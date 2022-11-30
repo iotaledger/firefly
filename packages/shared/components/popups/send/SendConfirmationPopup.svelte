@@ -220,30 +220,32 @@
         <div class="pt-4">
             <ActivityInformation {activity} networkAddress={layer2Parameters?.networkAddress} bind:activeTab />
         </div>
-        {#if !hideGiftToggle}
-            <KeyValueBox keyText={localize('general.giftStorageDeposit')}>
-                <Toggle
-                    slot="value"
-                    color="green"
-                    disabled={disableToggleGift}
-                    active={giftStorageDeposit}
-                    onClick={toggleGiftStorageDeposit}
-                />
-            </KeyValueBox>
-        {/if}
-        {#if initialExpirationDate !== undefined && activeTab === Tab.Transaction}
-            <KeyValueBox keyText={localize('general.expirationTime')}>
-                <ExpirationTimePicker
-                    slot="value"
-                    bind:this={expirationTimePicker}
-                    bind:value={expirationDate}
-                    initialSelected={initialExpirationDate}
-                    disabled={disableChangeExpiration}
-                />
-            </KeyValueBox>
+        {#if activeTab === Tab.Transaction}
+            {#if !hideGiftToggle}
+                <KeyValueBox keyText={localize('general.giftStorageDeposit')}>
+                    <Toggle
+                        slot="value"
+                        color="green"
+                        disabled={disableToggleGift}
+                        active={giftStorageDeposit}
+                        onClick={toggleGiftStorageDeposit}
+                    />
+                </KeyValueBox>
+            {/if}
+            {#if initialExpirationDate !== undefined}
+                <KeyValueBox keyText={localize('general.expirationTime')}>
+                    <ExpirationTimePicker
+                        slot="value"
+                        bind:this={expirationTimePicker}
+                        bind:value={expirationDate}
+                        initialSelected={initialExpirationDate}
+                        disabled={disableChangeExpiration}
+                    />
+                </KeyValueBox>
+            {/if}
         {/if}
     </div>
-    {#if surplus && activeTab === Tab.Transaction}
+    {#if surplus}
         <TextHint warning text={localize('popups.transaction.surplusIncluded')} />
     {/if}
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
