@@ -243,7 +243,7 @@
             </KeyValueBox>
         {/if}
     </div>
-    {#if surplus}
+    {#if surplus && activeTab === Tab.Transaction}
         <TextHint warning text={localize('popups.transaction.surplusIncluded')} />
     {/if}
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">

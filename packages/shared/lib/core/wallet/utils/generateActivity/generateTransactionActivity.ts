@@ -57,7 +57,7 @@ export function generateTransactionActivity(
     const destinationNetwork = getDestinationNetworkFromAddress(sendingAddress)
 
     const parsedLayer2Metadata =
-        destinationNetwork !== DestinationNetwork.Shimmer ? parseLayer2Metadata(metadata) : undefined
+        destinationNetwork === DestinationNetwork.Shimmer ? undefined : parseLayer2Metadata(metadata)
 
     return {
         type: ActivityType.Basic,

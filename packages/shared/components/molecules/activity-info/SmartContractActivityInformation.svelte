@@ -8,7 +8,7 @@
 
     $: detailsList = createDetailsList(activity.parsedLayer2Metadata)
 
-    function createDetailsList(metadata: Layer2Metadata): { [key: string]: { data: unknown } } {
+    function createDetailsList(metadata: Layer2Metadata): { [key: string]: { data: string } } {
         return {
             ...(metadata?.targetContract && {
                 targetContract: { data: metadata.targetContract },
