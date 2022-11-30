@@ -27,8 +27,8 @@ export function handleTransactionInclusionEventInternal(
     const activity = getActivityByTransactionId(accountIndex, payload.transactionId)
 
     if (activity.type === ActivityType.Nft) {
-        const isOwned = activity.direction === ActivityDirection.Incoming || activity.isSelfTransaction
-        updateNftInAllAccountNfts(accountIndex, activity.nftId, { isOwned })
+        const isSpendable = activity.direction === ActivityDirection.Incoming || activity.isSelfTransaction
+        updateNftInAllAccountNfts(accountIndex, activity.nftId, { isSpendable })
     }
 
     updateClaimingTransactionInclusion(payload.transactionId, payload.inclusionState, accountIndex)

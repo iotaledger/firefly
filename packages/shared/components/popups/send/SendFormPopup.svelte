@@ -58,7 +58,7 @@
     let activeTab: SendForm =
         transactionDetails.type === NewTransactionType.TokenTransfer ? SendForm.SendToken : SendForm.SendNft
 
-    $: ownsNfts = $selectedAccountNfts.some((nft) => nft.isOwned)
+    $: ownsNfts = $selectedAccountNfts.some((nft) => nft.isSpendable)
     $: isLayer2 = !isLayer1Destination(networkAddress)
     $: isSendTokenTab = activeTab === SendForm.SendToken
 
