@@ -43,11 +43,12 @@
     }
 
     export function validate(): Promise<void> {
-        error = validateBech32Address(addressPrefix, networkAddress)
-        if (error) {
-            return Promise.reject(error)
-        } else {
+        try {
+            validateBech32Address(addressPrefix, networkAddress)
             return Promise.resolve()
+        } catch (err) {
+            error = err?.message ?? err
+            return Promise.reject(error)
         }
     }
 </script>
