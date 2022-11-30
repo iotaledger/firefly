@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/firefly">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.723080805828">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.723134820290">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -32,11 +32,11 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/firefly/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../static/icon_firefly.png" rel="icon" />
-    <link href="../../../resources/css/retype.css?v=2.4.0.723080805828" rel="stylesheet" />
+    <link href="../../../resources/css/retype.css?v=2.4.0.723134820290" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.723080805828" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.723134820290" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.723080805828" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.723134820290" data-turbo-eval="false" defer></script>
     <script id="mermaid-js" type="text/javascript" src="../../../resources/js/mermaid.js?v=2.4.0" defer></script>
 </head>
 <body>
@@ -283,10 +283,9 @@
     Base Activity &lt;|-- Nft Activity
     Base Activity &lt;|-- Alias Activity
     Base Activity &lt;|-- Foundry Activity
-    Alias Activity -- Alias Type
+    Base Activity -- Activity Action
     class Base Activity {
         &lt;&lt;Interface&gt;&gt;
-        - id: string
         - id: string
         - outputId: string
         - transactionId: string
@@ -299,11 +298,11 @@
         - containsValue: boolean
         - isAssetHidden: boolean
         - direction: ActivityDirection
+        - action: ActivityAction
         - isInternal: boolean
         - storageDeposit: number
         - giftedStorageDeposit: number
         - subject: Subject
-        - isSelfTransaction: boolean
         - asyncData: AsyncData
     }
     class Transaction Activity {
@@ -325,7 +324,6 @@
     class Alias Activity {
         - type: ActivityType.Alias
         - aliasId: string
-        - aliasSubype: AliasSubtype
         - governorAddress: string
         - stateControllerAddress: string
     }
@@ -338,11 +336,12 @@
         &lt;&lt;Enum&gt;&gt;
         - Incoming
         - Outgoing
+        - SelfTransaction
     }
-    class Alias Type {
+    class Activity Action {
         &lt;&lt;Enum&gt;&gt;
-        - Created
-        - Other
+        - Send
+        - Mint
     }
     class Async Data {
         - asyncStatus: ActivityAsyncStatus
