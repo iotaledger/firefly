@@ -8,8 +8,10 @@
     import { Platform } from '@core/app'
     import { truncateString } from '@core/utils'
     import { setClipboard } from '@core/utils'
+    import { DestinationNetwork, NETWORK_ADDRESS } from '@core/layer-2'
 
     export let activity: Activity
+    export let networkAddress: string = null
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
@@ -17,6 +19,7 @@
     $: claimedTime = getDateFormat(activity.asyncData?.claimedDate)
     $: hasStorageDeposit =
         activity.storageDeposit || (activity.storageDeposit === 0 && activity.giftedStorageDeposit === 0)
+    $: destinationNetwork = getDestinationNetwork(networkAddress)
 
     $: formattedTransactionTime = getDateFormat(activity.time)
     $: formattedTimelockDate = getDateFormat(activity.asyncData?.timelockDate)
@@ -31,6 +34,9 @@
 
     let transactionDetailsList: { [key in string]: { data: string; isTooltipVisible?: boolean } }
     $: transactionDetailsList = {
+        ...(destinationNetwork && {
+            destinationNetwork: { data: destinationNetwork },
+        }),
         ...(activity.time && {
             transactionTime: { data: formattedTransactionTime },
         }),
@@ -74,6 +80,14 @@
         } catch (err) {
             return undefined
         }
+    }
+
+    function getDestinationNetwork(networkAddress: string): string {
+        const foundDestinationNetwork = Object.entries(NETWORK_ADDRESS[$activeProfile?.networkType]).find(
+            (networkAddressEntry) => networkAddressEntry[1] === networkAddress
+        )?.[0]
+
+        return foundDestinationNetwork ?? networkAddress ?? DestinationNetwork.Shimmer
     }
 </script>
 

@@ -1640,43 +1640,39 @@
             "Confirmed": "staked per",
             "Conflicting": "stake fallito"
         },
-        "transaction": {
-            "internal": {
-                "incoming": {
-                    "Pending": "trasferendo da",
-                    "Confirmed": "trasferito da",
-                    "Conflicting": "impossibile trasferire"
-                },
-                "outgoing": {
-                    "Pending": "trasferendo a",
-                    "Confirmed": "trasferito a",
-                    "Conflicting": "impossibile trasferire"
-                }
-            },
-            "external": {
-                "incoming": {
-                    "Pending": "ricevendo da",
-                    "Confirmed": "ricevuto da",
-                    "Conflicting": "impossibile ricevere"
-                },
-                "outgoing": {
-                    "Pending": "inviando a",
-                    "Confirmed": "inviato a",
-                    "Conflicting": "impossibile inviare"
-                }
-            }
-        },
-        "minting": {
+        "external": {
             "incoming": {
-                "Pending": "coniando",
-                "Confirmed": "coniato",
-                "Conflicting": "impossibile coniare"
+                "Pending": "ricevendo da",
+                "Confirmed": "ricevuto da",
+                "Conflicting": "impossibile ricevere"
             },
             "outgoing": {
-                "Pending": "coniando",
-                "Confirmed": "coniato",
-                "Conflicting": "impossibile coniare"
+                "Pending": "inviando a",
+                "Confirmed": "inviato a",
+                "Conflicting": "impossibile inviare"
             }
+        },
+        "internal": {
+            "incoming": {
+                "Pending": "trasferendo da",
+                "Confirmed": "trasferito da",
+                "Conflicting": "impossibile trasferire"
+            },
+            "outgoing": {
+                "Pending": "trasferendo a",
+                "Confirmed": "trasferito a",
+                "Conflicting": "impossibile trasferire"
+            },
+            "selftransaction": {
+                "Pending": "trasferendo a",
+                "Confirmed": "trasferito a",
+                "Conflicting": "impossibile trasferire"
+            }
+        },
+        "mint": {
+            "Pending": "coniando",
+            "Confirmed": "coniato",
+            "Conflicting": "impossibile coniare"
         },
         "migrate": {
             "Pending": "migrazione per",

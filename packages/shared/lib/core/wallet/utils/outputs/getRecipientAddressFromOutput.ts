@@ -1,5 +1,5 @@
-import { Output } from '@core/wallet/types'
 import { UNLOCK_CONDITION_ADDRESS } from '../../constants'
+import { Output } from '../../types'
 import { getBech32AddressFromAddressTypes } from '../getBech32AddressFromAddressTypes'
 
 export function getRecipientAddressFromOutput(output: Output): string {

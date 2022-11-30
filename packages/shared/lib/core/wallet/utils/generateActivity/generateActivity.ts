@@ -10,7 +10,7 @@ export function generateActivity(processedTransaction: IProcessedTransaction, ac
     const type = getActivityType(processedTransaction.outputs)
 
     switch (type) {
-        case ActivityType.Transaction:
+        case ActivityType.Basic:
             return generateTransactionActivity(processedTransaction, account)
         case ActivityType.Foundry:
             return generateFoundryActivity(processedTransaction, account)

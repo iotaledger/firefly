@@ -34,7 +34,7 @@ const features = {
                 enabled: false,
             },
             actions: {
-                enabled: false,
+                enabled: true,
             },
         },
         tokens: {

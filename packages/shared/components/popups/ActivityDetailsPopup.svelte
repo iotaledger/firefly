@@ -35,13 +35,14 @@
 
     $: activity = $selectedAccountActivities.find((_activity) => _activity.id === activityId)
     $: asset =
-        activity.type === ActivityType.Transaction || activity.type === ActivityType.Foundry
+        activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry
             ? getAssetFromPersistedAssets(activity.assetId)
             : undefined
     $: isTimelocked = activity.asyncData?.asyncStatus === ActivityAsyncStatus.Timelocked
     $: isActivityIncomingAndUnclaimed =
         activity.asyncData &&
-        (activity?.direction === ActivityDirection.Incoming || activity.isSelfTransaction) &&
+        (activity.direction === ActivityDirection.Incoming ||
+            activity.direction === ActivityDirection.SelfTransaction) &&
         activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
 
     let details: Record<string, unknown>
@@ -67,10 +68,10 @@
             timelockDate: activity.asyncData?.timelockDate,
             subject: activity.subject,
         }
-        if (activity.type === ActivityType.Transaction) {
+        if (activity.type === ActivityType.Basic) {
             return {
                 ...details,
-                type: activity.type,
+                action: activity.action,
                 asset,
                 storageDeposit: activity.storageDeposit,
                 rawAmount: activity.rawAmount,
@@ -154,21 +155,18 @@
             </button>
         {/if}
     </div>
-    {#if activity?.type === ActivityType.Transaction}
-        <BasicActivityDetails {...details} />
-    {:else}
-        <activity-details class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
-            {#if activity?.type === ActivityType.Foundry}
-                <FoundryActivityDetails {activity} />
-            {:else if activity?.type === ActivityType.Nft}
-                <NftActivityDetails {activity} />
-            {:else if activity?.type === ActivityType.Alias}
-                <AliasActivityDetails {activity} />
-            {/if}
-            <ActivityInformation {activity} />
-        </activity-details>
-    {/if}
-
+    <activity-details class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
+        {#if activity.type === ActivityType.Basic}
+            <BasicActivityDetails {activity} />
+        {:else if activity.type === ActivityType.Foundry}
+            <FoundryActivityDetails {activity} />
+        {:else if activity.type === ActivityType.Nft}
+            <NftActivityDetails {activity} />
+        {:else if activity.type === ActivityType.Alias}
+            <AliasActivityDetails {activity} />
+        {/if}
+        <ActivityInformation {activity} />
+    </activity-details>
     {#if !isTimelocked && isActivityIncomingAndUnclaimed}
         <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
             <Button

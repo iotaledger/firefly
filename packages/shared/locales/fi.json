@@ -1640,43 +1640,39 @@
             "Confirmed": "stakettu",
             "Conflicting": "stake epäonnistui"
         },
-        "transaction": {
-            "internal": {
-                "incoming": {
-                    "Pending": "siirretään kohteesta",
-                    "Confirmed": "siirretty kohteesta",
-                    "Conflicting": "siirto epäonnistui"
-                },
-                "outgoing": {
-                    "Pending": "siirretään kohteeseen",
-                    "Confirmed": "siirretty kohteeseen",
-                    "Conflicting": "siirto epäonnistui"
-                }
-            },
-            "external": {
-                "incoming": {
-                    "Pending": "vastaanotetaan kohteesta",
-                    "Confirmed": "vastaanotettu kohteesta",
-                    "Conflicting": "vastaanotto epäonnistui"
-                },
-                "outgoing": {
-                    "Pending": "lähetetään kohteeseen",
-                    "Confirmed": "lähetetty kohteeseen",
-                    "Conflicting": "lähetys epäonnistui"
-                }
-            }
-        },
-        "minting": {
+        "external": {
             "incoming": {
-                "Pending": "lyönti",
-                "Confirmed": "lyöty",
-                "Conflicting": "lyönti epäonnistui"
+                "Pending": "vastaanotetaan kohteesta",
+                "Confirmed": "vastaanotettu kohteesta",
+                "Conflicting": "vastaanotto epäonnistui"
             },
             "outgoing": {
-                "Pending": "lyönti",
-                "Confirmed": "lyöty",
-                "Conflicting": "lyönti epäonnistui"
+                "Pending": "lähetetään kohteeseen",
+                "Confirmed": "lähetetty kohteeseen",
+                "Conflicting": "lähetys epäonnistui"
             }
+        },
+        "internal": {
+            "incoming": {
+                "Pending": "siirretään kohteesta",
+                "Confirmed": "siirretty kohteesta",
+                "Conflicting": "siirto epäonnistui"
+            },
+            "outgoing": {
+                "Pending": "siirretään kohteeseen",
+                "Confirmed": "siirretty kohteeseen",
+                "Conflicting": "siirto epäonnistui"
+            },
+            "selftransaction": {
+                "Pending": "siirretään kohteeseen",
+                "Confirmed": "siirretty kohteeseen",
+                "Conflicting": "siirto epäonnistui"
+            }
+        },
+        "mint": {
+            "Pending": "lyönti",
+            "Confirmed": "lyöty",
+            "Conflicting": "lyönti epäonnistui"
         },
         "migrate": {
             "Pending": "siirretään",

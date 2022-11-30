@@ -1640,43 +1640,39 @@
             "Confirmed": "stakeano za",
             "Conflicting": "nije bilo moguće stakeati"
         },
-        "transaction": {
-            "internal": {
-                "incoming": {
-                    "Pending": "prijenos s",
-                    "Confirmed": "preneseno s",
-                    "Conflicting": "prijenos nije uspio"
-                },
-                "outgoing": {
-                    "Pending": "prijenos na",
-                    "Confirmed": "preneseno na",
-                    "Conflicting": "prijenos nije uspio"
-                }
-            },
-            "external": {
-                "incoming": {
-                    "Pending": "primanje od",
-                    "Confirmed": "primljeno od",
-                    "Conflicting": "primanje nije uspjelo"
-                },
-                "outgoing": {
-                    "Pending": "slanje na",
-                    "Confirmed": "poslano na",
-                    "Conflicting": "slanje nije uspjelo"
-                }
-            }
-        },
-        "minting": {
+        "external": {
             "incoming": {
-                "Pending": "mintanje u tijeku",
-                "Confirmed": "mintano",
-                "Conflicting": "mintanje nije uspjelo"
+                "Pending": "primanje od",
+                "Confirmed": "primljeno od",
+                "Conflicting": "primanje nije uspjelo"
             },
             "outgoing": {
-                "Pending": "mintanje u tijeku",
-                "Confirmed": "mintano",
-                "Conflicting": "mintanje nije uspjelo"
+                "Pending": "slanje na",
+                "Confirmed": "poslano na",
+                "Conflicting": "slanje nije uspjelo"
             }
+        },
+        "internal": {
+            "incoming": {
+                "Pending": "prijenos s",
+                "Confirmed": "preneseno s",
+                "Conflicting": "prijenos nije uspio"
+            },
+            "outgoing": {
+                "Pending": "prijenos na",
+                "Confirmed": "preneseno na",
+                "Conflicting": "prijenos nije uspio"
+            },
+            "selftransaction": {
+                "Pending": "prijenos na",
+                "Confirmed": "preneseno na",
+                "Conflicting": "prijenos nije uspio"
+            }
+        },
+        "mint": {
+            "Pending": "mintanje u tijeku",
+            "Confirmed": "mintano",
+            "Conflicting": "mintanje nije uspjelo"
         },
         "migrate": {
             "Pending": "migracija za",

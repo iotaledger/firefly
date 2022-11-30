@@ -35,13 +35,13 @@ export async function mintNft(metadata: IIrc27Metadata): Promise<void> {
         })
 
         // Generate Activity
-        const processedTransaction = preprocessTransaction(mintNftTransaction)
+        const processedTransaction = preprocessTransaction(mintNftTransaction, account.depositAddress)
         const activity: NftActivity = generateActivity(processedTransaction, account) as NftActivity
         addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)
 
         // Store NFT
         const output = getNftOutputFromTransaction(processedTransaction.outputs)
-        const nft = buildNftFromNftOutput(output.output as INftOutput, activity.outputId, true)
+        const nft = buildNftFromNftOutput(output.output as INftOutput, activity.outputId, false)
         addOrUpdateNftInAllAccountNfts(account.index, nft)
 
         return Promise.resolve()

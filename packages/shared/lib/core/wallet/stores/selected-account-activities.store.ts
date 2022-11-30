@@ -4,8 +4,8 @@ import { isValidIrc30 } from '@core/token'
 import { selectedAccount } from '../../account/stores/selected-account.store'
 import { Activity } from '../types/activity.type'
 import {
+    ActivityAction,
     ActivityType,
-    AliasSubtype,
     BooleanFilterOption,
     DateFilterOption,
     NumberFilterOption,
@@ -108,13 +108,13 @@ export const queriedActivities: Readable<Activity[]> = derived(
             if (
                 !_activity.isHidden &&
                 (_activity.type === ActivityType.Nft ||
-                    (_activity.type === ActivityType.Alias && _activity.aliasSubtype === AliasSubtype.Created))
+                    (_activity.type === ActivityType.Alias && _activity.action === ActivityAction.Mint))
             ) {
                 return true
             }
 
             const asset =
-                (_activity.type === ActivityType.Transaction || _activity.type === ActivityType.Foundry) &&
+                (_activity.type === ActivityType.Basic || _activity.type === ActivityType.Foundry) &&
                 getAssetFromPersistedAssets(_activity.assetId)
             const hasValidAsset = asset && isValidIrc30(asset.metadata)
             return !_activity.isHidden && hasValidAsset
@@ -142,12 +142,12 @@ function getFieldsToSearchFromActivity(activity: Activity): string[] {
         fieldsToSearch.push(activity.transactionId)
     }
 
-    if ((activity.type === ActivityType.Transaction || activity.type === ActivityType.Foundry) && activity.assetId) {
+    if ((activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry) && activity.assetId) {
         fieldsToSearch.push(activity.assetId)
         fieldsToSearch.push(getAssetFromPersistedAssets(activity.assetId)?.metadata?.name)
     }
 
-    if ((activity.type === ActivityType.Transaction || activity.type === ActivityType.Foundry) && activity.rawAmount) {
+    if ((activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry) && activity.rawAmount) {
         fieldsToSearch.push(activity.rawAmount?.toString())
         fieldsToSearch.push(getFormattedAmountFromActivity(activity, false)?.toLowerCase())
     }

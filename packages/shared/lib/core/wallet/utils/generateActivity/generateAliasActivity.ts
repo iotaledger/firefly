@@ -1,6 +1,6 @@
 import { IProcessedTransaction } from '../../interfaces'
 import { convertHexAddressToBech32, outputContainsValue, hashOutputId } from '..'
-import { ActivityType, AliasSubtype } from '@core/wallet/enums'
+import { ActivityAction, ActivityType } from '@core/wallet/enums'
 import { ADDRESS_TYPE_ALIAS, EMPTY_HEX_ID, OUTPUT_TYPE_ALIAS } from '@core/wallet/constants'
 import { IAliasOutput } from '@iota/types'
 import { AliasActivity } from '@core/wallet/types'
@@ -20,7 +20,8 @@ export function generateAliasActivity(
     processedTransaction: IProcessedTransaction,
     account: IAccountState
 ): AliasActivity {
-    const { outputs, transactionInputs, transactionId, claimingData, time, inclusionState } = processedTransaction
+    const { outputs, transactionInputs, transactionId, claimingData, direction, time, inclusionState } =
+        processedTransaction
     const wrappedOutput = outputs.find((output) => output.output.type === OUTPUT_TYPE_ALIAS)
 
     const output = wrappedOutput.output as IAliasOutput
@@ -32,7 +33,7 @@ export function generateAliasActivity(
     const governorAddress = getGovernorAddressFromAliasOutput(output)
     const stateControllerAddress = getStateControllerAddressFromAliasOutput(output)
     const aliasId = getAliasId(output, outputId)
-    const aliasSubtype = output.aliasId === EMPTY_HEX_ID ? AliasSubtype.Created : AliasSubtype.Other
+    const action = output.aliasId === EMPTY_HEX_ID ? ActivityAction.Mint : ActivityAction.Send
 
     const isHidden = false
     const isAssetHidden = false
@@ -42,7 +43,7 @@ export function generateAliasActivity(
 
     const metadata = getMetadataFromOutput(output)
     const tag = getTagFromOutput(output)
-    const asyncData = getAsyncDataFromOutput(output, transactionId, claimingData, account)
+    const asyncData = getAsyncDataFromOutput(output, outputId, claimingData, account)
     const sendingInfo = getSendingInformation(processedTransaction, output, account)
 
     return {
@@ -50,8 +51,9 @@ export function generateAliasActivity(
         id,
         outputId,
         transactionId,
+        direction,
+        action,
         aliasId,
-        aliasSubtype,
         storageDeposit,
         giftedStorageDeposit,
         governorAddress,

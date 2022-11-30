@@ -1,8 +1,9 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { networkHrp } from '@core/network'
-    import { BECH32_ADDRESS_LENGTH, validateBech32Address } from '@core/utils'
-    import { IAddressSubject } from '@core/wallet'
+    import { networkHrp } from '@core/network/stores'
+    import { BECH32_ADDRESS_LENGTH } from '@core/utils/constants'
+    import { validateBech32Address } from '@core/utils/crypto'
+    import { IAddressSubject } from '@core/wallet/interfaces'
 
     export let recipient: IAddressSubject
     export let disabled: boolean = false
@@ -31,7 +32,11 @@
                 },
             })
         } else {
-            error = validateBech32Address(addressPrefix, value)
+            try {
+                validateBech32Address(addressPrefix, value)
+            } catch (err) {
+                error = err?.message ?? err
+            }
         }
     }
 </script>
