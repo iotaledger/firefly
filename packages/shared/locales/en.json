@@ -1003,6 +1003,11 @@
             "title": "Burn {assetName}",
             "hint": "Please note that burning a token may free storage deposit attached to it and is not reversible"
         },
+        "confirmNftBurn": {
+            "title": "Burn {nftName}",
+            "description": "Are you sure you want to burn this NFT?",
+            "hint": "Please note that burning a token frees the storage deposit attached to it and is not reversible."
+        },
         "proceedAnyway": "Proceed anyway",
         "save": "Save",
         "importSeed": "Import an existing seed",

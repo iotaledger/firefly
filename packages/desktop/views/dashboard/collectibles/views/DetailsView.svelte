@@ -62,7 +62,7 @@
         <div class="mb-6 flex justify-between items-center">
             <Text type={TextType.h3} fontWeight={FontWeight.semibold}>{name}</Text>
             <MeatballMenuButton onClick={modal?.toggle} />
-            <CollectibleDetailsMenu bind:modal />
+            <CollectibleDetailsMenu bind:modal {nft} />
         </div>
         <div class="overflow-y-scroll h-full">
             <div class="space-y-2 mb-6">
