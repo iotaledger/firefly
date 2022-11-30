@@ -550,6 +550,7 @@
             "gallery": {
                 "title": "Collectibles",
                 "emptyTitle": "No collectibles",
+                "noResults": "No results",
                 "emptyDescription": "Deposit or Receive your first collectible now!"
             },
             "details": {

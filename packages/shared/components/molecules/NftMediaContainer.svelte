@@ -46,7 +46,7 @@
                 break
             case NftMediaSize.ExtraLarge:
                 width = 96
-                height = 9
+                height = 96
                 // squircle or circle
                 radius = shape === 'squircle' ? '2xl' : 'full'
                 break
