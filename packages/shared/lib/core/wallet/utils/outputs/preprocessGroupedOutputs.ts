@@ -26,7 +26,7 @@ export function preprocessGroupedOutputs(
                 } as IUTXOInput)
         ) ?? []
 
-    const direction = isTransactionIncoming(outputDatas, detailedTransactionInputs, account.depositAddress)
+    const direction = getDirectionForOutputs(outputDatas, detailedTransactionInputs, account.depositAddress)
     const wrappedOutputs = outputDatas.map((outputData) => ({
         outputId: outputData.outputId,
         output: outputData.output.type !== OUTPUT_TYPE_TREASURY ? outputData.output : undefined,
@@ -43,7 +43,7 @@ export function preprocessGroupedOutputs(
     }
 }
 
-function isTransactionIncoming(
+function getDirectionForOutputs(
     outputs: OutputData[],
     detailedTransactionInputs: IOutputResponse[],
     accountAddress: string

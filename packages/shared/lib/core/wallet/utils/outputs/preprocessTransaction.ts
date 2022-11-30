@@ -1,9 +1,8 @@
-import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
+import { IProcessedTransaction } from '../../interfaces'
 import { Transaction } from '@iota/wallet'
 import { outputIdFromTransactionData } from './outputIdFromTransactionData'
 import { OUTPUT_TYPE_TREASURY } from '@core/wallet/constants'
-import { getRecipientAddressFromOutput } from './getRecipientAddressFromOutput'
-import { ActivityDirection } from '@core/wallet/enums'
+import { getDirectionFromTransaction } from '../transactions'
 
 export function preprocessTransaction(transaction: Transaction, accountAddress: string): IProcessedTransaction {
     const outputs = transaction.payload.essence.outputs.map((output, index) => {
@@ -20,29 +19,5 @@ export function preprocessTransaction(transaction: Transaction, accountAddress: 
         inclusionState: transaction.inclusionState,
         detailedTransactionInputs: [],
         transactionInputs: transaction.payload.essence.inputs,
-    }
-}
-
-function getDirectionFromTransaction(
-    wrappedOutputs: IWrappedOutput[],
-    incoming: boolean,
-    accountAddress: string
-): ActivityDirection {
-    const containsOutput = wrappedOutputs.some((outputData) => {
-        const recipientAddress = getRecipientAddressFromOutput(outputData.output)
-
-        if (incoming) {
-            return accountAddress === recipientAddress
-        } else {
-            return accountAddress !== recipientAddress
-        }
-    })
-    if (containsOutput) {
-        return incoming ? ActivityDirection.Incoming : ActivityDirection.Outgoing
-    } else {
-        const isSelfTransaction = wrappedOutputs.some(
-            (outputData) => accountAddress === getRecipientAddressFromOutput(outputData.output)
-        )
-        return isSelfTransaction ? ActivityDirection.SelfTransaction : ActivityDirection.Incoming
     }
 }
