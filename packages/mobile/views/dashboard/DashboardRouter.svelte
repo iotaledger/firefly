@@ -1,6 +1,6 @@
 <script lang="typescript">
     import features from '@features/features'
-    import { selectedActivity } from '../../lib/contexts/dashboard'
+    import { selectedActivity, selectedAsset } from '../../lib/contexts/dashboard'
     import {
         accountSwitcherRouter,
         activityRouter,
@@ -9,10 +9,19 @@
         dashboardRouter,
         resetRouterWithDrawerDelay,
         sendRouter,
+        tokenRouter,
     } from '../../lib/routers'
-    import { AccountSwitcherDrawer, ActivityDrawer, ProfileActionsDrawer, ReceiveDrawer, SendDrawer } from './drawers'
+    import {
+        AccountSwitcherDrawer,
+        ActivityDrawer,
+        ProfileActionsDrawer,
+        ReceiveDrawer,
+        SendDrawer,
+        TokenDrawer,
+    } from './drawers'
 
     $: $selectedActivity && $dashboardRouter.goTo(DashboardRoute.Activity)
+    $: $selectedAsset && $dashboardRouter.goTo(DashboardRoute.Token)
 
     function onReceiveDrawerClose(): void {
         $dashboardRouter.previous()
@@ -32,6 +41,11 @@
         $selectedActivity = null
         $dashboardRouter.previous()
     }
+    function onTokenDrawerClose(): void {
+        resetRouterWithDrawerDelay($tokenRouter)
+        $selectedAsset = null
+        $dashboardRouter.previous()
+    }
 </script>
 
 {#if $dashboardRoute === DashboardRoute.Receive && features?.dashboard?.receive?.enabled}
@@ -44,4 +58,6 @@
     <ProfileActionsDrawer onClose={onProfileActionsDrawerClose} />
 {:else if $dashboardRoute === DashboardRoute.Activity && $selectedActivity}
     <ActivityDrawer activity={$selectedActivity} onClose={onActivityDrawerClose} />
+{:else if $dashboardRoute === DashboardRoute.Token && $selectedAsset}
+    <TokenDrawer asset={$selectedAsset} onClose={onTokenDrawerClose} />
 {/if}
