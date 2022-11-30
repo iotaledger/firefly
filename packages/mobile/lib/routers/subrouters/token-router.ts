@@ -1,9 +1,18 @@
 import { get, writable } from 'svelte/store'
 
 import { Subrouter } from '@core/router'
+import {
+    NewTransactionType,
+    updateNewTransactionDetails,
+    NotVerifiedStatus,
+    unverifyAsset,
+    VerifiedStatus,
+    verifyAsset,
+    getPersistedAsset,
+} from '@core/wallet'
 
-import { selectedAsset } from '../../../lib/contexts/dashboard'
-import { dashboardRouter } from '../dashboard-router'
+import { selectedAsset, TokenAction } from '../../../lib/contexts/dashboard'
+import { dashboardRouter, DashboardRoute } from '../'
 import { TokenRoute } from '../enums'
 import { ITokenRouterEvent } from '../interfaces'
 
@@ -15,9 +24,31 @@ export class TokenRouter extends Subrouter<TokenRoute> {
         super(TokenRoute.Info, tokenRoute, get(dashboardRouter))
     }
     public next(event: ITokenRouterEvent = {}): void {
-        const { asset } = event
+        const { action, asset } = event
+
         if (asset) {
             selectedAsset.set(asset)
+        }
+
+        if (!get(selectedAsset)) {
+            return
+        }
+
+        const { id } = get(selectedAsset)
+        switch (action) {
+            case TokenAction.Send:
+                updateNewTransactionDetails({ type: NewTransactionType.TokenTransfer, assetId: id })
+                get(dashboardRouter).previous()
+                get(dashboardRouter).goTo(DashboardRoute.Send)
+                return
+            case TokenAction.Skip:
+                unverifyAsset(id, NotVerifiedStatus.Skipped)
+                selectedAsset.set(getPersistedAsset(id))
+                return
+            case TokenAction.Verify:
+                verifyAsset(id, VerifiedStatus.SelfVerified)
+                selectedAsset.set(getPersistedAsset(id))
+                return
         }
     }
 }
