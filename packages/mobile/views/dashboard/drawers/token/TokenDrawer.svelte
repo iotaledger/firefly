@@ -11,7 +11,7 @@
 
     const fullScreen: boolean = true
 
-    const title =
+    $: title =
         asset?.verification?.status === NotVerifiedStatus.New
             ? localize('popups.tokenInformation.newTokenTitle')
             : asset?.metadata?.name
