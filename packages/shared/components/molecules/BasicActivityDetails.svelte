@@ -37,6 +37,7 @@
             <TransactionActivityStatusPill
                 type={activity.type}
                 direction={activity.direction}
+                action={activity.action}
                 isInternal={activity.isInternal}
                 inclusionState={activity.inclusionState}
             />

@@ -35,6 +35,7 @@
 
     let assetAmountInput: AssetAmountInput
     let nftInput: NftInput
+    let networkInput: NetworkInput
     let recipientInput: RecipientInput
     let metadataInput: OptionalInput
     let tagInput: OptionalInput
@@ -92,6 +93,7 @@
             await Promise.all([
                 isSendTokenTab ? assetAmountInput?.validate() : nftInput?.validate(),
                 recipientInput?.validate(),
+                networkInput?.validate(),
                 metadataInput?.validate(
                     validateOptionalInput(metadata, MAX_METADATA_BYTES, localize('error.send.metadataTooLong'))
                 ),
@@ -142,7 +144,7 @@
         {:else}
             <NftInput bind:this={nftInput} bind:nftId />
         {/if}
-        <NetworkInput bind:networkAddress showLayer2={isSendTokenTab} />
+        <NetworkInput bind:this={networkInput} bind:networkAddress showLayer2={isSendTokenTab} />
         <RecipientInput bind:this={recipientInput} bind:recipient {isLayer2} />
         <optional-inputs class="flex flex-row flex-wrap gap-4">
             <OptionalInput

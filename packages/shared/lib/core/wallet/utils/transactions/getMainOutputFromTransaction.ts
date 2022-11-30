@@ -1,32 +1,19 @@
 import { getRecipientAddressFromOutput } from '..'
 import { IWrappedOutput } from '@core/wallet/interfaces'
+import { ActivityDirection } from '@core/wallet/enums'
 
 export function getMainOutputFromTransaction(
     wrappedOutputs: IWrappedOutput[],
     accountAddress: string,
-    isIncoming: boolean
-): { wrappedOutput: IWrappedOutput; isSelfTransaction: boolean } {
-    const nonRemainerOutput = wrappedOutputs.find((outputData) => {
+    direction: ActivityDirection
+): IWrappedOutput {
+    return wrappedOutputs.find((outputData) => {
         const recipientAddress = getRecipientAddressFromOutput(outputData.output)
 
-        if (isIncoming) {
+        if (direction === ActivityDirection.Incoming || direction === ActivityDirection.SelfTransaction) {
             return accountAddress === recipientAddress
         } else {
             return accountAddress !== recipientAddress
         }
     })
-    if (nonRemainerOutput) {
-        return {
-            wrappedOutput: nonRemainerOutput,
-            isSelfTransaction: false,
-        }
-    } else {
-        const output = wrappedOutputs.find(
-            (outputData) => accountAddress === getRecipientAddressFromOutput(outputData.output)
-        )
-        if (output) {
-            return { wrappedOutput: output, isSelfTransaction: true }
-        }
-    }
-    return { wrappedOutput: undefined, isSelfTransaction: undefined }
 }
