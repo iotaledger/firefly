@@ -1640,43 +1640,39 @@
             "Confirmed": "lekötés eddig:",
             "Conflicting": "lekötés sikertelen"
         },
-        "transaction": {
-            "internal": {
-                "incoming": {
-                    "Pending": "átutalás folyamatban innen:",
-                    "Confirmed": "átutalva innen:",
-                    "Conflicting": "átutalás sikertelen"
-                },
-                "outgoing": {
-                    "Pending": "átutalás folyamatban ide:",
-                    "Confirmed": "átutalva ide:",
-                    "Conflicting": "átutalás sikertelen"
-                }
-            },
-            "external": {
-                "incoming": {
-                    "Pending": "fogadás folyamatban innen:",
-                    "Confirmed": "fogadva innen:",
-                    "Conflicting": "fogadás sikertelen"
-                },
-                "outgoing": {
-                    "Pending": "küldés folyamatban ide:",
-                    "Confirmed": "elküldve ide:",
-                    "Conflicting": "küldés sikertelen"
-                }
-            }
-        },
-        "minting": {
+        "external": {
             "incoming": {
-                "Pending": "kibocsátás folyamatban",
-                "Confirmed": "kibocsátás elkészült",
-                "Conflicting": "kibocsátás sikertelen"
+                "Pending": "fogadás folyamatban innen:",
+                "Confirmed": "fogadva innen:",
+                "Conflicting": "fogadás sikertelen"
             },
             "outgoing": {
-                "Pending": "kibocsátás folyamatban",
-                "Confirmed": "kibocsátás elkészült",
-                "Conflicting": "kibocsátás sikertelen"
+                "Pending": "küldés folyamatban ide:",
+                "Confirmed": "elküldve ide:",
+                "Conflicting": "küldés sikertelen"
             }
+        },
+        "internal": {
+            "incoming": {
+                "Pending": "átutalás folyamatban innen:",
+                "Confirmed": "átutalva innen:",
+                "Conflicting": "átutalás sikertelen"
+            },
+            "outgoing": {
+                "Pending": "átutalás folyamatban ide:",
+                "Confirmed": "átutalva ide:",
+                "Conflicting": "átutalás sikertelen"
+            },
+            "selftransaction": {
+                "Pending": "átutalás folyamatban ide:",
+                "Confirmed": "átutalva ide:",
+                "Conflicting": "átutalás sikertelen"
+            }
+        },
+        "mint": {
+            "Pending": "kibocsátás folyamatban",
+            "Confirmed": "kibocsátás elkészült",
+            "Conflicting": "kibocsátás sikertelen"
         },
         "migrate": {
             "Pending": "költöztetés ide:",

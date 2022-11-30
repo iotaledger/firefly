@@ -4,8 +4,8 @@ import { isValidIrc30 } from '@core/token'
 import { selectedAccount } from '../../account/stores/selected-account.store'
 import { Activity } from '../types/activity.type'
 import {
+    ActivityAction,
     ActivityType,
-    AliasSubtype,
     BooleanFilterOption,
     DateFilterOption,
     NumberFilterOption,
@@ -108,7 +108,7 @@ export const queriedActivities: Readable<Activity[]> = derived(
             if (
                 !_activity.isHidden &&
                 (_activity.type === ActivityType.Nft ||
-                    (_activity.type === ActivityType.Alias && _activity.aliasSubtype === AliasSubtype.Created))
+                    (_activity.type === ActivityType.Alias && _activity.action === ActivityAction.Mint))
             ) {
                 return true
             }

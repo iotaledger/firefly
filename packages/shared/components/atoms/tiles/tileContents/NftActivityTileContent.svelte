@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { ActivityDirection, InclusionState, NftActivity, Subject } from '@core/wallet'
+    import { ActivityAction, ActivityDirection, InclusionState, NftActivity, Subject } from '@core/wallet'
     import { truncateString } from '@core/utils'
     import { Text, FontWeight, NftMediaContainer, NftMediaSize } from 'shared/components'
     import { networkHrp } from '@core/network'
@@ -9,23 +9,24 @@
 
     export let activity: NftActivity
 
-    $: isIncoming = activity.direction === ActivityDirection.Incoming
+    $: isIncoming =
+        activity.direction === ActivityDirection.Incoming || activity.direction === ActivityDirection.SelfTransaction
     $: title = getTitle(activity)
     $: subjectLocale = getSubjectLocale(activity.subject)
 
     $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, activity.nftId)
 
     function getTitle(_activity: NftActivity): string {
-        const { isInternal, direction, inclusionState } = _activity
+        const { isInternal, direction, inclusionState, action } = _activity
         const isConfirmed = inclusionState === InclusionState.Confirmed
 
-        if (direction === ActivityDirection.Minting) {
+        if (action === ActivityAction.Mint) {
             return isConfirmed ? 'general.mintedNft' : 'general.mintingNft'
         }
         if (isInternal) {
             return isConfirmed ? 'general.transferNft' : 'general.transferringNft'
         }
-        if (direction === ActivityDirection.Incoming) {
+        if (direction === ActivityDirection.Incoming || direction === ActivityDirection.SelfTransaction) {
             return isConfirmed ? 'general.receivedNft' : 'general.receivingNft'
         }
         if (direction === ActivityDirection.Outgoing) {
@@ -62,7 +63,7 @@
 
     <div class="flex flex-row items-start" style="width: 70%">
         <Text fontWeight={FontWeight.normal} lineHeight="140" color="gray-600" classes="truncate">
-            {#if activity.direction === ActivityDirection.Minting}
+            {#if activity.action === ActivityAction.Mint}
                 {nft?.name}
             {:else}
                 {localize(isIncoming ? 'general.fromAddress' : 'general.toAddress', {
