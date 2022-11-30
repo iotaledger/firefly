@@ -48,7 +48,7 @@ export async function handleNewOutputEventInternal(
             const isOwned = getIsOwnedFromUnspentNftOutput(account.depositAddress, output.output as INftOutput)
             const nft = buildNftFromNftOutput(output.output as INftOutput, output.outputId, isOwned)
             addOrUpdateNftInAllAccountNfts(account.index, nft)
-        } else if (activity.type === ActivityType.Transaction || activity.type === ActivityType.Foundry) {
+        } else if (activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry) {
             const asset = await getOrRequestAssetFromPersistedAssets(activity.assetId)
             addPersistedAsset(asset)
         }

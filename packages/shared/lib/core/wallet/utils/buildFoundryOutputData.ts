@@ -1,4 +1,4 @@
-import { UnlockConditionTypes } from '@iota/types'
+import type { FeatureTypes, TokenSchemeTypes, UnlockConditionTypes } from '@iota/types'
 import type { BuildFoundryOutputData } from '@iota/wallet'
 import { Converter } from '@core/utils'
 import { ADDRESS_TYPE_ALIAS, FEATURE_TYPE_METADATA, UNLOCK_CONDITION_IMMUTABLE_ALIAS } from '../constants'
@@ -20,21 +20,21 @@ export function buildFoundryOutputData(
             },
         },
     ]
-    const tokenScheme = {
+    const tokenScheme: TokenSchemeTypes = {
         type: 0,
         maximumSupply: Converter.decimalToHex(totalSupply, true),
         meltedTokens: Converter.decimalToHex(0, true),
         mintedTokens: Converter.decimalToHex(circulatingSupply, true),
     }
 
-    const immutableFeatures = [
+    const immutableFeatures: FeatureTypes[] = [
         {
             type: FEATURE_TYPE_METADATA,
             data: Converter.utf8ToHex(JSON.stringify(metadata), true),
         },
     ]
 
-    return <BuildFoundryOutputData>{
+    return {
         serialNumber: 0,
         tokenScheme,
         immutableFeatures,

@@ -1,6 +1,6 @@
 /* eslint-disable no-bitwise */
 
-import { MILLISECONDS_PER_SECOND } from '@core/utils'
+import { MILLISECONDS_PER_SECOND } from './constants'
 import { Base64 } from './encode'
 
 /**

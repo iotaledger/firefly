@@ -55,7 +55,7 @@ export function generateTransactionActivity(
     const asyncData = getAsyncDataFromOutput(output, outputId, claimingData, account)
 
     return {
-        type: ActivityType.Transaction,
+        type: ActivityType.Basic,
         isHidden,
         id,
         transactionId,

@@ -3,11 +3,12 @@
     import {
         TokenStandard,
         IAsset,
-        setNewTransactionDetails,
+        updateNewTransactionDetails,
         unverifyAsset,
         verifyAsset,
         NotVerifiedStatus,
         VerifiedStatus,
+        NewTransactionType,
     } from '@core/wallet'
     import { openPopup, updatePopupProps } from '@auxiliary/popup'
     import { AssetIcon, Button, Text, TextHint, AssetActionsButton, KeyValueBox, FontWeight } from 'shared/components'
@@ -44,7 +45,7 @@
     }
 
     function onSendClick(): void {
-        setNewTransactionDetails({ asset })
+        updateNewTransactionDetails({ type: NewTransactionType.TokenTransfer, assetId: asset.id })
         openPopup({
             type: 'sendForm',
             overflow: true,

@@ -6,6 +6,7 @@
     export let size: NftMediaSize = NftMediaSize.Medium
     export let nftId: string
     export let shape: 'square' | 'circle' | 'squircle' = 'squircle'
+    export let classes: string = ''
     $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, nftId)
 
     let width
@@ -45,7 +46,7 @@
                 break
             case NftMediaSize.ExtraLarge:
                 width = 96
-                height = 9
+                height = 96
                 // squircle or circle
                 radius = shape === 'squircle' ? '2xl' : 'full'
                 break
@@ -59,7 +60,7 @@
 </script>
 
 <div
-    class="flex justify-center items-center transition-none p-{padding} bg-gray-500 w-{width} h-{height} rounded-{radius} "
+    class="flex justify-center items-center transition-none p-{padding} bg-gray-500 w-{width} h-{height} rounded-{radius} {classes}"
 >
     {#if !isLoaded}
         <NftPlaceholderIcon {nft} />

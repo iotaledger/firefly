@@ -547,6 +547,12 @@
             }
         },
         "collectibles": {
+            "gallery": {
+                "title": "Collectibles",
+                "emptyTitle": "No collectibles",
+                "noResults": "No results",
+                "emptyDescription": "Deposit or Receive your first collectible now!"
+            },
             "details": {
                 "collection": "Collection",
                 "nftId": "NFT ID",
@@ -995,7 +1001,6 @@
         },
         "confirmTokenBurn": {
             "title": "Burn {assetName}",
-            "description": "Are you sure you want burn this token?",
             "hint": "Please note that burning a token may free storage deposit attached to it and is not reversible"
         },
         "proceedAnyway": "Proceed anyway",
@@ -1136,7 +1141,9 @@
         "testDeepLink": "Test deep link",
         "initialize": "Initialize",
         "initializing": "Initializing",
-        "delete": "Delete"
+        "delete": "Delete",
+        "addReference": "Add reference",
+        "depositNft": "Deposit NFTs"
     },
     "general": {
         "recipient": "Recipient",
@@ -1601,7 +1608,7 @@
             "nftNotInPossession": "NFT not in possession"
         },
         "layer2": {
-            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account"
+            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account."
         },
         "node": {
             "invalid": "Please enter a valid URL.",
@@ -1812,7 +1819,7 @@
             "Confirmed": "staked for",
             "Conflicting": "failed to stake"
         },
-        "transaction": {
+        "basic": {
             "internal": {
                 "incoming": {
                     "Pending": "transferring from",
