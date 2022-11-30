@@ -6,9 +6,9 @@
     export let onClick: () => void = () => {}
 </script>
 
-<button on:click={onClick} style="height: 300px;">
-    <NftMediaContainer nftId={nft.id} size={NftMediaSize.Large} />
-    <div class="description w-full flex flex-col justify-center p-3">
-        <Text weight={FontWeight.semibold} fontSize="12" classes="text-left">{nft.name}</Text>
+<button on:click={onClick} style="height: 300px; width: 240px;">
+    <NftMediaContainer nftId={nft.id} size={NftMediaSize.Large} classes="rounded-b-none" />
+    <div class="description w-full flex flex-col justify-center p-3.5 bg-white dark:bg-gray-800 rounded-b-2xl">
+        <Text fontWeight={FontWeight.semibold} fontSize="12" classes="text-left truncate">{nft.name}</Text>
     </div>
 </button>

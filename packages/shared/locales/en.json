@@ -547,6 +547,12 @@
             }
         },
         "collectibles": {
+            "gallery": {
+                "title": "Collectibles",
+                "emptyTitle": "No collectibles",
+                "noResults": "No results",
+                "emptyDescription": "Deposit or Receive your first collectible now!"
+            },
             "details": {
                 "collection": "Collection",
                 "nftId": "NFT ID",
@@ -995,7 +1001,6 @@
         },
         "confirmTokenBurn": {
             "title": "Burn {assetName}",
-            "description": "Are you sure you want burn this token?",
             "hint": "Please note that burning a token may free storage deposit attached to it and is not reversible"
         },
         "proceedAnyway": "Proceed anyway",
@@ -1137,7 +1142,8 @@
         "initialize": "Initialize",
         "initializing": "Initializing",
         "delete": "Delete",
-        "addReference": "Add reference"
+        "addReference": "Add reference",
+        "depositNft": "Deposit NFTs"
     },
     "general": {
         "recipient": "Recipient",
