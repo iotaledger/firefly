@@ -258,6 +258,8 @@ function createWindow() {
         webPreferences: {
             ...defaultWebPreferences,
             preload: paths.preload,
+            // Sandboxing is disabled, since our preload script depends on Node.js
+            sandbox: false,
         },
     })
 
