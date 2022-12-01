@@ -1640,43 +1640,39 @@
             "Confirmed": "已质押给",
             "Conflicting": "质押失败"
         },
-        "transaction": {
-            "internal": {
-                "incoming": {
-                    "Pending": "正在接收来自",
-                    "Confirmed": "接收到来自",
-                    "Conflicting": "传送失败"
-                },
-                "outgoing": {
-                    "Pending": "正在发送给",
-                    "Confirmed": "已发送给",
-                    "Conflicting": "传送失败"
-                }
-            },
-            "external": {
-                "incoming": {
-                    "Pending": "正在接收来自",
-                    "Confirmed": "收到来自",
-                    "Conflicting": "接收失败"
-                },
-                "outgoing": {
-                    "Pending": "正在发送给",
-                    "Confirmed": "发送到",
-                    "Conflicting": "发送失败"
-                }
-            }
-        },
-        "minting": {
+        "external": {
             "incoming": {
-                "Pending": "锻造中",
-                "Confirmed": "已锻造",
-                "Conflicting": "锻造失败"
+                "Pending": "正在接收来自",
+                "Confirmed": "收到来自",
+                "Conflicting": "接收失败"
             },
             "outgoing": {
-                "Pending": "锻造中",
-                "Confirmed": "已锻造",
-                "Conflicting": "锻造失败"
+                "Pending": "正在发送给",
+                "Confirmed": "发送到",
+                "Conflicting": "发送失败"
             }
+        },
+        "internal": {
+            "incoming": {
+                "Pending": "正在接收来自",
+                "Confirmed": "接收到来自",
+                "Conflicting": "传送失败"
+            },
+            "outgoing": {
+                "Pending": "正在发送给",
+                "Confirmed": "已发送给",
+                "Conflicting": "传送失败"
+            },
+            "selftransaction": {
+                "Pending": "正在发送给",
+                "Confirmed": "已发送给",
+                "Conflicting": "传送失败"
+            }
+        },
+        "mint": {
+            "Pending": "锻造中",
+            "Confirmed": "已锻造",
+            "Conflicting": "锻造失败"
         },
         "migrate": {
             "Pending": "迁移到",

@@ -4,6 +4,7 @@ import { handleError } from '@core/error/handlers/handleError'
 import { localize } from '@core/i18n'
 import { handleLedgerError } from '@core/ledger'
 import { activeProfile, ProfileType } from '@core/profile'
+import { Converter } from '@core/utils'
 import { get } from 'svelte/store'
 import { addActivityToAccountActivitiesInAllAccountActivities } from '../stores'
 import { generateActivity, preprocessTransaction } from '../utils'
@@ -12,10 +13,10 @@ export async function burnAsset(assetId: string, rawAmount: string): Promise<voi
     const account = get(selectedAccount)
     const _activeProfile = get(activeProfile)
     try {
-        const burnTokenTransaction = await account.burnNativeToken(assetId, '0x' + Number(rawAmount).toString(16))
+        const burnTokenTransaction = await account.burnNativeToken(assetId, Converter.decimalToHex(Number(rawAmount)))
 
         // Generate Activity
-        const processedTransaction = preprocessTransaction(burnTokenTransaction)
+        const processedTransaction = preprocessTransaction(burnTokenTransaction, account.depositAddress)
         const activity = generateActivity(processedTransaction, account)
         addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)
 
