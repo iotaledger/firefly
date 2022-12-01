@@ -42,9 +42,7 @@
         $dashboardRouter.previous()
     }
     function onTokenDrawerClose(): void {
-        resetRouterWithDrawerDelay($tokenRouter)
-        $selectedAsset = null
-        $dashboardRouter.previous()
+        $tokenRouter.closeDrawer()
     }
 </script>
 

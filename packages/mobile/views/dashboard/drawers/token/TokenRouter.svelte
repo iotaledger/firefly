@@ -1,6 +1,5 @@
 <script lang="typescript">
     import { IAsset } from '@core/wallet'
-    import { onDestroy } from 'svelte'
     import { tokenRoute, TokenRoute, tokenRouter } from '../../../../lib/routers'
     import { TokenInformation } from './views'
     import { TokenAction } from '../../../../lib/contexts/dashboard'
@@ -16,10 +15,6 @@
     function onSend(): void {
         $tokenRouter.next({ action: TokenAction.Send })
     }
-
-    onDestroy(() => {
-        $tokenRouter.reset()
-    })
 </script>
 
 {#if $tokenRoute === TokenRoute.Info}

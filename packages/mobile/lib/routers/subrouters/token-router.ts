@@ -15,6 +15,7 @@ import { selectedAsset, TokenAction } from '../../../lib/contexts/dashboard'
 import { dashboardRouter, DashboardRoute } from '../'
 import { TokenRoute } from '../enums'
 import { ITokenRouterEvent } from '../interfaces'
+import { resetRouterWithDrawerDelay } from '../utils'
 
 export const tokenRoute = writable<TokenRoute>(null)
 export const tokenRouter = writable<TokenRouter>(null)
@@ -24,9 +25,8 @@ export class TokenRouter extends Subrouter<TokenRoute> {
         super(TokenRoute.Info, tokenRoute, get(dashboardRouter))
     }
     public next(event: ITokenRouterEvent = {}): void {
-        const { action, asset } = event
-
-        if (asset) {
+        const { asset, action } = event
+        if (asset && get(tokenRoute) === TokenRoute.Info) {
             selectedAsset.set(asset)
         }
 
@@ -50,5 +50,11 @@ export class TokenRouter extends Subrouter<TokenRoute> {
                 selectedAsset.set(getPersistedAsset(id))
                 return
         }
+    }
+
+    closeDrawer(): void {
+        selectedAsset.set(null)
+        get(dashboardRouter).previous()
+        resetRouterWithDrawerDelay(get(tokenRouter))
     }
 }
