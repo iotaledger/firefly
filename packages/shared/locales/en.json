@@ -587,6 +587,12 @@
                 "title": "Voting power",
                 "maximal": "Maximal voting power: {value}",
                 "manage": "Manage voting power"
+            },
+            "proposalsDetails": {
+                "title": "Details",
+                "activeProposals": "Active proposals",
+                "votingProposals": "Proposals you are voting on",
+                "votedProposals": "Total proposals you voted on"
             }
         }
     },
