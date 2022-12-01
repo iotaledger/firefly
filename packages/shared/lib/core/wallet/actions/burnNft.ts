@@ -34,5 +34,6 @@ export async function burnNft(nftId: string): Promise<void> {
         } else {
             handleError(err)
         }
+        throw err
     }
 }

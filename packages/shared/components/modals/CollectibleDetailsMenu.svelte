@@ -24,11 +24,14 @@
                 warning: true,
                 confirmText: localize('actions.burnToken'),
                 onConfirm: () => {
-                    checkActiveProfileAuth(async () => {
-                        await burnNft(nft.id)
-                        $collectiblesRouter.goTo(CollectiblesRoute.Gallery)
-                        closePopup()
-                    })
+                    checkActiveProfileAuth(
+                        async () => {
+                            await burnNft(nft.id)
+                            $collectiblesRouter.goTo(CollectiblesRoute.Gallery)
+                            closePopup()
+                        },
+                        { stronghold: true }
+                    )
                 },
             },
         })
