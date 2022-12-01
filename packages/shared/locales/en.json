@@ -1815,6 +1815,7 @@
     "tabs": {
         "wallet": "Wallet",
         "collectibles": "Collectibles",
+        "governance": "Governance",
         "developer": "Developer",
         "tokens": "Tokens",
         "activity": "Activity"

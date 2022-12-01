@@ -44,6 +44,12 @@
                   },
               ]
             : []),
+        {
+            icon: 'voting',
+            label: localize('tabs.governance'),
+            route: DashboardRoute.Governance,
+            onClick: openGovernance,
+        },
         ...(features?.developerTools?.enabled && $activeProfile?.isDeveloperProfile
             ? [
                   {
@@ -62,6 +68,10 @@
 
     function openCollectibles(): void {
         $dashboardRouter.goTo(DashboardRoute.Collectibles)
+    }
+
+    function openGovernance(): void {
+        $dashboardRouter.goTo(DashboardRoute.Governance)
     }
 
     function openDeveloper(): void {
