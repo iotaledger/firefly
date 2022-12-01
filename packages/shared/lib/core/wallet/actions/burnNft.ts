@@ -16,7 +16,7 @@ export async function burnNft(nftId: string): Promise<void> {
         const burnNftTransaction = await account.burnNft(nftId)
 
         // Generate Activity
-        const processedTransaction = preprocessTransaction(burnNftTransaction)
+        const processedTransaction = preprocessTransaction(burnNftTransaction, account.depositAddress)
         const activity = generateActivity(processedTransaction, account)
         addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)
 
