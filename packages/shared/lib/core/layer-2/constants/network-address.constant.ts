@@ -10,4 +10,7 @@ export const NETWORK_ADDRESS: Readonly<{ [key in NetworkType]?: { [key in Destin
         [DestinationNetwork.Shimmer]: '-',
         [DestinationNetwork.ShimmerTestnetEvm]: 'rms1pzw5y4e4y6gzkytvjp0ukgjgs37vd33uvnju9tuf6rrztnnw4tj7crw72ar',
     },
+    [NetworkType.PrivateNet]: {
+        [DestinationNetwork.Shimmer]: '-',
+    },
 }

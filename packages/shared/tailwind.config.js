@@ -4,13 +4,18 @@ const selectorParser = require('postcss-selector-parser')
 /* Utilities */
 const pxToRem = (px, base = 16) => `${px / base}rem`
 
+const IS_DESKOP = process.env.PLATFORM === 'desktop'
+const SHARED_PURGE_ROUTES = ['../shared/**/*.svelte', '../shared/**/*.scss']
+const DESKTOP_PURGE_ROUTES = ['../desktop/**/*.svelte']
+const MOBILE_PURGE_ROUTES = ['../mobile/**/*.svelte']
+
 module.exports = {
     future: {
         // removeDeprecatedGapUtilities: true,
         // purgeLayersByDefault: true,
     },
     purge: {
-        content: ['../shared/**/*.svelte', '../shared/**/*.scss'],
+        content: [...SHARED_PURGE_ROUTES, ...(IS_DESKOP ? DESKTOP_PURGE_ROUTES : MOBILE_PURGE_ROUTES)],
         options: {
             // Needed to prevent purgecss from removing classes declared with string concatenation
             safelist: [
