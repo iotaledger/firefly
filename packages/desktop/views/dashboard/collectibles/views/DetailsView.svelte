@@ -112,7 +112,9 @@
             {/if}
         </div>
         <div class="flex w-full space-x-4 self-end mt-auto pt-4">
-            <Button outline classes="flex-1" onClick={handleExplorerClick}>{localize('general.viewOnExplorer')}</Button>
+            <Button outline classes="flex-1" onClick={handleExplorerClick} disabled={!explorerUrl}
+                >{localize('general.viewOnExplorer')}</Button
+            >
             <Button classes="flex-1">{localize('actions.send')}</Button>
         </div>
     </Pane>
