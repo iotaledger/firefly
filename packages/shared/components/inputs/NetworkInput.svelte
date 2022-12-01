@@ -44,7 +44,9 @@
 
     export function validate(): Promise<void> {
         try {
-            validateBech32Address(addressPrefix, networkAddress)
+            if (networkAddress !== networkAddresses[DestinationNetwork.Shimmer]) {
+                validateBech32Address(addressPrefix, networkAddress)
+            }
             return Promise.resolve()
         } catch (err) {
             error = err?.message ?? err
