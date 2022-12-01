@@ -18,7 +18,8 @@
     $: isActivityIncomingAndUnclaimed =
         activity &&
         activity.asyncData &&
-        (activity?.direction === ActivityDirection.Incoming || activity.isSelfTransaction) &&
+        (activity?.direction === ActivityDirection.Incoming ||
+            activity?.direction === ActivityDirection.SelfTransaction) &&
         activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
 
     $: shouldShowActions =

@@ -16,10 +16,9 @@ classDiagram
     Base Activity <|-- Nft Activity
     Base Activity <|-- Alias Activity
     Base Activity <|-- Foundry Activity
-    Alias Activity -- Alias Type
+    Base Activity -- Activity Action
     class Base Activity {
         <<Interface>>
-        - id: string
         - id: string
         - outputId: string
         - transactionId: string
@@ -32,11 +31,11 @@ classDiagram
         - containsValue: boolean
         - isAssetHidden: boolean
         - direction: ActivityDirection
+        - action: ActivityAction
         - isInternal: boolean
         - storageDeposit: number
         - giftedStorageDeposit: number
         - subject: Subject
-        - isSelfTransaction: boolean
         - asyncData: AsyncData
     }
     class Transaction Activity {
@@ -58,7 +57,6 @@ classDiagram
     class Alias Activity {
         - type: ActivityType.Alias
         - aliasId: string
-        - aliasSubype: AliasSubtype
         - governorAddress: string
         - stateControllerAddress: string
     }
@@ -71,11 +69,12 @@ classDiagram
         <<Enum>>
         - Incoming
         - Outgoing
+        - SelfTransaction
     }
-    class Alias Type {
+    class Activity Action {
         <<Enum>>
-        - Created
-        - Other
+        - Send
+        - Mint
     }
     class Async Data {
         - asyncStatus: ActivityAsyncStatus

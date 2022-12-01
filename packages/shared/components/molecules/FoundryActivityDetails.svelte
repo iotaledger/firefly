@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { AmountBox, SubjectBox, ActivityInclusionStatusPill } from 'shared/components'
+    import { AmountBox, SubjectBox, TransactionActivityStatusPill } from 'shared/components'
     import { formatTokenAmountDefault, getAssetFromPersistedAssets } from '@core/wallet'
     import { FoundryActivity } from '@core/wallet'
 
@@ -14,7 +14,12 @@
         <AmountBox {amount} unit={asset?.metadata?.unit} {asset} />
     {/if}
     <foundry-status class="flex flex-row w-full space-x-2 justify-center">
-        <ActivityInclusionStatusPill localizationKey={'foundry.minting'} inclusionState={activity.inclusionState} />
+        <TransactionActivityStatusPill
+            inclusionState={activity.inclusionState}
+            direction={activity.direction}
+            isInternal={activity.isInternal}
+            action={activity.action}
+        />
     </foundry-status>
     {#if activity.subject}
         <SubjectBox subject={activity.subject} />
