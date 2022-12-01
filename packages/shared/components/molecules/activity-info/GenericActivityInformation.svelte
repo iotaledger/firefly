@@ -3,7 +3,7 @@
     import { formatDate, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import { Activity, formatTokenAmountPrecise } from '@core/wallet'
-    import { BASE_TOKEN } from '@core/network'
+    import { BASE_TOKEN, ExplorerEndpoint } from '@core/network'
     import { getOfficialExplorerUrl } from '@core/network/utils'
     import { Platform } from '@core/app'
     import { truncateString } from '@core/utils'
@@ -63,7 +63,9 @@
 
     function handleTransactionIdClick(): void {
         explorerUrl
-            ? Platform.openUrl(`${explorerUrl}/block/${activity.asyncData?.claimingTransactionId}`)
+            ? Platform.openUrl(
+                  `${explorerUrl}/${ExplorerEndpoint.Transaction}/${activity.asyncData?.claimingTransactionId}`
+              )
             : setClipboard(activity.asyncData?.claimingTransactionId)
     }
 

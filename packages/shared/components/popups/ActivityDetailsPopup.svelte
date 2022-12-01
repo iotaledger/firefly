@@ -27,6 +27,7 @@
     import { truncateString } from '@core/utils'
     import { closePopup, openPopup } from '@auxiliary/popup'
     import { onMount } from 'svelte'
+    import { ExplorerEndpoint } from '@core/network'
 
     export let activityId: string
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
@@ -82,7 +83,7 @@
     }
 
     function handleExplorerClick(): void {
-        Platform.openUrl(`${explorerUrl}/transaction/${activity.transactionId}`)
+        Platform.openUrl(`${explorerUrl}/${ExplorerEndpoint.Transaction}/${activity.transactionId}`)
     }
 
     function handleTransactionIdClick(): void {

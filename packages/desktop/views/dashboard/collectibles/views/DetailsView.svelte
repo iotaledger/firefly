@@ -22,7 +22,7 @@
     import { BASE_TOKEN } from '@core/network/constants'
     import { activeProfile } from '@core/profile/stores'
     import { Platform } from '@core/app'
-    import { getOfficialExplorerUrl } from '@core/network'
+    import { ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
     const nft: INft = getNftByIdFromAllAccountNfts($selectedAccountIndex, $selectedNftId)
@@ -57,7 +57,7 @@
     }
 
     function handleExplorerClick(): void {
-        Platform.openUrl(`${explorerUrl}/nft/${id}`)
+        Platform.openUrl(`${explorerUrl}/${ExplorerEndpoint.Nft}/${id}`)
     }
 </script>
 
