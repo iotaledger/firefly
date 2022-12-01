@@ -1640,43 +1640,39 @@
             "Confirmed": "已質押到",
             "Conflicting": "質押失敗"
         },
-        "transaction": {
-            "internal": {
-                "incoming": {
-                    "Pending": "正傳送自",
-                    "Confirmed": "傳送自",
-                    "Conflicting": "傳送失敗"
-                },
-                "outgoing": {
-                    "Pending": "傳送至",
-                    "Confirmed": "已傳送至",
-                    "Conflicting": "傳送失敗"
-                }
-            },
-            "external": {
-                "incoming": {
-                    "Pending": "正接收自",
-                    "Confirmed": "接收自",
-                    "Conflicting": "接收失敗"
-                },
-                "outgoing": {
-                    "Pending": "正發送至",
-                    "Confirmed": "已發送至",
-                    "Conflicting": "傳送失敗"
-                }
-            }
-        },
-        "minting": {
+        "external": {
             "incoming": {
-                "Pending": "鑄造中",
-                "Confirmed": "已鑄造",
-                "Conflicting": "鑄造失敗"
+                "Pending": "正接收自",
+                "Confirmed": "接收自",
+                "Conflicting": "接收失敗"
             },
             "outgoing": {
-                "Pending": "鑄造中",
-                "Confirmed": "已鑄造",
-                "Conflicting": "鑄造失敗"
+                "Pending": "正發送至",
+                "Confirmed": "已發送至",
+                "Conflicting": "傳送失敗"
             }
+        },
+        "internal": {
+            "incoming": {
+                "Pending": "正傳送自",
+                "Confirmed": "傳送自",
+                "Conflicting": "傳送失敗"
+            },
+            "outgoing": {
+                "Pending": "傳送至",
+                "Confirmed": "已傳送至",
+                "Conflicting": "傳送失敗"
+            },
+            "selftransaction": {
+                "Pending": "傳送至",
+                "Confirmed": "已傳送至",
+                "Conflicting": "傳送失敗"
+            }
+        },
+        "mint": {
+            "Pending": "鑄造中",
+            "Confirmed": "已鑄造",
+            "Conflicting": "鑄造失敗"
         },
         "migrate": {
             "Pending": "遷移到",
