@@ -3,6 +3,7 @@
 
     export let classes = ''
     export let overflow = 'hidden'
+    export let removeShadow = false
 
     let darkModeEnabled
     $: darkModeEnabled = $appSettings.darkMode
@@ -10,7 +11,8 @@
 
 <div
     class:darkmode={darkModeEnabled}
-    class="bg-white dark:bg-gray-800 rounded-2xl overflow-{overflow} shadow-elevation-1 {classes}"
+    class:shadow-elevation-1={!removeShadow}
+    class="bg-white dark:bg-gray-800 rounded-2xl overflow-{overflow} {classes}"
 >
     <slot />
 </div>

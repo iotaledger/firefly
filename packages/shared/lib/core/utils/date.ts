@@ -1,3 +1,5 @@
+import { SECONDS_PER_MILESTONE } from '@core/network'
+import { MILLISECONDS_PER_SECOND } from './constants'
 import { IDateDifference } from './interfaces'
 
 export function datesOnSameDay(first: Date, second: Date): boolean {
@@ -69,4 +71,20 @@ export function diffDates(firstDate: Date, secondDate: Date): IDateDifference {
     }
 
     return { unit: 'today' }
+}
+
+/**
+ * Converts milestone to date based on current milestone
+ *
+ * @method milestoneToDate
+ *
+ * @param {number} baseMilestone - Milestone to start from, generally the current milestone
+ * @param {number} milestone
+ *
+ * @returns {Date}
+ */
+export const milestoneToDate = (baseMilestone: number, milestone: number): Date => {
+    const firstMilestoneMillis = Date.now() - baseMilestone * SECONDS_PER_MILESTONE * MILLISECONDS_PER_SECOND
+    const milestoneMillis = firstMilestoneMillis + milestone * SECONDS_PER_MILESTONE * MILLISECONDS_PER_SECOND
+    return new Date(milestoneMillis)
 }
