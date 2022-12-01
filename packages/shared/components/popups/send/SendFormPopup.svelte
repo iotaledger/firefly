@@ -59,7 +59,7 @@
     let activeTab: SendForm =
         transactionDetails.type === NewTransactionType.TokenTransfer ? SendForm.SendToken : SendForm.SendNft
 
-    $: ownsNfts = $selectedAccountNfts.some((nft) => nft.isSpendable)
+    $: hasSpendableNfts = $selectedAccountNfts.some((nft) => nft.isSpendable)
     $: isLayer2 = !isLayer1Destination(networkAddress)
     $: isSendTokenTab = activeTab === SendForm.SendToken
 
@@ -136,7 +136,7 @@
         {localize('popups.transaction.title')}
     </Text>
     <send-form-inputs class="flex flex-col space-y-4">
-        {#if ownsNfts}
+        {#if hasSpendableNfts}
             <Tabs bind:activeTab {tabs} />
         {/if}
         {#if activeTab === SendForm.SendToken}
