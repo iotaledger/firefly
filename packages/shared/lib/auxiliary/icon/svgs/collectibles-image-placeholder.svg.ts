@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-// temporarily using PICTURE_SVG implementation
+// same as PICTURE_SVG icon
 export const COLLECTIBLES_IMAGE_PLACEHOLDER_SVG: ISvg = {
     width: 24,
     height: 24,
@@ -15,33 +15,3 @@ export const COLLECTIBLES_IMAGE_PLACEHOLDER_SVG: ISvg = {
         },
     ],
 }
-
-// <svg width="244" height="244" viewBox="0 0 244 244" fill="none" xmlns="http://www.w3.org/2000/svg">
-// <g clip-path="url(#clip0_12690_56172)">
-// <rect width="244" height="244" fill="#F0F5FE"/>
-// <rect x="67" y="62" width="110" height="110" rx="55" fill="url(#paint0_linear_12690_56172)"/>
-// <path d="M67 117.926L93.1515 105.111C97.0692 103.191 101.72 103.549 105.298 106.045L137.146 128.265C140.484 130.594 144.776 131.072 148.545 129.534L177 117.926L176.841 119.762C174.385 148.181 150.6 170 122.075 170V170C94.5465 170 71.2627 149.637 67.5951 122.353L67 117.926Z" fill="#C4D1E8"/>
-// <g filter="url(#filter0_d_12690_56172)">
-// <circle cx="140.5" cy="98.5" r="10.5" fill="#F0F5FE"/>
-// </g>
-// </g>
-// <defs>
-// <filter id="filter0_d_12690_56172" x="130" y="88" width="23" height="23" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-// <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-// <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-// <feOffset dx="1" dy="1"/>
-// <feGaussianBlur stdDeviation="0.5"/>
-// <feComposite in2="hardAlpha" operator="out"/>
-// <feColorMatrix type="matrix" values="0 0 0 0 0.768627 0 0 0 0 0.819608 0 0 0 0 0.909804 0 0 0 1 0"/>
-// <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_12690_56172"/>
-// <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_12690_56172" result="shape"/>
-// </filter>
-// <linearGradient id="paint0_linear_12690_56172" x1="122" y1="96.5" x2="122" y2="172" gradientUnits="userSpaceOnUse">
-// <stop stop-color="#D8E3F5"/>
-// <stop offset="1" stop-color="#C4D1E8"/>
-// </linearGradient>
-// <clipPath id="clip0_12690_56172">
-// <rect width="244" height="244" fill="white"/>
-// </clipPath>
-// </defs>
-// </svg>
