@@ -20,7 +20,8 @@
     $: title = getTitle(activity)
     $: subjectLocale = getSubjectLocale(activity)
     $: amount = getFormattedAmountFromActivity(activity)
-    $: isIncoming = activity.direction === ActivityDirection.Incoming
+    $: isIncoming =
+        activity.direction === ActivityDirection.Incoming || activity.direction === ActivityDirection.SelfTransaction
 
     function getTitle(_activity: TransactionActivity): string {
         const { isShimmerClaiming, isInternal, direction, inclusionState } = _activity
@@ -32,7 +33,7 @@
         if (isInternal) {
             return isConfirmed ? 'general.transfer' : 'general.transferring'
         }
-        if (direction === ActivityDirection.Incoming) {
+        if (direction === ActivityDirection.Incoming || direction === ActivityDirection.SelfTransaction) {
             return isConfirmed ? 'general.received' : 'general.receiving'
         }
         if (direction === ActivityDirection.Outgoing) {
@@ -49,7 +50,9 @@
             return truncateString(subject?.account?.name, 13, 0)
         }
         if (subject?.type === 'address') {
-            return truncateString(subject?.address, $networkHrp.length, 6)
+            const address = activity.parsedLayer2Metadata?.ethereumAddress ?? subject?.address
+            const hrpLength = activity.parsedLayer2Metadata ? '0x'.length : $networkHrp.length
+            return truncateString(address, hrpLength, 6)
         }
         return localize('general.unknownAddress')
     }

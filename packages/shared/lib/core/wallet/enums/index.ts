@@ -1,3 +1,4 @@
+export * from './activity-action.enum'
 export * from './activity-async-status.enum'
 export * from './activity-direction.enum'
 export * from './activity-status.enum'

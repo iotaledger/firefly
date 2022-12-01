@@ -1,7 +1,6 @@
 import { IAccountState } from '@core/account'
 import { activeProfileId } from '@core/profile'
 import { ActivityDirection, IProcessedTransaction } from '@core/wallet'
-import { getDirectionFromTransaction } from '@core/wallet/utils'
 import { isOutputAsync } from '@core/wallet/utils/outputs/isOutputAsync'
 import { get } from 'svelte/store'
 import { addClaimedActivity, claimedActivities } from '../../stores'
@@ -27,7 +26,8 @@ export function linkTransactionsWithClaimingTransactions(
         const isClaimingTransaction = transactionsIncludedAsClaimingTransactions.includes(transaction.transactionId)
         const isIncomingAsyncTransaction =
             transaction.outputs.some((_output) => isOutputAsync(_output.output)) &&
-            getDirectionFromTransaction(transaction, account.depositAddress) === ActivityDirection.Incoming
+            (transaction.direction === ActivityDirection.Incoming ||
+                transaction.direction === ActivityDirection.SelfTransaction)
 
         if (isClaimingTransaction) {
             continue
@@ -46,10 +46,8 @@ export function linkTransactionsWithClaimingTransactions(
                 incomingAsyncTransactions.push(transaction)
             }
             resultingTransactions.push(transaction)
-        } else if (transaction.isIncoming) {
+        } else if (transaction.direction === ActivityDirection.Incoming) {
             // Incoming transactions can never be claiming transactions
-            // Even though we specify self transactions as "Direction.In", "incoming" flag is false for them, which is important here,
-            // as self transactions are most of the time claiming transactions
             resultingTransactions.push(transaction)
         } else {
             // For 'normal' transactions we search through the async transactions to check if one is the claiming transaction from the other one
