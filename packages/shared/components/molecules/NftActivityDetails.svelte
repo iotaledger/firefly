@@ -12,7 +12,7 @@
     $: isTimelocked = activity?.asyncData?.timelockDate > $time
 </script>
 
-<nft-transaction-details class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
+<nft-transaction-details class="w-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <div class="flex w-full items-center justify-center">
         <div class="rounded-full flex justify-center items-center transition-none p-2 w-16 h-16 bg-gray-500">
             <Icon
@@ -27,7 +27,7 @@
         <transaction-status class="flex flex-row w-full space-x-2 justify-center">
             {#if activity?.inclusionState && activity?.direction}
                 <TransactionActivityStatusPill
-                    type={activity?.type}
+                    action={activity?.action}
                     direction={activity?.direction}
                     isInternal={activity?.isInternal}
                     inclusionState={activity?.inclusionState}

@@ -16,6 +16,16 @@
     $: asset = getAssetFromPersistedAssets(activity.assetId)
     $: amount = formatTokenAmountDefault(Number(activity.rawAmount), asset?.metadata, asset?.metadata?.unit)
     $: isTimelocked = activity.asyncData?.timelockDate > $time
+
+    let subjectData = activity.subject
+    $: if (activity.parsedLayer2Metadata) {
+        subjectData = {
+            ...activity.subject,
+            ...(activity.subject?.type === 'address' && {
+                address: activity.parsedLayer2Metadata?.ethereumAddress,
+            }),
+        }
+    }
 </script>
 
 <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-3">
@@ -27,6 +37,7 @@
             <TransactionActivityStatusPill
                 type={activity.type}
                 direction={activity.direction}
+                action={activity.action}
                 isInternal={activity.isInternal}
                 inclusionState={activity.inclusionState}
             />
@@ -46,6 +57,6 @@
         {/if}
     </transaction-status>
     {#if activity.subject}
-        <SubjectBox subject={activity.subject} />
+        <SubjectBox subject={subjectData} />
     {/if}
 </main-content>

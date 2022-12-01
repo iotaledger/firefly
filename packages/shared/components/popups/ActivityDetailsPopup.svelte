@@ -27,6 +27,7 @@
     import { truncateString } from '@core/utils'
     import { closePopup, openPopup } from '@auxiliary/popup'
     import { onMount } from 'svelte'
+    import { ExplorerEndpoint } from '@core/network'
 
     export let activityId: string
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
@@ -41,7 +42,8 @@
     $: isTimelocked = activity.asyncData?.asyncStatus === ActivityAsyncStatus.Timelocked
     $: isActivityIncomingAndUnclaimed =
         activity.asyncData &&
-        (activity?.direction === ActivityDirection.Incoming || activity.isSelfTransaction) &&
+        (activity.direction === ActivityDirection.Incoming ||
+            activity.direction === ActivityDirection.SelfTransaction) &&
         activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
 
     let details: Record<string, unknown>
@@ -70,7 +72,7 @@
         if (activity.type === ActivityType.Basic) {
             return {
                 ...details,
-                type: activity.type,
+                action: activity.action,
                 asset,
                 storageDeposit: activity.storageDeposit,
                 rawAmount: activity.rawAmount,
@@ -82,7 +84,7 @@
     }
 
     function handleExplorerClick(): void {
-        Platform.openUrl(`${explorerUrl}/transaction/${activity.transactionId}`)
+        Platform.openUrl(`${explorerUrl}/${ExplorerEndpoint.Transaction}/${activity.transactionId}`)
     }
 
     function handleTransactionIdClick(): void {
