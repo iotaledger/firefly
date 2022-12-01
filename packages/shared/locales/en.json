@@ -581,6 +581,13 @@
                 "attributes": "Attributes",
                 "metadata": "Metadata"
             }
+        },
+        "governance": {
+            "votingPower": {
+                "title": "Voting power",
+                "maximal": "Maximal voting power: {value}",
+                "manage": "Manage voting power"
+            }
         }
     },
     "popups": {
