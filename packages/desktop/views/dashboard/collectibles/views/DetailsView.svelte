@@ -21,7 +21,10 @@
     import { ActivityType, formatTokenAmountPrecise } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network/constants'
     import { activeProfile } from '@core/profile/stores'
+    import { Platform } from '@core/app'
+    import { ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
 
+    const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
     const nft: INft = getNftByIdFromAllAccountNfts($selectedAccountIndex, $selectedNftId)
 
     const { id, name } = nft
@@ -51,6 +54,10 @@
         ...(storageDeposit && {
             storageDeposit: { data: String(storageDeposit) },
         }),
+    }
+
+    function handleExplorerClick(): void {
+        Platform.openUrl(`${explorerUrl}/${ExplorerEndpoint.Nft}/${id}`)
     }
 </script>
 
@@ -105,7 +112,9 @@
             {/if}
         </div>
         <div class="flex w-full space-x-4 self-end mt-auto pt-4">
-            <Button outline classes="flex-1">{localize('general.viewOnExplorer')}</Button>
+            <Button outline classes="flex-1" onClick={handleExplorerClick} disabled={!explorerUrl}
+                >{localize('general.viewOnExplorer')}</Button
+            >
             <Button classes="flex-1">{localize('actions.send')}</Button>
         </div>
     </Pane>
