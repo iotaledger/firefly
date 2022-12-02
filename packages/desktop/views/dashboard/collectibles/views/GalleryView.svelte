@@ -69,7 +69,7 @@
             </div>
         </div>
 
-        <div class="w-full h-full flex items-center justify-center grow-1">
+        <div class="w-full h-full flex items-center justify-start grow-1">
             {#if $queriedNfts.length}
                 <div class="h-full flex flex-wrap flex-row gap-6 scrollable-y">
                     {#each $queriedNfts as nft}

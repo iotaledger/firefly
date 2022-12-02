@@ -9,7 +9,7 @@ export const selectedAccountNfts: Readable<INft[]> = derived(
     [selectedAccount, allAccountNfts],
     ([$selectedAccount, $allAccountNfts]) => {
         if (selectedAccount) {
-            return $allAccountNfts[$selectedAccount?.index]?.filter((nft) => nft.isOwned) ?? []
+            return $allAccountNfts[$selectedAccount?.index]?.filter((nft) => nft.isSpendable) ?? []
         } else {
             return []
         }

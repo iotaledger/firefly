@@ -4,7 +4,7 @@ import { DEFAULT_NFT_NAME } from '../constants'
 import { INft } from '../interfaces'
 import { parseNftMetadata } from './parseNftMetadata'
 
-export function buildNftFromNftOutput(nftOutput: INftOutput, outputId: string, isOwned: boolean): INft {
+export function buildNftFromNftOutput(nftOutput: INftOutput, outputId: string, isSpendable: boolean): INft {
     const id = getNftId(nftOutput.nftId, outputId)
     const issuer = getIssuerFromNftOutput(nftOutput)
     const metadata = getMetadataFromNftOutput(nftOutput)
@@ -13,7 +13,7 @@ export function buildNftFromNftOutput(nftOutput: INftOutput, outputId: string, i
         id,
         name: parsedMetadata?.name ?? DEFAULT_NFT_NAME,
         issuer,
-        isOwned,
+        isSpendable,
         metadata,
         parsedMetadata: parsedMetadata,
     }

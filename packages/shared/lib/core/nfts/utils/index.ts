@@ -1,3 +1,3 @@
 export * from './buildNftFromNftOutput'
-export * from './getIsOwnedFromUnspentNftOutput'
+export * from './getIsSpendableFromUnspentNftOutput'
 export * from './parseNftMetadata'

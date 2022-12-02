@@ -14,12 +14,13 @@ import {
     sendRouter,
     storageProtectionSetupRouter,
     strongholdSetupRouter,
+    tokenRouter,
 } from '../subrouters'
 
 export function getSubroutersForAppContext(context: AppContext): IRouter[] {
     switch (context) {
         case AppContext.Dashboard:
-            return [get(accountSwitcherRouter), get(sendRouter), get(activityRouter)]
+            return [get(accountSwitcherRouter), get(sendRouter), get(activityRouter), get(tokenRouter)]
         case AppContext.Login:
             return []
         case AppContext.Onboarding:
