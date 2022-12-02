@@ -152,10 +152,10 @@
                     />
                     {#if proposal.hasVoted}
                         <TooltipIcon
-                            icon={IconEnum.CheckboxRound}
+                            icon={IconEnum.Voted}
                             size="small"
                             position={Position.Left}
-                            iconClasses="text-black"
+                            iconClasses="text-gray-500"
                         >
                             <Text smaller overrideColor fontWeight={FontWeight.semibold} classes="text-gray-600">
                                 {localize('views.governance.proposals.voted')}

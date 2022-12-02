@@ -45,7 +45,7 @@
               ]
             : []),
         {
-            icon: 'voting',
+            icon: 'governance',
             label: localize('tabs.governance'),
             route: DashboardRoute.Governance,
             onClick: openGovernance,
