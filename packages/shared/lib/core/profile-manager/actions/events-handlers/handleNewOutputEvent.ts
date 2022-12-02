@@ -2,7 +2,7 @@ import { syncBalance } from '@core/account/actions/syncBalance'
 import { addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput, getIsSpendableFromUnspentNftOutput } from '@core/nfts'
 import { activeAccounts } from '@core/profile/stores'
 import { ActivityType, addPersistedAsset, generateActivity, getOrRequestAssetFromPersistedAssets } from '@core/wallet'
-import { OUTPUT_TYPE_ALIAS } from '@core/wallet/constants'
+import { OUTPUT_TYPE_ALIAS, OUTPUT_TYPE_NFT } from '@core/wallet/constants'
 import {
     addActivityToAccountActivitiesInAllAccountActivities,
     allAccountActivities,
@@ -33,6 +33,7 @@ export async function handleNewOutputEventInternal(
         output.output.type === OUTPUT_TYPE_ALIAS &&
         output.output.stateIndex === 0 &&
         !get(allAccountActivities)[accountIndex].find((_activity) => _activity.id === output.outputId)
+    const isNftOutput = output.output.type === OUTPUT_TYPE_NFT
 
     if ((account.depositAddress === address && !output?.remainder) || isNewAliasOutput) {
         await syncBalance(account.index)
@@ -44,14 +45,16 @@ export async function handleNewOutputEventInternal(
         )
 
         const activity = generateActivity(processedOutput, account)
-        if (activity.type === ActivityType.Nft) {
-            const isSpendable = getIsSpendableFromUnspentNftOutput(account.depositAddress, output.output as INftOutput)
-            const nft = buildNftFromNftOutput(output.output as INftOutput, output.outputId, isSpendable)
-            addOrUpdateNftInAllAccountNfts(account.index, nft)
-        } else if (activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry) {
+        if (activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry) {
             const asset = await getOrRequestAssetFromPersistedAssets(activity.assetId)
             addPersistedAsset(asset)
         }
         addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)
+    }
+
+    if (isNftOutput) {
+        const isSpendable = getIsSpendableFromUnspentNftOutput(account.depositAddress, output.output as INftOutput)
+        const nft = buildNftFromNftOutput(output.output as INftOutput, output.outputId, isSpendable)
+        addOrUpdateNftInAllAccountNfts(account.index, nft)
     }
 }
