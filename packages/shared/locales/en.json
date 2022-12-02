@@ -1888,7 +1888,7 @@
             }
         },
         "locked": "locked",
-        "smartContractCall": "smart contract call"
+        "smartContract": "smart contract"
     },
     "menus": {
         "expirationTimePicker": {

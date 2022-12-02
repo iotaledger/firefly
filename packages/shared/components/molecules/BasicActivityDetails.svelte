@@ -52,7 +52,7 @@
         {/if}
         {#if networkAddress}
             <Pill backgroundColor="blue-200" darkBackgroundColor="blue-200">
-                {localize('pills.smartContractCall')}
+                {localize('pills.smartContract')}
             </Pill>
         {/if}
     </transaction-status>
