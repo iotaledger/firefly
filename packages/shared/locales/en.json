@@ -1440,6 +1440,11 @@
             "Name": "Name",
             "Amount": "Amount"
         },
+        "internalExternal": {
+            "label": "Internal / External",
+            "internal": "Internal",
+            "external": "External"
+        },
         "verificationStatus": {
             "label": "Verification status",
             "new": "New",
@@ -1478,9 +1483,16 @@
         },
         "type": {
             "label": "Type",
-            "incoming": "incoming",
-            "outgoing": "outgoing",
-            "internal": "internal"
+            "basic": "Basic",
+            "nft": "NFT",
+            "alias": "Alias",
+            "foundry": "Foundry"
+        },
+        "direction": {
+            "label": "Direction",
+            "incoming": "Incoming",
+            "outgoing": "Outgoing",
+            "selfTransaction": "Self transaction"
         }
     },
     "dates": {
