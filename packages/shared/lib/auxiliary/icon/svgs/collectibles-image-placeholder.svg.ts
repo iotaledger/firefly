@@ -1,6 +1,5 @@
 import { ISvg } from '../interfaces'
 
-// same as PICTURE_SVG icon
 export const COLLECTIBLES_IMAGE_PLACEHOLDER_SVG: ISvg = {
     width: 24,
     height: 24,
