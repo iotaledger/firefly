@@ -11,6 +11,7 @@ import {
     ActivityType,
     DateFilterOption,
     DateUnit,
+    InternalExternalOption,
 } from '../enums'
 import { dateIsAfterOtherDate, dateIsBeforeOtherDate, datesOnSameDay } from '@core/utils'
 import { ActivityFilter } from '../interfaces'
@@ -46,6 +47,9 @@ export function isVisibleActivity(activity: Activity): boolean {
         return false
     }
     if (!isVisibleWithActiveDirectionFilter(activity, filter)) {
+        return false
+    }
+    if (!isVisibleWithInternalExternalFilter(activity, filter)) {
         return false
     }
     return true
@@ -281,6 +285,18 @@ function isVisibleWithActiveTypeFilter(activity: Activity, filter: ActivityFilte
 function isVisibleWithActiveDirectionFilter(activity: Activity, filter: ActivityFilter): boolean {
     if (filter.direction.active && filter.direction.selected) {
         if (filter.direction.selected !== activity.direction) {
+            return false
+        }
+    }
+    return true
+}
+
+function isVisibleWithInternalExternalFilter(activity: Activity, filter: ActivityFilter): boolean {
+    if (filter.internalExternal.active && filter.internalExternal.selected) {
+        if (filter.internalExternal.selected === InternalExternalOption.Internal && !activity.isInternal) {
+            return false
+        }
+        if (filter.internalExternal.selected === InternalExternalOption.External && activity.isInternal) {
             return false
         }
     }

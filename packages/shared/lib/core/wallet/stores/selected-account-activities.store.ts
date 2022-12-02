@@ -9,6 +9,7 @@ import {
     ActivityType,
     BooleanFilterOption,
     DateFilterOption,
+    InternalExternalOption,
     NumberFilterOption,
     StatusFilterOption,
 } from '../enums'
@@ -71,6 +72,13 @@ export const activityFilter: Writable<ActivityFilter> = writable({
         localeKey: 'filters.direction',
         selected: ActivityDirection.Incoming,
         choices: [ActivityDirection.Incoming, ActivityDirection.Outgoing, ActivityDirection.SelfTransaction],
+    },
+    internalExternal: {
+        active: false,
+        type: 'selection',
+        localeKey: 'filters.internalExternal',
+        selected: InternalExternalOption.External,
+        choices: [InternalExternalOption.External, InternalExternalOption.Internal],
     },
     date: {
         active: false,

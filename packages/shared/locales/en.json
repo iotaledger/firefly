@@ -1402,6 +1402,11 @@
             "Name": "Name",
             "Amount": "Amount"
         },
+        "internalExternal": {
+            "label": "Internal / External",
+            "internal": "Internal",
+            "external": "External"
+        },
         "verificationStatus": {
             "label": "Verification status",
             "new": "New",
