@@ -42,10 +42,8 @@ export function generateTransactionActivity(
     const nativeToken = getNativeTokenFromOutput(output)
     const assetId = nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol])
 
-    const { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output)
-    const rawAmount = nativeToken ? Number(nativeToken?.amount) : getAmountFromOutput(output) - storageDeposit
-    const metadata = getMetadataFromOutput(output)
     const tag = getTagFromOutput(output)
+    const metadata = getMetadataFromOutput(output)
     const publicNote = ''
 
     const action = ActivityAction.Send
@@ -59,6 +57,10 @@ export function generateTransactionActivity(
     const parsedLayer2Metadata =
         destinationNetwork === DestinationNetwork.Shimmer ? undefined : parseLayer2Metadata(metadata)
 
+    const { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output)
+    const gasBudget = Number(parsedLayer2Metadata?.gasBudget ?? '0')
+    const baseTokenAmount = getAmountFromOutput(output) - storageDeposit - gasBudget
+    const rawAmount = nativeToken ? Number(nativeToken?.amount) : baseTokenAmount
     return {
         type: ActivityType.Basic,
         isHidden,
