@@ -33,14 +33,14 @@
     const questions = Array(4).fill('Should we burn the unclaimed tokens')
     const options = ['This is option 1', 'This is option 2', 'This is option 3', 'Abstain']
 
-    let openedQuestionIndex = questions.length
+    let openedQuestionIndex = null
 
     function handleMeatballMenu(): void {
         return
     }
 
     function handleQuestionClick(index: number): void {
-        openedQuestionIndex = openedQuestionIndex === index ? questions.length : index
+        openedQuestionIndex = openedQuestionIndex === index ? null : index
     }
 </script>
 
