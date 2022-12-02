@@ -1,4 +1,5 @@
 export * from './burnAsset'
+export * from './burnNft'
 export * from './claimActivity'
 export * from './getAccountAssetsForSelectedAccount'
 export * from './generateAndStoreActivitiesForAllAccounts'
