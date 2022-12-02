@@ -1,6 +1,6 @@
 <script lang="typescript">
     import Big from 'big.js'
-    import { Text, AssetDropdown, InputContainer, AmountInput, TooltipIcon } from 'shared/components'
+    import { Text, AssetDropdown, InputContainer, SliderInput, AmountInput, TooltipIcon } from 'shared/components'
     import UnitInput from './UnitInput.svelte'
     import { formatCurrency, localize, parseCurrency } from '@core/i18n'
     import {
@@ -19,6 +19,8 @@
     export let asset: IAsset = $visibleSelectedAccountAssets?.baseCoin
     export let rawAmount: string = undefined
     export let unit: string = undefined
+    export let readonlyAsset: boolean = false
+    export let containsSlider: boolean = false
 
     let amount: string = rawAmount
         ? formatTokenAmountDefault(Number(rawAmount), asset?.metadata, unit, false)
@@ -93,7 +95,7 @@
     on:clickOutside={() => (isFocused = false)}
 >
     <div class="flex flex-row w-full items-center space-x-0.5 relative">
-        <AssetDropdown bind:asset />
+        <AssetDropdown bind:asset readonly={readonlyAsset} />
         <AmountInput
             bind:inputElement={amountInputElement}
             bind:amount
@@ -109,26 +111,47 @@
             <UnitInput bind:unit bind:isFocused tokenMetadata={asset?.metadata} />
         {/if}
     </div>
-    <div class="flex flex-row w-full items-end justify-between">
-        {#if asset}
-            <div class="flex flex-row items-center">
-                <button on:click={onClickAvailableBalance}>
-                    <Text color="gray-600" darkColor="gray-500" fontSize="xs" classes="cursor-pointer">
-                        {localize('general.availableBalanceWithValue', {
-                            values: { balance: formatTokenAmountBestMatch(asset?.balance?.available, asset?.metadata) },
-                        })}
-                    </Text>
-                </button>
-                <TooltipIcon
-                    title={localize('general.availableBalance')}
-                    text={localize('general.availableBalanceTooltip')}
-                    width={15}
-                    height={15}
-                    classes="ml-1"
-                />
+    {#if containsSlider}
+        <div class="flex flex-col">
+            <SliderInput
+                bind:value={amount}
+                max={Number(formatTokenAmountDefault(asset?.balance?.available, asset.metadata, unit, false))}
+                decimals={asset.metadata.decimals}
+            />
+            <div class="flex flex-row justify-between">
+                <Text color="gray-800" darkColor="gray-500" fontSize="xs"
+                    >{formatTokenAmountBestMatch(0, asset?.metadata)}</Text
+                >
+                <Text color="gray-800" darkColor="gray-500" fontSize="xs"
+                    >{formatTokenAmountBestMatch(asset?.balance?.available, asset?.metadata)}</Text
+                >
             </div>
-        {/if}
-        <!-- Placeholder for asset USD value  -->
-        <Text color="gray-600" darkColor="gray-500" fontSize="xs">{formatCurrency(marketAmount) ?? ''}</Text>
-    </div>
+        </div>
+    {:else}
+        <div class="flex flex-row w-full items-end justify-between">
+            {#if asset}
+                <div class="flex flex-row items-center">
+                    <button on:click={onClickAvailableBalance}>
+                        <Text color="gray-600" darkColor="gray-500" fontSize="xs" classes="cursor-pointer">
+                            {localize('general.availableBalanceWithValue', {
+                                values: {
+                                    balance: formatTokenAmountBestMatch(asset?.balance?.available, asset?.metadata),
+                                },
+                            })}
+                        </Text>
+                    </button>
+                    <TooltipIcon
+                        title={localize('general.availableBalance')}
+                        text={localize('general.availableBalanceTooltip')}
+                        width={15}
+                        height={15}
+                        classes="ml-1"
+                    />
+                </div>
+            {/if}
+            <!-- Placeholder for asset USD value  -->
+            <Text color="gray-600" darkColor="gray-500" fontSize="xs">{formatCurrency(marketAmount) ?? ''}</Text>
+        </div>
+        <!-- else content here -->
+    {/if}
 </InputContainer>
