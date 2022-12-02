@@ -3,9 +3,14 @@ import { ILayer2TransferAllowanceMetadata } from '../interfaces'
 type Layer2Metadata = Omit<ILayer2TransferAllowanceMetadata, 'baseTokenAmount' | 'nativeTokens'>
 
 export function parseLayer2Metadata(metadata: string): Layer2Metadata {
+    if (!metadata) {
+        return undefined
+    }
+
     try {
-        const parsedData = metadata ? JSON.parse(metadata) : {}
+        const parsedData = JSON.parse(metadata)
         validate(parsedData)
+
         const parsedMetadata: Layer2Metadata = {
             senderContract: parsedData.senderContract,
             targetContract: parsedData.targetContract,

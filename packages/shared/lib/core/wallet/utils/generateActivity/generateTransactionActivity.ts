@@ -1,6 +1,11 @@
 import { isShimmerClaimingTransaction } from '@contexts/onboarding'
 import { IAccountState } from '@core/account'
-import { DestinationNetwork, getDestinationNetworkFromAddress, parseLayer2Metadata } from '@core/layer-2'
+import {
+    DestinationNetwork,
+    getDestinationNetworkFromAddress,
+    Layer2Metadata,
+    parseLayer2Metadata,
+} from '@core/layer-2'
 import { COIN_TYPE } from '@core/network'
 import { activeProfile, activeProfileId } from '@core/profile'
 import { TransactionActivity } from '@core/wallet/types'
@@ -51,11 +56,17 @@ export function generateTransactionActivity(
     const sendingInfo = getSendingInformation(processedTransaction, output, account)
     const asyncData = getAsyncDataFromOutput(output, outputId, claimingData, account)
 
-    const sendingAddress = sendingInfo.subject.type === 'address' ? sendingInfo.subject.address : undefined
-    const destinationNetwork = getDestinationNetworkFromAddress(sendingAddress)
-
-    const parsedLayer2Metadata =
-        destinationNetwork === DestinationNetwork.Shimmer ? undefined : parseLayer2Metadata(metadata)
+    let parsedLayer2Metadata: Layer2Metadata
+    let destinationNetwork: string
+    try {
+        parsedLayer2Metadata = parseLayer2Metadata(metadata)
+        destinationNetwork = getDestinationNetworkFromAddress(
+            sendingInfo.subject.type === 'address' ? sendingInfo.subject.address : undefined
+        )
+    } catch (_) {
+        parsedLayer2Metadata = null
+        destinationNetwork = DestinationNetwork.Shimmer
+    }
 
     const { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output)
     const gasBudget = Number(parsedLayer2Metadata?.gasBudget ?? '0')

@@ -43,6 +43,7 @@
         ACCOUNTS_CONTRACT,
         CONTRACT_FUNCTIONS,
         GAS_BUDGET,
+        getDestinationNetworkFromAddress,
         TARGET_CONTRACTS,
         TRANSFER_ALLOWANCE,
     } from '@core/layer-2'
@@ -87,16 +88,12 @@
         type: ActivityType.Basic,
         direction: ActivityDirection.Outgoing,
         inclusionState: InclusionState.Pending,
-        ...(layer2Parameters?.networkAddress && {
-            layer2Parameters: {
-                ...transactionDetails.layer2Parameters,
-                gasBudget: GAS_BUDGET,
-            },
-        }),
+        destinationNetwork: getDestinationNetworkFromAddress(layer2Parameters?.networkAddress),
         ...(layer2Parameters?.networkAddress && {
             parsedLayer2Metadata: {
                 targetContract: TARGET_CONTRACTS[ACCOUNTS_CONTRACT],
                 contractFunction: CONTRACT_FUNCTIONS[TRANSFER_ALLOWANCE],
+                gasBudget: GAS_BUDGET,
             },
         }),
     }
@@ -213,12 +210,12 @@
     >
     <div class="w-full flex-col space-y-2">
         {#if transactionDetails.type === NewTransactionType.TokenTransfer}
-            <BasicActivityDetails {activity} networkAddress={layer2Parameters?.networkAddress} />
+            <BasicActivityDetails {activity} />
         {:else if transactionDetails.type === NewTransactionType.NftTransfer}
             <NftActivityDetails {activity} />
         {/if}
         <div class="pt-4">
-            <ActivityInformation {activity} networkAddress={layer2Parameters?.networkAddress} bind:activeTab />
+            <ActivityInformation {activity} bind:activeTab />
         </div>
         {#if activeTab === Tab.Transaction}
             {#if !hideGiftToggle}
