@@ -46,6 +46,7 @@
         TARGET_CONTRACTS,
         TRANSFER_ALLOWANCE,
     } from '@core/layer-2'
+    import { dashboardRouter } from '@core/router'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
@@ -165,6 +166,7 @@
 
     async function sendOutputAndClosePopup(): Promise<void> {
         await sendOutput(preparedOutput)
+        $dashboardRouter.reset()
         closePopup()
     }
 
