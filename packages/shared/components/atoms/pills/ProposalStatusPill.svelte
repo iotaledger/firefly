@@ -19,5 +19,5 @@
     darkTextColor="white"
     backgroundColor={STATUS_COLORS[status]}
     darkBackgroundColor={STATUS_COLORS[status]}
-    classes="rounded-full px-2 py-1"
+    classes="rounded-full px-2 py-1 flex items-center"
 />

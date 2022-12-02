@@ -603,6 +603,20 @@
                 "votingOpen": "Voting open",
                 "counting": "Counting starts",
                 "closed": "Counting stops"
+            },
+            "details": {
+                "fullProposal": "Read the full proposal",
+                "yourVote": {
+                    "title": "Your vote",
+                    "total": "Total votes counted",
+                    "power": "Voting power"
+                },
+                "proposalInformation": {
+                    "title": "Proposal information",
+                    "countingEnds": "Counting ends on",
+                    "eventId": "Event ID",
+                    "nodeUrl": "Node URL"
+                }
             }
         }
     },
@@ -1166,7 +1180,8 @@
         "initializing": "Initializing",
         "delete": "Delete",
         "addReference": "Add reference",
-        "depositNft": "Deposit NFTs"
+        "depositNft": "Deposit NFTs",
+        "vote": "Vote"
     },
     "general": {
         "recipient": "Recipient",

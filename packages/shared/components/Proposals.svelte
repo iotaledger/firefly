@@ -3,6 +3,8 @@
     import { localize } from '@core/i18n'
     import { FontWeight, Position, ProposalStatus } from './enums'
     import { Icon as IconEnum } from '@auxiliary/icon'
+    import { GovernanceRoute, governanceRouter } from '@core/router'
+    import { selectedProposal } from '@core/governance'
 
     // used data to display in UI
     type Proposal = {
@@ -108,6 +110,11 @@
 
         return milestones
     }
+
+    function handleProposalClick(proposal: Proposal): void {
+        $selectedProposal = { ...proposal, milestones: getMilestonesFromStatus(proposal.status) }
+        $governanceRouter.goTo(GovernanceRoute.Details)
+    }
 </script>
 
 <proposals-container class="flex flex-col h-full">
@@ -119,7 +126,8 @@
     <ul class="grid grid-cols-2 gap-6 flex-1 overflow-y-scroll">
         {#each proposals as proposal}
             <proposal-box
-                class="flex flex-col p-6 border border-solid border-gray-200 rounded-xl
+                on:click={() => handleProposalClick(proposal)}
+                class="flex flex-col p-6 border border-solid border-gray-200 rounded-xl cursor-pointer
                 {proposal.status === ProposalStatus.Closed ? 'bg-transparent' : 'bg-white'}"
             >
                 <div class="flex items-center gap-1.5 mb-5">
