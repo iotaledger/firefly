@@ -5,6 +5,7 @@ export { default as AsyncActivityTileFooter } from './AsyncActivityTileFooter.sv
 export { default as ColorPicker } from './ColorPicker.svelte'
 export { default as Confirmation } from './Confirmation.svelte'
 export { default as Drawer } from './Drawer.svelte'
+export { default as ExpirationTimePicker } from './ExpirationTimePicker.svelte'
 export { default as OnboardingLayout } from './OnboardingLayout.svelte'
 export { default as QRScanner } from './QRScanner.svelte'
 export { default as RecoveryPhrase } from './RecoveryPhrase.svelte'
