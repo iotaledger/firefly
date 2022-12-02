@@ -51,12 +51,16 @@
                   },
               ]
             : []),
-        {
-            icon: 'governance',
-            label: localize('tabs.governance'),
-            route: DashboardRoute.Governance,
-            onClick: openGovernance,
-        },
+        ...(features?.governance?.enabled
+            ? [
+                  {
+                      icon: 'governance',
+                      label: localize('tabs.governance'),
+                      route: DashboardRoute.Governance,
+                      onClick: openGovernance,
+                  },
+              ]
+            : []),
         ...(features?.developerTools?.enabled && $activeProfile?.isDeveloperProfile
             ? [
                   {
