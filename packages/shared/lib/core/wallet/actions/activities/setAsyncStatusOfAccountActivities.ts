@@ -26,7 +26,7 @@ export function setAsyncStatusOfAccountActivities(time: Date): void {
                         activity.asyncData.asyncStatus === ActivityAsyncStatus.Expired &&
                         activity.direction === ActivityDirection.Outgoing
                     ) {
-                        updateNftInAllAccountNfts(accountIndex, activity.nftId, { isOwned: true })
+                        updateNftInAllAccountNfts(accountIndex, activity.nftId, { isSpendable: true })
                     }
                 }
             }
