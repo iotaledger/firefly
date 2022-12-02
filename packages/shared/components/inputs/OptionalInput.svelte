@@ -2,7 +2,7 @@
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
     import { ClosableInput, AddInputButton, Tooltip, Text, FontWeight, TextType } from 'shared/components'
-    import { Position } from 'shared/components/Tooltip.svelte'
+    import { Position } from 'shared/components/enums'
 
     export let label: string = ''
     export let description: string = ''
