@@ -1040,6 +1040,11 @@
             "title": "Burn {assetName}",
             "hint": "Please note that burning a token may free storage deposit attached to it and is not reversible"
         },
+        "confirmNftBurn": {
+            "title": "Burn {nftName}",
+            "description": "Are you sure you want to burn this NFT?",
+            "hint": "Please note that burning a token frees the storage deposit attached to it and is not reversible."
+        },
         "proceedAnyway": "Proceed anyway",
         "save": "Save",
         "importSeed": "Import an existing seed",
@@ -1544,8 +1549,14 @@
         "mintNativeToken": {
             "success": "Native token minting transaction sent"
         },
+        "burnNativeToken": {
+            "success": "Native token burning transaction sent"
+        },
         "mintNft": {
             "success": "NFT minting transaction sent"
+        },
+        "burnNft": {
+            "success": "NFT burning transaction sent"
         },
         "refreshTokenMetadata": {
             "success": "All token metadata has been reset and refreshed"
