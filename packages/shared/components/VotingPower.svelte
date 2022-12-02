@@ -2,12 +2,15 @@
     import { Text, Button } from 'shared/components'
     import { localize } from '@core/i18n'
     import { ButtonSize, FontWeight, TextType } from './enums'
+    import { openPopup } from '@auxiliary/popup'
 
     const votingPowerBalance: string = '4821 SMR'
     const maximalVotingPower: string = '4821 SMR'
 
     function handleManageVotingPower(): void {
-        return
+        openPopup({
+            type: 'manageVotingPower',
+        })
     }
 </script>
 
