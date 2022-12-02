@@ -1,14 +1,6 @@
-<script lang="typescript" context="module">
-    export enum Position {
-        Top = 'top',
-        Bottom = 'bottom',
-        Left = 'left',
-        Right = 'right',
-    }
-</script>
-
 <script lang="typescript">
     import { appSettings } from '@core/app'
+    import { Position } from './enums'
     import { onMount } from 'svelte'
 
     export let classes = ''

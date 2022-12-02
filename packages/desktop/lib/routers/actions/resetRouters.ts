@@ -4,6 +4,7 @@ import {
     appSetupRouter,
     collectiblesRouter,
     dashboardRouter,
+    governanceRouter,
     ledgerSetupRouter,
     loginRouter,
     networkSetupRouter,
@@ -41,4 +42,5 @@ function resetBaseRouters(): void {
     get(onboardingRouter).reset()
     get(settingsRouter).reset()
     get(collectiblesRouter).reset()
+    get(governanceRouter).reset()
 }

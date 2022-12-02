@@ -7,6 +7,9 @@
         collectiblesRouter,
         DashboardRoute,
         dashboardRoute,
+        GovernanceRoute,
+        governanceRoute,
+        governanceRouter,
         SettingsRoute,
         settingsRoute,
         settingsRouter,
@@ -18,7 +21,7 @@
 
     let showBackButton = false
     $: {
-        if ($settingsRoute || $collectiblesRoute) {
+        if ($settingsRoute || $collectiblesRoute || $governanceRoute) {
             showBackButton = isCorrectRoute()
         }
     }
@@ -30,6 +33,8 @@
                 return $settingsRoute !== SettingsRoute.Init
             case DashboardRoute.Collectibles:
                 return $collectiblesRoute !== CollectiblesRoute.Gallery
+            case DashboardRoute.Governance:
+                return $governanceRoute !== GovernanceRoute.Proposals
             default:
                 break
         }
@@ -42,6 +47,9 @@
                 break
             case DashboardRoute.Collectibles:
                 $collectiblesRouter.previous()
+                break
+            case DashboardRoute.Governance:
+                $governanceRouter.previous()
                 break
             default:
                 break
