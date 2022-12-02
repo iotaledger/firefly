@@ -83,7 +83,7 @@ export function diffDates(firstDate: Date, secondDate: Date): IDateDifference {
  *
  * @returns {Date}
  */
-export const milestoneToDate = (baseMilestone: number, milestone: number): Date => {
+export function milestoneToDate(baseMilestone: number, milestone: number): Date {
     const firstMilestoneMillis = Date.now() - baseMilestone * SECONDS_PER_MILESTONE * MILLISECONDS_PER_SECOND
     const milestoneMillis = firstMilestoneMillis + milestone * SECONDS_PER_MILESTONE * MILLISECONDS_PER_SECOND
     return new Date(milestoneMillis)
