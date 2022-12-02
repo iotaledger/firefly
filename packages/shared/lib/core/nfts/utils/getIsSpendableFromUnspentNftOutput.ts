@@ -6,7 +6,7 @@ import {
 } from '@core/wallet'
 import { INftOutput } from '@iota/types'
 
-export function getIsOwnedFromUnspentNftOutput(accountAddress: string, nftOutput: INftOutput): boolean {
+export function getIsSpendableFromUnspentNftOutput(accountAddress: string, nftOutput: INftOutput): boolean {
     const isAsync = isOutputAsync(nftOutput)
     if (isAsync) {
         const expirationUnixTime = getExpirationUnixTimeFromOutput(nftOutput)

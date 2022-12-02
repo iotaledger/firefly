@@ -5,6 +5,8 @@ import {
     CollectiblesRouter,
     DashboardRouter,
     dashboardRouter,
+    GovernanceRouter,
+    governanceRouter,
     OnboardingRouter,
     onboardingRouter,
     SettingsRouter,
@@ -53,6 +55,7 @@ function initialiseBaseRouters(): void {
     dashboardRouter.set(new DashboardRouter())
     settingsRouter.set(new SettingsRouter())
     collectiblesRouter.set(new CollectiblesRouter())
+    governanceRouter.set(new GovernanceRouter())
     initialiseBaseOnboardingRouters()
 }
 

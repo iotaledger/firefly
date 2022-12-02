@@ -24,6 +24,8 @@ import {
     StorageProtectionSetupRouter,
     strongholdSetupRouter,
     StrongholdSetupRouter,
+    TokenRouter,
+    tokenRouter,
 } from '../subrouters'
 
 export function initialiseRouters(): void {
@@ -75,4 +77,5 @@ function initialiseDashboardSubrouters(): void {
     accountSwitcherRouter.set(new AccountSwitcherRouter())
     activityRouter.set(new ActivityRouter())
     sendRouter.set(new SendRouter())
+    tokenRouter.set(new TokenRouter())
 }

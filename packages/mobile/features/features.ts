@@ -42,6 +42,12 @@ const features = {
             search: {
                 enabled: false,
             },
+            details: {
+                enabled: true,
+            },
+            actions: {
+                enabled: false,
+            },
         },
         governance: {
             enabled: false,

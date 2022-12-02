@@ -17,11 +17,15 @@
     import { getNftByIdFromAllAccountNfts, INft } from '@core/nfts'
     import { selectedAccountIndex } from '@core/account'
     import { truncateString } from '@core/utils'
-    import { selectedAccountActivities } from '@core/wallet/stores'
+    import { NewTransactionType, selectedAccountActivities, setNewTransactionDetails } from '@core/wallet/stores'
     import { ActivityType, formatTokenAmountPrecise } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network/constants'
     import { activeProfile } from '@core/profile/stores'
+    import { Platform } from '@core/app'
+    import { ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
+    import { openPopup } from '@auxiliary/popup'
 
+    const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
     const nft: INft = getNftByIdFromAllAccountNfts($selectedAccountIndex, $selectedNftId)
 
     const { id, name } = nft
@@ -52,6 +56,22 @@
             storageDeposit: { data: String(storageDeposit) },
         }),
     }
+
+    function handleExplorerClick(): void {
+        Platform.openUrl(`${explorerUrl}/${ExplorerEndpoint.Nft}/${id}`)
+    }
+
+    function handleSendClick(): void {
+        setNewTransactionDetails({
+            type: NewTransactionType.NftTransfer,
+            nftId: id,
+            recipient: undefined,
+        })
+        openPopup({
+            type: 'sendForm',
+            overflow: true,
+        })
+    }
 </script>
 
 <div class="flex flex-row w-full h-full space-x-4 overflow-auto">
@@ -62,7 +82,7 @@
         <div class="mb-6 flex justify-between items-center">
             <Text type={TextType.h3} fontWeight={FontWeight.semibold}>{name}</Text>
             <MeatballMenuButton onClick={modal?.toggle} />
-            <CollectibleDetailsMenu bind:modal />
+            <CollectibleDetailsMenu bind:modal {nft} />
         </div>
         <div class="overflow-y-scroll h-full">
             <div class="space-y-2 mb-6">
@@ -105,8 +125,10 @@
             {/if}
         </div>
         <div class="flex w-full space-x-4 self-end mt-auto pt-4">
-            <Button outline classes="flex-1">{localize('general.viewOnExplorer')}</Button>
-            <Button classes="flex-1">{localize('actions.send')}</Button>
+            <Button outline classes="flex-1" onClick={handleExplorerClick} disabled={!explorerUrl}
+                >{localize('general.viewOnExplorer')}</Button
+            >
+            <Button classes="flex-1" onClick={handleSendClick}>{localize('actions.send')}</Button>
         </div>
     </Pane>
 </div>
