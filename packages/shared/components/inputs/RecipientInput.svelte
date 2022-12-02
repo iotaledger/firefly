@@ -75,6 +75,7 @@
     bind:error
     {disabled}
     options={accountOptions}
+    maxHeight="max-h-48"
     {...$$restProps}
     let:option
 >

@@ -21,7 +21,7 @@ export async function burnNft(nftId: string): Promise<void> {
         addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)
 
         // Update NFT
-        updateNftInAllAccountNfts(account.index, nftId, { isOwned: false })
+        updateNftInAllAccountNfts(account.index, nftId, { isSpendable: false })
 
         showAppNotification({
             type: 'success',

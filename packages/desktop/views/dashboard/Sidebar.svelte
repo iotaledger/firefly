@@ -6,7 +6,14 @@
     import { appVersionDetails, mobile } from '@core/app/stores'
     import { getInitials, isRecentDate } from '@core/utils'
     import { activeProfile } from '@core/profile/stores'
-    import { DashboardRoute, dashboardRouter, settingsRoute, SettingsRoute, settingsRouter } from '@core/router'
+    import {
+        collectiblesRouter,
+        DashboardRoute,
+        dashboardRouter,
+        settingsRoute,
+        SettingsRoute,
+        settingsRouter,
+    } from '@core/router'
     import { localize } from '@core/i18n'
     import { ISidebarTab } from '../../lib/routers'
 
@@ -68,6 +75,7 @@
 
     function openCollectibles(): void {
         $dashboardRouter.goTo(DashboardRoute.Collectibles)
+        $collectiblesRouter.reset()
     }
 
     function openGovernance(): void {
