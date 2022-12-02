@@ -4,11 +4,9 @@ import { activityFilter } from '../stores'
 import { getAssetFromPersistedAssets } from './getAssetFromPersistedAssets'
 import {
     ActivityAsyncStatus,
-    ActivityDirection,
     BooleanFilterOption,
     NumberFilterOption,
     InclusionState,
-    TypeFilterOption,
     StatusFilterOption,
     ActivityType,
     DateFilterOption,
@@ -45,6 +43,9 @@ export function isVisibleActivity(activity: Activity): boolean {
         return false
     }
     if (!isVisibleWithActiveTypeFilter(activity, filter)) {
+        return false
+    }
+    if (!isVisibleWithActiveDirectionFilter(activity, filter)) {
         return false
     }
     return true
@@ -270,21 +271,16 @@ function isVisibleWithActiveStatusFilter(activity: Activity, filter: ActivityFil
 
 function isVisibleWithActiveTypeFilter(activity: Activity, filter: ActivityFilter): boolean {
     if (filter.type.active && filter.type.selected) {
-        if (
-            filter.type.selected === TypeFilterOption.Incoming &&
-            activity.direction !== ActivityDirection.Incoming &&
-            activity.direction !== ActivityDirection.SelfTransaction
-        ) {
+        if (filter.type.selected !== activity.type) {
             return false
         }
-        if (
-            filter.type.selected === TypeFilterOption.Outgoing &&
-            activity.direction !== ActivityDirection.Outgoing &&
-            activity.direction !== ActivityDirection.SelfTransaction
-        ) {
-            return false
-        }
-        if (filter.type.selected === TypeFilterOption.Internal && !activity.isInternal) {
+    }
+    return true
+}
+
+function isVisibleWithActiveDirectionFilter(activity: Activity, filter: ActivityFilter): boolean {
+    if (filter.direction.active && filter.direction.selected) {
+        if (filter.direction.selected !== activity.direction) {
             return false
         }
     }

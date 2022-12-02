@@ -12,6 +12,7 @@ export interface ActivityFilter {
     amount: NumberFilterUnit
     status: SelectionFilterUnit
     type: SelectionFilterUnit
+    direction: SelectionFilterUnit
     asset: AssetFilterUnit
     date: DateFilterUnit
     showRejected: SelectionFilterUnit

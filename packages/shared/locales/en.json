@@ -1440,9 +1440,16 @@
         },
         "type": {
             "label": "Type",
-            "incoming": "incoming",
-            "outgoing": "outgoing",
-            "internal": "internal"
+            "basic": "Basic",
+            "nft": "NFT",
+            "alias": "Alias",
+            "foundry": "Foundry"
+        },
+        "direction": {
+            "label": "Direction",
+            "incoming": "Incoming",
+            "outgoing": "Outgoing",
+            "selfTransaction": "Self transaction"
         }
     },
     "dates": {
