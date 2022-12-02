@@ -1,5 +1,5 @@
 import { syncBalance } from '@core/account/actions/syncBalance'
-import { addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput, getIsOwnedFromUnspentNftOutput } from '@core/nfts'
+import { addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput, getIsSpendableFromUnspentNftOutput } from '@core/nfts'
 import { activeAccounts } from '@core/profile/stores'
 import { ActivityType, addPersistedAsset, generateActivity, getOrRequestAssetFromPersistedAssets } from '@core/wallet'
 import { OUTPUT_TYPE_ALIAS } from '@core/wallet/constants'
@@ -45,8 +45,8 @@ export async function handleNewOutputEventInternal(
 
         const activity = generateActivity(processedOutput, account)
         if (activity.type === ActivityType.Nft) {
-            const isOwned = getIsOwnedFromUnspentNftOutput(account.depositAddress, output.output as INftOutput)
-            const nft = buildNftFromNftOutput(output.output as INftOutput, output.outputId, isOwned)
+            const isSpendable = getIsSpendableFromUnspentNftOutput(account.depositAddress, output.output as INftOutput)
+            const nft = buildNftFromNftOutput(output.output as INftOutput, output.outputId, isSpendable)
             addOrUpdateNftInAllAccountNfts(account.index, nft)
         } else if (activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry) {
             const asset = await getOrRequestAssetFromPersistedAssets(activity.assetId)
