@@ -17,12 +17,13 @@
     import { getNftByIdFromAllAccountNfts, INft } from '@core/nfts'
     import { selectedAccountIndex } from '@core/account'
     import { truncateString } from '@core/utils'
-    import { selectedAccountActivities } from '@core/wallet/stores'
+    import { NewTransactionType, selectedAccountActivities, setNewTransactionDetails } from '@core/wallet/stores'
     import { ActivityType, formatTokenAmountPrecise } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network/constants'
     import { activeProfile } from '@core/profile/stores'
     import { Platform } from '@core/app'
     import { ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
+    import { openPopup } from '@auxiliary/popup'
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
     const nft: INft = getNftByIdFromAllAccountNfts($selectedAccountIndex, $selectedNftId)
@@ -58,6 +59,18 @@
 
     function handleExplorerClick(): void {
         Platform.openUrl(`${explorerUrl}/${ExplorerEndpoint.Nft}/${id}`)
+    }
+
+    function handleSendClick(): void {
+        setNewTransactionDetails({
+            type: NewTransactionType.NftTransfer,
+            nftId: id,
+            recipient: undefined,
+        })
+        openPopup({
+            type: 'sendForm',
+            overflow: true,
+        })
     }
 </script>
 
@@ -115,7 +128,7 @@
             <Button outline classes="flex-1" onClick={handleExplorerClick} disabled={!explorerUrl}
                 >{localize('general.viewOnExplorer')}</Button
             >
-            <Button classes="flex-1">{localize('actions.send')}</Button>
+            <Button classes="flex-1" onClick={handleSendClick}>{localize('actions.send')}</Button>
         </div>
     </Pane>
 </div>
