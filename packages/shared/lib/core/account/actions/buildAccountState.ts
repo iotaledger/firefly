@@ -18,9 +18,11 @@ export async function buildAccountState(account: IAccount, metadata: IAccountMet
         aliases: [],
     }
     let depositAddress: string
+    let votingPower: string
     try {
         balances = await account.getBalance()
         depositAddress = await getDepositAddress(account)
+        votingPower = await account.getVotingPower()
     } catch (err) {
         console.error(err)
     }
@@ -31,5 +33,6 @@ export async function buildAccountState(account: IAccount, metadata: IAccountMet
         depositAddress,
         balances,
         isTransferring: false,
+        votingPower,
     }
 }

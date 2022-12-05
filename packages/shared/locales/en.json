@@ -1003,6 +1003,11 @@
         "faucetRequest": {
             "title": "Faucet request",
             "body": "Are you sure you want to request {token} tokens from the {network} faucet?"
+        },
+        "manageVotingPower": {
+            "title": "Manage voting power",
+            "body": "Define your voting power to vote on proposals.",
+            "hint": "Increasing your voting power locks your funds. In order to make them spendable again, you need to decrease your voting power. This affects all proposals with an active vote."
         }
     },
     "charts": {
