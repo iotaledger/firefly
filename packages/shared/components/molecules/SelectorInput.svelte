@@ -12,6 +12,7 @@
     export let options: IOption[] = []
     export let selected: IOption = undefined
     export let maxHeight: string = 'max-h-64'
+    export let readonly: boolean = false
 
     let value: string = selected?.key ?? selected?.value
     let previousValue: string = value
@@ -65,6 +66,7 @@
         label={localize(labelLocale)}
         placeholder={localize(labelLocale)}
         fontSize="sm"
+        {readonly}
         {...$$restProps}
     >
         <div slot="right">
@@ -76,7 +78,7 @@
         </div>
     </TextInput>
 
-    {#if filteredOptions.length > 0}
+    {#if filteredOptions.length > 0 && !readonly}
         <Modal
             bind:this={modal}
             position={{ left: '0', top: '100%' }}
