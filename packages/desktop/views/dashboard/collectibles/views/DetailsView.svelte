@@ -66,6 +66,7 @@
             type: NewTransactionType.NftTransfer,
             nftId: id,
             recipient: undefined,
+            disableAssetSelection: true,
         })
         openPopup({
             type: 'sendForm',

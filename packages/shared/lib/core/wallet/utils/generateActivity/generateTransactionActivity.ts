@@ -22,14 +22,13 @@ export function generateTransactionActivity(
     processedTransaction: IProcessedTransaction,
     account: IAccountState
 ): TransactionActivity {
-    const { outputs, transactionId, direction, claimingData, time, inclusionState, transactionInputs } =
-        processedTransaction
+    const { outputs, transactionId, direction, claimingData, time, inclusionState, utxoInputs } = processedTransaction
 
     const isHidden = false
     const isAssetHidden = false
     const containsValue = outputContainsValue(processedTransaction, account)
 
-    const inputs = transactionInputs
+    const inputs = utxoInputs
 
     const wrappedOutput = getMainOutputFromTransaction(outputs, account.depositAddress, direction)
     const outputId = wrappedOutput.outputId

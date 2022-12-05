@@ -1,13 +1,13 @@
-<script>
+<script lang="typescript">
+    import { formatNumber, parseCurrency } from '@core/i18n'
     import { createEventDispatcher } from 'svelte'
 
     // Props
     export let min = 0
     export let max = 100
-    export let initialValue = 0
     export let id = null
     export let decimals = 0
-    export let value = typeof initialValue === 'string' ? parseInt(initialValue) : initialValue
+    export let value: string
 
     // Node Bindings
     let container = null
@@ -38,8 +38,8 @@
     }
 
     // Allows both bind:value and on:change for parent value retrieval
-    function setValue(val) {
-        value = String(val)
+    function setValue(val: number) {
+        value = formatNumber(val)
         dispatch('change', { value })
     }
 
@@ -85,7 +85,7 @@
         percent = percent < 0 ? 0 : percent > 100 ? 100 : percent
 
         // Limit value min -> max
-        setValue(parseInt((percent / 100) * (max - min) * 10 ** decimals) / 10 ** decimals + min)
+        setValue(Math.floor((percent / 100) * (max - min) * 10 ** decimals) / 10 ** decimals + min)
     }
 
     // Handles both dragging of touch/mouse as well as simple one-off click/touches
@@ -110,7 +110,7 @@
 
     // Update progressbar and thumb styles to represent value
     $: if (progressBar && thumb) {
-        let percent = ((Number(value) - min) * 100) / (max - min)
+        let percent = ((parseCurrency(value) - min) * 100) / (max - min)
         percent = Math.max(Math.min(percent, 100), 0)
         const offsetLeft = (container.clientWidth - 10) * (percent / 100) + 5
 
@@ -136,7 +136,7 @@
         role="slider"
         aria-valuemin={min}
         aria-valuemax={max}
-        aria-valuenow={value}
+        aria-valuenow={parseCurrency(value)}
         {id}
         on:mousedown={onTrackEvent}
         on:touchstart={onTrackEvent}

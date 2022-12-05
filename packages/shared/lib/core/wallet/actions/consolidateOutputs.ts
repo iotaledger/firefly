@@ -11,7 +11,7 @@ export async function consolidateOutputs(): Promise<void> {
     const _activeProfile = get(activeProfile)
     try {
         const transaction = await account.consolidateOutputs(false, 2)
-        const processedTransaction = preprocessTransaction(transaction, account.depositAddress)
+        const processedTransaction = await preprocessTransaction(transaction, account)
         const activity = generateActivity(processedTransaction, account)
         addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)
     } catch (err) {
