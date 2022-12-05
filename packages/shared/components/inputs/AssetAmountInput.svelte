@@ -43,6 +43,7 @@
 
     $: bigAmount = convertToRawAmount(amount, unit, asset?.metadata)
     $: marketAmount = getMarketAmountFromAssetValue(bigAmount, asset)
+    $: max = parseCurrency(formatTokenAmountDefault(asset?.balance?.available, asset.metadata, unit, false))
 
     function onClickAvailableBalance(): void {
         const isRawAmount = asset?.metadata?.decimals && asset?.metadata?.unit
@@ -113,11 +114,7 @@
     </div>
     {#if containsSlider}
         <div class="flex flex-col">
-            <SliderInput
-                bind:value={amount}
-                max={Number(formatTokenAmountDefault(asset?.balance?.available, asset.metadata, unit, false))}
-                decimals={asset.metadata.decimals}
-            />
+            <SliderInput bind:value={amount} {max} decimals={asset.metadata.decimals} />
             <div class="flex flex-row justify-between">
                 <Text color="gray-800" darkColor="gray-500" fontSize="xs"
                     >{formatTokenAmountBestMatch(0, asset?.metadata)}</Text
