@@ -10,7 +10,7 @@
     let isDropdownOpen = false
     let icon: string
 
-    $: isReadonly = readonly || $visibleSelectedAccountAssets?.nativeTokens.length < 1
+    $: isReadonly = readonly || $visibleSelectedAccountAssets?.nativeTokens.length === 0
     $: switch (asset?.metadata?.name?.toLocaleLowerCase()) {
         case NetworkProtocol.IOTA:
         case NetworkProtocol.Shimmer:
