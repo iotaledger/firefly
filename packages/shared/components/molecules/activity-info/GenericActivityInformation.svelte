@@ -5,7 +5,7 @@
     import { Activity, formatTokenAmountPrecise } from '@core/wallet'
     import { BASE_TOKEN, ExplorerEndpoint } from '@core/network'
     import { getOfficialExplorerUrl } from '@core/network/utils'
-    import { Platform } from '@core/app'
+    import { openUrlInBrowser } from '@core/app'
     import { truncateString } from '@core/utils'
     import { setClipboard } from '@core/utils'
     import { getDestinationNetworkFromAddress } from '@core/layer-2'
@@ -71,7 +71,7 @@
 
     function handleTransactionIdClick(): void {
         explorerUrl
-            ? Platform.openUrl(
+            ? openUrlInBrowser(
                   `${explorerUrl}/${ExplorerEndpoint.Transaction}/${activity.asyncData?.claimingTransactionId}`
               )
             : setClipboard(activity.asyncData?.claimingTransactionId)
