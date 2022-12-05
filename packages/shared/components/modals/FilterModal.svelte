@@ -33,7 +33,7 @@
     classes="overflow-visible"
 >
     <div class="filter-modal">
-        <div class="flex flex-row items-center justify-between bg-gray-50 dark:bg-transparent px-4 py-3 rounded-t-xl">
+        <div class="flex flex-row items-center justify-between bg-gray-50 dark:bg-transparent px-4 py-2 rounded-t-xl">
             <Button outline size={ButtonSize.Small} onClick={clear}>{localize('actions.clear')}</Button>
             <Text fontWeight={FontWeight.semibold} fontSize="14" classes="text-center flex grow-1"
                 >{localize('filters.title')}</Text

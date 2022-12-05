@@ -19,6 +19,7 @@
     export let asset: IAsset = $visibleSelectedAccountAssets?.baseCoin
     export let rawAmount: string = undefined
     export let unit: string = undefined
+    export let disableAssetSelection: boolean = false
 
     let amount: string = rawAmount
         ? formatTokenAmountDefault(Number(rawAmount), asset?.metadata, unit, false)
@@ -93,7 +94,7 @@
     on:clickOutside={() => (isFocused = false)}
 >
     <div class="flex flex-row w-full items-center space-x-0.5 relative">
-        <AssetDropdown bind:asset />
+        <AssetDropdown bind:asset readonly={disableAssetSelection} />
         <AmountInput
             bind:inputElement={amountInputElement}
             bind:amount

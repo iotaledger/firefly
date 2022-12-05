@@ -22,7 +22,7 @@
 </script>
 
 <div class="filter-item border-t border-solid border-gray-200 dark:border-gray-800 ">
-    <div class="px-4 py-3 flex flex-row justify-between">
+    <div class="px-4 py-2 flex flex-row justify-between">
         <Checkbox
             label={localize(filterUnit.localeKey + '.label')}
             bind:checked={filterUnit.active}
