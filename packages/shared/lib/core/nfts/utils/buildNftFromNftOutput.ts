@@ -16,5 +16,6 @@ export function buildNftFromNftOutput(nftOutput: INftOutput, outputId: string, i
         isSpendable,
         metadata,
         parsedMetadata: parsedMetadata,
+        latestOutputId: outputId,
     }
 }
