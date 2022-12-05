@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { TextType } from 'shared/components/enums'
-    import { Button, Text, TextHint, AssetAmountSliderInput } from 'shared/components'
+    import { Button, Text, TextHint, AssetAmountInput } from 'shared/components'
     import { selectedAccount } from '@core/account'
     import { handleError } from '@core/error/handlers/handleError'
     import { setVotingPower } from '@core/governance/actions'
@@ -11,8 +11,10 @@
 
     const asset = $visibleSelectedAccountAssets?.baseCoin
 
-    let assetAmountSliderInput: AssetAmountSliderInput
+    let assetAmountInput: AssetAmountInput
     let rawAmount = $selectedAccount?.votingPower
+
+    $: isTransferring = $selectedAccount?.isTransferring
 
     function handleBack(): void {
         closePopup()
@@ -20,7 +22,7 @@
 
     async function handleConfirm(): Promise<void> {
         try {
-            await assetAmountSliderInput?.validate()
+            await assetAmountInput?.validate()
             await checkActiveProfileAuth(async () => {
                 await setVotingPower(rawAmount)
                 closePopup()
@@ -35,11 +37,11 @@
 <Text type={TextType.h4} classes="mb-3">{localize('popups.manageVotingPower.title')}</Text>
 <Text type={TextType.p} secondary classes="mb-5">{localize('popups.manageVotingPower.body')}</Text>
 <div class="space-y-4 mb-6">
-    <AssetAmountSliderInput bind:this={assetAmountSliderInput} bind:rawAmount {asset} />
+    <AssetAmountInput bind:this={assetAmountInput} bind:rawAmount {asset} containsSlider disableAssetSelection />
     <TextHint info text={localize('popups.manageVotingPower.hint')} />
 </div>
 <div class="flex flex-row flex-nowrap w-full space-x-4">
-    <Button outline classes="w-full" disabled={$selectedAccount.isTransferring} onClick={handleBack}>
+    <Button outline classes="w-full" disabled={isTransferring} onClick={handleBack}>
         {localize('actions.back')}
     </Button>
     <Button

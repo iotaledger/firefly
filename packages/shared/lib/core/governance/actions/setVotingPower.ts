@@ -5,6 +5,7 @@ import {
     generateActivity,
     preprocessTransaction,
 } from '@core/wallet'
+import { Transaction } from '@iota/wallet'
 
 export async function setVotingPower(rawAmount: string): Promise<void> {
     try {
@@ -15,16 +16,21 @@ export async function setVotingPower(rawAmount: string): Promise<void> {
         if (amount > votingPower) {
             const amountToIncrease = amount - votingPower
             const transaction = await account.increaseVotingPower(amountToIncrease.toString())
-            const activity = generateActivity(preprocessTransaction(transaction, account.depositAddress), account)
-            addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)
+            await processAndAddToActivities(transaction)
         } else if (amount < votingPower) {
             const amountToDecrease = votingPower - amount
             const transaction = await account.decreaseVotingPower(amountToDecrease.toString())
-            const activity = generateActivity(preprocessTransaction(transaction, account.depositAddress), account)
-            addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)
+            await processAndAddToActivities(transaction)
         }
         updateSelectedAccount({ isTransferring: false })
     } catch (err) {
         updateSelectedAccount({ isTransferring: false })
     }
+}
+
+async function processAndAddToActivities(transaction: Transaction): Promise<void> {
+    const account = get(selectedAccount)
+    const preprocessedTransaction = await preprocessTransaction(transaction, account)
+    const activity = generateActivity(preprocessedTransaction, account)
+    addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)
 }
