@@ -12,7 +12,7 @@
     export let options: IOption[] = []
     export let selected: IOption = undefined
     export let maxHeight: string = 'max-h-64'
-    export let readonly: boolean = false
+    export let readonly: boolean = null
 
     let value: string = selected?.key ?? selected?.value
     let previousValue: string = value
