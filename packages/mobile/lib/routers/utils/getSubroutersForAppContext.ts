@@ -15,7 +15,7 @@ import {
     storageProtectionSetupRouter,
     strongholdSetupRouter,
     tokenRouter,
-} from '../subrouters'
+} from '../routers'
 
 export function getSubroutersForAppContext(context: AppContext): IRouter[] {
     switch (context) {

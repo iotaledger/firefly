@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
 
 import { AppContext } from '@core/app/enums'
-import { appRouter } from '../app-router'
+import { appRouter } from '../routers'
 
 import { getAppRouteForContext } from '../helpers'
 import { resetRouters } from './resetRouters'

@@ -3,7 +3,7 @@ import { get, writable } from 'svelte/store'
 import { Subrouter } from '@core/router'
 
 import { ProfileBackupRoute } from '../../enums'
-import { onboardingRouter } from '../../onboarding-router'
+import { onboardingRouter } from '../onboarding-router'
 
 export const profileBackupRoute = writable<ProfileBackupRoute>(null)
 export const profileBackupRouter = writable<ProfileBackupRouter>(null)
