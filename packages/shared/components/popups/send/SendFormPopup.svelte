@@ -142,7 +142,13 @@
             <Tabs bind:activeTab {tabs} />
         {/if}
         {#if activeTab === SendForm.SendToken}
-            <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:unit />
+            <AssetAmountInput
+                bind:this={assetAmountInput}
+                bind:asset
+                bind:rawAmount
+                bind:unit
+                {disableAssetSelection}
+            />
         {:else}
             <NftInput bind:this={nftInput} bind:nftId readonly={disableAssetSelection} />
         {/if}

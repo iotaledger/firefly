@@ -5,11 +5,12 @@
     import { clickOutside } from '@core/utils'
 
     export let asset = $visibleSelectedAccountAssets?.baseCoin
+    export let readonly: boolean = false
 
     let isDropdownOpen = false
     let icon: string
 
-    $: hasMultipleAssets = $visibleSelectedAccountAssets?.nativeTokens.length >= 1
+    $: hasMultipleAssets = $visibleSelectedAccountAssets?.nativeTokens.length >= 1 && !readonly
     $: switch (asset?.metadata?.name?.toLocaleLowerCase()) {
         case NetworkProtocol.IOTA:
         case NetworkProtocol.Shimmer:
