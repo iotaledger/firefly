@@ -25,15 +25,13 @@
     } from 'shared/components'
     import { get } from 'svelte/store'
 
-    export let disableAssetSelection: boolean = false
-
     enum SendForm {
         SendToken = 'general.sendToken',
         SendNft = 'general.sendNft',
     }
 
     const transactionDetails = get(newTransactionDetails)
-    let { metadata, recipient, tag, layer2Parameters } = transactionDetails
+    let { metadata, recipient, tag, layer2Parameters, disableAssetSelection } = transactionDetails
 
     let assetAmountInput: AssetAmountInput
     let nftInput: NftInput
@@ -78,6 +76,7 @@
                 tag,
                 metadata,
                 layer2Parameters,
+                disableAssetSelection,
             })
         } else {
             setNewTransactionDetails({
@@ -86,6 +85,7 @@
                 nftId,
                 tag,
                 metadata,
+                disableAssetSelection,
             })
         }
     }

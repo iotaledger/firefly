@@ -66,13 +66,11 @@
             type: NewTransactionType.NftTransfer,
             nftId: id,
             recipient: undefined,
+            disableAssetSelection: true,
         })
         openPopup({
             type: 'sendForm',
             overflow: true,
-            props: {
-                disableAssetSelection: true,
-            },
         })
     }
 </script>

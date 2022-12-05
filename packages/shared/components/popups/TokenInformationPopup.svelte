@@ -3,6 +3,7 @@
     import {
         TokenStandard,
         IAsset,
+        resetNewTokenTransactionDetails,
         updateNewTransactionDetails,
         unverifyAsset,
         verifyAsset,
@@ -45,13 +46,15 @@
     }
 
     function onSendClick(): void {
-        updateNewTransactionDetails({ type: NewTransactionType.TokenTransfer, assetId: asset.id })
+        resetNewTokenTransactionDetails()
+        updateNewTransactionDetails({
+            type: NewTransactionType.TokenTransfer,
+            assetId: asset.id,
+            disableAssetSelection: true,
+        })
         openPopup({
             type: 'sendForm',
             overflow: true,
-            props: {
-                disableAssetSelection: true,
-            },
         })
     }
 </script>
