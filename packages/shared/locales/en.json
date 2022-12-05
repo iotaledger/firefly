@@ -1412,7 +1412,8 @@
         "smartContract": "Smart Contract",
         "targetContract": "Target contract",
         "contractFunction": "Contract function",
-        "gasBudget": "Gas budget"
+        "gasBudget": "Gas budget",
+        "availableAmount": "{amount} available"
     },
     "filters":{
         "title": "Filters",
