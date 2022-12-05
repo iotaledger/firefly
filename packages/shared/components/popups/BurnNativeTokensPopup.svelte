@@ -32,7 +32,7 @@
         })}
     </Text>
     <div class="space-y-4">
-        <AssetAmountInput bind:this={assetAmountInput} bind:rawAmount {asset} containsSlider readonlyAsset />
+        <AssetAmountInput bind:this={assetAmountInput} bind:rawAmount {asset} containsSlider disableAssetSelection />
         <TextHint warning text={localize('actions.confirmTokenBurn.hint')} />
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
