@@ -7,7 +7,7 @@
     import { INft } from '@core/nfts'
     import { CollectiblesRoute, collectiblesRouter } from '@core/router'
 
-    export let modal: Modal
+    export let modal: Modal = undefined
     export let nft: INft
 
     function openBurnNft(): void {

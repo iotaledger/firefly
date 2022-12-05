@@ -70,6 +70,9 @@
         openPopup({
             type: 'sendForm',
             overflow: true,
+            props: {
+                disableAssetSelection: true,
+            },
         })
     }
 </script>
