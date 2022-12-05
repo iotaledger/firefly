@@ -3,7 +3,7 @@ export enum DashboardRoute {
     Activity = 'activity',
     Token = 'token',
     Init = 'init',
-    ProfileActions = 'profileActions',
+    Profile = 'profile',
     Receive = 'receive',
     Send = 'send',
 }
