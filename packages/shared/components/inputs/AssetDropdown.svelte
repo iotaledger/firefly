@@ -10,7 +10,7 @@
     let isDropdownOpen = false
     let icon: string
 
-    $: hasMultipleAssets = $visibleSelectedAccountAssets?.nativeTokens.length >= 1 && !readonly
+    $: isReadonly = readonly || $visibleSelectedAccountAssets?.nativeTokens.length === 0
     $: switch (asset?.metadata?.name?.toLocaleLowerCase()) {
         case NetworkProtocol.IOTA:
         case NetworkProtocol.Shimmer:
@@ -21,7 +21,7 @@
     }
 
     function handleDropdownClick(): void {
-        if (hasMultipleAssets) {
+        if (!isReadonly) {
             isDropdownOpen = !isDropdownOpen
         }
     }
@@ -40,7 +40,7 @@
     <div class="flex flex-col" use:clickOutside on:clickOutside={handleOnClickOutside}>
         <div
             class="flex flex-row items-center p-2 space-x-2 text-left bg-gray-100 dark:bg-gray-700 rounded-md cursor-default"
-            class:cursor-pointer={hasMultipleAssets}
+            class:cursor-pointer={!isReadonly}
             on:click={handleDropdownClick}
         >
             <AssetIcon small {asset} />
@@ -55,13 +55,13 @@
                     {asset?.metadata?.name ?? asset?.id}
                 </Text>
             </div>
-            {#if hasMultipleAssets}
+            {#if !isReadonly}
                 <div class="transform rotate-0">
                     <Icon height="18" width="18" icon="chevron-down" classes="text-gray-600 dark:text-gray-500" />
                 </div>
             {/if}
         </div>
-        {#if isDropdownOpen && hasMultipleAssets}
+        {#if isDropdownOpen && !isReadonly}
             <div
                 class="dropdown bg-white dark:bg-gray-800 absolute flex flex-col top-12 -left-5 -right-5 border border-solid border-blue-500 rounded-xl z-10 p-4 max-h-96"
             >

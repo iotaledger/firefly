@@ -1,14 +1,22 @@
 <script lang="typescript">
-    import { Drawer, Icon, Modal, NetworkIndicator, NotificationBadge, ProfileActionsModal, Text } from '@ui'
+    import { Drawer, Icon, Modal, NetworkIndicator, NotificationBadge, ProfileActionsModal, Text, TextType } from '@ui'
     import { SidebarTab } from '@components'
     import { Settings } from './settings'
     import features from '@features/features'
     import { appVersionDetails, mobile } from '@core/app/stores'
     import { getInitials, isRecentDate } from '@core/utils'
     import { activeProfile } from '@core/profile/stores'
-    import { DashboardRoute, dashboardRouter, settingsRoute, SettingsRoute, settingsRouter } from '@core/router'
+    import {
+        collectiblesRouter,
+        DashboardRoute,
+        dashboardRouter,
+        settingsRoute,
+        SettingsRoute,
+        settingsRouter,
+    } from '@core/router'
     import { localize } from '@core/i18n'
     import { ISidebarTab } from '../../lib/routers'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     let profileModal: Modal
     let drawer: Drawer
@@ -44,6 +52,16 @@
                   },
               ]
             : []),
+        ...(features?.governance?.enabled
+            ? [
+                  {
+                      icon: 'governance',
+                      label: localize('tabs.governance'),
+                      route: DashboardRoute.Governance,
+                      onClick: openGovernance,
+                  },
+              ]
+            : []),
         ...(features?.developerTools?.enabled && $activeProfile?.isDeveloperProfile
             ? [
                   {
@@ -62,6 +80,11 @@
 
     function openCollectibles(): void {
         $dashboardRouter.goTo(DashboardRoute.Collectibles)
+        $collectiblesRouter.reset()
+    }
+
+    function openGovernance(): void {
+        $dashboardRouter.goTo(DashboardRoute.Governance)
     }
 
     function openDeveloper(): void {
@@ -90,8 +113,8 @@
                 class="w-full px-8 py-3 mb-6 flex items-centers justify-center bg-white dark:bg-gray-800"
                 on:click={handleBackClick}
             >
-                <Icon icon="arrow-left" classes="absolute left-6 text-gray-500 text-blue-500" />
-                <Text type="h4" classes="text-center">
+                <Icon icon={IconEnum.ArrowLeft} classes="absolute left-6 text-gray-500 text-blue-500" />
+                <Text type={TextType.h4} classes="text-center">
                     {localize(
                         $settingsRoute === SettingsRoute.Init
                             ? 'general.yourWallets'
@@ -109,10 +132,10 @@
                             >{profileInitial || 'A'}</span
                         >
                     </div>
-                    <Text type="h4">John Doe</Text>
+                    <Text type={TextType.h4}>John Doe</Text>
                 </div>
             {/if}
-            <Settings {localize} />
+            <Settings />
         </div>
     </Drawer>
 {:else}
