@@ -16,7 +16,7 @@ export async function burnAsset(assetId: string, rawAmount: string): Promise<voi
         const burnTokenTransaction = await account.burnNativeToken(assetId, Converter.decimalToHex(Number(rawAmount)))
 
         // Generate Activity
-        const processedTransaction = preprocessTransaction(burnTokenTransaction, account.depositAddress)
+        const processedTransaction = await preprocessTransaction(burnTokenTransaction, account)
         const activity = generateActivity(processedTransaction, account)
         addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)
 

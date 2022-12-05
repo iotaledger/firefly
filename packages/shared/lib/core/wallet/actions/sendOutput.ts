@@ -14,11 +14,9 @@ export async function sendOutput(output: Output): Promise<void> {
         const transaction = await account.sendOutputs([output], DEFAULT_TRANSACTION_OPTIONS)
         // Reset transaction details state, since the transaction has been sent
         resetNewTokenTransactionDetails()
-        const processedTransaction = preprocessTransaction(transaction, account.depositAddress)
-        addActivityToAccountActivitiesInAllAccountActivities(
-            account.index,
-            generateActivity(processedTransaction, account)
-        )
+        const processedTransaction = await preprocessTransaction(transaction, account)
+        const activity = generateActivity(processedTransaction, account)
+        addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)
         updateSelectedAccount({ isTransferring: false })
         return
     } catch (err) {
