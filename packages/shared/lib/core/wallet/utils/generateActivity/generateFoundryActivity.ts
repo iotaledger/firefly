@@ -26,8 +26,7 @@ export function generateFoundryActivity(
     processedTransaction: IProcessedTransaction,
     account: IAccountState
 ): FoundryActivity {
-    const { outputs, transactionId, claimingData, transactionInputs, time, direction, inclusionState } =
-        processedTransaction
+    const { outputs, transactionId, claimingData, utxoInputs, time, direction, inclusionState } = processedTransaction
     const wrappedOutput = getFoundryOutputFromTransaction(outputs)
 
     const output = wrappedOutput.output as IFoundryOutput
@@ -44,7 +43,7 @@ export function generateFoundryActivity(
     const isAssetHidden = false
     const containsValue = outputContainsValue(processedTransaction, account)
 
-    const inputs = transactionInputs
+    const inputs = utxoInputs
 
     const id = outputId || transactionId
     const nativeToken = getNativeTokenFromOutput(output)
