@@ -92,7 +92,6 @@
     col
     {isFocused}
     {error}
-    classes="space-y-2"
     on:clickOutside={() => (isFocused = false)}
 >
     <div class="flex flex-row w-full items-center space-x-0.5 relative">
@@ -113,7 +112,7 @@
         {/if}
     </div>
     {#if containsSlider}
-        <div class="flex flex-col">
+        <div class="flex flex-col mt-5">
             <SliderInput bind:value={amount} {max} decimals={asset.metadata.decimals} />
             <div class="flex flex-row justify-between">
                 <Text color="gray-800" darkColor="gray-500" fontSize="xs"
@@ -125,7 +124,7 @@
             </div>
         </div>
     {:else}
-        <div class="flex flex-row w-full items-end justify-between">
+        <div class="flex flex-row w-full items-end justify-between mt-2">
             {#if asset}
                 <div class="flex flex-row items-center">
                     <button on:click={onClickAvailableBalance}>
