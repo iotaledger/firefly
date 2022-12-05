@@ -581,6 +581,43 @@
                 "attributes": "Attributes",
                 "metadata": "Metadata"
             }
+        },
+        "governance": {
+            "votingPower": {
+                "title": "Voting power",
+                "maximal": "Maximal voting power: {value}",
+                "manage": "Manage voting power"
+            },
+            "proposalsDetails": {
+                "title": "Details",
+                "activeProposals": "Active proposals",
+                "votingProposals": "Proposals you are voting on",
+                "votedProposals": "Total proposals you voted on"
+            },
+            "proposals": {
+                "title": "Proposals",
+                "voted": "Voted"
+            },
+            "statusTimeline": {
+                "announcement": "Announcement",
+                "votingOpen": "Voting open",
+                "counting": "Counting starts",
+                "closed": "Counting stops"
+            },
+            "details": {
+                "fullProposal": "Read the full proposal",
+                "yourVote": {
+                    "title": "Your vote",
+                    "total": "Total votes counted",
+                    "power": "Voting power"
+                },
+                "proposalInformation": {
+                    "title": "Proposal information",
+                    "countingEnds": "Counting ends on",
+                    "eventId": "Event ID",
+                    "nodeUrl": "Node URL"
+                }
+            }
         }
     },
     "popups": {
@@ -966,6 +1003,11 @@
         "faucetRequest": {
             "title": "Faucet request",
             "body": "Are you sure you want to request {token} tokens from the {network} faucet?"
+        },
+        "manageVotingPower": {
+            "title": "Manage voting power",
+            "body": "Define your voting power to vote on proposals.",
+            "hint": "Increasing your voting power locks your funds. In order to make them spendable again, you need to decrease your voting power. This affects all proposals with an active vote."
         }
     },
     "charts": {
@@ -1148,7 +1190,8 @@
         "initializing": "Initializing",
         "delete": "Delete",
         "addReference": "Add reference",
-        "depositNft": "Deposit NFTs"
+        "depositNft": "Deposit NFTs",
+        "vote": "Vote"
     },
     "general": {
         "recipient": "Recipient",
@@ -1402,6 +1445,11 @@
             "Name": "Name",
             "Amount": "Amount"
         },
+        "internalExternal": {
+            "label": "Internal / External",
+            "internal": "Internal",
+            "external": "External"
+        },
         "verificationStatus": {
             "label": "Verification status",
             "new": "New",
@@ -1440,9 +1488,16 @@
         },
         "type": {
             "label": "Type",
-            "incoming": "incoming",
-            "outgoing": "outgoing",
-            "internal": "internal"
+            "basic": "Basic",
+            "nft": "NFT",
+            "alias": "Alias",
+            "foundry": "Foundry"
+        },
+        "direction": {
+            "label": "Direction",
+            "incoming": "Incoming",
+            "outgoing": "Outgoing",
+            "selfTransaction": "Self transaction"
         }
     },
     "dates": {
@@ -1826,6 +1881,7 @@
     "tabs": {
         "wallet": "Wallet",
         "collectibles": "Collectibles",
+        "governance": "Governance",
         "developer": "Developer",
         "tokens": "Tokens",
         "activity": "Activity"
@@ -1888,7 +1944,13 @@
             }
         },
         "locked": "locked",
-        "smartContract": "smart contract"
+        "smartContract": "smart contract",
+        "proposalStatus": {
+            "announcement": "Announcement",
+            "votingOpen": "Voting open",
+            "counting": "Counting",
+            "closed": "Closed"
+        }
     },
     "menus": {
         "expirationTimePicker": {

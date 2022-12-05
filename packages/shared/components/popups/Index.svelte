@@ -26,6 +26,7 @@
     import LedgerConnectionGuidePopup from './LedgerConnectionGuidePopup.svelte'
     import LegalUpdate from './LegalUpdate.svelte'
     import ManageAccountPopup from './ManageAccountPopup.svelte'
+    import ManageVotingPowerPopup from './ManageVotingPowerPopup.svelte'
     import MintNativeTokenFormPopup from './MintNativeTokenFormPopup.svelte'
     import MintNativeTokenConfirmationPopup from './MintNativeTokenConfirmationPopup.svelte'
     import MintNftFormPopup from './MintNftFormPopup.svelte'
@@ -119,6 +120,7 @@
         faucetRequest: FaucetRequestPopup,
         enableLedgerBlindSigning: EnableLedgerBlindSigningPopup,
         testDeepLinkForm: TestDeepLinkFormPopup,
+        manageVotingPower: ManageVotingPowerPopup,
     }
 
     function onKey(event: KeyboardEvent): void {

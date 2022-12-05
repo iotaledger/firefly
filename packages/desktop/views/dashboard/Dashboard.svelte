@@ -20,6 +20,7 @@
     import { Wallet } from './wallet'
     import { onDestroy, onMount } from 'svelte'
     import Collectibles from './collectibles/Collectibles.svelte'
+    import { Governance } from './governance'
     import Sidebar from './Sidebar.svelte'
     import TopNavigation from './TopNavigation.svelte'
 
@@ -29,6 +30,7 @@
         wallet: Wallet,
         settings: Settings,
         collectibles: Collectibles,
+        governance: Governance,
         developer: Developer,
     }
 

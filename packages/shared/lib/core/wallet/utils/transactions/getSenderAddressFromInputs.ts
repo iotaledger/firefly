@@ -1,10 +1,12 @@
-import { OUTPUT_TYPE_TREASURY, UNLOCK_CONDITION_ADDRESS, UNLOCK_CONDITION_EXPIRATION } from '../../constants'
-import { IOutputResponse, IExpirationUnlockCondition, IAddressUnlockCondition } from '@iota/types'
+import { IWrappedOutput } from '@core/wallet/interfaces'
+import { IAddressUnlockCondition, IExpirationUnlockCondition } from '@iota/types'
+import { UNLOCK_CONDITION_ADDRESS, UNLOCK_CONDITION_EXPIRATION } from '../../constants'
 import { getBech32AddressFromAddressTypes } from '../getBech32AddressFromAddressTypes'
 
-export function getSenderAddressFromInputs(inputs: IOutputResponse[]): string {
-    for (const { output, metadata } of inputs) {
-        if (output.type !== OUTPUT_TYPE_TREASURY) {
+export function getSenderAddressFromInputs(inputs: IWrappedOutput[]): string {
+    for (const input of inputs) {
+        if (input) {
+            const { output, metadata } = input
             const { unlockConditions } = output
 
             const spentDate = metadata.milestoneTimestampSpent
