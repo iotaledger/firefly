@@ -14,6 +14,7 @@ type NewBaseTransactionDetails = {
     disableToggleGift?: boolean
     disableChangeExpiration?: boolean
     addSenderFeature?: boolean
+    disableAssetSelection?: boolean
 }
 
 export type NewTokenTransactionDetails = NewBaseTransactionDetails & {
