@@ -3,29 +3,24 @@ import { ILayer2TransferAllowanceMetadata } from '../interfaces'
 type Layer2Metadata = Omit<ILayer2TransferAllowanceMetadata, 'baseTokenAmount' | 'nativeTokens'>
 
 export function parseLayer2Metadata(metadata: string): Layer2Metadata {
-    if (!metadata) {
-        return undefined
-    }
+    const parsedData = JSON.parse(metadata)
+    validate(parsedData)
 
-    try {
-        const parsedData = JSON.parse(metadata)
-        validate(parsedData)
-
-        const parsedMetadata: Layer2Metadata = {
-            senderContract: parsedData.senderContract,
-            targetContract: parsedData.targetContract,
-            contractFunction: parsedData.contractFunction,
-            gasBudget: parsedData.gasBudget,
-            ethereumAddress: parsedData.ethereumAddress,
-            forceOpenAccount: parsedData.forceOpenAccount,
-        }
-        return parsedMetadata
-    } catch (err) {
-        return undefined
+    return {
+        senderContract: parsedData.senderContract,
+        targetContract: parsedData.targetContract,
+        contractFunction: parsedData.contractFunction,
+        gasBudget: parsedData.gasBudget,
+        ethereumAddress: parsedData.ethereumAddress,
+        forceOpenAccount: parsedData.forceOpenAccount,
     }
 }
 
 function validate(data: Layer2Metadata): void {
+    if (!data) {
+        throw new Error('Invalid Metadata')
+    }
+
     if (data.senderContract && typeof data.senderContract !== 'string') {
         throw new Error('Invalid senderContract')
     }
