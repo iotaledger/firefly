@@ -15,11 +15,11 @@ export function getSendingInformation(
     subject: Subject
     isInternal: boolean
 } {
-    const { direction, detailedTransactionInputs } = processedTransaction
+    const { direction, wrappedInputs } = processedTransaction
 
     const recipient = getRecipientFromOutput(output)
-    const sender = detailedTransactionInputs
-        ? getSubjectFromAddress(getSenderAddressFromInputs(detailedTransactionInputs))
+    const sender = wrappedInputs
+        ? getSubjectFromAddress(getSenderAddressFromInputs(wrappedInputs))
         : getSenderFromTransaction(direction === ActivityDirection.Incoming, account.depositAddress, output)
 
     const subject = direction === ActivityDirection.Incoming ? sender : recipient
