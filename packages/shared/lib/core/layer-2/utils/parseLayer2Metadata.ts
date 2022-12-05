@@ -21,7 +21,6 @@ export function parseLayer2Metadata(metadata: string): Layer2Metadata {
         }
         return parsedMetadata
     } catch (err) {
-        console.error(err)
         return undefined
     }
 }
