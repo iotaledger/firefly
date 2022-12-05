@@ -131,8 +131,10 @@
         </div>
     </div>
     <div class="flex flex-col space-y-8 w-full">
-        <HR overrideColor classes="border-gray-200 dark:border-gray-700" />
-        <TokenWithMax {asset} onMaxClick={onClickAvailableBalance} />
+        {#if $newTransactionDetails?.type === NewTransactionType.TokenTransfer}
+            <HR overrideColor classes="border-gray-200 dark:border-gray-700" />
+            <TokenWithMax {asset} onMaxClick={onClickAvailableBalance} />
+        {/if}
         <Button onClick={onContinueClick} disabled={!!error} classes="w-full">
             {error ?? localize('actions.continue')}
         </Button>
