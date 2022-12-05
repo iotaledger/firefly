@@ -97,9 +97,15 @@ export class AccountMock implements IAccount {
     ): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
+
+    decreaseVotingPower(amount: string): Promise<Transaction> {
+        throw new Error('Method not implemented.')
+    }
+
     destroyAlias(aliasId: string, transactionOptions?: TransactionOptions): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
+
     destroyFoundry(foundryId: string, transactionOptions?: TransactionOptions): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
@@ -155,6 +161,10 @@ export class AccountMock implements IAccount {
         return Promise.resolve([''])
     }
 
+    getVotingPower(): Promise<string> {
+        throw new Error('Method not implemented.')
+    }
+
     incomingTransactions(): Promise<[string, [ITransactionPayload, IOutputResponse[]]][]> {
         throw new Error('Method not implemented.')
     }
@@ -165,6 +175,10 @@ export class AccountMock implements IAccount {
         increaseNativeTokenSupplyOptions?: IncreaseNativeTokenSupplyOptions,
         transactionOptions?: TransactionOptions
     ): Promise<MintTokenTransaction> {
+        throw new Error('Method not implemented.')
+    }
+
+    increaseVotingPower(amount: string): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
 
