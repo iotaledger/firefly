@@ -37,7 +37,7 @@
     </Text>
     <div class="space-y-4">
         {#if description}
-            <Text fontSize="14" classes="text-left">{description}</Text>
+            <Text fontSize="14" classes="text-left break-words">{description}</Text>
         {/if}
         {#if hint}
             <TextHint {info} {success} {warning} {danger} text={hint} />
