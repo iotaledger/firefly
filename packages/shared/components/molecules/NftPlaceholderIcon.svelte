@@ -2,12 +2,16 @@
     import { INft, ParentMimeType } from '@core/nfts'
     import { Icon, NftMediaSize } from 'shared/components'
     import { Icon as IconEnum } from '@auxiliary/icon'
+    import { appSettings } from '@core/app'
 
     export let nft: INft = undefined
     export let size: NftMediaSize
 
-    const width = '100%'
-    const height = '100%'
+    const width = '125%'
+    const height = '125%'
+
+    $: primaryColor = $appSettings.darkMode ? '#9AADCE' : '#F0F5FE'
+    $: secondaryColor = $appSettings.darkMode ? '#9AADCE' : '#D8E3F5'
 
     let iconSize: 'Small' | 'Large'
     $: iconSize = size === NftMediaSize.Large || size === NftMediaSize.ExtraLarge ? 'Large' : 'Small'
@@ -37,4 +41,11 @@
     }
 </script>
 
-<Icon {icon} {width} {height} classes="text-white dark:text-gray-800 text-center" />
+<Icon
+    {icon}
+    {width}
+    {height}
+    {primaryColor}
+    {secondaryColor}
+    classes="bg-gray-100 text-white dark:text-gray-800 text-center"
+/>
