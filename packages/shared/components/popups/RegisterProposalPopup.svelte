@@ -5,6 +5,7 @@
     import { registerParticipationEvent } from '@core/profile-manager/api'
     import { isValidUrl } from '@core/utils'
     import { handleError } from '@core/error/handlers/handleError'
+    import { showAppNotification } from '@auxiliary/notification'
 
     let eventId: string
     let nodeUrl: string
@@ -20,6 +21,10 @@
         try {
             validate()
             await registerParticipationEvent(eventId, [{ url: nodeUrl }])
+            showAppNotification({
+                type: 'success',
+                message: localize('views.governance.proposals.successRegister'),
+            })
             closePopup()
         } catch (err) {
             handleError(err)
@@ -34,7 +39,7 @@
         }
         const hasEventId = !!eventId
         if (!hasEventId) {
-            eventIdError = 'Should have a valid event ID'
+            eventIdError = localize('error.governance.eventId.invalid')
             throw new Error(eventIdError)
         }
     }
