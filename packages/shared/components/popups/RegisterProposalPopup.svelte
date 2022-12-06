@@ -4,6 +4,7 @@
     import { closePopup } from '@auxiliary/popup'
     import { registerParticipationEvent } from '@core/profile-manager/api'
     import { isValidUrl } from '@core/utils'
+    import { handleError } from '@core/error/handlers/handleError'
 
     let eventId: string
     let nodeUrl: string
@@ -16,12 +17,25 @@
     }
 
     async function handleConfirm(): Promise<void> {
-        const isValid = isValidUrl(nodeUrl)
-        if (isValid) {
+        try {
+            validate()
             await registerParticipationEvent(eventId, [{ url: nodeUrl }])
             closePopup()
-        } else {
+        } catch (err) {
+            handleError(err)
+        }
+    }
+
+    function validate(): void {
+        const isValid = isValidUrl(nodeUrl)
+        if (!isValid) {
             nodeUrlError = localize('error.node.invalid')
+            throw new Error(nodeUrlError)
+        }
+        const hasEventId = !!eventId
+        if (!hasEventId) {
+            eventIdError = 'Should have a valid event ID'
+            throw new Error(eventIdError)
         }
     }
 </script>
