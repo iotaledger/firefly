@@ -16,7 +16,7 @@
         accountBalance = await $selectedAccount.getBalance()
     }
 
-    let potentiallyLockedOutputsStorageDeposit
+    let potentiallyLockedOutputsStorageDeposit: number
     $: accountBalance, void calculatePendingTransactionStorageDeposit()
     async function calculatePendingTransactionStorageDeposit(): Promise<void> {
         potentiallyLockedOutputsStorageDeposit = 0
@@ -28,6 +28,10 @@
             }
         }
     }
+    $: totalStorageDeposit = Object.values($selectedAccount.balances.requiredStorageDeposit).reduce(
+        (total: number, value: string): number => total + Number(value),
+        potentiallyLockedOutputsStorageDeposit
+    )
 
     function handleConsolidation(): void {
         openPopup({
@@ -62,7 +66,7 @@
     <HR hidden />
     <BalanceSummarySection
         title={localize('popups.storageDepositBreakdown.totalStorageDeposit')}
-        amount={Number($selectedAccount.balances.requiredStorageDeposit.alias) + potentiallyLockedOutputsStorageDeposit}
+        amount={totalStorageDeposit}
         asset={baseCoin}
         totalRow
     />
