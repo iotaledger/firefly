@@ -62,7 +62,7 @@
     <HR hidden />
     <BalanceSummarySection
         title={localize('popups.storageDepositBreakdown.totalStorageDeposit')}
-        amount={Number($selectedAccount.balances.requiredStorageDeposit) + potentiallyLockedOutputsStorageDeposit}
+        amount={Number($selectedAccount.balances.requiredStorageDeposit.alias) + potentiallyLockedOutputsStorageDeposit}
         asset={baseCoin}
         totalRow
     />
