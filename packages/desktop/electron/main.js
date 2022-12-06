@@ -183,7 +183,7 @@ function isUrlAllowed(targetUrl) {
     const url = new URL(targetUrl)
     const domain = url.hostname.replace('www.', '').replace('mailto:', '')
 
-    return !externalBlacklist.includes(domain) || !externalBlacklist.includes(domain + url.pathname)
+    return !externalBlacklist.includes(domain) && !externalBlacklist.includes(domain + url.pathname)
 }
 
 /**
