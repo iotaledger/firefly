@@ -6,6 +6,7 @@
     import { burnNft } from '@core/wallet'
     import { INft } from '@core/nfts'
     import { CollectiblesRoute, collectiblesRouter } from '@core/router'
+    import { openUrlInBrowser } from '@core/app'
 
     export let modal: Modal = undefined
     export let nft: INft
@@ -36,13 +37,22 @@
             },
         })
     }
+
+    function handleOpenMediaClick(): void {
+        openUrlInBrowser(nft.parsedMetadata.uri)
+    }
 </script>
 
 <Modal bind:this={modal} position={{ top: '100px', right: '60px' }}>
     <div class="flex flex-col">
         <MenuItem icon="receive" title={localize('views.collectibles.details.menu.download')} first />
         <MenuItem icon="profile" title={localize('views.collectibles.details.menu.setAvatar')} />
-        <MenuItem icon="export" title={localize('views.collectibles.details.menu.view')} />
+        <MenuItem
+            icon="export"
+            title={localize('views.collectibles.details.menu.view')}
+            disabled={!nft.parsedMetadata?.uri}
+            onClick={handleOpenMediaClick}
+        />
         <MenuItem icon="delete" title={localize('views.collectibles.details.menu.burn')} onClick={openBurnNft} />
     </div>
 </Modal>

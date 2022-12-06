@@ -563,7 +563,7 @@
                 "menu": {
                     "download": "Download",
                     "setAvatar": "Set NFT as profile avatar",
-                    "view": "View in IPFS",
+                    "view": "View media in browser",
                     "burn": "Burn NFT"
                 }
             },
