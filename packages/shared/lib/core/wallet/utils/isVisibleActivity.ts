@@ -4,15 +4,14 @@ import { activityFilter } from '../stores'
 import { getAssetFromPersistedAssets } from './getAssetFromPersistedAssets'
 import {
     ActivityAsyncStatus,
-    ActivityDirection,
     BooleanFilterOption,
     NumberFilterOption,
     InclusionState,
-    TypeFilterOption,
     StatusFilterOption,
     ActivityType,
     DateFilterOption,
     DateUnit,
+    InternalExternalOption,
 } from '../enums'
 import { dateIsAfterOtherDate, dateIsBeforeOtherDate, datesOnSameDay } from '@core/utils'
 import { ActivityFilter } from '../interfaces'
@@ -45,6 +44,12 @@ export function isVisibleActivity(activity: Activity): boolean {
         return false
     }
     if (!isVisibleWithActiveTypeFilter(activity, filter)) {
+        return false
+    }
+    if (!isVisibleWithActiveDirectionFilter(activity, filter)) {
+        return false
+    }
+    if (!isVisibleWithInternalExternalFilter(activity, filter)) {
         return false
     }
     return true
@@ -270,21 +275,28 @@ function isVisibleWithActiveStatusFilter(activity: Activity, filter: ActivityFil
 
 function isVisibleWithActiveTypeFilter(activity: Activity, filter: ActivityFilter): boolean {
     if (filter.type.active && filter.type.selected) {
-        if (
-            filter.type.selected === TypeFilterOption.Incoming &&
-            activity.direction !== ActivityDirection.Incoming &&
-            activity.direction !== ActivityDirection.SelfTransaction
-        ) {
+        if (filter.type.selected !== activity.type) {
             return false
         }
-        if (
-            filter.type.selected === TypeFilterOption.Outgoing &&
-            activity.direction !== ActivityDirection.Outgoing &&
-            activity.direction !== ActivityDirection.SelfTransaction
-        ) {
+    }
+    return true
+}
+
+function isVisibleWithActiveDirectionFilter(activity: Activity, filter: ActivityFilter): boolean {
+    if (filter.direction.active && filter.direction.selected) {
+        if (filter.direction.selected !== activity.direction) {
             return false
         }
-        if (filter.type.selected === TypeFilterOption.Internal && !activity.isInternal) {
+    }
+    return true
+}
+
+function isVisibleWithInternalExternalFilter(activity: Activity, filter: ActivityFilter): boolean {
+    if (filter.internalExternal.active && filter.internalExternal.selected) {
+        if (filter.internalExternal.selected === InternalExternalOption.Internal && !activity.isInternal) {
+            return false
+        }
+        if (filter.internalExternal.selected === InternalExternalOption.External && activity.isInternal) {
             return false
         }
     }

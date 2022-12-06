@@ -4,7 +4,7 @@
     export let classes = ''
     export let overflow = 'hidden'
 
-    let darkModeEnabled
+    let darkModeEnabled: boolean
     $: darkModeEnabled = $appSettings.darkMode
 </script>
 
