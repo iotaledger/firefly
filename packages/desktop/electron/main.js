@@ -258,6 +258,8 @@ function createWindow() {
         webPreferences: {
             ...defaultWebPreferences,
             preload: paths.preload,
+            // Sandboxing is disabled, since our preload script depends on Node.js
+            sandbox: false,
         },
     })
 
@@ -294,7 +296,6 @@ function createWindow() {
      * Only allow external navigation to allowed domains
      */
     windows.main.webContents.on('will-navigate', handleNavigation)
-    windows.main.webContents.on('new-window', handleNavigation)
 
     windows.main.on('close', () => {
         closeAboutWindow()

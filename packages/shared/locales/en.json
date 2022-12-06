@@ -1944,7 +1944,7 @@
             }
         },
         "locked": "locked",
-        "smartContractCall": "smart contract call",
+        "smartContract": "smart contract",
         "proposalStatus": {
             "announcement": "Announcement",
             "votingOpen": "Voting open",
