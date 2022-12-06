@@ -92,6 +92,7 @@
         destinationNetwork: getDestinationNetworkFromAddress(layer2Parameters?.networkAddress),
         ...(layer2Parameters?.networkAddress && {
             parsedLayer2Metadata: {
+                ethereumAddress: recipientAddress,
                 targetContract: TARGET_CONTRACTS[ACCOUNTS_CONTRACT],
                 contractFunction: CONTRACT_FUNCTIONS[TRANSFER_ALLOWANCE],
                 gasBudget: GAS_BUDGET,
