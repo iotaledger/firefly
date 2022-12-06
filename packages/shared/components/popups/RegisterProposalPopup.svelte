@@ -13,6 +13,8 @@
     let eventIdError: string
     let nodeUrlError: string
 
+    $: disabled = !eventId || !nodeUrl
+
     function handleCancel(): void {
         closePopup()
     }
@@ -46,22 +48,24 @@
 </script>
 
 <register-proposal>
-    <Text type={TextType.h3}>{localize('popups.registerProposal.title')}</Text>
-    <Text bigger>{localize('popups.registerProposal.body')}</Text>
-    <div class="flex flex-col w-full space-y-2 mt-4">
+    <Text type={TextType.h3} classes="mb-6">{localize('popups.registerProposal.title')}</Text>
+    <Text fontSize="15">{localize('popups.registerProposal.body')}</Text>
+    <div class="flex flex-col w-full space-y-4 mt-4">
         <TextInput
             bind:value={eventId}
             bind:error={eventIdError}
             placeholder={localize('views.governance.details.proposalInformation.eventId')}
+            label={localize('views.governance.details.proposalInformation.eventId')}
         />
         <TextInput
             bind:value={nodeUrl}
             bind:error={nodeUrlError}
             placeholder={localize('views.governance.details.proposalInformation.nodeUrl')}
+            label={localize('views.governance.details.proposalInformation.nodeUrl')}
         />
     </div>
     <div class="flex w-full space-x-4 mt-6">
         <Button outline classes="w-full" onClick={handleCancel}>{localize('actions.cancel')}</Button>
-        <Button classes="w-full" onClick={handleConfirm}>{localize('actions.confirm')}</Button>
+        <Button {disabled} classes="w-full" onClick={handleConfirm}>{localize('actions.confirm')}</Button>
     </div>
 </register-proposal>

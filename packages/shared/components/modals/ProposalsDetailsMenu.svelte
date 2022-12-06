@@ -15,6 +15,11 @@
 
 <Modal bind:this={modal} {...$$restProps}>
     <div class="flex flex-col">
-        <MenuItem icon={Icon.Plus} title={localize('actions.registerProposal')} onClick={handleRegister} />
+        <MenuItem
+            icon={Icon.Plus}
+            iconProps={{ width: '14', height: '14' }}
+            title={localize('actions.registerProposal')}
+            onClick={handleRegister}
+        />
     </div>
 </Modal>
