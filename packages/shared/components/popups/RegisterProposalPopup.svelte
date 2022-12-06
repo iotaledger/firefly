@@ -39,7 +39,7 @@
         }
         const hasEventId = !!eventId
         if (!hasEventId) {
-            eventIdError = localize('error.governance.eventId.invalid')
+            eventIdError = localize('error.eventId.invalid')
             throw new Error(eventIdError)
         }
     }

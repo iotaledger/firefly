@@ -1769,10 +1769,8 @@
             "aliasNotInPossession": "Alias not in possession"
         },
         "noOutputsToConsolidate": "Not enough outputs to consolidate",
-        "governance": {
-            "eventId": {
-                "invalid": "Please enter a valid event ID."
-            }
+        "eventId": {
+            "invalid": "Please enter a valid event ID."
         }
     },
     "warning": {
