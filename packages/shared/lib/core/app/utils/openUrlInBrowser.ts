@@ -10,10 +10,11 @@ export function openUrlInBrowser(url: string): void {
         openPopup({
             type: 'confirmation',
             props: {
-                title: localize('popups.deleteProfile.title'),
-                hint: localize('popups.deleteProfile.confirmation'),
+                title: localize('popups.externalUrl.title'),
+                description: localize('popups.externalUrl.body', { values: { url } }),
+                hint: localize('popups.externalUrl.hint'),
                 warning: true,
-                confirmText: localize('actions.delete'),
+                confirmText: localize('popups.externalUrl.action'),
                 onConfirm: () => {
                     Platform.openUrl(url)
                     closePopup()

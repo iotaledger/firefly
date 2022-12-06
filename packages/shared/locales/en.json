@@ -683,6 +683,12 @@
             "errorTitle": "Unable to delete {name}",
             "errorBody1": "You cannot delete this wallet, you must have at least one."
         },
+        "externalUrl": {
+            "title": "Open Url in Browser",
+            "body": "Do you want to open \"{url}\" in the browser?",
+            "hint": "This Url is unknown to Firefly",
+            "action": "Open Url"
+        },
         "hideAccount": {
             "title": "Hide {name}?",
             "body": "You can find this wallet later by enabling \"Show hidden wallets\" in Advanced Settings.",
