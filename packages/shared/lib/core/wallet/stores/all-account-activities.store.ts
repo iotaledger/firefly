@@ -17,6 +17,19 @@ export function addActivityToAccountActivitiesInAllAccountActivities(accountInde
     })
 }
 
+export function addActivitiesToAccountActivitiesInAllAccountActivities(
+    accountIndex: number,
+    activities: Activity[]
+): void {
+    allAccountActivities.update((state) => {
+        if (!state[accountIndex]) {
+            state[accountIndex] = []
+        }
+        state[accountIndex].push(...activities)
+        return state
+    })
+}
+
 export function setAccountActivitiesInAllAccountActivities(accountIndex: number, accountActivities: Activity[]): void {
     allAccountActivities.update((state) => {
         state[accountIndex] = accountActivities

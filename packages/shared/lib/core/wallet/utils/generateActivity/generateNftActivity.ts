@@ -1,23 +1,23 @@
-import { IProcessedTransaction } from '../../interfaces'
-import { outputContainsValue, getNftOutputFromTransaction } from '..'
-import { ActivityAction, ActivityType } from '@core/wallet/enums'
 import { IAccountState } from '@core/account'
-import type { INftOutput } from '@iota/types'
+import { ActivityType } from '@core/wallet/enums'
 import { NftActivity } from '@core/wallet/types'
-import { getMetadataFromOutput, getSendingInformation, getTagFromOutput, getAsyncDataFromOutput } from './helper'
+import type { INftOutput } from '@iota/types'
+import { IActivityGenerationParameters } from '..'
 import { getNftId } from '../outputs/getNftId'
-import { EMPTY_HEX_ID } from '@core/wallet/constants'
+import { getAsyncDataFromOutput, getMetadataFromOutput, getSendingInformation, getTagFromOutput } from './helper'
 
-export function generateNftActivity(processedTransaction: IProcessedTransaction, account: IAccountState): NftActivity {
-    const { outputs, claimingData, utxoInputs, time, inclusionState, transactionId, direction } = processedTransaction
-    const wrappedOutput = getNftOutputFromTransaction(outputs)
+export function generateNftActivity(
+    account: IAccountState,
+    { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
+): NftActivity {
+    const { claimingData, utxoInputs, time, inclusionState, transactionId, direction } = processedTransaction
     const outputId = wrappedOutput.outputId
     const output = wrappedOutput.output as INftOutput
     const id = outputId || transactionId
 
     const isHidden = false
     const isAssetHidden = false
-    const containsValue = outputContainsValue(processedTransaction, account)
+    const containsValue = true
 
     const inputs = utxoInputs
 
@@ -30,7 +30,6 @@ export function generateNftActivity(processedTransaction: IProcessedTransaction,
     const sendingInfo = getSendingInformation(processedTransaction, output, account)
     const { subject, isInternal } = sendingInfo
 
-    const action = output.nftId === EMPTY_HEX_ID ? ActivityAction.Mint : ActivityAction.Send
     const asyncData = getAsyncDataFromOutput(output, outputId, claimingData, account)
 
     return {

@@ -1,7 +1,7 @@
 import { IAccountState } from '@core/account'
 import { IProcessedTransaction } from '@core/wallet/interfaces/processed-transaction.interface'
 import { Activity } from '@core/wallet/types'
-import { generateActivity } from '@core/wallet/utils'
+import { generateActivities } from '@core/wallet/utils'
 
 export function generateActivitiesFromProcessedTransactions(
     processedTransactions: IProcessedTransaction[],
@@ -10,8 +10,8 @@ export function generateActivitiesFromProcessedTransactions(
     const activities: Activity[] = []
     for (const _preparedActivity of processedTransactions) {
         try {
-            const activity = generateActivity(_preparedActivity, account)
-            activities.push(activity)
+            const activitiesToAdd = generateActivities(_preparedActivity, account)
+            activities.push(...activitiesToAdd)
         } catch (err) {
             console.error(err)
         }

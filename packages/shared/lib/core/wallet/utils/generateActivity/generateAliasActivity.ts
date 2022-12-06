@@ -1,9 +1,9 @@
-import { IProcessedTransaction } from '../../interfaces'
-import { convertHexAddressToBech32, outputContainsValue, hashOutputId } from '..'
-import { ActivityAction, ActivityType } from '@core/wallet/enums'
-import { ADDRESS_TYPE_ALIAS, EMPTY_HEX_ID, OUTPUT_TYPE_ALIAS } from '@core/wallet/constants'
-import { IAliasOutput } from '@iota/types'
+import { IAccountState } from '@core/account'
+import { ADDRESS_TYPE_ALIAS, EMPTY_HEX_ID } from '@core/wallet/constants'
+import { ActivityType } from '@core/wallet/enums'
 import { AliasActivity } from '@core/wallet/types'
+import { IAliasOutput } from '@iota/types'
+import { convertHexAddressToBech32, hashOutputId, IActivityGenerationParameters } from '..'
 import {
     getAmountFromOutput,
     getAsyncDataFromOutput,
@@ -14,14 +14,12 @@ import {
     getStorageDepositFromOutput,
     getTagFromOutput,
 } from './helper'
-import { IAccountState } from '@core/account'
 
 export function generateAliasActivity(
-    processedTransaction: IProcessedTransaction,
-    account: IAccountState
+    account: IAccountState,
+    { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
 ): AliasActivity {
-    const { outputs, utxoInputs, transactionId, claimingData, direction, time, inclusionState } = processedTransaction
-    const wrappedOutput = outputs.find((output) => output.output.type === OUTPUT_TYPE_ALIAS)
+    const { utxoInputs, transactionId, claimingData, direction, time, inclusionState } = processedTransaction
 
     const output = wrappedOutput.output as IAliasOutput
     const outputId = wrappedOutput.outputId
@@ -32,11 +30,10 @@ export function generateAliasActivity(
     const governorAddress = getGovernorAddressFromAliasOutput(output)
     const stateControllerAddress = getStateControllerAddressFromAliasOutput(output)
     const aliasId = getAliasId(output, outputId)
-    const action = output.aliasId === EMPTY_HEX_ID ? ActivityAction.Mint : ActivityAction.Send
 
     const isHidden = false
     const isAssetHidden = false
-    const containsValue = outputContainsValue(processedTransaction, account)
+    const containsValue = true
 
     const inputs = utxoInputs
 

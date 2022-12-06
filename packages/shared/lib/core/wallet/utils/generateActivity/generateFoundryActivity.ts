@@ -1,15 +1,12 @@
+import { IAccountState } from '@core/account'
 import { COIN_TYPE } from '@core/network'
 import { activeProfile } from '@core/profile'
-import { get } from 'svelte/store'
-import { IProcessedTransaction } from '../../interfaces'
-import {
-    getNativeTokenFromOutput,
-    getFoundryOutputFromTransaction,
-    outputContainsValue,
-    convertHexAddressToBech32,
-} from '..'
-import { ActivityAction, ActivityType } from '@core/wallet/enums'
+import { ADDRESS_TYPE_ALIAS, UNLOCK_CONDITION_IMMUTABLE_ALIAS } from '@core/wallet/constants'
+import { ActivityType } from '@core/wallet/enums'
 import { FoundryActivity } from '@core/wallet/types'
+import type { IAliasAddress, IFoundryOutput, IImmutableAliasUnlockCondition } from '@iota/types'
+import { get } from 'svelte/store'
+import { convertHexAddressToBech32, getNativeTokenFromOutput, IActivityGenerationParameters } from '..'
 import {
     getAmountFromOutput,
     getAsyncDataFromOutput,
@@ -18,16 +15,12 @@ import {
     getStorageDepositFromOutput,
     getTagFromOutput,
 } from './helper'
-import { IAccountState } from '@core/account'
-import type { IAliasAddress, IFoundryOutput, IImmutableAliasUnlockCondition } from '@iota/types'
-import { ADDRESS_TYPE_ALIAS, UNLOCK_CONDITION_IMMUTABLE_ALIAS } from '@core/wallet/constants'
 
 export function generateFoundryActivity(
-    processedTransaction: IProcessedTransaction,
-    account: IAccountState
+    account: IAccountState,
+    { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
 ): FoundryActivity {
-    const { outputs, transactionId, claimingData, utxoInputs, time, direction, inclusionState } = processedTransaction
-    const wrappedOutput = getFoundryOutputFromTransaction(outputs)
+    const { transactionId, claimingData, utxoInputs, time, direction, inclusionState } = processedTransaction
 
     const output = wrappedOutput.output as IFoundryOutput
     const outputId = wrappedOutput.outputId
@@ -41,7 +34,7 @@ export function generateFoundryActivity(
 
     const isHidden = false
     const isAssetHidden = false
-    const containsValue = outputContainsValue(processedTransaction, account)
+    const containsValue = true
 
     const inputs = utxoInputs
 
@@ -54,7 +47,6 @@ export function generateFoundryActivity(
     const metadata = getMetadataFromOutput(output)
     const tag = getTagFromOutput(output)
 
-    const action = ActivityAction.Mint
     const sendingInfo = getSendingInformation(processedTransaction, output, account)
     const asyncData = getAsyncDataFromOutput(output, outputId, claimingData, account)
 

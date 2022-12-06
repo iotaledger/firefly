@@ -6,9 +6,8 @@ import { activeProfile, activeProfileId } from '@core/profile'
 import { TransactionActivity } from '@core/wallet/types'
 import { IBasicOutput } from '@iota/types'
 import { get } from 'svelte/store'
-import { ActivityAction, ActivityType } from '../../enums'
-import { IProcessedTransaction } from '../../interfaces'
-import { getNativeTokenFromOutput, getMainOutputFromTransaction, outputContainsValue } from '../../utils'
+import { ActivityType } from '../../enums'
+import { activityOutputContainsValue, getNativeTokenFromOutput, IActivityGenerationParameters } from '../../utils'
 import {
     getAmountFromOutput,
     getAsyncDataFromOutput,
@@ -19,18 +18,17 @@ import {
 } from './helper'
 
 export function generateTransactionActivity(
-    processedTransaction: IProcessedTransaction,
-    account: IAccountState
+    account: IAccountState,
+    { type, action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
 ): TransactionActivity {
-    const { outputs, transactionId, direction, claimingData, time, inclusionState, utxoInputs } = processedTransaction
+    const { transactionId, direction, claimingData, time, inclusionState, utxoInputs } = processedTransaction
 
     const isHidden = false
     const isAssetHidden = false
-    const containsValue = outputContainsValue(processedTransaction, account)
+    const containsValue = activityOutputContainsValue(type, wrappedOutput)
 
     const inputs = utxoInputs
 
-    const wrappedOutput = getMainOutputFromTransaction(outputs, account.depositAddress, direction)
     const outputId = wrappedOutput.outputId
     const id = outputId || transactionId
 
@@ -46,8 +44,6 @@ export function generateTransactionActivity(
     const metadata = getMetadataFromOutput(output)
     const tag = getTagFromOutput(output)
     const publicNote = ''
-
-    const action = ActivityAction.Send
 
     const sendingInfo = getSendingInformation(processedTransaction, output, account)
     const asyncData = getAsyncDataFromOutput(output, outputId, claimingData, account)
