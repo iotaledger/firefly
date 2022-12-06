@@ -2,6 +2,7 @@ import {
     AccountSyncOptions,
     ClientOptions,
     EventType,
+    GenerateAddressOptions,
     LedgerNanoStatus,
     NodeInfoWrapper,
     WalletEvent,
@@ -20,6 +21,13 @@ export interface IProfileManager {
     clearStrongholdPassword(): Promise<void>
     destroy(): void
     emitTestEvent(event: WalletEvent): Promise<void>
+    generateAddress(
+        accountIndex: number,
+        internal: boolean,
+        addressIndex: number,
+        options?: GenerateAddressOptions,
+        bech32Hrp?: string
+    ): Promise<string>
     generateMnemonic(): Promise<string>
     getAccountIndexes(): Promise<number[]>
     getAccount(accountIndex: number): Promise<IAccount>
