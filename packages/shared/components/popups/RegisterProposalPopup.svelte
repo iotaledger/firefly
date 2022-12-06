@@ -29,7 +29,9 @@
             })
             closePopup()
         } catch (err) {
-            handleError(err)
+            if (!nodeUrlError && !eventIdError) {
+                handleError(err)
+            }
         }
     }
 
@@ -42,6 +44,17 @@
         const hasEventId = !!eventId
         if (!hasEventId) {
             eventIdError = localize('error.eventId.invalid')
+            throw new Error(eventIdError)
+        }
+        const startsWith0x = eventId?.substring(0, 2) === '0x'
+        if (!startsWith0x) {
+            eventIdError = localize('error.eventId.doNotStartWith0x')
+            throw new Error(eventIdError)
+        }
+        const hexLength = eventId?.substring(2)?.length
+        const has64Length = hexLength === 64
+        if (!has64Length) {
+            eventIdError = localize('error.eventId.hasNot64Length', { values: { length: hexLength } })
             throw new Error(eventIdError)
         }
     }

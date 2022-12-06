@@ -1771,7 +1771,9 @@
         },
         "noOutputsToConsolidate": "Not enough outputs to consolidate",
         "eventId": {
-            "invalid": "Please enter a valid event ID."
+            "invalid": "Please enter a valid event ID.",
+            "doNotStartWith0x": "Event ID should start with '0x'",
+            "hasNot64Length": "Event ID length should be 64 instead of {length}"
         }
     },
     "warning": {
