@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const COLLECTIBLES_AUDIO_PLACEHOLDER_SVG: ISvg = {
+export const COLLECTIBLES_AUDIO_SMALL_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

@@ -63,7 +63,7 @@
     class="flex justify-center items-center transition-none p-{padding} bg-gray-500 w-{width} h-{height} rounded-{radius} {classes}"
 >
     {#if !isLoaded}
-        <NftPlaceholderIcon {nft} />
+        <NftPlaceholderIcon {nft} {size} />
     {:else}
         <div>
             <!-- Loaded and Secure NFT Media  -->
