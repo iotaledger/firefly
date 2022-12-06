@@ -7,7 +7,7 @@
 
     export let nftId: string = ''
     export let error: string = ''
-    export let readonly: boolean = false
+    export let readonly: boolean = null
 
     let inputElement: HTMLInputElement = undefined
     let modal: Modal = undefined

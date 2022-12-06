@@ -13,7 +13,10 @@ export async function burnAsset(assetId: string, rawAmount: string): Promise<voi
     const account = get(selectedAccount)
     const _activeProfile = get(activeProfile)
     try {
-        const burnTokenTransaction = await account.burnNativeToken(assetId, Converter.decimalToHex(Number(rawAmount)))
+        const burnTokenTransaction = await account.burnNativeToken(
+            assetId,
+            Converter.decimalToHex(Number(rawAmount), true)
+        )
 
         // Generate Activity
         const processedTransaction = await preprocessTransaction(burnTokenTransaction, account)
