@@ -12,6 +12,8 @@
     export let options: IOption[] = []
     export let selected: IOption = undefined
     export let maxHeight: string = 'max-h-64'
+    // HTML checks whether this value is absent to determine whether the field is readonly
+    // If the attribute is set to false, HTML interprets it as a readonly field.
     export let readonly: boolean = null
 
     let value: string = selected?.key ?? selected?.value
