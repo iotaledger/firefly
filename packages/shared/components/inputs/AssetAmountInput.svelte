@@ -20,7 +20,7 @@
     export let rawAmount: string = undefined
     export let unit: string = undefined
     export let containsSlider: boolean = false
-    export let disableAssetSelection: boolean = false
+    export let disableAssetSelection: boolean = null
 
     let amount: string = rawAmount
         ? formatTokenAmountDefault(Number(rawAmount), asset?.metadata, unit, false)
