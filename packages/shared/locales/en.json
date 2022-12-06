@@ -1008,6 +1008,10 @@
             "title": "Manage voting power",
             "body": "Define your voting power to vote on proposals.",
             "hint": "Increasing your voting power locks your funds. In order to make them spendable again, you need to decrease your voting power. This affects all proposals with an active vote."
+        },
+        "registerProposal": {
+            "title": "Register proposal",
+            "body": "Please provide the information listed below to register a proposal."
         }
     },
     "charts": {
