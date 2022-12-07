@@ -14,8 +14,8 @@
 
     // primaryColor: gives extra color customization outside of default text colors, used in CollectiblesImageLarge to change mountain color
     // secondaryColor: alters the large icon's circle color
-    $: primaryColor = $appSettings.darkMode ? '#1B2D4B' : '#C4D1E8'
-    $: secondaryColor = $appSettings.darkMode ? '#D8E3F5' : '#D8E3F5'
+    $: primaryColor = $appSettings.darkMode ? '#25395F' : '#C4D1E8'
+    $: secondaryColor = $appSettings.darkMode ? '#F0F5FE' : '#D8E3F5'
 
     let iconSize: 'Small' | 'Large'
     $: iconSize =
