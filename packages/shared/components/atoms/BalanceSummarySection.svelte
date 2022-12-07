@@ -22,7 +22,7 @@
     const SECONDARY_COLOR = 'gray-600'
     const SECONDARY_DARK_COLOR = 'gray-400'
     const SECONDARY_FONT_SIZE = '13'
-    const SECONDARY_FONT_WEIGHT = FontWeight.medium
+    const SECONDARY_FONT_WEIGHT = FontWeight.normal
     const SECONDARY_LINE_HEIGHT = '4'
 </script>
 
