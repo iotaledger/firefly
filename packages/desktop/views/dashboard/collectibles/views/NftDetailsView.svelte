@@ -76,7 +76,7 @@
 </script>
 
 <div class="flex flex-row w-full h-full space-x-4 overflow-auto">
-    <div class="flex w-full h-full bg-gray-100 dark:bg-gray-500 items-center justify-center rounded-2xl">
+    <div class="flex w-full h-full bg-gray-500 items-center justify-center rounded-2xl">
         <NftMediaContainer nftId={id} size={NftMediaSize.ExtraLarge} />
     </div>
     <Pane classes="flex flex-col p-6 w-full h-full max-w-lg">

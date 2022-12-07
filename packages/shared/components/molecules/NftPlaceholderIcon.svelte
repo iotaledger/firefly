@@ -52,5 +52,5 @@
     {height}
     {primaryColor}
     {secondaryColor}
-    classes="text-white dark:text-gray-800 bg-gray-100 dark:bg-gray-500 text-center"
+    classes="text-white dark:text-gray-800 dark:bg-gray-500 text-center"
 />
