@@ -14,6 +14,8 @@
     let height
     let radius
     let padding
+    let bgColor
+    let darkBgColor
     $: size, setShapeAndSize()
     function setShapeAndSize(): void {
         switch (size) {
@@ -44,16 +46,22 @@
                 // squircle or circle
                 radius = shape === 'squircle' ? '2xl' : 'full'
                 padding = 2
+                bgColor = 'gray-200'
+                darkBgColor = 'gray-700'
                 break
             case NftMediaSize.ExtraLarge:
                 width = 'w-96'
                 height = 'h-96'
                 // squircle or circle
                 radius = shape === 'squircle' ? '2xl' : 'full'
+                bgColor = 'gray-200'
+                darkBgColor = 'gray-700'
                 break
             case NftMediaSize.Flexible:
                 // squircle or circle
                 radius = shape === 'squircle' ? '2xl' : 'full'
+                bgColor = 'gray-200'
+                darkBgColor = 'gray-700'
                 break
         }
 
@@ -65,10 +73,10 @@
 </script>
 
 <div
-    class="overflow-hidden flex justify-center items-center transition-none flex-shrink-0 p-{padding} bg-gray-500 {width} {height} rounded-{radius} {classes}"
+    class="overflow-hidden flex justify-center items-center transition-none flex-shrink-0 p-{padding} bg-gray-500 dark:bg-gray-500 {width} {height} rounded-{radius} {classes}"
 >
     {#if !isLoaded}
-        <NftPlaceholderIcon {nft} {size} />
+        <NftPlaceholderIcon {nft} {size} {bgColor} {darkBgColor} />
     {:else}
         <div>
             <!-- Loaded and Secure NFT Media  -->
