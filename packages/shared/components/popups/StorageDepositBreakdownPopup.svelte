@@ -14,7 +14,7 @@
     let accountBalance: AccountBalance
     $: $selectedAccount, void getAccountBalance()
     async function getAccountBalance(): Promise<void> {
-        accountBalance = await await $selectedAccount.getBalance()
+        accountBalance = await $selectedAccount.getBalance()
     }
 
     let potentiallyLockedOutputsStorageDeposit: number
