@@ -16,7 +16,10 @@
     $: secondaryColor = $appSettings.darkMode ? '#D8E3F5' : '#D8E3F5'
 
     let iconSize: 'Small' | 'Large'
-    $: iconSize = size === NftMediaSize.Large || size === NftMediaSize.ExtraLarge ? 'Large' : 'Small'
+    $: iconSize =
+        size === NftMediaSize.Large || size === NftMediaSize.ExtraLarge || size === NftMediaSize.Flexible
+            ? 'Large'
+            : 'Small'
     $: icon = mapNftToIcon(nft, iconSize)
 
     function mapNftToIcon(nft: INft, iconSize: 'Small' | 'Large'): IconEnum {
