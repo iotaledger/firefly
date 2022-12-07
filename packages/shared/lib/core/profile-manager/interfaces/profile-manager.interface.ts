@@ -1,9 +1,12 @@
-import {
+import type {
     AccountSyncOptions,
     ClientOptions,
+    Event,
+    EventId,
     EventType,
     GenerateAddressOptions,
     LedgerNanoStatus,
+    Node,
     NodeInfoWrapper,
     WalletEvent,
 } from '@iota/wallet'
@@ -20,6 +23,7 @@ export interface IProfileManager {
     changeStrongholdPassword(currentPassword: string, newPassword: string): Promise<void>
     clearStrongholdPassword(): Promise<void>
     destroy(): void
+    deregisterParticipationEvent(eventId: EventId): Promise<void>
     emitTestEvent(event: WalletEvent): Promise<void>
     generateAddress(
         accountIndex: number,
@@ -38,6 +42,7 @@ export interface IProfileManager {
     isStrongholdPasswordAvailable(): Promise<boolean>
     listen(eventTypes: EventType[], callback: WalletApiEventHandler): void
     clearListeners(eventTypes: EventType[]): void
+    registerParticipationEvent(eventId: EventId, nodes: Node[]): Promise<Event>
     removeLatestAccount(): Promise<void>
     restoreBackup(source: string, password: string): Promise<void>
     setClientOptions(options: ClientOptions): Promise<void>

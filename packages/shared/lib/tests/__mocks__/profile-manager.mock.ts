@@ -9,6 +9,8 @@ import type {
     WalletEvent,
     LedgerNanoStatus,
     GenerateAddressOptions,
+    Event,
+    Node,
 } from '@iota/wallet'
 
 import { IAccount } from '@core/account'
@@ -51,6 +53,10 @@ export class ProfileManagerMock implements IProfileManager {
 
     destroy(): Promise<void> {
         return Promise.resolve()
+    }
+
+    deregisterParticipationEvent(eventId: string): Promise<void> {
+        throw new Error('Method not implemented.')
     }
 
     emitTestEvent(event: WalletEvent): Promise<void> {
@@ -164,6 +170,10 @@ export class ProfileManagerMock implements IProfileManager {
         syncOptions: AccountSyncOptions
     ): Promise<IAccount[]> {
         return Promise.resolve([])
+    }
+
+    registerParticipationEvent(eventId: string, nodes?: Node[]): Promise<Event> {
+        throw new Error('Method not implemented.')
     }
 
     removeLatestAccount(): Promise<void> {
