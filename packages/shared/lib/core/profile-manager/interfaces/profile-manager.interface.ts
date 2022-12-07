@@ -30,6 +30,8 @@ export interface IProfileManager {
     getAccounts(): Promise<IAccount[]>
     getNodeInfo(url?: string, auth?: IAuth): Promise<NodeInfoWrapper>
     getLedgerNanoStatus(): Promise<LedgerNanoStatus>
+    getParticipationEvent(eventId: EventId): Promise<Event>
+    getParticipationEvents(): Promise<Event[]>
     hexToBech32(hex: string, bech32Hrp?: string): Promise<string>
     isStrongholdPasswordAvailable(): Promise<boolean>
     listen(eventTypes: EventType[], callback: WalletApiEventHandler): void
