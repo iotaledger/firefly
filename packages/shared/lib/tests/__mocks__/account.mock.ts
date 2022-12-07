@@ -229,6 +229,14 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
+    retryTransactionUntilIncluded(
+        transactionId: string,
+        interval?: number | undefined,
+        maxAttempts?: number | undefined
+    ): Promise<PreparedTransactionData> {
+        throw new Error('Method not implemented.')
+    }
+
     sendAmount(
         addressesWithAmount: AddressWithAmount[],
         transactionOptions?: TransactionOptions
