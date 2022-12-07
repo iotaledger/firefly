@@ -12,7 +12,7 @@
         NftActivityDetails,
         ActivityInformation,
     } from 'shared/components'
-    import { Platform } from '@core/app'
+    import { openUrlInBrowser } from '@core/app'
     import {
         ActivityAsyncStatus,
         ActivityDirection,
@@ -84,7 +84,7 @@
     }
 
     function handleExplorerClick(): void {
-        Platform.openUrl(`${explorerUrl}/${ExplorerEndpoint.Transaction}/${activity.transactionId}`)
+        openUrlInBrowser(`${explorerUrl}/${ExplorerEndpoint.Transaction}/${activity.transactionId}`)
     }
 
     function handleTransactionIdClick(): void {

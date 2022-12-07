@@ -21,7 +21,7 @@
     import { ActivityType, formatTokenAmountPrecise } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network/constants'
     import { activeProfile } from '@core/profile/stores'
-    import { Platform } from '@core/app'
+    import { openUrlInBrowser } from '@core/app'
     import { ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
     import { openPopup } from '@auxiliary/popup'
 
@@ -58,7 +58,7 @@
     }
 
     function handleExplorerClick(): void {
-        Platform.openUrl(`${explorerUrl}/${ExplorerEndpoint.Nft}/${id}`)
+        openUrlInBrowser(`${explorerUrl}/${ExplorerEndpoint.Nft}/${id}`)
     }
 
     function handleSendClick(): void {
