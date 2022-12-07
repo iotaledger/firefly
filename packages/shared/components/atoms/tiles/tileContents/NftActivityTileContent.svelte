@@ -50,20 +50,16 @@
     <NftMediaContainer nftId={activity.nftId} size={NftMediaSize.Small} />
 </div>
 
-<div class="flex flex-col w-full space-y-0.5">
+<div class="flex flex-col w-full space-y-0.5 overflow-hidden">
     <div class="flex flex-row justify-between space-x-1">
-        <Text
-            fontWeight={FontWeight.semibold}
-            lineHeight="140"
-            classes="overflow-hidden overflow-ellipsis multiwrap-line2"
-        >
+        <Text fontWeight={FontWeight.semibold} lineHeight="140" classes="flex-shrink-0">
             {localize(title)}
         </Text>
         <Text
             fontWeight={FontWeight.semibold}
             lineHeight="140"
             color={isIncoming ? 'blue-700' : ''}
-            classes="whitespace-nowrap"
+            classes="overflow-hidden overflow-ellipsis whitespace-nowrap"
         >
             {nft?.name ?? ''}
         </Text>
