@@ -1663,7 +1663,7 @@
                 "Confirmed": "överfört till",
                 "Conflicting": "misslyckad överföring"
             },
-            "selftransaction": {
+            "selfTransaction": {
                 "Pending": "överför till",
                 "Confirmed": "överfört till",
                 "Conflicting": "misslyckad överföring"

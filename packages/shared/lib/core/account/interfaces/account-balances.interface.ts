@@ -1,3 +1,5 @@
+import { RequiredStorageDeposit } from '@iota/wallet'
+
 export interface IAccountBalances {
     aliases: unknown[]
     available: number
@@ -5,6 +7,6 @@ export interface IAccountBalances {
     nativeToken: Record<string, unknown>
     nfts: unknown[]
     potentiallLockedOutputs: unknown[]
-    requiredStorageDeposit: number
+    requiredStorageDeposit: RequiredStorageDeposit
     total: number
 }

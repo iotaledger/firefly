@@ -1663,7 +1663,7 @@
                 "Confirmed": "übertragen zu",
                 "Conflicting": "Übertragung fehlgeschlagen"
             },
-            "selftransaction": {
+            "selfTransaction": {
                 "Pending": "übertrage an",
                 "Confirmed": "übertragen zu",
                 "Conflicting": "Übertragung fehlgeschlagen"

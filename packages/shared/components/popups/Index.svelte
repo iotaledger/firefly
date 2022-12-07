@@ -33,6 +33,7 @@
     import MintNftConfirmationPopup from './MintNftConfirmationPopup.svelte'
     import NodeInfoPopup from './NodeInfoPopup.svelte'
     import ReceiveAddressPopup from './ReceiveAddressPopup.svelte'
+    import RegisterProposalPopup from './RegisterProposalPopup.svelte'
     import RemoveNode from './RemoveNode.svelte'
     import { SendFormPopup, SendConfirmationPopup } from './send'
     import StorageDepositBreakdownPopup from './StorageDepositBreakdownPopup.svelte'
@@ -99,6 +100,7 @@
         verifyLedgerTransaction: VerifyLedgerTransactionPopup,
         nodeInfo: NodeInfoPopup,
         addNode: AddNodePopup,
+        registerProposal: RegisterProposalPopup,
         removeNode: RemoveNode,
         storageDepositBreakdown: StorageDepositBreakdownPopup,
         errorLog: ErrorLog,

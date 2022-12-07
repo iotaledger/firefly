@@ -4,4 +4,5 @@ export enum NftMediaSize {
     Medium = 'medium',
     Large = 'large',
     ExtraLarge = 'extraLarge',
+    Flexible = 'flexible',
 }
