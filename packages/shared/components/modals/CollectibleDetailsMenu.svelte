@@ -65,15 +65,14 @@
 
 <Modal bind:this={modal} position={{ top: '100px', right: '60px' }}>
     <div class="flex flex-col">
-        <MenuItem icon="receive" title={localize('views.collectibles.details.menu.download')} first />
-        <MenuItem icon="profile" title={localize('views.collectibles.details.menu.setAvatar')} />
-        {#if url}
-            <MenuItem
-                icon="export"
-                title={localize('views.collectibles.details.menu.view')}
-                onClick={handleOpenMediaClick}
-            />
-        {/if}
+        <MenuItem icon="receive" title={localize('views.collectibles.details.menu.download')} disabled={true} />
+        <MenuItem icon="profile" title={localize('views.collectibles.details.menu.setAvatar')} disabled={true} />
+        <MenuItem
+            icon="export"
+            title={localize('views.collectibles.details.menu.view')}
+            onClick={handleOpenMediaClick}
+            disabled={!url}
+        />
         <MenuItem icon="delete" title={localize('views.collectibles.details.menu.burn')} onClick={openBurnNft} />
     </div>
 </Modal>
