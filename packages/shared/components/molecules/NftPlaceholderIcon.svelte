@@ -10,8 +10,10 @@
     const width = '125%'
     const height = '125%'
 
-    $: primaryColor = $appSettings.darkMode ? '#9AADCE' : '#F0F5FE'
-    $: secondaryColor = $appSettings.darkMode ? '#9AADCE' : '#D8E3F5'
+    // primaryColor: gives extra color customization outside of default text colors, used in CollectiblesImageLarge to change mountain color
+    // secondaryColor: alters the large icon's circle color
+    $: primaryColor = $appSettings.darkMode ? '#25395F' : '#C4D1E8'
+    $: secondaryColor = $appSettings.darkMode ? '#D8E3F5' : '#D8E3F5'
 
     let iconSize: 'Small' | 'Large'
     $: iconSize = size === NftMediaSize.Large || size === NftMediaSize.ExtraLarge ? 'Large' : 'Small'
@@ -47,5 +49,5 @@
     {height}
     {primaryColor}
     {secondaryColor}
-    classes="bg-gray-100 text-white dark:text-gray-800 text-center"
+    classes="text-white dark:text-gray-800 bg-gray-100 dark:bg-gray-500 text-center"
 />
