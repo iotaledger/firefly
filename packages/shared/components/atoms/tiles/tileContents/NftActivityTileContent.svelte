@@ -51,7 +51,7 @@
 </div>
 
 <div class="flex flex-col w-full space-y-0.5 overflow-hidden">
-    <div class="flex flex-row justify-between space-x-1">
+    <div class="flex flex-row justify-between space-x-4">
         <Text fontWeight={FontWeight.semibold} lineHeight="140" classes="flex-shrink-0">
             {localize(title)}
         </Text>
