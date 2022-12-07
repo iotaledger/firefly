@@ -4,6 +4,7 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let nft: INft = undefined
+    export let classes: string = ''
 
     const width = '100%'
     const height = '100%'
@@ -34,4 +35,4 @@
     }
 </script>
 
-<Icon {icon} {width} {height} classes="text-white dark:text-gray-800 text-center" />
+<Icon {icon} {width} {height} classes="text-white dark:text-gray-800 text-center {classes}" />
