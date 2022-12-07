@@ -7,8 +7,8 @@
     export let nft: INft = undefined
     export let size: NftMediaSize
 
-    const width = '125%'
-    const height = '125%'
+    const width = '100%'
+    const height = '100%'
 
     // primaryColor: gives extra color customization outside of default text colors, used in CollectiblesImageLarge to change mountain color
     // secondaryColor: alters the large icon's circle color

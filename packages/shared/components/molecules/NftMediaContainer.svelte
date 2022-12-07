@@ -19,14 +19,14 @@
         switch (size) {
             case NftMediaSize.ExtraSmall:
                 width = 'w-6'
-                height = 6
+                height = 'w-6'
                 // squircle or circle
                 radius = shape === 'squircle' ? 'md' : 'full'
                 padding = 1
                 break
             case NftMediaSize.Small:
                 width = 'w-8'
-                height = 8
+                height = 'w-8'
                 // squircle or circle
                 radius = shape === 'squircle' ? 'lg' : 'full'
                 padding = 2
