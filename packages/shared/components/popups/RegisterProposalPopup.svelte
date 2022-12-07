@@ -21,7 +21,7 @@
 
     async function handleConfirm(): Promise<void> {
         try {
-            validate()
+            await Promise.all([validateEventId(), validateNodeUrl()])
             await registerParticipationEvent(eventId, [{ url: nodeUrl }])
             showAppNotification({
                 type: 'success',
@@ -35,27 +35,25 @@
         }
     }
 
-    function validate(): void {
-        const isValid = isValidUrl(nodeUrl)
-        if (!isValid) {
+    async function validateNodeUrl(): Promise<void> {
+        if (!isValidUrl(nodeUrl)) {
             nodeUrlError = localize('error.node.invalid')
-            throw new Error(nodeUrlError)
+            return Promise.reject(nodeUrlError)
         }
-        const hasEventId = !!eventId
-        if (!hasEventId) {
-            eventIdError = localize('error.eventId.invalid')
-            throw new Error(eventIdError)
-        }
+    }
+
+    async function validateEventId(): Promise<void> {
         const startsWith0x = eventId?.substring(0, 2) === '0x'
         if (!startsWith0x) {
-            eventIdError = localize('error.eventId.doNotStartWith0x')
-            throw new Error(eventIdError)
+            eventIdError = localize('error.eventId.doesNotStartWith0x')
+            return Promise.reject(eventIdError)
         }
+
         const hexLength = eventId?.substring(2)?.length
         const has64Length = hexLength === 64
         if (!has64Length) {
-            eventIdError = localize('error.eventId.hasNot64Length', { values: { length: hexLength } })
-            throw new Error(eventIdError)
+            eventIdError = localize('error.eventId.insufficientLength')
+            return Promise.reject(eventIdError)
         }
     }
 </script>
