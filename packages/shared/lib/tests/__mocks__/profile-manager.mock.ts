@@ -8,6 +8,7 @@ import type {
     EventType,
     WalletEvent,
     LedgerNanoStatus,
+    GenerateAddressOptions,
     Event,
     Node,
 } from '@iota/wallet'
@@ -64,6 +65,16 @@ export class ProfileManagerMock implements IProfileManager {
 
     generateMnemonic(): Promise<string> {
         return Promise.resolve(MOCK_MNEMONIC)
+    }
+
+    generateAddress(
+        accountIndex: number,
+        internal: boolean,
+        addressIndex: number,
+        options?: GenerateAddressOptions,
+        bech32Hrp?: string
+    ): Promise<string> {
+        throw new Error('Method not implemented.')
     }
 
     getAccount(accountIndex: AccountId): Promise<IAccount> {
