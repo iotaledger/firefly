@@ -65,7 +65,7 @@
 </script>
 
 <div
-    class="flex justify-center items-center transition-none p-{padding} bg-gray-500 {width} {height} rounded-{radius} {classes}"
+    class="flex justify-center items-center transition-none flex-shrink-0 p-{padding} bg-gray-500 {width} {height} rounded-{radius} {classes}"
 >
     {#if !isLoaded}
         <NftPlaceholderIcon {nft} classes={placeholderClasses} />

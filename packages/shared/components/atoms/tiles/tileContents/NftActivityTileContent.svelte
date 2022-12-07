@@ -21,16 +21,16 @@
         const isConfirmed = inclusionState === InclusionState.Confirmed
 
         if (action === ActivityAction.Mint) {
-            return isConfirmed ? 'general.mintedNft' : 'general.mintingNft'
+            return isConfirmed ? 'general.minted' : 'general.minting'
         }
         if (isInternal) {
-            return isConfirmed ? 'general.transferNft' : 'general.transferringNft'
+            return isConfirmed ? 'general.transfer' : 'general.transferring'
         }
         if (direction === ActivityDirection.Incoming || direction === ActivityDirection.SelfTransaction) {
-            return isConfirmed ? 'general.receivedNft' : 'general.receivingNft'
+            return isConfirmed ? 'general.received' : 'general.receiving'
         }
         if (direction === ActivityDirection.Outgoing) {
-            return isConfirmed ? 'general.sentNft' : 'general.sendingNft'
+            return isConfirmed ? 'general.sent' : 'general.sending'
         }
     }
 
@@ -50,26 +50,21 @@
     <NftMediaContainer nftId={activity.nftId} size={NftMediaSize.Small} />
 </div>
 
-<div class="flex flex-col w-full space-y-0.5">
-    <div class="flex flex-row items-start">
-        <Text
-            fontWeight={FontWeight.semibold}
-            lineHeight="140"
-            classes="overflow-hidden overflow-ellipsis multiwrap-line2"
-        >
+<div class="flex flex-col w-full space-y-0.5 overflow-hidden">
+    <div class="flex flex-row justify-between space-x-4">
+        <Text fontWeight={FontWeight.semibold} lineHeight="140" classes="flex-shrink-0">
             {localize(title)}
+        </Text>
+        <Text fontWeight={FontWeight.semibold} lineHeight="140" color={isIncoming ? 'blue-700' : ''} classes="truncate">
+            {nft?.name ?? ''}
         </Text>
     </div>
 
     <div class="flex flex-row items-start" style="width: 70%">
         <Text fontWeight={FontWeight.normal} lineHeight="140" color="gray-600" classes="truncate">
-            {#if activity.action === ActivityAction.Mint}
-                {nft?.name}
-            {:else}
-                {localize(isIncoming ? 'general.fromAddress' : 'general.toAddress', {
-                    values: { account: subjectLocale },
-                })}
-            {/if}
+            {localize(isIncoming ? 'general.fromAddress' : 'general.toAddress', {
+                values: { account: subjectLocale },
+            })}
         </Text>
     </div>
 </div>
