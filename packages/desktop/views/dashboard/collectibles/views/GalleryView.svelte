@@ -69,7 +69,7 @@
             </div>
         </div>
 
-        <div class="w-full h-full flex items-center justify-start grow-1">
+        <div class="w-full h-full ">
             {#if $queriedNfts.length}
                 <div class="h-full gallery-grid scrollable-y">
                     {#each $queriedNfts as nft}
@@ -77,7 +77,7 @@
                     {/each}
                 </div>
             {:else}
-                <div class="flex flex-col items-center space-y-8">
+                <div class="w-full h-full flex flex-col items-center justify-center space-y-8">
                     <Illustration illustration="empty-collectibles" width="134" height="134" />
                     <Text fontSize="text-14" fontWeight={FontWeight.semibold} color="gray-500"
                         >{localize('views.collectibles.gallery.noResults')}</Text
