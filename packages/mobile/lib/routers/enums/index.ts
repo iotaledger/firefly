@@ -1,11 +1,6 @@
 export * from './onboarding'
+export * from './dashboard'
 
-export * from './account-switcher-route.enum'
-export * from './activity-route.enum'
 export * from './app-route.enum'
 export * from './dashboard-route.enum'
 export * from './login-route.enum'
-export * from './onboarding'
-export * from './profile-route.enum'
-export * from './send-route.enum'
-export * from './token-route.enum'
