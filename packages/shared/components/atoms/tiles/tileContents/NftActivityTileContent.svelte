@@ -55,12 +55,7 @@
         <Text fontWeight={FontWeight.semibold} lineHeight="140" classes="flex-shrink-0">
             {localize(title)}
         </Text>
-        <Text
-            fontWeight={FontWeight.semibold}
-            lineHeight="140"
-            color={isIncoming ? 'blue-700' : ''}
-            classes="overflow-hidden overflow-ellipsis whitespace-nowrap"
-        >
+        <Text fontWeight={FontWeight.semibold} lineHeight="140" color={isIncoming ? 'blue-700' : ''} classes="truncate">
             {nft?.name ?? ''}
         </Text>
     </div>
