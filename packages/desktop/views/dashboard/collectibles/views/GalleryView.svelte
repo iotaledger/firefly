@@ -71,7 +71,7 @@
 
         <div class="w-full h-full flex items-center justify-start grow-1">
             {#if $queriedNfts.length}
-                <div class="h-full flex flex-wrap flex-row gap-6 scrollable-y">
+                <div class="h-full gallery-grid scrollable-y">
                     {#each $queriedNfts as nft}
                         <NftGalleryItem {nft} onClick={() => handleNftClick(nft)} />
                     {/each}
@@ -102,3 +102,25 @@
         </div>
     {/if}
 </div>
+
+<style lang="scss">
+    .gallery-grid {
+        --grid-layout-gap: 1rem;
+        --grid-column-count: 6;
+        --grid-item--min-width: 240px;
+
+        /**
+        * Calculated values.
+        */
+        --gap-count: calc(var(--grid-column-count) - 1);
+        --total-gap-width: calc(var(--gap-count) * var(--grid-layout-gap));
+        --grid-item--max-width: calc((100% - var(--total-gap-width)) / var(--grid-column-count));
+
+        display: grid;
+        grid-template-columns: repeat(
+            auto-fill,
+            minmax(max(var(--grid-item--min-width), var(--grid-item--max-width)), 1fr)
+        );
+        grid-gap: var(--grid-layout-gap);
+    }
+</style>
