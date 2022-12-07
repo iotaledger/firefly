@@ -2,6 +2,7 @@ import { closePopup, openPopup } from '@auxiliary/popup'
 import { localize } from '@core/i18n'
 import { Platform } from '../classes/platform.class'
 import { externalAllowedLinks } from '../constants'
+import { showAppNotification } from '@auxiliary/notification'
 
 export function openUrlInBrowser(targetUrl: string): void {
     const url = new URL(targetUrl)
@@ -9,7 +10,13 @@ export function openUrlInBrowser(targetUrl: string): void {
 
     const isAllowed = externalAllowedLinks.includes(domain) || externalAllowedLinks.includes(domain + url.pathname)
 
-    if (isAllowed) {
+    if (url.protocol !== 'https:') {
+        showAppNotification({
+            alert: true,
+            type: 'error',
+            message: localize('popups.externalUrl.invalidProtocol'),
+        })
+    } else if (isAllowed) {
         Platform.openUrl(targetUrl)
     } else {
         openPopup({

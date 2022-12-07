@@ -1,6 +1,6 @@
 <script lang="ts">
     import { collectiblesRoute, CollectiblesRoute } from '@core/router'
-    import { DetailsView, GalleryView } from './views'
+    import { NftDetailsView, GalleryView } from './views'
 </script>
 
 <div class="w-full h-full flex flex-col flex-nowrap p-8 relative flex-1 bg-gray-50 dark:bg-gray-900">
@@ -8,6 +8,6 @@
         <GalleryView />
     {/if}
     {#if $collectiblesRoute === CollectiblesRoute.Details}
-        <DetailsView />
+        <NftDetailsView />
     {/if}
 </div>

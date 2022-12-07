@@ -563,7 +563,7 @@
                 "menu": {
                     "download": "Download",
                     "setAvatar": "Set NFT as profile avatar",
-                    "view": "View in IPFS",
+                    "view": "View media in browser",
                     "burn": "Burn NFT"
                 }
             },
@@ -704,7 +704,8 @@
             "title": "Open URL in Browser",
             "body": "Are you sure you want to open \"{url}\" in the browser?",
             "hint": "This URL is unknown to Firefly. Please double check the URL before opening it.",
-            "action": "Open URL"
+            "action": "Open URL",
+            "invalidProtocol": "Cannot open URL with invalid protocol"
         },
         "hideAccount": {
             "title": "Hide {name}?",
