@@ -4,12 +4,14 @@
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { burnNft } from '@core/wallet'
-    import { INft } from '@core/nfts'
+    import { INft, rewriteIpfsUri } from '@core/nfts'
     import { CollectiblesRoute, collectiblesRouter } from '@core/router'
     import { openUrlInBrowser } from '@core/app'
 
     export let modal: Modal = undefined
     export let nft: INft
+
+    $: url = composeUrl(nft?.parsedMetadata?.uri)
 
     function openBurnNft(): void {
         openPopup({
@@ -38,8 +40,26 @@
         })
     }
 
+    function composeUrl(targetUrl: string): string {
+        if (!targetUrl) {
+            return undefined
+        }
+        const url = new URL(targetUrl)
+
+        switch (url.protocol) {
+            case 'http:':
+                return targetUrl.replace('http:', 'https:')
+            case 'https:':
+                return targetUrl
+            case 'ipfs:':
+                return rewriteIpfsUri(targetUrl)
+            default:
+                return undefined
+        }
+    }
+
     function handleOpenMediaClick(): void {
-        openUrlInBrowser(nft.parsedMetadata.uri)
+        openUrlInBrowser(url)
     }
 </script>
 
@@ -47,12 +67,13 @@
     <div class="flex flex-col">
         <MenuItem icon="receive" title={localize('views.collectibles.details.menu.download')} first />
         <MenuItem icon="profile" title={localize('views.collectibles.details.menu.setAvatar')} />
-        <MenuItem
-            icon="export"
-            title={localize('views.collectibles.details.menu.view')}
-            disabled={!nft.parsedMetadata?.uri}
-            onClick={handleOpenMediaClick}
-        />
+        {#if url}
+            <MenuItem
+                icon="export"
+                title={localize('views.collectibles.details.menu.view')}
+                onClick={handleOpenMediaClick}
+            />
+        {/if}
         <MenuItem icon="delete" title={localize('views.collectibles.details.menu.burn')} onClick={openBurnNft} />
     </div>
 </Modal>
