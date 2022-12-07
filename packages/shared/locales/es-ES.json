@@ -1663,7 +1663,7 @@
                 "Confirmed": "transferido a",
                 "Conflicting": "no se pudo transferir"
             },
-            "selftransaction": {
+            "selfTransaction": {
                 "Pending": "transfiriendo a",
                 "Confirmed": "transferido a",
                 "Conflicting": "no se pudo transferir"
