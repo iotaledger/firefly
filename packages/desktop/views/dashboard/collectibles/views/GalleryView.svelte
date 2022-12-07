@@ -70,7 +70,7 @@
         </div>
 
         {#if $queriedNfts.length}
-            <div class="h-full gallery-grid items-start scrollable-y">
+            <div class="h-full gallery-grid scrollable-y">
                 {#each $queriedNfts as nft}
                     <NftGalleryItem {nft} onClick={() => handleNftClick(nft)} />
                 {/each}
@@ -103,8 +103,9 @@
 
 <style lang="scss">
     .gallery-grid {
+        // margin-right: -1rem !important;
         --grid-layout-gap: 1rem;
-        --grid-column-count: 6;
+        --grid-column-count: 9;
         --grid-item--min-width: 240px;
 
         /**
@@ -119,6 +120,7 @@
             auto-fill,
             minmax(max(var(--grid-item--min-width), var(--grid-item--max-width)), 1fr)
         );
+        grid-auto-rows: minmax(min-content, max-content);
         grid-gap: var(--grid-layout-gap);
     }
 </style>

@@ -7,7 +7,7 @@
     export let nftId: string
     export let shape: 'square' | 'circle' | 'squircle' = 'squircle'
     export let classes: string = ''
-    export let placeholderClasses: string = ''
+
     $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, nftId)
 
     let width
@@ -68,7 +68,7 @@
     class="flex justify-center items-center transition-none flex-shrink-0 p-{padding} bg-gray-500 {width} {height} rounded-{radius} {classes}"
 >
     {#if !isLoaded}
-        <NftPlaceholderIcon {nft} classes={placeholderClasses} />
+        <NftPlaceholderIcon {nft} />
     {:else}
         <div>
             <!-- Loaded and Secure NFT Media  -->
