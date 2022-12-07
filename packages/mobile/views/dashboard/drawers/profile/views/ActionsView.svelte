@@ -51,6 +51,6 @@
         </div>
     </div>
 {/if}
-{#if features?.profileActions?.settings?.enabled}
+{#if features?.dashboard?.profileActions?.settings?.enabled}
     <button on:click={$profileRouter.next({ settings: true })}>Settings</button>
 {/if}
