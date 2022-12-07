@@ -103,7 +103,6 @@
 
 <style lang="scss">
     .gallery-grid {
-        // margin-right: -1rem !important;
         --grid-layout-gap: 1rem;
         --grid-column-count: 9;
         --grid-item--min-width: 240px;
