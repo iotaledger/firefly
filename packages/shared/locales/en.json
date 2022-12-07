@@ -563,7 +563,7 @@
                 "menu": {
                     "download": "Download",
                     "setAvatar": "Set NFT as profile avatar",
-                    "view": "View in IPFS",
+                    "view": "View media in browser",
                     "burn": "Burn NFT"
                 }
             },
@@ -596,7 +596,8 @@
             },
             "proposals": {
                 "title": "Proposals",
-                "voted": "Voted"
+                "voted": "Voted",
+                "successRegister": "Proposal successfully registered"
             },
             "statusTimeline": {
                 "announcement": "Announcement",
@@ -632,9 +633,25 @@
         "storageDepositBreakdown": {
             "title": "Storage deposit breakdown",
             "totalStorageDeposit": "Total storage deposit",
+            "basicOutputs": {
+                "title": "Native Tokens",
+                "subtitle": "Reserved for Native Token storage"
+            },
+            "nftOutputs": {
+                "title": "NFTs",
+                "subtitle": "Reserved for NFT storage"
+            },
+            "aliasOutputs": {
+                "title": "Aliases",
+                "subtitle": "Reserved for Alias storage"
+            },
+            "foundryOutputs": {
+                "title": "Foundries",
+                "subtitle": "Reserved for Native Token Foundry storage"
+            },
             "pendingTransactions": {
-                "title": "Locked in pending transactions",
-                "subtitle": "For sending native assets and small IOTA amounts"
+                "title": "Transactions",
+                "subtitle": "Temporarily locked in unclaimed transactions"
             },
             "minimizeStorageDepositButton": "Minimize storage deposit"
         },
@@ -682,6 +699,13 @@
             "hideAccount": "Delete wallet",
             "errorTitle": "Unable to delete {name}",
             "errorBody1": "You cannot delete this wallet, you must have at least one."
+        },
+        "externalUrl": {
+            "title": "Open URL in Browser",
+            "body": "Are you sure you want to open \"{url}\" in the browser?",
+            "hint": "This URL is unknown to Firefly. Please double check the URL before opening it.",
+            "action": "Open URL",
+            "invalidProtocol": "Cannot open URL with invalid protocol"
         },
         "hideAccount": {
             "title": "Hide {name}?",
@@ -1008,6 +1032,10 @@
             "title": "Manage voting power",
             "body": "Define your voting power to vote on proposals.",
             "hint": "Increasing your voting power locks your funds. In order to make them spendable again, you need to decrease your voting power. This affects all proposals with an active vote."
+        },
+        "registerProposal": {
+            "title": "Register proposal",
+            "body": "Please provide the information listed below to register a proposal."
         }
     },
     "charts": {
@@ -1191,7 +1219,8 @@
         "delete": "Delete",
         "addReference": "Add reference",
         "depositNft": "Deposit NFTs",
-        "vote": "Vote"
+        "vote": "Vote",
+        "registerProposal": "Register proposal"
     },
     "general": {
         "recipient": "Recipient",
@@ -1763,7 +1792,11 @@
             "aliasRequired": "Alias is required",
             "aliasNotInPossession": "Alias not in possession"
         },
-        "noOutputsToConsolidate": "Not enough outputs to consolidate"
+        "noOutputsToConsolidate": "Not enough outputs to consolidate",
+        "eventId": {
+            "doesNotStartWith0x": "Event ID should start with '0x'",
+            "insufficientLength": "Event ID should be 66 characters long"
+        }
     },
     "warning": {
         "transaction": {
@@ -1915,7 +1948,7 @@
                 "Confirmed": "transferred to",
                 "Conflicting": "failed to transfer"
             },
-            "selftransaction": {
+            "selfTransaction": {
                 "Pending": "transferring to",
                 "Confirmed": "transferred to",
                 "Conflicting": "failed to transfer"
