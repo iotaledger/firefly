@@ -7,6 +7,7 @@
 
     export let nftId: string = ''
     export let error: string = ''
+    export let readonly: boolean = null
 
     let inputElement: HTMLInputElement = undefined
     let modal: Modal = undefined
@@ -44,6 +45,7 @@
     bind:inputElement
     bind:modal
     bind:error
+    {readonly}
     options={nftOptions}
     let:option
 >

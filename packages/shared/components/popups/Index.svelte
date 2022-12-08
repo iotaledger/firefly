@@ -26,12 +26,14 @@
     import LedgerConnectionGuidePopup from './LedgerConnectionGuidePopup.svelte'
     import LegalUpdate from './LegalUpdate.svelte'
     import ManageAccountPopup from './ManageAccountPopup.svelte'
+    import ManageVotingPowerPopup from './ManageVotingPowerPopup.svelte'
     import MintNativeTokenFormPopup from './MintNativeTokenFormPopup.svelte'
     import MintNativeTokenConfirmationPopup from './MintNativeTokenConfirmationPopup.svelte'
     import MintNftFormPopup from './MintNftFormPopup.svelte'
     import MintNftConfirmationPopup from './MintNftConfirmationPopup.svelte'
     import NodeInfoPopup from './NodeInfoPopup.svelte'
     import ReceiveAddressPopup from './ReceiveAddressPopup.svelte'
+    import RegisterProposalPopup from './RegisterProposalPopup.svelte'
     import RemoveNode from './RemoveNode.svelte'
     import { SendFormPopup, SendConfirmationPopup } from './send'
     import StorageDepositBreakdownPopup from './StorageDepositBreakdownPopup.svelte'
@@ -98,6 +100,7 @@
         verifyLedgerTransaction: VerifyLedgerTransactionPopup,
         nodeInfo: NodeInfoPopup,
         addNode: AddNodePopup,
+        registerProposal: RegisterProposalPopup,
         removeNode: RemoveNode,
         storageDepositBreakdown: StorageDepositBreakdownPopup,
         errorLog: ErrorLog,
@@ -119,6 +122,7 @@
         faucetRequest: FaucetRequestPopup,
         enableLedgerBlindSigning: EnableLedgerBlindSigningPopup,
         testDeepLinkForm: TestDeepLinkFormPopup,
+        manageVotingPower: ManageVotingPowerPopup,
     }
 
     function onKey(event: KeyboardEvent): void {

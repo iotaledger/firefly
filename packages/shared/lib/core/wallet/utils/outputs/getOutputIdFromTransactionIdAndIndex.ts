@@ -6,6 +6,6 @@ import { convertUInt16NumberToLittleEndianHex } from '@core/utils'
  * @param outputIndex The index of the output.
  * @returns The output id.
  */
-export function outputIdFromTransactionData(transactionId: string, outputIndex: number): string {
+export function getOutputIdFromTransactionIdAndIndex(transactionId: string, outputIndex: number): string {
     return transactionId + convertUInt16NumberToLittleEndianHex(outputIndex)
 }

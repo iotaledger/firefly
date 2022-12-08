@@ -8,4 +8,5 @@ export interface INft {
     metadata: string
     parsedMetadata?: IIrc27Metadata
     isSpendable: boolean
+    latestOutputId: string
 }
