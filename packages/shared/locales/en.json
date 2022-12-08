@@ -1429,7 +1429,8 @@
         "royalties": "Royalties",
         "description": "Description",
         "attributes": "Attributes",
-        "details": "Details"
+        "details": "Details",
+        "availableAmount": "{amount} available"
     },
     "filters":{
         "title": "Filters",

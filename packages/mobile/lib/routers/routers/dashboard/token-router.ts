@@ -2,11 +2,11 @@ import { get, writable } from 'svelte/store'
 
 import { Subrouter } from '@core/router'
 
-import { selectedAsset } from '../../../lib/contexts/dashboard'
+import { selectedAsset } from '../../../contexts/dashboard'
 import { dashboardRouter } from '../dashboard-router'
-import { TokenRoute } from '../enums'
-import { ITokenRouterEvent } from '../interfaces'
-import { resetRouterWithDrawerDelay } from '../utils'
+import { TokenRoute } from '../../enums'
+import { ITokenRouterEvent } from '../../interfaces'
+import { resetRouterWithDrawerDelay } from '../../utils'
 
 export const tokenRoute = writable<TokenRoute>(null)
 export const tokenRouter = writable<TokenRouter>(null)
