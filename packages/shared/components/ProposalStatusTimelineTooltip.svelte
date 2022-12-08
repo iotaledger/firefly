@@ -2,7 +2,8 @@
     import { formatDate, localize } from '@core/i18n'
     import { networkStatus } from '@core/network'
     import { milestoneToDate } from '@core/utils'
-    import { Position, ProposalStatus, Text, TextType, Tooltip } from 'shared/components'
+    import { Position, Text, TextType, Tooltip } from 'shared/components'
+    import { ProposalStatus } from '@core/governance/enums'
 
     export let milestones: Record<ProposalStatus, number>
     export let status: ProposalStatus

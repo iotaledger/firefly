@@ -11,6 +11,7 @@ import type {
     GenerateAddressOptions,
     Event,
     Node,
+    EventId,
 } from '@iota/wallet'
 
 import { IAccount } from '@core/account'
@@ -149,6 +150,14 @@ export class ProfileManagerMock implements IProfileManager {
                 blindSigningEnabled: false,
             })
         )
+    }
+
+    getParticipationEvent(eventId: EventId): Promise<Event> {
+        throw new Error('Method not implemented.')
+    }
+
+    getParticipationEvents(): Promise<Event[]> {
+        throw new Error('Method not implemented.')
     }
 
     hexToBech32(hex: string, bech32Hrp?: string): Promise<string> {
