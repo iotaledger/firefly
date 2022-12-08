@@ -1,14 +1,14 @@
 import { get } from 'svelte/store'
 
-import { appRouter } from '../app-router'
-import { dashboardRouter } from '../dashboard-router'
-import { onboardingRouter } from '../onboarding-router'
 import {
     accountSwitcherRouter,
     activityRouter,
+    appRouter,
     appSetupRouter,
+    dashboardRouter,
     loginRouter,
     networkSetupRouter,
+    onboardingRouter,
     profileBackupRouter,
     profileRecoveryRouter,
     profileSetupRouter,
@@ -16,7 +16,7 @@ import {
     storageProtectionSetupRouter,
     strongholdSetupRouter,
     tokenRouter,
-} from '../subrouters'
+} from '../routers'
 
 export function resetRouters(): void {
     resetSubrouters()

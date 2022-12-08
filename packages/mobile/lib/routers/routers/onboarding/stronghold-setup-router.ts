@@ -3,7 +3,7 @@ import { get, writable } from 'svelte/store'
 import { Subrouter } from '@core/router'
 
 import { StrongholdSetupRoute } from '../../enums'
-import { onboardingRouter } from '../../onboarding-router'
+import { onboardingRouter } from '../onboarding-router'
 
 export const strongholdSetupRoute = writable<StrongholdSetupRoute>(null)
 export const strongholdSetupRouter = writable<StrongholdSetupRouter>(null)
