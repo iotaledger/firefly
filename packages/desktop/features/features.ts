@@ -90,7 +90,7 @@ const features = {
     },
     electron: {
         developerTools: {
-            enabled: false,
+            enabled: true,
         },
     },
     wallet: {
@@ -107,7 +107,7 @@ const features = {
         assets: {
             enabled: true,
             burnAsset: {
-                enabled: false,
+                enabled: true,
             },
         },
         activityHistory: {
