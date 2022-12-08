@@ -1,26 +1,18 @@
 <script lang="typescript">
-    import {
-        Button,
-        Text,
-        TextHint,
-        FontWeight,
-        TextType,
-        ButtonVariant,
-        AssetAmountSliderInput,
-    } from 'shared/components'
+    import { Button, Text, TextHint, FontWeight, TextType, ButtonVariant, AssetAmountInput } from 'shared/components'
     import { localize } from '@core/i18n'
     import { closePopup } from '@auxiliary/popup'
     import { burnAsset, IAsset } from '@core/wallet'
     import { checkActiveProfileAuth } from '@core/profile'
 
     export let asset: IAsset
-    let assetAmountSliderInput: AssetAmountSliderInput
+    let assetAmountInput: AssetAmountInput
 
     let rawAmount = '0'
 
     async function confirmClick(): Promise<void> {
         try {
-            await assetAmountSliderInput.validate()
+            await assetAmountInput.validate()
             checkActiveProfileAuth(async () => {
                 await burnAsset(asset.id, rawAmount)
                 closePopup()
@@ -40,7 +32,7 @@
         })}
     </Text>
     <div class="space-y-4">
-        <AssetAmountSliderInput bind:this={assetAmountSliderInput} bind:rawAmount {asset} />
+        <AssetAmountInput bind:this={assetAmountInput} bind:rawAmount {asset} containsSlider disableAssetSelection />
         <TextHint warning text={localize('actions.confirmTokenBurn.hint')} />
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">

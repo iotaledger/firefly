@@ -1,13 +1,22 @@
 <script lang="typescript">
     import { Text, Button } from 'shared/components'
-    import { localize } from '@core/i18n'
     import { ButtonSize, FontWeight, TextType } from './enums'
+    import { selectedAccount } from '@core/account'
+    import { localize } from '@core/i18n'
+    import { formatTokenAmountBestMatch, visibleSelectedAccountAssets } from '@core/wallet'
+    import { openPopup } from '@auxiliary/popup'
 
-    const votingPowerBalance: string = '4821 SMR'
-    const maximalVotingPower: string = '4821 SMR'
+    const asset = $visibleSelectedAccountAssets?.baseCoin
+
+    $: votingPower = parseInt($selectedAccount?.votingPower, 10)
+    $: maxVotingPower = parseInt($selectedAccount?.balances?.baseCoin?.available)
+    $: formattedVotingPower = formatTokenAmountBestMatch(votingPower, asset?.metadata)
+    $: formattedMaxVotingPower = formatTokenAmountBestMatch(maxVotingPower, asset?.metadata)
 
     function handleManageVotingPower(): void {
-        return
+        openPopup({
+            type: 'manageVotingPower',
+        })
     }
 </script>
 
@@ -15,11 +24,17 @@
     <Text fontSize="14" fontWeight={FontWeight.semibold} classes="mb-4">
         {localize('views.governance.votingPower.title')}
     </Text>
-    <Text type={TextType.h1}>{votingPowerBalance}</Text>
+    <Text type={TextType.h1}>{formattedVotingPower}</Text>
     <Text fontWeight={FontWeight.medium} overrideColor classes="mb-4 text-gray-600">
-        {localize('views.governance.votingPower.maximal', { values: { value: maximalVotingPower } })}
+        {localize('views.governance.votingPower.maximal', { values: { value: formattedMaxVotingPower } })}
     </Text>
-    <Button size={ButtonSize.Medium} onClick={handleManageVotingPower} classes="w-full">
+    <Button
+        size={ButtonSize.Medium}
+        onClick={handleManageVotingPower}
+        classes="w-full"
+        disabled={$selectedAccount.isTransferring}
+        isBusy={$selectedAccount.isTransferring}
+    >
         {localize('views.governance.votingPower.manage')}
     </Button>
 </voting-power>

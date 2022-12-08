@@ -1663,7 +1663,7 @@
                 "Confirmed": "siirretty kohteeseen",
                 "Conflicting": "siirto epäonnistui"
             },
-            "selftransaction": {
+            "selfTransaction": {
                 "Pending": "siirretään kohteeseen",
                 "Confirmed": "siirretty kohteeseen",
                 "Conflicting": "siirto epäonnistui"

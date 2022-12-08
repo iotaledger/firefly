@@ -36,7 +36,7 @@ export async function mintNativeToken(
             metadata,
             { verified: true, status: VerifiedStatus.SelfVerified }
         )
-        const processedTransaction = preprocessTransaction(mintTokenTransaction.transaction, account.depositAddress)
+        const processedTransaction = await preprocessTransaction(mintTokenTransaction.transaction, account)
         addPersistedAsset(persistedAsset)
         addActivityToAccountActivitiesInAllAccountActivities(
             account.index,

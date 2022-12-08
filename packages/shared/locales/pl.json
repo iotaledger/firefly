@@ -1663,7 +1663,7 @@
                 "Confirmed": "przesłano do",
                 "Conflicting": "nie udało się przesłać"
             },
-            "selftransaction": {
+            "selfTransaction": {
                 "Pending": "przesyłanie do",
                 "Confirmed": "przesłano do",
                 "Conflicting": "nie udało się przesłać"
