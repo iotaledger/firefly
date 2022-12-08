@@ -3,9 +3,7 @@ import { get } from 'svelte/store'
 import { AppContext } from '@core/app/enums'
 import { IRouter } from '@core/router/interfaces'
 
-import { dashboardRouter } from '../dashboard-router'
-import { onboardingRouter } from '../onboarding-router'
-import { loginRouter } from '../subrouters'
+import { dashboardRouter, loginRouter, onboardingRouter } from '../routers'
 
 export function getRouterForAppContext(context: AppContext): IRouter {
     switch (context) {

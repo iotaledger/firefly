@@ -12,8 +12,8 @@ import { ProfileType } from '@core/profile'
 import { Router } from '@core/router'
 
 import { appRouter } from './app-router'
-import { OnboardingRoute, ProfileSetupRoute } from './enums'
-import { profileSetupRoute } from './subrouters'
+import { OnboardingRoute, ProfileSetupRoute } from '../enums'
+import { profileSetupRoute } from '.'
 
 export const onboardingRoute = writable<OnboardingRoute>(null)
 export const onboardingRouter = writable<OnboardingRouter>(null)

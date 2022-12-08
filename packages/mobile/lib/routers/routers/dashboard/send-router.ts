@@ -4,9 +4,9 @@ import { Subrouter } from '@core/router'
 import { resetNewTokenTransactionDetails } from '@core/wallet'
 
 import { dashboardRouter } from '../dashboard-router'
-import { SendRoute } from '../enums'
-import { ISendRouterEvent } from '../interfaces'
-import { resetRouterWithDrawerDelay } from '../utils'
+import { SendRoute } from '../../enums'
+import { ISendRouterEvent } from '../../interfaces'
+import { resetRouterWithDrawerDelay } from '../../utils'
 
 export const sendRoute = writable<SendRoute>(null)
 export const sendRouter = writable<SendRouter>(null)

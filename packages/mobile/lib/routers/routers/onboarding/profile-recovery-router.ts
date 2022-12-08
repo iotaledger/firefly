@@ -4,7 +4,7 @@ import { onboardingProfile, ProfileRecoveryType } from '@contexts/onboarding'
 import { Subrouter } from '@core/router'
 
 import { ProfileRecoveryRoute } from '../../enums'
-import { onboardingRouter } from '../../onboarding-router'
+import { onboardingRouter } from '../onboarding-router'
 
 export const profileRecoveryRoute = writable<ProfileRecoveryRoute>(null)
 export const profileRecoveryRouter = writable<ProfileRecoveryRouter>(null)
