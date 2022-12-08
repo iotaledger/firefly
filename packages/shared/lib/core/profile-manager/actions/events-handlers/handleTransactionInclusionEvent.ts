@@ -1,3 +1,4 @@
+import { syncVotingPower } from '@core/account'
 import { updateNftInAllAccountNfts } from '@core/nfts'
 import { ActivityDirection, ActivityType } from '@core/wallet'
 import { updateClaimingTransactionInclusion } from '@core/wallet/actions/activities/updateClaimingTransactionInclusion'
@@ -26,11 +27,15 @@ export function handleTransactionInclusionEventInternal(
 
     const activity = getActivityByTransactionId(accountIndex, payload.transactionId)
 
-    if (activity.type === ActivityType.Nft) {
+    if (activity?.type === ActivityType.Nft) {
         const isSpendable =
             activity.direction === ActivityDirection.Incoming ||
             activity.direction === ActivityDirection.SelfTransaction
         updateNftInAllAccountNfts(accountIndex, activity.nftId, { isSpendable })
+    }
+
+    if (activity?.tag === 'PARTICIPATE') {
+        syncVotingPower(accountIndex)
     }
 
     updateClaimingTransactionInclusion(payload.transactionId, payload.inclusionState, accountIndex)

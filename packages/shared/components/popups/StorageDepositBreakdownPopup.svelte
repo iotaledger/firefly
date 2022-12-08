@@ -6,17 +6,18 @@
     import { selectedAccountAssets } from '@core/wallet'
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
+    import type { AccountBalance } from '@iota/wallet'
     import { BalanceSummarySection, Button, FontWeight, HR, Text } from 'shared/components'
 
     $: ({ baseCoin } = $selectedAccountAssets)
 
-    let accountBalance
+    let accountBalance: AccountBalance
     $: $selectedAccount, void getAccountBalance()
     async function getAccountBalance(): Promise<void> {
         accountBalance = await $selectedAccount.getBalance()
     }
 
-    let potentiallyLockedOutputsStorageDeposit
+    let potentiallyLockedOutputsStorageDeposit: number
     $: accountBalance, void calculatePendingTransactionStorageDeposit()
     async function calculatePendingTransactionStorageDeposit(): Promise<void> {
         potentiallyLockedOutputsStorageDeposit = 0
@@ -28,6 +29,13 @@
             }
         }
     }
+
+    $: totalStorageDeposit = accountBalance?.requiredStorageDeposit
+        ? Object.values(accountBalance?.requiredStorageDeposit).reduce(
+              (total: number, value: string): number => total + Number(value),
+              potentiallyLockedOutputsStorageDeposit
+          )
+        : potentiallyLockedOutputsStorageDeposit
 
     function handleConsolidation(): void {
         openPopup({
@@ -52,20 +60,50 @@
     <Text type="h3" fontWeight={FontWeight.semibold} lineHeight="6">
         {localize('popups.storageDepositBreakdown.title')}
     </Text>
-    <HR hidden />
-    <BalanceSummarySection
-        title={localize('popups.storageDepositBreakdown.pendingTransactions.title')}
-        subtitle={localize('popups.storageDepositBreakdown.pendingTransactions.subtitle')}
-        amount={potentiallyLockedOutputsStorageDeposit}
-        asset={baseCoin}
-    />
-    <HR hidden />
-    <BalanceSummarySection
-        title={localize('popups.storageDepositBreakdown.totalStorageDeposit')}
-        amount={Number($selectedAccount.balances.requiredStorageDeposit) + potentiallyLockedOutputsStorageDeposit}
-        asset={baseCoin}
-        totalRow
-    />
+    <div class="flex flex-col space-y-4">
+        <HR hidden />
+        <BalanceSummarySection
+            title={localize('popups.storageDepositBreakdown.basicOutputs.title')}
+            subtitle={localize('popups.storageDepositBreakdown.basicOutputs.subtitle')}
+            amount={Number(accountBalance?.requiredStorageDeposit?.basic ?? 0)}
+            asset={baseCoin}
+        />
+        <HR hidden />
+        <BalanceSummarySection
+            title={localize('popups.storageDepositBreakdown.nftOutputs.title')}
+            subtitle={localize('popups.storageDepositBreakdown.nftOutputs.subtitle')}
+            amount={Number(accountBalance?.requiredStorageDeposit?.nft ?? 0)}
+            asset={baseCoin}
+        />
+        <HR hidden />
+        <BalanceSummarySection
+            title={localize('popups.storageDepositBreakdown.aliasOutputs.title')}
+            subtitle={localize('popups.storageDepositBreakdown.aliasOutputs.subtitle')}
+            amount={Number(accountBalance?.requiredStorageDeposit?.alias ?? 0)}
+            asset={baseCoin}
+        />
+        <HR hidden />
+        <BalanceSummarySection
+            title={localize('popups.storageDepositBreakdown.foundryOutputs.title')}
+            subtitle={localize('popups.storageDepositBreakdown.foundryOutputs.subtitle')}
+            amount={Number(accountBalance?.requiredStorageDeposit?.foundry ?? 0)}
+            asset={baseCoin}
+        />
+        <HR hidden />
+        <BalanceSummarySection
+            title={localize('popups.storageDepositBreakdown.pendingTransactions.title')}
+            subtitle={localize('popups.storageDepositBreakdown.pendingTransactions.subtitle')}
+            amount={potentiallyLockedOutputsStorageDeposit}
+            asset={baseCoin}
+        />
+        <HR hidden />
+        <BalanceSummarySection
+            title={localize('popups.storageDepositBreakdown.totalStorageDeposit')}
+            amount={totalStorageDeposit}
+            asset={baseCoin}
+            totalRow
+        />
+    </div>
     <Button onClick={handleConsolidation}>
         {localize('popups.storageDepositBreakdown.minimizeStorageDepositButton')}
     </Button>

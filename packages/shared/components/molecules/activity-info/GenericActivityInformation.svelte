@@ -5,13 +5,11 @@
     import { Activity, formatTokenAmountPrecise } from '@core/wallet'
     import { BASE_TOKEN, ExplorerEndpoint } from '@core/network'
     import { getOfficialExplorerUrl } from '@core/network/utils'
-    import { Platform } from '@core/app'
+    import { openUrlInBrowser } from '@core/app'
     import { truncateString } from '@core/utils'
     import { setClipboard } from '@core/utils'
-    import { getDestinationNetworkFromAddress } from '@core/layer-2'
 
     export let activity: Activity
-    export let networkAddress: string = null
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
@@ -19,8 +17,7 @@
     $: claimedTime = getDateFormat(activity.asyncData?.claimedDate)
     $: hasStorageDeposit =
         activity.storageDeposit || (activity.storageDeposit === 0 && activity.giftedStorageDeposit === 0)
-    $: gasBudget = activity.parsedLayer2Metadata?.gasBudget ?? activity.layer2Parameters?.gasBudget
-    $: destinationNetwork = getDestinationNetworkFromAddress(networkAddress)
+    $: gasBudget = activity?.parsedLayer2Metadata?.gasBudget
 
     $: formattedTransactionTime = getDateFormat(activity.time)
     $: formattedTimelockDate = getDateFormat(activity.asyncData?.timelockDate)
@@ -39,8 +36,8 @@
 
     let transactionDetailsList: { [key in string]: { data: string; isTooltipVisible?: boolean } }
     $: transactionDetailsList = {
-        ...(destinationNetwork && {
-            destinationNetwork: { data: destinationNetwork },
+        ...(activity?.destinationNetwork && {
+            destinationNetwork: { data: activity?.destinationNetwork },
         }),
         ...(activity.time && {
             transactionTime: { data: formattedTransactionTime },
@@ -71,7 +68,7 @@
 
     function handleTransactionIdClick(): void {
         explorerUrl
-            ? Platform.openUrl(
+            ? openUrlInBrowser(
                   `${explorerUrl}/${ExplorerEndpoint.Transaction}/${activity.asyncData?.claimingTransactionId}`
               )
             : setClipboard(activity.asyncData?.claimingTransactionId)

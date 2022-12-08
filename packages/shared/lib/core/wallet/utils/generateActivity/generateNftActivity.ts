@@ -9,8 +9,7 @@ import { getNftId } from '../outputs/getNftId'
 import { EMPTY_HEX_ID } from '@core/wallet/constants'
 
 export function generateNftActivity(processedTransaction: IProcessedTransaction, account: IAccountState): NftActivity {
-    const { outputs, claimingData, transactionInputs, time, inclusionState, transactionId, direction } =
-        processedTransaction
+    const { outputs, claimingData, utxoInputs, time, inclusionState, transactionId, direction } = processedTransaction
     const wrappedOutput = getNftOutputFromTransaction(outputs)
     const outputId = wrappedOutput.outputId
     const output = wrappedOutput.output as INftOutput
@@ -20,7 +19,7 @@ export function generateNftActivity(processedTransaction: IProcessedTransaction,
     const isAssetHidden = false
     const containsValue = outputContainsValue(processedTransaction, account)
 
-    const inputs = transactionInputs
+    const inputs = utxoInputs
 
     const nftId = getNftId(output.nftId, outputId)
     const storageDeposit = Number(output.amount)

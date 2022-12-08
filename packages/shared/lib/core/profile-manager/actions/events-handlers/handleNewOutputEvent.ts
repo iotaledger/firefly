@@ -38,11 +38,7 @@ export async function handleNewOutputEventInternal(
     if ((account.depositAddress === address && !output?.remainder) || isNewAliasOutput) {
         await syncBalance(account.index)
 
-        const processedOutput = preprocessGroupedOutputs(
-            [output],
-            [payload?.transaction, payload?.transactionInputs],
-            account
-        )
+        const processedOutput = preprocessGroupedOutputs([output], payload?.transactionInputs ?? [], account)
 
         const activity = generateActivity(processedOutput, account)
         if (activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry) {
