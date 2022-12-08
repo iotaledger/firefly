@@ -19,6 +19,8 @@ import {
     profileBackupRouter,
     ProfileRecoveryRouter,
     profileRecoveryRouter,
+    ProfileRouter,
+    profileRouter,
     ProfileSetupRouter,
     profileSetupRouter,
     SendRouter,
@@ -81,4 +83,5 @@ function initialiseDashboardSubrouters(): void {
     activityRouter.set(new ActivityRouter())
     sendRouter.set(new SendRouter())
     tokenRouter.set(new TokenRouter())
+    profileRouter.set(new ProfileRouter())
 }
