@@ -18,29 +18,27 @@
     } from '@core/wallet'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import type { OutputOptions } from '@iota/wallet'
-    import { ExpirationTimePicker } from 'shared/components'
     import { get } from 'svelte/store'
     import { StrongholdUnlock } from '../../../../components'
     import { sendRoute, SendRoute, sendRouter } from '../../../../lib/routers'
-    import { AmountView, RecipientView, ReferenceView, ReviewView, TokenView } from './views'
+    import { AmountView, Expiration, RecipientView, ReferenceView, ReviewView, TokenView } from './views'
 
     $: ({ recipient, expirationDate, giftStorageDeposit, surplus } = $newTransactionDetails)
 
     let storageDeposit = 0
     let preparedOutput: Output
     let outputOptions: OutputOptions
-    let expirationTimePicker: ExpirationTimePicker
     let initialExpirationDate: ExpirationTime = getInitialExpirationDate()
 
     let triggerSendOnMount: boolean = false
 
     $: transactionDetails = get(newTransactionDetails)
     $: recipientAddress = recipient?.type === 'account' ? recipient?.account?.depositAddress : recipient?.address
-    $: expirationTimePicker?.setNull(giftStorageDeposit)
     $: asset =
         transactionDetails.type === NewTransactionType.TokenTransfer
             ? getAssetById(transactionDetails.assetId)
             : undefined
+    $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
 
     async function sendTransaction(): Promise<void> {
         triggerSendOnMount = false
@@ -112,6 +110,10 @@
         }
     }
 
+    function refreshSendConfirmationState(): void {
+        void prepareTransactionOutput()
+    }
+
     function getInitialExpirationDate(): ExpirationTime {
         if (expirationDate) {
             return ExpirationTime.Custom
@@ -137,7 +139,9 @@
 {:else if $sendRoute === SendRoute.Reference}
     <ReferenceView />
 {:else if $sendRoute === SendRoute.Review}
-    <ReviewView {sendTransaction} {triggerSendOnMount} {storageDeposit} />
+    <ReviewView {sendTransaction} {triggerSendOnMount} {storageDeposit} {initialExpirationDate} bind:expirationDate />
+{:else if $sendRoute === SendRoute.Expiration}
+    <Expiration onCancel={() => $sendRouter.previous()} />
 {:else if $sendRoute === SendRoute.Password}
     <StrongholdUnlock onSuccess={onUnlockSuccess} onCancel={() => $sendRouter.previous()} />
 {/if}

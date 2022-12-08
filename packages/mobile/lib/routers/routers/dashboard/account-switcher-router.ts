@@ -2,7 +2,7 @@ import { get, writable } from 'svelte/store'
 
 import { Subrouter } from '@core/router'
 
-import { AccountSwitcherRoute } from '../enums'
+import { AccountSwitcherRoute } from '../../enums'
 import { dashboardRouter } from '../dashboard-router'
 
 export const accountSwitcherRoute = writable<AccountSwitcherRoute>(null)

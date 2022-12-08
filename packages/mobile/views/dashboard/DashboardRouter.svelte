@@ -7,6 +7,7 @@
         DashboardRoute,
         dashboardRoute,
         dashboardRouter,
+        profileRouter,
         resetRouterWithDrawerDelay,
         sendRouter,
         tokenRouter,
@@ -14,7 +15,7 @@
     import {
         AccountSwitcherDrawer,
         ActivityDrawer,
-        ProfileActionsDrawer,
+        ProfileDrawer,
         ReceiveDrawer,
         SendDrawer,
         TokenDrawer,
@@ -33,8 +34,8 @@
         resetRouterWithDrawerDelay($accountSwitcherRouter)
         $dashboardRouter.previous()
     }
-    function onProfileActionsDrawerClose(): void {
-        $dashboardRouter.previous()
+    function onProfileDrawerClose(): void {
+        $profileRouter.closeDrawer()
     }
     function onActivityDrawerClose(): void {
         resetRouterWithDrawerDelay($activityRouter)
@@ -52,8 +53,8 @@
     <SendDrawer onClose={onSendDrawerClose} />
 {:else if $dashboardRoute === DashboardRoute.AccountSwitcher && features?.dashboard?.accountSwitcher?.enabled}
     <AccountSwitcherDrawer onClose={onAccountSwitcherDrawerClose} />
-{:else if $dashboardRoute === DashboardRoute.ProfileActions && features?.dashboard?.profileActions?.enabled}
-    <ProfileActionsDrawer onClose={onProfileActionsDrawerClose} />
+{:else if $dashboardRoute === DashboardRoute.Profile && features?.dashboard?.profileActions?.enabled}
+    <ProfileDrawer onClose={onProfileDrawerClose} />
 {:else if $dashboardRoute === DashboardRoute.Activity && $selectedActivity}
     <ActivityDrawer activity={$selectedActivity} onClose={onActivityDrawerClose} />
 {:else if $dashboardRoute === DashboardRoute.Token && $selectedAsset}

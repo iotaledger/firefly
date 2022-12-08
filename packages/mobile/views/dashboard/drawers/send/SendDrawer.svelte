@@ -18,6 +18,9 @@
             case SendRoute.Reference:
                 title = localize('actions.addReference')
                 break
+            case SendRoute.Expiration:
+                title = localize('general.expirationTime')
+                break
             default:
                 title = localize('popups.sendForm.title')
                 break

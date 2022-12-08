@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
+    import { ExpirationTime } from '@core/utils'
     import {
         ActivityDirection,
         ActivityType,
@@ -12,13 +13,16 @@
     import { ActivityInformation, BasicActivityDetails, Button, KeyValueBox, TextHint, Toggle } from 'shared/components'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
+    import { ExpirationTimePicker } from '../../../../../components'
     import { sendRouter } from '../../../../../lib/routers'
 
     export let sendTransaction: () => Promise<void>
     export let triggerSendOnMount: boolean = false
     export let storageDeposit: number
+    export let initialExpirationDate: ExpirationTime
+    export let expirationDate: Date
 
-    const { recipient, surplus, layer2Parameters } = get(newTransactionDetails)
+    const { recipient, surplus, layer2Parameters, disableChangeExpiration } = get(newTransactionDetails)
 
     let loading: boolean = false
 
@@ -82,6 +86,18 @@
                         disabled={$newTransactionDetails.disableToggleGift}
                         active={$newTransactionDetails.giftStorageDeposit}
                         onClick={toggleGiftStorageDeposit}
+                    />
+                </KeyValueBox>
+            {/if}
+            {#if initialExpirationDate !== undefined}
+                <KeyValueBox keyText={localize('general.expirationTime')}>
+                    <ExpirationTimePicker
+                        slot="value"
+                        bind:value={expirationDate}
+                        disabled={disableChangeExpiration}
+                        onClick={() => {
+                            $sendRouter.next({ addExpiration: true })
+                        }}
                     />
                 </KeyValueBox>
             {/if}

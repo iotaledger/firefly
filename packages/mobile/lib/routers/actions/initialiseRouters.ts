@@ -1,21 +1,26 @@
-import { appRouter, AppRouter } from '../app-router'
-import { dashboardRouter, DashboardRouter } from '../dashboard-router'
-import { onboardingRouter, OnboardingRouter } from '../onboarding-router'
 import {
     AccountSwitcherRouter,
     accountSwitcherRouter,
     ActivityRouter,
     activityRouter,
+    appRouter,
+    AppRouter,
     AppSetupRouter,
     appSetupRouter,
+    dashboardRouter,
+    DashboardRouter,
     LoginRouter,
     loginRouter,
     NetworkSetupRouter,
     networkSetupRouter,
+    onboardingRouter,
+    OnboardingRouter,
     ProfileBackupRouter,
     profileBackupRouter,
     ProfileRecoveryRouter,
     profileRecoveryRouter,
+    ProfileRouter,
+    profileRouter,
     ProfileSetupRouter,
     profileSetupRouter,
     SendRouter,
@@ -26,7 +31,7 @@ import {
     StrongholdSetupRouter,
     TokenRouter,
     tokenRouter,
-} from '../subrouters'
+} from '../routers'
 
 export function initialiseRouters(): void {
     /**
@@ -78,4 +83,5 @@ function initialiseDashboardSubrouters(): void {
     activityRouter.set(new ActivityRouter())
     sendRouter.set(new SendRouter())
     tokenRouter.set(new TokenRouter())
+    profileRouter.set(new ProfileRouter())
 }
