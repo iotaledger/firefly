@@ -48,19 +48,20 @@
             </div>
         </div>
     </token-content>
-
-    <token-actions class="space-y-4">
-        {#if asset?.verification?.status === NotVerifiedStatus.New && features.dashboard.tokens.actions.enabled}
-            <Button classes="w-full" onClick={onVerify}>
-                {localize('popups.tokenInformation.buttons.verifyToken')}
-            </Button>
-            <Button outline classes="w-full" onClick={onSkip}>
-                {localize('actions.skip')}
-            </Button>
-        {:else}
-            <Button classes="w-full" onClick={onSend}>
-                {localize('actions.send')}
-            </Button>
-        {/if}
-    </token-actions>
+    {#if features.dashboard.tokens.actions.enabled}
+        <token-actions class="space-y-4">
+            {#if asset?.verification?.status === NotVerifiedStatus.New}
+                <Button classes="w-full" onClick={onVerify}>
+                    {localize('popups.tokenInformation.buttons.verifyToken')}
+                </Button>
+                <Button outline classes="w-full" onClick={onSkip}>
+                    {localize('actions.skip')}
+                </Button>
+            {:else}
+                <Button classes="w-full" onClick={onSend}>
+                    {localize('actions.send')}
+                </Button>
+            {/if}
+        </token-actions>
+    {/if}
 </token-information>

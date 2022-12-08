@@ -26,8 +26,10 @@ export class TokenRouter extends Subrouter<TokenRoute> {
     }
     public next(event: ITokenRouterEvent = {}): void {
         const { asset, action } = event
+
         if (asset && get(tokenRoute) === TokenRoute.Info) {
             selectedAsset.set(asset)
+            return
         }
 
         if (!get(selectedAsset)) {
@@ -35,21 +37,25 @@ export class TokenRouter extends Subrouter<TokenRoute> {
         }
 
         const { id } = get(selectedAsset)
-        switch (action) {
-            case TokenAction.Send:
-                updateNewTransactionDetails({ type: NewTransactionType.TokenTransfer, assetId: id })
-                get(dashboardRouter).previous()
-                get(dashboardRouter).goTo(DashboardRoute.Send)
-                return
-            case TokenAction.Skip:
-                unverifyAsset(id, NotVerifiedStatus.Skipped)
-                selectedAsset.set(getPersistedAsset(id))
-                return
-            case TokenAction.Verify:
-                verifyAsset(id, VerifiedStatus.SelfVerified)
-                selectedAsset.set(getPersistedAsset(id))
-                return
+
+        if (action) {
+            switch (action) {
+                case TokenAction.Skip:
+                    unverifyAsset(id, NotVerifiedStatus.Skipped)
+                    selectedAsset.set(getPersistedAsset(id))
+                    return
+                case TokenAction.Verify:
+                    verifyAsset(id, VerifiedStatus.SelfVerified)
+                    selectedAsset.set(getPersistedAsset(id))
+                    return
+                default:
+                    return
+            }
         }
+
+        updateNewTransactionDetails({ type: NewTransactionType.TokenTransfer, assetId: id })
+        get(dashboardRouter).previous()
+        get(dashboardRouter).goTo(DashboardRoute.Send)
     }
 
     closeDrawer(): void {
