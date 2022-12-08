@@ -17,11 +17,10 @@
     }
 </script>
 
-<proposal-box
+<proposal-card
     on:click={handleProposalClick}
-    class="flex flex-col p-6 border border-solid border-gray-200 rounded-xl cursor-pointer
+    class="flex flex-col p-6 border border-solid border-gray-200 rounded-xl cursor-pointer h-32
     {proposal.status === ProposalStatus.Closed ? 'bg-transparent' : 'bg-white'}"
-    style="height: 8rem"
 >
     <div class="flex items-center gap-1.5 mb-5">
         {#if proposal.organization}
@@ -48,4 +47,4 @@
             </TooltipIcon>
         {/if}
     </div>
-</proposal-box>
+</proposal-card>
