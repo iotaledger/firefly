@@ -1428,7 +1428,8 @@
         "collectionName": "Collection Name",
         "royalties": "Royalties",
         "description": "Description",
-        "attributes": "Attributes"
+        "attributes": "Attributes",
+        "details": "Details"
     },
     "filters":{
         "title": "Filters",

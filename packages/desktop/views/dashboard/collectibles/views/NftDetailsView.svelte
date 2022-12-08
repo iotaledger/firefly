@@ -39,7 +39,8 @@
     const nft: INft = getNftByIdFromAllAccountNfts($selectedAccountIndex, $selectedNftId)
 
     const { id, name, issuer, address, metadata } = nft
-    const { standard, version, type, uri, issuerName, collectionName, attributes } = nft?.parsedMetadata || {}
+    const { standard, version, type, uri, description, issuerName, collectionName, attributes } =
+        nft?.parsedMetadata || {}
 
     const issuerAddress = getBech32AddressFromAddressTypes(issuer)
     const collectionId = getHexAddressFromAddressTypes(issuer)
@@ -122,30 +123,42 @@
     <div class="flex w-full h-full bg-gray-200 dark:bg-gray-700 items-center justify-center rounded-2xl">
         <NftMediaContainer nftId={id} size={NftMediaSize.ExtraLarge} />
     </div>
-    <Pane classes="flex flex-col p-6 w-full h-full max-w-lg">
-        <div class="mb-6 flex justify-between items-center">
+    <Pane classes="flex flex-col p-6 space-y-3 w-full h-full max-w-lg">
+        <nft-title class="flex justify-between items-center">
             <Text type={TextType.h3} fontWeight={FontWeight.semibold}>{name}</Text>
             <MeatballMenuButton onClick={modal?.toggle} />
             <CollectibleDetailsMenu bind:modal {nft} />
-        </div>
-        <div class="overflow-y-scroll h-full">
-            <div class="space-y-2 mb-6">
-                {#each Object.entries(detailsList) as [key, value]}
-                    <KeyValueBox
-                        keyText={localize('general.' + key)}
-                        copyValue={value.copyValue ?? value.data}
-                        isCopyable={value.isCopyable}
-                        valueText={value.data}
-                        isPreText={value.isPreText}
-                        maxHeight={value.maxHeight}
-                    />
-                {/each}
-            </div>
+        </nft-title>
+        {#if description}
+            <nft-description>
+                <Text type={TextType.h5} fontWeight={FontWeight.normal} color="gray-700">
+                    {description}
+                </Text>
+            </nft-description>
+        {/if}
+        <div class="overflow-y-scroll h-full flex flex-col space-y-4">
+            <nft-details class="flex flex-col space-y-4">
+                <Text type={TextType.h5} fontWeight={FontWeight.semibold}>
+                    {localize('general.details')}
+                </Text>
+                <key-value-list class="flex flex-col space-y-2">
+                    {#each Object.entries(detailsList) as [key, value]}
+                        <KeyValueBox
+                            keyText={localize('general.' + key)}
+                            copyValue={value.copyValue ?? value.data}
+                            isCopyable={value.isCopyable}
+                            valueText={value.data}
+                            isPreText={value.isPreText}
+                            maxHeight={value.maxHeight}
+                        />
+                    {/each}
+                </key-value-list>
+            </nft-details>
             {#if attributes}
-                <div>
-                    <Text type={TextType.h5} fontWeight={FontWeight.semibold} classes="mb-4"
-                        >{localize('general.attributes')}</Text
-                    >
+                <nft-attributes class="flex flex-col space-y-4">
+                    <Text type={TextType.h5} fontWeight={FontWeight.semibold}>
+                        {localize('general.attributes')}
+                    </Text>
                     <div class="flex flex-wrap gap-3">
                         {#each Object.values(attributes) as attribute}
                             <div
@@ -156,7 +169,7 @@
                             </div>
                         {/each}
                     </div>
-                </div>
+                </nft-attributes>
             {/if}
         </div>
         <div class="flex w-full space-x-4 self-end mt-auto pt-4">
