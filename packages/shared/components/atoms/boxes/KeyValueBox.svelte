@@ -15,6 +15,8 @@
     export let isCopyable: boolean = false
     export let tooltipText: string = ''
     export let shrink: boolean = false
+    export let isPreText: boolean = false
+    export let maxHeight: number
 
     let isVertical: boolean = false
     let valueContainer: HTMLElement
@@ -38,9 +40,11 @@
         classes="w-full overflow-hidden {padding} {classes}"
     >
         <div
-            class="w-full flex text-left  {isVertical
-                ? 'max-h-20 flex-col space-y-1 overflow-y-auto'
-                : 'flex-row space-x-2 justify-between'}"
+            class="
+                w-full flex text-left  
+                {isVertical ? 'flex-col space-y-1 overflow-y-auto' : 'flex-row space-x-2 justify-between'}
+                {maxHeight ? `min-h-${maxHeight}` : 'max-h-20'}
+            "
         >
             <div class="flex flex-row items-center">
                 {#if keyText}
@@ -64,7 +68,10 @@
                 <div
                     bind:this={valueContainer}
                     bind:clientWidth={valueContainerWidth}
-                    class={isVertical ? 'break-words' : 'truncate'}
+                    class="
+                        {isVertical ? 'break-words' : 'truncate'}
+                        {isPreText ? 'whitespace-pre-wrap' : ''}    
+                    "
                 >
                     <Text
                         fontSize="13"

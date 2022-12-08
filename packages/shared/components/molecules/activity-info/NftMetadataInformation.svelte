@@ -1,13 +1,11 @@
 <script lang="typescript">
+    import { selectedAccountIndex } from '@core/account'
+    import { localize } from '@core/i18n'
+    import { convertAndFormatNftMetadata, getNftByIdFromAllAccountNfts, IIrc27Metadata } from '@core/nfts'
+    import { NftActivity } from '@core/wallet'
     import { KeyValueBox } from 'shared/components'
 
-    import { localize } from '@core/i18n'
-    import { getNftByIdFromAllAccountNfts, IIrc27Metadata } from '@core/nfts'
-    import { NftActivity } from '@core/wallet'
-    import { selectedAccountIndex } from '@core/account'
-
     export let activity: NftActivity
-    export let nftMetadata: IIrc27Metadata | string = undefined
 
     type NftMetadataDetailsList = {
         [key in keyof IIrc27Metadata]?: {
@@ -15,28 +13,21 @@
             isTooltipVisible?: boolean
             copyValue?: string
             isCopyable?: boolean
+            isPreText?: boolean
+            maxHeight?: number
         }
     }
 
-    $: storedNft = getNftByIdFromAllAccountNfts($selectedAccountIndex, activity?.nftId)
-    $: nftMetadataDetailsList = createNftMetadataDetailsList(
-        storedNft?.parsedMetadata ?? storedNft?.metadata ?? nftMetadata
-    )
+    $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, activity?.nftId)
+    $: nftMetadataDetailsList = nft?.parsedMetadata
+        ? createIrc27NftMetadataDetailsList(nft?.parsedMetadata)
+        : createNftMetadataDetailsList(nft?.metadata)
 
-    function createNftMetadataDetailsList(
-        metadata: IIrc27Metadata | string
-    ): NftMetadataDetailsList | { metadata: { data: string; copyValue?: string; isCopyable?: boolean } } {
-        if (typeof metadata === 'string') {
-            let formattedMetadata: string
-            try {
-                formattedMetadata = JSON.stringify(JSON.parse(metadata), null, '\t')
-            } catch (e) {
-                formattedMetadata = metadata
-            }
-
-            return { metadata: { data: formattedMetadata, isCopyable: true } }
-        }
-        return createIrc27NftMetadataDetailsList(metadata)
+    function createNftMetadataDetailsList(metadata: string): {
+        metadata: { data: string; copyValue?: string; isCopyable?: boolean; isPreText?: boolean; maxHeight: number }
+    } {
+        const data = convertAndFormatNftMetadata(metadata)
+        return { metadata: { data, isCopyable: true, isPreText: true, maxHeight: 48 } }
     }
 
     function createIrc27NftMetadataDetailsList(metadata: IIrc27Metadata): NftMetadataDetailsList {
@@ -67,7 +58,8 @@
         keyText={localize(`general.${key}`)}
         valueText={value.data}
         tooltipText={value.isTooltipVisible ? localize(`tooltips.transactionDetails.nftMetadata.${key}`) : undefined}
-        classes={key === 'metadata' ? 'whitespace-pre-wrap' : ''}
+        isPreText={value.isPreText}
         isCopyable={value.isCopyable}
+        maxHeight={value.maxHeight}
     />
 {/each}

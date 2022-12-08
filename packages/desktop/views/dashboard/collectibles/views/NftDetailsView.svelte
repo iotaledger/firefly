@@ -1,56 +1,68 @@
 <script lang="typescript">
-    import {
-        Button,
-        CollectibleDetailsMenu,
-        FontWeight,
-        NftMediaContainer,
-        NftMediaSize,
-        MeatballMenuButton,
-        KeyValueBox,
-        TextType,
-        Modal,
-        Pane,
-        Text,
-    } from 'shared/components'
-    import { localize } from '@core/i18n'
-    import { selectedNftId } from '../stores/selected-nft.store'
-    import { getNftByIdFromAllAccountNfts, INft } from '@core/nfts'
+    import { openPopup } from '@auxiliary/popup'
     import { selectedAccountIndex } from '@core/account'
+    import { openUrlInBrowser } from '@core/app'
+    import { localize } from '@core/i18n'
+    import { ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
+    import { BASE_TOKEN } from '@core/network/constants'
+    import { convertAndFormatNftMetadata, getNftByIdFromAllAccountNfts, INft } from '@core/nfts'
+    import { activeProfile } from '@core/profile/stores'
     import { truncateString } from '@core/utils'
-    import { NewTransactionType, selectedAccountActivities, setNewTransactionDetails } from '@core/wallet/stores'
     import {
         ActivityType,
+        ADDRESS_TYPE_ALIAS,
         ADDRESS_TYPE_ED25519,
+        ADDRESS_TYPE_NFT,
         formatTokenAmountPrecise,
         getBech32AddressFromAddressTypes,
         getHexAddressFromAddressTypes,
     } from '@core/wallet'
-    import { BASE_TOKEN } from '@core/network/constants'
-    import { activeProfile } from '@core/profile/stores'
-    import { openUrlInBrowser } from '@core/app'
-    import { ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
-    import { openPopup } from '@auxiliary/popup'
+    import { NewTransactionType, selectedAccountActivities, setNewTransactionDetails } from '@core/wallet/stores'
+    import {
+        Button,
+        CollectibleDetailsMenu,
+        FontWeight,
+        KeyValueBox,
+        MeatballMenuButton,
+        Modal,
+        NftMediaContainer,
+        NftMediaSize,
+        Pane,
+        Text,
+        TextType,
+    } from 'shared/components'
+    import { selectedNftId } from '../stores/selected-nft.store'
 
     let modal: Modal
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
     const nft: INft = getNftByIdFromAllAccountNfts($selectedAccountIndex, $selectedNftId)
 
-    const { id, name, issuer, address } = nft
-    const { standard, version, type, uri, issuerName, collectionName, attributes } = nft.parsedMetadata || {}
+    const { id, name, issuer, address, metadata } = nft
+    const { standard, version, type, uri, issuerName, collectionName, attributes } = nft?.parsedMetadata || {}
 
     const issuerAddress = getBech32AddressFromAddressTypes(issuer)
     const collectionId = getHexAddressFromAddressTypes(issuer)
 
     $: nftActivity = $selectedAccountActivities.find(
-        (activity) => activity.type === ActivityType.Nft && activity.nftId === id
+        (activity) => activity?.type === ActivityType.Nft && activity?.nftId === id
     )
     $: storageDeposit = formatTokenAmountPrecise(
         nftActivity?.storageDeposit ?? 0,
         BASE_TOKEN[$activeProfile?.networkProtocol]
     )
 
-    let detailsList: { [key in string]: { data: string; copyValue?: string; isCopyable?: boolean } }
+    $: formattedMetadata = convertAndFormatNftMetadata(metadata)
+
+    let detailsList: {
+        [key in string]: {
+            data: string
+            copyValue?: string
+            isCopyable?: boolean
+            isPreText?: boolean
+            maxHeight?: number
+        }
+    }
     $: detailsList = {
         ...(id && {
             nftId: { data: truncateString(id, 20, 20), copyValue: id, isCopyable: true },
@@ -73,15 +85,19 @@
         ...(issuerName && {
             issuer: { data: issuerName },
         }),
-        ...(issuer.type === ADDRESS_TYPE_ED25519 && {
+        ...(issuer?.type === ADDRESS_TYPE_ED25519 && {
             issuerAddress: { data: truncateString(issuerAddress, 20, 20), copyValue: issuerAddress, isCopyable: true },
         }),
         ...(collectionName && {
             collection: { data: collectionName },
         }),
-        ...(issuer.type !== ADDRESS_TYPE_ED25519 && {
+        ...((issuer?.type === ADDRESS_TYPE_NFT || issuer?.type === ADDRESS_TYPE_ALIAS) && {
             collectionId: { data: truncateString(collectionId, 20, 20), copyValue: collectionId, isCopyable: true },
         }),
+        ...(!nft?.parsedMetadata &&
+            formattedMetadata && {
+                metadata: { data: formattedMetadata, isCopyable: true, isPreText: true, maxHeight: 72 },
+            }),
     }
 
     function handleExplorerClick(): void {
@@ -120,6 +136,8 @@
                         copyValue={value.copyValue ?? value.data}
                         isCopyable={value.isCopyable}
                         valueText={value.data}
+                        isPreText={value.isPreText}
+                        maxHeight={value.maxHeight}
                     />
                 {/each}
             </div>

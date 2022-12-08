@@ -3,7 +3,9 @@
     import { localize } from '@core/i18n'
     import { getNftByIdFromAllAccountNfts } from '@core/nfts'
     import {
+        ADDRESS_TYPE_ALIAS,
         ADDRESS_TYPE_ED25519,
+        ADDRESS_TYPE_NFT,
         getBech32AddressFromAddressTypes,
         getHexAddressFromAddressTypes,
         NftActivity,
@@ -13,16 +15,16 @@
     export let activity: NftActivity
 
     $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, activity?.nftId)
-    $: issuerAddress = getBech32AddressFromAddressTypes(nft.issuer)
-    $: collectionId = getHexAddressFromAddressTypes(nft.issuer)
+    $: issuerAddress = getBech32AddressFromAddressTypes(nft?.issuer)
+    $: collectionId = getHexAddressFromAddressTypes(nft?.issuer)
 
     let detailsList: { [key in string]: { data: string; copyValue?: string; isCopyable?: boolean } }
     $: detailsList = {
         nftId: { data: activity?.nftId, isCopyable: true },
-        ...(nft.issuer.type === ADDRESS_TYPE_ED25519 && {
+        ...(nft?.issuer?.type === ADDRESS_TYPE_ED25519 && {
             issuerAddress: { data: issuerAddress, isCopyable: true },
         }),
-        ...(nft.issuer.type !== ADDRESS_TYPE_ED25519 && {
+        ...((nft?.issuer?.type === ADDRESS_TYPE_NFT || nft?.issuer?.type === ADDRESS_TYPE_ALIAS) && {
             collectionId: { data: collectionId, isCopyable: true },
         }),
     }
