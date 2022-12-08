@@ -18,20 +18,29 @@
     import { selectedAccountIndex } from '@core/account'
     import { truncateString } from '@core/utils'
     import { NewTransactionType, selectedAccountActivities, setNewTransactionDetails } from '@core/wallet/stores'
-    import { ActivityType, formatTokenAmountPrecise } from '@core/wallet'
+    import {
+        ActivityType,
+        ADDRESS_TYPE_ED25519,
+        formatTokenAmountPrecise,
+        getBech32AddressFromAddressTypes,
+        getHexAddressFromAddressTypes,
+    } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network/constants'
     import { activeProfile } from '@core/profile/stores'
     import { openUrlInBrowser } from '@core/app'
     import { ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
     import { openPopup } from '@auxiliary/popup'
 
+    let modal: Modal
+
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
     const nft: INft = getNftByIdFromAllAccountNfts($selectedAccountIndex, $selectedNftId)
 
-    const { id, name } = nft
-    const { standard, collectionName, attributes } = nft.parsedMetadata || {}
+    const { id, name, issuer, address } = nft
+    const { standard, version, type, uri, issuerName, collectionName, attributes } = nft.parsedMetadata || {}
 
-    let modal: Modal
+    const issuerAddress = getBech32AddressFromAddressTypes(issuer)
+    const collectionId = getHexAddressFromAddressTypes(issuer)
 
     $: nftActivity = $selectedAccountActivities.find(
         (activity) => activity.type === ActivityType.Nft && activity.nftId === id
@@ -43,17 +52,35 @@
 
     let detailsList: { [key in string]: { data: string; copyValue?: string; isCopyable?: boolean } }
     $: detailsList = {
-        ...(collectionName && {
-            collection: { data: collectionName, isCopyable: true },
-        }),
         ...(id && {
-            nftId: { data: truncateString(id, 6, 6), copyValue: id, isCopyable: true },
+            nftId: { data: truncateString(id, 20, 20), copyValue: id, isCopyable: true },
         }),
-        ...(standard && {
-            nftType: { data: standard },
+        ...(address && {
+            address: { data: truncateString(address, 20, 20), copyValue: address, isCopyable: true },
         }),
         ...(storageDeposit && {
             storageDeposit: { data: String(storageDeposit) },
+        }),
+        ...(standard && {
+            standard: { data: version ? `${standard} - ${version}` : standard },
+        }),
+        ...(type && {
+            type: { data: type },
+        }),
+        ...(uri && {
+            uri: { data: uri, copyValue: uri, isCopyable: true },
+        }),
+        ...(issuerName && {
+            issuer: { data: issuerName },
+        }),
+        ...(issuer.type === ADDRESS_TYPE_ED25519 && {
+            issuerAddress: { data: truncateString(issuerAddress, 20, 20), copyValue: issuerAddress, isCopyable: true },
+        }),
+        ...(collectionName && {
+            collection: { data: collectionName },
+        }),
+        ...(issuer.type !== ADDRESS_TYPE_ED25519 && {
+            collectionId: { data: truncateString(collectionId, 20, 20), copyValue: collectionId, isCopyable: true },
         }),
     }
 
@@ -89,7 +116,7 @@
             <div class="space-y-2 mb-6">
                 {#each Object.entries(detailsList) as [key, value]}
                     <KeyValueBox
-                        keyText={localize('views.collectibles.details.' + key)}
+                        keyText={localize('general.' + key)}
                         copyValue={value.copyValue ?? value.data}
                         isCopyable={value.isCopyable}
                         valueText={value.data}
@@ -99,7 +126,7 @@
             {#if attributes}
                 <div>
                     <Text type={TextType.h5} fontWeight={FontWeight.semibold} classes="mb-4"
-                        >{localize('views.collectibles.details.attributes')}</Text
+                        >{localize('general.attributes')}</Text
                     >
                     <div class="flex flex-wrap gap-3">
                         {#each Object.values(attributes) as attribute}
@@ -107,18 +134,7 @@
                                 class="flex flex-col bg-gray-50 dark:bg-gray-850 rounded-2xl p-3"
                                 style="max-width: 100px"
                             >
-                                <Text
-                                    color="gray-500"
-                                    darkColor="gray-500"
-                                    classes="truncate"
-                                    fontWeight={FontWeight.semibold}>{attribute.trait_type}</Text
-                                >
-                                <Text
-                                    color="gray-800"
-                                    darkColor="gray-400"
-                                    classes="truncate"
-                                    fontWeight={FontWeight.semibold}>{attribute.value}</Text
-                                >
+                                <KeyValueBox keyText={attribute.trait_type} valueText={attribute.value} shrink />
                             </div>
                         {/each}
                     </div>
@@ -126,9 +142,9 @@
             {/if}
         </div>
         <div class="flex w-full space-x-4 self-end mt-auto pt-4">
-            <Button outline classes="flex-1" onClick={handleExplorerClick} disabled={!explorerUrl}
-                >{localize('general.viewOnExplorer')}</Button
-            >
+            <Button outline classes="flex-1" onClick={handleExplorerClick} disabled={!explorerUrl}>
+                {localize('general.viewOnExplorer')}
+            </Button>
             <Button classes="flex-1" onClick={handleSendClick}>{localize('actions.send')}</Button>
         </div>
     </Pane>

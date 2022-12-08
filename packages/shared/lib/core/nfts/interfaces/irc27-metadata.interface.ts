@@ -7,6 +7,7 @@ export interface IIrc27Metadata {
     type: MimeType
     uri: string
     name: string
+    collectionId?: string
     collectionName?: string
     royalties?: Record<string, number>
     issuerName?: string

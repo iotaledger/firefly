@@ -554,10 +554,6 @@
                 "emptyDescription": "Deposit or Receive your first collectible now!"
             },
             "details": {
-                "collection": "Collection",
-                "nftId": "NFT ID",
-                "nftType": "NFT Type",
-                "storageDeposit": "Storage deposit",
                 "storageDepositDescription": "A refundable deposit required to store your NFT on the Tangle.",
                 "attributes": "Attributes",
                 "menu": {
@@ -566,20 +562,6 @@
                     "view": "View media in browser",
                     "burn": "Burn NFT"
                 }
-            },
-            "metadata": {
-                "standard": "Standard",
-                "version": "Version",
-                "type": "Type",
-                "uri": "URI",
-                "name": "Name",
-                "collectionId" : "Collection Id",
-                "collectionName": "Collection Name",
-                "royalties": "Royalties",
-                "issuerName": "Issuer Name",
-                "description": "Description",
-                "attributes": "Attributes",
-                "metadata": "Metadata"
             }
         },
         "governance": {
@@ -1011,18 +993,7 @@
             "description": "You must own an alias output to mint native tokens. To continue, please create an alias first"
         },
         "mintNftForm": {
-            "title": "Mint simple NFT",
-            "property": {
-                "type": "Type",
-                "uri": "URI",
-                "name": "Name",
-                "collectionId" : "Collection Id",
-                "collectionName": "Collection Name",
-                "royalties": "Royalties",
-                "issuerName": "Issuer Name",
-                "description": "Description",
-                "attributes": "Attributes"
-            }
+            "title": "Mint simple NFT"
         },
         "faucetRequest": {
             "title": "Faucet request",
@@ -1415,7 +1386,7 @@
         "availableBalanceTooltip": "An asset's total balance minus any funds that are required to cover the storage deposit (i.e. funds that are locked in pending transactions, reserved for Native Tokens, or reserved for NFTs).",
         "amountClaimed": "{amount} claimed",
         "metadata": "Metadata",
-        "metadataName": "Name",
+        "name": "Name",
         "tag": "Tag",
         "nodeList": "Node list",
         "claimedIn": "Claimed in",
@@ -1446,7 +1417,18 @@
         "smartContract": "Smart Contract",
         "targetContract": "Target contract",
         "contractFunction": "Contract function",
-        "gasBudget": "Gas budget"
+        "gasBudget": "Gas budget",
+        "standard": "Standard",
+        "uri": "URI",
+        "issuer": "Issuer",
+        "issuerAddress": "Issuer Address",
+        "issuerName": "Issuer Name",
+        "collection": "Collection",
+        "collectionId": "Collection ID",
+        "collectionName": "Collection Name",
+        "royalties": "Royalties",
+        "description": "Description",
+        "attributes": "Attributes"
     },
     "filters":{
         "title": "Filters",

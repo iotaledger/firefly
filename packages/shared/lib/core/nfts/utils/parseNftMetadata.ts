@@ -1,11 +1,9 @@
-import { get } from 'svelte/store'
-
 import { networkHrp } from '@core/network/stores'
-import { isValidUri } from '@core/utils/validation'
-import { validateBech32Address } from '@core/utils/crypto'
 import { Converter } from '@core/utils/convert'
+import { validateBech32Address } from '@core/utils/crypto'
+import { isValidUri } from '@core/utils/validation'
 import { TokenStandard } from '@core/wallet/enums'
-
+import { get } from 'svelte/store'
 import { SupportedMimeType } from '../enums'
 import { IIrc27Metadata } from '../interfaces'
 import { MimeType } from '../types'
@@ -20,12 +18,13 @@ export function parseNftMetadata(metadata: string): IIrc27Metadata {
             version: parsedData.version,
             type: parsedData.type as MimeType,
             uri: parsedData.uri,
-            name: parsedData.name,
-            collectionName: parsedData.collectionName,
-            royalties: parsedData.royalties,
-            issuerName: parsedData.issuerName,
-            description: parsedData.description,
-            attributes: parsedData.attributes,
+            name: parsedData?.name,
+            collectionId: parsedData?.collectionId,
+            collectionName: parsedData?.collectionName,
+            royalties: parsedData?.royalties,
+            issuerName: parsedData?.issuerName,
+            description: parsedData?.description,
+            attributes: parsedData?.attributes,
         }
         return parsedMetadata
     } catch (error) {
@@ -34,19 +33,19 @@ export function parseNftMetadata(metadata: string): IIrc27Metadata {
 }
 
 function validate(data: IIrc27Metadata): void {
-    if (!data.standard || data.standard !== TokenStandard.IRC27) {
+    if (!data?.standard || data?.standard !== TokenStandard.IRC27) {
         throw 'Invalid standard, must be "IRC27"'
     }
 
-    if (!Object.keys(SupportedMimeType).includes(data.type)) {
+    if (!Object.keys(SupportedMimeType).includes(data?.type)) {
         throw 'Invalid MimeType, check if the file type is supported'
     }
 
-    if (data.name.length === 0) {
+    if (data?.name.length === 0) {
         throw 'Empty name, it is a required field'
     }
 
-    if (data.uri.length === 0) {
+    if (data?.uri.length === 0) {
         throw 'Empty URI'
     } else if (!isValidUri(data.uri)) {
         throw 'Invalid URI'

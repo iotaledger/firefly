@@ -14,6 +14,7 @@
     export let copyValue: string = ''
     export let isCopyable: boolean = false
     export let tooltipText: string = ''
+    export let shrink: boolean = false
 
     let isVertical: boolean = false
     let valueContainer: HTMLElement
@@ -24,7 +25,7 @@
     })
 </script>
 
-<div class="w-full">
+<div class={shrink ? '' : 'w-full'}>
     <CopyableBox
         value={copyValue ? copyValue : valueText}
         {isCopyable}

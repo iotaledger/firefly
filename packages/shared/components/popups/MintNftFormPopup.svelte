@@ -195,8 +195,8 @@
             bind:value={inputs.type}
             bind:error={typeError}
             onSelect={handleSelectNftType}
-            label={localize('popups.mintNftForm.property.type')}
-            placeholder={localize('popups.mintNftForm.property.type')}
+            label={localize('general.type')}
+            placeholder={localize('general.type')}
             items={nftTypeOptions}
             fontSize="sm"
             lineHeight="140"
@@ -205,21 +205,21 @@
         <TextInput
             bind:value={inputs.uri}
             bind:error={uriError}
-            label={localize('popups.mintNftForm.property.uri')}
-            placeholder={localize('popups.mintNftForm.property.uri')}
+            label={localize('general.uri')}
+            placeholder={localize('general.uri')}
         />
         <TextInput
             bind:value={inputs.name}
             bind:error={nameError}
-            label={localize('popups.mintNftForm.property.name')}
-            placeholder={localize('popups.mintNftForm.property.name')}
+            label={localize('general.name')}
+            placeholder={localize('general.name')}
         />
         <optional-inputs class="flex flex-row flex-wrap gap-4">
             {#each Object.keys(inputs).filter((key) => !['type', 'uri', 'name'].includes(key)) as key}
                 <OptionalInput
                     bind:value={inputs[key]}
                     bind:error={optionalInputErrors[key]}
-                    label={localize(`popups.mintNftForm.property.${key}`)}
+                    label={localize(`general.${key}`)}
                     description={localize(`tooltips.mintNftForm.${key}`)}
                     fontSize="14"
                 />
