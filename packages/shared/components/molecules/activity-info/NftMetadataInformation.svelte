@@ -13,6 +13,8 @@
         [key in keyof IIrc27Metadata]?: {
             data: unknown
             isTooltipVisible?: boolean
+            copyValue?: string
+            isCopyable?: boolean
         }
     }
 
@@ -23,7 +25,7 @@
 
     function createNftMetadataDetailsList(
         metadata: IIrc27Metadata | string
-    ): NftMetadataDetailsList | { metadata: { data: string } } {
+    ): NftMetadataDetailsList | { metadata: { data: string; copyValue?: string; isCopyable?: boolean } } {
         if (typeof metadata === 'string') {
             let formattedMetadata: string
             try {
@@ -32,7 +34,7 @@
                 formattedMetadata = metadata
             }
 
-            return { metadata: { data: formattedMetadata } }
+            return { metadata: { data: formattedMetadata, isCopyable: true } }
         }
         return createIrc27NftMetadataDetailsList(metadata)
     }
@@ -40,13 +42,15 @@
     function createIrc27NftMetadataDetailsList(metadata: IIrc27Metadata): NftMetadataDetailsList {
         return {
             ...(metadata.standard && {
-                standard: { data: metadata.version ? `${metadata.standard} - ${metadata.version}` : standard },
+                standard: {
+                    data: metadata.version ? `${metadata.standard} - ${metadata.version}` : metadata?.standard,
+                },
             }),
             ...(metadata?.type && {
                 type: { data: metadata.type as string, isTooltipVisible: true },
             }),
             ...(metadata?.uri && {
-                uri: { data: metadata.uri },
+                uri: { data: metadata.uri, isCopyable: true },
             }),
             ...(metadata?.issuerName && {
                 issuerName: { data: metadata.issuerName, isTooltipVisible: true },
@@ -64,6 +68,6 @@
         valueText={value.data}
         tooltipText={value.isTooltipVisible ? localize(`tooltips.transactionDetails.nftMetadata.${key}`) : undefined}
         classes={key === 'metadata' ? 'whitespace-pre-wrap' : ''}
-        isCopyable
+        isCopyable={value.isCopyable}
     />
 {/each}
