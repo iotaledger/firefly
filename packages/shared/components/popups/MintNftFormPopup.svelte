@@ -167,7 +167,7 @@
 
     function convertInputsToMetadataType(inputs: Inputs): IIrc27Metadata {
         return {
-            standard: standard ?? TokenStandard.IRC27,
+            standard: standard ?? TokenStandard.Irc27,
             version,
             ...inputs,
             royalties: inputs.royalties ? JSON.parse(inputs.royalties) : undefined,
