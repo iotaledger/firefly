@@ -62,6 +62,7 @@ export interface IAccount {
         meltAmount: HexEncodedAmount,
         transactionOptions?: TransactionOptions
     ): Promise<Transaction>
+    decreaseVotingPower(amount: string): Promise<Transaction>
     destroyAlias(aliasId: string, transactionOptions?: TransactionOptions): Promise<Transaction>
     destroyFoundry(foundryId: string, transactionOptions?: TransactionOptions): Promise<Transaction>
     generateAddress(options?: AddressGenerationOptions): Promise<Address>
@@ -72,6 +73,7 @@ export interface IAccount {
     getOutput(outputId: string): Promise<OutputData>
     getOutputsWithAdditionalUnlockConditions(outputs: OutputsToClaim): Promise<string[]>
     getTransaction(transactionId: string): Promise<Transaction>
+    getVotingPower(): Promise<string>
     incomingTransactions(): Promise<[string, [ITransactionPayload, IOutputResponse[]]][]>
     increaseNativeTokenSupply(
         tokenId: string,
@@ -79,6 +81,7 @@ export interface IAccount {
         increaseNativeTokenSupplyOptions?: IncreaseNativeTokenSupplyOptions,
         transactionOptions?: TransactionOptions
     ): Promise<MintTokenTransaction>
+    increaseVotingPower(amount: string): Promise<Transaction>
     minimumRequiredStorageDeposit(outputs: OutputTypes[]): Promise<string>
     mintNativeToken(
         nativeTokenOptions: NativeTokenOptions,
@@ -93,6 +96,11 @@ export interface IAccount {
         options?: TransactionOptions
     ): Promise<PreparedTransactionData>
     prepareTransaction(outputs: OutputTypes[], options?: TransactionOptions): Promise<PreparedTransactionData>
+    retryTransactionUntilIncluded(
+        transactionId: string,
+        interval?: number,
+        maxAttempts?: number
+    ): Promise<PreparedTransactionData>
     sendAmount(addressesWithAmount: AddressWithAmount[], transactionOptions?: TransactionOptions): Promise<Transaction>
     sendMicroTransaction(
         addressesWithMicroAmount: AddressWithMicroAmount[],

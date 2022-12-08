@@ -31,7 +31,7 @@
     }
 
     const transactionDetails = get(newTransactionDetails)
-    let { metadata, recipient, tag, layer2Parameters } = transactionDetails
+    let { metadata, recipient, tag, layer2Parameters, disableAssetSelection } = transactionDetails
 
     let assetAmountInput: AssetAmountInput
     let nftInput: NftInput
@@ -76,6 +76,7 @@
                 tag,
                 metadata,
                 layer2Parameters,
+                disableAssetSelection,
             })
         } else {
             setNewTransactionDetails({
@@ -84,6 +85,7 @@
                 nftId,
                 tag,
                 metadata,
+                disableAssetSelection,
             })
         }
     }
@@ -136,13 +138,19 @@
         {localize('popups.transaction.title')}
     </Text>
     <send-form-inputs class="flex flex-col space-y-4">
-        {#if hasSpendableNfts}
+        {#if hasSpendableNfts && !disableAssetSelection}
             <Tabs bind:activeTab {tabs} />
         {/if}
         {#if activeTab === SendForm.SendToken}
-            <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:unit />
+            <AssetAmountInput
+                bind:this={assetAmountInput}
+                bind:asset
+                bind:rawAmount
+                bind:unit
+                {disableAssetSelection}
+            />
         {:else}
-            <NftInput bind:this={nftInput} bind:nftId />
+            <NftInput bind:this={nftInput} bind:nftId readonly={disableAssetSelection} />
         {/if}
         <NetworkInput bind:this={networkInput} bind:networkAddress showLayer2={isSendTokenTab} />
         <RecipientInput bind:this={recipientInput} bind:recipient {isLayer2} />

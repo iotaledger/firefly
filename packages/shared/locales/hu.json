@@ -1663,7 +1663,7 @@
                 "Confirmed": "átutalva ide:",
                 "Conflicting": "átutalás sikertelen"
             },
-            "selftransaction": {
+            "selfTransaction": {
                 "Pending": "átutalás folyamatban ide:",
                 "Confirmed": "átutalva ide:",
                 "Conflicting": "átutalás sikertelen"

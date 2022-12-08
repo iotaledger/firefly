@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Text, ButtonSize } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { Platform } from '@core/app'
+    import { openUrlInBrowser } from '@core/app'
     import { HelpAndInfoRoute } from '@core/router'
 
     export let route: HelpAndInfoRoute
@@ -9,7 +9,7 @@
     export let actionLocale: string
 
     function handleClick(): void {
-        Platform.openUrl(url)
+        openUrlInBrowser(url)
     }
 </script>
 

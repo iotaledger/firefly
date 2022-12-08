@@ -30,6 +30,6 @@
 
 {#if localizationKey && inclusionState}
     <Pill {backgroundColor} {darkBackgroundColor} {textColor}>
-        {localize(`pills.${localizationKey}.${inclusionState}`).toLowerCase()}
+        {localize(`pills.${localizationKey}.${inclusionState}`)}
     </Pill>
 {/if}

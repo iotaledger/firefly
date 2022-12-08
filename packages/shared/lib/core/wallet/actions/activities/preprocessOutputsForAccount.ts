@@ -32,7 +32,7 @@ export async function preprocessOutputsForAccount(account: IAccountState): Promi
             const incomingTransaction = incomingTransactions[transactionId]
             const processedTransaction = preprocessGroupedOutputs(
                 groupedOutputs[transactionId],
-                incomingTransaction,
+                incomingTransaction?.[1] ?? [],
                 account
             )
 
