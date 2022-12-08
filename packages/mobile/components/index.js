@@ -13,6 +13,7 @@ export { default as Route } from './Route.svelte'
 export { default as StrongholdUnlock } from './StrongholdUnlock.svelte'
 export { default as TabPane } from './TabPane.svelte'
 export { default as TokenUnitSwapper } from './TokenUnitSwapper.svelte'
+export { default as TokenWithMax } from './TokenWithMax.svelte'
 export { default as TopBar } from './TopBar.svelte'
 
 export * from './buttons'

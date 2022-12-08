@@ -13,10 +13,10 @@
         NewTransactionType,
         updateNewTransactionDetails,
     } from '@core/wallet'
-    import { AmountInput, Button } from '@ui'
+    import { AmountInput, Button, HR } from '@ui'
 
     import { getAssetById } from '@core/wallet'
-    import { TokenUnitSwapper } from '../../../../../components'
+    import { TokenUnitSwapper, TokenWithMax } from '../../../../../components'
     import { sendRouter } from '../../../../../lib/routers'
 
     let amount: string
@@ -89,6 +89,18 @@
         amountInputElement.focus()
     }
 
+    function onClickAvailableBalance(): void {
+        const isRawAmount = asset?.metadata?.decimals && asset?.metadata?.unit
+        if (isRawAmount) {
+            const parsedAmount = formatTokenAmountDefault(asset?.balance?.available, asset?.metadata, unit)
+            amount = parsedAmount
+            unit = asset?.metadata?.unit
+            return
+        }
+        amount = asset?.balance.available.toString() ?? '0'
+        unit = undefined
+    }
+
     function onContinueClick(): void {
         updateNewTransactionDetails({
             type: $newTransactionDetails.type,
@@ -118,7 +130,13 @@
             <TokenUnitSwapper {tokenMetadata} selectedUnit={unit} onClick={toggleUnit} />
         </div>
     </div>
-    <Button onClick={onContinueClick} disabled={!!error} classes="w-full">
-        {error ?? localize('actions.continue')}
-    </Button>
+    <div class="flex flex-col space-y-8 w-full">
+        {#if $newTransactionDetails?.type === NewTransactionType.TokenTransfer}
+            <HR overrideColor classes="border-gray-200 dark:border-gray-700" />
+            <TokenWithMax {asset} onMaxClick={onClickAvailableBalance} />
+        {/if}
+        <Button onClick={onContinueClick} disabled={!!error} classes="w-full">
+            {error ?? localize('actions.continue')}
+        </Button>
+    </div>
 </div>
