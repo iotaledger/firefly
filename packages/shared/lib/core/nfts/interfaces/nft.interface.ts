@@ -7,5 +7,5 @@ export interface INft {
     issuer: AddressTypes
     metadata: string
     parsedMetadata?: IIrc27Metadata
-    isOwned: boolean
+    isSpendable: boolean
 }
