@@ -23,11 +23,11 @@
     let valueContainerWidth: number
 
     onMount(() => {
-        isVertical = (valueContainer?.firstChild as HTMLElement)?.scrollWidth > valueContainerWidth
+        isVertical = shrink || (valueContainer?.firstChild as HTMLElement)?.scrollWidth > valueContainerWidth
     })
 </script>
 
-<div class={shrink ? '' : 'w-full'}>
+<div class={shrink ? 'flex-shrink-0' : 'w-full'}>
     <CopyableBox
         value={copyValue ? copyValue : valueText}
         {isCopyable}

@@ -161,12 +161,7 @@
                     </Text>
                     <div class="flex flex-wrap gap-3">
                         {#each Object.values(attributes) as attribute}
-                            <div
-                                class="flex flex-col bg-gray-50 dark:bg-gray-850 rounded-2xl p-3"
-                                style="max-width: 100px"
-                            >
-                                <KeyValueBox keyText={attribute.trait_type} valueText={attribute.value} shrink />
-                            </div>
+                            <KeyValueBox keyText={attribute.trait_type} valueText={attribute.value} shrink />
                         {/each}
                     </div>
                 </nft-attributes>
