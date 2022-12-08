@@ -1,37 +1,58 @@
 <script lang="typescript">
     import { INft, ParentMimeType } from '@core/nfts'
-    import { Icon } from 'shared/components'
+    import { Icon, NftMediaSize } from 'shared/components'
     import { Icon as IconEnum } from '@auxiliary/icon'
+    import { appSettings } from '@core/app'
 
     export let nft: INft = undefined
+    export let size: NftMediaSize
+    export let bgColor = 'gray-500'
+    export let darkBgColor = 'gray-500'
 
     const width = '100%'
     const height = '100%'
 
-    $: icon = mapNftToIcon(nft)
+    // primaryColor: gives extra color customization outside of default text colors, used in CollectiblesImageLarge to change mountain color
+    // secondaryColor: alters the large icon's circle color
+    $: primaryColor = $appSettings.darkMode ? '#25395F' : '#C4D1E8'
+    $: secondaryColor = $appSettings.darkMode ? '#F0F5FE' : '#D8E3F5'
 
-    function mapNftToIcon(nft: INft): IconEnum {
+    let iconSize: 'Small' | 'Large'
+    $: iconSize =
+        size === NftMediaSize.Large || size === NftMediaSize.ExtraLarge || size === NftMediaSize.Flexible
+            ? 'Large'
+            : 'Small'
+    $: icon = mapNftToIcon(nft, iconSize)
+
+    function mapNftToIcon(nft: INft, iconSize: 'Small' | 'Large'): IconEnum {
         const nftType = nft?.parsedMetadata?.type?.split('/', 1)
 
         switch (nftType?.[0]) {
             case ParentMimeType.Image:
-                return IconEnum.Picture
+                return IconEnum[`CollectiblesImage${iconSize}`]
             case ParentMimeType.Video:
-                return IconEnum.Play
+                return IconEnum[`CollectiblesVideo${iconSize}`]
             case ParentMimeType.Audio:
-                return IconEnum.Bell
+                return IconEnum[`CollectiblesAudio${iconSize}`]
             case ParentMimeType.Text:
-                return IconEnum.Doc
+                return IconEnum[`CollectiblesText${iconSize}`]
             case ParentMimeType.Application:
-                return IconEnum.Parchment
+                return IconEnum[`CollectiblesApplication${iconSize}`]
             case ParentMimeType.Model:
-                return IconEnum.Help
+                return IconEnum[`CollectiblesModel${iconSize}`]
             case ParentMimeType.Font:
-                return IconEnum.Language
+                return IconEnum[`CollectiblesFont${iconSize}`]
             default:
-                return IconEnum.Collectibles
+                return IconEnum[`CollectiblesUnknown${iconSize}`]
         }
     }
 </script>
 
-<Icon {icon} {width} {height} classes="text-white dark:text-gray-800 text-center" />
+<Icon
+    {icon}
+    {width}
+    {height}
+    {primaryColor}
+    {secondaryColor}
+    classes={`text-white dark:text-gray-800 bg-${bgColor} dark:bg-${darkBgColor} text-center`}
+/>

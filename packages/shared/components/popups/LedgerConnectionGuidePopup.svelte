@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { LedgerAnimation, Button, Link, Text } from 'shared/components'
-    import { Platform } from '@core/app'
+    import { openUrlInBrowser } from '@core/app'
     import { closePopup } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
 
@@ -34,7 +34,7 @@
             <Link
                 classes="ml-0.5 inline-block text-13 leading-160"
                 onClick={() =>
-                    Platform.openUrl(
+                    openUrlInBrowser(
                         'https://support.ledger.com/hc/en-us/articles/360019868977-Fix-USB-connection-issues-with-Ledger-Live?support=true'
                     )}
             >

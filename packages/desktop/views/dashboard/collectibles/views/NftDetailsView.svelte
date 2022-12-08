@@ -21,7 +21,7 @@
     import { ActivityType, formatTokenAmountPrecise } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network/constants'
     import { activeProfile } from '@core/profile/stores'
-    import { Platform } from '@core/app'
+    import { openUrlInBrowser } from '@core/app'
     import { ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
     import { openPopup } from '@auxiliary/popup'
 
@@ -58,7 +58,7 @@
     }
 
     function handleExplorerClick(): void {
-        Platform.openUrl(`${explorerUrl}/${ExplorerEndpoint.Nft}/${id}`)
+        openUrlInBrowser(`${explorerUrl}/${ExplorerEndpoint.Nft}/${id}`)
     }
 
     function handleSendClick(): void {
@@ -76,7 +76,7 @@
 </script>
 
 <div class="flex flex-row w-full h-full space-x-4 overflow-auto">
-    <div class="flex w-full h-full bg-gray-500 items-center justify-center rounded-2xl">
+    <div class="flex w-full h-full bg-gray-200 dark:bg-gray-700 items-center justify-center rounded-2xl">
         <NftMediaContainer nftId={id} size={NftMediaSize.ExtraLarge} />
     </div>
     <Pane classes="flex flex-col p-6 w-full h-full max-w-lg">

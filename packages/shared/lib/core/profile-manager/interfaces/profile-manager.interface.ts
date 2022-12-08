@@ -4,6 +4,7 @@ import type {
     Event,
     EventId,
     EventType,
+    GenerateAddressOptions,
     LedgerNanoStatus,
     Node,
     NodeInfoWrapper,
@@ -24,6 +25,13 @@ export interface IProfileManager {
     destroy(): void
     deregisterParticipationEvent(eventId: EventId): Promise<void>
     emitTestEvent(event: WalletEvent): Promise<void>
+    generateAddress(
+        accountIndex: number,
+        internal: boolean,
+        addressIndex: number,
+        options?: GenerateAddressOptions,
+        bech32Hrp?: string
+    ): Promise<string>
     generateMnemonic(): Promise<string>
     getAccountIndexes(): Promise<number[]>
     getAccount(accountIndex: number): Promise<IAccount>

@@ -9,7 +9,7 @@
         needsToAcceptLatestPrivacyPolicy,
         TERMS_OF_SERVICE_VERSION,
         PRIVACY_POLICY_VERSION,
-        Platform,
+        openUrlInBrowser,
     } from '@core/app'
 
     const TOS_LINK = 'https://firefly.iota.org/terms'
@@ -20,11 +20,11 @@
     const privacyPolicy = needsToAcceptLatestPrivacyPolicy()
 
     function handleViewTosClick(): void {
-        Platform.openUrl(TOS_LINK)
+        openUrlInBrowser(TOS_LINK)
     }
 
     function handleViewPrivPolicyClick(): void {
-        Platform.openUrl(PRIVACY_POLICY_LINK)
+        openUrlInBrowser(PRIVACY_POLICY_LINK)
     }
 
     function handleConfirmClick(): void {

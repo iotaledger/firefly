@@ -563,7 +563,7 @@
                 "menu": {
                     "download": "Download",
                     "setAvatar": "Set NFT as profile avatar",
-                    "view": "View in IPFS",
+                    "view": "View media in browser",
                     "burn": "Burn NFT"
                 }
             },
@@ -633,9 +633,25 @@
         "storageDepositBreakdown": {
             "title": "Storage deposit breakdown",
             "totalStorageDeposit": "Total storage deposit",
+            "basicOutputs": {
+                "title": "Native Tokens",
+                "subtitle": "Reserved for Native Token storage"
+            },
+            "nftOutputs": {
+                "title": "NFTs",
+                "subtitle": "Reserved for NFT storage"
+            },
+            "aliasOutputs": {
+                "title": "Aliases",
+                "subtitle": "Reserved for Alias storage"
+            },
+            "foundryOutputs": {
+                "title": "Foundries",
+                "subtitle": "Reserved for Native Token Foundry storage"
+            },
             "pendingTransactions": {
-                "title": "Locked in pending transactions",
-                "subtitle": "For sending native assets and small IOTA amounts"
+                "title": "Transactions",
+                "subtitle": "Temporarily locked in unclaimed transactions"
             },
             "minimizeStorageDepositButton": "Minimize storage deposit"
         },
@@ -683,6 +699,13 @@
             "hideAccount": "Delete wallet",
             "errorTitle": "Unable to delete {name}",
             "errorBody1": "You cannot delete this wallet, you must have at least one."
+        },
+        "externalUrl": {
+            "title": "Open URL in Browser",
+            "body": "Are you sure you want to open \"{url}\" in the browser?",
+            "hint": "This URL is unknown to Firefly. Please double check the URL before opening it.",
+            "action": "Open URL",
+            "invalidProtocol": "Cannot open URL with invalid protocol"
         },
         "hideAccount": {
             "title": "Hide {name}?",
@@ -1925,7 +1948,7 @@
                 "Confirmed": "transferred to",
                 "Conflicting": "failed to transfer"
             },
-            "selftransaction": {
+            "selfTransaction": {
                 "Pending": "transferring to",
                 "Confirmed": "transferred to",
                 "Conflicting": "failed to transfer"
