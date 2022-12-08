@@ -6,40 +6,6 @@
     import { IProposal } from '@core/governance/interfaces'
 
     export let proposals: IProposal[] = []
-
-    // const IotaDAO: IOrganization = {
-    //     name: 'IOTA Foundation',
-    //     icon: IconEnum.Iota,
-    // }
-
-    // // mocked proposals
-    // let proposals: IProposal[] = [
-    //     {
-    //         title: 'Important Soonaverse decision',
-    //         status: ProposalStatus.Announcement,
-    //     },
-    //     {
-    //         organization: IotaDAO,
-    //         title: 'The New Shimmer Governance',
-    //         status: ProposalStatus.VotingOpen,
-    //         hasVoted: true,
-    //     },
-    //     {
-    //         organization: IotaDAO,
-    //         title: 'Short proposal',
-    //         status: ProposalStatus.Counting,
-    //         hasVoted: true,
-    //     },
-    //     {
-    //         title: 'Medium long proposal',
-    //         status: ProposalStatus.Counting,
-    //         hasVoted: true,
-    //     },
-    //     {
-    //         title: 'Important proposal',
-    //         status: ProposalStatus.Counting,
-    //     }
-    //
 </script>
 
 <proposals-container class="flex flex-col h-full">
