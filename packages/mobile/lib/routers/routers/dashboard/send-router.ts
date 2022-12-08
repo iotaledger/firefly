@@ -17,7 +17,7 @@ export class SendRouter extends Subrouter<SendRoute> {
     }
 
     next(event: ISendRouterEvent = {}): void {
-        const { needsUnlock, addReference } = event
+        const { needsUnlock, addReference, addExpiration } = event
 
         let nextRoute: SendRoute
         const currentRoute = get(this.routeStore)
@@ -38,6 +38,8 @@ export class SendRouter extends Subrouter<SendRoute> {
             case SendRoute.Review: {
                 if (addReference) {
                     nextRoute = SendRoute.Reference
+                } else if (addExpiration) {
+                    nextRoute = SendRoute.Expiration
                 } else {
                     if (needsUnlock) {
                         nextRoute = SendRoute.Password
@@ -48,6 +50,7 @@ export class SendRouter extends Subrouter<SendRoute> {
                 break
             }
             case SendRoute.Reference:
+            case SendRoute.Expiration:
             case SendRoute.Password: {
                 super.previous()
                 break
