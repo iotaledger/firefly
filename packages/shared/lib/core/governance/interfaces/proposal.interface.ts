@@ -2,9 +2,10 @@ import { ProposalStatus } from '../enums'
 import { IOrganization } from './organization.interface'
 
 export interface IProposal {
-    organization?: IOrganization
-    title: string
-    status: ProposalStatus
     hasVoted?: boolean
+    id: string
     milestones?: Record<ProposalStatus, number>
+    organization?: IOrganization
+    status: ProposalStatus
+    title: string
 }

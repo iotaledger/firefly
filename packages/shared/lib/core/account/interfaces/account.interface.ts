@@ -36,6 +36,7 @@ import {
     IncreaseNativeTokenSupplyOptions,
     AccountMetadata,
     AliasOutputOptions,
+    ParticipationOverview,
 } from '@iota/wallet'
 
 export interface IAccount {
@@ -72,6 +73,7 @@ export interface IAccount {
     getMetadata(): AccountMetadata
     getOutput(outputId: string): Promise<OutputData>
     getOutputsWithAdditionalUnlockConditions(outputs: OutputsToClaim): Promise<string[]>
+    getParticipationOverview(): Promise<ParticipationOverview>
     getTransaction(transactionId: string): Promise<Transaction>
     getVotingPower(): Promise<string>
     incomingTransactions(): Promise<[string, [ITransactionPayload, IOutputResponse[]]][]>

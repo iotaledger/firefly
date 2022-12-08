@@ -5,6 +5,9 @@
     import { milestoneToDate } from '@core/utils'
     import { Button, Text, MeatballMenuButton, Pane, ProposalStatusPill, TextType, FontWeight, Icon } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
+    import { getVotingEvent } from '@core/profile-manager'
+    import { getParticipationOverview, selectedAccount } from '@core/account'
+    import { Event, TrackedParticipationOverview } from '@iota/wallet'
 
     const dateFormat = {
         year: 'numeric',
@@ -15,23 +18,34 @@
         timeZoneName: 'short',
     } as Intl.DateTimeFormatOptions
 
-    const votesCounter = {
-        total: 0, // mocked data
-        power: '4821 SMR', // mocked data
+    let event: Event
+    $: {
+        getVotingEvent($selectedProposal?.id).then((votingEvent) => (event = votingEvent))
     }
+    let selectedProposalOverview: TrackedParticipationOverview[]
+    $: {
+        getParticipationOverview($selectedAccount?.index).then((participationOverview) => {
+            selectedProposalOverview = participationOverview.participations
+                ?.filter((participation) => participation[0] === $selectedProposal?.id)
+                ?.map((participation) => participation[1][1])
+        })
+    }
+    $: totalVotes =
+        selectedProposalOverview?.reduce((acc, trackedParticipation) => trackedParticipation.amount ? parseInt(trackedParticipation.amount, 10) + acc : acc, 0) ?? 0
+    $: votesCounter = {
+        total: totalVotes,
+        power: $selectedAccount?.votingPower,
+    }
+    $: questions = event?.data?.payload?.questions
 
     const proposalInformation = {
         countingEnds: formatDate(
             milestoneToDate($networkStatus.currentMilestone, $selectedProposal?.milestones?.closed),
             dateFormat
         ),
-        eventId: 'SGO-0001', // mocked data
+        eventId: $selectedProposal?.id,
         nodeUrl: 'jfjk821391290jha.url', // mocked data
     }
-
-    // just used for mocking
-    const questions = Array(4).fill('Should we burn the unclaimed tokens')
-    const options = ['This is option 1', 'This is option 2', 'This is option 3', 'Abstain']
 
     let openedQuestionIndex = null
 
@@ -108,14 +122,16 @@
                             <Text smaller fontWeight={FontWeight.bold} overrideColor classes="mb-1 text-blue-500"
                                 >Question {questionIndex + 1}</Text
                             >
-                            <Text fontWeight={FontWeight.bold} overrideColor classes="text-gray-900">{question}</Text>
+                            <Text fontWeight={FontWeight.bold} overrideColor classes="text-gray-900"
+                                >{question.text}</Text
+                            >
                         </div>
                         <div class="transform {openedQuestionIndex === questionIndex ? 'rotate-180' : 'rotate-0'}">
                             <Icon icon={IconEnum.ChevronDown} classes="text-gray-500" />
                         </div>
                     </div>
                     <ul class:mt-4={openedQuestionIndex === questionIndex} class="space-y-2">
-                        {#each options as option, optionIndex}
+                        {#each question.answer as answer, answerIndex}
                             <li
                                 class:hidden={openedQuestionIndex !== questionIndex}
                                 class="flex justify-between items-center p-3 rounded-md border border-solid border-gray-200"
@@ -124,9 +140,9 @@
                                     <span
                                         class="flex items-center justify-center h-5 w-5 text-12 text-700 text-gray-500 border border-solid border-gray-200"
                                     >
-                                        {optionIndex + 1}
+                                        {answerIndex + 1}
                                     </span>
-                                    <Text fontWeight={FontWeight.medium}>{option}</Text>
+                                    <Text fontWeight={FontWeight.medium}>{answer.text}</Text>
                                 </div>
                                 <Icon icon={IconEnum.Info} width={10} height={10} classes="text-gray-600" />
                             </li>

@@ -7,8 +7,9 @@ import { IProposal } from '@core/governance/interfaces'
 import { nodeInfo } from '@core/network'
 
 export function createProposalsFromEvents(events: Event[]): IProposal[] {
-    const proposals: IProposal[] = events.map(({ data }) => {
+    const proposals: IProposal[] = events.map(({ data, id }) => {
         const proposal = {
+            id,
             title: data.name,
             status: ProposalStatus.Announcement,
             milestones: {
