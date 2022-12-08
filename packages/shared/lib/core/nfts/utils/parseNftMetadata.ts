@@ -1,31 +1,28 @@
-import { get } from 'svelte/store'
-
 import { networkHrp } from '@core/network/stores'
-import { isValidUri } from '@core/utils/validation'
-import { validateBech32Address } from '@core/utils/crypto'
 import { Converter } from '@core/utils/convert'
-import { TokenStandard } from '@core/wallet/enums'
-
-import { SupportedMimeType } from '../enums'
-import { IIrc27Metadata } from '../interfaces'
+import { validateBech32Address } from '@core/utils/crypto'
+import { isValidUri } from '@core/utils/validation'
+import { Irc27Version, TokenStandard } from '@core/wallet/enums'
+import { get } from 'svelte/store'
+import { IIrc27Attribute, IIrc27Metadata } from '../interfaces'
 import { MimeType } from '../types'
 
 export function parseNftMetadata(metadata: string): IIrc27Metadata {
     try {
         const convertedData = Converter.hexToUtf8(metadata)
         const parsedData = metadata ? JSON.parse(convertedData) : {}
-        validate(parsedData)
+        validateRequiredFieldsForIrc27(parsedData)
         const parsedMetadata: IIrc27Metadata = {
             standard: parsedData.standard,
             version: parsedData.version,
             type: parsedData.type as MimeType,
             uri: parsedData.uri,
             name: parsedData.name,
-            collectionName: parsedData.collectionName,
-            royalties: parsedData.royalties,
-            issuerName: parsedData.issuerName,
-            description: parsedData.description,
-            attributes: parsedData.attributes,
+            description: parsedData?.description,
+            issuerName: parsedData?.issuerName,
+            collectionName: parsedData?.collectionName,
+            attributes: getValidAttributes(parsedData?.attributes),
+            royalties: getValidRoyalties(parsedData?.royalties),
         }
         return parsedMetadata
     } catch (error) {
@@ -33,61 +30,39 @@ export function parseNftMetadata(metadata: string): IIrc27Metadata {
     }
 }
 
-function validate(data: IIrc27Metadata): void {
-    if (!data.standard || data.standard !== TokenStandard.IRC27) {
+function validateRequiredFieldsForIrc27(data: IIrc27Metadata): void {
+    if (!data?.standard || data?.standard !== TokenStandard.Irc27) {
         throw 'Invalid standard, must be "IRC27"'
     }
 
-    if (!Object.keys(SupportedMimeType).includes(data.type)) {
-        throw 'Invalid MimeType, check if the file type is supported'
+    if (!data?.version || data?.version !== Irc27Version.V1) {
+        throw 'Invalid version of IRC27, must be "v1.0"'
     }
 
-    if (data.name.length === 0) {
-        throw 'Empty name, it is a required field'
+    if (!data?.type) {
+        throw 'Type is a required field'
     }
 
-    if (data.uri.length === 0) {
+    if (data?.uri.length === 0) {
         throw 'Empty URI'
     } else if (!isValidUri(data.uri)) {
         throw 'Invalid URI'
     }
 
-    if (data.royalties) {
-        validateRoyalties(data.royalties)
-    }
-
-    if (data.attributes) {
-        validateAttributes(data.attributes)
+    if (data?.name.length === 0) {
+        throw 'Name is a required field'
     }
 }
 
-function validateRoyalties(royalties: unknown): void {
-    try {
-        Object.keys(royalties).forEach((key) => validateBech32Address(get(networkHrp), key))
-    } catch (err) {
-        throw `Invalid royalty address, must be a valid ${get(networkHrp)} address where royalties will be sent to.`
-    }
-
-    const isValuesValid = Object.values(royalties).every((value) => value >= 0 && value <= 1)
-    if (!isValuesValid) {
-        throw 'Invalid royalty value, it must be a numeric decimal representative of the percentage required ie. 0.05'
-    }
-
-    const isSumValid = Object.values(royalties).reduce((acc, val) => acc + val, 0) <= 1
-    if (!isSumValid) {
-        throw 'Invalid royalty value, the sum of all royalties must be less than or equal to 1'
-    }
-}
-
-function validateAttributes(attributes: unknown): void {
+function getValidAttributes(attributes: unknown): IIrc27Attribute[] {
     if (!Array.isArray(attributes)) {
-        throw 'Attributes must be an array'
+        return undefined
     }
     const isArrayOfObjects = attributes.every(
         (attribute) => typeof attribute === 'object' && !Array.isArray(attribute) && attribute !== null
     )
     if (!isArrayOfObjects) {
-        throw 'Attributes must be an array of objects'
+        return undefined
     }
     const isKeysValid = attributes.every(
         (attribute) =>
@@ -96,7 +71,7 @@ function validateAttributes(attributes: unknown): void {
             Object.keys(attribute).filter((key) => key === 'value').length === 1
     )
     if (!isKeysValid) {
-        throw 'Invalid key, attributes must have the keys "trait_type" and "value"'
+        return undefined
     }
     const isValuesValid = attributes.every(
         (attribute) =>
@@ -107,6 +82,28 @@ function validateAttributes(attributes: unknown): void {
             typeof attribute.value === 'number'
     )
     if (!isValuesValid) {
-        throw 'Invalid value, "trait_type" must be a non empty string and "value" must be a non empty string or a number'
+        return undefined
     }
+
+    return attributes as IIrc27Attribute[]
+}
+
+function getValidRoyalties(royalties: unknown): Record<string, number> {
+    try {
+        Object.keys(royalties).forEach((key) => validateBech32Address(get(networkHrp), key))
+    } catch (err) {
+        return undefined
+    }
+
+    const isValuesValid = Object.values(royalties).every((value) => value >= 0 && value <= 1)
+    if (!isValuesValid) {
+        return undefined
+    }
+
+    const isSumValid = Object.values(royalties).reduce((acc, val) => acc + val, 0) <= 1
+    if (!isSumValid) {
+        return undefined
+    }
+
+    return royalties as Record<string, number>
 }

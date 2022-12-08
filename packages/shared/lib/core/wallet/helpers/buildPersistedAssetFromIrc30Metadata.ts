@@ -10,7 +10,7 @@ export function buildPersistedAssetFromIrc30Metadata(
 ): IPersistedAsset {
     return {
         id: tokenId,
-        standard: TokenStandard.IRC30,
+        standard: TokenStandard.Irc30,
         metadata: {
             name: metadata.name,
             unit: metadata.symbol,
