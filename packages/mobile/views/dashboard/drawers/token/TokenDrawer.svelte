@@ -19,7 +19,7 @@
 
 <Drawer {onClose} {title} {fullScreen}>
     <div class="absolute right-8">
-        {#if asset?.standard === TokenStandard.IRC30 && $tokenRoute === TokenRoute.Info}
+        {#if asset?.standard === TokenStandard.Irc30 && $tokenRoute === TokenRoute.Info}
             <AssetActionsButton {asset} />
         {/if}
     </div>
