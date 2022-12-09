@@ -3,7 +3,17 @@
     import { formatDate, localize } from '@core/i18n'
     import { networkStatus } from '@core/network'
     import { milestoneToDate } from '@core/utils'
-    import { Button, Text, MeatballMenuButton, Pane, ProposalStatusPill, TextType, FontWeight, Icon } from '@ui'
+    import {
+        Button,
+        Text,
+        MeatballMenuButton,
+        Pane,
+        ProposalStatusPill,
+        TextType,
+        FontWeight,
+        Icon,
+        ProposalQuestion,
+    } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { getVotingEvent } from '@core/profile-manager'
     import { getParticipationOverview, selectedAccount } from '@core/account'
@@ -31,7 +41,11 @@
         })
     }
     $: totalVotes =
-        selectedProposalOverview?.reduce((acc, trackedParticipation) => trackedParticipation.amount ? parseInt(trackedParticipation.amount, 10) + acc : acc, 0) ?? 0
+        selectedProposalOverview?.reduce(
+            (acc, trackedParticipation) =>
+                trackedParticipation.amount ? parseInt(trackedParticipation.amount, 10) + acc : acc,
+            0
+        ) ?? 0
     $: votesCounter = {
         total: totalVotes,
         power: $selectedAccount?.votingPower,
@@ -111,46 +125,16 @@
         </Pane>
     </div>
     <Pane classes="w-3/5 h-full p-6 flex flex-col justify-between ">
-        <ul class="flex flex-1 flex-col space-y-5 overflow-y-scroll">
-            {#each questions as question, questionIndex}
-                <li
-                    on:click={() => handleQuestionClick(questionIndex)}
-                    class="flex flex-col px-5 py-4 rounded-xl border border-solid border-gray-200 cursor-pointer"
-                >
-                    <div class="flex justify-between items-center">
-                        <div class="flex flex-col">
-                            <Text smaller fontWeight={FontWeight.bold} overrideColor classes="mb-1 text-blue-500"
-                                >Question {questionIndex + 1}</Text
-                            >
-                            <Text fontWeight={FontWeight.bold} overrideColor classes="text-gray-900"
-                                >{question.text}</Text
-                            >
-                        </div>
-                        <div class="transform {openedQuestionIndex === questionIndex ? 'rotate-180' : 'rotate-0'}">
-                            <Icon icon={IconEnum.ChevronDown} classes="text-gray-500" />
-                        </div>
-                    </div>
-                    <ul class:mt-4={openedQuestionIndex === questionIndex} class="space-y-2">
-                        {#each question.answer as answer, answerIndex}
-                            <li
-                                class:hidden={openedQuestionIndex !== questionIndex}
-                                class="flex justify-between items-center p-3 rounded-md border border-solid border-gray-200"
-                            >
-                                <div class="flex space-x-3">
-                                    <span
-                                        class="flex items-center justify-center h-5 w-5 text-12 text-700 text-gray-500 border border-solid border-gray-200"
-                                    >
-                                        {answerIndex + 1}
-                                    </span>
-                                    <Text fontWeight={FontWeight.medium}>{answer.text}</Text>
-                                </div>
-                                <Icon icon={IconEnum.Info} width={10} height={10} classes="text-gray-600" />
-                            </li>
-                        {/each}
-                    </ul>
-                </li>
+        <proposal-questions class="flex flex-1 flex-col space-y-5 overflow-y-scroll">
+            {#each questions as question, index}
+                <ProposalQuestion
+                    {question}
+                    isOpened={openedQuestionIndex === index}
+                    {index}
+                    onClick={() => handleQuestionClick(index)}
+                />
             {/each}
-        </ul>
+        </proposal-questions>
         <buttons-container class="flex w-full space-x-4 mt-6">
             <Button outline classes="w-full">{localize('actions.cancel')}</Button>
             <Button classes="w-full">{localize('actions.vote')}</Button>
