@@ -9,7 +9,6 @@
     export let rawAmount: string
 
     function onBack(): void {
-        closePopup()
         openPopup({
             type: 'burnNativeTokens',
             props: { asset, rawAmount },

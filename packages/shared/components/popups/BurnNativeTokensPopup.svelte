@@ -12,7 +12,6 @@
     async function confirmClick(): Promise<void> {
         try {
             await assetAmountInput.validate()
-            closePopup()
             openPopup({
                 type: 'burnNativeTokensConfirm',
                 props: { asset, rawAmount },
