@@ -72,7 +72,7 @@
                 ? localize('popups.tokenInformation.newTokenTitle')
                 : asset?.metadata?.name}
         </Text>
-        {#if asset?.standard === TokenStandard.IRC30}
+        {#if asset?.standard === TokenStandard.Irc30}
             <AssetActionsButton {asset} />
         {/if}
     </div>
@@ -100,7 +100,7 @@
             <KeyValueBox
                 keyText={localize('popups.tokenInformation.tokenMetadata.tokenId')}
                 valueText={asset?.id}
-                isCopyable={asset?.standard === TokenStandard.IRC30}
+                isCopyable={asset?.standard === TokenStandard.Irc30}
                 copyValue={asset?.id}
             />
             {#if asset?.metadata?.url}

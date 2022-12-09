@@ -34,7 +34,7 @@
 
     let metadata: IIrc30Metadata
     $: metadata = {
-        standard: TokenStandard.IRC30,
+        standard: TokenStandard.Irc30,
         name: tokenName,
         symbol,
         decimals: Number(decimals),
