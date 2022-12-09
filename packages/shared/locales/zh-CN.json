@@ -1663,7 +1663,7 @@
                 "Confirmed": "已发送给",
                 "Conflicting": "传送失败"
             },
-            "selftransaction": {
+            "selfTransaction": {
                 "Pending": "正在发送给",
                 "Confirmed": "已发送给",
                 "Conflicting": "传送失败"

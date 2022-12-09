@@ -554,32 +554,52 @@
                 "emptyDescription": "Deposit or Receive your first collectible now!"
             },
             "details": {
-                "collection": "Collection",
-                "nftId": "NFT ID",
-                "nftType": "NFT Type",
-                "storageDeposit": "Storage deposit",
                 "storageDepositDescription": "A refundable deposit required to store your NFT on the Tangle.",
                 "attributes": "Attributes",
                 "menu": {
                     "download": "Download",
                     "setAvatar": "Set NFT as profile avatar",
-                    "view": "View in IPFS",
+                    "view": "View media in browser",
                     "burn": "Burn NFT"
                 }
+            }
+        },
+        "governance": {
+            "votingPower": {
+                "title": "Voting power",
+                "maximal": "Maximal voting power: {value}",
+                "manage": "Manage voting power"
             },
-            "metadata": {
-                "standard": "Standard",
-                "version": "Version",
-                "type": "Type",
-                "uri": "URI",
-                "name": "Name",
-                "collectionId" : "Collection Id",
-                "collectionName": "Collection Name",
-                "royalties": "Royalties",
-                "issuerName": "Issuer Name",
-                "description": "Description",
-                "attributes": "Attributes",
-                "metadata": "Metadata"
+            "proposalsDetails": {
+                "title": "Details",
+                "activeProposals": "Active proposals",
+                "votingProposals": "Proposals you are voting on",
+                "votedProposals": "Total proposals you voted on"
+            },
+            "proposals": {
+                "title": "Proposals",
+                "voted": "Voted",
+                "successRegister": "Proposal successfully registered"
+            },
+            "statusTimeline": {
+                "announcement": "Announcement",
+                "votingOpen": "Voting open",
+                "counting": "Counting starts",
+                "closed": "Counting stops"
+            },
+            "details": {
+                "fullProposal": "Read the full proposal",
+                "yourVote": {
+                    "title": "Your vote",
+                    "total": "Total votes counted",
+                    "power": "Voting power"
+                },
+                "proposalInformation": {
+                    "title": "Proposal information",
+                    "countingEnds": "Counting ends on",
+                    "eventId": "Event ID",
+                    "nodeUrl": "Node URL"
+                }
             }
         }
     },
@@ -595,9 +615,25 @@
         "storageDepositBreakdown": {
             "title": "Storage deposit breakdown",
             "totalStorageDeposit": "Total storage deposit",
+            "basicOutputs": {
+                "title": "Native Tokens",
+                "subtitle": "Reserved for Native Token storage"
+            },
+            "nftOutputs": {
+                "title": "NFTs",
+                "subtitle": "Reserved for NFT storage"
+            },
+            "aliasOutputs": {
+                "title": "Aliases",
+                "subtitle": "Reserved for Alias storage"
+            },
+            "foundryOutputs": {
+                "title": "Foundries",
+                "subtitle": "Reserved for Native Token Foundry storage"
+            },
             "pendingTransactions": {
-                "title": "Locked in pending transactions",
-                "subtitle": "For sending native assets and small IOTA amounts"
+                "title": "Transactions",
+                "subtitle": "Temporarily locked in unclaimed transactions"
             },
             "minimizeStorageDepositButton": "Minimize storage deposit"
         },
@@ -645,6 +681,13 @@
             "hideAccount": "Delete wallet",
             "errorTitle": "Unable to delete {name}",
             "errorBody1": "You cannot delete this wallet, you must have at least one."
+        },
+        "externalUrl": {
+            "title": "Open URL in Browser",
+            "body": "Are you sure you want to open \"{url}\" in the browser?",
+            "hint": "This URL is unknown to Firefly. Please double check the URL before opening it.",
+            "action": "Open URL",
+            "invalidProtocol": "Cannot open URL with invalid protocol"
         },
         "hideAccount": {
             "title": "Hide {name}?",
@@ -950,22 +993,20 @@
             "description": "You must own an alias output to mint native tokens. To continue, please create an alias first"
         },
         "mintNftForm": {
-            "title": "Mint simple NFT",
-            "property": {
-                "type": "Type",
-                "uri": "URI",
-                "name": "Name",
-                "collectionId" : "Collection Id",
-                "collectionName": "Collection Name",
-                "royalties": "Royalties",
-                "issuerName": "Issuer Name",
-                "description": "Description",
-                "attributes": "Attributes"
-            }
+            "title": "Mint simple NFT"
         },
         "faucetRequest": {
             "title": "Faucet request",
             "body": "Are you sure you want to request {token} tokens from the {network} faucet?"
+        },
+        "manageVotingPower": {
+            "title": "Manage voting power",
+            "body": "Define your voting power to vote on proposals.",
+            "hint": "Increasing your voting power locks your funds. In order to make them spendable again, you need to decrease your voting power. This affects all proposals with an active vote."
+        },
+        "registerProposal": {
+            "title": "Register proposal",
+            "body": "Please provide the information listed below to register a proposal."
         }
     },
     "charts": {
@@ -1148,7 +1189,9 @@
         "initializing": "Initializing",
         "delete": "Delete",
         "addReference": "Add reference",
-        "depositNft": "Deposit NFTs"
+        "depositNft": "Deposit NFTs",
+        "vote": "Vote",
+        "registerProposal": "Register proposal"
     },
     "general": {
         "recipient": "Recipient",
@@ -1343,7 +1386,7 @@
         "availableBalanceTooltip": "An asset's total balance minus any funds that are required to cover the storage deposit (i.e. funds that are locked in pending transactions, reserved for Native Tokens, or reserved for NFTs).",
         "amountClaimed": "{amount} claimed",
         "metadata": "Metadata",
-        "metadataName": "Name",
+        "name": "Name",
         "tag": "Tag",
         "nodeList": "Node list",
         "claimedIn": "Claimed in",
@@ -1374,7 +1417,20 @@
         "smartContract": "Smart Contract",
         "targetContract": "Target contract",
         "contractFunction": "Contract function",
-        "gasBudget": "Gas budget"
+        "gasBudget": "Gas budget",
+        "standard": "Standard",
+        "uri": "URI",
+        "issuer": "Issuer",
+        "issuerAddress": "Issuer Address",
+        "issuerName": "Issuer Name",
+        "collection": "Collection",
+        "collectionId": "Collection ID",
+        "collectionName": "Collection Name",
+        "royalties": "Royalties",
+        "description": "Description",
+        "attributes": "Attributes",
+        "details": "Details",
+        "availableAmount": "{amount} available"
     },
     "filters":{
         "title": "Filters",
@@ -1401,6 +1457,11 @@
             "label": "Order",
             "Name": "Name",
             "Amount": "Amount"
+        },
+        "internalExternal": {
+            "label": "Internal / External",
+            "internal": "Internal",
+            "external": "External"
         },
         "verificationStatus": {
             "label": "Verification status",
@@ -1440,9 +1501,16 @@
         },
         "type": {
             "label": "Type",
-            "incoming": "incoming",
-            "outgoing": "outgoing",
-            "internal": "internal"
+            "basic": "Basic",
+            "nft": "NFT",
+            "alias": "Alias",
+            "foundry": "Foundry"
+        },
+        "direction": {
+            "label": "Direction",
+            "incoming": "Incoming",
+            "outgoing": "Outgoing",
+            "selfTransaction": "Self transaction"
         }
     },
     "dates": {
@@ -1708,7 +1776,11 @@
             "aliasRequired": "Alias is required",
             "aliasNotInPossession": "Alias not in possession"
         },
-        "noOutputsToConsolidate": "Not enough outputs to consolidate"
+        "noOutputsToConsolidate": "Not enough outputs to consolidate",
+        "eventId": {
+            "doesNotStartWith0x": "Event ID should start with '0x'",
+            "insufficientLength": "Event ID should be 66 characters long"
+        }
     },
     "warning": {
         "transaction": {
@@ -1826,6 +1898,7 @@
     "tabs": {
         "wallet": "Wallet",
         "collectibles": "Collectibles",
+        "governance": "Governance",
         "developer": "Developer",
         "tokens": "Tokens",
         "activity": "Activity"
@@ -1859,7 +1932,7 @@
                 "Confirmed": "transferred to",
                 "Conflicting": "failed to transfer"
             },
-            "selftransaction": {
+            "selfTransaction": {
                 "Pending": "transferring to",
                 "Confirmed": "transferred to",
                 "Conflicting": "failed to transfer"
@@ -1888,7 +1961,13 @@
             }
         },
         "locked": "locked",
-        "smartContractCall": "smart contract call"
+        "smartContract": "smart contract",
+        "proposalStatus": {
+            "announcement": "Announcement",
+            "votingOpen": "Voting open",
+            "counting": "Counting",
+            "closed": "Closed"
+        }
     },
     "menus": {
         "expirationTimePicker": {

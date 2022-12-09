@@ -3,7 +3,7 @@
     import { TooltipIcon, Text, Pill, TileFooter, FontWeight } from 'shared/components'
     import { time } from '@core/app'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
-    import { Position } from 'shared/components/Tooltip.svelte'
+    import { Position } from 'shared/components/enums'
     import { localize } from '@core/i18n'
 
     export let activity: Activity

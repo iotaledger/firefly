@@ -5,12 +5,13 @@ import { selectedAccount } from '../../account/stores/selected-account.store'
 import { Activity } from '../types/activity.type'
 import {
     ActivityAction,
+    ActivityDirection,
     ActivityType,
     BooleanFilterOption,
     DateFilterOption,
+    InternalExternalOption,
     NumberFilterOption,
     StatusFilterOption,
-    TypeFilterOption,
 } from '../enums'
 import { ActivityFilter } from '../interfaces/filter/filter.interface'
 import { getAssetFromPersistedAssets, getFormattedAmountFromActivity } from '../utils'
@@ -62,8 +63,22 @@ export const activityFilter: Writable<ActivityFilter> = writable({
         active: false,
         type: 'selection',
         localeKey: 'filters.type',
-        selected: TypeFilterOption.Incoming,
-        choices: [TypeFilterOption.Incoming, TypeFilterOption.Outgoing, TypeFilterOption.Internal],
+        selected: ActivityType.Basic,
+        choices: [ActivityType.Basic, ActivityType.Nft, ActivityType.Foundry, ActivityType.Alias],
+    },
+    direction: {
+        active: false,
+        type: 'selection',
+        localeKey: 'filters.direction',
+        selected: ActivityDirection.Incoming,
+        choices: [ActivityDirection.Incoming, ActivityDirection.Outgoing, ActivityDirection.SelfTransaction],
+    },
+    internalExternal: {
+        active: false,
+        type: 'selection',
+        localeKey: 'filters.internalExternal',
+        selected: InternalExternalOption.External,
+        choices: [InternalExternalOption.External, InternalExternalOption.Internal],
     },
     date: {
         active: false,

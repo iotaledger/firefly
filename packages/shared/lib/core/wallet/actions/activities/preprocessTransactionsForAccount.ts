@@ -9,7 +9,7 @@ export async function preprocessTransactionsForAccount(account: IAccountState): 
 
     for (const transaction of transactions) {
         try {
-            const processedTransaction = preprocessTransaction(transaction, account.depositAddress)
+            const processedTransaction = await preprocessTransaction(transaction, account)
             processedTransactions.push(processedTransaction)
         } catch (err) {
             console.error(err)

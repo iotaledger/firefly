@@ -1663,7 +1663,7 @@
                 "Confirmed": "preneseno na",
                 "Conflicting": "prijenos nije uspio"
             },
-            "selftransaction": {
+            "selfTransaction": {
                 "Pending": "prijenos na",
                 "Confirmed": "preneseno na",
                 "Conflicting": "prijenos nije uspio"

@@ -12,7 +12,8 @@ import {
 } from '@core/wallet'
 
 import { selectedAsset, TokenAction } from '../../../contexts/dashboard'
-import { dashboardRouter, DashboardRoute } from '../../'
+import { dashboardRouter, DashboardRoute } from '../dashboard-router'
+
 import { TokenRoute } from '../../enums'
 import { ITokenRouterEvent } from '../../interfaces'
 import { resetRouterWithDrawerDelay } from '../../utils'

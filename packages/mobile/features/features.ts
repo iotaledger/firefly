@@ -6,6 +6,9 @@ const features = {
         enabled: false,
         profileActions: {
             enabled: false,
+            settings: {
+                enabled: false,
+            },
         },
         accountSwitcher: {
             enabled: true,
@@ -31,7 +34,7 @@ const features = {
                 enabled: false,
             },
             details: {
-                enabled: false,
+                enabled: true,
             },
             actions: {
                 enabled: true,

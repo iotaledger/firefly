@@ -2,4 +2,5 @@ export { default as ActivityAsyncStatusPill } from './ActivityAsyncStatusPill.sv
 export { default as ActivityInclusionStatusPill } from './ActivityInclusionStatusPill.svelte'
 export { default as DeveloperIndicatorPill } from './DeveloperIndicatorPill.svelte'
 export { default as Pill } from './Pill.svelte'
+export { default as ProposalStatusPill } from './ProposalStatusPill.svelte'
 export { default as TransactionActivityStatusPill } from './TransactionActivityStatusPill.svelte'

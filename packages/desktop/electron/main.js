@@ -176,49 +176,13 @@ if (app.isPackaged) {
 }
 
 /**
- * Check URL against allowlist
- */
-function isUrlAllowed(targetUrl) {
-    const externalAllowlist = [
-        // IOTA Foundation
-        'blog.iota.org',
-        'chrysalis.iota.org',
-        'chrysalis.docs.iota.org',
-        'discord.iota.org',
-        'firefly.iota.org',
-        'iota.org',
-        'privacy@iota.org',
-        'wiki.iota.org',
-        'explorer.iota.org',
-
-        // Assembly / Shimmer
-        'assembly.sc',
-        'shimmer.network',
-        'explorer.shimmer.network',
-
-        // GitHub
-        'github.com/iotaledger/firefly/issues',
-        'github.com/iotaledger/firefly/issues/new/choose',
-
-        // Other
-        'support.ledger.com',
-    ]
-    const url = new URL(targetUrl)
-    const domain = url.hostname.replace('www.', '').replace('mailto:', '')
-
-    return externalAllowlist.includes(domain) || externalAllowlist.includes(domain + url.pathname)
-}
-
-/**
  * Handles url navigation events
  */
 const handleNavigation = (e, url) => {
     e.preventDefault()
 
     try {
-        if (isUrlAllowed(url)) {
-            shell.openExternal(url)
-        }
+        shell.openExternal(url)
     } catch (err) {
         console.error(err)
     }
@@ -258,6 +222,8 @@ function createWindow() {
         webPreferences: {
             ...defaultWebPreferences,
             preload: paths.preload,
+            // Sandboxing is disabled, since our preload script depends on Node.js
+            sandbox: false,
         },
     })
 
@@ -294,7 +260,6 @@ function createWindow() {
      * Only allow external navigation to allowed domains
      */
     windows.main.webContents.on('will-navigate', handleNavigation)
-    windows.main.webContents.on('new-window', handleNavigation)
 
     windows.main.on('close', () => {
         closeAboutWindow()
@@ -324,7 +289,7 @@ function createWindow() {
      * Handle permissions requests
      */
     session.defaultSession.setPermissionRequestHandler((_webContents, permission, cb, details) => {
-        if (permission === 'openExternal' && details && details.externalURL && isUrlAllowed(details.externalURL)) {
+        if (permission === 'openExternal' && details && details.externalURL) {
             return cb(true)
         }
 
