@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { selectedAccountIndex } from '@core/account'
-    import { getNftByIdFromAllAccountNfts } from '@core/nfts'
+    import { getNftByIdFromAllAccountNfts, rewriteIpfsUri } from '@core/nfts'
     import { NftMediaSize, NftPlaceholderIcon } from 'shared/components'
 
     export let size: NftMediaSize = NftMediaSize.Medium
@@ -75,7 +75,29 @@
         radius = shape === 'square' ? 'none' : radius
     }
 
-    const isLoaded = false
+    let isLoaded = true
+
+    function composeUrl(targetUrl: string): string {
+        if (!targetUrl) {
+            return undefined
+        }
+        const url = new URL(targetUrl)
+
+        switch (url.protocol) {
+            case 'http:':
+                return targetUrl.replace('http:', 'https:')
+            case 'https:':
+                return targetUrl
+            case 'ipfs:':
+                return rewriteIpfsUri(targetUrl)
+            default:
+                return undefined
+        }
+    }
+
+    function handleImageError() {
+        isLoaded = false
+    }
 </script>
 
 <div
@@ -83,9 +105,23 @@
 >
     {#if !isLoaded}
         <NftPlaceholderIcon {nft} {size} {bgColor} {darkBgColor} />
+    {:else if nft.parsedMetadata.type.startsWith('image')}
+        <img
+            src={composeUrl(nft.parsedMetadata.uri)}
+            on:error={handleImageError}
+            class="object-cover w-full h-full"
+            alt={`Media for ${nft.name}`}
+        />
+    {:else if nft.parsedMetadata.type.startsWith('video')}
+        <video
+            src={composeUrl(nft.parsedMetadata.uri)}
+            class="object-cover w-full h-full"
+            alt={`Media for ${nft.name}`}
+            autoplay
+            loop
+            muted
+        />
     {:else}
-        <div>
-            <!-- Loaded and Secure NFT Media  -->
-        </div>
+        <NftPlaceholderIcon {nft} {size} {bgColor} {darkBgColor} />
     {/if}
 </div>
