@@ -11,11 +11,11 @@ import {
     getPersistedAsset,
 } from '@core/wallet'
 
-import { selectedAsset, TokenAction } from '../../../lib/contexts/dashboard'
-import { dashboardRouter, DashboardRoute } from '../'
-import { TokenRoute } from '../enums'
-import { ITokenRouterEvent } from '../interfaces'
-import { resetRouterWithDrawerDelay } from '../utils'
+import { selectedAsset, TokenAction } from '../../../contexts/dashboard'
+import { dashboardRouter, DashboardRoute } from '../../'
+import { TokenRoute } from '../../enums'
+import { ITokenRouterEvent } from '../../interfaces'
+import { resetRouterWithDrawerDelay } from '../../utils'
 
 export const tokenRoute = writable<TokenRoute>(null)
 export const tokenRouter = writable<TokenRouter>(null)
