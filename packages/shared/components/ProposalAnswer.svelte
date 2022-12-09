@@ -1,12 +1,7 @@
 <script lang="typescript">
     import { Text, FontWeight, Icon } from 'shared/components'
     import { Icon as IconEnum } from '@auxiliary/icon'
-
-    interface Answer {
-        value: number
-        text: string
-        additionalInfo: string
-    }
+    import { Answer } from '@core/governance/interfaces'
 
     export let answer: Answer
     export let hidden = null

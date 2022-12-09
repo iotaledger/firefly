@@ -1,18 +1,7 @@
 <script lang="typescript">
     import { Text, FontWeight, Icon, ProposalAnswer } from 'shared/components'
     import { Icon as IconEnum } from '@auxiliary/icon'
-
-    interface Answer {
-        value: number
-        text: string
-        additionalInfo: string
-    }
-
-    interface Question {
-        text: string
-        answers: Answer[]
-        additionalInfo: string
-    }
+    import { Question } from '@core/governance/interfaces'
 
     export let question: Question
     export let index: number = undefined
