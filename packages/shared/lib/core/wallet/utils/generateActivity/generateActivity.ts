@@ -93,7 +93,8 @@ function generateActivitiesFromProcessedTransactionsWithoutInputs(
     processedTransaction: IProcessedTransaction,
     account: IAccountState
 ): Activity[] {
-    return processedTransaction.outputs.map((wrappedOutput) => {
+    const nonRemainderOutputs = processedTransaction.outputs.filter((wrappedOutput) => !wrappedOutput.remainder)
+    return nonRemainderOutputs.map((wrappedOutput) => {
         const type = getActivityTypeFromOutput(wrappedOutput)
         return generateActivityForAccount(account, {
             type,

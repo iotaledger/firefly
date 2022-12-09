@@ -46,5 +46,9 @@ function convertTransactionOutputTypeToWrappedOutput(
     outputType: OutputTypes
 ): IWrappedOutput {
     const outputId = getOutputIdFromTransactionIdAndIndex(transactionId, index)
-    return { outputId, output: outputType.type !== OUTPUT_TYPE_TREASURY ? outputType : undefined }
+    return {
+        outputId,
+        output: outputType.type !== OUTPUT_TYPE_TREASURY ? outputType : undefined,
+        remainder: false,
+    }
 }

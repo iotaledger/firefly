@@ -27,7 +27,7 @@ export function getAsyncDataFromOutput(
             if (timelockDate.getTime() > Date.now()) {
                 asyncStatus = ActivityAsyncStatus.Timelocked
             }
-        } else if (expirationDate.getTime() < Date.now()) {
+        } else if (expirationDate && expirationDate.getTime() < Date.now()) {
             asyncStatus = ActivityAsyncStatus.Expired
         } else {
             asyncStatus = ActivityAsyncStatus.Unclaimed
