@@ -1,4 +1,4 @@
-import {
+import type {
     HexEncodedAmount,
     IAliasOutput,
     IBasicOutput,
@@ -8,7 +8,7 @@ import {
     ITransactionPayload,
     OutputTypes,
 } from '@iota/types'
-import {
+import type {
     AccountBalance,
     AccountSyncOptions,
     Address,
