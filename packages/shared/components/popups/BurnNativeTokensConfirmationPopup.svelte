@@ -2,11 +2,13 @@
     import { Button, Text, TextHint, FontWeight, TextType, ButtonVariant, KeyValueBox } from 'shared/components'
     import { localize } from '@core/i18n'
     import { closePopup, openPopup } from '@auxiliary/popup'
-    import { burnAsset, IAsset } from '@core/wallet'
+    import { burnAsset, formatTokenAmountBestMatch, IAsset } from '@core/wallet'
     import { checkActiveProfileAuth } from '@core/profile'
 
     export let asset: IAsset
     export let rawAmount: string
+
+    $: formattedAmount = formatTokenAmountBestMatch(Number(rawAmount), asset.metadata)
 
     function onBack(): void {
         openPopup({
@@ -37,11 +39,11 @@
     </Text>
     <div class="space-y-4">
         <KeyValueBox keyText={localize('popups.nativeToken.property.assetId')} valueText={asset.id} isCopyable />
-        <KeyValueBox keyText={localize('general.amount')} valueText={rawAmount} />
+        <KeyValueBox keyText={localize('general.amount')} valueText={formattedAmount} />
         <TextHint warning text={localize('actions.confirmTokenBurn.hint')} />
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" outline onClick={onBack}>{localize('actions.cancel')}</Button>
+        <Button classes="w-full" outline onClick={onBack}>{localize('actions.back')}</Button>
         <Button classes="w-full" variant={ButtonVariant.Warning} onClick={confirmClick}>
             {localize('actions.burnToken')}
         </Button>
