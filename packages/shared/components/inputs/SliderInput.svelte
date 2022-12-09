@@ -33,29 +33,29 @@
         e.stopPropagation()
     })
 
-    function resizeWindow() {
+    function resizeWindow(): void {
         elementX = element.getBoundingClientRect().left
     }
 
     // Allows both bind:value and on:change for parent value retrieval
-    function setValue(val: number) {
+    function setValue(val: number): void {
         value = formatNumber(val, undefined, undefined, 0)
         dispatch('change', { value })
     }
 
-    function onTrackEvent(e) {
+    function onTrackEvent(e): void {
         // Update value immediately before beginning drag
         updateValueOnEvent(e)
         onDragStart(e)
     }
 
-    function onDragStart(e) {
+    function onDragStart(e): void {
         // If mouse event add a pointer events shield
         if (e.type === 'mousedown') document.body.append(mouseEventShield)
         currentThumb = thumb
     }
 
-    function onDragEnd(e) {
+    function onDragEnd(e): void {
         // If using mouse - remove pointer event shield
         if (e.type === 'mouseup') {
             if (document.body.contains(mouseEventShield)) document.body.removeChild(mouseEventShield)
@@ -66,7 +66,7 @@
     }
 
     // Check if mouse event cords overlay with an element's area
-    function isMouseInElement(event, element) {
+    function isMouseInElement(event, element): boolean {
         const rect = element.getBoundingClientRect()
         const { clientX: x, clientY: y } = event
         if (x < rect.left || x >= rect.right) return false
@@ -74,7 +74,7 @@
         return true
     }
 
-    function calculateNewValue(clientX) {
+    function calculateNewValue(clientX): void {
         // Find distance between cursor and element's left cord (20px / 2 = 10px) - Center of thumb
         const delta = clientX - (elementX + 10)
 
@@ -89,7 +89,7 @@
     }
 
     // Handles both dragging of touch/mouse as well as simple one-off click/touches
-    function updateValueOnEvent(e) {
+    function updateValueOnEvent(e): boolean {
         // touchstart && mousedown are one-off updates, otherwise expect a currentPointer node
         if (!currentThumb && e.type !== 'touchstart' && e.type !== 'mousedown') return false
 
