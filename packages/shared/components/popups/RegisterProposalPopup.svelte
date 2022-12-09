@@ -26,6 +26,7 @@
             showAppNotification({
                 type: 'success',
                 message: localize('views.governance.proposals.successRegister'),
+                alert: true,
             })
             closePopup()
         } catch (err) {

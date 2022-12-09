@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Pill } from 'shared/components'
-    import { ProposalStatus } from 'shared/components/enums'
     import { localize } from '@core/i18n'
+    import { ProposalStatus } from '@core/governance/enums'
 
     export let status: ProposalStatus
 
