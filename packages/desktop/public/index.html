@@ -6,12 +6,13 @@
         <meta
             http-equiv="Content-Security-Policy"
             content="
-            default-src 'self';
-            connect-src 'self' https://*.iota.org https://*.iota.works https://*.iota.cafe https://*.shimmer.network https://api.coingecko.com/api/v3/;
-            object-src 'none';
-            img-src 'self' data:;
-            style-src 'self' 'unsafe-inline';
-            media-src 'self' https://d17lo1ro77zjnd.cloudfront.net/firefly/videos/ledger_integration_v12.mp4"
+                default-src 'self';
+                connect-src 'self' https://*.iota.org https://*.iota.works https://*.iota.cafe https://*.shimmer.network https://api.coingecko.com/api/v3/;
+                object-src 'none';
+                img-src data: *;
+                style-src 'self' 'unsafe-inline';
+                media-src  *
+            "
         />
 
         <link rel="icon" type="image/png" href="/favicon.png" />
