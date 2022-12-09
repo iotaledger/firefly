@@ -13,7 +13,7 @@
         $tokenRouter.next({ action: TokenAction.Skip })
     }
     function onSend(): void {
-        $tokenRouter.next()
+        $tokenRouter.next({ action: TokenAction.Send })
     }
 </script>
 
