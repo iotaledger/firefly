@@ -1,18 +1,4 @@
 import { writable } from 'svelte/store'
-import { ProposalStatus } from '../../../../components/enums'
-import { Icon as IconEnum } from '@auxiliary/icon'
+import { IProposal } from '@core/governance/interfaces'
 
-type DAO = {
-    name: string
-    icon: IconEnum
-}
-
-type Proposal = {
-    dao?: DAO
-    title: string
-    status: ProposalStatus
-    hasVoted?: boolean
-    milestones?: Record<ProposalStatus, number>
-}
-
-export const selectedProposal = writable<Proposal>(null)
+export const selectedProposal = writable<IProposal>(null)

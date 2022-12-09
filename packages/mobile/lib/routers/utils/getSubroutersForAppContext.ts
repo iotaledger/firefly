@@ -10,17 +10,24 @@ import {
     networkSetupRouter,
     profileBackupRouter,
     profileRecoveryRouter,
+    profileRouter,
     profileSetupRouter,
     sendRouter,
     storageProtectionSetupRouter,
     strongholdSetupRouter,
     tokenRouter,
-} from '../subrouters'
+} from '../routers'
 
 export function getSubroutersForAppContext(context: AppContext): IRouter[] {
     switch (context) {
         case AppContext.Dashboard:
-            return [get(accountSwitcherRouter), get(sendRouter), get(activityRouter), get(tokenRouter)]
+            return [
+                get(accountSwitcherRouter),
+                get(sendRouter),
+                get(activityRouter),
+                get(tokenRouter),
+                get(profileRouter),
+            ]
         case AppContext.Login:
             return []
         case AppContext.Onboarding:

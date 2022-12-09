@@ -10,9 +10,9 @@
         appVersionDetails,
         AppStage,
         appStage,
-        Platform,
         PlatformOption,
         platform,
+        openUrlInBrowser,
     } from '@core/app'
     import { formatDate, localize } from '@core/i18n'
     import { closePopup } from '@auxiliary/popup'
@@ -24,7 +24,7 @@
         if (hasAutoUpdate) {
             downloadAppUpdate()
         } else {
-            Platform.openUrl('https://firefly.iota.org')
+            openUrlInBrowser('https://firefly.iota.org')
         }
         closePopup()
     }

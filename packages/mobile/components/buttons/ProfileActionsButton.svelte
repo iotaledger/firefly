@@ -9,7 +9,7 @@
 </script>
 
 <button
-    on:click={() => $dashboardRouter.goTo(DashboardRoute.ProfileActions)}
+    on:click={() => $dashboardRouter.goTo(DashboardRoute.Profile)}
     class="w-10 h-10 relative flex items-center justify-center rounded-full bg-blue-500 leading-100"
 >
     <span class="text-12 text-center text-white uppercase">{profileInitial}</span>

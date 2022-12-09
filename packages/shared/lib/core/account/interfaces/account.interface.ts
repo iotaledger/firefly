@@ -96,6 +96,11 @@ export interface IAccount {
         options?: TransactionOptions
     ): Promise<PreparedTransactionData>
     prepareTransaction(outputs: OutputTypes[], options?: TransactionOptions): Promise<PreparedTransactionData>
+    retryTransactionUntilIncluded(
+        transactionId: string,
+        interval?: number,
+        maxAttempts?: number
+    ): Promise<PreparedTransactionData>
     sendAmount(addressesWithAmount: AddressWithAmount[], transactionOptions?: TransactionOptions): Promise<Transaction>
     sendMicroTransaction(
         addressesWithMicroAmount: AddressWithMicroAmount[],

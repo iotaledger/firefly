@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { MeatballMenuButton, Text } from 'shared/components'
+    import { ProposalsDetailsButton, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { FontWeight } from './enums'
 
@@ -8,10 +8,6 @@
         votingProposals: 3,
         votedProposals: 4,
     }
-
-    function handleMeatballMenu(): void {
-        return
-    }
 </script>
 
 <proposals-details>
@@ -19,7 +15,7 @@
         <Text fontSize="14" fontWeight={FontWeight.semibold}>
             {localize('views.governance.proposalsDetails.title')}
         </Text>
-        <MeatballMenuButton onClick={handleMeatballMenu} />
+        <ProposalsDetailsButton />
     </header-container>
     <ul class="space-y-2">
         {#each Object.keys(counters) as counterKey}
