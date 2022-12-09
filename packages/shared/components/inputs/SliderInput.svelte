@@ -39,7 +39,7 @@
 
     // Allows both bind:value and on:change for parent value retrieval
     function setValue(val: number) {
-        value = formatNumber(val)
+        value = formatNumber(val, undefined, undefined, 0)
         dispatch('change', { value })
     }
 
