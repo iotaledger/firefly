@@ -9,6 +9,7 @@
     export let classes: string = ''
 
     $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, nftId)
+    $: url = composeUrl(nft?.parsedMetadata?.uri)
 
     let width
     let height
@@ -95,28 +96,24 @@
         }
     }
 
-    function handleImageError() {
+    function handleLoadingError() {
         isLoaded = false
     }
 </script>
 
 <div
-    class="overflow-hidden flex justify-center items-center transition-none flex-shrink-0 p-{padding} bg-{bgColor} dark:bg-{darkBgColor} {width} {height} rounded-{radius} {classes}"
+    class="overflow-hidden w-full flex justify-center items-center transition-none flex-grow flex-shrink-0 p-{padding} bg-{bgColor} dark:bg-{darkBgColor} {width} {height} rounded-{radius} {classes}"
 >
-    {#if !isLoaded}
+    {#if !url || !isLoaded}
         <NftPlaceholderIcon {nft} {size} {bgColor} {darkBgColor} />
     {:else if nft.parsedMetadata.type.startsWith('image')}
-        <img
-            src={composeUrl(nft.parsedMetadata.uri)}
-            on:error={handleImageError}
-            class="object-cover w-full h-full"
-            alt={`Media for ${nft.name}`}
-        />
+        <img src={url} on:error={handleLoadingError} class="object-cover w-full h-full" alt={`Media for ${nft.name}`} />
     {:else if nft.parsedMetadata.type.startsWith('video')}
         <video
-            src={composeUrl(nft.parsedMetadata.uri)}
+            src={url}
             class="object-cover w-full h-full"
             alt={`Media for ${nft.name}`}
+            on:error={handleLoadingError}
             autoplay
             loop
             muted
