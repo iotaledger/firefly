@@ -125,8 +125,11 @@
 </script>
 
 <div class="flex flex-row w-full h-full space-x-4">
-    <div class="flex w-full h-full items-center justify-center">
-        <NftMedia nftId={id} classes="rounded-2xl object-contain w-full h-full" />
+    <div
+        class="relative flex w-full max-h-full items-center justify-center rounded-2xl overflow-hidden"
+        style="height: fit-content;"
+    >
+        <NftMedia nftId={id} classes="min-w-full min-h-full object-cover" />
     </div>
     <Pane classes="flex flex-col p-6 space-y-3 w-full h-full max-w-lg">
         <nft-title class="flex justify-between items-center">
