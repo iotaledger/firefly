@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { selectedAccountIndex } from '@core/account'
     import { getNftByIdFromAllAccountNfts } from '@core/nfts'
-    import { NftMedia, MediaIcon } from 'shared/components'
+    import { NftMedia, MediaPlaceholder } from 'shared/components'
 
     export let nftId: string
     export let size: 'small' | 'medium' | 'large' = 'medium'
@@ -31,7 +31,7 @@
                     {size === 'large' && 'p-2'}
                 "
             >
-                <MediaIcon type={type || nftType} />
+                <MediaPlaceholder type={type || nftType} iconOnly />
             </div>
         </NftMedia>
     {:else}
@@ -43,7 +43,7 @@
                 {size === 'large' && 'p-2'}
             "
         >
-            <MediaIcon type={type || nftType} />
+            <MediaPlaceholder type={type || nftType} iconOnly />
         </div>
     {/if}
 </div>
