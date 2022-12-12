@@ -4,7 +4,7 @@
     import { localize } from '@core/i18n'
     import { Modal, MenuItem } from 'shared/components'
 
-    export let modal: Modal
+    export let modal: Modal = undefined
 
     function handleRegister(): void {
         openPopup({
