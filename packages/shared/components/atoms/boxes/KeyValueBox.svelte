@@ -16,7 +16,7 @@
     export let tooltipText: string = ''
     export let shrink: boolean = false
     export let isPreText: boolean = false
-    export let maxHeight: number
+    export let maxHeight: number = undefined
 
     let isVertical: boolean = false
     let valueContainer: HTMLElement
