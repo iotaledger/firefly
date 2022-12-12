@@ -20,18 +20,7 @@
         {size === 'large' && 'w-10 h-10'}
     "
 >
-    {#if parentType !== 'image'}
-        <div
-            class="
-                w-full h-full 
-                {size === 'small' && 'p-1'}
-                {size === 'medium' && 'p-2'}
-                {size === 'large' && 'p-2'}
-            "
-        >
-            <MediaIcon type={type || nftType} />
-        </div>
-    {:else}
+    {#if parentType === 'image'}
         <NftMedia {nftId} classes="min-w-full min-h-full object-cover">
             <div
                 slot="placeholder"
@@ -45,5 +34,16 @@
                 <MediaIcon type={type || nftType} />
             </div>
         </NftMedia>
+    {:else}
+        <div
+            class="
+                w-full h-full 
+                {size === 'small' && 'p-1'}
+                {size === 'medium' && 'p-2'}
+                {size === 'large' && 'p-2'}
+            "
+        >
+            <MediaIcon type={type || nftType} />
+        </div>
     {/if}
 </div>
