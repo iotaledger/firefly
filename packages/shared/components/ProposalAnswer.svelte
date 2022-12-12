@@ -2,22 +2,35 @@
     import { Text, FontWeight, Icon } from 'shared/components'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { Answer } from '@core/governance/interfaces'
+    import { createEventDispatcher } from 'svelte'
 
     export let answer: Answer
     export let hidden = null
-    export let index: number = undefined
+    export let isSelected = null
+    export let answerIndex: number = undefined
+
+    const dispatch = createEventDispatcher()
+
+    function handleClick(): void {
+        dispatch('answerClicked', answerIndex)
+    }
 </script>
 
 <proposal-answer
     class:hidden
-    class="flex justify-between items-center p-3 rounded-md border border-solid border-gray-200"
+    class="flex justify-between items-center p-3 rounded-md border border-solid {isSelected
+        ? 'border-blue-500'
+        : 'border-gray-200'} "
+    on:click={handleClick}
 >
     <div class="flex space-x-3">
-        {#if index !== undefined}
+        {#if answerIndex !== undefined}
             <span
-                class="flex items-center justify-center h-5 w-5 text-12 text-700 text-gray-500 border border-solid border-gray-200"
+                class="flex items-center justify-center h-5 w-5 text-12 {isSelected
+                    ? 'bg-blue-500 text-white'
+                    : 'text-gray-500'} text-700 border border-solid border-gray-200"
             >
-                {index + 1}
+                {answerIndex + 1}
             </span>
         {/if}
         <Text fontWeight={FontWeight.medium}>{answer.text}</Text>

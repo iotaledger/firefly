@@ -5,15 +5,18 @@
 
     export let question: Question
     export let index: number = undefined
+    export let selectedIndices: number[] // TODO, maybe should be a svelte store
     export let isOpened = false
+
     export let onClick: () => unknown = () => {}
+
+    function handleAnswerClick(answerIndex: number): void {
+        selectedIndices[index] = answerIndex
+    }
 </script>
 
-<proposal-question
-    on:click={onClick}
-    class="flex flex-col px-5 py-4 rounded-xl border border-solid border-gray-200 cursor-pointer"
->
-    <div class="flex justify-between items-center">
+<proposal-question class="flex flex-col px-5 py-4 rounded-xl border border-solid border-gray-200 cursor-pointer">
+    <div on:click={onClick} class="flex justify-between items-center">
         <div class="flex flex-col">
             {#if index !== undefined}
                 <Text smaller fontWeight={FontWeight.bold} overrideColor classes="mb-1 text-blue-500"
@@ -28,7 +31,13 @@
     </div>
     <proposal-answers class:mt-4={isOpened} class="space-y-2">
         {#each question.answers as answer, answerIndex}
-            <ProposalAnswer {answer} hidden={!isOpened} index={answerIndex} />
+            <ProposalAnswer
+                {answer}
+                {answerIndex}
+                on:answerClicked={() => handleAnswerClick(answerIndex)}
+                hidden={!isOpened}
+                isSelected={selectedIndices[index] === answerIndex}
+            />
         {/each}
     </proposal-answers>
 </proposal-question>
