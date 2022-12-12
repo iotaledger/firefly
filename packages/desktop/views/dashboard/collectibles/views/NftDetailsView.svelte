@@ -146,7 +146,7 @@
                 </Text>
             </nft-description>
         {/if}
-        <div class="overflow-y-scroll h-full flex flex-col space-y-4">
+        <div class="overflow-y-scroll h-full flex flex-col space-y-4 -mr-3.5 pr-2.5">
             <nft-details class="flex flex-col space-y-4">
                 <Text type={TextType.h5} fontWeight={FontWeight.semibold}>
                     {localize('general.details')}
