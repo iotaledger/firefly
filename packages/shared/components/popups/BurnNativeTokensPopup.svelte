@@ -1,21 +1,20 @@
 <script lang="typescript">
-    import { Button, Text, TextHint, FontWeight, TextType, ButtonVariant, AssetAmountInput } from 'shared/components'
+    import { Button, Text, TextHint, FontWeight, TextType, AssetAmountInput } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { closePopup } from '@auxiliary/popup'
-    import { burnAsset, IAsset } from '@core/wallet'
-    import { checkActiveProfileAuth } from '@core/profile'
+    import { closePopup, openPopup } from '@auxiliary/popup'
+    import { IAsset } from '@core/wallet'
 
     export let asset: IAsset
-    let assetAmountInput: AssetAmountInput
+    export let rawAmount: string = '0'
 
-    let rawAmount = '0'
+    let assetAmountInput: AssetAmountInput
 
     async function confirmClick(): Promise<void> {
         try {
             await assetAmountInput.validate()
-            checkActiveProfileAuth(async () => {
-                await burnAsset(asset.id, rawAmount)
-                closePopup()
+            openPopup({
+                type: 'burnNativeTokensConfirm',
+                props: { asset, rawAmount },
             })
         } catch (err) {
             console.error(err)
@@ -37,8 +36,6 @@
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" outline onClick={closePopup}>{localize('actions.cancel')}</Button>
-        <Button classes="w-full" variant={ButtonVariant.Warning} onClick={confirmClick}>
-            {localize('actions.burnToken')}
-        </Button>
+        <Button classes="w-full" onClick={confirmClick}>{localize('actions.continue')}</Button>
     </popup-buttons>
 </div>
