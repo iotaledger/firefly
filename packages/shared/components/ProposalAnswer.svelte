@@ -1,8 +1,9 @@
 <script lang="typescript">
-    import { Text, FontWeight, Icon } from 'shared/components'
-    import { Icon as IconEnum } from '@auxiliary/icon'
-    import { Answer } from '@core/governance/interfaces'
     import { createEventDispatcher } from 'svelte'
+    import { Text, FontWeight, TooltipIcon } from 'shared/components'
+    import { Position } from 'shared/components/enums'
+    import { Answer } from '@core/governance/interfaces'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let answer: Answer
     export let hidden = null
@@ -35,5 +36,14 @@
         {/if}
         <Text fontWeight={FontWeight.medium}>{answer.text}</Text>
     </div>
-    <Icon icon={IconEnum.Info} width={10} height={10} classes="text-gray-600" />
+    {#if answer.additionalInfo}
+        <TooltipIcon
+            icon={IconEnum.Info}
+            iconClasses="text-gray-600 dark:text-gray-200"
+            text={answer.additionalInfo}
+            position={Position.Left}
+            width={10}
+            height={10}
+        />
+    {/if}
 </proposal-answer>
