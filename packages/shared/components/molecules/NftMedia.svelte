@@ -12,11 +12,18 @@
     const bgColor = 'gray-200'
     const darkBgColor = 'gray-700'
 
-    const isLoaded = true
+    let isLoaded = true
     let hasError = false
 
     $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, nftId)
     $: url = composeUrl(nft?.parsedMetadata?.uri)
+
+    $: nftId, resetProps()
+
+    function resetProps() {
+        isLoaded = true
+        hasError = false
+    }
 
     function composeUrl(targetUrl: string): string {
         if (!targetUrl) {
@@ -40,7 +47,7 @@
                 return undefined
         }
 
-        if (nft?.parsedMetadata?.issuerName === '_Soonaverse') {
+        if (nft?.parsedMetadata?.issuerName === 'Soonaverse') {
             return newUrl + '/' + nft?.parsedMetadata?.name
         } else {
             return newUrl

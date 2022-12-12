@@ -55,7 +55,7 @@
         </div>
 
         {#if $queriedNfts.length}
-            <NftGallery />
+            <NftGallery nfts={$queriedNfts} />
         {:else}
             <div class="w-full h-full flex flex-col items-center justify-center space-y-8">
                 <Illustration illustration="empty-collectibles" width="134" height="134" />
