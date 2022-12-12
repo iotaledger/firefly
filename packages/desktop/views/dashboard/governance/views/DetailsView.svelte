@@ -29,6 +29,7 @@
         questions: Question[]
     }
 
+    let selectedIndices: number[] = []
     let votingEvent: Event
     let votingPayload: VotingEventPayload
     $: void setVotingEvent($selectedProposal?.id)
@@ -41,7 +42,9 @@
     }
     $: questions = votingPayload?.questions
 
-    $: selectedIndices = Array<number>(questions?.length)
+    $: if (questions?.length > 0 && selectedIndices?.length === 0) {
+        selectedIndices = Array<number>(questions?.length)
+    }
 
     async function setVotingEvent(eventId: string): Promise<void> {
         const event = await getVotingEvent(eventId)
@@ -129,7 +132,7 @@
                         {question}
                         isOpened={openedQuestionIndex === index}
                         {index}
-                        {selectedIndices}
+                        bind:selectedIndices
                         onClick={() => handleQuestionClick(index)}
                     />
                 {/each}
