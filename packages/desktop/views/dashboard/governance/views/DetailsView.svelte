@@ -15,17 +15,17 @@
     } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { getVotingEvent } from '@core/profile-manager'
-    import { selectedAccount } from '@core/account'
-    import type { Event, VotingEventPayload } from '@iota/wallet'
-    import { ParticipationEventType } from '@iota/wallet'
+    import { getParticipationOverview, selectedAccount } from '@core/account'
+    import { Event, VotingEventPayload, ParticipationEventType } from '@iota/wallet/out/types'
+    import type { IParticipations } from '@core/governance/interfaces'
 
     let selectedIndices: number[] = []
     let votingEvent: Event
     let votingPayload: VotingEventPayload
     $: void setVotingEvent($selectedProposal?.id)
 
-    // TODO: calculateVotes function needs to take into account the time
-    $: totalVotes = void calculateTotalVotes()
+    let totalVotes = 0
+    $: void setTotalVotes()
     $: votesCounter = {
         total: totalVotes,
         power: $selectedAccount?.votingPower,
@@ -46,19 +46,19 @@
         }
     }
 
-    // TODO: track the votes after voting has been done
-    function calculateTotalVotes(): number {
-        // const participations = (await getParticipationOverview($selectedAccount?.index))?.participations
-        // console.log(0, participations)
-        // const selectedProposalOverview = participations
-        //         ?.filter((participation) => participation[0] === $selectedProposal?.id)
-        // const votes = selectedProposalOverview?.map((participation) => participation[1][1])
-        // selectedProposalOverview?.reduce(
-        //     (acc, trackedParticipation) =>
-        //         trackedParticipation.amount ? parseInt(trackedParticipation.amount, 10) + acc : acc,
-        //     0
-        // ) ?? 0
-        return 10000
+    async function setTotalVotes(): Promise<void> {
+        const participations: IParticipations = (await getParticipationOverview($selectedAccount?.index))
+            ?.participations
+        const selectedProposalOverview = participations[$selectedProposal?.id]
+
+        if (selectedProposalOverview) {
+            const votes = Object.values(selectedProposalOverview).map(
+                ({ amount, startMilestoneIndex, endMilestoneIndex }) => parseInt(amount, 10) * (endMilestoneIndex - startMilestoneIndex)
+            )
+            totalVotes = votes?.reduce((accumulator, votes) => accumulator + votes, 0) ?? 0
+        } else {
+            totalVotes = 0
+        }
     }
 
     let openedQuestionIndex = null
