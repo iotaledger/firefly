@@ -35,8 +35,6 @@
                 return 'img'
             case ParentMimeType.Video:
                 return 'video'
-            case ParentMimeType.Audio:
-                return 'audio'
             default:
                 onError()
                 return undefined
