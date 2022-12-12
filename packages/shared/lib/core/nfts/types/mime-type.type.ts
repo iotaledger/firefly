@@ -1,6 +1,7 @@
 export type MimeType =
     | 'image/jpeg'
     | 'image/png'
+    | 'image/webp'
     | 'image/gif'
     | 'video/x-msvideo'
     | 'video/mp4'

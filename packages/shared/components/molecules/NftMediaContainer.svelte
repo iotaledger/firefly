@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { selectedAccountIndex } from '@core/account'
     import { getNftByIdFromAllAccountNfts, rewriteIpfsUri } from '@core/nfts'
-    import { NftMediaSize, NftPlaceholderIcon } from 'shared/components'
+    import { MediaDisplay, NftMediaSize, NftPlaceholderIcon } from 'shared/components'
 
     export let size: NftMediaSize = NftMediaSize.Medium
     export let nftId: string
@@ -9,7 +9,10 @@
     export let classes: string = ''
 
     $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, nftId)
-    $: url = composeUrl(nft?.parsedMetadata?.uri)
+    $: url =
+        nft?.parsedMetadata?.issuerName === 'Soonaverse'
+            ? composeUrl(nft?.parsedMetadata?.uri) + '/' + nft?.parsedMetadata?.name
+            : composeUrl(nft?.parsedMetadata?.uri)
 
     let width
     let height
@@ -102,23 +105,19 @@
 </script>
 
 <div
-    class="overflow-hidden w-full flex justify-center items-center transition-none flex-grow flex-shrink-0 p-{padding} bg-{bgColor} dark:bg-{darkBgColor} {width} {height} rounded-{radius} {classes}"
+    class="overflow-hidden w-full h-full flex justify-center items-center transition-none flex-grow p-{padding} bg-{bgColor} dark:bg-{darkBgColor} {width} {height} rounded-{radius} {classes}"
 >
     {#if !url || !isLoaded}
         <NftPlaceholderIcon {nft} {size} {bgColor} {darkBgColor} />
-    {:else if nft.parsedMetadata.type.startsWith('image')}
-        <img src={url} on:error={handleLoadingError} class="object-cover w-full h-full" alt={`Media for ${nft.name}`} />
-    {:else if nft.parsedMetadata.type.startsWith('video')}
-        <video
-            src={url}
-            class="object-cover w-full h-full"
-            alt={`Media for ${nft.name}`}
-            on:error={handleLoadingError}
-            autoplay
-            loop
-            muted
-        />
     {:else}
-        <NftPlaceholderIcon {nft} {size} {bgColor} {darkBgColor} />
+        <MediaDisplay
+            src={url}
+            expectedType={nft.parsedMetadata.type}
+            alt={`Media display for ${nft.name}`}
+            autoplay={size === NftMediaSize.ExtraLarge}
+            controls={size === NftMediaSize.ExtraLarge}
+            classes="object-contain w-full h-full"
+            onError={handleLoadingError}
+        />
     {/if}
 </div>

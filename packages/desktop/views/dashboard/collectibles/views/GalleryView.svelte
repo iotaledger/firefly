@@ -1,19 +1,8 @@
 <script lang="typescript">
-    import {
-        Text,
-        TextInput,
-        NftGalleryItem,
-        TogglableButton,
-        Icon,
-        FontWeight,
-        ReceiveButton,
-        Illustration,
-    } from 'shared/components'
-    import { CollectiblesRoute, collectiblesRouter } from '@core/router'
-    import { INft, nftSearchTerm, selectedAccountNfts, queriedNfts } from '@core/nfts'
-    import { selectedNftId } from '../stores/selected-nft.store'
     import { localize } from '@core/i18n'
+    import { nftSearchTerm, queriedNfts, selectedAccountNfts } from '@core/nfts'
     import { debounce } from '@core/utils'
+    import { FontWeight, Icon, Illustration, NftGallery, Text, TextInput, TogglableButton } from 'shared/components'
 
     let searchActive = false
     let inputElement: HTMLInputElement
@@ -24,10 +13,6 @@
         debounce(() => {
             $nftSearchTerm = searchValue
         })()
-    }
-    function handleNftClick(nft: INft): void {
-        $selectedNftId = nft.id
-        $collectiblesRouter.goTo(CollectiblesRoute.Details)
     }
 </script>
 
@@ -70,11 +55,7 @@
         </div>
 
         {#if $queriedNfts.length}
-            <div class="h-full gallery-grid scrollable-y">
-                {#each $queriedNfts as nft}
-                    <NftGalleryItem {nft} onClick={() => handleNftClick(nft)} />
-                {/each}
-            </div>
+            <NftGallery />
         {:else}
             <div class="w-full h-full flex flex-col items-center justify-center space-y-8">
                 <Illustration illustration="empty-collectibles" width="134" height="134" />
@@ -95,7 +76,6 @@
                         >{localize('views.collectibles.gallery.emptyDescription')}</Text
                     >
                 </div>
-                <ReceiveButton text={localize('actions.depositNft')} />
             </div>
         </div>
     {/if}

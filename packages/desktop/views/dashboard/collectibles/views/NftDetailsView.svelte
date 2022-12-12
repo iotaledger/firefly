@@ -5,7 +5,7 @@
     import { localize } from '@core/i18n'
     import { ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
     import { BASE_TOKEN } from '@core/network/constants'
-    import { convertAndFormatNftMetadata, getNftByIdFromAllAccountNfts, INft } from '@core/nfts'
+    import { convertAndFormatNftMetadata, getNftByIdFromAllAccountNfts, INft, selectedNftId } from '@core/nfts'
     import { activeProfile } from '@core/profile/stores'
     import { truncateString } from '@core/utils'
     import {
@@ -31,14 +31,13 @@
         Text,
         TextType,
     } from 'shared/components'
-    import { selectedNftId } from '../stores/selected-nft.store'
 
     let modal: Modal
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
     const nft: INft = getNftByIdFromAllAccountNfts($selectedAccountIndex, $selectedNftId)
 
-    const { id, name, issuer, address, metadata } = nft
+    const { id, name, issuer, address, metadata } = nft ?? {}
     const { standard, version, type, uri, description, issuerName, collectionName, attributes } =
         nft?.parsedMetadata || {}
 
