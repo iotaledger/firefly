@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Text, FontWeight, Icon, ProposalAnswer } from 'shared/components'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { Question } from '@core/governance/interfaces'
+    import type { Question } from '@iota/wallet'
 
     export let question: Question
     export let index: number = undefined

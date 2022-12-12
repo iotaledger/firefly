@@ -16,18 +16,8 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { getVotingEvent } from '@core/profile-manager'
     import { selectedAccount } from '@core/account'
-    import type { Event } from '@iota/wallet'
-    import { Question } from '@core/governance/interfaces'
-
-    enum EventType {
-        VotingEvent,
-        StakingEvent,
-    }
-
-    interface VotingEventPayload {
-        type: number
-        questions: Question[]
-    }
+    import type { Event, VotingEventPayload } from '@iota/wallet'
+    import { ParticipationEventType } from '@iota/wallet'
 
     let selectedIndices: number[] = []
     let votingEvent: Event
@@ -48,7 +38,7 @@
 
     async function setVotingEvent(eventId: string): Promise<void> {
         const event = await getVotingEvent(eventId)
-        if (event?.data?.payload?.type === EventType.VotingEvent) {
+        if (event?.data?.payload?.type === ParticipationEventType.Voting) {
             votingEvent = event
             votingPayload = event.data.payload as VotingEventPayload
         } else {
@@ -78,14 +68,8 @@
     }
 
     function handleQuestionClick(index: number): void {
-        // console.log(index)
-        // console.log(proposalInformation)
         openedQuestionIndex = openedQuestionIndex === index ? null : index
     }
-
-    // async function handleVoteClick(): Promise<void> {
-    //     console.log(`Vote w/`)
-    // }
 </script>
 
 <div class="w-full h-full flex flex-nowrap p-8 relative flex-1 space-x-4 bg-gray-50 dark:bg-gray-900">

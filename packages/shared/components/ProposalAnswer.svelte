@@ -2,7 +2,7 @@
     import { createEventDispatcher } from 'svelte'
     import { Text, FontWeight, TooltipIcon } from 'shared/components'
     import { Position } from 'shared/components/enums'
-    import { Answer } from '@core/governance/interfaces'
+    import type { Answer } from '@iota/wallet'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let answer: Answer
