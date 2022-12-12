@@ -6,7 +6,7 @@
     export let nftId: string
     export let size: 'small' | 'medium' | 'large' = 'medium'
 
-    let isLoaded = true
+    let isLoaded = false
     let hasError = false
     let isIcon = false
 
@@ -17,13 +17,17 @@
     $: isIcon = parentType !== 'image' || !isLoaded || hasError
 
     function resetProps() {
-        isLoaded = true
+        isLoaded = false
         hasError = false
         isIcon = false
     }
 
     function handleLoadingError() {
         hasError = true
+    }
+
+    function handleOnLoad() {
+        isLoaded = true
     }
 </script>
 
@@ -41,6 +45,11 @@
     {#if isIcon}
         <MediaIcon {type} />
     {:else}
-        <NftMedia {nftId} classes="min-w-full min-h-full object-cover" onError={handleLoadingError} />
+        <NftMedia
+            {nftId}
+            classes="min-w-full min-h-full object-cover"
+            onError={handleLoadingError}
+            onLoad={handleOnLoad}
+        />
     {/if}
 </div>

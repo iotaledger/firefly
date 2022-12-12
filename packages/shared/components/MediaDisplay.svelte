@@ -1,28 +1,30 @@
 <script lang="typescript">
     import { MimeType, ParentMimeType } from '@core/nfts'
 
+    export let Media: HTMLImageElement | HTMLVideoElement | HTMLAudioElement
     export let src: string | unknown
     export let expectedType: MimeType
     export let classes: string
     export let alt
-    export let onError: () => void
+    export let onError: () => unknown
+    export let onLoad: () => unknown
     export let autoplay: boolean = false
     export let controls: boolean = false
     export let muted: boolean = false
     export let loop: boolean = false
 
-    let Media
     let type
     $: type = convertMimeTypeToHtmlTag(expectedType)
 
     function startPlaying() {
         if (type === 'video' && !autoplay) {
-            Media.play()
+            (Media as HTMLVideoElement).play()
         }
     }
+
     function stopPlaying() {
         if (type === 'video' && !autoplay) {
-            Media.pause()
+            (Media as HTMLVideoElement).pause()
         }
     }
 
@@ -39,6 +41,10 @@
                 onError()
                 return undefined
         }
+    }
+
+    $: if (type === 'video' && (Media as HTMLVideoElement)?.readyState === 4) {
+        onLoad()
     }
 
     // TODO: find a way to check the type of the file without downloading it
@@ -74,6 +80,7 @@
     muted={muted ? true : undefined}
     class={classes}
     on:error={onError}
+    on:load={onLoad}
     on:mouseenter={startPlaying}
     on:mouseleave={stopPlaying}
 />

@@ -9,11 +9,12 @@
     export let controls: boolean = false
     export let classes: string = ''
     export let onError: () => unknown
+    export let onLoad: () => unknown
 
     const bgColor = 'gray-200'
     const darkBgColor = 'gray-700'
 
-    let isLoaded = true
+    let isLoaded = false
     let hasError = false
 
     $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, nftId)
@@ -21,8 +22,8 @@
 
     $: nftId, resetProps()
 
-    function resetProps() {
-        isLoaded = true
+    function resetProps(): void {
+        isLoaded = false
         hasError = false
     }
 
@@ -55,25 +56,48 @@
         }
     }
 
-    function handleLoadingError() {
+    function handleLoadingError(): void {
         if (onError) {
             onError()
         } else {
             hasError = true
         }
     }
+
+    function handleOnLoad(): void {
+        if (onLoad) {
+            onLoad()
+        } else {
+            isLoaded = true
+        }
+    }
 </script>
 
-{#if !onError && (!url || !isLoaded || hasError)}
+{#if !onError && (!url || hasError)}
     <MediaPlaceholder type={nft?.parsedMetadata?.type} {bgColor} {darkBgColor} />
 {:else}
     <MediaDisplay
         src={url}
         expectedType={nft.parsedMetadata.type}
         alt={`Media display for ${nft.name}`}
-        {autoplay}
-        {controls}
-        {classes}
+        classes="hidden {classes}"
+        onLoad={handleOnLoad}
         onError={handleLoadingError}
     />
+
+    {#if !isLoaded}
+        {#if !onLoad}
+            <MediaPlaceholder type={nft?.parsedMetadata?.type} {bgColor} {darkBgColor} />
+        {/if}
+    {:else}
+        <MediaDisplay
+            src={url}
+            expectedType={nft.parsedMetadata.type}
+            alt={`Media display for ${nft.name}`}
+            {autoplay}
+            {controls}
+            {classes}
+            onError={handleLoadingError}
+        />
+    {/if}
 {/if}
