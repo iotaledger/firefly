@@ -7,29 +7,9 @@
     export let size: 'small' | 'medium' | 'large' = 'medium'
     export let type = undefined
 
-    let isLoaded = false
-    let hasError = false
-    let isIcon = false
-
     $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, nftId)
     $: nftType = nft?.parsedMetadata?.type
     $: parentType = nftType?.split('/')?.[0]
-    $: nftId, resetProps()
-    $: isIcon = parentType !== 'image' || !isLoaded || hasError
-
-    function resetProps() {
-        isLoaded = false
-        hasError = false
-        isIcon = false
-    }
-
-    function handleLoadingError() {
-        hasError = true
-    }
-
-    function handleOnLoad() {
-        isLoaded = true
-    }
 </script>
 
 <div
@@ -38,19 +18,32 @@
         {size === 'small' && 'w-6 h-6'}
         {size === 'medium' && 'w-8 h-8'}
         {size === 'large' && 'w-10 h-10'}
-        {isIcon && size === 'small' && 'p-1'}
-        {isIcon && size === 'medium' && 'p-2'}
-        {isIcon && size === 'large' && 'p-2'}
     "
 >
-    {#if isIcon}
-        <MediaIcon type={type || nftType} />
+    {#if parentType !== 'image'}
+        <div
+            class="
+                w-full h-full 
+                {size === 'small' && 'p-1'}
+                {size === 'medium' && 'p-2'}
+                {size === 'large' && 'p-2'}
+            "
+        >
+            <MediaIcon type={type || nftType} />
+        </div>
     {:else}
-        <NftMedia
-            {nftId}
-            classes="min-w-full min-h-full object-cover"
-            onError={handleLoadingError}
-            onLoad={handleOnLoad}
-        />
+        <NftMedia {nftId} classes="min-w-full min-h-full object-cover">
+            <div
+                slot="placeholder"
+                class="
+                    w-full h-full 
+                    {size === 'small' && 'p-1'}
+                    {size === 'medium' && 'p-2'}
+                    {size === 'large' && 'p-2'}
+                "
+            >
+                <MediaIcon type={type || nftType} />
+            </div>
+        </NftMedia>
     {/if}
 </div>

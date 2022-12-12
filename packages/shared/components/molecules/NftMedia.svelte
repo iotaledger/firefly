@@ -74,7 +74,9 @@
 </script>
 
 {#if !onError && (!url || hasError)}
-    <MediaPlaceholder type={nft?.parsedMetadata?.type} {bgColor} {darkBgColor} />
+    <slot name="placeholder">
+        <MediaPlaceholder type={nft?.parsedMetadata?.type} {bgColor} {darkBgColor} />
+    </slot>
 {:else}
     <MediaDisplay
         src={url}
@@ -87,7 +89,9 @@
 
     {#if !isLoaded}
         {#if !onLoad}
-            <MediaPlaceholder type={nft?.parsedMetadata?.type} {bgColor} {darkBgColor} />
+            <slot name="placeholder">
+                <MediaPlaceholder type={nft?.parsedMetadata?.type} {bgColor} {darkBgColor} />
+            </slot>
         {/if}
     {:else}
         <MediaDisplay
