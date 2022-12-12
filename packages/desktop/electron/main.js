@@ -176,13 +176,26 @@ if (app.isPackaged) {
 }
 
 /**
+ * Check URL against allowlist
+ */
+function isUrlAllowed(targetUrl) {
+    const externalBlocklist = ['localhost']
+    const url = new URL(targetUrl)
+    const domain = url.hostname.replace('www.', '').replace('mailto:', '')
+
+    return !externalBlocklist.includes(domain) && !externalBlocklist.includes(domain + url.pathname)
+}
+
+/**
  * Handles url navigation events
  */
 const handleNavigation = (e, url) => {
     e.preventDefault()
 
     try {
-        shell.openExternal(url)
+        if (isUrlAllowed) {
+            shell.openExternal(url)
+        }
     } catch (err) {
         console.error(err)
     }
@@ -289,7 +302,7 @@ function createWindow() {
      * Handle permissions requests
      */
     session.defaultSession.setPermissionRequestHandler((_webContents, permission, cb, details) => {
-        if (permission === 'openExternal' && details && details.externalURL) {
+        if (permission === 'openExternal' && details && details.externalURL && isUrlAllowed(details.externalURL)) {
             return cb(true)
         }
 
