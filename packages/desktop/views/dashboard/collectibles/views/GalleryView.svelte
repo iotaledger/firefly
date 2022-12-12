@@ -99,7 +99,7 @@
             auto-fill,
             minmax(max(var(--grid-item--min-width), var(--grid-item--max-width)), 1fr)
         );
-        grid-auto-rows: minmax(min-content, max-content);
+        grid-template-rows: auto;
         grid-gap: var(--grid-layout-gap);
     }
 </style>
