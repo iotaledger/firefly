@@ -140,7 +140,9 @@
         </proposal-questions>
         <buttons-container class="flex w-full space-x-4 mt-6">
             <Button outline classes="w-full">{localize('actions.cancel')}</Button>
-            <Button classes="w-full">{localize('actions.vote')}</Button>
+            <Button classes="w-full" disabled={selectedIndices?.length === 0 || selectedIndices?.includes(undefined)}>
+                {localize('actions.vote')}
+            </Button>
         </buttons-container>
     </Pane>
 </div>
