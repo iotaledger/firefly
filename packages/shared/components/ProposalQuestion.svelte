@@ -11,7 +11,11 @@
     export let onClick: () => unknown = () => {}
 
     function handleAnswerClick(answerIndex: number): void {
-        selectedIndices[index] = answerIndex
+        if (selectedIndices[index] === answerIndex) {
+            selectedIndices[index] = undefined
+        } else {
+            selectedIndices[index] = answerIndex
+        }
     }
 </script>
 
