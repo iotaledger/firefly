@@ -2,12 +2,14 @@
     import { localize } from '@core/i18n'
     import { ActivityAction, ActivityDirection, InclusionState, NftActivity, Subject } from '@core/wallet'
     import { truncateString } from '@core/utils'
-    import { Text, FontWeight, NftMedia } from 'shared/components'
+    import { Text, FontWeight, NftImageOrIcon } from 'shared/components'
     import { networkHrp } from '@core/network'
     import { getNftByIdFromAllAccountNfts } from '@core/nfts'
     import { selectedAccountIndex } from '@core/account'
 
     export let activity: NftActivity
+
+    let isIcon = false
 
     $: isIncoming =
         activity.direction === ActivityDirection.Incoming || activity.direction === ActivityDirection.SelfTransaction
@@ -46,8 +48,11 @@
     }
 </script>
 
-<div class="relative flex w-8 h-8">
-    <NftMedia nftId={activity.nftId} classes="p-2 w-8 h-8 bg-gray-500 dark:bg-gray-500 rounded-lg" />
+<div
+    class="flex w-8 h-8 overflow-hidden {isIcon &&
+        'p-2'} flex-shrink-0 rounded-md bg-gray-500 items-center justify-center"
+>
+    <NftImageOrIcon bind:isIcon nftId={activity.nftId} classes="object-cover min-w-full min-h-full" />
 </div>
 
 <div class="flex flex-col w-full space-y-0.5 overflow-hidden">

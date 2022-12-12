@@ -8,6 +8,7 @@
     export let autoplay: boolean = false
     export let controls: boolean = false
     export let classes: string = ''
+    export let onError: () => unknown
 
     const bgColor = 'gray-200'
     const darkBgColor = 'gray-700'
@@ -55,11 +56,15 @@
     }
 
     function handleLoadingError() {
-        hasError = true
+        if (onError) {
+            onError()
+        } else {
+            hasError = true
+        }
     }
 </script>
 
-{#if !url || !isLoaded || hasError}
+{#if !onError && (!url || !isLoaded || hasError)}
     <MediaPlaceholder type={nft?.parsedMetadata?.type} {bgColor} {darkBgColor} />
 {:else}
     <MediaDisplay
