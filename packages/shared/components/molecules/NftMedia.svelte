@@ -7,6 +7,7 @@
     export let nftId: string
     export let autoplay: boolean = false
     export let controls: boolean = false
+    export let loop: boolean = false
     export let classes: string = ''
 
     const bgColor = 'gray-200'
@@ -88,6 +89,7 @@
             alt={`Media display for ${nft.name}`}
             {autoplay}
             {controls}
+            {loop}
             {classes}
         />
     {/if}
