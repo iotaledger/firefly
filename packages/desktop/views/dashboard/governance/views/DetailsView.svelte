@@ -1,8 +1,6 @@
 <script lang="typescript">
     import { selectedProposal } from '@core/governance'
-    import { formatDate, localize } from '@core/i18n'
-    import { networkStatus } from '@core/network'
-    import { milestoneToDate } from '@core/utils'
+    import { localize } from '@core/i18n'
     import {
         Button,
         Text,
@@ -13,52 +11,61 @@
         FontWeight,
         Icon,
         ProposalQuestion,
+        ProposalInformation,
     } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { getVotingEvent } from '@core/profile-manager'
-    import { getParticipationOverview, selectedAccount } from '@core/account'
-    import { Event, TrackedParticipationOverview } from '@iota/wallet'
+    import { selectedAccount } from '@core/account'
+    import type { Event } from '@iota/wallet'
+    import { Question } from '@core/governance/interfaces'
 
-    const dateFormat = {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        timeZoneName: 'short',
-    } as Intl.DateTimeFormatOptions
+    enum EventType {
+        VotingEvent,
+        StakingEvent,
+    }
 
-    let event: Event
-    $: {
-        getVotingEvent($selectedProposal?.id).then((votingEvent) => (event = votingEvent))
+    interface VotingEventPayload {
+        type: number
+        questions: Question[]
     }
-    let selectedProposalOverview: TrackedParticipationOverview[]
-    $: {
-        getParticipationOverview($selectedAccount?.index).then((participationOverview) => {
-            selectedProposalOverview = participationOverview.participations
-                ?.filter((participation) => participation[0] === $selectedProposal?.id)
-                ?.map((participation) => participation[1][1])
-        })
-    }
-    $: totalVotes =
-        selectedProposalOverview?.reduce(
-            (acc, trackedParticipation) =>
-                trackedParticipation.amount ? parseInt(trackedParticipation.amount, 10) + acc : acc,
-            0
-        ) ?? 0
+
+    let votingEvent: Event
+    let votingPayload: VotingEventPayload
+    $: void setVotingEvent($selectedProposal?.id)
+
+    // TODO: calculateVotes function needs to take into account the time
+    $: totalVotes = void calculateTotalVotes()
     $: votesCounter = {
         total: totalVotes,
         power: $selectedAccount?.votingPower,
     }
-    $: questions = event?.data?.payload?.questions
+    $: questions = votingPayload?.questions
 
-    const proposalInformation = {
-        countingEnds: formatDate(
-            milestoneToDate($networkStatus.currentMilestone, $selectedProposal?.milestones?.closed),
-            dateFormat
-        ),
-        eventId: $selectedProposal?.id,
-        nodeUrl: 'jfjk821391290jha.url', // mocked data
+    $: selectedIndices = Array<number>(questions?.length)
+
+    async function setVotingEvent(eventId: string): Promise<void> {
+        const event = await getVotingEvent(eventId)
+        if (event?.data?.payload?.type === EventType.VotingEvent) {
+            votingEvent = event
+            votingPayload = event.data.payload as VotingEventPayload
+        } else {
+            throw new Error('Event is a staking event!')
+        }
+    }
+
+    // TODO: track the votes after voting has been done
+    function calculateTotalVotes(): number {
+        // const participations = (await getParticipationOverview($selectedAccount?.index))?.participations
+        // console.log(0, participations)
+        // const selectedProposalOverview = participations
+        //         ?.filter((participation) => participation[0] === $selectedProposal?.id)
+        // const votes = selectedProposalOverview?.map((participation) => participation[1][1])
+        // selectedProposalOverview?.reduce(
+        //     (acc, trackedParticipation) =>
+        //         trackedParticipation.amount ? parseInt(trackedParticipation.amount, 10) + acc : acc,
+        //     0
+        // ) ?? 0
+        return 10000
     }
 
     let openedQuestionIndex = null
@@ -68,8 +75,14 @@
     }
 
     function handleQuestionClick(index: number): void {
+        // console.log(index)
+        // console.log(proposalInformation)
         openedQuestionIndex = openedQuestionIndex === index ? null : index
     }
+
+    // async function handleVoteClick(): Promise<void> {
+    //     console.log(`Vote w/`)
+    // }
 </script>
 
 <div class="w-full h-full flex flex-nowrap p-8 relative flex-1 space-x-4 bg-gray-50 dark:bg-gray-900">
@@ -106,34 +119,21 @@
                 {/each}
             </ul>
         </Pane>
-        <Pane classes="p-6 h-fit">
-            <Text smaller classes="mb-5">
-                {localize('views.governance.details.proposalInformation.title')}
-            </Text>
-            <ul class="space-y-2">
-                {#each Object.keys(proposalInformation) as counterKey}
-                    <li class="flex justify-between bg-gray-50 px-4 py-3 rounded-lg">
-                        <Text fontWeight={FontWeight.medium} overrideColor classes="text-gray-600">
-                            {localize(`views.governance.details.proposalInformation.${counterKey}`)}
-                        </Text>
-                        <Text overrideColor classes="text-gray-600">
-                            {proposalInformation[counterKey]}
-                        </Text>
-                    </li>
-                {/each}
-            </ul>
-        </Pane>
+        <ProposalInformation />
     </div>
     <Pane classes="w-3/5 h-full p-6 flex flex-col justify-between ">
         <proposal-questions class="flex flex-1 flex-col space-y-5 overflow-y-scroll">
-            {#each questions as question, index}
-                <ProposalQuestion
-                    {question}
-                    isOpened={openedQuestionIndex === index}
-                    {index}
-                    onClick={() => handleQuestionClick(index)}
-                />
-            {/each}
+            {#if questions}
+                {#each questions as question, index}
+                    <ProposalQuestion
+                        {question}
+                        isOpened={openedQuestionIndex === index}
+                        {index}
+                        {selectedIndices}
+                        onClick={() => handleQuestionClick(index)}
+                    />
+                {/each}
+            {/if}
         </proposal-questions>
         <buttons-container class="flex w-full space-x-4 mt-6">
             <Button outline classes="w-full">{localize('actions.cancel')}</Button>
