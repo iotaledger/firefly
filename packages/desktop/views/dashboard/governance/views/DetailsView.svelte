@@ -40,7 +40,7 @@
         const event = await getVotingEvent(eventId)
         if (event?.data?.payload?.type === ParticipationEventType.Voting) {
             votingEvent = event
-            votingPayload = event.data.payload as VotingEventPayload
+            votingPayload = event.data.payload
         } else {
             throw new Error('Event is a staking event!')
         }
@@ -53,7 +53,8 @@
 
         if (selectedProposalOverview) {
             const votes = Object.values(selectedProposalOverview).map(
-                ({ amount, startMilestoneIndex, endMilestoneIndex }) => parseInt(amount, 10) * (endMilestoneIndex - startMilestoneIndex)
+                ({ amount, startMilestoneIndex, endMilestoneIndex }) =>
+                    parseInt(amount, 10) * (endMilestoneIndex - startMilestoneIndex)
             )
             totalVotes = votes?.reduce((accumulator, votes) => accumulator + votes, 0) ?? 0
         } else {
