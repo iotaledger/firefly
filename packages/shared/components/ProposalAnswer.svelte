@@ -6,8 +6,8 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let answer: Answer
-    export let hidden = null
-    export let isSelected = null
+    export let hidden: boolean = null
+    export let isSelected: boolean = null
     export let answerIndex: number = undefined
 
     const dispatch = createEventDispatcher()
