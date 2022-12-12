@@ -8,7 +8,7 @@ import {
     unverifyAsset,
     VerifiedStatus,
     verifyAsset,
-    getPersistedAsset,
+    getAssetById,
 } from '@core/wallet'
 
 import { selectedAsset, TokenAction } from '../../../contexts/dashboard'
@@ -55,15 +55,15 @@ export class TokenRouter extends Subrouter<TokenRoute> {
         switch (action) {
             case TokenAction.Skip:
                 unverifyAsset(id, NotVerifiedStatus.Skipped)
-                selectedAsset.set(getPersistedAsset(id))
+                selectedAsset.set(getAssetById(id))
                 return
             case TokenAction.Verify:
                 verifyAsset(id, VerifiedStatus.SelfVerified)
-                selectedAsset.set(getPersistedAsset(id))
+                selectedAsset.set(getAssetById(id))
                 return
             case TokenAction.Send:
                 updateNewTransactionDetails({ type: NewTransactionType.TokenTransfer, assetId: id })
-                get(dashboardRouter).previous()
+                this.closeDrawer()
                 get(dashboardRouter).goTo(DashboardRoute.Send)
         }
     }
