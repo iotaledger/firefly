@@ -8,8 +8,6 @@
     export let autoplay: boolean = false
     export let controls: boolean = false
     export let classes: string = ''
-    export let onError: () => unknown
-    export let onLoad: () => unknown
 
     const bgColor = 'gray-200'
     const darkBgColor = 'gray-700'
@@ -57,23 +55,15 @@
     }
 
     function handleLoadingError(): void {
-        if (onError) {
-            onError()
-        } else {
-            hasError = true
-        }
+        hasError = true
     }
 
     function handleOnLoad(): void {
-        if (onLoad) {
-            onLoad()
-        } else {
-            isLoaded = true
-        }
+        isLoaded = true
     }
 </script>
 
-{#if !onError && (!url || hasError)}
+{#if !url || hasError}
     <slot name="placeholder">
         <MediaPlaceholder type={nft?.parsedMetadata?.type} {bgColor} {darkBgColor} />
     </slot>
@@ -88,11 +78,9 @@
     />
 
     {#if !isLoaded}
-        {#if !onLoad}
-            <slot name="placeholder">
-                <MediaPlaceholder type={nft?.parsedMetadata?.type} {bgColor} {darkBgColor} />
-            </slot>
-        {/if}
+        <slot name="placeholder">
+            <MediaPlaceholder type={nft?.parsedMetadata?.type} {bgColor} {darkBgColor} />
+        </slot>
     {:else}
         <MediaDisplay
             src={url}
@@ -101,7 +89,6 @@
             {autoplay}
             {controls}
             {classes}
-            onError={handleLoadingError}
         />
     {/if}
 {/if}
