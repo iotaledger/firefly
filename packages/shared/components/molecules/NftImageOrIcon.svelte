@@ -5,14 +5,15 @@
 
     export let nftId: string
     export let size: 'small' | 'medium' | 'large' = 'medium'
+    export let type = undefined
 
     let isLoaded = false
     let hasError = false
     let isIcon = false
 
     $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, nftId)
-    $: type = nft?.parsedMetadata?.type
-    $: parentType = type?.split('/')?.[0]
+    $: nftType = nft?.parsedMetadata?.type
+    $: parentType = nftType?.split('/')?.[0]
     $: nftId, resetProps()
     $: isIcon = parentType !== 'image' || !isLoaded || hasError
 
@@ -39,11 +40,11 @@
         {size === 'large' && 'w-10 h-10'}
         {isIcon && size === 'small' && 'p-1'}
         {isIcon && size === 'medium' && 'p-2'}
-        {isIcon && size === 'large' && 'p-3'}
+        {isIcon && size === 'large' && 'p-2'}
     "
 >
     {#if isIcon}
-        <MediaIcon {type} />
+        <MediaIcon type={type || nftType} />
     {:else}
         <NftMedia
             {nftId}
