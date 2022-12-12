@@ -9,8 +9,6 @@
 
     export let activity: NftActivity
 
-    let isIcon = false
-
     $: isIncoming =
         activity.direction === ActivityDirection.Incoming || activity.direction === ActivityDirection.SelfTransaction
     $: title = getTitle(activity)
@@ -48,12 +46,7 @@
     }
 </script>
 
-<div
-    class="flex w-8 h-8 overflow-hidden {isIcon &&
-        'p-2'} flex-shrink-0 rounded-md bg-gray-500 items-center justify-center"
->
-    <NftImageOrIcon bind:isIcon nftId={activity.nftId} classes="object-cover min-w-full min-h-full" />
-</div>
+<NftImageOrIcon nftId={activity.nftId} size="medium" />
 
 <div class="flex flex-col w-full space-y-0.5 overflow-hidden">
     <div class="flex flex-row justify-between space-x-4">

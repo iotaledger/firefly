@@ -4,11 +4,11 @@
     import { NftMedia, MediaIcon } from 'shared/components'
 
     export let nftId: string
-    export let classes: string = ''
-    export let isIcon: boolean = false
+    export let size: 'small' | 'medium' | 'large' = 'medium'
 
     let isLoaded = true
     let hasError = false
+    let isIcon = false
 
     $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, nftId)
     $: type = nft?.parsedMetadata?.type
@@ -19,6 +19,7 @@
     function resetProps() {
         isLoaded = true
         hasError = false
+        isIcon = false
     }
 
     function handleLoadingError() {
@@ -26,8 +27,20 @@
     }
 </script>
 
-{#if isIcon}
-    <MediaIcon {type} />
-{:else}
-    <NftMedia {nftId} {classes} onError={handleLoadingError} />
-{/if}
+<div
+    class="
+        flex overflow-hidden flex-shrink-0 rounded-md bg-gray-500 items-center justify-center
+        {size === 'small' && 'w-6 h-6'}
+        {size === 'medium' && 'w-8 h-8'}
+        {size === 'large' && 'w-10 h-10'}
+        {isIcon && size === 'small' && 'p-1'}
+        {isIcon && size === 'medium' && 'p-2'}
+        {isIcon && size === 'large' && 'p-3'}
+    "
+>
+    {#if isIcon}
+        <MediaIcon {type} />
+    {:else}
+        <NftMedia {nftId} classes="min-w-full min-h-full object-cover" onError={handleLoadingError} />
+    {/if}
+</div>
