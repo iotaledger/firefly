@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Button, Text, FontWeight, NftMedia, Tabs, KeyValueBox } from 'shared/components'
+    import { Button, Text, FontWeight, NftImageOrIcon, Tabs, KeyValueBox } from 'shared/components'
     import { localize } from '@core/i18n'
     import { selectedAccount } from '@core/account'
     import { buildNftOutputData, formatTokenAmountPrecise, mintNft, mintNftDetails } from '@core/wallet'
@@ -99,7 +99,7 @@
     </Text>
     <div class="space-y-2 max-h-100 scrollable-y flex-1">
         <nft-details class="flex flex-col justify-center items-center space-y-4">
-            <NftMedia />
+            <NftImageOrIcon size="large" {type} />
             <activity-details class="w-full h-full space-y-2 flex flex-auto flex-col flex-shrink-0">
                 <Tabs bind:activeTab {tabs} />
                 {#if activeTab === Tab.Transaction}
