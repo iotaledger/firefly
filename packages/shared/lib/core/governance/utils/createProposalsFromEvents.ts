@@ -5,10 +5,12 @@ import { Event } from '@iota/wallet'
 import { ProposalStatus } from '@core/governance/enums'
 import { IProposal } from '@core/governance/interfaces'
 import { nodeInfo } from '@core/network'
+import { activeProfile } from '@core/profile'
 
 export function createProposalsFromEvents(events: Event[]): IProposal[] {
-    const proposals: IProposal[] = events.map(({ data }) => {
+    const proposals: IProposal[] = events.map(({ data, id }) => {
         const proposal = {
+            id,
             title: data.name,
             status: ProposalStatus.Announcement,
             milestones: {
@@ -17,6 +19,8 @@ export function createProposalsFromEvents(events: Event[]): IProposal[] {
                 [ProposalStatus.Counting]: data.milestoneIndexStart,
                 [ProposalStatus.Closed]: data.milestoneIndexEnd,
             },
+            // TODO: figure out a better way to get the node URLs
+            nodeUrls: get(activeProfile)?.clientOptions?.nodes,
         }
 
         const status = getLatestStatus(proposal)
