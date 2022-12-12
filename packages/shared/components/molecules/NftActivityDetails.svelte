@@ -6,7 +6,7 @@
     import { NftActivity } from '@core/wallet'
     import {
         ActivityAsyncStatusPill,
-        NftMediaContainer,
+        NftMedia,
         NftMediaSize,
         Pill,
         SubjectBox,
@@ -26,12 +26,16 @@
     <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-3 overflow-hidden">
         <nft-summary class="flex w-full items-center justify-center w-full space-x-2">
             {#if nft?.name}
-                <NftMediaContainer nftId={activity.nftId} size={NftMediaSize.ExtraSmall} />
+                <NftMedia nftId={activity.nftId} classes="p-1 w-6 h-6 bg-gray-500 dark:bg-gray-500 rounded-md" />
                 <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="whitespace-pre truncate">
                     {nft?.name}
                 </Text>
             {:else}
-                <NftMediaContainer nftId={activity.nftId} size={NftMediaSize.Medium} />
+                <NftMedia
+                    nftId={activity.nftId}
+                    size={NftMediaSize.Medium}
+                    classes="p-1 w-20 h-20 bg-gray-500 dark:bg-gray-500 rounded-xl"
+                />
             {/if}
         </nft-summary>
         <transaction-status class="flex flex-row w-full space-x-2 justify-center">

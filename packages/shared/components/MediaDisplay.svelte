@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { MimeType, ParentMimeType } from '@core/nfts'
 
-    export let Media
     export let src: string | unknown
     export let expectedType: MimeType
     export let classes: string
@@ -12,6 +11,7 @@
     export let muted: boolean = false
     export let loop: boolean = false
 
+    let Media
     let type
     $: type = convertMimeTypeToHtmlTag(expectedType)
 

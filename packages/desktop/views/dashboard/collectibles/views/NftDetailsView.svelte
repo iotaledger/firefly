@@ -25,8 +25,7 @@
         KeyValueBox,
         MeatballMenuButton,
         Modal,
-        NftMediaContainer,
-        NftMediaSize,
+        NftMedia,
         Pane,
         Text,
         TextType,
@@ -116,11 +115,18 @@
             overflow: true,
         })
     }
+
+    // width = 'w-96'
+    //             height = 'h-96'
+    //             // squircle or circle
+    //             radius = shape === 'squircle' ? '2xl' : 'full'
+    //             bgColor = 'gray-200'
+    //             darkBgColor = 'gray-700'
 </script>
 
-<div class="flex flex-row w-full h-full space-x-4 overflow-auto">
-    <div class="flex w-full h-full bg-gray-200 dark:bg-gray-700 items-center justify-center rounded-2xl">
-        <NftMediaContainer nftId={id} size={NftMediaSize.ExtraLarge} />
+<div class="flex flex-row w-full h-full space-x-4">
+    <div class="flex w-full h-full items-center justify-center">
+        <NftMedia nftId={id} classes="rounded-2xl object-contain w-full h-full" />
     </div>
     <Pane classes="flex flex-col p-6 space-y-3 w-full h-full max-w-lg">
         <nft-title class="flex justify-between items-center">

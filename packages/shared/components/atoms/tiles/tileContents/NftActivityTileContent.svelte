@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { ActivityAction, ActivityDirection, InclusionState, NftActivity, Subject } from '@core/wallet'
     import { truncateString } from '@core/utils'
-    import { Text, FontWeight, NftMediaContainer, NftMediaSize } from 'shared/components'
+    import { Text, FontWeight, NftMedia } from 'shared/components'
     import { networkHrp } from '@core/network'
     import { getNftByIdFromAllAccountNfts } from '@core/nfts'
     import { selectedAccountIndex } from '@core/account'
@@ -47,7 +47,7 @@
 </script>
 
 <div class="relative flex w-8 h-8">
-    <NftMediaContainer nftId={activity.nftId} size={NftMediaSize.Small} />
+    <NftMedia nftId={activity.nftId} classes="p-2 w-8 h-8 bg-gray-500 dark:bg-gray-500 rounded-lg" />
 </div>
 
 <div class="flex flex-col w-full space-y-0.5 overflow-hidden">
