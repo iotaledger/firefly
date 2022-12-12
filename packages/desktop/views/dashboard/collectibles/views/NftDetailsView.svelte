@@ -129,7 +129,7 @@
         <div class="relative w-full h-full flex">
             <NftMedia
                 nftId={id}
-                classes="rounded-2xl overflow-hidden flex-1 w-auto h-auto max-w-full max-h-full object-contain absolute top-0 left-1/2 transform -translate-x-1/2"
+                classes="rounded-2xl overflow-hidden flex-1 w-auto h-auto max-w-full max-h-full object-contain absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
             />
         </div>
     </div>
