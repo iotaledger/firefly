@@ -38,6 +38,7 @@ const persistedProfileMigrationsMap: Record<number, (existingProfile: unknown) =
     3: persistedProfileMigrationToV4,
     4: persistedProfileMigrationToV5,
     5: persistedProfileMigrationToV6,
+    6: persistedProfileMigrationToV7,
 }
 
 function persistedProfileMigrationToV4(existingProfile: unknown): void {
@@ -85,4 +86,31 @@ function persistedProfileMigrationToV5(existingProfile: unknown): void {
 function persistedProfileMigrationToV6(existingProfile: IPersistedProfile): void {
     existingProfile.forceAssetRefresh = true
     saveProfile(existingProfile)
+}
+
+function persistedProfileMigrationToV7(existingProfile: unknown): void {
+    const newProfile = {}
+
+    const keysToKeep = [
+        'id',
+        'name',
+        'type',
+        'networkProtocol',
+        'networkType',
+        'lastStrongholdBackupTime',
+        'settings',
+        'accountMetadata',
+        'isDeveloperProfile',
+        'hasVisitedDashboard',
+        'lastUsedAccountIndex',
+        'clientOptions',
+        'forceAssetRefresh',
+    ]
+
+    keysToKeep.forEach((key) => {
+        const existingValue = existingProfile?.[key]
+        newProfile[key] = existingValue
+    })
+
+    saveProfile(newProfile as IPersistedProfile)
 }
