@@ -2,7 +2,16 @@
     import { localize } from '@core/i18n'
     import { nftSearchTerm, queriedNfts, selectedAccountNfts } from '@core/nfts'
     import { debounce } from '@core/utils'
-    import { FontWeight, Icon, Illustration, NftGallery, Text, TextInput, TogglableButton } from 'shared/components'
+    import {
+        FontWeight,
+        Icon,
+        Illustration,
+        NftGallery,
+        Text,
+        TextInput,
+        TogglableButton,
+        ReceiveButton,
+    } from 'shared/components'
 
     let searchActive = false
     let inputElement: HTMLInputElement
@@ -76,6 +85,7 @@
                         >{localize('views.collectibles.gallery.emptyDescription')}</Text
                     >
                 </div>
+                <ReceiveButton text={localize('actions.depositNft')} />
             </div>
         </div>
     {/if}
