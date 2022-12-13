@@ -12,7 +12,7 @@ import {
 } from '@core/wallet'
 
 import { selectedAsset, TokenAction } from '../../../contexts/dashboard'
-import { dashboardRouter } from '../dashboard-router'
+import { dashboardRouter, sendRouter } from '../'
 
 import { TokenRoute, DashboardRoute } from '../../enums'
 import { ITokenRouterEvent } from '../../interfaces'
@@ -45,7 +45,7 @@ export class TokenRouter extends Subrouter<TokenRoute> {
         resetRouterWithDrawerDelay(get(tokenRouter))
     }
 
-    private handleTokenAction(action) {
+    private handleTokenAction(action): void {
         if (!get(selectedAsset)) {
             return
         }
@@ -63,6 +63,7 @@ export class TokenRouter extends Subrouter<TokenRoute> {
                 return
             case TokenAction.Send:
                 updateNewTransactionDetails({ type: NewTransactionType.TokenTransfer, assetId: id })
+                get(sendRouter).next()
                 this.closeDrawer()
                 get(dashboardRouter).goTo(DashboardRoute.Send)
         }
