@@ -1609,6 +1609,9 @@
         "claimShimmerRewards": {
             "success": "Shimmer rewards claimed for {accountAlias}",
             "error": "An error occurred while claiming. Try again."
+        },
+        "vote": {
+            "success": "Votes successfully casted."
         }
     },
     "error": {

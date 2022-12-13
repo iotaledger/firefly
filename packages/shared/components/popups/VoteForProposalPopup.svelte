@@ -7,6 +7,7 @@
     import type { Event } from '@iota/wallet'
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
     import { BASE_TOKEN } from '@core/network'
+    import { showAppNotification } from '@auxiliary/notification'
 
     export let event: Event
     export let selectedAnswers: number[]
@@ -21,6 +22,11 @@
         try {
             await checkActiveProfileAuth(async () => {
                 await vote($selectedAccount.index, event?.id, selectedAnswers)
+                showAppNotification({
+                    type: 'success',
+                    message: localize('notifications.vote.success'),
+                    alert: true,
+                })
                 closePopup()
             })
         } catch (err) {
