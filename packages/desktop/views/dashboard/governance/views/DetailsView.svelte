@@ -17,17 +17,19 @@
     import { getVotingEvent } from '@core/profile-manager'
     import { governanceRouter } from '@core/router'
     import { getParticipationOverview, selectedAccount } from '@core/account'
-    import { Event, VotingEventPayload, ParticipationEventType } from '@iota/wallet/out/types'
+    import { VotingEventPayload, ParticipationEventType } from '@iota/wallet/out/types'
     import type { IParticipations } from '@core/governance/interfaces'
     import { openPopup } from '@auxiliary/popup'
+    import { ProposalStatus } from '@core/governance/enums'
 
     let selectedIndices: number[] = []
-    let votingEvent: Event
+
     let votingPayload: VotingEventPayload
-    $: void setVotingEvent($selectedProposal?.id)
+    $: void setVotingEventPayload($selectedProposal?.id)
 
     let totalVotes = 0
     $: void setTotalVotes()
+
     $: votesCounter = {
         total: totalVotes,
         power: $selectedAccount?.votingPower,
@@ -37,11 +39,15 @@
     $: if (questions?.length > 0 && selectedIndices?.length === 0) {
         selectedIndices = Array<number>(questions?.length)
     }
+    $: isVotingDisabled =
+        $selectedProposal?.status === ProposalStatus.Announcement ||
+        $selectedProposal?.status === ProposalStatus.Closed ||
+        selectedIndices?.length === 0 ||
+        selectedIndices?.includes(undefined)
 
-    async function setVotingEvent(eventId: string): Promise<void> {
+    async function setVotingEventPayload(eventId: string): Promise<void> {
         const event = await getVotingEvent(eventId)
         if (event?.data?.payload?.type === ParticipationEventType.Voting) {
-            votingEvent = event
             votingPayload = event.data.payload
         } else {
             throw new Error('Event is a staking event!')
@@ -81,10 +87,7 @@
     function handleVoteClick(): void {
         openPopup({
             type: 'voteForProposal',
-            props: {
-                selectedAnswers: selectedIndices,
-                event: votingEvent,
-            },
+            props: { selectedAnswers: selectedIndices },
         })
     }
 </script>
@@ -141,11 +144,7 @@
         </proposal-questions>
         <buttons-container class="flex w-full space-x-4 mt-6">
             <Button outline classes="w-full" onClick={handleCancelClick}>{localize('actions.cancel')}</Button>
-            <Button
-                classes="w-full"
-                disabled={selectedIndices?.length === 0 || selectedIndices?.includes(undefined)}
-                onClick={handleVoteClick}
-            >
+            <Button classes="w-full" disabled={isVotingDisabled} onClick={handleVoteClick}>
                 {localize('actions.vote')}
             </Button>
         </buttons-container>

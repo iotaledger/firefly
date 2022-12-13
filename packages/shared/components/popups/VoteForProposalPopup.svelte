@@ -4,12 +4,11 @@
     import { closePopup } from '@auxiliary/popup'
     import { activeProfile, checkActiveProfileAuth } from '@core/profile'
     import { selectedAccount, vote } from '@core/account'
-    import type { Event } from '@iota/wallet'
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
     import { BASE_TOKEN } from '@core/network'
     import { showAppNotification } from '@auxiliary/notification'
+    import { selectedProposal } from '@core/governance'
 
-    export let event: Event
     export let selectedAnswers: number[]
 
     $: formattedVotingPower = formatTokenAmountBestMatch(
@@ -21,7 +20,7 @@
     async function handleVoteClick(): Promise<void> {
         try {
             await checkActiveProfileAuth(async () => {
-                await vote($selectedAccount.index, event?.id, selectedAnswers)
+                await vote($selectedAccount.index, $selectedProposal?.id, selectedAnswers)
                 showAppNotification({
                     type: 'success',
                     message: localize('notifications.vote.success'),
@@ -42,7 +41,7 @@
     <Text type={TextType.p} secondary>
         {localize('popups.voteForProposal.body', {
             values: {
-                proposal: event?.data?.name,
+                proposal: $selectedProposal?.title,
             },
         })}
     </Text>
