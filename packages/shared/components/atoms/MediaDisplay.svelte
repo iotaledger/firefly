@@ -1,8 +1,8 @@
 <script lang="typescript">
     import { MimeType, ParentMimeType } from '@core/nfts'
 
-    export let Media: HTMLImageElement | HTMLVideoElement | HTMLAudioElement
-    export let src: string | unknown
+    export let Media: HTMLImageElement | HTMLVideoElement
+    export let src: string
     export let expectedType: MimeType
     export let classes: string
     export let alt
