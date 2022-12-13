@@ -25,6 +25,7 @@ import {
     MintTokenTransaction,
     OutputData,
     OutputOptions,
+    ParticipationOverview,
     PreparedTransactionData,
     SignedTransactionEssence,
     Transaction,
@@ -159,6 +160,10 @@ export class AccountMock implements IAccount {
 
     getOutputsWithAdditionalUnlockConditions(outputs): Promise<string[]> {
         return Promise.resolve([''])
+    }
+
+    getParticipationOverview(): Promise<ParticipationOverview> {
+        throw new Error('Method not implemented.')
     }
 
     getVotingPower(): Promise<string> {
