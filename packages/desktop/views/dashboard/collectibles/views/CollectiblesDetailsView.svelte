@@ -115,13 +115,6 @@
             overflow: true,
         })
     }
-
-    // width = 'w-96'
-    //             height = 'h-96'
-    //             // squircle or circle
-    //             radius = shape === 'squircle' ? '2xl' : 'full'
-    //             bgColor = 'gray-200'
-    //             darkBgColor = 'gray-700'
 </script>
 
 <div class="flex flex-row w-full h-full space-x-4">
