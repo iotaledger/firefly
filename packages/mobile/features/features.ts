@@ -46,7 +46,7 @@ const features = {
                 enabled: true,
             },
             actions: {
-                enabled: false,
+                enabled: true,
             },
         },
         governance: {
