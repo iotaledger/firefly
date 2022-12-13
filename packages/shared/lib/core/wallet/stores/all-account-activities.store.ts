@@ -47,11 +47,9 @@ export function updateActivityByTransactionId(
     partialBaseActivity: Partial<BaseActivity>
 ): void {
     allAccountActivities.update((state) => {
-        const activity = state[accountIndex]?.find((_activity) => _activity.transactionId === transactionId)
+        const activities = state[accountIndex]?.filter((_activity) => _activity.transactionId === transactionId)
 
-        if (activity) {
-            Object.assign(activity, partialBaseActivity)
-        }
+        activities.forEach((activity) => Object.assign(activity, partialBaseActivity))
         return state
     })
 }
