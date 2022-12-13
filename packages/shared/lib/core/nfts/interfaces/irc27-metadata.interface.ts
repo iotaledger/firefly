@@ -13,5 +13,6 @@ export interface IIrc27Metadata {
     royalties?: Record<string, number>
     issuerName?: string
     description?: string
-    attributes?: IIrc27Attribute[] | ISoonaverseAttributes
+    attributes?: IIrc27Attribute[]
+    soonaverseAttributes?: ISoonaverseAttributes
 }
