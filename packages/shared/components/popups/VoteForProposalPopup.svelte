@@ -2,7 +2,7 @@
     import { Button, Text, TextHint, FontWeight, TextType, KeyValueBox } from 'shared/components'
     import { localize } from '@core/i18n'
     import { closePopup } from '@auxiliary/popup'
-    import { activeProfile } from '@core/profile'
+    import { activeProfile, checkActiveProfileAuth } from '@core/profile'
     import { selectedAccount, vote } from '@core/account'
     import type { Event } from '@iota/wallet'
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
@@ -15,11 +15,14 @@
         Number($selectedAccount?.votingPower),
         BASE_TOKEN[$activeProfile.networkProtocol]
     )
+    $: hasVotingPower = Number($selectedAccount?.votingPower) > 0
 
-    async function confirmClick(): Promise<void> {
+    async function handleVoteClick(): Promise<void> {
         try {
-            await vote($selectedAccount.index, event?.id, selectedAnswers)
-            closePopup()
+            await checkActiveProfileAuth(async () => {
+                await vote($selectedAccount.index, event?.id, selectedAnswers)
+                closePopup()
+            })
         } catch (err) {
             console.error(err)
         }
@@ -39,10 +42,16 @@
     </Text>
     <div class="space-y-4">
         <KeyValueBox keyText={localize('popups.voteForProposal.key')} valueText={formattedVotingPower} />
-        <TextHint info text={localize('popups.voteForProposal.hint')} />
+        {#if hasVotingPower}
+            <TextHint info text={localize('popups.voteForProposal.hint')} />
+        {:else}
+            <TextHint danger text={localize('popups.voteForProposal.noVotingPower')} />
+        {/if}
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" outline onClick={closePopup}>{localize('actions.cancel')}</Button>
-        <Button classes="w-full" onClick={confirmClick}>{localize('actions.vote')}</Button>
+        <Button classes="w-full" disabled={!hasVotingPower} onClick={handleVoteClick}>
+            {localize('actions.vote')}
+        </Button>
     </popup-buttons>
 </div>

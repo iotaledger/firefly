@@ -1007,6 +1007,13 @@
         "registerProposal": {
             "title": "Register proposal",
             "body": "Please provide the information listed below to register a proposal."
+        },
+        "voteForProposal": {
+            "title": "Vote for proposal",
+            "body": "You're about to vote for {proposal} proposal",
+            "key": "Your voting power",
+            "hint": "Please not that your voting power depends on the amount of funds you hold in your wallet. The more funds you hold, the higher your voting power is!",
+            "noVotingPower": "You do not have any voting power. Please increase your voting power from the Governance dashboard."
         }
     },
     "charts": {
