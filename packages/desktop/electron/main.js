@@ -176,7 +176,7 @@ if (app.isPackaged) {
 }
 
 /**
- * Check URL against allowlist
+ * Check URL against blacklist
  */
 function isUrlAllowed(targetUrl) {
     const externalBlocklist = ['localhost']
@@ -193,7 +193,7 @@ const handleNavigation = (e, url) => {
     e.preventDefault()
 
     try {
-        if (isUrlAllowed) {
+        if (isUrlAllowed(url)) {
             shell.openExternal(url)
         }
     } catch (err) {
