@@ -8,6 +8,7 @@
     export let autoplay: boolean = false
     export let controls: boolean = false
     export let loop: boolean = false
+    export let muted: boolean = false
     export let classes: string = ''
 
     const bgColor = 'gray-200'
@@ -80,7 +81,7 @@
 
     {#if !isLoaded}
         <slot name="placeholder">
-            <MediaPlaceholder type={nft?.parsedMetadata?.type} {bgColor} {darkBgColor} />
+            <MediaPlaceholder type={nft?.parsedMetadata?.type} {bgColor} {darkBgColor} classes="animate-pulse" />
         </slot>
     {:else}
         <MediaDisplay
@@ -90,6 +91,7 @@
             {autoplay}
             {controls}
             {loop}
+            {muted}
             {classes}
         />
     {/if}

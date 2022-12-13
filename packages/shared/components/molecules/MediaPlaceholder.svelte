@@ -8,6 +8,7 @@
     export let iconOnly = false
     export let bgColor = 'gray-500'
     export let darkBgColor = 'gray-500'
+    export let classes = ''
 
     const width = '100%'
     const height = '100%'
@@ -48,5 +49,5 @@
     {height}
     {primaryColor}
     {secondaryColor}
-    classes={`text-white dark:text-gray-800 bg-${bgColor} dark:bg-${darkBgColor} text-center`}
+    classes={`text-white dark:text-gray-800 bg-${bgColor} dark:bg-${darkBgColor} text-center ${classes}`}
 />

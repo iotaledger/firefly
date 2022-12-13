@@ -2,7 +2,16 @@
     import { localize } from '@core/i18n'
     import { nftSearchTerm, queriedNfts, selectedAccountNfts } from '@core/nfts'
     import { debounce } from '@core/utils'
-    import { FontWeight, Icon, Illustration, NftGallery, Text, TextInput, TogglableButton } from 'shared/components'
+    import {
+        FontWeight,
+        Icon,
+        Illustration,
+        NftGallery,
+        Text,
+        TextInput,
+        TogglableButton,
+        ReceiveButton,
+    } from 'shared/components'
 
     let searchActive = false
     let inputElement: HTMLInputElement
@@ -76,30 +85,8 @@
                         >{localize('views.collectibles.gallery.emptyDescription')}</Text
                     >
                 </div>
+                <ReceiveButton text={localize('actions.depositNft')} />
             </div>
         </div>
     {/if}
 </div>
-
-<style lang="scss">
-    .gallery-grid {
-        --grid-layout-gap: 1rem;
-        --grid-column-count: 9;
-        --grid-item--min-width: 240px;
-
-        /**
-        * Calculated values.
-        */
-        --gap-count: calc(var(--grid-column-count) - 1);
-        --total-gap-width: calc(var(--gap-count) * var(--grid-layout-gap));
-        --grid-item--max-width: calc((100% - var(--total-gap-width)) / var(--grid-column-count));
-
-        display: grid;
-        grid-template-columns: repeat(
-            auto-fill,
-            minmax(max(var(--grid-item--min-width), var(--grid-item--max-width)), 1fr)
-        );
-        grid-template-rows: auto;
-        grid-gap: var(--grid-layout-gap);
-    }
-</style>
