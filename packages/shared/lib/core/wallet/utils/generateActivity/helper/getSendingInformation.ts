@@ -18,7 +18,7 @@ export function getSendingInformation(
     const { direction, wrappedInputs } = processedTransaction
 
     const recipient = getRecipientFromOutput(output)
-    const sender = wrappedInputs
+    const sender = wrappedInputs?.length
         ? getSubjectFromAddress(getSenderAddressFromInputs(wrappedInputs))
         : getSenderFromTransaction(direction === ActivityDirection.Incoming, account.depositAddress, output)
 

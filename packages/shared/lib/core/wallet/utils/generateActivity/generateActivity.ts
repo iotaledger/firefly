@@ -20,7 +20,7 @@ import { generateNftActivity } from './generateNftActivity'
 import { generateTransactionActivity } from './generateTransactionActivity'
 
 export function generateActivities(processedTransaction: IProcessedTransaction, account: IAccountState): Activity[] {
-    if (processedTransaction.wrappedInputs.length > 1) {
+    if (processedTransaction.wrappedInputs?.length > 1) {
         return generateActivitiesFromProcessedTransactionsWithInputs(processedTransaction, account)
     } else {
         return generateActivitiesFromProcessedTransactionsWithoutInputs(processedTransaction, account)
