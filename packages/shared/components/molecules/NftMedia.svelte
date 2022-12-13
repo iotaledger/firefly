@@ -8,6 +8,7 @@
     export let autoplay: boolean = false
     export let controls: boolean = false
     export let loop: boolean = false
+    export let muted: boolean = false
     export let classes: string = ''
 
     const bgColor = 'gray-200'
@@ -90,6 +91,7 @@
             {autoplay}
             {controls}
             {loop}
+            {muted}
             {classes}
         />
     {/if}

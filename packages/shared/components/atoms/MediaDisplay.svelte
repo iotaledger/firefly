@@ -13,18 +13,28 @@
     export let muted: boolean = false
     export let loop: boolean = false
 
+    let isLoaded = false
+
     let type
     $: type = convertMimeTypeToHtmlTag(expectedType)
 
+    $: isLoaded && muteVideo()
+
+    function muteVideo() {
+        if (muted && Media instanceof HTMLVideoElement) {
+            Media.muted = true
+        }
+    }
+
     function startPlaying() {
-        if (type === 'video' && !autoplay) {
-            (Media as HTMLVideoElement).play()
+        if (!autoplay && Media instanceof HTMLVideoElement) {
+            Media.play()
         }
     }
 
     function stopPlaying() {
-        if (type === 'video' && !autoplay) {
-            (Media as HTMLVideoElement).pause()
+        if (!autoplay && Media instanceof HTMLVideoElement) {
+            Media.pause()
         }
     }
 
@@ -41,10 +51,16 @@
         }
     }
 
-    function onLoadedMetadata() {
+    function handleLoadedMetadata() {
+        isLoaded = true
         if (type === 'video') {
             onLoad && onLoad()
         }
+    }
+
+    function handleLoaded() {
+        isLoaded = true
+        onLoad && onLoad()
     }
 
     // TODO: find a way to check the type of the file without downloading it
@@ -77,12 +93,12 @@
     autoplay={autoplay ? true : undefined}
     controls={controls ? true : undefined}
     loop={loop ? true : undefined}
-    muted={muted ? true : undefined}
+    muted
     class={classes}
+    preload="metadata"
+    on:load={handleLoaded}
+    on:loadedmetadata={handleLoadedMetadata}
     on:error={onError}
-    on:load={onLoad}
     on:mouseenter={startPlaying}
     on:mouseleave={stopPlaying}
-    preload="metadata"
-    on:loadedmetadata={onLoadedMetadata}
 />
