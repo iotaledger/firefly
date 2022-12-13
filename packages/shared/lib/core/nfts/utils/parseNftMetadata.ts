@@ -124,9 +124,9 @@ function isISoonaverseAttribute(object: unknown): object is ISoonaverseAttribute
     return (
         typeof object === 'object' &&
         'label' in object &&
-        typeof object.label === 'string' &&
+        typeof (object as { label }).label === 'string' &&
         'value' in object &&
-        (typeof object.value === 'string' || typeof object.value === 'number')
+        (typeof (object as { value }).value === 'string' || typeof (object as { value }).value === 'number')
     )
 }
 
@@ -135,16 +135,18 @@ function isISoonaverseAttributes(object: unknown): object is ISoonaverseAttribut
         return false
     } else {
         if ('props' in object) {
-            if (typeof object.props !== 'object') {
+            const _object = object as ISoonaverseAttributes
+            if (typeof _object.props !== 'object') {
                 return false
-            } else if (!Object.values(object.props).every(isISoonaverseAttribute)) {
+            } else if (!Object.values(_object.props).every(isISoonaverseAttribute)) {
                 return false
             }
         }
         if ('stats' in object) {
-            if (typeof object.stats !== 'object') {
+            const _object = object as ISoonaverseAttributes
+            if (typeof _object.stats !== 'object') {
                 return false
-            } else if (!Object.values(object.stats).every(isISoonaverseAttribute)) {
+            } else if (!Object.values(_object.stats).every(isISoonaverseAttribute)) {
                 return false
             }
         }
