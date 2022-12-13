@@ -81,7 +81,7 @@
 
     {#if !isLoaded}
         <slot name="placeholder">
-            <MediaPlaceholder type={nft?.parsedMetadata?.type} {bgColor} {darkBgColor} />
+            <MediaPlaceholder type={nft?.parsedMetadata?.type} {bgColor} {darkBgColor} classes="animate-pulse" />
         </slot>
     {:else}
         <MediaDisplay
