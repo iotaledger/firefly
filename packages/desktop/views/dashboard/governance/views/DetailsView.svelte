@@ -15,9 +15,11 @@
     } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { getVotingEvent } from '@core/profile-manager'
+    import { governanceRouter } from '@core/router'
     import { getParticipationOverview, selectedAccount } from '@core/account'
     import { Event, VotingEventPayload, ParticipationEventType } from '@iota/wallet/out/types'
     import type { IParticipations } from '@core/governance/interfaces'
+    import { openPopup } from '@auxiliary/popup'
 
     let selectedIndices: number[] = []
     let votingEvent: Event
@@ -70,6 +72,20 @@
 
     function handleQuestionClick(index: number): void {
         openedQuestionIndex = openedQuestionIndex === index ? null : index
+    }
+
+    function handleCancelClick(): void {
+        $governanceRouter.previous()
+    }
+
+    function handleVoteClick(): void {
+        openPopup({
+            type: 'voteForProposal',
+            props: {
+                selectedAnswers: selectedIndices,
+                event: votingEvent,
+            },
+        })
     }
 </script>
 
@@ -124,8 +140,12 @@
             {/if}
         </proposal-questions>
         <buttons-container class="flex w-full space-x-4 mt-6">
-            <Button outline classes="w-full">{localize('actions.cancel')}</Button>
-            <Button classes="w-full" disabled={selectedIndices?.length === 0 || selectedIndices?.includes(undefined)}>
+            <Button outline classes="w-full" onClick={handleCancelClick}>{localize('actions.cancel')}</Button>
+            <Button
+                classes="w-full"
+                disabled={selectedIndices?.length === 0 || selectedIndices?.includes(undefined)}
+                onClick={handleVoteClick}
+            >
                 {localize('actions.vote')}
             </Button>
         </buttons-container>
