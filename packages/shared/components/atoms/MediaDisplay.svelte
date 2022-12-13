@@ -4,7 +4,7 @@
     export let Media: HTMLImageElement | HTMLVideoElement
     export let src: string
     export let expectedType: MimeType
-    export let classes: string
+    export let classes: string = ''
     export let alt
     export let onError: () => unknown
     export let onLoad: () => unknown
