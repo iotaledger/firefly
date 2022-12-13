@@ -1,15 +1,6 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import {
-        IAsset,
-        NewTransactionType,
-        NotVerifiedStatus,
-        TokenStandard,
-        unverifyAsset,
-        updateNewTransactionDetails,
-        VerifiedStatus,
-        verifyAsset,
-    } from '@core/wallet'
+    import { IAsset, NotVerifiedStatus, TokenStandard } from '@core/wallet'
     import features from '@features/features'
     import { AssetIcon, Button, FontWeight, KeyValueBox, Text, TextHint, TextType } from 'shared/components'
 
@@ -17,21 +8,6 @@
     export let onVerify: () => unknown = () => {}
     export let onSkip: () => unknown = () => {}
     export let onSend: () => unknown = () => {}
-
-    function onSkipClick(): void {
-        unverifyAsset(asset.id, NotVerifiedStatus.Skipped)
-        onSkip()
-    }
-
-    function onVerifyClick(): void {
-        verifyAsset(asset.id, VerifiedStatus.SelfVerified)
-        onVerify()
-    }
-
-    function onSendClick(): void {
-        updateNewTransactionDetails({ type: NewTransactionType.TokenTransfer, assetId: asset.id })
-        onSend()
-    }
 </script>
 
 <token-information class="flex flex-col justify-between h-full pt-10">
@@ -72,19 +48,20 @@
             </div>
         </div>
     </token-content>
-
-    <token-actions class="space-y-4">
-        {#if asset?.verification?.status === NotVerifiedStatus.New && features.dashboard.tokens.actions.enabled}
-            <Button classes="w-full" onClick={onVerifyClick}>
-                {localize('popups.tokenInformation.buttons.verifyToken')}
-            </Button>
-            <Button outline classes="w-full" onClick={onSkipClick}>
-                {localize('actions.skip')}
-            </Button>
-        {:else}
-            <Button classes="w-full" onClick={onSendClick}>
-                {localize('actions.send')}
-            </Button>
-        {/if}
-    </token-actions>
+    {#if features.dashboard.tokens.actions.enabled}
+        <token-actions class="space-y-4">
+            {#if asset?.verification?.status === NotVerifiedStatus.New}
+                <Button classes="w-full" onClick={onVerify}>
+                    {localize('popups.tokenInformation.buttons.verifyToken')}
+                </Button>
+                <Button outline classes="w-full" onClick={onSkip}>
+                    {localize('actions.skip')}
+                </Button>
+            {:else}
+                <Button classes="w-full" onClick={onSend}>
+                    {localize('actions.send')}
+                </Button>
+            {/if}
+        </token-actions>
+    {/if}
 </token-information>
