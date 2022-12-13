@@ -13,7 +13,7 @@
         TextType,
         TransactionActivityStatusPill,
     } from 'shared/components'
-    import NftImageOrIcon from './NftImageOrIcon.svelte'
+    import NftImageOrIconBox from './NftImageOrIconBox.svelte'
 
     export let activity: NftActivity
 
@@ -24,7 +24,7 @@
 <nft-transaction-details class="w-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-3 overflow-hidden">
         <nft-summary class="flex w-full items-center justify-center w-full space-x-2">
-            <NftImageOrIcon nftId={activity.nftId} size="small" />
+            <NftImageOrIconBox nftId={activity.nftId} size="small" />
             <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="whitespace-pre truncate">
                 {nft?.name}
             </Text>

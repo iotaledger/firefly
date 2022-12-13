@@ -21,7 +21,7 @@
             bind:clientWidth={nftWrapperClientWidth}
             style="height: {nftWrapperClientWidth}px; "
         >
-            <NftMedia nftId={nft.id} classes="bg-gray-200 dark:bg-gray-700 min-w-full min-h-full object-cover" />
+            <NftMedia nftId={nft.id} classes="bg-gray-200 dark:bg-gray-700 min-w-full min-h-full object-cover" loop />
         </div>
         <div class="w-full flex flex-col justify-center p-3.5 bg-white dark:bg-gray-800">
             <Text fontWeight={FontWeight.semibold} fontSize="12" classes="text-left truncate">{nft.name}</Text>

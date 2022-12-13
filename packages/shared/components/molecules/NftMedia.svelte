@@ -7,9 +7,8 @@
     export let nftId: string
     export let autoplay: boolean = false
     export let controls: boolean = false
+    export let loop: boolean = false
     export let classes: string = ''
-    export let onError: () => unknown
-    export let onLoad: () => unknown
 
     const bgColor = 'gray-200'
     const darkBgColor = 'gray-700'
@@ -57,24 +56,18 @@
     }
 
     function handleLoadingError(): void {
-        if (onError) {
-            onError()
-        } else {
-            hasError = true
-        }
+        hasError = true
     }
 
     function handleOnLoad(): void {
-        if (onLoad) {
-            onLoad()
-        } else {
-            isLoaded = true
-        }
+        isLoaded = true
     }
 </script>
 
-{#if !onError && (!url || hasError)}
-    <MediaPlaceholder type={nft?.parsedMetadata?.type} {bgColor} {darkBgColor} />
+{#if !url || hasError}
+    <slot name="placeholder">
+        <MediaPlaceholder type={nft?.parsedMetadata?.type} {bgColor} {darkBgColor} />
+    </slot>
 {:else}
     <MediaDisplay
         src={url}
@@ -86,9 +79,9 @@
     />
 
     {#if !isLoaded}
-        {#if !onLoad}
+        <slot name="placeholder">
             <MediaPlaceholder type={nft?.parsedMetadata?.type} {bgColor} {darkBgColor} />
-        {/if}
+        </slot>
     {:else}
         <MediaDisplay
             src={url}
@@ -96,8 +89,8 @@
             alt={`Media display for ${nft.name}`}
             {autoplay}
             {controls}
+            {loop}
             {classes}
-            onError={handleLoadingError}
         />
     {/if}
 {/if}

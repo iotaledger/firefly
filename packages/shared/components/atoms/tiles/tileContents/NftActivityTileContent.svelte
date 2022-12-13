@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { ActivityAction, ActivityDirection, InclusionState, NftActivity, Subject } from '@core/wallet'
     import { truncateString } from '@core/utils'
-    import { Text, FontWeight, NftImageOrIcon } from 'shared/components'
+    import { Text, FontWeight, NftImageOrIconBox } from 'shared/components'
     import { networkHrp } from '@core/network'
     import { getNftByIdFromAllAccountNfts } from '@core/nfts'
     import { selectedAccountIndex } from '@core/account'
@@ -46,7 +46,7 @@
     }
 </script>
 
-<NftImageOrIcon nftId={activity.nftId} size="medium" />
+<NftImageOrIconBox nftId={activity.nftId} size="medium" />
 
 <div class="flex flex-col w-full space-y-0.5 overflow-hidden">
     <div class="flex flex-row justify-between space-x-4">

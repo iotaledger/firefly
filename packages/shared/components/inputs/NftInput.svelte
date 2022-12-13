@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Modal, SelectorInput, IOption, NftImageOrIcon } from 'shared/components'
+    import { Modal, SelectorInput, IOption, NftImageOrIconBox } from 'shared/components'
     import { selectedAccountNfts } from '@core/nfts'
     import { getNftByIdFromAllAccountNfts } from '@core/nfts'
     import { selectedAccountIndex } from '@core/account'
@@ -49,5 +49,5 @@
     options={nftOptions}
     let:option
 >
-    <NftImageOrIcon nftId={option.value} size="small" />
+    <NftImageOrIconBox nftId={option.value} size="small" />
 </SelectorInput>

@@ -5,6 +5,7 @@
     import { appSettings } from '@core/app'
 
     export let type: MimeType = undefined
+    export let iconOnly = false
     export let bgColor = 'gray-500'
     export let darkBgColor = 'gray-500'
 
@@ -16,7 +17,7 @@
     $: primaryColor = $appSettings.darkMode ? '#25395F' : '#C4D1E8'
     $: secondaryColor = $appSettings.darkMode ? '#F0F5FE' : '#D8E3F5'
 
-    $: icon = mapPropsToIcon(type, 'Large')
+    $: icon = mapPropsToIcon(type, iconOnly ? 'Small' : 'Large')
 
     function mapPropsToIcon(type: MimeType, iconSize: 'Small' | 'Large'): IconEnum {
         const parentMimeType = type?.split('/', 1)?.[0]

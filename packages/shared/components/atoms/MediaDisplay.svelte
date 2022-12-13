@@ -41,8 +41,10 @@
         }
     }
 
-    $: if (type === 'video' && (Media as HTMLVideoElement)?.readyState === 4) {
-        onLoad()
+    function onLoadedMetadata() {
+        if (type === 'video') {
+            onLoad && onLoad()
+        }
     }
 
     // TODO: find a way to check the type of the file without downloading it
@@ -81,4 +83,6 @@
     on:load={onLoad}
     on:mouseenter={startPlaying}
     on:mouseleave={stopPlaying}
+    preload="metadata"
+    on:loadedmetadata={onLoadedMetadata}
 />
