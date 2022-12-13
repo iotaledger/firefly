@@ -14,8 +14,9 @@
     export let loop: boolean = false
 
     let isLoaded = false
+    let safeToLoad = false
 
-    let type
+    let type: string
     $: type = convertMimeTypeToHtmlTag(expectedType)
 
     $: isLoaded && muteVideo()
@@ -63,42 +64,41 @@
         onLoad && onLoad()
     }
 
-    // TODO: find a way to check the type of the file without downloading it
-    // or decide which is better the content security policy or this check
-    /* $: {
+    $: {
         if (src && typeof src === 'string') {
-            fetch(src)
-            .then(response => response.blob())
-            .then(blob => {
-                if (blob.type === expectedType) {
-                    type = convertMimeTypeToHtmlTag(blob.type);
-                } else {
+            fetch(src, { method: 'HEAD' })
+                .then((response) => {
+                    if (response.headers.get('Content-Type') === expectedType) {
+                        safeToLoad = true
+                    } else {
+                        onError()
+                    }
+                })
+                .catch(() => {
                     onError()
-                }
-            })
-            .catch(() => {
-                onError()
-            });
+                })
         } else {
             onError()
         }
-    } */
+    }
 </script>
 
-<svelte:element
-    this={type}
-    bind:this={Media}
-    {src}
-    {alt}
-    autoplay={autoplay ? true : undefined}
-    controls={controls ? true : undefined}
-    loop={loop ? true : undefined}
-    muted
-    class={classes}
-    preload="metadata"
-    on:load={handleLoaded}
-    on:loadedmetadata={handleLoadedMetadata}
-    on:error={onError}
-    on:mouseenter={startPlaying}
-    on:mouseleave={stopPlaying}
-/>
+{#if safeToLoad}
+    <svelte:element
+        this={type}
+        bind:this={Media}
+        {src}
+        {alt}
+        autoplay={autoplay ? true : undefined}
+        controls={controls ? true : undefined}
+        loop={loop ? true : undefined}
+        muted
+        class={classes}
+        preload="metadata"
+        on:load={handleLoaded}
+        on:loadedmetadata={handleLoadedMetadata}
+        on:error={onError}
+        on:mouseenter={startPlaying}
+        on:mouseleave={stopPlaying}
+    />
+{/if}
