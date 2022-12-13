@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { formatDate, localize } from '@core/i18n'
     import { networkStatus } from '@core/network'
-    import { milestoneToDate } from '@core/utils'
+    import { DATE_FORMAT, milestoneToDate } from '@core/utils'
     import { Position, Text, TextType, Tooltip } from 'shared/components'
     import { ProposalStatus } from '@core/governance/enums'
 
@@ -9,15 +9,6 @@
     export let status: ProposalStatus
     export let anchor: HTMLElement
     export let position: Position = Position.Right
-
-    const dateFormat = {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        timeZoneName: 'short',
-    } as Intl.DateTimeFormatOptions
 
     let eventProgress: number
     switch (status) {
@@ -48,7 +39,7 @@
                 >
                     {formatDate(
                         milestoneToDate($networkStatus.currentMilestone, milestones[ProposalStatus[status]]),
-                        dateFormat
+                        DATE_FORMAT
                     )}
                 </Text>
                 <Text
