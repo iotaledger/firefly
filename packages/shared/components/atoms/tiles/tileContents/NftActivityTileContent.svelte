@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { ActivityAction, ActivityDirection, InclusionState, NftActivity, Subject } from '@core/wallet'
+    import { ActivityDirection, getActivityTileTitle, NftActivity, Subject } from '@core/wallet'
     import { truncateString } from '@core/utils'
     import { Text, FontWeight, NftMediaContainer, NftMediaSize } from 'shared/components'
     import { networkHrp } from '@core/network'
@@ -11,28 +11,10 @@
 
     $: isIncoming =
         activity.direction === ActivityDirection.Incoming || activity.direction === ActivityDirection.SelfTransaction
-    $: title = getTitle(activity)
+    $: title = getActivityTileTitle(activity)
     $: subjectLocale = getSubjectLocale(activity.subject)
 
     $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, activity.nftId)
-
-    function getTitle(_activity: NftActivity): string {
-        const { isInternal, direction, inclusionState, action } = _activity
-        const isConfirmed = inclusionState === InclusionState.Confirmed
-
-        if (action === ActivityAction.Mint) {
-            return isConfirmed ? 'general.minted' : 'general.minting'
-        }
-        if (isInternal) {
-            return isConfirmed ? 'general.transfer' : 'general.transferring'
-        }
-        if (direction === ActivityDirection.Incoming || direction === ActivityDirection.SelfTransaction) {
-            return isConfirmed ? 'general.received' : 'general.receiving'
-        }
-        if (direction === ActivityDirection.Outgoing) {
-            return isConfirmed ? 'general.sent' : 'general.sending'
-        }
-    }
 
     function getSubjectLocale(subject: Subject): string {
         let description

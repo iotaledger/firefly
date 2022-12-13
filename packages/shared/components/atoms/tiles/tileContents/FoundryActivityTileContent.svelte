@@ -1,10 +1,9 @@
 <script lang="typescript">
-    import { localize } from '@core/i18n'
     import {
         FoundryActivity,
+        getActivityTileTitle,
         getAssetFromPersistedAssets,
         getFormattedAmountFromActivity,
-        InclusionState,
         IPersistedAsset,
         selectedAccountAssets,
     } from '@core/wallet'
@@ -15,6 +14,7 @@
 
     let asset: IPersistedAsset
     $: $selectedAccountAssets, (asset = getAssetFromPersistedAssets(activity.assetId))
+    $: title = getActivityTileTitle(activity)
     $: amount = getFormattedAmountFromActivity(activity)
 </script>
 
@@ -26,7 +26,7 @@
             lineHeight="140"
             classes="overflow-hidden overflow-ellipsis multiwrap-line2"
         >
-            {localize(activity.inclusionState === InclusionState.Confirmed ? 'general.minted' : 'general.minting')}
+            {title}
         </Text>
         <Text fontWeight={FontWeight.semibold} lineHeight="140" color="blue-700" classes="whitespace-nowrap">
             {amount}

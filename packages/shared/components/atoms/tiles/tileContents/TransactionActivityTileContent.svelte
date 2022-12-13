@@ -3,12 +3,12 @@
     import { networkHrp } from '@core/network'
     import {
         ActivityDirection,
-        InclusionState,
         IPersistedAsset,
         getFormattedAmountFromActivity,
         TransactionActivity,
         selectedAccountAssets,
         getAssetFromPersistedAssets,
+        getActivityTileTitle,
     } from '@core/wallet'
     import { truncateString } from '@core/utils'
     import { Text, AssetIcon, FontWeight } from 'shared/components'
@@ -17,29 +17,11 @@
 
     let asset: IPersistedAsset
     $: $selectedAccountAssets, (asset = getAssetFromPersistedAssets(activity.assetId))
-    $: title = getTitle(activity)
+    $: title = getActivityTileTitle(activity)
     $: subjectLocale = getSubjectLocale(activity)
     $: amount = getFormattedAmountFromActivity(activity)
     $: isIncoming =
         activity.direction === ActivityDirection.Incoming || activity.direction === ActivityDirection.SelfTransaction
-
-    function getTitle(_activity: TransactionActivity): string {
-        const { isShimmerClaiming, isInternal, direction, inclusionState } = _activity
-        const isConfirmed = inclusionState === InclusionState.Confirmed
-
-        if (isShimmerClaiming) {
-            return isConfirmed ? 'general.shimmerClaimed' : 'general.shimmerClaiming'
-        }
-        if (isInternal) {
-            return isConfirmed ? 'general.transfer' : 'general.transferring'
-        }
-        if (direction === ActivityDirection.Incoming || direction === ActivityDirection.SelfTransaction) {
-            return isConfirmed ? 'general.received' : 'general.receiving'
-        }
-        if (direction === ActivityDirection.Outgoing) {
-            return isConfirmed ? 'general.sent' : 'general.sending'
-        }
-    }
 
     function getSubjectLocale(_activity: TransactionActivity): string {
         const { isShimmerClaiming, subject } = _activity
