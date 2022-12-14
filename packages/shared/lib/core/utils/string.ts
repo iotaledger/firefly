@@ -109,16 +109,3 @@ export function getNthOccurrenceIndex(string: string, char: string, n: number): 
     }
     return index
 }
-
-/**
- * Checks whether a byteArray contains values that correspond to non-printable ASCII characters
- * See a complete table here: https://www.utf8-chartable.de/
- * @param byteArray is an array that contains encoded UTF-8 characters
- * @returns
- */
-export function containsNonPrintableCharacters(byteArray: Uint8Array): boolean {
-    const lowerControlCharacters = [...Array(32).keys()]
-    const upperControlCharacters = [...Array(33).keys()].map((key) => key + 0x7f)
-    const utf8ControlCharacters = [...lowerControlCharacters, ...upperControlCharacters]
-    return byteArray.some((byte) => utf8ControlCharacters.includes(byte))
-}

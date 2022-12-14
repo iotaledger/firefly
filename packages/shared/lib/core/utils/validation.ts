@@ -19,6 +19,10 @@ export function isValidHttpsUrl(url: string): boolean {
     return validUrl.isHttpsUri(url)
 }
 
+export function containsControlCharacters(stringToTest: string): boolean {
+    /* eslint-disable no-control-regex */
+    return /[\u0000-\u001f\u0080-\u009f]/g.test(stringToTest)
+}
 /**
  * Does the string contain invalid filename chars
  * @param name The name to validate
@@ -31,8 +35,7 @@ export function validateFilenameChars(name: string | undefined): string {
     if (name.startsWith('~')) {
         return 'tilde'
     }
-    /* eslint-disable no-control-regex */
-    if (/[\u0000-\u001f\u0080-\u009f]/g.test(name)) {
+    if (containsControlCharacters(name)) {
         return 'control'
     }
     if (/^\.\./.test(name)) {

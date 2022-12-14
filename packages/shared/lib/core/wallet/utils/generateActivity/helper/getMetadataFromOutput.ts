@@ -1,7 +1,7 @@
 import { FEATURE_TYPE_METADATA } from '../../../constants'
 import { IMetadataFeature } from '@iota/types'
 import { Output } from '@core/wallet/types'
-import { containsNonPrintableCharacters, Converter } from '@core/utils'
+import { containsControlCharacters, Converter } from '@core/utils'
 import { EXTERNALLY_OWNED_ACCOUNT, parseLayer2MetadataForTransfer } from '@core/layer-2'
 
 export function getMetadataFromOutput(output: Output): string {
@@ -13,8 +13,8 @@ export function getMetadataFromOutput(output: Output): string {
         const startValue = Number(data.substring(0, 10))
 
         // For smart contract calls the first 32 bits of the metadata
-        // corresponds to 0 in case the transaction was initiated
-        // by an end-user instead of a smart contract
+        // correspond to 0 if an an end-user initiates the transaction
+        // instead of a smart contract
         if (startValue === EXTERNALLY_OWNED_ACCOUNT) {
             try {
                 const layer2Data = parseLayer2MetadataForTransfer(metadataBytes)
@@ -23,10 +23,9 @@ export function getMetadataFromOutput(output: Output): string {
                 console.error(err)
                 return data
             }
-        } else if (containsNonPrintableCharacters(metadataBytes)) {
-            return data
         } else {
-            return Converter.hexToUtf8(data)
+            const convertedString = Converter.hexToUtf8(data)
+            return containsControlCharacters(convertedString) ? data : convertedString
         }
     }
 }
