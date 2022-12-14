@@ -172,7 +172,7 @@
                         {/each}
                     </div>
                 </nft-attributes>
-            {:else if soonaverseAttributes}
+            {:else}
                 {#if soonaverseAttributes?.props}
                     <nft-attributes class="flex flex-col space-y-4">
                         <Text type={TextType.h5} fontWeight={FontWeight.semibold}>
