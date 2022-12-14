@@ -1445,7 +1445,9 @@
         "description": "Description",
         "attributes": "Attributes",
         "details": "Details",
-        "availableAmount": "{amount} available"
+        "availableAmount": "{amount} available",
+        "properties": "Properties",
+        "statistics": "Statistics"
     },
     "filters":{
         "title": "Filters",
