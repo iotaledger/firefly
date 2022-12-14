@@ -27,6 +27,24 @@ export function saveProfile(profileToPersist: IPersistedProfile): void {
 }
 
 /**
+ * Updates profile in persistent storage
+ * @method updateProfile
+ * @param {IPersistedProfile} fieldsToUpdate
+ * @returns {void}
+ */
+export function updateProfile(profileId: string, fieldsToUpdate: Partial<IPersistedProfile>): void {
+    profiles.update((state) =>
+        state.map((profile) => {
+            if (profile.id === profileId) {
+                return { ...profile, ...fieldsToUpdate }
+            } else {
+                return profile
+            }
+        })
+    )
+}
+
+/**
  * Removes a profile from persistent storage
  *
  * @method removeProfile

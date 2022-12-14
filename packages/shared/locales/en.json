@@ -579,7 +579,8 @@
             "proposals": {
                 "title": "Proposals",
                 "voted": "Voted",
-                "successRegister": "Proposal successfully registered"
+                "successRegister": "Proposal successfully registered",
+                "successRemove": "Proposal successfully removed"
             },
             "statusTimeline": {
                 "announcement": "Announcement",
@@ -1007,6 +1008,18 @@
         "registerProposal": {
             "title": "Register proposal",
             "body": "Please provide the information listed below to register a proposal."
+        },
+        "voteForProposal": {
+            "title": "Vote for proposal",
+            "body": "You're about to vote for {proposal} proposal",
+            "key": "Your voting power",
+            "hint": "Please note that your voting power depends on the amount of funds you hold in your wallet. The more funds you hold, the higher your voting power is!",
+            "noVotingPower": "You do not have any voting power. Please increase your voting power from the Governance dashboard."
+        },
+        "removeProposal": {
+            "title": "Remove proposal",
+            "body": "Are you sure you want to remove this proposal?",
+            "hint": "Please note that removing a proposal during the counting period will stop your votes but won't impact any votes that have already been counted."
         }
     },
     "charts": {
@@ -1188,10 +1201,12 @@
         "initialize": "Initialize",
         "initializing": "Initializing",
         "delete": "Delete",
+        "remove": "Remove",
         "addReference": "Add reference",
         "depositNft": "Deposit NFTs",
         "vote": "Vote",
-        "registerProposal": "Register proposal"
+        "registerProposal": "Register proposal",
+        "removeProposal": "Remove proposal"
     },
     "general": {
         "recipient": "Recipient",
@@ -1602,6 +1617,9 @@
         "claimShimmerRewards": {
             "success": "Shimmer rewards claimed for {accountAlias}",
             "error": "An error occurred while claiming. Try again."
+        },
+        "vote": {
+            "success": "Votes successfully casted."
         }
     },
     "error": {
