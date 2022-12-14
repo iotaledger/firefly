@@ -21,6 +21,7 @@
     import type { IParticipations } from '@core/governance/interfaces'
     import { openPopup } from '@auxiliary/popup'
     import { ProposalStatus } from '@core/governance/enums'
+    import { networkStatus } from '@core/network'
 
     let selectedIndices: number[] = []
 
@@ -61,8 +62,10 @@
 
         if (selectedProposalOverview) {
             const votes = Object.values(selectedProposalOverview).map(
-                ({ amount, startMilestoneIndex, endMilestoneIndex }) =>
-                    parseInt(amount, 10) * (endMilestoneIndex - startMilestoneIndex)
+                ({ amount, startMilestoneIndex, endMilestoneIndex }) => {
+                    const endMilestone = endMilestoneIndex <= 0 ? $networkStatus?.currentMilestone : endMilestoneIndex
+                    return parseInt(amount, 10) * (endMilestone - startMilestoneIndex)
+                }
             )
             totalVotes = votes?.reduce((accumulator, votes) => accumulator + votes, 0) ?? 0
         } else {
