@@ -1,5 +1,6 @@
 import { closePopup } from '@auxiliary/popup'
 import { resetSelectedAccount } from '@core/account'
+import { clearPollProposalStatusInterval } from '@core/governance'
 import { isPollingLedgerDeviceStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
 import { clearPollMarketPrices } from '@core/market/actions'
 import { clearPollNetworkInterval } from '@core/network'
@@ -33,6 +34,7 @@ export function logout(clearActiveProfile: boolean = true, _lockStronghold: bool
 
         clearPollNetworkInterval()
         clearPollMarketPrices()
+        clearPollProposalStatusInterval()
         const _activeProfile = get(activeProfile)
         if (_activeProfile) {
             const manager = get(profileManager)
