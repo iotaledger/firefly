@@ -46,6 +46,7 @@
     import Version from './Version.svelte'
     import Video from './Video.svelte'
     import WalletFinderPopup from './WalletFinderPopup.svelte'
+    import VoteForProposal from './VoteForProposalPopup.svelte'
 
     export let type: string
     export let props: any
@@ -127,6 +128,7 @@
         enableLedgerBlindSigning: EnableLedgerBlindSigningPopup,
         testDeepLinkForm: TestDeepLinkFormPopup,
         manageVotingPower: ManageVotingPowerPopup,
+        voteForProposal: VoteForProposal,
     }
 
     function onKey(event: KeyboardEvent): void {
