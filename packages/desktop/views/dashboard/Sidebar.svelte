@@ -10,6 +10,7 @@
         collectiblesRouter,
         DashboardRoute,
         dashboardRouter,
+        governanceRouter,
         settingsRoute,
         SettingsRoute,
         settingsRouter,
@@ -75,20 +76,29 @@
     ]
 
     function openWallet(): void {
-        $dashboardRouter.reset()
+        resetAllRouters()
     }
 
     function openCollectibles(): void {
+        resetAllRouters()
         $dashboardRouter.goTo(DashboardRoute.Collectibles)
-        $collectiblesRouter.reset()
     }
 
     function openGovernance(): void {
+        resetAllRouters()
         $dashboardRouter.goTo(DashboardRoute.Governance)
     }
 
     function openDeveloper(): void {
+        resetAllRouters()
         $dashboardRouter.goTo(DashboardRoute.Developer)
+    }
+
+    function resetAllRouters(): void {
+        $dashboardRouter.reset()
+        $collectiblesRouter.reset()
+        $settingsRouter.reset()
+        $governanceRouter.reset()
     }
 
     function handleBackClick(): void {
