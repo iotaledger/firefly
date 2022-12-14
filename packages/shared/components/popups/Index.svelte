@@ -35,6 +35,7 @@
     import NodeInfoPopup from './NodeInfoPopup.svelte'
     import ReceiveAddressPopup from './ReceiveAddressPopup.svelte'
     import RegisterProposalPopup from './RegisterProposalPopup.svelte'
+    import RemoveProposalPopup from './RemoveProposalPopup.svelte'
     import RemoveNode from './RemoveNode.svelte'
     import { SendFormPopup, SendConfirmationPopup } from './send'
     import StorageDepositBreakdownPopup from './StorageDepositBreakdownPopup.svelte'
@@ -104,6 +105,7 @@
         nodeInfo: NodeInfoPopup,
         addNode: AddNodePopup,
         registerProposal: RegisterProposalPopup,
+        removeProposal: RemoveProposalPopup,
         removeNode: RemoveNode,
         storageDepositBreakdown: StorageDepositBreakdownPopup,
         errorLog: ErrorLog,
