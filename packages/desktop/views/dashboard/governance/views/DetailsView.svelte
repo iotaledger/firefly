@@ -3,29 +3,34 @@
     import { localize } from '@core/i18n'
     import {
         Button,
-        Text,
-        MeatballMenuButton,
-        Pane,
-        ProposalStatusPill,
-        TextType,
         FontWeight,
         Icon,
-        ProposalQuestion,
+        Pane,
+        ProposalDetailsButton,
         ProposalInformation,
+        ProposalQuestion,
+        ProposalStatusPill,
+        Text,
+        TextType,
     } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { getVotingEvent } from '@core/profile-manager'
+    import { governanceRouter } from '@core/router'
     import { getParticipationOverview, selectedAccount } from '@core/account'
-    import { Event, VotingEventPayload, ParticipationEventType } from '@iota/wallet/out/types'
+    import { VotingEventPayload, ParticipationEventType } from '@iota/wallet/out/types'
     import type { IParticipations } from '@core/governance/interfaces'
+    import { openPopup } from '@auxiliary/popup'
+    import { ProposalStatus } from '@core/governance/enums'
+    import { networkStatus } from '@core/network'
 
     let selectedIndices: number[] = []
-    let votingEvent: Event
+
     let votingPayload: VotingEventPayload
-    $: void setVotingEvent($selectedProposal?.id)
+    $: void setVotingEventPayload($selectedProposal?.id)
 
     let totalVotes = 0
     $: void setTotalVotes()
+
     $: votesCounter = {
         total: totalVotes,
         power: $selectedAccount?.votingPower,
@@ -35,11 +40,15 @@
     $: if (questions?.length > 0 && selectedIndices?.length === 0) {
         selectedIndices = Array<number>(questions?.length)
     }
+    $: isVotingDisabled =
+        $selectedProposal?.status === ProposalStatus.Announcement ||
+        $selectedProposal?.status === ProposalStatus.Closed ||
+        selectedIndices?.length === 0 ||
+        selectedIndices?.includes(undefined)
 
-    async function setVotingEvent(eventId: string): Promise<void> {
+    async function setVotingEventPayload(eventId: string): Promise<void> {
         const event = await getVotingEvent(eventId)
         if (event?.data?.payload?.type === ParticipationEventType.Voting) {
-            votingEvent = event
             votingPayload = event.data.payload
         } else {
             throw new Error('Event is a staking event!')
@@ -53,8 +62,10 @@
 
         if (selectedProposalOverview) {
             const votes = Object.values(selectedProposalOverview).map(
-                ({ amount, startMilestoneIndex, endMilestoneIndex }) =>
-                    parseInt(amount, 10) * (endMilestoneIndex - startMilestoneIndex)
+                ({ amount, startMilestoneIndex, endMilestoneIndex }) => {
+                    const endMilestone = endMilestoneIndex <= 0 ? $networkStatus?.currentMilestone : endMilestoneIndex
+                    return parseInt(amount, 10) * (endMilestone - startMilestoneIndex)
+                }
             )
             totalVotes = votes?.reduce((accumulator, votes) => accumulator + votes, 0) ?? 0
         } else {
@@ -64,12 +75,19 @@
 
     let openedQuestionIndex = null
 
-    function handleMeatballMenu(): void {
-        return
-    }
-
     function handleQuestionClick(index: number): void {
         openedQuestionIndex = openedQuestionIndex === index ? null : index
+    }
+
+    function handleCancelClick(): void {
+        $governanceRouter.previous()
+    }
+
+    function handleVoteClick(): void {
+        openPopup({
+            type: 'voteForProposal',
+            props: { selectedAnswers: selectedIndices },
+        })
     }
 </script>
 
@@ -78,7 +96,7 @@
         <Pane classes="p-6 flex flex-col flex-1">
             <header-container class="flex justify-between items-center mb-4">
                 <ProposalStatusPill status={$selectedProposal?.status} />
-                <MeatballMenuButton onClick={handleMeatballMenu} />
+                <ProposalDetailsButton />
             </header-container>
             <div class="flex flex-1 flex-col justify-between">
                 <Text type={TextType.h2}>{$selectedProposal?.title}</Text>
@@ -124,8 +142,8 @@
             {/if}
         </proposal-questions>
         <buttons-container class="flex w-full space-x-4 mt-6">
-            <Button outline classes="w-full">{localize('actions.cancel')}</Button>
-            <Button classes="w-full" disabled={selectedIndices?.length === 0 || selectedIndices?.includes(undefined)}>
+            <Button outline classes="w-full" onClick={handleCancelClick}>{localize('actions.cancel')}</Button>
+            <Button classes="w-full" disabled={isVotingDisabled} onClick={handleVoteClick}>
                 {localize('actions.vote')}
             </Button>
         </buttons-container>

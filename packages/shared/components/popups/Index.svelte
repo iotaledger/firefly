@@ -35,6 +35,7 @@
     import NodeInfoPopup from './NodeInfoPopup.svelte'
     import ReceiveAddressPopup from './ReceiveAddressPopup.svelte'
     import RegisterProposalPopup from './RegisterProposalPopup.svelte'
+    import RemoveProposalPopup from './RemoveProposalPopup.svelte'
     import RemoveNode from './RemoveNode.svelte'
     import { SendFormPopup, SendConfirmationPopup } from './send'
     import StorageDepositBreakdownPopup from './StorageDepositBreakdownPopup.svelte'
@@ -45,6 +46,7 @@
     import Version from './Version.svelte'
     import Video from './Video.svelte'
     import WalletFinderPopup from './WalletFinderPopup.svelte'
+    import VoteForProposal from './VoteForProposalPopup.svelte'
 
     export let type: string
     export let props: any
@@ -103,6 +105,7 @@
         nodeInfo: NodeInfoPopup,
         addNode: AddNodePopup,
         registerProposal: RegisterProposalPopup,
+        removeProposal: RemoveProposalPopup,
         removeNode: RemoveNode,
         storageDepositBreakdown: StorageDepositBreakdownPopup,
         errorLog: ErrorLog,
@@ -125,6 +128,7 @@
         enableLedgerBlindSigning: EnableLedgerBlindSigningPopup,
         testDeepLinkForm: TestDeepLinkFormPopup,
         manageVotingPower: ManageVotingPowerPopup,
+        voteForProposal: VoteForProposal,
     }
 
     function onKey(event: KeyboardEvent): void {

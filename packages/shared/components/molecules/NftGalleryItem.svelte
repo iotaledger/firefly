@@ -15,7 +15,7 @@
 </script>
 
 <button on:click={openCollectiblesDetailsView} class="flex flex-col items-center justify-center">
-    <div class="w-full rounded-2xl overflow-hidden flex flex-col  shadow-elevation-1">
+    <div class="w-full rounded-2xl overflow-hidden flex flex-col shadow-elevation-1">
         <div
             class="w-full overflow-hidden flex"
             bind:clientWidth={nftWrapperClientWidth}
