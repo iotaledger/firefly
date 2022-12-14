@@ -34,6 +34,7 @@
         NewTransactionType,
         Output,
         getAssetById,
+        ActivityAction,
     } from '@core/wallet'
     import { closePopup, openPopup } from '@auxiliary/popup'
     import { ledgerPreparedOutput } from '@core/ledger'
@@ -89,6 +90,7 @@
         type: ActivityType.Basic,
         direction: ActivityDirection.Outgoing,
         inclusionState: InclusionState.Pending,
+        action: ActivityAction.Send,
         destinationNetwork: getDestinationNetworkFromAddress(layer2Parameters?.networkAddress),
         ...(layer2Parameters?.networkAddress && {
             parsedLayer2Metadata: {

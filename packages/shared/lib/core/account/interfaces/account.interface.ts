@@ -1,4 +1,4 @@
-import {
+import type {
     HexEncodedAmount,
     IAliasOutput,
     IBasicOutput,
@@ -8,7 +8,7 @@ import {
     ITransactionPayload,
     OutputTypes,
 } from '@iota/types'
-import {
+import type {
     AccountBalance,
     AccountSyncOptions,
     Address,
@@ -36,6 +36,7 @@ import {
     IncreaseNativeTokenSupplyOptions,
     AccountMetadata,
     AliasOutputOptions,
+    ParticipationOverview,
 } from '@iota/wallet'
 
 export interface IAccount {
@@ -72,6 +73,7 @@ export interface IAccount {
     getMetadata(): AccountMetadata
     getOutput(outputId: string): Promise<OutputData>
     getOutputsWithAdditionalUnlockConditions(outputs: OutputsToClaim): Promise<string[]>
+    getParticipationOverview(): Promise<ParticipationOverview>
     getTransaction(transactionId: string): Promise<Transaction>
     getVotingPower(): Promise<string>
     incomingTransactions(): Promise<[string, [ITransactionPayload, IOutputResponse[]]][]>
@@ -114,8 +116,10 @@ export interface IAccount {
     sendOutputs(outputs: OutputTypes[], transactionOptions?: TransactionOptions): Promise<Transaction>
     setAlias(alias: string): Promise<void>
     signTransactionEssence(preparedTransactionData: PreparedTransactionData): Promise<SignedTransactionEssence>
+    stopParticipating(eventId: string): Promise<Transaction>
     submitAndStoreTransaction(signedTransactionData: SignedTransactionEssence): Promise<Transaction>
     sync(options?: AccountSyncOptions): Promise<AccountBalance>
     transactions(): Promise<Transaction[]>
     unspentOutputs(filterOptions?: FilterOptions): Promise<OutputData[]>
+    vote(eventId?: string, answers?: number[]): Promise<Transaction>
 }
