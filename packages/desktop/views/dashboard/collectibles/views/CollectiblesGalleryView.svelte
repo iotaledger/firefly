@@ -1,19 +1,17 @@
 <script lang="typescript">
+    import { localize } from '@core/i18n'
+    import { nftSearchTerm, queriedNfts, selectedAccountNfts } from '@core/nfts'
+    import { debounce } from '@core/utils'
     import {
+        FontWeight,
+        Icon,
+        Illustration,
+        NftGallery,
         Text,
         TextInput,
-        NftGalleryItem,
         TogglableButton,
-        Icon,
-        FontWeight,
         ReceiveButton,
-        Illustration,
     } from 'shared/components'
-    import { CollectiblesRoute, collectiblesRouter } from '@core/router'
-    import { INft, nftSearchTerm, selectedAccountNfts, queriedNfts } from '@core/nfts'
-    import { selectedNftId } from '../stores/selected-nft.store'
-    import { localize } from '@core/i18n'
-    import { debounce } from '@core/utils'
 
     let searchActive = false
     let inputElement: HTMLInputElement
@@ -24,10 +22,6 @@
         debounce(() => {
             $nftSearchTerm = searchValue
         })()
-    }
-    function handleNftClick(nft: INft): void {
-        $selectedNftId = nft.id
-        $collectiblesRouter.goTo(CollectiblesRoute.Details)
     }
 </script>
 
@@ -70,11 +64,7 @@
         </div>
 
         {#if $queriedNfts.length}
-            <div class="h-full gallery-grid scrollable-y">
-                {#each $queriedNfts as nft}
-                    <NftGalleryItem {nft} onClick={() => handleNftClick(nft)} />
-                {/each}
-            </div>
+            <NftGallery nfts={$queriedNfts} />
         {:else}
             <div class="w-full h-full flex flex-col items-center justify-center space-y-8">
                 <Illustration illustration="empty-collectibles" width="134" height="134" />
@@ -100,26 +90,3 @@
         </div>
     {/if}
 </div>
-
-<style lang="scss">
-    .gallery-grid {
-        --grid-layout-gap: 1rem;
-        --grid-column-count: 9;
-        --grid-item--min-width: 240px;
-
-        /**
-        * Calculated values.
-        */
-        --gap-count: calc(var(--grid-column-count) - 1);
-        --total-gap-width: calc(var(--gap-count) * var(--grid-layout-gap));
-        --grid-item--max-width: calc((100% - var(--total-gap-width)) / var(--grid-column-count));
-
-        display: grid;
-        grid-template-columns: repeat(
-            auto-fill,
-            minmax(max(var(--grid-item--min-width), var(--grid-item--max-width)), 1fr)
-        );
-        grid-auto-rows: minmax(min-content, max-content);
-        grid-gap: var(--grid-layout-gap);
-    }
-</style>

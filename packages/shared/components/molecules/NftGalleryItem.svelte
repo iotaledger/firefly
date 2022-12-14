@@ -1,14 +1,35 @@
 <script lang="typescript">
     import { INft } from '@core/nfts'
-    import { Text, FontWeight, NftMediaContainer, NftMediaSize } from 'shared/components'
+    import { Text, FontWeight, NftMedia } from 'shared/components'
+    import { CollectiblesRoute, collectiblesRouter } from '@core/router'
+    import { selectedNftId } from '@core/nfts/stores'
 
     export let nft: INft
-    export let onClick: () => void = () => {}
+
+    let nftWrapperClientWidth: number
+
+    function openCollectiblesDetailsView(): void {
+        $selectedNftId = nft.id
+        $collectiblesRouter.goTo(CollectiblesRoute.Details)
+    }
 </script>
 
-<button on:click={onClick}>
-    <NftMediaContainer nftId={nft.id} size={NftMediaSize.Flexible} classes="rounded-b-none" />
-    <div class="description w-full flex flex-col justify-center p-3.5 bg-white dark:bg-gray-800 rounded-b-2xl">
-        <Text fontWeight={FontWeight.semibold} fontSize="12" classes="text-left truncate">{nft.name}</Text>
+<button on:click={openCollectiblesDetailsView} class="flex flex-col items-center justify-center">
+    <div class="w-full rounded-2xl overflow-hidden flex flex-col">
+        <div
+            class="w-full overflow-hidden flex"
+            bind:clientWidth={nftWrapperClientWidth}
+            style="height: {nftWrapperClientWidth}px; "
+        >
+            <NftMedia
+                nftId={nft.id}
+                classes="bg-gray-200 dark:bg-gray-700 min-w-full min-h-full object-cover"
+                loop
+                muted
+            />
+        </div>
+        <div class="w-full flex flex-col justify-center p-3.5 bg-white dark:bg-gray-800">
+            <Text fontWeight={FontWeight.semibold} fontSize="12" classes="text-left truncate">{nft.name}</Text>
+        </div>
     </div>
 </button>
