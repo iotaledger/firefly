@@ -161,7 +161,7 @@
                     {/each}
                 </key-value-list>
             </nft-details>
-            {#if attributes && attributes.length > 0}
+            {#if attributes?.length > 0}
                 <nft-attributes class="flex flex-col space-y-4">
                     <Text type={TextType.h5} fontWeight={FontWeight.semibold}>
                         {localize('general.attributes')}
