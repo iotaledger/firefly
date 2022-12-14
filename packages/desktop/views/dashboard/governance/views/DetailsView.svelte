@@ -3,15 +3,15 @@
     import { localize } from '@core/i18n'
     import {
         Button,
-        Text,
-        MeatballMenuButton,
-        Pane,
-        ProposalStatusPill,
-        TextType,
         FontWeight,
         Icon,
-        ProposalQuestion,
+        Pane,
+        ProposalDetailsButton,
         ProposalInformation,
+        ProposalQuestion,
+        ProposalStatusPill,
+        Text,
+        TextType,
     } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { getVotingEvent } from '@core/profile-manager'
@@ -64,10 +64,6 @@
 
     let openedQuestionIndex = null
 
-    function handleMeatballMenu(): void {
-        return
-    }
-
     function handleQuestionClick(index: number): void {
         openedQuestionIndex = openedQuestionIndex === index ? null : index
     }
@@ -78,7 +74,7 @@
         <Pane classes="p-6 flex flex-col flex-1">
             <header-container class="flex justify-between items-center mb-4">
                 <ProposalStatusPill status={$selectedProposal?.status} />
-                <MeatballMenuButton onClick={handleMeatballMenu} />
+                <ProposalDetailsButton />
             </header-container>
             <div class="flex flex-1 flex-col justify-between">
                 <Text type={TextType.h2}>{$selectedProposal?.title}</Text>
