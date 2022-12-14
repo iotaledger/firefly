@@ -1,7 +1,7 @@
 <script lang="ts">
+    import { CollectiblesDetailsView, CollectiblesGalleryView } from './views'
     import { selectedAccountIndex } from '@core/account/stores/selected-account-id.store'
     import { collectiblesRoute, CollectiblesRoute, collectiblesRouter } from '@core/router'
-    import { CollectiblesDetailsView, CollectiblesGalleryView } from './views'
 
     $: $selectedAccountIndex && $collectiblesRouter.reset()
 </script>
