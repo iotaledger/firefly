@@ -20,7 +20,7 @@
     let allowBack: boolean
     let activeRouter: ProfileRouter | SettingsRouter = $profileRouter
 
-    $: $profileRoute, (setTitle(), setAllowBack(), setActiveRouter())
+    $: $profileRoute, $settingsRoute, (setTitle(), setAllowBack(), setActiveRouter())
 
     function setActiveRouter(): void {
         if ($profileRoute === ProfileRoute.Settings) {
@@ -30,7 +30,7 @@
         }
     }
     function setTitle(): void {
-        if (activeRouter === $settingsRouter) {
+        if ($profileRoute === ProfileRoute.Settings) {
             if ($settingsRoute === SettingsRoute.Init) {
                 title = localize('views.settings.settings')
             } else {
