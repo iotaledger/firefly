@@ -5,7 +5,7 @@
     import { selectedProposal } from '@core/governance'
     import { localize } from '@core/i18n'
     import { deregisterParticipationEvent } from '@core/profile-manager/api'
-    import { GovernanceRoute, governanceRouter } from '@core/router'
+    import { governanceRouter } from '@core/router'
     import { closePopup } from '@auxiliary/popup'
     import { showAppNotification } from '@auxiliary/notification'
 
@@ -22,7 +22,7 @@
                 alert: true,
             })
             closePopup()
-            $governanceRouter.goTo(GovernanceRoute.Proposals)
+            $governanceRouter.previous()
         } catch (err) {
             handleError(err)
         }

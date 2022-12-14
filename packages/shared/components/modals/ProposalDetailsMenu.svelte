@@ -10,6 +10,7 @@
         openPopup({
             type: 'removeProposal',
         })
+        modal.close()
     }
 
     // TODO: User can only remove a proposal when he is not voting for it
