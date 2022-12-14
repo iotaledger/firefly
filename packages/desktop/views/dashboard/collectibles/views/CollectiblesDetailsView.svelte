@@ -126,6 +126,7 @@
                 autoplay
                 controls
                 loop
+                muted
             />
         </div>
     </div>

@@ -4,8 +4,8 @@
     export let Media: HTMLImageElement | HTMLVideoElement
     export let src: string
     export let expectedType: MimeType
-    export let classes: string
-    export let alt
+    export let classes: string = ''
+    export let alt = ''
     export let onError: () => unknown
     export let onLoad: () => unknown
     export let autoplay: boolean = false
@@ -13,11 +13,12 @@
     export let muted: boolean = false
     export let loop: boolean = false
 
+    let type: string
+    let safeToLoad = false
     let isLoaded = false
 
-    let type
     $: type = convertMimeTypeToHtmlTag(expectedType)
-
+    $: src && void checkContentIsSafeToLoad()
     $: isLoaded && muteVideo()
 
     function muteVideo() {
@@ -63,42 +64,40 @@
         onLoad && onLoad()
     }
 
-    // TODO: find a way to check the type of the file without downloading it
-    // or decide which is better the content security policy or this check
-    /* $: {
-        if (src && typeof src === 'string') {
-            fetch(src)
-            .then(response => response.blob())
-            .then(blob => {
-                if (blob.type === expectedType) {
-                    type = convertMimeTypeToHtmlTag(blob.type);
+    async function checkContentIsSafeToLoad() {
+        try {
+            if (src && typeof src === 'string') {
+                const response = await fetch(src, { method: 'HEAD', cache: 'force-cache' })
+                if (response.headers.get('Content-Type') === expectedType) {
+                    safeToLoad = true
                 } else {
+                    safeToLoad = false
                     onError()
                 }
-            })
-            .catch(() => {
-                onError()
-            });
-        } else {
+            }
+        } catch (error) {
+            safeToLoad = false
             onError()
         }
-    } */
+    }
 </script>
 
-<svelte:element
-    this={type}
-    bind:this={Media}
-    {src}
-    {alt}
-    autoplay={autoplay ? true : undefined}
-    controls={controls ? true : undefined}
-    loop={loop ? true : undefined}
-    muted
-    class={classes}
-    preload="metadata"
-    on:load={handleLoaded}
-    on:loadedmetadata={handleLoadedMetadata}
-    on:error={onError}
-    on:mouseenter={startPlaying}
-    on:mouseleave={stopPlaying}
-/>
+{#if safeToLoad}
+    <svelte:element
+        this={type}
+        bind:this={Media}
+        {src}
+        {alt}
+        autoplay={autoplay ? true : undefined}
+        controls={controls ? true : undefined}
+        loop={loop ? true : undefined}
+        muted
+        class={classes}
+        preload="metadata"
+        on:load={handleLoaded}
+        on:loadedmetadata={handleLoadedMetadata}
+        on:error={onError}
+        on:mouseenter={startPlaying}
+        on:mouseleave={stopPlaying}
+    />
+{/if}

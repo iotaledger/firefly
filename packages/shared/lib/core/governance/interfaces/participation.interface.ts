@@ -1,7 +1,7 @@
-import type { EventId, OutputId, TrackedParticipationOverview } from '@iota/wallet'
+import type { TrackedParticipationOverview } from '@iota/wallet'
 
 export interface IParticipations {
-    [eventId: EventId]: {
-        [outputId: OutputId]: TrackedParticipationOverview
+    [eventId: string]: {
+        [outputId: string]: TrackedParticipationOverview
     }
 }
