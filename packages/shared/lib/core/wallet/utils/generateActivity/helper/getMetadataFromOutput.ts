@@ -1,8 +1,8 @@
 import { FEATURE_TYPE_METADATA } from '../../../constants'
 import { IMetadataFeature } from '@iota/types'
 import { Output } from '@core/wallet/types'
-import { Converter } from '@core/utils'
-import { parseLayer2MetadataForTransfer } from '@core/layer-2'
+import { containsNonPrintableCharacters, Converter } from '@core/utils'
+import { EXTERNALLY_OWNED_ACCOUNT, parseLayer2MetadataForTransfer } from '@core/layer-2'
 
 export function getMetadataFromOutput(output: Output): string {
     const { data } = <IMetadataFeature>output?.features?.find((feature) => feature.type === FEATURE_TYPE_METADATA) ?? {
@@ -10,9 +10,12 @@ export function getMetadataFromOutput(output: Output): string {
     }
     if (data) {
         const metadataBytes = Converter.hexToBytes(data.substring(2))
-        // TODO, optimal way to figure out if bytes contain non-ASCII character
-        // https://www.utf8-chartable.de/
-        if (metadataBytes.includes(0)) {
+        const startValue = Number(data.substring(0, 10))
+
+        // For smart contract calls the first 32 bits of the metadata
+        // corresponds to 0 in case the transaction was initiated
+        // by an end-user instead of a smart contract
+        if (startValue === EXTERNALLY_OWNED_ACCOUNT) {
             try {
                 const layer2Data = parseLayer2MetadataForTransfer(metadataBytes)
                 return JSON.stringify(layer2Data)
@@ -20,7 +23,10 @@ export function getMetadataFromOutput(output: Output): string {
                 console.error(err)
                 return data
             }
+        } else if (containsNonPrintableCharacters(metadataBytes)) {
+            return data
+        } else {
+            return Converter.hexToUtf8(data)
         }
-        return Converter.hexToUtf8(data)
     }
 }
