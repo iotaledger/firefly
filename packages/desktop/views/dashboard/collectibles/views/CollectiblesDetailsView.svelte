@@ -37,7 +37,7 @@
     const nft: INft = getNftByIdFromAllAccountNfts($selectedAccountIndex, $selectedNftId)
 
     const { id, name, issuer, address, metadata } = nft ?? {}
-    const { standard, version, type, uri, description, issuerName, collectionName, attributes } =
+    const { standard, version, type, uri, description, issuerName, collectionName, attributes, soonaverseAttributes } =
         nft?.parsedMetadata || {}
 
     const issuerAddress = getBech32AddressFromAddressTypes(issuer)
@@ -161,7 +161,7 @@
                     {/each}
                 </key-value-list>
             </nft-details>
-            {#if attributes}
+            {#if attributes?.length > 0}
                 <nft-attributes class="flex flex-col space-y-4">
                     <Text type={TextType.h5} fontWeight={FontWeight.semibold}>
                         {localize('general.attributes')}
@@ -172,6 +172,31 @@
                         {/each}
                     </div>
                 </nft-attributes>
+            {:else}
+                {#if soonaverseAttributes?.props}
+                    <nft-attributes class="flex flex-col space-y-4">
+                        <Text type={TextType.h5} fontWeight={FontWeight.semibold}>
+                            {localize('general.properties')}
+                        </Text>
+                        <div class="flex flex-wrap gap-3">
+                            {#each Object.entries(soonaverseAttributes?.props) as [_key, { label, value }]}
+                                <KeyValueBox keyText={label} valueText={value} shrink />
+                            {/each}
+                        </div>
+                    </nft-attributes>
+                {/if}
+                {#if soonaverseAttributes?.stats}
+                    <nft-attributes class="flex flex-col space-y-4">
+                        <Text type={TextType.h5} fontWeight={FontWeight.semibold}>
+                            {localize('general.statistics')}
+                        </Text>
+                        <div class="flex flex-wrap gap-3">
+                            {#each Object.entries(soonaverseAttributes?.stats) as [_key, { label, value }]}
+                                <KeyValueBox keyText={label} valueText={value} shrink />
+                            {/each}
+                        </div>
+                    </nft-attributes>
+                {/if}
             {/if}
         </div>
         <div class="flex w-full space-x-4 self-end mt-auto pt-4">
