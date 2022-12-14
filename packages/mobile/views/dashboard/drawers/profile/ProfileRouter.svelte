@@ -1,10 +1,12 @@
 <script lang="typescript">
-    import { profileRoute, ProfileRoute } from '../../../../lib/routers'
-    import { ActionsView, SettingsRouterView } from './views'
+    import { ProfileRoute, profileRoute } from '../../../../lib/routers'
+    import { ActionsView, SettingsView } from './views'
+
+    export let changeTitle: (title: string) => void
 </script>
 
 {#if $profileRoute === ProfileRoute.Actions}
     <ActionsView />
 {:else if $profileRoute === ProfileRoute.Settings}
-    <SettingsRouterView />
+    <SettingsView {changeTitle} />
 {/if}

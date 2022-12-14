@@ -6,7 +6,7 @@ import { showAppNotification } from '@auxiliary/notification'
 
 export function openUrlInBrowser(targetUrl: string): void {
     const url = new URL(targetUrl)
-    const domain = url.hostname.replace('www.', '').replace('mailto:', '')
+    const domain = url.hostname.replace(/^www\./, '')
 
     const isAllowed = externalAllowedLinks.includes(domain) || externalAllowedLinks.includes(domain + url.pathname)
 
