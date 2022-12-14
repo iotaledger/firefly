@@ -140,7 +140,7 @@
     </Drawer>
 {:else}
     <aside
-        class="flex flex-col justify-center items-center bg-white dark:bg-gray-800 relative w-20 px-5 pt-10 pb-5 border-solid border-r border-gray-100 dark:border-gray-800"
+        class="flex flex-col justify-center items-center bg-white dark:bg-gray-800 relative w-18 px-5 pt-10 pb-5 border-solid border-r border-gray-100 dark:border-gray-800"
     >
         <nav class="flex flex-grow flex-col items-center justify-between">
             <div class="flex flex-col items-center">
