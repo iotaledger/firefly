@@ -279,6 +279,10 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
+    stopParticipating(eventId: string): Promise<Transaction> {
+        throw new Error('Method not implemented.')
+    }
+
     submitAndStoreTransaction(signedTransactionData: SignedTransactionEssence): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
@@ -293,5 +297,9 @@ export class AccountMock implements IAccount {
 
     unspentOutputs(filterOptions?: FilterOptions): Promise<[]> {
         return Promise.resolve([])
+    }
+
+    vote(eventId?: string | undefined, answers?: number[] | undefined): Promise<Transaction> {
+        throw new Error('Method not implemented.')
     }
 }
