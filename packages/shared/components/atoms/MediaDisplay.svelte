@@ -4,8 +4,8 @@
     export let Media: HTMLImageElement | HTMLVideoElement
     export let src: string
     export let expectedType: MimeType
-    export let classes: string
-    export let alt
+    export let classes: string = ''
+    export let alt = ''
     export let onError: () => unknown
     export let onLoad: () => unknown
     export let autoplay: boolean = false
@@ -13,12 +13,12 @@
     export let muted: boolean = false
     export let loop: boolean = false
 
-    let isLoaded = false
-    let safeToLoad = false
-
     let type: string
-    $: type = convertMimeTypeToHtmlTag(expectedType)
+    let safeToLoad = false
+    let isLoaded = false
 
+    $: type = convertMimeTypeToHtmlTag(expectedType)
+    $: src && void checkContentIsSafeToLoad()
     $: isLoaded && muteVideo()
 
     function muteVideo() {
@@ -64,20 +64,19 @@
         onLoad && onLoad()
     }
 
-    $: {
-        if (src && typeof src === 'string') {
-            fetch(src, { method: 'HEAD' })
-                .then((response) => {
-                    if (response.headers.get('Content-Type') === expectedType) {
-                        safeToLoad = true
-                    } else {
-                        onError()
-                    }
-                })
-                .catch(() => {
+    async function checkContentIsSafeToLoad() {
+        try {
+            if (src && typeof src === 'string') {
+                const response = await fetch(src, { method: 'HEAD', cache: 'force-cache' })
+                if (response.headers.get('Content-Type') === expectedType) {
+                    safeToLoad = true
+                } else {
+                    safeToLoad = false
                     onError()
-                })
-        } else {
+                }
+            }
+        } catch (error) {
+            safeToLoad = false
             onError()
         }
     }
