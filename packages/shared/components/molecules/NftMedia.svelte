@@ -93,6 +93,7 @@
             {loop}
             {muted}
             {classes}
+            onError={handleLoadingError}
         />
     {/if}
 {/if}
