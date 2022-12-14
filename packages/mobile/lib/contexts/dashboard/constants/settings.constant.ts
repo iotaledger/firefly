@@ -1,4 +1,4 @@
-import { Icon } from '@lib/auxiliary/icon'
+import { SETTINGS_ICON_SVG } from '@lib/auxiliary/icon'
 import features from '../../../../features/features'
 import { ChangePasswordView } from '../../../../views/dashboard/drawers/profile/views/settings/security'
 import { SettingsRoute } from '../../../routers'
@@ -11,7 +11,7 @@ export const SETTINGS = {
         name: 'views.settings.changePassword.title',
         category: SettingsCategory.Security,
         enabled: security.changePassword.enabled,
-        icon: Icon.Lock,
+        icon: SETTINGS_ICON_SVG[SettingsRoute.ChangePassword],
         view: ChangePasswordView,
     },
 }
