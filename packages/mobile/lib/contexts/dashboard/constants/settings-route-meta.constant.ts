@@ -6,7 +6,7 @@ import { SettingsCategory } from '../enums'
 
 const { security } = features.settings
 
-export const SETTINGS = {
+export const SETTINGS_ROUTE_META = {
     [SettingsRoute.ChangePassword]: {
         name: 'views.settings.changePassword.title',
         category: SettingsCategory.Security,

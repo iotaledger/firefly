@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import features from '@features/features'
     import { Icon, Text, TextType } from '@ui'
-    import { SETTINGS, SettingsCategory } from '../../../../../../lib/contexts/dashboard'
+    import { SETTINGS_ROUTE_META, SettingsCategory } from '../../../../../../lib/contexts/dashboard'
     import { settingsRoute, SettingsRoute, settingsRouter } from '../../../../../../lib/routers'
 
     const categories = {
@@ -32,7 +32,7 @@
         $settingsRouter.goTo(route)
     }
 
-    for (const [route, setting] of Object.entries(SETTINGS)) {
+    for (const [route, setting] of Object.entries(SETTINGS_ROUTE_META)) {
         if (categories[setting.category].enabled) {
             const listItem = { ...setting, route }
             categories[setting.category].settings.push(listItem)
@@ -67,5 +67,5 @@
         {/each}
     </div>
 {:else}
-    <svelte:component this={SETTINGS[$settingsRoute].view} />
+    <svelte:component this={SETTINGS_ROUTE_META[$settingsRoute].view} />
 {/if}

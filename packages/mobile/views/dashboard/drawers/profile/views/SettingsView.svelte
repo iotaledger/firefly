@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { SETTINGS } from '../../../../../lib/contexts/dashboard'
+    import { SETTINGS_ROUTE_META } from '../../../../../lib/contexts/dashboard'
     import { SettingsRoute, settingsRoute } from '../../../../../lib/routers'
     import { SettingsRouter } from './settings'
 
@@ -12,7 +12,7 @@
         if ($settingsRoute === SettingsRoute.Init) {
             changeTitle(localize('views.settings.settings'))
         } else {
-            changeTitle(localize(SETTINGS[$settingsRoute].name))
+            changeTitle(localize(SETTINGS_ROUTE_META[$settingsRoute].name))
         }
     }
 </script>
