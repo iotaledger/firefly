@@ -8,9 +8,9 @@ const { security } = features.settings
 
 export const SETTINGS_ROUTE_META = {
     [SettingsRoute.ChangePassword]: {
-        name: 'views.settings.changePassword.title',
+        name: `views.settings.${SettingsRoute.ChangePassword}.title`,
         category: SettingsCategory.Security,
-        enabled: security.changePassword.enabled,
+        enabled: security?.[SettingsRoute.ChangePassword]?.enabled,
         icon: SETTINGS_ICON_SVG[SettingsRoute.ChangePassword],
         view: ChangePasswordView,
     },

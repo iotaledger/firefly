@@ -44,25 +44,20 @@
     <div class="flex flex-col h-full justify-start items-start">
         {#each Object.values(categories) as category}
             {#if category.enabled}
-                <Text bold overrideColor classes="text-gray-700 mb-2">{category.name}</Text>
-                {#each category.settings as setting}
-                    {#if setting.enabled}
-                        <button
-                            class="py-1 pl-7 w-full relative text-left"
-                            on:click={() => handleSettingClick(setting.route)}
-                        >
-                            <Icon
-                                width="18"
-                                height="18"
-                                icon={setting.icon}
-                                classes="text-blue-500 absolute left-1 top-0.4 text-xl"
-                            />
-                            <Text type={TextType.p} overrideColor classes="mb-1 text-gray-700"
-                                >{localize(setting.name)}</Text
+                <Text type={TextType.h4} classes="mb-4">{category.name}</Text>
+                <div class="flex flex-col space-y-1 w-full">
+                    {#each category.settings as setting}
+                        {#if setting.enabled}
+                            <button
+                                class="p-2 w-full flex flex-row items-center space-x-4"
+                                on:click={() => handleSettingClick(setting.route)}
                             >
-                        </button>
-                    {/if}
-                {/each}
+                                <Icon width="18" height="18" icon={setting.icon} classes="text-blue-500" />
+                                <Text type={TextType.p} secondary>{localize(setting.name)}</Text>
+                            </button>
+                        {/if}
+                    {/each}
+                </div>
             {/if}
         {/each}
     </div>
