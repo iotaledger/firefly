@@ -50,7 +50,7 @@
 
 <ClickableTile
     onClick={handleTransactionClick}
-    classes={activity.inclusionState === InclusionState.Confirmed ? '' : 'opacity-50'}
+    classes={activity.inclusionState === InclusionState.Pending ? 'opacity-80 animate-pulse' : ''}
 >
     <activity-tile class="w-full flex flex-col space-y-4">
         <tile-content class="flex flex-row items-center text-left space-x-4">
