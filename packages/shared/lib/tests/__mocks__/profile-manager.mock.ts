@@ -12,6 +12,7 @@ import type {
     Event,
     Node,
     EventId,
+    EventStatus,
 } from '@iota/wallet'
 
 import { IAccount } from '@core/account'
@@ -157,6 +158,10 @@ export class ProfileManagerMock implements IProfileManager {
     }
 
     getParticipationEvents(): Promise<Event[]> {
+        throw new Error('Method not implemented.')
+    }
+
+    getParticipationEventStatus(eventId: EventId): Promise<EventStatus> {
         throw new Error('Method not implemented.')
     }
 
