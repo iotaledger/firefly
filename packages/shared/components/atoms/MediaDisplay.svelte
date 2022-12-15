@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { localize } from '@core/i18n'
     import { MimeType, ParentMimeType } from '@core/nfts'
 
     export let Media: HTMLImageElement | HTMLVideoElement
@@ -6,7 +7,7 @@
     export let expectedType: MimeType
     export let classes: string = ''
     export let alt = ''
-    export let onError: () => unknown
+    export let onError: (a?: string) => unknown
     export let onLoad: () => unknown
     export let autoplay: boolean = false
     export let controls: boolean = false
@@ -72,12 +73,12 @@
                     safeToLoad = true
                 } else {
                     safeToLoad = false
-                    onError()
+                    onError(localize('error.nft.notMatchingFileTypes'))
                 }
             }
         } catch (error) {
             safeToLoad = false
-            onError()
+            onError(localize('error.nft.generic'))
         }
     }
 </script>

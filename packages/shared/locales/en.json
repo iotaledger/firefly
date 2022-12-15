@@ -1800,6 +1800,11 @@
         "eventId": {
             "doesNotStartWith0x": "Event ID should start with '0x'",
             "insufficientLength": "Event ID should be 66 characters long"
+        },
+        "nft": {
+            "unsupportedUrl": "Url not supported",
+            "notMatchingFileTypes": "Specified media type doesnt match the file type",
+            "generic": "Cannot display media"
         }
     },
     "warning": {

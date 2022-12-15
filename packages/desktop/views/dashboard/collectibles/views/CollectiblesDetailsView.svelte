@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { showAppNotification } from '@auxiliary/notification'
     import { openPopup } from '@auxiliary/popup'
     import { selectedAccountIndex } from '@core/account'
     import { openUrlInBrowser } from '@core/app'
@@ -115,6 +116,14 @@
             overflow: true,
         })
     }
+
+    function onError(error): void {
+        showAppNotification({
+            type: 'error',
+            alert: true,
+            message: error,
+        })
+    }
 </script>
 
 <div class="flex flex-row w-full h-full space-x-4">
@@ -127,6 +136,7 @@
                 controls
                 loop
                 muted
+                {onError}
             />
         </div>
     </div>
