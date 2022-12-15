@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Input, Text, ButtonSize, TextType } from 'shared/components'
+    import { Button, Input, Text, HTMLButtonType, ButtonSize, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
     import { showAppNotification } from '@auxiliary/notification'
     import { activeProfile, updateActiveProfile, validateProfileName } from '@core/profile'
@@ -31,7 +31,7 @@
     }
 </script>
 
-<change-profile-name-form>
+<form id="form-change-profile-name" on:submit|preventDefault={onSubmitClick}>
     <Text type={TextType.h4} classes="mb-3">
         {localize('views.settings.changeProfileName.title')}
     </Text>
@@ -39,7 +39,7 @@
         {localize('views.settings.changeProfileName.description')}
     </Text>
     <Input {error} placeholder={$activeProfile?.name} bind:value={newName} classes="mb-5" />
-    <Button size={ButtonSize.Medium} onClick={onSubmitClick} {disabled}>
+    <Button size={ButtonSize.Medium} type={HTMLButtonType.Submit} {disabled}>
         {localize('views.settings.changeProfileName.title')}
     </Button>
-</change-profile-name-form>
+</form>
