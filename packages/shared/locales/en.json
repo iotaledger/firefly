@@ -583,10 +583,10 @@
                 "successRemove": "Proposal successfully removed"
             },
             "statusTimeline": {
-                "announcement": "Announcement",
-                "votingOpen": "Voting open",
-                "counting": "Counting starts",
-                "closed": "Counting stops"
+                "upcoming": "Announcement",
+                "commencing": "Voting open",
+                "holding": "Counting starts",
+                "ended": "Counting stops"
             },
             "details": {
                 "fullProposal": "Read the full proposal",
@@ -1983,10 +1983,10 @@
         "locked": "locked",
         "smartContract": "smart contract",
         "proposalStatus": {
-            "announcement": "Announcement",
-            "votingOpen": "Voting open",
-            "counting": "Counting",
-            "closed": "Closed"
+            "upcoming": "Announcement",
+            "commencing": "Voting open",
+            "holding": "Counting",
+            "ended": "Closed"
         }
     },
     "menus": {

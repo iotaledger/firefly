@@ -41,8 +41,8 @@
         selectedIndices = Array<number>(questions?.length)
     }
     $: isVotingDisabled =
-        $selectedProposal?.status === ProposalStatus.Announcement ||
-        $selectedProposal?.status === ProposalStatus.Closed ||
+        $selectedProposal?.status === ProposalStatus.Upcoming ||
+        $selectedProposal?.status === ProposalStatus.Ended ||
         selectedIndices?.length === 0 ||
         selectedIndices?.includes(undefined)
 
