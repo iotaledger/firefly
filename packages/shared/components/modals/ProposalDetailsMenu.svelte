@@ -1,13 +1,17 @@
 <script lang="typescript">
     import { Modal, MenuItem } from 'shared/components'
-    import { localize } from '@core/i18n'
     import { Icon } from '@auxiliary/icon'
     import { openPopup } from '@auxiliary/popup/actions'
+    import { handleError } from '@core/error/handlers'
+    import { isVotingForProposal } from '@core/governance/utils'
+    import { localize } from '@core/i18n'
 
     export let modal: Modal = undefined
 
-    // TODO: add proper logic
-    $: isVotingForProposal = true
+    let _isVotingForProposal
+    isVotingForProposal()
+        .then((result) => (_isVotingForProposal = result))
+        .catch((err) => handleError(err))
 
     function onStopVotingClick(): void {
         openPopup({
@@ -28,7 +32,7 @@
 
 <Modal bind:this={modal} {...$$restProps}>
     <div class="flex flex-col">
-        {#if isVotingForProposal}
+        {#if !_isVotingForProposal}
             <MenuItem
                 icon={Icon.Minus}
                 iconProps={{ width: '16', height: '19' }}
