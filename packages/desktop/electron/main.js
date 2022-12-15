@@ -179,9 +179,9 @@ if (app.isPackaged) {
  * Check URL against blacklist
  */
 function isUrlAllowed(targetUrl) {
-    const externalBlocklist = ['localhost']
+    const externalBlocklist = []
     const url = new URL(targetUrl)
-    const domain = url.hostname.replace('www.', '').replace('mailto:', '')
+    const domain = url.hostname.replace(/^www\./, '')
 
     return !externalBlocklist.includes(domain) && !externalBlocklist.includes(domain + url.pathname)
 }
