@@ -8,8 +8,11 @@
     import { FontWeight, Position } from '../enums'
     import { Icon } from '@auxiliary/icon/enums'
     import { localize } from '@core/i18n'
+    import { proposalsState } from '@core/governance/stores'
 
     export let proposal: IProposal
+
+    $: proposalState = $proposalsState[proposal?.id]
 
     function handleProposalClick(): void {
         $selectedProposal = proposal
@@ -38,7 +41,7 @@
         <Text fontWeight={FontWeight.semibold} fontSize="14" classes="truncate">{proposal.title}</Text>
     </div>
     <div class="flex justify-between items-center">
-        <ProposalStatusInfo status={proposal.status} milestones={proposal.milestones} />
+        <ProposalStatusInfo status={proposalState?.status} milestones={proposal.milestones} />
         {#if proposal.hasVoted}
             <TooltipIcon icon={Icon.Voted} size="small" position={Position.Left} iconClasses="text-gray-500">
                 <Text smaller overrideColor fontWeight={FontWeight.semibold} classes="text-gray-600">
