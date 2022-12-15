@@ -1,6 +1,6 @@
 <script lang="typescript">
     import zxcvbn from 'zxcvbn'
-    import { Animation, Button, OnboardingLayout, PasswordInput, Text, HTMLButtonType } from 'shared/components'
+    import { Animation, Button, OnboardingLayout, PasswordInput, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'
@@ -100,40 +100,37 @@
         <Text type="h2">{localize('views.onboarding.strongholdSetup.setupStrongholdPassword.title')}</Text>
     </div>
     <div slot="leftpane__content">
-        <form on:submit|preventDefault={onContinueClick} id="password-form">
-            <Text type="p" classes="mb-4" secondary
-                >{localize('views.onboarding.strongholdSetup.setupStrongholdPassword.body1')}</Text
-            >
-            <Text type="p" classes="mb-10" secondary
-                >{localize('views.onboarding.strongholdSetup.setupStrongholdPassword.body2')}</Text
-            >
-            <PasswordInput
-                {error}
-                classes="mb-4"
-                bind:value={strongholdPassword}
-                strengthLevels={4}
-                showRevealToggle
-                showStrengthLevel
-                strength={passwordStrength?.score}
-                autofocus
-                disabled={busy}
-            />
-            <PasswordInput
-                error={errorConfirm}
-                bind:value={confirmedStrongholdPassword}
-                classes="mb-5"
-                placeholder={localize('general.confirmPassword')}
-                showRevealToggle
-                disabled={busy}
-            />
-        </form>
+        <Text classes="mb-4" secondary
+            >{localize('views.onboarding.strongholdSetup.setupStrongholdPassword.body1')}</Text
+        >
+        <Text classes="mb-10" secondary
+            >{localize('views.onboarding.strongholdSetup.setupStrongholdPassword.body2')}</Text
+        >
+        <PasswordInput
+            {error}
+            classes="mb-4"
+            bind:value={strongholdPassword}
+            strengthLevels={4}
+            showRevealToggle
+            showStrengthLevel
+            strength={passwordStrength?.score}
+            autofocus
+            disabled={busy}
+        />
+        <PasswordInput
+            error={errorConfirm}
+            bind:value={confirmedStrongholdPassword}
+            classes="mb-5"
+            placeholder={localize('general.confirmPassword')}
+            showRevealToggle
+            disabled={busy}
+        />
     </div>
     <div slot="leftpane__action">
         <Button
-            type={HTMLButtonType.Submit}
-            form="password-form"
             classes="w-full"
             disabled={!strongholdPassword || !confirmedStrongholdPassword || busy}
+            onClick={onContinueClick}
         >
             {localize('actions.continue')}
         </Button>

@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Animation, Button, OnboardingLayout, PasswordInput, Text, HTMLButtonType } from 'shared/components'
+    import { Animation, Button, OnboardingLayout, PasswordInput, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { profileBackupRouter } from '@core/router'
@@ -52,24 +52,22 @@
         <Text type="h2">{localize('views.onboarding.profileBackup.backupStronghold.title')}</Text>
     </div>
     <div slot="leftpane__content">
-        <form on:submit|preventDefault={onBackupClick} id="backup-form">
-            <Text type="p" secondary classes="mb-8"
-                >{localize('views.onboarding.profileBackup.backupStronghold.body1')}</Text
-            >
-            <PasswordInput bind:value={confirmPassword} autofocus disabled={busy} showRevealToggle classes="mb-8" />
-            <Text type="p" secondary classes="mb-4"
-                >{localize('views.onboarding.profileBackup.backupStronghold.body2')}</Text
-            >
-            <Text type="p" secondary smaller classes="mb-2"
-                >- {localize('views.onboarding.profileBackup.backupStronghold.reason1')}</Text
-            >
-            <Text type="p" secondary smaller classes="mb-2"
-                >- {localize('views.onboarding.profileBackup.backupStronghold.reason2')}</Text
-            >
-            <Text type="p" secondary smaller classes="mb-2"
-                >- {localize('views.onboarding.profileBackup.backupStronghold.reason3')}</Text
-            >
-        </form>
+        <Text type="p" secondary classes="mb-8"
+            >{localize('views.onboarding.profileBackup.backupStronghold.body1')}</Text
+        >
+        <PasswordInput bind:value={confirmPassword} autofocus disabled={busy} showRevealToggle classes="mb-8" />
+        <Text type="p" secondary classes="mb-4"
+            >{localize('views.onboarding.profileBackup.backupStronghold.body2')}</Text
+        >
+        <Text type="p" secondary smaller classes="mb-2"
+            >- {localize('views.onboarding.profileBackup.backupStronghold.reason1')}</Text
+        >
+        <Text type="p" secondary smaller classes="mb-2"
+            >- {localize('views.onboarding.profileBackup.backupStronghold.reason2')}</Text
+        >
+        <Text type="p" secondary smaller classes="mb-2"
+            >- {localize('views.onboarding.profileBackup.backupStronghold.reason3')}</Text
+        >
     </div>
     <div slot="leftpane__action">
         <Button
@@ -83,9 +81,8 @@
             {localize('actions.skipBackup')}
         </Button>
         <Button
-            type={HTMLButtonType.Submit}
-            form="backup-form"
             classes="w-full"
+            onClick={onBackupClick}
             disabled={!isStrongholdPasswordValid || busy}
             isBusy={!skipBackup && busy}
             busyMessage={localize('general.creatingProfile')}

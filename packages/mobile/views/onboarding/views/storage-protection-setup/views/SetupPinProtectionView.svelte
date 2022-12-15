@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { OnboardingLayout } from '../../../../../components'
-    import { Button, PinInput, Text, HTMLButtonType, TextType } from 'shared/components'
+    import { Button, PinInput, Text, TextType } from 'shared/components'
     import {
         initialiseFirstShimmerClaimingAccount,
         initialisePincodeManager,
@@ -104,7 +104,7 @@
                 >{localize('views.onboarding.storageProtectionSetup.setupPinProtection.body2')}</Text
             >
         </div>
-        <form id="setup-pin" class="flex flex-col mb-8" on:submit={onSetPinClick}>
+        <div class="flex flex-col mb-8" on:submit={onSetPinClick}>
             <PinInput
                 bind:value={setPinInput}
                 glimpse
@@ -114,7 +114,7 @@
                 error={setPinInputError}
                 label={localize('actions.setPin')}
                 on:filled={confirmPinInputElement.focus}
-                on:submit={onSetPinClick}
+                onEnter={onSetPinClick}
             />
             <PinInput
                 bind:value={confirmPinInput}
@@ -125,16 +125,14 @@
                 label={localize('actions.confirmPin')}
                 bind:this={confirmPinInputElement}
                 on:filled={submitButtonElement.resetAndFocus}
-                on:submit={onSetPinClick}
+                onEnter={onSetPinClick}
             />
-        </form>
+        </div>
     </div>
     <div slot="footer" class="flex flex-row flex-wrap justify-between items-center space-x-4">
         <Button
             classes="flex-1"
-            type={HTMLButtonType.Submit}
             disabled={!(arePinInputsValid && arePinInputsMatching) || busy}
-            form="setup-pin"
             isBusy={busy}
             busyMessage={`${localize('actions.initializing')}...`}
             bind:this={submitButtonElement}
