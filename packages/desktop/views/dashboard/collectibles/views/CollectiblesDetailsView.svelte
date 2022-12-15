@@ -1,5 +1,4 @@
 <script lang="typescript">
-    import { showAppNotification } from '@auxiliary/notification'
     import { openPopup } from '@auxiliary/popup'
     import { selectedAccountIndex } from '@core/account'
     import { openUrlInBrowser } from '@core/app'
@@ -30,9 +29,12 @@
         Pane,
         Text,
         TextType,
+        Alert,
     } from 'shared/components'
 
     let modal: Modal
+    let error: string
+    let warning: string
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
     const nft: INft = getNftByIdFromAllAccountNfts($selectedAccountIndex, $selectedNftId)
@@ -116,14 +118,6 @@
             overflow: true,
         })
     }
-
-    function onError(error): void {
-        showAppNotification({
-            type: 'error',
-            alert: true,
-            message: error,
-        })
-    }
 </script>
 
 <div class="flex flex-row w-full h-full space-x-4">
@@ -131,13 +125,22 @@
         <div class="relative w-full h-full flex rounded-2xl overflow-hidden">
             <NftMedia
                 nftId={id}
+                bind:error
+                bind:warning
                 classes="rounded-2xl overflow-hidden flex-1 w-auto h-auto max-w-full max-h-full object-contain absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
                 autoplay
                 controls
                 loop
                 muted
-                {onError}
+                big
             />
+            <div class="toast-container">
+                {#if error}
+                    <Alert type="error" message={error} />
+                {:else if warning}
+                    <Alert type="warning" message={warning} />
+                {/if}
+            </div>
         </div>
     </div>
     <Pane classes="flex flex-col p-6 space-y-3 w-full h-full max-w-lg">
@@ -217,3 +220,12 @@
         </div>
     </Pane>
 </div>
+
+<style lang="scss">
+    .toast-container {
+        position: absolute;
+        right: 24px;
+        bottom: 24px;
+        width: 400px;
+    }
+</style>

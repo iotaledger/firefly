@@ -2,7 +2,7 @@
     import { selectedAccountIndex } from '@core/account'
     import { localize } from '@core/i18n'
     import { getNftByIdFromAllAccountNfts, rewriteIpfsUri } from '@core/nfts'
-    import { MediaDisplay } from 'shared/components'
+    import { MediaDisplay, Toast } from 'shared/components'
     import MediaPlaceholder from './MediaPlaceholder.svelte'
 
     export let nftId: string
@@ -11,7 +11,9 @@
     export let loop: boolean = false
     export let muted: boolean = false
     export let classes: string = ''
-    export let onError: (a?: string) => unknown = () => {}
+    export let error: string = ''
+    export let warning: string = ''
+    export let big: boolean = false
 
     const bgColor = 'gray-200'
     const darkBgColor = 'gray-700'
@@ -48,7 +50,7 @@
                 newUrl = rewriteIpfsUri(targetUrl)
                 break
             default:
-                onError(localize('error.nft.unsupportedUrl'))
+                error = localize('error.nft.unsupportedUrl')
                 return undefined
         }
 
@@ -59,9 +61,9 @@
         }
     }
 
-    function handleLoadingError(error): void {
+    function handleLoadingError(err): void {
         hasError = true
-        onError(error)
+        error = err
     }
 
     function handleOnLoad(): void {
@@ -99,5 +101,11 @@
             {classes}
             onError={handleLoadingError}
         />
+    {/if}
+{/if}
+
+{#if big}
+    {#if error}
+        <Toast type="error" message={error} />
     {/if}
 {/if}

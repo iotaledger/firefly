@@ -1803,7 +1803,7 @@
         },
         "nft": {
             "unsupportedUrl": "Url not supported",
-            "notMatchingFileTypes": "Specified media type doesnt match the file type",
+            "notMatchingFileTypes": "Specified media type doesn't match the file type",
             "generic": "Cannot display media"
         }
     },
