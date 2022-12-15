@@ -83,7 +83,7 @@ jobs:
               if: matrix.os == 'windows-2019'
 
             - name: Set deployment target (macOS)
-              run: echo "MACOSX_DEPLOYMENT_TARGET=10.12" >> $GITHUB_ENV
+              run: echo "MACOSX_DEPLOYMENT_TARGET=10.14" >> $GITHUB_ENV # TODO: set this to 10.12 once rocksDB issue is fixed
               if: matrix.os == 'macos-11'
 
             - name: Install required packages (Linux)
