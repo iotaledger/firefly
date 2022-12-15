@@ -1,11 +1,11 @@
 import { PROPOSAL_STATUS_POLL_INTERVAL } from '../constants'
-import { updateProposalsStatus } from '../stores'
+import { updateProposalsState } from '../stores'
 
 let pollInterval: NodeJS.Timeout
 
 export async function pollProposalStatus(): Promise<void> {
-    await updateProposalsStatus()
-    pollInterval = setInterval(() => void updateProposalsStatus(), PROPOSAL_STATUS_POLL_INTERVAL)
+    await updateProposalsState()
+    pollInterval = setInterval(() => void updateProposalsState(), PROPOSAL_STATUS_POLL_INTERVAL)
 }
 
 export function clearPollProposalStatusInterval(): void {
