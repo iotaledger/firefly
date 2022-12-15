@@ -54,4 +54,5 @@ function resetDashboardSubrouters(): void {
     get(settingsRouter).reset()
     get(tokenRouter).reset()
     get(profileRouter).reset()
+    get(settingsRouter).reset()
 }

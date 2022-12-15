@@ -13,6 +13,7 @@ import {
     profileRouter,
     profileSetupRouter,
     sendRouter,
+    settingsRouter,
     storageProtectionSetupRouter,
     strongholdSetupRouter,
     tokenRouter,
@@ -27,6 +28,7 @@ export function getSubroutersForAppContext(context: AppContext): IRouter[] {
                 get(activityRouter),
                 get(tokenRouter),
                 get(profileRouter),
+                get(settingsRouter),
             ]
         case AppContext.Login:
             return []

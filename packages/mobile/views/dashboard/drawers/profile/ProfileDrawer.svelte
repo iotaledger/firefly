@@ -1,11 +1,14 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { Drawer } from '../../../../components'
+    import { SETTINGS_ROUTE_META } from '../../../../lib/contexts/dashboard'
     import {
         ProfileRoute,
         profileRoute,
         ProfileRouter,
         profileRouter,
+        SettingsRoute,
+        settingsRoute,
         SettingsRouter,
         settingsRouter,
     } from '../../../../lib/routers'
@@ -17,11 +20,7 @@
     let allowBack: boolean
     let activeRouter: ProfileRouter | SettingsRouter = $profileRouter
 
-    $: $profileRoute, (setTitle(), setAllowBack(), setActiveRouter())
-
-    function changeTitle(newTitle: string) {
-        title = newTitle
-    }
+    $: $profileRoute, $settingsRoute, (setTitle(), setAllowBack(), setActiveRouter())
 
     function setActiveRouter(): void {
         if ($profileRoute === ProfileRoute.Settings) {
@@ -30,12 +29,15 @@
             activeRouter = $profileRouter
         }
     }
-
     function setTitle(): void {
-        switch ($profileRoute) {
-            default:
-                title = localize('views.settings.profile.title')
-                break
+        if ($profileRoute === ProfileRoute.Settings) {
+            if ($settingsRoute === SettingsRoute.Init) {
+                title = localize('views.settings.settings')
+            } else {
+                title = localize(SETTINGS_ROUTE_META[$settingsRoute].name)
+            }
+        } else {
+            title = localize('views.settings.profile.title')
         }
     }
     function setAllowBack(): void {
@@ -48,5 +50,5 @@
 </script>
 
 <Drawer {onClose} {title} fullScreen enterFromSide {allowBack} onBackClick={() => activeRouter.previous()}>
-    <ProfileRouterComponent {changeTitle} />
+    <ProfileRouterComponent />
 </Drawer>
