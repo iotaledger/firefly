@@ -32,7 +32,7 @@
 
 <Modal bind:this={modal} {...$$restProps}>
     <div class="flex flex-col">
-        {#if !_isVotingForProposal}
+        {#if _isVotingForProposal}
             <MenuItem
                 icon={Icon.Minus}
                 iconProps={{ width: '16', height: '19' }}

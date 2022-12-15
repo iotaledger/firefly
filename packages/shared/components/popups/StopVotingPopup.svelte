@@ -4,21 +4,26 @@
     import { showAppNotification } from '@auxiliary/notification/actions'
     import { closePopup } from '@auxiliary/popup/actions'
     import { handleError } from '@core/error/handlers'
-    import { localize } from '@core/i18n'
     import { selectedProposal } from '@core/governance/stores'
+    import { stopVotingForProposal } from '@core/governance/actions'
+    import { localize } from '@core/i18n'
+    import { checkActiveProfileAuth } from '@core/profile/actions'
 
     function onCancelClick(): void {
         closePopup()
     }
 
-    function onStopVotingClick(): void {
+    async function onStopVotingClick(): Promise<void> {
         try {
-            showAppNotification({
-                type: 'success',
-                message: localize('notifications.stopVoting.success'),
-                alert: true,
+            await checkActiveProfileAuth(async () => {
+                await stopVotingForProposal($selectedProposal?.id)
+                showAppNotification({
+                    type: 'success',
+                    message: localize('notifications.stopVoting.success'),
+                    alert: true,
+                })
+                closePopup()
             })
-            closePopup()
         } catch (err) {
             handleError(err)
         }
