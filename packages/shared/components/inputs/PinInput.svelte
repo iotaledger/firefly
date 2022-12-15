@@ -15,7 +15,6 @@
     export let autofocus = false
     export let glimpse = false
     export let smaller = false
-    export let onEnter: () => void = () => {}
 
     let inputs = new Array(PIN_LENGTH)
 
@@ -84,7 +83,7 @@
             handleBackspace()
         } else if (event.key === KEYBOARD.ENTER) {
             if (isValidPin(inputs.join(''))) {
-                onEnter()
+                dispatch('submit')
             }
         } else if (event.key === KEYBOARD.TAB) {
             // Do default tab handling by focusing the root
