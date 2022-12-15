@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { get } from 'svelte/store'
-    import { Button, PinInput, Spinner, Text, HTMLButtonType, ButtonSize } from 'shared/components'
+    import { Button, PinInput, Spinner, Text, ButtonSize } from 'shared/components'
     import { localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import { Platform } from '@core/app'
@@ -85,7 +85,7 @@
     }
 </script>
 
-<form on:submit={changePincode} id="pincode-change-form">
+<change-pincode>
     <Text type="h4" classes="mb-3">{localize('views.settings.changePincode.title')}</Text>
     <Text type="p" secondary classes="mb-5">{localize('views.settings.changePincode.description')}</Text>
     <Text type="p" secondary smaller classes="mb-2">{localize('views.settings.changePincode.currentPincode')}</Text>
@@ -95,7 +95,7 @@
         classes="mb-4"
         bind:value={currentPincode}
         disabled={pinCodeBusy}
-        on:submit={changePincode}
+        onEnter={changePincode}
     />
     <Text type="p" secondary smaller classes="mb-2">{localize('views.settings.changePincode.newPincode')}</Text>
     <PinInput
@@ -104,7 +104,7 @@
         classes="mb-4"
         bind:value={newPincode}
         disabled={pinCodeBusy}
-        on:submit={changePincode}
+        onEnter={changePincode}
     />
     <Text type="p" secondary smaller classes="mb-2">{localize('views.settings.changePincode.confirmNewPincode')}</Text>
     <PinInput
@@ -113,16 +113,16 @@
         classes="mb-4"
         bind:value={confirmedPincode}
         disabled={pinCodeBusy}
-        on:submit={changePincode}
+        onEnter={changePincode}
     />
     <div class="flex flex-row items-center">
         <Button
             size={ButtonSize.Medium}
-            type={HTMLButtonType.Submit}
+            on:click={changePincode}
             disabled={!currentPincode || !newPincode || !confirmedPincode || pinCodeBusy}
         >
             {localize('views.settings.changePincode.action')}
         </Button>
         <Spinner busy={pinCodeBusy} message={pinCodeMessage} classes="ml-2" />
     </div>
-</form>
+</change-pincode>

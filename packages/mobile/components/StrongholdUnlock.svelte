@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { unlockStronghold } from '@core/profile'
-    import { Button, HTMLButtonType, PasswordInput, Text } from 'shared/components'
+    import { Button, PasswordInput, Text } from 'shared/components'
 
     export let busyMessage: string = ''
 
@@ -34,7 +34,7 @@
 <div class="mb-5">
     <Text type="p" secondary>{localize('popups.password.subtitle')}</Text>
 </div>
-<form id="password-popup-form" class="flex justify-center w-full flex-row flex-wrap" on:submit={handleSubmit}>
+<div class="flex justify-center w-full flex-row flex-wrap">
     <PasswordInput
         {error}
         classes="w-full mb-5"
@@ -49,12 +49,12 @@
         </Button>
         <Button
             classes="w-1/2"
-            type={HTMLButtonType.Submit}
             disabled={!password || password.length === 0 || isBusy}
             {isBusy}
             {busyMessage}
+            onClick={handleSubmit}
         >
             {localize('actions.unlock')}
         </Button>
     </div>
-</form>
+</div>

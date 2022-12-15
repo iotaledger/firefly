@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Text, NodeConfigurationForm, Button, HTMLButtonType } from 'shared/components'
+    import { Text, NodeConfigurationForm, Button } from 'shared/components'
     import { localize } from '@core/i18n'
     import { INode, addNodeToClientOptions, editNodeInClientOptions } from '@core/network'
     import { closePopup } from '@auxiliary/popup'
@@ -58,8 +58,6 @@
         </Button>
         <Button
             disabled={!node.url || isBusy}
-            type={HTMLButtonType.Submit}
-            form="node-configuration-form"
             classes="w-1/2"
             onClick={handleAddNode}
             {isBusy}

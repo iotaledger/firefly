@@ -118,7 +118,7 @@
     }
 </script>
 
-<form id="form-change-password">
+<change-password>
     <Text type="h4" classes="mb-3">{localize('views.settings.changePassword.title')}</Text>
     <Text type="p" secondary classes="mb-5">{localize('views.settings.changePassword.description')}</Text>
     <PasswordInput
@@ -166,4 +166,4 @@
         </Button>
         <Spinner {busy} message={localize(changeMessageLocale)} classes="ml-2" />
     </div>
-</form>
+</change-password>

@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, PasswordInput, Text, Error, ButtonVariant, HTMLButtonType } from 'shared/components'
+    import { Button, PasswordInput, Text, Error, ButtonVariant } from 'shared/components'
     import { closePopup } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
     import { setStrongholdPassword } from '@core/profile-manager'
@@ -70,7 +70,6 @@
             variant={ButtonVariant.Warning}
             classes="w-1/2"
             onClick={handleDeleteClick}
-            type={HTMLButtonType.Submit}
             disabled={(!password && $isSoftwareProfile) || isBusy}
             {isBusy}
         >

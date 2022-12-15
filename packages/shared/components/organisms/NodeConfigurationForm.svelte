@@ -80,7 +80,7 @@
     }
 </script>
 
-<form id="node-configuration-form" class="w-full h-full">
+<div class="w-full h-full">
     <Input
         bind:value={node.url}
         placeholder={localize('popups.node.nodeAddress')}
@@ -107,4 +107,4 @@
         placeholder={localize('popups.node.optionalJwt')}
         disabled={isBusy}
     />
-</form>
+</div>
