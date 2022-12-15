@@ -270,7 +270,9 @@ function createWindow() {
     })
 
     /**
-     * Only allow external navigation to allowed domains
+     * `will-navigate` is emitted whenever window.location is updated.
+     *  This happens e.g. when clicking on a link (<a href="www.iota.org").
+     *  The handler only allows navigation to an external browser.
      */
     windows.main.webContents.on('will-navigate', handleNavigation)
 
