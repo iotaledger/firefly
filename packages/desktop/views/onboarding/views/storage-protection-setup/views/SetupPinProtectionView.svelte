@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Animation, Button, OnboardingLayout, PinInput, Text } from 'shared/components'
+    import { Animation, Button, OnboardingLayout, PinInput, Text, HTMLButtonType } from 'shared/components'
     import { onMount } from 'svelte'
     import {
         initialiseFirstShimmerClaimingAccount,
@@ -105,7 +105,7 @@
                 >{localize('views.onboarding.storageProtectionSetup.setupPinProtection.body2')}</Text
             >
         </div>
-        <div class="flex flex-col">
+        <form id="setup-pin" class="flex flex-col" on:submit|preventDefault={onSetPinClick}>
             <PinInput
                 bind:value={setPinInput}
                 glimpse
@@ -115,6 +115,7 @@
                 error={setPinInputError}
                 label={localize('actions.setPin')}
                 on:filled={confirmPinInputElement.focus}
+                on:submit={onSetPinClick}
             />
             <PinInput
                 bind:value={confirmPinInput}
@@ -125,16 +126,18 @@
                 label={localize('actions.confirmPin')}
                 bind:this={confirmPinInputElement}
                 on:filled={submitButtonElement.resetAndFocus}
+                on:submit={onSetPinClick}
             />
-        </div>
+        </form>
     </div>
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
         <Button
             classes="flex-1"
+            type={HTMLButtonType.Submit}
             disabled={!(arePinInputsValid && arePinInputsMatching) || busy}
+            form="setup-pin"
             isBusy={busy}
             busyMessage={`${localize('actions.initializing')}...`}
-            onClick={onSetPinClick}
             bind:this={submitButtonElement}
         >
             {localize('actions.continue')}

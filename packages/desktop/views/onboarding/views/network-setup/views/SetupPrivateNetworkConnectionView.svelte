@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Animation, OnboardingLayout, Text, Button, NodeConfigurationForm } from 'shared/components'
+    import { Animation, OnboardingLayout, Text, Button, NodeConfigurationForm, HTMLButtonType } from 'shared/components'
     import {
         cleanupOnboardingProfileManager,
         initialiseProfileManagerFromOnboardingProfile,
@@ -68,13 +68,21 @@
         <Text type="p" secondary classes="mb-8"
             >{localize('views.onboarding.networkSetup.setupPrivateNetworkConnection.body')}</Text
         >
-        <NodeConfigurationForm bind:this={nodeConfigurationForm} bind:node bind:formError {isBusy} isDeveloperProfile />
+        <NodeConfigurationForm
+            onSubmit={onContinueClick}
+            bind:this={nodeConfigurationForm}
+            bind:node
+            bind:formError
+            {isBusy}
+            isDeveloperProfile
+        />
     </div>
     <div slot="leftpane__action">
         <Button
             disabled={!node?.url || isBusy}
+            type={HTMLButtonType.Submit}
+            form="node-configuration-form"
             classes="w-full"
-            onClick={onContinueClick}
             {isBusy}
             busyMessage={localize('actions.addingNode')}
         >

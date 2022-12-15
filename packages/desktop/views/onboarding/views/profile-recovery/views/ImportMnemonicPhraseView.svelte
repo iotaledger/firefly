@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Animation, Button, ImportTextfield, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, Button, ImportTextfield, OnboardingLayout, Text, HTMLButtonType } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { setStrongholdPassword } from '@core/profile-manager'
@@ -48,10 +48,12 @@
             >{localize('views.onboarding.profileRecovery.importMnemonicPhrase.body')}</Text
         >
         <Text type="h5" classes="mb-3">{localize('views.onboarding.profileRecovery.importMnemonicPhrase.enter')}</Text>
-        <ImportTextfield type={$onboardingProfile?.recoveryType} bind:value={input} />
+        <form on:submit|preventDefault={onContinueClick} id="text-import-form">
+            <ImportTextfield type={$onboardingProfile?.recoveryType} bind:value={input} />
+        </form>
     </div>
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-        <Button classes="flex-1" disabled={input.length === 0} onClick={onContinueClick}>
+        <Button type={HTMLButtonType.Submit} form="text-import-form" classes="flex-1" disabled={input.length === 0}>
             {localize('actions.continue')}
         </Button>
     </div>
