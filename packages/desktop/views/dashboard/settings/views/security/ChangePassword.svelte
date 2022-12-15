@@ -160,7 +160,6 @@
         <Button
             size={ButtonSize.Medium}
             disabled={!currentPassword || !newPassword || !confirmedPassword || busy}
-            onClick={changePassword}
             type={HTMLButtonType.Submit}
         >
             {localize('views.settings.changePassword.title')}
