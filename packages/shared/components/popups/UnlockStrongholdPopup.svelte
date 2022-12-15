@@ -43,6 +43,7 @@
         bind:value={password}
         showRevealToggle
         placeholder={localize('general.password')}
+        submitHandler={handleSubmit}
         autofocus
     />
     <div class="flex flex-row justify-between w-full space-x-4">
