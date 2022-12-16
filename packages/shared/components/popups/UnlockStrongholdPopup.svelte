@@ -36,13 +36,18 @@
     <Text type="h4">{localize('popups.password.title')}</Text>
     <Text type="p" secondary>{subtitle ?? localize('popups.password.subtitle')}</Text>
 </div>
-<form id="password-popup-form" class="flex justify-center w-full flex-row flex-wrap" on:submit={handleSubmit}>
+<form
+    id="password-popup-form"
+    class="flex justify-center w-full flex-row flex-wrap"
+    on:submit|preventDefault={handleSubmit}
+>
     <PasswordInput
         {error}
         classes="w-full mb-5"
         bind:value={password}
         showRevealToggle
         placeholder={localize('general.password')}
+        submitHandler={handleSubmit}
         autofocus
     />
     <div class="flex flex-row justify-between w-full space-x-4">
