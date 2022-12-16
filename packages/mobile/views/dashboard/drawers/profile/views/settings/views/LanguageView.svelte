@@ -3,12 +3,10 @@
     import { appSettings } from '@core/app'
     import { SUPPORTED_LOCALES, setLanguage } from '@core/i18n'
 
-    export let onLanguageChange: () => unknown = () => {}
-
     let appLanguage: string = SUPPORTED_LOCALES[$appSettings.language]
 
     $: languageList = Object.values(SUPPORTED_LOCALES).map((locale) => ({ value: locale, label: locale }))
-    $: appLanguage, (setLanguage({ value: appLanguage }), onLanguageChange())
+    $: appLanguage, setLanguage({ value: appLanguage })
 </script>
 
 <div class="flex flex-col overflow-y-auto">
