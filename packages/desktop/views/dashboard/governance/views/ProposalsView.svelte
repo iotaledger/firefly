@@ -1,16 +1,21 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { Pane, Proposals, ProposalsDetails, VotingPower } from '@ui'
-    import { getVotingEvents } from '@core/profile-manager'
     import type { IProposal } from '@core/governance/interfaces'
-    import { createProposalsFromEvents } from '@core/governance/utils'
+    import { createProposals } from '@core/governance/utils'
+    import { registeredProposalsIds } from '@core/governance/stores'
 
     let proposals: IProposal[]
     let loaded = false
 
+    $: $registeredProposalsIds, setProposals()
+
+    async function setProposals(): Promise<void> {
+        proposals = await createProposals()
+    }
+
     onMount(async () => {
-        const events = await getVotingEvents()
-        proposals = createProposalsFromEvents(events)
+        await setProposals()
         loaded = true
     })
 </script>
