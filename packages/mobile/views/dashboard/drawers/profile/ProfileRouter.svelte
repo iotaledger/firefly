@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { profileRoute, ProfileRoute } from '../../../../lib/routers'
+    import { ProfileRoute, profileRoute } from '../../../../lib/routers'
     import { ActionsView, SettingsView } from './views'
 </script>
 

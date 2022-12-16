@@ -5,10 +5,7 @@ const features = {
     dashboard: {
         enabled: false,
         profileActions: {
-            enabled: false,
-            settings: {
-                enabled: false,
-            },
+            enabled: true,
         },
         accountSwitcher: {
             enabled: true,
@@ -57,6 +54,90 @@ const features = {
         },
         collectibles: {
             enabled: false,
+        },
+    },
+    settings: {
+        enabled: true,
+        general: {
+            enabled: false,
+            theme: {
+                enabled: false,
+            },
+            language: {
+                enabled: false,
+            },
+            currency: {
+                enabled: false,
+            },
+            notifications: {
+                enabled: false,
+            },
+            networkStatus: {
+                enabled: false,
+            },
+            changeProfileName: {
+                enabled: false,
+            },
+        },
+        security: {
+            enabled: false,
+            exportStronghold: {
+                enabled: false,
+            },
+            appLock: {
+                enabled: false,
+            },
+            changePassword: {
+                enabled: false,
+            },
+            changePincode: {
+                enabled: false,
+            },
+            deleteProfile: {
+                enabled: false,
+            },
+        },
+        advanced: {
+            enabled: false,
+            networkConfiguration: {
+                enabled: false,
+            },
+            deepLinks: {
+                enabled: false,
+            },
+            walletFinder: {
+                enabled: false,
+            },
+            hiddenAccounts: {
+                enabled: false,
+            },
+            errorLog: {
+                enabled: false,
+            },
+            crashReporting: {
+                enabled: false,
+            },
+            diagnostics: {
+                enabled: false,
+            },
+            migrateLedgerIndex: {
+                enabled: false,
+            },
+        },
+        helpAndInfo: {
+            enabled: false,
+            documentation: {
+                enabled: false,
+            },
+            faq: {
+                enabled: false,
+            },
+            discord: {
+                enabled: false,
+            },
+            reportAnIssue: {
+                enabled: false,
+            },
         },
     },
 }

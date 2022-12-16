@@ -1,6 +1,7 @@
 import { TokenStandard } from '@core/wallet'
 import { MimeType } from '../types'
 import { IIrc27Attribute } from './irc27-attribute.interface'
+import { ISoonaverseAttributes } from './soonaverse-attributes.interface'
 
 export interface IIrc27Metadata {
     standard: TokenStandard.Irc27
@@ -13,4 +14,5 @@ export interface IIrc27Metadata {
     issuerName?: string
     description?: string
     attributes?: IIrc27Attribute[]
+    soonaverseAttributes?: ISoonaverseAttributes
 }

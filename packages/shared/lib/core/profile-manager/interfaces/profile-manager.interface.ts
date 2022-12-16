@@ -9,6 +9,7 @@ import type {
     Node,
     NodeInfoWrapper,
     WalletEvent,
+    EventStatus,
 } from '@iota/wallet'
 
 import { IAuth } from '@core/network'
@@ -40,6 +41,7 @@ export interface IProfileManager {
     getLedgerNanoStatus(): Promise<LedgerNanoStatus>
     getParticipationEvent(eventId: EventId): Promise<Event>
     getParticipationEvents(): Promise<Event[]>
+    getParticipationEventStatus(eventId: EventId): Promise<EventStatus>
     hexToBech32(hex: string, bech32Hrp?: string): Promise<string>
     isStrongholdPasswordAvailable(): Promise<boolean>
     listen(eventTypes: EventType[], callback: WalletApiEventHandler): void

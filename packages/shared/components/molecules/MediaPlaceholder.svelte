@@ -1,13 +1,14 @@
 <script lang="typescript">
-    import { INft, ParentMimeType } from '@core/nfts'
-    import { Icon, NftMediaSize } from 'shared/components'
+    import { MimeType, ParentMimeType } from '@core/nfts'
+    import { Icon } from 'shared/components'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { appSettings } from '@core/app'
 
-    export let nft: INft = undefined
-    export let size: NftMediaSize
+    export let type: MimeType = undefined
+    export let iconOnly = false
     export let bgColor = 'gray-500'
     export let darkBgColor = 'gray-500'
+    export let classes = ''
 
     const width = '100%'
     const height = '100%'
@@ -17,17 +18,11 @@
     $: primaryColor = $appSettings.darkMode ? '#25395F' : '#C4D1E8'
     $: secondaryColor = $appSettings.darkMode ? '#F0F5FE' : '#D8E3F5'
 
-    let iconSize: 'Small' | 'Large'
-    $: iconSize =
-        size === NftMediaSize.Large || size === NftMediaSize.ExtraLarge || size === NftMediaSize.Flexible
-            ? 'Large'
-            : 'Small'
-    $: icon = mapNftToIcon(nft, iconSize)
+    $: icon = mapPropsToIcon(type, iconOnly ? 'Small' : 'Large')
 
-    function mapNftToIcon(nft: INft, iconSize: 'Small' | 'Large'): IconEnum {
-        const nftType = nft?.parsedMetadata?.type?.split('/', 1)
-
-        switch (nftType?.[0]) {
+    function mapPropsToIcon(type: MimeType, iconSize: 'Small' | 'Large'): IconEnum {
+        const parentMimeType = type?.split('/', 1)?.[0]
+        switch (parentMimeType) {
             case ParentMimeType.Image:
                 return IconEnum[`CollectiblesImage${iconSize}`]
             case ParentMimeType.Video:
@@ -54,5 +49,5 @@
     {height}
     {primaryColor}
     {secondaryColor}
-    classes={`text-white dark:text-gray-800 bg-${bgColor} dark:bg-${darkBgColor} text-center`}
+    classes={`text-white dark:text-gray-800 bg-${bgColor} dark:bg-${darkBgColor} text-center ${classes}`}
 />

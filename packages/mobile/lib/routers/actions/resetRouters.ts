@@ -14,6 +14,7 @@ import {
     profileRouter,
     profileSetupRouter,
     sendRouter,
+    settingsRouter,
     storageProtectionSetupRouter,
     strongholdSetupRouter,
     tokenRouter,
@@ -50,6 +51,8 @@ function resetDashboardSubrouters(): void {
     get(accountSwitcherRouter).reset()
     get(activityRouter).reset()
     get(sendRouter).reset()
+    get(settingsRouter).reset()
     get(tokenRouter).reset()
     get(profileRouter).reset()
+    get(settingsRouter).reset()
 }

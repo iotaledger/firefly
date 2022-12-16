@@ -5,7 +5,7 @@
     import { localize } from '@core/i18n'
     import { ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
     import { BASE_TOKEN } from '@core/network/constants'
-    import { convertAndFormatNftMetadata, getNftByIdFromAllAccountNfts, INft } from '@core/nfts'
+    import { convertAndFormatNftMetadata, getNftByIdFromAllAccountNfts, INft, selectedNftId } from '@core/nfts'
     import { activeProfile } from '@core/profile/stores'
     import { truncateString } from '@core/utils'
     import {
@@ -25,21 +25,19 @@
         KeyValueBox,
         MeatballMenuButton,
         Modal,
-        NftMediaContainer,
-        NftMediaSize,
+        NftMedia,
         Pane,
         Text,
         TextType,
     } from 'shared/components'
-    import { selectedNftId } from '../stores/selected-nft.store'
 
     let modal: Modal
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
     const nft: INft = getNftByIdFromAllAccountNfts($selectedAccountIndex, $selectedNftId)
 
-    const { id, name, issuer, address, metadata } = nft
-    const { standard, version, type, uri, description, issuerName, collectionName, attributes } =
+    const { id, name, issuer, address, metadata } = nft ?? {}
+    const { standard, version, type, uri, description, issuerName, collectionName, attributes, soonaverseAttributes } =
         nft?.parsedMetadata || {}
 
     const issuerAddress = getBech32AddressFromAddressTypes(issuer)
@@ -119,9 +117,18 @@
     }
 </script>
 
-<div class="flex flex-row w-full h-full space-x-4 overflow-auto">
-    <div class="flex w-full h-full bg-gray-200 dark:bg-gray-700 items-center justify-center rounded-2xl">
-        <NftMediaContainer nftId={id} size={NftMediaSize.ExtraLarge} />
+<div class="flex flex-row w-full h-full space-x-4">
+    <div class="flex w-full h-full items-center justify-center">
+        <div class="relative w-full h-full flex rounded-2xl overflow-hidden">
+            <NftMedia
+                nftId={id}
+                classes="rounded-2xl overflow-hidden flex-1 w-auto h-auto max-w-full max-h-full object-contain absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                autoplay
+                controls
+                loop
+                muted
+            />
+        </div>
     </div>
     <Pane classes="flex flex-col p-6 space-y-3 w-full h-full max-w-lg">
         <nft-title class="flex justify-between items-center">
@@ -136,7 +143,7 @@
                 </Text>
             </nft-description>
         {/if}
-        <div class="overflow-y-scroll h-full flex flex-col space-y-4">
+        <div class="overflow-y-scroll h-full flex flex-col space-y-4 pr-2 -mr-4 ">
             <nft-details class="flex flex-col space-y-4">
                 <Text type={TextType.h5} fontWeight={FontWeight.semibold}>
                     {localize('general.details')}
@@ -154,7 +161,7 @@
                     {/each}
                 </key-value-list>
             </nft-details>
-            {#if attributes}
+            {#if attributes?.length > 0}
                 <nft-attributes class="flex flex-col space-y-4">
                     <Text type={TextType.h5} fontWeight={FontWeight.semibold}>
                         {localize('general.attributes')}
@@ -165,6 +172,31 @@
                         {/each}
                     </div>
                 </nft-attributes>
+            {:else}
+                {#if soonaverseAttributes?.props}
+                    <nft-attributes class="flex flex-col space-y-4">
+                        <Text type={TextType.h5} fontWeight={FontWeight.semibold}>
+                            {localize('general.properties')}
+                        </Text>
+                        <div class="flex flex-wrap gap-3">
+                            {#each Object.entries(soonaverseAttributes?.props) as [_key, { label, value }]}
+                                <KeyValueBox keyText={label} valueText={value} shrink />
+                            {/each}
+                        </div>
+                    </nft-attributes>
+                {/if}
+                {#if soonaverseAttributes?.stats}
+                    <nft-attributes class="flex flex-col space-y-4">
+                        <Text type={TextType.h5} fontWeight={FontWeight.semibold}>
+                            {localize('general.statistics')}
+                        </Text>
+                        <div class="flex flex-wrap gap-3">
+                            {#each Object.entries(soonaverseAttributes?.stats) as [_key, { label, value }]}
+                                <KeyValueBox keyText={label} valueText={value} shrink />
+                            {/each}
+                        </div>
+                    </nft-attributes>
+                {/if}
             {/if}
         </div>
         <div class="flex w-full space-x-4 self-end mt-auto pt-4">

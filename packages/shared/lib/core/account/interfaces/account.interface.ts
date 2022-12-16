@@ -116,8 +116,10 @@ export interface IAccount {
     sendOutputs(outputs: OutputTypes[], transactionOptions?: TransactionOptions): Promise<Transaction>
     setAlias(alias: string): Promise<void>
     signTransactionEssence(preparedTransactionData: PreparedTransactionData): Promise<SignedTransactionEssence>
+    stopParticipating(eventId: string): Promise<Transaction>
     submitAndStoreTransaction(signedTransactionData: SignedTransactionEssence): Promise<Transaction>
     sync(options?: AccountSyncOptions): Promise<AccountBalance>
     transactions(): Promise<Transaction[]>
     unspentOutputs(filterOptions?: FilterOptions): Promise<OutputData[]>
+    vote(eventId?: string, answers?: number[]): Promise<Transaction>
 }

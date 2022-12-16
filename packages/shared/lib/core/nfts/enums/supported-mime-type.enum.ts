@@ -2,6 +2,7 @@ export enum SupportedMimeType {
     'image/jpeg',
     'image/png',
     'image/gif',
+    'image/webp',
     'video/x-msvideo',
     'video/mp4',
     'video/mpeg',

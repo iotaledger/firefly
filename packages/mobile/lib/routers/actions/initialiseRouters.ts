@@ -25,6 +25,8 @@ import {
     profileSetupRouter,
     SendRouter,
     sendRouter,
+    SettingsRouter,
+    settingsRouter,
     storageProtectionSetupRouter,
     StorageProtectionSetupRouter,
     strongholdSetupRouter,
@@ -84,4 +86,5 @@ function initialiseDashboardSubrouters(): void {
     sendRouter.set(new SendRouter())
     tokenRouter.set(new TokenRouter())
     profileRouter.set(new ProfileRouter())
+    settingsRouter.set(new SettingsRouter())
 }

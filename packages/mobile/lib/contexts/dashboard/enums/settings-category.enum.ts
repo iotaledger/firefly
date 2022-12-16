@@ -1,5 +1,4 @@
-export enum SettingsRoute {
-    Init = 'init',
+export enum SettingsCategory {
     General = 'general',
     Security = 'security',
     Advanced = 'advanced',
