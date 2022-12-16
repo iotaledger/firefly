@@ -1,6 +1,6 @@
 import { SETTINGS_ICON_SVG } from '@lib/auxiliary/icon'
 import features from '../../../../features/features'
-import { ChangePasswordView } from '../../../../views/dashboard/drawers/profile/views/settings/security'
+import { ChangePasswordView } from '../../../../views/dashboard/drawers/profile/views/settings'
 import { SettingsRoute } from '../../../routers'
 import { SettingsCategory } from '../enums'
 

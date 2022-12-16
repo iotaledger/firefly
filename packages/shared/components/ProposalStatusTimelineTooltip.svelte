@@ -12,16 +12,16 @@
 
     let eventProgress: number
     switch (status) {
-        case ProposalStatus.Announcement:
+        case ProposalStatus.Upcoming:
             eventProgress = 0
             break
-        case ProposalStatus.VotingOpen:
+        case ProposalStatus.Commencing:
             eventProgress = 1
             break
-        case ProposalStatus.Counting:
+        case ProposalStatus.Holding:
             eventProgress = 2
             break
-        case ProposalStatus.Closed:
+        case ProposalStatus.Ended:
             eventProgress = 3
             break
         default:
