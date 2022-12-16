@@ -1,3 +1,3 @@
-export { default as SettingsRouter } from './SettingsRouter.svelte'
+export { default as SettingsView } from './SettingsView.svelte'
 
-export * from './security'
+export * from './views'
