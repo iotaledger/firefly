@@ -121,7 +121,7 @@ const features = {
         },
     },
     governance: {
-        enabled: false,
+        enabled: true,
     },
     collectibles: {
         enabled: true,
