@@ -10,7 +10,7 @@ import { getVotingEvents } from '@core/profile-manager'
 
 export async function createProposals(): Promise<IProposal[]> {
     const events = await getVotingEvents()
-    const proposals: IProposal[] = events.map(createProposalFromEvent)
+    const proposals: IProposal[] = events?.map(createProposalFromEvent)
     return proposals
 }
 
