@@ -7,8 +7,8 @@ import { selectedAccount } from '@core/account/stores'
 
 import { selectedProposal } from '../stores'
 
-export async function isVotingForProposal(): Promise<boolean> {
-    const overview = await getParticipationOverview(get(selectedAccount)?.index ?? 0)
+export async function isVotingForSelectedProposal(): Promise<boolean> {
+    const overview = await getParticipationOverview(get(selectedAccount)?.index)
     if (overview) {
         const proposalId = get(selectedProposal)?.id
         if (proposalId in overview.participations) {
@@ -17,9 +17,9 @@ export async function isVotingForProposal(): Promise<boolean> {
             )
             return participationOutputs.some((output) => output?.endMilestoneIndex === 0)
         } else {
-            throw new Error('Unable to retrieve selected proposal in participation overview.')
+            return false
         }
     } else {
-        throw new Error('Unable to retrieve participation overview.')
+        return false
     }
 }

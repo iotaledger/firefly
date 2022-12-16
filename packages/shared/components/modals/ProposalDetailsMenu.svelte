@@ -1,17 +1,15 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
     import { Modal, MenuItem } from 'shared/components'
     import { Icon } from '@auxiliary/icon'
     import { openPopup } from '@auxiliary/popup/actions'
     import { handleError } from '@core/error/handlers'
-    import { isVotingForProposal } from '@core/governance/utils'
+    import { isVotingForSelectedProposal } from '@core/governance/utils'
     import { localize } from '@core/i18n'
 
     export let modal: Modal = undefined
 
-    let _isVotingForProposal
-    isVotingForProposal()
-        .then((result) => (_isVotingForProposal = result))
-        .catch((err) => handleError(err))
+    let isVotingForProposal: boolean
 
     function onStopVotingClick(): void {
         openPopup({
@@ -27,24 +25,34 @@
         modal.close()
     }
 
-    // TODO: User can only remove a proposal when he is not voting for it
+    async function onMountHelper(): Promise<void> {
+        try {
+            isVotingForProposal = await isVotingForSelectedProposal()
+        } catch (err) {
+            handleError(err)
+        }
+    }
+
+    onMount(() => void onMountHelper())
 </script>
 
 <Modal bind:this={modal} {...$$restProps}>
     <div class="flex flex-col">
-        {#if _isVotingForProposal}
+        {#if isVotingForProposal}
             <MenuItem
-                icon={Icon.Minus}
-                iconProps={{ width: '16', height: '19' }}
+                icon={Icon.Close}
+                iconProps={{ width: '16', height: '16' }}
                 title={localize('actions.stopVoting')}
                 onClick={onStopVotingClick}
             />
+        {:else}
+            <MenuItem
+                icon={Icon.Delete}
+                iconProps={{ width: '16', height: '19' }}
+                title={localize('actions.removeProposal')}
+                onClick={onRemoveProposalClick}
+                variant="error"
+            />
         {/if}
-        <MenuItem
-            icon={Icon.Delete}
-            iconProps={{ width: '16', height: '19' }}
-            title={localize('actions.removeProposal')}
-            onClick={onRemoveProposalClick}
-        />
     </div>
 </Modal>
