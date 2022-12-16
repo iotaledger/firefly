@@ -1802,9 +1802,10 @@
             "insufficientLength": "Event ID should be 66 characters long"
         },
         "nft": {
-            "unsupportedUrl": "Url not supported",
-            "notMatchingFileTypes": "Specified media type doesn't match the file type",
-            "generic": "Cannot display media"
+            "unsupportedUrl": "Url not supported.",
+            "notMatchingFileTypes": "Specified media type doesn't match the file type.",
+            "generic": "Cannot display media.",
+            "tooLargeFile": "File can not load. File size is too big."
         }
     },
     "warning": {

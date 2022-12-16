@@ -66,6 +66,11 @@
         error = err
     }
 
+    function handleWarning(warn): void {
+        hasError = true
+        warning = warn
+    }
+
     function handleOnLoad(): void {
         isLoaded = true
     }
@@ -83,6 +88,7 @@
         classes="hidden {classes}"
         onLoad={handleOnLoad}
         onError={handleLoadingError}
+        onWarning={handleWarning}
     />
 
     {#if !isLoaded}
@@ -100,6 +106,7 @@
             {muted}
             {classes}
             onError={handleLoadingError}
+            onWarning={handleWarning}
         />
     {/if}
 {/if}
