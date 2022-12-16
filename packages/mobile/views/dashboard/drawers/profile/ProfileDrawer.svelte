@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { appSettings } from '@core/app'
     import { localize } from '@core/i18n'
     import { Drawer } from '../../../../components'
     import { SETTINGS_ROUTE_META } from '../../../../lib/contexts/dashboard'
@@ -21,6 +22,7 @@
     let activeRouter: ProfileRouter | SettingsRouter = $profileRouter
 
     $: $profileRoute, $settingsRoute, (setTitle(), setAllowBack(), setActiveRouter())
+    $: $appSettings.language, setTitle()
 
     function setActiveRouter(): void {
         if ($profileRoute === ProfileRoute.Settings) {
