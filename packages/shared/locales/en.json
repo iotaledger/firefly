@@ -1020,6 +1020,11 @@
             "title": "Remove proposal",
             "body": "Are you sure you want to remove this proposal?",
             "hint": "Please note that removing a proposal during the counting period will stop your votes but won't impact any votes that have already been counted."
+        },
+        "stopVoting": {
+            "title": "Stop voting",
+            "body": "You're about to stop voting for the {proposalName} proposal.",
+            "hint": "Please note that stopping voting during the counting period won't impact any votes that have already been counted."
         }
     },
     "charts": {
@@ -1206,7 +1211,8 @@
         "depositNft": "Deposit NFTs",
         "vote": "Vote",
         "registerProposal": "Register proposal",
-        "removeProposal": "Remove proposal"
+        "removeProposal": "Remove proposal",
+        "stopVoting": "Stop voting"
     },
     "general": {
         "recipient": "Recipient",
@@ -1621,7 +1627,10 @@
             "error": "An error occurred while claiming. Try again."
         },
         "vote": {
-            "success": "Votes successfully casted."
+            "success": "Votes successfully casted"
+        },
+        "stopVoting": {
+            "success": "Voting successfully stopped"
         }
     },
     "error": {
