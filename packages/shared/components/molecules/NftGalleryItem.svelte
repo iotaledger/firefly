@@ -25,7 +25,7 @@
     } else if (warning) {
         tooltipContent = {
             icon: 'exclamation-filled',
-            iconClasses: 'fill-current text-yellow-800',
+            iconClasses: 'fill-current text-yellow-700',
             text: warning,
         }
     }
