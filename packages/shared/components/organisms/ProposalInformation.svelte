@@ -7,7 +7,7 @@
 
     const proposalInformation = {
         countingEnds: formatDate(
-            milestoneToDate($networkStatus.currentMilestone, $selectedProposal.milestones?.closed),
+            milestoneToDate($networkStatus.currentMilestone, $selectedProposal.milestones?.ended),
             DATE_FORMAT
         ),
         eventId: truncateString($selectedProposal?.id, 9, 9),
