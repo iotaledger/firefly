@@ -1805,7 +1805,7 @@
             "unsupportedUrl": "Url not supported.",
             "notMatchingFileTypes": "Specified media type doesn't match the file type.",
             "generic": "Cannot display media.",
-            "tooLargeFile": "File can not load. File size is too big."
+            "tooLargeFile": "File cannot load. File size is too big."
         }
     },
     "warning": {
