@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { MimeType, ParentMimeType } from '@core/nfts'
 
-    export let Media: HTMLImageElement | HTMLVideoElement
+    export let Media: HTMLImageElement | HTMLVideoElement = undefined
     export let src: string
     export let expectedType: MimeType
     export let classes: string = ''

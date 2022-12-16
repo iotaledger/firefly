@@ -2,7 +2,7 @@
     import { selectedAccountIndex } from '@core/account'
     import { localize } from '@core/i18n'
     import { getNftByIdFromAllAccountNfts, rewriteIpfsUri } from '@core/nfts'
-    import { MediaDisplay, Toast } from 'shared/components'
+    import { MediaDisplay } from 'shared/components'
     import MediaPlaceholder from './MediaPlaceholder.svelte'
 
     export let nftId: string
@@ -13,7 +13,6 @@
     export let classes: string = ''
     export let error: string = ''
     export let warning: string = ''
-    export let big: boolean = false
 
     const bgColor = 'gray-200'
     const darkBgColor = 'gray-700'
@@ -108,11 +107,5 @@
             onError={handleLoadingError}
             onWarning={handleWarning}
         />
-    {/if}
-{/if}
-
-{#if big}
-    {#if error}
-        <Toast type="error" message={error} />
     {/if}
 {/if}
