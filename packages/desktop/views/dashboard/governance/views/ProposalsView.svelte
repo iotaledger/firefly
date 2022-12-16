@@ -3,12 +3,12 @@
     import { Pane, Proposals, ProposalsDetails, VotingPower } from '@ui'
     import type { IProposal } from '@core/governance/interfaces'
     import { createProposals } from '@core/governance/utils'
-    import { registeredProposalsIds } from '@core/governance/stores'
+    import { registeredEventIds } from '@core/governance/stores'
 
     let proposals: IProposal[]
     let loaded = false
 
-    $: $registeredProposalsIds, setProposals()
+    $: $registeredEventIds, setProposals()
 
     async function setProposals(): Promise<void> {
         proposals = await createProposals()
