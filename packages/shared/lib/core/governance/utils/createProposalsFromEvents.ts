@@ -12,12 +12,12 @@ export function createProposalsFromEvents(events: Event[]): IProposal[] {
         const proposal = {
             id,
             title: data.name,
-            status: ProposalStatus.Announcement,
+            status: ProposalStatus.Upcoming,
             milestones: {
-                [ProposalStatus.Announcement]: 0, // TODO: fix this
-                [ProposalStatus.VotingOpen]: data.milestoneIndexCommence,
-                [ProposalStatus.Counting]: data.milestoneIndexStart,
-                [ProposalStatus.Closed]: data.milestoneIndexEnd,
+                [ProposalStatus.Upcoming]: 0, // TODO: fix this
+                [ProposalStatus.Commencing]: data.milestoneIndexCommence,
+                [ProposalStatus.Holding]: data.milestoneIndexStart,
+                [ProposalStatus.Ended]: data.milestoneIndexEnd,
             },
             // TODO: figure out a better way to get the node URLs
             nodeUrls: get(activeProfile)?.clientOptions?.nodes,

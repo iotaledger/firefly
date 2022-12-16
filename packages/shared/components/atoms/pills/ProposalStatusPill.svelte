@@ -6,10 +6,10 @@
     export let status: ProposalStatus
 
     const STATUS_COLORS: Record<ProposalStatus, string> = {
-        [ProposalStatus.Announcement]: 'purple-200',
-        [ProposalStatus.VotingOpen]: 'blue-200',
-        [ProposalStatus.Counting]: 'green-300',
-        [ProposalStatus.Closed]: 'gray-200',
+        [ProposalStatus.Upcoming]: 'purple-200',
+        [ProposalStatus.Commencing]: 'blue-200',
+        [ProposalStatus.Holding]: 'green-300',
+        [ProposalStatus.Ended]: 'gray-200',
     }
 </script>
 
