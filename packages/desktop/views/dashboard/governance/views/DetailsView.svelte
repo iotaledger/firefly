@@ -22,7 +22,7 @@
     import { openPopup } from '@auxiliary/popup'
     import { ProposalStatus } from '@core/governance/enums'
     import { proposalsState } from '@core/governance/stores'
-    import { networkStatus } from '@core/network'
+    import { networkStatus } from '@core/network/stores'
 
     let selectedIndices: number[] = []
     let votingPayload: VotingEventPayload

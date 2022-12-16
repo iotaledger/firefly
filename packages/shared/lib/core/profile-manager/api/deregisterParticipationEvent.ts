@@ -1,10 +1,10 @@
-import { removeProposalState } from '@core/governance'
-import { profileManager } from '@core/profile-manager/stores'
-import type { EventId } from '@iota/wallet'
 import { get } from 'svelte/store'
+import type { EventId } from '@iota/wallet'
+import { removeProposalState } from '@core/governance'
+import { profileManager } from '../stores'
 
-export async function deregisterParticipationEvent(eventId: EventId): Promise<void> {
+export function deregisterParticipationEvent(eventId: EventId): Promise<void> {
     const manager = get(profileManager)
-    await removeProposalState(eventId)
+    removeProposalState(eventId)
     return manager.deregisterParticipationEvent(eventId)
 }

@@ -3,11 +3,11 @@ import { updateProposalsState } from '../stores'
 
 let pollInterval
 
-export async function pollProposalStatus(): Promise<void> {
+export async function pollProposalsState(): Promise<void> {
     await updateProposalsState()
     pollInterval = setInterval(() => void updateProposalsState(), PROPOSAL_STATUS_POLL_INTERVAL)
 }
 
-export function clearPollProposalStatusInterval(): void {
+export function clearPollProposalsStateInterval(): void {
     clearInterval(pollInterval)
 }

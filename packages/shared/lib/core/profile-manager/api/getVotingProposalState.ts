@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 import { EventStatus, EventId } from '@iota/wallet'
-import { profileManager } from '@core/profile-manager'
+import { profileManager } from '../stores'
 
 export function getVotingProposalState(eventId: EventId): Promise<EventStatus> {
     const manager = get(profileManager)

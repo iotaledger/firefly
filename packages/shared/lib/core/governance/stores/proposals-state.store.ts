@@ -1,7 +1,7 @@
-import { getVotingProposalState } from '@core/profile-manager'
-import { persistent } from '@core/utils/store'
-import { EventStatus } from '@iota/wallet'
 import { get } from 'svelte/store'
+import type { EventStatus } from '@iota/wallet'
+import { getVotingProposalState } from '@core/profile-manager/api'
+import { persistent } from '@core/utils/store'
 
 export const proposalsState = persistent<{ [key in string]: EventStatus }>('proposalsState', {})
 

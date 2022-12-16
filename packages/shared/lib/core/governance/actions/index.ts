@@ -1,2 +1,2 @@
-export * from './proposal-status-polling'
+export * from './proposalsStatePolling'
 export * from './setVotingPower'
