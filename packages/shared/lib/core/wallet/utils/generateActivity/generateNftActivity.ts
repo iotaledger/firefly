@@ -1,8 +1,8 @@
 import { IAccountState } from '@core/account'
 import { ActivityType } from '@core/wallet/enums'
+import { IActivityGenerationParameters } from '@core/wallet/interfaces'
 import { NftActivity } from '@core/wallet/types'
 import type { INftOutput } from '@iota/types'
-import { IActivityGenerationParameters } from '..'
 import { getNftId } from '../outputs/getNftId'
 import { getAsyncDataFromOutput, getMetadataFromOutput, getSendingInformation, getTagFromOutput } from './helper'
 

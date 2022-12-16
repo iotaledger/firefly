@@ -9,15 +9,14 @@ import {
     getMainOutputFromTransaction,
     getNftOutputFromTransaction,
     IProcessedTransaction,
-    IWrappedOutput,
 } from '@core/wallet'
-import { OUTPUT_TYPE_ALIAS, OUTPUT_TYPE_BASIC, OUTPUT_TYPE_FOUNDRY, OUTPUT_TYPE_NFT } from '@core/wallet/constants'
 import { Activity } from '@core/wallet/types'
 import type { IAliasOutput, INftOutput } from '@iota/types'
 import { generateAliasActivity } from './generateAliasActivity'
 import { generateFoundryActivity } from './generateFoundryActivity'
 import { generateNftActivity } from './generateNftActivity'
 import { generateTransactionActivity } from './generateTransactionActivity'
+import { getActivityTypeFromOutput } from './helper'
 
 export function generateActivities(processedTransaction: IProcessedTransaction, account: IAccountState): Activity[] {
     if (processedTransaction.wrappedInputs?.length > 1) {
@@ -82,51 +81,31 @@ function generateActivitiesFromProcessedTransactionsWithInputs(
     }
 }
 
-export interface IActivityGenerationParameters {
-    type: ActivityType
-    action: ActivityAction
-    processedTransaction: IProcessedTransaction
-    wrappedOutput: IWrappedOutput
-}
-
+/*
+ * If we cannot get the detailed inputs for a transaction, we would need to blind guess what the user did with the transaction.
+ * Therefore we set the action to `Unknown`
+ */
 function generateActivitiesFromProcessedTransactionsWithoutInputs(
     processedTransaction: IProcessedTransaction,
     account: IAccountState
 ): Activity[] {
     const nonRemainderOutputs = processedTransaction.outputs.filter((wrappedOutput) => !wrappedOutput.remainder)
     return nonRemainderOutputs.map((wrappedOutput) => {
-        const type = getActivityTypeFromOutput(wrappedOutput)
-        return generateActivityForAccount(account, {
-            type,
+        const params = {
+            type: getActivityTypeFromOutput(wrappedOutput),
             action: ActivityAction.Unknown,
             processedTransaction,
             wrappedOutput,
-        })
+        }
+        switch (params.type) {
+            case ActivityType.Basic:
+                return generateTransactionActivity(account, params)
+            case ActivityType.Foundry:
+                return generateFoundryActivity(account, params)
+            case ActivityType.Alias:
+                return generateAliasActivity(account, params)
+            case ActivityType.Nft:
+                return generateNftActivity(account, params)
+        }
     })
-}
-
-function generateActivityForAccount(account: IAccountState, params: IActivityGenerationParameters): Activity {
-    switch (params.type) {
-        case ActivityType.Basic:
-            return generateTransactionActivity(account, params)
-        case ActivityType.Foundry:
-            return generateFoundryActivity(account, params)
-        case ActivityType.Alias:
-            return generateAliasActivity(account, params)
-        case ActivityType.Nft:
-            return generateNftActivity(account, params)
-    }
-}
-
-function getActivityTypeFromOutput(output: IWrappedOutput): ActivityType {
-    switch (output.output.type) {
-        case OUTPUT_TYPE_NFT:
-            return ActivityType.Nft
-        case OUTPUT_TYPE_ALIAS:
-            return ActivityType.Alias
-        case OUTPUT_TYPE_FOUNDRY:
-            return ActivityType.Foundry
-        case OUTPUT_TYPE_BASIC:
-            return ActivityType.Basic
-    }
 }

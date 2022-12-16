@@ -1,9 +1,10 @@
 import { IAccountState } from '@core/account'
 import { ADDRESS_TYPE_ALIAS, EMPTY_HEX_ID } from '@core/wallet/constants'
 import { ActivityType } from '@core/wallet/enums'
+import { IActivityGenerationParameters } from '@core/wallet/interfaces'
 import { AliasActivity } from '@core/wallet/types'
 import { IAliasOutput } from '@iota/types'
-import { convertHexAddressToBech32, hashOutputId, IActivityGenerationParameters } from '..'
+import { convertHexAddressToBech32, hashOutputId } from '..'
 import {
     getAmountFromOutput,
     getAsyncDataFromOutput,

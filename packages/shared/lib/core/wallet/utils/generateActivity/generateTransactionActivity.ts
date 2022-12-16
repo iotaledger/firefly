@@ -8,11 +8,12 @@ import {
 } from '@core/layer-2'
 import { COIN_TYPE } from '@core/network'
 import { activeProfile, activeProfileId } from '@core/profile'
+import { IActivityGenerationParameters } from '@core/wallet/interfaces'
 import { TransactionActivity } from '@core/wallet/types'
 import { IBasicOutput } from '@iota/types'
 import { get } from 'svelte/store'
 import { ActivityType } from '../../enums'
-import { activityOutputContainsValue, getNativeTokenFromOutput, IActivityGenerationParameters } from '../../utils'
+import { activityOutputContainsValue, getNativeTokenFromOutput } from '../../utils'
 import {
     getAmountFromOutput,
     getAsyncDataFromOutput,
