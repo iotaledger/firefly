@@ -21,15 +21,16 @@
     import type { IParticipations } from '@core/governance/interfaces'
     import { openPopup } from '@auxiliary/popup'
     import { ProposalStatus } from '@core/governance/enums'
-    import { networkStatus } from '@core/network'
+    import { proposalsState } from '@core/governance/stores'
+    import { networkStatus } from '@core/network/stores'
 
     let selectedIndices: number[] = []
-
     let votingPayload: VotingEventPayload
-    $: void setVotingEventPayload($selectedProposal?.id)
-
     let totalVotes = 0
+
+    $: void setVotingEventPayload($selectedProposal?.id)
     $: void setTotalVotes()
+    $: proposalStatus = $proposalsState[$selectedProposal?.id]?.status
 
     $: votesCounter = {
         total: totalVotes,
@@ -41,8 +42,8 @@
         selectedIndices = Array<number>(questions?.length)
     }
     $: isVotingDisabled =
-        $selectedProposal?.status === ProposalStatus.Announcement ||
-        $selectedProposal?.status === ProposalStatus.Closed ||
+        proposalStatus === ProposalStatus.Upcoming ||
+        proposalStatus === ProposalStatus.Ended ||
         selectedIndices?.length === 0 ||
         selectedIndices?.includes(undefined)
 
