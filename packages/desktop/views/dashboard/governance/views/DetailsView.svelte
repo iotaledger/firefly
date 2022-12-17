@@ -1,5 +1,4 @@
 <script lang="typescript">
-    import { selectedProposal } from '@contexts/governance'
     import { localize } from '@core/i18n'
     import {
         Button,
@@ -21,7 +20,7 @@
     import type { IParticipations } from '@contexts/governance/interfaces'
     import { openPopup } from '@auxiliary/popup'
     import { ProposalStatus } from '@contexts/governance/enums'
-    import { proposalsState } from '@contexts/governance/stores'
+    import { proposalsState, selectedProposal } from '@contexts/governance/stores'
     import { networkStatus } from '@core/network/stores'
 
     let selectedIndices: number[] = []
