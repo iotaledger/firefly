@@ -6,31 +6,35 @@ import { ProposalStatus } from '@core/governance/enums'
 import { IProposal } from '@core/governance/interfaces'
 import { nodeInfo } from '@core/network'
 import { activeProfile } from '@core/profile'
+import { getVotingEvents } from '@core/profile-manager'
 
-export function createProposalsFromEvents(events: Event[]): IProposal[] {
-    const proposals: IProposal[] = events.map(({ data, id }) => {
-        const proposal = {
-            id,
-            title: data.name,
-            status: ProposalStatus.Upcoming,
-            milestones: {
-                [ProposalStatus.Upcoming]: 0, // TODO: fix this
-                [ProposalStatus.Commencing]: data.milestoneIndexCommence,
-                [ProposalStatus.Holding]: data.milestoneIndexStart,
-                [ProposalStatus.Ended]: data.milestoneIndexEnd,
-            },
-            // TODO: figure out a better way to get the node URLs
-            nodeUrls: get(activeProfile)?.clientOptions?.nodes,
-        }
-
-        const status = getLatestStatus(proposal)
-        if (status) {
-            proposal.status = status
-        }
-        return proposal
-    })
-
+export async function createProposals(): Promise<IProposal[]> {
+    const events = await getVotingEvents()
+    const proposals: IProposal[] = events?.map(createProposalFromEvent)
     return proposals
+}
+
+function createProposalFromEvent(event: Event): IProposal {
+    const { data, id } = event
+    const proposal = {
+        id,
+        title: event.data.name,
+        status: ProposalStatus.Upcoming,
+        milestones: {
+            [ProposalStatus.Upcoming]: 0, // TODO: fix this
+            [ProposalStatus.Commencing]: data.milestoneIndexCommence,
+            [ProposalStatus.Holding]: data.milestoneIndexStart,
+            [ProposalStatus.Ended]: data.milestoneIndexEnd,
+        },
+        // TODO: figure out a better way to get the node URLs
+        nodeUrls: get(activeProfile)?.clientOptions?.nodes,
+    }
+
+    const status = getLatestStatus(proposal)
+    if (status) {
+        proposal.status = status
+    }
+    return proposal
 }
 
 function getLatestStatus(proposal: IProposal): ProposalStatus {
