@@ -9,10 +9,14 @@
     import { Icon } from '@auxiliary/icon/enums'
     import { localize } from '@core/i18n'
     import { proposalsState } from '@core/governance/stores'
+    import { isVotingForProposal } from '@core/governance/utils'
 
     export let proposal: IProposal
 
+    let hasVoted = false
+
     $: proposalState = $proposalsState[proposal?.id]
+    $: isVotingForProposal(proposal?.id).then((bool) => (hasVoted = bool))
 
     function handleProposalClick(): void {
         $selectedProposal = proposal
@@ -42,7 +46,7 @@
     </div>
     <div class="flex justify-between items-center">
         <ProposalStatusInfo status={proposalState?.status} milestones={proposal.milestones} />
-        {#if proposal.hasVoted}
+        {#if hasVoted}
             <TooltipIcon icon={Icon.Voted} size="small" position={Position.Left} iconClasses="text-gray-500">
                 <Text smaller overrideColor fontWeight={FontWeight.semibold} classes="text-gray-600">
                     {localize('views.governance.proposals.voted')}
