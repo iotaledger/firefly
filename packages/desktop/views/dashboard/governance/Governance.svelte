@@ -3,7 +3,7 @@
     import { DetailsView, ProposalsView } from './views'
     import { selectedAccount } from '@core/account'
     import { GovernanceRoute, governanceRoute } from '@core/router'
-    import { pollProposalsState } from '@core/governance/actions'
+    import { pollProposalsState } from '@contexts/governance/actions'
 
     onMount(async () => {
         await pollProposalsState()
