@@ -2,8 +2,8 @@
     import { onMount } from 'svelte'
     import { Pane, Proposals, ProposalsDetails, VotingPower } from '@ui'
     import { getVotingEvents } from '@core/profile-manager'
-    import type { IProposal } from '@core/governance/interfaces'
-    import { createProposalsFromEvents } from '@core/governance/utils'
+    import type { IProposal } from '@contexts/governance/interfaces'
+    import { createProposalsFromEvents } from '@contexts/governance/utils'
 
     let proposals: IProposal[]
     let loaded = false

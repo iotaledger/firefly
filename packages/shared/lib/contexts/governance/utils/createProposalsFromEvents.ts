@@ -2,8 +2,8 @@ import { get } from 'svelte/store'
 
 import { Event } from '@iota/wallet'
 
-import { ProposalStatus } from '@core/governance/enums'
-import { IProposal } from '@core/governance/interfaces'
+import { ProposalStatus } from '@contexts/governance/enums'
+import { IProposal } from '@contexts/governance/interfaces'
 import { nodeInfo } from '@core/network'
 import { activeProfile } from '@core/profile'
 

@@ -4,7 +4,7 @@
     import { Icon } from '@auxiliary/icon'
     import { openPopup } from '@auxiliary/popup/actions'
     import { handleError } from '@core/error/handlers'
-    import { isVotingForSelectedProposal } from '@core/governance/utils'
+    import { isVotingForSelectedProposal } from '@contexts/governance/utils'
     import { localize } from '@core/i18n'
 
     export let modal: Modal = undefined

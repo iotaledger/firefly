@@ -1,6 +1,6 @@
 import { closePopup } from '@auxiliary/popup'
 import { resetSelectedAccount } from '@core/account'
-import { clearPollProposalsStateInterval } from '@core/governance'
+import { clearPollProposalsStateInterval } from '@contexts/governance'
 import { isPollingLedgerDeviceStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
 import { clearPollMarketPrices } from '@core/market/actions'
 import { clearPollNetworkInterval } from '@core/network'

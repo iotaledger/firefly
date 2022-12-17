@@ -1,6 +1,9 @@
 import { get } from 'svelte/store'
+
 import type { EventId } from '@iota/wallet'
-import { removeProposalState } from '@core/governance'
+
+import { removeProposalState } from '@contexts/governance'
+
 import { profileManager } from '../stores'
 
 export function deregisterParticipationEvent(eventId: EventId): Promise<void> {

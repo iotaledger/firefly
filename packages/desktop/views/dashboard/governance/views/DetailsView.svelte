@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { selectedProposal } from '@core/governance'
+    import { selectedProposal } from '@contexts/governance'
     import { localize } from '@core/i18n'
     import {
         Button,
@@ -18,10 +18,10 @@
     import { governanceRouter } from '@core/router'
     import { getParticipationOverview, selectedAccount } from '@core/account'
     import { VotingEventPayload, ParticipationEventType } from '@iota/wallet/out/types'
-    import type { IParticipations } from '@core/governance/interfaces'
+    import type { IParticipations } from '@contexts/governance/interfaces'
     import { openPopup } from '@auxiliary/popup'
-    import { ProposalStatus } from '@core/governance/enums'
-    import { proposalsState } from '@core/governance/stores'
+    import { ProposalStatus } from '@contexts/governance/enums'
+    import { proposalsState } from '@contexts/governance/stores'
     import { networkStatus } from '@core/network/stores'
 
     let selectedIndices: number[] = []
