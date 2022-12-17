@@ -1,9 +1,9 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { Pane, Proposals, ProposalsDetails, VotingPower } from '@ui'
-    import type { IProposal } from '@core/governance/interfaces'
-    import { createProposals } from '@core/governance/utils'
-    import { registeredEventIds } from '@core/governance/stores'
+    import type { IProposal } from '@contexts/governance/interfaces'
+    import { createProposals } from '@contexts/governance/utils'
+    import { registeredEventIds } from '@contexts/governance/stores'
 
     let proposals: IProposal[]
     let loaded = false

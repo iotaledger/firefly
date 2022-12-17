@@ -4,8 +4,8 @@
     import { showAppNotification } from '@auxiliary/notification/actions'
     import { closePopup } from '@auxiliary/popup/actions'
     import { handleError } from '@core/error/handlers'
-    import { stopVotingForProposal } from '@core/governance/actions'
-    import { selectedProposal } from '@core/governance/stores'
+    import { stopVotingForProposal } from '@contexts/governance/actions'
+    import { selectedProposal } from '@contexts/governance/stores'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile/actions'
 
