@@ -8,7 +8,7 @@
     let proposals: IProposal[]
     let loaded = false
 
-    $: $registeredEventIds, setProposals()
+    $: $registeredEventIds, void setProposals()
 
     async function setProposals(): Promise<void> {
         proposals = await createProposals()
