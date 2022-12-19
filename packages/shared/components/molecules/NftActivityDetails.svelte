@@ -1,8 +1,10 @@
 <script lang="typescript">
+    import { closePopup } from '@auxiliary/popup'
     import { selectedAccountIndex } from '@core/account/stores'
     import { time } from '@core/app'
     import { localize } from '@core/i18n'
-    import { getNftByIdFromAllAccountNfts } from '@core/nfts'
+    import { getNftByIdFromAllAccountNfts, selectedAccountNfts, selectedNftId } from '@core/nfts'
+    import { CollectiblesRoute, collectiblesRouter, DashboardRoute, dashboardRouter } from '@core/router'
     import { NftActivity } from '@core/wallet'
     import {
         ActivityAsyncStatusPill,
@@ -19,16 +21,36 @@
 
     $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, activity.nftId)
     $: isTimelocked = activity?.asyncData?.timelockDate > $time
+
+    function handleClick(): void {
+        $selectedNftId = activity.nftId
+        $dashboardRouter.goTo(DashboardRoute.Collectibles)
+        $collectiblesRouter.goTo(CollectiblesRoute.Details)
+        closePopup()
+    }
 </script>
 
 <nft-transaction-details class="w-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-3 overflow-hidden">
-        <nft-summary class="flex w-full items-center justify-center w-full space-x-2">
-            <NftImageOrIconBox nftId={activity.nftId} size="small" />
-            <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="whitespace-pre truncate">
-                {nft?.name}
-            </Text>
-        </nft-summary>
+        {#if $selectedAccountNfts.some((nft) => nft.id === activity.nftId)}
+            <button
+                on:click|preventDefault={handleClick}
+                class="flex w-full items-center justify-center w-full space-x-2"
+            >
+                <NftImageOrIconBox nftId={activity.nftId} size="small" />
+                <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="whitespace-pre truncate">
+                    {nft?.name}
+                </Text>
+            </button>
+        {:else}
+            <div class="flex w-full items-center justify-center w-full space-x-2">
+                <NftImageOrIconBox nftId={activity.nftId} size="small" />
+                <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="whitespace-pre truncate">
+                    {nft?.name}
+                </Text>
+            </div>
+        {/if}
+
         <transaction-status class="flex flex-row w-full space-x-2 justify-center">
             {#if activity?.inclusionState && activity?.direction}
                 <TransactionActivityStatusPill
