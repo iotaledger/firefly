@@ -13,6 +13,7 @@
     export let classes: string = ''
     export let error: string = ''
     export let warning: string = ''
+    export let translationSuffix: string = 'long'
 
     const bgColor = 'gray-200'
     const darkBgColor = 'gray-700'
@@ -49,7 +50,7 @@
                 newUrl = rewriteIpfsUri(targetUrl)
                 break
             default:
-                error = localize('error.nft.unsupportedUrl')
+                error = localize('error.nft.unsupportedUrl.' + translationSuffix)
                 return undefined
         }
 
@@ -62,12 +63,12 @@
 
     function handleLoadingError(err): void {
         hasError = true
-        error = err
+        error = localize(err + translationSuffix)
     }
 
     function handleWarning(warn): void {
         hasError = true
-        warning = warn
+        warning = localize(warn + translationSuffix)
     }
 
     function handleOnLoad(): void {

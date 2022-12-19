@@ -1802,10 +1802,34 @@
             "insufficientLength": "Event ID should be 66 characters long"
         },
         "nft": {
-            "unsupportedUrl": "Url not supported.",
-            "notMatchingFileTypes": "Specified media type doesn't match the file type.",
-            "generic": "Cannot display media.",
-            "tooLargeFile": "File cannot load. File size is too big."
+            "unsupportedUrl": {
+                "short": "Url not supported",
+                "long": "Url schema not supported"
+            },
+            "unsupportedFileType": {
+                "short": "Unsupported file type",
+                "long": "the file type is not currently supported"
+            },
+            "notMatchingFileTypes": {
+                "short": "Loading blocked",
+                "long": "NFT file type does not match the expected media type"
+            },
+            "tooLargeFile": {
+                "short": "File is too large",
+                "long": "Loading NFT blocked because the file is too large"
+            },
+            "corsError": {
+                "short": "Loading blocked",
+                "long": "Loading NFT blocked by CORS policy"
+            },
+            "unsafeToLoad": {
+                "short": "Unsafe to load",
+                "long": "An error occurred while checking if the NFT was safe to load"
+            },
+            "loadingError": {
+                "short": "Unable to load",
+                "long": "An error occurred while loading the NFT"
+            }
         }
     },
     "warning": {
