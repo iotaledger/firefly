@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { createEventDispatcher } from 'svelte'
-    import { Text, FontWeight, TooltipIcon } from 'shared/components'
+    import { Text, Icon, FontWeight, TooltipIcon } from 'shared/components'
     import { Position } from 'shared/components/enums'
     import type { Answer } from '@iota/wallet'
     import { Icon as IconEnum } from '@auxiliary/icon'
@@ -19,21 +19,28 @@
 </script>
 
 <proposal-answer
-    class:hidden
-    class="flex justify-between items-center p-3 rounded-md border border-solid {isSelected
-        ? 'border-blue-500'
-        : 'border-gray-200'} "
+    class:hidden={isVotedFor ? false : hidden}
+    class="flex justify-between items-center p-3 rounded-md border border-solid
+        {isSelected ? 'border-blue-500' : 'border-gray-200'}
+        {isVotedFor ? 'bg-blue-100' : ''}"
     on:click={handleClick}
 >
     <div class="flex space-x-3">
         {#if answerIndex !== undefined}
-            <span
-                class="flex items-center justify-center h-5 w-5 text-12 {isSelected
-                    ? 'bg-blue-500 text-white'
-                    : 'text-gray-500'} text-700 border border-solid {isVotedFor ? 'border-red-200' : 'border-gray-200'}"
-            >
-                {answerIndex + 1}
-            </span>
+            {#if isVotedFor}
+                <Icon
+                    icon={IconEnum.CheckmarkFilled}
+                    classes="flex items-center justify-center h-5 w-5 text-blue-500"
+                />
+            {:else}
+                <span
+                    class="flex items-center justify-center h-5 w-5 text-12 {isSelected
+                        ? 'bg-blue-500 text-white'
+                        : 'text-gray-500'} text-700 border border-solid border-gray-200"
+                >
+                    {answerIndex + 1}
+                </span>
+            {/if}
         {/if}
         <Text fontWeight={FontWeight.medium}>{answer.text}</Text>
     </div>

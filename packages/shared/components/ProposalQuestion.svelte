@@ -1,13 +1,17 @@
 <script lang="typescript">
     import { Text, FontWeight, Icon, ProposalAnswer } from 'shared/components'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import type { Question } from '@iota/wallet'
+    import type { Answer, Question } from '@iota/wallet'
 
     export let question: Question
     export let index: number = undefined
     export let selectedAnswers: number[] // TODO, maybe should be a svelte store
+    export let currentVote: Answer = null
     export let isOpened = false
+
     export let onClick: () => unknown = () => {}
+
+    $: voteValue = currentVote?.answers?.find((answer) => answer?.current !== 0)?.value
 
     function handleAnswerClick(answer: number): void {
         if (selectedAnswers[index] === answer) {
@@ -32,7 +36,7 @@
             <Icon icon={IconEnum.ChevronDown} classes="text-gray-500" />
         </div>
     </div>
-    <proposal-answers class:mt-4={isOpened} class="space-y-2">
+    <proposal-answers class:mt-4={isOpened || voteValue} class="space-y-2">
         {#each question.answers as answer, answerIndex}
             <ProposalAnswer
                 {answer}
@@ -40,6 +44,7 @@
                 on:answerClicked={() => handleAnswerClick(answerIndex)}
                 hidden={!isOpened}
                 isSelected={selectedAnswers[index] === answerIndex}
+                isVotedFor={voteValue === answer?.value}
             />
         {/each}
     </proposal-answers>
