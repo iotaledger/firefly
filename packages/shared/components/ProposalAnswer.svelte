@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { createEventDispatcher } from 'svelte'
-    import { Text, Icon, FontWeight, TooltipIcon } from 'shared/components'
+    import { Text, FontWeight, TooltipIcon } from 'shared/components'
     import { Position } from 'shared/components/enums'
     import type { Answer } from '@iota/wallet'
     import { Icon as IconEnum } from '@auxiliary/icon'
@@ -10,6 +10,8 @@
     export let isSelected: boolean = null
     export let isVotedFor: boolean = null
     export let answerIndex: number = undefined
+
+    $: showBorder = isVotedFor || isSelected
 
     const dispatch = createEventDispatcher()
 
@@ -21,17 +23,17 @@
 <proposal-answer
     class:hidden={isVotedFor ? false : hidden}
     class="flex justify-between items-center p-3 rounded-md border border-solid
-        {isSelected ? 'border-blue-500' : 'border-gray-200'}
-        {isVotedFor ? 'bg-blue-100' : ''}"
+        {isVotedFor ? 'bg-blue-100' : ''}
+        {showBorder ? 'border-blue-500' : 'border-gray-200'}
+    "
     on:click={handleClick}
 >
-    <div class="flex space-x-3">
+    <div class="flex space-x-3 items-center">
         {#if answerIndex !== undefined}
             {#if isVotedFor}
-                <Icon
-                    icon={IconEnum.CheckmarkFilled}
-                    classes="flex items-center justify-center h-5 w-5 text-blue-500"
-                />
+                <div class="flex justify-center w-5">
+                    <span class="ring flex items-center justify-center h-1.5 w-1.5" />
+                </div>
             {:else}
                 <span
                     class="flex items-center justify-center h-5 w-5 text-12 {isSelected
@@ -55,3 +57,13 @@
         />
     {/if}
 </proposal-answer>
+
+<style type="text/scss">
+    .ring {
+        @apply bg-blue-500;
+        @apply ring-4;
+        @apply ring-blue-500;
+        @apply ring-opacity-20;
+        @apply rounded-full;
+    }
+</style>
