@@ -12,6 +12,7 @@
     export let onClick: () => unknown = () => {}
 
     $: voteValue = currentVote?.answers?.find((answer) => answer?.current !== 0)?.value
+    $: answers = [...question?.answers, { value: 0, text: 'Abstain', additionalInfo: '' }]
 
     function handleAnswerClick(answer: number): void {
         if (selectedAnswers[index] === answer) {
@@ -37,7 +38,7 @@
         </div>
     </div>
     <proposal-answers class:mt-4={isOpened || voteValue} class="space-y-2">
-        {#each question.answers as answer, answerIndex}
+        {#each answers as answer, answerIndex}
             <ProposalAnswer
                 {answer}
                 {answerIndex}
