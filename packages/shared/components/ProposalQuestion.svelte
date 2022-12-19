@@ -42,9 +42,9 @@
             <ProposalAnswer
                 {answer}
                 {answerIndex}
-                on:answerClicked={() => handleAnswerClick(answerIndex)}
+                on:answerClicked={(event) => handleAnswerClick(event.detail)}
                 hidden={!isOpened}
-                isSelected={selectedAnswers[index] === answerIndex}
+                isSelected={selectedAnswers[index] === answer?.value}
                 isVotedFor={voteValue === answer?.value}
             />
         {/each}
