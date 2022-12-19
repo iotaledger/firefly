@@ -16,7 +16,11 @@
     let hasVoted = false
 
     $: proposalState = $proposalsState[proposal?.id]
-    $: isVotingForProposal(proposal?.id).then((bool) => (hasVoted = bool))
+    $: void setHasVoted()
+
+    async function setHasVoted(): Promise<void> {
+        hasVoted = await isVotingForProposal(proposal?.id)
+    }
 
     function handleProposalClick(): void {
         $selectedProposal = proposal
