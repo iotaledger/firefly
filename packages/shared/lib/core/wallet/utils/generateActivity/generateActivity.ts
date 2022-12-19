@@ -19,7 +19,7 @@ import { generateTransactionActivity } from './generateTransactionActivity'
 import { getActivityTypeFromOutput } from './helper'
 
 export function generateActivities(processedTransaction: IProcessedTransaction, account: IAccountState): Activity[] {
-    if (processedTransaction.wrappedInputs?.length > 1) {
+    if (processedTransaction.wrappedInputs?.length > 0) {
         return generateActivitiesFromProcessedTransactionsWithInputs(processedTransaction, account)
     } else {
         return generateActivitiesFromProcessedTransactionsWithoutInputs(processedTransaction, account)
