@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { localize } from '@core/i18n'
     import { AliasActivity, getActivityTileTitle } from '@core/wallet'
     import { truncateString } from '@core/utils'
     import { Text, Icon, FontWeight } from 'shared/components'
@@ -26,7 +27,7 @@
             lineHeight="140"
             classes="overflow-hidden overflow-ellipsis multiwrap-line2"
         >
-            {title}
+            {localize(title)}
         </Text>
     </div>
     <div class="flex flex-row">

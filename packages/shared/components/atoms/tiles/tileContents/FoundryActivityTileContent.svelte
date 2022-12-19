@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { localize } from '@core/i18n'
     import {
         FoundryActivity,
         getActivityTileTitle,
@@ -26,7 +27,7 @@
             lineHeight="140"
             classes="overflow-hidden overflow-ellipsis multiwrap-line2"
         >
-            {title}
+            {localize(title)}
         </Text>
         <Text fontWeight={FontWeight.semibold} lineHeight="140" color="blue-700" classes="whitespace-nowrap">
             {amount}

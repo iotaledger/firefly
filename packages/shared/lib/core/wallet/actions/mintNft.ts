@@ -9,7 +9,7 @@ import { INftOutput } from '@iota/types'
 import { NftOptions } from '@iota/wallet'
 import { get } from 'svelte/store'
 import { DEFAULT_TRANSACTION_OPTIONS } from '../constants'
-import { ActivityAction, ActivityType } from '../enums'
+import { ActivityAction } from '../enums'
 import { addActivityToAccountActivitiesInAllAccountActivities, resetMintNftDetails } from '../stores'
 import { NftActivity } from '../types'
 import { getNftOutputFromTransaction, preprocessTransaction } from '../utils'
@@ -38,7 +38,6 @@ export async function mintNft(metadata: IIrc27Metadata): Promise<void> {
         // Generate Activity
         const processedTransaction = await preprocessTransaction(mintNftTransaction, account)
         const activity: NftActivity = generateNftActivity(account, {
-            type: ActivityType.Nft,
             action: ActivityAction.Mint,
             processedTransaction,
             wrappedOutput: getNftOutputFromTransaction(processedTransaction.outputs),

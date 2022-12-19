@@ -25,13 +25,13 @@ import {
 
 export function generateTransactionActivity(
     account: IAccountState,
-    { type, action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
+    { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
 ): TransactionActivity {
     const { transactionId, direction, claimingData, time, inclusionState, utxoInputs } = processedTransaction
 
     const isHidden = false
     const isAssetHidden = false
-    const containsValue = activityOutputContainsValue(type, wrappedOutput)
+    const containsValue = activityOutputContainsValue(wrappedOutput)
 
     const inputs = utxoInputs
 

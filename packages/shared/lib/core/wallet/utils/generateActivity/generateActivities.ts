@@ -3,12 +3,14 @@ import {
     ActivityAction,
     ActivityType,
     EMPTY_HEX_ID,
-    getActivityType,
     getAliasOutputFromTransaction,
     getFoundryOutputFromTransaction,
     getMainOutputFromTransaction,
     getNftOutputFromTransaction,
     IProcessedTransaction,
+    OUTPUT_TYPE_ALIAS,
+    OUTPUT_TYPE_FOUNDRY,
+    OUTPUT_TYPE_NFT,
 } from '@core/wallet'
 import { Activity } from '@core/wallet/types'
 import type { IAliasOutput, INftOutput } from '@iota/types'
@@ -30,55 +32,63 @@ function generateActivitiesFromProcessedTransactionsWithInputs(
     processedTransaction: IProcessedTransaction,
     account: IAccountState
 ): Activity[] {
-    const type = getActivityType(processedTransaction.outputs)
-    switch (type) {
-        case ActivityType.Basic:
-            return [
+    const outputs = processedTransaction.outputs
+    const activities = []
+    const containsFoundryActivity = outputs.some((output) => output.output.type === OUTPUT_TYPE_FOUNDRY)
+    if (containsFoundryActivity) {
+        activities.push(
+            generateFoundryActivity(account, {
+                action: ActivityAction.Send,
+                processedTransaction,
+                wrappedOutput: getFoundryOutputFromTransaction(processedTransaction.outputs),
+            })
+        )
+    }
+    const containsNftActivity = outputs.some((output) => output.output.type === OUTPUT_TYPE_NFT)
+    if (containsNftActivity) {
+        const wrappedOutput = getNftOutputFromTransaction(processedTransaction.outputs)
+        const output = wrappedOutput.output as INftOutput
+        activities.push(
+            generateNftActivity(account, {
+                action: output.nftId === EMPTY_HEX_ID ? ActivityAction.Mint : ActivityAction.Send,
+                processedTransaction,
+                wrappedOutput,
+            })
+        )
+    }
+    const containsAliasActivity =
+        outputs.some((output) => output.output.type === OUTPUT_TYPE_ALIAS) && !containsFoundryActivity
+    if (containsAliasActivity) {
+        const wrappedOutput = getAliasOutputFromTransaction(processedTransaction.outputs)
+        const output = wrappedOutput.output as IAliasOutput
+        activities.push(
+            generateAliasActivity(account, {
+                action: output.aliasId === EMPTY_HEX_ID ? ActivityAction.Mint : ActivityAction.Send,
+                processedTransaction,
+                wrappedOutput: wrappedOutput,
+            })
+        )
+    }
+
+    if (!containsFoundryActivity && !containsNftActivity && !containsAliasActivity) {
+        const basicOutput = getMainOutputFromTransaction(
+            processedTransaction.outputs,
+            account.depositAddress,
+            processedTransaction.direction
+        )
+        const containsBasicOutput = basicOutput
+        if (containsBasicOutput) {
+            activities.push(
                 generateTransactionActivity(account, {
-                    type,
                     action: ActivityAction.Send,
                     processedTransaction,
-                    wrappedOutput: getMainOutputFromTransaction(
-                        processedTransaction.outputs,
-                        account.depositAddress,
-                        processedTransaction.direction
-                    ),
-                }),
-            ]
-        case ActivityType.Foundry:
-            return [
-                generateFoundryActivity(account, {
-                    type,
-                    action: ActivityAction.Send,
-                    processedTransaction,
-                    wrappedOutput: getFoundryOutputFromTransaction(processedTransaction.outputs),
-                }),
-            ]
-        case ActivityType.Alias: {
-            const wrappedOutput = getAliasOutputFromTransaction(processedTransaction.outputs)
-            const output = wrappedOutput.output as IAliasOutput
-            return [
-                generateAliasActivity(account, {
-                    type,
-                    action: output.aliasId === EMPTY_HEX_ID ? ActivityAction.Mint : ActivityAction.Send,
-                    processedTransaction,
-                    wrappedOutput: wrappedOutput,
-                }),
-            ]
-        }
-        case ActivityType.Nft: {
-            const wrappedOutput = getNftOutputFromTransaction(processedTransaction.outputs)
-            const output = wrappedOutput.output as INftOutput
-            return [
-                generateNftActivity(account, {
-                    type,
-                    action: output.nftId === EMPTY_HEX_ID ? ActivityAction.Mint : ActivityAction.Send,
-                    processedTransaction,
-                    wrappedOutput,
-                }),
-            ]
+                    wrappedOutput: basicOutput,
+                })
+            )
         }
     }
+
+    return activities
 }
 
 /*
