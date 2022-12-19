@@ -23,13 +23,13 @@
     import { proposalsState, selectedProposal } from '@contexts/governance/stores'
     import { networkStatus } from '@core/network/stores'
 
-    let selectedIndices: number[] = []
+    let selectedAnswers: number[] = []
     let votingPayload: VotingEventPayload
     let totalVotes = 0
 
     $: void setVotingEventPayload($selectedProposal?.id)
     $: void setTotalVotes()
-    $: proposalStatus = $proposalsState[$selectedProposal?.id]?.status
+    $: proposalState = $proposalsState[$selectedProposal?.id]
 
     $: votesCounter = {
         total: totalVotes,
@@ -37,14 +37,14 @@
     }
     $: questions = votingPayload?.questions
 
-    $: if (questions?.length > 0 && selectedIndices?.length === 0) {
-        selectedIndices = Array<number>(questions?.length)
+    $: if (questions?.length > 0 && selectedAnswers?.length === 0) {
+        selectedAnswers = Array<number>(questions?.length)
     }
     $: isVotingDisabled =
-        proposalStatus === ProposalStatus.Upcoming ||
-        proposalStatus === ProposalStatus.Ended ||
-        selectedIndices?.length === 0 ||
-        selectedIndices?.includes(undefined)
+        proposalState?.status === ProposalStatus.Upcoming ||
+        proposalState?.status === ProposalStatus.Ended ||
+        selectedAnswers?.length === 0 ||
+        selectedAnswers?.includes(undefined)
 
     async function setVotingEventPayload(eventId: string): Promise<void> {
         const event = await getVotingEvent(eventId)
@@ -86,7 +86,7 @@
     function handleVoteClick(): void {
         openPopup({
             type: 'voteForProposal',
-            props: { selectedAnswers: selectedIndices },
+            props: { selectedAnswers },
         })
     }
 </script>
@@ -135,7 +135,8 @@
                         {question}
                         isOpened={openedQuestionIndex === index}
                         {index}
-                        bind:selectedIndices
+                        bind:selectedAnswers
+                        currentVote={proposalState?.questions[index]}
                         onClick={() => handleQuestionClick(index)}
                     />
                 {/each}

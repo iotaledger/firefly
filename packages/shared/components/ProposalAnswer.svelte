@@ -8,12 +8,13 @@
     export let answer: Answer
     export let hidden: boolean = null
     export let isSelected: boolean = null
+    export let isVotedFor: boolean = null
     export let answerIndex: number = undefined
 
     const dispatch = createEventDispatcher()
 
     function handleClick(): void {
-        dispatch('answerClicked', answerIndex)
+        dispatch('answerClicked', answer?.value)
     }
 </script>
 
@@ -29,7 +30,7 @@
             <span
                 class="flex items-center justify-center h-5 w-5 text-12 {isSelected
                     ? 'bg-blue-500 text-white'
-                    : 'text-gray-500'} text-700 border border-solid border-gray-200"
+                    : 'text-gray-500'} text-700 border border-solid {isVotedFor ? 'border-red-200' : 'border-gray-200'}"
             >
                 {answerIndex + 1}
             </span>

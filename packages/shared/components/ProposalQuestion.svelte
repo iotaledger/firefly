@@ -5,16 +5,15 @@
 
     export let question: Question
     export let index: number = undefined
-    export let selectedIndices: number[] // TODO, maybe should be a svelte store
+    export let selectedAnswers: number[] // TODO, maybe should be a svelte store
     export let isOpened = false
-
     export let onClick: () => unknown = () => {}
 
-    function handleAnswerClick(answerIndex: number): void {
-        if (selectedIndices[index] === answerIndex) {
-            selectedIndices[index] = undefined
+    function handleAnswerClick(answer: number): void {
+        if (selectedAnswers[index] === answer) {
+            selectedAnswers[index] = undefined
         } else {
-            selectedIndices[index] = answerIndex
+            selectedAnswers[index] = answer
         }
     }
 </script>
@@ -40,7 +39,7 @@
                 {answerIndex}
                 on:answerClicked={() => handleAnswerClick(answerIndex)}
                 hidden={!isOpened}
-                isSelected={selectedIndices[index] === answerIndex}
+                isSelected={selectedAnswers[index] === answerIndex}
             />
         {/each}
     </proposal-answers>
