@@ -32,7 +32,7 @@
         {#if answerIndex !== undefined}
             {#if isVotedFor}
                 <div class="flex justify-center w-5">
-                    <span class="ring flex items-center justify-center h-1.5 w-1.5" />
+                    <span class="ring flex items-center justify-center h-1.5 w-1.5 bg-blue-500 rounded-full" />
                 </div>
             {:else}
                 <span
@@ -60,10 +60,8 @@
 
 <style type="text/scss">
     .ring {
-        @apply bg-blue-500;
         @apply ring-4;
         @apply ring-blue-500;
         @apply ring-opacity-20;
-        @apply rounded-full;
     }
 </style>
