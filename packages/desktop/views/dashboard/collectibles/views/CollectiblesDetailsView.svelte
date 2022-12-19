@@ -132,9 +132,8 @@
                 controls
                 loop
                 muted
-                big
             />
-            <div class="toast-container">
+            <div class="absolute right-6 bottom-6 w-auto">
                 {#if error}
                     <Alert type="error" message={error} />
                 {:else if warning}
@@ -220,12 +219,3 @@
         </div>
     </Pane>
 </div>
-
-<style lang="scss">
-    .toast-container {
-        position: absolute;
-        right: 24px;
-        bottom: 24px;
-        width: 400px;
-    }
-</style>

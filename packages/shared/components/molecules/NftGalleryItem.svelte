@@ -47,7 +47,7 @@
                 muted
             />
             {#if error || warning}
-                <div class="toast-container">
+                <div class="absolute right-3 top-3">
                     <TooltipIcon
                         height={24}
                         width={24}
@@ -66,11 +66,3 @@
         </div>
     </div>
 </button>
-
-<style lang="scss">
-    .toast-container {
-        position: absolute;
-        right: 12px;
-        top: 12px;
-    }
-</style>
