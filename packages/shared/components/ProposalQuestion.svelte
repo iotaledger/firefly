@@ -1,21 +1,18 @@
 <script lang="typescript">
     import { Text, FontWeight, Icon, ProposalAnswer } from 'shared/components'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import type { Answer, Question } from '@iota/wallet'
+    import type { Question } from '@iota/wallet'
 
     export let question: Question
     export let index: number = undefined
     export let selectedAnswerValues: number[] // TODO, maybe should be a svelte store
-    export let currentVote: Answer = null
     export let isOpened = false
 
     export let onClick: () => unknown = () => {}
 
-    $: voteValue = currentVote?.answers?.find((answer) => answer?.current !== 0)?.value
+    let voteValue: number // TODO: get the current answer being voted by the account
     $: answers = [...question?.answers, { value: 0, text: 'Abstain', additionalInfo: '' }]
-
-    // voteValue 0 corresponds to abstained vote
-    $: showMargin = isOpened || ((voteValue || voteValue === 0) && !isOpened)
+    $: showMargin = isOpened || ((voteValue || voteValue === 0) && !isOpened) // voteValue 0 corresponds to abstained vote
 
     function handleAnswerClick(answer: number): void {
         if (selectedAnswerValues[index] === answer) {

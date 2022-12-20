@@ -139,7 +139,6 @@
                         isOpened={openedQuestionIndex === index}
                         {index}
                         bind:selectedAnswerValues
-                        currentVote={proposalState?.questions[index]}
                         onClick={() => handleQuestionClick(index)}
                     />
                 {/each}
