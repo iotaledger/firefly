@@ -20,6 +20,7 @@
     export let activity: NftActivity
 
     $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, activity.nftId)
+    $: nftIsOwned = $selectedAccountNfts.some((nft) => nft.id === activity.nftId)
     $: isTimelocked = activity?.asyncData?.timelockDate > $time
 
     function handleClick(): void {
@@ -32,25 +33,17 @@
 
 <nft-transaction-details class="w-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-3 overflow-hidden">
-        {#if $selectedAccountNfts.some((nft) => nft.id === activity.nftId)}
-            <button
-                on:click|preventDefault={handleClick}
-                class="flex w-full items-center justify-center w-full space-x-2"
-            >
-                <NftImageOrIconBox nftId={activity.nftId} size="small" />
-                <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="whitespace-pre truncate">
-                    {nft?.name}
-                </Text>
-            </button>
-        {:else}
-            <div class="flex w-full items-center justify-center w-full space-x-2">
-                <NftImageOrIconBox nftId={activity.nftId} size="small" />
-                <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="whitespace-pre truncate">
-                    {nft?.name}
-                </Text>
-            </div>
-        {/if}
-
+        <!-- kraftjs: rerouting to detailsView sends to galleryView in some wallets -->
+        <button
+            on:click|preventDefault={handleClick}
+            disabled={!nftIsOwned}
+            class="flex w-max items-center justify-center space-x-2 cursor-{nftIsOwned ? 'pointer' : 'default'}"
+        >
+            <NftImageOrIconBox nftId={activity.nftId} size="small" />
+            <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="whitespace-pre truncate">
+                {nft?.name}
+            </Text>
+        </button>
         <transaction-status class="flex flex-row w-full space-x-2 justify-center">
             {#if activity?.inclusionState && activity?.direction}
                 <TransactionActivityStatusPill
