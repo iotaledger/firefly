@@ -7,7 +7,7 @@
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
     import { BASE_TOKEN } from '@core/network'
     import { showAppNotification } from '@auxiliary/notification'
-    import { selectedProposal } from '@core/governance'
+    import { selectedProposal } from '@contexts/governance/stores'
 
     export let selectedAnswers: number[]
 

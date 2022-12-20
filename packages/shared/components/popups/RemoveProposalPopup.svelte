@@ -2,7 +2,7 @@
     import { Button, Text, TextType, TextHint } from 'shared/components'
     import { ButtonVariant } from 'shared/components/enums'
     import { handleError } from '@core/error/handlers/handleError'
-    import { selectedProposal } from '@core/governance'
+    import { selectedProposal } from '@contexts/governance'
     import { localize } from '@core/i18n'
     import { deregisterParticipationEvent } from '@core/profile-manager/api'
     import { governanceRouter } from '@core/router'

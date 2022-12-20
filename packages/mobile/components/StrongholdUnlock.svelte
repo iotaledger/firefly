@@ -34,7 +34,11 @@
 <div class="mb-5">
     <Text type="p" secondary>{localize('popups.password.subtitle')}</Text>
 </div>
-<form id="password-popup-form" class="flex justify-center w-full flex-row flex-wrap" on:submit={handleSubmit}>
+<form
+    id="password-popup-form"
+    class="flex justify-center w-full flex-row flex-wrap"
+    on:submit|preventDefault={handleSubmit}
+>
     <PasswordInput
         {error}
         classes="w-full mb-5"

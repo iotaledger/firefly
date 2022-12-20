@@ -43,7 +43,7 @@
         <Text type={TextType.h5} classes="mb-3"
             >{localize('views.onboarding.profileRecovery.importMnemonicPhrase.enter')}</Text
         >
-        <form on:submit={onContinueClick} id="text-import-form">
+        <form on:submit|preventDefault={onContinueClick} id="text-import-form">
             <ImportTextfield type={$onboardingProfile?.recoveryType} bind:value={input} />
         </form>
     </div>

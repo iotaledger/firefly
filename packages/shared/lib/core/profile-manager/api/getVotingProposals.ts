@@ -4,5 +4,5 @@ import { profileManager } from '@core/profile-manager'
 
 export function getVotingEvents(): Promise<Event[]> {
     const manager = get(profileManager)
-    return manager.getParticipationEvents()
+    return manager?.getParticipationEvents()
 }

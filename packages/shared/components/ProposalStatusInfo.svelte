@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { ProposalStatusTimelineTooltip, ProposalStatusPill } from 'shared/components'
     import { Position } from 'shared/components/enums'
-    import { ProposalStatus } from '@core/governance/enums'
+    import { ProposalStatus } from '@contexts/governance/enums'
 
     export let milestones: Record<ProposalStatus, number>
     export let status: ProposalStatus

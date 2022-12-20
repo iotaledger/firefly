@@ -176,26 +176,13 @@ if (app.isPackaged) {
 }
 
 /**
- * Check URL against blacklist
- */
-function isUrlAllowed(targetUrl) {
-    const externalBlocklist = ['localhost']
-    const url = new URL(targetUrl)
-    const domain = url.hostname.replace('www.', '').replace('mailto:', '')
-
-    return !externalBlocklist.includes(domain) && !externalBlocklist.includes(domain + url.pathname)
-}
-
-/**
  * Handles url navigation events
  */
 const handleNavigation = (e, url) => {
     e.preventDefault()
 
     try {
-        if (isUrlAllowed(url)) {
-            shell.openExternal(url)
-        }
+        shell.openExternal(url)
     } catch (err) {
         console.error(err)
     }
@@ -270,7 +257,9 @@ function createWindow() {
     })
 
     /**
-     * Only allow external navigation to allowed domains
+     * `will-navigate` is emitted whenever window.location is updated.
+     *  This happens e.g. when clicking on a link (<a href="www.iota.org").
+     *  The handler only allows navigation to an external browser.
      */
     windows.main.webContents.on('will-navigate', handleNavigation)
 
@@ -302,7 +291,7 @@ function createWindow() {
      * Handle permissions requests
      */
     session.defaultSession.setPermissionRequestHandler((_webContents, permission, cb, details) => {
-        if (permission === 'openExternal' && details && details.externalURL && isUrlAllowed(details.externalURL)) {
+        if (permission === 'openExternal' && details && details.externalURL) {
             return cb(true)
         }
 
