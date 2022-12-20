@@ -3,16 +3,30 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
     import type { Question } from '@iota/wallet'
 
-    export let question: Question
+    export let currentVote: Question = undefined
     export let index: number = undefined
-    export let selectedAnswerValues: number[] // TODO, maybe should be a svelte store
     export let isOpened = false
-
+    export let question: Question
+    export let selectedAnswerValues: number[] // TODO, maybe should be a svelte store
     export let onClick: () => unknown = () => {}
 
+    let percentages: string[]
     let voteValue: number // TODO: get the current answer being voted by the account
+
     $: answers = [...question?.answers, { value: 0, text: 'Abstain', additionalInfo: '' }]
     $: showMargin = isOpened || ((voteValue || voteValue === 0) && !isOpened) // voteValue 0 corresponds to abstained vote
+    $: currentVote, setPercentagesFromAccumulated()
+
+    function setPercentagesFromAccumulated(): void {
+        const totalAccumulated = currentVote?.answers?.reduce((acc, answer) => acc + answer.accumulated, 0)
+        percentages = answers?.map((currentAnswer) => {
+            const answerAccumulated = currentVote?.answers?.find(
+                (answer) => answer.value === currentAnswer.value
+            )?.accumulated
+            const divisionResult = answerAccumulated / totalAccumulated
+            return Number.isNaN(divisionResult) ? '0%' : `${Math.round(divisionResult * 100)}%`
+        })
+    }
 
     function handleAnswerClick(answer: number): void {
         if (selectedAnswerValues[index] === answer) {
@@ -46,6 +60,8 @@
                 hidden={!isOpened}
                 isSelected={selectedAnswerValues[index] === answer?.value}
                 isVotedFor={voteValue === answer?.value}
+                votes={currentVote}
+                percentage={percentages[answerIndex]}
             />
         {/each}
     </proposal-answers>
