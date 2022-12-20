@@ -9,13 +9,14 @@
     import {
         ActivityAsyncStatusPill,
         FontWeight,
+        NftImageOrIconBox,
         Pill,
         SubjectBox,
         Text,
         TextType,
         TransactionActivityStatusPill,
     } from 'shared/components'
-    import NftImageOrIconBox from './NftImageOrIconBox.svelte'
+    import { tick } from 'svelte'
 
     export let activity: NftActivity
 
@@ -23,17 +24,17 @@
     $: nftIsOwned = $selectedAccountNfts.some((nft) => nft.id === activity.nftId)
     $: isTimelocked = activity?.asyncData?.timelockDate > $time
 
-    function handleClick(): void {
+    async function handleClick(): Promise<void> {
+        closePopup()
         $selectedNftId = activity.nftId
         $dashboardRouter.goTo(DashboardRoute.Collectibles)
+        await tick()
         $collectiblesRouter.goTo(CollectiblesRoute.Details)
-        closePopup()
     }
 </script>
 
 <nft-transaction-details class="w-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-3 overflow-hidden">
-        <!-- kraftjs: rerouting to detailsView sends to galleryView in some wallets -->
         <button
             on:click|preventDefault={handleClick}
             disabled={!nftIsOwned}
