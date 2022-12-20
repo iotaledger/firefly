@@ -3,10 +3,7 @@ import {
     ActivityAction,
     ActivityType,
     EMPTY_HEX_ID,
-    getAliasOutputFromTransaction,
-    getFoundryOutputFromTransaction,
-    getMainOutputFromTransaction,
-    getNftOutputFromTransaction,
+    getNonRemainderBasicOutputsFromTransaction,
     IProcessedTransaction,
     OUTPUT_TYPE_ALIAS,
     OUTPUT_TYPE_FOUNDRY,
@@ -34,50 +31,59 @@ function generateActivitiesFromProcessedTransactionsWithInputs(
 ): Activity[] {
     const outputs = processedTransaction.outputs
     const activities = []
+
     const containsFoundryActivity = outputs.some((output) => output.output.type === OUTPUT_TYPE_FOUNDRY)
     if (containsFoundryActivity) {
-        activities.push(
-            generateFoundryActivity(account, {
-                action: ActivityAction.Send,
-                processedTransaction,
-                wrappedOutput: getFoundryOutputFromTransaction(processedTransaction.outputs),
-            })
-        )
+        const foundryOutputs = outputs.filter((output) => output.output.type === OUTPUT_TYPE_FOUNDRY)
+        for (const foundryOutput of foundryOutputs) {
+            activities.push(
+                generateFoundryActivity(account, {
+                    action: ActivityAction.Mint,
+                    processedTransaction,
+                    wrappedOutput: foundryOutput,
+                })
+            )
+        }
     }
+
     const containsNftActivity = outputs.some((output) => output.output.type === OUTPUT_TYPE_NFT)
     if (containsNftActivity) {
-        const wrappedOutput = getNftOutputFromTransaction(processedTransaction.outputs)
-        const output = wrappedOutput.output as INftOutput
-        activities.push(
-            generateNftActivity(account, {
-                action: output.nftId === EMPTY_HEX_ID ? ActivityAction.Mint : ActivityAction.Send,
-                processedTransaction,
-                wrappedOutput,
-            })
-        )
+        const nftOutputs = outputs.filter((output) => output.output.type === OUTPUT_TYPE_NFT)
+        for (const nftOutput of nftOutputs) {
+            const output = nftOutput.output as INftOutput
+            activities.push(
+                generateNftActivity(account, {
+                    action: output.nftId === EMPTY_HEX_ID ? ActivityAction.Mint : ActivityAction.Send,
+                    processedTransaction,
+                    wrappedOutput: nftOutput,
+                })
+            )
+        }
     }
+
     const containsAliasActivity =
         outputs.some((output) => output.output.type === OUTPUT_TYPE_ALIAS) && !containsFoundryActivity
     if (containsAliasActivity) {
-        const wrappedOutput = getAliasOutputFromTransaction(processedTransaction.outputs)
-        const output = wrappedOutput.output as IAliasOutput
-        activities.push(
-            generateAliasActivity(account, {
-                action: output.aliasId === EMPTY_HEX_ID ? ActivityAction.Mint : ActivityAction.Send,
-                processedTransaction,
-                wrappedOutput: wrappedOutput,
-            })
-        )
+        const aliasOutputs = outputs.filter((output) => output.output.type === OUTPUT_TYPE_ALIAS)
+        for (const aliasOutput of aliasOutputs) {
+            const output = aliasOutput.output as IAliasOutput
+            activities.push(
+                generateAliasActivity(account, {
+                    action: output.aliasId === EMPTY_HEX_ID ? ActivityAction.Mint : ActivityAction.Send,
+                    processedTransaction,
+                    wrappedOutput: aliasOutput,
+                })
+            )
+        }
     }
 
     if (!containsFoundryActivity && !containsNftActivity && !containsAliasActivity) {
-        const basicOutput = getMainOutputFromTransaction(
+        const basicOutputs = getNonRemainderBasicOutputsFromTransaction(
             processedTransaction.outputs,
             account.depositAddress,
             processedTransaction.direction
         )
-        const containsBasicOutput = basicOutput
-        if (containsBasicOutput) {
+        for (const basicOutput of basicOutputs) {
             activities.push(
                 generateTransactionActivity(account, {
                     action: ActivityAction.Send,
