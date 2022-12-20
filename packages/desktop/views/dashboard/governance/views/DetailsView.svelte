@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
     import { localize } from '@core/i18n'
     import {
         Button,
@@ -23,28 +24,25 @@
     import { proposalsState, selectedProposal } from '@contexts/governance/stores'
     import { networkStatus } from '@core/network/stores'
 
-    let selectedAnswers: number[] = []
+    let selectedAnswerValues: number[] = []
     let votingPayload: VotingEventPayload
     let totalVotes = 0
 
-    $: void setVotingEventPayload($selectedProposal?.id)
-    $: void setTotalVotes()
     $: proposalState = $proposalsState[$selectedProposal?.id]
-
     $: votesCounter = {
         total: totalVotes,
         power: $selectedAccount?.votingPower,
     }
     $: questions = votingPayload?.questions
 
-    $: if (questions?.length > 0 && selectedAnswers?.length === 0) {
-        selectedAnswers = Array<number>(questions?.length)
+    $: if (questions?.length > 0 && selectedAnswerValues?.length === 0) {
+        selectedAnswerValues = Array<number>(questions?.length)
     }
     $: isVotingDisabled =
         proposalState?.status === ProposalStatus.Upcoming ||
         proposalState?.status === ProposalStatus.Ended ||
-        selectedAnswers?.length === 0 ||
-        selectedAnswers?.includes(undefined)
+        selectedAnswerValues?.length === 0 ||
+        selectedAnswerValues?.includes(undefined)
 
     async function setVotingEventPayload(eventId: string): Promise<void> {
         const event = await getVotingEvent(eventId)
@@ -86,9 +84,14 @@
     function handleVoteClick(): void {
         openPopup({
             type: 'voteForProposal',
-            props: { selectedAnswers },
+            props: { selectedAnswerValues },
         })
     }
+
+    onMount(() => {
+        void setVotingEventPayload($selectedProposal?.id)
+        void setTotalVotes()
+    })
 </script>
 
 <div class="w-full h-full flex flex-nowrap p-8 relative flex-1 space-x-4 bg-gray-50 dark:bg-gray-900">
@@ -135,7 +138,7 @@
                         {question}
                         isOpened={openedQuestionIndex === index}
                         {index}
-                        bind:selectedAnswers
+                        bind:selectedAnswerValues
                         currentVote={proposalState?.questions[index]}
                         onClick={() => handleQuestionClick(index)}
                     />

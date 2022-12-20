@@ -10,13 +10,13 @@
     import { localize } from '@core/i18n'
     import { proposalsState } from '@contexts/governance/stores'
     import { isVotingForProposal } from '@contexts/governance/utils'
+    import { onMount } from 'svelte'
 
     export let proposal: IProposal
 
     let hasVoted = false
 
     $: proposalState = $proposalsState[proposal?.id]
-    $: void setHasVoted()
 
     async function setHasVoted(): Promise<void> {
         hasVoted = await isVotingForProposal(proposal?.id)
@@ -26,6 +26,8 @@
         $selectedProposal = proposal
         $governanceRouter.goTo(GovernanceRoute.Details)
     }
+
+    onMount(() => void setHasVoted())
 </script>
 
 <proposal-card

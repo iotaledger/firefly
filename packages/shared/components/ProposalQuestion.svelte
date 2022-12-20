@@ -5,7 +5,7 @@
 
     export let question: Question
     export let index: number = undefined
-    export let selectedAnswers: number[] // TODO, maybe should be a svelte store
+    export let selectedAnswerValues: number[] // TODO, maybe should be a svelte store
     export let currentVote: Answer = null
     export let isOpened = false
 
@@ -13,12 +13,13 @@
 
     $: voteValue = currentVote?.answers?.find((answer) => answer?.current !== 0)?.value
     $: answers = [...question?.answers, { value: 0, text: 'Abstain', additionalInfo: '' }]
+    $: showMargin = isOpened || (voteValue && !isOpened)
 
     function handleAnswerClick(answer: number): void {
-        if (selectedAnswers[index] === answer) {
-            selectedAnswers[index] = undefined
+        if (selectedAnswerValues[index] === answer) {
+            selectedAnswerValues[index] = undefined
         } else {
-            selectedAnswers[index] = answer
+            selectedAnswerValues[index] = answer
         }
     }
 </script>
@@ -37,14 +38,14 @@
             <Icon icon={IconEnum.ChevronDown} classes="text-gray-500" />
         </div>
     </div>
-    <proposal-answers class:mt-4={isOpened || voteValue} class="space-y-2">
+    <proposal-answers class:mt-4={showMargin} class={isOpened ? 'space-y-2' : ''}>
         {#each answers as answer, answerIndex}
             <ProposalAnswer
                 {answer}
                 {answerIndex}
                 on:answerClicked={(event) => handleAnswerClick(event.detail)}
                 hidden={!isOpened}
-                isSelected={selectedAnswers[index] === answer?.value}
+                isSelected={selectedAnswerValues[index] === answer?.value}
                 isVotedFor={voteValue === answer?.value}
             />
         {/each}
