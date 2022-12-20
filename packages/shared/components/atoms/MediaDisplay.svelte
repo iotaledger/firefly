@@ -1,5 +1,4 @@
 <script lang="typescript">
-    import { localize } from '@core/i18n'
     import { MimeType, ParentMimeType } from '@core/nfts'
 
     export let Media: HTMLImageElement | HTMLVideoElement = undefined
@@ -49,7 +48,7 @@
             case ParentMimeType.Video:
                 return 'video'
             default:
-                onWarning(localize('error.nft.unsupportedFileType.'))
+                onWarning('error.nft.unsupportedFileType.')
                 return undefined
         }
     }
