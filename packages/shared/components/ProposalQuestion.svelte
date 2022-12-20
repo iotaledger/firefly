@@ -13,7 +13,9 @@
 
     $: voteValue = currentVote?.answers?.find((answer) => answer?.current !== 0)?.value
     $: answers = [...question?.answers, { value: 0, text: 'Abstain', additionalInfo: '' }]
-    $: showMargin = isOpened || (voteValue && !isOpened)
+
+    // voteValue 0 corresponds to abstained vote
+    $: showMargin = isOpened || ((voteValue || voteValue === 0) && !isOpened)
 
     function handleAnswerClick(answer: number): void {
         if (selectedAnswerValues[index] === answer) {
