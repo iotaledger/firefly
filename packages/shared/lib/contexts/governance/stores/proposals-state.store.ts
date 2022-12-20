@@ -26,7 +26,7 @@ export function removeProposalState(eventId: string): void {
 
 export async function updateProposalsState(): Promise<void> {
     const _proposalsState = get(proposalsState)
-    for (const eventId in _proposalsState) {
+    for (const eventId of Object.keys(_proposalsState)) {
         const proposalStatus = await getVotingProposalState(eventId)
         _proposalsState[eventId] = proposalStatus
     }
