@@ -309,6 +309,10 @@
                 "title": "Automatic lock",
                 "description": "Inactivity time before your wallets lock and you are logged out"
             },
+            "maxMediaSize": {
+                "title": "Maximum media size",
+                "description": "Maximum media size allowed to be downloaded for NFTs"
+            },
             "changePassword": {
                 "title": "Change password",
                 "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
