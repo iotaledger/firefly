@@ -1,6 +1,11 @@
 import { SETTINGS_ICON_SVG } from '@lib/auxiliary/icon'
 import features from '../../../../features/features'
-import { ChangePasswordView, LanguageView, ThemeView } from '../../../../views/dashboard/drawers/profile/views/settings'
+import {
+    ChangePasswordView,
+    CurrencyView,
+    LanguageView,
+    ThemeView,
+} from '../../../../views/dashboard/drawers/profile/views/settings'
 import { SettingsRoute } from '../../../routers'
 import { SettingsCategory } from '../enums'
 
@@ -20,6 +25,13 @@ export const SETTINGS_ROUTE_META = {
         enabled: general?.[SettingsRoute.Language]?.enabled,
         icon: SETTINGS_ICON_SVG[SettingsRoute.Language],
         view: LanguageView,
+    },
+    [SettingsRoute.Currency]: {
+        name: `views.settings.${SettingsRoute.Currency}.title`,
+        category: SettingsCategory.General,
+        enabled: general?.[SettingsRoute.Currency]?.enabled,
+        icon: SETTINGS_ICON_SVG[SettingsRoute.Currency],
+        view: CurrencyView,
     },
     [SettingsRoute.ChangePassword]: {
         name: `views.settings.${SettingsRoute.ChangePassword}.title`,
