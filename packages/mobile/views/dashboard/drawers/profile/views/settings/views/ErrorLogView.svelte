@@ -38,11 +38,11 @@
         {/if}
     </div>
     {#if $errorLog.length > 0}
-        <div class="flex w-full justify-center pt-8 space-x-4">
-            <Button size={ButtonSize.Medium} classes="w-1/2" onClick={handleClearClick}>
+        <div class="flex w-full justify-center space-y-4">
+            <Button size={ButtonSize.Medium} classes="w-full" onClick={handleClearClick}>
                 {localize('actions.clear')}
             </Button>
-            <Button size={ButtonSize.Medium} classes="w-1/2" onClick={handleCopyClick}>
+            <Button size={ButtonSize.Medium} classes="w-full" onClick={handleCopyClick}>
                 {localize('actions.copy')}
             </Button>
         </div>
