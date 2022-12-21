@@ -112,7 +112,7 @@ const features = {
                 enabled: false,
             },
             errorLog: {
-                enabled: false,
+                enabled: true,
             },
             crashReporting: {
                 enabled: false,
