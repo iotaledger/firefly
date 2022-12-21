@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { VotingEventPayload, ParticipationEventType } from '@iota/wallet/out/types'
     import { localize } from '@core/i18n'
     import {
         Button,
@@ -13,15 +14,15 @@
         TextType,
     } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
+    import { openPopup } from '@auxiliary/popup'
+    import { activeProfileId } from '@core/profile/stores'
+    import { networkStatus } from '@core/network/stores'
     import { getVotingEvent } from '@core/profile-manager'
     import { governanceRouter } from '@core/router'
     import { getParticipationOverview, selectedAccount } from '@core/account'
-    import { VotingEventPayload, ParticipationEventType } from '@iota/wallet/out/types'
     import type { IParticipations } from '@contexts/governance/interfaces'
-    import { openPopup } from '@auxiliary/popup'
     import { ProposalStatus } from '@contexts/governance/enums'
     import { proposalsState, selectedProposal } from '@contexts/governance/stores'
-    import { networkStatus } from '@core/network/stores'
 
     let selectedIndices: number[] = []
     let votingPayload: VotingEventPayload
@@ -29,7 +30,7 @@
 
     $: void setVotingEventPayload($selectedProposal?.id)
     $: void setTotalVotes()
-    $: proposalStatus = $proposalsState[$selectedProposal?.id]?.status
+    $: proposalStatus = $proposalsState[$activeProfileId]?.[$selectedProposal?.id]?.status
 
     $: votesCounter = {
         total: totalVotes,
