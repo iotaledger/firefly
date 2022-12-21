@@ -17,7 +17,7 @@ import {
     getTagFromOutput,
 } from './helper'
 
-export function generateFoundryActivity(
+export function generateSingleFoundryActivity(
     account: IAccountState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
 ): FoundryActivity {

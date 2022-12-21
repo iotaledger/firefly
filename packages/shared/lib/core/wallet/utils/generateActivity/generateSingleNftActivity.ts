@@ -6,7 +6,7 @@ import type { INftOutput } from '@iota/types'
 import { getNftId } from '../outputs/getNftId'
 import { getAsyncDataFromOutput, getMetadataFromOutput, getSendingInformation, getTagFromOutput } from './helper'
 
-export function generateNftActivity(
+export function generateSingleNftActivity(
     account: IAccountState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
 ): NftActivity {

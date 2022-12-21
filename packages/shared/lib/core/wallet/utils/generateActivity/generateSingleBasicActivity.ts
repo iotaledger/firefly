@@ -13,7 +13,7 @@ import { TransactionActivity } from '@core/wallet/types'
 import { IBasicOutput } from '@iota/types'
 import { get } from 'svelte/store'
 import { ActivityType } from '../../enums'
-import { activityOutputContainsValue, getNativeTokenFromOutput } from '../../utils'
+import { activityOutputContainsValue, getNativeTokenFromOutput } from '..'
 import {
     getAmountFromOutput,
     getAsyncDataFromOutput,
@@ -23,7 +23,7 @@ import {
     getTagFromOutput,
 } from './helper'
 
-export function generateTransactionActivity(
+export function generateSingleBasicActivity(
     account: IAccountState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
 ): TransactionActivity {

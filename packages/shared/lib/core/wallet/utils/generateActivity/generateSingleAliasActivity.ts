@@ -16,7 +16,7 @@ import {
     getTagFromOutput,
 } from './helper'
 
-export function generateAliasActivity(
+export function generateSingleAliasActivity(
     account: IAccountState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
 ): AliasActivity {

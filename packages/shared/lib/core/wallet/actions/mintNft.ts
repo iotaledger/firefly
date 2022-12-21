@@ -12,7 +12,7 @@ import { ActivityAction } from '../enums'
 import { addActivityToAccountActivitiesInAllAccountActivities, resetMintNftDetails } from '../stores'
 import { NftActivity } from '../types'
 import { preprocessTransaction } from '../utils'
-import { generateNftActivity } from '../utils/generateActivity/generateNftActivity'
+import { generateSingleNftActivity } from '../utils/generateActivity/generateSingleNftActivity'
 
 export async function mintNft(metadata: IIrc27Metadata): Promise<void> {
     try {
@@ -41,7 +41,7 @@ export async function mintNft(metadata: IIrc27Metadata): Promise<void> {
         for (const output of outputs) {
             if (output.output.type === OUTPUT_TYPE_NFT) {
                 // For each minted NFT, generate a new activity
-                const activity: NftActivity = generateNftActivity(account, {
+                const activity: NftActivity = generateSingleNftActivity(account, {
                     action: ActivityAction.Mint,
                     processedTransaction,
                     wrappedOutput: output,

@@ -11,10 +11,10 @@ import {
 } from '@core/wallet'
 import { Activity } from '@core/wallet/types'
 import type { IAliasOutput, INftOutput } from '@iota/types'
-import { generateAliasActivity } from './generateAliasActivity'
-import { generateFoundryActivity } from './generateFoundryActivity'
-import { generateNftActivity } from './generateNftActivity'
-import { generateTransactionActivity } from './generateTransactionActivity'
+import { generateSingleAliasActivity } from './generateSingleAliasActivity'
+import { generateSingleFoundryActivity } from './generateSingleFoundryActivity'
+import { generateSingleNftActivity } from './generateSingleNftActivity'
+import { generateSingleBasicActivity } from './generateSingleBasicActivity'
 import { getActivityTypeFromOutput } from './helper'
 
 export function generateActivities(processedTransaction: IProcessedTransaction, account: IAccountState): Activity[] {
@@ -37,7 +37,7 @@ function generateActivitiesFromProcessedTransactionsWithInputs(
         const foundryOutputs = outputs.filter((output) => output.output.type === OUTPUT_TYPE_FOUNDRY)
         for (const foundryOutput of foundryOutputs) {
             activities.push(
-                generateFoundryActivity(account, {
+                generateSingleFoundryActivity(account, {
                     action: ActivityAction.Mint,
                     processedTransaction,
                     wrappedOutput: foundryOutput,
@@ -52,7 +52,7 @@ function generateActivitiesFromProcessedTransactionsWithInputs(
         for (const nftOutput of nftOutputs) {
             const output = nftOutput.output as INftOutput
             activities.push(
-                generateNftActivity(account, {
+                generateSingleNftActivity(account, {
                     action: output.nftId === EMPTY_HEX_ID ? ActivityAction.Mint : ActivityAction.Send,
                     processedTransaction,
                     wrappedOutput: nftOutput,
@@ -68,7 +68,7 @@ function generateActivitiesFromProcessedTransactionsWithInputs(
         for (const aliasOutput of aliasOutputs) {
             const output = aliasOutput.output as IAliasOutput
             activities.push(
-                generateAliasActivity(account, {
+                generateSingleAliasActivity(account, {
                     action: output.aliasId === EMPTY_HEX_ID ? ActivityAction.Mint : ActivityAction.Send,
                     processedTransaction,
                     wrappedOutput: aliasOutput,
@@ -85,7 +85,7 @@ function generateActivitiesFromProcessedTransactionsWithInputs(
         )
         for (const basicOutput of basicOutputs) {
             activities.push(
-                generateTransactionActivity(account, {
+                generateSingleBasicActivity(account, {
                     action: ActivityAction.Send,
                     processedTransaction,
                     wrappedOutput: basicOutput,
@@ -115,13 +115,13 @@ function generateActivitiesFromProcessedTransactionsWithoutInputs(
         }
         switch (params.type) {
             case ActivityType.Basic:
-                return generateTransactionActivity(account, params)
+                return generateSingleBasicActivity(account, params)
             case ActivityType.Foundry:
-                return generateFoundryActivity(account, params)
+                return generateSingleFoundryActivity(account, params)
             case ActivityType.Alias:
-                return generateAliasActivity(account, params)
+                return generateSingleAliasActivity(account, params)
             case ActivityType.Nft:
-                return generateNftActivity(account, params)
+                return generateSingleNftActivity(account, params)
         }
     })
 }
