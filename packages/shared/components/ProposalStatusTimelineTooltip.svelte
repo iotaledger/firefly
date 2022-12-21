@@ -3,7 +3,7 @@
     import { networkStatus } from '@core/network'
     import { DATE_FORMAT, milestoneToDate } from '@core/utils'
     import { Position, Text, TextType, Tooltip } from 'shared/components'
-    import { ProposalStatus } from '@core/governance/enums'
+    import { ProposalStatus } from '@contexts/governance/enums'
 
     export let milestones: Record<ProposalStatus, number>
     export let status: ProposalStatus

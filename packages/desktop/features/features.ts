@@ -1,9 +1,11 @@
 import onboardingFeatures from './onboarding.features'
 import developerToolsFeatures from './developer-tools.features'
+import governanceFeatures from './governance.features'
 
 const features = {
     onboarding: onboardingFeatures,
     developerTools: developerToolsFeatures,
+    governance: governanceFeatures,
     settings: {
         enabled: true,
         general: {
@@ -119,9 +121,6 @@ const features = {
                 enabled: true,
             },
         },
-    },
-    governance: {
-        enabled: false,
     },
     collectibles: {
         enabled: true,

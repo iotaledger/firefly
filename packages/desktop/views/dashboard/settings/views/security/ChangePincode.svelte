@@ -85,7 +85,7 @@
     }
 </script>
 
-<form on:submit={changePincode} id="pincode-change-form">
+<form on:submit|preventDefault={changePincode} id="pincode-change-form">
     <Text type="h4" classes="mb-3">{localize('views.settings.changePincode.title')}</Text>
     <Text type="p" secondary classes="mb-5">{localize('views.settings.changePincode.description')}</Text>
     <Text type="p" secondary smaller classes="mb-2">{localize('views.settings.changePincode.currentPincode')}</Text>

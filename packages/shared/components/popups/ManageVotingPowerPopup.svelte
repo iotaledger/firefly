@@ -3,7 +3,7 @@
     import { Button, Text, TextHint, AssetAmountInput } from 'shared/components'
     import { selectedAccount } from '@core/account'
     import { handleError } from '@core/error/handlers/handleError'
-    import { setVotingPower } from '@core/governance/actions'
+    import { setVotingPower } from '@contexts/governance/actions'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile'
     import { visibleSelectedAccountAssets } from '@core/wallet'

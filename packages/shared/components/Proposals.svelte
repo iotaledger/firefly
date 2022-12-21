@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { FontWeight } from './enums'
 
-    import { IProposal } from '@core/governance/interfaces'
+    import { IProposal } from '@contexts/governance/interfaces'
 
     export let proposals: IProposal[] = []
 </script>

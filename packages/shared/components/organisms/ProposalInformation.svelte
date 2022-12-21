@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { networkStatus } from '@core/network'
-    import { selectedProposal } from '@core/governance/stores'
+    import { selectedProposal } from '@contexts/governance/stores'
     import { formatDate, localize } from '@core/i18n'
     import { DATE_FORMAT, milestoneToDate, truncateString } from '@core/utils'
     import { Text, Pane, FontWeight } from 'shared/components'
