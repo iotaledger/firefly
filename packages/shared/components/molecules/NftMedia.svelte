@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { selectedAccountIndex } from '@core/account'
+    import { localize } from '@core/i18n'
     import { getNftByIdFromAllAccountNfts, rewriteIpfsUri } from '@core/nfts'
     import { MediaDisplay } from 'shared/components'
     import MediaPlaceholder from './MediaPlaceholder.svelte'
@@ -10,11 +11,14 @@
     export let loop: boolean = false
     export let muted: boolean = false
     export let classes: string = ''
+    export let error: string = ''
+    export let warning: string = ''
+    export let translationSuffix: string = 'long'
+    export let isLoaded = false
 
     const bgColor = 'gray-200'
     const darkBgColor = 'gray-700'
 
-    let isLoaded = false
     let hasError = false
 
     $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, nftId)
@@ -46,6 +50,7 @@
                 newUrl = rewriteIpfsUri(targetUrl)
                 break
             default:
+                error = localize('error.nft.unsupportedUrl.' + translationSuffix)
                 return undefined
         }
 
@@ -56,8 +61,14 @@
         }
     }
 
-    function handleLoadingError(): void {
+    function handleLoadingError(err): void {
         hasError = true
+        error = localize(err + translationSuffix)
+    }
+
+    function handleWarning(warn): void {
+        hasError = true
+        warning = localize(warn + translationSuffix)
     }
 
     function handleOnLoad(): void {
@@ -77,6 +88,7 @@
         classes="hidden {classes}"
         onLoad={handleOnLoad}
         onError={handleLoadingError}
+        onWarning={handleWarning}
     />
 
     {#if !isLoaded}
@@ -94,6 +106,7 @@
             {muted}
             {classes}
             onError={handleLoadingError}
+            onWarning={handleWarning}
         />
     {/if}
 {/if}

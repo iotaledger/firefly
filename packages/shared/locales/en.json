@@ -1025,6 +1025,10 @@
             "title": "Stop voting",
             "body": "You're about to stop voting for the {proposalName} proposal.",
             "hint": "Please note that stopping voting during the counting period won't impact any votes that have already been counted."
+        },
+        "nodeAuthRequired": {
+            "title": "Authentication required",
+            "body": "This node requires additional authentication. Please fill in the appropriate information."
         }
     },
     "charts": {
@@ -1453,7 +1457,9 @@
         "details": "Details",
         "availableAmount": "{amount} available",
         "properties": "Properties",
-        "statistics": "Statistics"
+        "statistics": "Statistics",
+        "username": "Username",
+        "jwt": "JSON web token"
     },
     "filters":{
         "title": "Filters",
@@ -1809,6 +1815,36 @@
         "eventId": {
             "doesNotStartWith0x": "Event ID should start with '0x'",
             "insufficientLength": "Event ID should be 66 characters long"
+        },
+        "nft": {
+            "unsupportedUrl": {
+                "short": "Url not supported",
+                "long": "Url schema not supported"
+            },
+            "unsupportedFileType": {
+                "short": "Unsupported media type",
+                "long": "The media type is not currently supported"
+            },
+            "notMatchingFileTypes": {
+                "short": "Loading blocked",
+                "long": "NFT file type does not match the expected media type"
+            },
+            "tooLargeFile": {
+                "short": "File is too large",
+                "long": "Loading NFT blocked because the file is too large"
+            },
+            "corsError": {
+                "short": "Loading blocked",
+                "long": "Loading NFT blocked by CORS policy"
+            },
+            "unsafeToLoad": {
+                "short": "Unsafe to load",
+                "long": "An error occurred while checking if the NFT was safe to load"
+            },
+            "loadingError": {
+                "short": "Unable to load",
+                "long": "An error occurred while loading the NFT"
+            }
         }
     },
     "warning": {
