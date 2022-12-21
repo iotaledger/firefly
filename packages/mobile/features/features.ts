@@ -76,7 +76,7 @@ const features = {
                 enabled: false,
             },
             changeProfileName: {
-                enabled: false,
+                enabled: true,
             },
         },
         security: {
