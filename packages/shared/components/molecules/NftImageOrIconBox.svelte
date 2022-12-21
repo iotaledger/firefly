@@ -10,18 +10,21 @@
     $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, nftId)
     $: nftType = nft?.parsedMetadata?.type
     $: parentType = nftType?.split('/')?.[0]
+
+    let isLoaded = false
 </script>
 
 <div
     class="
-        flex overflow-hidden flex-shrink-0 rounded-md bg-gray-500 items-center justify-center
+        flex overflow-hidden flex-shrink-0 rounded-md items-center justify-center
+        {isLoaded ? '' : 'bg-gray-500'}
         {size === 'small' && 'w-6 h-6'}
         {size === 'medium' && 'w-8 h-8'}
         {size === 'large' && 'w-10 h-10'}
     "
 >
     {#if parentType === 'image'}
-        <NftMedia {nftId} classes="min-w-full min-h-full object-cover">
+        <NftMedia {nftId} bind:isLoaded classes="min-w-full min-h-full object-cover">
             <div
                 slot="placeholder"
                 class="
