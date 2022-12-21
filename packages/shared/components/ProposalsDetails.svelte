@@ -1,12 +1,25 @@
 <script lang="typescript">
     import { ProposalsDetailsButton, Text } from 'shared/components'
-    import { localize } from '@core/i18n'
     import { FontWeight } from './enums'
+    import { localize } from '@core/i18n'
+    import { IProposalsDetails } from '@contexts/governance/interfaces'
+    import { proposalsState } from '@contexts/governance/stores'
+    import {
+        getNumberOfActiveProposals,
+        getNumberOfVotingProposals,
+        getTotalNumberOfProposals,
+    } from '@contexts/governance/utils'
 
-    const counters = {
-        activeProposals: 100,
-        votingProposals: 3,
-        votedProposals: 4,
+    let details = <IProposalsDetails>{}
+
+    $: $proposalsState, void updateProposalsDetails()
+
+    async function updateProposalsDetails(): Promise<void> {
+        details = {
+            activeProposals: getNumberOfActiveProposals(),
+            votingProposals: await getNumberOfVotingProposals(),
+            votedProposals: await getTotalNumberOfProposals(),
+        }
     }
 </script>
 
@@ -18,13 +31,13 @@
         <ProposalsDetailsButton />
     </header-container>
     <ul class="space-y-2">
-        {#each Object.keys(counters) as counterKey}
+        {#each Object.keys(details) as detailKey}
             <li class="flex justify-between bg-gray-50 px-4 py-3 rounded-lg">
                 <Text fontWeight={FontWeight.medium} overrideColor classes="text-gray-600">
-                    {localize(`views.governance.proposalsDetails.${counterKey}`)}
+                    {localize(`views.governance.proposalsDetails.${detailKey}`)}
                 </Text>
                 <Text overrideColor classes="text-gray-600">
-                    {counters[counterKey]}
+                    {details[detailKey]}
                 </Text>
             </li>
         {/each}
