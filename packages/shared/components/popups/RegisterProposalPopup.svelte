@@ -1,11 +1,12 @@
 <script lang="typescript">
     import { Button, TextInput, Text, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { closePopup } from '@auxiliary/popup'
+    import { closePopup, openPopup } from '@auxiliary/popup'
     import { registerParticipationEvent } from '@core/profile-manager/api'
     import { isValidUrl } from '@core/utils'
     import { handleError } from '@core/error/handlers/handleError'
     import { showAppNotification } from '@auxiliary/notification'
+    import type { Auth } from '@iota/wallet'
 
     let eventId: string
     let nodeUrl: string
@@ -30,10 +31,29 @@
             })
             closePopup()
         } catch (err) {
-            if (!nodeUrlError && !eventIdError) {
+            const isAuthenticationError = err?.error?.match(/(username)|(password)|(jwt)/g).length > 0
+            if (isAuthenticationError) {
+                openAuthenticationRequiredPopup()
+            } else if (!nodeUrlError && !eventIdError) {
                 handleError(err)
             }
         }
+    }
+
+    function openAuthenticationRequiredPopup(): void {
+        async function onSubmit(auth: Auth): Promise<void> {
+            await registerParticipationEvent(eventId, [{ url: nodeUrl, auth }])
+            showAppNotification({
+                type: 'success',
+                message: localize('views.governance.proposals.successRegister'),
+                alert: true,
+            })
+            closePopup()
+        }
+        openPopup({
+            type: 'authenticationRequired',
+            props: { onSubmit },
+        })
     }
 
     async function validateNodeUrl(): Promise<void> {

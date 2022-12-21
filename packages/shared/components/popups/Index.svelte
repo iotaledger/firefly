@@ -11,6 +11,7 @@
     import AliasConfirmationPopup from './AliasConfirmationPopup.svelte'
     import ActivityDetailsPopup from './ActivityDetailsPopup.svelte'
     import AddNodePopup from './AddNodePopup.svelte'
+    import AuthenticationRequiredPopup from './AuthenticationRequiredPopup.svelte'
     import BackupStrongholdPopup from './BackupStrongholdPopup.svelte'
     import BurnNativeTokensPopup from './BurnNativeTokensPopup.svelte'
     import BurnNativeTokensConfirmationPopup from './BurnNativeTokensConfirmationPopup.svelte'
@@ -93,6 +94,7 @@
         activityDetails: ActivityDetailsPopup,
         addNode: AddNodePopup,
         aliasConfirmation: AliasConfirmationPopup,
+        authenticationRequired: AuthenticationRequiredPopup,
         backupStronghold: BackupStrongholdPopup,
         burnNativeTokens: BurnNativeTokensPopup,
         burnNativeTokensConfirm: BurnNativeTokensConfirmationPopup,

@@ -1025,6 +1025,10 @@
             "title": "Stop voting",
             "body": "You're about to stop voting for the {proposalName} proposal.",
             "hint": "Please note that stopping voting during the counting period won't impact any votes that have already been counted."
+        },
+        "authenticationRequired": {
+            "title": "Authentication required",
+            "body": "This node requires additional authentication. Please fill in the appropriate information."
         }
     },
     "charts": {
@@ -1453,7 +1457,9 @@
         "details": "Details",
         "availableAmount": "{amount} available",
         "properties": "Properties",
-        "statistics": "Statistics"
+        "statistics": "Statistics",
+        "username": "Username",
+        "jwt": "JSON web token"
     },
     "filters":{
         "title": "Filters",
