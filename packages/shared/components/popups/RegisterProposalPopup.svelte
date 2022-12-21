@@ -7,9 +7,10 @@
     import { handleError } from '@core/error/handlers/handleError'
     import { showAppNotification } from '@auxiliary/notification'
     import type { Auth } from '@iota/wallet'
+    import { activeProfile } from '@core/profile/stores'
 
     let eventId: string
-    let nodeUrl: string
+    let nodeUrl: string = $activeProfile?.clientOptions?.nodes[0]?.url
 
     let eventIdError: string
     let nodeUrlError: string
