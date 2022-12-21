@@ -311,7 +311,7 @@
             },
             "maxMediaSize": {
                 "title": "Maximum media size",
-                "description": "Maximum media size allowed to be downloaded for NFTs"
+                "description": "NFT media with sizes greater than this limit will not be downloaded and a placeholder representing the media type will be displayed instead"
             },
             "changePassword": {
                 "title": "Change password",
