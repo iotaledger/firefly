@@ -2,20 +2,21 @@ import { IAccountState } from '@core/account'
 import {
     ActivityAction,
     ActivityType,
-    EMPTY_HEX_ID,
-    getNonRemainderBasicOutputsFromTransaction,
     IProcessedTransaction,
     OUTPUT_TYPE_ALIAS,
     OUTPUT_TYPE_FOUNDRY,
     OUTPUT_TYPE_NFT,
 } from '@core/wallet'
 import { Activity } from '@core/wallet/types'
-import type { IAliasOutput, INftOutput } from '@iota/types'
 import { generateSingleAliasActivity } from './generateSingleAliasActivity'
 import { generateSingleFoundryActivity } from './generateSingleFoundryActivity'
 import { generateSingleNftActivity } from './generateSingleNftActivity'
 import { generateSingleBasicActivity } from './generateSingleBasicActivity'
 import { getActivityTypeFromOutput } from './helper'
+import { generateNftActivitiesFromTransaction } from './generateNftActivitiesFromTransaction'
+import { generateAliasActivitiesFromTransaction } from './generateAliasActivitiesFromTransaction'
+import { generateBasicActivitiesFromTransaction } from './generateBasicActivitiesFromTransaction'
+import { generateFoundryActivitiesFromTransaction } from './generateFoundryActivitiesFromTransaction'
 
 export function generateActivities(processedTransaction: IProcessedTransaction, account: IAccountState): Activity[] {
     if (processedTransaction.wrappedInputs?.length > 0) {
@@ -34,64 +35,26 @@ function generateActivitiesFromProcessedTransactionsWithInputs(
 
     const containsFoundryActivity = outputs.some((output) => output.output.type === OUTPUT_TYPE_FOUNDRY)
     if (containsFoundryActivity) {
-        const foundryOutputs = outputs.filter((output) => output.output.type === OUTPUT_TYPE_FOUNDRY)
-        for (const foundryOutput of foundryOutputs) {
-            activities.push(
-                generateSingleFoundryActivity(account, {
-                    action: ActivityAction.Mint,
-                    processedTransaction,
-                    wrappedOutput: foundryOutput,
-                })
-            )
-        }
+        const foundryActivities = generateFoundryActivitiesFromTransaction(processedTransaction, account)
+        activities.push(foundryActivities)
     }
 
     const containsNftActivity = outputs.some((output) => output.output.type === OUTPUT_TYPE_NFT)
     if (containsNftActivity) {
-        const nftOutputs = outputs.filter((output) => output.output.type === OUTPUT_TYPE_NFT)
-        for (const nftOutput of nftOutputs) {
-            const output = nftOutput.output as INftOutput
-            activities.push(
-                generateSingleNftActivity(account, {
-                    action: output.nftId === EMPTY_HEX_ID ? ActivityAction.Mint : ActivityAction.Send,
-                    processedTransaction,
-                    wrappedOutput: nftOutput,
-                })
-            )
-        }
+        const nftActivities = generateNftActivitiesFromTransaction(processedTransaction, account)
+        activities.push(nftActivities)
     }
 
     const containsAliasActivity =
         outputs.some((output) => output.output.type === OUTPUT_TYPE_ALIAS) && !containsFoundryActivity
     if (containsAliasActivity) {
-        const aliasOutputs = outputs.filter((output) => output.output.type === OUTPUT_TYPE_ALIAS)
-        for (const aliasOutput of aliasOutputs) {
-            const output = aliasOutput.output as IAliasOutput
-            activities.push(
-                generateSingleAliasActivity(account, {
-                    action: output.aliasId === EMPTY_HEX_ID ? ActivityAction.Mint : ActivityAction.Send,
-                    processedTransaction,
-                    wrappedOutput: aliasOutput,
-                })
-            )
-        }
+        const aliasActivities = generateAliasActivitiesFromTransaction(processedTransaction, account)
+        activities.push(aliasActivities)
     }
 
     if (!containsFoundryActivity && !containsNftActivity && !containsAliasActivity) {
-        const basicOutputs = getNonRemainderBasicOutputsFromTransaction(
-            processedTransaction.outputs,
-            account.depositAddress,
-            processedTransaction.direction
-        )
-        for (const basicOutput of basicOutputs) {
-            activities.push(
-                generateSingleBasicActivity(account, {
-                    action: ActivityAction.Send,
-                    processedTransaction,
-                    wrappedOutput: basicOutput,
-                })
-            )
-        }
+        const basicActivities = generateBasicActivitiesFromTransaction(processedTransaction, account)
+        activities.push(basicActivities)
     }
 
     return activities
