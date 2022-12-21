@@ -7,10 +7,9 @@
     import { handleError } from '@core/error/handlers/handleError'
     import { showAppNotification } from '@auxiliary/notification'
     import type { Auth } from '@iota/wallet'
-    import { activeProfile } from '@core/profile/stores'
 
     let eventId: string
-    let nodeUrl: string = $activeProfile?.clientOptions?.nodes[0]?.url
+    let nodeUrl: string
 
     let eventIdError: string
     let nodeUrlError: string
@@ -24,13 +23,7 @@
     async function handleConfirm(): Promise<void> {
         try {
             await Promise.all([validateEventId(), validateNodeUrl()])
-            await registerParticipationEvent(eventId, [{ url: nodeUrl }])
-            showAppNotification({
-                type: 'success',
-                message: localize('views.governance.proposals.successRegister'),
-                alert: true,
-            })
-            closePopup()
+            await registerParticipationWrapper()
         } catch (err) {
             const isAuthenticationError = err?.error?.match(/(username)|(password)|(jwt)/g).length > 0
             if (isAuthenticationError) {
@@ -42,19 +35,20 @@
     }
 
     function openAuthenticationRequiredPopup(): void {
-        async function onSubmit(auth: Auth): Promise<void> {
-            await registerParticipationEvent(eventId, [{ url: nodeUrl, auth }])
-            showAppNotification({
-                type: 'success',
-                message: localize('views.governance.proposals.successRegister'),
-                alert: true,
-            })
-            closePopup()
-        }
         openPopup({
             type: 'authenticationRequired',
-            props: { onSubmit },
+            props: { onSubmit: registerParticipationWrapper },
         })
+    }
+
+    async function registerParticipationWrapper(auth?: Auth): Promise<void> {
+        await registerParticipationEvent(eventId, [{ url: nodeUrl, auth }])
+        showAppNotification({
+            type: 'success',
+            message: localize('views.governance.proposals.successRegister'),
+            alert: true,
+        })
+        closePopup()
     }
 
     async function validateNodeUrl(): Promise<void> {
