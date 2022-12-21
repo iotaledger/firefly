@@ -109,7 +109,7 @@ const features = {
                 enabled: false,
             },
             hiddenAccounts: {
-                enabled: false,
+                enabled: true,
             },
             errorLog: {
                 enabled: false,
