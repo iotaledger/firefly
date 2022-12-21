@@ -1,6 +1,16 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Button, Dropdown, Error, FontWeight, OptionalInput, Text, TextInput, NumberInput } from 'shared/components'
+    import {
+        Button,
+        Dropdown,
+        Error,
+        FontWeight,
+        OptionalInput,
+        Text,
+        TextInput,
+        NumberInput,
+        TooltipIcon,
+    } from 'shared/components'
     import { closePopup, openPopup } from '@auxiliary/popup'
     import { BaseError } from '@core/error/classes'
     import { handleError } from '@core/error/handlers/handleError'
@@ -215,7 +225,16 @@
             bind:error={uriError}
             label={localize('general.uri')}
             placeholder={localize('general.uri')}
-        />
+        >
+            <TooltipIcon
+                slot="right"
+                text={localize('tooltips.mintNftForm.uri')}
+                title={localize('general.uri')}
+                width={15}
+                height={15}
+                classes="ml-1 flex items-center"
+            />
+        </TextInput>
         <TextInput
             bind:value={name}
             bind:error={nameError}
