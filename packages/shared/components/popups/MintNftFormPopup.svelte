@@ -210,8 +210,8 @@
         >
             <TooltipIcon
                 slot="right"
-                text="To create a URI, you need to upload your file first to some provider (e.g. https://nft.storage/)."
-                title="URI"
+                text={localize('tooltips.mintNftForm.uri')}
+                title={localize('general.uri')}
                 width={15}
                 height={15}
                 classes="ml-1 flex items-center"
