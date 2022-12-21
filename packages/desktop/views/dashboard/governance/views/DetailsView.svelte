@@ -21,6 +21,7 @@
     import { openPopup } from '@auxiliary/popup'
     import { ProposalStatus } from '@contexts/governance/enums'
     import { proposalsState, selectedProposal } from '@contexts/governance/stores'
+    import { activeProfileId } from '@core/profile/stores'
     import { networkStatus } from '@core/network/stores'
 
     let selectedIndices: number[] = []
@@ -29,7 +30,7 @@
 
     $: void setVotingEventPayload($selectedProposal?.id)
     $: void setTotalVotes()
-    $: proposalStatus = $proposalsState[$selectedProposal?.id]?.status
+    $: proposalStatus = $proposalsState[$activeProfileId]?.[$selectedProposal?.id]?.status
 
     $: votesCounter = {
         total: totalVotes,

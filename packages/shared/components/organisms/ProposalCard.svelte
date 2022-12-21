@@ -1,18 +1,18 @@
 <script lang="typescript">
     import { ProposalStatusInfo, Text, TooltipIcon } from 'shared/components'
     import { IProposal } from '@contexts/governance/interfaces'
-    import { selectedProposal } from '@contexts/governance/stores'
+    import { selectedProposal, proposalsState } from '@contexts/governance/stores'
     import { ProposalStatus } from '@contexts/governance/enums'
     import { GovernanceRoute, governanceRouter } from '@core/router'
 
     import { FontWeight, Position } from '../enums'
     import { Icon } from '@auxiliary/icon/enums'
     import { localize } from '@core/i18n'
-    import { proposalsState } from '@contexts/governance/stores'
+    import { activeProfileId } from '@core/profile/stores'
 
     export let proposal: IProposal
 
-    $: proposalState = $proposalsState[proposal?.id]
+    $: proposalState = $proposalsState[$activeProfileId]?.[proposal?.id]
 
     function handleProposalClick(): void {
         $selectedProposal = proposal

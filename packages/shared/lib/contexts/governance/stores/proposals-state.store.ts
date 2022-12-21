@@ -1,34 +1,42 @@
 import { get } from 'svelte/store'
-import type { EventStatus } from '@iota/wallet'
 import { getVotingProposalState } from '@core/profile-manager/api'
+import { activeProfileId } from '@core/profile/stores'
 import { persistent } from '@core/utils/store'
+import { IProposalState } from '../interfaces'
 
-export const proposalsState = persistent<{ [key in string]: EventStatus }>('proposalsState', {})
+export const proposalsState = persistent<IProposalState>('proposalsState', {})
 
 export async function addProposalState(eventId: string): Promise<void> {
+    const profileId = get(activeProfileId)
     const _proposalsState = get(proposalsState)
-    const hasRegisteredProposalStatus = Object.keys(_proposalsState).includes(eventId)
-    if (!hasRegisteredProposalStatus) {
-        const proposalStatus = await getVotingProposalState(eventId)
-        _proposalsState[eventId] = proposalStatus
-        proposalsState.set(_proposalsState)
+
+    const proposalStatus = await getVotingProposalState(eventId)
+
+    if (!_proposalsState[profileId]) {
+        _proposalsState[profileId] = {}
     }
+
+    _proposalsState[profileId][eventId] = proposalStatus
+    proposalsState.set(_proposalsState)
 }
 
 export function removeProposalState(eventId: string): void {
+    const profileId = get(activeProfileId)
     const _proposalsState = get(proposalsState)
-    const hasRegisteredProposalStatus = Object.keys(_proposalsState).includes(eventId)
-    if (hasRegisteredProposalStatus) {
-        delete _proposalsState[eventId]
+
+    if (_proposalsState[profileId]?.[eventId]) {
+        delete _proposalsState[profileId][eventId]
         proposalsState.set(_proposalsState)
     }
 }
 
 export async function updateProposalsState(): Promise<void> {
+    const profileId = get(activeProfileId)
     const _proposalsState = get(proposalsState)
-    for (const eventId in _proposalsState) {
+
+    for (const eventId of Object.keys(_proposalsState[profileId] ?? {})) {
         const proposalStatus = await getVotingProposalState(eventId)
-        _proposalsState[eventId] = proposalStatus
+        _proposalsState[profileId][eventId] = proposalStatus
     }
     proposalsState.set(_proposalsState)
 }
