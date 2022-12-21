@@ -1,14 +1,14 @@
 <script lang="typescript">
     import { ProposalStatusInfo, Text, TooltipIcon } from 'shared/components'
-    import { IProposal } from '@contexts/governance/interfaces'
-    import { selectedProposal, proposalsState } from '@contexts/governance/stores'
-    import { ProposalStatus } from '@contexts/governance/enums'
-    import { GovernanceRoute, governanceRouter } from '@core/router'
-
-    import { FontWeight, Position } from '../enums'
     import { Icon } from '@auxiliary/icon/enums'
     import { localize } from '@core/i18n'
     import { activeProfileId } from '@core/profile/stores'
+    import { GovernanceRoute, governanceRouter } from '@core/router'
+    import { IProposal } from '@contexts/governance/interfaces'
+    import { selectedProposal, proposalsState } from '@contexts/governance/stores'
+    import { ProposalStatus } from '@contexts/governance/enums'
+
+    import { FontWeight, Position } from '../enums'
 
     export let proposal: IProposal
 

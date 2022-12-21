@@ -10,13 +10,13 @@ export async function addProposalState(eventId: string): Promise<void> {
     const profileId = get(activeProfileId)
     const _proposalsState = get(proposalsState)
 
-    const proposalStatus = await getVotingProposalState(eventId)
+    const votingProposalState = await getVotingProposalState(eventId)
 
     if (!_proposalsState[profileId]) {
         _proposalsState[profileId] = {}
     }
 
-    _proposalsState[profileId][eventId] = proposalStatus
+    _proposalsState[profileId][eventId] = votingProposalState
     proposalsState.set(_proposalsState)
 }
 
@@ -35,8 +35,8 @@ export async function updateProposalsState(): Promise<void> {
     const _proposalsState = get(proposalsState)
 
     for (const eventId of Object.keys(_proposalsState[profileId] ?? {})) {
-        const proposalStatus = await getVotingProposalState(eventId)
-        _proposalsState[profileId][eventId] = proposalStatus
+        const votingProposalState = await getVotingProposalState(eventId)
+        _proposalsState[profileId][eventId] = votingProposalState
     }
     proposalsState.set(_proposalsState)
 }
