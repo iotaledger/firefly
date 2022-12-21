@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Button, Dropdown, Error, FontWeight, OptionalInput, Text, TextInput } from 'shared/components'
+    import { Button, Dropdown, Error, FontWeight, OptionalInput, Text, TextInput, TooltipIcon } from 'shared/components'
     import { closePopup, openPopup } from '@auxiliary/popup'
     import { BaseError } from '@core/error/classes'
     import { handleError } from '@core/error/handlers/handleError'
@@ -207,7 +207,16 @@
             bind:error={uriError}
             label={localize('general.uri')}
             placeholder={localize('general.uri')}
-        />
+        >
+            <TooltipIcon
+                slot="right"
+                text="To create a URI, you need to upload your file first to some provider (e.g. https://nft.storage/)."
+                title="URI"
+                width={15}
+                height={15}
+                classes="ml-1 flex items-center"
+            />
+        </TextInput>
         <TextInput
             bind:value={inputs.name}
             bind:error={nameError}
