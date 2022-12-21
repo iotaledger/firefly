@@ -1,12 +1,12 @@
 <script lang="typescript">
     import { Button, TextInput, Text, TextType } from 'shared/components'
-    import { localize } from '@core/i18n'
-    import { closePopup, openPopup } from '@auxiliary/popup'
-    import { registerParticipationEvent } from '@core/profile-manager/api'
-    import { isValidUrl } from '@core/utils'
-    import { handleError } from '@core/error/handlers/handleError'
-    import { showAppNotification } from '@auxiliary/notification'
     import type { Auth } from '@iota/wallet'
+    import { showAppNotification } from '@auxiliary/notification/actions'
+    import { closePopup, openPopup } from '@auxiliary/popup/actions'
+    import { handleError } from '@core/error/handlers/handleError'
+    import { localize } from '@core/i18n'
+    import { registerParticipationEvent } from '@core/profile-manager/api'
+    import { isValidUrl } from '@core/utils/validation'
 
     let eventId: string
     let nodeUrl: string

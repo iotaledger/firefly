@@ -1,9 +1,9 @@
 <script lang="typescript">
-    import { Button, TextInput, Text, TextType, HTMLButtonType } from 'shared/components'
-    import { localize } from '@core/i18n'
-    import { closePopup } from '@auxiliary/popup'
-    import { handleError } from '@core/error/handlers'
+    import { Button, HTMLButtonType, Text, TextInput, TextType } from 'shared/components'
     import type { Auth } from '@iota/wallet'
+    import { handleError } from '@core/error/handlers'
+    import { localize } from '@core/i18n'
+    import { closePopup } from '@auxiliary/popup/actions'
 
     export let onSubmit: (auth: Auth) => unknown = () => {}
 
