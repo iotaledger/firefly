@@ -4,7 +4,7 @@
     import { activeProfile, updateActiveProfileSettings } from '@core/profile'
     import type { IDropdownChoice } from '@core/utils'
 
-    function updateMediaSizeTimeout(option): void {
+    function updateMediaSizeLimit(option): void {
         updateActiveProfileSettings({ maxMediaSizeInMegaBytes: option.value })
     }
 
@@ -23,7 +23,7 @@
 <Text type="h4" classes="mb-3">{localize('views.settings.maxMediaSize.title')}</Text>
 <Text type="p" secondary classes="mb-5">{localize('views.settings.maxMediaSize.description')}</Text>
 <Dropdown
-    onSelect={updateMediaSizeTimeout}
+    onSelect={updateMediaSizeLimit}
     value={assignMaxMediaSizeOptionLabel($activeProfile?.settings.maxMediaSizeInMegaBytes)}
     items={maxSizeOptions()}
 />
