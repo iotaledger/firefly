@@ -27,16 +27,16 @@
         } catch (err) {
             const isAuthenticationError = err?.error?.match(/(username)|(password)|(jwt)/g).length > 0
             if (isAuthenticationError) {
-                openAuthenticationRequiredPopup()
+                openNodeAuthRequiredPopup()
             } else if (!nodeUrlError && !eventIdError) {
                 handleError(err)
             }
         }
     }
 
-    function openAuthenticationRequiredPopup(): void {
+    function openNodeAuthRequiredPopup(): void {
         openPopup({
-            type: 'authenticationRequired',
+            type: 'nodeAuthRequired',
             props: { onSubmit: registerParticipationWrapper },
         })
     }

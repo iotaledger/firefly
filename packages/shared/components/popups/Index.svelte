@@ -11,7 +11,6 @@
     import AliasConfirmationPopup from './AliasConfirmationPopup.svelte'
     import ActivityDetailsPopup from './ActivityDetailsPopup.svelte'
     import AddNodePopup from './AddNodePopup.svelte'
-    import AuthenticationRequiredPopup from './AuthenticationRequiredPopup.svelte'
     import BackupStrongholdPopup from './BackupStrongholdPopup.svelte'
     import BurnNativeTokensPopup from './BurnNativeTokensPopup.svelte'
     import BurnNativeTokensConfirmationPopup from './BurnNativeTokensConfirmationPopup.svelte'
@@ -33,6 +32,7 @@
     import MintNativeTokenConfirmationPopup from './MintNativeTokenConfirmationPopup.svelte'
     import MintNftFormPopup from './MintNftFormPopup.svelte'
     import MintNftConfirmationPopup from './MintNftConfirmationPopup.svelte'
+    import NodeAuthRequiredPopup from './NodeAuthRequiredPopup.svelte'
     import NodeInfoPopup from './NodeInfoPopup.svelte'
     import ReceiveAddressPopup from './ReceiveAddressPopup.svelte'
     import RegisterProposalPopup from './RegisterProposalPopup.svelte'
@@ -94,7 +94,6 @@
         activityDetails: ActivityDetailsPopup,
         addNode: AddNodePopup,
         aliasConfirmation: AliasConfirmationPopup,
-        authenticationRequired: AuthenticationRequiredPopup,
         backupStronghold: BackupStrongholdPopup,
         burnNativeTokens: BurnNativeTokensPopup,
         burnNativeTokensConfirm: BurnNativeTokensConfirmationPopup,
@@ -116,6 +115,7 @@
         mintNativeTokenForm: MintNativeTokenFormPopup,
         mintNftConfirmation: MintNftConfirmationPopup,
         mintNftForm: MintNftFormPopup,
+        nodeAuthRequired: NodeAuthRequiredPopup,
         nodeInfo: NodeInfoPopup,
         receiveAddress: ReceiveAddressPopup,
         registerProposal: RegisterProposalPopup,

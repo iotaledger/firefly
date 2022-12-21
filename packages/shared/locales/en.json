@@ -1026,7 +1026,7 @@
             "body": "You're about to stop voting for the {proposalName} proposal.",
             "hint": "Please note that stopping voting during the counting period won't impact any votes that have already been counted."
         },
-        "authenticationRequired": {
+        "nodeAuthRequired": {
             "title": "Authentication required",
             "body": "This node requires additional authentication. Please fill in the appropriate information."
         }
