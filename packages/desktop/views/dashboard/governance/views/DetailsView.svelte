@@ -45,6 +45,8 @@
         selectedAnswerValues?.length === 0 ||
         selectedAnswerValues?.includes(undefined)
 
+    $: isTransferring = $selectedAccount?.isTransferring
+
     async function setVotingEventPayload(eventId: string): Promise<void> {
         const event = await getVotingEvent(eventId)
         if (event?.data?.payload?.type === ParticipationEventType.Voting) {
@@ -148,7 +150,12 @@
         </proposal-questions>
         <buttons-container class="flex w-full space-x-4 mt-6">
             <Button outline classes="w-full" onClick={handleCancelClick}>{localize('actions.cancel')}</Button>
-            <Button classes="w-full" disabled={isVotingDisabled} onClick={handleVoteClick}>
+            <Button
+                classes="w-full"
+                disabled={isVotingDisabled || isTransferring}
+                isBusy={isTransferring}
+                onClick={handleVoteClick}
+            >
                 {localize('actions.vote')}
             </Button>
         </buttons-container>
