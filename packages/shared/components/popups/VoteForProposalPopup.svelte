@@ -9,7 +9,7 @@
     import { showAppNotification } from '@auxiliary/notification'
     import { selectedProposal } from '@contexts/governance/stores'
 
-    export let selectedAnswers: number[]
+    export let selectedAnswerValues: number[]
 
     $: formattedVotingPower = formatTokenAmountBestMatch(
         Number($selectedAccount?.votingPower),
@@ -20,7 +20,7 @@
     async function handleVoteClick(): Promise<void> {
         try {
             await checkActiveProfileAuth(async () => {
-                await vote($selectedAccount.index, $selectedProposal?.id, selectedAnswers)
+                await vote($selectedAccount.index, $selectedProposal?.id, selectedAnswerValues)
                 showAppNotification({
                     type: 'success',
                     message: localize('notifications.vote.success'),
