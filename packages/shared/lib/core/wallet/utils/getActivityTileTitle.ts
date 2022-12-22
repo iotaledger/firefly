@@ -23,6 +23,6 @@ export function getActivityTileTitle(activity: Activity): string {
             return isConfirmed ? 'general.sent' : 'general.sending'
         }
     } else if (action === ActivityAction.Unknown) {
-        return 'general.unknownAction'
+        return 'general.unknown'
     }
 }
