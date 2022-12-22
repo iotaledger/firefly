@@ -6,6 +6,9 @@ const features = {
         enabled: false,
         profileActions: {
             enabled: true,
+            networkStatus: {
+                enabled: true,
+            },
         },
         accountSwitcher: {
             enabled: true,
