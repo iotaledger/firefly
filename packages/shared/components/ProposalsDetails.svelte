@@ -10,7 +10,11 @@
         getTotalNumberOfProposals,
     } from '@contexts/governance/utils'
 
-    let details = <IProposalsDetails>{}
+    let details = <IProposalsDetails>{
+        activeProposals: null,
+        votingProposals: null,
+        votedProposals: null,
+    }
 
     $: $proposalsState, void updateProposalsDetails()
 
@@ -37,7 +41,7 @@
                     {localize(`views.governance.proposalsDetails.${detailKey}`)}
                 </Text>
                 <Text overrideColor classes="text-gray-600">
-                    {details[detailKey]}
+                    {details[detailKey] ?? '-'}
                 </Text>
             </li>
         {/each}
