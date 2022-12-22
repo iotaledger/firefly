@@ -1,4 +1,6 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
+    import { VotingEventPayload, ParticipationEventType } from '@iota/wallet/out/types'
     import { localize } from '@core/i18n'
     import {
         Button,
@@ -13,38 +15,35 @@
         TextType,
     } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
+    import { openPopup } from '@auxiliary/popup'
+    import { activeProfileId } from '@core/profile/stores'
+    import { networkStatus } from '@core/network/stores'
     import { getVotingEvent } from '@core/profile-manager'
     import { governanceRouter } from '@core/router'
     import { getParticipationOverview, selectedAccount } from '@core/account'
-    import { VotingEventPayload, ParticipationEventType } from '@iota/wallet/out/types'
     import type { IParticipations } from '@contexts/governance/interfaces'
-    import { openPopup } from '@auxiliary/popup'
     import { ProposalStatus } from '@contexts/governance/enums'
     import { proposalsState, selectedProposal } from '@contexts/governance/stores'
-    import { networkStatus } from '@core/network/stores'
 
-    let selectedIndices: number[] = []
+    let selectedAnswerValues: number[] = []
     let votingPayload: VotingEventPayload
     let totalVotes = 0
 
-    $: void setVotingEventPayload($selectedProposal?.id)
-    $: void setTotalVotes()
-    $: proposalStatus = $proposalsState[$selectedProposal?.id]?.status
-
+    $: proposalState = $proposalsState[$activeProfileId]?.[$selectedProposal?.id]
     $: votesCounter = {
         total: totalVotes,
         power: $selectedAccount?.votingPower,
     }
     $: questions = votingPayload?.questions
 
-    $: if (questions?.length > 0 && selectedIndices?.length === 0) {
-        selectedIndices = Array<number>(questions?.length)
+    $: if (questions?.length > 0 && selectedAnswerValues?.length === 0) {
+        selectedAnswerValues = Array<number>(questions?.length)
     }
     $: isVotingDisabled =
-        proposalStatus === ProposalStatus.Upcoming ||
-        proposalStatus === ProposalStatus.Ended ||
-        selectedIndices?.length === 0 ||
-        selectedIndices?.includes(undefined)
+        proposalState?.status === ProposalStatus.Upcoming ||
+        proposalState?.status === ProposalStatus.Ended ||
+        selectedAnswerValues?.length === 0 ||
+        selectedAnswerValues?.includes(undefined)
 
     async function setVotingEventPayload(eventId: string): Promise<void> {
         const event = await getVotingEvent(eventId)
@@ -86,9 +85,14 @@
     function handleVoteClick(): void {
         openPopup({
             type: 'voteForProposal',
-            props: { selectedAnswers: selectedIndices },
+            props: { selectedAnswerValues },
         })
     }
+
+    onMount(() => {
+        void setVotingEventPayload($selectedProposal?.id)
+        void setTotalVotes()
+    })
 </script>
 
 <div class="w-full h-full flex flex-nowrap p-8 relative flex-1 space-x-4 bg-gray-50 dark:bg-gray-900">
@@ -135,7 +139,8 @@
                         {question}
                         isOpened={openedQuestionIndex === index}
                         {index}
-                        bind:selectedIndices
+                        bind:selectedAnswerValues
+                        currentVote={proposalState?.questions[index]?.answers}
                         onClick={() => handleQuestionClick(index)}
                     />
                 {/each}

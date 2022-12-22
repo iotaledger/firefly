@@ -39,6 +39,7 @@ const persistedProfileMigrationsMap: Record<number, (existingProfile: unknown) =
     4: persistedProfileMigrationToV5,
     5: persistedProfileMigrationToV6,
     6: persistedProfileMigrationToV7,
+    7: persistedProfileMigrationToV8,
 }
 
 function persistedProfileMigrationToV4(existingProfile: unknown): void {
@@ -113,4 +114,10 @@ function persistedProfileMigrationToV7(existingProfile: unknown): void {
     })
 
     saveProfile(newProfile as IPersistedProfile)
+}
+
+function persistedProfileMigrationToV8(existingProfile: IPersistedProfile): void {
+    existingProfile.settings = { ...existingProfile.settings, maxMediaSizeInMegaBytes: 50 }
+
+    saveProfile(existingProfile)
 }

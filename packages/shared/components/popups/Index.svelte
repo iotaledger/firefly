@@ -32,6 +32,7 @@
     import MintNativeTokenConfirmationPopup from './MintNativeTokenConfirmationPopup.svelte'
     import MintNftFormPopup from './MintNftFormPopup.svelte'
     import MintNftConfirmationPopup from './MintNftConfirmationPopup.svelte'
+    import NodeAuthRequiredPopup from './NodeAuthRequiredPopup.svelte'
     import NodeInfoPopup from './NodeInfoPopup.svelte'
     import ReceiveAddressPopup from './ReceiveAddressPopup.svelte'
     import RegisterProposalPopup from './RegisterProposalPopup.svelte'
@@ -114,6 +115,7 @@
         mintNativeTokenForm: MintNativeTokenFormPopup,
         mintNftConfirmation: MintNftConfirmationPopup,
         mintNftForm: MintNftFormPopup,
+        nodeAuthRequired: NodeAuthRequiredPopup,
         nodeInfo: NodeInfoPopup,
         receiveAddress: ReceiveAddressPopup,
         registerProposal: RegisterProposalPopup,
