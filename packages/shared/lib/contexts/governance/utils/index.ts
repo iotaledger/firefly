@@ -1,2 +1,7 @@
 export * from './createProposalsFromEvents'
+export * from './getNumberOfActiveProposals'
+export * from './getNumberOfVotingProposals'
+export * from './getTotalNumberOfProposals'
+export * from './isProposalActive'
+export * from './isVotingForProposal'
 export * from './isVotingForSelectedProposal'
