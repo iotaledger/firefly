@@ -31,30 +31,30 @@ function generateActivitiesFromProcessedTransactionsWithInputs(
     account: IAccountState
 ): Activity[] {
     const outputs = processedTransaction.outputs
-    const activities = []
+    const activities: Activity[] = []
 
     const containsFoundryActivity = outputs.some((output) => output.output.type === OUTPUT_TYPE_FOUNDRY)
     if (containsFoundryActivity) {
         const foundryActivities = generateFoundryActivitiesFromTransaction(processedTransaction, account)
-        activities.push(foundryActivities)
+        activities.push(...foundryActivities)
     }
 
     const containsNftActivity = outputs.some((output) => output.output.type === OUTPUT_TYPE_NFT)
     if (containsNftActivity) {
         const nftActivities = generateNftActivitiesFromTransaction(processedTransaction, account)
-        activities.push(nftActivities)
+        activities.push(...nftActivities)
     }
 
     const containsAliasActivity =
         outputs.some((output) => output.output.type === OUTPUT_TYPE_ALIAS) && !containsFoundryActivity
     if (containsAliasActivity) {
         const aliasActivities = generateAliasActivitiesFromTransaction(processedTransaction, account)
-        activities.push(aliasActivities)
+        activities.push(...aliasActivities)
     }
 
     if (!containsFoundryActivity && !containsNftActivity && !containsAliasActivity) {
         const basicActivities = generateBasicActivitiesFromTransaction(processedTransaction, account)
-        activities.push(basicActivities)
+        activities.push(...basicActivities)
     }
 
     return activities
