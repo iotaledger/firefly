@@ -1,3 +1,4 @@
+export * from './getActivityTypeFromOutput'
 export * from './getAsyncDataFromOutput'
 export * from './getAmountFromOutput'
 export * from './getSendingInformation'
