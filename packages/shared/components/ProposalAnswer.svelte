@@ -56,8 +56,8 @@
                 >
             </div>
         {/if}
-        {#if answer.additionalInfo}
-            <div>
+        <div class="flex justify-center items-center w-3 h-3">
+            {#if answer.additionalInfo}
                 <TooltipIcon
                     icon={IconEnum.Info}
                     iconClasses="text-gray-600 dark:text-gray-200"
@@ -66,8 +66,8 @@
                     width={10}
                     height={10}
                 />
-            </div>
-        {/if}
+            {/if}
+        </div>
     </div>
 </proposal-answer>
 
