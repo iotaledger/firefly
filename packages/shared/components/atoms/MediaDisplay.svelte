@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { MimeType, ParentMimeType } from '@core/nfts'
+    import { activeProfile } from '@core/profile'
 
     export let Media: HTMLImageElement | HTMLVideoElement = undefined
     export let src: string
@@ -17,7 +18,7 @@
     const type: string = convertMimeTypeToHtmlTag(expectedType)
     let safeToLoad = false
     let isLoaded = false
-    const MAX_FILE_SIZE_IN_MB = 30000000
+    const MAX_FILE_SIZE_IN_BYTES = ($activeProfile?.settings?.maxMediaSizeInMegaBytes ?? 0) * 1000000
 
     $: src && void checkContentIsSafeToLoad()
     $: isLoaded && muteVideo()
@@ -72,7 +73,10 @@
                 if (response.headers.get('Content-Type') !== expectedType) {
                     safeToLoad = false
                     onError('error.nft.notMatchingFileTypes.')
-                } else if (Number(response.headers.get('Content-Length')) > MAX_FILE_SIZE_IN_MB) {
+                } else if (
+                    MAX_FILE_SIZE_IN_BYTES > 0 &&
+                    Number(response.headers.get('Content-Length')) > MAX_FILE_SIZE_IN_BYTES
+                ) {
                     safeToLoad = false
                     onWarning('error.nft.tooLargeFile.')
                 } else {

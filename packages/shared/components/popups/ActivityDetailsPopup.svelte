@@ -142,7 +142,7 @@
         </Text>
         {#if explorerUrl && activity.transactionId}
             <button
-                class="action w-fit flex justify-start text-center font-medium text-14 text-blue-500"
+                class="action w-max flex justify-start text-center font-medium text-14 text-blue-500"
                 on:click={handleExplorerClick}
             >
                 {localize('general.viewOnExplorer')}

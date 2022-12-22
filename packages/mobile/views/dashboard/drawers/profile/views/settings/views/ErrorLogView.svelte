@@ -38,7 +38,7 @@
         {/if}
     </div>
     {#if $errorLog.length > 0}
-        <div class="flex w-full justify-center space-y-4">
+        <div class="flex w-full justify-center space-x-4">
             <Button size={ButtonSize.Medium} classes="w-full" onClick={handleClearClick}>
                 {localize('actions.clear')}
             </Button>
