@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { localeDirection, setupI18n } from '@core/i18n'
-    import { checkAndMigrateProfiles, cleanupEmptyProfiles } from '@core/profile'
+    import { activeAccounts, checkAndMigrateProfiles, cleanupEmptyProfiles, loadPersistedProfileIntoActiveProfile } from '@core/profile'
     import { initialiseRouterManager, RouterManagerExtensionName } from '@core/router'
     import {
         appSettings,
@@ -27,8 +27,9 @@
         resetRouters,
     } from './lib/routers'
     import { DashboardView, LoginRouter, OnboardingRouter } from './views'
+    import { SplashScreen } from '@capacitor/splash-screen'
 
-    appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
+    appStage.set(AppStage[process.env.STAGE?.toUpperCase()] ?? AppStage.ALPHA)
 
     checkAndMigrateProfiles()
 
@@ -40,27 +41,18 @@
         document.dir = $localeDirection
     }
 
-    let splash = true
-
     void setupI18n({ fallbackLocale: 'en', initialLocale: $appSettings.language })
 
     onMount(async () => {
         setTimeout(() => {
-            splash = false
+            SplashScreen.hide()
             initialiseRouters()
         }, 3000)
 
         initAppSettings.set($appSettings)
 
-        // await pollMarketData()
-
-        /* eslint-disable no-undef */
-        // @ts-expect-error: This value is replaced by Webpack DefinePlugin
-        // if (!devMode && get(appStage) === AppStage.PROD) {
-        //     await setAppVersionDetails()
-        //     pollCheckForAppUpdate()
-        // }
-
+        // pollMarketData()
+        
         initialiseRouterManager({
             extensions: [
                 [RouterManagerExtensionName.GetAppRouter, getAppRouter],
@@ -72,7 +64,6 @@
         })
 
         await cleanupEmptyProfiles()
-        // loadPersistedProfileIntoActiveProfile($activeProfileId)
 
         const platform = await Platform.getOS()
         setPlatform(platform)
