@@ -46,6 +46,9 @@ const features = {
             deleteProfile: {
                 enabled: true,
             },
+            maxMediaSize: {
+                enabled: true,
+            },
         },
         advanced: {
             enabled: true,
