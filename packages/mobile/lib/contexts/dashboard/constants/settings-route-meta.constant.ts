@@ -5,6 +5,7 @@ import {
     DiagnosticsView,
     LanguageView,
     ThemeView,
+    WalletFinderView,
 } from '../../../../views/dashboard/drawers/profile/views/settings'
 import { SettingsRoute } from '../../../routers'
 import { SettingsCategory } from '../enums'
@@ -42,5 +43,12 @@ export const SETTINGS_ROUTE_META = {
         enabled: advanced?.[SettingsRoute.Diagnostics]?.enabled,
         icon: SETTINGS_ICON_SVG[SettingsRoute.Diagnostics],
         view: DiagnosticsView,
+    },
+    [SettingsRoute.WalletFinder]: {
+        name: `views.settings.${SettingsRoute.WalletFinder}.title`,
+        category: SettingsCategory.Advanced,
+        enabled: advanced?.[SettingsRoute.WalletFinder]?.enabled,
+        icon: SETTINGS_ICON_SVG[SettingsRoute.WalletFinder],
+        view: WalletFinderView,
     },
 }

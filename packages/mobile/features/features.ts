@@ -106,7 +106,7 @@ const features = {
                 enabled: false,
             },
             walletFinder: {
-                enabled: false,
+                enabled: true,
             },
             hiddenAccounts: {
                 enabled: false,
