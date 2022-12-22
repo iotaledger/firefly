@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { closePopup } from '@auxiliary/popup'
     import { activeProfile, checkActiveProfileAuth } from '@core/profile'
-    import { selectedAccount, vote } from '@core/account'
+    import { selectedAccount, updateSelectedAccount, vote } from '@core/account'
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
     import { BASE_TOKEN } from '@core/network'
     import { showAppNotification } from '@auxiliary/notification'
@@ -17,9 +17,12 @@
     )
     $: hasVotingPower = Number($selectedAccount?.votingPower) > 0
 
+    $: isTransferring = $selectedAccount?.isTransferring
+
     async function handleVoteClick(): Promise<void> {
         try {
             await checkActiveProfileAuth(async () => {
+                updateSelectedAccount({ isTransferring: true })
                 await vote($selectedAccount.index, $selectedProposal?.id, selectedAnswers)
                 showAppNotification({
                     type: 'success',
@@ -27,9 +30,11 @@
                     alert: true,
                 })
                 closePopup()
+                updateSelectedAccount({ isTransferring: false })
             })
         } catch (err) {
             console.error(err)
+            updateSelectedAccount({ isTransferring: false })
         }
     }
 </script>
@@ -55,7 +60,12 @@
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" outline onClick={closePopup}>{localize('actions.cancel')}</Button>
-        <Button classes="w-full" disabled={!hasVotingPower} onClick={handleVoteClick}>
+        <Button
+            classes="w-full"
+            disabled={!hasVotingPower || isTransferring}
+            isBusy={isTransferring}
+            onClick={handleVoteClick}
+        >
             {localize('actions.vote')}
         </Button>
     </popup-buttons>
