@@ -5,9 +5,13 @@
     import { SettingsIndexView } from './views'
 
     $: needsUnlockStore = $settingsRouter?.getNeedsUnlockStore()
+    $: needsUnlockStoreCallbackStore = $settingsRouter?.getNeedsUnlockCallbackStore()
 
     function onUnlockSuccess(): void {
-        $settingsRouter.setNeedsUnlock(false)
+        $settingsRouter.setNeedsUnlock(false, undefined)
+        if ($needsUnlockStoreCallbackStore && typeof $needsUnlockStoreCallbackStore === 'function') {
+            $needsUnlockStoreCallbackStore()
+        }
     }
 </script>
 
@@ -19,6 +23,9 @@
 
 {#if $needsUnlockStore}
     <Drawer onClose={() => $settingsRouter.setNeedsUnlock(false)}>
-        <StrongholdUnlock onSuccess={onUnlockSuccess} onCancel={() => $settingsRouter.setNeedsUnlock(false)} />
+        <StrongholdUnlock
+            onSuccess={onUnlockSuccess}
+            onCancel={() => $settingsRouter.setNeedsUnlock(false, undefined)}
+        />
     </Drawer>
 {/if}
