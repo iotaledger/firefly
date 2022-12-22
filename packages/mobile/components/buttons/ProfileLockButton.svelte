@@ -15,24 +15,19 @@
 <button
     type="button"
     {disabled}
-    class="w-full rounded-xl p-4 cursor-pointer text-left border border-solid border-gray-300 bg-gray-50 bg-opacity-10 {classes}"
+    class="w-full rounded-xl p-4 cursor-pointer text-left border border-solid border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-opacity-10 {classes}"
     on:click|stopPropagation={onClick}
 >
-    <div class="grid grid-cols-12 gap-4">
-        <div class="col-span-1 h-full flex justify-center items-center justify-items-center">
-            <Icon
-                height={24}
-                width={24}
-                icon={$isStrongholdLocked ? IconEnum.Lock : IconEnum.Unlock}
-                classes="text-blue-500"
-            />
-        </div>
-        <div
-            class="
-                h-full flex items-center col-start-2
-                {!disabled ? 'col-end-12' : 'col-end-13'}
-            "
-        >
+    <div class="flex flex-row space-x-2 justify-between items-center">
+        <div class="flex flex-row space-x-2 items-center">
+            <div class="col-span-1 h-full flex justify-center items-center justify-items-center">
+                <Icon
+                    height={24}
+                    width={24}
+                    icon={$isStrongholdLocked ? IconEnum.Lock : IconEnum.Unlock}
+                    classes="text-blue-500"
+                />
+            </div>
             <span class="flex flex-col justify-center space-y-0.5">
                 <Text
                     type={TextType.p}
@@ -56,7 +51,7 @@
                 </Text>
             </span>
         </div>
-        <div class="col-span-1 col-end-13 h-full flex justify-center items-center justify-items-center">
+        <div class="col-end-12 h-full flex justify-center items-center justify-items-center">
             <Toggle active={$isStrongholdLocked} onClick={() => {}} />
         </div>
     </div>
