@@ -16,7 +16,7 @@ const tsConfigOptions = {
 const resolve = {
     alias: {
         svelte: path.dirname(require.resolve('svelte/package.json')),
-        '@auxiliary': path.resolve(__dirname, './lib/auxiliary'),
+        '@auxiliary': path.resolve(__dirname, '../shared/lib/auxiliary'),
         '@contexts': path.resolve(__dirname, '../shared/lib/contexts'),
         '@components': path.resolve(__dirname, './components/'),
         '@core': path.resolve(__dirname, '../shared/lib/core'),
@@ -32,6 +32,7 @@ const resolve = {
         fs: false,
         crypto: false,
     },
+    plugins: [new TsconfigPathsPlugin(tsConfigOptions)],
 }
 
 // ------------------------ Output ------------------------
@@ -136,6 +137,13 @@ module.exports = [
         devtool: prod ? false : 'cheap-module-source-map',
         devServer: {
             hot: true,
+            static: path.join(__dirname, 'public'),
+            client: {
+                overlay: {
+                    errors: true,
+                    warnings: false,
+                },
+            },
         },
     },
 ]

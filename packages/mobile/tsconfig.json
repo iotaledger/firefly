@@ -7,7 +7,7 @@
         "importsNotUsedAsValues": "remove",
         "lib": ["DOM", "ESNext"],
         "paths": {
-            "@auxiliary/*": ["./lib/auxiliary/*"],
+            "@auxiliary/*": ["../shared/lib/auxiliary/*"],
             "@contexts/*": ["../shared/lib/contexts/*"],
             "@components": ["./components"],
             "@core/*": ["../shared/lib/core/*"],
@@ -15,7 +15,10 @@
             "@lib/*": ["../shared/lib/*"],
             "@ui": ["../shared/components"],
             "@views": ["./views"]
-        }
+        },
+        "types": ["node"],
+        "allowSyntheticDefaultImports": true
     },
-    "include": ["./capacitor"]
+    "include": ["./capacitor"],
+    "exclude": ["./capacitor/plugins", "../**/tests"]
 }
