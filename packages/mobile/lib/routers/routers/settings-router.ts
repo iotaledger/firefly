@@ -10,6 +10,7 @@ export const settingsRoute = writable<SettingsRoute>(null)
 export const settingsRouter = writable<SettingsRouter>(null)
 
 const needsUnlockStore = writable<boolean>(false)
+const needsUnlockStoreCallbackStore = writable<(() => unknown) | undefined>(() => {})
 
 export class SettingsRouter extends Subrouter<SettingsRoute> {
     constructor() {
@@ -38,6 +39,10 @@ export class SettingsRouter extends Subrouter<SettingsRoute> {
     }
     previous(): void {
         if (get(needsUnlockStore)) {
+            const callback = get(needsUnlockStoreCallbackStore)
+            if (callback && typeof callback === 'function') {
+                callback()
+            }
             needsUnlockStore.set(false)
         } else {
             super.previous()
@@ -46,11 +51,18 @@ export class SettingsRouter extends Subrouter<SettingsRoute> {
     getNeedsUnlockStore(): Writable<boolean> {
         return needsUnlockStore
     }
-    setNeedsUnlock(value: boolean): void {
+    getNeedsUnlockCallbackStore(): Writable<(() => unknown) | undefined> {
+        return needsUnlockStoreCallbackStore
+    }
+    setNeedsUnlock(value: boolean, callback: (() => unknown) | undefined = undefined): void {
         needsUnlockStore.set(value)
+        if (callback) {
+            needsUnlockStoreCallbackStore.set(callback)
+        }
     }
     reset(): void {
         super.reset()
         needsUnlockStore.set(false)
+        needsUnlockStoreCallbackStore.set(undefined)
     }
 }
