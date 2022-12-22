@@ -5,7 +5,7 @@
 
     // TODO: replace with new wallet.rs type
     export let currentVote: { value: number; current: number; accumulated: number }[] = undefined
-    export let index: number = undefined
+    export let questionIndex: number = undefined
     export let isOpened = false
     export let question: Question
     export let selectedAnswerValues: number[] // TODO, maybe should be a svelte store
@@ -27,11 +27,11 @@
         })
     }
 
-    function handleAnswerClick(answer: number): void {
-        if (selectedAnswerValues[index] === answer) {
-            selectedAnswerValues[index] = undefined
+    function handleAnswerClick(answerValue: number): void {
+        if (selectedAnswerValues[questionIndex] === answerValue) {
+            selectedAnswerValues[questionIndex] = undefined
         } else {
-            selectedAnswerValues[index] = answer
+            selectedAnswerValues[questionIndex] = answerValue
         }
     }
 </script>
@@ -39,9 +39,9 @@
 <proposal-question class="flex flex-col px-5 py-4 rounded-xl border border-solid border-gray-200 cursor-pointer">
     <div on:click={onClick} class="flex justify-between items-center">
         <div class="flex flex-col">
-            {#if index !== undefined}
+            {#if questionIndex !== undefined}
                 <Text smaller fontWeight={FontWeight.bold} overrideColor classes="mb-1 text-blue-500"
-                    >Question {index + 1}</Text
+                    >Question {questionIndex + 1}</Text
                 >
             {/if}
             <Text fontWeight={FontWeight.bold} overrideColor classes="text-gray-900">{question.text}</Text>
@@ -57,7 +57,7 @@
                 {answerIndex}
                 on:answerClicked={(event) => handleAnswerClick(event.detail)}
                 hidden={!isOpened}
-                isSelected={selectedAnswerValues[index] === answer?.value}
+                isSelected={selectedAnswerValues[questionIndex] === answer?.value}
                 isVotedFor={voteValue === answer?.value}
                 percentage={percentages[answerIndex]}
             />

@@ -24,7 +24,7 @@
 <proposal-answer
     style:--percentage={percentage}
     class:hidden={isVotedFor ? false : hidden}
-    class="flex justify-between items-center p-3 rounded-md border border-solid
+    class="flex justify-between items-center p-3 rounded-md border border-solid relative
         {isVotedFor ? 'bg-blue-100' : ''}
         {showBorder ? 'border-blue-500' : 'border-gray-200'}
     "
@@ -48,29 +48,31 @@
         {/if}
         <Text fontWeight={FontWeight.medium}>{answer.text}</Text>
     </div>
-    {#if percentage}
-        <div>
-            <Text smaller fontWeight={FontWeight.medium} classes="ml-auto text-gray-700">{percentage}</Text>
-        </div>
-    {/if}
-    {#if answer.additionalInfo}
-        <div>
-            <TooltipIcon
-                icon={IconEnum.Info}
-                iconClasses="text-gray-600 dark:text-gray-200"
-                text={answer.additionalInfo}
-                position={Position.Left}
-                width={10}
-                height={10}
-            />
-        </div>
-    {/if}
+    <div class="flex items-center space-x-2">
+        {#if percentage}
+            <div>
+                <Text smaller fontWeight={FontWeight.medium} classes="ml-auto text-gray-700" overrideColor
+                    >{percentage}</Text
+                >
+            </div>
+        {/if}
+        {#if answer.additionalInfo}
+            <div>
+                <TooltipIcon
+                    icon={IconEnum.Info}
+                    iconClasses="text-gray-600 dark:text-gray-200"
+                    text={answer.additionalInfo}
+                    position={Position.Left}
+                    width={10}
+                    height={10}
+                />
+            </div>
+        {/if}
+    </div>
 </proposal-answer>
 
 <style type="text/scss">
     proposal-answer {
-        @apply relative;
-
         > * {
             z-index: 2;
         }
