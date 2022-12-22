@@ -7,37 +7,55 @@
     "author": "IOTA Foundation <contact@iota.org>",
     "license": "Apache-2.0",
     "scripts": {
-        "build": "NODE_ENV=production PLATFORM=mobile webpack && yarn assets:alpha",
+        "build": "STAGE=beta NODE_ENV=production PLATFORM=mobile webpack && yarn assets:beta",
+        "build:prod": "STAGE=prod NODE_ENV=production PLATFORM=mobile webpack && yarn assets:prod",
+        "build:beta": "STAGE=beta NODE_ENV=development PLATFORM=mobile webpack && yarn assets:beta",
+        "build:beta:android": "yarn build:beta && NODE_ENV=production yarn android:update",
+        "build:beta:ios": "yarn build:beta && NODE_ENV=production yarn ios:update",
+        "build:prod:android": "yarn build:prod && NODE_ENV=production yarn android:update",
+        "build:prod:ios": "yarn build:prod && NODE_ENV=production yarn ios:update",
         "ios": "cap copy ios && cap open ios",
         "ios:update": "cap sync ios && cap open ios",
         "android": "cap copy android && cap open android",
         "android:update": "cap sync android && cap open android",
-        "dev": "NODE_ENV=development PLATFORM=mobile webpack serve --content-base public --host 0.0.0.0 --client-log-level none",
+        "dev": "NODE_ENV=development PLATFORM=mobile webpack-dev-server --host 0.0.0.0",
         "dev:device": "NODE_ENV=development PLATFORM=mobile webpack --stats && cap copy",
         "assets:alpha": "capacitor/assets/assetgen.sh alpha.png",
         "assets:beta": "capacitor/assets/assetgen.sh beta.png",
-        "assets:prod": "capacitor/assets/assetgen.sh prod.png"
+        "assets:prod": "capacitor/assets/assetgen.sh prod.png",
+        "rename:appid:android": "mv android/app/src/main/java/org/iota/firefly/alpha/mobile/* android/app/src/main/java/org/iota/firefly/mobile/",
+        "force:install:pods": "cd ios/App && rm -rf ~/Library/Caches/CocoaPods Pods ~/Library/Developer/Xcode/DerivedData && pod deintegrate && pod install"
     },
     "devDependencies": {
         "@capacitor/android": "3.4.1",
         "@capacitor/cli": "^3.4.1",
         "@capacitor/core": "3.4.1",
         "@capacitor/ios": "3.4.1",
+        "@iota/types": "^1.0.0-beta.15",
+        "@tsconfig/svelte": "^1.0.10",
+        "@types/node": "^18.7.9",
+        "copy-webpack-plugin": "^7.0.0",
+        "css-loader": "^6.7.2",
         "imagemagick": "^0.1.3",
-        "mini-css-extract-plugin": "^1.6.0",
+        "mini-css-extract-plugin": "^1.3.5",
+        "postcss-url": "^10.1.1",
+        "ts-loader": "^8.0.4",
         "tsconfig-paths-webpack-plugin": "^3.5.2",
-        "webpack": "^5.16.0",
-        "webpack-cli": "^4.4.0",
-        "webpack-dev-server": "^3.11.3"
+        "webpack": "^5.74.0",
+        "webpack-cli": "^4.10.0",
+        "webpack-dev-server": "^4.0.0"
     },
     "dependencies": {
-        "@capacitor/splash-screen": "^1.2.2",
         "@capacitor-community/barcode-scanner": "^2.0.1",
         "@capacitor-community/privacy-screen": "^2.1.1",
-        "capacitor-secure-storage-plugin": "^0.6.2"
-    },
-    "engineStrict": true,
-    "engines": {
-        "node": ">=12"
+        "@capacitor/action-sheet": "^1.0.8",
+        "@capacitor/app": "^1.1.1",
+        "@capacitor/device": "1.1.2",
+        "@capacitor/keyboard": "^1.2.3",
+        "@capacitor/share": "^1.1.2",
+        "@capacitor/splash-screen": "^1.2.2",
+        "@capacitor/status-bar": "^1.0.8",
+        "@iota/wallet-mobile": "./packages/mobile/capacitor/plugins/capacitorjs/",
+        "shared": "0.0.0"
     }
 }
