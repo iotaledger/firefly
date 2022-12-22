@@ -48,7 +48,7 @@
         {/if}
         <Text fontWeight={FontWeight.medium}>{answer.text}</Text>
     </div>
-    <div class="flex items-center space-x-2">
+    <div class="flex items-center space-x-1">
         {#if percentage}
             <div>
                 <Text smaller fontWeight={FontWeight.medium} classes="ml-auto text-gray-700" overrideColor
