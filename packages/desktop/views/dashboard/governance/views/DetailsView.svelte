@@ -30,7 +30,6 @@
     let totalVotes = 0
 
     $: proposalState = $proposalsState[$activeProfileId]?.[$selectedProposal?.id]
-
     $: votesCounter = {
         total: totalVotes,
         power: $selectedAccount?.votingPower,
@@ -141,7 +140,7 @@
                         isOpened={openedQuestionIndex === index}
                         {index}
                         bind:selectedAnswerValues
-                        currentVote={proposalState?.questions[index]}
+                        currentVote={proposalState?.questions[index]?.answers}
                         onClick={() => handleQuestionClick(index)}
                     />
                 {/each}

@@ -3,7 +3,8 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
     import type { Question } from '@iota/wallet'
 
-    export let currentVote: Question = undefined
+    // TODO: replace with new wallet.rs type
+    export let currentVote: { value: number; current: number; accumulated: number }[] = undefined
     export let index: number = undefined
     export let isOpened = false
     export let question: Question
@@ -18,11 +19,9 @@
     $: currentVote, setPercentagesFromAccumulated()
 
     function setPercentagesFromAccumulated(): void {
-        const totalAccumulated = currentVote?.answers?.reduce((acc, answer) => acc + answer.accumulated, 0)
+        const totalAccumulated = currentVote?.reduce((acc, answer) => acc + answer.accumulated, 0)
         percentages = answers?.map((currentAnswer) => {
-            const answerAccumulated = currentVote?.answers?.find(
-                (answer) => answer.value === currentAnswer.value
-            )?.accumulated
+            const answerAccumulated = currentVote?.find((answer) => answer.value === currentAnswer.value)?.accumulated
             const divisionResult = answerAccumulated / totalAccumulated
             return Number.isNaN(divisionResult) ? '0%' : `${Math.round(divisionResult * 100)}%`
         })
@@ -60,7 +59,6 @@
                 hidden={!isOpened}
                 isSelected={selectedAnswerValues[index] === answer?.value}
                 isVotedFor={voteValue === answer?.value}
-                votes={currentVote}
                 percentage={percentages[answerIndex]}
             />
         {/each}
