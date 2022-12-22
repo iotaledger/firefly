@@ -11,6 +11,7 @@ export const SETTINGS_ICON_SVG = {
     [GeneralSettingsRoute.ChangeProfileName]: Icon.Profile,
     [SecuritySettingsRoute.ExportStronghold]: Icon.Export,
     [SecuritySettingsRoute.AppLock]: Icon.Lock3,
+    [SecuritySettingsRoute.MaxMediaSize]: Icon.File,
     [SecuritySettingsRoute.ChangePassword]: Icon.Lock2,
     [SecuritySettingsRoute.ChangePincode]: Icon.Lock,
     [SecuritySettingsRoute.DeleteProfile]: Icon.Delete,
