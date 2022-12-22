@@ -59,12 +59,12 @@ const features = {
     settings: {
         enabled: true,
         general: {
-            enabled: false,
+            enabled: true,
             theme: {
-                enabled: false,
+                enabled: true,
             },
             language: {
-                enabled: false,
+                enabled: true,
             },
             currency: {
                 enabled: false,
@@ -80,7 +80,7 @@ const features = {
             },
         },
         security: {
-            enabled: false,
+            enabled: true,
             exportStronghold: {
                 enabled: false,
             },
@@ -88,7 +88,7 @@ const features = {
                 enabled: false,
             },
             changePassword: {
-                enabled: false,
+                enabled: true,
             },
             changePincode: {
                 enabled: false,
@@ -98,7 +98,7 @@ const features = {
             },
         },
         advanced: {
-            enabled: false,
+            enabled: true,
             networkConfiguration: {
                 enabled: false,
             },
@@ -118,7 +118,7 @@ const features = {
                 enabled: false,
             },
             diagnostics: {
-                enabled: false,
+                enabled: true,
             },
             migrateLedgerIndex: {
                 enabled: false,
