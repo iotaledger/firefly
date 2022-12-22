@@ -1,22 +1,22 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
     import { ProposalStatusInfo, Text, TooltipIcon } from 'shared/components'
-    import { IProposal } from '@contexts/governance/interfaces'
-    import { selectedProposal } from '@contexts/governance/stores'
-    import { ProposalStatus } from '@contexts/governance/enums'
-    import { GovernanceRoute, governanceRouter } from '@core/router'
-
-    import { FontWeight, Position } from '../enums'
     import { Icon } from '@auxiliary/icon/enums'
     import { localize } from '@core/i18n'
-    import { proposalsState } from '@contexts/governance/stores'
+    import { activeProfileId } from '@core/profile/stores'
+    import { GovernanceRoute, governanceRouter } from '@core/router'
+    import { IProposal } from '@contexts/governance/interfaces'
+    import { selectedProposal, proposalsState } from '@contexts/governance/stores'
+    import { ProposalStatus } from '@contexts/governance/enums'
     import { isVotingForProposal } from '@contexts/governance/utils'
-    import { onMount } from 'svelte'
+
+    import { FontWeight, Position } from '../enums'
 
     export let proposal: IProposal
 
-    let hasVoted = false
+    $: proposalState = $proposalsState[$activeProfileId]?.[proposal?.id]
 
-    $: proposalState = $proposalsState[proposal?.id]
+    let hasVoted = false
 
     async function setHasVoted(): Promise<void> {
         hasVoted = await isVotingForProposal(proposal?.id)

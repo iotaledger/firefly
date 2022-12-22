@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
+    import { VotingEventPayload, ParticipationEventType } from '@iota/wallet/out/types'
     import { localize } from '@core/i18n'
     import {
         Button,
@@ -14,21 +15,22 @@
         TextType,
     } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
+    import { openPopup } from '@auxiliary/popup'
+    import { activeProfileId } from '@core/profile/stores'
+    import { networkStatus } from '@core/network/stores'
     import { getVotingEvent } from '@core/profile-manager'
     import { governanceRouter } from '@core/router'
     import { getParticipationOverview, selectedAccount } from '@core/account'
-    import { VotingEventPayload, ParticipationEventType } from '@iota/wallet/out/types'
     import type { IParticipations } from '@contexts/governance/interfaces'
-    import { openPopup } from '@auxiliary/popup'
     import { ProposalStatus } from '@contexts/governance/enums'
     import { proposalsState, selectedProposal } from '@contexts/governance/stores'
-    import { networkStatus } from '@core/network/stores'
 
     let selectedAnswerValues: number[] = []
     let votingPayload: VotingEventPayload
     let totalVotes = 0
 
-    $: proposalState = $proposalsState[$selectedProposal?.id]
+    $: proposalState = $proposalsState[$activeProfileId]?.[$selectedProposal?.id]
+
     $: votesCounter = {
         total: totalVotes,
         power: $selectedAccount?.votingPower,
