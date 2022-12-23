@@ -1,10 +1,10 @@
 import { syncBalance } from '@core/account/actions/syncBalance'
 import { addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput, getIsSpendableFromUnspentNftOutput } from '@core/nfts'
 import { activeAccounts } from '@core/profile/stores'
-import { ActivityType, addPersistedAsset, generateActivity, getOrRequestAssetFromPersistedAssets } from '@core/wallet'
+import { ActivityType, addPersistedAsset, generateActivities, getOrRequestAssetFromPersistedAssets } from '@core/wallet'
 import { OUTPUT_TYPE_ALIAS, OUTPUT_TYPE_NFT } from '@core/wallet/constants'
 import {
-    addActivityToAccountActivitiesInAllAccountActivities,
+    addActivitiesToAccountActivitiesInAllAccountActivities,
     allAccountActivities,
 } from '@core/wallet/stores/all-account-activities.store'
 import { getBech32AddressFromAddressTypes } from '@core/wallet/utils/getBech32AddressFromAddressTypes'
@@ -40,12 +40,14 @@ export async function handleNewOutputEventInternal(
 
         const processedOutput = preprocessGroupedOutputs([output], payload?.transactionInputs ?? [], account)
 
-        const activity = generateActivity(processedOutput, account)
-        if (activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry) {
-            const asset = await getOrRequestAssetFromPersistedAssets(activity.assetId)
-            addPersistedAsset(asset)
+        const activities = generateActivities(processedOutput, account)
+        for (const activity of activities) {
+            if (activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry) {
+                const asset = await getOrRequestAssetFromPersistedAssets(activity.assetId)
+                addPersistedAsset(asset)
+            }
         }
-        addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)
+        addActivitiesToAccountActivitiesInAllAccountActivities(account.index, activities)
     }
 
     if (isNftOutput) {
