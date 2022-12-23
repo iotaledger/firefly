@@ -6,6 +6,7 @@ import { selectedAccount } from '@core/account/stores'
 import { isVotingForProposal } from './isVotingForProposal'
 
 export async function getNumberOfVotingProposals(): Promise<number> {
-    const overview = await getParticipationOverview(get(selectedAccount)?.index)
-    return Object.keys(overview?.participations).filter((proposalId) => isVotingForProposal(proposalId)).length
+    const { participations } = (await getParticipationOverview(get(selectedAccount)?.index)) ?? {}
+    const votingProposals = Object.keys(participations ?? {}).filter((proposalId) => isVotingForProposal(proposalId))
+    return votingProposals.length
 }
