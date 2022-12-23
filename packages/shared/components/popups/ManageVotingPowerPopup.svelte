@@ -14,6 +14,7 @@
     let assetAmountInput: AssetAmountInput
     let rawAmount = $selectedAccount?.votingPower
 
+    $: votingPower = parseInt($selectedAccount?.votingPower, 10)
     $: isTransferring = $selectedAccount?.isTransferring
 
     function handleBack(): void {
@@ -37,7 +38,14 @@
 <Text type={TextType.h4} classes="mb-3">{localize('popups.manageVotingPower.title')}</Text>
 <Text type={TextType.p} secondary classes="mb-5">{localize('popups.manageVotingPower.body')}</Text>
 <div class="space-y-4 mb-6">
-    <AssetAmountInput bind:this={assetAmountInput} bind:rawAmount {asset} containsSlider disableAssetSelection />
+    <AssetAmountInput
+        bind:this={assetAmountInput}
+        bind:rawAmount
+        {asset}
+        {votingPower}
+        containsSlider
+        disableAssetSelection
+    />
     <TextHint info text={localize('popups.manageVotingPower.hint')} />
 </div>
 <div class="flex flex-row flex-nowrap w-full space-x-4">
