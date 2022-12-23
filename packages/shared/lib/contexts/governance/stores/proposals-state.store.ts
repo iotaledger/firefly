@@ -6,7 +6,7 @@ import { IProposalState } from '../interfaces'
 
 export const proposalsState = persistent<IProposalState>('proposalsState', {})
 
-export async function addProposalState(eventId: string): Promise<void> {
+export async function addProposalState(eventId: string, nodeUrl: string): Promise<void> {
     const profileId = get(activeProfileId)
     const _proposalsState = get(proposalsState)
 
@@ -16,7 +16,7 @@ export async function addProposalState(eventId: string): Promise<void> {
         _proposalsState[profileId] = {}
     }
 
-    _proposalsState[profileId][eventId] = votingProposalState
+    _proposalsState[profileId][eventId] = { state: votingProposalState, nodeUrl }
     proposalsState.set(_proposalsState)
 }
 
@@ -36,7 +36,7 @@ export async function updateProposalsState(): Promise<void> {
 
     for (const eventId of Object.keys(_proposalsState[profileId] ?? {})) {
         const votingProposalState = await getVotingProposalState(eventId)
-        _proposalsState[profileId][eventId] = votingProposalState
+        _proposalsState[profileId][eventId].state = votingProposalState
     }
     proposalsState.set(_proposalsState)
 }

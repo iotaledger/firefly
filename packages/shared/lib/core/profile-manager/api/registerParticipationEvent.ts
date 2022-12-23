@@ -11,6 +11,6 @@ export async function registerParticipationEvent(eventId: EventId, nodes: Node[]
     const event = await manager.registerParticipationEvent(eventId, nodes)
 
     registeredEventIds.update((ids) => [...ids, eventId])
-    await addProposalState(eventId)
+    await addProposalState(eventId, nodes[0].url)
     return event
 }
