@@ -2,6 +2,7 @@
     import { onMount } from 'svelte'
     import { MenuItem, Modal, Text, Tooltip } from 'shared/components'
     import { Position } from 'shared/components/enums'
+    import { selectedAccount } from '@core/account'
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
     import { isVotingForSelectedProposal, isAnyAccountVotingForSelectedProposal } from '@contexts/governance/utils'
@@ -12,8 +13,11 @@
 
     let isVotingForProposal: boolean
     let isAnyAccountVotingForProposal: boolean
-    let deleteMenuItem
+    let deleteMenuItem: HTMLDivElement
     let isTooltipVisible = false
+
+    $: isTransferring = $selectedAccount?.isTransferring
+    $: isTransferring, updateIsVoting() // vote/stop vote changes the isTransferring value, this means that is less updates than relying on proposalsState
 
     function onStopVotingClick(): void {
         openPopup({
@@ -29,20 +33,20 @@
         modal.close()
     }
 
-    async function onMountHelper(): Promise<void> {
+    async function updateIsVoting(): Promise<void> {
         try {
             isVotingForProposal = await isVotingForSelectedProposal()
-            isAnyAccountVotingForProposal = await isAnyAccountVotingForSelectedProposal()
+            isAnyAccountVotingForProposal = isAnyAccountVotingForSelectedProposal()
         } catch (err) {
             handleError(err)
         }
     }
 
     function showTooltip(show: boolean): void {
-        isTooltipVisible = isAnyAccountVotingForProposal && show
+        isTooltipVisible = isVotingForProposal !== undefined && isAnyAccountVotingForProposal && show
     }
 
-    onMount(() => void onMountHelper())
+    onMount(() => void updateIsVoting())
 </script>
 
 <Modal bind:this={modal} {...$$restProps}>
@@ -66,7 +70,7 @@
                     title={localize('actions.removeProposal')}
                     onClick={onRemoveProposalClick}
                     variant="error"
-                    disabled={isAnyAccountVotingForProposal}
+                    disabled={isAnyAccountVotingForProposal || isVotingForProposal === undefined}
                 />
             </div>
             {#if isTooltipVisible}
