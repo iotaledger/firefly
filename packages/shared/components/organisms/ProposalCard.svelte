@@ -1,23 +1,33 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
     import { ProposalStatusInfo, Text, TooltipIcon } from 'shared/components'
-    import { IProposal } from '@contexts/governance/interfaces'
-    import { selectedProposal } from '@contexts/governance/stores'
-    import { ProposalStatus } from '@contexts/governance/enums'
-    import { GovernanceRoute, governanceRouter } from '@core/router'
-
-    import { FontWeight, Position } from '../enums'
     import { Icon } from '@auxiliary/icon/enums'
     import { localize } from '@core/i18n'
-    import { proposalsState } from '@contexts/governance/stores'
+    import { activeProfileId } from '@core/profile/stores'
+    import { GovernanceRoute, governanceRouter } from '@core/router'
+    import { IProposal } from '@contexts/governance/interfaces'
+    import { selectedProposal, proposalsState } from '@contexts/governance/stores'
+    import { ProposalStatus } from '@contexts/governance/enums'
+    import { isVotingForProposal } from '@contexts/governance/utils'
+
+    import { FontWeight, Position } from '../enums'
 
     export let proposal: IProposal
 
-    $: proposalState = $proposalsState[proposal?.id]
+    $: proposalState = $proposalsState[$activeProfileId]?.[proposal?.id]
+
+    let hasVoted = false
+
+    async function setHasVoted(): Promise<void> {
+        hasVoted = await isVotingForProposal(proposal?.id)
+    }
 
     function handleProposalClick(): void {
         $selectedProposal = proposal
         $governanceRouter.goTo(GovernanceRoute.Details)
     }
+
+    onMount(() => void setHasVoted())
 </script>
 
 <proposal-card
@@ -42,7 +52,7 @@
     </div>
     <div class="flex justify-between items-center">
         <ProposalStatusInfo status={proposalState?.status} milestones={proposal.milestones} />
-        {#if proposal.hasVoted}
+        {#if hasVoted}
             <TooltipIcon icon={Icon.Voted} size="small" position={Position.Left} iconClasses="text-gray-500">
                 <Text smaller overrideColor fontWeight={FontWeight.semibold} classes="text-gray-600">
                     {localize('views.governance.proposals.voted')}
