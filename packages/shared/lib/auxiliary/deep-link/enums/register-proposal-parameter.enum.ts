@@ -4,5 +4,4 @@
 export enum RegisterProposalOperationParameter {
     EventId = 'eventId',
     NodeUrl = 'nodeUrl',
-    // TODO: What about auth?
 }
