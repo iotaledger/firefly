@@ -1,11 +1,11 @@
-import { get } from 'svelte/store'
 import { selectedAccount, updateSelectedAccount } from '@core/account'
 import {
-    addActivityToAccountActivitiesInAllAccountActivities,
-    generateActivity,
+    addActivitiesToAccountActivitiesInAllAccountActivities,
+    generateActivities,
     preprocessTransaction,
 } from '@core/wallet'
 import { Transaction } from '@iota/wallet'
+import { get } from 'svelte/store'
 
 export async function setVotingPower(rawAmount: string): Promise<void> {
     try {
@@ -31,6 +31,6 @@ export async function setVotingPower(rawAmount: string): Promise<void> {
 async function processAndAddToActivities(transaction: Transaction): Promise<void> {
     const account = get(selectedAccount)
     const preprocessedTransaction = await preprocessTransaction(transaction, account)
-    const activity = generateActivity(preprocessedTransaction, account)
-    addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)
+    const activities = generateActivities(preprocessedTransaction, account)
+    addActivitiesToAccountActivitiesInAllAccountActivities(account.index, activities)
 }
