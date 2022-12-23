@@ -5,8 +5,9 @@ import { TrackedParticipationOverview } from '@iota/wallet'
 import { getParticipationOverview } from '@core/account/api'
 import { selectedAccount } from '@core/account/stores'
 
-export async function isVotingForProposal(proposalId: string): Promise<boolean> {
-    const overview = await getParticipationOverview(get(selectedAccount)?.index)
+export async function isVotingForProposal(proposalId: string, accountIndex?: number): Promise<boolean> {
+    const _accountIndex = accountIndex ?? get(selectedAccount)?.index
+    const overview = await getParticipationOverview(_accountIndex)
     if (overview) {
         if (proposalId in overview.participations) {
             const participationOutputs: TrackedParticipationOverview[] = Object.values(

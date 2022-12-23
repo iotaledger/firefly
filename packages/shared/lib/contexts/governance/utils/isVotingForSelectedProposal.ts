@@ -4,7 +4,7 @@ import { selectedProposal } from '../stores'
 
 import { isVotingForProposal } from './isVotingForProposal'
 
-export async function isVotingForSelectedProposal(): Promise<boolean> {
+export async function isVotingForSelectedProposal(accountIndex?: number): Promise<boolean> {
     const proposalId = get(selectedProposal)?.id
-    return isVotingForProposal(proposalId)
+    return isVotingForProposal(proposalId, accountIndex)
 }
