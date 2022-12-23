@@ -4,10 +4,10 @@
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth, activeProfile } from '@core/profile'
     import {
-        addActivityToAccountActivitiesInAllAccountActivities,
+        addActivitiesToAccountActivitiesInAllAccountActivities,
         convertBech32ToHexAddress,
         formatTokenAmountPrecise,
-        generateActivity,
+        generateActivities,
         EMPTY_HEX_ID,
         preprocessTransaction,
         UNLOCK_CONDITION_GOVERNOR_ADDRESS,
@@ -59,8 +59,8 @@
             updateSelectedAccount({ isTransferring: true })
             const transaction = await $selectedAccount.createAliasOutput()
             const processedTransaction = await preprocessTransaction(transaction, $selectedAccount)
-            const activity = generateActivity(processedTransaction, $selectedAccount)
-            addActivityToAccountActivitiesInAllAccountActivities($selectedAccount.index, activity)
+            const activities = generateActivities(processedTransaction, $selectedAccount)
+            addActivitiesToAccountActivitiesInAllAccountActivities($selectedAccount.index, activities)
             closePopup()
         } catch (err) {
             handleError(err)

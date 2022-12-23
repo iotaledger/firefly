@@ -8,7 +8,7 @@ import { isProposalActive } from './isProposalActive'
 
 export function getNumberOfActiveProposals(): number {
     const profileId = get(activeProfileId)
-    return Object.values(get(proposalsState)[profileId]).filter((proposalStatus) =>
-        isProposalActive(<ProposalStatus>proposalStatus?.status)
+    return Object.values(get(proposalsState)[profileId]).filter(({ state }) =>
+        isProposalActive(<ProposalStatus>state?.status)
     ).length
 }

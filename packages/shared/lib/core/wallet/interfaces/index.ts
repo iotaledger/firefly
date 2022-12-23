@@ -1,5 +1,6 @@
 export * from './account-assets.interface'
 export * from './account-subject.interface'
+export * from './activity-generation-parameters.interface'
 export * from './address-subject.interface'
 export * from './asset-balance.interface'
 export * from './asset.interface'
