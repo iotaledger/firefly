@@ -32,6 +32,10 @@ export function removeProposalState(eventId: string): void {
 
 export async function updateProposalsState(): Promise<void> {
     const profileId = get(activeProfileId)
+    if (!profileId) {
+        return
+    }
+
     const _proposalsState = get(proposalsState)
 
     for (const eventId of Object.keys(_proposalsState[profileId] ?? {})) {
