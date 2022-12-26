@@ -29,7 +29,7 @@
     let votingPayload: VotingEventPayload
     let totalVotes = 0
 
-    $: proposalState = $proposalsState[$activeProfileId]?.[$selectedProposal?.id]
+    $: proposalState = $proposalsState[$activeProfileId]?.[$selectedProposal?.id]?.state
     $: votesCounter = {
         total: totalVotes,
         power: $selectedAccount?.votingPower,

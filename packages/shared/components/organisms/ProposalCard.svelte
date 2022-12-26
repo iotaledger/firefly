@@ -14,7 +14,7 @@
 
     export let proposal: IProposal
 
-    $: proposalState = $proposalsState[$activeProfileId]?.[proposal?.id]
+    $: proposalState = $proposalsState[$activeProfileId]?.[proposal?.id]?.state
 
     let hasVoted = false
 
