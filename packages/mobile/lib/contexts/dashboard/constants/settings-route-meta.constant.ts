@@ -1,11 +1,12 @@
 import { SETTINGS_ICON_SVG } from '@lib/auxiliary/icon'
 import features from '../../../../features/features'
 import {
+    AppLockView,
+    ThemeView,
     ChangePasswordView,
     ErrorLogView,
     LanguageView,
     DiagnosticsView,
-    ThemeView,
     WalletFinderView,
 } from '../../../../views/dashboard/drawers/profile/views/settings'
 import { SettingsRoute } from '../../../routers'
@@ -30,6 +31,13 @@ export const SETTINGS_ROUTE_META = {
         view: LanguageView,
     },
     // Security
+    [SettingsRoute.AppLock]: {
+        name: `views.settings.${SettingsRoute.AppLock}.title`,
+        category: SettingsCategory.Security,
+        enabled: security?.[SettingsRoute.AppLock]?.enabled,
+        icon: SETTINGS_ICON_SVG[SettingsRoute.AppLock],
+        view: AppLockView,
+    },
     [SettingsRoute.ChangePassword]: {
         name: `views.settings.${SettingsRoute.ChangePassword}.title`,
         category: SettingsCategory.Security,
