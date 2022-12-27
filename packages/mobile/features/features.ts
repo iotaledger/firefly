@@ -85,7 +85,7 @@ const features = {
                 enabled: false,
             },
             appLock: {
-                enabled: false,
+                enabled: true,
             },
             changePassword: {
                 enabled: true,

@@ -29,7 +29,7 @@
     let votingPayload: VotingEventPayload
     let totalVotes = 0
 
-    $: proposalState = $proposalsState[$activeProfileId]?.[$selectedProposal?.id]
+    $: proposalState = $proposalsState[$activeProfileId]?.[$selectedProposal?.id]?.state
     $: votesCounter = {
         total: totalVotes,
         power: $selectedAccount?.votingPower,
@@ -136,14 +136,14 @@
     <Pane classes="w-3/5 h-full p-6 flex flex-col justify-between ">
         <proposal-questions class="flex flex-1 flex-col space-y-5 overflow-y-scroll">
             {#if questions}
-                {#each questions as question, index}
+                {#each questions as question, questionIndex}
                     <ProposalQuestion
                         {question}
-                        isOpened={openedQuestionIndex === index}
-                        {index}
+                        {questionIndex}
+                        isOpened={openedQuestionIndex === questionIndex}
                         bind:selectedAnswerValues
-                        currentVote={proposalState?.questions[index]?.answers}
-                        onClick={() => handleQuestionClick(index)}
+                        currentVote={proposalState?.questions[questionIndex]?.answers}
+                        onClick={() => handleQuestionClick(questionIndex)}
                     />
                 {/each}
             {/if}

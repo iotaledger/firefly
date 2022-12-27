@@ -8,8 +8,8 @@
     import { registerParticipationEvent } from '@core/profile-manager/api'
     import { isValidUrl } from '@core/utils/validation'
 
-    let eventId: string
-    let nodeUrl: string
+    export let eventId: string
+    export let nodeUrl: string
 
     let eventIdError: string
     let nodeUrlError: string

@@ -1,3 +1,4 @@
+export { default as AppLockView } from './AppLockView.svelte'
 export { default as ChangePasswordView } from './ChangePasswordView.svelte'
 export { default as DeleteProfileView } from './DeleteProfileView.svelte'
 export { default as DiagnosticsView } from './DiagnosticsView.svelte'

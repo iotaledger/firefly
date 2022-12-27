@@ -1,12 +1,12 @@
 <script lang="typescript">
-    import { AccountActionsButton, AccountSwitcherButton, ProfileActionsButton } from './'
+    import { AccountActionsButton, AccountSwitcherButton, DashboardProfileButton } from './'
     import features from '@features/features'
 </script>
 
 <div class="grid grid-cols-4 h-10">
     <div class="col-span-1">
         {#if features?.dashboard?.profileActions?.enabled}
-            <ProfileActionsButton />
+            <DashboardProfileButton />
         {/if}
     </div>
     <div class="flex justify-center col-span-2 content-center">
