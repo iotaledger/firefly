@@ -14,11 +14,11 @@
     export let error: string = ''
     export let warning: string = ''
     export let translationSuffix: string = 'long'
+    export let isLoaded = false
 
     const bgColor = 'gray-200'
     const darkBgColor = 'gray-700'
 
-    let isLoaded = false
     let hasError = false
 
     $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, nftId)

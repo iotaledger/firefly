@@ -1,14 +1,15 @@
 <script lang="typescript">
     import { Button, TextInput, Text, TextType } from 'shared/components'
-    import { localize } from '@core/i18n'
-    import { closePopup } from '@auxiliary/popup'
-    import { registerParticipationEvent } from '@core/profile-manager/api'
-    import { isValidUrl } from '@core/utils'
+    import type { Auth } from '@iota/wallet'
+    import { showAppNotification } from '@auxiliary/notification/actions'
+    import { closePopup, openPopup } from '@auxiliary/popup/actions'
     import { handleError } from '@core/error/handlers/handleError'
-    import { showAppNotification } from '@auxiliary/notification'
+    import { localize } from '@core/i18n'
+    import { registerParticipationEvent } from '@core/profile-manager/api'
+    import { isValidUrl } from '@core/utils/validation'
 
-    let eventId: string
-    let nodeUrl: string
+    export let eventId: string
+    export let nodeUrl: string
 
     let eventIdError: string
     let nodeUrlError: string
@@ -22,18 +23,32 @@
     async function handleConfirm(): Promise<void> {
         try {
             await Promise.all([validateEventId(), validateNodeUrl()])
-            await registerParticipationEvent(eventId, [{ url: nodeUrl }])
-            showAppNotification({
-                type: 'success',
-                message: localize('views.governance.proposals.successRegister'),
-                alert: true,
-            })
-            closePopup()
+            await registerParticipationWrapper()
         } catch (err) {
-            if (!nodeUrlError && !eventIdError) {
+            const isAuthenticationError = err?.error?.match(/(username)|(password)|(jwt)/g).length > 0
+            if (isAuthenticationError) {
+                openNodeAuthRequiredPopup()
+            } else if (!nodeUrlError && !eventIdError) {
                 handleError(err)
             }
         }
+    }
+
+    function openNodeAuthRequiredPopup(): void {
+        openPopup({
+            type: 'nodeAuthRequired',
+            props: { onSubmit: registerParticipationWrapper },
+        })
+    }
+
+    async function registerParticipationWrapper(auth?: Auth): Promise<void> {
+        await registerParticipationEvent(eventId, [{ url: nodeUrl, auth }])
+        showAppNotification({
+            type: 'success',
+            message: localize('views.governance.proposals.successRegister'),
+            alert: true,
+        })
+        closePopup()
     }
 
     async function validateNodeUrl(): Promise<void> {

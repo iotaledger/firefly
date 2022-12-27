@@ -1,1 +1,1 @@
-export * from './generateActivity'
+export * from './generateActivities'

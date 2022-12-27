@@ -4,7 +4,6 @@ import { isValidIrc30 } from '@core/token'
 import { selectedAccount } from '../../account/stores/selected-account.store'
 import { Activity } from '../types/activity.type'
 import {
-    ActivityAction,
     ActivityDirection,
     ActivityType,
     BooleanFilterOption,
@@ -120,11 +119,7 @@ export const queriedActivities: Readable<Activity[]> = derived(
     [selectedAccountActivities, activitySearchTerm, activityFilter],
     ([$selectedAccountActivities, $activitySearchTerm]) => {
         let activityList = $selectedAccountActivities.filter((_activity) => {
-            if (
-                !_activity.isHidden &&
-                (_activity.type === ActivityType.Nft ||
-                    (_activity.type === ActivityType.Alias && _activity.action === ActivityAction.Mint))
-            ) {
+            if (!_activity.isHidden && (_activity.type === ActivityType.Nft || _activity.type === ActivityType.Alias)) {
                 return true
             }
 

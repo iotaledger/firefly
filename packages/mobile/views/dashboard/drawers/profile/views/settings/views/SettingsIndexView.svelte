@@ -40,22 +40,24 @@
     }
 </script>
 
-<div class="flex flex-col h-full justify-start items-start">
+<div class="flex flex-col h-full justify-start items-start space-y-6">
     {#each Object.values(categories) as category}
         {#if category.enabled}
-            <Text type={TextType.h4} classes="mb-4">{category.name}</Text>
-            <div class="flex flex-col space-y-1 w-full">
-                {#each category.settings as setting}
-                    {#if setting.enabled}
-                        <button
-                            class="p-2 w-full flex flex-row items-center space-x-4"
-                            on:click={() => handleSettingClick(setting.route)}
-                        >
-                            <Icon width="18" height="18" icon={setting.icon} classes="text-blue-500" />
-                            <Text type={TextType.p} secondary>{localize(setting.name)}</Text>
-                        </button>
-                    {/if}
-                {/each}
+            <div class="flex flex-col space-y-4">
+                <Text type={TextType.h4}>{category.name}</Text>
+                <div class="flex flex-col space-y-1 w-full">
+                    {#each category.settings as setting}
+                        {#if setting.enabled}
+                            <button
+                                class="p-2 w-full flex flex-row items-center space-x-4"
+                                on:click={() => handleSettingClick(setting.route)}
+                            >
+                                <Icon width="18" height="18" icon={setting.icon} classes="text-blue-500" />
+                                <Text type={TextType.p} secondary>{localize(setting.name)}</Text>
+                            </button>
+                        {/if}
+                    {/each}
+                </div>
             </div>
         {/if}
     {/each}
