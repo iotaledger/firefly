@@ -5,14 +5,14 @@ import { handleLedgerError } from '@core/ledger'
 import { addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput, IIrc27Metadata } from '@core/nfts'
 import { activeProfile, ProfileType } from '@core/profile'
 import { Converter } from '@core/utils'
-import { INftOutput } from '@iota/types'
 import { NftOptions } from '@iota/wallet'
 import { get } from 'svelte/store'
-import { DEFAULT_TRANSACTION_OPTIONS } from '../constants'
+import { DEFAULT_TRANSACTION_OPTIONS, OUTPUT_TYPE_NFT } from '../constants'
+import { ActivityAction } from '../enums'
 import { addActivityToAccountActivitiesInAllAccountActivities, resetMintNftDetails } from '../stores'
 import { NftActivity } from '../types'
-import { getNftOutputFromTransaction, preprocessTransaction } from '../utils'
-import { generateActivity } from '../utils/generateActivity'
+import { preprocessTransaction } from '../utils'
+import { generateSingleNftActivity } from '../utils/generateActivity/generateSingleNftActivity'
 
 export async function mintNft(metadata: IIrc27Metadata, amount: number): Promise<void> {
     try {
@@ -35,15 +35,25 @@ export async function mintNft(metadata: IIrc27Metadata, amount: number): Promise
             alert: true,
         })
 
-        // Generate Activity
         const processedTransaction = await preprocessTransaction(mintNftTransaction, account)
-        const activity: NftActivity = generateActivity(processedTransaction, account) as NftActivity
-        addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)
+        const outputs = processedTransaction.outputs
 
-        // Store NFT
-        const output = getNftOutputFromTransaction(processedTransaction.outputs)
-        const nft = buildNftFromNftOutput(output.output as INftOutput, activity.outputId, false)
-        addOrUpdateNftInAllAccountNfts(account.index, nft)
+        // Generate Activities
+        for (const output of outputs) {
+            if (output.output.type === OUTPUT_TYPE_NFT) {
+                // For each minted NFT, generate a new activity
+                const activity: NftActivity = generateSingleNftActivity(account, {
+                    action: ActivityAction.Mint,
+                    processedTransaction,
+                    wrappedOutput: output,
+                }) as NftActivity
+                addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)
+
+                // Store NFT metadata for each minted NFT
+                const nft = buildNftFromNftOutput(output.output, activity.outputId, false)
+                addOrUpdateNftInAllAccountNfts(account.index, nft)
+            }
+        }
 
         return Promise.resolve()
     } catch (err) {

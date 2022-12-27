@@ -8,42 +8,93 @@
     export let answer: Answer
     export let hidden: boolean = null
     export let isSelected: boolean = null
+    export let isVotedFor: boolean = null
     export let answerIndex: number = undefined
+    export let percentage: string = ''
+
+    $: showBorder = isVotedFor || isSelected
 
     const dispatch = createEventDispatcher()
 
     function handleClick(): void {
-        dispatch('answerClicked', answerIndex)
+        dispatch('answerClicked', answer?.value)
     }
 </script>
 
 <proposal-answer
-    class:hidden
-    class="flex justify-between items-center p-3 rounded-md border border-solid {isSelected
-        ? 'border-blue-500'
-        : 'border-gray-200'} "
+    style:--percentage={percentage}
+    class:hidden={isVotedFor ? false : hidden}
+    class="flex justify-between items-center p-3 rounded-md border border-solid relative
+        {isVotedFor ? 'bg-blue-100' : ''}
+        {showBorder ? 'border-blue-500' : 'border-gray-200'}
+    "
     on:click={handleClick}
 >
-    <div class="flex space-x-3">
+    <div class="flex space-x-3 items-center">
         {#if answerIndex !== undefined}
-            <span
-                class="flex items-center justify-center h-5 w-5 text-12 {isSelected
-                    ? 'bg-blue-500 text-white'
-                    : 'text-gray-500'} text-700 border border-solid border-gray-200"
-            >
-                {answerIndex + 1}
-            </span>
+            {#if isVotedFor}
+                <div class="flex justify-center w-5">
+                    <span class="ring flex items-center justify-center h-1.5 w-1.5 bg-blue-500 rounded-full" />
+                </div>
+            {:else}
+                <span
+                    class="flex items-center justify-center h-5 w-5 text-12 {isSelected
+                        ? 'bg-blue-500 text-white'
+                        : 'bg-white text-gray-500'} text-700 border border-solid border-gray-200"
+                >
+                    {answerIndex + 1}
+                </span>
+            {/if}
         {/if}
         <Text fontWeight={FontWeight.medium}>{answer.text}</Text>
     </div>
-    {#if answer.additionalInfo}
-        <TooltipIcon
-            icon={IconEnum.Info}
-            iconClasses="text-gray-600 dark:text-gray-200"
-            text={answer.additionalInfo}
-            position={Position.Left}
-            width={10}
-            height={10}
-        />
-    {/if}
+    <div class="flex items-center space-x-1">
+        {#if percentage}
+            <div>
+                <Text smaller fontWeight={FontWeight.medium} classes="ml-auto text-gray-700" overrideColor
+                    >{percentage}</Text
+                >
+            </div>
+        {/if}
+        <div class="flex justify-center items-center w-3 h-3">
+            {#if answer.additionalInfo}
+                <TooltipIcon
+                    icon={IconEnum.Info}
+                    iconClasses="text-gray-600 dark:text-gray-200"
+                    text={answer.additionalInfo}
+                    position={Position.Left}
+                    width={10}
+                    height={10}
+                />
+            {/if}
+        </div>
+    </div>
 </proposal-answer>
+
+<style type="text/scss">
+    proposal-answer {
+        > * {
+            z-index: 2;
+        }
+
+        &::after {
+            @apply -ml-3;
+            @apply absolute;
+            @apply bg-gray-100;
+            @apply h-full;
+            @apply inline-block;
+            @apply mr-auto;
+            @apply rounded-l-md;
+            @apply z-10;
+            content: '';
+            width: var(--percentage);
+            z-index: 1;
+        }
+    }
+
+    .ring {
+        @apply ring-4;
+        @apply ring-blue-500;
+        @apply ring-opacity-20;
+    }
+</style>
