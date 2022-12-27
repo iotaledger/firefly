@@ -27,6 +27,7 @@
         resetRouters,
     } from './lib/routers'
     import { DashboardView, LoginRouter, OnboardingRouter } from './views'
+    import { _ } from '@core/i18n'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -103,7 +104,9 @@
     <OnboardingRouter />
 </Route>
 <Route route={AppRoute.Dashboard}>
-    <DashboardView />
+    {#key $_}
+        <DashboardView />
+    {/key}
 </Route>
 
 <ToastContainer />
