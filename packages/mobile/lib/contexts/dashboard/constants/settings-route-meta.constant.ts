@@ -4,6 +4,7 @@ import {
     AppLockView,
     ThemeView,
     ChangePasswordView,
+    ChangeProfileNameView,
     DeleteProfileView,
     DiagnosticsView,
     ErrorLogView,
@@ -31,6 +32,13 @@ export const SETTINGS_ROUTE_META = {
         icon: SETTINGS_ICON_SVG[SettingsRoute.Language],
         view: LanguageView,
     },
+    [SettingsRoute.ChangeProfileName]: {
+        name: `views.settings.${SettingsRoute.ChangeProfileName}.title`,
+        category: SettingsCategory.General,
+        enabled: general?.[SettingsRoute.ChangeProfileName]?.enabled,
+        icon: SETTINGS_ICON_SVG[SettingsRoute.ChangeProfileName],
+        view: ChangeProfileNameView,
+    },
     // Security
     [SettingsRoute.AppLock]: {
         name: `views.settings.${SettingsRoute.AppLock}.title`,
@@ -46,6 +54,7 @@ export const SETTINGS_ROUTE_META = {
         icon: SETTINGS_ICON_SVG[SettingsRoute.ChangePassword],
         view: ChangePasswordView,
     },
+    // Advanced
     [SettingsRoute.DeleteProfile]: {
         name: `views.settings.${SettingsRoute.DeleteProfile}.title`,
         category: SettingsCategory.Security,
@@ -53,7 +62,6 @@ export const SETTINGS_ROUTE_META = {
         icon: SETTINGS_ICON_SVG[SettingsRoute.DeleteProfile],
         view: DeleteProfileView,
     },
-    // Advanced
     [SettingsRoute.WalletFinder]: {
         name: `views.settings.${SettingsRoute.WalletFinder}.title`,
         category: SettingsCategory.Advanced,
