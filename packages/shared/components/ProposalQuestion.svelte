@@ -3,18 +3,35 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
     import type { Question } from '@iota/wallet'
 
-    export let question: Question
-    export let index: number = undefined
-    export let selectedIndices: number[] // TODO, maybe should be a svelte store
+    // TODO: replace with new wallet.rs type
+    export let currentVote: { value: number; current: number; accumulated: number }[] = undefined
+    export let questionIndex: number = undefined
     export let isOpened = false
-
+    export let question: Question
+    export let selectedAnswerValues: number[] // TODO, maybe should be a svelte store
     export let onClick: () => unknown = () => {}
 
-    function handleAnswerClick(answerIndex: number): void {
-        if (selectedIndices[index] === answerIndex) {
-            selectedIndices[index] = undefined
+    let percentages: string[]
+    let voteValue: number // TODO: get the current answer being voted by the account
+
+    $: answers = [...question?.answers, { value: 0, text: 'Abstain', additionalInfo: '' }]
+    $: showMargin = isOpened || ((voteValue || voteValue === 0) && !isOpened) // voteValue 0 corresponds to abstained vote
+    $: currentVote, setPercentagesFromAccumulated()
+
+    function setPercentagesFromAccumulated(): void {
+        const totalAccumulated = currentVote?.reduce((acc, answer) => acc + answer.accumulated, 0)
+        percentages = answers?.map((currentAnswer) => {
+            const answerAccumulated = currentVote?.find((answer) => answer.value === currentAnswer.value)?.accumulated
+            const divisionResult = answerAccumulated / totalAccumulated
+            return Number.isNaN(divisionResult) ? '0%' : `${Math.round(divisionResult * 100)}%`
+        })
+    }
+
+    function handleAnswerClick(answerValue: number): void {
+        if (selectedAnswerValues[questionIndex] === answerValue) {
+            selectedAnswerValues[questionIndex] = undefined
         } else {
-            selectedIndices[index] = answerIndex
+            selectedAnswerValues[questionIndex] = answerValue
         }
     }
 </script>
@@ -22,9 +39,9 @@
 <proposal-question class="flex flex-col px-5 py-4 rounded-xl border border-solid border-gray-200 cursor-pointer">
     <div on:click={onClick} class="flex justify-between items-center">
         <div class="flex flex-col">
-            {#if index !== undefined}
+            {#if questionIndex !== undefined}
                 <Text smaller fontWeight={FontWeight.bold} overrideColor classes="mb-1 text-blue-500"
-                    >Question {index + 1}</Text
+                    >Question {questionIndex + 1}</Text
                 >
             {/if}
             <Text fontWeight={FontWeight.bold} overrideColor classes="text-gray-900">{question.text}</Text>
@@ -33,14 +50,16 @@
             <Icon icon={IconEnum.ChevronDown} classes="text-gray-500" />
         </div>
     </div>
-    <proposal-answers class:mt-4={isOpened} class="space-y-2">
-        {#each question.answers as answer, answerIndex}
+    <proposal-answers class:mt-4={showMargin} class={isOpened ? 'space-y-2' : ''}>
+        {#each answers as answer, answerIndex}
             <ProposalAnswer
                 {answer}
                 {answerIndex}
-                on:answerClicked={() => handleAnswerClick(answerIndex)}
+                on:answerClicked={(event) => handleAnswerClick(event.detail)}
                 hidden={!isOpened}
-                isSelected={selectedIndices[index] === answerIndex}
+                isSelected={selectedAnswerValues[questionIndex] === answer?.value}
+                isVotedFor={voteValue === answer?.value}
+                percentage={percentages[answerIndex]}
             />
         {/each}
     </proposal-answers>

@@ -23,6 +23,7 @@ export function preprocessGroupedOutputs(
     const direction = getDirectionForOutputs(outputDatas, wrappedInputs, account.depositAddress)
     const wrappedOutputs = outputDatas.map((outputData) => ({
         outputId: outputData.outputId,
+        remainder: outputData.remainder,
         output: outputData.output.type !== OUTPUT_TYPE_TREASURY ? outputData.output : undefined,
     }))
 
