@@ -463,6 +463,7 @@
             },
             "profileModal": {
                 "allSettings": "All settings",
+                "profileApplication": "Profile, application, security",
                 "logout": "Log out",
                 "stronghold": {
                     "title": "Profile lock",
