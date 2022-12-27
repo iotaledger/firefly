@@ -2,6 +2,7 @@
     import { ProposalsDetailsButton, Text } from 'shared/components'
     import { FontWeight } from './enums'
     import { localize } from '@core/i18n'
+    import { activeProfileId } from '@core/profile'
     import { IProposalsDetails } from '@contexts/governance/interfaces'
     import { proposalsState } from '@contexts/governance/stores'
     import {
@@ -19,10 +20,12 @@
     $: $proposalsState, void updateProposalsDetails()
 
     async function updateProposalsDetails(): Promise<void> {
-        details = {
-            activeProposals: getNumberOfActiveProposals(),
-            votingProposals: await getNumberOfVotingProposals(),
-            votedProposals: await getTotalNumberOfProposals(),
+        if ($activeProfileId) {
+            details = {
+                activeProposals: getNumberOfActiveProposals(),
+                votingProposals: await getNumberOfVotingProposals(),
+                votedProposals: await getTotalNumberOfProposals(),
+            }
         }
     }
 </script>

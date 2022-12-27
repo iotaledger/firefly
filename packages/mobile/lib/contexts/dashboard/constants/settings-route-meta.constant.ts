@@ -1,12 +1,14 @@
 import { SETTINGS_ICON_SVG } from '@lib/auxiliary/icon'
 import features from '../../../../features/features'
 import {
+    AppLockView,
+    ThemeView,
     ChangePasswordView,
     ChangeProfileNameView,
+    DeleteProfileView,
+    DiagnosticsView,
     ErrorLogView,
     LanguageView,
-    DiagnosticsView,
-    ThemeView,
     WalletFinderView,
 } from '../../../../views/dashboard/drawers/profile/views/settings'
 import { SettingsRoute } from '../../../routers'
@@ -38,6 +40,13 @@ export const SETTINGS_ROUTE_META = {
         view: ChangeProfileNameView,
     },
     // Security
+    [SettingsRoute.AppLock]: {
+        name: `views.settings.${SettingsRoute.AppLock}.title`,
+        category: SettingsCategory.Security,
+        enabled: security?.[SettingsRoute.AppLock]?.enabled,
+        icon: SETTINGS_ICON_SVG[SettingsRoute.AppLock],
+        view: AppLockView,
+    },
     [SettingsRoute.ChangePassword]: {
         name: `views.settings.${SettingsRoute.ChangePassword}.title`,
         category: SettingsCategory.Security,
@@ -46,6 +55,20 @@ export const SETTINGS_ROUTE_META = {
         view: ChangePasswordView,
     },
     // Advanced
+    [SettingsRoute.DeleteProfile]: {
+        name: `views.settings.${SettingsRoute.DeleteProfile}.title`,
+        category: SettingsCategory.Security,
+        enabled: security?.[SettingsRoute.DeleteProfile]?.enabled,
+        icon: SETTINGS_ICON_SVG[SettingsRoute.DeleteProfile],
+        view: DeleteProfileView,
+    },
+    [SettingsRoute.WalletFinder]: {
+        name: `views.settings.${SettingsRoute.WalletFinder}.title`,
+        category: SettingsCategory.Advanced,
+        enabled: advanced?.[SettingsRoute.WalletFinder]?.enabled,
+        icon: SETTINGS_ICON_SVG[SettingsRoute.WalletFinder],
+        view: WalletFinderView,
+    },
     [SettingsRoute.ErrorLog]: {
         name: `views.settings.${SettingsRoute.ErrorLog}.title`,
         category: SettingsCategory.Advanced,
@@ -59,12 +82,5 @@ export const SETTINGS_ROUTE_META = {
         enabled: advanced?.[SettingsRoute.Diagnostics]?.enabled,
         icon: SETTINGS_ICON_SVG[SettingsRoute.Diagnostics],
         view: DiagnosticsView,
-    },
-    [SettingsRoute.WalletFinder]: {
-        name: `views.settings.${SettingsRoute.WalletFinder}.title`,
-        category: SettingsCategory.Advanced,
-        enabled: advanced?.[SettingsRoute.WalletFinder]?.enabled,
-        icon: SETTINGS_ICON_SVG[SettingsRoute.WalletFinder],
-        view: WalletFinderView,
     },
 }

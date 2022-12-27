@@ -85,7 +85,7 @@ const features = {
                 enabled: false,
             },
             appLock: {
-                enabled: false,
+                enabled: true,
             },
             changePassword: {
                 enabled: true,
@@ -94,7 +94,7 @@ const features = {
                 enabled: false,
             },
             deleteProfile: {
-                enabled: false,
+                enabled: true,
             },
         },
         advanced: {
