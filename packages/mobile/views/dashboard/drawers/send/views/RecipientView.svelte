@@ -9,8 +9,10 @@
 
     let recipient: IAddressSubject
     let recipientValidationError: string
+    let recipientInputElement: HTMLInputElement
 
     onMount(() => {
+        recipientInputElement?.focus()
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         recipient = $newTransactionDetails?.recipient
@@ -23,7 +25,7 @@
 </script>
 
 <div class="w-full overflow-y-auto flex flex-col flex-auto h-1 justify-between">
-    <RecipientInput bind:recipient bind:error={recipientValidationError} />
+    <RecipientInput bind:recipient bind:error={recipientValidationError} bind:inputElement={recipientInputElement} />
     <Button disabled={!!recipientValidationError} outline classes="w-full" onClick={onContinueClick}>
         {recipientValidationError ?? localize('actions.continue')}
     </Button>
