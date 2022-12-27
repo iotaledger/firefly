@@ -4,9 +4,10 @@ import {
     AppLockView,
     ThemeView,
     ChangePasswordView,
+    DeleteProfileView,
+    DiagnosticsView,
     ErrorLogView,
     LanguageView,
-    DiagnosticsView,
     WalletFinderView,
 } from '../../../../views/dashboard/drawers/profile/views/settings'
 import { SettingsRoute } from '../../../routers'
@@ -45,6 +46,21 @@ export const SETTINGS_ROUTE_META = {
         icon: SETTINGS_ICON_SVG[SettingsRoute.ChangePassword],
         view: ChangePasswordView,
     },
+    [SettingsRoute.DeleteProfile]: {
+        name: `views.settings.${SettingsRoute.DeleteProfile}.title`,
+        category: SettingsCategory.Security,
+        enabled: security?.[SettingsRoute.DeleteProfile]?.enabled,
+        icon: SETTINGS_ICON_SVG[SettingsRoute.DeleteProfile],
+        view: DeleteProfileView,
+    },
+    // Advanced
+    [SettingsRoute.WalletFinder]: {
+        name: `views.settings.${SettingsRoute.WalletFinder}.title`,
+        category: SettingsCategory.Advanced,
+        enabled: advanced?.[SettingsRoute.WalletFinder]?.enabled,
+        icon: SETTINGS_ICON_SVG[SettingsRoute.WalletFinder],
+        view: WalletFinderView,
+    },
     [SettingsRoute.ErrorLog]: {
         name: `views.settings.${SettingsRoute.ErrorLog}.title`,
         category: SettingsCategory.Advanced,
@@ -52,19 +68,11 @@ export const SETTINGS_ROUTE_META = {
         icon: SETTINGS_ICON_SVG[SettingsRoute.ErrorLog],
         view: ErrorLogView,
     },
-    // Advanced
     [SettingsRoute.Diagnostics]: {
         name: `views.settings.${SettingsRoute.Diagnostics}.title`,
         category: SettingsCategory.Advanced,
         enabled: advanced?.[SettingsRoute.Diagnostics]?.enabled,
         icon: SETTINGS_ICON_SVG[SettingsRoute.Diagnostics],
         view: DiagnosticsView,
-    },
-    [SettingsRoute.WalletFinder]: {
-        name: `views.settings.${SettingsRoute.WalletFinder}.title`,
-        category: SettingsCategory.Advanced,
-        enabled: advanced?.[SettingsRoute.WalletFinder]?.enabled,
-        icon: SETTINGS_ICON_SVG[SettingsRoute.WalletFinder],
-        view: WalletFinderView,
     },
 }
