@@ -13,8 +13,10 @@
         NewTransactionType,
         updateNewTransactionDetails,
     } from '@core/wallet'
-    import { AmountInput, Button, HR } from '@ui'
+    import { AmountInput, Button, HR, Text } from '@ui'
 
+    import { formatCurrency } from '@core/i18n'
+    import { getMarketAmountFromAssetValue } from '@core/market/utils'
     import { getAssetById } from '@core/wallet'
     import { TokenUnitSwapper, TokenWithMax } from '../../../../../components'
     import { sendRouter } from '../../../../../lib/routers'
@@ -41,6 +43,7 @@
 
     $: bigAmount = convertToRawAmount(amount, unit, asset?.metadata)
     $: amount, validate()
+    $: marketAmount = getMarketAmountFromAssetValue(bigAmount, asset)
 
     onMount(() => {
         if ($newTransactionDetails?.type === NewTransactionType.TokenTransfer) {
@@ -112,23 +115,26 @@
 </script>
 
 <div class="w-full overflow-y-auto flex flex-col flex-auto h-1 justify-between">
-    <div class="flex flex-row flex-1 items-center justify-center relative">
-        <div class="flex flex-row items-center space-x-2 px-28" on:click={() => amountInputElement.focus()}>
-            <AmountInput
-                bind:inputElement={amountInputElement}
-                bind:amount
-                hasFocus={false}
-                maxDecimals={allowedDecimals}
-                isInteger={allowedDecimals === 0}
-                clearBackground
-                clearPadding
-                clearBorder
-            />
-            <p class="font-600 text-gray-800 dark:text-white text-24 leading-140">{unit}</p>
+    <div class="flex-1 flex flex-col space-y-2 items-center justify-center">
+        <div class="flex flex-row items-center justify-center relative">
+            <div class="flex flex-row items-center space-x-2 px-28" on:click={() => amountInputElement.focus()}>
+                <AmountInput
+                    bind:inputElement={amountInputElement}
+                    bind:amount
+                    hasFocus={false}
+                    maxDecimals={allowedDecimals}
+                    isInteger={allowedDecimals === 0}
+                    clearBackground
+                    clearPadding
+                    clearBorder
+                />
+                <p class="font-600 text-gray-800 dark:text-white text-24 leading-140">{unit}</p>
+            </div>
+            <div class="absolute right-0">
+                <TokenUnitSwapper {tokenMetadata} selectedUnit={unit} onClick={toggleUnit} />
+            </div>
         </div>
-        <div class="absolute right-0">
-            <TokenUnitSwapper {tokenMetadata} selectedUnit={unit} onClick={toggleUnit} />
-        </div>
+        <Text color="gray-600" darkColor="gray-500" fontSize="xs">{formatCurrency(marketAmount) ?? ''}</Text>
     </div>
     <div class="flex flex-col space-y-8 w-full">
         {#if $newTransactionDetails?.type === NewTransactionType.TokenTransfer}
