@@ -33,6 +33,7 @@ import { logout } from './logout'
 import { subscribeToWalletApiEventsForActiveProfile } from './subscribeToWalletApiEventsForActiveProfile'
 import { AppContext } from '@core/app'
 import { routerManager } from '@core/router/stores'
+import { pollProposalsState } from '@contexts/governance'
 
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const loginRouter = get(routerManager).getRouterForAppContext(AppContext.Login)
@@ -124,7 +125,8 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 loginRouter?.next()
                 resetLoginProgress()
             }, 500)
-            pollMarketPrices()
+            void pollMarketPrices()
+            void pollProposalsState()
 
             void cleanupOnboarding()
         } else {
