@@ -1,17 +1,17 @@
-import { get } from 'svelte/store'
+import { showAppNotification } from '@auxiliary/notification'
 import { selectedAccount, updateSelectedAccount } from '@core/account'
 import { localize } from '@core/i18n'
-import { NativeTokenOptions, TransactionOptions } from '@iota/wallet'
-import { Converter } from '@core/utils'
-import { showAppNotification } from '@auxiliary/notification'
-import { activeProfile, ProfileType } from '@core/profile'
 import { handleLedgerError } from '@core/ledger'
+import { activeProfile, ProfileType } from '@core/profile'
+import { Converter } from '@core/utils'
+import { NativeTokenOptions, TransactionOptions } from '@iota/wallet'
+import { get } from 'svelte/store'
+import { VerifiedStatus } from '../enums'
 import { buildPersistedAssetFromIrc30Metadata } from '../helpers'
 import { IIrc30Metadata, IPersistedAsset } from '../interfaces'
-import { addActivityToAccountActivitiesInAllAccountActivities, resetMintTokenDetails } from '../stores'
+import { addActivitiesToAccountActivitiesInAllAccountActivities, resetMintTokenDetails } from '../stores'
 import { addPersistedAsset } from '../stores/persisted-assets.store'
-import { generateActivity, preprocessTransaction } from '../utils'
-import { VerifiedStatus } from '../enums'
+import { generateActivities, preprocessTransaction } from '../utils'
 
 export async function mintNativeToken(
     maximumSupply: number,
@@ -38,10 +38,8 @@ export async function mintNativeToken(
         )
         const processedTransaction = await preprocessTransaction(mintTokenTransaction.transaction, account)
         addPersistedAsset(persistedAsset)
-        addActivityToAccountActivitiesInAllAccountActivities(
-            account.index,
-            generateActivity(processedTransaction, account)
-        )
+        const activities = generateActivities(processedTransaction, account)
+        addActivitiesToAccountActivitiesInAllAccountActivities(account.index, activities)
         showAppNotification({
             type: 'success',
             message: localize('notifications.mintNativeToken.success'),

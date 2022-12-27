@@ -1,11 +1,11 @@
 import { selectedAccount, updateSelectedAccount } from '@core/account'
+import { handleLedgerError } from '@core/ledger'
 import { activeProfile, ProfileType } from '@core/profile'
 import { get } from 'svelte/store'
 import { DEFAULT_TRANSACTION_OPTIONS } from '../constants'
-import { addActivityToAccountActivitiesInAllAccountActivities, resetNewTokenTransactionDetails } from '../stores'
-import { handleLedgerError } from '@core/ledger'
-import { generateActivity, preprocessTransaction } from '../utils'
+import { addActivitiesToAccountActivitiesInAllAccountActivities, resetNewTokenTransactionDetails } from '../stores'
 import { Output } from '../types'
+import { generateActivities, preprocessTransaction } from '../utils'
 
 export async function sendOutput(output: Output): Promise<void> {
     try {
@@ -15,18 +15,16 @@ export async function sendOutput(output: Output): Promise<void> {
         // Reset transaction details state, since the transaction has been sent
         resetNewTokenTransactionDetails()
         const processedTransaction = await preprocessTransaction(transaction, account)
-        const activity = generateActivity(processedTransaction, account)
-        addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)
+        const activities = generateActivities(processedTransaction, account)
+        addActivitiesToAccountActivitiesInAllAccountActivities(account.index, activities)
         updateSelectedAccount({ isTransferring: false })
         return
     } catch (err) {
         updateSelectedAccount({ isTransferring: false })
         const _activeProfile = get(activeProfile)
-
         if (_activeProfile.type === ProfileType.Ledger) {
             handleLedgerError(err.error)
         }
-
         throw err
     }
 }
