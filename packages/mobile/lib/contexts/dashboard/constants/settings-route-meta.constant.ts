@@ -2,6 +2,7 @@ import { SETTINGS_ICON_SVG } from '@lib/auxiliary/icon'
 import features from '../../../../features/features'
 import {
     AppLockView,
+    HiddenAccountsView,
     ThemeView,
     ChangePasswordView,
     ChangeProfileNameView,
@@ -55,6 +56,13 @@ export const SETTINGS_ROUTE_META = {
         view: ChangePasswordView,
     },
     // Advanced
+    [SettingsRoute.HiddenAccounts]: {
+        name: `views.settings.${SettingsRoute.HiddenAccounts}.title`,
+        category: SettingsCategory.Security,
+        enabled: advanced?.[SettingsRoute.HiddenAccounts]?.enabled,
+        icon: SETTINGS_ICON_SVG[SettingsRoute.HiddenAccounts],
+        view: HiddenAccountsView,
+    },
     [SettingsRoute.DeleteProfile]: {
         name: `views.settings.${SettingsRoute.DeleteProfile}.title`,
         category: SettingsCategory.Security,
