@@ -8,6 +8,9 @@
     import { selectedProposal } from '@contexts/governance/stores'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile/actions'
+    import { selectedAccount, updateSelectedAccount } from '@core/account/stores'
+
+    $: isTransferring = $selectedAccount?.isTransferring
 
     function onCancelClick(): void {
         closePopup()
@@ -16,6 +19,7 @@
     async function onStopVotingClick(): Promise<void> {
         try {
             await checkActiveProfileAuth(async () => {
+                updateSelectedAccount({ isTransferring: true })
                 await stopVotingForProposal($selectedProposal?.id)
                 showAppNotification({
                     type: 'success',
@@ -23,9 +27,11 @@
                     alert: true,
                 })
                 closePopup()
+                updateSelectedAccount({ isTransferring: false })
             })
         } catch (err) {
             handleError(err)
+            updateSelectedAccount({ isTransferring: false })
         }
     }
 </script>
@@ -40,8 +46,12 @@
     </div>
     <div class="flex w-full space-x-4 mt-6">
         <Button outline classes="w-full" onClick={onCancelClick}>{localize('actions.cancel')}</Button>
-        <Button variant={ButtonVariant.Primary} classes="w-full" onClick={onStopVotingClick}
-            >{localize('actions.stopVoting')}</Button
+        <Button
+            variant={ButtonVariant.Primary}
+            classes="w-full"
+            onClick={onStopVotingClick}
+            disabled={isTransferring}
+            isBusy={isTransferring}>{localize('actions.stopVoting')}</Button
         >
     </div>
 </stop-voting>

@@ -6,8 +6,8 @@ import { handleLedgerError } from '@core/ledger'
 import { activeProfile, ProfileType } from '@core/profile'
 import { Converter } from '@core/utils'
 import { get } from 'svelte/store'
-import { addActivityToAccountActivitiesInAllAccountActivities } from '../stores'
-import { generateActivity, preprocessTransaction } from '../utils'
+import { addActivitiesToAccountActivitiesInAllAccountActivities } from '../stores'
+import { generateActivities, preprocessTransaction } from '../utils'
 
 export async function burnAsset(assetId: string, rawAmount: string): Promise<void> {
     const account = get(selectedAccount)
@@ -20,8 +20,8 @@ export async function burnAsset(assetId: string, rawAmount: string): Promise<voi
 
         // Generate Activity
         const processedTransaction = await preprocessTransaction(burnTokenTransaction, account)
-        const activity = generateActivity(processedTransaction, account)
-        addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)
+        const activities = generateActivities(processedTransaction, account)
+        addActivitiesToAccountActivitiesInAllAccountActivities(account.index, activities)
 
         showAppNotification({
             type: 'success',

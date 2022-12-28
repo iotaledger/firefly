@@ -10,6 +10,7 @@
         profileRouter,
         resetRouterWithDrawerDelay,
         sendRouter,
+        settingsRouter,
         tokenRouter,
     } from '../../lib/routers'
     import {
@@ -36,6 +37,7 @@
     }
     function onProfileDrawerClose(): void {
         $profileRouter.closeDrawer()
+        resetRouterWithDrawerDelay($settingsRouter)
     }
     function onActivityDrawerClose(): void {
         resetRouterWithDrawerDelay($activityRouter)
