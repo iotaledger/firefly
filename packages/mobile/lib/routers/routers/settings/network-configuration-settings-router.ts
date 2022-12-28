@@ -29,7 +29,7 @@ export class NetworkConfigurationSettingsRouter extends Subrouter<NetworkConfigu
     getSelectedNodeStore(): Writable<INode> {
         return selectedNodeStore
     }
-    setNeedsUnlock(node: INode): void {
+    setSelectedNode(node: INode): void {
         selectedNodeStore.set(node)
     }
     reset(): void {
