@@ -59,7 +59,7 @@
         bind:clientHeight={panelHeight}
         bind:clientWidth={panelWidth}
         class:moving
-        class="py-6 px-5 fixed w-full flex flex-col flex-auto {fullScreen
+        class="py-6 px-5 fixed w-full flex flex-col flex-auto overflow-scroll {fullScreen
             ? 'h-screen'
             : ''} z-10 bg-white dark:bg-gray-800 {enterFromSide ? '' : 'rounded-t-2xl'}"
         style={enterFromSide ? `left: ${position}px;` : `bottom: ${position}px;`}
