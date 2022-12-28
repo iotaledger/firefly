@@ -53,13 +53,9 @@ export function generateBasicActivitiesFromTransaction(
 function getBurnedNfts(processedTransaction: IProcessedTransaction): { nftId: string; amount: string }[] {
     const burnedNftOutputs: { nftId: string; amount: string }[] = []
     const nftIdsInOutputs = processedTransaction.outputs
-        .map((output) => {
-            if (output.output.type === OUTPUT_TYPE_NFT) {
-                return getNftId(output.output.nftId, output.outputId)
-            } else {
-                return undefined
-            }
-        })
+        .map((output) =>
+            output.output.type === OUTPUT_TYPE_NFT ? getNftId(output.output.nftId, output.outputId) : undefined
+        )
         .filter((output) => output)
 
     for (const wrappedInput of processedTransaction.wrappedInputs) {
