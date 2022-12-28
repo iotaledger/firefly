@@ -15,7 +15,7 @@ export class ProfileRouter extends Subrouter<ProfileRoute> {
         super(ProfileRoute.Actions, profileRoute, get(dashboardRouter))
     }
     public next(event: IProfileRouterEvent = {}): void {
-        const { settings } = event
+        const { settings, networkStatus } = event
 
         let nextRoute: ProfileRoute
         const currentRoute = get(this.routeStore)
@@ -24,6 +24,8 @@ export class ProfileRouter extends Subrouter<ProfileRoute> {
             case ProfileRoute.Actions: {
                 if (settings) {
                     nextRoute = ProfileRoute.Settings
+                } else if (networkStatus) {
+                    nextRoute = ProfileRoute.NetworkStatus
                 }
                 break
             }

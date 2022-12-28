@@ -7,7 +7,7 @@
     import { FontWeight, Icon, NetworkIcon, Text, TextType } from 'shared/components'
     import { profileRouter } from '../../../../../lib/routers'
     import features from '@features/features'
-    import { ProfileActionButton } from '../../../../../components/'
+    import { NetworkStatusButton, ProfileActionButton } from '../../../../../components/'
 
     let networkProtocol: NetworkProtocol
     $: networkProtocol = $activeProfile.networkProtocol
@@ -53,6 +53,9 @@
             </div>
         </div>
         <div class="flex flex-col space-y-6">
+            {#if features?.dashboard?.profileActions?.networkStatus?.enabled}
+                <NetworkStatusButton onClick={() => $profileRouter.next({ networkStatus: true })} />
+            {/if}
             {#if features?.settings?.enabled}
                 <ProfileActionButton
                     primaryText={localize('views.dashboard.profileModal.allSettings')}
