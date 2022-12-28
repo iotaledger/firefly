@@ -1,7 +1,6 @@
 /**
  * The query parameters available in a send operation.
  */
-
 export enum SendOperationParameter {
     Address = 'address',
     AssetId = 'assetId',
