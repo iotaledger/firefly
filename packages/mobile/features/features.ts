@@ -6,6 +6,9 @@ const features = {
         enabled: false,
         profileActions: {
             enabled: true,
+            networkStatus: {
+                enabled: true,
+            },
         },
         accountSwitcher: {
             enabled: true,
@@ -59,15 +62,15 @@ const features = {
     settings: {
         enabled: true,
         general: {
-            enabled: false,
+            enabled: true,
             theme: {
-                enabled: false,
+                enabled: true,
             },
             language: {
-                enabled: false,
+                enabled: true,
             },
             currency: {
-                enabled: false,
+                enabled: true,
             },
             notifications: {
                 enabled: false,
@@ -76,29 +79,29 @@ const features = {
                 enabled: false,
             },
             changeProfileName: {
-                enabled: false,
+                enabled: true,
             },
         },
         security: {
-            enabled: false,
+            enabled: true,
             exportStronghold: {
                 enabled: false,
             },
             appLock: {
-                enabled: false,
+                enabled: true,
             },
             changePassword: {
-                enabled: false,
+                enabled: true,
             },
             changePincode: {
                 enabled: false,
             },
             deleteProfile: {
-                enabled: false,
+                enabled: true,
             },
         },
         advanced: {
-            enabled: false,
+            enabled: true,
             networkConfiguration: {
                 enabled: false,
             },
@@ -106,19 +109,19 @@ const features = {
                 enabled: false,
             },
             walletFinder: {
-                enabled: false,
+                enabled: true,
             },
             hiddenAccounts: {
-                enabled: false,
+                enabled: true,
             },
             errorLog: {
-                enabled: false,
+                enabled: true,
             },
             crashReporting: {
                 enabled: false,
             },
             diagnostics: {
-                enabled: false,
+                enabled: true,
             },
             migrateLedgerIndex: {
                 enabled: false,

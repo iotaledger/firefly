@@ -22,7 +22,7 @@
     let activeTab = Tab.Transaction
 
     let storageDeposit = '0'
-    const { standard, type, uri, name, collectionName, royalties, issuerName, description, attributes } =
+    const { standard, type, uri, name, collectionName, royalties, issuerName, description, attributes, amount } =
         $mintNftDetails
 
     $: irc27Metadata = {
@@ -60,7 +60,7 @@
 
     async function mintAction(): Promise<void> {
         try {
-            await mintNft(irc27Metadata)
+            await mintNft(irc27Metadata, Number(amount))
             closePopup()
         } catch (err) {
             handleError(err)

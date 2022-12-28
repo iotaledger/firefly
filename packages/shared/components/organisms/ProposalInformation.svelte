@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { networkStatus } from '@core/network'
-    import { selectedProposal } from '@contexts/governance/stores'
+    import { proposalsState, selectedProposal } from '@contexts/governance/stores'
+    import { activeProfileId } from '@core/profile'
     import { formatDate, localize } from '@core/i18n'
     import { DATE_FORMAT, milestoneToDate, truncateString } from '@core/utils'
     import { Text, Pane, FontWeight } from 'shared/components'
@@ -11,7 +12,7 @@
             DATE_FORMAT
         ),
         eventId: truncateString($selectedProposal?.id, 9, 9),
-        nodeUrl: $selectedProposal.nodeUrls[0].url,
+        nodeUrl: $proposalsState[$activeProfileId]?.[$selectedProposal?.id].nodeUrl,
     }
 </script>
 

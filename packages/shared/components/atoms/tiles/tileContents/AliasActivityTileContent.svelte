@@ -1,11 +1,13 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { InclusionState, AliasActivity } from '@core/wallet'
+    import { AliasActivity, getActivityTileTitle } from '@core/wallet'
     import { truncateString } from '@core/utils'
     import { Text, Icon, FontWeight } from 'shared/components'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
 
     export let activity: AliasActivity
+
+    $: title = getActivityTileTitle(activity)
 </script>
 
 <div class="relative flex w-8 h-8">
@@ -25,9 +27,7 @@
             lineHeight="140"
             classes="overflow-hidden overflow-ellipsis multiwrap-line2"
         >
-            {localize(
-                activity.inclusionState === InclusionState.Confirmed ? 'general.aliasCreated' : 'general.creatingAlias'
-            )}
+            {localize(title)}
         </Text>
     </div>
     <div class="flex flex-row">
