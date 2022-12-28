@@ -1,9 +1,12 @@
 import { IAccountState } from '@core/account'
 import {
     ActivityAction,
+    ActivityDirection,
     getNftId,
     getNonRemainderBasicOutputsFromTransaction,
     IProcessedTransaction,
+    IWrappedOutput,
+    OUTPUT_TYPE_BASIC,
     OUTPUT_TYPE_NFT,
 } from '@core/wallet'
 import { Activity } from '@core/wallet/types'
@@ -38,8 +41,11 @@ export function generateBasicActivitiesFromTransaction(
             )
             burnedNftOutputs.splice(burnedNftOutputIndex, 1)
         } else {
+            const action = isConsolidation(basicOutput, processedTransaction)
+                ? ActivityAction.Consolidation
+                : ActivityAction.Send
             activity = generateSingleBasicActivity(account, {
-                action: ActivityAction.Send,
+                action,
                 processedTransaction,
                 wrappedOutput: basicOutput,
             })
@@ -67,4 +73,14 @@ function getBurnedNfts(processedTransaction: IProcessedTransaction): { nftId: st
         }
     }
     return burnedNftOutputs
+}
+
+function isConsolidation(output: IWrappedOutput, processedTransaction: IProcessedTransaction): boolean {
+    const allBasicInputs = processedTransaction.wrappedInputs.every((input) => input.output.type === OUTPUT_TYPE_BASIC)
+    const isSelfTransaction = processedTransaction.direction === ActivityDirection.SelfTransaction
+    const isSameAmount =
+        processedTransaction.wrappedInputs.reduce((sum, input) => sum + Number(input.output.amount), 0) ===
+        Number(output.output.amount)
+
+    return allBasicInputs && isSelfTransaction && isSameAmount
 }
