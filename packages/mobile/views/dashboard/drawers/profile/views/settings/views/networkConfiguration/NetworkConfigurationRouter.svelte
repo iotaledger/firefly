@@ -8,4 +8,6 @@
 
 {#if $networkConfigurationSettingsRoute === NetworkConfigurationSettingsRoute.Init}
     <NetworkConfigurationInitView />
+{:else if $networkConfigurationSettingsRoute === NetworkConfigurationSettingsRoute.NodeDetails}
+    Lola
 {/if}
