@@ -2026,7 +2026,7 @@
             "Confirmed": "burned",
             "Conflicting": "failed to burn"
         },
-        "consolidate": {
+        "consolidation": {
             "Pending": "consolidating",
             "Confirmed": "consolidated",
             "Conflicting": "failed to consolidate"
