@@ -1,6 +1,8 @@
 import { SETTINGS_ICON_SVG } from '@lib/auxiliary/icon'
 import features from '../../../../features/features'
 import {
+    CurrencyView,
+    LanguageView,
     AppLockView,
     HiddenAccountsView,
     ThemeView,
@@ -32,6 +34,13 @@ export const SETTINGS_ROUTE_META = {
         enabled: general?.[SettingsRoute.Language]?.enabled,
         icon: SETTINGS_ICON_SVG[SettingsRoute.Language],
         view: LanguageView,
+    },
+    [SettingsRoute.Currency]: {
+        name: `views.settings.${SettingsRoute.Currency}.title`,
+        category: SettingsCategory.General,
+        enabled: general?.[SettingsRoute.Currency]?.enabled,
+        icon: SETTINGS_ICON_SVG[SettingsRoute.Currency],
+        view: CurrencyView,
     },
     [SettingsRoute.ChangeProfileName]: {
         name: `views.settings.${SettingsRoute.ChangeProfileName}.title`,

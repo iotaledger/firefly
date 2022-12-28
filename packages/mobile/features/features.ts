@@ -67,7 +67,7 @@ const features = {
                 enabled: true,
             },
             currency: {
-                enabled: false,
+                enabled: true,
             },
             notifications: {
                 enabled: false,
