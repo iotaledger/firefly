@@ -9,7 +9,7 @@ import {
     DiagnosticsView,
     ErrorLogView,
     LanguageView,
-    NetworkConfigurationView,
+    NetworkConfigurationRouter,
     WalletFinderView,
 } from '../../../../views/dashboard/drawers/profile/views/settings'
 import { SettingsRoute } from '../../../routers'
@@ -68,7 +68,7 @@ export const SETTINGS_ROUTE_META = {
         category: SettingsCategory.Advanced,
         enabled: advanced?.[SettingsRoute.NetworkConfiguration]?.enabled,
         icon: SETTINGS_ICON_SVG[SettingsRoute.NetworkConfiguration],
-        view: NetworkConfigurationView,
+        view: NetworkConfigurationRouter,
     },
     [SettingsRoute.WalletFinder]: {
         name: `views.settings.${SettingsRoute.WalletFinder}.title`,

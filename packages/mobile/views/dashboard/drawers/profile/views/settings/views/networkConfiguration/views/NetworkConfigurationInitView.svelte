@@ -11,7 +11,7 @@
     } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { Button, ButtonSize, HR, Text, TextType } from 'shared/components'
-    import { NodeListTable } from '../../../../../../../components'
+    import { NodeListTable } from '../../../../../../../../../components'
 
     const { networkType } = $activeProfile
 
