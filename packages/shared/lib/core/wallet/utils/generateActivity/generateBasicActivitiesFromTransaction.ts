@@ -4,7 +4,6 @@ import {
     getNftId,
     getNonRemainderBasicOutputsFromTransaction,
     IProcessedTransaction,
-    IWrappedOutput,
     OUTPUT_TYPE_NFT,
 } from '@core/wallet'
 import { Activity } from '@core/wallet/types'
@@ -24,17 +23,20 @@ export function generateBasicActivitiesFromTransaction(
     )
     const burnedNftOutputs = getBurnedNfts(processedTransaction)
     for (const basicOutput of basicOutputs) {
-        const burnedNftOutputIndex = burnedNftOutputs.findIndex(
-            (output) => output.output.amount === basicOutput.output.amount
-        )
+        const burnedNftOutputIndex = burnedNftOutputs.findIndex((output) => output.amount === basicOutput.output.amount)
 
         let activity: Activity
         if (burnedNftOutputIndex >= 0) {
-            activity = generateSingleNftActivity(account, {
-                action: ActivityAction.Burn,
-                processedTransaction,
-                wrappedOutput: burnedNftOutputs[burnedNftOutputIndex],
-            })
+            activity = generateSingleNftActivity(
+                account,
+                {
+                    action: ActivityAction.Burn,
+                    processedTransaction,
+                    wrappedOutput: basicOutput,
+                },
+                burnedNftOutputs[burnedNftOutputIndex].nftId
+            )
+            activities.push(activity)
         }
         activities.push(
             generateSingleBasicActivity(account, {
@@ -43,13 +45,12 @@ export function generateBasicActivitiesFromTransaction(
                 wrappedOutput: basicOutput,
             })
         )
-        activities.push(activity)
     }
     return activities
 }
 
-function getBurnedNfts(processedTransaction: IProcessedTransaction): IWrappedOutput[] {
-    const burnedNftOutputs: IWrappedOutput[] = []
+function getBurnedNfts(processedTransaction: IProcessedTransaction): { nftId: string; amount: string }[] {
+    const burnedNftOutputs: { nftId: string; amount: string }[] = []
     const nftIdsInOutputs = processedTransaction.outputs
         .map((output) => {
             if (output.output.type === OUTPUT_TYPE_NFT) {
@@ -65,7 +66,7 @@ function getBurnedNfts(processedTransaction: IProcessedTransaction): IWrappedOut
         if (output.type === OUTPUT_TYPE_NFT) {
             const nftId = getNftId(output.nftId, wrappedInput.outputId)
             if (!nftIdsInOutputs.includes(nftId)) {
-                burnedNftOutputs.push(wrappedInput)
+                burnedNftOutputs.push({ nftId, amount: wrappedInput.output.amount })
             }
         }
     }

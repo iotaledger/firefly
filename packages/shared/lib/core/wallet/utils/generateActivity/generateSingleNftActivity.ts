@@ -8,7 +8,8 @@ import { getAsyncDataFromOutput, getMetadataFromOutput, getSendingInformation, g
 
 export function generateSingleNftActivity(
     account: IAccountState,
-    { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
+    { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters,
+    defaultNftId?: string
 ): NftActivity {
     const { claimingData, utxoInputs, time, inclusionState, transactionId, direction } = processedTransaction
     const outputId = wrappedOutput.outputId
@@ -21,7 +22,7 @@ export function generateSingleNftActivity(
 
     const inputs = utxoInputs
 
-    const nftId = getNftId(output.nftId, outputId)
+    const nftId = defaultNftId ? defaultNftId : getNftId(output.nftId, outputId)
     const storageDeposit = Number(output.amount)
     const giftedStorageDeposit = 0
     const metadata = getMetadataFromOutput(output)
