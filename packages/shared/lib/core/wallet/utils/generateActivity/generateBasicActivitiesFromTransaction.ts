@@ -36,6 +36,7 @@ export function generateBasicActivitiesFromTransaction(
                 },
                 burnedNftOutputs[burnedNftOutputIndex].nftId
             )
+            burnedNftOutputs.splice(burnedNftOutputIndex, 1)
             activities.push(activity)
         }
         activities.push(
