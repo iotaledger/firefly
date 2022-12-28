@@ -309,6 +309,10 @@
                 "title": "Automatic lock",
                 "description": "Inactivity time before your wallets lock and you are logged out"
             },
+            "maxMediaSize": {
+                "title": "Maximum media size",
+                "description": "NFT media with sizes greater than this limit will not be downloaded and a placeholder representing the media type will be displayed instead"
+            },
             "changePassword": {
                 "title": "Change password",
                 "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
@@ -1585,6 +1589,9 @@
             "invalidFormat": "The deep link you followed is invalid",
             "invalidAmount": "The amount in deep link is not an integer number {amount}",
             "invalidSurplus": "The surplus in deep link is not a number {surplus}",
+            "governance": {
+                "unrecognizedOperation": "Unrecognized Governance operation: {operation}"
+            },
             "wallet": {
                 "send": {
                     "success": "Payment details added from deep link"

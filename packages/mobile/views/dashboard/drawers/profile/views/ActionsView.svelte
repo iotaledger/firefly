@@ -52,7 +52,7 @@
                 </button>
             </div>
         </div>
-        <div class="flex flex-col space-y-4">
+        <div class="flex flex-col space-y-6">
             {#if features?.dashboard?.profileActions?.networkStatus?.enabled}
                 <NetworkStatusButton onClick={() => $profileRouter.next({ networkStatus: true })} />
             {/if}

@@ -17,6 +17,19 @@ export function addActivityToAccountActivitiesInAllAccountActivities(accountInde
     })
 }
 
+export function addActivitiesToAccountActivitiesInAllAccountActivities(
+    accountIndex: number,
+    activities: Activity[]
+): void {
+    allAccountActivities.update((state) => {
+        if (!state[accountIndex]) {
+            state[accountIndex] = []
+        }
+        state[accountIndex].push(...activities)
+        return state
+    })
+}
+
 export function setAccountActivitiesInAllAccountActivities(accountIndex: number, accountActivities: Activity[]): void {
     allAccountActivities.update((state) => {
         state[accountIndex] = accountActivities
@@ -34,11 +47,9 @@ export function updateActivityByTransactionId(
     partialBaseActivity: Partial<BaseActivity>
 ): void {
     allAccountActivities.update((state) => {
-        const activity = state[accountIndex]?.find((_activity) => _activity.transactionId === transactionId)
+        const activities = state[accountIndex]?.filter((_activity) => _activity.transactionId === transactionId)
 
-        if (activity) {
-            Object.assign(activity, partialBaseActivity)
-        }
+        activities.forEach((activity) => Object.assign(activity, partialBaseActivity))
         return state
     })
 }
