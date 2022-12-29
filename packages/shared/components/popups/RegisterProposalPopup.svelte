@@ -1,11 +1,10 @@
 <script lang="typescript">
     import type { Auth } from '@iota/wallet'
-    import { Button, TextInput, Text, TextType } from 'shared/components'
+    import { Button, NodeInput, TextInput, Text, TextType } from 'shared/components'
     import { HTMLButtonType } from 'shared/components/enums'
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
     import { registerParticipationEvent } from '@core/profile-manager/api'
-    import { isValidUrl } from '@core/utils/validation'
     import { showAppNotification } from '@auxiliary/notification/actions'
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
 
@@ -13,7 +12,7 @@
     export let nodeUrl: string
 
     let eventIdError: string
-    let nodeUrlError: string
+    let nodeInput: NodeInput
 
     $: disabled = !eventId || !nodeUrl
 
@@ -23,13 +22,13 @@
 
     async function handleSubmit(): Promise<void> {
         try {
-            await Promise.all([validateEventId(), validateNodeUrl()])
+            await Promise.all([validateEventId(), nodeInput?.validate()])
             await registerParticipationWrapper()
         } catch (err) {
             const isAuthenticationError = err?.error?.match(/(username)|(password)|(jwt)/g).length > 0
             if (isAuthenticationError) {
                 openNodeAuthRequiredPopup()
-            } else if (!nodeUrlError && !eventIdError) {
+            } else if (!nodeInput?.error && !eventIdError) {
                 handleError(err)
             }
         }
@@ -50,13 +49,6 @@
             alert: true,
         })
         closePopup()
-    }
-
-    async function validateNodeUrl(): Promise<void> {
-        if (!isValidUrl(nodeUrl)) {
-            nodeUrlError = localize('error.node.invalid')
-            return Promise.reject(nodeUrlError)
-        }
     }
 
     async function validateEventId(): Promise<void> {
@@ -85,12 +77,7 @@
             placeholder={localize('views.governance.details.proposalInformation.eventId')}
             label={localize('views.governance.details.proposalInformation.eventId')}
         />
-        <TextInput
-            bind:value={nodeUrl}
-            bind:error={nodeUrlError}
-            placeholder={localize('views.governance.details.proposalInformation.nodeUrl')}
-            label={localize('views.governance.details.proposalInformation.nodeUrl')}
-        />
+        <NodeInput bind:this={nodeInput} bind:nodeUrl />
     </div>
     <div class="flex w-full space-x-4 mt-6">
         <Button outline classes="w-full" onClick={handleCancel}>{localize('actions.cancel')}</Button>
