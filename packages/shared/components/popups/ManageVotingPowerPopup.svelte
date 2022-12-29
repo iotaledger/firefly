@@ -16,11 +16,11 @@
 
     $: isTransferring = $selectedAccount?.isTransferring
 
-    function handleBack(): void {
+    function onCancelClick(): void {
         closePopup()
     }
 
-    async function handleConfirm(): Promise<void> {
+    async function onConfirmClick(): Promise<void> {
         try {
             await assetAmountInput?.validate()
             await checkActiveProfileAuth(async () => {
@@ -41,13 +41,13 @@
     <TextHint info text={localize('popups.manageVotingPower.hint')} />
 </div>
 <div class="flex flex-row flex-nowrap w-full space-x-4">
-    <Button outline classes="w-full" disabled={isTransferring} onClick={handleBack}>
-        {localize('actions.back')}
+    <Button outline classes="w-full" disabled={isTransferring} onClick={onCancelClick}>
+        {localize('actions.cancel')}
     </Button>
     <Button
         classes="w-full"
         disabled={$selectedAccount.isTransferring}
-        onClick={handleConfirm}
+        onClick={onConfirmClick}
         isBusy={$selectedAccount.isTransferring}
     >
         {localize('actions.confirm')}
