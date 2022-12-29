@@ -7,10 +7,11 @@
     import { Icon } from '@auxiliary/icon'
 
     export let answer: Answer
+    export let answerIndex: number = undefined
+    export let disabled = false
     export let hidden: boolean = null
     export let isSelected: boolean = null
     export let isVotedFor: boolean = null
-    export let answerIndex: number = undefined
     export let percentage: string = ''
 
     $: showBorder = isVotedFor || isSelected
@@ -19,7 +20,9 @@
     const dispatch = createEventDispatcher()
 
     function handleClick(): void {
-        dispatch('answerClicked', answer?.value)
+        if (!disabled) {
+            dispatch('answerClicked', answer?.value)
+        }
     }
 </script>
 
@@ -28,6 +31,7 @@
     class:hidden={isVotedFor ? false : hidden}
     class:dark
     class="flex justify-between items-center p-3 rounded-md border border-solid relative dark:bg-gray-900
+        {disabled ? 'cursor-default' : 'cursor-pointer'}
         {isVotedFor ? 'bg-blue-100' : ''}
         {showBorder ? 'border-blue-500' : 'border-gray-200 dark:border-transparent'}
     "

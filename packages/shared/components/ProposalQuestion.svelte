@@ -1,7 +1,8 @@
 <script lang="typescript">
-    import { Text, FontWeight, Icon, ProposalAnswer } from 'shared/components'
-    import { Icon as IconEnum } from '@auxiliary/icon'
     import type { Question } from '@iota/wallet'
+    import { Text, FontWeight, Icon, ProposalAnswer } from 'shared/components'
+    import { ProposalStatus, selectedProposal } from '@contexts/governance'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     // TODO: replace with new wallet.rs type
     export let currentVote: { value: number; current: number; accumulated: number }[] = undefined
@@ -17,6 +18,8 @@
     $: answers = [...question?.answers, { value: 0, text: 'Abstain', additionalInfo: '' }]
     $: showMargin = isOpened || ((voteValue || voteValue === 0) && !isOpened) // voteValue 0 corresponds to abstained vote
     $: currentVote, setPercentagesFromAccumulated()
+    $: disabled =
+        $selectedProposal.status === ProposalStatus.Upcoming || $selectedProposal.status === ProposalStatus.Ended
 
     function setPercentagesFromAccumulated(): void {
         const totalAccumulated = currentVote?.reduce((acc, answer) => acc + answer.accumulated, 0)
@@ -59,6 +62,7 @@
             <ProposalAnswer
                 {answer}
                 {answerIndex}
+                {disabled}
                 on:answerClicked={(event) => handleAnswerClick(event.detail)}
                 hidden={!isOpened}
                 isSelected={selectedAnswerValues[questionIndex] === answer?.value}
