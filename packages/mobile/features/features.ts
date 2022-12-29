@@ -9,6 +9,9 @@ const features = {
             networkStatus: {
                 enabled: true,
             },
+            profileLock: {
+                enabled: true,
+            },
         },
         accountSwitcher: {
             enabled: true,
