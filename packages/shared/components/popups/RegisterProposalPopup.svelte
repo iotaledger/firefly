@@ -8,13 +8,15 @@
     import { showAppNotification } from '@auxiliary/notification/actions'
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
 
+    let isBusy = false
+
     export let eventId: string
     export let nodeUrl: string
 
     let eventIdError: string
     let nodeInput: NodeInput
 
-    $: disabled = !eventId || !nodeUrl
+    $: disabled = !eventId || !nodeUrl || isBusy
 
     function handleCancel(): void {
         closePopup()
@@ -22,9 +24,12 @@
 
     async function handleSubmit(): Promise<void> {
         try {
+            isBusy = true
             await Promise.all([validateEventId(), nodeInput?.validate()])
             await registerParticipationWrapper()
+            isBusy = false
         } catch (err) {
+            isBusy = false
             const isAuthenticationError = err?.error?.match(/(username)|(password)|(jwt)/g).length > 0
             if (isAuthenticationError) {
                 openNodeAuthRequiredPopup()
@@ -81,6 +86,8 @@
     </div>
     <div class="flex w-full space-x-4 mt-6">
         <Button outline classes="w-full" onClick={handleCancel}>{localize('actions.cancel')}</Button>
-        <Button type={HTMLButtonType.Submit} {disabled} classes="w-full">{localize('actions.confirm')}</Button>
+        <Button type={HTMLButtonType.Submit} {disabled} {isBusy} classes="w-full">
+            {localize('actions.confirm')}
+        </Button>
     </div>
 </form>
