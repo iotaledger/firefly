@@ -21,7 +21,7 @@
     {disabled}
     class="w-full rounded-xl p-4 cursor-pointer text-left border border-solid border-{color === 'transparent'
         ? 'gray-200'
-        : color} dark:border-{color === 'transparent' ? 'gray-600' : color} bg-{color} bg-opacity-10 {classes}"
+        : color} dark:border-{color === 'transparent' ? 'gray-600' : color} bg-{color} bg-opacity-30 {classes}"
     on:click|stopPropagation={onClick}
 >
     <div class="grid grid-cols-12 gap-4">

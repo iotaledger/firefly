@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
     import { VotingEventPayload, ParticipationEventType } from '@iota/wallet/out/types'
     import { localize } from '@core/i18n'
     import {
@@ -24,28 +25,27 @@
     import { ProposalStatus } from '@contexts/governance/enums'
     import { proposalsState, selectedProposal } from '@contexts/governance/stores'
 
-    let selectedIndices: number[] = []
+    let selectedAnswerValues: number[] = []
     let votingPayload: VotingEventPayload
     let totalVotes = 0
 
-    $: void setVotingEventPayload($selectedProposal?.id)
-    $: void setTotalVotes()
-    $: proposalStatus = $proposalsState[$activeProfileId]?.[$selectedProposal?.id]?.status
-
+    $: proposalState = $proposalsState[$activeProfileId]?.[$selectedProposal?.id]?.state
     $: votesCounter = {
         total: totalVotes,
         power: $selectedAccount?.votingPower,
     }
     $: questions = votingPayload?.questions
 
-    $: if (questions?.length > 0 && selectedIndices?.length === 0) {
-        selectedIndices = Array<number>(questions?.length)
+    $: if (questions?.length > 0 && selectedAnswerValues?.length === 0) {
+        selectedAnswerValues = Array<number>(questions?.length)
     }
     $: isVotingDisabled =
-        proposalStatus === ProposalStatus.Upcoming ||
-        proposalStatus === ProposalStatus.Ended ||
-        selectedIndices?.length === 0 ||
-        selectedIndices?.includes(undefined)
+        proposalState?.status === ProposalStatus.Upcoming ||
+        proposalState?.status === ProposalStatus.Ended ||
+        selectedAnswerValues?.length === 0 ||
+        selectedAnswerValues?.includes(undefined)
+
+    $: isTransferring = $selectedAccount?.isTransferring
 
     async function setVotingEventPayload(eventId: string): Promise<void> {
         const event = await getVotingEvent(eventId)
@@ -87,9 +87,14 @@
     function handleVoteClick(): void {
         openPopup({
             type: 'voteForProposal',
-            props: { selectedAnswers: selectedIndices },
+            props: { selectedAnswerValues },
         })
     }
+
+    onMount(() => {
+        void setVotingEventPayload($selectedProposal?.id)
+        void setTotalVotes()
+    })
 </script>
 
 <div class="w-full h-full flex flex-nowrap p-8 relative flex-1 space-x-4 bg-gray-50 dark:bg-gray-900">
@@ -131,20 +136,26 @@
     <Pane classes="w-3/5 h-full p-6 flex flex-col justify-between ">
         <proposal-questions class="flex flex-1 flex-col space-y-5 overflow-y-scroll">
             {#if questions}
-                {#each questions as question, index}
+                {#each questions as question, questionIndex}
                     <ProposalQuestion
                         {question}
-                        isOpened={openedQuestionIndex === index}
-                        {index}
-                        bind:selectedIndices
-                        onClick={() => handleQuestionClick(index)}
+                        {questionIndex}
+                        isOpened={openedQuestionIndex === questionIndex}
+                        bind:selectedAnswerValues
+                        currentVote={proposalState?.questions[questionIndex]?.answers}
+                        onClick={() => handleQuestionClick(questionIndex)}
                     />
                 {/each}
             {/if}
         </proposal-questions>
         <buttons-container class="flex w-full space-x-4 mt-6">
             <Button outline classes="w-full" onClick={handleCancelClick}>{localize('actions.cancel')}</Button>
-            <Button classes="w-full" disabled={isVotingDisabled} onClick={handleVoteClick}>
+            <Button
+                classes="w-full"
+                disabled={isVotingDisabled || isTransferring}
+                isBusy={isTransferring}
+                onClick={handleVoteClick}
+            >
                 {localize('actions.vote')}
             </Button>
         </buttons-container>

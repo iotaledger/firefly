@@ -47,19 +47,19 @@
 <svelte:window on:touchend={onTouchEnd} on:touchmove={onTouchMove} />
 <drawer class="fixed top-0 left-0 z-30 w-screen h-screen z-40">
     <overlay
-        in:fade={{ duration: DRAWER_IN_ANIMATION_DURATION_MS }}
-        out:fade={{ duration: DRAWER_OUT_ANIMATION_DURATION_MS }}
+        in:fade|local={{ duration: DRAWER_IN_ANIMATION_DURATION_MS }}
+        out:fade|local={{ duration: DRAWER_OUT_ANIMATION_DURATION_MS }}
         on:click={onClose}
         class="fixed top-0 left-0 w-full h-full z-0 bg-gray-700 dark:bg-gray-900 bg-opacity-60 dark:bg-opacity-60"
     />
     <panel
         on:touchstart={onTouchStart}
-        in:fly={{ ...directon, duration: DRAWER_IN_ANIMATION_DURATION_MS }}
-        out:fly={{ ...directon, duration: DRAWER_OUT_ANIMATION_DURATION_MS }}
+        in:fly|local={{ ...directon, duration: DRAWER_IN_ANIMATION_DURATION_MS }}
+        out:fly|local={{ ...directon, duration: DRAWER_OUT_ANIMATION_DURATION_MS }}
         bind:clientHeight={panelHeight}
         bind:clientWidth={panelWidth}
         class:moving
-        class="py-6 px-5 fixed w-full flex flex-col flex-auto {fullScreen
+        class="py-6 px-5 fixed w-full flex flex-col flex-auto overflow-hidden {fullScreen
             ? 'h-screen'
             : ''} z-10 bg-white dark:bg-gray-800 {enterFromSide ? '' : 'rounded-t-2xl'}"
         style={enterFromSide ? `left: ${position}px;` : `bottom: ${position}px;`}

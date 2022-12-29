@@ -1,9 +1,10 @@
 <script lang="typescript">
+    import { openUrlInBrowser } from '@core/app'
     import { localize } from '@core/i18n'
     import features from '@features/features'
     import { Icon, Text, TextType } from '@ui'
     import { SettingsCategory, SETTINGS_ROUTE_META } from '../../../../../../../lib/contexts/dashboard'
-    import { settingsRouter } from '../../../../../../../lib/routers'
+    import { SettingsRoute, settingsRouter } from '../../../../../../../lib/routers'
 
     const categories = {
         [SettingsCategory.General]: {
@@ -28,8 +29,14 @@
         },
     }
 
-    function handleSettingClick(route): void {
-        $settingsRouter.next({ goTo: route })
+    function handleSettingClick(route: SettingsRoute | string, external: boolean = false): void {
+        if (external) {
+            if (typeof route === 'string') {
+                openUrlInBrowser(route)
+            }
+        } else {
+            $settingsRouter.next({ goTo: route as SettingsRoute })
+        }
     }
 
     for (const [route, setting] of Object.entries(SETTINGS_ROUTE_META)) {
@@ -40,22 +47,28 @@
     }
 </script>
 
-<div class="flex flex-col h-full justify-start items-start">
+<div class="flex flex-col h-full justify-start items-start space-y-6 overflow-scroll">
     {#each Object.values(categories) as category}
         {#if category.enabled}
-            <Text type={TextType.h4} classes="mb-4">{category.name}</Text>
-            <div class="flex flex-col space-y-1 w-full">
-                {#each category.settings as setting}
-                    {#if setting.enabled}
-                        <button
-                            class="p-2 w-full flex flex-row items-center space-x-4"
-                            on:click={() => handleSettingClick(setting.route)}
-                        >
-                            <Icon width="18" height="18" icon={setting.icon} classes="text-blue-500" />
-                            <Text type={TextType.p} secondary>{localize(setting.name)}</Text>
-                        </button>
-                    {/if}
-                {/each}
+            <div class="flex flex-col space-y-4">
+                <Text type={TextType.h4}>{category.name}</Text>
+                <div class="flex flex-col space-y-1 w-full">
+                    {#each category.settings as setting}
+                        {#if setting.enabled}
+                            <button
+                                class="p-2 w-full flex flex-row items-center space-x-4"
+                                on:click={() =>
+                                    handleSettingClick(
+                                        setting?.external ? setting?.url : setting.route,
+                                        setting?.external
+                                    )}
+                            >
+                                <Icon width="18" height="18" icon={setting.icon} classes="text-blue-500" />
+                                <Text type={TextType.p} secondary>{localize(setting.name)}</Text>
+                            </button>
+                        {/if}
+                    {/each}
+                </div>
             </div>
         {/if}
     {/each}

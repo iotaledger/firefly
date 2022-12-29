@@ -11,7 +11,6 @@
     import { profileRouter } from '../../../../../lib/routers'
 
     const { isStrongholdLocked } = $activeProfile
-
     let networkProtocol: NetworkProtocol
     $: networkProtocol = $activeProfile.networkProtocol
 
@@ -66,7 +65,7 @@
                 </button>
             </div>
         </div>
-        <div class="flex flex-col space-y-4">
+        <div class="flex flex-col space-y-6">
             {#if features?.dashboard?.profileActions?.networkStatus?.enabled}
                 <NetworkStatusButton onClick={() => $profileRouter.next({ networkStatus: true })} />
             {/if}
