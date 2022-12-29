@@ -47,7 +47,7 @@
     }
 </script>
 
-<div class="flex flex-col h-full justify-start items-start space-y-6">
+<div class="flex flex-col h-full justify-start items-start space-y-6 overflow-scroll">
     {#each Object.values(categories) as category}
         {#if category.enabled}
             <div class="flex flex-col space-y-4">
