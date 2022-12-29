@@ -8,6 +8,7 @@
     export let id = null
     export let decimals = 0
     export let value: string
+    export let disabled = false
 
     // Node Bindings
     let container = null
@@ -44,18 +45,21 @@
     }
 
     function onTrackEvent(e): void {
+        if (disabled) return
         // Update value immediately before beginning drag
         updateValueOnEvent(e)
         onDragStart(e)
     }
 
     function onDragStart(e): void {
+        if (disabled) return
         // If mouse event add a pointer events shield
         if (e.type === 'mousedown') document.body.append(mouseEventShield)
         currentThumb = thumb
     }
 
     function onDragEnd(e): void {
+        if (disabled) return
         // If using mouse - remove pointer event shield
         if (e.type === 'mouseup') {
             if (document.body.contains(mouseEventShield)) document.body.removeChild(mouseEventShield)
@@ -142,9 +146,14 @@
         on:touchstart={onTrackEvent}
     >
         <div class="range__track" bind:this={container}>
-            <div class="range__track--highlighted bg-blue-500" bind:this={progressBar} />
             <div
-                class="range__thumb bg-blue-500"
+                bind:this={progressBar}
+                class="range__track--highlighted
+                {disabled ? 'bg-gray-400' : 'bg-blue-500'}"
+            />
+            <div
+                class="range__thumb
+                {disabled ? 'bg-gray-400' : 'bg-blue-500'}"
                 class:range__thumb--holding={holding}
                 bind:this={thumb}
                 on:touchstart={onDragStart}

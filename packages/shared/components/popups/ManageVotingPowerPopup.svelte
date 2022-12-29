@@ -37,19 +37,21 @@
 <Text type={TextType.h4} classes="mb-3">{localize('popups.manageVotingPower.title')}</Text>
 <Text type={TextType.p} secondary classes="mb-5">{localize('popups.manageVotingPower.body')}</Text>
 <div class="space-y-4 mb-6">
-    <AssetAmountInput bind:this={assetAmountInput} bind:rawAmount {asset} containsSlider disableAssetSelection />
+    <AssetAmountInput
+        bind:this={assetAmountInput}
+        bind:rawAmount
+        {asset}
+        containsSlider
+        disableAssetSelection
+        disabled={isTransferring}
+    />
     <TextHint info text={localize('popups.manageVotingPower.hint')} />
 </div>
 <div class="flex flex-row flex-nowrap w-full space-x-4">
     <Button outline classes="w-full" disabled={isTransferring} onClick={handleBack}>
         {localize('actions.back')}
     </Button>
-    <Button
-        classes="w-full"
-        disabled={$selectedAccount.isTransferring}
-        onClick={handleConfirm}
-        isBusy={$selectedAccount.isTransferring}
-    >
+    <Button classes="w-full" disabled={isTransferring} onClick={handleConfirm} isBusy={isTransferring}>
         {localize('actions.confirm')}
     </Button>
 </div>
