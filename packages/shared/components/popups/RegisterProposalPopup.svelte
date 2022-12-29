@@ -1,12 +1,13 @@
 <script lang="typescript">
-    import { Button, TextInput, Text, TextType } from 'shared/components'
     import type { Auth } from '@iota/wallet'
-    import { showAppNotification } from '@auxiliary/notification/actions'
-    import { closePopup, openPopup } from '@auxiliary/popup/actions'
+    import { Button, TextInput, Text, TextType } from 'shared/components'
+    import { HTMLButtonType } from 'shared/components/enums'
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
     import { registerParticipationEvent } from '@core/profile-manager/api'
     import { isValidUrl } from '@core/utils/validation'
+    import { showAppNotification } from '@auxiliary/notification/actions'
+    import { closePopup, openPopup } from '@auxiliary/popup/actions'
 
     export let eventId: string
     export let nodeUrl: string
@@ -20,7 +21,7 @@
         closePopup()
     }
 
-    async function handleConfirm(): Promise<void> {
+    async function handleSubmit(): Promise<void> {
         try {
             await Promise.all([validateEventId(), validateNodeUrl()])
             await registerParticipationWrapper()
@@ -74,7 +75,7 @@
     }
 </script>
 
-<register-proposal>
+<form id="register-proposal" on:submit|preventDefault={handleSubmit}>
     <Text type={TextType.h3} classes="mb-6">{localize('popups.registerProposal.title')}</Text>
     <Text fontSize="15">{localize('popups.registerProposal.body')}</Text>
     <div class="flex flex-col w-full space-y-4 mt-4">
@@ -93,6 +94,6 @@
     </div>
     <div class="flex w-full space-x-4 mt-6">
         <Button outline classes="w-full" onClick={handleCancel}>{localize('actions.cancel')}</Button>
-        <Button {disabled} classes="w-full" onClick={handleConfirm}>{localize('actions.confirm')}</Button>
+        <Button type={HTMLButtonType.Submit} {disabled} classes="w-full">{localize('actions.confirm')}</Button>
     </div>
-</register-proposal>
+</form>
