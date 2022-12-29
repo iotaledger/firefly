@@ -6,6 +6,8 @@
     import { IProposal } from '@contexts/governance/interfaces'
 
     export let proposals: IProposal[] = []
+
+    $: sortedProposals = proposals.sort((a, b) => (a.id < b.id ? -1 : 1))
 </script>
 
 <proposals-container class="flex flex-col h-full">
@@ -15,7 +17,7 @@
         </Text>
     </header-container>
     <ul class="grid grid-cols-2 auto-rows-min gap-6 flex-1 overflow-y-scroll">
-        {#each proposals as proposal}
+        {#each sortedProposals as proposal}
             <ProposalCard {proposal} />
         {/each}
     </ul>
