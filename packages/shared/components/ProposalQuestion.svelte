@@ -36,7 +36,9 @@
     }
 </script>
 
-<proposal-question class="flex flex-col px-5 py-4 rounded-xl border border-solid border-gray-200 cursor-pointer">
+<proposal-question
+    class="flex flex-col px-5 py-4 rounded-xl border border-solid border-gray-200 dark:border-transparent dark:bg-gray-850 cursor-pointer"
+>
     <div on:click={onClick} class="flex justify-between items-center">
         <div class="flex flex-col">
             {#if questionIndex !== undefined}
@@ -44,7 +46,9 @@
                     >Question {questionIndex + 1}</Text
                 >
             {/if}
-            <Text fontWeight={FontWeight.bold} overrideColor classes="text-gray-900">{question.text}</Text>
+            <Text fontWeight={FontWeight.bold} overrideColor classes="text-gray-900 dark:text-white"
+                >{question.text}</Text
+            >
         </div>
         <div class="transform {isOpened ? 'rotate-180' : 'rotate-0'}">
             <Icon icon={IconEnum.ChevronDown} classes="text-gray-500" />
