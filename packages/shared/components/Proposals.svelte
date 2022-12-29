@@ -14,7 +14,7 @@
             {localize('views.governance.proposals.title')}
         </Text>
     </header-container>
-    <ul class="grid grid-cols-2 gap-6 flex-1 overflow-y-scroll">
+    <ul class="grid grid-cols-2 auto-rows-min gap-6 flex-1 overflow-y-scroll">
         {#each proposals as proposal}
             <ProposalCard {proposal} />
         {/each}
