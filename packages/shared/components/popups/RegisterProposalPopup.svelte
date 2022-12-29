@@ -6,6 +6,7 @@
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
     import { registerParticipationEvent } from '@core/profile-manager/api'
+    import { truncateString } from '@core/utils/string'
     import { isValidUrl } from '@core/utils/validation'
 
     export let eventId: string
@@ -32,9 +33,25 @@
             busy = false
         } catch (err) {
             busy = false
-            const isAuthenticationError = err?.error?.match(/(username)|(password)|(jwt)/g).length > 0
+            const isAuthenticationError = err?.error?.match(/(username)|(password)|(jwt)/g)?.length > 0
+            const isEventError = err?.error?.match(/(the requested data)|(was not found)/)?.length > 0
+            const isNodeError = err?.error?.match(/(failed to lookup address information)|(dns error)/)?.length > 0
             if (isAuthenticationError) {
                 openNodeAuthRequiredPopup()
+            } else if (isEventError) {
+                showAppNotification({
+                    type: 'error',
+                    alert: true,
+                    message: localize('error.governance.unableToRegisterProposal.long', {
+                        values: { proposalId: truncateString(eventId) },
+                    }),
+                })
+            } else if (isNodeError) {
+                showAppNotification({
+                    type: 'error',
+                    alert: true,
+                    message: localize('error.node.dns'),
+                })
             } else if (!nodeUrlError && !eventIdError) {
                 handleError(err)
             }
