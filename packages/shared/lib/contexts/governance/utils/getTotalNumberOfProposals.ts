@@ -4,6 +4,6 @@ import { getParticipationOverview } from '@core/account/api'
 import { selectedAccount } from '@core/account/stores'
 
 export async function getTotalNumberOfProposals(): Promise<number> {
-    const overview = await getParticipationOverview(get(selectedAccount)?.index)
-    return Object.keys(overview?.participations ?? {}).length
+    const { participations } = (await getParticipationOverview(get(selectedAccount)?.index)) ?? {}
+    return Object.keys(participations ?? {}).length
 }
