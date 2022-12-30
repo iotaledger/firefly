@@ -15,15 +15,14 @@
         TextType,
     } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { openPopup } from '@auxiliary/popup'
+    import { openPopup } from '@auxiliary/popup/actions'
     import { activeProfileId } from '@core/profile/stores'
     import { networkStatus } from '@core/network/stores'
-    import { getVotingEvent } from '@core/profile-manager'
-    import { governanceRouter } from '@core/router'
-    import { getParticipationOverview, selectedAccount } from '@core/account'
-    import type { IParticipations } from '@contexts/governance/interfaces'
+    import { getVotingEvent } from '@core/profile-manager/api'
+    import { governanceRouter } from '@core/router/routers'
+    import { selectedAccount } from '@core/account/stores'
     import { ProposalStatus } from '@contexts/governance/enums'
-    import { proposalsState, selectedProposal } from '@contexts/governance/stores'
+    import { participationOverview, proposalsState, selectedProposal } from '@contexts/governance/stores'
 
     let selectedAnswerValues: number[] = []
     let votingPayload: VotingEventPayload
@@ -56,10 +55,8 @@
         }
     }
 
-    async function setTotalVotes(): Promise<void> {
-        const participations: IParticipations = (await getParticipationOverview($selectedAccount?.index))
-            ?.participations
-        const selectedProposalOverview = participations[$selectedProposal?.id]
+    function setTotalVotes(): void {
+        const selectedProposalOverview = $participationOverview?.participations?.[$selectedProposal?.id]
 
         if (selectedProposalOverview) {
             const votes = Object.values(selectedProposalOverview).map(
@@ -93,7 +90,7 @@
 
     onMount(() => {
         void setVotingEventPayload($selectedProposal?.id)
-        void setTotalVotes()
+        setTotalVotes()
     })
 </script>
 

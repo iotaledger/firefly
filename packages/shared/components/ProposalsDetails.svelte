@@ -23,7 +23,7 @@
         if ($activeProfileId) {
             details = {
                 activeProposals: getNumberOfActiveProposals(),
-                votingProposals: await getNumberOfVotingProposals(),
+                votingProposals: getNumberOfVotingProposals(),
                 votedProposals: await getTotalNumberOfProposals(),
             }
         }

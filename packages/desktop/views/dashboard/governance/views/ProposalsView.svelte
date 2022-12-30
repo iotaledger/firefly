@@ -1,22 +1,31 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { Pane, Proposals, ProposalsDetails, VotingPower } from '@ui'
+    import { selectedAccountIndex } from '@core/account/stores'
+    import { initialiseParticipationOverview } from '@contexts/governance/actions'
     import type { IProposal } from '@contexts/governance/interfaces'
+    import { participationOverview, proposalsState, registeredEventIds } from '@contexts/governance/stores'
     import { createProposals } from '@contexts/governance/utils'
-    import { registeredEventIds } from '@contexts/governance/stores'
 
     let proposals: IProposal[]
     let loaded = false
 
     $: $registeredEventIds, void setProposals()
 
+    $: $selectedAccountIndex, $proposalsState, void initialiseParticipationOverview()
+    $: $participationOverview
+
     async function setProposals(): Promise<void> {
         proposals = await createProposals()
     }
 
-    onMount(async () => {
+    async function onMountHelper(): Promise<void> {
         await setProposals()
         loaded = true
+    }
+
+    onMount(() => {
+        void onMountHelper()
     })
 </script>
 
