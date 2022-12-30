@@ -48,6 +48,8 @@
 
     $: isTransferring = $selectedAccount?.isTransferring
 
+    $: proposalState, void setTotalVotes()
+
     async function setVotingEventPayload(eventId: string): Promise<void> {
         const event = await getVotingEvent(eventId)
         if (event?.data?.payload?.type === ParticipationEventType.Voting) {
