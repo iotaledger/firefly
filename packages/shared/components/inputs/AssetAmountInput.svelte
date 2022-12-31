@@ -50,9 +50,8 @@
     function onClickAvailableBalance(): void {
         const isRawAmount = asset?.metadata?.decimals && asset?.metadata?.unit
         if (isRawAmount) {
-            const parsedAmount = formatTokenAmountDefault(availableBalance, asset?.metadata, unit)
+            const parsedAmount = formatTokenAmountDefault(availableBalance, asset?.metadata, unit, false)
             amount = parsedAmount
-            unit = asset?.metadata?.unit
             return
         }
         amount = availableBalance.toString() ?? '0'
