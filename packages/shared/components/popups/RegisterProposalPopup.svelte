@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, HTMLButtonType, Spinner, TextInput, Text, TextType } from 'shared/components'
+    import { Button, HTMLButtonType, TextInput, Text, TextType } from 'shared/components'
     import type { Auth } from '@iota/wallet'
     import { showAppNotification } from '@auxiliary/notification/actions'
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
@@ -15,7 +15,7 @@
     let eventIdError: string
     let nodeUrlError: string
 
-    let busy = false
+    let isBusy = false
 
     $: disabled = !eventId || !nodeUrl
 
@@ -25,14 +25,14 @@
 
     async function onConfirmClick(): Promise<void> {
         try {
-            busy = true
+            isBusy = true
 
             await Promise.all([validateEventId(), validateNodeUrl()])
             await registerParticipationWrapper()
 
-            busy = false
+            isBusy = false
         } catch (err) {
-            busy = false
+            isBusy = false
             const isAuthenticationError = err?.error?.match(/(username)|(password)|(jwt)/g)?.length > 0
             const isEventError = err?.error?.match(/(the requested data)|(was not found)/)?.length > 0
             const isNodeError = err?.error?.match(/(failed to lookup address information)|(dns error)/)?.length > 0
@@ -117,12 +117,8 @@
     </div>
     <div class="flex w-full space-x-4 mt-6">
         <Button outline classes="w-full" onClick={onCloseClick}>{localize('actions.cancel')}</Button>
-        <Button disabled={disabled || busy} classes="w-full" type={HTMLButtonType.Submit}>
-            {#if busy}
-                <Spinner {busy} />
-            {:else}
-                {localize('actions.confirm')}
-            {/if}
+        <Button disabled={disabled || isBusy} {isBusy} classes="w-full" type={HTMLButtonType.Submit}>
+            {localize('actions.confirm')}
         </Button>
     </div>
 </form>
