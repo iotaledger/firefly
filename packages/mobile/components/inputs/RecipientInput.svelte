@@ -8,6 +8,7 @@
     export let recipient: IAddressSubject | IAccountSubject
     export let disabled: boolean = false
     export let error: string = undefined
+    export let inputElement: HTMLInputElement = undefined
 
     let addressPrefix: string
     let value: string
@@ -53,6 +54,7 @@
     <input
         type="text"
         {value}
+        bind:this={inputElement}
         on:input={onInputChange}
         class="w-full bg-white dark:bg-gray-800 text-gray-800 dark:text-white"
         {disabled}

@@ -12,6 +12,7 @@
 
     let recipient: IAddressSubject | IAccountSubject
     let recipientValidationError: string
+    let recipientInputElement: HTMLInputElement
 
     let recipientQuickListOptions: IOption[] = []
     $: recipientQuickListOptions = $visibleActiveAccounts
@@ -26,6 +27,7 @@
     $: recipient, updateFilteredQuickListOptions()
 
     onMount(() => {
+        recipientInputElement?.focus()
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         recipient = $newTransactionDetails?.recipient
@@ -54,7 +56,7 @@
 </script>
 
 <div class="w-full overflow-y-auto flex flex-col flex-auto h-1 space-y-4 justify-between">
-    <RecipientInput bind:recipient bind:error={recipientValidationError} />
+    <RecipientInput bind:recipient bind:error={recipientValidationError} bind:inputElement={recipientInputElement} />
     <div class="flex flex-col flex-1 space-y-1 overflow-y-auto">
         {#each filteredQuickListOptions as option}
             <button
