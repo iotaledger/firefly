@@ -42,7 +42,7 @@
     }
 
     $: bigAmount = convertToRawAmount(amount, unit, asset?.metadata)
-    $: amount, validate()
+    $: (amount, unit), validate()
     $: marketAmount = getMarketAmountFromAssetValue(bigAmount, asset)
 
     onMount(() => {
@@ -101,7 +101,7 @@
             return
         }
         amount = asset?.balance.available.toString() ?? '0'
-        unit = undefined
+        unit = asset?.metadata?.unit
     }
 
     function onContinueClick(): void {
