@@ -52,7 +52,6 @@
         if (isRawAmount) {
             const parsedAmount = formatTokenAmountDefault(availableBalance, asset?.metadata, unit, false)
             amount = parsedAmount
-            unit = asset?.metadata?.unit
             return
         }
         amount = availableBalance.toString() ?? '0'
