@@ -16,6 +16,7 @@
     export let inputElement: HTMLInputElement = undefined
     export let disabled = false
     export let isFocused = false
+    export let votingPower: number = 0
     export let asset: IAsset = $visibleSelectedAccountAssets?.baseCoin
     export let rawAmount: string = undefined
     export let unit: string = undefined
@@ -41,19 +42,20 @@
         allowedDecimals = IOTA_UNIT_MAP?.[unit?.substring(0, 1)] ?? 0
     }
 
+    $: availableBalance = asset?.balance?.available + votingPower
     $: bigAmount = convertToRawAmount(amount, unit, asset?.metadata)
     $: marketAmount = getMarketAmountFromAssetValue(bigAmount, asset)
-    $: max = parseCurrency(formatTokenAmountDefault(asset?.balance?.available, asset.metadata, unit, false))
+    $: max = parseCurrency(formatTokenAmountDefault(availableBalance, asset.metadata, unit, false))
 
     function onClickAvailableBalance(): void {
         const isRawAmount = asset?.metadata?.decimals && asset?.metadata?.unit
         if (isRawAmount) {
-            const parsedAmount = formatTokenAmountDefault(asset?.balance?.available, asset?.metadata, unit)
+            const parsedAmount = formatTokenAmountDefault(availableBalance, asset?.metadata, unit)
             amount = parsedAmount
             unit = asset?.metadata?.unit
             return
         }
-        amount = asset?.balance.available.toString() ?? '0'
+        amount = availableBalance.toString() ?? '0'
         unit = undefined
     }
 
@@ -71,7 +73,7 @@
             Number.parseInt(amount, 10).toString() !== amount
         ) {
             error = localize('error.send.amountNoFloat')
-        } else if (bigAmount.gt(Big(asset?.balance?.available))) {
+        } else if (bigAmount.gt(Big(availableBalance))) {
             error = localize('error.send.amountTooHigh')
         } else if (bigAmount.lte(Big(0))) {
             error = localize('error.send.amountZero')
@@ -119,7 +121,7 @@
                     >{formatTokenAmountBestMatch(0, asset?.metadata)}</Text
                 >
                 <Text color="gray-800" darkColor="gray-500" fontSize="xs"
-                    >{formatTokenAmountBestMatch(asset?.balance?.available, asset?.metadata)}</Text
+                    >{formatTokenAmountBestMatch(availableBalance, asset?.metadata)}</Text
                 >
             </div>
         </div>
@@ -131,7 +133,7 @@
                         <Text color="gray-600" darkColor="gray-500" fontSize="xs" classes="cursor-pointer">
                             {localize('general.availableBalanceWithValue', {
                                 values: {
-                                    balance: formatTokenAmountBestMatch(asset?.balance?.available, asset?.metadata),
+                                    balance: formatTokenAmountBestMatch(availableBalance, asset?.metadata),
                                 },
                             })}
                         </Text>
