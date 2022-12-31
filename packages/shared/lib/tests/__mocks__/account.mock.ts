@@ -242,6 +242,10 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
+    requestFundsFromFaucet(url: string, address: string): Promise<string> {
+        throw new Error('Method not implemented.')
+    }
+
     sendAmount(
         addressesWithAmount: AddressWithAmount[],
         transactionOptions?: TransactionOptions
