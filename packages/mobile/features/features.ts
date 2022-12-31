@@ -6,6 +6,12 @@ const features = {
         enabled: false,
         profileActions: {
             enabled: true,
+            networkStatus: {
+                enabled: true,
+            },
+            profileLock: {
+                enabled: true,
+            },
         },
         accountSwitcher: {
             enabled: true,
@@ -67,7 +73,7 @@ const features = {
                 enabled: true,
             },
             currency: {
-                enabled: false,
+                enabled: true,
             },
             notifications: {
                 enabled: false,
@@ -76,7 +82,7 @@ const features = {
                 enabled: false,
             },
             changeProfileName: {
-                enabled: false,
+                enabled: true,
             },
         },
         security: {
@@ -109,7 +115,7 @@ const features = {
                 enabled: true,
             },
             hiddenAccounts: {
-                enabled: false,
+                enabled: true,
             },
             errorLog: {
                 enabled: true,
@@ -125,18 +131,18 @@ const features = {
             },
         },
         helpAndInfo: {
-            enabled: false,
+            enabled: true,
             documentation: {
-                enabled: false,
+                enabled: true,
             },
             faq: {
-                enabled: false,
+                enabled: true,
             },
             discord: {
-                enabled: false,
+                enabled: true,
             },
             reportAnIssue: {
-                enabled: false,
+                enabled: true,
             },
         },
     },

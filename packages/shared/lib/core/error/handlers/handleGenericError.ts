@@ -1,5 +1,5 @@
-import { IError } from '../interfaces'
 import { logAndNotifyError } from '../actions'
+import { IError } from '../interfaces'
 
 export function handleGenericError(error: IError | string): void {
     let message: string
