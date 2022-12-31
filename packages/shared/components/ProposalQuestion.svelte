@@ -1,11 +1,10 @@
 <script lang="typescript">
-    import type { Question } from '@iota/wallet'
+    import type { AnswerStatus, Question } from '@iota/wallet'
     import { Text, FontWeight, Icon, ProposalAnswer } from 'shared/components'
     import { ProposalStatus, selectedProposal } from '@contexts/governance'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
-    // TODO: replace with new wallet.rs type
-    export let currentVote: { value: number; current: number; accumulated: number }[] = undefined
+    export let currentVote: AnswerStatus[] = undefined
     export let questionIndex: number = undefined
     export let isOpened = false
     export let question: Question

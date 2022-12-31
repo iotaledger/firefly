@@ -7,8 +7,7 @@
     import { registerParticipationEvent } from '@core/profile-manager/api'
     import { showAppNotification } from '@auxiliary/notification/actions'
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
-
-    let isBusy = false
+    import { truncateString } from '@core/utils/string'
 
     export let eventId: string
     export let nodeUrl: string
@@ -16,13 +15,15 @@
     let eventIdError: string
     let nodeInput: NodeInput
 
+    let isBusy = false
+
     $: disabled = !eventId || !nodeUrl || isBusy
 
-    function handleCancel(): void {
+    function onCancel(): void {
         closePopup()
     }
 
-    async function handleSubmit(): Promise<void> {
+    async function onSubmit(): Promise<void> {
         try {
             isBusy = true
             await Promise.all([validateEventId(), nodeInput?.validate()])
@@ -30,9 +31,25 @@
             isBusy = false
         } catch (err) {
             isBusy = false
-            const isAuthenticationError = err?.error?.match(/(username)|(password)|(jwt)/g).length > 0
+            const isAuthenticationError = err?.error?.match(/(username)|(password)|(jwt)/g)?.length > 0
+            const isEventError = err?.error?.match(/(the requested data)|(was not found)/)?.length > 0
+            const isNodeError = err?.error?.match(/(failed to lookup address information)|(dns error)/)?.length > 0
             if (isAuthenticationError) {
                 openNodeAuthRequiredPopup()
+            } else if (isEventError) {
+                showAppNotification({
+                    type: 'error',
+                    alert: true,
+                    message: localize('error.governance.unableToRegisterProposal.long', {
+                        values: { proposalId: truncateString(eventId) },
+                    }),
+                })
+            } else if (isNodeError) {
+                showAppNotification({
+                    type: 'error',
+                    alert: true,
+                    message: localize('error.node.dns'),
+                })
             } else if (!nodeInput?.error && !eventIdError) {
                 handleError(err)
             }
@@ -72,7 +89,7 @@
     }
 </script>
 
-<form id="register-proposal" on:submit|preventDefault={handleSubmit}>
+<form id="register-proposal" on:submit|preventDefault={onSubmit}>
     <Text type={TextType.h3} classes="mb-6">{localize('popups.registerProposal.title')}</Text>
     <Text fontSize="15">{localize('popups.registerProposal.body')}</Text>
     <div class="flex flex-col w-full space-y-4 mt-4">
@@ -85,7 +102,7 @@
         <NodeInput bind:this={nodeInput} bind:nodeUrl />
     </div>
     <div class="flex w-full space-x-4 mt-6">
-        <Button outline classes="w-full" onClick={handleCancel}>{localize('actions.cancel')}</Button>
+        <Button outline classes="w-full" onClick={onCancel}>{localize('actions.cancel')}</Button>
         <Button type={HTMLButtonType.Submit} {disabled} {isBusy} classes="w-full">
             {localize('actions.confirm')}
         </Button>
