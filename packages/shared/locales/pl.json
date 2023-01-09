@@ -552,7 +552,7 @@
                 },
                 "shimmer": {
                     "name": "Shimmer",
-                    "description": "Sieć stagingowa motywowana do rozwoju głównych innowacji w technologii IOTA. Co będzie, to będzie. To, jak Shimmer będzie się rozwijał, zależy od Ciebie."
+                    "description": "Sieć etapowa, motywowana do rozwoju głównych innowacji w technologii IOTA. Co będzie, to będzie. To, jak Shimmer będzie się rozwijał, zależy od Ciebie."
                 }
             },
             "banners": {
@@ -900,12 +900,12 @@
         "shimmer-info": {
             "title": "O Shimmer",
             "body1": "Gratulacje, zdobyłeś tokeny SMR jako nagrodę za staking. Shimmer to sieć rozwojowa do testowania głównych udoskonaleń technologii IOTA.",
-            "body2": "Uruchomienie Shimmer jest planowane na rok 2022. Twoje tokeny będą dostępne do transferu po uruchomieniu sieci."
+            "body2": "Sieć Shimmer jest już uruchomiona, możesz odebrać swoje tokeny za pomocą aplikacji Firefly Shimmer."
         },
         "assembly-info": {
             "title": "O Assembly",
             "body1": "Gratulacje, zdobyłeś tokeny ASMB jako nagrodę za staking. Assembly to wielołańcuchowa sieć do wdrażania skalowalnych smart kontraktów IOTA.",
-            "body2": "Uruchomienie Assembly jest planowane na rok 2022. Twoje tokeny będą dostępne do transferu po uruchomieniu sieci."
+            "body2": "Będziesz mógł przesyłać swoje tokeny po uruchomieniu sieci."
         },
         "confirmDeveloperProfile": {
             "title": "Tworzysz profil dewelopera",

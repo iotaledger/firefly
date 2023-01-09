@@ -69,7 +69,7 @@
             "title": "Hast du die notwendigen Ledger-Apps installiert?",
             "body1": "Bevor du fortfährst, musst du sowohl die {legacy} App als auch die neue IOTA App über Ledger Live installieren.",
             "body2": "Stelle sicher, dass deine Ledger-Firmware aktuell ist. Alle vorinstallierten Apps sollten auf ihre neuesten Versionen aktualisiert werden.",
-            "action": "Ja, ich habe beide Apps installiert"
+            "action": "Ja, ich habe die Apps installiert"
         },
         "password": {
             "title": "Passwort erstellen",
@@ -900,12 +900,12 @@
         "shimmer-info": {
             "title": "Über Shimmer",
             "body1": "Herzlichen Glückwunsch! Für das Staking hast du SMR Token erhalten. Shimmer ist ein Staging-Netzwerk, um größere Upgrades für IOTA zu testen.",
-            "body2": "Unser Ziel ist es, Shimmer in 2022 zu starten. Deine Token werden verfügbar sein, sobald das Netzwerk startet."
+            "body2": "Das Shimmer Netzwerk wurde gestartet, du kannst deine Token mit der Firefly Shimmer App beanspruchen."
         },
         "assembly-info": {
             "title": "Über Assembly",
             "body1": "Herzlichen Glückwunsch! Für das Staking hast du ASMB Token erhalten. Assembly ist ein Multi-Chain Netzwerk, welches es ermöglicht, skalierbare Smart-Contracts auf IOTA bereitzustellen.",
-            "body2": "Unser Ziel ist es, Assembly in 2022 zu starten. Deine Token werden verfügbar sein, sobald das Netzwerk startet."
+            "body2": "Deine Token werden verfügbar sein, sobald das Netzwerk gestartet wird."
         },
         "confirmDeveloperProfile": {
             "title": "Du erstellst ein Entwicklerprofil",

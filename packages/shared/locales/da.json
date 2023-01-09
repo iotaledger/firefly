@@ -16,7 +16,7 @@
             "checkbox": "Indsend fejlrapporter til IOTA Foundation"
         },
         "appearance": {
-            "title": "Appearance",
+            "title": "Udseende",
             "body": "Vælg app-tema."
         },
         "profile": {
@@ -192,7 +192,7 @@
             "readMore": "Hvad der kan forventes af migreringsprocessen"
         },
         "generateNewLedgerAddress": {
-            "title": "Generate new address",
+            "title": "Generér ny adresse",
             "body": "Man skal generere en ny adresse for at migrere sine tokens med Firefly. Klik på knappen nedenfor for at fortsætte.",
             "confirmTitle": "Bekræft den nye adresse",
             "confirmBody": "Sammenlign af sikkerhedshensyn den adresse, der er genereret på Ledger, med den, der vises nedenfor. Matcher de, så tryk, som anmodet, på begge Ledger-knapper.",
@@ -419,18 +419,18 @@
                 "description": "Vis fejl for at fejlfinde et problem"
             },
             "crashReporting": {
-                "title": "Crash reports",
-                "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs",
-                "checkbox": "Send crash reports",
-                "advice": "Please restart the Firefly application to {sendCrashReports, select, true {start sharing crash reports} false {stop sharing crash reports} other {apply this change}}"
+                "title": "Nedbrudsrapporter",
+                "body": "Hjælp udviklerne med at forbedre Firefly ved automatisk at indsende diagnostikdata, når fejl eller nedbrud opstår",
+                "checkbox": "Indsend fejlrapporter",
+                "advice": "Genstart Firefly-applikationen for at {sendCrashReports, select, true {starte deling af nedbrudsrapporter} false {stoppe deling af nedbrudsrapporter} other {anvend denne ændring}}"
             },
             "diagnostics": {
                 "title": "Diagnostik",
                 "description": "Vis system og applikationsinformation"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger index",
-                "description": "Migrate another Trinity account index"
+                "title": "Migrér Ledger-enhedens indeks",
+                "description": "Migrér et andet Trinity-kontoindeks"
             },
             "troubleshoot": {
                 "title": "Fejlfinding",
@@ -442,7 +442,7 @@
             },
             "faq": {
                 "title": "FAQ",
-                "title2": "Frequently asked questions",
+                "title2": "Hyppigt stillede spørgsmål",
                 "description": "Se ofte stillede spørgsmål for at få hjælp til et typisk problem eller spørgsmål"
             },
             "discord": {
@@ -459,14 +459,14 @@
             }
         },
         "login": {
-            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
-            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
+            "pleaseWait": "Afvent {time, plural, one {1 sekund} other {# sekunder}}",
+            "incorrectAttempts": "{attempts, plural, one {1 forkert forsøg} other {# forkerte forsøg}}"
         },
         "dashboard": {
             "network": {
-                "networkOperational": "Network operational",
-                "networkDegraded": "Network degraded",
-                "networkDown": "Network disconnected",
+                "networkOperational": "Netværk operationelt",
+                "networkDegraded": "Netværk forringet",
+                "networkDown": "Netværk afbrudt",
                 "networkUnreachable": "Netværk utilgængeligt",
                 "status": "Status",
                 "messagesPerSecond": "Beskeder pr. sekund",
@@ -474,65 +474,65 @@
             },
             "profileModal": {
                 "allSettings": {
-                    "title": "All settings",
-                    "description": "Profile, application, security"
+                    "title": "Alle indstillinger",
+                    "description": "Profil, applikation, sikkerhed"
                 },
                 "logout": "Log ud",
                 "stronghold": {
-                    "title": "Profile lock",
-                    "locked": "Stronghold locked",
-                    "unlocked": "Stronghold unlocked"
+                    "title": "Profillås",
+                    "locked": "Stronghold låst",
+                    "unlocked": "Stronghold oplåst"
                 },
                 "hardware": {
-                    "title": "Hardware Device",
+                    "title": "Hardware-enhed",
                     "statuses": {
-                        "appNotOpen": "IOTA app not open",
-                        "connected": "Connected",
-                        "legacyConnected": "Legacy app open",
-                        "locked": "Locked",
-                        "mnemonicMismatch": "Wrong Ledger or mnemonic",
-                        "notDetected": "Not detected",
-                        "otherConnected": "App open"
+                        "appNotOpen": "IOTA-app ikke åben",
+                        "connected": "Forbundet",
+                        "legacyConnected": "Ældre app er åben",
+                        "locked": "Låst",
+                        "mnemonicMismatch": "Forkert Ledger-enhed eller mnemonic",
+                        "notDetected": "Ikke fundet",
+                        "otherConnected": "App åben"
                     }
                 },
                 "backup": {
-                    "title": "Backup your wallets",
-                    "lastBackup": "You last backed up {date}",
-                    "notBackedUp": "Not backed up",
-                    "button": "Backup"
+                    "title": "Sikkerhedskopiér wallets",
+                    "lastBackup": "Senest sikkerhedskopieret {date}",
+                    "notBackedUp": "Ikke sikkerhedskopieret",
+                    "button": "Sikkerhedskopiér"
                 },
                 "version": {
-                    "title": "New update available",
+                    "title": "Ny opdatering tilgængelig",
                     "updateVersion": "Firefly v{version}",
-                    "button": "Update"
+                    "button": "Opdatér"
                 }
             }
         },
         "staking": {
-            "welcome": "Welcome to the staking dashboard!",
+            "welcome": "Velkommen til staking-kontrolpanelet!",
             "status": {
-                "upcoming": "Event not started",
-                "commencing": "Pre-staking open",
-                "holdingActive": "Staking in progress",
-                "holdingInactive": "Staking open",
-                "inactive": "Staking not detected",
-                "ended": "Staking ended"
+                "upcoming": "Begivenhed ikke startet",
+                "commencing": "Præ-staking åben",
+                "holdingActive": "Staking i gang",
+                "holdingInactive": "Staking åben",
+                "inactive": "Staking ikke fundet",
+                "ended": "Staking afsluttet"
             },
             "summary": {
-                "stakedFunds": "Staked funds"
+                "stakedFunds": "Stakede midler"
             },
             "info": {
                 "headers": {
-                    "upcoming": "Check back later",
-                    "commencing": "Pre-staking is open",
-                    "holding": "{duration} of staking left",
-                    "ended": "Staking has now ended",
-                    "inactive": "No staking events detected",
-                    "fetching": "Fetching staking event info..."
+                    "upcoming": "Tjek igen senere",
+                    "commencing": "Præ-staking er åben",
+                    "holding": "{duration} af staking resterer",
+                    "ended": "Staking er nu afsluttet",
+                    "inactive": "Ingen staking-begivenheder fundet",
+                    "fetching": "Henter staking-begivenhedsinfo..."
                 },
                 "bodies": {
-                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
+                    "upcoming": "Stake {token}-tokener for automatisk at modtage belønninger hvert 10. sekunder, når staking starter d. {date}.",
+                    "commencing": "Stake {token}-tokener for automatisk at modtage belønninger hvert 10. sekunder, når staking starter d. {date}.",
                     "holdingAndStaking": "You automatically receive rewards every 10 seconds.",
                     "holdingAndNotStaking": "Stake your {token} tokens to receive rewards every 10 seconds.",
                     "endedAndDidStake": "{token} rewards will be distributed to your wallet once the network launches.",
@@ -624,28 +624,28 @@
                         "subtitle": "Please connect to a node that has added this vote",
                         "buttonConnect": "Connect to default node",
                         "buttonSettings": "View node settings",
-                        "fetching": "Fetching governance event info..."
+                        "fetching": "Henter styringsbegivenhedsinfo..."
                     }
                 }
             },
             "eventDetails": {
-                "votingOpens": "Voting opens on",
-                "votingProgress": "Time remaining",
-                "votingPower": "Your voting weight",
-                "votesCounted": "Your counted votes",
-                "maximumVotes": "Your maximum votes",
-                "countingStarts": "Counting begins on",
-                "currentResult": "Current result",
-                "finalResult": "Final result",
+                "votingOpens": "Afstemning starter d.",
+                "votingProgress": "Resterende tid",
+                "votingPower": "Din stemmevægt",
+                "votesCounted": "Dine optalte stemmer",
+                "maximumVotes": "Dine mak. stemmer",
+                "countingStarts": "Optælling begynder d.",
+                "currentResult": "Aktuelt resultat",
+                "finalResult": "Endeligt resultat",
                 "answerHeader": {
-                    "activeVoting": "Active voting",
-                    "selected": "Submitted",
-                    "notSelected": "Not selected",
-                    "winner": "Winner"
+                    "activeVoting": "Aktiv afstemning",
+                    "selected": "Indsendt",
+                    "notSelected": "Ikke valgt",
+                    "winner": "Vinder"
                 }
             },
-            "votes": "votes",
-            "manageVote": "Manage vote"
+            "votes": "stemmer",
+            "manageVote": "Håndtér stemme"
         }
     },
     "popups": {
@@ -664,7 +664,7 @@
             "updateAvailable": "Firefly opdatering tilgængelig",
             "updateDetails": "Version {version} - {date}",
             "noAutoUpdate": "Auto-opdatering er deaktiveret i denne Windows-version, gå til https://firefly.iota.org for at downloade opdateringen.",
-            "preReleaseDescription": "You are running a pre-release version of Firefly. Updates are disabled."
+            "preReleaseDescription": "Der anvendes en præudgivelsesversion af Firefly. Opdateringer er deaktiveret."
         },
         "backup": {
             "title": "Seneste sikkerhedskopi: {date}",
@@ -695,57 +695,57 @@
         },
         "addressHistory": {
             "title": "{name} adresse historik",
-            "currentBalance": "Balance: {balance}",
-            "internal": "Internal Address",
-            "external": "Deposit Address"
+            "currentBalance": "Saldo: {balance}",
+            "internal": "Intern adresse",
+            "external": "Deponeringsadresse"
         },
         "node": {
             "titleAdd": "Tilføj en node",
             "titleUpdate": "Opdater en node",
             "titleRemove": "Fjern en node",
-            "titleRemoveAll": "Remove all nodes",
+            "titleRemoveAll": "Fjern alle noder",
             "titleDetails": "Node detaljer",
-            "titleInfo": "Node info",
-            "addingNode": "Adding node",
-            "updatingNode": "Updating node",
-            "loadingNodeInfo": "Loading node info",
+            "titleInfo": "Nodeinfo",
+            "addingNode": "Tilføjer node",
+            "updatingNode": "Opdater node",
+            "loadingNodeInfo": "Indlæser nodeinfo",
             "nodeAddress": "Node addresse",
             "optionalUsername": "Brugernavn (valgfrit)",
             "optionalPassword": "Adgangskode (valgfrit)",
-            "optionalJwt": "JSON web token (optional)",
+            "optionalJwt": "JSON web token (valgfrit)",
             "setAsPrimaryNode": "Sæt som primær node",
             "removeConfirmation": "Er du sikker på, at du vil du fjerne denne node?",
-            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "removeAllConfirmation": "Sikker på, at alle noder skal fjernes?",
             "info": {
                 "url": "URL",
                 "software": "Software",
-                "networkId": "Network ID",
+                "networkId": "Netværks-ID",
                 "bech32HRP": "Bech32 HRP",
-                "features": "Features",
-                "confirmedMilestoneIndex": "Confirmed milestone index",
-                "pruningIndex": "Pruning index",
-                "messagesPerSecond": "Messages per second",
-                "referencedRate": "Referenced rate"
+                "features": "Funktioner",
+                "confirmedMilestoneIndex": "Bekræftet milestone-indeks",
+                "pruningIndex": "Beskærer indeks",
+                "messagesPerSecond": "Beskeder pr. sekund",
+                "referencedRate": "Refereret sats"
             }
         },
         "switchNetwork": {
-            "title": "Switch network",
-            "newNetwork": "New network",
-            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
-            "switchingNetwork": "Switching network",
-            "typePassword": "Type your password to switch to:"
+            "title": "Skift netværk",
+            "newNetwork": "Nyt netværk",
+            "resetWarning": "Skift af netværk vil logge brugeren ud og nulstille alle konti, saldi og transaktionshistorik for denne profil.",
+            "switchingNetwork": "Skift af netværk",
+            "typePassword": "Angiv adgangskode for at skifte til:"
         },
         "errorLog": {
             "title": "Fejllog",
             "empty": "Fejlloggen er tom."
         },
         "deleteProfile": {
-            "title": "Delete profile",
+            "title": "Slet profil",
             "confirmation": "Er du sikker på, at du vil slette denne profil? Denne handling kan ikke fortrydes.",
             "typePassword": "Indtast din adgangskode for at bekræfte."
         },
         "diagnostics": {
-            "title": "Diagnostics",
+            "title": "Diagnostik",
             "node": "Node",
             "platform": "Platform",
             "platformVersion": "Platformsversion",
@@ -758,7 +758,7 @@
         "transaction": {
             "title": "Bekræft transaktion",
             "body": "Du er ved at sende {amount} til",
-            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
+            "sendingFromStakedAccount": "Der sendes en overførsel fra en wallet, der pt. stakes. Dette kan fjerne staking af tokener. Man er velkommen til at sende overførslen, men det kan være nødvendigt efterfølgende at gen-stake sine resterende tokener.",
             "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet.",
             "sendingFromStakedAccountBelowMinRewardVote": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet. You may also need to vote again.",
             "sendingFromActiveParticipationAccount": {
@@ -900,12 +900,12 @@
         "shimmer-info": {
             "title": "About Shimmer",
             "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
-            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
+            "body2": "Shimmer-netværket er nu startet, og man kan gøre krav på sine tokener via Firefly Shimmer-appen."
         },
         "assembly-info": {
             "title": "About Assembly",
             "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
-            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+            "body2": "Når netværket først starter, vil man kunne overføre sine tokener."
         },
         "confirmDeveloperProfile": {
             "title": "You are creating a developer profile",

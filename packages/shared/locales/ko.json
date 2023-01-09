@@ -125,9 +125,9 @@
             "body": "Stronghold로 지갑을 백업하였습니다."
         },
         "congratulations": {
-            "title": "Profile setup complete!",
+            "title": "프로필 설정 완료!",
             "fundsMigrated": "이전 된 자금",
-            "body": "Your new profile is ready to use.",
+            "body": "이제 새 프로필을 사용할 수 있습니다.",
             "softwareMigratedBody": "여러분의 자금을 새로운 네트워크로 무사히 이동시켰습니다.",
             "fireflyLedgerBody": "Ledger 계정이 성공적으로 복원되어 이제 계속할 수 있습니다.",
             "trinityLedgerBody": "여러분의 Ledger를 새로운 네트워크로 무사히 이동시켰습니다.",
@@ -526,7 +526,7 @@
                     "upcoming": "나중에 다시 확인",
                     "commencing": "Pre-staking 시작",
                     "holding": "{duration} of staking left",
-                    "ended": "Staking has now ended",
+                    "ended": "스테이킹이 이제 종료되었습니다",
                     "inactive": "No staking events detected",
                     "fetching": "Fetching staking event info..."
                 },
@@ -568,10 +568,10 @@
         },
         "governance": {
             "votingPower": {
-                "title": "My voting weight",
+                "title": "내 투표 가중치",
                 "info": {
-                    "title": "Your voting weight",
-                    "equality": "1000 IOTA = 1 VOTE",
+                    "title": "내 투표 가중치",
+                    "equality": "1000 IOTA = 1표",
                     "description1": "Your voting weight is derived from your wallet balance. When a voting proposal is in the Counting phase, active votes are counted and accumulated every 10s.",
                     "description2": "1 Ki of voting weight (1000 IOTA tokens) yields 1 vote every 10s. This means you must continue voting for the full duration of the Counting phase in order to achieve your full voting weight."
                 }
@@ -579,18 +579,18 @@
             "info": {
                 "title": "Governance info",
                 "description": "With the help of the IOTA Foundation, the IOTA community has developed an IOTA voting protocol, allowing you to participate in governance decisions by voting with your IOTA tokens in Firefly.",
-                "link": "Learn about voting with IOTA",
+                "link": "IOTA를 통한 투표에 대해 알아보기",
                 "tooltip": {
                     "eventStatusTimeline": {
-                        "votingOpen": "Voting open",
-                        "countingStarts": "Counting begins",
-                        "countingStops": "Counting ends",
-                        "votingOpened": "Voting opened",
-                        "countingStarted": "Counting began",
-                        "countingStopped": "Counting ended"
+                        "votingOpen": "투표 중",
+                        "countingStarts": "개표 시작",
+                        "countingStops": "개표 종료",
+                        "votingOpened": "투표 시작",
+                        "countingStarted": "개표 시작",
+                        "countingStopped": "개표 종료"
                     },
                     "votingRate": {
-                        "title": "Voting rate",
+                        "title": "투표율",
                         "body": "{amount} will generate {votesPerMilestone} votes every {time, plural, one {# second} other {# seconds}}."
                     },
                     "countedVotes": {
@@ -900,12 +900,12 @@
         "shimmer-info": {
             "title": "Shimmer에 대하여",
             "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
-            "body2": "Shimmer의 출발은 2022년을 목표로 하고 있습니다. 여러분의 토큰은 네트워크가 열리면 즉시 전송할 수 있게됩니다."
+            "body2": "The Shimmer network has now launched, you can claim your tokens using the Firefly Shimmer app."
         },
         "assembly-info": {
             "title": "Assemby에 대하여",
             "body1": "축하합니다. ASMB 토큰을 staking 보상으로 획득하셨습니다. Assembly는 다중체인 네트워크로 IOTA에서 확장성 있는 스마트 컨트랙트를 배포할 수 있습니다.",
-            "body2": "Assembly의 출발은 2022년을 목표로 하고 있습니다. 여러분의 토큰은 네트워크가 열리면 즉시 전송할 수 있게됩니다."
+            "body2": "Your tokens will become available to transfer once the network launches."
         },
         "confirmDeveloperProfile": {
             "title": "개발자 프로필을 생성하고 있습니다",

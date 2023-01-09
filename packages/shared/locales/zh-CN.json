@@ -125,9 +125,9 @@
             "body": "你已经将你的钱包备份到了一个Stronghold文件。"
         },
         "congratulations": {
-            "title": "Profile setup complete!",
+            "title": "钱包设置完成!",
             "fundsMigrated": "资金已迁移",
-            "body": "Your new profile is ready to use.",
+            "body": "您的新钱包已准备就绪。",
             "softwareMigratedBody": "您已成功地将您的资金迁移到新的网络",
             "fireflyLedgerBody": "您的Ledger 账号已成功恢复，您现在可以继续。",
             "trinityLedgerBody": "您已成功地从Ledger 迁移到新的网络。",
@@ -252,7 +252,7 @@
             "title": "警告！",
             "body1": "您在一个或多个已花费的地址上存有资金。",
             "body2": "我们建议你执行一个自动化程序，以帮助您保护和安全地转移这些资金。",
-            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
+            "body3": "无法保证您的资金在移动终端进行安全迁移。我们建议您使用 Firefly 桌面应用程序进行迁移。",
             "learn": "了解已花费的地址"
         },
         "secureSpentAddresses": {
@@ -900,12 +900,12 @@
         "shimmer-info": {
             "title": "关于 Shimmer",
             "body1": "恭喜您已经获得SMR代币作为质押奖励。Shimmer 是一个激励性的阶段性网络，用于测试IOTA上的重大升级。",
-            "body2": "我们的目标是在2022年启动Shimmer。一旦网络启动，您的代币将可进行传输。"
+            "body2": "Shimmer网络现在已经启动，你可以使用Firefly Shimmer应用程序认领你的代币。"
         },
         "assembly-info": {
             "title": "关于Assembly",
             "body1": "恭喜您获得的 ASMB 代币作为质押奖励。Assembly 是一个在IOTA上部署的可缩放的智能合约的多链网络。",
-            "body2": "我们的目标是在2022年启动Assembly。一旦网络启动，您的代币将可进行传输。"
+            "body2": "一旦网络启动，你的代币就可以进行转账。"
         },
         "confirmDeveloperProfile": {
             "title": "您正在创建一个开发者配置",
@@ -964,7 +964,7 @@
         "restoreWalletDescription": "迁移到 Chrysalis 或恢复现有钱包",
         "createWallet": "创建新钱包",
         "createWalletDescription": "在 Chrysalis 上创建一个新的钱包",
-        "exploreWallet": "Explore wallet",
+        "exploreWallet": "探索钱包",
         "savePassword": "保存密码",
         "useBiometric": "使用生物特征安全机制",
         "setupPin": "设置PIN码",

@@ -900,12 +900,12 @@
         "shimmer-info": {
             "title": "About Shimmer",
             "body1": "Felicitări ati câștigat jetoane SMR ca o recompensă din mizare. Shimmer este o rețea stimulată de stagii pentru a testa îmbunătățiri majore la IOTA.",
-            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
+            "body2": "The Shimmer network has now launched, you can claim your tokens using the Firefly Shimmer app."
         },
         "assembly-info": {
             "title": "About Assembly",
             "body1": "Felicitări ai câștigat jetoane ASMB ca o recompensă din mizare. Assembly este o rețea multi-lanț pentru implementarea de contracte inteligente scalabile pe IOTA.",
-            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+            "body2": "Your tokens will become available to transfer once the network launches."
         },
         "confirmDeveloperProfile": {
             "title": "You are creating a developer profile",

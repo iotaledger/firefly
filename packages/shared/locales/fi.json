@@ -252,7 +252,7 @@
             "title": "Varoitus",
             "body1": "Sinulla on varoja yhdessä tai useammassa käytetyssä osoitteessa.",
             "body2": "Suosittelemme, että suoritat automatisoidun prosessin suojaamaan ja siirtämään nämä varat turvallisesti.",
-            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
+            "body3": "Ei ole mahdollista taata, että varasi siirtyisivät turvallisesti mobiililaitteella. Suosittelemme, että käytät Fireflyn työpöytäsovellusta migraatioon.",
             "learn": "Lue lisää käytetyistä osoitteista"
         },
         "secureSpentAddresses": {
@@ -900,12 +900,12 @@
         "shimmer-info": {
             "title": "Tietoja Shimmeristä",
             "body1": "Onnittelut, olet ansainnut SMR-tokeneita staking-palkkiona. Shimmer on kannustettu valmisteluverkko IOTA:n merkittävien uudistusten testaamiseen.",
-            "body2": "Tavoitteenamme on käynnistää Shimmer vuonna 2022. Sinun tokenisi tulevat saataville siirrettäväksi, kun verkko käynnistetään."
+            "body2": "The Shimmer network has now launched, you can claim your tokens using the Firefly Shimmer app."
         },
         "assembly-info": {
             "title": "Tietoja Assemblystä",
             "body1": "Onnittelut, olet ansainnut ASMB-tokeneita staking-palkkiona. Assembly on moniketjuverkko skaalautuvien älysopimusten käyttöönottoon IOTA:lla.",
-            "body2": "Tavoitteenamme on käynnistää Assembly vuonna 2022. Sinun tokenisi tulevat saataville siirrettäväksi, kun verkko käynnistetään."
+            "body2": "Your tokens will become available to transfer once the network launches."
         },
         "confirmDeveloperProfile": {
             "title": "Olet luomassa kehittäjäprofiilia",

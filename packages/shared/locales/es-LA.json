@@ -900,12 +900,12 @@
         "shimmer-info": {
             "title": "Sobre Shimmer",
             "body1": "Felicitaciones, has ganado tokens SMR como recompensa a tu staking. Shimmer es una red incentivada de staking para probar actualizaciones importantes en IOTA.",
-            "body2": "Nuestro objetivo es lanzar Shimmer en 2022. Tus tokens estarán disponibles para su transferencia una vez que se lance la red."
+            "body2": "The Shimmer network has now launched, you can claim your tokens using the Firefly Shimmer app."
         },
         "assembly-info": {
             "title": "Sobre Assembly",
             "body1": "Felicitaciones, has ganado tokens ASMB como recompensa por tu staking. Assembly es una red multi-cadena para desplegar contratos inteligentes escalables en IOTA.",
-            "body2": "Está previsto lanzar Assembly en 2022. Tus tokens estarán disponibles para transferir cuando se lance la red."
+            "body2": "Your tokens will become available to transfer once the network launches."
         },
         "confirmDeveloperProfile": {
             "title": "Estás creando un perfil de desarrollador",

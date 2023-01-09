@@ -125,9 +125,9 @@
             "body": "Has realizado una copia de seguridad de tus carteras a un Stronghold."
         },
         "congratulations": {
-            "title": "Profile setup complete!",
+            "title": "¡Configuración del perfil completada!",
             "fundsMigrated": "Fondos migrados",
-            "body": "Your new profile is ready to use.",
+            "body": "Tu nuevo perfil está listo para usar.",
             "softwareMigratedBody": "Tus fondos han sido migrados con éxito a la nueva red",
             "fireflyLedgerBody": "Tu cuenta de Ledger se ha recuperado con éxito y ahora puedes continuar.",
             "trinityLedgerBody": "Has migrado con éxito tu Ledger a la nueva red.",
@@ -252,7 +252,7 @@
             "title": "Advertencia",
             "body1": "Tienes fondos en una o más direcciones gastadas.",
             "body2": "Te recomendamos que ejecutes un proceso automatizado para ayudar a proteger y transferir estos fondos de forma segura.",
-            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
+            "body3": "No es posible garantizar que sus fondos se migrarán de forma segura en móvil. Le recomendamos que utilice la aplicación de escritorio Firefly para migrar.",
             "learn": "Aprende sobre las direcciones gastadas"
         },
         "secureSpentAddresses": {
@@ -900,12 +900,12 @@
         "shimmer-info": {
             "title": "Sobre Shimmer",
             "body1": "Enhorabuena, has ganado tokens SMR como recompensa a tu staking. Shimmer es una red incentivada de staking para testear actualizaciones de gran calado en IOTA.",
-            "body2": "Nuestro objetivo es lanzar Shimmer en 2022. Tus tokens estarán disponibles para su transferencia una vez que se lance la red."
+            "body2": "The Shimmer network has now launched, you can claim your tokens using the Firefly Shimmer app."
         },
         "assembly-info": {
             "title": "Sobre Assembly",
             "body1": "Enhorabuena, has ganado tokens ASMB como recompensa por tu staking. Assembly es una red multi-cadena para desplegar contratos inteligentes escalables en IOTA.",
-            "body2": "Está previsto lanzar Assembly en 2022. Tus tokens estarán disponibles para transferir cuando se lance la red."
+            "body2": "Your tokens will become available to transfer once the network launches."
         },
         "confirmDeveloperProfile": {
             "title": "Estas creando un perfil para desarrolladores",
@@ -964,7 +964,7 @@
         "restoreWalletDescription": "Migrar a Chrysalis o restaurar una cartera existente",
         "createWallet": "Crear nueva cartera",
         "createWalletDescription": "Crear una nueva cartera en Chrysalis",
-        "exploreWallet": "Explore wallet",
+        "exploreWallet": "Explorar cartera",
         "savePassword": "Guardar contraseña",
         "useBiometric": "Usar seguridad biométrica",
         "setupPin": "Establecer código PIN",

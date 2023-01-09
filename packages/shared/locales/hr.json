@@ -125,9 +125,9 @@
             "body": "Napravili ste Stronghold sigurnosnu kopiju svojih novčanika."
         },
         "congratulations": {
-            "title": "Profile setup complete!",
+            "title": "Postavljanje profila dovršeno!",
             "fundsMigrated": "Sredstva su prebačena",
-            "body": "Your new profile is ready to use.",
+            "body": "Vaš novi profil spreman je za upotrebu.",
             "softwareMigratedBody": "Sredstva su uspješno prebačena na novu mrežu",
             "fireflyLedgerBody": "Tvoj Ledger račun uspješno je oporavljen te stoga možeš nastaviti.",
             "trinityLedgerBody": "Tvoj je Ledger uspješno migriran na novu mrežu.",
@@ -252,7 +252,7 @@
             "title": "Upozorenje",
             "body1": "Imate sredstva na jednoj ili više iskorištenih adresa.",
             "body2": "Preporučamo da pokrenete automatski postupak kako biste uspješno osigurali i prebacili svoja sredstva.",
-            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
+            "body3": "Nije moguće jamčiti da će vaša sredstva biti sigurno migrirana na vašem mobilnom uređaju. Preporučujemo korištenje Firefly desktop aplikacije za migraciju.",
             "learn": "Saznajte više o iskorištenim adresama"
         },
         "secureSpentAddresses": {
@@ -400,7 +400,7 @@
                 "title": "Node konfiguracija",
                 "description": "Upravljanje popisom nodeova na koje se spajate",
                 "primaryNode": "Primarni node",
-                "excludeNode": "Izuzmi node",
+                "excludeNode": "Izostavi node",
                 "includeNode": "Priključi node",
                 "editDetails": "Uredi pojedinosti",
                 "viewInfo": "Pogledaj informacije",
@@ -900,12 +900,12 @@
         "shimmer-info": {
             "title": "O Shimmeru",
             "body1": "Čestitamo, zaradili ste SMR tokene kao nagradu za staking. Shimmer je mreža s poticajima namijenjena razvoju i testiranju većih inovacija kojima će glavna IOTA mreža naposljetku biti nadograđena.",
-            "body2": "Cilj nam je pokrenuti Shimmer u 2022. Vaši tokeni će postati dostupni za transfer nakon pokretanja Shimmer mreže."
+            "body2": "Shimmer mreža je sada pokrenuta. Možete preuzeti svoje tokene koristeći Firefly Shimmer aplikaciju."
         },
         "assembly-info": {
             "title": "O Assemblyu",
             "body1": "Čestitamo, zaradili ste ASMB tokene kao nagradu za staking. Assembly je multi-chain mreža namijenjena implementaciji pametnih ugovora na IOTA-i.",
-            "body2": "Cilj nam je pokrenuti Assembly u 2022. Vaši tokeni će postati dostupni za transfer nakon pokretanja Assembly mreže."
+            "body2": "Vaši tokeni će postati dostupni za transfer nakon pokretanja mreže."
         },
         "confirmDeveloperProfile": {
             "title": "Trenutno kreirate developerski profil",
@@ -964,7 +964,7 @@
         "restoreWalletDescription": "Migriraj na Chrysalis mrežu ili obnovi postojeći novčanik",
         "createWallet": "Stvorite novi novčanik",
         "createWalletDescription": "Napravi novi, svjež novčanik na Chrysalis mreži",
-        "exploreWallet": "Explore wallet",
+        "exploreWallet": "Istraži novčanik",
         "savePassword": "Spremi lozinku",
         "useBiometric": "Koristi biometričku zaštitu",
         "setupPin": "Postavite PIN",
@@ -1026,7 +1026,7 @@
         "checkForUpdates": "Potraži ažuriranja",
         "reportAnIssue": "Prijavi problem",
         "restore": "Vrati",
-        "clear": "Očisti",
+        "clear": "Ukloni",
         "hideDetails": "Sakrij detalje",
         "yes": "Da",
         "no": "Ne",
@@ -1221,7 +1221,7 @@
         "voting": "Glasanje",
         "unvoting": "Prekid glasanja",
         "accountColor": "Boja novčanika",
-        "myAssets": "Moja imovina",
+        "myAssets": "Moja sredstva",
         "option": "Opcija",
         "total": "Ukupno: {balance}",
         "openExplorer": "Prikaži u pretraživaču",
