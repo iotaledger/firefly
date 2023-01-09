@@ -1,14 +1,16 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { NetworkProtocol } from '@core/network'
-    import { activeProfile, logout } from '@core/profile'
+    import { activeProfile, lockStronghold, logout } from '@core/profile'
+    import { isStrongholdUnlocked } from '@core/profile-manager'
     import { getInitials } from '@core/utils'
+    import features from '@features/features'
     import { Icon as IconTypes } from '@lib/auxiliary/icon'
     import { FontWeight, Icon, NetworkIcon, Text, TextType } from 'shared/components'
+    import { NetworkStatusButton, ProfileActionButton, ProfileLockButton } from '../../../../../components/'
     import { profileRouter } from '../../../../../lib/routers'
-    import features from '@features/features'
-    import { ProfileActionButton } from '../../../../../components/'
 
+    const { isStrongholdLocked } = $activeProfile
     let networkProtocol: NetworkProtocol
     $: networkProtocol = $activeProfile.networkProtocol
 
@@ -17,6 +19,17 @@
 
     function handleLogoutClick(): void {
         void logout()
+    }
+    function handleProfileLockButtonClick(): void {
+        if ($isStrongholdLocked) {
+            isStrongholdUnlocked().then((locked) => {
+                if (!locked) {
+                    $profileRouter.setNeedsUnlock(true)
+                }
+            })
+        } else {
+            lockStronghold()
+        }
     }
 </script>
 
@@ -53,6 +66,12 @@
             </div>
         </div>
         <div class="flex flex-col space-y-6">
+            {#if features?.dashboard?.profileActions?.networkStatus?.enabled}
+                <NetworkStatusButton onClick={() => $profileRouter.next({ networkStatus: true })} />
+            {/if}
+            {#if features?.dashboard?.profileActions?.profileLock?.enabled}
+                <ProfileLockButton onClick={handleProfileLockButtonClick} />
+            {/if}
             {#if features?.settings?.enabled}
                 <ProfileActionButton
                     primaryText={localize('views.dashboard.profileModal.allSettings')}
