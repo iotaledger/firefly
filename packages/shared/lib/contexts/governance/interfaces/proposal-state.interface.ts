@@ -2,7 +2,7 @@ import type { EventStatus } from '@iota/wallet'
 
 export interface IProposalState {
     [profileId: string]: {
-        [eventId: string]: {
+        [proposalId: string]: {
             state: EventStatus
             nodeUrl: string
         }

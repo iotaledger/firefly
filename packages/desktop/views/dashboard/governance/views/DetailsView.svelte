@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { VotingEventPayload, ParticipationEventType } from '@iota/wallet/out/types'
+    import { Participations, VotingEventPayload, ParticipationEventType } from '@iota/wallet/out/types'
     import { localize } from '@core/i18n'
     import {
         Button,
@@ -20,15 +20,25 @@
     import { networkStatus } from '@core/network/stores'
     import { getVotingEvent } from '@core/profile-manager/api'
     import { governanceRouter } from '@core/router/routers'
-    import { selectedAccount } from '@core/account/stores'
+    import { getParticipationOverview } from '@core/account/api'
+    import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
     import { ProposalStatus } from '@contexts/governance/enums'
-    import { participationOverview, proposalsState, selectedProposal } from '@contexts/governance/stores'
+    import {
+        participationOverview,
+        proposalsState,
+        selectedProposal,
+        updateParticipationOverview,
+    } from '@contexts/governance/stores'
 
     let selectedAnswerValues: number[] = []
     let votingPayload: VotingEventPayload
     let totalVotes = 0
 
     $: proposalState = $proposalsState[$activeProfileId]?.[$selectedProposal?.id]?.state
+
+    $: $participationOverview
+    $: $selectedAccountIndex, void updateParticipationOverview()
+
     $: votesCounter = {
         total: totalVotes,
         power: $selectedAccount?.votingPower,
@@ -55,8 +65,9 @@
         }
     }
 
-    function setTotalVotes(): void {
-        const selectedProposalOverview = $participationOverview?.participations?.[$selectedProposal?.id]
+    async function setTotalVotes(): Promise<void> {
+        const participations: Participations = (await getParticipationOverview($selectedAccount?.index))?.participations
+        const selectedProposalOverview = participations[$selectedProposal?.id]
 
         if (selectedProposalOverview) {
             const votes = Object.values(selectedProposalOverview).map(

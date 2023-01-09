@@ -103,6 +103,7 @@ export interface IAccount {
         interval?: number,
         maxAttempts?: number
     ): Promise<PreparedTransactionData>
+    requestFundsFromFaucet(url: string, address: string): Promise<string>
     sendAmount(addressesWithAmount: AddressWithAmount[], transactionOptions?: TransactionOptions): Promise<Transaction>
     sendMicroTransaction(
         addressesWithMicroAmount: AddressWithMicroAmount[],

@@ -2,9 +2,8 @@
     import { onMount } from 'svelte'
     import { Pane, Proposals, ProposalsDetails, VotingPower } from '@ui'
     import { selectedAccountIndex } from '@core/account/stores'
-    import { initialiseParticipationOverview } from '@contexts/governance/actions'
     import type { IProposal } from '@contexts/governance/interfaces'
-    import { participationOverview, proposalsState, registeredEventIds } from '@contexts/governance/stores'
+    import { proposalsState, registeredEventIds, updateParticipationOverview } from '@contexts/governance/stores'
     import { createProposals } from '@contexts/governance/utils'
 
     let proposals: IProposal[]
@@ -12,8 +11,7 @@
 
     $: $registeredEventIds, void setProposals()
 
-    $: $selectedAccountIndex, $proposalsState, void initialiseParticipationOverview()
-    $: $participationOverview
+    $: $selectedAccountIndex, $proposalsState, void updateParticipationOverview()
 
     async function setProposals(): Promise<void> {
         proposals = await createProposals()

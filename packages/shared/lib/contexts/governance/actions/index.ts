@@ -1,4 +1,3 @@
-export * from './initialiseParticipationOverview'
-export * from './proposalsStatePolling'
+export * from './pollGovernanceData'
 export * from './setVotingPower'
 export * from './stopVotingForProposal'

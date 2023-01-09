@@ -2,9 +2,14 @@ import { get, writable } from 'svelte/store'
 
 import { ParticipationOverview } from '@iota/wallet'
 
-export const participationOverview = writable<ParticipationOverview>({ participations: {} })
+import { getParticipationOverview } from '@core/account/api'
+import { selectedAccountIndex } from '@core/account/stores'
 
-export function updateParticipationOverview(payload: Partial<ParticipationOverview>): void {
-    const _participationOverview = get(participationOverview)
-    participationOverview.set({ ..._participationOverview, ...payload })
+import { DEFAULT_PARTICIPATION_OVERVIEW } from '../constants'
+
+export const participationOverview = writable<ParticipationOverview>(DEFAULT_PARTICIPATION_OVERVIEW)
+
+export async function updateParticipationOverview(): Promise<void> {
+    const overview = await getParticipationOverview(get(selectedAccountIndex))
+    participationOverview.set(overview ?? DEFAULT_PARTICIPATION_OVERVIEW)
 }
