@@ -12,6 +12,7 @@ import {
     DiagnosticsView,
     ErrorLogView,
     LanguageView,
+    NetworkConfigurationRouter,
     WalletFinderView,
 } from '../../../../views/dashboard/drawers/profile/views/settings'
 import { SettingsRoute } from '../../../routers'
@@ -64,6 +65,50 @@ export const SETTINGS_ROUTE_META = {
         icon: SETTINGS_ICON_SVG[SettingsRoute.ChangePassword],
         view: ChangePasswordView,
     },
+    [SettingsRoute.HiddenAccounts]: {
+        name: `views.settings.${SettingsRoute.HiddenAccounts}.title`,
+        category: SettingsCategory.Security,
+        enabled: advanced?.[SettingsRoute.HiddenAccounts]?.enabled,
+        icon: SETTINGS_ICON_SVG[SettingsRoute.HiddenAccounts],
+        view: HiddenAccountsView,
+    },
+    [SettingsRoute.DeleteProfile]: {
+        name: `views.settings.${SettingsRoute.DeleteProfile}.title`,
+        category: SettingsCategory.Security,
+        enabled: security?.[SettingsRoute.DeleteProfile]?.enabled,
+        icon: SETTINGS_ICON_SVG[SettingsRoute.DeleteProfile],
+        view: DeleteProfileView,
+    },
+    // Advanced
+    [SettingsRoute.NetworkConfiguration]: {
+        name: `views.settings.${SettingsRoute.NetworkConfiguration}.title`,
+        category: SettingsCategory.Advanced,
+        enabled: advanced?.[SettingsRoute.NetworkConfiguration]?.enabled,
+        icon: SETTINGS_ICON_SVG[SettingsRoute.NetworkConfiguration],
+        view: NetworkConfigurationRouter,
+    },
+    [SettingsRoute.WalletFinder]: {
+        name: `views.settings.${SettingsRoute.WalletFinder}.title`,
+        category: SettingsCategory.Advanced,
+        enabled: advanced?.[SettingsRoute.WalletFinder]?.enabled,
+        icon: SETTINGS_ICON_SVG[SettingsRoute.WalletFinder],
+        view: WalletFinderView,
+    },
+    [SettingsRoute.ErrorLog]: {
+        name: `views.settings.${SettingsRoute.ErrorLog}.title`,
+        category: SettingsCategory.Advanced,
+        enabled: advanced?.[SettingsRoute.ErrorLog]?.enabled,
+        icon: SETTINGS_ICON_SVG[SettingsRoute.ErrorLog],
+        view: ErrorLogView,
+    },
+    [SettingsRoute.Diagnostics]: {
+        name: `views.settings.${SettingsRoute.Diagnostics}.title`,
+        category: SettingsCategory.Advanced,
+        enabled: advanced?.[SettingsRoute.Diagnostics]?.enabled,
+        icon: SETTINGS_ICON_SVG[SettingsRoute.Diagnostics],
+        view: DiagnosticsView,
+    },
+    // Help and information
     [SettingsRoute.Documentation]: {
         name: `views.settings.${SettingsRoute.Documentation}.title`,
         category: SettingsCategory.HelpAndInfo,
@@ -95,41 +140,5 @@ export const SETTINGS_ROUTE_META = {
         icon: SETTINGS_ICON_SVG[SettingsRoute.ReportAnIssue],
         external: true,
         url: ISSUE_REPORT_URL,
-    },
-    // Advanced
-    [SettingsRoute.HiddenAccounts]: {
-        name: `views.settings.${SettingsRoute.HiddenAccounts}.title`,
-        category: SettingsCategory.Security,
-        enabled: advanced?.[SettingsRoute.HiddenAccounts]?.enabled,
-        icon: SETTINGS_ICON_SVG[SettingsRoute.HiddenAccounts],
-        view: HiddenAccountsView,
-    },
-    [SettingsRoute.DeleteProfile]: {
-        name: `views.settings.${SettingsRoute.DeleteProfile}.title`,
-        category: SettingsCategory.Security,
-        enabled: security?.[SettingsRoute.DeleteProfile]?.enabled,
-        icon: SETTINGS_ICON_SVG[SettingsRoute.DeleteProfile],
-        view: DeleteProfileView,
-    },
-    [SettingsRoute.WalletFinder]: {
-        name: `views.settings.${SettingsRoute.WalletFinder}.title`,
-        category: SettingsCategory.Advanced,
-        enabled: advanced?.[SettingsRoute.WalletFinder]?.enabled,
-        icon: SETTINGS_ICON_SVG[SettingsRoute.WalletFinder],
-        view: WalletFinderView,
-    },
-    [SettingsRoute.ErrorLog]: {
-        name: `views.settings.${SettingsRoute.ErrorLog}.title`,
-        category: SettingsCategory.Advanced,
-        enabled: advanced?.[SettingsRoute.ErrorLog]?.enabled,
-        icon: SETTINGS_ICON_SVG[SettingsRoute.ErrorLog],
-        view: ErrorLogView,
-    },
-    [SettingsRoute.Diagnostics]: {
-        name: `views.settings.${SettingsRoute.Diagnostics}.title`,
-        category: SettingsCategory.Advanced,
-        enabled: advanced?.[SettingsRoute.Diagnostics]?.enabled,
-        icon: SETTINGS_ICON_SVG[SettingsRoute.Diagnostics],
-        view: DiagnosticsView,
     },
 }
