@@ -8,8 +8,8 @@
     export let error: string
     export let nodeUrl: string
 
-    let inputElement: HTMLInputElement = undefined
-    let modal: Modal = undefined
+    let inputElement: HTMLInputElement
+    let modal: Modal
     let nodeOptions: IOption[]
     let selected: IOption
 

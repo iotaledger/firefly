@@ -19,7 +19,7 @@
 
     $: disabled = !eventId || !nodeUrl || isBusy
 
-    function onCancel(): void {
+    function onCancelClick(): void {
         closePopup()
     }
 
@@ -102,7 +102,7 @@
         <NodeInput bind:this={nodeInput} bind:nodeUrl />
     </div>
     <div class="flex w-full space-x-4 mt-6">
-        <Button outline classes="w-full" onClick={onCancel}>{localize('actions.cancel')}</Button>
+        <Button outline classes="w-full" onClick={onCancelClick}>{localize('actions.cancel')}</Button>
         <Button type={HTMLButtonType.Submit} {disabled} {isBusy} classes="w-full">
             {localize('actions.confirm')}
         </Button>

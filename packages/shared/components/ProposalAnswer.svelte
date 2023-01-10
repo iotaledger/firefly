@@ -62,8 +62,10 @@
                     smaller
                     fontWeight={FontWeight.medium}
                     classes="ml-auto text-gray-700 dark:text-gray-500"
-                    overrideColor>{percentage}</Text
+                    overrideColor
                 >
+                    {percentage}
+                </Text>
             </div>
         {/if}
         <div class="flex justify-center items-center w-3 h-3">

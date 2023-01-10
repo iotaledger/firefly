@@ -48,9 +48,9 @@
                     >Question {questionIndex + 1}</Text
                 >
             {/if}
-            <Text fontWeight={FontWeight.bold} overrideColor classes="text-gray-900 dark:text-white"
-                >{question.text}</Text
-            >
+            <Text fontWeight={FontWeight.bold} overrideColor classes="text-gray-900 dark:text-white">
+                {question.text}
+            </Text>
         </div>
         <div class="transform {isOpened ? 'rotate-180' : 'rotate-0'}">
             <Icon icon={IconEnum.ChevronDown} classes="text-gray-500" />
