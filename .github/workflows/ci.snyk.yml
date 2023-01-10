@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - 'develop'
-      - 'stardust-develop'
 
 jobs:
   test:
