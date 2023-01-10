@@ -900,12 +900,12 @@
         "shimmer-info": {
             "title": "Shimmerről",
             "body1": "Gratulálunk! A staking eseményen SMR tokeneket kapott jutalmul. A Shimmer egy ösztönzőkkel ellátott teszt hálózat az IOTA hálózat nagyobb fejlesztéseinek kipróbálásához.",
-            "body2": "A Shimmer hálózatot várhatóan 2022-ben fogjuk elindítani. A hálózat indulásakor fogja tudni az SMR tokenjeit felhasználni."
+            "body2": "A Shimmer-hálózat elindult, így a Firefly Shimmer alkalmazással hozzájuthat a tokenjeihez."
         },
         "assembly-info": {
             "title": "Az Assembly-ről",
             "body1": "Gratulálunk! A staking eseményen ASMB tokeneket kapott jutalmul. Az Assembly egy többláncú hálózat, mely okos szerződések létrehozásához és életbe léptetésére használható az IOTA hálózat felett.",
-            "body2": "Az Assembly hálózatot várhatóan 2022-ben fogjuk elindítani. A hálózat indulásakor fogja tudni az SMR tokenjeit felhasználni."
+            "body2": "A tokenjeit a hálózat elindulását követően tudja tranzakciókhoz felhasználni."
         },
         "confirmDeveloperProfile": {
             "title": "Egy fejlesztői profilt hoz létre",
@@ -1385,7 +1385,7 @@
             "generateAddress": "Hiba történt a cím generálása közben.",
             "timeout": "A Ledger eszköze időtúllépés miatt nem elérhető.",
             "disconnected": "Megszakadt a kapcsolat a Ledger eszközével.",
-            "noStronghold": "Hardveres tárca profillal nem lehet a Stronghold-ot használni."
+            "noStronghold": "Hardver tárca profillal nem lehet a Stronghold-ot használni."
         },
         "popup": {
             "preventClose": "A felugró ablakot nem lehet bezárni."

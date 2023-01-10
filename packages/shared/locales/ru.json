@@ -125,9 +125,9 @@
             "body": "Вы сделали резервную копию своих кошельков в Stronghold."
         },
         "congratulations": {
-            "title": "Profile setup complete!",
+            "title": "Установка профиля завершена!",
             "fundsMigrated": "Средства перенесены",
-            "body": "Your new profile is ready to use.",
+            "body": "Ваш новый профиль готов к использованию.",
             "softwareMigratedBody": "Вы успешно мигрировали свои средства в новую сеть",
             "fireflyLedgerBody": "Ваш Ledger аккаунт успешно восстановлен, и вы можете продолжить.",
             "trinityLedgerBody": "Вы успешно перевели свой Ledger в новую сеть.",
@@ -252,7 +252,7 @@
             "title": "Предупреждение",
             "body1": "У вас есть средства на одном или несколько потраченных адресов.",
             "body2": "Мы рекомендуем вам запустить автоматизированный процесс для безопасного и надёжного перевода средств.",
-            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
+            "body3": "Невозможно гарантировать, что ваши средства будут безопасно переведены с помощью мобильного телефона. Мы рекомендуем использовать для миграции настольное приложение Firefly.",
             "learn": "Узнайте о потраченных адресах"
         },
         "secureSpentAddresses": {
@@ -467,7 +467,7 @@
                 "networkOperational": "Сеть исправна",
                 "networkDegraded": "Ухудшение работы сети",
                 "networkDown": "Сеть отключена",
-                "networkUnreachable": "Network unreachable",
+                "networkUnreachable": "Сеть недоступна",
                 "status": "Статус",
                 "messagesPerSecond": "Сообщений в секунду",
                 "referencedRate": "Базовая скорость"
@@ -900,12 +900,12 @@
         "shimmer-info": {
             "title": "О Shimmer",
             "body1": "Поздравляем, вы заработали токены SMR в качестве вознаграждения за размещение ставок. Shimmer - это стимулируемая сеть для тестирования основных обновлений IOTA.",
-            "body2": "Мы планируем запустить Shimmer в 2022 году. Ваши токены станут доступны для перевода после запуска сети."
+            "body2": "Сеть Shimmer уже запущена, вы можете запросить свои токены с помощью приложения Firefly Shimmer."
         },
         "assembly-info": {
             "title": "О Assembly",
             "body1": "Поздравляем, вы заработали токены ASMB в качестве вознаграждения за размещение ставок. Assembly - это многоцепочечная сеть для развертывания масштабируемых смарт-контрактов на IOTA.",
-            "body2": "Мы планируем запустить Assembly в 2022 году. Ваши токены станут доступны для перевода после запуска сети."
+            "body2": "Ваши токены станут доступны для перевода после запуска сети."
         },
         "confirmDeveloperProfile": {
             "title": "Вы создаете профиль разработчика",
@@ -964,7 +964,7 @@
         "restoreWalletDescription": "Миграция в Chrysalis или восстановление существующего кошелька",
         "createWallet": "Создать новый кошелек",
         "createWalletDescription": "Создать новый кошелек на Chrysalis",
-        "exploreWallet": "Explore wallet",
+        "exploreWallet": "Исследовать кошелек",
         "savePassword": "Сохранить пароль",
         "useBiometric": "Использовать биометрическую защиту",
         "setupPin": "Задайте PIN-код",
@@ -1441,9 +1441,9 @@
             "bodyMinBalanceAirdrop": "В этом кошельке недостаточно токенов IOTA для достижения минимального вознаграждения за {airdrop}."
         },
         "shimmerTokenFormatting": {
-            "title": "Shimmer unit update",
-            "body1": "SMR units have changed following a governance decision. Shimmer tokens are now displayed with 6 decimal places; 1 SMR = 1,000,000 glow.",
-            "body2": "You still have the same amount of SMR rewards, Firefly just formats the value differently."
+            "title": "Обновление единицы шиммера",
+            "body1": "Единицы SMR были изменены в соответствии с решением руководства. Токены Shimmer теперь отображаются с 6 десятичными знаками; 1 SMR = 1,000,000 glow.",
+            "body2": "У вас остается то же количество вознаграждений SMR, Firefly просто по-другому форматирует значение."
         }
     },
     "exports": {

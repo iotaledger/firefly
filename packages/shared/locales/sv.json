@@ -509,7 +509,7 @@
             }
         },
         "staking": {
-            "welcome": "Välkommen till staking-instrumentpanelen!",
+            "welcome": "Välkommen till staking-översikten!",
             "status": {
                 "upcoming": "Event inte startat",
                 "commencing": "För-staking öppen",
@@ -900,12 +900,12 @@
         "shimmer-info": {
             "title": "Om Shimmer",
             "body1": "Grattis du har förtjänat SMR-tokens som en stakingbelöning. Shimmer är ett belöningsmotiverat förestående nätverk för att testa stora uppgraderingar på IOTA.",
-            "body2": "Vi siktar på att lansera Shimmer 2022. Dina tokens kommer att bli tillgängliga för överföring när nätverket lanserats."
+            "body2": "Shimmer-nätverket har nu lanserats, du kan hämta ut dina tokens med hjälp av appen Firefly Shimmer."
         },
         "assembly-info": {
             "title": "Om Assembly",
             "body1": "Grattis du har förtjänat ASMB-tokens som en stakingbelöning. Assembly är ett multi-kedje-nätverk för att distribuera skalbara smarta kontrakt på IOTA.",
-            "body2": "Vi siktar på att lansera Assembly 2022. Dina tokens kommer att bli tillgängliga för överföring när nätverket lanserats."
+            "body2": "Dina tokens kommer att bli tillgängliga för överföring när nätverket lanserats."
         },
         "confirmDeveloperProfile": {
             "title": "Du skapar en utvecklarprofil",
@@ -1224,7 +1224,7 @@
         "myAssets": "Mina tillgångar",
         "option": "Alternativ",
         "total": "Totalt: {balance}",
-        "openExplorer": "Visa i utforskaren",
+        "openExplorer": "Visa i Explorer",
         "activityDetails": "Transaktionsdetaljer"
     },
     "dates": {
