@@ -1,8 +1,8 @@
 export enum ActivityType {
-    Stake = 'stake',
-    Basic = 'basic',
-    Nft = 'nft',
-    Foundry = 'foundry',
     Alias = 'alias',
+    Basic = 'basic',
+    Foundry = 'foundry',
+    Governance = 'governance',
     Migrate = 'migrate',
+    Nft = 'nft',
 }

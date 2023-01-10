@@ -10,6 +10,7 @@ import {
 import { Activity } from '@core/wallet/types'
 import { generateSingleAliasActivity } from './generateSingleAliasActivity'
 import { generateSingleFoundryActivity } from './generateSingleFoundryActivity'
+import { generateSingleGovernanceActivity } from './generateSingleGovernanceActivity'
 import { generateSingleNftActivity } from './generateSingleNftActivity'
 import { generateSingleBasicActivity } from './generateSingleBasicActivity'
 import { getActivityTypeFromOutput } from './helper'
@@ -79,6 +80,8 @@ function generateActivitiesFromProcessedTransactionsWithoutInputs(
         switch (params.type) {
             case ActivityType.Basic:
                 return generateSingleBasicActivity(account, params)
+            case ActivityType.Governance:
+                return generateSingleGovernanceActivity(account, params)
             case ActivityType.Foundry:
                 return generateSingleFoundryActivity(account, params)
             case ActivityType.Alias:
