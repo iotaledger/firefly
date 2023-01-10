@@ -3,6 +3,8 @@ name: Snyk
 on:
   push:
     branches:
+      - 'main'
+      - 'main-mobile'
       - 'develop'
 
 jobs:
