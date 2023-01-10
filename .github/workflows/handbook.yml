@@ -3,7 +3,7 @@ name: Handbook
 on:
   push:
     branches:
-      - 'stardust-develop'
+      - 'develop'
 
 jobs:
   publish:
