@@ -11,6 +11,8 @@ import {
     DashboardRouter,
     LoginRouter,
     loginRouter,
+    NetworkConfigurationSettingsRouter,
+    networkConfigurationSettingsRouter,
     NetworkSetupRouter,
     networkSetupRouter,
     onboardingRouter,
@@ -68,6 +70,7 @@ function initialiseSubrouters(): void {
     loginRouter.set(new LoginRouter())
     initialiseOnboardingSubrouters()
     initialiseDashboardSubrouters()
+    initialiseSettingsSubrouters()
 }
 
 function initialiseOnboardingSubrouters(): void {
@@ -87,4 +90,8 @@ function initialiseDashboardSubrouters(): void {
     tokenRouter.set(new TokenRouter())
     profileRouter.set(new ProfileRouter())
     settingsRouter.set(new SettingsRouter())
+}
+
+function initialiseSettingsSubrouters(): void {
+    networkConfigurationSettingsRouter.set(new NetworkConfigurationSettingsRouter())
 }

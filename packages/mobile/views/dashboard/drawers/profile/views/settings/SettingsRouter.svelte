@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Drawer, StrongholdUnlock } from '../../../../../../components'
-    import { SETTINGS_ROUTE_META } from '../../../../../../lib/contexts/dashboard'
+    import { SETTINGS_ROUTE_META } from '../../../../../../lib/contexts/settings'
     import { settingsRoute, SettingsRoute, settingsRouter } from '../../../../../../lib/routers'
     import { SettingsIndexView } from './views'
 
