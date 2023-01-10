@@ -45,7 +45,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             if (!get(profileManager)) {
                 const profileManagerOptions = await buildProfileManagerOptionsFromProfileData(_activeProfile)
                 const { storagePath, coinType, clientOptions, secretManager } = profileManagerOptions
-                const manager = initialiseProfileManager(storagePath, coinType, clientOptions, secretManager, id)
+                const manager = await initialiseProfileManager(storagePath, coinType, clientOptions, secretManager, id)
                 profileManager.set(manager)
             }
 

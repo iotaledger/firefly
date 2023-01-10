@@ -2,9 +2,9 @@ import { Capacitor } from '@capacitor/core'
 
 import { App } from '@capacitor/app'
 import { Device } from '@capacitor/device'
-import { ActionSheet, ShowActionsOptions } from '@capacitor/action-sheet'
-import { Keyboard } from '@capacitor/keyboard'
-import { Share } from '@capacitor/share'
+// import { ActionSheet, ShowActionsOptions } from '@capacitor/action-sheet'
+// import { Keyboard } from '@capacitor/keyboard'
+// import { Share } from '@capacitor/share'
 // import { BarcodeManager } from './lib/barcodeManager'
 // import { SecureFilesystemAccess } from 'capacitor-secure-filesystem-access'
 import { DeepLinkManager } from '../../mobile/capacitor/lib/deepLinkManager'
@@ -27,20 +27,22 @@ import { PincodeManager } from '../../mobile/capacitor/lib/pincodeManager'
 // const IotaWalletMobile = registerPlugin('IotaWalletMobile')
 // import IotaWalletMobile from '@iota/wallet-mobile'
 // const WalletApi = IotaWalletMobile
-// import IotaWalletMobile from '@iota/wallet-mobile'
+// import { WalletApi } from '@iota/wallet-mobile'
+
 import * as WalletApi from './wallet-api'
-// const { WalletApi } = IotaWalletMobile
-// console.error({WalletApi})
+
+// const { WalletApi } = IotaWalletMobile.
+console.error({WalletApi})
 // console.error(IotaWalletMobile)
 let activeProfileId = null
 const profileManagers = {}
 
 window['__WALLET__API__'] = {
     async createAccountManager(
-        id: WalletApi.AccountId, 
+        id: WalletApi.AccountId,
         options: WalletApi.AccountManagerOptions
     ) {
-        console.log({options})
+        console.error({options})
         const manager = await WalletApi.AccountManager(options)
         manager.id = id
         console.error({manager})
