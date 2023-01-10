@@ -1,11 +1,12 @@
 <script lang="typescript">
-    import { Button, TextInput, Text, TextType } from 'shared/components'
+    import { Button, HTMLButtonType, TextInput, Text, TextType } from 'shared/components'
     import type { Auth } from '@iota/wallet'
     import { showAppNotification } from '@auxiliary/notification/actions'
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
     import { registerParticipationEvent } from '@core/profile-manager/api'
+    import { truncateString } from '@core/utils/string'
     import { isValidUrl } from '@core/utils/validation'
 
     export let eventId: string
@@ -14,20 +15,43 @@
     let eventIdError: string
     let nodeUrlError: string
 
+    let isBusy = false
+
     $: disabled = !eventId || !nodeUrl
 
-    function handleCancel(): void {
+    function onCloseClick(): void {
         closePopup()
     }
 
-    async function handleConfirm(): Promise<void> {
+    async function onConfirmClick(): Promise<void> {
         try {
+            isBusy = true
+
             await Promise.all([validateEventId(), validateNodeUrl()])
             await registerParticipationWrapper()
+
+            isBusy = false
         } catch (err) {
-            const isAuthenticationError = err?.error?.match(/(username)|(password)|(jwt)/g).length > 0
+            isBusy = false
+            const isAuthenticationError = err?.error?.match(/(username)|(password)|(jwt)/g)?.length > 0
+            const isEventError = err?.error?.match(/(the requested data)|(was not found)/)?.length > 0
+            const isNodeError = err?.error?.match(/(failed to lookup address information)|(dns error)/)?.length > 0
             if (isAuthenticationError) {
                 openNodeAuthRequiredPopup()
+            } else if (isEventError) {
+                showAppNotification({
+                    type: 'error',
+                    alert: true,
+                    message: localize('error.governance.unableToRegisterProposal.long', {
+                        values: { proposalId: truncateString(eventId) },
+                    }),
+                })
+            } else if (isNodeError) {
+                showAppNotification({
+                    type: 'error',
+                    alert: true,
+                    message: localize('error.node.dns'),
+                })
             } else if (!nodeUrlError && !eventIdError) {
                 handleError(err)
             }
@@ -74,7 +98,7 @@
     }
 </script>
 
-<register-proposal>
+<form id="register-proposal" on:submit|preventDefault={onConfirmClick}>
     <Text type={TextType.h3} classes="mb-6">{localize('popups.registerProposal.title')}</Text>
     <Text fontSize="15">{localize('popups.registerProposal.body')}</Text>
     <div class="flex flex-col w-full space-y-4 mt-4">
@@ -92,7 +116,9 @@
         />
     </div>
     <div class="flex w-full space-x-4 mt-6">
-        <Button outline classes="w-full" onClick={handleCancel}>{localize('actions.cancel')}</Button>
-        <Button {disabled} classes="w-full" onClick={handleConfirm}>{localize('actions.confirm')}</Button>
+        <Button outline classes="w-full" onClick={onCloseClick}>{localize('actions.cancel')}</Button>
+        <Button disabled={disabled || isBusy} {isBusy} classes="w-full" type={HTMLButtonType.Submit}>
+            {localize('actions.confirm')}
+        </Button>
     </div>
-</register-proposal>
+</form>

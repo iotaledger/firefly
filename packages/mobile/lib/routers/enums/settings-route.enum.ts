@@ -22,6 +22,11 @@ export enum SettingsRoute {
     CrashReporting = 'crashReporting',
     Diagnostics = 'diagnostics',
     MigrateLedgerIndex = 'migrateLedgerIndex',
+    // Help & Info
+    Documentation = 'documentation',
+    FAQ = 'faq',
+    Discord = 'discord',
+    ReportAnIssue = 'reportAnIssue',
     // Auxiliary
     UnlockStronghold = 'unlockStronghold',
 }

@@ -1,5 +1,7 @@
 export { default as AppLockView } from './AppLockView.svelte'
 export { default as ChangePasswordView } from './ChangePasswordView.svelte'
+export { default as CurrencyView } from './CurrencyView.svelte'
+export { default as HiddenAccountsView } from './HiddenAccountsView.svelte'
 export { default as ChangeProfileNameView } from './ChangeProfileNameView.svelte'
 export { default as DeleteProfileView } from './DeleteProfileView.svelte'
 export { default as DiagnosticsView } from './DiagnosticsView.svelte'

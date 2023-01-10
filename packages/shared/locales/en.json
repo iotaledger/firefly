@@ -1738,7 +1738,7 @@
         },
         "node": {
             "invalid": "Please enter a valid URL.",
-            "dns": "Could not find DNS resolution for node.",
+            "dns": "Unable to find DNS resolution for node",
             "timedOut": "The connection timed out.",
             "refused": "The connection was refused.",
             "handshake": "Could not complete handshake with node.",
@@ -1852,6 +1852,12 @@
             "loadingError": {
                 "short": "Unable to load",
                 "long": "An error occurred while loading the NFT"
+            }
+        },
+        "governance": {
+            "unableToRegisterProposal": {
+                "short": "Unable to register proposal",
+                "long": "An error occurred while trying to register proposal {proposalId}"
             }
         }
     },
