@@ -71,7 +71,11 @@
                 title = localize(SETTINGS_ROUTE_META[$settingsRoute].name)
             }
         } else {
-            title = localize('views.settings.profile.title')
+            if ($profileRoute === ProfileRoute.NetworkStatus) {
+                title = localize('views.settings.networkStatus.title')
+            } else {
+                title = localize('views.settings.profile.title')
+            }
         }
     }
     function setAllowBack(): void {

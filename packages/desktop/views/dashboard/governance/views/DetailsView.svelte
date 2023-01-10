@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { VotingEventPayload, ParticipationEventType } from '@iota/wallet/out/types'
+    import { Participations, VotingEventPayload, ParticipationEventType } from '@iota/wallet/out/types'
     import { localize } from '@core/i18n'
     import {
         Button,
@@ -21,7 +21,6 @@
     import { getVotingEvent } from '@core/profile-manager'
     import { governanceRouter } from '@core/router'
     import { getParticipationOverview, selectedAccount } from '@core/account'
-    import type { IParticipations } from '@contexts/governance/interfaces'
     import { ProposalStatus } from '@contexts/governance/enums'
     import { proposalsState, selectedProposal } from '@contexts/governance/stores'
 
@@ -57,8 +56,7 @@
     }
 
     async function setTotalVotes(): Promise<void> {
-        const participations: IParticipations = (await getParticipationOverview($selectedAccount?.index))
-            ?.participations
+        const participations: Participations = (await getParticipationOverview($selectedAccount?.index))?.participations
         const selectedProposalOverview = participations[$selectedProposal?.id]
 
         if (selectedProposalOverview) {
