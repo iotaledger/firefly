@@ -21,7 +21,7 @@
     const dispatch = createEventDispatcher()
 
     function handleClick(): void {
-        dispatch('clicked')
+        dispatch('click')
     }
 
     function setIsSelected(): void {

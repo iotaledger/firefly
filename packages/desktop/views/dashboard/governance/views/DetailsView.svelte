@@ -149,8 +149,8 @@
                         selectedAnswerValue={selectedAnswerValues[questionIndex]}
                         votedAnswerValue={votedAnswerValues[questionIndex]}
                         allVotes={proposalState?.questions[questionIndex]?.answers}
-                        on:clickedQuestion={handleQuestionClick}
-                        on:clickedAnswer={handleAnswerClick}
+                        on:clickQuestion={handleQuestionClick}
+                        on:clickAnswer={handleAnswerClick}
                     />
                 {/each}
             {/if}

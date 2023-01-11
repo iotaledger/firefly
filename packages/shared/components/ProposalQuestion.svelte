@@ -29,11 +29,11 @@
     }
 
     function handleAnswerClick(answerValue: number): void {
-        dispatch('clickedAnswer', { answerValue, questionIndex })
+        dispatch('clickAnswer', { answerValue, questionIndex })
     }
 
     function handleQuestionClick(): void {
-        dispatch('clickedQuestion', { questionIndex })
+        dispatch('clickQuestion', { questionIndex })
     }
 </script>
 
@@ -60,7 +60,7 @@
                 {selectedAnswerValue}
                 hidden={!isOpened}
                 percentage={percentages[answerIndex]}
-                on:clicked={handleAnswerClick(answer?.value)}
+                on:click={handleAnswerClick(answer?.value)}
             />
         {/each}
     </proposal-answers>
