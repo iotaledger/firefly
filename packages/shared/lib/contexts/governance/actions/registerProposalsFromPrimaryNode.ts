@@ -2,6 +2,7 @@ import { get } from 'svelte/store'
 
 import { activeProfile } from '@core/profile/stores'
 import { registerParticipationEvent } from '@core/profile-manager/api'
+import { isProposalAlreadyRegistered } from '@contexts/governance'
 
 export async function registerProposalsFromPrimaryNode(): Promise<void> {
     // const proposalIds = await getVotingEventIds()
@@ -25,5 +26,11 @@ export async function registerProposalsFromPrimaryNode(): Promise<void> {
         throw new Error('Unable to retrieve primary node')
     }
 
-    await Promise.all(proposalIds.map((proposalId) => registerParticipationEvent(proposalId, [primaryNode])))
+    await Promise.all(
+        proposalIds.map(async (proposalId) => {
+            if (!isProposalAlreadyRegistered(proposalId)) {
+                await registerParticipationEvent(proposalId, [primaryNode])
+            }
+        })
+    )
 }
