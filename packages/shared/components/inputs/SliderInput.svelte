@@ -195,12 +195,14 @@
     }
 
     .range {
+        @apply block;
         @apply relative;
         @apply flex-1;
         @apply cursor-pointer;
     }
 
     .range__wrapper {
+        @apply block;
         @apply relative;
         @apply box-border;
         @apply min-w-full;
@@ -213,12 +215,14 @@
     }
 
     .range__track {
+        @apply block;
         @apply rounded-full;
         @apply h-1.5;
         background-color: var(--track-bgcolor, #d8e3f5);
     }
 
     .range__track--highlighted {
+        @apply block;
         @apply absolute;
         @apply rounded-full;
         @apply w-0;
