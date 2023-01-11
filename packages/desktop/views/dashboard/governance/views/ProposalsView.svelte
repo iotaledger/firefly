@@ -1,9 +1,8 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { Pane, Proposals, ProposalsDetails, VotingPower } from '@ui'
-    import { selectedAccountIndex } from '@core/account/stores'
     import type { IProposal } from '@contexts/governance/interfaces'
-    import { proposalsState, registeredEventIds, updateParticipationOverview } from '@contexts/governance/stores'
+    import { registeredEventIds, updateParticipationOverview } from '@contexts/governance/stores'
     import { createProposals } from '@contexts/governance/utils'
 
     let proposals: IProposal[]
@@ -11,13 +10,12 @@
 
     $: $registeredEventIds, void setProposals()
 
-    $: $selectedAccountIndex, $proposalsState, void updateParticipationOverview()
-
     async function setProposals(): Promise<void> {
         proposals = await createProposals()
     }
 
     async function onMountHelper(): Promise<void> {
+        await updateParticipationOverview()
         await setProposals()
         loaded = true
     }
