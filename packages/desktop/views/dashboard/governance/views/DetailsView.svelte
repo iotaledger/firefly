@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Participations, VotingEventPayload, ParticipationEventType } from '@iota/wallet/out/types'
+    import { VotingEventPayload, ParticipationEventType } from '@iota/wallet/out/types'
     import { localize } from '@core/i18n'
     import {
         Button,
@@ -20,8 +20,7 @@
     import { networkStatus } from '@core/network/stores'
     import { getVotingEvent } from '@core/profile-manager/api'
     import { governanceRouter } from '@core/router/routers'
-    import { getParticipationOverview } from '@core/account/api'
-    import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
+    import { selectedAccount } from '@core/account/stores'
     import { ProposalStatus } from '@contexts/governance/enums'
     import {
         participationOverview,
@@ -33,11 +32,11 @@
     let selectedAnswerValues: number[] = []
     let votingPayload: VotingEventPayload
     let totalVotes = 0
+    let hasMounted = false
 
     $: proposalState = $proposalsState[$activeProfileId]?.[$selectedProposal?.id]?.state
 
-    $: $participationOverview
-    $: $selectedAccountIndex, void updateParticipationOverview()
+    $: hasMounted && $participationOverview && setTotalVotes()
 
     $: votesCounter = {
         total: totalVotes,
@@ -65,9 +64,8 @@
         }
     }
 
-    async function setTotalVotes(): Promise<void> {
-        const participations: Participations = (await getParticipationOverview($selectedAccount?.index))?.participations
-        const selectedProposalOverview = participations[$selectedProposal?.id]
+    function setTotalVotes(): void {
+        const selectedProposalOverview = $participationOverview?.participations?.[$selectedProposal?.id]
 
         if (selectedProposalOverview) {
             const votes = Object.values(selectedProposalOverview).map(
@@ -99,9 +97,11 @@
         })
     }
 
-    onMount(() => {
-        void setVotingEventPayload($selectedProposal?.id)
+    onMount(async () => {
+        await setVotingEventPayload($selectedProposal?.id)
+        await updateParticipationOverview()
         setTotalVotes()
+        hasMounted = true
     })
 </script>
 
