@@ -1,21 +1,30 @@
-import { cleanupOnboarding } from '@contexts/onboarding'
-import { createNewAccount, IAccount, setSelectedAccount } from '@core/account'
-import { handleError } from '@core/error/handlers/handleError'
-import { pollLedgerNanoStatus } from '@core/ledger'
-import { pollMarketPrices } from '@core/market/actions'
-import { getAndUpdateNodeInfo, pollNetworkStatus } from '@core/network'
-import { loadNftsForActiveProfile } from '@core/nfts'
-import {
-    buildProfileManagerOptionsFromProfileData,
-    initialiseProfileManager,
-    isStrongholdUnlocked,
-    profileManager,
-    recoverAccounts,
-    RecoverAccountsPayload,
-} from '@core/profile-manager'
-import { getAccounts, setStrongholdPasswordClearInterval, startBackgroundSync } from '@core/profile-manager/api'
-import { generateAndStoreActivitiesForAllAccounts, refreshAccountAssetsForActiveProfile } from '@core/wallet'
 import { get } from 'svelte/store'
+
+import { pollProposalsState, registerProposalsFromPrimaryNode } from '@contexts/governance/actions'
+import { cleanupOnboarding } from '@contexts/onboarding/actions'
+
+import { AppContext } from '@core/app/enums'
+import { createNewAccount, setSelectedAccount } from '@core/account/actions'
+import { IAccount } from '@core/account/interfaces'
+import { handleError } from '@core/error/handlers'
+import { pollLedgerNanoStatus } from '@core/ledger/actions'
+import { pollMarketPrices } from '@core/market/actions'
+import { getAndUpdateNodeInfo, pollNetworkStatus } from '@core/network/actions'
+import { loadNftsForActiveProfile } from '@core/nfts/actions'
+import { initialiseProfileManager } from '@core/profile-manager/actions'
+import {
+    getAccounts,
+    isStrongholdUnlocked,
+    recoverAccounts,
+    setStrongholdPasswordClearInterval,
+    startBackgroundSync,
+} from '@core/profile-manager/api'
+import { RecoverAccountsPayload } from '@core/profile-manager/interfaces'
+import { profileManager } from '@core/profile-manager/stores'
+import { buildProfileManagerOptionsFromProfileData } from '@core/profile-manager/utils'
+import { routerManager } from '@core/router/stores'
+import { generateAndStoreActivitiesForAllAccounts, refreshAccountAssetsForActiveProfile } from '@core/wallet/actions'
+
 import { DEFAULT_ACCOUNT_RECOVERY_CONFIGURATION, STRONGHOLD_PASSWORD_CLEAR_INTERVAL } from '../../constants'
 import { ProfileType } from '../../enums'
 import { ILoginOptions } from '../../interfaces'
@@ -28,12 +37,10 @@ import {
     setTimeStrongholdLastUnlocked,
 } from '../../stores'
 import { isLedgerProfile } from '../../utils'
+
 import { loadAccounts } from './loadAccounts'
 import { logout } from './logout'
 import { subscribeToWalletApiEventsForActiveProfile } from './subscribeToWalletApiEventsForActiveProfile'
-import { AppContext } from '@core/app'
-import { routerManager } from '@core/router/stores'
-import { pollProposalsState } from '@contexts/governance'
 
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const loginRouter = get(routerManager).getRouterForAppContext(AppContext.Login)
@@ -127,6 +134,8 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             }, 500)
             void pollMarketPrices()
             void pollProposalsState()
+
+            void registerProposalsFromPrimaryNode()
 
             void cleanupOnboarding()
         } else {
