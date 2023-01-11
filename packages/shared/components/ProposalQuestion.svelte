@@ -3,24 +3,24 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
     import type { AnswerStatus, Question } from '@iota/wallet'
 
-    export let currentVote: AnswerStatus[] = undefined
+    export let allVotes: AnswerStatus[] = undefined
     export let questionIndex: number = undefined
     export let isOpened = false
     export let question: Question
     export let selectedAnswerValues: number[] // TODO, maybe should be a svelte store
+    export let votedAnswerValue: number = undefined
     export let onClick: () => unknown = () => {}
 
     let percentages: string[]
-    let voteValue: number // TODO: get the current answer being voted by the account
 
     $: answers = [...question?.answers, { value: 0, text: 'Abstain', additionalInfo: '' }]
-    $: showMargin = isOpened || ((voteValue || voteValue === 0) && !isOpened) // voteValue 0 corresponds to abstained vote
-    $: currentVote, setPercentagesFromAccumulated()
+    $: showMargin = isOpened || ((votedAnswerValue || votedAnswerValue === 0) && !isOpened) // votedAnswerValue 0 corresponds to abstained vote
+    $: allVotes, setPercentagesFromAccumulated()
 
     function setPercentagesFromAccumulated(): void {
-        const totalAccumulated = currentVote?.reduce((acc, answer) => acc + answer.accumulated, 0)
+        const totalAccumulated = allVotes?.reduce((acc, answer) => acc + answer.accumulated, 0)
         percentages = answers?.map((currentAnswer) => {
-            const answerAccumulated = currentVote?.find((answer) => answer.value === currentAnswer.value)?.accumulated
+            const answerAccumulated = allVotes?.find((answer) => answer.value === currentAnswer.value)?.accumulated
             const divisionResult = answerAccumulated / totalAccumulated
             return Number.isNaN(divisionResult) ? '0%' : `${Math.round(divisionResult * 100)}%`
         })
@@ -57,7 +57,7 @@
                 on:answerClicked={(event) => handleAnswerClick(event.detail)}
                 hidden={!isOpened}
                 isSelected={selectedAnswerValues[questionIndex] === answer?.value}
-                isVotedFor={voteValue === answer?.value}
+                isVotedFor={votedAnswerValue === answer?.value}
                 percentage={percentages[answerIndex]}
             />
         {/each}

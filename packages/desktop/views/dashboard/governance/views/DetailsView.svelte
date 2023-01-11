@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Participations, VotingEventPayload, ParticipationEventType } from '@iota/wallet/out/types'
+    import { VotingEventPayload, ParticipationEventType } from '@iota/wallet/out/types'
     import { localize } from '@core/i18n'
     import {
         Button,
@@ -25,6 +25,7 @@
     import { proposalsState, selectedProposal } from '@contexts/governance/stores'
 
     let selectedAnswerValues: number[] = []
+    let votedAnswerValues: number[] = []
     let votingPayload: VotingEventPayload
     let totalVotes = 0
 
@@ -55,21 +56,17 @@
         }
     }
 
-    async function setTotalVotes(): Promise<void> {
-        const participations: Participations = (await getParticipationOverview($selectedAccount?.index))?.participations
-        const selectedProposalOverview = participations[$selectedProposal?.id]
+    async function setCurrentAndTotalVotes(): Promise<void> {
+        const { participations } = (await getParticipationOverview($selectedAccount?.index)) ?? {}
+        const trackedParticipations = Object.values(participations[$selectedProposal?.id] ?? {})
 
-        if (selectedProposalOverview) {
-            const votes = Object.values(selectedProposalOverview).map(
-                ({ amount, startMilestoneIndex, endMilestoneIndex }) => {
-                    const endMilestone = endMilestoneIndex <= 0 ? $networkStatus?.currentMilestone : endMilestoneIndex
-                    return parseInt(amount, 10) * (endMilestone - startMilestoneIndex)
-                }
-            )
-            totalVotes = votes?.reduce((accumulator, votes) => accumulator + votes, 0) ?? 0
-        } else {
-            totalVotes = 0
-        }
+        const votes = trackedParticipations.map(({ amount, startMilestoneIndex, endMilestoneIndex }) => {
+            const endMilestone = endMilestoneIndex <= 0 ? $networkStatus?.currentMilestone : endMilestoneIndex
+            return parseInt(amount) * (endMilestone - startMilestoneIndex)
+        })
+
+        votedAnswerValues = trackedParticipations.find((overview) => overview.endMilestoneIndex === 0)?.answers ?? []
+        totalVotes = votes?.reduce((accumulator, votes) => accumulator + votes, 0) ?? 0
     }
 
     let openedQuestionIndex = null
@@ -89,9 +86,9 @@
         })
     }
 
-    onMount(() => {
-        void setVotingEventPayload($selectedProposal?.id)
-        void setTotalVotes()
+    onMount(async () => {
+        await setVotingEventPayload($selectedProposal?.id)
+        await setCurrentAndTotalVotes()
     })
 </script>
 
@@ -140,7 +137,8 @@
                         {questionIndex}
                         isOpened={openedQuestionIndex === questionIndex}
                         bind:selectedAnswerValues
-                        currentVote={proposalState?.questions[questionIndex]?.answers}
+                        votedAnswerValue={votedAnswerValues[questionIndex]}
+                        otherVotes={proposalState?.questions[questionIndex]?.answers}
                         onClick={() => handleQuestionClick(questionIndex)}
                     />
                 {/each}
