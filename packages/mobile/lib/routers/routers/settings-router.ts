@@ -3,7 +3,7 @@ import { ISettingsRouterEvent } from '../interfaces'
 
 import { Subrouter } from '@core/router'
 
-import { profileRouter } from '.'
+import { profileRouter, networkConfigurationSettingsRouter } from '.'
 import { SettingsRoute } from '../enums'
 
 export const settingsRoute = writable<SettingsRoute>(null)
@@ -62,6 +62,7 @@ export class SettingsRouter extends Subrouter<SettingsRoute> {
     }
     reset(): void {
         super.reset()
+        get(networkConfigurationSettingsRouter)?.reset()
         needsUnlockStore.set(false)
         needsUnlockStoreCallbackStore.set(undefined)
     }

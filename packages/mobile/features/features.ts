@@ -106,7 +106,7 @@ const features = {
         advanced: {
             enabled: true,
             networkConfiguration: {
-                enabled: false,
+                enabled: true,
             },
             deepLinks: {
                 enabled: false,
