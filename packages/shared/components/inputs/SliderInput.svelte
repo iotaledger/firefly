@@ -232,7 +232,7 @@
         @apply justify-center;
         @apply cursor-pointer;
         @apply select-none;
-        @apply rounded-full
+        @apply rounded-full;
         @apply -mt-2;
         @apply w-5;
         @apply h-5;
