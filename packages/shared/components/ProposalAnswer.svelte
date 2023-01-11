@@ -7,15 +7,35 @@
 
     export let answer: Answer
     export let hidden: boolean = null
-    export let isSelected: boolean = null
-    export let isVotedFor: boolean = null
+    export let votedAnswerValue: number = undefined
+    export let selectedAnswerValue: number = undefined
     export let answerIndex: number = undefined
     export let percentage: string = ''
+
+    let isSelected: boolean
+    let isVotedFor: boolean
+
+    $: selectedAnswerValue, votedAnswerValue, setIsSelected()
+    $: votedAnswerValue, setIsVotedFor()
 
     const dispatch = createEventDispatcher()
 
     function handleClick(): void {
         dispatch('clicked')
+    }
+
+    function setIsSelected(): void {
+        if (selectedAnswerValue === answer?.value) {
+            isSelected = true
+        } else if (selectedAnswerValue === undefined && votedAnswerValue === answer?.value) {
+            isSelected = true
+        } else {
+            isSelected = false
+        }
+    }
+
+    function setIsVotedFor(): void {
+        isVotedFor = votedAnswerValue === answer?.value
     }
 </script>
 

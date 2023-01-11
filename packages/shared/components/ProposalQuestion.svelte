@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Text, FontWeight, Icon, ProposalAnswer } from 'shared/components'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import type { Answer, AnswerStatus, Question } from '@iota/wallet'
+    import type { AnswerStatus, Question } from '@iota/wallet'
     import { createEventDispatcher } from 'svelte'
 
     const dispatch = createEventDispatcher()
@@ -35,16 +35,6 @@
     function handleQuestionClick(): void {
         dispatch('clickedQuestion', { questionIndex })
     }
-
-    function isAnswerSelected(answer: Answer): boolean {
-        if (selectedAnswerValue === answer?.value) {
-            return true
-        } else if (selectedAnswerValue === undefined && votedAnswerValue === answer?.value) {
-            return true
-        } else {
-            return false
-        }
-    }
 </script>
 
 <proposal-question class="flex flex-col px-5 py-4 rounded-xl border border-solid border-gray-200 cursor-pointer">
@@ -62,18 +52,16 @@
         </div>
     </div>
     <proposal-answers class:mt-4={showMargin} class={isOpened ? 'space-y-2' : ''}>
-        {#key selectedAnswerValue}
-            {#each answers as answer, answerIndex}
-                <ProposalAnswer
-                    {answer}
-                    {answerIndex}
-                    on:clicked={handleAnswerClick(answer?.value)}
-                    hidden={!isOpened}
-                    isSelected={isAnswerSelected(answer)}
-                    isVotedFor={votedAnswerValue === answer?.value}
-                    percentage={percentages[answerIndex]}
-                />
-            {/each}
-        {/key}
+        {#each answers as answer, answerIndex}
+            <ProposalAnswer
+                {answer}
+                {answerIndex}
+                {votedAnswerValue}
+                {selectedAnswerValue}
+                hidden={!isOpened}
+                percentage={percentages[answerIndex]}
+                on:clicked={handleAnswerClick(answer?.value)}
+            />
+        {/each}
     </proposal-answers>
 </proposal-question>
