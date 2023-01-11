@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Text, FontWeight, Icon, ProposalAnswer } from 'shared/components'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import type { AnswerStatus, Question } from '@iota/wallet'
+    import type { Answer, AnswerStatus, Question } from '@iota/wallet'
 
     export let allVotes: AnswerStatus[] = undefined
     export let questionIndex: number = undefined
@@ -33,6 +33,16 @@
             selectedAnswerValues[questionIndex] = answerValue
         }
     }
+
+    function isAnswerSelected(answer: Answer): boolean {
+        if (selectedAnswerValues[questionIndex] === answer?.value) {
+            return true
+        } else if (selectedAnswerValues[questionIndex] === undefined && votedAnswerValue === answer?.value) {
+            return true
+        } else {
+            return false
+        }
+    }
 </script>
 
 <proposal-question class="flex flex-col px-5 py-4 rounded-xl border border-solid border-gray-200 cursor-pointer">
@@ -50,16 +60,18 @@
         </div>
     </div>
     <proposal-answers class:mt-4={showMargin} class={isOpened ? 'space-y-2' : ''}>
-        {#each answers as answer, answerIndex}
-            <ProposalAnswer
-                {answer}
-                {answerIndex}
-                on:answerClicked={(event) => handleAnswerClick(event.detail)}
-                hidden={!isOpened}
-                isSelected={selectedAnswerValues[questionIndex] === answer?.value}
-                isVotedFor={votedAnswerValue === answer?.value}
-                percentage={percentages[answerIndex]}
-            />
-        {/each}
+        {#key selectedAnswerValues[questionIndex]}
+            {#each answers as answer, answerIndex}
+                <ProposalAnswer
+                    {answer}
+                    {answerIndex}
+                    on:answerClicked={(event) => handleAnswerClick(event.detail)}
+                    hidden={!isOpened}
+                    isSelected={isAnswerSelected(answer)}
+                    isVotedFor={votedAnswerValue === answer?.value}
+                    percentage={percentages[answerIndex]}
+                />
+            {/each}
+        {/key}
     </proposal-answers>
 </proposal-question>

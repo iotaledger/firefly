@@ -12,8 +12,6 @@
     export let answerIndex: number = undefined
     export let percentage: string = ''
 
-    $: showBorder = isVotedFor || isSelected
-
     const dispatch = createEventDispatcher()
 
     function handleClick(): void {
@@ -26,7 +24,7 @@
     class:hidden={isVotedFor ? false : hidden}
     class:is-voted-for={isVotedFor}
     class="flex justify-between items-center p-3 rounded-md border border-solid relative
-        {showBorder ? 'border-blue-500' : 'border-gray-200'}
+        {isSelected ? 'border-blue-500' : 'border-gray-200'}
     "
     on:click={handleClick}
 >
