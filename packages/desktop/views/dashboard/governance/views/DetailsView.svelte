@@ -138,7 +138,7 @@
                         isOpened={openedQuestionIndex === questionIndex}
                         bind:selectedAnswerValues
                         votedAnswerValue={votedAnswerValues[questionIndex]}
-                        otherVotes={proposalState?.questions[questionIndex]?.answers}
+                        allVotes={proposalState?.questions[questionIndex]?.answers}
                         onClick={() => handleQuestionClick(questionIndex)}
                     />
                 {/each}

@@ -24,8 +24,8 @@
 <proposal-answer
     style:--percentage={percentage}
     class:hidden={isVotedFor ? false : hidden}
+    class:is-voted-for={isVotedFor}
     class="flex justify-between items-center p-3 rounded-md border border-solid relative
-        {isVotedFor ? 'bg-blue-100' : ''}
         {showBorder ? 'border-blue-500' : 'border-gray-200'}
     "
     on:click={handleClick}
@@ -89,6 +89,10 @@
             content: '';
             width: var(--percentage);
             z-index: 1;
+        }
+
+        &.is-voted-for::after {
+            @apply bg-blue-100;
         }
     }
 
