@@ -17,21 +17,8 @@ import type {
 } from './types';
 
 // The MessageHandler class interacts with messages with the rust bindings.
-export async function MessageHandler(options?: AccountManagerOptions): Promise<{
-    messageHandler: number;
-    sendMessage: (message: __Message__) => Promise<string>;
-    callAccountMethod: (
-        accountIndex: AccountId,
-        method: __AccountMethod__
-    ) => Promise<string>;
-    listen: (
-        eventTypes: EventType[],
-        callback: (error: Error, result: string) => void
-    ) => Promise<void>;
-    clearListeners: (eventTypes: EventType[]) => Promise<void>;
-    destroy: () => void;
-}> {
-
+export async function MessageHandler(options?: AccountManagerOptions) {
+    
     const messageOptions = {
             storagePath: options?.storagePath,
             clientOptions: options?.clientOptions,
@@ -39,15 +26,16 @@ export async function MessageHandler(options?: AccountManagerOptions): Promise<{
             secretManager: options?.secretManager
     };
     const { messageHandler } = await messageHandlerNew(messageOptions);
-
+    // messageHandler = messageHandler.messageHandler;
+    // console.error(messageHandler.messageHandler, 'received')
+    
     async function sendMessage(message: __Message__): Promise<string> {
-        return sendMessageAsync(
+        return await sendMessageAsync(
             JSON.stringify(message),
             messageHandler,
         ).catch((error) => {
             try {
                 error = JSON.parse(error).payload;
-            // eslint-disable-next-line no-empty
             } catch (e) {}
             return Promise.reject(error);
         });
@@ -70,48 +58,28 @@ export async function MessageHandler(options?: AccountManagerOptions): Promise<{
         eventTypes: EventType[],
         callback: (error: Error, result: string) => void,
     ): Promise<void> {
-        const callbackId = await _listen(
-            {
-                eventTypes,
-                messageHandler
-            },
-            ({ error, result }) => {
-                if (error) console.error('CALLBACK error!', error)
-                if (result) console.error('CALLBACK result!', result)
-                callback(
-                    {
-                        name: 'listen error',
-                        message: error?.toString()
-                    },
-                    result
-                )
+        await _listen({ eventTypes, messageHandler }, ({ error, result }) => {
+            const Error = error ? {
+                name: error.toString(), 
+                message: error?.cause?.toString()
+            } : undefined
+            callback(
+                Error,
+                result
+            )
         });
-        console.error({callbackId})
-        // callback(null, result)
     }
 
     async function clearListeners(
         eventTypes: EventType[]
     ): Promise<void> {
-        const callbackId = await _clearListeners(
-            {
-                eventTypes,
-                messageHandler
-            },
-            ({ error, result }) => {
-                if (error) console.error('CALLBACK error!', error)
-                if (result) console.error('CALLBACK result!', result)
-                // callback(
-                //     {
-                //         name: 'listen error',
-                //         message: error?.cause?.toString()
-                //     },
-                //     // null,
-                //     result
-                // )
+        await _clearListeners({ eventTypes, messageHandler }, ({ error, result }) => {
+            const Error = error ? {
+                name: error.toString(), 
+                message: error?.cause?.toString()
+            } : undefined
+            return Error || result
         });
-        console.error({callbackId})
-        // callback(null, result)
     }
 
     function destroy(): void {
