@@ -9,14 +9,14 @@ import type {
     LedgerNanoStatus,
     Node,
     NodeInfoWrapper,
+    ParticipationEventType,
     WalletEvent,
 } from '@iota/wallet'
 
-import { IAuth } from '@core/network'
+import { IAccount } from '@core/account/interfaces'
+import { IAuth } from '@core/network/interfaces'
 
 import { WalletApiEventHandler } from '../types'
-import { IAccount } from '@core/account'
-import { ParticipationEventType } from '@iota/wallet'
 
 export interface IProfileManager {
     id: string
