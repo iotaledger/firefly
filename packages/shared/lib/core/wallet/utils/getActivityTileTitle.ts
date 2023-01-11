@@ -1,4 +1,4 @@
-import { ActivityAction, ActivityDirection, ActivityType, InclusionState } from '../enums'
+import { ActivityAction, ActivityDirection, ActivityType, GovernanceAction, InclusionState } from '../enums'
 import { Activity } from '../types'
 
 export function getActivityTileTitle(activity: Activity): string {
@@ -7,6 +7,13 @@ export function getActivityTileTitle(activity: Activity): string {
 
     if (activity.type === ActivityType.Basic && activity.isShimmerClaiming) {
         return isConfirmed ? 'general.shimmerClaimed' : 'general.shimmerClaiming'
+    }
+    if (activity.type === ActivityType.Governance) {
+        if (activity.governanceAction === GovernanceAction.IncreaseVotingPower) {
+            return isConfirmed ? 'general.increase' : 'general.increasing'
+        } else if (activity.governanceAction === GovernanceAction.DecreaseVotingPower) {
+            return isConfirmed ? 'general.decrease' : 'general.decreasing'
+        }
     } else if (action === ActivityAction.Mint) {
         if (type === ActivityType.Alias) {
             return isConfirmed ? 'general.aliasCreated' : 'general.creatingAlias'

@@ -1,19 +1,9 @@
-import { isShimmerClaimingTransaction } from '@contexts/onboarding'
 import { IAccountState } from '@core/account'
-import {
-    DestinationNetwork,
-    getDestinationNetworkFromAddress,
-    Layer2Metadata,
-    parseLayer2Metadata,
-} from '@core/layer-2'
-import { COIN_TYPE } from '@core/network'
-import { activeProfile, activeProfileId } from '@core/profile'
 import { IActivityGenerationParameters } from '@core/wallet/interfaces'
-import { TransactionActivity } from '@core/wallet/types'
+import { GovernanceActivity } from '@core/wallet/types'
 import { IBasicOutput } from '@iota/types'
-import { get } from 'svelte/store'
-import { ActivityType } from '../../enums'
-import { activityOutputContainsValue, getNativeTokenFromOutput } from '..'
+import { ActivityType, GovernanceAction } from '../../enums'
+import { activityOutputContainsValue } from '..'
 import {
     getAmountFromOutput,
     getMetadataFromOutput,
@@ -21,52 +11,34 @@ import {
     getStorageDepositFromOutput,
     getTagFromOutput,
 } from './helper'
+import { isParticipationOutput } from '@contexts/governance'
 
 export function generateSingleGovernanceActivity(
     account: IAccountState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
-): TransactionActivity {
-    const { transactionId, direction, time, inclusionState, utxoInputs } = processedTransaction
+): GovernanceActivity {
+    const { transactionId, direction, time, inclusionState, wrappedInputs } = processedTransaction
 
     const isHidden = false
     const isAssetHidden = false
     const containsValue = activityOutputContainsValue(wrappedOutput)
-
-    const inputs = utxoInputs
 
     const outputId = wrappedOutput.outputId
     const id = outputId || transactionId
 
     const output = wrappedOutput.output as IBasicOutput
 
-    const isShimmerClaiming = isShimmerClaimingTransaction(transactionId, get(activeProfileId))
-
-    const nativeToken = getNativeTokenFromOutput(output)
-    const assetId = nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol])
-
     const tag = getTagFromOutput(output)
     const metadata = getMetadataFromOutput(output)
-    const publicNote = ''
 
     const sendingInfo = getSendingInformation(processedTransaction, output, account)
-    let parsedLayer2Metadata: Layer2Metadata
-    let destinationNetwork: string
-    try {
-        parsedLayer2Metadata = parseLayer2Metadata(metadata)
-        destinationNetwork = getDestinationNetworkFromAddress(
-            sendingInfo.subject.type === 'address' ? sendingInfo.subject.address : undefined
-        )
-    } catch (_) {
-        parsedLayer2Metadata = null
-        destinationNetwork = DestinationNetwork.Shimmer
-    }
 
-    const { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output)
-    const gasBudget = Number(parsedLayer2Metadata?.gasBudget ?? '0')
-    const baseTokenAmount = getAmountFromOutput(output) - storageDeposit - gasBudget
-    const rawAmount = nativeToken ? Number(nativeToken?.amount) : baseTokenAmount
+    const { storageDeposit } = getStorageDepositFromOutput(output)
+    const votingPower = getAmountFromOutput(output)
+    const governanceInfo = getGovernanceInfo(output, wrappedInputs)
+
     return {
-        type: ActivityType.Basic,
+        type: ActivityType.Governance,
         isHidden,
         id,
         transactionId,
@@ -75,20 +47,43 @@ export function generateSingleGovernanceActivity(
         action,
         isAssetHidden,
         inclusionState,
-        inputs,
         containsValue,
         outputId,
         storageDeposit,
-        giftedStorageDeposit,
-        rawAmount,
-        isShimmerClaiming,
-        publicNote,
+        giftedStorageDeposit: 0,
+        votingPower,
         metadata,
         tag,
-        assetId,
         asyncData: null,
-        destinationNetwork,
-        parsedLayer2Metadata,
+        ...governanceInfo,
         ...sendingInfo,
+    }
+}
+
+function getGovernanceInfo(
+    output,
+    inputs
+): {
+    governanceAction: GovernanceAction
+    votingPower: number
+    votingPowerDifference?: number
+} {
+    const currentVotingPower = getAmountFromOutput(output)
+    const governanceInput = inputs?.find((input) => isParticipationOutput(input))
+
+    if (governanceInput) {
+        const oldVotingPower = getAmountFromOutput(governanceInput)
+        return {
+            governanceAction:
+                currentVotingPower - oldVotingPower > 0
+                    ? GovernanceAction.IncreaseVotingPower
+                    : GovernanceAction.DecreaseVotingPower,
+            votingPower: currentVotingPower,
+            votingPowerDifference: Math.abs(currentVotingPower - oldVotingPower),
+        }
+    }
+    return {
+        governanceAction: GovernanceAction.IncreaseVotingPower,
+        votingPower: currentVotingPower,
     }
 }
