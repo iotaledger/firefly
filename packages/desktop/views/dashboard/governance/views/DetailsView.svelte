@@ -71,8 +71,9 @@
 
     let openedQuestionIndex = null
 
-    function handleQuestionClick(index: number): void {
-        openedQuestionIndex = openedQuestionIndex === index ? null : index
+    function handleQuestionClick(event: CustomEvent): void {
+        const { questionIndex } = event.detail
+        openedQuestionIndex = openedQuestionIndex === questionIndex ? null : questionIndex
     }
 
     function handleCancelClick(): void {
@@ -84,6 +85,15 @@
             type: 'voteForProposal',
             props: { selectedAnswerValues },
         })
+    }
+
+    function handleAnswerClick(event: CustomEvent) {
+        const { answerValue, questionIndex } = event.detail
+        if (selectedAnswerValues[questionIndex] === answerValue) {
+            selectedAnswerValues[questionIndex] = null
+        } else {
+            selectedAnswerValues[questionIndex] = answerValue
+        }
     }
 
     onMount(async () => {
@@ -136,10 +146,11 @@
                         {question}
                         {questionIndex}
                         isOpened={openedQuestionIndex === questionIndex}
-                        bind:selectedAnswerValues
+                        selectedAnswerValue={selectedAnswerValues[questionIndex]}
                         votedAnswerValue={votedAnswerValues[questionIndex]}
                         allVotes={proposalState?.questions[questionIndex]?.answers}
-                        onClick={() => handleQuestionClick(questionIndex)}
+                        on:clickedQuestion={handleQuestionClick}
+                        on:clickedAnswer={handleAnswerClick}
                     />
                 {/each}
             {/if}

@@ -15,7 +15,7 @@
     const dispatch = createEventDispatcher()
 
     function handleClick(): void {
-        dispatch('answerClicked', answer?.value)
+        dispatch('clicked')
     }
 </script>
 
