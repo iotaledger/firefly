@@ -20,7 +20,7 @@
     import { networkStatus } from '@core/network/stores'
     import { getVotingEvent } from '@core/profile-manager/api'
     import { governanceRouter } from '@core/router/routers'
-    import { selectedAccount } from '@core/account/stores'
+    import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
     import { ProposalStatus } from '@contexts/governance/enums'
     import {
         participationOverview,
@@ -37,6 +37,7 @@
     $: proposalState = $proposalsState[$activeProfileId]?.[$selectedProposal?.id]?.state
 
     $: hasMounted && $participationOverview && setTotalVotes()
+    $: $selectedAccountIndex, void updateParticipationOverview()
 
     $: votesCounter = {
         total: totalVotes,
@@ -100,7 +101,6 @@
     onMount(async () => {
         await setVotingEventPayload($selectedProposal?.id)
         await updateParticipationOverview()
-        setTotalVotes()
         hasMounted = true
     })
 </script>
