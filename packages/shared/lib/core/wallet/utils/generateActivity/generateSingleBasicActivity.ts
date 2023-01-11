@@ -27,13 +27,11 @@ export function generateSingleBasicActivity(
     account: IAccountState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
 ): TransactionActivity {
-    const { transactionId, direction, claimingData, time, inclusionState, utxoInputs } = processedTransaction
+    const { transactionId, direction, claimingData, time, inclusionState } = processedTransaction
 
     const isHidden = false
     const isAssetHidden = false
     const containsValue = activityOutputContainsValue(wrappedOutput)
-
-    const inputs = utxoInputs
 
     const outputId = wrappedOutput.outputId
     const id = outputId || transactionId
@@ -78,7 +76,6 @@ export function generateSingleBasicActivity(
         action,
         isAssetHidden,
         inclusionState,
-        inputs,
         containsValue,
         outputId,
         storageDeposit,
