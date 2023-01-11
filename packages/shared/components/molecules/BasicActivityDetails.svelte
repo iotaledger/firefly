@@ -7,7 +7,12 @@
         SubjectBox,
     } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { formatTokenAmountDefault, TransactionActivity, getAssetFromPersistedAssets } from '@core/wallet'
+    import {
+        formatTokenAmountDefault,
+        TransactionActivity,
+        getAssetFromPersistedAssets,
+        ActivityAction,
+    } from '@core/wallet'
     import { time } from '@core/app'
 
     export let activity: TransactionActivity
@@ -28,7 +33,7 @@
 </script>
 
 <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-3">
-    {#if amount}
+    {#if amount && activity.action !== ActivityAction.Consolidation}
         <AmountBox {amount} unit={asset?.metadata?.unit} {asset} />
     {/if}
     <transaction-status class="flex flex-row w-full space-x-2 justify-center">
