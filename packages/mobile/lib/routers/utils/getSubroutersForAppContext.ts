@@ -8,6 +8,7 @@ import {
     activityRouter,
     appSetupRouter,
     networkSetupRouter,
+    networkConfigurationSettingsRouter,
     profileBackupRouter,
     profileRecoveryRouter,
     profileRouter,
@@ -29,6 +30,7 @@ export function getSubroutersForAppContext(context: AppContext): IRouter[] {
                 get(tokenRouter),
                 get(profileRouter),
                 get(settingsRouter),
+                get(networkConfigurationSettingsRouter),
             ]
         case AppContext.Login:
             return []
