@@ -18,6 +18,7 @@ import { generateNftActivitiesFromTransaction } from './generateNftActivitiesFro
 import { generateAliasActivitiesFromTransaction } from './generateAliasActivitiesFromTransaction'
 import { generateBasicActivitiesFromTransaction } from './generateBasicActivitiesFromTransaction'
 import { generateFoundryActivitiesFromTransaction } from './generateFoundryActivitiesFromTransaction'
+import { isParticipationOutput } from '@contexts/governance'
 
 export function generateActivities(processedTransaction: IProcessedTransaction, account: IAccountState): Activity[] {
     if (processedTransaction.wrappedInputs?.length > 0) {
@@ -53,7 +54,17 @@ function generateActivitiesFromProcessedTransactionsWithInputs(
         activities.push(...aliasActivities)
     }
 
-    if (!containsFoundryActivity && !containsNftActivity && !containsAliasActivity) {
+    const governanceOutput = outputs.find((output) => isParticipationOutput(output.output))
+    if (governanceOutput) {
+        const governanceActivity = generateSingleGovernanceActivity(account, {
+            processedTransaction,
+            wrappedOutput: governanceOutput,
+            action: null,
+        })
+        activities.push(governanceActivity)
+    }
+
+    if (!containsFoundryActivity && !containsNftActivity && !containsAliasActivity && !governanceOutput) {
         const basicActivities = generateBasicActivitiesFromTransaction(processedTransaction, account)
         activities.push(...basicActivities)
     }
