@@ -18,7 +18,6 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { openPopup } from '@auxiliary/popup/actions'
     import { activeProfileId } from '@core/profile/stores'
-    import { networkStatus } from '@core/network/stores'
     import { getVotingEvent } from '@core/profile-manager/api'
     import { governanceRouter } from '@core/router/routers'
     import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
@@ -29,6 +28,7 @@
         selectedProposal,
         updateParticipationOverview,
     } from '@contexts/governance/stores'
+    import { calculateWeightedVotes } from '@contexts/governance/utils'
 
     let selectedAnswerValues: number[] = []
     let votedAnswerValues: number[] = []
@@ -73,11 +73,7 @@
     function setCurrentAndTotalVotes(): void {
         const selectedProposalOverview = $participationOverview?.participations?.[$selectedProposal?.id]
         const trackedParticipations = Object.values(selectedProposalOverview)
-
-        const votes = trackedParticipations.map(({ amount, startMilestoneIndex, endMilestoneIndex }) => {
-            const endMilestone = endMilestoneIndex <= 0 ? $networkStatus?.currentMilestone : endMilestoneIndex
-            return parseInt(amount) * (endMilestone - startMilestoneIndex)
-        })
+        const votes = calculateWeightedVotes(trackedParticipations)
 
         votedAnswerValues = trackedParticipations.find((overview) => overview.endMilestoneIndex === 0)?.answers ?? []
         totalVotes = votes?.reduce((accumulator, votes) => accumulator + votes, 0) ?? 0

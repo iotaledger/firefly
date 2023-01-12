@@ -2,7 +2,9 @@
     import type { AnswerStatus, Question } from '@iota/wallet'
     import { createEventDispatcher } from 'svelte'
     import { Text, FontWeight, Icon, ProposalAnswer } from 'shared/components'
-    import { ProposalStatus, selectedProposal } from '@contexts/governance'
+    import { ABSTAIN_VOTE_VALUE } from '@contexts/governance/constants'
+    import { ProposalStatus } from '@contexts/governance/enums'
+    import { selectedProposal } from '@contexts/governance/stores'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
     const dispatch = createEventDispatcher()
@@ -17,16 +19,16 @@
     let percentages: string[]
 
     $: answers = [...question?.answers, { value: 0, text: 'Abstain', additionalInfo: '' }]
-    $: showMargin = isOpened || ((votedAnswerValue || votedAnswerValue === 0) && !isOpened) // votedAnswerValue 0 corresponds to abstained vote
-    $: allVotes, setPercentagesFromAccumulated()
+    $: showMargin = isOpened || ((votedAnswerValue || votedAnswerValue === ABSTAIN_VOTE_VALUE) && !isOpened)
+    $: allVotes, calculatePercentagesFromAllVotes()
     $: disabled =
         $selectedProposal.status === ProposalStatus.Upcoming || $selectedProposal.status === ProposalStatus.Ended
 
-    function setPercentagesFromAccumulated(): void {
-        const totalAccumulated = allVotes?.reduce((acc, answer) => acc + answer.accumulated, 0)
+    function calculatePercentagesFromAllVotes(): void {
+        const totalVotes = allVotes?.reduce((acc, answer) => acc + answer.accumulated, 0)
         percentages = answers?.map((currentAnswer) => {
-            const answerAccumulated = allVotes?.find((answer) => answer.value === currentAnswer.value)?.accumulated
-            const divisionResult = answerAccumulated / totalAccumulated
+            const answerVotes = allVotes?.find((answer) => answer.value === currentAnswer.value)?.accumulated
+            const divisionResult = answerVotes / totalVotes
             return Number.isNaN(divisionResult) ? '0%' : `${Math.round(divisionResult * 100)}%`
         })
     }
