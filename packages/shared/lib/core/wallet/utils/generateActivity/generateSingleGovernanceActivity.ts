@@ -1,7 +1,7 @@
 import { IAccountState } from '@core/account'
-import { IActivityGenerationParameters } from '@core/wallet/interfaces'
-import { GovernanceActivity } from '@core/wallet/types'
-import { IBasicOutput } from '@iota/types'
+import { IActivityGenerationParameters, IWrappedOutput } from '@core/wallet/interfaces'
+import { GovernanceActivity, Output } from '@core/wallet/types'
+import type { IBasicOutput } from '@iota/types'
 import { ActivityType, GovernanceAction } from '../../enums'
 import { activityOutputContainsValue } from '..'
 import {
@@ -61,18 +61,17 @@ export function generateSingleGovernanceActivity(
 }
 
 function getGovernanceInfo(
-    output,
-    inputs
+    output: Output,
+    inputs: IWrappedOutput[]
 ): {
     governanceAction: GovernanceAction
     votingPower: number
     votingPowerDifference?: number
 } {
     const currentVotingPower = getAmountFromOutput(output)
-    const governanceInput = inputs?.find((input) => isParticipationOutput(input))
-
+    const governanceInput = inputs?.find((input) => isParticipationOutput(input.output))
     if (governanceInput) {
-        const oldVotingPower = getAmountFromOutput(governanceInput)
+        const oldVotingPower = getAmountFromOutput(governanceInput.output)
         return {
             governanceAction:
                 currentVotingPower - oldVotingPower > 0
