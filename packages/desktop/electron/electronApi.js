@@ -316,7 +316,8 @@ const ElectronApi = {
             })
     },
 
-    isFeatureFlagEnabled: (keyPath) => keyPath?.split('.').reduce((prev, cur) => prev && prev[cur], features)?.enabled ?? false,
+    isFeatureFlagEnabled: (keyPath) =>
+        keyPath?.split('.').reduce((prev, cur) => prev && prev[cur], features)?.enabled ?? false,
 }
 
 module.exports = ElectronApi
