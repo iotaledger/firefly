@@ -10,7 +10,7 @@ import { Activity } from '@core/wallet/types'
 import { generateSingleBasicActivity } from './generateSingleBasicActivity'
 import { generateSingleNftActivity } from './generateSingleNftActivity'
 
-export function generateBasicActivitiesFromTransaction(
+export function generateActivitiesFromBasicOutputs(
     processedTransaction: IProcessedTransaction,
     account: IAccountState
 ): Activity[] {
