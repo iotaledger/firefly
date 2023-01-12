@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, HTMLButtonType, TextInput, Text, TextType } from 'shared/components'
+    import { Button, HTMLButtonType, TextInput, Text, TextType, Form } from 'shared/components'
     import type { Auth } from '@iota/wallet'
     import { showAppNotification } from '@auxiliary/notification/actions'
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
@@ -15,8 +15,6 @@
     let eventIdError: string
     let nodeUrlError: string
 
-    let isBusy = false
-
     $: disabled = !eventId || !nodeUrl
 
     function onCloseClick(): void {
@@ -25,14 +23,9 @@
 
     async function onConfirmClick(): Promise<void> {
         try {
-            isBusy = true
-
             await Promise.all([validateEventId(), validateNodeUrl()])
             await registerParticipationWrapper()
-
-            isBusy = false
         } catch (err) {
-            isBusy = false
             const isAuthenticationError = err?.error?.match(/(username)|(password)|(jwt)/g)?.length > 0
             const isEventError = err?.error?.match(/(the requested data)|(was not found)/)?.length > 0
             const isNodeError = err?.error?.match(/(failed to lookup address information)|(dns error)/)?.length > 0
@@ -98,7 +91,7 @@
     }
 </script>
 
-<form id="register-proposal" on:submit|preventDefault={onConfirmClick}>
+<Form id="register-proposal" onSubmit={onConfirmClick} let:isBusy>
     <Text type={TextType.h3} classes="mb-6">{localize('popups.registerProposal.title')}</Text>
     <Text fontSize="15">{localize('popups.registerProposal.body')}</Text>
     <div class="flex flex-col w-full space-y-4 mt-4">
@@ -121,4 +114,4 @@
             {localize('actions.confirm')}
         </Button>
     </div>
-</form>
+</Form>

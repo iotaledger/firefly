@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, PasswordInput, Text, HTMLButtonType } from 'shared/components'
+    import { Button, PasswordInput, Text, HTMLButtonType, Form } from 'shared/components'
     import { closePopup } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
     import { unlockStronghold } from '@core/profile'
@@ -13,7 +13,7 @@
     let password: string
     let error = ''
 
-    async function handleSubmit(): Promise<void> {
+    async function onSubmit(): Promise<void> {
         try {
             const response = await unlockStronghold(password)
             closePopup()
@@ -36,10 +36,10 @@
     <Text type="h4">{localize('popups.password.title')}</Text>
     <Text type="p" secondary>{subtitle ?? localize('popups.password.subtitle')}</Text>
 </div>
-<form
+<Form
     id="password-popup-form"
-    class="flex justify-center w-full flex-row flex-wrap"
-    on:submit|preventDefault={handleSubmit}
+    classes="flex justify-center w-full flex-row flex-wrap"
+    {onSubmit}
 >
     <PasswordInput
         {error}
@@ -47,7 +47,7 @@
         bind:value={password}
         showRevealToggle
         placeholder={localize('general.password')}
-        submitHandler={handleSubmit}
+        submitHandler={onSubmit}
         autofocus
     />
     <div class="flex flex-row justify-between w-full space-x-4">
@@ -56,4 +56,4 @@
             {localize('actions.unlock')}
         </Button>
     </div>
-</form>
+</Form>

@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, PasswordInput, Text, Error, ButtonVariant, HTMLButtonType } from 'shared/components'
+    import { Button, PasswordInput, Text, Error, ButtonVariant, HTMLButtonType, Form } from 'shared/components'
     import { closePopup } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
     import { setStrongholdPassword } from '@core/profile-manager'
@@ -11,13 +11,10 @@
 
     let password: string
     let error: string
-    let isBusy = false
 
-    async function handleDeleteClick(): Promise<void> {
+    async function handleSubmit(): Promise<void> {
         error = null
-        isBusy = true
         await deleteStrongholdAccount(password)
-        isBusy = false
     }
 
     async function deleteStrongholdAccount(password: string): Promise<void> {
@@ -45,7 +42,7 @@
         })}
     </Text>
 </div>
-<form on:submit|preventDefault={handleDeleteClick} class="flex w-full flex-row flex-wrap">
+<Form onSubmit={handleSubmit} let:isBusy classes="flex w-full flex-row flex-wrap">
     <Text type="p" secondary classes="mb-5">{localize('popups.deleteAccount.body')}</Text>
     {#if $isSoftwareProfile}
         <Text type="p" secondary classes="mb-3">{localize('popups.deleteAccount.typePassword')}</Text>
@@ -55,7 +52,7 @@
             showRevealToggle
             placeholder={localize('general.password')}
             autofocus
-            submitHandler={handleDeleteClick}
+            submitHandler={handleSubmit}
             disabled={isBusy}
         />
     {/if}
@@ -76,4 +73,4 @@
             {localize('actions.deleteAccount')}
         </Button>
     </div>
-</form>
+</Form>

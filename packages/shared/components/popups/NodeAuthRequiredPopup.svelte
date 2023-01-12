@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, HTMLButtonType, Text, TextInput, TextType } from 'shared/components'
+    import { Button, HTMLButtonType, Text, TextInput, TextType, Form } from 'shared/components'
     import type { Auth } from '@iota/wallet'
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
@@ -41,7 +41,7 @@
     }
 </script>
 
-<form id="node-auth-required" on:submit|preventDefault={handleSubmit}>
+<Form id="node-auth-required" onSubmit={handleSubmit}>
     <Text type={TextType.h3} classes="mb-6">{localize('popups.nodeAuthRequired.title')}</Text>
     <Text fontSize="15">{localize('popups.nodeAuthRequired.body')}</Text>
     <div class="flex flex-col w-full space-y-4 mt-4">
@@ -70,4 +70,4 @@
             {localize('actions.confirm')}
         </Button>
     </div>
-</form>
+</Form>
