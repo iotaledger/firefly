@@ -7,6 +7,8 @@ import { DeepLinkManager } from './lib/deepLinkManager'
 import { NotificationManager } from './lib/notificationManager'
 import { PincodeManager } from './lib/pincodeManager'
 
+import features from '@features/features'
+
 let activeProfileId = null
 
 export const nativeSplash = SplashScreen
@@ -141,6 +143,8 @@ export const CapacitorApi: IPlatform = {
 
     saveRecoveryKit: () => new Promise<void>(() => {}),
     ledger: undefined,
+
+    isFeatureFlagEnabled: (keyPath: string) => keyPath?.split('.').reduce((prev, cur) => prev && prev[cur], features)?.enabled ?? false,
 }
 
 window['__CAPACITOR__'] = CapacitorApi

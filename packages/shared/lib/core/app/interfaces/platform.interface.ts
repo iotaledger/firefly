@@ -43,4 +43,6 @@ export interface IPlatform {
 
     onEvent<K extends keyof IPlatformEventMap>(eventName: K, callback: (param: IPlatformEventMap[K]) => void)
     removeListenersForEvent<K extends keyof IPlatformEventMap>(eventName: K)
+
+    isFeatureFlagEnabled(keyPath: string): boolean
 }
