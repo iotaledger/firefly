@@ -25,7 +25,7 @@
 
     function handleClick(): void {
         if (!disabled) {
-            dispatch('answerClicked', answer?.value)
+            dispatch('click')
         }
     }
 
