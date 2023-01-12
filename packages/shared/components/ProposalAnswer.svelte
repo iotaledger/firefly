@@ -24,7 +24,7 @@
     const dispatch = createEventDispatcher()
 
     function handleClick(): void {
-        if (!disabled) {
+        if (!disabled && !hidden) {
             dispatch('click')
         }
     }
