@@ -144,7 +144,8 @@ export const CapacitorApi: IPlatform = {
     saveRecoveryKit: () => new Promise<void>(() => {}),
     ledger: undefined,
 
-    isFeatureFlagEnabled: (keyPath: string) => keyPath?.split('.').reduce((prev, cur) => prev && prev[cur], features)?.enabled ?? false,
+    isFeatureFlagEnabled: (keyPath: string) =>
+        keyPath?.split('.').reduce((prev, cur) => prev && prev[cur], features)?.enabled ?? false,
 }
 
 window['__CAPACITOR__'] = CapacitorApi
