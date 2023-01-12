@@ -15,7 +15,6 @@
     }
 
     export let node: INode = { url: '' }
-    export let nodeInfoTab: NodeInfoTab = NodeInfoTab.General
 
     const NODE_INFO_LOCALE_BASE_PATH = 'popups.node.info'
     const NODE_INFO_TAB_MAP: Readonly<
@@ -66,6 +65,7 @@
     }
 
     let nodeInfo: INodeInfo
+    let nodeInfoTab: NodeInfoTab = NodeInfoTab.General
 
     function processNodeInfoMapTab(
         _nodeInfoTab: NodeInfoTab,
