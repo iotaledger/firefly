@@ -1,8 +1,9 @@
 <script lang="typescript">
-    import { Text, FontWeight, Icon, ProposalAnswer } from 'shared/components'
-    import { Icon as IconEnum } from '@auxiliary/icon'
     import type { AnswerStatus, Question } from '@iota/wallet'
     import { createEventDispatcher } from 'svelte'
+    import { Text, FontWeight, Icon, ProposalAnswer } from 'shared/components'
+    import { ProposalStatus, selectedProposal } from '@contexts/governance'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     const dispatch = createEventDispatcher()
 
@@ -18,6 +19,8 @@
     $: answers = [...question?.answers, { value: 0, text: 'Abstain', additionalInfo: '' }]
     $: showMargin = isOpened || ((votedAnswerValue || votedAnswerValue === 0) && !isOpened) // votedAnswerValue 0 corresponds to abstained vote
     $: allVotes, setPercentagesFromAccumulated()
+    $: disabled =
+        $selectedProposal.status === ProposalStatus.Upcoming || $selectedProposal.status === ProposalStatus.Ended
 
     function setPercentagesFromAccumulated(): void {
         const totalAccumulated = allVotes?.reduce((acc, answer) => acc + answer.accumulated, 0)
@@ -37,7 +40,9 @@
     }
 </script>
 
-<proposal-question class="flex flex-col px-5 py-4 rounded-xl border border-solid border-gray-200 cursor-pointer">
+<proposal-question
+    class="flex flex-col px-5 py-4 rounded-xl border border-solid border-gray-200 dark:border-transparent dark:bg-gray-850 cursor-pointer"
+>
     <div on:click={handleQuestionClick} class="flex justify-between items-center">
         <div class="flex flex-col">
             {#if questionIndex !== undefined}
@@ -45,7 +50,9 @@
                     Question {questionIndex + 1}
                 </Text>
             {/if}
-            <Text fontWeight={FontWeight.bold} overrideColor classes="text-gray-900">{question.text}</Text>
+            <Text fontWeight={FontWeight.bold} overrideColor classes="text-gray-900 dark:text-white">
+                {question.text}
+            </Text>
         </div>
         <div class="transform {isOpened ? 'rotate-180' : 'rotate-0'}">
             <Icon icon={IconEnum.ChevronDown} classes="text-gray-500" />
@@ -58,6 +65,7 @@
                 {answerIndex}
                 {votedAnswerValue}
                 {selectedAnswerValue}
+                {disabled}
                 hidden={!isOpened}
                 percentage={percentages[answerIndex]}
                 on:click={handleAnswerClick(answer?.value)}

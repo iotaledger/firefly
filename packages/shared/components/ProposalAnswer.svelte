@@ -1,15 +1,17 @@
 <script lang="typescript">
+    import type { Answer } from '@iota/wallet'
     import { createEventDispatcher } from 'svelte'
     import { Text, FontWeight, TooltipIcon } from 'shared/components'
     import { Position } from 'shared/components/enums'
-    import type { Answer } from '@iota/wallet'
-    import { Icon as IconEnum } from '@auxiliary/icon'
+    import { appSettings } from '@core/app/stores'
+    import { Icon } from '@auxiliary/icon'
 
     export let answer: Answer
+    export let answerIndex: number = undefined
+    export let disabled = false
     export let hidden: boolean = null
     export let votedAnswerValue: number = undefined
     export let selectedAnswerValue: number = undefined
-    export let answerIndex: number = undefined
     export let percentage: string = ''
 
     let isSelected: boolean
@@ -17,11 +19,14 @@
 
     $: selectedAnswerValue, votedAnswerValue, setIsSelected()
     $: votedAnswerValue, setIsVotedFor()
+    $: dark = $appSettings.darkMode
 
     const dispatch = createEventDispatcher()
 
     function handleClick(): void {
-        dispatch('click')
+        if (!disabled) {
+            dispatch('answerClicked', answer?.value)
+        }
     }
 
     function setIsSelected(): void {
@@ -43,8 +48,10 @@
     style:--percentage={percentage}
     class:hidden={isVotedFor ? false : hidden}
     class:is-voted-for={isVotedFor}
-    class="flex justify-between items-center p-3 rounded-md border border-solid relative
-        {isSelected ? 'border-blue-500' : 'border-gray-200'}
+    class:dark
+    class="flex justify-between items-center p-3 rounded-md border border-solid relative dark:bg-gray-900
+        {isSelected ? 'border-blue-500' : 'border-gray-200 dark:border-transparent'}
+        {disabled ? 'cursor-default' : 'cursor-pointer'}
     "
     on:click={handleClick}
 >
@@ -58,7 +65,7 @@
                 <span
                     class="flex items-center justify-center h-5 w-5 text-12 {isSelected
                         ? 'bg-blue-500 text-white'
-                        : 'bg-white text-gray-500'} text-700 border border-solid border-gray-200"
+                        : 'bg-white dark:bg-gray-900 text-gray-500'} text-700 border border-solid border-gray-200 dark:border-gray-800"
                 >
                     {answerIndex + 1}
                 </span>
@@ -66,23 +73,28 @@
         {/if}
         <Text fontWeight={FontWeight.medium}>{answer.text}</Text>
     </div>
-    <div class="flex items-center space-x-1">
+    <div class="flex items-center space-x-1.5">
         {#if percentage}
             <div>
-                <Text smaller fontWeight={FontWeight.medium} classes="ml-auto text-gray-700" overrideColor
-                    >{percentage}</Text
+                <Text
+                    smaller
+                    fontWeight={FontWeight.medium}
+                    classes="ml-auto text-gray-700 dark:text-gray-500"
+                    overrideColor
                 >
+                    {percentage}
+                </Text>
             </div>
         {/if}
         <div class="flex justify-center items-center w-3 h-3">
             {#if answer.additionalInfo}
                 <TooltipIcon
-                    icon={IconEnum.Info}
-                    iconClasses="text-gray-600 dark:text-gray-200"
+                    icon={Icon.Info}
+                    iconClasses="text-gray-600 dark:text-gray-500"
                     text={answer.additionalInfo}
                     position={Position.Left}
-                    width={10}
-                    height={10}
+                    width={13}
+                    height={13}
                 />
             {/if}
         </div>
@@ -111,6 +123,10 @@
 
         &.is-voted-for::after {
             @apply bg-blue-100;
+        }
+
+        &.dark::after {
+            @apply bg-gray-1000;
         }
     }
 

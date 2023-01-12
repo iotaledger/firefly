@@ -6,6 +6,7 @@
         Button,
         FontWeight,
         Icon,
+        KeyValueBox,
         Pane,
         ProposalDetailsButton,
         ProposalInformation,
@@ -15,21 +16,32 @@
         TextType,
     } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { openPopup } from '@auxiliary/popup'
+    import { openPopup } from '@auxiliary/popup/actions'
     import { activeProfileId } from '@core/profile/stores'
     import { networkStatus } from '@core/network/stores'
-    import { getVotingEvent } from '@core/profile-manager'
-    import { governanceRouter } from '@core/router'
-    import { getParticipationOverview, selectedAccount } from '@core/account'
+    import { getVotingEvent } from '@core/profile-manager/api'
+    import { governanceRouter } from '@core/router/routers'
+    import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
     import { ProposalStatus } from '@contexts/governance/enums'
-    import { proposalsState, selectedProposal } from '@contexts/governance/stores'
+    import {
+        participationOverview,
+        proposalsState,
+        selectedProposal,
+        updateParticipationOverview,
+    } from '@contexts/governance/stores'
 
     let selectedAnswerValues: number[] = []
     let votedAnswerValues: number[] = []
     let votingPayload: VotingEventPayload
     let totalVotes = 0
+    let hasMounted = false
 
+    $: $selectedAccountIndex, void updateParticipationOverview()
     $: proposalState = $proposalsState[$activeProfileId]?.[$selectedProposal?.id]?.state
+
+    // Reactively start updating votes once component has mounted and participation overview is available.
+    $: hasMounted && $participationOverview && setCurrentAndTotalVotes()
+
     $: votesCounter = {
         total: totalVotes,
         power: $selectedAccount?.votingPower,
@@ -47,6 +59,8 @@
 
     $: isTransferring = $selectedAccount?.isTransferring
 
+    $: proposalState, setCurrentAndTotalVotes()
+
     async function setVotingEventPayload(eventId: string): Promise<void> {
         const event = await getVotingEvent(eventId)
         if (event?.data?.payload?.type === ParticipationEventType.Voting) {
@@ -56,9 +70,9 @@
         }
     }
 
-    async function setCurrentAndTotalVotes(): Promise<void> {
-        const { participations } = (await getParticipationOverview($selectedAccount?.index)) ?? {}
-        const trackedParticipations = Object.values(participations[$selectedProposal?.id] ?? {})
+    function setCurrentAndTotalVotes(): void {
+        const selectedProposalOverview = $participationOverview?.participations?.[$selectedProposal?.id]
+        const trackedParticipations = Object.values(selectedProposalOverview)
 
         const votes = trackedParticipations.map(({ amount, startMilestoneIndex, endMilestoneIndex }) => {
             const endMilestone = endMilestoneIndex <= 0 ? $networkStatus?.currentMilestone : endMilestoneIndex
@@ -87,7 +101,7 @@
         })
     }
 
-    function handleAnswerClick(event: CustomEvent) {
+    function handleAnswerClick(event: CustomEvent): void {
         const { answerValue, questionIndex } = event.detail
         if (selectedAnswerValues[questionIndex] === answerValue) {
             selectedAnswerValues[questionIndex] = null
@@ -98,7 +112,8 @@
 
     onMount(async () => {
         await setVotingEventPayload($selectedProposal?.id)
-        await setCurrentAndTotalVotes()
+        await updateParticipationOverview()
+        hasMounted = true
     })
 </script>
 
@@ -125,13 +140,11 @@
             </Text>
             <ul class="space-y-2">
                 {#each Object.keys(votesCounter) as counterKey}
-                    <li class="flex justify-between bg-gray-50 px-4 py-3 rounded-lg">
-                        <Text fontWeight={FontWeight.medium} overrideColor classes="text-gray-600">
-                            {localize(`views.governance.details.yourVote.${counterKey}`)}
-                        </Text>
-                        <Text overrideColor classes="text-gray-600">
-                            {votesCounter[counterKey]}
-                        </Text>
+                    <li>
+                        <KeyValueBox
+                            keyText={localize(`views.governance.details.yourVote.${counterKey}`)}
+                            valueText={votesCounter[counterKey]}
+                        />
                     </li>
                 {/each}
             </ul>
