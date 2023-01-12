@@ -4,7 +4,7 @@
     import { localize } from '@core/i18n'
     import { activeProfileId } from '@core/profile'
     import { IProposalsDetails } from '@contexts/governance/interfaces'
-    import { proposalsState } from '@contexts/governance/stores'
+    import { participationOverview, proposalsState } from '@contexts/governance/stores'
     import {
         getNumberOfActiveProposals,
         getNumberOfVotingProposals,
@@ -17,14 +17,14 @@
         votedProposals: null,
     }
 
-    $: $proposalsState, void updateProposalsDetails()
+    $: $proposalsState, $participationOverview, updateProposalsDetails()
 
-    async function updateProposalsDetails(): Promise<void> {
+    function updateProposalsDetails(): void {
         if ($activeProfileId) {
             details = {
                 activeProposals: getNumberOfActiveProposals(),
-                votingProposals: await getNumberOfVotingProposals(),
-                votedProposals: await getTotalNumberOfProposals(),
+                votingProposals: getNumberOfVotingProposals(),
+                votedProposals: getTotalNumberOfProposals(),
             }
         }
     }
@@ -42,7 +42,7 @@
             <li>
                 <KeyValueBox
                     keyText={localize(`views.governance.proposalsDetails.${detailKey}`)}
-                    valueText={details[detailKey] ?? '-'}
+                    valueText={details[detailKey].toString() ?? '-'}
                 />
             </li>
         {/each}
