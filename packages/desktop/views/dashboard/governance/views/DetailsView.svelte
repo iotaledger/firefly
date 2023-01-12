@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Participations, VotingEventPayload, ParticipationEventType } from '@iota/wallet/out/types'
+    import { VotingEventPayload, ParticipationEventType } from '@iota/wallet/out/types'
     import { localize } from '@core/i18n'
     import {
         Button,
@@ -16,20 +16,30 @@
         TextType,
     } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { openPopup } from '@auxiliary/popup'
+    import { openPopup } from '@auxiliary/popup/actions'
     import { activeProfileId } from '@core/profile/stores'
     import { networkStatus } from '@core/network/stores'
-    import { getVotingEvent } from '@core/profile-manager'
-    import { governanceRouter } from '@core/router'
-    import { getParticipationOverview, selectedAccount } from '@core/account'
+    import { getVotingEvent } from '@core/profile-manager/api'
+    import { governanceRouter } from '@core/router/routers'
+    import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
     import { ProposalStatus } from '@contexts/governance/enums'
-    import { proposalsState, selectedProposal } from '@contexts/governance/stores'
+    import {
+        participationOverview,
+        proposalsState,
+        selectedProposal,
+        updateParticipationOverview,
+    } from '@contexts/governance/stores'
 
     let selectedAnswerValues: number[] = []
     let votingPayload: VotingEventPayload
     let totalVotes = 0
+    let hasMounted = false
 
     $: proposalState = $proposalsState[$activeProfileId]?.[$selectedProposal?.id]?.state
+
+    $: hasMounted && $participationOverview && setTotalVotes()
+    $: $selectedAccountIndex, void updateParticipationOverview()
+
     $: votesCounter = {
         total: totalVotes,
         power: $selectedAccount?.votingPower,
@@ -58,9 +68,8 @@
         }
     }
 
-    async function setTotalVotes(): Promise<void> {
-        const participations: Participations = (await getParticipationOverview($selectedAccount?.index))?.participations
-        const selectedProposalOverview = participations[$selectedProposal?.id]
+    function setTotalVotes(): void {
+        const selectedProposalOverview = $participationOverview?.participations?.[$selectedProposal?.id]
 
         if (selectedProposalOverview) {
             const votes = Object.values(selectedProposalOverview).map(
@@ -92,9 +101,10 @@
         })
     }
 
-    onMount(() => {
-        void setVotingEventPayload($selectedProposal?.id)
-        void setTotalVotes()
+    onMount(async () => {
+        await setVotingEventPayload($selectedProposal?.id)
+        await updateParticipationOverview()
+        hasMounted = true
     })
 </script>
 
