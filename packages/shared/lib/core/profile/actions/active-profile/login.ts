@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 
-import { pollProposalsState, registerProposalsFromPrimaryNode } from '@contexts/governance/actions'
+import { pollGovernanceData, registerProposalsFromPrimaryNode } from '@contexts/governance/actions'
 import { cleanupOnboarding } from '@contexts/onboarding/actions'
 
 import { AppContext } from '@core/app/enums'
@@ -133,7 +133,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 resetLoginProgress()
             }, 500)
             void pollMarketPrices()
-            void pollProposalsState()
+            void pollGovernanceData()
 
             void registerProposalsFromPrimaryNode()
 

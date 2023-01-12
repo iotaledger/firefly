@@ -7,6 +7,8 @@
 
     export let onSubmit: (auth: Auth) => unknown = () => {}
 
+    let isBusy = false
+
     let username: string
     let password: string
     let jwt: string
@@ -15,13 +17,16 @@
     let passwordError: string
     let jwtError: string
 
-    $: disabled = !username && !password && !jwt
+    $: disabled = (!username && !password && !jwt) || isBusy
 
     async function handleSubmit(): Promise<void> {
         try {
+            isBusy = true
             const auth = { username, password, jwt }
             await onSubmit(auth)
+            isBusy = false
         } catch (err) {
+            isBusy = false
             const authenticationError = err?.error?.match(/(username)|(password)|(jwt)/g)?.[0]
             switch (authenticationError) {
                 case 'username':
@@ -66,7 +71,7 @@
     </div>
     <div class="flex w-full space-x-4 mt-6">
         <Button outline classes="w-full" onClick={closePopup}>{localize('actions.cancel')}</Button>
-        <Button {disabled} type={HTMLButtonType.Submit} classes="w-full">
+        <Button {disabled} {isBusy} type={HTMLButtonType.Submit} classes="w-full">
             {localize('actions.confirm')}
         </Button>
     </div>
