@@ -1,22 +1,14 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Pane, Proposals, ProposalsDetails, VotingPower } from '@ui'
-    import type { IProposal } from '@contexts/governance/interfaces'
+    import { Pane, Proposals, ProposalsDetails, VotingPower, Spinner } from '@ui'
+    import { registeredEventIds, updateParticipationOverview } from '@contexts/governance/stores'
     import { createProposals } from '@contexts/governance/utils'
-    import { registeredEventIds } from '@contexts/governance/stores'
 
-    let proposals: IProposal[]
-    let loaded = false
+    let promise = createProposals()
+    $: $registeredEventIds, (promise = createProposals())
 
-    $: $registeredEventIds, void setProposals()
-
-    async function setProposals(): Promise<void> {
-        proposals = await createProposals()
-    }
-
-    onMount(async () => {
-        await setProposals()
-        loaded = true
+    onMount(() => {
+        void updateParticipationOverview()
     })
 </script>
 
@@ -31,8 +23,10 @@
     </div>
     <span class="block w-0.5 h-full bg-gray-200 dark:bg-gray-800" />
     <div class="w-2/3">
-        {#if loaded}
+        {#await promise}
+            <Spinner busy classes="w-full h-full items-center justify-center opacity-25 h-20" width={80} height={80} />
+        {:then proposals}
             <Proposals {proposals} />
-        {/if}
+        {/await}
     </div>
 </div>
