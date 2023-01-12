@@ -3,7 +3,7 @@ import { ActivityAction, IProcessedTransaction, OUTPUT_TYPE_FOUNDRY } from '@cor
 import { Activity } from '@core/wallet/types'
 import { generateSingleFoundryActivity } from './generateSingleFoundryActivity'
 
-export function generateFoundryActivitiesFromTransaction(
+export function generateActivitiesFromFoundryOutputs(
     processedTransaction: IProcessedTransaction,
     account: IAccountState
 ): Activity[] {
