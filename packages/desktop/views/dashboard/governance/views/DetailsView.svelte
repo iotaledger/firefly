@@ -6,6 +6,7 @@
         Button,
         FontWeight,
         Icon,
+        KeyValueBox,
         Pane,
         ProposalDetailsButton,
         ProposalInformation,
@@ -45,6 +46,8 @@
         selectedAnswerValues?.includes(undefined)
 
     $: isTransferring = $selectedAccount?.isTransferring
+
+    $: proposalState, void setTotalVotes()
 
     async function setVotingEventPayload(eventId: string): Promise<void> {
         const event = await getVotingEvent(eventId)
@@ -118,13 +121,11 @@
             </Text>
             <ul class="space-y-2">
                 {#each Object.keys(votesCounter) as counterKey}
-                    <li class="flex justify-between bg-gray-50 px-4 py-3 rounded-lg">
-                        <Text fontWeight={FontWeight.medium} overrideColor classes="text-gray-600">
-                            {localize(`views.governance.details.yourVote.${counterKey}`)}
-                        </Text>
-                        <Text overrideColor classes="text-gray-600">
-                            {votesCounter[counterKey]}
-                        </Text>
+                    <li>
+                        <KeyValueBox
+                            keyText={localize(`views.governance.details.yourVote.${counterKey}`)}
+                            valueText={votesCounter[counterKey]}
+                        />
                     </li>
                 {/each}
             </ul>
