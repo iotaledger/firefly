@@ -42,7 +42,7 @@
             <li>
                 <KeyValueBox
                     keyText={localize(`views.governance.proposalsDetails.${detailKey}`)}
-                    valueText={details[detailKey] ?? '-'}
+                    valueText={details[detailKey].toString() ?? '-'}
                 />
             </li>
         {/each}
