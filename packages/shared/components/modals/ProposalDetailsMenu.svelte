@@ -28,15 +28,15 @@
         modal.close()
     }
 
-    async function onMountHelper(): Promise<void> {
+    function onMountHelper(): void {
         try {
-            isVotingForProposal = await isVotingForSelectedProposal()
+            isVotingForProposal = isVotingForSelectedProposal()
         } catch (err) {
             handleError(err)
         }
     }
 
-    onMount(() => void onMountHelper())
+    onMount(() => onMountHelper())
 </script>
 
 <Modal bind:this={modal} {...$$restProps}>

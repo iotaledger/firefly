@@ -1,3 +1,4 @@
+export * from './calculateWeightedVotes'
 export * from './createProposalsFromEvents'
 export * from './getNumberOfActiveProposals'
 export * from './getNumberOfVotingProposals'

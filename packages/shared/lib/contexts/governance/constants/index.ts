@@ -1,3 +1,4 @@
+export * from './abstain-vote-value.constant'
 export * from './default-participation-overview.constant'
 export * from './participate-tag-hex.constant'
 export * from './proposal-id-regex.constant'
