@@ -114,7 +114,7 @@
     </div>
     {#if containsSlider}
         <div class="flex flex-col mt-5">
-            <SliderInput bind:value={amount} {max} decimals={asset.metadata.decimals} />
+            <SliderInput bind:value={amount} {max} decimals={asset.metadata.decimals} {disabled} />
             <div class="flex flex-row justify-between">
                 <Text color="gray-800" darkColor="gray-500" fontSize="xs"
                     >{formatTokenAmountBestMatch(0, asset?.metadata)}</Text

@@ -3,19 +3,20 @@ import type {
     ClientOptions,
     Event,
     EventId,
+    EventStatus,
     EventType,
     GenerateAddressOptions,
     LedgerNanoStatus,
     Node,
     NodeInfoWrapper,
+    ParticipationEventType,
     WalletEvent,
-    EventStatus,
 } from '@iota/wallet'
 
-import { IAuth } from '@core/network'
+import { IAccount } from '@core/account/interfaces'
+import { IAuth } from '@core/network/interfaces'
 
 import { WalletApiEventHandler } from '../types'
-import { IAccount } from '@core/account'
 
 export interface IProfileManager {
     id: string
@@ -40,6 +41,7 @@ export interface IProfileManager {
     getNodeInfo(url?: string, auth?: IAuth): Promise<NodeInfoWrapper>
     getLedgerNanoStatus(): Promise<LedgerNanoStatus>
     getParticipationEvent(eventId: EventId): Promise<Event>
+    getParticipationEventIds(eventType?: ParticipationEventType): Promise<EventId[]>
     getParticipationEvents(): Promise<Event[]>
     getParticipationEventStatus(eventId: EventId): Promise<EventStatus>
     hexToBech32(hex: string, bech32Hrp?: string): Promise<string>
