@@ -1,9 +1,10 @@
 <script lang="typescript">
-    import { networkStatus } from '@core/network'
-    import { selectedProposal } from '@contexts/governance/stores'
+    import { Text, Pane, KeyValueBox } from 'shared/components'
     import { formatDate, localize } from '@core/i18n'
+    import { networkStatus } from '@core/network'
+    import { activeProfileId } from '@core/profile'
     import { DATE_FORMAT, milestoneToDate, truncateString } from '@core/utils'
-    import { Text, Pane, FontWeight } from 'shared/components'
+    import { proposalsState, selectedProposal } from '@contexts/governance/stores'
 
     const proposalInformation = {
         countingEnds: formatDate(
@@ -11,7 +12,7 @@
             DATE_FORMAT
         ),
         eventId: truncateString($selectedProposal?.id, 9, 9),
-        nodeUrl: $selectedProposal.nodeUrls[0].url,
+        nodeUrl: $proposalsState[$activeProfileId]?.[$selectedProposal?.id].nodeUrl,
     }
 </script>
 
@@ -21,13 +22,11 @@
     </Text>
     <ul class="space-y-2">
         {#each Object.keys(proposalInformation) as counterKey}
-            <li class="flex justify-between bg-gray-50 px-4 py-3 rounded-lg">
-                <Text fontWeight={FontWeight.medium} overrideColor classes="text-gray-600">
-                    {localize(`views.governance.details.proposalInformation.${counterKey}`)}
-                </Text>
-                <Text overrideColor classes="text-gray-600">
-                    {proposalInformation[counterKey]}
-                </Text>
+            <li>
+                <KeyValueBox
+                    keyText={localize(`views.governance.details.proposalInformation.${counterKey}`)}
+                    valueText={proposalInformation[counterKey]}
+                />
             </li>
         {/each}
     </ul>

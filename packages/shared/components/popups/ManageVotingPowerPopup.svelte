@@ -1,6 +1,6 @@
 <script lang="typescript">
-    import { TextType } from 'shared/components/enums'
     import { Button, Text, TextHint, AssetAmountInput } from 'shared/components'
+    import { HTMLButtonType, TextType } from 'shared/components/enums'
     import { selectedAccount } from '@core/account'
     import { handleError } from '@core/error/handlers/handleError'
     import { setVotingPower } from '@contexts/governance/actions'
@@ -14,13 +14,14 @@
     let assetAmountInput: AssetAmountInput
     let rawAmount = $selectedAccount?.votingPower
 
+    $: votingPower = parseInt($selectedAccount?.votingPower, 10)
     $: isTransferring = $selectedAccount?.isTransferring
 
-    function handleBack(): void {
+    function onCancelClick(): void {
         closePopup()
     }
 
-    async function handleConfirm(): Promise<void> {
+    async function onSubmit(): Promise<void> {
         try {
             await assetAmountInput?.validate()
             await checkActiveProfileAuth(async () => {
@@ -34,22 +35,27 @@
     }
 </script>
 
-<Text type={TextType.h4} classes="mb-3">{localize('popups.manageVotingPower.title')}</Text>
-<Text type={TextType.p} secondary classes="mb-5">{localize('popups.manageVotingPower.body')}</Text>
-<div class="space-y-4 mb-6">
-    <AssetAmountInput bind:this={assetAmountInput} bind:rawAmount {asset} containsSlider disableAssetSelection />
-    <TextHint info text={localize('popups.manageVotingPower.hint')} />
-</div>
-<div class="flex flex-row flex-nowrap w-full space-x-4">
-    <Button outline classes="w-full" disabled={isTransferring} onClick={handleBack}>
-        {localize('actions.back')}
-    </Button>
-    <Button
-        classes="w-full"
-        disabled={$selectedAccount.isTransferring}
-        onClick={handleConfirm}
-        isBusy={$selectedAccount.isTransferring}
-    >
-        {localize('actions.confirm')}
-    </Button>
-</div>
+<form id="manage-voting-power" on:submit|preventDefault={onSubmit}>
+    <Text type={TextType.h4} classes="mb-3">{localize('popups.manageVotingPower.title')}</Text>
+    <Text type={TextType.p} secondary classes="mb-5">{localize('popups.manageVotingPower.body')}</Text>
+    <div class="space-y-4 mb-6">
+        <AssetAmountInput
+            bind:this={assetAmountInput}
+            bind:rawAmount
+            {asset}
+            containsSlider
+            disableAssetSelection
+            disabled={isTransferring}
+            {votingPower}
+        />
+        <TextHint info text={localize('popups.manageVotingPower.hint')} />
+    </div>
+    <div class="flex flex-row flex-nowrap w-full space-x-4">
+        <Button outline classes="w-full" disabled={isTransferring} onClick={onCancelClick}>
+            {localize('actions.cancel')}
+        </Button>
+        <Button type={HTMLButtonType.Submit} disabled={isTransferring} isBusy={isTransferring} classes="w-full">
+            {localize('actions.confirm')}
+        </Button>
+    </div>
+</form>

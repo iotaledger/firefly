@@ -18,6 +18,7 @@ import type {
 import { IAccount } from '@core/account'
 import { IAuth, INodeInfoResponse } from '@core/network'
 import { IProfileManager } from '@core/profile-manager'
+import { ParticipationEventType } from '@iota/wallet/out/types'
 
 export const MOCK_MNEMONIC =
     'term aisle loyal cradle talent buddy crater express asthma load antique game better head position master aspect print more wine sword speed joy story'
@@ -154,6 +155,10 @@ export class ProfileManagerMock implements IProfileManager {
     }
 
     getParticipationEvent(eventId: EventId): Promise<Event> {
+        throw new Error('Method not implemented.')
+    }
+
+    getParticipationEventIds(eventType?: ParticipationEventType): Promise<EventId[]> {
         throw new Error('Method not implemented.')
     }
 

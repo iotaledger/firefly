@@ -9,7 +9,7 @@
     const asset = $visibleSelectedAccountAssets?.baseCoin
 
     $: votingPower = parseInt($selectedAccount?.votingPower, 10)
-    $: maxVotingPower = parseInt($selectedAccount?.balances?.baseCoin?.available)
+    $: maxVotingPower = parseInt($selectedAccount?.balances?.baseCoin?.available) + votingPower
     $: formattedVotingPower = formatTokenAmountBestMatch(votingPower, asset?.metadata)
     $: formattedMaxVotingPower = formatTokenAmountBestMatch(maxVotingPower, asset?.metadata)
 
@@ -25,7 +25,7 @@
         {localize('views.governance.votingPower.title')}
     </Text>
     <Text type={TextType.h1}>{formattedVotingPower}</Text>
-    <Text fontWeight={FontWeight.medium} overrideColor classes="mb-4 text-gray-600">
+    <Text fontWeight={FontWeight.medium} overrideColor classes="mb-4 text-gray-600 dark:text-white">
         {localize('views.governance.votingPower.maximal', { values: { value: formattedMaxVotingPower } })}
     </Text>
     <Button

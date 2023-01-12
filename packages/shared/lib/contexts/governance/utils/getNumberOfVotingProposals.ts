@@ -1,11 +1,11 @@
 import { get } from 'svelte/store'
 
-import { getParticipationOverview } from '@core/account/api'
-import { selectedAccount } from '@core/account/stores'
+import { participationOverview } from '../stores'
 
 import { isVotingForProposal } from './isVotingForProposal'
 
-export async function getNumberOfVotingProposals(): Promise<number> {
-    const overview = await getParticipationOverview(get(selectedAccount)?.index)
-    return Object.keys(overview?.participations).filter((proposalId) => isVotingForProposal(proposalId)).length
+export function getNumberOfVotingProposals(): number {
+    const { participations } = get(participationOverview)
+    const votingProposals = Object.keys(participations).filter((proposalId) => isVotingForProposal(proposalId))
+    return votingProposals.length
 }

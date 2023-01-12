@@ -7,6 +7,7 @@ import {
     appSetupRouter,
     dashboardRouter,
     loginRouter,
+    networkConfigurationSettingsRouter,
     networkSetupRouter,
     onboardingRouter,
     profileBackupRouter,
@@ -34,6 +35,7 @@ function resetBaseRouters(): void {
 function resetSubrouters(): void {
     resetOnboardingSubrouters()
     resetDashboardSubrouters()
+    resetSettingsSubrouters()
 }
 
 function resetOnboardingSubrouters(): void {
@@ -51,8 +53,11 @@ function resetDashboardSubrouters(): void {
     get(accountSwitcherRouter).reset()
     get(activityRouter).reset()
     get(sendRouter).reset()
-    get(settingsRouter).reset()
     get(tokenRouter).reset()
     get(profileRouter).reset()
     get(settingsRouter).reset()
+}
+
+function resetSettingsSubrouters(): void {
+    get(networkConfigurationSettingsRouter).reset()
 }

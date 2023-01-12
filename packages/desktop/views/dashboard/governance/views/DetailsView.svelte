@@ -6,6 +6,7 @@
         Button,
         FontWeight,
         Icon,
+        KeyValueBox,
         Pane,
         ProposalDetailsButton,
         ProposalInformation,
@@ -15,21 +16,30 @@
         TextType,
     } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { openPopup } from '@auxiliary/popup'
+    import { openPopup } from '@auxiliary/popup/actions'
     import { activeProfileId } from '@core/profile/stores'
     import { networkStatus } from '@core/network/stores'
-    import { getVotingEvent } from '@core/profile-manager'
-    import { governanceRouter } from '@core/router'
-    import { getParticipationOverview, selectedAccount } from '@core/account'
-    import type { IParticipations } from '@contexts/governance/interfaces'
+    import { getVotingEvent } from '@core/profile-manager/api'
+    import { governanceRouter } from '@core/router/routers'
+    import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
     import { ProposalStatus } from '@contexts/governance/enums'
-    import { proposalsState, selectedProposal } from '@contexts/governance/stores'
+    import {
+        participationOverview,
+        proposalsState,
+        selectedProposal,
+        updateParticipationOverview,
+    } from '@contexts/governance/stores'
 
     let selectedAnswerValues: number[] = []
     let votingPayload: VotingEventPayload
     let totalVotes = 0
+    let hasMounted = false
 
-    $: proposalState = $proposalsState[$activeProfileId]?.[$selectedProposal?.id]
+    $: proposalState = $proposalsState[$activeProfileId]?.[$selectedProposal?.id]?.state
+
+    $: hasMounted && $participationOverview && setTotalVotes()
+    $: $selectedAccountIndex, void updateParticipationOverview()
+
     $: votesCounter = {
         total: totalVotes,
         power: $selectedAccount?.votingPower,
@@ -47,6 +57,8 @@
 
     $: isTransferring = $selectedAccount?.isTransferring
 
+    $: proposalState, void setTotalVotes()
+
     async function setVotingEventPayload(eventId: string): Promise<void> {
         const event = await getVotingEvent(eventId)
         if (event?.data?.payload?.type === ParticipationEventType.Voting) {
@@ -56,10 +68,8 @@
         }
     }
 
-    async function setTotalVotes(): Promise<void> {
-        const participations: IParticipations = (await getParticipationOverview($selectedAccount?.index))
-            ?.participations
-        const selectedProposalOverview = participations[$selectedProposal?.id]
+    function setTotalVotes(): void {
+        const selectedProposalOverview = $participationOverview?.participations?.[$selectedProposal?.id]
 
         if (selectedProposalOverview) {
             const votes = Object.values(selectedProposalOverview).map(
@@ -91,9 +101,10 @@
         })
     }
 
-    onMount(() => {
-        void setVotingEventPayload($selectedProposal?.id)
-        void setTotalVotes()
+    onMount(async () => {
+        await setVotingEventPayload($selectedProposal?.id)
+        await updateParticipationOverview()
+        hasMounted = true
     })
 </script>
 
@@ -120,13 +131,11 @@
             </Text>
             <ul class="space-y-2">
                 {#each Object.keys(votesCounter) as counterKey}
-                    <li class="flex justify-between bg-gray-50 px-4 py-3 rounded-lg">
-                        <Text fontWeight={FontWeight.medium} overrideColor classes="text-gray-600">
-                            {localize(`views.governance.details.yourVote.${counterKey}`)}
-                        </Text>
-                        <Text overrideColor classes="text-gray-600">
-                            {votesCounter[counterKey]}
-                        </Text>
+                    <li>
+                        <KeyValueBox
+                            keyText={localize(`views.governance.details.yourVote.${counterKey}`)}
+                            valueText={votesCounter[counterKey]}
+                        />
                     </li>
                 {/each}
             </ul>
@@ -136,14 +145,14 @@
     <Pane classes="w-3/5 h-full p-6 flex flex-col justify-between ">
         <proposal-questions class="flex flex-1 flex-col space-y-5 overflow-y-scroll">
             {#if questions}
-                {#each questions as question, index}
+                {#each questions as question, questionIndex}
                     <ProposalQuestion
                         {question}
-                        isOpened={openedQuestionIndex === index}
-                        {index}
+                        {questionIndex}
+                        isOpened={openedQuestionIndex === questionIndex}
                         bind:selectedAnswerValues
-                        currentVote={proposalState?.questions[index]?.answers}
-                        onClick={() => handleQuestionClick(index)}
+                        currentVote={proposalState?.questions[questionIndex]?.answers}
+                        onClick={() => handleQuestionClick(questionIndex)}
                     />
                 {/each}
             {/if}

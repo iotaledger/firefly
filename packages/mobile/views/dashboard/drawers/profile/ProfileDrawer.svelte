@@ -2,8 +2,12 @@
     import { appSettings } from '@core/app'
     import { localize } from '@core/i18n'
     import { Drawer } from '../../../../components'
-    import { SETTINGS_ROUTE_META } from '../../../../lib/contexts/dashboard'
+    import { SETTINGS_ROUTE_META } from '../../../../lib/contexts/settings'
     import {
+        networkConfigurationSettingsRoute,
+        NetworkConfigurationSettingsRoute,
+        networkConfigurationSettingsRouter,
+        NetworkConfigurationSettingsRouter,
         ProfileRoute,
         profileRoute,
         ProfileRouter,
@@ -19,14 +23,21 @@
 
     let title: string
     let allowBack: boolean
-    let activeRouter: ProfileRouter | SettingsRouter = $profileRouter
+    let activeRouter: ProfileRouter | SettingsRouter | NetworkConfigurationSettingsRouter = $profileRouter
 
-    $: $profileRoute, $settingsRoute, (setTitle(), setAllowBack(), setActiveRouter())
+    $: $profileRoute,
+        $settingsRoute,
+        $networkConfigurationSettingsRoute,
+        (setTitle(), setAllowBack(), setActiveRouter())
     $: $appSettings.language, setTitle()
 
     function setActiveRouter(): void {
         if ($profileRoute === ProfileRoute.Settings) {
-            activeRouter = $settingsRouter
+            if ($settingsRoute === SettingsRoute.NetworkConfiguration) {
+                activeRouter = $networkConfigurationSettingsRouter
+            } else {
+                activeRouter = $settingsRouter
+            }
         } else {
             activeRouter = $profileRouter
         }
@@ -35,11 +46,36 @@
         if ($profileRoute === ProfileRoute.Settings) {
             if ($settingsRoute === SettingsRoute.Init) {
                 title = localize('views.settings.settings')
+            } else if (
+                $settingsRoute === SettingsRoute.NetworkConfiguration &&
+                $networkConfigurationSettingsRoute !== NetworkConfigurationSettingsRoute.Init
+            ) {
+                switch ($networkConfigurationSettingsRoute) {
+                    case NetworkConfigurationSettingsRoute.NodeDetails:
+                        title = localize('popups.node.titleDetails')
+                        break
+                    case NetworkConfigurationSettingsRoute.AddNode:
+                        title = localize('popups.node.titleAdd')
+                        break
+                    case NetworkConfigurationSettingsRoute.EditNode:
+                        title = localize('popups.node.titleUpdate')
+                        break
+                    case NetworkConfigurationSettingsRoute.DeleteNodeConfirmation:
+                        title = localize('popups.node.titleRemove')
+                        break
+                    case NetworkConfigurationSettingsRoute.ExcludeNodeConfirmation:
+                        title = localize('popups.excludeNode.title')
+                        break
+                }
             } else {
                 title = localize(SETTINGS_ROUTE_META[$settingsRoute].name)
             }
         } else {
-            title = localize('views.settings.profile.title')
+            if ($profileRoute === ProfileRoute.NetworkStatus) {
+                title = localize('views.settings.networkStatus.title')
+            } else {
+                title = localize('views.settings.profile.title')
+            }
         }
     }
     function setAllowBack(): void {

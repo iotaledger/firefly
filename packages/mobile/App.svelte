@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { localeDirection, setupI18n } from '@core/i18n'
-    import { activeAccounts, checkAndMigrateProfiles, cleanupEmptyProfiles, loadPersistedProfileIntoActiveProfile } from '@core/profile'
+    import { localeDirection, setupI18n, _ } from '@core/i18n'
+    import { checkAndMigrateProfiles, cleanupEmptyProfiles } from '@core/profile'
     import { initialiseRouterManager, RouterManagerExtensionName } from '@core/router'
     import {
         appSettings,
@@ -52,7 +52,7 @@
         initAppSettings.set($appSettings)
 
         // pollMarketData()
-        
+
         initialiseRouterManager({
             extensions: [
                 [RouterManagerExtensionName.GetAppRouter, getAppRouter],
@@ -94,7 +94,9 @@
     <OnboardingRouter />
 </Route>
 <Route route={AppRoute.Dashboard}>
-    <DashboardView />
+    {#key $_}
+        <DashboardView />
+    {/key}
 </Route>
 
 <ToastContainer />
