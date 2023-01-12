@@ -1,12 +1,15 @@
 import { IAccountState } from '@core/account'
+import { addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput } from '@core/nfts'
 import {
     ActivityAction,
     getNftId,
     getNonRemainderBasicOutputsFromTransaction,
     IProcessedTransaction,
+    IWrappedOutput,
     OUTPUT_TYPE_NFT,
 } from '@core/wallet'
 import { Activity } from '@core/wallet/types'
+import { INftOutput } from '@iota/types'
 import { generateSingleBasicActivity } from './generateSingleBasicActivity'
 import { generateSingleNftActivity } from './generateSingleNftActivity'
 
@@ -21,12 +24,16 @@ export function generateActivitiesFromBasicOutputs(
         account.depositAddress,
         processedTransaction.direction
     )
-    const burnedNftOutputs = getBurnedNfts(processedTransaction)
+    const burnedNftInputs = getBurnedNftInputs(processedTransaction)
     for (const basicOutput of basicOutputs) {
-        const burnedNftOutputIndex = burnedNftOutputs.findIndex((output) => output.amount === basicOutput.output.amount)
+        const burnedNftInputIndex = burnedNftInputs.findIndex(
+            (input) => input.output.amount === basicOutput.output.amount
+        )
 
         let activity: Activity
-        if (burnedNftOutputIndex >= 0) {
+        if (burnedNftInputIndex >= 0) {
+            const wrappedInput = burnedNftInputs[burnedNftInputIndex]
+            const nftInput = wrappedInput.output as INftOutput
             activity = generateSingleNftActivity(
                 account,
                 {
@@ -34,9 +41,12 @@ export function generateActivitiesFromBasicOutputs(
                     processedTransaction,
                     wrappedOutput: basicOutput,
                 },
-                burnedNftOutputs[burnedNftOutputIndex].nftId
+                getNftId(nftInput.nftId, wrappedInput.outputId)
             )
-            burnedNftOutputs.splice(burnedNftOutputIndex, 1)
+            const nft = buildNftFromNftOutput(nftInput, wrappedInput.outputId, false)
+            addOrUpdateNftInAllAccountNfts(account.index, nft)
+
+            burnedNftInputs.splice(burnedNftInputIndex, 1)
         } else {
             activity = generateSingleBasicActivity(account, {
                 action: ActivityAction.Send,
@@ -49,22 +59,23 @@ export function generateActivitiesFromBasicOutputs(
     return activities
 }
 
-function getBurnedNfts(processedTransaction: IProcessedTransaction): { nftId: string; amount: string }[] {
-    const burnedNftOutputs: { nftId: string; amount: string }[] = []
-    const nftIdsInOutputs = processedTransaction.outputs
-        .map((output) =>
-            output.output.type === OUTPUT_TYPE_NFT ? getNftId(output.output.nftId, output.outputId) : undefined
-        )
-        .filter((output) => output)
+function getBurnedNftInputs(processedTransaction: IProcessedTransaction): IWrappedOutput[] {
+    return processedTransaction.wrappedInputs.filter((wrappedInput) => {
+        const input = wrappedInput.output
+        if (input.type === OUTPUT_TYPE_NFT) {
+            const nftId = getNftId(input.nftId, wrappedInput.outputId)
 
-    for (const wrappedInput of processedTransaction.wrappedInputs) {
-        const output = wrappedInput.output
-        if (output.type === OUTPUT_TYPE_NFT) {
-            const nftId = getNftId(output.nftId, wrappedInput.outputId)
-            if (!nftIdsInOutputs.includes(nftId)) {
-                burnedNftOutputs.push({ nftId, amount: wrappedInput.output.amount })
-            }
+            const isIncludedInOutputs = processedTransaction.outputs.some((output) => {
+                if (output.output.type === OUTPUT_TYPE_NFT) {
+                    return getNftId(output.output.nftId, output.outputId) === nftId
+                } else {
+                    return false
+                }
+            })
+
+            return !isIncludedInOutputs
+        } else {
+            return false
         }
-    }
-    return burnedNftOutputs
+    })
 }
