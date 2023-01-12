@@ -4,6 +4,8 @@
     import { activeProfile } from '@core/profile'
     import { Pill, Text } from 'shared/components'
 
+    export let onNodeClick: (node: INode) => void
+
     $: clientOptions = $activeProfile?.clientOptions
 
     let nodesList: INode[] = []
@@ -15,8 +17,6 @@
     function isPrimary(node: INode): boolean {
         return node.url === clientOptions?.primaryNode?.url
     }
-
-    function handleViewNodeInfoClick(): void {}
 </script>
 
 <div
@@ -30,7 +30,7 @@
         {#each nodesList as node}
             <button
                 class="flex flex-row items-center justify-between py-4 px-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
-                on:click={handleViewNodeInfoClick}
+                on:click={() => onNodeClick(node)}
             >
                 <div class="flex flex-row items-center space-x-4 overflow-hidden">
                     <Text classes={'self-start overflow-hidden whitespace-nowrap overflow-ellipsis'}>
