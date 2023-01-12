@@ -23,9 +23,11 @@
                     },
                 }),
                 description: localize('actions.confirmNftBurn.description'),
+                inputCheckLabel: localize('general.nftName'),
+                inputCheckValidation: nft.name,
                 hint: localize('actions.confirmNftBurn.hint'),
                 warning: true,
-                confirmText: localize('actions.burnToken'),
+                confirmText: localize('actions.burnNft'),
                 onConfirm: () => {
                     checkActiveProfileAuth(
                         async () => {
