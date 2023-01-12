@@ -72,7 +72,7 @@
         {...$$restProps}
     >
         <div slot="right">
-            {#if selected?.key}
+            {#if selected?.key && selected?.value}
                 <Text slot="right" type={TextType.pre} fontSize="sm" color="gray-600" whitespace="pre">
                     {truncateString(selected.value, 9, 9)}
                 </Text>
@@ -93,7 +93,7 @@
                         on:click={() => handleClick(option)}
                         class="w-full flex flex-row flex-1 justify-between items-center px-2 py-3 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20"
                     >
-                        <div class="flex flex-row gap-3 justify-start items-center" style="max-width: 50%;">
+                        <div class="flex flex-row gap-3 justify-start items-center flex-1">
                             <slot {option} {index}>
                                 <!-- Contains Custom Selector -->
                             </slot>
@@ -104,12 +104,14 @@
                                 color="gray-800"
                                 classes="truncate"
                             >
-                                {option.key}
+                                {option.key ?? option.value}
                             </Text>
                         </div>
-                        <Text type={TextType.pre} fontSize="sm" color="gray-600">
-                            {truncateString(option.value, 9, 9)}
-                        </Text>
+                        {#if option.value && option.key}
+                            <Text type={TextType.pre} fontSize="sm" color="gray-600" classes="flex-1">
+                                {truncateString(option.value, 9, 9)}
+                            </Text>
+                        {/if}
                     </button>
                 {/each}
             </picker-modal>
