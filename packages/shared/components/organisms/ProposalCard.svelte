@@ -32,8 +32,8 @@
 
 <proposal-card
     on:click={handleProposalClick}
-    class="flex flex-col p-6 border border-solid border-gray-200 rounded-xl cursor-pointer h-32
-    {proposal.status === ProposalStatus.Ended ? 'bg-transparent' : 'bg-white'}"
+    class="flex flex-col p-6 border border-solid border-gray-200 dark:border-transparent rounded-xl cursor-pointer h-32
+    {proposal.status === ProposalStatus.Ended ? 'bg-transparent' : 'bg-white dark:bg-gray-850'}"
 >
     <div class="flex items-center gap-1.5 mb-5">
         {#if proposal.organization}

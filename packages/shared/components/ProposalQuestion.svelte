@@ -1,7 +1,8 @@
 <script lang="typescript">
-    import { Text, FontWeight, Icon, ProposalAnswer } from 'shared/components'
-    import { Icon as IconEnum } from '@auxiliary/icon'
     import type { AnswerStatus, Question } from '@iota/wallet'
+    import { Text, FontWeight, Icon, ProposalAnswer } from 'shared/components'
+    import { ProposalStatus, selectedProposal } from '@contexts/governance'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let currentVote: AnswerStatus[] = undefined
     export let questionIndex: number = undefined
@@ -16,6 +17,8 @@
     $: answers = [...question?.answers, { value: 0, text: 'Abstain', additionalInfo: '' }]
     $: showMargin = isOpened || ((voteValue || voteValue === 0) && !isOpened) // voteValue 0 corresponds to abstained vote
     $: currentVote, setPercentagesFromAccumulated()
+    $: disabled =
+        $selectedProposal.status === ProposalStatus.Upcoming || $selectedProposal.status === ProposalStatus.Ended
 
     function setPercentagesFromAccumulated(): void {
         const totalAccumulated = currentVote?.reduce((acc, answer) => acc + answer.accumulated, 0)
@@ -35,7 +38,9 @@
     }
 </script>
 
-<proposal-question class="flex flex-col px-5 py-4 rounded-xl border border-solid border-gray-200 cursor-pointer">
+<proposal-question
+    class="flex flex-col px-5 py-4 rounded-xl border border-solid border-gray-200 dark:border-transparent dark:bg-gray-850 cursor-pointer"
+>
     <div on:click={onClick} class="flex justify-between items-center">
         <div class="flex flex-col">
             {#if questionIndex !== undefined}
@@ -43,7 +48,9 @@
                     >Question {questionIndex + 1}</Text
                 >
             {/if}
-            <Text fontWeight={FontWeight.bold} overrideColor classes="text-gray-900">{question.text}</Text>
+            <Text fontWeight={FontWeight.bold} overrideColor classes="text-gray-900 dark:text-white">
+                {question.text}
+            </Text>
         </div>
         <div class="transform {isOpened ? 'rotate-180' : 'rotate-0'}">
             <Icon icon={IconEnum.ChevronDown} classes="text-gray-500" />
@@ -54,6 +61,7 @@
             <ProposalAnswer
                 {answer}
                 {answerIndex}
+                {disabled}
                 on:answerClicked={(event) => handleAnswerClick(event.detail)}
                 hidden={!isOpened}
                 isSelected={selectedAnswerValues[questionIndex] === answer?.value}

@@ -1,35 +1,33 @@
 <script lang="typescript">
-    import { Button, HTMLButtonType, TextInput, Text, TextType } from 'shared/components'
     import type { Auth } from '@iota/wallet'
-    import { showAppNotification } from '@auxiliary/notification/actions'
-    import { closePopup, openPopup } from '@auxiliary/popup/actions'
+    import { Button, NodeInput, TextInput, Text, TextType } from 'shared/components'
+    import { HTMLButtonType } from 'shared/components/enums'
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
     import { registerParticipationEvent } from '@core/profile-manager/api'
+    import { showAppNotification } from '@auxiliary/notification/actions'
+    import { closePopup, openPopup } from '@auxiliary/popup/actions'
     import { truncateString } from '@core/utils/string'
-    import { isValidUrl } from '@core/utils/validation'
 
     export let eventId: string
     export let nodeUrl: string
 
     let eventIdError: string
-    let nodeUrlError: string
+    let nodeInput: NodeInput
 
     let isBusy = false
 
-    $: disabled = !eventId || !nodeUrl
+    $: disabled = !eventId || !nodeUrl || isBusy
 
-    function onCloseClick(): void {
+    function onCancelClick(): void {
         closePopup()
     }
 
-    async function onConfirmClick(): Promise<void> {
+    async function onSubmit(): Promise<void> {
         try {
             isBusy = true
-
-            await Promise.all([validateEventId(), validateNodeUrl()])
+            await Promise.all([validateEventId(), nodeInput?.validate()])
             await registerParticipationWrapper()
-
             isBusy = false
         } catch (err) {
             isBusy = false
@@ -52,7 +50,7 @@
                     alert: true,
                     message: localize('error.node.dns'),
                 })
-            } else if (!nodeUrlError && !eventIdError) {
+            } else if (!nodeInput?.error && !eventIdError) {
                 handleError(err)
             }
         }
@@ -75,13 +73,6 @@
         closePopup()
     }
 
-    async function validateNodeUrl(): Promise<void> {
-        if (!isValidUrl(nodeUrl)) {
-            nodeUrlError = localize('error.node.invalid')
-            return Promise.reject(nodeUrlError)
-        }
-    }
-
     async function validateEventId(): Promise<void> {
         const startsWith0x = eventId?.substring(0, 2) === '0x'
         if (!startsWith0x) {
@@ -98,7 +89,7 @@
     }
 </script>
 
-<form id="register-proposal" on:submit|preventDefault={onConfirmClick}>
+<form id="register-proposal" on:submit|preventDefault={onSubmit}>
     <Text type={TextType.h3} classes="mb-6">{localize('popups.registerProposal.title')}</Text>
     <Text fontSize="15">{localize('popups.registerProposal.body')}</Text>
     <div class="flex flex-col w-full space-y-4 mt-4">
@@ -108,16 +99,11 @@
             placeholder={localize('views.governance.details.proposalInformation.eventId')}
             label={localize('views.governance.details.proposalInformation.eventId')}
         />
-        <TextInput
-            bind:value={nodeUrl}
-            bind:error={nodeUrlError}
-            placeholder={localize('views.governance.details.proposalInformation.nodeUrl')}
-            label={localize('views.governance.details.proposalInformation.nodeUrl')}
-        />
+        <NodeInput bind:this={nodeInput} bind:nodeUrl />
     </div>
     <div class="flex w-full space-x-4 mt-6">
-        <Button outline classes="w-full" onClick={onCloseClick}>{localize('actions.cancel')}</Button>
-        <Button disabled={disabled || isBusy} {isBusy} classes="w-full" type={HTMLButtonType.Submit}>
+        <Button outline classes="w-full" onClick={onCancelClick}>{localize('actions.cancel')}</Button>
+        <Button type={HTMLButtonType.Submit} {disabled} {isBusy} classes="w-full">
             {localize('actions.confirm')}
         </Button>
     </div>

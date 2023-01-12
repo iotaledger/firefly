@@ -21,7 +21,7 @@
             <ProposalsDetails />
         </Pane>
     </div>
-    <span class="block w-0.5 h-full bg-gray-200" />
+    <span class="block w-0.5 h-full bg-gray-200 dark:bg-gray-800" />
     <div class="w-2/3">
         {#await promise}
             <Spinner busy classes="w-full h-full items-center justify-center opacity-25 h-20" width={80} height={80} />
