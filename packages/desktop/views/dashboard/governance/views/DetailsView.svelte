@@ -40,7 +40,7 @@
     $: proposalState = $proposalsState[$activeProfileId]?.[$selectedProposal?.id]?.state
 
     // Reactively start updating votes once component has mounted and participation overview is available.
-    $: hasMounted && $participationOverview && setCurrentAndTotalVotes()
+    $: hasMounted && $participationOverview && proposalState && setCurrentAndTotalVotes()
 
     $: votesCounter = {
         total: totalVotes,
@@ -59,8 +59,6 @@
 
     $: isTransferring = $selectedAccount?.isTransferring
 
-    $: proposalState, setCurrentAndTotalVotes()
-
     async function setVotingEventPayload(eventId: string): Promise<void> {
         const event = await getVotingEvent(eventId)
         if (event?.data?.payload?.type === ParticipationEventType.Voting) {
@@ -72,11 +70,14 @@
 
     function setCurrentAndTotalVotes(): void {
         const selectedProposalOverview = $participationOverview?.participations?.[$selectedProposal?.id]
-        const trackedParticipations = Object.values(selectedProposalOverview)
-        const votes = calculateWeightedVotes(trackedParticipations)
+        if (selectedProposalOverview) {
+            const trackedParticipations = Object.values(selectedProposalOverview)
+            const votes = calculateWeightedVotes(trackedParticipations)
 
-        votedAnswerValues = trackedParticipations.find((overview) => overview.endMilestoneIndex === 0)?.answers ?? []
-        totalVotes = votes?.reduce((accumulator, votes) => accumulator + votes, 0) ?? 0
+            votedAnswerValues =
+                trackedParticipations.find((overview) => overview.endMilestoneIndex === 0)?.answers ?? []
+            totalVotes = votes?.reduce((accumulator, votes) => accumulator + votes, 0) ?? 0
+        }
     }
 
     let openedQuestionIndex = null
@@ -139,7 +140,7 @@
                     <li>
                         <KeyValueBox
                             keyText={localize(`views.governance.details.yourVote.${counterKey}`)}
-                            valueText={votesCounter[counterKey]}
+                            valueText={votesCounter[counterKey].toString()}
                         />
                     </li>
                 {/each}
