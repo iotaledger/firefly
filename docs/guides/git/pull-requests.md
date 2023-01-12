@@ -91,6 +91,7 @@ Before a PR can be merged into the develop branch, it must satisfy the following
 
 - At least one approval review
 - Zero unresolved comments
+- Signed commits
 - No merge conflicts with the target branch
 - Status checks:
   - Format and linting tests pass on Rust and JS/TS files
@@ -101,10 +102,11 @@ Before a PR can be merged into the develop branch, it must satisfy the following
 
 #### Main Branch
 
-Before a PR can be merged into the develop branch, it must satisfy the following conditions:
+Before a PR can be merged into the main branch, it must satisfy the following conditions:
 
 - At least one approval review
 - Zero unresolved comments
+- Signed commits
 - No merge conflicts with the target branch
 - Status checks:
   - Format and linting tests pass on Rust and JS/TS files

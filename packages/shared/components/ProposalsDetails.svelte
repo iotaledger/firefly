@@ -1,10 +1,10 @@
 <script lang="typescript">
-    import { ProposalsDetailsButton, Text } from 'shared/components'
+    import { ProposalsDetailsButton, Text, KeyValueBox } from 'shared/components'
     import { FontWeight } from './enums'
     import { localize } from '@core/i18n'
     import { activeProfileId } from '@core/profile'
     import { IProposalsDetails } from '@contexts/governance/interfaces'
-    import { proposalsState } from '@contexts/governance/stores'
+    import { participationOverview, proposalsState } from '@contexts/governance/stores'
     import {
         getNumberOfActiveProposals,
         getNumberOfVotingProposals,
@@ -17,14 +17,14 @@
         votedProposals: null,
     }
 
-    $: $proposalsState, void updateProposalsDetails()
+    $: $proposalsState, $participationOverview, updateProposalsDetails()
 
-    async function updateProposalsDetails(): Promise<void> {
+    function updateProposalsDetails(): void {
         if ($activeProfileId) {
             details = {
                 activeProposals: getNumberOfActiveProposals(),
-                votingProposals: await getNumberOfVotingProposals(),
-                votedProposals: await getTotalNumberOfProposals(),
+                votingProposals: getNumberOfVotingProposals(),
+                votedProposals: getTotalNumberOfProposals(),
             }
         }
     }
@@ -39,13 +39,11 @@
     </header-container>
     <ul class="space-y-2">
         {#each Object.keys(details) as detailKey}
-            <li class="flex justify-between bg-gray-50 px-4 py-3 rounded-lg">
-                <Text fontWeight={FontWeight.medium} overrideColor classes="text-gray-600">
-                    {localize(`views.governance.proposalsDetails.${detailKey}`)}
-                </Text>
-                <Text overrideColor classes="text-gray-600">
-                    {details[detailKey] ?? '-'}
-                </Text>
+            <li>
+                <KeyValueBox
+                    keyText={localize(`views.governance.proposalsDetails.${detailKey}`)}
+                    valueText={details[detailKey].toString() ?? '-'}
+                />
             </li>
         {/each}
     </ul>

@@ -6,10 +6,13 @@
     import { handleError } from '@core/error/handlers'
     import { isVotingForSelectedProposal } from '@contexts/governance/utils'
     import { localize } from '@core/i18n'
+    import { proposalsState } from '@contexts/governance'
 
     export let modal: Modal = undefined
 
     let isVotingForProposal: boolean
+
+    $: $proposalsState, onMountHelper()
 
     function onStopVotingClick(): void {
         openPopup({
