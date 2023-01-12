@@ -10,30 +10,48 @@
     export let answerIndex: number = undefined
     export let disabled = false
     export let hidden: boolean = null
-    export let isSelected: boolean = null
-    export let isVotedFor: boolean = null
+    export let votedAnswerValue: number = undefined
+    export let selectedAnswerValue: number = undefined
     export let percentage: string = ''
 
-    $: showBorder = isVotedFor || isSelected
+    let isSelected: boolean
+    let isVotedFor: boolean
+
+    $: selectedAnswerValue, votedAnswerValue, setIsSelected()
+    $: votedAnswerValue, setIsVotedFor()
     $: dark = $appSettings.darkMode
 
     const dispatch = createEventDispatcher()
 
     function handleClick(): void {
-        if (!disabled) {
-            dispatch('answerClicked', answer?.value)
+        if (!disabled && !hidden) {
+            dispatch('click')
         }
+    }
+
+    function setIsSelected(): void {
+        if (selectedAnswerValue === answer?.value) {
+            isSelected = true
+        } else if (selectedAnswerValue === undefined && votedAnswerValue === answer?.value) {
+            isSelected = true
+        } else {
+            isSelected = false
+        }
+    }
+
+    function setIsVotedFor(): void {
+        isVotedFor = votedAnswerValue === answer?.value
     }
 </script>
 
 <proposal-answer
     style:--percentage={percentage}
     class:hidden={isVotedFor ? false : hidden}
+    class:is-voted-for={isVotedFor}
     class:dark
     class="flex justify-between items-center p-3 rounded-md border border-solid relative dark:bg-gray-900
+        {isSelected ? 'border-blue-500' : 'border-gray-200 dark:border-transparent'}
         {disabled ? 'cursor-default' : 'cursor-pointer'}
-        {isVotedFor ? 'bg-blue-100' : ''}
-        {showBorder ? 'border-blue-500' : 'border-gray-200 dark:border-transparent'}
     "
     on:click={handleClick}
 >
@@ -101,6 +119,10 @@
             content: '';
             width: var(--percentage);
             z-index: 1;
+        }
+
+        &.is-voted-for::after {
+            @apply bg-blue-100;
         }
 
         &.dark::after {
