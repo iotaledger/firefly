@@ -1,7 +1,7 @@
 <script lang="typescript">
     import type { Answer } from '@iota/wallet'
     import { createEventDispatcher } from 'svelte'
-    import { Text, FontWeight, TooltipIcon } from 'shared/components'
+    import { Text, FontWeight, TooltipIcon, PingingBadge } from 'shared/components'
     import { Position } from 'shared/components/enums'
     import { appSettings } from '@core/app/stores'
     import { Icon } from '@auxiliary/icon'
@@ -58,8 +58,8 @@
     <div class="flex space-x-3 items-center">
         {#if answerIndex !== undefined}
             {#if isVotedFor}
-                <div class="flex justify-center w-5">
-                    <span class="ring flex items-center justify-center h-1.5 w-1.5 bg-blue-500 rounded-full" />
+                <div class="flex justify-center items-center w-5">
+                    <PingingBadge classes="relative" />
                 </div>
             {:else}
                 <span
@@ -128,11 +128,5 @@
         &.dark::after {
             @apply bg-gray-1000;
         }
-    }
-
-    .ring {
-        @apply ring-4;
-        @apply ring-blue-500;
-        @apply ring-opacity-20;
     }
 </style>
