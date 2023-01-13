@@ -5,6 +5,7 @@ const PincodeManager = require('./lib/pincodeManager')
 const DeepLinkManager = require('./lib/deepLinkManager')
 const NotificationManager = require('./lib/notificationManager')
 const { menuState } = require('./lib/menuState')
+const features = require('../features/features').default
 
 let activeProfileId = null
 const eventListeners = {}
@@ -313,6 +314,10 @@ const ElectronApi = {
                     console.error(err)
                 }
             })
+    },
+
+    isFeatureFlagEnabled(keyPath) {
+        return keyPath?.split('.').reduce((prev, cur) => prev && prev[cur], features)?.enabled ?? false
     },
 }
 
