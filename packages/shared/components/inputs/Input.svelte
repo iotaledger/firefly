@@ -37,7 +37,7 @@
 
     $: value, (error = '')
 
-    function handleInput(event: InputEvent): void {
+    function handleInput(event: Event): void {
         value = (event.target as HTMLInputElement).value
     }
 
