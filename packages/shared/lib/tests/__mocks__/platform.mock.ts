@@ -76,6 +76,9 @@ const Platform: IPlatform = {
     copyFile(copyFilePath: string, destinationFilePath: string): Promise<void> {
         return Promise.resolve()
     },
+    isFeatureFlagEnabled(keyPath: string): boolean {
+        return false
+    },
 }
 
 window['__CAPACITOR__'] = Platform
