@@ -2,6 +2,7 @@
     import { localize } from '@core/i18n'
     import {
         addOfficialNodesToClientOptions,
+        INode,
         NetworkHealth,
         networkStatus,
         NetworkType,
@@ -12,10 +13,15 @@
     import { activeProfile } from '@core/profile'
     import { Button, ButtonSize, HR, Text, TextType } from 'shared/components'
     import { NodeListTable } from '../../../../../../../../../components'
+    import { networkConfigurationSettingsRouter } from '../../../../../../../../../lib/routers'
 
     const { networkType } = $activeProfile
 
     function handleAddNodeClick(): void {}
+
+    function handleNodeClick(node: INode) {
+        $networkConfigurationSettingsRouter.next({ node })
+    }
 </script>
 
 <div class="flex flex-col justify-between space-y-4 h-full">
@@ -51,7 +57,7 @@
         <div class="flex flex-col space-y-4 w-full">
             <Text type={TextType.h5}>{localize('views.settings.configureNodeList.title')}</Text>
             <Text type={TextType.p} secondary>{localize('views.settings.configureNodeList.description')}</Text>
-            <NodeListTable />
+            <NodeListTable onNodeClick={handleNodeClick} />
         </div>
     </div>
     <div class="flex flex-col space-y-4 w-full">

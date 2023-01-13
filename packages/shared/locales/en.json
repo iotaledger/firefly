@@ -1733,7 +1733,8 @@
             "recipientRequired": "Recipient is required",
             "nftRequired": "NFT is required",
             "nftNotInHex": "NFT address has to be in HEX format",
-            "nftNotInPossession": "NFT not in possession"
+            "nftNotInPossession": "NFT not in possession",
+            "reservedTagKeyword": "Unable to use reserved tag keyword"
         },
         "layer2": {
             "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account."
