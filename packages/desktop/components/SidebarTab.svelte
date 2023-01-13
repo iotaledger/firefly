@@ -30,6 +30,7 @@
         <PingingBadge
             innerColor={tab?.notificationType === 'warning' ? 'yellow-600' : 'red-500'}
             outerColor={tab?.notificationType === 'warning' ? 'yellow-400' : 'red-300'}
+            classes="absolute -top-2 -left-2"
         />
     {/if}
 </button>
