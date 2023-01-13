@@ -1,7 +1,7 @@
 <script lang="typescript">
     import type { Answer } from '@iota/wallet'
     import { createEventDispatcher } from 'svelte'
-    import { Text, FontWeight, TooltipIcon } from 'shared/components'
+    import { Text, FontWeight, TooltipIcon, PingingBadge } from 'shared/components'
     import { Position } from 'shared/components/enums'
     import { appSettings } from '@core/app/stores'
     import { Icon } from '@auxiliary/icon'
@@ -10,38 +10,56 @@
     export let answerIndex: number = undefined
     export let disabled = false
     export let hidden: boolean = null
-    export let isSelected: boolean = null
-    export let isVotedFor: boolean = null
+    export let votedAnswerValue: number = undefined
+    export let selectedAnswerValue: number = undefined
     export let percentage: string = ''
 
-    $: showBorder = isVotedFor || isSelected
+    let isSelected: boolean
+    let isVotedFor: boolean
+
+    $: selectedAnswerValue, votedAnswerValue, setIsSelected()
+    $: votedAnswerValue, setIsVotedFor()
     $: dark = $appSettings.darkMode
 
     const dispatch = createEventDispatcher()
 
     function handleClick(): void {
-        if (!disabled) {
-            dispatch('answerClicked', answer?.value)
+        if (!disabled && !hidden) {
+            dispatch('click')
         }
+    }
+
+    function setIsSelected(): void {
+        if (selectedAnswerValue === answer?.value) {
+            isSelected = true
+        } else if (selectedAnswerValue === undefined && votedAnswerValue === answer?.value) {
+            isSelected = true
+        } else {
+            isSelected = false
+        }
+    }
+
+    function setIsVotedFor(): void {
+        isVotedFor = votedAnswerValue === answer?.value
     }
 </script>
 
 <proposal-answer
     style:--percentage={percentage}
     class:hidden={isVotedFor ? false : hidden}
+    class:is-voted-for={isVotedFor}
     class:dark
     class="flex justify-between items-center p-3 rounded-md border border-solid relative dark:bg-gray-900
+        {isSelected ? 'border-blue-500' : 'border-gray-200 dark:border-transparent'}
         {disabled ? 'cursor-default' : 'cursor-pointer'}
-        {isVotedFor ? 'bg-blue-100' : ''}
-        {showBorder ? 'border-blue-500' : 'border-gray-200 dark:border-transparent'}
     "
     on:click={handleClick}
 >
     <div class="flex space-x-3 items-center">
         {#if answerIndex !== undefined}
             {#if isVotedFor}
-                <div class="flex justify-center w-5">
-                    <span class="ring flex items-center justify-center h-1.5 w-1.5 bg-blue-500 rounded-full" />
+                <div class="flex justify-center items-center w-5">
+                    <PingingBadge classes="relative" />
                 </div>
             {:else}
                 <span
@@ -103,14 +121,12 @@
             z-index: 1;
         }
 
+        &.is-voted-for::after {
+            @apply bg-blue-100;
+        }
+
         &.dark::after {
             @apply bg-gray-1000;
         }
-    }
-
-    .ring {
-        @apply ring-4;
-        @apply ring-blue-500;
-        @apply ring-opacity-20;
     }
 </style>
