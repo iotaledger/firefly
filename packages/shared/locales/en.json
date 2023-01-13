@@ -1237,6 +1237,7 @@
         "sending": "Sending",
         "received": "Received",
         "receiving": "Receiving",
+        "votingPower": "New voting power",
         "increased": "Vote increased",
         "increasing": "Increasing vote",
         "decreased": "Vote decreased",
@@ -2036,6 +2037,18 @@
             "unclaimed": "unclaimed",
             "claimed": "claimed",
             "expired": "expired"
+        },
+        "governance": {
+            "increaseVotingPower": {
+                "Pending": "increasing voting weight",
+                "Confirmed": "increased voting weight",
+                "Conflicting": "failed to increased voting weight"
+            },
+            "decreaseVotingPower": {
+                "Pending": "decreasing voting weight",
+                "Confirmed": "decreased voting weight",
+                "Conflicting": "failed to decreased voting weight"
+            }
         },
         "alias": {
             "creation": {

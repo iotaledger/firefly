@@ -1,4 +1,4 @@
 export enum GovernanceAction {
-    IncreaseVotingPower,
-    DecreaseVotingPower,
+    IncreaseVotingPower = 'increaseVotingPower',
+    DecreaseVotingPower = 'decreaseVotingPower',
 }
