@@ -7,6 +7,7 @@
     import {
         getAssetById,
         IAsset,
+        isReservedTagKeyword,
         newTransactionDetails,
         NewTransactionType,
         setNewTransactionDetails,
@@ -28,6 +29,11 @@
     enum SendForm {
         SendToken = 'general.sendToken',
         SendNft = 'general.sendNft',
+    }
+
+    enum OptionalInputType {
+        Metadata = 'metadata',
+        Tag = 'tag',
     }
 
     const transactionDetails = get(newTransactionDetails)
@@ -97,9 +103,16 @@
                 recipientInput?.validate(),
                 networkInput?.validate(),
                 metadataInput?.validate(
-                    validateOptionalInput(metadata, MAX_METADATA_BYTES, localize('error.send.metadataTooLong'))
+                    validateOptionalInput(
+                        metadata,
+                        OptionalInputType.Metadata,
+                        MAX_METADATA_BYTES,
+                        localize('error.send.metadataTooLong')
+                    )
                 ),
-                tagInput?.validate(validateOptionalInput(tag, MAX_TAG_BYTES, localize('error.send.tagTooLong'))),
+                tagInput?.validate(
+                    validateOptionalInput(tag, OptionalInputType.Tag, MAX_TAG_BYTES, localize('error.send.tagTooLong'))
+                ),
             ])
             return true
         } catch (err) {
@@ -108,11 +121,23 @@
         }
     }
 
-    function validateOptionalInput(value: string, byteLimit: number, errorMessage: string): Promise<void> {
+    function validateOptionalInput(
+        value: string,
+        optionalInputType: OptionalInputType,
+        byteLimit: number,
+        errorMessage: string
+    ): Promise<void> {
         return new Promise((resolve, reject) => {
             if (getByteLengthOfString(value) > byteLimit) {
                 reject(errorMessage)
             }
+
+            if (optionalInputType === OptionalInputType.Tag) {
+                if (isReservedTagKeyword(value)) {
+                    reject(localize('error.send.reservedTagKeyword'))
+                }
+            }
+
             resolve()
         })
     }
