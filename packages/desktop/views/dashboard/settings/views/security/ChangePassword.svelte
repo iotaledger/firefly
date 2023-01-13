@@ -1,5 +1,14 @@
 <script lang="typescript">
-    import { Button, Checkbox, PasswordInput, Spinner, Text, ButtonSize, HTMLButtonType } from 'shared/components'
+    import {
+        Button,
+        Checkbox,
+        PasswordInput,
+        Spinner,
+        Text,
+        TextType,
+        ButtonSize,
+        HTMLButtonType,
+    } from 'shared/components'
     import { localize } from '@core/i18n'
     import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'
     import { changePasswordAndUnlockStronghold } from '@core/profile-manager'
@@ -119,8 +128,8 @@
 </script>
 
 <form id="form-change-password" on:submit|preventDefault={changePassword}>
-    <Text type="h4" classes="mb-3">{localize('views.settings.changePassword.title')}</Text>
-    <Text type="p" secondary classes="mb-5">{localize('views.settings.changePassword.description')}</Text>
+    <Text type={TextType.h4} classes="mb-3">{localize('views.settings.changePassword.title')}</Text>
+    <Text type={TextType.p} secondary classes="mb-5">{localize('views.settings.changePassword.description')}</Text>
     <PasswordInput
         error={localize(currentPasswordError)}
         classes="mb-5"

@@ -42,12 +42,11 @@
     on:submit|preventDefault={handleSubmit}
 >
     <PasswordInput
-        {error}
-        classes="w-full mb-5"
+        bind:error
         bind:value={password}
+        classes="w-full mb-5"
         showRevealToggle
         placeholder={localize('general.password')}
-        submitHandler={handleSubmit}
         autofocus
     />
     <div class="flex flex-row justify-between w-full space-x-4">
