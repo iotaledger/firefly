@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { unlockStronghold } from '@core/profile'
-    import { Button, HTMLButtonType, PasswordInput, Text } from 'shared/components'
+    import { Button, HTMLButtonType, PasswordInput, Text, TextType } from 'shared/components'
 
     export let busyMessage: string = ''
 
@@ -32,7 +32,7 @@
 </script>
 
 <div class="mb-5">
-    <Text type="p" secondary>{localize('popups.password.subtitle')}</Text>
+    <Text type={TextType.p} secondary>{localize('popups.password.subtitle')}</Text>
 </div>
 <form
     id="password-popup-form"
@@ -40,7 +40,7 @@
     on:submit|preventDefault={handleSubmit}
 >
     <PasswordInput
-        {error}
+        bind:error
         classes="w-full mb-5"
         bind:value={password}
         showRevealToggle
