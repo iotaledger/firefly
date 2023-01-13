@@ -3,29 +3,16 @@
     import {
         GovernanceActivity,
         getActivityTileTitle,
+        getFormattedVotingPowerFromGovernanceActivity,
         GovernanceAction,
-        formatTokenAmountBestMatch,
     } from '@core/wallet'
     import { Text, Icon, FontWeight } from 'shared/components'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
-    import { BASE_TOKEN } from '@core/network'
-    import { activeProfile } from '@core/profile'
 
     export let activity: GovernanceActivity
 
-    $: amount = getAmount(activity)
+    $: amount = getFormattedVotingPowerFromGovernanceActivity(activity)
     $: title = getActivityTileTitle(activity)
-
-    function getAmount(activity: GovernanceActivity) {
-        const metadata = BASE_TOKEN[$activeProfile?.networkProtocol]
-        if (
-            activity.governanceAction === GovernanceAction.IncreaseVotingPower ||
-            activity.governanceAction === GovernanceAction.DecreaseVotingPower
-        ) {
-            const amount = formatTokenAmountBestMatch(activity.votingPowerDifference, metadata, 2)
-            return `${activity.governanceAction === GovernanceAction.DecreaseVotingPower ? '- ' : ''}${amount}`
-        }
-    }
 </script>
 
 <div class="relative flex w-8 h-8">
@@ -48,7 +35,11 @@
             {localize(title)}
         </Text>
         {#if amount}
-            <Text fontWeight={FontWeight.medium} lineHeight="140" color="gray-600">
+            <Text
+                fontWeight={FontWeight.medium}
+                lineHeight="140"
+                color={activity.governanceAction === GovernanceAction.DecreaseVotingPower ? '' : 'blue-700'}
+            >
                 {amount}
             </Text>
         {/if}

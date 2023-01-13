@@ -1,10 +1,10 @@
 <script lang="typescript">
     import { KeyValueBox } from 'shared/components'
-    import { formatDate, localize } from '@core/i18n'
+    import { localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import { Activity, formatTokenAmountPrecise } from '@core/wallet'
     import { BASE_TOKEN, ExplorerEndpoint } from '@core/network'
-    import { getOfficialExplorerUrl } from '@core/network/utils'
+    import { getFormattedTimeStamp, getOfficialExplorerUrl } from '@core/network/utils'
     import { openUrlInBrowser } from '@core/app'
     import { truncateString } from '@core/utils'
     import { setClipboard } from '@core/utils'
@@ -13,26 +13,18 @@
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
-    $: expirationTime = getDateFormat(activity.asyncData?.expirationDate)
-    $: claimedTime = getDateFormat(activity.asyncData?.claimedDate)
+    $: expirationTime = getFormattedTimeStamp(activity.asyncData?.expirationDate)
+    $: claimedTime = getFormattedTimeStamp(activity.asyncData?.claimedDate)
     $: hasStorageDeposit =
         activity.storageDeposit || (activity.storageDeposit === 0 && activity.giftedStorageDeposit === 0)
     $: gasBudget = activity?.parsedLayer2Metadata?.gasBudget
 
-    $: formattedTransactionTime = getDateFormat(activity.time)
-    $: formattedTimelockDate = getDateFormat(activity.asyncData?.timelockDate)
-    $: formattedStorageDeposit = formatTokenAmountPrecise(
-        activity.storageDeposit ?? 0,
-        BASE_TOKEN[$activeProfile?.networkProtocol]
-    )
-    $: formattedGiftedStorageDeposit = formatTokenAmountPrecise(
-        activity.giftedStorageDeposit ?? 0,
-        BASE_TOKEN[$activeProfile?.networkProtocol]
-    )
-    $: formattedGasBudget = formatTokenAmountPrecise(
-        Number(gasBudget ?? 0),
-        BASE_TOKEN[$activeProfile?.networkProtocol]
-    )
+    $: formattedTransactionTime = getFormattedTimeStamp(activity.time)
+    $: formattedTimelockDate = getFormattedTimeStamp(activity.asyncData?.timelockDate)
+    $: baseToken = BASE_TOKEN[$activeProfile?.networkProtocol]
+    $: formattedStorageDeposit = formatTokenAmountPrecise(activity.storageDeposit ?? 0, baseToken)
+    $: formattedGiftedStorageDeposit = formatTokenAmountPrecise(activity.giftedStorageDeposit ?? 0, baseToken)
+    $: formattedGasBudget = formatTokenAmountPrecise(Number(gasBudget ?? 0), baseToken)
 
     let transactionDetailsList: { [key in string]: { data: string; isTooltipVisible?: boolean } }
     $: transactionDetailsList = {
@@ -72,21 +64,6 @@
                   `${explorerUrl}/${ExplorerEndpoint.Transaction}/${activity.asyncData?.claimingTransactionId}`
               )
             : setClipboard(activity.asyncData?.claimingTransactionId)
-    }
-
-    function getDateFormat(date: Date): string {
-        try {
-            if (date) {
-                return formatDate(date, {
-                    dateStyle: 'long',
-                    timeStyle: 'medium',
-                })
-            } else {
-                return undefined
-            }
-        } catch (err) {
-            return undefined
-        }
     }
 </script>
 
