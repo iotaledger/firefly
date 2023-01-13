@@ -18,6 +18,7 @@
 
     $: isTransferring = $selectedAccount?.isTransferring
     $: isTransferring, void updateIsVoting() // vote/stop vote changes the isTransferring value, this means that is less updates than relying on proposalsState
+    $: isBusy = isAnyAccountVotingForProposal === undefined && isVotingForProposal === undefined
 
     function onStopVotingClick(): void {
         openPopup({
@@ -36,7 +37,7 @@
     async function updateIsVoting(): Promise<void> {
         try {
             isVotingForProposal = await isVotingForSelectedProposal()
-            isAnyAccountVotingForProposal = isAnyAccountVotingForSelectedProposal()
+            isAnyAccountVotingForProposal = await isAnyAccountVotingForSelectedProposal()
         } catch (err) {
             handleError(err)
         }
@@ -70,7 +71,8 @@
                     title={localize('actions.removeProposal')}
                     onClick={onRemoveProposalClick}
                     variant="error"
-                    disabled={isAnyAccountVotingForProposal || isVotingForProposal === undefined}
+                    disabled={isAnyAccountVotingForProposal || isBusy}
+                    {isBusy}
                 />
             </div>
             {#if isTooltipVisible}

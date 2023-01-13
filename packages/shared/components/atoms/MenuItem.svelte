@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Icon, Text } from 'shared/components'
+    import { Icon, Text, Spinner } from 'shared/components'
 
     export let icon: string = ''
     export let iconProps: Record<string, unknown> = undefined
@@ -8,6 +8,7 @@
     export let onClick: () => any
     export let selected = false
     export let disabled = false
+    export let isBusy = false
     export let variant: 'success' | 'error' | 'warning' | 'info' = 'info'
     let color = 'blue'
 
@@ -74,5 +75,8 @@
     </div>
     {#if selected}
         <Icon icon="checkmark" classes="ml-2 text-blue-500" />
+    {/if}
+    {#if isBusy}
+        <Spinner busy classes="opacity-30" height={20} width={20} />
     {/if}
 </button>
