@@ -129,10 +129,4 @@
             @apply bg-gray-1000;
         }
     }
-
-    .ring {
-        @apply ring-4;
-        @apply ring-blue-500;
-        @apply ring-opacity-20;
-    }
 </style>
