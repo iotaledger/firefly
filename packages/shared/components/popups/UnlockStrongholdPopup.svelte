@@ -42,9 +42,9 @@
     on:submit|preventDefault={handleSubmit}
 >
     <PasswordInput
-        {error}
-        classes="w-full mb-5"
+        bind:error
         bind:value={password}
+        classes="w-full mb-5"
         showRevealToggle
         placeholder={localize('general.password')}
         autofocus

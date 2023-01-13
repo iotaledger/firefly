@@ -45,9 +45,9 @@
     {/if}
     <div class="flex  w-full relative">
         <Input
-            {error}
-            {type}
+            bind:error
             bind:value
+            {type}
             {maxlength}
             {integer}
             {autofocus}
