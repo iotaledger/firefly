@@ -5,7 +5,7 @@ const PincodeManager = require('./lib/pincodeManager')
 const DeepLinkManager = require('./lib/deepLinkManager')
 const NotificationManager = require('./lib/notificationManager')
 const { menuState } = require('./lib/menuState')
-const features = require('../features/features')
+const features = require('../features/features').default
 
 let activeProfileId = null
 const eventListeners = {}
