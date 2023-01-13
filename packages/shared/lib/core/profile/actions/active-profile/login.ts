@@ -31,7 +31,7 @@ import { isLedgerProfile } from '../../utils'
 import { loadAccounts } from './loadAccounts'
 import { logout } from './logout'
 import { subscribeToWalletApiEventsForActiveProfile } from './subscribeToWalletApiEventsForActiveProfile'
-import { AppContext } from '@core/app'
+import { AppContext, Platform } from '@core/app'
 import { routerManager } from '@core/router/stores'
 import { pollGovernanceData } from '@contexts/governance'
 
@@ -126,7 +126,10 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 resetLoginProgress()
             }, 500)
             void pollMarketPrices()
-            void pollGovernanceData()
+
+            if (Platform.isFeatureFlagEnabled('governance')) {
+                void pollGovernanceData()
+            }
 
             void cleanupOnboarding()
         } else {
