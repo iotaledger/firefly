@@ -1238,10 +1238,10 @@
         "received": "Received",
         "receiving": "Receiving",
         "votingPower": "New voting power",
-        "increased": "Vote increased",
-        "increasing": "Increasing vote",
-        "decreased": "Vote decreased",
-        "decreasing": "Decreasing vote",
+        "increased": "Voting power increased",
+        "increasing": "Increasing voting power",
+        "decreased": "Voting power decreased",
+        "decreasing": "Decreasing voting power",
         "sentNft": "NFT sent",
         "sendingNft": "Sending NFT",
         "receivedNft": "NFT received",
@@ -2041,14 +2041,14 @@
         },
         "governance": {
             "increaseVotingPower": {
-                "Pending": "increasing voting weight",
-                "Confirmed": "increased voting weight",
-                "Conflicting": "failed to increased voting weight"
+                "Pending": "increasing voting power",
+                "Confirmed": "increased voting power",
+                "Conflicting": "failed to increased voting power"
             },
             "decreaseVotingPower": {
-                "Pending": "decreasing voting weight",
-                "Confirmed": "decreased voting weight",
-                "Conflicting": "failed to decreased voting weight"
+                "Pending": "decreasing voting power",
+                "Confirmed": "decreased voting power",
+                "Conflicting": "failed to decreased voting power"
             }
         },
         "alias": {
