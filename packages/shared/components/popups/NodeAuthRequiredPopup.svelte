@@ -9,32 +9,21 @@
 
     let isBusy = false
 
-    let username: string
-    let password: string
     let jwt: string
-
-    let usernameError: string
-    let passwordError: string
     let jwtError: string
 
-    $: disabled = (!username && !password && !jwt) || isBusy
+    $: disabled = !jwt || isBusy
 
     async function handleSubmit(): Promise<void> {
         try {
             isBusy = true
-            const auth = { username, password, jwt }
+            const auth = { jwt }
             await onSubmit(auth)
             isBusy = false
         } catch (err) {
             isBusy = false
-            const authenticationError = err?.error?.match(/(username)|(password)|(jwt)/g)?.[0]
+            const authenticationError = err?.error?.match(/(jwt)/g)?.[0]
             switch (authenticationError) {
-                case 'username':
-                    usernameError = err.error
-                    break
-                case 'password':
-                    passwordError = err.error
-                    break
                 case 'jwt':
                     jwtError = err.error
                     break
@@ -50,18 +39,6 @@
     <Text type={TextType.h3} classes="mb-6">{localize('popups.nodeAuthRequired.title')}</Text>
     <Text fontSize="15">{localize('popups.nodeAuthRequired.body')}</Text>
     <div class="flex flex-col w-full space-y-4 mt-4">
-        <TextInput
-            bind:value={username}
-            bind:error={usernameError}
-            placeholder={localize('general.username')}
-            label={localize('general.username')}
-        />
-        <TextInput
-            bind:value={password}
-            bind:error={passwordError}
-            placeholder={localize('general.password')}
-            label={localize('general.password')}
-        />
         <TextInput
             bind:value={jwt}
             bind:error={jwtError}
