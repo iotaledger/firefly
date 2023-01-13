@@ -1,18 +1,23 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Modal, MenuItem } from 'shared/components'
+    import { Modal, MenuItem, Text, Tooltip } from 'shared/components'
+    import { Position } from 'shared/components/enums'
     import { Icon } from '@auxiliary/icon'
     import { openPopup } from '@auxiliary/popup/actions'
     import { handleError } from '@core/error/handlers'
-    import { isVotingForSelectedProposal } from '@contexts/governance/utils'
+    import { isAnyAccountVotingForSelectedProposal, isVotingForSelectedProposal } from '@contexts/governance/utils'
     import { localize } from '@core/i18n'
-    import { proposalsState } from '@contexts/governance'
+    import { selectedAccount } from '@core/account'
 
     export let modal: Modal = undefined
 
     let isVotingForProposal: boolean
+    let isAnyAccountVotingForProposal: boolean
+    let deleteMenuItem: HTMLDivElement
+    let isTooltipVisible = false
 
-    $: $proposalsState, onMountHelper()
+    $: isTransferring = $selectedAccount?.isTransferring
+    $: isTransferring, void updateIsVoting() // vote/stop vote changes the isTransferring value, this means that is less updates than relying on proposalsState
 
     function onStopVotingClick(): void {
         openPopup({
@@ -28,15 +33,20 @@
         modal.close()
     }
 
-    function onMountHelper(): void {
+    async function updateIsVoting(): Promise<void> {
         try {
-            isVotingForProposal = isVotingForSelectedProposal()
+            isVotingForProposal = await isVotingForSelectedProposal()
+            isAnyAccountVotingForProposal = isAnyAccountVotingForSelectedProposal()
         } catch (err) {
             handleError(err)
         }
     }
 
-    onMount(() => onMountHelper())
+    function showTooltip(show: boolean): void {
+        isTooltipVisible = isVotingForProposal !== undefined && isAnyAccountVotingForProposal && show
+    }
+
+    onMount(() => updateIsVoting())
 </script>
 
 <Modal bind:this={modal} {...$$restProps}>
@@ -49,13 +59,25 @@
                 onClick={onStopVotingClick}
             />
         {:else}
-            <MenuItem
-                icon={Icon.Delete}
-                iconProps={{ width: '16', height: '19' }}
-                title={localize('actions.removeProposal')}
-                onClick={onRemoveProposalClick}
-                variant="error"
-            />
+            <div
+                bind:this={deleteMenuItem}
+                on:mouseenter={() => showTooltip(true)}
+                on:mouseleave={() => showTooltip(false)}
+            >
+                <MenuItem
+                    icon={Icon.Delete}
+                    iconProps={{ width: '16', height: '19' }}
+                    title={localize('actions.removeProposal')}
+                    onClick={onRemoveProposalClick}
+                    variant="error"
+                    disabled={isAnyAccountVotingForProposal || isVotingForProposal === undefined}
+                />
+            </div>
+            {#if isTooltipVisible}
+                <Tooltip anchor={deleteMenuItem} position={Position.Right}>
+                    <Text smaller>{localize('tooltips.governance.removeProposalWarning')}</Text>
+                </Tooltip>
+            {/if}
         {/if}
     </div>
 </Modal>
