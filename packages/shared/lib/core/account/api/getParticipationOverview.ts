@@ -1,7 +1,8 @@
 import type { ParticipationOverview } from '@iota/wallet'
 
-import { getAccount } from '@core/profile-manager/api'
+import { DEFAULT_PARTICIPATION_OVERVIEW } from '@contexts/governance/constants'
 
-export async function getParticipationOverview(index?: number): Promise<ParticipationOverview> {
-    return (await getAccount(index))?.getParticipationOverview()
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function getParticipationOverview(index?: number): ParticipationOverview {
+    return DEFAULT_PARTICIPATION_OVERVIEW
 }
