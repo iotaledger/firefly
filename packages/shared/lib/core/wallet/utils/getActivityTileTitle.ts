@@ -12,6 +12,8 @@ export function getActivityTileTitle(activity: Activity): string {
             return isConfirmed ? 'general.aliasCreated' : 'general.creatingAlias'
         }
         return isConfirmed ? 'general.minted' : 'general.minting'
+    } else if (action === ActivityAction.Burn) {
+        return isConfirmed ? 'general.burned' : 'general.burning'
     } else if (action === ActivityAction.Send) {
         if (isInternal) {
             return isConfirmed ? 'general.transfer' : 'general.transferring'
@@ -22,7 +24,7 @@ export function getActivityTileTitle(activity: Activity): string {
         if (direction === ActivityDirection.Outgoing) {
             return isConfirmed ? 'general.sent' : 'general.sending'
         }
-    } else if (action === ActivityAction.Unknown) {
+    } else {
         return 'general.unknown'
     }
 }
