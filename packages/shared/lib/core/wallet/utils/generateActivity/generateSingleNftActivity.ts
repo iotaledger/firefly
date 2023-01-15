@@ -8,7 +8,8 @@ import { getAsyncDataFromOutput, getMetadataFromOutput, getSendingInformation, g
 
 export function generateSingleNftActivity(
     account: IAccountState,
-    { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
+    { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters,
+    nftIdFromInput?: string
 ): NftActivity {
     const { claimingData, time, inclusionState, transactionId, direction } = processedTransaction
     const outputId = wrappedOutput.outputId
