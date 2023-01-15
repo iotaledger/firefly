@@ -1257,6 +1257,8 @@
         "shimmerGenesis": "Shimmer Genesis",
         "minted": "Minted",
         "minting": "Minting",
+        "burned": "Burned",
+        "burning": "Burning",
         "aliasCreated": "Alias created",
         "creatingAlias": "Creating Alias",
         "sendPayment": "Send Payment",
@@ -2028,6 +2030,11 @@
             "Pending": "minting",
             "Confirmed": "minted",
             "Conflicting": "failed to mint"
+        },
+        "burn": {
+            "Pending": "burning",
+            "Confirmed": "burned",
+            "Conflicting": "failed to burn"
         },
         "migrate": {
             "Pending": "migrating for",
