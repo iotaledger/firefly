@@ -8,6 +8,7 @@
     } from '@core/wallet'
     import { Text, Icon, FontWeight } from 'shared/components'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
+    import { truncateString } from '@core/utils'
 
     export let activity: GovernanceActivity
 
@@ -49,7 +50,7 @@
         <div class="flex flex-row justify-between">
             <Text fontWeight={FontWeight.medium} lineHeight="140" color="gray-600">
                 {localize('general.forEvent', {
-                    values: { eventId: activity.participation.eventId },
+                    values: { eventId: truncateString(activity.participation.eventId, 6, 6) },
                 })}
             </Text>
         </div>

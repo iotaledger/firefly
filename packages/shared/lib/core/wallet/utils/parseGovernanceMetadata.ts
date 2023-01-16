@@ -13,7 +13,7 @@ export function parseGovernanceMetadata(metadata: string): IParticipation[] {
     const amountParticipations = readStream.readUInt8('amountParticipations')
 
     for (let index = 0; index < amountParticipations; index++) {
-        const eventId = Converter.bytesToUtf8(readStream.readBytes('eventId', 32))
+        const eventId = '0x' + Converter.bytesToHex(readStream.readBytes('eventId', 32))
 
         const amountAnswers = readStream.readUInt8('amountAnswers')
 
