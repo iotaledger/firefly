@@ -36,7 +36,7 @@
         </Text>
         {#if amount}
             <Text
-                fontWeight={FontWeight.medium}
+                fontWeight={FontWeight.semibold}
                 lineHeight="140"
                 color={activity.governanceAction === GovernanceAction.DecreaseVotingPower ? '' : 'blue-700'}
             >
