@@ -1,10 +1,10 @@
 <script lang="typescript">
     import { KeyValueBox } from 'shared/components'
-    import { localize } from '@core/i18n'
+    import { getFormattedTimeStamp, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import { Activity, formatTokenAmountPrecise } from '@core/wallet'
     import { BASE_TOKEN, ExplorerEndpoint } from '@core/network'
-    import { getFormattedTimeStamp, getOfficialExplorerUrl } from '@core/network/utils'
+    import { getOfficialExplorerUrl } from '@core/network/utils'
     import { openUrlInBrowser } from '@core/app'
     import { truncateString } from '@core/utils'
     import { setClipboard } from '@core/utils'
