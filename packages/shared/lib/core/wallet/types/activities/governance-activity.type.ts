@@ -1,9 +1,11 @@
 import { ActivityType, GovernanceAction } from '@core/wallet/enums'
+import { IParticipation } from '@core/wallet/interfaces'
 import { BaseActivity } from './base-activity.type'
 
 export type GovernanceActivity = BaseActivity & {
     type: ActivityType.Governance
     governanceAction: GovernanceAction
+    participations: IParticipation[]
     votingPower: number
     votingPowerDifference?: number
 }
