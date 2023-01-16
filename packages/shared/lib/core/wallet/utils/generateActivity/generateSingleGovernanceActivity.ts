@@ -84,5 +84,6 @@ function getGovernanceInfo(
     return {
         governanceAction: GovernanceAction.IncreaseVotingPower,
         votingPower: currentVotingPower,
+        votingPowerDifference: currentVotingPower,
     }
 }
