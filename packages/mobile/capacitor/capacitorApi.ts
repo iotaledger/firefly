@@ -27,70 +27,71 @@ import { PincodeManager } from '../../mobile/capacitor/lib/pincodeManager'
 // const IotaWalletMobile = registerPlugin('IotaWalletMobile')
 // import IotaWalletMobile from '@iota/wallet-mobile'
 // const WalletApi = IotaWalletMobile
-// import { WalletApi } from '@iota/wallet-mobile'
+import { WalletApi } from '@iota/wallet-mobile'
 
-import * as WalletApi from './wallet-api'
+// import * as WalletApi from './wallet-api'
 
 // const { WalletApi } = IotaWalletMobile.
 console.error({WalletApi})
 // console.error(IotaWalletMobile)
 let activeProfileId = null
-const profileManagers = {}
+// const profileManagers = {}
 
-window['__WALLET__API__'] = {
-    async createAccountManager(
-        id: WalletApi.AccountId,
-        options: WalletApi.AccountManagerOptions
-    ) {
-        console.error({options})
-        const manager = await WalletApi.AccountManager(options)
-        manager.id = id
-        console.error({manager})
-        profileManagers[id] = manager
-        // bindMethodsAcrossContextBridge(WalletApi.AccountManager, manager)
-        return manager
-    },
-    async createAccount(managerId, payload) {
-        const manager = profileManagers[managerId]
-        const account = await manager.createAccount(payload)
-        bindMethodsAcrossContextBridge(WalletApi.Account.prototype, account)
-        return account
-    },
-    deleteAccountManager(id) {
-        if (id && id in profileManagers) {
-            delete profileManagers[id]
-        }
-    },
-    async getAccount(managerId, index) {
-        const manager = profileManagers[managerId]
-        console.error({manager})
-        const account = await manager.getAccount(index)
-        bindMethodsAcrossContextBridge(WalletApi.Account.prototype, account)
-        return account
-    },
-    async getAccounts(managerId) {
-        const manager = profileManagers[managerId]
-        console.error({manager})
-        const accounts = await manager.getAccounts()
-        accounts.forEach((account) => bindMethodsAcrossContextBridge(WalletApi.Account.prototype, account))
-        return accounts
-    },
-    async recoverAccounts(managerId, payload) {
-        const manager = profileManagers[managerId]
-        console.error({manager})
-        const accounts = await manager.recoverAccounts(...Object.values(payload))
-        accounts.forEach((account) => bindMethodsAcrossContextBridge(WalletApi.Account.prototype, account))
-        return accounts
-    },
-}
-function bindMethodsAcrossContextBridge(prototype, object) {
-    const prototypeProperties = Object.getOwnPropertyNames(prototype)
-    prototypeProperties.forEach((key) => {
-        if (key !== 'constructor') {
-            object[key] = object[key].bind(object)
-        }
-    })
-}
+window['__WALLET__API__'] = WalletApi
+// window['__WALLET__API__'] = {
+//     async createAccountManager(
+//         id: WalletApi.AccountId,
+//         options: WalletApi.AccountManagerOptions
+//     ) {
+//         console.error({options})
+//         const manager = await WalletApi.AccountManager(options)
+//         manager.id = id
+//         console.error({manager})
+//         profileManagers[id] = manager
+//         // bindMethodsAcrossContextBridge(WalletApi.AccountManager, manager)
+//         return manager
+//     },
+//     async createAccount(managerId, payload) {
+//         const manager = profileManagers[managerId]
+//         const account = await manager.createAccount(payload)
+//         bindMethodsAcrossContextBridge(WalletApi.Account.prototype, account)
+//         return account
+//     },
+//     deleteAccountManager(id) {
+//         if (id && id in profileManagers) {
+//             delete profileManagers[id]
+//         }
+//     },
+//     async getAccount(managerId, index) {
+//         const manager = profileManagers[managerId]
+//         console.error({manager})
+//         const account = await manager.getAccount(index)
+//         bindMethodsAcrossContextBridge(WalletApi.Account.prototype, account)
+//         return account
+//     },
+//     async getAccounts(managerId) {
+//         const manager = profileManagers[managerId]
+//         console.error({manager})
+//         const accounts = await manager.getAccounts()
+//         accounts.forEach((account) => bindMethodsAcrossContextBridge(WalletApi.Account.prototype, account))
+//         return accounts
+//     },
+//     async recoverAccounts(managerId, payload) {
+//         const manager = profileManagers[managerId]
+//         console.error({manager})
+//         const accounts = await manager.recoverAccounts(...Object.values(payload))
+//         accounts.forEach((account) => bindMethodsAcrossContextBridge(WalletApi.Account.prototype, account))
+//         return accounts
+//     },
+// }
+// function bindMethodsAcrossContextBridge(prototype, object) {
+//     const prototypeProperties = Object.getOwnPropertyNames(prototype)
+//     prototypeProperties.forEach((key) => {
+//         if (key !== 'constructor') {
+//             object[key] = object[key].bind(object)
+//         }
+//     })
+// }
 
 export const CapacitorApi = {
     updateAppSettings(settings) {
