@@ -1,9 +1,9 @@
 import { IAccountState } from '@core/account'
-import { IActivityGenerationParameters, IWrappedOutput } from '@core/wallet/interfaces'
+import { IActivityGenerationParameters, IParticipation, IWrappedOutput } from '@core/wallet/interfaces'
 import { GovernanceActivity, Output } from '@core/wallet/types'
 import type { IBasicOutput } from '@iota/types'
 import { ActivityType, GovernanceAction } from '../../enums'
-import { activityOutputContainsValue } from '..'
+import { activityOutputContainsValue, parseGovernanceMetadata } from '..'
 import {
     getAmountFromOutput,
     getMetadataFromOutput,
@@ -35,7 +35,7 @@ export function generateSingleGovernanceActivity(
 
     const { storageDeposit } = getStorageDepositFromOutput(output)
     const votingPower = getAmountFromOutput(output)
-    const governanceInfo = getGovernanceInfo(output, wrappedInputs)
+    const governanceInfo = getGovernanceInfo(output, wrappedInputs, metadata)
 
     return {
         type: ActivityType.Governance,
@@ -62,23 +62,44 @@ export function generateSingleGovernanceActivity(
 
 function getGovernanceInfo(
     output: Output,
-    inputs: IWrappedOutput[]
+    inputs: IWrappedOutput[],
+    metadata: string
 ): {
     governanceAction: GovernanceAction
     votingPower: number
     votingPowerDifference?: number
+    participation?: IParticipation
 } {
     const currentVotingPower = getAmountFromOutput(output)
+    const participations = parseGovernanceMetadata(metadata)
+
     const governanceInput = inputs?.find((input) => isParticipationOutput(input.output))
     if (governanceInput) {
-        const oldVotingPower = getAmountFromOutput(governanceInput.output)
-        return {
-            governanceAction:
-                currentVotingPower - oldVotingPower > 0
-                    ? GovernanceAction.IncreaseVotingPower
-                    : GovernanceAction.DecreaseVotingPower,
-            votingPower: currentVotingPower,
-            votingPowerDifference: Math.abs(currentVotingPower - oldVotingPower),
+        const oldParticipations = parseGovernanceMetadata(metadata)
+        const { addedParticipation, removedParticipation } = getVotingDifferences(oldParticipations, participations)
+
+        if (addedParticipation) {
+            return {
+                governanceAction: GovernanceAction.StartVoting,
+                votingPower: currentVotingPower,
+                participation: addedParticipation,
+            }
+        } else if (removedParticipation) {
+            return {
+                governanceAction: GovernanceAction.StopVoting,
+                votingPower: currentVotingPower,
+                participation: removedParticipation,
+            }
+        } else {
+            const oldVotingPower = getAmountFromOutput(governanceInput.output)
+            return {
+                governanceAction:
+                    currentVotingPower - oldVotingPower > 0
+                        ? GovernanceAction.IncreaseVotingPower
+                        : GovernanceAction.DecreaseVotingPower,
+                votingPower: currentVotingPower,
+                votingPowerDifference: Math.abs(currentVotingPower - oldVotingPower),
+            }
         }
     }
     return {
@@ -86,4 +107,18 @@ function getGovernanceInfo(
         votingPower: currentVotingPower,
         votingPowerDifference: currentVotingPower,
     }
+}
+
+function getVotingDifferences(
+    oldParticipations: IParticipation[],
+    newParticipations: IParticipation[]
+): { removedParticipation: IParticipation; addedParticipation: IParticipation } {
+    const removedParticipation = oldParticipations.find((oldParticipation) =>
+        newParticipations.some((newParticipation) => newParticipation.eventId === oldParticipation.eventId)
+    )
+    const addedParticipation = newParticipations.find((newParticipation) =>
+        newParticipations.some((oldParticipation) => oldParticipation.eventId === newParticipation.eventId)
+    )
+
+    return { removedParticipation, addedParticipation }
 }

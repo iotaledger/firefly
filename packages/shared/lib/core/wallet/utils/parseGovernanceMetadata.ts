@@ -4,7 +4,7 @@ import { IParticipation } from '../interfaces'
 
 export function parseGovernanceMetadata(metadata: string): IParticipation[] {
     if (!metadata) {
-        return undefined
+        return []
     }
 
     const readStream = new ReadStream(Converter.hexToBytes(metadata.substring(2)))

@@ -5,7 +5,7 @@ import { BaseActivity } from './base-activity.type'
 export type GovernanceActivity = BaseActivity & {
     type: ActivityType.Governance
     governanceAction: GovernanceAction
-    participations: IParticipation[]
     votingPower: number
+    participation?: IParticipation
     votingPowerDifference?: number
 }

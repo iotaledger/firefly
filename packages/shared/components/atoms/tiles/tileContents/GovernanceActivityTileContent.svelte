@@ -34,7 +34,7 @@
         >
             {localize(title)}
         </Text>
-        {#if amount}
+        {#if activity.governanceAction === GovernanceAction.DecreaseVotingPower || activity.governanceAction === GovernanceAction.IncreaseVotingPower}
             <Text
                 fontWeight={FontWeight.semibold}
                 lineHeight="140"
@@ -45,4 +45,13 @@
             </Text>
         {/if}
     </div>
+    {#if activity.participation}
+        <div class="flex flex-row justify-between">
+            <Text fontWeight={FontWeight.medium} lineHeight="140" color="gray-600">
+                {localize('general.forEvent', {
+                    values: { eventId: activity.participation.eventId },
+                })}
+            </Text>
+        </div>
+    {/if}
 </div>
