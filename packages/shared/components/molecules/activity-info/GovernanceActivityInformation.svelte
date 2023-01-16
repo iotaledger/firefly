@@ -1,8 +1,7 @@
 <script lang="typescript">
     import { KeyValueBox } from 'shared/components'
-    import { localize } from '@core/i18n'
+    import { getFormattedTimeStamp, localize } from '@core/i18n'
     import { getFormattedVotingPowerFromGovernanceActivity, GovernanceActivity } from '@core/wallet'
-    import { getFormattedTimeStamp } from '@core/network'
 
     export let activity: GovernanceActivity
 
