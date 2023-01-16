@@ -11,7 +11,7 @@
     $: {
         if (action === ActivityAction.Send) {
             localizationKey = (isInternal ? 'internal.' : 'external.') + direction
-        } else if (action === ActivityAction.Mint) {
+        } else if (action === ActivityAction.Mint || action === ActivityAction.Burn) {
             localizationKey = action
         }
     }

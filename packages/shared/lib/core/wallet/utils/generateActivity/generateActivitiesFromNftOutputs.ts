@@ -4,7 +4,7 @@ import { Activity } from '@core/wallet/types'
 import type { INftOutput } from '@iota/types'
 import { generateSingleNftActivity } from './generateSingleNftActivity'
 
-export function generateNftActivitiesFromTransaction(
+export function generateActivitiesFromNftOutputs(
     processedTransaction: IProcessedTransaction,
     account: IAccountState
 ): Activity[] {

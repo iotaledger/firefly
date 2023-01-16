@@ -1252,6 +1252,8 @@
         "shimmerGenesis": "Shimmer Genesis",
         "minted": "Minted",
         "minting": "Minting",
+        "burned": "Burned",
+        "burning": "Burning",
         "aliasCreated": "Alias created",
         "creatingAlias": "Creating Alias",
         "sendPayment": "Send Payment",
@@ -1731,7 +1733,8 @@
             "recipientRequired": "Recipient is required",
             "nftRequired": "NFT is required",
             "nftNotInHex": "NFT address has to be in HEX format",
-            "nftNotInPossession": "NFT not in possession"
+            "nftNotInPossession": "NFT not in possession",
+            "reservedTagKeyword": "Unable to use reserved tag keyword"
         },
         "layer2": {
             "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account."
@@ -2022,6 +2025,11 @@
             "Pending": "minting",
             "Confirmed": "minted",
             "Conflicting": "failed to mint"
+        },
+        "burn": {
+            "Pending": "burning",
+            "Confirmed": "burned",
+            "Conflicting": "failed to burn"
         },
         "migrate": {
             "Pending": "migrating for",

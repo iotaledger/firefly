@@ -1,11 +1,12 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Participations, VotingEventPayload, ParticipationEventType } from '@iota/wallet/out/types'
+    import { VotingEventPayload, ParticipationEventType } from '@iota/wallet/out/types'
     import { localize } from '@core/i18n'
     import {
         Button,
         FontWeight,
         Icon,
+        KeyValueBox,
         Pane,
         ProposalDetailsButton,
         ProposalInformation,
@@ -15,20 +16,32 @@
         TextType,
     } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { openPopup } from '@auxiliary/popup'
+    import { openPopup } from '@auxiliary/popup/actions'
     import { activeProfileId } from '@core/profile/stores'
-    import { networkStatus } from '@core/network/stores'
-    import { getVotingEvent } from '@core/profile-manager'
-    import { governanceRouter } from '@core/router'
-    import { getParticipationOverview, selectedAccount } from '@core/account'
+    import { getVotingEvent } from '@core/profile-manager/api'
+    import { governanceRouter } from '@core/router/routers'
+    import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
     import { ProposalStatus } from '@contexts/governance/enums'
-    import { proposalsState, selectedProposal } from '@contexts/governance/stores'
+    import {
+        participationOverview,
+        proposalsState,
+        selectedProposal,
+        updateParticipationOverview,
+    } from '@contexts/governance/stores'
+    import { calculateWeightedVotes } from '@contexts/governance/utils'
 
     let selectedAnswerValues: number[] = []
+    let votedAnswerValues: number[] = []
     let votingPayload: VotingEventPayload
     let totalVotes = 0
+    let hasMounted = false
 
+    $: $selectedAccountIndex, void updateParticipationOverview()
     $: proposalState = $proposalsState[$activeProfileId]?.[$selectedProposal?.id]?.state
+
+    // Reactively start updating votes once component has mounted and participation overview is available.
+    $: hasMounted && $participationOverview && proposalState && setCurrentAndTotalVotes()
+
     $: votesCounter = {
         total: totalVotes,
         power: $selectedAccount?.votingPower,
@@ -55,27 +68,23 @@
         }
     }
 
-    async function setTotalVotes(): Promise<void> {
-        const participations: Participations = (await getParticipationOverview($selectedAccount?.index))?.participations
-        const selectedProposalOverview = participations[$selectedProposal?.id]
-
+    function setCurrentAndTotalVotes(): void {
+        const selectedProposalOverview = $participationOverview?.participations?.[$selectedProposal?.id]
         if (selectedProposalOverview) {
-            const votes = Object.values(selectedProposalOverview).map(
-                ({ amount, startMilestoneIndex, endMilestoneIndex }) => {
-                    const endMilestone = endMilestoneIndex <= 0 ? $networkStatus?.currentMilestone : endMilestoneIndex
-                    return parseInt(amount, 10) * (endMilestone - startMilestoneIndex)
-                }
-            )
+            const trackedParticipations = Object.values(selectedProposalOverview)
+            const votes = calculateWeightedVotes(trackedParticipations)
+
+            votedAnswerValues =
+                trackedParticipations.find((overview) => overview.endMilestoneIndex === 0)?.answers ?? []
             totalVotes = votes?.reduce((accumulator, votes) => accumulator + votes, 0) ?? 0
-        } else {
-            totalVotes = 0
         }
     }
 
     let openedQuestionIndex = null
 
-    function handleQuestionClick(index: number): void {
-        openedQuestionIndex = openedQuestionIndex === index ? null : index
+    function handleQuestionClick(event: CustomEvent): void {
+        const { questionIndex } = event.detail
+        openedQuestionIndex = openedQuestionIndex === questionIndex ? null : questionIndex
     }
 
     function handleCancelClick(): void {
@@ -89,9 +98,19 @@
         })
     }
 
-    onMount(() => {
-        void setVotingEventPayload($selectedProposal?.id)
-        void setTotalVotes()
+    function handleAnswerClick(event: CustomEvent): void {
+        const { answerValue, questionIndex } = event.detail
+        if (selectedAnswerValues[questionIndex] === answerValue) {
+            selectedAnswerValues[questionIndex] = null
+        } else {
+            selectedAnswerValues[questionIndex] = answerValue
+        }
+    }
+
+    onMount(async () => {
+        await setVotingEventPayload($selectedProposal?.id)
+        await updateParticipationOverview()
+        hasMounted = true
     })
 </script>
 
@@ -118,13 +137,11 @@
             </Text>
             <ul class="space-y-2">
                 {#each Object.keys(votesCounter) as counterKey}
-                    <li class="flex justify-between bg-gray-50 px-4 py-3 rounded-lg">
-                        <Text fontWeight={FontWeight.medium} overrideColor classes="text-gray-600">
-                            {localize(`views.governance.details.yourVote.${counterKey}`)}
-                        </Text>
-                        <Text overrideColor classes="text-gray-600">
-                            {votesCounter[counterKey]}
-                        </Text>
+                    <li>
+                        <KeyValueBox
+                            keyText={localize(`views.governance.details.yourVote.${counterKey}`)}
+                            valueText={votesCounter[counterKey].toString()}
+                        />
                     </li>
                 {/each}
             </ul>
@@ -139,9 +156,11 @@
                         {question}
                         {questionIndex}
                         isOpened={openedQuestionIndex === questionIndex}
-                        bind:selectedAnswerValues
-                        currentVote={proposalState?.questions[questionIndex]?.answers}
-                        onClick={() => handleQuestionClick(questionIndex)}
+                        selectedAnswerValue={selectedAnswerValues[questionIndex]}
+                        votedAnswerValue={votedAnswerValues[questionIndex]}
+                        allVotes={proposalState?.questions[questionIndex]?.answers}
+                        on:clickQuestion={handleQuestionClick}
+                        on:clickAnswer={handleAnswerClick}
                     />
                 {/each}
             {/if}
