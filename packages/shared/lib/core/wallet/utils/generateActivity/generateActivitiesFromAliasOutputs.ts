@@ -4,7 +4,7 @@ import { Activity } from '@core/wallet/types'
 import type { IAliasOutput } from '@iota/types'
 import { generateSingleAliasActivity } from './generateSingleAliasActivity'
 
-export function generateAliasActivitiesFromTransaction(
+export function generateActivitiesFromAliasOutputs(
     processedTransaction: IProcessedTransaction,
     account: IAccountState
 ): Activity[] {

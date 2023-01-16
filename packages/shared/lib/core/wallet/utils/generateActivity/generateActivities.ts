@@ -13,10 +13,10 @@ import { generateSingleFoundryActivity } from './generateSingleFoundryActivity'
 import { generateSingleNftActivity } from './generateSingleNftActivity'
 import { generateSingleBasicActivity } from './generateSingleBasicActivity'
 import { getActivityTypeFromOutput } from './helper'
-import { generateNftActivitiesFromTransaction } from './generateNftActivitiesFromTransaction'
-import { generateAliasActivitiesFromTransaction } from './generateAliasActivitiesFromTransaction'
-import { generateBasicActivitiesFromTransaction } from './generateBasicActivitiesFromTransaction'
-import { generateFoundryActivitiesFromTransaction } from './generateFoundryActivitiesFromTransaction'
+import { generateActivitiesFromNftOutputs } from './generateActivitiesFromNftOutputs'
+import { generateActivitiesFromAliasOutputs } from './generateActivitiesFromAliasOutputs'
+import { generateActivitiesFromBasicOutputs } from './generateActivitiesFromBasicOutputs'
+import { generateActivitiesFromFoundryOutputs } from './generateActivitiesFromFoundryOutputs'
 
 export function generateActivities(processedTransaction: IProcessedTransaction, account: IAccountState): Activity[] {
     if (processedTransaction.wrappedInputs?.length > 0) {
@@ -35,25 +35,25 @@ function generateActivitiesFromProcessedTransactionsWithInputs(
 
     const containsFoundryActivity = outputs.some((output) => output.output.type === OUTPUT_TYPE_FOUNDRY)
     if (containsFoundryActivity) {
-        const foundryActivities = generateFoundryActivitiesFromTransaction(processedTransaction, account)
+        const foundryActivities = generateActivitiesFromFoundryOutputs(processedTransaction, account)
         activities.push(...foundryActivities)
     }
 
     const containsNftActivity = outputs.some((output) => output.output.type === OUTPUT_TYPE_NFT)
     if (containsNftActivity) {
-        const nftActivities = generateNftActivitiesFromTransaction(processedTransaction, account)
+        const nftActivities = generateActivitiesFromNftOutputs(processedTransaction, account)
         activities.push(...nftActivities)
     }
 
     const containsAliasActivity =
         outputs.some((output) => output.output.type === OUTPUT_TYPE_ALIAS) && !containsFoundryActivity
     if (containsAliasActivity) {
-        const aliasActivities = generateAliasActivitiesFromTransaction(processedTransaction, account)
+        const aliasActivities = generateActivitiesFromAliasOutputs(processedTransaction, account)
         activities.push(...aliasActivities)
     }
 
     if (!containsFoundryActivity && !containsNftActivity && !containsAliasActivity) {
-        const basicActivities = generateBasicActivitiesFromTransaction(processedTransaction, account)
+        const basicActivities = generateActivitiesFromBasicOutputs(processedTransaction, account)
         activities.push(...basicActivities)
     }
 
