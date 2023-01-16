@@ -1021,6 +1021,11 @@
             "hint": "Please note that your voting power depends on the amount of funds you hold in your wallet. The more funds you hold, the higher your voting power is!",
             "noVotingPower": "You do not have any voting power. Please increase your voting power from the Governance dashboard."
         },
+        "revote": {
+            "title": "Revote on proposals",
+            "body": "As mentioned in the previous step, changing your voting power temporarly stopped your voting for all proposals on which you were currently voting. In this step, you can easily revote for all of them with only one click!",
+            "hint": "We remembered all the proposals and answer options you previously voted for."
+        },
         "removeProposal": {
             "title": "Remove proposal",
             "body": "Are you sure you want to remove this proposal?",
