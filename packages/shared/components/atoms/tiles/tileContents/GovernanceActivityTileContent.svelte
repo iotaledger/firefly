@@ -38,6 +38,7 @@
             <Text
                 fontWeight={FontWeight.semibold}
                 lineHeight="140"
+                classes="text-right"
                 color={activity.governanceAction === GovernanceAction.DecreaseVotingPower ? '' : 'blue-700'}
             >
                 {amount}
