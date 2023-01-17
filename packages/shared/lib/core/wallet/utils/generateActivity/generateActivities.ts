@@ -17,8 +17,8 @@ import { getActivityTypeFromOutput } from './helper'
 import { isParticipationOutput } from '@contexts/governance'
 import { generateActivitiesFromNftOutputs } from './generateActivitiesFromNftOutputs'
 import { generateActivitiesFromAliasOutputs } from './generateActivitiesFromAliasOutputs'
-import { generateActivitiesFromBasicOutputs } from './generateActivitiesFromBasicOutputs'
 import { generateActivitiesFromFoundryOutputs } from './generateActivitiesFromFoundryOutputs'
+import { generateActivitiesFromBasicOutputs } from './generateActivitiesFromBasicOutputs'
 
 export function generateActivities(processedTransaction: IProcessedTransaction, account: IAccountState): Activity[] {
     if (processedTransaction.wrappedInputs?.length > 0) {
