@@ -1,13 +1,13 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Modal, MenuItem, Text, Tooltip } from 'shared/components'
+    import { Modal, MenuItem, Text, Tooltip, Spinner } from 'shared/components'
     import { Position } from 'shared/components/enums'
     import { Icon } from '@auxiliary/icon'
     import { openPopup } from '@auxiliary/popup/actions'
     import { handleError } from '@core/error/handlers'
     import { isAnyAccountVotingForSelectedProposal, isVotingForSelectedProposal } from '@contexts/governance/utils'
     import { localize } from '@core/i18n'
-    import { selectedAccount } from '@core/account'
+    import { selectedAccount } from '@core/account/stores'
 
     export let modal: Modal = undefined
 
@@ -15,6 +15,7 @@
     let isAnyAccountVotingForProposal: boolean
     let deleteMenuItem: HTMLDivElement
     let isTooltipVisible = false
+    let isBusy = true // starts in a busy state because data needs to be fetched before displaying selectable options
 
     $: isTransferring = $selectedAccount?.isTransferring
     $: isTransferring, void updateIsVoting() // vote/stop vote changes the isTransferring value, this means that is less updates than relying on proposalsState
@@ -47,12 +48,16 @@
         isTooltipVisible = isVotingForProposal !== undefined && isAnyAccountVotingForProposal && show
     }
 
-    onMount(() => updateIsVoting())
+    onMount(() => void updateIsVoting())
 </script>
 
 <Modal bind:this={modal} {...$$restProps}>
     <div class="flex flex-col">
-        {#if isVotingForProposal}
+        {#if isBusy}
+            <div class="flex justify-center items-center p-3 bg-gray-200">
+                <Spinner message={localize('views.governance.details.fetching')} busy width={16} height={16} />
+            </div>
+        {:else if isVotingForProposal}
             <MenuItem
                 icon={Icon.Close}
                 iconProps={{ width: '16', height: '16' }}
@@ -71,8 +76,7 @@
                     title={localize('actions.removeProposal')}
                     onClick={onRemoveProposalClick}
                     variant="error"
-                    disabled={isAnyAccountVotingForProposal || isBusy}
-                    {isBusy}
+                    disabled={isAnyAccountVotingForProposal}
                 />
             </div>
             {#if isTooltipVisible}
