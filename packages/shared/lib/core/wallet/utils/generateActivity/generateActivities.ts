@@ -14,7 +14,6 @@ import { generateSingleGovernanceActivity } from './generateSingleGovernanceActi
 import { generateSingleNftActivity } from './generateSingleNftActivity'
 import { generateSingleBasicActivity } from './generateSingleBasicActivity'
 import { getActivityTypeFromOutput } from './helper'
-import { isParticipationOutput } from '@contexts/governance'
 import { generateActivitiesFromNftOutputs } from './generateActivitiesFromNftOutputs'
 import { generateActivitiesFromAliasOutputs } from './generateActivitiesFromAliasOutputs'
 import { generateActivitiesFromFoundryOutputs } from './generateActivitiesFromFoundryOutputs'
