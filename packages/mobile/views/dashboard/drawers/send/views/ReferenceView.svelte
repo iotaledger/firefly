@@ -5,6 +5,7 @@
     import { Button, FontWeight, TextInput } from 'shared/components'
     import { onMount } from 'svelte'
     import { sendRouter } from '../../../../../lib/routers'
+    import { isKeyboardOpen, keyboardHeight } from '../../../../../lib/auxiliary/keyboard'
 
     let metadata, tag: string
     let error: string = undefined
@@ -54,7 +55,9 @@
             />
         </div>
     </div>
-    <Button onClick={onContinueClick} classes="w-full" disabled={!!error}>
-        {error ?? localize('actions.continue')}
-    </Button>
+    <div style={$isKeyboardOpen && `margin-bottom: ${$keyboardHeight}px`}>
+        <Button onClick={onContinueClick} classes="w-full" disabled={!!error}>
+            {error ?? localize('actions.continue')}
+        </Button>
+    </div>
 </div>
