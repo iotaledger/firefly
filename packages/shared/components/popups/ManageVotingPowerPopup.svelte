@@ -7,7 +7,13 @@
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile'
     import { visibleSelectedAccountAssets } from '@core/wallet'
-    import { closePopup } from '@auxiliary/popup'
+    import { closePopup, openPopup, popupState } from '@auxiliary/popup'
+    import { votingPowerTransactionState } from '@contexts/governance/stores'
+    import { InclusionState } from '@iota/wallet/out/types'
+    import { onMount } from 'svelte'
+    import { modifyPopupState } from '@auxiliary/popup/helpers'
+
+    export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
     const asset = $visibleSelectedAccountAssets?.baseCoin
 
@@ -15,7 +21,8 @@
     let rawAmount = $selectedAccount?.votingPower
 
     $: votingPower = parseInt($selectedAccount?.votingPower, 10)
-    $: isTransferring = $selectedAccount?.isTransferring
+    $: $votingPowerTransactionState, openRevotePopupIfNecessary()
+    $: disabled = $votingPowerTransactionState === InclusionState.Pending || $selectedAccount?.isTransferring
 
     function onCancelClick(): void {
         closePopup()
@@ -24,15 +31,40 @@
     async function onSubmit(): Promise<void> {
         try {
             await assetAmountInput?.validate()
-            await checkActiveProfileAuth(async () => {
-                await setVotingPower(rawAmount)
-                closePopup()
-            })
+            await checkActiveProfileAuth(
+                async () => {
+                    await setVotingPower(rawAmount)
+                },
+                { stronghold: true, ledger: false }
+            )
         } catch (err) {
             handleError(err)
             closePopup()
         }
     }
+
+    function openRevotePopupIfNecessary(): void {
+        if ($votingPowerTransactionState === InclusionState.Confirmed) {
+            modifyPopupState({ ...$popupState, preventClose: false, hideClose: false }, true)
+            openPopup({
+                type: 'revote',
+            })
+        }
+    }
+
+    onMount(async () => {
+        disabled = true
+        try {
+            await _onMount()
+            if ($votingPowerTransactionState === InclusionState.Pending) {
+                modifyPopupState({ ...$popupState, preventClose: true, hideClose: true })
+            } else {
+                disabled = false
+            }
+        } catch (err) {
+            handleError(err)
+        }
+    })
 </script>
 
 <form id="manage-voting-power" on:submit|preventDefault={onSubmit}>
@@ -45,16 +77,16 @@
             {asset}
             containsSlider
             disableAssetSelection
-            disabled={isTransferring}
+            {disabled}
             {votingPower}
         />
         <TextHint info text={localize('popups.manageVotingPower.hint')} />
     </div>
     <div class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button outline classes="w-full" disabled={isTransferring} onClick={onCancelClick}>
+        <Button outline classes="w-full" {disabled} onClick={onCancelClick}>
             {localize('actions.cancel')}
         </Button>
-        <Button type={HTMLButtonType.Submit} disabled={isTransferring} isBusy={isTransferring} classes="w-full">
+        <Button type={HTMLButtonType.Submit} {disabled} isBusy={disabled} classes="w-full">
             {localize('actions.confirm')}
         </Button>
     </div>
