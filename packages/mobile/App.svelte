@@ -27,6 +27,7 @@
         resetRouters,
     } from './lib/routers'
     import { DashboardView, LoginRouter, OnboardingRouter } from './views'
+    import { Keyboard } from '@capacitor/keyboard'
     import { SplashScreen } from '@capacitor/splash-screen'
 
     appStage.set(AppStage[process.env.STAGE?.toUpperCase()] ?? AppStage.ALPHA)
@@ -69,8 +70,18 @@
         setPlatform(platform)
     })
 
-    $keyboardHeight = window.innerHeight / 2
-    // Press ctrl + k to toggle the fake keyboard
+    $keyboardHeight = window.screen.height / 2
+
+    void Keyboard.addListener('keyboardWillShow', (info) => {
+        // Listen for when the keyboard is about to be showed.
+        $keyboardHeight = info.keyboardHeight
+        $isKeyboardOpen = true
+    })
+    void Keyboard.addListener('keyboardWillHide', () => {
+        // Listen for when the keyboard is about to be hidden.
+        $isKeyboardOpen = false
+    })
+
     document.onkeydown = function (e): void {
         if (e.ctrlKey && e.key === 'c') {
             $appSettings.theme = $appSettings.theme === AppTheme.Light ? AppTheme.Dark : AppTheme.Light
@@ -78,9 +89,6 @@
         }
         if (e.ctrlKey && e.key === 'd') {
             $onboardingProfile.isDeveloperProfile = true
-        }
-        if (e.ctrlKey && e.key === 'k') {
-            $isKeyboardOpen = !$isKeyboardOpen
         }
     }
 </script>
@@ -100,9 +108,6 @@
 </Route>
 
 <ToastContainer />
-{#if $isKeyboardOpen}
-    <div class="keyboard" />
-{/if}
 
 <style global type="text/scss">
     @tailwind base;
@@ -172,14 +177,5 @@
     }
     img {
         -webkit-user-drag: none;
-    }
-
-    .keyboard {
-        position: absolute;
-        bottom: 0;
-        height: 50%;
-        width: 100%;
-        background-color: black;
-        z-index: 100;
     }
 </style>
