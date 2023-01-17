@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { Animation, Icon, Text, TextType } from 'shared/components'
+    import { Icon as IconType } from '@lib/auxiliary/icon'
     import { isKeyboardOpen, keyboardHeight } from '../lib/auxiliary/keyboard'
 
     export let allowBack = true
@@ -24,7 +25,7 @@
         {#if allowBack}
             <button on:click={onBackClick} class="absolute left-0" disabled={busy}>
                 <Icon
-                    icon="arrow-left"
+                    icon={IconType.ArrowLeft}
                     classes={busy ? 'pointer-events-none text-gray-500' : 'cursor-pointer text-blue-500'}
                 />
             </button>
