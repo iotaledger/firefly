@@ -25,12 +25,16 @@
     }
 
     async function onProfileRecoverySelectionClick(recoveryType: ProfileRecoveryType): Promise<void> {
-        isBusy = { ...isBusy, [recoveryType]: true }
-        const type = getProfileTypeFromProfileRecoveryType(recoveryType)
-        updateOnboardingProfile({ type, recoveryType })
-        await initialiseProfileManagerFromOnboardingProfile(true)
-        await createShimmerClaimingProfileManager()
-        $profileSetupRouter.next()
+        if (Object.keys(isBusy).some((key) => isBusy[key])) {
+            return
+        } else {
+            isBusy = { ...isBusy, [recoveryType]: true }
+            const type = getProfileTypeFromProfileRecoveryType(recoveryType)
+            updateOnboardingProfile({ type, recoveryType, shimmerClaimingAccounts: [] })
+            await initialiseProfileManagerFromOnboardingProfile(true)
+            await createShimmerClaimingProfileManager()
+            $profileSetupRouter.next()
+        }
     }
     function onBackClick(): void {
         $profileSetupRouter.previous()
