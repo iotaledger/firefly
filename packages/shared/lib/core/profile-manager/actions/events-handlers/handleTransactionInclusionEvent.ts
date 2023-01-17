@@ -1,5 +1,8 @@
+import { get } from 'svelte/store'
+import { votingPowerTransactionState } from '@contexts/governance/stores'
 import { syncVotingPower } from '@core/account'
 import { updateNftInAllAccountNfts } from '@core/nfts'
+
 import { ActivityAction, ActivityDirection, ActivityType } from '@core/wallet'
 import { updateClaimingTransactionInclusion } from '@core/wallet/actions/activities/updateClaimingTransactionInclusion'
 import {
@@ -21,9 +24,8 @@ export function handleTransactionInclusionEventInternal(
     accountIndex: number,
     payload: ITransactionInclusionEventPayload
 ): void {
-    updateActivityByTransactionId(accountIndex, payload.transactionId, {
-        inclusionState: payload.inclusionState,
-    })
+    const { inclusionState } = payload
+    updateActivityByTransactionId(accountIndex, payload.transactionId, { inclusionState })
 
     const activity = getActivityByTransactionId(accountIndex, payload.transactionId)
 
@@ -36,8 +38,11 @@ export function handleTransactionInclusionEventInternal(
     }
 
     if (activity?.tag === 'PARTICIPATE') {
+        if (get(votingPowerTransactionState)) {
+            votingPowerTransactionState.set(inclusionState)
+        }
         syncVotingPower(accountIndex)
     }
 
-    updateClaimingTransactionInclusion(payload.transactionId, payload.inclusionState, accountIndex)
+    updateClaimingTransactionInclusion(payload.transactionId, inclusionState, accountIndex)
 }
