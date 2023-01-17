@@ -28,7 +28,7 @@ export function generateSingleConsolidationActivity(
 
     const output = wrappedOutput.output as IBasicOutput
 
-    const amountConsolidatedOutputs = getAmountOfConsolidationInputs(wrappedInputs)
+    const amountConsolidatedInputs = getAmountOfConsolidationInputs(wrappedInputs)
 
     const tag = getTagFromOutput(output)
     const metadata = getMetadataFromOutput(output)
@@ -54,7 +54,7 @@ export function generateSingleConsolidationActivity(
         metadata,
         tag,
         asyncData,
-        amountConsolidatedOutputs,
+        amountConsolidatedInputs,
         ...sendingInfo,
     }
 }

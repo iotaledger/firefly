@@ -10,8 +10,8 @@
         ...(activity.time && {
             transactionTime: { data: getFormattedTimeStamp(activity.time) },
         }),
-        ...(activity.amountConsolidatedOutputs && {
-            amountConsolidatedOutputs: { data: String(activity.amountConsolidatedOutputs) },
+        ...(activity.amountConsolidatedInputs && {
+            amountConsolidatedInputs: { data: String(activity.amountConsolidatedInputs) },
         }),
     }
 </script>
