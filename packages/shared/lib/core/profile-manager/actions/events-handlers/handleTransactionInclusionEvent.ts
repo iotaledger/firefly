@@ -35,6 +35,9 @@ export function handleTransactionInclusionEventInternal(
         updateNftInAllAccountNfts(accountIndex, activity.nftId, { isSpendable })
     }
 
+    // TODO: This check is problematic since the tag is removed when the voting power is set to zero,
+    // although we still need to sync since it was an adjustment of the voting power.
+    // Can we use activity?.type?
     if (activity?.tag === 'PARTICIPATE') {
         syncVotingPower(accountIndex)
     }
