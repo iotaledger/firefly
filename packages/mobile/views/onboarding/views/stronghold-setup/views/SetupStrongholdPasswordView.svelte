@@ -97,7 +97,7 @@
     } // zxcvbn lib recommends to not validate long passwords because of performance issues https://github.com/dropbox/zxcvbn#user-content-performance
 </script>
 
-<OnboardingLayout {onBackClick} {busy} {title} animation="password-desktop">
+<OnboardingLayout {onBackClick} {busy} {title}>
     <div slot="content" class="mb-5">
         <form on:submit|preventDefault={onContinueClick} id="password-form">
             <Text type={TextType.p} secondary

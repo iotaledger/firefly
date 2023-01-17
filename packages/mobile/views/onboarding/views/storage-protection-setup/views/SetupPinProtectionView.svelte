@@ -94,7 +94,7 @@
     })
 </script>
 
-<OnboardingLayout {onBackClick} {busy} {title} animation="pin-desktop">
+<OnboardingLayout {onBackClick} {busy} {title}>
     <div slot="content">
         <div class="flex flex-col">
             <Text type={TextType.p} secondary classes="mb-4"

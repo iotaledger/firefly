@@ -56,7 +56,7 @@
     })
 </script>
 
-<OnboardingLayout {onBackClick} {title} animation="profile-desktop">
+<OnboardingLayout {onBackClick} {title}>
     <div slot="content">
         <Text type={TextType.p} secondary classes="mb-4"
             >{localize('views.onboarding.profileSetup.enterName.body1')}</Text
