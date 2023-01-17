@@ -4,7 +4,7 @@
     import { isSoftwareProfile } from '@core/profile'
     import { setStrongholdPassword } from '@core/profile-manager'
     import { Button, ButtonSize, ButtonVariant, PasswordInput, Text, TextType } from 'shared/components'
-
+    import { isKeyboardOpen, keyboardHeight } from '../../../../../../../lib/auxiliary/keyboard'
     let isBusy = false
     let error = ''
     let password: string
@@ -41,14 +41,15 @@
             />
         {/if}
     </div>
-    <Button
-        disabled={(!password && $isSoftwareProfile) || isBusy}
-        size={ButtonSize.Medium}
-        classes="w-full"
-        onClick={handleDeleteClick}
-        variant={ButtonVariant.Warning}
-        {isBusy}
-    >
-        {localize('actions.delete')}
-    </Button>
+    <div style={$isKeyboardOpen && `margin-bottom: ${$keyboardHeight}px`}>
+        <Button
+            disabled={(!password && $isSoftwareProfile) || isBusy}
+            classes="w-full"
+            onClick={handleDeleteClick}
+            variant={ButtonVariant.Warning}
+            {isBusy}
+        >
+            {localize('actions.delete')}
+        </Button>
+    </div>
 </div>
