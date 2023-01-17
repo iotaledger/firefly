@@ -75,7 +75,8 @@ function getGovernanceInfo(
 
     const governanceInput = inputs?.find((input) => isParticipationOutput(input.output))
     if (governanceInput) {
-        const oldParticipations = parseGovernanceMetadata(metadata)
+        const oldMetadata = getMetadataFromOutput(governanceInput.output)
+        const oldParticipations = parseGovernanceMetadata(oldMetadata)
         const { addedParticipation, removedParticipation } = getVotingDifferences(oldParticipations, participations)
 
         if (addedParticipation) {
@@ -113,11 +114,13 @@ function getVotingDifferences(
     oldParticipations: IParticipation[],
     newParticipations: IParticipation[]
 ): { removedParticipation: IParticipation; addedParticipation: IParticipation } {
-    const removedParticipation = oldParticipations.find((oldParticipation) =>
-        newParticipations.some((newParticipation) => newParticipation.eventId === oldParticipation.eventId)
+    const removedParticipation = oldParticipations.find(
+        (oldParticipation) =>
+            !newParticipations.some((newParticipation) => newParticipation.eventId === oldParticipation.eventId)
     )
-    const addedParticipation = newParticipations.find((newParticipation) =>
-        newParticipations.some((oldParticipation) => oldParticipation.eventId === newParticipation.eventId)
+    const addedParticipation = newParticipations.find(
+        (newParticipation) =>
+            !oldParticipations.some((oldParticipation) => oldParticipation.eventId === newParticipation.eventId)
     )
 
     return { removedParticipation, addedParticipation }
