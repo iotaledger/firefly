@@ -1259,8 +1259,8 @@
         "minting": "Minting",
         "burned": "Burned",
         "burning": "Burning",
-        "consolidated": "Consolidated",
-        "consolidating": "Consolidating",
+        "consolidated": "Outputs consolidated",
+        "consolidating": "Consolidating outputs",
         "aliasCreated": "Alias created",
         "creatingAlias": "Creating Alias",
         "sendPayment": "Send Payment",
@@ -2039,9 +2039,9 @@
             "Conflicting": "failed to burn"
         },
         "consolidation": {
-            "Pending": "consolidating",
-            "Confirmed": "consolidated",
-            "Conflicting": "failed to consolidate"
+            "Pending": "Consolidating outputs",
+            "Confirmed": "Outputs consolidated",
+            "Conflicting": "failed to consolidate outputs"
         },
         "migrate": {
             "Pending": "migrating for",

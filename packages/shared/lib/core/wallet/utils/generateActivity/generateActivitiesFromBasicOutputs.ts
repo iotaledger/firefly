@@ -13,6 +13,7 @@ import {
 import { Activity } from '@core/wallet/types'
 import { INftOutput } from '@iota/types'
 import { generateSingleBasicActivity } from './generateSingleBasicActivity'
+import { generateSingleConsolidationActivity } from './generateSingleConsolidationActivity'
 import { generateSingleNftActivity } from './generateSingleNftActivity'
 
 export function generateActivitiesFromBasicOutputs(
@@ -49,12 +50,15 @@ export function generateActivitiesFromBasicOutputs(
             addOrUpdateNftInAllAccountNfts(account.index, nft)
 
             burnedNftInputs.splice(burnedNftInputIndex, 1)
+        } else if (isConsolidation(basicOutput, processedTransaction)) {
+            activity = generateSingleConsolidationActivity(account, {
+                action: ActivityAction.Send,
+                processedTransaction,
+                wrappedOutput: basicOutput,
+            })
         } else {
-            const action = isConsolidation(basicOutput, processedTransaction)
-                ? ActivityAction.Consolidation
-                : ActivityAction.Send
             activity = generateSingleBasicActivity(account, {
-                action,
+                action: ActivityAction.Send,
                 processedTransaction,
                 wrappedOutput: basicOutput,
             })
