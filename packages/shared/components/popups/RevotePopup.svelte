@@ -33,7 +33,7 @@
 <form id="manage-voting-power" class="space-y-5" on:submit|preventDefault={onSubmit}>
     <Text type={TextType.h4} classes="mb-3">{localize('popups.revote.title')}</Text>
     <Text type={TextType.p} secondary>{localize('popups.revote.body')}</Text>
-    <TextHint success text={localize('popups.revote.hint')} />
+    <TextHint info text={localize('popups.revote.hint')} />
     <div class="flex flex-row flex-nowrap w-full space-x-4">
         <Button outline classes="w-full" {disabled} onClick={onCancelClick}>
             {localize('actions.cancel')}
