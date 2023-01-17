@@ -1,15 +1,16 @@
-import { votingPowerTransactionState } from '@contexts/governance'
-import { selectedAccount, updateSelectedAccount } from '@core/account'
+import { get } from 'svelte/store'
+import { Transaction } from '@iota/wallet/out/types'
+import { hasToRevote } from '@contexts/governance/stores'
+import { selectedAccount, updateSelectedAccount } from '@core/account/stores'
 import {
     addActivitiesToAccountActivitiesInAllAccountActivities,
     generateActivities,
     preprocessTransaction,
 } from '@core/wallet'
-import { InclusionState, Transaction } from '@iota/wallet/out/types'
-import { get } from 'svelte/store'
 
 export async function setVotingPower(rawAmount: string): Promise<void> {
     try {
+        hasToRevote.set(true)
         const account = get(selectedAccount)
         updateSelectedAccount({ isTransferring: true })
         const votingPower = parseInt(account.votingPower, 10)
@@ -24,11 +25,10 @@ export async function setVotingPower(rawAmount: string): Promise<void> {
             transaction = await account.decreaseVotingPower(amountToDecrease.toString())
         }
 
-        votingPowerTransactionState.set(InclusionState.Pending)
         await processAndAddToActivities(transaction)
-
         updateSelectedAccount({ isTransferring: false })
     } catch (err) {
+        hasToRevote.set(false)
         updateSelectedAccount({ isTransferring: false })
     }
 }

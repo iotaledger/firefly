@@ -7,10 +7,9 @@
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { visibleSelectedAccountAssets } from '@core/wallet'
-    import { closePopup, openPopup } from '@auxiliary/popup/actions'
+    import { closePopup } from '@auxiliary/popup/actions'
     import { popupState } from '@auxiliary/popup/stores'
-    import { votingPowerTransactionState } from '@contexts/governance/stores'
-    import { InclusionState } from '@iota/wallet/out/types'
+    import { hasToRevote } from '@contexts/governance/stores'
     import { onMount } from 'svelte'
     import { modifyPopupState } from '@auxiliary/popup/helpers'
 
@@ -22,9 +21,7 @@
     let rawAmount = $selectedAccount?.votingPower
 
     $: votingPower = parseInt($selectedAccount?.votingPower, 10)
-    $: $votingPowerTransactionState, openRevotePopupIfNecessary()
-    $: disabled = $votingPowerTransactionState === InclusionState.Pending || $selectedAccount?.isTransferring
-    $: disableConfirm = disabled || $selectedAccount?.votingPower === rawAmount
+    $: disabled = $hasToRevote || $selectedAccount?.isTransferring
 
     function onCancelClick(): void {
         closePopup()
@@ -45,20 +42,11 @@
         }
     }
 
-    function openRevotePopupIfNecessary(): void {
-        if ($votingPowerTransactionState === InclusionState.Confirmed) {
-            modifyPopupState({ ...$popupState, preventClose: false, hideClose: false }, true)
-            openPopup({
-                type: 'revote',
-            })
-        }
-    }
-
     onMount(async () => {
         disabled = true
         try {
             await _onMount()
-            if ($votingPowerTransactionState === InclusionState.Pending) {
+            if ($hasToRevote) {
                 modifyPopupState({ ...$popupState, preventClose: true, hideClose: true })
             } else {
                 disabled = false
@@ -88,7 +76,7 @@
         <Button outline classes="w-full" {disabled} onClick={onCancelClick}>
             {localize('actions.cancel')}
         </Button>
-        <Button type={HTMLButtonType.Submit} disabled={disableConfirm} isBusy={disabled} classes="w-full">
+        <Button type={HTMLButtonType.Submit} {disabled} isBusy={disabled} classes="w-full">
             {localize('actions.confirm')}
         </Button>
     </div>

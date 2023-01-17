@@ -6,7 +6,7 @@
     import { closePopup } from '@auxiliary/popup/actions'
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { onDestroy } from 'svelte'
-    import { votingPowerTransactionState } from '@contexts/governance/stores'
+    import { hasToRevote } from '@contexts/governance/stores'
 
     $: disabled = $selectedAccount?.isTransferring || isBusy
 
@@ -26,7 +26,7 @@
     }
 
     onDestroy(() => {
-        $votingPowerTransactionState = null
+        $hasToRevote = false
     })
 </script>
 

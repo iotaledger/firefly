@@ -1,9 +1,9 @@
 import { get } from 'svelte/store'
-import { votingPowerTransactionState } from '@contexts/governance/stores'
+import { hasToRevote } from '@contexts/governance/stores'
 import { syncVotingPower } from '@core/account'
 import { updateNftInAllAccountNfts } from '@core/nfts'
 
-import { ActivityAction, ActivityDirection, ActivityType } from '@core/wallet'
+import { ActivityAction, ActivityDirection, ActivityType, InclusionState } from '@core/wallet'
 import { updateClaimingTransactionInclusion } from '@core/wallet/actions/activities/updateClaimingTransactionInclusion'
 import {
     updateActivityByTransactionId,
@@ -13,6 +13,7 @@ import {
 import { WalletApiEvent } from '../../enums'
 import { ITransactionInclusionEventPayload } from '../../interfaces'
 import { validateWalletApiEvent } from '../../utils'
+import { closePopup, openPopup } from '@auxiliary/popup/actions'
 
 export function handleTransactionInclusionEvent(error: Error, rawEvent: string): void {
     const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletApiEvent.TransactionInclusion)
@@ -38,8 +39,11 @@ export function handleTransactionInclusionEventInternal(
     }
 
     if (activity?.tag === 'PARTICIPATE') {
-        if (get(votingPowerTransactionState)) {
-            votingPowerTransactionState.set(inclusionState)
+        if (get(hasToRevote) && inclusionState === InclusionState.Confirmed) {
+            closePopup(true)
+            openPopup({
+                type: 'revote',
+            })
         }
         syncVotingPower(accountIndex)
     }
