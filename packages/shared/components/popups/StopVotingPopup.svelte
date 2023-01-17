@@ -9,6 +9,13 @@
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { selectedAccount, updateSelectedAccount } from '@core/account/stores'
+    import {
+        addActivitiesToAccountActivitiesInAllAccountActivities,
+        generateActivities,
+        preprocessTransaction,
+    } from '@core/wallet'
+    import { activeProfile, ProfileType } from '@core/profile'
+    import { handleLedgerError } from '@core/ledger'
 
     $: isTransferring = $selectedAccount?.isTransferring
 
@@ -20,7 +27,12 @@
         try {
             await checkActiveProfileAuth(async () => {
                 updateSelectedAccount({ isTransferring: true })
-                await stopVotingForProposal($selectedProposal?.id)
+
+                const transaction = await stopVotingForProposal($selectedProposal?.id)
+                const processedTransaction = await preprocessTransaction(transaction, $selectedAccount)
+                const activities = generateActivities(processedTransaction, $selectedAccount)
+                addActivitiesToAccountActivitiesInAllAccountActivities($selectedAccount.index, activities)
+
                 showAppNotification({
                     type: 'success',
                     message: localize('notifications.stopVoting.success'),
@@ -30,7 +42,13 @@
                 updateSelectedAccount({ isTransferring: false })
             })
         } catch (err) {
+            if ($activeProfile.type === ProfileType.Ledger) {
+                handleLedgerError(err)
+            } else {
+                handleError(err)
+            }
             handleError(err)
+        } finally {
             updateSelectedAccount({ isTransferring: false })
         }
     }
