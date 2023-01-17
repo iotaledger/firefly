@@ -20,7 +20,7 @@ export function generateSingleNftActivity(
     const isAssetHidden = false
     const containsValue = true
 
-    const nftId = getNftId(output.nftId, outputId)
+    const nftId = nftIdFromInput ? nftIdFromInput : getNftId(output.nftId, outputId)
     const storageDeposit = Number(output.amount)
     const giftedStorageDeposit = 0
     const metadata = getMetadataFromOutput(output)

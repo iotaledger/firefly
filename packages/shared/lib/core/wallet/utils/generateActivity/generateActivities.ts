@@ -102,7 +102,3 @@ function generateActivitiesFromProcessedTransactionsWithoutInputs(
         }
     })
 }
-function generateBasicActivitiesFromTransaction(processedTransaction: IProcessedTransaction, account: IAccountState) {
-    throw new Error('Function not implemented.')
-}
-
