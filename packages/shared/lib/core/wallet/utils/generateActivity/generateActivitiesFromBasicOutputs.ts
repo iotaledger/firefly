@@ -2,13 +2,13 @@ import { IAccountState } from '@core/account'
 import { addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput } from '@core/nfts'
 import {
     ActivityAction,
-    OUTPUT_TYPE_NFT,
     ActivityDirection,
     getNftId,
     getNonRemainderBasicOutputsFromTransaction,
     IProcessedTransaction,
     IWrappedOutput,
     OUTPUT_TYPE_BASIC,
+    OUTPUT_TYPE_NFT,
 } from '@core/wallet'
 import { Activity } from '@core/wallet/types'
 import { INftOutput } from '@iota/types'

@@ -11,7 +11,7 @@ export function generateSingleNftActivity(
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters,
     nftIdFromInput?: string
 ): NftActivity {
-    const { claimingData, utxoInputs, time, inclusionState, transactionId, direction } = processedTransaction
+    const { claimingData, time, inclusionState, transactionId, direction } = processedTransaction
     const outputId = wrappedOutput.outputId
     const output = wrappedOutput.output as INftOutput
     const id = outputId || transactionId
@@ -19,8 +19,6 @@ export function generateSingleNftActivity(
     const isHidden = false
     const isAssetHidden = false
     const containsValue = true
-
-    const inputs = utxoInputs
 
     const nftId = nftIdFromInput ? nftIdFromInput : getNftId(output.nftId, outputId)
     const storageDeposit = Number(output.amount)
@@ -45,7 +43,6 @@ export function generateSingleNftActivity(
         giftedStorageDeposit,
         isAssetHidden,
         containsValue,
-        inputs,
         inclusionState,
         storageDeposit,
         metadata,

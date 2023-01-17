@@ -3,6 +3,7 @@
         Tabs,
         GenericActivityInformation,
         AliasActivityInformation,
+        GovernanceActivityInformation,
         NftActivityInformation,
         FoundryActivityInformation,
         TokenActivityInformation,
@@ -16,7 +17,7 @@
 
     export let activity: Activity
     export let networkAddress: string = null
-    export let activeTab = Tab.Transaction
+    export let activeTab = activity.type === ActivityType.Governance ? Tab.Governance : Tab.Transaction
 
     let hasMetadata = false
     $: {
@@ -32,6 +33,9 @@
         switch (activity.type) {
             case ActivityType.Basic:
                 tabs = [Tab.Transaction, ...(activity?.parsedLayer2Metadata ? [Tab.SmartContract] : [])]
+                break
+            case ActivityType.Governance:
+                tabs = [Tab.Governance]
                 break
             case ActivityType.Alias:
                 tabs = [Tab.Transaction, Tab.Alias]
@@ -54,6 +58,8 @@
         <GenericActivityInformation {activity} {networkAddress} />
     {:else if activeTab === Tab.Alias && activity.type === ActivityType.Alias}
         <AliasActivityInformation {activity} />
+    {:else if activeTab === Tab.Governance && activity.type === ActivityType.Governance}
+        <GovernanceActivityInformation {activity} />
     {:else if activeTab === Tab.Nft && activity.type === ActivityType.Nft}
         <NftActivityInformation {activity} />
     {:else if activeTab === Tab.Foundry}

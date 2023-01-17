@@ -85,7 +85,12 @@ export const setLanguage = (item: { value }): void => {
  */
 export const formatDate = (
     date: Date,
-    options: Intl.DateTimeFormatOptions & { format?: string; locale?: string }
+    options: Intl.DateTimeFormatOptions & {
+        format?: string
+        locale?: string
+        dateStyle?: 'full' | 'long' | 'medium' | 'short'
+        timeStyle?: 'full' | 'long' | 'medium' | 'short'
+    }
 ): string => getDateFormatter({ locale: getLocaleFromNavigator(), ...options }).format(date)
 
 // We expose the svelte-i18n _ store so that our app has a single API for i18n

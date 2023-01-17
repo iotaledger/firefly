@@ -10,6 +10,7 @@ import {
 import { Activity } from '@core/wallet/types'
 import { generateSingleAliasActivity } from './generateSingleAliasActivity'
 import { generateSingleFoundryActivity } from './generateSingleFoundryActivity'
+import { generateSingleGovernanceActivity } from './generateSingleGovernanceActivity'
 import { generateSingleNftActivity } from './generateSingleNftActivity'
 import { generateSingleBasicActivity } from './generateSingleBasicActivity'
 import { getActivityTypeFromOutput } from './helper'
@@ -17,6 +18,7 @@ import { generateActivitiesFromNftOutputs } from './generateActivitiesFromNftOut
 import { generateActivitiesFromAliasOutputs } from './generateActivitiesFromAliasOutputs'
 import { generateActivitiesFromBasicOutputs } from './generateActivitiesFromBasicOutputs'
 import { generateActivitiesFromFoundryOutputs } from './generateActivitiesFromFoundryOutputs'
+import { isParticipationOutput } from '@contexts/governance/utils'
 
 export function generateActivities(processedTransaction: IProcessedTransaction, account: IAccountState): Activity[] {
     if (processedTransaction.wrappedInputs?.length > 0) {
@@ -52,7 +54,17 @@ function generateActivitiesFromProcessedTransactionsWithInputs(
         activities.push(...aliasActivities)
     }
 
-    if (!containsFoundryActivity && !containsNftActivity && !containsAliasActivity) {
+    const governanceOutput = outputs.find((output) => isParticipationOutput(output.output))
+    if (governanceOutput) {
+        const governanceActivity = generateSingleGovernanceActivity(account, {
+            processedTransaction,
+            wrappedOutput: governanceOutput,
+            action: null,
+        })
+        activities.push(governanceActivity)
+    }
+
+    if (!containsFoundryActivity && !containsNftActivity && !containsAliasActivity && !governanceOutput) {
         const basicActivities = generateActivitiesFromBasicOutputs(processedTransaction, account)
         activities.push(...basicActivities)
     }
@@ -79,6 +91,8 @@ function generateActivitiesFromProcessedTransactionsWithoutInputs(
         switch (params.type) {
             case ActivityType.Basic:
                 return generateSingleBasicActivity(account, params)
+            case ActivityType.Governance:
+                return generateSingleGovernanceActivity(account, params)
             case ActivityType.Foundry:
                 return generateSingleFoundryActivity(account, params)
             case ActivityType.Alias:
