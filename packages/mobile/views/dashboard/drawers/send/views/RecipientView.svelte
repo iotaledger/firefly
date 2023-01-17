@@ -82,12 +82,7 @@
         {/each}
     </div>
     <div style={$isKeyboardOpen && `margin-bottom: ${$keyboardHeight}px`}>
-        <Button 
-            disabled={!!recipientValidationError} 
-            outline 
-            classes="w-full" 
-            onClick={onContinueClick}
-        >
+        <Button disabled={!!recipientValidationError} outline classes="w-full" onClick={onContinueClick}>
             {recipientValidationError ?? localize('actions.continue')}
         </Button>
     </div>

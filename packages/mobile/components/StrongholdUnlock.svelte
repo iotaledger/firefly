@@ -48,7 +48,7 @@
         placeholder={localize('general.password')}
         autofocus
     />
-    <div 
+    <div
         style={$isKeyboardOpen && `margin-bottom: ${$keyboardHeight}px`}
         class="flex flex-row justify-between w-full space-x-4"
     >
