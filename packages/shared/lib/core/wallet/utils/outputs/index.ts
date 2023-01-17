@@ -1,5 +1,6 @@
 export * from './getExpirationDateFromOutput'
 export * from './getFormattedAmountFromActivity'
+export * from './getFormattedVotingPowerFromGovernanceActivity'
 export * from './getNativeTokenFromOutput'
 export * from './getSenderFromOutput'
 export * from './getIssuerFromNftOutput'

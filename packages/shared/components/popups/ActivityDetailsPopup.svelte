@@ -9,6 +9,7 @@
         BasicActivityDetails,
         AliasActivityDetails,
         FoundryActivityDetails,
+        GovernanceActivityDetails,
         NftActivityDetails,
         ActivityInformation,
     } from 'shared/components'
@@ -161,6 +162,8 @@
             <BasicActivityDetails {activity} />
         {:else if activity.type === ActivityType.Foundry}
             <FoundryActivityDetails {activity} />
+        {:else if activity.type === ActivityType.Governance}
+            <GovernanceActivityDetails {activity} />
         {:else if activity.type === ActivityType.Nft}
             <NftActivityDetails {activity} />
         {:else if activity.type === ActivityType.Alias}

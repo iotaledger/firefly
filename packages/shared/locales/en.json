@@ -1238,6 +1238,11 @@
         "sending": "Sending",
         "received": "Received",
         "receiving": "Receiving",
+        "votingPower": "New voting power",
+        "increased": "Voting power increased",
+        "increasing": "Increasing voting power",
+        "decreased": "Voting power decreased",
+        "decreasing": "Decreasing voting power",
         "sentNft": "NFT sent",
         "sendingNft": "Sending NFT",
         "receivedNft": "NFT received",
@@ -2044,6 +2049,18 @@
             "unclaimed": "unclaimed",
             "claimed": "claimed",
             "expired": "expired"
+        },
+        "governance": {
+            "increaseVotingPower": {
+                "Pending": "increasing voting power",
+                "Confirmed": "increased voting power",
+                "Conflicting": "failed to increased voting power"
+            },
+            "decreaseVotingPower": {
+                "Pending": "decreasing voting power",
+                "Confirmed": "decreased voting power",
+                "Conflicting": "failed to decreased voting power"
+            }
         },
         "alias": {
             "creation": {

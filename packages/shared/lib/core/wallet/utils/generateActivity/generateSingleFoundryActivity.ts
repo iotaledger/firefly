@@ -21,7 +21,7 @@ export function generateSingleFoundryActivity(
     account: IAccountState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
 ): FoundryActivity {
-    const { transactionId, claimingData, utxoInputs, time, direction, inclusionState } = processedTransaction
+    const { transactionId, claimingData, time, direction, inclusionState } = processedTransaction
 
     const output = wrappedOutput.output as IFoundryOutput
     const outputId = wrappedOutput.outputId
@@ -36,8 +36,6 @@ export function generateSingleFoundryActivity(
     const isHidden = false
     const isAssetHidden = false
     const containsValue = true
-
-    const inputs = utxoInputs
 
     const id = outputId || transactionId
     const nativeToken = getNativeTokenFromOutput(output)
@@ -67,7 +65,6 @@ export function generateSingleFoundryActivity(
         giftedStorageDeposit,
         rawAmount,
         time,
-        inputs,
         inclusionState,
         containsValue,
         isAssetHidden,
