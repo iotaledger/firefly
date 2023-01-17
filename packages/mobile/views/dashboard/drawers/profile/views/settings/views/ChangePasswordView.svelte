@@ -4,6 +4,7 @@
     import { changePasswordAndUnlockStronghold } from '@core/profile-manager'
     import { PASSWORD_REASON_MAP } from '@core/stronghold'
     import { Button, ButtonSize, PasswordInput, Text, TextType } from 'shared/components'
+    import { isKeyboardOpen, keyboardHeight } from '../../../../../../../lib/auxiliary/keyboard'
     import zxcvbn from 'zxcvbn'
 
     let startOfPasswordChange: number
@@ -126,11 +127,13 @@
             submitHandler={isPasswordValid}
         />
     </div>
-    <Button
-        size={ButtonSize.Medium}
-        disabled={!currentPassword || !newPassword || !confirmedPassword || busy}
-        onClick={changePassword}
-    >
-        {localize('views.settings.changePassword.title')}
-    </Button>
+    <div style={$isKeyboardOpen && `margin-bottom: ${$keyboardHeight}px`}>
+        <Button
+            classes="w-full"    
+            disabled={!currentPassword || !newPassword || !confirmedPassword || busy}
+            onClick={changePassword}
+        >
+            {localize('views.settings.changePassword.title')}
+        </Button>
+    </div>
 </div>
