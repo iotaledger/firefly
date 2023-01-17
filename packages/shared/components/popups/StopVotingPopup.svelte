@@ -39,7 +39,6 @@
                     alert: true,
                 })
                 closePopup()
-                updateSelectedAccount({ isTransferring: false })
             })
         } catch (err) {
             if ($activeProfile.type === ProfileType.Ledger) {

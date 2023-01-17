@@ -5,6 +5,7 @@
     import { BASE_TOKEN, COIN_TYPE } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { getVotingEvent } from '@core/profile-manager'
+    import { truncateString } from '@core/utils'
 
     export let activity: GovernanceActivity
 
@@ -17,7 +18,7 @@
               BASE_TOKEN[$activeProfile.networkProtocol],
               asset?.metadata?.unit
           )
-        : 0
+        : ''
     $: localizationKey = 'governance.' + activity.governanceAction
     $: activity.participation?.eventId, setProposalName()
 
@@ -27,7 +28,7 @@
                 proposalName = (await getVotingEvent(activity.participation.eventId)).data.name
             }
         } catch (err) {
-            proposalName = activity.participation.eventId
+            proposalName = truncateString(activity.participation.eventId, 6, 6)
         }
     }
 </script>
