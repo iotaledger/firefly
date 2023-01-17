@@ -119,13 +119,15 @@ export const queriedActivities: Readable<Activity[]> = derived(
     [selectedAccountActivities, activitySearchTerm, activityFilter],
     ([$selectedAccountActivities, $activitySearchTerm]) => {
         let activityList = $selectedAccountActivities.filter((_activity) => {
-            if (!_activity.isHidden && (_activity.type === ActivityType.Nft || _activity.type === ActivityType.Alias)) {
+            const containsAssets = _activity.type === ActivityType.Basic || _activity.type === ActivityType.Foundry
+            if (!_activity.isHidden && !containsAssets) {
                 return true
             }
 
             const asset =
-                (_activity.type === ActivityType.Basic || _activity.type === ActivityType.Foundry) &&
-                getAssetFromPersistedAssets(_activity.assetId)
+                _activity.type === ActivityType.Basic || _activity.type === ActivityType.Foundry
+                    ? getAssetFromPersistedAssets(_activity.assetId)
+                    : undefined
             const hasValidAsset = asset && isValidIrc30(asset.metadata)
             return !_activity.isHidden && hasValidAsset
         })

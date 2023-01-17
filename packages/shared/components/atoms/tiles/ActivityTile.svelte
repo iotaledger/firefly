@@ -18,6 +18,7 @@
         TimelockActivityTileFooter,
         AsyncActivityTileFooter,
         NftActivityTileContent,
+        GovernanceActivityTileContent,
     } from 'shared/components'
 
     export let activity: Activity
@@ -60,6 +61,8 @@
                 <AliasActivityTileContent {activity} />
             {:else if activity.type === ActivityType.Nft}
                 <NftActivityTileContent {activity} />
+            {:else if activity.type === ActivityType.Governance}
+                <GovernanceActivityTileContent {activity} />
             {:else}
                 <FoundryActivityTileContent {activity} />
             {/if}
