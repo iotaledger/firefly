@@ -2,6 +2,7 @@
     import { localize } from '@core/i18n'
     import { unlockStronghold } from '@core/profile'
     import { Button, HTMLButtonType, PasswordInput, Text } from 'shared/components'
+    import { isKeyboardOpen, keyboardHeight } from '../lib/auxiliary/keyboard'
 
     export let busyMessage: string = ''
 
@@ -47,7 +48,10 @@
         placeholder={localize('general.password')}
         autofocus
     />
-    <div class="flex flex-row justify-between w-full space-x-4">
+    <div 
+        style={$isKeyboardOpen && `margin-bottom: ${$keyboardHeight}px`}
+        class="flex flex-row justify-between w-full space-x-4"
+    >
         <Button outline classes="w-1/2" onClick={handleCancelClick} disabled={isBusy}>
             {localize('actions.cancel')}
         </Button>
