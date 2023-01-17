@@ -3,6 +3,7 @@
     import { localize } from '@core/i18n'
     import { activeProfile, updateActiveProfile, validateProfileName } from '@core/profile'
     import { Button, ButtonSize, HTMLButtonType, Input, Text, TextType } from 'shared/components'
+    import { isKeyboardOpen, keyboardHeight } from '../../../../../../../lib/auxiliary/keyboard'
 
     let newName = $activeProfile?.name
     let error = ''
@@ -42,7 +43,10 @@
         </Text>
         <Input {error} placeholder={$activeProfile?.name} bind:value={newName} />
     </div>
-    <Button size={ButtonSize.Medium} type={HTMLButtonType.Submit} {disabled}>
-        {localize('views.settings.changeProfileName.title')}
-    </Button>
+
+    <div style={$isKeyboardOpen && `margin-bottom: ${$keyboardHeight}px`}>
+        <Button classes="w-full" type={HTMLButtonType.Submit} {disabled}>
+            {localize('views.settings.changeProfileName.title')}
+        </Button>
+    </div>
 </form>
