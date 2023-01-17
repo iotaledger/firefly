@@ -1008,7 +1008,7 @@
         "manageVotingPower": {
             "title": "Manage voting power",
             "body": "Define your voting power to vote on proposals.",
-            "hint": "Increasing your voting power locks your funds. In order to make them spendable again, you need to decrease your voting power. This affects all proposals with an active vote."
+            "hint": "Increasing your voting power locks your funds. You need to decrease your voting power to make them spendable again. This affects all proposals with an active vote."
         },
         "registerProposal": {
             "title": "Register proposal",
@@ -1018,12 +1018,12 @@
             "title": "Vote for proposal",
             "body": "You're about to vote for {proposal} proposal",
             "key": "Your voting power",
-            "hint": "Please note that your voting power depends on the amount of funds you hold in your wallet. The more funds you hold, the higher your voting power is!",
+            "hint": "Please note that your voting power depends on the amount of funds you hold in your wallet. The more funds you hold, the higher your voting power is.",
             "noVotingPower": "You do not have any voting power. Please increase your voting power from the Governance dashboard."
         },
         "revote": {
             "title": "Revote on proposals",
-            "body": "As mentioned in the previous step, changing your voting power temporarly stopped your voting for all proposals on which you were currently voting. In this step, you can easily revote for all of them with only one click!",
+            "body": "As mentioned in the previous step, changing your voting power temporarily stops counting your votes for the proposals that you were voting for. In this step, you can easily revote for all of them with only one click.",
             "hint": "We remembered all the proposals and answer options you previously voted for."
         },
         "removeProposal": {

@@ -1,13 +1,14 @@
 <script lang="typescript">
     import { Button, Text, TextHint, AssetAmountInput } from 'shared/components'
     import { HTMLButtonType, TextType } from 'shared/components/enums'
-    import { selectedAccount } from '@core/account'
-    import { handleError } from '@core/error/handlers/handleError'
+    import { selectedAccount } from '@core/account/stores'
+    import { handleError } from '@core/error/handlers'
     import { setVotingPower } from '@contexts/governance/actions'
     import { localize } from '@core/i18n'
-    import { checkActiveProfileAuth } from '@core/profile'
+    import { checkActiveProfileAuth } from '@core/profile/actions'
     import { visibleSelectedAccountAssets } from '@core/wallet'
-    import { closePopup, openPopup, popupState } from '@auxiliary/popup'
+    import { closePopup, openPopup } from '@auxiliary/popup/actions'
+    import { popupState } from '@auxiliary/popup/stores'
     import { votingPowerTransactionState } from '@contexts/governance/stores'
     import { InclusionState } from '@iota/wallet/out/types'
     import { onMount } from 'svelte'
@@ -23,6 +24,7 @@
     $: votingPower = parseInt($selectedAccount?.votingPower, 10)
     $: $votingPowerTransactionState, openRevotePopupIfNecessary()
     $: disabled = $votingPowerTransactionState === InclusionState.Pending || $selectedAccount?.isTransferring
+    $: disableConfirm = disabled || $selectedAccount?.votingPower === rawAmount
 
     function onCancelClick(): void {
         closePopup()
@@ -86,7 +88,7 @@
         <Button outline classes="w-full" {disabled} onClick={onCancelClick}>
             {localize('actions.cancel')}
         </Button>
-        <Button type={HTMLButtonType.Submit} {disabled} isBusy={disabled} classes="w-full">
+        <Button type={HTMLButtonType.Submit} disabled={disableConfirm} isBusy={disabled} classes="w-full">
             {localize('actions.confirm')}
         </Button>
     </div>

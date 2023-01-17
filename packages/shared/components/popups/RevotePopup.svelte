@@ -1,12 +1,12 @@
 <script lang="typescript">
-    import { Button, Text, TextHint } from 'shared/components'
-    import { HTMLButtonType, TextType } from 'shared/components/enums'
-    import { selectedAccount, selectedAccountIndex, vote } from '@core/account'
+    import { Button, Text, TextHint, HTMLButtonType, TextType } from 'shared/components'
+    import { selectedAccount } from '@core/account/stores'
+    import { vote } from '@core/account/api'
     import { localize } from '@core/i18n'
-    import { closePopup } from '@auxiliary/popup'
+    import { closePopup } from '@auxiliary/popup/actions'
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { onDestroy } from 'svelte'
-    import { votingPowerTransactionState } from '@contexts/governance'
+    import { votingPowerTransactionState } from '@contexts/governance/stores'
 
     $: disabled = $selectedAccount?.isTransferring || isBusy
 
@@ -19,7 +19,7 @@
     async function onSubmit(): Promise<void> {
         isBusy = true
         await checkActiveProfileAuth(async () => {
-            await vote($selectedAccountIndex)
+            await vote()
             isBusy = false
             closePopup()
         })

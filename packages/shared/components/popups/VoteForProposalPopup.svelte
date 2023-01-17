@@ -24,7 +24,7 @@
         try {
             await checkActiveProfileAuth(async () => {
                 updateSelectedAccount({ isTransferring: true })
-                await vote($selectedAccount.index, $selectedProposal?.id, selectedAnswerValues)
+                await vote($selectedProposal?.id, selectedAnswerValues)
                 showAppNotification({
                     type: 'success',
                     message: localize('notifications.vote.success'),

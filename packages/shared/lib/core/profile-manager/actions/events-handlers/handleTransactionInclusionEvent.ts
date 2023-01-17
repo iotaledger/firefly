@@ -24,10 +24,10 @@ export function handleTransactionInclusionEventInternal(
     accountIndex: number,
     payload: ITransactionInclusionEventPayload
 ): void {
-    const { inclusionState } = payload
-    updateActivityByTransactionId(accountIndex, payload.transactionId, { inclusionState })
+    const { inclusionState, transactionId } = payload
+    updateActivityByTransactionId(accountIndex, transactionId, { inclusionState })
 
-    const activity = getActivityByTransactionId(accountIndex, payload.transactionId)
+    const activity = getActivityByTransactionId(accountIndex, transactionId)
 
     if (activity?.type === ActivityType.Nft) {
         const isSpendable =
@@ -44,5 +44,5 @@ export function handleTransactionInclusionEventInternal(
         syncVotingPower(accountIndex)
     }
 
-    updateClaimingTransactionInclusion(payload.transactionId, inclusionState, accountIndex)
+    updateClaimingTransactionInclusion(transactionId, inclusionState, accountIndex)
 }

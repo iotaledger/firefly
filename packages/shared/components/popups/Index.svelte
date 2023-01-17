@@ -1,9 +1,10 @@
 <script lang="typescript">
     import { mobile, PlatformOption, platform } from '@core/app'
     import { Drawer, Icon } from 'shared/components'
-    import { clickOutside } from '@core/utils'
-    import { closePopup, popupState } from '@auxiliary/popup'
-    import { Icon as IconEnum } from '@auxiliary/icon'
+    import { clickOutside } from '@core/utils/ui'
+    import { closePopup } from '@auxiliary/popup/actions'
+    import { popupState } from '@auxiliary/popup/stores'
+    import { Icon as IconEnum } from '@auxiliary/icon/enums'
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
 
