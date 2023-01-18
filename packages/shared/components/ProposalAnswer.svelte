@@ -44,9 +44,9 @@
 </script>
 
 <proposal-answer
-    class:disabled
     class:dark
-    class:hidden={isVotedFor || isWinner ? false : hidden}
+    class:disabled
+    class:hidden={isSelected || isWinner ? false : hidden}
     class:voted={isVotedFor}
     class:winner={isWinner}
     class:selected={isSelected}
