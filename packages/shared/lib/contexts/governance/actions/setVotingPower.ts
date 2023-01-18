@@ -1,12 +1,12 @@
 import { get } from 'svelte/store'
+
 import { Transaction } from '@iota/wallet/out/types'
-import { hasToRevote } from '@contexts/governance/stores'
+
 import { selectedAccount, updateSelectedAccount } from '@core/account/stores'
-import {
-    addActivitiesToAccountActivitiesInAllAccountActivities,
-    generateActivities,
-    preprocessTransaction,
-} from '@core/wallet'
+import { addActivitiesToAccountActivitiesInAllAccountActivities } from '@core/wallet/stores'
+import { generateActivities, preprocessTransaction } from '@core/wallet/utils'
+
+import { hasToRevote } from '../stores'
 import { isSelectedAccountVoting } from '../utils'
 
 export async function setVotingPower(rawAmount: string): Promise<void> {

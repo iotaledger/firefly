@@ -1008,7 +1008,7 @@
         "manageVotingPower": {
             "title": "Manage voting power",
             "body": "Define your voting power to vote on proposals.",
-            "revote": "Changing your voting power stops your voting for all proposals you currently vote on. But don’t worry, you can easily revote for all of them with only one click in the following step!",
+            "revote": "Changing your voting power temporarily stops your votes from being counted. Proceed to the following step to resume voting.",
             "hint": "Increasing your voting power locks your funds. You need to decrease your voting power to make them spendable again. This affects all proposals with an active vote."
         },
         "registerProposal": {
@@ -1025,7 +1025,7 @@
         "revote": {
             "title": "Revote on proposals",
             "body": "As mentioned in the previous step, changing your voting power temporarily stops counting your votes for the proposals that you were voting for. In this step, you can easily revote for all of them with only one click.",
-            "hint": "We remembered all the proposals and answer options you previously voted for."
+            "hint": "Firefly remembers all of the proposals and answer options you previously voted for."
         },
         "removeProposal": {
             "title": "Remove proposal",

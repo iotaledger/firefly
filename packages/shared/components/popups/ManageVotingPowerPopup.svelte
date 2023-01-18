@@ -29,15 +29,11 @@
     $: amount, disabled, setConfirmDisabled()
 
     function setConfirmDisabled(): void {
-        if (disabled) {
+        if (disabled || !amount) {
             confirmDisabled = true
             return
         }
 
-        if (!amount) {
-            confirmDisabled = true
-            return
-        }
         const convertedSliderAmount = convertToRawAmount(amount.toString(), 'SMR', asset?.metadata).toString()
         confirmDisabled = convertedSliderAmount === $selectedAccount?.votingPower
     }
@@ -75,6 +71,7 @@
                 disabled = $selectedAccount?.isTransferring
             }
         } catch (err) {
+            disabled = false
             handleError(err)
         }
     })
@@ -94,10 +91,10 @@
             {disabled}
             {votingPower}
         />
+        <TextHint info text={localize('popups.manageVotingPower.hint')} />
         {#if isSelectedAccountVoting()}
             <TextHint warning text={localize('popups.manageVotingPower.revote')} />
         {/if}
-        <TextHint info text={localize('popups.manageVotingPower.hint')} />
     </div>
     <div class="flex flex-row flex-nowrap w-full space-x-4">
         <Button outline classes="w-full" {disabled} onClick={onCancelClick}>
