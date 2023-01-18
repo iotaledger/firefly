@@ -8,19 +8,15 @@
     import { hasToRevote } from '@contexts/governance/stores'
     import { vote } from '@contexts/governance/actions'
 
-    $: disabled = $selectedAccount?.isTransferring || isBusy
-
-    let isBusy = false
+    $: disabled = $selectedAccount?.isTransferring
 
     function onCancelClick(): void {
         closePopup()
     }
 
     async function onSubmit(): Promise<void> {
-        isBusy = true
         await checkActiveProfileAuth(async () => {
             await vote()
-            isBusy = false
             closePopup()
         })
     }
