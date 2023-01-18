@@ -2,12 +2,20 @@
     import { Button, Text, TextType, TextHint } from 'shared/components'
     import { ButtonVariant } from 'shared/components/enums'
     import { closePopup } from '@auxiliary/popup/actions'
+    import { showAppNotification } from '@auxiliary/notification/actions'
     import { handleError } from '@core/error/handlers'
     import { stopVotingForProposal } from '@contexts/governance/actions'
     import { selectedProposal } from '@contexts/governance/stores'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile/actions'
-    import { selectedAccount } from '@core/account/stores'
+    import { selectedAccount, updateSelectedAccount } from '@core/account/stores'
+    import {
+        addActivitiesToAccountActivitiesInAllAccountActivities,
+        generateActivities,
+        preprocessTransaction,
+    } from '@core/wallet'
+    import { activeProfile, ProfileType } from '@core/profile'
+    import { handleLedgerError } from '@core/ledger'
 
     $: isTransferring = $selectedAccount?.isTransferring
 
@@ -18,11 +26,29 @@
     async function onStopVotingClick(): Promise<void> {
         try {
             await checkActiveProfileAuth(async () => {
-                await stopVotingForProposal($selectedProposal?.id)
+                updateSelectedAccount({ isTransferring: true })
+
+                const transaction = await stopVotingForProposal($selectedProposal?.id)
+                const processedTransaction = await preprocessTransaction(transaction, $selectedAccount)
+                const activities = generateActivities(processedTransaction, $selectedAccount)
+                addActivitiesToAccountActivitiesInAllAccountActivities($selectedAccount.index, activities)
+
+                showAppNotification({
+                    type: 'success',
+                    message: localize('notifications.stopVoting.success'),
+                    alert: true,
+                })
+                updateSelectedAccount({ isTransferring: false })
+
                 closePopup()
             })
         } catch (err) {
-            handleError(err)
+            if ($activeProfile.type === ProfileType.Ledger) {
+                handleLedgerError(err)
+            } else {
+                handleError(err)
+            }
+            updateSelectedAccount({ isTransferring: false })
         }
     }
 </script>
