@@ -6,7 +6,7 @@
     import { setVotingPower } from '@contexts/governance/actions'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile/actions'
-    import { visibleSelectedAccountAssets } from '@core/wallet'
+    import { convertToRawAmount, visibleSelectedAccountAssets } from '@core/wallet'
     import { closePopup } from '@auxiliary/popup/actions'
     import { popupState } from '@auxiliary/popup/stores'
     import { hasToRevote } from '@contexts/governance/stores'
@@ -19,9 +19,24 @@
 
     let assetAmountInput: AssetAmountInput
     let rawAmount = $selectedAccount?.votingPower
+    let amount: number
 
     $: votingPower = parseInt($selectedAccount?.votingPower, 10)
     $: disabled = $hasToRevote || $selectedAccount?.isTransferring
+    $: confirmDisabled = isConfirmDisabled(amount)
+
+    function isConfirmDisabled(sliderAmount: number): boolean {
+        if (disabled) {
+            return true
+        }
+
+        if (!sliderAmount) {
+            return true
+        }
+
+        const convertedSliderAmount = convertToRawAmount(sliderAmount.toString(), 'SMR', asset?.metadata).toString()
+        return convertedSliderAmount === $selectedAccount?.votingPower
+    }
 
     function onCancelClick(): void {
         closePopup()
@@ -64,6 +79,7 @@
         <AssetAmountInput
             bind:this={assetAmountInput}
             bind:rawAmount
+            bind:amount
             {asset}
             containsSlider
             disableAssetSelection
@@ -76,7 +92,7 @@
         <Button outline classes="w-full" {disabled} onClick={onCancelClick}>
             {localize('actions.cancel')}
         </Button>
-        <Button type={HTMLButtonType.Submit} {disabled} isBusy={disabled} classes="w-full">
+        <Button type={HTMLButtonType.Submit} disabled={confirmDisabled} isBusy={disabled} classes="w-full">
             {localize('actions.confirm')}
         </Button>
     </div>
