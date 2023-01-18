@@ -3,7 +3,7 @@
     import { Button, Icon, Text, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
     import { BASE_TOKEN, NetworkProtocol } from '@core/network'
-    import { shimmerClaimingRouter } from '@core/router'
+    import { shimmerClaimingRouter } from '../../../../../lib/routers'
     import { formatTokenAmountBestMatch } from '@core/wallet'
     import { onboardingProfile, sumTotalClaimedRewards } from '@contexts/onboarding'
 
