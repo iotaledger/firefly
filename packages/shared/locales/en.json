@@ -1226,7 +1226,8 @@
         "vote": "Vote",
         "registerProposal": "Register proposal",
         "removeProposal": "Remove proposal",
-        "stopVoting": "Stop voting"
+        "stopVoting": "Stop voting",
+        "revote": "Revote"
     },
     "general": {
         "recipient": "Recipient",

@@ -39,7 +39,7 @@
             {localize('actions.cancel')}
         </Button>
         <Button type={HTMLButtonType.Submit} {disabled} isBusy={disabled} classes="w-full">
-            {localize('actions.confirm')}
+            {localize('actions.revote')}
         </Button>
     </div>
 </form>
