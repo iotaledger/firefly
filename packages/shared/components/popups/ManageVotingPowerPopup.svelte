@@ -12,6 +12,7 @@
     import { hasToRevote } from '@contexts/governance/stores'
     import { onMount } from 'svelte'
     import { modifyPopupState } from '@auxiliary/popup/helpers'
+    import { isSelectedAccountVoting } from '@contexts/governance'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let newVotingPower: string = undefined
@@ -93,6 +94,9 @@
             {disabled}
             {votingPower}
         />
+        {#if isSelectedAccountVoting()}
+            <TextHint warning text={localize('popups.manageVotingPower.revote')} />
+        {/if}
         <TextHint info text={localize('popups.manageVotingPower.hint')} />
     </div>
     <div class="flex flex-row flex-nowrap w-full space-x-4">
