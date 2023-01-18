@@ -1,17 +1,17 @@
 import { IAccountState } from '@core/account'
-import { IActivityGenerationParameters, IWrappedOutput } from '@core/wallet/interfaces'
-import { GovernanceActivity, Output } from '@core/wallet/types'
+import { IActivityGenerationParameters } from '@core/wallet/interfaces'
+import { GovernanceActivity } from '@core/wallet/types'
 import type { IBasicOutput } from '@iota/types'
-import { ActivityType, GovernanceAction } from '../../enums'
+import { ActivityType } from '../../enums'
 import { activityOutputContainsValue } from '..'
 import {
     getAmountFromOutput,
+    getGovernanceInfo,
     getMetadataFromOutput,
     getSendingInformation,
     getStorageDepositFromOutput,
     getTagFromOutput,
 } from './helper'
-import { isParticipationOutput } from '@contexts/governance'
 
 export function generateSingleGovernanceActivity(
     account: IAccountState,
@@ -35,7 +35,7 @@ export function generateSingleGovernanceActivity(
 
     const { storageDeposit } = getStorageDepositFromOutput(output)
     const votingPower = getAmountFromOutput(output)
-    const governanceInfo = getGovernanceInfo(output, wrappedInputs)
+    const governanceInfo = getGovernanceInfo(output, wrappedInputs, metadata)
 
     return {
         type: ActivityType.Governance,
@@ -57,33 +57,5 @@ export function generateSingleGovernanceActivity(
         asyncData: null,
         ...governanceInfo,
         ...sendingInfo,
-    }
-}
-
-function getGovernanceInfo(
-    output: Output,
-    inputs: IWrappedOutput[]
-): {
-    governanceAction: GovernanceAction
-    votingPower: number
-    votingPowerDifference?: number
-} {
-    const currentVotingPower = getAmountFromOutput(output)
-    const governanceInput = inputs?.find((input) => isParticipationOutput(input.output))
-    if (governanceInput) {
-        const oldVotingPower = getAmountFromOutput(governanceInput.output)
-        return {
-            governanceAction:
-                currentVotingPower - oldVotingPower > 0
-                    ? GovernanceAction.IncreaseVotingPower
-                    : GovernanceAction.DecreaseVotingPower,
-            votingPower: currentVotingPower,
-            votingPowerDifference: Math.abs(currentVotingPower - oldVotingPower),
-        }
-    }
-    return {
-        governanceAction: GovernanceAction.IncreaseVotingPower,
-        votingPower: currentVotingPower,
-        votingPowerDifference: currentVotingPower,
     }
 }

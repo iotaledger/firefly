@@ -8,6 +8,8 @@ import {
     OUTPUT_TYPE_NFT,
 } from '@core/wallet'
 import { Activity } from '@core/wallet/types'
+import { isParticipationOutput } from '@contexts/governance/utils'
+
 import { generateSingleAliasActivity } from './generateSingleAliasActivity'
 import { generateSingleFoundryActivity } from './generateSingleFoundryActivity'
 import { generateSingleGovernanceActivity } from './generateSingleGovernanceActivity'
@@ -17,8 +19,7 @@ import { getActivityTypeFromOutput } from './helper'
 import { generateActivitiesFromNftOutputs } from './generateActivitiesFromNftOutputs'
 import { generateActivitiesFromAliasOutputs } from './generateActivitiesFromAliasOutputs'
 import { generateActivitiesFromFoundryOutputs } from './generateActivitiesFromFoundryOutputs'
-import { isParticipationOutput } from '@contexts/governance/utils'
-import { generateActivitiesFromBasicOutputs } from '@core/wallet/utils/generateActivity/generateActivitiesFromBasicOutputs'
+import { generateActivitiesFromBasicOutputs } from './generateActivitiesFromBasicOutputs'
 
 export function generateActivities(processedTransaction: IProcessedTransaction, account: IAccountState): Activity[] {
     if (processedTransaction.wrappedInputs?.length > 0) {
