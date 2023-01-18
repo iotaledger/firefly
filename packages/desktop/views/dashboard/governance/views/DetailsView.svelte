@@ -4,8 +4,6 @@
     import { localize } from '@core/i18n'
     import {
         Button,
-        FontWeight,
-        Icon,
         KeyValueBox,
         Pane,
         ProposalDetailsButton,
@@ -15,7 +13,6 @@
         Text,
         TextType,
     } from '@ui'
-    import { Icon as IconEnum } from '@auxiliary/icon'
     import { openPopup } from '@auxiliary/popup/actions'
     import { activeProfileId } from '@core/profile/stores'
     import { getVotingEvent } from '@core/profile-manager/api'
@@ -123,12 +120,6 @@
             </header-container>
             <div class="flex flex-1 flex-col justify-between">
                 <Text type={TextType.h2}>{$selectedProposal?.title}</Text>
-                <div class="flex items-center cursor-pointer">
-                    <Text fontSize="14" fontWeight={FontWeight.semibold} overrideColor classes="text-blue-500"
-                        >{localize('views.governance.details.fullProposal')}</Text
-                    >
-                    <Icon icon={IconEnum.Link} height={16} classes="ml-0.5 text-blue-500" />
-                </div>
             </div>
         </Pane>
         <Pane classes="p-6 h-fit">
