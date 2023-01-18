@@ -53,8 +53,7 @@
     <div class="flex justify-between items-center">
         <ProposalStatusInfo status={proposalState?.status} milestones={proposal.milestones} />
         {#if hasVoted}
-            {@const icon = proposal.status === ProposalStatus.Commencing ? Icon.History : Icon.Voted}
-            <TooltipIcon {icon} size="small" position={Position.Left} iconClasses="text-gray-500">
+            <TooltipIcon icon={Icon.Voted} size="small" position={Position.Left} iconClasses="text-gray-500">
                 <Text smaller overrideColor fontWeight={FontWeight.semibold} classes="text-gray-600">
                     {localize('views.governance.proposals.voted')}
                 </Text>

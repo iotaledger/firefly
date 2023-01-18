@@ -80,7 +80,7 @@
             votedAnswerValues = lastActiveOverview?.answers ?? []
             totalVotes =
                 proposalState.status === ProposalStatus.Commencing
-                    ? parseInt(lastActiveOverview.amount, 10) ?? 0
+                    ? parseInt(lastActiveOverview?.amount, 10) ?? 0
                     : votesSum
         }
     }

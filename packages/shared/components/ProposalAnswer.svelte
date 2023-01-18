@@ -5,6 +5,7 @@
     import { Position } from 'shared/components/enums'
     import { appSettings } from '@core/app/stores'
     import { Icon as IconEnum } from '@auxiliary/icon'
+    import { ProposalStatus } from '@contexts/governance'
 
     export let answer: Answer
     export let answerIndex: number = undefined
@@ -14,7 +15,7 @@
     export let disabled = false
     export let hidden: boolean = null
     export let isWinner: boolean
-    export let hasEnded: boolean
+    export let proposalStatus: ProposalStatus
 
     let isSelected: boolean
     let isVotedFor: boolean
@@ -56,9 +57,9 @@
         {#if answerIndex !== undefined}
             {#if isVotedFor}
                 <status-icon class="flex justify-center items-center w-5">
-                    {#if hasEnded}
+                    {#if proposalStatus === ProposalStatus.Ended}
                         <Icon icon={IconEnum.Voted} />
-                    {:else}
+                    {:else if proposalStatus === ProposalStatus.Holding}
                         <PingingBadge classes="relative" />
                     {/if}
                 </status-icon>
@@ -104,8 +105,6 @@
         @apply border;
         @apply border-gray-200;
         @apply cursor-pointer;
-        @apply dark:bg-gray-900;
-        @apply dark:border-transparent;
         @apply items-center;
         @apply justify-between;
         @apply p-3;
@@ -168,8 +167,21 @@
             }
         }
 
-        &.dark::after {
-            @apply bg-gray-1000;
+        &.dark:not(.selected) {
+            @apply border-transparent;
+        }
+
+        &.dark:not(.winner) {
+            @apply bg-gray-900;
+
+            &::after {
+                @apply bg-gray-1000;
+            }
+
+            answer-index {
+                @apply bg-gray-900;
+                @apply border-gray-800;
+            }
         }
 
         &:disabled {
@@ -181,8 +193,6 @@
             @apply border-gray-200;
             @apply border-solid;
             @apply border;
-            @apply dark:bg-gray-900;
-            @apply dark:border-gray-800;
             @apply flex;
             @apply font-bold;
             @apply h-5;

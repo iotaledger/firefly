@@ -55,12 +55,11 @@
     }
 
     function setWinnerAnswerIndex(): void {
-        if ($selectedProposal.status !== ProposalStatus.Ended) {
-            return
+        if ($selectedProposal.status === ProposalStatus.Ended) {
+            const answersAccumulated = allVotes?.map((answer) => answer.accumulated)
+            const maxAccumulated = Math.max(...answersAccumulated)
+            winnerAnswerIndex = answersAccumulated?.indexOf(maxAccumulated)
         }
-        const answersAccumulated = allVotes?.map((answer) => answer.accumulated)
-        const maxAccumulated = Math.max(...answersAccumulated)
-        winnerAnswerIndex = answersAccumulated?.indexOf(maxAccumulated)
     }
 </script>
 
@@ -104,7 +103,7 @@
                 hidden={!isOpened}
                 percentage={percentages?.[answerIndex]}
                 isWinner={answerIndex === winnerAnswerIndex}
-                hasEnded={$selectedProposal.status === ProposalStatus.Ended}
+                proposalStatus={$selectedProposal.status}
                 on:click={handleAnswerClick(answer?.value)}
             />
         {/each}
