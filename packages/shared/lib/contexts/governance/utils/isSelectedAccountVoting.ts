@@ -1,8 +1,7 @@
 import { get } from 'svelte/store'
 import { DEFAULT_PARTICIPATION_OVERVIEW } from '../constants'
-import { participationOverview, updateParticipationOverview } from '../stores'
+import { participationOverview } from '../stores'
 
-export async function isSelectedAccountVoting(): Promise<boolean> {
-    await updateParticipationOverview()
+export function isSelectedAccountVoting(): boolean {
     return get(participationOverview) === DEFAULT_PARTICIPATION_OVERVIEW
 }
