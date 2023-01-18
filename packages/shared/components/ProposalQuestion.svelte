@@ -1,11 +1,12 @@
 <script lang="typescript">
     import type { AnswerStatus, Question } from '@iota/wallet'
     import { createEventDispatcher } from 'svelte'
-    import { Text, FontWeight, Icon, ProposalAnswer } from 'shared/components'
+    import { Text, FontWeight, Icon, ProposalAnswer, TooltipIcon } from 'shared/components'
     import { ABSTAIN_VOTE_VALUE } from '@contexts/governance/constants'
     import { ProposalStatus } from '@contexts/governance/enums'
     import { selectedProposal } from '@contexts/governance/stores'
     import { Icon as IconEnum } from '@auxiliary/icon'
+    import { Position } from './enums'
 
     const dispatch = createEventDispatcher()
 
@@ -52,9 +53,20 @@
                     Question {questionIndex + 1}
                 </Text>
             {/if}
-            <Text fontWeight={FontWeight.bold} overrideColor classes="text-gray-900 dark:text-white">
-                {question.text}
-            </Text>
+            <div class="flex flex-row space-x-1.5 items-center">
+                <Text fontWeight={FontWeight.bold} overrideColor classes="text-gray-900 dark:text-white">
+                    {question.text}
+                </Text>
+                {#if question.additionalInfo}
+                    <TooltipIcon
+                        iconClasses="text-gray-600 dark:text-gray-500"
+                        text={question.additionalInfo}
+                        position={Position.Bottom}
+                        width={13}
+                        height={13}
+                    />
+                {/if}
+            </div>
         </div>
         <div class="transform {isOpened ? 'rotate-180' : 'rotate-0'}">
             <Icon icon={IconEnum.ChevronDown} classes="text-gray-500" />
