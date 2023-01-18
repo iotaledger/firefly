@@ -3,8 +3,8 @@
     import { localize } from '@core/i18n'
     import { isSoftwareProfile } from '@core/profile'
     import { setStrongholdPassword } from '@core/profile-manager'
-    import { Button, ButtonSize, ButtonVariant, PasswordInput, Text, TextType } from 'shared/components'
-    import { isKeyboardOpen, keyboardHeight } from '../../../../../../../lib/auxiliary/keyboard'
+    import { Button, ButtonVariant, PasswordInput, Text, TextType } from 'shared/components'
+
     let isBusy = false
     let error = ''
     let password: string
@@ -41,7 +41,7 @@
             />
         {/if}
     </div>
-    <div style={$isKeyboardOpen && `margin-bottom: ${$keyboardHeight}px`}>
+    <div class="drawer-footer">
         <Button
             disabled={(!password && $isSoftwareProfile) || isBusy}
             classes="w-full"

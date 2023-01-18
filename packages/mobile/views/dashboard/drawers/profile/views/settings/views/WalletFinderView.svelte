@@ -20,7 +20,7 @@
         generateAndStoreActivitiesForAllAccounts,
         refreshAccountAssetsForActiveProfile,
     } from '@core/wallet'
-    import { Button, ButtonSize, KeyValueBox, Text, TextHint, TextType } from 'shared/components'
+    import { Button, KeyValueBox, Text, TextHint, TextType } from 'shared/components'
     import { onDestroy } from 'svelte'
     import { settingsRouter } from '../../../../../../../lib/routers'
 
@@ -124,7 +124,6 @@
     </div>
     <Button
         classes="w-full"
-        size={ButtonSize.Medium}
         onClick={handleFindBalances}
         disabled={isBusy}
         {isBusy}

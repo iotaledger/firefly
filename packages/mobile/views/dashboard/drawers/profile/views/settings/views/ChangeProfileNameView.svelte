@@ -2,8 +2,7 @@
     import { showAppNotification } from '@auxiliary/notification'
     import { localize } from '@core/i18n'
     import { activeProfile, updateActiveProfile, validateProfileName } from '@core/profile'
-    import { Button, ButtonSize, HTMLButtonType, Input, Text, TextType } from 'shared/components'
-    import { isKeyboardOpen, keyboardHeight } from '../../../../../../../lib/auxiliary/keyboard'
+    import { Button, HTMLButtonType, Input, Text, TextType } from 'shared/components'
 
     let newName = $activeProfile?.name
     let error = ''
@@ -44,7 +43,7 @@
         <Input {error} placeholder={$activeProfile?.name} bind:value={newName} />
     </div>
 
-    <div style={$isKeyboardOpen && `margin-bottom: ${$keyboardHeight}px`}>
+    <div class="drawer-footer">
         <Button classes="w-full" type={HTMLButtonType.Submit} {disabled}>
             {localize('views.settings.changeProfileName.title')}
         </Button>

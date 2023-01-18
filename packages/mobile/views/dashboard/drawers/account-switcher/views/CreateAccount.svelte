@@ -6,8 +6,7 @@
     import { onMount } from 'svelte'
     import { ColorPicker } from '../../../../../components'
     import { handleError } from '@core/error/handlers/handleError'
-    import { isKeyboardOpen, keyboardHeight } from '../../../../../lib/auxiliary/keyboard'
-    
+
     export let accountAlias: string = ''
     export let color: string = getRandomAccountColor()
     export let isBusy: boolean = false
@@ -66,7 +65,7 @@
             <ColorPicker title={localize('general.accountColor')} bind:active={color} classes="mb-4" />
         </div>
     </div>
-    <div style={$isKeyboardOpen && `margin-bottom: ${$keyboardHeight}px`} class="flex flex-row justify-between px-2">
+    <div class="drawer-footer flex flex-row justify-between px-2">
         <Button outline classes="-mx-2 w-1/2" onClick={handleCancelClick} disabled={isBusy}>
             {localize('actions.cancel')}
         </Button>

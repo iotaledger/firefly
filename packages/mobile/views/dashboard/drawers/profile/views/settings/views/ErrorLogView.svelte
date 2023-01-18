@@ -2,7 +2,7 @@
     import { errorLog } from '@core/error'
     import { localize } from '@core/i18n'
     import { setClipboard } from '@core/utils'
-    import { Button, ButtonSize, Text, TextType } from 'shared/components'
+    import { Button, Text, TextType } from 'shared/components'
 
     function handleClearClick(): void {
         errorLog.set([])
@@ -38,11 +38,11 @@
         {/if}
     </div>
     {#if $errorLog.length > 0}
-        <div class="flex w-full justify-center space-x-4">
-            <Button size={ButtonSize.Medium} classes="w-full" onClick={handleClearClick}>
+        <div class="flex flex-col space-y-4 w-full">
+            <Button outline classes="w-full" onClick={handleClearClick}>
                 {localize('actions.clear')}
             </Button>
-            <Button size={ButtonSize.Medium} classes="w-full" onClick={handleCopyClick}>
+            <Button classes="w-full" onClick={handleCopyClick}>
                 {localize('actions.copy')}
             </Button>
         </div>

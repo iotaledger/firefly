@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import { setClipboard } from '@core/utils'
-    import { Button, ButtonSize, Text, TextType } from 'shared/components'
+    import { Button, Text, TextType } from 'shared/components'
     import { onMount } from 'svelte'
 
     let contentApp = ''
@@ -48,5 +48,5 @@
         <Text type={TextType.pre} secondary>{contentApp}</Text>
         <Text type={TextType.pre} secondary>{contentSystem}</Text>
     </div>
-    <Button size={ButtonSize.Medium} classes="w-full" onClick={handleCopyClick}>{localize('actions.copy')}</Button>
+    <Button classes="w-full" onClick={handleCopyClick}>{localize('actions.copy')}</Button>
 </div>

@@ -3,8 +3,7 @@
     import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'
     import { changePasswordAndUnlockStronghold } from '@core/profile-manager'
     import { PASSWORD_REASON_MAP } from '@core/stronghold'
-    import { Button, ButtonSize, PasswordInput, Text, TextType } from 'shared/components'
-    import { isKeyboardOpen, keyboardHeight } from '../../../../../../../lib/auxiliary/keyboard'
+    import { Button, PasswordInput, Text, TextType } from 'shared/components'
     import zxcvbn from 'zxcvbn'
 
     let startOfPasswordChange: number
@@ -127,9 +126,9 @@
             submitHandler={isPasswordValid}
         />
     </div>
-    <div style={$isKeyboardOpen && `margin-bottom: ${$keyboardHeight}px`}>
+    <div class="drawer-footer">
         <Button
-            classes="w-full"    
+            classes="w-full"
             disabled={!currentPassword || !newPassword || !confirmedPassword || busy}
             onClick={changePassword}
         >

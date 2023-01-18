@@ -9,7 +9,6 @@
     import { onMount } from 'svelte'
     import { RecipientInput } from '../../../../../components'
     import { sendRouter } from '../../../../../lib/routers'
-    import { isKeyboardOpen, keyboardHeight } from '../../../../../lib/auxiliary/keyboard'
 
     let recipient: IAddressSubject | IAccountSubject
     let recipientValidationError: string
@@ -81,7 +80,7 @@
             </button>
         {/each}
     </div>
-    <div style={$isKeyboardOpen && `margin-bottom: ${$keyboardHeight}px`}>
+    <div class="drawer-footer">
         <Button disabled={!!recipientValidationError} outline classes="w-full" onClick={onContinueClick}>
             {recipientValidationError ?? localize('actions.continue')}
         </Button>

@@ -2,6 +2,7 @@
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
     import { Icon, Text, TextType } from 'shared/components'
     import { fade, fly } from 'svelte/transition'
+    import { isKeyboardOpen, keyboardHeight } from '../lib/auxiliary/keyboard'
     import { DRAWER_IN_ANIMATION_DURATION_MS, DRAWER_OUT_ANIMATION_DURATION_MS } from '../lib/contexts/dashboard'
 
     export let onClose: () => unknown = () => {}
@@ -16,8 +17,11 @@
     let panelHeight = 0
     let panelWidth = 0
     let touchStart = 0
+    let drawer: HTMLDivElement
 
     const directon = enterFromSide ? { x: -100 } : { y: 100 }
+
+    $: $isKeyboardOpen, updateFooterMargin()
 
     function onTouchStart(event): void {
         moving = true
@@ -42,10 +46,21 @@
             position = 0
         }
     }
+
+    function updateFooterMargin(): void {
+        const footer = drawer?.querySelector<HTMLElement>('.drawer-footer')
+        if (footer) {
+            if ($isKeyboardOpen) {
+                footer.style.setProperty('margin-bottom', `${$keyboardHeight}px`)
+            } else {
+                footer.style.removeProperty('margin-bottom')
+            }
+        }
+    }
 </script>
 
 <svelte:window on:touchend={onTouchEnd} on:touchmove={onTouchMove} />
-<drawer class="fixed top-0 left-0 z-30 w-screen h-screen z-40">
+<drawer class="fixed top-0 left-0 z-30 w-screen h-screen z-40" bind:this={drawer}>
     <overlay
         in:fade|local={{ duration: DRAWER_IN_ANIMATION_DURATION_MS }}
         out:fade|local={{ duration: DRAWER_OUT_ANIMATION_DURATION_MS }}

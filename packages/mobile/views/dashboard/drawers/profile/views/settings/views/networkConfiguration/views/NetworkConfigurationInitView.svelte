@@ -11,7 +11,7 @@
         nodeInfo,
     } from '@core/network'
     import { activeProfile } from '@core/profile'
-    import { Button, ButtonSize, HR, Text, TextType } from 'shared/components'
+    import { Button, HR, Text, TextType } from 'shared/components'
     import { NodeListTable } from '../../../../../../../../../components'
     import { networkConfigurationSettingsRouter } from '../../../../../../../../../lib/routers'
 
@@ -62,11 +62,11 @@
     </div>
     <div class="flex flex-col space-y-4 w-full">
         {#if networkType !== NetworkType.PrivateNet}
-            <Button outline size={ButtonSize.Medium} classes="w-full" onClick={addOfficialNodesToClientOptions}>
+            <Button outline classes="w-full" onClick={addOfficialNodesToClientOptions}>
                 {localize('actions.addOfficialNodes')}
             </Button>
         {/if}
-        <Button inlineStyle="min-width: 156px;" size={ButtonSize.Medium} classes="w-full" onClick={handleAddNodeClick}>
+        <Button inlineStyle="min-width: 156px;" classes="w-full" onClick={handleAddNodeClick}>
             {localize('actions.addNode')}
         </Button>
     </div>

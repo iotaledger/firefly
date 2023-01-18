@@ -4,7 +4,7 @@
     import { INode, INodeInfo } from '@core/network'
     import { getNodeInfo } from '@core/profile-manager'
     import { resolveObjectPath, setClipboard } from '@core/utils'
-    import { Button, ButtonSize, Checkbox, CopyableBox, FontWeight, Spinner, Text, TextType } from 'shared/components'
+    import { Button, Checkbox, CopyableBox, FontWeight, Spinner, Text, TextType } from 'shared/components'
     import { onMount } from 'svelte'
 
     enum NodeInfoTab {
@@ -157,7 +157,6 @@
             isBusy={!nodeInfo || !nodeInfoTab}
             disabled={!nodeInfo}
             classes="w-full"
-            size={ButtonSize.Medium}
             outline
             onClick={handleCopyAllInformationClick}
         >

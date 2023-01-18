@@ -20,7 +20,6 @@
     import { getAssetById } from '@core/wallet'
     import { TokenUnitSwapper, TokenWithMax } from '../../../../../components'
     import { sendRouter } from '../../../../../lib/routers'
-    import { isKeyboardOpen, keyboardHeight } from '../../../../../lib/auxiliary/keyboard'
 
     let amount: string
     let rawAmount: string
@@ -137,7 +136,7 @@
         </div>
         <Text color="gray-600" darkColor="gray-500" fontSize="xs">{formatCurrency(marketAmount) ?? ''}</Text>
     </div>
-    <div style={$isKeyboardOpen && `margin-bottom: ${$keyboardHeight}px`} class="flex flex-col space-y-8 w-full">
+    <div class="drawer-footer flex flex-col space-y-8 w-full">
         {#if $newTransactionDetails?.type === NewTransactionType.TokenTransfer}
             <HR overrideColor classes="border-gray-200 dark:border-gray-700" />
             <TokenWithMax {asset} onMaxClick={onClickAvailableBalance} />
