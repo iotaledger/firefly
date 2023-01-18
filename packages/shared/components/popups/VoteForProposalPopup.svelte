@@ -38,6 +38,7 @@
                     message: localize('notifications.vote.success'),
                     alert: true,
                 })
+                updateSelectedAccount({ isTransferring: false })
                 closePopup()
             })
         } catch (err) {
@@ -46,7 +47,6 @@
             } else {
                 handleError(err)
             }
-        } finally {
             updateSelectedAccount({ isTransferring: false })
         }
     }
