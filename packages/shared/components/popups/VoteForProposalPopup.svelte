@@ -4,11 +4,14 @@
     import { selectedAccount, updateSelectedAccount, vote } from '@core/account'
     import { localize } from '@core/i18n'
     import { BASE_TOKEN } from '@core/network'
-    import { activeProfile, checkActiveProfileAuth } from '@core/profile'
-    import { formatTokenAmountBestMatch } from '@core/wallet/utils'
+    import { activeProfile, checkActiveProfileAuth, ProfileType } from '@core/profile'
+    import { formatTokenAmountBestMatch, generateActivities, preprocessTransaction } from '@core/wallet/utils'
     import { selectedProposal } from '@contexts/governance/stores'
     import { showAppNotification } from '@auxiliary/notification'
     import { closePopup } from '@auxiliary/popup'
+    import { addActivitiesToAccountActivitiesInAllAccountActivities } from '@core/wallet'
+    import { handleError } from '@core/error/handlers'
+    import { handleLedgerError } from '@core/ledger'
 
     export let selectedAnswerValues: number[]
 
@@ -24,17 +27,26 @@
         try {
             await checkActiveProfileAuth(async () => {
                 updateSelectedAccount({ isTransferring: true })
-                await vote($selectedAccount.index, $selectedProposal?.id, selectedAnswerValues)
+
+                const transaction = await vote($selectedAccount.index, $selectedProposal?.id, selectedAnswerValues)
+                const processedTransaction = await preprocessTransaction(transaction, $selectedAccount)
+                const activities = generateActivities(processedTransaction, $selectedAccount)
+                addActivitiesToAccountActivitiesInAllAccountActivities($selectedAccount.index, activities)
+
                 showAppNotification({
                     type: 'success',
                     message: localize('notifications.vote.success'),
                     alert: true,
                 })
-                closePopup()
                 updateSelectedAccount({ isTransferring: false })
+                closePopup()
             })
         } catch (err) {
-            console.error(err)
+            if ($activeProfile.type === ProfileType.Ledger) {
+                handleLedgerError(err)
+            } else {
+                handleError(err)
+            }
             updateSelectedAccount({ isTransferring: false })
         }
     }

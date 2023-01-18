@@ -1238,11 +1238,17 @@
         "sending": "Sending",
         "received": "Received",
         "receiving": "Receiving",
-        "votingPower": "New voting power",
+        "newVotingPower": "New voting power",
+        "votingPower": "Voting power",
         "increased": "Voting power increased",
         "increasing": "Increasing voting power",
         "decreased": "Voting power decreased",
         "decreasing": "Decreasing voting power",
+        "startVoting": "Voted",
+        "startingVoting": "Starting to vote",
+        "stopVoting": "Stopped voting",
+        "stoppingVoting": "Stopping to vote",
+        "forEvent": "for {eventId}",
         "sentNft": "NFT sent",
         "sendingNft": "Sending NFT",
         "receivedNft": "NFT received",
@@ -2060,6 +2066,16 @@
                 "Pending": "decreasing voting power",
                 "Confirmed": "decreased voting power",
                 "Conflicting": "failed to decreased voting power"
+            },
+            "startVoting": {
+                "Pending": "voting for",
+                "Confirmed": "voted for",
+                "Conflicting": "failed to vote for"
+            },
+            "stopVoting": {
+                "Pending": "stopping voting for",
+                "Confirmed": "stopped voting for",
+                "Conflicting": "failed to stopped voting for"
             }
         },
         "alias": {
