@@ -54,8 +54,9 @@
 <Modal bind:this={modal} {...$$restProps}>
     <div class="flex flex-col">
         {#if isBusy}
-            <div class="flex justify-center items-center p-3 bg-gray-200">
-                <Spinner message={localize('views.governance.details.fetching')} busy width={16} height={16} />
+            <div class="flex items-center p-3 space-x-3 bg-gray-200">
+                <Spinner busy width={16} height={16} />
+                <Text type="p" secondary>{localize('views.governance.details.fetching')}</Text>
             </div>
         {:else if isVotingForProposal}
             <MenuItem
