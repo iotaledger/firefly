@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Text, TextHint, FontWeight, TextType, KeyValueBox } from 'shared/components'
+    import { Button, Text, FontWeight, TextType, KeyValueBox } from 'shared/components'
     import { HTMLButtonType } from 'shared/components/enums'
     import { selectedAccount, updateSelectedAccount, vote } from '@core/account'
     import { localize } from '@core/i18n'
@@ -69,11 +69,6 @@
     </Text>
     <div class="space-y-4">
         <KeyValueBox keyText={localize('popups.voteForProposal.key')} valueText={formattedVotingPower} />
-        {#if hasVotingPower}
-            <TextHint info text={localize('popups.voteForProposal.hint')} />
-        {:else}
-            <TextHint danger text={localize('popups.voteForProposal.noVotingPower')} />
-        {/if}
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" outline onClick={closePopup}>{localize('actions.cancel')}</Button>
