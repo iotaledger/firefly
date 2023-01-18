@@ -1,5 +1,6 @@
 export { default as ActivityList } from './ActivityList.svelte'
 export { default as ActivityTile } from './ActivityTile.svelte'
+export { default as AddressBox } from './AddressBox.svelte'
 export { default as AssetList } from './AssetList.svelte'
 export { default as AsyncActivityTileFooter } from './AsyncActivityTileFooter.svelte'
 export { default as ColorPicker } from './ColorPicker.svelte'
