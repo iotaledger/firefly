@@ -605,7 +605,8 @@
                     "countingEnds": "Counting ends on",
                     "eventId": "Event ID",
                     "nodeUrl": "Node URL"
-                }
+                },
+                "voteOpens": "Vote opens in {time}"
             }
         }
     },
