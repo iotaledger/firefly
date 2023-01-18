@@ -3,8 +3,8 @@ import { updateNftInAllAccountNfts } from '@core/nfts'
 import { ActivityAction, ActivityDirection, ActivityType } from '@core/wallet'
 import { updateClaimingTransactionInclusion } from '@core/wallet/actions/activities/updateClaimingTransactionInclusion'
 import {
-    updateActivityByTransactionId,
     getActivityByTransactionId,
+    updateActivityByTransactionId,
 } from '@core/wallet/stores/all-account-activities.store'
 
 import { WalletApiEvent } from '../../enums'
@@ -35,10 +35,7 @@ export function handleTransactionInclusionEventInternal(
         updateNftInAllAccountNfts(accountIndex, activity.nftId, { isSpendable })
     }
 
-    // TODO: This check is problematic since the tag is removed when the voting power is set to zero,
-    // although we still need to sync since it was an adjustment of the voting power.
-    // Can we use activity?.type?
-    if (activity?.tag === 'PARTICIPATE') {
+    if (activity?.type === ActivityType.Governance) {
         syncVotingPower(accountIndex)
     }
 
