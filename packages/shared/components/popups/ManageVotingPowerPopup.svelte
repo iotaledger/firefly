@@ -51,6 +51,7 @@
 
             // After unlocking stronghold popup, the popup tracks newVotingPower to show it when reopened.
             $popupState.props = { newVotingPower: rawAmount }
+
             await checkActiveProfileAuth(
                 async () => {
                     await setVotingPower(rawAmount)
@@ -70,7 +71,7 @@
             if ($hasToRevote) {
                 modifyPopupState({ ...$popupState, preventClose: true, hideClose: true })
             } else {
-                disabled = false
+                disabled = $selectedAccount?.isTransferring
             }
         } catch (err) {
             handleError(err)
