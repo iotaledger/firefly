@@ -53,7 +53,7 @@
                     Question {questionIndex + 1}
                 </Text>
             {/if}
-            <div class="flex flex-row space-x-1 items-center">
+            <div class="flex flex-row space-x-1.5 items-center">
                 <Text fontWeight={FontWeight.bold} overrideColor classes="text-gray-900 dark:text-white">
                     {question.text}
                 </Text>
