@@ -1,14 +1,14 @@
 <script lang="typescript">
     import { Button, Text, TextHint, FontWeight, TextType, KeyValueBox } from 'shared/components'
     import { HTMLButtonType } from 'shared/components/enums'
-    import { selectedAccount, updateSelectedAccount, vote } from '@core/account'
+    import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { BASE_TOKEN } from '@core/network'
     import { activeProfile, checkActiveProfileAuth } from '@core/profile'
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
     import { selectedProposal } from '@contexts/governance/stores'
-    import { showAppNotification } from '@auxiliary/notification'
     import { closePopup } from '@auxiliary/popup'
+    import { vote } from '@contexts/governance/actions'
 
     export let selectedAnswerValues: number[]
 
@@ -23,19 +23,11 @@
     async function handleSubmit(): Promise<void> {
         try {
             await checkActiveProfileAuth(async () => {
-                updateSelectedAccount({ isTransferring: true })
                 await vote($selectedProposal?.id, selectedAnswerValues)
-                showAppNotification({
-                    type: 'success',
-                    message: localize('notifications.vote.success'),
-                    alert: true,
-                })
                 closePopup()
-                updateSelectedAccount({ isTransferring: false })
             })
         } catch (err) {
             console.error(err)
-            updateSelectedAccount({ isTransferring: false })
         }
     }
 </script>

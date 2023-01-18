@@ -1,12 +1,12 @@
 <script lang="typescript">
     import { Button, Text, TextHint, HTMLButtonType, TextType } from 'shared/components'
     import { selectedAccount } from '@core/account/stores'
-    import { vote } from '@core/account/api'
     import { localize } from '@core/i18n'
     import { closePopup } from '@auxiliary/popup/actions'
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { onDestroy } from 'svelte'
     import { hasToRevote } from '@contexts/governance/stores'
+    import { vote } from '@contexts/governance/actions'
 
     $: disabled = $selectedAccount?.isTransferring || isBusy
 
