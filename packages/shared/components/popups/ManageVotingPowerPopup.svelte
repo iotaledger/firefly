@@ -14,28 +14,31 @@
     import { modifyPopupState } from '@auxiliary/popup/helpers'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
+    export let newVotingPower: string = undefined
 
     const asset = $visibleSelectedAccountAssets?.baseCoin
 
     let assetAmountInput: AssetAmountInput
-    let rawAmount = $selectedAccount?.votingPower
     let amount: number
+    let rawAmount = newVotingPower ?? $selectedAccount?.votingPower
+    let confirmDisabled = false
 
     $: votingPower = parseInt($selectedAccount?.votingPower, 10)
     $: disabled = $hasToRevote || $selectedAccount?.isTransferring
-    $: confirmDisabled = isConfirmDisabled(amount)
+    $: amount, disabled, setConfirmDisabled()
 
-    function isConfirmDisabled(sliderAmount: number): boolean {
+    function setConfirmDisabled(): void {
         if (disabled) {
-            return true
+            confirmDisabled = true
+            return
         }
 
-        if (!sliderAmount) {
-            return true
+        if (!amount) {
+            confirmDisabled = true
+            return
         }
-
-        const convertedSliderAmount = convertToRawAmount(sliderAmount.toString(), 'SMR', asset?.metadata).toString()
-        return convertedSliderAmount === $selectedAccount?.votingPower
+        const convertedSliderAmount = convertToRawAmount(amount.toString(), 'SMR', asset?.metadata).toString()
+        confirmDisabled = convertedSliderAmount === $selectedAccount?.votingPower
     }
 
     function onCancelClick(): void {
@@ -45,6 +48,9 @@
     async function onSubmit(): Promise<void> {
         try {
             await assetAmountInput?.validate()
+
+            // After unlocking stronghold popup, the popup tracks newVotingPower to show it when reopened.
+            $popupState.props = { newVotingPower: rawAmount }
             await checkActiveProfileAuth(
                 async () => {
                     await setVotingPower(rawAmount)
