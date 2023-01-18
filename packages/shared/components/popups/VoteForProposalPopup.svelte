@@ -1,13 +1,15 @@
 <script lang="typescript">
     import { Button, Text, TextHint, FontWeight, TextType, KeyValueBox } from 'shared/components'
     import { HTMLButtonType } from 'shared/components/enums'
-    import { selectedAccount } from '@core/account'
+    import { selectedAccount } from '@core/account/stores'
+    import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
-    import { BASE_TOKEN } from '@core/network'
-    import { activeProfile, checkActiveProfileAuth } from '@core/profile'
+    import { BASE_TOKEN } from '@core/network/constants'
+    import { activeProfile } from '@core/profile/stores'
+    import { checkActiveProfileAuth } from '@core/profile/actions'
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
     import { selectedProposal } from '@contexts/governance/stores'
-    import { closePopup } from '@auxiliary/popup'
+    import { closePopup } from '@auxiliary/popup/actions'
     import { vote } from '@contexts/governance/actions'
 
     export let selectedAnswerValues: number[]
@@ -27,7 +29,7 @@
                 closePopup()
             })
         } catch (err) {
-            console.error(err)
+            handleError(err)
         }
     }
 </script>
