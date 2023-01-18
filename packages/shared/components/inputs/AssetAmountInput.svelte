@@ -109,7 +109,7 @@
             {disabled}
         />
         {#if asset?.metadata?.unit}
-            <UnitInput bind:unit bind:isFocused tokenMetadata={asset?.metadata} />
+            <UnitInput bind:unit bind:isFocused {disabled} tokenMetadata={asset?.metadata} />
         {/if}
     </div>
     {#if containsSlider}
