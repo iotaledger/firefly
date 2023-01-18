@@ -14,7 +14,12 @@ interface IGovernanceInfo {
 }
 
 export function getGovernanceInfo(output: Output, inputs: IWrappedOutput[], metadata: string): IGovernanceInfo {
-    const currentVotingPower = getAmountFromOutput(output)
+    /**
+     * NOTE: If the output is NOT a participation output, then it doesn't have any voting power.
+     * This is possible if the user manually set it to zero, which automatically removes the
+     * participation metadata and tag.
+     */
+    const currentVotingPower = isParticipationOutput(output) ? getAmountFromOutput(output) : 0
     const participations = parseGovernanceMetadata(metadata)
 
     const governanceInput = inputs?.find((input) => isParticipationOutput(input.output))
@@ -32,10 +37,21 @@ export function getGovernanceInfo(output: Output, inputs: IWrappedOutput[], meta
                 participation: addedParticipation,
             }
         } else if (removedParticipation) {
-            return {
-                governanceAction: GovernanceAction.StopVoting,
-                votingPower: currentVotingPower,
-                participation: removedParticipation,
+            /**
+             * NOTE: Unless we check the voting power, we won't know if the participations were removed
+             * because the user stopped voting or manually set the voting power to zero.
+             */
+            if (currentVotingPower === 0) {
+                return {
+                    governanceAction: GovernanceAction.DecreaseVotingPower,
+                    votingPower: currentVotingPower,
+                }
+            } else {
+                return {
+                    governanceAction: GovernanceAction.StopVoting,
+                    votingPower: currentVotingPower,
+                    participation: removedParticipation,
+                }
             }
         } else {
             const oldVotingPower = getAmountFromOutput(governanceInput.output)

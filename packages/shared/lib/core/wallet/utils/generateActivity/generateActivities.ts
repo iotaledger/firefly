@@ -33,7 +33,7 @@ function generateActivitiesFromProcessedTransactionsWithInputs(
     processedTransaction: IProcessedTransaction,
     account: IAccountState
 ): Activity[] {
-    const outputs = processedTransaction.outputs
+    const { outputs, wrappedInputs } = processedTransaction
     const activities: Activity[] = []
 
     const containsFoundryActivity = outputs.some((output) => output.output.type === OUTPUT_TYPE_FOUNDRY)
@@ -55,9 +55,10 @@ function generateActivitiesFromProcessedTransactionsWithInputs(
         activities.push(...aliasActivities)
     }
 
-    // TODO: Change callback's conditional so that the inputs' tags are also checked, in case
-    // the user set the voting power to zero, resulting in an output without a PARTICIPATE tag
-    const governanceOutput = outputs.find((output) => isParticipationOutput(output.output))
+    const hasParticipationInputs = wrappedInputs?.some((input) => isParticipationOutput(input.output))
+    const governanceOutput = hasParticipationInputs
+        ? processedTransaction?.outputs[0]
+        : outputs.find((output) => isParticipationOutput(output.output))
     if (governanceOutput) {
         const governanceActivity = generateSingleGovernanceActivity(account, {
             processedTransaction,
