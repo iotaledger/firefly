@@ -1,13 +1,13 @@
 <script lang="typescript">
     import { Button, Text, TextHint, AssetAmountInput } from 'shared/components'
     import { HTMLButtonType, TextType } from 'shared/components/enums'
-    import { selectedAccount } from '@core/account'
+    import { selectedAccount } from '@core/account/stores'
     import { handleError } from '@core/error/handlers/handleError'
     import { setVotingPower } from '@contexts/governance/actions'
     import { localize } from '@core/i18n'
-    import { checkActiveProfileAuth } from '@core/profile'
-    import { visibleSelectedAccountAssets } from '@core/wallet'
-    import { closePopup } from '@auxiliary/popup'
+    import { checkActiveProfileAuth } from '@core/profile/actions'
+    import { visibleSelectedAccountAssets } from '@core/wallet/stores'
+    import { closePopup } from '@auxiliary/popup/actions'
 
     const asset = $visibleSelectedAccountAssets?.baseCoin
 
@@ -23,7 +23,7 @@
 
     async function onSubmit(): Promise<void> {
         try {
-            await assetAmountInput?.validate()
+            await assetAmountInput?.validate(true)
             await checkActiveProfileAuth(async () => {
                 await setVotingPower(rawAmount)
                 closePopup()
