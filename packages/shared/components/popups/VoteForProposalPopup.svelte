@@ -2,7 +2,6 @@
     import { Button, Text, TextHint, FontWeight, TextType, KeyValueBox } from 'shared/components'
     import { HTMLButtonType } from 'shared/components/enums'
     import { selectedAccount } from '@core/account/stores'
-    import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
     import { BASE_TOKEN } from '@core/network/constants'
     import { activeProfile } from '@core/profile/stores'
@@ -23,14 +22,10 @@
     $: isTransferring = $selectedAccount?.isTransferring
 
     async function handleSubmit(): Promise<void> {
-        try {
-            await checkActiveProfileAuth(async () => {
-                await vote($selectedProposal?.id, selectedAnswerValues)
-                closePopup()
-            })
-        } catch (err) {
-            handleError(err)
-        }
+        await checkActiveProfileAuth(async () => {
+            await vote($selectedProposal?.id, selectedAnswerValues)
+            closePopup()
+        })
     }
 </script>
 

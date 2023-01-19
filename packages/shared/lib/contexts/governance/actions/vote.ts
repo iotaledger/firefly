@@ -1,5 +1,4 @@
 import { get } from 'svelte/store'
-import { Transaction } from '@iota/wallet'
 
 import { selectedAccount, updateSelectedAccount } from '@core/account/stores'
 import { activeProfile } from '@core/profile/stores'
@@ -7,8 +6,9 @@ import { ProfileType } from '@core/profile/enums'
 import { handleLedgerError } from '@core/ledger/utils'
 import { showAppNotification } from '@auxiliary/notification/actions'
 import { localize } from '@core/i18n'
+import { handleError } from '@core/error/handlers'
 
-export async function vote(eventId?: string, answers?: number[]): Promise<Transaction> {
+export async function vote(eventId?: string, answers?: number[]): Promise<void> {
     try {
         updateSelectedAccount({ isTransferring: true })
 
@@ -24,8 +24,9 @@ export async function vote(eventId?: string, answers?: number[]): Promise<Transa
         const _activeProfile = get(activeProfile)
         if (_activeProfile.type === ProfileType.Ledger) {
             handleLedgerError(err?.error)
+        } else {
+            handleError(err)
         }
-        return Promise.reject(err)
     } finally {
         updateSelectedAccount({ isTransferring: false })
     }
