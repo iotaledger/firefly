@@ -76,7 +76,7 @@
         </div>
         <div class="flex flex-col space-y-6">
             {#if features?.dashboard?.profileActions?.backupProfile?.enabled && !isBackupSafe}
-                <ProfileBackupButton {lastBackupDate} onClick={() => {}} />
+                <ProfileBackupButton {lastBackupDate} onClick={() => $profileRouter.next({ backup: true })} />
             {/if}
             {#if features?.dashboard?.profileActions?.networkStatus?.enabled}
                 <NetworkStatusButton onClick={() => $profileRouter.next({ networkStatus: true })} />

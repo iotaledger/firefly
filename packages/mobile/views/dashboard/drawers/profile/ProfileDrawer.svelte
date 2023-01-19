@@ -73,6 +73,8 @@
         } else {
             if ($profileRoute === ProfileRoute.NetworkStatus) {
                 title = localize('views.settings.networkStatus.title')
+            } else if ($profileRoute === ProfileRoute.Backup) {
+                title = localize('views.settings.exportStronghold.title')
             } else {
                 title = localize('views.settings.profile.title')
             }
