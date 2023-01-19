@@ -43,7 +43,7 @@
     }
 
     $: availableBalance = asset?.balance?.available + votingPower
-    $: bigAmount = convertToRawAmount(amount, unit, asset?.metadata)
+    $: bigAmount = convertToRawAmount(amount, asset?.metadata, unit)
     $: marketAmount = getMarketAmountFromAssetValue(bigAmount, asset)
     $: max = parseCurrency(formatTokenAmountDefault(availableBalance, asset.metadata, unit, false))
 

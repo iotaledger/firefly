@@ -23,6 +23,7 @@
     let amount: number
     let rawAmount = newVotingPower ?? $selectedAccount?.votingPower
     let confirmDisabled = false
+    let isVoting: boolean
 
     $: votingPower = parseInt($selectedAccount?.votingPower, 10)
     $: disabled = $hasToRevote || $selectedAccount?.isTransferring
@@ -33,8 +34,7 @@
             confirmDisabled = true
             return
         }
-
-        const convertedSliderAmount = convertToRawAmount(amount.toString(), 'SMR', asset?.metadata).toString()
+        const convertedSliderAmount = convertToRawAmount(amount.toString(), asset?.metadata).toString()
         confirmDisabled = convertedSliderAmount === $selectedAccount?.votingPower
     }
 
@@ -64,6 +64,7 @@
     onMount(async () => {
         disabled = true
         try {
+            isVoting = await isSelectedAccountVoting()
             await _onMount()
             if ($hasToRevote) {
                 modifyPopupState({ ...$popupState, preventClose: true, hideClose: true })
@@ -92,7 +93,7 @@
             {votingPower}
         />
         <TextHint info text={localize('popups.manageVotingPower.hint')} />
-        {#if isSelectedAccountVoting()}
+        {#if isVoting}
             <TextHint warning text={localize('popups.manageVotingPower.revote')} />
         {/if}
     </div>
