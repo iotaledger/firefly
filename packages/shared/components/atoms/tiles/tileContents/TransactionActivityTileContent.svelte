@@ -9,6 +9,7 @@
         selectedAccountAssets,
         getAssetFromPersistedAssets,
         getActivityTileTitle,
+        ActivityAction,
     } from '@core/wallet'
     import { truncateString } from '@core/utils'
     import { Text, AssetIcon, FontWeight } from 'shared/components'
@@ -22,6 +23,7 @@
     $: amount = getFormattedAmountFromActivity(activity)
     $: isIncoming =
         activity.direction === ActivityDirection.Incoming || activity.direction === ActivityDirection.SelfTransaction
+    $: fundsGained = isIncoming && activity.action !== ActivityAction.Burn
 
     function getSubjectLocale(_activity: TransactionActivity): string {
         const { isShimmerClaiming, subject } = _activity
@@ -53,7 +55,7 @@
         <Text
             fontWeight={FontWeight.semibold}
             lineHeight="140"
-            color={isIncoming ? 'blue-700' : ''}
+            color={fundsGained ? 'blue-700' : ''}
             classes="whitespace-nowrap"
         >
             {amount}
