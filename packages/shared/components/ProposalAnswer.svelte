@@ -46,7 +46,7 @@
 
 <proposal-answer
     style:--percentage={percentage}
-    class:hidden={isVotedFor ? false : hidden}
+    class:hidden={isSelected ? false : hidden}
     class:is-voted-for={isVotedFor}
     class:dark
     class="flex justify-between items-center p-3 rounded-md border border-solid relative dark:bg-gray-900
