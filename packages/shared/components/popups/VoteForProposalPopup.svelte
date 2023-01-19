@@ -60,7 +60,7 @@
     <Text type={TextType.h4} fontWeight={FontWeight.semibold} classes="text-left">
         {localize('popups.voteForProposal.title')}
     </Text>
-    <Text type={TextType.p} secondary>
+    <Text fontSize="14" classes="text-left break-words">
         {localize('popups.voteForProposal.body', {
             values: {
                 proposal: $selectedProposal?.title,
