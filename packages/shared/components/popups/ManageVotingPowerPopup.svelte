@@ -92,10 +92,10 @@
             {disabled}
             {votingPower}
         />
-        <TextHint info text={localize('popups.manageVotingPower.hint')} />
         {#if isVoting}
             <TextHint warning text={localize('popups.manageVotingPower.revote')} />
         {/if}
+        <TextHint info text={localize('popups.manageVotingPower.hint')} />
     </div>
     <div class="flex flex-row flex-nowrap w-full space-x-4">
         <Button outline classes="w-full" {disabled} onClick={onCancelClick}>
