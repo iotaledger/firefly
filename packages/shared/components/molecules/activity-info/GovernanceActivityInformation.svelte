@@ -14,7 +14,7 @@
         ...(activity.time && {
             transactionTime: { data: formattedTransactionTime },
         }),
-        ...(activity.votingPower && {
+        ...(activity.votingPower !== undefined && {
             votingPower: {
                 data: formatTokenAmountBestMatch(activity.votingPower, BASE_TOKEN[$activeProfile?.networkProtocol], 2),
                 alternateKey:
