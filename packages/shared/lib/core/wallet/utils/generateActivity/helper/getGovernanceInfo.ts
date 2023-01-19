@@ -26,6 +26,7 @@ export function getGovernanceInfo(output: Output, inputs: IWrappedOutput[], meta
     if (governanceInput) {
         const oldMetadata = getMetadataFromOutput(governanceInput.output)
         const oldParticipations = parseGovernanceMetadata(oldMetadata)
+        const oldVotingPower = getAmountFromOutput(governanceInput.output)
 
         const addedParticipation = getParticipationDifference(oldParticipations, participations)
         const removedParticipation = getParticipationDifference(participations, oldParticipations)
@@ -45,6 +46,7 @@ export function getGovernanceInfo(output: Output, inputs: IWrappedOutput[], meta
                 return {
                     governanceAction: GovernanceAction.DecreaseVotingPower,
                     votingPower: currentVotingPower,
+                    votingPowerDifference: oldVotingPower,
                 }
             } else {
                 return {
@@ -54,7 +56,6 @@ export function getGovernanceInfo(output: Output, inputs: IWrappedOutput[], meta
                 }
             }
         } else {
-            const oldVotingPower = getAmountFromOutput(governanceInput.output)
             return {
                 governanceAction:
                     currentVotingPower - oldVotingPower > 0
