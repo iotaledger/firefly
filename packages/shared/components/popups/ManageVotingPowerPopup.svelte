@@ -17,14 +17,13 @@
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let newVotingPower: string = undefined
 
-    const asset = $visibleSelectedAccountAssets?.baseCoin
-
     let assetAmountInput: AssetAmountInput
     let amount: number
     let rawAmount = newVotingPower ?? $selectedAccount?.votingPower
     let confirmDisabled = false
     let isVoting: boolean
 
+    $: asset = $visibleSelectedAccountAssets?.baseCoin
     $: votingPower = parseInt($selectedAccount?.votingPower, 10)
     $: disabled = $hasToRevote || $selectedAccount?.isTransferring
     $: amount, disabled, setConfirmDisabled()
