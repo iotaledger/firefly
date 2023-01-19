@@ -43,7 +43,7 @@
 
     async function onSubmit(): Promise<void> {
         try {
-            await assetAmountInput?.validate()
+            await assetAmountInput?.validate(true)
 
             // After unlocking stronghold popup, the popup tracks newVotingPower to show it when reopened.
             $popupState.props = { newVotingPower: rawAmount }

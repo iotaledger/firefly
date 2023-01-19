@@ -63,6 +63,7 @@
         const isAmountZeroOrNull = !Number(amountAsFloat)
         // Zero value transactions can still contain metadata/tags
         if (allowZeroOrNull && isAmountZeroOrNull) {
+            rawAmount = Big(0).toString()
             return
         } else if (isAmountZeroOrNull) {
             error = localize('error.send.amountInvalidFormat')

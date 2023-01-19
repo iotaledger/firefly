@@ -6,8 +6,8 @@ import { updateNftInAllAccountNfts } from '@core/nfts'
 import { ActivityAction, ActivityDirection, ActivityType, InclusionState } from '@core/wallet'
 import { updateClaimingTransactionInclusion } from '@core/wallet/actions/activities/updateClaimingTransactionInclusion'
 import {
-    updateActivityByTransactionId,
     getActivityByTransactionId,
+    updateActivityByTransactionId,
 } from '@core/wallet/stores/all-account-activities.store'
 
 import { WalletApiEvent } from '../../enums'
@@ -38,7 +38,7 @@ export function handleTransactionInclusionEventInternal(
         updateNftInAllAccountNfts(accountIndex, activity.nftId, { isSpendable })
     }
 
-    if (activity?.tag === 'PARTICIPATE') {
+    if (activity?.type === ActivityType.Governance) {
         if (get(hasToRevote) && inclusionState === InclusionState.Confirmed) {
             closePopup(true)
             openPopup({
