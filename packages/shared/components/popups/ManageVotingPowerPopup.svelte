@@ -30,7 +30,6 @@
             })
         } catch (err) {
             handleError(err)
-            closePopup()
         }
     }
 </script>

@@ -62,6 +62,7 @@
         const amountAsFloat = parseCurrency(amount)
         const isAmountZeroOrNull = !Number(amountAsFloat)
         // Zero value transactions can still contain metadata/tags
+        error = ''
         if (allowZeroOrNull && isAmountZeroOrNull) {
             rawAmount = Big(0).toString()
             return
@@ -115,7 +116,7 @@
     </div>
     {#if containsSlider}
         <div class="flex flex-col mt-5">
-            <SliderInput bind:value={amount} {max} decimals={asset.metadata.decimals} {disabled} />
+            <SliderInput bind:value={amount} {max} decimals={allowedDecimals} {disabled} />
             <div class="flex flex-row justify-between">
                 <Text color="gray-800" darkColor="gray-500" fontSize="xs"
                     >{formatTokenAmountBestMatch(0, asset?.metadata)}</Text
