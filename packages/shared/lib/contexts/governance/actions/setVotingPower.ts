@@ -12,7 +12,8 @@ import { isSelectedAccountVoting } from '../utils'
 export async function setVotingPower(rawAmount: string): Promise<void> {
     try {
         // If voting power is set to '0', the PARTICIPATE tag is removed and no revoting has to occur.
-        hasToRevote.set(rawAmount !== '0' && isSelectedAccountVoting())
+        const isVoting = await isSelectedAccountVoting()
+        hasToRevote.set(rawAmount !== '0' && isVoting)
 
         const account = get(selectedAccount)
         updateSelectedAccount({ isTransferring: true })
