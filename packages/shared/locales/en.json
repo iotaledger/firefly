@@ -1017,14 +1017,14 @@
         },
         "voteForProposal": {
             "title": "Vote for proposal",
-            "body": "You're about to vote for {proposal} proposal",
+            "body": "You're about to vote for {proposal} proposal.",
             "key": "Your voting power",
             "hint": "Please note that your voting power depends on the amount of funds you hold in your wallet. The more funds you hold, the higher your voting power is.",
             "noVotingPower": "You do not have any voting power. Please increase your voting power from the Governance dashboard."
         },
         "revote": {
             "title": "Revote on proposals",
-            "body": "As mentioned in the previous step, changing your voting power temporarily stops counting your votes for the proposals that you were voting for. In this step, you can easily revote for all of them with only one click.",
+            "body": "As mentioned in the previous step, changing your voting power temporarily stops your votes from being counted. Simply click \"Revote\" to resume voting.",
             "hint": "Firefly remembers all of the proposals and answer options you previously voted for."
         },
         "removeProposal": {
