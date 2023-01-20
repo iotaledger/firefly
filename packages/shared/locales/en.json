@@ -605,6 +605,7 @@
                     "eventId": "Event ID",
                     "nodeUrl": "Node URL"
                 },
+                "voteOpens": "Vote opens in {time}",
                 "fetching": "Fetching proposal data"
             }
         }
