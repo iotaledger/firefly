@@ -18,14 +18,26 @@
     export let votedAnswerValue: number = undefined
 
     let percentages: string[]
+    let winnerAnswerIndex: number
 
     $: answers = [...question?.answers, { value: 0, text: 'Abstain', additionalInfo: '' }]
-    $: showMargin = isOpened || ((votedAnswerValue || votedAnswerValue === ABSTAIN_VOTE_VALUE) && !isOpened)
     $: allVotes, calculatePercentagesFromAllVotes()
     $: disabled =
         $selectedProposal.status === ProposalStatus.Upcoming || $selectedProposal.status === ProposalStatus.Ended
+    $: allVotes, setWinnerAnswerIndex()
+    $: showMargin =
+        isOpened ||
+        ((votedAnswerValue || votedAnswerValue === ABSTAIN_VOTE_VALUE) && !isOpened) ||
+        winnerAnswerIndex !== undefined
 
     function calculatePercentagesFromAllVotes(): void {
+        if (
+            $selectedProposal?.status === ProposalStatus.Upcoming ||
+            $selectedProposal?.status === ProposalStatus.Commencing
+        ) {
+            return
+        }
+
         const totalVotes = allVotes?.reduce((acc, answer) => acc + answer.accumulated, 0)
         percentages = answers?.map((currentAnswer) => {
             const answerVotes = allVotes?.find((answer) => answer.value === currentAnswer.value)?.accumulated
@@ -40,6 +52,14 @@
 
     function handleQuestionClick(): void {
         dispatch('clickQuestion', { questionIndex })
+    }
+
+    function setWinnerAnswerIndex(): void {
+        if ($selectedProposal.status === ProposalStatus.Ended) {
+            const answersAccumulated = allVotes?.map((answer) => answer.accumulated)
+            const maxAccumulated = Math.max(...answersAccumulated)
+            winnerAnswerIndex = answersAccumulated?.indexOf(maxAccumulated)
+        }
     }
 </script>
 
@@ -72,7 +92,7 @@
             <Icon icon={IconEnum.ChevronDown} classes="text-gray-500" />
         </div>
     </div>
-    <proposal-answers class:mt-4={showMargin} class={isOpened ? 'space-y-2' : ''}>
+    <proposal-answers class:mt-4={showMargin} class="flex flex-col gap-2">
         {#each answers as answer, answerIndex}
             <ProposalAnswer
                 {answer}
@@ -81,7 +101,9 @@
                 {selectedAnswerValue}
                 {disabled}
                 hidden={!isOpened}
-                percentage={percentages[answerIndex]}
+                percentage={percentages?.[answerIndex]}
+                isWinner={answerIndex === winnerAnswerIndex}
+                proposalStatus={$selectedProposal.status}
                 on:click={handleAnswerClick(answer?.value)}
             />
         {/each}

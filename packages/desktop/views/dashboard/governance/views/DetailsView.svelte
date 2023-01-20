@@ -26,6 +26,8 @@
         updateParticipationOverview,
     } from '@contexts/governance/stores'
     import { calculateWeightedVotes } from '@contexts/governance/utils'
+    import { getBestTimeDuration, milestoneToDate } from '@core/utils'
+    import { networkStatus } from '@core/network/stores'
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
     import { visibleSelectedAccountAssets } from '@core/wallet/stores'
 
@@ -36,6 +38,7 @@
     let votingPayload: VotingEventPayload
     let totalVotes = 0
     let hasMounted = false
+    let voteButtonText = localize('actions.vote')
 
     $: $selectedAccountIndex, void updateParticipationOverview()
     $: proposalState = $proposalsState[$activeProfileId]?.[$selectedProposal?.id]?.state
@@ -59,6 +62,7 @@
         selectedAnswerValues?.includes(undefined)
 
     $: isTransferring = $selectedAccount?.isTransferring
+    $: proposalState, (voteButtonText = getVoteButtonText())
 
     async function setVotingEventPayload(eventId: string): Promise<void> {
         const event = await getVotingEvent(eventId)
@@ -74,10 +78,17 @@
         if (selectedProposalOverview) {
             const trackedParticipations = Object.values(selectedProposalOverview)
             const votes = calculateWeightedVotes(trackedParticipations)
+            const lastActiveOverview = trackedParticipations.find(
+                (overview) =>
+                    overview.endMilestoneIndex === 0 || overview.endMilestoneIndex > $selectedProposal.milestones.ended
+            )
+            const votesSum = votes?.reduce((accumulator, votes) => accumulator + votes, 0) ?? 0
 
-            votedAnswerValues =
-                trackedParticipations.find((overview) => overview.endMilestoneIndex === 0)?.answers ?? []
-            totalVotes = votes?.reduce((accumulator, votes) => accumulator + votes, 0) ?? 0
+            votedAnswerValues = lastActiveOverview?.answers ?? []
+            totalVotes =
+                proposalState.status === ProposalStatus.Commencing
+                    ? parseInt(lastActiveOverview?.amount, 10) ?? 0
+                    : votesSum
         }
     }
 
@@ -105,6 +116,20 @@
             selectedAnswerValues[questionIndex] = null
         } else {
             selectedAnswerValues[questionIndex] = answerValue
+        }
+    }
+
+    function getVoteButtonText(): string {
+        if ($selectedProposal?.status === ProposalStatus.Upcoming) {
+            const millis =
+                milestoneToDate(
+                    $networkStatus.currentMilestone,
+                    $selectedProposal.milestones[ProposalStatus.Commencing]
+                ).getTime() - new Date().getTime()
+            const timeString = getBestTimeDuration(millis, 'second')
+            return localize('views.governance.details.voteOpens', { values: { time: timeString } })
+        } else {
+            return localize('actions.vote')
         }
     }
 
@@ -167,7 +192,7 @@
                 isBusy={isTransferring}
                 onClick={handleVoteClick}
             >
-                {localize('actions.vote')}
+                {voteButtonText}
             </Button>
         </buttons-container>
     </Pane>
