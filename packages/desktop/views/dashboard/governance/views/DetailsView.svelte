@@ -110,7 +110,6 @@
 
     onMount(async () => {
         await setVotingEventPayload($selectedProposal?.id)
-        await updateParticipationOverview()
         hasMounted = true
     })
 </script>
