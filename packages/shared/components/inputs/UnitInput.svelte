@@ -6,6 +6,7 @@
     export let unit: string
     export let isFocused: boolean
     export let tokenMetadata: ITokenMetadata
+    export let disabled: boolean = false
 
     let previousTokenMetadata: ITokenMetadata = tokenMetadata
 
@@ -37,4 +38,4 @@
     }
 </script>
 
-<Dropdown2 bind:isFocused value={unit} {items} {onSelect} contentWidth small />
+<Dropdown2 bind:isFocused value={unit} {items} {onSelect} {disabled} contentWidth small />
