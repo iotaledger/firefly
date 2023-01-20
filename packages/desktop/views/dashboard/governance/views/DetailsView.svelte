@@ -26,6 +26,10 @@
         updateParticipationOverview,
     } from '@contexts/governance/stores'
     import { calculateWeightedVotes } from '@contexts/governance/utils'
+    import { formatTokenAmountBestMatch } from '@core/wallet/utils'
+    import { visibleSelectedAccountAssets } from '@core/wallet/stores'
+
+    const { metadata } = $visibleSelectedAccountAssets?.baseCoin
 
     let selectedAnswerValues: number[] = []
     let votedAnswerValues: number[] = []
@@ -41,7 +45,7 @@
 
     $: votesCounter = {
         total: totalVotes,
-        power: $selectedAccount?.votingPower,
+        power: parseInt($selectedAccount?.votingPower),
     }
     $: questions = votingPayload?.questions
 
@@ -131,7 +135,7 @@
                     <li>
                         <KeyValueBox
                             keyText={localize(`views.governance.details.yourVote.${counterKey}`)}
-                            valueText={votesCounter[counterKey].toString()}
+                            valueText={formatTokenAmountBestMatch(votesCounter[counterKey], metadata)}
                         />
                     </li>
                 {/each}
