@@ -112,10 +112,10 @@ function getBurnedNativeTokens(
         return null
     }
 
-    const inputNativeTokens: { [key: string]: number } = getAllNativTokensFromOutputs(
+    const inputNativeTokens: { [key: string]: number } = getAllNativeTokensFromOutputs(
         processedTransaction.wrappedInputs
     )
-    const outputNativeTokens: { [key: string]: number } = getAllNativTokensFromOutputs([output])
+    const outputNativeTokens: { [key: string]: number } = getAllNativeTokensFromOutputs([output])
     for (const inputNativeTokenId of Object.keys(inputNativeTokens)) {
         if (!outputNativeTokens[inputNativeTokenId]) {
             return { assetId: inputNativeTokenId, amount: inputNativeTokens[inputNativeTokenId] }
@@ -128,7 +128,7 @@ function getBurnedNativeTokens(
     }
 }
 
-function getAllNativTokensFromOutputs(outputs: IWrappedOutput[]): { [key: string]: number } {
+function getAllNativeTokensFromOutputs(outputs: IWrappedOutput[]): { [key: string]: number } {
     const nativeTokens: { [key: string]: number } = {}
     for (const output of outputs) {
         for (const nativeToken of output.output.nativeTokens ?? []) {
