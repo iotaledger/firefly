@@ -92,7 +92,7 @@
             <Icon icon={IconEnum.ChevronDown} classes="text-gray-500" />
         </div>
     </div>
-    <proposal-answers class:mt-4={showMargin} class={isOpened ? 'space-y-2' : ''}>
+    <proposal-answers class:mt-4={showMargin} class="flex flex-col gap-2">
         {#each answers as answer, answerIndex}
             <ProposalAnswer
                 {answer}
