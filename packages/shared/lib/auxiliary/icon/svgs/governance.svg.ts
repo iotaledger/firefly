@@ -2,7 +2,7 @@ import { ISvg } from '../interfaces'
 
 export const GOVERNANCE_SVG: ISvg = {
     width: 24,
-    height: 25,
+    height: 27,
     path: [
         {
             d: 'M6,13.5v8h-2v-8Z',
