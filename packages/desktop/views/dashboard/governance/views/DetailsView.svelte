@@ -78,7 +78,10 @@
         if (selectedProposalOverview) {
             const trackedParticipations = Object.values(selectedProposalOverview)
             const votes = calculateWeightedVotes(trackedParticipations)
-            const lastActiveOverview = trackedParticipations.find((overview) => overview.endMilestoneIndex === 0)
+            const lastActiveOverview = trackedParticipations.find(
+                (overview) =>
+                    overview.endMilestoneIndex === 0 || overview.endMilestoneIndex > $selectedProposal.milestones.ended
+            )
             const votesSum = votes?.reduce((accumulator, votes) => accumulator + votes, 0) ?? 0
 
             votedAnswerValues = lastActiveOverview?.answers ?? []

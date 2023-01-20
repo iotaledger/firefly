@@ -56,9 +56,11 @@
     <div class="flex space-x-3 items-center">
         {#if answerIndex !== undefined}
             {#if isVotedFor}
-                <status-icon class="flex justify-center items-center w-5">
+                <status-icon class="flex justify-center items-center w-5 h-5">
                     {#if proposalStatus === ProposalStatus.Ended}
-                        <Icon icon={IconEnum.Voted} />
+                        <Icon icon={IconEnum.Voted} width={20} height={20} />
+                    {:else if proposalStatus === ProposalStatus.Commencing}
+                        <Icon icon={IconEnum.History} width={20} height={20} />
                     {:else if proposalStatus === ProposalStatus.Holding}
                         <PingingBadge classes="relative" />
                     {/if}
