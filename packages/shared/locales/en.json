@@ -1273,6 +1273,8 @@
         "minting": "Minting",
         "burned": "Burned",
         "burning": "Burning",
+        "consolidated": "Outputs consolidated",
+        "consolidating": "Consolidating outputs",
         "aliasCreated": "Alias created",
         "creatingAlias": "Creating Alias",
         "sendPayment": "Send Payment",
@@ -1437,6 +1439,7 @@
         "availableBalanceTooltip": "An asset's total balance minus any funds that are required to cover the storage deposit (i.e. funds that are locked in pending transactions, reserved for Native Tokens, or reserved for NFTs).",
         "amountClaimed": "{amount} claimed",
         "metadata": "Metadata",
+        "amountConsolidatedInputs": "Consolidated outputs",
         "name": "Name",
         "tag": "Tag",
         "nodeList": "Node list",
@@ -1485,7 +1488,8 @@
         "properties": "Properties",
         "statistics": "Statistics",
         "username": "Username",
-        "jwt": "JSON web token"
+        "jwt": "JSON web token",
+        "internalTransaction": "Internal transaction"
     },
     "filters":{
         "title": "Filters",
@@ -2052,6 +2056,11 @@
             "Pending": "burning",
             "Confirmed": "burned",
             "Conflicting": "failed to burn"
+        },
+        "consolidation": {
+            "Pending": "Consolidating outputs",
+            "Confirmed": "Outputs consolidated",
+            "Conflicting": "failed to consolidate outputs"
         },
         "migrate": {
             "Pending": "migrating for",
