@@ -112,6 +112,7 @@ export enum Icon {
     Tokens = 'tokens',
     Tools = 'tools',
     Transfer = 'transfer',
+    Trophy = 'trophy',
     Unlock = 'unlock',
     VerificationStatusNew = 'verificationStatusNew',
     VerificationStatusOfficial = 'verificationStatusOfficial',
