@@ -41,6 +41,8 @@
     let voteButtonText = localize('actions.vote')
 
     $: $selectedAccountIndex, void updateParticipationOverview()
+    $: $selectedAccountIndex, (selectedAnswerValues = [])
+
     $: proposalState = $proposalsState[$activeProfileId]?.[$selectedProposal?.id]?.state
 
     // Reactively start updating votes once component has mounted and participation overview is available.
@@ -89,6 +91,9 @@
                 proposalState.status === ProposalStatus.Commencing
                     ? parseInt(lastActiveOverview?.amount, 10) ?? 0
                     : votesSum
+        } else {
+            votedAnswerValues = []
+            totalVotes = 0
         }
     }
 
@@ -135,7 +140,6 @@
 
     onMount(async () => {
         await setVotingEventPayload($selectedProposal?.id)
-        await updateParticipationOverview()
         hasMounted = true
     })
 </script>
