@@ -9,7 +9,6 @@
         selectedAccountAssets,
         getAssetFromPersistedAssets,
         getActivityTileTitle,
-        ActivityAction,
     } from '@core/wallet'
     import { truncateString } from '@core/utils'
     import { Text, AssetIcon, FontWeight } from 'shared/components'
@@ -51,16 +50,14 @@
         >
             {localize(title)}
         </Text>
-        {#if activity.action !== ActivityAction.Consolidation}
-            <Text
-                fontWeight={FontWeight.semibold}
-                lineHeight="140"
-                color={isIncoming ? 'blue-700' : ''}
-                classes="whitespace-nowrap"
-            >
-                {amount}
-            </Text>
-        {/if}
+        <Text
+            fontWeight={FontWeight.semibold}
+            lineHeight="140"
+            color={isIncoming ? 'blue-700' : ''}
+            classes="whitespace-nowrap"
+        >
+            {amount}
+        </Text>
     </div>
     <div class="flex flex-row justify-between">
         <Text fontWeight={FontWeight.medium} lineHeight="140" color="gray-600">

@@ -29,4 +29,9 @@
             {localize(title)}
         </Text>
     </div>
+    <div class="flex flex-row justify-between">
+        <Text fontWeight={FontWeight.medium} lineHeight="140" color="gray-600">
+            {localize('general.internalTransaction')}
+        </Text>
+    </div>
 </div>

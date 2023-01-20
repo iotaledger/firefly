@@ -1486,7 +1486,8 @@
         "properties": "Properties",
         "statistics": "Statistics",
         "username": "Username",
-        "jwt": "JSON web token"
+        "jwt": "JSON web token",
+        "internalTransaction": "Internal transaction"
     },
     "filters":{
         "title": "Filters",
