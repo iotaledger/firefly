@@ -14,6 +14,7 @@
         ClickableTile,
         TransactionActivityTileContent,
         FoundryActivityTileContent,
+        ConsolidationActivityTileContent,
         AliasActivityTileContent,
         TimelockActivityTileFooter,
         AsyncActivityTileFooter,
@@ -63,6 +64,8 @@
                 <NftActivityTileContent {activity} />
             {:else if activity.type === ActivityType.Governance}
                 <GovernanceActivityTileContent {activity} />
+            {:else if activity.type === ActivityType.Consolidation}
+                <ConsolidationActivityTileContent {activity} />
             {:else}
                 <FoundryActivityTileContent {activity} />
             {/if}

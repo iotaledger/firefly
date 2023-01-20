@@ -22,10 +22,10 @@
     export let unit: string = undefined
     export let containsSlider: boolean = false
     export let disableAssetSelection: boolean = null
-
-    let amount: string = rawAmount
+    export let amount: string = rawAmount
         ? formatTokenAmountDefault(Number(rawAmount), asset?.metadata, unit, false)
         : undefined
+
     let amountInputElement: HTMLInputElement
     let error: string
 
@@ -43,7 +43,7 @@
     }
 
     $: availableBalance = asset?.balance?.available + votingPower
-    $: bigAmount = convertToRawAmount(amount, unit, asset?.metadata)
+    $: bigAmount = convertToRawAmount(amount, asset?.metadata, unit)
     $: marketAmount = getMarketAmountFromAssetValue(bigAmount, asset)
     $: max = parseCurrency(formatTokenAmountDefault(availableBalance, asset.metadata, unit, false))
 
@@ -62,6 +62,7 @@
         const amountAsFloat = parseCurrency(amount)
         const isAmountZeroOrNull = !Number(amountAsFloat)
         // Zero value transactions can still contain metadata/tags
+        error = ''
         if (allowZeroOrNull && isAmountZeroOrNull) {
             rawAmount = Big(0).toString()
             return
@@ -110,12 +111,12 @@
             {disabled}
         />
         {#if asset?.metadata?.unit}
-            <UnitInput bind:unit bind:isFocused tokenMetadata={asset?.metadata} />
+            <UnitInput bind:unit bind:isFocused {disabled} tokenMetadata={asset?.metadata} />
         {/if}
     </div>
     {#if containsSlider}
         <div class="flex flex-col mt-5">
-            <SliderInput bind:value={amount} {max} decimals={asset.metadata.decimals} {disabled} />
+            <SliderInput bind:value={amount} {max} decimals={allowedDecimals} {disabled} />
             <div class="flex flex-row justify-between">
                 <Text color="gray-800" darkColor="gray-500" fontSize="xs"
                     >{formatTokenAmountBestMatch(0, asset?.metadata)}</Text

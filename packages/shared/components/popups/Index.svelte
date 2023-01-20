@@ -1,8 +1,10 @@
 <script lang="typescript">
     import { mobile, PlatformOption, platform } from '@core/app'
     import { Drawer, Icon } from 'shared/components'
-    import { clickOutside } from '@core/utils'
-    import { closePopup, popupState } from '@auxiliary/popup'
+    import { clickOutside } from '@core/utils/ui'
+    import { closePopup } from '@auxiliary/popup/actions'
+    import { popupState } from '@auxiliary/popup/stores'
+    import { Icon as IconEnum } from '@auxiliary/icon/enums'
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
 
@@ -38,6 +40,7 @@
     import RegisterProposalPopup from './RegisterProposalPopup.svelte'
     import RemoveProposalPopup from './RemoveProposalPopup.svelte'
     import RemoveNode from './RemoveNode.svelte'
+    import RevotePopup from './RevotePopup.svelte'
     import { SendFormPopup, SendConfirmationPopup } from './send'
     import StopVotingPopup from './StopVotingPopup.svelte'
     import StorageDepositBreakdownPopup from './StorageDepositBreakdownPopup.svelte'
@@ -121,6 +124,7 @@
         registerProposal: RegisterProposalPopup,
         removeNode: RemoveNode,
         removeProposal: RemoveProposalPopup,
+        revote: RevotePopup,
         sendConfirmation: SendConfirmationPopup,
         sendForm: SendFormPopup,
         stopVoting: StopVotingPopup,
@@ -213,7 +217,7 @@
             {#if !hideClose}
                 <button on:click={tryClosePopup} class="absolute top-6 right-6 focus:text-blue-500">
                     <Icon
-                        icon="close"
+                        icon={IconEnum.Close}
                         classes="text-gray-500 dark:text-white hover:text-gray-600 dark:hover:text-gray-100"
                     />
                 </button>

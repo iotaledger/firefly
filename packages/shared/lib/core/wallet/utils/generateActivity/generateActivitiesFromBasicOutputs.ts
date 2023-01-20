@@ -7,11 +7,13 @@ import {
     getNonRemainderBasicOutputsFromTransaction,
     IProcessedTransaction,
     IWrappedOutput,
+    OUTPUT_TYPE_BASIC,
     OUTPUT_TYPE_NFT,
 } from '@core/wallet'
 import { Activity } from '@core/wallet/types'
 import { INftOutput } from '@iota/types'
 import { generateSingleBasicActivity } from './generateSingleBasicActivity'
+import { generateSingleConsolidationActivity } from './generateSingleConsolidationActivity'
 import { generateSingleNftActivity } from './generateSingleNftActivity'
 
 export function generateActivitiesFromBasicOutputs(
@@ -48,6 +50,8 @@ export function generateActivitiesFromBasicOutputs(
             addOrUpdateNftInAllAccountNfts(account.index, nft)
 
             burnedNftInputs.splice(burnedNftInputIndex, 1)
+            activities.push(activity)
+            break
         }
 
         const burnedNativeToken = getBurnedNativeTokens(basicOutput, processedTransaction)
@@ -62,6 +66,12 @@ export function generateActivitiesFromBasicOutputs(
                 burnedNativeToken.assetId,
                 burnedNativeToken.amount
             )
+        } else if (isConsolidation(basicOutput, processedTransaction)) {
+            activity = generateSingleConsolidationActivity(account, {
+                action: ActivityAction.Send,
+                processedTransaction,
+                wrappedOutput: basicOutput,
+            })
         } else {
             activity = generateSingleBasicActivity(account, {
                 action: ActivityAction.Send,
@@ -69,7 +79,6 @@ export function generateActivitiesFromBasicOutputs(
                 wrappedOutput: basicOutput,
             })
         }
-        activities.push(activity)
     }
     return activities
 }
@@ -130,4 +139,14 @@ function getAllNativTokensFromOutputs(outputs: IWrappedOutput[]): { [key: string
         }
     }
     return nativeTokens
+}
+
+function isConsolidation(output: IWrappedOutput, processedTransaction: IProcessedTransaction): boolean {
+    const allBasicInputs = processedTransaction.wrappedInputs.every((input) => input.output.type === OUTPUT_TYPE_BASIC)
+    const isSelfTransaction = processedTransaction.direction === ActivityDirection.SelfTransaction
+    const isSameAmount =
+        processedTransaction.wrappedInputs.reduce((sum, input) => sum + Number(input.output.amount), 0) ===
+        Number(output.output.amount)
+
+    return allBasicInputs && isSelfTransaction && isSameAmount
 }
