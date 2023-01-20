@@ -56,7 +56,6 @@
             )
         } catch (err) {
             handleError(err)
-            closePopup()
         }
     }
 
