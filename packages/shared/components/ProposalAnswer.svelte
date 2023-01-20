@@ -131,6 +131,10 @@
             z-index: 1;
         }
 
+        &:not(.disabled):hover {
+            @apply border-blue-500;
+        }
+
         &:not(.hidden) {
             @apply flex;
         }
@@ -148,8 +152,14 @@
             }
         }
 
-        &.voted::after {
-            @apply bg-blue-100;
+        &.voted {
+            &:hover {
+                @apply bg-blue-50;
+            }
+
+            &::after {
+                @apply bg-blue-100;
+            }
         }
 
         &.winner {
@@ -186,7 +196,7 @@
             }
         }
 
-        &:disabled {
+        &.disabled {
             @apply cursor-default;
         }
 
