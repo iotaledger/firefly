@@ -1,3 +1,4 @@
+export * from './has-to-revote.constant'
 export * from './participation-overview.store'
 export * from './proposals-state.store'
 export * from './registered-event-ids.store'

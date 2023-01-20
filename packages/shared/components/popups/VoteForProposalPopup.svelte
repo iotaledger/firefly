@@ -1,17 +1,15 @@
 <script lang="typescript">
     import { Button, Text, FontWeight, TextType, KeyValueBox } from 'shared/components'
     import { HTMLButtonType } from 'shared/components/enums'
-    import { selectedAccount, updateSelectedAccount, vote } from '@core/account'
+    import { selectedAccount } from '@core/account/stores'
     import { localize } from '@core/i18n'
-    import { BASE_TOKEN } from '@core/network'
-    import { activeProfile, checkActiveProfileAuth, ProfileType } from '@core/profile'
-    import { formatTokenAmountBestMatch, generateActivities, preprocessTransaction } from '@core/wallet/utils'
+    import { BASE_TOKEN } from '@core/network/constants'
+    import { activeProfile } from '@core/profile/stores'
+    import { checkActiveProfileAuth } from '@core/profile/actions'
+    import { formatTokenAmountBestMatch } from '@core/wallet/utils'
     import { selectedProposal } from '@contexts/governance/stores'
-    import { showAppNotification } from '@auxiliary/notification'
-    import { closePopup } from '@auxiliary/popup'
-    import { addActivitiesToAccountActivitiesInAllAccountActivities } from '@core/wallet'
-    import { handleError } from '@core/error/handlers'
-    import { handleLedgerError } from '@core/ledger'
+    import { closePopup } from '@auxiliary/popup/actions'
+    import { vote } from '@contexts/governance/actions'
 
     export let selectedAnswerValues: number[]
 
@@ -24,31 +22,10 @@
     $: isTransferring = $selectedAccount?.isTransferring
 
     async function handleSubmit(): Promise<void> {
-        try {
-            await checkActiveProfileAuth(async () => {
-                updateSelectedAccount({ isTransferring: true })
-
-                const transaction = await vote($selectedAccount.index, $selectedProposal?.id, selectedAnswerValues)
-                const processedTransaction = await preprocessTransaction(transaction, $selectedAccount)
-                const activities = generateActivities(processedTransaction, $selectedAccount)
-                addActivitiesToAccountActivitiesInAllAccountActivities($selectedAccount.index, activities)
-
-                showAppNotification({
-                    type: 'success',
-                    message: localize('notifications.vote.success'),
-                    alert: true,
-                })
-                updateSelectedAccount({ isTransferring: false })
-                closePopup()
-            })
-        } catch (err) {
-            if ($activeProfile.type === ProfileType.Ledger) {
-                handleLedgerError(err)
-            } else {
-                handleError(err)
-            }
-            updateSelectedAccount({ isTransferring: false })
-        }
+        await checkActiveProfileAuth(async () => {
+            await vote($selectedProposal?.id, selectedAnswerValues)
+            closePopup()
+        })
     }
 </script>
 
