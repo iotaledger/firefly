@@ -4,5 +4,5 @@ import { profileManager } from '../stores'
 
 export function getVotingProposalState(eventId: EventId): Promise<EventStatus> {
     const manager = get(profileManager)
-    return manager.getParticipationEventStatus(eventId)
+    return manager?.getParticipationEventStatus(eventId)
 }

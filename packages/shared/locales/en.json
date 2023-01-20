@@ -1009,7 +1009,8 @@
         "manageVotingPower": {
             "title": "Manage voting power",
             "body": "Define your voting power to vote on proposals.",
-            "hint": "Increasing your voting power locks your funds. In order to make them spendable again, you need to decrease your voting power. This affects all proposals with an active vote."
+            "revote": "Changing your voting power temporarily stops your votes from being counted. Proceed to the following step to resume voting.",
+            "hint": "Increasing your voting power locks your funds. You need to decrease your voting power to make them spendable again. This affects all proposals with an active vote."
         },
         "registerProposal": {
             "title": "Register proposal",
@@ -1017,10 +1018,14 @@
         },
         "voteForProposal": {
             "title": "Vote for proposal",
-            "body": "You're about to vote for {proposal} proposal",
+            "body": "You're about to vote for {proposal} proposal.",
             "key": "Your voting power",
-            "hint": "Please note that your voting power depends on the amount of funds you hold in your wallet. The more funds you hold, the higher your voting power is!",
             "noVotingPower": "You do not have any voting power. Please increase your voting power from the Governance dashboard."
+        },
+        "revote": {
+            "title": "Revote on proposals",
+            "body": "As mentioned in the previous step, changing your voting power temporarily stops your votes from being counted. Simply click \"Revote\" to resume voting.",
+            "hint": "Firefly remembers all of the proposals and answer options you previously voted for."
         },
         "removeProposal": {
             "title": "Remove proposal",
@@ -1222,7 +1227,8 @@
         "vote": "Vote",
         "registerProposal": "Register proposal",
         "removeProposal": "Remove proposal",
-        "stopVoting": "Stop voting"
+        "stopVoting": "Stop voting",
+        "revote": "Revote"
     },
     "general": {
         "recipient": "Recipient",
@@ -1246,6 +1252,8 @@
         "decreasing": "Decreasing voting power",
         "startVoting": "Voted",
         "startingVoting": "Starting to vote",
+        "changedVote": "Changed vote",
+        "changingVote": "Changing vote",
         "stopVoting": "Stopped voting",
         "stoppingVoting": "Stopping to vote",
         "forEvent": "for {eventId}",
@@ -1266,6 +1274,8 @@
         "minting": "Minting",
         "burned": "Burned",
         "burning": "Burning",
+        "consolidated": "Outputs consolidated",
+        "consolidating": "Consolidating outputs",
         "aliasCreated": "Alias created",
         "creatingAlias": "Creating Alias",
         "sendPayment": "Send Payment",
@@ -1430,6 +1440,7 @@
         "availableBalanceTooltip": "An asset's total balance minus any funds that are required to cover the storage deposit (i.e. funds that are locked in pending transactions, reserved for Native Tokens, or reserved for NFTs).",
         "amountClaimed": "{amount} claimed",
         "metadata": "Metadata",
+        "amountConsolidatedInputs": "Consolidated outputs",
         "name": "Name",
         "tag": "Tag",
         "nodeList": "Node list",
@@ -1478,7 +1489,8 @@
         "properties": "Properties",
         "statistics": "Statistics",
         "username": "Username",
-        "jwt": "JSON web token"
+        "jwt": "JSON web token",
+        "internalTransaction": "Internal transaction"
     },
     "filters":{
         "title": "Filters",
@@ -2046,6 +2058,11 @@
             "Confirmed": "burned",
             "Conflicting": "failed to burn"
         },
+        "consolidation": {
+            "Pending": "Consolidating outputs",
+            "Confirmed": "Outputs consolidated",
+            "Conflicting": "failed to consolidate outputs"
+        },
         "migrate": {
             "Pending": "migrating for",
             "Confirmed": "migrated for",
@@ -2076,6 +2093,11 @@
                 "Pending": "stopping voting for",
                 "Confirmed": "stopped voting for",
                 "Conflicting": "failed to stopped voting for"
+            },
+            "changedVote": {
+                "Pending": "changing vote for",
+                "Confirmed": "changed vote for",
+                "Conflicting": "failed to change vote for"
             }
         },
         "alias": {

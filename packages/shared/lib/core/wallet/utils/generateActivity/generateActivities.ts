@@ -9,7 +9,6 @@ import {
 } from '@core/wallet'
 import { Activity } from '@core/wallet/types'
 import { isParticipationOutput } from '@contexts/governance/utils'
-
 import { generateSingleAliasActivity } from './generateSingleAliasActivity'
 import { generateSingleFoundryActivity } from './generateSingleFoundryActivity'
 import { generateSingleGovernanceActivity } from './generateSingleGovernanceActivity'
