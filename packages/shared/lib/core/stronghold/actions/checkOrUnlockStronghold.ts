@@ -4,7 +4,7 @@ import { get } from 'svelte/store'
 import { handleError } from '@core/error/handlers/handleError'
 
 export async function checkOrUnlockStronghold(
-    callback: () => Promise<unknown> = async () => {},
+    callback: () => Promise<unknown> = async (): Promise<void> => {},
     reopenPopup?: boolean
 ): Promise<unknown> {
     const previousPopup = get(popupState)

@@ -1,8 +1,8 @@
 <script lang="typescript">
     import { Button, Text, TextType, TextHint } from 'shared/components'
     import { ButtonVariant } from 'shared/components/enums'
-    import { showAppNotification } from '@auxiliary/notification/actions'
     import { closePopup } from '@auxiliary/popup/actions'
+    import { showAppNotification } from '@auxiliary/notification/actions'
     import { handleError } from '@core/error/handlers'
     import { stopVotingForProposal } from '@contexts/governance/actions'
     import { selectedProposal } from '@contexts/governance/stores'

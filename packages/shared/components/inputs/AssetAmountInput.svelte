@@ -22,10 +22,10 @@
     export let unit: string = undefined
     export let containsSlider: boolean = false
     export let disableAssetSelection: boolean = null
-
-    let amount: string = rawAmount
+    export let amount: string = rawAmount
         ? formatTokenAmountDefault(Number(rawAmount), asset?.metadata, unit, false)
         : undefined
+
     let amountInputElement: HTMLInputElement
     let error: string
 
@@ -43,7 +43,7 @@
     }
 
     $: availableBalance = asset?.balance?.available + votingPower
-    $: bigAmount = convertToRawAmount(amount, unit, asset?.metadata)
+    $: bigAmount = convertToRawAmount(amount, asset?.metadata, unit)
     $: marketAmount = getMarketAmountFromAssetValue(bigAmount, asset)
     $: max = parseCurrency(formatTokenAmountDefault(availableBalance, asset.metadata, unit, false))
 
@@ -111,7 +111,7 @@
             {disabled}
         />
         {#if asset?.metadata?.unit}
-            <UnitInput bind:unit bind:isFocused tokenMetadata={asset?.metadata} />
+            <UnitInput bind:unit bind:isFocused {disabled} tokenMetadata={asset?.metadata} />
         {/if}
     </div>
     {#if containsSlider}
