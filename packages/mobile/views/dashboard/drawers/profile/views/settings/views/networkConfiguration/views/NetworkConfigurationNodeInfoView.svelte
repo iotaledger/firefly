@@ -106,8 +106,8 @@
     })
 </script>
 
-{#if nodeInfo && nodeInfoTab}
-    <div class="flex flex-auto flex-col justify-between space-y-4">
+<div class="flex flex-auto flex-col justify-between space-y-4">
+    {#if nodeInfo && nodeInfoTab}
         <div class="flex flex-col space-y-4">
             <div class="flex flex-row">
                 {#key nodeInfoTab}
@@ -152,18 +152,22 @@
                 {/each}
             </div>
         </div>
-        <Button
-            busyMessage={localize('popups.node.loadingNodeInfo')}
-            isBusy={!nodeInfo || !nodeInfoTab}
-            disabled={!nodeInfo}
-            classes="w-full"
-            size={ButtonSize.Medium}
-            outline
-            onClick={handleCopyAllInformationClick}
-        >
-            {localize('actions.copyAllInformation')}
-        </Button>
+    {:else}
+        <Spinner busy message={localize('popups.node.loadingNodeInfo')} classes="my-12 justify-center" />
+    {/if}
+    <div class="flex flex-col space-y-4 w-full">
+        {#if nodeInfo && nodeInfoTab}
+            <Button
+                busyMessage={localize('popups.node.loadingNodeInfo')}
+                isBusy={!nodeInfo || !nodeInfoTab}
+                disabled={!nodeInfo}
+                classes="w-full"
+                size={ButtonSize.Medium}
+                outline
+                onClick={handleCopyAllInformationClick}
+            >
+                {localize('actions.copyAllInformation')}
+            </Button>
+        {/if}
     </div>
-{:else}
-    <Spinner busy message={localize('popups.node.loadingNodeInfo')} classes="my-12 justify-center" />
-{/if}
+</div>
