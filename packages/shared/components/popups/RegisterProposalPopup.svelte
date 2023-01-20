@@ -8,6 +8,8 @@
     import { showAppNotification } from '@auxiliary/notification/actions'
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
     import { truncateString } from '@core/utils/string'
+    import { createProposalFromEvent, selectedProposal } from '@contexts/governance'
+    import { GovernanceRoute, governanceRouter } from '@core/router'
 
     export let eventId: string
     export let nodeUrl: string
@@ -64,12 +66,15 @@
     }
 
     async function registerParticipationWrapper(auth?: Auth): Promise<void> {
-        await registerParticipationEvent(eventId, [{ url: nodeUrl, auth }])
+        const event = await registerParticipationEvent(eventId, [{ url: nodeUrl, auth }])
         showAppNotification({
             type: 'success',
             message: localize('views.governance.proposals.successRegister'),
             alert: true,
         })
+        const proposal = await createProposalFromEvent(event)
+        $selectedProposal = proposal
+        $governanceRouter.goTo(GovernanceRoute.Details)
         closePopup()
     }
 

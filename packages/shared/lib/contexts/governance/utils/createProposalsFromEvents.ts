@@ -14,7 +14,7 @@ export async function createProposals(): Promise<IProposal[]> {
     return proposals
 }
 
-function createProposalFromEvent(event: Event): IProposal {
+export function createProposalFromEvent(event: Event): IProposal {
     const { data, id } = event
     const proposal = {
         id,
