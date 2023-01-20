@@ -12,18 +12,18 @@
 
     export let activity: GovernanceActivity
 
+    $: icon =
+        activity.governanceAction === GovernanceAction.DecreaseVotingPower ||
+        activity.governanceAction === GovernanceAction.IncreaseVotingPower
+            ? IconEnum.Governance
+            : IconEnum.Voted
     $: amount = getFormattedVotingPowerFromGovernanceActivity(activity)
     $: title = getActivityTileTitle(activity)
 </script>
 
 <div class="relative flex w-8 h-8">
     <div class="rounded-full flex justify-center items-center transition-none p-1 w-8 h-8 bg-gray-500">
-        <Icon
-            icon={IconEnum.Governance}
-            width="83.33333%"
-            height="83.33333%"
-            classes="text-white dark:text-gray-800 text-center"
-        />
+        <Icon {icon} width="83.33333%" height="83.33333%" classes="text-white dark:text-gray-800 text-center" />
     </div>
 </div>
 <div class="flex flex-col w-full space-y-0.5">

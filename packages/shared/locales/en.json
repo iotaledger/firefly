@@ -1251,6 +1251,8 @@
         "decreasing": "Decreasing voting power",
         "startVoting": "Voted",
         "startingVoting": "Starting to vote",
+        "changedVote": "Changed vote",
+        "changingVote": "Changing vote",
         "stopVoting": "Stopped voting",
         "stoppingVoting": "Stopping to vote",
         "forEvent": "for {eventId}",
@@ -2081,6 +2083,11 @@
                 "Pending": "stopping voting for",
                 "Confirmed": "stopped voting for",
                 "Conflicting": "failed to stopped voting for"
+            },
+            "changedVote": {
+                "Pending": "changing vote for",
+                "Confirmed": "changed vote for",
+                "Conflicting": "failed to change vote for"
             }
         },
         "alias": {
