@@ -34,6 +34,8 @@ export function generateActivitiesFromBasicOutputs(
         const burnedNftInputIndex = burnedNftInputs.findIndex(
             (input) => input.output.amount === basicOutput.output.amount
         )
+        const burnedNativeToken =
+            burnedNftInputIndex < 0 ? getBurnedNativeTokens(basicOutput, processedTransaction) : undefined
         if (burnedNftInputIndex >= 0) {
             const wrappedInput = burnedNftInputs[burnedNftInputIndex]
             const nftInput = wrappedInput.output as INftOutput
@@ -50,12 +52,7 @@ export function generateActivitiesFromBasicOutputs(
             addOrUpdateNftInAllAccountNfts(account.index, nft)
 
             burnedNftInputs.splice(burnedNftInputIndex, 1)
-            activities.push(activity)
-            break
-        }
-
-        const burnedNativeToken = getBurnedNativeTokens(basicOutput, processedTransaction)
-        if (burnedNativeToken) {
+        } else if (burnedNativeToken) {
             activity = generateSingleBasicActivity(
                 account,
                 {
@@ -79,6 +76,7 @@ export function generateActivitiesFromBasicOutputs(
                 wrappedOutput: basicOutput,
             })
         }
+        activities.push(activity)
     }
     return activities
 }
