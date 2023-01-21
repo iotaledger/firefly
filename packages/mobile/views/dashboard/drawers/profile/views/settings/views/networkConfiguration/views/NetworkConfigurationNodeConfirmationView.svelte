@@ -20,6 +20,10 @@
                 descriptionText = localize('popups.unsetAsPrimaryNode.body', { values: { url: node.url } })
                 confirmButtonText = localize('actions.clear')
                 break
+            case NetworkConfigurationSettingsAction.ExcludeNode:
+                descriptionText = localize('popups.excludeNode.body', { values: { url: node?.url } })
+                confirmButtonText = localize('views.settings.configureNodeList.excludeNode')
+                break
         }
     }
 </script>
