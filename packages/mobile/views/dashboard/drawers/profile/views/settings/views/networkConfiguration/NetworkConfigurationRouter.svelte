@@ -1,5 +1,9 @@
 <script lang="typescript">
-    import { toggleDisabledNodeInClientOptions, togglePrimaryNodeInClientOptions } from '@core/network'
+    import {
+        removeNodeFromClientOptions,
+        toggleDisabledNodeInClientOptions,
+        togglePrimaryNodeInClientOptions,
+    } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { NetworkConfigurationSettingsAction } from '../../../../../../../../lib/contexts/settings'
     import {
@@ -49,12 +53,22 @@
     }
     function handleToggleDisabledNodeClick(): void {
         if ($networkConfigurationSettingsRoute === NetworkConfigurationSettingsRoute.NodeDetails) {
+            $networkConfigurationSettingsRouter.next({
+                action: NetworkConfigurationSettingsAction.ExcludeNode,
+            })
+        } else if ($networkConfigurationSettingsRoute === NetworkConfigurationSettingsRoute.ExcludeNodeConfirmation) {
+            void removeNodeFromClientOptions($selectedNode)
+            $networkConfigurationSettingsRouter.reset()
+        }
+    }
+    function handleDeleteNodeClick(): void {
+        if ($networkConfigurationSettingsRoute === NetworkConfigurationSettingsRoute.NodeDetails) {
             if ($selectedNode.disabled) {
                 toggleDisabledNodeInClientOptions($selectedNode)
                 $networkConfigurationSettingsRouter.previous()
             } else {
                 $networkConfigurationSettingsRouter.next({
-                    action: NetworkConfigurationSettingsAction.ExcludeNode,
+                    action: NetworkConfigurationSettingsAction.DeleteNode,
                 })
             }
         } else if ($networkConfigurationSettingsRoute === NetworkConfigurationSettingsRoute.ExcludeNodeConfirmation) {
@@ -62,7 +76,6 @@
             $networkConfigurationSettingsRouter.reset()
         }
     }
-
     function onConfirmViewCancelClick(): void {
         $networkConfigurationSettingsRouter.previous()
     }
@@ -76,7 +89,7 @@
         onEditClick={onNodeEditClick}
         onTogglePrimaryClick={handleTooglePrimaryNode}
         onToggleDisabledClick={handleToggleDisabledNodeClick}
-        onRemoveClick={() => {}}
+        onRemoveClick={handleDeleteNodeClick}
     />
 {:else if $networkConfigurationSettingsRoute === NetworkConfigurationSettingsRoute.AddNode}
     <NetworkConfigurationAddUpdateNodeView node={$selectedNode} onSuccess={onAddNodeSuccess} />
@@ -93,6 +106,13 @@
     <NetworkConfigurationNodeConfirmationView
         action={NetworkConfigurationSettingsAction.ExcludeNode}
         onConfirm={handleToggleDisabledNodeClick}
+        onCancel={onConfirmViewCancelClick}
+        node={$selectedNode}
+    />
+{:else if $networkConfigurationSettingsRoute === NetworkConfigurationSettingsRoute.DeleteNodeConfirmation}
+    <NetworkConfigurationNodeConfirmationView
+        action={NetworkConfigurationSettingsAction.DeleteNode}
+        onConfirm={handleDeleteNodeClick}
         onCancel={onConfirmViewCancelClick}
         node={$selectedNode}
     />

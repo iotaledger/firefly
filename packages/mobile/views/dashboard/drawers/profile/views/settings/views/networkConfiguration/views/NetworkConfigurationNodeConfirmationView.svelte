@@ -24,6 +24,10 @@
                 descriptionText = localize('popups.excludeNode.body', { values: { url: node?.url } })
                 confirmButtonText = localize('views.settings.configureNodeList.excludeNode')
                 break
+            case NetworkConfigurationSettingsAction.DeleteNode:
+                descriptionText = localize('popups.node.removeConfirmation')
+                confirmButtonText = localize('actions.removeNode')
+                break
         }
     }
 </script>
