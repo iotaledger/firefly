@@ -172,10 +172,10 @@
             >
                 {localize('actions.copyAllInformation')}
             </Button>
-            <Button disabled={node?.disabled} classes="w-full" outline onClick={onTogglePrimaryClick}>
-                {localize(`views.settings.configureNodeList.${isPrimary ? 'unsetAsPrimary' : 'setAsPrimary'}`)}
-            </Button>
         {/if}
+        <Button disabled={node?.disabled} classes="w-full" outline onClick={onTogglePrimaryClick}>
+            {localize(`views.settings.configureNodeList.${isPrimary ? 'unsetAsPrimary' : 'setAsPrimary'}`)}
+        </Button>
         <Button classes="w-full" outline onClick={onEditClick}>
             {localize('views.settings.configureNodeList.editDetails')}
         </Button>
