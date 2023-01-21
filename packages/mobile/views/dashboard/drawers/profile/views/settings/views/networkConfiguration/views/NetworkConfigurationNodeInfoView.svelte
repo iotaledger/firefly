@@ -2,6 +2,7 @@
     import { showAppNotification } from '@auxiliary/notification'
     import { localize } from '@core/i18n'
     import { INode, INodeInfo } from '@core/network'
+    import { activeProfile } from '@core/profile'
     import { getNodeInfo } from '@core/profile-manager'
     import { resolveObjectPath, setClipboard } from '@core/utils'
     import { Button, Checkbox, CopyableBox, FontWeight, Spinner, Text, TextType } from 'shared/components'
@@ -16,6 +17,7 @@
 
     export let node: INode = { url: '' }
     export let onEditClick: () => void
+    export let onTogglePrimaryClick: () => void
 
     const NODE_INFO_LOCALE_BASE_PATH = 'popups.node.info'
     const NODE_INFO_TAB_MAP: Readonly<
@@ -64,6 +66,8 @@
              */
         },
     }
+
+    $: isPrimary = $activeProfile?.clientOptions?.primaryNode?.url === node.url
 
     let nodeInfo: INodeInfo
     let nodeInfoTab: NodeInfoTab = NodeInfoTab.General
@@ -167,6 +171,9 @@
                 onClick={handleCopyAllInformationClick}
             >
                 {localize('actions.copyAllInformation')}
+            </Button>
+            <Button disabled={node?.disabled} classes="w-full" outline onClick={onTogglePrimaryClick}>
+                {localize(`views.settings.configureNodeList.${isPrimary ? 'unsetAsPrimary' : 'setAsPrimary'}`)}
             </Button>
         {/if}
         <Button classes="w-full" outline onClick={onEditClick}>
