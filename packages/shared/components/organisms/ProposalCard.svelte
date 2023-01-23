@@ -32,8 +32,10 @@
 
 <proposal-card
     on:click={handleProposalClick}
-    class="flex flex-col p-6 border border-solid border-gray-200 dark:border-transparent rounded-xl cursor-pointer h-32
-    {proposal.status === ProposalStatus.Ended ? 'bg-transparent' : 'bg-white dark:bg-gray-850'}"
+    on:keydown={(e) => e.key === 'Enter' && handleProposalClick()}
+    class="flex flex-col p-6 border border-solid border-gray-200 dark:border-transparent rounded-xl cursor-pointer h-32 shadow-elevation-1 hover:shadow-inner focus:shadow-inner
+    {proposal.status === ProposalStatus.Ended ? 'bg-gray-100' : 'bg-white dark:bg-gray-850'}"
+    tabindex="0"
 >
     <div class="flex items-center gap-1.5 mb-5">
         {#if proposal.organization}
