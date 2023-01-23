@@ -1,15 +1,10 @@
 <script lang="typescript">
-    import { onMount } from 'svelte'
     import { Pane, Proposals, ProposalsDetails, VotingPower, Spinner } from '@ui'
-    import { registeredEventIds, updateParticipationOverview } from '@contexts/governance/stores'
+    import { registeredEventIds } from '@contexts/governance/stores'
     import { createProposals } from '@contexts/governance/utils'
 
     let promise = createProposals()
     $: $registeredEventIds, (promise = createProposals())
-
-    onMount(() => {
-        void updateParticipationOverview()
-    })
 </script>
 
 <div class="w-full h-full flex flex-nowrap p-8 relative flex-1 space-x-6 bg-gray-50 dark:bg-gray-900">

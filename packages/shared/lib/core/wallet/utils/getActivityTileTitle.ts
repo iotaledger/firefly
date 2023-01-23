@@ -13,7 +13,15 @@ export function getActivityTileTitle(activity: Activity): string {
             return isConfirmed ? 'general.increased' : 'general.increasing'
         } else if (activity.governanceAction === GovernanceAction.DecreaseVotingPower) {
             return isConfirmed ? 'general.decreased' : 'general.decreasing'
+        } else if (activity.governanceAction === GovernanceAction.StartVoting) {
+            return isConfirmed ? 'general.startVoting' : 'general.startingVoting'
+        } else if (activity.governanceAction === GovernanceAction.StopVoting) {
+            return isConfirmed ? 'general.stopVoting' : 'general.stoppingVoting'
+        } else if (activity.governanceAction === GovernanceAction.ChangedVote) {
+            return isConfirmed ? 'general.changedVote' : 'general.changingVote'
         }
+    } else if (activity.type === ActivityType.Consolidation) {
+        return isConfirmed ? 'general.consolidated' : 'general.consolidating'
     } else if (action === ActivityAction.Mint) {
         if (type === ActivityType.Alias) {
             return isConfirmed ? 'general.aliasCreated' : 'general.creatingAlias'
