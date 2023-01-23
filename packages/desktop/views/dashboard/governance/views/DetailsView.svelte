@@ -146,7 +146,7 @@
 
 <div class="w-full h-full flex flex-nowrap p-8 relative flex-1 space-x-4 bg-gray-50 dark:bg-gray-900">
     <div class="w-2/5 flex flex-col space-y-4">
-        <Pane classes="p-6 flex flex-col flex-1">
+        <Pane classes="p-6 flex flex-col h-fit">
             <header-container class="flex justify-between items-center mb-4">
                 <ProposalStatusPill status={$selectedProposal?.status} />
                 <ProposalDetailsButton />
