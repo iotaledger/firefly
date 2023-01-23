@@ -25,8 +25,7 @@
 
     $: asset = $visibleSelectedAccountAssets?.baseCoin
     $: votingPower = parseInt($selectedAccount?.votingPower, 10)
-    $: isLoading = $selectedAccount?.isTransferring || !!$selectedAccount?.transferringVotingPowerTransaction
-    $: disabled = $hasToRevote || isLoading
+    $: disabled = $hasToRevote || $selectedAccount?.isTransferring
     $: amount, disabled, setConfirmDisabled()
 
     function setConfirmDisabled(): void {
@@ -35,7 +34,7 @@
             return
         }
         const convertedSliderAmount = convertToRawAmount(amount.toString(), asset?.metadata).toString()
-        confirmDisabled = convertedSliderAmount === $selectedAccount?.votingPower || isLoading
+        confirmDisabled = convertedSliderAmount === $selectedAccount?.votingPower || $selectedAccount?.isTransferring
     }
 
     function onCancelClick(): void {
@@ -100,7 +99,12 @@
         <Button outline classes="w-full" onClick={onCancelClick}>
             {localize('actions.cancel')}
         </Button>
-        <Button type={HTMLButtonType.Submit} disabled={confirmDisabled} isBusy={isLoading} classes="w-full">
+        <Button
+            type={HTMLButtonType.Submit}
+            disabled={confirmDisabled}
+            isBusy={$selectedAccount?.isTransferring}
+            classes="w-full"
+        >
             {localize('actions.confirm')}
         </Button>
     </div>

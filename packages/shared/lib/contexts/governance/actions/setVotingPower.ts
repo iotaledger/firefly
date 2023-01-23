@@ -29,10 +29,8 @@ export async function setVotingPower(rawAmount: string): Promise<void> {
             const amountToDecrease = votingPower - amount
             transaction = await account.decreaseVotingPower(amountToDecrease.toString())
         }
-        updateSelectedAccount({ transferringVotingPowerTransaction: transaction.transactionId })
 
         await processAndAddToActivities(transaction)
-        updateSelectedAccount({ isTransferring: false })
     } catch (err) {
         hasToRevote.set(false)
         handleError(err)
