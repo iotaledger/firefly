@@ -19,4 +19,5 @@ export { default as TopBar } from './TopBar.svelte'
 
 export * from './buttons'
 export * from './inputs'
+export * from './labels'
 export * from './molecules'
