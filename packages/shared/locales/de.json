@@ -198,7 +198,7 @@
             "videoGuide": "Video-Leitfaden zur Ledger-Migration"
         },
         "ledgerInstallationGuide": {
-            "title": "Haben du die {protocol} App auf deinem Ledger Gerät installiert?",
+            "title": "Hast du die {protocol} App auf deinem Ledger Gerät installiert?",
             "body1": "Bevor du fortfährst, musst du Ledger Live verwenden, um die {protocol} App zu finden und zu installieren.",
             "body2": "Stelle sicher, dass deine Ledger-Firmware aktuell ist. Alle vorinstallierten Apps sollten auf ihre neuesten Versionen aktualisiert werden.",
             "action": "Ja, ich habe die {protocol} App installiert"
