@@ -6,5 +6,6 @@ export interface IAccountState extends IAccount, IAccountMetadata {
     depositAddress: string
     balances: AccountBalance
     isTransferring: boolean
+    transferringVotingPowerTransaction: string
     votingPower: string
 }

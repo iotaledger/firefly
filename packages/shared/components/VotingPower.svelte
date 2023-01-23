@@ -12,6 +12,7 @@
     $: maxVotingPower = parseInt($selectedAccount?.balances?.baseCoin?.available) + votingPower
     $: formattedVotingPower = formatTokenAmountBestMatch(votingPower, asset?.metadata)
     $: formattedMaxVotingPower = formatTokenAmountBestMatch(maxVotingPower, asset?.metadata)
+    $: isLoading = $selectedAccount.isTransferring || !!$selectedAccount.transferringVotingPowerTransaction
 
     function handleManageVotingPower(): void {
         openPopup({
@@ -32,8 +33,8 @@
         size={ButtonSize.Medium}
         onClick={handleManageVotingPower}
         classes="w-full"
-        disabled={$selectedAccount.isTransferring}
-        isBusy={$selectedAccount.isTransferring}
+        disabled={isLoading}
+        isBusy={isLoading}
     >
         {localize('views.governance.votingPower.manage')}
     </Button>

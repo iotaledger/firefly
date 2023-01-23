@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 import { hasToRevote } from '@contexts/governance/stores'
-import { syncVotingPower } from '@core/account'
+import { selectedAccount, syncVotingPower, updateSelectedAccount } from '@core/account'
 import { updateNftInAllAccountNfts } from '@core/nfts'
 
 import { ActivityAction, ActivityDirection, ActivityType, InclusionState } from '@core/wallet'
@@ -44,6 +44,12 @@ export function handleTransactionInclusionEventInternal(
             openPopup({
                 type: 'revote',
             })
+        }
+        if (
+            activity.transactionId === get(selectedAccount).transferringVotingPowerTransaction &&
+            inclusionState === InclusionState.Confirmed
+        ) {
+            updateSelectedAccount({ transferringVotingPowerTransaction: undefined })
         }
         syncVotingPower(accountIndex)
     }
