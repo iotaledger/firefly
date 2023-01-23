@@ -13,11 +13,14 @@
     import { activeProfile } from '@core/profile'
     import { Button, ButtonSize, HR, Text, TextType } from 'shared/components'
     import { NodeListTable } from '../../../../../../../../../components'
+    import { NetworkConfigurationSettingsAction } from '../../../../../../../../../lib/contexts/settings'
     import { networkConfigurationSettingsRouter } from '../../../../../../../../../lib/routers'
 
     const { networkType } = $activeProfile
 
-    function handleAddNodeClick(): void {}
+    function handleAddNodeClick(): void {
+        $networkConfigurationSettingsRouter.next({ action: NetworkConfigurationSettingsAction.AddNode })
+    }
 
     function handleNodeClick(node: INode) {
         $networkConfigurationSettingsRouter.next({ node })
