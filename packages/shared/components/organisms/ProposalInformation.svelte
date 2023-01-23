@@ -3,10 +3,10 @@
     import { formatDate, localize } from '@core/i18n'
     import { networkStatus } from '@core/network'
     import { activeProfileId } from '@core/profile'
-    import { DATE_FORMAT, milestoneToDate, truncateString } from '@core/utils'
+    import { DATE_FORMAT, IKeyValueBoxList, milestoneToDate, truncateString } from '@core/utils'
     import { proposalsState, selectedProposal } from '@contexts/governance/stores'
 
-    const proposalInformation: { [key in string]: { data: string; isCopyable?: boolean; copyValue?: string } } = {
+    const proposalInformation: IKeyValueBoxList = {
         countingEnds: {
             data: formatDate(
                 milestoneToDate($networkStatus.currentMilestone, $selectedProposal.milestones?.ended),
