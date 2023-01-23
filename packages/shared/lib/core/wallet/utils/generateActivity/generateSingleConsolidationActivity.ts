@@ -1,23 +1,23 @@
 import { IAccountState } from '@core/account'
-import { IActivityGenerationParameters } from '@core/wallet/interfaces'
-import { GovernanceActivity } from '@core/wallet/types'
-import type { IBasicOutput } from '@iota/types'
+import { IActivityGenerationParameters, IWrappedOutput } from '@core/wallet/interfaces'
+import { ConsolidationActivity } from '@core/wallet/types'
+import { IBasicOutput } from '@iota/types'
 import { ActivityType } from '../../enums'
 import { activityOutputContainsValue } from '..'
 import {
-    getAmountFromOutput,
-    getGovernanceInfo,
+    getAsyncDataFromOutput,
     getMetadataFromOutput,
     getSendingInformation,
     getStorageDepositFromOutput,
     getTagFromOutput,
 } from './helper'
+import { OUTPUT_TYPE_BASIC } from '@core/wallet/constants'
 
-export function generateSingleGovernanceActivity(
+export function generateSingleConsolidationActivity(
     account: IAccountState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
-): GovernanceActivity {
-    const { transactionId, direction, time, inclusionState, wrappedInputs } = processedTransaction
+): ConsolidationActivity {
+    const { transactionId, direction, claimingData, time, inclusionState, wrappedInputs } = processedTransaction
 
     const isHidden = false
     const isAssetHidden = false
@@ -28,17 +28,17 @@ export function generateSingleGovernanceActivity(
 
     const output = wrappedOutput.output as IBasicOutput
 
+    const amountConsolidatedInputs = getAmountOfConsolidationInputs(wrappedInputs)
+
     const tag = getTagFromOutput(output)
     const metadata = getMetadataFromOutput(output)
 
     const sendingInfo = getSendingInformation(processedTransaction, output, account)
+    const asyncData = getAsyncDataFromOutput(output, outputId, claimingData, account)
 
-    const { storageDeposit } = getStorageDepositFromOutput(output)
-    const votingPower = getAmountFromOutput(output)
-    const governanceInfo = getGovernanceInfo(output, wrappedInputs, metadata)
-
+    const { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output)
     return {
-        type: ActivityType.Governance,
+        type: ActivityType.Consolidation,
         isHidden,
         id,
         transactionId,
@@ -50,12 +50,15 @@ export function generateSingleGovernanceActivity(
         containsValue,
         outputId,
         storageDeposit,
-        giftedStorageDeposit: 0,
-        votingPower,
+        giftedStorageDeposit,
         metadata,
         tag,
-        asyncData: null,
-        ...governanceInfo,
+        asyncData,
+        amountConsolidatedInputs,
         ...sendingInfo,
     }
+}
+
+function getAmountOfConsolidationInputs(inputs: IWrappedOutput[]): number {
+    return inputs.filter((input) => input.output.type === OUTPUT_TYPE_BASIC).length
 }

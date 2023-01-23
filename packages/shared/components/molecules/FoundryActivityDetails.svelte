@@ -15,6 +15,7 @@
     {/if}
     <foundry-status class="flex flex-row w-full space-x-2 justify-center">
         <TransactionActivityStatusPill
+            type={activity.type}
             inclusionState={activity.inclusionState}
             direction={activity.direction}
             isInternal={activity.isInternal}
