@@ -53,7 +53,7 @@
     style:--percentage={percentage}
     on:click={handleClick}
 >
-    <div class="flex space-x-3 items-center">
+    <div class="flex space-x-3 items-center w-full">
         {#if answerIndex !== undefined}
             {#if isVotedFor}
                 <status-icon class="flex justify-center items-center w-5 h-5">
@@ -69,7 +69,7 @@
                 <answer-index>{answerIndex + 1}</answer-index>
             {/if}
         {/if}
-        <Text fontWeight={FontWeight.medium}>{answer.text}</Text>
+        <Text fontWeight={FontWeight.medium} classes="truncate w-full">{answer.text}</Text>
     </div>
     <div class="flex items-center space-x-1.5">
         {#if isWinner}
