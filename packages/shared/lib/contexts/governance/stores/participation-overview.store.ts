@@ -13,3 +13,7 @@ export async function updateParticipationOverview(): Promise<void> {
     const overview = await getParticipationOverview(get(selectedAccountIndex))
     participationOverview.set(overview ?? DEFAULT_PARTICIPATION_OVERVIEW)
 }
+
+export function resetParticipationOverview(): void {
+    participationOverview.set(DEFAULT_PARTICIPATION_OVERVIEW)
+}

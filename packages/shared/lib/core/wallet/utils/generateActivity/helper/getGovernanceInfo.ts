@@ -55,6 +55,15 @@ export function getGovernanceInfo(output: Output, inputs: IWrappedOutput[], meta
                     participation: removedParticipation,
                 }
             }
+        }
+
+        const changedParticipation = getChangedParticipation(oldParticipations, participations)
+        if (changedParticipation) {
+            return {
+                governanceAction: GovernanceAction.ChangedVote,
+                votingPower: currentVotingPower,
+                participation: changedParticipation,
+            }
         } else {
             return {
                 governanceAction:
@@ -84,4 +93,17 @@ function getParticipationDifference(
             !oldParticipations.some((oldParticipation) => newParticipation.eventId === oldParticipation.eventId)
     )
     return participationDifference
+}
+
+function getChangedParticipation(
+    oldParticipations: IParticipation[],
+    newParticipations: IParticipation[]
+): IParticipation {
+    return newParticipations.find((newParticipation) =>
+        oldParticipations.some(
+            (oldParticipation) =>
+                oldParticipation.eventId === newParticipation.eventId &&
+                JSON.stringify(newParticipation.answers) !== JSON.stringify(oldParticipation.answers)
+        )
+    )
 }
