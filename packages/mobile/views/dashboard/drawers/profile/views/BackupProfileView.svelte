@@ -22,7 +22,7 @@
 </script>
 
 <div class="flex flex-col h-full justify-between">
-    <div class="flex flex-col overflow-y-auto h-full">
+    <div class="flex flex-col h-full">
         <Animation animation="backup-desktop" />
         <div class="space-y-2">
             <Text type={TextType.h4}>{subHeaderText}</Text>
