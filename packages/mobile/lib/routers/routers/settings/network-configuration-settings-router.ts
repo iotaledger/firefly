@@ -5,19 +5,25 @@ import { INode } from '@core/network'
 import { Subrouter } from '@core/router'
 
 import { settingsRouter } from '..'
+import { NetworkConfigurationSettingsAction } from '../../../contexts/settings'
 import { NetworkConfigurationSettingsRoute } from '../../enums'
 
 export const networkConfigurationSettingsRoute = writable<NetworkConfigurationSettingsRoute>(null)
 export const networkConfigurationSettingsRouter = writable<NetworkConfigurationSettingsRouter>(null)
 
-const selectedNodeStore = writable<INode>(null)
+const selectedNodeStore = writable<INode>(undefined)
+const unsubscribeRouteObserver = networkConfigurationSettingsRoute.subscribe((route) => {
+    if (route === NetworkConfigurationSettingsRoute.Init) {
+        selectedNodeStore.set(undefined)
+    }
+})
 
 export class NetworkConfigurationSettingsRouter extends Subrouter<NetworkConfigurationSettingsRoute> {
     constructor() {
         super(NetworkConfigurationSettingsRoute.Init, networkConfigurationSettingsRoute, get(settingsRouter))
     }
     next(event: INetworkConfigurationSettingsRouterEvent = {}): void {
-        const { node } = event
+        const { node, action } = event
 
         let nextRoute: NetworkConfigurationSettingsRoute
         const currentRoute = get(this.routeStore)
@@ -27,6 +33,12 @@ export class NetworkConfigurationSettingsRouter extends Subrouter<NetworkConfigu
                 if (node) {
                     selectedNodeStore.set(node)
                     nextRoute = NetworkConfigurationSettingsRoute.NodeDetails
+                } else if (action) {
+                    switch (action) {
+                        case NetworkConfigurationSettingsAction?.AddNode:
+                            nextRoute = NetworkConfigurationSettingsRoute.AddNode
+                            break
+                    }
                 }
         }
 
@@ -37,6 +49,7 @@ export class NetworkConfigurationSettingsRouter extends Subrouter<NetworkConfigu
     }
     reset(): void {
         super.reset()
-        selectedNodeStore.set(null)
+        unsubscribeRouteObserver()
+        selectedNodeStore.set(undefined)
     }
 }
