@@ -1,9 +1,9 @@
 <script lang="typescript">
-    import type { FilterUnit } from '@core/wallet/interfaces'
     import { Checkbox, Icon } from 'shared/components'
     import { localize } from '@core/i18n'
     import { DateFilterItem, NumberFilterItem, SelectionFilterItem, AssetFilterItem, OrderFilterItem } from './items'
     import { createEventDispatcher } from 'svelte'
+    import { FilterUnit } from '@core/utils/interfaces/filter'
 
     export let filterUnit: FilterUnit
     export let isOpen: boolean

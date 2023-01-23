@@ -1,4 +1,4 @@
-import { NumberFilterOption, DateFilterOption, OrderOption } from '../../enums'
+import { DateFilterOption, NumberFilterOption, OrderOption } from '@core/utils/enums/filters'
 import { DateFilterInput } from './date-filter-input.interface'
 import { NumberFilterInput } from './number-filter-input.interface'
 
