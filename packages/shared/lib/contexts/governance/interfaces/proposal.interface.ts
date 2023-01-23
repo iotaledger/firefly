@@ -8,5 +8,6 @@ export interface IProposal {
     organization?: IOrganization
     status: ProposalStatus
     title: string
+    additionalInfo: string
     nodeUrls: INode[]
 }

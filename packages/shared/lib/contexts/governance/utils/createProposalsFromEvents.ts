@@ -19,6 +19,7 @@ export function createProposalFromEvent(event: Event): IProposal {
     const proposal = {
         id,
         title: event.data.name,
+        additionalInfo: event.data.additionalInfo,
         status: ProposalStatus.Upcoming,
         milestones: {
             [ProposalStatus.Upcoming]: 0, // TODO: fix this

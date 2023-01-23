@@ -4,6 +4,7 @@
     import { localize } from '@core/i18n'
     import {
         Button,
+        FontWeight,
         KeyValueBox,
         Pane,
         ProposalDetailsButton,
@@ -153,6 +154,9 @@
             </header-container>
             <div class="flex flex-1 flex-col justify-between">
                 <Text type={TextType.h2}>{$selectedProposal?.title}</Text>
+                {#if $selectedProposal?.additionalInfo}
+                    <Text type={TextType.h5} overrideColor classes="text-gray-600 mt-4 max-h-40 overflow-hidden" fontWeight={FontWeight.medium}>{$selectedProposal?.additionalInfo}</Text>
+                {/if}
             </div>
         </Pane>
         <Pane classes="p-6 h-fit">
