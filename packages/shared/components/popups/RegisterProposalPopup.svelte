@@ -4,7 +4,7 @@
     import { HTMLButtonType } from 'shared/components/enums'
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
-    import { registerParticipationEvent } from '@core/profile-manager/api'
+    import { registerParticipationEvent } from '@contexts/governance/actions'
     import { showAppNotification } from '@auxiliary/notification/actions'
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
     import { truncateString } from '@core/utils/string'

@@ -23,8 +23,12 @@ import {
     FilterOptions,
     IncreaseNativeTokenSupplyOptions,
     MintTokenTransaction,
+    Node,
     OutputData,
     OutputOptions,
+    ParticipationEvent,
+    ParticipationEventStatus,
+    ParticipationEventType,
     ParticipationOverview,
     PreparedTransactionData,
     SignedTransactionEssence,
@@ -103,6 +107,10 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
+    deregisterParticipationEvent(eventId: string): Promise<void> {
+        throw new Error('Method not implemented.')
+    }
+
     destroyAlias(aliasId: string, transactionOptions?: TransactionOptions): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
@@ -160,6 +168,22 @@ export class AccountMock implements IAccount {
 
     getOutputsWithAdditionalUnlockConditions(outputs): Promise<string[]> {
         return Promise.resolve([''])
+    }
+
+    getParticipationEvent(eventId: string): Promise<ParticipationEvent> {
+        throw new Error('Method not implemented.')
+    }
+
+    getParticipationEventIds(eventType?: ParticipationEventType | undefined): Promise<string[]> {
+        throw new Error('Method not implemented.')
+    }
+
+    getParticipationEvents(): Promise<ParticipationEvent[]> {
+        throw new Error('Method not implemented.')
+    }
+
+    getParticipationEventStatus(eventId: string): Promise<ParticipationEventStatus> {
+        throw new Error('Method not implemented.')
     }
 
     getParticipationOverview(): Promise<ParticipationOverview> {
@@ -231,6 +255,10 @@ export class AccountMock implements IAccount {
     }
 
     getTransaction(transactionId: string): Promise<Transaction> {
+        throw new Error('Method not implemented.')
+    }
+
+    registerParticipationEvent(eventId: string, nodes: Node[]): Promise<ParticipationEvent> {
         throw new Error('Method not implemented.')
     }
 

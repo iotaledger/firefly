@@ -1,12 +1,12 @@
 import { get } from 'svelte/store'
 
-import { Event } from '@iota/wallet'
+import { ParticipationEvent } from '@iota/wallet'
 
+import { getVotingEvents } from '@contexts/governance/actions'
 import { ProposalStatus } from '@contexts/governance/enums'
 import { IProposal } from '@contexts/governance/interfaces'
 import { nodeInfo } from '@core/network'
 import { activeProfile } from '@core/profile'
-import { getVotingEvents } from '@core/profile-manager'
 
 export async function createProposals(): Promise<IProposal[]> {
     const events = await getVotingEvents()
@@ -14,7 +14,7 @@ export async function createProposals(): Promise<IProposal[]> {
     return proposals
 }
 
-function createProposalFromEvent(event: Event): IProposal {
+function createProposalFromEvent(event: ParticipationEvent): IProposal {
     const { data, id } = event
     const proposal = {
         id,
