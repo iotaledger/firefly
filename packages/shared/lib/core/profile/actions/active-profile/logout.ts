@@ -1,9 +1,9 @@
 import { closePopup } from '@auxiliary/popup'
 import { resetSelectedAccount } from '@core/account'
-import { clearPollGovernanceDataInterval } from '@contexts/governance'
+import { clearGovernancePollAndData } from '@contexts/governance'
 import { isPollingLedgerDeviceStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
-import { clearPollMarketPrices } from '@core/market/actions'
-import { clearPollNetworkInterval } from '@core/network'
+import { clearMarketPricesPoll } from '@core/market/actions'
+import { clearNetworkPoll } from '@core/network'
 import {
     activeAccounts,
     activeProfile,
@@ -32,9 +32,9 @@ export async function logout(clearActiveProfile: boolean = true, _lockStronghold
             get(isPollingLedgerDeviceStatus) && stopPollingLedgerNanoStatus()
         }
 
-        clearPollNetworkInterval()
-        clearPollMarketPrices()
-        clearPollGovernanceDataInterval()
+        clearNetworkPoll()
+        clearMarketPricesPoll()
+        clearGovernancePollAndData()
         const _activeProfile = get(activeProfile)
         if (_activeProfile) {
             const manager = get(profileManager)
