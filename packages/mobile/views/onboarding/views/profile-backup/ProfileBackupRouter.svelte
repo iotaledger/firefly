@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { VerifyMnemonicView, ViewMnemonicView } from './views'
+    import { BackupStrongholdView, VerifyMnemonicView, ViewMnemonicView } from './views'
     import { profileBackupRoute, ProfileBackupRoute } from '../../../../lib/routers'
 </script>
 
@@ -7,4 +7,6 @@
     <ViewMnemonicView />
 {:else if $profileBackupRoute === ProfileBackupRoute.VerifyMnemonic}
     <VerifyMnemonicView />
+{:else if $profileBackupRoute === ProfileBackupRoute.BackupStronghold}
+    <BackupStrongholdView />
 {/if}
