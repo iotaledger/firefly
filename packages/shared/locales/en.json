@@ -585,7 +585,9 @@
                 "title": "Proposals",
                 "voted": "Voted",
                 "successAdd": "Proposal successfully added",
-                "successRemove": "Proposal successfully removed"
+                "successRemove": "Proposal successfully removed",
+                "emptyTitle": "No proposals",
+                "emptyDescription": "Add a proposal now!"
             },
             "statusTimeline": {
                 "upcoming": "Announcement",
