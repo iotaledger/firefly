@@ -1,10 +1,10 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { ImportMnemonicPhraseView, SuccessView } from './views'
+    import { BackupPasswordView, ImportMnemonicPhraseView, ImportStrongholdBackupView, SuccessView } from './views'
     import { localize } from '@core/i18n'
     import { profileRecoveryRoute, profileRecoveryRouter, ProfileRecoveryRoute } from '../../../../lib/routers'
     import { showAppNotification } from '@auxiliary/notification'
-
+    
     let busy = false
     let error = ''
 
@@ -38,6 +38,10 @@
 
 {#if $profileRecoveryRoute === ProfileRecoveryRoute.ImportMnemonicPhrase}
     <ImportMnemonicPhraseView on:next={next} on:previous={previous} />
+{:else if $profileRecoveryRoute === ProfileRecoveryRoute.ImportStrongholdBackup}
+    <ImportStrongholdBackupView on:next={next} on:previous={previous} />
+{:else if $profileRecoveryRoute === ProfileRecoveryRoute.BackupPassword}
+    <BackupPasswordView on:next={next} on:previous={previous} />
 {:else if $profileRecoveryRoute === ProfileRecoveryRoute.Success}
     <SuccessView on:next={next} on:previous={previous} />
 {/if}
