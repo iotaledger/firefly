@@ -11,6 +11,7 @@
         FoundryActivityDetails,
         GovernanceActivityDetails,
         NftActivityDetails,
+        ConsolidationActivityDetails,
         ActivityInformation,
     } from 'shared/components'
     import { openUrlInBrowser } from '@core/app'
@@ -164,6 +165,8 @@
             <FoundryActivityDetails {activity} />
         {:else if activity.type === ActivityType.Governance}
             <GovernanceActivityDetails {activity} />
+        {:else if activity.type === ActivityType.Consolidation}
+            <ConsolidationActivityDetails {activity} />
         {:else if activity.type === ActivityType.Nft}
             <NftActivityDetails {activity} />
         {:else if activity.type === ActivityType.Alias}

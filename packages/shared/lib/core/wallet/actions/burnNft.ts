@@ -1,5 +1,5 @@
 import { showAppNotification } from '@auxiliary/notification'
-import { selectedAccount } from '@core/account/stores/selected-account.store'
+import { selectedAccount, updateSelectedAccount } from '@core/account/stores/selected-account.store'
 import { handleError } from '@core/error/handlers/handleError'
 import { localize } from '@core/i18n'
 import { handleLedgerError } from '@core/ledger'
@@ -13,6 +13,7 @@ export async function burnNft(nftId: string): Promise<void> {
     const account = get(selectedAccount)
     const _activeProfile = get(activeProfile)
     try {
+        updateSelectedAccount({ isTransferring: true })
         const burnNftTransaction = await account.burnNft(nftId)
 
         // Generate Activity
@@ -35,5 +36,7 @@ export async function burnNft(nftId: string): Promise<void> {
             handleError(err)
         }
         throw err
+    } finally {
+        updateSelectedAccount({ isTransferring: false })
     }
 }
