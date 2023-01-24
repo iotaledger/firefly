@@ -16,7 +16,6 @@ import { destroyProfileManager, unsubscribeFromWalletApiEvents } from '@core/pro
 import { profileManager } from '@core/profile-manager/stores'
 import { routerManager } from '@core/router/stores'
 import { get } from 'svelte/store'
-import { resetDashboardState } from '../resetDashboardState'
 
 /**
  * Logout from active profile
@@ -61,7 +60,6 @@ export function logout(clearActiveProfile: boolean = true, _lockStronghold: bool
         if (clearActiveProfile) {
             resetActiveProfile()
         }
-        resetDashboardState()
         get(routerManager).resetRouters()
 
         resolve()

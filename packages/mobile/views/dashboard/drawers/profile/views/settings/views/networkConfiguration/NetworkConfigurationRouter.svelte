@@ -33,7 +33,7 @@
             $networkConfigurationSettingsRouter.previous()
         }
     }
-    function handleTooglePrimaryNode(): void {
+    function handleTogglePrimaryNode(): void {
         const isPrimary = $activeProfile?.clientOptions?.primaryNode?.url === $selectedNode.url
         if ($networkConfigurationSettingsRoute === NetworkConfigurationSettingsRoute.NodeDetails) {
             if (!isPrimary) {
@@ -87,7 +87,7 @@
     <NetworkConfigurationNodeInfoView
         node={$selectedNode}
         onEditClick={onNodeEditClick}
-        onTogglePrimaryClick={handleTooglePrimaryNode}
+        onTogglePrimaryClick={handleTogglePrimaryNode}
         onToggleDisabledClick={handleToggleDisabledNodeClick}
         onRemoveClick={handleDeleteNodeClick}
     />
@@ -98,7 +98,7 @@
 {:else if $networkConfigurationSettingsRoute === NetworkConfigurationSettingsRoute.UnsetAsPrimaryNodeConfirmation}
     <NetworkConfigurationNodeConfirmationView
         action={NetworkConfigurationSettingsAction.UnsetAsPrimaryNode}
-        onConfirm={handleTooglePrimaryNode}
+        onConfirm={handleTogglePrimaryNode}
         onCancel={onConfirmViewCancelClick}
         node={$selectedNode}
     />

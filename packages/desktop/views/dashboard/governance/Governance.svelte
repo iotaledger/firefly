@@ -5,11 +5,9 @@
 </script>
 
 {#if $selectedAccount}
-    {#key $selectedAccount?.index}
-        {#if $governanceRoute === GovernanceRoute.Proposals}
-            <ProposalsView />
-        {:else if $governanceRoute === GovernanceRoute.Details}
-            <DetailsView />
-        {/if}
-    {/key}
+    {#if $governanceRoute === GovernanceRoute.Proposals}
+        <ProposalsView />
+    {:else if $governanceRoute === GovernanceRoute.Details}
+        <DetailsView />
+    {/if}
 {/if}

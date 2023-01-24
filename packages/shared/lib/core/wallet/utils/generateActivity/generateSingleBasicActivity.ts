@@ -12,7 +12,7 @@ import { IActivityGenerationParameters } from '@core/wallet/interfaces'
 import { TransactionActivity } from '@core/wallet/types'
 import { IBasicOutput } from '@iota/types'
 import { get } from 'svelte/store'
-import { ActivityType } from '../../enums'
+import { ActivityAction, ActivityType } from '../../enums'
 import { activityOutputContainsValue, getNativeTokenFromOutput } from '..'
 import {
     getAmountFromOutput,
@@ -25,7 +25,9 @@ import {
 
 export function generateSingleBasicActivity(
     account: IAccountState,
-    { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
+    { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters,
+    fallbackAssetId?: string,
+    fallbackAmount?: number
 ): TransactionActivity {
     const { transactionId, direction, claimingData, time, inclusionState } = processedTransaction
 
@@ -39,9 +41,6 @@ export function generateSingleBasicActivity(
     const output = wrappedOutput.output as IBasicOutput
 
     const isShimmerClaiming = isShimmerClaimingTransaction(transactionId, get(activeProfileId))
-
-    const nativeToken = getNativeTokenFromOutput(output)
-    const assetId = nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol])
 
     const tag = getTagFromOutput(output)
     const metadata = getMetadataFromOutput(output)
@@ -62,10 +61,22 @@ export function generateSingleBasicActivity(
         destinationNetwork = DestinationNetwork.Shimmer
     }
 
-    const { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output)
+    let { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output)
+    giftedStorageDeposit = action === ActivityAction.Burn ? 0 : giftedStorageDeposit
+
     const gasBudget = Number(parsedLayer2Metadata?.gasBudget ?? '0')
     const baseTokenAmount = getAmountFromOutput(output) - storageDeposit - gasBudget
-    const rawAmount = nativeToken ? Number(nativeToken?.amount) : baseTokenAmount
+
+    const nativeToken = getNativeTokenFromOutput(output)
+    const assetId = fallbackAssetId ?? nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol])
+
+    let rawAmount
+    if (fallbackAmount !== undefined) {
+        rawAmount = fallbackAmount
+    } else {
+        rawAmount = nativeToken ? Number(nativeToken?.amount) : baseTokenAmount
+    }
+
     return {
         type: ActivityType.Basic,
         isHidden,

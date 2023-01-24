@@ -109,11 +109,7 @@ function isVisibleWithActiveAmountFilter(activity: Activity, filter: ActivityFil
             filter.amount.subunit.type === 'single' &&
             filter.amount.subunit.amount
         ) {
-            const amount = convertToRawAmount(
-                String(filter.amount.subunit.amount),
-                asset?.metadata?.unit,
-                asset?.metadata
-            )
+            const amount = convertToRawAmount(String(filter.amount.subunit.amount), asset?.metadata)
             const isEqual = activityAmount.eq(amount)
             if (!isEqual) {
                 return false
@@ -125,16 +121,8 @@ function isVisibleWithActiveAmountFilter(activity: Activity, filter: ActivityFil
             filter.amount.subunit.start &&
             filter.amount.subunit.end
         ) {
-            const startAmount = convertToRawAmount(
-                String(filter.amount.subunit.start),
-                asset?.metadata?.unit,
-                asset?.metadata
-            )
-            const endAmount = convertToRawAmount(
-                String(filter.amount.subunit.end),
-                asset?.metadata?.unit,
-                asset?.metadata
-            )
+            const startAmount = convertToRawAmount(String(filter.amount.subunit.start), asset?.metadata)
+            const endAmount = convertToRawAmount(String(filter.amount.subunit.end), asset?.metadata)
             const isInRange = activityAmount.lte(endAmount) && activityAmount.gte(startAmount)
             if (!isInRange) {
                 return false
@@ -145,11 +133,7 @@ function isVisibleWithActiveAmountFilter(activity: Activity, filter: ActivityFil
             filter.amount.subunit.type === 'single' &&
             filter.amount.subunit.amount
         ) {
-            const amount = convertToRawAmount(
-                String(filter.amount.subunit.amount),
-                asset?.metadata?.unit,
-                asset?.metadata
-            )
+            const amount = convertToRawAmount(String(filter.amount.subunit.amount), asset?.metadata)
             const isGreater = activityAmount.gte(amount)
             if (!isGreater) {
                 return false
@@ -160,11 +144,7 @@ function isVisibleWithActiveAmountFilter(activity: Activity, filter: ActivityFil
             filter.amount.subunit.type === 'single' &&
             filter.amount.subunit.amount
         ) {
-            const amount = convertToRawAmount(
-                String(filter.amount.subunit.amount),
-                asset?.metadata?.unit,
-                asset?.metadata
-            )
+            const amount = convertToRawAmount(String(filter.amount.subunit.amount), asset?.metadata)
             const isLess = activityAmount.lte(amount)
             if (!isLess) {
                 return false
