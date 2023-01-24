@@ -6,7 +6,7 @@
     import { BASE_TOKEN, ExplorerEndpoint } from '@core/network'
     import { getOfficialExplorerUrl } from '@core/network/utils'
     import { openUrlInBrowser } from '@core/app'
-    import { truncateString } from '@core/utils'
+    import { IKeyValueBoxList, truncateString } from '@core/utils'
     import { setClipboard } from '@core/utils'
 
     export let activity: Activity
@@ -26,7 +26,7 @@
     $: formattedGiftedStorageDeposit = formatTokenAmountPrecise(activity.giftedStorageDeposit ?? 0, baseToken)
     $: formattedGasBudget = formatTokenAmountPrecise(Number(gasBudget ?? 0), baseToken)
 
-    let transactionDetailsList: { [key in string]: { data: string; isTooltipVisible?: boolean } }
+    let transactionDetailsList: IKeyValueBoxList
     $: transactionDetailsList = {
         ...(activity?.destinationNetwork && {
             destinationNetwork: { data: activity?.destinationNetwork },

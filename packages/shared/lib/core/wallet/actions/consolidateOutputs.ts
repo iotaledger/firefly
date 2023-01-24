@@ -1,4 +1,4 @@
-import { selectedAccount } from '@core/account'
+import { selectedAccount, updateSelectedAccount } from '@core/account'
 import { handleError } from '@core/error/handlers/handleError'
 import { handleLedgerError } from '@core/ledger'
 import { activeProfile, ProfileType } from '@core/profile'
@@ -10,6 +10,8 @@ export async function consolidateOutputs(): Promise<void> {
     const account = get(selectedAccount)
     const _activeProfile = get(activeProfile)
     try {
+        updateSelectedAccount({ isTransferring: true })
+
         const transaction = await account.consolidateOutputs(false, 2)
         const processedTransaction = await preprocessTransaction(transaction, account)
         const activities = generateActivities(processedTransaction, account)
@@ -20,5 +22,7 @@ export async function consolidateOutputs(): Promise<void> {
         } else {
             handleError(err)
         }
+    } finally {
+        updateSelectedAccount({ isTransferring: false })
     }
 }

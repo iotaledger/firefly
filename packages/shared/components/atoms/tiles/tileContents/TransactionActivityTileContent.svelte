@@ -20,8 +20,7 @@
     $: title = getActivityTileTitle(activity)
     $: subjectLocale = getSubjectLocale(activity)
     $: amount = getFormattedAmountFromActivity(activity)
-    $: isIncoming =
-        activity.direction === ActivityDirection.Incoming || activity.direction === ActivityDirection.SelfTransaction
+    $: isIncoming = activity.direction === ActivityDirection.Incoming
 
     function getSubjectLocale(_activity: TransactionActivity): string {
         const { isShimmerClaiming, subject } = _activity
@@ -61,9 +60,13 @@
     </div>
     <div class="flex flex-row justify-between">
         <Text fontWeight={FontWeight.medium} lineHeight="140" color="gray-600">
-            {localize(isIncoming ? 'general.fromAddress' : 'general.toAddress', {
-                values: { account: subjectLocale },
-            })}
+            {#if activity.direction === ActivityDirection.SelfTransaction}
+                {localize('general.internalTransaction')}
+            {:else}
+                {localize(isIncoming ? 'general.fromAddress' : 'general.toAddress', {
+                    values: { account: subjectLocale },
+                })}
+            {/if}
         </Text>
     </div>
 </div>
