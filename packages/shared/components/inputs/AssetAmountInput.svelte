@@ -16,7 +16,6 @@
     export let inputElement: HTMLInputElement = undefined
     export let disabled = false
     export let isFocused = false
-    export let votingPower: number = 0
     export let asset: IAsset = $visibleSelectedAccountAssets?.baseCoin
     export let rawAmount: string = undefined
     export let unit: string = undefined
@@ -42,7 +41,7 @@
         allowedDecimals = IOTA_UNIT_MAP?.[unit?.substring(0, 1)] ?? 0
     }
 
-    $: availableBalance = asset?.balance?.available + votingPower
+    $: availableBalance = asset?.balance?.available
     $: bigAmount = convertToRawAmount(amount, asset?.metadata, unit)
     $: marketAmount = getMarketAmountFromAssetValue(bigAmount, asset)
     $: max = parseCurrency(formatTokenAmountDefault(availableBalance, asset.metadata, unit, false))
