@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { showAppNotification } from '@auxiliary/notification'
-    import { sumBalanceForAccounts } from '@core/account'
+    import { sumBalanceForAccounts, DEFAULT_SYNC_OPTIONS } from '@core/account'
     import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile, ledgerNanoStatus } from '@core/ledger'
     import { BASE_TOKEN } from '@core/network'
@@ -60,7 +60,7 @@
                     accountStartIndex: 0,
                     accountGapLimit: currentAccountGapLimit,
                     addressGapLimit: currentAddressGapLimit,
-                    syncOptions: { syncIncomingTransactions: true },
+                    syncOptions: DEFAULT_SYNC_OPTIONS,
                 }
                 await recoverAccounts(recoverAccountsPayload)
                 await loadAccounts()
