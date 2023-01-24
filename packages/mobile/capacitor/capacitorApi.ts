@@ -6,7 +6,7 @@ import { Device } from '@capacitor/device'
 // import { Keyboard } from '@capacitor/keyboard'
 // import { Share } from '@capacitor/share'
 // import { BarcodeManager } from './lib/barcodeManager'
-// import { SecureFilesystemAccess } from 'capacitor-secure-filesystem-access'
+import { SecureFilesystemAccess } from 'capacitor-secure-filesystem-access'
 import { DeepLinkManager } from '../../mobile/capacitor/lib/deepLinkManager'
 import { NotificationManager } from '../../mobile/capacitor/lib/notificationManager'
 import { PincodeManager } from '../../mobile/capacitor/lib/pincodeManager'
@@ -27,25 +27,28 @@ import { PincodeManager } from '../../mobile/capacitor/lib/pincodeManager'
 // const IotaWalletMobile = registerPlugin('IotaWalletMobile')
 // import IotaWalletMobile from '@iota/wallet-mobile'
 // const WalletApi = IotaWalletMobile
-// import { WalletApi } from '@iota/wallet-mobile'
-
-import * as WalletApi from './wallet-api'
+import { Account, AccountManager } from '@iota/wallet-mobile'
+const WalletApi = {
+    Account,
+    AccountManager
+}
+// import * as WalletApi from './wallet-api'
 
 // const { WalletApi } = IotaWalletMobile.
-console.error({WalletApi})
+// console.error({WalletApi})
 // console.error(IotaWalletMobile)
 let activeProfileId = null
 const profileManagers = {}
 
 window['__WALLET__API__'] = {
     async createAccountManager(
-        id: WalletApi.AccountId,
-        options: WalletApi.AccountManagerOptions
+        id: number, // WalletApi.AccountId,
+        options: unknown, // WalletApi.AccountManagerOptions
     ) {
-        console.error({options})
+        // console.error({options})
         const manager = await WalletApi.AccountManager(options)
         manager.id = id
-        console.error({manager})
+        // console.error({manager})
         profileManagers[id] = manager
         // bindMethodsAcrossContextBridge(WalletApi.AccountManager, manager)
         return manager
@@ -63,21 +66,21 @@ window['__WALLET__API__'] = {
     },
     async getAccount(managerId, index) {
         const manager = profileManagers[managerId]
-        console.error({manager})
+        // console.error({manager})
         const account = await manager.getAccount(index)
         bindMethodsAcrossContextBridge(WalletApi.Account.prototype, account)
         return account
     },
     async getAccounts(managerId) {
         const manager = profileManagers[managerId]
-        console.error({manager})
+        // console.error({manager})
         const accounts = await manager.getAccounts()
         accounts.forEach((account) => bindMethodsAcrossContextBridge(WalletApi.Account.prototype, account))
         return accounts
     },
     async recoverAccounts(managerId, payload) {
         const manager = profileManagers[managerId]
-        console.error({manager})
+        // console.error({manager})
         const accounts = await manager.recoverAccounts(...Object.values(payload))
         accounts.forEach((account) => bindMethodsAcrossContextBridge(WalletApi.Account.prototype, account))
         return accounts
@@ -106,16 +109,16 @@ export const CapacitorApi = {
     },
 
     renameProfileFolder: async (oldPath, newPath) => {
-        // void (await SecureFilesystemAccess.renameProfileFolder({
-        //     oldName: oldPath,
-        //     newName: newPath,
-        // }))
+        void (await SecureFilesystemAccess.renameProfileFolder({
+            oldName: oldPath,
+            newName: newPath,
+        }))
     },
 
     removeProfileFolder: async (profilePath) => {
-        // void (await SecureFilesystemAccess.removeProfileFolder({
-        //     folder: profilePath,
-        // }))
+        void (await SecureFilesystemAccess.removeProfileFolder({
+            folder: profilePath,
+        }))
     },
 
     listProfileFolders: (profileStoragePath) => new Promise<string[]>((resolve, reject) => {}),
@@ -130,6 +133,10 @@ export const CapacitorApi = {
     //     }
     // },
 
+    copyFile(sourceFilePath, destinationFilePath) {
+        return true
+    },
+
     PincodeManager: PincodeManager,
 
     DeepLinkManager: DeepLinkManager,
@@ -138,35 +145,35 @@ export const CapacitorApi = {
 
     // BarcodeManager: BarcodeManager,
 
-    // getStrongholdBackupDestination: async (defaultPath) => {
+    getStrongholdBackupDestination: async (defaultPath) => {
         // only with folder param the picker needs filename to save,
         // we pass explicity null on mobile to pick files
-        // const type = defaultPath === null ? 'file' : 'folder'
-        // const { selected } = await SecureFilesystemAccess.showPicker({
-        //     type,
-        //     defaultPath,
-        // })
-        // return `${selected}`
-    // },
+        const type = defaultPath === null ? 'file' : 'folder'
+        const { selected } = await SecureFilesystemAccess.showPicker({
+            type,
+            defaultPath,
+        })
+        return `${selected}`
+    },
 
-    // saveStrongholdBackup: async ({ allowAccess }) => {
-    //     const os: string = Capacitor.getPlatform()
-    //     switch (os) {
-    //         case 'ios':
-    //             if (allowAccess) {
-    //                 await SecureFilesystemAccess.allowAccess()
-    //             } else {
-    //                 await SecureFilesystemAccess.revokeAccess()
-    //             }
-    //             break
-    //         case 'android':
-    //             if (!allowAccess) {
-    //                 await SecureFilesystemAccess.finishBackup()
-    //             }
-    //             break
-    //     }
-    //     return
-    // },
+    saveStrongholdBackup: async ({ allowAccess }) => {
+        const os: string = Capacitor.getPlatform()
+        switch (os) {
+            case 'ios':
+                if (allowAccess) {
+                    await SecureFilesystemAccess.allowAccess()
+                } else {
+                    await SecureFilesystemAccess.revokeAccess()
+                }
+                break
+            case 'android':
+                if (!allowAccess) {
+                    await SecureFilesystemAccess.finishBackup()
+                }
+                break
+        }
+        return
+    },
 
     /**
      * Exports transaction history
@@ -178,13 +185,13 @@ export const CapacitorApi = {
      *
      * @returns {Promise<string>}
      */
-    // exportTransactionHistory: async (textContent, fileName) => {
-    //     await SecureFilesystemAccess.saveTextFile({
-    //         textContent,
-    //         fileName,
-    //     })
-    //     return ''
-    // },
+    exportTransactionHistory: async (textContent, fileName) => {
+        await SecureFilesystemAccess.saveTextFile({
+            textContent,
+            fileName,
+        })
+        return ''
+    },
 
     /**
      * Exports migration log
@@ -196,13 +203,13 @@ export const CapacitorApi = {
      *
      * @returns {Promise<boolean>}
      */
-    // exportMigrationLog: async (textContent, fileName) => {
-    //     await SecureFilesystemAccess.saveTextFile({
-    //         textContent,
-    //         fileName,
-    //     })
-    //     return true
-    // },
+    exportMigrationLog: async (textContent, fileName) => {
+        await SecureFilesystemAccess.saveTextFile({
+            textContent,
+            fileName,
+        })
+        return true
+    },
 
     /**
      * Exports ledger migration log
@@ -417,17 +424,17 @@ export const CapacitorApi = {
      * @returns
      */
     saveRecoveryKit: async (recoverKitData) => {
-        // const os: string = Capacitor.getPlatform()
-        // const { selected } = await SecureFilesystemAccess.showPicker({
-        //     type: 'folder',
-        //     defaultPath: '',
-        // })
-        // if (os === 'ios') {
-        //     void (await SecureFilesystemAccess.allowAccess())
-        // }
-        // if (os === 'ios') {
-        //     void SecureFilesystemAccess.revokeAccess()
-        // }
+        const os: string = Capacitor.getPlatform()
+        const { selected } = await SecureFilesystemAccess.showPicker({
+            type: 'folder',
+            defaultPath: '',
+        })
+        if (os === 'ios') {
+            void (await SecureFilesystemAccess.allowAccess())
+        }
+        if (os === 'ios') {
+            void SecureFilesystemAccess.revokeAccess()
+        }
         return
     },
 
