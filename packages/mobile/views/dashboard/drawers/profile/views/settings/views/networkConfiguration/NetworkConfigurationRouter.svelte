@@ -4,13 +4,25 @@
         networkConfigurationSettingsRoute,
         networkConfigurationSettingsRouter,
     } from '../../../../../../../../lib/routers'
-    import { NetworkConfigurationInitNodeInfoView, NetworkConfigurationInitView } from './views'
+    import {
+        NetworkConfigurationAddUpdateNodeView,
+        NetworkConfigurationInitView,
+        NetworkConfigurationNodeInfoView,
+    } from './views'
 
     $: selectedNode = $networkConfigurationSettingsRouter.getSelectedNodeStore()
+
+    function onAddNodeSuccess(): void {
+        if ($networkConfigurationSettingsRoute === NetworkConfigurationSettingsRoute.AddNode) {
+            $networkConfigurationSettingsRouter.previous()
+        }
+    }
 </script>
 
 {#if $networkConfigurationSettingsRoute === NetworkConfigurationSettingsRoute.Init}
     <NetworkConfigurationInitView />
 {:else if $networkConfigurationSettingsRoute === NetworkConfigurationSettingsRoute.NodeDetails}
-    <NetworkConfigurationInitNodeInfoView node={$selectedNode} />
+    <NetworkConfigurationNodeInfoView node={$selectedNode} />
+{:else if $networkConfigurationSettingsRoute === NetworkConfigurationSettingsRoute.AddNode}
+    <NetworkConfigurationAddUpdateNodeView node={$selectedNode} onSuccess={onAddNodeSuccess} />
 {/if}

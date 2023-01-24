@@ -26,8 +26,8 @@
                 hint: localize('actions.confirmNftBurn.hint'),
                 warning: true,
                 confirmText: localize('actions.burnToken'),
-                onConfirm: () => {
-                    checkActiveProfileAuth(
+                onConfirm: async () => {
+                    await checkActiveProfileAuth(
                         async () => {
                             await burnNft(nft.id)
                             $collectiblesRouter.goTo(CollectiblesRoute.Gallery)

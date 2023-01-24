@@ -178,6 +178,7 @@
         <div class="flex flex-col items-center inner overflow-y-auto" bind:this={navContainer}>
             {#each items as item}
                 <button
+                    type="button"
                     class="relative flex items-center p-2 pl-1 w-full whitespace-nowrap
                         {item[valueKey] === value && 'bg-gray-100 dark:bg-gray-700 dark:bg-opacity-20'}
                         hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20
@@ -187,8 +188,9 @@
                     on:focus={() => focusItem(item[valueKey])}
                     tabindex={dropdown ? 0 : -1}
                     class:active={item[valueKey] === value}
-                    ><Text type={itemTextType} smaller>{item[valueKey]}</Text></button
                 >
+                    <Text type={itemTextType} smaller>{item[valueKey]}</Text>
+                </button>
             {/each}
         </div>
     </nav>
