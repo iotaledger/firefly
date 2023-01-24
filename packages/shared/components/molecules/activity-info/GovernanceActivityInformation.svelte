@@ -4,12 +4,13 @@
     import { formatTokenAmountBestMatch, GovernanceAction, GovernanceActivity } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
     import { activeProfile } from '@core/profile'
+    import { IKeyValueBoxList } from '@core/utils'
 
     export let activity: GovernanceActivity
 
     $: formattedTransactionTime = getFormattedTimeStamp(activity.time)
 
-    let transactionDetailsList: { [key in string]: { data: string; alternateKey?: string } }
+    let transactionDetailsList: IKeyValueBoxList
     $: transactionDetailsList = {
         ...(activity.time && {
             transactionTime: { data: formattedTransactionTime },
