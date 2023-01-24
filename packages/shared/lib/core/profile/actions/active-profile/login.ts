@@ -33,7 +33,7 @@ import { logout } from './logout'
 import { subscribeToWalletApiEventsForActiveProfile } from './subscribeToWalletApiEventsForActiveProfile'
 import { AppContext, Platform } from '@core/app'
 import { routerManager } from '@core/router/stores'
-import { pollGovernanceData } from '@contexts/governance'
+import { pollGovernanceData } from '@contexts/governance/actions'
 
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const loginRouter = get(routerManager).getRouterForAppContext(AppContext.Login)
