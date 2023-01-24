@@ -160,7 +160,7 @@ const onboardingFeatures = {
                     enabled: true,
                 },
                 strongholdBackup: {
-                    enabled: false,
+                    enabled: true,
                 },
                 ledgerBackup: {
                     enabled: false,
@@ -201,7 +201,7 @@ const onboardingFeatures = {
                     enabled: true,
                 },
                 strongholdBackup: {
-                    enabled: false,
+                    enabled: true,
                 },
                 ledgerBackup: {
                     enabled: false,
@@ -242,7 +242,7 @@ const onboardingFeatures = {
                     enabled: false,
                 },
                 strongholdBackup: {
-                    enabled: false,
+                    enabled: true,
                 },
                 ledgerBackup: {
                     enabled: false,
