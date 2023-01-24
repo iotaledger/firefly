@@ -8,6 +8,7 @@
     import { showAppNotification } from '@auxiliary/notification/actions'
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
     import { truncateString } from '@core/utils/string'
+    import { registeredEventIds } from '@contexts/governance'
 
     export let eventId: string
     export let nodeUrl: string
@@ -85,6 +86,11 @@
         const has64Length = hexLength === 64
         if (!has64Length) {
             eventIdError = localize('error.eventId.insufficientLength')
+            return Promise.reject(eventIdError)
+        }
+
+        if ($registeredEventIds.find((id) => id === eventId)) {
+            eventIdError = localize('error.eventId.alreadyRegistered')
             return Promise.reject(eventIdError)
         }
     }
