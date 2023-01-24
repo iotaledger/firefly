@@ -726,10 +726,10 @@
   dependencies:
     big-integer "^1.6.51"
 
-"@iota/wallet@2.0.3-rc.14":
-  version "2.0.3-rc.14"
-  resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.3-rc.14.tgz#e267d20d89c838004a131060d870212a7e3a2d56"
-  integrity sha512-h/IMaOMQlBidOvBYvRgIiHUCOsrRXVEtc0A3ScTuROCAJiMgbsfU1Dxpr5kxYXWNLjjqJfDe5UFPxEIjbb2pkg==
+"@iota/wallet@2.0.3-rc.15":
+  version "2.0.3-rc.15"
+  resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.3-rc.15.tgz#1eff0eb5554331813c908da0760315dff64a9a27"
+  integrity sha512-gUg6D/nZqq41BWu1ibreU5MpGNssMzYdUiPx9XG9JLWd8q9W7KvOBkQk2zqgszj8K0HgPJr1yniyazsheWLrgQ==
   dependencies:
     "@iota/types" "^1.0.0-beta.15"
     cargo-cp-artifact "^0.1.6"
