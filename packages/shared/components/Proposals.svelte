@@ -4,10 +4,13 @@
     import { FontWeight } from './enums'
     import { IProposal } from '@contexts/governance/interfaces'
     import { proposalFilter } from '@contexts/governance'
+    import { isVisibleProposal } from '@contexts/governance/utils/isVisibleProposal'
 
     export let proposals: IProposal[] = []
 
-    $: sortedProposals = proposals.sort((a, b) => (a.id < b.id ? -1 : 1))
+    $: sortedProposals = proposals
+        .filter((proposal) => isVisibleProposal(proposal, $proposalFilter))
+        .sort((a, b) => (a.id < b.id ? -1 : 1))
 </script>
 
 <proposals-container class="flex flex-col h-full">
