@@ -13,6 +13,7 @@
     export let nodeUrl: string
 
     let eventIdError: string
+    let nodeInputError: string
     let nodeInput: NodeInput
 
     let isBusy = false
@@ -50,7 +51,7 @@
                     alert: true,
                     message: localize('error.node.dns'),
                 })
-            } else if (!nodeInput?.error && !eventIdError) {
+            } else if (!nodeInputError && !eventIdError) {
                 handleError(err)
             }
         }
@@ -99,7 +100,7 @@
             placeholder={localize('views.governance.details.proposalInformation.eventId')}
             label={localize('views.governance.details.proposalInformation.eventId')}
         />
-        <NodeInput bind:this={nodeInput} bind:nodeUrl />
+        <NodeInput bind:this={nodeInput} bind:nodeUrl bind:error={nodeInputError} />
     </div>
     <div class="flex w-full space-x-4 mt-6">
         <Button outline classes="w-full" onClick={onCancelClick}>{localize('actions.cancel')}</Button>
