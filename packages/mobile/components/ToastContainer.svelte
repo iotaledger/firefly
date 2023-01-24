@@ -16,10 +16,10 @@
     }))
 </script>
 
-<toast-container class="fixed top-0 flex flex-col z-10 w-full p-5">
+<toast-container class="fixed top-0 flex flex-col z-10 w-full {$notifications.length > 0 && 'p-5'}">
     <ul class="space-y-2">
         {#each toasts as toast}
-            <li in:fade={{ duration: 100 }} out:fade={{ duration: 100 }}>
+            <li in:fade|local={{ duration: 100 }} out:fade|local={{ duration: 100 }}>
                 {#if toast.alert}
                     <Alert type={toast.type} message={toast.message} />
                 {:else}
