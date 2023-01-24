@@ -1,5 +1,5 @@
 import type {
-    AccountSyncOptions,
+    SyncOptions,
     ClientOptions,
     EventType,
     GenerateAddressOptions,
@@ -43,7 +43,7 @@ export interface IProfileManager {
     setClientOptions(options: ClientOptions): Promise<void>
     setStrongholdPassword(password: string): Promise<void>
     setStrongholdPasswordClearInterval(intervalInMilliseconds?: number): Promise<void>
-    startBackgroundSync(options?: AccountSyncOptions, intervalInMilliseconds?: number): Promise<void>
+    startBackgroundSync(options?: SyncOptions, intervalInMilliseconds?: number): Promise<void>
     stopBackgroundSync(): Promise<void>
     storeMnemonic(mnemonic: string): Promise<void>
     verifyMnemonic(mnemonic: string): Promise<void>

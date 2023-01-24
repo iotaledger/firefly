@@ -11,7 +11,7 @@ import type {
 import type {
     AccountBalance,
     AccountMetadata,
-    AccountSyncOptions,
+    SyncOptions,
     Address,
     AddressGenerationOptions,
     AddressNativeTokens,
@@ -130,7 +130,7 @@ export interface IAccount {
     signTransactionEssence(preparedTransactionData: PreparedTransactionData): Promise<SignedTransactionEssence>
     stopParticipating(eventId: string): Promise<Transaction>
     submitAndStoreTransaction(signedTransactionData: SignedTransactionEssence): Promise<Transaction>
-    sync(options?: AccountSyncOptions): Promise<AccountBalance>
+    sync(options?: SyncOptions): Promise<AccountBalance>
     transactions(): Promise<Transaction[]>
     unspentOutputs(filterOptions?: FilterOptions): Promise<OutputData[]>
     vote(eventId?: string, answers?: number[]): Promise<Transaction>

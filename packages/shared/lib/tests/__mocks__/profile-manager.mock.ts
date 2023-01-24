@@ -3,7 +3,7 @@ import { AccountMock } from './account.mock'
 import type {
     AccountId,
     CreateAccountPayload,
-    AccountSyncOptions,
+    SyncOptions,
     ClientOptions,
     EventType,
     WalletEvent,
@@ -162,7 +162,7 @@ export class ProfileManagerMock implements IProfileManager {
         accountStartIndex: number,
         accountGapLimit: number,
         addressGapLimit: number,
-        syncOptions: AccountSyncOptions
+        syncOptions: SyncOptions
     ): Promise<IAccount[]> {
         return Promise.resolve([])
     }
@@ -187,7 +187,7 @@ export class ProfileManagerMock implements IProfileManager {
         throw new Error('Method not implemented.')
     }
 
-    startBackgroundSync(options?: AccountSyncOptions, interval?: number): Promise<void> {
+    startBackgroundSync(options?: SyncOptions, interval?: number): Promise<void> {
         return Promise.resolve()
     }
 
