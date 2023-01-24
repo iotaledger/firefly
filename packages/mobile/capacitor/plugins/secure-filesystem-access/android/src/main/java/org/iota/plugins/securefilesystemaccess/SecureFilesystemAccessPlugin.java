@@ -1,19 +1,16 @@
 package org.iota.plugins.securefilesystemaccess;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
 import android.os.FileUtils;
 import android.os.ParcelFileDescriptor;
-import android.provider.DocumentsContract;
 import android.util.Log;
 
 import androidx.activity.result.ActivityResult;
-import androidx.annotation.RequiresApi;
 import androidx.core.content.FileProvider;
 
 import com.getcapacitor.JSObject;
@@ -33,16 +30,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Objects;
 
-import static android.os.Environment.DIRECTORY_DOWNLOADS;
-
 @CapacitorPlugin(
         name = "SecureFilesystemAccess",
         permissions = {
                 @Permission(
                         alias = "storage",
                         strings = {
-                                Manifest.permission.READ_EXTERNAL_STORAGE,
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE
+                                Manifest.permission.READ_EXTERNAL_STORAGE
                         }
                 )
         }
@@ -50,7 +44,6 @@ import static android.os.Environment.DIRECTORY_DOWNLOADS;
 
 public class SecureFilesystemAccessPlugin extends Plugin {
     private String resourceType = "";
-    private String fileName = "";
 
     @PluginMethod
     public void finishBackup(PluginCall call) {
@@ -68,7 +61,7 @@ public class SecureFilesystemAccessPlugin extends Plugin {
                 return;
             }
             resourceType = call.getString("type");
-            fileName = call.getString("defaultPath");
+            String fileName = call.getString("defaultPath");
             if (resourceType == null) {
                 call.reject("Resource type is null");
                 return;
@@ -110,15 +103,17 @@ public class SecureFilesystemAccessPlugin extends Plugin {
         }
     }
 
-    @RequiresApi(api = 26)
+    @SuppressLint("Recycle")
     @ActivityCallback
     private void pickResult(PluginCall call, ActivityResult result) throws Exception {
-        // For Android we need to make sure that we remove any previous tmp file
-        // otherwise the next import will not work on next start
         File tmpStronghold = new File(getContext().getCacheDir(), "temp.stronghold");
         if (tmpStronghold.exists()) {
-            tmpStronghold.delete();
+            boolean isDeleted = tmpStronghold.delete();
+            if (!isDeleted) {
+                call.reject("Can't delete previous temporal Stronghold file!");
+            }
         }
+
         call.setKeepAlive(true);
         JSObject response = new JSObject();
         Intent data = result.getData();
@@ -128,6 +123,7 @@ public class SecureFilesystemAccessPlugin extends Plugin {
         if (resourceType.equals("file")) {
             if (data == null) throw new AssertionError();
             resolver.takePersistableUriPermission(data.getData(), takeFlagRead);
+
             if (Build.VERSION.SDK_INT <= 28) {
                 String selected = data.getData().getPath().split(":")[1];
                 Log.e("selected", selected);
@@ -145,7 +141,6 @@ public class SecureFilesystemAccessPlugin extends Plugin {
                     FileUtils.copy(sourceFD.getFileDescriptor(), targetFD.getFileDescriptor());
                     input.close();
                     output.close();
-                    // resolver.delete(Uri.fromFile(copiedFile), null, null);
                 } catch (Exception e) {
                     throw  new Exception("Unable to write file - " + e.getMessage());
                 }
@@ -155,31 +150,6 @@ public class SecureFilesystemAccessPlugin extends Plugin {
 
         }
         call.resolve(response);
-    }
-
-    // TODO warn the user with a popup that needs to create a folder in Downloads
-    private String buildPath(String path) {
-        // external storage resides on a physical volume that the user might be able to remove.
-        boolean isWritable = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
-        boolean isReadable = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) ||
-                Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED_READ_ONLY);
-        if (!isReadable && !isWritable) {
-            return "Storage is not available";
-        }
-        if (!path.contains(":")) return ""; // user must select again, stronghold shows error
-        String segment = path.split(":")[1];
-        if (Build.VERSION.SDK_INT <= 28) {
-            return segment;
-        }
-
-        int slashIndex = segment.indexOf("/");
-        if (slashIndex == -1) return "";
-        String finalPath = segment.substring(slashIndex);
-        String beginPath = segment.substring(0, slashIndex);
-
-        if (!beginPath.equals(DIRECTORY_DOWNLOADS)) return "";
-        File downloadsPath = Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS);
-        return downloadsPath.getPath() + finalPath;
     }
 
     @PermissionCallback
@@ -193,21 +163,8 @@ public class SecureFilesystemAccessPlugin extends Plugin {
         }
     }
 
-    public static String getPath(ContentResolver resolver, Uri uri) {
-        if (uri.getScheme().equals("file")) {
-            return uri.getPath();
-        }
-        final Cursor cursor = resolver.query(uri, new String[]{"_data"}, null, null, null);
-        if (cursor.moveToFirst()) {
-            String path = cursor.getString(0);
-            cursor.close();
-            return path;
-        }
-        throw new RuntimeException("Can't retrieve path from uri: " + uri.toString());
-    }
-
     @PluginMethod
-    public void saveTextFile(PluginCall call) throws IOException {
+    public void saveTextFile(PluginCall call) {
         if (!call.getData().has("textContent")
                 || !call.getData().has("fileName")) {
             call.reject("textContent & fileName are required");
@@ -318,7 +275,5 @@ public class SecureFilesystemAccessPlugin extends Plugin {
         response.put("folderList", files);
         call.resolve(response);
     }
-
-
 
 }
