@@ -46,10 +46,13 @@
                 confirmText: localize('popups.minimizeStorageDeposit.confirmButton'),
                 info: true,
                 onConfirm: async () => {
-                    await checkActiveProfileAuth(async () => {
-                        await consolidateOutputs()
-                        closePopup()
-                    })
+                    await checkActiveProfileAuth(
+                        async () => {
+                            await consolidateOutputs()
+                            closePopup()
+                        },
+                        { stronghold: true }
+                    )
                 },
             },
         })
