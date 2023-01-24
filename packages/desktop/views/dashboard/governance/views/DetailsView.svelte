@@ -98,7 +98,7 @@
         }
     }
 
-    let openedQuestionIndex = null
+    let openedQuestionIndex = 0
 
     function handleQuestionClick(event: CustomEvent): void {
         const { questionIndex } = event.detail
