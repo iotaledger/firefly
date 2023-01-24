@@ -40,6 +40,16 @@ export class NetworkConfigurationSettingsRouter extends Subrouter<NetworkConfigu
                             break
                     }
                 }
+                break
+            case NetworkConfigurationSettingsRoute.NodeDetails:
+                if (action) {
+                    switch (action) {
+                        case NetworkConfigurationSettingsAction.EditNode:
+                            nextRoute = NetworkConfigurationSettingsRoute.EditNode
+                            break
+                    }
+                }
+                break
         }
 
         this.setNext(nextRoute)
