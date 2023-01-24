@@ -16,7 +16,7 @@
     }))
 </script>
 
-{#if $notifications.length > 0}
+{#if toasts?.length > 0}
     <toast-container class="fixed top-0 flex flex-col z-10 w-full p-5">
         <ul class="space-y-2">
             {#each toasts as toast}
