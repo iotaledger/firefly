@@ -37,7 +37,7 @@ export interface IProfileManager {
     hexToBech32(hex: string, bech32Hrp?: string): Promise<string>
     isStrongholdPasswordAvailable(): Promise<boolean>
     listen(eventTypes: EventType[], callback: WalletApiEventHandler): void
-    clearListeners(eventTypes: EventType[]): void
+    clearListeners(eventTypes: EventType[]): Promise<void>
     removeLatestAccount(): Promise<void>
     restoreBackup(source: string, password: string): Promise<void>
     setClientOptions(options: ClientOptions): Promise<void>

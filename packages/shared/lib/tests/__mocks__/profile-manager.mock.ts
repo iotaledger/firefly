@@ -38,7 +38,7 @@ export class ProfileManagerMock implements IProfileManager {
         throw new Error('Method not implemented.')
     }
 
-    clearListeners(eventTypes: EventType[]): void {
+    clearListeners(eventTypes: EventType[]): Promise<void> {
         throw new Error('Method not implemented.')
     }
 
