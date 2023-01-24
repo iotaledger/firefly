@@ -106,6 +106,7 @@
                 percentage={percentages?.[answerIndex]}
                 isWinner={answerIndex === winnerAnswerIndex}
                 proposalStatus={$selectedProposal.status}
+                truncate={!isOpened}
                 on:click={handleAnswerClick(answer?.value)}
             />
         {/each}
