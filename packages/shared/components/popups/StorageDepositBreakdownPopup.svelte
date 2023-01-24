@@ -45,8 +45,8 @@
                 description: localize('popups.minimizeStorageDeposit.description'),
                 confirmText: localize('popups.minimizeStorageDeposit.confirmButton'),
                 info: true,
-                onConfirm: () => {
-                    checkActiveProfileAuth(async () => {
+                onConfirm: async () => {
+                    await checkActiveProfileAuth(async () => {
                         await consolidateOutputs()
                         closePopup()
                     })
