@@ -1,13 +1,4 @@
-import type {
-    HexEncodedAmount,
-    IAliasOutput,
-    IBasicOutput,
-    IFoundryOutput,
-    INftOutput,
-    IOutputResponse,
-    ITransactionPayload,
-    OutputTypes,
-} from '@iota/types'
+import type { HexEncodedAmount, IAliasOutput, IBasicOutput, IFoundryOutput, INftOutput, OutputTypes } from '@iota/types'
 import type {
     AccountBalance,
     AccountMetadata,
@@ -86,7 +77,7 @@ export interface IAccount {
     getParticipationOverview(): Promise<ParticipationOverview>
     getTransaction(transactionId: string): Promise<Transaction>
     getVotingPower(): Promise<string>
-    incomingTransactions(): Promise<[string, [ITransactionPayload, IOutputResponse[]]][]>
+    incomingTransactions(): Promise<[string, Transaction][]>
     increaseNativeTokenSupply(
         tokenId: string,
         mintAmount: HexEncodedAmount,
