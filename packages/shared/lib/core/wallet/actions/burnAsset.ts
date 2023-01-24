@@ -1,5 +1,5 @@
 import { showAppNotification } from '@auxiliary/notification'
-import { selectedAccount } from '@core/account/stores/selected-account.store'
+import { selectedAccount, updateSelectedAccount } from '@core/account/stores/selected-account.store'
 import { handleError } from '@core/error/handlers/handleError'
 import { localize } from '@core/i18n'
 import { handleLedgerError } from '@core/ledger'
@@ -13,6 +13,7 @@ export async function burnAsset(assetId: string, rawAmount: string): Promise<voi
     const account = get(selectedAccount)
     const _activeProfile = get(activeProfile)
     try {
+        updateSelectedAccount({ isTransferring: true })
         const burnTokenTransaction = await account.burnNativeToken(
             assetId,
             Converter.decimalToHex(Number(rawAmount), true)
@@ -34,5 +35,7 @@ export async function burnAsset(assetId: string, rawAmount: string): Promise<voi
         } else {
             handleError(err)
         }
+    } finally {
+        updateSelectedAccount({ isTransferring: false })
     }
 }
