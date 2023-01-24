@@ -16,11 +16,11 @@ export function isVisibleProposal(proposal: IProposal, filter: ProposalFilter): 
 
 function isVisibleWithActivePraticipatedFilter(proposal: IProposal, filter: ProposalFilter): boolean {
     if (
-        !filter.participated.active ||
-        filter.participated.selected === BooleanFilterOption.No // && proposal.participated
+        filter.participated.active &&
+        ((filter.participated.selected === BooleanFilterOption.No && proposal.participated) ||
+            (filter.participated.selected === BooleanFilterOption.Yes && !proposal.participated))
     ) {
-        return true
-        // return false
+        return false
     }
     return true
 }

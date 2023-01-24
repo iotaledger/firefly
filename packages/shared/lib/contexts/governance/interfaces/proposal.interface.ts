@@ -9,5 +9,6 @@ export interface IProposal {
     status: ProposalStatus
     type: ProposalType
     title: string
+    participated: boolean
     nodeUrls: INode[]
 }

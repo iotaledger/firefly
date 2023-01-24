@@ -7,20 +7,22 @@ import { IProposal } from '@contexts/governance/interfaces'
 import { nodeInfo, OFFICIAL_NODE_URLS } from '@core/network'
 import { activeProfile, activeProfileId } from '@core/profile'
 import { getVotingEvents } from '@core/profile-manager'
-import { proposalsState } from '..'
+import { getParticipationsForProposal, proposalsState } from '..'
 
 export async function createProposals(): Promise<IProposal[]> {
     const events = await getVotingEvents()
-    const proposals: IProposal[] = events?.map(createProposalFromEvent)
+    const proposals: IProposal[] = await Promise.all(events?.map(async (event) => createProposalFromEvent(event)))
     return proposals
 }
 
-function createProposalFromEvent(event: Event): IProposal {
+async function createProposalFromEvent(event: Event): Promise<IProposal> {
     const { data, id } = event
 
     const officialNodeUrls = OFFICIAL_NODE_URLS[get(activeProfile).networkProtocol][get(activeProfile).networkType]
     const proposalNodeUrl = get(proposalsState)[get(activeProfileId)]?.[id].nodeUrl
     const isOfficialNetwork = officialNodeUrls.includes(proposalNodeUrl)
+
+    const participated = (await getParticipationsForProposal(id)) !== undefined
 
     const milestones = {
         [ProposalStatus.Upcoming]: 0, // TODO: fix this
@@ -39,6 +41,7 @@ function createProposalFromEvent(event: Event): IProposal {
         // TODO: figure out a better way to get the node URLs
         nodeUrls: get(activeProfile)?.clientOptions?.nodes,
         type: isOfficialNetwork ? ProposalType.Official : ProposalType.Custom,
+        participated,
     }
 
     return proposal
