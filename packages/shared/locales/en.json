@@ -584,7 +584,7 @@
             "proposals": {
                 "title": "Proposals",
                 "voted": "Voted",
-                "successRegister": "Proposal successfully registered",
+                "successAdd": "Proposal successfully added",
                 "successRemove": "Proposal successfully removed"
             },
             "statusTimeline": {
@@ -1012,9 +1012,9 @@
             "revote": "Changing your voting power temporarily stops your votes from being counted. Proceed to the following step to resume voting.",
             "hint": "Increasing your voting power locks your funds. You need to decrease your voting power to make them spendable again. This affects all proposals with an active vote."
         },
-        "registerProposal": {
-            "title": "Register proposal",
-            "body": "Please provide the information listed below to register a proposal."
+        "addProposal": {
+            "title": "Add proposal",
+            "body": "Please provide the information listed below to add a proposal."
         },
         "voteForProposal": {
             "title": "Vote for proposal",
@@ -1225,7 +1225,7 @@
         "addReference": "Add reference",
         "depositNft": "Deposit NFTs",
         "vote": "Vote",
-        "registerProposal": "Register proposal",
+        "addProposal": "Add proposal",
         "removeProposal": "Remove proposal",
         "stopVoting": "Stop voting",
         "revote": "Revote"
@@ -1882,9 +1882,9 @@
             }
         },
         "governance": {
-            "unableToRegisterProposal": {
-                "short": "Unable to register proposal",
-                "long": "An error occurred while trying to register proposal {proposalId}"
+            "unableToAddProposal": {
+                "short": "Unable to add proposal",
+                "long": "An error occurred while trying to add proposal {proposalId}"
             }
         }
     },

@@ -29,7 +29,7 @@ export function handleDeepLinkRegisterProposalOperation(searchParams: URLSearchP
     }
 
     openPopup({
-        type: 'registerProposal',
+        type: 'addProposal',
         props: { eventId, nodeUrl },
     })
 }

@@ -42,7 +42,7 @@
                 showAppNotification({
                     type: 'error',
                     alert: true,
-                    message: localize('error.governance.unableToRegisterProposal.long', {
+                    message: localize('error.governance.unableToAddProposal.long', {
                         values: { proposalId: truncateString(eventId) },
                     }),
                 })
@@ -94,9 +94,9 @@
     }
 </script>
 
-<form id="register-proposal" on:submit|preventDefault={onSubmit}>
-    <Text type={TextType.h3} classes="mb-6">{localize('popups.registerProposal.title')}</Text>
-    <Text fontSize="15">{localize('popups.registerProposal.body')}</Text>
+<form id="add-proposal" on:submit|preventDefault={onSubmit}>
+    <Text type={TextType.h3} classes="mb-6">{localize('popups.addProposal.title')}</Text>
+    <Text fontSize="15">{localize('popups.addProposal.body')}</Text>
     <div class="flex flex-col w-full space-y-4 mt-4">
         <TextInput
             bind:value={eventId}

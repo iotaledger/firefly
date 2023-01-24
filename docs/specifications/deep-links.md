@@ -143,10 +143,10 @@ Coming :soon:
 
 #### Register Proposal
 
-This operation brings the user to the register proposal popup:
+This operation brings the user to the add proposal popup:
 
 :::image
-![](../static/register-proposal-popup.png "Register proposal popup")
+![](../static/register-proposal-popup.png "Add proposal popup")
 :::
 
 The deep link structure is as follows:
