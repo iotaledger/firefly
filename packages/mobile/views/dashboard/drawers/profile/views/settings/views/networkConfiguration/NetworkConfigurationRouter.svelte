@@ -37,7 +37,7 @@
         const isPrimary = $activeProfile?.clientOptions?.primaryNode?.url === $selectedNode.url
         if ($networkConfigurationSettingsRoute === NetworkConfigurationSettingsRoute.NodeDetails) {
             if (!isPrimary) {
-                togglePrimaryNodeInClientOptions($selectedNode)
+                void togglePrimaryNodeInClientOptions($selectedNode)
                 $networkConfigurationSettingsRouter.previous()
             } else {
                 $networkConfigurationSettingsRouter.next({
@@ -47,32 +47,32 @@
         } else if (
             $networkConfigurationSettingsRoute === NetworkConfigurationSettingsRoute.UnsetAsPrimaryNodeConfirmation
         ) {
-            togglePrimaryNodeInClientOptions($selectedNode)
+            void togglePrimaryNodeInClientOptions($selectedNode)
             $networkConfigurationSettingsRouter.reset()
         }
     }
     function handleToggleDisabledNodeClick(): void {
         if ($networkConfigurationSettingsRoute === NetworkConfigurationSettingsRoute.NodeDetails) {
-            $networkConfigurationSettingsRouter.next({
-                action: NetworkConfigurationSettingsAction.ExcludeNode,
-            })
+            if ($selectedNode.disabled) {
+                void toggleDisabledNodeInClientOptions($selectedNode)
+                $networkConfigurationSettingsRouter.previous()
+            } else {
+                $networkConfigurationSettingsRouter.next({
+                    action: NetworkConfigurationSettingsAction.ExcludeNode,
+                })
+            }
         } else if ($networkConfigurationSettingsRoute === NetworkConfigurationSettingsRoute.ExcludeNodeConfirmation) {
-            void removeNodeFromClientOptions($selectedNode)
+            void toggleDisabledNodeInClientOptions($selectedNode)
             $networkConfigurationSettingsRouter.reset()
         }
     }
     function handleDeleteNodeClick(): void {
         if ($networkConfigurationSettingsRoute === NetworkConfigurationSettingsRoute.NodeDetails) {
-            if ($selectedNode.disabled) {
-                toggleDisabledNodeInClientOptions($selectedNode)
-                $networkConfigurationSettingsRouter.previous()
-            } else {
-                $networkConfigurationSettingsRouter.next({
-                    action: NetworkConfigurationSettingsAction.DeleteNode,
-                })
-            }
-        } else if ($networkConfigurationSettingsRoute === NetworkConfigurationSettingsRoute.ExcludeNodeConfirmation) {
-            toggleDisabledNodeInClientOptions($selectedNode)
+            $networkConfigurationSettingsRouter.next({
+                action: NetworkConfigurationSettingsAction.DeleteNode,
+            })
+        } else if ($networkConfigurationSettingsRoute === NetworkConfigurationSettingsRoute.DeleteNodeConfirmation) {
+            void removeNodeFromClientOptions($selectedNode)
             $networkConfigurationSettingsRouter.reset()
         }
     }
