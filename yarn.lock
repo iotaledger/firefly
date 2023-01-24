@@ -590,7 +590,7 @@
   dependencies:
     tslib "^2.1.0"
 
-"@capacitor/core@^3.4.1":
+"@capacitor/core@^3.4.0", "@capacitor/core@^3.4.1":
   version "3.9.0"
   resolved "https://registry.yarnpkg.com/@capacitor/core/-/core-3.9.0.tgz#ab5eccbeb02e140382e983b794ead296f1db7e6d"
   integrity sha512-j1lL0+/7stY8YhIq1Lm6xixvUqIn89vtyH5ZpJNNmcZ0kwz6K9eLkcG6fvq1UWMDgSVZg9JrRGSFhb4LLoYOsw==
@@ -901,17 +901,12 @@
   dependencies:
     big-integer "^1.6.51"
 
-"@iota/wallet-mobile@./packages/mobile/capacitor/plugins/capacitorjs":
-  version "0.0.1"
+"@iota/wallet-mobile@file:../amadeu2-wallet.rs/bindings/capacitorjs":
+  version "2.0.0-alpha.0"
   dependencies:
     "@capacitor/core" "^3.4.1"
     "@iota/types" "^1.0.0-beta.15"
-
-"@iota/wallet-mobile@./packages/mobile/capacitor/plugins/capacitorjs/":
-  version "0.0.1"
-  dependencies:
-    "@capacitor/core" "^3.4.1"
-    "@iota/types" "^1.0.0-beta.15"
+    rollup "^2.29.0"
 
 "@iota/wallet@2.0.3-rc.13":
   version "2.0.3-rc.13"
@@ -2822,6 +2817,16 @@ caniuse-lite@^1.0.30001400:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001412.tgz#30f67d55a865da43e0aeec003f073ea8764d5d7c"
   integrity sha512-+TeEIee1gS5bYOiuf+PS/kp2mrXic37Hl66VY6EAfxasIk5fELTktK2oOezYed12H8w7jt3s512PpulQidPjwA==
 
+capacitor-secure-filesystem-access@./packages/mobile/capacitor/plugins/secure-filesystem-access:
+  version "0.0.1"
+  dependencies:
+    "@capacitor/core" "^3.4.0"
+
+capacitor-secure-storage-plugin@^0.6.2:
+  version "0.6.4"
+  resolved "https://registry.yarnpkg.com/capacitor-secure-storage-plugin/-/capacitor-secure-storage-plugin-0.6.4.tgz#282d77f030a2686beca3276836bf97603e78bf07"
+  integrity sha512-Uv5uRRiPmvELmtsz89gSt9i/hyliM1H19T3S7ZsUeaxQTiWj1UOzhuADSA1zwTd7tMr8WTHja7Y12uies1hBjw==
+
 cargo-cp-artifact@^0.1.6:
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/cargo-cp-artifact/-/cargo-cp-artifact-0.1.6.tgz#df1bc9dad036ae0f4230639a869182e1d5850f89"
@@ -3289,20 +3294,6 @@ css-loader@^5.0.1:
     postcss-value-parser "^4.1.0"
     schema-utils "^3.0.0"
     semver "^7.3.2"
-
-css-loader@^6.7.2:
-  version "6.7.3"
-  resolved "https://registry.yarnpkg.com/css-loader/-/css-loader-6.7.3.tgz#1e8799f3ccc5874fdd55461af51137fcc5befbcd"
-  integrity sha512-qhOH1KlBMnZP8FzRO6YCH9UHXQhVMcEGLyNdb7Hv2cpcmJbW0YrddO+tG1ab5nT41KpHIYGsbeHqxB9xPu1pKQ==
-  dependencies:
-    icss-utils "^5.1.0"
-    postcss "^8.4.19"
-    postcss-modules-extract-imports "^3.0.0"
-    postcss-modules-local-by-default "^4.0.0"
-    postcss-modules-scope "^3.0.0"
-    postcss-modules-values "^4.0.0"
-    postcss-value-parser "^4.2.0"
-    semver "^7.3.8"
 
 css-unit-converter@^1.1.1:
   version "1.1.2"
@@ -4832,7 +4823,7 @@ iconv-lite@^0.6.2:
   dependencies:
     safer-buffer ">= 2.1.2 < 3.0.0"
 
-icss-utils@^5.0.0, icss-utils@^5.1.0:
+icss-utils@^5.0.0:
   version "5.1.0"
   resolved "https://registry.npmjs.org/icss-utils/-/icss-utils-5.1.0.tgz"
   integrity sha512-soFhflCVWLfRNOPU3iv5Z9VUdT44xFRbzjLsEzSr5AQmgqPMTHdU3PMT1Cf1ssx8fLNJDA1juftYl+PUcv3MqA==
@@ -7019,11 +7010,6 @@ postcss-value-parser@^4.1.0:
   resolved "https://registry.npmjs.org/postcss-value-parser/-/postcss-value-parser-4.1.0.tgz"
   integrity sha512-97DXOFbQJhk71ne5/Mt6cOu6yxsSfM0QGQyl0L25Gca4yGWEGJaig7l7gbCX623VqTBNGLRLaVUCnNkcedlRSQ==
 
-postcss-value-parser@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-4.2.0.tgz#723c09920836ba6d3e5af019f92bc0971c02e514"
-  integrity sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==
-
 postcss@^8.1.4, postcss@^8.1.6, postcss@^8.2.13:
   version "8.2.13"
   resolved "https://registry.npmjs.org/postcss/-/postcss-8.2.13.tgz"
@@ -7037,15 +7023,6 @@ postcss@^8.3.5:
   version "8.4.16"
   resolved "https://registry.npmjs.org/postcss/-/postcss-8.4.16.tgz"
   integrity sha512-ipHE1XBvKzm5xI7hiHCZJCSugxvsdq2mPnsq5+UF+VHCjiBvtDrlxJfMBToWaP9D5XlgNmcFGqoHmUn0EYEaRQ==
-  dependencies:
-    nanoid "^3.3.4"
-    picocolors "^1.0.0"
-    source-map-js "^1.0.2"
-
-postcss@^8.4.19:
-  version "8.4.20"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.20.tgz#64c52f509644cecad8567e949f4081d98349dc56"
-  integrity sha512-6Q04AXR1212bXr5fh03u8aAwbLxAQNGQ/Q1LNa0VfOI06ZAlhPHtQvE4OIdpj4kLThXilalPnmDSOD65DcHt+g==
   dependencies:
     nanoid "^3.3.4"
     picocolors "^1.0.0"
@@ -7453,6 +7430,13 @@ roarr@^2.15.3:
     semver-compare "^1.0.0"
     sprintf-js "^1.1.2"
 
+rollup@^2.29.0:
+  version "2.79.1"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.79.1.tgz#bedee8faef7c9f93a2647ac0108748f497f081c7"
+  integrity sha512-uKxbd0IhMZOhjAiD5oAFp7BqvkA4Dv47qpOCtaNvng4HBwdbWtdOh8f5nZNuk2rp51PMGk3bzfWu5oayNEuYnw==
+  optionalDependencies:
+    fsevents "~2.3.2"
+
 run-parallel@^1.1.9:
   version "1.1.10"
   resolved "https://registry.npmjs.org/run-parallel/-/run-parallel-1.1.10.tgz"
@@ -7598,13 +7582,6 @@ semver@^7.3.7:
   version "7.3.7"
   resolved "https://registry.npmjs.org/semver/-/semver-7.3.7.tgz"
   integrity sha512-QlYTucUYOews+WeEujDoEGziz4K6c47V/Bd+LjSSYcA94p+DmINdf7ncaUinThfvZyu13lN9OY1XDxt8C0Tw0g==
-  dependencies:
-    lru-cache "^6.0.0"
-
-semver@^7.3.8:
-  version "7.3.8"
-  resolved "https://registry.yarnpkg.com/semver/-/semver-7.3.8.tgz#07a78feafb3f7b32347d725e33de7e2a2df67798"
-  integrity sha512-NB1ctGL5rlHrPJtFDVIVzTyQylMLu9N9VICA6HSFJo8MCGVTMW6gfpicwKmmK/dAjTOrqu5l63JJOpDSrAis3A==
   dependencies:
     lru-cache "^6.0.0"
 
