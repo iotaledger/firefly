@@ -27,10 +27,9 @@ function isVisibleWithActivePraticipatedFilter(proposal: IProposal, filter: Prop
 
 function isVisibleWithActiveTypeFilter(proposal: IProposal, filter: ProposalFilter): boolean {
     if (filter.type.active && filter.type.selected) {
-        // if (filter.type.selected !== proposal.type) {
-        return true
-        // return false
-        // }
+        if (filter.type.selected !== proposal.type) {
+            return false
+        }
     }
     return true
 }
