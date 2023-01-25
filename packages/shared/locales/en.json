@@ -1588,6 +1588,12 @@
             "label": "Participated",
             "yes": "Yes",
             "no": "No"
+        },
+        "proposalOrder": {
+            "label": "Order",
+            "date": "Date",
+            "name": "Name",
+            "phase": "Phase"
         }
     },
     "dates": {
