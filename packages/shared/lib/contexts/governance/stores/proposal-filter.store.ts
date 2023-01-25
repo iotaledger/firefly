@@ -1,6 +1,6 @@
-import { BooleanFilterOption } from '@core/utils/enums/filters'
+import { BooleanFilterOption, OrderOption } from '@core/utils/enums/filters'
 import { writable, Writable } from 'svelte/store'
-import { ProposalFilter, ProposalStatus, ProposalType } from '..'
+import { ProposalFilter, ProposalStatus, ProposalType, ProposalOrderOption } from '..'
 
 export const proposalFilter: Writable<ProposalFilter> = writable({
     phase: {
@@ -23,5 +23,13 @@ export const proposalFilter: Writable<ProposalFilter> = writable({
         localeKey: 'filters.participated',
         selected: BooleanFilterOption.Yes,
         choices: [BooleanFilterOption.Yes, BooleanFilterOption.No],
+    },
+    order: {
+        active: false,
+        type: 'order',
+        localeKey: 'filters.proposalOrder',
+        selected: ProposalOrderOption.Date,
+        ascDesc: OrderOption.Asc,
+        choices: [ProposalOrderOption.Date, ProposalOrderOption.Phase, ProposalOrderOption.Name],
     },
 })
