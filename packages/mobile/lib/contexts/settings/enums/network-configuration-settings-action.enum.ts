@@ -3,4 +3,5 @@ export enum NetworkConfigurationSettingsAction {
     EditNode = 'editNode',
     DeleteNode = 'deleteNode',
     ExcludeNode = 'excludeNode',
+    UnsetAsPrimaryNode = 'unsetAsPrimaryNode',
 }
