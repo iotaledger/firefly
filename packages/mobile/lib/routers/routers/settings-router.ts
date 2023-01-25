@@ -10,7 +10,8 @@ export const settingsRoute = writable<SettingsRoute>(null)
 export const settingsRouter = writable<SettingsRouter>(null)
 
 const needsUnlockStore = writable<boolean>(false)
-const needsUnlockStoreCallbackStore = writable<(() => unknown) | undefined>(() => {})
+const needsUnlockStoreCallbackStore = writable<((password?: string) => unknown) | undefined>(() => {})
+const returnPasswordUnlockCallbackStore = writable<boolean>(false)
 
 export class SettingsRouter extends Subrouter<SettingsRoute> {
     constructor() {
@@ -44,6 +45,7 @@ export class SettingsRouter extends Subrouter<SettingsRoute> {
                 callback()
             }
             needsUnlockStore.set(false)
+            returnPasswordUnlockCallbackStore.set(false)
         } else {
             super.previous()
         }
@@ -51,11 +53,19 @@ export class SettingsRouter extends Subrouter<SettingsRoute> {
     getNeedsUnlockStore(): Writable<boolean> {
         return needsUnlockStore
     }
-    getNeedsUnlockCallbackStore(): Writable<(() => unknown) | undefined> {
+    getNeedsUnlockCallbackStore(): Writable<((password?: string) => unknown) | undefined> {
         return needsUnlockStoreCallbackStore
     }
-    setNeedsUnlock(value: boolean, callback: (() => unknown) | undefined = undefined): void {
+    getReturnPasswordUnlockCallbackStore(): Writable<boolean> {
+        return returnPasswordUnlockCallbackStore
+    }
+    setNeedsUnlock(
+        value: boolean,
+        callback: ((password?: string) => unknown) | undefined = undefined,
+        returnPassword: boolean = false
+    ): void {
         needsUnlockStore.set(value)
+        returnPasswordUnlockCallbackStore.set(returnPassword)
         if (callback) {
             needsUnlockStoreCallbackStore.set(callback)
         }
@@ -65,5 +75,6 @@ export class SettingsRouter extends Subrouter<SettingsRoute> {
         get(networkConfigurationSettingsRouter)?.reset()
         needsUnlockStore.set(false)
         needsUnlockStoreCallbackStore.set(undefined)
+        returnPasswordUnlockCallbackStore.set(false)
     }
 }
