@@ -3456,9 +3456,9 @@ electron-to-chromium@^1.4.251:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.265.tgz#45630ae190228f945ff79c060b99574b1347e5a7"
   integrity sha512-38KaYBNs0oCzWCpr6j7fY/W9vF0vSp4tKFIshQTgdZMhUpkxgotkQgjJP6iGMdmlsgMs3i0/Hkko4UXLTrkYVQ==
 
-electron-updater@^4.3.5:
+electron-updater@4.3.5:
   version "4.3.5"
-  resolved "https://registry.npmjs.org/electron-updater/-/electron-updater-4.3.5.tgz"
+  resolved "https://registry.yarnpkg.com/electron-updater/-/electron-updater-4.3.5.tgz#4fb36f593a031c87ea07ee141c9f064d5deffb15"
   integrity sha512-5jjN7ebvfj1cLI0VZMdCnJk6aC4bP+dy7ryBf21vArR0JzpRVk0OZHA2QBD+H5rm6ZSeDYHOY6+8PrMEqJ4wlQ==
   dependencies:
     "@types/semver" "^7.3.1"
