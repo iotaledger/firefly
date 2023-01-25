@@ -5,9 +5,10 @@
     import type { Writable } from 'svelte/store'
     import { ProposalFilter } from '@contexts/governance'
 
-    export let filterStore: Writable<ActivityFilter | AssetFilter | ProposalFilter>
+    type Filter = ActivityFilter | AssetFilter | ProposalFilter
 
-    let filter: ActivityFilter | AssetFilter | ProposalFilter = deepCopy($filterStore)
+    export let filterStore: Writable<Filter>
+    let filter: Filter = deepCopy($filterStore)
 
     let filterActive = false
     let modal: Modal
