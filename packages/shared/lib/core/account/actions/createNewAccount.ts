@@ -1,10 +1,12 @@
+import { get } from 'svelte/store'
 import { localize } from '@core/i18n'
 import { activeAccounts, addAccountMetadataToActiveProfile, addAccountToActiveAccounts } from '@core/profile'
 import { createAccount } from '@core/profile-manager'
-import { addEmptyAccountActivitiesToAllAccountActivities } from '@core/wallet/stores/all-account-activities.store'
-import { get } from 'svelte/store'
+import { addEmptyAccountActivitiesToAllAccountActivities } from '@core/wallet/stores'
+
 import { DEFAULT_SYNC_OPTIONS } from '../constants'
 import { IAccountState } from '../interfaces'
+
 import { buildAccountStateAndMetadata } from './buildAccountStateAndMetadata'
 
 export async function createNewAccount(name?: string, color?: string): Promise<IAccountState> {

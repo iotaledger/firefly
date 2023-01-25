@@ -2,9 +2,9 @@ import { get } from 'svelte/store'
 
 import type { Node, ParticipationEvent, ParticipationEventId } from '@iota/wallet'
 
-import { addProposalState, registeredEventIds } from '@contexts/governance/stores'
-
 import { selectedAccount } from '@core/account'
+
+import { addProposalState, registeredEventIds } from '../stores'
 
 export async function registerParticipationEvent(
     eventId: ParticipationEventId,

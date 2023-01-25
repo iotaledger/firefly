@@ -1,12 +1,4 @@
-import type {
-    IAliasOutput,
-    IBasicOutput,
-    IFoundryOutput,
-    INftOutput,
-    IOutputResponse,
-    ITransactionPayload,
-    OutputTypes,
-} from '@iota/types'
+import type { IAliasOutput, IBasicOutput, IFoundryOutput, INftOutput, OutputTypes } from '@iota/types'
 import {
     AccountBalance,
     AccountMetadata,
@@ -26,6 +18,7 @@ import {
     Node,
     OutputData,
     OutputOptions,
+    OutputsToClaim,
     ParticipationEvent,
     ParticipationEventStatus,
     ParticipationEventType,
@@ -166,7 +159,7 @@ export class AccountMock implements IAccount {
         // })
     }
 
-    getOutputsWithAdditionalUnlockConditions(outputs): Promise<string[]> {
+    getOutputsWithAdditionalUnlockConditions(outputs: OutputsToClaim): Promise<string[]> {
         return Promise.resolve([''])
     }
 
@@ -174,7 +167,7 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    getParticipationEventIds(eventType?: ParticipationEventType | undefined): Promise<string[]> {
+    getParticipationEventIds(eventType?: ParticipationEventType): Promise<string[]> {
         throw new Error('Method not implemented.')
     }
 
@@ -264,8 +257,8 @@ export class AccountMock implements IAccount {
 
     retryTransactionUntilIncluded(
         transactionId: string,
-        interval?: number | undefined,
-        maxAttempts?: number | undefined
+        interval?: number,
+        maxAttempts?: number
     ): Promise<PreparedTransactionData> {
         throw new Error('Method not implemented.')
     }
@@ -331,7 +324,7 @@ export class AccountMock implements IAccount {
         return Promise.resolve([])
     }
 
-    vote(eventId?: string | undefined, answers?: number[] | undefined): Promise<Transaction> {
+    vote(eventId?: string, answers?: number[]): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
 }
