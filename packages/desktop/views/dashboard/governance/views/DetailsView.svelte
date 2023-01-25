@@ -40,6 +40,7 @@
     let totalVotes = 0
     let hasMounted = false
     let voteButtonText = localize('actions.vote')
+    let proposalQuestions: HTMLElement
 
     $: $selectedAccountIndex, void updateParticipationOverview()
     $: $selectedAccountIndex, (selectedAnswerValues = [])
@@ -123,6 +124,14 @@
         } else {
             selectedAnswerValues[questionIndex] = answerValue
         }
+
+        openedQuestionIndex = selectedAnswerValues.length === questionIndex + 1 ? null : questionIndex + 1
+        const selectedQuestionElement: HTMLElement = proposalQuestions?.querySelector(
+            'proposal-question:nth-child(' + (openedQuestionIndex + 1) + ')'
+        )
+        setTimeout(() => {
+            proposalQuestions.scrollTo({ top: selectedQuestionElement?.offsetTop, behavior: 'smooth' })
+        }, 500)
     }
 
     function getVoteButtonText(): string {
@@ -155,7 +164,12 @@
             <div class="flex flex-1 flex-col justify-between">
                 <Text type={TextType.h2}>{$selectedProposal?.title}</Text>
                 {#if $selectedProposal?.additionalInfo}
-                    <Text type={TextType.h5} overrideColor classes="text-gray-600 mt-4 max-h-40 overflow-hidden" fontWeight={FontWeight.medium}>{$selectedProposal?.additionalInfo}</Text>
+                    <Text
+                        type={TextType.h5}
+                        overrideColor
+                        classes="text-gray-600 mt-4 max-h-40 overflow-hidden"
+                        fontWeight={FontWeight.medium}>{$selectedProposal?.additionalInfo}</Text
+                    >
                 {/if}
             </div>
         </Pane>
@@ -177,7 +191,10 @@
         <ProposalInformation />
     </div>
     <Pane classes="w-3/5 h-full p-6 flex flex-col justify-between ">
-        <proposal-questions class="flex flex-1 flex-col space-y-5 overflow-y-scroll">
+        <proposal-questions
+            class="relative flex flex-1 flex-col space-y-5 overflow-y-scroll"
+            bind:this={proposalQuestions}
+        >
             {#if questions}
                 {#each questions as question, questionIndex}
                     <ProposalQuestion
