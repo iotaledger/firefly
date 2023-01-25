@@ -46,6 +46,8 @@ export function handleTransactionInclusionEventInternal(
                 closePopup(true)
                 openPopup({
                     type: 'revote',
+                    preventClose: true,
+                    hideClose: true,
                 })
             }
         }

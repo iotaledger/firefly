@@ -1023,7 +1023,7 @@
         },
         "revote": {
             "title": "Revote on proposals",
-            "body": "As mentioned in the previous step, changing your voting power temporarily stops your votes from being counted. Simply click \"Revote\" to resume voting.",
+            "body": "Changing your voting power temporarily stops your votes for all proposals from being counted. Simply click \"Revote\" to resume voting.",
             "hint": "Firefly remembers all of the proposals and answer options you previously voted for."
         },
         "removeProposal": {
