@@ -2,10 +2,11 @@
     import { KeyValueBox } from 'shared/components'
     import { getFormattedTimeStamp, localize } from '@core/i18n'
     import { ConsolidationActivity } from '@core/wallet'
+    import { IKeyValueBoxList } from '@core/utils'
 
     export let activity: ConsolidationActivity
 
-    let transactionDetailsList: { [key in string]: { data: string; isTooltipVisible?: boolean } }
+    let transactionDetailsList: IKeyValueBoxList
     $: transactionDetailsList = {
         ...(activity.time && {
             transactionTime: { data: getFormattedTimeStamp(activity.time) },

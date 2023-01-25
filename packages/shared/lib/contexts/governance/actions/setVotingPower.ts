@@ -8,6 +8,7 @@ import { generateActivities, preprocessTransaction } from '@core/wallet/utils'
 
 import { hasToRevote } from '../stores'
 import { isSelectedAccountVoting } from '../utils'
+import { handleError } from '@core/error/handlers'
 
 export async function setVotingPower(rawAmount: string): Promise<void> {
     try {
@@ -16,9 +17,11 @@ export async function setVotingPower(rawAmount: string): Promise<void> {
         hasToRevote.set(rawAmount !== '0' && isVoting)
 
         const account = get(selectedAccount)
-        updateSelectedAccount({ isTransferring: true })
         const votingPower = parseInt(account.votingPower, 10)
         const amount = parseInt(rawAmount, 10)
+
+        // isTransferring is kept true until wallet.rs confirms transaction inclusion
+        updateSelectedAccount({ isTransferring: true })
 
         let transaction: Transaction
         if (amount > votingPower) {
@@ -28,11 +31,10 @@ export async function setVotingPower(rawAmount: string): Promise<void> {
             const amountToDecrease = votingPower - amount
             transaction = await account.decreaseVotingPower(amountToDecrease.toString())
         }
-
         await processAndAddToActivities(transaction)
-        updateSelectedAccount({ isTransferring: false })
     } catch (err) {
         hasToRevote.set(false)
+        handleError(err)
         updateSelectedAccount({ isTransferring: false })
     }
 }

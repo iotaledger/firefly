@@ -2,17 +2,18 @@ import { DISCORD_URL, DOCUMENTATION_URL, FAQ_URL, ISSUE_REPORT_URL } from '@cont
 import { SETTINGS_ICON_SVG } from '@lib/auxiliary/icon'
 import features from '../../../../features/features'
 import {
-    CurrencyView,
     AppLockView,
-    HiddenAccountsView,
-    ThemeView,
     ChangePasswordView,
     ChangeProfileNameView,
+    CurrencyView,
     DeleteProfileView,
     DiagnosticsView,
     ErrorLogView,
+    ExportStrongholdView,
+    HiddenAccountsView,
     LanguageView,
     NetworkConfigurationRouter,
+    ThemeView,
     WalletFinderView,
 } from '../../../../views/dashboard/drawers/profile/views/settings'
 import { SettingsRoute } from '../../../routers'
@@ -51,6 +52,13 @@ export const SETTINGS_ROUTE_META = {
         view: ChangeProfileNameView,
     },
     // Security
+    [SettingsRoute.ExportStronghold]: {
+        name: `views.settings.${SettingsRoute.ExportStronghold}.title`,
+        category: SettingsCategory.Security,
+        enabled: security?.[SettingsRoute.ExportStronghold]?.enabled,
+        icon: SETTINGS_ICON_SVG[SettingsRoute.ExportStronghold],
+        view: ExportStrongholdView,
+    },
     [SettingsRoute.AppLock]: {
         name: `views.settings.${SettingsRoute.AppLock}.title`,
         category: SettingsCategory.Security,
