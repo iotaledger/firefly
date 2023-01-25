@@ -190,9 +190,9 @@
         </Pane>
         <ProposalInformation />
     </div>
-    <Pane classes="w-3/5 h-full p-6 flex flex-col justify-between ">
+    <Pane classes="w-3/5 h-full p-6 pr-3 flex flex-col justify-between ">
         <proposal-questions
-            class="relative flex flex-1 flex-col space-y-5 overflow-y-scroll"
+            class="relative flex flex-1 flex-col space-y-5 overflow-y-scroll pr-3"
             bind:this={proposalQuestions}
         >
             {#if questions}
