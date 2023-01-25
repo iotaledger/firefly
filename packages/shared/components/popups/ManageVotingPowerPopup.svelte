@@ -34,7 +34,7 @@
             return
         }
         const convertedSliderAmount = convertToRawAmount(amount.toString(), asset?.metadata).toString()
-        confirmDisabled = convertedSliderAmount === $selectedAccount?.votingPower
+        confirmDisabled = convertedSliderAmount === $selectedAccount?.votingPower || $selectedAccount?.isTransferring
     }
 
     function onCancelClick(): void {
@@ -96,10 +96,15 @@
         <TextHint info text={localize('popups.manageVotingPower.hint')} />
     </div>
     <div class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button outline classes="w-full" {disabled} onClick={onCancelClick}>
+        <Button outline classes="w-full" onClick={onCancelClick}>
             {localize('actions.cancel')}
         </Button>
-        <Button type={HTMLButtonType.Submit} disabled={confirmDisabled} isBusy={disabled} classes="w-full">
+        <Button
+            type={HTMLButtonType.Submit}
+            disabled={confirmDisabled}
+            isBusy={$selectedAccount?.isTransferring}
+            classes="w-full"
+        >
             {localize('actions.confirm')}
         </Button>
     </div>

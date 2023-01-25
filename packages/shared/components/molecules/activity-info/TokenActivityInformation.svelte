@@ -2,13 +2,14 @@
     import { KeyValueBox } from 'shared/components'
     import { localize } from '@core/i18n'
     import { FoundryActivity, getAssetFromPersistedAssets, ITokenMetadata } from '@core/wallet'
+    import { IKeyValueBoxList } from '@core/utils'
 
     export let activity: FoundryActivity
 
     let metadata: ITokenMetadata
     $: metadata = getAssetFromPersistedAssets(activity.assetId)?.metadata
 
-    let detailsList: { [key in string]: { data: string; tooltipText?: string; isCopyable?: boolean } }
+    let detailsList: IKeyValueBoxList
     $: detailsList = {
         ...(metadata?.name && {
             tokenName: { data: metadata.name },

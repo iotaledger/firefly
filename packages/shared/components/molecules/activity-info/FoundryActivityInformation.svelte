@@ -2,10 +2,11 @@
     import { KeyValueBox } from 'shared/components'
     import { localize } from '@core/i18n'
     import { FoundryActivity } from '@core/wallet'
+    import { IKeyValueBoxList } from '@core/utils'
 
     export let activity: FoundryActivity
 
-    let detailsList: { [key in string]: { data: string; isCopyable?: boolean } }
+    let detailsList: IKeyValueBoxList
     $: detailsList = {
         aliasAddress: { data: activity.aliasAddress, isCopyable: true },
         assetId: { data: activity.assetId, isCopyable: true },
