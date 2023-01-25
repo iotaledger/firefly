@@ -5,8 +5,9 @@
 
     export let busyMessage: string = ''
 
-    export let onSuccess: () => unknown
+    export let onSuccess: (password?: string) => unknown
     export let onCancel: () => unknown
+    export let returnPassword = false
 
     let password: string
     let error: string
@@ -17,7 +18,7 @@
             error = ''
             isBusy = true
             await unlockStronghold(password)
-            onSuccess && onSuccess()
+            onSuccess && onSuccess(returnPassword ? password : undefined)
             isBusy = false
         } catch (err) {
             console.error(err)
