@@ -66,6 +66,9 @@
                     case NetworkConfigurationSettingsRoute.ExcludeNodeConfirmation:
                         title = localize('popups.excludeNode.title')
                         break
+                    case NetworkConfigurationSettingsRoute.UnsetAsPrimaryNodeConfirmation:
+                        title = localize('popups.unsetAsPrimaryNode.title')
+                        break
                 }
             } else {
                 title = localize(SETTINGS_ROUTE_META[$settingsRoute].name)
