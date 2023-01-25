@@ -1578,11 +1578,7 @@
             "custom": "Custom"
         },
         "phase": {
-            "label": "Phase",
-            "upcoming": "Announcement",
-            "commencing": "Voting open",
-            "holding": "Counting starts",
-            "ended": "Counting stops"
+            "label": "Phase"
         },
         "participated": {
             "label": "Participated",
