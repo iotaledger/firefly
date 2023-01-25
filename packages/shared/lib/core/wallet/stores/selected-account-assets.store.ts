@@ -13,7 +13,6 @@ export const assetFilter: Writable<AssetFilter> = writable({
     verificationStatus: {
         active: false,
         type: 'selection',
-        labelKey: 'filters.verificationStatus.label',
         localeKey: 'filters.verificationStatus',
         selected: 'new',
         choices: Object.values(NotVerifiedStatus)
@@ -23,7 +22,6 @@ export const assetFilter: Writable<AssetFilter> = writable({
     showHidden: {
         active: false,
         type: 'selection',
-        labelKey: 'filters.showHidden.label',
         localeKey: 'filters.showHidden',
         selected: BooleanFilterOption.Yes,
         choices: [BooleanFilterOption.Yes, BooleanFilterOption.No],
@@ -31,7 +29,6 @@ export const assetFilter: Writable<AssetFilter> = writable({
     order: {
         active: false,
         type: 'order',
-        labelKey: 'filters.assetOrder.label',
         localeKey: 'filters.assetOrder',
         selected: AssetOrderOption.Name,
         ascDesc: OrderOption.Asc,

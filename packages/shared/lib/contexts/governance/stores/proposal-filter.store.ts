@@ -14,7 +14,6 @@ export const proposalFilter: Writable<ProposalFilter> = writable({
     type: {
         active: false,
         type: 'selection',
-        labelKey: 'filters.proposalType.label',
         localeKey: 'filters.proposalType',
         selected: ProposalType.Official,
         choices: [ProposalType.Official, ProposalType.Custom],
@@ -22,7 +21,6 @@ export const proposalFilter: Writable<ProposalFilter> = writable({
     participated: {
         active: false,
         type: 'selection',
-        labelKey: 'filters.participated.label',
         localeKey: 'filters.participated',
         selected: BooleanFilterOption.Yes,
         choices: [BooleanFilterOption.Yes, BooleanFilterOption.No],
