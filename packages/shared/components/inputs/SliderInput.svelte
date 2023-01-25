@@ -36,7 +36,7 @@
 
     // Allows both bind:value and on:change for parent value retrieval
     function setValue(val: number): void {
-        value = formatNumber(val, undefined, undefined, 0)
+        value = formatNumber(val, undefined, decimals, 0)
         dispatch('change', { value })
     }
 
@@ -97,7 +97,8 @@
         percent = percent < 0 ? 0 : percent > 100 ? 100 : percent
 
         // Limit value min -> max
-        setValue(Math.floor((percent / 100) * (max - min) * 10 ** decimals) / 10 ** decimals + min)
+        const val = Math.floor((percent / 100) * (max - min) * 10 ** decimals) / 10 ** decimals + min
+        setValue(val)
     }
 
     // Handles both dragging of touch/mouse as well as simple one-off click/touches
