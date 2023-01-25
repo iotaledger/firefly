@@ -12,7 +12,6 @@
     import { hasToRevote } from '@contexts/governance/stores'
     import { onMount } from 'svelte'
     import { modifyPopupState } from '@auxiliary/popup/helpers'
-    import { isSelectedAccountVoting } from '@contexts/governance'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let newVotingPower: string = undefined
@@ -21,7 +20,6 @@
     let amount: number
     let rawAmount = newVotingPower ?? $selectedAccount?.votingPower
     let confirmDisabled = false
-    let isVoting: boolean
 
     $: asset = $visibleSelectedAccountAssets?.baseCoin
     $: votingPower = parseInt($selectedAccount?.votingPower, 10)
@@ -62,7 +60,6 @@
     onMount(async () => {
         disabled = true
         try {
-            isVoting = await isSelectedAccountVoting()
             await _onMount()
             if ($hasToRevote) {
                 modifyPopupState({ ...$popupState, preventClose: true, hideClose: true })
@@ -90,9 +87,6 @@
             {disabled}
             {votingPower}
         />
-        {#if isVoting}
-            <TextHint warning text={localize('popups.manageVotingPower.revote')} />
-        {/if}
         <TextHint info text={localize('popups.manageVotingPower.hint')} />
     </div>
     <div class="flex flex-row flex-nowrap w-full space-x-4">
