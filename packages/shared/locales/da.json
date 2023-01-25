@@ -231,7 +231,7 @@
             "readMore": "Hvad der kan forventes af migreringsprocessen"
         },
         "generateNewLedgerAddress": {
-            "title": "Generate new address",
+            "title": "Generér ny adresse",
             "body": "Man skal generere en ny adresse for at migrere sine tokens med Firefly. Klik på knappen nedenfor for at fortsætte.",
             "confirmTitle": "Bekræft den nye adresse",
             "confirmBody": "Sammenlign af sikkerhedshensyn den adresse, der er genereret på Ledger, med den, der vises nedenfor. Matcher de, så tryk, som anmodet, på begge Ledger-knapper.",
@@ -309,6 +309,10 @@
                 "title": "Automatisk lås",
                 "description": "Inaktivitetstid før wallets låses, og man logges ud"
             },
+            "maxMediaSize": {
+                "title": "Maks. mediestørrelse",
+                "description": "NFT-mediestørrelser over end denne grænse downloades ikke, men en pladsholder for medietypen vises i stedet"
+            },
             "changePassword": {
                 "title": "Skift adgangskode",
                 "description": "Adgangskoden bruges til at sikre wallets. Der skal bruges en stærk adgangskode for at beskytte dine midler"
@@ -383,18 +387,18 @@
                 "description": "Vis fejl for at fejlfinde et problem"
             },
             "crashReporting": {
-                "title": "Crash reports",
-                "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs",
-                "checkbox": "Send crash reports",
-                "advice": "Please restart the Firefly application to {sendCrashReports, select, true {start sharing crash reports} false {stop sharing crash reports} other {apply this change}}"
+                "title": "Nedbrudsrapporter",
+                "body": "Hjælp udviklerne med at forbedre Firefly ved automatisk at indsende diagnostikdata, når fejl eller nedbrud opstår",
+                "checkbox": "Indsend fejlrapporter",
+                "advice": "Genstart Firefly-applikationen for at {sendCrashReports, select, true {starte deling af nedbrudsrapporter} false {stoppe deling af nedbrudsrapporter} other {anvend denne ændring}}"
             },
             "diagnostics": {
                 "title": "Diagnostik",
                 "description": "Vis system og applikationsinformation"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger index",
-                "description": "Migrate another Trinity account index"
+                "title": "Migrér Ledger-enhedens indeks",
+                "description": "Migrér et andet Trinity-kontoindeks"
             },
             "troubleshoot": {
                 "title": "Fejlfinding",
@@ -406,7 +410,7 @@
             },
             "faq": {
                 "title": "FAQ",
-                "title2": "Frequently asked questions",
+                "title2": "Hyppigt stillede spørgsmål",
                 "description": "Se ofte stillede spørgsmål for at få hjælp til et typisk problem eller spørgsmål"
             },
             "discord": {
@@ -431,8 +435,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
-            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
+            "pleaseWait": "Afvent {time, plural, one {1 sekund} other {# sekunder}}",
+            "incorrectAttempts": "{attempts, plural, one {1 forkert forsøg} other {# forkerte forsøg}}"
         },
         "loadProfile": {
             "loginSteps": {
@@ -459,60 +463,61 @@
             },
             "profileModal": {
                 "allSettings": "All settings",
+                "profileApplication": "Profil, applikation, sikkerhed",
                 "logout": "Log ud",
                 "stronghold": {
-                    "title": "Profile lock",
-                    "locked": "Stronghold locked",
-                    "unlocked": "Stronghold unlocked"
+                    "title": "Profillås",
+                    "locked": "Stronghold låst",
+                    "unlocked": "Stronghold oplåst"
                 },
                 "hardware": {
-                    "title": "Hardware Device",
+                    "title": "Hardware-enhed",
                     "statuses": {
                         "appNotOpen": "Ledger-enhed oplåst, men app er ikke åben",
                         "correctAppOpen": "Ledger-enhed oplåst, og app er åben ",
                         "locked": "Ledger-enheden sikkert låst",
-                        "mnemonicMismatch": "Wrong Ledger or mnemonic",
+                        "mnemonicMismatch": "Forkert Ledger-enhed eller mnemonic",
                         "notConnected": "Ledger-enheden ikke tilsluttet",
-                        "otherConnected": "App open"
+                        "otherConnected": "App åben"
                     }
                 },
                 "backup": {
-                    "title": "Backup your wallets",
-                    "lastBackup": "You last backed up {date}",
-                    "notBackedUp": "Not backed up",
-                    "button": "Backup"
+                    "title": "Sikkerhedskopiér wallets",
+                    "lastBackup": "Senest sikkerhedskopieret {date}",
+                    "notBackedUp": "Ikke sikkerhedskopieret",
+                    "button": "Sikkerhedskopiér"
                 },
                 "version": {
-                    "title": "New update available",
+                    "title": "Ny opdatering tilgængelig",
                     "updateVersion": "Firefly v{version}",
-                    "button": "Update"
+                    "button": "Opdatér"
                 }
             }
         },
         "staking": {
-            "welcome": "Welcome to the staking dashboard!",
+            "welcome": "Velkommen til staking-kontrolpanelet!",
             "status": {
-                "upcoming": "Event not started",
-                "commencing": "Pre-staking open",
-                "holdingActive": "Staking in progress",
-                "holdingInactive": "Staking open",
-                "inactive": "Staking not detected",
-                "ended": "Staking ended"
+                "upcoming": "Begivenhed ikke startet",
+                "commencing": "Præ-staking åben",
+                "holdingActive": "Staking i gang",
+                "holdingInactive": "Staking åben",
+                "inactive": "Staking ikke fundet",
+                "ended": "Staking afsluttet"
             },
             "summary": {
-                "stakedFunds": "Staked funds"
+                "stakedFunds": "Stakede midler"
             },
             "info": {
                 "headers": {
-                    "upcoming": "Check back later",
-                    "commencing": "Pre-staking is open",
-                    "holding": "{duration} of staking left",
-                    "ended": "Staking has now ended",
-                    "inactive": "No staking events detected"
+                    "upcoming": "Tjek igen senere",
+                    "commencing": "Præ-staking er åben",
+                    "holding": "{duration} af staking resterer",
+                    "ended": "Staking er nu afsluttet",
+                    "inactive": "Ingen staking-begivenheder fundet"
                 },
                 "bodies": {
-                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
+                    "upcoming": "Stake {token}-tokener for automatisk at modtage belønninger hvert 10. sekunder, når staking starter d. {date}.",
+                    "commencing": "Stake {token}-tokener for automatisk at modtage belønninger hvert 10. sekunder, når staking starter d. {date}.",
                     "holdingAndStaking": "You automatically receive rewards every 10 seconds.",
                     "holdingAndNotStaking": "Stake your {token} tokens to receive rewards every 10 seconds.",
                     "endedAndDidStake": "{token} rewards will be distributed to your wallet once the network launches.",
@@ -545,6 +550,64 @@
                 "title": "Color picker",
                 "hexCode": "Color hex code"
             }
+        },
+        "collectibles": {
+            "gallery": {
+                "title": "Samlinger",
+                "emptyTitle": "Ingen samlinger",
+                "noResults": "Ingen resultater",
+                "emptyDescription": "Indbetal eller modtag det første samleremne nu!"
+            },
+            "details": {
+                "storageDepositDescription": "En refunderbar tokenindbetaling kræves for at gemme NFT'en på Tangle.",
+                "attributes": "Attributter",
+                "menu": {
+                    "download": "Download",
+                    "setAvatar": "Angiv NFT som profilavatar",
+                    "view": "Vis medier i browser",
+                    "burn": "Brænd NFT"
+                }
+            }
+        },
+        "governance": {
+            "votingPower": {
+                "title": "Afstemningsstyrke",
+                "maximal": "Maksimal afstemningsstyrke: {value}",
+                "manage": "Håndtér afstemningsstyrke"
+            },
+            "proposalsDetails": {
+                "title": "Detaljer",
+                "activeProposals": "Aktive forslag",
+                "votingProposals": "Forslag, der stemmes om",
+                "votedProposals": "Forslag i alt, der blev stemte om"
+            },
+            "proposals": {
+                "title": "Forslag",
+                "voted": "Stemt",
+                "successRegister": "Forslag registreret",
+                "successRemove": "Forslag fjernet"
+            },
+            "statusTimeline": {
+                "upcoming": "Bekendtgørelse",
+                "commencing": "Afstemning åben",
+                "holding": "Optælling starter",
+                "ended": "Optælling stopper"
+            },
+            "details": {
+                "yourVote": {
+                    "title": "Din stemme",
+                    "total": "Stemmer i alt optalt",
+                    "power": "Afstemningsstyrke"
+                },
+                "proposalInformation": {
+                    "title": "Forslagsinformation",
+                    "countingEnds": "Optælling afsluttes d.",
+                    "eventId": "Begivenheds-ID",
+                    "nodeUrl": "Node-URL"
+                },
+                "voteOpens": "Afstemning åbnes om {time}",
+                "fetching": "Henter forslagsdata"
+            }
         }
     },
     "popups": {
@@ -559,10 +622,35 @@
         "storageDepositBreakdown": {
             "title": "Storage deposit breakdown",
             "totalStorageDeposit": "Total storage deposit",
+            "basicOutputs": {
+                "title": "Native Tokener",
+                "subtitle": "Reserveret til lagring af Native Tokener"
+            },
+            "nftOutputs": {
+                "title": "NFT'er",
+                "subtitle": "Reserveret til NFT-opbevaring"
+            },
+            "aliasOutputs": {
+                "title": "Aliasser",
+                "subtitle": "Reserveret til Alias-opbevaring"
+            },
+            "foundryOutputs": {
+                "title": "Foundries",
+                "subtitle": "Reserved for Native Token Foundry storage"
+            },
             "pendingTransactions": {
-                "title": "Locked in pending transactions",
-                "subtitle": "For sending native assets and small IOTA amounts"
-            }
+                "title": "Transactions",
+                "subtitle": "Temporarily locked in unclaimed transactions"
+            },
+            "minimizeStorageDepositButton": "Minimize storage deposit"
+        },
+        "minimizeStorageDeposit": {
+            "title": "Minimize storage deposit",
+            "description": "Consolidate outputs to minimize your required storage deposit and increase your available balance.",
+            "confirmButton": "Consolidate"
+        },
+        "alias": {
+            "title": "Confirm alias creation"
         },
         "password": {
             "title": "Adgangskode påkrævet",
@@ -579,7 +667,7 @@
             "updateAvailable": "Firefly opdatering tilgængelig",
             "updateDetails": "Version {version} - {date}",
             "noAutoUpdate": "Auto-opdatering er deaktiveret i denne Windows-version, gå til https://firefly.iota.org for at downloade opdateringen.",
-            "preReleaseDescription": "You are running a pre-release version of Firefly. Updates are disabled."
+            "preReleaseDescription": "Der anvendes en præudgivelsesversion af Firefly. Opdateringer er deaktiveret."
         },
         "backupStronghold": {
             "title": "Backup your stronghold file",
@@ -601,6 +689,13 @@
             "errorTitle": "Kan ikke slette {name}",
             "errorBody1": "Du kan ikke slette denne wallet, du skal have mindst en."
         },
+        "externalUrl": {
+            "title": "Open URL in Browser",
+            "body": "Are you sure you want to open \"{url}\" in the browser?",
+            "hint": "This URL is unknown to Firefly. Please double check the URL before opening it.",
+            "action": "Open URL",
+            "invalidProtocol": "Cannot open URL with invalid protocol"
+        },
         "hideAccount": {
             "title": "Skjul {name}?",
             "body": "Du kan finde denne wallet senere ved at aktivere \"Vis skjulte wallets\" i Avancerede Indstillinger.",
@@ -613,9 +708,9 @@
         },
         "addressHistory": {
             "title": "{name} adresse historik",
-            "currentBalance": "Balance: {balance}",
-            "internal": "Internal Address",
-            "external": "Deposit Address"
+            "currentBalance": "Saldo: {balance}",
+            "internal": "Intern adresse",
+            "external": "Deponeringsadresse"
         },
         "excludeNode": {
             "title": "Udeluk node",
@@ -629,16 +724,16 @@
             "titleAdd": "Tilføj en node",
             "titleUpdate": "Opdater en node",
             "titleRemove": "Fjern en node",
-            "titleRemoveAll": "Remove all nodes",
+            "titleRemoveAll": "Fjern alle noder",
             "titleDetails": "Node detaljer",
             "titleInfo": "Node information",
-            "addingNode": "Adding node",
-            "updatingNode": "Updating node",
-            "loadingNodeInfo": "Loading node info",
+            "addingNode": "Tilføjer node",
+            "updatingNode": "Opdater node",
+            "loadingNodeInfo": "Indlæser nodeinfo",
             "nodeAddress": "Node addresse",
             "optionalUsername": "Brugernavn (valgfrit)",
             "optionalPassword": "Adgangskode (valgfrit)",
-            "optionalJwt": "JSON web token (optional)",
+            "optionalJwt": "JSON web token (valgfrit)",
             "setAsPrimaryNode": "Sæt som primær node",
             "removeConfirmation": "Er du sikker på, at du vil du fjerne denne node?",
             "info": {
@@ -680,23 +775,23 @@
             }
         },
         "switchNetwork": {
-            "title": "Switch network",
-            "newNetwork": "New network",
-            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
-            "switchingNetwork": "Switching network",
-            "typePassword": "Type your password to switch to:"
+            "title": "Skift netværk",
+            "newNetwork": "Nyt netværk",
+            "resetWarning": "Skift af netværk vil logge brugeren ud og nulstille alle konti, saldi og transaktionshistorik for denne profil.",
+            "switchingNetwork": "Skift af netværk",
+            "typePassword": "Angiv adgangskode for at skifte til:"
         },
         "errorLog": {
             "title": "Fejllog",
             "empty": "Fejlloggen er tom."
         },
         "deleteProfile": {
-            "title": "Delete profile",
+            "title": "Slet profil",
             "confirmation": "Er du sikker på, at du vil slette denne profil? Denne handling kan ikke fortrydes.",
             "typePassword": "Indtast din adgangskode for at bekræfte."
         },
         "diagnostics": {
-            "title": "Diagnostics",
+            "title": "Diagnostik",
             "node": "Node",
             "platform": "Platform",
             "platformVersion": "Platformsversion",
@@ -707,10 +802,10 @@
             "userPath": "Bruger Sti"
         },
         "transaction": {
-            "title": "Bekræft transaktion",
+            "title": "Send asset",
             "body": "Du er ved at sende {amount} til",
             "surplusIncluded": "Denne transaktion indeholder et overskudsbeløb. Dobbelttjek, at dette er dét beløb, der ønskes sendt.",
-            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
+            "sendingFromStakedAccount": "Der sendes en overførsel fra en wallet, der pt. stakes. Dette kan fjerne staking af tokener. Man er velkommen til at sende overførslen, men det kan være nødvendigt efterfølgende at gen-stake sine resterende tokener.",
             "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "walletFinder": {
@@ -868,24 +963,83 @@
                 "verifyToken": "Dette token bekræftes hermed"
             }
         },
-        "nativeToken": {
-            "formTitle": "Mint native tokener",
+        "sendNft": {
+            "formTitle": "Send NFT",
+            "confirmationTitle": "Confirm sending NFT",
             "property": {
-                "totalSupply": "Samlet beholdning",
-                "circulatingSupply": "Cirkulerende beholdning",
-                "standard": "Standard",
-                "name": "Navn",
-                "description": "Beskriveslse",
-                "symbol": "Symbol",
-                "decimals": "Decimaler",
-                "url": "URL",
-                "logoUrl": "Logo-URL",
-                "logo": "Logo"
+                "nft": "NFT"
             }
+        },
+        "nativeToken": {
+            "formTitle": "Mint native tokens",
+            "confirmationTitle": "Mint native tokens",
+            "property": {
+                "totalSupply": "Total supply",
+                "maximumSupply": "Maximum supply",
+                "mintedTokens": "Minted tokens",
+                "meltedTokens": "Melted tokens",
+                "circulatingSupply": "Circulating supply",
+                "aliasAddress": "Alias controller address",
+                "standard": "Standard",
+                "tokenName": "Name",
+                "unit": "Unit",
+                "subunit": "Subunit",
+                "storageDeposit": "Storage Deposit",
+                "description": "Description",
+                "symbol": "Symbol",
+                "decimals": "Decimals",
+                "url": "URL",
+                "logoUrl": "Logo URL",
+                "logo": "Logo",
+                "alias": "Alias",
+                "assetId": "Asset Id"
+            }
+        },
+        "noAlias": {
+            "title": "Unable to mint",
+            "description": "You must own an alias output to mint native tokens. To continue, please create an alias first"
+        },
+        "mintNftForm": {
+            "title": "Mint simple NFT"
         },
         "faucetRequest": {
             "title": "Faucet-anmodning",
             "body": "Sikker på, at der skal anmodes om {token} tokener fra {network}-faucet'en?"
+        },
+        "manageVotingPower": {
+            "title": "Håndtér stemmeret",
+            "body": "Definér stemmeretten for at stemme om forslag.",
+            "revote": "Ændring af stemmeretten forhindrer midlertidigt dine stemmer i at blive medregnet. Fortsæt til flg. trin for at genoptage afstemningen.",
+            "hint": "Forøgelse af din stemmeretten låser dine midler. Stemmeretten skal reduceres for igen at gøre dem brugbare. Dette påvirker alle forslag med aktiv afstemning."
+        },
+        "registerProposal": {
+            "title": "Register proposal",
+            "body": "Please provide the information listed below to register a proposal."
+        },
+        "voteForProposal": {
+            "title": "Vote for proposal",
+            "body": "Du er ved at stemme på {proposal} forslag.",
+            "key": "Stemmeret",
+            "noVotingPower": "Ingen stemmeret. Øg stemmeretten fra Governance-kontrolpanelet."
+        },
+        "revote": {
+            "title": "Stem igen om forslag",
+            "body": "Som nævnt i foregående trin hindrer ændring af stemmeretten midlertidigt medregningen af dine stemmer. Klik blot på \"Sten igen\" for at genoptage afstemningen.",
+            "hint": "Firefly husker alle forslags og svarmuligheder, som der tidligere er stemt for."
+        },
+        "removeProposal": {
+            "title": "Remove proposal",
+            "body": "Are you sure you want to remove this proposal?",
+            "hint": "Please note that removing a proposal during the counting period will stop your votes but won't impact any votes that have already been counted."
+        },
+        "stopVoting": {
+            "title": "Stop voting",
+            "body": "You're about to stop voting for the {proposalName} proposal.",
+            "hint": "Please note that stopping voting during the counting period won't impact any votes that have already been counted."
+        },
+        "nodeAuthRequired": {
+            "title": "Authentication required",
+            "body": "This node requires additional authentication. Please fill in the appropriate information."
         }
     },
     "charts": {
@@ -919,6 +1073,15 @@
             "description": "Are you sure you want to reject this transaction?",
             "node": "Please note that rejecting a transaction only hides it from your Activity feed"
         },
+        "confirmTokenBurn": {
+            "title": "Burn {assetName}",
+            "hint": "Please note that burning a token may free storage deposit attached to it and is not reversible"
+        },
+        "confirmNftBurn": {
+            "title": "Burn {nftName}",
+            "description": "Are you sure you want to burn this NFT?",
+            "hint": "Please note that burning a token frees the storage deposit attached to it and is not reversible."
+        },
         "proceedAnyway": "Fortsæt alligevel",
         "save": "Gem",
         "importSeed": "Importer et eksisterende seed",
@@ -934,6 +1097,8 @@
         "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
         "claimShimmer": "Claim Shimmer staking rewards",
         "claimShimmerDescription": "Importér IOTA-profilen og indløs staking-belønninger",
+        "createAlias": "Create alias",
+        "createAliasDescription": "Create alias output",
         "savePassword": "Gem adgangskode",
         "useBiometric": "Brug biometrisk sikkerhed",
         "setupPinCode": "Setup PIN code",
@@ -1043,6 +1208,7 @@
         "backup": "Backup",
         "mint": "Mint",
         "mintNativeToken": "Mint native tokener",
+        "mintNft": "Mint NFT",
         "verifyToken": "Bekræft token",
         "unverifyToken": "Afkræft token",
         "hideToken": "Skjul token",
@@ -1054,7 +1220,15 @@
         "testDeepLink": "Test dybt link",
         "initialize": "Initialisér",
         "initializing": "Initialiserer",
-        "delete": "Slet"
+        "delete": "Slet",
+        "remove": "Remove",
+        "addReference": "Add reference",
+        "depositNft": "Deposit NFTs",
+        "vote": "Vote",
+        "registerProposal": "Register proposal",
+        "removeProposal": "Remove proposal",
+        "stopVoting": "Stop voting",
+        "revote": "Stem igen"
     },
     "general": {
         "recipient": "Recipient",
@@ -1067,22 +1241,54 @@
         "recoveryPhrase": "Gendannelsesssætning",
         "recentActivity": "Seneste Aktivitet",
         "sent": "Sendt",
+        "sending": "Sender",
         "received": "Modtaget",
+        "receiving": "Modtager",
+        "newVotingPower": "New voting power",
+        "votingPower": "Voting power",
+        "increased": "Stemmeret øget",
+        "increasing": "Øger stemmeret",
+        "decreased": "Stemmeret formindsket",
+        "decreasing": "Formindsker stemmeret",
+        "startVoting": "Voted",
+        "startingVoting": "Starting to vote",
+        "changedVote": "Ændret stemme",
+        "changingVote": "Ændring af stemme",
+        "stopVoting": "Stopped voting",
+        "stoppingVoting": "Stopping to vote",
+        "forEvent": "for {eventId}",
+        "sentNft": "NFT sent",
+        "sendingNft": "Sending NFT",
+        "receivedNft": "NFT received",
+        "receivingNft": "Receiving NFT",
         "transfer": "Transfer",
         "transferring": "Transferring",
+        "transferNft": "Transfer NFT",
+        "transferringNft": "Transferring NFT",
+        "mintedNft": "Minted NFT",
+        "mintingNft": "Minting NFT",
         "shimmerClaimed": "Modtaget",
         "shimmerClaiming": "Modtager",
         "shimmerGenesis": "Shimmer Genesis",
         "minted": "Mintet",
         "minting": "Mintning",
+        "burned": "Brændt",
+        "burning": "Brænder",
+        "consolidated": "Output konsolideret",
+        "consolidating": "Konsolidering af output",
+        "aliasCreated": "Alias created",
+        "creatingAlias": "Creating Alias",
         "sendPayment": "Send Betaling",
         "moveFunds": "Intern Overførsel",
         "sendTo": "Send To",
-        "sendFunds": "Send midler",
+        "sendAssets": "Send assets",
+        "sendAssetToAddress": "Send asset to an address",
         "sendToAddress": "Send til adresse",
+        "sendToken": "Send token",
+        "sendNft": "Send NFT",
+        "sendNftToAddress": "Send NFT to an address",
         "scanQrOrPaste": "Scan en QR-kode eller indsæt en adresse",
         "moveFundsBetweenAccounts": "Flyt midler mellem wallets",
-        "sendTokensToAddress": "Send tokens til en adresse",
         "manageAccount": "Håndtér Wallet",
         "customizeAcount": "Tilpas din wallet",
         "account": "Wallet",
@@ -1114,6 +1320,7 @@
         "systemTheme": "System",
         "balance": "Saldo",
         "balanceWithValue": "Saldo: {balance}",
+        "balanceWithNetwork": "{network} Balance",
         "all": "All",
         "incoming": "Indgående",
         "outgoing": "Udgående",
@@ -1132,6 +1339,7 @@
         "security": "Sikkerhed",
         "accountAddress": "Wallet-adresse",
         "network": "Network",
+        "destinationNetwork": "Destination network",
         "nodes": "Noder",
         "wallet": "Wallet",
         "help": "Hjælp",
@@ -1197,8 +1405,6 @@
         "unvotedFor": "Unvoted for {account}",
         "stakingTransaction": "Staking Transaction",
         "unstakingTransaction": "Unstaking Transaction",
-        "receiving": "Modtager",
-        "sending": "Sender",
         "legacyNetwork": "Legacy Netværk",
         "capsLock": "Caps Lock er slået til",
         "version": "Version {version}",
@@ -1221,6 +1427,12 @@
         "expirationTime": "Expiration time",
         "timelockDate": "Tidslås",
         "claimedTime": "Claimed at",
+        "nftAddress": "NFT Address",
+        "nftId": "NFT ID",
+        "nftMetadata": "NFT Metadata",
+        "aliasId": "Alias ID",
+        "governorAddress": "Governor Address",
+        "stateControllerAddress": "State Controller Address",
         "copiedToClipboard": "Copied to clipboard",
         "total": "Total: {balance}",
         "availableBalanceWithValue": "Disponibel saldo: {balance}",
@@ -1228,6 +1440,8 @@
         "availableBalanceTooltip": "Et aktivs samlede saldo, minus evt. midler nødvendige for at dække lagerdepositum (dvs. midler låst til brug for afventende transaktioner, reserveret til Native Tokens eller reserveret til NFT'er).",
         "amountClaimed": "{amount} claimed",
         "metadata": "Metadata",
+        "amountConsolidatedInputs": "Konsoliderede output",
+        "name": "Name",
         "tag": "Tag",
         "nodeList": "Node list",
         "claimedIn": "Claimed in",
@@ -1235,6 +1449,7 @@
         "assets": "Assets",
         "nativeTokens": "Native tokener",
         "mintNativeTokenDescription": "Mint native tokener efter IRC30-standarden",
+        "mintNftDescription": "Mint NFT following IRC27 standard",
         "faucetRequestDescription": "Anmod om tokener fra {network}-faucet'en",
         "refreshTokenMetadataDescription": "Nulstil og opfrisk alle tokenmetadata",
         "refreshTokenMetadataHint": "Dette nulstiller alle tokeners metadata, herunder bekræftelsesstatus og viser evt. ellers skjulte aktiver.",
@@ -1245,7 +1460,37 @@
         "url": "URL",
         "hash": "Hash",
         "creating": "Oprettelse",
-        "updating": "Opdatering"
+        "updating": "Opdatering",
+        "enterAddress": "Enter address",
+        "transaction": "Transaction",
+        "alias": "Alias",
+        "foundry": "Foundry",
+        "token": "Token",
+        "nft": "NFT",
+        "type": "Type",
+        "immutableIssuer": "Immutable Issuer",
+        "smartContract": "Smart Contract",
+        "targetContract": "Target contract",
+        "contractFunction": "Contract function",
+        "gasBudget": "Gas budget",
+        "standard": "Standard",
+        "uri": "URI",
+        "issuer": "Issuer",
+        "issuerAddress": "Issuer Address",
+        "issuerName": "Issuer Name",
+        "collection": "Collection",
+        "collectionId": "Collection ID",
+        "collectionName": "Collection Name",
+        "royalties": "Royalties",
+        "description": "Description",
+        "attributes": "Attributes",
+        "details": "Details",
+        "availableAmount": "{amount} available",
+        "properties": "Properties",
+        "statistics": "Statistics",
+        "username": "Username",
+        "jwt": "JSON web token",
+        "internalTransaction": "Intern transaktion"
     },
     "filters": {
         "title": "Filtre",
@@ -1258,6 +1503,25 @@
             "label": "Vis afviste",
             "yes": "Ja",
             "no": "Nej"
+        },
+        "showValueless": {
+            "label": "Show valueless",
+            "yes": "Yes",
+            "no": "No"
+        },
+        "ascDesc": {
+            "Asc": "Ascending",
+            "Desc": "Descending"
+        },
+        "assetOrder": {
+            "label": "Order",
+            "Name": "Name",
+            "Amount": "Amount"
+        },
+        "internalExternal": {
+            "label": "Internal / External",
+            "internal": "Internal",
+            "external": "External"
         },
         "verificationStatus": {
             "label": "Bekræftelsesstatus",
@@ -1297,9 +1561,16 @@
         },
         "type": {
             "label": "Type",
-            "incoming": "indgående",
-            "outgoing": "udgående",
-            "internal": "intern"
+            "basic": "Basic",
+            "nft": "NFT",
+            "alias": "Alias",
+            "foundry": "Foundry"
+        },
+        "direction": {
+            "label": "Direction",
+            "incoming": "Incoming",
+            "outgoing": "Outgoing",
+            "selfTransaction": "Self transaction"
         }
     },
     "dates": {
@@ -1342,8 +1613,11 @@
             "receivedWhileLoggedOut": "Please login to initiate the deep link",
             "notEnabled": "Deep links are not enabled",
             "invalidFormat": "The deep link you followed is invalid",
-            "invalidAmount": "Dybt link-beløbet er ikke et tal {amount}",
+            "invalidAmount": "The amount in deep link is not an integer number {amount}",
             "invalidSurplus": "Dybt link-overskuddet er ikke et tal {surplus}",
+            "governance": {
+                "unrecognizedOperation": "Unrecognized Governance operation: {operation}"
+            },
             "wallet": {
                 "send": {
                     "success": "Payment details added from deep link"
@@ -1368,6 +1642,15 @@
         "mintNativeToken": {
             "success": "Native token-mintningstransaktion sendt"
         },
+        "burnNativeToken": {
+            "success": "Native token burning transaction sent"
+        },
+        "mintNft": {
+            "success": "NFT minting transaction sent"
+        },
+        "burnNft": {
+            "success": "NFT burning transaction sent"
+        },
         "refreshTokenMetadata": {
             "success": "Alle tokenmetadata er nulstillet og opdateret"
         },
@@ -1382,6 +1665,12 @@
         "claimShimmerRewards": {
             "success": "Shimmer-belønninger indløst for {accountAlias}",
             "error": "En fejl opstod under indløsning. Forsøg igen."
+        },
+        "vote": {
+            "success": "Votes successfully casted"
+        },
+        "stopVoting": {
+            "success": "Voting successfully stopped"
         }
     },
     "error": {
@@ -1417,9 +1706,12 @@
             "incorrect": "Din nuværende pinkode er forkert.",
             "invalid": "Invalid PIN code."
         },
+        "address": {
+            "wrongAddressType": "Wrong address type"
+        },
         "account": {
+            "addressNotFound": "The address cannot be found in your account.",
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
-            "empty": "Du skal bruge din seneste wallet før du opretter en ny.",
             "emptyName": "A profile name must contain at least 1 character.",
             "notEmpty": "Du skal overføre din saldo før du sletter denne wallet.",
             "duplicate": "En wallet med dette navn findes allerede.",
@@ -1442,8 +1734,8 @@
             "amountNoFloat": "Kan ikke bruge decimalpladser med den mindste valgte enhed",
             "amountInvalidFormat": "Beløbet ser ud til at være et ugyldigt tal.",
             "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
-            "tagTooLong": "Tagget kan maks. udgøre 64 tegn.",
-            "metadataTooLong": "Metadataene kan maks. udgøre 8.192 tegn.",
+            "tagTooLong": "The tag cannot be longer than 64 bytes.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "Beløb skal være større end 0.",
             "wrongAddressPrefix": "Adresser starter med præfikset {prefix}.",
             "wrongAddressFormat": "Adressen er ikke formateret korrekt.",
@@ -1458,19 +1750,28 @@
             "cancelled": "The transaction was cancelled.",
             "transaction": "There was an error sending your transaction. Please try again.",
             "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",
+            "noInputs": "No inputs found.",
+            "notEnoughBalance": "Not enough balance.",
             "missingTransactionId": "Transaktions-ID'et mangler",
-            "missingTransactionProgressEventPayload": "Payload for transaktionstatusbegivenhed mangler"
+            "missingTransactionProgressEventPayload": "Payload for transaktionstatusbegivenhed mangler",
+            "recipientRequired": "Recipient is required",
+            "nftRequired": "NFT is required",
+            "nftNotInHex": "NFT address has to be in HEX format",
+            "nftNotInPossession": "NFT not in possession",
+            "reservedTagKeyword": "Reserveret tagnøgleord kan ikke burges"
+        },
+        "layer2": {
+            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account."
         },
         "node": {
             "invalid": "Indtast venligst en gyldig URL.",
-            "dns": "Could not find DNS resolution for node.",
+            "dns": "Unable to find DNS resolution for node",
             "timedOut": "The connection timed out.",
             "refused": "The connection was refused.",
             "handshake": "Could not complete handshake with node.",
             "invalidCertificate": "Could not connect with invalid certificate.",
             "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
             "duplicate": "Denne node er allerede blevet tilføjet.",
-            "unsynced": "Noden er ikke synkroniseret.",
             "noSyncedNode": "Ingen synkede noder tilgængelig.",
             "timeNotSynced": "Enhedsklokkeslæt forkert, kan ikke synke node.",
             "answer": "Failed to get an answer from all nodes.",
@@ -1540,6 +1841,51 @@
         "walletApiEvent": {
             "invalidAccountIndex": "Ugyldigt kontoindeks for {eventName}-begivenheden",
             "invalidPayload": "Ugyldig payload for {eventName}-begivenheden"
+        },
+        "aliasMinting": {
+            "aliasRequired": "Alias is required",
+            "aliasNotInPossession": "Alias not in possession"
+        },
+        "noOutputsToConsolidate": "Not enough outputs to consolidate",
+        "eventId": {
+            "doesNotStartWith0x": "Event ID should start with '0x'",
+            "insufficientLength": "Event ID should be 66 characters long"
+        },
+        "nft": {
+            "unsupportedUrl": {
+                "short": "Url not supported",
+                "long": "Url schema not supported"
+            },
+            "unsupportedFileType": {
+                "short": "Unsupported media type",
+                "long": "The media type is not currently supported"
+            },
+            "notMatchingFileTypes": {
+                "short": "Loading blocked",
+                "long": "NFT file type does not match the expected media type"
+            },
+            "tooLargeFile": {
+                "short": "File is too large",
+                "long": "Loading NFT blocked because the file is too large"
+            },
+            "corsError": {
+                "short": "Loading blocked",
+                "long": "Loading NFT blocked by CORS policy"
+            },
+            "unsafeToLoad": {
+                "short": "Unsafe to load",
+                "long": "An error occurred while checking if the NFT was safe to load"
+            },
+            "loadingError": {
+                "short": "Unable to load",
+                "long": "An error occurred while loading the NFT"
+            }
+        },
+        "governance": {
+            "unableToRegisterProposal": {
+                "short": "Unable to register proposal",
+                "long": "An error occurred while trying to register proposal {proposalId}"
+            }
         }
     },
     "warning": {
@@ -1581,13 +1927,22 @@
         },
         "optionalInput": "Disse valgfrie data vil være offentlige i Explorer og synlige for alle.",
         "transactionDetails": {
+            "minting": {
+                "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
+                "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
+                "expirationTime": "Claim these funds before the expiration time or they will be returned to the sender.",
+                "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
+                "metadata": "An optional data field for storing data persistently on the Tangle.",
+                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
+            },
             "incoming": {
                 "storageDeposit": "En refunderbar tokenindbetaling kræves for at gemme transaktionen på Tangle.",
                 "giftedStorageDeposit": "Lagerdepositum for denne transaktion udgjorde en gave. Man behøver ikke at refundere depositummet.",
                 "expirationTime": "Indløs disse midler inden udløbstidspunktet, da de ellers returneres til afsenderen.",
                 "timelockDate": "Afsender opsatter en tidslås for disse midler. De vil kunne bruges, når tidslåsen udløber.",
                 "metadata": "Et valgfrit datafelt til at lagre data vedvarende på Tangle.",
-                "tag": "Et kort valgfrit datafelt. Tagning af grupper af transaktioner kan gøre dem lettere at fremsøge."
+                "tag": "Et kort valgfrit datafelt. Tagning af grupper af transaktioner kan gøre dem lettere at fremsøge.",
+                "gasBudget": "Gas budget is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "outgoing": {
                 "storageDeposit": "Et lagerdepositum, der er refunderbart, kræves for at gemme transaktionen på Tangle.",
@@ -1595,14 +1950,35 @@
                 "expirationTime": "Indløser modtageren ikke i tide, får man sine tokener returneret.",
                 "timelockDate": "Tidslås føjet til denne transaktion. Modtageren vil ikke kunne bruge disse midler, før tidslåsen udløber.",
                 "metadata": "Et valgfrit datafelt til at lagre data vedvarende på Tangle.",
-                "tag": "Et kort valgfrit datafelt. Tagning af grupper af transaktioner kan gøre dem lettere at fremsøge."
+                "tag": "Et kort valgfrit datafelt. Tagning af grupper af transaktioner kan gøre dem lettere at fremsøge.",
+                "gasBudget": "Gas budget is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
+            },
+            "nftMetadata": {
+                "standard": "The NFT standard e.g. IRC27.",
+                "type": "The MimeType of the NFT. e.g. image/png.",
+                "collectionId": "UTXO string of the collection NFT that minted this NFT",
+                "royalties": "An object containing key-value pairs of addresses that map to payout percentages",
+                "issuerName": "The name of the creator",
+                "attributes": "An array of traits and values that define attributes of the NFT"
             }
         },
-        "mintNativeTokenForm": {
-            "decimals": "Valgfri IRC30-parameter: Antal decimaler tokenet bruger (dividér token-beløbet med 10^decimaler for at få dets brugerrepræsentation).",
-            "description": "Valgfri IRC30-parameter: Den menneskelig læsbare beskrivelse af tokenet.",
-            "url": "Valgfri IRC30-parameter: URL, der peger på flere ressourcer for tokenet, såsom et websted eller sociale medier-side.",
-            "logoUrl": "Valgfri IRC30-parameter: URL, der peger på en billedressource for tokenlogoet."
+        "mintNativeToken": {
+            "decimals": "IRC30 optional parameter: Number of decimals the token uses (divide the token amount by 10^decimals to get its user representation).",
+            "description": "IRC30 optional parameter: The human-readable description of the token.",
+            "url": "IRC30 optional parameter: URL pointing to more resources about the token like a website or social media page.",
+            "logoUrl": "IRC30 optional parameter: URL pointing to an image resource of the token logo."
+        },
+        "mintNftForm": {
+            "collectionId": "Optional parameter: UTXO string of the collection NFT that minted this NFT",
+            "collectionName": "Optional parameter: The collection's name",
+            "royalties": "Optional parameter: An object containing key-value pairs of addresses that map to payout percentages",
+            "issuerName": "Optional parameter: The name of the creator",
+            "description": "Optional parameter: A description of the NFT",
+            "attributes": "Optional parameter: An array of traits and values that define attributes of the NFT",
+            "uri": "To create a URI using custom media, first upload your file to IPFS via a storage service (e.g. https://nft.storage/)"
+        },
+        "governance": {
+            "removeProposalWarning": "Før dette forslag fjernes, skal man ophøre med at stemme for det på alle konti."
         }
     },
     "exports": {
@@ -1631,8 +2007,11 @@
     },
     "tabs": {
         "wallet": "Wallet",
-        "staking": "Staking",
-        "developer": "Udvikler"
+        "collectibles": "Collectibles",
+        "governance": "Governance",
+        "developer": "Udvikler",
+        "tokens": "Tokens",
+        "activity": "Activity"
     },
     "pills": {
         "stake": {
@@ -1642,26 +2021,26 @@
         },
         "external": {
             "incoming": {
-                "Pending": "modtager fra",
-                "Confirmed": "modtaget fra",
-                "Conflicting": "modtagelse mislykkedes"
+                "Pending": "receiving from",
+                "Confirmed": "received from",
+                "Conflicting": "failed to receive"
             },
             "outgoing": {
-                "Pending": "sender til",
-                "Confirmed": "sendt til",
-                "Conflicting": "afsendelse mislykkedes"
+                "Pending": "sending to",
+                "Confirmed": "sent to",
+                "Conflicting": "failed to send"
             }
         },
         "internal": {
             "incoming": {
-                "Pending": "overfører fra",
-                "Confirmed": "overført fra",
-                "Conflicting": "overførsel mislykkedes"
+                "Pending": "transferring from",
+                "Confirmed": "transferred from",
+                "Conflicting": "failed to transfer"
             },
             "outgoing": {
-                "Pending": "overfører til",
-                "Confirmed": "overført til",
-                "Conflicting": "overførsel mislykkedes"
+                "Pending": "transferring to",
+                "Confirmed": "transferred to",
+                "Conflicting": "failed to transfer"
             },
             "selfTransaction": {
                 "Pending": "transferring to",
@@ -1670,9 +2049,19 @@
             }
         },
         "mint": {
-            "Pending": "mintning",
-            "Confirmed": "mintet",
-            "Conflicting": "mintning mislykkedes"
+            "Pending": "minting",
+            "Confirmed": "minted",
+            "Conflicting": "failed to mint"
+        },
+        "burn": {
+            "Pending": "brænder",
+            "Confirmed": "brændt",
+            "Conflicting": "mislykkedes at brænde"
+        },
+        "consolidation": {
+            "Pending": "Konsolidering af output",
+            "Confirmed": "Output konsolideret",
+            "Conflicting": "kunne ikke konsolidere output"
         },
         "migrate": {
             "Pending": "migrating for",
@@ -1684,7 +2073,48 @@
             "claimed": "claimed",
             "expired": "expired"
         },
-        "locked": "låst"
+        "governance": {
+            "increaseVotingPower": {
+                "Pending": "øger stemmeret",
+                "Confirmed": "øget stemmeret",
+                "Conflicting": "kunne ikke øge stemmeret"
+            },
+            "decreaseVotingPower": {
+                "Pending": "formindsker stemmeret",
+                "Confirmed": "formindsket stemmeret",
+                "Conflicting": "kunne ikke formindske stemmeret"
+            },
+            "startVoting": {
+                "Pending": "voting for",
+                "Confirmed": "voted for",
+                "Conflicting": "failed to vote for"
+            },
+            "stopVoting": {
+                "Pending": "stopping voting for",
+                "Confirmed": "stopped voting for",
+                "Conflicting": "failed to stopped voting for"
+            },
+            "changedVote": {
+                "Pending": "ændring af stemme for",
+                "Confirmed": "ændrede stemme for",
+                "Conflicting": "kunne ikke ændre stemme for"
+            }
+        },
+        "alias": {
+            "creation": {
+                "Pending": "creating alias",
+                "Confirmed": "alias created",
+                "Failed": "Failed to create alias"
+            }
+        },
+        "locked": "låst",
+        "smartContract": "smart contract",
+        "proposalStatus": {
+            "upcoming": "Announcement",
+            "commencing": "Voting open",
+            "holding": "Counting",
+            "ended": "Closed"
+        }
     },
     "menus": {
         "expirationTimePicker": {

@@ -1,4 +1,4 @@
-import { ActivityAction, ActivityDirection, ActivityType, InclusionState } from '../enums'
+import { ActivityAction, ActivityDirection, ActivityType, GovernanceAction, InclusionState } from '../enums'
 import { Activity } from '../types'
 
 export function getActivityTileTitle(activity: Activity): string {
@@ -7,6 +7,21 @@ export function getActivityTileTitle(activity: Activity): string {
 
     if (activity.type === ActivityType.Basic && activity.isShimmerClaiming) {
         return isConfirmed ? 'general.shimmerClaimed' : 'general.shimmerClaiming'
+    }
+    if (activity.type === ActivityType.Governance) {
+        if (activity.governanceAction === GovernanceAction.IncreaseVotingPower) {
+            return isConfirmed ? 'general.increased' : 'general.increasing'
+        } else if (activity.governanceAction === GovernanceAction.DecreaseVotingPower) {
+            return isConfirmed ? 'general.decreased' : 'general.decreasing'
+        } else if (activity.governanceAction === GovernanceAction.StartVoting) {
+            return isConfirmed ? 'general.startVoting' : 'general.startingVoting'
+        } else if (activity.governanceAction === GovernanceAction.StopVoting) {
+            return isConfirmed ? 'general.stopVoting' : 'general.stoppingVoting'
+        } else if (activity.governanceAction === GovernanceAction.ChangedVote) {
+            return isConfirmed ? 'general.changedVote' : 'general.changingVote'
+        }
+    } else if (activity.type === ActivityType.Consolidation) {
+        return isConfirmed ? 'general.consolidated' : 'general.consolidating'
     } else if (action === ActivityAction.Mint) {
         if (type === ActivityType.Alias) {
             return isConfirmed ? 'general.aliasCreated' : 'general.creatingAlias'

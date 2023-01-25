@@ -2,9 +2,10 @@
     import { showAppNotification } from '@auxiliary/notification'
     import { localize } from '@core/i18n'
     import { INode, INodeInfo } from '@core/network'
+    import { activeProfile } from '@core/profile'
     import { getNodeInfo } from '@core/profile-manager'
     import { resolveObjectPath, setClipboard } from '@core/utils'
-    import { Button, ButtonSize, Checkbox, CopyableBox, FontWeight, Spinner, Text, TextType } from 'shared/components'
+    import { Button, Checkbox, CopyableBox, FontWeight, Spinner, Text, TextType } from 'shared/components'
     import { onMount } from 'svelte'
 
     enum NodeInfoTab {
@@ -15,6 +16,8 @@
     }
 
     export let node: INode = { url: '' }
+    export let onEditClick: () => void
+    export let onTogglePrimaryClick: () => void
 
     const NODE_INFO_LOCALE_BASE_PATH = 'popups.node.info'
     const NODE_INFO_TAB_MAP: Readonly<
@@ -64,6 +67,8 @@
         },
     }
 
+    $: isPrimary = $activeProfile?.clientOptions?.primaryNode?.url === node.url
+
     let nodeInfo: INodeInfo
     let nodeInfoTab: NodeInfoTab = NodeInfoTab.General
 
@@ -106,8 +111,8 @@
     })
 </script>
 
-{#if nodeInfo && nodeInfoTab}
-    <div class="flex flex-auto flex-col justify-between space-y-4">
+<div class="flex flex-auto flex-col justify-between space-y-4">
+    {#if nodeInfo && nodeInfoTab}
         <div class="flex flex-col space-y-4">
             <div class="flex flex-row">
                 {#key nodeInfoTab}
@@ -152,18 +157,27 @@
                 {/each}
             </div>
         </div>
-        <Button
-            busyMessage={localize('popups.node.loadingNodeInfo')}
-            isBusy={!nodeInfo || !nodeInfoTab}
-            disabled={!nodeInfo}
-            classes="w-full"
-            size={ButtonSize.Medium}
-            outline
-            onClick={handleCopyAllInformationClick}
-        >
-            {localize('actions.copyAllInformation')}
+    {:else}
+        <Spinner busy message={localize('popups.node.loadingNodeInfo')} classes="my-12 justify-center" />
+    {/if}
+    <div class="flex flex-col space-y-4 w-full">
+        {#if nodeInfo && nodeInfoTab}
+            <Button
+                busyMessage={localize('popups.node.loadingNodeInfo')}
+                isBusy={!nodeInfo || !nodeInfoTab}
+                disabled={!nodeInfo}
+                classes="w-full"
+                outline
+                onClick={handleCopyAllInformationClick}
+            >
+                {localize('actions.copyAllInformation')}
+            </Button>
+        {/if}
+        <Button disabled={node?.disabled} classes="w-full" outline onClick={onTogglePrimaryClick}>
+            {localize(`views.settings.configureNodeList.${isPrimary ? 'unsetAsPrimary' : 'setAsPrimary'}`)}
+        </Button>
+        <Button classes="w-full" outline onClick={onEditClick}>
+            {localize('views.settings.configureNodeList.editDetails')}
         </Button>
     </div>
-{:else}
-    <Spinner busy message={localize('popups.node.loadingNodeInfo')} classes="my-12 justify-center" />
-{/if}
+</div>

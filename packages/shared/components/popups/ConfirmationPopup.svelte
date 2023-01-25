@@ -2,6 +2,9 @@
     import { Button, Text, TextHint, FontWeight, TextType, ButtonVariant } from 'shared/components'
     import { localize } from '@core/i18n'
     import { closePopup } from '@auxiliary/popup'
+    import { handleError } from '@core/error/handlers'
+    import { onMount } from 'svelte'
+    import { selectedAccount } from '@core/account'
 
     export let title: string
     export let description: string = ''
@@ -13,6 +16,7 @@
     export let confirmText: string = localize('actions.confirm')
     export let onConfirm: () => void = undefined
     export let onCancel: () => void = undefined
+    export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
     function confirmClick(): void {
         if (onConfirm) {
@@ -29,6 +33,14 @@
             closePopup()
         }
     }
+
+    onMount(async () => {
+        try {
+            await _onMount()
+        } catch (err) {
+            handleError(err)
+        }
+    })
 </script>
 
 <div class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
@@ -48,6 +60,8 @@
         <Button
             classes="w-full"
             variant={warning || danger ? ButtonVariant.Warning : ButtonVariant.Primary}
+            disabled={$selectedAccount.isTransferring}
+            isBusy={$selectedAccount.isTransferring}
             onClick={confirmClick}
         >
             {confirmText}

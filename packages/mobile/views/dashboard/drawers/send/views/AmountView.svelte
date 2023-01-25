@@ -41,7 +41,7 @@
         allowedDecimals = IOTA_UNIT_MAP?.[unit?.substring(0, 1)] ?? 0
     }
 
-    $: bigAmount = convertToRawAmount(amount, unit, asset?.metadata)
+    $: bigAmount = convertToRawAmount(amount, asset?.metadata, unit)
     $: (amount, unit), validate()
     $: marketAmount = getMarketAmountFromAssetValue(bigAmount, asset)
 

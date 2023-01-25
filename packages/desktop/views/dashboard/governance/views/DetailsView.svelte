@@ -4,8 +4,6 @@
     import { localize } from '@core/i18n'
     import {
         Button,
-        FontWeight,
-        Icon,
         KeyValueBox,
         Pane,
         ProposalDetailsButton,
@@ -15,7 +13,6 @@
         Text,
         TextType,
     } from '@ui'
-    import { Icon as IconEnum } from '@auxiliary/icon'
     import { openPopup } from '@auxiliary/popup/actions'
     import { activeProfileId } from '@core/profile/stores'
     import { getVotingEvent } from '@core/profile-manager/api'
@@ -29,14 +26,23 @@
         updateParticipationOverview,
     } from '@contexts/governance/stores'
     import { calculateWeightedVotes } from '@contexts/governance/utils'
+    import { getBestTimeDuration, milestoneToDate } from '@core/utils'
+    import { networkStatus } from '@core/network/stores'
+    import { formatTokenAmountBestMatch } from '@core/wallet/utils'
+    import { visibleSelectedAccountAssets } from '@core/wallet/stores'
+
+    const { metadata } = $visibleSelectedAccountAssets?.baseCoin
 
     let selectedAnswerValues: number[] = []
     let votedAnswerValues: number[] = []
     let votingPayload: VotingEventPayload
     let totalVotes = 0
     let hasMounted = false
+    let voteButtonText = localize('actions.vote')
 
     $: $selectedAccountIndex, void updateParticipationOverview()
+    $: $selectedAccountIndex, (selectedAnswerValues = [])
+
     $: proposalState = $proposalsState[$activeProfileId]?.[$selectedProposal?.id]?.state
 
     // Reactively start updating votes once component has mounted and participation overview is available.
@@ -44,7 +50,7 @@
 
     $: votesCounter = {
         total: totalVotes,
-        power: $selectedAccount?.votingPower,
+        power: parseInt($selectedAccount?.votingPower),
     }
     $: questions = votingPayload?.questions
 
@@ -58,6 +64,7 @@
         selectedAnswerValues?.includes(undefined)
 
     $: isTransferring = $selectedAccount?.isTransferring
+    $: proposalState, (voteButtonText = getVoteButtonText())
 
     async function setVotingEventPayload(eventId: string): Promise<void> {
         const event = await getVotingEvent(eventId)
@@ -73,10 +80,20 @@
         if (selectedProposalOverview) {
             const trackedParticipations = Object.values(selectedProposalOverview)
             const votes = calculateWeightedVotes(trackedParticipations)
+            const lastActiveOverview = trackedParticipations.find(
+                (overview) =>
+                    overview.endMilestoneIndex === 0 || overview.endMilestoneIndex > $selectedProposal.milestones.ended
+            )
+            const votesSum = votes?.reduce((accumulator, votes) => accumulator + votes, 0) ?? 0
 
-            votedAnswerValues =
-                trackedParticipations.find((overview) => overview.endMilestoneIndex === 0)?.answers ?? []
-            totalVotes = votes?.reduce((accumulator, votes) => accumulator + votes, 0) ?? 0
+            votedAnswerValues = lastActiveOverview?.answers ?? []
+            totalVotes =
+                proposalState.status === ProposalStatus.Commencing
+                    ? parseInt(lastActiveOverview?.amount, 10) ?? 0
+                    : votesSum
+        } else {
+            votedAnswerValues = []
+            totalVotes = 0
         }
     }
 
@@ -107,9 +124,22 @@
         }
     }
 
+    function getVoteButtonText(): string {
+        if ($selectedProposal?.status === ProposalStatus.Upcoming) {
+            const millis =
+                milestoneToDate(
+                    $networkStatus.currentMilestone,
+                    $selectedProposal.milestones[ProposalStatus.Commencing]
+                ).getTime() - new Date().getTime()
+            const timeString = getBestTimeDuration(millis, 'second')
+            return localize('views.governance.details.voteOpens', { values: { time: timeString } })
+        } else {
+            return localize('actions.vote')
+        }
+    }
+
     onMount(async () => {
         await setVotingEventPayload($selectedProposal?.id)
-        await updateParticipationOverview()
         hasMounted = true
     })
 </script>
@@ -123,12 +153,6 @@
             </header-container>
             <div class="flex flex-1 flex-col justify-between">
                 <Text type={TextType.h2}>{$selectedProposal?.title}</Text>
-                <div class="flex items-center cursor-pointer">
-                    <Text fontSize="14" fontWeight={FontWeight.semibold} overrideColor classes="text-blue-500"
-                        >{localize('views.governance.details.fullProposal')}</Text
-                    >
-                    <Icon icon={IconEnum.Link} height={16} classes="ml-0.5 text-blue-500" />
-                </div>
             </div>
         </Pane>
         <Pane classes="p-6 h-fit">
@@ -140,7 +164,7 @@
                     <li>
                         <KeyValueBox
                             keyText={localize(`views.governance.details.yourVote.${counterKey}`)}
-                            valueText={votesCounter[counterKey].toString()}
+                            valueText={formatTokenAmountBestMatch(votesCounter[counterKey], metadata)}
                         />
                     </li>
                 {/each}
@@ -173,7 +197,7 @@
                 isBusy={isTransferring}
                 onClick={handleVoteClick}
             >
-                {localize('actions.vote')}
+                {voteButtonText}
             </Button>
         </buttons-container>
     </Pane>

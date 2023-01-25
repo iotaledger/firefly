@@ -1,5 +1,16 @@
-import { AliasActivity, FoundryActivity } from './activities'
-import { NftActivity } from './activities/nft-activity.type'
-import { TransactionActivity } from './activities/transaction-activity.type'
+import {
+    AliasActivity,
+    ConsolidationActivity,
+    FoundryActivity,
+    GovernanceActivity,
+    NftActivity,
+    TransactionActivity,
+} from './activities'
 
-export type Activity = TransactionActivity | AliasActivity | FoundryActivity | NftActivity
+export type Activity =
+    | TransactionActivity
+    | AliasActivity
+    | FoundryActivity
+    | NftActivity
+    | GovernanceActivity
+    | ConsolidationActivity
