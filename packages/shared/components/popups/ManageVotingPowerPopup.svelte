@@ -24,6 +24,7 @@
     let isVoting: boolean
 
     $: asset = $visibleSelectedAccountAssets?.baseCoin
+    $: votingPower = parseInt($selectedAccount?.votingPower, 10)
     $: disabled = $hasToRevote || $selectedAccount?.isTransferring
     $: amount, disabled, setConfirmDisabled()
 
@@ -87,6 +88,7 @@
             containsSlider
             disableAssetSelection
             {disabled}
+            {votingPower}
         />
         {#if isVoting}
             <TextHint warning text={localize('popups.manageVotingPower.revote')} />

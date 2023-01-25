@@ -9,7 +9,7 @@
     const asset = $visibleSelectedAccountAssets?.baseCoin
 
     $: votingPower = parseInt($selectedAccount?.votingPower, 10)
-    $: maxVotingPower = parseInt($selectedAccount?.balances?.baseCoin?.available)
+    $: maxVotingPower = parseInt($selectedAccount?.balances?.baseCoin?.available) + votingPower
     $: formattedVotingPower = formatTokenAmountBestMatch(votingPower, asset?.metadata)
     $: formattedMaxVotingPower = formatTokenAmountBestMatch(maxVotingPower, asset?.metadata)
 
