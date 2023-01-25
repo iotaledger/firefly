@@ -43,7 +43,6 @@
 
     async function handleFindBalances(): Promise<void> {
         if ($isSoftwareProfile && $isStrongholdLocked) {
-            $settingsRouter.setNeedsUnlock(true)
             $settingsRouter.setNeedsUnlock(true, handleFindBalances)
         } else {
             try {
