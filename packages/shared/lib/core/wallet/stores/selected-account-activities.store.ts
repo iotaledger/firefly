@@ -3,19 +3,18 @@ import { isValidIrc30 } from '@core/token'
 
 import { selectedAccount } from '../../account/stores/selected-account.store'
 import { Activity } from '../types/activity.type'
+import { ActivityDirection, ActivityType } from '../enums'
+import { ActivityFilter } from '../interfaces/activity-filter.interface'
+import { getAssetFromPersistedAssets, getFormattedAmountFromActivity } from '../utils'
+import { isVisibleActivity } from '../utils/isVisibleActivity'
+import { allAccountActivities } from './all-account-activities.store'
 import {
-    ActivityDirection,
-    ActivityType,
     BooleanFilterOption,
     DateFilterOption,
     InternalExternalOption,
     NumberFilterOption,
     StatusFilterOption,
-} from '../enums'
-import { ActivityFilter } from '../interfaces/filter/filter.interface'
-import { getAssetFromPersistedAssets, getFormattedAmountFromActivity } from '../utils'
-import { isVisibleActivity } from '../utils/isVisibleActivity'
-import { allAccountActivities } from './all-account-activities.store'
+} from '@core/utils/enums/filters'
 
 export const selectedAccountActivities: Readable<Activity[]> = derived(
     [selectedAccount, allAccountActivities],
