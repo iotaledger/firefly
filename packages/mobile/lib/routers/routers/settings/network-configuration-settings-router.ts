@@ -35,11 +35,30 @@ export class NetworkConfigurationSettingsRouter extends Subrouter<NetworkConfigu
                     nextRoute = NetworkConfigurationSettingsRoute.NodeDetails
                 } else if (action) {
                     switch (action) {
-                        case NetworkConfigurationSettingsAction?.AddNode:
+                        case NetworkConfigurationSettingsAction.AddNode:
                             nextRoute = NetworkConfigurationSettingsRoute.AddNode
                             break
                     }
                 }
+                break
+            case NetworkConfigurationSettingsRoute.NodeDetails:
+                if (action) {
+                    switch (action) {
+                        case NetworkConfigurationSettingsAction.EditNode:
+                            nextRoute = NetworkConfigurationSettingsRoute.EditNode
+                            break
+                        case NetworkConfigurationSettingsAction.UnsetAsPrimaryNode:
+                            nextRoute = NetworkConfigurationSettingsRoute.UnsetAsPrimaryNodeConfirmation
+                            break
+                        case NetworkConfigurationSettingsAction.ExcludeNode:
+                            nextRoute = NetworkConfigurationSettingsRoute.ExcludeNodeConfirmation
+                            break
+                        case NetworkConfigurationSettingsAction.DeleteNode:
+                            nextRoute = NetworkConfigurationSettingsRoute.DeleteNodeConfirmation
+                            break
+                    }
+                }
+                break
         }
 
         this.setNext(nextRoute)
