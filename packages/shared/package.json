@@ -36,7 +36,7 @@
         "@rollup/plugin-typescript": "^6.0.0",
         "@tsconfig/svelte": "^1.0.10",
         "@types/jest": "^27.5.1",
-        "@types/node": "^14.11.1",
+        "@types/node": "^16.4.2",
         "autoprefixer": "^10.0.2",
         "jest": "^27.5.1",
         "postcss": "^8.2.13",

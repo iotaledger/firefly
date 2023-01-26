@@ -50,6 +50,12 @@ export class NetworkConfigurationSettingsRouter extends Subrouter<NetworkConfigu
                         case NetworkConfigurationSettingsAction.UnsetAsPrimaryNode:
                             nextRoute = NetworkConfigurationSettingsRoute.UnsetAsPrimaryNodeConfirmation
                             break
+                        case NetworkConfigurationSettingsAction.ExcludeNode:
+                            nextRoute = NetworkConfigurationSettingsRoute.ExcludeNodeConfirmation
+                            break
+                        case NetworkConfigurationSettingsAction.DeleteNode:
+                            nextRoute = NetworkConfigurationSettingsRoute.DeleteNodeConfirmation
+                            break
                     }
                 }
                 break

@@ -1,8 +1,8 @@
 <script lang="typescript">
-    import type { AssetFilterUnit } from '@core/wallet/interfaces'
     import { Dropdown } from 'shared/components'
     import type { IDropdownChoice } from '@core/utils'
     import { visibleSelectedAccountAssets } from '@core/wallet'
+    import { AssetFilterUnit } from '@core/utils/interfaces/filter'
 
     export let filterUnit: AssetFilterUnit
     const { baseCoin, nativeTokens } = $visibleSelectedAccountAssets

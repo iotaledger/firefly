@@ -1,4 +1,4 @@
-import { DateUnit } from '@core/wallet/enums'
+import { DateUnit } from '@core/utils/enums/filters'
 
 export type DateFilterInput = SingleDateFilterInput | RangeDateFilterInput | UnitDateFilterInput
 

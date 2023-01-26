@@ -1,9 +1,9 @@
 <script lang="typescript">
-    import type { DateFilterUnit } from '@core/wallet/interfaces'
     import { DateInputButton, Dropdown, Icon, Text, NumberInput } from 'shared/components'
     import { localize } from '@core/i18n'
     import type { IDropdownChoice } from '@core/utils'
-    import { DateFilterOption, DateUnit } from '@core/wallet'
+    import { DateFilterUnit } from '@core/utils/interfaces/filter'
+    import { DateFilterOption, DateUnit } from '@core/utils/enums/filters'
 
     export let filterUnit: DateFilterUnit
 
