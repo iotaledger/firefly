@@ -12,9 +12,9 @@
         milestone: number
     }
 
-    const proposalDateData = getNextProposalPhaseData()
+    const proposalDateData = getNextProposalDateData()
 
-    function getNextProposalPhaseData(): IProposalDateData {
+    function getNextProposalDateData(): IProposalDateData {
         switch ($selectedProposal?.status) {
             case ProposalStatus.Upcoming:
                 return {
