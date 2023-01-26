@@ -55,7 +55,7 @@
     $: questions = votingPayload?.questions
 
     $: if (questions?.length > 0 && selectedAnswerValues?.length === 0) {
-        selectedAnswerValues = Array.from({ length: questions?.length })
+        selectedAnswerValues = Array<number>(questions?.length)
     }
     $: isVotingDisabled =
         proposalState?.status === ProposalStatus.Upcoming ||
