@@ -131,7 +131,7 @@
         )
         setTimeout(() => {
             proposalQuestions.scrollTo({ top: selectedQuestionElement?.offsetTop, behavior: 'smooth' })
-        }, 500)
+        }, 250)
     }
 
     function getVoteButtonText(): string {

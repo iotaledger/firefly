@@ -72,7 +72,7 @@
             message: localize('views.governance.proposals.successRegister'),
             alert: true,
         })
-        const proposal = await createProposalFromEvent(event)
+        const proposal = createProposalFromEvent(event)
         $selectedProposal = proposal
         $governanceRouter.goTo(GovernanceRoute.Details)
         closePopup()

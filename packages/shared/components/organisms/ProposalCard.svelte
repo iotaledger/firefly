@@ -33,7 +33,7 @@
 <proposal-card
     on:click={handleProposalClick}
     on:keydown={(e) => e.key === 'Enter' && handleProposalClick()}
-    class="flex flex-col p-6 border border-solid border-gray-200 dark:border-transparent rounded-xl cursor-pointer h-fit shadow-elevation-1 hover:shadow-inner focus:shadow-inner
+    class="flex flex-col p-6 border border-solid border-gray-200 dark:border-transparent rounded-xl cursor-pointer h-fit shadow-elevation-1 focus:shadow-inner
     {proposal.status === ProposalStatus.Ended ? 'bg-gray-100' : 'bg-white dark:bg-gray-850'}"
     tabindex="0"
 >
