@@ -1,18 +1,18 @@
 <script lang="typescript">
     import { KeyValueBox, Pane, Text } from 'shared/components'
     import { formatDate, localize } from '@core/i18n'
-    import { networkStatus } from '@core/network'
-    import { activeProfileId } from '@core/profile'
+    import { networkStatus } from '@core/network/stores'
+    import { activeProfileId } from '@core/profile/stores'
     import { DATE_FORMAT, IKeyValueBoxList, milestoneToDate, truncateString } from '@core/utils'
+    import { ProposalStatus } from '@contexts/governance/enums'
     import { proposalsState, selectedProposal } from '@contexts/governance/stores'
-    import { ProposalStatus } from '../../lib/contexts/governance'
-
-    const proposalDateData = getNextProposalPhaseData()
 
     interface IProposalDateData {
         propertyKey: 'votingOpens' | 'countingStarts' | 'countingEnds' | 'countingEnded'
         milestone: number
     }
+
+    const proposalDateData = getNextProposalPhaseData()
 
     function getNextProposalPhaseData(): IProposalDateData {
         switch ($selectedProposal?.status) {
