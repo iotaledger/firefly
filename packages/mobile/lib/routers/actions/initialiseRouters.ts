@@ -27,6 +27,8 @@ import {
     profileSetupRouter,
     SendRouter,
     sendRouter,
+    ShimmerClaimingRouter,
+    shimmerClaimingRouter,
     SettingsRouter,
     settingsRouter,
     storageProtectionSetupRouter,
@@ -80,6 +82,7 @@ function initialiseOnboardingSubrouters(): void {
     profileBackupRouter.set(new ProfileBackupRouter())
     profileRecoveryRouter.set(new ProfileRecoveryRouter())
     profileSetupRouter.set(new ProfileSetupRouter())
+    shimmerClaimingRouter.set(new ShimmerClaimingRouter())
     storageProtectionSetupRouter.set(new StorageProtectionSetupRouter())
 }
 
