@@ -28,6 +28,7 @@
     $: showMargin =
         isOpened ||
         ((votedAnswerValue || votedAnswerValue === ABSTAIN_VOTE_VALUE) && !isOpened) ||
+        ((selectedAnswerValue || selectedAnswerValue === ABSTAIN_VOTE_VALUE) && !isOpened) ||
         winnerAnswerIndex !== undefined
 
     function calculatePercentagesFromAllVotes(): void {
