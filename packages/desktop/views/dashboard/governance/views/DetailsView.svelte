@@ -61,7 +61,7 @@
         proposalState?.status === ProposalStatus.Upcoming ||
         proposalState?.status === ProposalStatus.Ended ||
         selectedAnswerValues?.length === 0 ||
-        selectedAnswerValues?.includes(undefined)
+        selectedAnswerValues?.every((selectedAnswerValue) => selectedAnswerValue === undefined)
 
     $: isTransferring = $selectedAccount?.isTransferring
     $: proposalState, (voteButtonText = getVoteButtonText())
@@ -109,9 +109,17 @@
     }
 
     function handleVoteClick(): void {
+        const activeParticipationAnswerValues = getActiveParticipation($selectedProposal?.id)?.answers
+        const chosenAnswerValues = selectedAnswerValues.map((selectedAnswerValue, idx) => {
+            if (selectedAnswerValue === undefined) {
+                return activeParticipationAnswerValues[idx]
+            } else {
+                return selectedAnswerValue
+            }
+        })
         openPopup({
             type: 'voteForProposal',
-            props: { selectedAnswerValues },
+            props: { selectedAnswerValues: chosenAnswerValues },
         })
     }
 
