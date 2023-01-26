@@ -76,7 +76,7 @@
                 (selectedAnswerValue, idx) => selectedAnswerValue !== activeParticipationAnswerValues[idx]
             )
         } else {
-            return true
+            return _selectedAnswerValues.some((selectedAnswerValue) => selectedAnswerValue !== undefined)
         }
     }
 
