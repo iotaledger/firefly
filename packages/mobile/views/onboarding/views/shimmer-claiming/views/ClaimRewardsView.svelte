@@ -174,6 +174,16 @@
     </div>
     <div slot="footer">
         <div class="flex flex-col space-y-4">
+            <Button
+                classes="w-full"
+                disabled={!shouldSearchForRewardsButtonBeEnabled}
+                outline
+                onClick={onSearchForRewardsClick}
+                isBusy={isSearchingForRewards}
+                busyMessage={localize('actions.searching')}
+            >
+                {localize(`actions.${hasSearchedForRewardsBefore ? 'searchAgain' : 'searchForRewards'}`)}
+            </Button>
             {#if shouldShowContinueButton}
                 <Button classes="w-full" disabled={isSearchingForRewards} onClick={onContinueClick}>
                     {localize('actions.continue')}
@@ -189,16 +199,6 @@
                     {localize(`actions.${hasTriedClaimingRewards ? 'rerunClaimProcess' : 'claimRewards'}`)}
                 </Button>
             {/if}
-            <Button
-                classes="w-full"
-                disabled={!shouldSearchForRewardsButtonBeEnabled}
-                outline
-                onClick={onSearchForRewardsClick}
-                isBusy={isSearchingForRewards}
-                busyMessage={localize('actions.searching')}
-            >
-                {localize(`actions.${hasSearchedForRewardsBefore ? 'searchAgain' : 'searchForRewards'}`)}
-            </Button>
         </div>
     </div>
 </OnboardingLayout>
