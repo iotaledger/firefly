@@ -31,7 +31,6 @@ export const activityFilter: Writable<ActivityFilter> = writable({
     amount: {
         type: 'number',
         active: false,
-        labelKey: 'filters.amount.label',
         localeKey: 'filters.amount',
         selected: NumberFilterOption.Equal,
         choices: Object.values(NumberFilterOption),
@@ -43,14 +42,12 @@ export const activityFilter: Writable<ActivityFilter> = writable({
     asset: {
         active: false,
         type: 'asset',
-        labelKey: 'filters.asset.label',
         localeKey: 'filters.asset',
         selected: '',
     },
     status: {
         active: false,
         type: 'selection',
-        labelKey: 'filters.status.label',
         localeKey: 'filters.status',
         selected: StatusFilterOption.Confirmed,
         choices: [
@@ -63,7 +60,6 @@ export const activityFilter: Writable<ActivityFilter> = writable({
     type: {
         active: false,
         type: 'selection',
-        labelKey: 'filters.type.label',
         localeKey: 'filters.type',
         selected: ActivityType.Basic,
         choices: [ActivityType.Basic, ActivityType.Nft, ActivityType.Foundry, ActivityType.Alias],
@@ -71,7 +67,6 @@ export const activityFilter: Writable<ActivityFilter> = writable({
     direction: {
         active: false,
         type: 'selection',
-        labelKey: 'filters.direction.label',
         localeKey: 'filters.direction',
         selected: ActivityDirection.Incoming,
         choices: [ActivityDirection.Incoming, ActivityDirection.Outgoing, ActivityDirection.SelfTransaction],
@@ -79,7 +74,6 @@ export const activityFilter: Writable<ActivityFilter> = writable({
     internalExternal: {
         active: false,
         type: 'selection',
-        labelKey: 'filters.internalExternal.label',
         localeKey: 'filters.internalExternal',
         selected: InternalExternalOption.External,
         choices: [InternalExternalOption.External, InternalExternalOption.Internal],
@@ -87,7 +81,6 @@ export const activityFilter: Writable<ActivityFilter> = writable({
     date: {
         active: false,
         type: 'date',
-        labelKey: 'filters.date.label',
         localeKey: 'filters.date',
         selected: DateFilterOption.Equals,
         choices: Object.values(DateFilterOption),
@@ -99,7 +92,6 @@ export const activityFilter: Writable<ActivityFilter> = writable({
     showRejected: {
         active: false,
         type: 'selection',
-        labelKey: 'filters.showRejected.label',
         localeKey: 'filters.showRejected',
         selected: BooleanFilterOption.Yes,
         choices: [BooleanFilterOption.Yes, BooleanFilterOption.No],
@@ -107,7 +99,6 @@ export const activityFilter: Writable<ActivityFilter> = writable({
     showHidden: {
         active: false,
         type: 'selection',
-        labelKey: 'filters.showHidden.label',
         localeKey: 'filters.showHidden',
         selected: BooleanFilterOption.Yes,
         choices: [BooleanFilterOption.Yes, BooleanFilterOption.No],
@@ -115,7 +106,6 @@ export const activityFilter: Writable<ActivityFilter> = writable({
     showValueless: {
         active: false,
         type: 'selection',
-        labelKey: 'filters.showValueless.label',
         localeKey: 'filters.showValueless',
         selected: BooleanFilterOption.Yes,
         choices: [BooleanFilterOption.Yes, BooleanFilterOption.No],

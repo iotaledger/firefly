@@ -7,7 +7,7 @@ export type FilterUnit = SelectionFilterUnit | NumberFilterUnit | AssetFilterUni
 export type BooleanFilterUnit = {
     type: 'boolean'
     active: boolean
-    labelKey: string
+    localeKey: string
 }
 
 export type SelectionFilterUnit = {
@@ -15,7 +15,7 @@ export type SelectionFilterUnit = {
     active: boolean
     choices: string[]
     selected: string
-    labelKey: string
+    labelKey?: string
     localeKey: string
 }
 
@@ -25,7 +25,7 @@ export type OrderFilterUnit = {
     choices: string[]
     ascDesc: OrderOption.Asc
     selected: string
-    labelKey: string
+    labelKey?: string
     localeKey: string
 }
 
@@ -34,7 +34,7 @@ export type DateFilterUnit = {
     active: boolean
     choices: DateFilterOption[]
     selected: DateFilterOption
-    labelKey: string
+    labelKey?: string
     localeKey: string
     subunit: DateFilterInput
 }
@@ -42,7 +42,7 @@ export type DateFilterUnit = {
 export type NumberFilterUnit = {
     type: 'number'
     active: boolean
-    labelKey: string
+    labelKey?: string
     localeKey: string
     selected: NumberFilterOption
     choices: NumberFilterOption[]
@@ -52,7 +52,7 @@ export type NumberFilterUnit = {
 export type AssetFilterUnit = {
     type: 'asset'
     active: boolean
-    labelKey: string
+    labelKey?: string
     localeKey: string
     selected: string
 }
