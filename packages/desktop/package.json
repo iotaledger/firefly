@@ -31,7 +31,7 @@
         "@sentry/electron": "^2.5.4",
         "argon2": "^0.27.1",
         "electron-log": "^4.3.1",
-        "electron-updater": "^4.3.5",
+        "electron-updater": "4.3.5",
         "keytar": "^7.9.0",
         "node-machine-id": "^1.1.12",
         "shared": "0.0.0"
@@ -39,7 +39,7 @@
     "devDependencies": {
         "@sentry/webpack-plugin": "^1.18.5",
         "@tsconfig/svelte": "^1.0.10",
-        "@types/node": "^18.7.9",
+        "@types/node": "^16.4.2",
         "copy-webpack-plugin": "^7.0.0",
         "cross-env": "^7.0.2",
         "css-loader": "^5.0.1",
