@@ -36,6 +36,7 @@ async function createProposalFromEvent(event: Event): Promise<IProposal> {
     const proposal: IProposal = {
         id,
         title: event.data.name,
+        additionalInfo: event.data.additionalInfo,
         status: status ?? ProposalStatus.Upcoming,
         milestones,
         // TODO: figure out a better way to get the node URLs

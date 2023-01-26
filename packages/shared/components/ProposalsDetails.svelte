@@ -8,10 +8,12 @@
     import {
         getNumberOfActiveProposals,
         getNumberOfVotingProposals,
-        getTotalNumberOfProposals,
+        getNumberOfVotedProposals,
+        getNumberOfTotalProposals,
     } from '@contexts/governance/utils'
 
     let details = <IProposalsDetails>{
+        totalProposals: null,
         activeProposals: null,
         votingProposals: null,
         votedProposals: null,
@@ -22,9 +24,10 @@
     function updateProposalsDetails(): void {
         if ($activeProfileId) {
             details = {
+                totalProposals: getNumberOfTotalProposals(),
                 activeProposals: getNumberOfActiveProposals(),
                 votingProposals: getNumberOfVotingProposals(),
-                votedProposals: getTotalNumberOfProposals(),
+                votedProposals: getNumberOfVotedProposals(),
             }
         }
     }

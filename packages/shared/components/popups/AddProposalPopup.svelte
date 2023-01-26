@@ -14,6 +14,7 @@
 
     let eventIdError: string
     let nodeInput: NodeInput
+    let nodeInputError: string
 
     let isBusy = false
 
@@ -40,7 +41,7 @@
                 showAppNotification({
                     type: 'error',
                     alert: true,
-                    message: localize('error.governance.unableToRegisterProposal.long', {
+                    message: localize('error.governance.unableToAddProposal.long', {
                         values: { proposalId: truncateString(eventId) },
                     }),
                 })
@@ -50,7 +51,7 @@
                     alert: true,
                     message: localize('error.node.dns'),
                 })
-            } else if (!nodeInput?.error && !eventIdError) {
+            } else if (!nodeInputError && !eventIdError) {
                 handleError(err)
             }
         }
@@ -67,7 +68,7 @@
         await registerParticipationEvent(eventId, [{ url: nodeUrl, auth }])
         showAppNotification({
             type: 'success',
-            message: localize('views.governance.proposals.successRegister'),
+            message: localize('views.governance.proposals.successAdd'),
             alert: true,
         })
         closePopup()
@@ -89,9 +90,9 @@
     }
 </script>
 
-<form id="register-proposal" on:submit|preventDefault={onSubmit}>
-    <Text type={TextType.h3} classes="mb-6">{localize('popups.registerProposal.title')}</Text>
-    <Text fontSize="15">{localize('popups.registerProposal.body')}</Text>
+<form id="add-proposal" on:submit|preventDefault={onSubmit}>
+    <Text type={TextType.h3} classes="mb-6">{localize('popups.addProposal.title')}</Text>
+    <Text fontSize="15">{localize('popups.addProposal.body')}</Text>
     <div class="flex flex-col w-full space-y-4 mt-4">
         <TextInput
             bind:value={eventId}
@@ -99,7 +100,7 @@
             placeholder={localize('views.governance.details.proposalInformation.eventId')}
             label={localize('views.governance.details.proposalInformation.eventId')}
         />
-        <NodeInput bind:this={nodeInput} bind:nodeUrl />
+        <NodeInput bind:this={nodeInput} bind:nodeUrl bind:error={nodeInputError} />
     </div>
     <div class="flex w-full space-x-4 mt-6">
         <Button outline classes="w-full" onClick={onCancelClick}>{localize('actions.cancel')}</Button>
