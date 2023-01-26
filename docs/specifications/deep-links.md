@@ -141,18 +141,18 @@ Coming :soon:
 
 ### Governance
 
-#### Register Proposal
+#### Add Proposal
 
-This operation brings the user to the register proposal popup:
+This operation brings the user to the add proposal popup:
 
 :::image
-![](../static/register-proposal-popup.png "Register proposal popup")
+![](../static/add-proposal-popup.png "Add proposal popup")
 :::
 
 The deep link structure is as follows:
 
 ```
-firefly://governance/registerProposal?eventId=<eventId>&nodeUrl=<nodeUrl>
+firefly://governance/addProposal?eventId=<eventId>&nodeUrl=<nodeUrl>
 ```
 
 The following parameters are **required**:
@@ -170,12 +170,12 @@ to manually enter the information.
 
 Example:
 
-[!button Click me!](firefly://governance/registerProposal?eventId=0x6d27606a773a3c87c151af09ad58ddc831864e2141ef598075dc24be5668ca7f7f&nodeUrl=https://api.testnet.shimmer.network)
+[!button Click me!](firefly://governance/addProposal?eventId=0x6d27606a773a3c87c151af09ad58ddc831864e2141ef598075dc24be5668ca7f7f&nodeUrl=https://api.testnet.shimmer.network)
 
 Source:
 
 ```
-firefly://governance/registerProposal?eventId=0x6d27606a773a3c87c151af09ad58ddc831864e2141ef598075dc24be5668ca7f7f&nodeUrl=https://api.testnet.shimmer.network
+firefly://governance/addProposal?eventId=0x6d27606a773a3c87c151af09ad58ddc831864e2141ef598075dc24be5668ca7f7f&nodeUrl=https://api.testnet.shimmer.network
 ```
 
 <style>

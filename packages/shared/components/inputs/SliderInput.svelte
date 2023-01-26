@@ -147,7 +147,7 @@
     on:resize={resizeWindow}
 />
 
-<slider-input class="range">
+<slider-input class="range" class:cursor-pointer={!disabled}>
     <range-wrapper
         class="range__wrapper"
         tabindex="0"
@@ -170,6 +170,7 @@
                 class="range__thumb
                 {disabled ? 'bg-gray-400' : 'bg-blue-500'}"
                 class:range__thumb--holding={holding}
+                class:cursor-pointer={!disabled}
                 bind:this={thumb}
                 on:touchstart={onDragStart}
                 on:mousedown={onDragStart}
@@ -199,7 +200,6 @@
         @apply block;
         @apply relative;
         @apply flex-1;
-        @apply cursor-pointer;
     }
 
     .range__wrapper {
@@ -235,7 +235,6 @@
         @apply flex;
         @apply items-center;
         @apply justify-center;
-        @apply cursor-pointer;
         @apply select-none;
         @apply rounded-full;
         @apply -mt-2;

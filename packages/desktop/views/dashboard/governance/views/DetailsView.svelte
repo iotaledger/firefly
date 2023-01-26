@@ -4,6 +4,7 @@
     import { localize } from '@core/i18n'
     import {
         Button,
+        FontWeight,
         KeyValueBox,
         Pane,
         ProposalDetailsButton,
@@ -39,6 +40,7 @@
     let totalVotes = 0
     let hasMounted = false
     let voteButtonText = localize('actions.vote')
+    let proposalQuestions: HTMLElement
 
     $: $selectedAccountIndex, void updateParticipationOverview()
     $: $selectedAccountIndex, (selectedAnswerValues = [])
@@ -97,7 +99,7 @@
         }
     }
 
-    let openedQuestionIndex = null
+    let openedQuestionIndex = 0
 
     function handleQuestionClick(event: CustomEvent): void {
         const { questionIndex } = event.detail
@@ -122,6 +124,14 @@
         } else {
             selectedAnswerValues[questionIndex] = answerValue
         }
+
+        openedQuestionIndex = selectedAnswerValues.length === questionIndex + 1 ? null : questionIndex + 1
+        const selectedQuestionElement: HTMLElement = proposalQuestions?.querySelector(
+            'proposal-question:nth-child(' + (openedQuestionIndex + 1) + ')'
+        )
+        setTimeout(() => {
+            proposalQuestions.scrollTo({ top: selectedQuestionElement?.offsetTop, behavior: 'smooth' })
+        }, 250)
     }
 
     function getVoteButtonText(): string {
@@ -146,13 +156,21 @@
 
 <div class="w-full h-full flex flex-nowrap p-8 relative flex-1 space-x-4 bg-gray-50 dark:bg-gray-900">
     <div class="w-2/5 flex flex-col space-y-4">
-        <Pane classes="p-6 flex flex-col flex-1">
+        <Pane classes="p-6 flex flex-col h-fit">
             <header-container class="flex justify-between items-center mb-4">
                 <ProposalStatusPill status={$selectedProposal?.status} />
                 <ProposalDetailsButton />
             </header-container>
             <div class="flex flex-1 flex-col justify-between">
                 <Text type={TextType.h2}>{$selectedProposal?.title}</Text>
+                {#if $selectedProposal?.additionalInfo}
+                    <Text
+                        type={TextType.h5}
+                        overrideColor
+                        classes="text-gray-600 mt-4 max-h-40 overflow-hidden"
+                        fontWeight={FontWeight.medium}>{$selectedProposal?.additionalInfo}</Text
+                    >
+                {/if}
             </div>
         </Pane>
         <Pane classes="p-6 h-fit">
@@ -172,8 +190,11 @@
         </Pane>
         <ProposalInformation />
     </div>
-    <Pane classes="w-3/5 h-full p-6 flex flex-col justify-between ">
-        <proposal-questions class="flex flex-1 flex-col space-y-5 overflow-y-scroll">
+    <Pane classes="w-3/5 h-full p-6 pr-3 flex flex-col justify-between ">
+        <proposal-questions
+            class="relative flex flex-1 flex-col space-y-5 overflow-y-scroll pr-3"
+            bind:this={proposalQuestions}
+        >
             {#if questions}
                 {#each questions as question, questionIndex}
                     <ProposalQuestion
