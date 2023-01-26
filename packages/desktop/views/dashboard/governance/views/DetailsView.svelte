@@ -25,7 +25,7 @@
         selectedProposal,
         updateParticipationOverview,
     } from '@contexts/governance/stores'
-    import { calculateWeightedVotes } from '@contexts/governance/utils'
+    import { calculateWeightedVotes, getActiveParticipation } from '@contexts/governance/utils'
     import { getBestTimeDuration, milestoneToDate } from '@core/utils'
     import { networkStatus } from '@core/network/stores'
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
@@ -55,7 +55,7 @@
     $: questions = votingPayload?.questions
 
     $: if (questions?.length > 0 && selectedAnswerValues?.length === 0) {
-        selectedAnswerValues = Array<number>(questions?.length)
+        selectedAnswerValues = Array.from({ length: questions?.length })
     }
     $: isVotingDisabled =
         proposalState?.status === ProposalStatus.Upcoming ||
@@ -117,10 +117,17 @@
 
     function handleAnswerClick(event: CustomEvent): void {
         const { answerValue, questionIndex } = event.detail
-        if (selectedAnswerValues[questionIndex] === answerValue) {
-            selectedAnswerValues[questionIndex] = null
+
+        const activeParticipation = getActiveParticipation($selectedProposal?.id)
+        const hasSelectedVotedAnswer = activeParticipation?.answers[questionIndex] === answerValue
+        if (hasSelectedVotedAnswer) {
+            selectedAnswerValues[questionIndex] = undefined
         } else {
-            selectedAnswerValues[questionIndex] = answerValue
+            if (selectedAnswerValues[questionIndex] === answerValue) {
+                selectedAnswerValues[questionIndex] = undefined
+            } else {
+                selectedAnswerValues[questionIndex] = answerValue
+            }
         }
     }
 
