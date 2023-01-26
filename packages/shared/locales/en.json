@@ -1571,6 +1571,19 @@
             "incoming": "Incoming",
             "outgoing": "Outgoing",
             "selfTransaction": "Self transaction"
+        },
+        "proposalType": {
+            "label": "Type",
+            "official": "Official",
+            "custom": "Custom"
+        },
+        "phase": {
+            "label": "Phase"
+        },
+        "participated": {
+            "label": "Participated",
+            "yes": "Yes",
+            "no": "No"
         }
     },
     "dates": {

@@ -5,4 +5,5 @@ export enum NetworkConfigurationSettingsRoute {
     EditNode = 'editNode',
     DeleteNodeConfirmation = 'deleteNodeConfirmation',
     ExcludeNodeConfirmation = 'excludeNodeConfirmation',
+    UnsetAsPrimaryNodeConfirmation = 'unsetAsPrimaryNodeConfirmation',
 }

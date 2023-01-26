@@ -9,6 +9,7 @@
 
     // Text Props
     export let type = TextType.p
+    export let inputType: 'text' | 'number' = 'text'
     export let fontWeight: FontWeight = FontWeight.normal
     export let fontSize = 'sm'
     export let lineHeight = '140'
@@ -18,7 +19,7 @@
     $: textProps = { type, fontSize, lineHeight, fontWeight }
 </script>
 
-<Input bind:inputElement bind:value bind:hasFocus bind:error type="text" {textProps} {alignment} {...$$restProps}>
+<Input bind:inputElement bind:value bind:hasFocus bind:error type={inputType} {textProps} {alignment} {...$$restProps}>
     <slot name="left" slot="left" />
     <slot name="right" slot="right" />
     <slot name="right-full-h" slot="right-full-h" />

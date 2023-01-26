@@ -127,6 +127,7 @@
                     clearBackground
                     clearPadding
                     clearBorder
+                    inputType="number"
                 />
                 <p class="font-600 text-gray-800 dark:text-white text-24 leading-140">{unit}</p>
             </div>
