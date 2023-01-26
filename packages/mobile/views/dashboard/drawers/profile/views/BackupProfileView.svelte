@@ -1,5 +1,4 @@
 <script lang="typescript">
-    import { showAppNotification } from '@auxiliary/notification'
     import { exportStronghold } from '@contexts/settings'
     import { localize } from '@core/i18n'
     import { diffDates } from '@core/utils'
@@ -26,37 +25,20 @@
 
     function handleExportClick(): void {
         isBusy = false
-        message = ''
         const handleExport = (password: string) => {
             isBusy = true
             message = localize('general.exportingStronghold')
-            exportStronghold(password, handleExportStrongholdResponse)
+            exportStronghold(password, handleExportStronghold)
         }
         $profileRouter.setNeedsUnlock(true, handleExport, true)
     }
-
-    function handleExportStrongholdResponse(cancelled, error): void {
-        setTimeout(
-            () => {
-                message = ''
-            },
-            cancelled ? 0 : 5000
-        )
-        isBusy = false
-        if (!cancelled) {
-            if (error) {
-                message = localize('general.exportingStrongholdFailed')
-                showAppNotification({
-                    type: 'error',
-                    message: localize(error),
-                })
-            } else {
-                message = localize('general.exportingStrongholdSuccess')
-                showAppNotification({
-                    type: 'info',
-                    message: localize('general.exportingStrongholdSuccess'),
-                })
-            }
+    function handleExportStronghold(cancelled, error) {
+        $profileRouter.handleExportResult(cancelled, error)
+        if (error) {
+            message = localize('general.exportingStrongholdFailed')
+            isBusy = false
+        } else {
+            message = ''
         }
     }
 </script>
@@ -69,7 +51,7 @@
             <Text type={TextType.p} secondary>{localize('popups.backupStronghold.body')}</Text>
         </div>
     </div>
-    <Button classes="w-full" disabled={isBusy} {isBusy} onClick={handleExportClick}>
+    <Button classes="w-full" disabled={isBusy} busyMessage={message} {isBusy} onClick={handleExportClick}>
         {localize('actions.saveBackup')}
     </Button>
 </div>

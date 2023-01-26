@@ -1,5 +1,7 @@
 import { get, writable, Writable } from 'svelte/store'
 
+import { showAppNotification } from '@auxiliary/notification'
+import { localize } from '@core/i18n'
 import { Subrouter } from '@core/router'
 
 import { ProfileRoute } from '../../enums'
@@ -39,7 +41,6 @@ export class ProfileRouter extends Subrouter<ProfileRoute> {
 
         this.setNext(nextRoute)
     }
-
     closeDrawer(): void {
         get(dashboardRouter).previous()
         resetRouterWithDrawerDelay(get(profileRouter))
@@ -81,5 +82,21 @@ export class ProfileRouter extends Subrouter<ProfileRoute> {
         needsUnlockStore.set(false)
         needsUnlockStoreCallbackStore.set(undefined)
         returnPasswordUnlockCallbackStore.set(false)
+    }
+    handleExportResult(cancelled: boolean, error: boolean): void {
+        if (!cancelled) {
+            if (error) {
+                showAppNotification({
+                    type: 'error',
+                    message: localize(error),
+                })
+            } else {
+                showAppNotification({
+                    type: 'info',
+                    message: localize('general.exportingStrongholdSuccess'),
+                })
+                this.previous()
+            }
+        }
     }
 }
