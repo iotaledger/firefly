@@ -37,7 +37,7 @@
     import NodeAuthRequiredPopup from './NodeAuthRequiredPopup.svelte'
     import NodeInfoPopup from './NodeInfoPopup.svelte'
     import ReceiveAddressPopup from './ReceiveAddressPopup.svelte'
-    import RegisterProposalPopup from './RegisterProposalPopup.svelte'
+    import AddProposalPopup from './AddProposalPopup.svelte'
     import RemoveProposalPopup from './RemoveProposalPopup.svelte'
     import RemoveNode from './RemoveNode.svelte'
     import RevotePopup from './RevotePopup.svelte'
@@ -121,7 +121,7 @@
         nodeAuthRequired: NodeAuthRequiredPopup,
         nodeInfo: NodeInfoPopup,
         receiveAddress: ReceiveAddressPopup,
-        registerProposal: RegisterProposalPopup,
+        addProposal: AddProposalPopup,
         removeNode: RemoveNode,
         removeProposal: RemoveProposalPopup,
         revote: RevotePopup,

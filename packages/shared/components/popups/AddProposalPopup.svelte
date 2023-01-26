@@ -8,6 +8,8 @@
     import { showAppNotification } from '@auxiliary/notification/actions'
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
     import { truncateString } from '@core/utils/string'
+    import { createProposalFromEvent, selectedProposal } from '@contexts/governance'
+    import { GovernanceRoute, governanceRouter } from '@core/router'
 
     export let eventId: string
     export let nodeUrl: string
@@ -40,7 +42,7 @@
                 showAppNotification({
                     type: 'error',
                     alert: true,
-                    message: localize('error.governance.unableToRegisterProposal.long', {
+                    message: localize('error.governance.unableToAddProposal.long', {
                         values: { proposalId: truncateString(eventId) },
                     }),
                 })
@@ -64,12 +66,15 @@
     }
 
     async function registerParticipationWrapper(auth?: Auth): Promise<void> {
-        await registerParticipationEvent(eventId, [{ url: nodeUrl, auth }])
+        const event = await registerParticipationEvent(eventId, [{ url: nodeUrl, auth }])
         showAppNotification({
             type: 'success',
             message: localize('views.governance.proposals.successRegister'),
             alert: true,
         })
+        const proposal = createProposalFromEvent(event)
+        $selectedProposal = proposal
+        $governanceRouter.goTo(GovernanceRoute.Details)
         closePopup()
     }
 
@@ -89,9 +94,9 @@
     }
 </script>
 
-<form id="register-proposal" on:submit|preventDefault={onSubmit}>
-    <Text type={TextType.h3} classes="mb-6">{localize('popups.registerProposal.title')}</Text>
-    <Text fontSize="15">{localize('popups.registerProposal.body')}</Text>
+<form id="add-proposal" on:submit|preventDefault={onSubmit}>
+    <Text type={TextType.h3} classes="mb-6">{localize('popups.addProposal.title')}</Text>
+    <Text fontSize="15">{localize('popups.addProposal.body')}</Text>
     <div class="flex flex-col w-full space-y-4 mt-4">
         <TextInput
             bind:value={eventId}
