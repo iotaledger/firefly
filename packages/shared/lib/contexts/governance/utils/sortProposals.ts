@@ -14,9 +14,6 @@ export function sortProposals(proposals: IProposal[], filter: ProposalFilter): I
             case ProposalOrderOption.Phase:
                 orderFunction = sortByPhase
                 break
-            case ProposalOrderOption.Date:
-                orderFunction = sortByDate
-                break
         }
         isAscending = filter.order.ascDesc === OrderOption.Asc
     }
@@ -36,9 +33,4 @@ function sortByPhase(proposal1: IProposal, proposal2: IProposal, asc: boolean): 
         [ProposalStatus.Ended]: 3,
     }
     return phaseOrdering[proposal1.status] > phaseOrdering[proposal2.status] ? (asc ? 1 : -1) : asc ? -1 : 1
-}
-
-// TODO: Define what `date` means
-function sortByDate(proposal1: IProposal, proposal2: IProposal, asc: boolean): number {
-    return proposal1.title.toLowerCase() > proposal2.title.toLowerCase() ? (asc ? 1 : -1) : asc ? -1 : 1
 }
