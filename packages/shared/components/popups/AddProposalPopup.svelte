@@ -8,14 +8,13 @@
     import { showAppNotification } from '@auxiliary/notification/actions'
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
     import { truncateString } from '@core/utils/string'
-    import { createProposalFromEvent, selectedProposal } from '@contexts/governance'
-    import { GovernanceRoute, governanceRouter } from '@core/router'
 
     export let eventId: string
     export let nodeUrl: string
 
     let eventIdError: string
     let nodeInput: NodeInput
+    let nodeInputError: string
 
     let isBusy = false
 
@@ -52,7 +51,7 @@
                     alert: true,
                     message: localize('error.node.dns'),
                 })
-            } else if (!nodeInput?.error && !eventIdError) {
+            } else if (!nodeInputError && !eventIdError) {
                 handleError(err)
             }
         }
@@ -66,15 +65,12 @@
     }
 
     async function registerParticipationWrapper(auth?: Auth): Promise<void> {
-        const event = await registerParticipationEvent(eventId, [{ url: nodeUrl, auth }])
+        await registerParticipationEvent(eventId, [{ url: nodeUrl, auth }])
         showAppNotification({
             type: 'success',
-            message: localize('views.governance.proposals.successRegister'),
+            message: localize('views.governance.proposals.successAdd'),
             alert: true,
         })
-        const proposal = createProposalFromEvent(event)
-        $selectedProposal = proposal
-        $governanceRouter.goTo(GovernanceRoute.Details)
         closePopup()
     }
 
@@ -104,7 +100,7 @@
             placeholder={localize('views.governance.details.proposalInformation.eventId')}
             label={localize('views.governance.details.proposalInformation.eventId')}
         />
-        <NodeInput bind:this={nodeInput} bind:nodeUrl />
+        <NodeInput bind:this={nodeInput} bind:nodeUrl bind:error={nodeInputError} />
     </div>
     <div class="flex w-full space-x-4 mt-6">
         <Button outline classes="w-full" onClick={onCancelClick}>{localize('actions.cancel')}</Button>
