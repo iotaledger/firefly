@@ -88,7 +88,7 @@ export class ProfileRouter extends Subrouter<ProfileRoute> {
             if (error) {
                 showAppNotification({
                     type: 'error',
-                    message: localize(error),
+                    message: localize('general.exportingStrongholdFailed'),
                 })
             } else {
                 showAppNotification({
