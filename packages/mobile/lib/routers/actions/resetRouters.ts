@@ -15,6 +15,7 @@ import {
     profileRouter,
     profileSetupRouter,
     sendRouter,
+    shimmerClaimingRouter,
     settingsRouter,
     storageProtectionSetupRouter,
     strongholdSetupRouter,
@@ -46,6 +47,7 @@ function resetOnboardingSubrouters(): void {
     get(profileBackupRouter).reset()
     get(profileRecoveryRouter).reset()
     get(profileSetupRouter).reset()
+    get(shimmerClaimingRouter).reset()
     get(storageProtectionSetupRouter).reset()
 }
 

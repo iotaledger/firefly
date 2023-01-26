@@ -6,9 +6,9 @@
 
     export let modal: Modal = undefined
 
-    function handleRegister(): void {
+    function handleAddProposal(): void {
         openPopup({
-            type: 'registerProposal',
+            type: 'addProposal',
         })
     }
 </script>
@@ -18,8 +18,8 @@
         <MenuItem
             icon={Icon.Plus}
             iconProps={{ width: '14', height: '14' }}
-            title={localize('actions.registerProposal')}
-            onClick={handleRegister}
+            title={localize('actions.addProposal')}
+            onClick={handleAddProposal}
         />
     </div>
 </Modal>
