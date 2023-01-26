@@ -7,7 +7,7 @@ const features = {
         profileActions: {
             enabled: true,
             backupProfile: {
-                enabled: false,
+                enabled: true,
             },
             networkStatus: {
                 enabled: true,

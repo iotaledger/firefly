@@ -11,7 +11,8 @@ export const profileRoute = writable<ProfileRoute>(null)
 export const profileRouter = writable<ProfileRouter>(null)
 
 const needsUnlockStore = writable<boolean>(false)
-const needsUnlockStoreCallbackStore = writable<(() => unknown) | undefined>(() => {})
+const needsUnlockStoreCallbackStore = writable<((password?: string) => unknown) | undefined>(() => {})
+const returnPasswordUnlockCallbackStore = writable<boolean>(false)
 
 export class ProfileRouter extends Subrouter<ProfileRoute> {
     constructor() {
@@ -50,6 +51,7 @@ export class ProfileRouter extends Subrouter<ProfileRoute> {
                 callback()
             }
             needsUnlockStore.set(false)
+            returnPasswordUnlockCallbackStore.set(false)
         } else {
             super.previous()
         }
@@ -57,11 +59,19 @@ export class ProfileRouter extends Subrouter<ProfileRoute> {
     getNeedsUnlockStore(): Writable<boolean> {
         return needsUnlockStore
     }
-    getNeedsUnlockCallbackStore(): Writable<(() => unknown) | undefined> {
+    getNeedsUnlockCallbackStore(): Writable<((password?: string) => unknown) | undefined> {
         return needsUnlockStoreCallbackStore
     }
-    setNeedsUnlock(value: boolean, callback: (() => unknown) | undefined = undefined): void {
+    getReturnPasswordUnlockCallbackStore(): Writable<boolean> {
+        return returnPasswordUnlockCallbackStore
+    }
+    setNeedsUnlock(
+        value: boolean,
+        callback: ((password?: string) => unknown) | undefined = undefined,
+        returnPassword: boolean = false
+    ): void {
         needsUnlockStore.set(value)
+        returnPasswordUnlockCallbackStore.set(returnPassword)
         if (callback) {
             needsUnlockStoreCallbackStore.set(callback)
         }
@@ -70,5 +80,6 @@ export class ProfileRouter extends Subrouter<ProfileRoute> {
         super.reset()
         needsUnlockStore.set(false)
         needsUnlockStoreCallbackStore.set(undefined)
+        returnPasswordUnlockCallbackStore.set(false)
     }
 }
