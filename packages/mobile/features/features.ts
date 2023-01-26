@@ -91,7 +91,7 @@ const features = {
         security: {
             enabled: true,
             exportStronghold: {
-                enabled: false,
+                enabled: true,
             },
             appLock: {
                 enabled: true,
