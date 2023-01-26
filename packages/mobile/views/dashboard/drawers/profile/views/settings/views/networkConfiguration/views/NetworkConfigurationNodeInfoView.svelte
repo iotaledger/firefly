@@ -1,11 +1,21 @@
 <script lang="typescript">
     import { showAppNotification } from '@auxiliary/notification'
     import { localize } from '@core/i18n'
-    import { INode, INodeInfo } from '@core/network'
+    import { getOfficialNodes, INode, INodeInfo } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { getNodeInfo } from '@core/profile-manager'
     import { resolveObjectPath, setClipboard } from '@core/utils'
-    import { Button, Checkbox, CopyableBox, FontWeight, Spinner, Text, TextType } from 'shared/components'
+    import {
+        Button,
+        ButtonVariant,
+        Checkbox,
+        CopyableBox,
+        FontWeight,
+        HR,
+        Spinner,
+        Text,
+        TextType,
+    } from 'shared/components'
     import { onMount } from 'svelte'
 
     enum NodeInfoTab {
@@ -18,6 +28,8 @@
     export let node: INode = { url: '' }
     export let onEditClick: () => void
     export let onTogglePrimaryClick: () => void
+    export let onToggleDisabledClick: () => void
+    export let onRemoveClick: () => void
 
     const NODE_INFO_LOCALE_BASE_PATH = 'popups.node.info'
     const NODE_INFO_TAB_MAP: Readonly<
@@ -68,6 +80,11 @@
     }
 
     $: isPrimary = $activeProfile?.clientOptions?.primaryNode?.url === node.url
+    $: isOfficialNode = getOfficialNodes($activeProfile?.networkProtocol, $activeProfile?.networkType).some(
+        (n) => n.url === node?.url
+    )
+    $: allowDisableOrRemove =
+        node?.disabled || $activeProfile?.clientOptions?.nodes?.filter((node) => !node.disabled)?.length > 1
 
     let nodeInfo: INodeInfo
     let nodeInfoTab: NodeInfoTab = NodeInfoTab.General
@@ -164,8 +181,6 @@
         {#if nodeInfo && nodeInfoTab}
             <Button
                 busyMessage={localize('popups.node.loadingNodeInfo')}
-                isBusy={!nodeInfo || !nodeInfoTab}
-                disabled={!nodeInfo}
                 classes="w-full"
                 outline
                 onClick={handleCopyAllInformationClick}
@@ -173,11 +188,24 @@
                 {localize('actions.copyAllInformation')}
             </Button>
         {/if}
-        <Button disabled={node?.disabled} classes="w-full" outline onClick={onTogglePrimaryClick}>
-            {localize(`views.settings.configureNodeList.${isPrimary ? 'unsetAsPrimary' : 'setAsPrimary'}`)}
-        </Button>
-        <Button classes="w-full" outline onClick={onEditClick}>
-            {localize('views.settings.configureNodeList.editDetails')}
-        </Button>
+        {#if !isOfficialNode}
+            <Button classes="w-full" outline onClick={onEditClick}>
+                {localize('views.settings.configureNodeList.editDetails')}
+            </Button>
+        {/if}
+        {#if !node?.disabled}
+            <Button classes="w-full" outline onClick={onTogglePrimaryClick}>
+                {localize(`views.settings.configureNodeList.${isPrimary ? 'unsetAsPrimary' : 'setAsPrimary'}`)}
+            </Button>
+        {/if}
+        {#if allowDisableOrRemove}
+            <Button classes="w-full" outline onClick={onToggleDisabledClick}>
+                {localize(`views.settings.configureNodeList.${node.disabled ? 'include' : 'exclude'}Node`)}
+            </Button>
+            <HR />
+            <Button classes="w-full" variant={ButtonVariant.Warning} outline onClick={onRemoveClick}>
+                {localize('views.settings.configureNodeList.removeNode')}
+            </Button>
+        {/if}
     </div>
 </div>

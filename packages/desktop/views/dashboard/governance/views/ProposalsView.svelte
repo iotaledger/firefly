@@ -47,9 +47,6 @@
                     <Text fontSize="text-14" fontWeight={FontWeight.semibold} color="gray-500" classes="mt-8"
                         >{localize('views.governance.proposals.emptyTitle')}</Text
                     >
-                    <Text fontSize="text-14" color="gray-500"
-                        >{localize('views.governance.proposals.emptyDescription')}</Text
-                    >
                     <Button onClick={handleAddProposal} classes="mt-8">{localize('actions.addProposal')}</Button>
                 </div>
             {/if}
