@@ -55,16 +55,30 @@
     $: questions = votingPayload?.questions
 
     $: if (questions?.length > 0 && selectedAnswerValues?.length === 0) {
-        selectedAnswerValues = Array<number>(questions?.length)
+        selectedAnswerValues =
+            getActiveParticipation($selectedProposal?.id)?.answers ?? Array<number>(questions?.length)
     }
+
     $: isVotingDisabled =
         proposalState?.status === ProposalStatus.Upcoming ||
         proposalState?.status === ProposalStatus.Ended ||
         selectedAnswerValues?.length === 0 ||
-        selectedAnswerValues?.every((selectedAnswerValue) => selectedAnswerValue === undefined)
+        selectedAnswerValues?.includes(undefined) ||
+        !hasChangedAnswers(selectedAnswerValues)
 
     $: isTransferring = $selectedAccount?.isTransferring
     $: proposalState, (voteButtonText = getVoteButtonText())
+
+    function hasChangedAnswers(_selectedAnswerValues: number[]): boolean {
+        const activeParticipationAnswerValues = getActiveParticipation($selectedProposal?.id)?.answers
+        if (activeParticipationAnswerValues) {
+            return _selectedAnswerValues.some(
+                (selectedAnswerValue, idx) => selectedAnswerValue !== activeParticipationAnswerValues[idx]
+            )
+        } else {
+            return true
+        }
+    }
 
     async function setVotingEventPayload(eventId: string): Promise<void> {
         const event = await getVotingEvent(eventId)
@@ -109,34 +123,15 @@
     }
 
     function handleVoteClick(): void {
-        const activeParticipationAnswerValues = getActiveParticipation($selectedProposal?.id)?.answers
-        const chosenAnswerValues = selectedAnswerValues.map((selectedAnswerValue, idx) => {
-            if (selectedAnswerValue === undefined) {
-                return activeParticipationAnswerValues[idx]
-            } else {
-                return selectedAnswerValue
-            }
-        })
         openPopup({
             type: 'voteForProposal',
-            props: { selectedAnswerValues: chosenAnswerValues },
+            props: { selectedAnswerValues },
         })
     }
 
     function handleAnswerClick(event: CustomEvent): void {
         const { answerValue, questionIndex } = event.detail
-
-        const activeParticipation = getActiveParticipation($selectedProposal?.id)
-        const hasSelectedVotedAnswer = activeParticipation?.answers[questionIndex] === answerValue
-        if (hasSelectedVotedAnswer) {
-            selectedAnswerValues[questionIndex] = undefined
-        } else {
-            if (selectedAnswerValues[questionIndex] === answerValue) {
-                selectedAnswerValues[questionIndex] = undefined
-            } else {
-                selectedAnswerValues[questionIndex] = answerValue
-            }
-        }
+        selectedAnswerValues[questionIndex] = answerValue
     }
 
     function getVoteButtonText(): string {
