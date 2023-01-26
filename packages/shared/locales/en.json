@@ -601,7 +601,10 @@
                 },
                 "proposalInformation": {
                     "title": "Proposal information",
+                    "votingOpens": "Voting opens on",
+                    "countingStarts": "Counting starts on",
                     "countingEnds": "Counting ends on",
+                    "countingEnded": "Counting ended on",
                     "eventId": "Event ID",
                     "nodeUrl": "Node URL"
                 },
