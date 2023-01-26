@@ -36,10 +36,10 @@
         $profileRouter.handleExportResult(cancelled, error)
         if (error) {
             message = localize('general.exportingStrongholdFailed')
-            isBusy = false
         } else {
             message = ''
         }
+        isBusy = false
     }
 </script>
 
