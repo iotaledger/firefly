@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/firefly">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.728060613700">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.728068293960">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -34,11 +34,11 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/firefly/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../static/icon_firefly.png" rel="icon" />
-    <link href="../../resources/css/retype.css?v=2.4.0.728060613700" rel="stylesheet" />
+    <link href="../../resources/css/retype.css?v=2.4.0.728068293960" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.728060613700" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.728068293960" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.728060613700" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.728068293960" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -470,22 +470,22 @@ confirmation on behalf of the user.</p>
         <span>Governance</span>
     </h3>
 </doc-anchor-target>
-<doc-anchor-target id="register-proposal">
+<doc-anchor-target id="add-proposal">
     <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#register-proposal">#</doc-anchor-trigger>
-        <span>Register Proposal</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#add-proposal">#</doc-anchor-trigger>
+        <span>Add Proposal</span>
     </h4>
 </doc-anchor-target>
-<p>This operation brings the user to the register proposal popup:</p>
+<p>This operation brings the user to the add proposal popup:</p>
 <div class="image"><p><figure class="content-center">
-    <img src="../../static/register-proposal-popup.png" alt="" title="Register proposal popup" />
+    <img src="../../static/add-proposal-popup.png" alt="" title="Add proposal popup" />
     <figcaption class="caption"></figcaption>
 </figure>
 </p>
 </div>
 <p>The deep link structure is as follows:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">firefly://governance/registerProposal?eventId=&lt;eventId&gt;&amp;nodeUrl=&lt;nodeUrl&gt;</code></pre>
+<pre class="language-none"><code v-pre class="language-none">firefly://governance/addProposal?eventId=&lt;eventId&gt;&amp;nodeUrl=&lt;nodeUrl&gt;</code></pre>
 </doc-codeblock></div>
 <p>The following parameters are <strong>required</strong>:</p>
 <ul>
@@ -515,12 +515,12 @@ to manually enter the information.</p>
     </div>
 </div>
 <p>Example:</p>
-<p><a href="firefly://governance/registerProposal?eventId=0x6d27606a773a3c87c151af09ad58ddc831864e2141ef598075dc24be5668ca7f7f&amp;nodeUrl=https://api.testnet.shimmer.network" class="no-link inline-flex items-center font-medium cursor-pointer transition-colors duration-200 ease-out focus:outline-none bg-blue-500 hover:bg-blue-700 text-white px-4 h-10 text-sm rounded-md">
+<p><a href="firefly://governance/addProposal?eventId=0x6d27606a773a3c87c151af09ad58ddc831864e2141ef598075dc24be5668ca7f7f&amp;nodeUrl=https://api.testnet.shimmer.network" class="no-link inline-flex items-center font-medium cursor-pointer transition-colors duration-200 ease-out focus:outline-none bg-blue-500 hover:bg-blue-700 text-white px-4 h-10 text-sm rounded-md">
     <span>Click me!</span>
 </a></p>
 <p>Source:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">firefly://governance/registerProposal?eventId=0x6d27606a773a3c87c151af09ad58ddc831864e2141ef598075dc24be5668ca7f7f&amp;nodeUrl=https://api.testnet.shimmer.network</code></pre>
+<pre class="language-none"><code v-pre class="language-none">firefly://governance/addProposal?eventId=0x6d27606a773a3c87c151af09ad58ddc831864e2141ef598075dc24be5668ca7f7f&amp;nodeUrl=https://api.testnet.shimmer.network</code></pre>
 </doc-codeblock></div>
 <style>
   .image {
