@@ -1,4 +1,4 @@
-import { NumberFilterOption, DateFilterOption, OrderOption } from '../../enums'
+import { DateFilterOption, NumberFilterOption, OrderOption } from '@core/utils/enums/filters'
 import { DateFilterInput } from './date-filter-input.interface'
 import { NumberFilterInput } from './number-filter-input.interface'
 
@@ -15,6 +15,7 @@ export type SelectionFilterUnit = {
     active: boolean
     choices: string[]
     selected: string
+    labelKey?: string
     localeKey: string
 }
 
@@ -24,6 +25,7 @@ export type OrderFilterUnit = {
     choices: string[]
     ascDesc: OrderOption.Asc
     selected: string
+    labelKey?: string
     localeKey: string
 }
 
@@ -32,6 +34,7 @@ export type DateFilterUnit = {
     active: boolean
     choices: DateFilterOption[]
     selected: DateFilterOption
+    labelKey?: string
     localeKey: string
     subunit: DateFilterInput
 }
@@ -39,6 +42,7 @@ export type DateFilterUnit = {
 export type NumberFilterUnit = {
     type: 'number'
     active: boolean
+    labelKey?: string
     localeKey: string
     selected: NumberFilterOption
     choices: NumberFilterOption[]
@@ -48,6 +52,7 @@ export type NumberFilterUnit = {
 export type AssetFilterUnit = {
     type: 'asset'
     active: boolean
+    labelKey?: string
     localeKey: string
     selected: string
 }
