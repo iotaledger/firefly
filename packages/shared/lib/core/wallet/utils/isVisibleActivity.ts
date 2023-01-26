@@ -2,21 +2,19 @@ import { get } from 'svelte/store'
 import { Activity } from '../types'
 import { activityFilter } from '../stores'
 import { getAssetFromPersistedAssets } from './getAssetFromPersistedAssets'
-import {
-    ActivityAsyncStatus,
-    BooleanFilterOption,
-    NumberFilterOption,
-    InclusionState,
-    StatusFilterOption,
-    ActivityType,
-    DateFilterOption,
-    DateUnit,
-    InternalExternalOption,
-} from '../enums'
+import { ActivityAsyncStatus, InclusionState, ActivityType } from '../enums'
 import { dateIsAfterOtherDate, dateIsBeforeOtherDate, datesOnSameDay } from '@core/utils'
 import { ActivityFilter } from '../interfaces'
 import { convertToRawAmount } from '.'
 import Big from 'big.js'
+import {
+    BooleanFilterOption,
+    DateFilterOption,
+    DateUnit,
+    InternalExternalOption,
+    NumberFilterOption,
+    StatusFilterOption,
+} from '@core/utils/enums/filters'
 
 // Filters activities based on activity properties. If none of the conditionals are valid, then activity is shown.
 export function isVisibleActivity(activity: Activity): boolean {

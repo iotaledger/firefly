@@ -74,7 +74,7 @@
                 </button>
             </div>
         </div>
-        <div class="flex flex-col space-y-6">
+        <div class="flex flex-col space-y-4">
             {#if features?.dashboard?.profileActions?.backupProfile?.enabled && !isBackupSafe}
                 <ProfileBackupButton {lastBackupDate} onClick={() => $profileRouter.next({ backup: true })} />
             {/if}
