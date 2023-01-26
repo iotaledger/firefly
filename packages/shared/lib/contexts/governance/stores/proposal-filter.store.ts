@@ -28,7 +28,6 @@ export const proposalFilter: Writable<ProposalFilter> = writable({
     order: {
         active: false,
         type: 'order',
-        labelKey: 'filters.proposalOrder.label',
         localeKey: 'filters.proposalOrder',
         selected: ProposalOrderOption.Date,
         ascDesc: OrderOption.Asc,

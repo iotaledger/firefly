@@ -5,12 +5,12 @@
     import { IProposal } from '@contexts/governance/interfaces'
     import { proposalFilter } from '@contexts/governance'
     import { isVisibleProposal } from '@contexts/governance/utils/isVisibleProposal'
+    import { sortProposals } from '@contexts/governance/utils/sortProposals'
 
     export let proposals: IProposal[] = []
 
-    $: sortedProposals = proposals
-        .filter((proposal) => isVisibleProposal(proposal, $proposalFilter))
-        .sort((a, b) => (a.id < b.id ? -1 : 1))
+    $: visibleProposals = proposals.filter((proposal) => isVisibleProposal(proposal, $proposalFilter))
+    $: sortedProposals = sortProposals(visibleProposals, $proposalFilter)
 </script>
 
 <proposals-container class="flex flex-col h-full">
