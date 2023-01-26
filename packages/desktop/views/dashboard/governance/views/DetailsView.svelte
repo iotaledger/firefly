@@ -72,11 +72,19 @@
     function hasChangedAnswers(_selectedAnswerValues: number[]): boolean {
         const activeParticipationAnswerValues = getActiveParticipation($selectedProposal?.id)?.answers
         if (activeParticipationAnswerValues) {
+            /**
+             * NOTE: If any of the values between what's active and selected differ, it means
+             * that the user has changed at least one answer.
+             */
             return _selectedAnswerValues.some(
                 (selectedAnswerValue, idx) => selectedAnswerValue !== activeParticipationAnswerValues[idx]
             )
         } else {
-            return _selectedAnswerValues.some((selectedAnswerValue) => selectedAnswerValue !== undefined)
+            /**
+             * NOTE: If the user hasn't voted for the participation yet, the user has not changed (all) answers
+             * yet until every value is not undefined.
+             */
+            return _selectedAnswerValues.every((selectedAnswerValue) => selectedAnswerValue !== undefined)
         }
     }
 
