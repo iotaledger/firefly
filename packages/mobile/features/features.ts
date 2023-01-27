@@ -28,7 +28,7 @@ const features = {
                 enabled: true,
             },
             delete: {
-                enabled: false,
+                enabled: true,
             },
             balanceBreakdown: {
                 enabled: false,

@@ -3,6 +3,7 @@
     import { Drawer } from '../../../../components'
     import { AccountActionsRoute, accountActionsRoute, accountActionsRouter } from '../../../../lib/routers'
     import AccountActionsRouter from './AccountActionsRouter.svelte'
+    import { selectedAccount } from '@core/account'
 
     export let onClose: () => unknown = () => {}
 
@@ -17,6 +18,11 @@
                 break
             case AccountActionsRoute.Customize:
                 title = localize('general.manageAccount')
+                break
+            case AccountActionsRoute.DeleteConfirmation:
+                title = localize('popups.deleteAccount.title', {
+                    values: { name: $selectedAccount?.name },
+                })
                 break
         }
     }
