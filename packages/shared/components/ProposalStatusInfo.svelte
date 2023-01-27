@@ -4,7 +4,7 @@
     import { ProposalStatus } from '@contexts/governance/enums'
 
     export let milestones: Record<ProposalStatus, number>
-    export let status: ProposalStatus
+    export let status: string
     export let position: Position = Position.Right
 
     let anchor: HTMLElement

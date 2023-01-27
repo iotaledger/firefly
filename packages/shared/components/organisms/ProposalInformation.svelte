@@ -2,9 +2,8 @@
     import { Text, Pane, KeyValueBox } from 'shared/components'
     import { formatDate, localize } from '@core/i18n'
     import { networkStatus } from '@core/network'
-    import { activeProfileId } from '@core/profile'
     import { DATE_FORMAT, IKeyValueBoxList, milestoneToDate, truncateString } from '@core/utils'
-    import { proposalsState, selectedProposal } from '@contexts/governance/stores'
+    import { selectedProposal } from '@contexts/governance/stores'
 
     const proposalInformation: IKeyValueBoxList = {
         countingEnds: {
@@ -18,7 +17,7 @@
             isCopyable: true,
             copyValue: $selectedProposal?.id,
         },
-        nodeUrl: { data: $proposalsState[$activeProfileId]?.[$selectedProposal?.id].nodeUrl, isCopyable: true },
+        nodeUrl: { data: $selectedProposal?.nodeUrl, isCopyable: true },
     }
 </script>
 

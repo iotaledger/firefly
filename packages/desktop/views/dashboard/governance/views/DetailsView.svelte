@@ -14,17 +14,11 @@
         TextType,
     } from '@ui'
     import { openPopup } from '@auxiliary/popup/actions'
-    import { activeProfileId } from '@core/profile/stores'
     import { governanceRouter } from '@core/router/routers'
     import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
     import { getVotingEvent } from '@contexts/governance/actions'
     import { ProposalStatus } from '@contexts/governance/enums'
-    import {
-        participationOverview,
-        proposalsState,
-        selectedProposal,
-        updateParticipationOverview,
-    } from '@contexts/governance/stores'
+    import { participationOverview, selectedProposal, updateParticipationOverview } from '@contexts/governance/stores'
     import { calculateWeightedVotes } from '@contexts/governance/utils'
     import { getBestTimeDuration, milestoneToDate } from '@core/utils'
     import { networkStatus } from '@core/network/stores'
@@ -43,10 +37,8 @@
     $: $selectedAccountIndex, void updateParticipationOverview()
     $: $selectedAccountIndex, (selectedAnswerValues = [])
 
-    $: proposalState = $proposalsState[$activeProfileId]?.[$selectedProposal?.id]?.state
-
     // Reactively start updating votes once component has mounted and participation overview is available.
-    $: hasMounted && $participationOverview && proposalState && setCurrentAndTotalVotes()
+    $: hasMounted && $participationOverview && $selectedProposal && setCurrentAndTotalVotes()
 
     $: votesCounter = {
         total: totalVotes,
@@ -58,13 +50,13 @@
         selectedAnswerValues = Array<number>(questions?.length)
     }
     $: isVotingDisabled =
-        proposalState?.status === ProposalStatus.Upcoming ||
-        proposalState?.status === ProposalStatus.Ended ||
+        $selectedProposal?.state?.status === ProposalStatus.Upcoming ||
+        $selectedProposal?.state?.status === ProposalStatus.Ended ||
         selectedAnswerValues?.length === 0 ||
         selectedAnswerValues?.includes(undefined)
 
     $: isTransferring = $selectedAccount?.isTransferring
-    $: proposalState, (voteButtonText = getVoteButtonText())
+    $: $selectedProposal, (voteButtonText = getVoteButtonText())
 
     async function setVotingEventPayload(eventId: string): Promise<void> {
         const event = await getVotingEvent(eventId)
@@ -88,7 +80,7 @@
 
             votedAnswerValues = lastActiveOverview?.answers ?? []
             totalVotes =
-                proposalState.status === ProposalStatus.Commencing
+                $selectedProposal?.state.status === ProposalStatus.Commencing
                     ? parseInt(lastActiveOverview?.amount, 10) ?? 0
                     : votesSum
         } else {
@@ -125,7 +117,7 @@
     }
 
     function getVoteButtonText(): string {
-        if ($selectedProposal?.status === ProposalStatus.Upcoming) {
+        if ($selectedProposal?.state.status === ProposalStatus.Upcoming) {
             const millis =
                 milestoneToDate(
                     $networkStatus.currentMilestone,
@@ -148,7 +140,7 @@
     <div class="w-2/5 flex flex-col space-y-4">
         <Pane classes="p-6 flex flex-col flex-1">
             <header-container class="flex justify-between items-center mb-4">
-                <ProposalStatusPill status={$selectedProposal?.status} />
+                <ProposalStatusPill status={$selectedProposal?.state.status} />
                 <ProposalDetailsButton />
             </header-container>
             <div class="flex flex-1 flex-col justify-between">
@@ -182,7 +174,7 @@
                         isOpened={openedQuestionIndex === questionIndex}
                         selectedAnswerValue={selectedAnswerValues[questionIndex]}
                         votedAnswerValue={votedAnswerValues[questionIndex]}
-                        allVotes={proposalState?.questions[questionIndex]?.answers}
+                        allVotes={$selectedProposal?.state?.questions[questionIndex]?.answers}
                         on:clickQuestion={handleQuestionClick}
                         on:clickAnswer={handleAnswerClick}
                     />

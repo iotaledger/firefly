@@ -2,16 +2,15 @@ import { get } from 'svelte/store'
 
 import { ProposalStatus, ProposalType } from '@contexts/governance/enums'
 import { OFFICIAL_NODE_URLS } from '@core/network'
-import { activeProfile, activeProfileId } from '@core/profile'
-import { getParticipationsForProposal, IProposalMetadata, proposalStates } from '..'
+import { activeProfile } from '@core/profile'
+import { getParticipationsForProposal, IProposalMetadata } from '..'
 import { ParticipationEvent } from '@iota/wallet'
 
 export async function createProposalFromEvent(event: ParticipationEvent, nodeUrl: string): Promise<IProposalMetadata> {
     const { data, id } = event
 
     const officialNodeUrls = OFFICIAL_NODE_URLS[get(activeProfile).networkProtocol][get(activeProfile).networkType]
-    const proposalNodeUrl = get(proposalStates)[get(activeProfileId)]?.[id].nodeUrl
-    const isOfficialNetwork = officialNodeUrls.includes(proposalNodeUrl)
+    const isOfficialNetwork = officialNodeUrls.includes(nodeUrl)
 
     const participated = (await getParticipationsForProposal(id)) !== undefined
 

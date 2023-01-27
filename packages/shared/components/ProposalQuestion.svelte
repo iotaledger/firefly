@@ -23,7 +23,8 @@
     $: answers = [...question?.answers, { value: 0, text: 'Abstain', additionalInfo: '' }]
     $: allVotes, calculatePercentagesFromAllVotes()
     $: disabled =
-        $selectedProposal.status === ProposalStatus.Upcoming || $selectedProposal.status === ProposalStatus.Ended
+        $selectedProposal.state.status === ProposalStatus.Upcoming ||
+        $selectedProposal.state.status === ProposalStatus.Ended
     $: allVotes, setWinnerAnswerIndex()
     $: showMargin =
         isOpened ||
@@ -32,8 +33,8 @@
 
     function calculatePercentagesFromAllVotes(): void {
         if (
-            $selectedProposal?.status === ProposalStatus.Upcoming ||
-            $selectedProposal?.status === ProposalStatus.Commencing
+            $selectedProposal?.state.status === ProposalStatus.Upcoming ||
+            $selectedProposal?.state.status === ProposalStatus.Commencing
         ) {
             return
         }
@@ -55,7 +56,7 @@
     }
 
     function setWinnerAnswerIndex(): void {
-        if ($selectedProposal.status === ProposalStatus.Ended) {
+        if ($selectedProposal.state.status === ProposalStatus.Ended) {
             const answersAccumulated = allVotes?.map((answer) => answer.accumulated)
             const maxAccumulated = Math.max(...answersAccumulated)
             winnerAnswerIndex = answersAccumulated?.indexOf(maxAccumulated)

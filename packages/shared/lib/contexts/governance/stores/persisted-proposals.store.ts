@@ -10,11 +10,11 @@ export const persistedProposals = persistent<IPersistedProposals>('persistedProp
 export const registeredProposalsForSelectedAccount: Readable<{ [proposalId: string]: IProposal }> = derived(
     [activeProfileId, selectedAccountIndex, persistedProposals, proposalStates],
     ([$profileId, $selectedAccountIndex, $persistedProposals, $proposalStates]) => {
-        if ($selectedAccountIndex) {
-            const registeredProposalMetadatas = $persistedProposals[$profileId][$selectedAccountIndex]
+        if ($profileId && $selectedAccountIndex >= 0) {
+            const registeredProposalMetadatas = $persistedProposals[$profileId][$selectedAccountIndex] ?? {}
 
             const proposals: { [proposalId: string]: IProposal } = {}
-            for (const key of Object.keys(persistedProposals)) {
+            for (const key of Object.keys(registeredProposalMetadatas)) {
                 const proposalState = $proposalStates[key] ?? { state: undefined }
                 proposals[key] = { ...registeredProposalMetadatas[key], ...proposalState }
             }

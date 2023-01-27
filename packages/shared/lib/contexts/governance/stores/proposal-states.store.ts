@@ -29,14 +29,16 @@ export async function updateProposalsState(): Promise<void> {
 
     for (const eventId of Object.keys(_proposalStates ?? {})) {
         const votingProposalState = await getVotingProposalState(eventId)
-        _proposalStates[eventId] = { state: votingProposalState }
+        if (votingProposalState) {
+            _proposalStates[eventId] = { state: votingProposalState }
+        }
     }
     proposalStates.set(_proposalStates)
 }
 
 // Instead of fetching everything, only check if participated
 export async function initializeProposalStates(): Promise<void> {
-    const allProposals = {}
+    const allProposals: IProposalState = {}
     const proposalsForActiveProfile = get(persistedProposals)[get(activeProfileId)] ?? {}
 
     for (const account of get(activeAccounts)) {
@@ -44,8 +46,8 @@ export async function initializeProposalStates(): Promise<void> {
         const registeredEventIds: string[] = Object.keys(proposalsForAccount)
 
         for (const eventId of registeredEventIds) {
-            const proposalState = await getVotingProposalState(eventId)
-            allProposals[eventId] = proposalState
+            const proposalState = await getVotingProposalState(eventId, account)
+            allProposals[eventId] = { state: proposalState }
         }
     }
     proposalStates.set(allProposals)
