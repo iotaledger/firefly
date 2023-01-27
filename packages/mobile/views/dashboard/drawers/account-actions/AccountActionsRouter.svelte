@@ -6,7 +6,7 @@
 </script>
 
 {#if $accountActionsRoute === AccountActionsRoute.Actions}
-    <AccountActionsView />
+    <AccountActionsView onToggleVisibilitySuccess={onClose} onDeleteSuccess={onClose} />
 {:else if $accountActionsRoute === AccountActionsRoute.Customize}
     <CustomizeAccountView onSaveSucess={onClose} />
 {/if}
