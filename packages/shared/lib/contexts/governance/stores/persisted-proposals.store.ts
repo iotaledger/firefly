@@ -11,7 +11,7 @@ export const registeredProposalsForSelectedAccount: Readable<{ [proposalId: stri
     [activeProfileId, selectedAccountIndex, persistedProposals, proposalStates],
     ([$profileId, $selectedAccountIndex, $persistedProposals, $proposalStates]) => {
         if ($profileId && $selectedAccountIndex >= 0) {
-            const registeredProposalMetadatas = $persistedProposals[$profileId][$selectedAccountIndex] ?? {}
+            const registeredProposalMetadatas = $persistedProposals[$profileId]?.[$selectedAccountIndex] ?? {}
 
             const proposals: { [proposalId: string]: IProposal } = {}
             for (const key of Object.keys(registeredProposalMetadatas)) {
