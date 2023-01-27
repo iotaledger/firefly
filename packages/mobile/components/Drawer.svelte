@@ -80,7 +80,7 @@
                 </div>
                 <div class="flex justify-center col-span-2 content-center">
                     {#if title}
-                        <Text type={TextType.h4}>{title}</Text>
+                        <Text type={TextType.h4} classes="text-center">{title}</Text>
                     {/if}
                 </div>
             </div>

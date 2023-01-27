@@ -1,9 +1,9 @@
 <script lang="typescript">
+    import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { Drawer } from '../../../../components'
     import { AccountActionsRoute, accountActionsRoute, accountActionsRouter } from '../../../../lib/routers'
     import AccountActionsRouter from './AccountActionsRouter.svelte'
-    import { selectedAccount } from '@core/account'
 
     export let onClose: () => unknown = () => {}
 
@@ -23,6 +23,9 @@
                 title = localize('popups.deleteAccount.title', {
                     values: { name: $selectedAccount?.name },
                 })
+                break
+            case AccountActionsRoute.BalanceBreakdown:
+                title = localize('popups.storageDepositBreakdown.title')
                 break
         }
     }

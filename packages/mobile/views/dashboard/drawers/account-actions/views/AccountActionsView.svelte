@@ -32,9 +32,17 @@
     function handleDeleteAccountClick(): void {
         $accountActionsRouter.next({ action: AccountAction.Delete })
     }
+    function handleBalanceBreakdownClick(): void {
+        $accountActionsRouter.next({ action: AccountAction.BalanceBreakdown })
+    }
 </script>
 
 <div class="flex flex-col space-y-4">
+    {#if features?.dashboard?.accountActions?.balanceBreakdown?.enabled}
+        <Button outline onClick={handleBalanceBreakdownClick} icon={Icon.Doc}>
+            {localize('actions.viewStorageDeposit')}
+        </Button>
+    {/if}
     {#if features?.dashboard?.accountActions?.customize?.enabled}
         <Button outline onClick={handleCustomizeAccountClick} icon={Icon.Customize}>
             {localize('actions.customizeAcount')}

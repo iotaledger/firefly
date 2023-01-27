@@ -31,7 +31,7 @@ const features = {
                 enabled: true,
             },
             balanceBreakdown: {
-                enabled: false,
+                enabled: true,
             },
             exportTransactions: {
                 enabled: false,
