@@ -203,7 +203,7 @@
                         isOpened={openedQuestionIndex === questionIndex}
                         selectedAnswerValue={selectedAnswerValues[questionIndex]}
                         votedAnswerValue={votedAnswerValues[questionIndex]}
-                        allVotes={proposalState?.questions[questionIndex]?.answers}
+                        answerStatuses={proposalState?.questions[questionIndex]?.answers}
                         on:clickQuestion={handleQuestionClick}
                         on:clickAnswer={handleAnswerClick}
                     />
