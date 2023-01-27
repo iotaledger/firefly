@@ -27,7 +27,7 @@
         selectedProposal,
         updateParticipationOverview,
     } from '@contexts/governance/stores'
-    import { calculateWeightedVotes } from '@contexts/governance/utils'
+    import { calculateWeightedVotes, getActiveParticipation } from '@contexts/governance/utils'
     import { getBestTimeDuration, milestoneToDate } from '@core/utils'
     import { networkStatus } from '@core/network/stores'
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
@@ -58,16 +58,38 @@
     $: questions = votingPayload?.questions
 
     $: if (questions?.length > 0 && selectedAnswerValues?.length === 0) {
-        selectedAnswerValues = Array<number>(questions?.length)
+        selectedAnswerValues =
+            getActiveParticipation($selectedProposal?.id)?.answers ?? Array<number>(questions?.length)
     }
+
     $: isVotingDisabled =
         proposalState?.status === ProposalStatus.Upcoming ||
         proposalState?.status === ProposalStatus.Ended ||
         selectedAnswerValues?.length === 0 ||
-        selectedAnswerValues?.includes(undefined)
+        selectedAnswerValues?.includes(undefined) ||
+        !hasChangedAnswers(selectedAnswerValues)
 
     $: isTransferring = $selectedAccount?.isTransferring
     $: proposalState, (textHintString = getTextHintString())
+
+    function hasChangedAnswers(_selectedAnswerValues: number[]): boolean {
+        const activeParticipationAnswerValues = getActiveParticipation($selectedProposal?.id)?.answers
+        if (activeParticipationAnswerValues) {
+            /**
+             * NOTE: If any of the values between what's active and selected differ, it means
+             * that the user has changed at least one answer.
+             */
+            return _selectedAnswerValues.some(
+                (selectedAnswerValue, idx) => selectedAnswerValue !== activeParticipationAnswerValues[idx]
+            )
+        } else {
+            /**
+             * NOTE: If the user hasn't voted for the participation yet, the user has not changed (all) answers
+             * yet until every value is not undefined.
+             */
+            return _selectedAnswerValues.every((selectedAnswerValue) => selectedAnswerValue !== undefined)
+        }
+    }
 
     async function setVotingEventPayload(eventId: string): Promise<void> {
         const event = await getVotingEvent(eventId)
@@ -104,7 +126,14 @@
 
     function handleQuestionClick(event: CustomEvent): void {
         const { questionIndex } = event.detail
-        openedQuestionIndex = openedQuestionIndex === questionIndex ? null : questionIndex
+        openedQuestionIndex = questionIndex
+
+        const selectedQuestionElement: HTMLElement = proposalQuestions?.querySelector(
+            'proposal-question:nth-child(' + openedQuestionIndex + ')'
+        )
+        setTimeout(() => {
+            proposalQuestions.scrollTo({ top: selectedQuestionElement?.offsetTop, behavior: 'smooth' })
+        }, 250)
     }
 
     function handleCancelClick(): void {
@@ -120,19 +149,7 @@
 
     function handleAnswerClick(event: CustomEvent): void {
         const { answerValue, questionIndex } = event.detail
-        if (selectedAnswerValues[questionIndex] === answerValue) {
-            selectedAnswerValues[questionIndex] = null
-        } else {
-            selectedAnswerValues[questionIndex] = answerValue
-        }
-
-        openedQuestionIndex = selectedAnswerValues.length === questionIndex + 1 ? null : questionIndex + 1
-        const selectedQuestionElement: HTMLElement = proposalQuestions?.querySelector(
-            'proposal-question:nth-child(' + (openedQuestionIndex + 1) + ')'
-        )
-        setTimeout(() => {
-            proposalQuestions.scrollTo({ top: selectedQuestionElement?.offsetTop, behavior: 'smooth' })
-        }, 250)
+        selectedAnswerValues[questionIndex] = answerValue
     }
 
     function getTextHintString(): string {
