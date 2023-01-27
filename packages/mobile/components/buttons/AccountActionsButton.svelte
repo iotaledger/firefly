@@ -1,5 +1,9 @@
 <script lang="typescript">
     import { MeatballMenuButton } from 'shared/components'
+    import { DashboardRoute, dashboardRouter } from '../../lib/routers'
 </script>
 
-<MeatballMenuButton onClick={() => {}} classes="items-center text-gray-500" />
+<MeatballMenuButton
+    onClick={() => $dashboardRouter.goTo(DashboardRoute.AccountActions)}
+    classes="items-center text-gray-500"
+/>

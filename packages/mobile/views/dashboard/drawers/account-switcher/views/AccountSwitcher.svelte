@@ -15,7 +15,7 @@
     $: totalBalance = sumBalanceForAccounts($visibleActiveAccounts)
 </script>
 
-<div class="felx-auto flex flex-col overflow-x-hidden w-full">
+<div class="flex-auto flex flex-col overflow-x-hidden w-full">
     <account-list class="accounts flex flex-col scrollable-y">
         {#each $visibleActiveAccounts as account}
             <AccountSwitcherMenuItem id="account-{account.index}" {account} onClick={onSwitch} />
