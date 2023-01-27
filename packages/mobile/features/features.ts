@@ -24,7 +24,10 @@ const features = {
             customize: {
                 enabled: false,
             },
-            hideDelete: {
+            hide: {
+                enabled: false,
+            },
+            delete: {
                 enabled: false,
             },
             balanceBreakdown: {
