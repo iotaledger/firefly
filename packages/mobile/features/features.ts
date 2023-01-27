@@ -20,9 +20,9 @@ const features = {
             enabled: true,
         },
         accountActions: {
-            enabled: false,
+            enabled: true,
             customize: {
-                enabled: false,
+                enabled: true,
             },
             hide: {
                 enabled: false,

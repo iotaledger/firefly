@@ -1,6 +1,7 @@
 <script lang="typescript">
+    import { localize } from '@core/i18n'
     import { Drawer } from '../../../../components'
-    import { AccountActionsRoute, accountActionsRoute } from '../../../../lib/routers'
+    import { AccountActionsRoute, accountActionsRoute, accountActionsRouter } from '../../../../lib/routers'
     import AccountActionsRouter from './AccountActionsRouter.svelte'
 
     export let onClose: () => unknown = () => {}
@@ -14,10 +15,18 @@
             case AccountActionsRoute.Actions:
                 title = null
                 break
+            case AccountActionsRoute.Customize:
+                title = localize('general.manageAccount')
+                break
         }
     }
 </script>
 
-<Drawer {onClose} {title}>
+<Drawer
+    {onClose}
+    {title}
+    allowBack={$accountActionsRoute !== AccountActionsRoute.Actions}
+    onBackClick={() => $accountActionsRouter.previous()}
+>
     <AccountActionsRouter {onClose} />
 </Drawer>
