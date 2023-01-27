@@ -34,6 +34,7 @@ import { subscribeToWalletApiEventsForActiveProfile } from './subscribeToWalletA
 import { AppContext, Platform } from '@core/app'
 import { routerManager } from '@core/router/stores'
 import { pollGovernanceData } from '@contexts/governance/actions'
+import { initializeProposalStates, updateParticipationOverview } from '@contexts/governance'
 
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const loginRouter = get(routerManager).getRouterForAppContext(AppContext.Login)
@@ -128,6 +129,9 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             void pollMarketPrices()
 
             if (Platform.isFeatureFlagEnabled('governance')) {
+                await initializeProposalStates()
+                await updateParticipationOverview()
+
                 void pollGovernanceData()
             }
 

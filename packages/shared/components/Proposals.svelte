@@ -2,11 +2,10 @@
     import { Text, ProposalCard, Filter } from 'shared/components'
     import { localize } from '@core/i18n'
     import { FontWeight } from './enums'
-    import { IProposal } from '@contexts/governance/interfaces'
-    import { proposalFilter } from '@contexts/governance'
+    import { proposalFilter, registeredProposalsForSelectedAccount } from '@contexts/governance'
     import { isVisibleProposal } from '@contexts/governance/utils/isVisibleProposal'
 
-    export let proposals: IProposal[] = []
+    $: proposals = Object.values($registeredProposalsForSelectedAccount)
 
     $: sortedProposals = proposals
         .filter((proposal) => isVisibleProposal(proposal, $proposalFilter))

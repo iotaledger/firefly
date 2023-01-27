@@ -1,8 +1,7 @@
-import { get } from 'svelte/store'
 import type { ParticipationEvent } from '@iota/wallet'
-import { selectedAccount } from '@core/account/stores'
+import { IAccountState } from '@core/account'
 
-export function getVotingEvents(): Promise<ParticipationEvent[]> {
-    const account = get(selectedAccount)
+// TODO: check if we can remove this
+export function getVotingEvents(account: IAccountState): Promise<ParticipationEvent[]> {
     return account?.getParticipationEvents()
 }

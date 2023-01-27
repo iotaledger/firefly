@@ -1,6 +1,7 @@
 import { BooleanFilterOption } from '@core/utils/enums/filters'
 import { writable, Writable } from 'svelte/store'
-import { ProposalFilter, ProposalStatus, ProposalType } from '..'
+import { ProposalStatus, ProposalType } from '../enums'
+import { ProposalFilter } from '../interfaces'
 
 export const proposalFilter: Writable<ProposalFilter> = writable({
     phase: {

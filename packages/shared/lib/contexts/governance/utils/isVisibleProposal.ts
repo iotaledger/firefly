@@ -36,7 +36,7 @@ function isVisibleWithActiveTypeFilter(proposal: IProposal, filter: ProposalFilt
 
 function isVisibleWithActivePhaseFilter(proposal: IProposal, filter: ProposalFilter): boolean {
     if (filter.phase.active && filter.phase.selected) {
-        if (filter.phase.selected !== proposal.status) {
+        if (filter.phase.selected !== proposal.state.status) {
             return false
         }
     }
