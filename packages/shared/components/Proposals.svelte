@@ -3,9 +3,8 @@
     import { localize } from '@core/i18n'
     import { FontWeight } from './enums'
     import { IProposal } from '@contexts/governance/interfaces'
-    import { proposalFilter } from '@contexts/governance'
-    import { isVisibleProposal } from '@contexts/governance/utils/isVisibleProposal'
-    import { sortProposals } from '@contexts/governance/utils/sortProposals'
+    import { proposalFilter } from '@contexts/governance/stores'
+    import { isVisibleProposal, sortProposals } from '@contexts/governance/utils'
 
     export let proposals: IProposal[] = []
 

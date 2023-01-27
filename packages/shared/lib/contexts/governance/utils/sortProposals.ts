@@ -18,7 +18,7 @@ export function sortProposals(proposals: IProposal[], filter: ProposalFilter): I
         isAscending = filter.order.ascDesc === OrderOption.Asc
     }
 
-    return proposals?.sort((proposal1, propsal2) => orderFunction(proposal1, propsal2, isAscending)) ?? []
+    return proposals?.sort((proposal1, proposal2) => orderFunction(proposal1, proposal2, isAscending)) ?? []
 }
 
 function sortByName(proposal1: IProposal, proposal2: IProposal, asc: boolean): number {
