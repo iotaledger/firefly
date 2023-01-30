@@ -29,7 +29,7 @@
     $: isIncoming = activity.direction === ActivityDirection.Incoming
     $: rightText = {
         text: amount,
-        color: isIncoming ? 'blue-700' : '',
+        color: isIncoming || activity.direction === ActivityDirection.SelfTransaction ? 'blue-700' : '',
     }
 
     function getSubjectLocale(_activity: TransactionActivity): string {

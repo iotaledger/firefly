@@ -9,7 +9,8 @@
 
     $: title = localize(getActivityTileTitle(activity))
     $: rightText = {
-        text: truncateString(activity.aliasId, 20, 6),
+        text: truncateString(activity.aliasId, 5, 3),
+        color: 'blue-700',
     }
 </script>
 
