@@ -647,6 +647,10 @@
                 "title": "Transactions",
                 "subtitle": "Temporarily locked in unclaimed transactions"
             },
+            "votingPowerOutput": {
+                "title": "Governance",
+                "subtitle": "Reserved for voting power"
+            },
             "minimizeStorageDepositButton": "Minimize storage deposit"
         },
         "minimizeStorageDeposit": {
