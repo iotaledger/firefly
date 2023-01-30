@@ -1,3 +1,4 @@
+export * from './account-actions-route.enum'
 export * from './account-switcher-route.enum'
 export * from './activity-route.enum'
 export * from './profile-route.enum'

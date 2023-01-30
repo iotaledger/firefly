@@ -13,6 +13,7 @@
         ProposalStatusPill,
         Text,
         TextType,
+        TextHint,
     } from '@ui'
     import { openPopup } from '@auxiliary/popup/actions'
     import { activeProfileId } from '@core/profile/stores'
@@ -39,7 +40,7 @@
     let votingPayload: VotingEventPayload
     let totalVotes = 0
     let hasMounted = false
-    let voteButtonText = localize('actions.vote')
+    let textHintString = ''
     let proposalQuestions: HTMLElement
 
     $: $selectedAccountIndex, void updateParticipationOverview()
@@ -69,7 +70,7 @@
         !hasChangedAnswers(selectedAnswerValues)
 
     $: isTransferring = $selectedAccount?.isTransferring
-    $: proposalState, (voteButtonText = getVoteButtonText())
+    $: proposalState, (textHintString = getTextHintString())
 
     function hasChangedAnswers(_selectedAnswerValues: number[]): boolean {
         const activeParticipationAnswerValues = getActiveParticipation($selectedProposal?.id)?.answers
@@ -151,18 +152,14 @@
         selectedAnswerValues[questionIndex] = answerValue
     }
 
-    function getVoteButtonText(): string {
-        if ($selectedProposal?.status === ProposalStatus.Upcoming) {
-            const millis =
-                milestoneToDate(
-                    $networkStatus.currentMilestone,
-                    $selectedProposal.milestones[ProposalStatus.Commencing]
-                ).getTime() - new Date().getTime()
-            const timeString = getBestTimeDuration(millis, 'second')
-            return localize('views.governance.details.voteOpens', { values: { time: timeString } })
-        } else {
-            return localize('actions.vote')
-        }
+    function getTextHintString(): string {
+        const millis =
+            milestoneToDate(
+                $networkStatus.currentMilestone,
+                $selectedProposal.milestones[ProposalStatus.Commencing]
+            ).getTime() - new Date().getTime()
+        const timeString = getBestTimeDuration(millis, 'second')
+        return localize('views.governance.details.hintVote', { values: { time: timeString } })
     }
 
     onMount(async () => {
@@ -227,16 +224,20 @@
                 {/each}
             {/if}
         </proposal-questions>
-        <buttons-container class="flex w-full space-x-4 mt-6">
-            <Button outline classes="w-full" onClick={handleCancelClick}>{localize('actions.cancel')}</Button>
-            <Button
-                classes="w-full"
-                disabled={isVotingDisabled || isTransferring}
-                isBusy={isTransferring}
-                onClick={handleVoteClick}
-            >
-                {voteButtonText}
-            </Button>
-        </buttons-container>
+        {#if $selectedProposal?.status === ProposalStatus.Upcoming}
+            <TextHint info text={textHintString} />
+        {:else if [ProposalStatus.Commencing, ProposalStatus.Holding].includes($selectedProposal.status)}
+            <buttons-container class="flex w-full space-x-4 mt-6">
+                <Button outline classes="w-full" onClick={handleCancelClick}>{localize('actions.cancel')}</Button>
+                <Button
+                    classes="w-full"
+                    disabled={isVotingDisabled || isTransferring}
+                    isBusy={isTransferring}
+                    onClick={handleVoteClick}
+                >
+                    {localize('actions.vote')}
+                </Button>
+            </buttons-container>
+        {/if}
     </Pane>
 </div>

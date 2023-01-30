@@ -33,6 +33,7 @@
 
 {#if value !== null && value !== undefined}
     <button
+        type="button"
         bind:this={tooltipAnchor}
         on:click={onClick}
         class="{clearPadding ? '' : 'w-full'} {isCopyable ? 'cursor-pointer' : 'cursor-default'}"

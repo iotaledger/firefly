@@ -20,7 +20,22 @@ const features = {
             enabled: true,
         },
         accountActions: {
-            enabled: false,
+            enabled: true,
+            customize: {
+                enabled: true,
+            },
+            toggleVisibility: {
+                enabled: true,
+            },
+            delete: {
+                enabled: true,
+            },
+            balanceBreakdown: {
+                enabled: false,
+            },
+            exportTransactions: {
+                enabled: false,
+            },
         },
         createAccount: {
             enabled: true,
