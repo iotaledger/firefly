@@ -169,7 +169,7 @@ function getFieldsToSearchFromActivity(activity: Activity): string[] {
         fieldsToSearch.push(activity.subject?.address)
     }
 
-    if (activity.asyncData.claimingTransactionId) {
+    if (activity.asyncData?.claimingTransactionId) {
         fieldsToSearch.push(activity.asyncData.claimingTransactionId)
     }
 
