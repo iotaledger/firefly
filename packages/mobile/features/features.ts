@@ -21,6 +21,21 @@ const features = {
         },
         accountActions: {
             enabled: false,
+            customize: {
+                enabled: false,
+            },
+            hide: {
+                enabled: false,
+            },
+            delete: {
+                enabled: false,
+            },
+            balanceBreakdown: {
+                enabled: false,
+            },
+            exportTransactions: {
+                enabled: false,
+            },
         },
         createAccount: {
             enabled: true,
