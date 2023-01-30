@@ -9,6 +9,7 @@
     function handleAddProposal(): void {
         openPopup({
             type: 'addProposal',
+            overflow: true,
         })
     }
 </script>
