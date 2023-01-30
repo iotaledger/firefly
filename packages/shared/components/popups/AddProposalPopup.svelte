@@ -13,7 +13,6 @@
     export let nodeUrl: string
 
     let eventIdError: string
-    let nodeInputError: string
     let nodeInput: NodeInput
     let nodeInputError: string
 
