@@ -24,11 +24,11 @@ const features = {
             customize: {
                 enabled: true,
             },
-            hide: {
-                enabled: false,
+            toggleVisibility: {
+                enabled: true,
             },
             delete: {
-                enabled: false,
+                enabled: true,
             },
             balanceBreakdown: {
                 enabled: false,

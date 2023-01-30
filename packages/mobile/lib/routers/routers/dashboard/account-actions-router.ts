@@ -27,6 +27,10 @@ export class AccountActionsRouter extends Subrouter<AccountActionsRoute> {
                         nextRoute = AccountActionsRoute.Customize
                         break
                     }
+                    case AccountAction.Delete: {
+                        nextRoute = AccountActionsRoute.DeleteConfirmation
+                        break
+                    }
                 }
             }
         }
