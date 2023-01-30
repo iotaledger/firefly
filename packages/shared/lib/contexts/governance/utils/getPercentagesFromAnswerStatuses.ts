@@ -1,4 +1,5 @@
-import type { AnswerStatus } from '@iota/wallet'
+import type { AnswerStatus } from '@iota/wallet/out/types'
+import { IProposalAnswerPercentages } from '../interfaces'
 
 export function getPercentagesFromAnswerStatuses(answerStatuses: AnswerStatus[]): { [key: number]: string } {
     const totalVotes = answerStatuses.reduce((acc, answerStatus) => acc + answerStatus.accumulated, 0)
@@ -6,7 +7,7 @@ export function getPercentagesFromAnswerStatuses(answerStatuses: AnswerStatus[])
         return {}
     }
 
-    let percentages: { [key: number]: string } = {}
+    let percentages: IProposalAnswerPercentages = {}
     answerStatuses.forEach((answerStatus) => {
         if (answerStatus.value !== undefined) {
             const divisionResult = (answerStatus.accumulated ?? 0) / totalVotes
