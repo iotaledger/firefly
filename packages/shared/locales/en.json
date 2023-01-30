@@ -610,8 +610,8 @@
                     "eventId": "Event ID",
                     "nodeUrl": "Node URL"
                 },
-                "voteOpens": "Vote opens in {time}",
-                "fetching": "Fetching proposal data"
+                "fetching": "Fetching proposal data",
+                "hintVote": "You can not vote on a proposal that is in the announcement phase, voting will open in {time}."
             }
         }
     },
