@@ -16,22 +16,21 @@ Like other features, there is a corresponding feature flag that will allow you t
 - **Governance** - rules and processes that are used for making decisions concerning permission-less applications and platforms
 - **Participation** - interacting with or taking part in an event, either by voting or staking funds
 - **Proposal** - synonymous with voting event, which is an event that contains one or more questions to be voted on by users
-- **Register** - to add a proposal to an account in Firefly
 - **Vote** - participating in a voting event, initially by selecting answers (aka votes) for each question on the proposal's ballot then broadcasting a transaction with appropriately structured metadata (so that it can be tracked by the node(s))
 - **Voting output** - a designated output to be used for all voting operations (e.g. increasing or decreasing voting power and voting or unvoting for an event) 
 - **Voting power** - the amount of votes a user can cast for a proposal, which is based off of how much IOTA or SMR he or she has; this **MAY** or **MAY NOT** be the same as a user's total balance, it depends on how much they have manually designated as their voting power
 
-## Registering a Proposal
+## Adding a Proposal
 
-To be able to vote on a proposal, a user first needs to register it. This can happen in multiple ways:
+To be able to vote on a proposal, a user first needs to add it to his or her dashboard. This can happen in multiple ways:
 
 - Automatically registering the proposals that are tracked by the client options node(s)
 - Manually entering a proposal (aka event) ID and a URL of a node that is tracking it
 - Following a deep link containing a proposal (aka event) ID and a URL of a node that is tracking it
 
-Once registered, Firefly will regularly poll the given node(s) to update the states of the proposals, which includes the current vote results. 
+Once added, Firefly will regularly poll the given node(s) to update the states of the proposals, which includes the current vote results. 
 
-Users may also "de-register" or remove proposals from their account(s), but only if they are **NOT** currently voting for the proposal.
+Users may also remove proposals from their account(s), but only if they are **NOT** currently voting for the proposal.
 
 ## Voting on a Proposal
 
