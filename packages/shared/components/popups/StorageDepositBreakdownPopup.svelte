@@ -104,6 +104,7 @@
         <HR hidden />
         <BalanceSummarySection
             title={localize('popups.storageDepositBreakdown.votingPowerOutput.title')}
+            subtitle={localize('popups.storageDepositBreakdown.votingPowerOutput.subtitle')}
             amount={votingPower}
             asset={baseCoin}
         />
