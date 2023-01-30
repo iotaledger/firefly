@@ -26,11 +26,11 @@ describe('File: getPercentagesFromAnswerStatuses.ts', () => {
         it('should return percentages from valid arguments', () => {
             expect(getPercentagesFromAnswerStatuses(ANSWER_STATUSES)).toEqual({ 0: '17%', 1: '33%', 2: '50%' })
         })
-        it('should return undefined from invalid arguments', () => {
-            expect(getPercentagesFromAnswerStatuses([{} as AnswerStatus])).toBeUndefined()
+        it('should return empty object from invalid arguments', () => {
+            expect(getPercentagesFromAnswerStatuses([{} as AnswerStatus])).toEqual({})
         })
-        it('should return undefined from empty arguments', () => {
-            expect(getPercentagesFromAnswerStatuses([])).toBeUndefined()
+        it('should return empty object from empty arguments', () => {
+            expect(getPercentagesFromAnswerStatuses([])).toEqual({})
         })
     })
 })
