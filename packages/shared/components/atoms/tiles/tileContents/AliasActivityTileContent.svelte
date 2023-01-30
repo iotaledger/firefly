@@ -8,6 +8,9 @@
     export let activity: AliasActivity
 
     $: title = localize(getActivityTileTitle(activity))
+    $: rightText = {
+        text: truncateString(activity.aliasId, 20, 6),
+    }
 </script>
 
-<ActivityTileContent icon={Icon.Alias} {title} subtitle={truncateString(activity.aliasId, 20, 6)} />
+<ActivityTileContent icon={Icon.Alias} {title} subtitle={localize('general.internalTransaction')} {rightText} />

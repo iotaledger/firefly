@@ -18,8 +18,12 @@
     $: title = localize(getActivityTileTitle(activity))
     $: subtitle = asset?.metadata?.name ? truncateString(asset?.metadata?.name, 20, 0) : truncateString(asset?.id, 6, 7)
     $: amount = getFormattedAmountFromActivity(activity)
+    $: rightText = {
+        text: amount,
+        color: 'blue-700',
+    }
 </script>
 
-<ActivityTileContent {title} {subtitle} {amount} amountColor="blue-700">
+<ActivityTileContent {title} {subtitle} {rightText}>
     <AssetIcon slot="icon" {asset} showVerifiedBadgeOnly />
 </ActivityTileContent>

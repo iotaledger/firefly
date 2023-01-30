@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { ActivityDirection, getActivityTileTitle, NftActivity, Subject } from '@core/wallet'
     import { truncateString } from '@core/utils'
-    import { Text, FontWeight, NftImageOrIconBox, ActivityTileContent } from 'shared/components'
+    import { NftImageOrIconBox, ActivityTileContent } from 'shared/components'
     import { networkHrp } from '@core/network'
     import { getNftByIdFromAllAccountNfts } from '@core/nfts'
     import { selectedAccountIndex } from '@core/account'
@@ -15,6 +15,11 @@
     $: subtitle = localize(isIncoming ? 'general.fromAddress' : 'general.toAddress', {
         values: { account: subjectLocale },
     })
+    $: rightText = {
+        text: nft?.name ?? '',
+        color: isIncoming ? 'blue-700' : '',
+        classes: 'truncate',
+    }
     $: subjectLocale = getSubjectLocale(activity.subject)
 
     $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, activity.nftId)
@@ -31,16 +36,6 @@
     }
 </script>
 
-<ActivityTileContent {title} {subtitle}>
+<ActivityTileContent {title} {subtitle} {rightText}>
     <NftImageOrIconBox slot="icon" nftId={activity.nftId} size="medium" />
-
-    <Text
-        slot="text-right"
-        fontWeight={FontWeight.semibold}
-        lineHeight="140"
-        color={isIncoming ? 'blue-700' : ''}
-        classes="truncate"
-    >
-        {nft?.name ?? ''}
-    </Text>
 </ActivityTileContent>

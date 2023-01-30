@@ -3,10 +3,9 @@
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
 
     export let title: string
-    export let subtitle: string
-    export let icon: IconEnum
-    export let amount: string
-    export let amountColor: string
+    export let subtitle: string = undefined
+    export let icon: IconEnum = undefined
+    export let rightText: { text: string; color?: string; classes?: string } = undefined
 </script>
 
 {#if icon}
@@ -27,17 +26,15 @@
         >
             {title}
         </Text>
-        {#if amount}
+        {#if rightText && rightText.text}
             <Text
                 fontWeight={FontWeight.semibold}
                 lineHeight="140"
-                color={amountColor}
-                classes="whitespace-nowrap text-right"
+                color={rightText.color}
+                classes="whitespace-nowrap text-right {rightText.classes}"
             >
-                {amount}
+                {rightText.text}
             </Text>
-        {:else}
-            <slot name="text-right" />
         {/if}
     </div>
     <div class="flex flex-row justify-between">

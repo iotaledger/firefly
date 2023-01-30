@@ -27,6 +27,10 @@
 
     $: amount = getFormattedAmountFromActivity(activity)
     $: isIncoming = activity.direction === ActivityDirection.Incoming
+    $: rightText = {
+        text: amount,
+        color: isIncoming ? 'blue-700' : '',
+    }
 
     function getSubjectLocale(_activity: TransactionActivity): string {
         const { isShimmerClaiming, subject } = _activity
@@ -45,6 +49,6 @@
     }
 </script>
 
-<ActivityTileContent {title} {subtitle} {amount} amountColor={isIncoming ? 'blue-700' : ''}>
+<ActivityTileContent {title} {subtitle} {rightText}>
     <AssetIcon slot="icon" {asset} showVerifiedBadgeOnly />
 </ActivityTileContent>
