@@ -36,9 +36,8 @@
 </script>
 
 <form on:submit|preventDefault={handleDeleteClick} class="flex w-full flex-col space-y-4">
-    <Text type={TextType.p} secondary classes="mb-5">{localize('popups.deleteAccount.body')}</Text>
     {#if $isSoftwareProfile}
-        <Text type={TextType.p} secondary classes="mb-3">{localize('popups.deleteAccount.typePassword')}</Text>
+        <Text type={TextType.p} secondary>{localize('popups.deleteAccount.typePassword')}</Text>
         <PasswordInput
             classes="w-full mb-3"
             bind:value={password}
