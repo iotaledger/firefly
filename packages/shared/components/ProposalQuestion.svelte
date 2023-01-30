@@ -7,45 +7,30 @@
     import { selectedProposal } from '@contexts/governance/stores'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { Position } from './enums'
+    import { getPercentagesFromAnswerStatuses } from '@contexts/governance'
 
     const dispatch = createEventDispatcher()
 
-    export let allVotes: AnswerStatus[] = undefined
+    export let answerStatuses: AnswerStatus[] = []
     export let questionIndex: number = undefined
     export let isOpened = false
     export let question: Question
     export let selectedAnswerValue: number = undefined
     export let votedAnswerValue: number = undefined
 
-    let percentages: string[]
+    let percentages: { [key: number]: string } = {}
     let winnerAnswerIndex: number
 
     $: answers = [...question?.answers, { value: 0, text: 'Abstain', additionalInfo: '' }]
-    $: allVotes, calculatePercentagesFromAllVotes()
+    $: percentages = getPercentagesFromAnswerStatuses(answerStatuses)
     $: disabled =
         $selectedProposal.status === ProposalStatus.Upcoming || $selectedProposal.status === ProposalStatus.Ended
-    $: allVotes, setWinnerAnswerIndex()
+    $: answerStatuses, setWinnerAnswerIndex()
     $: showMargin =
         isOpened ||
         ((votedAnswerValue || votedAnswerValue === ABSTAIN_VOTE_VALUE) && !isOpened) ||
         ((selectedAnswerValue || selectedAnswerValue === ABSTAIN_VOTE_VALUE) && !isOpened) ||
         winnerAnswerIndex !== undefined
-
-    function calculatePercentagesFromAllVotes(): void {
-        if (
-            $selectedProposal?.status === ProposalStatus.Upcoming ||
-            $selectedProposal?.status === ProposalStatus.Commencing
-        ) {
-            return
-        }
-
-        const totalVotes = allVotes?.reduce((acc, answer) => acc + answer.accumulated, 0)
-        percentages = answers?.map((currentAnswer) => {
-            const answerVotes = allVotes?.find((answer) => answer.value === currentAnswer.value)?.accumulated
-            const divisionResult = answerVotes / totalVotes
-            return Number.isNaN(divisionResult) ? '0%' : `${Math.round(divisionResult * 100)}%`
-        })
-    }
 
     function handleAnswerClick(answerValue: number): void {
         dispatch('clickAnswer', { answerValue, questionIndex })
@@ -57,7 +42,7 @@
 
     function setWinnerAnswerIndex(): void {
         if ($selectedProposal.status === ProposalStatus.Ended) {
-            const answersAccumulated = allVotes?.map((answer) => answer.accumulated)
+            const answersAccumulated = answerStatuses?.map((answer) => answer.accumulated)
             const maxAccumulated = Math.max(...answersAccumulated)
             winnerAnswerIndex = answersAccumulated?.indexOf(maxAccumulated)
         }
@@ -104,11 +89,11 @@
                 {selectedAnswerValue}
                 {disabled}
                 hidden={!isOpened}
-                percentage={percentages?.[answerIndex]}
+                percentage={percentages[answer.value]}
                 isWinner={answerIndex === winnerAnswerIndex}
                 proposalStatus={$selectedProposal.status}
                 truncate={!isOpened}
-                on:click={handleAnswerClick(answer?.value)}
+                on:click={handleAnswerClick(answer.value)}
             />
         {/each}
     </proposal-answers>
