@@ -2,6 +2,7 @@
     import { selectedAccount, setNextSelectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { activeProfile, nonHiddenActiveAccounts, updateActiveAccountMetadata } from '@core/profile'
+    import { activeAccounts, visibleActiveAccounts } from '@core/profile/stores'
     import features from '@features/features'
     import { Icon } from '@lib/auxiliary/icon/enums'
     import { Button } from '@ui'
@@ -10,6 +11,9 @@
     import { accountActionsRouter } from '../../../../../lib/routers'
 
     export let onToggleVisibilitySuccess: () => unknown
+
+    const showDeleteAccount =
+        $selectedAccount?.index === $activeAccounts?.length - 1 && $visibleActiveAccounts?.length > 1
 
     function handleCustomizeAccountClick(): void {
         $accountActionsRouter.next({ action: AccountAction.Customize })
@@ -58,7 +62,7 @@
             {localize($selectedAccount.hidden ? 'actions.showAccount' : 'actions.hideAccount')}
         </Button>
     {/if}
-    {#if features?.dashboard?.accountActions?.toggleVisibility?.enabled}
+    {#if features?.dashboard?.accountActions?.delete?.enabled && showDeleteAccount}
         <HR />
         <Button
             variant={ButtonVariant.Warning}
