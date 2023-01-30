@@ -20,15 +20,15 @@ const features = {
             enabled: true,
         },
         accountActions: {
-            enabled: false,
+            enabled: true,
             customize: {
-                enabled: false,
+                enabled: true,
             },
-            hide: {
-                enabled: false,
+            toggleVisibility: {
+                enabled: true,
             },
             delete: {
-                enabled: false,
+                enabled: true,
             },
             balanceBreakdown: {
                 enabled: false,
