@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 
-import type { Node, ParticipationEvent, ParticipationEventId } from '@iota/wallet'
+import type { Node, ParticipationEventWithNodes, ParticipationEventId } from '@iota/wallet'
 
 import { selectedAccount } from '@core/account'
 
@@ -9,7 +9,7 @@ import { addProposalState, registeredEventIds } from '../stores'
 export async function registerParticipationEvent(
     eventId: ParticipationEventId,
     nodes: Node[]
-): Promise<ParticipationEvent> {
+): Promise<ParticipationEventWithNodes> {
     const account = get(selectedAccount)
     const event = await account.registerParticipationEvent(eventId, nodes)
 

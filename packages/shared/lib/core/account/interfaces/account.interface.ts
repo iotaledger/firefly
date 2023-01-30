@@ -24,8 +24,7 @@ import type {
     OutputData,
     OutputOptions,
     OutputsToClaim,
-    ParticipationEvent,
-    ParticipationEventId,
+    ParticipationEventWithNodes,
     ParticipationEventStatus,
     ParticipationEventType,
     ParticipationOverview,
@@ -60,7 +59,7 @@ export interface IAccount {
         transactionOptions?: TransactionOptions
     ): Promise<Transaction>
     decreaseVotingPower(amount: string): Promise<Transaction>
-    deregisterParticipationEvent(eventId: ParticipationEventId): Promise<void>
+    deregisterParticipationEvent(eventId: string): Promise<void>
     destroyAlias(aliasId: string, transactionOptions?: TransactionOptions): Promise<Transaction>
     destroyFoundry(foundryId: string, transactionOptions?: TransactionOptions): Promise<Transaction>
     generateAddress(options?: AddressGenerationOptions): Promise<Address>
@@ -70,10 +69,10 @@ export interface IAccount {
     getMetadata(): AccountMetadata
     getOutput(outputId: string): Promise<OutputData>
     getOutputsWithAdditionalUnlockConditions(outputs: OutputsToClaim): Promise<string[]>
-    getParticipationEvent(eventId: ParticipationEventId): Promise<ParticipationEvent>
-    getParticipationEventIds(eventType?: ParticipationEventType): Promise<ParticipationEventId[]>
-    getParticipationEvents(): Promise<ParticipationEvent[]>
-    getParticipationEventStatus(eventId: ParticipationEventId): Promise<ParticipationEventStatus>
+    getParticipationEvent(eventId: string): Promise<ParticipationEventWithNodes>
+    getParticipationEventIds(eventType?: ParticipationEventType): Promise<string[]>
+    getParticipationEvents(): Promise<{ [eventId: string]: ParticipationEventWithNodes }>
+    getParticipationEventStatus(eventId: string): Promise<ParticipationEventStatus>
     getParticipationOverview(): Promise<ParticipationOverview>
     getTransaction(transactionId: string): Promise<Transaction>
     getVotingPower(): Promise<string>
@@ -99,7 +98,7 @@ export interface IAccount {
         options?: TransactionOptions
     ): Promise<PreparedTransactionData>
     prepareTransaction(outputs: OutputTypes[], options?: TransactionOptions): Promise<PreparedTransactionData>
-    registerParticipationEvent(eventId: ParticipationEventId, nodes: Node[]): Promise<ParticipationEvent>
+    registerParticipationEvent(eventId: string, nodes: Node[]): Promise<ParticipationEventWithNodes>
     retryTransactionUntilIncluded(
         transactionId: string,
         interval?: number,
