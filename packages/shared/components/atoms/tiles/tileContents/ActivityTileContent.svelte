@@ -1,0 +1,50 @@
+<script lang="typescript">
+    import { Text, Icon, FontWeight } from 'shared/components'
+    import { Icon as IconEnum } from '@lib/auxiliary/icon'
+
+    export let title: string
+    export let subtitle: string
+    export let icon: IconEnum
+    export let amount: string
+    export let amountColor: string
+</script>
+
+{#if icon}
+    <div class="relative flex w-8 h-8">
+        <div class="rounded-full flex justify-center items-center transition-none p-1 w-8 h-8 bg-gray-500">
+            <Icon {icon} width="83.33333%" height="83.33333%" classes="text-white dark:text-gray-800 text-center" />
+        </div>
+    </div>
+{:else}
+    <slot name="icon" />
+{/if}
+<div class="flex flex-col w-full space-y-0.5">
+    <div class="flex flex-row justify-between space-x-1">
+        <Text
+            fontWeight={FontWeight.semibold}
+            lineHeight="140"
+            classes="overflow-hidden overflow-ellipsis multiwrap-line2"
+        >
+            {title}
+        </Text>
+        {#if amount}
+            <Text
+                fontWeight={FontWeight.semibold}
+                lineHeight="140"
+                color={amountColor}
+                classes="whitespace-nowrap text-right"
+            >
+                {amount}
+            </Text>
+        {:else}
+            <slot name="text-right" />
+        {/if}
+    </div>
+    <div class="flex flex-row justify-between">
+        {#if subtitle}
+            <Text fontWeight={FontWeight.medium} lineHeight="140" color="gray-600">
+                {subtitle}
+            </Text>
+        {/if}
+    </div>
+</div>

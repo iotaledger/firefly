@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { ActivityDirection, getActivityTileTitle, NftActivity, Subject } from '@core/wallet'
     import { truncateString } from '@core/utils'
-    import { Text, FontWeight, NftImageOrIconBox } from 'shared/components'
+    import { Text, FontWeight, NftImageOrIconBox, ActivityTileContent } from 'shared/components'
     import { networkHrp } from '@core/network'
     import { getNftByIdFromAllAccountNfts } from '@core/nfts'
     import { selectedAccountIndex } from '@core/account'
@@ -11,7 +11,10 @@
 
     $: isIncoming =
         activity.direction === ActivityDirection.Incoming || activity.direction === ActivityDirection.SelfTransaction
-    $: title = getActivityTileTitle(activity)
+    $: title = localize(getActivityTileTitle(activity))
+    $: subtitle = localize(isIncoming ? 'general.fromAddress' : 'general.toAddress', {
+        values: { account: subjectLocale },
+    })
     $: subjectLocale = getSubjectLocale(activity.subject)
 
     $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, activity.nftId)
@@ -28,23 +31,16 @@
     }
 </script>
 
-<NftImageOrIconBox nftId={activity.nftId} size="medium" />
+<ActivityTileContent {title} {subtitle}>
+    <NftImageOrIconBox slot="icon" nftId={activity.nftId} size="medium" />
 
-<div class="flex flex-col w-full space-y-0.5 overflow-hidden">
-    <div class="flex flex-row justify-between space-x-4">
-        <Text fontWeight={FontWeight.semibold} lineHeight="140" classes="flex-shrink-0">
-            {localize(title)}
-        </Text>
-        <Text fontWeight={FontWeight.semibold} lineHeight="140" color={isIncoming ? 'blue-700' : ''} classes="truncate">
-            {nft?.name ?? ''}
-        </Text>
-    </div>
-
-    <div class="flex flex-row items-start" style="width: 70%">
-        <Text fontWeight={FontWeight.normal} lineHeight="140" color="gray-600" classes="truncate">
-            {localize(isIncoming ? 'general.fromAddress' : 'general.toAddress', {
-                values: { account: subjectLocale },
-            })}
-        </Text>
-    </div>
-</div>
+    <Text
+        slot="text-right"
+        fontWeight={FontWeight.semibold}
+        lineHeight="140"
+        color={isIncoming ? 'blue-700' : ''}
+        classes="truncate"
+    >
+        {nft?.name ?? ''}
+    </Text>
+</ActivityTileContent>
