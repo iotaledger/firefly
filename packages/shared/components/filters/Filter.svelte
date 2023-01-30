@@ -3,9 +3,9 @@
     import type { ActivityFilter, AssetFilter } from '@core/wallet/interfaces'
     import { deepCopy } from '@core/utils'
     import type { Writable } from 'svelte/store'
-    import { ProposalFilter } from '@contexts/governance'
+    import { IProposalFilter } from '@contexts/governance'
 
-    type Filter = ActivityFilter | AssetFilter | ProposalFilter
+    type Filter = ActivityFilter | AssetFilter | IProposalFilter
 
     export let filterStore: Writable<Filter>
     let filter: Filter = deepCopy($filterStore)
