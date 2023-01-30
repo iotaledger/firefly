@@ -54,7 +54,7 @@
             {localize($selectedAccount.hidden ? 'actions.showAccount' : 'actions.hideAccount')}
         </Button>
     {/if}
-    {#if features?.dashboard?.accountActions?.toggleVisibility?.enabled && showDeleteAccount}
+    {#if features?.dashboard?.accountActions?.delete?.enabled && showDeleteAccount}
         <HR />
         <Button
             variant={ButtonVariant.Warning}
