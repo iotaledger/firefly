@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { formatCurrency } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
-    import { formatTokenAmountPrecise, IAsset } from '@core/wallet'
+    import { formatTokenAmountBestMatch, IAsset } from '@core/wallet'
     import { FontWeight, Text } from 'shared/components'
 
     export let totalRow = false
@@ -10,7 +10,7 @@
     export let amount: number
     export let asset: IAsset
 
-    $: formattedAmount = formatTokenAmountPrecise(amount, asset.metadata)
+    $: formattedAmount = formatTokenAmountBestMatch(amount, asset.metadata)
     $: convertedAmount = formatCurrency(getMarketAmountFromAssetValue(amount, asset))
 
     const PRIMARY_COLOR = 'gray-800'

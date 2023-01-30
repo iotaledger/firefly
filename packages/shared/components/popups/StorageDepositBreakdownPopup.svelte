@@ -34,8 +34,10 @@
         ? Object.values(accountBalance?.requiredStorageDeposit).reduce(
               (total: number, value: string): number => total + Number(value),
               potentiallyLockedOutputsStorageDeposit
-          )
-        : potentiallyLockedOutputsStorageDeposit
+          ) + votingPower
+        : potentiallyLockedOutputsStorageDeposit + votingPower
+
+    $: votingPower = parseInt($selectedAccount?.votingPower, 10)
 
     function handleConsolidation(): void {
         openPopup({
@@ -97,6 +99,12 @@
             title={localize('popups.storageDepositBreakdown.pendingTransactions.title')}
             subtitle={localize('popups.storageDepositBreakdown.pendingTransactions.subtitle')}
             amount={potentiallyLockedOutputsStorageDeposit}
+            asset={baseCoin}
+        />
+        <HR hidden />
+        <BalanceSummarySection
+            title={localize('popups.storageDepositBreakdown.votingPowerOutput.title')}
+            amount={votingPower}
             asset={baseCoin}
         />
         <HR hidden />
