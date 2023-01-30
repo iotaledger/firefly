@@ -15,7 +15,7 @@ export async function createProposals(): Promise<IProposal[]> {
     return proposals
 }
 
-async function createProposalFromEvent(event: Event): Promise<IProposal> {
+export async function createProposalFromEvent(event: Event): Promise<IProposal> {
     const { data, id } = event
 
     const officialNodeUrls = OFFICIAL_NODE_URLS[get(activeProfile).networkProtocol][get(activeProfile).networkType]
