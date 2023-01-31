@@ -1080,7 +1080,7 @@
         "confirmNftBurn": {
             "title": "Burn {nftName}",
             "description": "Are you sure you want to burn this NFT?",
-            "hint": "Please note that burning a token frees the storage deposit attached to it and is not reversible."
+            "hint": "Please note that burning an NFT frees the storage deposit attached to it and is not reversible."
         },
         "proceedAnyway": "Continuer tout de même",
         "save": "Sauvegarder",
