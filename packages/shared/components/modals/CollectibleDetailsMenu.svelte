@@ -25,7 +25,7 @@
                 description: localize('actions.confirmNftBurn.description'),
                 hint: localize('actions.confirmNftBurn.hint'),
                 warning: true,
-                confirmText: localize('actions.burnToken'),
+                confirmText: localize('actions.burn'),
                 onConfirm: async () => {
                     await checkActiveProfileAuth(
                         async () => {

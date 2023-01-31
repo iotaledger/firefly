@@ -1080,7 +1080,7 @@
         "confirmNftBurn": {
             "title": "Quemar {nftName}",
             "description": "¿Seguro que quieres quemar este NFT?",
-            "hint": "Por favor, ten en cuenta que quemar un token liberará el depósito de almacenamiento vinculado a él y no es reversible."
+            "hint": "Por favor, ten en cuenta que quemar un NFT liberará el depósito de almacenamiento vinculado a él y no es reversible."
         },
         "proceedAnyway": "Proceder de todos modos",
         "save": "Guardar",
