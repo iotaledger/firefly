@@ -1,7 +1,7 @@
 import type { ParticipationEventWithNodes } from '@iota/wallet/out/types'
-import { getVotingEvents } from '@contexts/governance/actions'
+import { getVotingEvents } from '../actions'
 import { IProposal } from '../interfaces'
-import { createProposalFromEvent } from '..'
+import { createProposalFromEvent } from './createProposalFromEvent'
 
 export async function createProposals(): Promise<IProposal[]> {
     const events: ParticipationEventWithNodes[] = Object.values(await getVotingEvents())

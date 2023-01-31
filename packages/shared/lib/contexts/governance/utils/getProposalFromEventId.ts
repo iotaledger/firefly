@@ -1,6 +1,6 @@
 import { getVotingEvents } from '@contexts/governance/actions'
 import { IProposal } from '../interfaces'
-import { createProposalFromEvent } from '..'
+import { createProposalFromEvent } from './createProposalFromEvent'
 
 export async function getProposalFromEventId(eventId: string): Promise<IProposal> {
     const events = await getVotingEvents()

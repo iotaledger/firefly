@@ -1,11 +1,12 @@
 import { get } from 'svelte/store'
 import type { ParticipationEventWithNodes } from '@iota/wallet/out/types'
-import { ProposalStatus, ProposalType } from '@contexts/governance/enums'
-import { IProposal } from '@contexts/governance/interfaces'
-import { OFFICIAL_NODE_URLS } from '@core/network'
-import { activeProfile, activeProfileId } from '@core/profile'
-import { getLatestProposalStatus, getParticipationsForProposal } from '..'
+import { OFFICIAL_NODE_URLS } from '@core/network/constants'
+import { activeProfile, activeProfileId } from '@core/profile/stores'
 import { proposalsState } from '../stores'
+import { IProposal } from '../interfaces'
+import { getParticipationsForProposal } from './getParticipationsForProposal'
+import { getLatestProposalStatus } from './getLatestProposalStatus'
+import { ProposalStatus, ProposalType } from '../enums'
 
 export async function createProposalFromEvent(event: ParticipationEventWithNodes): Promise<IProposal> {
     const { data, id } = event
