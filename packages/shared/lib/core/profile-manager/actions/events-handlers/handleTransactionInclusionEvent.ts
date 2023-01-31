@@ -41,9 +41,9 @@ export function handleTransactionInclusionEventInternal(
     if (activity?.type === ActivityType.Governance) {
         if (inclusionState === InclusionState.Confirmed) {
             updateSelectedAccount({ isTransferring: false })
+            closePopup(true)
 
             if (get(hasToRevote)) {
-                closePopup(true)
                 openPopup({
                     type: 'revote',
                     preventClose: true,
