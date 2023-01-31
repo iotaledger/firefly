@@ -1,3 +1,4 @@
+export { default as ActivityTileContent } from './ActivityTileContent.svelte'
 export { default as AliasActivityTileContent } from './AliasActivityTileContent.svelte'
 export { default as ConsolidationActivityTileContent } from './ConsolidationActivityTileContent.svelte'
 export { default as GovernanceActivityTileContent } from './GovernanceActivityTileContent.svelte'
