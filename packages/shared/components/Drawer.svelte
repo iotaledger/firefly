@@ -13,7 +13,7 @@
 	@function {() => Promise<viod>} open - Opens drawer.
 	@function {() => Promise<void>} close - Closes drawer.
 -->
-<script lang="typescript">
+<script lang="ts">
     import { appSettings } from '@core/app'
     import { createEventDispatcher, onMount } from 'svelte'
     import { quintOut } from 'svelte/easing'

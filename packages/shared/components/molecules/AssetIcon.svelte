@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { COIN_TYPE, NetworkProtocol } from '@core/network'
     import { getAssetInitials, IPersistedAsset, NotVerifiedStatus, ANIMATED_TOKEN_IDS } from '@core/wallet'
     import { isBright } from '@core/utils'

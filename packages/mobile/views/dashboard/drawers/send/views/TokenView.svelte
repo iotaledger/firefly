@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { IAsset, newTransactionDetails, selectedAccountAssets, updateNewTransactionDetails } from '@core/wallet'
 
     import { AssetList } from '../../../../../components'

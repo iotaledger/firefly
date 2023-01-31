@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { ActivityAsyncStatus, getTimeDifference, Activity } from '@core/wallet'
     import { TooltipIcon, Text, Pill, TileFooter, FontWeight } from 'shared/components'
     import { time } from '@core/app'

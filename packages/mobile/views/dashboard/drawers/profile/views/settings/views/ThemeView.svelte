@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Radio, Text, Icon } from 'shared/components'
     import { AppTheme, appSettings, shouldBeDarkMode } from '@core/app'
     import { localize } from '@core/i18n'

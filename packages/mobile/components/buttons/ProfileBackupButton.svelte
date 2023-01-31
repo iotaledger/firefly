@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { localize } from '@core/i18n'
     import { diffDates, getBackupWarningColor } from '@core/utils'
     import { activeProfile } from '@core/profile'

@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Dropdown } from 'shared/components'
     import { localize } from '@core/i18n'
     import type { IDropdownChoice } from '@core/utils'

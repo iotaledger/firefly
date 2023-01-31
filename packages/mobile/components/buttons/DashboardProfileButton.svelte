@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { activeProfile } from '@core/profile'
     import { getInitials } from '@core/utils'
     import { DashboardRoute, dashboardRouter } from '../../lib/routers'

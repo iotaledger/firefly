@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { AccountActionsButton, AccountSwitcherButton, DashboardProfileButton } from './'
     import features from '@features/features'
 </script>

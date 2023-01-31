@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Icon, Logo, Profile } from 'shared/components'
     import { AppContext, mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService } from '@core/app'
     import { localize } from '@core/i18n'

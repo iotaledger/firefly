@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { onMount } from 'svelte'
     import { Button, Checkbox, CopyableBox, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'

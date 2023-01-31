@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import {

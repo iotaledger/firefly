@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Icon } from 'shared/components'
     import { createEventDispatcher } from 'svelte'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
