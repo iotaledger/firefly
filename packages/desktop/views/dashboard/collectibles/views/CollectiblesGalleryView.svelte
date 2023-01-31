@@ -1,28 +1,7 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { nftSearchTerm, queriedNfts, selectedAccountNfts } from '@core/nfts'
-    import { debounce } from '@core/utils'
-    import {
-        FontWeight,
-        Icon,
-        Illustration,
-        NftGallery,
-        Text,
-        TextInput,
-        TogglableButton,
-        ReceiveButton,
-    } from 'shared/components'
-
-    let searchActive = false
-    let inputElement: HTMLInputElement
-
-    $: if (searchActive && inputElement) inputElement.focus()
-    $: searchValue = searchActive ? searchValue.toLowerCase() : ''
-    $: if ($selectedAccountNfts) {
-        debounce(() => {
-            $nftSearchTerm = searchValue
-        })()
-    }
+    import { FontWeight, Illustration, NftGallery, Text, ReceiveButton, SearchInput } from 'shared/components'
 </script>
 
 <div class="flex flex-col w-full h-full space-y-4">
@@ -35,31 +14,8 @@
                 <Text fontSize="text-14" fontWeight={FontWeight.semibold} color="gray-500">• {$queriedNfts.length}</Text
                 >
             </div>
-
             <div class="flex items-center" style="height: 40px">
-                {#if searchActive}
-                    <TextInput
-                        bind:inputElement
-                        bind:value={searchValue}
-                        hasFocus={true}
-                        placeholder={localize('general.search')}
-                        fontSize="15"
-                        clearPadding
-                        containerClasses="py-2 px-3"
-                        fontWeight={FontWeight.medium}
-                        color="gray-500"
-                    >
-                        <Icon slot="left" icon="search" classes="mr-2 text-gray-500 dark:text-white" />
-                        <button on:click={() => (searchActive = false)} slot="right">
-                            <Icon
-                                icon="close"
-                                classes="cursor-pointer ml-2 text-gray-500 dark:text-white hover:text-gray-600 dark:hover:text-gray-200"
-                            />
-                        </button>
-                    </TextInput>
-                {:else}
-                    <TogglableButton icon="search" bind:active={searchActive} />
-                {/if}
+                <SearchInput bind:value={$nftSearchTerm} />
             </div>
         </div>
 

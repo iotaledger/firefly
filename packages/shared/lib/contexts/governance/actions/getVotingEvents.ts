@@ -1,7 +1,7 @@
-import type { ParticipationEvent } from '@iota/wallet'
-import { IAccountState } from '@core/account'
+import type { ParticipationEventWithNodes } from '@iota/wallet'
+import type { IAccountState } from '@core/account'
 
 // TODO: check if we can remove this
-export function getVotingEvents(account: IAccountState): Promise<ParticipationEvent[]> {
+export function getVotingEvents(account: IAccountState): Promise<{ [eventId: string]: ParticipationEventWithNodes }> {
     return account?.getParticipationEvents()
 }

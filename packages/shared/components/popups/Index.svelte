@@ -37,7 +37,7 @@
     import NodeAuthRequiredPopup from './NodeAuthRequiredPopup.svelte'
     import NodeInfoPopup from './NodeInfoPopup.svelte'
     import ReceiveAddressPopup from './ReceiveAddressPopup.svelte'
-    import RegisterProposalPopup from './RegisterProposalPopup.svelte'
+    import AddProposalPopup from './AddProposalPopup.svelte'
     import RemoveProposalPopup from './RemoveProposalPopup.svelte'
     import RemoveNode from './RemoveNode.svelte'
     import RevotePopup from './RevotePopup.svelte'
@@ -50,8 +50,9 @@
     import VerifyLedgerTransactionPopup from './VerifyLedgerTransactionPopup.svelte'
     import Version from './Version.svelte'
     import Video from './Video.svelte'
-    import WalletFinderPopup from './WalletFinderPopup.svelte'
     import VoteForProposal from './VoteForProposalPopup.svelte'
+    import VotingPowerToZeroPopup from './VotingPowerToZeroPopup.svelte'
+    import WalletFinderPopup from './WalletFinderPopup.svelte'
 
     export let type: string
     export let props: any
@@ -121,7 +122,7 @@
         nodeAuthRequired: NodeAuthRequiredPopup,
         nodeInfo: NodeInfoPopup,
         receiveAddress: ReceiveAddressPopup,
-        registerProposal: RegisterProposalPopup,
+        addProposal: AddProposalPopup,
         removeNode: RemoveNode,
         removeProposal: RemoveProposalPopup,
         revote: RevotePopup,
@@ -136,6 +137,7 @@
         version: Version,
         video: Video,
         voteForProposal: VoteForProposal,
+        votingPowerToZero: VotingPowerToZeroPopup,
         walletFinder: WalletFinderPopup,
     }
 

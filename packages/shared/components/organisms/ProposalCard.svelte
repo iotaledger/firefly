@@ -29,10 +29,11 @@
 
 <proposal-card
     on:click={handleProposalClick}
-    class="flex flex-col p-6 border border-solid border-gray-200 dark:border-transparent rounded-xl cursor-pointer h-32
+    on:keydown={(e) => e.key === 'Enter' && handleProposalClick()}
+    class="flex flex-col p-6 border border-solid border-gray-200 dark:border-transparent rounded-xl cursor-pointer h-fit shadow-elevation-1 focus:shadow-inner
     {proposal?.state?.status === ProposalStatus.Ended ? 'bg-transparent' : 'bg-white dark:bg-gray-850'}"
 >
-    <div class="flex items-center gap-1.5 mb-5">
+    <div class="flex items-center gap-1.5 mb-4">
         {#if proposal.organization}
             <TooltipIcon
                 icon={proposal.organization.icon}
@@ -45,7 +46,7 @@
                 >
             </TooltipIcon>
         {/if}
-        <Text fontWeight={FontWeight.semibold} fontSize="14" classes="truncate">{proposal.title}</Text>
+        <Text fontWeight={FontWeight.semibold} fontSize="14" classes="truncate" lineHeight="5">{proposal.title}</Text>
     </div>
     <div class="flex justify-between items-center">
         <ProposalStatusInfo status={proposal?.state?.status} milestones={proposal.milestones} />

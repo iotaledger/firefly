@@ -1,1 +1,1 @@
-export * from './handleDeepLinkRegisterProposalOperation'
+export * from './handleDeepLinkAddProposalOperation'

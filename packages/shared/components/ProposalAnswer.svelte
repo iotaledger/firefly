@@ -16,6 +16,7 @@
     export let hidden: boolean = null
     export let isWinner: boolean
     export let proposalStatus: string
+    export let truncate = false
 
     let isSelected: boolean
     let isVotedFor: boolean
@@ -53,7 +54,7 @@
     style:--percentage={percentage}
     on:click={handleClick}
 >
-    <div class="flex space-x-3 items-center">
+    <div class="flex space-x-3 items-center w-full min-w-0">
         {#if answerIndex !== undefined}
             {#if isVotedFor}
                 <status-icon class="flex justify-center items-center w-5 h-5">
@@ -69,23 +70,21 @@
                 <answer-index>{answerIndex + 1}</answer-index>
             {/if}
         {/if}
-        <Text fontWeight={FontWeight.medium}>{answer.text}</Text>
+        <Text fontWeight={FontWeight.medium} classes="w-full {truncate ? 'truncate' : ''}">{answer.text}</Text>
     </div>
     <div class="flex items-center space-x-1.5">
         {#if isWinner}
             <Icon icon={IconEnum.Trophy} />
         {/if}
         {#if percentage}
-            <div>
-                <Text
-                    smaller
-                    fontWeight={FontWeight.medium}
-                    classes="ml-auto text-gray-700 dark:text-gray-500"
-                    overrideColor
-                >
-                    {percentage}
-                </Text>
-            </div>
+            <Text
+                smaller
+                fontWeight={FontWeight.medium}
+                classes="h-3 ml-auto text-gray-700 dark:text-gray-500"
+                overrideColor
+            >
+                {percentage}
+            </Text>
         {/if}
         {#if answer.additionalInfo}
             <TooltipIcon
@@ -94,8 +93,8 @@
                 iconClasses="text-gray-600 dark:text-gray-500"
                 text={answer.additionalInfo}
                 position={Position.Left}
-                width={13}
-                height={13}
+                width={12}
+                height={12}
             />
         {/if}
     </div>
@@ -131,6 +130,10 @@
             z-index: 1;
         }
 
+        &:not(.disabled):hover {
+            @apply border-blue-500;
+        }
+
         &:not(.hidden) {
             @apply flex;
         }
@@ -148,8 +151,14 @@
             }
         }
 
-        &.voted::after {
-            @apply bg-blue-100;
+        &.voted {
+            &:hover {
+                @apply bg-blue-50;
+            }
+
+            &::after {
+                @apply bg-blue-100;
+            }
         }
 
         &.winner {
@@ -186,7 +195,7 @@
             }
         }
 
-        &:disabled {
+        &.disabled {
             @apply cursor-default;
         }
 

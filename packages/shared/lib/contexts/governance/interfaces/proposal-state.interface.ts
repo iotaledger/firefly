@@ -1,4 +1,4 @@
-import type { ParticipationEventStatus } from '@iota/wallet'
+import type { ParticipationEventStatus, Question } from '@iota/wallet'
 import { IOrganization } from '..'
 import { ProposalStatus, ProposalType } from '../enums'
 
@@ -30,6 +30,8 @@ export interface IProposalMetadata {
     milestones?: Record<ProposalStatus, number>
     organization?: IOrganization
     type: ProposalType
+    questions: Question[]
+    additionalInfo: string
     title: string
     participated: boolean
     nodeUrl: string

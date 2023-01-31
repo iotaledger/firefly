@@ -101,3 +101,15 @@ Wallet.initLogger({
 ```
 
 in `desktop/electron/preload.js` after `const Wallet = binding`. Debug logs will then be added to the `wallet.log` file in the same location where Firefly or the Electron / Capacitor development instance is installed.
+
+## Resetting Firefly 
+
+### Desktop
+
+If you want to reset Firefly your profiles are stored in the following places on the different OS'es for the official release:
+
+- Windows: `%APPDATA%\Roaming\Firefly\__storage__/`
+- MacOS: `$HOME/Library/Application\ Support/Firefly/__storage/`
+- Linux: `~/.config/Firefly/__storage__/`
+
+For developer/alpha/beta builds you have to look for `Electron`/`'Firefly Shimmer - Alpha'`/`'Firefly Shimmer - Beta'` respectively.

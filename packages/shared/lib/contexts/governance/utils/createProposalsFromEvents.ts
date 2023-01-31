@@ -1,10 +1,11 @@
 import { get } from 'svelte/store'
+import type { ParticipationEvent, VotingEventPayload } from '@iota/wallet'
 
 import { ProposalStatus, ProposalType } from '@contexts/governance/enums'
 import { OFFICIAL_NODE_URLS } from '@core/network'
 import { activeProfile } from '@core/profile'
-import { getParticipationsForProposal, IProposalMetadata } from '..'
-import { ParticipationEvent } from '@iota/wallet'
+import { getParticipationsForProposal } from '../utils'
+import { IProposalMetadata } from '../interfaces'
 
 export async function createProposalFromEvent(event: ParticipationEvent, nodeUrl: string): Promise<IProposalMetadata> {
     const { data, id } = event
@@ -26,6 +27,8 @@ export async function createProposalFromEvent(event: ParticipationEvent, nodeUrl
         title: event.data.name,
         milestones,
         nodeUrl,
+        questions: (data.payload as VotingEventPayload)?.questions,
+        additionalInfo: data.additionalInfo,
         type: isOfficialNetwork ? ProposalType.Official : ProposalType.Custom,
         participated,
     }
