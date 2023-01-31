@@ -16,7 +16,7 @@ export function sortProposals(proposals: IProposal[], filter: IProposalFilter): 
                 orderFunction = sortByName
                 break
             case ProposalOrderOption.Phase:
-                orderFunction = sortByPhase
+                orderFunction = sortByPhaseAndMilestoneAndName
                 break
         }
         isAscending = filter.order.ascDesc === OrderOption.Asc
@@ -28,8 +28,8 @@ export function sortProposals(proposals: IProposal[], filter: IProposalFilter): 
 function sortByPhaseAndMilestoneAndName(proposal1: IProposal, proposal2: IProposal, asc: boolean): number {
     return (
         sortByPhase(proposal1, proposal2, asc) ||
-        sortByMilestone(proposal1, proposal2, asc) ||
-        sortByName(proposal1, proposal2, asc)
+        sortByMilestone(proposal1, proposal2, true) ||
+        sortByName(proposal1, proposal2, true)
     )
 }
 
