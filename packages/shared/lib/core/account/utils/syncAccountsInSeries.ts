@@ -1,9 +1,9 @@
-import { AccountBalance, AccountSyncOptions } from '@iota/wallet'
+import { AccountBalance, SyncOptions } from '@iota/wallet'
 
 import { IAccount } from '@core/account'
 
 export async function syncAccountsInSeries(
-    syncOptions: AccountSyncOptions,
+    syncOptions: SyncOptions,
     ...accounts: IAccount[]
 ): Promise<AccountBalance[]> {
     const accountBalances: AccountBalance[] = []
