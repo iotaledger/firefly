@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { clickOutside } from '@core/utils'
 
     export let onClick: (event?: any) => void

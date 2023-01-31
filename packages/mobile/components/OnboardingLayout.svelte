@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Animation, Icon, Text, TextType } from 'shared/components'
     import { isKeyboardOpen, keyboardHeight } from '../lib/auxiliary/keyboard'
 

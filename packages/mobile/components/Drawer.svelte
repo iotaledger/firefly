@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
     import { Icon, Text, TextType } from 'shared/components'
     import { fade, fly } from 'svelte/transition'

@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { localize } from '@core/i18n'
     import { assetFilter, IAccountAssets, IAsset } from '@core/wallet'
     import { isVisibleAsset } from '@core/wallet/utils/isVisibleAsset'

@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { MeatballMenuButton } from 'shared/components'
     import { DashboardRoute, dashboardRouter } from '../../lib/routers'
 </script>

@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { MimeType, ParentMimeType } from '@core/nfts'
     import { activeProfile } from '@core/profile'
 

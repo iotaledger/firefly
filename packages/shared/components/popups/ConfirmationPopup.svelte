@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Button, Text, TextHint, FontWeight, TextType, ButtonVariant } from 'shared/components'
     import { localize } from '@core/i18n'
     import { closePopup } from '@auxiliary/popup'

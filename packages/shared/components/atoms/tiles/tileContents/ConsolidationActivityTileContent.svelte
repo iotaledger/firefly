@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { localize } from '@core/i18n'
     import { ConsolidationActivity, getActivityTileTitle } from '@core/wallet'
     import { Text, Icon, FontWeight } from 'shared/components'

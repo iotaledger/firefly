@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Icon, Text, FontWeight, TextType } from 'shared/components'
 
     export let type: string

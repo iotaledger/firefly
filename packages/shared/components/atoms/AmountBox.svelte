@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { AssetIcon, Text, FontWeight, TextType, Tooltip } from 'shared/components'
     import { getNthOccurrenceIndex } from '@core/utils'
     import { IPersistedAsset } from '@core/wallet'

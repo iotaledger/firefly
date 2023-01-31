@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { TextInput, Icon, TogglableButton, FontWeight } from 'shared/components'
     import { localize } from '@core/i18n'
     import { debounce } from '@core/utils'

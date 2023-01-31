@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { appSettings, appVersionDetails, Platform } from '@core/app'
     import { localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'

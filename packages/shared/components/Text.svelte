@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { TextType, FontWeight } from './enums'
 
     export let type: TextType = TextType.p

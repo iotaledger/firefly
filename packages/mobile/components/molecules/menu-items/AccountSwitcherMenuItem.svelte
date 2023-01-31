@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Text, TextType } from 'shared/components'
     import { AccountLabel } from 'shared/components/atoms'
     import { IAccountState, selectedAccount, setSelectedAccount } from '@core/account'

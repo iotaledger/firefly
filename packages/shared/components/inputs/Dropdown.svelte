@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { onMount } from 'svelte'
     import { FontWeight, Icon, Text, TextPropTypes, TextType, Error } from 'shared/components'
     import { clickOutside, IDropdownChoice, isNumberLetterOrPunctuation } from '@core/utils'

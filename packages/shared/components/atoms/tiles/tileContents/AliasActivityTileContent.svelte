@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { localize } from '@core/i18n'
     import { AliasActivity, getActivityTileTitle } from '@core/wallet'
     import { truncateString } from '@core/utils'

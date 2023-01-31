@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { ShimmerClaimingAccountTile } from 'shared/components'
     import { IShimmerClaimingAccount } from '@contexts/onboarding'
 
