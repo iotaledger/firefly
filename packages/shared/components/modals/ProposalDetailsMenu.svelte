@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { onMount } from 'svelte'
     import { Modal, MenuItem, Text, Tooltip, Spinner } from 'shared/components'
     import { Position } from 'shared/components/enums'

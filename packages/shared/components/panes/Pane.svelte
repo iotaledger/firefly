@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { appSettings } from '@core/app'
 
     export let classes = ''

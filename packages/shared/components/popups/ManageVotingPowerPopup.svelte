@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Button, Text, TextHint, AssetAmountInput } from 'shared/components'
     import { HTMLButtonType, TextType } from 'shared/components/enums'
     import { selectedAccount } from '@core/account/stores'

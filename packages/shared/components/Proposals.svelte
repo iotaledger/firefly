@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Text, ProposalCard, Filter, SearchInput } from 'shared/components'
     import { localize } from '@core/i18n'
     import { FontWeight } from './enums'

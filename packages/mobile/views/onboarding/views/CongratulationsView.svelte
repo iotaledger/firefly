@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { OnboardingLayout } from '../../../components'
     import { Button, Icon, Text, TextType } from 'shared/components'
     import { onboardingRouter } from '../../../lib/routers'

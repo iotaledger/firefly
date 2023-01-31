@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { onMount } from 'svelte'
     import { Scroller, SettingsNavigator, Text, TextType } from 'shared/components'
     import features from '@features/features'

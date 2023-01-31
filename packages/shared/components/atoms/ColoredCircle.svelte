@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     export let color = false
     export let size: number = 3
 </script>

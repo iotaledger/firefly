@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Button, Text, TextHint, HTMLButtonType, TextType } from 'shared/components'
     import { selectedAccount } from '@core/account/stores'
     import { localize } from '@core/i18n'

@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import zxcvbn from 'zxcvbn'
     import { OnboardingLayout } from '../../../../../components'
     import { Button, PasswordInput, Text, HTMLButtonType, TextType } from 'shared/components'

@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { AssetList } from 'shared/components'
     import { selectedAccountAssets } from '@core/wallet'
 </script>

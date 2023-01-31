@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Link, Text } from 'shared/components'
     import { openUrlInBrowser } from '@core/app'
 </script>

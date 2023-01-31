@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Transition } from 'shared/components'
     import { ClaimRewardsView, SuccessView } from './views'
     import { ShimmerClaimingRoute, shimmerClaimingRoute } from '@core/router'

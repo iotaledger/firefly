@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { IAsset } from '@core/wallet'
     import { Modal, AssetActionsMenu, MeatballMenuButton } from 'shared/components'
 

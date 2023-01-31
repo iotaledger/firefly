@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Modal, SelectorInput, IOption, NftImageOrIconBox } from 'shared/components'
     import { selectedAccountNfts } from '@core/nfts'
     import { getNftByIdFromAllAccountNfts } from '@core/nfts'

@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { MarketCurrency } from '@core/market'
     import { activeProfile, updateActiveProfileSettings } from '@core/profile'
     import type { IDropdownChoice } from '@core/utils'

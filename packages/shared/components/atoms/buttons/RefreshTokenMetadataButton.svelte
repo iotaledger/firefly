@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { localize } from '@core/i18n'
     import { refreshAccountAssetsForActiveProfile } from '@core/wallet'
     import { showAppNotification } from '@auxiliary/notification'

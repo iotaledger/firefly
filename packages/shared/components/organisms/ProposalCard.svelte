@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { onMount } from 'svelte'
     import { ProposalStatusInfo, Text, TooltipIcon } from 'shared/components'
     import { Icon } from '@auxiliary/icon/enums'

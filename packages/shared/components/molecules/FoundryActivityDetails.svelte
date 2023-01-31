@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { AmountBox, SubjectBox, TransactionActivityStatusPill } from 'shared/components'
     import { formatTokenAmountDefault, getAssetFromPersistedAssets } from '@core/wallet'
     import { FoundryActivity } from '@core/wallet'
