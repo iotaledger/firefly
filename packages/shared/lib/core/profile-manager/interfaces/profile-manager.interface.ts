@@ -1,15 +1,10 @@
 import type {
-    AccountSyncOptions,
+    SyncOptions,
     ClientOptions,
-    Event,
-    EventId,
-    EventStatus,
     EventType,
     GenerateAddressOptions,
     LedgerNanoStatus,
-    Node,
     NodeInfoWrapper,
-    ParticipationEventType,
     WalletEvent,
 } from '@iota/wallet'
 
@@ -25,7 +20,6 @@ export interface IProfileManager {
     changeStrongholdPassword(currentPassword: string, newPassword: string): Promise<void>
     clearStrongholdPassword(): Promise<void>
     destroy(): void
-    deregisterParticipationEvent(eventId: EventId): Promise<void>
     emitTestEvent(event: WalletEvent): Promise<void>
     generateAddress(
         accountIndex: number,
@@ -40,21 +34,16 @@ export interface IProfileManager {
     getAccounts(): Promise<IAccount[]>
     getNodeInfo(url?: string, auth?: IAuth): Promise<NodeInfoWrapper>
     getLedgerNanoStatus(): Promise<LedgerNanoStatus>
-    getParticipationEvent(eventId: EventId): Promise<Event>
-    getParticipationEventIds(eventType?: ParticipationEventType): Promise<EventId[]>
-    getParticipationEvents(): Promise<Event[]>
-    getParticipationEventStatus(eventId: EventId): Promise<EventStatus>
     hexToBech32(hex: string, bech32Hrp?: string): Promise<string>
     isStrongholdPasswordAvailable(): Promise<boolean>
     listen(eventTypes: EventType[], callback: WalletApiEventHandler): void
-    clearListeners(eventTypes: EventType[]): void
-    registerParticipationEvent(eventId: EventId, nodes: Node[]): Promise<Event>
+    clearListeners(eventTypes: EventType[]): Promise<void>
     removeLatestAccount(): Promise<void>
     restoreBackup(source: string, password: string): Promise<void>
     setClientOptions(options: ClientOptions): Promise<void>
     setStrongholdPassword(password: string): Promise<void>
     setStrongholdPasswordClearInterval(intervalInMilliseconds?: number): Promise<void>
-    startBackgroundSync(options?: AccountSyncOptions, intervalInMilliseconds?: number): Promise<void>
+    startBackgroundSync(options?: SyncOptions, intervalInMilliseconds?: number): Promise<void>
     stopBackgroundSync(): Promise<void>
     storeMnemonic(mnemonic: string): Promise<void>
     verifyMnemonic(mnemonic: string): Promise<void>
