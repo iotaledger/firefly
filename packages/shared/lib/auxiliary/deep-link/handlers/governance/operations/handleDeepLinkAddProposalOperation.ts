@@ -4,7 +4,7 @@ import { isValidUrl } from '@core/utils/validation'
 import { getProposalFromEventId, isProposalAlreadyAdded, isValidProposalId } from '@contexts/governance/utils'
 
 import { AddProposalOperationParameter } from '../../../enums'
-import { selectedProposal } from '@contexts/governance'
+import { selectedProposal } from '@contexts/governance/stores'
 import { GovernanceRoute, governanceRouter } from '@core/router'
 import { get } from 'svelte/store'
 
@@ -19,8 +19,8 @@ export function handleDeepLinkAddProposalOperation(searchParams: URLSearchParams
          */
         getProposalFromEventId(eventId).then((proposal) => {
             selectedProposal.set(proposal)
+            get(governanceRouter).goTo(GovernanceRoute.Details)
         })
-        get(governanceRouter).goTo(GovernanceRoute.Details)
         showAppNotification({
             type: 'warning',
             alert: true,

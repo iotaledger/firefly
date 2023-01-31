@@ -4,16 +4,9 @@ import { Event } from '@iota/wallet'
 
 import { ProposalStatus, ProposalType } from '@contexts/governance/enums'
 import { IProposal } from '@contexts/governance/interfaces'
-import { nodeInfo, OFFICIAL_NODE_URLS } from '@core/network'
+import { OFFICIAL_NODE_URLS } from '@core/network'
 import { activeProfile, activeProfileId } from '@core/profile'
-import { getVotingEvents } from '@core/profile-manager'
-import { getParticipationsForProposal, proposalsState } from '..'
-
-export async function createProposals(): Promise<IProposal[]> {
-    const events = await getVotingEvents()
-    const proposals: IProposal[] = await Promise.all(events?.map(async (event) => createProposalFromEvent(event)))
-    return proposals
-}
+import { getLatestProposalStatus, getParticipationsForProposal, proposalsState } from '..'
 
 export async function createProposalFromEvent(event: Event): Promise<IProposal> {
     const { data, id } = event
@@ -31,7 +24,7 @@ export async function createProposalFromEvent(event: Event): Promise<IProposal> 
         [ProposalStatus.Ended]: data.milestoneIndexEnd,
     }
 
-    const status = getLatestStatus(milestones)
+    const status = getLatestProposalStatus(milestones)
 
     const proposal: IProposal = {
         id,
@@ -46,15 +39,4 @@ export async function createProposalFromEvent(event: Event): Promise<IProposal> 
     }
 
     return proposal
-}
-
-function getLatestStatus(milestones: Record<ProposalStatus, number>): ProposalStatus {
-    const latestMilestoneIndex = get(nodeInfo)?.status?.latestMilestone.index
-    const milestoneDifferences = Object.entries(milestones).map(([status, milestone]) => ({
-        status,
-        milestoneDifference: latestMilestoneIndex - milestone,
-    }))
-    const passedMilestones = milestoneDifferences.filter(({ milestoneDifference }) => milestoneDifference > 0)
-    const lastPassedMilestone = passedMilestones.pop()
-    return <ProposalStatus>lastPassedMilestone?.status
 }
