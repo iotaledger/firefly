@@ -1256,7 +1256,6 @@
         "changingVote": "Cambiando voto",
         "stopVoting": "Voto detenido",
         "stoppingVoting": "Deteniendo el voto",
-        "forEvent": "para {eventId}",
         "sentNft": "NFT enviado",
         "sendingNft": "Enviando NFT",
         "receivedNft": "NFT recibido",
