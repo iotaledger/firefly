@@ -1,8 +1,10 @@
 import { get } from 'svelte/store'
 
 import { activeProfile } from '@core/profile/stores'
-import { registerParticipationEvent } from '@core/profile-manager/api'
-import { isProposalAlreadyRegistered } from '@contexts/governance'
+
+import { isProposalAlreadyAdded } from '../utils'
+
+import { registerParticipationEvent } from './registerParticipationEvent'
 
 export async function registerProposalsFromPrimaryNode(): Promise<void> {
     // const proposalIds = await getVotingEventIds()
@@ -28,7 +30,7 @@ export async function registerProposalsFromPrimaryNode(): Promise<void> {
 
     await Promise.all(
         proposalIds.map(async (proposalId) => {
-            if (!isProposalAlreadyRegistered(proposalId)) {
+            if (!isProposalAlreadyAdded(proposalId)) {
                 await registerParticipationEvent(proposalId, [primaryNode])
             }
         })

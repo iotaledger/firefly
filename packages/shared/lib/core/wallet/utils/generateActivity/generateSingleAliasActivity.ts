@@ -20,7 +20,7 @@ export function generateSingleAliasActivity(
     account: IAccountState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
 ): AliasActivity {
-    const { utxoInputs, transactionId, claimingData, direction, time, inclusionState } = processedTransaction
+    const { transactionId, claimingData, direction, time, inclusionState } = processedTransaction
 
     const output = wrappedOutput.output as IAliasOutput
     const outputId = wrappedOutput.outputId
@@ -35,8 +35,6 @@ export function generateSingleAliasActivity(
     const isHidden = false
     const isAssetHidden = false
     const containsValue = true
-
-    const inputs = utxoInputs
 
     const metadata = getMetadataFromOutput(output)
     const tag = getTagFromOutput(output)
@@ -57,7 +55,6 @@ export function generateSingleAliasActivity(
         stateControllerAddress,
         isHidden,
         isAssetHidden,
-        inputs,
         time,
         metadata,
         tag,

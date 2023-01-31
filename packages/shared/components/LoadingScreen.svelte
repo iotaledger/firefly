@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Animation, Text, ProgressBar } from 'shared/components'
 
     export let statusMessage = ''

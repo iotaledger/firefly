@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { closePopup } from '@auxiliary/popup'
     import { selectedAccountIndex } from '@core/account/stores'
     import { time } from '@core/app'
@@ -48,6 +48,7 @@
         <transaction-status class="flex flex-row w-full space-x-2 justify-center">
             {#if activity?.inclusionState && activity?.direction}
                 <TransactionActivityStatusPill
+                    type={activity.type}
                     action={activity?.action}
                     direction={activity?.direction}
                     isInternal={activity?.isInternal}

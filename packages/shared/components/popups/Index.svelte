@@ -1,8 +1,10 @@
-<script lang="typescript">
+<script lang="ts">
     import { mobile, PlatformOption, platform } from '@core/app'
     import { Drawer, Icon } from 'shared/components'
-    import { clickOutside } from '@core/utils'
-    import { closePopup, popupState } from '@auxiliary/popup'
+    import { clickOutside } from '@core/utils/ui'
+    import { closePopup } from '@auxiliary/popup/actions'
+    import { popupState } from '@auxiliary/popup/stores'
+    import { Icon as IconEnum } from '@auxiliary/icon/enums'
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
 
@@ -35,9 +37,10 @@
     import NodeAuthRequiredPopup from './NodeAuthRequiredPopup.svelte'
     import NodeInfoPopup from './NodeInfoPopup.svelte'
     import ReceiveAddressPopup from './ReceiveAddressPopup.svelte'
-    import RegisterProposalPopup from './RegisterProposalPopup.svelte'
+    import AddProposalPopup from './AddProposalPopup.svelte'
     import RemoveProposalPopup from './RemoveProposalPopup.svelte'
     import RemoveNode from './RemoveNode.svelte'
+    import RevotePopup from './RevotePopup.svelte'
     import { SendFormPopup, SendConfirmationPopup } from './send'
     import StopVotingPopup from './StopVotingPopup.svelte'
     import StorageDepositBreakdownPopup from './StorageDepositBreakdownPopup.svelte'
@@ -47,8 +50,9 @@
     import VerifyLedgerTransactionPopup from './VerifyLedgerTransactionPopup.svelte'
     import Version from './Version.svelte'
     import Video from './Video.svelte'
-    import WalletFinderPopup from './WalletFinderPopup.svelte'
     import VoteForProposal from './VoteForProposalPopup.svelte'
+    import VotingPowerToZeroPopup from './VotingPowerToZeroPopup.svelte'
+    import WalletFinderPopup from './WalletFinderPopup.svelte'
 
     export let type: string
     export let props: any
@@ -118,9 +122,10 @@
         nodeAuthRequired: NodeAuthRequiredPopup,
         nodeInfo: NodeInfoPopup,
         receiveAddress: ReceiveAddressPopup,
-        registerProposal: RegisterProposalPopup,
+        addProposal: AddProposalPopup,
         removeNode: RemoveNode,
         removeProposal: RemoveProposalPopup,
+        revote: RevotePopup,
         sendConfirmation: SendConfirmationPopup,
         sendForm: SendFormPopup,
         stopVoting: StopVotingPopup,
@@ -132,6 +137,7 @@
         version: Version,
         video: Video,
         voteForProposal: VoteForProposal,
+        votingPowerToZero: VotingPowerToZeroPopup,
         walletFinder: WalletFinderPopup,
     }
 
@@ -213,7 +219,7 @@
             {#if !hideClose}
                 <button on:click={tryClosePopup} class="absolute top-6 right-6 focus:text-blue-500">
                     <Icon
-                        icon="close"
+                        icon={IconEnum.Close}
                         classes="text-gray-500 dark:text-white hover:text-gray-600 dark:hover:text-gray-100"
                     />
                 </button>

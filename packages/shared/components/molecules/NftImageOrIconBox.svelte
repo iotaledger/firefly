@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { selectedAccountIndex } from '@core/account'
     import { getNftByIdFromAllAccountNfts } from '@core/nfts'
     import { NftMedia, MediaPlaceholder } from 'shared/components'

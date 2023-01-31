@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { setClipboard } from '@core/utils'
     import Box from './Box.svelte'
     import { Text, Tooltip, FontWeight } from 'shared/components'
@@ -33,6 +33,7 @@
 
 {#if value !== null && value !== undefined}
     <button
+        type="button"
         bind:this={tooltipAnchor}
         on:click={onClick}
         class="{clearPadding ? '' : 'w-full'} {isCopyable ? 'cursor-pointer' : 'cursor-default'}"

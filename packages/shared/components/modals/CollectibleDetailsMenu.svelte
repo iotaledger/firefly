@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Modal, MenuItem } from 'shared/components'
     import { localize } from '@core/i18n'
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
@@ -25,9 +25,9 @@
                 description: localize('actions.confirmNftBurn.description'),
                 hint: localize('actions.confirmNftBurn.hint'),
                 warning: true,
-                confirmText: localize('actions.burnToken'),
-                onConfirm: () => {
-                    checkActiveProfileAuth(
+                confirmText: localize('actions.burn'),
+                onConfirm: async () => {
+                    await checkActiveProfileAuth(
                         async () => {
                             await burnNft(nft.id)
                             $collectiblesRouter.goTo(CollectiblesRoute.Gallery)

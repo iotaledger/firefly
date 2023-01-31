@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { ProposalsDetailsButton, Text, KeyValueBox } from 'shared/components'
     import { FontWeight } from './enums'
     import { localize } from '@core/i18n'
@@ -8,10 +8,12 @@
     import {
         getNumberOfActiveProposals,
         getNumberOfVotingProposals,
-        getTotalNumberOfProposals,
+        getNumberOfVotedProposals,
+        getNumberOfTotalProposals,
     } from '@contexts/governance/utils'
 
     let details = <IProposalsDetails>{
+        totalProposals: null,
         activeProposals: null,
         votingProposals: null,
         votedProposals: null,
@@ -22,9 +24,10 @@
     function updateProposalsDetails(): void {
         if ($activeProfileId) {
             details = {
+                totalProposals: getNumberOfTotalProposals(),
                 activeProposals: getNumberOfActiveProposals(),
                 votingProposals: getNumberOfVotingProposals(),
-                votedProposals: getTotalNumberOfProposals(),
+                votedProposals: getNumberOfVotedProposals(),
             }
         }
     }
@@ -42,7 +45,7 @@
             <li>
                 <KeyValueBox
                     keyText={localize(`views.governance.proposalsDetails.${detailKey}`)}
-                    valueText={details[detailKey].toString() ?? '-'}
+                    valueText={details[detailKey]?.toString() ?? '-'}
                 />
             </li>
         {/each}

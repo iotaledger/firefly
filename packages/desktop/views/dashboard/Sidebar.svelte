@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Drawer, Icon, Modal, NetworkIndicator, NotificationBadge, ProfileActionsModal, Text, TextType } from '@ui'
     import { SidebarTab } from '@components'
     import { Settings } from './settings'

@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Transition } from 'shared/components'
     import { ChooseNetworkView, ChooseProtocolView, SetupPrivateNetworkConnectionView } from './views'
     import { NetworkSetupRoute, networkSetupRoute } from '@core/router'

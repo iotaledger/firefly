@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { ICON_SVG, Icon } from '@lib/auxiliary/icon'
 
     export let icon: Icon = undefined

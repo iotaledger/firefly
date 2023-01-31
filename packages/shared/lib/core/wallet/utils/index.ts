@@ -18,7 +18,9 @@ export * from './getOutputOptions'
 export * from './getSenderAddressFromUnlockCondition'
 export * from './getSubjectFromAddress'
 export * from './hashOutputId'
+export * from './isReservedTagKeyword'
 export * from './isSubjectInternal'
+export * from './parseGovernanceMetadata'
 export * from './validateIrc30Metadata'
 
 // Folders

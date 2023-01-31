@@ -1,9 +1,9 @@
-<script lang="typescript">
-    import type { FilterUnit } from '@core/wallet/interfaces'
+<script lang="ts">
     import { Checkbox, Icon } from 'shared/components'
     import { localize } from '@core/i18n'
     import { DateFilterItem, NumberFilterItem, SelectionFilterItem, AssetFilterItem, OrderFilterItem } from './items'
     import { createEventDispatcher } from 'svelte'
+    import { FilterUnit } from '@core/utils/interfaces/filter'
 
     export let filterUnit: FilterUnit
     export let isOpen: boolean
@@ -24,7 +24,7 @@
 <div class="filter-item border-t border-solid border-gray-200 dark:border-gray-800 ">
     <div class="px-4 py-2 flex flex-row justify-between">
         <Checkbox
-            label={localize(filterUnit.localeKey + '.label')}
+            label={localize(filterUnit.labelKey ?? filterUnit.localeKey + '.label')}
             bind:checked={filterUnit.active}
             small
             keepSameColor

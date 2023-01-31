@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { AccountSwitcherModal, Icon, Modal } from 'shared/components'
     import { selectedAccount } from '@core/account'
     import { AccountLabel } from 'shared/components/atoms/'

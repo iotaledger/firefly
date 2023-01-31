@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { IClientOptions, INode } from '@core/network'
     import { Modal, NodeActionsMenu, MeatballMenuButton } from 'shared/components'
 

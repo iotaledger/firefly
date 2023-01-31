@@ -31,6 +31,7 @@ export class ProfileSetupRouter extends Subrouter<ProfileSetupRoute> {
                 }
                 break
             }
+            case ProfileSetupRoute.SetupClaimed:
             case ProfileSetupRoute.SetupRecovered: {
                 const profileType = get(onboardingProfile)?.type
                 if (profileType === ProfileType.Software) {

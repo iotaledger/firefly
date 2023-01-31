@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Pill } from 'shared/components'
     import { localize } from '@core/i18n'
     import { ProposalStatus } from '@contexts/governance/enums'
@@ -13,11 +13,13 @@
     }
 </script>
 
-<Pill
-    data={localize(`pills.proposalStatus.${status}`)}
-    textColor="gray-800"
-    darkTextColor="gray-800"
-    backgroundColor={STATUS_COLORS[status]}
-    darkBackgroundColor={STATUS_COLORS[status]}
-    classes="rounded-full px-2 py-1 flex items-center"
-/>
+{#if status}
+    <Pill
+        data={localize(`pills.proposalStatus.${status}`)}
+        textColor="gray-800"
+        darkTextColor="gray-800"
+        backgroundColor={STATUS_COLORS[status]}
+        darkBackgroundColor={STATUS_COLORS[status]}
+        classes="rounded-full px-2 py-1 flex items-center"
+    />
+{/if}

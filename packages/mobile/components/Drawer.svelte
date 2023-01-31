@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
     import { Icon, Text, TextType } from 'shared/components'
     import { fade, fly } from 'svelte/transition'
@@ -45,7 +45,7 @@
 </script>
 
 <svelte:window on:touchend={onTouchEnd} on:touchmove={onTouchMove} />
-<drawer class="fixed top-0 left-0 z-30 w-screen h-screen z-40">
+<drawer class="fixed top-0 left-0 w-screen h-screen">
     <overlay
         in:fade|local={{ duration: DRAWER_IN_ANIMATION_DURATION_MS }}
         out:fade|local={{ duration: DRAWER_OUT_ANIMATION_DURATION_MS }}
@@ -61,7 +61,7 @@
         class:moving
         class="py-6 px-5 fixed w-full flex flex-col flex-auto overflow-hidden {fullScreen
             ? 'h-screen'
-            : ''} z-10 bg-white dark:bg-gray-800 {enterFromSide ? '' : 'rounded-t-2xl'}"
+            : ''} bg-white dark:bg-gray-800 {enterFromSide ? '' : 'rounded-t-2xl'}"
         style={enterFromSide ? `left: ${position}px;` : `bottom: ${position}px;`}
     >
         {#if enterFromSide === false}

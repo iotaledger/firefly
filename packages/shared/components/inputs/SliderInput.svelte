@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { createEventDispatcher } from 'svelte'
     import { formatNumber, parseCurrency } from '@core/i18n'
 
@@ -36,7 +36,7 @@
 
     // Allows both bind:value and on:change for parent value retrieval
     function setValue(val: number): void {
-        value = formatNumber(val, undefined, undefined, 0)
+        value = formatNumber(val, undefined, decimals, 0)
         dispatch('change', { value })
     }
 
@@ -97,7 +97,8 @@
         percent = percent < 0 ? 0 : percent > 100 ? 100 : percent
 
         // Limit value min -> max
-        setValue(Math.floor((percent / 100) * (max - min) * 10 ** decimals) / 10 ** decimals + min)
+        const val = Math.floor((percent / 100) * (max - min) * 10 ** decimals) / 10 ** decimals + min
+        setValue(val)
     }
 
     // Handles both dragging of touch/mouse as well as simple one-off click/touches
@@ -146,7 +147,7 @@
     on:resize={resizeWindow}
 />
 
-<slider-input class="range">
+<slider-input class="range" class:cursor-pointer={!disabled}>
     <range-wrapper
         class="range__wrapper"
         tabindex="0"
@@ -169,6 +170,7 @@
                 class="range__thumb
                 {disabled ? 'bg-gray-400' : 'bg-blue-500'}"
                 class:range__thumb--holding={holding}
+                class:cursor-pointer={!disabled}
                 bind:this={thumb}
                 on:touchstart={onDragStart}
                 on:mousedown={onDragStart}
@@ -198,7 +200,6 @@
         @apply block;
         @apply relative;
         @apply flex-1;
-        @apply cursor-pointer;
     }
 
     .range__wrapper {
@@ -234,7 +235,6 @@
         @apply flex;
         @apply items-center;
         @apply justify-center;
-        @apply cursor-pointer;
         @apply select-none;
         @apply rounded-full;
         @apply -mt-2;

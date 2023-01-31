@@ -1,5 +1,7 @@
 import { get, writable, Writable } from 'svelte/store'
 
+import { showAppNotification } from '@auxiliary/notification'
+import { localize } from '@core/i18n'
 import { Subrouter } from '@core/router'
 
 import { ProfileRoute } from '../../enums'
@@ -11,14 +13,15 @@ export const profileRoute = writable<ProfileRoute>(null)
 export const profileRouter = writable<ProfileRouter>(null)
 
 const needsUnlockStore = writable<boolean>(false)
-const needsUnlockStoreCallbackStore = writable<(() => unknown) | undefined>(() => {})
+const needsUnlockStoreCallbackStore = writable<((password?: string) => unknown) | undefined>(() => {})
+const returnPasswordUnlockCallbackStore = writable<boolean>(false)
 
 export class ProfileRouter extends Subrouter<ProfileRoute> {
     constructor() {
         super(ProfileRoute.Actions, profileRoute, get(dashboardRouter))
     }
     public next(event: IProfileRouterEvent = {}): void {
-        const { settings, networkStatus } = event
+        const { settings, networkStatus, backup } = event
 
         let nextRoute: ProfileRoute
         const currentRoute = get(this.routeStore)
@@ -29,6 +32,8 @@ export class ProfileRouter extends Subrouter<ProfileRoute> {
                     nextRoute = ProfileRoute.Settings
                 } else if (networkStatus) {
                     nextRoute = ProfileRoute.NetworkStatus
+                } else if (backup) {
+                    nextRoute = ProfileRoute.Backup
                 }
                 break
             }
@@ -36,7 +41,6 @@ export class ProfileRouter extends Subrouter<ProfileRoute> {
 
         this.setNext(nextRoute)
     }
-
     closeDrawer(): void {
         get(dashboardRouter).previous()
         resetRouterWithDrawerDelay(get(profileRouter))
@@ -48,6 +52,7 @@ export class ProfileRouter extends Subrouter<ProfileRoute> {
                 callback()
             }
             needsUnlockStore.set(false)
+            returnPasswordUnlockCallbackStore.set(false)
         } else {
             super.previous()
         }
@@ -55,11 +60,19 @@ export class ProfileRouter extends Subrouter<ProfileRoute> {
     getNeedsUnlockStore(): Writable<boolean> {
         return needsUnlockStore
     }
-    getNeedsUnlockCallbackStore(): Writable<(() => unknown) | undefined> {
+    getNeedsUnlockCallbackStore(): Writable<((password?: string) => unknown) | undefined> {
         return needsUnlockStoreCallbackStore
     }
-    setNeedsUnlock(value: boolean, callback: (() => unknown) | undefined = undefined): void {
+    getReturnPasswordUnlockCallbackStore(): Writable<boolean> {
+        return returnPasswordUnlockCallbackStore
+    }
+    setNeedsUnlock(
+        value: boolean,
+        callback: ((password?: string) => unknown) | undefined = undefined,
+        returnPassword: boolean = false
+    ): void {
         needsUnlockStore.set(value)
+        returnPasswordUnlockCallbackStore.set(returnPassword)
         if (callback) {
             needsUnlockStoreCallbackStore.set(callback)
         }
@@ -68,5 +81,22 @@ export class ProfileRouter extends Subrouter<ProfileRoute> {
         super.reset()
         needsUnlockStore.set(false)
         needsUnlockStoreCallbackStore.set(undefined)
+        returnPasswordUnlockCallbackStore.set(false)
+    }
+    handleExportResult(cancelled: boolean, error: boolean): void {
+        if (!cancelled) {
+            if (error) {
+                showAppNotification({
+                    type: 'error',
+                    message: localize('general.exportingStrongholdFailed'),
+                })
+            } else {
+                showAppNotification({
+                    type: 'info',
+                    message: localize('general.exportingStrongholdSuccess'),
+                })
+                this.previous()
+            }
+        }
     }
 }

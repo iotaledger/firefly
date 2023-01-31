@@ -1,11 +1,11 @@
-<script lang="typescript">
+<script lang="ts">
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { BASE_TOKEN } from '@core/network'
     import { activeProfile, hasStrongholdLocked, reflectLockedStronghold, saveActiveProfile } from '@core/profile'
     import { selectedAccountAssets } from '@core/wallet'
-    import { Button, TogglableAssetBalanceLabel } from 'shared/components'
-    import { TabPane, TopBar } from '../../components'
+    import { Button } from 'shared/components'
+    import { TabPane, TogglableAssetBalanceLabel, TopBar } from '../../components'
     import features from '@features/features'
     import { activeDashboardTab, DASHBOARD_TAB_COMPONENT } from '../../lib/contexts/dashboard'
     import { DashboardRoute, dashboardRouter } from '../../lib/routers'

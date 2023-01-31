@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { localize } from '@core/i18n'
     import { FAUCET_URLS, nodeInfo } from '@core/network'
     import { openPopup } from '@auxiliary/popup'

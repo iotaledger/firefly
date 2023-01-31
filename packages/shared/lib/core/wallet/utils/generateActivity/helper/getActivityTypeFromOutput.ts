@@ -1,3 +1,4 @@
+import { isParticipationOutput } from '@contexts/governance/utils'
 import { OUTPUT_TYPE_ALIAS, OUTPUT_TYPE_BASIC, OUTPUT_TYPE_FOUNDRY, OUTPUT_TYPE_NFT } from '@core/wallet/constants'
 import { ActivityType } from '@core/wallet/enums'
 import { IWrappedOutput } from '@core/wallet/interfaces'
@@ -11,6 +12,10 @@ export function getActivityTypeFromOutput(output: IWrappedOutput): ActivityType 
         case OUTPUT_TYPE_FOUNDRY:
             return ActivityType.Foundry
         case OUTPUT_TYPE_BASIC:
-            return ActivityType.Basic
+            if (isParticipationOutput(output.output)) {
+                return ActivityType.Governance
+            } else {
+                return ActivityType.Basic
+            }
     }
 }

@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import Big from 'big.js'
     import { onMount } from 'svelte'
 
@@ -41,7 +41,7 @@
         allowedDecimals = IOTA_UNIT_MAP?.[unit?.substring(0, 1)] ?? 0
     }
 
-    $: bigAmount = convertToRawAmount(amount, unit, asset?.metadata)
+    $: bigAmount = convertToRawAmount(amount, asset?.metadata, unit)
     $: (amount, unit), validate()
     $: marketAmount = getMarketAmountFromAssetValue(bigAmount, asset)
 
@@ -127,6 +127,7 @@
                     clearBackground
                     clearPadding
                     clearBorder
+                    inputType="number"
                 />
                 <p class="font-600 text-gray-800 dark:text-white text-24 leading-140">{unit}</p>
             </div>

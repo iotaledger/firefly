@@ -1,12 +1,4 @@
-import type {
-    IAliasOutput,
-    IBasicOutput,
-    IFoundryOutput,
-    INftOutput,
-    IOutputResponse,
-    ITransactionPayload,
-    OutputTypes,
-} from '@iota/types'
+import type { IAliasOutput, IBasicOutput, IFoundryOutput, INftOutput, OutputTypes } from '@iota/types'
 import {
     AccountBalance,
     AccountMetadata,
@@ -23,8 +15,13 @@ import {
     FilterOptions,
     IncreaseNativeTokenSupplyOptions,
     MintTokenTransaction,
+    Node,
     OutputData,
     OutputOptions,
+    OutputsToClaim,
+    ParticipationEventStatus,
+    ParticipationEventType,
+    ParticipationEventWithNodes,
     ParticipationOverview,
     PreparedTransactionData,
     SignedTransactionEssence,
@@ -103,6 +100,10 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
+    deregisterParticipationEvent(eventId: string): Promise<void> {
+        throw new Error('Method not implemented.')
+    }
+
     destroyAlias(aliasId: string, transactionOptions?: TransactionOptions): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
@@ -158,8 +159,24 @@ export class AccountMock implements IAccount {
         // })
     }
 
-    getOutputsWithAdditionalUnlockConditions(outputs): Promise<string[]> {
+    getOutputsWithAdditionalUnlockConditions(outputs: OutputsToClaim): Promise<string[]> {
         return Promise.resolve([''])
+    }
+
+    getParticipationEvent(eventId: string): Promise<ParticipationEventWithNodes> {
+        throw new Error('Method not implemented.')
+    }
+
+    getParticipationEventIds(eventType?: ParticipationEventType): Promise<string[]> {
+        throw new Error('Method not implemented.')
+    }
+
+    getParticipationEvents(): Promise<{ [eventId: string]: ParticipationEventWithNodes }> {
+        throw new Error('Method not implemented.')
+    }
+
+    getParticipationEventStatus(eventId: string): Promise<ParticipationEventStatus> {
+        throw new Error('Method not implemented.')
     }
 
     getParticipationOverview(): Promise<ParticipationOverview> {
@@ -170,7 +187,7 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    incomingTransactions(): Promise<[string, [ITransactionPayload, IOutputResponse[]]][]> {
+    incomingTransactions(): Promise<[string, Transaction][]> {
         throw new Error('Method not implemented.')
     }
 
@@ -234,10 +251,14 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
+    registerParticipationEvent(eventId: string, nodes: Node[]): Promise<ParticipationEventWithNodes> {
+        throw new Error('Method not implemented.')
+    }
+
     retryTransactionUntilIncluded(
         transactionId: string,
-        interval?: number | undefined,
-        maxAttempts?: number | undefined
+        interval?: number,
+        maxAttempts?: number
     ): Promise<PreparedTransactionData> {
         throw new Error('Method not implemented.')
     }
@@ -303,7 +324,7 @@ export class AccountMock implements IAccount {
         return Promise.resolve([])
     }
 
-    vote(eventId?: string | undefined, answers?: number[] | undefined): Promise<Transaction> {
+    vote(eventId?: string, answers?: number[]): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
 }

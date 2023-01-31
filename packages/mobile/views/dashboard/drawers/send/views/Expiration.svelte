@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { localize } from '@core/i18n'
     import { ExpirationTime } from '@core/utils'
     import { newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'

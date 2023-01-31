@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { sumBalanceForAccounts } from '@core/account'
     import { localize } from '@core/i18n'
     import { BASE_TOKEN } from '@core/network'
@@ -15,7 +15,7 @@
     $: totalBalance = sumBalanceForAccounts($visibleActiveAccounts)
 </script>
 
-<div class="felx-auto overflow-y-auto flex flex-col w-full">
+<div class="flex-auto flex flex-col overflow-x-hidden w-full">
     <account-list class="accounts flex flex-col scrollable-y">
         {#each $visibleActiveAccounts as account}
             <AccountSwitcherMenuItem id="account-{account.index}" {account} onClick={onSwitch} />

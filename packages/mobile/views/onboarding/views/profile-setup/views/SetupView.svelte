@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import {
         initialiseOnboardingProfile,
         initialiseProfileManagerFromOnboardingProfile,
@@ -60,6 +60,17 @@
 
 <OnboardingLayout {onBackClick} {title} animation="setup-desktop">
     <div slot="footer" class="flex flex-col space-y-4">
+        <OnboardingButton
+            primaryText={localize('actions.claimShimmer')}
+            icon="tokens"
+            iconHeight="24"
+            iconWidth="24"
+            hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
+                ?.claimRewards?.hidden}
+            disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
+                ?.claimRewards?.enabled}
+            onClick={() => onProfileSetupSelectionClick(ProfileSetupType.Claimed)}
+        />
         <OnboardingButton
             primaryText={localize('actions.createWallet', {
                 values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },

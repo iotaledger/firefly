@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { NetworkProtocol } from '@core/network'
     import { IAsset, visibleSelectedAccountAssets } from '@core/wallet'
     import { AssetTile, Icon, Text, AssetIcon, FontWeight } from 'shared/components'

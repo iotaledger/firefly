@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { appRoute, AppRoute } from '../lib/routers'
 
     export let route: AppRoute

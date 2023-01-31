@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Icon, Text, Tooltip, FontWeight, TextType, Position } from 'shared/components'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
 

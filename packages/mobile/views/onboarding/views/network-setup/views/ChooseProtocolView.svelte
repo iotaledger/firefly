@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { onMount } from 'svelte'
     import { OnboardingLayout } from '../../../../../components'
     import { OnboardingButton } from 'shared/components'

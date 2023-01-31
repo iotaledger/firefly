@@ -1,39 +1,50 @@
-<script lang="typescript">
+<script lang="ts">
     import type { AnswerStatus, Question } from '@iota/wallet'
-    import { Text, FontWeight, Icon, ProposalAnswer } from 'shared/components'
-    import { ProposalStatus, selectedProposal } from '@contexts/governance'
+    import { createEventDispatcher } from 'svelte'
+    import { Text, FontWeight, Icon, ProposalAnswer, TooltipIcon } from 'shared/components'
+    import { ABSTAIN_VOTE_VALUE } from '@contexts/governance/constants'
+    import { ProposalStatus } from '@contexts/governance/enums'
+    import { selectedProposal } from '@contexts/governance/stores'
     import { Icon as IconEnum } from '@auxiliary/icon'
+    import { Position } from './enums'
+    import { getPercentagesFromAnswerStatuses, IProposalAnswerPercentages } from '@contexts/governance'
 
-    export let currentVote: AnswerStatus[] = undefined
+    const dispatch = createEventDispatcher()
+
+    export let answerStatuses: AnswerStatus[] = []
     export let questionIndex: number = undefined
     export let isOpened = false
     export let question: Question
-    export let selectedAnswerValues: number[] // TODO, maybe should be a svelte store
-    export let onClick: () => unknown = () => {}
+    export let selectedAnswerValue: number = undefined
+    export let votedAnswerValue: number = undefined
 
-    let percentages: string[]
-    let voteValue: number // TODO: get the current answer being voted by the account
+    let percentages: IProposalAnswerPercentages = {}
+    let winnerAnswerIndex: number
 
     $: answers = [...question?.answers, { value: 0, text: 'Abstain', additionalInfo: '' }]
-    $: showMargin = isOpened || ((voteValue || voteValue === 0) && !isOpened) // voteValue 0 corresponds to abstained vote
-    $: currentVote, setPercentagesFromAccumulated()
+    $: percentages = getPercentagesFromAnswerStatuses(answerStatuses)
     $: disabled =
         $selectedProposal.status === ProposalStatus.Upcoming || $selectedProposal.status === ProposalStatus.Ended
-
-    function setPercentagesFromAccumulated(): void {
-        const totalAccumulated = currentVote?.reduce((acc, answer) => acc + answer.accumulated, 0)
-        percentages = answers?.map((currentAnswer) => {
-            const answerAccumulated = currentVote?.find((answer) => answer.value === currentAnswer.value)?.accumulated
-            const divisionResult = answerAccumulated / totalAccumulated
-            return Number.isNaN(divisionResult) ? '0%' : `${Math.round(divisionResult * 100)}%`
-        })
-    }
+    $: answerStatuses, setWinnerAnswerIndex()
+    $: showMargin =
+        isOpened ||
+        ((votedAnswerValue || votedAnswerValue === ABSTAIN_VOTE_VALUE) && !isOpened) ||
+        ((selectedAnswerValue || selectedAnswerValue === ABSTAIN_VOTE_VALUE) && !isOpened) ||
+        winnerAnswerIndex !== undefined
 
     function handleAnswerClick(answerValue: number): void {
-        if (selectedAnswerValues[questionIndex] === answerValue) {
-            selectedAnswerValues[questionIndex] = undefined
-        } else {
-            selectedAnswerValues[questionIndex] = answerValue
+        dispatch('clickAnswer', { answerValue, questionIndex })
+    }
+
+    function handleQuestionClick(): void {
+        dispatch('clickQuestion', { questionIndex })
+    }
+
+    function setWinnerAnswerIndex(): void {
+        if ($selectedProposal.status === ProposalStatus.Ended) {
+            const answersAccumulated = answerStatuses?.map((answer) => answer.accumulated)
+            const maxAccumulated = Math.max(...answersAccumulated)
+            winnerAnswerIndex = answersAccumulated?.indexOf(maxAccumulated)
         }
     }
 </script>
@@ -41,32 +52,48 @@
 <proposal-question
     class="flex flex-col px-5 py-4 rounded-xl border border-solid border-gray-200 dark:border-transparent dark:bg-gray-850 cursor-pointer"
 >
-    <div on:click={onClick} class="flex justify-between items-center">
-        <div class="flex flex-col">
+    <div on:click={handleQuestionClick} class="flex justify-between items-center">
+        <div class="flex flex-col min-w-0">
             {#if questionIndex !== undefined}
-                <Text smaller fontWeight={FontWeight.bold} overrideColor classes="mb-1 text-blue-500"
-                    >Question {questionIndex + 1}</Text
-                >
+                <Text smaller fontWeight={FontWeight.bold} overrideColor classes="mb-1 text-blue-500">
+                    Question {questionIndex + 1}
+                </Text>
             {/if}
-            <Text fontWeight={FontWeight.bold} overrideColor classes="text-gray-900 dark:text-white">
-                {question.text}
-            </Text>
+            <div class="flex flex-row space-x-1.5 items-center">
+                <Text
+                    fontWeight={FontWeight.bold}
+                    overrideColor
+                    classes="text-gray-900 dark:text-white {isOpened ? '' : 'truncate'}"
+                >
+                    {question.text}
+                </Text>
+                {#if question.additionalInfo}
+                    <TooltipIcon
+                        iconClasses="text-gray-600 dark:text-gray-500"
+                        text={question.additionalInfo}
+                        position={Position.Bottom}
+                        width={13}
+                        height={13}
+                    />
+                {/if}
+            </div>
         </div>
-        <div class="transform {isOpened ? 'rotate-180' : 'rotate-0'}">
-            <Icon icon={IconEnum.ChevronDown} classes="text-gray-500" />
-        </div>
+        <Icon icon={IconEnum.ChevronDown} classes="text-gray-500 transform {isOpened ? 'rotate-180' : 'rotate-0'}" />
     </div>
-    <proposal-answers class:mt-4={showMargin} class={isOpened ? 'space-y-2' : ''}>
+    <proposal-answers class:mt-4={showMargin} class="flex flex-col gap-2">
         {#each answers as answer, answerIndex}
             <ProposalAnswer
                 {answer}
                 {answerIndex}
+                {votedAnswerValue}
+                {selectedAnswerValue}
                 {disabled}
-                on:answerClicked={(event) => handleAnswerClick(event.detail)}
                 hidden={!isOpened}
-                isSelected={selectedAnswerValues[questionIndex] === answer?.value}
-                isVotedFor={voteValue === answer?.value}
-                percentage={percentages[answerIndex]}
+                percentage={percentages[answer.value]}
+                isWinner={answerIndex === winnerAnswerIndex}
+                proposalStatus={$selectedProposal.status}
+                truncate={!isOpened}
+                on:click={handleAnswerClick(answer.value)}
             />
         {/each}
     </proposal-answers>

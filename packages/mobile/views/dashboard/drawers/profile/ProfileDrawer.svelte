@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { appSettings } from '@core/app'
     import { localize } from '@core/i18n'
     import { Drawer } from '../../../../components'
@@ -66,6 +66,9 @@
                     case NetworkConfigurationSettingsRoute.ExcludeNodeConfirmation:
                         title = localize('popups.excludeNode.title')
                         break
+                    case NetworkConfigurationSettingsRoute.UnsetAsPrimaryNodeConfirmation:
+                        title = localize('popups.unsetAsPrimaryNode.title')
+                        break
                 }
             } else {
                 title = localize(SETTINGS_ROUTE_META[$settingsRoute].name)
@@ -73,6 +76,8 @@
         } else {
             if ($profileRoute === ProfileRoute.NetworkStatus) {
                 title = localize('views.settings.networkStatus.title')
+            } else if ($profileRoute === ProfileRoute.Backup) {
+                title = localize('views.settings.exportStronghold.title')
             } else {
                 title = localize('views.settings.profile.title')
             }

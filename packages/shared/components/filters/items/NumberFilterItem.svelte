@@ -1,9 +1,9 @@
-<script lang="typescript">
-    import type { NumberFilterUnit } from '@core/wallet/interfaces'
+<script lang="ts">
     import { Dropdown, Icon, Text, NumberInput } from 'shared/components'
     import { localize } from '@core/i18n'
     import type { IDropdownChoice } from '@core/utils'
-    import { NumberFilterOption } from '@core/wallet'
+    import { NumberFilterUnit } from '@core/utils/interfaces/filter'
+    import { NumberFilterOption } from '@core/utils/enums/filters'
 
     export let filterUnit: NumberFilterUnit
 

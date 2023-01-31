@@ -1,7 +1,8 @@
-<script lang="typescript">
+<script lang="ts">
     import { selectedAccountIndex } from '@core/account'
     import { localize } from '@core/i18n'
     import { getNftByIdFromAllAccountNfts } from '@core/nfts'
+    import { IKeyValueBoxList } from '@core/utils'
     import {
         ADDRESS_TYPE_ALIAS,
         ADDRESS_TYPE_ED25519,
@@ -18,7 +19,7 @@
     $: issuerAddress = getBech32AddressFromAddressTypes(nft?.issuer)
     $: collectionId = getHexAddressFromAddressTypes(nft?.issuer)
 
-    let detailsList: { [key in string]: { data: string; copyValue?: string; isCopyable?: boolean } }
+    let detailsList: IKeyValueBoxList
     $: detailsList = {
         nftId: { data: activity?.nftId, isCopyable: true },
         ...(nft?.issuer?.type === ADDRESS_TYPE_ED25519 && {

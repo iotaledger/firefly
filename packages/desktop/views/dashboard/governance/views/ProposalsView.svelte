@@ -1,15 +1,28 @@
-<script lang="typescript">
-    import { onMount } from 'svelte'
-    import { Pane, Proposals, ProposalsDetails, VotingPower, Spinner } from '@ui'
-    import { registeredEventIds, updateParticipationOverview } from '@contexts/governance/stores'
+<script lang="ts">
+    import {
+        Pane,
+        Proposals,
+        ProposalsDetails,
+        VotingPower,
+        Spinner,
+        Illustration,
+        Text,
+        FontWeight,
+        Button,
+    } from '@ui'
+    import { registeredEventIds } from '@contexts/governance/stores'
     import { createProposals } from '@contexts/governance/utils'
+    import { localize } from '@core/i18n'
+    import { openPopup } from '@auxiliary/popup'
 
     let promise = createProposals()
     $: $registeredEventIds, (promise = createProposals())
 
-    onMount(() => {
-        void updateParticipationOverview()
-    })
+    function handleAddProposal(): void {
+        openPopup({
+            type: 'addProposal',
+        })
+    }
 </script>
 
 <div class="w-full h-full flex flex-nowrap p-8 relative flex-1 space-x-6 bg-gray-50 dark:bg-gray-900">
@@ -26,7 +39,17 @@
         {#await promise}
             <Spinner busy classes="w-full h-full items-center justify-center opacity-25 h-20" width={80} height={80} />
         {:then proposals}
-            <Proposals {proposals} />
+            {#if proposals.length}
+                <Proposals {proposals} />
+            {:else}
+                <div class="w-full h-full flex flex-col items-center justify-center">
+                    <Illustration illustration="empty-collectibles" width="134" height="134" />
+                    <Text fontSize="text-14" fontWeight={FontWeight.semibold} color="gray-500" classes="mt-8"
+                        >{localize('views.governance.proposals.emptyTitle')}</Text
+                    >
+                    <Button onClick={handleAddProposal} classes="mt-8">{localize('actions.addProposal')}</Button>
+                </div>
+            {/if}
         {/await}
     </div>
 </div>

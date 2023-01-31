@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { onMount, createEventDispatcher, tick } from 'svelte'
     import { Text, InputContainer, TextPropTypes, TextType } from 'shared/components'
     import { DECIMAL_SEPARATORS, formatNumber, getDecimalSeparator, parseCurrency } from '@core/i18n'
@@ -17,7 +17,7 @@
     export let float = false
     export let integer = false
     export let autofocus = false
-    export let submitHandler = (): void => {}
+    export let submitHandler: () => void = undefined
     export let disabled = false
     export let maxDecimals: number = undefined
     export let disableContextMenu = false
@@ -37,7 +37,7 @@
 
     $: value, (error = '')
 
-    function handleInput(event: InputEvent): void {
+    function handleInput(event: Event): void {
         value = (event.target as HTMLInputElement).value
     }
 

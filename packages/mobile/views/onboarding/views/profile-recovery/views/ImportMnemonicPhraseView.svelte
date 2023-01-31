@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { onMount } from 'svelte'
     import { OnboardingLayout } from '../../../../../components'
     import { Button, HTMLButtonType, ImportTextfield, Text, TextType } from 'shared/components'
@@ -8,8 +8,10 @@
     import {
         DEFAULT_STRONGHOLD_PASSWORD,
         onboardingProfile,
+        ProfileSetupType,
         updateOnboardingProfile,
         verifyAndStoreMnemonic,
+        shimmerClaimingProfileManager,
     } from '@contexts/onboarding'
 
     const title = localize('views.onboarding.profileRecovery.importMnemonicPhrase.title')
@@ -17,12 +19,16 @@
     let input = ''
 
     async function onContinueClick(): Promise<void> {
+        const isClaimedProfileSetupType = $onboardingProfile?.setupType === ProfileSetupType.Claimed
         const mnemonic = input.split(' ')
         updateOnboardingProfile({ mnemonic })
         await setStrongholdPassword(DEFAULT_STRONGHOLD_PASSWORD)
         updateOnboardingProfile({ strongholdPassword: DEFAULT_STRONGHOLD_PASSWORD })
         await verifyAndStoreMnemonic()
-
+        if (isClaimedProfileSetupType) {
+            await $shimmerClaimingProfileManager?.setStrongholdPassword(DEFAULT_STRONGHOLD_PASSWORD)
+            await $shimmerClaimingProfileManager?.storeMnemonic(mnemonic.join(' '))
+        }
         $profileRecoveryRouter.next()
     }
 

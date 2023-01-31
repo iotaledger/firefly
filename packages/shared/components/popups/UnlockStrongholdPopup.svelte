@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Button, PasswordInput, Text, HTMLButtonType } from 'shared/components'
     import { closePopup } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
@@ -42,12 +42,11 @@
     on:submit|preventDefault={handleSubmit}
 >
     <PasswordInput
-        {error}
-        classes="w-full mb-5"
+        bind:error
         bind:value={password}
+        classes="w-full mb-5"
         showRevealToggle
         placeholder={localize('general.password')}
-        submitHandler={handleSubmit}
         autofocus
     />
     <div class="flex flex-row justify-between w-full space-x-4">

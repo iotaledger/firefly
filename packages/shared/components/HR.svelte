@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     export let classes: string = ''
     export let hidden: boolean = false
     export let overrideColor: boolean = false

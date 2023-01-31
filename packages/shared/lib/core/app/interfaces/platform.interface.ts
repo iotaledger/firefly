@@ -41,6 +41,8 @@ export interface IPlatform {
 
     unhandledException(title: string, err: IError | unknown): Promise<void>
 
-    onEvent<K extends keyof IPlatformEventMap>(eventName: K, callback: (param: IPlatformEventMap[K]) => void)
-    removeListenersForEvent<K extends keyof IPlatformEventMap>(eventName: K)
+    onEvent<K extends keyof IPlatformEventMap>(eventName: K, callback: (param: IPlatformEventMap[K]) => void): void
+    removeListenersForEvent<K extends keyof IPlatformEventMap>(eventName: K): void
+
+    isFeatureFlagEnabled(keyPath: string): boolean
 }

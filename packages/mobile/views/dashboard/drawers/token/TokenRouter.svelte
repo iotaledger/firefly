@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { IAsset } from '@core/wallet'
     import { tokenRoute, TokenRoute, tokenRouter } from '../../../../lib/routers'
     import { TokenInformation } from './views'

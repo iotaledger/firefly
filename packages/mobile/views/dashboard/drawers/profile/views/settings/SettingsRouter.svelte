@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Drawer, StrongholdUnlock } from '../../../../../../components'
     import { SETTINGS_ROUTE_META } from '../../../../../../lib/contexts/settings'
     import { settingsRoute, SettingsRoute, settingsRouter } from '../../../../../../lib/routers'
@@ -6,11 +6,12 @@
 
     $: needsUnlockStore = $settingsRouter?.getNeedsUnlockStore()
     $: needsUnlockStoreCallbackStore = $settingsRouter?.getNeedsUnlockCallbackStore()
+    $: returnPasswordUnlockCallbackStore = $settingsRouter?.getReturnPasswordUnlockCallbackStore()
 
-    function onUnlockSuccess(): void {
+    function onUnlockSuccess(password?: string): void {
         $settingsRouter.setNeedsUnlock(false, undefined)
         if ($needsUnlockStoreCallbackStore && typeof $needsUnlockStoreCallbackStore === 'function') {
-            $needsUnlockStoreCallbackStore()
+            $needsUnlockStoreCallbackStore(password)
         }
     }
 </script>
@@ -26,6 +27,7 @@
         <StrongholdUnlock
             onSuccess={onUnlockSuccess}
             onCancel={() => $settingsRouter.setNeedsUnlock(false, undefined)}
+            returnPassword={$returnPasswordUnlockCallbackStore}
         />
     </Drawer>
 {/if}

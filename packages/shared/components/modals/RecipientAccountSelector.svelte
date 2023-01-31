@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { IAccountState, selectedAccount } from '@core/account'
     import { BASE_TOKEN } from '@core/network'
     import { visibleActiveAccounts, activeProfile } from '@core/profile'

@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Text, TextType } from '@ui'
     import { SettingsMenu } from '@components'
     import { mobile } from '@core/app'

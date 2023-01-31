@@ -1,29 +1,38 @@
-import { selectedAccount, updateSelectedAccount } from '@core/account'
-import {
-    addActivitiesToAccountActivitiesInAllAccountActivities,
-    generateActivities,
-    preprocessTransaction,
-} from '@core/wallet'
-import { Transaction } from '@iota/wallet'
 import { get } from 'svelte/store'
 
-export async function setVotingPower(rawAmount: string): Promise<void> {
+import { Transaction } from '@iota/wallet/out/types'
+
+import { selectedAccount, updateSelectedAccount } from '@core/account/stores'
+import { addActivitiesToAccountActivitiesInAllAccountActivities } from '@core/wallet/stores'
+import { generateActivities, preprocessTransaction } from '@core/wallet/utils'
+
+import { hasToRevote } from '../stores'
+import { handleError } from '@core/error/handlers'
+
+export async function setVotingPower(rawAmount: string, isVoting: boolean): Promise<void> {
     try {
+        // If voting power is set to '0', the PARTICIPATE tag is removed and no revoting has to occur.
+        hasToRevote.set(rawAmount !== '0' && isVoting)
+
         const account = get(selectedAccount)
-        updateSelectedAccount({ isTransferring: true })
         const votingPower = parseInt(account.votingPower, 10)
         const amount = parseInt(rawAmount, 10)
+
+        // isTransferring is kept true until wallet.rs confirms transaction inclusion
+        updateSelectedAccount({ isTransferring: true })
+
+        let transaction: Transaction
         if (amount > votingPower) {
             const amountToIncrease = amount - votingPower
-            const transaction = await account.increaseVotingPower(amountToIncrease.toString())
-            await processAndAddToActivities(transaction)
+            transaction = await account.increaseVotingPower(amountToIncrease.toString())
         } else if (amount < votingPower) {
             const amountToDecrease = votingPower - amount
-            const transaction = await account.decreaseVotingPower(amountToDecrease.toString())
-            await processAndAddToActivities(transaction)
+            transaction = await account.decreaseVotingPower(amountToDecrease.toString())
         }
-        updateSelectedAccount({ isTransferring: false })
+        await processAndAddToActivities(transaction)
     } catch (err) {
+        hasToRevote.set(false)
+        handleError(err)
         updateSelectedAccount({ isTransferring: false })
     }
 }

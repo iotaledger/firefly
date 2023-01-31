@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import {
         InclusionState,
         selectedAccountAssets,
@@ -14,10 +14,12 @@
         ClickableTile,
         TransactionActivityTileContent,
         FoundryActivityTileContent,
+        ConsolidationActivityTileContent,
         AliasActivityTileContent,
         TimelockActivityTileFooter,
         AsyncActivityTileFooter,
         NftActivityTileContent,
+        GovernanceActivityTileContent,
     } from 'shared/components'
 
     export let activity: Activity
@@ -60,6 +62,10 @@
                 <AliasActivityTileContent {activity} />
             {:else if activity.type === ActivityType.Nft}
                 <NftActivityTileContent {activity} />
+            {:else if activity.type === ActivityType.Governance}
+                <GovernanceActivityTileContent {activity} />
+            {:else if activity.type === ActivityType.Consolidation}
+                <ConsolidationActivityTileContent {activity} />
             {:else}
                 <FoundryActivityTileContent {activity} />
             {/if}

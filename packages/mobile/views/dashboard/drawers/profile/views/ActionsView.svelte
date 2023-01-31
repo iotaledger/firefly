@@ -1,18 +1,27 @@
-<script lang="typescript">
+<script lang="ts">
     import { localize } from '@core/i18n'
     import { NetworkProtocol } from '@core/network'
     import { activeProfile, lockStronghold, logout } from '@core/profile'
     import { isStrongholdUnlocked } from '@core/profile-manager'
-    import { getInitials } from '@core/utils'
+    import { getInitials, isRecentDate } from '@core/utils'
     import features from '@features/features'
     import { Icon as IconTypes } from '@lib/auxiliary/icon'
     import { FontWeight, Icon, NetworkIcon, Text, TextType } from 'shared/components'
-    import { NetworkStatusButton, ProfileActionButton, ProfileLockButton } from '../../../../../components/'
+    import {
+        NetworkStatusButton,
+        ProfileActionButton,
+        ProfileBackupButton,
+        ProfileLockButton,
+    } from '../../../../../components/'
     import { profileRouter } from '../../../../../lib/routers'
 
     const { isStrongholdLocked } = $activeProfile
     let networkProtocol: NetworkProtocol
     $: networkProtocol = $activeProfile.networkProtocol
+
+    $: lastStrongholdBackupTime = $activeProfile?.lastStrongholdBackupTime
+    $: lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
+    $: isBackupSafe = lastBackupDate && isRecentDate(lastBackupDate)?.lessThanAMonth
 
     let initials: string
     $: initials = getInitials($activeProfile.name, 1)
@@ -65,7 +74,10 @@
                 </button>
             </div>
         </div>
-        <div class="flex flex-col space-y-6">
+        <div class="flex flex-col space-y-4">
+            {#if features?.dashboard?.profileActions?.backupProfile?.enabled && !isBackupSafe}
+                <ProfileBackupButton {lastBackupDate} onClick={() => $profileRouter.next({ backup: true })} />
+            {/if}
             {#if features?.dashboard?.profileActions?.networkStatus?.enabled}
                 <NetworkStatusButton onClick={() => $profileRouter.next({ networkStatus: true })} />
             {/if}

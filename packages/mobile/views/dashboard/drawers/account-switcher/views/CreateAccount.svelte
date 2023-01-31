@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { getRandomAccountColor, validateAccountName } from '@core/account'
     import { localize } from '@core/i18n'
     import { Button, Input } from 'shared/components'

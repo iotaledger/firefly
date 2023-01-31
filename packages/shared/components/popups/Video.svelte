@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Text, Video } from 'shared/components'
 
     export let title

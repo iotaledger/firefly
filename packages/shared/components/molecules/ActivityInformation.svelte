@@ -1,11 +1,13 @@
-<script lang="typescript">
+<script lang="ts">
     import {
         Tabs,
         GenericActivityInformation,
         AliasActivityInformation,
+        GovernanceActivityInformation,
         NftActivityInformation,
         FoundryActivityInformation,
         TokenActivityInformation,
+        ConsolidationActivityInformation,
         NftMetadataInformation,
         SmartContractActivityInformation,
     } from 'shared/components'
@@ -33,6 +35,12 @@
             case ActivityType.Basic:
                 tabs = [Tab.Transaction, ...(activity?.parsedLayer2Metadata ? [Tab.SmartContract] : [])]
                 break
+            case ActivityType.Governance:
+                tabs = [Tab.Transaction]
+                break
+            case ActivityType.Consolidation:
+                tabs = [Tab.Transaction]
+                break
             case ActivityType.Alias:
                 tabs = [Tab.Transaction, Tab.Alias]
                 break
@@ -51,7 +59,13 @@
         <Tabs bind:activeTab {tabs} />
     {/if}
     {#if activeTab === Tab.Transaction}
-        <GenericActivityInformation {activity} {networkAddress} />
+        {#if activity.type === ActivityType.Governance}
+            <GovernanceActivityInformation {activity} />
+        {:else if activity.type === ActivityType.Consolidation}
+            <ConsolidationActivityInformation {activity} />
+        {:else}
+            <GenericActivityInformation {activity} {networkAddress} />
+        {/if}
     {:else if activeTab === Tab.Alias && activity.type === ActivityType.Alias}
         <AliasActivityInformation {activity} />
     {:else if activeTab === Tab.Nft && activity.type === ActivityType.Nft}

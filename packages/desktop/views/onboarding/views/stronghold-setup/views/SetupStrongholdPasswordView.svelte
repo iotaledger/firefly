@@ -1,6 +1,14 @@
-<script lang="typescript">
+<script lang="ts">
     import zxcvbn from 'zxcvbn'
-    import { Animation, Button, OnboardingLayout, PasswordInput, Text, HTMLButtonType } from 'shared/components'
+    import {
+        Animation,
+        Button,
+        OnboardingLayout,
+        PasswordInput,
+        Text,
+        HTMLButtonType,
+        TextType,
+    } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'
@@ -97,14 +105,14 @@
 
 <OnboardingLayout {onBackClick} {busy}>
     <div slot="title">
-        <Text type="h2">{localize('views.onboarding.strongholdSetup.setupStrongholdPassword.title')}</Text>
+        <Text type={TextType.h2}>{localize('views.onboarding.strongholdSetup.setupStrongholdPassword.title')}</Text>
     </div>
     <div slot="leftpane__content">
         <form on:submit|preventDefault={onContinueClick} id="password-form">
-            <Text type="p" classes="mb-4" secondary
+            <Text type={TextType.p} classes="mb-4" secondary
                 >{localize('views.onboarding.strongholdSetup.setupStrongholdPassword.body1')}</Text
             >
-            <Text type="p" classes="mb-10" secondary
+            <Text type={TextType.p} classes="mb-10" secondary
                 >{localize('views.onboarding.strongholdSetup.setupStrongholdPassword.body2')}</Text
             >
             <PasswordInput

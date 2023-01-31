@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     export let active = false
     export let classes = ''
     export let color = 'blue'

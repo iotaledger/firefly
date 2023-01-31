@@ -3,8 +3,10 @@ import { get } from 'svelte/store'
 import { pollGovernanceData, registerProposalsFromPrimaryNode } from '@contexts/governance/actions'
 import { cleanupOnboarding } from '@contexts/onboarding/actions'
 
+import { Platform } from '@core/app/classes'
 import { AppContext } from '@core/app/enums'
 import { createNewAccount, setSelectedAccount } from '@core/account/actions'
+import { DEFAULT_SYNC_OPTIONS } from '@core/account/constants'
 import { IAccount } from '@core/account/interfaces'
 import { handleError } from '@core/error/handlers'
 import { pollLedgerNanoStatus } from '@core/ledger/actions'
@@ -71,7 +73,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                     accountStartIndex: 0,
                     accountGapLimit: initialAccountRange,
                     addressGapLimit,
-                    syncOptions: { syncIncomingTransactions: true },
+                    syncOptions: DEFAULT_SYNC_OPTIONS,
                 }
                 accounts = await recoverAccounts(recoverAccountsPayload)
             } else {
@@ -133,9 +135,11 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 resetLoginProgress()
             }, 500)
             void pollMarketPrices()
-            void pollGovernanceData()
 
-            void registerProposalsFromPrimaryNode()
+            if (Platform.isFeatureFlagEnabled('governance')) {
+                void registerProposalsFromPrimaryNode()
+                void pollGovernanceData()
+            }
 
             void cleanupOnboarding()
         } else {

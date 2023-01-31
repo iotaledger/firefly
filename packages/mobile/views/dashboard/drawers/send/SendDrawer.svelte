@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { Drawer } from '../../../../components'

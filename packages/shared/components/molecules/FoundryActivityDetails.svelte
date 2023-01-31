@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { AmountBox, SubjectBox, TransactionActivityStatusPill } from 'shared/components'
     import { formatTokenAmountDefault, getAssetFromPersistedAssets } from '@core/wallet'
     import { FoundryActivity } from '@core/wallet'
@@ -15,6 +15,7 @@
     {/if}
     <foundry-status class="flex flex-row w-full space-x-2 justify-center">
         <TransactionActivityStatusPill
+            type={activity.type}
             inclusionState={activity.inclusionState}
             direction={activity.direction}
             isInternal={activity.isInternal}
