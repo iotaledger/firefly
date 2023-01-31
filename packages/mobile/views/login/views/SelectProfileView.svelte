@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { ProfileButton } from '../../../components'
     import { Button, Logo, Text, TextType } from 'shared/components'
     import { needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService, appSettings } from '@core/app'

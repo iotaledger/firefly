@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { AccountActionsRoute, accountActionsRoute } from '../../../../lib/routers'
     import { AccountActionsView, CustomizeAccountView, DeleteAccountConfirmationView } from './views'
 

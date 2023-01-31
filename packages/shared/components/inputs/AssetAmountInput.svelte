@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import Big from 'big.js'
     import { Text, AssetDropdown, InputContainer, SliderInput, AmountInput, TooltipIcon } from 'shared/components'
     import UnitInput from './UnitInput.svelte'

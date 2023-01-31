@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { selectedAccountIndex } from '@core/account/stores'
     import { localize } from '@core/i18n'
     import { visibleActiveAccounts } from '@core/profile/stores'

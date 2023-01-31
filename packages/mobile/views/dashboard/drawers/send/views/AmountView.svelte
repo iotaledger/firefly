@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import Big from 'big.js'
     import { onMount } from 'svelte'
 

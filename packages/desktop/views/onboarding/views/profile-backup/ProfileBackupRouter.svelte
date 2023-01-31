@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Transition } from 'shared/components'
     import { BackupMnemonicView, BackupStrongholdView, VerifyMnemonicView, ViewMnemonicView } from './views'
     import { profileBackupRoute, ProfileBackupRoute } from '@core/router'

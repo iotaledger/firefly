@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { DateInputButton, Dropdown, Icon, Text, NumberInput } from 'shared/components'
     import { localize } from '@core/i18n'
     import type { IDropdownChoice } from '@core/utils'

@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Modal, ProposalDetailsMenu, MeatballMenuButton } from 'shared/components'
 
     let modal: Modal

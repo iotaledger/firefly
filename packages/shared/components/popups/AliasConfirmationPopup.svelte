@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Button, KeyValueBox, Text, FontWeight, TextType } from 'shared/components'
     import { selectedAccount, updateSelectedAccount } from '@core/account'
     import { localize } from '@core/i18n'

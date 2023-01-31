@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { selectedAccount } from '@core/account'
     import { Icon } from 'shared/components'

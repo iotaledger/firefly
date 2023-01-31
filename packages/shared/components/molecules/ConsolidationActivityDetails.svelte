@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { TransactionActivityStatusPill } from 'shared/components'
     import { ConsolidationActivity } from '@core/wallet'
 

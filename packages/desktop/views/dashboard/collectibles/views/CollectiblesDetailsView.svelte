@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { openPopup } from '@auxiliary/popup'
     import { selectedAccountIndex } from '@core/account'
     import { openUrlInBrowser } from '@core/app'

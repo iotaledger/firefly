@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Modal, Text, FontWeight, Button, ButtonSize } from 'shared/components'
     import type { Filter } from '@core/wallet'
     import { localize } from '@core/i18n'

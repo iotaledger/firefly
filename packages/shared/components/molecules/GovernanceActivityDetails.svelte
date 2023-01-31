@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { AmountBox, ActivityInclusionStatusPill, Text, FontWeight } from 'shared/components'
     import { formatTokenAmountDefault, getAssetFromPersistedAssets } from '@core/wallet'
     import { GovernanceActivity } from '@core/wallet'

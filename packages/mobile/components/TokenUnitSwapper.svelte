@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { ITokenMetadata } from '@core/wallet'
     import { Text, TextType, FontWeight } from '@ui'
 

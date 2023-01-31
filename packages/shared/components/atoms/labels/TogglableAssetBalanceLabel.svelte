@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Text, FontWeight, TextType } from 'shared/components'
     import { formatTokenAmountBestMatch, IAsset } from '@core/wallet'
     import { formatCurrency, localize } from '@core/i18n'

@@ -1,6 +1,6 @@
 import { OrderFilterUnit, SelectionFilterUnit } from '@core/utils/interfaces/filter/filter-unit.interface'
 
-export interface ProposalFilter {
+export interface IProposalFilter {
     phase: SelectionFilterUnit
     type: SelectionFilterUnit
     participated: SelectionFilterUnit

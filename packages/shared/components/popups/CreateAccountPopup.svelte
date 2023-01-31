@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Button, ColorPicker, Input, Text } from 'shared/components'
     import { getTrimmedLength } from '@core/utils'
     import { localize } from '@core/i18n'

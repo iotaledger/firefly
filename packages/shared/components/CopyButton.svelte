@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { setClipboard } from '@core/utils'
     import { Icon } from 'shared/components'
 

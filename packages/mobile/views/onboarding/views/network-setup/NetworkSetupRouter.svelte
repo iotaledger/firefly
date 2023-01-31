@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { ChooseNetworkView, ChooseProtocolView } from './views'
     import { NetworkSetupRoute, networkSetupRoute } from '../../../../lib/routers'
 </script>
