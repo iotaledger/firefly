@@ -17,9 +17,9 @@
     } from '@ui'
     import { openPopup } from '@auxiliary/popup/actions'
     import { activeProfileId } from '@core/profile/stores'
-    import { getVotingEvent } from '@core/profile-manager/api'
     import { governanceRouter } from '@core/router/routers'
     import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
+    import { getVotingEvent } from '@contexts/governance/actions'
     import { ProposalStatus } from '@contexts/governance/enums'
     import {
         participationOverview,
@@ -217,7 +217,7 @@
                         isOpened={openedQuestionIndex === questionIndex}
                         selectedAnswerValue={selectedAnswerValues[questionIndex]}
                         votedAnswerValue={votedAnswerValues[questionIndex]}
-                        allVotes={proposalState?.questions[questionIndex]?.answers}
+                        answerStatuses={proposalState?.questions[questionIndex]?.answers}
                         on:clickQuestion={handleQuestionClick}
                         on:clickAnswer={handleAnswerClick}
                     />

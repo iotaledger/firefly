@@ -7,13 +7,11 @@ import { addActivitiesToAccountActivitiesInAllAccountActivities } from '@core/wa
 import { generateActivities, preprocessTransaction } from '@core/wallet/utils'
 
 import { hasToRevote } from '../stores'
-import { isSelectedAccountVoting } from '../utils'
 import { handleError } from '@core/error/handlers'
 
-export async function setVotingPower(rawAmount: string): Promise<void> {
+export async function setVotingPower(rawAmount: string, isVoting: boolean): Promise<void> {
     try {
         // If voting power is set to '0', the PARTICIPATE tag is removed and no revoting has to occur.
-        const isVoting = await isSelectedAccountVoting()
         hasToRevote.set(rawAmount !== '0' && isVoting)
 
         const account = get(selectedAccount)
