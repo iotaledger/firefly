@@ -17,14 +17,14 @@ export function handleDeepLinkAddProposalOperation(searchParams: URLSearchParams
          * NOTE: If we throw an error as normal, it will be handled and displayed in the "failed link"
          * popup.
          */
-        if (get(selectedProposal)?.id !== eventId) {
-            getProposalFromEventId(eventId).then((proposal) => {
+        getProposalFromEventId(eventId).then((proposal) => {
+            if (get(selectedProposal)?.id !== eventId) {
                 selectedProposal.set(proposal)
-                if (get(governanceRoute) !== GovernanceRoute.Details) {
-                    get(governanceRouter).goTo(GovernanceRoute.Details)
-                }
-            })
-        }
+            }
+            if (get(governanceRoute) !== GovernanceRoute.Details) {
+                get(governanceRouter).goTo(GovernanceRoute.Details)
+            }
+        })
         showAppNotification({
             type: 'warning',
             alert: true,
