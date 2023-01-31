@@ -5,7 +5,7 @@ import { getProposalFromEventId, isProposalAlreadyAdded, isValidProposalId } fro
 
 import { AddProposalOperationParameter } from '../../../enums'
 import { selectedProposal } from '@contexts/governance/stores'
-import { GovernanceRoute, governanceRouter } from '@core/router'
+import { governanceRoute, GovernanceRoute, governanceRouter } from '@core/router'
 import { get } from 'svelte/store'
 
 export function handleDeepLinkAddProposalOperation(searchParams: URLSearchParams): void {
@@ -17,10 +17,14 @@ export function handleDeepLinkAddProposalOperation(searchParams: URLSearchParams
          * NOTE: If we throw an error as normal, it will be handled and displayed in the "failed link"
          * popup.
          */
-        getProposalFromEventId(eventId).then((proposal) => {
-            selectedProposal.set(proposal)
-            get(governanceRouter).goTo(GovernanceRoute.Details)
-        })
+        if (get(selectedProposal)?.id !== eventId) {
+            getProposalFromEventId(eventId).then((proposal) => {
+                selectedProposal.set(proposal)
+                if (get(governanceRoute) !== GovernanceRoute.Details) {
+                    get(governanceRouter).goTo(GovernanceRoute.Details)
+                }
+            })
+        }
         showAppNotification({
             type: 'warning',
             alert: true,
