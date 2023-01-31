@@ -82,7 +82,7 @@
 
 <form id="manage-voting-power" on:submit|preventDefault={onSubmit}>
     <Text type={TextType.h4} classes="mb-3">{localize('popups.manageVotingPower.title')}</Text>
-    <Text type={TextType.p} secondary classes="mb-5">{localize('popups.manageVotingPower.body')}</Text>
+    <Text type={TextType.p} classes="mb-5">{localize('popups.manageVotingPower.body')}</Text>
     <div class="space-y-4 mb-6">
         <AssetAmountInput
             bind:this={assetAmountInput}
