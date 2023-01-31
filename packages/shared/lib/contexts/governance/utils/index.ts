@@ -1,6 +1,7 @@
 export * from './calculateWeightedVotes'
 export * from './createProposalsFromEvents'
 export * from './getActiveParticipation'
+export * from './getNextProposalPhase'
 export * from './getNumberOfActiveProposals'
 export * from './getNumberOfTotalProposals'
 export * from './getNumberOfVotedProposals'
