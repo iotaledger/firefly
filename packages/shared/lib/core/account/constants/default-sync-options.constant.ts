@@ -1,18 +1,22 @@
 import type { SyncOptions } from '@iota/wallet'
 
-export const SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS: SyncOptions = {
+export const DEFAULT_SYNC_OPTIONS: SyncOptions = {
+    account: {
+        basicOutputs: true,
+        aliasOutputs: true,
+        nftOutputs: true,
+    },
     alias: {
         aliasOutputs: false,
         basicOutputs: false,
         nftOutputs: false,
-        foundryOutputs: false,
+        foundryOutputs: true,
     },
     nft: {
         aliasOutputs: false,
         basicOutputs: false,
         nftOutputs: false,
     },
-    syncOnlyMostBasicOutputs: true,
-    syncPendingTransactions: false,
-    syncIncomingTransactions: false,
+    syncIncomingTransactions: true,
+    syncNativeTokenFoundries: true,
 }

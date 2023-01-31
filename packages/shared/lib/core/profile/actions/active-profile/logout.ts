@@ -20,8 +20,9 @@ import { get } from 'svelte/store'
 /**
  * Logout from active profile
  */
-export function logout(clearActiveProfile: boolean = true, _lockStronghold: boolean = true): Promise<void> {
+export async function logout(clearActiveProfile: boolean = true, _lockStronghold: boolean = true): Promise<void> {
     const { lastActiveAt, loggedIn, hasLoadedAccounts, type } = get(activeProfile)
+    await unsubscribeFromWalletApiEvents()
 
     // (TODO): Figure out why we are using a promise here?
     return new Promise((resolve) => {
@@ -37,8 +38,6 @@ export function logout(clearActiveProfile: boolean = true, _lockStronghold: bool
         const _activeProfile = get(activeProfile)
         if (_activeProfile) {
             const manager = get(profileManager)
-
-            unsubscribeFromWalletApiEvents()
 
             // stop background sync
             // TODO: Make sure we need this. Would destroying the profile manager also stop background syncing automatically?
