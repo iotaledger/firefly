@@ -41,7 +41,7 @@
     }
 
     function setWinnerAnswerIndex(): void {
-        if ($selectedProposal.status === ProposalStatus.Ended) {
+        if ($selectedProposal.status === ProposalStatus.Ended && answerStatuses?.length > 0) {
             const answersAccumulated = answerStatuses?.map((answer) => answer.accumulated)
             const maxAccumulated = Math.max(...answersAccumulated)
             winnerAnswerIndex = answersAccumulated?.indexOf(maxAccumulated)
