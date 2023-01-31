@@ -4,9 +4,9 @@ import { OFFICIAL_NODE_URLS } from '@core/network/constants'
 import { activeProfile, activeProfileId } from '@core/profile/stores'
 import { proposalsState } from '../stores'
 import { IProposal } from '../interfaces'
+import { ProposalStatus, ProposalType } from '../enums'
 import { getParticipationsForProposal } from './getParticipationsForProposal'
 import { getLatestProposalStatus } from './getLatestProposalStatus'
-import { ProposalStatus, ProposalType } from '../enums'
 
 export async function createProposalFromEvent(event: ParticipationEventWithNodes): Promise<IProposal> {
     const { data, id } = event
