@@ -1,4 +1,4 @@
-import { getVotingEvents } from '@contexts/governance/actions'
+import { getVotingEvents } from '../actions'
 import { IProposal } from '../interfaces'
 import { createProposalFromEvent } from './createProposalFromEvent'
 
