@@ -9,8 +9,6 @@
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
     import { popupState } from '@auxiliary/popup/stores'
 
-    export let isVoting: boolean = false
-
     const rawAmount = '0'
 
     function onCancelClick(): void {
@@ -27,7 +25,7 @@
                     type: 'manageVotingPower',
                     props: { newVotingPower: rawAmount },
                 })
-                await setVotingPower(rawAmount, isVoting)
+                await setVotingPower(rawAmount, true)
             })
         } catch (err) {
             handleError(err)

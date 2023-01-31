@@ -46,10 +46,7 @@
 
             const isVoting = await isSelectedAccountVoting()
             if (amount === '0' && isVoting) {
-                openPopup({
-                    type: 'votingPowerToZero',
-                    props: { isVoting },
-                })
+                openPopup({ type: 'votingPowerToZero' })
                 return
             }
 
