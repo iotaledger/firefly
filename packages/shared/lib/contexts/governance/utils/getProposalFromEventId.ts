@@ -1,4 +1,4 @@
-import { getVotingEvents } from '@core/profile-manager/api'
+import { getVotingEvents } from '@contexts/governance/actions'
 import { IProposal } from '../interfaces'
 import { createProposalFromEvent } from '..'
 
