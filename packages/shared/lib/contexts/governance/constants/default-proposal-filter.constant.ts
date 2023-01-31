@@ -1,5 +1,6 @@
-import { IProposalFilter, ProposalOrderOption, ProposalStatus, ProposalType } from '@contexts/governance'
 import { BooleanFilterOption, OrderOption } from '@core/utils/enums/filters'
+import { ProposalOrderOption, ProposalStatus, ProposalType } from '../enums'
+import { IProposalFilter } from '../interfaces'
 
 export const DEFAULT_PROPOSAL_FILTER: IProposalFilter = {
     phase: {
