@@ -1,5 +1,5 @@
 import { cleanupOnboarding } from '@contexts/onboarding'
-import { createNewAccount, IAccount, setSelectedAccount } from '@core/account'
+import { createNewAccount, DEFAULT_SYNC_OPTIONS, IAccount, setSelectedAccount } from '@core/account'
 import { handleError } from '@core/error/handlers/handleError'
 import { pollLedgerNanoStatus } from '@core/ledger'
 import { pollMarketPrices } from '@core/market/actions'
@@ -64,7 +64,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                     accountStartIndex: 0,
                     accountGapLimit: initialAccountRange,
                     addressGapLimit,
-                    syncOptions: { syncIncomingTransactions: true },
+                    syncOptions: DEFAULT_SYNC_OPTIONS,
                 }
                 accounts = await recoverAccounts(recoverAccountsPayload)
             } else {

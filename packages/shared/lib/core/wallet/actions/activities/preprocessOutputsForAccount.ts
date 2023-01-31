@@ -1,5 +1,4 @@
-import { OutputData, Transaction } from '@iota/wallet'
-import { IOutputResponse, ITransactionPayload } from '@iota/types'
+import type { OutputData, Transaction } from '@iota/wallet'
 
 import { IAccountState } from '@core/account/interfaces'
 
@@ -52,8 +51,8 @@ function getTransactionsMapFromList(transactions: Transaction[]): { [transaction
     return transactionMap
 }
 
-function getMapFromList(transactions: [string, [ITransactionPayload, IOutputResponse[]]][]): {
-    [transactionId: string]: [ITransactionPayload, IOutputResponse[]]
+function getMapFromList(transactions: [string, Transaction][]): {
+    [transactionId: string]: Transaction
 } {
     const transactionMap = {}
     for (const [transactionId, payload] of transactions) {
