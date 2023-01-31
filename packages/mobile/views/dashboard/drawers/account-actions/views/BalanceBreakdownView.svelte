@@ -1,13 +1,12 @@
 <script lang="typescript">
-    import { closePopup, openPopup } from '@auxiliary/popup'
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { checkActiveProfileAuth } from '@core/profile'
     import { selectedAccountAssets } from '@core/wallet'
-    import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import type { AccountBalance } from '@iota/wallet'
     import { BalanceSummarySection, Button, HR } from 'shared/components'
+    import { AccountAction } from '../../../../../lib/contexts/dashboard'
+    import { accountActionsRouter } from '../../../../../lib/routers'
 
     $: ({ baseCoin } = $selectedAccountAssets)
 
@@ -38,24 +37,7 @@
         : potentiallyLockedOutputsStorageDeposit
 
     function handleConsolidation(): void {
-        openPopup({
-            type: 'confirmation',
-            props: {
-                title: localize('popups.minimizeStorageDeposit.title'),
-                description: localize('popups.minimizeStorageDeposit.description'),
-                confirmText: localize('popups.minimizeStorageDeposit.confirmButton'),
-                info: true,
-                onConfirm: async () => {
-                    await checkActiveProfileAuth(
-                        async () => {
-                            await consolidateOutputs()
-                            closePopup()
-                        },
-                        { stronghold: true }
-                    )
-                },
-            },
-        })
+        $accountActionsRouter.next({ action: AccountAction.Consolidate })
     }
 </script>
 

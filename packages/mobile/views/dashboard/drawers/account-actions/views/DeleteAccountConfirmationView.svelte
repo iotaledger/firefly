@@ -8,7 +8,7 @@
     import { Button } from '@ui'
     import { ButtonVariant, Error, HTMLButtonType, PasswordInput, Text, TextType } from 'shared/components'
 
-    export let onDeleteSuccess: () => unknown
+    export let onSuccess: () => unknown
 
     let password: string
     let error: string
@@ -27,7 +27,7 @@
                 await setStrongholdPassword(password)
             }
             await deleteAccount($selectedAccount?.index)
-            onDeleteSuccess && onDeleteSuccess()
+            onSuccess && onSuccess()
         } catch (err) {
             error = err.error
             handleError(err)

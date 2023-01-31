@@ -4,4 +4,5 @@ export enum AccountAction {
     Delete = 'delete',
     Hide = 'hide',
     ExportTransactions = 'exportTransactions',
+    Consolidate = 'consolidate',
 }

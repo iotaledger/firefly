@@ -27,6 +27,9 @@
             case AccountActionsRoute.BalanceBreakdown:
                 title = localize('popups.storageDepositBreakdown.title')
                 break
+            case AccountActionsRoute.ConsolidateConfirmation:
+                title = localize('popups.minimizeStorageDeposit.title')
+                break
         }
     }
 </script>
