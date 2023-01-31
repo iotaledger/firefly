@@ -11,16 +11,26 @@
         getActivityTileTitle,
     } from '@core/wallet'
     import { truncateString } from '@core/utils'
-    import { Text, AssetIcon, FontWeight } from 'shared/components'
+    import { AssetIcon, ActivityTileContent } from 'shared/components'
 
     export let activity: TransactionActivity
 
     let asset: IPersistedAsset
     $: $selectedAccountAssets, (asset = getAssetFromPersistedAssets(activity.assetId))
-    $: title = getActivityTileTitle(activity)
-    $: subjectLocale = getSubjectLocale(activity)
+    $: action = localize(getActivityTileTitle(activity))
+    $: subject =
+        activity.direction === ActivityDirection.SelfTransaction
+            ? localize('general.internalTransaction')
+            : localize(isIncoming ? 'general.fromAddress' : 'general.toAddress', {
+                  values: { account: getSubjectLocale(activity) },
+              })
+
     $: amount = getFormattedAmountFromActivity(activity)
     $: isIncoming = activity.direction === ActivityDirection.Incoming
+    $: formattedAsset = {
+        text: amount,
+        color: isIncoming || activity.direction === ActivityDirection.SelfTransaction ? 'blue-700' : '',
+    }
 
     function getSubjectLocale(_activity: TransactionActivity): string {
         const { isShimmerClaiming, subject } = _activity
@@ -39,34 +49,6 @@
     }
 </script>
 
-<AssetIcon {asset} showVerifiedBadgeOnly />
-<div class="flex flex-col w-full space-y-0.5">
-    <div class="flex flex-row justify-between space-x-1">
-        <Text
-            fontWeight={FontWeight.semibold}
-            lineHeight="140"
-            classes="overflow-hidden overflow-ellipsis multiwrap-line2"
-        >
-            {localize(title)}
-        </Text>
-        <Text
-            fontWeight={FontWeight.semibold}
-            lineHeight="140"
-            color={isIncoming ? 'blue-700' : ''}
-            classes="whitespace-nowrap"
-        >
-            {amount}
-        </Text>
-    </div>
-    <div class="flex flex-row justify-between">
-        <Text fontWeight={FontWeight.medium} lineHeight="140" color="gray-600">
-            {#if activity.direction === ActivityDirection.SelfTransaction}
-                {localize('general.internalTransaction')}
-            {:else}
-                {localize(isIncoming ? 'general.fromAddress' : 'general.toAddress', {
-                    values: { account: subjectLocale },
-                })}
-            {/if}
-        </Text>
-    </div>
-</div>
+<ActivityTileContent {action} {subject} {formattedAsset}>
+    <AssetIcon slot="icon" {asset} showVerifiedBadgeOnly />
+</ActivityTileContent>
