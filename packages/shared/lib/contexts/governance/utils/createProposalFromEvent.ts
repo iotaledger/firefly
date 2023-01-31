@@ -5,16 +5,9 @@ import { IProposal } from '@contexts/governance/interfaces'
 import { OFFICIAL_NODE_URLS } from '@core/network'
 import { activeProfile, activeProfileId } from '@core/profile'
 import { getLatestProposalStatus, getParticipationsForProposal } from '..'
-import { getVotingEvents } from '../actions'
 import { proposalsState } from '../stores'
 
-export async function createProposals(): Promise<IProposal[]> {
-    const events: ParticipationEventWithNodes[] = Object.values(await getVotingEvents())
-    const proposals: IProposal[] = await Promise.all(events?.map(async (event) => createProposalFromEvent(event)))
-    return proposals
-}
-
-async function createProposalFromEvent(event: ParticipationEventWithNodes): Promise<IProposal> {
+export async function createProposalFromEvent(event: ParticipationEventWithNodes): Promise<IProposal> {
     const { data, id } = event
 
     const officialNodeUrls = OFFICIAL_NODE_URLS[get(activeProfile).networkProtocol][get(activeProfile).networkType]
