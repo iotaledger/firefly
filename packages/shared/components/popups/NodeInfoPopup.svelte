@@ -19,11 +19,9 @@
     export let nodeInfoTab: NodeInfoTab = NodeInfoTab.General
 
     const NODE_INFO_LOCALE_BASE_PATH = 'popups.node.info'
-    const NODE_INFO_TAB_MAP: Readonly<
-        {
-            [key in NodeInfoTab]: { [key: string]: { localeKey: string; nodeInfoPath: string } }
-        }
-    > = {
+    const NODE_INFO_TAB_MAP: Readonly<{
+        [key in NodeInfoTab]: { [key: string]: { localeKey: string; nodeInfoPath: string } }
+    }> = {
         [NodeInfoTab.General]: {
             url: { localeKey: 'general.url', nodeInfoPath: undefined },
             name: { localeKey: 'general.name', nodeInfoPath: 'name' },
