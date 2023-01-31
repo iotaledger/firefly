@@ -1089,7 +1089,7 @@
         "confirmNftBurn": {
             "title": "Burn {nftName}",
             "description": "Are you sure you want to burn this NFT?",
-            "hint": "Please note that burning a NFT frees the storage deposit attached to it and is not reversible."
+            "hint": "Please note that burning an NFT frees the storage deposit attached to it and is not reversible."
         },
         "proceedAnyway": "Proceed anyway",
         "save": "Save",
@@ -1222,6 +1222,7 @@
         "unverifyToken": "Unverify token",
         "hideToken": "Hide token",
         "unhideToken": "Unhide token",
+        "burn": "Burn",
         "burnToken": "Burn token",
         "faucetRequest": "Get {token} tokens",
         "refreshTokenMetadata": "Refresh token metadata",
