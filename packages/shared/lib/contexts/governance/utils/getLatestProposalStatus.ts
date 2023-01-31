@@ -1,5 +1,5 @@
-import { nodeInfo } from '@core/network/stores'
 import { get } from 'svelte/store'
+import { nodeInfo } from '@core/network/stores'
 import { ProposalStatus } from '../enums'
 
 export function getLatestProposalStatus(milestones: Record<ProposalStatus, number>): ProposalStatus {
