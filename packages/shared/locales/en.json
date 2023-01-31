@@ -577,6 +577,7 @@
             },
             "proposalsDetails": {
                 "title": "Details",
+                "totalProposals": "Total proposals",
                 "activeProposals": "Active proposals",
                 "votingProposals": "Proposals you are voting on",
                 "votedProposals": "Total proposals you voted on"
@@ -584,8 +585,9 @@
             "proposals": {
                 "title": "Proposals",
                 "voted": "Voted",
-                "successRegister": "Proposal successfully registered",
-                "successRemove": "Proposal successfully removed"
+                "successAdd": "Proposal successfully added",
+                "successRemove": "Proposal successfully removed",
+                "emptyTitle": "No proposals"
             },
             "statusTimeline": {
                 "upcoming": "Announcement",
@@ -601,12 +603,15 @@
                 },
                 "proposalInformation": {
                     "title": "Proposal information",
+                    "votingOpens": "Voting opens on",
+                    "countingStarts": "Counting starts on",
                     "countingEnds": "Counting ends on",
+                    "countingEnded": "Counting ended on",
                     "eventId": "Event ID",
                     "nodeUrl": "Node URL"
                 },
-                "voteOpens": "Vote opens in {time}",
-                "fetching": "Fetching proposal data"
+                "fetching": "Fetching proposal data",
+                "hintVote": "You can not vote on a proposal that is in the announcement phase, voting will open in {time}."
             }
         }
     },
@@ -641,6 +646,10 @@
             "pendingTransactions": {
                 "title": "Transactions",
                 "subtitle": "Temporarily locked in unclaimed transactions"
+            },
+            "votingPowerOutput": {
+                "title": "Governance",
+                "subtitle": "Reserved for voting power"
             },
             "minimizeStorageDepositButton": "Minimize storage deposit"
         },
@@ -1011,9 +1020,9 @@
             "body": "Define your voting power to vote on proposals.",
             "hint": "All funds that you allocate to voting are locked. In order to make them spendable again, you need to decrease your voting power. This affects all proposals with an active vote."
         },
-        "registerProposal": {
-            "title": "Register proposal",
-            "body": "Please provide the information listed below to register a proposal."
+        "addProposal": {
+            "title": "Add proposal",
+            "body": "Please provide the information listed below to add a proposal."
         },
         "voteForProposal": {
             "title": "Vote for proposal",
@@ -1224,7 +1233,7 @@
         "addReference": "Add reference",
         "depositNft": "Deposit NFTs",
         "vote": "Vote",
-        "registerProposal": "Register proposal",
+        "addProposal": "Add proposal",
         "removeProposal": "Remove proposal",
         "stopVoting": "Stop voting",
         "revote": "Revote"
@@ -1570,6 +1579,24 @@
             "incoming": "Incoming",
             "outgoing": "Outgoing",
             "selfTransaction": "Self transaction"
+        },
+        "proposalType": {
+            "label": "Type",
+            "official": "Official",
+            "custom": "Custom"
+        },
+        "phase": {
+            "label": "Phase"
+        },
+        "participated": {
+            "label": "Participated",
+            "yes": "Yes",
+            "no": "No"
+        },
+        "proposalOrder": {
+            "label": "Order",
+            "name": "Name",
+            "phase": "Phase"
         }
     },
     "dates": {
@@ -1881,9 +1908,9 @@
             }
         },
         "governance": {
-            "unableToRegisterProposal": {
-                "short": "Unable to register proposal",
-                "long": "An error occurred while trying to register proposal {proposalId}"
+            "unableToAddProposal": {
+                "short": "Unable to add proposal",
+                "long": "An error occurred while trying to add proposal {proposalId}"
             }
         }
     },

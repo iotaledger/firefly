@@ -7,44 +7,30 @@
     import { selectedProposal } from '@contexts/governance/stores'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { Position } from './enums'
+    import { getPercentagesFromAnswerStatuses, IProposalAnswerPercentages } from '@contexts/governance'
 
     const dispatch = createEventDispatcher()
 
-    export let allVotes: AnswerStatus[] = undefined
+    export let answerStatuses: AnswerStatus[] = []
     export let questionIndex: number = undefined
     export let isOpened = false
     export let question: Question
     export let selectedAnswerValue: number = undefined
     export let votedAnswerValue: number = undefined
 
-    let percentages: string[]
+    let percentages: IProposalAnswerPercentages = {}
     let winnerAnswerIndex: number
 
     $: answers = [...question?.answers, { value: 0, text: 'Abstain', additionalInfo: '' }]
-    $: allVotes, calculatePercentagesFromAllVotes()
+    $: percentages = getPercentagesFromAnswerStatuses(answerStatuses)
     $: disabled =
         $selectedProposal.status === ProposalStatus.Upcoming || $selectedProposal.status === ProposalStatus.Ended
-    $: allVotes, setWinnerAnswerIndex()
+    $: answerStatuses, setWinnerAnswerIndex()
     $: showMargin =
         isOpened ||
         ((votedAnswerValue || votedAnswerValue === ABSTAIN_VOTE_VALUE) && !isOpened) ||
+        ((selectedAnswerValue || selectedAnswerValue === ABSTAIN_VOTE_VALUE) && !isOpened) ||
         winnerAnswerIndex !== undefined
-
-    function calculatePercentagesFromAllVotes(): void {
-        if (
-            $selectedProposal?.status === ProposalStatus.Upcoming ||
-            $selectedProposal?.status === ProposalStatus.Commencing
-        ) {
-            return
-        }
-
-        const totalVotes = allVotes?.reduce((acc, answer) => acc + answer.accumulated, 0)
-        percentages = answers?.map((currentAnswer) => {
-            const answerVotes = allVotes?.find((answer) => answer.value === currentAnswer.value)?.accumulated
-            const divisionResult = answerVotes / totalVotes
-            return Number.isNaN(divisionResult) ? '0%' : `${Math.round(divisionResult * 100)}%`
-        })
-    }
 
     function handleAnswerClick(answerValue: number): void {
         dispatch('clickAnswer', { answerValue, questionIndex })
@@ -56,7 +42,7 @@
 
     function setWinnerAnswerIndex(): void {
         if ($selectedProposal.status === ProposalStatus.Ended) {
-            const answersAccumulated = allVotes?.map((answer) => answer.accumulated)
+            const answersAccumulated = answerStatuses?.map((answer) => answer.accumulated)
             const maxAccumulated = Math.max(...answersAccumulated)
             winnerAnswerIndex = answersAccumulated?.indexOf(maxAccumulated)
         }
@@ -67,14 +53,18 @@
     class="flex flex-col px-5 py-4 rounded-xl border border-solid border-gray-200 dark:border-transparent dark:bg-gray-850 cursor-pointer"
 >
     <div on:click={handleQuestionClick} class="flex justify-between items-center">
-        <div class="flex flex-col">
+        <div class="flex flex-col min-w-0">
             {#if questionIndex !== undefined}
                 <Text smaller fontWeight={FontWeight.bold} overrideColor classes="mb-1 text-blue-500">
                     Question {questionIndex + 1}
                 </Text>
             {/if}
             <div class="flex flex-row space-x-1.5 items-center">
-                <Text fontWeight={FontWeight.bold} overrideColor classes="text-gray-900 dark:text-white">
+                <Text
+                    fontWeight={FontWeight.bold}
+                    overrideColor
+                    classes="text-gray-900 dark:text-white {isOpened ? '' : 'truncate'}"
+                >
                     {question.text}
                 </Text>
                 {#if question.additionalInfo}
@@ -88,9 +78,7 @@
                 {/if}
             </div>
         </div>
-        <div class="transform {isOpened ? 'rotate-180' : 'rotate-0'}">
-            <Icon icon={IconEnum.ChevronDown} classes="text-gray-500" />
-        </div>
+        <Icon icon={IconEnum.ChevronDown} classes="text-gray-500 transform {isOpened ? 'rotate-180' : 'rotate-0'}" />
     </div>
     <proposal-answers class:mt-4={showMargin} class="flex flex-col gap-2">
         {#each answers as answer, answerIndex}
@@ -101,10 +89,11 @@
                 {selectedAnswerValue}
                 {disabled}
                 hidden={!isOpened}
-                percentage={percentages?.[answerIndex]}
+                percentage={percentages[answer.value]}
                 isWinner={answerIndex === winnerAnswerIndex}
                 proposalStatus={$selectedProposal.status}
-                on:click={handleAnswerClick(answer?.value)}
+                truncate={!isOpened}
+                on:click={handleAnswerClick(answer.value)}
             />
         {/each}
     </proposal-answers>

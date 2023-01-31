@@ -1,4 +1,6 @@
 import {
+    AccountActionsRouter,
+    accountActionsRouter,
     AccountSwitcherRouter,
     accountSwitcherRouter,
     ActivityRouter,
@@ -27,6 +29,8 @@ import {
     profileSetupRouter,
     SendRouter,
     sendRouter,
+    ShimmerClaimingRouter,
+    shimmerClaimingRouter,
     SettingsRouter,
     settingsRouter,
     storageProtectionSetupRouter,
@@ -80,11 +84,13 @@ function initialiseOnboardingSubrouters(): void {
     profileBackupRouter.set(new ProfileBackupRouter())
     profileRecoveryRouter.set(new ProfileRecoveryRouter())
     profileSetupRouter.set(new ProfileSetupRouter())
+    shimmerClaimingRouter.set(new ShimmerClaimingRouter())
     storageProtectionSetupRouter.set(new StorageProtectionSetupRouter())
 }
 
 function initialiseDashboardSubrouters(): void {
     accountSwitcherRouter.set(new AccountSwitcherRouter())
+    accountActionsRouter.set(new AccountActionsRouter())
     activityRouter.set(new ActivityRouter())
     sendRouter.set(new SendRouter())
     tokenRouter.set(new TokenRouter())

@@ -1,5 +1,5 @@
 import { INode } from '@core/network'
-import { ProposalStatus } from '../enums'
+import { ProposalStatus, ProposalType } from '../enums'
 import { IOrganization } from './organization.interface'
 
 export interface IProposal {
@@ -7,6 +7,9 @@ export interface IProposal {
     milestones?: Record<ProposalStatus, number>
     organization?: IOrganization
     status: ProposalStatus
+    type: ProposalType
     title: string
+    additionalInfo: string
+    participated: boolean
     nodeUrls: INode[]
 }
