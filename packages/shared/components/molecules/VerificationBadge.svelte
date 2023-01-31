@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Icon as Icons } from '@auxiliary/icon'
     import { NotVerifiedStatus, VerifiedStatus } from '@core/wallet'
     import { Icon } from 'shared/components'

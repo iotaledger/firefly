@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { localize } from '@core/i18n'
     import { INode } from '@core/network'
     import { Button, ButtonVariant, Text, TextType } from 'shared/components'

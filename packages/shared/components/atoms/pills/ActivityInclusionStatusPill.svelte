@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { localize } from '@core/i18n'
     import { InclusionState } from '@core/wallet'
     import Pill from './Pill.svelte'

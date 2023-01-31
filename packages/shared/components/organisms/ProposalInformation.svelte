@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { KeyValueBox, Pane, Text } from 'shared/components'
     import { formatDate, localize } from '@core/i18n'
     import { networkStatus } from '@core/network/stores'

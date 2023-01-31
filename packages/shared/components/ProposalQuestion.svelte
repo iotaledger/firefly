@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import type { AnswerStatus, Question } from '@iota/wallet'
     import { createEventDispatcher } from 'svelte'
     import { Text, FontWeight, Icon, ProposalAnswer, TooltipIcon } from 'shared/components'
@@ -7,7 +7,7 @@
     import { selectedProposal } from '@contexts/governance/stores'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { Position } from './enums'
-    import { getPercentagesFromAnswerStatuses } from '@contexts/governance'
+    import { getPercentagesFromAnswerStatuses, IProposalAnswerPercentages } from '@contexts/governance'
 
     const dispatch = createEventDispatcher()
 
@@ -18,7 +18,7 @@
     export let selectedAnswerValue: number = undefined
     export let votedAnswerValue: number = undefined
 
-    let percentages: { [key: number]: string } = {}
+    let percentages: IProposalAnswerPercentages = {}
     let winnerAnswerIndex: number
 
     $: answers = [...question?.answers, { value: 0, text: 'Abstain', additionalInfo: '' }]

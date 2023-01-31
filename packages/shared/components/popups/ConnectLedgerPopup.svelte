@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { onboardingProfile } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
     import { LedgerConnectionState, ledgerConnectionState } from '@core/ledger'

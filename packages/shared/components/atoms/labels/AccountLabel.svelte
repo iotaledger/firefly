@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { IAccountState } from '@core/account'
     import { Text, FontWeight, ColoredCircle } from 'shared/components/'
 

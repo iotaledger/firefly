@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { formatCurrency } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
     import { formatTokenAmountBestMatch, IAsset } from '@core/wallet'

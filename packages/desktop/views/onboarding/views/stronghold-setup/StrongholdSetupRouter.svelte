@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Transition } from 'shared/components'
     import { SetupStrongholdPasswordView } from './views'
     import { strongholdSetupRoute, StrongholdSetupRoute } from '@core/router'

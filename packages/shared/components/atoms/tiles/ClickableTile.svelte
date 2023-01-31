@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Tile } from 'shared/components'
 
     export let disabled = false

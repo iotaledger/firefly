@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { localize } from '@core/i18n'
     import { isStrongholdUnlocked } from '@core/profile-manager'
     import { Activity } from '@core/wallet'

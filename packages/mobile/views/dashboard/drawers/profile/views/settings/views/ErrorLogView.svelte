@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { errorLog } from '@core/error'
     import { localize } from '@core/i18n'
     import { setClipboard } from '@core/utils'

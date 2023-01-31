@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { showAppNotification } from '@auxiliary/notification'
     import { localize } from '@core/i18n'
     import { getOfficialNodes, INode, INodeInfo } from '@core/network'
@@ -33,7 +33,9 @@
 
     const NODE_INFO_LOCALE_BASE_PATH = 'popups.node.info'
     const NODE_INFO_TAB_MAP: Readonly<
-        { [key in NodeInfoTab]: { [key: string]: { localeKey: string; nodeInfoPath: string } } }
+        {
+            [key in NodeInfoTab]: { [key: string]: { localeKey: string; nodeInfoPath: string } }
+        }
     > = {
         [NodeInfoTab.General]: {
             url: { localeKey: 'general.url', nodeInfoPath: undefined },

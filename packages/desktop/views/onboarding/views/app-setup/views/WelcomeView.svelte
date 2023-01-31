@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Animation, Button, Logo, OnboardingLayout, Text } from 'shared/components'
     import features from '@features/features'
     import { mobile } from '@core/app'

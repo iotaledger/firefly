@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Button, Text, ButtonSize } from 'shared/components'
     import { localize } from '@core/i18n'
     import { openUrlInBrowser } from '@core/app'

@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Checkbox, Text, Icon } from 'shared/components'
     import { appSettings, initAppSettings } from '@core/app'
     import { localize } from '@core/i18n'

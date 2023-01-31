@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { selectedAccount, setNextSelectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { activeProfile, nonHiddenActiveAccounts, updateActiveAccountMetadata } from '@core/profile'

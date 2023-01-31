@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import type { Answer } from '@iota/wallet'
     import { createEventDispatcher } from 'svelte'
     import { Text, FontWeight, TooltipIcon, PingingBadge, Icon } from 'shared/components'

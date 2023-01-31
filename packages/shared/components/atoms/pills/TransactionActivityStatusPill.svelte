@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { ActivityAction, ActivityDirection, ActivityType, InclusionState } from '@core/wallet'
     import ActivityInclusionStatusPill from './ActivityInclusionStatusPill.svelte'
 

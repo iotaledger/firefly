@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     export let innerColor = 'blue-500'
     export let outerColor = 'blue-500'
     export let classes = ''

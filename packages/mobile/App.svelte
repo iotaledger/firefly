@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { onMount } from 'svelte'
     import { localeDirection, setupI18n, _ } from '@core/i18n'
     import { checkAndMigrateProfiles, cleanupEmptyProfiles } from '@core/profile'

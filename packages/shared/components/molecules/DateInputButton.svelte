@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { formatDate } from '@core/i18n'
     import { Text, DateTimePicker, Icon } from 'shared/components'
     import { appSettings } from '@core/app'

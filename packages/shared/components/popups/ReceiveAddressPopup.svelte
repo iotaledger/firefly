@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { QR, Text, FontWeight } from 'shared/components'
     import { AddressBox } from 'shared/components/atoms'
     import { localize } from '@core/i18n'

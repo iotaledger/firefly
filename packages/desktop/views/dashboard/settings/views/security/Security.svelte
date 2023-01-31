@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { isSoftwareProfile } from '@core/profile'
     import { SecuritySettingsRoute } from '@core/router'
     import { HR } from 'shared/components'

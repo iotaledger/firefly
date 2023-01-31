@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { requestTokensFromFaucet } from '@contexts/developer'
     import { localize } from '@core/i18n'
     import { nodeInfo } from '@core/network'

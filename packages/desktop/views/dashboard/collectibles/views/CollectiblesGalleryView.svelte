@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { localize } from '@core/i18n'
     import { nftSearchTerm, queriedNfts, selectedAccountNfts } from '@core/nfts'
     import { FontWeight, Illustration, NftGallery, Text, ReceiveButton, SearchInput } from 'shared/components'
