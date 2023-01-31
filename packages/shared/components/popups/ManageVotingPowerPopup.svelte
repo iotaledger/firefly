@@ -7,17 +7,18 @@
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { convertToRawAmount, visibleSelectedAccountAssets } from '@core/wallet'
-    import { closePopup } from '@auxiliary/popup/actions'
+    import { closePopup, openPopup } from '@auxiliary/popup/actions'
     import { popupState } from '@auxiliary/popup/stores'
     import { hasToRevote } from '@contexts/governance/stores'
     import { onMount } from 'svelte'
     import { modifyPopupState } from '@auxiliary/popup/helpers'
+    import { isSelectedAccountVoting } from '@contexts/governance/utils'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let newVotingPower: string = undefined
 
     let assetAmountInput: AssetAmountInput
-    let amount: number
+    let amount: string
     let rawAmount = newVotingPower ?? $selectedAccount?.votingPower
     let confirmDisabled = false
 
@@ -31,7 +32,7 @@
             confirmDisabled = true
             return
         }
-        const convertedSliderAmount = convertToRawAmount(amount.toString(), asset?.metadata).toString()
+        const convertedSliderAmount = convertToRawAmount(amount, asset?.metadata).toString()
         confirmDisabled = convertedSliderAmount === $selectedAccount?.votingPower || $selectedAccount?.isTransferring
     }
 
@@ -43,12 +44,21 @@
         try {
             await assetAmountInput?.validate(true)
 
+            const isVoting = await isSelectedAccountVoting()
+            if (amount === '0' && isVoting) {
+                openPopup({
+                    type: 'votingPowerToZero',
+                    props: { isVoting },
+                })
+                return
+            }
+
             // After unlocking stronghold popup, the popup tracks newVotingPower to show it when reopened.
             $popupState.props = { newVotingPower: rawAmount }
 
             await checkActiveProfileAuth(
                 async () => {
-                    await setVotingPower(rawAmount)
+                    await setVotingPower(rawAmount, isVoting)
                 },
                 { stronghold: true, ledger: false }
             )
