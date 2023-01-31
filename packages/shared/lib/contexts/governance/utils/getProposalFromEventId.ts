@@ -4,9 +4,13 @@ import { createProposalFromEvent } from '..'
 
 export async function getProposalFromEventId(eventId: string): Promise<IProposal> {
     const events = await getVotingEvents()
-    const event = events.find((event) => event.id === eventId)
+    const event = events[eventId]
     /**
      * NOTE: If createProposalFromEvent function starts having stateful behavior (store, persist value) then we should refactor this function to not use it.
      */
-    return createProposalFromEvent(event)
+    if (event === undefined) {
+        throw new Error(`Event with id ${eventId} not found`)
+    } else {
+        return createProposalFromEvent(event)
+    }
 }
