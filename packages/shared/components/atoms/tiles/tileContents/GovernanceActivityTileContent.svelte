@@ -8,7 +8,6 @@
     } from '@core/wallet'
     import { ActivityTileContent } from 'shared/components'
     import { Icon } from '@lib/auxiliary/icon'
-    import { truncateString } from '@core/utils'
 
     export let activity: GovernanceActivity
 
@@ -18,11 +17,6 @@
     $: icon = isVotingPowerActivity ? Icon.Governance : Icon.Voted
     $: amount = isVotingPowerActivity ? getFormattedVotingPowerFromGovernanceActivity(activity) : ''
     $: title = localize(getActivityTileTitle(activity))
-    $: subtitle = activity.participation
-        ? localize('general.forEvent', {
-              values: { eventId: truncateString(activity.participation.eventId, 6, 6) },
-          })
-        : ''
 
     $: rightText = {
         text: amount,
@@ -30,4 +24,4 @@
     }
 </script>
 
-<ActivityTileContent {icon} {title} {subtitle} {rightText} />
+<ActivityTileContent {icon} {title} subtitle={localize('general.internalTransaction')} {rightText} />

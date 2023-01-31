@@ -32,13 +32,13 @@
             </Text>
         {/if}
     </div>
-    <div class="flex flex-col space-y-0.5 justify-center">
+    <div class="flex flex-col space-y-0.5 justify-center overflow-hidden">
         {#if rightText && rightText.text}
             <Text
                 fontWeight={FontWeight.semibold}
                 lineHeight="140"
                 color={rightText.color}
-                classes="text-right overflow-hidden {rightText.classes}"
+                classes="text-right {rightText.classes}"
             >
                 {rightText.text}
             </Text>
