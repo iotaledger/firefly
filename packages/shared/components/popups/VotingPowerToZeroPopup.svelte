@@ -9,7 +9,7 @@
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
     import { popupState } from '@auxiliary/popup/stores'
 
-    const rawAmount = '0'
+    const ZERO_VOTING_POWER = '0'
 
     function onCancelClick(): void {
         closePopup()
@@ -18,14 +18,14 @@
     async function onSubmit(): Promise<void> {
         try {
             // After unlocking stronghold popup, the popup tracks newVotingPower to show it when reopened.
-            $popupState.props = { newVotingPower: rawAmount }
+            $popupState.props = { newVotingPower: ZERO_VOTING_POWER }
 
             await checkActiveProfileAuth(async () => {
                 openPopup({
                     type: 'manageVotingPower',
-                    props: { newVotingPower: rawAmount },
+                    props: { newVotingPower: ZERO_VOTING_POWER },
                 })
-                await setVotingPower(rawAmount, true)
+                await setVotingPower(ZERO_VOTING_POWER, true)
             })
         } catch (err) {
             handleError(err)
