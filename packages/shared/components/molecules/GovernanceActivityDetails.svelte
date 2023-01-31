@@ -4,7 +4,7 @@
     import { GovernanceActivity } from '@core/wallet'
     import { BASE_TOKEN, COIN_TYPE } from '@core/network'
     import { activeProfile } from '@core/profile'
-    import { getVotingEvent } from '@core/profile-manager'
+    import { getVotingEvent } from '@contexts/governance/actions'
     import { truncateString } from '@core/utils'
 
     export let activity: GovernanceActivity

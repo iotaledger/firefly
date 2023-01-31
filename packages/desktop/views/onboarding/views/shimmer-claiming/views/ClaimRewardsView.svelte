@@ -155,7 +155,7 @@
     })
 
     async function onDestroyHelper(): Promise<void> {
-        unsubscribeFromWalletApiEvents(shimmerClaimingProfileManager)
+        await unsubscribeFromWalletApiEvents(shimmerClaimingProfileManager)
         await $shimmerClaimingProfileManager?.stopBackgroundSync()
         if ($isOnboardingLedgerProfile) {
             stopPollingLedgerNanoStatus()
