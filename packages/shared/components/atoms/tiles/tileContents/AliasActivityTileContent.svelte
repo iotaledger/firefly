@@ -7,11 +7,11 @@
 
     export let activity: AliasActivity
 
-    $: title = localize(getActivityTileTitle(activity))
-    $: rightText = {
+    $: action = localize(getActivityTileTitle(activity))
+    $: formattedAsset = {
         text: truncateString(activity.aliasId, 5, 3),
         color: 'blue-700',
     }
 </script>
 
-<ActivityTileContent icon={Icon.Alias} {title} subtitle={localize('general.internalTransaction')} {rightText} />
+<ActivityTileContent icon={Icon.Alias} {action} subject={localize('general.internalTransaction')} {formattedAsset} />

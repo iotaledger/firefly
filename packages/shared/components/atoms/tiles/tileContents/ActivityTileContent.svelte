@@ -2,10 +2,10 @@
     import { Text, Icon, FontWeight } from 'shared/components'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
 
-    export let title: string
-    export let subtitle: string = undefined
+    export let action: string
+    export let subject: string = undefined
     export let icon: IconEnum = undefined
-    export let rightText: { text: string; color?: string; classes?: string } = undefined
+    export let formattedAsset: { text: string; color?: string; classes?: string } = undefined
 </script>
 
 {#if icon}
@@ -24,21 +24,21 @@
             lineHeight="140"
             classes="overflow-hidden overflow-ellipsis multiwrap-line2"
         >
-            {title}
+            {action}
         </Text>
         <Text
             fontWeight={FontWeight.semibold}
             lineHeight="140"
-            color={rightText?.color}
-            classes="text-right {rightText?.classes}"
+            color={formattedAsset?.color}
+            classes="text-right {formattedAsset?.classes}"
         >
-            {rightText?.text ?? ''}
+            {formattedAsset?.text ?? ''}
         </Text>
     </div>
     <div class="flex flex-row w-full justify-between space-x-2 overflow-hidden">
-        {#if subtitle}
+        {#if subject}
             <Text fontWeight={FontWeight.medium} lineHeight="140" color="gray-600">
-                {subtitle}
+                {subject}
             </Text>
         {/if}
     </div>

@@ -16,12 +16,12 @@
         activity.governanceAction === GovernanceAction.IncreaseVotingPower
     $: icon = isVotingPowerActivity ? Icon.Governance : Icon.Voted
     $: amount = isVotingPowerActivity ? getFormattedVotingPowerFromGovernanceActivity(activity) : ''
-    $: title = localize(getActivityTileTitle(activity))
+    $: action = localize(getActivityTileTitle(activity))
 
-    $: rightText = {
+    $: formattedAsset = {
         text: amount,
         color: activity.governanceAction === GovernanceAction.DecreaseVotingPower ? '' : 'blue-700',
     }
 </script>
 
-<ActivityTileContent {icon} {title} subtitle={localize('general.internalTransaction')} {rightText} />
+<ActivityTileContent {icon} {action} subject={localize('general.internalTransaction')} {formattedAsset} />

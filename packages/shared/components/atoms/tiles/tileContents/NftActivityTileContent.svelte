@@ -11,11 +11,11 @@
 
     $: isIncoming =
         activity.direction === ActivityDirection.Incoming || activity.direction === ActivityDirection.SelfTransaction
-    $: title = localize(getActivityTileTitle(activity))
-    $: subtitle = localize(isIncoming ? 'general.fromAddress' : 'general.toAddress', {
+    $: action = localize(getActivityTileTitle(activity))
+    $: subject = localize(isIncoming ? 'general.fromAddress' : 'general.toAddress', {
         values: { account: subjectLocale },
     })
-    $: rightText = {
+    $: formattedAsset = {
         text: nft?.name ?? '',
         color: isIncoming ? 'blue-700' : '',
         classes: 'truncate',
@@ -36,6 +36,6 @@
     }
 </script>
 
-<ActivityTileContent {title} {subtitle} {rightText}>
+<ActivityTileContent {action} {subject} {formattedAsset}>
     <NftImageOrIconBox slot="icon" nftId={activity.nftId} size="medium" />
 </ActivityTileContent>

@@ -17,8 +17,8 @@
 
     let asset: IPersistedAsset
     $: $selectedAccountAssets, (asset = getAssetFromPersistedAssets(activity.assetId))
-    $: title = localize(getActivityTileTitle(activity))
-    $: subtitle =
+    $: action = localize(getActivityTileTitle(activity))
+    $: subject =
         activity.direction === ActivityDirection.SelfTransaction
             ? localize('general.internalTransaction')
             : localize(isIncoming ? 'general.fromAddress' : 'general.toAddress', {
@@ -27,7 +27,7 @@
 
     $: amount = getFormattedAmountFromActivity(activity)
     $: isIncoming = activity.direction === ActivityDirection.Incoming
-    $: rightText = {
+    $: formattedAsset = {
         text: amount,
         color: isIncoming || activity.direction === ActivityDirection.SelfTransaction ? 'blue-700' : '',
     }
@@ -49,6 +49,6 @@
     }
 </script>
 
-<ActivityTileContent {title} {subtitle} {rightText}>
+<ActivityTileContent {action} {subject} {formattedAsset}>
     <AssetIcon slot="icon" {asset} showVerifiedBadgeOnly />
 </ActivityTileContent>

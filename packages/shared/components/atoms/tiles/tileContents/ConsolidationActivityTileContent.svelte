@@ -6,7 +6,7 @@
 
     export let activity: ConsolidationActivity
 
-    $: title = localize(getActivityTileTitle(activity))
+    $: action = localize(getActivityTileTitle(activity))
 </script>
 
-<ActivityTileContent icon={Icon.Currency} {title} subtitle={localize('general.internalTransaction')} />
+<ActivityTileContent icon={Icon.Currency} {action} subject={localize('general.internalTransaction')} />
