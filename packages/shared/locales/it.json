@@ -1080,7 +1080,7 @@
         "confirmNftBurn": {
             "title": "Distruggi {nftName}",
             "description": "Sei sicuro di voler distruggere questo NFT?",
-            "hint": "Si prega di notare che la distruzione di un token libera il deposito di archiviazione collegato ad esso e non è reversibile."
+            "hint": "Si prega di notare che la distruzione di un NFT libera il deposito di archiviazione collegato ad esso e non è reversibile."
         },
         "proceedAnyway": "Procedi comunque",
         "save": "Salva",
@@ -1256,7 +1256,6 @@
         "changingVote": "Modifica del voto",
         "stopVoting": "Votazione interrotta",
         "stoppingVoting": "Interrompere la votazione",
-        "forEvent": "per {eventId}",
         "sentNft": "NFT Inviato",
         "sendingNft": "Invio NFT",
         "receivedNft": "NFT Ricevuto",

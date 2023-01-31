@@ -1,9 +1,9 @@
-import type { EventStatus } from '@iota/wallet'
+import type { ParticipationEventStatus } from '@iota/wallet'
 
 export interface IProposalState {
     [profileId: string]: {
         [proposalId: string]: {
-            state: EventStatus
+            state: ParticipationEventStatus
             nodeUrl: string
         }
     }

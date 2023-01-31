@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { createEventDispatcher } from 'svelte'
     import { DateTimePicker } from 'shared/components'
     import { localize } from '@core/i18n'

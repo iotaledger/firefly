@@ -1,5 +1,5 @@
 import { get } from 'svelte/store'
-import { getVotingProposalState } from '@core/profile-manager/api'
+import { getVotingProposalState } from '@contexts/governance/actions'
 import { activeProfileId } from '@core/profile/stores'
 import { persistent } from '@core/utils/store'
 import { IProposalState } from '../interfaces'

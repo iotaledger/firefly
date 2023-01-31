@@ -1080,7 +1080,7 @@
         "confirmNftBurn": {
             "title": "{nftName} löschen",
             "description": "Bist du sicher, dass du dieses NFT löschen möchtest?",
-            "hint": "Bitte beachte, dass das Verbrennen/Löschen eines Tokens die damit verbundene Speicherkaution freigeben kann und nicht rückgängig gemacht werden kann."
+            "hint": "Bitte beachte, dass das Verbrennen/Löschen eines NFT die damit verbundene Speicherkaution freigeben kann und nicht rückgängig gemacht werden kann."
         },
         "proceedAnyway": "Trotzdem fortfahren",
         "save": "Speichern",
@@ -1256,7 +1256,6 @@
         "changingVote": "Stimme ändern",
         "stopVoting": "Abstimmung gestoppt",
         "stoppingVoting": "Abstimmung stoppt",
-        "forEvent": "für {eventId}",
         "sentNft": "NFT gesendet",
         "sendingNft": "NFT wird gesendet",
         "receivedNft": "NFT empfangen",

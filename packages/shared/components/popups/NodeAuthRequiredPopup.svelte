@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Button, HTMLButtonType, Text, TextInput, TextType } from 'shared/components'
     import type { Auth } from '@iota/wallet'
     import { handleError } from '@core/error/handlers'

@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     export let innerColor = 'red-600'
     export let borderColor = 'white'
     export let darkBorderColor = 'gray-800'

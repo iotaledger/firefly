@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { IAsset, selectedAccountAssets } from '@core/wallet'
     import { AssetList } from '../../../../mobile/components'
     import { tokenRouter } from '../../../lib/routers'

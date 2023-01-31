@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Error, Icon, Text } from 'shared/components'
     import { createEventDispatcher, onMount } from 'svelte'
     import { mobile, PlatformOption, platform } from '@core/app'

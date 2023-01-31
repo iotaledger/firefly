@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Text, CopyableBox, FontWeight } from 'shared/components'
 
     export let address = ''

@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Button, Text, TextType, TextHint } from 'shared/components'
     import { ButtonVariant } from 'shared/components/enums'
     import { closePopup } from '@auxiliary/popup/actions'

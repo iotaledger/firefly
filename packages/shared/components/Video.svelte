@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     export let video
     export let width = '100%'
     export let height = '100%'

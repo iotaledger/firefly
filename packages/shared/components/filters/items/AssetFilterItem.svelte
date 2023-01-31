@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Dropdown } from 'shared/components'
     import type { IDropdownChoice } from '@core/utils'
     import { visibleSelectedAccountAssets } from '@core/wallet'

@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Icon, Text, Tooltip, PingingBadge } from '@ui'
     import { dashboardRoute } from '@core/router'
     import { ISidebarTab } from '../lib/routers'

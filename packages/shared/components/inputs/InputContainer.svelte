@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Box } from 'shared/components/atoms'
     import { Error } from 'shared/components/'
     import { clickOutside } from '@core/utils'

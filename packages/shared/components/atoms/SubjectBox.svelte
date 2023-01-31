@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { localize } from '@core/i18n'
     import { Subject } from '@core/wallet'
     import { Box, AddressBox, Text, AccountLabel, TextType, FontWeight } from 'shared/components'

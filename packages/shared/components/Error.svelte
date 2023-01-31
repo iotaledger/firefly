@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Text } from 'shared/components'
     export let error = ''
 </script>
