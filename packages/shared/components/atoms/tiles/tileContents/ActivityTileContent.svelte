@@ -17,8 +17,8 @@
 {:else}
     <slot name="icon" />
 {/if}
-<div class="flex flex-row w-full justify-between space-x-2 overflow-hidden">
-    <div class="flex flex-col space-y-0.5 flex-shrink-0">
+<div class="flex flex-col w-full space-y-0.5">
+    <div class="flex flex-row justify-between space-x-2 overflow-hidden">
         <Text
             fontWeight={FontWeight.semibold}
             lineHeight="140"
@@ -26,13 +26,6 @@
         >
             {title}
         </Text>
-        {#if subtitle}
-            <Text fontWeight={FontWeight.medium} lineHeight="140" color="gray-600">
-                {subtitle}
-            </Text>
-        {/if}
-    </div>
-    <div class="flex flex-col space-y-0.5 justify-between overflow-hidden">
         <Text
             fontWeight={FontWeight.semibold}
             lineHeight="140"
@@ -41,5 +34,12 @@
         >
             {rightText?.text ?? ''}
         </Text>
+    </div>
+    <div class="flex flex-row w-full justify-between space-x-2 overflow-hidden">
+        {#if subtitle}
+            <Text fontWeight={FontWeight.medium} lineHeight="140" color="gray-600">
+                {subtitle}
+            </Text>
+        {/if}
     </div>
 </div>
