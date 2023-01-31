@@ -1080,7 +1080,7 @@
         "confirmNftBurn": {
             "title": "Spal {nftName}",
             "description": "Czy na pewno chcesz spalić ten NFT?",
-            "hint": "Należy pamiętać, że spalenie tokena zwalnia dołączony do niego depozyt magazynowego i jest to nieodwracalne."
+            "hint": "Należy pamiętać, że spalenie NFT zwalnia dołączony do niego depozyt magazynowego i jest to nieodwracalne."
         },
         "proceedAnyway": "Kontynuuj mimo to",
         "save": "Zapisz",
