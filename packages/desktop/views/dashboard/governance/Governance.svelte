@@ -3,12 +3,7 @@
     import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
     import { GovernanceRoute, governanceRoute, governanceRouter } from '@core/router'
 
-    /**
-     * NOTE: We add one to the selectedAccountIndex because
-     * switching to the first account (index = 0) would evaluate
-     * to false, causing the router to never be reset.
-     */
-    $: $selectedAccountIndex + 1 && $governanceRouter.reset()
+    $: $selectedAccountIndex !== undefined && $governanceRouter.reset()
 </script>
 
 {#if $selectedAccount}
