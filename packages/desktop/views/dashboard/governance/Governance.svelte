@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { DetailsView, ProposalsView } from './views'
+    import { GovernanceDashboardView, ProposalDetailsView } from './views'
     import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
     import { GovernanceRoute, governanceRoute, governanceRouter } from '@core/router'
 
@@ -8,8 +8,8 @@
 
 {#if $selectedAccount}
     {#if $governanceRoute === GovernanceRoute.Proposals}
-        <ProposalsView />
+        <GovernanceDashboardView />
     {:else if $governanceRoute === GovernanceRoute.Details}
-        <DetailsView />
+        <ProposalDetailsView />
     {/if}
 {/if}
