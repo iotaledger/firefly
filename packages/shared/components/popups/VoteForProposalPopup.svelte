@@ -22,9 +22,8 @@
 
     $: isTransferring = $selectedAccount?.isTransferring
 
-    $: numberOfAbstainedQuestions = selectedAnswerValues?.filter(
-        (answerValue) => answerValue === ABSTAIN_VOTE_VALUE
-    ).length
+    $: numberOfAbstainedQuestions =
+        selectedAnswerValues?.filter((answerValue) => answerValue === ABSTAIN_VOTE_VALUE).length ?? 0
 
     async function handleSubmit(): Promise<void> {
         await checkActiveProfileAuth(async () => {

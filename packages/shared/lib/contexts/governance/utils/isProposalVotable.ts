@@ -7,6 +7,7 @@ export function isProposalVotable(status: ProposalStatus): boolean {
             return true
         case ProposalStatus.Upcoming:
         case ProposalStatus.Ended:
+        default:
             return false
     }
 }
