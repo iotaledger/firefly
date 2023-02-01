@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Pane, Proposals, ProposalsDetails, VotingPower, Illustration, Text, FontWeight, Button } from '@ui'
     import { localize } from '@core/i18n'
     import { openPopup } from '@auxiliary/popup'

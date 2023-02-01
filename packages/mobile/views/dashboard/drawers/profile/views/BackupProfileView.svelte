@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { exportStronghold } from '@contexts/settings'
     import { localize } from '@core/i18n'
     import { diffDates } from '@core/utils'

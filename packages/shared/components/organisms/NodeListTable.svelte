@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { localize } from '@core/i18n'
     import { getOfficialNodes, INode, isOfficialNetwork } from '@core/network'
     import { activeProfile } from '@core/profile'

@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { onDestroy } from 'svelte'
     import { Button, KeyValueBox, Text, TextHint, FontWeight } from 'shared/components'
     import { closePopup, openPopup } from '@auxiliary/popup'

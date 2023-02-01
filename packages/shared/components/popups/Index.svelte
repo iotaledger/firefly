@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { mobile, PlatformOption, platform } from '@core/app'
     import { Drawer, Icon } from 'shared/components'
     import { clickOutside } from '@core/utils/ui'

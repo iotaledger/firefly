@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { formatDate, localize } from '@core/i18n'
     import { networkStatus } from '@core/network'
     import { DATE_FORMAT, milestoneToDate } from '@core/utils'

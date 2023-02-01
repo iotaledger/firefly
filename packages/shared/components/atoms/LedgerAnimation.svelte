@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Animation, Illustration } from 'shared/components'
 
     export let animation: string

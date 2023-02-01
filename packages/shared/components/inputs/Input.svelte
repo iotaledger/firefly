@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { onMount, createEventDispatcher, tick } from 'svelte'
     import { Text, InputContainer, TextPropTypes, TextType } from 'shared/components'
     import { DECIMAL_SEPARATORS, formatNumber, getDecimalSeparator, parseCurrency } from '@core/i18n'

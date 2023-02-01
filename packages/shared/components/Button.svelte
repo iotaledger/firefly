@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { ButtonSize, ButtonVariant, HTMLButtonType, Icon, Spinner } from 'shared/components'
     import { onMount } from 'svelte'
     import { appSettings } from '@core/app'

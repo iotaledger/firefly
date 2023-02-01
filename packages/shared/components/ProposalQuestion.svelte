@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import type { AnswerStatus, Question } from '@iota/wallet'
     import { createEventDispatcher } from 'svelte'
     import { Text, FontWeight, Icon, ProposalAnswer, TooltipIcon } from 'shared/components'
@@ -42,7 +42,7 @@
     }
 
     function setWinnerAnswerIndex(): void {
-        if ($selectedProposal.state.status === ProposalStatus.Ended) {
+        if ($selectedProposal.state.status === ProposalStatus.Ended && answerStatuses?.length > 0) {
             const answersAccumulated = answerStatuses?.map((answer) => answer.accumulated)
             const maxAccumulated = Math.max(...answersAccumulated)
             winnerAnswerIndex = answersAccumulated?.indexOf(maxAccumulated)

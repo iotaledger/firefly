@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Modal, SelectorInput, IOption, ColoredCircle } from 'shared/components'
     import { selectedAccountIndex } from '@core/account/stores'
     import { getAccountColorById } from '@core/account/utils'

@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { showAppNotification } from '@auxiliary/notification'
     import { localize } from '@core/i18n'
     import { getOfficialNodes, INode, INodeInfo } from '@core/network'

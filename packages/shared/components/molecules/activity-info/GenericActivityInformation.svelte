@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { KeyValueBox } from 'shared/components'
     import { getFormattedTimeStamp, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'

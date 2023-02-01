@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { deleteProfile } from '@contexts/settings'
     import { localize } from '@core/i18n'
     import { isSoftwareProfile } from '@core/profile'

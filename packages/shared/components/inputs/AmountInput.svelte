@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { NumberInput, FontWeight } from 'shared/components'
 
     export let inputElement: HTMLInputElement = undefined

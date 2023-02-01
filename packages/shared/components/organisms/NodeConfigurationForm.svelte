@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { get } from 'svelte/store'
     import { Input, PasswordInput } from 'shared/components'
     import { INode, checkNodeUrlValidity, checkNetworkId, IClientOptions, nodeInfo } from '@core/network'

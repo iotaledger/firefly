@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { selectedAccount } from '@core/account'
     import features from '@features/features'
     import { ReceiveAddressButton } from 'shared/components/atoms'

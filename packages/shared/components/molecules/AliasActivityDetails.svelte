@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { AddressBox, ActivityInclusionStatusPill } from 'shared/components'
     import { AliasActivity } from '@core/wallet'
 

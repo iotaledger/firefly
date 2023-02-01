@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { DeveloperIndicatorPill, Icon, NetworkIconBadge, Text } from 'shared/components'
     import { getInitials as _getInitials } from '@core/utils'
     import { NetworkProtocol, NetworkType } from '@core/network'

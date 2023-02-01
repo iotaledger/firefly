@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { HR, Modal, Text, TextType } from 'shared/components'
     import {
         NETWORK_HEALTH_COLORS,

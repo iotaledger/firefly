@@ -1,9 +1,13 @@
 import { showAppNotification } from '@auxiliary/notification/actions'
 import { closePopup, openPopup } from '@auxiliary/popup/actions'
 import { isValidUrl } from '@core/utils/validation'
-import { isProposalAlreadyAdded, isValidProposalId } from '@contexts/governance/utils'
+import { getProposalFromEventId, isProposalAlreadyAdded, isValidProposalId } from '@contexts/governance/utils'
 
 import { AddProposalOperationParameter } from '../../../enums'
+import { selectedProposal } from '@contexts/governance/stores'
+import { governanceRoute, GovernanceRoute, governanceRouter } from '@core/router'
+import { get } from 'svelte/store'
+import { selectedAccount } from '@core/account'
 
 export function handleDeepLinkAddProposalOperation(searchParams: URLSearchParams): void {
     const eventId = searchParams.get(AddProposalOperationParameter.EventId)
@@ -14,6 +18,14 @@ export function handleDeepLinkAddProposalOperation(searchParams: URLSearchParams
          * NOTE: If we throw an error as normal, it will be handled and displayed in the "failed link"
          * popup.
          */
+        getProposalFromEventId(eventId, get(selectedAccount)).then((proposal) => {
+            if (get(selectedProposal)?.id !== eventId) {
+                selectedProposal.set(proposal)
+            }
+            if (get(governanceRoute) !== GovernanceRoute.Details) {
+                get(governanceRouter).goTo(GovernanceRoute.Details)
+            }
+        })
         showAppNotification({
             type: 'warning',
             alert: true,

@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Icon } from 'shared/components'
     import { mobile } from '@core/app'
     import { isLocaleLoaded } from '@core/i18n'

@@ -1080,7 +1080,7 @@
         "confirmNftBurn": {
             "title": "Bränn {nftName}",
             "description": "Är du säker på att du vill bränna denna NFT?",
-            "hint": "Observera att bränning av en token frigör lagringsdepositionen ansluten till den men är inte reversibel efteråt."
+            "hint": "Observera att bränning av en NFT frigör lagringsdepositionen ansluten till den men är inte reversibel efteråt."
         },
         "proceedAnyway": "Fortsätt ändå",
         "save": "Spara",
@@ -1256,7 +1256,6 @@
         "changingVote": "Changing vote",
         "stopVoting": "Stopped voting",
         "stoppingVoting": "Stopping to vote",
-        "forEvent": "for {eventId}",
         "sentNft": "NFT skickad",
         "sendingNft": "Skickar NFT",
         "receivedNft": "NFT mottagen",

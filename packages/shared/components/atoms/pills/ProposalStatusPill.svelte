@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Pill } from 'shared/components'
     import { localize } from '@core/i18n'
     import { ProposalStatus } from '@contexts/governance/enums'

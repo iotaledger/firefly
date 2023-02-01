@@ -10,7 +10,7 @@ export async function registerParticipationEvent(
 ): Promise<ParticipationEventWithNodes> {
     const account = get(selectedAccount)
     const event = await account.registerParticipationEvent(eventId, [node])
-    const proposal = await createProposalFromEvent(event, node.url)
+    const proposal = await createProposalFromEvent(event)
     await addProposalState(eventId)
     addProposalToPersistedProposals(proposal, account.index)
 

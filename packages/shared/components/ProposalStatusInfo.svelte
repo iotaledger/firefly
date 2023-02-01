@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { ProposalStatusTimelineTooltip, ProposalStatusPill } from 'shared/components'
     import { Position } from 'shared/components/enums'
     import { ProposalStatus } from '@contexts/governance/enums'

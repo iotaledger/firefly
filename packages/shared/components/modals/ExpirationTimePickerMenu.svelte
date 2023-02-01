@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { formatDate, localize } from '@core/i18n'
     import { ExpirationTime } from '@core/utils'
     import { HR, Modal, MenuItem, ExpirationDateTimePicker } from 'shared/components'
