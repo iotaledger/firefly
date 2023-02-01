@@ -18,3 +18,8 @@ export function isNumberLetterOrPunctuation(key: string): boolean {
     const code = key.charCodeAt(0)
     return (code >= 48 && code <= 57) || (code >= 65 && code <= 122)
 }
+
+export function round(value: number, precision: number): number {
+    const multiplier = Math.pow(10, precision || 0)
+    return Math.round(value * multiplier) / multiplier
+}
