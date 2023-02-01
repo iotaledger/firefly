@@ -1029,6 +1029,7 @@
             "title": "Vote for proposal",
             "body": "You're about to vote for {proposal} proposal.",
             "key": "Your voting power",
+            "hasAbstained": "You are abstaining from answering {numberOfQuestions, plural, one {# question} other {# questions}}.",
             "noVotingPower": "You do not have any voting power. Please increase your voting power from the Governance dashboard."
         },
         "revote": {
