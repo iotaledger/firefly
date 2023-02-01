@@ -10,7 +10,7 @@
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
     import { vote } from '@contexts/governance/actions'
     import { ABSTAIN_VOTE_VALUE } from '@contexts/governance/constants'
-    import { selectedProposal } from '@contexts/governance/stores'
+    import { pendingGovernanceTransactionIds, selectedProposal } from '@contexts/governance/stores'
 
     export let selectedAnswerValues: number[]
 
@@ -20,7 +20,8 @@
     )
     $: hasVotingPower = Number($selectedAccount?.votingPower) > 0
 
-    $: isTransferring = $selectedAccount?.isTransferring
+    $: isTransferring =
+        $selectedAccount?.isTransferring || Boolean($pendingGovernanceTransactionIds?.[$selectedAccount.index])
 
     $: numberOfAbstainedQuestions =
         selectedAnswerValues?.filter((answerValue) => answerValue === ABSTAIN_VOTE_VALUE).length ?? 0
@@ -62,7 +63,9 @@
         {/if}
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" outline onClick={closePopup}>{localize('actions.cancel')}</Button>
+        <Button classes="w-full" disabled={isTransferring} outline onClick={closePopup}
+            >{localize('actions.cancel')}</Button
+        >
         <Button
             type={HTMLButtonType.Submit}
             classes="w-full"
