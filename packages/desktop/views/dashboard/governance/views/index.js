@@ -1,2 +1,2 @@
-export { default as DetailsView } from './DetailsView.svelte'
-export { default as ProposalsView } from './ProposalsView.svelte'
+export { default as GovernanceDashboardView } from './GovernanceDashboardView.svelte'
+export { default as ProposalDetailsView } from './ProposalDetailsView.svelte'
