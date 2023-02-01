@@ -4,14 +4,12 @@
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth, activeProfile } from '@core/profile'
     import {
-        addActivitiesToAccountActivitiesInAllAccountActivities,
         convertBech32ToHexAddress,
         formatTokenAmountPrecise,
-        generateActivities,
         EMPTY_HEX_ID,
-        preprocessTransaction,
         UNLOCK_CONDITION_GOVERNOR_ADDRESS,
         UNLOCK_CONDITION_STATE_CONTROLLER_ADDRESS,
+        processAndAddToActivities,
     } from '@core/wallet'
     import { closePopup } from '@auxiliary/popup'
     import { onMount } from 'svelte'
@@ -58,9 +56,7 @@
         try {
             updateSelectedAccount({ isTransferring: true })
             const transaction = await $selectedAccount.createAliasOutput()
-            const processedTransaction = await preprocessTransaction(transaction, $selectedAccount)
-            const activities = generateActivities(processedTransaction, $selectedAccount)
-            addActivitiesToAccountActivitiesInAllAccountActivities($selectedAccount.index, activities)
+            await processAndAddToActivities(transaction)
             closePopup()
         } catch (err) {
             handleError(err)
