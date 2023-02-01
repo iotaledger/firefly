@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { VotingEventPayload, ParticipationEventType } from '@iota/wallet/out/types'
+    import { VotingEventPayload, ParticipationEventType, TrackedParticipationOverview } from '@iota/wallet/out/types'
     import { localize } from '@core/i18n'
     import {
         Button,
@@ -27,11 +27,12 @@
         selectedProposal,
         updateParticipationOverview,
     } from '@contexts/governance/stores'
-    import { calculateWeightedVotes, getActiveParticipation } from '@contexts/governance/utils'
+    import { calculateTotalVotesForTrackedParticipations, getActiveParticipation } from '@contexts/governance/utils'
     import { getBestTimeDuration, milestoneToDate } from '@core/utils'
     import { networkStatus } from '@core/network/stores'
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
     import { visibleSelectedAccountAssets } from '@core/wallet/stores'
+    import { MILESTONE_NOT_FOUND } from '@core/network'
 
     const { metadata } = $visibleSelectedAccountAssets?.baseCoin
 
@@ -47,9 +48,12 @@
     $: $selectedAccountIndex, (selectedAnswerValues = [])
 
     $: proposalState = $proposalsState[$activeProfileId]?.[$selectedProposal?.id]?.state
+    $: selectedProposalOverview = $participationOverview?.participations?.[$selectedProposal?.id]
+    $: trackedParticipations = Object.values(selectedProposalOverview ?? {})
+    $: currentMilestone = $networkStatus.currentMilestone
 
     // Reactively start updating votes once component has mounted and participation overview is available.
-    $: hasMounted && $participationOverview && proposalState && setCurrentAndTotalVotes()
+    $: hasMounted && proposalState && trackedParticipations && currentMilestone && setVotedAnswerValuesAndTotalVotes()
 
     $: votesCounter = {
         total: totalVotes,
@@ -100,26 +104,33 @@
         }
     }
 
-    function setCurrentAndTotalVotes(): void {
-        const selectedProposalOverview = $participationOverview?.participations?.[$selectedProposal?.id]
-        if (selectedProposalOverview) {
-            const trackedParticipations = Object.values(selectedProposalOverview)
-            const votes = calculateWeightedVotes(trackedParticipations)
-            const lastActiveOverview = trackedParticipations.find(
-                (overview) =>
-                    overview.endMilestoneIndex === 0 || overview.endMilestoneIndex > $selectedProposal.milestones.ended
-            )
-            const votesSum = votes?.reduce((accumulator, votes) => accumulator + votes, 0) ?? 0
-
-            votedAnswerValues = lastActiveOverview?.answers ?? []
-            totalVotes =
-                proposalState.status === ProposalStatus.Commencing
-                    ? parseInt(lastActiveOverview?.amount, 10) ?? 0
-                    : votesSum
-        } else {
-            votedAnswerValues = []
+    function setVotedAnswerValuesAndTotalVotes(): void {
+        let lastActiveOverview: TrackedParticipationOverview
+        const { currentMilestone } = $networkStatus
+        if (currentMilestone === MILESTONE_NOT_FOUND) {
             totalVotes = 0
+        } else {
+            switch (proposalState.status) {
+                case ProposalStatus.Upcoming:
+                    totalVotes = 0
+                    break
+                case ProposalStatus.Commencing:
+                    lastActiveOverview = trackedParticipations?.find((overview) => overview.endMilestoneIndex === 0)
+                    totalVotes = 0
+                    break
+                case ProposalStatus.Holding:
+                    lastActiveOverview = trackedParticipations?.find((overview) => overview.endMilestoneIndex === 0)
+                    totalVotes = calculateTotalVotesForTrackedParticipations(trackedParticipations, currentMilestone)
+                    break
+                case ProposalStatus.Ended:
+                    lastActiveOverview = trackedParticipations?.find(
+                        (overview) => overview.endMilestoneIndex > $selectedProposal.milestones.ended
+                    )
+                    totalVotes = calculateTotalVotesForTrackedParticipations(trackedParticipations, currentMilestone)
+                    break
+            }
         }
+        votedAnswerValues = lastActiveOverview?.answers ?? []
     }
 
     let openedQuestionIndex = 0
