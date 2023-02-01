@@ -577,6 +577,7 @@
             },
             "proposalsDetails": {
                 "title": "Detalls",
+                "totalProposals": "Total proposals",
                 "activeProposals": "Propostes actives",
                 "votingProposals": "Propostes que esteu votant",
                 "votedProposals": "Total de propostes que heu votat"
@@ -584,8 +585,9 @@
             "proposals": {
                 "title": "Propostes",
                 "voted": "Votat",
-                "successRegister": "Proposta registrada amb èxit",
-                "successRemove": "La proposta s'ha eliminat correctament"
+                "successAdd": "Proposal successfully added",
+                "successRemove": "La proposta s'ha eliminat correctament",
+                "emptyTitle": "No proposals"
             },
             "statusTimeline": {
                 "upcoming": "Anunci",
@@ -601,12 +603,15 @@
                 },
                 "proposalInformation": {
                     "title": "Descripció de la proposta",
+                    "votingOpens": "Votació oberta",
+                    "countingStarts": "Comença el recompte",
                     "countingEnds": "El compte acaba",
+                    "countingEnded": "El compte acaba",
                     "eventId": "Identificador d'esdeveniment",
                     "nodeUrl": "Node URL"
                 },
-                "voteOpens": "Vote opens in {time}",
-                "fetching": "Fetching proposal data"
+                "fetching": "Fetching proposal data",
+                "hintVote": "You can not vote on a proposal that is in the announcement phase, voting will open in {time}."
             }
         }
     },
@@ -641,6 +646,10 @@
             "pendingTransactions": {
                 "title": "Transactions",
                 "subtitle": "Temporarily locked in unclaimed transactions"
+            },
+            "votingPowerOutput": {
+                "title": "Governance",
+                "subtitle": "Reserved for voting power"
             },
             "minimizeStorageDepositButton": "Minimize storage deposit"
         },
@@ -1009,12 +1018,12 @@
         "manageVotingPower": {
             "title": "Manage voting power",
             "body": "Define your voting power to vote on proposals.",
-            "revote": "Changing your voting power temporarily stops your votes from being counted. Proceed to the following step to resume voting.",
-            "hint": "Increasing your voting power locks your funds. You need to decrease your voting power to make them spendable again. This affects all proposals with an active vote."
+            "hint": "All funds that you allocate to voting are locked. In order to make them spendable again, you need to decrease your voting power. This affects all proposals with an active vote.",
+            "amountZero": "Please be aware that setting your voting power to zero will stop all your votes for all proposals you are currently voting on."
         },
-        "registerProposal": {
-            "title": "Register proposal",
-            "body": "Please provide the information listed below to register a proposal."
+        "addProposal": {
+            "title": "Add proposal",
+            "body": "Please provide the information listed below to add a proposal."
         },
         "voteForProposal": {
             "title": "Vote for proposal",
@@ -1024,7 +1033,7 @@
         },
         "revote": {
             "title": "Revote on proposals",
-            "body": "As mentioned in the previous step, changing your voting power temporarily stops your votes from being counted. Simply click \"Revote\" to resume voting.",
+            "body": "Changing your voting power temporarily stops your votes for all proposals from being counted. Simply click \"Revote\" to resume voting.",
             "hint": "Firefly remembers all of the proposals and answer options you previously voted for."
         },
         "removeProposal": {
@@ -1213,6 +1222,7 @@
         "unverifyToken": "Unverify token",
         "hideToken": "Hide token",
         "unhideToken": "Unhide token",
+        "burn": "Burn",
         "burnToken": "Burn token",
         "faucetRequest": "Get {token} tokens",
         "refreshTokenMetadata": "Refresh token metadata",
@@ -1225,7 +1235,7 @@
         "addReference": "Add reference",
         "depositNft": "Deposit NFTs",
         "vote": "Vote",
-        "registerProposal": "Register proposal",
+        "addProposal": "Add proposal",
         "removeProposal": "Remove proposal",
         "stopVoting": "Stop voting",
         "revote": "Revote"
@@ -1570,6 +1580,24 @@
             "incoming": "Incoming",
             "outgoing": "Outgoing",
             "selfTransaction": "Self transaction"
+        },
+        "proposalType": {
+            "label": "Type",
+            "official": "Official",
+            "custom": "Custom"
+        },
+        "phase": {
+            "label": "Phase"
+        },
+        "participated": {
+            "label": "Participated",
+            "yes": "Yes",
+            "no": "No"
+        },
+        "proposalOrder": {
+            "label": "Ordre",
+            "name": "Nom",
+            "phase": "Fase"
         }
     },
     "dates": {
@@ -1881,9 +1909,9 @@
             }
         },
         "governance": {
-            "unableToRegisterProposal": {
-                "short": "Unable to register proposal",
-                "long": "An error occurred while trying to register proposal {proposalId}"
+            "unableToAddProposal": {
+                "short": "Unable to add proposal",
+                "long": "An error occurred while trying to add proposal {proposalId}"
             }
         }
     },
