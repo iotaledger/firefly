@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { EnterPinView, SelectProfileView, LoadProfileView } from './views'
     import { loginRoute, LoginRoute } from '../../lib/routers'
 </script>

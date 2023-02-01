@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { showAppNotification } from '@auxiliary/notification'
     import { sumBalanceForAccounts, DEFAULT_SYNC_OPTIONS } from '@core/account'
     import { localize } from '@core/i18n'

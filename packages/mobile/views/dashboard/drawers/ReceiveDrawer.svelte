@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { selectedAccount } from '@core/account'
     import { AddressBox, QR, Text, TextType } from 'shared/components'
     import { Drawer } from '../../../components'

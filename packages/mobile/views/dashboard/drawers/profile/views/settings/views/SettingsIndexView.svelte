@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { openUrlInBrowser } from '@core/app'
     import { localize } from '@core/i18n'
     import features from '@features/features'

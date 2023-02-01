@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Modal, SelectorInput, IOption } from 'shared/components'
     import { activeProfile } from '@core/profile'
     import { NETWORK_ADDRESS, DestinationNetwork } from '@core/layer-2'

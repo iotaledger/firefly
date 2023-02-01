@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Modal, RecipientAccountSelector, AccountLabel } from 'shared/components'
     import { IAccountState, selectedAccount } from '@core/account'
 

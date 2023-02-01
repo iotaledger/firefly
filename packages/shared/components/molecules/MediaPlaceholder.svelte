@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { MimeType, ParentMimeType } from '@core/nfts'
     import { Icon } from 'shared/components'
     import { Icon as IconEnum } from '@auxiliary/icon'

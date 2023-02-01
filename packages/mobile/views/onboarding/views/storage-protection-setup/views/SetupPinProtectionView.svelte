@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { OnboardingLayout } from '../../../../../components'
     import { Button, PinInput, Text, HTMLButtonType, TextType } from 'shared/components'
     import {

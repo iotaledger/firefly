@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Modal, MenuItem } from 'shared/components'
     import { localize } from '@core/i18n'
     import { closePopup, openPopup } from '@auxiliary/popup/actions'

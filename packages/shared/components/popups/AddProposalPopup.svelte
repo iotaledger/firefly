@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import type { Auth } from '@iota/wallet'
     import { Button, NodeInput, TextInput, Text, TextType } from 'shared/components'
     import { HTMLButtonType } from 'shared/components/enums'

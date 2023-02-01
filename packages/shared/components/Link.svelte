@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Icon } from 'shared/components'
 
     export let href = undefined

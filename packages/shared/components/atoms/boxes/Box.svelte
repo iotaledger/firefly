@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     export let col = false
     export let row = false
     export let clearBackground = false

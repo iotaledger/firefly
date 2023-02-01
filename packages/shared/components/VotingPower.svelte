@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Text, Button } from 'shared/components'
     import { ButtonSize, FontWeight, TextType } from './enums'
     import { selectedAccount } from '@core/account'

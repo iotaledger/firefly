@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { localize } from '@core/i18n'
     import { NetworkProtocol } from '@core/network'
     import { activeProfile, lockStronghold, logout } from '@core/profile'

@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Icon, Modal, NetworkSummaryModal } from 'shared/components'
     import { getAndUpdateNodeInfo, networkStatus, NETWORK_HEALTH_COLORS } from '@core/network'
     import { activeProfile } from '@core/profile'

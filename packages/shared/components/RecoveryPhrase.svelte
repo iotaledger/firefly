@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { mobile } from '@core/app'
 
     export let recoveryPhrase = []

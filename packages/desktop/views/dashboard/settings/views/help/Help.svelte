@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { HR } from 'shared/components'
     import { HelpAndInfoRoute } from '@core/router'
     import HelpSection from './HelpSection.svelte'
