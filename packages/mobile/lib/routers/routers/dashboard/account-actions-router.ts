@@ -1,4 +1,4 @@
-import { get, writable } from 'svelte/store'
+import { get, writable, Writable } from 'svelte/store'
 
 import { Subrouter } from '@core/router'
 
@@ -9,6 +9,9 @@ import { dashboardRouter } from '../dashboard-router'
 
 export const accountActionsRoute = writable<AccountActionsRoute>(null)
 export const accountActionsRouter = writable<AccountActionsRouter>(null)
+
+const needsUnlockStore = writable<boolean>(false)
+const needsUnlockStoreCallbackStore = writable<(() => unknown) | undefined>(() => {})
 
 export class AccountActionsRouter extends Subrouter<AccountActionsRoute> {
     constructor() {
@@ -31,9 +34,51 @@ export class AccountActionsRouter extends Subrouter<AccountActionsRoute> {
                         nextRoute = AccountActionsRoute.DeleteConfirmation
                         break
                     }
+                    case AccountAction.BalanceBreakdown: {
+                        nextRoute = AccountActionsRoute.BalanceBreakdown
+                        break
+                    }
                 }
+                break
+            }
+            case AccountActionsRoute.BalanceBreakdown: {
+                switch (action) {
+                    case AccountAction.Consolidate: {
+                        nextRoute = AccountActionsRoute.ConsolidateConfirmation
+                        break
+                    }
+                }
+                break
             }
         }
         this.setNext(nextRoute)
+    }
+    previous(): void {
+        if (get(needsUnlockStore)) {
+            const callback = get(needsUnlockStoreCallbackStore)
+            if (callback && typeof callback === 'function') {
+                callback()
+            }
+            needsUnlockStore.set(false)
+        } else {
+            super.previous()
+        }
+    }
+    getNeedsUnlockStore(): Writable<boolean> {
+        return needsUnlockStore
+    }
+    getNeedsUnlockCallbackStore(): Writable<((password?: string) => unknown) | undefined> {
+        return needsUnlockStoreCallbackStore
+    }
+    setNeedsUnlock(value: boolean, callback: ((password?: string) => unknown) | undefined = undefined): void {
+        needsUnlockStore.set(value)
+        if (callback) {
+            needsUnlockStoreCallbackStore.set(callback)
+        }
+    }
+    reset(): void {
+        super.reset()
+        needsUnlockStore.set(false)
+        needsUnlockStoreCallbackStore.set(undefined)
     }
 }
