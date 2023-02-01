@@ -6,14 +6,14 @@ import { showAppNotification } from '@auxiliary/notification/actions'
 import { localize } from '@core/i18n'
 import { handleError } from '@core/error/handlers'
 import { processAndAddToActivities } from '@core/wallet/utils'
-import { setLatestGovernanceTransactionIdForAccount } from '../stores'
+import { setPendingGovernanceTransactionIdForAccount } from '../stores'
 
 export async function stopVotingForProposal(eventId: string): Promise<Transaction> {
     try {
         updateSelectedAccount({ isTransferring: true })
         const account = get(selectedAccount)
         const transaction = await account?.stopParticipating(eventId)
-        setLatestGovernanceTransactionIdForAccount(account.index, transaction.transactionId)
+        setPendingGovernanceTransactionIdForAccount(account.index, transaction.transactionId)
 
         await processAndAddToActivities(transaction)
 

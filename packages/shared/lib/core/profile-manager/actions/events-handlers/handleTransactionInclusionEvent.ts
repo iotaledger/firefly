@@ -1,8 +1,8 @@
 import { get } from 'svelte/store'
 import {
-    clearLatestGovernanceTransactionIdForAccount,
+    clearPendingGovernanceTransactionIdForAccount,
     hasToRevote,
-    latestGovernanceTransactionIds,
+    pendingGovernanceTransactionIds,
     updateParticipationOverview,
 } from '@contexts/governance/stores'
 import { syncVotingPower, updateSelectedAccount } from '@core/account'
@@ -60,8 +60,8 @@ export function handleTransactionInclusionEventInternal(
         syncVotingPower(accountIndex)
     }
 
-    if (transactionId === get(latestGovernanceTransactionIds)?.[accountIndex]) {
-        clearLatestGovernanceTransactionIdForAccount(accountIndex)
+    if (transactionId === get(pendingGovernanceTransactionIds)?.[accountIndex]) {
+        clearPendingGovernanceTransactionIdForAccount(accountIndex)
     }
 
     updateClaimingTransactionInclusion(transactionId, inclusionState, accountIndex)
