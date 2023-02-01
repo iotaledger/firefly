@@ -1,5 +1,5 @@
 import { get } from 'svelte/store'
-import { hasToRevote } from '@contexts/governance/stores'
+import { hasToRevote, updateParticipationOverview } from '@contexts/governance/stores'
 import { syncVotingPower, updateSelectedAccount } from '@core/account'
 import { updateNftInAllAccountNfts } from '@core/nfts'
 
@@ -50,6 +50,7 @@ export function handleTransactionInclusionEventInternal(
                     hideClose: true,
                 })
             }
+            updateParticipationOverview()
         }
         syncVotingPower(accountIndex)
     }
