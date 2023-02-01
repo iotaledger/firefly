@@ -41,7 +41,7 @@
     $: $selectedAccountIndex, (selectedAnswerValues = [])
 
     // Reactively start updating votes once component has mounted and participation overview is available.
-    $: hasMounted && $participationOverview && $selectedProposal && setCurrentAndTotalVotes()
+    $: hasMounted, $participationOverview, $selectedProposal, setCurrentAndTotalVotes()
 
     $: votesCounter = {
         total: totalVotes,
