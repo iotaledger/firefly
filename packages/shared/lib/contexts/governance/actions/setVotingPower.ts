@@ -5,7 +5,7 @@ import { Transaction } from '@iota/wallet/out/types'
 import { selectedAccount, updateSelectedAccount } from '@core/account/stores'
 import { processAndAddToActivities } from '@core/wallet/utils'
 
-import { hasToRevote } from '../stores'
+import { hasToRevote, setPendingGovernanceTransactionIdForAccount } from '../stores'
 import { handleError } from '@core/error/handlers'
 
 export async function setVotingPower(rawAmount: string, isVoting: boolean): Promise<void> {
@@ -28,6 +28,7 @@ export async function setVotingPower(rawAmount: string, isVoting: boolean): Prom
             const amountToDecrease = votingPower - amount
             transaction = await account.decreaseVotingPower(amountToDecrease.toString())
         }
+        setPendingGovernanceTransactionIdForAccount(account.index, transaction.transactionId)
         await processAndAddToActivities(transaction)
     } catch (err) {
         hasToRevote.set(false)
