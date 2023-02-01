@@ -5,7 +5,7 @@
     import { localize } from '@core/i18n'
     import { GovernanceRoute, governanceRouter } from '@core/router'
     import { IProposal } from '@contexts/governance/interfaces'
-    import { selectedProposal } from '@contexts/governance/stores'
+    import { participationOverview, selectedProposal } from '@contexts/governance/stores'
     import { ProposalStatus } from '@contexts/governance/enums'
     import { isVotingForProposal } from '@contexts/governance/utils'
 
@@ -14,6 +14,7 @@
     export let proposal: IProposal
 
     let hasVoted = false
+    $: $participationOverview, setHasVoted()
 
     async function setHasVoted(): Promise<void> {
         hasVoted = await isVotingForProposal(proposal?.id)
