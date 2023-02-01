@@ -13,13 +13,11 @@
     }
 </script>
 
-{#if status}
-    <Pill
-        data={localize(`pills.proposalStatus.${status}`)}
-        textColor="gray-800"
-        darkTextColor="gray-800"
-        backgroundColor={STATUS_COLORS[status]}
-        darkBackgroundColor={STATUS_COLORS[status]}
-        classes="rounded-full px-2 py-1 flex items-center"
-    />
-{/if}
+<Pill
+    data={localize(`pills.proposalStatus.${status}`)}
+    textColor="gray-800"
+    darkTextColor="gray-800"
+    backgroundColor={STATUS_COLORS[status]}
+    darkBackgroundColor={STATUS_COLORS[status]}
+    classes="rounded-full px-2 py-1 flex items-center {status ? '' : 'invisible'}"
+/>
