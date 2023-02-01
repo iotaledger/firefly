@@ -24,8 +24,8 @@
     $: answers = [...question?.answers, { value: 0, text: 'Abstain', additionalInfo: '' }]
     $: percentages = getPercentagesFromAnswerStatuses(answerStatuses)
     $: disabled =
-        $selectedProposal.state.status === ProposalStatus.Upcoming ||
-        $selectedProposal.state.status === ProposalStatus.Ended
+        $selectedProposal.state?.status === ProposalStatus.Upcoming ||
+        $selectedProposal.state?.status === ProposalStatus.Ended
     $: answerStatuses, setWinnerAnswerIndex()
     $: showMargin =
         isOpened ||

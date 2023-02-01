@@ -1,7 +1,6 @@
 export * from './deregisterParticipationEvent'
 export * from './getGovernanceData'
 export * from './getVotingEvent'
-export * from './getVotingEvents'
 export * from './getVotingProposalState'
 export * from './initializeRegisteredProposals'
 export * from './initializeProposalStates'

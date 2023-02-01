@@ -105,7 +105,7 @@
 
             votedAnswerValues = lastActiveOverview?.answers ?? []
             totalVotes =
-                $selectedProposal?.state.status === ProposalStatus.Commencing
+                $selectedProposal.state?.status === ProposalStatus.Commencing
                     ? parseInt(lastActiveOverview?.amount, 10) ?? 0
                     : votesSum
         } else {

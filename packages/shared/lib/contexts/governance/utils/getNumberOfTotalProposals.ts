@@ -1,9 +1,7 @@
-import { activeProfileId } from '@core/profile/stores'
 import { get } from 'svelte/store'
-
-import { proposalStates } from '../stores'
+import { registeredProposalsForSelectedAccount } from '../stores'
 
 export function getNumberOfTotalProposals(): number {
-    const proposals = get(proposalStates)?.[get(activeProfileId)]
+    const proposals = get(registeredProposalsForSelectedAccount)
     return Object.keys(proposals ?? {}).length
 }
