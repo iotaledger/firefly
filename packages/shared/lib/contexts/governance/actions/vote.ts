@@ -7,13 +7,22 @@ import { handleLedgerError } from '@core/ledger/utils'
 import { showAppNotification } from '@auxiliary/notification/actions'
 import { localize } from '@core/i18n'
 import { handleError } from '@core/error/handlers'
+import {
+    addActivitiesToAccountActivitiesInAllAccountActivities,
+    generateActivities,
+    preprocessTransaction,
+} from '@core/wallet'
 
 export async function vote(eventId?: string, answers?: number[]): Promise<void> {
     try {
         updateSelectedAccount({ isTransferring: true })
 
         const account = get(selectedAccount)
-        await account.vote(eventId, answers)
+        const transaction = await account.vote(eventId, answers)
+
+        const preprocessedTransaction = await preprocessTransaction(transaction, account)
+        const activities = generateActivities(preprocessedTransaction, account)
+        addActivitiesToAccountActivitiesInAllAccountActivities(account.index, activities)
 
         showAppNotification({
             type: 'success',
