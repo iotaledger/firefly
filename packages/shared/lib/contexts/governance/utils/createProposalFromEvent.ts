@@ -1,5 +1,5 @@
 import { get } from 'svelte/store'
-import type { ParticipationEventWithNodes, VotingEventPayload } from '@iota/wallet/out/types'
+import type { Node, ParticipationEventWithNodes, VotingEventPayload } from '@iota/wallet/out/types'
 import { OFFICIAL_NODE_URLS } from '@core/network/constants'
 import { activeProfile } from '@core/profile/stores'
 import { IProposalMetadata } from '../interfaces'
@@ -10,7 +10,7 @@ export async function createProposalFromEvent(event: ParticipationEventWithNodes
     const { data, id } = event
 
     const officialNodeUrls = OFFICIAL_NODE_URLS[get(activeProfile).networkProtocol][get(activeProfile).networkType]
-    const nodeUrl = event.nodes[0].baseURI
+    const nodeUrl = (event.nodes[0] as unknown as Node).url
     const isOfficialNetwork = officialNodeUrls.includes(nodeUrl)
 
     const participated = (await getParticipationsForProposal(id)) !== undefined

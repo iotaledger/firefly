@@ -22,7 +22,6 @@
     </div>
     <span class="block w-0.5 h-full bg-gray-200 dark:bg-gray-800" />
     <div class="w-2/3">
-        <Proposals />
         {#if Object.keys($registeredProposalsForSelectedAccount).length}
             <Proposals />
         {:else}
