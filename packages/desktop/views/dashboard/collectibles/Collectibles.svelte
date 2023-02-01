@@ -3,7 +3,7 @@
     import { selectedAccountIndex } from '@core/account/stores/selected-account-id.store'
     import { collectiblesRoute, CollectiblesRoute, collectiblesRouter } from '@core/router'
 
-    $: $selectedAccountIndex && $collectiblesRouter.reset()
+    $: $selectedAccountIndex + 1 && $collectiblesRouter.reset()
 </script>
 
 <div class="w-full h-full flex flex-col flex-nowrap p-8 relative flex-1 bg-gray-50 dark:bg-gray-900">

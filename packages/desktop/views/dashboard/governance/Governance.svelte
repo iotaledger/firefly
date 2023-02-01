@@ -1,7 +1,9 @@
 <script lang="ts">
     import { DetailsView, ProposalsView } from './views'
-    import { selectedAccount } from '@core/account'
-    import { GovernanceRoute, governanceRoute } from '@core/router'
+    import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
+    import { GovernanceRoute, governanceRoute, governanceRouter } from '@core/router'
+
+    $: $selectedAccountIndex + 1 && $governanceRouter.reset()
 </script>
 
 {#if $selectedAccount}
