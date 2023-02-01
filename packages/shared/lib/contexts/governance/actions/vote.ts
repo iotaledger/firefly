@@ -8,6 +8,7 @@ import { showAppNotification } from '@auxiliary/notification/actions'
 import { localize } from '@core/i18n'
 import { handleError } from '@core/error/handlers'
 import { processAndAddToActivities } from '@core/wallet'
+import { setLatestGovernanceTransactionIdForAccount } from '../stores'
 
 export async function vote(eventId?: string, answers?: number[]): Promise<void> {
     try {
@@ -15,6 +16,7 @@ export async function vote(eventId?: string, answers?: number[]): Promise<void> 
 
         const account = get(selectedAccount)
         const transaction = await account.vote(eventId, answers)
+        setLatestGovernanceTransactionIdForAccount(account.index, transaction.transactionId)
 
         await processAndAddToActivities(transaction)
 

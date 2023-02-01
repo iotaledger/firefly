@@ -1,5 +1,10 @@
 import { get } from 'svelte/store'
-import { hasToRevote, updateParticipationOverview } from '@contexts/governance/stores'
+import {
+    clearLatestGovernanceTransactionIdForAccount,
+    hasToRevote,
+    latestGovernanceTransactionIds,
+    updateParticipationOverview,
+} from '@contexts/governance/stores'
 import { syncVotingPower, updateSelectedAccount } from '@core/account'
 import { updateNftInAllAccountNfts } from '@core/nfts'
 
@@ -53,6 +58,10 @@ export function handleTransactionInclusionEventInternal(
             updateParticipationOverview()
         }
         syncVotingPower(accountIndex)
+    }
+
+    if (transactionId === get(latestGovernanceTransactionIds)?.[accountIndex]) {
+        clearLatestGovernanceTransactionIdForAccount(accountIndex)
     }
 
     updateClaimingTransactionInclusion(transactionId, inclusionState, accountIndex)

@@ -9,7 +9,7 @@
     import { convertToRawAmount, visibleSelectedAccountAssets } from '@core/wallet'
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
     import { popupState } from '@auxiliary/popup/stores'
-    import { hasToRevote } from '@contexts/governance/stores'
+    import { hasToRevote, latestGovernanceTransactionIds } from '@contexts/governance/stores'
     import { onMount } from 'svelte'
     import { modifyPopupState } from '@auxiliary/popup/helpers'
     import { isSelectedAccountVoting } from '@contexts/governance/utils'
@@ -24,7 +24,10 @@
 
     $: asset = $visibleSelectedAccountAssets?.baseCoin
     $: votingPower = parseInt($selectedAccount?.votingPower, 10)
-    $: disabled = $hasToRevote || $selectedAccount?.isTransferring
+    $: isTransferring =
+        $selectedAccount?.isTransferring || Boolean($latestGovernanceTransactionIds?.[$selectedAccount.index])
+    $: disabled = $hasToRevote || isTransferring
+
     $: amount, disabled, setConfirmDisabled()
 
     function setConfirmDisabled(): void {
@@ -97,15 +100,10 @@
         <TextHint info text={localize('popups.manageVotingPower.hint')} />
     </div>
     <div class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button outline classes="w-full" onClick={onCancelClick}>
+        <Button outline disabled={isTransferring} classes="w-full" onClick={onCancelClick}>
             {localize('actions.cancel')}
         </Button>
-        <Button
-            type={HTMLButtonType.Submit}
-            disabled={confirmDisabled}
-            isBusy={$selectedAccount?.isTransferring}
-            classes="w-full"
-        >
+        <Button type={HTMLButtonType.Submit} disabled={confirmDisabled} isBusy={isTransferring} classes="w-full">
             {localize('actions.confirm')}
         </Button>
     </div>
