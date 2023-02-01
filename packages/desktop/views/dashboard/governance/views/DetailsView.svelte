@@ -37,7 +37,6 @@
     import { networkStatus } from '@core/network/stores'
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
     import { visibleSelectedAccountAssets } from '@core/wallet/stores'
-    import { MILESTONE_NOT_FOUND } from '@core/network'
 
     const { metadata } = $visibleSelectedAccountAssets?.baseCoin
 
@@ -116,29 +115,24 @@
 
     function setVotedAnswerValuesAndTotalVotes(): void {
         let lastActiveOverview: TrackedParticipationOverview
-        const { currentMilestone } = $networkStatus
-        if (currentMilestone === MILESTONE_NOT_FOUND) {
-            totalVotes = 0
-        } else {
-            switch (proposalState.status) {
-                case ProposalStatus.Upcoming:
-                    totalVotes = 0
-                    break
-                case ProposalStatus.Commencing:
-                    lastActiveOverview = trackedParticipations?.find((overview) => overview.endMilestoneIndex === 0)
-                    totalVotes = 0
-                    break
-                case ProposalStatus.Holding:
-                    lastActiveOverview = trackedParticipations?.find((overview) => overview.endMilestoneIndex === 0)
-                    totalVotes = calculateTotalVotesForTrackedParticipations(trackedParticipations, currentMilestone)
-                    break
-                case ProposalStatus.Ended:
-                    lastActiveOverview = trackedParticipations?.find(
-                        (overview) => overview.endMilestoneIndex > $selectedProposal.milestones.ended
-                    )
-                    totalVotes = calculateTotalVotesForTrackedParticipations(trackedParticipations, currentMilestone)
-                    break
-            }
+        switch (proposalState.status) {
+            case ProposalStatus.Upcoming:
+                totalVotes = 0
+                break
+            case ProposalStatus.Commencing:
+                lastActiveOverview = trackedParticipations?.find((overview) => overview.endMilestoneIndex === 0)
+                totalVotes = 0
+                break
+            case ProposalStatus.Holding:
+                lastActiveOverview = trackedParticipations?.find((overview) => overview.endMilestoneIndex === 0)
+                totalVotes = calculateTotalVotesForTrackedParticipations(trackedParticipations)
+                break
+            case ProposalStatus.Ended:
+                lastActiveOverview = trackedParticipations?.find(
+                    (overview) => overview.endMilestoneIndex > $selectedProposal.milestones.ended
+                )
+                totalVotes = calculateTotalVotesForTrackedParticipations(trackedParticipations)
+                break
         }
         votedAnswerValues = lastActiveOverview?.answers ?? []
     }
