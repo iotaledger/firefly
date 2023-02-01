@@ -24,7 +24,7 @@ describe('File: getPercentagesFromAnswerStatuses.ts', () => {
         ]
 
         it('should return percentages from valid arguments', () => {
-            expect(getPercentagesFromAnswerStatuses(ANSWER_STATUSES)).toEqual({ 0: '17%', 1: '33%', 2: '50%' })
+            expect(getPercentagesFromAnswerStatuses(ANSWER_STATUSES)).toEqual({ 0: '16.7%', 1: '33.3%', 2: '50%' })
         })
         it('should return empty object from invalid arguments', () => {
             expect(getPercentagesFromAnswerStatuses([{} as AnswerStatus])).toEqual({})
