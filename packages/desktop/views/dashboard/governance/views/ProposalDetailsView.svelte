@@ -106,10 +106,14 @@
 
     async function setVotingEventPayload(eventId: string): Promise<void> {
         const event = await getVotingEvent(eventId)
-        if (event?.data?.payload?.type === ParticipationEventType.Voting) {
-            votingPayload = event.data.payload
+        if (event) {
+            if (event.data?.payload?.type === ParticipationEventType.Voting) {
+                votingPayload = event.data.payload
+            } else {
+                throw new Error('Event is a staking event')
+            }
         } else {
-            throw new Error('Event is a staking event!')
+            throw new Error('Event not found')
         }
     }
 
