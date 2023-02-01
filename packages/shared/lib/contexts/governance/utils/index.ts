@@ -1,4 +1,4 @@
-export * from './calculateWeightedVotes'
+export * from './calculateTotalVotesForTrackedParticipations'
 export * from './createProposalFromEvent'
 export * from './createProposals'
 export * from './getActiveParticipation'
