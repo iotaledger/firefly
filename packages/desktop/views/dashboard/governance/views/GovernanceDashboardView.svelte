@@ -10,13 +10,14 @@
         FontWeight,
         Button,
     } from '@ui'
+    import { openPopup } from '@auxiliary/popup'
+    import { selectedAccountIndex } from '@core/account/stores'
+    import { localize } from '@core/i18n'
     import { registeredEventIds } from '@contexts/governance/stores'
     import { createProposals } from '@contexts/governance/utils'
-    import { localize } from '@core/i18n'
-    import { openPopup } from '@auxiliary/popup'
 
     let promise = createProposals()
-    $: $registeredEventIds, (promise = createProposals())
+    $: $selectedAccountIndex, $registeredEventIds, (promise = createProposals())
 
     function handleAddProposal(): void {
         openPopup({

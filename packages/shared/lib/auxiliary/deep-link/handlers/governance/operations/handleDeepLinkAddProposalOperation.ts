@@ -1,18 +1,21 @@
 import { showAppNotification } from '@auxiliary/notification/actions'
 import { closePopup, openPopup } from '@auxiliary/popup/actions'
 import { isValidUrl } from '@core/utils/validation'
-import { getProposalFromEventId, isProposalAlreadyAdded, isValidProposalId } from '@contexts/governance/utils'
-
+import {
+    getProposalFromEventId,
+    isProposalAlreadyAddedForSelectedAccount,
+    isValidProposalId,
+} from '@contexts/governance/utils'
 import { AddProposalOperationParameter } from '../../../enums'
 import { selectedProposal } from '@contexts/governance/stores'
 import { governanceRoute, GovernanceRoute, governanceRouter } from '@core/router'
 import { get } from 'svelte/store'
 
-export function handleDeepLinkAddProposalOperation(searchParams: URLSearchParams): void {
+export async function handleDeepLinkAddProposalOperation(searchParams: URLSearchParams): Promise<void> {
     const eventId = searchParams.get(AddProposalOperationParameter.EventId)
     if (!isValidProposalId(eventId)) {
         throw new Error('Invalid proposal ID')
-    } else if (isProposalAlreadyAdded(eventId)) {
+    } else if (await isProposalAlreadyAddedForSelectedAccount(eventId)) {
         /**
          * NOTE: If we throw an error as normal, it will be handled and displayed in the "failed link"
          * popup.

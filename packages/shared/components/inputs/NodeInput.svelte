@@ -11,7 +11,7 @@
     let inputElement: HTMLInputElement
     let modal: Modal
     let nodeOptions: IOption[]
-    let selected: IOption
+    let selected: IOption = { value: nodeUrl }
 
     $: clientOptionsNodes = $activeProfile?.clientOptions?.nodes
     $: clientOptionsNodes, (nodeOptions = getNodeOptionsFromClientOptions())
