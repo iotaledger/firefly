@@ -20,6 +20,7 @@
     import { governanceRouter } from '@core/router/routers'
     import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
     import { getVotingEvent } from '@contexts/governance/actions'
+    import { ABSTAIN_VOTE_VALUE } from '@contexts/governance/constants'
     import { ProposalStatus } from '@contexts/governance/enums'
     import {
         participationOverview,
@@ -27,7 +28,11 @@
         selectedProposal,
         updateParticipationOverview,
     } from '@contexts/governance/stores'
-    import { calculateTotalVotesForTrackedParticipations, getActiveParticipation } from '@contexts/governance/utils'
+    import {
+        calculateTotalVotesForTrackedParticipations,
+        getActiveParticipation,
+        isProposalVotable,
+    } from '@contexts/governance/utils'
     import { getBestTimeDuration, milestoneToDate } from '@core/utils'
     import { networkStatus } from '@core/network/stores'
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
@@ -63,18 +68,23 @@
 
     $: if (questions?.length > 0 && selectedAnswerValues?.length === 0) {
         selectedAnswerValues =
-            getActiveParticipation($selectedProposal?.id)?.answers ?? Array<number>(questions?.length)
+            getActiveParticipation($selectedProposal?.id)?.answers ?? Array.from({ length: questions?.length })
     }
 
     $: isVotingDisabled =
-        proposalState?.status === ProposalStatus.Upcoming ||
-        proposalState?.status === ProposalStatus.Ended ||
-        selectedAnswerValues?.length === 0 ||
-        selectedAnswerValues?.includes(undefined) ||
-        !hasChangedAnswers(selectedAnswerValues)
+        !isProposalVotable(proposalState?.status) ||
+        !hasChangedAnswers(selectedAnswerValues) ||
+        hasSelectedNoAnswers(selectedAnswerValues)
 
     $: isTransferring = $selectedAccount?.isTransferring
     $: proposalState, (textHintString = getTextHintString())
+
+    function hasSelectedNoAnswers(_selectedAnswerValues: number[]): boolean {
+        return (
+            _selectedAnswerValues.length === 0 ||
+            _selectedAnswerValues.every((answerValue) => answerValue === undefined)
+        )
+    }
 
     function hasChangedAnswers(_selectedAnswerValues: number[]): boolean {
         const activeParticipationAnswerValues = getActiveParticipation($selectedProposal?.id)?.answers
@@ -91,7 +101,7 @@
              * NOTE: If the user hasn't voted for the participation yet, the user has not changed (all) answers
              * yet until every value is not undefined.
              */
-            return _selectedAnswerValues.every((selectedAnswerValue) => selectedAnswerValue !== undefined)
+            return _selectedAnswerValues.some((selectedAnswerValue) => selectedAnswerValue !== undefined)
         }
     }
 
@@ -152,9 +162,12 @@
     }
 
     function handleVoteClick(): void {
+        const chosenAnswerValues = selectedAnswerValues.map((answerValue) =>
+            answerValue === undefined ? ABSTAIN_VOTE_VALUE : answerValue
+        )
         openPopup({
             type: 'voteForProposal',
-            props: { selectedAnswerValues },
+            props: { selectedAnswerValues: chosenAnswerValues },
         })
     }
 
