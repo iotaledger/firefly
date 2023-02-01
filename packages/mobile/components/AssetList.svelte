@@ -30,9 +30,9 @@
             } else {
                 const matchId = asset?.id?.toLowerCase().includes(searchValue.toLowerCase())
 
-                const metadataProps = ['name', 'description', 'unit']
-                const matchMetadata = metadataProps.some((prop) => {
-                    const hasMatch = asset?.metadata?.[prop]?.toLowerCase().includes(searchValue.toLowerCase())
+                const metadataKeys = ['name', 'description', 'unit']
+                const matchMetadata = metadataKeys.some((key) => {
+                    const hasMatch = asset?.metadata?.[key]?.toLowerCase().includes(searchValue.toLowerCase())
                     return hasMatch
                 })
 
