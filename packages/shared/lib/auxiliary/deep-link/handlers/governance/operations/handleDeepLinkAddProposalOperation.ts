@@ -1,7 +1,7 @@
 import { showAppNotification } from '@auxiliary/notification/actions'
 import { closePopup, openPopup } from '@auxiliary/popup/actions'
 import { isValidUrl } from '@core/utils/validation'
-import { isProposalAlreadyAdded, isValidProposalId } from '@contexts/governance/utils'
+import { isProposalAlreadyAddedForSelectedAccount, isValidProposalId } from '@contexts/governance/utils'
 import { AddProposalOperationParameter } from '../../../enums'
 import { registeredProposalsForSelectedAccount, selectedProposal } from '@contexts/governance/stores'
 import { GovernanceRoute, governanceRouter } from '@core/router'
@@ -15,7 +15,7 @@ export function handleDeepLinkAddProposalOperation(searchParams: URLSearchParams
     const eventId = searchParams.get(AddProposalOperationParameter.EventId)
     if (!isValidProposalId(eventId)) {
         throw new Error('Invalid proposal ID')
-    } else if (isProposalAlreadyAdded(eventId)) {
+    } else if (isProposalAlreadyAddedForSelectedAccount(eventId)) {
         const proposal = get(registeredProposalsForSelectedAccount)[eventId]
         if (proposal === undefined) {
             throw new Error(`Event with id ${eventId} not found`)
