@@ -4,4 +4,5 @@ export enum AccountActionsRoute {
     BalanceBreakdown = 'balanceBreakdown',
     ExportTransactions = 'exportTransactions',
     DeleteConfirmation = 'deleteConfirmation',
+    ConsolidateConfirmation = 'consolidateConfirmation',
 }

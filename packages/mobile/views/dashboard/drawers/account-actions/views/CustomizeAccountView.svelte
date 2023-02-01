@@ -5,7 +5,7 @@
     import { Button, Input } from 'shared/components'
     import { ColorPicker } from '../../../../../components'
 
-    export let onSaveSucess: () => void = () => {}
+    export let onSuccess: () => void = () => {}
 
     let error = ''
     let isBusy = false
@@ -37,7 +37,7 @@
         try {
             if (trimmedAccountAlias || color) {
                 await tryEditSelectedAccountMetadata({ name: trimmedAccountAlias, color })
-                onSaveSucess()
+                onSuccess && onSuccess()
             }
         } finally {
             isBusy = false
