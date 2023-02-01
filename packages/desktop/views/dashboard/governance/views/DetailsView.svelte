@@ -126,14 +126,7 @@
 
     function handleQuestionClick(event: CustomEvent): void {
         const { questionIndex } = event.detail
-        openedQuestionIndex = questionIndex
-
-        const selectedQuestionElement: HTMLElement = proposalQuestions?.querySelector(
-            'proposal-question:nth-child(' + openedQuestionIndex + ')'
-        )
-        setTimeout(() => {
-            proposalQuestions.scrollTo({ top: selectedQuestionElement?.offsetTop, behavior: 'smooth' })
-        }, 250)
+        openedQuestionIndex = questionIndex === openedQuestionIndex ? null : questionIndex
     }
 
     function handleCancelClick(): void {
@@ -150,6 +143,15 @@
     function handleAnswerClick(event: CustomEvent): void {
         const { answerValue, questionIndex } = event.detail
         selectedAnswerValues[questionIndex] = answerValue
+
+        openedQuestionIndex = questionIndex + 1
+
+        const selectedQuestionElement: HTMLElement = proposalQuestions?.querySelector(
+            `proposal-question:nth-child(${openedQuestionIndex})`
+        )
+        setTimeout(() => {
+            proposalQuestions.scrollTo({ top: selectedQuestionElement?.offsetTop, behavior: 'smooth' })
+        }, 250)
     }
 
     function getTextHintString(): string {
