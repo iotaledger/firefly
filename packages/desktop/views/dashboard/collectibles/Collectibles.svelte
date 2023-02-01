@@ -1,8 +1,13 @@
 <script lang="ts">
     import { CollectiblesDetailsView, CollectiblesGalleryView } from './views'
-    import { selectedAccountIndex } from '@core/account/stores/selected-account-id.store'
+    import { selectedAccountIndex } from '@core/account/stores'
     import { collectiblesRoute, CollectiblesRoute, collectiblesRouter } from '@core/router'
 
+    /**
+     * NOTE: We add one to the selectedAccountIndex because
+     * switching to the first account (index = 0) would evaluate
+     * to false, causing the router to never be reset.
+     */
     $: $selectedAccountIndex + 1 && $collectiblesRouter.reset()
 </script>
 
