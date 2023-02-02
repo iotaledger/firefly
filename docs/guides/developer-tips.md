@@ -73,7 +73,7 @@ There are a few steps besides just creating the component file before it can wor
 #### Backend
 
 Firefly uses [wallet.rs](https://github.com/iotaledger/wallet.rs) in the backend to handle functionality around value-based transfers.
-See its [REAMDE](https://github.com/iotaledger/wallet.rs#dependencies) for the required dependencies.
+See its [README](https://github.com/iotaledger/wallet.rs#dependencies) for the required dependencies.
 
 #### Desktop
 

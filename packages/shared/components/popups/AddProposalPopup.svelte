@@ -8,6 +8,7 @@
     import { showAppNotification } from '@auxiliary/notification/actions'
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
     import { truncateString } from '@core/utils/string'
+    import { registeredProposalsForSelectedAccount } from '@contexts/governance'
 
     export let eventId: string
     export let nodeUrl: string
@@ -65,7 +66,7 @@
     }
 
     async function registerParticipationWrapper(auth?: Auth): Promise<void> {
-        await registerParticipationEvent(eventId, [{ url: nodeUrl, auth }])
+        await registerParticipationEvent(eventId, { url: nodeUrl, auth })
         showAppNotification({
             type: 'success',
             message: localize('views.governance.proposals.successAdd'),
@@ -85,6 +86,10 @@
         const has64Length = hexLength === 64
         if (!has64Length) {
             eventIdError = localize('error.eventId.insufficientLength')
+            return Promise.reject(eventIdError)
+        }
+        if ($registeredProposalsForSelectedAccount[eventId]) {
+            eventIdError = localize('error.eventId.alreadyRegistered')
             return Promise.reject(eventIdError)
         }
     }
