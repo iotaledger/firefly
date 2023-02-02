@@ -15,7 +15,7 @@
     export let disabled = false
     export let hidden: boolean = null
     export let isWinner: boolean
-    export let proposalStatus: ProposalStatus
+    export let proposalStatus: string
     export let truncate = false
 
     let isSelected: boolean

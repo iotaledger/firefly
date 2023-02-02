@@ -1,7 +1,6 @@
-import { selectedAccount } from '@core/account'
 import { get } from 'svelte/store'
+import { registeredProposalsForSelectedAccount } from '../stores'
 
-export async function isProposalAlreadyAddedForSelectedAccount(proposalId: string): Promise<boolean> {
-    const events = await get(selectedAccount).getParticipationEvents()
-    return Object.keys(events).some((eventId) => eventId === proposalId)
+export function isProposalAlreadyAddedForSelectedAccount(proposalId: string): boolean {
+    return !!get(registeredProposalsForSelectedAccount)?.[proposalId]
 }

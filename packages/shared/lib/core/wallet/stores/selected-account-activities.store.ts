@@ -19,7 +19,7 @@ import {
 export const selectedAccountActivities: Readable<Activity[]> = derived(
     [selectedAccount, allAccountActivities],
     ([$selectedAccount, $allAccountActivities]) => {
-        if (selectedAccount) {
+        if ($selectedAccount) {
             return $allAccountActivities[$selectedAccount?.index] ?? []
         } else {
             return []
