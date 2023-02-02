@@ -17,7 +17,6 @@
     } from '@ui'
     import { openPopup } from '@auxiliary/popup/actions'
     import { activeProfileId } from '@core/profile/stores'
-    import { governanceRouter } from '@core/router/routers'
     import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
     import { getVotingEvent } from '@contexts/governance/actions'
     import { ABSTAIN_VOTE_VALUE } from '@contexts/governance/constants'
@@ -33,11 +32,13 @@
         calculateTotalVotesForTrackedParticipations,
         getActiveParticipation,
         isProposalVotable,
+        isVotingForSelectedProposal,
     } from '@contexts/governance/utils'
     import { getBestTimeDuration, milestoneToDate } from '@core/utils'
     import { networkStatus } from '@core/network/stores'
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
     import { visibleSelectedAccountAssets } from '@core/wallet/stores'
+    import { handleError } from '@core/error/handlers'
 
     const { metadata } = $visibleSelectedAccountAssets?.baseCoin
 
@@ -48,6 +49,7 @@
     let hasMounted = false
     let textHintString = ''
     let proposalQuestions: HTMLElement
+    let isVotingForProposal: boolean = false
 
     $: $selectedAccountIndex, void updateParticipationOverview()
     $: $selectedAccountIndex, (selectedAnswerValues = [])
@@ -59,6 +61,7 @@
 
     // Reactively start updating votes once component has mounted and participation overview is available.
     $: hasMounted && proposalState && trackedParticipations && currentMilestone && setVotedAnswerValuesAndTotalVotes()
+    $: hasMounted && selectedProposalOverview && updateIsVoting()
 
     $: votesCounter = {
         total: totalVotes,
@@ -120,6 +123,14 @@
         }
     }
 
+    async function updateIsVoting(): Promise<void> {
+        try {
+            isVotingForProposal = await isVotingForSelectedProposal()
+        } catch (err) {
+            handleError(err)
+        }
+    }
+
     function setVotedAnswerValuesAndTotalVotes(): void {
         let lastActiveOverview: TrackedParticipationOverview
         switch (proposalState.status) {
@@ -151,8 +162,10 @@
         openedQuestionIndex = questionIndex === openedQuestionIndex ? null : questionIndex
     }
 
-    function handleCancelClick(): void {
-        $governanceRouter.previous()
+    function onStopVotingClick(): void {
+        openPopup({
+            type: 'stopVoting',
+        })
     }
 
     function handleVoteClick(): void {
@@ -191,6 +204,7 @@
 
     onMount(async () => {
         await setVotingEventPayload($selectedProposal?.id)
+        await updateIsVoting()
         hasMounted = true
     })
 </script>
@@ -255,7 +269,13 @@
             <TextHint info text={textHintString} />
         {:else if [ProposalStatus.Commencing, ProposalStatus.Holding].includes($selectedProposal.status)}
             <buttons-container class="flex w-full space-x-4 mt-6">
-                <Button outline classes="w-full" onClick={handleCancelClick}>{localize('actions.cancel')}</Button>
+                <Button
+                    outline
+                    classes="w-full"
+                    onClick={onStopVotingClick}
+                    disabled={!isVotingForProposal || isTransferring}
+                    isBusy={isTransferring}>{localize('actions.stopVoting')}</Button
+                >
                 <Button
                     classes="w-full"
                     disabled={isVotingDisabled || isTransferring}
