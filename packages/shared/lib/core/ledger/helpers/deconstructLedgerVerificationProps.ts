@@ -18,7 +18,7 @@ export function deconstructLedgerVerificationProps(): PopupProps {
         const asset = getPersistedAsset(transactionDetails?.assetId)
         toAmount = `${formatTokenAmountDefault(
             Number(transactionDetails?.rawAmount),
-            asset.metadata,
+            asset?.metadata,
             transactionDetails?.unit
         )}`
     }
