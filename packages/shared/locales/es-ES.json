@@ -1018,8 +1018,8 @@
         "manageVotingPower": {
             "title": "Administrar peso de voto",
             "body": "Definir tu peso de voto para votar en proposiciones.",
-            "hint": "All funds that you allocate to voting are locked. In order to make them spendable again, you need to decrease your voting power. This affects all proposals with an active vote.",
-            "amountZero": "Please be aware that setting your voting power to zero will stop all your votes for all proposals you are currently voting on."
+            "hint": "Todos los fondos que asignes a votaciones están bloqueados. Para hacerlos nuevamente utilizables tienes que reducir tu peso de voto. Esto afecta a todas las propuestas con voto activo.",
+            "amountZero": "Por favor, ten en cuenta que establecer tu peso de voto a cero detendrá todos tus votos para todas las propuestas en las que estás votando actualmente."
         },
         "addProposal": {
             "title": "Añadir propuesta",
@@ -1029,11 +1029,12 @@
             "title": "Votar por propuesta",
             "body": "Estás a punto de votar por la propuesta {proposal}.",
             "key": "Tu peso de voto",
+            "hasAbstained": "You are abstaining from answering {numberOfQuestions, plural, one {# question} other {# questions}}.",
             "noVotingPower": "No tienes ningún peso de voto. Por favor, incrementa tu peso de voto desde el panel de gobernanza."
         },
         "revote": {
             "title": "Vuelve a votar en las propuestas",
-            "body": "Changing your voting power temporarily stops your votes for all proposals from being counted. Simply click \"Revote\" to resume voting.",
+            "body": "Cambiar tu peso de voto detendrá temporalmente el conteo de tus votos en todas las propuestas. Símplemente clica \"Volver a votar\" para continuar el voto.",
             "hint": "Firefly recuerda todas las propuestas y opciones de respuesta por las que has votado anteriormente."
         },
         "removeProposal": {
@@ -1089,7 +1090,7 @@
         "confirmNftBurn": {
             "title": "Quemar {nftName}",
             "description": "¿Seguro que quieres quemar este NFT?",
-            "hint": "Please note that burning an NFT frees the storage deposit attached to it and is not reversible."
+            "hint": "Por favor, ten en cuenta que quemar un NFT libera el depósito asociado al mismo y no es reversible."
         },
         "proceedAnyway": "Proceder de todos modos",
         "save": "Guardar",
@@ -1222,7 +1223,7 @@
         "unverifyToken": "Token no verificado",
         "hideToken": "Ocultar token",
         "unhideToken": "Mostrar token",
-        "burn": "Burn",
+        "burn": "Quemar",
         "burnToken": "Quemar token",
         "faucetRequest": "Obtener {token} tokens",
         "refreshTokenMetadata": "Actualizar metadatos del token",
@@ -1260,12 +1261,12 @@
         "increasing": "Incrementando peso de voto",
         "decreased": "Peso de voto disminuido",
         "decreasing": "Disminuyendo peso de voto",
-        "startVoting": "Votado",
-        "startingVoting": "Empezando a votar",
+        "voted": "Votado",
+        "voting": "Votación",
         "changedVote": "Voto cambiado",
         "changingVote": "Cambiando voto",
-        "stopVoting": "Voto detenido",
-        "stoppingVoting": "Deteniendo el voto",
+        "unvoted": "Sin votar",
+        "unvoting": "No votar",
         "sentNft": "NFT enviado",
         "sendingNft": "Enviando NFT",
         "receivedNft": "NFT recibido",
