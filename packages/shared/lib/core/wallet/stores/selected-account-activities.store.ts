@@ -3,20 +3,18 @@ import { isValidIrc30 } from '@core/token'
 
 import { selectedAccount } from '../../account/stores/selected-account.store'
 import { Activity } from '../types/activity.type'
+import { ActivityDirection, ActivityType } from '../enums'
+import { ActivityFilter } from '../interfaces/activity-filter.interface'
+import { getAssetFromPersistedAssets, getFormattedAmountFromActivity } from '../utils'
+import { isVisibleActivity } from '../utils/isVisibleActivity'
+import { allAccountActivities } from './all-account-activities.store'
 import {
-    ActivityAction,
-    ActivityDirection,
-    ActivityType,
     BooleanFilterOption,
     DateFilterOption,
     InternalExternalOption,
     NumberFilterOption,
     StatusFilterOption,
-} from '../enums'
-import { ActivityFilter } from '../interfaces/filter/filter.interface'
-import { getAssetFromPersistedAssets, getFormattedAmountFromActivity } from '../utils'
-import { isVisibleActivity } from '../utils/isVisibleActivity'
-import { allAccountActivities } from './all-account-activities.store'
+} from '@core/utils/enums/filters'
 
 export const selectedAccountActivities: Readable<Activity[]> = derived(
     [selectedAccount, allAccountActivities],
@@ -120,17 +118,15 @@ export const queriedActivities: Readable<Activity[]> = derived(
     [selectedAccountActivities, activitySearchTerm, activityFilter],
     ([$selectedAccountActivities, $activitySearchTerm]) => {
         let activityList = $selectedAccountActivities.filter((_activity) => {
-            if (
-                !_activity.isHidden &&
-                (_activity.type === ActivityType.Nft ||
-                    (_activity.type === ActivityType.Alias && _activity.action === ActivityAction.Mint))
-            ) {
+            const containsAssets = _activity.type === ActivityType.Basic || _activity.type === ActivityType.Foundry
+            if (!_activity.isHidden && !containsAssets) {
                 return true
             }
 
             const asset =
-                (_activity.type === ActivityType.Basic || _activity.type === ActivityType.Foundry) &&
-                getAssetFromPersistedAssets(_activity.assetId)
+                _activity.type === ActivityType.Basic || _activity.type === ActivityType.Foundry
+                    ? getAssetFromPersistedAssets(_activity.assetId)
+                    : undefined
             const hasValidAsset = asset && isValidIrc30(asset.metadata)
             return !_activity.isHidden && hasValidAsset
         })
@@ -173,7 +169,7 @@ function getFieldsToSearchFromActivity(activity: Activity): string[] {
         fieldsToSearch.push(activity.subject?.address)
     }
 
-    if (activity.asyncData.claimingTransactionId) {
+    if (activity.asyncData?.claimingTransactionId) {
         fieldsToSearch.push(activity.asyncData.claimingTransactionId)
     }
 

@@ -1,7 +1,6 @@
-<script lang="typescript">
-    import { Icon, Text, Tooltip, FontWeight, TextType } from 'shared/components'
+<script lang="ts">
+    import { Icon, Text, Tooltip, FontWeight, TextType, Position } from 'shared/components'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
-    import { Position } from 'shared/components/enums'
 
     export let title: string = ''
     export let text: string = ''
@@ -11,6 +10,8 @@
     export let classes: string = ''
     export let iconClasses: string = ''
     export let position: Position = Position.Right
+    export let primaryColor: string = undefined
+    export let secondaryColor: string = undefined
 
     let tooltipAnchor: HTMLElement
     let isTooltipVisible = false
@@ -27,24 +28,20 @@
         bind:this={tooltipAnchor}
         class="text-gray-600"
     >
-        <Icon {width} {height} {icon} classes={iconClasses} />
+        <Icon {width} {height} {icon} classes={iconClasses} {primaryColor} {secondaryColor} />
     </icon-container>
     {#if isTooltipVisible}
         <Tooltip anchor={tooltipAnchor} {position} {...$$restProps}>
-            {#if title}
-                <Text
-                    bigger
-                    type={TextType.h5}
-                    fontWeight={FontWeight.medium}
-                    classes="text-left mb-2"
-                    color="gray-900"
-                >
-                    {title}
-                </Text>
-            {/if}
-            {#if text}
-                <Text smaller classes="text-left" color="gray-700" lineHeight="leading-140">{text}</Text>
-            {/if}
+            <div class="flex flex-col space-y-2">
+                {#if title}
+                    <Text bigger type={TextType.h5} fontWeight={FontWeight.medium} classes="text-left" color="gray-900">
+                        {title}
+                    </Text>
+                {/if}
+                {#if text}
+                    <Text smaller classes="text-left" color="gray-700" lineHeight="leading-140">{text}</Text>
+                {/if}
+            </div>
             <slot />
         </Tooltip>
     {/if}

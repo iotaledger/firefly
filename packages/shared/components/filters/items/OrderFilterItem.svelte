@@ -1,9 +1,9 @@
-<script lang="typescript">
-    import type { OrderFilterUnit } from '@core/wallet/interfaces'
+<script lang="ts">
     import { Dropdown } from 'shared/components'
     import { localize } from '@core/i18n'
     import type { IDropdownChoice } from '@core/utils'
-    import { OrderOption } from '@core/wallet'
+    import { OrderFilterUnit } from '@core/utils/interfaces/filter'
+    import { OrderOption } from '@core/utils/enums/filters'
 
     export let filterUnit: OrderFilterUnit
 
@@ -30,6 +30,6 @@
 </script>
 
 <div class="flex flex-row justify-between space-x-2">
-    <Dropdown {value} items={choices} {onSelect} small classes="mb-4" />
+    <Dropdown {value} items={choices} {onSelect} small />
     <Dropdown value={ascDescvalue} items={ascDescChoices} onSelect={onSelectAscDesc} small />
 </div>

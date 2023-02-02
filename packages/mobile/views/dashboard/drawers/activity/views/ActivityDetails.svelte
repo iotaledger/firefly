@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { localize } from '@core/i18n'
     import { Activity, ActivityAsyncStatus, ActivityDirection, ActivityType } from '@core/wallet'
     import features from '@features/features'

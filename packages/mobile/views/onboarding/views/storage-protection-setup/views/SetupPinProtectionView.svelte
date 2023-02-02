@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { OnboardingLayout } from '../../../../../components'
     import { Button, PinInput, Text, HTMLButtonType, TextType } from 'shared/components'
     import {
@@ -104,7 +104,7 @@
                 >{localize('views.onboarding.storageProtectionSetup.setupPinProtection.body2')}</Text
             >
         </div>
-        <form id="setup-pin" class="flex flex-col mb-8" on:submit={onSetPinClick}>
+        <form id="setup-pin" class="flex flex-col mb-8" on:submit|preventDefault={onSetPinClick}>
             <PinInput
                 bind:value={setPinInput}
                 glimpse

@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { onMount } from 'svelte'
     import { Animation, Button, ImportTextfield, OnboardingLayout, Text, HTMLButtonType } from 'shared/components'
     import { mobile } from '@core/app'
@@ -48,7 +48,7 @@
             >{localize('views.onboarding.profileRecovery.importMnemonicPhrase.body')}</Text
         >
         <Text type="h5" classes="mb-3">{localize('views.onboarding.profileRecovery.importMnemonicPhrase.enter')}</Text>
-        <form on:submit={onContinueClick} id="text-import-form">
+        <form on:submit|preventDefault={onContinueClick} id="text-import-form">
             <ImportTextfield type={$onboardingProfile?.recoveryType} bind:value={input} />
         </form>
     </div>

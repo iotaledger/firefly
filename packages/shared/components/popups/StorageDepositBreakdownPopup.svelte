@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { closePopup, openPopup } from '@auxiliary/popup'
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
@@ -34,8 +34,10 @@
         ? Object.values(accountBalance?.requiredStorageDeposit).reduce(
               (total: number, value: string): number => total + Number(value),
               potentiallyLockedOutputsStorageDeposit
-          )
-        : potentiallyLockedOutputsStorageDeposit
+          ) + votingPower
+        : potentiallyLockedOutputsStorageDeposit + votingPower
+
+    $: votingPower = parseInt($selectedAccount?.votingPower, 10)
 
     function handleConsolidation(): void {
         openPopup({
@@ -45,11 +47,14 @@
                 description: localize('popups.minimizeStorageDeposit.description'),
                 confirmText: localize('popups.minimizeStorageDeposit.confirmButton'),
                 info: true,
-                onConfirm: () => {
-                    checkActiveProfileAuth(async () => {
-                        await consolidateOutputs()
-                        closePopup()
-                    })
+                onConfirm: async () => {
+                    await checkActiveProfileAuth(
+                        async () => {
+                            await consolidateOutputs()
+                            closePopup()
+                        },
+                        { stronghold: true }
+                    )
                 },
             },
         })
@@ -94,6 +99,13 @@
             title={localize('popups.storageDepositBreakdown.pendingTransactions.title')}
             subtitle={localize('popups.storageDepositBreakdown.pendingTransactions.subtitle')}
             amount={potentiallyLockedOutputsStorageDeposit}
+            asset={baseCoin}
+        />
+        <HR hidden />
+        <BalanceSummarySection
+            title={localize('popups.storageDepositBreakdown.votingPowerOutput.title')}
+            subtitle={localize('popups.storageDepositBreakdown.votingPowerOutput.subtitle')}
+            amount={votingPower}
             asset={baseCoin}
         />
         <HR hidden />

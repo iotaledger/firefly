@@ -1,5 +1,7 @@
 import { closePopup } from '@auxiliary/popup'
 import { resetSelectedAccount } from '@core/account'
+import { clearPollGovernanceDataInterval } from '@contexts/governance/actions'
+import { resetPendingGovernanceTransactionIds } from '@contexts/governance/stores'
 import { isPollingLedgerDeviceStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
 import { clearPollMarketPrices } from '@core/market/actions'
 import { clearPollNetworkInterval } from '@core/network'
@@ -15,13 +17,13 @@ import { destroyProfileManager, unsubscribeFromWalletApiEvents } from '@core/pro
 import { profileManager } from '@core/profile-manager/stores'
 import { routerManager } from '@core/router/stores'
 import { get } from 'svelte/store'
-import { resetDashboardState } from '../resetDashboardState'
 
 /**
  * Logout from active profile
  */
-export function logout(clearActiveProfile: boolean = true, _lockStronghold: boolean = true): Promise<void> {
+export async function logout(clearActiveProfile: boolean = true, _lockStronghold: boolean = true): Promise<void> {
     const { lastActiveAt, loggedIn, hasLoadedAccounts, type } = get(activeProfile)
+    await unsubscribeFromWalletApiEvents()
 
     // (TODO): Figure out why we are using a promise here?
     return new Promise((resolve) => {
@@ -33,11 +35,10 @@ export function logout(clearActiveProfile: boolean = true, _lockStronghold: bool
 
         clearPollNetworkInterval()
         clearPollMarketPrices()
+        clearPollGovernanceDataInterval()
         const _activeProfile = get(activeProfile)
         if (_activeProfile) {
             const manager = get(profileManager)
-
-            unsubscribeFromWalletApiEvents()
 
             // stop background sync
             // TODO: Make sure we need this. Would destroying the profile manager also stop background syncing automatically?
@@ -55,11 +56,11 @@ export function logout(clearActiveProfile: boolean = true, _lockStronghold: bool
         loggedIn.set(false)
         hasLoadedAccounts.set(false)
         resetSelectedAccount()
+        resetPendingGovernanceTransactionIds()
         activeAccounts.set([])
         if (clearActiveProfile) {
             resetActiveProfile()
         }
-        resetDashboardState()
         get(routerManager).resetRouters()
 
         resolve()

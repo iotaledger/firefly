@@ -1,24 +1,22 @@
 import { showAppNotification } from '@auxiliary/notification'
-import { selectedAccount } from '@core/account/stores/selected-account.store'
+import { selectedAccount, updateSelectedAccount } from '@core/account/stores/selected-account.store'
 import { handleError } from '@core/error/handlers/handleError'
 import { localize } from '@core/i18n'
 import { handleLedgerError } from '@core/ledger'
 import { updateNftInAllAccountNfts } from '@core/nfts'
 import { activeProfile, ProfileType } from '@core/profile'
 import { get } from 'svelte/store'
-import { addActivityToAccountActivitiesInAllAccountActivities } from '../stores'
-import { generateActivity, preprocessTransaction } from '../utils'
+import { processAndAddToActivities } from '../utils'
 
 export async function burnNft(nftId: string): Promise<void> {
     const account = get(selectedAccount)
     const _activeProfile = get(activeProfile)
     try {
+        updateSelectedAccount({ isTransferring: true })
         const burnNftTransaction = await account.burnNft(nftId)
 
         // Generate Activity
-        const processedTransaction = await preprocessTransaction(burnNftTransaction, account)
-        const activity = generateActivity(processedTransaction, account)
-        addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)
+        await processAndAddToActivities(burnNftTransaction)
 
         // Update NFT
         updateNftInAllAccountNfts(account.index, nftId, { isSpendable: false })
@@ -35,5 +33,7 @@ export async function burnNft(nftId: string): Promise<void> {
             handleError(err)
         }
         throw err
+    } finally {
+        updateSelectedAccount({ isTransferring: false })
     }
 }

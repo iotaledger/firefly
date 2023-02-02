@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { clickOutside } from '@core/utils'
 
     export let onClick: (event?: any) => void
@@ -25,6 +25,7 @@
         flex flex-row space-x-1 px-2 py-3
         text-gray-500 dark:text-white rounded-lg
         hover:bg-gray-50 dark:hover:bg-gray-900 dark:hover:bg-opacity-50
+        focus:bg-gray-50 dark:focus:bg-gray-900 dark:focus:bg-opacity-50
         {active ? 'bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50' : ''}
         {classes}
     "

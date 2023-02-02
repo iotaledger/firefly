@@ -1,8 +1,10 @@
-<script lang="typescript">
+<script lang="ts">
     import { mobile, PlatformOption, platform } from '@core/app'
     import { Drawer, Icon } from 'shared/components'
-    import { clickOutside } from '@core/utils'
-    import { closePopup, popupState } from '@auxiliary/popup'
+    import { clickOutside } from '@core/utils/ui'
+    import { closePopup } from '@auxiliary/popup/actions'
+    import { popupState } from '@auxiliary/popup/stores'
+    import { Icon as IconEnum } from '@auxiliary/icon/enums'
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
 
@@ -32,12 +34,15 @@
     import MintNativeTokenConfirmationPopup from './MintNativeTokenConfirmationPopup.svelte'
     import MintNftFormPopup from './MintNftFormPopup.svelte'
     import MintNftConfirmationPopup from './MintNftConfirmationPopup.svelte'
+    import NodeAuthRequiredPopup from './NodeAuthRequiredPopup.svelte'
     import NodeInfoPopup from './NodeInfoPopup.svelte'
     import ReceiveAddressPopup from './ReceiveAddressPopup.svelte'
-    import RegisterProposalPopup from './RegisterProposalPopup.svelte'
+    import AddProposalPopup from './AddProposalPopup.svelte'
     import RemoveProposalPopup from './RemoveProposalPopup.svelte'
     import RemoveNode from './RemoveNode.svelte'
+    import RevotePopup from './RevotePopup.svelte'
     import { SendFormPopup, SendConfirmationPopup } from './send'
+    import StopVotingPopup from './StopVotingPopup.svelte'
     import StorageDepositBreakdownPopup from './StorageDepositBreakdownPopup.svelte'
     import TestDeepLinkFormPopup from './TestDeepLinkFormPopup.svelte'
     import TokenInformationPopup from './TokenInformationPopup.svelte'
@@ -45,8 +50,9 @@
     import VerifyLedgerTransactionPopup from './VerifyLedgerTransactionPopup.svelte'
     import Version from './Version.svelte'
     import Video from './Video.svelte'
-    import WalletFinderPopup from './WalletFinderPopup.svelte'
     import VoteForProposal from './VoteForProposalPopup.svelte'
+    import VotingPowerToZeroPopup from './VotingPowerToZeroPopup.svelte'
+    import WalletFinderPopup from './WalletFinderPopup.svelte'
 
     export let type: string
     export let props: any
@@ -89,46 +95,50 @@
 
     const types = {
         accountSwitcher: AccountSwitcherPopup,
+        activityDetails: ActivityDetailsPopup,
+        addNode: AddNodePopup,
         aliasConfirmation: AliasConfirmationPopup,
-        unlockStronghold: UnlockStrongholdPopup,
-        version: Version,
         backupStronghold: BackupStrongholdPopup,
         burnNativeTokens: BurnNativeTokensPopup,
         burnNativeTokensConfirm: BurnNativeTokensConfirmationPopup,
         confirmation: ConfirmationPopup,
+        connectLedger: ConnectLedgerPopup,
+        createAccount: CreateAccountPopup,
         deepLinkError: DeepLinkErrorPopup,
         deleteAccount: DeleteAccount,
-        connectLedger: ConnectLedgerPopup,
+        diagnostics: Diagnostics,
+        enableLedgerBlindSigning: EnableLedgerBlindSigningPopup,
+        errorLog: ErrorLog,
+        faucetRequest: FaucetRequestPopup,
         ledgerAppGuide: LedgerAppGuidePopup,
         ledgerConnectionGuide: LedgerConnectionGuidePopup,
-        verifyLedgerTransaction: VerifyLedgerTransactionPopup,
-        nodeInfo: NodeInfoPopup,
-        addNode: AddNodePopup,
-        registerProposal: RegisterProposalPopup,
-        removeProposal: RemoveProposalPopup,
-        removeNode: RemoveNode,
-        storageDepositBreakdown: StorageDepositBreakdownPopup,
-        errorLog: ErrorLog,
-        createAccount: CreateAccountPopup,
-        diagnostics: Diagnostics,
-        walletFinder: WalletFinderPopup,
-        video: Video,
         legalUpdate: LegalUpdate,
+        manageAccount: ManageAccountPopup,
+        manageVotingPower: ManageVotingPowerPopup,
+        mintNativeTokenConfirmation: MintNativeTokenConfirmationPopup,
+        mintNativeTokenForm: MintNativeTokenFormPopup,
+        mintNftConfirmation: MintNftConfirmationPopup,
+        mintNftForm: MintNftFormPopup,
+        nodeAuthRequired: NodeAuthRequiredPopup,
+        nodeInfo: NodeInfoPopup,
         receiveAddress: ReceiveAddressPopup,
-        activityDetails: ActivityDetailsPopup,
+        addProposal: AddProposalPopup,
+        removeNode: RemoveNode,
+        removeProposal: RemoveProposalPopup,
+        revote: RevotePopup,
         sendConfirmation: SendConfirmationPopup,
         sendForm: SendFormPopup,
-        manageAccount: ManageAccountPopup,
-        tokenInformation: TokenInformationPopup,
-        mintNativeTokenForm: MintNativeTokenFormPopup,
-        mintNativeTokenConfirmation: MintNativeTokenConfirmationPopup,
-        mintNftForm: MintNftFormPopup,
-        mintNftConfirmation: MintNftConfirmationPopup,
-        faucetRequest: FaucetRequestPopup,
-        enableLedgerBlindSigning: EnableLedgerBlindSigningPopup,
+        stopVoting: StopVotingPopup,
+        storageDepositBreakdown: StorageDepositBreakdownPopup,
         testDeepLinkForm: TestDeepLinkFormPopup,
-        manageVotingPower: ManageVotingPowerPopup,
+        tokenInformation: TokenInformationPopup,
+        unlockStronghold: UnlockStrongholdPopup,
+        verifyLedgerTransaction: VerifyLedgerTransactionPopup,
+        version: Version,
+        video: Video,
         voteForProposal: VoteForProposal,
+        votingPowerToZero: VotingPowerToZeroPopup,
+        walletFinder: WalletFinderPopup,
     }
 
     function onKey(event: KeyboardEvent): void {
@@ -209,7 +219,7 @@
             {#if !hideClose}
                 <button on:click={tryClosePopup} class="absolute top-6 right-6 focus:text-blue-500">
                     <Icon
-                        icon="close"
+                        icon={IconEnum.Close}
                         classes="text-gray-500 dark:text-white hover:text-gray-600 dark:hover:text-gray-100"
                     />
                 </button>

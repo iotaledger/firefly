@@ -1,15 +1,24 @@
-import { syncVotingPower } from '@core/account'
+import { get } from 'svelte/store'
+import {
+    clearPendingGovernanceTransactionIdForAccount,
+    hasToRevote,
+    pendingGovernanceTransactionIds,
+    updateParticipationOverview,
+} from '@contexts/governance/stores'
+import { syncVotingPower, updateSelectedAccount } from '@core/account'
 import { updateNftInAllAccountNfts } from '@core/nfts'
-import { ActivityDirection, ActivityType } from '@core/wallet'
+
+import { ActivityAction, ActivityDirection, ActivityType, InclusionState } from '@core/wallet'
 import { updateClaimingTransactionInclusion } from '@core/wallet/actions/activities/updateClaimingTransactionInclusion'
 import {
-    updateActivityByTransactionId,
     getActivityByTransactionId,
+    updateActivityByTransactionId,
 } from '@core/wallet/stores/all-account-activities.store'
 
 import { WalletApiEvent } from '../../enums'
 import { ITransactionInclusionEventPayload } from '../../interfaces'
 import { validateWalletApiEvent } from '../../utils'
+import { closePopup, openPopup } from '@auxiliary/popup/actions'
 
 export function handleTransactionInclusionEvent(error: Error, rawEvent: string): void {
     const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletApiEvent.TransactionInclusion)
@@ -21,22 +30,39 @@ export function handleTransactionInclusionEventInternal(
     accountIndex: number,
     payload: ITransactionInclusionEventPayload
 ): void {
-    updateActivityByTransactionId(accountIndex, payload.transactionId, {
-        inclusionState: payload.inclusionState,
-    })
+    const { inclusionState, transactionId } = payload
+    updateActivityByTransactionId(accountIndex, transactionId, { inclusionState })
 
-    const activity = getActivityByTransactionId(accountIndex, payload.transactionId)
+    const activity = getActivityByTransactionId(accountIndex, transactionId)
 
     if (activity?.type === ActivityType.Nft) {
         const isSpendable =
-            activity.direction === ActivityDirection.Incoming ||
-            activity.direction === ActivityDirection.SelfTransaction
+            (activity.direction === ActivityDirection.Incoming ||
+                activity.direction === ActivityDirection.SelfTransaction) &&
+            activity.action !== ActivityAction.Burn
         updateNftInAllAccountNfts(accountIndex, activity.nftId, { isSpendable })
     }
 
-    if (activity?.tag === 'PARTICIPATE') {
+    if (activity?.type === ActivityType.Governance) {
+        if (inclusionState === InclusionState.Confirmed) {
+            updateSelectedAccount({ isTransferring: false })
+            closePopup(true)
+
+            if (get(hasToRevote)) {
+                openPopup({
+                    type: 'revote',
+                    preventClose: true,
+                    hideClose: true,
+                })
+            }
+            updateParticipationOverview()
+        }
         syncVotingPower(accountIndex)
     }
 
-    updateClaimingTransactionInclusion(payload.transactionId, payload.inclusionState, accountIndex)
+    if (transactionId === get(pendingGovernanceTransactionIds)?.[accountIndex]) {
+        clearPendingGovernanceTransactionIdForAccount(accountIndex)
+    }
+
+    updateClaimingTransactionInclusion(transactionId, inclusionState, accountIndex)
 }

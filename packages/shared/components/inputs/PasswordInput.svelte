@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Icon, Input, Text } from 'shared/components'
     import { localize } from '@core/i18n'
 
@@ -45,9 +45,9 @@
     {/if}
     <div class="flex  w-full relative">
         <Input
-            {error}
-            {type}
+            bind:error
             bind:value
+            {type}
             {maxlength}
             {integer}
             {autofocus}

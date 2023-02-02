@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Button, PasswordInput, Text, HTMLButtonType } from 'shared/components'
     import { closePopup } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
@@ -36,11 +36,15 @@
     <Text type="h4">{localize('popups.password.title')}</Text>
     <Text type="p" secondary>{subtitle ?? localize('popups.password.subtitle')}</Text>
 </div>
-<form id="password-popup-form" class="flex justify-center w-full flex-row flex-wrap" on:submit={handleSubmit}>
+<form
+    id="password-popup-form"
+    class="flex justify-center w-full flex-row flex-wrap"
+    on:submit|preventDefault={handleSubmit}
+>
     <PasswordInput
-        {error}
-        classes="w-full mb-5"
+        bind:error
         bind:value={password}
+        classes="w-full mb-5"
         showRevealToggle
         placeholder={localize('general.password')}
         autofocus

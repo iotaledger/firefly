@@ -1,12 +1,35 @@
-<script lang="typescript">
-    import { ProposalsDetailsButton, Text } from 'shared/components'
-    import { localize } from '@core/i18n'
+<script lang="ts">
+    import { ProposalsDetailsButton, Text, KeyValueBox } from 'shared/components'
     import { FontWeight } from './enums'
+    import { localize } from '@core/i18n'
+    import { activeProfileId } from '@core/profile'
+    import { IProposalsDetails } from '@contexts/governance/interfaces'
+    import { participationOverview, proposalsState } from '@contexts/governance/stores'
+    import {
+        getNumberOfActiveProposals,
+        getNumberOfVotingProposals,
+        getNumberOfVotedProposals,
+        getNumberOfTotalProposals,
+    } from '@contexts/governance/utils'
 
-    const counters = {
-        activeProposals: 100,
-        votingProposals: 3,
-        votedProposals: 4,
+    let details = <IProposalsDetails>{
+        totalProposals: null,
+        activeProposals: null,
+        votingProposals: null,
+        votedProposals: null,
+    }
+
+    $: $proposalsState, $participationOverview, updateProposalsDetails()
+
+    function updateProposalsDetails(): void {
+        if ($activeProfileId) {
+            details = {
+                totalProposals: getNumberOfTotalProposals(),
+                activeProposals: getNumberOfActiveProposals(),
+                votingProposals: getNumberOfVotingProposals(),
+                votedProposals: getNumberOfVotedProposals(),
+            }
+        }
     }
 </script>
 
@@ -18,14 +41,12 @@
         <ProposalsDetailsButton />
     </header-container>
     <ul class="space-y-2">
-        {#each Object.keys(counters) as counterKey}
-            <li class="flex justify-between bg-gray-50 px-4 py-3 rounded-lg">
-                <Text fontWeight={FontWeight.medium} overrideColor classes="text-gray-600">
-                    {localize(`views.governance.proposalsDetails.${counterKey}`)}
-                </Text>
-                <Text overrideColor classes="text-gray-600">
-                    {counters[counterKey]}
-                </Text>
+        {#each Object.keys(details) as detailKey}
+            <li>
+                <KeyValueBox
+                    keyText={localize(`views.governance.proposalsDetails.${detailKey}`)}
+                    valueText={details[detailKey]?.toString() ?? '-'}
+                />
             </li>
         {/each}
     </ul>

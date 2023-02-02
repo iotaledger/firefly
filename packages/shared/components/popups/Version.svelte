@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { Button, Logo, Text } from 'shared/components'

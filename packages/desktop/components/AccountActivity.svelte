@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { time } from '@core/app'
     import { localize } from '@core/i18n'
     import {
@@ -64,10 +64,10 @@
     <div class="mb-4">
         <div class="relative flex flex-1 flex-row justify-between">
             <Text type="h5">{localize('general.activity')}</Text>
-            <div class="flex flex-row">
+            <div class="flex flex-row space-x-2">
                 {#if features?.wallet?.activityHistory?.search?.enabled}
+                    <TogglableButton icon="search" bind:active={searchActive} />
                     <Filter filterStore={activityFilter} />
-                    <TogglableButton icon="search" bind:active={searchActive} classes="ml-2" />
                 {/if}
             </div>
         </div>

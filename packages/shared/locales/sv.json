@@ -309,6 +309,10 @@
                 "title": "Automatiskt lås",
                 "description": "Inaktivitetstid innan din plånbok låses och du loggas ut"
             },
+            "maxMediaSize": {
+                "title": "Maximal mediestorlek",
+                "description": "NFT-media med storlekar större än denna gräns kommer inte att laddas ner och en platshållare som representerar mediatypen kommer att visas istället"
+            },
             "changePassword": {
                 "title": "Ändra lösenord",
                 "description": "Ditt lösenord används för att säkra dina plånböcker. Du måste använda ett starkt lösenord för att skydda dina tillgångar"
@@ -459,6 +463,7 @@
             },
             "profileModal": {
                 "allSettings": "Alla inställningar",
+                "profileApplication": "Profil, applikation, säkerhet",
                 "logout": "Logga ut",
                 "stronghold": {
                     "title": "Profillås",
@@ -545,6 +550,69 @@
                 "title": "Färgväljare",
                 "hexCode": "Färg hex-kod"
             }
+        },
+        "collectibles": {
+            "gallery": {
+                "title": "Samlingar",
+                "emptyTitle": "Inga samlingar",
+                "noResults": "Inga resultat",
+                "emptyDescription": "Sätt in eller ta emot ditt första samlarobjekt nu!"
+            },
+            "details": {
+                "storageDepositDescription": "En återbetalningsbar deposition behövs för att lagra din NFT på Tangle.",
+                "attributes": "Attribut",
+                "menu": {
+                    "download": "Ladda ner",
+                    "setAvatar": "Ange NFT som profilavatar",
+                    "view": "Visa media i webbläsaren",
+                    "burn": "Bränn NFT"
+                }
+            }
+        },
+        "governance": {
+            "votingPower": {
+                "title": "Röstkraft",
+                "maximal": "Maximal röststyrka: {value}",
+                "manage": "Hantera röstkraft"
+            },
+            "proposalsDetails": {
+                "title": "Detaljer",
+                "totalProposals": "Total proposals",
+                "activeProposals": "Aktiva förslag",
+                "votingProposals": "Förslag som du röstar om",
+                "votedProposals": "Totalt antal förslag du röstade på"
+            },
+            "proposals": {
+                "title": "Förslag",
+                "voted": "Röstat",
+                "successAdd": "Proposal successfully added",
+                "successRemove": "Förslaget har tagits bort",
+                "emptyTitle": "No proposals"
+            },
+            "statusTimeline": {
+                "upcoming": "Meddelande",
+                "commencing": "Röstning öppen",
+                "holding": "Räkning startar",
+                "ended": "Räkning slutar"
+            },
+            "details": {
+                "yourVote": {
+                    "title": "Din röst",
+                    "total": "Totalt räknade röster",
+                    "power": "Röstkraft"
+                },
+                "proposalInformation": {
+                    "title": "Information om förslag",
+                    "votingOpens": "Voting opens on",
+                    "countingStarts": "Counting starts on",
+                    "countingEnds": "Räkning slutar på",
+                    "countingEnded": "Counting ended on",
+                    "eventId": "Händelse ID",
+                    "nodeUrl": "Nod URL"
+                },
+                "fetching": "Fetching proposal data",
+                "hintVote": "You can not vote on a proposal that is in the announcement phase, voting will open in {time}."
+            }
         }
     },
     "popups": {
@@ -559,10 +627,39 @@
         "storageDepositBreakdown": {
             "title": "Lagringsdeposition breakdown",
             "totalStorageDeposit": "Totalt lagringsdeposition",
+            "basicOutputs": {
+                "title": "Inhemska Tokens",
+                "subtitle": "Reserverat för lagring av Inhemska tokens"
+            },
+            "nftOutputs": {
+                "title": "NFT:er",
+                "subtitle": "Reserverat för NFT-lagring"
+            },
+            "aliasOutputs": {
+                "title": "Alias",
+                "subtitle": "Reserverat för Alias-lagring"
+            },
+            "foundryOutputs": {
+                "title": "Foundries",
+                "subtitle": "Reserved for Native Token Foundry storage"
+            },
             "pendingTransactions": {
-                "title": "Låst i väntande transaktioner",
-                "subtitle": "För att skicka inhemska tillgångar och små IOTA-belopp"
-            }
+                "title": "Transaktioner",
+                "subtitle": "Tillfälligt låst i ej hämtade transaktioner"
+            },
+            "votingPowerOutput": {
+                "title": "Governance",
+                "subtitle": "Reserved for voting power"
+            },
+            "minimizeStorageDepositButton": "Minimera lagringsdeposition"
+        },
+        "minimizeStorageDeposit": {
+            "title": "Minimera lagringsdeposition",
+            "description": "Consolidate outputs to minimize your required storage deposit and increase your available balance.",
+            "confirmButton": "Sammanslå"
+        },
+        "alias": {
+            "title": "Bekräfta skapandet av alias"
         },
         "password": {
             "title": "Lösenord krävs",
@@ -600,6 +697,13 @@
             "hideAccount": "Ta bort plånbok",
             "errorTitle": "Det gick inte att ta bort {name}",
             "errorBody1": "Du kan inte ta bort denna plånbok, du måste ha minst en."
+        },
+        "externalUrl": {
+            "title": "Öppna URL i webbläsare",
+            "body": "Är du säker på att du vill öppna \"{url}\" i webbläsaren?",
+            "hint": "Denna URL är okänd för Firefly. Vänligen dubbelkolla URL:en innan du öppnar den.",
+            "action": "Öppna URL",
+            "invalidProtocol": "Kan inte öppna URL med ogiltigt protokoll"
         },
         "hideAccount": {
             "title": "Dölj {name}?",
@@ -707,7 +811,7 @@
             "userPath": "Sökväg för användare"
         },
         "transaction": {
-            "title": "Bekräfta transaktion",
+            "title": "Skicka tillgång",
             "body": "Du håller på att skicka {amount} till",
             "surplusIncluded": "Denna transaktion innehåller ett överskott. Dubbelkolla att detta är det belopp du vill skicka.",
             "sendingFromStakedAccount": "Du skickar en överföring från en plånbok som för närvarande används för staking. Detta kan innebära att dina tokens slutar stakas. Fortsätt att skicka överföringen om du vill, men du kan behöva staka dina återstående tokens på nytt.",
@@ -868,24 +972,84 @@
                 "verifyToken": "Jag verifierar denna token"
             }
         },
+        "sendNft": {
+            "formTitle": "Skicka NFT",
+            "confirmationTitle": "Bekräfta att NFT skickas",
+            "property": {
+                "nft": "NFT"
+            }
+        },
         "nativeToken": {
             "formTitle": "Minta inhemska tokens",
+            "confirmationTitle": "Minta inhemska tokens",
             "property": {
                 "totalSupply": "Totalt antal",
+                "maximumSupply": "Maximalt antal",
+                "mintedTokens": "Mintade tokens",
+                "meltedTokens": "Smälta tokens",
                 "circulatingSupply": "Cirkulerande antal",
+                "aliasAddress": "Alias controller adress",
                 "standard": "Standard",
-                "name": "Namn",
+                "tokenName": "Namn",
+                "unit": "Enhet",
+                "subunit": "Underenhet",
+                "storageDeposit": "Lagringsdeposition",
                 "description": "Beskrivning",
                 "symbol": "Symbol",
                 "decimals": "Decimaler",
                 "url": "URL",
                 "logoUrl": "Logotyp URL",
-                "logo": "Logotyp"
+                "logo": "Logotyp",
+                "alias": "Alias",
+                "assetId": "Tillgångs-ID"
             }
+        },
+        "noAlias": {
+            "title": "Det går inte att minta",
+            "description": "Du måste äga en alias utdata för att mynta inhemska tokens. För att fortsätta, vänligen skapa ett alias först"
+        },
+        "mintNftForm": {
+            "title": "Minta enkel NFT"
         },
         "faucetRequest": {
             "title": "Faucet-begäran",
             "body": "Är du säker på att du vill begära {token} tokens från {network} faucet?"
+        },
+        "manageVotingPower": {
+            "title": "Hantera röstkraft",
+            "body": "Definiera din röstkraft för att rösta om förslag.",
+            "hint": "All funds that you allocate to voting are locked. In order to make them spendable again, you need to decrease your voting power. This affects all proposals with an active vote.",
+            "amountZero": "Please be aware that setting your voting power to zero will stop all your votes for all proposals you are currently voting on."
+        },
+        "addProposal": {
+            "title": "Add proposal",
+            "body": "Please provide the information listed below to add a proposal."
+        },
+        "voteForProposal": {
+            "title": "Rösta på förslag",
+            "body": "You're about to vote for {proposal} proposal.",
+            "key": "Din röstningsförmåga",
+            "hasAbstained": "You are abstaining from answering {numberOfQuestions, plural, one {# question} other {# questions}}.",
+            "noVotingPower": "You do not have any voting power. Please increase your voting power from the Governance dashboard."
+        },
+        "revote": {
+            "title": "Revote on proposals",
+            "body": "Changing your voting power temporarily stops your votes for all proposals from being counted. Simply click \"Revote\" to resume voting.",
+            "hint": "Firefly remembers all of the proposals and answer options you previously voted for."
+        },
+        "removeProposal": {
+            "title": "Ta bort förslag",
+            "body": "Är du säker på att du vill ta bort förslaget?",
+            "hint": "Please note that removing a proposal during the counting period will stop your votes but won't impact any votes that have already been counted."
+        },
+        "stopVoting": {
+            "title": "Sluta rösta",
+            "body": "Du är på väg att sluta rösta på förslaget {proposalName}.",
+            "hint": "Observera att stopp av röstning under räkningsperioden inte påverkar några röster som redan har räknats."
+        },
+        "nodeAuthRequired": {
+            "title": "Autentisering krävs",
+            "body": "Den här noden kräver ytterligare autentisering. Vänligen fyll i lämplig information."
         }
     },
     "charts": {
@@ -919,6 +1083,15 @@
             "description": "Är du säker på att du vill avvisa denna transaktion?",
             "node": "Vänligen observera att avvisa en transaktion endast döljer det från ditt aktivitetsflöde"
         },
+        "confirmTokenBurn": {
+            "title": "Bränn {assetName}",
+            "hint": "Observera att bränning av en token kan frigöra lagringsdepositionen ansluten till den men är inte reversibel efteråt"
+        },
+        "confirmNftBurn": {
+            "title": "Bränn {nftName}",
+            "description": "Är du säker på att du vill bränna denna NFT?",
+            "hint": "Please note that burning an NFT frees the storage deposit attached to it and is not reversible."
+        },
         "proceedAnyway": "Fortsätt ändå",
         "save": "Spara",
         "importSeed": "Importera en befintlig seed",
@@ -934,6 +1107,8 @@
         "createWalletDescription": "Skapa en ny profil som körs på {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
         "claimShimmer": "Hämta Shimmer staking-belöningar",
         "claimShimmerDescription": "Importera IOTA-profil och hämta dina Shimmer staking-belöningar",
+        "createAlias": "Skapa alias",
+        "createAliasDescription": "Skapa alias utdata",
         "savePassword": "Spara lösenord",
         "useBiometric": "Använd biometrisk säkerhet",
         "setupPinCode": "Ställ in PIN-kod",
@@ -1043,10 +1218,12 @@
         "backup": "Säkerhetskopiera",
         "mint": "Minta",
         "mintNativeToken": "Minta inhemska tokens",
+        "mintNft": "Minta NFT",
         "verifyToken": "Verifiera token",
         "unverifyToken": "Avverifiera",
         "hideToken": "Dölj token",
         "unhideToken": "Visa token",
+        "burn": "Burn",
         "burnToken": "Bränn token",
         "faucetRequest": "Skaffa {token} tokens",
         "refreshTokenMetadata": "Uppdatera metadata för token",
@@ -1054,7 +1231,15 @@
         "testDeepLink": "Testa hyperlänk",
         "initialize": "Initiera",
         "initializing": "Initierar",
-        "delete": "Ta bort"
+        "delete": "Ta bort",
+        "remove": "Radera",
+        "addReference": "Lägg till referens",
+        "depositNft": "Insättning av NFTs",
+        "vote": "Rösta",
+        "addProposal": "Add proposal",
+        "removeProposal": "Ta bort förslag",
+        "stopVoting": "Sluta rösta",
+        "revote": "Revote"
     },
     "general": {
         "recipient": "Mottagare",
@@ -1067,22 +1252,53 @@
         "recoveryPhrase": "Återställningsfras",
         "recentActivity": "Senaste aktivitet",
         "sent": "Skickat",
+        "sending": "Skickar",
         "received": "Mottaget",
+        "receiving": "Tar emot",
+        "newVotingPower": "New voting power",
+        "votingPower": "Voting power",
+        "increased": "Voting power increased",
+        "increasing": "Increasing voting power",
+        "decreased": "Voting power decreased",
+        "decreasing": "Decreasing voting power",
+        "voted": "Röstat",
+        "voting": "Röstning",
+        "changedVote": "Changed vote",
+        "changingVote": "Changing vote",
+        "unvoted": "Tog bort röst",
+        "unvoting": "Avröstar",
+        "sentNft": "NFT skickad",
+        "sendingNft": "Skickar NFT",
+        "receivedNft": "NFT mottagen",
+        "receivingNft": "Tar emot NFT",
         "transfer": "Överföring",
         "transferring": "Överför",
+        "transferNft": "Överför NFT",
+        "transferringNft": "Överför NFT",
+        "mintedNft": "Mintad NFT",
+        "mintingNft": "Minting NFT",
         "shimmerClaimed": "Anspråkstagen",
         "shimmerClaiming": "Gör anspråk",
         "shimmerGenesis": "Shimmer genesis",
         "minted": "Mintad",
         "minting": "Mintar",
+        "burned": "Burned",
+        "burning": "Burning",
+        "consolidated": "Outputs consolidated",
+        "consolidating": "Consolidating outputs",
+        "aliasCreated": "Alias created",
+        "creatingAlias": "Creating Alias",
         "sendPayment": "Skicka tokens",
         "moveFunds": "Intern överföring",
         "sendTo": "Skicka till",
-        "sendFunds": "Skicka tillgångar",
+        "sendAssets": "Send assets",
+        "sendAssetToAddress": "Send asset to an address",
         "sendToAddress": "Skicka till adress",
+        "sendToken": "Send token",
+        "sendNft": "Send NFT",
+        "sendNftToAddress": "Send NFT to an address",
         "scanQrOrPaste": "Skanna en QR-kod eller klistra in en adress",
         "moveFundsBetweenAccounts": "Flytta IOTA mellan dina plånböcker",
-        "sendTokensToAddress": "Skicka tokens till en adress",
         "manageAccount": "Hantera plånbok",
         "customizeAcount": "Anpassa din plånbok",
         "account": "Plånbok",
@@ -1114,6 +1330,7 @@
         "systemTheme": "System",
         "balance": "Saldo",
         "balanceWithValue": "Saldo: {balance}",
+        "balanceWithNetwork": "{network} Balance",
         "all": "Alla",
         "incoming": "Inkommande",
         "outgoing": "Utgående",
@@ -1132,6 +1349,7 @@
         "security": "Säkerhet",
         "accountAddress": "Plånbokens adress",
         "network": "Nätverk",
+        "destinationNetwork": "Destination network",
         "nodes": "Noder",
         "wallet": "Plånbok",
         "help": "Hjälp",
@@ -1197,8 +1415,6 @@
         "unvotedFor": "Ej röstade för {account}",
         "stakingTransaction": "Staking-transaktion",
         "unstakingTransaction": "Unstaking-transaktion",
-        "receiving": "Tar emot",
-        "sending": "Skickar",
         "legacyNetwork": "Ursprungliga nätverket",
         "capsLock": "Caps Lock är på",
         "version": "Version {version}",
@@ -1221,6 +1437,12 @@
         "expirationTime": "Utgångstid",
         "timelockDate": "Tidlås",
         "claimedTime": "Gjorde anspråk vid",
+        "nftAddress": "NFT Address",
+        "nftId": "NFT ID",
+        "nftMetadata": "NFT Metadata",
+        "aliasId": "Alias ID",
+        "governorAddress": "Governor Address",
+        "stateControllerAddress": "State Controller Address",
         "copiedToClipboard": "Kopierad till urklipp",
         "total": "Totalt: {balance}",
         "availableBalanceWithValue": "Tillgängligt saldo: {balance}",
@@ -1228,6 +1450,8 @@
         "availableBalanceTooltip": "En tillgångs totala saldo minus eventuella medel som krävs för att täcka insättningen av lagringsdeposition (dvs. medel som är låsta i väntande transaktioner, reserverade för inhemska tokens eller reserverade för NFTs).",
         "amountClaimed": "{amount} taget i anspråk",
         "metadata": "Metadata",
+        "amountConsolidatedInputs": "Consolidated outputs",
+        "name": "Namn",
         "tag": "Tagg",
         "nodeList": "Nodlista",
         "claimedIn": "Gjorde anspråk i",
@@ -1235,6 +1459,7 @@
         "assets": "Tillgångar",
         "nativeTokens": "Inhemska tokens",
         "mintNativeTokenDescription": "Minta imhemsk token som följer IRC30 standard",
+        "mintNftDescription": "Minta NFT enligt IRC27 standard",
         "faucetRequestDescription": "Begär tokens från {network} faucet",
         "refreshTokenMetadataDescription": "Återställ och uppdatera all metadata för alla tokens",
         "refreshTokenMetadataHint": "Detta kommer att återställa alla dina tokens metadata inklusive verifieringsstatus och visa dina dolda tillgångar.",
@@ -1245,7 +1470,37 @@
         "url": "URL",
         "hash": "Hash",
         "creating": "Skapar",
-        "updating": "Uppdaterar"
+        "updating": "Uppdaterar",
+        "enterAddress": "Ange adress",
+        "transaction": "Transaktion",
+        "alias": "Alias",
+        "foundry": "Foundry",
+        "token": "Token",
+        "nft": "NFT",
+        "type": "Typ",
+        "immutableIssuer": "Oföränderlig utfärdare",
+        "smartContract": "Smartkontrakt",
+        "targetContract": "Målkontrakt",
+        "contractFunction": "Kontraktsfunktion",
+        "gasBudget": "Gas-budget",
+        "standard": "Standard",
+        "uri": "URI",
+        "issuer": "Utfärdare",
+        "issuerAddress": "Utfärdarens adress",
+        "issuerName": "Utfärdarens namn",
+        "collection": "Samling",
+        "collectionId": "Samlings-ID",
+        "collectionName": "Samlingsnamn",
+        "royalties": "Royaltyer",
+        "description": "Beskrivning",
+        "attributes": "Attribut",
+        "details": "Detaljer",
+        "availableAmount": "{amount} tillgängligt",
+        "properties": "Egenskaper",
+        "statistics": "Statistik",
+        "username": "Användarnamn",
+        "jwt": "JSON webb-token",
+        "internalTransaction": "Internal transaction"
     },
     "filters": {
         "title": "Filter",
@@ -1258,6 +1513,25 @@
             "label": "Visa avvisade",
             "yes": "Ja",
             "no": "Nej"
+        },
+        "showValueless": {
+            "label": "Show valueless",
+            "yes": "Ja",
+            "no": "Nej"
+        },
+        "ascDesc": {
+            "Asc": "Stigande",
+            "Desc": "Fallande"
+        },
+        "assetOrder": {
+            "label": "Sortering",
+            "Name": "Namn",
+            "Amount": "Mängd"
+        },
+        "internalExternal": {
+            "label": "Intern/Extern",
+            "internal": "Intern",
+            "external": "Extern"
         },
         "verificationStatus": {
             "label": "Verifieringsstatus",
@@ -1297,9 +1571,34 @@
         },
         "type": {
             "label": "Typ",
-            "incoming": "inkommande",
-            "outgoing": "utgående",
-            "internal": "intern"
+            "basic": "Enkel",
+            "nft": "NFT",
+            "alias": "Alias",
+            "foundry": "Foundry"
+        },
+        "direction": {
+            "label": "Riktning",
+            "incoming": "Inkommande",
+            "outgoing": "Utgående",
+            "selfTransaction": "Egen transaktion"
+        },
+        "proposalType": {
+            "label": "Type",
+            "official": "Official",
+            "custom": "Custom"
+        },
+        "phase": {
+            "label": "Phase"
+        },
+        "participated": {
+            "label": "Participated",
+            "yes": "Yes",
+            "no": "No"
+        },
+        "proposalOrder": {
+            "label": "Order",
+            "name": "Name",
+            "phase": "Phase"
         }
     },
     "dates": {
@@ -1342,8 +1641,11 @@
             "receivedWhileLoggedOut": "Vänligen logga in för att initiera hyperlänken",
             "notEnabled": "Hyperlänkar är inte aktiverat",
             "invalidFormat": "Hyperlänken du följde är ogiltig",
-            "invalidAmount": "Beloppet i hyperlänken är inte ett nummer {amount}",
+            "invalidAmount": "The amount in deep link is not an integer number {amount}",
             "invalidSurplus": "Överskottet i hyperlänken är inte ett nummer {surplus}",
+            "governance": {
+                "unrecognizedOperation": "Unrecognized Governance operation: {operation}"
+            },
             "wallet": {
                 "send": {
                     "success": "Betalningsinformation tillagd från hyperlänk"
@@ -1368,6 +1670,15 @@
         "mintNativeToken": {
             "success": "Inhemsk token-minting transaktion skickad"
         },
+        "burnNativeToken": {
+            "success": "Native token burning transaction sent"
+        },
+        "mintNft": {
+            "success": "NFT minting transaction sent"
+        },
+        "burnNft": {
+            "success": "NFT burning transaction sent"
+        },
         "refreshTokenMetadata": {
             "success": "All token metadata har blivit återställd och förnyad"
         },
@@ -1382,6 +1693,12 @@
         "claimShimmerRewards": {
             "success": "Shimmer-belöningar hämtade för {accountAlias}",
             "error": "Ett fel inträffade när belöningar skulle hämtas. Försök igen."
+        },
+        "vote": {
+            "success": "Votes successfully casted"
+        },
+        "stopVoting": {
+            "success": "Voting successfully stopped"
         }
     },
     "error": {
@@ -1417,9 +1734,12 @@
             "incorrect": "Din nuvarande PIN-kod är felaktig.",
             "invalid": "Ogiltig PIN-kod."
         },
+        "address": {
+            "wrongAddressType": "Wrong address type"
+        },
         "account": {
+            "addressNotFound": "The address cannot be found in your account.",
             "length": "Ditt plånboksnamn kan inte vara längre än {length, plural, one {# tecken} other {# tecken}}.",
-            "empty": "Du måste använda din senaste plånbok innan du skapar en ny.",
             "emptyName": "Ett profilnamn måste innehålla minst 1 tecken.",
             "notEmpty": "Du måste överföra ditt saldo innan du tar bort denna plånbok.",
             "duplicate": "En plånbok med detta namn finns redan.",
@@ -1442,8 +1762,8 @@
             "amountNoFloat": "Kan inte använda decimaltecken med den minsta enhet som valts",
             "amountInvalidFormat": "Beloppet verkar vara ett ogiltigt nummer.",
             "amountSmallerThanSubunit": "Beloppet måste vara större än den minsta subenheten.",
-            "tagTooLong": "Taggen kan inte vara längre än 64 tecken.",
-            "metadataTooLong": "Metadatan kan inte vara längre än 8192 tecken.",
+            "tagTooLong": "The tag cannot be longer than 64 bytes.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "Beloppet måste vara större än 0.",
             "wrongAddressPrefix": "Adresser börjar med prefixet {prefix}.",
             "wrongAddressFormat": "Adressen är inte korrekt formaterad.",
@@ -1458,19 +1778,28 @@
             "cancelled": "Transaktionen avbröts.",
             "transaction": "Det uppstod ett fel. Vänligen försök igen.",
             "invalidExpirationDateTime": "Det valda utgångsdatumet/tiden är ogiltig.",
+            "noInputs": "No inputs found.",
+            "notEnoughBalance": "Not enough balance.",
             "missingTransactionId": "Transaktions-ID saknas",
-            "missingTransactionProgressEventPayload": "Händelseförloppet för transaktionen saknas"
+            "missingTransactionProgressEventPayload": "Händelseförloppet för transaktionen saknas",
+            "recipientRequired": "Recipient is required",
+            "nftRequired": "NFT is required",
+            "nftNotInHex": "NFT address has to be in HEX format",
+            "nftNotInPossession": "NFT not in possession",
+            "reservedTagKeyword": "Unable to use reserved tag keyword"
+        },
+        "layer2": {
+            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account."
         },
         "node": {
             "invalid": "Ange en giltig URL.",
-            "dns": "Kunde inte hitta DNS-upplösning för nod.",
+            "dns": "Unable to find DNS resolution for node",
             "timedOut": "Anslutningen tog för lång tid.",
             "refused": "Anslutningen avvisades.",
             "handshake": "Kunde inte slutföra handskakning med nod.",
             "invalidCertificate": "Kunde inte ansluta med ett ogiltigt certifikat.",
             "https": "HTTPS krävs; osäkra anslutningar över HTTP stöds inte just nu.",
             "duplicate": "Den här noden har redan lagts till.",
-            "unsynced": "Noden är inte synkroniserad.",
             "noSyncedNode": "Ingen synkroniserad nod är tillgänglig.",
             "timeNotSynced": "Enhetens tid är felaktig, det går inte att synkronisera noden.",
             "answer": "Det gick inte att få svar från alla noder.",
@@ -1540,6 +1869,51 @@
         "walletApiEvent": {
             "invalidAccountIndex": "Ogiltigt kontoindex för {eventName} händelse",
             "invalidPayload": "Ogiltig nyttolast för {eventName} händelse"
+        },
+        "aliasMinting": {
+            "aliasRequired": "Alias is required",
+            "aliasNotInPossession": "Alias not in possession"
+        },
+        "noOutputsToConsolidate": "Not enough outputs to consolidate",
+        "eventId": {
+            "doesNotStartWith0x": "Event ID should start with '0x'",
+            "insufficientLength": "Event ID should be 66 characters long"
+        },
+        "nft": {
+            "unsupportedUrl": {
+                "short": "Url not supported",
+                "long": "Url schema not supported"
+            },
+            "unsupportedFileType": {
+                "short": "Unsupported media type",
+                "long": "The media type is not currently supported"
+            },
+            "notMatchingFileTypes": {
+                "short": "Loading blocked",
+                "long": "NFT file type does not match the expected media type"
+            },
+            "tooLargeFile": {
+                "short": "File is too large",
+                "long": "Loading NFT blocked because the file is too large"
+            },
+            "corsError": {
+                "short": "Loading blocked",
+                "long": "Loading NFT blocked by CORS policy"
+            },
+            "unsafeToLoad": {
+                "short": "Unsafe to load",
+                "long": "An error occurred while checking if the NFT was safe to load"
+            },
+            "loadingError": {
+                "short": "Unable to load",
+                "long": "An error occurred while loading the NFT"
+            }
+        },
+        "governance": {
+            "unableToAddProposal": {
+                "short": "Unable to add proposal",
+                "long": "An error occurred while trying to add proposal {proposalId}"
+            }
         }
     },
     "warning": {
@@ -1581,13 +1955,22 @@
         },
         "optionalInput": "Denna valfria data kommer att vara offentlig på explorers och synlig för alla.",
         "transactionDetails": {
+            "minting": {
+                "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
+                "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
+                "expirationTime": "Claim these funds before the expiration time or they will be returned to the sender.",
+                "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
+                "metadata": "An optional data field for storing data persistently on the Tangle.",
+                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
+            },
             "incoming": {
                 "storageDeposit": "En återbetalningsbar tokeninsättning behövs för att lagra din transaktion på Tangle.",
                 "giftedStorageDeposit": "Lagringsdepositionen för denna transaktion skänktes till dig. Du behöver inte återbetala depositionen.",
                 "expirationTime": "Gör anspråk på dessa tillgångar innan utgångstiden annars kommer de att återlämnas till avsändaren.",
                 "timelockDate": "Avsändaren satte ett tidlås på dessa tillgångar. Du kommer att kunna spendera dem när tidsbegränsningen löpt ut.",
                 "metadata": "Ett valfritt datafält för att lagra data konstant på Tangle.",
-                "tag": "Ett kort valfritt datafält. Taggningsgrupper av transaktioner kan göra dem enklare att söka efter."
+                "tag": "Ett kort valfritt datafält. Taggningsgrupper av transaktioner kan göra dem enklare att söka efter.",
+                "gasBudget": "Gasbudget krävs för att genomföra en transaktion eller utföra en smartkontrakts-funktion på Shimmer EVM."
             },
             "outgoing": {
                 "storageDeposit": "En lagringsdeposition är en återbetalningsbar insättning som behövs för att lagra din transaktion på Tangle.",
@@ -1595,14 +1978,35 @@
                 "expirationTime": "Om mottagaren inte gör anspråk i tid kommer dina tokens att returneras till dig.",
                 "timelockDate": "Du har lagt till en tidsgräns för denna transaktion. Mottagaren kommer inte kunna spendera dessa tillgångar förrän tidsfristen löpt ut.",
                 "metadata": "Ett valfritt datafält för att lagra data konstant på Tangle.",
-                "tag": "Ett kort valfritt datafält. Taggningsgrupper av transaktioner kan göra dem enklare att söka efter."
+                "tag": "Ett kort valfritt datafält. Taggningsgrupper av transaktioner kan göra dem enklare att söka efter.",
+                "gasBudget": "Gasbudget krävs för att genomföra en transaktion eller utföra en smartkontrakts-funktion på Shimmer EVM."
+            },
+            "nftMetadata": {
+                "standard": "NFT-standarden t.ex. IRC27.",
+                "type": "MimeType av NFT. t.ex. image/png.",
+                "collectionId": "UTXO sträng av samlingens NFT som mintade denna NFT",
+                "royalties": "Ett objekt som innehåller nyckelvärdepar av adresser som kartlägger utbetalningsprocent",
+                "issuerName": "Namnet på skaparen",
+                "attributes": "En rad egenskaper och värden som definierar attribut för NFT"
             }
         },
-        "mintNativeTokenForm": {
+        "mintNativeToken": {
             "decimals": "IRC30 valfri parameter: Antal decimaler som token använder (dividera token beloppet med 10 ^ decimaler för att få dess användarrepresentation).",
             "description": "IRC30 valfri parameter: Den mänskliga läsbara beskrivningen av token.",
             "url": "IRC30 valfri parameter: URL som pekar på mer information om token som en webbplats eller sociala medier-sida.",
             "logoUrl": "IRC30 valfri parameter: URL som pekar mot en bild för tokenlogotypen."
+        },
+        "mintNftForm": {
+            "collectionId": "Valfri parameter: UTXO sträng av samlingens NFT som mintade denna NFT",
+            "collectionName": "Valfri parameter: Samlingens namn",
+            "royalties": "Valfri parameter: Ett objekt som innehåller nyckelvärdepar av adresser som kartlägger utbetalningsprocent",
+            "issuerName": "Valfri parameter: Namnet på skaparen",
+            "description": "Valfri parameter: En beskrivning av NFT",
+            "attributes": "Valfri parameter: En rad egenskaper och värden som definierar attribut för NFT",
+            "uri": "För att skapa en URI med anpassade medier, ladda först upp din fil till IPFS via en lagringstjänst (t.ex. https://nft.storage/)"
+        },
+        "governance": {
+            "removeProposalWarning": "You must stop voting for this proposal in all accounts before removing it."
         }
     },
     "exports": {
@@ -1631,8 +2035,11 @@
     },
     "tabs": {
         "wallet": "Plånbok",
-        "staking": "Staking",
-        "developer": "Utvecklare"
+        "collectibles": "Samlarobjekt",
+        "governance": "Styrning",
+        "developer": "Utvecklare",
+        "tokens": "Tokens",
+        "activity": "Aktivitet"
     },
     "pills": {
         "stake": {
@@ -1643,7 +2050,7 @@
         "external": {
             "incoming": {
                 "Pending": "tar emot från",
-                "Confirmed": "tagit emot från",
+                "Confirmed": "mottaget från",
                 "Conflicting": "misslyckades att ta emot"
             },
             "outgoing": {
@@ -1674,6 +2081,16 @@
             "Confirmed": "mintad",
             "Conflicting": "misslyckades med att minta"
         },
+        "burn": {
+            "Pending": "brinnande",
+            "Confirmed": "bränd",
+            "Conflicting": "misslyckades att bränna"
+        },
+        "consolidation": {
+            "Pending": "Consolidating outputs",
+            "Confirmed": "Outputs consolidated",
+            "Conflicting": "failed to consolidate outputs"
+        },
         "migrate": {
             "Pending": "migrerar för",
             "Confirmed": "migrerat för",
@@ -1684,7 +2101,48 @@
             "claimed": "anspråkstaget",
             "expired": "löpt ut"
         },
-        "locked": "låst"
+        "governance": {
+            "increaseVotingPower": {
+                "Pending": "increasing voting power",
+                "Confirmed": "increased voting power",
+                "Conflicting": "failed to increased voting power"
+            },
+            "decreaseVotingPower": {
+                "Pending": "decreasing voting power",
+                "Confirmed": "decreased voting power",
+                "Conflicting": "failed to decreased voting power"
+            },
+            "startVoting": {
+                "Pending": "voting for",
+                "Confirmed": "voted for",
+                "Conflicting": "failed to vote for"
+            },
+            "stopVoting": {
+                "Pending": "stopping voting for",
+                "Confirmed": "stopped voting for",
+                "Conflicting": "failed to stopped voting for"
+            },
+            "changedVote": {
+                "Pending": "changing vote for",
+                "Confirmed": "changed vote for",
+                "Conflicting": "failed to change vote for"
+            }
+        },
+        "alias": {
+            "creation": {
+                "Pending": "skapar alias",
+                "Confirmed": "alias skapat",
+                "Failed": "Misslyckades med att skapa alias"
+            }
+        },
+        "locked": "låst",
+        "smartContract": "smartkontrakt",
+        "proposalStatus": {
+            "upcoming": "Meddelande",
+            "commencing": "Röstning öppen",
+            "holding": "Räknar",
+            "ended": "Stängd"
+        }
     },
     "menus": {
         "expirationTimePicker": {

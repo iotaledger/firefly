@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { isStrongholdUnlocked } from '@core/profile-manager'
     import { Activity } from '@core/wallet'
     import { ActivityList } from '../../../../mobile/components'

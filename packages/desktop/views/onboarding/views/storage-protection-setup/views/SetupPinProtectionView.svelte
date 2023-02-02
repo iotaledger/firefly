@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Animation, Button, OnboardingLayout, PinInput, Text, HTMLButtonType } from 'shared/components'
     import { onMount } from 'svelte'
     import {
@@ -105,7 +105,7 @@
                 >{localize('views.onboarding.storageProtectionSetup.setupPinProtection.body2')}</Text
             >
         </div>
-        <form id="setup-pin" class="flex flex-col" on:submit={onSetPinClick}>
+        <form id="setup-pin" class="flex flex-col" on:submit|preventDefault={onSetPinClick}>
             <PinInput
                 bind:value={setPinInput}
                 glimpse

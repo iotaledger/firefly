@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
     import { ClosableInput, AddInputButton, Tooltip, Text, FontWeight, TextType } from 'shared/components'

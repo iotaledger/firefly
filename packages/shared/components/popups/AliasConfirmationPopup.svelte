@@ -1,17 +1,15 @@
-<script lang="typescript">
+<script lang="ts">
     import { Button, KeyValueBox, Text, FontWeight, TextType } from 'shared/components'
     import { selectedAccount, updateSelectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth, activeProfile } from '@core/profile'
     import {
-        addActivityToAccountActivitiesInAllAccountActivities,
         convertBech32ToHexAddress,
         formatTokenAmountPrecise,
-        generateActivity,
         EMPTY_HEX_ID,
-        preprocessTransaction,
         UNLOCK_CONDITION_GOVERNOR_ADDRESS,
         UNLOCK_CONDITION_STATE_CONTROLLER_ADDRESS,
+        processAndAddToActivities,
     } from '@core/wallet'
     import { closePopup } from '@auxiliary/popup'
     import { onMount } from 'svelte'
@@ -58,9 +56,7 @@
         try {
             updateSelectedAccount({ isTransferring: true })
             const transaction = await $selectedAccount.createAliasOutput()
-            const processedTransaction = await preprocessTransaction(transaction, $selectedAccount)
-            const activity = generateActivity(processedTransaction, $selectedAccount)
-            addActivityToAccountActivitiesInAllAccountActivities($selectedAccount.index, activity)
+            await processAndAddToActivities(transaction)
             closePopup()
         } catch (err) {
             handleError(err)

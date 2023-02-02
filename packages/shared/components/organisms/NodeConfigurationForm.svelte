@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { get } from 'svelte/store'
     import { Input, PasswordInput } from 'shared/components'
     import { INode, checkNodeUrlValidity, checkNetworkId, IClientOptions, nodeInfo } from '@core/network'
@@ -12,7 +12,7 @@
     export let formError = ''
     export let currentClientOptions: IClientOptions = undefined
     export let isDeveloperProfile: boolean = false
-
+    export let onSubmit: () => void = () => {}
     $: node.url, (formError = '')
 
     function cleanNodeUrl(): void {
@@ -80,7 +80,7 @@
     }
 </script>
 
-<form id="node-configuration-form" class="w-full h-full">
+<form id="node-configuration-form" class="w-full h-full" on:submit|preventDefault={onSubmit}>
     <Input
         bind:value={node.url}
         placeholder={localize('popups.node.nodeAddress')}

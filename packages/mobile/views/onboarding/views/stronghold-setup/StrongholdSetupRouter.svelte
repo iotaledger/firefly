@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { SetupStrongholdPasswordView } from './views'
     import { strongholdSetupRoute, StrongholdSetupRoute } from '../../../../lib/routers'
 </script>

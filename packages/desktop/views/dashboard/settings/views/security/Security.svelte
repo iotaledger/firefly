@@ -1,8 +1,8 @@
-<script lang="typescript">
+<script lang="ts">
     import { isSoftwareProfile } from '@core/profile'
     import { SecuritySettingsRoute } from '@core/router'
     import { HR } from 'shared/components'
-    import { AppLock, ChangePassword, ChangePincode, DeleteProfile, ExportStronghold } from './'
+    import { AppLock, ChangePassword, ChangePincode, DeleteProfile, ExportStronghold, MaxMediaSize } from './'
     import features from '@features/features'
 
     const settings: {
@@ -12,6 +12,7 @@
     }[] = [
         { component: ExportStronghold, childRoute: SecuritySettingsRoute.ExportStronghold, requireSoftware: true },
         { component: AppLock, childRoute: SecuritySettingsRoute.AppLock },
+        { component: MaxMediaSize, childRoute: SecuritySettingsRoute.MaxMediaSize },
         { component: ChangePassword, childRoute: SecuritySettingsRoute.ChangePassword, requireSoftware: true },
         { component: ChangePincode, childRoute: SecuritySettingsRoute.ChangePincode },
         { component: DeleteProfile, childRoute: SecuritySettingsRoute.DeleteProfile },

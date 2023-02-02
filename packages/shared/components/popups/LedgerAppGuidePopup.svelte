@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { LedgerAnimation, Button, Text } from 'shared/components'
     import { closePopup } from '@auxiliary/popup'
     import { LedgerAppName } from '@core/ledger'

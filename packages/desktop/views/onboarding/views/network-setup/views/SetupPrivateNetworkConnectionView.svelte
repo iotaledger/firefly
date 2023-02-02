@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { onMount } from 'svelte'
     import { Animation, OnboardingLayout, Text, Button, NodeConfigurationForm, HTMLButtonType } from 'shared/components'
     import {
@@ -68,7 +68,14 @@
         <Text type="p" secondary classes="mb-8"
             >{localize('views.onboarding.networkSetup.setupPrivateNetworkConnection.body')}</Text
         >
-        <NodeConfigurationForm bind:this={nodeConfigurationForm} bind:node bind:formError {isBusy} isDeveloperProfile />
+        <NodeConfigurationForm
+            onSubmit={onContinueClick}
+            bind:this={nodeConfigurationForm}
+            bind:node
+            bind:formError
+            {isBusy}
+            isDeveloperProfile
+        />
     </div>
     <div slot="leftpane__action">
         <Button
@@ -76,7 +83,6 @@
             type={HTMLButtonType.Submit}
             form="node-configuration-form"
             classes="w-full"
-            onClick={onContinueClick}
             {isBusy}
             busyMessage={localize('actions.addingNode')}
         >

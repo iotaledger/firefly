@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Icon } from '@auxiliary/icon'
     import { openPopup } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
@@ -6,9 +6,10 @@
 
     export let modal: Modal = undefined
 
-    function handleRegister(): void {
+    function handleAddProposal(): void {
         openPopup({
-            type: 'registerProposal',
+            type: 'addProposal',
+            overflow: true,
         })
     }
 </script>
@@ -18,8 +19,8 @@
         <MenuItem
             icon={Icon.Plus}
             iconProps={{ width: '14', height: '14' }}
-            title={localize('actions.registerProposal')}
-            onClick={handleRegister}
+            title={localize('actions.addProposal')}
+            onClick={handleAddProposal}
         />
     </div>
 </Modal>

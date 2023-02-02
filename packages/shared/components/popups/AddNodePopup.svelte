@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Text, NodeConfigurationForm, Button, HTMLButtonType } from 'shared/components'
     import { localize } from '@core/i18n'
     import { INode, addNodeToClientOptions, editNodeInClientOptions } from '@core/network'
@@ -49,6 +49,7 @@
     <NodeConfigurationForm
         bind:this={nodeConfigurationForm}
         bind:node
+        onSubmit={handleAddNode}
         {isBusy}
         isDeveloperProfile={$activeProfile.isDeveloperProfile}
     />
@@ -61,7 +62,6 @@
             type={HTMLButtonType.Submit}
             form="node-configuration-form"
             classes="w-1/2"
-            onClick={handleAddNode}
             {isBusy}
             busyMessage={localize(`popups.node.${isEditingNode ? 'updatingNode' : 'addingNode'}`)}
         >

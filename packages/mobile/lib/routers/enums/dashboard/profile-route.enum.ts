@@ -1,7 +1,8 @@
 export enum ProfileRoute {
     Actions = 'actions',
     Backup = 'backup',
-    Status = 'status',
-    Unlock = 'unlock',
+    NetworkStatus = 'networkStatus',
     Settings = 'settings',
+    // Auxiliary
+    UnlockStronghold = 'unlockStronghold',
 }

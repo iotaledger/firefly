@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { fade } from 'svelte/transition'
     import { Button, ButtonSize, DeveloperIndicatorPill, HR, Icon, Modal, Text, Toggle } from 'shared/components'
     import { localize } from '@core/i18n'

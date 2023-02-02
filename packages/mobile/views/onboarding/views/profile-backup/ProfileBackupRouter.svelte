@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { VerifyMnemonicView, ViewMnemonicView } from './views'
     import { profileBackupRoute, ProfileBackupRoute } from '../../../../lib/routers'
 </script>

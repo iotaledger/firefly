@@ -3,15 +3,13 @@ import { AccountMock } from './account.mock'
 import type {
     AccountId,
     CreateAccountPayload,
-    AccountSyncOptions,
+    SyncOptions,
     ClientOptions,
     EventType,
     WalletEvent,
     LedgerNanoStatus,
     GenerateAddressOptions,
-    Event,
     Node,
-    EventId,
 } from '@iota/wallet'
 
 import { IAccount } from '@core/account'
@@ -40,7 +38,7 @@ export class ProfileManagerMock implements IProfileManager {
         throw new Error('Method not implemented.')
     }
 
-    clearListeners(eventTypes: EventType[]): void {
+    clearListeners(eventTypes: EventType[]): Promise<void> {
         throw new Error('Method not implemented.')
     }
 
@@ -54,10 +52,6 @@ export class ProfileManagerMock implements IProfileManager {
 
     destroy(): Promise<void> {
         return Promise.resolve()
-    }
-
-    deregisterParticipationEvent(eventId: string): Promise<void> {
-        throw new Error('Method not implemented.')
     }
 
     emitTestEvent(event: WalletEvent): Promise<void> {
@@ -152,14 +146,6 @@ export class ProfileManagerMock implements IProfileManager {
         )
     }
 
-    getParticipationEvent(eventId: EventId): Promise<Event> {
-        throw new Error('Method not implemented.')
-    }
-
-    getParticipationEvents(): Promise<Event[]> {
-        throw new Error('Method not implemented.')
-    }
-
     hexToBech32(hex: string, bech32Hrp?: string): Promise<string> {
         throw new Error('Method not implemented.')
     }
@@ -176,13 +162,9 @@ export class ProfileManagerMock implements IProfileManager {
         accountStartIndex: number,
         accountGapLimit: number,
         addressGapLimit: number,
-        syncOptions: AccountSyncOptions
+        syncOptions: SyncOptions
     ): Promise<IAccount[]> {
         return Promise.resolve([])
-    }
-
-    registerParticipationEvent(eventId: string, nodes?: Node[]): Promise<Event> {
-        throw new Error('Method not implemented.')
     }
 
     removeLatestAccount(): Promise<void> {
@@ -205,7 +187,7 @@ export class ProfileManagerMock implements IProfileManager {
         throw new Error('Method not implemented.')
     }
 
-    startBackgroundSync(options?: AccountSyncOptions, interval?: number): Promise<void> {
+    startBackgroundSync(options?: SyncOptions, interval?: number): Promise<void> {
         return Promise.resolve()
     }
 

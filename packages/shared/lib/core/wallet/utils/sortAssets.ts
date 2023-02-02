@@ -1,5 +1,5 @@
+import { AssetOrderOption, OrderOption } from '@core/utils/enums/filters'
 import { get } from 'svelte/store'
-import { AssetOrderOption, OrderOption } from '../enums'
 import { IAsset } from '../interfaces'
 import { assetFilter } from '../stores'
 

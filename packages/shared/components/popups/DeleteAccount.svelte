@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Button, PasswordInput, Text, Error, ButtonVariant, HTMLButtonType } from 'shared/components'
     import { closePopup } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
@@ -45,7 +45,7 @@
         })}
     </Text>
 </div>
-<div class="flex w-full flex-row flex-wrap">
+<form on:submit|preventDefault={handleDeleteClick} class="flex w-full flex-row flex-wrap">
     <Text type="p" secondary classes="mb-5">{localize('popups.deleteAccount.body')}</Text>
     {#if $isSoftwareProfile}
         <Text type="p" secondary classes="mb-3">{localize('popups.deleteAccount.typePassword')}</Text>
@@ -69,7 +69,6 @@
         <Button
             variant={ButtonVariant.Warning}
             classes="w-1/2"
-            onClick={handleDeleteClick}
             type={HTMLButtonType.Submit}
             disabled={(!password && $isSoftwareProfile) || isBusy}
             {isBusy}
@@ -77,4 +76,4 @@
             {localize('actions.deleteAccount')}
         </Button>
     </div>
-</div>
+</form>

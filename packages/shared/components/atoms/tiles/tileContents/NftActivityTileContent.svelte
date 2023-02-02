@@ -1,8 +1,8 @@
-<script lang="typescript">
+<script lang="ts">
     import { localize } from '@core/i18n'
-    import { ActivityAction, ActivityDirection, InclusionState, NftActivity, Subject } from '@core/wallet'
+    import { ActivityDirection, getActivityTileTitle, NftActivity, Subject } from '@core/wallet'
     import { truncateString } from '@core/utils'
-    import { Text, FontWeight, NftImageOrIconBox } from 'shared/components'
+    import { NftImageOrIconBox, ActivityTileContent } from 'shared/components'
     import { networkHrp } from '@core/network'
     import { getNftByIdFromAllAccountNfts } from '@core/nfts'
     import { selectedAccountIndex } from '@core/account'
@@ -11,28 +11,18 @@
 
     $: isIncoming =
         activity.direction === ActivityDirection.Incoming || activity.direction === ActivityDirection.SelfTransaction
-    $: title = getTitle(activity)
+    $: action = localize(getActivityTileTitle(activity))
+    $: subject = localize(isIncoming ? 'general.fromAddress' : 'general.toAddress', {
+        values: { account: subjectLocale },
+    })
+    $: formattedAsset = {
+        text: nft?.name ?? '',
+        color: isIncoming ? 'blue-700' : '',
+        classes: 'truncate',
+    }
     $: subjectLocale = getSubjectLocale(activity.subject)
 
     $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, activity.nftId)
-
-    function getTitle(_activity: NftActivity): string {
-        const { isInternal, direction, inclusionState, action } = _activity
-        const isConfirmed = inclusionState === InclusionState.Confirmed
-
-        if (action === ActivityAction.Mint) {
-            return isConfirmed ? 'general.minted' : 'general.minting'
-        }
-        if (isInternal) {
-            return isConfirmed ? 'general.transfer' : 'general.transferring'
-        }
-        if (direction === ActivityDirection.Incoming || direction === ActivityDirection.SelfTransaction) {
-            return isConfirmed ? 'general.received' : 'general.receiving'
-        }
-        if (direction === ActivityDirection.Outgoing) {
-            return isConfirmed ? 'general.sent' : 'general.sending'
-        }
-    }
 
     function getSubjectLocale(subject: Subject): string {
         let description
@@ -46,23 +36,6 @@
     }
 </script>
 
-<NftImageOrIconBox nftId={activity.nftId} size="medium" />
-
-<div class="flex flex-col w-full space-y-0.5 overflow-hidden">
-    <div class="flex flex-row justify-between space-x-4">
-        <Text fontWeight={FontWeight.semibold} lineHeight="140" classes="flex-shrink-0">
-            {localize(title)}
-        </Text>
-        <Text fontWeight={FontWeight.semibold} lineHeight="140" color={isIncoming ? 'blue-700' : ''} classes="truncate">
-            {nft?.name ?? ''}
-        </Text>
-    </div>
-
-    <div class="flex flex-row items-start" style="width: 70%">
-        <Text fontWeight={FontWeight.normal} lineHeight="140" color="gray-600" classes="truncate">
-            {localize(isIncoming ? 'general.fromAddress' : 'general.toAddress', {
-                values: { account: subjectLocale },
-            })}
-        </Text>
-    </div>
-</div>
+<ActivityTileContent {action} {subject} {formattedAsset}>
+    <NftImageOrIconBox slot="icon" nftId={activity.nftId} size="medium" />
+</ActivityTileContent>

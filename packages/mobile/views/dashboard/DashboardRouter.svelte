@@ -1,7 +1,8 @@
-<script lang="typescript">
+<script lang="ts">
     import features from '@features/features'
     import { selectedActivity, selectedAsset } from '../../lib/contexts/dashboard'
     import {
+        accountActionsRouter,
         accountSwitcherRouter,
         activityRouter,
         DashboardRoute,
@@ -10,9 +11,11 @@
         profileRouter,
         resetRouterWithDrawerDelay,
         sendRouter,
+        settingsRouter,
         tokenRouter,
     } from '../../lib/routers'
     import {
+        AccountActionsDrawer,
         AccountSwitcherDrawer,
         ActivityDrawer,
         ProfileDrawer,
@@ -34,8 +37,13 @@
         resetRouterWithDrawerDelay($accountSwitcherRouter)
         $dashboardRouter.previous()
     }
+    function onAccountActionsDrawerClose(): void {
+        resetRouterWithDrawerDelay($accountActionsRouter)
+        $dashboardRouter.previous()
+    }
     function onProfileDrawerClose(): void {
         $profileRouter.closeDrawer()
+        resetRouterWithDrawerDelay($settingsRouter)
     }
     function onActivityDrawerClose(): void {
         resetRouterWithDrawerDelay($activityRouter)
@@ -53,6 +61,8 @@
     <SendDrawer onClose={onSendDrawerClose} />
 {:else if $dashboardRoute === DashboardRoute.AccountSwitcher && features?.dashboard?.accountSwitcher?.enabled}
     <AccountSwitcherDrawer onClose={onAccountSwitcherDrawerClose} />
+{:else if $dashboardRoute === DashboardRoute.AccountActions && features?.dashboard?.accountActions?.enabled}
+    <AccountActionsDrawer onClose={onAccountActionsDrawerClose} />
 {:else if $dashboardRoute === DashboardRoute.Profile && features?.dashboard?.profileActions?.enabled}
     <ProfileDrawer onClose={onProfileDrawerClose} />
 {:else if $dashboardRoute === DashboardRoute.Activity && $selectedActivity}

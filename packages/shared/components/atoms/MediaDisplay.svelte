@@ -1,23 +1,25 @@
-<script lang="typescript">
+<script lang="ts">
     import { MimeType, ParentMimeType } from '@core/nfts'
+    import { activeProfile } from '@core/profile'
 
-    export let Media: HTMLImageElement | HTMLVideoElement
+    export let Media: HTMLImageElement | HTMLVideoElement = undefined
     export let src: string
     export let expectedType: MimeType
     export let classes: string = ''
     export let alt = ''
-    export let onError: () => unknown
+    export let onError: (a?: string) => unknown
+    export let onWarning: (a?: string) => unknown
     export let onLoad: () => unknown
     export let autoplay: boolean = false
     export let controls: boolean = false
     export let muted: boolean = false
     export let loop: boolean = false
 
-    let type: string
+    const type: string = convertMimeTypeToHtmlTag(expectedType)
     let safeToLoad = false
     let isLoaded = false
+    const MAX_FILE_SIZE_IN_BYTES = ($activeProfile?.settings?.maxMediaSizeInMegaBytes ?? 0) * 1000000
 
-    $: type = convertMimeTypeToHtmlTag(expectedType)
     $: src && void checkContentIsSafeToLoad()
     $: isLoaded && muteVideo()
 
@@ -47,7 +49,7 @@
             case ParentMimeType.Video:
                 return 'video'
             default:
-                onError()
+                onWarning('error.nft.unsupportedFileType.')
                 return undefined
         }
     }
@@ -66,18 +68,24 @@
 
     async function checkContentIsSafeToLoad() {
         try {
-            if (src && typeof src === 'string') {
+            if (type && src && typeof src === 'string') {
                 const response = await fetch(src, { method: 'HEAD', cache: 'force-cache' })
-                if (response.headers.get('Content-Type') === expectedType) {
-                    safeToLoad = true
-                } else {
+                if (response.headers.get('Content-Type') !== expectedType) {
                     safeToLoad = false
-                    onError()
+                    onError('error.nft.notMatchingFileTypes.')
+                } else if (
+                    MAX_FILE_SIZE_IN_BYTES > 0 &&
+                    Number(response.headers.get('Content-Length')) > MAX_FILE_SIZE_IN_BYTES
+                ) {
+                    safeToLoad = false
+                    onWarning('error.nft.tooLargeFile.')
+                } else {
+                    safeToLoad = true
                 }
             }
         } catch (error) {
             safeToLoad = false
-            onError()
+            onError('error.nft.unsafeToLoad.')
         }
     }
 </script>

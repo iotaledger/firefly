@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { appRoute, AppRoute, dashboardRoute, DashboardRoute } from '@core/router'
     import { activeProfile } from '@core/profile'
     import { appSettings, Platform, PlatformOption, platform } from '@core/app'

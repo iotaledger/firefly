@@ -1,6 +1,6 @@
-<script lang="typescript">
+<script lang="ts">
     import { onMount } from 'svelte'
-    import { localeDirection, setupI18n } from '@core/i18n'
+    import { localeDirection, setupI18n, _ } from '@core/i18n'
     import { checkAndMigrateProfiles, cleanupEmptyProfiles } from '@core/profile'
     import { initialiseRouterManager, RouterManagerExtensionName } from '@core/router'
     import {
@@ -14,8 +14,7 @@
         shouldBeDarkMode,
     } from '@core/app'
     import { onboardingProfile } from '@contexts/onboarding'
-    import { ToastContainer } from '@ui'
-    import { Route } from './components'
+    import { Route, ToastContainer } from './components'
     import { isKeyboardOpen, keyboardHeight } from './lib/auxiliary/keyboard'
     import {
         AppRoute,
@@ -103,10 +102,13 @@
     <OnboardingRouter />
 </Route>
 <Route route={AppRoute.Dashboard}>
-    <DashboardView />
+    {#key $_}
+        <DashboardView />
+    {/key}
 </Route>
 
 <ToastContainer />
+
 {#if $isKeyboardOpen}
     <div class="keyboard" />
 {/if}

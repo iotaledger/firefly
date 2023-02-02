@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { localize } from '@core/i18n'
     import { getOfficialExplorerUrl } from '@core/network/utils'
     import {
@@ -9,7 +9,9 @@
         BasicActivityDetails,
         AliasActivityDetails,
         FoundryActivityDetails,
+        GovernanceActivityDetails,
         NftActivityDetails,
+        ConsolidationActivityDetails,
         ActivityInformation,
     } from 'shared/components'
     import { openUrlInBrowser } from '@core/app'
@@ -142,7 +144,7 @@
         </Text>
         {#if explorerUrl && activity.transactionId}
             <button
-                class="action w-fit flex justify-start text-center font-medium text-14 text-blue-500"
+                class="action w-max flex justify-start text-center font-medium text-14 text-blue-500"
                 on:click={handleExplorerClick}
             >
                 {localize('general.viewOnExplorer')}
@@ -161,6 +163,10 @@
             <BasicActivityDetails {activity} />
         {:else if activity.type === ActivityType.Foundry}
             <FoundryActivityDetails {activity} />
+        {:else if activity.type === ActivityType.Governance}
+            <GovernanceActivityDetails {activity} />
+        {:else if activity.type === ActivityType.Consolidation}
+            <ConsolidationActivityDetails {activity} />
         {:else if activity.type === ActivityType.Nft}
             <NftActivityDetails {activity} />
         {:else if activity.type === ActivityType.Alias}

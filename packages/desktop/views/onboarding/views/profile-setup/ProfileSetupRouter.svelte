@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Transition } from 'shared/components'
     import { EnterNameView, SetupClaimedView, SetupNewView, SetupRecoveredView, SetupView } from './views'
     import { ProfileSetupRoute, profileSetupRoute } from '@core/router'

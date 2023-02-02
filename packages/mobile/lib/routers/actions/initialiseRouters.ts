@@ -1,4 +1,6 @@
 import {
+    AccountActionsRouter,
+    accountActionsRouter,
     AccountSwitcherRouter,
     accountSwitcherRouter,
     ActivityRouter,
@@ -11,6 +13,8 @@ import {
     DashboardRouter,
     LoginRouter,
     loginRouter,
+    NetworkConfigurationSettingsRouter,
+    networkConfigurationSettingsRouter,
     NetworkSetupRouter,
     networkSetupRouter,
     onboardingRouter,
@@ -25,6 +29,10 @@ import {
     profileSetupRouter,
     SendRouter,
     sendRouter,
+    ShimmerClaimingRouter,
+    shimmerClaimingRouter,
+    SettingsRouter,
+    settingsRouter,
     storageProtectionSetupRouter,
     StorageProtectionSetupRouter,
     strongholdSetupRouter,
@@ -66,6 +74,7 @@ function initialiseSubrouters(): void {
     loginRouter.set(new LoginRouter())
     initialiseOnboardingSubrouters()
     initialiseDashboardSubrouters()
+    initialiseSettingsSubrouters()
 }
 
 function initialiseOnboardingSubrouters(): void {
@@ -75,13 +84,20 @@ function initialiseOnboardingSubrouters(): void {
     profileBackupRouter.set(new ProfileBackupRouter())
     profileRecoveryRouter.set(new ProfileRecoveryRouter())
     profileSetupRouter.set(new ProfileSetupRouter())
+    shimmerClaimingRouter.set(new ShimmerClaimingRouter())
     storageProtectionSetupRouter.set(new StorageProtectionSetupRouter())
 }
 
 function initialiseDashboardSubrouters(): void {
     accountSwitcherRouter.set(new AccountSwitcherRouter())
+    accountActionsRouter.set(new AccountActionsRouter())
     activityRouter.set(new ActivityRouter())
     sendRouter.set(new SendRouter())
     tokenRouter.set(new TokenRouter())
     profileRouter.set(new ProfileRouter())
+    settingsRouter.set(new SettingsRouter())
+}
+
+function initialiseSettingsSubrouters(): void {
+    networkConfigurationSettingsRouter.set(new NetworkConfigurationSettingsRouter())
 }
