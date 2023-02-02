@@ -1018,7 +1018,7 @@
         "manageVotingPower": {
             "title": "Manage voting power",
             "body": "Define your voting power to vote on proposals.",
-            "hint": "All funds that you allocate to voting are locked. In order to make them spendable again, you need to decrease your voting power. This affects all proposals with an active vote.",
+            "hint": "Tous les fonds que vous allouez au vote sont bloqués. Afin de les rendre à nouveau utilisables, vous devez diminuer votre pouvoir de vote. Cela affecte toutes les propositions avec un vote actif.",
             "amountZero": "Please be aware that setting your voting power to zero will stop all your votes for all proposals you are currently voting on."
         },
         "addProposal": {
@@ -1029,6 +1029,7 @@
             "title": "Vote for proposal",
             "body": "Vous êtes sur le point de voter pour la proposition {proposal}.",
             "key": "Your voting power",
+            "hasAbstained": "You are abstaining from answering {numberOfQuestions, plural, one {# question} other {# questions}}.",
             "noVotingPower": "Vous n'avez aucun pouvoir de vote. Veuillez augmenter votre pouvoir de vote depuis le tableau de bord de la gouvernance."
         },
         "revote": {
@@ -1260,12 +1261,12 @@
         "increasing": "Augmentation du pouvoir de vote",
         "decreased": "Diminution du pouvoir de vote",
         "decreasing": "Diminuer le pouvoir de vote",
-        "startVoting": "Voté",
-        "startingVoting": "Commencer à voter",
+        "voted": "A voté",
+        "voting": "Vote",
         "changedVote": "Vote modifié",
         "changingVote": "Changement du vote",
-        "stopVoting": "Vote interrompu",
-        "stoppingVoting": "Arrêt du vote",
+        "unvoted": "Arrêt du vote",
+        "unvoting": "Arrêt du vote",
         "sentNft": "NFT sent",
         "sendingNft": "Sending NFT",
         "receivedNft": "NFT received",
