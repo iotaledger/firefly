@@ -67,8 +67,9 @@
     $: questions = votingPayload?.questions
 
     $: if (questions?.length > 0 && selectedAnswerValues?.length === 0) {
-        selectedAnswerValues =
-            getActiveParticipation($selectedProposal?.id)?.answers ?? Array.from({ length: questions?.length })
+        selectedAnswerValues = [
+            ...(getActiveParticipation($selectedProposal?.id)?.answers ?? Array.from({ length: questions?.length })),
+        ]
     }
 
     $: isVotingDisabled =
