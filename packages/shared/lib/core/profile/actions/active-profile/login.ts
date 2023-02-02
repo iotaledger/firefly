@@ -128,7 +128,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             void pollMarketPrices()
 
             if (Platform.isFeatureFlagEnabled('governance')) {
-                await getGovernanceData()
+                void getGovernanceData()
                 void pollGovernanceData()
             }
 
