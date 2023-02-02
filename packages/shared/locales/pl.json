@@ -1018,8 +1018,8 @@
         "manageVotingPower": {
             "title": "Zarządzaj siłą głosu",
             "body": "Zdefiniuj swoją siłę głosu, aby głosować na propozycje.",
-            "hint": "All funds that you allocate to voting are locked. In order to make them spendable again, you need to decrease your voting power. This affects all proposals with an active vote.",
-            "amountZero": "Please be aware that setting your voting power to zero will stop all your votes for all proposals you are currently voting on."
+            "hint": "Wszystkie środki, które przydzielasz do głosowania, zostają zablokowane. Aby móc ich ponownie użyć, musisz zmniejszyć swoją siłę głosu. Ma to wpływ na wszystkie propozycje na które aktualnie głosujesz.",
+            "amountZero": "Pamiętaj, że ustawienie Twojej siły głosu na zero, zatrzyma Twoje wszystkie Twoje aktywne głosy we wszystkich propozycjach."
         },
         "addProposal": {
             "title": "Dodaj propozycję",
@@ -1029,11 +1029,12 @@
             "title": "Głosowanie na propozycję",
             "body": "Zamierzasz zagłosować na propozycję {proposal}.",
             "key": "Siła Twojego głosu",
+            "hasAbstained": "You are abstaining from answering {numberOfQuestions, plural, one {# question} other {# questions}}.",
             "noVotingPower": "Nie masz żadnej siły głosu. Zwiększ swoją siłę głosu w panelu zarządzania."
         },
         "revote": {
-            "title": "Głosuj ponownie na propozycje",
-            "body": "Changing your voting power temporarily stops your votes for all proposals from being counted. Simply click \"Revote\" to resume voting.",
+            "title": "Odnów głosy na propozycje",
+            "body": "Zmiana siły głosu tymczasowo wstrzymuje zliczanie wszystkich Twoich głosów. Po prostu kliknij \"Odnów głosy\", aby wznowić głosowanie.",
             "hint": "Firefly pamięta wszystkie propozycje i opcje odpowiedzi, na które wcześniej głosowałeś."
         },
         "removeProposal": {
@@ -1089,7 +1090,7 @@
         "confirmNftBurn": {
             "title": "Spal {nftName}",
             "description": "Czy na pewno chcesz spalić ten NFT?",
-            "hint": "Please note that burning an NFT frees the storage deposit attached to it and is not reversible."
+            "hint": "Należy pamiętać, że spalenie NFT zwalnia dołączony do niego depozyt magazynowy i jest to nieodwracalne."
         },
         "proceedAnyway": "Kontynuuj mimo to",
         "save": "Zapisz",
@@ -1222,7 +1223,7 @@
         "unverifyToken": "Cofnij weryfikację tokena",
         "hideToken": "Ukryj token",
         "unhideToken": "Odkryj token",
-        "burn": "Burn",
+        "burn": "Spal",
         "burnToken": "Spal token",
         "faucetRequest": "Uzyskaj tokeny {token}",
         "refreshTokenMetadata": "Odśwież metadane tokenów",
@@ -1238,7 +1239,7 @@
         "addProposal": "Dodaj propozycję",
         "removeProposal": "Usuń propozycję",
         "stopVoting": "Zatrzymaj głosowanie",
-        "revote": "Głosuj ponownie"
+        "revote": "Odnów głosy"
     },
     "general": {
         "recipient": "Odbiorca",
@@ -1260,12 +1261,12 @@
         "increasing": "Zwiększanie siły głosu",
         "decreased": "Zmniejszono siłę głosu",
         "decreasing": "Zmniejszanie siły głosu",
-        "startVoting": "Zagłosowano",
-        "startingVoting": "Rozpoczęcie głosowania",
+        "voted": "Zagłosowano",
+        "voting": "Głosowanie",
         "changedVote": "Zmieniono głos",
         "changingVote": "Zmiana głosu",
-        "stopVoting": "Zatrzymano głosowanie",
-        "stoppingVoting": "Zatrzymanie głosowania",
+        "unvoted": "Zatrzymano głos",
+        "unvoting": "Wycofywanie głosu",
         "sentNft": "NFT wysłane",
         "sendingNft": "Wysyłanie NFT",
         "receivedNft": "Odebrano NFT",
