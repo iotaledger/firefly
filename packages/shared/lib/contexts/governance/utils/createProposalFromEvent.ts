@@ -10,6 +10,7 @@ export async function createProposalFromEvent(event: ParticipationEventWithNodes
     const { data, id } = event
 
     const officialNodeUrls = OFFICIAL_NODE_URLS[get(activeProfile).networkProtocol][get(activeProfile).networkType]
+    // TODO: fix this when @iota/wallet-rc.20 is released
     const nodeUrl = (event.nodes[0] as unknown as Node).url
     const isOfficialNetwork = officialNodeUrls.includes(nodeUrl)
 
