@@ -1,7 +1,6 @@
 import type { ParticipationOverview } from '@iota/wallet'
+import type { IAccountState } from '@core/account/interfaces'
 
-import { getAccount } from '@core/profile-manager/api'
-
-export async function getParticipationOverview(index?: number): Promise<ParticipationOverview> {
-    return (await getAccount(index))?.getParticipationOverview()
+export function getParticipationOverview(account: IAccountState): Promise<ParticipationOverview> {
+    return account.getParticipationOverview()
 }
