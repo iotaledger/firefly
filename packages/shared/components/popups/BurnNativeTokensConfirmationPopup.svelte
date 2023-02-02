@@ -12,7 +12,7 @@
     export let rawAmount: string
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
-    $: formattedAmount = formatTokenAmountBestMatch(Number(rawAmount), asset.metadata)
+    $: formattedAmount = formatTokenAmountBestMatch(Number(rawAmount), asset?.metadata)
 
     function onBack(): void {
         openPopup({

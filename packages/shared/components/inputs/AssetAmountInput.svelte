@@ -45,7 +45,7 @@
     $: availableBalance = asset?.balance?.available + votingPower
     $: bigAmount = convertToRawAmount(amount, asset?.metadata, unit)
     $: marketAmount = getMarketAmountFromAssetValue(bigAmount, asset)
-    $: max = parseCurrency(formatTokenAmountDefault(availableBalance, asset.metadata, unit, false))
+    $: max = parseCurrency(formatTokenAmountDefault(availableBalance, asset?.metadata, unit, false))
 
     function onClickAvailableBalance(): void {
         const isRawAmount = asset?.metadata?.decimals && asset?.metadata?.unit

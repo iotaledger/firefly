@@ -127,7 +127,7 @@ export const queriedActivities: Readable<Activity[]> = derived(
                 _activity.type === ActivityType.Basic || _activity.type === ActivityType.Foundry
                     ? getAssetFromPersistedAssets(_activity.assetId)
                     : undefined
-            const hasValidAsset = asset && isValidIrc30(asset.metadata)
+            const hasValidAsset = asset && isValidIrc30(asset?.metadata)
             return !_activity.isHidden && hasValidAsset
         })
 
