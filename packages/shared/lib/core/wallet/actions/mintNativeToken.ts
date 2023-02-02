@@ -9,9 +9,9 @@ import { get } from 'svelte/store'
 import { VerifiedStatus } from '../enums'
 import { buildPersistedAssetFromIrc30Metadata } from '../helpers'
 import { IIrc30Metadata, IPersistedAsset } from '../interfaces'
-import { addActivitiesToAccountActivitiesInAllAccountActivities, resetMintTokenDetails } from '../stores'
+import { resetMintTokenDetails } from '../stores'
 import { addPersistedAsset } from '../stores/persisted-assets.store'
-import { generateActivities, preprocessTransaction } from '../utils'
+import { processAndAddToActivities } from '../utils'
 
 export async function mintNativeToken(
     maximumSupply: number,
@@ -36,10 +36,10 @@ export async function mintNativeToken(
             metadata,
             { verified: true, status: VerifiedStatus.SelfVerified }
         )
-        const processedTransaction = await preprocessTransaction(mintTokenTransaction.transaction, account)
         addPersistedAsset(persistedAsset)
-        const activities = generateActivities(processedTransaction, account)
-        addActivitiesToAccountActivitiesInAllAccountActivities(account.index, activities)
+
+        await processAndAddToActivities(mintTokenTransaction.transaction)
+
         showAppNotification({
             type: 'success',
             message: localize('notifications.mintNativeToken.success'),

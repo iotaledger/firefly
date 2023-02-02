@@ -38,25 +38,24 @@
         {#if proposal.organization}
             <TooltipIcon
                 icon={proposal.organization.icon}
+                text={proposal.organization.name}
                 size="small"
                 classes="p-0.5 rounded-full bg-black text-white"
                 iconClasses="text-white"
-            >
-                <Text smaller overrideColor fontWeight={FontWeight.semibold} classes="text-gray-600"
-                    >{proposal.organization.name}</Text
-                >
-            </TooltipIcon>
+            />
         {/if}
         <Text fontWeight={FontWeight.semibold} fontSize="14" classes="truncate" lineHeight="5">{proposal.title}</Text>
     </div>
     <div class="flex justify-between items-center">
         <ProposalStatusInfo status={proposal?.state?.status} milestones={proposal.milestones} />
         {#if hasVoted}
-            <TooltipIcon icon={Icon.Voted} size="small" position={Position.Left} iconClasses="text-gray-500">
-                <Text smaller overrideColor fontWeight={FontWeight.semibold} classes="text-gray-600">
-                    {localize('views.governance.proposals.voted')}
-                </Text>
-            </TooltipIcon>
+            <TooltipIcon
+                text={localize('views.governance.proposals.voted')}
+                icon={Icon.Voted}
+                size="small"
+                position={Position.Left}
+                iconClasses="text-gray-500"
+            />
         {/if}
     </div>
 </proposal-card>

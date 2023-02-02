@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { VotingEventPayload, ParticipationEventType } from '@iota/wallet/out/types'
+    import { VotingEventPayload, ParticipationEventType, TrackedParticipationOverview } from '@iota/wallet/out/types'
     import { localize } from '@core/i18n'
     import {
         Button,
@@ -19,9 +19,19 @@
     import { governanceRouter } from '@core/router/routers'
     import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
     import { getVotingEvent } from '@contexts/governance/actions'
+    import { ABSTAIN_VOTE_VALUE } from '@contexts/governance/constants'
     import { ProposalStatus } from '@contexts/governance/enums'
-    import { participationOverview, selectedProposal, updateParticipationOverview } from '@contexts/governance/stores'
-    import { calculateWeightedVotes, getActiveParticipation } from '@contexts/governance/utils'
+    import {
+        pendingGovernanceTransactionIds,
+        participationOverview,
+        selectedProposal,
+        updateParticipationOverview,
+    } from '@contexts/governance/stores'
+    import {
+        calculateTotalVotesForTrackedParticipations,
+        getActiveParticipation,
+        isProposalVotable,
+    } from '@contexts/governance/utils'
     import { getBestTimeDuration, milestoneToDate } from '@core/utils'
     import { networkStatus } from '@core/network/stores'
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
@@ -40,8 +50,13 @@
     $: $selectedAccountIndex, void updateParticipationOverview()
     $: $selectedAccountIndex, (selectedAnswerValues = [])
 
+    $: proposalState = $selectedProposal?.state
+    $: selectedProposalOverview = $participationOverview?.participations?.[$selectedProposal?.id]
+    $: trackedParticipations = Object.values(selectedProposalOverview ?? {})
+    $: currentMilestone = $networkStatus.currentMilestone
+
     // Reactively start updating votes once component has mounted and participation overview is available.
-    $: hasMounted, $participationOverview, $selectedProposal, setCurrentAndTotalVotes()
+    $: hasMounted && proposalState && trackedParticipations && currentMilestone && setVotedAnswerValuesAndTotalVotes()
 
     $: votesCounter = {
         total: totalVotes,
@@ -51,18 +66,24 @@
 
     $: if (questions?.length > 0 && selectedAnswerValues?.length === 0) {
         selectedAnswerValues =
-            getActiveParticipation($selectedProposal?.id)?.answers ?? Array<number>(questions?.length)
+            getActiveParticipation($selectedProposal?.id)?.answers ?? Array.from({ length: questions?.length })
     }
 
     $: isVotingDisabled =
-        $selectedProposal?.state?.status === ProposalStatus.Upcoming ||
-        $selectedProposal?.state?.status === ProposalStatus.Ended ||
-        selectedAnswerValues?.length === 0 ||
-        selectedAnswerValues?.includes(undefined) ||
-        !hasChangedAnswers(selectedAnswerValues)
+        !isProposalVotable(proposalState?.status) ||
+        !hasChangedAnswers(selectedAnswerValues) ||
+        hasSelectedNoAnswers(selectedAnswerValues)
 
-    $: isTransferring = $selectedAccount?.isTransferring
-    $: $selectedProposal, (textHintString = getTextHintString())
+    $: isTransferring =
+        $selectedAccount?.isTransferring || Boolean($pendingGovernanceTransactionIds?.[$selectedAccountIndex])
+    $: proposalState, (textHintString = getTextHintString())
+
+    function hasSelectedNoAnswers(_selectedAnswerValues: number[]): boolean {
+        return (
+            _selectedAnswerValues.length === 0 ||
+            _selectedAnswerValues.every((answerValue) => answerValue === undefined)
+        )
+    }
 
     function hasChangedAnswers(_selectedAnswerValues: number[]): boolean {
         const activeParticipationAnswerValues = getActiveParticipation($selectedProposal?.id)?.answers
@@ -79,53 +100,52 @@
              * NOTE: If the user hasn't voted for the participation yet, the user has not changed (all) answers
              * yet until every value is not undefined.
              */
-            return _selectedAnswerValues.every((selectedAnswerValue) => selectedAnswerValue !== undefined)
+            return _selectedAnswerValues.some((selectedAnswerValue) => selectedAnswerValue !== undefined)
         }
     }
 
     async function setVotingEventPayload(eventId: string): Promise<void> {
         const event = await getVotingEvent(eventId)
-        if (event?.data?.payload?.type === ParticipationEventType.Voting) {
-            votingPayload = event.data.payload
+        if (event) {
+            if (event.data?.payload?.type === ParticipationEventType.Voting) {
+                votingPayload = event.data.payload
+            } else {
+                throw new Error('Event is a staking event')
+            }
         } else {
-            throw new Error('Event is a staking event!')
+            throw new Error('Event not found')
         }
     }
 
-    function setCurrentAndTotalVotes(): void {
-        const selectedProposalOverview = $participationOverview?.participations?.[$selectedProposal?.id]
-        if (selectedProposalOverview) {
-            const trackedParticipations = Object.values(selectedProposalOverview)
-            const votes = calculateWeightedVotes(trackedParticipations)
-            const lastActiveOverview = trackedParticipations.find(
-                (overview) =>
-                    overview.endMilestoneIndex === 0 || overview.endMilestoneIndex > $selectedProposal.milestones.ended
-            )
-            const votesSum = votes?.reduce((accumulator, votes) => accumulator + votes, 0) ?? 0
-
-            votedAnswerValues = lastActiveOverview?.answers ?? []
-            totalVotes =
-                $selectedProposal.state?.status === ProposalStatus.Commencing
-                    ? parseInt(lastActiveOverview?.amount, 10) ?? 0
-                    : votesSum
-        } else {
-            votedAnswerValues = []
-            totalVotes = 0
+    function setVotedAnswerValuesAndTotalVotes(): void {
+        let lastActiveOverview: TrackedParticipationOverview
+        switch (proposalState?.status) {
+            case ProposalStatus.Upcoming:
+                totalVotes = 0
+                break
+            case ProposalStatus.Commencing:
+                lastActiveOverview = trackedParticipations?.find((overview) => overview.endMilestoneIndex === 0)
+                totalVotes = 0
+                break
+            case ProposalStatus.Holding:
+                lastActiveOverview = trackedParticipations?.find((overview) => overview.endMilestoneIndex === 0)
+                totalVotes = calculateTotalVotesForTrackedParticipations(trackedParticipations)
+                break
+            case ProposalStatus.Ended:
+                lastActiveOverview = trackedParticipations?.find(
+                    (overview) => overview.endMilestoneIndex > $selectedProposal.milestones.ended
+                )
+                totalVotes = calculateTotalVotesForTrackedParticipations(trackedParticipations)
+                break
         }
+        votedAnswerValues = lastActiveOverview?.answers ?? []
     }
 
     let openedQuestionIndex = 0
 
     function handleQuestionClick(event: CustomEvent): void {
         const { questionIndex } = event.detail
-        openedQuestionIndex = questionIndex
-
-        const selectedQuestionElement: HTMLElement = proposalQuestions?.querySelector(
-            'proposal-question:nth-child(' + openedQuestionIndex + ')'
-        )
-        setTimeout(() => {
-            proposalQuestions.scrollTo({ top: selectedQuestionElement?.offsetTop, behavior: 'smooth' })
-        }, 250)
+        openedQuestionIndex = questionIndex === openedQuestionIndex ? null : questionIndex
     }
 
     function handleCancelClick(): void {
@@ -133,15 +153,27 @@
     }
 
     function handleVoteClick(): void {
+        const chosenAnswerValues = selectedAnswerValues.map((answerValue) =>
+            answerValue === undefined ? ABSTAIN_VOTE_VALUE : answerValue
+        )
         openPopup({
             type: 'voteForProposal',
-            props: { selectedAnswerValues },
+            props: { selectedAnswerValues: chosenAnswerValues },
         })
     }
 
     function handleAnswerClick(event: CustomEvent): void {
         const { answerValue, questionIndex } = event.detail
         selectedAnswerValues[questionIndex] = answerValue
+
+        openedQuestionIndex = questionIndex + 1
+
+        const selectedQuestionElement: HTMLElement = proposalQuestions?.querySelector(
+            `proposal-question:nth-child(${openedQuestionIndex})`
+        )
+        setTimeout(() => {
+            proposalQuestions.scrollTo({ top: selectedQuestionElement?.offsetTop, behavior: 'smooth' })
+        }, 250)
     }
 
     function getTextHintString(): string {

@@ -1,6 +1,7 @@
 import { closePopup } from '@auxiliary/popup'
 import { resetSelectedAccount } from '@core/account'
 import { clearGovernancePollAndData } from '@contexts/governance'
+import { resetPendingGovernanceTransactionIds } from '@contexts/governance/stores'
 import { isPollingLedgerDeviceStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
 import { clearMarketPricesPoll } from '@core/market/actions'
 import { clearNetworkPoll } from '@core/network'
@@ -55,6 +56,7 @@ export async function logout(clearActiveProfile: boolean = true, _lockStronghold
         loggedIn.set(false)
         hasLoadedAccounts.set(false)
         resetSelectedAccount()
+        resetPendingGovernanceTransactionIds()
         activeAccounts.set([])
         if (clearActiveProfile) {
             resetActiveProfile()

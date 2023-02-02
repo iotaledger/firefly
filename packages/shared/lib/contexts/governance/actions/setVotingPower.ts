@@ -3,10 +3,9 @@ import { get } from 'svelte/store'
 import { Transaction } from '@iota/wallet/out/types'
 
 import { selectedAccount, updateSelectedAccount } from '@core/account/stores'
-import { addActivitiesToAccountActivitiesInAllAccountActivities } from '@core/wallet/stores'
-import { generateActivities, preprocessTransaction } from '@core/wallet/utils'
+import { processAndAddToActivities } from '@core/wallet/utils'
 
-import { hasToRevote } from '../stores'
+import { hasToRevote, setPendingGovernanceTransactionIdForAccount } from '../stores'
 import { handleError } from '@core/error/handlers'
 
 export async function setVotingPower(rawAmount: string, isVoting: boolean): Promise<void> {
@@ -29,17 +28,11 @@ export async function setVotingPower(rawAmount: string, isVoting: boolean): Prom
             const amountToDecrease = votingPower - amount
             transaction = await account.decreaseVotingPower(amountToDecrease.toString())
         }
+        setPendingGovernanceTransactionIdForAccount(account.index, transaction.transactionId)
         await processAndAddToActivities(transaction)
     } catch (err) {
         hasToRevote.set(false)
         handleError(err)
         updateSelectedAccount({ isTransferring: false })
     }
-}
-
-async function processAndAddToActivities(transaction: Transaction): Promise<void> {
-    const account = get(selectedAccount)
-    const preprocessedTransaction = await preprocessTransaction(transaction, account)
-    const activities = generateActivities(preprocessedTransaction, account)
-    addActivitiesToAccountActivitiesInAllAccountActivities(account.index, activities)
 }
