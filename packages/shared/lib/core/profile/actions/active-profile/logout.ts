@@ -17,6 +17,7 @@ import { destroyProfileManager, unsubscribeFromWalletApiEvents } from '@core/pro
 import { profileManager } from '@core/profile-manager/stores'
 import { routerManager } from '@core/router/stores'
 import { get } from 'svelte/store'
+import { clearFilters } from '@core/utils'
 
 /**
  * Logout from active profile
@@ -61,6 +62,7 @@ export async function logout(clearActiveProfile: boolean = true, _lockStronghold
         if (clearActiveProfile) {
             resetActiveProfile()
         }
+        clearFilters()
         get(routerManager).resetRouters()
 
         resolve()
