@@ -1,8 +1,10 @@
 <script lang="ts">
     import { Modal, Text, FontWeight, Button, ButtonSize } from 'shared/components'
-    import type { Filter } from '@core/wallet'
     import { localize } from '@core/i18n'
-    import { activeProfileId } from '@core/profile'
+    import type { ActivityFilter, AssetFilter } from '@core/wallet/interfaces'
+    import { IProposalFilter } from '@contexts/governance'
+
+    type Filter = ActivityFilter | AssetFilter | IProposalFilter
 
     export let modal: Modal = undefined
     export let filter: Filter
@@ -22,8 +24,6 @@
         onSetFilters()
         modal.toggle()
     }
-
-    $: $activeProfileId, clear()
 </script>
 
 <Modal

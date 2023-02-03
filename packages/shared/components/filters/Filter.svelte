@@ -4,6 +4,7 @@
     import { deepCopy } from '@core/utils'
     import type { Writable } from 'svelte/store'
     import { IProposalFilter } from '@contexts/governance'
+    import { activeProfileId } from '@core/profile'
 
     type Filter = ActivityFilter | AssetFilter | IProposalFilter
 
@@ -51,14 +52,16 @@
         </filter-badge>
     {/if}
 
-    <FilterModal bind:modal bind:filter {isChanged} {onSetFilters} {onClose}>
-        {#each Object.keys(filter) as filterUnit, index}
-            <FilterItem
-                bind:filterUnit={filter[filterUnit]}
-                on:toggle={() => toggleFilterItem(index)}
-                on:open={() => openFilterItem(index)}
-                isOpen={openFilterItemIndex === index}
-            />
-        {/each}
-    </FilterModal>
+    {#key $activeProfileId}
+        <FilterModal bind:modal bind:filter {isChanged} {onSetFilters} {onClose}>
+            {#each Object.keys(filter) as filterUnit, index}
+                <FilterItem
+                    bind:filterUnit={filter[filterUnit]}
+                    on:toggle={() => toggleFilterItem(index)}
+                    on:open={() => openFilterItem(index)}
+                    isOpen={openFilterItemIndex === index}
+                />
+            {/each}
+        </FilterModal>
+    {/key}
 </div>
