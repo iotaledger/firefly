@@ -119,10 +119,10 @@
             <SliderInput bind:value={amount} {max} decimals={allowedDecimals} {disabled} />
             <div class="flex flex-row justify-between">
                 <Text color="gray-800" darkColor="gray-500" fontSize="xs"
-                    >{formatTokenAmountBestMatch(0, asset?.metadata)}</Text
+                    >{formatTokenAmountDefault(0, asset?.metadata, unit)} {unit}</Text
                 >
                 <Text color="gray-800" darkColor="gray-500" fontSize="xs"
-                    >{formatTokenAmountBestMatch(availableBalance, asset?.metadata)}</Text
+                    >{formatTokenAmountDefault(availableBalance, asset?.metadata, unit)} {unit}</Text
                 >
             </div>
         </div>
