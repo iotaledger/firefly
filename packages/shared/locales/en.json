@@ -1574,7 +1574,9 @@
             "basic": "Basic",
             "nft": "NFT",
             "alias": "Alias",
-            "foundry": "Foundry"
+            "foundry": "Foundry",
+            "governance": "Governance",
+            "consolidation": "Consolidation"
         },
         "direction": {
             "label": "Direction",
