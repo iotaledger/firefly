@@ -9,8 +9,8 @@
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
     import { truncateString } from '@core/utils/string'
     import { registeredProposalsForSelectedAccount } from '@contexts/governance'
-    import {activeAccounts} from '@core/profile'
-    import {selectedAccount} from '@core/account'
+    import { activeAccounts } from '@core/profile'
+    import { selectedAccount } from '@core/account'
 
     export let eventId: string
     export let nodeUrl: string
@@ -69,12 +69,12 @@
     }
 
     async function registerParticipationWrapper(auth?: Auth): Promise<void> {
-        const accounts = (toAllAccounts) ? $activeAccounts : [$selectedAccount]
-        const promises = accounts.map(account => registerParticipationEvent(eventId, { url: nodeUrl, auth }, account))
+        const accounts = toAllAccounts ? $activeAccounts : [$selectedAccount]
+        const promises = accounts.map((account) => registerParticipationEvent(eventId, { url: nodeUrl, auth }, account))
         await Promise.all(promises)
         showAppNotification({
             type: 'success',
-            message: localize('views.governance.proposals.' + ((toAllAccounts) ? 'successAddAll' : 'successAdd')),
+            message: localize('views.governance.proposals.' + (toAllAccounts ? 'successAddAll' : 'successAdd')),
             alert: true,
         })
         closePopup()
