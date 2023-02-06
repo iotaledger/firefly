@@ -586,6 +586,7 @@
                 "title": "Proposals",
                 "voted": "Voted",
                 "successAdd": "Proposal successfully added",
+                "successAddAll": "Proposal successfully added to all accounts",
                 "successRemove": "Proposal successfully removed",
                 "emptyTitle": "No proposals"
             },
@@ -1023,7 +1024,8 @@
         },
         "addProposal": {
             "title": "Add proposal",
-            "body": "Please provide the information listed below to add a proposal."
+            "body": "Please provide the information listed below to add a proposal.",
+            "addToAllAccounts": "Add the proposal to all accounts"
         },
         "voteForProposal": {
             "title": "Vote for proposal",
@@ -1574,7 +1576,9 @@
             "basic": "Basic",
             "nft": "NFT",
             "alias": "Alias",
-            "foundry": "Foundry"
+            "foundry": "Foundry",
+            "governance": "Governance",
+            "consolidation": "Consolidation"
         },
         "direction": {
             "label": "Direction",

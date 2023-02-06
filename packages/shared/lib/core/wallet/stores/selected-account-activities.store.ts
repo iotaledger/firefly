@@ -62,7 +62,14 @@ export const activityFilter: Writable<ActivityFilter> = writable({
         type: 'selection',
         localeKey: 'filters.type',
         selected: ActivityType.Basic,
-        choices: [ActivityType.Basic, ActivityType.Nft, ActivityType.Foundry, ActivityType.Alias],
+        choices: [
+            ActivityType.Basic,
+            ActivityType.Nft,
+            ActivityType.Alias,
+            ActivityType.Governance,
+            ActivityType.Foundry,
+            ActivityType.Consolidation,
+        ],
     },
     direction: {
         active: false,
