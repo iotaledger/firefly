@@ -49,22 +49,10 @@ export function getGovernanceInfo(output: Output, inputs: IWrappedOutput[], meta
                 participation: addedParticipation,
             }
         } else if (removedParticipation) {
-            /**
-             * NOTE: Unless we check the voting power, we won't know if the participations were removed
-             * because the user stopped voting or manually set the voting power to zero.
-             */
-            if (currentVotingPower === 0) {
-                return {
-                    governanceAction: GovernanceAction.DecreaseVotingPower,
-                    votingPower: currentVotingPower,
-                    votingPowerDifference: oldVotingPower,
-                }
-            } else {
-                return {
-                    governanceAction: GovernanceAction.StopVoting,
-                    votingPower: currentVotingPower,
-                    participation: removedParticipation,
-                }
+            return {
+                governanceAction: GovernanceAction.StopVoting,
+                votingPower: currentVotingPower,
+                participation: removedParticipation,
             }
         }
 
