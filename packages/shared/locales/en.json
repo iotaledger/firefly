@@ -1025,7 +1025,7 @@
         "addProposal": {
             "title": "Add proposal",
             "body": "Please provide the information listed below to add a proposal.",
-            "addToAllAccounts": "Add this proposal to each account?"
+            "addToAllAccounts": "Add the proposal to all accounts"
         },
         "voteForProposal": {
             "title": "Vote for proposal",
