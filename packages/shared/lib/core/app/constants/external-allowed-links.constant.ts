@@ -9,6 +9,7 @@ export const externalAllowedLinks = [
     'privacy@iota.org',
     'wiki.iota.org',
     'explorer.iota.org',
+    'govern.iota.org',
 
     // Assembly / Shimmer
     'assembly.sc',
