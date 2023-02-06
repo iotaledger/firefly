@@ -5,12 +5,12 @@ import { Participation, StakingAirdrop } from './types'
 /**
  * The starting date of the next staking period.
  */
-export const ASSEMBLY_EVENT_START_DATE = new Date('November 7, 2022')
+export const ASSEMBLY_EVENT_START_DATE = new Date('10 February, 2023')
 
 /**
  * The staking event ID for Assembly.
  */
-export const ASSEMBLY_EVENT_ID = '758f9f6193c4ecc99b4b3c1a57a9cd3c6fc75f94e061d05361647d11ab8d06f6'
+export const ASSEMBLY_EVENT_ID = 'eac0ebbfd7fbd97621d95661f0720dfa8e800f5565fa0dd7b1c516f3e34b0a63'
 
 /**
  * The staking event ID for Shimmer.
@@ -64,7 +64,12 @@ export const LAST_MILESTONE_BEFORE_TREASURY_EVENT = 3395663
 /**
  * The GitHub URLs containing the end Assembly staking results per period.
  */
-export const ASSEMBLY_STAKING_RESULT_FILES: string[] = ['assembly_01.json', 'assembly_02.json', 'assembly_03.json']
+export const ASSEMBLY_STAKING_RESULT_FILES: string[] = [
+    'assembly_01.json',
+    'assembly_02.json',
+    'assembly_03.json',
+    'assembly_04.json',
+]
 
 /**
  * The GitHub URLs containing the end Shimmer staking result per period.
@@ -74,13 +79,13 @@ export const SHIMMER_STAKING_RESULT_FILES: string[] = ['shimmer.json']
 /**
  * The number of the last completed Assembly staking period.
  */
-export const LAST_ASSEMBLY_STAKING_PERIOD = 3
+export const LAST_ASSEMBLY_STAKING_PERIOD = 4
 
 /**
  * The number of the current Assembly staking period.
  * Set to 0 if no current event
  */
-export const CURRENT_ASSEMBLY_STAKING_PERIOD = 4
+export const CURRENT_ASSEMBLY_STAKING_PERIOD = 5
 
 /**
  * The number of the last completed Shimmer staking period.
