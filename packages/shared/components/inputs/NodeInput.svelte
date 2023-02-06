@@ -2,7 +2,7 @@
     import { SelectorInput, IOption, Modal } from 'shared/components'
     import { localize } from '@core/i18n'
     import { activeProfile } from '@core/profile/stores'
-    import { isValidUrl } from '@core/utils'
+    import { isValidUrl, stripSpaces, stripTrailingSlash } from '@core/utils'
 
     export let disabled = false
     export let error: string
@@ -15,11 +15,11 @@
 
     $: clientOptionsNodes = $activeProfile?.clientOptions?.nodes
     $: clientOptionsNodes, (nodeOptions = getNodeOptionsFromClientOptions())
-    $: nodeUrl = selected?.value
+    $: nodeUrl = stripTrailingSlash(stripSpaces(selected?.value))
 
     export async function validate(): Promise<void> {
         try {
-            if (!isValidUrl(selected?.value)) {
+            if (!isValidUrl(nodeUrl)) {
                 throw new Error(localize('error.node.invalid'))
             }
             return Promise.resolve()
