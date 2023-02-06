@@ -1267,6 +1267,8 @@
         "voting": "Voting",
         "changedVote": "Changed vote",
         "changingVote": "Changing vote",
+        "revoted": "Revoted",
+        "revoting": "Revoting",
         "unvoted": "Unvoted",
         "unvoting": "Unvoting",
         "sentNft": "NFT sent",
@@ -2131,6 +2133,11 @@
                 "Pending": "changing vote for",
                 "Confirmed": "changed vote for",
                 "Conflicting": "failed to change vote for"
+            },
+            "revote": {
+                "Pending": "revoting",
+                "Confirmed": "revote",
+                "Conflicting": "failed to revote"
             }
         },
         "alias": {
