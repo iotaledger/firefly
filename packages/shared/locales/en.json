@@ -2006,7 +2006,7 @@
             "uri": "To create a URI using custom media, first upload your file to IPFS via a storage service (e.g. https://nft.storage/)"
         },
         "governance": {
-            "removeProposalWarning": "You must stop voting for this proposal in all accounts before removing it."
+            "removeProposalWarning": "You must stop voting for this proposal before removing it."
         }
     },
     "exports": {
