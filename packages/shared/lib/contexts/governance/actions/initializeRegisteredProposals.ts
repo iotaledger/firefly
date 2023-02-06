@@ -14,7 +14,7 @@ export async function initializeRegisteredProposals(): Promise<void> {
             if (!allProposals[account.index]) {
                 allProposals[account.index] = {}
             }
-            allProposals[account.index][event.id] = await createProposalFromEvent(event)
+            allProposals[account.index][event.id] = createProposalFromEvent(event)
         }
     }
     registeredProposals.set(allProposals)

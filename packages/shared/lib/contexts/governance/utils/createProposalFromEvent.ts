@@ -6,7 +6,7 @@ import { IProposalMetadata } from '../interfaces'
 import { ProposalStatus, ProposalType } from '../enums'
 import { getParticipationsForProposal } from './getParticipationsForProposal'
 
-export async function createProposalFromEvent(event: ParticipationEventWithNodes): Promise<IProposalMetadata> {
+export function createProposalFromEvent(event: ParticipationEventWithNodes): IProposalMetadata {
     const { data, id } = event
 
     const officialNodeUrls = OFFICIAL_NODE_URLS[get(activeProfile).networkProtocol][get(activeProfile).networkType]
@@ -14,7 +14,7 @@ export async function createProposalFromEvent(event: ParticipationEventWithNodes
     const nodeUrl = (event.nodes[0] as unknown as Node).url
     const isOfficialNetwork = officialNodeUrls.includes(nodeUrl)
 
-    const participated = (await getParticipationsForProposal(id)) !== undefined
+    const participated = getParticipationsForProposal(id) !== undefined
 
     const milestones = {
         [ProposalStatus.Upcoming]: 0, // TODO: fix this

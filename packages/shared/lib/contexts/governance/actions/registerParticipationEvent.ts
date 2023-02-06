@@ -9,7 +9,7 @@ export async function registerParticipationEvent(
     account: IAccountState
 ): Promise<ParticipationEventWithNodes> {
     const event = await account.registerParticipationEvent(eventId, [node])
-    const proposal = await createProposalFromEvent(event)
+    const proposal = createProposalFromEvent(event)
     await addProposalState(eventId)
     addProposalToRegisteredProposals(proposal, account.index)
 

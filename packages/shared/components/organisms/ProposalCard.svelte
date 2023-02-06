@@ -16,8 +16,8 @@
     let hasVoted = false
     $: $participationOverviewForSelectedAccount, setHasVoted()
 
-    async function setHasVoted(): Promise<void> {
-        hasVoted = await isVotingForProposal(proposal?.id)
+    function setHasVoted(): void {
+        hasVoted = isVotingForProposal(proposal?.id)
     }
 
     function handleProposalClick(): void {
@@ -25,7 +25,7 @@
         $governanceRouter.goTo(GovernanceRoute.Details)
     }
 
-    onMount(() => void setHasVoted())
+    onMount(() => setHasVoted())
 </script>
 
 <proposal-card

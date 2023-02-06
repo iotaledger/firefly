@@ -2,20 +2,13 @@ import { get } from 'svelte/store'
 
 import type { ParticipationOverview, TrackedParticipationOverview } from '@iota/wallet'
 
-import { participationOverviewForSelectedAccount } from '@contexts/governance/stores'
-import { getParticipationOverview } from '@core/account/api'
+import { allParticipationOverviews } from '@contexts/governance/stores'
 import { selectedAccountIndex } from '@core/account/stores'
 
-export async function getParticipationsForProposal(
+export function getParticipationsForProposal(
     proposalId: string,
     accountIndex = get(selectedAccountIndex)
-): Promise<{ [outputId: string]: TrackedParticipationOverview }> {
-    let overview: ParticipationOverview
-    if (accountIndex === get(selectedAccountIndex)) {
-        overview = get(participationOverviewForSelectedAccount)
-    } else {
-        overview = await getParticipationOverview(accountIndex)
-    }
-
+): { [outputId: string]: TrackedParticipationOverview } {
+    const overview: ParticipationOverview = get(allParticipationOverviews)[accountIndex]
     return overview?.participations?.[proposalId]
 }
