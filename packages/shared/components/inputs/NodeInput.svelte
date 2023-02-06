@@ -2,7 +2,7 @@
     import { SelectorInput, IOption, Modal } from 'shared/components'
     import { localize } from '@core/i18n'
     import { activeProfile } from '@core/profile/stores'
-    import { isValidUrl, stripSpaces, stripTrailingSlash } from '@core/utils'
+    import { isValidUrl, stripTrailingSlash } from '@core/utils'
 
     export let disabled = false
     export let error: string
@@ -15,7 +15,7 @@
 
     $: clientOptionsNodes = $activeProfile?.clientOptions?.nodes
     $: clientOptionsNodes, (nodeOptions = getNodeOptionsFromClientOptions())
-    $: nodeUrl = stripTrailingSlash(stripSpaces(selected?.value))
+    $: nodeUrl = stripTrailingSlash(selected?.value?.trim())
 
     export async function validate(): Promise<void> {
         try {
