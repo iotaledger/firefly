@@ -9,6 +9,7 @@ export function clearFilters(): void {
         }
         return state
     })
+
     assetFilter.update((state) => {
         for (const key in state) {
             state[key].active = false

@@ -1,10 +1,7 @@
 <script lang="ts">
     import { Modal, Text, FontWeight, Button, ButtonSize } from 'shared/components'
     import { localize } from '@core/i18n'
-    import type { ActivityFilter, AssetFilter } from '@core/wallet/interfaces'
-    import { IProposalFilter } from '@contexts/governance'
-
-    type Filter = ActivityFilter | AssetFilter | IProposalFilter
+    import { Filter } from '@core/utils/types'
 
     export let modal: Modal = undefined
     export let filter: Filter
