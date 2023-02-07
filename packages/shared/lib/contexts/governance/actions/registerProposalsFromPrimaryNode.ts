@@ -3,15 +3,15 @@ import { get } from 'svelte/store'
 import { selectedAccount } from '@core/account/stores'
 import { activeProfile } from '@core/profile/stores'
 
-import { isProposalAlreadyAddedForSelectedAccount } from '../utils'
+import { getVotingEventIds, isProposalAlreadyAddedForSelectedAccount } from '../utils'
 
 import { registerParticipationEvent } from './registerParticipationEvent'
 
 export async function registerProposalsFromPrimaryNode(): Promise<void> {
-    // const proposalIdss = await getVotingEventIds()
-    // console.log('IDs: ', proposalIdss)
-
-    const proposalIds = []
+    const proposalIds = await getVotingEventIds()
+    if (!proposalIds || proposalIds.length === 0) {
+        return
+    }
 
     const clientOptions = get(activeProfile)?.clientOptions
     if (!clientOptions) {

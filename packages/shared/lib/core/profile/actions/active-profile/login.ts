@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 
-import { getGovernanceData, pollGovernanceData } from '@contexts/governance/actions'
+import { getGovernanceData, pollGovernanceData, registerProposalsFromPrimaryNode } from '@contexts/governance/actions'
 import { cleanupOnboarding } from '@contexts/onboarding/actions'
 
 import { Platform } from '@core/app/classes'
@@ -128,12 +128,6 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 pollLedgerNanoStatus()
             }
 
-            if (Platform.isFeatureFlagEnabled('governance')) {
-                void getGovernanceData()
-                void pollGovernanceData()
-                // void registerProposalsFromPrimaryNode()
-            }
-
             setSelectedAccount(lastUsedAccountIndex ?? get(activeAccounts)?.[0]?.index ?? null)
             lastActiveAt.set(new Date())
             loggedIn.set(true)
@@ -142,6 +136,12 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 resetLoginProgress()
             }, 500)
             void pollMarketPrices()
+
+            if (Platform.isFeatureFlagEnabled('governance')) {
+                void getGovernanceData()
+                void pollGovernanceData()
+                void registerProposalsFromPrimaryNode()
+            }
 
             void cleanupOnboarding()
         } else {
