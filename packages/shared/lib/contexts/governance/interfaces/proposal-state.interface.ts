@@ -24,6 +24,5 @@ export interface IProposalMetadata {
     questions: Question[]
     additionalInfo: string
     title: string
-    participated: boolean
     nodeUrl: string
 }

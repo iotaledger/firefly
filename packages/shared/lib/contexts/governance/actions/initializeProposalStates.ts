@@ -13,8 +13,10 @@ export async function initializeProposalStates(): Promise<void> {
         const registeredEventIds: string[] = Object.keys(proposalsForAccount)
 
         for (const eventId of registeredEventIds) {
-            const proposalState = await getVotingProposalState(eventId, account)
-            allProposals[eventId] = { state: proposalState }
+            if (allProposals[eventId] === undefined) {
+                const proposalState = await getVotingProposalState(eventId, account)
+                allProposals[eventId] = { state: proposalState }
+            }
         }
     }
     proposalStates.set(allProposals)

@@ -118,6 +118,12 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             if (isLedgerProfile(type)) {
                 pollLedgerNanoStatus()
             }
+
+            if (Platform.isFeatureFlagEnabled('governance')) {
+                void getGovernanceData()
+                void pollGovernanceData()
+            }
+
             setSelectedAccount(lastUsedAccountIndex ?? get(activeAccounts)?.[0]?.index ?? null)
             lastActiveAt.set(new Date())
             loggedIn.set(true)
@@ -126,11 +132,6 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 resetLoginProgress()
             }, 500)
             void pollMarketPrices()
-
-            if (Platform.isFeatureFlagEnabled('governance')) {
-                void getGovernanceData()
-                void pollGovernanceData()
-            }
 
             void cleanupOnboarding()
         } else {
