@@ -30,6 +30,6 @@
 </script>
 
 <div class="flex flex-row justify-between space-x-2">
-    <Dropdown {value} items={choices} {onSelect} small classes="mb-4" />
+    <Dropdown {value} items={choices} {onSelect} small />
     <Dropdown value={ascDescvalue} items={ascDescChoices} onSelect={onSelectAscDesc} small />
 </div>

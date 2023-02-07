@@ -14,11 +14,13 @@ export function getActivityTileTitle(activity: Activity): string {
         } else if (activity.governanceAction === GovernanceAction.DecreaseVotingPower) {
             return isConfirmed ? 'general.decreased' : 'general.decreasing'
         } else if (activity.governanceAction === GovernanceAction.StartVoting) {
-            return isConfirmed ? 'general.startVoting' : 'general.startingVoting'
+            return isConfirmed ? 'general.voted' : 'general.voting'
         } else if (activity.governanceAction === GovernanceAction.StopVoting) {
-            return isConfirmed ? 'general.stopVoting' : 'general.stoppingVoting'
+            return isConfirmed ? 'general.unvoted' : 'general.unvoting'
         } else if (activity.governanceAction === GovernanceAction.ChangedVote) {
             return isConfirmed ? 'general.changedVote' : 'general.changingVote'
+        } else if (activity.governanceAction === GovernanceAction.Revote) {
+            return isConfirmed ? 'general.revoted' : 'general.revoting'
         }
     } else if (activity.type === ActivityType.Consolidation) {
         return isConfirmed ? 'general.consolidated' : 'general.consolidating'

@@ -17,11 +17,11 @@ Governance refers to the feature allowing users to vote on important community-w
   - `holding` - corresponds to "Counting"
   - `ended` - corresponds to "Closed"
 - **Governance** - rules and processes to make decisions concerning permissionless applications and platforms
-- **Participation** - the interacting with or taking part in an event, either by voting or staking funds
+- **Participation** - interacting with or taking part in an event, either by voting or staking funds
 - **Proposal** - synonymous with voting event, which is an event that contains one or more questions that users can vote on
 - **Vote** - participating in a voting event, initially by selecting answers (aka votes) for each question on the proposal's ballot then broadcasting a transaction with appropriately structured metadata (so that it can be tracked by the node(s))
 - **Voting output** - a designated output to be used for all voting operations (e.g. increasing or decreasing voting power and voting or unvoting for an event) 
-- **Voting power** - the amount of votes a user can cast for a proposal, which is based off of how much IOTA or SMR he or she has; this **MAY** or **MAY NOT** be the same as a user's total balance, it depends on how much they have manually designated as their voting power
+- **Voting power** - the amount of votes a user can cast for a proposal, which is based on how much IOTA or SMR he or she has; this **MAY** or **MAY NOT** be the same as a user's total balance, it depends on how much they have manually designated as their voting power
 
 ## Adding a Proposal
 

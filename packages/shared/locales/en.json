@@ -62,7 +62,7 @@
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
+                    "title": "Set up {protocol, select, IOTA {an} Shimmer {a} other {an}} {protocol} profile",
                     "body": "Select the appropriate method to set up your {protocol} profile."
                 },
                 "setupNew": {
@@ -586,6 +586,7 @@
                 "title": "Proposals",
                 "voted": "Voted",
                 "successAdd": "Proposal successfully added",
+                "successAddAll": "Proposal successfully added to all accounts",
                 "successRemove": "Proposal successfully removed",
                 "emptyTitle": "No proposals"
             },
@@ -1023,12 +1024,14 @@
         },
         "addProposal": {
             "title": "Add proposal",
-            "body": "Please provide the information listed below to add a proposal."
+            "body": "Please provide the information listed below to add a proposal.",
+            "addToAllAccounts": "Add the proposal to all accounts"
         },
         "voteForProposal": {
             "title": "Vote for proposal",
             "body": "You're about to vote for {proposal} proposal.",
             "key": "Your voting power",
+            "hasAbstained": "You are abstaining from answering {numberOfQuestions, plural, one {# question} other {# questions}}.",
             "noVotingPower": "You do not have any voting power. Please increase your voting power from the Governance dashboard."
         },
         "revote": {
@@ -1103,7 +1106,7 @@
             "shimmer": "Restore an existing Shimmer profile"
         },
         "createWallet": "Create a new {protocol} profile",
-        "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
+        "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
         "claimShimmer": "Claim Shimmer staking rewards",
         "claimShimmerDescription": "Import IOTA profile and claim staking rewards",
         "createAlias": "Create alias",
@@ -1260,12 +1263,14 @@
         "increasing": "Increasing voting power",
         "decreased": "Voting power decreased",
         "decreasing": "Decreasing voting power",
-        "startVoting": "Voted",
-        "startingVoting": "Starting to vote",
+        "voted": "Voted",
+        "voting": "Voting",
         "changedVote": "Changed vote",
         "changingVote": "Changing vote",
-        "stopVoting": "Stopped voting",
-        "stoppingVoting": "Stopping to vote",
+        "revoted": "Revoted",
+        "revoting": "Revoting",
+        "unvoted": "Unvoted",
+        "unvoting": "Unvoting",
         "sentNft": "NFT sent",
         "sendingNft": "Sending NFT",
         "receivedNft": "NFT received",
@@ -1573,7 +1578,9 @@
             "basic": "Basic",
             "nft": "NFT",
             "alias": "Alias",
-            "foundry": "Foundry"
+            "foundry": "Foundry",
+            "governance": "Governance",
+            "consolidation": "Consolidation"
         },
         "direction": {
             "label": "Direction",
@@ -1876,7 +1883,8 @@
         "noOutputsToConsolidate": "Not enough outputs to consolidate",
         "eventId": {
             "doesNotStartWith0x": "Event ID should start with '0x'",
-            "insufficientLength": "Event ID should be 66 characters long"
+            "insufficientLength": "Event ID should be 66 characters long",
+            "alreadyRegistered": "Event ID already registered"
         },
         "nft": {
             "unsupportedUrl": {
@@ -2125,6 +2133,11 @@
                 "Pending": "changing vote for",
                 "Confirmed": "changed vote for",
                 "Conflicting": "failed to change vote for"
+            },
+            "revote": {
+                "Pending": "revoting",
+                "Confirmed": "revote",
+                "Conflicting": "failed to revote"
             }
         },
         "alias": {

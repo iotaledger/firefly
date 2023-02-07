@@ -577,6 +577,7 @@
             },
             "proposalsDetails": {
                 "title": "Details",
+                "totalProposals": "Total des propositions",
                 "activeProposals": "Active proposals",
                 "votingProposals": "Proposals you are voting on",
                 "votedProposals": "Total proposals you voted on"
@@ -584,8 +585,9 @@
             "proposals": {
                 "title": "Proposals",
                 "voted": "Voted",
-                "successRegister": "Proposal successfully registered",
-                "successRemove": "Proposal successfully removed"
+                "successAdd": "Proposition ajoutée avec succès",
+                "successRemove": "Proposal successfully removed",
+                "emptyTitle": "Aucune proposition"
             },
             "statusTimeline": {
                 "upcoming": "Announcement",
@@ -601,12 +603,15 @@
                 },
                 "proposalInformation": {
                     "title": "Proposal information",
+                    "votingOpens": "Le vote s'ouvre le",
+                    "countingStarts": "Le comptage commence le",
                     "countingEnds": "Counting ends on",
+                    "countingEnded": "Comptage terminé le",
                     "eventId": "Event ID",
                     "nodeUrl": "Node URL"
                 },
-                "voteOpens": "Le vote s'ouvre dans {time}",
-                "fetching": "Récupération des données de la proposition"
+                "fetching": "Récupération des données de la proposition",
+                "hintVote": "Vous ne pouvez pas voter sur une proposition qui est en phase d'annonce, le vote s'ouvrira dans {time}."
             }
         }
     },
@@ -641,6 +646,10 @@
             "pendingTransactions": {
                 "title": "Transactions",
                 "subtitle": "Temporarily locked in unclaimed transactions"
+            },
+            "votingPowerOutput": {
+                "title": "Gouvernance",
+                "subtitle": "Réservé au pouvoir de vote"
             },
             "minimizeStorageDepositButton": "Minimize storage deposit"
         },
@@ -1009,22 +1018,23 @@
         "manageVotingPower": {
             "title": "Manage voting power",
             "body": "Define your voting power to vote on proposals.",
-            "revote": "Changer votre pouvoir de vote empêche temporairement le comptage de vos votes. Passez à l'étape suivante pour reprendre le vote.",
-            "hint": "Augmenter votre pouvoir de vote verrouille vos fonds. Vous devez diminuer votre pouvoir de vote pour les rendre à nouveau utilisables. Cela affecte toutes les propositions avec un vote actif."
+            "hint": "Tous les fonds que vous allouez au vote sont bloqués. Afin de les rendre à nouveau utilisables, vous devez diminuer votre pouvoir de vote. Cela affecte toutes les propositions avec un vote actif.",
+            "amountZero": "Please be aware that setting your voting power to zero will stop all your votes for all proposals you are currently voting on."
         },
-        "registerProposal": {
-            "title": "Register proposal",
-            "body": "Please provide the information listed below to register a proposal."
+        "addProposal": {
+            "title": "Ajouter une proposition",
+            "body": "Veuillez fournir les informations énumérées ci-dessous pour ajouter une proposition."
         },
         "voteForProposal": {
             "title": "Vote for proposal",
             "body": "Vous êtes sur le point de voter pour la proposition {proposal}.",
             "key": "Your voting power",
+            "hasAbstained": "You are abstaining from answering {numberOfQuestions, plural, one {# question} other {# questions}}.",
             "noVotingPower": "Vous n'avez aucun pouvoir de vote. Veuillez augmenter votre pouvoir de vote depuis le tableau de bord de la gouvernance."
         },
         "revote": {
             "title": "Revoter sur les propositions",
-            "body": "Comme mentionné dans l'étape précédente, le changement de votre pouvoir de vote empêche temporairement le comptage de vos votes. Cliquez simplement sur \"Révoter\" pour reprendre le vote.",
+            "body": "Changing your voting power temporarily stops your votes for all proposals from being counted. Simply click \"Revote\" to resume voting.",
             "hint": "Firefly se souvient de toutes les propositions et options de réponse que vous avez votées précédemment."
         },
         "removeProposal": {
@@ -1213,6 +1223,7 @@
         "unverifyToken": "Unverify token",
         "hideToken": "Hide token",
         "unhideToken": "Unhide token",
+        "burn": "Burn",
         "burnToken": "Burn token",
         "faucetRequest": "Get {token} tokens",
         "refreshTokenMetadata": "Refresh token metadata",
@@ -1225,7 +1236,7 @@
         "addReference": "Add reference",
         "depositNft": "Deposit NFTs",
         "vote": "Vote",
-        "registerProposal": "Register proposal",
+        "addProposal": "Ajouter une proposition",
         "removeProposal": "Remove proposal",
         "stopVoting": "Stop voting",
         "revote": "Voter à nouveau"
@@ -1250,12 +1261,12 @@
         "increasing": "Augmentation du pouvoir de vote",
         "decreased": "Diminution du pouvoir de vote",
         "decreasing": "Diminuer le pouvoir de vote",
-        "startVoting": "Voté",
-        "startingVoting": "Commencer à voter",
+        "voted": "A voté",
+        "voting": "Vote",
         "changedVote": "Vote modifié",
         "changingVote": "Changement du vote",
-        "stopVoting": "Vote interrompu",
-        "stoppingVoting": "Arrêt du vote",
+        "unvoted": "Arrêt du vote",
+        "unvoting": "Arrêt du vote",
         "sentNft": "NFT sent",
         "sendingNft": "Sending NFT",
         "receivedNft": "NFT received",
@@ -1570,6 +1581,24 @@
             "incoming": "Incoming",
             "outgoing": "Outgoing",
             "selfTransaction": "Self transaction"
+        },
+        "proposalType": {
+            "label": "Type ",
+            "official": "Officiel",
+            "custom": "Personnalisé"
+        },
+        "phase": {
+            "label": "Etape"
+        },
+        "participated": {
+            "label": "Participé",
+            "yes": "Oui",
+            "no": "No"
+        },
+        "proposalOrder": {
+            "label": "Commandes",
+            "name": "Nom",
+            "phase": "Etape"
         }
     },
     "dates": {
@@ -1881,9 +1910,9 @@
             }
         },
         "governance": {
-            "unableToRegisterProposal": {
-                "short": "Unable to register proposal",
-                "long": "An error occurred while trying to register proposal {proposalId}"
+            "unableToAddProposal": {
+                "short": "Unable to add proposal",
+                "long": "An error occurred while trying to add proposal {proposalId}"
             }
         }
     },

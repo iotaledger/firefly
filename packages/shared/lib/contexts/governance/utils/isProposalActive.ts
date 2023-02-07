@@ -1,6 +1,6 @@
 import { ProposalStatus } from '../enums'
 
-export function isProposalActive(status: ProposalStatus): boolean {
+export function isProposalActive(status: string): boolean {
     switch (status) {
         case ProposalStatus.Holding:
             return true

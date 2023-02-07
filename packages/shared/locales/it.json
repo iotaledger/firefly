@@ -577,6 +577,7 @@
             },
             "proposalsDetails": {
                 "title": "Dettagli",
+                "totalProposals": "Totale proposte",
                 "activeProposals": "Proposte attive",
                 "votingProposals": "Proposte su cui stai votando",
                 "votedProposals": "Totale delle proposte votate"
@@ -584,8 +585,9 @@
             "proposals": {
                 "title": "Proposte",
                 "voted": "Votato",
-                "successRegister": "Proposta registrata con successo",
-                "successRemove": "Proposta rimossa con successo"
+                "successAdd": "Proposta aggiunta con successo",
+                "successRemove": "Proposta rimossa con successo",
+                "emptyTitle": "Nessuna proposta"
             },
             "statusTimeline": {
                 "upcoming": "Annuncio",
@@ -601,12 +603,15 @@
                 },
                 "proposalInformation": {
                     "title": "Informazioni sulle proposte",
+                    "votingOpens": "Inizia la votazione su",
+                    "countingStarts": "Il conteggio inizia il",
                     "countingEnds": "Conteggio terminato",
+                    "countingEnded": "Conteggio terminato il",
                     "eventId": "ID Evento",
                     "nodeUrl": "URL del nodo"
                 },
-                "voteOpens": "Il voto apre in {time}",
-                "fetching": "Recupero dati proposta"
+                "fetching": "Recupero dati proposta",
+                "hintVote": "Non puoi votare una proposta nella fase di annuncio, il voto sarà aperto tra {time}."
             }
         }
     },
@@ -641,6 +646,10 @@
             "pendingTransactions": {
                 "title": "Transazioni",
                 "subtitle": "Temporaneamente bloccato in transazioni non reclamate"
+            },
+            "votingPowerOutput": {
+                "title": "Governance",
+                "subtitle": "Riservato al potere di voto"
             },
             "minimizeStorageDepositButton": "Minimizza il deposito di archiviazione"
         },
@@ -1009,22 +1018,23 @@
         "manageVotingPower": {
             "title": "Gestisci il potere di voto",
             "body": "Definisci il tuo potere di voto per votare sulle proposte.",
-            "revote": "Cambiare il tuo potere di voto impedisce temporaneamente il conteggio dei tuoi voti. Procedere al seguente passo per riprendere la votazione.",
-            "hint": "Aumentare il tuo potere di voto blocca i tuoi fondi. Devi diminuire il tuo potere di voto per renderli nuovamente spendibili. Ciò riguarda tutte le proposte con una votazione attiva."
+            "hint": "Tutti i fondi stanziati per il voto sono bloccati. Al fine di renderli spendibili di nuovo, è necessario ridurre il vostro potere di voto. Ciò riguarda tutte le proposte con una votazione attiva.",
+            "amountZero": "Si prega di essere consapevoli che l'impostazione del potere di voto a zero interromperà tutti i voti per tutte le proposte su cui si sta attualmente votando."
         },
-        "registerProposal": {
-            "title": "Registra proposta",
-            "body": "Fornire le informazioni elencate di seguito per registrare una proposta."
+        "addProposal": {
+            "title": "Aggiungi proposta",
+            "body": "Si prega di fornire le informazioni elencate di seguito per aggiungere una proposta."
         },
         "voteForProposal": {
             "title": "Votazione per la proposta",
             "body": "Stai per votare la proposta {proposal}.",
             "key": "Il tuo potere di voto",
+            "hasAbstained": "You are abstaining from answering {numberOfQuestions, plural, one {# question} other {# questions}}.",
             "noVotingPower": "Non hai alcun potere di voto, aumenta il tuo potere di voto dal cruscotto della governance."
         },
         "revote": {
             "title": "Vota nuovamente le proposte",
-            "body": "Come accennato nel passaggio precedente, cambiare il tuo potere di voto impedisce temporaneamente il conteggio dei voti. Basta cliccare su \"Revote\" per riprendere il voto.",
+            "body": "Cambiare il tuo potere di voto interrompe temporaneamente i tuoi voti per tutte le proposte da contare. Basta cliccare su \"Revote\" per riprendere il voto.",
             "hint": "Firefly ricorda tutte le proposte e le opzioni di risposta votate in precedenza."
         },
         "removeProposal": {
@@ -1080,7 +1090,7 @@
         "confirmNftBurn": {
             "title": "Distruggi {nftName}",
             "description": "Sei sicuro di voler distruggere questo NFT?",
-            "hint": "Si prega di notare che la distruzione di un NFT libera il deposito di archiviazione collegato ad esso e non è reversibile."
+            "hint": "Si prega di notare che la distruzione di un NFT libera il deposito collegato ad esso e non è reversibile."
         },
         "proceedAnyway": "Procedi comunque",
         "save": "Salva",
@@ -1213,6 +1223,7 @@
         "unverifyToken": "Rimuovi verifica del token",
         "hideToken": "Nascondi token",
         "unhideToken": "Mostra token",
+        "burn": "Distruggi",
         "burnToken": "Brucia token",
         "faucetRequest": "Ottieni {token} token",
         "refreshTokenMetadata": "Aggiorna i metadati del token",
@@ -1225,7 +1236,7 @@
         "addReference": "Aggiungi riferimento",
         "depositNft": "Deposita NFTs",
         "vote": "Vota",
-        "registerProposal": "Registra proposta",
+        "addProposal": "Aggiungi proposta",
         "removeProposal": "Rimuovi la proposta",
         "stopVoting": "Interrompi la votazione",
         "revote": "Revote"
@@ -1246,16 +1257,16 @@
         "receiving": "Ricezione",
         "newVotingPower": "Nuovo potere di voto",
         "votingPower": "Potere di voto",
-        "increased": "Voting power increased",
-        "increasing": "Increasing voting power",
-        "decreased": "Voting power decreased",
-        "decreasing": "Decreasing voting power",
-        "startVoting": "Votato",
-        "startingVoting": "Iniziare a votare",
+        "increased": "Potere di voto aumentato",
+        "increasing": "Potere di voto in aumento",
+        "decreased": "Potere di voto ridotto",
+        "decreasing": "Potere di voto in riduzione",
+        "voted": "Votato",
+        "voting": "Votazione",
         "changedVote": "Voto modificato",
         "changingVote": "Modifica del voto",
-        "stopVoting": "Votazione interrotta",
-        "stoppingVoting": "Interrompere la votazione",
+        "unvoted": "Non Votato",
+        "unvoting": "Annulla Voto",
         "sentNft": "NFT Inviato",
         "sendingNft": "Invio NFT",
         "receivedNft": "NFT Ricevuto",
@@ -1271,8 +1282,8 @@
         "shimmerGenesis": "Shimmer Genesis",
         "minted": "Coniato",
         "minting": "Coniando",
-        "burned": "Burned",
-        "burning": "Burning",
+        "burned": "Bruciato",
+        "burning": "Bruciando",
         "consolidated": "Risultati consolidati",
         "consolidating": "Consolidamento risultati",
         "aliasCreated": "Alias creato",
@@ -1570,6 +1581,24 @@
             "incoming": "In entrata",
             "outgoing": "In uscita",
             "selfTransaction": "Auto transazione"
+        },
+        "proposalType": {
+            "label": "Tipo",
+            "official": "Ufficiale",
+            "custom": "Personalizzato"
+        },
+        "phase": {
+            "label": "Fase"
+        },
+        "participated": {
+            "label": "Partecipato",
+            "yes": "Sì",
+            "no": "No"
+        },
+        "proposalOrder": {
+            "label": "Ordine",
+            "name": "Nome",
+            "phase": "Fase"
         }
     },
     "dates": {
@@ -1873,17 +1902,17 @@
             },
             "unsafeToLoad": {
                 "short": "Non sicuro da caricare",
-                "long": "An error occurred while checking if the NFT was safe to load"
+                "long": "Si è verificato un errore verificando se il NFT fosse sicuro da caricare"
             },
             "loadingError": {
-                "short": "Unable to load",
-                "long": "An error occurred while loading the NFT"
+                "short": "Impossibile caricare",
+                "long": "Si è verificato un errore caricando il NFT"
             }
         },
         "governance": {
-            "unableToRegisterProposal": {
-                "short": "Unable to register proposal",
-                "long": "An error occurred while trying to register proposal {proposalId}"
+            "unableToAddProposal": {
+                "short": "Impossibile aggiungere la proposta",
+                "long": "Si è verificato un errore nel tentativo di aggiungere la proposta {proposalId}"
             }
         }
     },
@@ -1927,12 +1956,12 @@
         "optionalInput": "Questi dati opzionali saranno pubblici sull'esplorer e visualizzabili da tutti.",
         "transactionDetails": {
             "minting": {
-                "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
-                "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
-                "expirationTime": "Claim these funds before the expiration time or they will be returned to the sender.",
-                "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
-                "metadata": "An optional data field for storing data persistently on the Tangle.",
-                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
+                "storageDeposit": "Un deposito rimborsabile del token necessario per memorizzare la tua transazione sul Tangle.",
+                "giftedStorageDeposit": "Il deposito d'archiviazione per questa transazione ti è stato regalato. Non necessiti di rimbosarlo.",
+                "expirationTime": "Rivendica questi fondi prima dell'ora di scadenza o saranno restituiti al mittente.",
+                "timelockDate": "Il mittente ha impostato una scadenza su questi fondi. Potrai spenderli alla scadenza del blocco orario.",
+                "metadata": "Un campo di dati facoltativo per memorizzare persistentemente i dati sul Tangle.",
+                "tag": "Un campo di dati facoltativi breve. Etichettare i gruppi di transazione può renderli più facili da cercare."
             },
             "incoming": {
                 "storageDeposit": "Deposito di token rimborsabili necessario per memorizzare la transazione sul Tangle.",
@@ -1941,7 +1970,7 @@
                 "timelockDate": "Il mittente ha impostato un timelock su questi fondi. Sarai in grado di spenderli una volta scaduto il timeloce.",
                 "metadata": "Campo di dati opzionale per memorizzare i dati in modo persistente sul Tangle.",
                 "tag": "Breve campo di dati opzionale. I gruppi di transazioni possono facilitarne la ricerca.",
-                "gasBudget": "Gas budget is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
+                "gasBudget": "Il budget di gas è necessario per condurre una transazione o eseguire la funzione di un contatto intelligente sull'EVM di Shimmer."
             },
             "outgoing": {
                 "storageDeposit": "Un deposito è un importo rimborsabile necessario per memorizzare la transazione sul Tangle.",
@@ -1950,31 +1979,31 @@
                 "timelockDate": "Hai aggiunto un timelock a questa transazione. Il destinatario non sarà in grado di spendere questi fondi fino alla scadenza del timelock .",
                 "metadata": "Campo di dati opzionale per memorizzare i dati in modo persistente sul Tangle.",
                 "tag": "Breve campo di dati opzionale. I gruppi di transazioni possono facilitarne la ricerca.",
-                "gasBudget": "Gas budget is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
+                "gasBudget": "Il budget di gas è necessario per condurre una transazione o eseguire la funzione di un contatto intelligente sull'EVM di Shimmer."
             },
             "nftMetadata": {
-                "standard": "The NFT standard e.g. IRC27.",
-                "type": "The MimeType of the NFT. e.g. image/png.",
-                "collectionId": "UTXO string of the collection NFT that minted this NFT",
-                "royalties": "An object containing key-value pairs of addresses that map to payout percentages",
-                "issuerName": "The name of the creator",
-                "attributes": "An array of traits and values that define attributes of the NFT"
+                "standard": "Lo standard del NFT, es. IRC27.",
+                "type": "Il MimeType del NFT, es. immagine/png.",
+                "collectionId": "Stringa UTXO della collezione di NFT che ha coniato questo NFT",
+                "royalties": "Un oggetto contenente coppie chiave-valore di indirizzi che mappano alle percentuali di pagamento",
+                "issuerName": "Il nome del creatore",
+                "attributes": "Un insieme di tratti e valori che definisce gli attributi del NFT"
             }
         },
         "mintNativeToken": {
-            "decimals": "IRC30 optional parameter: Number of decimals the token uses (divide the token amount by 10^decimals to get its user representation).",
-            "description": "IRC30 optional parameter: The human-readable description of the token.",
-            "url": "IRC30 optional parameter: URL pointing to more resources about the token like a website or social media page.",
-            "logoUrl": "IRC30 optional parameter: URL pointing to an image resource of the token logo."
+            "decimals": "Parametro facoltativo IRC30: Numero di decimali utilizzati dal token (divide l'importo del token per decimali 10^ per ottenerne la rappresentazione dell'utente).",
+            "description": "Parametro facoltativo IRC30: La descrizione del token leggibile dall'uomo.",
+            "url": "Parametro facoltativo IRC30: URL che punta a ulteriori risorse sul token, come un sito web o la pagina social.",
+            "logoUrl": "Parametro facoltativo IRC30: URL che punta a una risorsa immagine del logo del token."
         },
         "mintNftForm": {
-            "collectionId": "Optional parameter: UTXO string of the collection NFT that minted this NFT",
-            "collectionName": "Optional parameter: The collection's name",
-            "royalties": "Optional parameter: An object containing key-value pairs of addresses that map to payout percentages",
-            "issuerName": "Optional parameter: The name of the creator",
-            "description": "Optional parameter: A description of the NFT",
-            "attributes": "Optional parameter: An array of traits and values that define attributes of the NFT",
-            "uri": "To create a URI using custom media, first upload your file to IPFS via a storage service (e.g. https://nft.storage/)"
+            "collectionId": "Parametro facoltativo: Stringa UTXO della raccolta NFT che ha coniato questo NFT",
+            "collectionName": "Parametro facoltativo: Il nome della collezione",
+            "royalties": "Parametro facoltativo: Un oggetto contenente coppie chiave-valore di indirizzi che mappano alle percentuali di pagamento",
+            "issuerName": "Parametro facoltativo: Il nome del creatore",
+            "description": "Parametro facoltativo: Una descrizione del NFT",
+            "attributes": "Parametro facoltativo: Un insieme di tratti e valori che definisce gli attributi del NFT",
+            "uri": "Per creare un URI utilizzando multimedia personalizzati, prima, carica il tuo file a IPFS tramite un servizio d'archiviazione (es. https://nft.storage/)"
         },
         "governance": {
             "removeProposalWarning": "Devi interrompere la votazione di questa proposta in tutti gli account prima di rimuoverla."
@@ -2006,7 +2035,7 @@
     },
     "tabs": {
         "wallet": "Portafoglio",
-        "collectibles": "Collectibles",
+        "collectibles": "Collezionabili",
         "governance": "Governance",
         "developer": "Sviluppatore",
         "tokens": "Token",
@@ -2020,42 +2049,42 @@
         },
         "external": {
             "incoming": {
-                "Pending": "receiving from",
-                "Confirmed": "received from",
-                "Conflicting": "failed to receive"
+                "Pending": "ricevendo da",
+                "Confirmed": "ricevuto da",
+                "Conflicting": "impossibile ricevere"
             },
             "outgoing": {
-                "Pending": "sending to",
-                "Confirmed": "sent to",
-                "Conflicting": "failed to send"
+                "Pending": "inviando a",
+                "Confirmed": "inviato a",
+                "Conflicting": "impossibile inviare"
             }
         },
         "internal": {
             "incoming": {
-                "Pending": "transferring from",
-                "Confirmed": "transferred from",
-                "Conflicting": "failed to transfer"
+                "Pending": "trasferendo da",
+                "Confirmed": "trasferito da",
+                "Conflicting": "impossibile trasferire"
             },
             "outgoing": {
-                "Pending": "transferring to",
-                "Confirmed": "transferred to",
-                "Conflicting": "failed to transfer"
+                "Pending": "trasferendo a",
+                "Confirmed": "trasferito a",
+                "Conflicting": "impossibile trasferire"
             },
             "selfTransaction": {
-                "Pending": "transferring to",
-                "Confirmed": "transferred to",
-                "Conflicting": "failed to transfer"
+                "Pending": "trasferendo a",
+                "Confirmed": "trasferito a",
+                "Conflicting": "impossibile trasferire"
             }
         },
         "mint": {
-            "Pending": "minting",
-            "Confirmed": "minted",
-            "Conflicting": "failed to mint"
+            "Pending": "coniando",
+            "Confirmed": "coniato",
+            "Conflicting": "impossibile copiare"
         },
         "burn": {
-            "Pending": "burning",
-            "Confirmed": "burned",
-            "Conflicting": "failed to burn"
+            "Pending": "bruciando",
+            "Confirmed": "bruciato",
+            "Conflicting": "impossibile bruciare"
         },
         "consolidation": {
             "Pending": "Consolidamento risultati",
@@ -2074,14 +2103,14 @@
         },
         "governance": {
             "increaseVotingPower": {
-                "Pending": "increasing voting power",
-                "Confirmed": "increased voting power",
-                "Conflicting": "failed to increased voting power"
+                "Pending": "aumentando il potere di voto",
+                "Confirmed": "potere di voto aumentato",
+                "Conflicting": "impossibile aumentare il potere di voto"
             },
             "decreaseVotingPower": {
-                "Pending": "decreasing voting power",
-                "Confirmed": "decreased voting power",
-                "Conflicting": "failed to decreased voting power"
+                "Pending": "riducecndo il potere di voto",
+                "Confirmed": "potere di voto ridotto",
+                "Conflicting": "impossibile ridurre il potere di voto"
             },
             "startVoting": {
                 "Pending": "voto per",
@@ -2101,7 +2130,7 @@
         },
         "alias": {
             "creation": {
-                "Pending": "creating alias",
+                "Pending": "creando alias",
                 "Confirmed": "alias creato",
                 "Failed": "Impossibile creare l'alias"
             }
