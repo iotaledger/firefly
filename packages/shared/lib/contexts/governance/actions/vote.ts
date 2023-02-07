@@ -1,6 +1,5 @@
 import { get } from 'svelte/store'
-
-import { selectedAccount, updateSelectedAccount } from '@core/account/stores'
+import { selectedAccount } from '@core/account/stores'
 import { activeProfile } from '@core/profile/stores'
 import { ProfileType } from '@core/profile/enums'
 import { handleLedgerError } from '@core/ledger/utils'
@@ -8,15 +7,14 @@ import { showAppNotification } from '@auxiliary/notification/actions'
 import { localize } from '@core/i18n'
 import { handleError } from '@core/error/handlers'
 import { processAndAddToActivities } from '@core/wallet'
-import { setPendingGovernanceTransactionIdForAccount } from '../stores'
+import { clearPendingGovernanceTransactionIdForAccount, setPendingGovernanceTransactionIdForAccount } from '../stores'
 
 export async function vote(eventId?: string, answers?: number[]): Promise<void> {
+    const account = get(selectedAccount)
     try {
-        updateSelectedAccount({ isTransferring: true })
+        setPendingGovernanceTransactionIdForAccount(account.index)
 
-        const account = get(selectedAccount)
         const transaction = await account.vote(eventId, answers)
-        setPendingGovernanceTransactionIdForAccount(account.index, transaction.transactionId)
 
         await processAndAddToActivities(transaction)
 
@@ -32,7 +30,6 @@ export async function vote(eventId?: string, answers?: number[]): Promise<void> 
         } else {
             handleError(err)
         }
-    } finally {
-        updateSelectedAccount({ isTransferring: false })
+        clearPendingGovernanceTransactionIdForAccount(account.index)
     }
 }

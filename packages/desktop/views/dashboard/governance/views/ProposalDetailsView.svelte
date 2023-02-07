@@ -21,7 +21,7 @@
     import { ABSTAIN_VOTE_VALUE } from '@contexts/governance/constants'
     import { ProposalStatus } from '@contexts/governance/enums'
     import {
-        pendingGovernanceTransactionIds,
+        isGovernanceTransferring,
         participationOverview,
         selectedProposal,
         updateParticipationOverview,
@@ -78,7 +78,7 @@
         !hasChangedAnswers(selectedAnswerValues) ||
         hasSelectedNoAnswers(selectedAnswerValues)
 
-    $: isTransferring = Boolean($pendingGovernanceTransactionIds?.[$selectedAccountIndex])
+    $: isTransferring = $isGovernanceTransferring?.[$selectedAccountIndex]
     $: proposalState, (textHintString = getTextHintString())
 
     function hasSelectedNoAnswers(_selectedAnswerValues: number[]): boolean {
