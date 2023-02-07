@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Icon } from '@auxiliary/icon'
     import { openPopup } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
@@ -9,6 +9,7 @@
     function handleAddProposal(): void {
         openPopup({
             type: 'addProposal',
+            overflow: true,
         })
     }
 </script>

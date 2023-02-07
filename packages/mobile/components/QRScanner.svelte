@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Icon } from '@ui'
     import { showCameraScanner, stopScanner } from '../lib/auxiliary/scanner'
 </script>

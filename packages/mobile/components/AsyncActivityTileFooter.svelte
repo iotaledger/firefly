@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import features from '@features/features'
     import { ActivityAsyncStatus, ActivityDirection, getTimeDifference, Activity } from '@core/wallet'
     import {

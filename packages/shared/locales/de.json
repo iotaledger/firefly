@@ -198,7 +198,7 @@
             "videoGuide": "Video-Leitfaden zur Ledger-Migration"
         },
         "ledgerInstallationGuide": {
-            "title": "Hast du die {protocol} App auf deinem Ledger Gerät installiert?",
+            "title": "Haben du die {protocol} App auf deinem Ledger Gerät installiert?",
             "body1": "Bevor du fortfährst, musst du Ledger Live verwenden, um die {protocol} App zu finden und zu installieren.",
             "body2": "Stelle sicher, dass deine Ledger-Firmware aktuell ist. Alle vorinstallierten Apps sollten auf ihre neuesten Versionen aktualisiert werden.",
             "action": "Ja, ich habe die {protocol} App installiert"
@@ -577,6 +577,7 @@
             },
             "proposalsDetails": {
                 "title": "Details",
+                "totalProposals": "Alle Vorschläge",
                 "activeProposals": "Aktive Abstimmungen",
                 "votingProposals": "Abstimmungen, an denen du teilnimmst",
                 "votedProposals": "Alle Abstimmungen, über die du abgestimmt hast"
@@ -584,8 +585,9 @@
             "proposals": {
                 "title": "Abstimmungen",
                 "voted": "Abgestimmt",
-                "successRegister": "Abstimmung erfolgreich registriert",
-                "successRemove": "Abstimmung erfolgreich entfernt"
+                "successAdd": "Vorschlag erfolgreich hinzugefügt",
+                "successRemove": "Abstimmung erfolgreich entfernt",
+                "emptyTitle": "Keine Vorschläge"
             },
             "statusTimeline": {
                 "upcoming": "Ankündigung",
@@ -601,12 +603,15 @@
                 },
                 "proposalInformation": {
                     "title": "Abstimmungsinformationen",
+                    "votingOpens": "Abstimmung beginnt am",
+                    "countingStarts": "Zählung beginnt am",
                     "countingEnds": "Auszählung endet am",
+                    "countingEnded": "Zählung beendet am",
                     "eventId": "Event-ID",
                     "nodeUrl": "Node URL"
                 },
-                "voteOpens": "Abstimmung eröffnet in {time}",
-                "fetching": "Abrufen der Abstimmungsdaten"
+                "fetching": "Abrufen der Abstimmungsdaten",
+                "hintVote": "Du kannst nicht über eine Abstimmung abstimmen, die sich noch in der Ankündigungsphase befindet. Die Abstimmung wird in {time} geöffnet."
             }
         }
     },
@@ -641,6 +646,10 @@
             "pendingTransactions": {
                 "title": "Transaktionen",
                 "subtitle": "Vorübergehend gesperrt in nicht abgeholten Transaktionen"
+            },
+            "votingPowerOutput": {
+                "title": "Governance",
+                "subtitle": "Reserviert für Stimmrecht"
             },
             "minimizeStorageDepositButton": "Speichereinlage minimieren"
         },
@@ -1009,22 +1018,23 @@
         "manageVotingPower": {
             "title": "Stimmrecht verwalten",
             "body": "Definiere dein Stimmrecht, um über Abstimmungen abzustimmen.",
-            "revote": "Wenn Sie Ihre Stimmrechte ändern, werden Ihre Stimmen vorübergehend nicht mehr gezählt. Fahren Sie mit dem folgenden Schritt fort, um die Abstimmung fortzusetzen.",
-            "hint": "Die Erhöhung deiner Stimmrechte sperrt dein Guthaben. Du musst dein Stimmrecht verringern, um es wieder ausgeben zu können. Dies betrifft alle Vorschläge mit einer aktiven Abstimmung."
+            "hint": "Alle Guthaben, die du den Abstimmungen zuweist, sind gesperrt. Um sie wieder ausgeben zu können, musst du deine Stimmrechte verringern. Dies betrifft alle Abstimmungen mit aktivem Abstimmen.",
+            "amountZero": "Bitte beachte, dass die Einstellung deiner Stimmrechte auf Null das Abtimmen für alle Abstimmungen, an denen du teilnimmst, stoppt."
         },
-        "registerProposal": {
-            "title": "Abstimmung registrieren",
-            "body": "Bitte gib die unten aufgeführten Informationen an, um eine Abstimmung zu registrieren."
+        "addProposal": {
+            "title": "Vorschlag hinzufügen",
+            "body": "Bitte gib die unten aufgeführten Informationen an, um einen Vorschlag hinzuzufügen."
         },
         "voteForProposal": {
             "title": "Für Abstimmung stimmen",
             "body": "Du bist dabei für {proposal} Abstimmung zu stimmen.",
             "key": "Dein Stimmrecht",
+            "hasAbstained": "You are abstaining from answering {numberOfQuestions, plural, one {# question} other {# questions}}.",
             "noVotingPower": "Du hast kein Stimmrecht. Bitte erhöhe dein Stimmrecht über das Governance-Dashboard."
         },
         "revote": {
             "title": "Über Vorschläge erneut abstimmen",
-            "body": "Wie bereits im vorherigen Schritt erwähnt, verhindert das Ändern deiner Stimmrechte vorübergehend die Stimmenauszählung. Klicke einfach auf \"Wiederabstimmen\", um die Stimmabgabe wieder aufzunehmen.",
+            "body": "Wenn Sie Ihre Stimmrechte ändern, werden Ihre Stimmen für alle Abstimmungen vorübergehend nicht mehr gezählt. Klicken Sie einfach auf \"Wieder abstimmen\", um die Abstimmung fortzusetzen.",
             "hint": "Firefly erinnert sich an alle Vorschläge und Antwort-Optionen, für die Sie zuvor gestimmt haben."
         },
         "removeProposal": {
@@ -1080,7 +1090,7 @@
         "confirmNftBurn": {
             "title": "{nftName} löschen",
             "description": "Bist du sicher, dass du dieses NFT löschen möchtest?",
-            "hint": "Bitte beachte, dass das Verbrennen/Löschen eines Tokens die damit verbundene Speicherkaution freigeben kann und nicht rückgängig gemacht werden kann."
+            "hint": "Bitte beachte, dass das Verbrennen/Löschen eines NFT's die damit verbundene Speicherkaution freigeben kann und nicht rückgängig gemacht werden kann."
         },
         "proceedAnyway": "Trotzdem fortfahren",
         "save": "Speichern",
@@ -1213,6 +1223,7 @@
         "unverifyToken": "Tokenverifizierung aufheben",
         "hideToken": "Token ausblenden",
         "unhideToken": "Token einblenden",
+        "burn": "Verbrennen/Löschen",
         "burnToken": "Token burnen",
         "faucetRequest": "{token} Token anfordern",
         "refreshTokenMetadata": "Token-Metadaten aktualisieren",
@@ -1225,7 +1236,7 @@
         "addReference": "Notiz hinzufügen",
         "depositNft": "NFTs einzahlen",
         "vote": "Abstimmen",
-        "registerProposal": "Abstimmung registrieren",
+        "addProposal": "Vorschlag hinzufügen",
         "removeProposal": "Abstimmung entfernen",
         "stopVoting": "Abstimmen beenden",
         "revote": "Wiederabstimmen"
@@ -1250,13 +1261,12 @@
         "increasing": "Erhöhe Stimmrecht",
         "decreased": "Stimmrecht verringert",
         "decreasing": "Verringere Stimmrecht",
-        "startVoting": "Abgestimmt",
-        "startingVoting": "Abstimmung startet",
+        "voted": "Abgestimmt",
+        "voting": "Abstimmung",
         "changedVote": "Stimme geändert",
         "changingVote": "Stimme ändern",
-        "stopVoting": "Abstimmung gestoppt",
-        "stoppingVoting": "Abstimmung stoppt",
-        "forEvent": "für {eventId}",
+        "unvoted": "Nicht abgestimmt",
+        "unvoting": "Stimme zurücknehmen",
         "sentNft": "NFT gesendet",
         "sendingNft": "NFT wird gesendet",
         "receivedNft": "NFT empfangen",
@@ -1571,6 +1581,24 @@
             "incoming": "Eingehend",
             "outgoing": "Ausgehend",
             "selfTransaction": "Selbstüberweisung"
+        },
+        "proposalType": {
+            "label": "Typ",
+            "official": "Offiziell",
+            "custom": "Benutzerdefiniert"
+        },
+        "phase": {
+            "label": "Phase"
+        },
+        "participated": {
+            "label": "Teilgenommen",
+            "yes": "Ja",
+            "no": "Nein"
+        },
+        "proposalOrder": {
+            "label": "Reihenfolge",
+            "name": "Name",
+            "phase": "Phase"
         }
     },
     "dates": {
@@ -1882,9 +1910,9 @@
             }
         },
         "governance": {
-            "unableToRegisterProposal": {
-                "short": "Abstimmung kann nicht registriert werden",
-                "long": "Beim Versuch, die Abstimmung {proposalId} zu registrieren ist ein Fehler aufgetreten"
+            "unableToAddProposal": {
+                "short": "Vorschlag kann nicht hinzugefügt werden",
+                "long": "Ein Fehler trat auf beim Versuch, den Vorschlag {proposalId} hinzuzufügen"
             }
         }
     },

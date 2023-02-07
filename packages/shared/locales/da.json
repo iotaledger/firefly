@@ -518,18 +518,18 @@
                 "bodies": {
                     "upcoming": "Stake {token}-tokener for automatisk at modtage belønninger hvert 10. sekunder, når staking starter d. {date}.",
                     "commencing": "Stake {token}-tokener for automatisk at modtage belønninger hvert 10. sekunder, når staking starter d. {date}.",
-                    "holdingAndStaking": "You automatically receive rewards every 10 seconds.",
-                    "holdingAndNotStaking": "Stake your {token} tokens to receive rewards every 10 seconds.",
-                    "endedAndDidStake": "{token} rewards will be distributed to your wallet once the network launches.",
-                    "endedAndDidNotStake": "You did not participate in this airdrop.",
-                    "endedAndDidNotReachMinRewards": "You did not stake enough {token} tokens to reach the minimum airdrop rewards.",
-                    "inactive": "Open network configuration in the advanced settings and make sure the current node has the \"Participation\" feature by clicking \"View info\"."
+                    "holdingAndStaking": "Du modtager automatisk belønninger hvert 10. sekund.",
+                    "holdingAndNotStaking": "Send dine {token} tokens for at modtage belønninger hvert 10. sekund.",
+                    "endedAndDidStake": "{token} belønninger vil blive distribueret til din tegnebog, når netværket lanceres.",
+                    "endedAndDidNotStake": "Du deltog ikke i denne airdrop.",
+                    "endedAndDidNotReachMinRewards": "Du sendte ikke nok {token} tokens til at nå det minimale antal airdrop belønninger.",
+                    "inactive": "Åbn netværkskonfiguration i de avancerede indstillinger og sørg for at den valgte node har funktionen \"Deltagelse\" ved at klikke på \"Vis info\"."
                 }
             },
             "airdrops": {
-                "holding": "Remaining",
-                "commencing": "Until staking begins",
-                "currentStakingPeriod": "Current staking period",
+                "holding": "Tilbage",
+                "commencing": "Indtil staking begynder",
+                "currentStakingPeriod": "Igangværende stakingperiode",
                 "totalWalletRewards": "Total wallet rewards",
                 "assembly": {
                     "name": "Assembly",
@@ -577,6 +577,7 @@
             },
             "proposalsDetails": {
                 "title": "Detaljer",
+                "totalProposals": "Forslag i alt",
                 "activeProposals": "Aktive forslag",
                 "votingProposals": "Forslag, der stemmes om",
                 "votedProposals": "Forslag i alt, der blev stemte om"
@@ -584,8 +585,9 @@
             "proposals": {
                 "title": "Forslag",
                 "voted": "Stemt",
-                "successRegister": "Forslag registreret",
-                "successRemove": "Forslag fjernet"
+                "successAdd": "Forslag hermed tilføjet",
+                "successRemove": "Forslag fjernet",
+                "emptyTitle": "Ingen forslag"
             },
             "statusTimeline": {
                 "upcoming": "Bekendtgørelse",
@@ -601,12 +603,15 @@
                 },
                 "proposalInformation": {
                     "title": "Forslagsinformation",
+                    "votingOpens": "Afstemning starter d.",
+                    "countingStarts": "Optælling starter d.",
                     "countingEnds": "Optælling afsluttes d.",
+                    "countingEnded": "Optælling afsluttedes d.",
                     "eventId": "Begivenheds-ID",
                     "nodeUrl": "Node-URL"
                 },
-                "voteOpens": "Afstemning åbnes om {time}",
-                "fetching": "Henter forslagsdata"
+                "fetching": "Henter forslagsdata",
+                "hintVote": "Du kan ikke stemme på et forslag, der er i annonceringsfasen. Afstemningen åbner om {time}."
             }
         }
     },
@@ -641,6 +646,10 @@
             "pendingTransactions": {
                 "title": "Transactions",
                 "subtitle": "Temporarily locked in unclaimed transactions"
+            },
+            "votingPowerOutput": {
+                "title": "Forvaltning",
+                "subtitle": "Reserveret til stemmerettigheder"
             },
             "minimizeStorageDepositButton": "Minimize storage deposit"
         },
@@ -1009,22 +1018,23 @@
         "manageVotingPower": {
             "title": "Håndtér stemmeret",
             "body": "Definér stemmeretten for at stemme om forslag.",
-            "revote": "Ændring af stemmeretten forhindrer midlertidigt dine stemmer i at blive medregnet. Fortsæt til flg. trin for at genoptage afstemningen.",
-            "hint": "Forøgelse af din stemmeretten låser dine midler. Stemmeretten skal reduceres for igen at gøre dem brugbare. Dette påvirker alle forslag med aktiv afstemning."
+            "hint": "Alle midler tildelt afstemningen er låst. For at gøre dem omsætbare igen, skal stemmeretten reduceres. Det påvirker alle forslag med aktiv afstemning.",
+            "amountZero": "Bemærk venligst, at sætter man stemmeretten til nul, stoppes alle ens stemmer for alle forslag, som man pt. stemmer om/på."
         },
-        "registerProposal": {
-            "title": "Register proposal",
-            "body": "Please provide the information listed below to register a proposal."
+        "addProposal": {
+            "title": "Tilføj forslag",
+            "body": "Angiv nedenstående oplysninger for at tilføje et forslag."
         },
         "voteForProposal": {
             "title": "Vote for proposal",
             "body": "Du er ved at stemme på {proposal} forslag.",
             "key": "Stemmeret",
+            "hasAbstained": "You are abstaining from answering {numberOfQuestions, plural, one {# question} other {# questions}}.",
             "noVotingPower": "Ingen stemmeret. Øg stemmeretten fra Governance-kontrolpanelet."
         },
         "revote": {
             "title": "Stem igen om forslag",
-            "body": "Som nævnt i foregående trin hindrer ændring af stemmeretten midlertidigt medregningen af dine stemmer. Klik blot på \"Sten igen\" for at genoptage afstemningen.",
+            "body": "Ændrer man sin stemmeret, stoppes ens stemmer om/på alle forslag midlertidigt i at blive optalt. Klik blot på \"Revote\" for at genoptage afstemningen.",
             "hint": "Firefly husker alle forslags og svarmuligheder, som der tidligere er stemt for."
         },
         "removeProposal": {
@@ -1080,7 +1090,7 @@
         "confirmNftBurn": {
             "title": "Burn {nftName}",
             "description": "Are you sure you want to burn this NFT?",
-            "hint": "Please note that burning a token frees the storage deposit attached to it and is not reversible."
+            "hint": "Bemærk, at brænding af en NFT frigør det tilknyttede lagerindestående, og at det er irreversibelt."
         },
         "proceedAnyway": "Fortsæt alligevel",
         "save": "Gem",
@@ -1213,6 +1223,7 @@
         "unverifyToken": "Afkræft token",
         "hideToken": "Skjul token",
         "unhideToken": "Vis token igen",
+        "burn": "Brænd",
         "burnToken": "Brænd token",
         "faucetRequest": "Hent {token} tokener",
         "refreshTokenMetadata": "Opdatér tokenmetadata",
@@ -1225,7 +1236,7 @@
         "addReference": "Add reference",
         "depositNft": "Deposit NFTs",
         "vote": "Vote",
-        "registerProposal": "Register proposal",
+        "addProposal": "Add proposal",
         "removeProposal": "Remove proposal",
         "stopVoting": "Stop voting",
         "revote": "Stem igen"
@@ -1250,13 +1261,12 @@
         "increasing": "Øger stemmeret",
         "decreased": "Stemmeret formindsket",
         "decreasing": "Formindsker stemmeret",
-        "startVoting": "Voted",
-        "startingVoting": "Starting to vote",
+        "voted": "Voted",
+        "voting": "Voting",
         "changedVote": "Ændret stemme",
         "changingVote": "Ændring af stemme",
-        "stopVoting": "Stopped voting",
-        "stoppingVoting": "Stopping to vote",
-        "forEvent": "for {eventId}",
+        "unvoted": "Unvoted",
+        "unvoting": "Unvoting",
         "sentNft": "NFT sent",
         "sendingNft": "Sending NFT",
         "receivedNft": "NFT received",
@@ -1571,6 +1581,24 @@
             "incoming": "Incoming",
             "outgoing": "Outgoing",
             "selfTransaction": "Self transaction"
+        },
+        "proposalType": {
+            "label": "Type",
+            "official": "Officiel",
+            "custom": "Tilpasset"
+        },
+        "phase": {
+            "label": "Fase"
+        },
+        "participated": {
+            "label": "Participated",
+            "yes": "Ja",
+            "no": "Nej"
+        },
+        "proposalOrder": {
+            "label": "Sortering",
+            "name": "Navn",
+            "phase": "Fase"
         }
     },
     "dates": {
@@ -1882,9 +1910,9 @@
             }
         },
         "governance": {
-            "unableToRegisterProposal": {
-                "short": "Unable to register proposal",
-                "long": "An error occurred while trying to register proposal {proposalId}"
+            "unableToAddProposal": {
+                "short": "Forslag kan ikke tilføjes",
+                "long": "En fejl opstod under forsøget på at tilføje et forslaget {proposalId}"
             }
         }
     },

@@ -1,4 +1,4 @@
-<script type="typescript">
+<script lang="ts">
     import { Icon } from 'shared/components'
 
     export let icon: string

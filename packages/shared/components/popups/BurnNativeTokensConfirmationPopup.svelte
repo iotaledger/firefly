@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Button, Text, TextHint, FontWeight, TextType, ButtonVariant, KeyValueBox } from 'shared/components'
     import { localize } from '@core/i18n'
     import { closePopup, openPopup } from '@auxiliary/popup'
@@ -12,7 +12,7 @@
     export let rawAmount: string
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
-    $: formattedAmount = formatTokenAmountBestMatch(Number(rawAmount), asset.metadata)
+    $: formattedAmount = formatTokenAmountBestMatch(Number(rawAmount), asset?.metadata)
 
     function onBack(): void {
         openPopup({
@@ -63,6 +63,7 @@
             classes="w-full"
             variant={ButtonVariant.Warning}
             isBusy={$selectedAccount.isTransferring}
+            disabled={$selectedAccount.isTransferring}
             onClick={confirmClick}
         >
             {localize('actions.burnToken')}

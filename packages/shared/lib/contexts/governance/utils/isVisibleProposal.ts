@@ -1,7 +1,7 @@
-import { IProposal, ProposalFilter } from '../interfaces'
+import { IProposal, IProposalFilter } from '../interfaces'
 import { BooleanFilterOption } from '@core/utils/enums/filters'
 
-export function isVisibleProposal(proposal: IProposal, filter: ProposalFilter): boolean {
+export function isVisibleProposal(proposal: IProposal, filter: IProposalFilter): boolean {
     if (!isVisibleWithActivePhaseFilter(proposal, filter)) {
         return false
     }
@@ -14,7 +14,7 @@ export function isVisibleProposal(proposal: IProposal, filter: ProposalFilter): 
     return true
 }
 
-function isVisibleWithActivePraticipatedFilter(proposal: IProposal, filter: ProposalFilter): boolean {
+function isVisibleWithActivePraticipatedFilter(proposal: IProposal, filter: IProposalFilter): boolean {
     if (
         filter.participated.active &&
         ((filter.participated.selected === BooleanFilterOption.No && proposal.participated) ||
@@ -25,7 +25,7 @@ function isVisibleWithActivePraticipatedFilter(proposal: IProposal, filter: Prop
     return true
 }
 
-function isVisibleWithActiveTypeFilter(proposal: IProposal, filter: ProposalFilter): boolean {
+function isVisibleWithActiveTypeFilter(proposal: IProposal, filter: IProposalFilter): boolean {
     if (filter.type.active && filter.type.selected) {
         if (filter.type.selected !== proposal.type) {
             return false
@@ -34,9 +34,9 @@ function isVisibleWithActiveTypeFilter(proposal: IProposal, filter: ProposalFilt
     return true
 }
 
-function isVisibleWithActivePhaseFilter(proposal: IProposal, filter: ProposalFilter): boolean {
+function isVisibleWithActivePhaseFilter(proposal: IProposal, filter: IProposalFilter): boolean {
     if (filter.phase.active && filter.phase.selected) {
-        if (filter.phase.selected !== proposal.status) {
+        if (filter.phase.selected !== proposal.state?.status) {
             return false
         }
     }

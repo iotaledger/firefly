@@ -1,9 +1,10 @@
 import { closePopup } from '@auxiliary/popup'
 import { resetSelectedAccount } from '@core/account'
-import { clearPollGovernanceDataInterval } from '@contexts/governance'
+import { clearGovernancePollAndData } from '@contexts/governance'
+import { resetPendingGovernanceTransactionIds } from '@contexts/governance/stores'
 import { isPollingLedgerDeviceStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
-import { clearPollMarketPrices } from '@core/market/actions'
-import { clearPollNetworkInterval } from '@core/network'
+import { clearMarketPricesPoll } from '@core/market/actions'
+import { clearNetworkPoll } from '@core/network'
 import {
     activeAccounts,
     activeProfile,
@@ -16,52 +17,46 @@ import { destroyProfileManager, unsubscribeFromWalletApiEvents } from '@core/pro
 import { profileManager } from '@core/profile-manager/stores'
 import { routerManager } from '@core/router/stores'
 import { get } from 'svelte/store'
+import { clearFilters } from '@core/utils'
 
 /**
  * Logout from active profile
  */
-export function logout(clearActiveProfile: boolean = true, _lockStronghold: boolean = true): Promise<void> {
-    const { lastActiveAt, loggedIn, hasLoadedAccounts, type } = get(activeProfile)
+export async function logout(clearActiveProfile = true, _lockStronghold = true): Promise<void> {
+    if (get(isSoftwareProfile)) {
+        _lockStronghold && lockStronghold()
+    } else if (isLedgerProfile(get(activeProfile).type)) {
+        get(isPollingLedgerDeviceStatus) && stopPollingLedgerNanoStatus()
+    }
 
-    // (TODO): Figure out why we are using a promise here?
-    return new Promise((resolve) => {
-        if (get(isSoftwareProfile)) {
-            _lockStronghold && lockStronghold()
-        } else if (isLedgerProfile(type)) {
-            get(isPollingLedgerDeviceStatus) && stopPollingLedgerNanoStatus()
-        }
+    clearNetworkPoll()
+    clearMarketPricesPoll()
+    clearGovernancePollAndData()
 
-        clearPollNetworkInterval()
-        clearPollMarketPrices()
-        clearPollGovernanceDataInterval()
-        const _activeProfile = get(activeProfile)
-        if (_activeProfile) {
-            const manager = get(profileManager)
+    const _activeProfile = get(activeProfile)
+    if (_activeProfile) {
+        const manager = get(profileManager)
+        await manager?.stopBackgroundSync()
+        await unsubscribeFromWalletApiEvents()
+        destroyProfileManager()
+    }
 
-            unsubscribeFromWalletApiEvents()
+    cleanupProfileState(clearActiveProfile)
+}
 
-            // stop background sync
-            // TODO: Make sure we need this. Would destroying the profile manager also stop background syncing automatically?
-            manager?.stopBackgroundSync()
+function cleanupProfileState(clearActiveProfile: boolean): void {
+    const { lastActiveAt, loggedIn, hasLoadedAccounts } = get(activeProfile)
 
-            // Unsubscribe to listeners
-            // https://github.com/iotaledger/wallet.rs/issues/1133
-
-            destroyProfileManager()
-        }
-
-        // TODO: clean up the state management
-        lastActiveAt.set(new Date())
-        closePopup(true)
-        loggedIn.set(false)
-        hasLoadedAccounts.set(false)
-        resetSelectedAccount()
-        activeAccounts.set([])
-        if (clearActiveProfile) {
-            resetActiveProfile()
-        }
-        get(routerManager).resetRouters()
-
-        resolve()
-    })
+    lastActiveAt.set(new Date())
+    closePopup(true)
+    loggedIn.set(false)
+    hasLoadedAccounts.set(false)
+    resetSelectedAccount()
+    resetPendingGovernanceTransactionIds()
+    activeAccounts.set([])
+    if (clearActiveProfile) {
+        resetActiveProfile()
+    }
+    clearFilters()
+    get(routerManager).resetRouters()
 }

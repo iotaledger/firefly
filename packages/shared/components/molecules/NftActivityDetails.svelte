@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { closePopup } from '@auxiliary/popup'
     import { selectedAccountIndex } from '@core/account/stores'
     import { time } from '@core/app'

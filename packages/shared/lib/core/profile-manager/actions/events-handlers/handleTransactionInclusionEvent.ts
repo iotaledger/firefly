@@ -1,5 +1,10 @@
 import { get } from 'svelte/store'
-import { hasToRevote } from '@contexts/governance/stores'
+import {
+    clearPendingGovernanceTransactionIdForAccount,
+    hasToRevote,
+    pendingGovernanceTransactionIds,
+    updateParticipationOverview,
+} from '@contexts/governance/stores'
 import { syncVotingPower, updateSelectedAccount } from '@core/account'
 import { updateNftInAllAccountNfts } from '@core/nfts'
 
@@ -41,15 +46,22 @@ export function handleTransactionInclusionEventInternal(
     if (activity?.type === ActivityType.Governance) {
         if (inclusionState === InclusionState.Confirmed) {
             updateSelectedAccount({ isTransferring: false })
+            closePopup(true)
 
             if (get(hasToRevote)) {
-                closePopup(true)
                 openPopup({
                     type: 'revote',
+                    preventClose: true,
+                    hideClose: true,
                 })
             }
+            updateParticipationOverview()
         }
         syncVotingPower(accountIndex)
+    }
+
+    if (transactionId === get(pendingGovernanceTransactionIds)?.[accountIndex]) {
+        clearPendingGovernanceTransactionIdForAccount(accountIndex)
     }
 
     updateClaimingTransactionInclusion(transactionId, inclusionState, accountIndex)

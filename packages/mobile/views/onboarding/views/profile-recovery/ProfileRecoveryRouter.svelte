@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { onMount } from 'svelte'
     import { BackupPasswordView, ImportMnemonicPhraseView, ImportStrongholdBackupView, SuccessView } from './views'
     import { localize } from '@core/i18n'

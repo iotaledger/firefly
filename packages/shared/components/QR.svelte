@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { default as QrCode } from 'qrious'
     import { appSettings } from '@core/app'
     import { onMount } from 'svelte'

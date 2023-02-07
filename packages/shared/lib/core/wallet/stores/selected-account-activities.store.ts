@@ -19,7 +19,7 @@ import {
 export const selectedAccountActivities: Readable<Activity[]> = derived(
     [selectedAccount, allAccountActivities],
     ([$selectedAccount, $allAccountActivities]) => {
-        if (selectedAccount) {
+        if ($selectedAccount) {
             return $allAccountActivities[$selectedAccount?.index] ?? []
         } else {
             return []
@@ -62,7 +62,14 @@ export const activityFilter: Writable<ActivityFilter> = writable({
         type: 'selection',
         localeKey: 'filters.type',
         selected: ActivityType.Basic,
-        choices: [ActivityType.Basic, ActivityType.Nft, ActivityType.Foundry, ActivityType.Alias],
+        choices: [
+            ActivityType.Basic,
+            ActivityType.Nft,
+            ActivityType.Alias,
+            ActivityType.Governance,
+            ActivityType.Foundry,
+            ActivityType.Consolidation,
+        ],
     },
     direction: {
         active: false,
@@ -127,7 +134,7 @@ export const queriedActivities: Readable<Activity[]> = derived(
                 _activity.type === ActivityType.Basic || _activity.type === ActivityType.Foundry
                     ? getAssetFromPersistedAssets(_activity.assetId)
                     : undefined
-            const hasValidAsset = asset && isValidIrc30(asset.metadata)
+            const hasValidAsset = asset && isValidIrc30(asset?.metadata)
             return !_activity.isHidden && hasValidAsset
         })
 
@@ -169,7 +176,7 @@ function getFieldsToSearchFromActivity(activity: Activity): string[] {
         fieldsToSearch.push(activity.subject?.address)
     }
 
-    if (activity.asyncData.claimingTransactionId) {
+    if (activity.asyncData?.claimingTransactionId) {
         fieldsToSearch.push(activity.asyncData.claimingTransactionId)
     }
 

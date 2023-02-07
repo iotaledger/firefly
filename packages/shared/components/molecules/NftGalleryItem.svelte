@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { INft } from '@core/nfts'
     import { Text, FontWeight, NftMedia, TooltipIcon, Position } from 'shared/components'
     import { CollectiblesRoute, collectiblesRouter } from '@core/router'

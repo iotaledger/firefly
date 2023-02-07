@@ -1,11 +1,10 @@
-<script lang="typescript">
+<script lang="ts">
     import { KeyValueBox, Pane, Text } from 'shared/components'
     import { formatDate, localize } from '@core/i18n'
-    import { networkStatus } from '@core/network/stores'
-    import { activeProfileId } from '@core/profile/stores'
     import { DATE_FORMAT, IKeyValueBoxList, milestoneToDate, truncateString } from '@core/utils'
+    import { networkStatus } from '@core/network/stores'
     import { ProposalStatus } from '@contexts/governance/enums'
-    import { proposalsState, selectedProposal } from '@contexts/governance/stores'
+    import { selectedProposal } from '@contexts/governance/stores'
 
     interface IProposalDateData {
         propertyKey: 'votingOpens' | 'countingStarts' | 'countingEnds' | 'countingEnded'
@@ -15,7 +14,7 @@
     const proposalDateData = getNextProposalDateData()
 
     function getNextProposalDateData(): IProposalDateData {
-        switch ($selectedProposal?.status) {
+        switch ($selectedProposal?.state?.status) {
             case ProposalStatus.Upcoming:
                 return {
                     propertyKey: 'votingOpens',
@@ -50,7 +49,7 @@
             isCopyable: true,
             copyValue: $selectedProposal?.id,
         },
-        nodeUrl: { data: $proposalsState[$activeProfileId]?.[$selectedProposal?.id].nodeUrl, isCopyable: true },
+        nodeUrl: { data: $selectedProposal?.nodeUrl, isCopyable: true },
     }
 </script>
 

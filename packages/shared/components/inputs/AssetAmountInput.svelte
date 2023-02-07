@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import Big from 'big.js'
     import { Text, AssetDropdown, InputContainer, SliderInput, AmountInput, TooltipIcon } from 'shared/components'
     import UnitInput from './UnitInput.svelte'
@@ -45,7 +45,7 @@
     $: availableBalance = asset?.balance?.available + votingPower
     $: bigAmount = convertToRawAmount(amount, asset?.metadata, unit)
     $: marketAmount = getMarketAmountFromAssetValue(bigAmount, asset)
-    $: max = parseCurrency(formatTokenAmountDefault(availableBalance, asset.metadata, unit, false))
+    $: max = parseCurrency(formatTokenAmountDefault(availableBalance, asset?.metadata, unit, false))
 
     function onClickAvailableBalance(): void {
         const isRawAmount = asset?.metadata?.decimals && asset?.metadata?.unit
@@ -119,10 +119,10 @@
             <SliderInput bind:value={amount} {max} decimals={allowedDecimals} {disabled} />
             <div class="flex flex-row justify-between">
                 <Text color="gray-800" darkColor="gray-500" fontSize="xs"
-                    >{formatTokenAmountBestMatch(0, asset?.metadata)}</Text
+                    >{formatTokenAmountDefault(0, asset?.metadata, unit)} {unit}</Text
                 >
                 <Text color="gray-800" darkColor="gray-500" fontSize="xs"
-                    >{formatTokenAmountBestMatch(availableBalance, asset?.metadata)}</Text
+                    >{formatTokenAmountDefault(availableBalance, asset?.metadata, unit)} {unit}</Text
                 >
             </div>
         </div>

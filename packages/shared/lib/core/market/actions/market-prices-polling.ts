@@ -11,6 +11,6 @@ export async function pollMarketPrices(): Promise<void> {
     pollInterval = setInterval(() => void getAndUpdateMarketPrices(), MARKET_POLL_INTERVAL)
 }
 
-export function clearPollMarketPrices(): void {
+export function clearMarketPricesPoll(): void {
     clearInterval(pollInterval)
 }

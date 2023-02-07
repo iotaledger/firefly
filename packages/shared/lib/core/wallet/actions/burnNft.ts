@@ -6,8 +6,7 @@ import { handleLedgerError } from '@core/ledger'
 import { updateNftInAllAccountNfts } from '@core/nfts'
 import { activeProfile, ProfileType } from '@core/profile'
 import { get } from 'svelte/store'
-import { addActivitiesToAccountActivitiesInAllAccountActivities } from '../stores'
-import { generateActivities, preprocessTransaction } from '../utils'
+import { processAndAddToActivities } from '../utils'
 
 export async function burnNft(nftId: string): Promise<void> {
     const account = get(selectedAccount)
@@ -17,9 +16,7 @@ export async function burnNft(nftId: string): Promise<void> {
         const burnNftTransaction = await account.burnNft(nftId)
 
         // Generate Activity
-        const processedTransaction = await preprocessTransaction(burnNftTransaction, account)
-        const activities = generateActivities(processedTransaction, account)
-        addActivitiesToAccountActivitiesInAllAccountActivities(account.index, activities)
+        await processAndAddToActivities(burnNftTransaction)
 
         // Update NFT
         updateNftInAllAccountNfts(account.index, nftId, { isSpendable: false })

@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Toast } from 'shared/components'
     import { mobile } from '@core/app'
     import { notifications } from '@auxiliary/notification'

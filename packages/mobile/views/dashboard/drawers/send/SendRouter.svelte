@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { prepareOutput, selectedAccount } from '@core/account'
     import { handleError } from '@core/error/handlers/handleError'
     import { ledgerPreparedOutput } from '@core/ledger'

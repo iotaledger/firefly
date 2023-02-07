@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'

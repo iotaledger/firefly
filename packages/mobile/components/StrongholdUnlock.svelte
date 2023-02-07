@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { localize } from '@core/i18n'
     import { unlockStronghold } from '@core/profile'
     import { Button, HTMLButtonType, PasswordInput, Text, TextType } from 'shared/components'

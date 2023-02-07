@@ -1,10 +1,11 @@
-<script lang="typescript">
+<script lang="ts">
     import { Button, Text, TextType, TextHint } from 'shared/components'
     import { ButtonVariant } from 'shared/components/enums'
-    import { handleError } from '@core/error/handlers/handleError'
-    import { ProposalStatus, selectedProposal } from '@contexts/governance'
+    import { handleError } from '@core/error/handlers'
+    import { deregisterParticipationEvent } from '@contexts/governance/actions'
+    import { ProposalStatus } from '@contexts/governance/enums'
+    import { selectedProposal } from '@contexts/governance/stores'
     import { localize } from '@core/i18n'
-    import { deregisterParticipationEvent } from '@core/profile-manager/api'
     import { governanceRouter } from '@core/router'
     import { closePopup } from '@auxiliary/popup'
     import { showAppNotification } from '@auxiliary/notification'
@@ -30,7 +31,8 @@
 
     // TODO: User can only remove a proposal when he is not voting for it
     $: isTextHintVisible =
-        $selectedProposal.status === ProposalStatus.Commencing || $selectedProposal.status === ProposalStatus.Holding
+        $selectedProposal.state?.status === ProposalStatus.Commencing ||
+        $selectedProposal.state?.status === ProposalStatus.Holding
 </script>
 
 <remove-proposal>

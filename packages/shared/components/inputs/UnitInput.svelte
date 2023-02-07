@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Dropdown2, DropdownItem } from 'shared/components'
     import { ITokenMetadata } from '@core/wallet'
     import { IotaUnit } from '@core/utils'

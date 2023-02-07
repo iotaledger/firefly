@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Drawer, StrongholdUnlock } from '../../../../../../components'
     import { SETTINGS_ROUTE_META } from '../../../../../../lib/contexts/settings'
     import { settingsRoute, SettingsRoute, settingsRouter } from '../../../../../../lib/routers'

@@ -1,11 +1,7 @@
-<script lang="typescript">
+<script lang="ts">
     import { TogglableButton, FilterModal, FilterItem, Modal } from 'shared/components'
-    import type { ActivityFilter, AssetFilter } from '@core/wallet/interfaces'
-    import { deepCopy } from '@core/utils'
+    import { deepCopy, Filter } from '@core/utils'
     import type { Writable } from 'svelte/store'
-    import { ProposalFilter } from '@contexts/governance'
-
-    type Filter = ActivityFilter | AssetFilter | ProposalFilter
 
     export let filterStore: Writable<Filter>
     let filter: Filter = deepCopy($filterStore)

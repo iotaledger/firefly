@@ -11,6 +11,6 @@ export async function pollNetworkStatus(): Promise<void> {
     pollInterval = setInterval(() => void getAndUpdateNodeInfo(), NETWORK_STATUS_POLL_INTERVAL)
 }
 
-export function clearPollNetworkInterval(): void {
+export function clearNetworkPoll(): void {
     clearInterval(pollInterval)
 }

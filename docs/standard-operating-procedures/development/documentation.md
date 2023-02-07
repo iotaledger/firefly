@@ -14,7 +14,7 @@ This SOP is applicable to contributors to the Firefly repository, mainly the cor
 
 ## Responsibilities
 
-All members of the Firefly team are responsible for mainintaing documentation, specifically in ensuring its accuracy and relevancy, as we all use this resource and benefit from it being of the highest possible quality.
+All members of the Firefly team are responsible for maintaining documentation, specifically in ensuring its accuracy and relevancy, as we all use this resource and benefit from it being of the highest possible quality.
 
 ## Processes
 
@@ -36,7 +36,7 @@ To make changes to the documentation within this handbook, begin the process by 
 When making changes to the code, be sure to check whether the comments if the functions, variables, etc. that you're dealing with are up-to-date and accurate.
 If writing new code that is exported and intended to be used elsewhere, make sure that it is appropriately commented (see the [coding conventions on comments](../../guides/coding-conventions/comments.md)).
 
-Every new folder and page page must have an `icon: <icon>` entry in the top of the its corresponding file (see [Octicons](https://primer.style/octicons/)).
+Every new folder and page must have an `icon: <icon>` entry in the top of its corresponding file (see [Octicons](https://primer.style/octicons/)).
 Lastly, every new folder must have some sort of text describing what its purpose is and what you'll find when looking in it.
 
 ## GitHub Wiki

@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Dropdown } from 'shared/components'
     import type { IDropdownChoice } from '@core/utils'
     import { visibleSelectedAccountAssets } from '@core/wallet'
@@ -22,7 +22,7 @@
         if (assetId === baseCoin.id) {
             value = baseCoin?.metadata.name
         } else {
-            value = nativeTokens.find((_nativeToken) => _nativeToken.id === assetId)?.metadata.name
+            value = nativeTokens.find((_nativeToken) => _nativeToken.id === assetId)?.metadata?.name
         }
     }
 
@@ -31,7 +31,7 @@
         if (item.value === baseCoin.metadata.name) {
             asset = baseCoin
         } else {
-            asset = nativeTokens.find((_nativeToken) => _nativeToken.metadata.name === item.value)
+            asset = nativeTokens.find((_nativeToken) => _nativeToken.metadata?.name === item.value)
         }
         filterUnit.selected = asset?.id || ''
     }

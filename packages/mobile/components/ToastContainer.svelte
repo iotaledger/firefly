@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Alert, Toast } from 'shared/components'
     import { notifications } from '@auxiliary/notification'
     import { fade } from 'svelte/transition'

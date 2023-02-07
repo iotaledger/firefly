@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { closePopup, openPopup } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
     import { isLayer1Destination } from '@core/layer-2'

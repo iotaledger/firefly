@@ -1,4 +1,6 @@
 import {
+    AccountActionsRouter,
+    accountActionsRouter,
     AccountSwitcherRouter,
     accountSwitcherRouter,
     ActivityRouter,
@@ -88,6 +90,7 @@ function initialiseOnboardingSubrouters(): void {
 
 function initialiseDashboardSubrouters(): void {
     accountSwitcherRouter.set(new AccountSwitcherRouter())
+    accountActionsRouter.set(new AccountActionsRouter())
     activityRouter.set(new ActivityRouter())
     sendRouter.set(new SendRouter())
     tokenRouter.set(new TokenRouter())

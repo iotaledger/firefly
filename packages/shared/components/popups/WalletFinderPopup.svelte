@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { onDestroy } from 'svelte'
     import { Button, KeyValueBox, Text, TextHint, FontWeight } from 'shared/components'
     import { closePopup, openPopup } from '@auxiliary/popup'
@@ -23,6 +23,7 @@
         refreshAccountAssetsForActiveProfile,
     } from '@core/wallet'
     import { loadNftsForActiveProfile } from '@core/nfts'
+    import { DEFAULT_SYNC_OPTIONS } from '@core/account/constants'
 
     export let searchForBalancesOnLoad = false
 
@@ -74,7 +75,7 @@
                     accountStartIndex: 0,
                     accountGapLimit: currentAccountGapLimit,
                     addressGapLimit: currentAddressGapLimit,
-                    syncOptions: { syncIncomingTransactions: true },
+                    syncOptions: DEFAULT_SYNC_OPTIONS,
                 }
                 await recoverAccounts(recoverAccountsPayload)
                 await loadAccounts()

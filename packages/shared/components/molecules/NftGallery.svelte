@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { INft } from '@core/nfts'
     import NftGalleryItem from './NftGalleryItem.svelte'
 

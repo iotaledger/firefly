@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Animation } from 'shared/components'
     import { appSettings, shouldBeDarkMode, mobile } from '@core/app'
     import { onMount } from 'svelte'

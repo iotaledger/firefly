@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { createEventDispatcher } from 'svelte'
     import { formatNumber, parseCurrency } from '@core/i18n'
 
@@ -36,7 +36,7 @@
 
     // Allows both bind:value and on:change for parent value retrieval
     function setValue(val: number): void {
-        value = formatNumber(val, undefined, decimals, 0)
+        value = formatNumber(val, undefined, decimals > 0 ? decimals : undefined, 0)
         dispatch('change', { value })
     }
 

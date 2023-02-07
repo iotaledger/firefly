@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { NETWORK, NetworkProtocol, NetworkType } from '@core/network'
     import { NetworkIcon, Text, Tooltip, FontWeight } from 'shared/components'
 

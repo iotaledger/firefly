@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { ButtonSize, ButtonVariant, HTMLButtonType, Icon, Spinner } from 'shared/components'
     import { onMount } from 'svelte'
     import { appSettings } from '@core/app'
@@ -77,7 +77,7 @@
             {#if icon}
                 <Icon
                     {icon}
-                    classes="text-{iconColor}"
+                    classes="text-{iconColor} mx-2"
                     height={iconHeight ?? ICON_DEFAULT_SIZE[size]}
                     width={iconWidth ?? ICON_DEFAULT_SIZE[size]}
                 />

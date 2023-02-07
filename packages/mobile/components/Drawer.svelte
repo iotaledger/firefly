@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
     import { Icon, Text, TextType } from 'shared/components'
     import { fade, fly } from 'svelte/transition'
@@ -80,7 +80,7 @@
                 </div>
                 <div class="flex justify-center col-span-2 content-center">
                     {#if title}
-                        <Text type={TextType.h4}>{title}</Text>
+                        <Text type={TextType.h4} classes="text-center">{title}</Text>
                     {/if}
                 </div>
             </div>

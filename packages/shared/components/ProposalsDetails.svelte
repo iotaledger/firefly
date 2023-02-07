@@ -1,10 +1,10 @@
-<script lang="typescript">
+<script lang="ts">
     import { ProposalsDetailsButton, Text, KeyValueBox } from 'shared/components'
     import { FontWeight } from './enums'
     import { localize } from '@core/i18n'
     import { activeProfileId } from '@core/profile'
     import { IProposalsDetails } from '@contexts/governance/interfaces'
-    import { participationOverview, proposalsState } from '@contexts/governance/stores'
+    import { participationOverview, proposalStates } from '@contexts/governance/stores'
     import {
         getNumberOfActiveProposals,
         getNumberOfVotingProposals,
@@ -19,7 +19,7 @@
         votedProposals: null,
     }
 
-    $: $proposalsState, $participationOverview, updateProposalsDetails()
+    $: $proposalStates, $participationOverview, updateProposalsDetails()
 
     function updateProposalsDetails(): void {
         if ($activeProfileId) {

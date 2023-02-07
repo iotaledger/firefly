@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import type { Answer } from '@iota/wallet'
     import { createEventDispatcher } from 'svelte'
     import { Text, FontWeight, TooltipIcon, PingingBadge, Icon } from 'shared/components'
@@ -15,7 +15,7 @@
     export let disabled = false
     export let hidden: boolean = null
     export let isWinner: boolean
-    export let proposalStatus: ProposalStatus
+    export let proposalStatus: string
     export let truncate = false
 
     let isSelected: boolean

@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Button, Text, TextHint, FontWeight, TextType, AssetAmountInput } from 'shared/components'
     import { localize } from '@core/i18n'
     import { closePopup, openPopup } from '@auxiliary/popup'
@@ -26,7 +26,7 @@
     <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
         {localize('actions.confirmTokenBurn.title', {
             values: {
-                assetName: asset.metadata.name,
+                assetName: asset?.metadata?.name,
             },
         })}
     </Text>

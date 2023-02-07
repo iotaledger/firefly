@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { mobile, PlatformOption, platform } from '@core/app'
     import { Drawer, Icon } from 'shared/components'
     import { clickOutside } from '@core/utils/ui'
@@ -50,8 +50,9 @@
     import VerifyLedgerTransactionPopup from './VerifyLedgerTransactionPopup.svelte'
     import Version from './Version.svelte'
     import Video from './Video.svelte'
-    import WalletFinderPopup from './WalletFinderPopup.svelte'
     import VoteForProposal from './VoteForProposalPopup.svelte'
+    import VotingPowerToZeroPopup from './VotingPowerToZeroPopup.svelte'
+    import WalletFinderPopup from './WalletFinderPopup.svelte'
 
     export let type: string
     export let props: any
@@ -136,6 +137,7 @@
         version: Version,
         video: Video,
         voteForProposal: VoteForProposal,
+        votingPowerToZero: VotingPowerToZeroPopup,
         walletFinder: WalletFinderPopup,
     }
 

@@ -1,11 +1,13 @@
-<script lang="typescript">
+<script lang="ts">
+    import { exportStronghold } from '@contexts/settings'
     import { localize } from '@core/i18n'
     import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'
     import { changePasswordAndUnlockStronghold } from '@core/profile-manager'
     import { PASSWORD_REASON_MAP } from '@core/stronghold'
-    import { Button, ButtonSize, PasswordInput, Text, TextType } from 'shared/components'
+    import { Button, ButtonSize, Checkbox, PasswordInput, Text, TextType } from 'shared/components'
     import zxcvbn from 'zxcvbn'
 
+    let exportStrongholdChecked: boolean
     let startOfPasswordChange: number
 
     let currentPassword = ''
@@ -26,6 +28,11 @@
 
             try {
                 await changePasswordAndUnlockStronghold(currentPassword, newPassword)
+                if (exportStrongholdChecked) {
+                    changeMessageLocale = 'general.exportingStronghold'
+                    void exportStronghold(newPassword, cancelStrongholdExport)
+                    return
+                }
                 resetPasswordsOnSuccess()
             } catch (err) {
                 console.error(err)
@@ -33,6 +40,21 @@
                 hideBusy(currentPasswordError, 0)
             }
         }
+    }
+
+    function cancelStrongholdExport(cancelled: boolean, err: string): void {
+        if (cancelled) {
+            hideBusy('', 0)
+            return
+        }
+
+        if (err) {
+            currentPasswordError = err
+            hideBusy('general.passwordFailed', 0)
+            return
+        }
+
+        resetPasswordsOnSuccess()
     }
 
     function isPasswordValid(): boolean {
@@ -74,6 +96,7 @@
         currentPassword = ''
         newPassword = ''
         confirmedPassword = ''
+        exportStrongholdChecked = false
         hideBusy('general.passwordSuccess', 2000)
     }
 
@@ -124,6 +147,12 @@
             placeholder={localize('general.confirmNewPassword')}
             disabled={busy}
             submitHandler={isPasswordValid}
+        />
+        <Checkbox
+            classes="mt-2"
+            label={localize('actions.exportNewStronghold')}
+            bind:checked={exportStrongholdChecked}
+            disabled={busy}
         />
     </div>
     <Button

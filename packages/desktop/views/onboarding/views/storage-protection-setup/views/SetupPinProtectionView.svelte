@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Animation, Button, OnboardingLayout, PinInput, Text, HTMLButtonType } from 'shared/components'
     import { onMount } from 'svelte'
     import {
