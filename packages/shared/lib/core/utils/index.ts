@@ -5,6 +5,7 @@ export * from './interfaces'
 export * from './stores'
 export * from './types'
 
+export * from './clearFilters'
 export * from './convert'
 export * from './date'
 export * from './dom'

@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { Auth } from '@iota/wallet'
-    import { Button, NodeInput, TextInput, Text, TextType } from 'shared/components'
+    import { Button, NodeInput, TextInput, Text, TextType, Checkbox } from 'shared/components'
     import { HTMLButtonType } from 'shared/components/enums'
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
@@ -8,6 +8,9 @@
     import { showAppNotification } from '@auxiliary/notification/actions'
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
     import { truncateString } from '@core/utils/string'
+    import { registeredProposalsForSelectedAccount } from '@contexts/governance'
+    import { activeAccounts } from '@core/profile'
+    import { selectedAccount } from '@core/account'
 
     export let eventId: string
     export let nodeUrl: string
@@ -15,10 +18,12 @@
     let eventIdError: string
     let nodeInput: NodeInput
     let nodeInputError: string
-
+    let inputtedEventId = eventId
     let isBusy = false
+    let toAllAccounts = false
 
     $: disabled = !eventId || !nodeUrl || isBusy
+    $: eventId = inputtedEventId?.trim()
 
     function onCancelClick(): void {
         closePopup()
@@ -27,7 +32,7 @@
     async function onSubmit(): Promise<void> {
         try {
             isBusy = true
-            await Promise.all([validateEventId(), nodeInput?.validate()])
+            await Promise.all([validateEventId(!toAllAccounts), nodeInput?.validate()])
             await registerParticipationWrapper()
             isBusy = false
         } catch (err) {
@@ -65,16 +70,18 @@
     }
 
     async function registerParticipationWrapper(auth?: Auth): Promise<void> {
-        await registerParticipationEvent(eventId, [{ url: nodeUrl, auth }])
+        const accounts = toAllAccounts ? $activeAccounts : [$selectedAccount]
+        const promises = accounts.map((account) => registerParticipationEvent(eventId, { url: nodeUrl, auth }, account))
+        await Promise.all(promises)
         showAppNotification({
             type: 'success',
-            message: localize('views.governance.proposals.successAdd'),
+            message: localize('views.governance.proposals.' + (toAllAccounts ? 'successAddAll' : 'successAdd')),
             alert: true,
         })
         closePopup()
     }
 
-    async function validateEventId(): Promise<void> {
+    async function validateEventId(checkIfAlreadyRegistered: boolean): Promise<void> {
         const startsWith0x = eventId?.substring(0, 2) === '0x'
         if (!startsWith0x) {
             eventIdError = localize('error.eventId.doesNotStartWith0x')
@@ -87,6 +94,10 @@
             eventIdError = localize('error.eventId.insufficientLength')
             return Promise.reject(eventIdError)
         }
+        if (checkIfAlreadyRegistered && $registeredProposalsForSelectedAccount[eventId]) {
+            eventIdError = localize('error.eventId.alreadyRegistered')
+            return Promise.reject(eventIdError)
+        }
     }
 </script>
 
@@ -95,12 +106,13 @@
     <Text fontSize="15">{localize('popups.addProposal.body')}</Text>
     <div class="flex flex-col w-full space-y-4 mt-4">
         <TextInput
-            bind:value={eventId}
+            bind:value={inputtedEventId}
             bind:error={eventIdError}
             placeholder={localize('views.governance.details.proposalInformation.eventId')}
             label={localize('views.governance.details.proposalInformation.eventId')}
         />
         <NodeInput bind:this={nodeInput} bind:nodeUrl bind:error={nodeInputError} />
+        <Checkbox label={localize('popups.addProposal.addToAllAccounts')} bind:checked={toAllAccounts} />
     </div>
     <div class="flex w-full space-x-4 mt-6">
         <Button outline classes="w-full" onClick={onCancelClick}>{localize('actions.cancel')}</Button>

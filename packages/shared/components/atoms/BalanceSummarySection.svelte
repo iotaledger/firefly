@@ -10,7 +10,7 @@
     export let amount: number
     export let asset: IAsset
 
-    $: formattedAmount = formatTokenAmountBestMatch(amount, asset.metadata)
+    $: formattedAmount = formatTokenAmountBestMatch(amount, asset?.metadata)
     $: convertedAmount = formatCurrency(getMarketAmountFromAssetValue(amount, asset))
 
     const PRIMARY_COLOR = 'gray-800'

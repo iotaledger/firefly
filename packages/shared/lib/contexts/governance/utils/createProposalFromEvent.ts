@@ -1,19 +1,18 @@
 import { get } from 'svelte/store'
-import type { ParticipationEventWithNodes } from '@iota/wallet/out/types'
+import type { Node, ParticipationEventWithNodes, VotingEventPayload } from '@iota/wallet/out/types'
 import { OFFICIAL_NODE_URLS } from '@core/network/constants'
-import { activeProfile, activeProfileId } from '@core/profile/stores'
-import { proposalsState } from '../stores'
-import { IProposal } from '../interfaces'
+import { activeProfile } from '@core/profile/stores'
+import { IProposalMetadata } from '../interfaces'
 import { ProposalStatus, ProposalType } from '../enums'
 import { getParticipationsForProposal } from './getParticipationsForProposal'
-import { getLatestProposalStatus } from './getLatestProposalStatus'
 
-export async function createProposalFromEvent(event: ParticipationEventWithNodes): Promise<IProposal> {
+export async function createProposalFromEvent(event: ParticipationEventWithNodes): Promise<IProposalMetadata> {
     const { data, id } = event
 
     const officialNodeUrls = OFFICIAL_NODE_URLS[get(activeProfile).networkProtocol][get(activeProfile).networkType]
-    const proposalNodeUrl = get(proposalsState)[get(activeProfileId)]?.[id].nodeUrl
-    const isOfficialNetwork = officialNodeUrls.includes(proposalNodeUrl)
+    // TODO: fix this when @iota/wallet-rc.20 is released
+    const nodeUrl = (event.nodes[0] as unknown as Node).url
+    const isOfficialNetwork = officialNodeUrls.includes(nodeUrl)
 
     const participated = (await getParticipationsForProposal(id)) !== undefined
 
@@ -24,16 +23,13 @@ export async function createProposalFromEvent(event: ParticipationEventWithNodes
         [ProposalStatus.Ended]: data.milestoneIndexEnd,
     }
 
-    const status = getLatestProposalStatus(milestones)
-
-    const proposal: IProposal = {
+    const proposal: IProposalMetadata = {
         id,
         title: event.data.name,
-        additionalInfo: event.data.additionalInfo,
-        status: status ?? ProposalStatus.Upcoming,
+        nodeUrl,
+        questions: (data.payload as VotingEventPayload)?.questions,
+        additionalInfo: data.additionalInfo,
         milestones,
-        // TODO: figure out a better way to get the node URLs
-        nodeUrls: get(activeProfile)?.clientOptions?.nodes,
         type: isOfficialNetwork ? ProposalType.Official : ProposalType.Custom,
         participated,
     }

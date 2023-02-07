@@ -38,9 +38,9 @@ function sortByName(proposal1: IProposal, proposal2: IProposal, asc: boolean): n
 }
 
 function sortByPhase(proposal1: IProposal, proposal2: IProposal, asc: boolean): number {
-    if (PROPOSAL_PHASE_ORDERING[proposal1.status] === PROPOSAL_PHASE_ORDERING[proposal2.status]) {
+    if (PROPOSAL_PHASE_ORDERING[proposal1.state?.status] === PROPOSAL_PHASE_ORDERING[proposal2.state?.status]) {
         return 0
-    } else if (PROPOSAL_PHASE_ORDERING[proposal1.status] > PROPOSAL_PHASE_ORDERING[proposal2.status]) {
+    } else if (PROPOSAL_PHASE_ORDERING[proposal1.state?.status] > PROPOSAL_PHASE_ORDERING[proposal2.state?.status]) {
         return asc ? 1 : -1
     } else {
         return asc ? -1 : 1
@@ -48,8 +48,8 @@ function sortByPhase(proposal1: IProposal, proposal2: IProposal, asc: boolean): 
 }
 
 function sortByMilestone(proposal1: IProposal, proposal2: IProposal, asc: boolean): number {
-    const proposal1Milestone = proposal1.milestones[getNextProposalPhase(proposal1.status)]
-    const proposal2Milestone = proposal2.milestones[getNextProposalPhase(proposal2.status)]
+    const proposal1Milestone = proposal1.milestones[getNextProposalPhase(proposal1.state?.status)]
+    const proposal2Milestone = proposal2.milestones[getNextProposalPhase(proposal2.state?.status)]
     if (proposal1Milestone === proposal2Milestone) {
         return 0
     } else if (proposal1Milestone > proposal2Milestone) {

@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { ProposalStatus } from '@contexts/governance/enums'
 
-    export let status: ProposalStatus
+    export let status: string
 
     const STATUS_COLORS: Record<ProposalStatus, string> = {
         [ProposalStatus.Upcoming]: 'purple-200',
