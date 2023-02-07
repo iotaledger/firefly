@@ -33,3 +33,7 @@ export async function updateProposalsState(): Promise<void> {
     }
     proposalStates.set(_proposalStates)
 }
+
+export function resetProposalStates(): void {
+    proposalStates.set({})
+}

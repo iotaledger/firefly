@@ -11,7 +11,6 @@ describe('Function: parseLayer2MetadataForTransfer.ts', () => {
             targetContract: 'Accounts',
             contractFunction: 'transferAllowanceTo',
             gasBudget: '500000',
-            forceOpenAccount: true,
             ethereumAddress: '0x807d707f59f1345e1063dbb64f2495d1491283a0',
             baseTokenAmount: '1000000',
             nativeTokens: [],
@@ -29,7 +28,6 @@ describe('Function: parseLayer2MetadataForTransfer.ts', () => {
             targetContract: 'Accounts',
             contractFunction: 'transferAllowanceTo',
             gasBudget: '18446744073709551615',
-            forceOpenAccount: true,
             ethereumAddress: '0x8cc8112290f8c350a60e1afdb8379c686e2a5bb3',
             baseTokenAmount: '0',
             nativeTokens: [

@@ -4,7 +4,7 @@
     import { localize } from '@core/i18n'
     import { activeProfileId } from '@core/profile'
     import { IProposalsDetails } from '@contexts/governance/interfaces'
-    import { participationOverview, proposalStates } from '@contexts/governance/stores'
+    import { participationOverviewForSelectedAccount, proposalStates } from '@contexts/governance/stores'
     import {
         getNumberOfActiveProposals,
         getNumberOfVotingProposals,
@@ -18,8 +18,7 @@
         votingProposals: null,
         votedProposals: null,
     }
-
-    $: $proposalStates, $participationOverview, updateProposalsDetails()
+    $: $proposalStates, $participationOverviewForSelectedAccount, updateProposalsDetails()
 
     function updateProposalsDetails(): void {
         if ($activeProfileId) {

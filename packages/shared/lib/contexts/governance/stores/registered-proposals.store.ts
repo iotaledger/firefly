@@ -41,3 +41,7 @@ export function removePersistedProposal(proposalId: string, accountId: number): 
         return proposals
     })
 }
+
+export function resetRegisteredProposals(): void {
+    registeredProposals.set({})
+}

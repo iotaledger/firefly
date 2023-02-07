@@ -55,7 +55,7 @@ export function handleTransactionInclusionEventInternal(
                     hideClose: true,
                 })
             }
-            updateParticipationOverview()
+            updateParticipationOverview(accountIndex)
         }
         syncVotingPower(accountIndex)
     }
