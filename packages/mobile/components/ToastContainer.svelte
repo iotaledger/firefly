@@ -25,7 +25,7 @@
                 <li transition:fade|local={{ duration: 100 }}>
                     <Swiper on:close={() => removeDisplayNotification(toast.id)}>
                         {#if toast.alert}
-                            <Alert type={toast.type} message={toast.message} />
+                            <Alert type={toast.type} message={toast.message} id={toast.id} showDismiss />
                         {:else}
                             <Toast
                                 type={toast.type}
