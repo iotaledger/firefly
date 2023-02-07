@@ -4,6 +4,5 @@ import { isVotingForSelectedProposal } from './isVotingForSelectedProposal'
 
 export function isAnyAccountVotingForSelectedProposal(): boolean {
     const accountIndexes = get(activeAccounts).map((account) => account.index)
-    const accountIsVoting = accountIndexes.map(isVotingForSelectedProposal)
-    return accountIsVoting.some((bool) => bool === true)
+    return accountIndexes.some(isVotingForSelectedProposal)
 }

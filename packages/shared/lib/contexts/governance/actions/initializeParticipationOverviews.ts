@@ -2,7 +2,7 @@ import { activeAccounts } from '@core/profile'
 import { ParticipationOverview } from '@iota/wallet'
 import { get } from 'svelte/store'
 import { DEFAULT_PARTICIPATION_OVERVIEW } from '../constants'
-import { allParticipationOverviews } from '../stores/participation-overviews.store'
+import { allParticipationOverviews } from '../stores'
 
 export async function initializeParticipationOverviews(): Promise<void> {
     const allOverviews: { [accountId: number]: ParticipationOverview } = {}
