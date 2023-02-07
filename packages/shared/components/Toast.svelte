@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Icon, Text } from 'shared/components'
+    import { Icon } from 'shared/components'
     import { localize } from '@core/i18n'
     import { removeDisplayNotification } from '@auxiliary/notification/stores'
     import Logo from './Logo.svelte'
@@ -92,10 +92,10 @@
         <button
             type="button"
             on:click={onDismissClick}
-            class="dismiss-min-wh cursor-pointer text-center rounded-lg font-bold text-11 text-{TOAST_STYLE[type]
-                .messageColor}"
+            class="dismiss-min-wh cursor-pointer text-center rounded-lg
+            font-bold text-11 text-{TOAST_STYLE[type].messageColor}"
         >
-            <Text type="p" color="white" darkColor="white">{localize('actions.dismiss')}</Text>
+            {localize('actions.dismiss')}
         </button>
     {/if}
 </div>
