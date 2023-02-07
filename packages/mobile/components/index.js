@@ -19,6 +19,7 @@ export { default as TokenWithMax } from './TokenWithMax.svelte'
 export { default as TopBar } from './TopBar.svelte'
 
 export * from './buttons'
+export * from './filters'
 export * from './inputs'
 export * from './labels'
 export * from './molecules'
