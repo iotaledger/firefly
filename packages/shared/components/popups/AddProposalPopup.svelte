@@ -18,11 +18,12 @@
     let eventIdError: string
     let nodeInput: NodeInput
     let nodeInputError: string
-
+    let inputtedEventId = eventId
     let isBusy = false
     let toAllAccounts = false
 
     $: disabled = !eventId || !nodeUrl || isBusy
+    $: eventId = inputtedEventId?.trim()
 
     function onCancelClick(): void {
         closePopup()
@@ -105,7 +106,7 @@
     <Text fontSize="15">{localize('popups.addProposal.body')}</Text>
     <div class="flex flex-col w-full space-y-4 mt-4">
         <TextInput
-            bind:value={eventId}
+            bind:value={inputtedEventId}
             bind:error={eventIdError}
             placeholder={localize('views.governance.details.proposalInformation.eventId')}
             label={localize('views.governance.details.proposalInformation.eventId')}
