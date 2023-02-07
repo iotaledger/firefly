@@ -1,11 +1,11 @@
 import { get } from 'svelte/store'
-import { participationOverview } from '../stores'
+import { participationOverviewForSelectedAccount } from '../stores'
 import { isVotingForProposal } from '@contexts/governance/utils/isVotingForProposal'
 
-export async function isSelectedAccountVoting(): Promise<boolean> {
-    const { participations } = get(participationOverview)
+export function isSelectedAccountVoting(): boolean {
+    const { participations } = get(participationOverviewForSelectedAccount)
     for (const proposalId in participations) {
-        const isVoting = await isVotingForProposal(proposalId)
+        const isVoting = isVotingForProposal(proposalId)
         if (isVoting) {
             return true
         }

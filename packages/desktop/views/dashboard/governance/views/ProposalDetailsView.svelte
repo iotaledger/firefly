@@ -23,9 +23,9 @@
     import { ProposalStatus } from '@contexts/governance/enums'
     import {
         pendingGovernanceTransactionIds,
-        participationOverview,
         selectedProposal,
         updateParticipationOverview,
+        participationOverviewForSelectedAccount,
     } from '@contexts/governance/stores'
     import {
         calculateTotalVotesForTrackedParticipations,
@@ -51,7 +51,7 @@
     $: $selectedAccountIndex, (selectedAnswerValues = [])
 
     $: proposalState = $selectedProposal?.state
-    $: selectedProposalOverview = $participationOverview?.participations?.[$selectedProposal?.id]
+    $: selectedProposalOverview = $participationOverviewForSelectedAccount?.participations?.[$selectedProposal?.id]
     $: trackedParticipations = Object.values(selectedProposalOverview ?? {})
     $: currentMilestone = $networkStatus.currentMilestone
 
