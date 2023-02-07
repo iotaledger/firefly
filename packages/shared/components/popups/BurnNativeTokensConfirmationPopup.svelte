@@ -63,6 +63,7 @@
             classes="w-full"
             variant={ButtonVariant.Warning}
             isBusy={$selectedAccount.isTransferring}
+            disabled={$selectedAccount.isTransferring}
             onClick={confirmClick}
         >
             {localize('actions.burnToken')}
