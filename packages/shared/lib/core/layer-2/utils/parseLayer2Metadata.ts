@@ -12,7 +12,6 @@ export function parseLayer2Metadata(metadata: string): Layer2Metadata {
         contractFunction: parsedData.contractFunction,
         gasBudget: parsedData.gasBudget,
         ethereumAddress: parsedData.ethereumAddress,
-        forceOpenAccount: parsedData.forceOpenAccount,
     }
 }
 
@@ -43,9 +42,5 @@ function validate(data: Layer2Metadata): void {
 
     if (data.ethereumAddress && typeof data.ethereumAddress !== 'string') {
         throw new Error('Invalid ethereumAddress')
-    }
-
-    if (data.forceOpenAccount && typeof data.forceOpenAccount !== 'boolean') {
-        throw new Error('Invalid forceOpenAccount')
     }
 }

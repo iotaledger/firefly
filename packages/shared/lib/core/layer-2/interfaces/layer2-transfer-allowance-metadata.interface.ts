@@ -2,5 +2,4 @@ import { ILayer2SmartContractCallData } from '@core/layer-2/interfaces/layer2-sm
 
 export interface ILayer2TransferAllowanceMetadata extends ILayer2SmartContractCallData {
     ethereumAddress: string
-    forceOpenAccount: boolean
 }

@@ -16,7 +16,6 @@
         TextHint,
     } from '@ui'
     import { openPopup } from '@auxiliary/popup/actions'
-    import { activeProfileId } from '@core/profile/stores'
     import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
     import { getVotingEvent } from '@contexts/governance/actions'
     import { ABSTAIN_VOTE_VALUE } from '@contexts/governance/constants'
@@ -24,7 +23,6 @@
     import {
         pendingGovernanceTransactionIds,
         participationOverview,
-        proposalsState,
         selectedProposal,
         updateParticipationOverview,
     } from '@contexts/governance/stores'
@@ -54,7 +52,7 @@
     $: $selectedAccountIndex, void updateParticipationOverview()
     $: $selectedAccountIndex, (selectedAnswerValues = [])
 
-    $: proposalState = $proposalsState[$activeProfileId]?.[$selectedProposal?.id]?.state
+    $: proposalState = $selectedProposal?.state
     $: selectedProposalOverview = $participationOverview?.participations?.[$selectedProposal?.id]
     $: trackedParticipations = Object.values(selectedProposalOverview ?? {})
     $: currentMilestone = $networkStatus.currentMilestone
@@ -133,7 +131,7 @@
 
     function setVotedAnswerValuesAndTotalVotes(): void {
         let lastActiveOverview: TrackedParticipationOverview
-        switch (proposalState.status) {
+        switch (proposalState?.status) {
             case ProposalStatus.Upcoming:
                 totalVotes = 0
                 break
@@ -213,7 +211,7 @@
     <div class="w-2/5 flex flex-col space-y-4">
         <Pane classes="p-6 flex flex-col h-fit">
             <header-container class="flex justify-between items-center mb-4">
-                <ProposalStatusPill status={$selectedProposal?.status} />
+                <ProposalStatusPill status={$selectedProposal.state?.status} />
                 <ProposalDetailsButton />
             </header-container>
             <div class="flex flex-1 flex-col justify-between">
@@ -258,16 +256,16 @@
                         isOpened={openedQuestionIndex === questionIndex}
                         selectedAnswerValue={selectedAnswerValues[questionIndex]}
                         votedAnswerValue={votedAnswerValues[questionIndex]}
-                        answerStatuses={proposalState?.questions[questionIndex]?.answers}
+                        answerStatuses={$selectedProposal.state?.questions[questionIndex]?.answers}
                         on:clickQuestion={handleQuestionClick}
                         on:clickAnswer={handleAnswerClick}
                     />
                 {/each}
             {/if}
         </proposal-questions>
-        {#if $selectedProposal?.status === ProposalStatus.Upcoming}
+        {#if $selectedProposal.state?.status === ProposalStatus.Upcoming}
             <TextHint info text={textHintString} />
-        {:else if [ProposalStatus.Commencing, ProposalStatus.Holding].includes($selectedProposal.status)}
+        {:else if [ProposalStatus.Commencing, ProposalStatus.Holding].includes($selectedProposal.state?.status)}
             <buttons-container class="flex w-full space-x-4 mt-6">
                 <Button
                     outline
