@@ -10,10 +10,6 @@
 - Please write a list of changes
 ```
 
-## Relevant Issues
-
-Please list any related issues (e.g. bug, task).
-
 ## Testing
 
 ### Platforms
@@ -36,7 +32,7 @@ Please list any related issues (e.g. bug, task).
 
 ## Checklist
 
-> Please tick all of the following boxes that are relevant to your changes.
+> Please tick the following boxes that are relevant to your changes.
 
 -   [ ] I have followed the contribution guidelines for this project
 -   [ ] I have performed a self-review of my own code
