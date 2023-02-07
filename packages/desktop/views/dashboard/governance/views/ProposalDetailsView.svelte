@@ -78,8 +78,7 @@
         !hasChangedAnswers(selectedAnswerValues) ||
         hasSelectedNoAnswers(selectedAnswerValues)
 
-    $: isTransferring =
-        $selectedAccount?.isTransferring || Boolean($pendingGovernanceTransactionIds?.[$selectedAccountIndex])
+    $: isTransferring = Boolean($pendingGovernanceTransactionIds?.[$selectedAccountIndex])
     $: proposalState, (textHintString = getTextHintString())
 
     function hasSelectedNoAnswers(_selectedAnswerValues: number[]): boolean {
