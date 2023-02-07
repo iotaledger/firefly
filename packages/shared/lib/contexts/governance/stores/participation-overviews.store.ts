@@ -24,3 +24,7 @@ export async function updateParticipationOverview(accountIndex: number = get(sel
         return state
     })
 }
+
+export function resetProposalOverviews(): void {
+    allParticipationOverviews.set({})
+}

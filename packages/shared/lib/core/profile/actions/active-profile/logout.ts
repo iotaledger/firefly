@@ -1,7 +1,12 @@
 import { closePopup } from '@auxiliary/popup'
 import { resetSelectedAccount } from '@core/account'
 import { clearGovernancePollAndData } from '@contexts/governance'
-import { resetPendingGovernanceTransactionIds } from '@contexts/governance/stores'
+import {
+    resetPendingGovernanceTransactionIds,
+    resetProposalOverviews,
+    resetProposalStates,
+    resetRegisteredProposals,
+} from '@contexts/governance/stores'
 import { isPollingLedgerDeviceStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
 import { clearMarketPricesPoll } from '@core/market/actions'
 import { clearNetworkPoll } from '@core/network'
@@ -51,7 +56,13 @@ function cleanupProfileState(clearActiveProfile: boolean): void {
     loggedIn.set(false)
     hasLoadedAccounts.set(false)
     resetSelectedAccount()
+
+    // Governance Stores
     resetPendingGovernanceTransactionIds()
+    resetRegisteredProposals()
+    resetProposalOverviews()
+    resetProposalStates()
+
     activeAccounts.set([])
     if (clearActiveProfile) {
         resetActiveProfile()
