@@ -6,9 +6,11 @@
     import { openPopup } from '@auxiliary/popup/actions'
     import { handleError } from '@core/error/handlers'
     import { isVotingForSelectedProposal } from '@contexts/governance/utils'
+    import { participationOverviewForSelectedAccount } from '@contexts/governance/stores'
     import { localize } from '@core/i18n'
     import { selectedAccount } from '@core/account/stores'
-    import { participationOverview } from '@contexts/governance'
+    // TODO: https://github.com/iotaledger/firefly/issues/5801
+    import features from '../../../desktop/features/features'
 
     export let modal: Modal = undefined
 
@@ -18,7 +20,7 @@
     let isBusy = true // starts in a busy state because data needs to be fetched before displaying selectable options
 
     $: isTransferring = $selectedAccount?.isTransferring
-    $: isTransferring, $participationOverview, void updateIsVoting() // vote/stop vote changes the isTransferring value. Relying on this requires less updates than relying on proposalsState
+    $: isTransferring, $participationOverviewForSelectedAccount, void updateIsVoting() // vote/stop vote changes the isTransferring value. Relying on this requires less updates than relying on proposalsState
     $: isBusy = isVotingForProposal === undefined
 
     function onRemoveProposalClick(): void {
@@ -62,7 +64,7 @@
                     title={localize('actions.removeProposal')}
                     onClick={onRemoveProposalClick}
                     variant="error"
-                    disabled={isVotingForProposal}
+                    disabled={!features.governance.removeProposals.enabled || isVotingForProposal}
                 />
             </div>
             {#if isTooltipVisible}
