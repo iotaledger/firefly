@@ -54,7 +54,7 @@ export function handleTransactionInclusionEventInternal(
                     hideClose: true,
                 })
             }
-            updateParticipationOverview()
+            updateParticipationOverview(accountIndex)
         }
 
         clearHasPendingGovernanceTransactionForAccount(accountIndex)

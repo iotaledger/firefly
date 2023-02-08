@@ -28,9 +28,9 @@
         modal.close()
     }
 
-    async function updateIsVoting(): Promise<void> {
+    function updateIsVoting(): void {
         try {
-            isVotingForProposal = await isVotingForSelectedProposal()
+            isVotingForProposal = isVotingForSelectedProposal()
         } catch (err) {
             handleError(err)
         }
