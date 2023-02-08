@@ -1,11 +1,10 @@
 import { selectedAccount, updateSelectedAccount } from '@core/account'
-import { handleLedgerError } from '@core/ledger'
-import { activeProfile, ProfileType } from '@core/profile'
 import { get } from 'svelte/store'
 import { DEFAULT_TRANSACTION_OPTIONS } from '../constants'
 import { resetNewTokenTransactionDetails } from '../stores'
 import { Output } from '../types'
 import { processAndAddToActivities } from '../utils'
+import { handleErrorActiveProfile } from '@core/error/handlers'
 
 export async function sendOutput(output: Output): Promise<void> {
     try {
@@ -20,10 +19,8 @@ export async function sendOutput(output: Output): Promise<void> {
         return
     } catch (err) {
         updateSelectedAccount({ isTransferring: false })
-        const _activeProfile = get(activeProfile)
-        if (_activeProfile.type === ProfileType.Ledger) {
-            handleLedgerError(err.error)
-        }
+        handleErrorActiveProfile(err)
+
         throw err
     }
 }

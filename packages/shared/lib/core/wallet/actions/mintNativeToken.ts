@@ -1,8 +1,6 @@
 import { showAppNotification } from '@auxiliary/notification'
 import { selectedAccount, updateSelectedAccount } from '@core/account'
 import { localize } from '@core/i18n'
-import { handleLedgerError } from '@core/ledger'
-import { activeProfile, ProfileType } from '@core/profile'
 import { Converter } from '@core/utils'
 import { NativeTokenOptions, TransactionOptions } from '@iota/wallet'
 import { get } from 'svelte/store'
@@ -12,6 +10,7 @@ import { IIrc30Metadata, IPersistedAsset } from '../interfaces'
 import { resetMintTokenDetails } from '../stores'
 import { addPersistedAsset } from '../stores/persisted-assets.store'
 import { processAndAddToActivities } from '../utils'
+import { handleErrorActiveProfile } from '@core/error/handlers'
 
 export async function mintNativeToken(
     maximumSupply: number,
@@ -51,10 +50,7 @@ export async function mintNativeToken(
     } catch (err) {
         updateSelectedAccount({ isTransferring: false })
 
-        const _activeProfile = get(activeProfile)
-        if (_activeProfile.type === ProfileType.Ledger) {
-            handleLedgerError(err?.error)
-        }
+        handleErrorActiveProfile(err)
 
         return Promise.reject(err)
     }

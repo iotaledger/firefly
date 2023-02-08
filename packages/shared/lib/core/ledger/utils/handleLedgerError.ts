@@ -9,7 +9,7 @@ import { LEDGER_ERROR_LOCALES } from '../constants'
 import { LedgerError } from '../enums'
 import { deriveLedgerError } from '../helpers'
 
-export function handleLedgerError(error: string, resetConfirmationPropsOnDenial: boolean = true): void {
+export function handleLedgerError(error: string, resetConfirmationPropsOnDenial = true): void {
     const ledgerError = deriveLedgerError(error)
     if (ledgerError in LEDGER_ERROR_LOCALES) {
         const popupType = get(popupState)?.type

@@ -5,10 +5,10 @@ import { activeProfile } from '@core/profile/stores'
 import { ProfileType } from '@core/profile/enums'
 import { IError } from '@core/error/interfaces'
 
-export function handleErrorActiveProfile(err: IError, governance = false): void {
+export function handleErrorActiveProfile(err: IError, resetConfirmationPropsOnDenial = true): void {
     const _activeProfile = get(activeProfile)
     if (_activeProfile.type === ProfileType.Ledger) {
-        handleLedgerError(err?.error, true, governance)
+        handleLedgerError(err?.error, resetConfirmationPropsOnDenial)
     } else {
         handleError(err)
     }
