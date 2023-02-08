@@ -43,7 +43,7 @@ export async function logout(clearActiveProfile = true, _lockStronghold = true):
         const manager = get(profileManager)
         await manager?.stopBackgroundSync()
         await unsubscribeFromWalletApiEvents()
-        destroyProfileManager()
+        await destroyProfileManager()
     }
 
     cleanupProfileState(clearActiveProfile)

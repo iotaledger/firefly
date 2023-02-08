@@ -36,9 +36,9 @@
         $networkSetupRouter.previous()
     }
 
-    onMount(() => {
+    onMount(async () => {
         if (!$onboardingProfile?.id) {
-            initialiseOnboardingProfile(
+            await initialiseOnboardingProfile(
                 $onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile(),
                 NetworkProtocol.Shimmer
             )
