@@ -8,6 +8,8 @@
     import { isAnyAccountVotingForSelectedProposal, isVotingForSelectedProposal } from '@contexts/governance/utils'
     import { localize } from '@core/i18n'
     import { selectedAccount } from '@core/account/stores'
+    // TODO: https://github.com/iotaledger/firefly/issues/5801
+    import features from '../../../desktop/features/features'
 
     export let modal: Modal = undefined
 
@@ -77,7 +79,7 @@
                     title={localize('actions.removeProposal')}
                     onClick={onRemoveProposalClick}
                     variant="error"
-                    disabled={isAnyAccountVotingForProposal}
+                    disabled={!features.governance.removeProposals.enabled || isAnyAccountVotingForProposal}
                 />
             </div>
             {#if isTooltipVisible}
