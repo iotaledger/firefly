@@ -5,12 +5,12 @@ import { Participation, StakingAirdrop } from './types'
 /**
  * The starting date of the next staking period.
  */
-export const ASSEMBLY_EVENT_START_DATE = new Date('February 10, 2023')
+export const ASSEMBLY_EVENT_START_DATE = new Date('February 11, 2023')
 
 /**
  * The staking event ID for Assembly.
  */
-export const ASSEMBLY_EVENT_ID = 'eac0ebbfd7fbd97621d95661f0720dfa8e800f5565fa0dd7b1c516f3e34b0a63'
+export const ASSEMBLY_EVENT_ID = 'e4a155210e0bc125b489e4d49cdb82368e19682b29e7da9a6d4f2ca2a8bd25b9'
 
 /**
  * The staking event ID for Shimmer.
