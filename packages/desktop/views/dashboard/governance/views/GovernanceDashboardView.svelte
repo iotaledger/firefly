@@ -1,8 +1,19 @@
 <script lang="ts">
-    import { Pane, Proposals, ProposalsDetails, VotingPower, Illustration, Text, FontWeight, Button } from '@ui'
+    import {
+        Pane,
+        Proposals,
+        ProposalsDetails,
+        VotingPower,
+        Illustration,
+        Text,
+        FontWeight,
+        Button,
+        Spinner,
+    } from '@ui'
     import { localize } from '@core/i18n'
     import { openPopup } from '@auxiliary/popup'
-    import { registeredProposalsForSelectedAccount } from '@contexts/governance'
+    import { GovernanceLoadingState, registeredProposalsForSelectedAccount } from '@contexts/governance'
+    import { governanceLoadingState } from '@contexts/governance/stores/governance-loading-state.store'
 
     function handleAddProposal(): void {
         openPopup({
@@ -22,7 +33,9 @@
     </div>
     <span class="block w-0.5 h-full bg-gray-200 dark:bg-gray-800" />
     <div class="w-2/3">
-        {#if Object.keys($registeredProposalsForSelectedAccount).length}
+        {#if $governanceLoadingState === GovernanceLoadingState.NothingLoaded}
+            <Spinner busy classes="w-full h-full items-center justify-center opacity-25 h-20" width={80} height={80} />
+        {:else if Object.keys($registeredProposalsForSelectedAccount).length}
             <Proposals />
         {:else}
             <div class="w-full h-full flex flex-col items-center justify-center">

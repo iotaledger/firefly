@@ -6,10 +6,11 @@
     import { GovernanceRoute, governanceRouter } from '@core/router'
     import { IProposal } from '@contexts/governance/interfaces'
     import { participationOverviewForSelectedAccount, selectedProposal } from '@contexts/governance/stores'
-    import { ProposalStatus } from '@contexts/governance/enums'
+    import { GovernanceLoadingState, ProposalStatus } from '@contexts/governance/enums'
     import { isVotingForProposal } from '@contexts/governance/utils'
 
     import { FontWeight, Position } from '../enums'
+    import { governanceLoadingState } from '@contexts/governance/stores/governance-loading-state.store'
 
     export let proposal: IProposal
 
@@ -46,16 +47,18 @@
         {/if}
         <Text fontWeight={FontWeight.semibold} fontSize="14" classes="truncate" lineHeight="5">{proposal.title}</Text>
     </div>
-    <div class="flex justify-between items-center">
-        <ProposalStatusInfo status={proposal?.state?.status} milestones={proposal.milestones} />
-        {#if hasVoted}
-            <TooltipIcon
-                text={localize('views.governance.proposals.voted')}
-                icon={Icon.Voted}
-                size="small"
-                position={Position.Left}
-                iconClasses="text-gray-500"
-            />
+    <div class="flex justify-between items-center" style="height: 23px;">
+        {#if $governanceLoadingState === GovernanceLoadingState.Completed}
+            <ProposalStatusInfo status={proposal?.state?.status} milestones={proposal.milestones} />
+            {#if hasVoted}
+                <TooltipIcon
+                    text={localize('views.governance.proposals.voted')}
+                    icon={Icon.Voted}
+                    size="small"
+                    position={Position.Left}
+                    iconClasses="text-gray-500"
+                />
+            {/if}
         {/if}
     </div>
 </proposal-card>
