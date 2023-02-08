@@ -4,10 +4,10 @@ android {
     compileSdk 30
     defaultConfig {
         applicationId 'org.iota.firefly.mobile.alpha'
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdk 30
-        versionCode 33
-        versionName '1.0.3'
+        minSdk 26
+        targetSdk 31
+        versionCode 34
+        versionName '1.0.4'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
