@@ -14,10 +14,11 @@
 	@function {() => Promise<void>} close - Closes drawer.
 -->
 <script lang="ts">
-    import { appSettings } from '@core/app'
     import { createEventDispatcher, onMount } from 'svelte'
     import { quintOut } from 'svelte/easing'
     import { tweened } from 'svelte/motion'
+    import { appSettings } from '@core/app'
+    import { slidable } from '@core/utils'
 
     $: darkModeEnabled = $appSettings.darkMode
 
@@ -48,63 +49,6 @@
             await open()
         }
     })
-
-    function slidable(node: HTMLElement, use: boolean = true): { destroy(): void } {
-        if (!use) {
-            return
-        }
-        let x: number
-        let y: number
-        let init: number
-
-        function handleTouchstart(event: TouchEvent): void {
-            event.preventDefault()
-
-            if (event.targetTouches.length === 1) {
-                init = window.performance.now()
-                x = event.touches[0].pageX
-                y = event.touches[0].pageY
-            }
-
-            node.addEventListener('touchmove', handleTouchmove)
-            node.addEventListener('touchend', handleTouchend)
-        }
-
-        function handleTouchmove(event: TouchEvent): void {
-            if (event.targetTouches.length === 1) {
-                const sx = event.touches[0].pageX - x
-                const sy = event.touches[0].pageY - y
-                x = event.touches[0].pageX
-                y = event.touches[0].pageY
-
-                node.dispatchEvent(
-                    new CustomEvent('slideMove', {
-                        detail: { x, y, sx, sy },
-                    })
-                )
-            }
-        }
-
-        function handleTouchend(): void {
-            node.dispatchEvent(new CustomEvent('slideEnd'))
-
-            const elapsed = window.performance.now()
-            if (init >= elapsed - 300) {
-                node.dispatchEvent(new CustomEvent('tap'))
-            }
-
-            node.removeEventListener('touchmove', handleTouchmove)
-            node.removeEventListener('touchend', handleTouchend)
-        }
-
-        node.addEventListener('touchstart', handleTouchstart)
-
-        return {
-            destroy(): void {
-                node.removeEventListener('touchstart', handleTouchstart)
-            },
-        }
-    }
 
     async function handleSlideMove(event: CustomEvent): Promise<void> {
         await coords.update(

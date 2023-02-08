@@ -62,7 +62,7 @@
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Richte {protocol, select, IOTA {ein} Shimmer {ein}} {protocol} Profil ein",
+                    "title": "Set up {protocol, select, IOTA {an} Shimmer {a} other {an}} {protocol} profile",
                     "body": "Wähle die geeignete Methode um dein {protocol} Profil einzurichten."
                 },
                 "setupNew": {
@@ -586,6 +586,7 @@
                 "title": "Abstimmungen",
                 "voted": "Abgestimmt",
                 "successAdd": "Vorschlag erfolgreich hinzugefügt",
+                "successAddAll": "Abstimmung erfolgreich zu allen Konten hinzugefügt",
                 "successRemove": "Abstimmung erfolgreich entfernt",
                 "emptyTitle": "Keine Vorschläge"
             },
@@ -1023,18 +1024,19 @@
         },
         "addProposal": {
             "title": "Vorschlag hinzufügen",
-            "body": "Bitte gib die unten aufgeführten Informationen an, um einen Vorschlag hinzuzufügen."
+            "body": "Bitte gib die unten aufgeführten Informationen an, um einen Vorschlag hinzuzufügen.",
+            "addToAllAccounts": "Abstimmung zu allen Konten hinzufügen"
         },
         "voteForProposal": {
             "title": "Für Abstimmung stimmen",
             "body": "Du bist dabei für {proposal} Abstimmung zu stimmen.",
             "key": "Dein Stimmrecht",
-            "hasAbstained": "You are abstaining from answering {numberOfQuestions, plural, one {# question} other {# questions}}.",
+            "hasAbstained": "Du enthältst dich bei der Beantwortung von {numberOfQuestions, plural, one {# Frage} other {# Fragen}}.",
             "noVotingPower": "Du hast kein Stimmrecht. Bitte erhöhe dein Stimmrecht über das Governance-Dashboard."
         },
         "revote": {
             "title": "Über Vorschläge erneut abstimmen",
-            "body": "Wenn Sie Ihre Stimmrechte ändern, werden Ihre Stimmen für alle Abstimmungen vorübergehend nicht mehr gezählt. Klicken Sie einfach auf \"Wieder abstimmen\", um die Abstimmung fortzusetzen.",
+            "body": "Wenn du deine Stimmrechte änderst, werden deine Stimmen für alle Abstimmungen vorübergehend nicht mehr gezählt. Klicke einfach auf \"Wieder abstimmen\", um die Abstimmung fortzusetzen.",
             "hint": "Firefly erinnert sich an alle Vorschläge und Antwort-Optionen, für die Sie zuvor gestimmt haben."
         },
         "removeProposal": {
@@ -1104,7 +1106,7 @@
             "shimmer": "Ein bestehendes Shimmer Profil wiederherstellen"
         },
         "createWallet": "Ein neues {protocol} Profil erstellen",
-        "createWalletDescription": "Erstelle ein neues {protocol, select, iota {Chrysalis} shimmer {Shimmer}} Profil",
+        "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
         "claimShimmer": "Shimmer Staking-Rewards beanspruchen",
         "claimShimmerDescription": "Importiere dein IOTA-Profil und beanspruche deine Shimmer Staking-Rewards",
         "createAlias": "Alias erstellen",
@@ -1265,6 +1267,8 @@
         "voting": "Abstimmung",
         "changedVote": "Stimme geändert",
         "changingVote": "Stimme ändern",
+        "revoted": "Erneut abgestimmt",
+        "revoting": "Erneut abstimmen",
         "unvoted": "Nicht abgestimmt",
         "unvoting": "Stimme zurücknehmen",
         "sentNft": "NFT gesendet",
@@ -1558,7 +1562,7 @@
             "after": "liegt nach dem",
             "afterOrEquals": "liegt am oder nach dem",
             "before": "liegt bevor dem",
-            "Days": "Tage",
+            "Days": "Tagen",
             "Months": "Monate",
             "Years": "Jahre"
         },
@@ -1574,7 +1578,9 @@
             "basic": "Basic",
             "nft": "NFT",
             "alias": "Alias",
-            "foundry": "Foundry-Fabrik"
+            "foundry": "Foundry-Fabrik",
+            "governance": "Governance",
+            "consolidation": "Consolidation"
         },
         "direction": {
             "label": "Richtung",
@@ -1877,7 +1883,8 @@
         "noOutputsToConsolidate": "Nicht genügend Outputs, zum zusammenführen",
         "eventId": {
             "doesNotStartWith0x": "Event-ID sollte mit '0x' beginnen",
-            "insufficientLength": "Event-ID sollte 66 Zeichen lang sein"
+            "insufficientLength": "Event-ID sollte 66 Zeichen lang sein",
+            "alreadyRegistered": "Event-ID bereits registriert"
         },
         "nft": {
             "unsupportedUrl": {
@@ -2126,6 +2133,11 @@
                 "Pending": "ändere Abstimmen für",
                 "Confirmed": "Stimme geändert für",
                 "Conflicting": "konnte Abstimmen nicht ändern für"
+            },
+            "revote": {
+                "Pending": "erneutes Abstimmen",
+                "Confirmed": "wieder abstimmen",
+                "Conflicting": "erneutes Abstimmen fehlgeschlagen"
             }
         },
         "alias": {

@@ -2,7 +2,7 @@ import { closePopup } from '@auxiliary/popup'
 import { resetSelectedAccount } from '@core/account'
 import { clearGovernancePollAndData } from '@contexts/governance'
 import {
-    resetPendingGovernanceTransactionIds,
+    resetHasPendingGovernanceTransaction,
     resetProposalOverviews,
     resetProposalStates,
     resetRegisteredProposals,
@@ -59,7 +59,7 @@ function cleanupProfileState(clearActiveProfile: boolean): void {
     resetSelectedAccount()
 
     // Governance Stores
-    resetPendingGovernanceTransactionIds()
+    resetHasPendingGovernanceTransaction()
     resetRegisteredProposals()
     resetProposalOverviews()
     resetProposalStates()
