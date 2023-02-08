@@ -62,7 +62,7 @@
             },
             "profileSetup": {
                 "setup": {
-                    "title": "設定 {protocol, select, IOTA {an} Shimmer {a}} {protocol} 設定檔",
+                    "title": "建立{protocol, select, IOTA {一個} Shimmer {一個} other {一個}} {protocol} 設定檔。",
                     "body": "選擇適合的方式設定您的{protocol} 檔案。"
                 },
                 "setupNew": {
@@ -564,7 +564,7 @@
                 "menu": {
                     "download": "下載",
                     "setAvatar": "Set NFT as profile avatar",
-                    "view": "View media in browser",
+                    "view": "在瀏覽器中檢視媒體",
                     "burn": "燒毀 NFT"
                 }
             }
@@ -572,7 +572,7 @@
         "governance": {
             "votingPower": {
                 "title": "表決權",
-                "maximal": "Maximal voting power: {value}",
+                "maximal": "最大表決權：{value}",
                 "manage": "管理表決權"
             },
             "proposalsDetails": {
@@ -586,32 +586,33 @@
                 "title": "提案",
                 "voted": "已投票",
                 "successAdd": "已成功新增提案",
+                "successAddAll": "Proposal successfully added to all accounts",
                 "successRemove": "已成功移除提案",
                 "emptyTitle": "暫無提案"
             },
             "statusTimeline": {
                 "upcoming": "公告",
-                "commencing": "Voting open",
-                "holding": "Counting starts",
-                "ended": "Counting stops"
+                "commencing": "開放投票",
+                "holding": "計票開始",
+                "ended": "計票停止"
             },
             "details": {
                 "yourVote": {
-                    "title": "Your vote",
-                    "total": "Total votes counted",
-                    "power": "Voting power"
+                    "title": "您的選票",
+                    "total": "已登記總票數",
+                    "power": "表決權"
                 },
                 "proposalInformation": {
                     "title": "提案資訊",
-                    "votingOpens": "Voting opens on",
-                    "countingStarts": "Counting starts on",
-                    "countingEnds": "Counting ends on",
-                    "countingEnded": "Counting ended on",
-                    "eventId": "Event ID",
-                    "nodeUrl": "Node URL"
+                    "votingOpens": "投票開放於",
+                    "countingStarts": "計票開始於",
+                    "countingEnds": "計票結束於",
+                    "countingEnded": "計票已結束於",
+                    "eventId": "事件 ID",
+                    "nodeUrl": "節點 URL"
                 },
-                "fetching": "Fetching proposal data",
-                "hintVote": "You can not vote on a proposal that is in the announcement phase, voting will open in {time}."
+                "fetching": "正在取得提案資料",
+                "hintVote": "您不能投票給尚在公告期的提案，投票將於 {time} 開始。"
             }
         }
     },
@@ -648,18 +649,18 @@
                 "subtitle": "Temporarily locked in unclaimed transactions"
             },
             "votingPowerOutput": {
-                "title": "Governance",
+                "title": "治理",
                 "subtitle": "Reserved for voting power"
             },
             "minimizeStorageDepositButton": "把存儲空間費用最小化"
         },
         "minimizeStorageDeposit": {
-            "title": "Minimize storage deposit",
+            "title": "把存儲空間費用最小化",
             "description": "Consolidate outputs to minimize your required storage deposit and increase your available balance.",
-            "confirmButton": "Consolidate"
+            "confirmButton": "合併"
         },
         "alias": {
-            "title": "Confirm alias creation"
+            "title": "確認建立別名"
         },
         "password": {
             "title": "必須輸入密碼",
@@ -699,10 +700,10 @@
             "errorBody1": "您無法刪除此錢包，您必須至少擁有一個錢包。"
         },
         "externalUrl": {
-            "title": "Open URL in Browser",
-            "body": "Are you sure you want to open \"{url}\" in the browser?",
+            "title": "以瀏覽器開啟網址",
+            "body": "您確定要在瀏覽器中開啟 \"{url}\" 嗎？",
             "hint": "This URL is unknown to Firefly. Please double check the URL before opening it.",
-            "action": "Open URL",
+            "action": "開啟網址",
             "invalidProtocol": "Cannot open URL with invalid protocol"
         },
         "hideAccount": {
@@ -984,28 +985,28 @@
             "confirmationTitle": "Mint native tokens",
             "property": {
                 "totalSupply": "總供應量",
-                "maximumSupply": "Maximum supply",
+                "maximumSupply": "最大供應量",
                 "mintedTokens": "Minted tokens",
                 "meltedTokens": "Melted tokens",
-                "circulatingSupply": "Circulating supply",
-                "aliasAddress": "Alias controller address",
-                "standard": "Standard",
-                "tokenName": "Name",
-                "unit": "Unit",
-                "subunit": "Subunit",
-                "storageDeposit": "Storage Deposit",
-                "description": "Description",
-                "symbol": "Symbol",
-                "decimals": "Decimals",
-                "url": "URL",
-                "logoUrl": "Logo URL",
-                "logo": "Logo",
-                "alias": "Alias",
-                "assetId": "Asset Id"
+                "circulatingSupply": "流通供應量",
+                "aliasAddress": "別名控制者地址",
+                "standard": "標準",
+                "tokenName": "名稱",
+                "unit": "單位",
+                "subunit": "次單位",
+                "storageDeposit": "存儲空間費用",
+                "description": "說明",
+                "symbol": "符號",
+                "decimals": "小數點",
+                "url": "網址",
+                "logoUrl": "標誌 URL",
+                "logo": "標誌",
+                "alias": "別名",
+                "assetId": "資產 ID"
             }
         },
         "noAlias": {
-            "title": "Unable to mint",
+            "title": "無法鑄造",
             "description": "You must own an alias output to mint native tokens. To continue, please create an alias first"
         },
         "mintNftForm": {
@@ -1023,11 +1024,12 @@
         },
         "addProposal": {
             "title": "新增提案",
-            "body": "Please provide the information listed below to add a proposal."
+            "body": "Please provide the information listed below to add a proposal.",
+            "addToAllAccounts": "Add the proposal to all accounts"
         },
         "voteForProposal": {
             "title": "給提案投票",
-            "body": "You're about to vote for {proposal} proposal.",
+            "body": "您即將投票給 {proposal} 提案。",
             "key": "Your voting power",
             "hasAbstained": "You are abstaining from answering {numberOfQuestions, plural, one {# question} other {# questions}}.",
             "noVotingPower": "You do not have any voting power. Please increase your voting power from the Governance dashboard."
@@ -1044,7 +1046,7 @@
         },
         "stopVoting": {
             "title": "Stop voting",
-            "body": "You're about to stop voting for the {proposalName} proposal.",
+            "body": "您即將停止投票給 {proposalName} 提案。",
             "hint": "Please note that stopping voting during the counting period won't impact any votes that have already been counted."
         },
         "nodeAuthRequired": {
@@ -1084,11 +1086,11 @@
             "node": "請注意，拒絕交易僅只是將它從您的活動提要中隱藏"
         },
         "confirmTokenBurn": {
-            "title": "Burn {assetName}",
+            "title": "燒毀 {assetName}",
             "hint": "Please note that burning a token may free storage deposit attached to it and is not reversible"
         },
         "confirmNftBurn": {
-            "title": "Burn {nftName}",
+            "title": "燒毀 {nftName}",
             "description": "Are you sure you want to burn this NFT?",
             "hint": "Please note that burning an NFT frees the storage deposit attached to it and is not reversible."
         },
@@ -1104,7 +1106,7 @@
             "shimmer": "復原既有的Shimmer檔"
         },
         "createWallet": "建立一個新的 {protocol} 檔案",
-        "createWalletDescription": "創建一個在 {protocol, select, iota {Chrysalis} shimmer {Shimmer}} 上運行的新配置文件",
+        "createWalletDescription": "創建一個在 {protocol, select,iota {Chrysalis} shimmer {Shimmer} other {Unknown}} 上運行的新設定檔",
         "claimShimmer": "領取Shimmer質押獎勵",
         "claimShimmerDescription": "導入 IOTA 資料並索取質押獎勵",
         "createAlias": "Create alias",
@@ -1265,6 +1267,8 @@
         "voting": "投票中",
         "changedVote": "Changed vote",
         "changingVote": "Changing vote",
+        "revoted": "Revoted",
+        "revoting": "Revoting",
         "unvoted": "已取消投票",
         "unvoting": "取消投票中",
         "sentNft": "NFT sent",
@@ -1330,7 +1334,7 @@
         "systemTheme": "系統",
         "balance": "餘額",
         "balanceWithValue": "餘額：{balance}",
-        "balanceWithNetwork": "{network} Balance",
+        "balanceWithNetwork": "{network} 餘額",
         "all": "全部",
         "incoming": "傳入",
         "outgoing": "發送",
@@ -1495,7 +1499,7 @@
         "description": "Description",
         "attributes": "Attributes",
         "details": "Details",
-        "availableAmount": "{amount} available",
+        "availableAmount": "{amount} 可用",
         "properties": "Properties",
         "statistics": "Statistics",
         "username": "Username",
@@ -1574,7 +1578,9 @@
             "basic": "Basic",
             "nft": "NFT",
             "alias": "Alias",
-            "foundry": "Foundry"
+            "foundry": "Foundry",
+            "governance": "Governance",
+            "consolidation": "Consolidation"
         },
         "direction": {
             "label": "Direction",
@@ -1641,10 +1647,10 @@
             "receivedWhileLoggedOut": "請登入以發起深度連結",
             "notEnabled": "深度連結未啟用",
             "invalidFormat": "您所追蹤的 深度連結 無效",
-            "invalidAmount": "The amount in deep link is not an integer number {amount}",
+            "invalidAmount": "深度連結中的填寫的數量不是一個整數: {amount}",
             "invalidSurplus": "深度連結中的填寫的數量不是一個數字: {surplus}",
             "governance": {
-                "unrecognizedOperation": "Unrecognized Governance operation: {operation}"
+                "unrecognizedOperation": "無法辨識的治理操作: {operation}"
             },
             "wallet": {
                 "send": {
@@ -1877,7 +1883,8 @@
         "noOutputsToConsolidate": "Not enough outputs to consolidate",
         "eventId": {
             "doesNotStartWith0x": "Event ID should start with '0x'",
-            "insufficientLength": "Event ID should be 66 characters long"
+            "insufficientLength": "Event ID should be 66 characters long",
+            "alreadyRegistered": "Event ID already registered"
         },
         "nft": {
             "unsupportedUrl": {
@@ -1912,7 +1919,7 @@
         "governance": {
             "unableToAddProposal": {
                 "short": "無法新增提案",
-                "long": "An error occurred while trying to add proposal {proposalId}"
+                "long": "新增 {proposalId} 提案時發生錯誤"
             }
         }
     },
@@ -2126,6 +2133,11 @@
                 "Pending": "changing vote for",
                 "Confirmed": "changed vote for",
                 "Conflicting": "failed to change vote for"
+            },
+            "revote": {
+                "Pending": "revoting",
+                "Confirmed": "revote",
+                "Conflicting": "failed to revote"
             }
         },
         "alias": {
