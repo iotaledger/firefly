@@ -18,7 +18,7 @@
     let isBusy = true // starts in a busy state because data needs to be fetched before displaying selectable options
 
     $: isTransferring = $selectedAccount?.isTransferring
-    $: isTransferring, $participationOverview, void updateIsVoting() // vote/stop vote changes the isTransferring value, this means that is less updates than relying on proposalsState
+    $: isTransferring, $participationOverview, void updateIsVoting() // vote/stop vote changes the isTransferring value. Relying on this requires less updates than relying on proposalsState
     $: isBusy = isVotingForProposal === undefined
 
     function onRemoveProposalClick(): void {

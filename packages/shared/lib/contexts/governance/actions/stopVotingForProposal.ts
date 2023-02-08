@@ -6,12 +6,12 @@ import { showAppNotification } from '@auxiliary/notification/actions'
 import { localize } from '@core/i18n'
 import { handleError } from '@core/error/handlers'
 import { processAndAddToActivities } from '@core/wallet/utils'
-import { clearPendingGovernanceTransactionIdForAccount, setPendingGovernanceTransactionIdForAccount } from '../stores'
+import { clearHasPendingGovernanceTransactionForAccount, setHasPendingGovernanceTransactionForAccount } from '../stores'
 
 export async function stopVotingForProposal(eventId: string): Promise<Transaction> {
     const account = get(selectedAccount)
     try {
-        setPendingGovernanceTransactionIdForAccount(account.index)
+        setHasPendingGovernanceTransactionForAccount(account.index)
         const transaction = await account?.stopParticipating(eventId)
 
         await processAndAddToActivities(transaction)
@@ -24,6 +24,6 @@ export async function stopVotingForProposal(eventId: string): Promise<Transactio
         return transaction
     } catch (err) {
         handleError(err)
-        clearPendingGovernanceTransactionIdForAccount(account.index)
+        clearHasPendingGovernanceTransactionForAccount(account.index)
     }
 }

@@ -3,12 +3,12 @@
     import { ButtonVariant } from 'shared/components/enums'
     import { closePopup } from '@auxiliary/popup/actions'
     import { stopVotingForProposal } from '@contexts/governance/actions'
-    import { isGovernanceTransferring, selectedProposal } from '@contexts/governance/stores'
+    import { hasPendingGovernanceTransaction, selectedProposal } from '@contexts/governance/stores'
     import { localize } from '@core/i18n'
     import { selectedAccount } from '@core/account/stores'
     import { checkActiveProfileAuth } from '@core/profile/actions'
 
-    $: isTransferring = $isGovernanceTransferring?.[$selectedAccount.index]
+    $: isTransferring = $hasPendingGovernanceTransaction?.[$selectedAccount.index]
 
     function onCancelClick(): void {
         closePopup()

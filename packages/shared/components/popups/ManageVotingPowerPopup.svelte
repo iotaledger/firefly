@@ -9,7 +9,7 @@
     import { convertToRawAmount, visibleSelectedAccountAssets } from '@core/wallet'
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
     import { popupState } from '@auxiliary/popup/stores'
-    import { hasToRevote, isGovernanceTransferring } from '@contexts/governance/stores'
+    import { hasToRevote, hasPendingGovernanceTransaction } from '@contexts/governance/stores'
     import { onMount } from 'svelte'
     import { modifyPopupState } from '@auxiliary/popup/helpers'
     import { isSelectedAccountVoting } from '@contexts/governance/utils'
@@ -24,7 +24,7 @@
 
     $: asset = $visibleSelectedAccountAssets?.baseCoin
     $: votingPower = parseInt($selectedAccount?.votingPower, 10)
-    $: isTransferring = $isGovernanceTransferring?.[$selectedAccount.index]
+    $: isTransferring = $hasPendingGovernanceTransaction?.[$selectedAccount.index]
     $: disabled = $hasToRevote || isTransferring
 
     $: amount, disabled, setConfirmDisabled()

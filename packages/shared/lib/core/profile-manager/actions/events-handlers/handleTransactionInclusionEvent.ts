@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 import {
-    clearPendingGovernanceTransactionIdForAccount,
+    clearHasPendingGovernanceTransactionForAccount,
     hasToRevote,
     updateParticipationOverview,
 } from '@contexts/governance/stores'
@@ -57,7 +57,7 @@ export function handleTransactionInclusionEventInternal(
             updateParticipationOverview()
         }
 
-        clearPendingGovernanceTransactionIdForAccount(accountIndex)
+        clearHasPendingGovernanceTransactionForAccount(accountIndex)
         syncVotingPower(accountIndex)
     }
 

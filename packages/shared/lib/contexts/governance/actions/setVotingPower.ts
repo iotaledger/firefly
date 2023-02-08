@@ -6,9 +6,9 @@ import { selectedAccount } from '@core/account/stores'
 import { processAndAddToActivities } from '@core/wallet/utils'
 
 import {
-    clearPendingGovernanceTransactionIdForAccount,
+    clearHasPendingGovernanceTransactionForAccount,
     hasToRevote,
-    setPendingGovernanceTransactionIdForAccount,
+    setHasPendingGovernanceTransactionForAccount,
 } from '../stores'
 import { handleError } from '@core/error/handlers'
 
@@ -21,7 +21,7 @@ export async function setVotingPower(rawAmount: string, isVoting: boolean): Prom
         const votingPower = parseInt(account.votingPower, 10)
         const amount = parseInt(rawAmount, 10)
 
-        setPendingGovernanceTransactionIdForAccount(account.index)
+        setHasPendingGovernanceTransactionForAccount(account.index)
 
         let transaction: Transaction
         if (amount > votingPower) {
@@ -35,6 +35,6 @@ export async function setVotingPower(rawAmount: string, isVoting: boolean): Prom
     } catch (err) {
         hasToRevote.set(false)
         handleError(err)
-        clearPendingGovernanceTransactionIdForAccount(account.index)
+        clearHasPendingGovernanceTransactionForAccount(account.index)
     }
 }

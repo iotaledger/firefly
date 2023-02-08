@@ -21,7 +21,7 @@
     import { ABSTAIN_VOTE_VALUE } from '@contexts/governance/constants'
     import { ProposalStatus } from '@contexts/governance/enums'
     import {
-        isGovernanceTransferring,
+        hasPendingGovernanceTransaction,
         participationOverview,
         selectedProposal,
         updateParticipationOverview,
@@ -78,7 +78,7 @@
         !hasChangedAnswers(selectedAnswerValues) ||
         hasSelectedNoAnswers(selectedAnswerValues)
 
-    $: isTransferring = $isGovernanceTransferring?.[$selectedAccountIndex]
+    $: isTransferring = $hasPendingGovernanceTransaction?.[$selectedAccountIndex]
     $: proposalState, (textHintString = getTextHintString())
 
     function hasSelectedNoAnswers(_selectedAnswerValues: number[]): boolean {
@@ -165,7 +165,7 @@
         })
     }
 
-    function handleVoteClick(): void {
+    function onVoteClick(): void {
         const chosenAnswerValues = selectedAnswerValues.map((answerValue) =>
             answerValue === undefined ? ABSTAIN_VOTE_VALUE : answerValue
         )
@@ -277,7 +277,7 @@
                     classes="w-full"
                     disabled={isVotingDisabled || isTransferring}
                     isBusy={isTransferring}
-                    onClick={handleVoteClick}
+                    onClick={onVoteClick}
                 >
                     {localize('actions.vote')}
                 </Button>

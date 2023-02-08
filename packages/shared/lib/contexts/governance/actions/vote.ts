@@ -7,12 +7,12 @@ import { showAppNotification } from '@auxiliary/notification/actions'
 import { localize } from '@core/i18n'
 import { handleError } from '@core/error/handlers'
 import { processAndAddToActivities } from '@core/wallet'
-import { clearPendingGovernanceTransactionIdForAccount, setPendingGovernanceTransactionIdForAccount } from '../stores'
+import { clearHasPendingGovernanceTransactionForAccount, setHasPendingGovernanceTransactionForAccount } from '../stores'
 
 export async function vote(eventId?: string, answers?: number[]): Promise<void> {
     const account = get(selectedAccount)
     try {
-        setPendingGovernanceTransactionIdForAccount(account.index)
+        setHasPendingGovernanceTransactionForAccount(account.index)
 
         const transaction = await account.vote(eventId, answers)
 
@@ -30,6 +30,6 @@ export async function vote(eventId?: string, answers?: number[]): Promise<void> 
         } else {
             handleError(err)
         }
-        clearPendingGovernanceTransactionIdForAccount(account.index)
+        clearHasPendingGovernanceTransactionForAccount(account.index)
     }
 }

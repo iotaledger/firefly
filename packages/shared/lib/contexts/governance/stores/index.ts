@@ -1,5 +1,5 @@
 export * from './has-to-revote.store'
-export * from './is-governance-transferring.store'
+export * from './has-pending-governance-transaction.store'
 export * from './participation-overview.store'
 export * from './proposal-filter.store'
 export * from './proposal-states.store'
