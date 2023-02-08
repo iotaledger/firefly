@@ -271,7 +271,7 @@
                     classes="w-full"
                     onClick={onStopVotingClick}
                     disabled={!isVotingForProposal || isTransferring}
-                    isBusy={isTransferring}>{localize('actions.stopVoting')}</Button
+                    isBusy={isVotingForProposal && isTransferring}>{localize('actions.stopVoting')}</Button
                 >
                 <Button
                     classes="w-full"
