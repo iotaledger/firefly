@@ -2,7 +2,7 @@ import { showAppNotification } from '@auxiliary/notification'
 import { selectedAccount, updateSelectedAccount } from '@core/account/stores/selected-account.store'
 import { localize } from '@core/i18n'
 import { updateNftInAllAccountNfts } from '@core/nfts'
-import { handleErrorActiveProfile } from '@core/error/handlers'
+import { handleError } from '@core/error/handlers'
 import { get } from 'svelte/store'
 import { processAndAddToActivities } from '../utils'
 
@@ -24,7 +24,7 @@ export async function burnNft(nftId: string): Promise<void> {
             alert: true,
         })
     } catch (err) {
-        handleErrorActiveProfile(err)
+        handleError(err)
         throw err
     } finally {
         updateSelectedAccount({ isTransferring: false })

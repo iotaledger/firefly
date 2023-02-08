@@ -4,7 +4,7 @@ import { DEFAULT_TRANSACTION_OPTIONS } from '../constants'
 import { resetNewTokenTransactionDetails } from '../stores'
 import { Output } from '../types'
 import { processAndAddToActivities } from '../utils'
-import { handleErrorActiveProfile } from '@core/error/handlers'
+import { handleError } from '@core/error/handlers'
 
 export async function sendOutput(output: Output): Promise<void> {
     try {
@@ -19,7 +19,7 @@ export async function sendOutput(output: Output): Promise<void> {
         return
     } catch (err) {
         updateSelectedAccount({ isTransferring: false })
-        handleErrorActiveProfile(err)
+        handleError(err)
 
         throw err
     }

@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 import { selectedAccount, updateSelectedAccount } from '@core/account'
-import { handleErrorActiveProfile } from '@core/error/handlers'
+import { handleError } from '@core/error/handlers'
 import { processAndAddToActivities } from '../utils'
 
 export async function consolidateOutputs(): Promise<void> {
@@ -11,7 +11,7 @@ export async function consolidateOutputs(): Promise<void> {
         const transaction = await account.consolidateOutputs(false, 2)
         await processAndAddToActivities(transaction)
     } catch (err) {
-        handleErrorActiveProfile(err)
+        handleError(err)
     } finally {
         updateSelectedAccount({ isTransferring: false })
     }

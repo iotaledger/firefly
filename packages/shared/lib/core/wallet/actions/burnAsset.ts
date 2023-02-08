@@ -3,7 +3,7 @@ import { showAppNotification } from '@auxiliary/notification'
 import { selectedAccount, updateSelectedAccount } from '@core/account/stores'
 import { localize } from '@core/i18n'
 import { Converter } from '@core/utils'
-import { handleErrorActiveProfile } from '@core/error/handlers'
+import { handleError } from '@core/error/handlers'
 import { processAndAddToActivities } from '../utils'
 
 export async function burnAsset(assetId: string, rawAmount: string): Promise<void> {
@@ -23,7 +23,7 @@ export async function burnAsset(assetId: string, rawAmount: string): Promise<voi
             alert: true,
         })
     } catch (err) {
-        handleErrorActiveProfile(err)
+        handleError(err)
     } finally {
         updateSelectedAccount({ isTransferring: false })
     }

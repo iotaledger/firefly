@@ -10,7 +10,7 @@ import {
     hasToRevote,
     setHasPendingGovernanceTransactionForAccount,
 } from '../stores'
-import { handleErrorActiveProfile } from '@core/error/handlers'
+import { handleError } from '@core/error/handlers'
 
 export async function setVotingPower(rawAmount: string, isVoting: boolean): Promise<void> {
     const account = get(selectedAccount)
@@ -34,7 +34,7 @@ export async function setVotingPower(rawAmount: string, isVoting: boolean): Prom
         await processAndAddToActivities(transaction)
     } catch (err) {
         hasToRevote.set(false)
-        handleErrorActiveProfile(err)
+        handleError(err)
         clearHasPendingGovernanceTransactionForAccount(account.index)
     }
 }

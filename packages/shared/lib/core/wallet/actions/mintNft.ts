@@ -11,7 +11,7 @@ import { addActivityToAccountActivitiesInAllAccountActivities, resetMintNftDetai
 import { NftActivity } from '../types'
 import { preprocessTransaction } from '../utils'
 import { generateSingleNftActivity } from '../utils/generateActivity/generateSingleNftActivity'
-import { handleErrorActiveProfile } from '@core/error/handlers'
+import { handleError } from '@core/error/handlers'
 
 export async function mintNft(metadata: IIrc27Metadata, amount: number): Promise<void> {
     try {
@@ -56,7 +56,7 @@ export async function mintNft(metadata: IIrc27Metadata, amount: number): Promise
 
         return Promise.resolve()
     } catch (err) {
-        handleErrorActiveProfile(err)
+        handleError(err)
 
         return Promise.reject(err)
     } finally {
