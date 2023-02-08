@@ -1,8 +1,6 @@
 import { get } from 'svelte/store'
-
 import { activeAccounts, updateActiveProfile } from '@core/profile/stores'
 import { resetSendOptionIndex } from '@core/wallet/stores'
-import { resetParticipationOverview } from '@contexts/governance/stores'
 
 import { selectedAccount, selectedAccountIndex } from '../stores'
 import { clearFilters } from '@core/utils'
@@ -13,7 +11,6 @@ export function setSelectedAccount(index: number): void {
         selectedAccountIndex.set(index)
         selectedAccount.set(account)
         updateActiveProfile({ lastUsedAccountIndex: index })
-        resetParticipationOverview()
         clearFilters()
         resetSendOptionIndex()
     } else {

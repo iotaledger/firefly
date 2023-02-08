@@ -1,11 +1,9 @@
 import { get } from 'svelte/store'
-
 import type { TrackedParticipationOverview } from '@iota/wallet'
-
-import { participationOverview } from '../stores'
+import { participationOverviewForSelectedAccount } from '../stores/participation-overviews.store'
 
 export function getActiveParticipation(proposalId: string): TrackedParticipationOverview {
-    const overview = get(participationOverview)
+    const overview = get(participationOverviewForSelectedAccount)
     const participationsForProposal: TrackedParticipationOverview[] = Object.values(
         overview?.participations?.[proposalId] ?? {}
     )
