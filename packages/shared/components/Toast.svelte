@@ -1,5 +1,7 @@
 <script lang="ts">
     import { Icon } from 'shared/components'
+    import { localize } from '@core/i18n'
+    import { removeDisplayNotification } from '@auxiliary/notification/stores'
     import Logo from './Logo.svelte'
 
     type Action = {
@@ -14,6 +16,8 @@
     export let subMessage: string = ''
     export let progress: number = undefined
     export let actions: Action[] = []
+    export let id: string = ''
+    export let showDismiss: boolean = false
 
     const TOAST_STYLE = {
         info: {
@@ -42,6 +46,10 @@
             subMessageColor: 'gray-600',
             buttonSecondary: 'black',
         },
+    }
+
+    function onDismissClick(): void {
+        removeDisplayNotification(id)
     }
 </script>
 
@@ -80,5 +88,21 @@
                 </button>
             {/each}
         </div>
+    {:else if showDismiss}
+        <button
+            type="button"
+            on:click={onDismissClick}
+            class="dismiss-min-wh cursor-pointer text-center rounded-lg
+            font-bold text-11 text-{TOAST_STYLE[type].messageColor}"
+        >
+            {localize('actions.dismiss')}
+        </button>
     {/if}
 </div>
+
+<style lang="scss">
+    .dismiss-min-wh {
+        min-width: 90px;
+        min-height: 32px;
+    }
+</style>
