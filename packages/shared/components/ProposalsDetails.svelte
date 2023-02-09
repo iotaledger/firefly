@@ -32,7 +32,7 @@
         }
     }
 
-    function onAddProposal(): void {
+    function onAddProposalClick(): void {
         openPopup({
             type: 'addProposal',
             overflow: true,
@@ -40,13 +40,13 @@
     }
 </script>
 
-<proposals-details>
-    <header-container class="flex justify-left items-center mb-4">
+<proposals-details class="space-y-4">
+    <header-container class="flex justify-left items-center">
         <Text fontSize="14" fontWeight={FontWeight.semibold}>
             {localize('views.governance.proposalsDetails.title')}
         </Text>
     </header-container>
-    <ul class="space-y-2 mb-4">
+    <ul class="space-y-2">
         {#each Object.keys(details) as detailKey}
             <li>
                 <KeyValueBox
@@ -56,7 +56,7 @@
             </li>
         {/each}
     </ul>
-    <Button size={ButtonSize.Medium} onClick={onAddProposal} classes="w-full">
+    <Button size={ButtonSize.Medium} onClick={onAddProposalClick} classes="w-full">
         {localize('actions.addProposal')}
     </Button>
 </proposals-details>
