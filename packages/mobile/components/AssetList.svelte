@@ -3,26 +3,51 @@
     import { IAccountAssets, IAsset } from '@core/wallet'
     import VirtualList from '@sveltejs/svelte-virtual-list'
     import { AssetTile, Text } from 'shared/components'
+    import { SearchInput } from '../components'
 
     export let assets: IAccountAssets
     export let onAssetTileClick: (asset: IAsset) => unknown = () => {}
 
+    let searchValue = ''
     let assetList: IAsset[]
-    $: assets, (assetList = getAssetList())
+    $: assets, searchValue, (assetList = getFilteredAssetList())
 
-    function getAssetList(): IAsset[] {
+    function getFilteredAssetList(): IAsset[] {
         const list = []
 
         if (assets?.baseCoin) {
             list.push(assets.baseCoin)
         }
         list.push(...assets?.nativeTokens)
-        return list
+
+        return searchAssets(list, searchValue)
+    }
+
+    function searchAssets(assets: IAsset[], searchValue: string): IAsset[] {
+        const filteredAssets = assets?.filter((asset) => {
+            if (!searchValue) {
+                return true
+            } else {
+                const matchId = asset?.id?.toLowerCase().includes(searchValue.toLowerCase())
+
+                const metadataKeys = ['name', 'description', 'unit']
+                const matchMetadata = metadataKeys.some((key) => {
+                    const hasMatch = asset?.metadata?.[key]?.toLowerCase().includes(searchValue.toLowerCase())
+                    return hasMatch
+                })
+
+                return matchId || matchMetadata
+            }
+        })
+        return filteredAssets
     }
 </script>
 
 {#if assets}
-    <div class="asset-list h-full flex flex-auto flex-col flex-grow flex-shrink-0">
+    <asset-list-container class="asset-list h-full flex flex-auto flex-col flex-grow flex-shrink-0">
+        <asset-list-header class="sticky pb-4">
+            <SearchInput bind:value={searchValue} />
+        </asset-list-header>
         {#if assetList.length > 0}
             <VirtualList items={assetList} let:item>
                 <AssetTile classes="mb-2" onClick={() => onAssetTileClick(item)} asset={item} />
@@ -32,5 +57,5 @@
                 <Text secondary>{localize('general.noAssets')}</Text>
             </div>
         {/if}
-    </div>
+    </asset-list-container>
 {/if}
