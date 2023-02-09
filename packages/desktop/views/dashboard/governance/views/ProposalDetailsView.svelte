@@ -219,7 +219,7 @@
                     <Text
                         type={TextType.h5}
                         overrideColor
-                        classes="text-gray-600 mt-4 max-h-40 overflow-hidden"
+                        classes="text-gray-600 mt-4 max-h-40 overflow-hidden select-text"
                         fontWeight={FontWeight.medium}>{$selectedProposal?.additionalInfo}</Text
                     >
                 {/if}
