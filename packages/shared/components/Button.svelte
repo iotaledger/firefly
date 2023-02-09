@@ -63,7 +63,6 @@
     class:dark
     class:outline
     class:is-busy={isBusy}
-    style:--border-width={outline ? '1px' : '0px'}
     on:click|stopPropagation={debounce(onClick, 100)}
     bind:this={buttonElement}
 >
@@ -124,24 +123,33 @@
 
     .lg {
         @apply px-8;
-        --lg-py: 1rem;
-        padding-top: calc(var(--lg-py) - var(--border-width, 0));
-        padding-bottom: calc(var(--lg-py) - var(--border-width, 0));
+        @apply py-4;
+
+        &.outline {
+            padding-top: calc(1rem - 1px);
+            padding-bottom: calc(1rem - 1px);
+        }
     }
 
     .md {
         @apply px-8;
-        --md-py: 0.75rem;
-        padding-top: calc(var(--md-py) - var(--border-width, 0));
-        padding-bottom: calc(var(--md-py) - var(--border-width, 0));
+        @apply py-3;
+
+        &.outline {
+            padding-top: calc(0.75rem - 1px);
+            padding-bottom: calc(0.75rem - 1px);
+        }
     }
 
     .sm {
         @apply px-3;
+        @apply py-2;
         @apply text-13;
-        --sm-py: 0.5rem;
-        padding-top: calc(var(--sm-py) - var(--border-width, 0));
-        padding-bottom: calc(var(--sm-py) - var(--border-width, 0));
+
+        &.outline {
+            padding-top: calc(0.5rem - 1px);
+            padding-bottom: calc(0.5rem - 1px);
+        }
     }
 
     @mixin button-variant($color) {
