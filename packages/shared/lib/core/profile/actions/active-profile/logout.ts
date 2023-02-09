@@ -1,9 +1,9 @@
 import { closePopup } from '@auxiliary/popup'
 import { resetSelectedAccount } from '@core/account'
 import {
+    clearSelectedParticipationEventStatus,
     resetHasPendingGovernanceTransaction,
     resetProposalOverviews,
-    resetProposalStates,
     resetRegisteredProposals,
 } from '@contexts/governance/stores'
 import { isPollingLedgerDeviceStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
@@ -60,7 +60,7 @@ function cleanupProfileState(clearActiveProfile: boolean): void {
     resetHasPendingGovernanceTransaction()
     resetRegisteredProposals()
     resetProposalOverviews()
-    resetProposalStates()
+    clearSelectedParticipationEventStatus()
 
     activeAccounts.set([])
     if (clearActiveProfile) {

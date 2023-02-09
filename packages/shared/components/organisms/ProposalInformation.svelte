@@ -11,7 +11,7 @@
         milestone: number
     }
 
-    $: proposalDateData = getNextProposalDateData($selectedProposal?.state?.status)
+    $: proposalDateData = getNextProposalDateData($selectedProposal?.status)
 
     function getNextProposalDateData(status: string): IProposalDateData {
         switch (status) {

@@ -1,13 +1,13 @@
-import { PROPOSAL_STATUS_POLL_INTERVAL } from '../constants'
-import { updateProposalsState } from '../stores'
+import { PARTICIPATION_EVENT__STATUS_POLL_INTERVAL } from '../constants'
+import { getAndSetSelectedParticipationEventStatus } from '../stores'
 
 let pollInterval
 
 export function pollParticipationEventStatus(eventId: string): void {
-    void updateProposalsState(eventId)
+    void getAndSetSelectedParticipationEventStatus(eventId)
     pollInterval = setInterval(() => {
-        void updateProposalsState(eventId)
-    }, PROPOSAL_STATUS_POLL_INTERVAL)
+        void getAndSetSelectedParticipationEventStatus(eventId)
+    }, PARTICIPATION_EVENT__STATUS_POLL_INTERVAL)
 }
 
 export function clearParticipationEventStatusPoll(): void {

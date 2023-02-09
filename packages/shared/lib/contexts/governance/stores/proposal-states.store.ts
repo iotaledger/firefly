@@ -1,37 +1,13 @@
-import { get, writable } from 'svelte/store'
-import { getVotingProposalState } from '@contexts/governance/actions'
-import { IProposalState } from '../interfaces'
+import { getAccountsParticipationEventStatusForEvent } from '@contexts/governance/actions'
+import { ParticipationEventStatus } from '@iota/wallet'
+import { writable } from 'svelte/store'
 
-export const proposalStates = writable<IProposalState>({})
+export const selectedParticipationEventStatus = writable<ParticipationEventStatus>(null)
 
-export async function addProposalState(eventId: string): Promise<void> {
-    const _proposalStates = get(proposalStates)
-
-    const votingProposalState = await getVotingProposalState(eventId)
-
-    _proposalStates[eventId] = { state: votingProposalState }
-    proposalStates.set(_proposalStates)
+export async function getAndSetSelectedParticipationEventStatus(eventId: string): Promise<void> {
+    selectedParticipationEventStatus.set(await getAccountsParticipationEventStatusForEvent(eventId))
 }
 
-export function removeProposalState(eventId: string): void {
-    const _proposalStates = get(proposalStates)
-
-    if (_proposalStates?.[eventId]) {
-        delete _proposalStates[eventId]
-        proposalStates.set(_proposalStates)
-    }
-}
-
-export async function updateProposalsState(eventId: string): Promise<void> {
-    const _proposalStates = get(proposalStates)
-
-    const votingProposalState = await getVotingProposalState(eventId)
-    if (votingProposalState) {
-        _proposalStates[eventId] = { state: votingProposalState }
-    }
-    proposalStates.set(_proposalStates)
-}
-
-export function resetProposalStates(): void {
-    proposalStates.set({})
+export function clearSelectedParticipationEventStatus(): void {
+    selectedParticipationEventStatus.set(null)
 }

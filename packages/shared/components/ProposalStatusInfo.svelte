@@ -15,13 +15,8 @@
 </script>
 
 <div bind:this={anchor} on:mouseenter={() => showTooltip(true)} on:mouseleave={() => showTooltip(false)}>
-    <ProposalStatusPill status={proposal?.state?.status} />
+    <ProposalStatusPill status={proposal?.status} />
 </div>
 {#if isTooltipVisible}
-    <ProposalStatusTimelineTooltip
-        bind:anchor
-        milestones={proposal.milestones}
-        status={proposal?.state?.status}
-        {position}
-    />
+    <ProposalStatusTimelineTooltip bind:anchor milestones={proposal.milestones} status={proposal?.status} {position} />
 {/if}
