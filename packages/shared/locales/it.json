@@ -62,7 +62,7 @@
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Configura {protocol, select, IOTA {un} Shimmer {un}} profilo di {protocol}",
+                    "title": "Configura {protocol, select, IOTA {un profilo di} Shimmer {un profilo di} other {un profilo di}} {protocol}",
                     "body": "Seleziona il metodo appropriato per impostare il tuo profilo {protocol}."
                 },
                 "setupNew": {
@@ -586,6 +586,7 @@
                 "title": "Proposte",
                 "voted": "Votato",
                 "successAdd": "Proposta aggiunta con successo",
+                "successAddAll": "Proposta aggiunta con successo a tutti gli account",
                 "successRemove": "Proposta rimossa con successo",
                 "emptyTitle": "Nessuna proposta"
             },
@@ -1023,13 +1024,14 @@
         },
         "addProposal": {
             "title": "Aggiungi proposta",
-            "body": "Si prega di fornire le informazioni elencate di seguito per aggiungere una proposta."
+            "body": "Si prega di fornire le informazioni elencate di seguito per aggiungere una proposta.",
+            "addToAllAccounts": "Aggiungi la proposta a tutti gli account"
         },
         "voteForProposal": {
             "title": "Votazione per la proposta",
             "body": "Stai per votare la proposta {proposal}.",
             "key": "Il tuo potere di voto",
-            "hasAbstained": "You are abstaining from answering {numberOfQuestions, plural, one {# question} other {# questions}}.",
+            "hasAbstained": "Ti stai astenendo dalla risposta {numberOfQuestions, plural, one {# domanda} other {# domande}}.",
             "noVotingPower": "Non hai alcun potere di voto, aumenta il tuo potere di voto dal cruscotto della governance."
         },
         "revote": {
@@ -1104,7 +1106,7 @@
             "shimmer": "Ripristina un profilo Shimmer esistente"
         },
         "createWallet": "Crea un nuovo profilo {protocol}",
-        "createWalletDescription": "Crea un nuovo profilo in esecuzione su {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
+        "createWalletDescription": "Crea un nuovo profilo su {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
         "claimShimmer": "Rivendica ricompense di staking Shimmer",
         "claimShimmerDescription": "Importa il tuo profilo di IOTA e richiedi le ricompense di staking del tuo Shimmer",
         "createAlias": "Crea alias",
@@ -1265,6 +1267,8 @@
         "voting": "Votazione",
         "changedVote": "Voto modificato",
         "changingVote": "Modifica del voto",
+        "revoted": "Revocato",
+        "revoting": "In fase di revocazione",
         "unvoted": "Non Votato",
         "unvoting": "Annulla Voto",
         "sentNft": "NFT Inviato",
@@ -1574,7 +1578,9 @@
             "basic": "Base",
             "nft": "NFT",
             "alias": "Alias",
-            "foundry": "Foundry"
+            "foundry": "Foundry",
+            "governance": "Governance",
+            "consolidation": "Consolidazione"
         },
         "direction": {
             "label": "Direzione",
@@ -1877,7 +1883,8 @@
         "noOutputsToConsolidate": "Output non sufficienti per consolidare",
         "eventId": {
             "doesNotStartWith0x": "L'ID evento dovrebbe iniziare con '0x'",
-            "insufficientLength": "L'ID evento deve essere lungo 66 caratteri"
+            "insufficientLength": "L'ID evento deve essere lungo 66 caratteri",
+            "alreadyRegistered": "ID Evento già registrato"
         },
         "nft": {
             "unsupportedUrl": {
@@ -2126,6 +2133,11 @@
                 "Pending": "modifica della votazione per",
                 "Confirmed": "votazione modificata",
                 "Conflicting": "non è stato possibile modificare il voto per"
+            },
+            "revote": {
+                "Pending": "in fase di revocazione",
+                "Confirmed": "revocato",
+                "Conflicting": "impossibile revocare"
             }
         },
         "alias": {
