@@ -59,7 +59,10 @@ const output = {
 const mainRules = [
     {
         test: /\.ts$/,
-        loader: 'ts-loader',
+        loader: 'esbuild-loader',
+        options: {
+            target: 'es2015',
+        },
         exclude: /node_modules/,
     },
     {
@@ -74,7 +77,10 @@ const mainRules = [
 const rendererRules = [
     {
         test: /\.ts$/,
-        loader: 'ts-loader',
+        loader: 'esbuild-loader',
+        options: {
+            target: 'es2015',
+        },
         exclude: /node_modules/,
     },
     {
