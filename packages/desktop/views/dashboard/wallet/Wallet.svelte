@@ -1,9 +1,8 @@
 <script lang="ts">
-    import { selectedAccount } from '@core/account'
+    import { AccountAssetsList, AccountSummary, ReceiveAddressButton } from '@ui'
+    import { AccountActivity, Pane, SendButton } from '@components'
     import features from '@features/features'
-    import { ReceiveAddressButton } from 'shared/components/atoms'
-    import { AccountActivity, SendButton } from '@components'
-    import { AccountAssetsList, AccountSummary, Pane } from '@ui'
+    import { selectedAccount } from '@core/account/stores'
 </script>
 
 {#if $selectedAccount}

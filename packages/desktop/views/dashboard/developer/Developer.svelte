@@ -1,17 +1,17 @@
 <script lang="ts">
-    import { selectedAccount } from '@core/account'
-    import { localize } from '@core/i18n'
     import {
         FaucetRequestButton,
         MintNativeTokenButton,
         MintNftButton,
         CreateAliasButton,
-        Pane,
         RefreshTokenMetadataButton,
         Text,
         TestDeepLinkButton,
-    } from 'shared/components'
+    } from '@ui'
+    import { Pane } from '@components'
     import features from '@features/features'
+    import { selectedAccount } from '@core/account/stores'
+    import { localize } from '@core/i18n'
 </script>
 
 {#if $selectedAccount}

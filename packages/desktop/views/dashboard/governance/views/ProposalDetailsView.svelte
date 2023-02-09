@@ -1,20 +1,20 @@
 <script lang="ts">
-    import { onMount } from 'svelte'
-    import { VotingEventPayload, ParticipationEventType, TrackedParticipationOverview } from '@iota/wallet/out/types'
-    import { localize } from '@core/i18n'
     import {
         Button,
         FontWeight,
         KeyValueBox,
         Pane,
         ProposalDetailsButton,
-        ProposalInformation,
         ProposalQuestion,
         ProposalStatusPill,
         Text,
         TextType,
         TextHint,
     } from '@ui'
+    import { ProposalInformationPane } from '@components'
+    import { onMount } from 'svelte'
+    import { VotingEventPayload, ParticipationEventType, TrackedParticipationOverview } from '@iota/wallet/out/types'
+    import { localize } from '@core/i18n'
     import { openPopup } from '@auxiliary/popup/actions'
     import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
     import { getVotingEvent } from '@contexts/governance/actions'
@@ -240,7 +240,7 @@
                 {/each}
             </ul>
         </Pane>
-        <ProposalInformation />
+        <ProposalInformationPane />
     </div>
     <Pane classes="w-3/5 h-full p-6 pr-3 flex flex-col justify-between ">
         <proposal-questions

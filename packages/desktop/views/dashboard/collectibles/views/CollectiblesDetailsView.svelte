@@ -1,7 +1,20 @@
 <script lang="ts">
-    import { openPopup } from '@auxiliary/popup'
-    import { selectedAccountIndex } from '@core/account'
-    import { openUrlInBrowser } from '@core/app'
+    import {
+        Button,
+        CollectibleDetailsMenu,
+        FontWeight,
+        KeyValueBox,
+        MeatballMenuButton,
+        Modal,
+        NftMedia,
+        Text,
+        TextType,
+        Alert,
+    } from '@ui'
+    import { Pane } from '@components'
+    import { openPopup } from '@auxiliary/popup/actions'
+    import { selectedAccountIndex } from '@core/account/stores'
+    import { openUrlInBrowser } from '@core/app/utils'
     import { localize } from '@core/i18n'
     import { ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
     import { BASE_TOKEN } from '@core/network/constants'
@@ -18,19 +31,6 @@
         getHexAddressFromAddressTypes,
     } from '@core/wallet'
     import { NewTransactionType, selectedAccountActivities, setNewTransactionDetails } from '@core/wallet/stores'
-    import {
-        Button,
-        CollectibleDetailsMenu,
-        FontWeight,
-        KeyValueBox,
-        MeatballMenuButton,
-        Modal,
-        NftMedia,
-        Pane,
-        Text,
-        TextType,
-        Alert,
-    } from 'shared/components'
 
     let modal: Modal
     let error: string

@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { KeyValueBox, Pane, Text } from 'shared/components'
+    import { KeyValueBox, Text } from '@ui'
+    import Pane from './Pane.svelte'
     import { formatDate, localize } from '@core/i18n'
     import { DATE_FORMAT, IKeyValueBoxList, milestoneToDate, truncateString } from '@core/utils'
     import { networkStatus } from '@core/network/stores'
