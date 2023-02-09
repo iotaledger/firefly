@@ -20,11 +20,11 @@ export async function initialiseOnboardingFlow(options: IOnboardingInitialisatio
         stopPollingLedgerNanoStatus()
     }
     await unsubscribeFromWalletApiEvents()
-    destroyProfileManager()
+    await destroyProfileManager()
 
     const { isDeveloperProfile, networkProtocol, networkType } = options
 
-    initialiseOnboardingProfile(isDeveloperProfile, networkProtocol, true)
+    await initialiseOnboardingProfile(isDeveloperProfile, networkProtocol, true)
 
     if (networkType) {
         updateOnboardingProfile({ networkType })
