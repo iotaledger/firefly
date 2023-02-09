@@ -10,6 +10,6 @@ export async function cleanupOnboardingProfileManager(): Promise<void> {
 
     const { id } = get(profileManager)
 
-    destroyProfileManager()
+    await destroyProfileManager()
     await removeProfileFolder(id)
 }

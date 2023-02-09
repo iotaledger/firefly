@@ -11,7 +11,7 @@ export async function destroyShimmerClaimingProfileManager(): Promise<void> {
     if (!_shimmerClaimingProfileManager) {
         return
     }
-    destroyProfileManager(shimmerClaimingProfileManager)
+    await destroyProfileManager(shimmerClaimingProfileManager)
     const profilePath = await getShimmerClaimingProfileManagerStorageDirectory()
     await Platform.removeProfileFolder(profilePath)
 }
