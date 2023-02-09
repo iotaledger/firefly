@@ -5,7 +5,6 @@ const path = require('path')
 const sveltePreprocess = require('svelte-preprocess')
 const SentryWebpackPlugin = require('@sentry/webpack-plugin')
 const { version } = require('./package.json')
-const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin')
 
 const mode = process.env.NODE_ENV || 'development'
 const prod = mode === 'production'
@@ -60,10 +59,6 @@ const mainRules = [
     {
         test: /\.ts$/,
         loader: 'esbuild-loader',
-        options: {
-            target: 'es2015',
-        },
-        exclude: /node_modules/,
     },
     {
         test: /\.node$/,
@@ -78,10 +73,6 @@ const rendererRules = [
     {
         test: /\.ts$/,
         loader: 'esbuild-loader',
-        options: {
-            target: 'es2015',
-        },
-        exclude: /node_modules/,
     },
     {
         test: /\.json$/,
