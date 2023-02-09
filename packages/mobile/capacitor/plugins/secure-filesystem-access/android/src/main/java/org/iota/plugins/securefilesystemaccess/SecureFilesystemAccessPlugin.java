@@ -74,7 +74,7 @@ public class SecureFilesystemAccessPlugin extends Plugin {
                 return;
             }
 
-            if (Build.VERSION.SDK_INT <= 32 && resourceType.equals("folder")) {
+            if (Build.VERSION.SDK_INT <= 33 && resourceType.equals("folder")) {
                 String selectedPath = getContext().getCacheDir().getPath() + File.separator + fileName;
                 String authority = getContext().getPackageName() + ".fileprovider";
                 File file = new File(Uri.parse(selectedPath).getPath());
