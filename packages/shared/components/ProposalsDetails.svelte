@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { ProposalsDetailsButton, Text, KeyValueBox } from 'shared/components'
+    import { Text, KeyValueBox, Button, ButtonSize } from 'shared/components'
     import { FontWeight } from './enums'
     import { localize } from '@core/i18n'
     import { activeProfileId } from '@core/profile'
@@ -11,6 +11,7 @@
         getNumberOfVotedProposals,
         getNumberOfTotalProposals,
     } from '@contexts/governance/utils'
+    import { openPopup } from '@auxiliary/popup'
 
     let details = <IProposalsDetails>{
         totalProposals: null,
@@ -30,16 +31,22 @@
             }
         }
     }
+
+    function onAddProposal(): void {
+        openPopup({
+            type: 'addProposal',
+            overflow: true,
+        })
+    }
 </script>
 
 <proposals-details>
-    <header-container class="flex justify-between items-center mb-4">
+    <header-container class="flex justify-left items-center mb-4">
         <Text fontSize="14" fontWeight={FontWeight.semibold}>
             {localize('views.governance.proposalsDetails.title')}
         </Text>
-        <ProposalsDetailsButton />
     </header-container>
-    <ul class="space-y-2">
+    <ul class="space-y-2 mb-4">
         {#each Object.keys(details) as detailKey}
             <li>
                 <KeyValueBox
@@ -49,4 +56,7 @@
             </li>
         {/each}
     </ul>
+    <Button size={ButtonSize.Medium} onClick={onAddProposal} classes="w-full">
+        {localize('actions.addProposal')}
+    </Button>
 </proposals-details>
