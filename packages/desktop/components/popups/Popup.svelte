@@ -1,9 +1,8 @@
 <script lang="ts">
     import { mobile, PlatformOption, platform } from '@core/app'
-    import { Drawer, Icon } from 'shared/components'
+    import { Icon } from '@ui'
     import { clickOutside } from '@core/utils/ui'
     import { closePopup } from '@auxiliary/popup/actions'
-    import { popupState } from '@auxiliary/popup/stores'
     import { Icon as IconEnum } from '@auxiliary/icon/enums'
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
@@ -189,46 +188,39 @@
 </script>
 
 <svelte:window on:keydown={onKey} />
-{#if $mobile && !fullScreen}
-    <Drawer opened zIndex="z-40" preventClose={hideClose} on:close={() => closePopup($popupState?.preventClose)}>
-        <div bind:this={popupContent} class="p-8">
-            <svelte:component this={types[type]} {...props} />
-        </div>
-    </Drawer>
-{:else}
-    <popup
-        in:fade={{ duration: transition ? 100 : 0 }}
-        class={`flex items-center justify-center fixed ${
-            $platform === PlatformOption.Windows ? 'top-9' : 'top-0'
-        } left-0 w-screen p-6 ${overflow ? '' : 'overflow-hidden'}
+
+<popup
+    in:fade={{ duration: transition ? 100 : 0 }}
+    class={`flex items-center justify-center fixed ${
+        $platform === PlatformOption.Windows ? 'top-9' : 'top-0'
+    } left-0 w-screen p-6 ${overflow ? '' : 'overflow-hidden'}
                 h-full z-20 ${
                     fullScreen
                         ? 'bg-white dark:bg-gray-900'
                         : 'bg-gray-800 bg-opacity-70 dark:bg-black dark:bg-opacity-50'
                 } ${$mobile && 'z-40'}`}
+>
+    <div tabindex="0" on:focus={handleFocusFirst} />
+    <popup-content
+        use:clickOutside
+        on:clickOutside={tryClosePopup}
+        bind:this={popupContent}
+        class={`${size} bg-white rounded-xl pt-6 px-6 pb-6 ${
+            fullScreen ? 'full-screen dark:bg-gray-900' : 'dark:bg-gray-800 shadow-elevation-4'
+        } ${overflow ? 'overflow' : ''} ${relative ? 'relative' : ''}`}
     >
-        <div tabindex="0" on:focus={handleFocusFirst} />
-        <popup-content
-            use:clickOutside
-            on:clickOutside={tryClosePopup}
-            bind:this={popupContent}
-            class={`${size} bg-white rounded-xl pt-6 px-6 pb-6 ${
-                fullScreen ? 'full-screen dark:bg-gray-900' : 'dark:bg-gray-800 shadow-elevation-4'
-            } ${overflow ? 'overflow' : ''} ${relative ? 'relative' : ''}`}
-        >
-            {#if !hideClose}
-                <button on:click={tryClosePopup} class="absolute top-6 right-6 focus:text-blue-500">
-                    <Icon
-                        icon={IconEnum.Close}
-                        classes="text-gray-500 dark:text-white hover:text-gray-600 dark:hover:text-gray-100"
-                    />
-                </button>
-            {/if}
-            <svelte:component this={types[type]} {...props} />
-        </popup-content>
-        <div tabindex="0" on:focus={handleFocusLast} />
-    </popup>
-{/if}
+        {#if !hideClose}
+            <button on:click={tryClosePopup} class="absolute top-6 right-6 focus:text-blue-500">
+                <Icon
+                    icon={IconEnum.Close}
+                    classes="text-gray-500 dark:text-white hover:text-gray-600 dark:hover:text-gray-100"
+                />
+            </button>
+        {/if}
+        <svelte:component this={types[type]} {...props} />
+    </popup-content>
+    <div tabindex="0" on:focus={handleFocusLast} />
+</popup>
 
 <style type="text/scss">
     popup {
