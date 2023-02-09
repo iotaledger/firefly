@@ -7,7 +7,7 @@ import { initializeRegisteredProposals } from './initializeRegisteredProposals'
 export async function getGovernanceData(): Promise<void> {
     governanceLoadingState.set(GovernanceLoadingState.NothingLoaded)
     await initializeRegisteredProposals()
-    governanceLoadingState.set(GovernanceLoadingState.CardsLoaded)
+    governanceLoadingState.set(GovernanceLoadingState.MetadataLoaded)
     await initializeProposalStates()
     await initializeParticipationOverviews()
     governanceLoadingState.set(GovernanceLoadingState.Completed)

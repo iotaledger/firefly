@@ -11,6 +11,8 @@
         getNumberOfVotedProposals,
         getNumberOfTotalProposals,
     } from '@contexts/governance/utils'
+    import { governanceLoadingState } from '@contexts/governance/stores/governance-loading-state.store'
+    import { GovernanceLoadingState } from '@contexts/governance/enums'
 
     let details = <IProposalsDetails>{
         totalProposals: null,
@@ -18,15 +20,18 @@
         votingProposals: null,
         votedProposals: null,
     }
+    $: $proposalStates, $participationOverviewForSelectedAccount, $governanceLoadingState, updateProposalsDetails()
+    $: loadingCompleted = $governanceLoadingState === GovernanceLoadingState.Completed
+    $: metadataLoaded = $governanceLoadingState === GovernanceLoadingState.MetadataLoaded || loadingCompleted
     $: $proposalStates, $participationOverviewForSelectedAccount, updateProposalsDetails()
 
     function updateProposalsDetails(): void {
         if ($activeProfileId) {
             details = {
-                totalProposals: getNumberOfTotalProposals(),
-                activeProposals: getNumberOfActiveProposals(),
-                votingProposals: getNumberOfVotingProposals(),
-                votedProposals: getNumberOfVotedProposals(),
+                totalProposals: metadataLoaded ? getNumberOfTotalProposals() : null,
+                activeProposals: loadingCompleted ? getNumberOfActiveProposals() : null,
+                votingProposals: loadingCompleted ? getNumberOfVotingProposals() : null,
+                votedProposals: loadingCompleted ? getNumberOfVotedProposals() : null,
             }
         }
     }
@@ -40,11 +45,13 @@
         <ProposalsDetailsButton />
     </header-container>
     <ul class="space-y-2">
+        {$governanceLoadingState}
         {#each Object.keys(details) as detailKey}
             <li>
                 <KeyValueBox
                     keyText={localize(`views.governance.proposalsDetails.${detailKey}`)}
                     valueText={details[detailKey]?.toString() ?? '-'}
+                    isLoading={details[detailKey] === null}
                 />
             </li>
         {/each}

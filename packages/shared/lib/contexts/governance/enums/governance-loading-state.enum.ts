@@ -1,5 +1,5 @@
 export enum GovernanceLoadingState {
     NothingLoaded,
-    CardsLoaded,
+    MetadataLoaded,
     Completed,
 }
