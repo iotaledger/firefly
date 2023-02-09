@@ -20,18 +20,21 @@
         votingProposals: null,
         votedProposals: null,
     }
-    $: $proposalStates, $participationOverviewForSelectedAccount, $governanceLoadingState, updateProposalsDetails()
-    $: loadingCompleted = $governanceLoadingState === GovernanceLoadingState.Completed
-    $: metadataLoaded = $governanceLoadingState === GovernanceLoadingState.MetadataLoaded || loadingCompleted
     $: $proposalStates, $participationOverviewForSelectedAccount, updateProposalsDetails()
 
     function updateProposalsDetails(): void {
         if ($activeProfileId) {
             details = {
-                totalProposals: metadataLoaded ? getNumberOfTotalProposals() : null,
-                activeProposals: loadingCompleted ? getNumberOfActiveProposals() : null,
-                votingProposals: loadingCompleted ? getNumberOfVotingProposals() : null,
-                votedProposals: loadingCompleted ? getNumberOfVotedProposals() : null,
+                totalProposals:
+                    $governanceLoadingState !== GovernanceLoadingState.NothingLoaded
+                        ? getNumberOfTotalProposals()
+                        : null,
+                activeProposals:
+                    $governanceLoadingState === GovernanceLoadingState.Completed ? getNumberOfActiveProposals() : null,
+                votingProposals:
+                    $governanceLoadingState === GovernanceLoadingState.Completed ? getNumberOfVotingProposals() : null,
+                votedProposals:
+                    $governanceLoadingState === GovernanceLoadingState.Completed ? getNumberOfVotedProposals() : null,
             }
         }
     }
@@ -45,7 +48,6 @@
         <ProposalsDetailsButton />
     </header-container>
     <ul class="space-y-2">
-        {$governanceLoadingState}
         {#each Object.keys(details) as detailKey}
             <li>
                 <KeyValueBox
