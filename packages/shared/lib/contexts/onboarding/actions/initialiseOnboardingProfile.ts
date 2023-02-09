@@ -11,17 +11,17 @@ import { isOnboardingLedgerProfile, onboardingProfile } from '../stores'
 /**
  * Builds a new onboarding profile and sets the Svelte store accordingly.
  */
-export function initialiseOnboardingProfile(
+export async function initialiseOnboardingProfile(
     isDeveloperProfile: boolean,
     networkProtocol?: NetworkProtocol,
     overrideExistingProfileManager = false
-): void {
+): Promise<void> {
     if (get(profileManager)) {
         if (overrideExistingProfileManager) {
             if (get(isOnboardingLedgerProfile)) {
                 stopPollingLedgerNanoStatus()
             }
-            destroyProfileManager()
+            await destroyProfileManager()
         } else {
             throw new OnboardingProfileManagerAlreadyInitializedError()
         }

@@ -19,7 +19,7 @@ export interface IProfileManager {
     bech32ToHex(bech32Address: string): Promise<string>
     changeStrongholdPassword(currentPassword: string, newPassword: string): Promise<void>
     clearStrongholdPassword(): Promise<void>
-    destroy(): void
+    destroy(): Promise<void>
     emitTestEvent(event: WalletEvent): Promise<void>
     generateAddress(
         accountIndex: number,

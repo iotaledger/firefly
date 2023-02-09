@@ -4,12 +4,14 @@
     import { assetFilter } from '@core/wallet/stores'
     import { isVisibleAsset } from '@core/wallet/utils/isVisibleAsset'
     import VirtualList from '@sveltejs/svelte-virtual-list'
-    import { AssetTile, Text } from 'shared/components'
-    import { Filter } from '../components'
+    import { AssetTile, Text } from '@ui'
+    import { Filter, SearchInput } from '../components'
+    import { FilterType } from '../lib/routers/routers'
 
     export let assets: IAccountAssets
     export let onAssetTileClick: (asset: IAsset) => unknown = () => {}
 
+    let searchValue = ''
     let assetList: IAsset[]
     $: $assetFilter, assets, (assetList = getFilteredAssetList()), scrollToTop()
     $: isEmptyBecauseOfFilter = (assets.baseCoin || assets.nativeTokens?.length > 0) && assetList.length === 0
@@ -21,6 +23,8 @@
         }
     }
 
+    $: assets, searchValue, (assetList = getFilteredAssetList())
+
     function getFilteredAssetList(): IAsset[] {
         const list = []
 
@@ -28,14 +32,37 @@
             list.push(assets.baseCoin)
         }
         list.push(...assets?.nativeTokens)
-        return list.filter((_nativeToken) => isVisibleAsset(_nativeToken))
+        return searchAssets(
+            list.filter((_nativeToken) => isVisibleAsset(_nativeToken)),
+            searchValue
+        )
+    }
+
+    function searchAssets(assets: IAsset[], searchValue: string): IAsset[] {
+        const filteredAssets = assets?.filter((asset) => {
+            if (!searchValue) {
+                return true
+            } else {
+                const matchId = asset?.id?.toLowerCase().includes(searchValue.toLowerCase())
+
+                const metadataKeys = ['name', 'description', 'unit']
+                const matchMetadata = metadataKeys.some((key) => {
+                    const hasMatch = asset?.metadata?.[key]?.toLowerCase().includes(searchValue.toLowerCase())
+                    return hasMatch
+                })
+
+                return matchId || matchMetadata
+            }
+        })
+        return filteredAssets
     }
 </script>
 
 {#if assets}
     <asset-list-container class="asset-list h-full flex flex-auto flex-col flex-grow flex-shrink-0">
-        <asset-list-header class="sticky pb-4">
-            <Filter filterStoreValue={$assetFilter} filterType="asset" />
+        <asset-list-header class="flex justify-between items-center sticky pb-4">
+            <Filter filterStoreValue={$assetFilter} filterType={FilterType.Asset} />
+            <SearchInput bind:value={searchValue} />
         </asset-list-header>
         {#if assetList.length > 0}
             <VirtualList items={assetList} let:item>

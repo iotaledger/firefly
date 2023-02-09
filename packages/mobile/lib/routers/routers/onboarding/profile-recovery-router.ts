@@ -20,6 +20,10 @@ export class ProfileRecoveryRouter extends Subrouter<ProfileRecoveryRoute> {
         )
     }
 
+    resetRecovery(): void {
+        get(onboardingRouter).resetRecovery()
+    }
+
     resetRoute(): void {
         profileRecoveryRoute.set(getInitialRoute() ?? ProfileRecoveryRoute.ImportMnemonicPhrase)
     }
