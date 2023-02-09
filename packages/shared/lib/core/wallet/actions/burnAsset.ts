@@ -1,16 +1,13 @@
-import { showAppNotification } from '@auxiliary/notification'
-import { selectedAccount, updateSelectedAccount } from '@core/account/stores/selected-account.store'
-import { handleError } from '@core/error/handlers/handleError'
-import { localize } from '@core/i18n'
-import { handleLedgerError } from '@core/ledger'
-import { activeProfile, ProfileType } from '@core/profile'
-import { Converter } from '@core/utils'
 import { get } from 'svelte/store'
+import { showAppNotification } from '@auxiliary/notification'
+import { selectedAccount, updateSelectedAccount } from '@core/account/stores'
+import { localize } from '@core/i18n'
+import { Converter } from '@core/utils'
+import { handleError } from '@core/error/handlers'
 import { processAndAddToActivities } from '../utils'
 
 export async function burnAsset(assetId: string, rawAmount: string): Promise<void> {
     const account = get(selectedAccount)
-    const _activeProfile = get(activeProfile)
     try {
         updateSelectedAccount({ isTransferring: true })
         const burnTokenTransaction = await account.burnNativeToken(
@@ -26,11 +23,7 @@ export async function burnAsset(assetId: string, rawAmount: string): Promise<voi
             alert: true,
         })
     } catch (err) {
-        if (_activeProfile.type === ProfileType.Ledger) {
-            handleLedgerError(err.error)
-        } else {
-            handleError(err)
-        }
+        handleError(err)
     } finally {
         updateSelectedAccount({ isTransferring: false })
     }

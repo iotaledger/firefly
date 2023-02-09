@@ -2,23 +2,26 @@ import { get } from 'svelte/store'
 
 import { Transaction } from '@iota/wallet/out/types'
 
-import { selectedAccount, updateSelectedAccount } from '@core/account/stores'
+import { selectedAccount } from '@core/account/stores'
 import { processAndAddToActivities } from '@core/wallet/utils'
 
-import { hasToRevote, setPendingGovernanceTransactionIdForAccount } from '../stores'
+import {
+    clearHasPendingGovernanceTransactionForAccount,
+    hasToRevote,
+    setHasPendingGovernanceTransactionForAccount,
+} from '../stores'
 import { handleError } from '@core/error/handlers'
 
 export async function setVotingPower(rawAmount: string, isVoting: boolean): Promise<void> {
+    const account = get(selectedAccount)
     try {
         // If voting power is set to '0', the PARTICIPATE tag is removed and no revoting has to occur.
         hasToRevote.set(rawAmount !== '0' && isVoting)
 
-        const account = get(selectedAccount)
         const votingPower = parseInt(account.votingPower, 10)
         const amount = parseInt(rawAmount, 10)
 
-        // isTransferring is kept true until wallet.rs confirms transaction inclusion
-        updateSelectedAccount({ isTransferring: true })
+        setHasPendingGovernanceTransactionForAccount(account.index)
 
         let transaction: Transaction
         if (amount > votingPower) {
@@ -28,11 +31,10 @@ export async function setVotingPower(rawAmount: string, isVoting: boolean): Prom
             const amountToDecrease = votingPower - amount
             transaction = await account.decreaseVotingPower(amountToDecrease.toString())
         }
-        setPendingGovernanceTransactionIdForAccount(account.index, transaction.transactionId)
         await processAndAddToActivities(transaction)
     } catch (err) {
         hasToRevote.set(false)
         handleError(err)
-        updateSelectedAccount({ isTransferring: false })
+        clearHasPendingGovernanceTransactionForAccount(account.index)
     }
 }

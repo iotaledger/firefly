@@ -10,7 +10,7 @@
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
     import { vote } from '@contexts/governance/actions'
     import { ABSTAIN_VOTE_VALUE } from '@contexts/governance/constants'
-    import { pendingGovernanceTransactionIds, selectedProposal } from '@contexts/governance/stores'
+    import { hasPendingGovernanceTransaction, selectedProposal } from '@contexts/governance/stores'
 
     export let selectedAnswerValues: number[]
 
@@ -20,8 +20,7 @@
     )
     $: hasVotingPower = Number($selectedAccount?.votingPower) > 0
 
-    $: isTransferring =
-        $selectedAccount?.isTransferring || Boolean($pendingGovernanceTransactionIds?.[$selectedAccount.index])
+    $: isTransferring = $hasPendingGovernanceTransaction?.[$selectedAccount.index]
 
     $: numberOfAbstainedQuestions =
         selectedAnswerValues?.filter((answerValue) => answerValue === ABSTAIN_VOTE_VALUE).length ?? 0

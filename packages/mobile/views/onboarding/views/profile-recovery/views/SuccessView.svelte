@@ -3,13 +3,7 @@
     import { OnboardingLayout } from '../../../../../components'
     import { Button, Icon, Text, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
-    import {
-        OnboardingRoute,
-        onboardingRoute,
-        profileRecoveryRouter,
-        ProfileSetupRoute,
-        profileSetupRoute,
-    } from '../../../../../lib/routers'
+    import { profileRecoveryRouter } from '../../../../../lib/routers'
     import { updateOnboardingProfile } from '@contexts/onboarding'
 
     function onContinueClick(): void {
@@ -17,9 +11,7 @@
     }
 
     function onBackClick(): void {
-        $profileRecoveryRouter.reset()
-        profileSetupRoute.set(ProfileSetupRoute.SetupRecovered)
-        onboardingRoute.set(OnboardingRoute.ProfileSetup)
+        $profileRecoveryRouter.resetRecovery()
     }
 
     onMount(() => {
