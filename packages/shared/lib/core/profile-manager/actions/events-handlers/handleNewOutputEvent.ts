@@ -35,7 +35,7 @@ export async function handleNewOutputEventInternal(
         !get(allAccountActivities)[accountIndex].find((_activity) => _activity.id === output.outputId)
     const isNftOutput = output.output.type === OUTPUT_TYPE_NFT
 
-    if ((account.depositAddress === address && !output?.remainder) || isNewAliasOutput) {
+    if ((account?.depositAddress === address && !output?.remainder) || isNewAliasOutput) {
         await syncBalance(account.index)
 
         const processedOutput = preprocessGroupedOutputs([output], payload?.transactionInputs ?? [], account)
@@ -51,7 +51,7 @@ export async function handleNewOutputEventInternal(
     }
 
     if (isNftOutput) {
-        const isSpendable = getIsSpendableFromUnspentNftOutput(account.depositAddress, output.output as INftOutput)
+        const isSpendable = getIsSpendableFromUnspentNftOutput(account?.depositAddress, output.output as INftOutput)
         const nft = buildNftFromNftOutput(output.output as INftOutput, output.outputId, isSpendable)
         addOrUpdateNftInAllAccountNfts(account.index, nft)
     }
