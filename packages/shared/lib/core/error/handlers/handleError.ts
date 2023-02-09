@@ -13,7 +13,7 @@ export function handleError(err: IError, resetConfirmationPropsOnDenial = true):
     if (Object.values(WalletRsError).includes(err?.type as WalletRsError)) {
         handleWalletRsError(err)
     } else if (_activeProfile.type === ProfileType.Ledger) {
-        handleLedgerError(err?.error, resetConfirmationPropsOnDenial)
+        handleLedgerError(err, resetConfirmationPropsOnDenial)
     } else {
         handleGenericError(err)
     }
