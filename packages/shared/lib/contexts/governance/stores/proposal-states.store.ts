@@ -22,14 +22,12 @@ export function removeProposalState(eventId: string): void {
     }
 }
 
-export async function updateProposalsState(): Promise<void> {
+export async function updateProposalsState(eventId: string): Promise<void> {
     const _proposalStates = get(proposalStates)
 
-    for (const eventId of Object.keys(_proposalStates ?? {})) {
-        const votingProposalState = await getVotingProposalState(eventId)
-        if (votingProposalState) {
-            _proposalStates[eventId] = { state: votingProposalState }
-        }
+    const votingProposalState = await getVotingProposalState(eventId)
+    if (votingProposalState) {
+        _proposalStates[eventId] = { state: votingProposalState }
     }
     proposalStates.set(_proposalStates)
 }

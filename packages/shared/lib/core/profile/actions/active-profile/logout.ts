@@ -1,6 +1,5 @@
 import { closePopup } from '@auxiliary/popup'
 import { resetSelectedAccount } from '@core/account'
-import { clearGovernancePollAndData } from '@contexts/governance'
 import {
     resetHasPendingGovernanceTransaction,
     resetProposalOverviews,
@@ -36,7 +35,6 @@ export async function logout(clearActiveProfile = true, _lockStronghold = true):
 
     clearNetworkPoll()
     clearMarketPricesPoll()
-    clearGovernancePollAndData()
 
     const _activeProfile = get(activeProfile)
     if (_activeProfile) {

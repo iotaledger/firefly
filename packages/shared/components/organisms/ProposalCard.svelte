@@ -47,7 +47,7 @@
         <Text fontWeight={FontWeight.semibold} fontSize="14" classes="truncate" lineHeight="5">{proposal.title}</Text>
     </div>
     <div class="flex justify-between items-center">
-        <ProposalStatusInfo status={proposal?.state?.status} milestones={proposal.milestones} />
+        <ProposalStatusInfo {proposal} />
         {#if hasVoted}
             <TooltipIcon
                 text={localize('views.governance.proposals.voted')}

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { onMount } from 'svelte'
+    import { onMount, onDestroy } from 'svelte'
     import { VotingEventPayload, ParticipationEventType, TrackedParticipationOverview } from '@iota/wallet/out/types'
     import { localize } from '@core/i18n'
     import {
@@ -25,6 +25,7 @@
         selectedProposal,
         updateParticipationOverview,
         participationOverviewForSelectedAccount,
+        proposalStates,
     } from '@contexts/governance/stores'
     import {
         calculateTotalVotesForTrackedParticipations,
@@ -37,6 +38,7 @@
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
     import { visibleSelectedAccountAssets } from '@core/wallet/stores'
     import { handleError } from '@core/error/handlers'
+    import { clearParticipationEventStatusPoll, pollParticipationEventStatus } from '@contexts/governance/actions/pollParticipationEventStatus'
 
     const { metadata } = $visibleSelectedAccountAssets?.baseCoin
 
@@ -54,6 +56,7 @@
 
     $: proposalState = $selectedProposal?.state
     $: selectedProposalOverview = $participationOverviewForSelectedAccount?.participations?.[$selectedProposal?.id]
+
     $: trackedParticipations = Object.values(selectedProposalOverview ?? {})
     $: currentMilestone = $networkStatus.currentMilestone
 
@@ -77,7 +80,6 @@
         !isProposalVotable(proposalState?.status) ||
         !hasChangedAnswers(selectedAnswerValues) ||
         hasSelectedNoAnswers(selectedAnswerValues)
-
     $: isTransferring = $hasPendingGovernanceTransaction?.[$selectedAccountIndex]
     $: proposalState, (textHintString = getTextHintString())
 
@@ -200,9 +202,17 @@
     }
 
     onMount(async () => {
+        void pollParticipationEventStatus($selectedProposal?.id)
+        // TODO: this api call gets all overviews, we need to change it so that we just get one
+        // We then need to update the latest overview manually if we perform an action
+        void updateParticipationOverview($selectedAccountIndex)
         await setVotingEventPayload($selectedProposal?.id)
         await updateIsVoting()
         hasMounted = true
+    })
+
+    onDestroy(() => {
+        clearParticipationEventStatusPoll()
     })
 </script>
 
@@ -255,7 +265,7 @@
                         isOpened={openedQuestionIndex === questionIndex}
                         selectedAnswerValue={selectedAnswerValues[questionIndex]}
                         votedAnswerValue={votedAnswerValues[questionIndex]}
-                        answerStatuses={$selectedProposal.state?.questions[questionIndex]?.answers}
+                        answerStatuses={$proposalStates[$selectedProposal.state]?.questions?.[questionIndex]?.answers}
                         on:clickQuestion={handleQuestionClick}
                         on:clickAnswer={handleAnswerClick}
                     />
