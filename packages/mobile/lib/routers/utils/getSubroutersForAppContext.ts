@@ -6,7 +6,6 @@ import { IRouter } from '@core/router/interfaces'
 import {
     accountActionsRouter,
     accountSwitcherRouter,
-    activityRouter,
     appSetupRouter,
     networkSetupRouter,
     networkConfigurationSettingsRouter,
@@ -28,7 +27,6 @@ export function getSubroutersForAppContext(context: AppContext): IRouter[] {
                 get(accountSwitcherRouter),
                 get(accountActionsRouter),
                 get(sendRouter),
-                get(activityRouter),
                 get(tokenRouter),
                 get(profileRouter),
                 get(settingsRouter),

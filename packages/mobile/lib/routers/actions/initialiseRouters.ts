@@ -3,8 +3,6 @@ import {
     accountActionsRouter,
     AccountSwitcherRouter,
     accountSwitcherRouter,
-    ActivityRouter,
-    activityRouter,
     appRouter,
     AppRouter,
     AppSetupRouter,
@@ -91,7 +89,6 @@ function initialiseOnboardingSubrouters(): void {
 function initialiseDashboardSubrouters(): void {
     accountSwitcherRouter.set(new AccountSwitcherRouter())
     accountActionsRouter.set(new AccountActionsRouter())
-    activityRouter.set(new ActivityRouter())
     sendRouter.set(new SendRouter())
     tokenRouter.set(new TokenRouter())
     profileRouter.set(new ProfileRouter())
