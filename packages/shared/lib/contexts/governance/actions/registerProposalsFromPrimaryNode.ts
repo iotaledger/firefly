@@ -23,10 +23,11 @@ export async function registerProposalsFromPrimaryNode(): Promise<void> {
         throw new Error('Unable to retrieve primary node')
     }
 
+    const _selectedAccount = get(selectedAccount)
     await Promise.all(
         proposalIds.map(async (proposalId) => {
             if (!isProposalAlreadyAddedForSelectedAccount(proposalId)) {
-                await registerParticipationEvent(proposalId, primaryNode, get(selectedAccount))
+                await registerParticipationEvent(proposalId, primaryNode, _selectedAccount)
             }
         })
     )

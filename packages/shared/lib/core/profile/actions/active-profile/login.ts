@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 
-import { getGovernanceData, pollGovernanceData, registerProposalsFromPrimaryNode } from '@contexts/governance/actions'
+import { getGovernanceData, pollGovernanceData } from '@contexts/governance/actions'
 import { cleanupOnboarding } from '@contexts/onboarding/actions'
 
 import { Platform } from '@core/app/classes'
@@ -140,7 +140,6 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             if (Platform.isFeatureFlagEnabled('governance')) {
                 void getGovernanceData()
                 void pollGovernanceData()
-                void registerProposalsFromPrimaryNode()
             }
 
             void cleanupOnboarding()
