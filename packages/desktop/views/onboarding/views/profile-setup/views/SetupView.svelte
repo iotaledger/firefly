@@ -26,9 +26,9 @@
         $profileSetupRouter.previous()
     }
 
-    onMount(() => {
+    onMount(async () => {
         if (!$onboardingProfile?.id) {
-            initialiseOnboardingProfile(
+            await initialiseOnboardingProfile(
                 $onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile(),
                 NetworkProtocol.Shimmer
             )
@@ -41,7 +41,7 @@
             )
             updateOnboardingProfile({ clientOptions })
         }
-        destroyProfileManager()
+        await destroyProfileManager()
         updateOnboardingProfile({ mustVisitProfileName: true, setupType: null, hasInitialisedProfileManager: false })
     })
 </script>

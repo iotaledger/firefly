@@ -23,8 +23,8 @@
         $profileSetupRouter.previous()
     }
 
-    onMount(() => {
-        destroyProfileManager()
+    onMount(async () => {
+        await destroyProfileManager()
         updateOnboardingProfile({ type: null, hasInitialisedProfileManager: false })
     })
 </script>
