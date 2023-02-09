@@ -21,8 +21,8 @@
         $appSetupRouter.next()
     }
 
-    onMount(() => {
-        initialiseOnboardingProfile(
+    onMount(async () => {
+        await initialiseOnboardingProfile(
             $onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile(),
             NetworkProtocol.Shimmer
         )

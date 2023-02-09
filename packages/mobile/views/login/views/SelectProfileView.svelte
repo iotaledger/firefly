@@ -15,13 +15,13 @@
 
     $: dark = $appSettings.darkMode
 
-    function onContinueClick(id: string) {
+    function onContinueClick(id: string): void {
         loadPersistedProfileIntoActiveProfile(id)
         $loginRouter.next()
     }
 
-    function onAddProfileClick() {
-        initialiseOnboardingProfile(shouldBeDeveloperProfile(), NetworkProtocol.Shimmer)
+    async function onAddProfileClick(): Promise<void> {
+        await initialiseOnboardingProfile(shouldBeDeveloperProfile(), NetworkProtocol.Shimmer)
         if (!shouldBeDeveloperProfile()) {
             updateOnboardingProfile({ networkType: NetworkType.Mainnet })
         }
