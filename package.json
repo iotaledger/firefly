@@ -32,7 +32,10 @@
         "pre-commit": "yarn format-check && yarn lint",
         "prepare": "husky install",
         "test": "yarn test:shared",
-        "test:shared": "cd packages/shared && yarn test"
+        "test:shared": "cd packages/shared && yarn test",
+        "check-types": "yarn check-types:shared && yarn check-types:desktop",
+        "check-types:shared": "cd packages/shared && tsc --pretty --noEmit",
+        "check-types:desktop": "cd packages/desktop && tsc --pretty --noEmit"
     },
     "resolutions": {
         "ansi-regex": "5.0.1",
