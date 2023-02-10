@@ -50,7 +50,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
         if (id) {
             // Step 1: create profile manager if its doesn't exist
             incrementLoginProgress()
-            await checkIfPreviousManagerIsDestroyed()
+            await waitForPreviousManagerToBeDestroyed()
             if (!get(profileManager)) {
                 const profileManagerOptions = await buildProfileManagerOptionsFromProfileData(_activeProfile)
                 const { storagePath, coinType, clientOptions, secretManager } = profileManagerOptions
@@ -153,7 +153,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
     }
 }
 
-async function checkIfPreviousManagerIsDestroyed(): Promise<void> {
+async function waitForPreviousManagerToBeDestroyed(): Promise<void> {
     for (let count = 0; count < CHECK_PREVIOUS_MANAGER_IS_DESTROYED_MAX_COUNT; count++) {
         if (!get(isDestroyingManager)) {
             return Promise.resolve()
