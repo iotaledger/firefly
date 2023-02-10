@@ -33,7 +33,7 @@ import { logout } from './logout'
 import { subscribeToWalletApiEventsForActiveProfile } from './subscribeToWalletApiEventsForActiveProfile'
 import { AppContext, Platform } from '@core/app'
 import { routerManager } from '@core/router/stores'
-import { pollGovernanceData, getGovernanceData } from '@contexts/governance/actions'
+import { initializeRegisteredProposals } from '@contexts/governance/actions'
 
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const loginRouter = get(routerManager).getRouterForAppContext(AppContext.Login)
@@ -119,11 +119,6 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 pollLedgerNanoStatus()
             }
 
-            if (Platform.isFeatureFlagEnabled('governance')) {
-                void getGovernanceData()
-                void pollGovernanceData()
-            }
-
             setSelectedAccount(lastUsedAccountIndex ?? get(activeAccounts)?.[0]?.index ?? null)
             lastActiveAt.set(new Date())
             loggedIn.set(true)
@@ -131,8 +126,11 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 loginRouter?.next()
                 resetLoginProgress()
             }, 500)
-            void pollMarketPrices()
 
+            void pollMarketPrices()
+            if (Platform.isFeatureFlagEnabled('governance')) {
+                void initializeRegisteredProposals()
+            }
             void cleanupOnboarding()
         } else {
             throw Error('No active profile error')

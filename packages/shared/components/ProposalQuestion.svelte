@@ -24,8 +24,7 @@
     $: answers = [...question?.answers, { value: 0, text: 'Abstain', additionalInfo: '' }]
     $: percentages = getPercentagesFromAnswerStatuses(answerStatuses)
     $: disabled =
-        $selectedProposal.state?.status === ProposalStatus.Upcoming ||
-        $selectedProposal.state?.status === ProposalStatus.Ended
+        $selectedProposal?.status === ProposalStatus.Upcoming || $selectedProposal?.status === ProposalStatus.Ended
     $: answerStatuses, setWinnerAnswerIndex()
     $: showMargin =
         isOpened ||
@@ -42,7 +41,7 @@
     }
 
     function setWinnerAnswerIndex(): void {
-        if ($selectedProposal.state.status === ProposalStatus.Ended && answerStatuses?.length > 0) {
+        if ($selectedProposal?.status === ProposalStatus.Ended && answerStatuses?.length > 0) {
             const answersAccumulated = answerStatuses?.map((answer) => answer.accumulated)
             const maxAccumulated = Math.max(...answersAccumulated)
             winnerAnswerIndex = answersAccumulated?.indexOf(maxAccumulated)
@@ -92,7 +91,7 @@
                 hidden={!isOpened}
                 percentage={percentages[answer.value]}
                 isWinner={answerIndex === winnerAnswerIndex}
-                proposalStatus={$selectedProposal.state?.status}
+                proposalStatus={$selectedProposal?.status}
                 truncate={!isOpened}
                 on:click={handleAnswerClick(answer.value)}
             />

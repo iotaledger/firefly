@@ -1,10 +1,9 @@
 import { closePopup } from '@auxiliary/popup'
 import { resetSelectedAccount } from '@core/account'
-import { clearGovernancePollAndData } from '@contexts/governance'
 import {
+    clearSelectedParticipationEventStatus,
     resetHasPendingGovernanceTransaction,
     resetProposalOverviews,
-    resetProposalStates,
     resetRegisteredProposals,
 } from '@contexts/governance/stores'
 import { isPollingLedgerDeviceStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
@@ -36,7 +35,6 @@ export async function logout(clearActiveProfile = true, _lockStronghold = true):
 
     clearNetworkPoll()
     clearMarketPricesPoll()
-    clearGovernancePollAndData()
 
     const _activeProfile = get(activeProfile)
     if (_activeProfile) {
@@ -62,7 +60,7 @@ function cleanupProfileState(clearActiveProfile: boolean): void {
     resetHasPendingGovernanceTransaction()
     resetRegisteredProposals()
     resetProposalOverviews()
-    resetProposalStates()
+    clearSelectedParticipationEventStatus()
 
     activeAccounts.set([])
     if (clearActiveProfile) {
