@@ -3,7 +3,7 @@ import type { ParticipationEventId, ParticipationEventStatus } from '@iota/walle
 import { selectedAccount } from '@core/account/stores'
 import { IAccount } from '@core/account'
 
-export async function getVotingProposalState(
+export async function getAccountsParticipationEventStatusForEvent(
     eventId: ParticipationEventId,
     account: IAccount = get(selectedAccount)
 ): Promise<ParticipationEventStatus> {
