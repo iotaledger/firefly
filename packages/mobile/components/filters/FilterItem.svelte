@@ -15,7 +15,7 @@
 </script>
 
 <filter-item class="block px-5 -mx-5 border-t border-solid border-gray-200 dark:border-gray-800">
-    <filter-item-toggle class="block py-4 flex flex-row justify-between">
+    <filter-item-toggle class="flex flex-row justify-between py-4">
         <Text fontWeight={FontWeight.medium} fontSize="15"
             >{localize(filterUnit.labelKey ?? filterUnit.localeKey + '.label')}</Text
         >
@@ -48,9 +48,6 @@
 <style lang="scss">
     filter-item:last-of-type {
         @apply border-b;
-        @apply border-solid;
-        @apply border-gray-200;
-        @apply dark:border-gray-800;
     }
 
     filter-item-type :global(p) {
