@@ -55,9 +55,6 @@
     let proposalQuestions: HTMLElement
     let isVotingForProposal: boolean = false
 
-    // $: $selectedAccountIndex, void updateParticipationOverview()
-    // $: $selectedAccountIndex, (selectedAnswerValues = [])
-
     $: selectedProposalOverview = $participationOverviewForSelectedAccount?.participations?.[$selectedProposal?.id]
     $: trackedParticipations = Object.values(selectedProposalOverview ?? {})
     $: currentMilestone = $networkStatus.currentMilestone
