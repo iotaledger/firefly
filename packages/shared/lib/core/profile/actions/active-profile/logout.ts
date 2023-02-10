@@ -16,8 +16,9 @@ import {
     isSoftwareProfile,
     lockStronghold,
     resetActiveProfile,
+    isDestroyingManager,
 } from '@core/profile'
-import { destroyProfileManager, unsubscribeFromWalletApiEvents } from '@core/profile-manager'
+import { destroyProfileManager, IProfileManager, unsubscribeFromWalletApiEvents } from '@core/profile-manager'
 import { profileManager } from '@core/profile-manager/stores'
 import { routerManager } from '@core/router/stores'
 import { get } from 'svelte/store'
@@ -26,7 +27,7 @@ import { clearFilters } from '@core/utils'
 /**
  * Logout from active profile
  */
-export async function logout(clearActiveProfile = true, _lockStronghold = true): Promise<void> {
+export function logout(clearActiveProfile = true, _lockStronghold = true): void {
     if (get(isSoftwareProfile)) {
         _lockStronghold && lockStronghold()
     } else if (isLedgerProfile(get(activeProfile).type)) {
@@ -39,9 +40,7 @@ export async function logout(clearActiveProfile = true, _lockStronghold = true):
     const _activeProfile = get(activeProfile)
     if (_activeProfile) {
         const manager = get(profileManager)
-        await manager?.stopBackgroundSync()
-        await unsubscribeFromWalletApiEvents()
-        await destroyProfileManager()
+        void destroyWalletRsObjects(manager)
     }
 
     cleanupProfileState(clearActiveProfile)
@@ -68,4 +67,12 @@ function cleanupProfileState(clearActiveProfile: boolean): void {
     }
     clearFilters()
     get(routerManager).resetRouters()
+}
+
+async function destroyWalletRsObjects(manager: IProfileManager): Promise<void> {
+    isDestroyingManager.set(true)
+    await manager?.stopBackgroundSync()
+    await unsubscribeFromWalletApiEvents()
+    await destroyProfileManager()
+    isDestroyingManager.set(false)
 }
