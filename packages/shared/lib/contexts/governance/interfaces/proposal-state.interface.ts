@@ -3,7 +3,7 @@ import { IOrganization } from '..'
 import { ProposalStatus, ProposalType } from '../enums'
 
 export interface IProposal extends IProposalMetadata {
-    state: ParticipationEventStatus
+    status: string
 }
 
 export interface IProposalState {
