@@ -2013,7 +2013,7 @@
             "uri": "Per creare un URI utilizzando multimedia personalizzati, prima, carica il tuo file a IPFS tramite un servizio d'archiviazione (es. https://nft.storage/)"
         },
         "governance": {
-            "removeProposalWarning": "Devi interrompere la votazione di questa proposta in tutti gli account prima di rimuoverla."
+            "removeProposalWarning": "Devi interrompere la votazione a favore di questa proposta prima di rimuoverla."
         }
     },
     "exports": {
