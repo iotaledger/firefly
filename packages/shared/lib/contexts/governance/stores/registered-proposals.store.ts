@@ -14,13 +14,13 @@ export const registeredProposalsForSelectedAccount: Readable<{ [proposalId: stri
             const proposals: { [proposalId: string]: IProposal } = {}
             for (const key of Object.keys(proposalsForSelectedAccount)) {
                 const status = getProposalStatusForMilestone(
-                    $networkStatus?.currentMilestone,
+                    $networkStatus.currentMilestone,
                     proposalsForSelectedAccount[key]?.milestones
                 )
                 proposals[key] = { ...proposalsForSelectedAccount[key], status }
             }
 
-            return proposals ?? {}
+            return proposals
         } else {
             return {}
         }
