@@ -21,6 +21,7 @@ import {
     storageProtectionSetupRouter,
     strongholdSetupRouter,
     tokenRouter,
+    filterRouter,
 } from '../routers'
 
 export function resetRouters(): void {
@@ -58,6 +59,7 @@ function resetDashboardSubrouters(): void {
     get(activityRouter).reset()
     get(sendRouter).reset()
     get(tokenRouter).reset()
+    get(filterRouter).reset()
     get(profileRouter).reset()
     get(settingsRouter).reset()
 }
