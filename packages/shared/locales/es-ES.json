@@ -2013,7 +2013,7 @@
             "uri": "Para crear una URI usando medios personalizados, primero sube tu archivo a IPFS a través de un servicio de almacenamiento (por ejemplo, https://nft.storage/)"
         },
         "governance": {
-            "removeProposalWarning": "Debe dejar de votar a favor de esta propuesta en todas las cuentas antes de eliminarla."
+            "removeProposalWarning": "Debes dejar de votar en esta propuesta antes de eliminarla."
         }
     },
     "exports": {

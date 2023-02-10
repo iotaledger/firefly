@@ -2013,7 +2013,7 @@
             "uri": "Um eine URI mittels benutzerdefinierter Medien zu erstellen, laden Sie zuerst Ihre Datei über einen Speicherdienst auf IPFS hoch (z.B. https://nft.storage/)"
         },
         "governance": {
-            "removeProposalWarning": "Du musst das Abstimmen in allen Konten stoppen, bevor du die Abstimmung entfernen kannst."
+            "removeProposalWarning": "Du musst das Abstimmen für diese Abstimmung stoppen, bevor du sie entfernen kannst."
         }
     },
     "exports": {

@@ -29,6 +29,5 @@ export function createProposalFromEvent(event: ParticipationEventWithNodes): IPr
         milestones,
         type: isOfficialNetwork ? ProposalType.Official : ProposalType.Custom,
     }
-
     return proposal
 }
