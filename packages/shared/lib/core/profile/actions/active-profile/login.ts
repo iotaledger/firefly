@@ -16,7 +16,12 @@ import {
 import { getAccounts, setStrongholdPasswordClearInterval, startBackgroundSync } from '@core/profile-manager/api'
 import { generateAndStoreActivitiesForAllAccounts, refreshAccountAssetsForActiveProfile } from '@core/wallet'
 import { get } from 'svelte/store'
-import { DEFAULT_ACCOUNT_RECOVERY_CONFIGURATION, STRONGHOLD_PASSWORD_CLEAR_INTERVAL } from '../../constants'
+import {
+    CHECK_PREVIOUS_MANAGER_IS_DESTROYED_INTERVAL,
+    CHECK_PREVIOUS_MANAGER_IS_DESTROYED_MAX_COUNT,
+    DEFAULT_ACCOUNT_RECOVERY_CONFIGURATION,
+    STRONGHOLD_PASSWORD_CLEAR_INTERVAL,
+} from '../../constants'
 import { ProfileType } from '../../enums'
 import { ILoginOptions } from '../../interfaces'
 import {
@@ -26,6 +31,7 @@ import {
     resetLoginProgress,
     updateProfile,
     setTimeStrongholdLastUnlocked,
+    isDestroyingManager,
 } from '../../stores'
 import { isLedgerProfile } from '../../utils'
 import { loadAccounts } from './loadAccounts'
@@ -33,7 +39,8 @@ import { logout } from './logout'
 import { subscribeToWalletApiEventsForActiveProfile } from './subscribeToWalletApiEventsForActiveProfile'
 import { AppContext, Platform } from '@core/app'
 import { routerManager } from '@core/router/stores'
-import { pollGovernanceData, getGovernanceData } from '@contexts/governance/actions'
+import { initializeRegisteredProposals } from '@contexts/governance/actions'
+import { sleep } from '@core/utils/os'
 
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const loginRouter = get(routerManager).getRouterForAppContext(AppContext.Login)
@@ -43,6 +50,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
         if (id) {
             // Step 1: create profile manager if its doesn't exist
             incrementLoginProgress()
+            await waitForPreviousManagerToBeDestroyed()
             if (!get(profileManager)) {
                 const profileManagerOptions = await buildProfileManagerOptionsFromProfileData(_activeProfile)
                 const { storagePath, coinType, clientOptions, secretManager } = profileManagerOptions
@@ -119,11 +127,6 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 pollLedgerNanoStatus()
             }
 
-            if (Platform.isFeatureFlagEnabled('governance')) {
-                void getGovernanceData()
-                void pollGovernanceData()
-            }
-
             setSelectedAccount(lastUsedAccountIndex ?? get(activeAccounts)?.[0]?.index ?? null)
             lastActiveAt.set(new Date())
             loggedIn.set(true)
@@ -131,8 +134,11 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 loginRouter?.next()
                 resetLoginProgress()
             }, 500)
-            void pollMarketPrices()
 
+            void pollMarketPrices()
+            if (Platform.isFeatureFlagEnabled('governance')) {
+                void initializeRegisteredProposals()
+            }
             void cleanupOnboarding()
         } else {
             throw Error('No active profile error')
@@ -140,9 +146,19 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
     } catch (err) {
         handleError(err)
         if (!loginOptions?.isFromOnboardingFlow) {
-            await logout(false)
+            logout(false)
         }
         loginRouter?.previous()
         resetLoginProgress()
     }
+}
+
+async function waitForPreviousManagerToBeDestroyed(): Promise<void> {
+    for (let count = 0; count < CHECK_PREVIOUS_MANAGER_IS_DESTROYED_MAX_COUNT; count++) {
+        if (!get(isDestroyingManager)) {
+            return Promise.resolve()
+        }
+        await sleep(CHECK_PREVIOUS_MANAGER_IS_DESTROYED_INTERVAL)
+    }
+    return Promise.reject()
 }

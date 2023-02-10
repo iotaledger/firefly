@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { onMount } from 'svelte'
+    import { onMount, onDestroy } from 'svelte'
     import { VotingEventPayload, ParticipationEventType, TrackedParticipationOverview } from '@iota/wallet/out/types'
     import { localize } from '@core/i18n'
     import {
@@ -25,6 +25,8 @@
         selectedProposal,
         updateParticipationOverview,
         participationOverviewForSelectedAccount,
+        selectedParticipationEventStatus,
+        clearSelectedParticipationEventStatus,
     } from '@contexts/governance/stores'
     import {
         calculateTotalVotesForTrackedParticipations,
@@ -37,6 +39,10 @@
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
     import { visibleSelectedAccountAssets } from '@core/wallet/stores'
     import { handleError } from '@core/error/handlers'
+    import {
+        clearParticipationEventStatusPoll,
+        pollParticipationEventStatus,
+    } from '@contexts/governance/actions/pollParticipationEventStatus'
 
     const { metadata } = $visibleSelectedAccountAssets?.baseCoin
 
@@ -49,16 +55,16 @@
     let proposalQuestions: HTMLElement
     let isVotingForProposal: boolean = false
 
-    $: $selectedAccountIndex, void updateParticipationOverview()
-    $: $selectedAccountIndex, (selectedAnswerValues = [])
-
-    $: proposalState = $selectedProposal?.state
     $: selectedProposalOverview = $participationOverviewForSelectedAccount?.participations?.[$selectedProposal?.id]
     $: trackedParticipations = Object.values(selectedProposalOverview ?? {})
     $: currentMilestone = $networkStatus.currentMilestone
 
     // Reactively start updating votes once component has mounted and participation overview is available.
-    $: hasMounted && proposalState && trackedParticipations && currentMilestone && setVotedAnswerValuesAndTotalVotes()
+    $: hasMounted &&
+        $selectedParticipationEventStatus &&
+        trackedParticipations &&
+        currentMilestone &&
+        setVotedAnswerValuesAndTotalVotes()
     $: hasMounted && selectedProposalOverview && updateIsVoting()
 
     $: votesCounter = {
@@ -74,12 +80,11 @@
     }
 
     $: isVotingDisabled =
-        !isProposalVotable(proposalState?.status) ||
+        !isProposalVotable($selectedParticipationEventStatus?.status) ||
         !hasChangedAnswers(selectedAnswerValues) ||
         hasSelectedNoAnswers(selectedAnswerValues)
-
     $: isTransferring = $hasPendingGovernanceTransaction?.[$selectedAccountIndex]
-    $: proposalState, (textHintString = getTextHintString())
+    $: $selectedParticipationEventStatus, (textHintString = getTextHintString())
 
     function hasSelectedNoAnswers(_selectedAnswerValues: number[]): boolean {
         return (
@@ -130,7 +135,7 @@
 
     function setVotedAnswerValuesAndTotalVotes(): void {
         let lastActiveOverview: TrackedParticipationOverview
-        switch (proposalState?.status) {
+        switch ($selectedParticipationEventStatus?.status) {
             case ProposalStatus.Upcoming:
                 totalVotes = 0
                 break
@@ -200,9 +205,18 @@
     }
 
     onMount(async () => {
+        void pollParticipationEventStatus($selectedProposal?.id)
+        // TODO: this api call gets all overviews, we need to change it so that we just get one
+        // We then need to update the latest overview manually if we perform an action
+        void updateParticipationOverview($selectedAccountIndex)
         await setVotingEventPayload($selectedProposal?.id)
         await updateIsVoting()
         hasMounted = true
+    })
+
+    onDestroy(() => {
+        clearParticipationEventStatusPoll()
+        clearSelectedParticipationEventStatus()
     })
 </script>
 
@@ -210,7 +224,7 @@
     <div class="w-2/5 flex flex-col space-y-4">
         <Pane classes="p-6 flex flex-col h-fit">
             <header-container class="flex justify-between items-center mb-4">
-                <ProposalStatusPill status={$selectedProposal.state?.status} />
+                <ProposalStatusPill status={$selectedProposal?.status} />
                 <ProposalDetailsButton />
             </header-container>
             <div class="flex flex-1 flex-col justify-between">
@@ -219,7 +233,7 @@
                     <Text
                         type={TextType.h5}
                         overrideColor
-                        classes="text-gray-600 mt-4 max-h-40 overflow-hidden"
+                        classes="text-gray-600 mt-4 max-h-40 overflow-hidden select-text"
                         fontWeight={FontWeight.medium}>{$selectedProposal?.additionalInfo}</Text
                     >
                 {/if}
@@ -255,16 +269,16 @@
                         isOpened={openedQuestionIndex === questionIndex}
                         selectedAnswerValue={selectedAnswerValues[questionIndex]}
                         votedAnswerValue={votedAnswerValues[questionIndex]}
-                        answerStatuses={$selectedProposal.state?.questions[questionIndex]?.answers}
+                        answerStatuses={$selectedParticipationEventStatus?.questions?.[questionIndex]?.answers}
                         on:clickQuestion={handleQuestionClick}
                         on:clickAnswer={handleAnswerClick}
                     />
                 {/each}
             {/if}
         </proposal-questions>
-        {#if $selectedProposal.state?.status === ProposalStatus.Upcoming}
+        {#if $selectedProposal?.status === ProposalStatus.Upcoming}
             <TextHint info text={textHintString} />
-        {:else if [ProposalStatus.Commencing, ProposalStatus.Holding].includes($selectedProposal.state?.status)}
+        {:else if [ProposalStatus.Commencing, ProposalStatus.Holding].includes($selectedParticipationEventStatus?.status)}
             <buttons-container class="flex w-full space-x-4 mt-6">
                 <Button
                     outline
