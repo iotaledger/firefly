@@ -27,7 +27,7 @@
     $: initials = getInitials($activeProfile.name, 1)
 
     function handleLogoutClick(): void {
-        void logout()
+        logout()
     }
     function handleProfileLockButtonClick(): void {
         if ($isStrongholdLocked) {
