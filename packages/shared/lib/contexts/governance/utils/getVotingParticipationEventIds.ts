@@ -4,6 +4,6 @@ import { ParticipationEventId, ParticipationEventType } from '@iota/wallet/out/t
 
 import { selectedAccount } from '@core/account/stores'
 
-export function getVotingEventIds(): Promise<ParticipationEventId[]> {
+export function getVotingParticipationEventIds(): Promise<ParticipationEventId[]> {
     return get(selectedAccount)?.getParticipationEventIds(ParticipationEventType.Voting)
 }
