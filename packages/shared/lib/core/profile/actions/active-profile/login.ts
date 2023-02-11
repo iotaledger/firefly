@@ -1,4 +1,4 @@
-import { initializeRegisteredProposals, registerProposalsFromNode } from '@contexts/governance/actions'
+import { initializeRegisteredProposals, registerProposalsFromPrimaryNode } from '@contexts/governance/actions'
 import { cleanupOnboarding } from '@contexts/onboarding/actions'
 import { createNewAccount, setSelectedAccount } from '@core/account/actions'
 import { DEFAULT_SYNC_OPTIONS } from '@core/account/constants'
@@ -51,8 +51,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const loginRouter = get(routerManager).getRouterForAppContext(AppContext.Login)
     try {
         const _activeProfile = get(activeProfile)
-        const { loggedIn, lastActiveAt, id, isStrongholdLocked, type, lastUsedAccountIndex, clientOptions } =
-            _activeProfile
+        const { loggedIn, lastActiveAt, id, isStrongholdLocked, type, lastUsedAccountIndex } = _activeProfile
         if (id) {
             // Step 1: create profile manager if its doesn't exist
             incrementLoginProgress()
@@ -144,7 +143,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             void pollMarketPrices()
             if (Platform.isFeatureFlagEnabled('governance')) {
                 void initializeRegisteredProposals()
-                void registerProposalsFromNode(clientOptions?.nodes[0])
+                void registerProposalsFromPrimaryNode()
             }
             void cleanupOnboarding()
         } else {
