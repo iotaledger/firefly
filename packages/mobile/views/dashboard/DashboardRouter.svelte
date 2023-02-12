@@ -46,9 +46,7 @@
         resetRouterWithDrawerDelay($settingsRouter)
     }
     function onActivityDrawerClose(): void {
-        resetRouterWithDrawerDelay($activityRouter)
-        $selectedActivity = null
-        $dashboardRouter.previous()
+        $activityRouter.closeDrawer()
     }
     function onTokenDrawerClose(): void {
         $tokenRouter.closeDrawer()
