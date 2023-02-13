@@ -36,7 +36,7 @@
         if ($activeProfileId) {
             details = {
                 totalProposals: getNumberOfTotalProposals(),
-                activeProposals: !isLoadingOverview ? getNumberOfActiveProposals() : null,
+                activeProposals: getNumberOfActiveProposals(),
                 votingProposals: !isLoadingOverview ? getNumberOfVotingProposals() : null,
                 votedProposals: !isLoadingOverview ? getNumberOfVotedProposals() : null,
             }
