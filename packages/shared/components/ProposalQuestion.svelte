@@ -17,6 +17,7 @@
     export let question: Question
     export let selectedAnswerValue: number = undefined
     export let votedAnswerValue: number = undefined
+    export let isLoading: boolean = false
 
     let percentages: IProposalAnswerPercentages = {}
     let winnerAnswerIndex: number
@@ -33,7 +34,9 @@
         winnerAnswerIndex !== undefined
 
     function handleAnswerClick(answerValue: number): void {
-        dispatch('clickAnswer', { answerValue, questionIndex })
+        if (!isLoading) {
+            dispatch('clickAnswer', { answerValue, questionIndex })
+        }
     }
 
     function handleQuestionClick(): void {
@@ -50,9 +53,11 @@
 </script>
 
 <proposal-question
-    class="flex flex-col px-5 py-4 rounded-xl border border-solid border-gray-200 dark:border-transparent dark:bg-gray-850 cursor-pointer"
+    class="flex flex-col px-5 py-4 rounded-xl border border-solid border-gray-200 cursor-pointer dark:border-transparent dark:bg-gray-850 {isLoading
+        ? 'animate-pulse'
+        : ' '}"
 >
-    <div on:click={handleQuestionClick} class="flex justify-between items-center">
+    <div on:click={handleQuestionClick} on:keyup={handleQuestionClick} class="flex justify-between items-center">
         <div class="flex flex-col min-w-0">
             {#if questionIndex !== undefined}
                 <Text smaller fontWeight={FontWeight.bold} overrideColor classes="mb-1 text-blue-500">
@@ -93,6 +98,7 @@
                 isWinner={answerIndex === winnerAnswerIndex}
                 proposalStatus={$selectedProposal?.status}
                 truncate={!isOpened}
+                {isLoading}
                 on:click={handleAnswerClick(answer.value)}
             />
         {/each}
