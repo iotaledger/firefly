@@ -206,7 +206,7 @@
         pollParticipationEventStatus($selectedProposal?.id).then(() => (statusLoaded = true))
         // TODO: this api call gets all overviews, we need to change it so that we just get one
         // We then need to update the latest overview manually if we perform an action
-        updateParticipationOverview($selectedAccountIndex)
+        void updateParticipationOverview($selectedAccountIndex)
         await setVotingEventPayload($selectedProposal?.id)
         await updateIsVoting()
         hasMounted = true
