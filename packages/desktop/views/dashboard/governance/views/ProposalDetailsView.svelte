@@ -54,6 +54,8 @@
     let textHintString = ''
     let proposalQuestions: HTMLElement
     let isVotingForProposal: boolean = false
+    let statusLoaded: boolean = false
+    let overviewLoaded: boolean = false
 
     $: selectedProposalOverview = $participationOverviewForSelectedAccount?.participations?.[$selectedProposal?.id]
     $: trackedParticipations = Object.values(selectedProposalOverview ?? {})
@@ -205,10 +207,10 @@
     }
 
     onMount(async () => {
-        void pollParticipationEventStatus($selectedProposal?.id)
+        pollParticipationEventStatus($selectedProposal?.id).then(() => (statusLoaded = true))
         // TODO: this api call gets all overviews, we need to change it so that we just get one
         // We then need to update the latest overview manually if we perform an action
-        void updateParticipationOverview($selectedAccountIndex)
+        updateParticipationOverview($selectedAccountIndex).then(() => (overviewLoaded = true))
         await setVotingEventPayload($selectedProposal?.id)
         await updateIsVoting()
         hasMounted = true
@@ -244,19 +246,24 @@
                 {localize('views.governance.details.yourVote.title')}
             </Text>
             <ul class="space-y-2">
-                {#each Object.keys(votesCounter) as counterKey}
-                    <li>
-                        <KeyValueBox
-                            keyText={localize(`views.governance.details.yourVote.${counterKey}`)}
-                            valueText={formatTokenAmountBestMatch(votesCounter[counterKey], metadata)}
-                        />
-                    </li>
-                {/each}
+                <li>
+                    <KeyValueBox
+                        keyText={localize('views.governance.details.yourVote.total')}
+                        valueText={formatTokenAmountBestMatch(totalVotes, metadata)}
+                        isLoading={!overviewLoaded}
+                    />
+                </li>
+                <li>
+                    <KeyValueBox
+                        keyText={localize('views.governance.details.yourVote.power')}
+                        valueText={formatTokenAmountBestMatch(parseInt($selectedAccount?.votingPower), metadata)}
+                    />
+                </li>
             </ul>
         </Pane>
         <ProposalInformation />
     </div>
-    <Pane classes="w-3/5 h-full p-6 pr-3 flex flex-col justify-between ">
+    <Pane classes="w-3/5 h-full p-6 pr-3 flex flex-col justify-between">
         <proposal-questions
             class="relative flex flex-1 flex-col space-y-5 overflow-y-scroll pr-3"
             bind:this={proposalQuestions}
@@ -270,6 +277,7 @@
                         selectedAnswerValue={selectedAnswerValues[questionIndex]}
                         votedAnswerValue={votedAnswerValues[questionIndex]}
                         answerStatuses={$selectedParticipationEventStatus?.questions?.[questionIndex]?.answers}
+                        isLoading={!overviewLoaded || !statusLoaded}
                         on:clickQuestion={handleQuestionClick}
                         on:clickAnswer={handleAnswerClick}
                     />

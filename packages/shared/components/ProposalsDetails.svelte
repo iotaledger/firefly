@@ -7,6 +7,7 @@
     import {
         participationOverviewForSelectedAccount,
         registeredProposalsForSelectedAccount,
+        updateParticipationOverview,
     } from '@contexts/governance/stores'
     import {
         getNumberOfActiveProposals,
@@ -15,6 +16,8 @@
         getNumberOfTotalProposals,
     } from '@contexts/governance/utils'
     import { openPopup } from '@auxiliary/popup'
+    import { onMount } from 'svelte'
+    import { selectedAccount } from '@core/account'
 
     let details = <IProposalsDetails>{
         totalProposals: null,
@@ -22,15 +25,16 @@
         votingProposals: null,
         votedProposals: null,
     }
+    let isLoadingOverview = false
     $: $registeredProposalsForSelectedAccount, $participationOverviewForSelectedAccount, updateProposalsDetails()
 
     function updateProposalsDetails(): void {
         if ($activeProfileId) {
             details = {
                 totalProposals: getNumberOfTotalProposals(),
-                activeProposals: getNumberOfActiveProposals(),
-                votingProposals: getNumberOfVotingProposals(),
-                votedProposals: getNumberOfVotedProposals(),
+                activeProposals: isLoadingOverview ? getNumberOfActiveProposals() : null,
+                votingProposals: isLoadingOverview ? getNumberOfVotingProposals() : null,
+                votedProposals: isLoadingOverview ? getNumberOfVotedProposals() : null,
             }
         }
     }
@@ -41,6 +45,13 @@
             overflow: true,
         })
     }
+
+    onMount(async () => {
+        isLoadingOverview = true
+        // Should we put this after the login?
+        await updateParticipationOverview($selectedAccount.index)
+        isLoadingOverview = false
+    })
 </script>
 
 <proposals-details class="space-y-4">
@@ -55,6 +66,7 @@
                 <KeyValueBox
                     keyText={localize(`views.governance.proposalsDetails.${detailKey}`)}
                     valueText={details[detailKey]?.toString() ?? '-'}
+                    isLoading={details[detailKey] === null}
                 />
             </li>
         {/each}
