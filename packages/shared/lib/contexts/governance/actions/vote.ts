@@ -13,7 +13,7 @@ export async function vote(eventId?: string, answers?: number[]): Promise<void> 
 
         const transaction = await account.vote(eventId, answers)
 
-        await processAndAddToActivities(transaction)
+        await processAndAddToActivities(transaction, account)
 
         showAppNotification({
             type: 'success',
