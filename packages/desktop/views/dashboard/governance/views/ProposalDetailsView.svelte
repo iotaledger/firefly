@@ -55,11 +55,11 @@
     let proposalQuestions: HTMLElement
     let isVotingForProposal: boolean = false
     let statusLoaded: boolean = false
-    let overviewLoaded: boolean = false
 
     $: selectedProposalOverview = $participationOverviewForSelectedAccount?.participations?.[$selectedProposal?.id]
     $: trackedParticipations = Object.values(selectedProposalOverview ?? {})
     $: currentMilestone = $networkStatus.currentMilestone
+    $: overviewLoaded = !!selectedProposalOverview
 
     // Reactively start updating votes once component has mounted and participation overview is available.
     $: hasMounted &&
@@ -206,7 +206,7 @@
         pollParticipationEventStatus($selectedProposal?.id).then(() => (statusLoaded = true))
         // TODO: this api call gets all overviews, we need to change it so that we just get one
         // We then need to update the latest overview manually if we perform an action
-        updateParticipationOverview($selectedAccountIndex).then(() => (overviewLoaded = true))
+        updateParticipationOverview($selectedAccountIndex)
         await setVotingEventPayload($selectedProposal?.id)
         await updateIsVoting()
         hasMounted = true
