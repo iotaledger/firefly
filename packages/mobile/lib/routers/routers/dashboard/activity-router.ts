@@ -1,13 +1,13 @@
 import { get, writable } from 'svelte/store'
 
 import { Subrouter } from '@core/router'
-import { claimActivity, rejectActivity } from '@core/wallet'
+import { ActivityType, claimActivity, getAssetById, NotVerifiedStatus, rejectActivity } from '@core/wallet'
 
-import { ActivityAction } from '../../../../lib/contexts/dashboard'
-import { selectedActivity } from '../../../../lib/contexts/dashboard'
+import { ActivityAction, selectedActivity } from '../../../../lib/contexts/dashboard'
 import { ActivityRoute } from '../../enums'
 import { IActivityRouterEvent } from '../../interfaces'
-import { dashboardRouter } from '../../routers'
+import { dashboardRouter, tokenRouter } from '../../routers'
+import { resetRouterWithDrawerDelay } from '../../utils'
 
 export const activityRoute = writable<ActivityRoute>(null)
 export const activityRouter = writable<ActivityRouter>(null)
@@ -23,6 +23,13 @@ export class ActivityRouter extends Subrouter<ActivityRoute> {
 
         if (activity) {
             selectedActivity.set(activity)
+            if (activity.type === ActivityType.Basic) {
+                const asset = getAssetById(activity.assetId)
+                if (asset?.verification?.status === NotVerifiedStatus.New) {
+                    get(tokenRouter)?.next({ asset })
+                    return
+                }
+            }
         }
 
         switch (action) {
@@ -40,6 +47,11 @@ export class ActivityRouter extends Subrouter<ActivityRoute> {
             case ActivityAction.Reject:
                 this.reject()
         }
+    }
+    public closeDrawer(): void {
+        selectedActivity.set(null)
+        get(dashboardRouter).previous()
+        resetRouterWithDrawerDelay(get(activityRouter))
     }
     public previous(): void {
         if (this.backToDashboard) {

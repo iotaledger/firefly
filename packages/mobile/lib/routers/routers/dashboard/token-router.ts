@@ -11,8 +11,8 @@ import {
     getAssetById,
 } from '@core/wallet'
 
-import { selectedAsset, TokenAction } from '../../../contexts/dashboard'
-import { dashboardRouter, sendRouter } from '../'
+import { selectedActivity, selectedAsset, TokenAction } from '../../../contexts/dashboard'
+import { activityRouter, dashboardRouter, sendRouter } from '../'
 
 import { TokenRoute, DashboardRoute } from '../../enums'
 import { ITokenRouterEvent } from '../../interfaces'
@@ -41,8 +41,24 @@ export class TokenRouter extends Subrouter<TokenRoute> {
 
     public closeDrawer(): void {
         selectedAsset.set(null)
-        get(dashboardRouter).previous()
+        // previous() opens the activity information instead of closing the drawer
+        // when the token information are displayed because an activity was clicked.
+        if (!get(selectedActivity)) {
+            get(dashboardRouter).previous()
+        }
         resetRouterWithDrawerDelay(get(tokenRouter))
+    }
+
+    private activitySelected(): boolean {
+        const activity = get(selectedActivity)
+        if (activity) {
+            selectedAsset.set(null)
+            get(dashboardRouter).reset()
+            get(tokenRouter).reset()
+            get(activityRouter)?.next({ activity })
+            return true
+        }
+        return false
     }
 
     private handleTokenAction(action): void {
@@ -55,12 +71,17 @@ export class TokenRouter extends Subrouter<TokenRoute> {
         switch (action) {
             case TokenAction.Skip:
                 unverifyAsset(id, NotVerifiedStatus.Skipped)
-                selectedAsset.set(getAssetById(id))
+                if (!this.activitySelected()) {
+                    selectedAsset.set(getAssetById(id))
+                }
                 return
-            case TokenAction.Verify:
+            case TokenAction.Verify: {
                 verifyAsset(id, VerifiedStatus.SelfVerified)
-                selectedAsset.set(getAssetById(id))
+                if (!this.activitySelected()) {
+                    selectedAsset.set(getAssetById(id))
+                }
                 return
+            }
             case TokenAction.Send:
                 updateNewTransactionDetails({ type: NewTransactionType.TokenTransfer, assetId: id })
                 get(sendRouter).next()
