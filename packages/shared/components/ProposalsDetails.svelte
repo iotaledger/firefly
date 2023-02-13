@@ -25,17 +25,34 @@
         votingProposals: null,
         votedProposals: null,
     }
-    let isLoadingOverview = false
-    $: $registeredProposalsForSelectedAccount, $participationOverviewForSelectedAccount, updateProposalsDetails()
+    let isLoadingOverview = true
+    $: $registeredProposalsForSelectedAccount,
+        $participationOverviewForSelectedAccount,
+        isLoadingOverview,
+        updateProposalsDetails()
+    $: $selectedAccount, setParticipationOverview()
 
     function updateProposalsDetails(): void {
         if ($activeProfileId) {
             details = {
                 totalProposals: getNumberOfTotalProposals(),
-                activeProposals: isLoadingOverview ? getNumberOfActiveProposals() : null,
-                votingProposals: isLoadingOverview ? getNumberOfVotingProposals() : null,
-                votedProposals: isLoadingOverview ? getNumberOfVotedProposals() : null,
+                activeProposals: !isLoadingOverview ? getNumberOfActiveProposals() : null,
+                votingProposals: !isLoadingOverview ? getNumberOfVotingProposals() : null,
+                votedProposals: !isLoadingOverview ? getNumberOfVotedProposals() : null,
             }
+        }
+    }
+
+    async function setParticipationOverview(): Promise<void> {
+        if (
+            !$participationOverviewForSelectedAccount ||
+            Object.keys($participationOverviewForSelectedAccount.participations).length === 0
+        ) {
+            isLoadingOverview = true
+            await updateParticipationOverview($selectedAccount.index)
+            isLoadingOverview = false
+        } else {
+            isLoadingOverview = false
         }
     }
 
@@ -46,12 +63,7 @@
         })
     }
 
-    onMount(async () => {
-        isLoadingOverview = true
-        // Should we put this after the login?
-        await updateParticipationOverview($selectedAccount.index)
-        isLoadingOverview = false
-    })
+    onMount(setParticipationOverview)
 </script>
 
 <proposals-details class="space-y-4">
