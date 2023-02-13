@@ -11,9 +11,7 @@ export async function registerProposalsFromPrimaryNode(): Promise<void> {
     }
 
     const primaryNode = clientOptions?.primaryNode
-    if (!primaryNode) {
-        throw new Error('Unable to retrieve primary node')
+    if (primaryNode) {
+        await registerProposalsFromNode(primaryNode)
     }
-
-    await registerProposalsFromNode(primaryNode)
 }

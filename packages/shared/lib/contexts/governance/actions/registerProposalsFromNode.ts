@@ -8,10 +8,6 @@ import { getVotingParticipationEventIds, isProposalAlreadyAddedForSelectedAccoun
 import { registerParticipationEvent } from './registerParticipationEvent'
 
 export async function registerProposalsFromNode(node: INode): Promise<void> {
-    if (!node) {
-        throw new Error('Unable to determine node')
-    }
-
     const proposalIds = await getVotingParticipationEventIds()
     if (!proposalIds || proposalIds.length === 0) {
         return
