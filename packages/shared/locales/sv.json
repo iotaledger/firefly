@@ -62,7 +62,7 @@
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Konfigurera {protocol, select, IOTA {en} Shimmer {en}} {protocol} profil",
+                    "title": "Set up {protocol, select, IOTA {an} Shimmer {a} other {an}} {protocol} profile",
                     "body": "Välj lämplig metod för att konfigurera din {protocol} -profil."
                 },
                 "setupNew": {
@@ -586,6 +586,7 @@
                 "title": "Förslag",
                 "voted": "Röstat",
                 "successAdd": "Proposal successfully added",
+                "successAddAll": "Proposal successfully added to all accounts",
                 "successRemove": "Förslaget har tagits bort",
                 "emptyTitle": "No proposals"
             },
@@ -1023,7 +1024,8 @@
         },
         "addProposal": {
             "title": "Add proposal",
-            "body": "Please provide the information listed below to add a proposal."
+            "body": "Please provide the information listed below to add a proposal.",
+            "addToAllAccounts": "Add the proposal to all accounts"
         },
         "voteForProposal": {
             "title": "Rösta på förslag",
@@ -1104,7 +1106,7 @@
             "shimmer": "Återställ en befintlig Shimmer-profil"
         },
         "createWallet": "Skapa en ny {protocol}-profil",
-        "createWalletDescription": "Skapa en ny profil som körs på {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
+        "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
         "claimShimmer": "Hämta Shimmer staking-belöningar",
         "claimShimmerDescription": "Importera IOTA-profil och hämta dina Shimmer staking-belöningar",
         "createAlias": "Skapa alias",
@@ -1265,6 +1267,8 @@
         "voting": "Röstning",
         "changedVote": "Changed vote",
         "changingVote": "Changing vote",
+        "revoted": "Revoted",
+        "revoting": "Revoting",
         "unvoted": "Tog bort röst",
         "unvoting": "Avröstar",
         "sentNft": "NFT skickad",
@@ -1574,7 +1578,9 @@
             "basic": "Enkel",
             "nft": "NFT",
             "alias": "Alias",
-            "foundry": "Foundry"
+            "foundry": "Foundry",
+            "governance": "Governance",
+            "consolidation": "Consolidation"
         },
         "direction": {
             "label": "Riktning",
@@ -1877,7 +1883,8 @@
         "noOutputsToConsolidate": "Not enough outputs to consolidate",
         "eventId": {
             "doesNotStartWith0x": "Event ID should start with '0x'",
-            "insufficientLength": "Event ID should be 66 characters long"
+            "insufficientLength": "Event ID should be 66 characters long",
+            "alreadyRegistered": "Event ID already registered"
         },
         "nft": {
             "unsupportedUrl": {
@@ -2006,7 +2013,7 @@
             "uri": "För att skapa en URI med anpassade medier, ladda först upp din fil till IPFS via en lagringstjänst (t.ex. https://nft.storage/)"
         },
         "governance": {
-            "removeProposalWarning": "You must stop voting for this proposal in all accounts before removing it."
+            "removeProposalWarning": "You must stop voting for this proposal before removing it."
         }
     },
     "exports": {
@@ -2126,6 +2133,11 @@
                 "Pending": "changing vote for",
                 "Confirmed": "changed vote for",
                 "Conflicting": "failed to change vote for"
+            },
+            "revote": {
+                "Pending": "revoting",
+                "Confirmed": "revote",
+                "Conflicting": "failed to revote"
             }
         },
         "alias": {

@@ -1,19 +1,18 @@
 import { get } from 'svelte/store'
 import type { Transaction } from '@iota/wallet'
 
-import { selectedAccount, updateSelectedAccount } from '@core/account/stores'
+import { selectedAccount } from '@core/account/stores'
 import { showAppNotification } from '@auxiliary/notification/actions'
 import { localize } from '@core/i18n'
 import { handleError } from '@core/error/handlers'
 import { processAndAddToActivities } from '@core/wallet/utils'
-import { setPendingGovernanceTransactionIdForAccount } from '../stores'
+import { clearHasPendingGovernanceTransactionForAccount, setHasPendingGovernanceTransactionForAccount } from '../stores'
 
 export async function stopVotingForProposal(eventId: string): Promise<Transaction> {
+    const account = get(selectedAccount)
     try {
-        updateSelectedAccount({ isTransferring: true })
-        const account = get(selectedAccount)
+        setHasPendingGovernanceTransactionForAccount(account.index)
         const transaction = await account?.stopParticipating(eventId)
-        setPendingGovernanceTransactionIdForAccount(account.index, transaction.transactionId)
 
         await processAndAddToActivities(transaction)
 
@@ -25,7 +24,6 @@ export async function stopVotingForProposal(eventId: string): Promise<Transactio
         return transaction
     } catch (err) {
         handleError(err)
-    } finally {
-        updateSelectedAccount({ isTransferring: false })
+        clearHasPendingGovernanceTransactionForAccount(account.index)
     }
 }

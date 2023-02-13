@@ -25,6 +25,8 @@
         TextType,
     } from 'shared/components'
     import { get } from 'svelte/store'
+    // TODO: https://github.com/iotaledger/firefly/issues/5803
+    import features from '../../../../desktop/features/features'
 
     enum SendForm {
         SendToken = 'general.sendToken',
@@ -177,7 +179,11 @@
         {:else}
             <NftInput bind:this={nftInput} bind:nftId readonly={disableAssetSelection} />
         {/if}
-        <NetworkInput bind:this={networkInput} bind:networkAddress showLayer2={isSendTokenTab} />
+        <NetworkInput
+            bind:this={networkInput}
+            bind:networkAddress
+            showLayer2={features?.wallet?.sendToLayer2?.enabled && isSendTokenTab}
+        />
         <RecipientInput bind:this={recipientInput} bind:recipient {isLayer2} />
         <optional-inputs class="flex flex-row flex-wrap gap-4">
             <OptionalInput

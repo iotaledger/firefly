@@ -1,10 +1,9 @@
 import { closePopup } from '@auxiliary/popup'
 import { resetSelectedAccount } from '@core/account'
-import { clearGovernancePollAndData } from '@contexts/governance'
 import {
-    resetPendingGovernanceTransactionIds,
+    clearSelectedParticipationEventStatus,
+    resetHasPendingGovernanceTransaction,
     resetProposalOverviews,
-    resetProposalStates,
     resetRegisteredProposals,
 } from '@contexts/governance/stores'
 import { isPollingLedgerDeviceStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
@@ -17,8 +16,9 @@ import {
     isSoftwareProfile,
     lockStronghold,
     resetActiveProfile,
+    isDestroyingManager,
 } from '@core/profile'
-import { destroyProfileManager, unsubscribeFromWalletApiEvents } from '@core/profile-manager'
+import { destroyProfileManager, IProfileManager, unsubscribeFromWalletApiEvents } from '@core/profile-manager'
 import { profileManager } from '@core/profile-manager/stores'
 import { routerManager } from '@core/router/stores'
 import { get } from 'svelte/store'
@@ -27,7 +27,7 @@ import { clearFilters } from '@core/utils'
 /**
  * Logout from active profile
  */
-export async function logout(clearActiveProfile = true, _lockStronghold = true): Promise<void> {
+export function logout(clearActiveProfile = true, _lockStronghold = true): void {
     if (get(isSoftwareProfile)) {
         _lockStronghold && lockStronghold()
     } else if (isLedgerProfile(get(activeProfile).type)) {
@@ -36,14 +36,11 @@ export async function logout(clearActiveProfile = true, _lockStronghold = true):
 
     clearNetworkPoll()
     clearMarketPricesPoll()
-    clearGovernancePollAndData()
 
     const _activeProfile = get(activeProfile)
     if (_activeProfile) {
         const manager = get(profileManager)
-        await manager?.stopBackgroundSync()
-        await unsubscribeFromWalletApiEvents()
-        destroyProfileManager()
+        void destroyWalletRsObjects(manager)
     }
 
     cleanupProfileState(clearActiveProfile)
@@ -59,10 +56,10 @@ function cleanupProfileState(clearActiveProfile: boolean): void {
     resetSelectedAccount()
 
     // Governance Stores
-    resetPendingGovernanceTransactionIds()
+    resetHasPendingGovernanceTransaction()
     resetRegisteredProposals()
     resetProposalOverviews()
-    resetProposalStates()
+    clearSelectedParticipationEventStatus()
 
     activeAccounts.set([])
     if (clearActiveProfile) {
@@ -70,4 +67,12 @@ function cleanupProfileState(clearActiveProfile: boolean): void {
     }
     clearFilters()
     get(routerManager).resetRouters()
+}
+
+async function destroyWalletRsObjects(manager: IProfileManager): Promise<void> {
+    isDestroyingManager.set(true)
+    await manager?.stopBackgroundSync()
+    await unsubscribeFromWalletApiEvents()
+    await destroyProfileManager()
+    isDestroyingManager.set(false)
 }

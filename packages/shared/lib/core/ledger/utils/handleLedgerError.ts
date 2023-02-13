@@ -2,6 +2,8 @@ import { get } from 'svelte/store'
 
 import { localize } from '@core/i18n'
 import { resetNewTokenTransactionDetails, resetMintTokenDetails, resetMintNftDetails } from '@core/wallet'
+import { IError } from '@core/error/interfaces'
+import { handleGenericError } from '@core/error/handlers'
 import { showAppNotification } from '@auxiliary/notification'
 import { closePopup, openPopup, popupState } from '@auxiliary/popup'
 
@@ -9,8 +11,8 @@ import { LEDGER_ERROR_LOCALES } from '../constants'
 import { LedgerError } from '../enums'
 import { deriveLedgerError } from '../helpers'
 
-export function handleLedgerError(error: string, resetConfirmationPropsOnDenial: boolean = true): void {
-    const ledgerError = deriveLedgerError(error)
+export function handleLedgerError(error: IError, resetConfirmationPropsOnDenial = true): void {
+    const ledgerError = deriveLedgerError(error?.error)
     if (ledgerError in LEDGER_ERROR_LOCALES) {
         const popupType = get(popupState)?.type
 
@@ -47,10 +49,6 @@ export function handleLedgerError(error: string, resetConfirmationPropsOnDenial:
             })
         }
     } else {
-        showAppNotification({
-            type: 'error',
-            alert: true,
-            message: error,
-        })
+        handleGenericError(error)
     }
 }
