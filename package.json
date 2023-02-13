@@ -21,6 +21,9 @@
         "retypeapp": "^2.3.0"
     },
     "scripts": {
+        "check-types": "yarn check-types:shared && yarn check-types:desktop",
+        "check-types:desktop": "cd packages/desktop && tsc --pretty --noEmit",
+        "check-types:shared": "cd packages/shared && tsc --pretty --noEmit",
         "docs:start": "cd docs/ && retype watch",
         "format": "yarn format:write",
         "format:check": "prettier -c \"**/*.{ts,js,json,scss,css,svelte}\"",
@@ -28,9 +31,9 @@
         "lint": "yarn lint:fix",
         "lint:check": "eslint . --cache",
         "lint:fix": "eslint . --cache --fix",
-        "postinstall": "patch-package",
         "pre-commit": "yarn format-check && yarn lint",
         "prepare": "husky install",
+        "postinstall": "patch-package",
         "test": "yarn test:shared",
         "test:shared": "cd packages/shared && yarn test"
     },

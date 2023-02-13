@@ -31,7 +31,7 @@ export async function setVotingPower(rawAmount: string, isVoting: boolean): Prom
             const amountToDecrease = votingPower - amount
             transaction = await account.decreaseVotingPower(amountToDecrease.toString())
         }
-        await processAndAddToActivities(transaction)
+        await processAndAddToActivities(transaction, account)
     } catch (err) {
         hasToRevote.set(false)
         handleError(err)
