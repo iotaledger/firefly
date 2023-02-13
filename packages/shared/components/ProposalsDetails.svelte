@@ -7,6 +7,7 @@
     import {
         participationOverviewForSelectedAccount,
         registeredProposalsForSelectedAccount,
+        updateParticipationOverview,
     } from '@contexts/governance/stores'
     import {
         getNumberOfActiveProposals,
@@ -15,6 +16,8 @@
         getNumberOfTotalProposals,
     } from '@contexts/governance/utils'
     import { openPopup } from '@auxiliary/popup'
+    import { onMount } from 'svelte'
+    import { selectedAccount } from '@core/account'
 
     let details = <IProposalsDetails>{
         totalProposals: null,
@@ -22,16 +25,34 @@
         votingProposals: null,
         votedProposals: null,
     }
-    $: $registeredProposalsForSelectedAccount, $participationOverviewForSelectedAccount, updateProposalsDetails()
+    let isLoadingOverview = true
+    $: $registeredProposalsForSelectedAccount,
+        $participationOverviewForSelectedAccount,
+        isLoadingOverview,
+        updateProposalsDetails()
+    $: $selectedAccount, setParticipationOverview()
 
     function updateProposalsDetails(): void {
         if ($activeProfileId) {
             details = {
                 totalProposals: getNumberOfTotalProposals(),
                 activeProposals: getNumberOfActiveProposals(),
-                votingProposals: getNumberOfVotingProposals(),
-                votedProposals: getNumberOfVotedProposals(),
+                votingProposals: !isLoadingOverview ? getNumberOfVotingProposals() : null,
+                votedProposals: !isLoadingOverview ? getNumberOfVotedProposals() : null,
             }
+        }
+    }
+
+    async function setParticipationOverview(): Promise<void> {
+        if (
+            !$participationOverviewForSelectedAccount ||
+            Object.keys($participationOverviewForSelectedAccount.participations).length === 0
+        ) {
+            isLoadingOverview = true
+            await updateParticipationOverview($selectedAccount.index)
+            isLoadingOverview = false
+        } else {
+            isLoadingOverview = false
         }
     }
 
@@ -41,6 +62,8 @@
             overflow: true,
         })
     }
+
+    onMount(setParticipationOverview)
 </script>
 
 <proposals-details class="space-y-4">
@@ -55,6 +78,7 @@
                 <KeyValueBox
                     keyText={localize(`views.governance.proposalsDetails.${detailKey}`)}
                     valueText={details[detailKey]?.toString() ?? '-'}
+                    isLoading={details[detailKey] === null}
                 />
             </li>
         {/each}
