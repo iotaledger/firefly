@@ -62,7 +62,7 @@
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Set up {protocol, select, IOTA {an} Shimmer {a} other {an}} {protocol} profile",
+                    "title": "Установить {protocol, select, IOTA {an} Shimmer {a} other {an}} {protocol} профиль",
                     "body": "Выберите соответствующий метод для настройки профиля {protocol}."
                 },
                 "setupNew": {
@@ -586,7 +586,7 @@
                 "title": "Предложения",
                 "voted": "Проголосовано",
                 "successAdd": "Предложение успешно добавлено",
-                "successAddAll": "Proposal successfully added to all accounts",
+                "successAddAll": "Предложение успешно добавлено во все аккаунты",
                 "successRemove": "Предложение успешно удалено",
                 "emptyTitle": "Нет предложений"
             },
@@ -1025,7 +1025,7 @@
         "addProposal": {
             "title": "Добавить предложение",
             "body": "Пожалуйста, представьте информацию, указанную ниже, чтобы добавить предложение.",
-            "addToAllAccounts": "Add the proposal to all accounts"
+            "addToAllAccounts": "Добавить предложение ко всем аккаунтам"
         },
         "voteForProposal": {
             "title": "Голосовать за предложение",
@@ -1106,7 +1106,7 @@
             "shimmer": "Восстановить существующий профиль Shimmer"
         },
         "createWallet": "Создать новый профиль {protocol}",
-        "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
+        "createWalletDescription": "Создайте новый профиль, работающий на {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
         "claimShimmer": "Запросить вознаграждение за ставки в Shimmer",
         "claimShimmerDescription": "Перенести профиль IOTA и востребовать вознаграждение по ставке",
         "createAlias": "Создать псевдоним",
@@ -1267,8 +1267,8 @@
         "voting": "Голосование",
         "changedVote": "Голос изменился",
         "changingVote": "Изменение голоса",
-        "revoted": "Revoted",
-        "revoting": "Revoting",
+        "revoted": "Переголосовано",
+        "revoting": "Переголосование",
         "unvoted": "Отозвал голос",
         "unvoting": "Отмена голосования",
         "sentNft": "NFT отправлен",
@@ -1277,30 +1277,30 @@
         "receivingNft": "Получение NFT",
         "transfer": "Перевести",
         "transferring": "Передача",
-        "transferNft": "Transfer NFT",
-        "transferringNft": "Transferring NFT",
-        "mintedNft": "Minted NFT",
-        "mintingNft": "Minting NFT",
+        "transferNft": "Перевести NFT",
+        "transferringNft": "Перевод NFT",
+        "mintedNft": "Отчеканенный NFT",
+        "mintingNft": "Чеканка NFT",
         "shimmerClaimed": "Востребовано",
         "shimmerClaiming": "Востребование",
         "shimmerGenesis": "Shimmer Genesis",
         "minted": "Отчеканено",
         "minting": "Чеканка",
-        "burned": "Burned",
-        "burning": "Burning",
-        "consolidated": "Outputs consolidated",
-        "consolidating": "Consolidating outputs",
-        "aliasCreated": "Alias created",
-        "creatingAlias": "Creating Alias",
+        "burned": "Сожжено",
+        "burning": "Сжигание",
+        "consolidated": "Результаты объединены",
+        "consolidating": "Объединение результатов",
+        "aliasCreated": "Псевдоним создан",
+        "creatingAlias": "Создание псевдонима",
         "sendPayment": "Отправить платёж",
         "moveFunds": "Внутренний перевод",
         "sendTo": "Отправить на",
-        "sendAssets": "Send assets",
-        "sendAssetToAddress": "Send asset to an address",
+        "sendAssets": "Отправить активы",
+        "sendAssetToAddress": "Отправить актив на адрес",
         "sendToAddress": "Отправить на адрес",
-        "sendToken": "Send token",
-        "sendNft": "Send NFT",
-        "sendNftToAddress": "Send NFT to an address",
+        "sendToken": "Отправить токен",
+        "sendNft": "Отправить NFT",
+        "sendNftToAddress": "Отправить NFT на адрес",
         "scanQrOrPaste": "Сканировать QR-код или вставить Адрес",
         "moveFundsBetweenAccounts": "Переместить средства между кошельками",
         "manageAccount": "Управление кошельками",
@@ -1334,7 +1334,7 @@
         "systemTheme": "Система",
         "balance": "Баланс",
         "balanceWithValue": "Баланс: {balance}",
-        "balanceWithNetwork": "{network} Balance",
+        "balanceWithNetwork": "Баланс {network}",
         "all": "Все",
         "incoming": "Входящие",
         "outgoing": "Исходящие",
@@ -1353,7 +1353,7 @@
         "security": "Настройки Безопасности",
         "accountAddress": "Адрес кошелька",
         "network": "Сеть",
-        "destinationNetwork": "Destination network",
+        "destinationNetwork": "Сеть назначения",
         "nodes": "Узлы",
         "wallet": "Кошелёк",
         "help": "Помощь",
@@ -1441,12 +1441,12 @@
         "expirationTime": "Окончание срока действия",
         "timelockDate": "Timelock",
         "claimedTime": "Востребовано",
-        "nftAddress": "NFT Address",
+        "nftAddress": "NFT Адрес",
         "nftId": "NFT ID",
-        "nftMetadata": "NFT Metadata",
-        "aliasId": "Alias ID",
-        "governorAddress": "Governor Address",
-        "stateControllerAddress": "State Controller Address",
+        "nftMetadata": "Метаданные NFT",
+        "aliasId": "ID псевдонима",
+        "governorAddress": "Адрес управляющего",
+        "stateControllerAddress": "Адрес контроллера состояния",
         "copiedToClipboard": "Скопировано в буфер обмена",
         "total": "Всего: {balance}",
         "availableBalanceWithValue": "Доступный баланс: {balance}",
@@ -1454,8 +1454,8 @@
         "availableBalanceTooltip": "Общий баланс актива за вычетом средств, необходимых для покрытия депозита для хранения (т.е. средств, заблокированных в ожидающих транзакциях, зарезервированных для нативных токенов или зарезервированных для NFT).",
         "amountClaimed": "{amount} запрошено",
         "metadata": "Полезные данные",
-        "amountConsolidatedInputs": "Consolidated outputs",
-        "name": "Name",
+        "amountConsolidatedInputs": "Объединенные результаты",
+        "name": "Имя",
         "tag": "Пометка",
         "nodeList": "Список узлов",
         "claimedIn": "Востребовано в",
@@ -1463,31 +1463,31 @@
         "assets": "Активы",
         "nativeTokens": "Собственные токены",
         "mintNativeTokenDescription": "Чеканить собственный токен в соответствии со стандартом IRC30",
-        "mintNftDescription": "Mint NFT following IRC27 standard",
-        "faucetRequestDescription": "Request tokens from the {network} faucet",
-        "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
-        "refreshTokenMetadataHint": "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
-        "giftStorageDeposit": "Gift storage deposit",
-        "excluded": "Excluded",
-        "developerTools": "Developer tools",
-        "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
+        "mintNftDescription": "Чеканить NFT следуя стандарту IRC27",
+        "faucetRequestDescription": "Запросить токены из смесителя {network}",
+        "refreshTokenMetadataDescription": "Сброс и обновление всех метаданных токена",
+        "refreshTokenMetadataHint": "Это сбросит все метаданные ваших токенов, включая статус проверки, и снимет все скрытые активы.",
+        "giftStorageDeposit": "Залог за хранение подарков",
+        "excluded": "Исключено",
+        "developerTools": "Инструменты разработчика",
+        "testDeepLinkDescription": "Имитация запроса глубокой ссылки, отправленного на firefly",
         "url": "URL",
-        "hash": "Hash",
-        "creating": "Creating",
-        "updating": "Updating",
-        "enterAddress": "Enter address",
-        "transaction": "Transaction",
-        "alias": "Alias",
-        "foundry": "Foundry",
-        "token": "Token",
+        "hash": "Хеш",
+        "creating": "Создание",
+        "updating": "Обновление",
+        "enterAddress": "Ввести адрес",
+        "transaction": "Транзакция",
+        "alias": "Псевдоним",
+        "foundry": "Учреждение",
+        "token": "Токен",
         "nft": "NFT",
-        "type": "Type",
-        "immutableIssuer": "Immutable Issuer",
-        "smartContract": "Smart Contract",
-        "targetContract": "Target contract",
-        "contractFunction": "Contract function",
-        "gasBudget": "Gas budget",
-        "standard": "Standard",
+        "type": "Тип",
+        "immutableIssuer": "Неизменный эмитент",
+        "smartContract": "Умный контракт",
+        "targetContract": "Целевой контракт",
+        "contractFunction": "Функция контракта",
+        "gasBudget": "Бюджет газа",
+        "standard": "Стандартный",
         "uri": "URI",
         "issuer": "Эмитент",
         "issuerAddress": "Адрес эмитента",
@@ -1579,8 +1579,8 @@
             "nft": "NFT",
             "alias": "Псевдоним",
             "foundry": "Foundry",
-            "governance": "Governance",
-            "consolidation": "Consolidation"
+            "governance": "Управление",
+            "consolidation": "Объединение"
         },
         "direction": {
             "label": "Направление",
@@ -1690,21 +1690,21 @@
         },
         "restoreFromStrongholdBackup": {
             "wrongProtocol": "Протокол не соответствует типу монет, найденных в резервной копии Stronghold",
-            "wrongProtocolForClaiming": "You must use an IOTA-based Stronghold backup to claim Shimmer rewards"
+            "wrongProtocolForClaiming": "Вы должны использовать резервную копию Stronghold на базе IOTA, чтобы получить Shimmer вознаграждение"
         },
         "findShimmerRewards": {
-            "success": "Successfully found Shimmer rewards",
-            "error": "An error occurred while searching for rewards"
+            "success": "Успешно найдены награды Shimmer",
+            "error": "Произошла ошибка при поиске вознаграждений"
         },
         "claimShimmerRewards": {
             "success": "Вознаграждение Shimmer востребовано для {accountAlias}",
             "error": "Произошла ошибка при востребовании. Попробуйте еще раз."
         },
         "vote": {
-            "success": "Votes successfully casted"
+            "success": "Голоса успешно приняты"
         },
         "stopVoting": {
-            "success": "Voting successfully stopped"
+            "success": "Голосование успешно остановлено"
         }
     },
     "error": {
@@ -1714,7 +1714,7 @@
             "delete": {
                 "nonEmptyAccounts": "Перед удалением профиля вы должны перевести все остатки средств."
             },
-            "type": "Unable to determine the profile type",
+            "type": "Невозможно определить тип профиля",
             "setupType": "Unable to determine the profile setup type"
         },
         "password": {
@@ -1888,23 +1888,23 @@
         },
         "nft": {
             "unsupportedUrl": {
-                "short": "Url not supported",
-                "long": "Url schema not supported"
+                "short": "Url не поддерживается",
+                "long": "Схема Url не поддерживается"
             },
             "unsupportedFileType": {
-                "short": "Unsupported media type",
-                "long": "The media type is not currently supported"
+                "short": "Неподдерживаемый тип медиа",
+                "long": "Тип медиа не поддерживается в настоящее время"
             },
             "notMatchingFileTypes": {
-                "short": "Loading blocked",
-                "long": "NFT file type does not match the expected media type"
+                "short": "Загрузка блокирована",
+                "long": "Тип файла NFT не соответствует ожидаемому типу медиафайла"
             },
             "tooLargeFile": {
-                "short": "File is too large",
-                "long": "Loading NFT blocked because the file is too large"
+                "short": "Файл слишком большой",
+                "long": "Загрузка NFT заблокирована из-за слишком большого размера файла"
             },
             "corsError": {
-                "short": "Loading blocked",
+                "short": "Загрузка блокирована",
                 "long": "Загрузка NFT блокируется политикой CORS"
             },
             "unsafeToLoad": {
@@ -2001,19 +2001,19 @@
             "decimals": "Необязательный параметр IRC30: Количество десятичных чисел, используемых токеном (разделите сумму токена на 10^ десятичное число, чтобы получить его пользовательское представление).",
             "description": "Необязательный параметр IRC30: Человекочитабельное описание токена.",
             "url": "Необязательный параметр IRC30: URL, указывающий на дополнительные ресурсы о токене, например, веб-сайт или страницу в социальной сети.",
-            "logoUrl": "IRC30 optional parameter: URL pointing to an image resource of the token logo."
+            "logoUrl": "Необязательный параметр IRC30: URL, указывающий на ресурс изображения логотипа токена."
         },
         "mintNftForm": {
-            "collectionId": "Optional parameter: UTXO string of the collection NFT that minted this NFT",
-            "collectionName": "Optional parameter: The collection's name",
-            "royalties": "Optional parameter: An object containing key-value pairs of addresses that map to payout percentages",
-            "issuerName": "Optional parameter: The name of the creator",
-            "description": "Optional parameter: A description of the NFT",
-            "attributes": "Optional parameter: An array of traits and values that define attributes of the NFT",
-            "uri": "To create a URI using custom media, first upload your file to IPFS via a storage service (e.g. https://nft.storage/)"
+            "collectionId": "Необязательный параметр: UTXO-строка коллекции NFT, который чеканил этот NFT",
+            "collectionName": "Необязательный параметр: Имя коллекции",
+            "royalties": "Необязательный параметр: Объект, содержащий пары ключ-значение адресов, которые соответствуют процентам выплат",
+            "issuerName": "Необязательный параметр: Имя создателя",
+            "description": "Необязательный параметр: Описание NFT",
+            "attributes": "Необязательный параметр: Массив свойств и значений, определяющих атрибуты NFT",
+            "uri": "Чтобы создать URI с помощью собственного медиа, сначала загрузите файл в IPFS через службу хранения (например, https://nft.storage/)"
         },
         "governance": {
-            "removeProposalWarning": "You must stop voting for this proposal before removing it."
+            "removeProposalWarning": "Вы должны прекратить голосование за это предложение, прежде чем удалить его."
         }
     },
     "exports": {
@@ -2042,9 +2042,9 @@
     },
     "tabs": {
         "wallet": "Кошелёк",
-        "collectibles": "Collectibles",
+        "collectibles": "Коллекционные экземпляры",
         "governance": "Управление",
-        "developer": "Developer",
+        "developer": "Разработчик",
         "tokens": "Токены",
         "activity": "Деятельность"
     },
@@ -2056,47 +2056,47 @@
         },
         "external": {
             "incoming": {
-                "Pending": "receiving from",
-                "Confirmed": "received from",
-                "Conflicting": "failed to receive"
+                "Pending": "получение от",
+                "Confirmed": "получено от",
+                "Conflicting": "не удалось получить"
             },
             "outgoing": {
-                "Pending": "sending to",
-                "Confirmed": "sent to",
-                "Conflicting": "failed to send"
+                "Pending": "отправление на",
+                "Confirmed": "отправить на",
+                "Conflicting": "не удалось отправить"
             }
         },
         "internal": {
             "incoming": {
-                "Pending": "transferring from",
-                "Confirmed": "transferred from",
-                "Conflicting": "failed to transfer"
+                "Pending": "переведение с",
+                "Confirmed": "переведено с",
+                "Conflicting": "не удалось перевести"
             },
             "outgoing": {
-                "Pending": "transferring to",
-                "Confirmed": "transferred to",
-                "Conflicting": "failed to transfer"
+                "Pending": "переведение на",
+                "Confirmed": "переведено на",
+                "Conflicting": "не удалось перевести"
             },
             "selfTransaction": {
-                "Pending": "transferring to",
-                "Confirmed": "transferred to",
-                "Conflicting": "failed to transfer"
+                "Pending": "переведение на",
+                "Confirmed": "переведено на",
+                "Conflicting": "не удалось перевести"
             }
         },
         "mint": {
-            "Pending": "minting",
-            "Confirmed": "minted",
-            "Conflicting": "failed to mint"
+            "Pending": "чеканка",
+            "Confirmed": "отчеканено",
+            "Conflicting": "не удалось отчеканить"
         },
         "burn": {
-            "Pending": "burning",
-            "Confirmed": "burned",
-            "Conflicting": "failed to burn"
+            "Pending": "сжигание",
+            "Confirmed": "сожжено",
+            "Conflicting": "не удалось сжечь"
         },
         "consolidation": {
-            "Pending": "Consolidating outputs",
-            "Confirmed": "Outputs consolidated",
-            "Conflicting": "failed to consolidate outputs"
+            "Pending": "Объединение результатов",
+            "Confirmed": "Результаты объединены",
+            "Conflicting": "не удалось объединить результаты"
         },
         "migrate": {
             "Pending": "перевод на",
@@ -2110,14 +2110,14 @@
         },
         "governance": {
             "increaseVotingPower": {
-                "Pending": "increasing voting power",
-                "Confirmed": "increased voting power",
-                "Conflicting": "failed to increased voting power"
+                "Pending": "увеличение права голоса",
+                "Confirmed": "право голоса увеличено",
+                "Conflicting": "не удалось увеличить право голоса"
             },
             "decreaseVotingPower": {
-                "Pending": "decreasing voting power",
-                "Confirmed": "decreased voting power",
-                "Conflicting": "failed to decreased voting power"
+                "Pending": "уменьшение права голоса",
+                "Confirmed": "право голоса уменьшено",
+                "Conflicting": "не удалось уменьшить право голоса"
             },
             "startVoting": {
                 "Pending": "voting for",
