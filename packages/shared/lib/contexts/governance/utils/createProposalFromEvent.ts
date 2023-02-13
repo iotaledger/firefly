@@ -8,7 +8,8 @@ import { ProposalStatus, ProposalType } from '../enums'
 export function createProposalFromEvent(event: ParticipationEventWithNodes): IProposalMetadata {
     const { data, id } = event
 
-    const officialNodeUrls = OFFICIAL_NODE_URLS[get(activeProfile).networkProtocol][get(activeProfile).networkType]
+    const officialNodeUrls =
+        OFFICIAL_NODE_URLS[get(activeProfile).networkProtocol][get(activeProfile).networkType] ?? []
     const nodeUrl = event.nodes[0].url
     const isOfficialNetwork = officialNodeUrls.includes(nodeUrl)
 
