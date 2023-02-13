@@ -46,7 +46,7 @@
         try {
             await assetAmountInput?.validate(true)
 
-            const isVoting = await isSelectedAccountVoting()
+            const isVoting = isSelectedAccountVoting()
             if (amount === '0' && isVoting) {
                 openPopup({ type: 'votingPowerToZero' })
                 return

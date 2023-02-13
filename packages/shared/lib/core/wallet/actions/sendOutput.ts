@@ -13,7 +13,7 @@ export async function sendOutput(output: Output): Promise<void> {
         // Reset transaction details state, since the transaction has been sent
         resetNewTokenTransactionDetails()
 
-        await processAndAddToActivities(transaction)
+        await processAndAddToActivities(transaction, account)
         updateSelectedAccount({ isTransferring: false })
         return
     } catch (err) {
