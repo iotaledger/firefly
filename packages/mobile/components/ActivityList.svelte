@@ -62,17 +62,17 @@
             const transactionId = activity?.activity?.transactionId?.toLowerCase()
 
             const addressOrName =
-                activity.activity.subject.type === 'address'
-                    ? activity.activity.subject.address.toLowerCase()
-                    : activity.activity.subject.account.name.toLowerCase()
+                activity?.activity?.subject?.type === 'address'
+                    ? activity?.activity?.subject?.address?.toLowerCase()
+                    : activity?.activity?.subject?.account?.name?.toLowerCase()
 
             const amount = getFormattedAmountFromActivity(
-                activity.activity.type === ActivityType.Basic || activity.activity.type === ActivityType.Foundry
-                    ? activity.activity
+                activity?.activity?.type === ActivityType.Basic || activity?.activity?.type === ActivityType.Foundry
+                    ? activity?.activity
                     : undefined
             )
-                .toLowerCase()
-                .replace(getGroupSeparator(), '')
+                ?.toLowerCase()
+                ?.replace(getGroupSeparator(), '')
 
             return [title, transactionId, addressOrName, amount].some((item) => item.includes(searchTerm))
         })
@@ -86,7 +86,7 @@
     </activity-list-header>
     {#if activityTileDataList.length > 0}
         <VirtualList items={activityTileDataList} let:item>
-            <activity-tile-container class="mb-2">
+            <activity-tile-container class="block mb-2">
                 {#if item.title}
                     <Text fontWeight={FontWeight.semibold} color="gray-600" classes="my-2">
                         {item.title} • {item.amount}
