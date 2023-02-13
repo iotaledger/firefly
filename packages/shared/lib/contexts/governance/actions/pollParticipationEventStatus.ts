@@ -3,8 +3,8 @@ import { getAndSetSelectedParticipationEventStatus } from '../stores'
 
 let pollInterval
 
-export function pollParticipationEventStatus(eventId: string): void {
-    void getAndSetSelectedParticipationEventStatus(eventId)
+export async function pollParticipationEventStatus(eventId: string): Promise<void> {
+    await getAndSetSelectedParticipationEventStatus(eventId)
     pollInterval = setInterval(() => {
         void getAndSetSelectedParticipationEventStatus(eventId)
     }, PARTICIPATION_EVENT__STATUS_POLL_INTERVAL)
