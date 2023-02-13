@@ -69,10 +69,6 @@
         setVotedAnswerValuesAndTotalVotes()
     $: hasMounted && selectedProposalOverview && updateIsVoting()
 
-    $: votesCounter = {
-        total: totalVotes,
-        power: parseInt($selectedAccount?.votingPower),
-    }
     $: questions = votingPayload?.questions
 
     $: if (questions?.length > 0 && selectedAnswerValues?.length === 0) {
