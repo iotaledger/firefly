@@ -74,7 +74,7 @@
                 ?.toLowerCase()
                 ?.replace(getGroupSeparator(), '')
 
-            return [title, transactionId, addressOrName, amount].some((item) => item.includes(searchTerm))
+            return [title, transactionId, addressOrName, amount].some((item) => item?.includes(searchTerm))
         })
         return filteredActivities
     }
