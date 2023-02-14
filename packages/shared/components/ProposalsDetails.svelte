@@ -25,11 +25,9 @@
         votingProposals: null,
         votedProposals: null,
     }
-    let isLoadingOverview = true
-    $: $registeredProposalsForSelectedAccount,
-        $participationOverviewForSelectedAccount,
-        isLoadingOverview,
-        updateProposalsDetails()
+
+    $: isOverviewLoaded = !!$participationOverviewForSelectedAccount
+    $: $registeredProposalsForSelectedAccount, $participationOverviewForSelectedAccount, updateProposalsDetails()
     $: $selectedAccount, setParticipationOverview()
 
     function updateProposalsDetails(): void {
@@ -37,22 +35,15 @@
             details = {
                 totalProposals: getNumberOfTotalProposals(),
                 activeProposals: getNumberOfActiveProposals(),
-                votingProposals: !isLoadingOverview ? getNumberOfVotingProposals() : null,
-                votedProposals: !isLoadingOverview ? getNumberOfVotedProposals() : null,
+                votingProposals: getNumberOfVotingProposals(),
+                votedProposals: getNumberOfVotedProposals(),
             }
         }
     }
 
     async function setParticipationOverview(): Promise<void> {
-        if (
-            !$participationOverviewForSelectedAccount ||
-            Object.keys($participationOverviewForSelectedAccount.participations).length === 0
-        ) {
-            isLoadingOverview = true
+        if (!isOverviewLoaded || getNumberOfVotedProposals() === 0) {
             await updateParticipationOverview($selectedAccount.index)
-            isLoadingOverview = false
-        } else {
-            isLoadingOverview = false
         }
     }
 
@@ -78,7 +69,7 @@
                 <KeyValueBox
                     keyText={localize(`views.governance.proposalsDetails.${detailKey}`)}
                     valueText={details[detailKey]?.toString() ?? '-'}
-                    isLoading={details[detailKey] === null}
+                    isLoading={details[detailKey] === undefined}
                 />
             </li>
         {/each}

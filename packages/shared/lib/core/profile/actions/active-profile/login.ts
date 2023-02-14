@@ -1,20 +1,29 @@
-import { cleanupOnboarding } from '@contexts/onboarding'
-import { createNewAccount, DEFAULT_SYNC_OPTIONS, IAccount, setSelectedAccount } from '@core/account'
-import { handleError } from '@core/error/handlers/handleError'
-import { pollLedgerNanoStatus } from '@core/ledger'
+import { initializeRegisteredProposals, registerProposalsFromPrimaryNode } from '@contexts/governance/actions'
+import { cleanupOnboarding } from '@contexts/onboarding/actions'
+import { createNewAccount, setSelectedAccount } from '@core/account/actions'
+import { DEFAULT_SYNC_OPTIONS } from '@core/account/constants'
+import { IAccount } from '@core/account/interfaces'
+import { Platform } from '@core/app/classes'
+import { AppContext } from '@core/app/enums'
+import { handleError } from '@core/error/handlers'
+import { pollLedgerNanoStatus } from '@core/ledger/actions'
 import { pollMarketPrices } from '@core/market/actions'
-import { getAndUpdateNodeInfo, pollNetworkStatus } from '@core/network'
-import { loadNftsForActiveProfile } from '@core/nfts'
+import { getAndUpdateNodeInfo, pollNetworkStatus } from '@core/network/actions'
+import { loadNftsForActiveProfile } from '@core/nfts/actions'
+import { initialiseProfileManager } from '@core/profile-manager/actions'
 import {
-    buildProfileManagerOptionsFromProfileData,
-    initialiseProfileManager,
+    getAccounts,
     isStrongholdUnlocked,
-    profileManager,
     recoverAccounts,
-    RecoverAccountsPayload,
-} from '@core/profile-manager'
-import { getAccounts, setStrongholdPasswordClearInterval, startBackgroundSync } from '@core/profile-manager/api'
-import { generateAndStoreActivitiesForAllAccounts, refreshAccountAssetsForActiveProfile } from '@core/wallet'
+    setStrongholdPasswordClearInterval,
+    startBackgroundSync,
+} from '@core/profile-manager/api'
+import { RecoverAccountsPayload } from '@core/profile-manager/interfaces'
+import { profileManager } from '@core/profile-manager/stores'
+import { buildProfileManagerOptionsFromProfileData } from '@core/profile-manager/utils'
+import { routerManager } from '@core/router/stores'
+import { sleep } from '@core/utils/os'
+import { generateAndStoreActivitiesForAllAccounts, refreshAccountAssetsForActiveProfile } from '@core/wallet/actions'
 import { get } from 'svelte/store'
 import {
     CHECK_PREVIOUS_MANAGER_IS_DESTROYED_INTERVAL,
@@ -28,19 +37,15 @@ import {
     activeAccounts,
     activeProfile,
     incrementLoginProgress,
-    resetLoginProgress,
-    updateProfile,
-    setTimeStrongholdLastUnlocked,
     isDestroyingManager,
+    resetLoginProgress,
+    setTimeStrongholdLastUnlocked,
+    updateProfile,
 } from '../../stores'
 import { isLedgerProfile } from '../../utils'
 import { loadAccounts } from './loadAccounts'
 import { logout } from './logout'
 import { subscribeToWalletApiEventsForActiveProfile } from './subscribeToWalletApiEventsForActiveProfile'
-import { AppContext, Platform } from '@core/app'
-import { routerManager } from '@core/router/stores'
-import { initializeRegisteredProposals } from '@contexts/governance/actions'
-import { sleep } from '@core/utils/os'
 
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const loginRouter = get(routerManager).getRouterForAppContext(AppContext.Login)
@@ -138,6 +143,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             void pollMarketPrices()
             if (Platform.isFeatureFlagEnabled('governance')) {
                 void initializeRegisteredProposals()
+                void registerProposalsFromPrimaryNode()
             }
             void cleanupOnboarding()
         } else {
