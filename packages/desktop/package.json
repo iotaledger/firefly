@@ -1,11 +1,11 @@
 {
     "name": "desktop",
     "productName": "Firefly Shimmer",
-    "version": "2.1.0-alpha-5",
+    "version": "2.1.0-alpha-6",
     "description": "Official wallet application of Shimmer",
     "main": "public/build/main.js",
     "repository": "git@github.com:iotaledger/firefly.git",
-    "author": "IOTA Foundation <contact@iota.org>",
+    "author": "IOTA Foundation <contact@iotapa.org>",
     "license": "Apache-2.0",
     "scripts": {
         "start": "npm-run-all -p start:dev start:electron",
