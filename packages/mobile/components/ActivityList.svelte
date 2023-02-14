@@ -2,10 +2,12 @@
     import { time } from '@core/app'
     import { localize } from '@core/i18n'
     import { getMonthYear } from '@core/utils'
-    import { Activity, queriedActivities, setAsyncStatusOfAccountActivities } from '@core/wallet'
+    import { Activity, setAsyncStatusOfAccountActivities } from '@core/wallet'
+    import { activityFilter, queriedActivities } from '@core/wallet/stores'
     import VirtualList from '@sveltejs/svelte-virtual-list'
+    import { FilterType } from '../lib/routers/routers/dashboard'
     import { FontWeight, Text } from 'shared/components'
-    import { ActivityTile } from '../../mobile/components'
+    import { ActivityTile, Filter } from '../../mobile/components'
 
     export let onTileClick: (activity: Activity) => unknown = () => {}
     export let onReject: (activity: Activity) => unknown = () => {}
@@ -35,10 +37,13 @@
     }
 </script>
 
-<div class="asset-list h-full flex flex-auto flex-col flex-grow flex-shrink-0">
+<activity-list-container class="asset-list h-full flex flex-auto flex-col flex-grow flex-shrink-0">
+    <activity-list-header class="flex justify-between items-center sticky pb-4">
+        <Filter filterStoreValue={$activityFilter} filterType={FilterType.Activity} />
+    </activity-list-header>
     {#if activityListWithTitles.length > 0}
         <VirtualList items={activityListWithTitles} let:item>
-            <div class="mb-2">
+            <activity-tile-container class="block mb-2">
                 {#if item.title}
                     <Text fontWeight={FontWeight.semibold} color="gray-600" classes="my-2">
                         {item.title} • {item.amount}
@@ -50,11 +55,11 @@
                     onClaim={() => onClaim(item.activity)}
                     onReject={() => onReject(item.activity)}
                 />
-            </div>
+            </activity-tile-container>
         </VirtualList>
     {:else}
-        <div class="h-full flex flex-col items-center justify-center text-center">
+        <text-container class="h-full flex flex-col items-center justify-center text-center">
             <Text secondary>{localize('general.noRecentHistory')}</Text>
-        </div>
+        </text-container>
     {/if}
-</div>
+</activity-list-container>
