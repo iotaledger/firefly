@@ -44,19 +44,20 @@ try {
     if (process.env.STAGE === 'prod') {
         // empty
     } else {
-        const logDir = './log'
-        if (!fs.existsSync(logDir)) {
-            fs.mkdirSync(logDir)
-        }
+        ipcRenderer.invoke('get-path', 'userData').then((logDir) => {
+            if (!fs.existsSync(logDir)) {
+                fs.mkdirSync(logDir)
+            }
 
-        const today = new Date().toISOString().slice(0, 16).replace('T', '-').replace(':', '-')
-        const loggerOptions = {
-            colorEnabled: true,
-            name: `./log/wallet-${today}.log`,
-            levelFilter: 'debug',
-            targetExclusions: ['h2', 'hyper', 'rustls', 'message_handler'],
-        }
-        WalletApi.initLogger(loggerOptions)
+            const today = new Date().toISOString().slice(0, 16).replace('T', '-').replace(':', '-')
+            const loggerOptions = {
+                colorEnabled: true,
+                name: `${logDir}/logs/wallet-${today}.log`,
+                levelFilter: 'debug',
+                targetExclusions: ['h2', 'hyper', 'rustls', 'message_handler'],
+            }
+            WalletApi.initLogger(loggerOptions)
+        })
     }
 } catch (err) {
     console.error('[Preload Context] Error:', err)
