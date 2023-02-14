@@ -61,8 +61,10 @@
 {#if assets}
     <asset-list-container class="asset-list h-full flex flex-auto flex-col flex-grow flex-shrink-0">
         <asset-list-header class="flex justify-between items-center sticky pb-4">
+            <search-input-container class="block flex-1">
+                <SearchInput bind:value={searchValue} />
+            </search-input-container>
             <Filter filterStoreValue={$assetFilter} filterType={FilterType.Asset} />
-            <SearchInput bind:value={searchValue} />
         </asset-list-header>
         {#if assetList.length > 0}
             <VirtualList items={assetList} let:item>

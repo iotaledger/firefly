@@ -57,9 +57,9 @@
     let statusLoaded: boolean = false
 
     $: selectedProposalOverview = $participationOverviewForSelectedAccount?.participations?.[$selectedProposal?.id]
+    $: overviewLoaded = !!$participationOverviewForSelectedAccount
     $: trackedParticipations = Object.values(selectedProposalOverview ?? {})
     $: currentMilestone = $networkStatus.currentMilestone
-    $: overviewLoaded = !!selectedProposalOverview
 
     // Reactively start updating votes once component has mounted and participation overview is available.
     $: hasMounted &&

@@ -1,7 +1,9 @@
 <script lang="ts">
+    import { activityFilter, queriedActivities } from '@core/wallet/stores'
     import VirtualList from '@sveltejs/svelte-virtual-list'
     import { FontWeight, Text } from 'shared/components'
-    import { ActivityTile, SearchInput } from '../../mobile/components'
+    import { ActivityTile, Filter, SearchInput } from '../../mobile/components'
+    import { FilterType } from '../lib/routers/routers/dashboard'
     import { time } from '@core/app'
     import { getGroupSeparator, localize } from '@core/i18n'
     import { getMonthYear } from '@core/utils'
@@ -10,7 +12,6 @@
         ActivityType,
         getActivityTileTitle,
         getFormattedAmountFromActivity,
-        queriedActivities,
         setAsyncStatusOfAccountActivities,
     } from '@core/wallet'
 
@@ -81,8 +82,11 @@
 </script>
 
 <activity-list-container class="asset-list h-full flex flex-auto flex-col flex-grow flex-shrink-0">
-    <activity-list-header class="sticky pb-4">
-        <SearchInput bind:value={searchValue} />
+    <activity-list-header class="flex justify-between items-center">
+        <search-input-container class="block flex-1">
+            <SearchInput bind:value={searchValue} />
+        </search-input-container>
+        <Filter filterStoreValue={$activityFilter} filterType={FilterType.Activity} />
     </activity-list-header>
     {#if activityTileDataList.length > 0}
         <VirtualList items={activityTileDataList} let:item>

@@ -13,9 +13,9 @@
     } from '@contexts/onboarding'
     import { profileSetupRouter } from '@core/router'
 
-    function onProfileTypeSelectionClick(type: ProfileType): void {
+    async function onProfileTypeSelectionClick(type: ProfileType): Promise<void> {
         updateOnboardingProfile({ type })
-        initialiseProfileManagerFromOnboardingProfile()
+        await initialiseProfileManagerFromOnboardingProfile()
         $profileSetupRouter.next()
     }
 
