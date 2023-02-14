@@ -45,6 +45,8 @@ function getAsyncStatus(activity: Activity, time: Date): ActivityAsyncStatus {
     if (activity.asyncData?.timelockDate) {
         if (activity.asyncData.timelockDate.getTime() > time.getTime()) {
             return ActivityAsyncStatus.Timelocked
+        } else {
+            return ActivityAsyncStatus.Unclaimed
         }
     } else if (activity.asyncData) {
         if (activity.asyncData.asyncStatus !== ActivityAsyncStatus.Claimed) {
