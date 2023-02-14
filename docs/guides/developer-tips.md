@@ -75,6 +75,14 @@ There are a few steps besides just creating the component file before it can wor
 Firefly uses [wallet.rs](https://github.com/iotaledger/wallet.rs) in the backend to handle functionality around value-based transfers.
 See its [README](https://github.com/iotaledger/wallet.rs#dependencies) for the required dependencies.
 
+The wallet.rs team often requires logs to debug their issues. Currently, they can be found in the following folders:
+
+- Windows: `%APPDATA%\Roaming\Firefly\logs`
+- MacOS: `$HOME/Library/Application\ Support/Firefly/logs`
+- Linux: `~/.config/Firefly/logs`
+
+For developer/alpha/beta builds you have to look for `Electron`/`'Firefly Shimmer - Alpha'`/`'Firefly Shimmer - Beta'` respectively.
+
 #### Desktop
 
 There may be times when Firefly just won't seem to compile correctly or you're getting an uncommon error while using it. If you get a blank electron application, reloading the electron application (MacOS: `Cmd+R`, Linux/Windows: `Ctrl+R`) might solve your issue. Another approach is updating the yarn dependencies:
@@ -109,7 +117,7 @@ in `desktop/electron/preload.js` after `const Wallet = binding`. Debug logs will
 If you want to reset Firefly your profiles are stored in the following places on the different OS'es for the official release:
 
 - Windows: `%APPDATA%\Roaming\Firefly\__storage__/`
-- MacOS: `$HOME/Library/Application\ Support/Firefly/__storage/`
+- MacOS: `$HOME/Library/Application\ Support/Firefly/__storage__/`
 - Linux: `~/.config/Firefly/__storage__/`
 
 For developer/alpha/beta builds you have to look for `Electron`/`'Firefly Shimmer - Alpha'`/`'Firefly Shimmer - Beta'` respectively.
