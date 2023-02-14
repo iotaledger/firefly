@@ -1,7 +1,7 @@
 const governanceFeatures = {
     enabled: true,
     removeProposals: {
-        enabled: true,
+        enabled: false,
     },
 }
 
