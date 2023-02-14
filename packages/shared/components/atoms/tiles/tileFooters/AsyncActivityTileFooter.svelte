@@ -33,6 +33,7 @@
     $: shouldShowAsyncFooter = activity.asyncData?.asyncStatus !== ActivityAsyncStatus.Claimed
 
     $: timeDiff = getTimeDiff(activity)
+    $: hasExpirationTime = !!activity.asyncData?.expirationDate
 
     function handleRejectClick(): void {
         openPopup({
@@ -76,13 +77,19 @@
     <TileFooter>
         <svelte:fragment slot="left">
             <TooltipIcon
-                icon={IconEnum.ExpirationTime}
+                icon={hasExpirationTime ? IconEnum.ExpirationTime : IconEnum.Timelock}
                 iconClasses="text-gray-600 dark:text-gray-200"
-                title={localize('general.expirationTime')}
-                text={localize(`tooltips.transactionDetails.${activity.direction}.expirationTime`)}
+                title={localize(`general.${hasExpirationTime ? 'expirationTime' : 'timelockDate'}`)}
+                text={localize(
+                    `tooltips.transactionDetails.${activity.direction}.${
+                        hasExpirationTime ? 'expirationTime' : 'timelockDate'
+                    }`
+                )}
                 position={Position.Top}
             />
-            <Text fontSize="13" color="gray-600" fontWeight={FontWeight.semibold}>{timeDiff}</Text>
+            {#if hasExpirationTime}
+                <Text fontSize="13" color="gray-600" fontWeight={FontWeight.semibold}>{timeDiff}</Text>
+            {/if}
         </svelte:fragment>
         <svelte:fragment slot="right">
             {#if shouldShowActions}
