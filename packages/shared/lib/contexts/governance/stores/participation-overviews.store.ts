@@ -11,9 +11,9 @@ export const participationOverviewForSelectedAccount: Readable<ParticipationOver
     [selectedAccountIndex, allParticipationOverviews],
     ([$selectedAccountIndex, $allParticipationOverviews]) => {
         if ($selectedAccountIndex >= 0) {
-            return $allParticipationOverviews[$selectedAccountIndex] ?? DEFAULT_PARTICIPATION_OVERVIEW
+            return $allParticipationOverviews[$selectedAccountIndex]
         } else {
-            return DEFAULT_PARTICIPATION_OVERVIEW
+            return undefined
         }
     }
 )
