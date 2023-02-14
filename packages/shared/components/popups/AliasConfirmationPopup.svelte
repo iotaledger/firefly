@@ -56,7 +56,7 @@
         try {
             updateSelectedAccount({ isTransferring: true })
             const transaction = await $selectedAccount.createAliasOutput()
-            await processAndAddToActivities(transaction)
+            await processAndAddToActivities(transaction, $selectedAccount)
             closePopup()
         } catch (err) {
             handleError(err)

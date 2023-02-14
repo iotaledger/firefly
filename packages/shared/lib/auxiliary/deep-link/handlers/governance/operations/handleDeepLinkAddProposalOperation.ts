@@ -1,40 +1,36 @@
 import { showAppNotification } from '@auxiliary/notification/actions'
 import { closePopup, openPopup } from '@auxiliary/popup/actions'
 import { isValidUrl } from '@core/utils/validation'
-import {
-    getProposalFromEventId,
-    isProposalAlreadyAddedForSelectedAccount,
-    isValidProposalId,
-} from '@contexts/governance/utils'
+import { isProposalAlreadyAddedForSelectedAccount, isValidProposalId } from '@contexts/governance/utils'
 import { AddProposalOperationParameter } from '../../../enums'
-import { selectedProposal } from '@contexts/governance/stores'
-import { governanceRoute, GovernanceRoute, governanceRouter } from '@core/router'
+import { registeredProposalsForSelectedAccount, selectedProposal } from '@contexts/governance/stores'
+import { GovernanceRoute, governanceRouter } from '@core/router'
 import { get } from 'svelte/store'
 
-export async function handleDeepLinkAddProposalOperation(searchParams: URLSearchParams): Promise<void> {
+/**
+ * NOTE: If we throw an error as normal, it will be handled and displayed in the "failed link"
+ * popup.
+ */
+export function handleDeepLinkAddProposalOperation(searchParams: URLSearchParams): void {
     const eventId = searchParams.get(AddProposalOperationParameter.EventId)
     if (!isValidProposalId(eventId)) {
         throw new Error('Invalid proposal ID')
-    } else if (await isProposalAlreadyAddedForSelectedAccount(eventId)) {
-        /**
-         * NOTE: If we throw an error as normal, it will be handled and displayed in the "failed link"
-         * popup.
-         */
-        getProposalFromEventId(eventId).then((proposal) => {
-            if (get(selectedProposal)?.id !== eventId) {
-                selectedProposal.set(proposal)
-            }
-            if (get(governanceRoute) !== GovernanceRoute.Details) {
-                get(governanceRouter).goTo(GovernanceRoute.Details)
-            }
-        })
-        showAppNotification({
-            type: 'warning',
-            alert: true,
-            message: 'This proposal has already been added',
-        })
-        closePopup()
-        return
+    } else if (isProposalAlreadyAddedForSelectedAccount(eventId)) {
+        const proposal = get(registeredProposalsForSelectedAccount)[eventId]
+        if (proposal === undefined) {
+            throw new Error(`Event with id ${eventId} not found`)
+        } else {
+            selectedProposal.set(proposal)
+            get(governanceRouter).goTo(GovernanceRoute.Details)
+
+            showAppNotification({
+                type: 'warning',
+                alert: true,
+                message: 'This proposal has already been added',
+            })
+            closePopup()
+            return
+        }
     }
 
     const nodeUrl = searchParams.get(AddProposalOperationParameter.NodeUrl)

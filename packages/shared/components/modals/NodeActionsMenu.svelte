@@ -1,16 +1,17 @@
 <script lang="ts">
     import { HR, MenuItem, Modal } from 'shared/components'
     import { localize } from '@core/i18n'
+    import { closePopup, openPopup } from '@auxiliary/popup/actions'
+    import { Platform } from '@core/app/classes'
     import {
-        getOfficialNodes,
-        INode,
-        IClientOptions,
         removeNodeFromClientOptions,
         toggleDisabledNodeInClientOptions,
         togglePrimaryNodeInClientOptions,
-    } from '@core/network'
-    import { closePopup, openPopup } from '@auxiliary/popup'
-    import { activeProfile } from '@core/profile'
+    } from '@core/network/actions'
+    import { IClientOptions, INode } from '@core/network/interfaces'
+    import { getOfficialNodes } from '@core/network/utils'
+    import { activeProfile } from '@core/profile/stores'
+    import { registerProposalsFromPrimaryNode } from '@contexts/governance/actions'
 
     export let node: INode
     export let clientOptions: IClientOptions
@@ -36,10 +37,8 @@
         modal?.toggle()
     }
 
-    function handleTogglePrimaryNodeClick(): void {
-        if (!isPrimary) {
-            togglePrimaryNodeInClientOptions(node)
-        } else {
+    async function handleTogglePrimaryNodeClick(): Promise<void> {
+        if (isPrimary) {
             openPopup({
                 type: 'confirmation',
                 props: {
@@ -48,11 +47,16 @@
                     danger: true,
                     confirmText: localize('actions.clear'),
                     onConfirm: () => {
-                        togglePrimaryNodeInClientOptions(node)
+                        void togglePrimaryNodeInClientOptions(node)
                         closePopup()
                     },
                 },
             })
+        } else {
+            await togglePrimaryNodeInClientOptions(node)
+            if (Platform.isFeatureFlagEnabled('governance')) {
+                await registerProposalsFromPrimaryNode()
+            }
         }
         modal?.toggle()
     }
@@ -76,7 +80,7 @@
 
     function handleToggleDisabledNodeClick(): void {
         if (node.disabled) {
-            toggleDisabledNodeInClientOptions(node)
+            void toggleDisabledNodeInClientOptions(node)
         } else {
             openPopup({
                 type: 'confirmation',
@@ -86,7 +90,7 @@
                     danger: true,
                     confirmText: localize('views.settings.configureNodeList.excludeNode'),
                     onConfirm: () => {
-                        toggleDisabledNodeInClientOptions(node)
+                        void toggleDisabledNodeInClientOptions(node)
                         closePopup()
                     },
                 },

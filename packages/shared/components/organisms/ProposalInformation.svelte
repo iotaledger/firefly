@@ -1,21 +1,20 @@
 <script lang="ts">
     import { KeyValueBox, Pane, Text } from 'shared/components'
     import { formatDate, localize } from '@core/i18n'
-    import { networkStatus } from '@core/network/stores'
-    import { activeProfileId } from '@core/profile/stores'
     import { DATE_FORMAT, IKeyValueBoxList, milestoneToDate, truncateString } from '@core/utils'
+    import { networkStatus } from '@core/network/stores'
     import { ProposalStatus } from '@contexts/governance/enums'
-    import { proposalsState, selectedProposal } from '@contexts/governance/stores'
+    import { selectedProposal } from '@contexts/governance/stores'
 
     interface IProposalDateData {
         propertyKey: 'votingOpens' | 'countingStarts' | 'countingEnds' | 'countingEnded'
         milestone: number
     }
 
-    const proposalDateData = getNextProposalDateData()
+    $: proposalDateData = getNextProposalDateData($selectedProposal?.status)
 
-    function getNextProposalDateData(): IProposalDateData {
-        switch ($selectedProposal?.status) {
+    function getNextProposalDateData(status: string): IProposalDateData {
+        switch (status) {
             case ProposalStatus.Upcoming:
                 return {
                     propertyKey: 'votingOpens',
@@ -37,20 +36,26 @@
                     milestone: $selectedProposal?.milestones?.ended,
                 }
             default:
-                throw new Error('Unable to determine proposal status')
+                return undefined
         }
     }
 
-    const proposalInformation: IKeyValueBoxList = {
-        [proposalDateData.propertyKey]: {
-            data: formatDate(milestoneToDate($networkStatus.currentMilestone, proposalDateData.milestone), DATE_FORMAT),
-        },
+    let proposalInformation: IKeyValueBoxList
+    $: proposalInformation = {
+        ...(proposalDateData?.propertyKey && {
+            [proposalDateData.propertyKey]: {
+                data: formatDate(
+                    milestoneToDate($networkStatus.currentMilestone, proposalDateData.milestone),
+                    DATE_FORMAT
+                ),
+            },
+        }),
         eventId: {
             data: truncateString($selectedProposal?.id, 9, 9),
             isCopyable: true,
             copyValue: $selectedProposal?.id,
         },
-        nodeUrl: { data: $proposalsState[$activeProfileId]?.[$selectedProposal?.id].nodeUrl, isCopyable: true },
+        nodeUrl: { data: $selectedProposal?.nodeUrl, isCopyable: true },
     }
 </script>
 
@@ -63,7 +68,7 @@
             <li>
                 <KeyValueBox
                     keyText={localize(`views.governance.details.proposalInformation.${counterKey}`)}
-                    valueText={proposalInformation[counterKey].data}
+                    valueText={proposalInformation[counterKey]?.data}
                     isCopyable={proposalInformation[counterKey].isCopyable}
                     copyValue={proposalInformation[counterKey].copyValue}
                 />

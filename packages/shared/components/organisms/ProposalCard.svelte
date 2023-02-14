@@ -3,10 +3,9 @@
     import { ProposalStatusInfo, Text, TooltipIcon } from 'shared/components'
     import { Icon } from '@auxiliary/icon/enums'
     import { localize } from '@core/i18n'
-    import { activeProfileId } from '@core/profile/stores'
     import { GovernanceRoute, governanceRouter } from '@core/router'
     import { IProposal } from '@contexts/governance/interfaces'
-    import { selectedProposal, proposalsState } from '@contexts/governance/stores'
+    import { participationOverviewForSelectedAccount, selectedProposal } from '@contexts/governance/stores'
     import { ProposalStatus } from '@contexts/governance/enums'
     import { isVotingForProposal } from '@contexts/governance/utils'
 
@@ -14,12 +13,11 @@
 
     export let proposal: IProposal
 
-    $: proposalState = $proposalsState[$activeProfileId]?.[proposal?.id]?.state
-
     let hasVoted = false
+    $: $participationOverviewForSelectedAccount, setHasVoted()
 
-    async function setHasVoted(): Promise<void> {
-        hasVoted = await isVotingForProposal(proposal?.id)
+    function setHasVoted(): void {
+        hasVoted = isVotingForProposal(proposal?.id)
     }
 
     function handleProposalClick(): void {
@@ -27,15 +25,14 @@
         $governanceRouter.goTo(GovernanceRoute.Details)
     }
 
-    onMount(() => void setHasVoted())
+    onMount(() => setHasVoted())
 </script>
 
 <proposal-card
     on:click={handleProposalClick}
     on:keydown={(e) => e.key === 'Enter' && handleProposalClick()}
     class="flex flex-col p-6 border border-solid border-gray-200 dark:border-transparent rounded-xl cursor-pointer h-fit shadow-elevation-1 focus:shadow-inner
-    {proposal.status === ProposalStatus.Ended ? 'bg-gray-100' : 'bg-white dark:bg-gray-850'}"
-    tabindex="0"
+    {proposal?.status === ProposalStatus.Ended ? 'bg-transparent' : 'bg-white dark:bg-gray-850'}"
 >
     <div class="flex items-center gap-1.5 mb-4">
         {#if proposal.organization}
@@ -50,7 +47,7 @@
         <Text fontWeight={FontWeight.semibold} fontSize="14" classes="truncate" lineHeight="5">{proposal.title}</Text>
     </div>
     <div class="flex justify-between items-center">
-        <ProposalStatusInfo status={proposalState?.status} milestones={proposal.milestones} />
+        <ProposalStatusInfo {proposal} />
         {#if hasVoted}
             <TooltipIcon
                 text={localize('views.governance.proposals.voted')}

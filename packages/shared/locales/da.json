@@ -62,7 +62,7 @@
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
+                    "title": "Opsæt {protocol, select, IOTA {en} Shimmer {en} other {en}} {protocol}-profil",
                     "body": "Vælg den passende metode til opsætning af {protocol}-profilen."
                 },
                 "setupNew": {
@@ -586,6 +586,7 @@
                 "title": "Forslag",
                 "voted": "Stemt",
                 "successAdd": "Forslag hermed tilføjet",
+                "successAddAll": "Proposal successfully added to all accounts",
                 "successRemove": "Forslag fjernet",
                 "emptyTitle": "Ingen forslag"
             },
@@ -1023,13 +1024,14 @@
         },
         "addProposal": {
             "title": "Tilføj forslag",
-            "body": "Angiv nedenstående oplysninger for at tilføje et forslag."
+            "body": "Angiv nedenstående oplysninger for at tilføje et forslag.",
+            "addToAllAccounts": "Add the proposal to all accounts"
         },
         "voteForProposal": {
             "title": "Vote for proposal",
             "body": "Du er ved at stemme på {proposal} forslag.",
             "key": "Stemmeret",
-            "hasAbstained": "You are abstaining from answering {numberOfQuestions, plural, one {# question} other {# questions}}.",
+            "hasAbstained": "Du undlader at besvare {numberOfQuestions, plural, one {# spørgsmål} other {# spørgsmål}}.",
             "noVotingPower": "Ingen stemmeret. Øg stemmeretten fra Governance-kontrolpanelet."
         },
         "revote": {
@@ -1104,7 +1106,7 @@
             "shimmer": "Restore an existing Shimmer profile"
         },
         "createWallet": "Create a new {protocol} profile",
-        "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
+        "createWalletDescription": "Opret en ny profil, der kører på {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Ukendt}}",
         "claimShimmer": "Claim Shimmer staking rewards",
         "claimShimmerDescription": "Importér IOTA-profilen og indløs staking-belønninger",
         "createAlias": "Create alias",
@@ -1265,6 +1267,8 @@
         "voting": "Voting",
         "changedVote": "Ændret stemme",
         "changingVote": "Ændring af stemme",
+        "revoted": "Revoted",
+        "revoting": "Revoting",
         "unvoted": "Unvoted",
         "unvoting": "Unvoting",
         "sentNft": "NFT sent",
@@ -1574,7 +1578,9 @@
             "basic": "Basic",
             "nft": "NFT",
             "alias": "Alias",
-            "foundry": "Foundry"
+            "foundry": "Foundry",
+            "governance": "Forvaltning",
+            "consolidation": "Konsolidering"
         },
         "direction": {
             "label": "Direction",
@@ -1877,7 +1883,8 @@
         "noOutputsToConsolidate": "Not enough outputs to consolidate",
         "eventId": {
             "doesNotStartWith0x": "Event ID should start with '0x'",
-            "insufficientLength": "Event ID should be 66 characters long"
+            "insufficientLength": "Event ID should be 66 characters long",
+            "alreadyRegistered": "Begivenheds-ID allerede registreret"
         },
         "nft": {
             "unsupportedUrl": {
@@ -2006,7 +2013,7 @@
             "uri": "To create a URI using custom media, first upload your file to IPFS via a storage service (e.g. https://nft.storage/)"
         },
         "governance": {
-            "removeProposalWarning": "Før dette forslag fjernes, skal man ophøre med at stemme for det på alle konti."
+            "removeProposalWarning": "Før dette forslag fjernes, skal man ophøre med at stemme på det."
         }
     },
     "exports": {
@@ -2126,6 +2133,11 @@
                 "Pending": "ændring af stemme for",
                 "Confirmed": "ændrede stemme for",
                 "Conflicting": "kunne ikke ændre stemme for"
+            },
+            "revote": {
+                "Pending": "revoting",
+                "Confirmed": "revote",
+                "Conflicting": "failed to revote"
             }
         },
         "alias": {

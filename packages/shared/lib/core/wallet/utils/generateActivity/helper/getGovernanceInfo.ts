@@ -24,9 +24,20 @@ export function getGovernanceInfo(output: Output, inputs: IWrappedOutput[], meta
 
     const governanceInput = inputs?.find((input) => isParticipationOutput(input.output))
     if (governanceInput) {
+        const oldVotingPower = getAmountFromOutput(governanceInput.output)
+        if (currentVotingPower !== oldVotingPower) {
+            return {
+                governanceAction:
+                    currentVotingPower - oldVotingPower > 0
+                        ? GovernanceAction.IncreaseVotingPower
+                        : GovernanceAction.DecreaseVotingPower,
+                votingPower: currentVotingPower,
+                votingPowerDifference: Math.abs(currentVotingPower - oldVotingPower),
+            }
+        }
+
         const oldMetadata = getMetadataFromOutput(governanceInput.output)
         const oldParticipations = parseGovernanceMetadata(oldMetadata)
-        const oldVotingPower = getAmountFromOutput(governanceInput.output)
 
         const addedParticipation = getParticipationDifference(oldParticipations, participations)
         const removedParticipation = getParticipationDifference(participations, oldParticipations)
@@ -38,22 +49,10 @@ export function getGovernanceInfo(output: Output, inputs: IWrappedOutput[], meta
                 participation: addedParticipation,
             }
         } else if (removedParticipation) {
-            /**
-             * NOTE: Unless we check the voting power, we won't know if the participations were removed
-             * because the user stopped voting or manually set the voting power to zero.
-             */
-            if (currentVotingPower === 0) {
-                return {
-                    governanceAction: GovernanceAction.DecreaseVotingPower,
-                    votingPower: currentVotingPower,
-                    votingPowerDifference: oldVotingPower,
-                }
-            } else {
-                return {
-                    governanceAction: GovernanceAction.StopVoting,
-                    votingPower: currentVotingPower,
-                    participation: removedParticipation,
-                }
+            return {
+                governanceAction: GovernanceAction.StopVoting,
+                votingPower: currentVotingPower,
+                participation: removedParticipation,
             }
         }
 
@@ -66,12 +65,8 @@ export function getGovernanceInfo(output: Output, inputs: IWrappedOutput[], meta
             }
         } else {
             return {
-                governanceAction:
-                    currentVotingPower - oldVotingPower > 0
-                        ? GovernanceAction.IncreaseVotingPower
-                        : GovernanceAction.DecreaseVotingPower,
+                governanceAction: GovernanceAction.Revote,
                 votingPower: currentVotingPower,
-                votingPowerDifference: Math.abs(currentVotingPower - oldVotingPower),
             }
         }
     } else {

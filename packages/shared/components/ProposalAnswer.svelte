@@ -15,8 +15,9 @@
     export let disabled = false
     export let hidden: boolean = null
     export let isWinner: boolean
-    export let proposalStatus: ProposalStatus
+    export let proposalStatus: string
     export let truncate = false
+    export let isLoading = false
 
     let isSelected: boolean
     let isVotedFor: boolean
@@ -51,6 +52,7 @@
     class:voted={isVotedFor}
     class:winner={isWinner}
     class:selected={isSelected}
+    class:cursor-default={isLoading}
     style:--percentage={percentage}
     on:click={handleClick}
 >
@@ -105,7 +107,6 @@
         @apply border-solid;
         @apply border;
         @apply border-gray-200;
-        @apply cursor-pointer;
         @apply items-center;
         @apply justify-between;
         @apply p-3;

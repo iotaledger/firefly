@@ -62,7 +62,7 @@
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Skonfiguruj profil {protocol, select, IOTA {} Shimmer {}} {protocol}",
+                    "title": "Skonfiguruj {protocol, select, IOTA {profil} Shimmer {profil} other {profil}} {protocol}",
                     "body": "Wybierz odpowiednią metodę, aby skonfigurować swój profil {protocol}."
                 },
                 "setupNew": {
@@ -586,6 +586,7 @@
                 "title": "Propozycje",
                 "voted": "Zagłosowano",
                 "successAdd": "Propozycja pomyślnie dodana",
+                "successAddAll": "Propozycja została pomyślnie dodana do wszystkich kont",
                 "successRemove": "Propozycja została usunięta",
                 "emptyTitle": "Brak propozycji"
             },
@@ -611,7 +612,7 @@
                     "nodeUrl": "URL serwera"
                 },
                 "fetching": "Pobieranie danych propozycji",
-                "hintVote": "Nie możesz głosować nad propozycją, która dopiero została zapowiedziana, głosowanie zostanie otwarte za {time}."
+                "hintVote": "Nie możesz głosować nad propozycją, która dopiero została zapowiedziana. Głosowanie zostanie otwarte za {time}."
             }
         }
     },
@@ -1023,13 +1024,14 @@
         },
         "addProposal": {
             "title": "Dodaj propozycję",
-            "body": "Wypełnij poniższe pola, aby dodać propozycję."
+            "body": "Wypełnij poniższe pola, aby dodać propozycję.",
+            "addToAllAccounts": "Dodaj propozycję do wszystkich kont"
         },
         "voteForProposal": {
             "title": "Głosowanie na propozycję",
             "body": "Zamierzasz zagłosować na propozycję {proposal}.",
             "key": "Siła Twojego głosu",
-            "hasAbstained": "You are abstaining from answering {numberOfQuestions, plural, one {# question} other {# questions}}.",
+            "hasAbstained": "Wstrzymujesz się od odpowiedzi na {numberOfQuestions, plural, one {# pytanie} few {# pytania} many {# pytań} other {# pytań}}.",
             "noVotingPower": "Nie masz żadnej siły głosu. Zwiększ swoją siłę głosu w panelu zarządzania."
         },
         "revote": {
@@ -1104,7 +1106,7 @@
             "shimmer": "Przywróć istniejący profil Shimmer"
         },
         "createWallet": "Utwórz nowy profil {protocol}",
-        "createWalletDescription": "Stwórz nowy profil działający w sieci {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
+        "createWalletDescription": "Stwórz nowy profil działający w sieci {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Nieznanej}}",
         "claimShimmer": "Odbierz nagrody Shimmer ze stakingu",
         "claimShimmerDescription": "Importuj profil IOTA i odbierz nagrody ze stakingu",
         "createAlias": "Utwórz alias",
@@ -1265,6 +1267,8 @@
         "voting": "Głosowanie",
         "changedVote": "Zmieniono głos",
         "changingVote": "Zmiana głosu",
+        "revoted": "Odnowiono głosy",
+        "revoting": "Odnawianie głosów",
         "unvoted": "Zatrzymano głos",
         "unvoting": "Wycofywanie głosu",
         "sentNft": "NFT wysłane",
@@ -1574,7 +1578,9 @@
             "basic": "Podstawowe",
             "nft": "NFT",
             "alias": "Alias",
-            "foundry": "Produkcja"
+            "foundry": "Produkcja",
+            "governance": "Zarządzanie",
+            "consolidation": "Konsolidacja"
         },
         "direction": {
             "label": "Kierunek",
@@ -1877,7 +1883,8 @@
         "noOutputsToConsolidate": "Za mało wyjść, aby skonsolidować",
         "eventId": {
             "doesNotStartWith0x": "ID zdarzenia powinno zaczynać się od '0x'",
-            "insufficientLength": "ID zdarzenia powinno mieć 66 znaków"
+            "insufficientLength": "ID zdarzenia powinno mieć 66 znaków",
+            "alreadyRegistered": "ID zdarzenia jest już zarejestrowane"
         },
         "nft": {
             "unsupportedUrl": {
@@ -2006,7 +2013,7 @@
             "uri": "Aby utworzyć URI za pomocą niestandardowych mediów, najpierw prześlij plik do IPFS za pośrednictwem usługi przechowywania danych (np. https://nft.storage/)"
         },
         "governance": {
-            "removeProposalWarning": "Musisz przestać głosować na tę propozycję na wszystkich kontach, zanim ją usuniesz."
+            "removeProposalWarning": "Musisz przestać głosować na tę propozycję, zanim ją usuniesz."
         }
     },
     "exports": {
@@ -2126,6 +2133,11 @@
                 "Pending": "zmiana głosu na",
                 "Confirmed": "zmieniono głos na",
                 "Conflicting": "nie udało się zmienić głosu na"
+            },
+            "revote": {
+                "Pending": "odnawianie głosów",
+                "Confirmed": "odnów głosy",
+                "Conflicting": "nie udało się odnowić głosów"
             }
         },
         "alias": {

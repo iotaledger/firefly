@@ -40,7 +40,7 @@
     }
 
     function handleLogoutClick(): void {
-        void logout()
+        logout()
     }
 
     function handleStrongholdToggleClick(): void {

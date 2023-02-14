@@ -1,8 +1,10 @@
 import { get } from 'svelte/store'
-
-import { participationOverview } from '../stores'
+import { participationOverviewForSelectedAccount } from '../stores'
 
 export function getNumberOfVotedProposals(): number {
-    const { participations } = get(participationOverview)
-    return Object.keys(participations).length
+    const overview = get(participationOverviewForSelectedAccount)
+    if (!overview) {
+        return undefined
+    }
+    return Object.keys(overview.participations).length
 }

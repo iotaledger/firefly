@@ -2,11 +2,10 @@
     import { Text, ProposalCard, Filter, SearchInput } from 'shared/components'
     import { localize } from '@core/i18n'
     import { FontWeight } from './enums'
-    import { IProposal } from '@contexts/governance/interfaces'
-    import { proposalFilter, sortProposals } from '@contexts/governance'
-    import { isVisibleProposal } from '@contexts/governance/utils/isVisibleProposal'
+    import { proposalFilter, registeredProposalsForSelectedAccount } from '@contexts/governance/stores'
+    import { isVisibleProposal, sortProposals } from '@contexts/governance/utils'
 
-    export let proposals: IProposal[] = []
+    $: proposals = Object.values($registeredProposalsForSelectedAccount)
 
     let searchTerm = ''
 

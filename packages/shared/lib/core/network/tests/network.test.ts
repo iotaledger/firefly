@@ -191,6 +191,7 @@ describe('File: network.ts', () => {
                     _buildNode(OFFICIAL_NODE_URLS[NetworkProtocol.IOTA][NetworkType.Mainnet][1]),
                     _buildNode(OFFICIAL_NODE_URLS[NetworkProtocol.IOTA][NetworkType.Mainnet][2]),
                 ],
+                primaryNode: _buildNode(OFFICIAL_NODE_URLS[NetworkProtocol.IOTA][NetworkType.Mainnet][0]),
             })
         })
     })

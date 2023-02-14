@@ -52,9 +52,9 @@
         $appSetupRouter.previous()
     }
 
-    onMount(() => {
+    onMount(async () => {
         _clonedVariable = appTheme
-        initialiseOnboardingProfile(
+        await initialiseOnboardingProfile(
             $onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile(),
             NetworkProtocol.Shimmer
         )

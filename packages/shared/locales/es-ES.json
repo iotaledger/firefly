@@ -62,7 +62,7 @@
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Configurar {protocol, select, IOTA {an} Shimmer {a}} Perfil de {protocol}",
+                    "title": "Configura {protocol, select, IOTA {un} Shimmer {un} other {un}} perfil de {protocol}",
                     "body": "Seleccione el método apropiado para configurar su perfil {protocol}."
                 },
                 "setupNew": {
@@ -586,6 +586,7 @@
                 "title": "Propuestas",
                 "voted": "Votado",
                 "successAdd": "Propuesta añadida correctamente",
+                "successAddAll": "Propuesta añadida correctamente a todas las cuentas",
                 "successRemove": "Propuesta eliminada correctamente",
                 "emptyTitle": "No hay propuestas"
             },
@@ -1023,13 +1024,14 @@
         },
         "addProposal": {
             "title": "Añadir propuesta",
-            "body": "Por favor, proporciona la siguiente información para añadir una propuesta."
+            "body": "Por favor, proporciona la siguiente información para añadir una propuesta.",
+            "addToAllAccounts": "Añadir la propuesta a todas las cuentas"
         },
         "voteForProposal": {
             "title": "Votar por propuesta",
             "body": "Estás a punto de votar por la propuesta {proposal}.",
             "key": "Tu peso de voto",
-            "hasAbstained": "You are abstaining from answering {numberOfQuestions, plural, one {# question} other {# questions}}.",
+            "hasAbstained": "Te estás absteniendo de responder a {numberOfQuestions, plural, one {# pregunta} other {# preguntas}}.",
             "noVotingPower": "No tienes ningún peso de voto. Por favor, incrementa tu peso de voto desde el panel de gobernanza."
         },
         "revote": {
@@ -1104,7 +1106,7 @@
             "shimmer": "Restaurar un perfil de Shimmer existente"
         },
         "createWallet": "Crear un nuevo perfil de {protocol}",
-        "createWalletDescription": "Crea un perfil nuevo ejecutándose en {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
+        "createWalletDescription": "Crea un perfil nuevo en {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Desconocido}}",
         "claimShimmer": "Reclamar recompensas de staking de Shimmer",
         "claimShimmerDescription": "Importar perfil IOTA y reclamar recompensas de staking",
         "createAlias": "Crear alias",
@@ -1265,6 +1267,8 @@
         "voting": "Votación",
         "changedVote": "Voto cambiado",
         "changingVote": "Cambiando voto",
+        "revoted": "Votado de nuevo",
+        "revoting": "Votando de nuevo",
         "unvoted": "Sin votar",
         "unvoting": "No votar",
         "sentNft": "NFT enviado",
@@ -1574,7 +1578,9 @@
             "basic": "Básico",
             "nft": "NFT",
             "alias": "Alias",
-            "foundry": "Fundición"
+            "foundry": "Fundición",
+            "governance": "Gobernanza",
+            "consolidation": "Consolidación"
         },
         "direction": {
             "label": "Dirección",
@@ -1877,7 +1883,8 @@
         "noOutputsToConsolidate": "No hay suficientes salidas para consolidar",
         "eventId": {
             "doesNotStartWith0x": "El ID del evento debe comenzar con '0x'",
-            "insufficientLength": "El ID del evento debe tener 66 caracteres de longitud"
+            "insufficientLength": "El ID del evento debe tener 66 caracteres de longitud",
+            "alreadyRegistered": "ID de evento ya registrado"
         },
         "nft": {
             "unsupportedUrl": {
@@ -2006,7 +2013,7 @@
             "uri": "Para crear una URI usando medios personalizados, primero sube tu archivo a IPFS a través de un servicio de almacenamiento (por ejemplo, https://nft.storage/)"
         },
         "governance": {
-            "removeProposalWarning": "Debe dejar de votar a favor de esta propuesta en todas las cuentas antes de eliminarla."
+            "removeProposalWarning": "Debes dejar de votar en esta propuesta antes de eliminarla."
         }
     },
     "exports": {
@@ -2126,6 +2133,11 @@
                 "Pending": "cambiando voto por",
                 "Confirmed": "voto cambiado por",
                 "Conflicting": "error al cambiar el voto por"
+            },
+            "revote": {
+                "Pending": "votando de nuevo",
+                "Confirmed": "votar de nuevo",
+                "Conflicting": "fallo al votar de nuevo"
             }
         },
         "alias": {

@@ -31,7 +31,7 @@
 
     // TODO: User can only remove a proposal when he is not voting for it
     $: isTextHintVisible =
-        $selectedProposal.status === ProposalStatus.Commencing || $selectedProposal.status === ProposalStatus.Holding
+        $selectedProposal?.status === ProposalStatus.Commencing || $selectedProposal?.status === ProposalStatus.Holding
 </script>
 
 <remove-proposal>

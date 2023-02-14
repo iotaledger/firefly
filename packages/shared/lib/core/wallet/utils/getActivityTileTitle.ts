@@ -19,6 +19,8 @@ export function getActivityTileTitle(activity: Activity): string {
             return isConfirmed ? 'general.unvoted' : 'general.unvoting'
         } else if (activity.governanceAction === GovernanceAction.ChangedVote) {
             return isConfirmed ? 'general.changedVote' : 'general.changingVote'
+        } else if (activity.governanceAction === GovernanceAction.Revote) {
+            return isConfirmed ? 'general.revoted' : 'general.revoting'
         }
     } else if (activity.type === ActivityType.Consolidation) {
         return isConfirmed ? 'general.consolidated' : 'general.consolidating'

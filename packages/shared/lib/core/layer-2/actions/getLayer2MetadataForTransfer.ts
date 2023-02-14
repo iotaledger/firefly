@@ -12,7 +12,6 @@ import {
     ENDING_SIGNAL_BYTE,
     EXTERNALLY_OWNED_ACCOUNT,
     EXTERNALLY_OWNED_ACCOUNT_TYPE_ID,
-    FORCE_OPEN_ACCOUNT,
     GAS_BUDGET,
     TRANSFER_ALLOWANCE,
 } from '@core/layer-2'
@@ -26,7 +25,7 @@ export function getLayer2MetadataForTransfer(layer2Address: string): string {
     metadataStream.writeUInt64('gasBudget', GAS_BUDGET)
 
     const encodedAddress = encodeAddress(layer2Address.toLowerCase())
-    const smartContractParameters = Object.entries({ a: encodedAddress, c: FORCE_OPEN_ACCOUNT })
+    const smartContractParameters = Object.entries({ a: encodedAddress })
     const parameters = encodeSmartContractParameters(smartContractParameters)
     metadataStream.writeBytes('smartContractParameters', parameters.length, parameters)
 

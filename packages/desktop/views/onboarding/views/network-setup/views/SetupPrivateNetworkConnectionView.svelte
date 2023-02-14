@@ -32,10 +32,10 @@
                 checkNodeInfo: false,
                 validateClientOptions: false,
             })
-            updateOnboardingProfile({ clientOptions: { nodes: [node] } })
+            updateOnboardingProfile({ clientOptions: { nodes: [node], primaryNode: node } })
             await initialiseProfileManagerFromOnboardingProfile(true)
             await getNodeInfo(node.url)
-            destroyProfileManager()
+            await destroyProfileManager()
             $networkSetupRouter.next()
         } catch (err) {
             console.error(err)

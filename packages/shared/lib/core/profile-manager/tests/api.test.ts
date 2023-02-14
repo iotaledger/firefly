@@ -34,8 +34,8 @@ describe('File: api.test.ts', () => {
         expect(profileManager).toBeDefined()
     })
 
-    it('should destroy the profile manager correctly', () => {
-        destroyProfileManager()
+    it('should destroy the profile manager correctly', async () => {
+        await destroyProfileManager()
         expect(get(profileManager)).toBeNull()
     })
 
