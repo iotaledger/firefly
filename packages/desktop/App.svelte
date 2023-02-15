@@ -29,7 +29,8 @@
     import { initialiseOnboardingFlow } from '@contexts/onboarding'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { getLocalisedMenuItems } from './lib/helpers'
-    import { Popup, Route, TitleBar, ToastContainer, Transition } from '@ui'
+    import { Popup, Route, ToastContainer, Transition } from '@ui'
+    import { TitleBar } from '@components'
     import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from '@views'
     import {
         getAppRouter,
