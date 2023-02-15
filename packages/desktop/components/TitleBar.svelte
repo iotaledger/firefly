@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onDestroy, onMount } from 'svelte'
-    import { Icon } from 'shared/components/atoms'
+    import { Icon } from '@ui'
     import { Platform, PlatformOption } from '@core/app'
     import { appSettings, platform } from '@core/app/stores'
     import { activeProfile } from '@core/profile/stores'
