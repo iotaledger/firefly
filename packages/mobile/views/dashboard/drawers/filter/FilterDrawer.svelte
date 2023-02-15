@@ -27,13 +27,13 @@
             <Text fontWeight={FontWeight.bold} fontSize="16" classes="text-center flex grow-1">
                 {localize('filters.title')}
             </Text>
-            <button type="button" disabled={!isChanged} on:click={filterRouterComponent?.apply}>
-                <Text
-                    fontSize="15"
-                    fontWeight={FontWeight.semibold}
-                    overrideColor
-                    classes={isChanged ? 'text-blue-500' : 'text-gray-200'}
-                >
+            <button
+                type="button"
+                disabled={!isChanged}
+                class:opacity-40={!isChanged}
+                on:click={filterRouterComponent?.apply}
+            >
+                <Text fontSize="15" fontWeight={FontWeight.semibold} highlighted>
                     {localize('actions.apply')}
                 </Text>
             </button>
