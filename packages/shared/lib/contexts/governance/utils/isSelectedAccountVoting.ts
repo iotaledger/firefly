@@ -3,7 +3,8 @@ import { participationOverviewForSelectedAccount } from '../stores'
 import { isVotingForProposal } from '@contexts/governance/utils/isVotingForProposal'
 
 export function isSelectedAccountVoting(): boolean {
-    const { participations } = get(participationOverviewForSelectedAccount)
+    const overview = get(participationOverviewForSelectedAccount)
+    const participations = overview?.participations ?? []
     for (const proposalId in participations) {
         const isVoting = isVotingForProposal(proposalId)
         if (isVoting) {
