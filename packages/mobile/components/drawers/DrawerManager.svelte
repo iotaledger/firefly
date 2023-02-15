@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { Drawer } from '../../components'
     import ConfirmDrawer from './ConfirmDrawer.svelte'
     import EnterPasswordDrawer from './EnterPasswordDrawer.svelte'
     import SelectedActivityDrawer from './SelectedActivityDrawer.svelte'
@@ -12,11 +13,8 @@
     }
 </script>
 
-{#if $drawersStore.length > 0}
-    {#each $drawersStore as drawer}
-        {@const drawerComponent = COMPONENTS[drawer.id]}
-        {#if drawerComponent}
-            <svelte:component this={drawerComponent} {...drawer.props} onClose={() => closeDrawer(drawer.id)} />
-        {/if}
-    {/each}
-{/if}
+{#each $drawersStore as drawer}
+    <Drawer {...drawer.props} onClose={() => closeDrawer(drawer.id)}>
+        <svelte:component this={COMPONENTS[drawer.id]} {...drawer.props} />
+    </Drawer>
+{/each}

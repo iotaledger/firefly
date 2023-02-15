@@ -18,11 +18,9 @@
         FoundryActivityDetails,
         NftActivityDetails,
     } from 'shared/components'
-    import { Drawer } from '../../components'
     import { closeDrawer, DrawerId, openDrawer } from '../../lib/auxiliary/drawer'
 
-    export let onClose: () => unknown = () => {}
-    export let activity: Activity | undefined = undefined
+    export let activity: Activity | undefined
 
     $: isActivityIncomingAndUnclaimed =
         activity &&
@@ -62,39 +60,37 @@
     }
 </script>
 
-<Drawer {onClose} title={localize('popups.transactionDetails.title')} fullScreen>
-    <activity-details class="flex flex-col justify-between h-full pt-10">
-        <activity-content class="flex flex-col space-y-8">
-            {#if activity?.type === ActivityType.Basic}
-                <BasicActivityDetails {activity} />
-            {:else if activity.type === ActivityType.Foundry}
-                <FoundryActivityDetails {activity} />
-            {:else if activity.type === ActivityType.Nft}
-                <NftActivityDetails {activity} />
-            {:else if activity.type === ActivityType.Alias}
-                <AliasActivityDetails {activity} />
-            {/if}
-            <ActivityInformation {activity} />
-        </activity-content>
-        {#if shouldShowActions}
-            <activity-actions class="space-y-4">
-                <Button
-                    classes="w-full"
-                    disabled={activity.asyncData?.isClaiming}
-                    onClick={onClaim}
-                    isBusy={activity.asyncData?.isClaiming}
-                >
-                    {localize('actions.claim')}
-                </Button>
-                <Button
-                    outline
-                    classes="w-full"
-                    disabled={activity.asyncData?.isClaiming || activity.asyncData?.isRejected}
-                    onClick={onReject}
-                >
-                    {localize('actions.reject')}
-                </Button>
-            </activity-actions>
+<activity-details class="flex flex-col justify-between h-full pt-10">
+    <activity-content class="flex flex-col space-y-8">
+        {#if activity?.type === ActivityType.Basic}
+            <BasicActivityDetails {activity} />
+        {:else if activity.type === ActivityType.Foundry}
+            <FoundryActivityDetails {activity} />
+        {:else if activity.type === ActivityType.Nft}
+            <NftActivityDetails {activity} />
+        {:else if activity.type === ActivityType.Alias}
+            <AliasActivityDetails {activity} />
         {/if}
-    </activity-details>
-</Drawer>
+        <ActivityInformation {activity} />
+    </activity-content>
+    {#if shouldShowActions}
+        <activity-actions class="space-y-4">
+            <Button
+                classes="w-full"
+                disabled={activity.asyncData?.isClaiming}
+                onClick={onClaim}
+                isBusy={activity.asyncData?.isClaiming}
+            >
+                {localize('actions.claim')}
+            </Button>
+            <Button
+                outline
+                classes="w-full"
+                disabled={activity.asyncData?.isClaiming || activity.asyncData?.isRejected}
+                onClick={onReject}
+            >
+                {localize('actions.reject')}
+            </Button>
+        </activity-actions>
+    {/if}
+</activity-details>
