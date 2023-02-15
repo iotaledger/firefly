@@ -75,7 +75,7 @@ There are a few steps besides just creating the component file before it can wor
 Firefly uses [wallet.rs](https://github.com/iotaledger/wallet.rs) in the backend to handle functionality around value-based transfers.
 See its [README](https://github.com/iotaledger/wallet.rs#dependencies) for the required dependencies.
 
-The wallet.rs team often requires logs to debug their issues. Currently, they can be found in the following folders:
+Log files are often required to debug `wallet.rs` issues. They can be found in the following folders:
 
 - Windows: `%APPDATA%\Roaming\Firefly\logs`
 - MacOS: `$HOME/Library/Application\ Support/Firefly/logs`
