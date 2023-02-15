@@ -22,45 +22,43 @@
 
     export let activity: Activity | undefined
 
+    $: isTimelocked = activity.asyncData?.asyncStatus === ActivityAsyncStatus.Timelocked
     $: isActivityIncomingAndUnclaimed =
-        activity &&
         activity.asyncData &&
-        (activity?.direction === ActivityDirection.Incoming ||
-            activity?.direction === ActivityDirection.SelfTransaction) &&
+        (activity.direction === ActivityDirection.Incoming ||
+            activity.direction === ActivityDirection.SelfTransaction) &&
         activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
-    $: shouldShowActions =
-        isActivityIncomingAndUnclaimed &&
-        activity.asyncData?.asyncStatus !== ActivityAsyncStatus.Timelocked &&
-        features.dashboard.activity.actions.enabled
 
     function onReject(): void {
-        const onRejectConfirm = (): void => {
+        const _onConfirm = (): void => {
             rejectActivity(activity.id)
-            closeRejectDrawer()
-        }
-        const closeRejectDrawer = (): void => {
             closeDrawer(DrawerId.Confirm)
         }
-        openDrawer(DrawerId.Confirm, { onConfirm: onRejectConfirm, onCancel: closeRejectDrawer })
+        openDrawer(DrawerId.Confirm, {
+            title: localize('actions.confirmRejection.title'),
+            description: localize('actions.confirmRejection.description'),
+            hint: localize('actions.confirmRejection.node'),
+            info: true,
+            confirmText: localize('actions.reject'),
+            warning: true,
+            onConfirm: _onConfirm,
+        })
     }
     async function onClaim(): Promise<void> {
         const isUnlocked = await isStrongholdUnlocked()
         if (isUnlocked) {
             claimActivity(activity)
         } else {
-            const onSuccess = async (): Promise<void> => {
+            const _onSuccess = async (): Promise<void> => {
                 await onClaim()
-                closeConfirmPasswordDrawer()
-            }
-            const closeConfirmPasswordDrawer = (): void => {
                 closeDrawer(DrawerId.EnterPassword)
             }
-            openDrawer(DrawerId.EnterPassword, { onSuccess, onCancel: closeConfirmPasswordDrawer })
+            openDrawer(DrawerId.EnterPassword, { onSuccess: _onSuccess })
         }
     }
 </script>
 
-<activity-details class="flex flex-col justify-between h-full pt-10">
+<activity-details class="flex flex-col justify-between h-full space-y-10">
     <activity-content class="flex flex-col space-y-8">
         {#if activity?.type === ActivityType.Basic}
             <BasicActivityDetails {activity} />
@@ -73,7 +71,7 @@
         {/if}
         <ActivityInformation {activity} />
     </activity-content>
-    {#if shouldShowActions}
+    {#if !isTimelocked && isActivityIncomingAndUnclaimed && features.dashboard.activity.actions.enabled}
         <activity-actions class="space-y-4">
             <Button
                 classes="w-full"

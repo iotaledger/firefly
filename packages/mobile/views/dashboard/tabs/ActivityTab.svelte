@@ -4,7 +4,9 @@
     import { DrawerId, openDrawer } from '../../../lib/auxiliary/drawer'
 
     function onTileClick(activity: Activity): void {
-        openDrawer(DrawerId.SelectedActivity, { activity })
+        openDrawer(DrawerId.SelectedActivity, {
+            activity,
+        })
     }
     function onReject(): void {
         // $activityRouter?.next({ action: ActivityAction.FastReject, activity })
