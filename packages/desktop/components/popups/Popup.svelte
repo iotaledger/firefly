@@ -1,11 +1,11 @@
 <script lang="ts">
-    import { mobile, PlatformOption, platform } from '@core/app'
-    import { Icon } from '@ui'
-    import { clickOutside } from '@core/utils/ui'
-    import { closePopup } from '@auxiliary/popup/actions'
-    import { Icon as IconEnum } from '@auxiliary/icon/enums'
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
+    import { Icon } from '@ui'
+    import { closePopup } from '@auxiliary/popup/actions'
+    import { Icon as IconEnum } from '@auxiliary/icon/enums'
+    import { PlatformOption, platform } from '@core/app'
+    import { clickOutside } from '@core/utils/ui'
 
     // Popups
     import AccountSwitcherPopup from './AccountSwitcherPopup.svelte'
@@ -198,7 +198,7 @@
                     fullScreen
                         ? 'bg-white dark:bg-gray-900'
                         : 'bg-gray-800 bg-opacity-70 dark:bg-black dark:bg-opacity-50'
-                } ${$mobile && 'z-40'}`}
+                }`}
 >
     <div tabindex="0" on:focus={handleFocusFirst} />
     <popup-content
