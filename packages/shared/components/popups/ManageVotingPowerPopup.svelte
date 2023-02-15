@@ -20,22 +20,18 @@
     let assetAmountInput: AssetAmountInput
     let amount: string
     let rawAmount = newVotingPower ?? $selectedAccount?.votingPower
-    let confirmDisabled = false
 
     $: asset = $visibleSelectedAccountAssets?.baseCoin
     $: votingPower = parseInt($selectedAccount?.votingPower, 10)
     $: isTransferring = $hasPendingGovernanceTransaction?.[$selectedAccount.index] || $selectedAccount?.isTransferring
-    $: disabled = $hasToRevote || isTransferring
+    $: disabled = getDisabled(amount, $hasToRevote, isTransferring)
 
-    $: amount, disabled, setConfirmDisabled()
-
-    function setConfirmDisabled(): void {
-        if (disabled || !amount) {
-            confirmDisabled = true
-            return
+    function getDisabled(amount: string, hasToRevote: boolean, isTransferring: boolean): boolean {
+        if (!amount) {
+            return hasToRevote || isTransferring
         }
         const convertedSliderAmount = convertToRawAmount(amount, asset?.metadata).toString()
-        confirmDisabled = convertedSliderAmount === $selectedAccount?.votingPower || isTransferring
+        return convertedSliderAmount === $selectedAccount?.votingPower || isTransferring
     }
 
     function onCancelClick(): void {
@@ -102,7 +98,7 @@
         <Button outline disabled={isTransferring} classes="w-full" onClick={onCancelClick}>
             {localize('actions.cancel')}
         </Button>
-        <Button type={HTMLButtonType.Submit} disabled={confirmDisabled} isBusy={isTransferring} classes="w-full">
+        <Button type={HTMLButtonType.Submit} {disabled} isBusy={isTransferring} classes="w-full">
             {localize('actions.confirm')}
         </Button>
     </div>
