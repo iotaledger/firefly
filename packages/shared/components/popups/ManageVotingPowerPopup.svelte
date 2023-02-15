@@ -35,7 +35,7 @@
             return
         }
         const convertedSliderAmount = convertToRawAmount(amount, asset?.metadata).toString()
-        confirmDisabled = convertedSliderAmount === $selectedAccount?.votingPower || $selectedAccount?.isTransferring
+        confirmDisabled = convertedSliderAmount === $selectedAccount?.votingPower || isTransferring
     }
 
     function onCancelClick(): void {
