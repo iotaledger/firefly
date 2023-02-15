@@ -1,13 +1,14 @@
-import { get } from 'svelte/store'
 import type { Transaction } from '@iota/wallet/out/types'
 
-import { selectedAccount } from '@core/account/stores'
+import type { IAccountState } from '@core/account/interfaces'
 import { addActivitiesToAccountActivitiesInAllAccountActivities } from '../stores'
 
 import { generateActivities, preprocessTransaction } from '.'
 
-export async function processAndAddToActivities(transaction: Transaction): Promise<void> {
-    const account = get(selectedAccount)
+// We pass the account as a parameter,
+// because logging out while transaction is pending,
+// clears the the selectedAccount store at this point.
+export async function processAndAddToActivities(transaction: Transaction, account: IAccountState): Promise<void> {
     const preprocessedTransaction = await preprocessTransaction(transaction, account)
     const activities = generateActivities(preprocessedTransaction, account)
     addActivitiesToAccountActivitiesInAllAccountActivities(account.index, activities)

@@ -41,20 +41,24 @@ window.addEventListener('unhandledrejection', (event) => {
 })
 
 try {
-    if (process.env.NODE_ENV === 'development') {
-        const logDir = './log'
-        if (!fs.existsSync(logDir)) {
-            fs.mkdirSync(logDir)
-        }
+    if (process.env.STAGE === 'prod') {
+        // empty
+    } else {
+        ipcRenderer.invoke('get-path', 'userData').then((baseDir) => {
+            const logDir = `${baseDir}/logs`
+            if (!fs.existsSync(logDir)) {
+                fs.mkdirSync(logDir)
+            }
 
-        const today = new Date().toISOString().slice(0, 16).replace('T', '-').replace(':', '-')
-        const loggerOptions = {
-            colorEnabled: true,
-            name: `./log/wallet-${today}.log`,
-            levelFilter: 'debug',
-            targetExclusions: ['h2', 'hyper', 'rustls', 'message_handler'],
-        }
-        WalletApi.initLogger(loggerOptions)
+            const today = new Date().toISOString().slice(0, 16).replace('T', '-').replace(':', '-')
+            const loggerOptions = {
+                colorEnabled: true,
+                name: `${logDir}/wallet-${today}.log`,
+                levelFilter: 'debug',
+                targetExclusions: ['h2', 'hyper', 'rustls', 'message_handler'],
+            }
+            WalletApi.initLogger(loggerOptions)
+        })
     }
 } catch (err) {
     console.error('[Preload Context] Error:', err)

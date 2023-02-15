@@ -1,14 +1,7 @@
 <script lang="ts">
-    import { Pane, Proposals, ProposalsDetails, VotingPower, Illustration, Text, FontWeight, Button } from '@ui'
+    import { Pane, Proposals, ProposalsDetails, VotingPower, Illustration, Text, FontWeight } from '@ui'
     import { localize } from '@core/i18n'
-    import { openPopup } from '@auxiliary/popup'
     import { registeredProposalsForSelectedAccount } from '@contexts/governance'
-
-    function handleAddProposal(): void {
-        openPopup({
-            type: 'addProposal',
-        })
-    }
 </script>
 
 <div class="w-full h-full flex flex-nowrap p-8 relative flex-1 space-x-6 bg-gray-50 dark:bg-gray-900">
@@ -30,7 +23,6 @@
                 <Text fontSize="text-14" fontWeight={FontWeight.semibold} color="gray-500" classes="mt-8"
                     >{localize('views.governance.proposals.emptyTitle')}</Text
                 >
-                <Button onClick={handleAddProposal} classes="mt-8">{localize('actions.addProposal')}</Button>
             </div>
         {/if}
     </div>

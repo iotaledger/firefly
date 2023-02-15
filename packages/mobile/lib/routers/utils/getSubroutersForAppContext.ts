@@ -18,6 +18,7 @@ import {
     storageProtectionSetupRouter,
     strongholdSetupRouter,
     tokenRouter,
+    filterRouter,
 } from '../routers'
 
 export function getSubroutersForAppContext(context: AppContext): IRouter[] {
@@ -28,6 +29,7 @@ export function getSubroutersForAppContext(context: AppContext): IRouter[] {
                 get(accountActionsRouter),
                 get(sendRouter),
                 get(tokenRouter),
+                get(filterRouter),
                 get(profileRouter),
                 get(settingsRouter),
                 get(networkConfigurationSettingsRouter),

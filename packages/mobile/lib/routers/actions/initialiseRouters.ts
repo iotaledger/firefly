@@ -37,6 +37,8 @@ import {
     StrongholdSetupRouter,
     TokenRouter,
     tokenRouter,
+    FilterRouter,
+    filterRouter,
 } from '../routers'
 
 export function initialiseRouters(): void {
@@ -91,6 +93,7 @@ function initialiseDashboardSubrouters(): void {
     accountActionsRouter.set(new AccountActionsRouter())
     sendRouter.set(new SendRouter())
     tokenRouter.set(new TokenRouter())
+    filterRouter.set(new FilterRouter())
     profileRouter.set(new ProfileRouter())
     settingsRouter.set(new SettingsRouter())
 }
