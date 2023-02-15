@@ -82,7 +82,7 @@
 </script>
 
 <activity-list-container class="asset-list h-full flex flex-auto flex-col flex-grow flex-shrink-0">
-    <activity-list-header class="flex justify-between items-center">
+    <activity-list-header class="flex flex-row space-x-4 justify-between items-center mb-4">
         <search-input-container class="block flex-1">
             <SearchInput bind:value={searchValue} />
         </search-input-container>
@@ -90,9 +90,9 @@
     </activity-list-header>
     {#if activityTileDataList.length > 0}
         <VirtualList items={activityTileDataList} let:item>
-            <activity-tile-container class="block mb-2">
+            <activity-tile-container class="flex flex-col space-y-2 mb-2">
                 {#if item.title}
-                    <Text fontWeight={FontWeight.semibold} color="gray-600" classes="my-2">
+                    <Text fontWeight={FontWeight.semibold} color="gray-600">
                         {item.title} • {item.amount}
                     </Text>
                 {/if}
