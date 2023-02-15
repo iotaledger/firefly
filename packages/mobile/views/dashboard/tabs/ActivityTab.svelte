@@ -2,19 +2,20 @@
     import { Activity } from '@core/wallet'
     import { ActivityList } from '../../../../mobile/components'
     import { DrawerId, openDrawer } from '../../../lib/auxiliary/drawer'
+    import { handleClaimActivity, handleRejectActivity } from '../../../lib/contexts/dashboard'
 
     function onTileClick(activity: Activity): void {
         openDrawer(DrawerId.SelectedActivity, {
             activity,
         })
     }
-    function onReject(): void {
-        // $activityRouter?.next({ action: ActivityAction.FastReject, activity })
+
+    function onReject(activityId: string): void {
+        handleRejectActivity(activityId)
     }
 
-    async function onClaim(): Promise<void> {
-        // const isUnlocked = await isStrongholdUnlocked()
-        // $activityRouter?.next({ action: ActivityAction.FastClaim, activity, isUnlocked })
+    function onClaim(activity: Activity): void {
+        void handleClaimActivity(activity)
     }
 </script>
 

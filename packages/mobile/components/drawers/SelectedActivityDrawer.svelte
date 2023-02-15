@@ -1,14 +1,6 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { isStrongholdUnlocked } from '@core/profile-manager'
-    import {
-        Activity,
-        ActivityAsyncStatus,
-        ActivityDirection,
-        ActivityType,
-        claimActivity,
-        rejectActivity,
-    } from '@core/wallet'
+    import { Activity, ActivityAsyncStatus, ActivityDirection, ActivityType } from '@core/wallet'
     import features from '@features/features'
     import {
         ActivityInformation,
@@ -18,7 +10,7 @@
         FoundryActivityDetails,
         NftActivityDetails,
     } from 'shared/components'
-    import { closeDrawer, DrawerId, openDrawer } from '../../lib/auxiliary/drawer'
+    import { handleClaimActivity, handleRejectActivity } from '../../lib/contexts/dashboard'
 
     export let activity: Activity | undefined
 
@@ -30,31 +22,10 @@
         activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
 
     function onReject(): void {
-        const _onConfirm = (): void => {
-            rejectActivity(activity.id)
-            closeDrawer(DrawerId.Confirm)
-        }
-        openDrawer(DrawerId.Confirm, {
-            title: localize('actions.confirmRejection.title'),
-            description: localize('actions.confirmRejection.description'),
-            hint: localize('actions.confirmRejection.node'),
-            info: true,
-            confirmText: localize('actions.reject'),
-            warning: true,
-            onConfirm: _onConfirm,
-        })
+        handleRejectActivity(activity.id)
     }
-    async function onClaim(): Promise<void> {
-        const isUnlocked = await isStrongholdUnlocked()
-        if (isUnlocked) {
-            claimActivity(activity)
-        } else {
-            const _onSuccess = async (): Promise<void> => {
-                await onClaim()
-                closeDrawer(DrawerId.EnterPassword)
-            }
-            openDrawer(DrawerId.EnterPassword, { onSuccess: _onSuccess })
-        }
+    function onClaim(): void {
+        void handleClaimActivity(activity)
     }
 </script>
 

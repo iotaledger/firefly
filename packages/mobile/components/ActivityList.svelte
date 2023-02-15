@@ -8,7 +8,7 @@
     import { ActivityTile } from '../../mobile/components'
 
     export let onTileClick: (activity: Activity) => unknown = () => {}
-    export let onReject: (activity: Activity) => unknown = () => {}
+    export let onReject: (activityId: string) => unknown = () => {}
     export let onClaim: (activity: Activity) => unknown = () => {}
 
     $: setAsyncStatusOfAccountActivities($time)
@@ -48,7 +48,7 @@
                     activity={item.activity}
                     onClick={() => onTileClick(item.activity)}
                     onClaim={() => onClaim(item.activity)}
-                    onReject={() => onReject(item.activity)}
+                    onReject={() => onReject(item.activity.id)}
                 />
             </div>
         </VirtualList>
