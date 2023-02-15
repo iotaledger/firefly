@@ -3,9 +3,9 @@
     import EnterPasswordDrawer from './EnterPasswordDrawer.svelte'
     import SelectedActivityDrawer from './SelectedActivityDrawer.svelte'
 
-    import { DrawerId, drawersStore, closeDrawer } from '../../lib/auxiliary/drawer'
+    import { closeDrawer, DrawerId, drawersStore } from '../../lib/auxiliary/drawer'
 
-    const drawerComponents = {
+    const COMPONENTS = {
         [DrawerId.Confirm]: ConfirmDrawer,
         [DrawerId.EnterPassword]: EnterPasswordDrawer,
         [DrawerId.SelectedActivity]: SelectedActivityDrawer,
@@ -14,6 +14,9 @@
 
 {#if $drawersStore.length > 0}
     {#each $drawersStore as drawer}
-        <svelte:component this={drawerComponents[drawer.id]} {...drawer.props} onClose={() => closeDrawer(drawer.id)} />
+        {@const drawerComponent = COMPONENTS[drawer.id]}
+        {#if drawerComponent}
+            <svelte:component this={drawerComponent} {...drawer.props} onClose={() => closeDrawer(drawer.id)} />
+        {/if}
     {/each}
 {/if}
