@@ -3,7 +3,7 @@
     import { Icon } from 'shared/components/atoms'
     import { appSettings, Platform, PlatformOption, platform } from '@core/app'
     import { activeProfile } from '@core/profile'
-    import { appRoute, AppRoute, dashboardRoute, DashboardRoute } from '@core/router'
+    import { appRoute, AppRoute } from '@core/router'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { popupState } from '@auxiliary/popup'
 
@@ -12,7 +12,6 @@
     let isMaximized = false
 
     $: isDashboardVisible = $appRoute === AppRoute.Dashboard && $hasLoadedAccounts && $popupState.type !== 'busy'
-    $: isSettingsVisible = $dashboardRoute === DashboardRoute.Settings
     $: isWindows = $platform === PlatformOption.Windows
     $: dark = $appSettings.darkMode
 
