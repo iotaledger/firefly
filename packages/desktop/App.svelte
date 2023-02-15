@@ -191,15 +191,15 @@
                 relative={$popupState.relative}
             />
         {/if}
-        <Route route={AppRoute.Dashboard}>
+        <Route route={AppRoute.Dashboard} routeStore={appRoute}>
             <Transition>
                 <Dashboard />
             </Transition>
         </Route>
-        <Route route={AppRoute.Login}>
+        <Route route={AppRoute.Login} routeStore={appRoute}>
             <LoginRouter />
         </Route>
-        <Route route={AppRoute.Onboarding}>
+        <Route route={AppRoute.Onboarding} routeStore={appRoute}>
             <OnboardingRouter />
         </Route>
         {#if settings}

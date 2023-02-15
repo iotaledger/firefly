@@ -1,9 +1,11 @@
 <script lang="ts">
-    import { appRoute, AppRoute } from '@core/router'
+    import { AppRoute } from '@core/router'
+    import { Writable } from 'svelte/store'
 
     export let route: AppRoute
+    export let routeStore: Writable<AppRoute>
 </script>
 
-{#if $appRoute === route}
+{#if $routeStore === route}
     <slot />
 {/if}
