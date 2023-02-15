@@ -1,11 +1,12 @@
 <script lang="ts">
     import { onDestroy, onMount } from 'svelte'
     import { Icon } from 'shared/components/atoms'
-    import { appSettings, Platform, PlatformOption, platform } from '@core/app'
-    import { activeProfile } from '@core/profile'
+    import { Platform, PlatformOption } from '@core/app'
+    import { appSettings, platform } from '@core/app/stores'
+    import { activeProfile } from '@core/profile/stores'
     import { appRoute, AppRoute } from '@core/router'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { popupState } from '@auxiliary/popup'
+    import { popupState } from '@auxiliary/popup/stores'
 
     const { hasLoadedAccounts } = $activeProfile
 
