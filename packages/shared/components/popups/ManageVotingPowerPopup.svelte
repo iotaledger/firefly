@@ -24,7 +24,7 @@
 
     $: asset = $visibleSelectedAccountAssets?.baseCoin
     $: votingPower = parseInt($selectedAccount?.votingPower, 10)
-    $: isTransferring = $hasPendingGovernanceTransaction?.[$selectedAccount.index]
+    $: isTransferring = $hasPendingGovernanceTransaction?.[$selectedAccount.index] || $selectedAccount?.isTransferring
     $: disabled = $hasToRevote || isTransferring
 
     $: amount, disabled, setConfirmDisabled()
