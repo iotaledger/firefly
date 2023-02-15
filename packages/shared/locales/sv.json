@@ -2013,7 +2013,7 @@
             "uri": "För att skapa en URI med anpassade medier, ladda först upp din fil till IPFS via en lagringstjänst (t.ex. https://nft.storage/)"
         },
         "governance": {
-            "removeProposalWarning": "You must stop voting for this proposal in all accounts before removing it."
+            "removeProposalWarning": "You must stop voting for this proposal before removing it."
         }
     },
     "exports": {

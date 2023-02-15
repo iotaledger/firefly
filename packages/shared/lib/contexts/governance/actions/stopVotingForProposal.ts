@@ -14,7 +14,7 @@ export async function stopVotingForProposal(eventId: string): Promise<Transactio
         setHasPendingGovernanceTransactionForAccount(account.index)
         const transaction = await account?.stopParticipating(eventId)
 
-        await processAndAddToActivities(transaction)
+        await processAndAddToActivities(transaction, account)
 
         showAppNotification({
             type: 'success',

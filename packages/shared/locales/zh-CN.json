@@ -62,7 +62,7 @@
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Set up {protocol, select, IOTA {an} Shimmer {a} other {an}} {protocol} profile",
+                    "title": "设置 {protocol, select, IOTA {一个} Shimmer {一个} other {一个}} {protocol} 档案",
                     "body": "请选择适当的方法来设置你的 {protocol} 配置文件。"
                 },
                 "setupNew": {
@@ -310,8 +310,8 @@
                 "description": "自动锁定钱包并登出的待机时间"
             },
             "maxMediaSize": {
-                "title": "Maximum media size",
-                "description": "NFT media with sizes greater than this limit will not be downloaded and a placeholder representing the media type will be displayed instead"
+                "title": "最大文件大小",
+                "description": "尺寸大于此限制的NFT 媒体将不会下载，代表媒体类型的占位符将会被显示。"
             },
             "changePassword": {
                 "title": "修改密码",
@@ -463,7 +463,7 @@
             },
             "profileModal": {
                 "allSettings": "所有设置",
-                "profileApplication": "Profile, application, security",
+                "profileApplication": "档案、应用、安全",
                 "logout": "退出账号",
                 "stronghold": {
                     "title": "配置文件锁定",
@@ -553,52 +553,52 @@
         },
         "collectibles": {
             "gallery": {
-                "title": "Collectibles",
-                "emptyTitle": "No collectibles",
-                "noResults": "No results",
-                "emptyDescription": "Deposit or Receive your first collectible now!"
+                "title": "合集",
+                "emptyTitle": "暂无合集",
+                "noResults": "没有结果",
+                "emptyDescription": "现在存入或接收你的第一个合集！"
             },
             "details": {
-                "storageDepositDescription": "A refundable deposit required to store your NFT on the Tangle.",
-                "attributes": "Attributes",
+                "storageDepositDescription": "一个可退还的押金，用于将你的NFT易存储在Tangle上。",
+                "attributes": "属性",
                 "menu": {
-                    "download": "Download",
-                    "setAvatar": "Set NFT as profile avatar",
-                    "view": "View media in browser",
-                    "burn": "Burn NFT"
+                    "download": "下载",
+                    "setAvatar": "设置 NFT 为配置文件头像",
+                    "view": "在浏览器中查看",
+                    "burn": "烧毁 NFT"
                 }
             }
         },
         "governance": {
             "votingPower": {
-                "title": "Voting power",
-                "maximal": "Maximal voting power: {value}",
-                "manage": "Manage voting power"
+                "title": "投票权重",
+                "maximal": "最大投票权重: {value}",
+                "manage": "管理投票权重"
             },
             "proposalsDetails": {
-                "title": "Details",
-                "totalProposals": "Total proposals",
-                "activeProposals": "Active proposals",
-                "votingProposals": "Proposals you are voting on",
-                "votedProposals": "Total proposals you voted on"
+                "title": "详情",
+                "totalProposals": "所有提案",
+                "activeProposals": "现行提案",
+                "votingProposals": "您正在投票的提案",
+                "votedProposals": "您投票的所有提案"
             },
             "proposals": {
-                "title": "Proposals",
-                "voted": "Voted",
-                "successAdd": "Proposal successfully added",
-                "successAddAll": "Proposal successfully added to all accounts",
-                "successRemove": "Proposal successfully removed",
-                "emptyTitle": "No proposals"
+                "title": "提案",
+                "voted": "已投票",
+                "successAdd": "提案成功添加",
+                "successAddAll": "提案成功添加到所有账户",
+                "successRemove": "提案成功移除",
+                "emptyTitle": "暂无提案"
             },
             "statusTimeline": {
-                "upcoming": "Announcement",
-                "commencing": "Voting open",
-                "holding": "Counting starts",
-                "ended": "Counting stops"
+                "upcoming": "通知",
+                "commencing": "投票开放",
+                "holding": "计数开始",
+                "ended": "计数停止"
             },
             "details": {
                 "yourVote": {
-                    "title": "Your vote",
+                    "title": "您的投票",
                     "total": "Total votes counted",
                     "power": "Voting power"
                 },
@@ -2013,7 +2013,7 @@
             "uri": "To create a URI using custom media, first upload your file to IPFS via a storage service (e.g. https://nft.storage/)"
         },
         "governance": {
-            "removeProposalWarning": "You must stop voting for this proposal in all accounts before removing it."
+            "removeProposalWarning": "You must stop voting for this proposal before removing it."
         }
     },
     "exports": {
