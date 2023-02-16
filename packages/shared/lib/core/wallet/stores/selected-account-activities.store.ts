@@ -60,7 +60,7 @@ export const queriedActivities: Readable<Activity[]> = derived(
 function getFieldsToSearchFromActivity(activity: Activity): string[] {
     const fieldsToSearch: string[] = []
 
-    if (activity.transactionId) {
+    if (activity?.transactionId) {
         fieldsToSearch.push(activity.transactionId)
     }
 
