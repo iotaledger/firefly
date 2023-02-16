@@ -227,7 +227,7 @@
             </header-container>
             <div class="flex flex-1 flex-col justify-between">
                 <Text type={TextType.h2}>{$selectedProposal?.title}</Text>
-                <div class="additional-info mt-4 max-h-40 overflow-hidden">
+                <div class="mt-4 max-h-40 overflow-hidden">
                     {#if $selectedProposal?.additionalInfo}
                         <MarkdownBlock text={$selectedProposal?.additionalInfo} />
                     {/if}
