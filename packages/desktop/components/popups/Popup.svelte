@@ -3,15 +3,18 @@
     import { fade } from 'svelte/transition'
     import { Icon } from '@ui'
     import { closePopup } from '@auxiliary/popup/actions'
+    import { PopupId } from '@auxiliary/popup/enums'
+    import { PopupComponentMap } from '@auxiliary/popup/types'
     import { Icon as IconEnum } from '@auxiliary/icon/enums'
     import { PlatformOption, platform } from '@core/app'
     import { clickOutside } from '@core/utils/ui'
 
     // Popups
     import AccountSwitcherPopup from './AccountSwitcherPopup.svelte'
-    import AliasConfirmationPopup from './AliasConfirmationPopup.svelte'
     import ActivityDetailsPopup from './ActivityDetailsPopup.svelte'
     import AddNodePopup from './AddNodePopup.svelte'
+    import AddProposalPopup from './AddProposalPopup.svelte'
+    import AliasConfirmationPopup from './AliasConfirmationPopup.svelte'
     import BackupStrongholdPopup from './BackupStrongholdPopup.svelte'
     import BurnNativeTokensPopup from './BurnNativeTokensPopup.svelte'
     import BurnNativeTokensConfirmationPopup from './BurnNativeTokensConfirmationPopup.svelte'
@@ -19,41 +22,41 @@
     import ConnectLedgerPopup from './ConnectLedgerPopup.svelte'
     import CreateAccountPopup from './CreateAccountPopup.svelte'
     import DeepLinkErrorPopup from './DeepLinkErrorPopup.svelte'
-    import DeleteAccount from './DeleteAccount.svelte'
-    import Diagnostics from './Diagnostics.svelte'
+    import DeleteAccountPopup from './DeleteAccountPopup.svelte'
+    import DeleteProfilePopup from './DeleteProfilePopup.svelte'
+    import DiagnosticsPopup from './DiagnosticsPopup.svelte'
     import EnableLedgerBlindSigningPopup from './EnableLedgerBlindSigningPopup.svelte'
-    import ErrorLog from './ErrorLog.svelte'
+    import ErrorLogPopup from './ErrorLogPopup.svelte'
     import FaucetRequestPopup from './FaucetRequestPopup.svelte'
     import LedgerAppGuidePopup from './LedgerAppGuidePopup.svelte'
     import LedgerConnectionGuidePopup from './LedgerConnectionGuidePopup.svelte'
-    import LegalUpdate from './LegalUpdate.svelte'
+    import LegalUpdatePopup from './LegalUpdatePopup.svelte'
     import ManageAccountPopup from './ManageAccountPopup.svelte'
     import ManageVotingPowerPopup from './ManageVotingPowerPopup.svelte'
-    import MintNativeTokenFormPopup from './MintNativeTokenFormPopup.svelte'
     import MintNativeTokenConfirmationPopup from './MintNativeTokenConfirmationPopup.svelte'
-    import MintNftFormPopup from './MintNftFormPopup.svelte'
+    import MintNativeTokenFormPopup from './MintNativeTokenFormPopup.svelte'
     import MintNftConfirmationPopup from './MintNftConfirmationPopup.svelte'
+    import MintNftFormPopup from './MintNftFormPopup.svelte'
     import NodeAuthRequiredPopup from './NodeAuthRequiredPopup.svelte'
     import NodeInfoPopup from './NodeInfoPopup.svelte'
     import ReceiveAddressPopup from './ReceiveAddressPopup.svelte'
-    import AddProposalPopup from './AddProposalPopup.svelte'
-    import RemoveProposalPopup from './RemoveProposalPopup.svelte'
     import RemoveNode from './RemoveNode.svelte'
+    import RemoveProposalPopup from './RemoveProposalPopup.svelte'
     import RevotePopup from './RevotePopup.svelte'
-    import { SendFormPopup, SendConfirmationPopup } from './send'
+    import { SendConfirmationPopup, SendFormPopup } from './send'
     import StopVotingPopup from './StopVotingPopup.svelte'
     import StorageDepositBreakdownPopup from './StorageDepositBreakdownPopup.svelte'
     import TestDeepLinkFormPopup from './TestDeepLinkFormPopup.svelte'
     import TokenInformationPopup from './TokenInformationPopup.svelte'
     import UnlockStrongholdPopup from './UnlockStrongholdPopup.svelte'
     import VerifyLedgerTransactionPopup from './VerifyLedgerTransactionPopup.svelte'
-    import Version from './Version.svelte'
-    import Video from './Video.svelte'
+    import VersionPopup from './VersionPopup.svelte'
+    import VideoPopup from './VideoPopup.svelte'
     import VoteForProposal from './VoteForProposalPopup.svelte'
     import VotingPowerToZeroPopup from './VotingPowerToZeroPopup.svelte'
     import WalletFinderPopup from './WalletFinderPopup.svelte'
 
-    export let type: string
+    export let type: PopupId
     export let props: any
     export let hideClose: boolean = false
     export let preventClose: boolean = false
@@ -92,52 +95,53 @@
 
     let popupContent
 
-    const types = {
-        accountSwitcher: AccountSwitcherPopup,
-        activityDetails: ActivityDetailsPopup,
-        addNode: AddNodePopup,
-        aliasConfirmation: AliasConfirmationPopup,
-        backupStronghold: BackupStrongholdPopup,
-        burnNativeTokens: BurnNativeTokensPopup,
-        burnNativeTokensConfirm: BurnNativeTokensConfirmationPopup,
-        confirmation: ConfirmationPopup,
-        connectLedger: ConnectLedgerPopup,
-        createAccount: CreateAccountPopup,
-        deepLinkError: DeepLinkErrorPopup,
-        deleteAccount: DeleteAccount,
-        diagnostics: Diagnostics,
-        enableLedgerBlindSigning: EnableLedgerBlindSigningPopup,
-        errorLog: ErrorLog,
-        faucetRequest: FaucetRequestPopup,
-        ledgerAppGuide: LedgerAppGuidePopup,
-        ledgerConnectionGuide: LedgerConnectionGuidePopup,
-        legalUpdate: LegalUpdate,
-        manageAccount: ManageAccountPopup,
-        manageVotingPower: ManageVotingPowerPopup,
-        mintNativeTokenConfirmation: MintNativeTokenConfirmationPopup,
-        mintNativeTokenForm: MintNativeTokenFormPopup,
-        mintNftConfirmation: MintNftConfirmationPopup,
-        mintNftForm: MintNftFormPopup,
-        nodeAuthRequired: NodeAuthRequiredPopup,
-        nodeInfo: NodeInfoPopup,
-        receiveAddress: ReceiveAddressPopup,
-        addProposal: AddProposalPopup,
-        removeNode: RemoveNode,
-        removeProposal: RemoveProposalPopup,
-        revote: RevotePopup,
-        sendConfirmation: SendConfirmationPopup,
-        sendForm: SendFormPopup,
-        stopVoting: StopVotingPopup,
-        storageDepositBreakdown: StorageDepositBreakdownPopup,
-        testDeepLinkForm: TestDeepLinkFormPopup,
-        tokenInformation: TokenInformationPopup,
-        unlockStronghold: UnlockStrongholdPopup,
-        verifyLedgerTransaction: VerifyLedgerTransactionPopup,
-        version: Version,
-        video: Video,
-        voteForProposal: VoteForProposal,
-        votingPowerToZero: VotingPowerToZeroPopup,
-        walletFinder: WalletFinderPopup,
+    const POPUP_MAP: PopupComponentMap = {
+        [PopupId.AccountSwitcher]: AccountSwitcherPopup,
+        [PopupId.ActivityDetails]: ActivityDetailsPopup,
+        [PopupId.AddNode]: AddNodePopup,
+        [PopupId.AddProposal]: AddProposalPopup,
+        [PopupId.AliasConfirmation]: AliasConfirmationPopup,
+        [PopupId.BackupStronghold]: BackupStrongholdPopup,
+        [PopupId.BurnNativeTokens]: BurnNativeTokensPopup,
+        [PopupId.BurnNativeTokensConfirmation]: BurnNativeTokensConfirmationPopup,
+        [PopupId.Confirmation]: ConfirmationPopup,
+        [PopupId.ConnectLedger]: ConnectLedgerPopup,
+        [PopupId.CreateAccount]: CreateAccountPopup,
+        [PopupId.DeepLinkError]: DeepLinkErrorPopup,
+        [PopupId.DeleteAccount]: DeleteAccountPopup,
+        [PopupId.DeleteProfile]: DeleteProfilePopup,
+        [PopupId.Diagnostics]: DiagnosticsPopup,
+        [PopupId.EnableLedgerBlindSigning]: EnableLedgerBlindSigningPopup,
+        [PopupId.ErrorLog]: ErrorLogPopup,
+        [PopupId.FaucetRequest]: FaucetRequestPopup,
+        [PopupId.LedgerAppGuide]: LedgerAppGuidePopup,
+        [PopupId.LedgerConnection]: LedgerConnectionGuidePopup,
+        [PopupId.LegalUpdate]: LegalUpdatePopup,
+        [PopupId.ManageAccount]: ManageAccountPopup,
+        [PopupId.ManageVotingPower]: ManageVotingPowerPopup,
+        [PopupId.MintNativeTokenConfirmation]: MintNativeTokenConfirmationPopup,
+        [PopupId.MintNativeTokenForm]: MintNativeTokenFormPopup,
+        [PopupId.MintNftConfirmation]: MintNftConfirmationPopup,
+        [PopupId.MintNftForm]: MintNftFormPopup,
+        [PopupId.NodeAuthRequired]: NodeAuthRequiredPopup,
+        [PopupId.NodeInfo]: NodeInfoPopup,
+        [PopupId.ReceiveAddress]: ReceiveAddressPopup,
+        [PopupId.RemoveNode]: RemoveNode,
+        [PopupId.RemoveProposal]: RemoveProposalPopup,
+        [PopupId.Revote]: RevotePopup,
+        [PopupId.SendConfirmation]: SendConfirmationPopup,
+        [PopupId.SendForm]: SendFormPopup,
+        [PopupId.StopVoting]: StopVotingPopup,
+        [PopupId.StorageDepositBreakdown]: StorageDepositBreakdownPopup,
+        [PopupId.TestDeepLinkForm]: TestDeepLinkFormPopup,
+        [PopupId.TokenInformation]: TokenInformationPopup,
+        [PopupId.UnlockStronghold]: UnlockStrongholdPopup,
+        [PopupId.VerifyLedgerTransaction]: VerifyLedgerTransactionPopup,
+        [PopupId.Version]: VersionPopup,
+        [PopupId.Video]: VideoPopup,
+        [PopupId.VoteForProposal]: VoteForProposal,
+        [PopupId.VotingPowerToZero]: VotingPowerToZeroPopup,
+        [PopupId.WalletFinder]: WalletFinderPopup,
     }
 
     function onKey(event: KeyboardEvent): void {
@@ -217,7 +221,7 @@
                 />
             </button>
         {/if}
-        <svelte:component this={types[type]} {...props} />
+        <svelte:component this={POPUP_MAP[type]} {...props} />
     </popup-content>
     <div tabindex="0" on:focus={handleFocusLast} />
 </popup>
