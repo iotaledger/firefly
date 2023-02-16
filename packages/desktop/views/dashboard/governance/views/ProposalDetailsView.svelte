@@ -4,7 +4,6 @@
     import { localize } from '@core/i18n'
     import {
         Button,
-        FontWeight,
         KeyValueBox,
         Pane,
         ProposalDetailsButton,
@@ -15,6 +14,7 @@
         TextType,
         TextHint,
     } from '@ui'
+    import SvelteMarkdown from 'svelte-markdown'
     import { openPopup } from '@auxiliary/popup/actions'
     import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
     import { getVotingEvent } from '@contexts/governance/actions'
@@ -227,14 +227,11 @@
             </header-container>
             <div class="flex flex-1 flex-col justify-between">
                 <Text type={TextType.h2}>{$selectedProposal?.title}</Text>
-                {#if $selectedProposal?.additionalInfo}
-                    <Text
-                        type={TextType.h5}
-                        overrideColor
-                        classes="text-gray-600 mt-4 max-h-40 overflow-hidden select-text"
-                        fontWeight={FontWeight.medium}>{$selectedProposal?.additionalInfo}</Text
-                    >
-                {/if}
+                <div class="additional-info mt-4 max-h-40 overflow-hidden">
+                    {#if $selectedProposal?.additionalInfo}
+                        <SvelteMarkdown source={$selectedProposal?.additionalInfo} />
+                    {/if}
+                </div>
             </div>
         </Pane>
         <Pane classes="p-6 h-fit">
@@ -303,3 +300,17 @@
         {/if}
     </Pane>
 </div>
+
+<style lang="scss">
+    .additional-info {
+        :global(p) {
+            @apply text-gray-600;
+            @apply leading-140;
+            @apply font-500;
+            @apply text-14;
+        }
+        :global(a) {
+            @apply underline;
+        }
+    }
+</style>
