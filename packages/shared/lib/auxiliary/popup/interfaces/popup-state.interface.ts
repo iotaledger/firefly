@@ -3,7 +3,7 @@ import { PopupProps } from '../types'
 
 export interface IPopupState {
     active: boolean
-    id: PopupId
+    id: PopupId | string
     hideClose?: boolean
     preventClose?: boolean
     fullScreen?: boolean
