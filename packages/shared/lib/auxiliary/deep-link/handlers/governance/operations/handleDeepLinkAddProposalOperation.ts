@@ -39,7 +39,7 @@ export function handleDeepLinkAddProposalOperation(searchParams: URLSearchParams
     }
 
     openPopup({
-        type: 'addProposal',
+        id: 'addProposal',
         props: { eventId, nodeUrl },
     })
 }

@@ -21,7 +21,7 @@
 
     function handleAddNodeClick(): void {
         openPopup({
-            type: 'addNode',
+            id: 'addNode',
             props: {
                 onSuccess: () => {
                     closePopup()

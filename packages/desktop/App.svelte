@@ -29,7 +29,8 @@
     import { initialiseOnboardingFlow } from '@contexts/onboarding'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { getLocalisedMenuItems } from './lib/helpers'
-    import { Popup, Route, TitleBar, ToastContainer, Transition } from '@ui'
+    import { Route, TitleBar, ToastContainer, Transition } from '@ui'
+    import { Popup } from '@components'
     import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from '@views'
     import {
         getAppRouter,
@@ -121,17 +122,17 @@
         })
         Platform.onEvent('menu-check-for-update', () => {
             openPopup({
-                type: 'version',
+                id: 'version',
                 props: {
                     currentVersion: $appVersionDetails.currentVersion,
                 },
             })
         })
         Platform.onEvent('menu-error-log', () => {
-            openPopup({ type: 'errorLog' })
+            openPopup({ id: 'errorLog' })
         })
         Platform.onEvent('menu-diagnostics', () => {
-            openPopup({ type: 'diagnostics' })
+            openPopup({ id: 'diagnostics' })
         })
         Platform.onEvent('menu-create-developer-profile', () => {
             void initialiseOnboardingFlow({
@@ -182,7 +183,7 @@
     {:else}
         {#if $popupState.active}
             <Popup
-                type={$popupState.type}
+                id={$popupState.id}
                 props={$popupState.props}
                 hideClose={$popupState.hideClose}
                 fullScreen={$popupState.fullScreen}

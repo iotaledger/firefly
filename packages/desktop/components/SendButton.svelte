@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { resetLedgerPreparedOutput, resetShowInternalVerificationPopup } from '@core/ledger'
     import { resetNewTokenTransactionDetails } from '@core/wallet'
-    import { openPopup } from '@auxiliary/popup'
+    import { openPopup, PopupId } from '@auxiliary/popup'
     import { OnboardingButton } from '@ui'
 
     function onSendClick(): void {
@@ -10,7 +10,7 @@
         resetLedgerPreparedOutput()
         resetShowInternalVerificationPopup()
         openPopup({
-            type: 'sendForm',
+            id: PopupId.SendForm,
             overflow: true,
         })
     }

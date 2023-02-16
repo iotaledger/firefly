@@ -13,7 +13,7 @@
         try {
             await assetAmountInput.validate()
             openPopup({
-                type: 'burnNativeTokensConfirm',
+                id: 'burnNativeTokensConfirm',
                 props: { asset, rawAmount },
             })
         } catch (err) {

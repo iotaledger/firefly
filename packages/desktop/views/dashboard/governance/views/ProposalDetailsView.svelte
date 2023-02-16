@@ -1,13 +1,9 @@
 <script lang="ts">
-    import { onMount, onDestroy } from 'svelte'
-    import { VotingEventPayload, ParticipationEventType, TrackedParticipationOverview } from '@iota/wallet/out/types'
-    import { localize } from '@core/i18n'
     import {
         Button,
         KeyValueBox,
         Pane,
         ProposalDetailsButton,
-        ProposalInformation,
         ProposalQuestion,
         ProposalStatusPill,
         Text,
@@ -15,6 +11,10 @@
         TextHint,
         MarkdownBlock,
     } from '@ui'
+    import { ProposalInformationPane } from '@components'
+    import { onMount, onDestroy } from 'svelte'
+    import { VotingEventPayload, ParticipationEventType, TrackedParticipationOverview } from '@iota/wallet/out/types'
+    import { localize } from '@core/i18n'
     import { openPopup } from '@auxiliary/popup/actions'
     import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
     import { getVotingEvent } from '@contexts/governance/actions'
@@ -164,7 +164,7 @@
 
     function onStopVotingClick(): void {
         openPopup({
-            type: 'stopVoting',
+            id: 'stopVoting',
         })
     }
 
@@ -173,7 +173,7 @@
             answerValue === undefined ? ABSTAIN_VOTE_VALUE : answerValue
         )
         openPopup({
-            type: 'voteForProposal',
+            id: 'voteForProposal',
             props: { selectedAnswerValues: chosenAnswerValues },
         })
     }
@@ -254,7 +254,7 @@
                 </li>
             </ul>
         </Pane>
-        <ProposalInformation />
+        <ProposalInformationPane />
     </div>
     <Pane classes="w-3/5 h-full p-6 pr-3 flex flex-col justify-between">
         <proposal-questions

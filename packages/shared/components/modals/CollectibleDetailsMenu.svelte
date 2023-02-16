@@ -15,7 +15,7 @@
 
     function openBurnNft(): void {
         openPopup({
-            type: 'confirmation',
+            id: 'confirmation',
             props: {
                 title: localize('actions.confirmNftBurn.title', {
                     values: {

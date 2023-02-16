@@ -17,7 +17,7 @@
 
     function handlePopupOpen(): void {
         openPopup({
-            type: 'ledgerAppGuide',
+            id: 'ledgerAppGuide',
         })
     }
 </script>

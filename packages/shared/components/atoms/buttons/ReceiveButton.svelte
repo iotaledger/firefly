@@ -7,7 +7,7 @@
 
     function onButtonClick(): void {
         openPopup({
-            type: 'receiveAddress',
+            id: 'receiveAddress',
             props: {
                 title,
             },

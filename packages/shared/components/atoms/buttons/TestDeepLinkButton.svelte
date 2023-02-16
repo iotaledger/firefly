@@ -5,7 +5,7 @@
 
     function handleClick(): void {
         openPopup({
-            type: 'testDeepLinkForm',
+            id: 'testDeepLinkForm',
         })
     }
 </script>

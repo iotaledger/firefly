@@ -15,7 +15,7 @@
 
     function handleViewNodeInfoClick(node: INode): void {
         openPopup({
-            type: 'nodeInfo',
+            id: 'nodeInfo',
             props: {
                 node,
             },

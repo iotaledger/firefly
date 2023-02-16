@@ -9,7 +9,7 @@
 
     const { hasLoadedAccounts } = $activeProfile
 
-    $: showingDashboard = $appRoute === AppRoute.Dashboard && $hasLoadedAccounts && $popupState.type !== 'busy'
+    $: showingDashboard = $appRoute === AppRoute.Dashboard && $hasLoadedAccounts && $popupState.id !== 'busy'
     $: showingSettings = $dashboardRoute === DashboardRoute.Settings
 
     let isMaximized = false

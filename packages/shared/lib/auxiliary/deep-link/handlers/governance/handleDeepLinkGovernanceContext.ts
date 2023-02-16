@@ -26,7 +26,7 @@ export function handleDeepLinkGovernanceContext(url: URL): void {
         }
     } catch (err) {
         openPopup({
-            type: 'deepLinkError',
+            id: 'deepLinkError',
             props: { error: err, url },
         })
         addError({ time: Date.now(), type: 'deepLink', message: `Error handling deep link. ${err.message}` })
