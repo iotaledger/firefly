@@ -8,11 +8,9 @@
     const renderers = {
         heading: ParagraphBlock,
         paragraph: ParagraphBlock,
-        text: ParagraphBlock,
         image: ParagraphBlock,
         link: LinkBlock,
         em: ParagraphBlock,
-        strong: ParagraphBlock,
         codespan: ParagraphBlock,
         del: ParagraphBlock,
         table: ParagraphBlock,
