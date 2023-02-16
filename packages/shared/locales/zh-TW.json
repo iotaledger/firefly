@@ -563,7 +563,7 @@
                 "attributes": "屬性",
                 "menu": {
                     "download": "下載",
-                    "setAvatar": "Set NFT as profile avatar",
+                    "setAvatar": "將 NFT 設為設定檔圖像",
                     "view": "在瀏覽器中檢視媒體",
                     "burn": "燒毀 NFT"
                 }
@@ -586,7 +586,7 @@
                 "title": "提案",
                 "voted": "已投票",
                 "successAdd": "已成功新增提案",
-                "successAddAll": "Proposal successfully added to all accounts",
+                "successAddAll": "提案已順利新增到全部帳號",
                 "successRemove": "已成功移除提案",
                 "emptyTitle": "暫無提案"
             },
@@ -630,18 +630,18 @@
             "totalStorageDeposit": "總存入之存儲空間費用",
             "basicOutputs": {
                 "title": "原生代幣",
-                "subtitle": "Reserved for Native Token storage"
+                "subtitle": "保留給原生代幣儲存空間"
             },
             "nftOutputs": {
                 "title": "NFT",
-                "subtitle": "Reserved for NFT storage"
+                "subtitle": "保留給 NFT 儲存空間"
             },
             "aliasOutputs": {
                 "title": "別名",
-                "subtitle": "Reserved for Alias storage"
+                "subtitle": "保留給別名儲存空間"
             },
             "foundryOutputs": {
-                "title": "Foundries",
+                "title": "鑄造廠",
                 "subtitle": "Reserved for Native Token Foundry storage"
             },
             "pendingTransactions": {
@@ -812,7 +812,7 @@
             "userPath": "使用者路徑"
         },
         "transaction": {
-            "title": "Send asset",
+            "title": "發送資產",
             "body": "您即將發送 {amount} 到",
             "surplusIncluded": "該交易包含盈餘金額。請仔細檢查這是您要發送的金額。",
             "sendingFromStakedAccount": "您正在從質押中的錢包發送交易。這將解除您的代幣質押。交易可繼續進行，但交易後您將需要重新質押剩餘的代幣。",
@@ -974,20 +974,20 @@
             }
         },
         "sendNft": {
-            "formTitle": "Send NFT",
-            "confirmationTitle": "Confirm sending NFT",
+            "formTitle": "發送 NFT",
+            "confirmationTitle": "確認發送 NFT",
             "property": {
                 "nft": "NFT"
             }
         },
         "nativeToken": {
-            "formTitle": "Mint native tokens",
-            "confirmationTitle": "Mint native tokens",
+            "formTitle": "鑄造原生代幣",
+            "confirmationTitle": "鑄造原生代幣",
             "property": {
                 "totalSupply": "總供應量",
                 "maximumSupply": "最大供應量",
-                "mintedTokens": "Minted tokens",
-                "meltedTokens": "Melted tokens",
+                "mintedTokens": "已鑄造的代幣",
+                "meltedTokens": "已熔化的代幣",
                 "circulatingSupply": "流通供應量",
                 "aliasAddress": "別名控制者地址",
                 "standard": "標準",
@@ -1007,18 +1007,18 @@
         },
         "noAlias": {
             "title": "無法鑄造",
-            "description": "You must own an alias output to mint native tokens. To continue, please create an alias first"
+            "description": "您必須擁有別名輸出才能鑄造原生代幣。若要繼續，請先建立一個別名。"
         },
         "mintNftForm": {
-            "title": "Mint simple NFT"
+            "title": "鑄造簡易 NFT"
         },
         "faucetRequest": {
             "title": "水龍頭要求",
             "body": "您確定要從 {network} 水龍頭請求 {token} 代幣嗎？"
         },
         "manageVotingPower": {
-            "title": "Manage voting power",
-            "body": "Define your voting power to vote on proposals.",
+            "title": "管理表決權",
+            "body": "定義您的表決權來為提案投票。",
             "hint": "All funds that you allocate to voting are locked. In order to make them spendable again, you need to decrease your voting power. This affects all proposals with an active vote.",
             "amountZero": "Please be aware that setting your voting power to zero will stop all your votes for all proposals you are currently voting on."
         },
@@ -1030,27 +1030,27 @@
         "voteForProposal": {
             "title": "給提案投票",
             "body": "您即將投票給 {proposal} 提案。",
-            "key": "Your voting power",
+            "key": "你的表決權",
             "hasAbstained": "You are abstaining from answering {numberOfQuestions, plural, one {# question} other {# questions}}.",
             "noVotingPower": "You do not have any voting power. Please increase your voting power from the Governance dashboard."
         },
         "revote": {
-            "title": "Revote on proposals",
+            "title": "為提案重新投票",
             "body": "Changing your voting power temporarily stops your votes for all proposals from being counted. Simply click \"Revote\" to resume voting.",
             "hint": "Firefly remembers all of the proposals and answer options you previously voted for."
         },
         "removeProposal": {
             "title": "移除提案",
-            "body": "Are you sure you want to remove this proposal?",
+            "body": "確定要刪除這個提案？",
             "hint": "Please note that removing a proposal during the counting period will stop your votes but won't impact any votes that have already been counted."
         },
         "stopVoting": {
-            "title": "Stop voting",
+            "title": "停止投票",
             "body": "您即將停止投票給 {proposalName} 提案。",
-            "hint": "Please note that stopping voting during the counting period won't impact any votes that have already been counted."
+            "hint": "請注意，在計票期間停止投票不會影響任何已計票的選票。"
         },
         "nodeAuthRequired": {
-            "title": "Authentication required",
+            "title": "需要驗證",
             "body": "This node requires additional authentication. Please fill in the appropriate information."
         }
     },
@@ -1091,7 +1091,7 @@
         },
         "confirmNftBurn": {
             "title": "燒毀 {nftName}",
-            "description": "Are you sure you want to burn this NFT?",
+            "description": "確定要燒毀這個 NFT 嗎？",
             "hint": "Please note that burning an NFT frees the storage deposit attached to it and is not reversible."
         },
         "proceedAnyway": "不論如何，就是執行",
@@ -1109,8 +1109,8 @@
         "createWalletDescription": "創建一個在 {protocol, select,iota {Chrysalis} shimmer {Shimmer} other {Unknown}} 上運行的新設定檔",
         "claimShimmer": "領取Shimmer質押獎勵",
         "claimShimmerDescription": "導入 IOTA 資料並索取質押獎勵",
-        "createAlias": "Create alias",
-        "createAliasDescription": "Create alias output",
+        "createAlias": "建立別名",
+        "createAliasDescription": "建立別名輸出",
         "savePassword": "儲存密碼",
         "useBiometric": "使用生物識別安全機制",
         "setupPinCode": "設定PIN碼",
@@ -1220,12 +1220,12 @@
         "backup": "備份",
         "mint": "鑄造代幣",
         "mintNativeToken": "鑄造原生代幣",
-        "mintNft": "Mint NFT",
+        "mintNft": "鑄造 NFT",
         "verifyToken": "認證代幣",
         "unverifyToken": "未認證代幣",
         "hideToken": "隱藏代幣",
         "unhideToken": "取消隱藏代幣",
-        "burn": "Burn",
+        "burn": "燒毀",
         "burnToken": "銷毀代幣",
         "faucetRequest": "取得 {token} 代幣",
         "refreshTokenMetadata": "重整代幣資訊",
@@ -1235,7 +1235,7 @@
         "initializing": "初始化中",
         "delete": "刪除",
         "remove": "移除",
-        "addReference": "Add reference",
+        "addReference": "新增參考資料",
         "depositNft": "Deposit NFTs",
         "vote": "投票",
         "addProposal": "新增提案",
@@ -1299,8 +1299,8 @@
         "sendAssetToAddress": "Send asset to an address",
         "sendToAddress": "發送到地址",
         "sendToken": "Send token",
-        "sendNft": "Send NFT",
-        "sendNftToAddress": "Send NFT to an address",
+        "sendNft": "發送 NFT",
+        "sendNftToAddress": "發送 NFT 至另一個地址",
         "scanQrOrPaste": "掃描QR碼 或 貼上地址",
         "moveFundsBetweenAccounts": "在錢包間轉移資金",
         "manageAccount": "管理錢包",
@@ -1353,7 +1353,7 @@
         "security": "安全性",
         "accountAddress": "錢包位址",
         "network": "網路",
-        "destinationNetwork": "Destination network",
+        "destinationNetwork": "目的地網路",
         "nodes": "節點",
         "wallet": "錢包",
         "help": "幫助",
@@ -1443,10 +1443,10 @@
         "claimedTime": "已收取於",
         "nftAddress": "NFT地址",
         "nftId": "NFT ID",
-        "nftMetadata": "NFT Metadata",
-        "aliasId": "Alias ID",
-        "governorAddress": "Governor Address",
-        "stateControllerAddress": "State Controller Address",
+        "nftMetadata": "NFT 的元數據",
+        "aliasId": "別名 ID",
+        "governorAddress": "治理者地址",
+        "stateControllerAddress": "狀態控制者地址",
         "copiedToClipboard": "複製到剪貼簿",
         "total": "總額： {balance}",
         "availableBalanceWithValue": "可用餘額：{balance}",
@@ -1455,7 +1455,7 @@
         "amountClaimed": "已領取{amount}",
         "metadata": "元數據",
         "amountConsolidatedInputs": "Consolidated outputs",
-        "name": "Name",
+        "name": "名稱",
         "tag": "標籤",
         "nodeList": "節點清單",
         "claimedIn": "領取於",
@@ -1475,36 +1475,36 @@
         "hash": "雜湊",
         "creating": "正在創建",
         "updating": "正在更新",
-        "enterAddress": "Enter address",
-        "transaction": "Transaction",
-        "alias": "Alias",
-        "foundry": "Foundry",
-        "token": "Token",
+        "enterAddress": "輸入地址",
+        "transaction": "交易",
+        "alias": "別名",
+        "foundry": "鑄造廠",
+        "token": "代幣",
         "nft": "NFT",
-        "type": "Type",
-        "immutableIssuer": "Immutable Issuer",
-        "smartContract": "Smart Contract",
-        "targetContract": "Target contract",
-        "contractFunction": "Contract function",
-        "gasBudget": "Gas budget",
-        "standard": "Standard",
+        "type": "類型",
+        "immutableIssuer": "不可變更的發行者",
+        "smartContract": "智能合約",
+        "targetContract": "目標合約",
+        "contractFunction": "合約功能",
+        "gasBudget": "瓦斯預算",
+        "standard": "標準",
         "uri": "URI",
-        "issuer": "Issuer",
-        "issuerAddress": "Issuer Address",
-        "issuerName": "Issuer Name",
-        "collection": "Collection",
-        "collectionId": "Collection ID",
-        "collectionName": "Collection Name",
-        "royalties": "Royalties",
-        "description": "Description",
-        "attributes": "Attributes",
-        "details": "Details",
+        "issuer": "發行者",
+        "issuerAddress": "發行者地址",
+        "issuerName": "發行者名稱",
+        "collection": "收藏品",
+        "collectionId": "收藏品 ID",
+        "collectionName": "收藏集名稱",
+        "royalties": "權利金",
+        "description": "說明",
+        "attributes": "屬性",
+        "details": "詳細資料",
         "availableAmount": "{amount} 可用",
-        "properties": "Properties",
-        "statistics": "Statistics",
-        "username": "Username",
-        "jwt": "JSON web token",
-        "internalTransaction": "Internal transaction"
+        "properties": "內容",
+        "statistics": "統計資料",
+        "username": "使用者名稱",
+        "jwt": "JSON 網路代幣",
+        "internalTransaction": "內部交易"
     },
     "filters": {
         "title": "篩選",
@@ -1520,21 +1520,21 @@
         },
         "showValueless": {
             "label": "Show valueless",
-            "yes": "Yes",
-            "no": "No"
+            "yes": "是",
+            "no": "否"
         },
         "ascDesc": {
-            "Asc": "Ascending",
-            "Desc": "Descending"
+            "Asc": "遞增排序",
+            "Desc": "遞減排序"
         },
         "assetOrder": {
-            "label": "Order",
-            "Name": "Name",
-            "Amount": "Amount"
+            "label": "順序",
+            "Name": "名稱",
+            "Amount": "數量"
         },
         "internalExternal": {
-            "label": "Internal / External",
-            "internal": "Internal",
+            "label": "內部 / 外部",
+            "internal": "內部的",
             "external": "External"
         },
         "verificationStatus": {
@@ -1892,27 +1892,27 @@
                 "long": "Url schema not supported"
             },
             "unsupportedFileType": {
-                "short": "Unsupported media type",
-                "long": "The media type is not currently supported"
+                "short": "不支援的媒體類型",
+                "long": "目刖不支援這個媒體類型。"
             },
             "notMatchingFileTypes": {
-                "short": "Loading blocked",
+                "short": "載入被阻擋了",
                 "long": "NFT file type does not match the expected media type"
             },
             "tooLargeFile": {
-                "short": "File is too large",
+                "short": "檔案過大",
                 "long": "Loading NFT blocked because the file is too large"
             },
             "corsError": {
-                "short": "Loading blocked",
+                "short": "載入被阻擋了",
                 "long": "Loading NFT blocked by CORS policy"
             },
             "unsafeToLoad": {
-                "short": "Unsafe to load",
+                "short": "載入不安全",
                 "long": "An error occurred while checking if the NFT was safe to load"
             },
             "loadingError": {
-                "short": "Unable to load",
+                "short": "無法載入",
                 "long": "An error occurred while loading the NFT"
             }
         },
@@ -1993,7 +1993,7 @@
                 "type": "The MimeType of the NFT. e.g. image/png.",
                 "collectionId": "UTXO string of the collection NFT that minted this NFT",
                 "royalties": "An object containing key-value pairs of addresses that map to payout percentages",
-                "issuerName": "The name of the creator",
+                "issuerName": "創作者名稱",
                 "attributes": "An array of traits and values that define attributes of the NFT"
             }
         },
@@ -2042,7 +2042,7 @@
     },
     "tabs": {
         "wallet": "錢包",
-        "collectibles": "Collectibles",
+        "collectibles": "收藏品",
         "governance": "治理",
         "developer": "開發人員",
         "tokens": "代幣",
@@ -2056,25 +2056,25 @@
         },
         "external": {
             "incoming": {
-                "Pending": "receiving from",
-                "Confirmed": "received from",
-                "Conflicting": "failed to receive"
+                "Pending": "正接收自",
+                "Confirmed": "接收自",
+                "Conflicting": "接收失敗"
             },
             "outgoing": {
-                "Pending": "sending to",
-                "Confirmed": "sent to",
-                "Conflicting": "failed to send"
+                "Pending": "正發送至",
+                "Confirmed": "已發送至",
+                "Conflicting": "發送失敗"
             }
         },
         "internal": {
             "incoming": {
-                "Pending": "transferring from",
-                "Confirmed": "transferred from",
-                "Conflicting": "failed to transfer"
+                "Pending": "正傳送自",
+                "Confirmed": "已傳送自",
+                "Conflicting": "傳送失敗"
             },
             "outgoing": {
-                "Pending": "transferring to",
-                "Confirmed": "transferred to",
+                "Pending": "正在傳送至",
+                "Confirmed": "已傳送至",
                 "Conflicting": "failed to transfer"
             },
             "selfTransaction": {
@@ -2121,39 +2121,39 @@
             },
             "startVoting": {
                 "Pending": "voting for",
-                "Confirmed": "voted for",
-                "Conflicting": "failed to vote for"
+                "Confirmed": "已投票給",
+                "Conflicting": "投票失敗"
             },
             "stopVoting": {
-                "Pending": "stopping voting for",
-                "Confirmed": "stopped voting for",
-                "Conflicting": "failed to stopped voting for"
+                "Pending": "正在停止投票給",
+                "Confirmed": "已停止投票給",
+                "Conflicting": "停止投票失敗"
             },
             "changedVote": {
-                "Pending": "changing vote for",
-                "Confirmed": "changed vote for",
-                "Conflicting": "failed to change vote for"
+                "Pending": "正在更改投票",
+                "Confirmed": "更改投票",
+                "Conflicting": "更改投票失敗"
             },
             "revote": {
-                "Pending": "revoting",
-                "Confirmed": "revote",
-                "Conflicting": "failed to revote"
+                "Pending": "重新投票中",
+                "Confirmed": "重新投票",
+                "Conflicting": "重新投票失敗"
             }
         },
         "alias": {
             "creation": {
-                "Pending": "creating alias",
-                "Confirmed": "alias created",
-                "Failed": "Failed to create alias"
+                "Pending": "正在建立別名",
+                "Confirmed": "已建立別名",
+                "Failed": "建立別名失敗"
             }
         },
         "locked": "已鎖定",
-        "smartContract": "smart contract",
+        "smartContract": "智能合約",
         "proposalStatus": {
-            "upcoming": "Announcement",
-            "commencing": "Voting open",
-            "holding": "Counting",
-            "ended": "Closed"
+            "upcoming": "公告",
+            "commencing": "開放投票",
+            "holding": "計票中",
+            "ended": "已關閉"
         }
     },
     "menus": {
