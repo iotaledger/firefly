@@ -25,7 +25,7 @@
 
             await checkActiveProfileAuth(async () => {
                 openPopup({
-                    type: 'manageVotingPower',
+                    id: 'manageVotingPower',
                     props: { newVotingPower: ZERO_VOTING_POWER },
                 })
                 await setVotingPower(ZERO_VOTING_POWER, true)

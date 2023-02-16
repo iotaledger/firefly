@@ -42,7 +42,7 @@
         message = ''
 
         openPopup({
-            type: 'unlockStronghold',
+            id: 'unlockStronghold',
             props: {
                 onSuccess: (password: string) => {
                     isBusy = true

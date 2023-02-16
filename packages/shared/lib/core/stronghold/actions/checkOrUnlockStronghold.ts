@@ -22,7 +22,7 @@ export async function checkOrUnlockStronghold(
         } else {
             closePopup(true)
             openPopup({
-                type: 'unlockStronghold',
+                id: 'unlockStronghold',
                 props: {
                     onSuccess: _callback,
                 },

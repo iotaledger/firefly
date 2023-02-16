@@ -114,7 +114,7 @@
             disableAssetSelection: true,
         })
         openPopup({
-            type: 'sendForm',
+            id: 'sendForm',
             overflow: true,
         })
     }

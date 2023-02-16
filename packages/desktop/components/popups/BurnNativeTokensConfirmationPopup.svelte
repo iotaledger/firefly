@@ -16,7 +16,7 @@
 
     function onBack(): void {
         openPopup({
-            type: 'burnNativeTokens',
+            id: 'burnNativeTokens',
             props: { asset, rawAmount },
         })
     }

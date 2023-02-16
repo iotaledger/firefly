@@ -34,7 +34,7 @@ export function handleDeepLink(input: string): void {
 
         if (get(visibleActiveAccounts).length > 1) {
             openPopup({
-                type: 'accountSwitcher',
+                id: 'accountSwitcher',
                 overflow: true,
                 props: {
                     onConfirm: () => {

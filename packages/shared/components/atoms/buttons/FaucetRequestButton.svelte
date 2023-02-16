@@ -7,7 +7,7 @@
 
     function handleGetTokens(): void {
         openPopup({
-            type: 'faucetRequest',
+            id: 'faucetRequest',
         })
     }
 </script>

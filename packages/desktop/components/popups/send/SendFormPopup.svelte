@@ -25,8 +25,7 @@
         TextType,
     } from 'shared/components'
     import { get } from 'svelte/store'
-    // TODO: https://github.com/iotaledger/firefly/issues/5803
-    import features from '../../../../desktop/features/features'
+    import features from '@features/features'
 
     enum SendForm {
         SendToken = 'general.sendToken',
@@ -149,7 +148,7 @@
         if (valid) {
             setTransactionDetails()
             openPopup({
-                type: 'sendConfirmation',
+                id: 'sendConfirmation',
                 overflow: true,
             })
         }
