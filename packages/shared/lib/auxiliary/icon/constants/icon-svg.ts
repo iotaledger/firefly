@@ -132,7 +132,9 @@ import {
 } from '../svgs'
 import { VERIFICATION_STATUS_OFFICIAL } from '../svgs/verification-status-official.svg'
 
-export const ICON_SVG: { [key in Icon]: ISvg } = {
+type IconSvgMap = { [key in Icon]: ISvg }
+
+export const ICON_SVG_MAP: IconSvgMap = {
     [Icon.Activity]: ACTIVITY_SVG,
     [Icon.Alias]: ALIAS_SVG,
     [Icon.ArrowLeft]: ARROW_LEFT_SVG,

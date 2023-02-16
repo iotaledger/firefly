@@ -91,7 +91,7 @@ export enum Icon {
     Receive = 'receive',
     Refresh = 'refresh',
     Reset = 'reset',
-    RestoreSize = 'RestoreSize',
+    RestoreSize = 'restore-size',
     Search = 'search',
     Security = 'security',
     Seed = 'seed',
