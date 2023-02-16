@@ -13,8 +13,8 @@
         Text,
         TextType,
         TextHint,
+        MarkdownBlock,
     } from '@ui'
-    import SvelteMarkdown from 'svelte-markdown'
     import { openPopup } from '@auxiliary/popup/actions'
     import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
     import { getVotingEvent } from '@contexts/governance/actions'
@@ -229,7 +229,7 @@
                 <Text type={TextType.h2}>{$selectedProposal?.title}</Text>
                 <div class="additional-info mt-4 max-h-40 overflow-hidden">
                     {#if $selectedProposal?.additionalInfo}
-                        <SvelteMarkdown source={$selectedProposal?.additionalInfo} />
+                        <MarkdownBlock text={$selectedProposal?.additionalInfo} />
                     {/if}
                 </div>
             </div>
@@ -300,17 +300,3 @@
         {/if}
     </Pane>
 </div>
-
-<style lang="scss">
-    .additional-info {
-        :global(p) {
-            @apply text-gray-600;
-            @apply leading-140;
-            @apply font-500;
-            @apply text-14;
-        }
-        :global(a) {
-            @apply underline;
-        }
-    }
-</style>
