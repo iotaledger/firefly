@@ -38,7 +38,7 @@ export function setAccountActivitiesInAllAccountActivities(accountIndex: number,
 }
 
 export function getActivityByTransactionId(accountIndex: number, transactionId: string): Activity {
-    return get(allAccountActivities)?.[accountIndex]?.find((_activity) => _activity.transactionId === transactionId)
+    return get(allAccountActivities)?.[accountIndex]?.find((_activity) => _activity?.transactionId === transactionId)
 }
 
 export function updateActivityByTransactionId(
@@ -47,7 +47,7 @@ export function updateActivityByTransactionId(
     partialBaseActivity: Partial<BaseActivity>
 ): void {
     allAccountActivities.update((state) => {
-        const activities = state[accountIndex]?.filter((_activity) => _activity.transactionId === transactionId)
+        const activities = state[accountIndex]?.filter((_activity) => _activity?.transactionId === transactionId)
 
         activities.forEach((activity) => Object.assign(activity, partialBaseActivity))
         return state
@@ -90,7 +90,7 @@ export function updateAsyncDataByTransactionId(
     partialAsyncData: Partial<AsyncData>
 ): void {
     allAccountActivities.update((state) => {
-        const activity = state[accountIndex]?.find((_activity) => _activity.transactionId === transactionId)
+        const activity = state[accountIndex]?.find((_activity) => _activity?.transactionId === transactionId)
 
         if (activity) {
             Object.assign(activity, { asyncData: { ...activity.asyncData, ...partialAsyncData } })

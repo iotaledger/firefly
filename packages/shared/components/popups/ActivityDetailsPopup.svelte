@@ -86,11 +86,11 @@
     }
 
     function handleExplorerClick(): void {
-        openUrlInBrowser(`${explorerUrl}/${ExplorerEndpoint.Transaction}/${activity.transactionId}`)
+        openUrlInBrowser(`${explorerUrl}/${ExplorerEndpoint.Transaction}/${activity?.transactionId}`)
     }
 
     function handleTransactionIdClick(): void {
-        setClipboard(activity.transactionId)
+        setClipboard(activity?.transactionId)
     }
 
     async function claim(): Promise<void> {
@@ -142,14 +142,14 @@
         <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
             {localize('popups.transactionDetails.title')}
         </Text>
-        {#if explorerUrl && activity.transactionId}
+        {#if explorerUrl && activity?.transactionId}
             <button
                 class="action w-max flex justify-start text-center font-medium text-14 text-blue-500"
                 on:click={handleExplorerClick}
             >
                 {localize('general.viewOnExplorer')}
             </button>
-        {:else if activity.transactionId}
+        {:else if activity?.transactionId}
             <button
                 class="action w-fit flex justify-start text-center font-medium text-14 text-blue-500"
                 on:click={handleTransactionIdClick}
