@@ -58,8 +58,8 @@
         const details = {
             transactionTime: activity.time,
             inclusionState: activity.inclusionState,
-            tag: activity.tag,
-            metadata: activity.metadata,
+            tag: activity?.tag,
+            metadata: activity?.metadata,
             direction: activity.direction,
             asyncStatus: activity.asyncData?.asyncStatus,
             claimedDate: activity.asyncData?.claimedDate,

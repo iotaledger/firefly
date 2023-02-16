@@ -5,10 +5,10 @@
     import { closePopup } from '@auxiliary/popup/actions'
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { onDestroy } from 'svelte'
-    import { hasToRevote } from '@contexts/governance/stores'
+    import { hasPendingGovernanceTransaction, hasToRevote } from '@contexts/governance/stores'
     import { vote } from '@contexts/governance/actions'
 
-    $: disabled = $selectedAccount?.isTransferring
+    $: disabled = $hasPendingGovernanceTransaction?.[$selectedAccount.index]
 
     async function onSubmit(): Promise<void> {
         await checkActiveProfileAuth(async () => {
