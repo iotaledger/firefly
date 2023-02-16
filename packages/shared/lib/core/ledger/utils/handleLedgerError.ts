@@ -14,7 +14,7 @@ import { deriveLedgerError } from '../helpers'
 export function handleLedgerError(error: IError, resetConfirmationPropsOnDenial = true): void {
     const ledgerError = deriveLedgerError(error?.error)
     if (ledgerError in LEDGER_ERROR_LOCALES) {
-        const popupType = get(popupState)?.type
+        const popupType = get(popupState)?.id
 
         const wasDeniedByUser = ledgerError === LedgerError.DeniedByUser
 
@@ -39,7 +39,7 @@ export function handleLedgerError(error: IError, resetConfirmationPropsOnDenial 
         const hadToEnableBlindSinging = popupType === 'enableLedgerBlindSigning' && wasDeniedByUser
         if (hadToEnableBlindSinging) {
             openPopup({
-                type: 'enableLedgerBlindSigning',
+                id: 'enableLedgerBlindSigning',
             })
         } else {
             showAppNotification({

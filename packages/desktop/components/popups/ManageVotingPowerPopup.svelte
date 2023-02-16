@@ -48,7 +48,7 @@
 
             const isVoting = isSelectedAccountVoting()
             if (amount === '0' && isVoting) {
-                openPopup({ type: 'votingPowerToZero' })
+                openPopup({ id: 'votingPowerToZero' })
                 return
             }
 

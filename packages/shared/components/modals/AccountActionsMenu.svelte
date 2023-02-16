@@ -13,18 +13,18 @@
         $selectedAccount?.index === $activeAccounts?.length - 1 && $visibleActiveAccounts?.length > 1
 
     function handleCustomiseAccountClick(): void {
-        openPopup({ type: 'manageAccount' })
+        openPopup({ id: 'manageAccount' })
         modal.close()
     }
 
     function handleViewStorageDepositClick(): void {
-        openPopup({ type: 'storageDepositBreakdown' })
+        openPopup({ id: 'storageDepositBreakdown' })
         modal.close()
     }
 
     function handleDeleteAccountClick(): void {
         openPopup({
-            type: 'deleteAccount',
+            id: 'deleteAccount',
             props: {
                 account: selectedAccount,
                 deleteAccount,

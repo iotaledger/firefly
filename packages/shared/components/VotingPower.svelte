@@ -15,7 +15,7 @@
 
     function handleManageVotingPower(): void {
         openPopup({
-            type: 'manageVotingPower',
+            id: 'manageVotingPower',
         })
     }
 </script>

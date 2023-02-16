@@ -64,7 +64,7 @@
 
     function openNodeAuthRequiredPopup(): void {
         openPopup({
-            type: 'nodeAuthRequired',
+            id: 'nodeAuthRequired',
             props: { onSubmit: registerParticipationWrapper },
         })
     }

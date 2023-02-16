@@ -56,7 +56,7 @@
     import VotingPowerToZeroPopup from './VotingPowerToZeroPopup.svelte'
     import WalletFinderPopup from './WalletFinderPopup.svelte'
 
-    export let type: PopupId
+    export let id: PopupId
     export let props: any
     export let hideClose: boolean = false
     export let preventClose: boolean = false
@@ -74,7 +74,7 @@
 
     let size: PopupSize = PopupSize.Medium
 
-    $: switch (type) {
+    $: switch (id) {
         case 'connectLedger':
         case 'createAccount':
         case 'manageAccount':
@@ -221,7 +221,7 @@
                 />
             </button>
         {/if}
-        <svelte:component this={POPUP_MAP[type]} {...props} />
+        <svelte:component this={POPUP_MAP[id]} {...props} />
     </popup-content>
     <div tabindex="0" on:focus={handleFocusLast} />
 </popup>

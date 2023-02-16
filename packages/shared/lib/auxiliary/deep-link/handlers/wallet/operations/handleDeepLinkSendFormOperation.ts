@@ -19,7 +19,7 @@ export function handleDeepLinkSendFormOperation(searchParams: URLSearchParams): 
     if (transactionDetails) {
         setNewTransactionDetails(transactionDetails)
         openPopup({
-            type: 'sendForm',
+            id: 'sendForm',
             overflow: true,
         })
     }

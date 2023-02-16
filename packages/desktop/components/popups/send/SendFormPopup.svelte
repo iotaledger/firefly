@@ -148,7 +148,7 @@
         if (valid) {
             setTransactionDetails()
             openPopup({
-                type: 'sendConfirmation',
+                id: 'sendConfirmation',
                 overflow: true,
             })
         }

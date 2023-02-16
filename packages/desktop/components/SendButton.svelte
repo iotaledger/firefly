@@ -10,7 +10,7 @@
         resetLedgerPreparedOutput()
         resetShowInternalVerificationPopup()
         openPopup({
-            type: PopupId.SendForm,
+            id: PopupId.SendForm,
             overflow: true,
         })
     }

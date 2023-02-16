@@ -25,7 +25,7 @@
             showBackButton = isCorrectRoute()
         }
     }
-    $: showingPopup = $popupState.active && $popupState.type !== 'busy'
+    $: showingPopup = $popupState.active && $popupState.id !== 'busy'
 
     function isCorrectRoute(): boolean {
         switch ($dashboardRoute) {

@@ -21,7 +21,7 @@
 
     function handleCreateAccountClick(): void {
         modal?.close()
-        openPopup({ type: 'createAccount' })
+        openPopup({ id: 'createAccount' })
     }
 </script>
 

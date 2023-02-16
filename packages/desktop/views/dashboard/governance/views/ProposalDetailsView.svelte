@@ -164,7 +164,7 @@
 
     function onStopVotingClick(): void {
         openPopup({
-            type: 'stopVoting',
+            id: 'stopVoting',
         })
     }
 
@@ -173,7 +173,7 @@
             answerValue === undefined ? ABSTAIN_VOTE_VALUE : answerValue
         )
         openPopup({
-            type: 'voteForProposal',
+            id: 'voteForProposal',
             props: { selectedAnswerValues: chosenAnswerValues },
         })
     }

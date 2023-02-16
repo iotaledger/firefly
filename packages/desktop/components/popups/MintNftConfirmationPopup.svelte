@@ -70,7 +70,7 @@
     function handleBack(): void {
         closePopup()
         openPopup({
-            type: 'mintNftForm',
+            id: 'mintNftForm',
             overflow: true,
         })
     }

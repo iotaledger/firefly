@@ -96,7 +96,7 @@
     async function claim(): Promise<void> {
         await claimActivity(activity)
         openPopup({
-            type: 'activityDetails',
+            id: 'activityDetails',
             props: { activityId },
         })
     }
@@ -107,7 +107,7 @@
 
     function reject(): void {
         openPopup({
-            type: 'confirmation',
+            id: 'confirmation',
             props: {
                 title: localize('actions.confirmRejection.title'),
                 description: localize('actions.confirmRejection.description'),
@@ -121,7 +121,7 @@
                 },
                 onCancel: () =>
                     openPopup({
-                        type: 'activityDetails',
+                        id: 'activityDetails',
                         props: { activityId },
                     }),
             },

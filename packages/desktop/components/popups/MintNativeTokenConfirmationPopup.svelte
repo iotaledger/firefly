@@ -93,7 +93,7 @@
     function handleBack(): void {
         closePopup()
         openPopup({
-            type: 'mintNativeTokenForm',
+            id: 'mintNativeTokenForm',
             overflow: true,
         })
     }
