@@ -49,7 +49,7 @@
 
     function onAddProposalClick(): void {
         openPopup({
-            type: 'addProposal',
+            id: 'addProposal',
             overflow: true,
         })
     }

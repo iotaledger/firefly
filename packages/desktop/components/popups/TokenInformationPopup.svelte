@@ -21,7 +21,7 @@
         unverifyAsset(asset.id, NotVerifiedStatus.Skipped)
         if (activityId) {
             openPopup({
-                type: 'activityDetails',
+                id: 'activityDetails',
                 props: { activityId },
             })
         } else {
@@ -35,7 +35,7 @@
         verifyAsset(asset.id, VerifiedStatus.SelfVerified)
         if (activityId) {
             openPopup({
-                type: 'activityDetails',
+                id: 'activityDetails',
                 props: { activityId },
             })
         } else {
@@ -53,7 +53,7 @@
             disableAssetSelection: true,
         })
         openPopup({
-            type: 'sendForm',
+            id: 'sendForm',
             overflow: true,
         })
     }

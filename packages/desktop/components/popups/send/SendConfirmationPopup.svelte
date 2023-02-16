@@ -128,7 +128,7 @@
             expirationDate,
             recipientAddress,
             transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.rawAmount : '0',
-            transactionDetails.metadata,
+            transactionDetails?.metadata,
             transactionDetails.tag,
             asset,
             giftStorageDeposit,
@@ -191,7 +191,7 @@
     function onBack(): void {
         closePopup()
         openPopup({
-            type: 'sendForm',
+            id: 'sendForm',
             overflow: true,
         })
     }

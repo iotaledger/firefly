@@ -4,7 +4,7 @@
     import { openPopup } from '@auxiliary/popup'
 
     function handleErrorLogClick(): void {
-        openPopup({ type: 'errorLog' })
+        openPopup({ id: 'errorLog' })
     }
 </script>
 

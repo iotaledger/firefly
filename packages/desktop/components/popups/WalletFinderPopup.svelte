@@ -45,17 +45,17 @@
     async function handleFindBalances(): Promise<void> {
         if ($isSoftwareProfile && $isStrongholdLocked) {
             openPopup({
-                type: 'unlockStronghold',
+                id: 'unlockStronghold',
                 props: {
                     onSuccess: function () {
                         openPopup({
-                            type: 'walletFinder',
+                            id: 'walletFinder',
                             props: { searchForBalancesOnLoad: true },
                         })
                     },
                     onCancelled: function () {
                         openPopup({
-                            type: 'walletFinder',
+                            id: 'walletFinder',
                         })
                     },
                 },

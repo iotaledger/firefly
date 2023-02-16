@@ -29,7 +29,7 @@ export function handleDeepLinkSendConfirmationOperation(searchParams: URLSearchP
     if (transactionDetails) {
         setNewTransactionDetails(transactionDetails)
         openPopup({
-            type: 'sendConfirmation',
+            id: 'sendConfirmation',
             overflow: true,
             props: {
                 disableBack: true,

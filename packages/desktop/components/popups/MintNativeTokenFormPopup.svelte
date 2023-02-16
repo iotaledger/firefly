@@ -65,7 +65,7 @@
                 aliasId,
             })
             openPopup({
-                type: 'mintNativeTokenConfirmation',
+                id: 'mintNativeTokenConfirmation',
                 overflow: true,
             })
         }

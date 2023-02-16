@@ -41,7 +41,7 @@
 
     function handleGuidePopup(): void {
         openPopup({
-            type: 'ledgerConnectionGuide',
+            id: 'ledgerConnectionGuide',
         })
     }
 

@@ -1715,7 +1715,7 @@
                 "nonEmptyAccounts": "Перед удалением профиля вы должны перевести все остатки средств."
             },
             "type": "Невозможно определить тип профиля",
-            "setupType": "Unable to determine the profile setup type"
+            "setupType": "Невозможно определить тип установки профиля"
         },
         "password": {
             "doNotMatch": "Пароли не совпадают.",
@@ -1741,10 +1741,10 @@
             "invalid": "Неверный PIN код."
         },
         "address": {
-            "wrongAddressType": "Wrong address type"
+            "wrongAddressType": "Неправильный тип адреса"
         },
         "account": {
-            "addressNotFound": "The address cannot be found in your account.",
+            "addressNotFound": "Адрес не может быть найден в вашем аккаунте.",
             "length": "Имя твоего профиля не может быть длиннее {length, plural, one {# символ} other {# символов}}.",
             "emptyName": "Имя профиля должно содержать хотя бы 1 символ.",
             "notEmpty": "Вы должны перевести баланс перед удалением этого кошелька.",
@@ -1759,8 +1759,8 @@
             "cannotRemove": "Невозможно удалить кошелёк.",
             "withBalance": "Вы должны перевести все суммы, прежде чем сможете удалить этот кошелек.",
             "notLast": "Вы можете удалить только ваш последний кошелек.",
-            "notFound": "Unable to find account",
-            "cannotGetBoundAccount": "Unable to get bound account"
+            "notFound": "Невозможно найти аккаунт",
+            "cannotGetBoundAccount": "Невозможно получить привязанный аккаунт"
         },
         "send": {
             "addressLength": "Длина адресов должна быть {length, plural, one {# символ} other {# символов}}.",
@@ -1768,46 +1768,46 @@
             "amountNoFloat": "Невозможно использовать десятичные знаки при выбранной наименьшей единице измерения",
             "amountInvalidFormat": "Сумма является недопустимым числом.",
             "amountSmallerThanSubunit": "Сумма должна быть больше, чем наименьшая субъединица.",
-            "tagTooLong": "The tag cannot be longer than 64 bytes.",
-            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
+            "tagTooLong": "Метка не может быть длиннее 64 байт.",
+            "metadataTooLong": "Метаданные не могут быть длиннее 8192 байт.",
             "amountZero": "Сумма должна быть больше 0.",
             "wrongAddressPrefix": "Адреса начинаются с префикса {prefix}.",
             "wrongAddressFormat": "Адрес неверно отформатирован.",
             "invalidAddress": "Адрес недействителен.",
-            "unknownAsset": "The asset is not known to this account.",
+            "unknownAsset": "Актив не известен для данного счета.",
             "insufficientFunds": "На этом кошельке недостаточно средств.",
             "insufficientFundsStorageDeposit": "Недостаточно средств для покрытия депозита для хранения",
-            "cannotClaimTwice": "Output has been already claimed",
+            "cannotClaimTwice": "Выход уже востребован",
             "noToAccount": "Вы не выбрали кошелек для отправки средств.",
             "sendingDust": "Вы не можете отправить менее 1 Mi.",
             "leavingDust": "Вы не можете оставить менее 1 Mi на вашем адресе.",
             "cancelled": "Транзакция была отменена.",
             "transaction": "Произошла ошибка при отправке вашей транзакции. Пожалуйста, попробуйте еще раз.",
             "invalidExpirationDateTime": "Выбранная дата/время истечения срока действия недопустима.",
-            "noInputs": "No inputs found.",
-            "notEnoughBalance": "Not enough balance.",
-            "missingTransactionId": "The transaction ID is missing",
-            "missingTransactionProgressEventPayload": "The transaction progress event payload is missing",
-            "recipientRequired": "Recipient is required",
-            "nftRequired": "NFT is required",
-            "nftNotInHex": "NFT address has to be in HEX format",
-            "nftNotInPossession": "NFT not in possession",
-            "reservedTagKeyword": "Unable to use reserved tag keyword"
+            "noInputs": "Вывод уже заявлен.",
+            "notEnoughBalance": "Недостаточно баланса.",
+            "missingTransactionId": "ID транзакции отсутствует",
+            "missingTransactionProgressEventPayload": "Полезная информация о событии хода транзакции отсутствует",
+            "recipientRequired": "Получатель обязателен",
+            "nftRequired": "NFT обязательно",
+            "nftNotInHex": "NFT адрес должен быть в формате HEX",
+            "nftNotInPossession": "NFT не в наличии",
+            "reservedTagKeyword": "Невозможно использовать зарезервированное ключевое слово метки"
         },
         "layer2": {
-            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account."
+            "layer1Recipient": "Транзакция слоя 2 не может быть отправлена на счет слоя 1."
         },
         "node": {
             "invalid": "Пожалуйста, введите правильный адрес.",
-            "dns": "Unable to find DNS resolution for node",
+            "dns": "Невозможно найти разрешение DNS узла",
             "timedOut": "Соединение прервалось по истечении времени.",
             "refused": "Соединение было отклонено.",
             "handshake": "Не удалось завершить рукопожатие с узлом.",
             "invalidCertificate": "Не удалось подключиться из-за недействительного сертификата.",
             "https": "Требуется HTTPS; небезопасные соединения по HTTP в настоящее время не поддерживаются.",
             "duplicate": "Этот узел уже был добавлен.",
-            "noSyncedNode": "No synced node is available.",
-            "timeNotSynced": "Device time is incorrect, unable to sync node.",
+            "noSyncedNode": "Не доступен синхронизированный узел.",
+            "timeNotSynced": "Время устройства неверно, не удается синхронизировать узел.",
             "answer": "Не удалось получить ответ от всех узлов.",
             "forbidden": "Соединение с этим узлом запрещено.",
             "pluginNotAvailable": "Плагин \"{nodePlugin}\" недоступен на текущем узле.",
@@ -1833,8 +1833,8 @@
             "phraseWordCount": "В твоей фразе восстановления должно быть 24 слова, сейчас здесь {length, plural, one {# слово} other {# слов}}.",
             "phraseUnrecognizedWord": "Нераспознанное слово \"{word}\" в твоей фразе восстановления",
             "phraseCaseWord": "Слово \"{word}\" должно быть строчным регистром",
-            "unableToCopyFile": "Unable to copy Stronghold backup file",
-            "unableToRestoreForProfileManager": "Unable to restore Stronghold backup for profile manager"
+            "unableToCopyFile": "Невозможно скопировать файл резервной копии Stronghold",
+            "unableToRestoreForProfileManager": "Невозможно восстановить резервную копию Stronghold для менеджера профиля"
         },
         "ledger": {
             "appNotOpen": "Вы должны открыть приложение IOTA на своем устройстве Ledger.",
@@ -1842,7 +1842,7 @@
             "legacyConnected": "На вашем устройстве Ledger открыто неправильное приложение.",
             "locked": "Пожалуйста, разблокируйте ваше устройство Ledger, введя PIN-код.",
             "mnemonicMismatch": "Вы подключили не то устройство Ledger или изменилась мнемоника.",
-            "notConnected": "No Ledger device detected.",
+            "notConnected": "Устройство Ledger не обнаружено.",
             "notFound": "Ledger устройство не найдено.",
             "otherConnected": "На вашем устройстве Ledger открыто неправильное приложение.",
             "generateAddress": "Произошла ошибка при генерировании адреса.",
@@ -1868,23 +1868,23 @@
         "invalidDate": "НЕДЕЙСТВИТЕЛЬНАЯ ДАТА",
         "invalidTime": "НЕДЕЙСТВИТЕЛЬНОЕ ВРЕМЯ",
         "shimmerClaiming": {
-            "missingProfileManager": "Unable to find Shimmer claiming profile manager",
-            "cannotInitialiseAccount": "Unable to initialize Shimmer claiming account",
-            "missingAccount": "Unable to find Shimmer claiming account"
+            "missingProfileManager": "Невозможно найти менеджера профиля востребований Shimmer",
+            "cannotInitialiseAccount": "Невозможно запустить аккаунт востребования Shimmer",
+            "missingAccount": "Невозможно найти аккаунт востребования Shimmer"
         },
         "walletApiEvent": {
-            "invalidAccountIndex": "Invalid account index for {eventName} event",
-            "invalidPayload": "Invalid payload for {eventName} event"
+            "invalidAccountIndex": "Неверный индекс аккаунта для события {eventName}",
+            "invalidPayload": "Неверная полезная информация для события {eventName}"
         },
         "aliasMinting": {
-            "aliasRequired": "Alias is required",
-            "aliasNotInPossession": "Alias not in possession"
+            "aliasRequired": "Требуется псевдоним",
+            "aliasNotInPossession": "Псевдоним не в наличии"
         },
-        "noOutputsToConsolidate": "Not enough outputs to consolidate",
+        "noOutputsToConsolidate": "Недостаточно выходов для объединения",
         "eventId": {
-            "doesNotStartWith0x": "Event ID should start with '0x'",
-            "insufficientLength": "Event ID should be 66 characters long",
-            "alreadyRegistered": "Event ID already registered"
+            "doesNotStartWith0x": "ID события должен начинаться с '0x'",
+            "insufficientLength": "ID события должен содержать 66 символов",
+            "alreadyRegistered": "ID события уже зарегистрирован"
         },
         "nft": {
             "unsupportedUrl": {
@@ -2120,40 +2120,40 @@
                 "Conflicting": "не удалось уменьшить право голоса"
             },
             "startVoting": {
-                "Pending": "voting for",
-                "Confirmed": "voted for",
-                "Conflicting": "failed to vote for"
+                "Pending": "голосование за",
+                "Confirmed": "проголосовал за",
+                "Conflicting": "не удалось проголосовать за"
             },
             "stopVoting": {
-                "Pending": "stopping voting for",
-                "Confirmed": "stopped voting for",
-                "Conflicting": "failed to stopped voting for"
+                "Pending": "прекращение голосования",
+                "Confirmed": "прекратил голосовать за",
+                "Conflicting": "не удалось прекратить голосование за"
             },
             "changedVote": {
-                "Pending": "changing vote for",
-                "Confirmed": "changed vote for",
-                "Conflicting": "failed to change vote for"
+                "Pending": "изменение голоса за",
+                "Confirmed": "изменил голос за",
+                "Conflicting": "не удалось изменить голос за"
             },
             "revote": {
-                "Pending": "revoting",
-                "Confirmed": "revote",
-                "Conflicting": "failed to revote"
+                "Pending": "переголосование",
+                "Confirmed": "переголосовать",
+                "Conflicting": "не удалось переголосовать"
             }
         },
         "alias": {
             "creation": {
-                "Pending": "creating alias",
-                "Confirmed": "alias created",
-                "Failed": "Failed to create alias"
+                "Pending": "создание псевдонима",
+                "Confirmed": "псевдоним создан",
+                "Failed": "Не удалось создать псевдоним"
             }
         },
-        "locked": "locked",
-        "smartContract": "smart contract",
+        "locked": "заблокировано",
+        "smartContract": "умный контракт",
         "proposalStatus": {
-            "upcoming": "Announcement",
-            "commencing": "Voting open",
-            "holding": "Counting",
-            "ended": "Closed"
+            "upcoming": "Объявление",
+            "commencing": "Голосование открыто",
+            "holding": "Подсчёт",
+            "ended": "Закрыто"
         }
     },
     "menus": {

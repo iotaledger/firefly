@@ -1,5 +1,5 @@
 import { isStrongholdUnlocked } from '@core/profile-manager'
-import { openPopup, popupState } from '@auxiliary/popup'
+import { closePopup, openPopup, popupState } from '@auxiliary/popup'
 import { get } from 'svelte/store'
 import { handleError } from '@core/error/handlers/handleError'
 
@@ -17,12 +17,12 @@ export async function checkOrUnlockStronghold(
     }
     try {
         const strongholdUnlocked = await isStrongholdUnlocked()
-
         if (strongholdUnlocked) {
             return callback()
         } else {
+            closePopup(true)
             openPopup({
-                type: 'unlockStronghold',
+                id: 'unlockStronghold',
                 props: {
                     onSuccess: _callback,
                 },
