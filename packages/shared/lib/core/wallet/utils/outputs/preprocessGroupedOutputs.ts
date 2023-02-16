@@ -16,7 +16,7 @@ export function preprocessGroupedOutputs(
 ): IProcessedTransaction {
     const transactionMetadata = outputDatas[0]?.metadata
     const wrappedInputs = convertTransactionOutputResponsesToWrappedOutputs(
-        transactionMetadata.transactionId,
+        transactionMetadata?.transactionId,
         transactionInputs
     )
     const utxoInputs = getUtxoInputsFromWrappedInputs(wrappedInputs)
@@ -89,7 +89,7 @@ function getUtxoInputsFromWrappedInputs(wrappedInputs: IWrappedOutput[]): IUTXOI
             (input) =>
                 ({
                     type: 0,
-                    transactionId: input.metadata.transactionId,
+                    transactionId: input.metadata?.transactionId,
                     transactionOutputIndex: input.metadata.outputIndex,
                 } as IUTXOInput)
         ) ?? []
