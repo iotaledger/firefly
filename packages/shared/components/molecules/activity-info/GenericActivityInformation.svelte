@@ -31,19 +31,19 @@
         ...(activity?.destinationNetwork && {
             destinationNetwork: { data: activity?.destinationNetwork },
         }),
-        ...(activity.time && {
+        ...(activity?.time && {
             transactionTime: { data: formattedTransactionTime },
         }),
-        ...(activity.metadata && {
+        ...(activity?.metadata && {
             metadata: { data: activity.metadata, isTooltipVisible: true },
         }),
-        ...(activity.tag && {
+        ...(activity?.tag && {
             tag: { data: activity.tag, isTooltipVisible: true },
         }),
         ...(hasStorageDeposit && {
             storageDeposit: { data: formattedStorageDeposit, isTooltipVisible: true },
         }),
-        ...(activity.giftedStorageDeposit && {
+        ...(activity?.giftedStorageDeposit && {
             giftedStorageDeposit: { data: formattedGiftedStorageDeposit, isTooltipVisible: true },
         }),
         ...(gasBudget && {
@@ -52,7 +52,7 @@
         ...(expirationTime && {
             expirationTime: { data: expirationTime, isTooltipVisible: true },
         }),
-        ...(activity.asyncData?.timelockDate && {
+        ...(activity?.asyncData?.timelockDate && {
             timelockDate: { data: formattedTimelockDate, isTooltipVisible: true },
         }),
         ...(claimedTime && { claimedTime: { data: claimedTime } }),
@@ -61,9 +61,9 @@
     function handleTransactionIdClick(): void {
         explorerUrl
             ? openUrlInBrowser(
-                  `${explorerUrl}/${ExplorerEndpoint.Transaction}/${activity.asyncData?.claimingTransactionId}`
+                  `${explorerUrl}/${ExplorerEndpoint.Transaction}/${activity?.asyncData?.claimingTransactionId}`
               )
-            : setClipboard(activity.asyncData?.claimingTransactionId)
+            : setClipboard(activity?.asyncData?.claimingTransactionId)
     }
 </script>
 
@@ -76,7 +76,7 @@
             : undefined}
     />
 {/each}
-{#if activity.asyncData?.claimingTransactionId}
+{#if activity?.asyncData?.claimingTransactionId}
     <KeyValueBox keyText={localize(activity.asyncData?.isClaiming ? 'general.claimingIn' : 'general.claimedIn')}>
         <button
             slot="value"

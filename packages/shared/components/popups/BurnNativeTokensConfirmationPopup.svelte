@@ -48,7 +48,7 @@
     <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
         {localize('actions.confirmTokenBurn.title', {
             values: {
-                assetName: asset.metadata.name,
+                assetName: asset?.metadata.name,
             },
         })}
     </Text>
