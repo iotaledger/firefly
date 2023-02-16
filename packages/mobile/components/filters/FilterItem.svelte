@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { slide } from 'svelte/transition'
     import { FontWeight, Text, Toggle } from '@ui'
     import { localize } from '@core/i18n'
     import {
@@ -28,7 +27,6 @@
     {#if filterUnit.active}
         <filter-item-type
             class="block expanded bg-gray-50 px-4 py-3 -mx-5 dark:bg-transparent border-t border-solid border-gray-200 dark:border-gray-800"
-            transition:slide
         >
             {#if filterUnit.type === 'number'}
                 <NumberFilterItem bind:filterUnit />
