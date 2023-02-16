@@ -49,7 +49,7 @@ export function handleTransactionInclusionEventInternal(
 
             if (get(hasToRevote)) {
                 openPopup({
-                    type: 'revote',
+                    id: 'revote',
                     preventClose: true,
                     hideClose: true,
                 })

@@ -64,7 +64,7 @@
         if (valid) {
             setMintNftDetails(convertInputsToMetadataType(optionalInputs))
             openPopup({
-                type: 'mintNftConfirmation',
+                id: 'mintNftConfirmation',
                 overflow: true,
             })
         }

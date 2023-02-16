@@ -11,7 +11,7 @@ export function hideActivitiesForFoundries(account: IAccountState): void {
 
     for (const activity of activities) {
         for (const candidate of accountActivities.filter(
-            (_activity) => _activity.transactionId === activity.transactionId && _activity.id !== activity.id
+            (_activity) => _activity?.transactionId === activity?.transactionId && _activity.id !== activity.id
         )) {
             updateActivityFromPartialActivity(candidate, { isHidden: true })
         }

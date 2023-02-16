@@ -36,7 +36,7 @@
 
     function handleRejectClick(): void {
         openPopup({
-            type: 'confirmation',
+            id: 'confirmation',
             props: {
                 title: localize('actions.confirmRejection.title'),
                 description: localize('actions.confirmRejection.description'),

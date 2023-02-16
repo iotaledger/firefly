@@ -191,7 +191,7 @@
     function onBack(): void {
         closePopup()
         openPopup({
-            type: 'sendForm',
+            id: 'sendForm',
             overflow: true,
         })
     }

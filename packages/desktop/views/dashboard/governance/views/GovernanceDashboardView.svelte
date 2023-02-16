@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { Pane, Proposals, ProposalsDetails, VotingPower, Illustration, Text, FontWeight } from '@ui'
+    import { Proposals, ProposalsDetails, VotingPower, Illustration, Pane, Text, FontWeight } from '@ui'
     import { localize } from '@core/i18n'
-    import { registeredProposalsForSelectedAccount } from '@contexts/governance'
+    import { registeredProposalsForSelectedAccount } from '@contexts/governance/stores'
 </script>
 
 <div class="w-full h-full flex flex-nowrap p-8 relative flex-1 space-x-6 bg-gray-50 dark:bg-gray-900">
