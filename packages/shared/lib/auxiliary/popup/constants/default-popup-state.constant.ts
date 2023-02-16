@@ -2,7 +2,7 @@ import { IPopupState } from '../interfaces'
 
 export const DEFAULT_POPUP_STATE: IPopupState = {
     active: false,
-    type: null,
+    id: undefined,
     hideClose: false,
     preventClose: false,
     fullScreen: false,

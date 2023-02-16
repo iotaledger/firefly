@@ -11,11 +11,11 @@
         resetMintTokenDetails()
         if (hasAliases) {
             openPopup({
-                type: 'mintNativeTokenForm',
+                id: 'mintNativeTokenForm',
             })
         } else {
             openPopup({
-                type: 'confirmation',
+                id: 'confirmation',
                 props: {
                     title: localize('popups.noAlias.title'),
                     hint: localize('popups.noAlias.description'),
@@ -24,7 +24,7 @@
                     onConfirm: () => {
                         closePopup()
                         openPopup({
-                            type: 'aliasConfirmation',
+                            id: 'aliasConfirmation',
                         })
                     },
                 },

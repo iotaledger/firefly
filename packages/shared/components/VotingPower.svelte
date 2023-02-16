@@ -5,6 +5,7 @@
     import { localize } from '@core/i18n'
     import { formatTokenAmountBestMatch, visibleSelectedAccountAssets } from '@core/wallet'
     import { openPopup } from '@auxiliary/popup'
+    import { hasPendingGovernanceTransaction } from '@contexts/governance/stores'
 
     const asset = $visibleSelectedAccountAssets?.baseCoin
 
@@ -12,10 +13,11 @@
     $: maxVotingPower = parseInt($selectedAccount?.balances?.baseCoin?.available) + votingPower
     $: formattedVotingPower = formatTokenAmountBestMatch(votingPower, asset?.metadata)
     $: formattedMaxVotingPower = formatTokenAmountBestMatch(maxVotingPower, asset?.metadata)
+    $: isTransferring = $hasPendingGovernanceTransaction?.[$selectedAccount.index] || $selectedAccount?.isTransferring
 
     function handleManageVotingPower(): void {
         openPopup({
-            type: 'manageVotingPower',
+            id: 'manageVotingPower',
         })
     }
 </script>
@@ -32,8 +34,8 @@
         size={ButtonSize.Medium}
         onClick={handleManageVotingPower}
         classes="w-full"
-        disabled={$selectedAccount.isTransferring}
-        isBusy={$selectedAccount.isTransferring}
+        disabled={isTransferring}
+        isBusy={isTransferring}
     >
         {localize('views.governance.votingPower.manage')}
     </Button>

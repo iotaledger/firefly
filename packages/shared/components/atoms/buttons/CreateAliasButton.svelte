@@ -5,7 +5,7 @@
 
     function handleCreateAlias(): void {
         openPopup({
-            type: 'aliasConfirmation',
+            id: 'aliasConfirmation',
         })
     }
 </script>

@@ -34,7 +34,7 @@
     function handleTransactionClick(): void {
         if (asset?.verification?.status === NotVerifiedStatus.New) {
             openPopup({
-                type: 'tokenInformation',
+                id: 'tokenInformation',
                 overflow: true,
                 props: {
                     activityId: activity.id,
@@ -43,7 +43,7 @@
             })
         } else {
             openPopup({
-                type: 'activityDetails',
+                id: 'activityDetails',
                 props: { activityId: activity.id },
             })
         }

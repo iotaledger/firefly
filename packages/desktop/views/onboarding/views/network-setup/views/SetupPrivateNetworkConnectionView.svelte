@@ -32,7 +32,7 @@
                 checkNodeInfo: false,
                 validateClientOptions: false,
             })
-            updateOnboardingProfile({ clientOptions: { nodes: [node] } })
+            updateOnboardingProfile({ clientOptions: { nodes: [node], primaryNode: node } })
             await initialiseProfileManagerFromOnboardingProfile(true)
             await getNodeInfo(node.url)
             await destroyProfileManager()

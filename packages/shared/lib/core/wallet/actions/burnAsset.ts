@@ -15,7 +15,7 @@ export async function burnAsset(assetId: string, rawAmount: string): Promise<voi
             Converter.decimalToHex(Number(rawAmount), true)
         )
 
-        await processAndAddToActivities(burnTokenTransaction)
+        await processAndAddToActivities(burnTokenTransaction, account)
 
         showAppNotification({
             type: 'success',

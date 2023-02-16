@@ -7,7 +7,7 @@
     function handleMintNft(): void {
         resetMintNftDetails()
         openPopup({
-            type: 'mintNftForm',
+            id: 'mintNftForm',
         })
     }
 </script>

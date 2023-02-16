@@ -11,18 +11,18 @@ export async function preprocessTransaction(
     account: IAccountState
 ): Promise<IProcessedTransaction> {
     const outputs = convertTransactionsOutputTypesToWrappedOutputs(
-        transaction.transactionId,
+        transaction?.transactionId,
         transaction.payload.essence.outputs
     )
     const direction = getDirectionFromTransaction(outputs, transaction.incoming, account.depositAddress)
     const utxoInputs = transaction.payload.essence.inputs
     const inputIds = utxoInputs.map((input) =>
-        getOutputIdFromTransactionIdAndIndex(input.transactionId, input.transactionOutputIndex)
+        getOutputIdFromTransactionIdAndIndex(input?.transactionId, input.transactionOutputIndex)
     )
     const inputs = await Promise.all(inputIds.map((inputId) => account.getOutput(inputId)))
     return {
         outputs: outputs,
-        transactionId: transaction.transactionId,
+        transactionId: transaction?.transactionId,
         direction,
         time: new Date(Number(transaction.timestamp)),
         inclusionState: transaction.inclusionState,

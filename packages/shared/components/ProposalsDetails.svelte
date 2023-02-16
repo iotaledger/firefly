@@ -4,7 +4,11 @@
     import { localize } from '@core/i18n'
     import { activeProfileId } from '@core/profile'
     import { IProposalsDetails } from '@contexts/governance/interfaces'
-    import { participationOverviewForSelectedAccount, proposalStates } from '@contexts/governance/stores'
+    import {
+        participationOverviewForSelectedAccount,
+        registeredProposalsForSelectedAccount,
+        updateParticipationOverview,
+    } from '@contexts/governance/stores'
     import {
         getNumberOfActiveProposals,
         getNumberOfVotingProposals,
@@ -12,6 +16,8 @@
         getNumberOfTotalProposals,
     } from '@contexts/governance/utils'
     import { openPopup } from '@auxiliary/popup'
+    import { onMount } from 'svelte'
+    import { selectedAccount } from '@core/account'
 
     let details = <IProposalsDetails>{
         totalProposals: null,
@@ -19,7 +25,10 @@
         votingProposals: null,
         votedProposals: null,
     }
-    $: $proposalStates, $participationOverviewForSelectedAccount, updateProposalsDetails()
+
+    $: isOverviewLoaded = !!$participationOverviewForSelectedAccount
+    $: $registeredProposalsForSelectedAccount, $participationOverviewForSelectedAccount, updateProposalsDetails()
+    $: $selectedAccount, setParticipationOverview()
 
     function updateProposalsDetails(): void {
         if ($activeProfileId) {
@@ -32,12 +41,20 @@
         }
     }
 
+    async function setParticipationOverview(): Promise<void> {
+        if (!isOverviewLoaded || getNumberOfVotedProposals() === 0) {
+            await updateParticipationOverview($selectedAccount.index)
+        }
+    }
+
     function onAddProposalClick(): void {
         openPopup({
-            type: 'addProposal',
+            id: 'addProposal',
             overflow: true,
         })
     }
+
+    onMount(setParticipationOverview)
 </script>
 
 <proposals-details class="space-y-4">
@@ -52,11 +69,12 @@
                 <KeyValueBox
                     keyText={localize(`views.governance.proposalsDetails.${detailKey}`)}
                     valueText={details[detailKey]?.toString() ?? '-'}
+                    isLoading={details[detailKey] === undefined}
                 />
             </li>
         {/each}
     </ul>
-    <Button size={ButtonSize.Medium} onClick={onAddProposalClick} classes="w-full">
+    <Button size={ButtonSize.Medium} outline onClick={onAddProposalClick} classes="w-full">
         {localize('actions.addProposal')}
     </Button>
 </proposals-details>

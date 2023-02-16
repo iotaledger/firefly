@@ -28,7 +28,7 @@
     $: backupWarningColor = getBackupWarningColor(lastBackupDate)
     // used to prevent the modal from closing when interacting with the password popup
     // to be able to see the stronghold toggle change
-    $: isPasswordPopupOpen = $popupState?.active && $popupState?.type === 'password'
+    $: isPasswordPopupOpen = $popupState?.active && $popupState?.id === 'password'
     $: if ($isActiveLedgerProfile && $ledgerConnectionState) {
         updateLedgerConnectionText()
     }
@@ -40,7 +40,7 @@
     }
 
     function handleLogoutClick(): void {
-        void logout()
+        logout()
     }
 
     function handleStrongholdToggleClick(): void {
@@ -58,13 +58,13 @@
     function handleBackupClick(): void {
         modal?.close()
         openPopup({
-            type: 'backupStronghold',
+            id: 'backupStronghold',
         })
     }
 
     function handleVersionUpdateClick(): void {
         modal?.close()
-        openPopup({ type: 'version' })
+        openPopup({ id: 'version' })
     }
 </script>
 

@@ -4,7 +4,7 @@
     import { openPopup } from '@auxiliary/popup'
 
     function handleDiagnosticsClick(): void {
-        openPopup({ type: 'diagnostics' })
+        openPopup({ id: 'diagnostics' })
     }
 </script>
 

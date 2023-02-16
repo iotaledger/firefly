@@ -1,4 +1,5 @@
 export * from './panes'
+export * from './popups'
 
 export { default as AccountActivity } from './AccountActivity.svelte'
 export { default as SendButton } from './SendButton.svelte'

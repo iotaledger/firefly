@@ -1,10 +1,9 @@
 <script lang="ts">
-    import { ProposalStatusTimelineTooltip, ProposalStatusPill } from 'shared/components'
+    import { IProposal } from '@contexts/governance/interfaces'
+    import { ProposalStatusPill, ProposalStatusTimelineTooltip } from 'shared/components'
     import { Position } from 'shared/components/enums'
-    import { ProposalStatus } from '@contexts/governance/enums'
 
-    export let milestones: Record<ProposalStatus, number>
-    export let status: string
+    export let proposal: IProposal
     export let position: Position = Position.Right
 
     let anchor: HTMLElement
@@ -16,8 +15,8 @@
 </script>
 
 <div bind:this={anchor} on:mouseenter={() => showTooltip(true)} on:mouseleave={() => showTooltip(false)}>
-    <ProposalStatusPill {status} />
+    <ProposalStatusPill status={proposal?.status} />
 </div>
 {#if isTooltipVisible}
-    <ProposalStatusTimelineTooltip bind:anchor {milestones} {status} {position} />
+    <ProposalStatusTimelineTooltip bind:anchor milestones={proposal.milestones} status={proposal?.status} {position} />
 {/if}

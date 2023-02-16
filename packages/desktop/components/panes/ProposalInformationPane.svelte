@@ -12,10 +12,10 @@
         milestone: number
     }
 
-    const proposalDateData = getNextProposalDateData()
+    $: proposalDateData = getNextProposalDateData($selectedProposal?.status)
 
-    function getNextProposalDateData(): IProposalDateData {
-        switch ($selectedProposal?.state?.status) {
+    function getNextProposalDateData(status: string): IProposalDateData {
+        switch (status) {
             case ProposalStatus.Upcoming:
                 return {
                     propertyKey: 'votingOpens',
@@ -37,14 +37,20 @@
                     milestone: $selectedProposal?.milestones?.ended,
                 }
             default:
-                throw new Error('Unable to determine proposal status')
+                return undefined
         }
     }
 
-    const proposalInformation: IKeyValueBoxList = {
-        [proposalDateData.propertyKey]: {
-            data: formatDate(milestoneToDate($networkStatus.currentMilestone, proposalDateData.milestone), DATE_FORMAT),
-        },
+    let proposalInformation: IKeyValueBoxList
+    $: proposalInformation = {
+        ...(proposalDateData?.propertyKey && {
+            [proposalDateData.propertyKey]: {
+                data: formatDate(
+                    milestoneToDate($networkStatus.currentMilestone, proposalDateData.milestone),
+                    DATE_FORMAT
+                ),
+            },
+        }),
         eventId: {
             data: truncateString($selectedProposal?.id, 9, 9),
             isCopyable: true,
@@ -63,7 +69,7 @@
             <li>
                 <KeyValueBox
                     keyText={localize(`views.governance.details.proposalInformation.${counterKey}`)}
-                    valueText={proposalInformation[counterKey].data}
+                    valueText={proposalInformation[counterKey]?.data}
                     isCopyable={proposalInformation[counterKey].isCopyable}
                     copyValue={proposalInformation[counterKey].copyValue}
                 />
