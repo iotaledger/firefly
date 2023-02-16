@@ -11,6 +11,7 @@
         image: ParagraphBlock,
         link: LinkBlock,
         em: ParagraphBlock,
+        strong: ParagraphBlock,
         codespan: ParagraphBlock,
         del: ParagraphBlock,
         table: ParagraphBlock,
@@ -23,7 +24,7 @@
         unorderedlistitem: null,
         listitem: ParagraphBlock,
         hr: ParagraphBlock,
-        html: ParagraphBlock,
+        html: null,
         blockquote: ParagraphBlock,
         code: ParagraphBlock,
     }
