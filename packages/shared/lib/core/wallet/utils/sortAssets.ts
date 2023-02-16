@@ -24,7 +24,7 @@ export function sortAssets(assets: IAsset[]): IAsset[] {
 }
 
 function sortByName(asset1: IAsset, asset2: IAsset, asc: boolean): number {
-    return asset1.metadata?.name.toLowerCase() > asset2.metadata?.name.toLowerCase() ? (asc ? 1 : -1) : asc ? -1 : 1
+    return asset1?.metadata?.name.toLowerCase() > asset2?.metadata?.name.toLowerCase() ? (asc ? 1 : -1) : asc ? -1 : 1
 }
 
 function sortByAmount(asset1: IAsset, asset2: IAsset, asc: boolean): number {
