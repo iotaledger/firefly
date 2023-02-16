@@ -4,12 +4,15 @@
     import { selectedAccount } from '@core/account/stores'
     import { handleError } from '@core/error/handlers'
     import { setVotingPower } from '@contexts/governance/actions'
+    import { hasPendingGovernanceTransaction } from '@contexts/governance/stores'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
     import { popupState } from '@auxiliary/popup/stores'
 
     const ZERO_VOTING_POWER = '0'
+
+    $: isTransferring = $hasPendingGovernanceTransaction?.[$selectedAccount.index]
 
     function onCancelClick(): void {
         closePopup()
@@ -40,12 +43,7 @@
         <Button outline classes="w-full" onClick={onCancelClick}>
             {localize('actions.cancel')}
         </Button>
-        <Button
-            type={HTMLButtonType.Submit}
-            isBusy={$selectedAccount?.isTransferring}
-            disabled={$selectedAccount?.isTransferring}
-            classes="w-full"
-        >
+        <Button type={HTMLButtonType.Submit} isBusy={isTransferring} disabled={isTransferring} classes="w-full">
             {localize('actions.confirm')}
         </Button>
     </div>

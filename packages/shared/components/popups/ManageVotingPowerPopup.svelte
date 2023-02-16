@@ -24,7 +24,7 @@
 
     $: asset = $visibleSelectedAccountAssets?.baseCoin
     $: votingPower = parseInt($selectedAccount?.votingPower, 10)
-    $: isTransferring = $hasPendingGovernanceTransaction?.[$selectedAccount.index]
+    $: isTransferring = $hasPendingGovernanceTransaction?.[$selectedAccount.index] || $selectedAccount?.isTransferring
     $: disabled = $hasToRevote || isTransferring
 
     $: amount, disabled, setConfirmDisabled()
@@ -35,7 +35,7 @@
             return
         }
         const convertedSliderAmount = convertToRawAmount(amount, asset?.metadata).toString()
-        confirmDisabled = convertedSliderAmount === $selectedAccount?.votingPower || $selectedAccount?.isTransferring
+        confirmDisabled = convertedSliderAmount === $selectedAccount?.votingPower || isTransferring
     }
 
     function onCancelClick(): void {
