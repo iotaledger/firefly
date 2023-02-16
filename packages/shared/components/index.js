@@ -38,7 +38,6 @@ export { default as Toast } from './Toast.svelte'
 export { default as ToastContainer } from './ToastContainer.svelte'
 export { default as Tooltip } from './Tooltip.svelte'
 export { default as Transition } from './Transition.svelte'
-export { default as Video } from './Video.svelte'
 export { default as VotingPower } from './VotingPower.svelte'
 
 export * from './atoms'
