@@ -1,6 +1,5 @@
 <script lang="ts">
-    import { Proposals, ProposalsDetails, VotingPower, Illustration, Text, FontWeight } from '@ui'
-    import { Pane } from '@components'
+    import { Proposals, ProposalsDetails, VotingPower, Illustration, Pane, Text, FontWeight } from '@ui'
     import { localize } from '@core/i18n'
     import { registeredProposalsForSelectedAccount } from '@contexts/governance/stores'
 </script>

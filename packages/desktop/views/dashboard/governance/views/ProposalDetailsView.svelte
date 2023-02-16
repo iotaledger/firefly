@@ -2,6 +2,7 @@
     import {
         Button,
         KeyValueBox,
+        Pane,
         ProposalDetailsButton,
         ProposalQuestion,
         ProposalStatusPill,
@@ -10,7 +11,7 @@
         TextHint,
         MarkdownBlock,
     } from '@ui'
-    import { Pane, ProposalInformationPane } from '@components'
+    import { ProposalInformationPane } from '@components'
     import { onMount, onDestroy } from 'svelte'
     import { VotingEventPayload, ParticipationEventType, TrackedParticipationOverview } from '@iota/wallet/out/types'
     import { localize } from '@core/i18n'

@@ -10,8 +10,8 @@
         Text,
         TextType,
         Alert,
+        Pane,
     } from '@ui'
-    import { Pane } from '@components'
     import { openPopup } from '@auxiliary/popup/actions'
     import { selectedAccountIndex } from '@core/account/stores'
     import { openUrlInBrowser } from '@core/app/utils'

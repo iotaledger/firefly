@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { AccountAssetsList, AccountSummary, ReceiveAddressButton } from '@ui'
-    import { AccountActivity, Pane, SendButton } from '@components'
+    import { AccountAssetsList, AccountSummary, Pane, ReceiveAddressButton } from '@ui'
+    import { AccountActivity, SendButton } from '@components'
     import features from '@features/features'
     import { selectedAccount } from '@core/account/stores'
 </script>

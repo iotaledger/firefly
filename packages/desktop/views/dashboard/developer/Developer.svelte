@@ -4,11 +4,11 @@
         MintNativeTokenButton,
         MintNftButton,
         CreateAliasButton,
+        Pane,
         RefreshTokenMetadataButton,
         Text,
         TestDeepLinkButton,
     } from '@ui'
-    import { Pane } from '@components'
     import features from '@features/features'
     import { selectedAccount } from '@core/account/stores'
     import { localize } from '@core/i18n'
