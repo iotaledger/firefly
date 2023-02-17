@@ -1,4 +1,3 @@
-export { default as AccountSwitcher } from './AccountSwitcher.svelte'
 export { default as Alert } from './Alert.svelte'
 export { default as Animation } from './Animation.svelte'
 export { default as Button } from './Button.svelte'

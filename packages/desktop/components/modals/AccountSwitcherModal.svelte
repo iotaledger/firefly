@@ -1,13 +1,14 @@
 <script lang="ts">
+    import { tick } from 'svelte'
+    import { AccountSwitcherMenuItem, HR, Icon, Modal, Text, TextType } from '@ui'
+    import { sumBalanceForAccounts } from '@core/account'
+    import { selectedAccount } from '@core/account/stores'
     import { localize } from '@core/i18n'
     import { BASE_TOKEN } from '@core/network'
     import { activeProfile, visibleActiveAccounts } from '@core/profile'
-    import { selectedAccount, sumBalanceForAccounts } from '@core/account'
     import { formatTokenAmountBestMatch } from '@core/wallet'
+    import { Icon as IconEnum } from '@auxiliary/icon'
     import { openPopup } from '@auxiliary/popup'
-    import { AccountSwitcherMenuItem } from 'shared/components/molecules'
-    import { HR, Icon, Modal, Text } from 'shared/components'
-    import { tick } from 'svelte'
 
     export let modal: Modal = undefined
 
@@ -15,8 +16,8 @@
 
     async function scrollToSelectedAccount(): Promise<void> {
         await tick()
-        const el = document.getElementById(`account-${$selectedAccount.index}`)
-        el?.scrollIntoView({ behavior: 'auto' })
+        const element = document.getElementById(`account-${$selectedAccount.index}`)
+        element?.scrollIntoView({ behavior: 'auto' })
     }
 
     function handleCreateAccountClick(): void {
@@ -32,23 +33,24 @@
     size="large"
     position={{ top: '30px', left: '50%' }}
 >
-    <div class="p-4">
-        <div class="accounts flex flex-col space-y-1 max-h-96 scrollable-y">
+    <account-list-container class="block p-4">
+        <account-list class="flex flex-col space-y-1 max-h-96 scrollable-y">
             {#each $visibleActiveAccounts as account}
                 <AccountSwitcherMenuItem id="account-{account.index}" {account} onClick={modal?.close} />
             {/each}
-        </div>
-    </div>
+        </account-list>
+    </account-list-container>
     <HR />
     <button
-        class="w-full hover:bg-gray-50 dark:hover:bg-gray-800 flex flex-row justify-between p-8"
+        type="button"
+        class=" flex flex-row justify-between w-full p-8 hover:bg-gray-50 dark:hover:bg-gray-800"
         on:click={handleCreateAccountClick}
     >
         <div class="flex flex-row items-center space-x-4">
-            <Icon icon="plus" height="12" width="12" classes="text-blue-500" />
-            <Text highlighted type="h5" classes="text-14">{localize('general.addAWallet')}</Text>
+            <Icon icon={IconEnum.Plus} height="12" width="12" classes="text-blue-500" />
+            <Text highlighted type={TextType.h5} classes="text-14">{localize('general.addAWallet')}</Text>
         </div>
-        <Text classes="opacity-50" type="h5">
+        <Text classes="opacity-50" type={TextType.h5}>
             {localize('general.total', {
                 values: {
                     balance: formatTokenAmountBestMatch(totalBalance, BASE_TOKEN[$activeProfile.networkProtocol]),
