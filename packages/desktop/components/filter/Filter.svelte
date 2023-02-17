@@ -1,7 +1,8 @@
 <script lang="ts">
-    import { TogglableButton, FilterModal, FilterItem, Modal } from 'shared/components'
-    import { deepCopy, Filter } from '@core/utils'
     import type { Writable } from 'svelte/store'
+    import { TogglableButton, Modal } from '@ui'
+    import { FilterItem, FilterModal } from '@components'
+    import { deepCopy, Filter } from '@core/utils'
 
     export let filterStore: Writable<Filter>
     let filter: Filter = deepCopy($filterStore)
@@ -37,7 +38,7 @@
     $: activeFilterCount = Object.keys($filterStore).filter((f) => $filterStore[f].active).length
 </script>
 
-<div class="h-6 relative">
+<filter-container class="block h-6 relative">
     <TogglableButton icon="filter" bind:active={filterActive} onClick={modal?.toggle} />
     {#if activeFilterCount}
         <filter-badge
@@ -46,7 +47,6 @@
             {activeFilterCount}
         </filter-badge>
     {/if}
-
     <FilterModal bind:modal bind:filter {isChanged} {onSetFilters} {onClose}>
         {#each Object.keys(filter) as filterUnit, index}
             <FilterItem
@@ -57,4 +57,4 @@
             />
         {/each}
     </FilterModal>
-</div>
+</filter-container>

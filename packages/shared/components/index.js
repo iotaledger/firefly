@@ -40,7 +40,6 @@ export { default as VotingPower } from './VotingPower.svelte'
 
 export * from './atoms'
 export * from './enums'
-export * from './filters'
 export * from './inputs'
 export * from './interfaces'
 export * from './modals'

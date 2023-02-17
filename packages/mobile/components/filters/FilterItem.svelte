@@ -1,13 +1,15 @@
 <script lang="ts">
-    import { FontWeight, Text, Toggle } from '@ui'
-    import { localize } from '@core/i18n'
     import {
+        FontWeight,
+        Text,
+        Toggle,
         DateFilterItem,
         NumberFilterItem,
         SelectionFilterItem,
         AssetFilterItem,
         OrderFilterItem,
-    } from 'shared/components/filters/items'
+    } from '@ui'
+    import { localize } from '@core/i18n'
     import { FilterUnit } from '@core/utils/interfaces/filter'
 
     export let filterUnit: FilterUnit
@@ -49,7 +51,6 @@
     }
 
     filter-item-type :global(p) {
-        @apply text-14;
-        @apply font-500;
+        @apply font-500 text-14;
     }
 </style>
