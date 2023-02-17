@@ -1,3 +1,4 @@
+export * from './modals'
 export * from './panes'
 export * from './popups'
 

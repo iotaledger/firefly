@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { AccountSwitcherModal, AccountLabel, Icon, Modal } from '@ui'
+    import { AccountLabel, Icon, Modal } from '@ui'
+    import { AccountSwitcherModal } from '@components'
     import { selectedAccount } from '@core/account'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
