@@ -1,4 +1,5 @@
 import { Icon } from '../enums'
+import { ISvg } from '../interfaces'
 import {
     ACTIVITY_SVG,
     ALIAS_SVG,
@@ -21,6 +22,7 @@ import {
     CHEVRON_UP_SVG,
     CHIP_SVG,
     CLOSE_SVG,
+    CLOSE_THIN_SVG,
     COPY_SVG,
     COLLECTIBLES_APPLICATION_LARGE_SVG,
     COLLECTIBLES_APPLICATION_SMALL_SVG,
@@ -56,6 +58,7 @@ import {
     FILTER_SVG,
     FIREFLY_SVG,
     GOVERNANCE_SVG,
+    HAMBURGER_SVG,
     HELP_SVG,
     HIDE_SVG,
     HISTORY_SVG,
@@ -71,6 +74,8 @@ import {
     LOCK3_SVG,
     LOCK_SVG,
     LOGOUT_SVG,
+    MAXIMIZE_SVG,
+    MINIMIZE_SVG,
     MINUS_SVG,
     NETWORK_SVG,
     PARCHMENT_SVG,
@@ -84,6 +89,7 @@ import {
     RECEIVE_SVG,
     REFRESH_SVG,
     RESET_SVG,
+    RESTORE_SIZE_SVG,
     SEARCH_SVG,
     SECURITY_SVG,
     SEED_SVG,
@@ -126,7 +132,9 @@ import {
 } from '../svgs'
 import { VERIFICATION_STATUS_OFFICIAL } from '../svgs/verification-status-official.svg'
 
-export const ICON_SVG = {
+type IconSvgMap = { [key in Icon]: ISvg }
+
+export const ICON_SVG_MAP: IconSvgMap = {
     [Icon.Activity]: ACTIVITY_SVG,
     [Icon.Alias]: ALIAS_SVG,
     [Icon.ArrowLeft]: ARROW_LEFT_SVG,
@@ -148,6 +156,7 @@ export const ICON_SVG = {
     [Icon.ChevronUp]: CHEVRON_UP_SVG,
     [Icon.Chip]: CHIP_SVG,
     [Icon.Close]: CLOSE_SVG,
+    [Icon.CloseThin]: CLOSE_THIN_SVG,
     [Icon.CollectiblesApplicationLarge]: COLLECTIBLES_APPLICATION_LARGE_SVG,
     [Icon.CollectiblesApplicationSmall]: COLLECTIBLES_APPLICATION_SMALL_SVG,
     [Icon.CollectiblesAudioLarge]: COLLECTIBLES_AUDIO_LARGE_SVG,
@@ -183,6 +192,7 @@ export const ICON_SVG = {
     [Icon.Filter]: FILTER_SVG,
     [Icon.Firefly]: FIREFLY_SVG,
     [Icon.Governance]: GOVERNANCE_SVG,
+    [Icon.Hamburger]: HAMBURGER_SVG,
     [Icon.Help]: HELP_SVG,
     [Icon.Hide]: HIDE_SVG,
     [Icon.History]: HISTORY_SVG,
@@ -198,6 +208,8 @@ export const ICON_SVG = {
     [Icon.Lock2]: LOCK2_SVG,
     [Icon.Lock3]: LOCK3_SVG,
     [Icon.Logout]: LOGOUT_SVG,
+    [Icon.Maximize]: MAXIMIZE_SVG,
+    [Icon.Minimize]: MINIMIZE_SVG,
     [Icon.Minus]: MINUS_SVG,
     [Icon.Network]: NETWORK_SVG,
     [Icon.NotVerified]: NOT_VERIFIED_SVG,
@@ -212,6 +224,7 @@ export const ICON_SVG = {
     [Icon.Receive]: RECEIVE_SVG,
     [Icon.Refresh]: REFRESH_SVG,
     [Icon.Reset]: RESET_SVG,
+    [Icon.RestoreSize]: RESTORE_SIZE_SVG,
     [Icon.Search]: SEARCH_SVG,
     [Icon.Security]: SECURITY_SVG,
     [Icon.Seed]: SEED_SVG,

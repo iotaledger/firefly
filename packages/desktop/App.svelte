@@ -21,7 +21,9 @@
         AppStage,
         appVersionDetails,
         initAppSettings,
+        platform,
         Platform,
+        PlatformOption,
         setPlatform,
     } from '@core/app'
     import { showAppNotification } from '@auxiliary/notification'
@@ -29,8 +31,8 @@
     import { initialiseOnboardingFlow } from '@contexts/onboarding'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { getLocalisedMenuItems } from './lib/helpers'
-    import { Route, TitleBar, ToastContainer, Transition } from '@ui'
-    import { Popup } from '@components'
+    import { Route, ToastContainer, Transition } from '@ui'
+    import { TitleBar, Popup } from '@components'
     import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from '@views'
     import {
         getAppRouter,
@@ -44,7 +46,7 @@
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
-    const { loggedIn } = $activeProfile
+    const { loggedIn, hasLoadedAccounts } = $activeProfile
 
     checkAndMigrateProfiles()
 
@@ -75,6 +77,9 @@
     $: if (document.dir !== $localeDirection) {
         document.dir = $localeDirection
     }
+
+    $: isDashboardVisible = $appRoute === AppRoute.Dashboard && $hasLoadedAccounts && $popupState.id !== 'busy'
+    $: isWindows = $platform === PlatformOption.Windows
 
     let splash = true
     let settings = false
@@ -175,41 +180,45 @@
     }
 </script>
 
-<TitleBar>
-    <!-- empty div to avoid auto-purge removing dark classes -->
-    <div class="scheme-dark" />
-    {#if !$isLocaleLoaded || splash}
-        <Splash />
-    {:else}
-        {#if $popupState.active}
-            <Popup
-                id={$popupState.id}
-                props={$popupState.props}
-                hideClose={$popupState.hideClose}
-                fullScreen={$popupState.fullScreen}
-                transition={$popupState.transition}
-                overflow={$popupState.overflow}
-                relative={$popupState.relative}
-            />
+<app-container class="block w-full h-full">
+    <TitleBar />
+    <app-body
+        class="block fixed left-0 right-0 bottom-0 z-50 top-0"
+        class:top-placement={isWindows || isDashboardVisible}
+    >
+        <div class="scheme-dark" />
+        {#if !$isLocaleLoaded || splash}
+            <Splash />
+        {:else}
+            {#if $popupState.active}
+                <Popup
+                    id={$popupState.id}
+                    props={$popupState.props}
+                    hideClose={$popupState.hideClose}
+                    fullScreen={$popupState.fullScreen}
+                    transition={$popupState.transition}
+                    overflow={$popupState.overflow}
+                    relative={$popupState.relative}
+                />
+            {/if}
+            <Route route={AppRoute.Dashboard}>
+                <Transition>
+                    <Dashboard />
+                </Transition>
+            </Route>
+            <Route route={AppRoute.Login}>
+                <LoginRouter />
+            </Route>
+            <Route route={AppRoute.Onboarding}>
+                <OnboardingRouter />
+            </Route>
+            {#if settings}
+                <Settings handleClose={() => (settings = false)} />
+            {/if}
+            <ToastContainer />
         {/if}
-        <Route route={AppRoute.Dashboard}>
-            <Transition>
-                <Dashboard />
-            </Transition>
-        </Route>
-        <Route route={AppRoute.Login}>
-            <LoginRouter />
-        </Route>
-        <Route route={AppRoute.Onboarding}>
-            <OnboardingRouter />
-        </Route>
-        {#if settings}
-            <Settings handleClose={() => (settings = false)} />
-        {/if}
-
-        <ToastContainer />
-    {/if}
-</TitleBar>
+    </app-body>
+</app-container>
 
 <style global type="text/scss">
     @tailwind base;
@@ -279,5 +288,8 @@
     }
     img {
         -webkit-user-drag: none;
+    }
+    app-body.top-placement {
+        @apply top-9;
     }
 </style>
