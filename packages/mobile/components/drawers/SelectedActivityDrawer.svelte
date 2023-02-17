@@ -9,7 +9,7 @@
         Button,
         FoundryActivityDetails,
         NftActivityDetails,
-    } from 'shared/components'
+    } from '@ui'
     import { handleClaimActivity, handleRejectActivity } from '../../lib/contexts/dashboard'
 
     export let activity: Activity | undefined

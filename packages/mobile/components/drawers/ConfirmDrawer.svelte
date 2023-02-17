@@ -1,6 +1,6 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { Button, ButtonVariant, Text, TextHint } from 'shared/components'
+    import { Button, ButtonVariant, Text, TextHint } from '@ui'
 
     export let description: string = ''
     export let hint: string = ''
