@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { Icon, Text } from '@ui'
+    import { AccountSwitcher } from '@components'
     import { PlatformOption, platform } from '@core/app'
     import { localize } from '@core/i18n'
     import {
@@ -14,7 +16,6 @@
         settingsRoute,
         settingsRouter,
     } from '@core/router'
-    import { AccountSwitcher, Icon, Text } from 'shared/components'
     import { popupState } from '@auxiliary/popup'
 
     export let classes = ''
