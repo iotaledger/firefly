@@ -1,32 +1,33 @@
 <script lang="ts">
     import { Icon, Text } from '@ui'
     import { AccountSwitcher } from '@components'
-    import { PlatformOption, platform } from '@core/app'
+    import { PlatformOption } from '@core/app'
+    import { platform } from '@core/app/stores'
     import { localize } from '@core/i18n'
     import {
         collectiblesRoute,
         CollectiblesRoute,
         collectiblesRouter,
-        DashboardRoute,
         dashboardRoute,
-        GovernanceRoute,
+        DashboardRoute,
         governanceRoute,
+        GovernanceRoute,
         governanceRouter,
-        SettingsRoute,
         settingsRoute,
+        SettingsRoute,
         settingsRouter,
     } from '@core/router'
+    import { Icon as IconEnum } from '@auxiliary/icon'
     import { popupState } from '@auxiliary/popup'
 
-    export let classes = ''
+    let isBackButtonVisible = false
 
-    let showBackButton = false
     $: {
         if ($settingsRoute || $collectiblesRoute || $governanceRoute) {
-            showBackButton = isCorrectRoute()
+            isBackButtonVisible = isCorrectRoute()
         }
     }
-    $: showingPopup = $popupState.active && $popupState.id !== 'busy'
+    $: isPopupVisible = $popupState?.active && $popupState?.id !== 'busy'
 
     function isCorrectRoute(): boolean {
         switch ($dashboardRoute) {
@@ -58,25 +59,29 @@
     }
 </script>
 
-<div
-    class="fixed top-0 left-20 flex flex-row justify-center items-center py-2 w-full z-10 {$platform ===
-        PlatformOption.Windows && showingPopup
-        ? 'opacity-50 pointer-events-none'
-        : ''} {classes}"
->
-    {#if showBackButton}
-        <button on:click={handleBackClick} class="absolute left-2 cursor-pointer" style="-webkit-app-region: none;">
-            <div class="flex items-center space-x-2 ">
-                <Icon width="18" icon="arrow-left" classes="text-gray-800 dark:text-gray-500" />
-                <Text overrideColor classes="text-gray-800 dark:text-gray-500">{localize('actions.back')}</Text>
-            </div>
+<top-navigation class:disabled={$platform === PlatformOption.Windows && isPopupVisible}>
+    {#if isBackButtonVisible}
+        <button type="button" on:click={handleBackClick}>
+            <Icon width="18" icon={IconEnum.ArrowLeft} classes="text-gray-800 dark:text-gray-500" />
+            <Text overrideColor classes="text-gray-800 dark:text-gray-500">{localize('actions.back')}</Text>
         </button>
     {/if}
     <AccountSwitcher />
-</div>
+</top-navigation>
 
 <style type="text/scss">
-    div {
+    top-navigation {
+        @apply fixed flex flex-row justify-center items-center z-10 top-0 left-20;
+        @apply py-2 w-full;
         width: calc(100% - 14rem);
+
+        &.disabled {
+            @apply opacity-50 pointer-events-none;
+        }
+
+        button {
+            @apply absolute flex items-center left-2 gap-2 cursor-pointer;
+            -webkit-app-region: none;
+        }
     }
 </style>
