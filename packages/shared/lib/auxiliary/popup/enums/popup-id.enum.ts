@@ -41,7 +41,6 @@ export enum PopupId {
     UnlockStronghold = 'unlockStronghold',
     VerifyLedgerTransaction = 'verifyLedgerTransaction',
     Version = 'version',
-    Video = 'video',
     VoteForProposal = 'voteForProposal',
     VotingPowerToZero = 'votingPowerToZero',
     WalletFinder = 'walletFinder',
