@@ -1,24 +1,35 @@
 <script lang="ts">
     import { AccountLabel, Icon, Modal } from '@ui'
     import { AccountSwitcherModal } from '@components'
-    import { selectedAccount } from '@core/account'
+    import { selectedAccount } from '@core/account/stores'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
     let modal: Modal
-    let isModalOpened: boolean
-
-    function onClick(): void {
-        modal?.toggle()
-    }
+    let isModalOpened: boolean = false
 </script>
 
 <svelte:window on:click={() => (isModalOpened = modal?.isOpened())} />
-<div class="relative left-8" style="-webkit-app-region: none;">
-    <button on:click={onClick} class="flex flex-row justify-center items-center space-x-2">
+<account-switcher>
+    <button type="button" on:click={modal?.toggle} class="flex flex-row justify-center items-center space-x-2">
         <AccountLabel account={$selectedAccount} />
-        <div class="transform {isModalOpened ? 'rotate-180' : 'rotate-0'}">
+        <icon-container class:rotate={isModalOpened}>
             <Icon height="18" width="18" icon={IconEnum.ChevronDown} classes="text-gray-800 dark:text-white" />
-        </div>
+        </icon-container>
     </button>
     <AccountSwitcherModal bind:modal />
-</div>
+</account-switcher>
+
+<style lang="scss">
+    account-switcher {
+        @apply block relative left-8;
+        -webkit-app-region: none;
+    }
+
+    icon-container {
+        @apply block transform rotate-0;
+
+        &.rotate {
+            @apply rotate-180;
+        }
+    }
+</style>
