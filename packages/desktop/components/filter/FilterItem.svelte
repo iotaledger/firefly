@@ -1,9 +1,17 @@
 <script lang="ts">
-    import { Checkbox, Icon } from 'shared/components'
-    import { localize } from '@core/i18n'
-    import { DateFilterItem, NumberFilterItem, SelectionFilterItem, AssetFilterItem, OrderFilterItem } from './items'
     import { createEventDispatcher } from 'svelte'
+    import {
+        Checkbox,
+        Icon,
+        DateFilterItem,
+        NumberFilterItem,
+        SelectionFilterItem,
+        AssetFilterItem,
+        OrderFilterItem,
+    } from '@ui'
+    import { localize } from '@core/i18n'
     import { FilterUnit } from '@core/utils/interfaces/filter'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let filterUnit: FilterUnit
     export let isOpen: boolean
@@ -21,8 +29,8 @@
     }
 </script>
 
-<div class="filter-item border-t border-solid border-gray-200 dark:border-gray-800 ">
-    <div class="px-4 py-2 flex flex-row justify-between">
+<filter-item class="block border-t border-solid border-gray-200 dark:border-gray-800 ">
+    <filter-item-toggle class="flex flex-row justify-between px-4 py-2">
         <Checkbox
             label={localize(filterUnit.labelKey ?? filterUnit.localeKey + '.label')}
             bind:checked={filterUnit.active}
@@ -32,16 +40,15 @@
         />
         <button on:click={onArrowClick}>
             <Icon
-                icon={isOpen ? 'small-chevron-up' : 'small-chevron-down'}
+                icon={isOpen ? IconEnum.SmallChevronUp : IconEnum.SmallChevronDown}
                 width="16"
                 height="16"
                 classes="cursor-pointer fill-current text-gray-500 dark:text-white"
             />
         </button>
-    </div>
-
+    </filter-item-toggle>
     {#if isOpen}
-        <div class="expanded bg-gray-50 px-4 py-3 dark:bg-transparent">
+        <filter-item-type class="block expanded px-4 py-3 bg-gray-50 dark:bg-transparent">
             {#if filterUnit.type === 'number'}
                 <NumberFilterItem bind:filterUnit />
             {:else if filterUnit.type === 'date'}
@@ -53,20 +60,18 @@
             {:else if filterUnit.type === 'asset'}
                 <AssetFilterItem bind:filterUnit />
             {/if}
-        </div>
+        </filter-item-type>
     {/if}
-</div>
+</filter-item>
 
 <style lang="scss">
-    .filter-item {
+    filter-item {
         :global(box) {
-            padding: 0.5rem !important;
+            @apply p-2;
         }
 
-        &:last-child {
-            .expanded {
-                @apply rounded-b-xl;
-            }
+        &:last-child .expanded {
+            @apply rounded-b-xl;
         }
     }
 </style>
