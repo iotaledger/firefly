@@ -33,7 +33,7 @@
     import { Route, ToastContainer, Transition } from '@ui'
     import { TitleBar, Popup } from '@components'
     import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from '@views'
-    import { initialiseDeepLinkManager, showDeepLinkNotification } from '@auxiliary/deep-link'
+    import { initialiseDeepLinkManager, showDeepLinkNotification } from './lib/auxiliary/deep-link'
     import {
         getAppRouter,
         getRouterForAppContext,

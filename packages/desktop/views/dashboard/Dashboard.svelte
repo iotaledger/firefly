@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { handleDeepLink } from '@auxiliary/deep-link'
+    import { handleDeepLink } from '../../lib/auxiliary/deep-link'
     import { localize } from '@core/i18n'
     import { nodeInfo } from '@core/network'
     import {

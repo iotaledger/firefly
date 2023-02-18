@@ -1,4 +1,4 @@
-import { formatHexString } from '@core/utils/format'
+import { formatHexString } from '../format'
 
 describe('File: format.ts', () => {
     describe('Function: formatHexString', () => {

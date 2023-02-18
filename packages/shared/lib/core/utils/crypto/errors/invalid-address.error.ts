@@ -1,4 +1,4 @@
-import { BaseError } from '@core/error'
+import { BaseError } from '@core/error/classes'
 import { localize } from '@core/i18n'
 
 export class InvalidAddressError extends BaseError {

@@ -1,12 +1,7 @@
 import '@mocks/i18n.mock'
 
-import {
-    getBestTimeDuration,
-    HOURS_PER_DAY,
-    MILLISECONDS_PER_SECOND,
-    MINUTES_PER_HOUR,
-    SECONDS_PER_MINUTE,
-} from '@core/utils'
+import { HOURS_PER_DAY, MILLISECONDS_PER_SECOND, MINUTES_PER_HOUR, SECONDS_PER_MINUTE } from '../constants'
+import { getBestTimeDuration } from '../time'
 
 describe('File: time.ts', () => {
     describe('Function: getBestTimeDuration', () => {

@@ -1,6 +1,6 @@
 import '@mocks/i18n.mock'
 
-import { range } from '@core/utils'
+import { range } from '../number'
 
 type Simple = {
     prop1?: string
@@ -22,7 +22,7 @@ type Complex = {
     data?: Data
 }
 
-describe('File: utils.ts', () => {
+describe('File: number.ts', () => {
     describe('Function: range', () => {
         it('should create ranges from valid arguments', () => {
             expect(range(0)).toEqual([])

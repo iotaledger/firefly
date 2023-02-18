@@ -1,4 +1,4 @@
-import { BaseError } from '@core/error'
+import { BaseError } from '@core/error/classes'
 
 export class OnboardingProfileManagerAlreadyInitializedError extends BaseError {
     constructor() {

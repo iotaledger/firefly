@@ -9,7 +9,7 @@
         HelpAndInfoRoute,
         SecuritySettingsRoute,
     } from '@core/router'
-    import { SETTINGS_ICON_SVG } from '@lib/auxiliary/icon'
+    import { SETTINGS_ICON_SVG } from '@auxiliary/icon'
     import { Icon, Text, TextType } from '@ui'
     import features from '@features/features'
 

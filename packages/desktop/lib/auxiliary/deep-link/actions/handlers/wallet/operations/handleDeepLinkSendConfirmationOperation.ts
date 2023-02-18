@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
 
 import { networkHrp } from '@core/network'
-import { isStringTrue, isValidBech32AddressAndPrefix, getByteLengthOfString } from '@core/utils'
+import { isStringTrue, isValidBech32AddressAndPrefix, getByteLengthOfString, InvalidAddressError } from '@core/utils'
 import {
     getAssetById,
     NewTransactionDetails,
@@ -15,7 +15,6 @@ import { openPopup } from '@auxiliary/popup'
 import { SendOperationParameter } from '../../../../enums'
 import {
     SurplusNotANumberError,
-    InvalidAddressError,
     MetadataLengthError,
     NoAddressSpecifiedError,
     TagLengthError,

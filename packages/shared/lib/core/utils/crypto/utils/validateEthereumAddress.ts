@@ -2,13 +2,13 @@ import { get } from 'svelte/store'
 
 import { Keccak } from 'sha3'
 
+import { localize } from '@core/i18n'
+import { Layer1RecipientError } from '@core/layer-2/errors'
 import { networkHrp } from '@core/network/stores'
 
 import { KECCAK_HASH_SIZE } from '../constants'
+import { InvalidAddressError } from '../errors'
 import { validateBech32Address } from './validateBech32Address'
-import { Layer1RecipientError } from '@core/layer-2/errors'
-import { InvalidAddressError } from '@auxiliary/deep-link'
-import { localize } from '@core/i18n'
 
 export function validateEthereumAddress(address: string): void {
     throwIfBech32Address(address)
