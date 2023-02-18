@@ -60,7 +60,7 @@ export const queriedActivities: Readable<Activity[]> = derived(
 function getFieldsToSearchFromActivity(activity: Activity): string[] {
     const fieldsToSearch: string[] = []
 
-    if (activity.transactionId) {
+    if (activity?.transactionId) {
         fieldsToSearch.push(activity.transactionId)
     }
 
@@ -80,15 +80,15 @@ function getFieldsToSearchFromActivity(activity: Activity): string[] {
         fieldsToSearch.push(activity.subject?.address)
     }
 
-    if (activity.asyncData?.claimingTransactionId) {
+    if (activity?.asyncData?.claimingTransactionId) {
         fieldsToSearch.push(activity.asyncData.claimingTransactionId)
     }
 
-    if (activity.metadata) {
+    if (activity?.metadata) {
         fieldsToSearch.push(activity.metadata)
     }
 
-    if (activity.tag) {
+    if (activity?.tag) {
         fieldsToSearch.push(activity.tag)
     }
 

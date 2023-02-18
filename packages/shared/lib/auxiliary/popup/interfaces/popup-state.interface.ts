@@ -1,8 +1,9 @@
+import { PopupId } from '../enums'
 import { PopupProps } from '../types'
 
 export interface IPopupState {
     active: boolean
-    type: string
+    id: PopupId | string
     hideClose?: boolean
     preventClose?: boolean
     fullScreen?: boolean

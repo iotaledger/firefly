@@ -19,7 +19,7 @@ export function handleDeepLinkSendFormOperation(searchParams: URLSearchParams): 
     if (transactionDetails) {
         setNewTransactionDetails(transactionDetails)
         openPopup({
-            type: 'sendForm',
+            id: 'sendForm',
             overflow: true,
         })
     }
@@ -42,7 +42,7 @@ function parseSendFormOperation(searchParams: URLSearchParams): NewTransactionDe
     }
 
     const address = searchParams.get(SendOperationParameter.Address)
-    const unit = searchParams.get(SendOperationParameter.Unit) ?? asset.metadata?.unit
+    const unit = searchParams.get(SendOperationParameter.Unit) ?? asset?.metadata?.unit
     const rawAmount = getRawAmountFromSearchParam(searchParams)
     const metadata = searchParams.get(SendOperationParameter.Metadata)
     const tag = searchParams.get(SendOperationParameter.Tag)

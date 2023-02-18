@@ -27,7 +27,7 @@ export function getAccountAssetsForSelectedAccount(marketCoinPrices: MarketCoinP
     const tokens = account?.balances?.nativeTokens ?? []
     for (const token of tokens) {
         const persistedAsset = getAssetFromPersistedAssets(token.tokenId)
-        if (persistedAsset && isValidIrc30(persistedAsset.metadata)) {
+        if (persistedAsset && isValidIrc30(persistedAsset?.metadata)) {
             nativeTokens.push({
                 ...persistedAsset,
                 balance: {

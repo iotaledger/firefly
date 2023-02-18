@@ -17,7 +17,7 @@
 
     function handleRefreshTokenMetadata(): void {
         openPopup({
-            type: 'confirmation',
+            id: 'confirmation',
             props: {
                 title: localize('actions.refreshTokenMetadata'),
                 hint: localize('general.refreshTokenMetadataHint'),

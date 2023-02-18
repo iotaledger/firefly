@@ -54,7 +54,7 @@
 
     function handleBurnToken(): void {
         modal.close()
-        openPopup({ type: 'burnNativeTokens', props: { asset } })
+        openPopup({ id: 'burnNativeTokens', props: { asset } })
     }
 </script>
 
