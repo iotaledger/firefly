@@ -3,6 +3,7 @@ const { ipcRenderer } = require('electron')
 /** Deep link manager  */
 // Runs in renderer process
 const DeepLinkManager = {
+    handleDeepLink: () => {},
     checkDeepLinkRequestExists: () => {
         ipcRenderer.send('check-deep-link-request-exists')
     },

@@ -9,9 +9,9 @@ import {
 import { openPopup } from '@auxiliary/popup'
 import { get } from 'svelte/store'
 
-import { SendOperationParameter } from '../../../enums'
-import { UnknownAssetError } from '../../../errors'
-import { getRawAmountFromSearchParam } from '../../../utils'
+import { SendOperationParameter } from '../../../../enums'
+import { UnknownAssetError } from '../../../../errors'
+import { getRawAmountFromSearchParam } from '../../../../helpers'
 
 export function handleDeepLinkSendFormOperation(searchParams: URLSearchParams): void {
     const transactionDetails = parseSendFormOperation(searchParams)

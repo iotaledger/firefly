@@ -22,7 +22,7 @@ type Complex = {
     data?: Data
 }
 
-describe('File: utils.ts', () => {
+describe('File: helpers.ts', () => {
     describe('Function: range', () => {
         it('should create ranges from valid arguments', () => {
             expect(range(0)).toEqual([])

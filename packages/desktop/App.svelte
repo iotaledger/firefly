@@ -26,7 +26,6 @@
         PlatformOption,
         setPlatform,
     } from '@core/app'
-    import { showAppNotification } from '@auxiliary/notification'
     import { closePopup, openPopup, popupState } from '@auxiliary/popup'
     import { initialiseOnboardingFlow } from '@contexts/onboarding'
     import { NetworkProtocol, NetworkType } from '@core/network'
@@ -34,6 +33,7 @@
     import { Route, ToastContainer, Transition } from '@ui'
     import { TitleBar, Popup } from '@components'
     import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from '@views'
+    import { initialiseDeepLinkManager, showDeepLinkNotification } from '@auxiliary/deep-link'
     import {
         getAppRouter,
         getRouterForAppContext,
@@ -94,6 +94,8 @@
 
         initAppSettings.set($appSettings)
 
+        initialiseDeepLinkManager()
+
         initialiseRouterManager({
             extensions: [
                 [RouterManagerExtensionName.GetAppRouter, getAppRouter],
@@ -105,8 +107,6 @@
                 [RouterManagerExtensionName.ResetRouters, resetRouters],
             ],
         })
-
-        // await pollMarketData()
 
         /* eslint-disable no-undef */
         // @ts-expect-error: This value is replaced by Webpack DefinePlugin
@@ -169,15 +169,6 @@
         Platform.removeListenersForEvent('deep-link-request')
         Platform.DeepLinkManager.clearDeepLinkRequest()
     })
-
-    function showDeepLinkNotification(): void {
-        if (!$loggedIn) {
-            showAppNotification({
-                type: 'info',
-                message: $_('notifications.deepLinkingRequest.receivedWhileLoggedOut'),
-            })
-        }
-    }
 </script>
 
 <app-container class="block w-full h-full">

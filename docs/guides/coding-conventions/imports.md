@@ -81,6 +81,6 @@ import { closePopup } from '@core/popup'
 
 import { Node, NodeInfo } from '@common/client'
 import { cleanNodeAuth } from '@common/network'
-import { setClipboard } from '@common/utils'
+import { setClipboard } from '@common/helpers'
 import { asyncGetNodeInfo, wallet } from '@common/wallet'
 ```

@@ -3,7 +3,7 @@ import { SplashScreen } from '@capacitor/splash-screen'
 
 import { IAppVersionDetails, IPlatform } from '@core/app'
 
-import { DeepLinkManager } from './lib/deepLinkManager'
+import { DeepLinkManager } from './lib/auxiliary/deep-link'
 import { NotificationManager } from './lib/notificationManager'
 import { PincodeManager } from './lib/pincodeManager'
 
@@ -29,12 +29,6 @@ export const CapacitorApi: IPlatform = {
     removeProfileFolder: () => new Promise<void>(() => {}),
 
     listProfileFolders: () => new Promise<string[]>(() => {}),
-
-    PincodeManager: PincodeManager,
-
-    DeepLinkManager: DeepLinkManager,
-
-    NotificationManager: NotificationManager,
 
     getStrongholdBackupDestination: () => new Promise<string>(() => {}),
 
@@ -140,6 +134,11 @@ export const CapacitorApi: IPlatform = {
     removeListenersForEvent: () => new Promise<void>(() => {}),
 
     saveRecoveryKit: () => new Promise<void>(() => {}),
+
+    DeepLinkManager: new DeepLinkManager(),
+    NotificationManager: NotificationManager,
+    PincodeManager: PincodeManager,
+
     ledger: undefined,
 }
 

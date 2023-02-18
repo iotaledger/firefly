@@ -1,1 +1,2 @@
-export * from './resetDeepLink'
+export * from './handleDeepLink'
+export * from './initialiseDeepLinkManager'

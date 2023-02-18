@@ -64,9 +64,6 @@ const ElectronApi = {
             }
         })
     },
-    PincodeManager: PincodeManager,
-    DeepLinkManager: DeepLinkManager,
-    NotificationManager: NotificationManager,
     async getStrongholdBackupDestination(defaultPath) {
         return ipcRenderer
             .invoke('show-save-dialog', {
@@ -319,6 +316,10 @@ const ElectronApi = {
     isFeatureFlagEnabled(keyPath) {
         return keyPath?.split('.').reduce((prev, cur) => prev && prev[cur], features)?.enabled ?? false
     },
+
+    PincodeManager: PincodeManager,
+    DeepLinkManager: DeepLinkManager,
+    NotificationManager: NotificationManager,
 }
 
 module.exports = ElectronApi

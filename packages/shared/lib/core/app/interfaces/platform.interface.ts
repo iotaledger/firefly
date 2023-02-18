@@ -28,10 +28,6 @@ export interface IPlatform {
     openUrl(url: string): void
     copyFile(sourceFilePath: string, destinationFilePath: string): Promise<void>
 
-    NotificationManager: INotificationManager | undefined
-    DeepLinkManager: IDeepLinkManager | undefined
-    PincodeManager: IPincodeManager | undefined
-
     getAppVersionDetails(): Promise<IAppVersionDetails>
 
     checkForAppUpdate(): Promise<void>
@@ -45,4 +41,8 @@ export interface IPlatform {
     removeListenersForEvent<K extends keyof IPlatformEventMap>(eventName: K): void
 
     isFeatureFlagEnabled(keyPath: string): boolean
+
+    DeepLinkManager: IDeepLinkManager | undefined
+    NotificationManager: INotificationManager | undefined
+    PincodeManager: IPincodeManager | undefined
 }

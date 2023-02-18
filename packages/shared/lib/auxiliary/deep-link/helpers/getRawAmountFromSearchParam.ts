@@ -1,4 +1,5 @@
-import { AmountNotAnIntegerError, SendOperationParameter } from '@auxiliary/deep-link'
+import { SendOperationParameter } from '../enums'
+import { AmountNotAnIntegerError } from '../errors'
 
 export function getRawAmountFromSearchParam(searchParams: URLSearchParams): string {
     let rawAmount = searchParams.get(SendOperationParameter.Amount)

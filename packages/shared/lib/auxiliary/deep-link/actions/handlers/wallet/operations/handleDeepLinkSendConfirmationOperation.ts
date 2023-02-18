@@ -12,7 +12,7 @@ import {
 } from '@core/wallet'
 import { openPopup } from '@auxiliary/popup'
 
-import { SendOperationParameter } from '../../../enums'
+import { SendOperationParameter } from '../../../../enums'
 import {
     SurplusNotANumberError,
     InvalidAddressError,
@@ -20,8 +20,8 @@ import {
     NoAddressSpecifiedError,
     TagLengthError,
     UnknownAssetError,
-} from '../../../errors'
-import { getRawAmountFromSearchParam } from '../../../utils'
+} from '../../../../errors'
+import { getRawAmountFromSearchParam } from '../../../../helpers'
 
 export function handleDeepLinkSendConfirmationOperation(searchParams: URLSearchParams): void {
     const transactionDetails = parseSendConfirmationOperation(searchParams)

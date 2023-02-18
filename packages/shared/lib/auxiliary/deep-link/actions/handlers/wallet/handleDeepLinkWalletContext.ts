@@ -2,8 +2,8 @@ import { openPopup } from '@auxiliary/popup/actions'
 import { addError } from '@core/error/stores'
 import { localize } from '@core/i18n'
 
-import { URL_CLEANUP_REGEX } from '../../constants'
-import { WalletOperation } from '../../enums'
+import { URL_CLEANUP_REGEX } from '../../../constants'
+import { WalletOperation } from '../../../enums'
 import { handleDeepLinkSendConfirmationOperation, handleDeepLinkSendFormOperation } from './operations'
 
 /**
