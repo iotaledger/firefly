@@ -7,7 +7,6 @@ import { DashboardRoute } from '@core/router/enums'
 
 import { resetDeepLink } from '../actions'
 import { DeepLinkContext } from '../enums'
-import { isDeepLinkRequestActive } from '../stores'
 
 import { handleDeepLinkGovernanceContext } from './governance/handleDeepLinkGovernanceContext'
 import { handleDeepLinkWalletContext } from './wallet/handleDeepLinkWalletContext'
@@ -20,7 +19,6 @@ import { handleError } from '@core/error/handlers'
  * @returns {void}
  */
 export function handleDeepLink(input: string): void {
-    isDeepLinkRequestActive.set(true)
     if (!input || typeof input !== 'string') {
         resetDeepLink()
         return
