@@ -6,7 +6,7 @@
     export let busyMessage: string = ''
 
     export let onSuccess: (password?: string) => unknown
-    export let returnPassword = false
+    export let returnPassword: boolean = false
 
     let password: string
     let error: string
