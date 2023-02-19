@@ -4,7 +4,7 @@
     import { Activity } from '@core/wallet'
     import { onDestroy } from 'svelte'
     import { Confirmation, StrongholdUnlock } from '@components'
-    import { ActivityAction } from '../../../../lib/contexts/dashboard'
+    import { ActivityAction } from '@/contexts/dashboard'
     import { activityRoute, ActivityRoute, activityRouter } from '../../../../lib/routers'
     import { ActivityDetails } from './views'
 

@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import features from '@features/features'
     import { Icon, Text, TextType } from '@ui'
-    import { SettingsCategory, SETTINGS_ROUTE_META } from '../../../../../../../lib/contexts/settings'
+    import { SettingsCategory, SETTINGS_ROUTE_META } from '@/contexts/settings'
     import { SettingsRoute, settingsRouter } from '../../../../../../../lib/routers'
 
     const categories = {

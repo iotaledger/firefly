@@ -5,7 +5,7 @@
         togglePrimaryNodeInClientOptions,
     } from '@core/network'
     import { activeProfile } from '@core/profile'
-    import { NetworkConfigurationSettingsAction } from '../../../../../../../../lib/contexts/settings'
+    import { NetworkConfigurationSettingsAction } from '@/contexts/settings'
     import {
         NetworkConfigurationSettingsRoute,
         networkConfigurationSettingsRoute,

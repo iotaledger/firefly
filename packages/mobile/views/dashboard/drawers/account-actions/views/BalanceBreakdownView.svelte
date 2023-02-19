@@ -5,7 +5,7 @@
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import type { AccountBalance } from '@iota/wallet'
     import { BalanceSummarySection, Button, HR } from '@ui'
-    import { AccountAction } from '../../../../../lib/contexts/dashboard'
+    import { AccountAction } from '@/contexts/dashboard'
     import { accountActionsRouter } from '../../../../../lib/routers'
 
     $: ({ baseCoin } = $selectedAccountAssets)

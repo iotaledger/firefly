@@ -7,7 +7,7 @@
     import { Icon } from '@lib/auxiliary/icon/enums'
     import { Button } from '@ui'
     import { ButtonVariant, HR } from '@ui'
-    import { AccountAction } from '../../../../../lib/contexts/dashboard'
+    import { AccountAction } from '@/contexts/dashboard'
     import { accountActionsRouter } from '../../../../../lib/routers'
 
     export let onToggleVisibilitySuccess: () => unknown

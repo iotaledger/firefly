@@ -2,7 +2,7 @@
     import { appSettings } from '@core/app'
     import { localize } from '@core/i18n'
     import { Drawer } from '@components'
-    import { SETTINGS_ROUTE_META } from '../../../../lib/contexts/settings'
+    import { SETTINGS_ROUTE_META } from '@/contexts/settings'
     import {
         networkConfigurationSettingsRoute,
         NetworkConfigurationSettingsRoute,

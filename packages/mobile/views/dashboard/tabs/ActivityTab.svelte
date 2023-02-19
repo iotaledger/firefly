@@ -2,7 +2,7 @@
     import { isStrongholdUnlocked } from '@core/profile-manager'
     import { Activity } from '@core/wallet'
     import { ActivityList } from '@components'
-    import { ActivityAction } from '../../../lib/contexts/dashboard'
+    import { ActivityAction } from '@/contexts/dashboard'
     import { activityRouter } from '../../../lib/routers'
 
     function onTileClick(activity: Activity): void {

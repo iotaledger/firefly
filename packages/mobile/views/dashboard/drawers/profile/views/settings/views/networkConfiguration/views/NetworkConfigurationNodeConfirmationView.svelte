@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { INode } from '@core/network'
     import { Button, ButtonVariant, Text, TextType } from '@ui'
-    import { NetworkConfigurationSettingsAction } from '../../../../../../../../../lib/contexts/settings'
+    import { NetworkConfigurationSettingsAction } from '@/contexts/settings'
 
     export let action: NetworkConfigurationSettingsAction = undefined
     export let node: INode = { url: '' }
