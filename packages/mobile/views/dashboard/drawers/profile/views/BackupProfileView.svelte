@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { diffDates } from '@core/utils'
     import { activeProfile } from '@core/profile'
-    import { Animation, Button, Text, TextType } from 'shared/components'
+    import { Animation, Button, Text, TextType } from '@ui'
     import { profileRouter } from '../../../../../lib/routers'
 
     let isBusy = false

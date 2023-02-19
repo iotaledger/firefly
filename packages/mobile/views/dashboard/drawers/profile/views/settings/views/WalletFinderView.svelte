@@ -20,7 +20,7 @@
         generateAndStoreActivitiesForAllAccounts,
         refreshAccountAssetsForActiveProfile,
     } from '@core/wallet'
-    import { Button, ButtonSize, KeyValueBox, Text, TextHint, TextType } from 'shared/components'
+    import { Button, ButtonSize, KeyValueBox, Text, TextHint, TextType } from '@ui'
     import { onDestroy } from 'svelte'
     import { settingsRouter } from '../../../../../../../lib/routers'
 

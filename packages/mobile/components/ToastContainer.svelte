@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Alert, Toast } from 'shared/components'
+    import { Alert, Toast } from '@ui'
     import { notifications, removeDisplayNotification } from '@auxiliary/notification/stores'
     import { fade } from 'svelte/transition'
     import { Swiper } from '../components'

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte'
     import { OnboardingLayout } from '../../../../../components'
-    import { Button, Icon, Text, TextType } from 'shared/components'
+    import { Button, Icon, Text, TextType } from '@ui'
     import { localize } from '@core/i18n'
     import { profileRecoveryRouter } from '../../../../../lib/routers'
     import { updateOnboardingProfile } from '@contexts/onboarding'

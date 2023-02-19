@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { TogglableButton } from 'shared/components'
+    import { TogglableButton } from '@ui'
     import { DashboardRoute, dashboardRoute, filterRouter, FilterType } from '../../lib/routers'
     import type { Filter } from '@core/utils/types'
     import { selectedFilter } from '../../lib/contexts/dashboard'

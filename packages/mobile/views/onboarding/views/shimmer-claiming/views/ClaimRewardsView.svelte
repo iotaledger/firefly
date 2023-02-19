@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onDestroy, onMount } from 'svelte'
     import { OnboardingLayout, ShimmerClaimingAccountList } from '../../../../../components'
-    import { Button, Text, TextType } from 'shared/components'
+    import { Button, Text, TextType } from '@ui'
     import { localize } from '@core/i18n'
     import {
         checkOrConnectLedger,

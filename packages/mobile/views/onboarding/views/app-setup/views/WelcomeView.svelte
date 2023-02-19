@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { formatProtocolName, NetworkProtocol, NetworkType } from '@core/network'
     import { appSetupRouter } from '../../../../../lib/routers'
-    import { Button, Checkbox, Text, TextType } from 'shared/components'
+    import { Button, Checkbox, Text, TextType } from '@ui'
     import {
         initialiseOnboardingProfile,
         onboardingProfile,

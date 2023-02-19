@@ -9,7 +9,7 @@
     import { getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
     import { networkSetupRouter } from '../../../../../lib/routers'
     import features from '@features/features'
-    import { OnboardingButton } from 'shared/components'
+    import { OnboardingButton } from '@ui'
     import { onMount } from 'svelte'
     import { OnboardingLayout } from '../../../../../components'
 

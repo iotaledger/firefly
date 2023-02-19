@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { getByteLengthOfString, MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
     import { newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'
-    import { Button, FontWeight, TextInput } from 'shared/components'
+    import { Button, FontWeight, TextInput } from '@ui'
     import { onMount } from 'svelte'
     import { sendRouter } from '../../../../../lib/routers'
 

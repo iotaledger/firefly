@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { ExpirationTime } from '@core/utils'
     import { newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'
-    import { Button, HR } from 'shared/components'
+    import { Button, HR } from '@ui'
     import { sendRouter } from '../../../../../lib/routers'
 
     export let onCancel: () => unknown = () => {}

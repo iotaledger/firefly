@@ -7,7 +7,7 @@
         NftActivityTileContent,
         TimelockActivityTileFooter,
         TransactionActivityTileContent,
-    } from 'shared/components'
+    } from '@ui'
     import { AsyncActivityTileFooter } from '../components'
 
     export let activity: Activity

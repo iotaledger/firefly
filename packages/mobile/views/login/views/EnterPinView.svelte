@@ -6,7 +6,7 @@
     import { loginRouter } from '../../../lib/routers'
     import { openPopup, popupState } from '@auxiliary/popup'
     import { isValidPin } from '@core/utils'
-    import { Icon, PinInput, Profile, Text, TextType } from 'shared/components'
+    import { Icon, PinInput, Profile, Text, TextType } from '@ui'
     import { onDestroy } from 'svelte'
 
     let attempts = 0

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
     import { INode } from '@core/network'
-    import { Button, ButtonVariant, Text, TextType } from 'shared/components'
+    import { Button, ButtonVariant, Text, TextType } from '@ui'
     import { NetworkConfigurationSettingsAction } from '../../../../../../../../../lib/contexts/settings'
 
     export let action: NetworkConfigurationSettingsAction = undefined

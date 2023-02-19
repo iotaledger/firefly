@@ -1,6 +1,6 @@
 <script lang="ts">
     import { selectedAccount } from '@core/account'
-    import { AddressBox, QR, Text, TextType } from 'shared/components'
+    import { AddressBox, QR, Text, TextType } from '@ui'
     import { Drawer } from '../../../components'
 
     export let onClose: () => unknown = () => {}

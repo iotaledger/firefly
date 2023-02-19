@@ -2,7 +2,7 @@
     import { showAppNotification } from '@auxiliary/notification'
     import { localize } from '@core/i18n'
     import { activeProfile, updateActiveProfile, validateProfileName } from '@core/profile'
-    import { Button, ButtonSize, HTMLButtonType, Input, Text, TextType } from 'shared/components'
+    import { Button, ButtonSize, HTMLButtonType, Input, Text, TextType } from '@ui'
 
     let newName = $activeProfile?.name
     let error = ''

@@ -1,6 +1,6 @@
 <script lang="ts">
     import { OnboardingLayout } from '../../../components'
-    import { Button, Icon, Text, TextType } from 'shared/components'
+    import { Button, Icon, Text, TextType } from '@ui'
     import { onboardingRouter } from '../../../lib/routers'
     import { localize } from '@core/i18n'
     import { completeOnboardingProcess } from '@contexts/onboarding'

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { getRandomAccountColor, validateAccountName } from '@core/account'
     import { localize } from '@core/i18n'
-    import { Button, Input } from 'shared/components'
+    import { Button, Input } from '@ui'
     import { getTrimmedLength } from '@core/utils'
     import { onMount } from 'svelte'
     import { ColorPicker } from '../../../../../components'

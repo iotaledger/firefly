@@ -1,7 +1,7 @@
 <script lang="ts">
     import { AccountColors } from '@core/account'
     import { localize } from '@core/i18n'
-    import { Icon, Text } from 'shared/components'
+    import { Icon, Text } from '@ui'
     import { isBright } from '@core/utils'
 
     export let active: string

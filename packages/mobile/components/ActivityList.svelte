@@ -1,7 +1,7 @@
 <script lang="ts">
     import { activityFilter, queriedActivities } from '@core/wallet/stores'
     import VirtualList from '@sveltejs/svelte-virtual-list'
-    import { FontWeight, Text } from 'shared/components'
+    import { FontWeight, Text } from '@ui'
     import { ActivityTile, Filter, SearchInput } from '../../mobile/components'
     import { FilterType } from '../lib/routers/routers/dashboard'
     import { time } from '@core/app'

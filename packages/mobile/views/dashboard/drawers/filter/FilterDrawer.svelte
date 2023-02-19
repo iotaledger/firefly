@@ -1,6 +1,6 @@
 <script lang="ts">
     import { get } from 'svelte/store'
-    import { Text, FontWeight } from 'shared/components'
+    import { Text, FontWeight } from '@ui'
     import { localize } from '@core/i18n'
     import { FilterRouter } from '.'
     import { Drawer } from '../../../../components'

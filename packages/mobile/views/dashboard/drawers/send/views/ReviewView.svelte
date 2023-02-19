@@ -10,7 +10,7 @@
         NewTransactionType,
         selectedAccountAssets,
     } from '@core/wallet'
-    import { ActivityInformation, BasicActivityDetails, Button, KeyValueBox, TextHint, Toggle } from 'shared/components'
+    import { ActivityInformation, BasicActivityDetails, Button, KeyValueBox, TextHint, Toggle } from '@ui'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { ExpirationTimePicker } from '../../../../../components'

@@ -6,7 +6,7 @@
     import { getInitials, isRecentDate } from '@core/utils'
     import features from '@features/features'
     import { Icon as IconTypes } from '@lib/auxiliary/icon'
-    import { FontWeight, Icon, NetworkIcon, Text, TextType } from 'shared/components'
+    import { FontWeight, Icon, NetworkIcon, Text, TextType } from '@ui'
     import {
         NetworkStatusButton,
         ProfileActionButton,

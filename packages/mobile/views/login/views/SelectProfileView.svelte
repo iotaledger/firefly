@@ -1,6 +1,6 @@
 <script lang="ts">
     import { ProfileButton } from '../../../components'
-    import { Button, Logo, Text, TextType } from 'shared/components'
+    import { Button, Logo, Text, TextType } from '@ui'
     import { needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService, appSettings } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'

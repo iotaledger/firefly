@@ -4,7 +4,7 @@
     import { selectedAccountAssets } from '@core/wallet'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import type { AccountBalance } from '@iota/wallet'
-    import { BalanceSummarySection, Button, HR } from 'shared/components'
+    import { BalanceSummarySection, Button, HR } from '@ui'
     import { AccountAction } from '../../../../../lib/contexts/dashboard'
     import { accountActionsRouter } from '../../../../../lib/routers'
 

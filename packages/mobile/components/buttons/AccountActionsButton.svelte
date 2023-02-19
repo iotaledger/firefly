@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { MeatballMenuButton } from 'shared/components'
+    import { MeatballMenuButton } from '@ui'
     import { DashboardRoute, dashboardRouter } from '../../lib/routers'
 </script>
 
