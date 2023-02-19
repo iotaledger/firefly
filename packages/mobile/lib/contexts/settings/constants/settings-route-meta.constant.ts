@@ -1,6 +1,6 @@
 import { DISCORD_URL, DOCUMENTATION_URL, FAQ_URL, ISSUE_REPORT_URL } from '@contexts/settings'
 import { SETTINGS_ICON_SVG } from '@lib/auxiliary/icon'
-import features from '../../../../features/features'
+import features from '@features/features'
 import {
     AppLockView,
     ChangePasswordView,
