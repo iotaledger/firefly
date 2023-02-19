@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { OnboardingLayout } from '../../../../../components'
+    import { OnboardingLayout } from '@components'
     import { Button, Icon, Text, TextType } from '@ui'
     import { localize } from '@core/i18n'
     import { BASE_TOKEN, NetworkProtocol } from '@core/network'

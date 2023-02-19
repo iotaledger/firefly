@@ -2,7 +2,7 @@
     import { onMount } from 'svelte'
     import { Button, PasswordInput, Text, TextType } from '@ui'
     import { localize } from '@core/i18n'
-    import { OnboardingLayout } from '../../../../../components'
+    import { OnboardingLayout } from '@components'
     import { profileRecoveryRouter } from '../../../../../lib/routers'
     import {
         CannotRestoreWithMismatchedCoinTypeError,

@@ -8,7 +8,7 @@
         TimelockActivityTileFooter,
         TransactionActivityTileContent,
     } from '@ui'
-    import { AsyncActivityTileFooter } from '../components'
+    import { AsyncActivityTileFooter } from '@components'
 
     export let activity: Activity
     export let onClick: () => unknown = () => {}

@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { getTrimmedLength } from '@core/utils'
     import { Button, Input } from '@ui'
-    import { ColorPicker } from '../../../../../components'
+    import { ColorPicker } from '@components'
 
     export let onSuccess: () => void = () => {}
 

@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { Drawer } from '../../../../components'
+    import { Drawer } from '@components'
     import { AccountActionsRoute, accountActionsRoute, accountActionsRouter } from '../../../../lib/routers'
     import AccountActionsRouter from './AccountActionsRouter.svelte'
 

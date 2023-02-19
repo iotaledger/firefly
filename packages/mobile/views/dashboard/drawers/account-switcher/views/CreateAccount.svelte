@@ -4,7 +4,7 @@
     import { Button, Input } from '@ui'
     import { getTrimmedLength } from '@core/utils'
     import { onMount } from 'svelte'
-    import { ColorPicker } from '../../../../../components'
+    import { ColorPicker } from '@components'
     import { handleError } from '@core/error/handlers/handleError'
 
     export let accountAlias: string = ''

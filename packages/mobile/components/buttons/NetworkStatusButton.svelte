@@ -8,7 +8,7 @@
         nodeInfo,
     } from '@core/network'
     import { Icon as IconTypes } from '@lib/auxiliary/icon'
-    import { ProfileActionButton } from '../../components/'
+    import { ProfileActionButton } from '@components'
 
     export let onClick: () => unknown
 

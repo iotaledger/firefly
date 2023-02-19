@@ -1,6 +1,6 @@
 <script lang="ts">
     import zxcvbn from 'zxcvbn'
-    import { OnboardingLayout } from '../../../../../components'
+    import { OnboardingLayout } from '@components'
     import { Button, PasswordInput, Text, HTMLButtonType, TextType } from '@ui'
     import { localize } from '@core/i18n'
     import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'

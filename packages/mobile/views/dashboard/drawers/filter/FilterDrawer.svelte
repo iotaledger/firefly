@@ -3,7 +3,7 @@
     import { Text, FontWeight } from '@ui'
     import { localize } from '@core/i18n'
     import { FilterRouter } from '.'
-    import { Drawer } from '../../../../components'
+    import { Drawer } from '@components'
     import type { Filter } from '@core/utils/types'
     import { filterRouter } from '../../../../lib/routers'
 

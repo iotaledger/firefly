@@ -18,7 +18,7 @@
     import { formatCurrency } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
     import { getAssetById } from '@core/wallet'
-    import { TokenUnitSwapper, TokenWithMax } from '../../../../../components'
+    import { TokenUnitSwapper, TokenWithMax } from '@components'
     import { sendRouter } from '../../../../../lib/routers'
 
     let amount: string

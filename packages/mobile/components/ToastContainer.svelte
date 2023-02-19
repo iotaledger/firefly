@@ -2,7 +2,7 @@
     import { Alert, Toast } from '@ui'
     import { notifications, removeDisplayNotification } from '@auxiliary/notification/stores'
     import { fade } from 'svelte/transition'
-    import { Swiper } from '../components'
+    import { Swiper } from '@components'
 
     $: toasts = $notifications.map((notification) => ({
         type: notification.type,

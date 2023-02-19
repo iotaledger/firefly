@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { OnboardingLayout } from '../../../../../components'
+    import { OnboardingLayout } from '@components'
     import { Button, PinInput, Text, HTMLButtonType, TextType } from '@ui'
     import {
         initialiseFirstShimmerClaimingAccount,

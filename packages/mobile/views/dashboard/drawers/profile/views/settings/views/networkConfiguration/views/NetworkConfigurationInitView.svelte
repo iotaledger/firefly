@@ -12,7 +12,7 @@
     } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { Button, HR, Text, TextType } from '@ui'
-    import { NodeListTable } from '../../../../../../../../../components'
+    import { NodeListTable } from '@components'
     import { NetworkConfigurationSettingsAction } from '../../../../../../../../../lib/contexts/settings'
     import { networkConfigurationSettingsRouter } from '../../../../../../../../../lib/routers'
 

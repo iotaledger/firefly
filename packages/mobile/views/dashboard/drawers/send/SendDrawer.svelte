@@ -1,7 +1,7 @@
 <script lang="ts">
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { Drawer } from '../../../../components'
+    import { Drawer } from '@components'
     import { sendRoute, SendRoute, sendRouter } from '../../../../lib/routers'
     import SendRouter from './SendRouter.svelte'
 

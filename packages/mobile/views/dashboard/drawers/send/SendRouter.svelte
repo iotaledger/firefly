@@ -19,7 +19,7 @@
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import type { OutputOptions } from '@iota/wallet'
     import { get } from 'svelte/store'
-    import { StrongholdUnlock } from '../../../../components'
+    import { StrongholdUnlock } from '@components'
     import { sendRoute, SendRoute, sendRouter } from '../../../../lib/routers'
     import { AmountView, Expiration, RecipientView, ReferenceView, ReviewView, TokenView } from './views'
 

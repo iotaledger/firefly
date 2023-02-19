@@ -1,7 +1,7 @@
 <script lang="ts">
     import { IAsset, newTransactionDetails, selectedAccountAssets, updateNewTransactionDetails } from '@core/wallet'
 
-    import { AssetList } from '../../../../../components'
+    import { AssetList } from '@components'
     import { sendRouter } from '../../../../../lib/routers'
 
     function onAssetClick(asset: IAsset) {

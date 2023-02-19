@@ -7,12 +7,7 @@
     import features from '@features/features'
     import { Icon as IconTypes } from '@lib/auxiliary/icon'
     import { FontWeight, Icon, NetworkIcon, Text, TextType } from '@ui'
-    import {
-        NetworkStatusButton,
-        ProfileActionButton,
-        ProfileBackupButton,
-        ProfileLockButton,
-    } from '../../../../../components/'
+    import { NetworkStatusButton, ProfileActionButton, ProfileBackupButton, ProfileLockButton } from '@components'
     import { profileRouter } from '../../../../../lib/routers'
 
     const { isStrongholdLocked } = $activeProfile

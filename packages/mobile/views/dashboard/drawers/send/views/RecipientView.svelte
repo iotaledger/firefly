@@ -7,7 +7,7 @@
     import { getSubjectFromAddress } from '@core/wallet/utils'
     import { Button, FontWeight, IOption, Text, TextType } from '@ui'
     import { onMount } from 'svelte'
-    import { RecipientInput } from '../../../../../components'
+    import { RecipientInput } from '@components'
     import { sendRouter } from '../../../../../lib/routers'
 
     let recipient: IAddressSubject | IAccountSubject

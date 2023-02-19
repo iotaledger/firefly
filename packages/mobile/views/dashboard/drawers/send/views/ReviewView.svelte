@@ -13,7 +13,7 @@
     import { ActivityInformation, BasicActivityDetails, Button, KeyValueBox, TextHint, Toggle } from '@ui'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { ExpirationTimePicker } from '../../../../../components'
+    import { ExpirationTimePicker } from '@components'
     import { sendRouter } from '../../../../../lib/routers'
 
     export let sendTransaction: () => Promise<void>

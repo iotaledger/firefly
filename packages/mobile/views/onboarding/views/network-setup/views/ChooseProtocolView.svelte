@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { OnboardingLayout } from '../../../../../components'
+    import { OnboardingLayout } from '@components'
     import { OnboardingButton } from '@ui'
     import features from '@features/features'
     import { cleanupOnboarding, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'

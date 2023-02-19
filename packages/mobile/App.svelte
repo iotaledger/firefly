@@ -14,7 +14,7 @@
         shouldBeDarkMode,
     } from '@core/app'
     import { onboardingProfile } from '@contexts/onboarding'
-    import { Route, ToastContainer } from './components'
+    import { Route, ToastContainer } from '@components'
     import { isKeyboardOpen, keyboardHeight } from './lib/auxiliary/keyboard'
     import {
         AppRoute,

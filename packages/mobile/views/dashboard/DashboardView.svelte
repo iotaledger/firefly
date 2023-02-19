@@ -5,7 +5,7 @@
     import { activeProfile, hasStrongholdLocked, reflectLockedStronghold, saveActiveProfile } from '@core/profile'
     import { selectedAccountAssets } from '@core/wallet'
     import { Button } from '@ui'
-    import { TabPane, TogglableAssetBalanceLabel, TopBar } from '../../components'
+    import { TabPane, TogglableAssetBalanceLabel, TopBar } from '@components'
     import features from '@features/features'
     import { activeDashboardTab, DASHBOARD_TAB_COMPONENT } from '../../lib/contexts/dashboard'
     import { DashboardRoute, dashboardRouter } from '../../lib/routers'

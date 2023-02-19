@@ -5,7 +5,7 @@
     import { isVisibleAsset } from '@core/wallet/utils/isVisibleAsset'
     import VirtualList from '@sveltejs/svelte-virtual-list'
     import { AssetTile, Text } from '@ui'
-    import { Filter, SearchInput } from '../components'
+    import { Filter, SearchInput } from '@components'
     import { FilterType } from '../lib/routers/routers'
 
     export let assets: IAccountAssets

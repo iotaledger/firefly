@@ -14,7 +14,7 @@
     import { profileSetupRouter } from '../../../../../lib/routers'
     import { OnboardingButton } from '@ui'
     import { onMount } from 'svelte'
-    import { OnboardingLayout } from '../../../../../components'
+    import { OnboardingLayout } from '@components'
     import features from '@features/features'
 
     const title = localize('views.onboarding.profileSetup.setup.title', {
