@@ -25,7 +25,7 @@
         resetRouterForAppContext,
         resetRouters,
     } from './lib/routers'
-    import { DashboardView, LoginRouter, OnboardingRouter } from './views'
+    import { DashboardView, LoginRouter, OnboardingRouter } from '@views'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 

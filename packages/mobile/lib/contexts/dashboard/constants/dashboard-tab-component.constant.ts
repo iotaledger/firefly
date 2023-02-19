@@ -1,4 +1,4 @@
-import { ActivityTab, TokensTab } from '../../../../views/dashboard/tabs'
+import { ActivityTab, TokensTab } from '@views/dashboard/tabs'
 import { DashboardTab } from '../enums'
 
 export const DASHBOARD_TAB_COMPONENT = {
