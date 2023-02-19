@@ -25,7 +25,7 @@
 
     function handleEditNodeDetailsClick(): void {
         openPopup({
-            type: 'addNode',
+            id: 'addNode',
             props: {
                 node,
                 isEditingNode: true,
@@ -40,7 +40,7 @@
     async function handleTogglePrimaryNodeClick(): Promise<void> {
         if (isPrimary) {
             openPopup({
-                type: 'confirmation',
+                id: 'confirmation',
                 props: {
                     title: localize('popups.unsetAsPrimaryNode.title'),
                     description: localize('popups.unsetAsPrimaryNode.body', { values: { url: node.url } }),
@@ -63,7 +63,7 @@
 
     function handleRemoveNodeClick(): void {
         openPopup({
-            type: 'confirmation',
+            id: 'confirmation',
             props: {
                 title: localize('popups.node.titleRemove'),
                 description: localize('popups.node.removeConfirmation'),
@@ -83,7 +83,7 @@
             void toggleDisabledNodeInClientOptions(node)
         } else {
             openPopup({
-                type: 'confirmation',
+                id: 'confirmation',
                 props: {
                     title: localize('popups.excludeNode.title'),
                     description: localize('popups.excludeNode.body', { values: { url: node?.url } }),

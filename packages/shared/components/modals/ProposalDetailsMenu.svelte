@@ -25,7 +25,7 @@
 
     function onRemoveProposalClick(): void {
         openPopup({
-            type: 'removeProposal',
+            id: 'removeProposal',
         })
         modal.close()
     }

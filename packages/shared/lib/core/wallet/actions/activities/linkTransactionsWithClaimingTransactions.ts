@@ -23,7 +23,7 @@ export function linkTransactionsWithClaimingTransactions(
     const sortedTransactions = transactions.sort((t1, t2) => (t1.time > t2.time ? 1 : -1))
     const incomingAsyncTransactions: IProcessedTransaction[] = []
     for (const transaction of sortedTransactions) {
-        const isClaimingTransaction = transactionsIncludedAsClaimingTransactions.includes(transaction.transactionId)
+        const isClaimingTransaction = transactionsIncludedAsClaimingTransactions.includes(transaction?.transactionId)
         const isIncomingAsyncTransaction =
             transaction.outputs.some((_output) => isOutputAsync(_output.output)) &&
             (transaction.direction === ActivityDirection.Incoming ||
@@ -33,8 +33,8 @@ export function linkTransactionsWithClaimingTransactions(
             continue
         } else if (isIncomingAsyncTransaction) {
             // If we have the corresponding claiming transaction cached in local storage, we get that data and update the async transaction
-            const claimedActivity = claimedAccountActivities?.[transaction.transactionId]
-            if (claimedActivity && claimedActivity.claimingTransactionId === transaction.transactionId) {
+            const claimedActivity = claimedAccountActivities?.[transaction?.transactionId]
+            if (claimedActivity && claimedActivity.claimingTransactionId === transaction?.transactionId) {
                 const claimingData = {
                     claimedDate: new Date(claimedActivity.claimedTimestamp),
                     claimingTransactionId: claimedActivity.claimingTransactionId,
@@ -59,11 +59,11 @@ export function linkTransactionsWithClaimingTransactions(
             if (claimedTransaction) {
                 claimedTransaction.claimingData = {
                     claimedDate: transaction.time,
-                    claimingTransactionId: transaction.transactionId,
+                    claimingTransactionId: transaction?.transactionId,
                 }
 
-                addClaimedActivity(account.index, claimedTransaction.transactionId, {
-                    id: claimedTransaction.transactionId,
+                addClaimedActivity(account.index, claimedTransaction?.transactionId, {
+                    id: claimedTransaction?.transactionId,
                     claimedTimestamp: transaction.time.getTime(),
                     claimingTransactionId: transaction.transactionId,
                 })
@@ -81,6 +81,6 @@ function searchClaimedTransactionInIncomingAsyncTransactions(
     transaction: IProcessedTransaction
 ): IProcessedTransaction {
     return allAsyncTransaction.find((candidate) =>
-        transaction.utxoInputs?.some((input) => input.transactionId === candidate.transactionId)
+        transaction.utxoInputs?.some((input) => input?.transactionId === candidate?.transactionId)
     )
 }

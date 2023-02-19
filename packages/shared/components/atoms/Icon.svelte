@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { ICON_SVG, Icon } from '@lib/auxiliary/icon'
+    import { ICON_SVG_MAP, Icon } from '@lib/auxiliary/icon'
 
     export let icon: Icon = undefined
     export let width: number | string = undefined
@@ -11,7 +11,7 @@
     export let primaryColor: string = undefined
     export let secondaryColor: string = undefined
 
-    $: selected = ICON_SVG[icon]
+    $: selected = ICON_SVG_MAP[icon]
 </script>
 
 {#if selected}

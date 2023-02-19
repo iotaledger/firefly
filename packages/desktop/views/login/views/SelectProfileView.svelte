@@ -26,7 +26,7 @@
 
     $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTermsOfService()) {
         openPopup({
-            type: 'legalUpdate',
+            id: 'legalUpdate',
             hideClose: true,
             preventClose: true,
         })

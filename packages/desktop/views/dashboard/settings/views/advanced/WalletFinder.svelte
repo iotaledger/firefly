@@ -4,7 +4,7 @@
     import { openPopup } from '@auxiliary/popup'
 
     function handleWalletFinderClick(): void {
-        openPopup({ type: 'walletFinder' })
+        openPopup({ id: 'walletFinder' })
     }
 </script>
 

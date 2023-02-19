@@ -6,7 +6,7 @@
 
     function handleDeleteClick(): void {
         openPopup({
-            type: 'confirmation',
+            id: 'confirmation',
             props: {
                 title: localize('popups.deleteProfile.title'),
                 hint: localize('popups.deleteProfile.confirmation'),

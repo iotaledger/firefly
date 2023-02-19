@@ -17,8 +17,8 @@
 </script>
 
 <Drawer {onClose} fullScreen>
-    <div>
-        <div class="flex flex-row items-center justify-between pb-6 rounded-t-xl">
+    <filter-drawer class="block">
+        <filter-drawer-header class="flex flex-row items-center justify-between pb-6 rounded-t-xl">
             <button type="button" on:click={filterRouterComponent?.clear}>
                 <Text fontSize="15" fontWeight={FontWeight.semibold} overrideColor classes="text-gray-500">
                     {localize('actions.clear')}
@@ -37,9 +37,9 @@
                     {localize('actions.apply')}
                 </Text>
             </button>
-        </div>
+        </filter-drawer-header>
         <div>
             <FilterRouter bind:this={filterRouterComponent} bind:filter />
         </div>
-    </div>
+    </filter-drawer>
 </Drawer>

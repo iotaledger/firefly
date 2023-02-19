@@ -37,7 +37,7 @@ function openPopupIfVerificationNeeded(payload: TransactionProgressEventPayload)
     if (payload) {
         if (isPreparedTransaction(payload)) {
             openPopup({
-                type: 'verifyLedgerTransaction',
+                id: 'verifyLedgerTransaction',
                 hideClose: true,
                 preventClose: true,
                 props: {
@@ -47,7 +47,7 @@ function openPopupIfVerificationNeeded(payload: TransactionProgressEventPayload)
         } else if (isPreparedTransactionEssenceHash(payload)) {
             if (get(ledgerNanoStatus)?.blindSigningEnabled) {
                 openPopup({
-                    type: 'verifyLedgerTransaction',
+                    id: 'verifyLedgerTransaction',
                     hideClose: true,
                     preventClose: true,
                     props: {
@@ -56,7 +56,7 @@ function openPopupIfVerificationNeeded(payload: TransactionProgressEventPayload)
                 })
             } else {
                 openPopup({
-                    type: 'enableLedgerBlindSigning',
+                    id: 'enableLedgerBlindSigning',
                     hideClose: true,
                     preventClose: true,
                 })
