@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { formatProtocolName, NetworkProtocol, NetworkType } from '@core/network'
     import { appSetupRouter } from '../../../../../lib/routers'
-    import { Button, Checkbox, Text, TextType } from 'shared/components'
+    import { Button, Checkbox, Link, Text, TextType } from 'shared/components'
     import {
         initialiseOnboardingProfile,
         onboardingProfile,
@@ -12,9 +12,12 @@
     } from 'shared/lib/contexts/onboarding'
     import { onMount } from 'svelte'
     import { OnboardingLayout } from '../../../../../components'
+    import { LegalDrawer } from '../drawers'
     import features from '@features/features'
 
     let checked = false
+
+    $: showLegal = false
 
     function onContinueClick(): void {
         hasCompletedAppSetup.set(true)
@@ -51,9 +54,22 @@
             <Checkbox bind:checked />
             <Text type={TextType.p} secondary>
                 I agree to the
-                <span class="text-blue-500"> Terms of Service </span>
+                <Link
+                    onClick={() => {
+                        showLegal = true
+                    }}
+                >
+                    Terms of Service
+                </Link>
             </Text>
         </div>
         <Button onClick={onContinueClick} classes="w-full">{localize('actions.continue')}</Button>
     </div>
 </OnboardingLayout>
+{#if showLegal}
+    <LegalDrawer
+        onClose={() => {
+            showLegal = false
+        }}
+    />
+{/if}
