@@ -14,7 +14,7 @@
     import { Button, HR, Text, TextType } from '@ui'
     import { NodeListTable } from '@components'
     import { NetworkConfigurationSettingsAction } from '@/contexts/settings'
-    import { networkConfigurationSettingsRouter } from '../../../../../../../../../lib/routers'
+    import { networkConfigurationSettingsRouter } from '@/routers'
 
     const { networkType } = $activeProfile
 

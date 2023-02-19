@@ -4,7 +4,7 @@
     import { diffDates } from '@core/utils'
     import { activeProfile } from '@core/profile'
     import { Animation, Button, Text, TextType } from '@ui'
-    import { profileRouter } from '../../../../../lib/routers'
+    import { profileRouter } from '@/routers'
 
     let isBusy = false
     let message = ''

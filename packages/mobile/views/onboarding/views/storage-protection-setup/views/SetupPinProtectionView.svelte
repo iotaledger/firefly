@@ -13,7 +13,7 @@
     import { ProfileType } from '@core/profile'
     import { isValidPin } from '@core/utils'
     import { onMount } from 'svelte'
-    import { storageProtectionSetupRouter } from '../../../../../lib/routers'
+    import { storageProtectionSetupRouter } from '@/routers'
 
     export let busy = false
 

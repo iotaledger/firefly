@@ -1,6 +1,6 @@
 <script lang="ts">
     import { MeatballMenuButton } from '@ui'
-    import { DashboardRoute, dashboardRouter } from '../../lib/routers'
+    import { DashboardRoute, dashboardRouter } from '@/routers'
 </script>
 
 <MeatballMenuButton

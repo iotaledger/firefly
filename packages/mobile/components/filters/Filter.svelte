@@ -1,6 +1,6 @@
 <script lang="ts">
     import { TogglableButton } from '@ui'
-    import { DashboardRoute, dashboardRoute, filterRouter, FilterType } from '../../lib/routers'
+    import { DashboardRoute, dashboardRoute, filterRouter, FilterType } from '@/routers'
     import type { Filter } from '@core/utils/types'
     import { selectedFilter } from '@/contexts/dashboard'
     import { activeProfileId } from '@core/profile'

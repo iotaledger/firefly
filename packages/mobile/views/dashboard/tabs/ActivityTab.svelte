@@ -3,7 +3,7 @@
     import { Activity } from '@core/wallet'
     import { ActivityList } from '@components'
     import { ActivityAction } from '@/contexts/dashboard'
-    import { activityRouter } from '../../../lib/routers'
+    import { activityRouter } from '@/routers'
 
     function onTileClick(activity: Activity): void {
         $activityRouter?.next({ activity })

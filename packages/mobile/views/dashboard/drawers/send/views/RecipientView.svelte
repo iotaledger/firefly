@@ -8,7 +8,7 @@
     import { Button, FontWeight, IOption, Text, TextType } from '@ui'
     import { onMount } from 'svelte'
     import { RecipientInput } from '@components'
-    import { sendRouter } from '../../../../../lib/routers'
+    import { sendRouter } from '@/routers'
 
     let recipient: IAddressSubject | IAccountSubject
     let recipientValidationError: string

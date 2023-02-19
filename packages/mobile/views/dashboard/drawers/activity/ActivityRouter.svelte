@@ -5,7 +5,7 @@
     import { onDestroy } from 'svelte'
     import { Confirmation, StrongholdUnlock } from '@components'
     import { ActivityAction } from '@/contexts/dashboard'
-    import { activityRoute, ActivityRoute, activityRouter } from '../../../../lib/routers'
+    import { activityRoute, ActivityRoute, activityRouter } from '@/routers'
     import { ActivityDetails } from './views'
 
     export let activity: Activity

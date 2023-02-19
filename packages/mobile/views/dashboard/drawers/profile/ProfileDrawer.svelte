@@ -16,7 +16,7 @@
         settingsRoute,
         SettingsRouter,
         settingsRouter,
-    } from '../../../../lib/routers'
+    } from '@/routers'
     import ProfileRouterComponent from './ProfileRouter.svelte'
 
     export let onClose: () => unknown = () => {}

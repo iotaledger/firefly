@@ -8,7 +8,7 @@
     import { TabPane, TogglableAssetBalanceLabel, TopBar } from '@components'
     import features from '@features/features'
     import { activeDashboardTab, DASHBOARD_TAB_COMPONENT } from '@/contexts/dashboard'
-    import { DashboardRoute, dashboardRouter } from '../../lib/routers'
+    import { DashboardRoute, dashboardRouter } from '@/routers'
     import DashboardRouter from './DashboardRouter.svelte'
     import { TabNavigator } from './tabs'
 

@@ -2,7 +2,7 @@
     import { IAsset, newTransactionDetails, selectedAccountAssets, updateNewTransactionDetails } from '@core/wallet'
 
     import { AssetList } from '@components'
-    import { sendRouter } from '../../../../../lib/routers'
+    import { sendRouter } from '@/routers'
 
     function onAssetClick(asset: IAsset) {
         updateNewTransactionDetails({ type: $newTransactionDetails.type, assetId: asset.id })

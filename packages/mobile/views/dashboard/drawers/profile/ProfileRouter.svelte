@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Drawer, StrongholdUnlock } from '@components'
-    import { ProfileRoute, profileRoute, profileRouter } from '../../../../lib/routers'
+    import { ProfileRoute, profileRoute, profileRouter } from '@/routers'
     import { ActionsView, BackupProfileView, NetworkStatusView, SettingsView } from './views'
 
     $: needsUnlockStore = $profileRouter?.getNeedsUnlockStore()

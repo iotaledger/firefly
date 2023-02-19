@@ -3,7 +3,7 @@
     import { ExpirationTime } from '@core/utils'
     import { newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'
     import { Button, HR } from '@ui'
-    import { sendRouter } from '../../../../../lib/routers'
+    import { sendRouter } from '@/routers'
 
     export let onCancel: () => unknown = () => {}
 

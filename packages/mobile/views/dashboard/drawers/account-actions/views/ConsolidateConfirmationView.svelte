@@ -4,7 +4,7 @@
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { Button } from '@ui'
     import { ButtonVariant, Text, TextType } from '@ui'
-    import { accountActionsRouter } from '../../../../../lib/routers'
+    import { accountActionsRouter } from '@/routers'
 
     export let onSuccess: () => unknown
 

@@ -1,6 +1,6 @@
 <script lang="ts">
     import { FilterAction } from '@/contexts/dashboard'
-    import { FilterRoute, filterRoute, filterRouter } from '../../../../lib/routers'
+    import { FilterRoute, filterRoute, filterRouter } from '@/routers'
     import { FilterView } from './views'
     import type { Filter } from '@core/utils/types'
 

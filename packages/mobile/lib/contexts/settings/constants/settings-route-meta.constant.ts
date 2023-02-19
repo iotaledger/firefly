@@ -16,7 +16,7 @@ import {
     ThemeView,
     WalletFinderView,
 } from '@views/dashboard/drawers/profile/views/settings'
-import { SettingsRoute } from '../../../routers'
+import { SettingsRoute } from '@/routers'
 import { SettingsCategory } from '../enums'
 
 const { general, security, advanced, helpAndInfo } = features.settings

@@ -5,7 +5,7 @@
     import { FilterRouter } from '.'
     import { Drawer } from '@components'
     import type { Filter } from '@core/utils/types'
-    import { filterRouter } from '../../../../lib/routers'
+    import { filterRouter } from '@/routers'
 
     export let filter: Filter
     export let onClose: () => void = () => {}

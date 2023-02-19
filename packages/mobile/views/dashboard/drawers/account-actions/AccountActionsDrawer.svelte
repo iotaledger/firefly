@@ -2,7 +2,7 @@
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { Drawer } from '@components'
-    import { AccountActionsRoute, accountActionsRoute, accountActionsRouter } from '../../../../lib/routers'
+    import { AccountActionsRoute, accountActionsRoute, accountActionsRouter } from '@/routers'
     import AccountActionsRouter from './AccountActionsRouter.svelte'
 
     export let onClose: () => unknown = () => {}

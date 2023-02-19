@@ -22,7 +22,7 @@
     } from '@core/wallet'
     import { Button, ButtonSize, KeyValueBox, Text, TextHint, TextType } from '@ui'
     import { onDestroy } from 'svelte'
-    import { settingsRouter } from '../../../../../../../lib/routers'
+    import { settingsRouter } from '@/routers'
 
     export let searchForBalancesOnLoad = false
 

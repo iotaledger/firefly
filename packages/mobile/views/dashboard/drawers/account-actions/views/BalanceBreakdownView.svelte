@@ -6,7 +6,7 @@
     import type { AccountBalance } from '@iota/wallet'
     import { BalanceSummarySection, Button, HR } from '@ui'
     import { AccountAction } from '@/contexts/dashboard'
-    import { accountActionsRouter } from '../../../../../lib/routers'
+    import { accountActionsRouter } from '@/routers'
 
     $: ({ baseCoin } = $selectedAccountAssets)
 

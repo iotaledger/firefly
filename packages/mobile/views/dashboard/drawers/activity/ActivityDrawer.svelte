@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { Activity } from '@core/wallet'
     import { Drawer } from '@components'
-    import { ActivityRoute, activityRoute } from '../../../../lib/routers'
+    import { ActivityRoute, activityRoute } from '@/routers'
     import ActivityRouter from './ActivityRouter.svelte'
 
     export let onClose: () => unknown = () => {}

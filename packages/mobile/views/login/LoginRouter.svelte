@@ -1,6 +1,6 @@
 <script lang="ts">
     import { EnterPinView, SelectProfileView, LoadProfileView } from './views'
-    import { loginRoute, LoginRoute } from '../../lib/routers'
+    import { loginRoute, LoginRoute } from '@/routers'
 </script>
 
 {#if $loginRoute === LoginRoute.SelectProfile}

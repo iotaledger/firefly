@@ -19,7 +19,7 @@
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
     import { getAssetById } from '@core/wallet'
     import { TokenUnitSwapper, TokenWithMax } from '@components'
-    import { sendRouter } from '../../../../../lib/routers'
+    import { sendRouter } from '@/routers'
 
     let amount: string
     let rawAmount: string

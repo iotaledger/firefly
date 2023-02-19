@@ -5,7 +5,7 @@
     import { localize } from '@core/i18n'
     import { formatProtocolName } from '@core/network'
     import { profiles, validateProfileName } from '@core/profile'
-    import { profileRecoveryRouter, profileSetupRouter } from '../../../../../lib/routers'
+    import { profileRecoveryRouter, profileSetupRouter } from '@/routers'
     import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
 
     const title = localize('views.onboarding.profileSetup.enterName.title', {

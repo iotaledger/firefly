@@ -8,7 +8,7 @@
     import { Icon as IconTypes } from '@lib/auxiliary/icon'
     import { FontWeight, Icon, NetworkIcon, Text, TextType } from '@ui'
     import { NetworkStatusButton, ProfileActionButton, ProfileBackupButton, ProfileLockButton } from '@components'
-    import { profileRouter } from '../../../../../lib/routers'
+    import { profileRouter } from '@/routers'
 
     const { isStrongholdLocked } = $activeProfile
     let networkProtocol: NetworkProtocol

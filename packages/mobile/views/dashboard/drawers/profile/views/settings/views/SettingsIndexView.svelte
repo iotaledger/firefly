@@ -4,7 +4,7 @@
     import features from '@features/features'
     import { Icon, Text, TextType } from '@ui'
     import { SettingsCategory, SETTINGS_ROUTE_META } from '@/contexts/settings'
-    import { SettingsRoute, settingsRouter } from '../../../../../../../lib/routers'
+    import { SettingsRoute, settingsRouter } from '@/routers'
 
     const categories = {
         [SettingsCategory.General]: {

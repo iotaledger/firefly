@@ -10,7 +10,7 @@
         stopPollingLedgerNanoStatus,
     } from '@core/ledger'
     import { unsubscribeFromWalletApiEvents } from '@core/profile-manager'
-    import { shimmerClaimingRouter } from '../../../../../lib/routers'
+    import { shimmerClaimingRouter } from '@/routers'
     import {
         canUserClaimRewards,
         claimShimmerRewards,

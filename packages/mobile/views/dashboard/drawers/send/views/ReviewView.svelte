@@ -14,7 +14,7 @@
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { ExpirationTimePicker } from '@components'
-    import { sendRouter } from '../../../../../lib/routers'
+    import { sendRouter } from '@/routers'
 
     export let sendTransaction: () => Promise<void>
     export let triggerSendOnMount: boolean = false

@@ -10,7 +10,7 @@
         NetworkConfigurationSettingsRoute,
         networkConfigurationSettingsRoute,
         networkConfigurationSettingsRouter,
-    } from '../../../../../../../../lib/routers'
+    } from '@/routers'
     import {
         NetworkConfigurationAddUpdateNodeView,
         NetworkConfigurationInitView,

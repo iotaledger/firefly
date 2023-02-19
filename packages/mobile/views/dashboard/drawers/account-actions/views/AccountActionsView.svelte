@@ -8,7 +8,7 @@
     import { Button } from '@ui'
     import { ButtonVariant, HR } from '@ui'
     import { AccountAction } from '@/contexts/dashboard'
-    import { accountActionsRouter } from '../../../../../lib/routers'
+    import { accountActionsRouter } from '@/routers'
 
     export let onToggleVisibilitySuccess: () => unknown
 

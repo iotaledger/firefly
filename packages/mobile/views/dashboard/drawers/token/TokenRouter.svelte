@@ -1,6 +1,6 @@
 <script lang="ts">
     import { IAsset } from '@core/wallet'
-    import { tokenRoute, TokenRoute, tokenRouter } from '../../../../lib/routers'
+    import { tokenRoute, TokenRoute, tokenRouter } from '@/routers'
     import { TokenInformation } from './views'
     import { TokenAction } from '@/contexts/dashboard'
 

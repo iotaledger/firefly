@@ -6,7 +6,7 @@
     import VirtualList from '@sveltejs/svelte-virtual-list'
     import { AssetTile, Text } from '@ui'
     import { Filter, SearchInput } from '@components'
-    import { FilterType } from '../lib/routers/routers'
+    import { FilterType } from '@/routers/routers/dashboard'
 
     export let assets: IAccountAssets
     export let onAssetTileClick: (asset: IAsset) => unknown = () => {}

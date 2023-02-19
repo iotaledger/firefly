@@ -14,7 +14,7 @@
         sendRouter,
         settingsRouter,
         tokenRouter,
-    } from '../../lib/routers'
+    } from '@/routers'
     import {
         AccountActionsDrawer,
         AccountSwitcherDrawer,

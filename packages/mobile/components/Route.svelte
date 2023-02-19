@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { appRoute, AppRoute } from '../lib/routers'
+    import { appRoute, AppRoute } from '@/routers'
 
     export let route: AppRoute
 </script>

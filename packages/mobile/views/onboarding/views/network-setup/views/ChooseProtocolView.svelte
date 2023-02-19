@@ -6,7 +6,7 @@
     import { cleanupOnboarding, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
-    import { networkSetupRouter } from '../../../../../lib/routers'
+    import { networkSetupRouter } from '@/routers'
     import { resetActiveProfile } from '@core/profile'
 
     const title = localize('views.onboarding.networkSetup.chooseProtocol.title')

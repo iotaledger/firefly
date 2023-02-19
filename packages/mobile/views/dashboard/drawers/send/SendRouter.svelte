@@ -20,7 +20,7 @@
     import type { OutputOptions } from '@iota/wallet'
     import { get } from 'svelte/store'
     import { StrongholdUnlock } from '@components'
-    import { sendRoute, SendRoute, sendRouter } from '../../../../lib/routers'
+    import { sendRoute, SendRoute, sendRouter } from '@/routers'
     import { AmountView, Expiration, RecipientView, ReferenceView, ReviewView, TokenView } from './views'
 
     $: ({ recipient, expirationDate, giftStorageDeposit, surplus } = $newTransactionDetails)

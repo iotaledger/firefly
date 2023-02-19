@@ -4,7 +4,7 @@
     import { OnboardingButton, Text, TextType } from '@ui'
     import features from '@features/features'
     import { localize } from '@core/i18n'
-    import { profileSetupRouter } from '../../../../../lib/routers'
+    import { profileSetupRouter } from '@/routers'
     import {
         createShimmerClaimingProfileManager,
         destroyShimmerClaimingProfileManager,
