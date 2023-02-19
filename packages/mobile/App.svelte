@@ -15,7 +15,7 @@
     } from '@core/app'
     import { onboardingProfile } from '@contexts/onboarding'
     import { Route, ToastContainer } from '@components'
-    import { isKeyboardOpen, keyboardHeight } from './lib/auxiliary/keyboard'
+    import { isKeyboardOpen, keyboardHeight } from '@/auxiliary/keyboard'
     import {
         AppRoute,
         getAppRouter,

@@ -17,7 +17,7 @@
     } from '@contexts/onboarding'
     import { showAppNotification } from '@auxiliary/notification'
     import { ClientError, CLIENT_ERROR_REGEXES } from '@core/error'
-    import { isKeyboardOpen, keyboardHeight } from '../../../../../lib/auxiliary/keyboard'
+    import { isKeyboardOpen, keyboardHeight } from '@/auxiliary/keyboard'
     export let error = ''
     export let busy = false
     const title = `${localize('general.import')} ${localize(`general.${$onboardingProfile?.recoveryType}`)}`
