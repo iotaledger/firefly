@@ -10,7 +10,7 @@
         FoundryActivityDetails,
         NftActivityDetails,
     } from '@ui'
-    import { handleClaimActivity, handleRejectActivity } from '../../lib/contexts/dashboard'
+    import { handleClaimActivity, handleRejectActivity } from '../../lib/contexts/wallet'
 
     export let activity: Activity | undefined
 

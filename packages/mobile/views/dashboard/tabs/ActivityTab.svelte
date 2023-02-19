@@ -2,7 +2,7 @@
     import { Activity } from '@core/wallet'
     import { ActivityList } from '../../../../mobile/components'
     import { DrawerId, openDrawer } from '../../../lib/auxiliary/drawer'
-    import { handleClaimActivity, handleRejectActivity } from '../../../lib/contexts/dashboard'
+    import { handleClaimActivity, handleRejectActivity } from '../../../lib/contexts/wallet'
 
     function onTileClick(activity: Activity): void {
         // TODO: when token drawer is refactor, implement this

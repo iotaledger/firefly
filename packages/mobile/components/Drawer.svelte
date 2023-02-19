@@ -4,7 +4,7 @@
     import { Icon, Text, TextType } from 'shared/components'
     import { fade, fly } from 'svelte/transition'
     import { DrawerId, DRAWER_STATIC_TITLE_TITLES } from '../lib/auxiliary/drawer'
-    import { DRAWER_IN_ANIMATION_DURATION_MS, DRAWER_OUT_ANIMATION_DURATION_MS } from '../lib/contexts/dashboard'
+    import { DRAWER_IN_ANIMATION_DURATION_MS, DRAWER_OUT_ANIMATION_DURATION_MS } from '../lib/auxiliary/drawer'
 
     export let onClose: () => unknown = () => {}
     export let onBackClick: () => unknown = () => {}
