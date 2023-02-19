@@ -9,7 +9,7 @@
         onboardingProfile,
         shouldBeDeveloperProfile,
         updateOnboardingProfile,
-    } from 'shared/lib/contexts/onboarding'
+    } from '@lib/contexts/onboarding'
     import { onMount } from 'svelte'
     import { OnboardingLayout } from '../../../../../components'
     import features from '@features/features'
