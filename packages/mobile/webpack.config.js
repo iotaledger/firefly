@@ -11,7 +11,7 @@ const prod = mode === 'production'
 const resolve = {
     alias: {
         svelte: path.dirname(require.resolve('svelte/package.json')),
-        '@auxiliary': path.resolve(__dirname, './lib/auxiliary'),
+        '@auxiliary': path.resolve(__dirname, '../shared/lib/auxiliary'),
         '@contexts': path.resolve(__dirname, '../shared/lib/contexts'),
         '@components': path.resolve(__dirname, './components/'),
         '@core': path.resolve(__dirname, '../shared/lib/core'),
@@ -19,6 +19,7 @@ const resolve = {
         '@lib': path.resolve(__dirname, '../shared/lib'),
         '@ui': path.resolve(__dirname, '../shared/components/'),
         '@views': path.resolve(__dirname, './views/'),
+        '@': path.resolve(__dirname, './lib/'),
     },
     extensions: ['.mjs', '.js', '.ts', '.svelte'],
     mainFields: ['svelte', 'browser', 'module', 'main'],
