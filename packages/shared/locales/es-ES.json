@@ -625,7 +625,7 @@
             "step_3": "Pulse el botón derecho para ir a la Configuración (Settings). Luego pulse ambos botones para validar. Su dispositivo Ledger muestra la firma ciega (Blind Signing).",
             "step_4": "Pulse ambos botones para activar la firma de la transacción ciega. El dispositivo muestra Habilitado. Ya ha terminado."
         },
-        "storageDepositBreakdown": {
+        "balanceBreakdown": {
             "title": "Desglose del depósito de almacenamiento",
             "totalStorageDeposit": "Depósito de almacenamiento total",
             "basicOutputs": {

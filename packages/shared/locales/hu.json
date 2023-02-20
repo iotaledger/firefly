@@ -625,7 +625,7 @@
             "step_3": "Nyomja meg a jobb gombot a Beállítások kiválasztásához, majd nyomja meg mindkét gombot egyszerre a jóváhagyáshoz. A hardver eszközén ekkor megjelenik a vak aláírás.",
             "step_4": "Nyomja meg mindkét gombot a tranzakciók vak aláírásának engedélyezéséhez. A hardver tárcán ekkor megjelenik: Engedélyezve."
         },
-        "storageDepositBreakdown": {
+        "balanceBreakdown": {
             "title": "Letéti dí részletezése",
             "totalStorageDeposit": "Összes letéti díj",
             "basicOutputs": {
