@@ -33,9 +33,18 @@
         openFilterItemIndex = index
     }
 
-    $: isChanged = JSON.stringify($filterStore) !== JSON.stringify(filter)
+    $: isChanged = isFilterChanged($filterStore, filter)
     $: filterActive = modal?.isOpened()
     $: activeFilterCount = Object.keys($filterStore).filter((f) => $filterStore[f].active).length
+
+    function isFilterChanged(originalFilter: Filter, filter: Filter): boolean {
+        const oldHasActiveFilters = Object.keys(originalFilter).some((key) => originalFilter[key].active)
+        const newHasActiveFilters = Object.keys(filter).some((key) => filter[key].active)
+
+        const stayedDeactivated = !oldHasActiveFilters && !newHasActiveFilters
+        const isDifferent = JSON.stringify(originalFilter) !== JSON.stringify(filter)
+        return isDifferent && !stayedDeactivated
+    }
 </script>
 
 <filter-container class="block h-6 relative">
