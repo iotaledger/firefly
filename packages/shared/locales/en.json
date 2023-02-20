@@ -637,7 +637,7 @@
             },
             "locked": {
                 "title": "Locked",
-                "subtitle": "Temporarily locked for governance and staking"
+                "subtitle": "Temporarily locked for governance"
             },
             "storageDeposit": {
                 "title": "Storage deposit",
@@ -678,10 +678,6 @@
             "governance": {
                 "title": "Governance",
                 "subtitle": "Reserved for voting power"
-            },
-            "staking": {
-                "title": "Staking",
-                "subtitle": "Reserved for staking"
             },
             "minimizeStorageDepositButton": "Minimize storage deposit"
         },

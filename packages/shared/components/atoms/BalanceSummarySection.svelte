@@ -15,14 +15,24 @@
 
     $: hasChildren = !!Object.keys(subBreakdown ?? {}).length
     $: ({ baseCoin } = $selectedAccountAssets)
-    $: formattedAmount = formatTokenAmountBestMatch(amount, baseCoin.metadata)
-    $: convertedAmount = formatCurrency(getMarketAmountFromAssetValue(amount, baseCoin))
+
+    function getAmount(amount: number): string {
+        return formatTokenAmountBestMatch(amount, baseCoin.metadata)
+    }
+
+    function getCurrencyAmount(amount: number): string {
+        return formatCurrency(getMarketAmountFromAssetValue(amount, baseCoin))
+    }
+
+    function toggleExpandedView(): void {
+        expanded = !expanded
+    }
 </script>
 
 <div class="flex flex-col space-y-8">
     <div
         class="w-full flex flex-row flex-grow justify-between space-x-2 {hasChildren ? 'cursor-pointer ' : ''}"
-        on:click={() => (expanded = !expanded)}
+        on:click={toggleExpandedView}
         on:keydown={() => {}}
     >
         {#if hasChildren}
@@ -36,8 +46,8 @@
         <BalanceSummaryRow
             title={titleKey ? localize(`popups.balanceBreakdown.${titleKey}.title`) : ''}
             subtitle={subtitleKey ? localize(`popups.balanceBreakdown.${subtitleKey}.subtitle`) : ''}
-            amount={formattedAmount}
-            {convertedAmount}
+            amount={getAmount(amount)}
+            convertedAmount={getCurrencyAmount(amount)}
             {bold}
         />
     </div>
@@ -46,10 +56,8 @@
             <BalanceSummaryRow
                 title={localize(`popups.balanceBreakdown.${breakdownKey}.title`)}
                 subtitle={localize(`popups.balanceBreakdown.${breakdownKey}.subtitle`)}
-                amount={formatTokenAmountBestMatch(subBreakdown[breakdownKey].amount, baseCoin.metadata)}
-                convertedAmount={formatCurrency(
-                    getMarketAmountFromAssetValue(subBreakdown[breakdownKey].amount, baseCoin)
-                )}
+                amount={getAmount(subBreakdown[breakdownKey].amount)}
+                convertedAmount={getCurrencyAmount(subBreakdown[breakdownKey].amount)}
                 classes="ml-8"
             />
         {/each}
