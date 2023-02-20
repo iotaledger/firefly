@@ -10,7 +10,12 @@ import { DEFAULT_NFT_NAME } from '../constants'
 import { INft } from '../interfaces'
 import { parseNftMetadata } from './parseNftMetadata'
 
-export function buildNftFromNftOutput(nftOutput: INftOutput, outputId: string, isSpendable: boolean): INft {
+export function buildNftFromNftOutput(
+    nftOutput: INftOutput,
+    outputId: string,
+    isSpendable: boolean,
+    isLocked: boolean
+): INft {
     const id = getNftId(nftOutput.nftId, outputId)
     const address = getBech32AddressFromAddressTypes({ type: ADDRESS_TYPE_NFT, nftId: id })
     const issuer = getIssuerFromNftOutput(nftOutput)
@@ -22,6 +27,7 @@ export function buildNftFromNftOutput(nftOutput: INftOutput, outputId: string, i
         name: parsedMetadata?.name ?? DEFAULT_NFT_NAME,
         issuer,
         isSpendable,
+        isLocked,
         metadata,
         parsedMetadata,
         latestOutputId: outputId,

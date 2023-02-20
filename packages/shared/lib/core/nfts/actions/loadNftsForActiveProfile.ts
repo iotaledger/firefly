@@ -4,7 +4,7 @@ import { getNftId } from '@core/wallet'
 import { get } from 'svelte/store'
 import { OUTPUT_TYPE_NFT } from '../../wallet/constants'
 import { INft } from '../interfaces'
-import { buildNftFromNftOutput, getIsSpendableFromUnspentNftOutput } from '../utils'
+import { buildNftFromNftOutput, getSpendableStatusFromUnspentNftOutput } from '../utils'
 import { setAccountNftsInAllAccountNfts } from './setAccountNftsInAllAccountNfts'
 
 export async function loadNftsForActiveProfile(): Promise<void> {
@@ -19,8 +19,11 @@ async function loadNftsForAccount(account: IAccountState): Promise<void> {
     const unspentOutputs = await account.unspentOutputs()
     for (const outputData of unspentOutputs) {
         if (outputData.output.type === OUTPUT_TYPE_NFT) {
-            const isSpendable = getIsSpendableFromUnspentNftOutput(account.depositAddress, outputData.output)
-            const nft = buildNftFromNftOutput(outputData.output, outputData.outputId, isSpendable)
+            const { isSpendable, isLocked } = getSpendableStatusFromUnspentNftOutput(
+                account.depositAddress,
+                outputData.output
+            )
+            const nft = buildNftFromNftOutput(outputData.output, outputData.outputId, isSpendable, isLocked)
             accountNfts.push(nft)
         }
     }
@@ -29,7 +32,7 @@ async function loadNftsForAccount(account: IAccountState): Promise<void> {
         if (outputData.output.type === OUTPUT_TYPE_NFT) {
             const nftId = getNftId(outputData.output.nftId, outputData.outputId)
             if (!accountNfts.some((nft) => nft.id === nftId)) {
-                const nft = buildNftFromNftOutput(outputData.output, outputData.outputId, false)
+                const nft = buildNftFromNftOutput(outputData.output, outputData.outputId, false, false)
                 accountNfts.push(nft)
             }
         }

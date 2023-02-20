@@ -49,7 +49,7 @@ export async function mintNft(metadata: IIrc27Metadata, amount: number): Promise
                 addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)
 
                 // Store NFT metadata for each minted NFT
-                const nft = buildNftFromNftOutput(output.output, activity.outputId, false)
+                const nft = buildNftFromNftOutput(output.output, activity.outputId, false, false)
                 addOrUpdateNftInAllAccountNfts(account.index, nft)
             }
         }

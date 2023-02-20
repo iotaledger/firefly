@@ -9,5 +9,6 @@ export interface INft {
     issuer?: AddressTypes
     parsedMetadata?: IIrc27Metadata
     isSpendable: boolean
+    isLocked: boolean
     latestOutputId: string
 }

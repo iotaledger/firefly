@@ -15,7 +15,9 @@
         ? { key: getNftByIdFromAllAccountNfts($selectedAccountIndex, nftId).name, value: nftId }
         : {}
 
-    const nftOptions: IOption[] = $selectedAccountNfts.map((_nft) => ({ key: _nft.name, value: _nft.id }))
+    const nftOptions: IOption[] = $selectedAccountNfts
+        .filter((nft) => nft.isSpendable && !nft.isLocked)
+        .map((_nft) => ({ key: _nft.name, value: _nft.id }))
 
     $: nftId = selected?.value
 
