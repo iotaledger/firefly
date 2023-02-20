@@ -73,6 +73,11 @@
             onClick={handleOpenMediaClick}
             disabled={!url}
         />
-        <MenuItem icon="delete" title={localize('views.collectibles.details.menu.burn')} onClick={openBurnNft} />
+        <MenuItem
+            icon="delete"
+            title={localize('views.collectibles.details.menu.burn')}
+            onClick={openBurnNft}
+            disabled={nft.isLocked}
+        />
     </div>
 </Modal>

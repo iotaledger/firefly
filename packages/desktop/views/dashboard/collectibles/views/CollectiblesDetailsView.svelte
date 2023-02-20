@@ -215,7 +215,9 @@
             <Button outline classes="flex-1" onClick={handleExplorerClick} disabled={!explorerUrl}>
                 {localize('general.viewOnExplorer')}
             </Button>
-            <Button classes="flex-1" onClick={handleSendClick}>{localize('actions.send')}</Button>
+            <Button classes="flex-1" onClick={handleSendClick} disabled={nft.isLocked}
+                >{localize('actions.send')}</Button
+            >
         </div>
     </Pane>
 </div>
