@@ -3,6 +3,8 @@
     import { Text, FontWeight, NftMedia, TooltipIcon, Position } from 'shared/components'
     import { CollectiblesRoute, collectiblesRouter } from '@core/router'
     import { selectedNftId } from '@core/nfts/stores'
+    import { Icon } from '@auxiliary/icon'
+    import { localize } from '@core/i18n'
 
     export let nft: INft
 
@@ -62,8 +64,17 @@
                 </div>
             {/if}
         </div>
-        <div class="w-full flex flex-col justify-center p-3.5 bg-white dark:bg-gray-800">
+        <div class="w-full flex flex-row align-center justify-between p-3.5 bg-white dark:bg-gray-800">
             <Text fontWeight={FontWeight.semibold} fontSize="12" classes="text-left truncate">{nft.name}</Text>
+            {#if nft.isLocked}
+                <TooltipIcon
+                    icon={Icon.Timelock}
+                    iconClasses="text-gray-600 dark:text-gray-200"
+                    title={localize('general.timelockDate')}
+                    text={localize('tooltips.transactionDetails.incoming.timelockDate')}
+                    position={Position.Top}
+                />
+            {/if}
         </div>
     </div>
 </button>
