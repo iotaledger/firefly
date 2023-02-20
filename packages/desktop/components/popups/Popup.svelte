@@ -51,7 +51,6 @@
     import UnlockStrongholdPopup from './UnlockStrongholdPopup.svelte'
     import VerifyLedgerTransactionPopup from './VerifyLedgerTransactionPopup.svelte'
     import VersionPopup from './VersionPopup.svelte'
-    import VideoPopup from './VideoPopup.svelte'
     import VoteForProposal from './VoteForProposalPopup.svelte'
     import VotingPowerToZeroPopup from './VotingPowerToZeroPopup.svelte'
     import WalletFinderPopup from './WalletFinderPopup.svelte'
@@ -80,7 +79,6 @@
         case 'manageAccount':
             size = PopupSize.Small
             break
-        case 'video':
         case 'ledgerAppGuide':
         case 'ledgerConnectionGuide':
             size = PopupSize.Large
@@ -138,7 +136,6 @@
         [PopupId.UnlockStronghold]: UnlockStrongholdPopup,
         [PopupId.VerifyLedgerTransaction]: VerifyLedgerTransactionPopup,
         [PopupId.Version]: VersionPopup,
-        [PopupId.Video]: VideoPopup,
         [PopupId.VoteForProposal]: VoteForProposal,
         [PopupId.VotingPowerToZero]: VotingPowerToZeroPopup,
         [PopupId.WalletFinder]: WalletFinderPopup,

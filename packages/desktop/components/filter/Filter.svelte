@@ -1,7 +1,8 @@
 <script lang="ts">
-    import { TogglableButton, FilterModal, FilterItem, Modal } from 'shared/components'
-    import { deepCopy, Filter } from '@core/utils'
     import type { Writable } from 'svelte/store'
+    import { TogglableButton, Modal } from '@ui'
+    import { FilterItem, FilterModal } from '@components'
+    import { deepCopy, Filter } from '@core/utils'
 
     export let filterStore: Writable<Filter>
     let filter: Filter = deepCopy($filterStore)
@@ -32,12 +33,21 @@
         openFilterItemIndex = index
     }
 
-    $: isChanged = JSON.stringify($filterStore) !== JSON.stringify(filter)
+    $: isChanged = isFilterChanged($filterStore, filter)
     $: filterActive = modal?.isOpened()
     $: activeFilterCount = Object.keys($filterStore).filter((f) => $filterStore[f].active).length
+
+    function isFilterChanged(originalFilter: Filter, filter: Filter): boolean {
+        const oldHasActiveFilters = Object.keys(originalFilter).some((key) => originalFilter[key].active)
+        const newHasActiveFilters = Object.keys(filter).some((key) => filter[key].active)
+
+        const stayedDeactivated = !oldHasActiveFilters && !newHasActiveFilters
+        const isDifferent = JSON.stringify(originalFilter) !== JSON.stringify(filter)
+        return isDifferent && !stayedDeactivated
+    }
 </script>
 
-<div class="h-6 relative">
+<filter-container class="block h-6 relative">
     <TogglableButton icon="filter" bind:active={filterActive} onClick={modal?.toggle} />
     {#if activeFilterCount}
         <filter-badge
@@ -46,7 +56,6 @@
             {activeFilterCount}
         </filter-badge>
     {/if}
-
     <FilterModal bind:modal bind:filter {isChanged} {onSetFilters} {onClose}>
         {#each Object.keys(filter) as filterUnit, index}
             <FilterItem
@@ -57,4 +66,4 @@
             />
         {/each}
     </FilterModal>
-</div>
+</filter-container>
