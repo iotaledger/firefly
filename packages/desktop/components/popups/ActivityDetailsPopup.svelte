@@ -20,7 +20,6 @@
         ActivityDirection,
         ActivityType,
         claimActivity,
-        getAssetFromPersistedAssets,
         rejectActivity,
         selectedAccountActivities,
     } from '@core/wallet'
@@ -37,53 +36,12 @@
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
     $: activity = $selectedAccountActivities.find((_activity) => _activity.id === activityId)
-    $: asset =
-        activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry
-            ? getAssetFromPersistedAssets(activity.assetId)
-            : undefined
     $: isTimelocked = activity.asyncData?.asyncStatus === ActivityAsyncStatus.Timelocked
     $: isActivityIncomingAndUnclaimed =
         activity.asyncData &&
         (activity.direction === ActivityDirection.Incoming ||
             activity.direction === ActivityDirection.SelfTransaction) &&
         activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
-
-    let details: Record<string, unknown>
-    $: activity, (details = getActivityDetails())
-
-    function getActivityDetails(): Record<string, unknown> {
-        if (!activity) {
-            return {}
-        }
-        const details = {
-            transactionTime: activity.time,
-            inclusionState: activity.inclusionState,
-            tag: activity?.tag,
-            metadata: activity?.metadata,
-            direction: activity.direction,
-            asyncStatus: activity.asyncData?.asyncStatus,
-            claimedDate: activity.asyncData?.claimedDate,
-            claimingTransactionId: activity.asyncData?.claimingTransactionId,
-            expirationDate:
-                activity.asyncData?.asyncStatus !== ActivityAsyncStatus.Claimed
-                    ? activity.asyncData?.expirationDate
-                    : null,
-            timelockDate: activity.asyncData?.timelockDate,
-            subject: activity.subject,
-        }
-        if (activity.type === ActivityType.Basic) {
-            return {
-                ...details,
-                action: activity.action,
-                asset,
-                storageDeposit: activity.storageDeposit,
-                rawAmount: activity.rawAmount,
-                unit: asset?.metadata?.unit,
-                giftedStorageDeposit: activity.giftedStorageDeposit,
-                isInternal: activity.isInternal,
-            }
-        }
-    }
 
     function handleExplorerClick(): void {
         openUrlInBrowser(`${explorerUrl}/${ExplorerEndpoint.Transaction}/${activity?.transactionId}`)
