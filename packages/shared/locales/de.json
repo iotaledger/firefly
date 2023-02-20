@@ -625,7 +625,7 @@
             "step_3": "Drücke die rechte Taste, um zu den Einstellungen zu navigieren. Drücke dann beide Schaltflächen, um sie zu validieren. Dein Ledger-Gerät zeigt Blindsignierung an.",
             "step_4": "Drücke beide Tasten, um die Transaktionsblindsignierung zu aktivieren. Das Gerät wird aktiviert. Du bist fertig."
         },
-        "storageDepositBreakdown": {
+        "balanceBreakdown": {
             "title": "Übersicht Storage Deposit",
             "totalStorageDeposit": "Gesamte Storage Deposit",
             "basicOutputs": {
