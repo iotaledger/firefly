@@ -1,92 +1,143 @@
-<script lang="typescript">
+<script lang="ts">
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { selectedAccountAssets } from '@core/wallet'
+    import {
+        OUTPUT_TYPE_TREASURY,
+        UNLOCK_CONDITION_EXPIRATION,
+        UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN,
+        UNLOCK_CONDITION_TIMELOCK,
+    } from '@core/wallet'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
-    import type { AccountBalance } from '@iota/wallet'
-    import { BalanceSummarySection, Button, HR } from 'shared/components'
+    import type { UnlockConditionTypes } from '@iota/types'
+    import { BalanceSummarySection, Button, FontWeight, Text } from 'shared/components'
     import { AccountAction } from '../../../../../lib/contexts/dashboard'
     import { accountActionsRouter } from '../../../../../lib/routers'
 
-    $: ({ baseCoin } = $selectedAccountAssets)
-
-    let accountBalance: AccountBalance
-    $: $selectedAccount, void getAccountBalance()
-    async function getAccountBalance(): Promise<void> {
-        accountBalance = await $selectedAccount.getBalance()
+    interface Breakdown {
+        amount: number
+        subBreakdown?: { [key: string]: { amount: number } }
     }
 
-    let potentiallyLockedOutputsStorageDeposit: number
-    $: accountBalance, void calculatePendingTransactionStorageDeposit()
-    async function calculatePendingTransactionStorageDeposit(): Promise<void> {
-        potentiallyLockedOutputsStorageDeposit = 0
-        for (const [outputId, unlocked] of Object.entries(accountBalance?.potentiallyLockedOutputs ?? {})) {
-            if (!unlocked) {
-                const output = (await $selectedAccount.getOutput(outputId)).output
-                const storageDeposit = getStorageDepositFromOutput(output).storageDeposit
-                potentiallyLockedOutputsStorageDeposit += storageDeposit
-            }
+    enum PendingFundsType {
+        Unclaimed = 'unclaimed',
+        StorageDepositReturn = 'storageDepositReturn',
+        Timelock = 'timelock',
+    }
+
+    $: accountBalance = $selectedAccount.balances
+
+    let breakdown: { [key: string]: Breakdown } = {}
+    $: accountBalance, void setBreakdown()
+    async function setBreakdown(): Promise<void> {
+        const availableBreakdown = getAvailableBreakdown()
+        const pendingBreakdown = await getPendingBreakdown()
+        const lockedBreakdown = getLockedBreakdown()
+        const storageDepositBreakdown = getStorageDepositBreakdown()
+
+        breakdown = {
+            available: availableBreakdown,
+            pending: pendingBreakdown,
+            locked: lockedBreakdown,
+            storageDeposit: storageDepositBreakdown,
         }
     }
 
-    $: totalStorageDeposit = accountBalance?.requiredStorageDeposit
-        ? Object.values(accountBalance?.requiredStorageDeposit).reduce(
-              (total: number, value: string): number => total + Number(value),
-              potentiallyLockedOutputsStorageDeposit
-          )
-        : potentiallyLockedOutputsStorageDeposit
+    function getAvailableBreakdown(): Breakdown {
+        return { amount: Number(accountBalance?.baseCoin?.available ?? 0) }
+    }
 
-    function handleConsolidation(): void {
+    async function getPendingBreakdown(): Promise<Breakdown> {
+        let pendingOutputsStorageDeposit = 0
+
+        const subBreakdown = {}
+        for (const [outputId, unlocked] of Object.entries(accountBalance?.potentiallyLockedOutputs ?? {})) {
+            if (!unlocked) {
+                const output = (await $selectedAccount.getOutput(outputId)).output
+
+                let type: string
+                let amount: number
+                if (output.type !== OUTPUT_TYPE_TREASURY) {
+                    if (containsUnlockCondition(output.unlockConditions, UNLOCK_CONDITION_EXPIRATION)) {
+                        type = PendingFundsType.Unclaimed
+                        amount = Number(output.amount)
+                    } else if (
+                        containsUnlockCondition(output.unlockConditions, UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN)
+                    ) {
+                        type = PendingFundsType.StorageDepositReturn
+                        amount = getStorageDepositFromOutput(output).storageDeposit
+                    } else if (containsUnlockCondition(output.unlockConditions, UNLOCK_CONDITION_TIMELOCK)) {
+                        type = PendingFundsType.Timelock
+                        amount = Number(output.amount)
+                    }
+                }
+
+                if (!subBreakdown[type]) {
+                    subBreakdown[type] = amount
+                } else {
+                    subBreakdown[type] += amount
+                }
+                pendingOutputsStorageDeposit += amount
+            }
+        }
+
+        return { amount: pendingOutputsStorageDeposit, subBreakdown }
+    }
+
+    function getLockedBreakdown(): Breakdown {
+        const governanceAmount = parseInt($selectedAccount?.votingPower, 10)
+        const totalLockedAmount = governanceAmount
+
+        const subBreakdown = {
+            governance: { amount: governanceAmount },
+        }
+
+        return { amount: totalLockedAmount, subBreakdown }
+    }
+
+    function getStorageDepositBreakdown(): Breakdown {
+        const storageDeposits = accountBalance?.requiredStorageDeposit
+        const totalStorageDeposit = storageDeposits
+            ? Object.values(accountBalance.requiredStorageDeposit).reduce(
+                  (total: number, value: string): number => total + Number(value ?? 0),
+                  0
+              )
+            : 0
+
+        const subBreakdown = {
+            basicOutputs: { amount: Number(storageDeposits?.basic ?? 0) },
+            nftOutputs: { amount: Number(storageDeposits?.nft ?? 0) },
+            aliasOutputs: { amount: Number(storageDeposits?.alias ?? 0) },
+            foundryOutputs: { amount: Number(storageDeposits?.foundry ?? 0) },
+        }
+
+        return { amount: totalStorageDeposit, subBreakdown }
+    }
+
+    function containsUnlockCondition(unlockConditions: UnlockConditionTypes[], unlockConditionId: number) {
+        return unlockConditions.some((unlockCondition) => unlockCondition.type === unlockConditionId)
+    }
+
+    function onConsolidationClick(): void {
         $accountActionsRouter.next({ action: AccountAction.Consolidate })
     }
 </script>
 
-<div class="flex flex-col justify-between space-y-8 flex-1 relative">
-    <div class="balance-breakdown flex flex-col overflow-y-auto flex-1 space-y-4">
-        <HR hidden />
-        <BalanceSummarySection
-            title={localize('popups.balanceBreakdown.basicOutputs.title')}
-            subtitle={localize('popups.balanceBreakdown.basicOutputs.subtitle')}
-            amount={Number(accountBalance?.requiredStorageDeposit?.basic ?? 0)}
-            asset={baseCoin}
-        />
-        <HR hidden />
-        <BalanceSummarySection
-            title={localize('popups.balanceBreakdown.nftOutputs.title')}
-            subtitle={localize('popups.balanceBreakdown.nftOutputs.subtitle')}
-            amount={Number(accountBalance?.requiredStorageDeposit?.nft ?? 0)}
-            asset={baseCoin}
-        />
-        <HR hidden />
-        <BalanceSummarySection
-            title={localize('popups.balanceBreakdown.aliasOutputs.title')}
-            subtitle={localize('popups.balanceBreakdown.aliasOutputs.subtitle')}
-            amount={Number(accountBalance?.requiredStorageDeposit?.alias ?? 0)}
-            asset={baseCoin}
-        />
-        <HR hidden />
-        <BalanceSummarySection
-            title={localize('popups.balanceBreakdown.foundryOutputs.title')}
-            subtitle={localize('popups.balanceBreakdown.foundryOutputs.subtitle')}
-            amount={Number(accountBalance?.requiredStorageDeposit?.foundry ?? 0)}
-            asset={baseCoin}
-        />
-        <HR hidden />
-        <BalanceSummarySection
-            title={localize('popups.balanceBreakdown.pendingTransactions.title')}
-            subtitle={localize('popups.balanceBreakdown.pendingTransactions.subtitle')}
-            amount={potentiallyLockedOutputsStorageDeposit}
-            asset={baseCoin}
-        />
-        <HR hidden />
-        <BalanceSummarySection
-            title={localize('popups.balanceBreakdown.totalStorageDeposit')}
-            amount={totalStorageDeposit}
-            asset={baseCoin}
-            totalRow
-        />
+<div class="flex flex-col space-y-6">
+    <Text type="h3" fontWeight={FontWeight.semibold} lineHeight="6">
+        {localize('popups.balanceBreakdown.title')}
+    </Text>
+    <div class="balance-breakdown flex flex-col space-y-8">
+        {#each Object.keys(breakdown) as breakdownKey}
+            <BalanceSummarySection
+                titleKey={breakdownKey}
+                subtitleKey={breakdownKey}
+                amount={breakdown[breakdownKey].amount}
+                subBreakdown={breakdown[breakdownKey].subBreakdown}
+            />
+        {/each}
+        <BalanceSummarySection titleKey="totalBalance" amount={Number(accountBalance?.baseCoin?.total ?? 0)} bold />
     </div>
-    <Button onClick={handleConsolidation}>
+    <Button onClick={onConsolidationClick}>
         {localize('popups.balanceBreakdown.minimizeStorageDepositButton')}
     </Button>
 </div>
