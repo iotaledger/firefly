@@ -12,7 +12,6 @@
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import type { UnlockConditionTypes } from '@iota/types'
-    import type { AccountBalance } from '@iota/wallet'
     import { BalanceSummarySection, Button, FontWeight, Text } from 'shared/components'
 
     interface Breakdown {
@@ -26,11 +25,7 @@
         Timelock = 'timelock',
     }
 
-    let accountBalance: AccountBalance
-    $: $selectedAccount, void setAccountBalance()
-    async function setAccountBalance(): Promise<void> {
-        accountBalance = await $selectedAccount.getBalance()
-    }
+    $: accountBalance = $selectedAccount.balances
 
     let breakdown: { [key: string]: Breakdown } = {}
     $: accountBalance, void setBreakdown()
@@ -89,10 +84,6 @@
         return { amount: pendingOutputsStorageDeposit, subBreakdown }
     }
 
-    function containsUnlockCondition(unlockConditions: UnlockConditionTypes[], unlockConditionId: number) {
-        return unlockConditions.some((unlockCondition) => unlockCondition.type === unlockConditionId)
-    }
-
     function getLockedBreakdown(): Breakdown {
         const governanceAmount = parseInt($selectedAccount?.votingPower, 10)
         const totalLockedAmount = governanceAmount
@@ -105,21 +96,26 @@
     }
 
     function getStorageDepositBreakdown(): Breakdown {
-        const totalStorageDeposit = accountBalance?.requiredStorageDeposit
+        const storageDeposits = accountBalance?.requiredStorageDeposit
+        const totalStorageDeposit = storageDeposits
             ? Object.values(accountBalance.requiredStorageDeposit).reduce(
-                  (total: number, value: string): number => total + Number(value),
+                  (total: number, value: string): number => total + Number(value ?? 0),
                   0
               )
             : 0
 
         const subBreakdown = {
-            basicOutputs: { amount: Number(accountBalance?.requiredStorageDeposit?.basic ?? 0) },
-            nftOutputs: { amount: Number(accountBalance?.requiredStorageDeposit?.nft ?? 0) },
-            aliasOutputs: { amount: Number(accountBalance?.requiredStorageDeposit?.alias ?? 0) },
-            foundryOutputs: { amount: Number(accountBalance?.requiredStorageDeposit?.foundry ?? 0) },
+            basicOutputs: { amount: Number(storageDeposits?.basic ?? 0) },
+            nftOutputs: { amount: Number(storageDeposits?.nft ?? 0) },
+            aliasOutputs: { amount: Number(storageDeposits?.alias ?? 0) },
+            foundryOutputs: { amount: Number(storageDeposits?.foundry ?? 0) },
         }
 
         return { amount: totalStorageDeposit, subBreakdown }
+    }
+
+    function containsUnlockCondition(unlockConditions: UnlockConditionTypes[], unlockConditionId: number) {
+        return unlockConditions.some((unlockCondition) => unlockCondition.type === unlockConditionId)
     }
 
     function onConsolidationClick(): void {
