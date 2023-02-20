@@ -45,49 +45,49 @@
     <div class="balance-breakdown flex flex-col overflow-y-auto flex-1 space-y-4">
         <HR hidden />
         <BalanceSummarySection
-            title={localize('popups.storageDepositBreakdown.basicOutputs.title')}
-            subtitle={localize('popups.storageDepositBreakdown.basicOutputs.subtitle')}
+            title={localize('popups.balanceBreakdown.basicOutputs.title')}
+            subtitle={localize('popups.balanceBreakdown.basicOutputs.subtitle')}
             amount={Number(accountBalance?.requiredStorageDeposit?.basic ?? 0)}
             asset={baseCoin}
         />
         <HR hidden />
         <BalanceSummarySection
-            title={localize('popups.storageDepositBreakdown.nftOutputs.title')}
-            subtitle={localize('popups.storageDepositBreakdown.nftOutputs.subtitle')}
+            title={localize('popups.balanceBreakdown.nftOutputs.title')}
+            subtitle={localize('popups.balanceBreakdown.nftOutputs.subtitle')}
             amount={Number(accountBalance?.requiredStorageDeposit?.nft ?? 0)}
             asset={baseCoin}
         />
         <HR hidden />
         <BalanceSummarySection
-            title={localize('popups.storageDepositBreakdown.aliasOutputs.title')}
-            subtitle={localize('popups.storageDepositBreakdown.aliasOutputs.subtitle')}
+            title={localize('popups.balanceBreakdown.aliasOutputs.title')}
+            subtitle={localize('popups.balanceBreakdown.aliasOutputs.subtitle')}
             amount={Number(accountBalance?.requiredStorageDeposit?.alias ?? 0)}
             asset={baseCoin}
         />
         <HR hidden />
         <BalanceSummarySection
-            title={localize('popups.storageDepositBreakdown.foundryOutputs.title')}
-            subtitle={localize('popups.storageDepositBreakdown.foundryOutputs.subtitle')}
+            title={localize('popups.balanceBreakdown.foundryOutputs.title')}
+            subtitle={localize('popups.balanceBreakdown.foundryOutputs.subtitle')}
             amount={Number(accountBalance?.requiredStorageDeposit?.foundry ?? 0)}
             asset={baseCoin}
         />
         <HR hidden />
         <BalanceSummarySection
-            title={localize('popups.storageDepositBreakdown.pendingTransactions.title')}
-            subtitle={localize('popups.storageDepositBreakdown.pendingTransactions.subtitle')}
+            title={localize('popups.balanceBreakdown.pendingTransactions.title')}
+            subtitle={localize('popups.balanceBreakdown.pendingTransactions.subtitle')}
             amount={potentiallyLockedOutputsStorageDeposit}
             asset={baseCoin}
         />
         <HR hidden />
         <BalanceSummarySection
-            title={localize('popups.storageDepositBreakdown.totalStorageDeposit')}
+            title={localize('popups.balanceBreakdown.totalStorageDeposit')}
             amount={totalStorageDeposit}
             asset={baseCoin}
             totalRow
         />
     </div>
     <Button onClick={handleConsolidation}>
-        {localize('popups.storageDepositBreakdown.minimizeStorageDepositButton')}
+        {localize('popups.balanceBreakdown.minimizeStorageDepositButton')}
     </Button>
 </div>
 

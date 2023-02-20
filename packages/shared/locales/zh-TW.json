@@ -625,7 +625,7 @@
             "step_3": "按下右鍵來瀏覽設定。然後同時按下左右兩鍵做確認。你的 Ledger 裝飾顯示 Blind Signing。",
             "step_4": "同時按下雙鍵來啟用交易 Blind Signing。裝置顯示啟用。代表已完成。"
         },
-        "storageDepositBreakdown": {
+        "balanceBreakdown": {
             "title": "存儲空間費用總覽",
             "totalStorageDeposit": "總存入之存儲空間費用",
             "basicOutputs": {

@@ -625,7 +625,7 @@
             "step_3": "Tryk på højre knap for at gå til Indstillinger. Tryk derefter på begge knapper for at bekræfte. Ledger-enheden viser Blind Signering.",
             "step_4": "Tryk på begge knapper for at aktivere blind signeringstransaktion. Enheden vises Aktiveret. Det var dét."
         },
-        "storageDepositBreakdown": {
+        "balanceBreakdown": {
             "title": "Storage deposit breakdown",
             "totalStorageDeposit": "Total storage deposit",
             "basicOutputs": {

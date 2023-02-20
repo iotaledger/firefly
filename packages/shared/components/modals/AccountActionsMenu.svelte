@@ -17,8 +17,8 @@
         modal.close()
     }
 
-    function handleViewStorageDepositClick(): void {
-        openPopup({ id: 'storageDepositBreakdown' })
+    function handleViewBalanceClick(): void {
+        openPopup({ id: 'balanceBreakdown' })
         modal.close()
     }
 
@@ -36,11 +36,7 @@
 
 <Modal bind:this={modal} {...$$restProps}>
     <div class="flex flex-col">
-        <MenuItem
-            icon={Icon.Doc}
-            title={localize('actions.viewStorageDeposit')}
-            onClick={handleViewStorageDepositClick}
-        />
+        <MenuItem icon={Icon.Doc} title={localize('actions.viewBalanceBreakdown')} onClick={handleViewBalanceClick} />
         <MenuItem
             icon={Icon.Customize}
             title={localize('actions.customizeAcount')}

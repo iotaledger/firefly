@@ -625,7 +625,7 @@
             "step_3": "Naciśnij prawy przycisk, aby przejść do opcji Ustawienia. Następnie naciśnij oba przyciski, aby zatwierdzić. Na urządzeniu Ledger pojawi się komunikat Blind Signing.",
             "step_4": "Naciśnij oba przyciski, aby włączyć Bling Signing transakcji. Na urządzeniu wyświetli się komunikat Enabled. Gotowe."
         },
-        "storageDepositBreakdown": {
+        "balanceBreakdown": {
             "title": "Zestawienie depozytu magazynowego",
             "totalStorageDeposit": "Całkowity depozyt magazynowy",
             "basicOutputs": {
