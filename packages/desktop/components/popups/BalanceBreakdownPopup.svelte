@@ -12,9 +12,9 @@
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import type { UnlockConditionTypes } from '@iota/types'
-    import { BalanceSummarySection, Button, FontWeight, Text } from 'shared/components'
+    import { BalanceSummarySection, Button, FontWeight, Text, TextType } from 'shared/components'
 
-    interface Breakdown {
+    interface BalanceBreakdown {
         amount: number
         subBreakdown?: { [key: string]: { amount: number } }
     }
@@ -27,7 +27,7 @@
 
     $: accountBalance = $selectedAccount.balances
 
-    let breakdown: { [key: string]: Breakdown } = {}
+    let breakdown: { [key: string]: BalanceBreakdown } = {}
     $: accountBalance, void setBreakdown()
     async function setBreakdown(): Promise<void> {
         const availableBreakdown = getAvailableBreakdown()
@@ -43,11 +43,11 @@
         }
     }
 
-    function getAvailableBreakdown(): Breakdown {
+    function getAvailableBreakdown(): BalanceBreakdown {
         return { amount: Number(accountBalance?.baseCoin?.available ?? 0) }
     }
 
-    async function getPendingBreakdown(): Promise<Breakdown> {
+    async function getPendingBreakdown(): Promise<BalanceBreakdown> {
         let pendingOutputsStorageDeposit = 0
 
         const subBreakdown = {}
@@ -84,7 +84,7 @@
         return { amount: pendingOutputsStorageDeposit, subBreakdown }
     }
 
-    function getLockedBreakdown(): Breakdown {
+    function getLockedBreakdown(): BalanceBreakdown {
         const governanceAmount = parseInt($selectedAccount?.votingPower, 10)
         const totalLockedAmount = governanceAmount
 
@@ -95,7 +95,7 @@
         return { amount: totalLockedAmount, subBreakdown }
     }
 
-    function getStorageDepositBreakdown(): Breakdown {
+    function getStorageDepositBreakdown(): BalanceBreakdown {
         const storageDeposits = accountBalance?.requiredStorageDeposit
         const totalStorageDeposit = storageDeposits
             ? Object.values(accountBalance.requiredStorageDeposit).reduce(
@@ -141,7 +141,7 @@
 </script>
 
 <div class="flex flex-col space-y-6">
-    <Text type="h3" fontWeight={FontWeight.semibold} lineHeight="6">
+    <Text type={TextType.h3} fontWeight={FontWeight.semibold} lineHeight="6">
         {localize('popups.balanceBreakdown.title')}
     </Text>
     <div class="flex flex-col space-y-8">
