@@ -1,72 +1,54 @@
 <script lang="ts">
-    import { formatCurrency } from '@core/i18n'
+    import { formatCurrency, localize } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
-    import { formatTokenAmountBestMatch, IAsset } from '@core/wallet'
-    import { FontWeight, Text } from 'shared/components'
+    import { formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
+    import { BalanceSummaryRow, Icon } from 'shared/components'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
-    export let totalRow = false
-    export let title: string
-    export let subtitle: string = ''
+    export let key: string
+    export let subBreakdown: { [key: string]: { amount: number } } = undefined
     export let amount: number
-    export let asset: IAsset
 
-    $: formattedAmount = formatTokenAmountBestMatch(amount, asset?.metadata)
-    $: convertedAmount = formatCurrency(getMarketAmountFromAssetValue(amount, asset))
+    let expanded = false
 
-    const PRIMARY_COLOR = 'gray-800'
-    const PRIMARY_DARK_COLOR = 'white'
-    const PRIMARY_FONT_SIZE = '15'
-    const PRIMARY_FONT_WEIGHT = FontWeight.normal
-    const PRIMARY_LINE_HEIGHT = '5'
-
-    const SECONDARY_COLOR = 'gray-600'
-    const SECONDARY_DARK_COLOR = 'gray-400'
-    const SECONDARY_FONT_SIZE = '13'
-    const SECONDARY_FONT_WEIGHT = FontWeight.normal
-    const SECONDARY_LINE_HEIGHT = '4'
+    $: hasChildren = !!Object.keys(subBreakdown ?? {}).length
+    $: ({ baseCoin } = $selectedAccountAssets)
+    $: formattedAmount = formatTokenAmountBestMatch(amount, baseCoin.metadata)
+    $: convertedAmount = formatCurrency(getMarketAmountFromAssetValue(amount, baseCoin))
 </script>
 
-<div class="flex justify-between">
-    <div class={title ? 'flex flex-col space-y-0.5' : ''}>
-        <Text
-            color={PRIMARY_COLOR}
-            darkColor={PRIMARY_DARK_COLOR}
-            fontSize={PRIMARY_FONT_SIZE}
-            fontWeight={totalRow ? FontWeight.semibold : PRIMARY_FONT_WEIGHT}
-            lineHeight={PRIMARY_LINE_HEIGHT}
-        >
-            {title}
-        </Text>
-        {#if subtitle}
-            <Text
-                color={SECONDARY_COLOR}
-                darkColor={SECONDARY_DARK_COLOR}
-                fontSize={SECONDARY_FONT_SIZE}
-                fontWeight={SECONDARY_FONT_WEIGHT}
-                lineHeight={SECONDARY_LINE_HEIGHT}
-            >
-                {subtitle}
-            </Text>
+<div class="flex flex-col space-y-8">
+    <div
+        class="w-full flex flex-row grow justify-between space-x-2 {hasChildren ? 'cursor-pointer ' : ''}"
+        on:click={() => (expanded = !expanded)}
+        on:keydown={() => {}}
+    >
+        {#if hasChildren}
+            <Icon
+                icon={expanded ? IconEnum.ChevronUp : IconEnum.ChevronDown}
+                width="12"
+                height="12"
+                classes="text-white mt-1"
+            />
         {/if}
-    </div>
-    <div class={formattedAmount ? 'flex flex-col items-end space-y-0.5' : ''}>
-        <Text
-            color={PRIMARY_COLOR}
-            darkColor={PRIMARY_DARK_COLOR}
-            fontSize={PRIMARY_FONT_SIZE}
-            fontWeight={totalRow ? FontWeight.semibold : PRIMARY_FONT_WEIGHT}
-            lineHeight={PRIMARY_LINE_HEIGHT}
-        >
-            {formattedAmount}
-        </Text>
-        <Text
-            color={SECONDARY_COLOR}
-            darkColor={SECONDARY_DARK_COLOR}
-            fontSize={SECONDARY_FONT_SIZE}
-            fontWeight={SECONDARY_FONT_WEIGHT}
-            lineHeight={SECONDARY_LINE_HEIGHT}
-        >
+        <BalanceSummaryRow
+            title={localize(`popups.balanceBreakdown.${key}.title`)}
+            subtitle={localize(`popups.balanceBreakdown.${key}.subtitle`)}
+            amount={formattedAmount}
             {convertedAmount}
-        </Text>
+        />
     </div>
+    {#if expanded}
+        {#each Object.keys(subBreakdown ?? {}) as breakdownKey}
+            <BalanceSummaryRow
+                title={localize(`popups.balanceBreakdown.${breakdownKey}.title`)}
+                subtitle={localize(`popups.balanceBreakdown.${breakdownKey}.subtitle`)}
+                amount={formatTokenAmountBestMatch(subBreakdown[breakdownKey].amount, baseCoin.metadata)}
+                convertedAmount={formatCurrency(
+                    getMarketAmountFromAssetValue(subBreakdown[breakdownKey].amount, baseCoin)
+                )}
+                classes="ml-8"
+            />
+        {/each}
+    {/if}
 </div>
