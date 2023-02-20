@@ -11,24 +11,29 @@
     } from '@core/wallet'
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
+    import type { UnlockConditionTypes } from '@iota/types'
     import type { AccountBalance } from '@iota/wallet'
     import { BalanceSummarySection, Button, FontWeight, Text } from 'shared/components'
 
+    interface Breakdown {
+        amount: number
+        subBreakdown?: { [key: string]: { amount: number } }
+    }
+
+    enum PendingFundsType {
+        Unclaimed = 'unclaimed',
+        StorageDepositReturn = 'storageDepositReturn',
+        Timelock = 'timelock',
+    }
+
     let accountBalance: AccountBalance
-    $: $selectedAccount, void getAccountBalance()
-    async function getAccountBalance(): Promise<void> {
+    $: $selectedAccount, void setAccountBalance()
+    async function setAccountBalance(): Promise<void> {
         accountBalance = await $selectedAccount.getBalance()
     }
 
-    interface Breakdown {
-        [key: string]: {
-            amount: number
-            subBreakdown?: { [key: string]: { amount: number } }
-        }
-    }
-
-    let breakdown: Breakdown = {}
-    $: accountBalance, setBreakdown()
+    let breakdown: { [key: string]: Breakdown } = {}
+    $: accountBalance, void setBreakdown()
     async function setBreakdown(): Promise<void> {
         const availableBreakdown = getAvailableBreakdown()
         const pendingBreakdown = await getPendingBreakdown()
@@ -43,11 +48,11 @@
         }
     }
 
-    function getAvailableBreakdown(): { amount: number } {
+    function getAvailableBreakdown(): Breakdown {
         return { amount: Number(accountBalance?.baseCoin?.available ?? 0) }
     }
 
-    async function getPendingBreakdown(): Promise<{ amount: number; subBreakdown: Breakdown }> {
+    async function getPendingBreakdown(): Promise<Breakdown> {
         let pendingOutputsStorageDeposit = 0
 
         const subBreakdown = {}
@@ -58,26 +63,16 @@
                 let type: string
                 let amount: number
                 if (output.type !== OUTPUT_TYPE_TREASURY) {
-                    if (
-                        output.unlockConditions.some(
-                            (unlockCondition) => unlockCondition.type === UNLOCK_CONDITION_EXPIRATION
-                        )
-                    ) {
-                        type = 'unclaimed'
+                    if (containsUnlockCondition(output.unlockConditions, UNLOCK_CONDITION_EXPIRATION)) {
+                        type = PendingFundsType.Unclaimed
                         amount = Number(output.amount)
                     } else if (
-                        output.unlockConditions.some(
-                            (unlockCondition) => unlockCondition.type === UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN
-                        )
+                        containsUnlockCondition(output.unlockConditions, UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN)
                     ) {
-                        type = 'storageDepositReturn'
+                        type = PendingFundsType.StorageDepositReturn
                         amount = getStorageDepositFromOutput(output).storageDeposit
-                    } else if (
-                        output.unlockConditions.some(
-                            (unlockCondition) => unlockCondition.type === UNLOCK_CONDITION_TIMELOCK
-                        )
-                    ) {
-                        type = 'timelock'
+                    } else if (containsUnlockCondition(output.unlockConditions, UNLOCK_CONDITION_TIMELOCK)) {
+                        type = PendingFundsType.Timelock
                         amount = Number(output.amount)
                     }
                 }
@@ -94,9 +89,12 @@
         return { amount: pendingOutputsStorageDeposit, subBreakdown }
     }
 
-    function getLockedBreakdown(): { amount: number; subBreakdown: Breakdown } {
-        const governanceAmount = parseInt($selectedAccount?.votingPower, 10)
+    function containsUnlockCondition(unlockConditions: UnlockConditionTypes[], unlockConditionId: number) {
+        return unlockConditions.some((unlockCondition) => unlockCondition.type === unlockConditionId)
+    }
 
+    function getLockedBreakdown(): Breakdown {
+        const governanceAmount = parseInt($selectedAccount?.votingPower, 10)
         const totalLockedAmount = governanceAmount
 
         const subBreakdown = {
@@ -106,7 +104,7 @@
         return { amount: totalLockedAmount, subBreakdown }
     }
 
-    function getStorageDepositBreakdown(): { amount: number; subBreakdown: Breakdown } {
+    function getStorageDepositBreakdown(): Breakdown {
         const totalStorageDeposit = accountBalance?.requiredStorageDeposit
             ? Object.values(accountBalance.requiredStorageDeposit).reduce(
                   (total: number, value: string): number => total + Number(value),
@@ -124,9 +122,9 @@
         return { amount: totalStorageDeposit, subBreakdown }
     }
 
-    function handleConsolidation(): void {
+    function onConsolidationClick(): void {
         openPopup({
-            id: PopupId.BalanceBreakdown,
+            id: PopupId.Confirmation,
             props: {
                 title: localize('popups.minimizeStorageDeposit.title'),
                 description: localize('popups.minimizeStorageDeposit.description'),
@@ -161,7 +159,7 @@
         {/each}
         <BalanceSummarySection titleKey="totalBalance" amount={Number(accountBalance?.baseCoin?.total ?? 0)} bold />
     </div>
-    <Button onClick={handleConsolidation}>
+    <Button onClick={onConsolidationClick}>
         {localize('popups.balanceBreakdown.minimizeStorageDepositButton')}
     </Button>
 </div>
