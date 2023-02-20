@@ -1,6 +1,5 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { Route } from '@ui'
     import { ToastContainer } from './components'
     import { DashboardView, LoginRouter, OnboardingRouter } from './views'
     import { localeDirection, setupI18n, _ } from '@core/i18n'
@@ -97,17 +96,15 @@
 
 <!-- empty div to avoid auto-purge removing dark classes -->
 <div class="scheme-dark" />
-<Route route={AppRoute.Login} routeStore={appRoute}>
+{#if $appRoute === AppRoute.Login}
     <LoginRouter />
-</Route>
-<Route route={AppRoute.Onboarding} routeStore={appRoute}>
+{:else if $appRoute === AppRoute.Onboarding}
     <OnboardingRouter />
-</Route>
-<Route route={AppRoute.Dashboard} routeStore={appRoute}>
+{:else if $appRoute === AppRoute.Dashboard}
     {#key $_}
         <DashboardView />
     {/key}
-</Route>
+{/if}
 
 <ToastContainer />
 

@@ -29,7 +29,7 @@
     import { initialiseOnboardingFlow } from '@contexts/onboarding'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { getLocalisedMenuItems } from './lib/helpers'
-    import { Route, TitleBar, ToastContainer, Transition } from '@ui'
+    import { TitleBar, ToastContainer, Transition } from '@ui'
     import { Popup } from '@components'
     import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from '@views'
     import {
@@ -192,17 +192,15 @@
                 relative={$popupState.relative}
             />
         {/if}
-        <Route route={AppRoute.Dashboard} routeStore={appRoute}>
+        {#if $appRoute === AppRoute.Dashboard}
             <Transition>
                 <Dashboard />
             </Transition>
-        </Route>
-        <Route route={AppRoute.Login} routeStore={appRoute}>
+        {:else if $appRoute === AppRoute.Login}
             <LoginRouter />
-        </Route>
-        <Route route={AppRoute.Onboarding} routeStore={appRoute}>
+        {:else if $appRoute === AppRoute.Onboarding}
             <OnboardingRouter />
-        </Route>
+        {/if}
         {#if settings}
             <Settings handleClose={() => (settings = false)} />
         {/if}
