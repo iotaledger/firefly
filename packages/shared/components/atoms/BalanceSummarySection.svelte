@@ -5,9 +5,11 @@
     import { BalanceSummaryRow, Icon } from 'shared/components'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
-    export let key: string
+    export let titleKey: string
+    export let subtitleKey: string = ''
     export let subBreakdown: { [key: string]: { amount: number } } = undefined
     export let amount: number
+    export let bold: boolean = false
 
     let expanded = false
 
@@ -19,7 +21,7 @@
 
 <div class="flex flex-col space-y-8">
     <div
-        class="w-full flex flex-row grow justify-between space-x-2 {hasChildren ? 'cursor-pointer ' : ''}"
+        class="w-full flex flex-row flex-grow justify-between space-x-2 {hasChildren ? 'cursor-pointer ' : ''}"
         on:click={() => (expanded = !expanded)}
         on:keydown={() => {}}
     >
@@ -28,14 +30,15 @@
                 icon={expanded ? IconEnum.ChevronUp : IconEnum.ChevronDown}
                 width="12"
                 height="12"
-                classes="text-white mt-1"
+                classes="dark:text-white mt-1"
             />
         {/if}
         <BalanceSummaryRow
-            title={localize(`popups.balanceBreakdown.${key}.title`)}
-            subtitle={localize(`popups.balanceBreakdown.${key}.subtitle`)}
+            title={titleKey ? localize(`popups.balanceBreakdown.${titleKey}.title`) : ''}
+            subtitle={subtitleKey ? localize(`popups.balanceBreakdown.${subtitleKey}.subtitle`) : ''}
             amount={formattedAmount}
             {convertedAmount}
+            {bold}
         />
     </div>
     {#if expanded}

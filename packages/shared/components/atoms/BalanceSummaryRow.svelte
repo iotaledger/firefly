@@ -21,7 +21,7 @@
     const SECONDARY_LINE_HEIGHT = '4'
 </script>
 
-<div class="w-full flex flex-row justify-between grow {classes}">
+<div class="flex flex-row justify-between flex-grow {classes}">
     <div class={title ? 'flex flex-col space-y-0.5' : ''}>
         <Text
             color={PRIMARY_COLOR}

@@ -627,7 +627,6 @@
         },
         "balanceBreakdown": {
             "title": "Balance breakdown",
-            "totalStorageDeposit": "Total storage deposit",
             "available": {
                 "title": "Available",
                 "subtitle": "Funds fully available for spending"
@@ -643,6 +642,10 @@
             "storageDeposit": {
                 "title": "Storage deposit",
                 "subtitle": "These funds are reserved for storing native assets."
+            },
+            "totalBalance": {
+                "title": "Total balance",
+                "subtitle": ""
             },
             "basicOutputs": {
                 "title": "Native Tokens",

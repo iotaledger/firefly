@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { closePopup, openPopup } from '@auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile'
@@ -96,9 +96,8 @@
 
     function getLockedBreakdown(): { amount: number; subBreakdown: Breakdown } {
         const governanceAmount = parseInt($selectedAccount?.votingPower, 10)
-        const stakingAmount = parseInt($selectedAccount?.votingPower, 10) // TODO:
 
-        const totalLockedAmount = governanceAmount + stakingAmount
+        const totalLockedAmount = governanceAmount
 
         const subBreakdown = {
             governance: { amount: governanceAmount },
@@ -127,7 +126,7 @@
 
     function handleConsolidation(): void {
         openPopup({
-            type: 'confirmation',
+            id: PopupId.BalanceBreakdown,
             props: {
                 title: localize('popups.minimizeStorageDeposit.title'),
                 description: localize('popups.minimizeStorageDeposit.description'),
@@ -154,11 +153,13 @@
     <div class="flex flex-col space-y-8">
         {#each Object.keys(breakdown) as breakdownKey}
             <BalanceSummarySection
-                key={breakdownKey}
+                titleKey={breakdownKey}
+                subtitleKey={breakdownKey}
                 amount={breakdown[breakdownKey].amount}
                 subBreakdown={breakdown[breakdownKey].subBreakdown}
             />
         {/each}
+        <BalanceSummarySection titleKey="totalBalance" amount={Number(accountBalance?.baseCoin?.total ?? 0)} bold />
     </div>
     <Button onClick={handleConsolidation}>
         {localize('popups.balanceBreakdown.minimizeStorageDepositButton')}
