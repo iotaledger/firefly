@@ -13,7 +13,6 @@
         VerifiedStatus,
         verifyAsset,
     } from '@core/wallet'
-    import { ButtonVariant } from 'shared/components'
     import { closeDrawer, DrawerId, openDrawer, updateDrawerProps } from '../../lib/auxiliary/drawer'
 
     export let asset: IAsset
@@ -70,9 +69,6 @@
         updateDrawerProps(DrawerId.SelectedToken, {
             asset: { ...asset, hidden: false },
         })
-    }
-    function handleBurnToken(): void {
-        _closeDrawer()
     }
     function handleSend(): void {
         updateNewTransactionDetails({ type: NewTransactionType.TokenTransfer, assetId: asset.id })
@@ -147,14 +143,6 @@
                         {localize('actions.hideToken')}
                     </Button>
                 {/if}
-                <Button
-                    variant={ButtonVariant.Warning}
-                    disabled={!features?.dashboard?.tokens?.burnAsset?.enabled}
-                    classes="w-full"
-                    onClick={handleBurnToken}
-                >
-                    {localize('actions.burnToken')}
-                </Button>
                 <Button classes="w-full" onClick={handleSend}>
                     {localize('actions.send')}
                 </Button>
