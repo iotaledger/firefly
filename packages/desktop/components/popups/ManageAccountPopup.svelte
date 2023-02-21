@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { Button, ColorPicker, Input, Text } from 'shared/components'
+    import { Button, Input, Text } from '@ui'
+    import { ColorPicker } from '@components'
     import { getTrimmedLength } from '@core/utils'
     import { localize } from '@core/i18n'
     import { selectedAccount, tryEditSelectedAccountMetadata, validateAccountName } from '@core/account'
