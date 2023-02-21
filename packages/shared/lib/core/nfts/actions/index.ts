@@ -1,5 +1,6 @@
 export * from './addOrUpdateNftInAllAccountNfts'
 export * from './getNftByIdFromAllAccountNfts'
 export * from './loadNftsForActiveProfile'
+export * from './removeNftFromSelectedAccount'
 export * from './setAccountNftsInAllAccountNfts'
 export * from './updateNftInAllAccountNfts'
