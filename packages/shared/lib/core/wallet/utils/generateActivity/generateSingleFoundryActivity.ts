@@ -13,7 +13,6 @@ import {
     getAsyncDataFromOutput,
     getMetadataFromOutput,
     getSendingInformation,
-    getStorageDepositFromOutput,
     getTagFromOutput,
 } from './helper'
 
@@ -41,7 +40,8 @@ export function generateSingleFoundryActivity(
     const nativeToken = getNativeTokenFromOutput(output)
     const assetId = nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol])
 
-    const { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output) // probably we need to sum up all storage deposits
+    const storageDeposit = getAmountFromOutput(output)
+    const giftedStorageDeposit = 0
     const rawAmount = nativeToken ? Number(nativeToken?.amount) : getAmountFromOutput(output) - storageDeposit
     const metadata = getMetadataFromOutput(output)
     const tag = getTagFromOutput(output)
