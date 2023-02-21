@@ -5,7 +5,7 @@ import { resetNewTokenTransactionDetails, resetMintTokenDetails, resetMintNftDet
 import { IError } from '@core/error/interfaces'
 import { handleGenericError } from '@core/error/handlers'
 import { showAppNotification } from '@auxiliary/notification'
-import { closePopup, openPopup, popupState } from '@auxiliary/popup'
+import { closePopup, openPopup, PopupId, popupState } from '@auxiliary/popup'
 
 import { LEDGER_ERROR_LOCALES } from '../constants'
 import { LedgerError } from '../enums'
@@ -39,7 +39,7 @@ export function handleLedgerError(error: IError, resetConfirmationPropsOnDenial 
         const hadToEnableBlindSinging = popupType === 'enableLedgerBlindSigning' && wasDeniedByUser
         if (hadToEnableBlindSinging) {
             openPopup({
-                id: 'enableLedgerBlindSigning',
+                id: PopupId.EnableLedgerBlindSigning,
             })
         } else {
             showAppNotification({

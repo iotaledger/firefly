@@ -11,7 +11,7 @@
         VerifiedStatus,
     } from '@core/wallet'
     import { Icon } from '@lib/auxiliary/icon'
-    import { openPopup, updatePopupProps } from '@auxiliary/popup'
+    import { openPopup, PopupId, updatePopupProps } from '@auxiliary/popup'
     import { MenuItem, Modal } from 'shared/components'
     import features from '@features/features'
 
@@ -54,7 +54,7 @@
 
     function handleBurnToken(): void {
         modal.close()
-        openPopup({ id: 'burnNativeTokens', props: { asset } })
+        openPopup({ id: PopupId.BurnNativeTokens, props: { asset } })
     }
 </script>
 

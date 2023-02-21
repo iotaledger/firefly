@@ -5,7 +5,7 @@
     import { activeProfile, login, ProfileType, resetActiveProfile } from '@core/profile'
     import { loginRouter } from '@core/router'
     import { Platform } from '@core/app'
-    import { openPopup, popupState } from '@auxiliary/popup'
+    import { openPopup, PopupId, popupState } from '@auxiliary/popup'
     import { isValidPin } from '@core/utils'
     import { Icon, PinInput, Profile, Text } from 'shared/components'
     import { onDestroy } from 'svelte'
@@ -26,7 +26,7 @@
 
     $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTermsOfService()) {
         openPopup({
-            id: 'legalUpdate',
+            id: PopupId.LegalUpdate,
             hideClose: true,
             preventClose: true,
         })
