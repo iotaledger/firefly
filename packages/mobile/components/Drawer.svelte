@@ -8,7 +8,9 @@
         DRAWER_IN_ANIMATION_DURATION_MS,
         DRAWER_OUT_ANIMATION_DURATION_MS,
         DRAWER_STATIC_TITLE_TITLES,
+        getDrawerRouter,
     } from '../lib/auxiliary/drawer'
+    import { resetRouterWithDrawerDelay } from '../lib/routers'
 
     export let onClose: () => unknown = () => {}
     export let onBackClick: () => unknown = () => {}
@@ -26,6 +28,7 @@
 
     $: staticTile = DRAWER_STATIC_TITLE_TITLES[id] ? localize(DRAWER_STATIC_TITLE_TITLES[id]) : undefined
     $: displayedTitle = title ?? staticTile
+    $: drawerRouter = getDrawerRouter(id)
 
     const directon = enterFromSide ? { x: -100 } : { y: 100 }
 
@@ -47,10 +50,17 @@
         moving = false
         const panelSize = enterFromSide ? panelWidth : panelHeight
         if (position < -panelSize / 3) {
-            onClose()
+            handleClose()
         } else {
             position = 0
         }
+    }
+
+    function handleClose(): void {
+        if ($drawerRouter) {
+            resetRouterWithDrawerDelay($drawerRouter)
+        }
+        onClose && onClose()
     }
 </script>
 
@@ -59,7 +69,7 @@
     <overlay
         in:fade|local={{ duration: DRAWER_IN_ANIMATION_DURATION_MS }}
         out:fade|local={{ duration: DRAWER_OUT_ANIMATION_DURATION_MS }}
-        on:click={onClose}
+        on:click={handleClose}
         class="fixed top-0 left-0 w-full h-full z-0 bg-gray-700 dark:bg-gray-900 bg-opacity-60 dark:bg-opacity-60"
     />
     <panel

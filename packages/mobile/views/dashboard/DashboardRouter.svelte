@@ -3,7 +3,6 @@
     import { selectedFilter } from '../../lib/contexts/dashboard'
     import {
         accountActionsRouter,
-        accountSwitcherRouter,
         DashboardRoute,
         dashboardRoute,
         dashboardRouter,
@@ -13,14 +12,7 @@
         sendRouter,
         settingsRouter,
     } from '../../lib/routers'
-    import {
-        AccountActionsDrawer,
-        AccountSwitcherDrawer,
-        ProfileDrawer,
-        ReceiveDrawer,
-        SendDrawer,
-        FilterDrawer,
-    } from './drawers'
+    import { AccountActionsDrawer, ProfileDrawer, ReceiveDrawer, SendDrawer, FilterDrawer } from './drawers'
 
     $: $selectedFilter && $dashboardRouter.goTo(DashboardRoute.Filter)
 
@@ -29,10 +21,6 @@
     }
     function onSendDrawerClose(): void {
         $sendRouter.closeDrawer()
-    }
-    function onAccountSwitcherDrawerClose(): void {
-        resetRouterWithDrawerDelay($accountSwitcherRouter)
-        $dashboardRouter.previous()
     }
     function onAccountActionsDrawerClose(): void {
         resetRouterWithDrawerDelay($accountActionsRouter)
@@ -51,8 +39,6 @@
     <ReceiveDrawer onClose={onReceiveDrawerClose} />
 {:else if $dashboardRoute === DashboardRoute.Send && features?.dashboard?.send?.enabled}
     <SendDrawer onClose={onSendDrawerClose} />
-{:else if $dashboardRoute === DashboardRoute.AccountSwitcher && features?.dashboard?.accountSwitcher?.enabled}
-    <AccountSwitcherDrawer onClose={onAccountSwitcherDrawerClose} />
 {:else if $dashboardRoute === DashboardRoute.AccountActions && features?.dashboard?.accountActions?.enabled}
     <AccountActionsDrawer onClose={onAccountActionsDrawerClose} />
 {:else if $dashboardRoute === DashboardRoute.Profile && features?.dashboard?.profileActions?.enabled}
