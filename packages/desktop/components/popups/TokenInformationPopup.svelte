@@ -11,7 +11,7 @@
         VerifiedStatus,
         NewTransactionType,
     } from '@core/wallet'
-    import { openPopup, updatePopupProps } from '@auxiliary/popup'
+    import { openPopup, PopupId, updatePopupProps } from '@auxiliary/popup'
     import { AssetIcon, Button, Text, TextHint, AssetActionsButton, KeyValueBox, FontWeight } from 'shared/components'
 
     export let asset: IAsset
@@ -21,7 +21,7 @@
         unverifyAsset(asset.id, NotVerifiedStatus.Skipped)
         if (activityId) {
             openPopup({
-                id: 'activityDetails',
+                id: PopupId.ActivityDetails,
                 props: { activityId },
             })
         } else {
@@ -35,7 +35,7 @@
         verifyAsset(asset.id, VerifiedStatus.SelfVerified)
         if (activityId) {
             openPopup({
-                id: 'activityDetails',
+                id: PopupId.ActivityDetails,
                 props: { activityId },
             })
         } else {
@@ -53,7 +53,7 @@
             disableAssetSelection: true,
         })
         openPopup({
-            id: 'sendForm',
+            id: PopupId.SendForm,
             overflow: true,
         })
     }

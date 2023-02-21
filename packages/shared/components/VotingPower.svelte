@@ -4,7 +4,7 @@
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { formatTokenAmountBestMatch, visibleSelectedAccountAssets } from '@core/wallet'
-    import { openPopup } from '@auxiliary/popup'
+    import { openPopup, PopupId } from '@auxiliary/popup'
     import { hasPendingGovernanceTransaction } from '@contexts/governance/stores'
 
     const asset = $visibleSelectedAccountAssets?.baseCoin
@@ -17,7 +17,7 @@
 
     function handleManageVotingPower(): void {
         openPopup({
-            id: 'manageVotingPower',
+            id: PopupId.ManageVotingPower,
         })
     }
 </script>

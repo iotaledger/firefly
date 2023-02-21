@@ -1,4 +1,4 @@
-import { closePopup, openPopup } from '@auxiliary/popup'
+import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
 import { localize } from '@core/i18n'
 import { Platform } from '../classes/platform.class'
 import { externalAllowedLinks } from '../constants'
@@ -20,7 +20,7 @@ export function openUrlInBrowser(targetUrl: string): void {
         openHttpsUrlsOnly(url.protocol, targetUrl)
     } else {
         openPopup({
-            id: 'confirmation',
+            id: PopupId.Confirmation,
             props: {
                 title: localize('popups.externalUrl.title'),
                 description: localize('popups.externalUrl.body', { values: { url: targetUrl } }),

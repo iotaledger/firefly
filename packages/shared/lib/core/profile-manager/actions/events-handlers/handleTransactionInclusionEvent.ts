@@ -18,6 +18,7 @@ import { WalletApiEvent } from '../../enums'
 import { ITransactionInclusionEventPayload } from '../../interfaces'
 import { validateWalletApiEvent } from '../../utils'
 import { closePopup, openPopup } from '@auxiliary/popup/actions'
+import { PopupId } from '@auxiliary/popup'
 
 export function handleTransactionInclusionEvent(error: Error, rawEvent: string): void {
     const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletApiEvent.TransactionInclusion)
@@ -49,7 +50,7 @@ export function handleTransactionInclusionEventInternal(
 
             if (get(hasToRevote)) {
                 openPopup({
-                    id: 'revote',
+                    id: PopupId.Revote,
                     preventClose: true,
                     hideClose: true,
                 })

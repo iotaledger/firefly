@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onDestroy } from 'svelte'
     import { Button, KeyValueBox, Text, TextHint, FontWeight } from 'shared/components'
-    import { closePopup, openPopup } from '@auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { showAppNotification } from '@auxiliary/notification'
     import { displayNotificationForLedgerProfile, ledgerNanoStatus } from '@core/ledger'
     import { sumBalanceForAccounts } from '@core/account'
@@ -45,17 +45,17 @@
     async function handleFindBalances(): Promise<void> {
         if ($isSoftwareProfile && $isStrongholdLocked) {
             openPopup({
-                id: 'unlockStronghold',
+                id: PopupId.UnlockStronghold,
                 props: {
                     onSuccess: function () {
                         openPopup({
-                            id: 'walletFinder',
+                            id: PopupId.WalletFinder,
                             props: { searchForBalancesOnLoad: true },
                         })
                     },
                     onCancelled: function () {
                         openPopup({
-                            id: 'walletFinder',
+                            id: PopupId.WalletFinder,
                         })
                     },
                 },

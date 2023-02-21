@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { closePopup, openPopup } from '@auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
     import { isLayer1Destination } from '@core/layer-2'
     import { selectedAccountNfts } from '@core/nfts'
@@ -148,7 +148,7 @@
         if (valid) {
             setTransactionDetails()
             openPopup({
-                id: 'sendConfirmation',
+                id: PopupId.SendConfirmation,
                 overflow: true,
             })
         }

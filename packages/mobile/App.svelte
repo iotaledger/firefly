@@ -14,9 +14,10 @@
         shouldBeDarkMode,
     } from '@core/app'
     import { onboardingProfile } from '@contexts/onboarding'
-    import { Route, ToastContainer, DrawerManager } from './components'
+    import { DrawerManager, ToastContainer } from './components'
     import { isKeyboardOpen, keyboardHeight } from './lib/auxiliary/keyboard'
     import {
+        appRoute,
         AppRoute,
         getAppRouter,
         getRouterForAppContext,
@@ -95,19 +96,16 @@
 
 <!-- empty div to avoid auto-purge removing dark classes -->
 <div class="scheme-dark" />
-<Route route={AppRoute.Login}>
+{#if $appRoute === AppRoute.Login}
     <LoginRouter />
-</Route>
-<Route route={AppRoute.Onboarding}>
+{:else if $appRoute === AppRoute.Onboarding}
     <OnboardingRouter />
-</Route>
-<Route route={AppRoute.Dashboard}>
+{:else if $appRoute === AppRoute.Dashboard}
     {#key $_}
         <DashboardView />
     {/key}
-</Route>
+{/if}
 <DrawerManager />
-
 <ToastContainer />
 
 {#if $isKeyboardOpen}

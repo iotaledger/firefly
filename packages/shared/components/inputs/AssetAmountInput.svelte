@@ -89,14 +89,7 @@
     }
 </script>
 
-<InputContainer
-    bind:this={inputElement}
-    bind:inputElement={amountInputElement}
-    col
-    {isFocused}
-    {error}
-    on:clickOutside={() => (isFocused = false)}
->
+<InputContainer bind:this={inputElement} bind:inputElement={amountInputElement} col {isFocused} {error}>
     <div class="flex flex-row w-full items-center space-x-0.5 relative">
         <AssetDropdown bind:asset readonly={disableAssetSelection} />
         <AmountInput

@@ -1,11 +1,12 @@
 <script lang="ts">
     import type { Answer } from '@iota/wallet'
-    import { createEventDispatcher } from 'svelte'
     import { Text, FontWeight, TooltipIcon, PingingBadge, Icon } from 'shared/components'
     import { Position } from 'shared/components/enums'
     import { appSettings } from '@core/app/stores'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { ProposalStatus } from '@contexts/governance'
+
+    export let onAnswerClick: () => void
 
     export let answer: Answer
     export let answerIndex: number = undefined
@@ -26,11 +27,9 @@
     $: isVotedFor = votedAnswerValue === answer?.value
     $: dark = $appSettings.darkMode
 
-    const dispatch = createEventDispatcher()
-
-    function handleClick(): void {
-        if (!disabled && !hidden) {
-            dispatch('click')
+    function onClick(): void {
+        if (!disabled && !hidden && !isLoading) {
+            onAnswerClick()
         }
     }
 
@@ -54,7 +53,7 @@
     class:selected={isSelected}
     class:cursor-default={isLoading}
     style:--percentage={percentage}
-    on:click={handleClick}
+    on:click={onClick}
 >
     <div class="flex space-x-3 items-center w-full min-w-0">
         {#if answerIndex !== undefined}
