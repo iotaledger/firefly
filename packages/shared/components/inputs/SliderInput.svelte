@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { createEventDispatcher } from 'svelte'
     import { formatNumber, parseCurrency } from '@core/i18n'
 
     export let min = 0
@@ -19,8 +18,6 @@
     let holding = false
     let thumbHover = false
 
-    const dispatch = createEventDispatcher()
-
     // Mouse shield used onMouseDown to prevent any mouse events penetrating other elements,
     // ie. hover events on other elements while dragging. Especially for Safari
     const mouseEventShield = document.createElement('div')
@@ -34,10 +31,8 @@
         elementX = element.getBoundingClientRect().left
     }
 
-    // Allows both bind:value and on:change for parent value retrieval
     function setValue(val: number): void {
         value = formatNumber(val, undefined, decimals > 0 ? decimals : undefined, 0)
-        dispatch('change', { value })
     }
 
     function onTrackEvent(event: TouchEvent | MouseEvent): void {

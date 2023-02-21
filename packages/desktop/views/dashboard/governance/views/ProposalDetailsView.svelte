@@ -158,8 +158,7 @@
 
     let openedQuestionIndex = 0
 
-    function handleQuestionClick(event: CustomEvent): void {
-        const { questionIndex } = event.detail
+    function onQuestionClick(questionIndex: number): void {
         openedQuestionIndex = questionIndex === openedQuestionIndex ? null : questionIndex
     }
 
@@ -179,8 +178,7 @@
         })
     }
 
-    function handleAnswerClick(event: CustomEvent): void {
-        const { answerValue, questionIndex } = event.detail
+    function onAnswerClick(answerValue: number, questionIndex: number): void {
         selectedAnswerValues[questionIndex] = answerValue
 
         openedQuestionIndex = questionIndex + 1
@@ -268,12 +266,12 @@
                         {question}
                         {questionIndex}
                         isOpened={openedQuestionIndex === questionIndex}
+                        isLoading={!overviewLoaded || !statusLoaded}
                         selectedAnswerValue={selectedAnswerValues[questionIndex]}
                         votedAnswerValue={votedAnswerValues[questionIndex]}
-                        answerStatuses={$selectedParticipationEventStatus?.questions?.[questionIndex]?.answers}
-                        isLoading={!overviewLoaded || !statusLoaded}
-                        on:clickQuestion={handleQuestionClick}
-                        on:clickAnswer={handleAnswerClick}
+                        answerStatuses={$selectedProposal.state?.questions[questionIndex]?.answers}
+                        {onQuestionClick}
+                        {onAnswerClick}
                     />
                 {/each}
             {/if}
