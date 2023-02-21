@@ -15,7 +15,7 @@
         getNumberOfVotedProposals,
         getNumberOfTotalProposals,
     } from '@contexts/governance/utils'
-    import { openPopup } from '@auxiliary/popup'
+    import { openPopup, PopupId } from '@auxiliary/popup'
     import { onMount } from 'svelte'
     import { selectedAccount } from '@core/account'
 
@@ -49,7 +49,7 @@
 
     function onAddProposalClick(): void {
         openPopup({
-            id: 'addProposal',
+            id: PopupId.AddProposal,
             overflow: true,
         })
     }

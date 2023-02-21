@@ -6,7 +6,7 @@
     import { buildNftOutputData, formatTokenAmountPrecise, mintNft, mintNftDetails } from '@core/wallet'
     import { activeProfile, checkActiveProfileAuth } from '@core/profile'
     import { handleError } from '@core/error/handlers/handleError'
-    import { closePopup, openPopup } from '@auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { CURRENT_IRC27_VERSION } from '@core/nfts'
     import { BASE_TOKEN } from '@core/network'
 
@@ -70,7 +70,7 @@
     function handleBack(): void {
         closePopup()
         openPopup({
-            id: 'mintNftForm',
+            id: PopupId.MintNftForm,
             overflow: true,
         })
     }

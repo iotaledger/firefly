@@ -35,7 +35,7 @@ export enum PopupId {
     SendConfirmation = 'sendConfirmation',
     SendForm = 'sendForm',
     StopVoting = 'stopVoting',
-    StorageDepositBreakdown = 'storageDepositBreakdown',
+    BalanceBreakdown = 'balanceBreakdown',
     TestDeepLinkForm = 'testDeepLinkForm',
     TokenInformation = 'tokenInformation',
     UnlockStronghold = 'unlockStronghold',

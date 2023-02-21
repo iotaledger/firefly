@@ -12,6 +12,7 @@
     import { getOfficialNodes } from '@core/network/utils'
     import { activeProfile } from '@core/profile/stores'
     import { registerProposalsFromPrimaryNode } from '@contexts/governance/actions'
+    import { PopupId } from '@auxiliary/popup'
 
     export let node: INode
     export let clientOptions: IClientOptions
@@ -25,7 +26,7 @@
 
     function handleEditNodeDetailsClick(): void {
         openPopup({
-            id: 'addNode',
+            id: PopupId.AddNode,
             props: {
                 node,
                 isEditingNode: true,
@@ -40,7 +41,7 @@
     async function handleTogglePrimaryNodeClick(): Promise<void> {
         if (isPrimary) {
             openPopup({
-                id: 'confirmation',
+                id: PopupId.Confirmation,
                 props: {
                     title: localize('popups.unsetAsPrimaryNode.title'),
                     description: localize('popups.unsetAsPrimaryNode.body', { values: { url: node.url } }),
@@ -63,7 +64,7 @@
 
     function handleRemoveNodeClick(): void {
         openPopup({
-            id: 'confirmation',
+            id: PopupId.Confirmation,
             props: {
                 title: localize('popups.node.titleRemove'),
                 description: localize('popups.node.removeConfirmation'),
@@ -83,7 +84,7 @@
             void toggleDisabledNodeInClientOptions(node)
         } else {
             openPopup({
-                id: 'confirmation',
+                id: PopupId.Confirmation,
                 props: {
                     title: localize('popups.excludeNode.title'),
                     description: localize('popups.excludeNode.body', { values: { url: node?.url } }),

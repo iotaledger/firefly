@@ -625,7 +625,7 @@
             "step_3": "Press the right button to navigate to Settings. Then press both buttons to validate. Your Ledger device displays Blind Signing.",
             "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
         },
-        "storageDepositBreakdown": {
+        "balanceBreakdown": {
             "title": "Desglose del depósito de almacenamiento",
             "totalStorageDeposit": "Depósito de almacenamiento total",
             "basicOutputs": {
