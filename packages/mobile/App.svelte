@@ -1,6 +1,5 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { DashboardView, LoginRouter, OnboardingRouter } from './views'
     import { localeDirection, setupI18n, _ } from '@core/i18n'
     import { checkAndMigrateProfiles, cleanupEmptyProfiles } from '@core/profile'
     import { initialiseRouterManager, RouterManagerExtensionName } from '@core/router'
@@ -27,6 +26,7 @@
         resetRouterForAppContext,
         resetRouters,
     } from './lib/routers'
+    import { DashboardView, LoginRouter, OnboardingRouter } from './views'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
