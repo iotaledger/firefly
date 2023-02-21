@@ -266,6 +266,7 @@
                         {question}
                         {questionIndex}
                         isOpened={openedQuestionIndex === questionIndex}
+                        isLoading={!overviewLoaded || !statusLoaded}
                         selectedAnswerValue={selectedAnswerValues[questionIndex]}
                         votedAnswerValue={votedAnswerValues[questionIndex]}
                         answerStatuses={$selectedProposal.state?.questions[questionIndex]?.answers}

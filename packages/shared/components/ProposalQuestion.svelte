@@ -17,6 +17,7 @@
     export let question: Question
     export let selectedAnswerValue: number = undefined
     export let votedAnswerValue: number = undefined
+    export let isLoading: boolean = false
 
     let percentages: IProposalAnswerPercentages = {}
     let winnerAnswerIndex: number
@@ -42,7 +43,9 @@
 </script>
 
 <proposal-question
-    class="flex flex-col px-5 py-4 rounded-xl border border-solid border-gray-200 cursor-pointer dark:border-transparent dark:bg-gray-850"
+    class="flex flex-col px-5 py-4 rounded-xl border border-solid border-gray-200 cursor-pointer dark:border-transparent dark:bg-gray-850 {isLoading
+        ? 'animate-pulse'
+        : ' '}"
 >
     <div on:click={() => onQuestionClick(questionIndex)} class="flex justify-between items-center">
         <div class="flex flex-col min-w-0">
@@ -80,6 +83,7 @@
                 {votedAnswerValue}
                 {selectedAnswerValue}
                 {disabled}
+                {isLoading}
                 hidden={!isOpened}
                 percentage={percentages[answer.value]}
                 isWinner={answerIndex === winnerAnswerIndex}
