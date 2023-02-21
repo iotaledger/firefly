@@ -7,7 +7,6 @@
         Activity,
         ActivityType,
         NotVerifiedStatus,
-        ActivityAsyncStatus,
     } from '@core/wallet'
     import { openPopup, PopupId } from '@auxiliary/popup'
     import {
@@ -21,6 +20,7 @@
         NftActivityTileContent,
         GovernanceActivityTileContent,
     } from 'shared/components'
+    import { time } from '@core/app'
 
     export let activity: Activity
 
@@ -30,6 +30,7 @@
             activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry
                 ? getAssetFromPersistedAssets(activity.assetId)
                 : undefined)
+    $: isTimelocked = activity?.asyncData?.timelockDate > $time
 
     function handleTransactionClick(): void {
         if (asset?.verification?.status === NotVerifiedStatus.New) {
@@ -70,7 +71,7 @@
                 <FoundryActivityTileContent {activity} />
             {/if}
         </tile-content>
-        {#if activity.asyncData?.asyncStatus === ActivityAsyncStatus.Timelocked}
+        {#if isTimelocked}
             <TimelockActivityTileFooter {activity} />
         {:else if activity.asyncData}
             <AsyncActivityTileFooter {activity} />
