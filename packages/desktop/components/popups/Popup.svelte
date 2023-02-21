@@ -74,17 +74,14 @@
     let size: PopupSize = PopupSize.Medium
 
     $: switch (id) {
-        case 'connectLedger':
-        case 'createAccount':
-        case 'manageAccount':
+        case PopupId.ConnectLedger:
+        case PopupId.CreateAccount:
+        case PopupId.ManageAccount:
             size = PopupSize.Small
             break
-        case 'ledgerAppGuide':
-        case 'ledgerConnectionGuide':
+        case PopupId.LedgerAppGuide:
+        case PopupId.LedgerConnection:
             size = PopupSize.Large
-            break
-        case 'transactionDetails':
-            autofocusContent = false
             break
         default:
             size = PopupSize.Medium
