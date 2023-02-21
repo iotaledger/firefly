@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { Text, ProposalCard, Filter, SearchInput } from 'shared/components'
+    import { Text, ProposalCard, SearchInput } from 'shared/components'
+    import { Filter } from '../../desktop/components' // TODO: refactor to match dependency platform
     import { localize } from '@core/i18n'
     import { FontWeight } from './enums'
     import { proposalFilter, registeredProposalsForSelectedAccount } from '@contexts/governance/stores'

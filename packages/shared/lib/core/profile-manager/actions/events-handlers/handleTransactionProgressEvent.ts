@@ -3,7 +3,7 @@ import { selectedAccountIndex } from '@core/account'
 import { ledgerNanoStatus } from '@core/ledger'
 import { isActiveLedgerProfile } from '@core/profile'
 import { isOnboardingLedgerProfile } from '@contexts/onboarding'
-import { closePopup, openPopup } from '@auxiliary/popup'
+import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
 import { deconstructLedgerVerificationProps } from '@core/ledger/helpers'
 
 import { WalletApiEvent } from '../../enums'
@@ -37,7 +37,7 @@ function openPopupIfVerificationNeeded(payload: TransactionProgressEventPayload)
     if (payload) {
         if (isPreparedTransaction(payload)) {
             openPopup({
-                type: 'verifyLedgerTransaction',
+                id: PopupId.VerifyLedgerTransaction,
                 hideClose: true,
                 preventClose: true,
                 props: {
@@ -47,7 +47,7 @@ function openPopupIfVerificationNeeded(payload: TransactionProgressEventPayload)
         } else if (isPreparedTransactionEssenceHash(payload)) {
             if (get(ledgerNanoStatus)?.blindSigningEnabled) {
                 openPopup({
-                    type: 'verifyLedgerTransaction',
+                    id: PopupId.VerifyLedgerTransaction,
                     hideClose: true,
                     preventClose: true,
                     props: {
@@ -56,7 +56,7 @@ function openPopupIfVerificationNeeded(payload: TransactionProgressEventPayload)
                 })
             } else {
                 openPopup({
-                    type: 'enableLedgerBlindSigning',
+                    id: PopupId.EnableLedgerBlindSigning,
                     hideClose: true,
                     preventClose: true,
                 })

@@ -22,7 +22,7 @@
     import { localize } from '@core/i18n'
     import { showInternalVerificationPopup } from '@core/ledger'
     import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
-    import { closePopup, openPopup } from '@auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
 
     export let activity: Activity
 
@@ -37,7 +37,7 @@
 
     function handleRejectClick(): void {
         openPopup({
-            type: 'confirmation',
+            id: PopupId.Confirmation,
             props: {
                 title: localize('actions.confirmRejection.title'),
                 description: localize('actions.confirmRejection.description'),

@@ -1,20 +1,20 @@
 <script lang="ts">
-    import { onMount, onDestroy } from 'svelte'
-    import { VotingEventPayload, ParticipationEventType, TrackedParticipationOverview } from '@iota/wallet/out/types'
-    import { localize } from '@core/i18n'
     import {
         Button,
-        FontWeight,
         KeyValueBox,
         Pane,
         ProposalDetailsButton,
-        ProposalInformation,
         ProposalQuestion,
         ProposalStatusPill,
         Text,
         TextType,
         TextHint,
+        MarkdownBlock,
     } from '@ui'
+    import { ProposalInformationPane } from '@components'
+    import { onMount, onDestroy } from 'svelte'
+    import { VotingEventPayload, ParticipationEventType, TrackedParticipationOverview } from '@iota/wallet/out/types'
+    import { localize } from '@core/i18n'
     import { openPopup } from '@auxiliary/popup/actions'
     import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
     import { getVotingEvent } from '@contexts/governance/actions'
@@ -43,6 +43,7 @@
         clearParticipationEventStatusPoll,
         pollParticipationEventStatus,
     } from '@contexts/governance/actions/pollParticipationEventStatus'
+    import { PopupId } from '@auxiliary/popup'
 
     const { metadata } = $visibleSelectedAccountAssets?.baseCoin
 
@@ -157,14 +158,13 @@
 
     let openedQuestionIndex = 0
 
-    function handleQuestionClick(event: CustomEvent): void {
-        const { questionIndex } = event.detail
+    function onQuestionClick(questionIndex: number): void {
         openedQuestionIndex = questionIndex === openedQuestionIndex ? null : questionIndex
     }
 
     function onStopVotingClick(): void {
         openPopup({
-            type: 'stopVoting',
+            id: PopupId.StopVoting,
         })
     }
 
@@ -173,13 +173,12 @@
             answerValue === undefined ? ABSTAIN_VOTE_VALUE : answerValue
         )
         openPopup({
-            type: 'voteForProposal',
+            id: PopupId.VoteForProposal,
             props: { selectedAnswerValues: chosenAnswerValues },
         })
     }
 
-    function handleAnswerClick(event: CustomEvent): void {
-        const { answerValue, questionIndex } = event.detail
+    function onAnswerClick(answerValue: number, questionIndex: number): void {
         selectedAnswerValues[questionIndex] = answerValue
 
         openedQuestionIndex = questionIndex + 1
@@ -227,14 +226,11 @@
             </header-container>
             <div class="flex flex-1 flex-col justify-between">
                 <Text type={TextType.h2}>{$selectedProposal?.title}</Text>
-                {#if $selectedProposal?.additionalInfo}
-                    <Text
-                        type={TextType.h5}
-                        overrideColor
-                        classes="text-gray-600 mt-4 max-h-40 overflow-hidden select-text"
-                        fontWeight={FontWeight.medium}>{$selectedProposal?.additionalInfo}</Text
-                    >
-                {/if}
+                <div class="mt-4 max-h-40 overflow-hidden">
+                    {#if $selectedProposal?.additionalInfo}
+                        <MarkdownBlock text={$selectedProposal?.additionalInfo} />
+                    {/if}
+                </div>
             </div>
         </Pane>
         <Pane classes="p-6 h-fit">
@@ -257,7 +253,7 @@
                 </li>
             </ul>
         </Pane>
-        <ProposalInformation />
+        <ProposalInformationPane />
     </div>
     <Pane classes="w-3/5 h-full p-6 pr-3 flex flex-col justify-between">
         <proposal-questions
@@ -270,12 +266,12 @@
                         {question}
                         {questionIndex}
                         isOpened={openedQuestionIndex === questionIndex}
+                        isLoading={!overviewLoaded || !statusLoaded}
                         selectedAnswerValue={selectedAnswerValues[questionIndex]}
                         votedAnswerValue={votedAnswerValues[questionIndex]}
-                        answerStatuses={$selectedParticipationEventStatus?.questions?.[questionIndex]?.answers}
-                        isLoading={!overviewLoaded || !statusLoaded}
-                        on:clickQuestion={handleQuestionClick}
-                        on:clickAnswer={handleAnswerClick}
+                        answerStatuses={$selectedProposal.state?.questions[questionIndex]?.answers}
+                        {onQuestionClick}
+                        {onAnswerClick}
                     />
                 {/each}
             {/if}

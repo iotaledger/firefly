@@ -1,5 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte'
+    import { ToastContainer } from './components'
+    import { DashboardView, LoginRouter, OnboardingRouter } from './views'
     import { localeDirection, setupI18n, _ } from '@core/i18n'
     import { checkAndMigrateProfiles, cleanupEmptyProfiles } from '@core/profile'
     import { initialiseRouterManager, RouterManagerExtensionName } from '@core/router'
@@ -14,9 +16,9 @@
         shouldBeDarkMode,
     } from '@core/app'
     import { onboardingProfile } from '@contexts/onboarding'
-    import { Route, ToastContainer } from './components'
     import { isKeyboardOpen, keyboardHeight } from './lib/auxiliary/keyboard'
     import {
+        appRoute,
         AppRoute,
         getAppRouter,
         getRouterForAppContext,
@@ -25,7 +27,6 @@
         resetRouterForAppContext,
         resetRouters,
     } from './lib/routers'
-    import { DashboardView, LoginRouter, OnboardingRouter } from './views'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -95,17 +96,15 @@
 
 <!-- empty div to avoid auto-purge removing dark classes -->
 <div class="scheme-dark" />
-<Route route={AppRoute.Login}>
+{#if $appRoute === AppRoute.Login}
     <LoginRouter />
-</Route>
-<Route route={AppRoute.Onboarding}>
+{:else if $appRoute === AppRoute.Onboarding}
     <OnboardingRouter />
-</Route>
-<Route route={AppRoute.Dashboard}>
+{:else if $appRoute === AppRoute.Dashboard}
     {#key $_}
         <DashboardView />
     {/key}
-</Route>
+{/if}
 
 <ToastContainer />
 

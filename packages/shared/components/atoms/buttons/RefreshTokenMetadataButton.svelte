@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { refreshAccountAssetsForActiveProfile } from '@core/wallet'
     import { showAppNotification } from '@auxiliary/notification'
-    import { closePopup, openPopup } from '@auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { OnboardingButton } from 'shared/components'
 
     function refreshTokenMetadata(): void {
@@ -17,7 +17,7 @@
 
     function handleRefreshTokenMetadata(): void {
         openPopup({
-            type: 'confirmation',
+            id: PopupId.Confirmation,
             props: {
                 title: localize('actions.refreshTokenMetadata'),
                 hint: localize('general.refreshTokenMetadataHint'),

@@ -625,7 +625,7 @@
             "step_3": "按右键导航到设置。然后按两个按钮进行验证。您的Ledger设备显示Blind签名。",
             "step_4": "按两个按钮以启用交易盲签。设备显示已启用。您已完成。"
         },
-        "storageDepositBreakdown": {
+        "balanceBreakdown": {
             "title": "存储押金明细",
             "totalStorageDeposit": "存储押金总额",
             "basicOutputs": {

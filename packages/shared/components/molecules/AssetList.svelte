@@ -1,10 +1,11 @@
 <script lang="ts">
+    import VirtualList from '@sveltejs/svelte-virtual-list'
+    import { AssetTile, Text, TextType } from 'shared/components'
+    import { Filter } from '../../../desktop/components' // TODO: refactor to match dependency platform
     import { localize } from '@core/i18n'
     import { assetFilter, IAccountAssets, IAsset } from '@core/wallet'
     import { isVisibleAsset } from '@core/wallet/utils/isVisibleAsset'
-    import { openPopup } from '@auxiliary/popup'
-    import VirtualList from '@sveltejs/svelte-virtual-list'
-    import { AssetTile, Text, Filter, TextType } from 'shared/components'
+    import { openPopup, PopupId } from '@auxiliary/popup'
 
     export let assets: IAccountAssets
 
@@ -31,7 +32,7 @@
 
     function handleAssetTileClick(asset: IAsset): void {
         openPopup({
-            type: 'tokenInformation',
+            id: PopupId.TokenInformation,
             overflow: true,
             props: {
                 asset,

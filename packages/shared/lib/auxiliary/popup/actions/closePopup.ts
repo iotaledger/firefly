@@ -4,7 +4,7 @@ export function closePopup(forceClose: boolean = false): void {
     modifyPopupState(
         {
             active: false,
-            type: null,
+            id: null,
             hideClose: false,
             preventClose: false,
             fullScreen: false,

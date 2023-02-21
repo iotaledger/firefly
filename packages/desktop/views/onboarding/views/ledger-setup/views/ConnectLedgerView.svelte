@@ -15,7 +15,7 @@
         ProfileSetupType,
         isOnboardingLedgerProfile,
     } from '@contexts/onboarding'
-    import { openPopup } from '@auxiliary/popup'
+    import { openPopup, PopupId } from '@auxiliary/popup'
 
     let isBusy = false
 
@@ -41,7 +41,7 @@
 
     function handleGuidePopup(): void {
         openPopup({
-            type: 'ledgerConnectionGuide',
+            id: PopupId.LedgerConnection,
         })
     }
 

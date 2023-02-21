@@ -625,7 +625,7 @@
             "step_3": "Appuyer sur le bouton droit pour ouvrir les paramètres. Appuyez ensuite sur les deux boutons pour valider. Votre clé Ledger affiche Blind Signing.",
             "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
         },
-        "storageDepositBreakdown": {
+        "balanceBreakdown": {
             "title": "Répartition de la caution de stockage",
             "totalStorageDeposit": "Total de la caution de stockage",
             "basicOutputs": {

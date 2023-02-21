@@ -6,6 +6,7 @@
     import { Icon } from '@lib/auxiliary/icon/enums'
     import { openPopup } from '@auxiliary/popup/actions'
     import { HR, MenuItem, Modal, ToggleHiddenAccountMenuItem } from 'shared/components'
+    import { PopupId } from '@auxiliary/popup'
 
     export let modal: Modal = undefined
 
@@ -13,18 +14,18 @@
         $selectedAccount?.index === $activeAccounts?.length - 1 && $visibleActiveAccounts?.length > 1
 
     function handleCustomiseAccountClick(): void {
-        openPopup({ type: 'manageAccount' })
+        openPopup({ id: PopupId.ManageAccount })
         modal.close()
     }
 
-    function handleViewStorageDepositClick(): void {
-        openPopup({ type: 'storageDepositBreakdown' })
+    function onViewBalanceClick(): void {
+        openPopup({ id: PopupId.BalanceBreakdown })
         modal.close()
     }
 
     function handleDeleteAccountClick(): void {
         openPopup({
-            type: 'deleteAccount',
+            id: PopupId.DeleteAccount,
             props: {
                 account: selectedAccount,
                 deleteAccount,
@@ -36,11 +37,7 @@
 
 <Modal bind:this={modal} {...$$restProps}>
     <div class="flex flex-col">
-        <MenuItem
-            icon={Icon.Doc}
-            title={localize('actions.viewStorageDeposit')}
-            onClick={handleViewStorageDepositClick}
-        />
+        <MenuItem icon={Icon.Doc} title={localize('actions.viewBalanceBreakdown')} onClick={onViewBalanceClick} />
         <MenuItem
             icon={Icon.Customize}
             title={localize('actions.customizeAcount')}

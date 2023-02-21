@@ -6,7 +6,7 @@
     import { loadPersistedProfileIntoActiveProfile, profiles, ProfileType } from '@core/profile'
     import { loginRouter, OnboardingRoute, onboardingRouter, routerManager } from '@core/router'
     import { initialiseOnboardingFlow, shouldBeDeveloperProfile } from '@contexts/onboarding'
-    import { openPopup } from '@auxiliary/popup'
+    import { openPopup, PopupId } from '@auxiliary/popup'
 
     function onContinueClick(id: string): void {
         loadPersistedProfileIntoActiveProfile(id)
@@ -26,7 +26,7 @@
 
     $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTermsOfService()) {
         openPopup({
-            type: 'legalUpdate',
+            id: PopupId.LegalUpdate,
             hideClose: true,
             preventClose: true,
         })

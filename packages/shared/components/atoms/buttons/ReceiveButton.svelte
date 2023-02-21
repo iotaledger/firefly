@@ -1,13 +1,13 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { openPopup } from '@auxiliary/popup'
+    import { openPopup, PopupId } from '@auxiliary/popup'
 
     export let text: string = localize('actions.receive')
     export let title: string = localize('general.receiveFunds')
 
     function onButtonClick(): void {
         openPopup({
-            type: 'receiveAddress',
+            id: PopupId.ReceiveAddress,
             props: {
                 title,
             },

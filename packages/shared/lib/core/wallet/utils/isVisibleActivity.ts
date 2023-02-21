@@ -85,11 +85,10 @@ function isVisibleWithActiveRejectedFilter(activity: Activity, filter: ActivityF
 }
 
 function isVisibleWithActiveAssetFilter(activity: Activity, filter: ActivityFilter): boolean {
-    if (
-        filter.asset.active &&
-        filter.asset.selected &&
-        (activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry)
-    ) {
+    if (filter.asset.active && filter.asset.selected) {
+        if (activity.type !== ActivityType.Basic && activity.type !== ActivityType.Foundry) {
+            return false
+        }
         if (filter.asset.selected && activity.assetId !== filter.asset.selected) {
             return false
         }

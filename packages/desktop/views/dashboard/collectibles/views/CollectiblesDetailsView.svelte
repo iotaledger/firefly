@@ -1,7 +1,20 @@
 <script lang="ts">
-    import { openPopup } from '@auxiliary/popup'
-    import { selectedAccountIndex } from '@core/account'
-    import { openUrlInBrowser } from '@core/app'
+    import {
+        Button,
+        CollectibleDetailsMenu,
+        FontWeight,
+        KeyValueBox,
+        MeatballMenuButton,
+        Modal,
+        NftMedia,
+        Text,
+        TextType,
+        Alert,
+        Pane,
+    } from '@ui'
+    import { openPopup } from '@auxiliary/popup/actions'
+    import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
+    import { openUrlInBrowser } from '@core/app/utils'
     import { localize } from '@core/i18n'
     import { ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
     import { BASE_TOKEN } from '@core/network/constants'
@@ -16,21 +29,11 @@
         formatTokenAmountPrecise,
         getBech32AddressFromAddressTypes,
         getHexAddressFromAddressTypes,
+        getNftId,
+        OUTPUT_TYPE_NFT,
     } from '@core/wallet'
     import { NewTransactionType, selectedAccountActivities, setNewTransactionDetails } from '@core/wallet/stores'
-    import {
-        Button,
-        CollectibleDetailsMenu,
-        FontWeight,
-        KeyValueBox,
-        MeatballMenuButton,
-        Modal,
-        NftMedia,
-        Pane,
-        Text,
-        TextType,
-        Alert,
-    } from 'shared/components'
+    import { PopupId } from '@auxiliary/popup'
 
     let modal: Modal
     let error: string
@@ -45,16 +48,29 @@
 
     const issuerAddress = getBech32AddressFromAddressTypes(issuer)
     const collectionId = getHexAddressFromAddressTypes(issuer)
+    let storageDeposit: string = undefined
 
-    $: nftActivity = $selectedAccountActivities.find(
-        (activity) => activity?.type === ActivityType.Nft && activity?.nftId === id
-    )
-    $: storageDeposit = formatTokenAmountPrecise(
-        nftActivity?.storageDeposit ?? 0,
-        BASE_TOKEN[$activeProfile?.networkProtocol]
-    )
+    $: nftActivity = $selectedAccountActivities
+        .sort((a1, a2) => a1.time.getTime() - a2.time.getTime())
+        .find((activity) => activity?.type === ActivityType.Nft && activity?.nftId === id)
 
     $: formattedMetadata = convertAndFormatNftMetadata(metadata)
+
+    $: nftActivity, setStorageDeposit()
+    async function setStorageDeposit() {
+        const outputs = await $selectedAccount.outputs()
+        const nftOutputs = outputs
+            .filter((output) => output.output.type === OUTPUT_TYPE_NFT)
+            .sort((a, b) => b.metadata.milestoneTimestampBooked - a.metadata.milestoneTimestampBooked)
+        const recentNftOutput = nftOutputs.find(
+            (o) => o.output.type === OUTPUT_TYPE_NFT && getNftId(o.output.nftId, o.outputId) === id
+        )
+
+        storageDeposit = formatTokenAmountPrecise(
+            Number(recentNftOutput?.output.amount ?? 0),
+            BASE_TOKEN[$activeProfile?.networkProtocol]
+        )
+    }
 
     let detailsList: {
         [key in string]: {
@@ -114,7 +130,7 @@
             disableAssetSelection: true,
         })
         openPopup({
-            type: 'sendForm',
+            id: PopupId.SendForm,
             overflow: true,
         })
     }
@@ -180,7 +196,7 @@
                     </Text>
                     <div class="flex flex-wrap gap-3">
                         {#each Object.values(attributes) as attribute}
-                            <KeyValueBox keyText={attribute.trait_type} valueText={attribute.value} shrink />
+                            <KeyValueBox keyText={attribute.trait_type} valueText={String(attribute.value)} shrink />
                         {/each}
                     </div>
                 </nft-attributes>
@@ -192,7 +208,7 @@
                         </Text>
                         <div class="flex flex-wrap gap-3">
                             {#each Object.entries(soonaverseAttributes?.props) as [_key, { label, value }]}
-                                <KeyValueBox keyText={label} valueText={value} shrink />
+                                <KeyValueBox keyText={label} valueText={String(value)} shrink />
                             {/each}
                         </div>
                     </nft-attributes>
@@ -204,7 +220,7 @@
                         </Text>
                         <div class="flex flex-wrap gap-3">
                             {#each Object.entries(soonaverseAttributes?.stats) as [_key, { label, value }]}
-                                <KeyValueBox keyText={label} valueText={value} shrink />
+                                <KeyValueBox keyText={label} valueText={String(value)} shrink />
                             {/each}
                         </div>
                     </nft-attributes>

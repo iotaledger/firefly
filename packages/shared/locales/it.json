@@ -625,7 +625,7 @@
             "step_3": "Premere il pulsante destro per passare alle Impostazioni. Quindi premere entrambi i pulsanti per convalidare. Il dispositivo Ledger visualizza la firma cieca.",
             "step_4": "Premi entrambi i pulsanti per abilitare la firma della transazione cieca. Il dispositivo viene visualizzato Abilitato. Hai finito."
         },
-        "storageDepositBreakdown": {
+        "balanceBreakdown": {
             "title": "Ripartizione dei depositi",
             "totalStorageDeposit": "Totale storage deposit\n",
             "basicOutputs": {

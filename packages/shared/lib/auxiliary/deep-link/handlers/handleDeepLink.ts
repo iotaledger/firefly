@@ -12,6 +12,7 @@ import { isDeepLinkRequestActive } from '../stores'
 import { handleDeepLinkGovernanceContext } from './governance/handleDeepLinkGovernanceContext'
 import { handleDeepLinkWalletContext } from './wallet/handleDeepLinkWalletContext'
 import { handleError } from '@core/error/handlers'
+import { PopupId } from '@auxiliary/popup'
 
 /**
  * Parses an IOTA deep link, i.e. a URL that begins with the app protocol i.e "firefly://".
@@ -34,7 +35,7 @@ export function handleDeepLink(input: string): void {
 
         if (get(visibleActiveAccounts).length > 1) {
             openPopup({
-                type: 'accountSwitcher',
+                id: PopupId.AccountSwitcher,
                 overflow: true,
                 props: {
                     onConfirm: () => {
