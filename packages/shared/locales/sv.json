@@ -626,33 +626,60 @@
             "step_4": "Tryck på båda knapparna för att aktivera blind signering. Enheten visar Aktiverad. Du är klar."
         },
         "balanceBreakdown": {
-            "title": "Lagringsdeposition breakdown",
-            "totalStorageDeposit": "Totalt lagringsdeposition",
+            "title": "Balance breakdown",
+            "available": {
+                "title": "Available",
+                "subtitle": "Funds fully available for spending"
+            },
+            "pending": {
+                "title": "Pending",
+                "subtitle": "Temporarily locked in transactions"
+            },
+            "locked": {
+                "title": "Locked",
+                "subtitle": "Temporarily locked for governance"
+            },
+            "storageDeposit": {
+                "title": "Storage deposit",
+                "subtitle": "These funds are reserved for storing native assets."
+            },
+            "totalBalance": {
+                "title": "Total balance",
+                "subtitle": ""
+            },
             "basicOutputs": {
-                "title": "Inhemska Tokens",
-                "subtitle": "Reserverat för lagring av Inhemska tokens"
+                "title": "Native Tokens",
+                "subtitle": "Reserved for Native Token storage"
             },
             "nftOutputs": {
-                "title": "NFT:er",
-                "subtitle": "Reserverat för NFT-lagring"
+                "title": "NFTs",
+                "subtitle": "Reserved for NFT storage"
             },
             "aliasOutputs": {
-                "title": "Alias",
-                "subtitle": "Reserverat för Alias-lagring"
+                "title": "Aliases",
+                "subtitle": "Reserved for Alias storage"
             },
             "foundryOutputs": {
                 "title": "Foundries",
                 "subtitle": "Reserved for Native Token Foundry storage"
             },
-            "pendingTransactions": {
-                "title": "Transaktioner",
-                "subtitle": "Tillfälligt låst i ej hämtade transaktioner"
+            "unclaimed": {
+                "title": "Unclaimed transaction",
+                "subtitle": "Temporarily locked in unclaimed transactions"
             },
-            "votingPowerOutput": {
+            "timelock": {
+                "title": "Time lock",
+                "subtitle": "Temporarily locked in timelocked transactions"
+            },
+            "storageDepositReturn": {
+                "title": "SDRUC",
+                "subtitle": "Temporarily locked in Storage Deposit Return"
+            },
+            "governance": {
                 "title": "Governance",
                 "subtitle": "Reserved for voting power"
             },
-            "minimizeStorageDepositButton": "Minimera lagringsdeposition"
+            "minimizeStorageDepositButton": "Minimize storage deposit"
         },
         "minimizeStorageDeposit": {
             "title": "Minimera lagringsdeposition",
@@ -1188,7 +1215,7 @@
         "readDocumentation": "Läs dokumentationen",
         "visitFaq": "Besök FAQ",
         "viewStatus": "Visa status",
-        "viewStorageDeposit": "Visa lagringsdeposition",
+        "viewBalanceBreakdown": "View balance breakdown",
         "showHiddenAccounts": "Visa dolda plånböcker",
         "confirm": "Bekräfta",
         "hideNetworkStatistics": "Dölj nätverksstatistik",
