@@ -36,7 +36,7 @@
         getAssetById,
         ActivityAction,
     } from '@core/wallet'
-    import { closePopup, openPopup } from '@auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { ledgerPreparedOutput } from '@core/ledger'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import { handleError } from '@core/error/handlers/handleError'
@@ -191,7 +191,7 @@
     function onBack(): void {
         closePopup()
         openPopup({
-            id: 'sendForm',
+            id: PopupId.SendForm,
             overflow: true,
         })
     }

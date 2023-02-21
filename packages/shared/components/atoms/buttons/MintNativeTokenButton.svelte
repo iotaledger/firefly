@@ -1,6 +1,6 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { closePopup, openPopup } from '@auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { OnboardingButton } from 'shared/components'
     import { selectedAccount } from '@core/account'
     import { resetMintTokenDetails } from '@core/wallet'
@@ -11,11 +11,11 @@
         resetMintTokenDetails()
         if (hasAliases) {
             openPopup({
-                id: 'mintNativeTokenForm',
+                id: PopupId.MintNativeTokenForm,
             })
         } else {
             openPopup({
-                id: 'confirmation',
+                id: PopupId.Confirmation,
                 props: {
                     title: localize('popups.noAlias.title'),
                     hint: localize('popups.noAlias.description'),
@@ -24,7 +24,7 @@
                     onConfirm: () => {
                         closePopup()
                         openPopup({
-                            id: 'aliasConfirmation',
+                            id: PopupId.AliasConfirmation,
                         })
                     },
                 },

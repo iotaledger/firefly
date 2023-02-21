@@ -1,10 +1,10 @@
 <script lang="ts">
     import { Button, Text, ButtonSize } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { openPopup } from '@auxiliary/popup'
+    import { openPopup, PopupId } from '@auxiliary/popup'
 
     function handleDiagnosticsClick(): void {
-        openPopup({ id: 'diagnostics' })
+        openPopup({ id: PopupId.Diagnostics })
     }
 </script>
 

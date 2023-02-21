@@ -43,6 +43,7 @@
         clearParticipationEventStatusPoll,
         pollParticipationEventStatus,
     } from '@contexts/governance/actions/pollParticipationEventStatus'
+    import { PopupId } from '@auxiliary/popup'
 
     const { metadata } = $visibleSelectedAccountAssets?.baseCoin
 
@@ -164,7 +165,7 @@
 
     function onStopVotingClick(): void {
         openPopup({
-            id: 'stopVoting',
+            id: PopupId.StopVoting,
         })
     }
 
@@ -173,7 +174,7 @@
             answerValue === undefined ? ABSTAIN_VOTE_VALUE : answerValue
         )
         openPopup({
-            id: 'voteForProposal',
+            id: PopupId.VoteForProposal,
             props: { selectedAnswerValues: chosenAnswerValues },
         })
     }

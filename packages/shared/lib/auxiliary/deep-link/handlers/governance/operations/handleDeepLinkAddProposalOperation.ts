@@ -6,6 +6,7 @@ import { AddProposalOperationParameter } from '../../../enums'
 import { registeredProposalsForSelectedAccount, selectedProposal } from '@contexts/governance/stores'
 import { GovernanceRoute, governanceRouter } from '@core/router'
 import { get } from 'svelte/store'
+import { PopupId } from '@auxiliary/popup'
 
 /**
  * NOTE: If we throw an error as normal, it will be handled and displayed in the "failed link"
@@ -39,7 +40,7 @@ export function handleDeepLinkAddProposalOperation(searchParams: URLSearchParams
     }
 
     openPopup({
-        id: 'addProposal',
+        id: PopupId.AddProposal,
         props: { eventId, nodeUrl },
     })
 }

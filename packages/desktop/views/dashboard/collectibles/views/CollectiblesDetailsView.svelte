@@ -32,6 +32,7 @@
         OUTPUT_TYPE_NFT,
     } from '@core/wallet'
     import { NewTransactionType, selectedAccountActivities, setNewTransactionDetails } from '@core/wallet/stores'
+    import { PopupId } from '@auxiliary/popup'
 
     let modal: Modal
     let error: string
@@ -126,7 +127,7 @@
             disableAssetSelection: true,
         })
         openPopup({
-            id: 'sendForm',
+            id: PopupId.SendForm,
             overflow: true,
         })
     }

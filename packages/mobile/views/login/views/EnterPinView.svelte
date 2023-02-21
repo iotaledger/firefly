@@ -4,7 +4,7 @@
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { activeProfile, login, resetActiveProfile } from '@core/profile'
     import { loginRouter } from '../../../lib/routers'
-    import { openPopup, popupState } from '@auxiliary/popup'
+    import { openPopup, popupState, PopupId } from '@auxiliary/popup'
     import { isValidPin } from '@core/utils'
     import { Icon, PinInput, Profile, Text, TextType } from 'shared/components'
     import { onDestroy } from 'svelte'
@@ -25,7 +25,7 @@
 
     $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTermsOfService()) {
         openPopup({
-            type: 'legalUpdate',
+            id: PopupId.LegalUpdate,
             hideClose: true,
             preventClose: true,
         })
