@@ -127,7 +127,8 @@
     }
 
     function returnIfNftWasSent(selectedAccountNfts: INft[]): void {
-        if (selectedAccountNfts.find((nft) => nft.id === id)) {
+        const nft = selectedAccountNfts.find((nft) => nft.id === id)
+        if (nft?.isSpendable) {
             // empty
         } else {
             $collectiblesRouter.previous()

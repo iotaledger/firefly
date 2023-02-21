@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 import { selectedAccount, updateSelectedAccount } from '@core/account'
-import { removeNftFromSelectedAccount } from '@core/nfts/actions'
+import { updateNftInAllAccountNfts } from '@core/nfts/actions'
 
 import { DEFAULT_TRANSACTION_OPTIONS, OUTPUT_TYPE_NFT } from '../constants'
 import { resetNewTokenTransactionDetails } from '../stores'
@@ -14,7 +14,7 @@ export async function sendOutput(output: Output): Promise<void> {
         const transaction = await account.sendOutputs([output], DEFAULT_TRANSACTION_OPTIONS)
         // Reset transaction details state, since the transaction has been sent
         if (output.type === OUTPUT_TYPE_NFT) {
-            removeNftFromSelectedAccount(account.index, output.nftId)
+            updateNftInAllAccountNfts(account.index, output.nftId, { isSpendable: false })
         }
 
         resetNewTokenTransactionDetails()
