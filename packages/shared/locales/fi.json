@@ -625,7 +625,7 @@
             "step_3": "Paina oikeaa painiketta navigoidaksesi asetuksiin. Paina sitten molempia painikkeita vahvistaaksesi. Ledger-laitteesi näyttää sokean allekirjoittamisen.",
             "step_4": "Paina molempia painikkeita aktivoidaksesi transaktion sokean allekirjoittamisen. Laite näyttää Käytössä. Olet valmis."
         },
-        "storageDepositBreakdown": {
+        "balanceBreakdown": {
             "title": "Tallennusvakuuden erittely",
             "totalStorageDeposit": "Tallennusvakuus yhteensä",
             "basicOutputs": {

@@ -2,7 +2,7 @@
     import { BaseError } from '@core/error'
     import { localize } from '@core/i18n'
     import { setMintTokenDetails, mintTokenDetails } from '@core/wallet'
-    import { closePopup, openPopup } from '@auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import {
         Button,
         Error,
@@ -65,7 +65,7 @@
                 aliasId,
             })
             openPopup({
-                id: 'mintNativeTokenConfirmation',
+                id: PopupId.MintNativeTokenConfirmation,
                 overflow: true,
             })
         }

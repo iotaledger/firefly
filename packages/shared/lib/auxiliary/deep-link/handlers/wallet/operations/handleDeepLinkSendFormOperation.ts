@@ -6,7 +6,7 @@ import {
     getAssetById,
     NewTransactionType,
 } from '@core/wallet'
-import { openPopup } from '@auxiliary/popup'
+import { openPopup, PopupId } from '@auxiliary/popup'
 import { get } from 'svelte/store'
 
 import { SendOperationParameter } from '../../../enums'
@@ -19,7 +19,7 @@ export function handleDeepLinkSendFormOperation(searchParams: URLSearchParams): 
     if (transactionDetails) {
         setNewTransactionDetails(transactionDetails)
         openPopup({
-            id: 'sendForm',
+            id: PopupId.SendForm,
             overflow: true,
         })
     }

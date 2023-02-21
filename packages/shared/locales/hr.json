@@ -625,7 +625,7 @@
             "step_3": "Pritisnite desni gumb da bi navigirali do Postavka. Zatim pritisnite oba gumba za potvrdu. Vaš Ledger uređaj prikazuje Blind Signing.",
             "step_4": "Pritisnite oba gumba da bi omogućili Blind Signing transakcije. Uređaj prikazuje Enabled. Gotovo."
         },
-        "storageDepositBreakdown": {
+        "balanceBreakdown": {
             "title": "Raščlamba depozita za pohranu",
             "totalStorageDeposit": "Ukupno depozita za pohranu",
             "basicOutputs": {

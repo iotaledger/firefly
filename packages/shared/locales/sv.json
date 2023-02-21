@@ -625,7 +625,7 @@
             "step_3": "Tryck på höger knapp för att navigera till Inställningar. Tryck sedan på båda knapparna för att validera. Ledger-enheten visar blind signering.",
             "step_4": "Tryck på båda knapparna för att aktivera blind signering. Enheten visar Aktiverad. Du är klar."
         },
-        "storageDepositBreakdown": {
+        "balanceBreakdown": {
             "title": "Lagringsdeposition breakdown",
             "totalStorageDeposit": "Totalt lagringsdeposition",
             "basicOutputs": {

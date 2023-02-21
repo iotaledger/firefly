@@ -9,6 +9,7 @@
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
     import { popupState } from '@auxiliary/popup/stores'
+    import { PopupId } from '@auxiliary/popup'
 
     const ZERO_VOTING_POWER = '0'
 
@@ -25,7 +26,7 @@
 
             await checkActiveProfileAuth(async () => {
                 openPopup({
-                    id: 'manageVotingPower',
+                    id: PopupId.ManageVotingPower,
                     props: { newVotingPower: ZERO_VOTING_POWER },
                 })
                 await setVotingPower(ZERO_VOTING_POWER, true)

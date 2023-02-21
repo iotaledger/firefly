@@ -45,7 +45,7 @@
     import RevotePopup from './RevotePopup.svelte'
     import { SendConfirmationPopup, SendFormPopup } from './send'
     import StopVotingPopup from './StopVotingPopup.svelte'
-    import StorageDepositBreakdownPopup from './StorageDepositBreakdownPopup.svelte'
+    import BalanceBreakdownPopup from './BalanceBreakdownPopup.svelte'
     import TestDeepLinkFormPopup from './TestDeepLinkFormPopup.svelte'
     import TokenInformationPopup from './TokenInformationPopup.svelte'
     import UnlockStrongholdPopup from './UnlockStrongholdPopup.svelte'
@@ -74,17 +74,14 @@
     let size: PopupSize = PopupSize.Medium
 
     $: switch (id) {
-        case 'connectLedger':
-        case 'createAccount':
-        case 'manageAccount':
+        case PopupId.ConnectLedger:
+        case PopupId.CreateAccount:
+        case PopupId.ManageAccount:
             size = PopupSize.Small
             break
-        case 'ledgerAppGuide':
-        case 'ledgerConnectionGuide':
+        case PopupId.LedgerAppGuide:
+        case PopupId.LedgerConnection:
             size = PopupSize.Large
-            break
-        case 'transactionDetails':
-            autofocusContent = false
             break
         default:
             size = PopupSize.Medium
@@ -130,7 +127,7 @@
         [PopupId.SendConfirmation]: SendConfirmationPopup,
         [PopupId.SendForm]: SendFormPopup,
         [PopupId.StopVoting]: StopVotingPopup,
-        [PopupId.StorageDepositBreakdown]: StorageDepositBreakdownPopup,
+        [PopupId.BalanceBreakdown]: BalanceBreakdownPopup,
         [PopupId.TestDeepLinkForm]: TestDeepLinkFormPopup,
         [PopupId.TokenInformation]: TokenInformationPopup,
         [PopupId.UnlockStronghold]: UnlockStrongholdPopup,

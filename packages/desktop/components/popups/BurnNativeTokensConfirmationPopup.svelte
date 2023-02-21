@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Button, Text, TextHint, FontWeight, TextType, ButtonVariant, KeyValueBox } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { closePopup, openPopup } from '@auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { burnAsset, formatTokenAmountBestMatch, IAsset } from '@core/wallet'
     import { checkActiveProfileAuth } from '@core/profile'
     import { handleError } from '@core/error/handlers'
@@ -16,7 +16,7 @@
 
     function onBack(): void {
         openPopup({
-            id: 'burnNativeTokens',
+            id: PopupId.BurnNativeTokens,
             props: { asset, rawAmount },
         })
     }

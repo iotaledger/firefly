@@ -11,7 +11,7 @@
         NumberInput,
         TooltipIcon,
     } from 'shared/components'
-    import { closePopup, openPopup } from '@auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { BaseError } from '@core/error/classes'
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
@@ -64,7 +64,7 @@
         if (valid) {
             setMintNftDetails(convertInputsToMetadataType(optionalInputs))
             openPopup({
-                id: 'mintNftConfirmation',
+                id: PopupId.MintNftConfirmation,
                 overflow: true,
             })
         }

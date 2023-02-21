@@ -8,7 +8,7 @@
     import { activeProfile, visibleActiveAccounts } from '@core/profile'
     import { formatTokenAmountBestMatch } from '@core/wallet'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { openPopup } from '@auxiliary/popup'
+    import { openPopup, PopupId } from '@auxiliary/popup'
 
     export let modal: Modal = undefined
 
@@ -22,7 +22,7 @@
 
     function handleCreateAccountClick(): void {
         modal?.close()
-        openPopup({ id: 'createAccount' })
+        openPopup({ id: PopupId.CreateAccount })
     }
 </script>
 
