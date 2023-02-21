@@ -60,8 +60,8 @@
         {#each Object.keys(filter) as filterUnit, index}
             <FilterItem
                 bind:filterUnit={filter[filterUnit]}
-                onArrowClick={() => toggleFilterItem(index)}
-                openFilterItem={() => openFilterItem(index)}
+                on:toggle={() => toggleFilterItem(index)}
+                on:open={() => openFilterItem(index)}
                 isOpen={openFilterItemIndex === index}
             />
         {/each}
