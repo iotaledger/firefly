@@ -1,6 +1,5 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { DrawerManager, ToastContainer } from './components'
     import { DashboardView, LoginRouter, OnboardingRouter } from './views'
     import { localeDirection, setupI18n, _ } from '@core/i18n'
     import { checkAndMigrateProfiles, cleanupEmptyProfiles } from '@core/profile'
@@ -16,6 +15,7 @@
         shouldBeDarkMode,
     } from '@core/app'
     import { onboardingProfile } from '@contexts/onboarding'
+    import { DrawerManager, ToastContainer } from './components'
     import { isKeyboardOpen, keyboardHeight } from './lib/auxiliary/keyboard'
     import {
         appRoute,
