@@ -18,7 +18,13 @@
     import { localize } from '@core/i18n'
     import { ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
     import { BASE_TOKEN } from '@core/network/constants'
-    import { convertAndFormatNftMetadata, getNftByIdFromAllAccountNfts, INft, selectedNftId } from '@core/nfts'
+    import {
+        allAccountNfts,
+        convertAndFormatNftMetadata,
+        getNftByIdFromAllAccountNfts,
+        INft,
+        selectedNftId,
+    } from '@core/nfts'
     import { activeProfile } from '@core/profile/stores'
     import { truncateString } from '@core/utils'
     import {
@@ -34,6 +40,7 @@
     } from '@core/wallet'
     import { NewTransactionType, selectedAccountActivities, setNewTransactionDetails } from '@core/wallet/stores'
     import { PopupId } from '@auxiliary/popup'
+    import { collectiblesRouter } from '@core/router/routers'
 
     let modal: Modal
     let error: string
@@ -55,6 +62,7 @@
         .find((activity) => activity?.type === ActivityType.Nft && activity?.nftId === id)
 
     $: formattedMetadata = convertAndFormatNftMetadata(metadata)
+    $: returnIfNftWasSent($allAccountNfts[$selectedAccountIndex])
 
     $: nftActivity, setStorageDeposit()
     async function setStorageDeposit() {
@@ -116,6 +124,15 @@
             formattedMetadata && {
                 metadata: { data: formattedMetadata, isCopyable: true, isPreText: true, maxHeight: 72 },
             }),
+    }
+
+    function returnIfNftWasSent(selectedAccountNfts: INft[]): void {
+        const nft = selectedAccountNfts.find((nft) => nft.id === id)
+        if (nft?.isSpendable) {
+            // empty
+        } else {
+            $collectiblesRouter.previous()
+        }
     }
 
     function handleExplorerClick(): void {
