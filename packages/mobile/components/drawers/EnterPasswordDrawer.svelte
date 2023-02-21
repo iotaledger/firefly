@@ -2,6 +2,7 @@
     import { localize } from '@core/i18n'
     import { unlockStronghold } from '@core/profile'
     import { Button, HTMLButtonType, PasswordInput, Text, TextType } from '@ui'
+    import { closeDrawer, DrawerId } from '../../lib/auxiliary/drawer'
 
     export let busyMessage: string = ''
 
@@ -17,6 +18,7 @@
             error = ''
             isBusy = true
             await unlockStronghold(password)
+            closeDrawer(DrawerId.EnterPassword)
             onSuccess && onSuccess(returnPassword ? password : undefined)
         } catch (err) {
             console.error(err)

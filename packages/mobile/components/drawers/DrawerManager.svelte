@@ -6,9 +6,11 @@
     import EnterPasswordDrawer from './EnterPasswordDrawer.svelte'
     import SelectedActivityDrawer from './SelectedActivityDrawer.svelte'
     import SelectedTokenDrawer from './SelectedTokenDrawer.svelte'
+    import CreateAccountDrawer from './CreateAccountDrawer.svelte'
 
     const COMPONENTS = {
         [DrawerId.AccountSwitcher]: AccountSwitcherDrawer,
+        [DrawerId.CreateAccount]: CreateAccountDrawer,
         [DrawerId.Confirm]: ConfirmDrawer,
         [DrawerId.EnterPassword]: EnterPasswordDrawer,
         [DrawerId.SelectedActivity]: SelectedActivityDrawer,
