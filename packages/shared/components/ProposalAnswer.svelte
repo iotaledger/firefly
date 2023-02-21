@@ -18,7 +18,6 @@
     export let isWinner: boolean
     export let proposalStatus: string
     export let truncate = false
-    export let isLoading = false
 
     let isSelected: boolean
     let isVotedFor: boolean
@@ -51,7 +50,6 @@
     class:voted={isVotedFor}
     class:winner={isWinner}
     class:selected={isSelected}
-    class:cursor-default={isLoading}
     style:--percentage={percentage}
     on:click={onClick}
 >
