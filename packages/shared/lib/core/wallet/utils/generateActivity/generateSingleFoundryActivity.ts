@@ -42,7 +42,7 @@ export function generateSingleFoundryActivity(
 
     const storageDeposit = getAmountFromOutput(output)
     const giftedStorageDeposit = 0
-    const rawAmount = nativeToken ? Number(nativeToken?.amount) : getAmountFromOutput(output) - storageDeposit
+    const rawAmount = Number(nativeToken?.amount ?? 0)
     const metadata = getMetadataFromOutput(output)
     const tag = getTagFromOutput(output)
 

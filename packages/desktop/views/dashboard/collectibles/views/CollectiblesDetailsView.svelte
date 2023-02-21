@@ -29,6 +29,7 @@
         formatTokenAmountPrecise,
         getBech32AddressFromAddressTypes,
         getHexAddressFromAddressTypes,
+        getNftId,
         OUTPUT_TYPE_NFT,
     } from '@core/wallet'
     import { NewTransactionType, selectedAccountActivities, setNewTransactionDetails } from '@core/wallet/stores'
@@ -61,10 +62,12 @@
         const nftOutputs = outputs
             .filter((output) => output.output.type === OUTPUT_TYPE_NFT)
             .sort((a, b) => b.metadata.milestoneTimestampBooked - a.metadata.milestoneTimestampBooked)
-        const recentNftOutput = nftOutputs.find((o) => o.output.type === OUTPUT_TYPE_NFT && o.output.nftId === id)
+        const recentNftOutput = nftOutputs.find(
+            (o) => o.output.type === OUTPUT_TYPE_NFT && getNftId(o.output.nftId, o.outputId) === id
+        )
 
         storageDeposit = formatTokenAmountPrecise(
-            Number(recentNftOutput.output.amount),
+            Number(recentNftOutput?.output.amount ?? 0),
             BASE_TOKEN[$activeProfile?.networkProtocol]
         )
     }
