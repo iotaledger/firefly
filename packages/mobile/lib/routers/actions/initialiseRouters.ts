@@ -35,8 +35,6 @@ import {
     StorageProtectionSetupRouter,
     strongholdSetupRouter,
     StrongholdSetupRouter,
-    TokenRouter,
-    tokenRouter,
     FilterRouter,
     filterRouter,
 } from '../routers'
@@ -92,7 +90,6 @@ function initialiseDashboardSubrouters(): void {
     accountSwitcherRouter.set(new AccountSwitcherRouter())
     accountActionsRouter.set(new AccountActionsRouter())
     sendRouter.set(new SendRouter())
-    tokenRouter.set(new TokenRouter())
     filterRouter.set(new FilterRouter())
     profileRouter.set(new ProfileRouter())
     settingsRouter.set(new SettingsRouter())
