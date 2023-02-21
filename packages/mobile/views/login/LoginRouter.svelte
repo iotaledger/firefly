@@ -1,10 +1,10 @@
 <script lang="ts">
-    import { needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService } from '@core/app'
-    import { EnterPinView, SelectProfileView, LegalUpdateView, LoadProfileView } from './views'
-    import { loginRoute, LoginRoute } from '../../lib/routers'
     import { onMount } from 'svelte'
+    import { needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService } from '@core/app'
+    import { loginRoute, LoginRoute } from '../../lib/routers'
+    import { EnterPinView, LegalUpdateView, LoadProfileView, SelectProfileView } from './views'
 
-    $: needsToAcceptLegal = false
+    let needsToAcceptLegal = false
 
     function checkLegal(): void {
         needsToAcceptLegal = needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTermsOfService()

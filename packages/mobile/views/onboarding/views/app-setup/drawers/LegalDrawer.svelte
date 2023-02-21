@@ -1,18 +1,12 @@
 <script lang="ts">
-    import { localize } from '@core/i18n'
     import { ConditionOfUse, Drawer } from '../../../../../components'
+    import { localize } from '@core/i18n'
 
     export let onClose: () => unknown = () => {}
 </script>
 
-<Drawer
-    {onClose}
-    title={`${localize('popups.legalUpdate.tosTitle')} & ${localize('popups.legalUpdate.privPolicyTitle')}`}
-    allowBack={true}
-    onBackClick={onClose}
-    fullScreen
->
-    <div class="overflow-auto mt-4">
+<Drawer {onClose} title={localize('views.onboarding.appSetup.legal.title')} onBackClick={onClose} allowBack fullScreen>
+    <legal-drawer class="block overflow-auto mt-4">
         <ConditionOfUse />
-    </div>
+    </legal-drawer>
 </Drawer>
