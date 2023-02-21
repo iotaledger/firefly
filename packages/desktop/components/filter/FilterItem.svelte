@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { createEventDispatcher } from 'svelte'
     import {
         Checkbox,
         Icon,
@@ -16,15 +15,12 @@
     export let filterUnit: FilterUnit
     export let isOpen: boolean
 
-    const dispatch = createEventDispatcher()
-
-    function onArrowClick(): void {
-        dispatch('toggle')
-    }
+    export let onArrowClick: () => void
+    export let openFilterItem: () => void
 
     function onCheckBoxClick(): void {
         if (filterUnit.active) {
-            dispatch('open')
+            openFilterItem()
         }
     }
 </script>
