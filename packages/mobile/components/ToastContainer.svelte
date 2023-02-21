@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Alert, Toast } from 'shared/components'
-    import { notifications, removeDisplayNotification } from '@auxiliary/notification/stores'
+    import { notifications } from '@auxiliary/notification/stores'
     import { fade } from 'svelte/transition'
     import { Swiper } from '../components'
 
@@ -23,7 +23,7 @@
         <ul class="space-y-2">
             {#each toasts as toast (toast.id)}
                 <li transition:fade|local={{ duration: 100 }}>
-                    <Swiper on:close={() => removeDisplayNotification(toast.id)}>
+                    <Swiper toastId={toast.id}>
                         {#if toast.alert}
                             <Alert type={toast.type} message={toast.message} id={toast.id} showDismiss />
                         {:else}
