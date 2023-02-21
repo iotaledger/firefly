@@ -4,11 +4,13 @@
     import ConfirmDrawer from './ConfirmDrawer.svelte'
     import EnterPasswordDrawer from './EnterPasswordDrawer.svelte'
     import SelectedActivityDrawer from './SelectedActivityDrawer.svelte'
+    import SelectedTokenDrawer from './SelectedTokenDrawer.svelte'
 
     const COMPONENTS = {
         [DrawerId.Confirm]: ConfirmDrawer,
         [DrawerId.EnterPassword]: EnterPasswordDrawer,
         [DrawerId.SelectedActivity]: SelectedActivityDrawer,
+        [DrawerId.SelectedToken]: SelectedTokenDrawer,
     }
 </script>
 

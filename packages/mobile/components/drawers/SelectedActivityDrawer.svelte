@@ -1,6 +1,6 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { Activity, ActivityAsyncStatus, ActivityDirection, ActivityType } from '@core/wallet'
+    import { ActivityAsyncStatus, ActivityDirection, ActivityType, selectedAccountActivities } from '@core/wallet'
     import features from '@features/features'
     import {
         ActivityInformation,
@@ -12,8 +12,9 @@
     } from '@ui'
     import { handleClaimActivity, handleRejectActivity } from '../../lib/contexts/wallet'
 
-    export let activity: Activity | undefined
+    export let activityId: string
 
+    $: activity = $selectedAccountActivities.find((_activity) => _activity.id === activityId)
     $: isTimelocked = activity.asyncData?.asyncStatus === ActivityAsyncStatus.Timelocked
     $: isActivityIncomingAndUnclaimed =
         activity.asyncData &&

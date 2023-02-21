@@ -3,8 +3,12 @@
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
     import { Icon, Text, TextType } from 'shared/components'
     import { fade, fly } from 'svelte/transition'
-    import { DrawerId, DRAWER_STATIC_TITLE_TITLES } from '../lib/auxiliary/drawer'
-    import { DRAWER_IN_ANIMATION_DURATION_MS, DRAWER_OUT_ANIMATION_DURATION_MS } from '../lib/auxiliary/drawer'
+    import {
+        DrawerId,
+        DRAWER_IN_ANIMATION_DURATION_MS,
+        DRAWER_OUT_ANIMATION_DURATION_MS,
+        DRAWER_STATIC_TITLE_TITLES,
+    } from '../lib/auxiliary/drawer'
 
     export let onClose: () => unknown = () => {}
     export let onBackClick: () => unknown = () => {}
@@ -20,10 +24,7 @@
     let panelWidth = 0
     let touchStart = 0
 
-    const staticTile: string | undefined = DRAWER_STATIC_TITLE_TITLES[id]
-        ? localize(DRAWER_STATIC_TITLE_TITLES[id])
-        : undefined
-    let displayedTitle: string | undefined = undefined
+    $: staticTile = DRAWER_STATIC_TITLE_TITLES[id] ? localize(DRAWER_STATIC_TITLE_TITLES[id]) : undefined
     $: displayedTitle = title ?? staticTile
 
     const directon = enterFromSide ? { x: -100 } : { y: 100 }
