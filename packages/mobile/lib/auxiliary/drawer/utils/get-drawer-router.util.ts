@@ -11,15 +11,7 @@ export function getDrawerRouter(drawerId: DrawerId): Writable<IRouter> | undefin
             return profileRouter
         case DrawerId.Send:
             return sendRouter
-        case DrawerId.AccountSwitcher:
-        case DrawerId.SelectedToken:
-        case DrawerId.Legal:
-        case DrawerId.SelectedActivity:
-        case DrawerId.EnterPassword:
-        case DrawerId.AddReferences:
-        case DrawerId.AddExpiration:
-        case DrawerId.Confirm:
-        case DrawerId.Receive:
+        default:
             return undefined
     }
 }
