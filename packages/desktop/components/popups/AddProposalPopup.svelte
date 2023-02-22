@@ -11,6 +11,7 @@
     import { registeredProposalsForSelectedAccount } from '@contexts/governance'
     import { activeAccounts } from '@core/profile'
     import { selectedAccount } from '@core/account'
+    import { PopupId } from '@auxiliary/popup'
 
     export let eventId: string
     export let nodeUrl: string
@@ -64,7 +65,7 @@
 
     function openNodeAuthRequiredPopup(): void {
         openPopup({
-            id: 'nodeAuthRequired',
+            id: PopupId.NodeAuthRequired,
             props: { onSubmit: registerParticipationWrapper },
         })
     }

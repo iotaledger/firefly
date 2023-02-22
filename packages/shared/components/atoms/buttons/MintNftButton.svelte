@@ -1,13 +1,13 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { openPopup } from '@auxiliary/popup'
+    import { openPopup, PopupId } from '@auxiliary/popup'
     import { OnboardingButton } from 'shared/components'
     import { resetMintNftDetails } from '@core/wallet'
 
     function handleMintNft(): void {
         resetMintNftDetails()
         openPopup({
-            id: 'mintNftForm',
+            id: PopupId.MintNftForm,
         })
     }
 </script>

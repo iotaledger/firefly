@@ -13,6 +13,7 @@
     import { onMount } from 'svelte'
     import { modifyPopupState } from '@auxiliary/popup/helpers'
     import { isSelectedAccountVoting } from '@contexts/governance/utils'
+    import { PopupId } from '@auxiliary/popup'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let newVotingPower: string = undefined
@@ -48,7 +49,7 @@
 
             const isVoting = isSelectedAccountVoting()
             if (amount === '0' && isVoting) {
-                openPopup({ id: 'votingPowerToZero' })
+                openPopup({ id: PopupId.VotingPowerToZero })
                 return
             }
 

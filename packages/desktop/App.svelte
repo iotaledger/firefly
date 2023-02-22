@@ -27,11 +27,11 @@
         setPlatform,
     } from '@core/app'
     import { showAppNotification } from '@auxiliary/notification'
-    import { closePopup, openPopup, popupState } from '@auxiliary/popup'
+    import { closePopup, openPopup, PopupId, popupState } from '@auxiliary/popup'
     import { initialiseOnboardingFlow } from '@contexts/onboarding'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { getLocalisedMenuItems } from './lib/helpers'
-    import { Route, ToastContainer, Transition } from '@ui'
+    import { ToastContainer, Transition } from '@ui'
     import { TitleBar, Popup } from '@components'
     import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from '@views'
     import {
@@ -127,17 +127,17 @@
         })
         Platform.onEvent('menu-check-for-update', () => {
             openPopup({
-                id: 'version',
+                id: PopupId.Version,
                 props: {
                     currentVersion: $appVersionDetails.currentVersion,
                 },
             })
         })
         Platform.onEvent('menu-error-log', () => {
-            openPopup({ id: 'errorLog' })
+            openPopup({ id: PopupId.ErrorLog })
         })
         Platform.onEvent('menu-diagnostics', () => {
-            openPopup({ id: 'diagnostics' })
+            openPopup({ id: PopupId.Diagnostics })
         })
         Platform.onEvent('menu-create-developer-profile', () => {
             void initialiseOnboardingFlow({
@@ -201,17 +201,15 @@
                     relative={$popupState.relative}
                 />
             {/if}
-            <Route route={AppRoute.Dashboard}>
+            {#if $appRoute === AppRoute.Dashboard}
                 <Transition>
                     <Dashboard />
                 </Transition>
-            </Route>
-            <Route route={AppRoute.Login}>
+            {:else if $appRoute === AppRoute.Login}
                 <LoginRouter />
-            </Route>
-            <Route route={AppRoute.Onboarding}>
+            {:else if $appRoute === AppRoute.Onboarding}
                 <OnboardingRouter />
-            </Route>
+            {/if}
             {#if settings}
                 <Settings handleClose={() => (settings = false)} />
             {/if}

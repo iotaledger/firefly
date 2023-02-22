@@ -625,30 +625,57 @@
             "step_3": "Press the right button to navigate to Settings. Then press both buttons to validate. Your Ledger device displays Blind Signing.",
             "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
         },
-        "storageDepositBreakdown": {
-            "title": "Storage deposit breakdown",
-            "totalStorageDeposit": "Total storage deposit",
+        "balanceBreakdown": {
+            "title": "Balance breakdown",
+            "available": {
+                "title": "Available",
+                "subtitle": "Funds fully available for spending"
+            },
+            "pending": {
+                "title": "Pending",
+                "subtitle": "Temporarily locked in transactions"
+            },
+            "locked": {
+                "title": "Locked",
+                "subtitle": "Temporarily locked for governance"
+            },
+            "storageDeposit": {
+                "title": "Storage deposit",
+                "subtitle": "These funds are reserved for storing native assets."
+            },
+            "totalBalance": {
+                "title": "Total balance",
+                "subtitle": ""
+            },
             "basicOutputs": {
-                "title": "Tokens Natius",
-                "subtitle": "Reservat per a l'emmagatzematge de fitxes natives"
+                "title": "Native Tokens",
+                "subtitle": "Reserved for Native Token storage"
             },
             "nftOutputs": {
                 "title": "NFTs",
-                "subtitle": "Reservat per emmagatzemar NFT"
+                "subtitle": "Reserved for NFT storage"
             },
             "aliasOutputs": {
-                "title": "Àlies",
-                "subtitle": "Reservat per emmagatzemar l'àlies"
+                "title": "Aliases",
+                "subtitle": "Reserved for Alias storage"
             },
             "foundryOutputs": {
                 "title": "Foundries",
                 "subtitle": "Reserved for Native Token Foundry storage"
             },
-            "pendingTransactions": {
-                "title": "Transactions",
+            "unclaimed": {
+                "title": "Unclaimed transaction",
                 "subtitle": "Temporarily locked in unclaimed transactions"
             },
-            "votingPowerOutput": {
+            "timelock": {
+                "title": "Time lock",
+                "subtitle": "Temporarily locked in timelocked transactions"
+            },
+            "storageDepositReturn": {
+                "title": "SDRUC",
+                "subtitle": "Temporarily locked in Storage Deposit Return"
+            },
+            "governance": {
                 "title": "Governance",
                 "subtitle": "Reserved for voting power"
             },
@@ -1188,7 +1215,7 @@
         "readDocumentation": "Llegeix la documentació",
         "visitFaq": "Visita les FAQ",
         "viewStatus": "Mostra l'estat",
-        "viewStorageDeposit": "View storage deposit",
+        "viewBalanceBreakdown": "View balance breakdown",
         "showHiddenAccounts": "Mostra els moneders amagats",
         "confirm": "Confirmar",
         "hideNetworkStatistics": "Amaga les estadístiques de la xarxa",

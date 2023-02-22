@@ -1,6 +1,5 @@
 <script lang="ts">
     import type { AnswerStatus, Question } from '@iota/wallet'
-    import { createEventDispatcher } from 'svelte'
     import { Text, FontWeight, Icon, ProposalAnswer, TooltipIcon } from 'shared/components'
     import { ABSTAIN_VOTE_VALUE } from '@contexts/governance/constants'
     import { ProposalStatus } from '@contexts/governance/enums'
@@ -9,7 +8,8 @@
     import { Position } from './enums'
     import { getPercentagesFromAnswerStatuses, IProposalAnswerPercentages } from '@contexts/governance'
 
-    const dispatch = createEventDispatcher()
+    export let onQuestionClick: (questionIndex: number) => void
+    export let onAnswerClick: (answerValue: number, questionIndex: number) => void
 
     export let answerStatuses: AnswerStatus[] = []
     export let questionIndex: number = undefined
@@ -33,16 +33,6 @@
         ((selectedAnswerValue || selectedAnswerValue === ABSTAIN_VOTE_VALUE) && !isOpened) ||
         winnerAnswerIndex !== undefined
 
-    function handleAnswerClick(answerValue: number): void {
-        if (!isLoading) {
-            dispatch('clickAnswer', { answerValue, questionIndex })
-        }
-    }
-
-    function handleQuestionClick(): void {
-        dispatch('clickQuestion', { questionIndex })
-    }
-
     function setWinnerAnswerIndex(): void {
         if ($selectedProposal?.status === ProposalStatus.Ended && answerStatuses?.length > 0) {
             const answersAccumulated = answerStatuses?.map((answer) => answer.accumulated)
@@ -57,7 +47,7 @@
         ? 'animate-pulse'
         : ' '}"
 >
-    <div on:click={handleQuestionClick} on:keyup={handleQuestionClick} class="flex justify-between items-center">
+    <div on:click={() => onQuestionClick(questionIndex)} class="flex justify-between items-center">
         <div class="flex flex-col min-w-0">
             {#if questionIndex !== undefined}
                 <Text smaller fontWeight={FontWeight.bold} overrideColor classes="mb-1 text-blue-500">
@@ -93,13 +83,13 @@
                 {votedAnswerValue}
                 {selectedAnswerValue}
                 {disabled}
+                {isLoading}
                 hidden={!isOpened}
                 percentage={percentages[answer.value]}
                 isWinner={answerIndex === winnerAnswerIndex}
                 proposalStatus={$selectedProposal?.status}
                 truncate={!isOpened}
-                {isLoading}
-                on:click={handleAnswerClick(answer.value)}
+                onAnswerClick={() => onAnswerClick(answer.value, questionIndex)}
             />
         {/each}
     </proposal-answers>

@@ -1,13 +1,13 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
     import { FAUCET_URLS, nodeInfo } from '@core/network'
-    import { openPopup } from '@auxiliary/popup'
+    import { openPopup, PopupId } from '@auxiliary/popup'
     import { OnboardingButton } from 'shared/components'
     import { activeProfile } from '@core/profile'
 
     function handleGetTokens(): void {
         openPopup({
-            id: 'faucetRequest',
+            id: PopupId.FaucetRequest,
         })
     }
 </script>
