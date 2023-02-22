@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Drawer } from '../../components'
-    import { closeDrawer, DrawerId, drawersStore } from '../../lib/auxiliary/drawer'
+    import { closeDrawer, DrawerId, drawers } from '../../lib/auxiliary/drawer'
     import ConfirmDrawer from './ConfirmDrawer.svelte'
     import EnterPasswordDrawer from './EnterPasswordDrawer.svelte'
     import SelectedActivityDrawer from './SelectedActivityDrawer.svelte'
@@ -12,7 +12,7 @@
     }
 </script>
 
-{#each $drawersStore as drawer}
+{#each $drawers as drawer}
     {@const drawerId = drawer.id}
     <Drawer id={drawerId} {...drawer.props} onClose={() => closeDrawer(drawerId)}>
         <svelte:component this={COMPONENTS[drawerId]} {...drawer.props} />
