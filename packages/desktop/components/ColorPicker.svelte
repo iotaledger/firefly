@@ -1,118 +1,143 @@
 <script lang="ts">
-    import { Text, Icon, Tooltip } from 'shared/components'
+    import { Text, Icon, Tooltip, TextType, Position } from '@ui'
     import { AccountColors } from '@core/account'
     import { localize } from '@core/i18n'
-    import { clickOutside, isBright } from '@core/utils'
+    import { clickOutside, isBright, hex2rgb } from '@core/utils'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
-    export let active
     export let title = localize('views.picker.color.title')
+    export let active = ''
     export let classes = ''
 
     const accountColors = Object.values(AccountColors).filter((c) => /[#]/.test(c as string))
-    function hex2rgb(hex: string): string {
-        hex = hex.length >= 7 ? hex : '#FFFFFF'
-        return hex
-            .match(/\w\w/g)
-            ?.map((x) => parseInt(x, 16))
-            .join(',')
-    }
-
     const activeAccountColorIndex = accountColors.findIndex((_, i) => accountColors[i] === active)
-    let activeElement = activeAccountColorIndex >= 0 ? activeAccountColorIndex : accountColors.length
 
-    const handleKeyPress = (event, i) => event.key === 'Enter' && (activeElement = i)
-    const handleColorClick = (i) => (activeElement = i)
-    const activeCustomColor = () => (activeElement = accountColors.length)
+    let activeElement = activeAccountColorIndex >= 0 ? activeAccountColorIndex : accountColors.length
+    let inputValue: string = activeAccountColorIndex >= 0 ? '#FFFFFF' : active
+    let inputColor = ''
+    let isTooltipVisible = false
+    let isCustomHover = false
+    let tooltipAnchor: HTMLElement
+
+    $: inputValue = `#${/[0-9|a-f|A-F]+/.exec(inputValue) || ''}`
+    $: customActiveFilled = activeElement === accountColors.length && inputValue.length >= 7
 
     $: if (activeElement >= accountColors.length) {
         active = inputValue.length >= 7 ? inputValue : '#FFFFFF'
     } else {
-        active = accountColors[activeElement]
+        active = accountColors?.[activeElement]?.toString()
     }
-    let inputValue = activeAccountColorIndex >= 0 ? '#FFFFFF' : active
-    $: inputValue = `#${inputValue?.match(/[0-9|a-f|A-F]+/) || ''}`
-    let inputColor
+
     $: if (inputValue.length >= 7) {
         inputColor = isBright(inputValue) ? 'gray-800' : 'white'
     } else {
         inputColor = 'gray-800'
     }
 
-    let tooltipAnchor: HTMLElement
-    let showTooltip = false
-    function toggleTooltip(): void {
-        showTooltip = !showTooltip
+    function onKeyPress(event: KeyboardEvent, index: number): void {
+        if (event.key === 'Enter') {
+            activeElement = index
+        }
     }
 
-    let isCustomHover = false
+    function onColorClick(index: number): void {
+        activeElement = index
+    }
+
     function toggleCustomHover(): void {
         isCustomHover = !isCustomHover
     }
 
-    $: customActiveFilled = activeElement === accountColors.length && inputValue.length >= 7
+    function toggleTooltip(event: KeyboardEvent | MouseEvent): void {
+        const isEnterKeyPressed = event.type === 'keypress' && (event as KeyboardEvent).key === 'Enter'
+        if (event.type === 'click' || isEnterKeyPressed) {
+            isTooltipVisible = !isTooltipVisible
+        }
+    }
+
+    function activeCustomColor(event: KeyboardEvent | MouseEvent): void {
+        const isEnterKeyPressed = event.type === 'keypress' && (event as KeyboardEvent).key === 'Enter'
+        if (event.type === 'click' || isEnterKeyPressed) {
+            activeElement = accountColors.length
+        }
+    }
+
+    function getAccountColorsNames(): string[] {
+        return Object.keys(AccountColors).reduce(
+            (acc, val) => (/[#]/.test(val) ? acc : [...acc, val.toLowerCase()]),
+            []
+        )
+    }
 </script>
 
-<div
-    style="--account-color: {inputValue ? hex2rgb(active) : ''}; --custom-color: {hex2rgb(inputValue)};"
-    class={classes}
+<color-picker
+    style:--account-color={inputValue ? hex2rgb(active) : ''}
+    style:--custom-color={hex2rgb(inputValue)}
+    class="block {classes}"
 >
-    <div class="flex flex-row mb-4">
-        <Text type="h5">{title}</Text>
-    </div>
+    {#if title}
+        <title-container class="flex flex-row mb-4">
+            <Text type={TextType.h5}>{title}</Text>
+        </title-container>
+    {/if}
     <ul class="flex flex-row flex-wrap gap-3.5">
-        {#each Object.keys(AccountColors).reduce((acc, val) => (/[#]/.test(val) ? acc : [...acc, val.toLowerCase()]), []) as color, i}
+        {#each getAccountColorsNames() as color, i}
             <li
+                on:click={() => onColorClick(i)}
+                on:keypress={(event) => onKeyPress(event, i)}
                 tabindex="0"
+                aria-label={color}
                 class="w-12 h-12 rounded-lg ring-opacity-30 hover:ring-opacity-40 cursor-pointer flex justify-center items-center
                 bg-{color}-500 hover:bg-{color}-600 focus:bg-{color}-600 ring-{color}-500"
                 class:ring-4={activeElement === i}
-                on:click={() => handleColorClick(i)}
-                on:keypress={(event) => handleKeyPress(event, i)}
-                aria-label={color}
             >
-                {#if activeElement === i}<Icon icon="checkmark" classes="text-white" />{/if}
+                {#if activeElement === i}
+                    <Icon icon={IconEnum.Checkmark} classes="text-white" />
+                {/if}
             </li>
         {/each}
         <li
+            bind:this={tooltipAnchor}
+            on:click={toggleTooltip}
+            on:click={activeCustomColor}
+            on:keypress={toggleTooltip}
+            on:keypress={activeCustomColor}
+            on:mouseenter={toggleCustomHover}
+            on:mouseleave={toggleCustomHover}
             tabindex="0"
             class="w-12 h-12 rounded-lg ring-opacity-30 hover:ring-opacity-40 cursor-pointer flex justify-center items-center
             custom-color hover:bg-gray-50 focus:bg-white ring-white"
-            on:click={toggleTooltip}
-            bind:this={tooltipAnchor}
             class:active={customActiveFilled}
             class:ring-4={customActiveFilled}
-            on:click={activeCustomColor}
-            on:mouseenter={toggleCustomHover}
-            on:mouseleave={toggleCustomHover}
         >
-            <Icon icon="edit" classes={isCustomHover ? 'text-gray-800' : `text-${inputColor}`} />
+            <Icon icon={IconEnum.Edit} classes={isCustomHover ? 'text-gray-800' : `text-${inputColor}`} />
         </li>
     </ul>
-    {#if showTooltip}
-        <div use:clickOutside on:clickOutside={toggleTooltip}>
-            <Tooltip anchor={tooltipAnchor} position="top">
-                <Text type="p">{localize('views.picker.color.hexCode')}</Text>
+    {#if isTooltipVisible}
+        <tooltip-container class="block" use:clickOutside on:clickOutside={toggleTooltip}>
+            <Tooltip anchor={tooltipAnchor} position={Position.Top}>
+                <Text type={TextType.p}>{localize('views.picker.color.hexCode')}</Text>
                 <input
+                    bind:value={inputValue}
+                    on:click={activeCustomColor}
                     type="text"
                     placeholder="#"
                     pattern="[A-F0-9]{10}"
                     maxlength="7"
-                    bind:value={inputValue}
-                    on:click={activeCustomColor}
-                    class="w-24 h-full text-16 uppercase leading-140 border border-solid mt-2 bg-white dark:bg-gray-800 border-gray-300
-                    text-gray-800 dark:text-white dark:border-gray-700
-                    hover:border-gray-500 dark:hover:border-gray-700 p-1 rounded text-center"
                     class:ring-4={customActiveFilled}
                     class:active={customActiveFilled}
                 />
             </Tooltip>
-        </div>
+        </tooltip-container>
     {/if}
-</div>
+</color-picker>
 
-<style type="text/scss">
+<style lang="scss">
     input {
-        background-color: transparent;
+        @apply w-24 h-full mt-2 p-1 rounded;
+        @apply uppercase text-16 leading-140 text-gray-800 dark:text-white text-center;
+        @apply border border-solid border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700;
+        @apply bg-transparent dark:bg-gray-800;
     }
 
     .active {
