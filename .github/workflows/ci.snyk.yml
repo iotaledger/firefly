@@ -3,8 +3,7 @@ name: Snyk
 on:
   push:
     branches:
-      - 'develop'
-      - 'stardust-develop'
+      - 'main-mobile'
 
 jobs:
   test:

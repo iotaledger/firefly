@@ -1,0 +1,24 @@
+name: Type Check
+
+on:
+    pull_request:
+    push:
+        branches:
+            - 'main-mobile'
+
+jobs:
+    check-types:
+        runs-on: ubuntu-20.04
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v2
+              with:
+                  node-version: 16.4.2
+
+            - name: Install Dependencies
+              run: yarn --ignore-scripts
+
+            - name: Check types
+              run: yarn check-types
