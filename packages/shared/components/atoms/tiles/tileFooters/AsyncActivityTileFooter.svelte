@@ -69,25 +69,25 @@
                 return getTimeDifference(expirationDate, $time)
             }
         }
-        return localize('general.none')
+        return undefined
     }
 </script>
 
 {#if shouldShowAsyncFooter}
     <TileFooter>
         <svelte:fragment slot="left">
-            <TooltipIcon
-                icon={hasExpirationTime ? IconEnum.ExpirationTime : IconEnum.Timelock}
-                iconClasses="text-gray-600 dark:text-gray-200"
-                title={localize(`general.${hasExpirationTime ? 'expirationTime' : 'timelockDate'}`)}
-                text={localize(
-                    `tooltips.transactionDetails.${activity.direction}.${
-                        hasExpirationTime ? 'expirationTime' : 'timelockDate'
-                    }`
-                )}
-                position={Position.Top}
-            />
-            {#if hasExpirationTime}
+            {#if timeDiff}
+                <TooltipIcon
+                    icon={hasExpirationTime ? IconEnum.ExpirationTime : IconEnum.Timelock}
+                    iconClasses="text-gray-600 dark:text-gray-200"
+                    title={localize(`general.${hasExpirationTime ? 'expirationTime' : 'timelockDate'}`)}
+                    text={localize(
+                        `tooltips.transactionDetails.${activity.direction}.${
+                            hasExpirationTime ? 'expirationTime' : 'timelockDate'
+                        }`
+                    )}
+                    position={Position.Top}
+                />
                 <Text fontSize="13" color="gray-600" fontWeight={FontWeight.semibold}>{timeDiff}</Text>
             {/if}
         </svelte:fragment>
