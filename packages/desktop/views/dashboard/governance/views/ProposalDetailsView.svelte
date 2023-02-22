@@ -79,7 +79,7 @@
     }
 
     $: isVotingDisabled =
-        !isProposalVotable($selectedParticipationEventStatus?.status) ||
+        !isProposalVotable($selectedProposal?.status) ||
         !hasChangedAnswers(selectedAnswerValues) ||
         hasSelectedNoAnswers(selectedAnswerValues)
     $: isTransferring = $hasPendingGovernanceTransaction?.[$selectedAccountIndex]
@@ -269,7 +269,7 @@
                         isLoading={!overviewLoaded || !statusLoaded}
                         selectedAnswerValue={selectedAnswerValues[questionIndex]}
                         votedAnswerValue={votedAnswerValues[questionIndex]}
-                        answerStatuses={$selectedProposal.state?.questions[questionIndex]?.answers}
+                        answerStatuses={$selectedParticipationEventStatus?.questions[questionIndex]?.answers}
                         {onQuestionClick}
                         {onAnswerClick}
                     />
@@ -278,7 +278,7 @@
         </proposal-questions>
         {#if $selectedProposal?.status === ProposalStatus.Upcoming}
             <TextHint info text={textHintString} />
-        {:else if [ProposalStatus.Commencing, ProposalStatus.Holding].includes($selectedParticipationEventStatus?.status)}
+        {:else if [ProposalStatus.Commencing, ProposalStatus.Holding].includes($selectedProposal?.status)}
             <buttons-container class="flex w-full space-x-4 mt-6">
                 <Button
                     outline
