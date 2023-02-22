@@ -13,16 +13,18 @@
     import { selectedAccount } from '@core/account'
     import { PopupId } from '@auxiliary/popup'
 
-    export let eventId: string
-    export let nodeUrl: string
+    export let initialEventId: string
+    export let initialNodeUrl: string
 
+    let inputtedEventId = initialEventId
+    let nodeUrl = initialNodeUrl
     let eventIdError: string
     let nodeInput: NodeInput
     let nodeInputError: string
-    let inputtedEventId = eventId
     let isBusy = false
     let toAllAccounts = false
 
+    $: isEditMode = !!initialEventId && !!initialNodeUrl
     $: disabled = !eventId || !nodeUrl || isBusy
     $: eventId = inputtedEventId?.trim()
 
@@ -33,7 +35,7 @@
     async function onSubmit(): Promise<void> {
         try {
             isBusy = true
-            await Promise.all([validateEventId(!toAllAccounts), nodeInput?.validate()])
+            await Promise.all([validateEventId(!toAllAccounts && !isEditMode), nodeInput?.validate()])
             await registerParticipationWrapper()
             isBusy = false
         } catch (err) {
@@ -103,17 +105,22 @@
 </script>
 
 <form id="add-proposal" on:submit|preventDefault={onSubmit}>
-    <Text type={TextType.h3} classes="mb-6">{localize('popups.addProposal.title')}</Text>
-    <Text fontSize="15">{localize('popups.addProposal.body')}</Text>
+    <Text type={TextType.h3} classes="mb-6"
+        >{localize(`popups.${isEditMode ? 'editProposal' : 'addProposal'}.title`)}</Text
+    >
+    <Text fontSize="15">{localize(`popups.${isEditMode ? 'editProposal' : 'addProposal'}.body`)}</Text>
     <div class="flex flex-col w-full space-y-4 mt-4">
         <TextInput
             bind:value={inputtedEventId}
             bind:error={eventIdError}
             placeholder={localize('views.governance.details.proposalInformation.eventId')}
             label={localize('views.governance.details.proposalInformation.eventId')}
+            disabled={isEditMode}
         />
         <NodeInput bind:this={nodeInput} bind:nodeUrl bind:error={nodeInputError} />
-        <Checkbox label={localize('popups.addProposal.addToAllAccounts')} bind:checked={toAllAccounts} />
+        {#if !isEditMode}
+            <Checkbox label={localize('popups.addProposal.addToAllAccounts')} bind:checked={toAllAccounts} />
+        {/if}
     </div>
     <div class="flex w-full space-x-4 mt-6">
         <Button outline classes="w-full" onClick={onCancelClick}>{localize('actions.cancel')}</Button>
