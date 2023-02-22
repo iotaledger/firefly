@@ -3,6 +3,7 @@
     import { closeDrawer, DrawerId, drawersStore } from '../../lib/auxiliary/drawer'
     import AccountActionsDrawer from './AccountActionsDrawer.svelte'
     import AccountSwitcherDrawer from './AccountSwitcherDrawer.svelte'
+    import BalanceBreakdownDrawer from './BalanceBreakdownDrawer.svelte'
     import ConfirmDrawer from './ConfirmDrawer.svelte'
     import CreateAccountDrawer from './CreateAccountDrawer.svelte'
     import CustomizeAccountDrawer from './CustomizeAccountDrawer.svelte'
@@ -21,6 +22,7 @@
         [DrawerId.Receive]: ReceiveDrawer,
         [DrawerId.AccountActions]: AccountActionsDrawer,
         [DrawerId.CustomizeAccount]: CustomizeAccountDrawer,
+        [DrawerId.BalanceBreakdown]: BalanceBreakdownDrawer,
     }
 </script>
 
