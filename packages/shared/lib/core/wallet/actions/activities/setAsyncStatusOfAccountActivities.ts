@@ -18,6 +18,7 @@ export function setAsyncStatusOfAccountActivities(time: Date): void {
                     false,
                     activity.asyncData.expirationDate,
                     activity.asyncData.timelockDate,
+                    !!activity.storageDeposit,
                     time.getTime()
                 )
                 if (oldAsyncStatus !== null && oldAsyncStatus !== activity.asyncData.asyncStatus) {

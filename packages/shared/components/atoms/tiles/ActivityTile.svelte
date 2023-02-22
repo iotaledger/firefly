@@ -7,6 +7,7 @@
         Activity,
         ActivityType,
         NotVerifiedStatus,
+        ActivityAsyncStatus,
     } from '@core/wallet'
     import { openPopup, PopupId } from '@auxiliary/popup'
     import {
@@ -31,6 +32,7 @@
                 ? getAssetFromPersistedAssets(activity.assetId)
                 : undefined)
     $: isTimelocked = activity?.asyncData?.timelockDate > $time
+    $: shouldShowAsyncFooter = activity.asyncData && activity.asyncData.asyncStatus !== ActivityAsyncStatus.Claimed
 
     function handleTransactionClick(): void {
         if (asset?.verification?.status === NotVerifiedStatus.New) {
@@ -73,7 +75,7 @@
         </tile-content>
         {#if isTimelocked}
             <TimelockActivityTileFooter {activity} />
-        {:else if activity.asyncData}
+        {:else if shouldShowAsyncFooter}
             <AsyncActivityTileFooter {activity} />
         {/if}
     </activity-tile>

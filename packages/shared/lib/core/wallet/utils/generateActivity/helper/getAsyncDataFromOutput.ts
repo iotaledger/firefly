@@ -4,6 +4,7 @@ import { getExpirationDateFromOutput } from '../../outputs/getExpirationDateFrom
 import { getTimelockDateFromOutput } from './getTimelockDateFromOutput'
 import { isOutputAsync } from '../../outputs/isOutputAsync'
 import { getAsyncStatus } from './getAsyncStatus'
+import { getStorageDepositFromOutput } from './getStorageDepositFromOutput'
 
 export function getAsyncDataFromOutput(
     output: Output,
@@ -20,8 +21,15 @@ export function getAsyncDataFromOutput(
 
         const expirationDate = getExpirationDateFromOutput(output)
         const timelockDate = getTimelockDateFromOutput(output)
+        const { storageDeposit } = getStorageDepositFromOutput(output)
 
-        const asyncStatus = getAsyncStatus(!!claimingTransactionId, expirationDate, timelockDate, Date.now())
+        const asyncStatus = getAsyncStatus(
+            !!claimingTransactionId,
+            expirationDate,
+            timelockDate,
+            !!storageDeposit,
+            Date.now()
+        )
 
         return {
             asyncStatus,
