@@ -626,29 +626,56 @@
             "step_4": "同時按下雙鍵來啟用交易 Blind Signing。裝置顯示啟用。代表已完成。"
         },
         "balanceBreakdown": {
-            "title": "存儲空間費用總覽",
-            "totalStorageDeposit": "總存入之存儲空間費用",
+            "title": "餘額明細",
+            "available": {
+                "title": "可用金額",
+                "subtitle": "Funds fully available for spending"
+            },
+            "pending": {
+                "title": "Pending",
+                "subtitle": "Temporarily locked in transactions"
+            },
+            "locked": {
+                "title": "已鎖定",
+                "subtitle": "Temporarily locked for governance"
+            },
+            "storageDeposit": {
+                "title": "Storage deposit",
+                "subtitle": "These funds are reserved for storing native assets."
+            },
+            "totalBalance": {
+                "title": "總餘額",
+                "subtitle": ""
+            },
             "basicOutputs": {
                 "title": "原生代幣",
-                "subtitle": "保留給原生代幣儲存空間"
+                "subtitle": "Reserved for Native Token storage"
             },
             "nftOutputs": {
-                "title": "NFT",
+                "title": "NFTs",
                 "subtitle": "保留給 NFT 儲存空間"
             },
             "aliasOutputs": {
-                "title": "別名",
-                "subtitle": "保留給別名儲存空間"
+                "title": "Aliases",
+                "subtitle": "Reserved for Alias storage"
             },
             "foundryOutputs": {
-                "title": "鑄造廠",
+                "title": "Foundries",
                 "subtitle": "Reserved for Native Token Foundry storage"
             },
-            "pendingTransactions": {
-                "title": "交易紀錄",
+            "unclaimed": {
+                "title": "Unclaimed transaction",
                 "subtitle": "Temporarily locked in unclaimed transactions"
             },
-            "votingPowerOutput": {
+            "timelock": {
+                "title": "時間鎖",
+                "subtitle": "Temporarily locked in timelocked transactions"
+            },
+            "storageDepositReturn": {
+                "title": "SDRUC",
+                "subtitle": "Temporarily locked in Storage Deposit Return"
+            },
+            "governance": {
                 "title": "治理",
                 "subtitle": "Reserved for voting power"
             },
@@ -1188,7 +1215,7 @@
         "readDocumentation": "閱讀文檔",
         "visitFaq": "訪問常見問題解答",
         "viewStatus": "查看狀態",
-        "viewStorageDeposit": "檢視存儲空間費用",
+        "viewBalanceBreakdown": "檢視餘額明細",
         "showHiddenAccounts": "顯示隱藏錢包",
         "confirm": "確認",
         "hideNetworkStatistics": "隱藏網路統計數據",
@@ -1236,12 +1263,12 @@
         "delete": "刪除",
         "remove": "移除",
         "addReference": "新增參考資料",
-        "depositNft": "Deposit NFTs",
+        "depositNft": "存入 NFT",
         "vote": "投票",
         "addProposal": "新增提案",
         "removeProposal": "移除提案",
         "stopVoting": "停止投票",
-        "revote": "Revote"
+        "revote": "重新投票"
     },
     "general": {
         "recipient": "接收方",
@@ -1257,48 +1284,48 @@
         "sending": "正在發送",
         "received": "已接收",
         "receiving": "收款中",
-        "newVotingPower": "New voting power",
-        "votingPower": "Voting power",
-        "increased": "Voting power increased",
-        "increasing": "Increasing voting power",
-        "decreased": "Voting power decreased",
-        "decreasing": "Decreasing voting power",
+        "newVotingPower": "新的表決權",
+        "votingPower": "表決權",
+        "increased": "表決權已增加",
+        "increasing": "正在增加表決權",
+        "decreased": "表決權已減少",
+        "decreasing": "正在減少表決權",
         "voted": "已投票",
         "voting": "投票中",
-        "changedVote": "Changed vote",
-        "changingVote": "Changing vote",
-        "revoted": "Revoted",
-        "revoting": "Revoting",
+        "changedVote": "已更改投票",
+        "changingVote": "正在更改投票",
+        "revoted": "已重新投票",
+        "revoting": "重新投票中",
         "unvoted": "已取消投票",
         "unvoting": "取消投票中",
-        "sentNft": "NFT sent",
-        "sendingNft": "Sending NFT",
-        "receivedNft": "NFT received",
-        "receivingNft": "Receiving NFT",
+        "sentNft": "已發送 NFT",
+        "sendingNft": "正在發送 NFT",
+        "receivedNft": "已收到 NFT",
+        "receivingNft": "正在接收 NFT",
         "transfer": "傳送",
         "transferring": "傳送中",
-        "transferNft": "Transfer NFT",
-        "transferringNft": "Transferring NFT",
-        "mintedNft": "Minted NFT",
-        "mintingNft": "Minting NFT",
+        "transferNft": "傳送 NFT",
+        "transferringNft": "正在傳送 NFT",
+        "mintedNft": "已鑄造 NFT",
+        "mintingNft": "正在鑄造 NFT",
         "shimmerClaimed": "已領取",
         "shimmerClaiming": "領取中",
         "shimmerGenesis": "Shimmer 創世",
         "minted": "已鑄造",
         "minting": "鑄造中",
-        "burned": "Burned",
-        "burning": "Burning",
-        "consolidated": "Outputs consolidated",
-        "consolidating": "Consolidating outputs",
-        "aliasCreated": "Alias created",
-        "creatingAlias": "Creating Alias",
+        "burned": "已燒毀",
+        "burning": "燒毀中",
+        "consolidated": "已合併輸出",
+        "consolidating": "合併輸出中",
+        "aliasCreated": "已建立別名",
+        "creatingAlias": "正在建立別名",
         "sendPayment": "發送付款",
         "moveFunds": "內部傳送",
         "sendTo": "發送至",
-        "sendAssets": "Send assets",
-        "sendAssetToAddress": "Send asset to an address",
+        "sendAssets": "發送資產",
+        "sendAssetToAddress": "發送資產至另一個地址",
         "sendToAddress": "發送到地址",
-        "sendToken": "Send token",
+        "sendToken": "發送代幣",
         "sendNft": "發送 NFT",
         "sendNftToAddress": "發送 NFT 至另一個地址",
         "scanQrOrPaste": "掃描QR碼 或 貼上地址",
@@ -1741,10 +1768,10 @@
             "invalid": "無效的 PIN 碼"
         },
         "address": {
-            "wrongAddressType": "Wrong address type"
+            "wrongAddressType": "地址類型錯誤"
         },
         "account": {
-            "addressNotFound": "The address cannot be found in your account.",
+            "addressNotFound": "從你的帳戶中找不到此地址。",
             "length": "您的錢包名稱長度不能超過 {length, plural, one {# 字元} other {# 字元}}。",
             "emptyName": "設定檔名稱需包含至少1個字元。",
             "notEmpty": "您必須先轉移餘額，才能刪除此錢包。",
@@ -1768,8 +1795,8 @@
             "amountNoFloat": "選擇的最小單位不能使用小數位",
             "amountInvalidFormat": "該金額是無效數字。",
             "amountSmallerThanSubunit": "數量必須大於最小的子單位。",
-            "tagTooLong": "The tag cannot be longer than 64 bytes.",
-            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
+            "tagTooLong": "標籤長度不能超過 64 個位元組。",
+            "metadataTooLong": "元數據長度不能超過 8192 個位元組。",
             "amountZero": "金額必須大於0。",
             "wrongAddressPrefix": "地址必須以 {prefix} 開頭。",
             "wrongAddressFormat": "地址格式不正確。",
@@ -1784,14 +1811,14 @@
             "cancelled": "交易取消。",
             "transaction": "交易發生錯誤，請重試。",
             "invalidExpirationDateTime": "您選擇的 失效日期/時間 為無效的",
-            "noInputs": "No inputs found.",
-            "notEnoughBalance": "Not enough balance.",
+            "noInputs": "找不到輸入。",
+            "notEnoughBalance": "餘額不足。",
             "missingTransactionId": "交易編號遺失",
             "missingTransactionProgressEventPayload": "缺少交易進度事件有效負載",
-            "recipientRequired": "Recipient is required",
-            "nftRequired": "NFT is required",
-            "nftNotInHex": "NFT address has to be in HEX format",
-            "nftNotInPossession": "NFT not in possession",
+            "recipientRequired": "需要接受者。",
+            "nftRequired": "NFT 為必填",
+            "nftNotInHex": "NFT 位址必須是 HEX 格式",
+            "nftNotInPossession": "未擁有此 NFT",
             "reservedTagKeyword": "Unable to use reserved tag keyword"
         },
         "layer2": {
@@ -1877,14 +1904,14 @@
             "invalidPayload": "{eventName} 事件的有效負載無效"
         },
         "aliasMinting": {
-            "aliasRequired": "Alias is required",
-            "aliasNotInPossession": "Alias not in possession"
+            "aliasRequired": "別名為必填",
+            "aliasNotInPossession": "未擁有此別名"
         },
-        "noOutputsToConsolidate": "Not enough outputs to consolidate",
+        "noOutputsToConsolidate": "輸出數量未達合併門檻",
         "eventId": {
-            "doesNotStartWith0x": "Event ID should start with '0x'",
-            "insufficientLength": "Event ID should be 66 characters long",
-            "alreadyRegistered": "Event ID already registered"
+            "doesNotStartWith0x": "事件 ID 必須以「0x」開頭",
+            "insufficientLength": "事件 ID 的長度應為 66 個字元",
+            "alreadyRegistered": "事件 ID 已經註冊！"
         },
         "nft": {
             "unsupportedUrl": {
