@@ -1951,7 +1951,7 @@
         "governance": {
             "unableToAddProposal": {
                 "short": "Unable to add proposal",
-                "long": "An error occurred while trying to add proposal {proposalId}"
+                "long": "Unable to find proposal {proposalId} on the specified node"
             }
         }
     },
