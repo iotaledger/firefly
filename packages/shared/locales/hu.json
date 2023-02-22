@@ -626,15 +626,34 @@
             "step_4": "Nyomja meg mindkét gombot a tranzakciók vak aláírásának engedélyezéséhez. A hardver tárcán ekkor megjelenik: Engedélyezve."
         },
         "balanceBreakdown": {
-            "title": "Letéti dí részletezése",
-            "totalStorageDeposit": "Összes letéti díj",
+            "title": "Egyenleg részletezése",
+            "available": {
+                "title": "Elérhető",
+                "subtitle": "A pénzösszegek teljes mértékben rendelkezésre állnak"
+            },
+            "pending": {
+                "title": "Függőben lévő",
+                "subtitle": "Ideiglenesen tranzakciókon belül zárolva"
+            },
+            "locked": {
+                "title": "Zárolva",
+                "subtitle": "Ideiglenesen zárolva kormányzás miatt"
+            },
+            "storageDeposit": {
+                "title": "Letéti díj",
+                "subtitle": "Ezek a pénzösszegek lefoglalva natív pénzeszközök tárolása végett."
+            },
+            "totalBalance": {
+                "title": "Teljes egyenleg",
+                "subtitle": ""
+            },
             "basicOutputs": {
                 "title": "Natív tokenek",
                 "subtitle": "Natív tokenek tárolására fenntartva"
             },
             "nftOutputs": {
                 "title": "NFT-k",
-                "subtitle": "NFT-k tárolására fenntartva"
+                "subtitle": "NFT tárolására fenntartva"
             },
             "aliasOutputs": {
                 "title": "Álnevek",
@@ -644,11 +663,19 @@
                 "title": "Pénzverdék",
                 "subtitle": "Natív token pénzverde számára fenntartva"
             },
-            "pendingTransactions": {
-                "title": "Tranzakciók",
+            "unclaimed": {
+                "title": "Nem igényelt tranzakció",
                 "subtitle": "Nem igényelt tranzakciók számára ideiglenesen zárolva"
             },
-            "votingPowerOutput": {
+            "timelock": {
+                "title": "Időzár",
+                "subtitle": "Időzár alatti tranzakciók számára ideiglenesen zárolva"
+            },
+            "storageDepositReturn": {
+                "title": "SDRUC",
+                "subtitle": "Ideiglenesen zárolva letéti díj visszatérítése végett"
+            },
+            "governance": {
                 "title": "Kormányzás",
                 "subtitle": "Szavazati jogra fenntartva"
             },
@@ -1188,7 +1215,7 @@
         "readDocumentation": "Dokumentáció elolvasása",
         "visitFaq": "GYIK megtekintése",
         "viewStatus": "Állapot megtekintése",
-        "viewStorageDeposit": "Letéti díj megtekintése",
+        "viewBalanceBreakdown": "Egyenleg részletezésének megtekintése",
         "showHiddenAccounts": "Rejtett tárcák megjelenítése",
         "confirm": "Megerősít",
         "hideNetworkStatistics": "Hálózati statisztika elrejtése",

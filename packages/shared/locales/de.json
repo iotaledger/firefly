@@ -626,33 +626,60 @@
             "step_4": "Drücke beide Tasten, um die Transaktionsblindsignierung zu aktivieren. Das Gerät wird aktiviert. Du bist fertig."
         },
         "balanceBreakdown": {
-            "title": "Übersicht Storage Deposit",
-            "totalStorageDeposit": "Gesamte Storage Deposit",
+            "title": "Saldenaufteilung anzeigen",
+            "available": {
+                "title": "Verfügbar",
+                "subtitle": "Für Ausgaben verfügbare Mittel"
+            },
+            "pending": {
+                "title": "Ausstehend",
+                "subtitle": "Vorübergehend gesperrte Transaktionen"
+            },
+            "locked": {
+                "title": "Gesperrt",
+                "subtitle": "Vorübergehend gesperrt für Governance"
+            },
+            "storageDeposit": {
+                "title": "Storage Deposit",
+                "subtitle": "Diese Mittel sind für die Speicherung nativer Vermögenswerte reserviert."
+            },
+            "totalBalance": {
+                "title": "Gesamtguthaben",
+                "subtitle": ""
+            },
             "basicOutputs": {
                 "title": "Native Token",
-                "subtitle": "Reserviert für Native Token Speicher"
+                "subtitle": "Reserviert für das Speichern nativer Token"
             },
             "nftOutputs": {
                 "title": "NFTs",
-                "subtitle": "Reserviert für NFT-Speicher"
+                "subtitle": "Reserviert für das Speichern von NFT"
             },
             "aliasOutputs": {
-                "title": "Aliase",
-                "subtitle": "Für Alias-Speicher reserviert"
+                "title": "Aliasnamen",
+                "subtitle": "Reserviert für das Speichern von Aliasnamen"
             },
             "foundryOutputs": {
-                "title": "Foundries-Fabriken",
-                "subtitle": "Reserviert für Native Token Foundry Speicher"
+                "title": "Foundries",
+                "subtitle": "Reserviert für das Speichern nativer Token"
             },
-            "pendingTransactions": {
-                "title": "Transaktionen",
+            "unclaimed": {
+                "title": "Unbeanspruchte Transaktion",
                 "subtitle": "Vorübergehend gesperrt in nicht abgeholten Transaktionen"
             },
-            "votingPowerOutput": {
+            "timelock": {
+                "title": "Sperrzeit",
+                "subtitle": "Vorübergehend gesperrt in zeitgesperrten Transaktionen"
+            },
+            "storageDepositReturn": {
+                "title": "SDRUC",
+                "subtitle": "Vorübergehend gesperrt in Storage Deposit Return"
+            },
+            "governance": {
                 "title": "Governance",
                 "subtitle": "Reserviert für Stimmrecht"
             },
-            "minimizeStorageDepositButton": "Speichereinlage minimieren"
+            "minimizeStorageDepositButton": "Storage Deposit reduzieren"
         },
         "minimizeStorageDeposit": {
             "title": "Speichereinlage minimieren",
@@ -1188,7 +1215,7 @@
         "readDocumentation": "Lese die Dokumentation",
         "visitFaq": "Gehe zu den FAQs",
         "viewStatus": "Status ansehen",
-        "viewStorageDeposit": "Storage Deposit anzeigen",
+        "viewBalanceBreakdown": "Saldenaufteilung anzeigen",
         "showHiddenAccounts": "Ausgeblendete Wallets anzeigen",
         "confirm": "Bestätigen",
         "hideNetworkStatistics": "Netzwerk Statistiken verbergen",
