@@ -626,8 +626,27 @@
             "step_4": "Paina molempia painikkeita aktivoidaksesi transaktion sokean allekirjoittamisen. Laite näyttää Käytössä. Olet valmis."
         },
         "balanceBreakdown": {
-            "title": "Tallennusvakuuden erittely",
-            "totalStorageDeposit": "Tallennusvakuus yhteensä",
+            "title": "Balance breakdown",
+            "available": {
+                "title": "Available",
+                "subtitle": "Funds fully available for spending"
+            },
+            "pending": {
+                "title": "Pending",
+                "subtitle": "Temporarily locked in transactions"
+            },
+            "locked": {
+                "title": "Locked",
+                "subtitle": "Temporarily locked for governance"
+            },
+            "storageDeposit": {
+                "title": "Storage deposit",
+                "subtitle": "These funds are reserved for storing native assets."
+            },
+            "totalBalance": {
+                "title": "Total balance",
+                "subtitle": ""
+            },
             "basicOutputs": {
                 "title": "Native Tokens",
                 "subtitle": "Reserved for Native Token storage"
@@ -644,11 +663,19 @@
                 "title": "Foundries",
                 "subtitle": "Reserved for Native Token Foundry storage"
             },
-            "pendingTransactions": {
-                "title": "Transactions",
+            "unclaimed": {
+                "title": "Unclaimed transaction",
                 "subtitle": "Temporarily locked in unclaimed transactions"
             },
-            "votingPowerOutput": {
+            "timelock": {
+                "title": "Time lock",
+                "subtitle": "Temporarily locked in timelocked transactions"
+            },
+            "storageDepositReturn": {
+                "title": "SDRUC",
+                "subtitle": "Temporarily locked in Storage Deposit Return"
+            },
+            "governance": {
                 "title": "Governance",
                 "subtitle": "Reserved for voting power"
             },
@@ -1188,7 +1215,7 @@
         "readDocumentation": "Lue dokumentaatio",
         "visitFaq": "Katso usein kysytyt kysymykset",
         "viewStatus": "Näytä tila",
-        "viewStorageDeposit": "Näytä tallennusvakuus",
+        "viewBalanceBreakdown": "View balance breakdown",
         "showHiddenAccounts": "Näytä piilotetut lompakot",
         "confirm": "Vahvista",
         "hideNetworkStatistics": "Piilota verkkotilastot",

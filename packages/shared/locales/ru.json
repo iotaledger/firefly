@@ -626,33 +626,60 @@
             "step_4": "Нажмите обе кнопки, чтобы включить слепое подписание транзакции. На экране устройства появится надпись Включено. Все готово."
         },
         "balanceBreakdown": {
-            "title": "Разбивка депозита для хранения",
-            "totalStorageDeposit": "Общий депозит для хранения",
+            "title": "Balance breakdown",
+            "available": {
+                "title": "Available",
+                "subtitle": "Funds fully available for spending"
+            },
+            "pending": {
+                "title": "Pending",
+                "subtitle": "Temporarily locked in transactions"
+            },
+            "locked": {
+                "title": "Locked",
+                "subtitle": "Temporarily locked for governance"
+            },
+            "storageDeposit": {
+                "title": "Storage deposit",
+                "subtitle": "These funds are reserved for storing native assets."
+            },
+            "totalBalance": {
+                "title": "Total balance",
+                "subtitle": ""
+            },
             "basicOutputs": {
-                "title": "Собственные токены",
-                "subtitle": "Отведено для хранения нативных токенов"
+                "title": "Native Tokens",
+                "subtitle": "Reserved for Native Token storage"
             },
             "nftOutputs": {
                 "title": "NFTs",
-                "subtitle": "Отведено для хранения NFT"
+                "subtitle": "Reserved for NFT storage"
             },
             "aliasOutputs": {
-                "title": "Псевдонимы",
-                "subtitle": "Отведено для хранения псевдонимов"
+                "title": "Aliases",
+                "subtitle": "Reserved for Alias storage"
             },
             "foundryOutputs": {
-                "title": "Учредительные организации",
-                "subtitle": "Отведено для хранилища производства нативных токенов"
+                "title": "Foundries",
+                "subtitle": "Reserved for Native Token Foundry storage"
             },
-            "pendingTransactions": {
-                "title": "Транзакции",
-                "subtitle": "Временно заблокировано в невостребованных транзакциях"
+            "unclaimed": {
+                "title": "Unclaimed transaction",
+                "subtitle": "Temporarily locked in unclaimed transactions"
             },
-            "votingPowerOutput": {
-                "title": "Управление",
-                "subtitle": "Зарезервировано для права голоса"
+            "timelock": {
+                "title": "Time lock",
+                "subtitle": "Temporarily locked in timelocked transactions"
             },
-            "minimizeStorageDepositButton": "Минимизировать вклады в хранилище"
+            "storageDepositReturn": {
+                "title": "SDRUC",
+                "subtitle": "Temporarily locked in Storage Deposit Return"
+            },
+            "governance": {
+                "title": "Governance",
+                "subtitle": "Reserved for voting power"
+            },
+            "minimizeStorageDepositButton": "Minimize storage deposit"
         },
         "minimizeStorageDeposit": {
             "title": "Минимизировать вклады в хранилище",
@@ -1188,7 +1215,7 @@
         "readDocumentation": "Читать документацию",
         "visitFaq": "Посетить FAQ",
         "viewStatus": "Просмотр статуса",
-        "viewStorageDeposit": "Просмотр депозита для хранения",
+        "viewBalanceBreakdown": "View balance breakdown",
         "showHiddenAccounts": "Показать скрытые кошельки",
         "confirm": "Подтвердить",
         "hideNetworkStatistics": "Скрыть статистику сети",
