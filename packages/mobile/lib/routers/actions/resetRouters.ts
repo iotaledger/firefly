@@ -1,7 +1,6 @@
 import { get } from 'svelte/store'
 
 import {
-    accountActionsRouter,
     appRouter,
     appSetupRouter,
     dashboardRouter,
@@ -51,7 +50,6 @@ function resetOnboardingSubrouters(): void {
 }
 
 function resetDashboardSubrouters(): void {
-    get(accountActionsRouter).reset()
     get(sendRouter).reset()
     get(filterRouter).reset()
     get(profileRouter).reset()
