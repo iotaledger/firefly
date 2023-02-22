@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { closePopup } from '@auxiliary/popup'
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { isStrongholdUnlocked } from '@core/profile-manager'
@@ -13,7 +12,7 @@
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import type { UnlockConditionTypes } from '@iota/types'
     import { BalanceSummarySection, Button } from 'shared/components'
-    import { DrawerId, openDrawer } from '../../lib/auxiliary/drawer'
+    import { closeDrawer, DrawerId, openDrawer } from '../../lib/auxiliary/drawer'
 
     interface Breakdown {
         amount: number
@@ -124,7 +123,7 @@
             const isUnlocked = await isStrongholdUnlocked()
             if (isUnlocked) {
                 await consolidateOutputs()
-                closePopup(DrawerId.Confirm)
+                closeDrawer(DrawerId.Confirm)
             } else {
                 openDrawer(DrawerId.EnterPassword, { onSuccess: _onConfirm })
             }

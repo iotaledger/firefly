@@ -4,6 +4,7 @@ export { default as BalanceBreakdownDrawer } from './BalanceBreakdownDrawer.svel
 export { default as ConfirmDrawer } from './ConfirmDrawer.svelte'
 export { default as CreateAccountDrawer } from './CreateAccountDrawer.svelte'
 export { default as CustomizeAccountDrawer } from './CustomizeAccountDrawer.svelte'
+export { default as DeleteAccountDrawer } from './DeleteAccountDrawer.svelte'
 export { default as DrawerManager } from './DrawerManager.svelte'
 export { default as EnterPasswordDrawer } from './EnterPasswordDrawer.svelte'
 export { default as ReceiveDrawer } from './ReceiveDrawer.svelte'

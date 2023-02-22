@@ -35,7 +35,11 @@
         }
     }
     function handleDeleteAccountClick(): void {
-        openDrawer(DrawerId.DeleteAccount)
+        openDrawer(DrawerId.DeleteAccount, {
+            title: localize('popups.deleteAccount.title', {
+                values: { name: $selectedAccount?.name },
+            }),
+        })
         _closeDrawer()
     }
     function handleBalanceBreakdownClick(): void {

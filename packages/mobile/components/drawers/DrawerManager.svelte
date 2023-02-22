@@ -7,6 +7,7 @@
     import ConfirmDrawer from './ConfirmDrawer.svelte'
     import CreateAccountDrawer from './CreateAccountDrawer.svelte'
     import CustomizeAccountDrawer from './CustomizeAccountDrawer.svelte'
+    import DeleteAccountDrawer from './DeleteAccountDrawer.svelte'
     import EnterPasswordDrawer from './EnterPasswordDrawer.svelte'
     import ReceiveDrawer from './ReceiveDrawer.svelte'
     import SelectedActivityDrawer from './SelectedActivityDrawer.svelte'
@@ -23,6 +24,7 @@
         [DrawerId.AccountActions]: AccountActionsDrawer,
         [DrawerId.CustomizeAccount]: CustomizeAccountDrawer,
         [DrawerId.BalanceBreakdown]: BalanceBreakdownDrawer,
+        [DrawerId.DeleteAccount]: DeleteAccountDrawer,
     }
 </script>
 
