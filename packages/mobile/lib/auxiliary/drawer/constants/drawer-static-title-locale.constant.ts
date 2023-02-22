@@ -6,4 +6,5 @@ export const DRAWER_STATIC_TITLE_TITLES = {
     [DrawerId.AccountSwitcher]: 'general.accounts',
     [DrawerId.CreateAccount]: 'general.createAccount',
     [DrawerId.Receive]: 'general.receiveFunds',
+    [DrawerId.CustomizeAccount]: 'general.manageAccount',
 }

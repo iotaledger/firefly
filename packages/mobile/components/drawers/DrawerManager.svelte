@@ -5,6 +5,7 @@
     import AccountSwitcherDrawer from './AccountSwitcherDrawer.svelte'
     import ConfirmDrawer from './ConfirmDrawer.svelte'
     import CreateAccountDrawer from './CreateAccountDrawer.svelte'
+    import CustomizeAccountDrawer from './CustomizeAccountDrawer.svelte'
     import EnterPasswordDrawer from './EnterPasswordDrawer.svelte'
     import ReceiveDrawer from './ReceiveDrawer.svelte'
     import SelectedActivityDrawer from './SelectedActivityDrawer.svelte'
@@ -19,6 +20,7 @@
         [DrawerId.SelectedToken]: SelectedTokenDrawer,
         [DrawerId.Receive]: ReceiveDrawer,
         [DrawerId.AccountActions]: AccountActionsDrawer,
+        [DrawerId.CustomizeAccount]: CustomizeAccountDrawer,
     }
 </script>
 
