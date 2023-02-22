@@ -12,4 +12,7 @@ export enum DrawerId {
     AddReferences = 'addReferences',
     AddExpiration = 'addExpiration',
     Confirm = 'confirm',
+    CustomizeAccount = 'customizeAccount',
+    BalanceBreakdown = 'balanceBreakdown',
+    DeleteAccount = 'deleteAccount',
 }

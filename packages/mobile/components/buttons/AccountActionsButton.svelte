@@ -1,9 +1,6 @@
 <script lang="ts">
     import { MeatballMenuButton } from 'shared/components'
-    import { DashboardRoute, dashboardRouter } from '../../lib/routers'
+    import { DrawerId, openDrawer } from '../../lib/auxiliary/drawer'
 </script>
 
-<MeatballMenuButton
-    onClick={() => $dashboardRouter.goTo(DashboardRoute.AccountActions)}
-    classes="items-center text-gray-500"
-/>
+<MeatballMenuButton onClick={() => openDrawer(DrawerId.AccountActions)} classes="items-center text-gray-500" />

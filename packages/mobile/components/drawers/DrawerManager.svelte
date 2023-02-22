@@ -1,13 +1,14 @@
 <script lang="ts">
     import { Drawer } from '../../components'
     import { closeDrawer, DrawerId, drawersStore } from '../../lib/auxiliary/drawer'
+    import AccountActionsDrawer from './AccountActionsDrawer.svelte'
     import AccountSwitcherDrawer from './AccountSwitcherDrawer.svelte'
     import ConfirmDrawer from './ConfirmDrawer.svelte'
+    import CreateAccountDrawer from './CreateAccountDrawer.svelte'
     import EnterPasswordDrawer from './EnterPasswordDrawer.svelte'
+    import ReceiveDrawer from './ReceiveDrawer.svelte'
     import SelectedActivityDrawer from './SelectedActivityDrawer.svelte'
     import SelectedTokenDrawer from './SelectedTokenDrawer.svelte'
-    import CreateAccountDrawer from './CreateAccountDrawer.svelte'
-    import ReceiveDrawer from './ReceiveDrawer.svelte'
 
     const COMPONENTS = {
         [DrawerId.AccountSwitcher]: AccountSwitcherDrawer,
@@ -17,6 +18,7 @@
         [DrawerId.SelectedActivity]: SelectedActivityDrawer,
         [DrawerId.SelectedToken]: SelectedTokenDrawer,
         [DrawerId.Receive]: ReceiveDrawer,
+        [DrawerId.AccountActions]: AccountActionsDrawer,
     }
 </script>
 

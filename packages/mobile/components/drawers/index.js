@@ -1,3 +1,4 @@
+export { default as AccountActionsDrawer } from './AccountActionsDrawer.svelte'
 export { default as AccountSwitcherDrawer } from './AccountSwitcherDrawer.svelte'
 export { default as ConfirmDrawer } from './ConfirmDrawer.svelte'
 export { default as CreateAccountDrawer } from './CreateAccountDrawer.svelte'
