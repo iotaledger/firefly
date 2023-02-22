@@ -7,6 +7,7 @@
         Activity,
         ActivityType,
         NotVerifiedStatus,
+        ActivityAsyncStatus,
     } from '@core/wallet'
     import { openPopup } from '@auxiliary/popup'
     import {
@@ -20,7 +21,6 @@
         NftActivityTileContent,
         GovernanceActivityTileContent,
     } from 'shared/components'
-    import { time } from '@core/app'
 
     export let activity: Activity
 
@@ -48,8 +48,6 @@
             })
         }
     }
-
-    $: isTimelocked = activity?.asyncData?.timelockDate > $time
 </script>
 
 <ClickableTile
@@ -72,7 +70,7 @@
                 <FoundryActivityTileContent {activity} />
             {/if}
         </tile-content>
-        {#if isTimelocked}
+        {#if activity.asyncData?.asyncStatus === ActivityAsyncStatus.Timelocked}
             <TimelockActivityTileFooter {activity} />
         {:else if activity.asyncData}
             <AsyncActivityTileFooter {activity} />
