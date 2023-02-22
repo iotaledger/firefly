@@ -21,6 +21,9 @@
         "prettier-plugin-svelte": "^2.7.0"
     },
     "scripts": {
+        "check-types": "yarn check-types:shared && yarn check-types:desktop",
+        "check-types:desktop": "cd packages/desktop && tsc --pretty --noEmit",
+        "check-types:shared": "cd packages/shared && tsc --pretty --noEmit",
         "format": "prettier -w \"**/*.{ts,js,json,scss,css,svelte}\"",
         "format-check": "prettier -c \"**/*.{ts,js,json,scss,css,svelte}\"",
         "lint": "eslint . --cache",
