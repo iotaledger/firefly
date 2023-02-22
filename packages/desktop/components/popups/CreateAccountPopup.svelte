@@ -1,7 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { Button, Input, Text, TextType } from '@ui'
-    import { ColorPicker } from '@components'
+    import { Button, ColorPicker, Input, Text, TextType } from '@ui'
     import { getRandomAccountColor, tryCreateAdditionalAccount, validateAccountName } from '@core/account'
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
@@ -79,7 +78,12 @@
                 disabled={isBusy}
                 classes="mb-4"
             />
-            <ColorPicker title={localize('general.accountColor')} bind:active={color} classes="mb-4" />
+            <ColorPicker
+                title={localize('general.accountColor')}
+                bind:active={color}
+                classes="mb-4"
+                isCustomColorEnabled
+            />
         </create-account-popup-inputs>
     </div>
     <create-account-popup-actions class="flex flex-row justify-between px-2">

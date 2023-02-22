@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Text, Icon, Tooltip, TextType, Position } from '@ui'
+    import { Text, Icon, Tooltip, TextType, Position } from 'shared/components'
     import { AccountColors } from '@core/account'
     import { localize } from '@core/i18n'
     import { clickOutside, isBright, hex2rgb } from '@core/utils'
@@ -8,6 +8,7 @@
     export let title = localize('views.picker.color.title')
     export let active = ''
     export let classes = ''
+    export let isCustomColorEnabled = false
 
     const accountColors = Object.values(AccountColors).filter((c) => /[#]/.test(c as string))
     const activeAccountColorIndex = accountColors.findIndex((_, i) => accountColors[i] === active)
@@ -96,22 +97,24 @@
                 {/if}
             </li>
         {/each}
-        <li
-            bind:this={tooltipAnchor}
-            on:click={toggleTooltip}
-            on:click={activeCustomColor}
-            on:keypress={toggleTooltip}
-            on:keypress={activeCustomColor}
-            on:mouseenter={toggleCustomHover}
-            on:mouseleave={toggleCustomHover}
-            tabindex="0"
-            class="w-12 h-12 rounded-lg ring-opacity-30 hover:ring-opacity-40 cursor-pointer flex justify-center items-center
-            custom-color hover:bg-gray-50 focus:bg-white ring-white"
-            class:active={customActiveFilled}
-            class:ring-4={customActiveFilled}
-        >
-            <Icon icon={IconEnum.Edit} classes={isCustomHover ? 'text-gray-800' : `text-${inputColor}`} />
-        </li>
+        {#if isCustomColorEnabled}
+            <li
+                bind:this={tooltipAnchor}
+                on:click={toggleTooltip}
+                on:click={activeCustomColor}
+                on:keypress={toggleTooltip}
+                on:keypress={activeCustomColor}
+                on:mouseenter={toggleCustomHover}
+                on:mouseleave={toggleCustomHover}
+                tabindex="0"
+                class="w-12 h-12 rounded-lg ring-opacity-30 hover:ring-opacity-40 cursor-pointer flex justify-center items-center
+                custom-color hover:bg-gray-50 focus:bg-white ring-white"
+                class:active={customActiveFilled}
+                class:ring-4={customActiveFilled}
+            >
+                <Icon icon={IconEnum.Edit} classes={isCustomHover ? 'text-gray-800' : `text-${inputColor}`} />
+            </li>
+        {/if}
     </ul>
     {#if isTooltipVisible}
         <tooltip-container class="block" use:clickOutside on:clickOutside={toggleTooltip}>

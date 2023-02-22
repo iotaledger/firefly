@@ -1,6 +1,5 @@
 <script lang="ts">
-    import { Button, Input, Text, TextType } from '@ui'
-    import { ColorPicker } from '@components'
+    import { Button, ColorPicker, Input, Text, TextType } from '@ui'
     import { selectedAccount, tryEditSelectedAccountMetadata, validateAccountName } from '@core/account'
     import { localize } from '@core/i18n'
     import { getTrimmedLength } from '@core/utils'
@@ -63,7 +62,12 @@
                 disabled={isBusy}
                 classes="mb-4"
             />
-            <ColorPicker title={localize('general.accountColor')} bind:active={color} classes="mb-4" />
+            <ColorPicker
+                title={localize('general.accountColor')}
+                bind:active={color}
+                classes="mb-4"
+                isCustomColorEnabled
+            />
         </manage-account-popup-inputs>
     </div>
     <manage-account-popup-actions class="flex flex-row justify-between mt-2 px-2">
