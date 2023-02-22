@@ -12,13 +12,10 @@
         sendRouter,
         settingsRouter,
     } from '../../lib/routers'
-    import { AccountActionsDrawer, ProfileDrawer, ReceiveDrawer, SendDrawer, FilterDrawer } from './drawers'
+    import { AccountActionsDrawer, ProfileDrawer, SendDrawer, FilterDrawer } from './drawers'
 
     $: $selectedFilter && $dashboardRouter.goTo(DashboardRoute.Filter)
 
-    function onReceiveDrawerClose(): void {
-        $dashboardRouter.previous()
-    }
     function onSendDrawerClose(): void {
         $sendRouter.closeDrawer()
     }
@@ -35,9 +32,7 @@
     }
 </script>
 
-{#if $dashboardRoute === DashboardRoute.Receive && features?.dashboard?.receive?.enabled}
-    <ReceiveDrawer onClose={onReceiveDrawerClose} />
-{:else if $dashboardRoute === DashboardRoute.Send && features?.dashboard?.send?.enabled}
+{#if $dashboardRoute === DashboardRoute.Send && features?.dashboard?.send?.enabled}
     <SendDrawer onClose={onSendDrawerClose} />
 {:else if $dashboardRoute === DashboardRoute.AccountActions && features?.dashboard?.accountActions?.enabled}
     <AccountActionsDrawer onClose={onAccountActionsDrawerClose} />

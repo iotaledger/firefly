@@ -4,9 +4,10 @@
     import { BASE_TOKEN } from '@core/network'
     import { activeProfile, hasStrongholdLocked, reflectLockedStronghold, saveActiveProfile } from '@core/profile'
     import { selectedAccountAssets } from '@core/wallet'
+    import features from '@features/features'
     import { Button } from 'shared/components'
     import { TabPane, TogglableAssetBalanceLabel, TopBar } from '../../components'
-    import features from '@features/features'
+    import { DrawerId, openDrawer } from '../../lib/auxiliary/drawer'
     import { activeDashboardTab, DASHBOARD_TAB_COMPONENT } from '../../lib/contexts/dashboard'
     import { DashboardRoute, dashboardRouter } from '../../lib/routers'
     import DashboardRouter from './DashboardRouter.svelte'
@@ -17,6 +18,10 @@
     $: $activeProfile, saveActiveProfile()
 
     $: $hasStrongholdLocked && reflectLockedStronghold()
+
+    function handleReceiveClick(): void {
+        openDrawer(DrawerId.Receive)
+    }
 </script>
 
 {#if $selectedAccount}
@@ -39,7 +44,7 @@
                         </Button>
                     {/if}
                     {#if features?.dashboard?.receive?.enabled}
-                        <Button classes="w-full h-10" onClick={() => $dashboardRouter.goTo(DashboardRoute.Receive)}>
+                        <Button classes="w-full h-10" onClick={handleReceiveClick}>
                             {localize('actions.receive')}
                         </Button>
                     {/if}

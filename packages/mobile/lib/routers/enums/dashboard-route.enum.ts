@@ -3,6 +3,5 @@ export enum DashboardRoute {
     Filter = 'filter',
     Init = 'init',
     Profile = 'profile',
-    Receive = 'receive',
     Send = 'send',
 }

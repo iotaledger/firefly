@@ -5,4 +5,5 @@ export const DRAWER_STATIC_TITLE_TITLES = {
     [DrawerId.SelectedActivity]: 'popups.transactionDetails.title',
     [DrawerId.AccountSwitcher]: 'general.accounts',
     [DrawerId.CreateAccount]: 'general.createAccount',
+    [DrawerId.Receive]: 'general.receiveFunds',
 }
