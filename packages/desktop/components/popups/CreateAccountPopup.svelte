@@ -1,25 +1,24 @@
 <script lang="ts">
-    import { Button, Input, Text } from '@ui'
-    import { ColorPicker } from '@components'
-    import { getTrimmedLength } from '@core/utils'
-    import { localize } from '@core/i18n'
-    import { closePopup, updatePopupProps } from '@auxiliary/popup'
-    import { checkActiveProfileAuth } from '@core/profile'
-    import { getRandomAccountColor, tryCreateAdditionalAccount, validateAccountName } from '@core/account'
     import { onMount } from 'svelte'
+    import { Button, Input, Text, TextType } from '@ui'
+    import { ColorPicker } from '@components'
+    import { getRandomAccountColor, tryCreateAdditionalAccount, validateAccountName } from '@core/account'
     import { handleError } from '@core/error/handlers/handleError'
+    import { localize } from '@core/i18n'
+    import { checkActiveProfileAuth } from '@core/profile'
+    import { getTrimmedLength } from '@core/utils'
+    import { closePopup, updatePopupProps } from '@auxiliary/popup'
 
     export let accountAlias = ''
-    export let color = getRandomAccountColor()
     export let error: string
+    export let color = getRandomAccountColor()
     export let isBusy = false
-
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
     $: accountAlias, (error = null)
     $: trimmedAccountAlias = accountAlias.trim()
 
-    async function handleCreateClick(): Promise<void> {
+    async function onCreateClick(): Promise<void> {
         try {
             if (!trimmedAccountAlias) {
                 return
@@ -37,7 +36,7 @@
         }
     }
 
-    function handleCancelClick(): void {
+    function onCancelClick(): void {
         isBusy = false
         closePopup()
     }
@@ -65,36 +64,36 @@
     })
 </script>
 
-<div class="flex flex-col h-full justify-between">
+<create-account-popup class="flex flex-col h-full justify-between">
     <div>
-        <div class="flex flex-row mb-6">
-            <Text type="h5">{localize('general.addAWallet')}</Text>
-        </div>
-        <div class="w-full flex flex-col justify-between">
+        <title-container class="flex flex-row mb-6">
+            <Text type={TextType.h5}>{localize('general.addAWallet')}</Text>
+        </title-container>
+        <create-account-popup-inputs class="w-full flex flex-col justify-between">
             <Input
                 {error}
                 bind:value={accountAlias}
                 placeholder={localize('general.accountName')}
                 autofocus
-                submitHandler={handleCreateClick}
+                submitHandler={onCreateClick}
                 disabled={isBusy}
                 classes="mb-4"
             />
             <ColorPicker title={localize('general.accountColor')} bind:active={color} classes="mb-4" />
-        </div>
+        </create-account-popup-inputs>
     </div>
-    <div class="flex flex-row justify-between px-2">
-        <Button outline classes="-mx-2 w-1/2" onClick={handleCancelClick} disabled={isBusy}>
+    <create-account-popup-actions class="flex flex-row justify-between px-2">
+        <Button outline classes="-mx-2 w-1/2" onClick={onCancelClick} disabled={isBusy}>
             {localize('actions.cancel')}
         </Button>
         <Button
             disabled={!getTrimmedLength(accountAlias) || isBusy}
             classes="-mx-2 w-1/2"
-            onClick={handleCreateClick}
+            onClick={onCreateClick}
             {isBusy}
             busyMessage={localize('general.creating')}
         >
             {localize('actions.create')}
         </Button>
-    </div>
-</div>
+    </create-account-popup-actions>
+</create-account-popup>
