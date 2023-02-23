@@ -4,7 +4,6 @@
     import { HTMLButtonType } from 'shared/components/enums'
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
-    import { registerParticipationEvent } from '@contexts/governance/actions'
     import { showAppNotification } from '@auxiliary/notification/actions'
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
     import { truncateString } from '@core/utils/string'
@@ -21,9 +20,11 @@
     let nodeInputError: string
     let inputtedEventId = eventId
     let isBusy = false
-    let toAllAccounts = false
+    let isRegisteringAllProposals = false
+    let isAddingForAllAccounts = false
 
     $: disabled = !eventId || !nodeUrl || isBusy
+    $: disabled = isBusy || !nodeUrl || (!isRegisteringAllProposals && !eventId)
     $: eventId = inputtedEventId?.trim()
 
     function onCancelClick(): void {
@@ -33,7 +34,7 @@
     async function onSubmit(): Promise<void> {
         try {
             isBusy = true
-            await Promise.all([validateEventId(!toAllAccounts), nodeInput?.validate()])
+            await Promise.all([validateEventId(!isAddingForAllAccounts), nodeInput?.validate()])
             await registerParticipationWrapper()
             isBusy = false
         } catch (err) {
@@ -71,12 +72,14 @@
     }
 
     async function registerParticipationWrapper(auth?: Auth): Promise<void> {
-        const accounts = toAllAccounts ? $activeAccounts : [$selectedAccount]
+        const accounts = isAddingForAllAccounts ? $activeAccounts : [$selectedAccount]
         const promises = accounts.map((account) => registerParticipationEvent(eventId, { url: nodeUrl, auth }, account))
         await Promise.all(promises)
         showAppNotification({
             type: 'success',
-            message: localize('views.governance.proposals.' + (toAllAccounts ? 'successAddAll' : 'successAdd')),
+            message: localize(
+                'views.governance.proposals.' + (isAddingForAllAccounts ? 'successAddAll' : 'successAdd')
+            ),
             alert: true,
         })
         closePopup()
@@ -106,14 +109,16 @@
     <Text type={TextType.h3} classes="mb-6">{localize('popups.addProposal.title')}</Text>
     <Text fontSize="15">{localize('popups.addProposal.body')}</Text>
     <div class="flex flex-col w-full space-y-4 mt-4">
+        <NodeInput bind:this={nodeInput} bind:nodeUrl bind:error={nodeInputError} />
+        <Checkbox label="Add all proposals on this node" bind:checked={isRegisteringAllProposals} />
         <TextInput
             bind:value={inputtedEventId}
             bind:error={eventIdError}
+            disabled={isRegisteringAllProposals}
             placeholder={localize('views.governance.details.proposalInformation.eventId')}
             label={localize('views.governance.details.proposalInformation.eventId')}
         />
-        <NodeInput bind:this={nodeInput} bind:nodeUrl bind:error={nodeInputError} />
-        <Checkbox label={localize('popups.addProposal.addToAllAccounts')} bind:checked={toAllAccounts} />
+        <Checkbox label={localize('popups.addProposal.addToAllAccounts')} bind:checked={isAddingForAllAccounts} />
     </div>
     <div class="flex w-full space-x-4 mt-6">
         <Button outline classes="w-full" onClick={onCancelClick}>{localize('actions.cancel')}</Button>
