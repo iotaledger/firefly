@@ -33,7 +33,7 @@
 
     function composeUrl(targetUrl: string): { url: string; backupUrl: string } {
         if (!targetUrl) {
-            return undefined
+            return { url: undefined, backupUrl: undefined }
         }
 
         const url = new URL(targetUrl)
@@ -52,7 +52,7 @@
                 break
             default:
                 error = localize('error.nft.unsupportedUrl.' + translationSuffix)
-                return undefined
+                return { url: undefined, backupUrl: undefined }
         }
 
         if (nft?.parsedMetadata?.issuerName === 'Soonaverse') {
