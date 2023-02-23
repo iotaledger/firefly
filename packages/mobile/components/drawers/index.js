@@ -7,6 +7,7 @@ export { default as CustomizeAccountDrawer } from './CustomizeAccountDrawer.svel
 export { default as DeleteAccountDrawer } from './DeleteAccountDrawer.svelte'
 export { default as DrawerManager } from './DrawerManager.svelte'
 export { default as EnterPasswordDrawer } from './EnterPasswordDrawer.svelte'
+export { default as FilterDrawer } from './FilterDrawer.svelte'
 export { default as ReceiveDrawer } from './ReceiveDrawer.svelte'
 export { default as SelectedActivityDrawer } from './SelectedActivityDrawer.svelte'
 export { default as SelectedTokenDrawer } from './SelectedTokenDrawer.svelte'

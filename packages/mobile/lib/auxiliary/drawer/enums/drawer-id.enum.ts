@@ -15,4 +15,5 @@ export enum DrawerId {
     CustomizeAccount = 'customizeAccount',
     BalanceBreakdown = 'balanceBreakdown',
     DeleteAccount = 'deleteAccount',
+    Filter = 'filter',
 }

@@ -3,7 +3,7 @@
     import VirtualList from '@sveltejs/svelte-virtual-list'
     import { FontWeight, Text } from 'shared/components'
     import { ActivityTile, Filter, SearchInput } from '../../mobile/components'
-    import { FilterType } from '../lib/routers/routers/dashboard'
+    import { FilterType } from '../lib/contexts/wallet'
     import { time } from '@core/app'
     import { getGroupSeparator, localize } from '@core/i18n'
     import { getMonthYear } from '@core/utils'

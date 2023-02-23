@@ -9,6 +9,7 @@
     import CustomizeAccountDrawer from './CustomizeAccountDrawer.svelte'
     import DeleteAccountDrawer from './DeleteAccountDrawer.svelte'
     import EnterPasswordDrawer from './EnterPasswordDrawer.svelte'
+    import FilterDrawer from './FilterDrawer.svelte'
     import ReceiveDrawer from './ReceiveDrawer.svelte'
     import SelectedActivityDrawer from './SelectedActivityDrawer.svelte'
     import SelectedTokenDrawer from './SelectedTokenDrawer.svelte'
@@ -25,6 +26,7 @@
         [DrawerId.CustomizeAccount]: CustomizeAccountDrawer,
         [DrawerId.BalanceBreakdown]: BalanceBreakdownDrawer,
         [DrawerId.DeleteAccount]: DeleteAccountDrawer,
+        [DrawerId.Filter]: FilterDrawer,
     }
 </script>
 

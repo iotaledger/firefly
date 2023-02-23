@@ -1,25 +1,24 @@
 <script lang="ts">
-    import { TogglableButton } from 'shared/components'
-    import { DashboardRoute, dashboardRoute, filterRouter, FilterType } from '../../lib/routers'
     import type { Filter } from '@core/utils/types'
-    import { selectedFilter } from '../../lib/contexts/dashboard'
-    import { activeProfileId } from '@core/profile'
+    import { Icon as IconEnum } from '@lib/auxiliary/icon'
+    import { Icon } from 'shared/components'
+    import { DrawerId, openDrawer } from '../../lib/auxiliary/drawer'
+    import { FilterType } from '../../lib/contexts/wallet'
 
     export let filterStoreValue: Filter
     export let filterType: FilterType
 
     function onClick(): void {
-        const filter = structuredClone(filterStoreValue)
-        $filterRouter.next({ filter, filterType })
+        openDrawer(DrawerId.Filter, { filterType, fullScreen: true })
     }
 
     $: activeFilterCount = Object.keys(filterStoreValue).filter((f) => filterStoreValue[f].active).length
-    $: isFilterActive = $dashboardRoute === DashboardRoute.Filter && $selectedFilter !== null
-    $: $activeProfileId, $filterRouter?.clearFilterStores()
 </script>
 
 <div class="h-6 relative">
-    <TogglableButton icon="filter" bind:active={isFilterActive} {onClick} />
+    <button on:click={onClick} class="text-gray-500 dark:text-white">
+        <Icon icon={IconEnum.Filter} />
+    </button>
     {#if activeFilterCount}
         <filter-badge
             class="inline-flex items-center justify-center h-3 w-3 -ml-2 -mt-0.5 absolute rounded-full bg-blue-500 text-white text-8"

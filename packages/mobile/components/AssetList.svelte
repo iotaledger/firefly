@@ -6,7 +6,7 @@
     import VirtualList from '@sveltejs/svelte-virtual-list'
     import { AssetTile, Text } from '@ui'
     import { Filter, SearchInput } from '../components'
-    import { FilterType } from '../lib/routers/routers'
+    import { FilterType } from '../lib/contexts/wallet'
 
     export let assets: IAccountAssets
     export let onAssetTileClick: (asset: IAsset) => unknown = () => {}
@@ -64,7 +64,7 @@
             <search-input-container class="block flex-1">
                 <SearchInput bind:value={searchValue} />
             </search-input-container>
-            <Filter filterStoreValue={$assetFilter} filterType={FilterType.Asset} />
+            <Filter filterStoreValue={$assetFilter} filterType={FilterType.Token} />
         </asset-list-header>
         {#if assetList.length > 0}
             <VirtualList items={assetList} let:item>
