@@ -167,7 +167,7 @@
 
 <OnboardingLayout {onBackClick} {title}>
     <div slot="content" class="h-full flex flex-col">
-        <Text type={TextType.p} secondary classes="mb-5">
+        <Text type={TextType.p} secondary fontSize="15" classes="mb-5">
             {localize('views.onboarding.shimmerClaiming.claimRewards.body')}
         </Text>
         <ShimmerClaimingAccountList {shimmerClaimingAccounts} />

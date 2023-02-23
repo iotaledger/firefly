@@ -28,7 +28,7 @@
             <Text type={TextType.h2} classes="mb-5 text-center"
                 >{localize('views.onboarding.profileRecovery.success.title')}</Text
             >
-            <Text type={TextType.p} secondary classes="mb-2"
+            <Text type={TextType.p} secondary fontSize="15" classes="mb-2"
                 >{localize('views.onboarding.profileRecovery.success.body')}</Text
             >
         </div>

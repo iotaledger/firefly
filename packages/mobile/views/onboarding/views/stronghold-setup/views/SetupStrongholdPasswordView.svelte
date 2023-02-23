@@ -100,10 +100,10 @@
 <OnboardingLayout {onBackClick} {busy} {title} animation="password-desktop">
     <div slot="content" class="mb-5">
         <form on:submit|preventDefault={onContinueClick} id="password-form">
-            <Text type={TextType.p} secondary
+            <Text type={TextType.p} secondary fontSize="15" classes="mb-4"
                 >{localize('views.onboarding.strongholdSetup.setupStrongholdPassword.body1')}</Text
             >
-            <Text type={TextType.p} classes="mb-10" secondary
+            <Text type={TextType.p} secondary fontSize="15" classes="mb-10"
                 >{localize('views.onboarding.strongholdSetup.setupStrongholdPassword.body2')}</Text
             >
             <PasswordInput
