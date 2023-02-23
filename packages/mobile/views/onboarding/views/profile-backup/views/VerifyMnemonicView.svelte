@@ -74,7 +74,7 @@
 <OnboardingLayout {onBackClick} {busy} {title}>
     <div slot="content" class="w-full h-full flex flex-col p-0">
         {#if !verified}
-            <Text type={TextType.p} secondary classes="mb-4">
+            <Text type={TextType.p} secondary fontSize="15" classes="mb-4">
                 {localize('views.onboarding.profileBackup.verifyMnemonic.body')}
             </Text>
         {:else}
@@ -85,7 +85,7 @@
                 <Text type={TextType.h2} classes="mb-5 text-center"
                     >{localize('views.onboarding.profileBackup.verifyMnemonic.verified')}</Text
                 >
-                <Text type={TextType.p} secondary classes="mb-2"
+                <Text type={TextType.p} secondary fontSize="15" classes="mb-2"
                     >{localize('views.onboarding.profileBackup.verifyMnemonic.verifiedBody')}</Text
                 >
             </div>
@@ -100,7 +100,7 @@
                     class="w-full flex flex-row p-4 mb-4 rounded-2xl border border-1 border-solid items-center justify-between border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-gray-500 dark:focus:border-gray-700"
                     on:click={() => handleChoice(word)}
                 >
-                    <Text smaller classes="ml-3" bold>{word}</Text>
+                    <Text smaller classes="ml-3 text-15" bold>{word}</Text>
                     <Icon icon="chevron-right" classes="text-gray-800 dark:text-white" />
                 </button>
             {/each}

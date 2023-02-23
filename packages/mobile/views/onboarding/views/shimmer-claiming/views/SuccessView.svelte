@@ -25,11 +25,11 @@
             <Text type={TextType.h3} classes="mb-5 text-center">
                 {localize('views.onboarding.shimmerClaiming.success.title')}
             </Text>
-            <Text type={TextType.p} secondary classes="mb-5 text-center">
+            <Text type={TextType.p} secondary fontSize="15" classes="mb-5 text-center">
                 {localize('views.onboarding.shimmerClaiming.success.body')}
             </Text>
             <div class="flex flex-col justify-center items-center">
-                <Text type={TextType.p} highlighted
+                <Text type={TextType.p} fontSize="15" highlighted
                     >{localize('views.onboarding.shimmerClaiming.success.totalRewards')}</Text
                 >
                 <Text type={TextType.h3}
