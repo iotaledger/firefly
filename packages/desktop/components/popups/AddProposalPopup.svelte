@@ -4,6 +4,7 @@
     import { HTMLButtonType } from 'shared/components/enums'
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
+    import { registerParticipationEvents } from '@contexts/governance/actions'
     import { showAppNotification } from '@auxiliary/notification/actions'
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
     import { truncateString } from '@core/utils/string'
@@ -73,7 +74,11 @@
 
     async function registerParticipationWrapper(auth?: Auth): Promise<void> {
         const accounts = isAddingForAllAccounts ? $activeAccounts : [$selectedAccount]
-        const promises = accounts.map((account) => registerParticipationEvent(eventId, { url: nodeUrl, auth }, account))
+        const options = {
+            node: { url: nodeUrl, auth },
+            eventsToRegister: [eventId],
+        }
+        const promises = accounts.map((account) => registerParticipationEvents(options, account))
         await Promise.all(promises)
         showAppNotification({
             type: 'success',
