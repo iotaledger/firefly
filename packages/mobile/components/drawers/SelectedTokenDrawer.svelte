@@ -8,6 +8,7 @@
         hideActivitiesForHiddenAssets,
         hideAsset,
         NewTransactionType,
+        unhideAsset,
         unverifyAsset,
         updateNewTransactionDetails,
         VerifiedStatus,
@@ -64,7 +65,7 @@
         })
     }
     function handleUnhide(): void {
-        hideAsset(asset.id)
+        unhideAsset(asset.id)
         hideActivitiesForHiddenAssets()
         updateDrawerProps(DrawerId.SelectedToken, {
             asset: { ...asset, hidden: false },
