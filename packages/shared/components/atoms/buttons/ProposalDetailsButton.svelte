@@ -25,7 +25,7 @@
 
     $: buttons = [
         {
-            icon: Icon.Delete,
+            icon: Icon.Node,
             title: localize('actions.changeNode'),
             onClick: onChangeNodeClick,
         },
