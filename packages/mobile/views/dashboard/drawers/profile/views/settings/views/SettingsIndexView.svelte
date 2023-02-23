@@ -64,7 +64,7 @@
                                     )}
                             >
                                 <Icon width="18" height="18" icon={setting.icon} classes="text-blue-500" />
-                                <Text type={TextType.p} secondary>{localize(setting.name)}</Text>
+                                <Text type={TextType.p} secondary fontSize="15">{localize(setting.name)}</Text>
                             </button>
                         {/if}
                     {/each}
