@@ -1,10 +1,10 @@
 <script lang="ts">
+    import { loginRouter } from '@/routers'
+    import { openPopup, PopupId, popupState } from '@auxiliary/popup'
     import { needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService, Platform } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { activeProfile, login, resetActiveProfile } from '@core/profile'
-    import { loginRouter } from '@/routers'
-    import { openPopup, popupState } from '@auxiliary/popup'
     import { isValidPin } from '@core/utils'
     import { Icon, PinInput, Profile, Text, TextType } from '@ui'
     import { onDestroy } from 'svelte'
@@ -25,7 +25,7 @@
 
     $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTermsOfService()) {
         openPopup({
-            type: 'legalUpdate',
+            id: PopupId.LegalUpdate,
             hideClose: true,
             preventClose: true,
         })

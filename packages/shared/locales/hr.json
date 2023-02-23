@@ -625,9 +625,28 @@
             "step_3": "Pritisnite desni gumb da bi navigirali do Postavka. Zatim pritisnite oba gumba za potvrdu. Vaš Ledger uređaj prikazuje Blind Signing.",
             "step_4": "Pritisnite oba gumba da bi omogućili Blind Signing transakcije. Uređaj prikazuje Enabled. Gotovo."
         },
-        "storageDepositBreakdown": {
-            "title": "Raščlamba depozita za pohranu",
-            "totalStorageDeposit": "Ukupno depozita za pohranu",
+        "balanceBreakdown": {
+            "title": "Balance breakdown",
+            "available": {
+                "title": "Available",
+                "subtitle": "Funds fully available for spending"
+            },
+            "pending": {
+                "title": "Pending",
+                "subtitle": "Temporarily locked in transactions"
+            },
+            "locked": {
+                "title": "Locked",
+                "subtitle": "Temporarily locked for governance"
+            },
+            "storageDeposit": {
+                "title": "Storage deposit",
+                "subtitle": "These funds are reserved for storing native assets."
+            },
+            "totalBalance": {
+                "title": "Total balance",
+                "subtitle": ""
+            },
             "basicOutputs": {
                 "title": "Native Tokens",
                 "subtitle": "Reserved for Native Token storage"
@@ -644,11 +663,19 @@
                 "title": "Foundries",
                 "subtitle": "Reserved for Native Token Foundry storage"
             },
-            "pendingTransactions": {
-                "title": "Transactions",
+            "unclaimed": {
+                "title": "Unclaimed transaction",
                 "subtitle": "Temporarily locked in unclaimed transactions"
             },
-            "votingPowerOutput": {
+            "timelock": {
+                "title": "Time lock",
+                "subtitle": "Temporarily locked in timelocked transactions"
+            },
+            "storageDepositReturn": {
+                "title": "SDRUC",
+                "subtitle": "Temporarily locked in Storage Deposit Return"
+            },
+            "governance": {
                 "title": "Governance",
                 "subtitle": "Reserved for voting power"
             },
@@ -1188,7 +1215,7 @@
         "readDocumentation": "Pročitajte dokumentaciju",
         "visitFaq": "Posjeti često postavljana pitanja",
         "viewStatus": "Vidi status",
-        "viewStorageDeposit": "Prikaz depozita za pohranu",
+        "viewBalanceBreakdown": "View balance breakdown",
         "showHiddenAccounts": "Prikaži skrivene novčanike",
         "confirm": "Potvrdi",
         "hideNetworkStatistics": "Sakrij statistiku mreže",

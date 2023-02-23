@@ -1,11 +1,11 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { openPopup } from '@auxiliary/popup'
+    import { openPopup, PopupId } from '@auxiliary/popup'
     import { OnboardingButton } from 'shared/components'
 
     function handleClick(): void {
         openPopup({
-            id: 'testDeepLinkForm',
+            id: PopupId.TestDeepLinkForm,
         })
     }
 </script>

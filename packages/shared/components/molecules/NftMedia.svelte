@@ -55,7 +55,7 @@
         }
 
         if (nft?.parsedMetadata?.issuerName === 'Soonaverse') {
-            return newUrl + '/' + nft?.parsedMetadata?.name
+            return newUrl + '/' + encodeURIComponent(nft?.parsedMetadata?.name)
         } else {
             return newUrl
         }

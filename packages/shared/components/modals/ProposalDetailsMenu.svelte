@@ -11,6 +11,7 @@
     import { selectedAccount } from '@core/account/stores'
     // TODO: https://github.com/iotaledger/firefly/issues/5801
     import features from '../../../desktop/features/features'
+    import { PopupId } from '@auxiliary/popup'
 
     export let modal: Modal = undefined
 
@@ -25,7 +26,7 @@
 
     function onRemoveProposalClick(): void {
         openPopup({
-            id: 'removeProposal',
+            id: PopupId.RemoveProposal,
         })
         modal.close()
     }

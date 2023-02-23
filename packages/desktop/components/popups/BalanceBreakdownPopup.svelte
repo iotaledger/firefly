@@ -1,20 +1,20 @@
 <script lang="ts">
-    import { AccountAction } from '@/contexts/dashboard'
-    import { accountActionsRouter } from '@/routers'
+    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
+    import { checkActiveProfileAuth } from '@core/profile'
     import {
         OUTPUT_TYPE_TREASURY,
         UNLOCK_CONDITION_EXPIRATION,
         UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN,
         UNLOCK_CONDITION_TIMELOCK,
     } from '@core/wallet'
+    import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import type { UnlockConditionTypes } from '@iota/types'
-    import { BalanceSummarySection, Button } from '@ui'
-    import { FontWeight, Text } from 'shared/components'
+    import { BalanceSummarySection, Button, FontWeight, Text, TextType } from 'shared/components'
 
-    interface Breakdown {
+    interface BalanceBreakdown {
         amount: number
         subBreakdown?: { [key: string]: { amount: number } }
     }
@@ -27,7 +27,7 @@
 
     $: accountBalance = $selectedAccount.balances
 
-    let breakdown: { [key: string]: Breakdown } = {}
+    let breakdown: { [key: string]: BalanceBreakdown } = {}
     $: accountBalance, void setBreakdown()
     async function setBreakdown(): Promise<void> {
         const availableBreakdown = getAvailableBreakdown()
@@ -43,11 +43,11 @@
         }
     }
 
-    function getAvailableBreakdown(): Breakdown {
+    function getAvailableBreakdown(): BalanceBreakdown {
         return { amount: Number(accountBalance?.baseCoin?.available ?? 0) }
     }
 
-    async function getPendingBreakdown(): Promise<Breakdown> {
+    async function getPendingBreakdown(): Promise<BalanceBreakdown> {
         let pendingOutputsStorageDeposit = 0
 
         const subBreakdown = {}
@@ -84,7 +84,7 @@
         return { amount: pendingOutputsStorageDeposit, subBreakdown }
     }
 
-    function getLockedBreakdown(): Breakdown {
+    function getLockedBreakdown(): BalanceBreakdown {
         const governanceAmount = parseInt($selectedAccount?.votingPower, 10)
         const totalLockedAmount = governanceAmount
 
@@ -95,7 +95,7 @@
         return { amount: totalLockedAmount, subBreakdown }
     }
 
-    function getStorageDepositBreakdown(): Breakdown {
+    function getStorageDepositBreakdown(): BalanceBreakdown {
         const storageDeposits = accountBalance?.requiredStorageDeposit
         const totalStorageDeposit = storageDeposits
             ? Object.values(accountBalance.requiredStorageDeposit).reduce(
@@ -119,15 +119,32 @@
     }
 
     function onConsolidationClick(): void {
-        $accountActionsRouter.next({ action: AccountAction.Consolidate })
+        openPopup({
+            id: PopupId.Confirmation,
+            props: {
+                title: localize('popups.minimizeStorageDeposit.title'),
+                description: localize('popups.minimizeStorageDeposit.description'),
+                confirmText: localize('popups.minimizeStorageDeposit.confirmButton'),
+                info: true,
+                onConfirm: async () => {
+                    await checkActiveProfileAuth(
+                        async () => {
+                            await consolidateOutputs()
+                            closePopup()
+                        },
+                        { stronghold: true }
+                    )
+                },
+            },
+        })
     }
 </script>
 
 <div class="flex flex-col space-y-6">
-    <Text type="h3" fontWeight={FontWeight.semibold} lineHeight="6">
+    <Text type={TextType.h3} fontWeight={FontWeight.semibold} lineHeight="6">
         {localize('popups.balanceBreakdown.title')}
     </Text>
-    <div class="balance-breakdown flex flex-col space-y-8">
+    <div class="flex flex-col space-y-8">
         {#each Object.keys(breakdown) as breakdownKey}
             <BalanceSummarySection
                 titleKey={breakdownKey}
@@ -142,9 +159,3 @@
         {localize('popups.balanceBreakdown.minimizeStorageDepositButton')}
     </Button>
 </div>
-
-<style type="text/scss">
-    .balance-breakdown {
-        max-height: calc(100vh - 200px);
-    }
-</style>

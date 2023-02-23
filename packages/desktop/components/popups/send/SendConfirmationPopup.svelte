@@ -36,7 +36,7 @@
         getAssetById,
         ActivityAction,
     } from '@core/wallet'
-    import { closePopup, openPopup } from '@auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { ledgerPreparedOutput } from '@core/ledger'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import { handleError } from '@core/error/handlers/handleError'
@@ -48,7 +48,6 @@
         TARGET_CONTRACTS,
         TRANSFER_ALLOWANCE,
     } from '@core/layer-2'
-    import { dashboardRouter } from '@core/router'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
@@ -166,7 +165,6 @@
 
     async function sendOutputAndClosePopup(): Promise<void> {
         await sendOutput(preparedOutput)
-        $dashboardRouter.reset()
         closePopup()
     }
 
@@ -191,7 +189,7 @@
     function onBack(): void {
         closePopup()
         openPopup({
-            id: 'sendForm',
+            id: PopupId.SendForm,
             overflow: true,
         })
     }
