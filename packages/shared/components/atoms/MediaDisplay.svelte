@@ -84,7 +84,6 @@
                             safeToLoad = true
                         }
                     } else {
-                        src = url
                         safeToLoad = false
                         onError('error.nft.notMatchingFileTypes.')
                     }
@@ -95,6 +94,7 @@
                     safeToLoad = false
                     onWarning('error.nft.tooLargeFile.')
                 } else {
+                    src = url
                     safeToLoad = true
                 }
             }

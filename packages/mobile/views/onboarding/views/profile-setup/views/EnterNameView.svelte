@@ -44,10 +44,10 @@
 
 <OnboardingLayout {onBackClick} {title} animation="profile-desktop">
     <div slot="content">
-        <Text type={TextType.p} secondary classes="mb-4"
+        <Text type={TextType.p} secondary fontSize="15" classes="mb-4"
             >{localize('views.onboarding.profileSetup.enterName.body1')}</Text
         >
-        <Text type={TextType.p} secondary classes="mb-4">
+        <Text type={TextType.p} secondary fontSize="15" classes="mb-4">
             {localize(
                 `views.onboarding.profileSetup.enterName.body2.${$profiles?.length === 0 ? 'first' : 'nonFirst'}`
             )}

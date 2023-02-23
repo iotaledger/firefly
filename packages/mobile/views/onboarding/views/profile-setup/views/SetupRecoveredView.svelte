@@ -44,7 +44,7 @@
 
 <OnboardingLayout {onBackClick} {title} animation="import-desktop">
     <div slot="content">
-        <Text type={TextType.p} secondary classes="mb-8"
+        <Text type={TextType.p} secondary fontSize="15" classes="mb-8"
             >{localize('views.onboarding.profileSetup.setupRecovered.body')}</Text
         >
     </div>
