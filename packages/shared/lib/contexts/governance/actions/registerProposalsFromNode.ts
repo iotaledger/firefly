@@ -5,20 +5,18 @@ import { INode } from '@core/network/interfaces'
 
 import { getVotingParticipationEventIds, isProposalAlreadyAddedForSelectedAccount } from '../utils'
 
-import { registerParticipationEvent } from './registerParticipationEvent'
+import { registerParticipationEvents } from './registerParticipationEvents'
 
 export async function registerProposalsFromNode(node: INode): Promise<void> {
-    const proposalIds = await getVotingParticipationEventIds(node)
-    if (!proposalIds || proposalIds.length === 0) {
+    const eventIds = await getVotingParticipationEventIds(node)
+    if (!eventIds || eventIds.length === 0) {
         return
     }
 
-    const _selectedAccount = get(selectedAccount)
-    await Promise.all(
-        proposalIds.map(async (proposalId) => {
-            if (!isProposalAlreadyAddedForSelectedAccount(proposalId)) {
-                await registerParticipationEvent(proposalId, node, _selectedAccount)
-            }
-        })
-    )
+    const eventsToRegister = eventIds.filter((eventId) => !isProposalAlreadyAddedForSelectedAccount(eventId))
+    const options = {
+        node,
+        eventsToRegister,
+    }
+    await registerParticipationEvents(options, get(selectedAccount))
 }
