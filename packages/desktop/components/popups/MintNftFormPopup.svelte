@@ -90,6 +90,7 @@
     }
 
     function handleContinue(): void {
+        resetErrors()
         const valid = validate()
         if (valid) {
             setMintNftDetails(convertInputsToMetadataType())
@@ -106,26 +107,24 @@
 
     function validate(): boolean {
         if (!nftTypeOptions.map((e) => e.value).includes(type as MimeType)) {
-            typeError = 'Invalid MimeType, check if the file type is supported'
+            typeError = localize('popups.mintNftForm.errors.invalidMimetype')
         }
 
         if (name.length === 0) {
-            nameError = 'Empty name, it is a required field'
+            nameError = localize('popups.mintNftForm.errors.emptyName')
         }
 
         if (optionalInputs.quantity?.isOpen) {
             if (Number(optionalInputs.quantity.value) < 1) {
-                optionalInputs.quantity.error = 'Quantity needs to be greater than 0'
+                optionalInputs.quantity.error = localize('popups.mintNftForm.errors.quantityTooSmall')
             }
             if (Number(optionalInputs.quantity.value) >= 64) {
-                optionalInputs.quantity.error = 'Quantity needs to be smaller than 64'
+                optionalInputs.quantity.error = localize('popups.mintNftForm.errors.quantityTooLarge')
             }
         }
 
-        if (uri.length === 0) {
-            uriError = 'Empty URI, please provide a valid URI'
-        } else if (!isValidUri(uri)) {
-            uriError = 'Invalid URI, please provide a valid URI'
+        if (uri.length === 0 || !isValidUri(uri)) {
+            uriError = localize('popups.mintNftForm.errors.invalidURI')
         }
 
         if (optionalInputs.royalties.isOpen) {
@@ -145,31 +144,42 @@
         return !hasErrors
     }
 
+    function resetErrors(): void {
+        typeError = ''
+        nameError = ''
+        uriError = ''
+
+        for (const key of Object.keys(optionalInputs)) {
+            optionalInputs[key].error = ''
+        }
+    }
+
     function validateRoyalties(): void {
         let royalties: unknown
         try {
             royalties = JSON.parse(optionalInputs.royalties.value)
         } catch (err) {
-            optionalInputs.royalties.error = 'Royalties must be a valid JSON'
+            optionalInputs.royalties.error = localize('popups.mintNftForm.errors.royaltiesMustBeJSON')
             return
         }
 
         try {
             Object.keys(royalties).forEach((key) => validateBech32Address($networkHrp, key))
         } catch (err) {
-            optionalInputs.royalties.error = `Invalid address, must be a valid ${$networkHrp} address where royalties will be sent to.`
+            optionalInputs.royalties.error = localize('popups.mintNftForm.errors.invalidAddress', {
+                values: { networkHrp: $networkHrp },
+            })
             return
         }
 
         const isValuesValid = Object.values(royalties).every((value) => value >= 0 && value <= 1)
         if (!isValuesValid) {
-            optionalInputs.royalties.error =
-                'Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05'
+            optionalInputs.royalties.error = localize('popups.mintNftForm.errors.invalidRoyaltyValue')
             return
         }
         const isSumValid = Object.values(royalties).reduce((acc, val) => acc + val, 0) <= 1
         if (!isSumValid) {
-            optionalInputs.royalties.error = 'Invalid value, the sum of all royalties must be less than or equal to 1'
+            optionalInputs.royalties.error = localize('popups.mintNftForm.errors.invalidRoyaltyValueSum')
             return
         }
     }
@@ -179,18 +189,18 @@
         try {
             attributes = JSON.parse(optionalInputs.attributes.value)
         } catch (err) {
-            optionalInputs.attributes.error = 'Attributes must be a valid JSON'
+            optionalInputs.attributes.error = localize('popups.mintNftForm.errors.attributesMustBeJSON')
             return
         }
         if (!Array.isArray(attributes)) {
-            optionalInputs.attributes.error = 'Attributes must be an array'
+            optionalInputs.attributes.error = localize('popups.mintNftForm.errors.attributesMustBeArrayOfObjects')
             return
         }
         const isArrayOfObjects = attributes.every(
             (attribute) => typeof attribute === 'object' && !Array.isArray(attribute) && attribute !== null
         )
         if (!isArrayOfObjects) {
-            optionalInputs.attributes.error = 'Attributes must be an array of objects'
+            optionalInputs.attributes.error = localize('popups.mintNftForm.errors.attributesMustBeArrayOfObjects')
             return
         }
         const isKeysValid = attributes.every(
@@ -200,7 +210,7 @@
                 Object.keys(attribute).filter((key) => key === 'value').length === 1
         )
         if (!isKeysValid) {
-            optionalInputs.attributes.error = 'Invalid key, attributes must have the keys "trait_type" and "value"'
+            optionalInputs.attributes.error = localize('popups.mintNftForm.errors.attributesInvalidKeys')
             return
         }
         const isValuesValid = attributes.every(
@@ -212,8 +222,7 @@
                 typeof attribute.value === 'number'
         )
         if (!isValuesValid) {
-            optionalInputs.attributes.error =
-                'Invalid value, "trait_type" must be a non empty string and "value" must be a non empty string or a number'
+            optionalInputs.attributes.error = localize('popups.mintNftForm.errors.attributesInvalidValues')
             return
         }
     }
