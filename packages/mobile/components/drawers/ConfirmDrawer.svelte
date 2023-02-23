@@ -12,7 +12,7 @@
     export let onConfirm: () => void = undefined
 </script>
 
-<div class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
+<confirm-drawer class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <div class="space-y-4">
         {#if description}
             <Text fontSize="14" classes="text-left">{description}</Text>
@@ -29,4 +29,4 @@
     >
         {confirmText}
     </Button>
-</div>
+</confirm-drawer>
