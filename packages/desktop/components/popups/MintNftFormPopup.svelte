@@ -1,16 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import {
-        Button,
-        Dropdown,
-        Error,
-        FontWeight,
-        OptionalInput,
-        Text,
-        TextInput,
-        NumberInput,
-        TooltipIcon,
-    } from 'shared/components'
+    import { Button, Dropdown, Error, FontWeight, OptionalInput, Text, TextInput, TooltipIcon } from 'shared/components'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { BaseError } from '@core/error/classes'
     import { handleError } from '@core/error/handlers/handleError'
@@ -26,25 +16,65 @@
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
-    let { standard, version, type, uri, amount, name, collectionName, royalties, issuerName, description, attributes } =
-        $mintNftDetails
-
-    const optionalInputs = {
+    let {
+        standard,
+        version,
+        type,
+        uri,
+        quantity,
+        name,
         collectionName,
-        royalties: JSON.stringify(royalties),
+        royalties,
         issuerName,
         description,
-        attributes: JSON.stringify(attributes),
-    }
-    const optionalInputErrors = {
-        collectionName: '',
-        royalties: '',
-        issuerName: '',
-        description: '',
-        attributes: '',
+        attributes,
+    } = $mintNftDetails
+
+    interface IOptionalInputs {
+        [key: string]: {
+            inputType: 'text' | 'number'
+            isInteger?: boolean
+            value: string
+            error: string
+            isOpen?: boolean
+        }
     }
 
-    let typeError: string, uriError: string, nameError: string, amountError: string
+    const optionalInputs: IOptionalInputs = {
+        issuerName: {
+            inputType: 'text',
+            value: issuerName,
+            error: '',
+        },
+        collectionName: {
+            inputType: 'text',
+            value: collectionName,
+            error: '',
+        },
+        description: {
+            inputType: 'text',
+            value: description,
+            error: '',
+        },
+        attributes: {
+            inputType: 'text',
+            value: attributes ? JSON.stringify(attributes) : undefined,
+            error: '',
+        },
+        royalties: {
+            inputType: 'text',
+            value: royalties ? JSON.stringify(royalties) : undefined,
+            error: '',
+        },
+        quantity: {
+            inputType: 'number',
+            isInteger: true,
+            value: quantity ? String(quantity <= 1 ? '' : quantity) : '',
+            error: '',
+        },
+    }
+
+    let typeError: string, uriError: string, nameError: string
 
     const error: BaseError = null
 
@@ -60,9 +90,10 @@
     }
 
     function handleContinue(): void {
+        resetErrors()
         const valid = validate()
         if (valid) {
-            setMintNftDetails(convertInputsToMetadataType(optionalInputs))
+            setMintNftDetails(convertInputsToMetadataType())
             openPopup({
                 id: PopupId.MintNftConfirmation,
                 overflow: true,
@@ -76,62 +107,79 @@
 
     function validate(): boolean {
         if (!nftTypeOptions.map((e) => e.value).includes(type as MimeType)) {
-            typeError = 'Invalid MimeType, check if the file type is supported'
+            typeError = localize('popups.mintNftForm.errors.invalidMimetype')
         }
 
         if (name.length === 0) {
-            nameError = 'Empty name, it is a required field'
+            nameError = localize('popups.mintNftForm.errors.emptyName')
         }
 
-        if (Number(amount) < 1) {
-            amountError = 'Amount needs to be greater than 0'
+        if (optionalInputs.quantity?.isOpen) {
+            if (Number(optionalInputs.quantity.value) < 1) {
+                optionalInputs.quantity.error = localize('popups.mintNftForm.errors.quantityTooSmall')
+            }
+            if (Number(optionalInputs.quantity.value) >= 64) {
+                optionalInputs.quantity.error = localize('popups.mintNftForm.errors.quantityTooLarge')
+            }
         }
 
-        if (uri.length === 0) {
-            uriError = 'Empty URI, please provide a valid URI'
-        } else if (!isValidUri(uri)) {
-            uriError = 'Invalid URI, please provide a valid URI'
+        if (uri.length === 0 || !isValidUri(uri)) {
+            uriError = localize('popups.mintNftForm.errors.invalidURI')
         }
 
-        if (optionalInputs.royalties) {
+        if (optionalInputs.royalties.isOpen) {
             validateRoyalties()
         }
 
-        if (optionalInputs.attributes) {
+        if (optionalInputs.attributes.isOpen) {
             validateAttributes()
         }
 
-        const hasErrors = Object.values({ ...optionalInputErrors, typeError, nameError, uriError }).some(
+        const optionalInputsErrors = Object.values(optionalInputs).map((optionalInput) => optionalInput.error)
+
+        const hasErrors = Object.values({ ...optionalInputsErrors, typeError, nameError, uriError }).some(
             (e) => e !== ''
         )
+
         return !hasErrors
+    }
+
+    function resetErrors(): void {
+        typeError = ''
+        nameError = ''
+        uriError = ''
+
+        for (const key of Object.keys(optionalInputs)) {
+            optionalInputs[key].error = ''
+        }
     }
 
     function validateRoyalties(): void {
         let royalties: unknown
         try {
-            royalties = JSON.parse(optionalInputs.royalties)
+            royalties = JSON.parse(optionalInputs.royalties.value)
         } catch (err) {
-            optionalInputErrors.royalties = 'Royalties must be a valid JSON'
+            optionalInputs.royalties.error = localize('popups.mintNftForm.errors.royaltiesMustBeJSON')
             return
         }
 
         try {
             Object.keys(royalties).forEach((key) => validateBech32Address($networkHrp, key))
         } catch (err) {
-            optionalInputErrors.royalties = `Invalid address, must be a valid ${$networkHrp} address where royalties will be sent to.`
+            optionalInputs.royalties.error = localize('popups.mintNftForm.errors.invalidAddress', {
+                values: { networkHrp: $networkHrp },
+            })
             return
         }
 
         const isValuesValid = Object.values(royalties).every((value) => value >= 0 && value <= 1)
         if (!isValuesValid) {
-            optionalInputErrors.royalties =
-                'Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05'
+            optionalInputs.royalties.error = localize('popups.mintNftForm.errors.invalidRoyaltyValue')
             return
         }
         const isSumValid = Object.values(royalties).reduce((acc, val) => acc + val, 0) <= 1
         if (!isSumValid) {
-            optionalInputErrors.royalties = 'Invalid value, the sum of all royalties must be less than or equal to 1'
+            optionalInputs.royalties.error = localize('popups.mintNftForm.errors.invalidRoyaltyValueSum')
             return
         }
     }
@@ -139,20 +187,20 @@
     function validateAttributes(): void {
         let attributes: unknown
         try {
-            attributes = JSON.parse(optionalInputs.attributes)
+            attributes = JSON.parse(optionalInputs.attributes.value)
         } catch (err) {
-            optionalInputErrors.attributes = 'Attributes must be a valid JSON'
+            optionalInputs.attributes.error = localize('popups.mintNftForm.errors.attributesMustBeJSON')
             return
         }
         if (!Array.isArray(attributes)) {
-            optionalInputErrors.attributes = 'Attributes must be an array'
+            optionalInputs.attributes.error = localize('popups.mintNftForm.errors.attributesMustBeArrayOfObjects')
             return
         }
         const isArrayOfObjects = attributes.every(
             (attribute) => typeof attribute === 'object' && !Array.isArray(attribute) && attribute !== null
         )
         if (!isArrayOfObjects) {
-            optionalInputErrors.attributes = 'Attributes must be an array of objects'
+            optionalInputs.attributes.error = localize('popups.mintNftForm.errors.attributesMustBeArrayOfObjects')
             return
         }
         const isKeysValid = attributes.every(
@@ -162,7 +210,7 @@
                 Object.keys(attribute).filter((key) => key === 'value').length === 1
         )
         if (!isKeysValid) {
-            optionalInputErrors.attributes = 'Invalid key, attributes must have the keys "trait_type" and "value"'
+            optionalInputs.attributes.error = localize('popups.mintNftForm.errors.attributesInvalidKeys')
             return
         }
         const isValuesValid = attributes.every(
@@ -174,22 +222,23 @@
                 typeof attribute.value === 'number'
         )
         if (!isValuesValid) {
-            optionalInputErrors.attributes =
-                'Invalid value, "trait_type" must be a non empty string and "value" must be a non empty string or a number'
+            optionalInputs.attributes.error = localize('popups.mintNftForm.errors.attributesInvalidValues')
             return
         }
     }
 
-    function convertInputsToMetadataType(optionalInputs: { [key: string]: string }): IMintNftDetails {
+    function convertInputsToMetadataType(): IMintNftDetails {
         return {
             standard: standard ?? TokenStandard.Irc27,
             version,
-            ...optionalInputs,
-            amount,
+            issuerName: optionalInputs.issuerName?.value,
+            description: optionalInputs.description?.value,
+            collectionName: optionalInputs.collectionName?.value,
+            quantity: optionalInputs.quantity?.value ? Number(optionalInputs.quantity.value) : 1,
             uri,
             name,
-            royalties: optionalInputs.royalties ? JSON.parse(optionalInputs.royalties) : undefined,
-            attributes: optionalInputs.attributes ? JSON.parse(optionalInputs.attributes) : undefined,
+            royalties: optionalInputs.royalties?.value ? JSON.parse(optionalInputs.royalties.value) : undefined,
+            attributes: optionalInputs.attributes?.value ? JSON.parse(optionalInputs.attributes.value) : undefined,
             type: type as MimeType,
         }
     }
@@ -241,17 +290,14 @@
             label={localize('general.name')}
             placeholder={localize('general.name')}
         />
-        <NumberInput
-            bind:value={amount}
-            bind:error={amountError}
-            label={localize('general.amount')}
-            placeholder={localize('general.amount')}
-        />
         <optional-inputs class="flex flex-row flex-wrap gap-4">
             {#each Object.keys(optionalInputs) as key}
                 <OptionalInput
-                    bind:value={optionalInputs[key]}
-                    bind:error={optionalInputErrors[key]}
+                    bind:value={optionalInputs[key].value}
+                    bind:error={optionalInputs[key].error}
+                    bind:isOpen={optionalInputs[key].isOpen}
+                    inputType={optionalInputs[key].inputType}
+                    isInteger={optionalInputs[key]?.isInteger}
                     label={localize(`general.${key}`)}
                     description={localize(`tooltips.mintNftForm.${key}`)}
                     fontSize="14"
