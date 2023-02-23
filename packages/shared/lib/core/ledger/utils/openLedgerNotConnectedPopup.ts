@@ -1,5 +1,5 @@
 import { get } from 'svelte/store'
-import { openPopup, popupState } from '@auxiliary/popup'
+import { openPopup, PopupId, popupState } from '@auxiliary/popup'
 
 export function openLedgerNotConnectedPopup(
     cancel: () => void = () => {},
@@ -8,7 +8,7 @@ export function openLedgerNotConnectedPopup(
 ): void {
     if (!get(popupState).active || overridePopup) {
         openPopup({
-            id: 'connectLedger',
+            id: PopupId.ConnectLedger,
             props: {
                 onClose: () => cancel(),
                 onPoll: () => poll(),

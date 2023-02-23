@@ -9,7 +9,7 @@
         NotVerifiedStatus,
         ActivityAsyncStatus,
     } from '@core/wallet'
-    import { openPopup } from '@auxiliary/popup'
+    import { openPopup, PopupId } from '@auxiliary/popup'
     import {
         ClickableTile,
         TransactionActivityTileContent,
@@ -21,6 +21,7 @@
         NftActivityTileContent,
         GovernanceActivityTileContent,
     } from 'shared/components'
+    import { time } from '@core/app'
 
     export let activity: Activity
 
@@ -30,11 +31,13 @@
             activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry
                 ? getAssetFromPersistedAssets(activity.assetId)
                 : undefined)
+    $: isTimelocked = activity?.asyncData?.timelockDate > $time
+    $: shouldShowAsyncFooter = activity.asyncData && activity.asyncData.asyncStatus !== ActivityAsyncStatus.Claimed
 
     function handleTransactionClick(): void {
         if (asset?.verification?.status === NotVerifiedStatus.New) {
             openPopup({
-                id: 'tokenInformation',
+                id: PopupId.TokenInformation,
                 overflow: true,
                 props: {
                     activityId: activity.id,
@@ -43,7 +46,7 @@
             })
         } else {
             openPopup({
-                id: 'activityDetails',
+                id: PopupId.ActivityDetails,
                 props: { activityId: activity.id },
             })
         }
@@ -70,9 +73,9 @@
                 <FoundryActivityTileContent {activity} />
             {/if}
         </tile-content>
-        {#if activity.asyncData?.asyncStatus === ActivityAsyncStatus.Timelocked}
+        {#if isTimelocked}
             <TimelockActivityTileFooter {activity} />
-        {:else if activity.asyncData}
+        {:else if shouldShowAsyncFooter}
             <AsyncActivityTileFooter {activity} />
         {/if}
     </activity-tile>

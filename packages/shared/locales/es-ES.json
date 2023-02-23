@@ -625,32 +625,59 @@
             "step_3": "Pulse el botón derecho para ir a la Configuración (Settings). Luego pulse ambos botones para validar. Su dispositivo Ledger muestra la firma ciega (Blind Signing).",
             "step_4": "Pulse ambos botones para activar la firma de la transacción ciega. El dispositivo muestra Habilitado. Ya ha terminado."
         },
-        "storageDepositBreakdown": {
-            "title": "Desglose del depósito de almacenamiento",
-            "totalStorageDeposit": "Depósito de almacenamiento total",
+        "balanceBreakdown": {
+            "title": "Desglose de saldo",
+            "available": {
+                "title": "Disponible",
+                "subtitle": "Fondos totalmente disponibles para gastar"
+            },
+            "pending": {
+                "title": "Pendiente",
+                "subtitle": "Bloqueado temporalmente en transacciones"
+            },
+            "locked": {
+                "title": "Bloqueado",
+                "subtitle": "Bloqueado temporalmente para gobernanza"
+            },
+            "storageDeposit": {
+                "title": "Depósito de almacenamiento",
+                "subtitle": "Estos fondos están reservados para almacenar activos nativos."
+            },
+            "totalBalance": {
+                "title": "Saldo total",
+                "subtitle": ""
+            },
             "basicOutputs": {
                 "title": "Tokens nativos",
-                "subtitle": "Reservado para almacenamiento de token nativo"
+                "subtitle": "Reservado para almacenamiento de Tokens Nativos"
             },
             "nftOutputs": {
                 "title": "NFTs",
-                "subtitle": "Reservado para almacenamiento NFT"
+                "subtitle": "Reservado para almacenamiento de NFT"
             },
             "aliasOutputs": {
                 "title": "Alias",
-                "subtitle": "Reservado para almacenamiento Alias"
+                "subtitle": "Reservado para almacenamiento de Alias"
             },
             "foundryOutputs": {
                 "title": "Fundiciones",
                 "subtitle": "Reservado para almacenamiento de la Fundición de Tokens Nativos"
             },
-            "pendingTransactions": {
-                "title": "Transacciones",
+            "unclaimed": {
+                "title": "Transacción no reclamada",
                 "subtitle": "Bloqueado temporalmente en transacciones no reclamadas"
             },
-            "votingPowerOutput": {
+            "timelock": {
+                "title": "Bloqueo de tiempo",
+                "subtitle": "Bloqueado temporalmente en transacciones con bloqueo de tiempo"
+            },
+            "storageDepositReturn": {
+                "title": "SDRUC",
+                "subtitle": "Temporalmente bloqueado en devolución de depósito de almacenamiento"
+            },
+            "governance": {
                 "title": "Gobernanza",
-                "subtitle": "Reservado para poder de voto"
+                "subtitle": "Reservado para peso de voto"
             },
             "minimizeStorageDepositButton": "Minimizar depósito de almacenamiento"
         },
@@ -1188,7 +1215,7 @@
         "readDocumentation": "Leer la documentación",
         "visitFaq": "Ver las preguntas frecuentes resueltas",
         "viewStatus": "Ver estado",
-        "viewStorageDeposit": "Ver depósito de almacenamiento",
+        "viewBalanceBreakdown": "Ver desglose de saldo",
         "showHiddenAccounts": "Mostrar carteras ocultas",
         "confirm": "Confirmar",
         "hideNetworkStatistics": "Ocultar estadísticas de la red",

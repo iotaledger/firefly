@@ -26,7 +26,7 @@
     import { activeProfile, checkActiveProfileAuth } from '@core/profile'
     import { setClipboard } from '@core/utils'
     import { truncateString } from '@core/utils'
-    import { closePopup, openPopup } from '@auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { onMount } from 'svelte'
     import { ExplorerEndpoint } from '@core/network'
 
@@ -54,7 +54,7 @@
     async function claim(): Promise<void> {
         await claimActivity(activity)
         openPopup({
-            id: 'activityDetails',
+            id: PopupId.ActivityDetails,
             props: { activityId },
         })
     }
@@ -65,7 +65,7 @@
 
     function reject(): void {
         openPopup({
-            id: 'confirmation',
+            id: PopupId.Confirmation,
             props: {
                 title: localize('actions.confirmRejection.title'),
                 description: localize('actions.confirmRejection.description'),
@@ -79,7 +79,7 @@
                 },
                 onCancel: () =>
                     openPopup({
-                        id: 'activityDetails',
+                        id: PopupId.ActivityDetails,
                         props: { activityId },
                     }),
             },

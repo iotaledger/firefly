@@ -1,10 +1,11 @@
 <script lang="typescript">
     import { slidable } from '@core/utils'
+    import { removeDisplayNotification } from '@auxiliary/notification/stores'
     import { tweened } from 'svelte/motion'
     import { quintOut } from 'svelte/easing'
-    import { createEventDispatcher } from 'svelte'
 
-    const dispatch = createEventDispatcher()
+    export let toastId: string = undefined
+
     const positionX = tweened(0, { duration: 350, easing: quintOut })
     const viewportLength = window.innerWidth
 
@@ -23,7 +24,7 @@
         if (isVelocityReached || isThresholdUnreached) {
             const offscreenX = $positionX < 0 ? -viewportLength : viewportLength * 2
             await positionX.update(() => offscreenX)
-            dispatch('close')
+            removeDisplayNotification(toastId)
         } else {
             await positionX.update(() => 0)
         }

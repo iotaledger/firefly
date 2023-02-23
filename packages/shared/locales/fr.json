@@ -625,34 +625,61 @@
             "step_3": "Appuyer sur le bouton droit pour ouvrir les paramètres. Appuyez ensuite sur les deux boutons pour valider. Votre clé Ledger affiche Blind Signing.",
             "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
         },
-        "storageDepositBreakdown": {
-            "title": "Répartition de la caution de stockage",
-            "totalStorageDeposit": "Total de la caution de stockage",
+        "balanceBreakdown": {
+            "title": "Répartition du solde",
+            "available": {
+                "title": "Disponible",
+                "subtitle": "Fonds entièrement disponibles pour la dépense"
+            },
+            "pending": {
+                "title": "En cours",
+                "subtitle": "Temporairement verrouillé dans les transactions"
+            },
+            "locked": {
+                "title": "Verrouillé",
+                "subtitle": "Temporairement verrouillé pour la gouvernance"
+            },
+            "storageDeposit": {
+                "title": "Caution de stockage",
+                "subtitle": "Ces fonds sont réservés au stockage des actifs natifs."
+            },
+            "totalBalance": {
+                "title": "Solde total",
+                "subtitle": ""
+            },
             "basicOutputs": {
-                "title": "Native Tokens",
-                "subtitle": "Reserved for Native Token storage"
+                "title": "Jetons natifs",
+                "subtitle": "Réservé pour le stockage de jetons natifs"
             },
             "nftOutputs": {
                 "title": "NFTs",
-                "subtitle": "Reserved for NFT storage"
+                "subtitle": "Réservé pour le stockage NFT"
             },
             "aliasOutputs": {
-                "title": "Aliases",
-                "subtitle": "Reserved for Alias storage"
+                "title": "Alias",
+                "subtitle": "Réservé pour le stockage d'alias"
             },
             "foundryOutputs": {
-                "title": "Foundries",
-                "subtitle": "Reserved for Native Token Foundry storage"
+                "title": "Fonderies",
+                "subtitle": "Réservé pour le stockage de jetons natifs"
             },
-            "pendingTransactions": {
-                "title": "Transactions",
-                "subtitle": "Temporarily locked in unclaimed transactions"
+            "unclaimed": {
+                "title": "Transaction non réclamée",
+                "subtitle": "Temporairement verrouillé dans les transactions non réclamées"
             },
-            "votingPowerOutput": {
+            "timelock": {
+                "title": "Verrouillage horaire, aussi appelé Time Lock",
+                "subtitle": "Temporairement verrouillé dans les transactions \"timelocked\""
+            },
+            "storageDepositReturn": {
+                "title": "SDRUC",
+                "subtitle": "Temporairement verrouillé dans le dépôt"
+            },
+            "governance": {
                 "title": "Gouvernance",
                 "subtitle": "Réservé au pouvoir de vote"
             },
-            "minimizeStorageDepositButton": "Minimize storage deposit"
+            "minimizeStorageDepositButton": "Réduire le dépôt de stockage"
         },
         "minimizeStorageDeposit": {
             "title": "Minimize storage deposit",
@@ -1188,7 +1215,7 @@
         "readDocumentation": "Consulter la documentation",
         "visitFaq": "Visitez la FAQ",
         "viewStatus": "Voir le statut",
-        "viewStorageDeposit": "Voir la caution de stockage",
+        "viewBalanceBreakdown": "Voir la répartition du solde",
         "showHiddenAccounts": "Afficher les portefeuilles cachés",
         "confirm": "Confirmer",
         "hideNetworkStatistics": "Masquer les statistiques du réseau",

@@ -7,6 +7,7 @@
     import { INft, rewriteIpfsUri } from '@core/nfts'
     import { CollectiblesRoute, collectiblesRouter } from '@core/router'
     import { openUrlInBrowser } from '@core/app'
+    import { PopupId } from '@auxiliary/popup'
 
     export let modal: Modal = undefined
     export let nft: INft
@@ -15,7 +16,7 @@
 
     function openBurnNft(): void {
         openPopup({
-            id: 'confirmation',
+            id: PopupId.Confirmation,
             props: {
                 title: localize('actions.confirmNftBurn.title', {
                     values: {

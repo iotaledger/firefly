@@ -9,7 +9,7 @@
         formatTokenAmountPrecise,
         IIrc30Metadata,
     } from '@core/wallet'
-    import { closePopup, openPopup } from '@auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { Button, KeyValueBox, Text, FontWeight } from 'shared/components'
     import { onMount } from 'svelte'
     import { selectedAccount } from '@core/account'
@@ -93,7 +93,7 @@
     function handleBack(): void {
         closePopup()
         openPopup({
-            id: 'mintNativeTokenForm',
+            id: PopupId.MintNativeTokenForm,
             overflow: true,
         })
     }

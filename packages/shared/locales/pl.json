@@ -625,9 +625,28 @@
             "step_3": "Naciśnij prawy przycisk, aby przejść do opcji Ustawienia. Następnie naciśnij oba przyciski, aby zatwierdzić. Na urządzeniu Ledger pojawi się komunikat Blind Signing.",
             "step_4": "Naciśnij oba przyciski, aby włączyć Bling Signing transakcji. Na urządzeniu wyświetli się komunikat Enabled. Gotowe."
         },
-        "storageDepositBreakdown": {
-            "title": "Zestawienie depozytu magazynowego",
-            "totalStorageDeposit": "Całkowity depozyt magazynowy",
+        "balanceBreakdown": {
+            "title": "Zestawienie środków",
+            "available": {
+                "title": "Dostępne",
+                "subtitle": "Środki w pełni dostępne do użycia"
+            },
+            "pending": {
+                "title": "Oczekujące",
+                "subtitle": "Tymczasowo zablokowane w transakcjach"
+            },
+            "locked": {
+                "title": "Zablokowano",
+                "subtitle": "Tymczasowo zablokowane przez zarządzanie"
+            },
+            "storageDeposit": {
+                "title": "Depozyt magazynowy",
+                "subtitle": "Środki te są zarezerwowane na przechowywanie natywnych assetów."
+            },
+            "totalBalance": {
+                "title": "Wszystkie środki",
+                "subtitle": ""
+            },
             "basicOutputs": {
                 "title": "Natywne tokeny",
                 "subtitle": "Zarezerwowano do przechowywania natywnych tokenów"
@@ -644,11 +663,19 @@
                 "title": "Produkcja",
                 "subtitle": "Zarezerwowano do przechowywania wyprodukowanych tokenów"
             },
-            "pendingTransactions": {
-                "title": "Transakcje",
+            "unclaimed": {
+                "title": "Nieodebrana transakcja",
                 "subtitle": "Tymczasowo zablokowano w nieodebranych transakcjach"
             },
-            "votingPowerOutput": {
+            "timelock": {
+                "title": "Blokada czasowa",
+                "subtitle": "Tymczasowo zablokowano w blokadach czasowych transakcji"
+            },
+            "storageDepositReturn": {
+                "title": "SDRUC",
+                "subtitle": "Tymczasowo zablokowano w zwrocie depozytu magazynowego"
+            },
+            "governance": {
                 "title": "Zarządzanie",
                 "subtitle": "Zarezerwowane na siłę głosu"
             },
@@ -702,7 +729,7 @@
         "externalUrl": {
             "title": "Otwórz URL w przeglądarce",
             "body": "Czy na pewno chcesz otworzyć \"{url}\" w przeglądarce?",
-            "hint": "Ten adres URL jest nieznany dla Firefly. Prosimy o podwójne sprawdzenie adresu URL przed jego otwarciem.",
+            "hint": "Ten adres URL jest nieznany dla Firefly. Prosimy o dokładne sprawdzenie adresu URL przed jego otwarciem.",
             "action": "Otwórz URL",
             "invalidProtocol": "Nie można otworzyć adresu URL z nieprawidłowym protokołem"
         },
@@ -1188,7 +1215,7 @@
         "readDocumentation": "Przeczytaj dokumentację",
         "visitFaq": "Odwiedź FAQ",
         "viewStatus": "Pokaż status",
-        "viewStorageDeposit": "Pokaż depozyt magazynowy",
+        "viewBalanceBreakdown": "Pokaż zestawienie środków",
         "showHiddenAccounts": "Pokaż ukryte portfele",
         "confirm": "Potwierdź",
         "hideNetworkStatistics": "Ukryj statystyki sieci",
@@ -1439,7 +1466,7 @@
         "storageDeposit": "Depozyt magazynowy",
         "giftedStorageDeposit": "Podarowany depozyt magazynowy",
         "expirationTime": "Czas wygaśnięcia",
-        "timelockDate": "Timelock",
+        "timelockDate": "Blokada czasowa",
         "claimedTime": "Odebrano",
         "nftAddress": "Adres NFT",
         "nftId": "NFT ID",

@@ -43,6 +43,7 @@
         clearParticipationEventStatusPoll,
         pollParticipationEventStatus,
     } from '@contexts/governance/actions/pollParticipationEventStatus'
+    import { PopupId } from '@auxiliary/popup'
 
     const { metadata } = $visibleSelectedAccountAssets?.baseCoin
 
@@ -78,7 +79,7 @@
     }
 
     $: isVotingDisabled =
-        !isProposalVotable($selectedParticipationEventStatus?.status) ||
+        !isProposalVotable($selectedProposal?.status) ||
         !hasChangedAnswers(selectedAnswerValues) ||
         hasSelectedNoAnswers(selectedAnswerValues)
     $: isTransferring = $hasPendingGovernanceTransaction?.[$selectedAccountIndex]
@@ -157,14 +158,13 @@
 
     let openedQuestionIndex = 0
 
-    function handleQuestionClick(event: CustomEvent): void {
-        const { questionIndex } = event.detail
+    function onQuestionClick(questionIndex: number): void {
         openedQuestionIndex = questionIndex === openedQuestionIndex ? null : questionIndex
     }
 
     function onStopVotingClick(): void {
         openPopup({
-            id: 'stopVoting',
+            id: PopupId.StopVoting,
         })
     }
 
@@ -173,13 +173,12 @@
             answerValue === undefined ? ABSTAIN_VOTE_VALUE : answerValue
         )
         openPopup({
-            id: 'voteForProposal',
+            id: PopupId.VoteForProposal,
             props: { selectedAnswerValues: chosenAnswerValues },
         })
     }
 
-    function handleAnswerClick(event: CustomEvent): void {
-        const { answerValue, questionIndex } = event.detail
+    function onAnswerClick(answerValue: number, questionIndex: number): void {
         selectedAnswerValues[questionIndex] = answerValue
 
         openedQuestionIndex = questionIndex + 1
@@ -267,19 +266,19 @@
                         {question}
                         {questionIndex}
                         isOpened={openedQuestionIndex === questionIndex}
+                        isLoading={!overviewLoaded || !statusLoaded}
                         selectedAnswerValue={selectedAnswerValues[questionIndex]}
                         votedAnswerValue={votedAnswerValues[questionIndex]}
-                        answerStatuses={$selectedParticipationEventStatus?.questions?.[questionIndex]?.answers}
-                        isLoading={!overviewLoaded || !statusLoaded}
-                        on:clickQuestion={handleQuestionClick}
-                        on:clickAnswer={handleAnswerClick}
+                        answerStatuses={$selectedParticipationEventStatus?.questions[questionIndex]?.answers}
+                        {onQuestionClick}
+                        {onAnswerClick}
                     />
                 {/each}
             {/if}
         </proposal-questions>
         {#if $selectedProposal?.status === ProposalStatus.Upcoming}
             <TextHint info text={textHintString} />
-        {:else if [ProposalStatus.Commencing, ProposalStatus.Holding].includes($selectedParticipationEventStatus?.status)}
+        {:else if [ProposalStatus.Commencing, ProposalStatus.Holding].includes($selectedProposal?.status)}
             <buttons-container class="flex w-full space-x-4 mt-6">
                 <Button
                     outline

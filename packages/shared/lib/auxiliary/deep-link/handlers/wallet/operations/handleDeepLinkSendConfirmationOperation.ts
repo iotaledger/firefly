@@ -10,7 +10,7 @@ import {
     setNewTransactionDetails,
     Subject,
 } from '@core/wallet'
-import { openPopup } from '@auxiliary/popup'
+import { openPopup, PopupId } from '@auxiliary/popup'
 
 import { SendOperationParameter } from '../../../enums'
 import {
@@ -29,7 +29,7 @@ export function handleDeepLinkSendConfirmationOperation(searchParams: URLSearchP
     if (transactionDetails) {
         setNewTransactionDetails(transactionDetails)
         openPopup({
-            id: 'sendConfirmation',
+            id: PopupId.SendConfirmation,
             overflow: true,
             props: {
                 disableBack: true,
