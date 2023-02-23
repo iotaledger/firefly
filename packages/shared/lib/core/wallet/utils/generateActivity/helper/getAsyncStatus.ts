@@ -13,9 +13,9 @@ export function getAsyncStatus(
         return ActivityAsyncStatus.Timelocked
     } else if (expirationDate && expirationDate.getTime() < currentTimeStamp) {
         return ActivityAsyncStatus.Expired
-    } else if (hasStorageDeposit) {
+    } else if (hasStorageDeposit || expirationDate) {
         return ActivityAsyncStatus.Unclaimed
-    } else if (timelockDate && !expirationDate) {
+    } else if (timelockDate) {
         return ActivityAsyncStatus.Claimed
     } else {
         return ActivityAsyncStatus.Unclaimed
