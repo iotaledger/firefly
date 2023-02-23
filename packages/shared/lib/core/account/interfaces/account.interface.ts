@@ -32,6 +32,7 @@ import type {
     SignedTransactionEssence,
     Transaction,
     TransactionOptions,
+    ParticipationEventRegistrationOptions,
 } from '@iota/wallet'
 
 export interface IAccount {
@@ -70,7 +71,7 @@ export interface IAccount {
     getOutput(outputId: string): Promise<OutputData>
     getOutputsWithAdditionalUnlockConditions(outputs: OutputsToClaim): Promise<string[]>
     getParticipationEvent(eventId: string): Promise<ParticipationEventWithNodes>
-    getParticipationEventIds(eventType?: ParticipationEventType): Promise<string[]>
+    getParticipationEventIds(node: Node, eventType?: ParticipationEventType): Promise<string[]>
     getParticipationEvents(): Promise<{ [eventId: string]: ParticipationEventWithNodes }>
     getParticipationEventStatus(eventId: string): Promise<ParticipationEventStatus>
     getParticipationOverview(): Promise<ParticipationOverview>
@@ -98,7 +99,9 @@ export interface IAccount {
         options?: TransactionOptions
     ): Promise<PreparedTransactionData>
     prepareTransaction(outputs: OutputTypes[], options?: TransactionOptions): Promise<PreparedTransactionData>
-    registerParticipationEvent(eventId: string, nodes: Node[]): Promise<ParticipationEventWithNodes>
+    registerParticipationEvents(
+        options: ParticipationEventRegistrationOptions
+    ): Promise<{ [eventId: string]: ParticipationEventWithNodes }>
     retryTransactionUntilIncluded(
         transactionId: string,
         interval?: number,
