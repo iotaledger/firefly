@@ -70,10 +70,10 @@
 
 <OnboardingLayout {onBackClick} {busy} {title} animation="import-from-file-password-desktop">
     <div slot="content">
-        <Text type={TextType.p} secondary classes="mb-4"
+        <Text type={TextType.p} secondary fontSize="15" classes="mb-4"
             >{localize('views.onboarding.profileRecovery.backupPassword.body1')}</Text
         >
-        <Text type={TextType.p} secondary classes="mb-8"
+        <Text type={TextType.p} secondary fontSize="15" classes="mb-8"
             >{localize('views.onboarding.profileRecovery.backupPassword.body2')}</Text
         >
         <PasswordInput
