@@ -11,7 +11,7 @@
     import { IClientOptions, INode } from '@core/network/interfaces'
     import { getOfficialNodes } from '@core/network/utils'
     import { activeProfile } from '@core/profile/stores'
-    import { registerProposalsFromPrimaryNode } from '@contexts/governance/actions'
+    import { registerProposalsFromNode } from '@contexts/governance/actions'
     import { PopupId } from '@auxiliary/popup'
 
     export let node: INode
@@ -56,7 +56,7 @@
         } else {
             await togglePrimaryNodeInClientOptions(node)
             if (Platform.isFeatureFlagEnabled('governance')) {
-                await registerProposalsFromPrimaryNode()
+                await registerProposalsFromNode(node)
             }
         }
         modal?.toggle()
