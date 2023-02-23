@@ -5,12 +5,14 @@
     import { closePopup } from '@auxiliary/popup'
     import { activeProfile } from '@core/profile'
     import { showAppNotification } from '@auxiliary/notification'
+    import { Platform } from 'shared/lib/core/app'
+    import { registerProposalsFromNode } from 'shared/lib/contexts/governance'
 
     export let node: INode = EMPTY_NODE
     export let isEditingNode: boolean = false
     export let onSuccess: (..._: any[]) => void
 
-    const currentNode = node
+    const currentNode = { ...node }
 
     let nodeConfigurationForm: NodeConfigurationForm
     let isBusy = false
@@ -30,6 +32,13 @@
             } else {
                 await addNodeToClientOptions(node)
             }
+
+            if (Platform.isFeatureFlagEnabled('governance')) {
+                if (currentNode.url !== node.url) {
+                    await registerProposalsFromNode(node)
+                }
+            }
+
             onSuccess()
         } catch (err) {
             if (err.type !== 'validationError') {
