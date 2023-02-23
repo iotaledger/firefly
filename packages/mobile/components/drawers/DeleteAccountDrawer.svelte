@@ -60,6 +60,7 @@
         type={HTMLButtonType.Submit}
         disabled={(!password && $isSoftwareProfile) || isBusy}
         {isBusy}
+        onClick={handleDeleteClick}
     >
         {localize('actions.deleteAccount')}
     </Button>
