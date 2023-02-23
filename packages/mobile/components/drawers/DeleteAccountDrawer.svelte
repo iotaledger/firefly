@@ -34,34 +34,38 @@
     }
 </script>
 
-<div class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
-    <div class="space-y-4">
-        <Text type={TextType.p} secondary classes="mb-5">{localize('popups.deleteAccount.body')}</Text>
-        {#if $isSoftwareProfile}
-            <Text type={TextType.p} secondary classes="mb-3">{localize('popups.deleteAccount.typePassword')}</Text>
-            <PasswordInput
-                classes="w-full mb-3"
-                bind:value={password}
-                showRevealToggle
-                placeholder={localize('general.password')}
-                autofocus
-                submitHandler={handleDeleteClick}
-                disabled={isBusy}
-            />
-        {/if}
-        {#if error}
-            <Error {error} />
-        {/if}
-    </div>
-
-    <Button
-        variant={ButtonVariant.Warning}
-        classes="w-full"
-        type={HTMLButtonType.Submit}
-        disabled={(!password && $isSoftwareProfile) || isBusy}
-        {isBusy}
-        onClick={handleDeleteClick}
+<delete-account-drawer>
+    <form
+        on:submit|preventDefault={handleDeleteClick}
+        class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0"
     >
-        {localize('actions.deleteAccount')}
-    </Button>
-</div>
+        <div class="space-y-4">
+            <Text type={TextType.p} secondary classes="mb-5">{localize('popups.deleteAccount.body')}</Text>
+            {#if $isSoftwareProfile}
+                <Text type={TextType.p} secondary classes="mb-3">{localize('popups.deleteAccount.typePassword')}</Text>
+                <PasswordInput
+                    classes="w-full mb-3"
+                    bind:value={password}
+                    showRevealToggle
+                    placeholder={localize('general.password')}
+                    autofocus
+                    submitHandler={handleDeleteClick}
+                    disabled={isBusy}
+                />
+            {/if}
+            {#if error}
+                <Error {error} />
+            {/if}
+        </div>
+
+        <Button
+            variant={ButtonVariant.Warning}
+            classes="w-full"
+            type={HTMLButtonType.Submit}
+            disabled={(!password && $isSoftwareProfile) || isBusy}
+            {isBusy}
+        >
+            {localize('actions.deleteAccount')}
+        </Button>
+    </form>
+</delete-account-drawer>
