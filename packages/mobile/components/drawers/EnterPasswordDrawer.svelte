@@ -4,7 +4,6 @@
     import { Button, HTMLButtonType, PasswordInput, Text, TextType } from '@ui'
 
     export let busyMessage: string = ''
-
     export let onSuccess: (password?: string) => unknown
     export let returnPassword: boolean = false
 
