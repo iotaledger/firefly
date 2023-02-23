@@ -1,6 +1,5 @@
 <script lang="ts">
-    import { Button, Checkbox, Text, TextType } from 'shared/components'
-    import { ConditionOfUse } from '../../../components'
+    import { Button, Checkbox, ConditionsOfUse, Text, TextType } from '@ui'
     import {
         lastAcceptedPrivacyPolicy,
         lastAcceptedTermsOfService,
@@ -27,7 +26,7 @@
     <legal-update-body class="flex flex-col h-full overflow-y-auto">
         <Text type={TextType.p} secondary>{localize('popups.legalUpdate.tosAndPrivPolicyBody')}</Text>
         <div class="mt-4">
-            <ConditionOfUse />
+            <ConditionsOfUse />
         </div>
     </legal-update-body>
     <legal-update-actions class="space-y-8 mt-6">
