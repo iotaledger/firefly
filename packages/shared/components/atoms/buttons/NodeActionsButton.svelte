@@ -1,8 +1,8 @@
 <script lang="ts">
-    import { IClientOptions, INode } from '@core/network'
+    import { EMPTY_NODE, IClientOptions, INode } from '@core/network'
     import { Modal, NodeActionsMenu, MeatballMenuButton } from 'shared/components'
 
-    export let node: INode
+    export let node: INode = EMPTY_NODE
     export let clientOptions: IClientOptions
 
     let modal: Modal

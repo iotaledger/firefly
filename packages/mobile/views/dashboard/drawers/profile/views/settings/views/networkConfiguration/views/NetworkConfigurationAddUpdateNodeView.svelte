@@ -1,11 +1,11 @@
 <script lang="ts">
     import { showAppNotification } from '@auxiliary/notification'
     import { localize } from '@core/i18n'
-    import { addNodeToClientOptions, editNodeInClientOptions, INode } from '@core/network'
+    import { addNodeToClientOptions, editNodeInClientOptions, EMPTY_NODE, INode } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { Button, HTMLButtonType, NodeConfigurationForm } from 'shared/components'
 
-    const DEFAULT_EMPTY_NODE: INode = { url: '', auth: { username: '', password: '', jwt: '' } }
+    const DEFAULT_EMPTY_NODE: INode = EMPTY_NODE
 
     export let node: INode = DEFAULT_EMPTY_NODE
     export let isEditingNode: boolean = false
