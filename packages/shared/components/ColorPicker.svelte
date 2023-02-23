@@ -1,6 +1,7 @@
 <script lang="ts">
     import { Text, Icon, Tooltip, TextType, Position } from 'shared/components'
     import { AccountColors } from '@core/account'
+    import { appSettings } from '@core/app/stores'
     import { localize } from '@core/i18n'
     import { clickOutside, isBright, hex2rgb } from '@core/utils'
     import { Icon as IconEnum } from '@auxiliary/icon'
@@ -22,6 +23,7 @@
 
     $: inputValue = `#${/[0-9|a-f|A-F]+/.exec(inputValue) || ''}`
     $: customActiveFilled = activeElement === accountColors.length && inputValue.length >= 7
+    $: dark = $appSettings.darkMode
 
     $: if (activeElement >= accountColors.length) {
         active = inputValue.length >= 7 ? inputValue : '#FFFFFF'
@@ -129,6 +131,7 @@
                     maxlength="7"
                     class:ring-4={customActiveFilled}
                     class:active={customActiveFilled}
+                    class:dark
                 />
             </Tooltip>
         </tooltip-container>
@@ -138,9 +141,13 @@
 <style lang="scss">
     input {
         @apply w-24 h-full mt-2 p-1 rounded;
-        @apply uppercase text-16 leading-140 text-gray-800 dark:text-white text-center;
-        @apply border border-solid border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700;
-        @apply bg-transparent dark:bg-gray-800;
+        @apply uppercase text-16 leading-140 text-gray-800 text-center;
+        @apply border border-solid border-gray-300 hover:border-gray-500;
+        @apply bg-transparent;
+
+        &.dark {
+            @apply text-white bg-gray-800 border-gray-700 hover:border-gray-700;
+        }
     }
 
     .active {
