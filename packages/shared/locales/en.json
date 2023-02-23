@@ -1519,6 +1519,7 @@
         "issuer": "Issuer",
         "issuerAddress": "Issuer Address",
         "issuerName": "Issuer Name",
+        "quantity": "Quantity",
         "collection": "Collection",
         "collectionId": "Collection ID",
         "collectionName": "Collection Name",

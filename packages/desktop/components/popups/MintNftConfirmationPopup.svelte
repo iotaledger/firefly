@@ -22,7 +22,7 @@
     let activeTab = Tab.Transaction
 
     let storageDeposit = '0'
-    const { standard, type, uri, name, collectionName, royalties, issuerName, description, attributes, amount } =
+    const { standard, type, uri, name, collectionName, royalties, issuerName, description, attributes, quantity } =
         $mintNftDetails
 
     $: irc27Metadata = {
@@ -53,14 +53,14 @@
         const outputData = buildNftOutputData(irc27Metadata, $selectedAccount.depositAddress)
         const preparedOutput = await $selectedAccount.buildNftOutput(outputData)
         storageDeposit = formatTokenAmountPrecise(
-            Number(preparedOutput.amount) ?? 0,
+            Number(preparedOutput.amount) * Number(quantity) ?? 0,
             BASE_TOKEN[$activeProfile?.networkProtocol]
         )
     }
 
     async function mintAction(): Promise<void> {
         try {
-            await mintNft(irc27Metadata, Number(amount))
+            await mintNft(irc27Metadata, Number(quantity))
             closePopup()
         } catch (err) {
             handleError(err)
