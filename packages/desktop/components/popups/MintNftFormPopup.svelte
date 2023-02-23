@@ -33,6 +33,7 @@
     interface IOptionalInputs {
         [key: string]: {
             inputType: 'text' | 'number'
+            isInteger?: boolean
             value: string
             error: string
             isOpen?: boolean
@@ -67,6 +68,7 @@
         },
         quantity: {
             inputType: 'number',
+            isInteger: true,
             value: quantity ? String(quantity <= 1 ? '' : quantity) : '',
             error: '',
         },
@@ -115,7 +117,7 @@
             if (Number(optionalInputs.quantity.value) < 1) {
                 optionalInputs.quantity.error = 'Quantity needs to be greater than 0'
             }
-            if (Number(optionalInputs.quantity.value) > 64) {
+            if (Number(optionalInputs.quantity.value) >= 64) {
                 optionalInputs.quantity.error = 'Quantity needs to be smaller than 64'
             }
         }
@@ -286,6 +288,7 @@
                     bind:error={optionalInputs[key].error}
                     bind:isOpen={optionalInputs[key].isOpen}
                     inputType={optionalInputs[key].inputType}
+                    isInteger={optionalInputs[key]?.isInteger}
                     label={localize(`general.${key}`)}
                     description={localize(`tooltips.mintNftForm.${key}`)}
                     fontSize="14"

@@ -21,7 +21,8 @@
     const tabs: Tab[] = [Tab.Transaction, Tab.Nft, Tab.Metadata]
     let activeTab = Tab.Transaction
 
-    let storageDeposit = '0'
+    let storageDeposit: number = 0
+    let totalStorageDeposit: number = 0
     const { standard, type, uri, name, collectionName, royalties, issuerName, description, attributes, quantity } =
         $mintNftDetails
 
@@ -52,10 +53,8 @@
     async function prepareNftOutput(): Promise<void> {
         const outputData = buildNftOutputData(irc27Metadata, $selectedAccount.depositAddress)
         const preparedOutput = await $selectedAccount.buildNftOutput(outputData)
-        storageDeposit = formatTokenAmountPrecise(
-            Number(preparedOutput.amount) * Number(quantity) ?? 0,
-            BASE_TOKEN[$activeProfile?.networkProtocol]
-        )
+        storageDeposit = Number(preparedOutput.amount) ?? 0
+        totalStorageDeposit = storageDeposit * quantity
     }
 
     async function mintAction(): Promise<void> {
@@ -103,7 +102,31 @@
             <activity-details class="w-full h-full space-y-2 flex flex-auto flex-col flex-shrink-0">
                 <Tabs bind:activeTab {tabs} />
                 {#if activeTab === Tab.Transaction}
-                    <KeyValueBox keyText={localize('general.storageDeposit')} valueText={storageDeposit} />
+                    {#if quantity > 1}
+                        <KeyValueBox keyText={localize('general.quantity')} valueText={quantity} />
+                        <KeyValueBox
+                            keyText={localize('general.storageDepositPerNft')}
+                            valueText={formatTokenAmountPrecise(
+                                storageDeposit,
+                                BASE_TOKEN[$activeProfile?.networkProtocol]
+                            )}
+                        />
+                        <KeyValueBox
+                            keyText={localize('general.totalStorageDeposit')}
+                            valueText={formatTokenAmountPrecise(
+                                totalStorageDeposit,
+                                BASE_TOKEN[$activeProfile?.networkProtocol]
+                            )}
+                        />
+                    {:else}
+                        <KeyValueBox
+                            keyText={localize('general.storageDeposit')}
+                            valueText={formatTokenAmountPrecise(
+                                storageDeposit,
+                                BASE_TOKEN[$activeProfile?.networkProtocol]
+                            )}
+                        />
+                    {/if}
                     <KeyValueBox
                         keyText={localize('general.immutableIssuer')}
                         valueText={$selectedAccount.depositAddress}
