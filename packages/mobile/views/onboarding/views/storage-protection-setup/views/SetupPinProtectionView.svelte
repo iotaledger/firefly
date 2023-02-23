@@ -97,11 +97,8 @@
 <OnboardingLayout {onBackClick} {busy} {title} animation="pin-desktop">
     <div slot="content">
         <div class="flex flex-col">
-            <Text type={TextType.p} secondary classes="mb-4"
+            <Text type={TextType.p} secondary fontSize="15" classes="mb-4"
                 >{localize('views.onboarding.storageProtectionSetup.setupPinProtection.body1')}</Text
-            >
-            <Text type={TextType.p} secondary highlighted
-                >{localize('views.onboarding.storageProtectionSetup.setupPinProtection.body2')}</Text
             >
         </div>
         <form id="setup-pin" class="flex flex-col mb-8" on:submit|preventDefault={onSetPinClick}>
