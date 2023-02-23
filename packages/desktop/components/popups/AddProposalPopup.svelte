@@ -35,7 +35,10 @@
     async function onSubmit(): Promise<void> {
         try {
             isBusy = true
-            await Promise.all([validateEventId(!isAddingForAllAccounts), nodeInput?.validate()])
+            await Promise.all([
+                !isRegisteringAllProposals && validateEventId(!isAddingForAllAccounts),
+                nodeInput?.validate(),
+            ])
             await registerParticipationWrapper()
             isBusy = false
         } catch (err) {
@@ -76,7 +79,7 @@
         const accounts = isAddingForAllAccounts ? $activeAccounts : [$selectedAccount]
         const options = {
             node: { url: nodeUrl, auth },
-            eventsToRegister: [eventId],
+            eventsToRegister: isRegisteringAllProposals ? [] : [eventId],
         }
         const promises = accounts.map((account) => registerParticipationEvents(options, account))
         await Promise.all(promises)
