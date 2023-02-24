@@ -11,7 +11,7 @@ import {
     getAssetById,
 } from '@core/wallet'
 
-import { selectedActivity, selectedAsset, TokenAction } from '../../../contexts/dashboard'
+import { selectedActivity, selectedAsset, TokenAction } from '@/contexts/dashboard'
 import { activityRouter, dashboardRouter, sendRouter } from '../'
 
 import { TokenRoute, DashboardRoute } from '../../enums'

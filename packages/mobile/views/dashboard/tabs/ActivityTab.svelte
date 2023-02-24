@@ -1,9 +1,9 @@
 <script lang="ts">
     import { isStrongholdUnlocked } from '@core/profile-manager'
     import { Activity } from '@core/wallet'
-    import { ActivityList } from '../../../../mobile/components'
-    import { ActivityAction } from '../../../lib/contexts/dashboard'
-    import { activityRouter } from '../../../lib/routers'
+    import { ActivityList } from '@components'
+    import { ActivityAction } from '@/contexts/dashboard'
+    import { activityRouter } from '@/routers'
 
     function onTileClick(activity: Activity): void {
         $activityRouter?.next({ activity })

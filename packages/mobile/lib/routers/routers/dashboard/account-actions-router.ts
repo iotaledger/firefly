@@ -2,7 +2,7 @@ import { get, writable, Writable } from 'svelte/store'
 
 import { Subrouter } from '@core/router'
 
-import { AccountAction } from '../../../../lib/contexts/dashboard'
+import { AccountAction } from '@/contexts/dashboard'
 import { AccountActionsRoute } from '../../enums'
 import { IAccountActionsRouterEvent } from '../../interfaces'
 import { dashboardRouter } from '../dashboard-router'

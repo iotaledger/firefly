@@ -1,9 +1,9 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { OnboardingLayout, RecoveryPhrase } from '../../../../../components'
-    import { Button, Text, TextType } from 'shared/components'
+    import { OnboardingLayout, RecoveryPhrase } from '@components'
+    import { Button, Text, TextType } from '@ui'
     import { localize } from '@core/i18n'
-    import { profileBackupRouter } from '../../../../../lib/routers'
+    import { profileBackupRouter } from '@/routers'
     import {
         onboardingProfile,
         generateMnemonicForOnboardingProfile,

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Drawer } from '../../../../../components'
+    import { Drawer } from '@components'
     import { localize } from '@core/i18n'
     import { ConditionsOfUse } from '@ui'
 

@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { OnboardingLayout } from '../../../../../components'
-    import { Button, Icon, Text, TextType } from 'shared/components'
+    import { OnboardingLayout } from '@components'
+    import { Button, Icon, Text, TextType } from '@ui'
     import { localize } from '@core/i18n'
     import { BASE_TOKEN, NetworkProtocol } from '@core/network'
-    import { shimmerClaimingRouter } from '../../../../../lib/routers'
+    import { shimmerClaimingRouter } from '@/routers'
     import { formatTokenAmountBestMatch } from '@core/wallet'
     import { onboardingProfile, sumTotalClaimedRewards } from '@contexts/onboarding'
 

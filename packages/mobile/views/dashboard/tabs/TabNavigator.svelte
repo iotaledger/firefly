@@ -2,9 +2,9 @@
     import { appSettings } from '@core/app'
     import { localize } from '@core/i18n'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
-    import { Icon } from 'shared/components'
+    import { Icon } from '@ui'
     import features from '@features/features'
-    import { activeDashboardTab, updateActiveDashboardTab, DashboardTab } from '../../../lib/contexts/dashboard'
+    import { activeDashboardTab, updateActiveDashboardTab, DashboardTab } from '@/contexts/dashboard'
 
     $: darkModeEnabled = $appSettings.darkMode
 

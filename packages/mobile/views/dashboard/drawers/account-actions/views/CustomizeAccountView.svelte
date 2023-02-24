@@ -1,9 +1,8 @@
 <script lang="ts">
+    import { Button, ColorPicker, Input } from '@ui'
     import { selectedAccount, tryEditSelectedAccountMetadata, validateAccountName } from '@core/account'
     import { localize } from '@core/i18n'
     import { getTrimmedLength } from '@core/utils'
-    import { Button, Input } from 'shared/components'
-    import { ColorPicker } from '../../../../../components'
 
     export let onSuccess: () => void = () => {}
 
