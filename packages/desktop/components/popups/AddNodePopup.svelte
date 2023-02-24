@@ -7,12 +7,13 @@
     import { showAppNotification } from '@auxiliary/notification'
     import { Platform } from 'shared/lib/core/app'
     import { registerProposalsFromNode } from 'shared/lib/contexts/governance'
+    import { deepCopy } from 'shared/lib/core/utils'
 
     export let node: INode = EMPTY_NODE
     export let isEditingNode: boolean = false
     export let onSuccess: (..._: any[]) => void
 
-    const currentNode = { ...node }
+    const currentNode = deepCopy(node)
 
     let nodeConfigurationForm: NodeConfigurationForm
     let isBusy = false
@@ -34,7 +35,7 @@
             }
 
             if (Platform.isFeatureFlagEnabled('governance')) {
-                if (currentNode.url !== node.url) {
+                if (currentNode?.url !== node?.url) {
                     await registerProposalsFromNode(node)
                 }
             }
