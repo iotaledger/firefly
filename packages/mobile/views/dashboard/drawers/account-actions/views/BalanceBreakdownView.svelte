@@ -11,8 +11,7 @@
     } from '@core/wallet'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import type { UnlockConditionTypes } from '@iota/types'
-    import { BalanceSummarySection, Button } from '@ui'
-    import { FontWeight, Text } from 'shared/components'
+    import { BalanceSummarySection, Button, FontWeight, Text } from '@ui'
 
     interface Breakdown {
         amount: number

@@ -1,11 +1,10 @@
 <script lang="ts">
-    import { getRandomAccountColor, validateAccountName } from '@core/account'
-    import { localize } from '@core/i18n'
-    import { Button, Input } from '@ui'
-    import { getTrimmedLength } from '@core/utils'
     import { onMount } from 'svelte'
-    import { ColorPicker } from '@components'
+    import { Button, ColorPicker, Input } from '@ui'
+    import { getRandomAccountColor, validateAccountName } from '@core/account'
     import { handleError } from '@core/error/handlers/handleError'
+    import { localize } from '@core/i18n'
+    import { getTrimmedLength } from '@core/utils'
 
     export let accountAlias: string = ''
     export let color: string = getRandomAccountColor()
