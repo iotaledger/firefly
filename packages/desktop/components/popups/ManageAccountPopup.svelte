@@ -1,8 +1,8 @@
 <script lang="ts">
-    import { Button, ColorPicker, Input, Text } from 'shared/components'
-    import { getTrimmedLength } from '@core/utils'
-    import { localize } from '@core/i18n'
+    import { Button, ColorPicker, Input, Text, TextType } from '@ui'
     import { selectedAccount, tryEditSelectedAccountMetadata, validateAccountName } from '@core/account'
+    import { localize } from '@core/i18n'
+    import { getTrimmedLength } from '@core/utils'
     import { closePopup } from '@auxiliary/popup'
 
     export let error = ''
@@ -11,7 +11,6 @@
     let accountAlias = $selectedAccount.name
     let color = $selectedAccount.color
 
-    // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
     $: accountAlias, (error = '')
     $: trimmedAccountAlias = accountAlias.trim()
     $: invalidAliasUpdate = !getTrimmedLength(accountAlias) || isBusy || accountAlias === $selectedAccount.name
@@ -48,12 +47,12 @@
     }
 </script>
 
-<div class="flex flex-col h-full justify-between">
+<manage-account-popup class="flex flex-col h-full justify-between">
     <div>
-        <div class="flex flex-row mb-6">
-            <Text type="h5">{localize('general.manageAccount')}</Text>
-        </div>
-        <div class="w-full flex flex-col justify-between">
+        <title-container class="flex flex-row mb-6">
+            <Text type={TextType.h5}>{localize('general.manageAccount')}</Text>
+        </title-container>
+        <manage-account-popup-inputs class="w-full flex flex-col justify-between">
             <Input
                 {error}
                 bind:value={accountAlias}
@@ -63,11 +62,15 @@
                 disabled={isBusy}
                 classes="mb-4"
             />
-            <ColorPicker title={localize('general.accountColor')} bind:active={color} classes="mb-4" />
-        </div>
+            <ColorPicker
+                title={localize('general.accountColor')}
+                bind:active={color}
+                classes="mb-4"
+                isCustomColorEnabled
+            />
+        </manage-account-popup-inputs>
     </div>
-    <!-- Action -->
-    <div class="flex flex-row justify-between mt-2 px-2">
+    <manage-account-popup-actions class="flex flex-row justify-between mt-2 px-2">
         <Button outline classes="-mx-2 w-1/2" onClick={onCancelClick} disabled={isBusy}>
             {localize('actions.cancel')}
         </Button>
@@ -80,5 +83,5 @@
         >
             {localize('actions.save')}
         </Button>
-    </div>
-</div>
+    </manage-account-popup-actions>
+</manage-account-popup>
