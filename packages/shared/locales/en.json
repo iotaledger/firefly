@@ -585,6 +585,7 @@
             "proposals": {
                 "title": "Proposals",
                 "voted": "Voted",
+                "successEdit": "Proposal successfully edited",
                 "successAdd": "Proposal successfully added",
                 "successAddAll": "Proposal successfully added to all accounts",
                 "successRemove": "Proposal successfully removed",

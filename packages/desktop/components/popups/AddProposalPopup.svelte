@@ -76,9 +76,12 @@
         const accounts = toAllAccounts ? $activeAccounts : [$selectedAccount]
         const promises = accounts.map((account) => registerParticipationEvent(eventId, { url: nodeUrl, auth }, account))
         await Promise.all(promises)
+        const successMessage = isEditMode
+            ? localize('views.governance.proposals.successEdit')
+            : localize('views.governance.proposals.' + (toAllAccounts ? 'successAddAll' : 'successAdd'))
         showAppNotification({
             type: 'success',
-            message: localize('views.governance.proposals.' + (toAllAccounts ? 'successAddAll' : 'successAdd')),
+            message: successMessage,
             alert: true,
         })
         closePopup()
