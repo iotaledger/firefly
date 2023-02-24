@@ -1,3 +1,4 @@
+import { ISvgCircle } from './svg-circle.interface'
 import { ISvgPath } from './svg-path.interface'
 
 /**
@@ -7,4 +8,5 @@ export interface ISvg {
     width?: number
     height?: number
     path: ISvgPath[]
+    circles?: ISvgCircle[]
 }
