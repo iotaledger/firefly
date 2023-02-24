@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { addNodeToClientOptions, editNodeInClientOptions, EMPTY_NODE, INode } from '@core/network'
     import { activeProfile } from '@core/profile'
-    import { Button, HTMLButtonType, NodeConfigurationForm } from 'shared/components'
+    import { Button, HTMLButtonType, NodeConfigurationForm } from '@ui'
 
     const DEFAULT_EMPTY_NODE: INode = EMPTY_NODE
 

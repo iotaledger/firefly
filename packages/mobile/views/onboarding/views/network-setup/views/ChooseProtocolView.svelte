@@ -1,12 +1,12 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { OnboardingLayout } from '../../../../../components'
-    import { OnboardingButton } from 'shared/components'
+    import { OnboardingLayout } from '@components'
+    import { OnboardingButton } from '@ui'
     import features from '@features/features'
     import { cleanupOnboarding, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
-    import { networkSetupRouter } from '../../../../../lib/routers'
+    import { networkSetupRouter } from '@/routers'
     import { resetActiveProfile } from '@core/profile'
 
     const title = localize('views.onboarding.networkSetup.chooseProtocol.title')

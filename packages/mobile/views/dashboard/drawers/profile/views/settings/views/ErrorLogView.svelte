@@ -2,7 +2,7 @@
     import { errorLog } from '@core/error'
     import { localize } from '@core/i18n'
     import { setClipboard } from '@core/utils'
-    import { Button, ButtonSize, Text, TextType } from 'shared/components'
+    import { Button, ButtonSize, Text, TextType } from '@ui'
 
     function handleClearClick(): void {
         errorLog.set([])

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte'
     import { needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService } from '@core/app'
-    import { loginRoute, LoginRoute } from '../../lib/routers'
+    import { loginRoute, LoginRoute } from '@/routers'
     import { EnterPinView, LegalUpdateView, LoadProfileView, SelectProfileView } from './views'
 
     let needsToAcceptLegal = false

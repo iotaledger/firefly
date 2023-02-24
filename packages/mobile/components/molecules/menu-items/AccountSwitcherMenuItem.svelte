@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { Text, TextType } from 'shared/components'
-    import { AccountLabel } from 'shared/components/atoms'
+    import { Text, TextType } from '@ui'
+    import { AccountLabel } from '@ui/atoms'
     import { IAccountState, selectedAccount, setSelectedAccount } from '@core/account'
     import { BASE_TOKEN } from '@core/network'
     import { activeProfile } from '@core/profile'

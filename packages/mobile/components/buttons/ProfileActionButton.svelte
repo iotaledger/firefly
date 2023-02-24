@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
-    import { FontWeight, Icon, Text, TextType } from 'shared/components'
+    import { FontWeight, Icon, Text, TextType } from '@ui'
 
     export let primaryText: string = ''
     export let secondaryText: string = ''

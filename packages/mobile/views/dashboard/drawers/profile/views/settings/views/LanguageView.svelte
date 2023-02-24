@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Radio } from 'shared/components'
+    import { Radio } from '@ui'
     import { appSettings } from '@core/app'
     import { SUPPORTED_LOCALES, setLanguage } from '@core/i18n'
 

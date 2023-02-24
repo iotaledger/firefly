@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { getOfficialNodes, INode, isOfficialNetwork } from '@core/network'
     import { activeProfile } from '@core/profile'
-    import { Pill, Text } from 'shared/components'
+    import { Pill, Text } from '@ui'
 
     export let onNodeClick: (node: INode) => void
 

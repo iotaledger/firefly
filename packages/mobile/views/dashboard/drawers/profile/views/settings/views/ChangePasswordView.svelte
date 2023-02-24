@@ -4,7 +4,7 @@
     import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'
     import { changePasswordAndUnlockStronghold } from '@core/profile-manager'
     import { PASSWORD_REASON_MAP } from '@core/stronghold'
-    import { Button, ButtonSize, Checkbox, PasswordInput, Text, TextType } from 'shared/components'
+    import { Button, ButtonSize, Checkbox, PasswordInput, Text, TextType } from '@ui'
     import zxcvbn from 'zxcvbn'
 
     let exportStrongholdChecked: boolean
