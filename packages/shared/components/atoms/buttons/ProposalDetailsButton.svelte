@@ -48,6 +48,7 @@
                 initialEventId: proposal.id,
                 initialNodeUrl: proposal.nodeUrl,
             },
+            overflow: true,
         })
         modal.close()
     }
