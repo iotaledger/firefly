@@ -33,6 +33,7 @@ import type {
     Transaction,
     TransactionOptions,
     ParticipationEventRegistrationOptions,
+    ParticipationEventMap,
 } from '@iota/wallet'
 
 export interface IAccount {
@@ -99,9 +100,7 @@ export interface IAccount {
         options?: TransactionOptions
     ): Promise<PreparedTransactionData>
     prepareTransaction(outputs: OutputTypes[], options?: TransactionOptions): Promise<PreparedTransactionData>
-    registerParticipationEvents(
-        options: ParticipationEventRegistrationOptions
-    ): Promise<{ [eventId: string]: ParticipationEventWithNodes }>
+    registerParticipationEvents(options: ParticipationEventRegistrationOptions): Promise<ParticipationEventMap>
     retryTransactionUntilIncluded(
         transactionId: string,
         interval?: number,
