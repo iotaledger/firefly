@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { AccountAction } from '@/contexts/dashboard'
+    import { accountActionsRouter } from '@/routers'
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import {
@@ -9,9 +11,7 @@
     } from '@core/wallet'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import type { UnlockConditionTypes } from '@iota/types'
-    import { BalanceSummarySection, Button, FontWeight, Text } from 'shared/components'
-    import { AccountAction } from '../../../../../lib/contexts/dashboard'
-    import { accountActionsRouter } from '../../../../../lib/routers'
+    import { BalanceSummarySection, Button, FontWeight, Text } from '@ui'
 
     interface Breakdown {
         amount: number

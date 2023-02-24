@@ -13,17 +13,19 @@
     import { selectedAccount } from '@core/account'
     import { PopupId } from '@auxiliary/popup'
 
-    export let eventId: string
-    export let nodeUrl: string
+    export let initialEventId: string
+    export let initialNodeUrl: string
 
+    let inputtedEventId = initialEventId
+    let nodeUrl = initialNodeUrl
     let eventIdError: string
     let nodeInput: NodeInput
     let nodeInputError: string
-    let inputtedEventId = eventId
     let isBusy = false
     let isRegisteringAllProposals = false
     let isAddingForAllAccounts = false
 
+    $: isEditMode = !!initialEventId && !!initialNodeUrl
     $: disabled = !eventId || !nodeUrl || isBusy
     $: disabled = isBusy || !nodeUrl || (!isRegisteringAllProposals && !eventId)
     $: eventId = inputtedEventId?.trim()
@@ -35,10 +37,7 @@
     async function onSubmit(): Promise<void> {
         try {
             isBusy = true
-            await Promise.all([
-                !isRegisteringAllProposals && validateEventId(!isAddingForAllAccounts),
-                nodeInput?.validate(),
-            ])
+            await Promise.all([validateEventId(!isAddingForAllAccounts && !isEditMode), nodeInput?.validate()])
             await registerParticipationWrapper()
             isBusy = false
         } catch (err) {
@@ -83,11 +82,12 @@
         }
         const promises = accounts.map((account) => registerParticipationEvents(options, account))
         await Promise.all(promises)
+        const successMessage = isEditMode
+            ? localize('views.governance.proposals.successEdit')
+            : localize('views.governance.proposals.' + (isAddingForAllAccounts ? 'successAddAll' : 'successAdd'))
         showAppNotification({
             type: 'success',
-            message: localize(
-                'views.governance.proposals.' + (isAddingForAllAccounts ? 'successAddAll' : 'successAdd')
-            ),
+            message: successMessage,
             alert: true,
         })
         closePopup()
@@ -114,19 +114,24 @@
 </script>
 
 <form id="add-proposal" on:submit|preventDefault={onSubmit}>
-    <Text type={TextType.h3} classes="mb-6">{localize('popups.addProposal.title')}</Text>
-    <Text fontSize="15">{localize('popups.addProposal.body')}</Text>
+    <Text type={TextType.h3} classes="mb-6"
+        >{localize(`popups.${isEditMode ? 'editProposal' : 'addProposal'}.title`)}</Text
+    >
+    <Text fontSize="15">{localize(`popups.${isEditMode ? 'editProposal' : 'addProposal'}.body`)}</Text>
     <div class="flex flex-col w-full space-y-4 mt-4">
         <NodeInput bind:this={nodeInput} bind:nodeUrl bind:error={nodeInputError} />
         <Checkbox label="Add all proposals on this node" bind:checked={isRegisteringAllProposals} />
         <TextInput
             bind:value={inputtedEventId}
             bind:error={eventIdError}
-            disabled={isRegisteringAllProposals}
+            disabled={isRegisteringAllProposals || isEditMode}
             placeholder={localize('views.governance.details.proposalInformation.eventId')}
             label={localize('views.governance.details.proposalInformation.eventId')}
         />
-        <Checkbox label={localize('popups.addProposal.addToAllAccounts')} bind:checked={isAddingForAllAccounts} />
+        <NodeInput bind:this={nodeInput} bind:nodeUrl bind:error={nodeInputError} />
+        {#if !isEditMode}
+            <Checkbox label={localize('popups.addProposal.addToAllAccounts')} bind:checked={isAddingForAllAccounts} />
+        {/if}
     </div>
     <div class="flex w-full space-x-4 mt-6">
         <Button outline classes="w-full" onClick={onCancelClick}>{localize('actions.cancel')}</Button>

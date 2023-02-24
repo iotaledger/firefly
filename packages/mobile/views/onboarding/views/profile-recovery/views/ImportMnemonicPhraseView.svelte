@@ -1,10 +1,10 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { OnboardingLayout } from '../../../../../components'
-    import { Button, HTMLButtonType, ImportTextfield, Text, TextType } from 'shared/components'
+    import { OnboardingLayout } from '@components'
+    import { Button, HTMLButtonType, ImportTextfield, Text, TextType } from '@ui'
     import { localize } from '@core/i18n'
     import { setStrongholdPassword } from '@core/profile-manager'
-    import { profileRecoveryRouter } from '../../../../../lib/routers'
+    import { profileRecoveryRouter } from '@/routers'
     import {
         DEFAULT_STRONGHOLD_PASSWORD,
         onboardingProfile,

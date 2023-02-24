@@ -1,18 +1,19 @@
 <script lang="ts">
-    import { Text, NodeConfigurationForm, Button, HTMLButtonType } from 'shared/components'
+    import { Text, NodeConfigurationForm, Button, HTMLButtonType } from '@ui'
+    import { showAppNotification } from '@auxiliary/notification'
+    import { closePopup } from '@auxiliary/popup'
+    import { Platform } from '@core/app'
     import { localize } from '@core/i18n'
     import { INode, addNodeToClientOptions, editNodeInClientOptions, EMPTY_NODE } from '@core/network'
-    import { closePopup } from '@auxiliary/popup'
     import { activeProfile } from '@core/profile'
-    import { showAppNotification } from '@auxiliary/notification'
-    import { Platform } from 'shared/lib/core/app'
-    import { registerProposalsFromNode } from 'shared/lib/contexts/governance'
+    import { deepCopy } from '@core/utils'
+    import { registerProposalsFromNode } from '@contexts/governance'
 
     export let node: INode = EMPTY_NODE
     export let isEditingNode: boolean = false
     export let onSuccess: (..._: any[]) => void
 
-    const currentNode = { ...node }
+    const currentNode = deepCopy(node)
 
     let nodeConfigurationForm: NodeConfigurationForm
     let isBusy = false
@@ -34,7 +35,7 @@
             }
 
             if (Platform.isFeatureFlagEnabled('governance')) {
-                if (currentNode.url !== node.url) {
+                if (currentNode?.url !== node?.url) {
                     await registerProposalsFromNode(node)
                 }
             }

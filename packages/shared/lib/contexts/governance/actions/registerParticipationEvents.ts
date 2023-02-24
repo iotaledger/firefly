@@ -1,8 +1,12 @@
-import type { ParticipationEventMap, ParticipationEventRegistrationOptions } from '@iota/wallet/out/types'
+import {
+    ParticipationEventMap,
+    ParticipationEventRegistrationOptions,
+    ParticipationEventWithNodes,
+} from '@iota/wallet/out/types'
 
-import { IAccountState } from '@core/account'
+import { IAccountState } from '@core/account/interfaces'
 
-import { addProposalToRegisteredProposals } from '../stores'
+import { addOrUpdateProposalToRegisteredProposals } from '../stores'
 import { createProposalFromEvent } from '../utils'
 
 export async function registerParticipationEvents(
@@ -10,9 +14,9 @@ export async function registerParticipationEvents(
     account: IAccountState
 ): Promise<ParticipationEventMap> {
     const eventMap = await account.registerParticipationEvents(options)
-    Object.values(eventMap).forEach((event) => {
+    Object.values(eventMap).forEach((event: ParticipationEventWithNodes) => {
         const proposal = createProposalFromEvent(event)
-        addProposalToRegisteredProposals(proposal, account.index)
+        addOrUpdateProposalToRegisteredProposals(proposal, account.index)
     })
 
     return eventMap
