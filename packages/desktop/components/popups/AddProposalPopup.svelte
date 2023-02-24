@@ -37,7 +37,10 @@
     async function onSubmit(): Promise<void> {
         try {
             isBusy = true
-            await Promise.all([validateEventId(!isAddingForAllAccounts && !isEditMode), nodeInput?.validate()])
+            await Promise.all([
+                !isRegisteringAllProposals && validateEventId(!isAddingForAllAccounts && !isEditMode),
+                nodeInput?.validate(),
+            ])
             await registerParticipationWrapper()
             isBusy = false
         } catch (err) {
@@ -128,7 +131,6 @@
             placeholder={localize('views.governance.details.proposalInformation.eventId')}
             label={localize('views.governance.details.proposalInformation.eventId')}
         />
-        <NodeInput bind:this={nodeInput} bind:nodeUrl bind:error={nodeInputError} />
         {#if !isEditMode}
             <Checkbox label={localize('popups.addProposal.addToAllAccounts')} bind:checked={isAddingForAllAccounts} />
         {/if}
