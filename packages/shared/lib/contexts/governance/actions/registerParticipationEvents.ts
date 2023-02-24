@@ -4,7 +4,7 @@ import {
     ParticipationEventWithNodes,
 } from '@iota/wallet/out/types'
 
-import { IAccountState } from '@core/account'
+import { IAccountState } from '@core/account/interfaces'
 
 import { addOrUpdateProposalToRegisteredProposals } from '../stores'
 import { createProposalFromEvent } from '../utils'
