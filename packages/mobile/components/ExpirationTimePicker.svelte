@@ -1,6 +1,6 @@
 <script lang="ts">
     import { formatDate, localize } from '@core/i18n'
-    import { Icon, Text } from 'shared/components'
+    import { Icon, Text } from '@ui'
 
     export let value: Date = undefined
     export let disabled: boolean = false

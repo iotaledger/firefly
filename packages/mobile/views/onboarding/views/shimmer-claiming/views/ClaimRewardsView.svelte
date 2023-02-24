@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onDestroy, onMount } from 'svelte'
-    import { OnboardingLayout, ShimmerClaimingAccountList } from '../../../../../components'
-    import { Button, Text, TextType } from 'shared/components'
+    import { OnboardingLayout, ShimmerClaimingAccountList } from '@components'
+    import { Button, Text, TextType } from '@ui'
     import { localize } from '@core/i18n'
     import {
         checkOrConnectLedger,
@@ -10,7 +10,7 @@
         stopPollingLedgerNanoStatus,
     } from '@core/ledger'
     import { unsubscribeFromWalletApiEvents } from '@core/profile-manager'
-    import { shimmerClaimingRouter } from '../../../../../lib/routers'
+    import { shimmerClaimingRouter } from '@/routers'
     import {
         canUserClaimRewards,
         claimShimmerRewards,

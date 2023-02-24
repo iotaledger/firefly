@@ -1,9 +1,9 @@
 <script lang="ts">
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { selectedAccount } from '@core/account'
-    import { Icon } from 'shared/components'
-    import { AccountLabel } from 'shared/components/atoms/'
-    import { DashboardRoute, dashboardRoute, dashboardRouter } from '../../lib/routers'
+    import { Icon } from '@ui'
+    import { AccountLabel } from '@ui/atoms/'
+    import { DashboardRoute, dashboardRoute, dashboardRouter } from '@/routers'
 
     $: isDrawerOpen = $dashboardRoute === DashboardRoute.AccountSwitcher
 </script>

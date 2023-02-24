@@ -1,8 +1,8 @@
 <script lang="typescript">
-    import { OnboardingLayout } from '../../../../../components'
-    import { Button, Text, TextType } from 'shared/components'
+    import { OnboardingLayout } from '@components'
+    import { Button, Text, TextType } from '@ui'
     import { localize } from '@core/i18n'
-    import { profileRecoveryRouter } from '../../../../../lib/routers'
+    import { profileRecoveryRouter } from '@/routers'
     import {
         ImportFile,
         setProfileRecoveryTypeFromFilename,

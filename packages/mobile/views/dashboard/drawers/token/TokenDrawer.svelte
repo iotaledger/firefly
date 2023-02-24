@@ -1,9 +1,9 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
     import { IAsset, NotVerifiedStatus, TokenStandard } from '@core/wallet'
-    import { AssetActionsButton } from 'shared/components'
-    import { Drawer } from '../../../../components'
-    import { TokenRoute, tokenRoute } from '../../../../lib/routers'
+    import { AssetActionsButton } from '@ui'
+    import { Drawer } from '@components'
+    import { TokenRoute, tokenRoute } from '@/routers'
     import TokenRouter from './TokenRouter.svelte'
 
     export let asset: IAsset

@@ -2,8 +2,8 @@
     import { showAppNotification } from '@auxiliary/notification'
     import { exportStronghold } from '@contexts/settings'
     import { localize } from '@core/i18n'
-    import { Button, Text, TextType } from 'shared/components'
-    import { settingsRouter } from '../../../../../../../lib/routers'
+    import { Button, Text, TextType } from '@ui'
+    import { settingsRouter } from '@/routers'
 
     let isBusy = false
     let message = ''
