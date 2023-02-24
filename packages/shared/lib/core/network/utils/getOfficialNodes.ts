@@ -16,7 +16,6 @@ function getOfficialNodeUrls(protocol: NetworkProtocol, type: NetworkType): stri
 function buildOfficialNode(url: string): INode {
     return {
         url,
-        auth: { username: '', password: '' },
         disabled: false,
     }
 }

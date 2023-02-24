@@ -1,7 +1,7 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
     import { NetworkHealth, networkStatus, NETWORK_STATUS_DESCRIPTION, nodeInfo } from '@core/network'
-    import { KeyValueBox } from 'shared/components'
+    import { KeyValueBox } from '@ui'
 
     let health: NetworkHealth
 

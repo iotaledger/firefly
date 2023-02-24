@@ -47,4 +47,5 @@ export interface IProfileManager {
     stopBackgroundSync(): Promise<void>
     storeMnemonic(mnemonic: string): Promise<void>
     verifyMnemonic(mnemonic: string): Promise<void>
+    updateNodeAuth(url: string, auth?: IAuth): Promise<void>
 }

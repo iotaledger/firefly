@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { IAsset, NotVerifiedStatus, TokenStandard } from '@core/wallet'
     import features from '@features/features'
-    import { AssetIcon, Button, FontWeight, KeyValueBox, Text, TextHint, TextType } from 'shared/components'
+    import { AssetIcon, Button, FontWeight, KeyValueBox, Text, TextHint, TextType } from '@ui'
 
     export let asset: IAsset
     export let onVerify: () => unknown = () => {}
