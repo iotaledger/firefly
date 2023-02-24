@@ -85,15 +85,23 @@
         }
         const promises = accounts.map((account) => registerParticipationEvents(options, account))
         await Promise.all(promises)
-        const successMessage = isEditMode
-            ? localize('views.governance.proposals.successEdit')
-            : localize('views.governance.proposals.' + (isAddingForAllAccounts ? 'successAddAll' : 'successAdd'))
         showAppNotification({
             type: 'success',
-            message: successMessage,
+            message: generateSuccessMessage(),
             alert: true,
         })
         closePopup()
+    }
+
+    function generateSuccessMessage(): string {
+        const localePath = `views.governance.proposals.${
+            isEditMode ? 'successEdit' : isAddingForAllAccounts ? 'successAddAll' : 'successAdd'
+        }`
+
+        return localize(
+            localePath,
+            !isEditMode && { values: { numberOfProposals: isRegisteringAllProposals ? 'other' : 'one' } }
+        )
     }
 
     async function validateEventId(checkIfAlreadyRegistered: boolean): Promise<void> {
@@ -123,7 +131,9 @@
     <Text fontSize="15">{localize(`popups.${isEditMode ? 'editProposal' : 'addProposal'}.body`)}</Text>
     <div class="flex flex-col w-full space-y-4 mt-4">
         <NodeInput bind:this={nodeInput} bind:nodeUrl bind:error={nodeInputError} />
-        <Checkbox label="Add all proposals on this node" bind:checked={isRegisteringAllProposals} />
+        {#if !isEditMode}
+            <Checkbox label="Add all proposals on this node" bind:checked={isRegisteringAllProposals} />
+        {/if}
         <TextInput
             bind:value={inputtedEventId}
             bind:error={eventIdError}
