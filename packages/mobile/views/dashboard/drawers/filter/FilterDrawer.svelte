@@ -1,11 +1,11 @@
 <script lang="ts">
     import { get } from 'svelte/store'
-    import { Text, FontWeight } from 'shared/components'
+    import { Text, FontWeight } from '@ui'
     import { localize } from '@core/i18n'
     import { FilterRouter } from '.'
-    import { Drawer } from '../../../../components'
+    import { Drawer } from '@components'
     import type { Filter } from '@core/utils/types'
-    import { filterRouter } from '../../../../lib/routers'
+    import { filterRouter } from '@/routers'
 
     export let filter: Filter
     export let onClose: () => void = () => {}

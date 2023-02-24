@@ -6,7 +6,7 @@
     import { setStrongholdPassword } from '@core/profile-manager'
     import { deleteAccount } from '@core/profile-manager/actions'
     import { Button } from '@ui'
-    import { ButtonVariant, Error, HTMLButtonType, PasswordInput, Text, TextType } from 'shared/components'
+    import { ButtonVariant, Error, HTMLButtonType, PasswordInput, Text, TextType } from '@ui'
 
     export let onSuccess: () => unknown
 

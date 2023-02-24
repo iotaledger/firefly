@@ -1,12 +1,12 @@
 <script lang="ts">
+    import { loginRouter } from '@/routers'
+    import { openPopup, PopupId, popupState } from '@auxiliary/popup'
     import { needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService, Platform } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { activeProfile, login, resetActiveProfile } from '@core/profile'
-    import { loginRouter } from '../../../lib/routers'
-    import { openPopup, popupState, PopupId } from '@auxiliary/popup'
     import { isValidPin } from '@core/utils'
-    import { Icon, PinInput, Profile, Text, TextType } from 'shared/components'
+    import { Icon, PinInput, Profile, Text, TextType } from '@ui'
     import { onDestroy } from 'svelte'
 
     let attempts = 0

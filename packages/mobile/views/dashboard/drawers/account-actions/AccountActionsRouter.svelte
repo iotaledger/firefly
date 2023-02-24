@@ -1,6 +1,6 @@
 <script lang="typescript">
-    import { Drawer, StrongholdUnlock } from '../../../../components'
-    import { AccountActionsRoute, accountActionsRoute, accountActionsRouter } from '../../../../lib/routers'
+    import { Drawer, StrongholdUnlock } from '@components'
+    import { AccountActionsRoute, accountActionsRoute, accountActionsRouter } from '@/routers'
     import {
         AccountActionsView,
         BalanceBreakdownView,

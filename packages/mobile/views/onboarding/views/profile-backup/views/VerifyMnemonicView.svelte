@@ -1,10 +1,10 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { OnboardingLayout, RecoveryPhrase } from '../../../../../components'
-    import { Icon, Text, TextType } from 'shared/components'
+    import { OnboardingLayout, RecoveryPhrase } from '@components'
+    import { Icon, Text, TextType } from '@ui'
     import { english } from '@auxiliary/wordlists'
     import { localize } from '@core/i18n'
-    import { profileBackupRouter } from '../../../../../lib/routers'
+    import { profileBackupRouter } from '@/routers'
     import { Mnemonic, onboardingProfile, verifyAndStoreMnemonic } from '@contexts/onboarding'
 
     export let busy = false

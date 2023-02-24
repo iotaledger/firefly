@@ -1,7 +1,7 @@
 <script lang="ts">
     import { activeProfile } from '@core/profile'
     import { getInitials } from '@core/utils'
-    import { DashboardRoute, dashboardRouter } from '../../lib/routers'
+    import { DashboardRoute, dashboardRouter } from '@/routers'
 
     // @TODO fix the linting error that profileInitial isn't used
     /* eslint-disable @typescript-eslint/no-unused-vars */

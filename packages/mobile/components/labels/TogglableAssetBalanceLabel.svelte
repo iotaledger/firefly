@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Text, FontWeight, TextType } from 'shared/components'
+    import { Text, FontWeight, TextType } from '@ui'
     import { formatTokenAmountBestMatch, IAsset } from '@core/wallet'
     import { formatCurrency, localize } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
@@ -15,7 +15,7 @@
 {#if asset}
     <button on:click={toggle}>
         <div class="flex flex-col flex-wrap items-start space-y-1">
-            <Text type={TextType.h1} fontWeight={FontWeight.semibold} fontSize="15" classes="w-full">
+            <Text type={TextType.h1} fontWeight={FontWeight.semibold} classes="w-full">
                 {isToggled
                     ? formatCurrency(getMarketAmountFromAssetValue(asset?.balance?.total, asset))
                     : formatTokenAmountBestMatch(asset?.balance?.total, asset?.metadata)}

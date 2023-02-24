@@ -2,8 +2,8 @@
     import { tryCreateAdditionalAccount } from '@core/account'
     import { isStrongholdUnlocked } from '@core/profile-manager'
 
-    import { StrongholdUnlock } from '../../../../components'
-    import { AccountSwitcherRoute, accountSwitcherRoute, accountSwitcherRouter } from '../../../../lib/routers'
+    import { StrongholdUnlock } from '@components'
+    import { AccountSwitcherRoute, accountSwitcherRoute, accountSwitcherRouter } from '@/routers'
     import { AccountSwitcher, CreateAccount } from './views'
 
     export let onClose: () => unknown = () => {}
