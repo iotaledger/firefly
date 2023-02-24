@@ -1,11 +1,11 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { OnboardingLayout } from '../../../../../components'
-    import { OnboardingButton, Text, TextType } from 'shared/components'
+    import { OnboardingLayout } from '@components'
+    import { OnboardingButton, Text, TextType } from '@ui'
     import features from '@features/features'
     import { localize } from '@core/i18n'
     import { formatProtocolName } from '@core/network'
-    import { profileSetupRouter } from '../../../../../lib/routers'
+    import { profileSetupRouter } from '@/routers'
     import {
         getProfileTypeFromProfileRecoveryType,
         initialiseProfileManagerFromOnboardingProfile,

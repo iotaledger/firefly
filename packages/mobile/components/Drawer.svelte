@@ -1,8 +1,8 @@
 <script lang="ts">
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
-    import { Icon, Text, TextType } from 'shared/components'
+    import { Icon, Text, TextType } from '@ui'
     import { fade, fly } from 'svelte/transition'
-    import { DRAWER_IN_ANIMATION_DURATION_MS, DRAWER_OUT_ANIMATION_DURATION_MS } from '../lib/contexts/dashboard'
+    import { DRAWER_IN_ANIMATION_DURATION_MS, DRAWER_OUT_ANIMATION_DURATION_MS } from '@/contexts/dashboard'
 
     export let onClose: () => unknown = () => {}
     export let onBackClick: () => unknown = () => {}

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Text, FontWeight, TextType } from 'shared/components'
+    import { Text, FontWeight, TextType } from '@ui'
     import { formatTokenAmountBestMatch, IAsset } from '@core/wallet'
     import { formatCurrency, localize } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'

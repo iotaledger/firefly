@@ -1,7 +1,7 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
     import { unlockStronghold } from '@core/profile'
-    import { Button, HTMLButtonType, PasswordInput, Text, TextType } from 'shared/components'
+    import { Button, HTMLButtonType, PasswordInput, Text, TextType } from '@ui'
 
     export let busyMessage: string = ''
 

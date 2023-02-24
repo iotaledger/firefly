@@ -1,8 +1,8 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
 
-    import { Drawer } from '../../../../components'
-    import { AccountSwitcherRoute, accountSwitcherRoute } from '../../../../lib/routers'
+    import { Drawer } from '@components'
+    import { AccountSwitcherRoute, accountSwitcherRoute } from '@/routers'
     import AccountSwitcherRouter from './AccountSwitcherRouter.svelte'
 
     export let onClose: () => unknown = () => {}
