@@ -90,7 +90,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): NewTrans
 
     return {
         type: NewTransactionType.TokenTransfer,
-        ...(assetId && { assetId }),
+        ...(assetId ? { assetId } : { assetId: baseAsset.id }),
         ...(recipient && { recipient }),
         ...(rawAmount && { rawAmount }),
         ...(unit && { unit }),
