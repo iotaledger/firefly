@@ -1,33 +1,34 @@
 <script lang="ts">
+    import { FontWeight, NetworkIcon, Text, Tooltip } from 'shared/components'
+    import { Position } from 'shared/components/enums'
     import { NETWORK, NetworkProtocol, NetworkType } from '@core/network'
-    import { NetworkIcon, Text, Tooltip, FontWeight } from 'shared/components'
 
-    export let networkType: NetworkType
     export let networkProtocol: NetworkProtocol
+    export let networkType: NetworkType
 
-    let tooltipAnchor
-    let showTooltip = false
+    let tooltipAnchor: HTMLElement
+    let isTooltipVisible = false
 
     $: tooltipText = NETWORK?.[networkProtocol]?.[networkType]?.name
 
-    function _showTooltip(show: boolean): void {
-        showTooltip = show
+    function showTooltip(show: boolean): void {
+        isTooltipVisible = show
     }
 </script>
 
 {#if networkType && networkProtocol}
-    <div
-        on:mouseenter={() => _showTooltip(true)}
-        on:mouseleave={() => _showTooltip(false)}
-        on:mousewheel={() => _showTooltip(false)}
+    <network-icon-badge
         bind:this={tooltipAnchor}
-        class="absolute -right-1 -bottom-1"
+        on:mouseenter={() => showTooltip(true)}
+        on:mouseleave={() => showTooltip(false)}
+        on:wheel={() => showTooltip(false)}
+        class="block absolute -right-1 -bottom-1"
     >
         <NetworkIcon {networkProtocol} />
-    </div>
-    {#if showTooltip}
-        <Tooltip anchor={tooltipAnchor} size="small" position="right" offset={6}>
-            <Text type="p" fontWeight={FontWeight.semibold} color="gray-600" darkColor="gray-400" smaller>
+    </network-icon-badge>
+    {#if isTooltipVisible}
+        <Tooltip anchor={tooltipAnchor} size="small" position={Position.Right} offset={6}>
+            <Text fontWeight={FontWeight.semibold} color="gray-600" darkColor="gray-400" smaller>
                 {tooltipText}
             </Text>
         </Tooltip>
