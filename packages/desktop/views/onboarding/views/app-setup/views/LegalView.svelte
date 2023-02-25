@@ -7,7 +7,8 @@
     } from '@core/app'
     import { localize } from '@core/i18n'
     import { appSetupRouter } from '@core/router'
-    import { Button, Checkbox, ConditionsOfUse, OnboardingLayout, Text, TextType } from '@ui'
+    import { Button, Checkbox, ConditionsOfUse, Text, TextType } from '@ui'
+    import { OnboardingLayout } from '@components'
 
     let checked = false
     let termsAccepted = false
