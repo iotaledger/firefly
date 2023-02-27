@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Icon } from 'shared/components'
+    import { Icon } from '@ui'
     import { localize } from '@core/i18n'
     import { debounce } from '@core/utils'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'

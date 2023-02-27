@@ -9,5 +9,7 @@ import { IAuth } from '../interfaces'
  * @returns {IAuth}
  */
 export function cleanAuth(auth: IAuth): IAuth {
-    return auth?.jwt ? auth : { username: auth?.username || '', password: auth?.password || '' }
+    return auth?.jwt
+        ? auth
+        : { basicAuthNamePwd: [auth?.basicAuthNamePwd?.[0] ?? '', auth?.basicAuthNamePwd?.[1] ?? ''] }
 }

@@ -1,10 +1,10 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { OnboardingLayout } from '../../../../../components'
-    import { Button, HTMLButtonType, ImportTextfield, Text, TextType } from 'shared/components'
+    import { OnboardingLayout } from '@components'
+    import { Button, HTMLButtonType, ImportTextfield, Text, TextType } from '@ui'
     import { localize } from '@core/i18n'
     import { setStrongholdPassword } from '@core/profile-manager'
-    import { profileRecoveryRouter } from '../../../../../lib/routers'
+    import { profileRecoveryRouter } from '@/routers'
     import {
         DEFAULT_STRONGHOLD_PASSWORD,
         onboardingProfile,
@@ -43,7 +43,7 @@
 
 <OnboardingLayout {onBackClick} {title}>
     <div slot="content">
-        <Text type={TextType.p} secondary classes="mb-8"
+        <Text type={TextType.p} secondary fontSize="15" classes="mb-8"
             >{localize('views.onboarding.profileRecovery.importMnemonicPhrase.body')}</Text
         >
         <Text type={TextType.h5} classes="mb-3"

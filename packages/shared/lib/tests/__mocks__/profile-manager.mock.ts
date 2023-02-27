@@ -202,4 +202,8 @@ export class ProfileManagerMock implements IProfileManager {
     verifyMnemonic(mnemonic: string): Promise<void> {
         return Promise.resolve()
     }
+
+    updateNodeAuth(url: string, auth?: IAuth): Promise<void> {
+        return Promise.resolve()
+    }
 }

@@ -3,8 +3,8 @@
     import { localize } from '@core/i18n'
     import features from '@features/features'
     import { Icon, Text, TextType } from '@ui'
-    import { SettingsCategory, SETTINGS_ROUTE_META } from '../../../../../../../lib/contexts/settings'
-    import { SettingsRoute, settingsRouter } from '../../../../../../../lib/routers'
+    import { SettingsCategory, SETTINGS_ROUTE_META } from '@/contexts/settings'
+    import { SettingsRoute, settingsRouter } from '@/routers'
 
     const categories = {
         [SettingsCategory.General]: {
@@ -64,7 +64,7 @@
                                     )}
                             >
                                 <Icon width="18" height="18" icon={setting.icon} classes="text-blue-500" />
-                                <Text type={TextType.p} secondary>{localize(setting.name)}</Text>
+                                <Text type={TextType.p} secondary fontSize="15">{localize(setting.name)}</Text>
                             </button>
                         {/if}
                     {/each}

@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { OnboardingLayout } from '../../../components'
-    import { Button, Icon, Text, TextType } from 'shared/components'
-    import { onboardingRouter } from '../../../lib/routers'
+    import { OnboardingLayout } from '@components'
+    import { Button, Icon, Text, TextType } from '@ui'
+    import { onboardingRouter } from '@/routers'
     import { localize } from '@core/i18n'
     import { completeOnboardingProcess } from '@contexts/onboarding'
 
@@ -21,7 +21,7 @@
             <Text type={TextType.h2} classes="mb-5 text-center"
                 >{localize('views.onboarding.congratulations.title')}</Text
             >
-            <Text type={TextType.p} secondary classes="mb-2 text-center"
+            <Text type={TextType.p} secondary fontSize="15" classes="mb-2 text-center"
                 >{localize('views.onboarding.congratulations.body')}</Text
             >
         </div>

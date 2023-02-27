@@ -1,7 +1,9 @@
 <script lang="ts">
+    import { AssetList } from '@components'
+
     import { IAsset, selectedAccountAssets } from '@core/wallet'
-    import { AssetList } from '../../../../mobile/components'
-    import { DrawerId, openDrawer } from '../../../lib/auxiliary/drawer'
+
+    import { DrawerId, openDrawer } from '@/auxiliary/drawer'
 
     function onAssetTileClick(asset: IAsset): void {
         openDrawer(DrawerId.SelectedToken, {

@@ -5,7 +5,7 @@ import { INode } from '@core/network'
 import { Subrouter } from '@core/router'
 
 import { settingsRouter } from '..'
-import { NetworkConfigurationSettingsAction } from '../../../contexts/settings'
+import { NetworkConfigurationSettingsAction } from '@/contexts/settings'
 import { NetworkConfigurationSettingsRoute } from '../../enums'
 
 export const networkConfigurationSettingsRoute = writable<NetworkConfigurationSettingsRoute>(null)
