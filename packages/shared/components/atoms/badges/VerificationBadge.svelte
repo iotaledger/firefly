@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { Icon as Icons } from '@auxiliary/icon'
-    import { NotVerifiedStatus, VerifiedStatus } from '@core/wallet'
     import { Icon } from 'shared/components'
+    import { NotVerifiedStatus, VerifiedStatus } from '@core/wallet'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let status: VerifiedStatus | NotVerifiedStatus
     export let large = false
@@ -11,17 +11,22 @@
     <Icon
         width={large ? 20 : 14}
         height={large ? 20 : 14}
-        icon={Icons.VerificationStatusNew}
+        icon={IconEnum.VerificationStatusNew}
         classes="text-gray-600"
         secondaryColor="white"
     />
 {:else if status === VerifiedStatus.SelfVerified}
-    <Icon width={large ? 20 : 14} height={large ? 20 : 14} icon={Icons.VerificationStatusSelf} secondaryColor="white" />
+    <Icon
+        width={large ? 20 : 14}
+        height={large ? 20 : 14}
+        icon={IconEnum.VerificationStatusSelf}
+        secondaryColor="white"
+    />
 {:else if status === VerifiedStatus.Official}
     <Icon
         width={large ? 20 : 14}
         height={large ? 20 : 14}
-        icon={Icons.VerificationStatusOfficial}
+        icon={IconEnum.VerificationStatusOfficial}
         classes="text-verification-blue"
         secondaryColor="white"
     />
