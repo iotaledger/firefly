@@ -1,19 +1,13 @@
 <script lang="ts">
-    import { Icon } from 'shared/components'
+    import { Icon } from '@ui'
     import { localize } from '@core/i18n'
-    import { PlatformOption, platform } from '@core/app'
+    import { platform, PlatformOption } from '@core/app'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let busy = false
     export let allowBack = true
     export let onBackClick = (): void => {}
 </script>
-
-<!-- https://github.com/sveltejs/svelte/issues/4546 -->
-{#if false}
-    <slot />
-{/if}
-<!--  -->
 
 <onboarding-layout data-label="onboarding-layout" class="relative w-full h-full flex flex-row">
     <leftpane-container data-label="leftpane" class="h-full flex justify-center p-12 pt-8 bg-white dark:bg-gray-800">
@@ -73,10 +67,10 @@
         &:focus {
             filter: brightness(1.3);
         }
-    }
 
-    button.busy {
-        @apply pointer-events-none opacity-50;
+        &.busy {
+            @apply pointer-events-none opacity-50;
+        }
     }
 
     icon-container {
