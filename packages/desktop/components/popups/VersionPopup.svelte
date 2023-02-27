@@ -1,6 +1,5 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { get } from 'svelte/store'
     import { Button, Logo, Text } from 'shared/components'
     import {
         setAppVersionDetails,
@@ -8,8 +7,6 @@
         checkForAppUpdate,
         downloadAppUpdate,
         appVersionDetails,
-        AppStage,
-        appStage,
         PlatformOption,
         platform,
         openUrlInBrowser,
@@ -18,7 +15,6 @@
     import { closePopup } from '@auxiliary/popup'
 
     let hasAutoUpdate = true
-    let isPreRelease = true
 
     function handleDownload(): void {
         if (hasAutoUpdate) {
@@ -36,10 +32,7 @@
         // @ts-expect-error: This value is replaced by Webpack DefinePlugin
         if (!devMode) {
             await setAppVersionDetails()
-            if (get(appStage) === AppStage.PROD) {
-                isPreRelease = false
-                checkForAppUpdate()
-            }
+            checkForAppUpdate()
         }
         hasAutoUpdate = $platform !== PlatformOption.Windows
     })
@@ -55,21 +48,12 @@
     {#if $appVersionDetails.upToDate}
         <div class="w-full text-center my-6 px-8">
             <Text type="h5" highlighted classes="mb-2">
-                {#if isPreRelease}
-                    <!-- Capitalize first letter of stage name -->
-                    {`Firefly ${$appStage.toString().replace(/^\w/, (c) => c.toUpperCase())}`}
-                {:else}
-                    {localize('popups.version.upToDateTitle')}
-                {/if}
+                {localize('popups.version.upToDateTitle')}
             </Text>
             <Text smaller secondary>
-                {#if isPreRelease}
-                    {localize('popups.version.preReleaseDescription')}
-                {:else}
-                    {localize('popups.version.upToDateDescription', {
-                        values: { version: $appVersionDetails.currentVersion },
-                    })}
-                {/if}
+                {localize('popups.version.upToDateDescription', {
+                    values: { version: $appVersionDetails.currentVersion },
+                })}
             </Text>
         </div>
         <div class="flex flex-row justify-center w-full">

@@ -25,6 +25,7 @@
         Platform,
         PlatformOption,
         pollCheckForAppUpdate,
+        registerAppEvents,
         setAppVersionDetails,
         setPlatform,
     } from '@core/app'
@@ -105,7 +106,7 @@
                 [RouterManagerExtensionName.ResetRouters, resetRouters],
             ],
         })
-
+        registerAppEvents()
         // await pollMarketData()
 
         /* eslint-disable no-undef */

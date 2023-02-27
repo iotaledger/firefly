@@ -6,6 +6,7 @@ const STAGE = process.env.STAGE || 'alpha'
 const APP_NAME = getAppName()
 const APP_ID = getAppId()
 const APP_PROTOCOL = getAppProtocol()
+const APP_CHANNEL = getAppChannel()
 
 /**
  * If stage = 'prod' -> 'Firefly'
@@ -27,6 +28,19 @@ function getAppId() {
         return defaultAppId
     }
     return `${defaultAppId}.${STAGE}`
+}
+
+function getAppChannel() {
+    switch (STAGE) {
+        case 'prod':
+            return 'latest'
+        case 'beta':
+            return 'beta'
+        case 'alpha':
+            return 'alpha'
+        default:
+            return 'latest'
+    }
 }
 
 const prodConfig = () => ({
@@ -95,7 +109,7 @@ const prodConfig = () => ({
         provider: 'generic',
         url: 'https://dl.firefly.iota.org/',
         publishAutoUpdate: true,
-        channel: 'latest',
+        channel: APP_CHANNEL,
     },
 })
 
@@ -126,11 +140,7 @@ const prereleaseNsisOptions = {
 
 const testConfig = () => {
     const icons = getIconPaths()
-    const publish = {
-        publishAutoUpdate: false,
-    }
-
-    return merge({}, prodConfig(), icons, { appId: APP_ID }, prereleaseNsisOptions, { publish })
+    return merge({}, prodConfig(), icons, { appId: APP_ID }, prereleaseNsisOptions)
 }
 
 const build = () => {
