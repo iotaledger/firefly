@@ -138,7 +138,7 @@ const paths = {
 
 let versionDetails = {
     upToDate: true,
-    currentVersion: app.getVersion(),
+    currentVersion: '2.0.0',
     newVersion: '',
     newVersionReleaseDate: new Date(),
     changelog: '',
@@ -246,6 +246,7 @@ function createWindow() {
         windows.main.webContents.openDevTools()
 
         windows.main.loadURL('http://localhost:8080')
+        initAutoUpdate()
     } else {
         if (process.env.STAGE === 'prod') {
             initAutoUpdate()

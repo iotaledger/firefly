@@ -176,11 +176,11 @@ const ElectronApi = {
     /**
      * Check for an update of the application
      *
-     * @method updateCheck
+     * @method checkForAppUpdate
      *
      * @returns void
      */
-    updateCheck() {
+    checkForAppUpdate() {
         return ipcRenderer.invoke('update-check')
     },
     /**
