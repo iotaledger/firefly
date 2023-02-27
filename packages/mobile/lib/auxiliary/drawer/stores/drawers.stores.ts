@@ -12,7 +12,7 @@ export function updateDrawerState(drawerState: IDrawerState): void {
     drawers.update(($drawers) =>
         $drawers.map((drawer) => {
             if (drawer.id === drawerState.id) {
-                return { ...drawer, props: drawerState.props }
+                return { ...drawer, props: { ...drawer.props, ...drawerState.props } }
             } else {
                 return drawer
             }
