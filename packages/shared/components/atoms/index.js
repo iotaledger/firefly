@@ -1,3 +1,4 @@
+export * from './badges'
 export * from './boxes'
 export * from './buttons'
 export * from './iconButtons'
