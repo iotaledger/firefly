@@ -15,7 +15,7 @@
         //     })
         // }
         openDrawer(DrawerId.SelectedActivity, {
-            activity,
+            activityId: activity.id,
         })
     }
 
