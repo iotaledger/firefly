@@ -585,6 +585,7 @@
             "proposals": {
                 "title": "Предложения",
                 "voted": "Проголосовано",
+                "successEdit": "Proposal successfully edited",
                 "successAdd": "Предложение успешно добавлено",
                 "successAddAll": "Предложение успешно добавлено во все аккаунты",
                 "successRemove": "Предложение успешно удалено",
@@ -1069,6 +1070,10 @@
             "body": "Пожалуйста, представьте информацию, указанную ниже, чтобы добавить предложение.",
             "addToAllAccounts": "Добавить предложение ко всем аккаунтам"
         },
+        "editProposal": {
+            "title": "Edit proposal",
+            "body": "Please provide the new url for the node that contains this proposal."
+        },
         "voteForProposal": {
             "title": "Голосовать за предложение",
             "body": "Вы собираетесь проголосовать за предложение {proposal}.",
@@ -1282,6 +1287,7 @@
         "vote": "Голосовать",
         "addProposal": "Добавить предложение",
         "removeProposal": "Удалить предложение",
+        "changeNode": "Change Node",
         "stopVoting": "Прекратить голосование",
         "revote": "Переголосовать"
     },
@@ -1819,6 +1825,7 @@
             "wrongAddressPrefix": "Адреса начинаются с префикса {prefix}.",
             "wrongAddressFormat": "Адрес неверно отформатирован.",
             "invalidAddress": "Адрес недействителен.",
+            "invalidAssetId": "The asset id is not valid.",
             "unknownAsset": "Актив не известен для данного счета.",
             "insufficientFunds": "На этом кошельке недостаточно средств.",
             "insufficientFundsStorageDeposit": "Недостаточно средств для покрытия депозита для хранения",
@@ -1964,7 +1971,7 @@
         "governance": {
             "unableToAddProposal": {
                 "short": "Невозможно добавить предложение",
-                "long": "Произошла ошибка при попытке добавить предложение {proposalId}"
+                "long": "Unable to find proposal {proposalId} on the specified node"
             }
         }
     },

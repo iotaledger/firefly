@@ -585,6 +585,7 @@
             "proposals": {
                 "title": "Förslag",
                 "voted": "Röstat",
+                "successEdit": "Proposal successfully edited",
                 "successAdd": "Proposal successfully added",
                 "successAddAll": "Proposal successfully added to all accounts",
                 "successRemove": "Förslaget har tagits bort",
@@ -1069,6 +1070,10 @@
             "body": "Please provide the information listed below to add a proposal.",
             "addToAllAccounts": "Add the proposal to all accounts"
         },
+        "editProposal": {
+            "title": "Edit proposal",
+            "body": "Please provide the new url for the node that contains this proposal."
+        },
         "voteForProposal": {
             "title": "Rösta på förslag",
             "body": "You're about to vote for {proposal} proposal.",
@@ -1282,6 +1287,7 @@
         "vote": "Rösta",
         "addProposal": "Add proposal",
         "removeProposal": "Ta bort förslag",
+        "changeNode": "Change Node",
         "stopVoting": "Sluta rösta",
         "revote": "Revote"
     },
@@ -1819,6 +1825,7 @@
             "wrongAddressPrefix": "Adresser börjar med prefixet {prefix}.",
             "wrongAddressFormat": "Adressen är inte korrekt formaterad.",
             "invalidAddress": "Adressen är inte giltig.",
+            "invalidAssetId": "The asset id is not valid.",
             "unknownAsset": "Tillgången är inte känd för detta konto.",
             "insufficientFunds": "Denna plånbok har inte tillräckligt med tillgångar.",
             "insufficientFundsStorageDeposit": "Otillräcktligt med tillgångar för att täcka lagringsdepositionen",
@@ -1964,7 +1971,7 @@
         "governance": {
             "unableToAddProposal": {
                 "short": "Unable to add proposal",
-                "long": "An error occurred while trying to add proposal {proposalId}"
+                "long": "Unable to find proposal {proposalId} on the specified node"
             }
         }
     },
