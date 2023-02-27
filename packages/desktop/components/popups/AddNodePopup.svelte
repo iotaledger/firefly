@@ -5,9 +5,9 @@
     import { Platform } from '@core/app'
     import { localize } from '@core/i18n'
     import { INode, addNodeToClientOptions, editNodeInClientOptions, EMPTY_NODE } from '@core/network'
-    import { activeProfile } from '@core/profile'
+    import { activeAccounts, activeProfile } from '@core/profile'
     import { deepCopy } from '@core/utils'
-    import { registerProposalsFromNode } from '@contexts/governance'
+    import { registerProposalsForAccounts } from '@contexts/governance'
 
     export let node: INode = EMPTY_NODE
     export let isEditingNode: boolean = false
@@ -36,7 +36,7 @@
 
             if (Platform.isFeatureFlagEnabled('governance')) {
                 if (currentNode?.url !== node?.url) {
-                    await registerProposalsFromNode(node)
+                    await registerProposalsForAccounts({ node }, $activeAccounts)
                 }
             }
 

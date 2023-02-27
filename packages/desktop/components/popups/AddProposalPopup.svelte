@@ -4,11 +4,10 @@
     import { HTMLButtonType } from 'shared/components/enums'
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
-    import { registerParticipationEvents } from '@contexts/governance/actions'
     import { showAppNotification } from '@auxiliary/notification/actions'
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
     import { truncateString } from '@core/utils/string'
-    import { registeredProposalsForSelectedAccount } from '@contexts/governance'
+    import { registeredProposalsForSelectedAccount, registerProposalsForAccounts } from '@contexts/governance'
     import { activeAccounts } from '@core/profile'
     import { selectedAccount } from '@core/account'
     import { PopupId } from '@auxiliary/popup'
@@ -73,13 +72,12 @@
     }
 
     async function registerParticipationWrapper(auth?: Auth): Promise<void> {
-        const accounts = toAllAccounts ? $activeAccounts : [$selectedAccount]
         const options = {
             node: { url: nodeUrl, auth },
             eventsToRegister: [eventId],
         }
-        const promises = accounts.map((account) => registerParticipationEvents(options, account))
-        await Promise.all(promises)
+        const accounts = toAllAccounts ? $activeAccounts : [$selectedAccount]
+        await registerProposalsForAccounts(options, accounts)
         const successMessage = isEditMode
             ? localize('views.governance.proposals.successEdit')
             : localize('views.governance.proposals.' + (toAllAccounts ? 'successAddAll' : 'successAdd'))
