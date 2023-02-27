@@ -1,20 +1,24 @@
 <script lang="ts">
-    import { localize } from '@core/i18n'
-    import { IAsset, NotVerifiedStatus, TokenStandard } from '@core/wallet'
-    import features from '@features/features'
-    import { AssetIcon, Button, FontWeight, KeyValueBox, Text, TextHint, TextType } from 'shared/components'
+    import { AssetIcon, Button, FontWeight, KeyValueBox, Text, TextHint, TextType } from '@ui'
 
+    import { localize } from '@core/i18n'
     import {
         hideActivitiesForHiddenAssets,
         hideAsset,
+        IAsset,
         NewTransactionType,
+        NotVerifiedStatus,
+        TokenStandard,
         unhideAsset,
         unverifyAsset,
         updateNewTransactionDetails,
         VerifiedStatus,
         verifyAsset,
     } from '@core/wallet'
-    import { closeDrawer, DrawerId, openDrawer, updateDrawerProps } from '../../lib/auxiliary/drawer'
+
+    import features from '@features/features'
+
+    import { closeDrawer, DrawerId, openDrawer, updateDrawerProps } from '@/auxiliary/drawer'
 
     export let asset: IAsset
     export let activityId: string = undefined
