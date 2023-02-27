@@ -1,6 +1,7 @@
 <script lang="ts">
-    import { localize } from '@core/i18n'
     import { Button, ButtonVariant, Text, TextHint } from '@ui'
+
+    import { localize } from '@core/i18n'
 
     export let description: string = ''
     export let hint: string = ''

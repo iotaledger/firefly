@@ -1,7 +1,8 @@
 <script lang="ts">
-    import { Drawer } from '../../components'
-    import { closeDrawer, DrawerId, drawers } from '../../lib/auxiliary/drawer'
+    import { Drawer } from '@components'
     import { ConfirmDrawer, EnterPasswordDrawer, SelectedActivityDrawer } from './'
+
+    import { closeDrawer, DrawerId, drawers } from '@/auxiliary/drawer'
 
     const COMPONENTS = {
         [DrawerId.Confirm]: ConfirmDrawer,
