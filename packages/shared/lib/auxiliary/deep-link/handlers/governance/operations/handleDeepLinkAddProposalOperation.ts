@@ -3,7 +3,7 @@ import { closePopup, openPopup } from '@auxiliary/popup/actions'
 import { isValidUrl } from '@core/utils/validation'
 import { isProposalAlreadyAddedForSelectedAccount, isValidProposalId } from '@contexts/governance/utils'
 import { AddProposalOperationParameter } from '../../../enums'
-import { registeredProposalsForSelectedAccount, selectedProposal } from '@contexts/governance/stores'
+import { registeredProposalsForSelectedAccount, selectedProposalId } from '@contexts/governance/stores'
 import { GovernanceRoute, governanceRouter } from '@core/router'
 import { get } from 'svelte/store'
 import { PopupId } from '@auxiliary/popup'
@@ -21,7 +21,7 @@ export function handleDeepLinkAddProposalOperation(searchParams: URLSearchParams
         if (proposal === undefined) {
             throw new Error(`Event with id ${eventId} not found`)
         } else {
-            selectedProposal.set(proposal)
+            selectedProposalId.set(eventId)
             get(governanceRouter).goTo(GovernanceRoute.Details)
 
             showAppNotification({

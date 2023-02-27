@@ -5,17 +5,7 @@
     import { activeProfile } from '@core/profile'
     import { getNodeInfo } from '@core/profile-manager'
     import { resolveObjectPath, setClipboard } from '@core/utils'
-    import {
-        Button,
-        ButtonVariant,
-        Checkbox,
-        CopyableBox,
-        FontWeight,
-        HR,
-        Spinner,
-        Text,
-        TextType,
-    } from 'shared/components'
+    import { Button, ButtonVariant, Checkbox, CopyableBox, FontWeight, HR, Spinner, Text, TextType } from '@ui'
     import { onMount } from 'svelte'
 
     enum NodeInfoTab {

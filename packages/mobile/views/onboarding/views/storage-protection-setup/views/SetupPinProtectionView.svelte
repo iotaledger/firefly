@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { OnboardingLayout } from '../../../../../components'
-    import { Button, PinInput, Text, HTMLButtonType, TextType } from 'shared/components'
+    import { OnboardingLayout } from '@components'
+    import { Button, PinInput, Text, HTMLButtonType, TextType } from '@ui'
     import {
         initialiseFirstShimmerClaimingAccount,
         initialisePincodeManager,
@@ -13,7 +13,7 @@
     import { ProfileType } from '@core/profile'
     import { isValidPin } from '@core/utils'
     import { onMount } from 'svelte'
-    import { storageProtectionSetupRouter } from '../../../../../lib/routers'
+    import { storageProtectionSetupRouter } from '@/routers'
 
     export let busy = false
 

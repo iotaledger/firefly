@@ -9,7 +9,7 @@
         FoundryActivityDetails,
         NftActivityDetails,
         ActivityInformation,
-    } from 'shared/components'
+    } from '@ui'
 
     export let activity: Activity
     export let onClaim: () => unknown = () => {}

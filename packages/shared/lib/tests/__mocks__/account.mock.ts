@@ -19,6 +19,7 @@ import {
     OutputData,
     OutputOptions,
     OutputsToClaim,
+    ParticipationEventRegistrationOptions,
     ParticipationEventStatus,
     ParticipationEventType,
     ParticipationEventWithNodes,
@@ -167,7 +168,7 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    getParticipationEventIds(eventType?: ParticipationEventType): Promise<string[]> {
+    getParticipationEventIds(node: Node, eventType?: ParticipationEventType): Promise<string[]> {
         throw new Error('Method not implemented.')
     }
 
@@ -251,7 +252,9 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    registerParticipationEvent(eventId: string, nodes: Node[]): Promise<ParticipationEventWithNodes> {
+    registerParticipationEvents(
+        options: ParticipationEventRegistrationOptions
+    ): Promise<{ [eventId: string]: ParticipationEventWithNodes }> {
         throw new Error('Method not implemented.')
     }
 

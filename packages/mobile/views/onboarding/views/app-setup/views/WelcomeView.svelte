@@ -1,15 +1,15 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { Button, Checkbox, Link, Text, TextType } from 'shared/components'
+    import { Button, Checkbox, Link, Text, TextType } from '@ui'
     import {
         initialiseOnboardingProfile,
         onboardingProfile,
         shouldBeDeveloperProfile,
         updateOnboardingProfile,
-    } from 'shared/lib/contexts/onboarding'
-    import { OnboardingLayout } from '../../../../../components'
+    } from '@contexts/onboarding'
+    import { OnboardingLayout } from '@components'
     import { LegalDrawer } from '../drawers'
-    import { appSetupRouter } from '../../../../../lib/routers'
+    import { appSetupRouter } from '@/routers'
     import { hasCompletedAppSetup } from '@core/app'
     import { localize } from '@core/i18n'
     import { formatProtocolName, NetworkProtocol, NetworkType } from '@core/network'

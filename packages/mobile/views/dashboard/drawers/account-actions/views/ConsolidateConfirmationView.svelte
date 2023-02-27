@@ -3,8 +3,8 @@
     import { activeProfile, isSoftwareProfile } from '@core/profile'
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { Button } from '@ui'
-    import { ButtonVariant, Text, TextType } from 'shared/components'
-    import { accountActionsRouter } from '../../../../../lib/routers'
+    import { ButtonVariant, Text, TextType } from '@ui'
+    import { accountActionsRouter } from '@/routers'
 
     export let onSuccess: () => unknown
 

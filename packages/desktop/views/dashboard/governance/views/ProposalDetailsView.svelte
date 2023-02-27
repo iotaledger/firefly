@@ -222,7 +222,7 @@
         <Pane classes="p-6 flex flex-col h-fit">
             <header-container class="flex justify-between items-center mb-4">
                 <ProposalStatusPill status={$selectedProposal?.status} />
-                <ProposalDetailsButton />
+                <ProposalDetailsButton proposal={$selectedProposal} />
             </header-container>
             <div class="flex flex-1 flex-col justify-between">
                 <Text type={TextType.h2}>{$selectedProposal?.title}</Text>

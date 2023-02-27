@@ -6,9 +6,9 @@
     import features from '@features/features'
     import { Icon } from '@lib/auxiliary/icon/enums'
     import { Button } from '@ui'
-    import { ButtonVariant, HR } from 'shared/components'
-    import { AccountAction } from '../../../../../lib/contexts/dashboard'
-    import { accountActionsRouter } from '../../../../../lib/routers'
+    import { ButtonVariant, HR } from '@ui'
+    import { AccountAction } from '@/contexts/dashboard'
+    import { accountActionsRouter } from '@/routers'
 
     export let onToggleVisibilitySuccess: () => unknown
 
