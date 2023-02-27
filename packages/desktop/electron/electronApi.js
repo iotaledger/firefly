@@ -186,11 +186,11 @@ const ElectronApi = {
     /**
      * Get version details
      *
-     * @method getVersionDetails
+     * @method getAppVersionDetails
      *
      * @returns void
      */
-    getVersionDetails() {
+    getAppVersionDetails() {
         return ipcRenderer.invoke('get-version-details')
     },
     /**

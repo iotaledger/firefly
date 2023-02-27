@@ -24,6 +24,7 @@
         platform,
         Platform,
         PlatformOption,
+        setAppVersionDetails,
         setPlatform,
     } from '@core/app'
     import { showAppNotification } from '@auxiliary/notification'
@@ -108,10 +109,10 @@
 
         /* eslint-disable no-undef */
         // @ts-expect-error: This value is replaced by Webpack DefinePlugin
-        // if (!devMode && get(appStage) === AppStage.PROD) {
-        //     await setAppVersionDetails()
-        //     pollCheckForAppUpdate()
-        // }
+        if (!devMode) {
+            await setAppVersionDetails()
+            // pollCheckForAppUpdate()
+        }
         Platform.onEvent('menu-navigate-wallet', () => {
             $dashboardRouter.goTo(DashboardRoute.Wallet)
         })
