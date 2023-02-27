@@ -79,6 +79,7 @@ export enum Icon {
     Minimize = 'minimize',
     Minus = 'minus',
     Network = 'network',
+    Node = 'node',
     NotVerified = 'not-verified',
     Parchment = 'parchment',
     Picture = 'picture',

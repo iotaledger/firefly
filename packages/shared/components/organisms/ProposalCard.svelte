@@ -5,7 +5,7 @@
     import { localize } from '@core/i18n'
     import { GovernanceRoute, governanceRouter } from '@core/router'
     import { IProposal } from '@contexts/governance/interfaces'
-    import { participationOverviewForSelectedAccount, selectedProposal } from '@contexts/governance/stores'
+    import { participationOverviewForSelectedAccount, selectedProposalId } from '@contexts/governance/stores'
     import { ProposalStatus } from '@contexts/governance/enums'
     import { isVotingForProposal } from '@contexts/governance/utils'
 
@@ -21,7 +21,7 @@
     }
 
     function handleProposalClick(): void {
-        $selectedProposal = proposal
+        $selectedProposalId = proposal?.id
         $governanceRouter.goTo(GovernanceRoute.Details)
     }
 

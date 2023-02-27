@@ -1,14 +1,14 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
-    import { Icon, Text, TextType } from 'shared/components'
+    import { Icon, Text, TextType } from '@ui'
     import { fade, fly } from 'svelte/transition'
-    import { 
+    import {
         DrawerId,
         DRAWER_STATIC_TITLE_TITLES,
         DRAWER_IN_ANIMATION_DURATION_MS,
         DRAWER_OUT_ANIMATION_DURATION_MS,
-    } from '../lib/auxiliary/drawer'
+    } from '@/auxiliary/drawer'
 
     export let onClose: () => unknown = () => {}
     export let onBackClick: () => unknown = () => {}

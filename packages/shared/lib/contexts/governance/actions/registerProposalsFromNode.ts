@@ -8,7 +8,7 @@ import { getVotingParticipationEventIds, isProposalAlreadyAddedForSelectedAccoun
 import { registerParticipationEvent } from './registerParticipationEvent'
 
 export async function registerProposalsFromNode(node: INode): Promise<void> {
-    const proposalIds = await getVotingParticipationEventIds()
+    const proposalIds = await getVotingParticipationEventIds(node)
     if (!proposalIds || proposalIds.length === 0) {
         return
     }

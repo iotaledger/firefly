@@ -7,8 +7,8 @@
         NftActivityTileContent,
         TimelockActivityTileFooter,
         TransactionActivityTileContent,
-    } from 'shared/components'
-    import { AsyncActivityTileFooter } from '../components'
+    } from '@ui'
+    import { AsyncActivityTileFooter } from '@components'
 
     export let activity: Activity
     export let onClick: () => unknown = () => {}

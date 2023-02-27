@@ -1,6 +1,6 @@
 <script lang="ts">
     import features from '@features/features'
-    import { selectedAsset, selectedFilter } from '../../lib/contexts/dashboard'
+    import { selectedAsset, selectedFilter } from '@/contexts/dashboard'
     import {
         accountActionsRouter,
         accountSwitcherRouter,
@@ -13,7 +13,7 @@
         sendRouter,
         settingsRouter,
         tokenRouter,
-    } from '../../lib/routers'
+    } from '@/routers'
     import {
         AccountActionsDrawer,
         AccountSwitcherDrawer,

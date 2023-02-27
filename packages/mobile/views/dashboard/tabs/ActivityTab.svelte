@@ -1,8 +1,8 @@
 <script lang="ts">
     import { Activity } from '@core/wallet'
-    import { ActivityList } from '../../../../mobile/components'
-    import { DrawerId, openDrawer } from '../../../lib/auxiliary/drawer'
-    import { handleClaimActivity, handleRejectActivity } from '../../../lib/contexts/wallet'
+    import { ActivityList } from '@components'
+    import { DrawerId, openDrawer } from '@/auxiliary/drawer'
+    import { handleClaimActivity, handleRejectActivity } from '@/contexts/wallet'
 
     function onTileClick(activity: Activity): void {
         // TODO: when token drawer is refactor, implement this

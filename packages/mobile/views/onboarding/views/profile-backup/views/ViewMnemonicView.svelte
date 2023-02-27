@@ -1,9 +1,9 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { OnboardingLayout, RecoveryPhrase } from '../../../../../components'
-    import { Button, Text, TextType } from 'shared/components'
+    import { OnboardingLayout, RecoveryPhrase } from '@components'
+    import { Button, Text, TextType } from '@ui'
     import { localize } from '@core/i18n'
-    import { profileBackupRouter } from '../../../../../lib/routers'
+    import { profileBackupRouter } from '@/routers'
     import {
         onboardingProfile,
         generateMnemonicForOnboardingProfile,
@@ -37,13 +37,13 @@
 
 <OnboardingLayout onBackClick={handleBackClick} {busy} {title}>
     <div slot="content" class="w-full h-full flex flex-col p-0">
-        <Text type={TextType.p} secondary classes="mb-4"
+        <Text type={TextType.p} secondary fontSize="15" classes="mb-4"
             >{localize('views.onboarding.profileBackup.viewMnemonic.body1')}</Text
         >
-        <Text type={TextType.p} secondary classes="mb-4"
+        <Text type={TextType.p} secondary fontSize="15" classes="mb-4"
             >{localize('views.onboarding.profileBackup.viewMnemonic.body3')}</Text
         >
-        <Text type={TextType.p} secondary overrideColor color="gray-800" classes="font-bold mb-4"
+        <Text type={TextType.p} secondary overrideColor color="gray-800" fontSize="15" classes="font-bold mb-4"
             >{localize('views.onboarding.profileBackup.viewMnemonic.body2')}</Text
         >
         {#if $onboardingProfile?.mnemonic}

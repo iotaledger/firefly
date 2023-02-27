@@ -1,11 +1,11 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { OnboardingLayout } from '../../../../../components'
-    import { Button, Input, Text, TextType } from 'shared/components'
+    import { OnboardingLayout } from '@components'
+    import { Button, Input, Text, TextType } from '@ui'
     import { localize } from '@core/i18n'
     import { formatProtocolName } from '@core/network'
     import { profiles, validateProfileName } from '@core/profile'
-    import { profileRecoveryRouter, profileSetupRouter } from '../../../../../lib/routers'
+    import { profileRecoveryRouter, profileSetupRouter } from '@/routers'
     import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
 
     const title = localize('views.onboarding.profileSetup.enterName.title', {
@@ -44,10 +44,10 @@
 
 <OnboardingLayout {onBackClick} {title} animation="profile-desktop">
     <div slot="content">
-        <Text type={TextType.p} secondary classes="mb-4"
+        <Text type={TextType.p} secondary fontSize="15" classes="mb-4"
             >{localize('views.onboarding.profileSetup.enterName.body1')}</Text
         >
-        <Text type={TextType.p} secondary classes="mb-4">
+        <Text type={TextType.p} secondary fontSize="15" classes="mb-4">
             {localize(
                 `views.onboarding.profileSetup.enterName.body2.${$profiles?.length === 0 ? 'first' : 'nonFirst'}`
             )}
