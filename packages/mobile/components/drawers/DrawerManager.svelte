@@ -1,9 +1,7 @@
 <script lang="ts">
     import { Drawer } from '../../components'
     import { closeDrawer, DrawerId, drawers } from '../../lib/auxiliary/drawer'
-    import ConfirmDrawer from './ConfirmDrawer.svelte'
-    import EnterPasswordDrawer from './EnterPasswordDrawer.svelte'
-    import SelectedActivityDrawer from './SelectedActivityDrawer.svelte'
+    import { ConfirmDrawer, EnterPasswordDrawer, SelectedActivityDrawer } from './'
 
     const COMPONENTS = {
         [DrawerId.Confirm]: ConfirmDrawer,

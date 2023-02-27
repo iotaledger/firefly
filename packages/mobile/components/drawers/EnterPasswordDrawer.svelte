@@ -1,10 +1,9 @@
 <script lang="ts">
+    import { Button, HTMLButtonType, PasswordInput, Text, TextType } from '@ui'
     import { localize } from '@core/i18n'
     import { unlockStronghold } from '@core/profile'
-    import { Button, HTMLButtonType, PasswordInput, Text, TextType } from '@ui'
 
     export let busyMessage: string = ''
-
     export let onSuccess: (password?: string) => unknown
     export let returnPassword: boolean = false
 
