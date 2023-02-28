@@ -3,8 +3,8 @@
     import { localize } from '@core/i18n'
     import { diffDates } from '@core/utils'
     import { activeProfile } from '@core/profile'
-    import { Animation, Button, Text, TextType } from 'shared/components'
-    import { profileRouter } from '../../../../../lib/routers'
+    import { Animation, Button, Text, TextType } from '@ui'
+    import { profileRouter } from '@/routers'
 
     let isBusy = false
     let message = ''
@@ -48,7 +48,7 @@
         <Animation animation="backup-desktop" />
         <div class="space-y-2">
             <Text type={TextType.h4}>{subHeaderText}</Text>
-            <Text type={TextType.p} secondary>{localize('popups.backupStronghold.body')}</Text>
+            <Text type={TextType.p} secondary fontSize="15">{localize('popups.backupStronghold.body')}</Text>
         </div>
     </div>
     <Button classes="w-full" disabled={isBusy} busyMessage={message} {isBusy} onClick={handleExportClick}>

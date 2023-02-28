@@ -1,7 +1,7 @@
 import { DrawerId } from '../enums'
 import { DrawerProps } from '../types'
 
-export interface IDrawer {
+export interface IDrawerState {
     id: DrawerId
     props?: DrawerProps
 }

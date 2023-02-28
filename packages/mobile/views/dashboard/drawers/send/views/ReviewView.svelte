@@ -10,11 +10,11 @@
         NewTransactionType,
         selectedAccountAssets,
     } from '@core/wallet'
-    import { ActivityInformation, BasicActivityDetails, Button, KeyValueBox, TextHint, Toggle } from 'shared/components'
+    import { ActivityInformation, BasicActivityDetails, Button, KeyValueBox, TextHint, Toggle } from '@ui'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { ExpirationTimePicker } from '../../../../../components'
-    import { sendRouter } from '../../../../../lib/routers'
+    import { ExpirationTimePicker } from '@components'
+    import { sendRouter } from '@/routers'
 
     export let sendTransaction: () => Promise<void>
     export let triggerSendOnMount: boolean = false

@@ -1,6 +1,7 @@
 import { isStrongholdUnlocked } from '@core/profile-manager'
 import { Activity, claimActivity } from '@core/wallet'
-import { DrawerId, openDrawer } from '../../../auxiliary/drawer'
+
+import { closeDrawer, DrawerId, openDrawer } from '@/auxiliary/drawer'
 
 export async function handleClaimActivity(activity: Activity): Promise<void> {
     const isUnlocked = await isStrongholdUnlocked()
@@ -9,6 +10,7 @@ export async function handleClaimActivity(activity: Activity): Promise<void> {
     } else {
         const _onSuccess = async (): Promise<void> => {
             await handleClaimActivity(activity)
+            closeDrawer(DrawerId.EnterPassword)
         }
         openDrawer(DrawerId.EnterPassword, { onSuccess: _onSuccess })
     }

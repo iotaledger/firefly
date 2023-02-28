@@ -585,6 +585,7 @@
             "proposals": {
                 "title": "Propozycje",
                 "voted": "Zagłosowano",
+                "successEdit": "Propozycja została pomyślnie edytowana",
                 "successAdd": "Propozycja pomyślnie dodana",
                 "successAddAll": "Propozycja została pomyślnie dodana do wszystkich kont",
                 "successRemove": "Propozycja została usunięta",
@@ -626,8 +627,27 @@
             "step_4": "Naciśnij oba przyciski, aby włączyć Bling Signing transakcji. Na urządzeniu wyświetli się komunikat Enabled. Gotowe."
         },
         "balanceBreakdown": {
-            "title": "Zestawienie depozytu magazynowego",
-            "totalStorageDeposit": "Całkowity depozyt magazynowy",
+            "title": "Zestawienie środków",
+            "available": {
+                "title": "Dostępne",
+                "subtitle": "Środki w pełni dostępne do użycia"
+            },
+            "pending": {
+                "title": "Oczekujące",
+                "subtitle": "Tymczasowo zablokowane w transakcjach"
+            },
+            "locked": {
+                "title": "Zablokowano",
+                "subtitle": "Tymczasowo zablokowane przez zarządzanie"
+            },
+            "storageDeposit": {
+                "title": "Depozyt magazynowy",
+                "subtitle": "Środki te są zarezerwowane na przechowywanie natywnych assetów."
+            },
+            "totalBalance": {
+                "title": "Wszystkie środki",
+                "subtitle": ""
+            },
             "basicOutputs": {
                 "title": "Natywne tokeny",
                 "subtitle": "Zarezerwowano do przechowywania natywnych tokenów"
@@ -644,11 +664,19 @@
                 "title": "Produkcja",
                 "subtitle": "Zarezerwowano do przechowywania wyprodukowanych tokenów"
             },
-            "pendingTransactions": {
-                "title": "Transakcje",
+            "unclaimed": {
+                "title": "Nieodebrana transakcja",
                 "subtitle": "Tymczasowo zablokowano w nieodebranych transakcjach"
             },
-            "votingPowerOutput": {
+            "timelock": {
+                "title": "Blokada czasowa",
+                "subtitle": "Tymczasowo zablokowano w blokadach czasowych transakcji"
+            },
+            "storageDepositReturn": {
+                "title": "SDRUC",
+                "subtitle": "Tymczasowo zablokowano w zwrocie depozytu magazynowego"
+            },
+            "governance": {
                 "title": "Zarządzanie",
                 "subtitle": "Zarezerwowane na siłę głosu"
             },
@@ -702,7 +730,7 @@
         "externalUrl": {
             "title": "Otwórz URL w przeglądarce",
             "body": "Czy na pewno chcesz otworzyć \"{url}\" w przeglądarce?",
-            "hint": "Ten adres URL jest nieznany dla Firefly. Prosimy o podwójne sprawdzenie adresu URL przed jego otwarciem.",
+            "hint": "Ten adres URL jest nieznany dla Firefly. Prosimy o dokładne sprawdzenie adresu URL przed jego otwarciem.",
             "action": "Otwórz URL",
             "invalidProtocol": "Nie można otworzyć adresu URL z nieprawidłowym protokołem"
         },
@@ -1010,7 +1038,22 @@
             "description": "Musisz posiadać wyjście aliasu, aby mintować natywne tokeny. Aby kontynuować, najpierw stwórz alias"
         },
         "mintNftForm": {
-            "title": "Mintuj proste NFT"
+            "title": "Mintuj proste NFT",
+            "errors": {
+                "invalidMimetype": "Nieprawidłowy MimeType, sprawdź czy typ pliku jest obsługiwany",
+                "quantityTooSmall": "Ilość musi być większa niż 0",
+                "quantityTooLarge": "Ilość musi być mniejsza niż 64",
+                "emptyName": "Nazwa jest wymaganym polem",
+                "invalidURI": "Nieprawidłowy URI, proszę podać poprawny URI",
+                "royaltiesMustBeJSON": "Tantiemy muszą być w poprawnym formacie JSON",
+                "invalidAddress": "Nieprawidłowy adres, musisz wpisać poprawny adres {networkHrp}, na który będą wysyłane tantiemy",
+                "invalidRoyaltyValue": "Nieprawidłowa wartość, musi być to liczba dziesiętna reprezentująca wymagany procent, np. 0,05",
+                "invalidRoyaltyValueSum": "Nieprawidłowa wartość, suma wszystkich tantiem musi być mniejsza lub równa 1'",
+                "attributesMustBeJSON": "Atrybuty muszą być w poprawnym formacie JSON",
+                "attributesMustBeArrayOfObjects": "Atrybuty muszą być tablicą obiektów",
+                "attributesInvalidKeys": "Nieprawidłowy klucz, atrybuty muszą mieć klucze \"trait_type\" i \"value\"",
+                "attributesInvalidValues": "Nieprawidłowa wartość, \"trait_type\" musi być niepustym ciągiem znaków, a \"value\" musi być niepustym ciągiem znaków lub liczbą"
+            }
         },
         "faucetRequest": {
             "title": "Prośba o token z faucetu",
@@ -1026,6 +1069,10 @@
             "title": "Dodaj propozycję",
             "body": "Wypełnij poniższe pola, aby dodać propozycję.",
             "addToAllAccounts": "Dodaj propozycję do wszystkich kont"
+        },
+        "editProposal": {
+            "title": "Edytuj propozycję",
+            "body": "Podaj adres URL serwera, który zawiera tę propozycję."
         },
         "voteForProposal": {
             "title": "Głosowanie na propozycję",
@@ -1188,7 +1235,7 @@
         "readDocumentation": "Przeczytaj dokumentację",
         "visitFaq": "Odwiedź FAQ",
         "viewStatus": "Pokaż status",
-        "viewStorageDeposit": "Pokaż depozyt magazynowy",
+        "viewBalanceBreakdown": "Pokaż zestawienie środków",
         "showHiddenAccounts": "Pokaż ukryte portfele",
         "confirm": "Potwierdź",
         "hideNetworkStatistics": "Ukryj statystyki sieci",
@@ -1240,6 +1287,7 @@
         "vote": "Głosuj",
         "addProposal": "Dodaj propozycję",
         "removeProposal": "Usuń propozycję",
+        "changeNode": "Zmień serwer",
         "stopVoting": "Zatrzymaj głosowanie",
         "revote": "Odnów głosy"
     },
@@ -1438,8 +1486,10 @@
         "surplus": "Nadwyżka",
         "storageDeposit": "Depozyt magazynowy",
         "giftedStorageDeposit": "Podarowany depozyt magazynowy",
+        "storageDepositPerNft": "Depozyt magazynowy na NFT",
+        "totalStorageDeposit": "Całkowity depozyt magazynowy",
         "expirationTime": "Czas wygaśnięcia",
-        "timelockDate": "Timelock",
+        "timelockDate": "Blokada czasowa",
         "claimedTime": "Odebrano",
         "nftAddress": "Adres NFT",
         "nftId": "NFT ID",
@@ -1492,6 +1542,7 @@
         "issuer": "Wydawca",
         "issuerAddress": "Adres wydawcy",
         "issuerName": "Nazwa wydawcy",
+        "quantity": "Ilość",
         "collection": "Kolekcja",
         "collectionId": "ID kolekcji",
         "collectionName": "Nazwa kolekcji",
@@ -1774,6 +1825,7 @@
             "wrongAddressPrefix": "Adresy zaczynają się od prefiksu {prefix}.",
             "wrongAddressFormat": "Adres nie jest poprawnie sformatowany.",
             "invalidAddress": "Adres jest nieprawidłowy.",
+            "invalidAssetId": "The asset id is not valid.",
             "unknownAsset": "Ten asset nie jest znany na tym koncie.",
             "insufficientFunds": "Brak wystarczających środków na tym portfelu.",
             "insufficientFundsStorageDeposit": "Niewystarczające środki na pokrycie depozytu magazynowego",
@@ -1919,7 +1971,7 @@
         "governance": {
             "unableToAddProposal": {
                 "short": "Nie można dodać propozycji",
-                "long": "Wystąpił błąd podczas próby dodania propozycji {proposalId}"
+                "long": "Nie można znaleźć propozycji {proposalId} na wybranym serwerze"
             }
         }
     },
@@ -2010,7 +2062,8 @@
             "issuerName": "Opcjonalny parametr: Nazwa twórcy",
             "description": "Opcjonalny parametr: Opis NFT",
             "attributes": "Opcjonalny parametr: tablica cech i wartości, które definiują atrybuty NFT",
-            "uri": "Aby utworzyć URI za pomocą niestandardowych mediów, najpierw prześlij plik do IPFS za pośrednictwem usługi przechowywania danych (np. https://nft.storage/)"
+            "uri": "Aby utworzyć URI za pomocą niestandardowych mediów, najpierw prześlij plik do IPFS za pośrednictwem usługi przechowywania danych (np. https://nft.storage/)",
+            "quantity": "Opcjonalny parametr: Ilość kopii mintowanych za pomocą tych metadanych."
         },
         "governance": {
             "removeProposalWarning": "Musisz przestać głosować na tę propozycję, zanim ją usuniesz."

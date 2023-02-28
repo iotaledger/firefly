@@ -79,7 +79,7 @@
     }
 
     $: isVotingDisabled =
-        !isProposalVotable($selectedParticipationEventStatus?.status) ||
+        !isProposalVotable($selectedProposal?.status) ||
         !hasChangedAnswers(selectedAnswerValues) ||
         hasSelectedNoAnswers(selectedAnswerValues)
     $: isTransferring = $hasPendingGovernanceTransaction?.[$selectedAccountIndex]
@@ -222,7 +222,7 @@
         <Pane classes="p-6 flex flex-col h-fit">
             <header-container class="flex justify-between items-center mb-4">
                 <ProposalStatusPill status={$selectedProposal?.status} />
-                <ProposalDetailsButton />
+                <ProposalDetailsButton proposal={$selectedProposal} />
             </header-container>
             <div class="flex flex-1 flex-col justify-between">
                 <Text type={TextType.h2}>{$selectedProposal?.title}</Text>
@@ -269,7 +269,7 @@
                         isLoading={!overviewLoaded || !statusLoaded}
                         selectedAnswerValue={selectedAnswerValues[questionIndex]}
                         votedAnswerValue={votedAnswerValues[questionIndex]}
-                        answerStatuses={$selectedProposal.state?.questions[questionIndex]?.answers}
+                        answerStatuses={$selectedParticipationEventStatus?.questions[questionIndex]?.answers}
                         {onQuestionClick}
                         {onAnswerClick}
                     />
@@ -278,7 +278,7 @@
         </proposal-questions>
         {#if $selectedProposal?.status === ProposalStatus.Upcoming}
             <TextHint info text={textHintString} />
-        {:else if [ProposalStatus.Commencing, ProposalStatus.Holding].includes($selectedParticipationEventStatus?.status)}
+        {:else if [ProposalStatus.Commencing, ProposalStatus.Holding].includes($selectedProposal?.status)}
             <buttons-container class="flex w-full space-x-4 mt-6">
                 <Button
                     outline
