@@ -20,7 +20,7 @@
         return date?.toLocaleString('sv')
     }
 
-    function handleConfirm(): void {
+    function onConfirmClick(): void {
         onConfirm(new Date(sveltyPickerDate))
         closeDrawer(DrawerId.DateTimePicker)
     }
@@ -38,7 +38,7 @@
         theme="datetime-picker-colors"
         bind:value={sveltyPickerDate}
     />
-    <Button onClick={handleConfirm} classes="w-full">{localize('actions.confirm')}</Button>
+    <Button onClick={onConfirmClick} classes="w-full">{localize('actions.confirm')}</Button>
 </datetime-picker-drawer>
 
 <style type="text/scss">

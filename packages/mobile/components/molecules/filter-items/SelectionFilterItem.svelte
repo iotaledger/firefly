@@ -1,8 +1,9 @@
 <script lang="ts">
+    import { Radio } from '@ui'
+
     import { localize } from '@core/i18n'
     import type { IDropdownChoice } from '@core/utils'
     import { SelectionFilterUnit } from '@core/utils/interfaces/filter'
-    import { Radio } from '@ui'
 
     export let filterUnit: SelectionFilterUnit
 
