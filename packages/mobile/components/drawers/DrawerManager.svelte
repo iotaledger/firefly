@@ -7,6 +7,7 @@
         ConfirmDrawer,
         CreateAccountDrawer,
         CustomizeAccountDrawer,
+        DateTimePickerDrawer,
         DeleteAccountDrawer,
         EnterPasswordDrawer,
         FilterDrawer,
@@ -30,6 +31,7 @@
         [DrawerId.BalanceBreakdown]: BalanceBreakdownDrawer,
         [DrawerId.DeleteAccount]: DeleteAccountDrawer,
         [DrawerId.Filter]: FilterDrawer,
+        [DrawerId.DateTimePicker]: DateTimePickerDrawer,
     }
 </script>
 
