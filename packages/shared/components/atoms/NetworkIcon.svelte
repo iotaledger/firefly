@@ -6,8 +6,9 @@
     export let height = 22
     export let width = 22
 
-    let backgroundColor
-    let iconColor
+    let backgroundColor: string
+    let iconColor: string
+
     $: {
         switch (networkProtocol) {
             case NetworkProtocol.IOTA:
@@ -25,8 +26,8 @@
     }
 </script>
 
-<div
-    class="p-0.5 flex items-center justify-center rounded-full ring-2 ring-white dark:ring-gray-900 bg-{backgroundColor}"
+<network-icon
+    class="flex items-center justify-center p-0.5 rounded-full ring-2 ring-white dark:ring-gray-900 bg-{backgroundColor}"
 >
     <Icon {height} {width} icon={networkProtocol} classes="text-{iconColor}" />
-</div>
+</network-icon>

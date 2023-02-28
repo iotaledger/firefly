@@ -25,7 +25,7 @@
         activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
 
     function onReject(): void {
-        handleRejectActivity(activity.id)
+        void handleRejectActivity(activity.id)
     }
     function onClaim(): void {
         void handleClaimActivity(activity)
