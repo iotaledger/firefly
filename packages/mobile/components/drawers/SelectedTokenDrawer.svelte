@@ -16,9 +16,8 @@
         verifyAsset,
     } from '@core/wallet'
 
-    import features from '@features/features'
-
     import { closeDrawer, DrawerId, openDrawer, updateDrawerProps } from '@/auxiliary/drawer'
+    import features from '@features/features'
 
     export let asset: IAsset
     export let activityId: string = undefined

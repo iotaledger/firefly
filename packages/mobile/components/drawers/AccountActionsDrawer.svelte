@@ -1,26 +1,28 @@
 <script lang="ts">
+    import { Button, ButtonVariant, HR } from '@ui'
+
     import { selectedAccount, setNextSelectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { activeProfile, nonHiddenActiveAccounts, updateActiveAccountMetadata } from '@core/profile'
     import { activeAccounts, visibleActiveAccounts } from '@core/profile/stores'
-    import features from '@features/features'
-    import { Icon } from '@lib/auxiliary/icon/enums'
-    import { Button } from '@ui'
-    import { ButtonVariant, HR } from '@ui'
-    import { AccountAction } from '@/contexts/dashboard'
-    import { accountActionsRouter } from '@/routers'
 
-    export let onToggleVisibilitySuccess: () => unknown
+    import { closeDrawer, DrawerId, openDrawer } from '@/auxiliary/drawer'
+    import { Icon } from '@auxiliary/icon/enums'
+    import features from '@features/features'
 
     const showDeleteAccount =
         $selectedAccount?.index === $activeAccounts?.length - 1 && $visibleActiveAccounts?.length > 1
 
+    function _closeDrawer(): void {
+        closeDrawer(DrawerId.AccountActions)
+    }
     function handleCustomizeAccountClick(): void {
-        $accountActionsRouter.next({ action: AccountAction.Customize })
+        openDrawer(DrawerId.CustomizeAccount)
+        _closeDrawer()
     }
     function handleShowAccountClick(): void {
         updateActiveAccountMetadata($selectedAccount.index, { hidden: false })
-        onToggleVisibilitySuccess && onToggleVisibilitySuccess()
+        _closeDrawer()
     }
     function handleHideAccountClick(): void {
         if ($nonHiddenActiveAccounts.length > 1) {
@@ -28,23 +30,29 @@
             if (!$activeProfile.showHiddenAccounts) {
                 setNextSelectedAccount()
             }
-            onToggleVisibilitySuccess && onToggleVisibilitySuccess()
+            _closeDrawer()
         } else {
             console.error('Not enough accounts visible: ', $nonHiddenActiveAccounts.length)
         }
     }
     function handleDeleteAccountClick(): void {
-        $accountActionsRouter.next({ action: AccountAction.Delete })
+        openDrawer(DrawerId.DeleteAccount, {
+            title: localize('popups.deleteAccount.title', {
+                values: { name: $selectedAccount?.name },
+            }),
+        })
+        _closeDrawer()
     }
     function handleBalanceBreakdownClick(): void {
-        $accountActionsRouter.next({ action: AccountAction.BalanceBreakdown })
+        openDrawer(DrawerId.BalanceBreakdown)
+        _closeDrawer()
     }
 </script>
 
 <div class="flex flex-col space-y-4">
     {#if features?.dashboard?.accountActions?.balanceBreakdown?.enabled}
         <Button outline onClick={handleBalanceBreakdownClick} icon={Icon.Doc}>
-            {localize('actions.viewStorageDeposit')}
+            {localize('actions.viewBalanceBreakdown')}
         </Button>
     {/if}
     {#if features?.dashboard?.accountActions?.customize?.enabled}

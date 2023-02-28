@@ -1,10 +1,11 @@
 <script lang="ts">
     import { Button, ColorPicker, Input } from '@ui'
+
     import { selectedAccount, tryEditSelectedAccountMetadata, validateAccountName } from '@core/account'
     import { localize } from '@core/i18n'
     import { getTrimmedLength } from '@core/utils'
 
-    export let onSuccess: () => void = () => {}
+    import { closeDrawer, DrawerId } from '@/auxiliary/drawer'
 
     let error = ''
     let isBusy = false
@@ -36,7 +37,7 @@
         try {
             if (trimmedAccountAlias || color) {
                 await tryEditSelectedAccountMetadata({ name: trimmedAccountAlias, color })
-                onSuccess && onSuccess()
+                closeDrawer(DrawerId.CustomizeAccount)
             }
         } finally {
             isBusy = false

@@ -1,11 +1,10 @@
 import { get } from 'svelte/store'
 
 import {
-    accountActionsRouter,
-    accountSwitcherRouter,
     appRouter,
     appSetupRouter,
     dashboardRouter,
+    filterRouter,
     loginRouter,
     networkConfigurationSettingsRouter,
     networkSetupRouter,
@@ -15,11 +14,10 @@ import {
     profileRouter,
     profileSetupRouter,
     sendRouter,
-    shimmerClaimingRouter,
     settingsRouter,
+    shimmerClaimingRouter,
     storageProtectionSetupRouter,
     strongholdSetupRouter,
-    filterRouter,
 } from '../routers'
 
 export function resetRouters(): void {
@@ -52,8 +50,6 @@ function resetOnboardingSubrouters(): void {
 }
 
 function resetDashboardSubrouters(): void {
-    get(accountSwitcherRouter).reset()
-    get(accountActionsRouter).reset()
     get(sendRouter).reset()
     get(filterRouter).reset()
     get(profileRouter).reset()

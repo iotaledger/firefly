@@ -1,4 +1,7 @@
 <script lang="ts">
+    import { localize } from '@core/i18n'
+    import { ActivityAsyncStatus, ActivityDirection, ActivityType, selectedAccountActivities } from '@core/wallet'
+
     import {
         ActivityInformation,
         AliasActivityDetails,
@@ -7,9 +10,6 @@
         FoundryActivityDetails,
         NftActivityDetails,
     } from '@ui'
-
-    import { localize } from '@core/i18n'
-    import { ActivityAsyncStatus, ActivityDirection, ActivityType, selectedAccountActivities } from '@core/wallet'
 
     import { handleClaimActivity, handleRejectActivity } from '@/contexts/wallet'
     import features from '@features/features'
