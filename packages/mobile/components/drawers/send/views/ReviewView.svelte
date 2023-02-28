@@ -91,34 +91,36 @@
 </script>
 
 <div class="w-full overflow-y-auto flex flex-col flex-auto h-1 justify-between">
-    <div class="flex flex-row flex-1 items-center justify-center relative">
-        <div class="w-full flex-col space-y-2">
+    <div class="flex flex-row flex-1 justify-center relative">
+        <div class="w-full flex-col space-y-6 pt-10">
             <BasicActivityDetails {activity} networkAddress={layer2Parameters?.networkAddress} />
-            <ActivityInformation {activity} networkAddress={layer2Parameters?.networkAddress} />
-            {#if !hideGiftToggle}
-                <KeyValueBox keyText={localize('general.giftStorageDeposit')}>
-                    <Toggle
-                        slot="value"
-                        color="green"
-                        disabled={$newTransactionDetails.disableToggleGift}
-                        active={$newTransactionDetails.giftStorageDeposit}
-                        onClick={toggleGiftStorageDeposit}
-                    />
-                </KeyValueBox>
-            {/if}
-            {#if initialExpirationDate !== undefined}
-                <KeyValueBox keyText={localize('general.expirationTime')}>
-                    <ExpirationTimePicker
-                        slot="value"
-                        bind:value={expirationDate}
-                        disabled={disableChangeExpiration}
-                        onClick={onAddExpirationClick}
-                    />
-                </KeyValueBox>
-            {/if}
-            {#if surplus}
-                <TextHint warning text={localize('popups.transaction.surplusIncluded')} />
-            {/if}
+            <div class="flex flex-col space-y-2">
+                <ActivityInformation {activity} networkAddress={layer2Parameters?.networkAddress} />
+                {#if !hideGiftToggle}
+                    <KeyValueBox keyText={localize('general.giftStorageDeposit')}>
+                        <Toggle
+                            slot="value"
+                            color="green"
+                            disabled={$newTransactionDetails.disableToggleGift}
+                            active={$newTransactionDetails.giftStorageDeposit}
+                            onClick={toggleGiftStorageDeposit}
+                        />
+                    </KeyValueBox>
+                {/if}
+                {#if initialExpirationDate !== undefined}
+                    <KeyValueBox keyText={localize('general.expirationTime')}>
+                        <ExpirationTimePicker
+                            slot="value"
+                            bind:value={expirationDate}
+                            disabled={disableChangeExpiration}
+                            onClick={onAddExpirationClick}
+                        />
+                    </KeyValueBox>
+                {/if}
+                {#if surplus}
+                    <TextHint warning text={localize('popups.transaction.surplusIncluded')} />
+                {/if}
+            </div>
         </div>
     </div>
     <div class="flex flex-col space-y-4">

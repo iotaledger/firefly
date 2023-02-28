@@ -42,7 +42,7 @@
     }
 </script>
 
-<div class="w-full flex flex-col space-y-4">
+<div class="w-full flex flex-col space-y-2">
     <Button outline onClick={() => handleChooseExpirationTimeClick(ExpirationTime.None)} classes="w-full">
         {localize('menus.expirationTimePicker.none')}
     </Button>
