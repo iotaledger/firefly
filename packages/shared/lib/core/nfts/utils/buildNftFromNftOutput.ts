@@ -27,7 +27,7 @@ export function buildNftFromNftOutput(
         name: parsedMetadata?.name ?? DEFAULT_NFT_NAME,
         issuer,
         isSpendable,
-        timelockTime,
+        timelockTime: timelockTime ? Number(timelockTime) : undefined,
         metadata,
         parsedMetadata,
         latestOutputId: outputId,

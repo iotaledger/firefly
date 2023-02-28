@@ -17,7 +17,7 @@
         : {}
 
     const nftOptions: IOption[] = $selectedAccountNfts
-        .filter((nft) => nft.isSpendable && nft.timelockTime < $time.getTime())
+        .filter((nft) => nft.isSpendable && (!nft.timelockTime || nft.timelockTime < $time.getTime()))
         .map((_nft) => ({ key: _nft.name, value: _nft.id }))
 
     $: nftId = selected?.value
