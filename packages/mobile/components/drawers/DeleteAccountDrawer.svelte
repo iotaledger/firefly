@@ -1,13 +1,14 @@
 <script lang="ts">
+    import { Button, ButtonVariant, Error, HTMLButtonType, PasswordInput, Text, TextType } from '@ui'
+
     import { selectedAccount } from '@core/account'
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
     import { isSoftwareProfile } from '@core/profile'
     import { setStrongholdPassword } from '@core/profile-manager'
     import { deleteAccount } from '@core/profile-manager/actions'
-    import { TextType } from '@ui'
-    import { Button, ButtonVariant, Error, HTMLButtonType, PasswordInput, Text } from 'shared/components'
-    import { closeDrawer, DrawerId } from '../../lib/auxiliary/drawer'
+
+    import { closeDrawer, DrawerId } from '@/auxiliary/drawer'
 
     let password: string
     let error: string

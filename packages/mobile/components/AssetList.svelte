@@ -1,12 +1,15 @@
 <script lang="ts">
+    import VirtualList from '@sveltejs/svelte-virtual-list'
+
+    import { Filter, SearchInput } from '@components'
+    import { AssetTile, Text } from '@ui'
+
     import { localize } from '@core/i18n'
     import { IAccountAssets, IAsset } from '@core/wallet'
     import { assetFilter } from '@core/wallet/stores'
     import { isVisibleAsset } from '@core/wallet/utils/isVisibleAsset'
-    import VirtualList from '@sveltejs/svelte-virtual-list'
-    import { AssetTile, Text } from '@ui'
-    import { Filter, SearchInput } from '../components'
-    import { FilterType } from '../lib/contexts/wallet'
+
+    import { FilterType } from '@/contexts/wallet'
 
     export let assets: IAccountAssets
     export let onAssetTileClick: (asset: IAsset) => unknown = () => {}

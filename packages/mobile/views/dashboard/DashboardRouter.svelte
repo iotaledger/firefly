@@ -1,5 +1,6 @@
 <script lang="ts">
-    import features from '@features/features'
+    import { ProfileDrawer, SendDrawer } from './drawers'
+
     import {
         DashboardRoute,
         dashboardRoute,
@@ -7,8 +8,8 @@
         resetRouterWithDrawerDelay,
         sendRouter,
         settingsRouter,
-    } from '../../lib/routers'
-    import { ProfileDrawer, SendDrawer } from './drawers'
+    } from '@/routers'
+    import features from '@features/features'
 
     function onSendDrawerClose(): void {
         $sendRouter.closeDrawer()

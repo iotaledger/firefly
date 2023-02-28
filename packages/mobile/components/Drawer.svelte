@@ -1,16 +1,19 @@
 <script lang="ts">
-    import { localize } from '@core/i18n'
-    import { Icon as IconEnum } from '@lib/auxiliary/icon'
-    import { Icon, Text, TextType } from 'shared/components'
     import { fade, fly } from 'svelte/transition'
+
+    import { Icon, Text, TextType } from '@ui'
+
+    import { localize } from '@core/i18n'
+
     import {
         DrawerId,
+        DRAWER_STATIC_TITLE_TITLES,
         DRAWER_IN_ANIMATION_DURATION_MS,
         DRAWER_OUT_ANIMATION_DURATION_MS,
-        DRAWER_STATIC_TITLE_TITLES,
         getDrawerRouter,
-    } from '../lib/auxiliary/drawer'
-    import { resetRouterWithDrawerDelay } from '../lib/routers'
+    } from '@/auxiliary/drawer'
+    import { Icon as IconEnum } from '@lib/auxiliary/icon'
+    import { resetRouterWithDrawerDelay } from '@/routers'
 
     export let onClose: () => unknown = () => {}
     export let onBackClick: () => unknown = () => {}

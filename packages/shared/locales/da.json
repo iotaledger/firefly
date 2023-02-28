@@ -585,6 +585,7 @@
             "proposals": {
                 "title": "Forslag",
                 "voted": "Stemt",
+                "successEdit": "Forslag hermed redigeret",
                 "successAdd": "Forslag hermed tilføjet",
                 "successAddAll": "Proposal successfully added to all accounts",
                 "successRemove": "Forslag fjernet",
@@ -626,31 +627,58 @@
             "step_4": "Tryk på begge knapper for at aktivere blind signeringstransaktion. Enheden vises Aktiveret. Det var dét."
         },
         "balanceBreakdown": {
-            "title": "Storage deposit breakdown",
-            "totalStorageDeposit": "Total storage deposit",
+            "title": "Saldofordeling",
+            "available": {
+                "title": "Tilgængelig",
+                "subtitle": "Midler fuldt tilgængelige til forbrug"
+            },
+            "pending": {
+                "title": "Afventer",
+                "subtitle": "Midlertidigt fastlåste transaktioner"
+            },
+            "locked": {
+                "title": "Låst",
+                "subtitle": "Midlertidigt fastlåst for forvaltning"
+            },
+            "storageDeposit": {
+                "title": "Lagerindskud",
+                "subtitle": "Disse midler er reserveret til lagring af henhørende aktiver."
+            },
+            "totalBalance": {
+                "title": "Saldo i alt",
+                "subtitle": ""
+            },
             "basicOutputs": {
-                "title": "Native Tokener",
-                "subtitle": "Reserveret til lagring af Native Tokener"
+                "title": "Henhørende Tokener",
+                "subtitle": "Reserveret til lagring af Henhørende Tokener"
             },
             "nftOutputs": {
                 "title": "NFT'er",
-                "subtitle": "Reserveret til NFT-opbevaring"
+                "subtitle": "Reserveret til NFT-lagring"
             },
             "aliasOutputs": {
                 "title": "Aliasser",
-                "subtitle": "Reserveret til Alias-opbevaring"
+                "subtitle": "Reserveret til Aliaslagring"
             },
             "foundryOutputs": {
-                "title": "Foundries",
-                "subtitle": "Reserved for Native Token Foundry storage"
+                "title": "Produktion",
+                "subtitle": "Reserveret til lagring af Henhørende Tokener Produktion"
             },
-            "pendingTransactions": {
-                "title": "Transactions",
+            "unclaimed": {
+                "title": "Unclaimed transaction",
                 "subtitle": "Temporarily locked in unclaimed transactions"
             },
-            "votingPowerOutput": {
-                "title": "Forvaltning",
-                "subtitle": "Reserveret til stemmerettigheder"
+            "timelock": {
+                "title": "Time lock",
+                "subtitle": "Temporarily locked in timelocked transactions"
+            },
+            "storageDepositReturn": {
+                "title": "SDRUC",
+                "subtitle": "Temporarily locked in Storage Deposit Return"
+            },
+            "governance": {
+                "title": "Governance",
+                "subtitle": "Reserved for voting power"
             },
             "minimizeStorageDepositButton": "Minimize storage deposit"
         },
@@ -1010,7 +1038,22 @@
             "description": "You must own an alias output to mint native tokens. To continue, please create an alias first"
         },
         "mintNftForm": {
-            "title": "Mint simple NFT"
+            "title": "Mint simple NFT",
+            "errors": {
+                "invalidMimetype": "Ugyldig MimeType. Tjek om filtypen understøttes",
+                "quantityTooSmall": "Mængde skal være større end 0",
+                "quantityTooLarge": "Mængde skal være mindre end 64",
+                "emptyName": "Navn er obligatorisk",
+                "invalidURI": "URI ugyldig, angiv en gyldig i stedet",
+                "royaltiesMustBeJSON": "Royalties skal være en gyldig JSON",
+                "invalidAddress": "Ugyldig adresse. Skal være en gyldig {networkHrp}-adresse, hvortil royalties sendes",
+                "invalidRoyaltyValue": "Ugyldig værdi. Skal være en numerisk decimal repræsentant for den ønskede procentdel, dvs. 0,05",
+                "invalidRoyaltyValueSum": "Ugyldig værdi. Summen af alle royalties skal være mindre end eller lig med 1'",
+                "attributesMustBeJSON": "Attributter skal være en gyldig JSON",
+                "attributesMustBeArrayOfObjects": "Attributter skal være en objektrække",
+                "attributesInvalidKeys": "Ugyldig nøgle. Attributter skal inkludere nøglerne \"trait_type\" samt \"værdi\"",
+                "attributesInvalidValues": "Ugyldig værdi. \"trait_type\" skal være en ikke-tom streng og \"værdi\" skal være en ikke-tom streng eller et tal"
+            }
         },
         "faucetRequest": {
             "title": "Faucet-anmodning",
@@ -1026,6 +1069,10 @@
             "title": "Tilføj forslag",
             "body": "Angiv nedenstående oplysninger for at tilføje et forslag.",
             "addToAllAccounts": "Add the proposal to all accounts"
+        },
+        "editProposal": {
+            "title": "Redigér forslag",
+            "body": "Angiv den nye URL til noden indeholdende dette forslag."
         },
         "voteForProposal": {
             "title": "Vote for proposal",
@@ -1188,7 +1235,7 @@
         "readDocumentation": "Læs dokumentationen",
         "visitFaq": "Besøg FAQ",
         "viewStatus": "Vis Status",
-        "viewStorageDeposit": "View storage deposit",
+        "viewBalanceBreakdown": "View balance breakdown",
         "showHiddenAccounts": "Vis skjulte wallets",
         "confirm": "Bekræft",
         "hideNetworkStatistics": "Skjul netværksstatistik",
@@ -1240,6 +1287,7 @@
         "vote": "Vote",
         "addProposal": "Add proposal",
         "removeProposal": "Remove proposal",
+        "changeNode": "Skift node",
         "stopVoting": "Stop voting",
         "revote": "Stem igen"
     },
@@ -1438,6 +1486,8 @@
         "surplus": "Overskud",
         "storageDeposit": "Storage deposit",
         "giftedStorageDeposit": "Gifted storage deposit",
+        "storageDepositPerNft": "Lagringsdeponering pr. NFT",
+        "totalStorageDeposit": "Lagerdeponering i alt",
         "expirationTime": "Expiration time",
         "timelockDate": "Tidslås",
         "claimedTime": "Claimed at",
@@ -1492,6 +1542,7 @@
         "issuer": "Issuer",
         "issuerAddress": "Issuer Address",
         "issuerName": "Issuer Name",
+        "quantity": "Antal",
         "collection": "Collection",
         "collectionId": "Collection ID",
         "collectionName": "Collection Name",
@@ -1774,6 +1825,7 @@
             "wrongAddressPrefix": "Adresser starter med præfikset {prefix}.",
             "wrongAddressFormat": "Adressen er ikke formateret korrekt.",
             "invalidAddress": "Adressen er ikke gyldig.",
+            "invalidAssetId": "The asset id is not valid.",
             "unknownAsset": "Aktivet kendes ikke af denne konto.",
             "insufficientFunds": "Denne wallet har ikke tilstrækkelige midler.",
             "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
@@ -1919,7 +1971,7 @@
         "governance": {
             "unableToAddProposal": {
                 "short": "Forslag kan ikke tilføjes",
-                "long": "En fejl opstod under forsøget på at tilføje et forslaget {proposalId}"
+                "long": "Forslaget {proposalId} ikke fundet på den angivne node"
             }
         }
     },
@@ -2010,7 +2062,8 @@
             "issuerName": "Optional parameter: The name of the creator",
             "description": "Optional parameter: A description of the NFT",
             "attributes": "Optional parameter: An array of traits and values that define attributes of the NFT",
-            "uri": "To create a URI using custom media, first upload your file to IPFS via a storage service (e.g. https://nft.storage/)"
+            "uri": "To create a URI using custom media, first upload your file to IPFS via a storage service (e.g. https://nft.storage/)",
+            "quantity": "Valgfri parameter: Mængden af kopier mintet med disse metadata."
         },
         "governance": {
             "removeProposalWarning": "Før dette forslag fjernes, skal man ophøre med at stemme på det."

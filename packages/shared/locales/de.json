@@ -585,6 +585,7 @@
             "proposals": {
                 "title": "Abstimmungen",
                 "voted": "Abgestimmt",
+                "successEdit": "Vorschlag erfolgreich aktualisiert",
                 "successAdd": "Vorschlag erfolgreich hinzugefügt",
                 "successAddAll": "Abstimmung erfolgreich zu allen Konten hinzugefügt",
                 "successRemove": "Abstimmung erfolgreich entfernt",
@@ -626,33 +627,60 @@
             "step_4": "Drücke beide Tasten, um die Transaktionsblindsignierung zu aktivieren. Das Gerät wird aktiviert. Du bist fertig."
         },
         "balanceBreakdown": {
-            "title": "Übersicht Storage Deposit",
-            "totalStorageDeposit": "Gesamte Storage Deposit",
+            "title": "Saldenaufteilung anzeigen",
+            "available": {
+                "title": "Verfügbar",
+                "subtitle": "Für Ausgaben verfügbare Mittel"
+            },
+            "pending": {
+                "title": "Ausstehend",
+                "subtitle": "Vorübergehend gesperrte Transaktionen"
+            },
+            "locked": {
+                "title": "Gesperrt",
+                "subtitle": "Vorübergehend gesperrt für Governance"
+            },
+            "storageDeposit": {
+                "title": "Storage Deposit",
+                "subtitle": "Diese Mittel sind für die Speicherung nativer Vermögenswerte reserviert."
+            },
+            "totalBalance": {
+                "title": "Gesamtguthaben",
+                "subtitle": ""
+            },
             "basicOutputs": {
                 "title": "Native Token",
-                "subtitle": "Reserviert für Native Token Speicher"
+                "subtitle": "Reserviert für das Speichern nativer Token"
             },
             "nftOutputs": {
                 "title": "NFTs",
-                "subtitle": "Reserviert für NFT-Speicher"
+                "subtitle": "Reserviert für das Speichern von NFT"
             },
             "aliasOutputs": {
-                "title": "Aliase",
-                "subtitle": "Für Alias-Speicher reserviert"
+                "title": "Aliasnamen",
+                "subtitle": "Reserviert für das Speichern von Aliasnamen"
             },
             "foundryOutputs": {
-                "title": "Foundries-Fabriken",
-                "subtitle": "Reserviert für Native Token Foundry Speicher"
+                "title": "Foundries",
+                "subtitle": "Reserviert für das Speichern nativer Token"
             },
-            "pendingTransactions": {
-                "title": "Transaktionen",
+            "unclaimed": {
+                "title": "Unbeanspruchte Transaktion",
                 "subtitle": "Vorübergehend gesperrt in nicht abgeholten Transaktionen"
             },
-            "votingPowerOutput": {
+            "timelock": {
+                "title": "Sperrzeit",
+                "subtitle": "Vorübergehend gesperrt in zeitgesperrten Transaktionen"
+            },
+            "storageDepositReturn": {
+                "title": "SDRUC",
+                "subtitle": "Vorübergehend gesperrt in Storage Deposit Return"
+            },
+            "governance": {
                 "title": "Governance",
                 "subtitle": "Reserviert für Stimmrecht"
             },
-            "minimizeStorageDepositButton": "Speichereinlage minimieren"
+            "minimizeStorageDepositButton": "Storage Deposit reduzieren"
         },
         "minimizeStorageDeposit": {
             "title": "Speichereinlage minimieren",
@@ -1010,7 +1038,22 @@
             "description": "Du musst einen Alias-Output besitzen, um native Token zu prägen. Um fortzufahren, erstellen bitte zuerst einen Alias"
         },
         "mintNftForm": {
-            "title": "Einfaches NFT minten"
+            "title": "Einfaches NFT minten",
+            "errors": {
+                "invalidMimetype": "Ungültiger MimeTyp, überprüfen Sie, ob der Dateityp unterstützt wird",
+                "quantityTooSmall": "Menge muss größer als Null sein",
+                "quantityTooLarge": "Menge muss kleiner als 64 sein",
+                "emptyName": "Name ist ein Pflichtfeld",
+                "invalidURI": "Ungültige URL, bitte gib eine gültige URL ein",
+                "royaltiesMustBeJSON": "Lizenzgebühren müssen ein gültiges JSON sein",
+                "invalidAddress": "Ungültige Adresse, muss eine gültige {networkHrp} Adresse sein, an die Lizenzgebühren gesendet werden",
+                "invalidRoyaltyValue": "Ungültiger Wert, muss ein numerischer Dezimaldarsteller des benötigten Prozentsatzes sein. 0,05",
+                "invalidRoyaltyValueSum": "Ungültiger Wert, die Summe aller Lizenzgebühren muss kleiner oder gleich 1' sein",
+                "attributesMustBeJSON": "Attribute müssen ein gültiges JSON sein",
+                "attributesMustBeArrayOfObjects": "Attribute müssen eine Reihe von Objekten sein",
+                "attributesInvalidKeys": "Ungültiger Schlüssel, Attribute müssen die Schlüssel \"trait_type\" und \"value\" haben",
+                "attributesInvalidValues": "Ungültiger Wert, \"trait_type\" muss ein nicht leerer String sein und \"value\" muss ein nicht leerer String oder eine Zahl sein"
+            }
         },
         "faucetRequest": {
             "title": "Faucet-Anfrage",
@@ -1026,6 +1069,10 @@
             "title": "Vorschlag hinzufügen",
             "body": "Bitte gib die unten aufgeführten Informationen an, um einen Vorschlag hinzuzufügen.",
             "addToAllAccounts": "Abstimmung zu allen Konten hinzufügen"
+        },
+        "editProposal": {
+            "title": "Vorschlag bearbeiten",
+            "body": "Bitte gebe die neue URL für die Node an, die diesen Vorschlag enthält."
         },
         "voteForProposal": {
             "title": "Für Abstimmung stimmen",
@@ -1188,7 +1235,7 @@
         "readDocumentation": "Lese die Dokumentation",
         "visitFaq": "Gehe zu den FAQs",
         "viewStatus": "Status ansehen",
-        "viewStorageDeposit": "Storage Deposit anzeigen",
+        "viewBalanceBreakdown": "Saldenaufteilung anzeigen",
         "showHiddenAccounts": "Ausgeblendete Wallets anzeigen",
         "confirm": "Bestätigen",
         "hideNetworkStatistics": "Netzwerk Statistiken verbergen",
@@ -1240,6 +1287,7 @@
         "vote": "Abstimmen",
         "addProposal": "Vorschlag hinzufügen",
         "removeProposal": "Abstimmung entfernen",
+        "changeNode": "Node wechseln",
         "stopVoting": "Abstimmen beenden",
         "revote": "Wiederabstimmen"
     },
@@ -1438,6 +1486,8 @@
         "surplus": "Überschuss",
         "storageDeposit": "Storage Deposit",
         "giftedStorageDeposit": "Gespendete Storage Deposit",
+        "storageDepositPerNft": "Storage Deposit pro NFT",
+        "totalStorageDeposit": "Gesamter Storage Deposit",
         "expirationTime": "Ablaufzeit",
         "timelockDate": "Zeitsperre",
         "claimedTime": "Beansprucht am",
@@ -1492,6 +1542,7 @@
         "issuer": "Aussteller",
         "issuerAddress": "Ausstelleradresse",
         "issuerName": "Name des Ausstellers",
+        "quantity": "Menge",
         "collection": "Kollektion",
         "collectionId": "Kollektions-ID",
         "collectionName": "Kollektions-Name",
@@ -1774,6 +1825,7 @@
             "wrongAddressPrefix": "Adressen beginnen mit dem Präfix {prefix}.",
             "wrongAddressFormat": "Die Adresse ist nicht korrekt formatiert.",
             "invalidAddress": "Die Adresse ist ungültig.",
+            "invalidAssetId": "The asset id is not valid.",
             "unknownAsset": "Das Asset ist diesem Konto nicht bekannt.",
             "insufficientFunds": "Diese Wallet hat unzureichendes Guthaben.",
             "insufficientFundsStorageDeposit": "Unzureichendes Guthaben, um die Storage Deposit abzudecken",
@@ -1919,7 +1971,7 @@
         "governance": {
             "unableToAddProposal": {
                 "short": "Vorschlag kann nicht hinzugefügt werden",
-                "long": "Ein Fehler trat auf beim Versuch, den Vorschlag {proposalId} hinzuzufügen"
+                "long": "Vorschlag {proposalId} konnte nicht auf der angegebenen Node gefunden werden"
             }
         }
     },
@@ -2010,7 +2062,8 @@
             "issuerName": "Optionaler Parameter: Der Name des Erstellers",
             "description": "Optionaler Parameter: Eine Beschreibung des NFT",
             "attributes": "Optionaler Parameter: Eine Reihe von Merkmalen und Werten, die Attribute der NFT definieren",
-            "uri": "Um eine URI mittels benutzerdefinierter Medien zu erstellen, laden Sie zuerst Ihre Datei über einen Speicherdienst auf IPFS hoch (z.B. https://nft.storage/)"
+            "uri": "Um eine URI mittels benutzerdefinierter Medien zu erstellen, laden Sie zuerst Ihre Datei über einen Speicherdienst auf IPFS hoch (z.B. https://nft.storage/)",
+            "quantity": "Optionaler Parameter: Die Anzahl der mit diesen Metadaten geprägten Kopien."
         },
         "governance": {
             "removeProposalWarning": "Du musst das Abstimmen für diese Abstimmung stoppen, bevor du sie entfernen kannst."

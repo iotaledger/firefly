@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { OnboardingLayout } from '../../../../../components'
-    import { Button, Icon, Text, TextType } from 'shared/components'
+    import { OnboardingLayout } from '@components'
+    import { Button, Icon, Text, TextType } from '@ui'
     import { localize } from '@core/i18n'
     import { BASE_TOKEN, NetworkProtocol } from '@core/network'
-    import { shimmerClaimingRouter } from '../../../../../lib/routers'
+    import { shimmerClaimingRouter } from '@/routers'
     import { formatTokenAmountBestMatch } from '@core/wallet'
     import { onboardingProfile, sumTotalClaimedRewards } from '@contexts/onboarding'
 
@@ -25,11 +25,11 @@
             <Text type={TextType.h3} classes="mb-5 text-center">
                 {localize('views.onboarding.shimmerClaiming.success.title')}
             </Text>
-            <Text type={TextType.p} secondary classes="mb-5 text-center">
+            <Text type={TextType.p} secondary fontSize="15" classes="mb-5 text-center">
                 {localize('views.onboarding.shimmerClaiming.success.body')}
             </Text>
             <div class="flex flex-col justify-center items-center">
-                <Text type={TextType.p} highlighted
+                <Text type={TextType.p} fontSize="15" highlighted
                     >{localize('views.onboarding.shimmerClaiming.success.totalRewards')}</Text
                 >
                 <Text type={TextType.h3}

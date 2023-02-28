@@ -1,14 +1,16 @@
 <script lang="ts">
+    import { AccountSwitcherMenuItem } from '@components'
+    import { HR, Icon, Text, TextType } from '@ui'
+
     import { sumBalanceForAccounts } from '@core/account'
     import { localize } from '@core/i18n'
     import { BASE_TOKEN } from '@core/network'
     import { activeProfile, visibleActiveAccounts } from '@core/profile'
     import { formatTokenAmountBestMatch } from '@core/wallet'
+
+    import { closeDrawer, DrawerId, openDrawer } from '@/auxiliary/drawer'
     import features from '@features/features'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
-    import { HR, Icon, Text, TextType } from '@ui'
-    import { AccountSwitcherMenuItem } from '../../components'
-    import { closeDrawer, DrawerId, openDrawer } from '../../lib/auxiliary/drawer'
 
     $: totalBalance = sumBalanceForAccounts($visibleActiveAccounts)
 

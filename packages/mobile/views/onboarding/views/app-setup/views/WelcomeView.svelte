@@ -1,20 +1,22 @@
 <script lang="ts">
-    import { hasCompletedAppSetup } from '@core/app'
-    import { localize } from '@core/i18n'
-    import { formatProtocolName, NetworkProtocol, NetworkType } from '@core/network'
-    import { appSetupRouter } from '../../../../../lib/routers'
-    import { Button, Checkbox, Text, TextType } from 'shared/components'
+    import { onMount } from 'svelte'
+    import { Button, Checkbox, Link, Text, TextType } from '@ui'
     import {
         initialiseOnboardingProfile,
         onboardingProfile,
         shouldBeDeveloperProfile,
         updateOnboardingProfile,
-    } from 'shared/lib/contexts/onboarding'
-    import { onMount } from 'svelte'
-    import { OnboardingLayout } from '../../../../../components'
+    } from '@contexts/onboarding'
+    import { OnboardingLayout } from '@components'
+    import { LegalDrawer } from '../drawers'
+    import { appSetupRouter } from '@/routers'
+    import { hasCompletedAppSetup } from '@core/app'
+    import { localize } from '@core/i18n'
+    import { formatProtocolName, NetworkProtocol, NetworkType } from '@core/network'
     import features from '@features/features'
 
     let checked = false
+    let showLegal = false
 
     function onContinueClick(): void {
         hasCompletedAppSetup.set(true)
@@ -51,9 +53,14 @@
             <Checkbox bind:checked />
             <Text type={TextType.p} secondary>
                 I agree to the
-                <span class="text-blue-500"> Terms of Service </span>
+                <Link onClick={() => (showLegal = true)}>
+                    {localize('popups.legalUpdate.tosTitle')}
+                </Link>
             </Text>
         </div>
         <Button onClick={onContinueClick} classes="w-full">{localize('actions.continue')}</Button>
     </div>
 </OnboardingLayout>
+{#if showLegal}
+    <LegalDrawer onClose={() => (showLegal = false)} />
+{/if}

@@ -1,9 +1,11 @@
 <script lang="ts">
+    import { Icon } from '@ui'
+
     import type { Filter } from '@core/utils/types'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
-    import { Icon } from 'shared/components'
-    import { DrawerId, openDrawer } from '../../lib/auxiliary/drawer'
-    import { FilterType } from '../../lib/contexts/wallet'
+
+    import { DrawerId, openDrawer } from '@/auxiliary/drawer'
+    import { FilterType } from '@/contexts/wallet'
 
     export let filterStoreValue: Filter
     export let filterType: FilterType

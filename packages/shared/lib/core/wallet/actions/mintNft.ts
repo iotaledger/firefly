@@ -13,7 +13,7 @@ import { preprocessTransaction } from '../utils'
 import { generateSingleNftActivity } from '../utils/generateActivity/generateSingleNftActivity'
 import { handleError } from '@core/error/handlers'
 
-export async function mintNft(metadata: IIrc27Metadata, amount: number): Promise<void> {
+export async function mintNft(metadata: IIrc27Metadata, quantity: number): Promise<void> {
     try {
         const account = get(selectedAccount)
         updateSelectedAccount({ isTransferring: true })
@@ -23,7 +23,7 @@ export async function mintNft(metadata: IIrc27Metadata, amount: number): Promise
             issuer: account.depositAddress,
             immutableMetadata: Converter.utf8ToHex(JSON.stringify(metadata), true),
         }
-        const allNfts: NftOptions[] = Array(amount).fill(nftOptions)
+        const allNfts: NftOptions[] = Array(quantity).fill(nftOptions)
 
         // Mint NFT
         const mintNftTransaction = await account.mintNfts(allNfts, DEFAULT_TRANSACTION_OPTIONS)

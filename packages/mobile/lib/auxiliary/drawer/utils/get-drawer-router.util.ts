@@ -1,6 +1,8 @@
-import { IRouter } from '@core/router/interfaces'
 import { Writable } from 'svelte/store'
-import { profileRouter, sendRouter } from '../../../routers'
+
+import { IRouter } from '@core/router/interfaces'
+
+import { profileRouter, sendRouter } from '@/routers'
 import { DrawerId } from '../enums'
 
 export function getDrawerRouter(drawerId: DrawerId): Writable<IRouter> | undefined {
