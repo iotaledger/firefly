@@ -5,7 +5,7 @@
     import { localize } from '@core/i18n'
     import { getNftByIdFromAllAccountNfts, selectedAccountNfts, selectedNftId } from '@core/nfts'
     import { CollectiblesRoute, collectiblesRouter, DashboardRoute, dashboardRouter } from '@core/router'
-    import { NftActivity } from '@core/wallet'
+    import { ActivityAsyncStatus, NftActivity } from '@core/wallet'
     import {
         ActivityAsyncStatusPill,
         FontWeight,
@@ -55,7 +55,7 @@
                     inclusionState={activity?.inclusionState}
                 />
             {/if}
-            {#if activity?.asyncData?.asyncStatus}
+            {#if activity?.asyncData?.asyncStatus && activity?.asyncData?.asyncStatus !== ActivityAsyncStatus.Timelocked}
                 <ActivityAsyncStatusPill asyncStatus={activity?.asyncData?.asyncStatus} />
             {/if}
             {#if isTimelocked}

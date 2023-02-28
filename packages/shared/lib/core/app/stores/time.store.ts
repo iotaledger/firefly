@@ -1,6 +1,6 @@
-import { readable } from 'svelte/store'
+import { readable, Readable } from 'svelte/store'
 
-export const time = readable(null, (set) => {
+export const time: Readable<Date> = readable(null, (set) => {
     set(new Date())
 
     const interval = setInterval(() => {
