@@ -14,7 +14,7 @@
     import { sendRouter } from '@/routers'
 
     let recipient: IAddressSubject | IAccountSubject
-    let recipientValidationError: string
+    let recipientValidationError: string = localize('error.send.recipientRequired')
     let recipientInputElement: HTMLInputElement
 
     let recipientQuickListOptions: IOption[] = []
@@ -83,7 +83,7 @@
             </button>
         {/each}
     </div>
-    <Button disabled={!!recipientValidationError} outline classes="w-full" onClick={onContinueClick}>
+    <Button disabled={!!recipientValidationError} classes="w-full" onClick={onContinueClick}>
         {recipientValidationError ?? localize('actions.continue')}
     </Button>
 </div>
