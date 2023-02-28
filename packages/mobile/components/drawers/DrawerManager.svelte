@@ -9,6 +9,7 @@
         CustomizeAccountDrawer,
         DeleteAccountDrawer,
         EnterPasswordDrawer,
+        FilterDrawer,
         ReceiveDrawer,
         SelectedActivityDrawer,
         SelectedTokenDrawer,
@@ -28,6 +29,7 @@
         [DrawerId.CustomizeAccount]: CustomizeAccountDrawer,
         [DrawerId.BalanceBreakdown]: BalanceBreakdownDrawer,
         [DrawerId.DeleteAccount]: DeleteAccountDrawer,
+        [DrawerId.Filter]: FilterDrawer,
     }
 </script>
 
