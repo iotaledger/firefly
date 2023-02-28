@@ -1,20 +1,30 @@
 <script lang="ts">
-    import { isStrongholdUnlocked } from '@core/profile-manager'
     import { Activity } from '@core/wallet'
     import { ActivityList } from '@components'
-    import { ActivityAction } from '@/contexts/dashboard'
-    import { activityRouter } from '@/routers'
+    import { DrawerId, openDrawer } from '@/auxiliary/drawer'
+    import { handleClaimActivity, handleRejectActivity } from '@/contexts/wallet'
 
     function onTileClick(activity: Activity): void {
-        $activityRouter?.next({ activity })
-    }
-    function onReject(activity: Activity): void {
-        $activityRouter?.next({ action: ActivityAction.FastReject, activity })
+        // TODO: when token drawer is refactor, implement this
+        // if (activity.type === ActivityType.Basic) {
+        //     const asset = getAssetById(activity.assetId)
+        //     // TODO: open token drawer to verify/skip token
+        // } else {
+        //     openDrawer(DrawerId.SelectedActivity, {
+        //         activity,
+        //     })
+        // }
+        openDrawer(DrawerId.SelectedActivity, {
+            activityId: activity.id,
+        })
     }
 
-    async function onClaim(activity: Activity): Promise<void> {
-        const isUnlocked = await isStrongholdUnlocked()
-        $activityRouter?.next({ action: ActivityAction.FastClaim, activity, isUnlocked })
+    function onReject(activityId: string): void {
+        handleRejectActivity(activityId)
+    }
+
+    function onClaim(activity: Activity): void {
+        void handleClaimActivity(activity)
     }
 </script>
 

@@ -1,34 +1,38 @@
 <script lang="ts">
-    import { localize } from '@core/i18n'
-    import { Activity, ActivityAsyncStatus, ActivityDirection, ActivityType } from '@core/wallet'
-    import features from '@features/features'
     import {
-        Button,
-        BasicActivityDetails,
+        ActivityInformation,
         AliasActivityDetails,
+        BasicActivityDetails,
+        Button,
         FoundryActivityDetails,
         NftActivityDetails,
-        ActivityInformation,
     } from '@ui'
 
-    export let activity: Activity
-    export let onClaim: () => unknown = () => {}
-    export let onReject: () => unknown = () => {}
+    import { localize } from '@core/i18n'
+    import { ActivityAsyncStatus, ActivityDirection, ActivityType, selectedAccountActivities } from '@core/wallet'
 
+    import { handleClaimActivity, handleRejectActivity } from '@/contexts/wallet'
+    import features from '@features/features'
+
+    export let activityId: string
+
+    $: activity = $selectedAccountActivities.find((_activity) => _activity.id === activityId)
+    $: isTimelocked = activity.asyncData?.asyncStatus === ActivityAsyncStatus.Timelocked
     $: isActivityIncomingAndUnclaimed =
-        activity &&
         activity.asyncData &&
-        (activity?.direction === ActivityDirection.Incoming ||
-            activity?.direction === ActivityDirection.SelfTransaction) &&
+        (activity.direction === ActivityDirection.Incoming ||
+            activity.direction === ActivityDirection.SelfTransaction) &&
         activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
 
-    $: shouldShowActions =
-        isActivityIncomingAndUnclaimed &&
-        activity.asyncData?.asyncStatus !== ActivityAsyncStatus.Timelocked &&
-        features.dashboard.activity.actions.enabled
+    function onReject(): void {
+        void handleRejectActivity(activity.id)
+    }
+    function onClaim(): void {
+        void handleClaimActivity(activity)
+    }
 </script>
 
-<activity-details class="flex flex-col justify-between h-full pt-10">
+<activity-details class="flex flex-col justify-between h-full space-y-10">
     <activity-content class="flex flex-col space-y-8">
         {#if activity?.type === ActivityType.Basic}
             <BasicActivityDetails {activity} />
@@ -41,7 +45,7 @@
         {/if}
         <ActivityInformation {activity} />
     </activity-content>
-    {#if shouldShowActions}
+    {#if !isTimelocked && isActivityIncomingAndUnclaimed && features.dashboard.activity.actions.enabled}
         <activity-actions class="space-y-4">
             <Button
                 classes="w-full"

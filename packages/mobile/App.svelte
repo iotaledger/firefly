@@ -14,7 +14,7 @@
         shouldBeDarkMode,
     } from '@core/app'
     import { onboardingProfile } from '@contexts/onboarding'
-    import { ToastContainer } from '@components'
+    import { DrawerManager, ToastContainer } from '@components'
     import { isKeyboardOpen, keyboardHeight } from '@/auxiliary/keyboard'
     import {
         appRoute,
@@ -105,7 +105,7 @@
         <DashboardView />
     {/key}
 {/if}
-
+<DrawerManager />
 <ToastContainer />
 
 {#if $isKeyboardOpen}
