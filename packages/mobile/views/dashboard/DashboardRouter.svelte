@@ -1,6 +1,7 @@
 <script lang="ts">
-    import features from '@features/features'
-    import { selectedFilter } from '../../lib/contexts/dashboard'
+    import { AccountActionsDrawer, FilterDrawer, ProfileDrawer, ReceiveDrawer, SendDrawer } from './drawers'
+
+    import { selectedFilter } from '@/contexts/dashboard'
     import {
         accountActionsRouter,
         DashboardRoute,
@@ -11,8 +12,8 @@
         resetRouterWithDrawerDelay,
         sendRouter,
         settingsRouter,
-    } from '../../lib/routers'
-    import { AccountActionsDrawer, ProfileDrawer, ReceiveDrawer, SendDrawer, FilterDrawer } from './drawers'
+    } from '@/routers'
+    import features from '@features/features'
 
     $: $selectedFilter && $dashboardRouter.goTo(DashboardRoute.Filter)
 

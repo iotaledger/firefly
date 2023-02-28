@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { Filter } from '@core/utils/types'
-    import { FilterItem } from '../../../../../components'
+    import { FilterItem } from '@components'
 
     export let filter: Filter
 </script>

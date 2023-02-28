@@ -11,10 +11,10 @@
     import { formatProtocolName, getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
     import { ProfileType } from '@core/profile'
     import { destroyProfileManager } from '@core/profile-manager'
-    import { profileSetupRouter } from '../../../../../lib/routers'
-    import { OnboardingButton } from 'shared/components'
+    import { profileSetupRouter } from '@/routers'
+    import { OnboardingButton } from '@ui'
     import { onMount } from 'svelte'
-    import { OnboardingLayout } from '../../../../../components'
+    import { OnboardingLayout } from '@components'
     import features from '@features/features'
 
     const title = localize('views.onboarding.profileSetup.setup.title', {

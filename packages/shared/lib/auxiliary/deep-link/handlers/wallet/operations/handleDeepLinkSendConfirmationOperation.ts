@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
 
 import { networkHrp } from '@core/network'
-import { isStringTrue, isValidBech32AddressAndPrefix, getByteLengthOfString } from '@core/utils'
+import { isStringTrue, isValidBech32AddressAndPrefix, getByteLengthOfString, validateAssetId } from '@core/utils'
 import {
     getAssetById,
     NewTransactionDetails,
@@ -60,6 +60,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): NewTrans
     const recipient: Subject = { type: 'address', address }
 
     const assetId = searchParams.get(SendOperationParameter.AssetId)
+    assetId && validateAssetId(assetId)
     const baseAsset = get(selectedAccountAssets).baseCoin
     const asset = assetId ? getAssetById(assetId) : baseAsset
     if (!asset) {
@@ -90,7 +91,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): NewTrans
 
     return {
         type: NewTransactionType.TokenTransfer,
-        ...(assetId && { assetId }),
+        assetId: asset.id,
         ...(recipient && { recipient }),
         ...(rawAmount && { rawAmount }),
         ...(unit && { unit }),

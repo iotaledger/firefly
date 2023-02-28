@@ -2,7 +2,7 @@
     import { MarketCurrency } from '@core/market'
     import { activeProfile, updateActiveProfileSettings } from '@core/profile'
     import type { IDropdownChoice } from '@core/utils'
-    import { Radio } from 'shared/components'
+    import { Radio } from '@ui'
 
     let currencyList: IDropdownChoice[]
     $: currencyList = Object.values(MarketCurrency)

@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { truncateString } from '@core/utils'
     import { formatTokenAmountBestMatch, IAsset } from '@core/wallet'
-    import { AssetIcon, Button, ButtonSize, FontWeight, Text, TextType } from 'shared/components'
+    import { AssetIcon, Button, ButtonSize, FontWeight, Text, TextType } from '@ui'
 
     export let asset: IAsset
     export let onMaxClick: () => unknown

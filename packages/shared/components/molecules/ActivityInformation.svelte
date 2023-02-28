@@ -18,7 +18,7 @@
 
     export let activity: Activity
     export let networkAddress: string = null
-    export let activeTab = Tab.Transaction
+    export let activeTab: Tab = Tab.Transaction
 
     let hasMetadata = false
     $: {

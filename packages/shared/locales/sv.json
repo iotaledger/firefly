@@ -626,33 +626,60 @@
             "step_4": "Tryck på båda knapparna för att aktivera blind signering. Enheten visar Aktiverad. Du är klar."
         },
         "balanceBreakdown": {
-            "title": "Lagringsdeposition breakdown",
-            "totalStorageDeposit": "Totalt lagringsdeposition",
+            "title": "Balance breakdown",
+            "available": {
+                "title": "Available",
+                "subtitle": "Funds fully available for spending"
+            },
+            "pending": {
+                "title": "Pending",
+                "subtitle": "Temporarily locked in transactions"
+            },
+            "locked": {
+                "title": "Locked",
+                "subtitle": "Temporarily locked for governance"
+            },
+            "storageDeposit": {
+                "title": "Storage deposit",
+                "subtitle": "These funds are reserved for storing native assets."
+            },
+            "totalBalance": {
+                "title": "Total balance",
+                "subtitle": ""
+            },
             "basicOutputs": {
-                "title": "Inhemska Tokens",
-                "subtitle": "Reserverat för lagring av Inhemska tokens"
+                "title": "Native Tokens",
+                "subtitle": "Reserved for Native Token storage"
             },
             "nftOutputs": {
-                "title": "NFT:er",
-                "subtitle": "Reserverat för NFT-lagring"
+                "title": "NFTs",
+                "subtitle": "Reserved for NFT storage"
             },
             "aliasOutputs": {
-                "title": "Alias",
-                "subtitle": "Reserverat för Alias-lagring"
+                "title": "Aliases",
+                "subtitle": "Reserved for Alias storage"
             },
             "foundryOutputs": {
                 "title": "Foundries",
                 "subtitle": "Reserved for Native Token Foundry storage"
             },
-            "pendingTransactions": {
-                "title": "Transaktioner",
-                "subtitle": "Tillfälligt låst i ej hämtade transaktioner"
+            "unclaimed": {
+                "title": "Unclaimed transaction",
+                "subtitle": "Temporarily locked in unclaimed transactions"
             },
-            "votingPowerOutput": {
+            "timelock": {
+                "title": "Time lock",
+                "subtitle": "Temporarily locked in timelocked transactions"
+            },
+            "storageDepositReturn": {
+                "title": "SDRUC",
+                "subtitle": "Temporarily locked in Storage Deposit Return"
+            },
+            "governance": {
                 "title": "Governance",
                 "subtitle": "Reserved for voting power"
             },
-            "minimizeStorageDepositButton": "Minimera lagringsdeposition"
+            "minimizeStorageDepositButton": "Minimize storage deposit"
         },
         "minimizeStorageDeposit": {
             "title": "Minimera lagringsdeposition",
@@ -1010,7 +1037,22 @@
             "description": "Du måste äga en alias utdata för att mynta inhemska tokens. För att fortsätta, vänligen skapa ett alias först"
         },
         "mintNftForm": {
-            "title": "Minta enkel NFT"
+            "title": "Minta enkel NFT",
+            "errors": {
+                "invalidMimetype": "Invalid MimeType, check if the file type is supported",
+                "quantityTooSmall": "Quantity needs to be greater than 0",
+                "quantityTooLarge": "Quantity needs to be smaller than 64",
+                "emptyName": "Name is a required field",
+                "invalidURI": "Invalid URI, please provide a valid URI",
+                "royaltiesMustBeJSON": "Royalties must be a valid JSON",
+                "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
+                "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",
+                "invalidRoyaltyValueSum": "Invalid value, the sum of all royalties must be less than or equal to 1'",
+                "attributesMustBeJSON": "Attributes must be a valid JSON",
+                "attributesMustBeArrayOfObjects": "Attributes must be an array of objects",
+                "attributesInvalidKeys": "Invalid key, attributes must have the keys \"trait_type\" and \"value\"",
+                "attributesInvalidValues": "Invalid value, \"trait_type\" must be a non empty string and \"value\" must be a non empty string or a number"
+            }
         },
         "faucetRequest": {
             "title": "Faucet-begäran",
@@ -1188,7 +1230,7 @@
         "readDocumentation": "Läs dokumentationen",
         "visitFaq": "Besök FAQ",
         "viewStatus": "Visa status",
-        "viewStorageDeposit": "Visa lagringsdeposition",
+        "viewBalanceBreakdown": "View balance breakdown",
         "showHiddenAccounts": "Visa dolda plånböcker",
         "confirm": "Bekräfta",
         "hideNetworkStatistics": "Dölj nätverksstatistik",
@@ -1438,6 +1480,8 @@
         "surplus": "Överskott",
         "storageDeposit": "Lagringsdeposition",
         "giftedStorageDeposit": "Skänkt lagringsdeposition",
+        "storageDepositPerNft": "Storage deposit per NFT",
+        "totalStorageDeposit": "Total storage deposit",
         "expirationTime": "Utgångstid",
         "timelockDate": "Tidlås",
         "claimedTime": "Gjorde anspråk vid",
@@ -1492,6 +1536,7 @@
         "issuer": "Utfärdare",
         "issuerAddress": "Utfärdarens adress",
         "issuerName": "Utfärdarens namn",
+        "quantity": "Quantity",
         "collection": "Samling",
         "collectionId": "Samlings-ID",
         "collectionName": "Samlingsnamn",
@@ -2010,7 +2055,8 @@
             "issuerName": "Valfri parameter: Namnet på skaparen",
             "description": "Valfri parameter: En beskrivning av NFT",
             "attributes": "Valfri parameter: En rad egenskaper och värden som definierar attribut för NFT",
-            "uri": "För att skapa en URI med anpassade medier, ladda först upp din fil till IPFS via en lagringstjänst (t.ex. https://nft.storage/)"
+            "uri": "För att skapa en URI med anpassade medier, ladda först upp din fil till IPFS via en lagringstjänst (t.ex. https://nft.storage/)",
+            "quantity": "Optional parameter: The quantity of copies minted with this metadata."
         },
         "governance": {
             "removeProposalWarning": "You must stop voting for this proposal before removing it."

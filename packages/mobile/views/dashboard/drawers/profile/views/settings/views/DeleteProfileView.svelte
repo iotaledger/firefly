@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { isSoftwareProfile } from '@core/profile'
     import { setStrongholdPassword } from '@core/profile-manager'
-    import { Button, ButtonSize, ButtonVariant, PasswordInput, Text, TextType } from 'shared/components'
+    import { Button, ButtonSize, ButtonVariant, PasswordInput, Text, TextType } from '@ui'
 
     let isBusy = false
     let error = ''

@@ -1,8 +1,10 @@
 <script lang="ts">
+    import { Button, HTMLButtonType, PasswordInput, Text, TextType } from '@ui'
+
     import { localize } from '@core/i18n'
     import { unlockStronghold } from '@core/profile'
-    import { Button, HTMLButtonType, PasswordInput, Text, TextType } from '@ui'
-    import { closeDrawer, DrawerId } from '../../lib/auxiliary/drawer'
+
+    import { closeDrawer, DrawerId } from '@/auxiliary/drawer'
 
     export let busyMessage: string = ''
 

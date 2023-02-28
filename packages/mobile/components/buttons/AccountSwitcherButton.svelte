@@ -1,9 +1,10 @@
 <script lang="ts">
-    import { Icon as IconEnum } from '@auxiliary/icon'
+    import { AccountLabel, Icon } from '@ui'
+
     import { selectedAccount } from '@core/account'
-    import { Icon } from 'shared/components'
-    import { AccountLabel } from 'shared/components/atoms/'
-    import { DrawerId, drawersStore, openDrawer } from '../../lib/auxiliary/drawer'
+
+    import { Icon as IconEnum } from '@auxiliary/icon'
+    import { DrawerId, drawersStore, openDrawer } from '@/auxiliary/drawer'
 
     $: isDrawerOpen = $drawersStore.find((drawer) => drawer.id === DrawerId.AccountSwitcher)
 </script>

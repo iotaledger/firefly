@@ -1,5 +1,4 @@
 export interface IAuth {
     jwt?: string
-    username?: string
-    password?: string
+    basicAuthNamePwd?: [string, string]
 }

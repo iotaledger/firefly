@@ -1,6 +1,6 @@
 import { DISCORD_URL, DOCUMENTATION_URL, FAQ_URL, ISSUE_REPORT_URL } from '@contexts/settings'
 import { SETTINGS_ICON_SVG } from '@lib/auxiliary/icon'
-import features from '../../../../features/features'
+import features from '@features/features'
 import {
     AppLockView,
     ChangePasswordView,
@@ -15,8 +15,8 @@ import {
     NetworkConfigurationRouter,
     ThemeView,
     WalletFinderView,
-} from '../../../../views/dashboard/drawers/profile/views/settings'
-import { SettingsRoute } from '../../../routers'
+} from '@views/dashboard/drawers/profile/views/settings'
+import { SettingsRoute } from '@/routers'
 import { SettingsCategory } from '../enums'
 
 const { general, security, advanced, helpAndInfo } = features.settings

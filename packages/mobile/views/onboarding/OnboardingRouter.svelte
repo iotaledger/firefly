@@ -11,7 +11,7 @@
         StorageProtectionSetupRouter,
         StrongholdSetupRouter,
     } from './views'
-    import { OnboardingRoute, onboardingRoute } from '../../lib/routers'
+    import { OnboardingRoute, onboardingRoute } from '@/routers'
 </script>
 
 {#if $onboardingRoute === OnboardingRoute.AppSetup}

@@ -1,9 +1,9 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { OnboardingLayout } from '../../../../../components'
-    import { Button, Icon, Text, TextType } from 'shared/components'
+    import { OnboardingLayout } from '@components'
+    import { Button, Icon, Text, TextType } from '@ui'
     import { localize } from '@core/i18n'
-    import { profileRecoveryRouter } from '../../../../../lib/routers'
+    import { profileRecoveryRouter } from '@/routers'
     import { updateOnboardingProfile } from '@contexts/onboarding'
 
     function onContinueClick(): void {
@@ -28,7 +28,7 @@
             <Text type={TextType.h2} classes="mb-5 text-center"
                 >{localize('views.onboarding.profileRecovery.success.title')}</Text
             >
-            <Text type={TextType.p} secondary classes="mb-2"
+            <Text type={TextType.p} secondary fontSize="15" classes="mb-2"
                 >{localize('views.onboarding.profileRecovery.success.body')}</Text
             >
         </div>

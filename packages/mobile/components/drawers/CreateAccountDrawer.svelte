@@ -1,12 +1,13 @@
 <script lang="ts">
+    import { Button, ColorPicker, Input } from '@ui'
+
     import { getRandomAccountColor, tryCreateAdditionalAccount, validateAccountName } from '@core/account'
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
     import { isStrongholdUnlocked } from '@core/profile-manager'
     import { getTrimmedLength } from '@core/utils'
-    import { Button, Input } from 'shared/components'
-    import { ColorPicker } from '../../components'
-    import { closeDrawer, DrawerId, openDrawer } from '../../lib/auxiliary/drawer'
+
+    import { closeDrawer, DrawerId, openDrawer } from '@/auxiliary/drawer'
 
     let accountAlias: string = ''
     let color: string = getRandomAccountColor()

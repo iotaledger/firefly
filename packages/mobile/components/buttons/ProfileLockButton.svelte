@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
-    import { FontWeight, Icon, Text, TextType, Toggle } from 'shared/components'
+    import { FontWeight, Icon, Text, TextType, Toggle } from '@ui'
 
     const { isStrongholdLocked } = $activeProfile
 
