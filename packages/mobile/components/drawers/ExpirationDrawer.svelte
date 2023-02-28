@@ -1,11 +1,11 @@
 <script lang="ts">
+    import { Button } from '@ui'
+
     import { localize } from '@core/i18n'
     import { ExpirationTime } from '@core/utils'
     import { newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'
-    import { Button, HR } from '@ui'
-    import { sendRouter } from '@/routers'
 
-    export let onCancel: () => unknown = () => {}
+    import { closeDrawer, DrawerId } from '@/auxiliary/drawer'
 
     const DATE_NOW = Date.now()
 
@@ -38,7 +38,7 @@
                 break
         }
         updateNewTransactionDetails({ type: $newTransactionDetails.type, expirationDate })
-        $sendRouter.next()
+        closeDrawer(DrawerId.Expiration)
     }
 </script>
 
@@ -54,9 +54,5 @@
     </Button>
     <Button outline onClick={() => handleChooseExpirationTimeClick(ExpirationTime.OneWeek)} classes="w-full">
         {localize('menus.expirationTimePicker.1week')}
-    </Button>
-    <HR />
-    <Button outline onClick={onCancel} classes="w-full">
-        {localize('actions.cancel')}
     </Button>
 </div>

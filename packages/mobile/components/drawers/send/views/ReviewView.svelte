@@ -1,6 +1,12 @@
 <script lang="ts">
+    import { get } from 'svelte/store'
+
+    import { ExpirationTimePicker } from '@components'
+    import { ActivityInformation, BasicActivityDetails, Button, KeyValueBox, TextHint, Toggle } from '@ui'
+
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
+    import { isStrongholdUnlocked } from '@core/profile-manager'
     import { ExpirationTime } from '@core/utils'
     import {
         ActivityDirection,
@@ -10,14 +16,11 @@
         NewTransactionType,
         selectedAccountAssets,
     } from '@core/wallet'
-    import { ActivityInformation, BasicActivityDetails, Button, KeyValueBox, TextHint, Toggle } from '@ui'
-    import { onMount } from 'svelte'
-    import { get } from 'svelte/store'
-    import { ExpirationTimePicker } from '@components'
+
+    import { DrawerId, openDrawer } from '@/auxiliary/drawer'
     import { sendRouter } from '@/routers'
 
     export let sendTransaction: () => Promise<void>
-    export let triggerSendOnMount: boolean = false
     export let storageDeposit: number
     export let initialExpirationDate: ExpirationTime
     export let expirationDate: Date
@@ -26,8 +29,13 @@
 
     let loading: boolean = false
 
-    // store the initial newTransactionDetails value to prevent undefined errors
-    $: transactionDetails = get(newTransactionDetails)
+    // need to store the newTransactionDetails to avoid errors
+    let transactionDetails = get(newTransactionDetails)
+    // need to update the variable only when newTransactionDetails is not reset
+    $: if ($newTransactionDetails.recipient) {
+        transactionDetails = $newTransactionDetails
+    }
+
     $: isInternal = recipient?.type === 'account'
     $: isTransferring = $selectedAccount.isTransferring
     $: hideGiftToggle =
@@ -45,27 +53,36 @@
         inclusionState: InclusionState.Pending,
     }
 
-    onMount(() => {
-        if (triggerSendOnMount) {
-            asyncSendTransaction()
-        }
-    })
-
     async function asyncSendTransaction(): Promise<void> {
         try {
             loading = true
             await sendTransaction()
         } catch (err) {
             loading = false
+        } finally {
+            loading = false
         }
     }
 
-    function onSendClick(): void {
-        asyncSendTransaction()
+    async function onSendClick(): Promise<void> {
+        const isUnlocked = await isStrongholdUnlocked()
+        const _onConfirm = async (): Promise<void> => {
+            await asyncSendTransaction()
+            $sendRouter.next()
+        }
+        if (isUnlocked) {
+            _onConfirm()
+        } else {
+            openDrawer(DrawerId.EnterPassword, { onSuccess: _onConfirm })
+        }
     }
 
     function onAddReferenceClick(): void {
-        $sendRouter.next({ addReference: true })
+        openDrawer(DrawerId.References)
+    }
+
+    function onAddExpirationClick(): void {
+        openDrawer(DrawerId.Expiration)
     }
 
     function toggleGiftStorageDeposit(): void {
@@ -95,9 +112,7 @@
                         slot="value"
                         bind:value={expirationDate}
                         disabled={disableChangeExpiration}
-                        onClick={() => {
-                            $sendRouter.next({ addExpiration: true })
-                        }}
+                        onClick={onAddExpirationClick}
                     />
                 </KeyValueBox>
             {/if}
@@ -107,6 +122,9 @@
         </div>
     </div>
     <div class="flex flex-col space-y-4">
+        <Button outline onClick={onAddReferenceClick} disabled={loading || isTransferring} classes="w-full">
+            {localize('actions.addReference')}
+        </Button>
         <Button
             isBusy={loading || isTransferring}
             onClick={onSendClick}
@@ -114,9 +132,6 @@
             classes="w-full"
         >
             {localize('actions.send')}
-        </Button>
-        <Button outline onClick={onAddReferenceClick} disabled={loading || isTransferring} classes="w-full">
-            {localize('actions.addReference')}
         </Button>
     </div>
 </div>

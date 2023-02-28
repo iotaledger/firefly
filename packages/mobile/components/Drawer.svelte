@@ -7,16 +7,15 @@
 
     import {
         DrawerId,
-        DRAWER_STATIC_TITLE_TITLES,
         DRAWER_IN_ANIMATION_DURATION_MS,
         DRAWER_OUT_ANIMATION_DURATION_MS,
+        DRAWER_STATIC_TITLE_TITLES,
         getDrawerRouter,
     } from '@/auxiliary/drawer'
-    import { Icon as IconEnum } from '@lib/auxiliary/icon'
     import { resetRouterWithDrawerDelay } from '@/routers'
+    import { Icon as IconEnum } from '@lib/auxiliary/icon'
 
     export let onClose: () => unknown = () => {}
-    export let onBackClick: () => unknown = () => {}
     export let allowBack: boolean = false
     export let title: string | undefined = undefined
     export let fullScreen: boolean = false
@@ -65,6 +64,11 @@
         }
         onClose && onClose()
     }
+    function handleBack(): void {
+        if ($drawerRouter) {
+            $drawerRouter.previous()
+        }
+    }
 </script>
 
 <svelte:window on:touchend={onTouchEnd} on:touchmove={onTouchMove} />
@@ -92,11 +96,11 @@
                 class="absolute top-2 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-gray-300 dark:bg-gray-700 rounded"
             />
         {/if}
-        {#if displayedTitle || (allowBack && onBackClick)}
+        {#if displayedTitle || allowBack}
             <div class="grid grid-cols-4 h-6 mb-6">
                 <div class="col-span-1">
-                    {#if allowBack && onBackClick}
-                        <button type="button" on:click={onBackClick}>
+                    {#if allowBack}
+                        <button type="button" on:click={handleBack}>
                             <Icon width="24" height="24" icon={IconEnum.ArrowLeft} classes="text-gray-500" />
                         </button>
                     {/if}

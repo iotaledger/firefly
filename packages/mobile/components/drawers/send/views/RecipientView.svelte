@@ -1,13 +1,16 @@
 <script lang="ts">
+    import { onMount } from 'svelte'
+
+    import { RecipientInput } from '@components'
+    import { Button, FontWeight, IOption, Text, TextType } from '@ui'
+
     import { selectedAccountIndex } from '@core/account/stores'
     import { localize } from '@core/i18n'
     import { visibleActiveAccounts } from '@core/profile/stores'
     import { truncateString } from '@core/utils'
     import { IAccountSubject, IAddressSubject, newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'
     import { getSubjectFromAddress } from '@core/wallet/utils'
-    import { Button, FontWeight, IOption, Text, TextType } from '@ui'
-    import { onMount } from 'svelte'
-    import { RecipientInput } from '@components'
+
     import { sendRouter } from '@/routers'
 
     let recipient: IAddressSubject | IAccountSubject
