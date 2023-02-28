@@ -585,6 +585,7 @@
             "proposals": {
                 "title": "Proposals",
                 "voted": "Voted",
+                "successEdit": "La proposition a été mise à jour avec succès",
                 "successAdd": "Proposition ajoutée avec succès",
                 "successAddAll": "Proposition ajoutée avec succès à tous les comptes",
                 "successRemove": "Proposal successfully removed",
@@ -626,33 +627,60 @@
             "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
         },
         "balanceBreakdown": {
-            "title": "Répartition de la caution de stockage",
-            "totalStorageDeposit": "Total de la caution de stockage",
+            "title": "Répartition du solde",
+            "available": {
+                "title": "Disponible",
+                "subtitle": "Fonds entièrement disponibles pour la dépense"
+            },
+            "pending": {
+                "title": "En cours",
+                "subtitle": "Temporairement verrouillé dans les transactions"
+            },
+            "locked": {
+                "title": "Verrouillé",
+                "subtitle": "Temporairement verrouillé pour la gouvernance"
+            },
+            "storageDeposit": {
+                "title": "Caution de stockage",
+                "subtitle": "Ces fonds sont réservés au stockage des actifs natifs."
+            },
+            "totalBalance": {
+                "title": "Solde total",
+                "subtitle": ""
+            },
             "basicOutputs": {
-                "title": "Native Tokens",
-                "subtitle": "Reserved for Native Token storage"
+                "title": "Jetons natifs",
+                "subtitle": "Réservé pour le stockage de jetons natifs"
             },
             "nftOutputs": {
                 "title": "NFTs",
-                "subtitle": "Reserved for NFT storage"
+                "subtitle": "Réservé pour le stockage NFT"
             },
             "aliasOutputs": {
-                "title": "Aliases",
-                "subtitle": "Reserved for Alias storage"
+                "title": "Alias",
+                "subtitle": "Réservé pour le stockage d'alias"
             },
             "foundryOutputs": {
-                "title": "Foundries",
-                "subtitle": "Reserved for Native Token Foundry storage"
+                "title": "Fonderies",
+                "subtitle": "Réservé pour le stockage de jetons natifs"
             },
-            "pendingTransactions": {
-                "title": "Transactions",
-                "subtitle": "Temporarily locked in unclaimed transactions"
+            "unclaimed": {
+                "title": "Transaction non réclamée",
+                "subtitle": "Temporairement verrouillé dans les transactions non réclamées"
             },
-            "votingPowerOutput": {
+            "timelock": {
+                "title": "Verrouillage horaire, aussi appelé Time Lock",
+                "subtitle": "Temporairement verrouillé dans les transactions \"timelocked\""
+            },
+            "storageDepositReturn": {
+                "title": "SDRUC",
+                "subtitle": "Temporairement verrouillé dans le dépôt"
+            },
+            "governance": {
                 "title": "Gouvernance",
                 "subtitle": "Réservé au pouvoir de vote"
             },
-            "minimizeStorageDepositButton": "Minimize storage deposit"
+            "minimizeStorageDepositButton": "Réduire le dépôt de stockage"
         },
         "minimizeStorageDeposit": {
             "title": "Minimize storage deposit",
@@ -1010,7 +1038,22 @@
             "description": "You must own an alias output to mint native tokens. To continue, please create an alias first"
         },
         "mintNftForm": {
-            "title": "Mint simple NFT"
+            "title": "Mint simple NFT",
+            "errors": {
+                "invalidMimetype": "MimeType invalide, vérifiez si le type de fichier est pris en charge",
+                "quantityTooSmall": "La quantité doit être supérieure à 0",
+                "quantityTooLarge": "La quantité doit être inférieure à 64",
+                "emptyName": "Le nom est un champ obligatoire",
+                "invalidURI": "URI invalide, veuillez fournir une URI valide",
+                "royaltiesMustBeJSON": "Les royalties doivent être un JSON valide",
+                "invalidAddress": "Adresse invalide, doit être une adresse {networkHrp} valide où les redevances seront envoyées à",
+                "invalidRoyaltyValue": "Valeur non valide, elle doit être un nombre décimal représentant le pourcentage requis i. e. 0.05",
+                "invalidRoyaltyValueSum": "Valeur invalide, la somme de toutes les royalties doit être inférieure ou égale à 1'",
+                "attributesMustBeJSON": "Les attributs doivent être un JSON valide",
+                "attributesMustBeArrayOfObjects": "Les attributs doivent être un tableau d'objets",
+                "attributesInvalidKeys": "Clé invalide, les attributs doivent avoir les clés \"trait_type\" value\"",
+                "attributesInvalidValues": "Valeur invalide, \"trait_type\" doit être une chaîne non vide et \"value\" doit être une chaîne non vide ou un nombre"
+            }
         },
         "faucetRequest": {
             "title": "Faucet request",
@@ -1026,6 +1069,10 @@
             "title": "Ajouter une proposition",
             "body": "Veuillez fournir les informations énumérées ci-dessous pour ajouter une proposition.",
             "addToAllAccounts": "Ajouter la proposition à tous les comptes"
+        },
+        "editProposal": {
+            "title": "Modifier la proposition",
+            "body": "Veuillez fournir la nouvelle url pour le noeud qui contient cette proposition."
         },
         "voteForProposal": {
             "title": "Vote for proposal",
@@ -1188,7 +1235,7 @@
         "readDocumentation": "Consulter la documentation",
         "visitFaq": "Visitez la FAQ",
         "viewStatus": "Voir le statut",
-        "viewStorageDeposit": "Voir la caution de stockage",
+        "viewBalanceBreakdown": "Voir la répartition du solde",
         "showHiddenAccounts": "Afficher les portefeuilles cachés",
         "confirm": "Confirmer",
         "hideNetworkStatistics": "Masquer les statistiques du réseau",
@@ -1240,6 +1287,7 @@
         "vote": "Vote",
         "addProposal": "Ajouter une proposition",
         "removeProposal": "Remove proposal",
+        "changeNode": "Changer de serveur",
         "stopVoting": "Stop voting",
         "revote": "Voter à nouveau"
     },
@@ -1438,6 +1486,8 @@
         "surplus": "Surplus",
         "storageDeposit": "Caution de stockage",
         "giftedStorageDeposit": "Gifted storage deposit",
+        "storageDepositPerNft": "Dépôt de stockage par NFT",
+        "totalStorageDeposit": "Dépôt de stockage total",
         "expirationTime": "Date d'expiration",
         "timelockDate": "Timelock",
         "claimedTime": "Réclamé à",
@@ -1492,6 +1542,7 @@
         "issuer": "Issuer",
         "issuerAddress": "Issuer Address",
         "issuerName": "Issuer Name",
+        "quantity": "Quantité",
         "collection": "Collection",
         "collectionId": "Collection ID",
         "collectionName": "Collection Name",
@@ -1774,6 +1825,7 @@
             "wrongAddressPrefix": "Les adresses commencent par le préfixe {prefix}.",
             "wrongAddressFormat": "L'adresse n'est pas correctement formatée.",
             "invalidAddress": "Cette adresse n'est pas valide.",
+            "invalidAssetId": "The asset id is not valid.",
             "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "Ce portefeuille a des fonds insuffisants.",
             "insufficientFundsStorageDeposit": "Fonds insuffisants pour couvrir la caution de stockage",
@@ -1919,7 +1971,7 @@
         "governance": {
             "unableToAddProposal": {
                 "short": "Unable to add proposal",
-                "long": "An error occurred while trying to add proposal {proposalId}"
+                "long": "Impossible de trouver la proposition {proposalId} sur le noeud spécifié"
             }
         }
     },
@@ -2010,7 +2062,8 @@
             "issuerName": "Optional parameter: The name of the creator",
             "description": "Optional parameter: A description of the NFT",
             "attributes": "Optional parameter: An array of traits and values that define attributes of the NFT",
-            "uri": "To create a URI using custom media, first upload your file to IPFS via a storage service (e.g. https://nft.storage/)"
+            "uri": "To create a URI using custom media, first upload your file to IPFS via a storage service (e.g. https://nft.storage/)",
+            "quantity": "Paramètre optionnel : La quantité de copies minées avec cette métadonnée."
         },
         "governance": {
             "removeProposalWarning": "Vous devez arrêter de voter pour cette proposition avant de la supprimer."

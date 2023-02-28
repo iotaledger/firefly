@@ -45,6 +45,18 @@
                             : path.fill ?? ''}
                     />
                 {/each}
+                {#if selected.circles}
+                    {#each selected.circles as circle}
+                        <circle
+                            cx={circle.cx}
+                            cy={circle.cy}
+                            r={circle.r}
+                            fill={circle.fill}
+                            stroke-width={circle.strokeWidth || ''}
+                            stroke={circle.strokeColor || ''}
+                        />
+                    {/each}
+                {/if}
             </svg>
         </div>
     {:else}
@@ -81,6 +93,18 @@
                         : path.fill ?? ''}
                 />
             {/each}
+            {#if selected.circles}
+                {#each selected.circles as circle}
+                    <circle
+                        cx={circle.cx}
+                        cy={circle.cy}
+                        r={circle.r}
+                        fill={circle.fill}
+                        stroke-width={circle.strokeWidth || ''}
+                        stroke={circle.strokeColor || ''}
+                    />
+                {/each}
+            {/if}
         </svg>
     {/if}
 {/if}

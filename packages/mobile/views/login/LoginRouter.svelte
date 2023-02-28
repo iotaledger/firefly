@@ -1,9 +1,23 @@
 <script lang="ts">
-    import { EnterPinView, SelectProfileView, LoadProfileView } from './views'
-    import { loginRoute, LoginRoute } from '../../lib/routers'
+    import { onMount } from 'svelte'
+    import { needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService } from '@core/app'
+    import { loginRoute, LoginRoute } from '@/routers'
+    import { EnterPinView, LegalUpdateView, LoadProfileView, SelectProfileView } from './views'
+
+    let needsToAcceptLegal = false
+
+    function checkLegal(): void {
+        needsToAcceptLegal = needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTermsOfService()
+    }
+
+    onMount(() => {
+        checkLegal()
+    })
 </script>
 
-{#if $loginRoute === LoginRoute.SelectProfile}
+{#if needsToAcceptLegal}
+    <LegalUpdateView onAccept={checkLegal} />
+{:else if $loginRoute === LoginRoute.SelectProfile}
     <SelectProfileView />
 {:else if $loginRoute === LoginRoute.EnterPin}
     <EnterPinView />

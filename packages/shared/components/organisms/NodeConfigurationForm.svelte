@@ -1,18 +1,19 @@
 <script lang="ts">
     import { get } from 'svelte/store'
     import { Input, PasswordInput } from 'shared/components'
-    import { INode, checkNodeUrlValidity, checkNetworkId, IClientOptions, nodeInfo } from '@core/network'
+    import { INode, checkNodeUrlValidity, checkNetworkId, IClientOptions, nodeInfo, EMPTY_NODE } from '@core/network'
     import { localize } from '@core/i18n'
     import { getNodeInfo } from '@core/profile-manager'
     import { stripSpaces, stripTrailingSlash } from '@core/utils'
     import { activeProfile } from '@core/profile'
 
-    export let node: INode = { url: '', auth: { username: '', password: '', jwt: '' } }
+    export let node: INode = EMPTY_NODE
     export let isBusy = false
     export let formError = ''
     export let currentClientOptions: IClientOptions = undefined
     export let isDeveloperProfile: boolean = false
     export let onSubmit: () => void = () => {}
+
     $: node.url, (formError = '')
 
     function cleanNodeUrl(): void {
@@ -91,13 +92,13 @@
     />
     <Input
         classes="mt-3"
-        bind:value={node.auth.username}
+        bind:value={node.auth.basicAuthNamePwd[0]}
         placeholder={localize('popups.node.optionalUsername')}
         disabled={isBusy}
     />
     <PasswordInput
         classes="mt-3"
-        bind:value={node.auth.password}
+        bind:value={node.auth.basicAuthNamePwd[1]}
         placeholder={localize('popups.node.optionalPassword')}
         disabled={isBusy}
     />

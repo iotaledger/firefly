@@ -585,6 +585,7 @@
             "proposals": {
                 "title": "Propuestas",
                 "voted": "Votado",
+                "successEdit": "Propuesta editada correctamente",
                 "successAdd": "Propuesta añadida correctamente",
                 "successAddAll": "Propuesta añadida correctamente a todas las cuentas",
                 "successRemove": "Propuesta eliminada correctamente",
@@ -626,31 +627,58 @@
             "step_4": "Pulse ambos botones para activar la firma de la transacción ciega. El dispositivo muestra Habilitado. Ya ha terminado."
         },
         "balanceBreakdown": {
-            "title": "Desglose del depósito de almacenamiento",
-            "totalStorageDeposit": "Depósito de almacenamiento total",
+            "title": "Desglose de saldo",
+            "available": {
+                "title": "Disponible",
+                "subtitle": "Fondos totalmente disponibles para gastar"
+            },
+            "pending": {
+                "title": "Pendiente",
+                "subtitle": "Bloqueado temporalmente en transacciones"
+            },
+            "locked": {
+                "title": "Bloqueado",
+                "subtitle": "Bloqueado temporalmente para gobernanza"
+            },
+            "storageDeposit": {
+                "title": "Depósito de almacenamiento",
+                "subtitle": "Estos fondos están reservados para almacenar activos nativos."
+            },
+            "totalBalance": {
+                "title": "Saldo total",
+                "subtitle": ""
+            },
             "basicOutputs": {
                 "title": "Tokens nativos",
-                "subtitle": "Reservado para almacenamiento de token nativo"
+                "subtitle": "Reservado para almacenamiento de Tokens Nativos"
             },
             "nftOutputs": {
                 "title": "NFTs",
-                "subtitle": "Reservado para almacenamiento NFT"
+                "subtitle": "Reservado para almacenamiento de NFT"
             },
             "aliasOutputs": {
                 "title": "Alias",
-                "subtitle": "Reservado para almacenamiento Alias"
+                "subtitle": "Reservado para almacenamiento de Alias"
             },
             "foundryOutputs": {
                 "title": "Fundiciones",
                 "subtitle": "Reservado para almacenamiento de la Fundición de Tokens Nativos"
             },
-            "pendingTransactions": {
-                "title": "Transacciones",
+            "unclaimed": {
+                "title": "Transacción no reclamada",
                 "subtitle": "Bloqueado temporalmente en transacciones no reclamadas"
             },
-            "votingPowerOutput": {
+            "timelock": {
+                "title": "Bloqueo de tiempo",
+                "subtitle": "Bloqueado temporalmente en transacciones con bloqueo de tiempo"
+            },
+            "storageDepositReturn": {
+                "title": "SDRUC",
+                "subtitle": "Temporalmente bloqueado en devolución de depósito de almacenamiento"
+            },
+            "governance": {
                 "title": "Gobernanza",
-                "subtitle": "Reservado para poder de voto"
+                "subtitle": "Reservado para peso de voto"
             },
             "minimizeStorageDepositButton": "Minimizar depósito de almacenamiento"
         },
@@ -1010,7 +1038,22 @@
             "description": "Debes poseer un alias de salida para acuñar tokens nativos. Para continuar, por favor crea un alias primero"
         },
         "mintNftForm": {
-            "title": "Acuñar un NFT simple"
+            "title": "Acuñar un NFT simple",
+            "errors": {
+                "invalidMimetype": "Invalid MimeType, check if the file type is supported",
+                "quantityTooSmall": "Quantity needs to be greater than 0",
+                "quantityTooLarge": "Quantity needs to be smaller than 64",
+                "emptyName": "Name is a required field",
+                "invalidURI": "Invalid URI, please provide a valid URI",
+                "royaltiesMustBeJSON": "Royalties must be a valid JSON",
+                "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
+                "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",
+                "invalidRoyaltyValueSum": "Invalid value, the sum of all royalties must be less than or equal to 1'",
+                "attributesMustBeJSON": "Attributes must be a valid JSON",
+                "attributesMustBeArrayOfObjects": "Attributes must be an array of objects",
+                "attributesInvalidKeys": "Invalid key, attributes must have the keys \"trait_type\" and \"value\"",
+                "attributesInvalidValues": "Invalid value, \"trait_type\" must be a non empty string and \"value\" must be a non empty string or a number"
+            }
         },
         "faucetRequest": {
             "title": "Solicitud de Faucet",
@@ -1026,6 +1069,10 @@
             "title": "Añadir propuesta",
             "body": "Por favor, proporciona la siguiente información para añadir una propuesta.",
             "addToAllAccounts": "Añadir la propuesta a todas las cuentas"
+        },
+        "editProposal": {
+            "title": "Editar propuesta",
+            "body": "Por favor, proporciona la nueva url del nodo que contiene esta propuesta."
         },
         "voteForProposal": {
             "title": "Votar por propuesta",
@@ -1188,7 +1235,7 @@
         "readDocumentation": "Leer la documentación",
         "visitFaq": "Ver las preguntas frecuentes resueltas",
         "viewStatus": "Ver estado",
-        "viewStorageDeposit": "Ver depósito de almacenamiento",
+        "viewBalanceBreakdown": "Ver desglose de saldo",
         "showHiddenAccounts": "Mostrar carteras ocultas",
         "confirm": "Confirmar",
         "hideNetworkStatistics": "Ocultar estadísticas de la red",
@@ -1240,6 +1287,7 @@
         "vote": "Votar",
         "addProposal": "Añadir propuesta",
         "removeProposal": "Eliminar propuesta",
+        "changeNode": "Cambiar Nodo",
         "stopVoting": "Dejar de votar",
         "revote": "Volver a votar"
     },
@@ -1438,6 +1486,8 @@
         "surplus": "Superávit",
         "storageDeposit": "Depósito de almacenamiento",
         "giftedStorageDeposit": "Depósito de almacenamiento regalado",
+        "storageDepositPerNft": "Storage deposit per NFT",
+        "totalStorageDeposit": "Total storage deposit",
         "expirationTime": "Tiempo de expiración",
         "timelockDate": "Bloqueo de tiempo",
         "claimedTime": "Reclamado ( Claimed at )",
@@ -1492,6 +1542,7 @@
         "issuer": "Emisor",
         "issuerAddress": "Dirección del emisor",
         "issuerName": "Nombre del emisor",
+        "quantity": "Quantity",
         "collection": "Colección",
         "collectionId": "ID de colección",
         "collectionName": "Nombre de la colección",
@@ -1774,6 +1825,7 @@
             "wrongAddressPrefix": "Las direcciones comienzan con el prefijo {prefix}.",
             "wrongAddressFormat": "La dirección no tiene el formato correcto.",
             "invalidAddress": "La dirección no es válida.",
+            "invalidAssetId": "The asset id is not valid.",
             "unknownAsset": "El activo no es conocido por esta cuenta.",
             "insufficientFunds": "Esta cartera tiene fondos insuficientes.",
             "insufficientFundsStorageDeposit": "Fondos insuficientes para cubrir el depósito de almacenamiento",
@@ -1919,7 +1971,7 @@
         "governance": {
             "unableToAddProposal": {
                 "short": "No se pudo añadir la propuesta",
-                "long": "Ocurrió un error al intentar añadir la propuesta {proposalId}"
+                "long": "No se pudo encontrar la propuesta {proposalId} en el nodo especificado"
             }
         }
     },
@@ -2010,7 +2062,8 @@
             "issuerName": "Parámetro opcional: el nombre del creador",
             "description": "Parámetro opcional: Una descripción del NFT",
             "attributes": "Parámetro opcional: un array de rasgos y valores que definen los atributos del NFT",
-            "uri": "Para crear una URI usando medios personalizados, primero sube tu archivo a IPFS a través de un servicio de almacenamiento (por ejemplo, https://nft.storage/)"
+            "uri": "Para crear una URI usando medios personalizados, primero sube tu archivo a IPFS a través de un servicio de almacenamiento (por ejemplo, https://nft.storage/)",
+            "quantity": "Optional parameter: The quantity of copies minted with this metadata."
         },
         "governance": {
             "removeProposalWarning": "Debes dejar de votar en esta propuesta antes de eliminarla."

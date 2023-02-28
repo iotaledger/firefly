@@ -1,17 +1,20 @@
 <script lang="ts">
-    import { Drawer } from '../../components'
-    import { closeDrawer, DrawerId, drawersStore } from '../../lib/auxiliary/drawer'
-    import AccountActionsDrawer from './AccountActionsDrawer.svelte'
-    import AccountSwitcherDrawer from './AccountSwitcherDrawer.svelte'
-    import BalanceBreakdownDrawer from './BalanceBreakdownDrawer.svelte'
-    import ConfirmDrawer from './ConfirmDrawer.svelte'
-    import CreateAccountDrawer from './CreateAccountDrawer.svelte'
-    import CustomizeAccountDrawer from './CustomizeAccountDrawer.svelte'
-    import DeleteAccountDrawer from './DeleteAccountDrawer.svelte'
-    import EnterPasswordDrawer from './EnterPasswordDrawer.svelte'
-    import ReceiveDrawer from './ReceiveDrawer.svelte'
-    import SelectedActivityDrawer from './SelectedActivityDrawer.svelte'
-    import SelectedTokenDrawer from './SelectedTokenDrawer.svelte'
+    import { Drawer } from '@components'
+    import {
+        AccountActionsDrawer,
+        AccountSwitcherDrawer,
+        BalanceBreakdownDrawer,
+        ConfirmDrawer,
+        CreateAccountDrawer,
+        CustomizeAccountDrawer,
+        DeleteAccountDrawer,
+        EnterPasswordDrawer,
+        ReceiveDrawer,
+        SelectedActivityDrawer,
+        SelectedTokenDrawer,
+    } from './'
+
+    import { closeDrawer, DrawerId, drawers } from '@/auxiliary/drawer'
 
     const COMPONENTS = {
         [DrawerId.AccountSwitcher]: AccountSwitcherDrawer,
@@ -28,7 +31,7 @@
     }
 </script>
 
-{#each $drawersStore as drawer}
+{#each $drawers as drawer}
     {@const drawerId = drawer.id}
     <Drawer id={drawerId} {...drawer.props} onClose={() => closeDrawer(drawerId)}>
         <svelte:component this={COMPONENTS[drawerId]} {...drawer.props} />

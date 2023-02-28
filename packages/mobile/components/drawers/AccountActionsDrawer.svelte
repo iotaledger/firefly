@@ -1,13 +1,14 @@
 <script lang="ts">
+    import { Button, ButtonVariant, HR } from '@ui'
+
     import { selectedAccount, setNextSelectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { activeProfile, nonHiddenActiveAccounts, updateActiveAccountMetadata } from '@core/profile'
     import { activeAccounts, visibleActiveAccounts } from '@core/profile/stores'
+
+    import { closeDrawer, DrawerId, openDrawer } from '@/auxiliary/drawer'
+    import { Icon } from '@auxiliary/icon/enums'
     import features from '@features/features'
-    import { Icon } from '@lib/auxiliary/icon/enums'
-    import { Button } from '@ui'
-    import { ButtonVariant, HR } from 'shared/components'
-    import { closeDrawer, DrawerId, openDrawer } from '../../lib/auxiliary/drawer'
 
     const showDeleteAccount =
         $selectedAccount?.index === $activeAccounts?.length - 1 && $visibleActiveAccounts?.length > 1

@@ -1,17 +1,19 @@
 <script lang="ts">
+    import { TabPane, TogglableAssetBalanceLabel, TopBar } from '@components'
+    import { Button } from '@ui'
+    import DashboardRouter from './DashboardRouter.svelte'
+    import { TabNavigator } from './tabs'
+
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { BASE_TOKEN } from '@core/network'
     import { activeProfile, hasStrongholdLocked, reflectLockedStronghold, saveActiveProfile } from '@core/profile'
     import { selectedAccountAssets } from '@core/wallet'
+
+    import { DrawerId, openDrawer } from '@/auxiliary/drawer'
+    import { activeDashboardTab, DASHBOARD_TAB_COMPONENT } from '@/contexts/dashboard'
+    import { DashboardRoute, dashboardRouter } from '@/routers'
     import features from '@features/features'
-    import { Button } from 'shared/components'
-    import { TabPane, TogglableAssetBalanceLabel, TopBar } from '../../components'
-    import { DrawerId, openDrawer } from '../../lib/auxiliary/drawer'
-    import { activeDashboardTab, DASHBOARD_TAB_COMPONENT } from '../../lib/contexts/dashboard'
-    import { DashboardRoute, dashboardRouter } from '../../lib/routers'
-    import DashboardRouter from './DashboardRouter.svelte'
-    import { TabNavigator } from './tabs'
 
     $: activeDashboardTabComponent = DASHBOARD_TAB_COMPONENT[$activeDashboardTab]
 

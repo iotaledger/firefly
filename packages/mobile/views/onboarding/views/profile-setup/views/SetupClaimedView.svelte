@@ -1,10 +1,10 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { OnboardingLayout } from '../../../../../components'
-    import { OnboardingButton, Text, TextType } from 'shared/components'
+    import { OnboardingLayout } from '@components'
+    import { OnboardingButton, Text, TextType } from '@ui'
     import features from '@features/features'
     import { localize } from '@core/i18n'
-    import { profileSetupRouter } from '../../../../../lib/routers'
+    import { profileSetupRouter } from '@/routers'
     import {
         createShimmerClaimingProfileManager,
         destroyShimmerClaimingProfileManager,
@@ -48,7 +48,7 @@
 
 <OnboardingLayout {onBackClick} {title} animation="import-desktop">
     <div slot="content">
-        <Text type={TextType.p} secondary classes="mb-8"
+        <Text type={TextType.p} secondary fontSize="15" classes="mb-8"
             >{localize('views.onboarding.profileSetup.setupClaimed.body')}</Text
         >
     </div>

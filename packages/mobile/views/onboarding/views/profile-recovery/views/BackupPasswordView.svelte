@@ -1,9 +1,9 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Button, PasswordInput, Text, TextType } from 'shared/components'
+    import { Button, PasswordInput, Text, TextType } from '@ui'
     import { localize } from '@core/i18n'
-    import { OnboardingLayout } from '../../../../../components'
-    import { profileRecoveryRouter } from '../../../../../lib/routers'
+    import { OnboardingLayout } from '@components'
+    import { profileRecoveryRouter } from '@/routers'
     import {
         CannotRestoreWithMismatchedCoinTypeError,
         createShimmerClaimingProfileManager,
@@ -17,7 +17,7 @@
     } from '@contexts/onboarding'
     import { showAppNotification } from '@auxiliary/notification'
     import { ClientError, CLIENT_ERROR_REGEXES } from '@core/error'
-    import { isKeyboardOpen, keyboardHeight } from '../../../../../lib/auxiliary/keyboard'
+    import { isKeyboardOpen, keyboardHeight } from '@/auxiliary/keyboard'
     export let error = ''
     export let busy = false
     const title = `${localize('general.import')} ${localize(`general.${$onboardingProfile?.recoveryType}`)}`
@@ -70,10 +70,10 @@
 
 <OnboardingLayout {onBackClick} {busy} {title} animation="import-from-file-password-desktop">
     <div slot="content">
-        <Text type={TextType.p} secondary classes="mb-4"
+        <Text type={TextType.p} secondary fontSize="15" classes="mb-4"
             >{localize('views.onboarding.profileRecovery.backupPassword.body1')}</Text
         >
-        <Text type={TextType.p} secondary classes="mb-8"
+        <Text type={TextType.p} secondary fontSize="15" classes="mb-8"
             >{localize('views.onboarding.profileRecovery.backupPassword.body2')}</Text
         >
         <PasswordInput

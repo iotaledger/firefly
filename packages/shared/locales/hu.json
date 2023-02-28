@@ -585,6 +585,7 @@
             "proposals": {
                 "title": "Javaslatok",
                 "voted": "Szavazott",
+                "successEdit": "Indítvány sikeresen módosítva",
                 "successAdd": "Javaslat sikeresen hozzáadva",
                 "successAddAll": "A javaslat sikeresen hozzáadva az összes fiókhoz",
                 "successRemove": "Javaslat sikeresen törölve",
@@ -626,15 +627,34 @@
             "step_4": "Nyomja meg mindkét gombot a tranzakciók vak aláírásának engedélyezéséhez. A hardver tárcán ekkor megjelenik: Engedélyezve."
         },
         "balanceBreakdown": {
-            "title": "Letéti dí részletezése",
-            "totalStorageDeposit": "Összes letéti díj",
+            "title": "Egyenleg részletezése",
+            "available": {
+                "title": "Elérhető",
+                "subtitle": "A pénzösszegek teljes mértékben rendelkezésre állnak"
+            },
+            "pending": {
+                "title": "Függőben lévő",
+                "subtitle": "Ideiglenesen tranzakciókon belül zárolva"
+            },
+            "locked": {
+                "title": "Zárolva",
+                "subtitle": "Ideiglenesen zárolva kormányzás miatt"
+            },
+            "storageDeposit": {
+                "title": "Letéti díj",
+                "subtitle": "Ezek a pénzösszegek lefoglalva natív pénzeszközök tárolása végett."
+            },
+            "totalBalance": {
+                "title": "Teljes egyenleg",
+                "subtitle": ""
+            },
             "basicOutputs": {
                 "title": "Natív tokenek",
                 "subtitle": "Natív tokenek tárolására fenntartva"
             },
             "nftOutputs": {
                 "title": "NFT-k",
-                "subtitle": "NFT-k tárolására fenntartva"
+                "subtitle": "NFT tárolására fenntartva"
             },
             "aliasOutputs": {
                 "title": "Álnevek",
@@ -644,11 +664,19 @@
                 "title": "Pénzverdék",
                 "subtitle": "Natív token pénzverde számára fenntartva"
             },
-            "pendingTransactions": {
-                "title": "Tranzakciók",
+            "unclaimed": {
+                "title": "Nem igényelt tranzakció",
                 "subtitle": "Nem igényelt tranzakciók számára ideiglenesen zárolva"
             },
-            "votingPowerOutput": {
+            "timelock": {
+                "title": "Időzár",
+                "subtitle": "Időzár alatti tranzakciók számára ideiglenesen zárolva"
+            },
+            "storageDepositReturn": {
+                "title": "SDRUC",
+                "subtitle": "Ideiglenesen zárolva letéti díj visszatérítése végett"
+            },
+            "governance": {
                 "title": "Kormányzás",
                 "subtitle": "Szavazati jogra fenntartva"
             },
@@ -1010,7 +1038,22 @@
             "description": "You must own an alias output to mint native tokens. To continue, please create an alias first"
         },
         "mintNftForm": {
-            "title": "Mint simple NFT"
+            "title": "Mint simple NFT",
+            "errors": {
+                "invalidMimetype": "Érvénytalen Mime-típus, ellenőrizze, hogy a fájltípus támogatott-e",
+                "quantityTooSmall": "A mennyiségnek többnek kell lennie mint 0",
+                "quantityTooLarge": "A mennyiségnek többnek kell lennie mint 64",
+                "emptyName": "A név mezőt ki kell tölteni",
+                "invalidURI": "Érvénytelen URI, kérjük, érvényes URI-t adjon meg",
+                "royaltiesMustBeJSON": "A jogdíjcímnek érvényes JSON formátumúnak kell lennie",
+                "invalidAddress": "Érvénytelen cím, érvényes {networkHrp}-címnek kell lennie, ahová a jogdíjakat küldik",
+                "invalidRoyaltyValue": "Érvénytelen érték, a kívánt százalékos arányt képviselő tizedes számnak kell lennie, például 0,05",
+                "invalidRoyaltyValueSum": "Érvénytelen érték, az összes jogdíj összegének 1-nél kisebbnek vagy egyenlőnek kell lennie",
+                "attributesMustBeJSON": "A jellemzőknek érvényes JSON formátumúnak kell lennie",
+                "attributesMustBeArrayOfObjects": "A jellemzőknek objektumok tömbjének kell lennie",
+                "attributesInvalidKeys": "Érvénytelen kulcs, a jellemzőknek a \"trait_type\" és \"value\" kulcsokkal kell rendelkezniük",
+                "attributesInvalidValues": "Érvénytelen érték, a \"trait_type\"-nak egy nem üres karakterláncnak, a \"value\"-nak pedig egy nem üres karakterláncnak vagy egy számnak kell lennie"
+            }
         },
         "faucetRequest": {
             "title": "Tokenigénylés",
@@ -1026,6 +1069,10 @@
             "title": "Add proposal",
             "body": "Please provide the information listed below to add a proposal.",
             "addToAllAccounts": "Javaslat hozzáadása az összes számlához"
+        },
+        "editProposal": {
+            "title": "Indítvány szerkesztése",
+            "body": "Kérjük, adja meg az indítványt tartalmazó csomópont új URL-címét."
         },
         "voteForProposal": {
             "title": "Vote for proposal",
@@ -1188,7 +1235,7 @@
         "readDocumentation": "Dokumentáció elolvasása",
         "visitFaq": "GYIK megtekintése",
         "viewStatus": "Állapot megtekintése",
-        "viewStorageDeposit": "Letéti díj megtekintése",
+        "viewBalanceBreakdown": "Egyenleg részletezésének megtekintése",
         "showHiddenAccounts": "Rejtett tárcák megjelenítése",
         "confirm": "Megerősít",
         "hideNetworkStatistics": "Hálózati statisztika elrejtése",
@@ -1240,6 +1287,7 @@
         "vote": "Vote",
         "addProposal": "Add proposal",
         "removeProposal": "Remove proposal",
+        "changeNode": "Csomópont megváltoztatása",
         "stopVoting": "Stop voting",
         "revote": "Revote"
     },
@@ -1438,6 +1486,8 @@
         "surplus": "Többlet",
         "storageDeposit": "Letéti díj",
         "giftedStorageDeposit": "Ajándékba kapott letéti díj",
+        "storageDepositPerNft": "Letéti díj NFT-nként",
+        "totalStorageDeposit": "Összes letéti díj",
         "expirationTime": "Lejárati idő",
         "timelockDate": "Időzár",
         "claimedTime": "Igénylés ideje:",
@@ -1492,6 +1542,7 @@
         "issuer": "Issuer",
         "issuerAddress": "Issuer Address",
         "issuerName": "Issuer Name",
+        "quantity": "Mennyiség",
         "collection": "Collection",
         "collectionId": "Collection ID",
         "collectionName": "Collection Name",
@@ -1774,6 +1825,7 @@
             "wrongAddressPrefix": "A címeknek {prefix} előtaggal kell kezdődniük.",
             "wrongAddressFormat": "A cím nem megfelelő formátumú.",
             "invalidAddress": "Helytelen cím.",
+            "invalidAssetId": "The asset id is not valid.",
             "unknownAsset": "A token ezen a számlán nem ismert.",
             "insufficientFunds": "Nincs elég összeg a tárcájában a tranzakció végrehajtásához.",
             "insufficientFundsStorageDeposit": "Nincs elegendő egyenlege a letéti díj fedezetéhez",
@@ -1919,7 +1971,7 @@
         "governance": {
             "unableToAddProposal": {
                 "short": "Unable to add proposal",
-                "long": "An error occurred while trying to add proposal {proposalId}"
+                "long": "Nem sikerült megtalálni a(z) {proposalId} azonosítójú indítványt a megadott csomóponton"
             }
         }
     },
@@ -2010,7 +2062,8 @@
             "issuerName": "Optional parameter: The name of the creator",
             "description": "Optional parameter: A description of the NFT",
             "attributes": "Optional parameter: An array of traits and values that define attributes of the NFT",
-            "uri": "To create a URI using custom media, first upload your file to IPFS via a storage service (e.g. https://nft.storage/)"
+            "uri": "To create a URI using custom media, first upload your file to IPFS via a storage service (e.g. https://nft.storage/)",
+            "quantity": "Választható paraméter: A metaadatokkal veretett példányok mennyisége."
         },
         "governance": {
             "removeProposalWarning": "A javaslat eltávolítása előtt le kell állítani a szavazást."

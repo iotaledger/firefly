@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Button, Text, FontWeight, TextHint, TextType, KeyValueBox } from 'shared/components'
     import { HTMLButtonType } from 'shared/components/enums'
-    import { closePopup } from '@auxiliary/popup/actions'
+    import { closePopup, openPopup } from '@auxiliary/popup/actions'
     import { selectedAccount } from '@core/account/stores'
     import { localize } from '@core/i18n'
     import { BASE_TOKEN } from '@core/network/constants'
@@ -11,6 +11,7 @@
     import { vote } from '@contexts/governance/actions'
     import { ABSTAIN_VOTE_VALUE } from '@contexts/governance/constants'
     import { hasPendingGovernanceTransaction, selectedProposal } from '@contexts/governance/stores'
+    import { PopupId } from '@auxiliary/popup'
 
     export let selectedAnswerValues: number[]
 
@@ -26,10 +27,14 @@
         selectedAnswerValues?.filter((answerValue) => answerValue === ABSTAIN_VOTE_VALUE).length ?? 0
 
     async function handleSubmit(): Promise<void> {
-        await checkActiveProfileAuth(async () => {
-            await vote($selectedProposal?.id, selectedAnswerValues)
-            closePopup()
-        })
+        if (hasVotingPower) {
+            await checkActiveProfileAuth(async () => {
+                await vote($selectedProposal?.id, selectedAnswerValues)
+                closePopup()
+            })
+        } else {
+            openPopup({ id: PopupId.ManageVotingPower })
+        }
     }
 </script>
 
@@ -65,13 +70,8 @@
         <Button classes="w-full" disabled={isTransferring} outline onClick={closePopup}
             >{localize('actions.cancel')}</Button
         >
-        <Button
-            type={HTMLButtonType.Submit}
-            classes="w-full"
-            disabled={!hasVotingPower || isTransferring}
-            isBusy={isTransferring}
-        >
-            {localize('actions.vote')}
+        <Button type={HTMLButtonType.Submit} classes="w-full" disabled={isTransferring} isBusy={isTransferring}>
+            {hasVotingPower ? localize('actions.vote') : localize('views.governance.votingPower.manage')}
         </Button>
     </popup-buttons>
 </form>

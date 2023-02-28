@@ -1,4 +1,8 @@
 <script lang="ts">
+    import type { UnlockConditionTypes } from '@iota/types'
+
+    import { BalanceSummarySection, Button } from '@ui'
+
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { isStrongholdUnlocked } from '@core/profile-manager'
@@ -10,9 +14,8 @@
     } from '@core/wallet'
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
-    import type { UnlockConditionTypes } from '@iota/types'
-    import { BalanceSummarySection, Button } from 'shared/components'
-    import { closeDrawer, DrawerId, openDrawer } from '../../lib/auxiliary/drawer'
+
+    import { closeDrawer, DrawerId, openDrawer } from '@/auxiliary/drawer'
 
     interface Breakdown {
         amount: number

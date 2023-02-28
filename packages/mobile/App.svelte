@@ -14,8 +14,8 @@
         shouldBeDarkMode,
     } from '@core/app'
     import { onboardingProfile } from '@contexts/onboarding'
-    import { DrawerManager, ToastContainer } from './components'
-    import { isKeyboardOpen, keyboardHeight } from './lib/auxiliary/keyboard'
+    import { DrawerManager, ToastContainer } from '@components'
+    import { isKeyboardOpen, keyboardHeight } from '@/auxiliary/keyboard'
     import {
         appRoute,
         AppRoute,
@@ -25,8 +25,8 @@
         initialiseRouters,
         resetRouterForAppContext,
         resetRouters,
-    } from './lib/routers'
-    import { DashboardView, LoginRouter, OnboardingRouter } from './views'
+    } from '@/routers'
+    import { DashboardView, LoginRouter, OnboardingRouter } from '@views'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 

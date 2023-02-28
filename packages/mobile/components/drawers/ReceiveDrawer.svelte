@@ -1,6 +1,7 @@
 <script lang="ts">
+    import { AddressBox, QR, Text, TextType } from '@ui'
+
     import { selectedAccount } from '@core/account'
-    import { AddressBox, QR, Text, TextType } from 'shared/components'
 
     let addressBoxElement: AddressBox
 

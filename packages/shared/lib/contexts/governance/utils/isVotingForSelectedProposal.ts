@@ -1,9 +1,9 @@
 import { get } from 'svelte/store'
 
-import { selectedProposal } from '../stores'
+import { selectedProposalId } from '../stores'
 import { isVotingForProposal } from './isVotingForProposal'
 
 export function isVotingForSelectedProposal(accountIndex?: number): boolean {
-    const proposalId = get(selectedProposal)?.id
+    const proposalId = get(selectedProposalId)
     return isVotingForProposal(proposalId, accountIndex)
 }
