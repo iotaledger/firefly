@@ -1,8 +1,17 @@
 <script lang="ts">
-    import { Icon as IconEnum } from '@lib/auxiliary/icon'
-    import { Icon, Text, TextType } from '@ui'
     import { fade, fly } from 'svelte/transition'
-    import { DRAWER_IN_ANIMATION_DURATION_MS, DRAWER_OUT_ANIMATION_DURATION_MS } from '@/contexts/dashboard'
+
+    import { Icon, Text, TextType } from '@ui'
+
+    import { localize } from '@core/i18n'
+
+    import {
+        DrawerId,
+        DRAWER_STATIC_TITLE_TITLES,
+        DRAWER_IN_ANIMATION_DURATION_MS,
+        DRAWER_OUT_ANIMATION_DURATION_MS,
+    } from '@/auxiliary/drawer'
+    import { Icon as IconEnum } from '@lib/auxiliary/icon'
 
     export let onClose: () => unknown = () => {}
     export let onBackClick: () => unknown = () => {}
@@ -10,12 +19,16 @@
     export let title: string | undefined = undefined
     export let fullScreen: boolean = false
     export let enterFromSide: boolean = false
+    export let id: DrawerId = undefined
 
     let position = 0
     let moving = false
     let panelHeight = 0
     let panelWidth = 0
     let touchStart = 0
+
+    $: staticTile = DRAWER_STATIC_TITLE_TITLES[id] ? localize(DRAWER_STATIC_TITLE_TITLES[id]) : undefined
+    $: displayedTitle = title ?? staticTile
 
     const directon = enterFromSide ? { x: -100 } : { y: 100 }
 
@@ -69,7 +82,7 @@
                 class="absolute top-2 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-gray-300 dark:bg-gray-700 rounded"
             />
         {/if}
-        {#if title || (allowBack && onBackClick)}
+        {#if displayedTitle || (allowBack && onBackClick)}
             <div class="grid grid-cols-4 h-6 mb-6">
                 <div class="col-span-1">
                     {#if allowBack && onBackClick}
@@ -79,8 +92,8 @@
                     {/if}
                 </div>
                 <div class="flex justify-center col-span-2 content-center">
-                    {#if title}
-                        <Text type={TextType.h4} classes="text-center">{title}</Text>
+                    {#if displayedTitle}
+                        <Text type={TextType.h4} classes="text-center">{displayedTitle}</Text>
                     {/if}
                 </div>
             </div>

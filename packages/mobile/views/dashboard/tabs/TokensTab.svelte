@@ -1,10 +1,14 @@
 <script lang="ts">
-    import { IAsset, selectedAccountAssets } from '@core/wallet'
     import { AssetList } from '@components'
-    import { tokenRouter } from '@/routers'
+
+    import { IAsset, selectedAccountAssets } from '@core/wallet'
+
+    import { DrawerId, openDrawer } from '@/auxiliary/drawer'
 
     function onAssetTileClick(asset: IAsset): void {
-        $tokenRouter?.next({ asset })
+        openDrawer(DrawerId.SelectedToken, {
+            asset,
+        })
     }
 </script>
 
