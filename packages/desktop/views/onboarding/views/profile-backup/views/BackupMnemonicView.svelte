@@ -8,11 +8,11 @@
 
     export let busy = false
 
-    function handleContinueClick(): void {
+    function onContinueClick(): void {
         $profileBackupRouter.next()
     }
 
-    function handleBackClick(): void {
+    function onBackClick(): void {
         $profileBackupRouter.previous()
     }
 
@@ -23,7 +23,7 @@
     })
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick} {busy}>
+<OnboardingLayout {onBackClick} {busy}>
     <div slot="title">
         <Text type="h2">{localize('views.onboarding.profileBackup.backupMnemonic.title')}</Text>
     </div>
@@ -35,7 +35,7 @@
         >
     </div>
     <div slot="leftpane__action">
-        <Button classes="w-full" onClick={handleContinueClick}>{localize('actions.continue')}</Button>
+        <Button classes="w-full" onClick={onContinueClick}>{localize('actions.continue')}</Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-purple dark:bg-gray-900'}">
         <Animation classes="setup-anim-aspect-ratio" animation="backup-desktop" />

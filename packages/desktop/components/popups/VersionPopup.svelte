@@ -20,7 +20,7 @@
     let hasAutoUpdate = true
     let isPreRelease = true
 
-    function handleDownload(): void {
+    function onDownloadClick(): void {
         if (hasAutoUpdate) {
             downloadAppUpdate()
         } else {
@@ -28,7 +28,7 @@
         }
         closePopup()
     }
-    function handleCloseClick(): void {
+    function onCloseClick(): void {
         closePopup()
     }
 
@@ -73,7 +73,7 @@
             </Text>
         </div>
         <div class="flex flex-row justify-center w-full">
-            <Button outline onClick={handleCloseClick}>{localize('actions.close')}</Button>
+            <Button outline onClick={onCloseClick}>{localize('actions.close')}</Button>
         </div>
     {:else}
         <div class="my-6">
@@ -96,8 +96,8 @@
             {/if}
         </div>
         <div class="flex flex-row justify-between space-x-4 w-full md:px-8">
-            <Button outline classes="w-1/2" onClick={handleCloseClick}>{localize('actions.cancel')}</Button>
-            <Button classes="w-1/2" onClick={handleDownload} disabled={$appUpdateBusy}>
+            <Button outline classes="w-1/2" onClick={onCloseClick}>{localize('actions.cancel')}</Button>
+            <Button classes="w-1/2" onClick={onDownloadClick} disabled={$appUpdateBusy}>
                 {localize('actions.updateFirefly')}
             </Button>
         </div>

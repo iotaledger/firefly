@@ -12,7 +12,7 @@
 
     let checked = false
 
-    function handleConfirmClick(): void {
+    function onConfirmClick(): void {
         lastAcceptedTermsOfService.set(TERMS_OF_SERVICE_VERSION)
         lastAcceptedPrivacyPolicy.set(PRIVACY_POLICY_VERSION)
         onAccept()
@@ -33,6 +33,6 @@
         <div class="flex flex-row items-center mb-4">
             <Checkbox label={localize('popups.legalUpdate.tosAndPrivPolicyCheckbox')} bind:checked />
         </div>
-        <Button classes="w-full" onClick={handleConfirmClick} disabled={!checked}>{localize('actions.confirm')}</Button>
+        <Button classes="w-full" onClick={onConfirmClick} disabled={!checked}>{localize('actions.confirm')}</Button>
     </legal-update-actions>
 </legal-update-view>

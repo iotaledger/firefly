@@ -5,7 +5,7 @@
     import { Button, HR } from '@ui'
     import { sendRouter } from '@/routers'
 
-    export let onCancel: () => unknown = () => {}
+    export let onCancelClick: () => unknown = () => {}
 
     const DATE_NOW = Date.now()
 
@@ -56,7 +56,7 @@
         {localize('menus.expirationTimePicker.1week')}
     </Button>
     <HR />
-    <Button outline onClick={onCancel} classes="w-full">
+    <Button outline onClick={onCancelClick} classes="w-full">
         {localize('actions.cancel')}
     </Button>
 </div>

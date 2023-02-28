@@ -39,10 +39,10 @@
     let isBusy = false
     let hasUsedWalletFinder = false
 
-    $: searchForBalancesOnLoad && !$isStrongholdLocked && handleFindBalances()
+    $: searchForBalancesOnLoad && !$isStrongholdLocked && onHandleFindBalancesClick()
     $: totalBalance = sumBalanceForAccounts($visibleActiveAccounts)
 
-    async function handleFindBalances(): Promise<void> {
+    async function onHandleFindBalancesClick(): Promise<void> {
         if ($isSoftwareProfile && $isStrongholdLocked) {
             openPopup({
                 id: PopupId.UnlockStronghold,
@@ -103,7 +103,7 @@
         }
     }
 
-    function handleCancelClick(): void {
+    function onCancelClick(): void {
         closePopup()
     }
 
@@ -144,12 +144,12 @@
 </div>
 
 <div class="flex flex-row flex-nowrap w-full space-x-4 mt-6">
-    <Button classes="w-full" outline onClick={handleCancelClick} disabled={isBusy}>
+    <Button classes="w-full" outline onClick={onCancelClick} disabled={isBusy}>
         {localize('actions.cancel')}
     </Button>
     <Button
         classes="w-full"
-        onClick={handleFindBalances}
+        onClick={onHandleFindBalancesClick}
         disabled={isBusy}
         {isBusy}
         busyMessage={localize('actions.searching')}

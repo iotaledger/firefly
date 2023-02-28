@@ -34,7 +34,7 @@
 
     let navWidth: string
 
-    function handleClickOutside(): void {
+    function onClickOutside(): void {
         dropdown = false
     }
 
@@ -130,7 +130,7 @@
         toggleDropDown()
     }}
     use:clickOutside
-    on:clickOutside={handleClickOutside}
+    on:clickOutside={onClickOutside}
     on:keydown={handleKey}
     class:active={dropdown}
     class:small

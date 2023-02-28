@@ -16,7 +16,7 @@
     let hide = true
     let hasRevealedRecoveryPhrase = false
 
-    function handleContinueClick(): void {
+    function onContinueClick(): void {
         $profileBackupRouter.next()
     }
 
@@ -25,7 +25,7 @@
         $profileBackupRouter.previous()
     }
 
-    function handleMnemonicVisibilityClick(): void {
+    function onMnemonicVisibilityClick(): void {
         hide = !hide
         hasRevealedRecoveryPhrase = true
     }
@@ -52,10 +52,7 @@
     </div>
     <div slot="footer">
         {#if hasRevealedRecoveryPhrase === false}
-            <Button
-                classes="w-full"
-                onClick={hasRevealedRecoveryPhrase ? handleContinueClick : handleMnemonicVisibilityClick}
-            >
+            <Button classes="w-full" onClick={hasRevealedRecoveryPhrase ? onContinueClick : onMnemonicVisibilityClick}>
                 {localize(
                     !hasRevealedRecoveryPhrase
                         ? 'views.onboarding.profileBackup.viewMnemonic.revealRecoveryPhrase'
@@ -63,10 +60,7 @@
                 )}
             </Button>
         {:else}
-            <Button
-                classes="w-full"
-                onClick={hasRevealedRecoveryPhrase ? handleContinueClick : handleMnemonicVisibilityClick}
-            >
+            <Button classes="w-full" onClick={hasRevealedRecoveryPhrase ? onContinueClick : onMnemonicVisibilityClick}>
                 {localize('actions.continue')}
             </Button>
         {/if}

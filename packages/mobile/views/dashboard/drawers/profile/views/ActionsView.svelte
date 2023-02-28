@@ -24,7 +24,7 @@
     function handleLogoutClick(): void {
         logout()
     }
-    function handleProfileLockButtonClick(): void {
+    function onProfileLockButtonClick(): void {
         if ($isStrongholdLocked) {
             isStrongholdUnlocked().then((locked) => {
                 if (!locked) {
@@ -77,7 +77,7 @@
                 <NetworkStatusButton onClick={() => $profileRouter.next({ networkStatus: true })} />
             {/if}
             {#if features?.dashboard?.profileActions?.profileLock?.enabled}
-                <ProfileLockButton onClick={handleProfileLockButtonClick} />
+                <ProfileLockButton onClick={onProfileLockButtonClick} />
             {/if}
             {#if features?.settings?.enabled}
                 <ProfileActionButton

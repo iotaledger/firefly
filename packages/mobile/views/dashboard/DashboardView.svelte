@@ -21,7 +21,7 @@
 
     $: $hasStrongholdLocked && reflectLockedStronghold()
 
-    function handleReceiveClick(): void {
+    function onReceiveClick(): void {
         openDrawer(DrawerId.Receive)
     }
 </script>
@@ -46,7 +46,7 @@
                         </Button>
                     {/if}
                     {#if features?.dashboard?.receive?.enabled}
-                        <Button classes="w-full h-10" onClick={handleReceiveClick}>
+                        <Button classes="w-full h-10" onClick={onReceiveClick}>
                             {localize('actions.receive')}
                         </Button>
                     {/if}

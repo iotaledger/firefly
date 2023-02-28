@@ -85,11 +85,11 @@
             value: type as MimeType,
         }))
 
-    function handleCancel(): void {
+    function onCancelClick(): void {
         closePopup()
     }
 
-    function handleContinue(): void {
+    function onContinueClick(): void {
         resetErrors()
         const valid = validate()
         if (valid) {
@@ -101,7 +101,7 @@
         }
     }
 
-    function handleSelectNftType(item: { label: MimeType; value: MimeType }): void {
+    function onSelectNftTypeClick(item: { label: MimeType; value: MimeType }): void {
         type = item.value
     }
 
@@ -261,7 +261,7 @@
         <Dropdown
             bind:value={type}
             bind:error={typeError}
-            onSelect={handleSelectNftType}
+            onSelect={onSelectNftTypeClick}
             label={localize('general.type')}
             placeholder={localize('general.type')}
             items={nftTypeOptions}
@@ -309,10 +309,10 @@
         {/if}
     </popup-inputs>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button outline classes="w-full" onClick={handleCancel}>
+        <Button outline classes="w-full" onClick={onCancelClick}>
             {localize('actions.cancel')}
         </Button>
-        <Button classes="w-full" onClick={handleContinue}>
+        <Button classes="w-full" onClick={onContinueClick}>
             {localize('actions.continue')}
         </Button>
     </popup-buttons>

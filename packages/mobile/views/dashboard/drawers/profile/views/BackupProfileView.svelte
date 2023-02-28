@@ -23,7 +23,7 @@
           })
         : localize('views.dashboard.profileModal.backup.notBackedUp')
 
-    function handleExportClick(): void {
+    function onExportClick(): void {
         isBusy = false
         const handleExport = (password: string) => {
             isBusy = true
@@ -51,7 +51,7 @@
             <Text type={TextType.p} secondary fontSize="15">{localize('popups.backupStronghold.body')}</Text>
         </div>
     </div>
-    <Button classes="w-full" disabled={isBusy} busyMessage={message} {isBusy} onClick={handleExportClick}>
+    <Button classes="w-full" disabled={isBusy} busyMessage={message} {isBusy} onClick={onExportClick}>
         {localize('actions.saveBackup')}
     </Button>
 </div>

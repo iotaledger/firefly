@@ -172,7 +172,7 @@
         giftStorageDeposit = !giftStorageDeposit
     }
 
-    async function onConfirm(): Promise<void> {
+    async function onConfirmClick(): Promise<void> {
         try {
             validateSendConfirmation(outputOptions, preparedOutput)
 
@@ -186,7 +186,7 @@
         }
     }
 
-    function onBack(): void {
+    function onBackClick(): void {
         closePopup()
         openPopup({
             id: PopupId.SendForm,
@@ -194,7 +194,7 @@
         })
     }
 
-    function onCancel(): void {
+    function onCancelClick(): void {
         closePopup()
     }
 
@@ -228,7 +228,7 @@
                         color="green"
                         disabled={disableToggleGift}
                         active={giftStorageDeposit}
-                        onClick={toggleGiftStorageDeposit}
+                        handleClick={toggleGiftStorageDeposit}
                     />
                 </KeyValueBox>
             {/if}
@@ -250,16 +250,16 @@
     {/if}
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         {#if disableBack}
-            <Button classes="w-full" outline onClick={onCancel} disabled={isTransferring}>
+            <Button classes="w-full" outline onClick={onCancelClick} disabled={isTransferring}>
                 {localize('actions.cancel')}
             </Button>
         {:else}
-            <Button classes="w-full" outline onClick={onBack} disabled={isTransferring}>
+            <Button classes="w-full" outline onClick={onBackClick} disabled={isTransferring}>
                 {localize('actions.back')}
             </Button>
         {/if}
 
-        <Button classes="w-full" onClick={onConfirm} disabled={isTransferring} isBusy={isTransferring}>
+        <Button classes="w-full" onClick={onConfirmClick} disabled={isTransferring} isBusy={isTransferring}>
             {localize('actions.send')}
         </Button>
     </popup-buttons>

@@ -124,7 +124,7 @@
         }
     }
 
-    function onUnlockSuccess(): void {
+    function handleSuccess(): void {
         triggerSendOnMount = true
         $sendRouter.next()
     }
@@ -141,7 +141,7 @@
 {:else if $sendRoute === SendRoute.Review}
     <ReviewView {sendTransaction} {triggerSendOnMount} {storageDeposit} {initialExpirationDate} bind:expirationDate />
 {:else if $sendRoute === SendRoute.Expiration}
-    <Expiration onCancel={() => $sendRouter.previous()} />
+    <Expiration onCancelClick={() => $sendRouter.previous()} />
 {:else if $sendRoute === SendRoute.Password}
-    <StrongholdUnlock onSuccess={onUnlockSuccess} onCancel={() => $sendRouter.previous()} />
+    <StrongholdUnlock {handleSuccess} handleCancel={() => $sendRouter.previous()} />
 {/if}

@@ -10,11 +10,11 @@
     import { closePopup } from '@auxiliary/popup'
     import { showAppNotification } from '@auxiliary/notification'
 
-    function handleCancel(): void {
+    function onCancelClick(): void {
         closePopup()
     }
 
-    async function handleConfirm(): Promise<void> {
+    async function onConfirmClick(): Promise<void> {
         try {
             await deregisterParticipationEvent($selectedProposal.id)
             showAppNotification({
@@ -43,8 +43,8 @@
         {/if}
     </div>
     <div class="flex w-full space-x-4 mt-6">
-        <Button outline classes="w-full" onClick={handleCancel}>{localize('actions.cancel')}</Button>
-        <Button variant={ButtonVariant.Warning} classes="w-full" onClick={handleConfirm}
+        <Button outline classes="w-full" onClick={onCancelClick}>{localize('actions.cancel')}</Button>
+        <Button variant={ButtonVariant.Warning} classes="w-full" onClick={onConfirmClick}
             >{localize('actions.remove')}</Button
         >
     </div>

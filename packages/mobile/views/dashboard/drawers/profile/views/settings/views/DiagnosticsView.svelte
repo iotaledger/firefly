@@ -34,7 +34,7 @@
         void Platform.getDiagnostics().then((values) => (contentSystem = concatenateInfo(values)))
     })
 
-    function handleCopyClick(): void {
+    function onCopyClick(): void {
         setClipboard(contentApp + '\r\n' + contentSystem)
     }
 
@@ -48,5 +48,5 @@
         <Text type={TextType.pre} secondary>{contentApp}</Text>
         <Text type={TextType.pre} secondary>{contentSystem}</Text>
     </div>
-    <Button size={ButtonSize.Medium} classes="w-full" onClick={handleCopyClick}>{localize('actions.copy')}</Button>
+    <Button size={ButtonSize.Medium} classes="w-full" onClick={onCopyClick}>{localize('actions.copy')}</Button>
 </div>

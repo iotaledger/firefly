@@ -13,7 +13,7 @@
     let error: string
     let isBusy = false
 
-    async function handleDeleteClick(): Promise<void> {
+    async function onDeleteClick(): Promise<void> {
         error = null
         isBusy = true
         await deleteStrongholdAccount(password)
@@ -33,7 +33,7 @@
         }
     }
 
-    function handleCancelClick(): void {
+    function onCancelClick(): void {
         closePopup()
     }
 </script>
@@ -45,7 +45,7 @@
         })}
     </Text>
 </div>
-<form on:submit|preventDefault={handleDeleteClick} class="flex w-full flex-row flex-wrap">
+<form on:submit|preventDefault={onDeleteClick} class="flex w-full flex-row flex-wrap">
     <Text type="p" secondary classes="mb-5">{localize('popups.deleteAccount.body')}</Text>
     {#if $isSoftwareProfile}
         <Text type="p" secondary classes="mb-3">{localize('popups.deleteAccount.typePassword')}</Text>
@@ -55,7 +55,7 @@
             showRevealToggle
             placeholder={localize('general.password')}
             autofocus
-            submitHandler={handleDeleteClick}
+            submitHandler={onDeleteClick}
             disabled={isBusy}
         />
     {/if}
@@ -63,7 +63,7 @@
         <Error {error} />
     {/if}
     <div class="flex flex-row w-full space-x-4 justify-center mt-5">
-        <Button outline classes="w-1/2" onClick={handleCancelClick} disabled={isBusy}>
+        <Button outline classes="w-1/2" onClick={onCancelClick} disabled={isBusy}>
             {localize('actions.cancel')}
         </Button>
         <Button

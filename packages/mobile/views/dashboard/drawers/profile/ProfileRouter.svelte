@@ -6,7 +6,8 @@
     $: needsUnlockStore = $profileRouter?.getNeedsUnlockStore()
     $: needsUnlockStoreCallbackStore = $profileRouter?.getNeedsUnlockCallbackStore()
     $: returnPasswordUnlockCallbackStore = $profileRouter?.getReturnPasswordUnlockCallbackStore()
-    function onUnlockSuccess(password?: string): void {
+
+    function handleSuccess(password?: string): void {
         $profileRouter.setNeedsUnlock(false, undefined)
         if ($needsUnlockStoreCallbackStore && typeof $needsUnlockStoreCallbackStore === 'function') {
             $needsUnlockStoreCallbackStore(password)
@@ -27,8 +28,8 @@
 {#if $needsUnlockStore}
     <Drawer onClose={() => $profileRouter.setNeedsUnlock(false)}>
         <StrongholdUnlock
-            onSuccess={onUnlockSuccess}
-            onCancel={() => $profileRouter.setNeedsUnlock(false, undefined)}
+            {handleSuccess}
+            handleCancel={() => $profileRouter.setNeedsUnlock(false, undefined)}
             returnPassword={$returnPasswordUnlockCallbackStore}
         />
     </Drawer>

@@ -15,21 +15,21 @@
     let hide = true
     let hasRevealedRecoveryPhrase = false
 
-    function handleContinueClick(): void {
+    function onContinueClick(): void {
         $profileBackupRouter.next()
     }
 
-    function handleBackClick(): void {
+    function onBackClick(): void {
         updateOnboardingProfile({ mnemonic: null })
         $profileBackupRouter.previous()
     }
 
-    function handleMnemonicVisibilityClick(): void {
+    function onMnemonicVisibilityClick(): void {
         hide = !hide
         hasRevealedRecoveryPhrase = true
     }
 
-    function handleDownloadClick(): void {
+    function onDownloadClick(): void {
         downloadRecoveryKit()
     }
 
@@ -38,7 +38,7 @@
     })
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick} {busy} reverseContent={$mobile}>
+<OnboardingLayout {onBackClick} {busy} reverseContent={$mobile}>
     <div slot="title">
         <Text type="h2">{localize('views.onboarding.profileBackup.viewMnemonic.title')}</Text>
     </div>
@@ -51,14 +51,14 @@
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
         {#if !$mobile}
-            <Button outline classes="w-full" onClick={handleDownloadClick}>
+            <Button outline classes="w-full" onClick={onDownloadClick}>
                 {localize('actions.downloadRecoveryKit')}
             </Button>
         {/if}
         <Button
             disabled={!$mobile && !hasRevealedRecoveryPhrase}
             classes="w-full"
-            onClick={hasRevealedRecoveryPhrase ? handleContinueClick : handleMnemonicVisibilityClick}
+            onClick={hasRevealedRecoveryPhrase ? onContinueClick : onMnemonicVisibilityClick}
         >
             {localize(
                 $mobile && !hasRevealedRecoveryPhrase
@@ -73,13 +73,13 @@
             {#if !$mobile}
                 {#if !hasRevealedRecoveryPhrase}
                     {#if hide}
-                        <Button onClick={handleMnemonicVisibilityClick} classes="absolute">
+                        <Button onClick={onMnemonicVisibilityClick} classes="absolute">
                             {localize('views.onboarding.profileBackup.viewMnemonic.revealRecoveryPhrase')}
                         </Button>
                     {/if}
                 {:else}
                     <button
-                        on:click={handleMnemonicVisibilityClick}
+                        on:click={onMnemonicVisibilityClick}
                         class="absolute top-10 right-10 flex flex-row items-center highlight"
                         type="button"
                     >

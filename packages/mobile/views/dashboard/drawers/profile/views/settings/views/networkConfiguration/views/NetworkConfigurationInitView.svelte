@@ -18,11 +18,11 @@
 
     const { networkType } = $activeProfile
 
-    function handleAddNodeClick(): void {
+    function onAddNodeClick(): void {
         $networkConfigurationSettingsRouter.next({ action: NetworkConfigurationSettingsAction.AddNode })
     }
 
-    function handleNodeClick(node: INode) {
+    function onNodeClick(node: INode) {
         $networkConfigurationSettingsRouter.next({ node })
     }
 </script>
@@ -60,7 +60,7 @@
         <div class="flex flex-col space-y-4 w-full">
             <Text type={TextType.h5}>{localize('views.settings.configureNodeList.title')}</Text>
             <Text type={TextType.p} secondary>{localize('views.settings.configureNodeList.description')}</Text>
-            <NodeListTable onNodeClick={handleNodeClick} />
+            <NodeListTable {onNodeClick} />
         </div>
     </div>
     <div class="flex flex-col space-y-4 w-full">
@@ -69,7 +69,7 @@
                 {localize('actions.addOfficialNodes')}
             </Button>
         {/if}
-        <Button inlineStyle="min-width: 156px;" classes="w-full" onClick={handleAddNodeClick}>
+        <Button inlineStyle="min-width: 156px;" classes="w-full" onClick={onAddNodeClick}>
             {localize('actions.addNode')}
         </Button>
     </div>

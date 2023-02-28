@@ -3,7 +3,7 @@
     import { openPopup, PopupId } from '@auxiliary/popup'
     import { OnboardingButton } from 'shared/components'
 
-    function handleCreateAlias(): void {
+    function onCreateAliasClick(): void {
         openPopup({
             id: PopupId.AliasConfirmation,
         })
@@ -13,5 +13,5 @@
 <OnboardingButton
     primaryText={localize('actions.createAlias')}
     secondaryText={localize('actions.createAliasDescription')}
-    onClick={handleCreateAlias}
+    onClick={onCreateAliasClick}
 />

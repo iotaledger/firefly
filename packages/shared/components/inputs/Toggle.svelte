@@ -4,17 +4,17 @@
     export let color = 'blue'
     export let disabled = false
 
-    export let onClick: () => void
+    export let handleClick: () => void
 
-    function handleClick(): void {
-        if (!disabled && onClick) {
-            onClick()
+    function onClick(): void {
+        if (!disabled && handleClick) {
+            handleClick()
         }
     }
 </script>
 
 <toggle
-    on:click={handleClick}
+    on:click={onClick}
     class:active
     disabled
     class="

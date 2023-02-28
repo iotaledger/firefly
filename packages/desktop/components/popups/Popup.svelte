@@ -161,7 +161,7 @@
         ].filter((el) => !el.hasAttribute('disabled'))
     }
 
-    function handleFocusFirst(event: FocusEvent): void {
+    function onFocusFirst(event: FocusEvent): void {
         const elems = focusableElements()
         if (elems && elems.length > 0) {
             elems[elems.length - 1].focus()
@@ -169,7 +169,7 @@
         event.preventDefault()
     }
 
-    function handleFocusLast(event: FocusEvent): void {
+    function onFocusLast(event: FocusEvent): void {
         const elems = focusableElements()
         if (elems && elems.length > 0) {
             elems[0].focus()
@@ -198,7 +198,7 @@
                         : 'bg-gray-800 bg-opacity-70 dark:bg-black dark:bg-opacity-50'
                 }`}
 >
-    <div tabindex="0" on:focus={handleFocusFirst} />
+    <div tabindex="0" on:focus={onFocusFirst} />
     <popup-content
         use:clickOutside
         on:clickOutside={tryClosePopup}
@@ -217,7 +217,7 @@
         {/if}
         <svelte:component this={POPUP_MAP[id]} {...props} />
     </popup-content>
-    <div tabindex="0" on:focus={handleFocusLast} />
+    <div tabindex="0" on:focus={onFocusLast} />
 </popup>
 
 <style type="text/scss">

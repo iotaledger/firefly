@@ -55,14 +55,14 @@
         ledgerConnectionText = localize(`views.dashboard.profileModal.hardware.statuses.${$ledgerConnectionState}`)
     }
 
-    function handleBackupClick(): void {
+    function onBackupClick(): void {
         modal?.close()
         openPopup({
             id: PopupId.BackupStronghold,
         })
     }
 
-    function handleVersionUpdateClick(): void {
+    function onVersionUpdateClick(): void {
         modal?.close()
         openPopup({ id: PopupId.Version })
     }
@@ -105,7 +105,7 @@
                             </Text>
                         </div>
                     </div>
-                    <Button size={ButtonSize.Small} onClick={handleVersionUpdateClick}>
+                    <Button size={ButtonSize.Small} onClick={onVersionUpdateClick}>
                         {localize('views.dashboard.profileModal.version.button')}
                     </Button>
                 </div>
@@ -135,7 +135,7 @@
                                 </Text>
                             </div>
                         </div>
-                        <Button outline size={ButtonSize.Small} onClick={handleBackupClick}>
+                        <Button outline size={ButtonSize.Small} onClick={onBackupClick}>
                             {localize('views.dashboard.profileModal.backup.button')}
                         </Button>
                     </div>
@@ -161,7 +161,7 @@
                 </div>
                 <Toggle
                     active={$isStrongholdLocked}
-                    onClick={() => handleStrongholdToggleClick()}
+                    handleClick={() => handleStrongholdToggleClick()}
                     classes="cursor-pointer"
                 />
             </div>

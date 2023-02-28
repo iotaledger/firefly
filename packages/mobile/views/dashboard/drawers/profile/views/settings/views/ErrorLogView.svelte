@@ -4,11 +4,11 @@
     import { setClipboard } from '@core/utils'
     import { Button, ButtonSize, Text, TextType } from '@ui'
 
-    function handleClearClick(): void {
+    function onClearClick(): void {
         errorLog.set([])
     }
 
-    function handleCopyClick(): void {
+    function onCopyClick(): void {
         const str = []
 
         for (const err of $errorLog) {
@@ -39,10 +39,10 @@
     </div>
     {#if $errorLog.length > 0}
         <div class="flex w-full justify-center space-x-4">
-            <Button size={ButtonSize.Medium} classes="w-full" onClick={handleClearClick}>
+            <Button size={ButtonSize.Medium} classes="w-full" onClick={onClearClick}>
                 {localize('actions.clear')}
             </Button>
-            <Button size={ButtonSize.Medium} classes="w-full" onClick={handleCopyClick}>
+            <Button size={ButtonSize.Medium} classes="w-full" onClick={onCopyClick}>
                 {localize('actions.copy')}
             </Button>
         </div>

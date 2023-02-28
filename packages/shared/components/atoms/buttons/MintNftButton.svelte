@@ -4,7 +4,7 @@
     import { OnboardingButton } from 'shared/components'
     import { resetMintNftDetails } from '@core/wallet'
 
-    function handleMintNft(): void {
+    function onMintNftClick(): void {
         resetMintNftDetails()
         openPopup({
             id: PopupId.MintNftForm,
@@ -15,5 +15,5 @@
 <OnboardingButton
     primaryText={localize('actions.mintNft')}
     secondaryText={localize('general.mintNftDescription')}
-    onClick={handleMintNft}
+    onClick={onMintNftClick}
 />

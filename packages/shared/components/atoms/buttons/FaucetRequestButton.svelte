@@ -5,7 +5,7 @@
     import { OnboardingButton } from 'shared/components'
     import { activeProfile } from '@core/profile'
 
-    function handleGetTokens(): void {
+    function onGetTokensClick(): void {
         openPopup({
             id: PopupId.FaucetRequest,
         })
@@ -20,6 +20,6 @@
         secondaryText={localize('general.faucetRequestDescription', {
             values: { network: $nodeInfo?.protocol?.networkName },
         })}
-        onClick={handleGetTokens}
+        onClick={onGetTokensClick}
     />
 {/if}

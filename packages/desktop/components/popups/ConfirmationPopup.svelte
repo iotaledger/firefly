@@ -18,7 +18,7 @@
     export let onCancel: () => void = undefined
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
-    function confirmClick(): void {
+    function onConfirmClick(): void {
         if (onConfirm) {
             onConfirm()
         } else {
@@ -26,7 +26,7 @@
         }
     }
 
-    function cancelClick(): void {
+    function onCancelClick(): void {
         if (onCancel) {
             onCancel()
         } else {
@@ -56,13 +56,13 @@
         {/if}
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" outline onClick={cancelClick}>{localize('actions.cancel')}</Button>
+        <Button classes="w-full" outline onClick={onCancelClick}>{localize('actions.cancel')}</Button>
         <Button
             classes="w-full"
             variant={warning || danger ? ButtonVariant.Warning : ButtonVariant.Primary}
             disabled={$selectedAccount.isTransferring}
             isBusy={$selectedAccount.isTransferring}
-            onClick={confirmClick}
+            onClick={onConfirmClick}
         >
             {confirmText}
         </Button>

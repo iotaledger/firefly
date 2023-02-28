@@ -20,7 +20,7 @@
 
     $: passwordStrength = zxcvbn(newPassword)
 
-    async function changePassword(): Promise<void> {
+    async function onChangePasswordClick(): Promise<void> {
         if (isPasswordValid()) {
             busy = true
             changeMessageLocale = 'general.passwordUpdating'
@@ -158,7 +158,7 @@
     <Button
         size={ButtonSize.Medium}
         disabled={!currentPassword || !newPassword || !confirmedPassword || busy}
-        onClick={changePassword}
+        onClick={onChangePasswordClick}
     >
         {localize('views.settings.changePassword.title')}
     </Button>
