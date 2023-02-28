@@ -4,9 +4,6 @@ import { AppContext } from '@core/app/enums'
 import { IRouter } from '@core/router/interfaces'
 
 import {
-    accountActionsRouter,
-    accountSwitcherRouter,
-    activityRouter,
     appSetupRouter,
     networkSetupRouter,
     networkConfigurationSettingsRouter,
@@ -18,24 +15,12 @@ import {
     settingsRouter,
     storageProtectionSetupRouter,
     strongholdSetupRouter,
-    tokenRouter,
-    filterRouter,
 } from '../routers'
 
 export function getSubroutersForAppContext(context: AppContext): IRouter[] {
     switch (context) {
         case AppContext.Dashboard:
-            return [
-                get(accountSwitcherRouter),
-                get(accountActionsRouter),
-                get(sendRouter),
-                get(activityRouter),
-                get(tokenRouter),
-                get(filterRouter),
-                get(profileRouter),
-                get(settingsRouter),
-                get(networkConfigurationSettingsRouter),
-            ]
+            return [get(sendRouter), get(profileRouter), get(settingsRouter), get(networkConfigurationSettingsRouter)]
         case AppContext.Login:
             return []
         case AppContext.Onboarding:
