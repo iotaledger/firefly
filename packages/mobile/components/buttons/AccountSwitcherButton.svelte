@@ -1,15 +1,16 @@
 <script lang="ts">
-    import { Icon as IconEnum } from '@auxiliary/icon'
-    import { selectedAccount } from '@core/account'
-    import { Icon } from '@ui'
-    import { AccountLabel } from '@ui/atoms/'
-    import { DashboardRoute, dashboardRoute, dashboardRouter } from '@/routers'
+    import { AccountLabel, Icon } from '@ui'
 
-    $: isDrawerOpen = $dashboardRoute === DashboardRoute.AccountSwitcher
+    import { selectedAccount } from '@core/account'
+
+    import { DrawerId, drawers, openDrawer } from '@/auxiliary/drawer'
+    import { Icon as IconEnum } from '@auxiliary/icon'
+
+    $: isDrawerOpen = $drawers.find((drawer) => drawer.id === DrawerId.AccountSwitcher)
 </script>
 
 <button
-    on:click={() => $dashboardRouter.goTo(DashboardRoute.AccountSwitcher)}
+    on:click={() => openDrawer(DrawerId.AccountSwitcher)}
     class="flex flex-row justify-center items-center space-x-2"
 >
     <AccountLabel account={$selectedAccount} />
