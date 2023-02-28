@@ -585,6 +585,7 @@
             "proposals": {
                 "title": "Proposals",
                 "voted": "Voted",
+                "successEdit": "Proposal successfully edited",
                 "successAdd": "Proposal successfully added",
                 "successAddAll": "Proposal successfully added to all accounts",
                 "successRemove": "Proposal successfully removed",
@@ -1069,6 +1070,10 @@
             "body": "Please provide the information listed below to add a proposal.",
             "addToAllAccounts": "Add the proposal to all accounts"
         },
+        "editProposal": {
+            "title": "Edit proposal",
+            "body": "Please provide the new url for the node that contains this proposal."
+        },
         "voteForProposal": {
             "title": "Vote for proposal",
             "body": "You're about to vote for {proposal} proposal.",
@@ -1282,6 +1287,7 @@
         "vote": "Vote",
         "addProposal": "Add proposal",
         "removeProposal": "Remove proposal",
+        "changeNode": "Change Node",
         "stopVoting": "Stop voting",
         "revote": "Revote"
     },
@@ -1819,6 +1825,7 @@
             "wrongAddressPrefix": "Adresy začínají předponou {prefix}.",
             "wrongAddressFormat": "Adresa nemá správný formát.",
             "invalidAddress": "Adresa je neplatná.",
+            "invalidAssetId": "The asset id is not valid.",
             "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "Tato peněženka nemá dostatek prostředků.",
             "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
@@ -1964,7 +1971,7 @@
         "governance": {
             "unableToAddProposal": {
                 "short": "Unable to add proposal",
-                "long": "An error occurred while trying to add proposal {proposalId}"
+                "long": "Unable to find proposal {proposalId} on the specified node"
             }
         }
     },

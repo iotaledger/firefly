@@ -585,6 +585,7 @@
             "proposals": {
                 "title": "提案",
                 "voted": "已投票",
+                "successEdit": "Proposal successfully edited",
                 "successAdd": "提案成功添加",
                 "successAddAll": "提案成功添加到所有账户",
                 "successRemove": "提案成功移除",
@@ -1069,6 +1070,10 @@
             "body": "请提供以下信息以添加提案。",
             "addToAllAccounts": "将提案添加到所有账户"
         },
+        "editProposal": {
+            "title": "Edit proposal",
+            "body": "Please provide the new url for the node that contains this proposal."
+        },
         "voteForProposal": {
             "title": "对提案投票",
             "body": "您即将投票给 {proposal} 提案。",
@@ -1282,6 +1287,7 @@
         "vote": "投票",
         "addProposal": "增加提案",
         "removeProposal": "移除提案",
+        "changeNode": "Change Node",
         "stopVoting": "停止投票",
         "revote": "重新投票"
     },
@@ -1819,6 +1825,7 @@
             "wrongAddressPrefix": "地址以前缀 {prefix} 开始。",
             "wrongAddressFormat": "地址格式不正确。",
             "invalidAddress": "地址无效的",
+            "invalidAssetId": "The asset id is not valid.",
             "unknownAsset": "该资产在这个账户中未知。",
             "insufficientFunds": "该账户资金不足。",
             "insufficientFundsStorageDeposit": "没有足够的资金来支付存储押金",
@@ -1964,7 +1971,7 @@
         "governance": {
             "unableToAddProposal": {
                 "short": "无法添加提案",
-                "long": "尝试添加提议 {proposalId} 时出错"
+                "long": "Unable to find proposal {proposalId} on the specified node"
             }
         }
     },
