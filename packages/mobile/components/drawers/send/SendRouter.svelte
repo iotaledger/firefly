@@ -1,6 +1,7 @@
 <script lang="ts">
     import type { OutputOptions } from '@iota/wallet'
 
+    import { onMount } from 'svelte'
     import { get } from 'svelte/store'
 
     import { AmountView, RecipientView, ReviewView, TokenView } from './views'
@@ -9,7 +10,6 @@
     import { handleError } from '@core/error/handlers/handleError'
     import { ledgerPreparedOutput } from '@core/ledger'
     import { isActiveLedgerProfile } from '@core/profile'
-    import { isStrongholdUnlocked } from '@core/profile-manager'
     import { ExpirationTime } from '@core/utils'
     import {
         DEFAULT_TRANSACTION_OPTIONS,
@@ -41,30 +41,31 @@
             : undefined
     $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
 
-    async function sendTransaction(): Promise<void> {
-        const isUnlocked = await isStrongholdUnlocked()
-        if (isUnlocked) {
-            try {
-                await prepareTransactionOutput()
-                validateSendConfirmation(outputOptions, preparedOutput)
+    onMount(() => {
+        if (transactionDetails.type === NewTransactionType.TokenTransfer && transactionDetails?.assetId) {
+            $sendRouter.next()
+        }
+    })
 
-                updateNewTransactionDetails({
-                    type: $newTransactionDetails.type,
-                    expirationDate,
-                    giftStorageDeposit,
-                    surplus,
-                })
-                if ($isActiveLedgerProfile) {
-                    ledgerPreparedOutput.set(preparedOutput)
-                }
-                await sendOutput(preparedOutput)
-                $sendRouter.next()
-            } catch (err) {
-                handleError(err)
-                throw new Error(err)
+    async function sendTransaction(): Promise<void> {
+        try {
+            await prepareTransactionOutput()
+            validateSendConfirmation(outputOptions, preparedOutput)
+
+            updateNewTransactionDetails({
+                type: $newTransactionDetails.type,
+                expirationDate,
+                giftStorageDeposit,
+                surplus,
+            })
+            if ($isActiveLedgerProfile) {
+                ledgerPreparedOutput.set(preparedOutput)
             }
-        } else {
-            $sendRouter.next({ needsUnlock: true })
+            await sendOutput(preparedOutput)
+            $sendRouter.next()
+        } catch (err) {
+            handleError(err)
+            throw new Error(err)
         }
     }
 
