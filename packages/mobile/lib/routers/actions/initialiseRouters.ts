@@ -31,8 +31,6 @@ import {
     StorageProtectionSetupRouter,
     strongholdSetupRouter,
     StrongholdSetupRouter,
-    FilterRouter,
-    filterRouter,
 } from '../routers'
 
 export function initialiseRouters(): void {
@@ -84,7 +82,6 @@ function initialiseOnboardingSubrouters(): void {
 
 function initialiseDashboardSubrouters(): void {
     sendRouter.set(new SendRouter())
-    filterRouter.set(new FilterRouter())
     profileRouter.set(new ProfileRouter())
     settingsRouter.set(new SettingsRouter())
 }
