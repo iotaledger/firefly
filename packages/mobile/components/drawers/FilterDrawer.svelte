@@ -1,13 +1,16 @@
 <script lang="ts">
+    import { onMount } from 'svelte'
+    import { Writable } from 'svelte/store'
+
+    import { FilterItem } from '@components'
+    import { FontWeight, Text } from '@ui'
+
     import { localize } from '@core/i18n'
     import { deepCopy } from '@core/utils'
     import { Filter } from '@core/utils/types'
-    import { FontWeight, Text } from '@ui'
-    import { onMount } from 'svelte'
-    import { Writable } from 'svelte/store'
-    import { FilterItem } from '../../components'
-    import { closeDrawer, DrawerId } from '../../lib/auxiliary/drawer'
-    import { FilterType, getFilterStore } from '../../lib/contexts/wallet'
+
+    import { closeDrawer, DrawerId } from '@/auxiliary/drawer'
+    import { FilterType, getFilterStore } from '@/contexts/wallet'
 
     export let filterType: FilterType
 
