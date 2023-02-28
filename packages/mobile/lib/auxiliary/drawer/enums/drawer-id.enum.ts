@@ -16,4 +16,5 @@ export enum DrawerId {
     BalanceBreakdown = 'balanceBreakdown',
     DeleteAccount = 'deleteAccount',
     Filter = 'filter',
+    DateTimePicker = 'dateTimePicker',
 }
