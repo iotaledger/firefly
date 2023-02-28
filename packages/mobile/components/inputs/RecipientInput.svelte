@@ -24,7 +24,9 @@
 
     function validateValue(): void {
         error = null
-        if (recipient?.type === 'address') {
+        if (!recipient) {
+            error = localize('error.send.recipientRequired')
+        } else if (recipient?.type === 'address') {
             localize('error.send.recipientRequired')
             if (!value?.length) {
                 error = localize('general.enterAddress')
