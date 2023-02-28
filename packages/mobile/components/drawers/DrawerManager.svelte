@@ -5,6 +5,7 @@
         ConfirmDrawer,
         CreateAccountDrawer,
         EnterPasswordDrawer,
+        ReceiveDrawer,
         SelectedActivityDrawer,
         SelectedTokenDrawer,
     } from './'
@@ -18,6 +19,7 @@
         [DrawerId.EnterPassword]: EnterPasswordDrawer,
         [DrawerId.SelectedActivity]: SelectedActivityDrawer,
         [DrawerId.SelectedToken]: SelectedTokenDrawer,
+        [DrawerId.Receive]: ReceiveDrawer,
     }
 </script>
 
