@@ -3,10 +3,10 @@
 
     import { selectedAccount } from '@core/account'
 
+    import { DrawerId, drawers, openDrawer } from '@/auxiliary/drawer'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { DrawerId, drawersStore, openDrawer } from '@/auxiliary/drawer'
 
-    $: isDrawerOpen = $drawersStore.find((drawer) => drawer.id === DrawerId.AccountSwitcher)
+    $: isDrawerOpen = $drawers.find((drawer) => drawer.id === DrawerId.AccountSwitcher)
 </script>
 
 <button
