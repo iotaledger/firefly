@@ -64,7 +64,7 @@
         }
         onClose && onClose()
     }
-    function handleBack(): void {
+    function onBackClick(): void {
         if ($drawerRouter) {
             $drawerRouter.previous()
         }
@@ -100,7 +100,7 @@
             <div class="grid grid-cols-4 h-6 mb-6">
                 <div class="col-span-1">
                     {#if allowBack}
-                        <button type="button" on:click={handleBack}>
+                        <button type="button" on:click={onBackClick}>
                             <Icon width="24" height="24" icon={IconEnum.ArrowLeft} classes="text-gray-500" />
                         </button>
                     {/if}
