@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { activeProfile, updateActiveProfileSettings } from '@core/profile'
     import type { IDropdownChoice } from '@core/utils'
-    import { Radio, Text, TextType } from 'shared/components'
+    import { Radio, Text, TextType } from '@ui'
 
     let selectedLockTimeout: number = $activeProfile?.settings?.lockScreenTimeoutInMinutes
     $: selectedLockTimeout, updateActiveProfileSettings({ lockScreenTimeoutInMinutes: selectedLockTimeout })

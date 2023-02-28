@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { Animation, Icon, Text, TextType } from 'shared/components'
-    import { isKeyboardOpen, keyboardHeight } from '../lib/auxiliary/keyboard'
+    import { Animation, Icon, Text, TextType } from '@ui'
+    import { isKeyboardOpen, keyboardHeight } from '@/auxiliary/keyboard'
 
     export let allowBack = true
     export let animation = ''

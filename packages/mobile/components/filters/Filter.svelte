@@ -1,8 +1,8 @@
 <script lang="ts">
-    import { TogglableButton } from 'shared/components'
-    import { DashboardRoute, dashboardRoute, filterRouter, FilterType } from '../../lib/routers'
+    import { TogglableButton } from '@ui'
+    import { DashboardRoute, dashboardRoute, filterRouter, FilterType } from '@/routers'
     import type { Filter } from '@core/utils/types'
-    import { selectedFilter } from '../../lib/contexts/dashboard'
+    import { selectedFilter } from '@/contexts/dashboard'
     import { activeProfileId } from '@core/profile'
 
     export let filterStoreValue: Filter

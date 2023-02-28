@@ -2,7 +2,7 @@
     import { setNextSelectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { activeProfile, updateActiveProfile } from '@core/profile'
-    import { Checkbox, Text, TextType } from 'shared/components'
+    import { Checkbox, Text, TextType } from '@ui'
 
     let showHiddenAccounts = $activeProfile?.showHiddenAccounts
     $: updateActiveProfile({ showHiddenAccounts: showHiddenAccounts })

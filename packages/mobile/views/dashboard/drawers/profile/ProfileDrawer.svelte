@@ -1,8 +1,8 @@
 <script lang="ts">
     import { appSettings } from '@core/app'
     import { localize } from '@core/i18n'
-    import { Drawer } from '../../../../components'
-    import { SETTINGS_ROUTE_META } from '../../../../lib/contexts/settings'
+    import { Drawer } from '@components'
+    import { SETTINGS_ROUTE_META } from '@/contexts/settings'
     import {
         networkConfigurationSettingsRoute,
         NetworkConfigurationSettingsRoute,
@@ -16,7 +16,7 @@
         settingsRoute,
         SettingsRouter,
         settingsRouter,
-    } from '../../../../lib/routers'
+    } from '@/routers'
     import ProfileRouterComponent from './ProfileRouter.svelte'
 
     export let onClose: () => unknown = () => {}

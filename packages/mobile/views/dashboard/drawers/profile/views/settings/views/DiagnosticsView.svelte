@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import { setClipboard } from '@core/utils'
-    import { Button, ButtonSize, Text, TextType } from 'shared/components'
+    import { Button, ButtonSize, Text, TextType } from '@ui'
     import { onMount } from 'svelte'
 
     let contentApp = ''

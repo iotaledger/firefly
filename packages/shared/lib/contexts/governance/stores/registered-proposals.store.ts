@@ -27,7 +27,7 @@ export const registeredProposalsForSelectedAccount: Readable<{ [proposalId: stri
     }
 )
 
-export function addProposalToRegisteredProposals(proposal: IProposalMetadata, accountId: number): void {
+export function addOrUpdateProposalToRegisteredProposals(proposal: IProposalMetadata, accountId: number): void {
     registeredProposals.update((proposals) => {
         if (!proposals[accountId]) {
             proposals[accountId] = {}

@@ -48,8 +48,6 @@
 
     const { loggedIn, hasLoadedAccounts } = $activeProfile
 
-    checkAndMigrateProfiles()
-
     async function handleCrashReporting(sendCrashReports: boolean): Promise<void> {
         await Platform.updateAppSettings({ sendCrashReports })
     }
@@ -160,6 +158,7 @@
         Platform.onEvent('deep-link-request', showDeepLinkNotification)
 
         await cleanupEmptyProfiles()
+        checkAndMigrateProfiles()
 
         const platform = await Platform.getOS()
         setPlatform(platform)

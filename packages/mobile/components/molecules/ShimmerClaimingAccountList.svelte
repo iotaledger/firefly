@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { ShimmerClaimingAccountTile } from 'shared/components'
+    import { ShimmerClaimingAccountTile } from '@ui'
     import { IShimmerClaimingAccount } from '@contexts/onboarding'
 
     export let shimmerClaimingAccounts: IShimmerClaimingAccount[]

@@ -1,12 +1,12 @@
 <script lang="ts">
     import { Text, NodeConfigurationForm, Button, HTMLButtonType } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { INode, addNodeToClientOptions, editNodeInClientOptions } from '@core/network'
+    import { INode, addNodeToClientOptions, editNodeInClientOptions, EMPTY_NODE } from '@core/network'
     import { closePopup } from '@auxiliary/popup'
     import { activeProfile } from '@core/profile'
     import { showAppNotification } from '@auxiliary/notification'
 
-    export let node: INode = { url: '', auth: { username: '', password: '', jwt: '' } }
+    export let node: INode = EMPTY_NODE
     export let isEditingNode: boolean = false
     export let onSuccess: (..._: any[]) => void
 

@@ -3,7 +3,7 @@ import { get, writable } from 'svelte/store'
 import { Subrouter } from '@core/router'
 import { ActivityType, claimActivity, getAssetById, NotVerifiedStatus, rejectActivity } from '@core/wallet'
 
-import { ActivityAction, selectedActivity } from '../../../../lib/contexts/dashboard'
+import { ActivityAction, selectedActivity } from '@/contexts/dashboard'
 import { ActivityRoute } from '../../enums'
 import { IActivityRouterEvent } from '../../interfaces'
 import { dashboardRouter, tokenRouter } from '../../routers'
