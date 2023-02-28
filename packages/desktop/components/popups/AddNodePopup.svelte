@@ -35,9 +35,7 @@
             }
 
             if (Platform.isFeatureFlagEnabled('governance')) {
-                if (currentNode?.url !== node?.url) {
-                    await registerProposalsForAccounts({ node }, $activeAccounts)
-                }
+                await registerProposalsForAccounts({ node }, $activeAccounts)
             }
 
             onSuccess()

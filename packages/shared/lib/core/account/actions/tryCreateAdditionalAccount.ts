@@ -1,11 +1,11 @@
 import { get } from 'svelte/store'
 
-import { showAppNotification } from '@auxiliary/notification'
-import { registerParticipationEvents } from '@contexts/governance/actions'
+import { showAppNotification } from '@auxiliary/notification/actions'
+import { registerProposalsFromNodes } from '@contexts/governance/actions'
 import { Platform } from '@core/app/classes'
 import { localize } from '@core/i18n'
-import { displayNotificationForLedgerProfile } from '@core/ledger'
-import { activeProfile, isActiveLedgerProfile } from '@core/profile'
+import { displayNotificationForLedgerProfile } from '@core/ledger/actions'
+import { isActiveLedgerProfile } from '@core/profile/stores'
 
 import { createNewAccount } from './createNewAccount'
 import { setSelectedAccount } from './setSelectedAccount'
@@ -16,8 +16,7 @@ export async function tryCreateAdditionalAccount(alias: string, color: string): 
         setSelectedAccount(account?.index)
 
         if (Platform.isFeatureFlagEnabled('governance')) {
-            const { nodes } = get(activeProfile)?.clientOptions
-            await Promise.all(nodes.map((node) => registerParticipationEvents({ node }, account)))
+            void registerProposalsFromNodes([account])
         }
 
         return Promise.resolve()
