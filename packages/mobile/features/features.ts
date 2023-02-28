@@ -72,6 +72,9 @@ const features = {
             actions: {
                 enabled: true,
             },
+            burnAsset: {
+                enabled: false,
+            },
         },
         governance: {
             enabled: false,

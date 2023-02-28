@@ -31,12 +31,14 @@ export function generateActivitiesFromBasicOutputs(
     for (const basicOutput of basicOutputs) {
         let activity: Activity
 
+        const isSelfTransaction = processedTransaction.direction === ActivityDirection.SelfTransaction
         const burnedNftInputIndex = burnedNftInputs.findIndex(
             (input) => input.output.amount === basicOutput.output.amount
         )
         const burnedNativeToken =
             burnedNftInputIndex < 0 ? getBurnedNativeTokens(basicOutput, processedTransaction) : undefined
-        if (burnedNftInputIndex >= 0) {
+
+        if (isSelfTransaction && burnedNftInputIndex >= 0) {
             const wrappedInput = burnedNftInputs[burnedNftInputIndex]
             const nftInput = wrappedInput.output as INftOutput
             activity = generateSingleNftActivity(
@@ -52,7 +54,7 @@ export function generateActivitiesFromBasicOutputs(
             addOrUpdateNftInAllAccountNfts(account.index, nft)
 
             burnedNftInputs.splice(burnedNftInputIndex, 1)
-        } else if (burnedNativeToken) {
+        } else if (isSelfTransaction && burnedNativeToken) {
             activity = generateSingleBasicActivity(
                 account,
                 {
@@ -63,7 +65,7 @@ export function generateActivitiesFromBasicOutputs(
                 burnedNativeToken.assetId,
                 burnedNativeToken.amount
             )
-        } else if (isConsolidation(basicOutput, processedTransaction)) {
+        } else if (isSelfTransaction && isConsolidation(basicOutput, processedTransaction)) {
             activity = generateSingleConsolidationActivity(account, {
                 action: ActivityAction.Send,
                 processedTransaction,

@@ -1,5 +1,5 @@
 export * from './buildNftFromNftOutput'
 export * from './convertAndFormatNftMetadata'
-export * from './getIsSpendableFromUnspentNftOutput'
+export * from './getSpendableStatusFromUnspentNftOutput'
 export * from './parseNftMetadata'
 export * from './rewriteIpfsUri'
