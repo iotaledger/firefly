@@ -1,10 +1,9 @@
 <script lang="ts">
     import features from '@features/features'
-    import { selectedActivity, selectedAsset, selectedFilter } from '@/contexts/dashboard'
+    import { selectedFilter } from '@/contexts/dashboard'
     import {
         accountActionsRouter,
         accountSwitcherRouter,
-        activityRouter,
         DashboardRoute,
         dashboardRoute,
         dashboardRouter,
@@ -13,21 +12,16 @@
         resetRouterWithDrawerDelay,
         sendRouter,
         settingsRouter,
-        tokenRouter,
     } from '@/routers'
     import {
         AccountActionsDrawer,
         AccountSwitcherDrawer,
-        ActivityDrawer,
         ProfileDrawer,
         ReceiveDrawer,
         SendDrawer,
-        TokenDrawer,
         FilterDrawer,
     } from './drawers'
 
-    $: $selectedActivity && $dashboardRouter.goTo(DashboardRoute.Activity)
-    $: $selectedAsset && $dashboardRouter.goTo(DashboardRoute.Token)
     $: $selectedFilter && $dashboardRouter.goTo(DashboardRoute.Filter)
 
     function onReceiveDrawerClose(): void {
@@ -48,12 +42,6 @@
         $profileRouter.closeDrawer()
         resetRouterWithDrawerDelay($settingsRouter)
     }
-    function onActivityDrawerClose(): void {
-        $activityRouter.closeDrawer()
-    }
-    function onTokenDrawerClose(): void {
-        $tokenRouter.closeDrawer()
-    }
     function onFilterDrawerClose(): void {
         $filterRouter.closeDrawer()
     }
@@ -69,10 +57,6 @@
     <AccountActionsDrawer onClose={onAccountActionsDrawerClose} />
 {:else if $dashboardRoute === DashboardRoute.Profile && features?.dashboard?.profileActions?.enabled}
     <ProfileDrawer onClose={onProfileDrawerClose} />
-{:else if $dashboardRoute === DashboardRoute.Activity && $selectedActivity}
-    <ActivityDrawer activity={$selectedActivity} onClose={onActivityDrawerClose} />
-{:else if $dashboardRoute === DashboardRoute.Token && $selectedAsset}
-    <TokenDrawer asset={$selectedAsset} onClose={onTokenDrawerClose} />
 {:else if $dashboardRoute === DashboardRoute.Filter && $selectedFilter}
     <FilterDrawer filter={$selectedFilter} onClose={onFilterDrawerClose} />
 {/if}
