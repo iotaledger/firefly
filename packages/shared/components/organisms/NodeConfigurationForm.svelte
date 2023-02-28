@@ -1,7 +1,10 @@
 <script lang="ts">
     import { get } from 'svelte/store'
     import { Input, PasswordInput } from 'shared/components'
-    import { INode, checkNodeUrlValidity, checkNetworkId, IClientOptions, nodeInfo, EMPTY_NODE } from '@core/network'
+    import { INode, IClientOptions, INodeInfoResponse } from '@core/network/interfaces'
+    import { EMPTY_NODE } from '@core/network/constants'
+    import { nodeInfo } from '@core/network/stores'
+    import { checkNodeUrlValidity, checkNetworkId } from '@core/network/utils'
     import { localize } from '@core/i18n'
     import { getNodeInfo } from '@core/profile-manager'
     import { stripSpaces, stripTrailingSlash } from '@core/utils'
@@ -41,7 +44,7 @@
             }
         }
 
-        let nodeInfoResponse
+        let nodeInfoResponse: INodeInfoResponse
         if (checkNodeInfo) {
             try {
                 nodeInfoResponse = await getNodeInfo(node.url)
@@ -69,7 +72,7 @@
 
         if (validateClientOptions && currentClientOptions) {
             const errorNetworkId = checkNetworkId(
-                nodeInfoResponse?.protocol?.networkName,
+                nodeInfoResponse?.nodeInfo?.protocol?.networkName,
                 currentClientOptions.network,
                 isDeveloperProfile
             )
