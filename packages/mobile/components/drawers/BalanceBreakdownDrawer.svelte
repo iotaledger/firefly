@@ -1,17 +1,21 @@
 <script lang="ts">
-    import { AccountAction } from '@/contexts/dashboard'
-    import { accountActionsRouter } from '@/routers'
+    import type { UnlockConditionTypes } from '@iota/types'
+
+    import { BalanceSummarySection, Button } from '@ui'
+
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
+    import { isStrongholdUnlocked } from '@core/profile-manager'
     import {
         OUTPUT_TYPE_TREASURY,
         UNLOCK_CONDITION_EXPIRATION,
         UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN,
         UNLOCK_CONDITION_TIMELOCK,
     } from '@core/wallet'
+    import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
-    import type { UnlockConditionTypes } from '@iota/types'
-    import { BalanceSummarySection, Button, FontWeight, Text } from '@ui'
+
+    import { closeDrawer, DrawerId, openDrawer } from '@/auxiliary/drawer'
 
     interface Breakdown {
         amount: number
@@ -118,15 +122,28 @@
     }
 
     function onConsolidationClick(): void {
-        $accountActionsRouter.next({ action: AccountAction.Consolidate })
+        const _onConfirm = async (): Promise<void> => {
+            const isUnlocked = await isStrongholdUnlocked()
+            if (isUnlocked) {
+                await consolidateOutputs()
+                closeDrawer(DrawerId.Confirm)
+            } else {
+                openDrawer(DrawerId.EnterPassword, { onSuccess: _onConfirm })
+            }
+        }
+
+        openDrawer(DrawerId.Confirm, {
+            title: localize('popups.minimizeStorageDeposit.title'),
+            description: localize('popups.minimizeStorageDeposit.description'),
+            hint: localize('popups.minimizeStorageDeposit.confirmButton'),
+            info: true,
+            onConfirm: _onConfirm,
+        })
     }
 </script>
 
-<div class="flex flex-col space-y-6">
-    <Text type="h3" fontWeight={FontWeight.semibold} lineHeight="6">
-        {localize('popups.balanceBreakdown.title')}
-    </Text>
-    <div class="balance-breakdown flex flex-col space-y-8">
+<div class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
+    <div class="flex flex-col space-y-8">
         {#each Object.keys(breakdown) as breakdownKey}
             <BalanceSummarySection
                 titleKey={breakdownKey}
@@ -141,9 +158,3 @@
         {localize('popups.balanceBreakdown.minimizeStorageDepositButton')}
     </Button>
 </div>
-
-<style type="text/scss">
-    .balance-breakdown {
-        max-height: calc(100vh - 200px);
-    }
-</style>

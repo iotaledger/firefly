@@ -1,4 +1,3 @@
-export * from './account-actions-router-event.interface'
 export * from './network-configuration-settings-router-event.interface'
 export * from './profile-router-event.interface'
 export * from './send-router-event.interface'
