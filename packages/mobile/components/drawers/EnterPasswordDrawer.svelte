@@ -1,9 +1,13 @@
 <script lang="ts">
     import { Button, HTMLButtonType, PasswordInput, Text, TextType } from '@ui'
+
     import { localize } from '@core/i18n'
     import { unlockStronghold } from '@core/profile'
 
+    import { closeDrawer, DrawerId } from '@/auxiliary/drawer'
+
     export let busyMessage: string = ''
+
     export let onSuccess: (password?: string) => unknown
     export let returnPassword: boolean = false
 
@@ -16,6 +20,7 @@
             error = ''
             isBusy = true
             await unlockStronghold(password)
+            closeDrawer(DrawerId.EnterPassword)
             onSuccess && onSuccess(returnPassword ? password : undefined)
         } catch (err) {
             console.error(err)

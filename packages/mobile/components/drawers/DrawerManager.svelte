@@ -1,10 +1,19 @@
 <script lang="ts">
     import { Drawer } from '@components'
-    import { ConfirmDrawer, EnterPasswordDrawer, SelectedActivityDrawer, SelectedTokenDrawer } from './'
+    import {
+        AccountSwitcherDrawer,
+        ConfirmDrawer,
+        CreateAccountDrawer,
+        EnterPasswordDrawer,
+        SelectedActivityDrawer,
+        SelectedTokenDrawer,
+    } from './'
 
     import { closeDrawer, DrawerId, drawers } from '@/auxiliary/drawer'
 
     const COMPONENTS = {
+        [DrawerId.AccountSwitcher]: AccountSwitcherDrawer,
+        [DrawerId.CreateAccount]: CreateAccountDrawer,
         [DrawerId.Confirm]: ConfirmDrawer,
         [DrawerId.EnterPassword]: EnterPasswordDrawer,
         [DrawerId.SelectedActivity]: SelectedActivityDrawer,

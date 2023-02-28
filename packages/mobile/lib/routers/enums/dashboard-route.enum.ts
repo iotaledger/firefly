@@ -1,5 +1,4 @@
 export enum DashboardRoute {
-    AccountSwitcher = 'accountSwitcher',
     AccountActions = 'accountActions',
     Filter = 'filter',
     Init = 'init',

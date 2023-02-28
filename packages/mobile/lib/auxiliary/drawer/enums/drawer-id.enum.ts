@@ -1,6 +1,7 @@
 export enum DrawerId {
     AccountActions = 'accountActions',
     AccountSwitcher = 'accountSwitcher',
+    CreateAccount = 'createAccount',
     SelectedActivity = 'selectedActivity',
     Profile = 'profile',
     Send = 'send',
