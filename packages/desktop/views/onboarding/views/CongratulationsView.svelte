@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { Animation, Button, Icon, OnboardingLayout, Text, TextHint } from 'shared/components'
+    import { Animation, Button, Icon, Text, TextHint } from '@ui'
+    import { OnboardingLayout } from '@components'
     import { onDestroy, onMount } from 'svelte'
     import { mobile } from '@core/app'
     import { onboardingRouter, ledgerSetupRouter } from '@core/router'
