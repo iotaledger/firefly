@@ -14,7 +14,7 @@ export function buildNftFromNftOutput(
     nftOutput: INftOutput,
     outputId: string,
     isSpendable: boolean,
-    isLocked: boolean
+    timelockTime?: string
 ): INft {
     const id = getNftId(nftOutput.nftId, outputId)
     const address = getBech32AddressFromAddressTypes({ type: ADDRESS_TYPE_NFT, nftId: id })
@@ -27,7 +27,7 @@ export function buildNftFromNftOutput(
         name: parsedMetadata?.name ?? DEFAULT_NFT_NAME,
         issuer,
         isSpendable,
-        isLocked,
+        timelockTime,
         metadata,
         parsedMetadata,
         latestOutputId: outputId,

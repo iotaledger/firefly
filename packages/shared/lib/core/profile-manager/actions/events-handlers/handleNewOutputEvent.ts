@@ -55,11 +55,11 @@ export async function handleNewOutputEventInternal(
     }
 
     if (isNftOutput) {
-        const { isSpendable, isLocked } = getSpendableStatusFromUnspentNftOutput(
+        const { isSpendable, timeLockTime } = getSpendableStatusFromUnspentNftOutput(
             account?.depositAddress,
             output.output as INftOutput
         )
-        const nft = buildNftFromNftOutput(output.output as INftOutput, output.outputId, isSpendable, isLocked)
+        const nft = buildNftFromNftOutput(output.output as INftOutput, output.outputId, isSpendable, timeLockTime)
         addOrUpdateNftInAllAccountNfts(account.index, nft)
     }
 }

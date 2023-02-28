@@ -4,6 +4,7 @@
     import { getNftByIdFromAllAccountNfts } from '@core/nfts'
     import { selectedAccountIndex } from '@core/account'
     import { localize } from '@core/i18n'
+    import { time } from '@core/app'
 
     export let nftId: string = ''
     export let error: string = ''
@@ -16,7 +17,7 @@
         : {}
 
     const nftOptions: IOption[] = $selectedAccountNfts
-        .filter((nft) => nft.isSpendable && !nft.isLocked)
+        .filter((nft) => nft.isSpendable && nft.timelockTime < $time.getTime())
         .map((_nft) => ({ key: _nft.name, value: _nft.id }))
 
     $: nftId = selected?.value

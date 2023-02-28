@@ -4,12 +4,17 @@ import { selectedAccount } from '@core/account/stores'
 
 import { INft } from '../interfaces'
 import { allAccountNfts } from './all-account-nfts.store'
+import { time } from '@core/app/stores/time.store'
 
 export const selectedAccountNfts: Readable<INft[]> = derived(
-    [selectedAccount, allAccountNfts],
-    ([$selectedAccount, $allAccountNfts]) => {
+    [selectedAccount, allAccountNfts, time],
+    ([$selectedAccount, $allAccountNfts, $time]) => {
         if (selectedAccount) {
-            return $allAccountNfts[$selectedAccount?.index]?.filter((nft) => nft.isSpendable || nft.isLocked) ?? []
+            return (
+                $allAccountNfts[$selectedAccount?.index]?.filter(
+                    (nft) => nft.isSpendable || nft.timelockTime > $time.getTime()
+                ) ?? []
+            )
         } else {
             return []
         }

@@ -10,9 +10,9 @@ import { INftOutput } from '@iota/types'
 export function getSpendableStatusFromUnspentNftOutput(
     accountAddress: string,
     nftOutput: INftOutput
-): { isSpendable: boolean; isLocked: boolean } {
+): { isSpendable: boolean; timeLockTime: string } {
     let isSpendable = true
-    let isLocked = false
+    let timeLockTime = undefined
 
     const isAsync = isOutputAsync(nftOutput)
     if (isAsync) {
@@ -32,13 +32,9 @@ export function getSpendableStatusFromUnspentNftOutput(
             isSpendable = false
         }
 
-        if (timeLockUnixTime) {
-            if (isRecipient && timeLockUnixTime > Date.now()) {
-                isLocked = true
-            } else {
-                isLocked = false
-            }
+        if (isRecipient && timeLockUnixTime) {
+            timeLockTime = timeLockUnixTime
         }
     }
-    return { isSpendable, isLocked }
+    return { isSpendable, timeLockTime }
 }

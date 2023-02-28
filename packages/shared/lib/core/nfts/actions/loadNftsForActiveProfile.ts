@@ -19,11 +19,11 @@ async function loadNftsForAccount(account: IAccountState): Promise<void> {
     const unspentOutputs = await account.unspentOutputs()
     for (const outputData of unspentOutputs) {
         if (outputData.output.type === OUTPUT_TYPE_NFT) {
-            const { isSpendable, isLocked } = getSpendableStatusFromUnspentNftOutput(
+            const { isSpendable, timeLockTime } = getSpendableStatusFromUnspentNftOutput(
                 account.depositAddress,
                 outputData.output
             )
-            const nft = buildNftFromNftOutput(outputData.output, outputData.outputId, isSpendable, isLocked)
+            const nft = buildNftFromNftOutput(outputData.output, outputData.outputId, isSpendable, timeLockTime)
             accountNfts.push(nft)
         }
     }
@@ -32,7 +32,7 @@ async function loadNftsForAccount(account: IAccountState): Promise<void> {
         if (outputData.output.type === OUTPUT_TYPE_NFT) {
             const nftId = getNftId(outputData.output.nftId, outputData.outputId)
             if (!accountNfts.some((nft) => nft.id === nftId)) {
-                const nft = buildNftFromNftOutput(outputData.output, outputData.outputId, false, false)
+                const nft = buildNftFromNftOutput(outputData.output, outputData.outputId, false)
                 accountNfts.push(nft)
             }
         }

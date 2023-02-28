@@ -5,12 +5,14 @@
     import { selectedNftId } from '@core/nfts/stores'
     import { Icon } from '@auxiliary/icon'
     import { localize } from '@core/i18n'
+    import { time } from '@core/app'
 
     export let nft: INft
 
     let nftWrapperClientWidth: number
     let error: string
     let warning: string
+    $: isLocked = nft.timelockTime > $time.getTime()
 
     function openCollectiblesDetailsView(): void {
         $selectedNftId = nft.id
@@ -66,7 +68,7 @@
         </div>
         <div class="w-full flex flex-row align-center justify-between p-3.5 bg-white dark:bg-gray-800">
             <Text fontWeight={FontWeight.semibold} fontSize="12" classes="text-left truncate">{nft.name}</Text>
-            {#if nft.isLocked}
+            {#if isLocked}
                 <TooltipIcon
                     icon={Icon.Timelock}
                     iconClasses="text-gray-600 dark:text-gray-200"
