@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Drawer } from '@components'
-    import { ConfirmDrawer, EnterPasswordDrawer, SelectedActivityDrawer } from './'
+    import { ConfirmDrawer, EnterPasswordDrawer, SelectedActivityDrawer, SelectedTokenDrawer } from './'
 
     import { closeDrawer, DrawerId, drawers } from '@/auxiliary/drawer'
 
@@ -8,6 +8,7 @@
         [DrawerId.Confirm]: ConfirmDrawer,
         [DrawerId.EnterPassword]: EnterPasswordDrawer,
         [DrawerId.SelectedActivity]: SelectedActivityDrawer,
+        [DrawerId.SelectedToken]: SelectedTokenDrawer,
     }
 </script>
 

@@ -27,10 +27,7 @@
     let panelWidth = 0
     let touchStart = 0
 
-    const staticTile: string | undefined = DRAWER_STATIC_TITLE_TITLES[id]
-        ? localize(DRAWER_STATIC_TITLE_TITLES[id])
-        : undefined
-    let displayedTitle: string | undefined = undefined
+    $: staticTile = DRAWER_STATIC_TITLE_TITLES[id] ? localize(DRAWER_STATIC_TITLE_TITLES[id]) : undefined
     $: displayedTitle = title ?? staticTile
 
     const directon = enterFromSide ? { x: -100 } : { y: 100 }
