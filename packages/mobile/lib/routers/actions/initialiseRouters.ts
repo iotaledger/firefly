@@ -41,6 +41,7 @@ export function initialiseRouters(): void {
      */
     initialiseBaseRouters()
     initialiseSubrouters()
+    initializeDrawersRouters()
 }
 
 export function initialiseOnboardingRouters(): void {
@@ -81,11 +82,14 @@ function initialiseOnboardingSubrouters(): void {
 }
 
 function initialiseDashboardSubrouters(): void {
-    sendRouter.set(new SendRouter())
     profileRouter.set(new ProfileRouter())
     settingsRouter.set(new SettingsRouter())
 }
 
 function initialiseSettingsSubrouters(): void {
     networkConfigurationSettingsRouter.set(new NetworkConfigurationSettingsRouter())
+}
+
+function initializeDrawersRouters(): void {
+    sendRouter.set(new SendRouter())
 }

@@ -1,9 +1,15 @@
 <script lang="ts">
+    import type { OutputOptions } from '@iota/wallet'
+
+    import { onMount } from 'svelte'
+    import { get } from 'svelte/store'
+
+    import { AmountView, RecipientView, ReviewView, TokenView } from './views'
+
     import { prepareOutput, selectedAccount } from '@core/account'
     import { handleError } from '@core/error/handlers/handleError'
     import { ledgerPreparedOutput } from '@core/ledger'
     import { isActiveLedgerProfile } from '@core/profile'
-    import { isStrongholdUnlocked } from '@core/profile-manager'
     import { ExpirationTime } from '@core/utils'
     import {
         DEFAULT_TRANSACTION_OPTIONS,
@@ -17,11 +23,8 @@
         validateSendConfirmation,
     } from '@core/wallet'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
-    import type { OutputOptions } from '@iota/wallet'
-    import { get } from 'svelte/store'
-    import { StrongholdUnlock } from '@components'
+
     import { sendRoute, SendRoute, sendRouter } from '@/routers'
-    import { AmountView, Expiration, RecipientView, ReferenceView, ReviewView, TokenView } from './views'
 
     $: ({ recipient, expirationDate, giftStorageDeposit, surplus } = $newTransactionDetails)
 
@@ -29,8 +32,6 @@
     let preparedOutput: Output
     let outputOptions: OutputOptions
     let initialExpirationDate: ExpirationTime = getInitialExpirationDate()
-
-    let triggerSendOnMount: boolean = false
 
     $: transactionDetails = get(newTransactionDetails)
     $: recipientAddress = recipient?.type === 'account' ? recipient?.account?.depositAddress : recipient?.address
@@ -40,31 +41,31 @@
             : undefined
     $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
 
-    async function sendTransaction(): Promise<void> {
-        triggerSendOnMount = false
-        const isUnlocked = await isStrongholdUnlocked()
-        if (isUnlocked) {
-            try {
-                await prepareTransactionOutput()
-                validateSendConfirmation(outputOptions, preparedOutput)
+    onMount(() => {
+        if (transactionDetails.type === NewTransactionType.TokenTransfer && transactionDetails?.assetId) {
+            $sendRouter.next()
+        }
+    })
 
-                updateNewTransactionDetails({
-                    type: $newTransactionDetails.type,
-                    expirationDate,
-                    giftStorageDeposit,
-                    surplus,
-                })
-                if ($isActiveLedgerProfile) {
-                    ledgerPreparedOutput.set(preparedOutput)
-                }
-                await sendOutput(preparedOutput)
-                $sendRouter.next()
-            } catch (err) {
-                handleError(err)
-                throw new Error(err)
+    async function sendTransaction(): Promise<void> {
+        try {
+            await prepareTransactionOutput()
+            validateSendConfirmation(outputOptions, preparedOutput)
+
+            updateNewTransactionDetails({
+                type: $newTransactionDetails.type,
+                expirationDate,
+                giftStorageDeposit,
+                surplus,
+            })
+            if ($isActiveLedgerProfile) {
+                ledgerPreparedOutput.set(preparedOutput)
             }
-        } else {
-            $sendRouter.next({ needsUnlock: true })
+            await sendOutput(preparedOutput)
+            $sendRouter.next()
+        } catch (err) {
+            handleError(err)
+            throw new Error(err)
         }
     }
 
@@ -123,11 +124,6 @@
             return ExpirationTime.None
         }
     }
-
-    function onUnlockSuccess(): void {
-        triggerSendOnMount = true
-        $sendRouter.next()
-    }
 </script>
 
 {#if $sendRoute === SendRoute.Token}
@@ -136,12 +132,6 @@
     <RecipientView />
 {:else if $sendRoute === SendRoute.Amount}
     <AmountView />
-{:else if $sendRoute === SendRoute.Reference}
-    <ReferenceView />
 {:else if $sendRoute === SendRoute.Review}
-    <ReviewView {sendTransaction} {triggerSendOnMount} {storageDeposit} {initialExpirationDate} bind:expirationDate />
-{:else if $sendRoute === SendRoute.Expiration}
-    <Expiration onCancel={() => $sendRouter.previous()} />
-{:else if $sendRoute === SendRoute.Password}
-    <StrongholdUnlock onSuccess={onUnlockSuccess} onCancel={() => $sendRouter.previous()} />
+    <ReviewView {sendTransaction} {storageDeposit} {initialExpirationDate} bind:expirationDate />
 {/if}
