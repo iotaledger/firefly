@@ -1,6 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { Animation, OnboardingLayout, Text, Button, NodeConfigurationForm, HTMLButtonType } from 'shared/components'
+    import { Animation, Text, Button, NodeConfigurationForm, HTMLButtonType } from '@ui'
+    import { OnboardingLayout } from '@components'
     import {
         cleanupOnboardingProfileManager,
         initialiseProfileManagerFromOnboardingProfile,
