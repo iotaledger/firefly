@@ -22,7 +22,6 @@ export { default as ProposalStatusTimelineTooltip } from './ProposalStatusTimeli
 export { default as QR } from './QR.svelte'
 export { default as RecoveryPhrase } from './RecoveryPhrase.svelte'
 export { default as Scroller } from './Scroller.svelte'
-export { default as SettingsNavigator } from './SettingsNavigator.svelte'
 export { default as Spinner } from './Spinner.svelte'
 export { default as Text } from './Text.svelte'
 export { default as TextHint } from './TextHint.svelte'

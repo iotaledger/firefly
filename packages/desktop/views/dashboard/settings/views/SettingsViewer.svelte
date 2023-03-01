@@ -1,8 +1,10 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { Scroller, SettingsNavigator, Text, TextType } from 'shared/components'
-    import features from '@features/features'
-    import { mobile } from '@core/app'
+
+    import { SettingsNavigator, SettingsNavigatorTypes } from '@components'
+    import { Scroller, Text, TextType } from '@ui'
+
+    import { Advanced, General, Help, Security } from './'
     import { localize, _ } from '@core/i18n'
     import { activeProfile, isActiveLedgerProfile, isSoftwareProfile } from '@core/profile'
     import {
@@ -12,12 +14,13 @@
         GeneralSettingsRouteNoProfile,
         HelpAndInfoRoute,
         SecuritySettingsRoute,
-        SettingsRoute,
         settingsRoute,
+        SettingsRoute,
         SettingsRouteNoProfile,
         settingsRouter,
     } from '@core/router'
-    import { Advanced, General, Help, Security } from './'
+
+    import features from '@features/features'
 
     const { loggedIn } = $activeProfile
 
@@ -25,12 +28,11 @@
         (route) => route !== SettingsRoute.Init
     )
 
-    let settings
+    const securitySettings = structuredClone(SecuritySettingsRoute)
+    const advancedSettings = structuredClone(AdvancedSettingsRoute)
 
-    const securitySettings = Object.assign({}, SecuritySettingsRoute)
-    const advancedSettings = Object.assign({}, AdvancedSettingsRoute)
+    let settings: SettingsNavigatorTypes.Settings
 
-    // TODO: ledger, The operand of a 'delete' operator cannot be a read-only property
     $: if (!$isSoftwareProfile) {
         delete securitySettings.ExportStronghold
         delete securitySettings.ChangePassword
@@ -39,7 +41,7 @@
         delete advancedSettings.MigrateLedgerIndex
     }
 
-    if ($loggedIn) {
+    $: if ($loggedIn) {
         settings = {
             general: GeneralSettingsRoute,
             security: securitySettings,
@@ -87,30 +89,24 @@
 </script>
 
 {#key $_}
-    <div class="flex flex-1 flex-row items-start">
-        {#if !$mobile}
-            <SettingsNavigator
-                {routes}
-                onSettingClick={(id) => scrollIntoView(id)}
-                {settings}
-                bind:route={$settingsRoute}
-            />
-        {/if}
+    <settings-viewer class="flex flex-1 flex-row items-start">
+        <SettingsNavigator
+            {routes}
+            onSettingClick={(id) => scrollIntoView(id)}
+            {settings}
+            bind:route={$settingsRoute}
+        />
         <div class="h-full w-full pb-10">
-            {#if !$mobile}
-                <Text type={TextType.p} secondary highlighted classes="mb-8">
-                    {localize('views.settings.settings')}
-                    /
-                    {localize(`views.settings.${$settingsRoute}.title`)}
-                </Text>
-            {/if}
+            <Text type={TextType.p} secondary highlighted classes="mb-8">
+                {localize('views.settings.settings')}
+                /
+                {localize(`views.settings.${$settingsRoute}.title`)}
+            </Text>
             <Scroller classes="w-full md:w-3/4 h-full md:pr-100" threshold={70}>
                 <div class="md:w-11/12">
-                    {#if !$mobile}
-                        <Text type={TextType.h2} classes="mb-7"
-                            >{localize(`views.settings.${$settingsRoute}.title`)}</Text
-                        >
-                    {/if}
+                    <Text type={TextType.h2} classes="mb-7">
+                        {localize(`views.settings.${$settingsRoute}.title`)}
+                    </Text>
                     {#if $settingsRoute === SettingsRoute.General}
                         <General />
                     {:else if $settingsRoute === SettingsRoute.Security}
@@ -123,5 +119,5 @@
                 </div>
             </Scroller>
         </div>
-    </div>
+    </settings-viewer>
 {/key}
