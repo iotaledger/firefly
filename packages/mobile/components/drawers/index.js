@@ -15,4 +15,5 @@ export { default as ReferencesDrawer } from './ReferencesDrawer.svelte'
 export { default as SelectedActivityDrawer } from './SelectedActivityDrawer.svelte'
 export { default as SelectedTokenDrawer } from './SelectedTokenDrawer.svelte'
 
+export * from './profile'
 export * from './send'

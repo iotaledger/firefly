@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { get } from 'svelte/store'
     import { fade, fly } from 'svelte/transition'
 
     import { Icon, Text, TextType } from '@ui'
@@ -30,7 +31,6 @@
 
     $: staticTile = DRAWER_STATIC_TITLE_TITLES[id] ? localize(DRAWER_STATIC_TITLE_TITLES[id]) : undefined
     $: displayedTitle = title ?? staticTile
-    $: drawerRouter = getDrawerRouter(id)
 
     const directon = enterFromSide ? { x: -100 } : { y: 100 }
 
@@ -59,14 +59,16 @@
     }
 
     function handleClose(): void {
-        if ($drawerRouter) {
-            resetRouterWithDrawerDelay($drawerRouter)
+        const drawerRouter = get(getDrawerRouter(id))
+        if (drawerRouter) {
+            resetRouterWithDrawerDelay(drawerRouter)
         }
         onClose && onClose()
     }
     function onBackClick(): void {
-        if ($drawerRouter) {
-            $drawerRouter.previous()
+        const drawerRouter = get(getDrawerRouter(id))
+        if (drawerRouter) {
+            drawerRouter.previous()
         }
     }
 </script>

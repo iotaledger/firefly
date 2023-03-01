@@ -17,6 +17,7 @@
         SelectedActivityDrawer,
         SelectedTokenDrawer,
         SendDrawer,
+        ProfileDrawer,
     } from './'
 
     import { closeDrawer, DrawerId, drawers } from '@/auxiliary/drawer'
@@ -38,6 +39,7 @@
         [DrawerId.Send]: SendDrawer,
         [DrawerId.References]: ReferencesDrawer,
         [DrawerId.Expiration]: ExpirationDrawer,
+        [DrawerId.Profile]: ProfileDrawer,
     }
 </script>
 

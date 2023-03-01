@@ -1,15 +1,18 @@
 <script lang="ts">
     import { activeProfile } from '@core/profile'
     import { getInitials } from '@core/utils'
-    import { DashboardRoute, dashboardRouter } from '@/routers'
 
-    // @TODO fix the linting error that profileInitial isn't used
-    /* eslint-disable @typescript-eslint/no-unused-vars */
+    import { DrawerId, openDrawer } from '@/auxiliary/drawer'
+
     $: profileInitial = getInitials($activeProfile?.name, 1)
+
+    function onClick(): void {
+        openDrawer(DrawerId.Profile, { fullScreen: true, enterFromSide: true, allowBack: true })
+    }
 </script>
 
 <button
-    on:click={() => $dashboardRouter.goTo(DashboardRoute.Profile)}
+    on:click={onClick}
     class="w-10 h-10 relative flex items-center justify-center rounded-full bg-blue-500 leading-100"
 >
     <span class="text-12 text-center text-white uppercase">{profileInitial}</span>
