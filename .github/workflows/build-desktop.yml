@@ -179,6 +179,10 @@ jobs:
               working-directory: packages/desktop/out
               if: matrix.os == 'windows-2019'
 
+            - name: Listing artifacts
+              run: ls -al .
+              working-directory: packages/desktop/out
+
             - name: Upload artifacts
               uses: actions/upload-artifact@v2
               with:
