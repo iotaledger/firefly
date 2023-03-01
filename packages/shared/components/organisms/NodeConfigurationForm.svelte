@@ -24,7 +24,7 @@
     export let isDeveloperProfile: boolean = false
     export let onSubmit: () => void = () => {}
 
-    let [username, password] = node.auth?.basicAuthNamePwd ?? [null, null]
+    let [username, password] = node.auth?.basicAuthNamePwd ?? ['', '']
     let jwt = node.auth?.jwt
 
     $: node.url, (formError = '')
