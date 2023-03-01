@@ -1,6 +1,11 @@
 <script lang="ts">
+    import { onMount } from 'svelte'
+
     import { OnboardingLayout } from '@components'
-    import { Button, PinInput, Text, HTMLButtonType, TextType } from '@ui'
+    import { Button, HTMLButtonType, PinInput, Text, TextType } from '@ui'
+
+    import { storageProtectionSetupRouter } from '@/routers'
+
     import {
         initialiseFirstShimmerClaimingAccount,
         initialisePincodeManager,
@@ -8,12 +13,11 @@
         onboardingProfile,
         ProfileSetupType,
     } from '@contexts/onboarding'
+
     import { localize } from '@core/i18n'
     import { pollLedgerNanoStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
     import { ProfileType } from '@core/profile'
     import { isValidPin } from '@core/utils'
-    import { onMount } from 'svelte'
-    import { storageProtectionSetupRouter } from '@/routers'
 
     export let busy = false
 
@@ -109,7 +113,6 @@
                 autofocus
                 disabled={busy}
                 error={setPinInputError}
-                label={localize('actions.setPin')}
                 on:filled={confirmPinInputElement.focus}
                 on:submit={onSetPinClick}
             />
@@ -119,7 +122,6 @@
                 classes="w-full mx-auto block"
                 disabled={busy}
                 error={confirmPinInputError}
-                label={localize('actions.confirmPin')}
                 bind:this={confirmPinInputElement}
                 on:filled={submitButtonElement.resetAndFocus}
                 on:submit={onSetPinClick}

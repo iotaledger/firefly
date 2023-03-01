@@ -1,13 +1,17 @@
 <script lang="ts">
+    import { onDestroy } from 'svelte'
+
+    import { Icon, PinInput, Profile, Text, TextType } from '@ui'
+
     import { loginRouter } from '@/routers'
-    import { openPopup, PopupId, popupState } from '@auxiliary/popup'
-    import { needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService, Platform } from '@core/app'
+
+    import { Platform } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { activeProfile, login, resetActiveProfile } from '@core/profile'
     import { isValidPin } from '@core/utils'
-    import { Icon, PinInput, Profile, Text, TextType } from '@ui'
-    import { onDestroy } from 'svelte'
+
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     let attempts = 0
     let pinCode = ''
@@ -23,23 +27,10 @@
 
     let timeRemainingBeforeNextAttempt = WAITING_TIME_AFTER_MAX_INCORRECT_ATTEMPTS
 
-    $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTermsOfService()) {
-        openPopup({
-            id: PopupId.LegalUpdate,
-            hideClose: true,
-            preventClose: true,
-        })
-    }
-
     $: hasReachedMaxAttempts = attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS
     $: {
         if (isValidPin(pinCode)) {
             void onSubmitClick()
-        }
-    }
-    $: {
-        if (pinRef && !$popupState.active) {
-            pinRef.focus()
         }
     }
 
@@ -114,7 +105,7 @@
             disabled={hasReachedMaxAttempts}
             on:click={onBackClick}
         >
-            <Icon icon="arrow-left" classes="text-gray-500 dark:text-gray-100" />
+            <Icon icon={IconEnum.ArrowLeft} classes="text-gray-500 dark:text-gray-100" />
         </button>
     </header>
     <div class="flex w-full justify-center items-center mt-16">
