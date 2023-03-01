@@ -7,6 +7,9 @@
     "repository": "git@github.com:iotaledger/firefly.git",
     "author": "IOTA Foundation <contact@iota.org>",
     "license": "Apache-2.0",
+    "build": {
+        "generateUpdatesFilesForAllChannels": true
+    },
     "scripts": {
         "start": "npm-run-all -p start:dev start:electron",
         "start:dev": "cross-env NODE_ENV=development PLATFORM=desktop webpack-dev-server",
