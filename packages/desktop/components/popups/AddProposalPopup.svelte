@@ -91,14 +91,13 @@
     }
 
     function generateSuccessMessage(): string {
-        const localePath = `views.governance.proposals.${
-            isEditMode ? 'successEdit' : isAddingForAllAccounts ? 'successAddAll' : 'successAdd'
-        }`
-
-        return localize(
-            localePath,
-            !isEditMode && { values: { numberOfProposals: isRegisteringAllProposals ? 'other' : 'one' } }
-        )
+        if (isEditMode) {
+            return localize('views.governance.proposals.successEdit')
+        } else {
+            return localize(`views.governance.proposals.${isAddingForAllAccounts ? 'successAddAll' : 'successAdd'}`, {
+                values: { numberOfProposals: isRegisteringAllProposals ? 'other' : 'one' },
+            })
+        }
     }
 
     async function validateEventId(checkIfAlreadyRegistered: boolean): Promise<void> {
