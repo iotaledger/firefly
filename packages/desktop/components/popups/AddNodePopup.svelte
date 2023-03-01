@@ -1,12 +1,13 @@
 <script lang="ts">
-    import { Text, NodeConfigurationForm, Button, HTMLButtonType } from 'shared/components'
+    import { Text, NodeConfigurationForm, Button, HTMLButtonType, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
     import { INode, addNodeToClientOptions, editNodeInClientOptions, EMPTY_NODE } from '@core/network'
     import { closePopup } from '@auxiliary/popup'
     import { activeProfile } from '@core/profile'
     import { showAppNotification } from '@auxiliary/notification'
+    import { deepCopy } from '@core/utils'
 
-    export let node: INode = EMPTY_NODE
+    export let node: INode = deepCopy(EMPTY_NODE)
     export let isEditingNode: boolean = false
     export let onSuccess: (..._: any[]) => void
 
@@ -15,20 +16,19 @@
     let nodeConfigurationForm: NodeConfigurationForm
     let isBusy = false
 
-    async function handleAddNode(): Promise<void> {
+    async function onSubmit(): Promise<void> {
         try {
             isBusy = true
-            await nodeConfigurationForm.validate({
-                validateUrl: true,
+            const validatedNode = await nodeConfigurationForm.buildNode({
+                checkNodeInfo: true,
                 checkSameNetwork: true,
                 uniqueCheck: !isEditingNode,
-                checkNodeInfo: true,
                 validateClientOptions: true,
             })
             if (isEditingNode) {
-                await editNodeInClientOptions(currentNode, node)
+                await editNodeInClientOptions(currentNode, validatedNode)
             } else {
-                await addNodeToClientOptions(node)
+                await addNodeToClientOptions(validatedNode)
             }
             onSuccess()
         } catch (err) {
@@ -45,11 +45,11 @@
 </script>
 
 <div class="flex flex-col space-y-6">
-    <Text type="h4">{localize(`popups.node.title${isEditingNode ? 'Update' : 'Add'}`)}</Text>
+    <Text type={TextType.h4}>{localize(`popups.node.title${isEditingNode ? 'Update' : 'Add'}`)}</Text>
     <NodeConfigurationForm
         bind:this={nodeConfigurationForm}
         bind:node
-        onSubmit={handleAddNode}
+        {onSubmit}
         {isBusy}
         isDeveloperProfile={$activeProfile.isDeveloperProfile}
     />

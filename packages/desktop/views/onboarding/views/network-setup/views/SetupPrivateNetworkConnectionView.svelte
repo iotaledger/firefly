@@ -1,6 +1,14 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { Animation, OnboardingLayout, Text, Button, NodeConfigurationForm, HTMLButtonType } from 'shared/components'
+    import {
+        Animation,
+        OnboardingLayout,
+        Text,
+        Button,
+        NodeConfigurationForm,
+        HTMLButtonType,
+        TextType,
+    } from 'shared/components'
     import {
         cleanupOnboardingProfileManager,
         initialiseProfileManagerFromOnboardingProfile,
@@ -25,16 +33,17 @@
     async function onContinueClick(): Promise<void> {
         isBusy = true
         try {
-            await nodeConfigurationForm.validate({
-                validateUrl: true,
-                uniqueCheck: false,
-                checkSameNetwork: false,
+            const validatedNode = await nodeConfigurationForm.buildNode({
                 checkNodeInfo: false,
+                checkSameNetwork: false,
+                uniqueCheck: false,
                 validateClientOptions: false,
             })
-            updateOnboardingProfile({ clientOptions: { nodes: [node], primaryNode: node } })
+            updateOnboardingProfile({ clientOptions: { nodes: [validatedNode], primaryNode: validatedNode } })
             await initialiseProfileManagerFromOnboardingProfile(true)
-            await getNodeInfo(node.url)
+
+            // The API request to check if a node is reachable requires an existing account manager.
+            await getNodeInfo(validatedNode.url)
             await destroyProfileManager()
             $networkSetupRouter.next()
         } catch (err) {
@@ -62,10 +71,10 @@
 
 <OnboardingLayout {onBackClick}>
     <div slot="title">
-        <Text type="h2">{localize('views.onboarding.networkSetup.setupPrivateNetworkConnection.title')}</Text>
+        <Text type={TextType.h2}>{localize('views.onboarding.networkSetup.setupPrivateNetworkConnection.title')}</Text>
     </div>
     <div slot="leftpane__content">
-        <Text type="p" secondary classes="mb-8"
+        <Text type={TextType.p} secondary classes="mb-8"
             >{localize('views.onboarding.networkSetup.setupPrivateNetworkConnection.body')}</Text
         >
         <NodeConfigurationForm

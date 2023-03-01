@@ -7,15 +7,25 @@
     import { checkNodeUrlValidity, checkNetworkId } from '@core/network/utils'
     import { localize } from '@core/i18n'
     import { getNodeInfo } from '@core/profile-manager'
-    import { stripSpaces, stripTrailingSlash } from '@core/utils'
+    import { deepCopy, stripSpaces, stripTrailingSlash } from '@core/utils'
     import { activeProfile } from '@core/profile'
 
-    export let node: INode = EMPTY_NODE
+    interface NodeValidationOptions {
+        checkNodeInfo: boolean
+        checkSameNetwork: boolean
+        uniqueCheck: boolean
+        validateClientOptions: boolean
+    }
+
+    export let node: INode = deepCopy(EMPTY_NODE)
     export let isBusy = false
     export let formError = ''
     export let currentClientOptions: IClientOptions = undefined
     export let isDeveloperProfile: boolean = false
     export let onSubmit: () => void = () => {}
+
+    let [username, password] = node.auth?.basicAuthNamePwd ?? [null, null]
+    let jwt = node.auth?.jwt
 
     $: node.url, (formError = '')
 
@@ -23,29 +33,15 @@
         node.url = stripTrailingSlash(stripSpaces(node?.url))
     }
 
-    export async function validate({
-        validateUrl,
-        checkNodeInfo,
-        checkSameNetwork,
-        uniqueCheck,
-        validateClientOptions,
-    }: {
-        validateUrl: boolean
-        checkNodeInfo: boolean
-        checkSameNetwork: boolean
-        uniqueCheck: boolean
-        validateClientOptions: boolean
-    }): Promise<void> {
-        if (validateUrl) {
-            const errorUrlValidity = checkNodeUrlValidity(currentClientOptions?.nodes, node.url, isDeveloperProfile)
-            if (errorUrlValidity) {
-                formError = localize(errorUrlValidity) ?? ''
-                return Promise.reject({ type: 'validationError', error: formError })
-            }
+    async function validate(options: NodeValidationOptions): Promise<INode> {
+        const errorUrlValidity = checkNodeUrlValidity(currentClientOptions?.nodes, node.url, isDeveloperProfile)
+        if (errorUrlValidity) {
+            formError = localize(errorUrlValidity) ?? ''
+            return Promise.reject({ type: 'validationError', error: formError })
         }
 
         let nodeInfoResponse: INodeInfoResponse
-        if (checkNodeInfo) {
+        if (options.checkNodeInfo) {
             try {
                 nodeInfoResponse = await getNodeInfo(node.url)
             } catch (err) {
@@ -54,7 +50,7 @@
             }
         }
 
-        if (checkSameNetwork) {
+        if (options.checkSameNetwork) {
             const isInSameNetwork =
                 get(nodeInfo).protocol.networkName === nodeInfoResponse.nodeInfo.protocol.networkName
             if (!isInSameNetwork) {
@@ -63,14 +59,14 @@
             }
         }
 
-        if (uniqueCheck) {
+        if (options.uniqueCheck) {
             if (get(activeProfile)?.clientOptions?.nodes.some((_node) => _node.url === node.url)) {
                 formError = localize('error.node.duplicateNodes')
                 return Promise.reject({ type: 'validationError', error: formError })
             }
         }
 
-        if (validateClientOptions && currentClientOptions) {
+        if (options.validateClientOptions && currentClientOptions) {
             const errorNetworkId = checkNetworkId(
                 nodeInfoResponse?.nodeInfo?.protocol?.networkName,
                 currentClientOptions.network,
@@ -80,6 +76,21 @@
                 formError = localize(errorNetworkId?.locale, errorNetworkId?.values) ?? ''
                 return Promise.reject({ type: 'validationError', error: formError })
             }
+        }
+    }
+
+    export async function buildNode(validationOptions: NodeValidationOptions): Promise<INode> {
+        await validate(validationOptions)
+        return {
+            url: node.url,
+            auth: {
+                ...([username, password].every((val) => val !== '') && {
+                    basicAuthNamePwd: [username, password],
+                }),
+                ...(jwt !== '' && {
+                    jwt,
+                }),
+            },
         }
     }
 </script>
@@ -95,19 +106,19 @@
     />
     <Input
         classes="mt-3"
-        bind:value={node.auth.basicAuthNamePwd[0]}
+        bind:value={username}
         placeholder={localize('popups.node.optionalUsername')}
         disabled={isBusy}
     />
     <PasswordInput
         classes="mt-3"
-        bind:value={node.auth.basicAuthNamePwd[1]}
+        bind:value={password}
         placeholder={localize('popups.node.optionalPassword')}
         disabled={isBusy}
     />
     <PasswordInput
         classes="mt-3"
-        bind:value={node.auth.jwt}
+        bind:value={jwt}
         placeholder={localize('popups.node.optionalJwt')}
         disabled={isBusy}
     />

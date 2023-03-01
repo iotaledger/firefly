@@ -1,13 +1,11 @@
 <script lang="ts">
     import { showAppNotification } from '@auxiliary/notification'
     import { localize } from '@core/i18n'
-    import { addNodeToClientOptions, editNodeInClientOptions, EMPTY_NODE, INode } from '@core/network'
+    import { addNodeToClientOptions, editNodeInClientOptions, INode } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { Button, HTMLButtonType, NodeConfigurationForm } from '@ui'
 
-    const DEFAULT_EMPTY_NODE: INode = EMPTY_NODE
-
-    export let node: INode = DEFAULT_EMPTY_NODE
+    export let node: INode = undefined
     export let isEditingNode: boolean = false
     export let onSuccess: (..._: any[]) => void
 
@@ -16,22 +14,20 @@
     let nodeConfigurationForm: NodeConfigurationForm
     let isBusy = false
 
-    async function handleSubmit(): Promise<void> {
+    async function onSubmit(): Promise<void> {
         try {
             isBusy = true
-            await nodeConfigurationForm.validate({
-                validateUrl: true,
+            const validatedNode = await nodeConfigurationForm.buildNode({
+                checkNodeInfo: true,
                 checkSameNetwork: true,
                 uniqueCheck: !isEditingNode,
-                checkNodeInfo: true,
                 validateClientOptions: true,
             })
             if (isEditingNode) {
-                await editNodeInClientOptions(currentNode, node)
+                await editNodeInClientOptions(currentNode, validatedNode)
             } else {
-                await addNodeToClientOptions(node)
+                await addNodeToClientOptions(validatedNode)
             }
-            node = DEFAULT_EMPTY_NODE
             onSuccess()
         } catch (err) {
             if (err.type !== 'validationError') {
@@ -50,7 +46,7 @@
     <NodeConfigurationForm
         bind:this={nodeConfigurationForm}
         bind:node
-        onSubmit={handleSubmit}
+        {onSubmit}
         {isBusy}
         isDeveloperProfile={$activeProfile.isDeveloperProfile}
     />
