@@ -212,7 +212,7 @@
             {#if settings}
                 <Settings handleClose={() => (settings = false)} />
             {/if}
-            <ToastContainer />
+            <ToastContainer classes="absolute right-5 bottom-5 w-25" />
         {/if}
     </app-body>
 </app-container>
