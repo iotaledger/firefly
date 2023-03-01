@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { Button, Icon, RecoveryPhrase, Text } from '@ui'
-    import { OnboardingLayout } from '@components'
+    import { Button, Icon, Text } from '@ui'
+    import { OnboardingLayout, RecoveryPhrase } from '@components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { profileBackupRouter } from '@core/router'
