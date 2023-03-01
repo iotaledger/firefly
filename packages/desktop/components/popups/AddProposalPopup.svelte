@@ -107,7 +107,6 @@
             eventIdError = localize('error.eventId.doesNotStartWith0x')
             return Promise.reject(eventIdError)
         }
-
         const hexLength = eventId?.substring(2)?.length
         const has64Length = hexLength === 64
         if (!has64Length) {
