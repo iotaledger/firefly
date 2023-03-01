@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { Animation, Button, Logo, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, Button, Logo, Text } from '@ui'
+    import { OnboardingLayout } from '@components'
     import features from '@features/features'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'

@@ -19,7 +19,10 @@
                 <Text type={TextType.p} secondary smaller>
                     {localize('general.availableAmount', {
                         values: {
-                            amount: formatTokenAmountBestMatch(asset?.balance.total, asset?.metadata),
+                            amount: formatTokenAmountBestMatch(
+                                asset?.balance.available ?? asset?.balance.total,
+                                asset?.metadata
+                            ),
                         },
                     })}
                 </Text>

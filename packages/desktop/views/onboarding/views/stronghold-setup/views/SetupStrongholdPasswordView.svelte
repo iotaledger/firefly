@@ -1,14 +1,7 @@
 <script lang="ts">
     import zxcvbn from 'zxcvbn'
-    import {
-        Animation,
-        Button,
-        OnboardingLayout,
-        PasswordInput,
-        Text,
-        HTMLButtonType,
-        TextType,
-    } from 'shared/components'
+    import { Animation, Button, PasswordInput, Text, HTMLButtonType, TextType } from '@ui'
+    import { OnboardingLayout } from '@components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'

@@ -7,12 +7,16 @@
         ConfirmDrawer,
         CreateAccountDrawer,
         CustomizeAccountDrawer,
+        DateTimePickerDrawer,
         DeleteAccountDrawer,
         EnterPasswordDrawer,
+        ExpirationDrawer,
         FilterDrawer,
         ReceiveDrawer,
+        ReferencesDrawer,
         SelectedActivityDrawer,
         SelectedTokenDrawer,
+        SendDrawer,
     } from './'
 
     import { closeDrawer, DrawerId, drawers } from '@/auxiliary/drawer'
@@ -30,6 +34,10 @@
         [DrawerId.BalanceBreakdown]: BalanceBreakdownDrawer,
         [DrawerId.DeleteAccount]: DeleteAccountDrawer,
         [DrawerId.Filter]: FilterDrawer,
+        [DrawerId.DateTimePicker]: DateTimePickerDrawer,
+        [DrawerId.Send]: SendDrawer,
+        [DrawerId.References]: ReferencesDrawer,
+        [DrawerId.Expiration]: ExpirationDrawer,
     }
 </script>
 
