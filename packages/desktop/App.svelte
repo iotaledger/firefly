@@ -85,6 +85,9 @@
     void setupI18n({ fallbackLocale: 'en', initialLocale: $appSettings.language })
 
     onMount(async () => {
+        await cleanupEmptyProfiles()
+        checkAndMigrateProfiles()
+
         setTimeout(() => {
             splash = false
             initialiseRouters()
@@ -156,9 +159,6 @@
         })
 
         Platform.onEvent('deep-link-request', showDeepLinkNotification)
-
-        await cleanupEmptyProfiles()
-        checkAndMigrateProfiles()
 
         const platform = await Platform.getOS()
         setPlatform(platform)

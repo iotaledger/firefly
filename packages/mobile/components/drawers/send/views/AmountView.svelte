@@ -116,19 +116,24 @@
 
 <div class="w-full overflow-y-auto flex flex-col flex-auto h-1 justify-between">
     <div class="flex-1 flex flex-col space-y-2 items-center justify-center">
-        <div class="flex flex-row items-center justify-center relative">
-            <div class="flex flex-row items-center space-x-2 px-28" on:click={() => amountInputElement.focus()}>
-                <AmountInput
-                    bind:inputElement={amountInputElement}
-                    bind:amount
-                    hasFocus={false}
-                    maxDecimals={allowedDecimals}
-                    isInteger={allowedDecimals === 0}
-                    clearBackground
-                    clearPadding
-                    clearBorder
-                    inputType="number"
-                />
+        <div class="w-full flex flex-row items-center justify-center relative">
+            <div class="flex flex-row items-center space-x-2">
+                <amount-wrapper
+                    style:--max-width={`${Math.max(amount?.length, 1) * 14}px`}
+                    on:click={() => amountInputElement.focus()}
+                >
+                    <AmountInput
+                        bind:inputElement={amountInputElement}
+                        bind:amount
+                        hasFocus={false}
+                        maxDecimals={allowedDecimals}
+                        isInteger={allowedDecimals === 0}
+                        clearBackground
+                        clearPadding
+                        clearBorder
+                        inputType="number"
+                    />
+                </amount-wrapper>
                 <p class="font-600 text-gray-800 dark:text-white text-24 leading-140">{unit}</p>
             </div>
             <div class="absolute right-0">
@@ -147,3 +152,10 @@
         </Button>
     </div>
 </div>
+
+<style lang="scss">
+    amount-wrapper {
+        max-width: var(--max-width);
+        @apply flex;
+    }
+</style>

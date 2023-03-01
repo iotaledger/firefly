@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { Button, Icon, LedgerAnimation, Link, OnboardingLayout, Text } from 'shared/components'
+    import { Button, Icon, LedgerAnimation, Link, Text } from '@ui'
+    import { OnboardingLayout } from '@components'
     import { localize } from '@core/i18n'
     import {
         displayNotificationForLedgerProfile,
