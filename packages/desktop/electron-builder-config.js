@@ -95,7 +95,7 @@ const prodConfig = () => ({
         provider: 'generic',
         url: 'https://dl.firefly.iota.org/',
         publishAutoUpdate: true,
-        channel: 'alpha',
+        channel: 'test',
     },
 })
 
