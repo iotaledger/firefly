@@ -146,31 +146,31 @@ const ElectronApi = {
     /**
      * Starts an update of the application
      *
-     * @method updateDownload
+     * @method downloadAppUpdate
      *
      * @returns void
      */
-    updateDownload() {
+    downloadAppUpdate() {
         return ipcRenderer.invoke('update-download')
     },
     /**
      * Cancels an update of the application
      *
-     * @method updateCancel
+     * @method cancelAppUpdateDownload
      *
      * @returns void
      */
-    updateCancel() {
+    cancelAppUpdateDownload() {
         return ipcRenderer.invoke('update-cancel')
     },
     /**
      * Install an update of the application
      *
-     * @method updateInstall
+     * @method installAppUpdate
      *
      * @returns void
      */
-    updateInstall() {
+    installAppUpdate() {
         return ipcRenderer.invoke('update-install')
     },
     /**
