@@ -1,6 +1,7 @@
 export enum DrawerId {
     AccountActions = 'accountActions',
     AccountSwitcher = 'accountSwitcher',
+    CreateAccount = 'createAccount',
     SelectedActivity = 'selectedActivity',
     Profile = 'profile',
     Send = 'send',
@@ -8,7 +9,12 @@ export enum DrawerId {
     SelectedToken = 'selectedToken',
     Legal = 'legal',
     EnterPassword = 'enterPassword',
-    AddReferences = 'addReferences',
-    AddExpiration = 'addExpiration',
+    References = 'references',
+    Expiration = 'expiration',
     Confirm = 'confirm',
+    CustomizeAccount = 'customizeAccount',
+    BalanceBreakdown = 'balanceBreakdown',
+    DeleteAccount = 'deleteAccount',
+    Filter = 'filter',
+    DateTimePicker = 'dateTimePicker',
 }

@@ -16,9 +16,8 @@
         verifyAsset,
     } from '@core/wallet'
 
-    import features from '@features/features'
-
     import { closeDrawer, DrawerId, openDrawer, updateDrawerProps } from '@/auxiliary/drawer'
+    import features from '@features/features'
 
     export let asset: IAsset
     export let activityId: string = undefined
@@ -78,7 +77,7 @@
     function handleSend(): void {
         updateNewTransactionDetails({ type: NewTransactionType.TokenTransfer, assetId: asset.id })
         _closeDrawer()
-        openDrawer(DrawerId.Send)
+        openDrawer(DrawerId.Send, { fullScreen: true })
     }
 </script>
 

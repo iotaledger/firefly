@@ -1,0 +1,137 @@
+<script lang="ts">
+    import type { OutputOptions } from '@iota/wallet'
+
+    import { onMount } from 'svelte'
+    import { get } from 'svelte/store'
+
+    import { AmountView, RecipientView, ReviewView, TokenView } from './views'
+
+    import { prepareOutput, selectedAccount } from '@core/account'
+    import { handleError } from '@core/error/handlers/handleError'
+    import { ledgerPreparedOutput } from '@core/ledger'
+    import { isActiveLedgerProfile } from '@core/profile'
+    import { ExpirationTime } from '@core/utils'
+    import {
+        DEFAULT_TRANSACTION_OPTIONS,
+        getAssetById,
+        getOutputOptions,
+        newTransactionDetails,
+        NewTransactionType,
+        Output,
+        sendOutput,
+        updateNewTransactionDetails,
+        validateSendConfirmation,
+    } from '@core/wallet'
+    import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
+
+    import { sendRoute, SendRoute, sendRouter } from '@/routers'
+
+    $: ({ recipient, expirationDate, giftStorageDeposit, surplus } = $newTransactionDetails)
+
+    let storageDeposit = 0
+    let preparedOutput: Output
+    let outputOptions: OutputOptions
+    let initialExpirationDate: ExpirationTime = getInitialExpirationDate()
+
+    $: transactionDetails = get(newTransactionDetails)
+    $: recipientAddress = recipient?.type === 'account' ? recipient?.account?.depositAddress : recipient?.address
+    $: asset =
+        transactionDetails.type === NewTransactionType.TokenTransfer
+            ? getAssetById(transactionDetails.assetId)
+            : undefined
+    $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
+
+    onMount(() => {
+        if (transactionDetails.type === NewTransactionType.TokenTransfer && transactionDetails?.assetId) {
+            $sendRouter.next()
+        }
+    })
+
+    async function sendTransaction(): Promise<void> {
+        try {
+            await prepareTransactionOutput()
+            validateSendConfirmation(outputOptions, preparedOutput)
+
+            updateNewTransactionDetails({
+                type: $newTransactionDetails.type,
+                expirationDate,
+                giftStorageDeposit,
+                surplus,
+            })
+            if ($isActiveLedgerProfile) {
+                ledgerPreparedOutput.set(preparedOutput)
+            }
+            await sendOutput(preparedOutput)
+            $sendRouter.next()
+        } catch (err) {
+            handleError(err)
+            throw new Error(err)
+        }
+    }
+
+    async function prepareTransactionOutput(): Promise<void> {
+        // TODO: move arguments into transactionDetails object
+        outputOptions = getOutputOptions(
+            expirationDate,
+            recipientAddress,
+            $newTransactionDetails.type === NewTransactionType.TokenTransfer ? $newTransactionDetails.rawAmount : '0',
+            $newTransactionDetails.metadata,
+            $newTransactionDetails.tag,
+            asset,
+            giftStorageDeposit,
+            $newTransactionDetails.surplus,
+            $newTransactionDetails.layer2Parameters,
+            $newTransactionDetails.type === NewTransactionType.NftTransfer ? $newTransactionDetails.nftId : undefined
+        )
+        preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
+
+        setStorageDeposit(preparedOutput, Number(surplus))
+
+        if (!initialExpirationDate) {
+            initialExpirationDate = getInitialExpirationDate()
+        }
+    }
+
+    function setStorageDeposit(preparedOutput: Output, surplus?: number): void {
+        const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
+            getStorageDepositFromOutput(preparedOutput)
+
+        if (giftStorageDeposit) {
+            // Only giftedStorageDeposit needs adjusting, since that is derived
+            // from the amount property instead of the unlock condition
+            if (!surplus) {
+                storageDeposit = _giftedStorageDeposit
+            } else if (surplus >= _giftedStorageDeposit) {
+                storageDeposit = 0
+            } else {
+                storageDeposit = _giftedStorageDeposit - surplus
+            }
+        } else {
+            storageDeposit = _storageDeposit
+        }
+    }
+
+    function refreshSendConfirmationState(): void {
+        void prepareTransactionOutput()
+    }
+
+    function getInitialExpirationDate(): ExpirationTime {
+        if (expirationDate) {
+            return ExpirationTime.Custom
+        } else if (storageDeposit && !giftStorageDeposit) {
+            return ExpirationTime.OneDay
+        } else {
+            return ExpirationTime.None
+        }
+    }
+</script>
+
+{#if $sendRoute === SendRoute.Token}
+    <TokenView />
+{:else if $sendRoute === SendRoute.Recipient}
+    <RecipientView />
+{:else if $sendRoute === SendRoute.Amount}
+    <AmountView />
+{:else if $sendRoute === SendRoute.Review}
+    <ReviewView {sendTransaction} {storageDeposit} {initialExpirationDate} bind:expirationDate />
+{/if}

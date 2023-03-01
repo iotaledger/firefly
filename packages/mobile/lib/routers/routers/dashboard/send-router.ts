@@ -1,24 +1,21 @@
 import { get, writable } from 'svelte/store'
 
-import { Subrouter } from '@core/router'
+import { Router } from '@core/router'
 import { resetNewTokenTransactionDetails } from '@core/wallet'
 
-import { dashboardRouter } from '../dashboard-router'
+import { closeDrawer, DrawerId } from '@/auxiliary/drawer'
 import { SendRoute } from '../../enums'
-import { ISendRouterEvent } from '../../interfaces'
 import { resetRouterWithDrawerDelay } from '../../utils'
 
 export const sendRoute = writable<SendRoute>(null)
 export const sendRouter = writable<SendRouter>(null)
 
-export class SendRouter extends Subrouter<SendRoute> {
+export class SendRouter extends Router<SendRoute> {
     constructor() {
-        super(SendRoute.Token, sendRoute, get(dashboardRouter))
+        super(SendRoute.Token, sendRoute)
     }
 
-    next(event: ISendRouterEvent = {}): void {
-        const { needsUnlock, addReference, addExpiration } = event
-
+    next(): void {
         let nextRoute: SendRoute
         const currentRoute = get(this.routeStore)
 
@@ -36,33 +33,29 @@ export class SendRouter extends Subrouter<SendRoute> {
                 break
             }
             case SendRoute.Review: {
-                if (addReference) {
-                    nextRoute = SendRoute.Reference
-                } else if (addExpiration) {
-                    nextRoute = SendRoute.Expiration
-                } else {
-                    if (needsUnlock) {
-                        nextRoute = SendRoute.Password
-                    } else {
-                        this.closeDrawer()
-                    }
-                }
-                break
-            }
-            case SendRoute.Reference:
-            case SendRoute.Expiration:
-            case SendRoute.Password: {
-                super.previous()
-                break
+                this.closeDrawer()
+                return
             }
         }
 
         this.setNext(nextRoute)
     }
 
-    closeDrawer(): void {
-        resetRouterWithDrawerDelay(get(sendRouter))
-        get(dashboardRouter).previous()
+    previous(): void {
+        if (this.history.length > 0) {
+            super.previous()
+        } else {
+            this.closeDrawer()
+        }
+    }
+
+    reset(): void {
+        super.reset()
         resetNewTokenTransactionDetails()
+    }
+
+    closeDrawer(): void {
+        closeDrawer(DrawerId.Send)
+        resetRouterWithDrawerDelay(get(sendRouter))
     }
 }
