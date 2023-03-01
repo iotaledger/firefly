@@ -1,11 +1,12 @@
 <script lang="ts">
     import { showAppNotification } from '@auxiliary/notification'
     import { localize } from '@core/i18n'
-    import { addNodeToClientOptions, editNodeInClientOptions, INode } from '@core/network'
+    import { addNodeToClientOptions, editNodeInClientOptions, EMPTY_NODE, INode } from '@core/network'
     import { activeProfile } from '@core/profile'
+    import { deepCopy } from '@core/utils'
     import { Button, HTMLButtonType, NodeConfigurationForm } from '@ui'
 
-    export let node: INode = undefined
+    export let node: INode = deepCopy(EMPTY_NODE)
     export let isEditingNode: boolean = false
     export let onSuccess: (..._: any[]) => void
 
@@ -17,17 +18,18 @@
     async function onSubmit(): Promise<void> {
         try {
             isBusy = true
-            const validatedNode = await nodeConfigurationForm.buildNode({
-                checkNodeInfo: true,
+            await nodeConfigurationForm.validate({
                 checkSameNetwork: true,
                 uniqueCheck: !isEditingNode,
+                checkNodeInfo: true,
                 validateClientOptions: true,
             })
             if (isEditingNode) {
-                await editNodeInClientOptions(currentNode, validatedNode)
+                await editNodeInClientOptions(currentNode, node)
             } else {
-                await addNodeToClientOptions(validatedNode)
+                await addNodeToClientOptions(node)
             }
+            node = deepCopy(EMPTY_NODE)
             onSuccess()
         } catch (err) {
             if (err.type !== 'validationError') {

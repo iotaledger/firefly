@@ -26,17 +26,17 @@
     async function onContinueClick(): Promise<void> {
         isBusy = true
         try {
-            const validatedNode = await nodeConfigurationForm.buildNode({
-                checkNodeInfo: false,
-                checkSameNetwork: false,
+            await nodeConfigurationForm.validate({
                 uniqueCheck: false,
+                checkSameNetwork: false,
+                checkNodeInfo: false,
                 validateClientOptions: false,
             })
-            updateOnboardingProfile({ clientOptions: { nodes: [validatedNode], primaryNode: validatedNode } })
+            updateOnboardingProfile({ clientOptions: { nodes: [node], primaryNode: node } })
             await initialiseProfileManagerFromOnboardingProfile(true)
 
             // The API request to check if a node is reachable requires an existing account manager.
-            await getNodeInfo(validatedNode.url)
+            await getNodeInfo(node.url)
             await destroyProfileManager()
             $networkSetupRouter.next()
         } catch (err) {

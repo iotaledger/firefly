@@ -29,11 +29,23 @@
 
     $: node.url, (formError = '')
 
+    $: node = {
+        url: node.url,
+        auth: {
+            ...([username, password].every((val) => val !== '') && {
+                basicAuthNamePwd: [username, password],
+            }),
+            ...(jwt !== '' && {
+                jwt,
+            }),
+        },
+    }
+
     function cleanNodeUrl(): void {
         node.url = stripTrailingSlash(stripSpaces(node?.url))
     }
 
-    async function validate(options: NodeValidationOptions): Promise<INode> {
+    export async function validate(options: NodeValidationOptions): Promise<INode> {
         const errorUrlValidity = checkNodeUrlValidity(currentClientOptions?.nodes, node.url, isDeveloperProfile)
         if (errorUrlValidity) {
             formError = localize(errorUrlValidity) ?? ''
@@ -76,21 +88,6 @@
                 formError = localize(errorNetworkId?.locale, errorNetworkId?.values) ?? ''
                 return Promise.reject({ type: 'validationError', error: formError })
             }
-        }
-    }
-
-    export async function buildNode(validationOptions: NodeValidationOptions): Promise<INode> {
-        await validate(validationOptions)
-        return {
-            url: node.url,
-            auth: {
-                ...([username, password].every((val) => val !== '') && {
-                    basicAuthNamePwd: [username, password],
-                }),
-                ...(jwt !== '' && {
-                    jwt,
-                }),
-            },
         }
     }
 </script>

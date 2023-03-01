@@ -21,16 +21,16 @@
     async function onSubmit(): Promise<void> {
         try {
             isBusy = true
-            const validatedNode = await nodeConfigurationForm.buildNode({
-                checkNodeInfo: true,
+            await nodeConfigurationForm.validate({
                 checkSameNetwork: true,
                 uniqueCheck: !isEditingNode,
+                checkNodeInfo: true,
                 validateClientOptions: true,
             })
             if (isEditingNode) {
-                await editNodeInClientOptions(currentNode, validatedNode)
+                await editNodeInClientOptions(currentNode, node)
             } else {
-                await addNodeToClientOptions(validatedNode)
+                await addNodeToClientOptions(node)
             }
 
             if (Platform.isFeatureFlagEnabled('governance')) {
