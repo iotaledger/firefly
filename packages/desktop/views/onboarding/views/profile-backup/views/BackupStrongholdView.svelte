@@ -1,13 +1,6 @@
 <script lang="ts">
-    import {
-        Animation,
-        Button,
-        OnboardingLayout,
-        PasswordInput,
-        Text,
-        TextType,
-        HTMLButtonType,
-    } from 'shared/components'
+    import { Animation, Button, PasswordInput, Text, TextType, HTMLButtonType } from '@ui'
+    import { OnboardingLayout } from '@components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { profileBackupRouter } from '@core/router'

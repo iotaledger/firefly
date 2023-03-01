@@ -1,10 +1,13 @@
 <script lang="ts">
+    import { onMount } from 'svelte'
+
+    import { Button, FontWeight, TextInput } from '@ui'
+
     import { localize } from '@core/i18n'
     import { getByteLengthOfString, MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
     import { newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'
-    import { Button, FontWeight, TextInput } from '@ui'
-    import { onMount } from 'svelte'
-    import { sendRouter } from '@/routers'
+
+    import { closeDrawer, DrawerId } from '@/auxiliary/drawer'
 
     let metadata, tag: string
     let error: string = undefined
@@ -16,9 +19,9 @@
         tag = $newTransactionDetails?.tag ?? ''
     })
 
-    function onContinueClick(): void {
+    function handleConfirm(): void {
         updateNewTransactionDetails({ type: $newTransactionDetails.type, tag, metadata })
-        $sendRouter.next()
+        closeDrawer(DrawerId.References)
     }
 
     function validate(): void {
@@ -35,7 +38,7 @@
     }
 </script>
 
-<div class="w-full overflow-y-auto flex flex-col flex-auto h-1 justify-between">
+<references-drawer class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <div class="flex flex-row flex-1 justify-center relative">
         <div class="w-full flex-col space-y-2">
             <TextInput
@@ -54,7 +57,7 @@
             />
         </div>
     </div>
-    <Button onClick={onContinueClick} classes="w-full" disabled={!!error}>
-        {error ?? localize('actions.continue')}
+    <Button onClick={handleConfirm} classes="w-full" disabled={!!error}>
+        {error ?? localize('actions.confirm')}
     </Button>
-</div>
+</references-drawer>
