@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { Button, Icon, Text } from '@ui'
-    import { OnboardingLayout, RecoveryPhrase } from '@components'
+    import { Button, Icon, Text, RecoveryPhrase } from '@ui'
+    import { OnboardingLayout } from '@components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { profileBackupRouter } from '@core/router'
@@ -70,7 +70,7 @@
     </div>
     <div slot="rightpane" class="w-full h-full flex flex-col items-center justify-center {$mobile ? 'p-0' : 'p-4'}">
         {#if $onboardingProfile?.mnemonic}
-            <RecoveryPhrase classes="mb-8" recoveryPhrase={$onboardingProfile?.mnemonic} {hide} />
+            <RecoveryPhrase recoveryPhrase={$onboardingProfile?.mnemonic} blurred={hide} />
             {#if !$mobile}
                 {#if !hasRevealedRecoveryPhrase}
                     {#if hide}

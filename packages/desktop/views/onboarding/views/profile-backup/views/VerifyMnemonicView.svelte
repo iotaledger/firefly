@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { Button, Icon, Text } from '@ui'
-    import { OnboardingLayout, RecoveryPhrase } from '@components'
+    import { Button, Icon, Text, RecoveryPhrase } from '@ui'
+    import { OnboardingLayout } from '@components'
     import { english } from '@auxiliary/wordlists'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
@@ -156,12 +156,7 @@
         class="w-full h-full flex flex-col items-center justify-center {$mobile ? 'my-4 p-0' : 'p-4'}"
     >
         {#if ($mobile && !verified) || !$mobile}
-            <RecoveryPhrase
-                classes="mb-8"
-                recoveryPhrase={$onboardingProfile?.mnemonic}
-                {verifyRecoveryPhrase}
-                disabled={busy}
-            />
+            <RecoveryPhrase recoveryPhrase={$onboardingProfile?.mnemonic} {verifyRecoveryPhrase} disabled={busy} />
         {/if}
     </div>
 </OnboardingLayout>
