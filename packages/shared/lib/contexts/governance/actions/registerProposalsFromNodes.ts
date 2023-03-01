@@ -1,6 +1,12 @@
-import { INode } from '@core/network/interfaces'
-import { registerProposalsFromNode } from '@contexts/governance'
+import { get } from 'svelte/store'
 
-export async function registerProposalsFromNodes(nodes: INode[]): Promise<void> {
-    await Promise.all(nodes.map((node) => registerProposalsFromNode(node)))
+import { IAccountState } from '@core/account/interfaces'
+import { INode } from '@core/network/interfaces'
+import { activeProfile } from '@core/profile/stores'
+
+import { registerProposalsForAccounts } from './registerProposalsForAccounts'
+
+export async function registerProposalsFromNodes(accounts: IAccountState[], nodes?: INode[]): Promise<void> {
+    const _nodes = nodes ? nodes : get(activeProfile)?.clientOptions?.nodes
+    await Promise.all(_nodes.map((node) => registerProposalsForAccounts({ node }, accounts)))
 }

@@ -585,6 +585,7 @@
             "proposals": {
                 "title": "Forslag",
                 "voted": "Stemt",
+                "successEdit": "Forslag hermed redigeret",
                 "successAdd": "Forslag hermed tilføjet",
                 "successAddAll": "Proposal successfully added to all accounts",
                 "successRemove": "Forslag fjernet",
@@ -1039,19 +1040,19 @@
         "mintNftForm": {
             "title": "Mint simple NFT",
             "errors": {
-                "invalidMimetype": "Invalid MimeType, check if the file type is supported",
-                "quantityTooSmall": "Quantity needs to be greater than 0",
-                "quantityTooLarge": "Quantity needs to be smaller than 64",
-                "emptyName": "Name is a required field",
-                "invalidURI": "Invalid URI, please provide a valid URI",
-                "royaltiesMustBeJSON": "Royalties must be a valid JSON",
-                "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
-                "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",
-                "invalidRoyaltyValueSum": "Invalid value, the sum of all royalties must be less than or equal to 1'",
-                "attributesMustBeJSON": "Attributes must be a valid JSON",
-                "attributesMustBeArrayOfObjects": "Attributes must be an array of objects",
-                "attributesInvalidKeys": "Invalid key, attributes must have the keys \"trait_type\" and \"value\"",
-                "attributesInvalidValues": "Invalid value, \"trait_type\" must be a non empty string and \"value\" must be a non empty string or a number"
+                "invalidMimetype": "Ugyldig MimeType. Tjek om filtypen understøttes",
+                "quantityTooSmall": "Mængde skal være større end 0",
+                "quantityTooLarge": "Mængde skal være mindre end 64",
+                "emptyName": "Navn er obligatorisk",
+                "invalidURI": "URI ugyldig, angiv en gyldig i stedet",
+                "royaltiesMustBeJSON": "Royalties skal være en gyldig JSON",
+                "invalidAddress": "Ugyldig adresse. Skal være en gyldig {networkHrp}-adresse, hvortil royalties sendes",
+                "invalidRoyaltyValue": "Ugyldig værdi. Skal være en numerisk decimal repræsentant for den ønskede procentdel, dvs. 0,05",
+                "invalidRoyaltyValueSum": "Ugyldig værdi. Summen af alle royalties skal være mindre end eller lig med 1'",
+                "attributesMustBeJSON": "Attributter skal være en gyldig JSON",
+                "attributesMustBeArrayOfObjects": "Attributter skal være en objektrække",
+                "attributesInvalidKeys": "Ugyldig nøgle. Attributter skal inkludere nøglerne \"trait_type\" samt \"værdi\"",
+                "attributesInvalidValues": "Ugyldig værdi. \"trait_type\" skal være en ikke-tom streng og \"værdi\" skal være en ikke-tom streng eller et tal"
             }
         },
         "faucetRequest": {
@@ -1068,6 +1069,10 @@
             "title": "Tilføj forslag",
             "body": "Angiv nedenstående oplysninger for at tilføje et forslag.",
             "addToAllAccounts": "Add the proposal to all accounts"
+        },
+        "editProposal": {
+            "title": "Redigér forslag",
+            "body": "Angiv den nye URL til noden indeholdende dette forslag."
         },
         "voteForProposal": {
             "title": "Vote for proposal",
@@ -1282,6 +1287,7 @@
         "vote": "Vote",
         "addProposal": "Add proposal",
         "removeProposal": "Remove proposal",
+        "changeNode": "Skift node",
         "stopVoting": "Stop voting",
         "revote": "Stem igen"
     },
@@ -1480,8 +1486,8 @@
         "surplus": "Overskud",
         "storageDeposit": "Storage deposit",
         "giftedStorageDeposit": "Gifted storage deposit",
-        "storageDepositPerNft": "Storage deposit per NFT",
-        "totalStorageDeposit": "Total storage deposit",
+        "storageDepositPerNft": "Lagringsdeponering pr. NFT",
+        "totalStorageDeposit": "Lagerdeponering i alt",
         "expirationTime": "Expiration time",
         "timelockDate": "Tidslås",
         "claimedTime": "Claimed at",
@@ -1536,7 +1542,7 @@
         "issuer": "Issuer",
         "issuerAddress": "Issuer Address",
         "issuerName": "Issuer Name",
-        "quantity": "Quantity",
+        "quantity": "Antal",
         "collection": "Collection",
         "collectionId": "Collection ID",
         "collectionName": "Collection Name",
@@ -1819,6 +1825,7 @@
             "wrongAddressPrefix": "Adresser starter med præfikset {prefix}.",
             "wrongAddressFormat": "Adressen er ikke formateret korrekt.",
             "invalidAddress": "Adressen er ikke gyldig.",
+            "invalidAssetId": "Aktivet er ugyldigt.",
             "unknownAsset": "Aktivet kendes ikke af denne konto.",
             "insufficientFunds": "Denne wallet har ikke tilstrækkelige midler.",
             "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
@@ -1964,7 +1971,7 @@
         "governance": {
             "unableToAddProposal": {
                 "short": "Forslag kan ikke tilføjes",
-                "long": "En fejl opstod under forsøget på at tilføje et forslaget {proposalId}"
+                "long": "Forslaget {proposalId} ikke fundet på den angivne node"
             }
         }
     },
@@ -2056,7 +2063,7 @@
             "description": "Optional parameter: A description of the NFT",
             "attributes": "Optional parameter: An array of traits and values that define attributes of the NFT",
             "uri": "To create a URI using custom media, first upload your file to IPFS via a storage service (e.g. https://nft.storage/)",
-            "quantity": "Optional parameter: The quantity of copies minted with this metadata."
+            "quantity": "Valgfri parameter: Mængden af kopier mintet med disse metadata."
         },
         "governance": {
             "removeProposalWarning": "Før dette forslag fjernes, skal man ophøre med at stemme på det."

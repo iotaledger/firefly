@@ -585,6 +585,7 @@
             "proposals": {
                 "title": "Propuestas",
                 "voted": "Votado",
+                "successEdit": "Propuesta editada correctamente",
                 "successAdd": "Propuesta añadida correctamente",
                 "successAddAll": "Propuesta añadida correctamente a todas las cuentas",
                 "successRemove": "Propuesta eliminada correctamente",
@@ -1069,6 +1070,10 @@
             "body": "Por favor, proporciona la siguiente información para añadir una propuesta.",
             "addToAllAccounts": "Añadir la propuesta a todas las cuentas"
         },
+        "editProposal": {
+            "title": "Editar propuesta",
+            "body": "Por favor, proporciona la nueva url del nodo que contiene esta propuesta."
+        },
         "voteForProposal": {
             "title": "Votar por propuesta",
             "body": "Estás a punto de votar por la propuesta {proposal}.",
@@ -1282,6 +1287,7 @@
         "vote": "Votar",
         "addProposal": "Añadir propuesta",
         "removeProposal": "Eliminar propuesta",
+        "changeNode": "Cambiar Nodo",
         "stopVoting": "Dejar de votar",
         "revote": "Volver a votar"
     },
@@ -1819,6 +1825,7 @@
             "wrongAddressPrefix": "Las direcciones comienzan con el prefijo {prefix}.",
             "wrongAddressFormat": "La dirección no tiene el formato correcto.",
             "invalidAddress": "La dirección no es válida.",
+            "invalidAssetId": "El id del activo no es válido.",
             "unknownAsset": "El activo no es conocido por esta cuenta.",
             "insufficientFunds": "Esta cartera tiene fondos insuficientes.",
             "insufficientFundsStorageDeposit": "Fondos insuficientes para cubrir el depósito de almacenamiento",
@@ -1964,7 +1971,7 @@
         "governance": {
             "unableToAddProposal": {
                 "short": "No se pudo añadir la propuesta",
-                "long": "Ocurrió un error al intentar añadir la propuesta {proposalId}"
+                "long": "No se pudo encontrar la propuesta {proposalId} en el nodo especificado"
             }
         }
     },
