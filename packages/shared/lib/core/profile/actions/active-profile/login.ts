@@ -1,4 +1,4 @@
-import { initializeRegisteredProposals, registerProposalsFromPrimaryNode } from '@contexts/governance/actions'
+import { initializeRegisteredProposals, registerProposalsFromNodes } from '@contexts/governance/actions'
 import { cleanupOnboarding } from '@contexts/onboarding/actions'
 import { createNewAccount, setSelectedAccount } from '@core/account/actions'
 import { DEFAULT_SYNC_OPTIONS } from '@core/account/constants'
@@ -143,7 +143,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             void pollMarketPrices()
             if (Platform.isFeatureFlagEnabled('governance')) {
                 void initializeRegisteredProposals()
-                void registerProposalsFromPrimaryNode()
+                void registerProposalsFromNodes(get(activeAccounts))
             }
             void cleanupOnboarding()
         } else {
