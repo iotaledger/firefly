@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { OnboardingLayout, RecoveryPhrase } from '@components'
-    import { Button, Text, TextType } from '@ui'
+    import { OnboardingLayout } from '@components'
+    import { Button, Text, TextType, RecoveryPhrase } from '@ui'
     import { localize } from '@core/i18n'
     import { profileBackupRouter } from '@/routers'
     import {
@@ -47,7 +47,7 @@
             >{localize('views.onboarding.profileBackup.viewMnemonic.body2')}</Text
         >
         {#if $onboardingProfile?.mnemonic}
-            <RecoveryPhrase classes="mb-8" recoveryPhrase={$onboardingProfile?.mnemonic} {hide} />
+            <RecoveryPhrase recoveryPhrase={$onboardingProfile?.mnemonic} blurred={hide} boxed />
         {/if}
     </div>
     <div slot="footer">
