@@ -109,12 +109,11 @@
         registerAppEvents()
         // await pollMarketData()
 
-        /* eslint-disable no-undef */
-        // @ts-expect-error: This value is replaced by Webpack DefinePlugin
-        // if (!devMode) {
-        await setAppVersionDetails()
-        pollCheckForAppUpdate()
-        // }
+        if (process.env.NODE_ENV !== 'development') {
+            await setAppVersionDetails()
+            pollCheckForAppUpdate()
+        }
+
         Platform.onEvent('menu-navigate-wallet', () => {
             $dashboardRouter.goTo(DashboardRoute.Wallet)
         })
