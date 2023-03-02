@@ -102,7 +102,7 @@
                 </button>
             </div>
         </div>
-        <div class="flex flex-col space-y-4">
+        <div class="flex flex-col space-y-2">
             {#if features?.dashboard?.profileActions?.backupProfile?.enabled && !isBackupSafe}
                 <ProfileBackupButton {lastBackupDate} onClick={onBackupClick} />
             {/if}
