@@ -1,8 +1,10 @@
 <script lang="typescript">
-    import { slidable } from '@core/utils'
-    import { removeDisplayNotification } from '@auxiliary/notification/stores'
     import { tweened } from 'svelte/motion'
     import { quintOut } from 'svelte/easing'
+
+    import { slidable } from '@core/utils'
+
+    import { removeDisplayNotification } from '@auxiliary/notification/stores'
 
     export let toastId: string = undefined
 
