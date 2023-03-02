@@ -10,22 +10,14 @@
         appVersionDetails,
         AppStage,
         appStage,
-        PlatformOption,
-        platform,
-        openUrlInBrowser,
     } from '@core/app'
     import { formatDate, localize } from '@core/i18n'
     import { closePopup } from '@auxiliary/popup'
 
-    let hasAutoUpdate = true
     let isPreRelease = true
 
     function handleDownload(): void {
-        if (hasAutoUpdate) {
-            downloadAppUpdate()
-        } else {
-            openUrlInBrowser('https://firefly.iota.org')
-        }
+        downloadAppUpdate()
         closePopup()
     }
     function handleCloseClick(): void {
@@ -39,7 +31,6 @@
             checkForAppUpdate()
             isPreRelease = get(appStage) !== AppStage.PROD
         }
-        hasAutoUpdate = $platform !== PlatformOption.Windows
     })
 </script>
 
@@ -88,9 +79,6 @@
             <div class="changelog overflow-y-auto">
                 <Text secondary classes="whitespace-pre-wrap">{$appVersionDetails.changelog}</Text>
             </div>
-            {#if !hasAutoUpdate}
-                <Text error classes="mt-4">{localize('popups.version.noAutoUpdate')}</Text>
-            {/if}
         </div>
         <div class="flex flex-row justify-between space-x-4 w-full md:px-8">
             <Button outline classes="w-1/2" onClick={handleCloseClick}>{localize('actions.cancel')}</Button>
