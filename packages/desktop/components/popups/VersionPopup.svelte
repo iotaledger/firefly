@@ -36,11 +36,8 @@
         // @ts-expect-error: This value is replaced by Webpack DefinePlugin
         if (!devMode) {
             await setAppVersionDetails()
-            if (get(appStage) === AppStage.PROD) {
-                isPreRelease = false
-                checkForAppUpdate()
-            }
             checkForAppUpdate()
+            isPreRelease = get(appStage) !== AppStage.PROD
         }
         hasAutoUpdate = $platform !== PlatformOption.Windows
     })
