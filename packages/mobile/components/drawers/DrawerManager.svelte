@@ -12,12 +12,13 @@
         EnterPasswordDrawer,
         ExpirationDrawer,
         FilterDrawer,
+        NetworkStatusDrawer,
+        ProfileDrawer,
         ReceiveDrawer,
         ReferencesDrawer,
         SelectedActivityDrawer,
         SelectedTokenDrawer,
         SendDrawer,
-        ProfileDrawer,
     } from './'
 
     import { closeDrawer, DrawerId, drawers } from '@/auxiliary/drawer'
@@ -40,6 +41,7 @@
         [DrawerId.References]: ReferencesDrawer,
         [DrawerId.Expiration]: ExpirationDrawer,
         [DrawerId.Profile]: ProfileDrawer,
+        [DrawerId.NetworkStatus]: NetworkStatusDrawer,
     }
 </script>
 

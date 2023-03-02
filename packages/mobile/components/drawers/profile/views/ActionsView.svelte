@@ -61,7 +61,9 @@
         openDrawer(DrawerId.EnterPassword, { returnPassword: true, onSuccess: _handleBackup })
     }
 
-    function onNetworkStatusClick(): void {}
+    function onNetworkStatusClick(): void {
+        openDrawer(DrawerId.NetworkStatus)
+    }
 
     function onSettingsClick(): void {
         $profileRouter.next()
