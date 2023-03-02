@@ -33,11 +33,11 @@ function getAppId() {
 function getChannelName() {
     switch (STAGE) {
         case 'alpha':
-            return 'shimmer-alpha'
+            return 'test-alpha'
         case 'beta':
-            return 'shimmer-beta'
+            return 'test-beta'
         default:
-            return 'shimmer'
+            return 'test'
     }
 }
 
