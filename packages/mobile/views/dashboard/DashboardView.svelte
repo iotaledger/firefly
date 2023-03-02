@@ -1,7 +1,6 @@
 <script lang="ts">
     import { TabPane, TogglableAssetBalanceLabel, TopBar } from '@components'
     import { Button } from '@ui'
-    import DashboardRouter from './DashboardRouter.svelte'
     import { TabNavigator } from './tabs'
 
     import { selectedAccount } from '@core/account'
@@ -65,4 +64,3 @@
         {/if}
     </div>
 {/if}>
-<DashboardRouter />

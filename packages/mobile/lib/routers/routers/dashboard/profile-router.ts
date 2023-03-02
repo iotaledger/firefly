@@ -1,18 +1,17 @@
 import { get, writable } from 'svelte/store'
 
-import { Subrouter } from '@core/router'
+import { Router } from '@core/router'
 
 import { closeDrawer, DrawerId } from '@/auxiliary/drawer'
 import { ProfileRoute } from '../../enums'
 import { resetRouterWithDrawerDelay } from '../../utils'
-import { dashboardRouter } from '../dashboard-router'
 
 export const profileRoute = writable<ProfileRoute>(null)
 export const profileRouter = writable<ProfileRouter>(null)
 
-export class ProfileRouter extends Subrouter<ProfileRoute> {
+export class ProfileRouter extends Router<ProfileRoute> {
     constructor() {
-        super(ProfileRoute.Actions, profileRoute, get(dashboardRouter))
+        super(ProfileRoute.Actions, profileRoute)
     }
     public next(): void {
         let nextRoute: ProfileRoute
@@ -37,7 +36,7 @@ export class ProfileRouter extends Subrouter<ProfileRoute> {
     }
 
     closeDrawer(): void {
-        closeDrawer(DrawerId.Send)
+        closeDrawer(DrawerId.Profile)
         resetRouterWithDrawerDelay(get(profileRouter))
     }
 }
