@@ -8,6 +8,5 @@ export interface IAccountState extends IAccount, IAccountMetadata {
     isTransferring: boolean
     hasVotingPowerTransactionInProgress: boolean
     hasVotingTransactionInProgress: boolean
-    shouldRevote: boolean
     votingPower: string
 }

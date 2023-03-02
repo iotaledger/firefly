@@ -4,12 +4,11 @@ import { showAppNotification } from '@auxiliary/notification/actions'
 import { localize } from '@core/i18n'
 import { handleError } from '@core/error/handlers'
 import { processAndAddToActivities } from '@core/wallet'
-import { GovernanceTransactionType } from '@contexts/governance/enums'
 
 export async function vote(eventId?: string, answers?: number[]): Promise<void> {
     const account = get(selectedAccount)
     try {
-        updateSelectedAccount({ processingGovernanceTransactionType: GovernanceTransactionType.Vote })
+        updateSelectedAccount({ hasVotingTransactionInProgress: true })
 
         const transaction = await account.vote(eventId, answers)
         await processAndAddToActivities(transaction, account)
@@ -20,7 +19,7 @@ export async function vote(eventId?: string, answers?: number[]): Promise<void> 
             alert: true,
         })
     } catch (err) {
-        updateSelectedAccount({ processingGovernanceTransactionType: null })
+        updateSelectedAccount({ hasVotingTransactionInProgress: false })
         handleError(err)
     }
 }

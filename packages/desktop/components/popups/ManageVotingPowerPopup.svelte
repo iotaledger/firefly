@@ -30,12 +30,12 @@
     $: amount, hasTransactionInProgress, setConfirmDisabled()
 
     function setConfirmDisabled(): void {
-        if (hasTransactionInProgress || !amount) {
+        if (!amount) {
             confirmDisabled = true
             return
         }
         const convertedSliderAmount = convertToRawAmount(amount, asset?.metadata).toString()
-        confirmDisabled = convertedSliderAmount === $selectedAccount?.votingPower || hasTransactionInProgress
+        confirmDisabled = convertedSliderAmount === $selectedAccount?.votingPower
     }
 
     function onCancelClick(): void {
@@ -46,8 +46,7 @@
         try {
             await assetAmountInput?.validate(true)
 
-            const isVoting = isAccountVoting($selectedAccount.index)
-            if (amount === '0' && isVoting) {
+            if (amount === '0' && isAccountVoting($selectedAccount.index)) {
                 openPopup({ id: PopupId.VotingPowerToZero })
                 return
             }
@@ -57,7 +56,7 @@
 
             await checkActiveProfileAuth(
                 async () => {
-                    await setVotingPower(rawAmount, isVoting)
+                    await setVotingPower(rawAmount)
                 },
                 { stronghold: true, ledger: false }
             )

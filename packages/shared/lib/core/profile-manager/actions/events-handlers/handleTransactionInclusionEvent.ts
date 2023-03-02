@@ -53,11 +53,11 @@ function handleGovernanceTransactionInclusionEvent(
     activity: GovernanceActivity
 ): void {
     if (inclusionState === InclusionState.Confirmed) {
-        // This is usually done after a transaction is returned from wallet.rs
-        // in the case of governance we want to wait for the transaction to be confirmed
+        // TODO: Normally we update active account after a wallet.rs returns a transaction
+        // With governance we wait for the transaction confirmation
         // we should think about making this consistent in the future
         updateActiveAccount(accountIndex, { isTransferring: false })
-        // need to move this
+        // TODO: move this
         closePopup(true)
 
         const account = get(activeAccounts)?.find((_account) => _account.index === accountIndex)
