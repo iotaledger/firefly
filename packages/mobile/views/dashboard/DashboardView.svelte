@@ -28,7 +28,7 @@
 </script>
 
 {#if $selectedAccount}
-    <div class="flex flex-col w-screen h-screen bg-gray-50 dark:bg-gray-900">
+    <dashboard-view class="flex flex-col w-screen h-screen bg-gray-50 dark:bg-gray-900">
         <div class="px-5 py-6">
             <TopBar />
             <div class="flex justify-center w-full mt-5">
@@ -62,5 +62,5 @@
                 <TabNavigator />
             </div>
         {/if}
-    </div>
+    </dashboard-view>
 {/if}>
