@@ -9,7 +9,7 @@
     import { Mnemonic, onboardingProfile, verifyAndStoreMnemonic } from '@contexts/onboarding'
 
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { english } from '@auxiliary/wordlists'
+    import { generateRandomWord } from '@auxiliary/wordlists'
 
     import { profileBackupRouter } from '@/routers'
 
@@ -34,19 +34,6 @@
         const random2 = generateRandomWord([...$onboardingProfile?.mnemonic, random1])
 
         wordChoices = [actualWord, random1, random2].sort(() => 0.5 - Math.random())
-    }
-
-    function generateRandomWord(excludedWords: string[]): string {
-        let word: string
-
-        do {
-            const wordIndex = Math.floor(Math.random() * english.length)
-            if (!excludedWords.includes(english[wordIndex])) {
-                word = english[wordIndex]
-            }
-        } while (!word)
-
-        return word
     }
 
     function handleChoice(word: string): void {
