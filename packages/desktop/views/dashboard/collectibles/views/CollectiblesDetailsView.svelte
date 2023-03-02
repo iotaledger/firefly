@@ -36,11 +36,13 @@
         getBech32AddressFromAddressTypes,
         getHexAddressFromAddressTypes,
         getNftId,
+        getTimeDifference,
         OUTPUT_TYPE_NFT,
     } from '@core/wallet'
     import { NewTransactionType, selectedAccountActivities, setNewTransactionDetails } from '@core/wallet/stores'
     import { PopupId } from '@auxiliary/popup'
     import { collectiblesRouter } from '@core/router/routers'
+    import { time } from '@core/app'
 
     let modal: Modal
     let error: string
@@ -62,7 +64,8 @@
         .find((activity) => activity?.type === ActivityType.Nft && activity?.nftId === id)
 
     $: formattedMetadata = convertAndFormatNftMetadata(metadata)
-    $: returnIfNftWasSent($allAccountNfts[$selectedAccountIndex])
+    $: returnIfNftWasSent($allAccountNfts[$selectedAccountIndex], $time)
+    $: timeDiff = getTimeDifference(new Date(nft.timelockTime), $time)
 
     $: nftActivity, setStorageDeposit()
     async function setStorageDeposit() {
@@ -126,9 +129,10 @@
             }),
     }
 
-    function returnIfNftWasSent(selectedAccountNfts: INft[]): void {
+    function returnIfNftWasSent(selectedAccountNfts: INft[], currentTime: Date): void {
         const nft = selectedAccountNfts.find((nft) => nft.id === id)
-        if (nft?.isSpendable) {
+        const isLocked = nft.timelockTime > currentTime.getTime()
+        if (nft?.isSpendable || isLocked) {
             // empty
         } else {
             $collectiblesRouter.previous()
@@ -248,7 +252,11 @@
             <Button outline classes="flex-1" onClick={handleExplorerClick} disabled={!explorerUrl}>
                 {localize('general.viewOnExplorer')}
             </Button>
-            <Button classes="flex-1" onClick={handleSendClick}>{localize('actions.send')}</Button>
+            <Button classes="flex-1" onClick={handleSendClick} disabled={!!timeDiff}>
+                {timeDiff
+                    ? localize('popups.balanceBreakdown.locked.title') + ' ' + String(timeDiff)
+                    : localize('actions.send')}
+            </Button>
         </div>
     </Pane>
 </div>

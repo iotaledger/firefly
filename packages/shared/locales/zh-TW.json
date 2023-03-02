@@ -585,6 +585,7 @@
             "proposals": {
                 "title": "提案",
                 "voted": "已投票",
+                "successEdit": "Proposal successfully edited",
                 "successAdd": "已成功新增提案",
                 "successAddAll": "提案已順利新增到全部帳號",
                 "successRemove": "已成功移除提案",
@@ -1069,6 +1070,10 @@
             "body": "Please provide the information listed below to add a proposal.",
             "addToAllAccounts": "Add the proposal to all accounts"
         },
+        "editProposal": {
+            "title": "Edit proposal",
+            "body": "Please provide the new url for the node that contains this proposal."
+        },
         "voteForProposal": {
             "title": "給提案投票",
             "body": "您即將投票給 {proposal} 提案。",
@@ -1282,6 +1287,7 @@
         "vote": "投票",
         "addProposal": "新增提案",
         "removeProposal": "移除提案",
+        "changeNode": "Change Node",
         "stopVoting": "停止投票",
         "revote": "重新投票"
     },
@@ -1819,6 +1825,7 @@
             "wrongAddressPrefix": "地址必須以 {prefix} 開頭。",
             "wrongAddressFormat": "地址格式不正確。",
             "invalidAddress": "此地址無效。",
+            "invalidAssetId": "The asset id is not valid.",
             "unknownAsset": "此帳號不清楚該資產",
             "insufficientFunds": "這個錢包資金不足。",
             "insufficientFundsStorageDeposit": "資金不足以負擔存儲空間費用",
@@ -1964,7 +1971,7 @@
         "governance": {
             "unableToAddProposal": {
                 "short": "無法新增提案",
-                "long": "新增 {proposalId} 提案時發生錯誤"
+                "long": "Unable to find proposal {proposalId} on the specified node"
             }
         }
     },
