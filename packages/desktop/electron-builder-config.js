@@ -7,6 +7,7 @@ const APP_NAME = getAppName()
 const APP_ID = getAppId()
 const APP_PROTOCOL = getAppProtocol()
 const CHANNEL_NAME = getChannelName()
+
 /**
  * If stage = 'prod' -> 'Firefly'
  * If stage = 'alpha' -> 'Firefly Alpha'
@@ -32,11 +33,11 @@ function getAppId() {
 function getChannelName() {
     switch (STAGE) {
         case 'alpha':
-            return 'test-alpha'
+            return 'shimmer-alpha'
         case 'beta':
-            return 'test-beta'
+            return 'shimmer-beta'
         default:
-            return 'test'
+            return 'shimmer'
     }
 }
 

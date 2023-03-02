@@ -106,10 +106,12 @@
                 [RouterManagerExtensionName.ResetRouters, resetRouters],
             ],
         })
-        registerAppEvents()
+
         // await pollMarketData()
 
+        // Used for auto updates
         if (process.env.NODE_ENV !== 'development') {
+            registerAppEvents()
             await setAppVersionDetails()
             pollCheckForAppUpdate()
         }

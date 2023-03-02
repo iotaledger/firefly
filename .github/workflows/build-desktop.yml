@@ -185,7 +185,7 @@ jobs:
                   name: firefly-desktop-${{ matrix.os }}
                   path: |
                       packages/desktop/out/firefly-desktop*
-                      packages/desktop/out/test*
+                      packages/desktop/out/shimmer*
 
     release:
         runs-on: ubuntu-latest
@@ -305,7 +305,7 @@ jobs:
                   AWS_DEFAULT_REGION: eu-central-1
 
             - name: Invalidate CloudFront cache for auto-update files
-              run: aws cloudfront create-invalidation --distribution-id E32G4HRED4PO65 --paths "/test*"
+              run: aws cloudfront create-invalidation --distribution-id E32G4HRED4PO65 --paths "/shimmer*"
               env:
                   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
                   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

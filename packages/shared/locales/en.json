@@ -701,11 +701,12 @@
         "version": {
             "title": "Current version: {version}",
             "upToDateTitle": "Firefly is up to date",
+            "preReleaseUpToDateTitle": "Pre-released Firefly is up to date",
             "upToDateDescription": "You are running the latest and safest version of Firefly.",
+            "preReleaseDescription": "You are running the latest pre-released version of Firefly.",
             "updateAvailable": "Firefly update available",
             "updateDetails": "Version {version} - {date}",
-            "noAutoUpdate": "Auto-update is disabled in this Windows version, please go to https://firefly.iota.org to download the update.",
-            "preReleaseDescription": "You are running a pre-release version of Firefly. Updates are disabled."
+            "noAutoUpdate": "Auto-update is disabled in this Windows version, please go to https://firefly.iota.org to download the update."
         },
         "backupStronghold": {
             "title": "Backup your stronghold file",
