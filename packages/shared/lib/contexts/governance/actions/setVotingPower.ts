@@ -10,7 +10,7 @@ export async function setVotingPower(rawAmount: string): Promise<void> {
         const votingPower = parseInt(account.votingPower, 10)
         const amount = parseInt(rawAmount, 10)
 
-        updateSelectedAccount({ hasVotingPowerTransactionInProgress: true })
+        updateSelectedAccount({ hasVotingPowerTransactionInProgress: true, isTransferring: true })
 
         let transaction: Transaction
         if (amount > votingPower) {
@@ -23,6 +23,6 @@ export async function setVotingPower(rawAmount: string): Promise<void> {
         await processAndAddToActivities(transaction, account)
     } catch (err) {
         handleError(err)
-        updateSelectedAccount({ hasVotingPowerTransactionInProgress: false })
+        updateSelectedAccount({ hasVotingPowerTransactionInProgress: false, isTransferring: false })
     }
 }
