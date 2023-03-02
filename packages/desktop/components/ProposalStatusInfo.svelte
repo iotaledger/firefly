@@ -1,7 +1,9 @@
 <script lang="ts">
+    import { ProposalStatusTimelineTooltip } from '@components'
+    import { ProposalStatusPill } from '@ui'
+    import { Position } from '@ui/enums'
+
     import { IProposal } from '@contexts/governance/interfaces'
-    import { ProposalStatusPill, ProposalStatusTimelineTooltip } from 'shared/components'
-    import { Position } from 'shared/components/enums'
 
     export let proposal: IProposal
     export let position: Position = Position.Right

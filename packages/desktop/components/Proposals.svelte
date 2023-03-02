@@ -1,8 +1,10 @@
 <script lang="ts">
-    import { Text, ProposalCard, SearchInput } from 'shared/components'
-    import { Filter } from '../../desktop/components' // TODO: refactor to match dependency platform
+    import { Filter, ProposalCard } from '@components'
+    import { SearchInput, Text } from '@ui'
+    import { FontWeight } from '@ui/enums'
+
     import { localize } from '@core/i18n'
-    import { FontWeight } from './enums'
+
     import { proposalFilter, registeredProposalsForSelectedAccount } from '@contexts/governance/stores'
     import { isVisibleProposal, sortProposals } from '@contexts/governance/utils'
 

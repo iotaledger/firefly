@@ -1,32 +1,33 @@
 <script lang="ts">
-    import {
-        Button,
-        KeyValueBox,
-        Pane,
-        ProposalDetailsButton,
-        ProposalQuestion,
-        ProposalStatusPill,
-        Text,
-        TextType,
-        TextHint,
-        MarkdownBlock,
-    } from '@ui'
-    import { ProposalInformationPane } from '@components'
-    import { onMount, onDestroy } from 'svelte'
     import { VotingEventPayload, ParticipationEventType, TrackedParticipationOverview } from '@iota/wallet/out/types'
-    import { localize } from '@core/i18n'
-    import { openPopup } from '@auxiliary/popup/actions'
+
+    import { onMount, onDestroy } from 'svelte'
+
+    import { Button, KeyValueBox, MarkdownBlock, Pane, ProposalStatusPill, Text, TextHint, TextType } from '@ui'
+    import { ProposalDetailsButton, ProposalInformationPane, ProposalQuestion } from '@components'
+
     import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
+    import { handleError } from '@core/error/handlers'
+    import { localize } from '@core/i18n'
+    import { networkStatus } from '@core/network/stores'
+    import { getBestTimeDuration, milestoneToDate } from '@core/utils'
+    import { visibleSelectedAccountAssets } from '@core/wallet/stores'
+    import { formatTokenAmountBestMatch } from '@core/wallet/utils'
+
     import { getVotingEvent } from '@contexts/governance/actions'
+    import {
+        clearParticipationEventStatusPoll,
+        pollParticipationEventStatus,
+    } from '@contexts/governance/actions/pollParticipationEventStatus'
     import { ABSTAIN_VOTE_VALUE } from '@contexts/governance/constants'
     import { ProposalStatus } from '@contexts/governance/enums'
     import {
+        clearSelectedParticipationEventStatus,
         hasPendingGovernanceTransaction,
-        selectedProposal,
-        updateParticipationOverview,
         participationOverviewForSelectedAccount,
         selectedParticipationEventStatus,
-        clearSelectedParticipationEventStatus,
+        selectedProposal,
+        updateParticipationOverview,
     } from '@contexts/governance/stores'
     import {
         calculateTotalVotesForTrackedParticipations,
@@ -34,16 +35,9 @@
         isProposalVotable,
         isVotingForSelectedProposal,
     } from '@contexts/governance/utils'
-    import { getBestTimeDuration, milestoneToDate } from '@core/utils'
-    import { networkStatus } from '@core/network/stores'
-    import { formatTokenAmountBestMatch } from '@core/wallet/utils'
-    import { visibleSelectedAccountAssets } from '@core/wallet/stores'
-    import { handleError } from '@core/error/handlers'
-    import {
-        clearParticipationEventStatusPoll,
-        pollParticipationEventStatus,
-    } from '@contexts/governance/actions/pollParticipationEventStatus'
+
     import { PopupId } from '@auxiliary/popup'
+    import { openPopup } from '@auxiliary/popup/actions'
 
     const { metadata } = $visibleSelectedAccountAssets?.baseCoin
 

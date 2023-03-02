@@ -1,11 +1,14 @@
 <script lang="ts">
-    import { Text, Button } from 'shared/components'
-    import { ButtonSize, FontWeight, TextType } from './enums'
+    import { Button, Text } from '@ui'
+    import { ButtonSize, FontWeight, TextType } from '@ui/enums'
+
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { formatTokenAmountBestMatch, visibleSelectedAccountAssets } from '@core/wallet'
-    import { openPopup, PopupId } from '@auxiliary/popup'
+
     import { hasPendingGovernanceTransaction } from '@contexts/governance/stores'
+
+    import { openPopup, PopupId } from '@auxiliary/popup'
 
     const asset = $visibleSelectedAccountAssets?.baseCoin
 

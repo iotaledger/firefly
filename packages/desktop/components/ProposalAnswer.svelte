@@ -1,10 +1,14 @@
 <script lang="ts">
     import type { Answer } from '@iota/wallet'
-    import { Text, FontWeight, TooltipIcon, PingingBadge, Icon } from 'shared/components'
-    import { Position } from 'shared/components/enums'
+
+    import { Icon, PingingBadge, Text, TooltipIcon } from '@ui'
+    import { FontWeight, Position } from '@ui/enums'
+
     import { appSettings } from '@core/app/stores'
-    import { Icon as IconEnum } from '@auxiliary/icon'
+
     import { ProposalStatus } from '@contexts/governance'
+
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let onAnswerClick: () => void
 

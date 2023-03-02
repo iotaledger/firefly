@@ -1,12 +1,16 @@
 <script lang="ts">
     import type { AnswerStatus, Question } from '@iota/wallet'
-    import { Text, FontWeight, Icon, ProposalAnswer, TooltipIcon } from 'shared/components'
+
+    import { ProposalAnswer } from '@components'
+    import { Icon, Text, TooltipIcon } from '@ui'
+    import { FontWeight, Position } from '@ui/enums'
+
     import { ABSTAIN_VOTE_VALUE } from '@contexts/governance/constants'
     import { ProposalStatus } from '@contexts/governance/enums'
-    import { selectedProposal } from '@contexts/governance/stores'
-    import { Icon as IconEnum } from '@auxiliary/icon'
-    import { Position } from './enums'
     import { getPercentagesFromAnswerStatuses, IProposalAnswerPercentages } from '@contexts/governance'
+    import { selectedProposal } from '@contexts/governance/stores'
+
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let onQuestionClick: (questionIndex: number) => void
     export let onAnswerClick: (answerValue: number, questionIndex: number) => void

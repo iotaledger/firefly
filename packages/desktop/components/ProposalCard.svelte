@@ -1,15 +1,19 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { ProposalStatusInfo, Text, TooltipIcon } from 'shared/components'
-    import { Icon } from '@auxiliary/icon/enums'
+
+    import { ProposalStatusInfo } from '@components'
+    import { Text, TooltipIcon } from '@ui'
+    import { FontWeight, Position } from '@ui/enums'
+
     import { localize } from '@core/i18n'
     import { GovernanceRoute, governanceRouter } from '@core/router'
+
+    import { ProposalStatus } from '@contexts/governance/enums'
     import { IProposal } from '@contexts/governance/interfaces'
     import { participationOverviewForSelectedAccount, selectedProposalId } from '@contexts/governance/stores'
-    import { ProposalStatus } from '@contexts/governance/enums'
     import { isVotingForProposal } from '@contexts/governance/utils'
 
-    import { FontWeight, Position } from '../enums'
+    import { Icon } from '@auxiliary/icon/enums'
 
     export let proposal: IProposal
 
