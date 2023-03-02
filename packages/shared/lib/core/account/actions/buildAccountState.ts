@@ -36,7 +36,6 @@ export async function buildAccountState(account: IAccount, metadata: IAccountMet
         ...account,
         ...metadata,
         depositAddress,
-        processingGovernanceTransactionType: null,
         balances,
         isTransferring: false,
         votingPower,

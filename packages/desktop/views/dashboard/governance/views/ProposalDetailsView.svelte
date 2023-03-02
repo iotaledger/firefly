@@ -81,7 +81,8 @@
         !isProposalVotable($selectedProposal?.status) ||
         !hasChangedAnswers(selectedAnswerValues) ||
         hasSelectedNoAnswers(selectedAnswerValues)
-    $: hasGovernanceTransactionInProgress = $selectedAccount.processingGovernanceTransactionType !== null
+    $: hasGovernanceTransactionInProgress =
+        $selectedAccount?.hasVotingPowerTransactionInProgress || $selectedAccount?.hasVotingTransactionInProgress
     $: $selectedParticipationEventStatus, (textHintString = getTextHintString())
 
     function hasSelectedNoAnswers(_selectedAnswerValues: number[]): boolean {

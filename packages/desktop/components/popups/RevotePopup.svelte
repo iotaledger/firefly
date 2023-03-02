@@ -6,7 +6,8 @@
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { vote } from '@contexts/governance/actions'
 
-    $: hasGovernanceTransactionInProgress = $selectedAccount?.processingGovernanceTransactionType !== null
+    $: hasGovernanceTransactionInProgress =
+        $selectedAccount?.hasVotingPowerTransactionInProgress || $selectedAccount?.hasVotingTransactionInProgress
 
     async function onSubmit(): Promise<void> {
         await checkActiveProfileAuth(async () => {

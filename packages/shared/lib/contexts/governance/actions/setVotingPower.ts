@@ -3,7 +3,6 @@ import { Transaction } from '@iota/wallet/out/types'
 import { selectedAccount, updateSelectedAccount } from '@core/account/stores'
 import { processAndAddToActivities } from '@core/wallet/utils'
 import { handleError } from '@core/error/handlers'
-import { GovernanceTransactionType } from '@contexts/governance/enums'
 
 export async function setVotingPower(rawAmount: string): Promise<void> {
     const account = get(selectedAccount)
@@ -11,10 +10,7 @@ export async function setVotingPower(rawAmount: string): Promise<void> {
         const votingPower = parseInt(account.votingPower, 10)
         const amount = parseInt(rawAmount, 10)
 
-        updateSelectedAccount({
-            processingGovernanceTransactionType: GovernanceTransactionType.VotingPower,
-            isTransferring: true,
-        })
+        updateSelectedAccount({ hasVotingPowerTransactionInProgress: true, isTransferring: true })
 
         let transaction: Transaction
         if (amount > votingPower) {
@@ -27,9 +23,6 @@ export async function setVotingPower(rawAmount: string): Promise<void> {
         await processAndAddToActivities(transaction, account)
     } catch (err) {
         handleError(err)
-        updateSelectedAccount({
-            processingGovernanceTransactionType: GovernanceTransactionType.VotingPower,
-            isTransferring: false,
-        })
+        updateSelectedAccount({ hasVotingPowerTransactionInProgress: false, isTransferring: false })
     }
 }
