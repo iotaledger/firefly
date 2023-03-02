@@ -6,10 +6,9 @@
 
     import { localize } from '@core/i18n'
 
-    import { Mnemonic, onboardingProfile, verifyAndStoreMnemonic } from '@contexts/onboarding'
+    import { getWordChoices, Mnemonic, onboardingProfile, verifyAndStoreMnemonic } from '@contexts/onboarding'
 
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { generateRandomWord } from '@auxiliary/wordlists'
 
     import { profileBackupRouter } from '@/routers'
 
@@ -27,15 +26,6 @@
         completeVerification()
     }
 
-    function fillChoices(): void {
-        const currentIndex = verifyRecoveryPhrase.length
-        const actualWord = $onboardingProfile?.mnemonic[currentIndex]
-        const random1 = generateRandomWord($onboardingProfile?.mnemonic)
-        const random2 = generateRandomWord([...$onboardingProfile?.mnemonic, random1])
-
-        wordChoices = [actualWord, random1, random2].sort(() => 0.5 - Math.random())
-    }
-
     function handleChoice(word: string): void {
         const wordElement = document.getElementById(`recovery-word-${verifyIndex}`)
         wordElement?.scrollIntoView({ behavior: 'smooth', block: 'center' })
@@ -45,7 +35,7 @@
                 isVerified = true
             } else {
                 verifyIndex++
-                fillChoices()
+                wordChoices = getWordChoices(verifyRecoveryPhrase.length)
             }
         }
     }
@@ -60,7 +50,7 @@
     }
 
     onMount(() => {
-        fillChoices()
+        wordChoices = getWordChoices(verifyRecoveryPhrase.length)
     })
 </script>
 

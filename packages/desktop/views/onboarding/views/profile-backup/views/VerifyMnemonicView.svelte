@@ -7,10 +7,9 @@
     import { localize } from '@core/i18n'
     import { profileBackupRouter } from '@core/router'
 
-    import { Mnemonic, onboardingProfile, verifyAndStoreMnemonic } from '@contexts/onboarding'
+    import { getWordChoices, Mnemonic, onboardingProfile, verifyAndStoreMnemonic } from '@contexts/onboarding'
 
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { generateRandomWord } from '@auxiliary/wordlists'
 
     export let busy: boolean = false
 
@@ -21,15 +20,6 @@
     let verifyIndex: number = 0
     let isVerified: boolean = false
 
-    function fillChoices(): void {
-        const currentIndex = verifyRecoveryPhrase.length
-        const actualWord = $onboardingProfile?.mnemonic[currentIndex]
-        const random1 = generateRandomWord($onboardingProfile?.mnemonic)
-        const random2 = generateRandomWord([...$onboardingProfile?.mnemonic, random1])
-
-        wordChoices = [actualWord, random1, random2].sort(() => 0.5 - Math.random())
-    }
-
     function handleChoice(word: string): void {
         verifyRecoveryPhrase[verifyIndex] = word
         if ($onboardingProfile?.mnemonic[verifyIndex] === word) {
@@ -37,7 +27,7 @@
                 isVerified = true
             } else {
                 verifyIndex++
-                fillChoices()
+                wordChoices = getWordChoices(verifyRecoveryPhrase.length)
             }
         }
     }
@@ -70,7 +60,7 @@
     }
 
     onMount(() => {
-        fillChoices()
+        wordChoices = getWordChoices(verifyRecoveryPhrase.length)
     })
 </script>
 
