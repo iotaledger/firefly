@@ -38,8 +38,8 @@ export class ProfileRouter extends Router<ProfileRoute> {
 
     closeDrawer(): void {
         closeDrawer(DrawerId.Profile)
-        resetRouterWithDrawerDelay(settingsRouter)
-        resetRouterWithDrawerDelay(networkConfigurationSettingsRouter)
+        resetRouterWithDrawerDelay(get(settingsRouter))
+        resetRouterWithDrawerDelay(get(networkConfigurationSettingsRouter))
         resetRouterWithDrawerDelay(get(profileRouter))
     }
 }
