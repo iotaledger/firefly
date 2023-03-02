@@ -1,4 +1,4 @@
-import type { IAccountState } from '@core/account'
+import type { IAccountState } from '@core/account/interfaces'
 import { derived, Readable, writable } from 'svelte/store'
 import { activeProfile } from './active-profile.store'
 

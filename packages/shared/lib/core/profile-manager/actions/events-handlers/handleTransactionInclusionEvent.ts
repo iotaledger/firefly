@@ -1,24 +1,20 @@
 import { get } from 'svelte/store'
-import {
-    clearHasPendingGovernanceTransactionForAccount,
-    hasToRevote,
-    updateParticipationOverview,
-} from '@contexts/governance/stores'
-import { syncVotingPower, updateSelectedAccount } from '@core/account'
+import { updateParticipationOverview } from '@contexts/governance/stores'
+import { syncVotingPower } from '@core/account'
 import { updateNftInAllAccountNfts } from '@core/nfts'
-
-import { ActivityAction, ActivityDirection, ActivityType, InclusionState } from '@core/wallet'
+import { ActivityAction, ActivityDirection, ActivityType, GovernanceActivity, InclusionState } from '@core/wallet'
 import { updateClaimingTransactionInclusion } from '@core/wallet/actions/activities/updateClaimingTransactionInclusion'
 import {
     getActivityByTransactionId,
     updateActivityByTransactionId,
 } from '@core/wallet/stores/all-account-activities.store'
-
 import { WalletApiEvent } from '../../enums'
 import { ITransactionInclusionEventPayload } from '../../interfaces'
 import { validateWalletApiEvent } from '../../utils'
 import { closePopup, openPopup } from '@auxiliary/popup/actions'
 import { PopupId } from '@auxiliary/popup'
+import { activeAccounts, updateActiveAccount } from '@core/profile/stores'
+import { isAccountVoting } from '@contexts/governance/utils/isAccountVoting'
 
 export function handleTransactionInclusionEvent(error: Error, rawEvent: string): void {
     const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletApiEvent.TransactionInclusion)
@@ -44,23 +40,37 @@ export function handleTransactionInclusionEventInternal(
     }
 
     if (activity?.type === ActivityType.Governance) {
-        if (inclusionState === InclusionState.Confirmed) {
-            updateSelectedAccount({ isTransferring: false })
-            closePopup(true)
-
-            if (get(hasToRevote)) {
-                openPopup({
-                    id: PopupId.Revote,
-                    preventClose: true,
-                    hideClose: true,
-                })
-            }
-            void updateParticipationOverview(accountIndex)
-        }
-
-        clearHasPendingGovernanceTransactionForAccount(accountIndex)
-        syncVotingPower(accountIndex)
+        handleGovernanceTransactionInclusionEvent(accountIndex, inclusionState, activity)
     }
 
     updateClaimingTransactionInclusion(transactionId, inclusionState, accountIndex)
+}
+
+function handleGovernanceTransactionInclusionEvent(
+    accountIndex: number,
+    inclusionState: InclusionState,
+    activity: GovernanceActivity
+): void {
+    if (inclusionState === InclusionState.Confirmed) {
+        // This is usually done after a transaction is returned from wallet.rs
+        // in the case of governance we want to wait for the transaction to be confirmed
+        // we should think about making this consistent in the future
+        updateActiveAccount(accountIndex, { isTransferring: false })
+        // need to move this
+        closePopup(true)
+
+        const account = get(activeAccounts)?.find((_account) => _account.index === accountIndex)
+        if (account.hasVotingPowerTransactionInProgress) {
+            updateActiveAccount(accountIndex, { hasVotingPowerTransactionInProgress: false })
+            if (isAccountVoting(accountIndex) && activity.votingPower !== 0) {
+                updateActiveAccount(accountIndex, { shouldRevote: true })
+                openPopup({ id: PopupId.Revote })
+            }
+        } else {
+            updateActiveAccount(accountIndex, { hasVotingTransactionInProgress: false })
+            updateActiveAccount(accountIndex, { shouldRevote: false })
+        }
+        void updateParticipationOverview(accountIndex)
+    }
+    syncVotingPower(accountIndex)
 }
