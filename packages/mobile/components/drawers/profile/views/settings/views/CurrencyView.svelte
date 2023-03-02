@@ -1,8 +1,9 @@
 <script lang="ts">
+    import { Radio } from '@ui'
+
     import { MarketCurrency } from '@core/market'
     import { activeProfile, updateActiveProfileSettings } from '@core/profile'
     import type { IDropdownChoice } from '@core/utils'
-    import { Radio } from '@ui'
 
     let currencyList: IDropdownChoice[]
     $: currencyList = Object.values(MarketCurrency)

@@ -1,10 +1,12 @@
 <script lang="ts">
+    import { onMount } from 'svelte'
+
+    import { Button, ButtonSize, Text, TextType } from '@ui'
+
     import { appSettings, appVersionDetails, Platform } from '@core/app'
     import { localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import { setClipboard } from '@core/utils'
-    import { Button, ButtonSize, Text, TextType } from '@ui'
-    import { onMount } from 'svelte'
 
     let contentApp = ''
     let contentSystem = ''

@@ -1,7 +1,8 @@
 <script lang="ts">
     import { Radio } from '@ui'
+
     import { appSettings } from '@core/app'
-    import { SUPPORTED_LOCALES, setLanguage } from '@core/i18n'
+    import { setLanguage, SUPPORTED_LOCALES } from '@core/i18n'
 
     let appLanguage: string = SUPPORTED_LOCALES[$appSettings.language]
 

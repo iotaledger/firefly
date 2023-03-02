@@ -1,8 +1,11 @@
 <script lang="ts">
+    import { Icon, Text, TextType } from '@ui'
+
     import { openUrlInBrowser } from '@core/app'
     import { localize } from '@core/i18n'
+
     import features from '@features/features'
-    import { Icon, Text, TextType } from '@ui'
+
     import { SettingsCategory, SETTINGS_ROUTE_META } from '@/contexts/settings'
     import { SettingsRoute, settingsRouter } from '@/routers'
 

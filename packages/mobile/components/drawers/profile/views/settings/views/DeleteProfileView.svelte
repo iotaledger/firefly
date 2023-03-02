@@ -1,9 +1,11 @@
 <script lang="ts">
-    import { deleteProfile } from '@contexts/settings'
+    import { Button, ButtonSize, ButtonVariant, PasswordInput, Text, TextType } from '@ui'
+
     import { localize } from '@core/i18n'
     import { isSoftwareProfile } from '@core/profile'
     import { setStrongholdPassword } from '@core/profile-manager'
-    import { Button, ButtonSize, ButtonVariant, PasswordInput, Text, TextType } from '@ui'
+
+    import { deleteProfile } from '@contexts/settings'
 
     let isBusy = false
     let error = ''

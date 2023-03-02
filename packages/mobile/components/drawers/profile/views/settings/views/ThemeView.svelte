@@ -1,6 +1,7 @@
 <script lang="ts">
-    import { Radio, Text, Icon } from '@ui'
-    import { AppTheme, appSettings, shouldBeDarkMode } from '@core/app'
+    import { Icon, Radio, Text } from '@ui'
+
+    import { appSettings, AppTheme, shouldBeDarkMode } from '@core/app'
     import { localize } from '@core/i18n'
 
     let appTheme: AppTheme = $appSettings.theme

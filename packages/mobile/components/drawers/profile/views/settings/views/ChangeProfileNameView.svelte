@@ -1,8 +1,10 @@
 <script lang="ts">
-    import { showAppNotification } from '@auxiliary/notification'
+    import { Button, ButtonSize, HTMLButtonType, Input, Text, TextType } from '@ui'
+
     import { localize } from '@core/i18n'
     import { activeProfile, updateActiveProfile, validateProfileName } from '@core/profile'
-    import { Button, ButtonSize, HTMLButtonType, Input, Text, TextType } from '@ui'
+
+    import { showAppNotification } from '@auxiliary/notification'
 
     let newName = $activeProfile?.name
     let error = ''
