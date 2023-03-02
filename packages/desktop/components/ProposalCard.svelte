@@ -5,6 +5,7 @@
     import { Text, TooltipIcon } from '@ui'
     import { FontWeight, Position } from '@ui/enums'
 
+    import { appSettings } from '@core/app/stores'
     import { localize } from '@core/i18n'
     import { GovernanceRoute, governanceRouter } from '@core/router'
 
@@ -18,13 +19,15 @@
     export let proposal: IProposal
 
     let hasVoted = false
+
     $: $participationOverviewForSelectedAccount, setHasVoted()
+    $: dark = $appSettings.darkMode
 
     function setHasVoted(): void {
         hasVoted = isVotingForProposal(proposal?.id)
     }
 
-    function handleProposalClick(): void {
+    function onProposalClick(): void {
         $selectedProposalId = proposal?.id
         $governanceRouter.goTo(GovernanceRoute.Details)
     }
@@ -33,10 +36,12 @@
 </script>
 
 <proposal-card
-    on:click={handleProposalClick}
-    on:keydown={(e) => e.key === 'Enter' && handleProposalClick()}
-    class="flex flex-col p-6 border border-solid border-gray-200 dark:border-transparent rounded-xl cursor-pointer h-fit shadow-elevation-1 focus:shadow-inner
-    {proposal?.status === ProposalStatus.Ended ? 'bg-transparent' : 'bg-white dark:bg-gray-850'}"
+    on:click={onProposalClick}
+    on:keydown={(e) => e.key === 'Enter' && onProposalClick()}
+    class:dark
+    class:ended={proposal?.status === ProposalStatus.Ended}
+    class="flex flex-col p-6 border border-solid border-gray-200 dark:border-transparent rounded-xl cursor-pointer
+    h-fit shadow-elevation-1 focus:shadow-inner bg-white dark:bg-gray-850"
 >
     <div class="flex items-center gap-1.5 mb-4">
         {#if proposal.organization}
@@ -63,3 +68,10 @@
         {/if}
     </div>
 </proposal-card>
+
+<style lang="scss">
+    proposal-card.ended,
+    proposal-card.dark.ended {
+        @apply bg-transparent;
+    }
+</style>
