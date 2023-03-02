@@ -1,7 +1,7 @@
 <script lang="ts">
     import { fade } from 'svelte/transition'
 
-    import { Alert, Swiper, Toast } from './'
+    import { Swiper, Toast } from './'
 
     import { notifications } from '@auxiliary/notification/stores'
 
@@ -30,24 +30,20 @@
                 <li transition:fade|local={{ duration: fadeDuration }}>
                     {#if swipe}
                         <Swiper toastId={toast.id}>
-                            {#if toast.alert}
-                                <Alert type={toast.type} message={toast.message} id={toast.id} showDismiss />
-                            {:else}
-                                <Toast
-                                    type={toast.type}
-                                    message={toast.message}
-                                    subMessage={toast.subMessage}
-                                    progress={toast.progress}
-                                    actions={toast.actions}
-                                    id={toast.id}
-                                    showDismiss
-                                />
-                            {/if}
+                            <Toast
+                                alert
+                                type={toast.type}
+                                message={toast.message}
+                                subMessage={toast.subMessage}
+                                progress={toast.progress}
+                                actions={toast.actions}
+                                id={toast.id}
+                                showDismiss
+                            />
                         </Swiper>
-                    {:else if toast.alert}
-                        <Alert type={toast.type} message={toast.message} id={toast.id} showDismiss />
                     {:else}
                         <Toast
+                            alert
                             type={toast.type}
                             message={toast.message}
                             subMessage={toast.subMessage}
