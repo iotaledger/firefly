@@ -34,8 +34,4 @@ export class SettingsRouter extends Subrouter<SettingsRoute> {
 
         this.setNext(nextRoute)
     }
-    reset(): void {
-        super.reset()
-        get(profileRouter)?.reset()
-    }
 }
