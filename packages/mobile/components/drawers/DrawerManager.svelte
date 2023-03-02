@@ -14,6 +14,8 @@
         EnterPasswordDrawer,
         ExpirationDrawer,
         FilterDrawer,
+        LegalDrawer,
+        LegalUpdateDrawer,
         NetworkStatusDrawer,
         ProfileDrawer,
         ReceiveDrawer,
@@ -45,6 +47,8 @@
         [DrawerId.Expiration]: ExpirationDrawer,
         [DrawerId.Profile]: ProfileDrawer,
         [DrawerId.NetworkStatus]: NetworkStatusDrawer,
+        [DrawerId.LegalUpdate]: LegalUpdateDrawer,
+        [DrawerId.Legal]: LegalDrawer,
     }
 
     function onClose(drawerId: DrawerId): void {
