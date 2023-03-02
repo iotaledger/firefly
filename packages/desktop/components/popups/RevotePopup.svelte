@@ -17,7 +17,6 @@
     }
 </script>
 
-r
 <form id="manage-voting-power" class="space-y-5" on:submit|preventDefault={onSubmit}>
     <Text type={TextType.h4} classes="mb-3">{localize('popups.revote.title')}</Text>
     <Text type={TextType.p}>{localize('popups.revote.body')}</Text>
