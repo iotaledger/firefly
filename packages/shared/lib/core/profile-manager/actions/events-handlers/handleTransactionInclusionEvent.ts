@@ -71,7 +71,7 @@ function handleGovernanceTransactionInclusionEvent(
             updateActiveAccountMetadata(accountIndex, { shouldRevote: false })
         }
 
-        updateActiveAccount(accountIndex, { processingGovernanceTransactionType: null })
+        updateActiveAccount(accountIndex, { processingGovernanceTransactionType: null, isTransferring: false })
         void updateParticipationOverview(accountIndex)
     }
     syncVotingPower(accountIndex)
