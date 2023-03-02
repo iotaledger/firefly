@@ -18,7 +18,7 @@
     $: formattedMaxVotingPower = formatTokenAmountBestMatch(maxVotingPower, asset?.metadata)
     $: isTransferring = $hasPendingGovernanceTransaction?.[$selectedAccount.index] || $selectedAccount?.isTransferring
 
-    function handleManageVotingPower(): void {
+    function onManageVotingPowerClick(): void {
         openPopup({
             id: PopupId.ManageVotingPower,
         })
@@ -35,7 +35,7 @@
     </Text>
     <Button
         size={ButtonSize.Medium}
-        onClick={handleManageVotingPower}
+        onClick={onManageVotingPowerClick}
         classes="w-full"
         disabled={isTransferring}
         isBusy={isTransferring}
