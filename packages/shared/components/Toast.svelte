@@ -1,7 +1,10 @@
 <script lang="ts">
     import { Alert, Icon } from 'shared/components'
+
     import { localize } from '@core/i18n'
+
     import { removeDisplayNotification } from '@auxiliary/notification/stores'
+
     import Logo from './Logo.svelte'
 
     type Action = {
