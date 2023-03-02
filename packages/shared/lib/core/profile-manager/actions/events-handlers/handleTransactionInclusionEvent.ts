@@ -14,6 +14,7 @@ import { validateWalletApiEvent } from '../../utils'
 import { closePopup, openPopup } from '@auxiliary/popup/actions'
 import { PopupId } from '@auxiliary/popup'
 import { activeAccounts, updateActiveAccount } from '@core/profile/stores'
+import { updateActiveAccountMetadata } from '@core/profile/actions'
 import { isAccountVoting } from '@contexts/governance/utils/isAccountVoting'
 
 export function handleTransactionInclusionEvent(error: Error, rawEvent: string): void {
@@ -63,12 +64,12 @@ function handleGovernanceTransactionInclusionEvent(
         if (account.hasVotingPowerTransactionInProgress) {
             updateActiveAccount(accountIndex, { hasVotingPowerTransactionInProgress: false })
             if (isAccountVoting(accountIndex) && activity.votingPower !== 0) {
-                updateActiveAccount(accountIndex, { shouldRevote: true })
+                updateActiveAccountMetadata(accountIndex, { shouldRevote: true })
                 openPopup({ id: PopupId.Revote })
             }
         } else {
             updateActiveAccount(accountIndex, { hasVotingTransactionInProgress: false })
-            updateActiveAccount(accountIndex, { shouldRevote: false })
+            updateActiveAccountMetadata(accountIndex, { shouldRevote: false })
         }
         void updateParticipationOverview(accountIndex)
     }
