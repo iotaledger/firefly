@@ -7,6 +7,9 @@
     import { activeProfile, lockStronghold, logout } from '@core/profile'
     import { getInitials, isRecentDate } from '@core/utils'
 
+    import { showAppNotification } from '@auxiliary/notification'
+    import { exportStronghold } from '@contexts/settings'
+
     import { DrawerId, openDrawer } from '@/auxiliary/drawer'
     import { profileRouter } from '@/routers'
     import features from '@features/features'
@@ -36,7 +39,27 @@
         }
     }
 
-    function onBackupClick(): void {}
+    function onBackupClick(): void {
+        function _handleExportStrongholdResponse(cancelled, error): void {
+            if (!cancelled) {
+                if (error) {
+                    showAppNotification({
+                        type: 'error',
+                        message: localize(error),
+                    })
+                } else {
+                    showAppNotification({
+                        type: 'info',
+                        message: localize('general.exportingStrongholdSuccess'),
+                    })
+                }
+            }
+        }
+        function _handleBackup(password): void {
+            exportStronghold(password, _handleExportStrongholdResponse)
+        }
+        openDrawer(DrawerId.EnterPassword, { returnPassword: true, onSuccess: _handleBackup })
+    }
 
     function onNetworkStatusClick(): void {}
 
