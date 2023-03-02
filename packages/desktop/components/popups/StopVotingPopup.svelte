@@ -8,8 +8,7 @@
     import { selectedAccount } from '@core/account/stores'
     import { checkActiveProfileAuth } from '@core/profile/actions'
 
-    $: hasGovernanceTransactionInProgress =
-        $selectedAccount?.hasVotingPowerTransactionInProgress || $selectedAccount?.hasVotingTransactionInProgress
+    $: hasGovernanceTransactionInProgress = $selectedAccount?.processingGovernanceTransactionType !== null
 
     function onCancelClick(): void {
         closePopup()

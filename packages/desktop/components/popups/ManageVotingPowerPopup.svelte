@@ -24,9 +24,7 @@
     $: asset = $visibleSelectedAccountAssets?.baseCoin
     $: votingPower = parseInt($selectedAccount?.votingPower, 10)
     $: hasTransactionInProgress =
-        $selectedAccount?.hasVotingPowerTransactionInProgress ||
-        $selectedAccount?.hasVotingTransactionInProgress ||
-        $selectedAccount?.isTransferring
+        $selectedAccount?.processingGovernanceTransactionType !== null || $selectedAccount?.isTransferring
     $: amount, hasTransactionInProgress, setConfirmDisabled()
 
     function setConfirmDisabled(): void {
@@ -57,7 +55,7 @@
 
             await checkActiveProfileAuth(
                 async () => {
-                    await setVotingPower(rawAmount, isVoting)
+                    await setVotingPower(rawAmount)
                 },
                 { stronghold: true, ledger: false }
             )

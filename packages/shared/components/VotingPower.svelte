@@ -13,9 +13,7 @@
     $: formattedVotingPower = formatTokenAmountBestMatch(votingPower, asset?.metadata)
     $: formattedMaxVotingPower = formatTokenAmountBestMatch(maxVotingPower, asset?.metadata)
     $: hasTransactionInProgress =
-        $selectedAccount?.hasVotingPowerTransactionInProgress ||
-        $selectedAccount?.hasVotingTransactionInProgress ||
-        $selectedAccount?.isTransferring
+        $selectedAccount?.processingGovernanceTransactionType !== null || $selectedAccount?.isTransferring
 
     function handleManageVotingPower(): void {
         openPopup({

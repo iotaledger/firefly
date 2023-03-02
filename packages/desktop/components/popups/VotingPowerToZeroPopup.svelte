@@ -12,8 +12,7 @@
 
     const ZERO_VOTING_POWER = '0'
 
-    $: isTransferring =
-        $selectedAccount?.hasVotingPowerTransactionInProgress || $selectedAccount?.hasVotingTransactionInProgress
+    $: isTransferring = $selectedAccount?.processingGovernanceTransactionType !== null
 
     function onCancelClick(): void {
         closePopup()
@@ -29,7 +28,7 @@
                     id: PopupId.ManageVotingPower,
                     props: { newVotingPower: ZERO_VOTING_POWER },
                 })
-                await setVotingPower(ZERO_VOTING_POWER, true)
+                await setVotingPower(ZERO_VOTING_POWER)
             })
         } catch (err) {
             handleError(err)

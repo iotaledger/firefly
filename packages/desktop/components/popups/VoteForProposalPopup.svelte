@@ -21,8 +21,7 @@
     )
     $: hasVotingPower = Number($selectedAccount?.votingPower) > 0
 
-    $: hasGovernanceTransactionInProgress =
-        $selectedAccount?.hasVotingPowerTransactionInProgress || $selectedAccount?.hasVotingTransactionInProgress
+    $: hasGovernanceTransactionInProgress = $selectedAccount?.processingGovernanceTransactionType !== null
 
     $: numberOfAbstainedQuestions =
         selectedAnswerValues?.filter((answerValue) => answerValue === ABSTAIN_VOTE_VALUE).length ?? 0
