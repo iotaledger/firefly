@@ -1,8 +1,8 @@
 <script lang="ts">
     import { onMount } from 'svelte'
 
-    import { SettingsNavigator, SettingsNavigatorTypes } from '@components'
-    import { Scroller, Text, TextType } from '@ui'
+    import { Scroller, SettingsNavigator, SettingsNavigatorTypes } from '@components'
+    import { Text, TextType } from '@ui'
 
     import { Advanced, General, Help, Security } from './'
     import { localize, _ } from '@core/i18n'
