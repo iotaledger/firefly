@@ -10,17 +10,17 @@
         DRAWER_IN_ANIMATION_DURATION_MS,
         DRAWER_OUT_ANIMATION_DURATION_MS,
         DRAWER_STATIC_TITLE_TITLES,
-        getDrawerRouter,
     } from '@/auxiliary/drawer'
-    import { resetRouterWithDrawerDelay } from '@/routers'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
 
+    export let onBack: () => unknown = () => {}
     export let onClose: () => unknown = () => {}
     export let allowBack: boolean = false
     export let title: string | undefined = undefined
     export let fullScreen: boolean = false
     export let enterFromSide: boolean = false
     export let id: DrawerId = undefined
+    export let preventClose: boolean = false
 
     let position = 0
     let moving = false
@@ -30,43 +30,42 @@
 
     $: staticTile = DRAWER_STATIC_TITLE_TITLES[id] ? localize(DRAWER_STATIC_TITLE_TITLES[id]) : undefined
     $: displayedTitle = title ?? staticTile
-    $: drawerRouter = getDrawerRouter(id)
 
     const directon = enterFromSide ? { x: -100 } : { y: 100 }
 
+    function onOverlayClick(): void {
+        if (!preventClose) {
+            onClose && onClose()
+        }
+    }
+
     function onTouchStart(event): void {
-        moving = true
-        const { pageX, pageY } = event.touches[0]
-        touchStart = enterFromSide ? -pageX : pageY
+        if (!preventClose) {
+            moving = true
+            const { pageX, pageY } = event.touches[0]
+            touchStart = enterFromSide ? -pageX : pageY
+        }
     }
 
     function onTouchMove(event): void {
-        if (moving && event.targetTouches.length === 1) {
-            const { pageX, pageY } = event.touches[0]
-            const nextTouch = enterFromSide ? -pageX : pageY
-            position = Math.min(touchStart - nextTouch, 0)
+        if (!preventClose) {
+            if (moving && event.targetTouches.length === 1) {
+                const { pageX, pageY } = event.touches[0]
+                const nextTouch = enterFromSide ? -pageX : pageY
+                position = Math.min(touchStart - nextTouch, 0)
+            }
         }
     }
 
     function onTouchEnd(): void {
-        moving = false
-        const panelSize = enterFromSide ? panelWidth : panelHeight
-        if (position < -panelSize / 3) {
-            handleClose()
-        } else {
-            position = 0
-        }
-    }
-
-    function handleClose(): void {
-        if ($drawerRouter) {
-            resetRouterWithDrawerDelay($drawerRouter)
-        }
-        onClose && onClose()
-    }
-    function onBackClick(): void {
-        if ($drawerRouter) {
-            $drawerRouter.previous()
+        if (!preventClose) {
+            moving = false
+            const panelSize = enterFromSide ? panelWidth : panelHeight
+            if (position < -panelSize / 3) {
+                onClose && onClose()
+            } else {
+                position = 0
+            }
         }
     }
 </script>
@@ -76,7 +75,7 @@
     <overlay
         in:fade|local={{ duration: DRAWER_IN_ANIMATION_DURATION_MS }}
         out:fade|local={{ duration: DRAWER_OUT_ANIMATION_DURATION_MS }}
-        on:click={handleClose}
+        on:click={onOverlayClick}
         class="fixed top-0 left-0 w-full h-full z-0 bg-gray-700 dark:bg-gray-900 bg-opacity-60 dark:bg-opacity-60"
     />
     <panel
@@ -100,7 +99,7 @@
             <div class="grid grid-cols-4 h-6 mb-6">
                 <div class="col-span-1">
                     {#if allowBack}
-                        <button type="button" on:click={onBackClick}>
+                        <button type="button" on:click={onBack}>
                             <Icon width="24" height="24" icon={IconEnum.ArrowLeft} classes="text-gray-500" />
                         </button>
                     {/if}

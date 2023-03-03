@@ -39,7 +39,7 @@
             <Filter filterStore={proposalFilter} />
         </div>
     </header-container>
-    <ul class="grid grid-cols-2 auto-rows-min gap-6 flex-1 overflow-y-scroll">
+    <ul class="grid grid-cols-2 auto-rows-min gap-6 flex-1 overflow-y-scroll pr-3 -mr-5">
         {#each sortedProposals as proposal}
             <ProposalCard {proposal} />
         {/each}
