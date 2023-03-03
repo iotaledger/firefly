@@ -1,14 +1,6 @@
 <script lang="ts">
-    import { CreateAliasButton, MintNativeTokenButton } from '@components'
-    import {
-        FaucetRequestButton,
-        MintNftButton,
-        Pane,
-        RefreshTokenMetadataButton,
-        TestDeepLinkButton,
-        Text,
-        TextType,
-    } from '@ui'
+    import { CreateAliasButton, MintNativeTokenButton, MintNftButton } from '@components'
+    import { FaucetRequestButton, Pane, RefreshTokenMetadataButton, TestDeepLinkButton, Text, TextType } from '@ui'
 
     import features from '@features/features'
 
