@@ -1,9 +1,11 @@
 <script lang="ts">
+    import { OnboardingButton } from 'shared/components'
+
     import { localize } from '@core/i18n'
     import { refreshAccountAssetsForActiveProfile } from '@core/wallet'
+
     import { showAppNotification } from '@auxiliary/notification'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-    import { OnboardingButton } from 'shared/components'
 
     function refreshTokenMetadata(): void {
         refreshAccountAssetsForActiveProfile(true)
@@ -15,7 +17,7 @@
         closePopup()
     }
 
-    function handleRefreshTokenMetadata(): void {
+    function onRefreshTokenMetadata(): void {
         openPopup({
             id: PopupId.Confirmation,
             props: {
@@ -32,5 +34,5 @@
 <OnboardingButton
     primaryText={localize('actions.refreshTokenMetadata')}
     secondaryText={localize('general.refreshTokenMetadataDescription')}
-    onClick={handleRefreshTokenMetadata}
+    onClick={onRefreshTokenMetadata}
 />
