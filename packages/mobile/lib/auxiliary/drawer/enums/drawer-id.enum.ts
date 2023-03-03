@@ -17,4 +17,6 @@ export enum DrawerId {
     DeleteAccount = 'deleteAccount',
     Filter = 'filter',
     DateTimePicker = 'dateTimePicker',
+    NetworkStatus = 'networkStatus',
+    LegalUpdate = 'LegalUpdate',
 }
