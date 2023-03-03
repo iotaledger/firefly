@@ -2067,6 +2067,10 @@
         },
         "governance": {
             "removeProposalWarning": "You must stop voting for this proposal before removing it."
+        },
+        "outdatedNode": {
+            "title": "Outdated node URL",
+            "body": "The node URL for this proposal is outdated. Please update it to access the latest voting results."
         }
     },
     "exports": {
