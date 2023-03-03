@@ -1825,7 +1825,7 @@
             "wrongAddressPrefix": "Adressen beginnen mit dem Präfix {prefix}.",
             "wrongAddressFormat": "Die Adresse ist nicht korrekt formatiert.",
             "invalidAddress": "Die Adresse ist ungültig.",
-            "invalidAssetId": "The asset id is not valid.",
+            "invalidAssetId": "Die Asset-Id ist nicht gültig.",
             "unknownAsset": "Das Asset ist diesem Konto nicht bekannt.",
             "insufficientFunds": "Diese Wallet hat unzureichendes Guthaben.",
             "insufficientFundsStorageDeposit": "Unzureichendes Guthaben, um die Storage Deposit abzudecken",

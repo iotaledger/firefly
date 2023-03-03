@@ -1825,7 +1825,7 @@
             "wrongAddressPrefix": "Adresy zaczynają się od prefiksu {prefix}.",
             "wrongAddressFormat": "Adres nie jest poprawnie sformatowany.",
             "invalidAddress": "Adres jest nieprawidłowy.",
-            "invalidAssetId": "The asset id is not valid.",
+            "invalidAssetId": "Identyfikator assetu jest nieprawidłowy.",
             "unknownAsset": "Ten asset nie jest znany na tym koncie.",
             "insufficientFunds": "Brak wystarczających środków na tym portfelu.",
             "insufficientFundsStorageDeposit": "Niewystarczające środki na pokrycie depozytu magazynowego",
