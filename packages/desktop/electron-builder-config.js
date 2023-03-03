@@ -105,7 +105,7 @@ const prodConfig = () => ({
     },
     publish: {
         provider: 'generic',
-        url: 'https://dl.firefly.iota.org/shimmer/',
+        url: 'https://dl.firefly.iota.org/',
         publishAutoUpdate: true,
         channel: CHANNEL_NAME,
     },
