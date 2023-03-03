@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { OnboardingButton } from 'shared/components'
+    import { OnboardingButton } from '@ui'
 
     import { localize } from '@core/i18n'
     import { refreshAccountAssetsForActiveProfile } from '@core/wallet'
