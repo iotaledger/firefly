@@ -2,7 +2,11 @@ import { get } from 'svelte/store'
 import type { ParticipationEventId, ParticipationEventStatus } from '@iota/wallet'
 import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
 import { IAccount } from '@core/account'
-import { addOrUpdateProposalToRegisteredProposals, registeredProposalsForSelectedAccount } from '@contexts/governance'
+import {
+    addOrUpdateProposalToRegisteredProposals,
+    ProposalStatus,
+    registeredProposalsForSelectedAccount,
+} from '@contexts/governance'
 
 export async function getAccountsParticipationEventStatusForEvent(
     eventId: ParticipationEventId,
@@ -14,11 +18,15 @@ export async function getAccountsParticipationEventStatusForEvent(
     } catch (err) {
         /* eslint-disable no-console */
         console.error(err)
-        /* eslint-disable no-constant-condition */
-        if (true) {
+        const isEventError = err?.error?.match(/(the requested data)|(was not found)/)?.length > 0
+        if (isEventError) {
             const proposal = get(registeredProposalsForSelectedAccount)[eventId]
-            console.log(proposal)
-            addOrUpdateProposalToRegisteredProposals({ ...proposal, isNodeOutdated: true }, get(selectedAccountIndex))
+            if (proposal.status !== ProposalStatus.Ended) {
+                addOrUpdateProposalToRegisteredProposals(
+                    { ...proposal, isNodeOutdated: true },
+                    get(selectedAccountIndex)
+                )
+            }
         }
         return undefined
     }
