@@ -4,20 +4,22 @@
     import { appSettings, AppTheme, shouldBeDarkMode } from '@core/app'
     import { localize } from '@core/i18n'
 
+    import { Icon as IconEnum } from '@auxiliary/icon'
+
     let appTheme: AppTheme = $appSettings.theme
 
     $: $appSettings.theme = appTheme
     $: $appSettings.darkMode = shouldBeDarkMode($appSettings.theme)
 </script>
 
-<div class="flex flex-col">
+<theme-view class="flex flex-col">
     <Radio value={'light'} bind:group={appTheme} label={localize('general.lightTheme')} classes="p-2" />
     <Radio value={'dark'} bind:group={appTheme} label={localize('general.darkTheme')} classes="p-2" />
     <Radio value={'system'} bind:group={appTheme} label={localize('general.systemTheme')} classes="p-2" />
     {#if appTheme === 'system'}
         <div class="flex flex-row items-center mb-5">
-            <Icon icon="info" classes="mr-3 fill-current text-black dark:text-white" />
+            <Icon icon={IconEnum.Info} classes="mr-3 fill-current text-black dark:text-white" />
             <Text fontSize="14" lineHeight="5">{localize('views.settings.theme.advice')}</Text>
         </div>
     {/if}
-</div>
+</theme-view>

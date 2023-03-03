@@ -1,7 +1,9 @@
 <script lang="ts">
+    import { Button, ButtonVariant, Text, TextType } from '@ui'
+
     import { localize } from '@core/i18n'
     import { INode } from '@core/network'
-    import { Button, ButtonVariant, Text, TextType } from '@ui'
+
     import { NetworkConfigurationSettingsAction } from '@/contexts/settings'
 
     export let action: NetworkConfigurationSettingsAction = undefined
@@ -32,7 +34,7 @@
     }
 </script>
 
-<div class="flex-1 flex flex-col justify-between space-y-4">
+<node-confirmation-view class="flex-1 flex flex-col justify-between space-y-4">
     <Text type={TextType.p}>{descriptionText}</Text>
     <div class="flex flex-col w-full space-y-4">
         <Button classes="w-full" outline onClick={onCancel}>{localize('actions.cancel')}</Button>
@@ -40,4 +42,4 @@
             {confirmButtonText}
         </Button>
     </div>
-</div>
+</node-confirmation-view>

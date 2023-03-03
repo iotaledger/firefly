@@ -13,7 +13,7 @@
     }
 </script>
 
-<div class="flex flex-col space-y-4">
+<hidden-accounts-view class="flex flex-col space-y-4">
     <Text type={TextType.p} secondary>{localize('views.settings.hiddenAccounts.description')}</Text>
     <Checkbox label={localize('actions.showHiddenAccounts')} bind:checked={showHiddenAccounts} />
-</div>
+</hidden-accounts-view>

@@ -5,11 +5,11 @@
     import { localize } from '@core/i18n'
     import { setClipboard } from '@core/utils'
 
-    function handleClearClick(): void {
+    function onClearClick(): void {
         errorLog.set([])
     }
 
-    function handleCopyClick(): void {
+    function onCopyClick(): void {
         const str = []
 
         for (const err of $errorLog) {
@@ -22,7 +22,7 @@
     }
 </script>
 
-<div class="flex flex-col justify-between space-y-4 flex-1 relative">
+<error-log-view class="flex flex-col justify-between space-y-4 flex-1 relative">
     <div class="log flex flex-col overflow-y-auto flex-1 space-y-7">
         {#if $errorLog.length > 0}
             {#each $errorLog as error}
@@ -40,15 +40,15 @@
     </div>
     {#if $errorLog.length > 0}
         <div class="flex w-full justify-center space-x-4">
-            <Button size={ButtonSize.Medium} classes="w-full" onClick={handleClearClick}>
+            <Button size={ButtonSize.Medium} classes="w-full" onClick={onClearClick}>
                 {localize('actions.clear')}
             </Button>
-            <Button size={ButtonSize.Medium} classes="w-full" onClick={handleCopyClick}>
+            <Button size={ButtonSize.Medium} classes="w-full" onClick={onCopyClick}>
                 {localize('actions.copy')}
             </Button>
         </div>
     {/if}
-</div>
+</error-log-view>
 
 <style type="text/scss">
     .log {
