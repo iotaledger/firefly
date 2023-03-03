@@ -41,17 +41,17 @@ export class SendRouter extends Router<SendRoute> {
         this.setNext(nextRoute)
     }
 
+    reset(): void {
+        super.reset()
+        resetNewTokenTransactionDetails()
+    }
+
     previous(): void {
         if (this.history.length > 0) {
             super.previous()
         } else {
             this.closeDrawer()
         }
-    }
-
-    reset(): void {
-        super.reset()
-        resetNewTokenTransactionDetails()
     }
 
     closeDrawer(): void {

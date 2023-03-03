@@ -1,10 +1,4 @@
 <script lang="ts">
-    import {
-        removeNodeFromClientOptions,
-        toggleDisabledNodeInClientOptions,
-        togglePrimaryNodeInClientOptions,
-    } from '@core/network'
-    import { activeProfile } from '@core/profile'
     import { NetworkConfigurationSettingsAction } from '@/contexts/settings'
     import {
         NetworkConfigurationSettingsRoute,
@@ -12,12 +6,20 @@
         networkConfigurationSettingsRouter,
     } from '@/routers'
     import {
+        removeNodeFromClientOptions,
+        toggleDisabledNodeInClientOptions,
+        togglePrimaryNodeInClientOptions,
+    } from '@core/network'
+    import { activeProfile } from '@core/profile'
+    import {
         NetworkConfigurationAddUpdateNodeView,
         NetworkConfigurationInitView,
         NetworkConfigurationNodeConfirmationView,
         NetworkConfigurationNodeInfoView,
     } from './views'
 
+    $: $networkConfigurationSettingsRoute === NetworkConfigurationSettingsRoute.Init &&
+        $networkConfigurationSettingsRouter.getSelectedNodeStore().set(undefined)
     $: selectedNode = $networkConfigurationSettingsRouter.getSelectedNodeStore()
 
     function onNodeEditClick(): void {

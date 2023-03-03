@@ -1,12 +1,16 @@
 <script lang="ts">
-    import { showAppNotification } from '@auxiliary/notification'
+    import { onMount } from 'svelte'
+
+    import { Button, Checkbox, CopyableBox, HR, Spinner, Text } from '@ui'
+    import { ButtonVariant, FontWeight, TextType } from '@ui/enums'
+
     import { localize } from '@core/i18n'
     import { getOfficialNodes, INode, INodeInfo } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { getNodeInfo } from '@core/profile-manager'
     import { resolveObjectPath, setClipboard } from '@core/utils'
-    import { Button, ButtonVariant, Checkbox, CopyableBox, FontWeight, HR, Spinner, Text, TextType } from '@ui'
-    import { onMount } from 'svelte'
+
+    import { showAppNotification } from '@auxiliary/notification'
 
     enum NodeInfoTab {
         General = 'general',
@@ -94,12 +98,12 @@
         }
     }
 
-    function handleNodeInfoTabClick(tab: NodeInfoTab): void {
+    function onNodeInfoTabClick(tab: NodeInfoTab): void {
         if (!tab) return
         nodeInfoTab = tab
     }
 
-    function handleCopyAllInformationClick(): void {
+    function onCopyAllInformationClick(): void {
         if (!nodeInfo) return
         setClipboard(JSON.stringify(nodeInfo, null, '\t'))
     }
@@ -118,13 +122,13 @@
     })
 </script>
 
-<div class="flex flex-auto flex-col justify-between space-y-4">
+<node-info-view class="flex flex-auto flex-col justify-between space-y-4">
     {#if nodeInfo && nodeInfoTab}
         <div class="flex flex-col space-y-4">
             <div class="flex flex-row">
                 {#key nodeInfoTab}
                     {#each Object.values(NodeInfoTab) as _nodeInfoTab}
-                        <button on:click={() => handleNodeInfoTabClick(_nodeInfoTab)} class="mr-3">
+                        <button on:click={() => onNodeInfoTabClick(_nodeInfoTab)} class="mr-3">
                             <Text
                                 fontSize="sm"
                                 classes="font-11 hover:text-blue-500"
@@ -173,7 +177,7 @@
                 busyMessage={localize('popups.node.loadingNodeInfo')}
                 classes="w-full"
                 outline
-                onClick={handleCopyAllInformationClick}
+                onClick={onCopyAllInformationClick}
             >
                 {localize('actions.copyAllInformation')}
             </Button>
@@ -198,4 +202,4 @@
             </Button>
         {/if}
     </div>
-</div>
+</node-info-view>

@@ -1,8 +1,9 @@
 <script lang="ts">
+    import { Radio } from '@ui'
+
     import { MarketCurrency } from '@core/market'
     import { activeProfile, updateActiveProfileSettings } from '@core/profile'
     import type { IDropdownChoice } from '@core/utils'
-    import { Radio } from '@ui'
 
     let currencyList: IDropdownChoice[]
     $: currencyList = Object.values(MarketCurrency)
@@ -13,8 +14,8 @@
     $: selectedCurrency, updateActiveProfileSettings({ marketCurrency: selectedCurrency })
 </script>
 
-<div class="flex flex-col overflow-y-auto">
+<currency-view class="flex flex-col overflow-y-auto">
     {#each currencyList as currency}
         <Radio value={currency.value} bind:group={selectedCurrency} label={currency.label} classes="p-2" />
     {/each}
-</div>
+</currency-view>

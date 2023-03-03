@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { get } from 'svelte/store'
+
     import { Drawer } from '@components'
     import {
         AccountActionsDrawer,
@@ -21,7 +23,8 @@
         SendDrawer,
     } from './'
 
-    import { closeDrawer, DrawerId, drawers } from '@/auxiliary/drawer'
+    import { closeDrawer, DrawerId, drawers, getDrawerRouter } from '@/auxiliary/drawer'
+    import { profileRouter, sendRouter } from '@/routers'
 
     const COMPONENTS = {
         [DrawerId.AccountSwitcher]: AccountSwitcherDrawer,
@@ -43,11 +46,28 @@
         [DrawerId.Profile]: ProfileDrawer,
         [DrawerId.NetworkStatus]: NetworkStatusDrawer,
     }
+
+    function onClose(drawerId: DrawerId): void {
+        if (drawerId === DrawerId.Profile) {
+            $profileRouter.closeDrawer()
+        } else if (drawerId === DrawerId.Send) {
+            $sendRouter.closeDrawer()
+        } else {
+            closeDrawer(drawerId)
+        }
+    }
+
+    function onBack(drawerId: DrawerId): void {
+        const drawerRouter = get(getDrawerRouter(drawerId))
+        if (drawerRouter) {
+            drawerRouter.previous()
+        }
+    }
 </script>
 
 {#each $drawers as drawer}
     {@const drawerId = drawer.id}
-    <Drawer id={drawerId} {...drawer.props} onClose={() => closeDrawer(drawerId)}>
+    <Drawer id={drawerId} {...drawer.props} onClose={() => onClose(drawerId)} onBack={() => onBack(drawerId)}>
         <svelte:component this={COMPONENTS[drawerId]} {...drawer.props} />
     </Drawer>
 {/each}

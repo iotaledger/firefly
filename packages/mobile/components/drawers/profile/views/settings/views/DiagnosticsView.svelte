@@ -1,10 +1,12 @@
 <script lang="ts">
+    import { onMount } from 'svelte'
+
+    import { Button, ButtonSize, Text, TextType } from '@ui'
+
     import { appSettings, appVersionDetails, Platform } from '@core/app'
     import { localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import { setClipboard } from '@core/utils'
-    import { Button, ButtonSize, Text, TextType } from '@ui'
-    import { onMount } from 'svelte'
 
     let contentApp = ''
     let contentSystem = ''
@@ -34,7 +36,7 @@
         void Platform.getDiagnostics().then((values) => (contentSystem = concatenateInfo(values)))
     })
 
-    function handleCopyClick(): void {
+    function onCopyClick(): void {
         setClipboard(contentApp + '\r\n' + contentSystem)
     }
 
@@ -43,10 +45,10 @@
     }
 </script>
 
-<div class="flex-1 flex flex-col justify-between space-y-4">
+<diagnostics-view class="flex-1 flex flex-col justify-between space-y-4">
     <div class="flex flex-col">
         <Text type={TextType.pre} secondary>{contentApp}</Text>
         <Text type={TextType.pre} secondary>{contentSystem}</Text>
     </div>
-    <Button size={ButtonSize.Medium} classes="w-full" onClick={handleCopyClick}>{localize('actions.copy')}</Button>
-</div>
+    <Button size={ButtonSize.Medium} classes="w-full" onClick={onCopyClick}>{localize('actions.copy')}</Button>
+</diagnostics-view>

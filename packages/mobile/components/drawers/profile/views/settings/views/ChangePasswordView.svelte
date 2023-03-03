@@ -1,11 +1,14 @@
 <script lang="ts">
-    import { exportStronghold } from '@contexts/settings'
+    import zxcvbn from 'zxcvbn'
+
+    import { Button, ButtonSize, Checkbox, PasswordInput, Text, TextType } from '@ui'
+
     import { localize } from '@core/i18n'
     import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'
     import { changePasswordAndUnlockStronghold } from '@core/profile-manager'
     import { PASSWORD_REASON_MAP } from '@core/stronghold'
-    import { Button, ButtonSize, Checkbox, PasswordInput, Text, TextType } from '@ui'
-    import zxcvbn from 'zxcvbn'
+
+    import { exportStronghold } from '@contexts/settings'
 
     let exportStrongholdChecked: boolean
     let startOfPasswordChange: number
@@ -118,7 +121,7 @@
     }
 </script>
 
-<div class="flex flex-col justify-between h-full">
+<change-password-view class="flex flex-col justify-between h-full">
     <div class="flex flex-col space-y-4">
         <Text type={TextType.p} secondary classes="mb-1">{localize('views.settings.changePassword.description')}</Text>
         <PasswordInput
@@ -162,4 +165,4 @@
     >
         {localize('views.settings.changePassword.title')}
     </Button>
-</div>
+</change-password-view>

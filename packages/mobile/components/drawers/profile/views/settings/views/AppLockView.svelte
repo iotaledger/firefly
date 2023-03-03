@@ -1,8 +1,9 @@
 <script lang="ts">
+    import { Radio, Text, TextType } from '@ui'
+
     import { localize } from '@core/i18n'
     import { activeProfile, updateActiveProfileSettings } from '@core/profile'
     import type { IDropdownChoice } from '@core/utils'
-    import { Radio, Text, TextType } from '@ui'
 
     let selectedLockTimeout: number = $activeProfile?.settings?.lockScreenTimeoutInMinutes
     $: selectedLockTimeout, updateActiveProfileSettings({ lockScreenTimeoutInMinutes: selectedLockTimeout })
@@ -22,9 +23,9 @@
     }
 </script>
 
-<div class="flex flex-col space-y-4 h-full">
+<app-lock-view class="flex flex-col space-y-4 h-full">
     <Text type={TextType.p} secondary>{localize('views.settings.appLock.description')}</Text>
     {#each lockScreenTimeoutOptions() as option}
         <Radio value={option.value} bind:group={selectedLockTimeout} label={option.label} classes="p-2" />
     {/each}
-</div>
+</app-lock-view>
