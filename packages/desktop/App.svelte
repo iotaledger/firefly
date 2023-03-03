@@ -24,7 +24,6 @@
         platform,
         Platform,
         PlatformOption,
-        pollCheckForAppUpdate,
         registerAppEvents,
         setAppVersionDetails,
         setPlatform,
@@ -113,7 +112,9 @@
         if (process.env.NODE_ENV !== 'development') {
             registerAppEvents()
             await setAppVersionDetails()
-            pollCheckForAppUpdate()
+            if ($appVersionDetails.upToDate === false) {
+                openPopup({ id: PopupId.CheckForUpdates })
+            }
         }
 
         Platform.onEvent('menu-navigate-wallet', () => {

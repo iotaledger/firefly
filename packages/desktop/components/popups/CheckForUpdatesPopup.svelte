@@ -8,13 +8,10 @@
         checkForAppUpdate,
         downloadAppUpdate,
         appVersionDetails,
-        AppStage,
         appStage,
     } from '@core/app'
     import { formatDate, localize } from '@core/i18n'
     import { closePopup } from '@auxiliary/popup'
-
-    let isPreRelease = true
 
     function handleDownload(): void {
         downloadAppUpdate()
@@ -29,7 +26,6 @@
         if (!devMode) {
             await setAppVersionDetails()
             checkForAppUpdate()
-            isPreRelease = get(appStage) !== AppStage.PROD
         }
     })
 </script>
