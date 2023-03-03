@@ -129,7 +129,7 @@
         })
         Platform.onEvent('menu-check-for-update', () => {
             openPopup({
-                id: PopupId.Version,
+                id: PopupId.CheckForUpdates,
                 props: {
                     currentVersion: $appVersionDetails.currentVersion,
                 },

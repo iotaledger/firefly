@@ -50,7 +50,7 @@
     import TokenInformationPopup from './TokenInformationPopup.svelte'
     import UnlockStrongholdPopup from './UnlockStrongholdPopup.svelte'
     import VerifyLedgerTransactionPopup from './VerifyLedgerTransactionPopup.svelte'
-    import VersionPopup from './VersionPopup.svelte'
+    import CheckForUpdatesPopup from './CheckForUpdatesPopup.svelte'
     import VoteForProposal from './VoteForProposalPopup.svelte'
     import VotingPowerToZeroPopup from './VotingPowerToZeroPopup.svelte'
     import WalletFinderPopup from './WalletFinderPopup.svelte'
@@ -132,7 +132,7 @@
         [PopupId.TokenInformation]: TokenInformationPopup,
         [PopupId.UnlockStronghold]: UnlockStrongholdPopup,
         [PopupId.VerifyLedgerTransaction]: VerifyLedgerTransactionPopup,
-        [PopupId.Version]: VersionPopup,
+        [PopupId.CheckForUpdates]: CheckForUpdatesPopup,
         [PopupId.VoteForProposal]: VoteForProposal,
         [PopupId.VotingPowerToZero]: VotingPowerToZeroPopup,
         [PopupId.WalletFinder]: WalletFinderPopup,
