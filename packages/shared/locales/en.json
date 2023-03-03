@@ -586,8 +586,8 @@
                 "title": "Proposals",
                 "voted": "Voted",
                 "successEdit": "Proposal successfully edited",
-                "successAdd": "Proposal successfully added",
-                "successAddAll": "Proposal successfully added to all accounts",
+                "successAdd": "{numberOfProposals, select, one {Proposal} other {Proposals}} successfully added",
+                "successAddAll": "{numberOfProposals, select, one {Proposal} other {Proposals}} successfully added to all accounts",
                 "successRemove": "Proposal successfully removed",
                 "emptyTitle": "No proposals"
             },
@@ -724,7 +724,8 @@
         },
         "deleteAccount": {
             "title": "Delete {name}?",
-            "body": "This wallet has no transaction history. It can safely be deleted.",
+            "body": "Are you sure you want to delete this wallet?",
+            "hint": "Note: once deleted, you can restore this wallet by using the \"Wallet Finder\" in the settings.",
             "typePassword": "Type your wallet password to confirm.",
             "hideAccount": "Delete wallet",
             "errorTitle": "Unable to delete {name}",

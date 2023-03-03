@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { activityFilter, queriedActivities } from '@core/wallet/stores'
     import VirtualList from '@sveltejs/svelte-virtual-list'
-    import { FontWeight, Text } from '@ui'
+
     import { ActivityTile, Filter, SearchInput } from '@components'
-    import { FilterType } from '@/routers/routers/dashboard'
+    import { FontWeight, Text } from '@ui'
+
     import { time } from '@core/app'
     import { getGroupSeparator, localize } from '@core/i18n'
     import { getMonthYear } from '@core/utils'
@@ -14,6 +14,9 @@
         getFormattedAmountFromActivity,
         setAsyncStatusOfAccountActivities,
     } from '@core/wallet'
+    import { activityFilter, queriedActivities } from '@core/wallet/stores'
+
+    import { FilterType } from '@/contexts/wallet'
 
     type ActivityTileData = {
         title: string | undefined

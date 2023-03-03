@@ -1825,7 +1825,7 @@
             "wrongAddressPrefix": "A címeknek {prefix} előtaggal kell kezdődniük.",
             "wrongAddressFormat": "A cím nem megfelelő formátumú.",
             "invalidAddress": "Helytelen cím.",
-            "invalidAssetId": "The asset id is not valid.",
+            "invalidAssetId": "A pénzeszköz azonosítója érvénytelen.",
             "unknownAsset": "A token ezen a számlán nem ismert.",
             "insufficientFunds": "Nincs elég összeg a tárcájában a tranzakció végrehajtásához.",
             "insufficientFundsStorageDeposit": "Nincs elegendő egyenlege a letéti díj fedezetéhez",

@@ -4,19 +4,14 @@ import { INetworkConfigurationSettingsRouterEvent } from '../../interfaces'
 import { INode } from '@core/network'
 import { Subrouter } from '@core/router'
 
-import { settingsRouter } from '..'
 import { NetworkConfigurationSettingsAction } from '@/contexts/settings'
+import { settingsRouter } from '..'
 import { NetworkConfigurationSettingsRoute } from '../../enums'
 
 export const networkConfigurationSettingsRoute = writable<NetworkConfigurationSettingsRoute>(null)
 export const networkConfigurationSettingsRouter = writable<NetworkConfigurationSettingsRouter>(null)
 
 const selectedNodeStore = writable<INode>(undefined)
-const unsubscribeRouteObserver = networkConfigurationSettingsRoute.subscribe((route) => {
-    if (route === NetworkConfigurationSettingsRoute.Init) {
-        selectedNodeStore.set(undefined)
-    }
-})
 
 export class NetworkConfigurationSettingsRouter extends Subrouter<NetworkConfigurationSettingsRoute> {
     constructor() {
@@ -68,7 +63,6 @@ export class NetworkConfigurationSettingsRouter extends Subrouter<NetworkConfigu
     }
     reset(): void {
         super.reset()
-        unsubscribeRouteObserver()
         selectedNodeStore.set(undefined)
     }
 }

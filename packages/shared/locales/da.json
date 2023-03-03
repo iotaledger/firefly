@@ -1825,7 +1825,7 @@
             "wrongAddressPrefix": "Adresser starter med præfikset {prefix}.",
             "wrongAddressFormat": "Adressen er ikke formateret korrekt.",
             "invalidAddress": "Adressen er ikke gyldig.",
-            "invalidAssetId": "The asset id is not valid.",
+            "invalidAssetId": "Aktivet er ugyldigt.",
             "unknownAsset": "Aktivet kendes ikke af denne konto.",
             "insufficientFunds": "Denne wallet har ikke tilstrækkelige midler.",
             "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",

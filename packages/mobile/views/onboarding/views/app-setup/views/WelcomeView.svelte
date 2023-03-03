@@ -1,22 +1,25 @@
 <script lang="ts">
     import { onMount } from 'svelte'
+
+    import { OnboardingLayout } from '@components'
     import { Button, Checkbox, Link, Text, TextType } from '@ui'
+
+    import { hasCompletedAppSetup } from '@core/app'
+    import { localize } from '@core/i18n'
+    import { formatProtocolName, NetworkProtocol, NetworkType } from '@core/network'
+
     import {
         initialiseOnboardingProfile,
         onboardingProfile,
         shouldBeDeveloperProfile,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
-    import { OnboardingLayout } from '@components'
-    import { LegalDrawer } from '../drawers'
-    import { appSetupRouter } from '@/routers'
-    import { hasCompletedAppSetup } from '@core/app'
-    import { localize } from '@core/i18n'
-    import { formatProtocolName, NetworkProtocol, NetworkType } from '@core/network'
     import features from '@features/features'
 
-    let checked = false
-    let showLegal = false
+    import { DrawerId, openDrawer } from '@/auxiliary/drawer'
+    import { appSetupRouter } from '@/routers'
+
+    let termsAccepted = false
 
     function onContinueClick(): void {
         hasCompletedAppSetup.set(true)
@@ -32,6 +35,10 @@
             updateOnboardingProfile({ networkType: NetworkType.Mainnet })
         }
     })
+
+    function onShowLegalClick(): void {
+        openDrawer(DrawerId.Legal, { fullScreen: true })
+    }
 </script>
 
 <OnboardingLayout allowBack={false} animation="welcome-desktop">
@@ -50,17 +57,16 @@
     </div>
     <div slot="footer" class="space-y-8">
         <div class="flex flex-row items-center space-x-3">
-            <Checkbox bind:checked />
+            <Checkbox bind:checked={termsAccepted} />
             <Text type={TextType.p} secondary>
                 I agree to the
-                <Link onClick={() => (showLegal = true)}>
+                <Link onClick={onShowLegalClick}>
                     {localize('popups.legalUpdate.tosTitle')}
                 </Link>
             </Text>
         </div>
-        <Button onClick={onContinueClick} classes="w-full">{localize('actions.continue')}</Button>
+        <Button disabled={!termsAccepted} onClick={onContinueClick} classes="w-full"
+            >{localize('actions.continue')}</Button
+        >
     </div>
 </OnboardingLayout>
-{#if showLegal}
-    <LegalDrawer onClose={() => (showLegal = false)} />
-{/if}

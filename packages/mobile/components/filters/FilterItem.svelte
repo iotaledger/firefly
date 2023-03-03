@@ -1,14 +1,13 @@
 <script lang="ts">
     import {
-        FontWeight,
-        Text,
-        Toggle,
+        AssetFilterItem,
         DateFilterItem,
         NumberFilterItem,
-        SelectionFilterItem,
-        AssetFilterItem,
         OrderFilterItem,
-    } from '@ui'
+        SelectionFilterItem,
+    } from '@components'
+    import { FontWeight, Text, Toggle } from '@ui'
+
     import { localize } from '@core/i18n'
     import { FilterUnit } from '@core/utils/interfaces/filter'
 
