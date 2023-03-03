@@ -1,10 +1,12 @@
 <script lang="ts">
-    import { showAppNotification } from '@auxiliary/notification'
+    import { Button, HTMLButtonType, NodeConfigurationForm } from '@ui'
+
     import { localize } from '@core/i18n'
     import { addNodeToClientOptions, editNodeInClientOptions, EMPTY_NODE, INode } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { deepCopy } from '@core/utils'
-    import { Button, HTMLButtonType, NodeConfigurationForm } from '@ui'
+
+    import { showAppNotification } from '@auxiliary/notification'
 
     export let node: INode = deepCopy(EMPTY_NODE)
     export let isEditingNode: boolean = false
@@ -44,7 +46,7 @@
     }
 </script>
 
-<div class="flex flex-col justify-between space-y-4 h-full">
+<add-update-node-view class="flex flex-col justify-between space-y-4 h-full">
     <NodeConfigurationForm
         bind:this={nodeConfigurationForm}
         bind:node
@@ -62,4 +64,4 @@
     >
         {localize(`actions.${isEditingNode ? 'updateNode' : 'addNode'}`)}
     </Button>
-</div>
+</add-update-node-view>

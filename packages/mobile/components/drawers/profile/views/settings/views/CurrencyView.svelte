@@ -14,8 +14,8 @@
     $: selectedCurrency, updateActiveProfileSettings({ marketCurrency: selectedCurrency })
 </script>
 
-<div class="flex flex-col overflow-y-auto">
+<currency-view class="flex flex-col overflow-y-auto">
     {#each currencyList as currency}
         <Radio value={currency.value} bind:group={selectedCurrency} label={currency.label} classes="p-2" />
     {/each}
-</div>
+</currency-view>

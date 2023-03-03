@@ -121,7 +121,7 @@
     }
 </script>
 
-<div class="flex flex-col justify-between h-full">
+<change-password-view class="flex flex-col justify-between h-full">
     <div class="flex flex-col space-y-4">
         <Text type={TextType.p} secondary classes="mb-1">{localize('views.settings.changePassword.description')}</Text>
         <PasswordInput
@@ -165,4 +165,4 @@
     >
         {localize('views.settings.changePassword.title')}
     </Button>
-</div>
+</change-password-view>

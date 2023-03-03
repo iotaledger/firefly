@@ -1,6 +1,8 @@
 <script lang="ts">
-    import { Button, ButtonSize, KeyValueBox, Text, TextHint, TextType } from '@ui'
     import { onDestroy } from 'svelte'
+
+    import { Button, KeyValueBox, Text, TextHint } from '@ui'
+    import { ButtonSize, TextType } from '@ui/enums'
 
     import { DEFAULT_SYNC_OPTIONS, sumBalanceForAccounts } from '@core/account'
     import { localize } from '@core/i18n'
@@ -103,7 +105,7 @@
     })
 </script>
 
-<div class="flex-1 flex flex-col justify-between space-y-4">
+<wallet-finder-view class="flex-1 flex flex-col justify-between space-y-4">
     <div class="flex flex-col space-y-4">
         <Text type={TextType.p} color="gray-600" fontSize="15" lineHeight="5">
             {localize('popups.walletFinder.body')}
@@ -140,4 +142,4 @@
             {localize('actions.search')}
         {/if}
     </Button>
-</div>
+</wallet-finder-view>

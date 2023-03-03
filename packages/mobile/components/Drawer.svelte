@@ -39,12 +39,6 @@
         }
     }
 
-    function onBackClick(): void {
-        if (!preventClose) {
-            onBack && onBack()
-        }
-    }
-
     function onTouchStart(event): void {
         if (!preventClose) {
             moving = true
@@ -105,7 +99,7 @@
             <div class="grid grid-cols-4 h-6 mb-6">
                 <div class="col-span-1">
                     {#if allowBack}
-                        <button type="button" on:click={onBackClick}>
+                        <button type="button" on:click={onBack}>
                             <Icon width="24" height="24" icon={IconEnum.ArrowLeft} classes="text-gray-500" />
                         </button>
                     {/if}

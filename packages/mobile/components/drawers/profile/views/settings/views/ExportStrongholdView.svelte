@@ -47,9 +47,9 @@
     }
 </script>
 
-<div class="flex flex-col justify-between h-full">
+<export-stronghold-view class="flex flex-col justify-between h-full">
     <Text type={TextType.p} secondary classes="mb-1">{localize('views.settings.exportStronghold.description')}</Text>
     <Button disabled={isBusy} {isBusy} busyMessage={message} onClick={onExportClick}>
         {localize('actions.export')}
     </Button>
-</div>
+</export-stronghold-view>

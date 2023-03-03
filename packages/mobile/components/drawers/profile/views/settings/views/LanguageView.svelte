@@ -10,8 +10,8 @@
     $: appLanguage, setLanguage({ value: appLanguage })
 </script>
 
-<div class="flex flex-col overflow-y-auto">
+<language-view class="flex flex-col overflow-y-auto">
     {#each languageList as language}
         <Radio value={language.value} bind:group={appLanguage} label={language.label} classes="p-2" />
     {/each}
-</div>
+</language-view>
