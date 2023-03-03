@@ -1,9 +1,11 @@
 <script lang="ts">
-    import { localize } from '@core/i18n'
-    import { openPopup, PopupId } from '@auxiliary/popup'
-    import { OnboardingButton } from 'shared/components'
+    import { OnboardingButton } from '@ui'
 
-    function handleClick(): void {
+    import { localize } from '@core/i18n'
+
+    import { openPopup, PopupId } from '@auxiliary/popup'
+
+    function onClick(): void {
         openPopup({
             id: PopupId.TestDeepLinkForm,
         })
@@ -13,5 +15,5 @@
 <OnboardingButton
     primaryText={localize('actions.testDeepLink')}
     secondaryText={localize('general.testDeepLinkDescription')}
-    onClick={handleClick}
+    {onClick}
 />
