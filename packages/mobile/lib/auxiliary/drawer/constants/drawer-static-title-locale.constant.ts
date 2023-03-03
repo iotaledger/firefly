@@ -12,4 +12,5 @@ export const DRAWER_STATIC_TITLE_TITLES = {
     [DrawerId.Expiration]: 'general.expirationTime',
     [DrawerId.Send]: 'popups.sendForm.title',
     [DrawerId.NetworkStatus]: 'views.settings.networkStatus.title',
+    [DrawerId.Legal]: 'views.onboarding.appSetup.legal.title',
 }

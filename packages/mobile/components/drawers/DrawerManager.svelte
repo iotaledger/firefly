@@ -14,6 +14,8 @@
         EnterPasswordDrawer,
         ExpirationDrawer,
         FilterDrawer,
+        LegalDrawer,
+        LegalUpdateDrawer,
         NetworkStatusDrawer,
         ProfileDrawer,
         ReceiveDrawer,
@@ -45,6 +47,8 @@
         [DrawerId.Expiration]: ExpirationDrawer,
         [DrawerId.Profile]: ProfileDrawer,
         [DrawerId.NetworkStatus]: NetworkStatusDrawer,
+        [DrawerId.LegalUpdate]: LegalUpdateDrawer,
+        [DrawerId.Legal]: LegalDrawer,
     }
 
     function onClose(drawerId: DrawerId): void {
@@ -56,7 +60,6 @@
             closeDrawer(drawerId)
         }
     }
-
     function onBack(drawerId: DrawerId): void {
         const drawerRouter = get(getDrawerRouter(drawerId))
         if (drawerRouter) {
