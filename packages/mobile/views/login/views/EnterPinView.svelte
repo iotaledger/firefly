@@ -3,15 +3,16 @@
 
     import { Icon, PinInput, Profile, Text, TextType } from '@ui'
 
-    import { loginRouter } from '@/routers'
-
-    import { Platform } from '@core/app'
+    import { needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService, Platform } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { activeProfile, login, resetActiveProfile } from '@core/profile'
     import { isValidPin } from '@core/utils'
 
     import { Icon as IconEnum } from '@auxiliary/icon'
+    import { DrawerId, drawers, openDrawer } from '@/auxiliary/drawer'
+    
+    import { loginRouter } from '@/routers'
 
     let attempts = 0
     let pinCode = ''
@@ -27,10 +28,19 @@
 
     let timeRemainingBeforeNextAttempt = WAITING_TIME_AFTER_MAX_INCORRECT_ATTEMPTS
 
+    $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTermsOfService()) {
+        openDrawer(DrawerId.LegalUpdate, { preventClose: true })
+    }
     $: hasReachedMaxAttempts = attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS
     $: {
         if (isValidPin(pinCode)) {
             void onSubmitClick()
+        }
+    }
+
+    $: {
+        if (pinRef && !$drawers?.length) {
+            pinRef.focus()
         }
     }
 

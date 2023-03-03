@@ -1,9 +1,10 @@
 <script lang="ts">
     import { AccountActionsButton, AccountSwitcherButton, DashboardProfileButton } from './'
+
     import features from '@features/features'
 </script>
 
-<div class="grid grid-cols-4 h-10">
+<top-bar class="grid grid-cols-4 h-10">
     <div class="col-span-1">
         {#if features?.dashboard?.profileActions?.enabled}
             <DashboardProfileButton />
@@ -19,4 +20,4 @@
             <AccountActionsButton />
         {/if}
     </div>
-</div>
+</top-bar>

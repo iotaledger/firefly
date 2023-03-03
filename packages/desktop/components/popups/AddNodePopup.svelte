@@ -1,15 +1,15 @@
 <script lang="ts">
-    import { Text, NodeConfigurationForm, Button, HTMLButtonType } from '@ui'
+    import { Text, NodeConfigurationForm, Button, HTMLButtonType, TextType } from '@ui'
+    import { localize } from '@core/i18n'
+    import { INode, addNodeToClientOptions, editNodeInClientOptions, EMPTY_NODE } from '@core/network'
     import { showAppNotification } from '@auxiliary/notification'
     import { closePopup } from '@auxiliary/popup'
     import { Platform } from '@core/app'
-    import { localize } from '@core/i18n'
-    import { INode, addNodeToClientOptions, editNodeInClientOptions, EMPTY_NODE } from '@core/network'
     import { activeAccounts, activeProfile } from '@core/profile'
     import { deepCopy } from '@core/utils'
     import { registerProposalsForAccounts } from '@contexts/governance'
 
-    export let node: INode = EMPTY_NODE
+    export let node: INode = deepCopy(EMPTY_NODE)
     export let isEditingNode: boolean = false
     export let onSuccess: (..._: any[]) => void
 
@@ -18,11 +18,10 @@
     let nodeConfigurationForm: NodeConfigurationForm
     let isBusy = false
 
-    async function handleAddNode(): Promise<void> {
+    async function onSubmit(): Promise<void> {
         try {
             isBusy = true
             await nodeConfigurationForm.validate({
-                validateUrl: true,
                 checkSameNetwork: true,
                 uniqueCheck: !isEditingNode,
                 checkNodeInfo: true,
@@ -53,11 +52,11 @@
 </script>
 
 <div class="flex flex-col space-y-6">
-    <Text type="h4">{localize(`popups.node.title${isEditingNode ? 'Update' : 'Add'}`)}</Text>
+    <Text type={TextType.h4}>{localize(`popups.node.title${isEditingNode ? 'Update' : 'Add'}`)}</Text>
     <NodeConfigurationForm
         bind:this={nodeConfigurationForm}
         bind:node
-        onSubmit={handleAddNode}
+        {onSubmit}
         {isBusy}
         isDeveloperProfile={$activeProfile.isDeveloperProfile}
     />
