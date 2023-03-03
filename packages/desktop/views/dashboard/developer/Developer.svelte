@@ -1,15 +1,17 @@
 <script lang="ts">
+    import { CreateAliasButton } from '@components'
     import {
         FaucetRequestButton,
         MintNativeTokenButton,
         MintNftButton,
-        CreateAliasButton,
         Pane,
         RefreshTokenMetadataButton,
         Text,
         TestDeepLinkButton,
     } from '@ui'
+
     import features from '@features/features'
+
     import { selectedAccount } from '@core/account/stores'
     import { localize } from '@core/i18n'
 </script>
