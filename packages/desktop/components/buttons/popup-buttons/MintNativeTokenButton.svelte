@@ -1,13 +1,15 @@
 <script lang="ts">
-    import { localize } from '@core/i18n'
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-    import { OnboardingButton } from 'shared/components'
+    import { OnboardingButton } from '@ui'
+
     import { selectedAccount } from '@core/account'
+    import { localize } from '@core/i18n'
     import { resetMintTokenDetails } from '@core/wallet'
+
+    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
 
     $: hasAliases = $selectedAccount.balances?.aliases.length > 0
 
-    function handleMintNativeToken(): void {
+    function onMintNativeToken(): void {
         resetMintTokenDetails()
         if (hasAliases) {
             openPopup({
@@ -36,5 +38,5 @@
 <OnboardingButton
     primaryText={localize('actions.mintNativeToken')}
     secondaryText={localize('general.mintNativeTokenDescription')}
-    onClick={handleMintNativeToken}
+    onClick={onMintNativeToken}
 />

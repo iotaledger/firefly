@@ -1,13 +1,13 @@
 <script lang="ts">
-    import { CreateAliasButton } from '@components'
+    import { CreateAliasButton, MintNativeTokenButton } from '@components'
     import {
         FaucetRequestButton,
-        MintNativeTokenButton,
         MintNftButton,
         Pane,
         RefreshTokenMetadataButton,
-        Text,
         TestDeepLinkButton,
+        Text,
+        TextType,
     } from '@ui'
 
     import features from '@features/features'
@@ -23,7 +23,7 @@
         {#key $selectedAccount?.index}
             <div class="flex columns-3 gap-4 min-h-0 min-w-0 max-w-7xl">
                 <Pane classes="flex flex-col p-6 space-y-6">
-                    <Text type="h5" classes="text-left">
+                    <Text type={TextType.h5} classes="text-left">
                         {localize('general.assets')}
                     </Text>
                     {#if features.developerTools.alias.enabled}
@@ -37,7 +37,7 @@
                     {/if}
                 </Pane>
                 <Pane classes="flex flex-col p-6 space-y-6">
-                    <Text type="h5" classes="text-left">
+                    <Text type={TextType.h5} classes="text-left">
                         {localize('general.developerTools')}
                     </Text>
                     {#if features.developerTools.faucet.enabled}
