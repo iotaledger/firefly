@@ -5,8 +5,9 @@
         MintNativeTokenButton,
         MintNftButton,
         RefreshTokenMetadataButton,
+        TestDeepLinkButton,
     } from '@components'
-    import { Pane, TestDeepLinkButton, Text, TextType } from '@ui'
+    import { Pane, Text, TextType } from '@ui'
 
     import features from '@features/features'
 
