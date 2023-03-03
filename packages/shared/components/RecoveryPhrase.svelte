@@ -4,9 +4,9 @@
     export let recoveryPhrase: string[] = []
     export let verifyRecoveryPhrase: string[] = undefined
 
-    export let blurred = false
-    export let disabled = false
-    export let boxed = false
+    export let blurred: boolean = false
+    export let disabled: boolean = false
+    export let boxed: boolean = false
 
     $: dark = $appSettings.darkMode
 </script>

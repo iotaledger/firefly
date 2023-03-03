@@ -14,9 +14,6 @@
 
     import { profileBackupRouter } from '@/routers'
 
-    const busy: boolean = false
-    const title: string = localize('views.onboarding.profileBackup.viewMnemonic.title')
-
     let isHidden: boolean = true
     let hasRevealedRecoveryPhrase: boolean = false
 
@@ -39,7 +36,7 @@
     })
 </script>
 
-<OnboardingLayout {onBackClick} {busy} {title}>
+<OnboardingLayout {onBackClick} title={localize('views.onboarding.profileBackup.viewMnemonic.title')}>
     <content-container slot="content" class="w-full h-full flex flex-col p-0">
         <Text type={TextType.p} secondary fontSize="15" classes="mb-4">
             {localize('views.onboarding.profileBackup.viewMnemonic.body1')}

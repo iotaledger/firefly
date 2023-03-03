@@ -12,21 +12,17 @@
 
     import { profileBackupRouter } from '@/routers'
 
-    export let busy: boolean = false
-
     const verifyRecoveryPhrase: Mnemonic = []
 
     let wordChoices: string[] = ['', '', '']
     let verifyIndex: number = 0
     let isVerified: boolean = false
 
-    const title = localize('views.onboarding.profileBackup.verifyMnemonic.title')
-
     $: if (isVerified) {
         completeVerification()
     }
 
-    function handleChoice(word: string): void {
+    function onChoiceClick(word: string): void {
         const wordElement = document.getElementById(`recovery-word-${verifyIndex}`)
         wordElement?.scrollIntoView({ behavior: 'smooth', block: 'center' })
         verifyRecoveryPhrase[verifyIndex] = word
@@ -54,7 +50,7 @@
     })
 </script>
 
-<OnboardingLayout {onBackClick} {busy} {title}>
+<OnboardingLayout {onBackClick} title={localize('views.onboarding.profileBackup.verifyMnemonic.title')}>
     <content-container slot="content" class="w-full h-full flex flex-col p-0">
         {#if !isVerified}
             <Text secondary fontSize="15" classes="mb-4">
@@ -83,7 +79,7 @@
                     class="w-full flex flex-row p-4 mb-4 rounded-2xl border border-1 border-solid items-center
                     justify-between border-gray-300 dark:border-gray-700 hover:border-gray-500
                     dark:hover:border-gray-700 focus:border-gray-500 dark:focus:border-gray-700"
-                    on:click={() => handleChoice(word)}
+                    on:click={() => onChoiceClick(word)}
                 >
                     <Text smaller fontSize="15" classes="ml-3" bold>{word}</Text>
                     <Icon icon={IconEnum.ChevronRight} classes="text-gray-800 dark:text-white" />

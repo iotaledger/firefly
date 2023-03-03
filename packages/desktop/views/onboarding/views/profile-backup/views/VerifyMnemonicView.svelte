@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte'
 
-    import { Button, Icon, Text, RecoveryPhrase, TextType } from '@ui'
+    import { Button, Icon, RecoveryPhrase, Text, TextType } from '@ui'
     import { OnboardingLayout } from '@components'
 
     import { localize } from '@core/i18n'
@@ -11,8 +11,6 @@
 
     import { Icon as IconEnum } from '@auxiliary/icon'
 
-    export let busy: boolean = false
-
     const verifyRecoveryPhrase: Mnemonic = []
     const wordElements: HTMLButtonElement[] = []
 
@@ -20,7 +18,7 @@
     let verifyIndex: number = 0
     let isVerified: boolean = false
 
-    function handleChoice(word: string): void {
+    function onChoiceClick(word: string): void {
         verifyRecoveryPhrase[verifyIndex] = word
         if ($onboardingProfile?.mnemonic[verifyIndex] === word) {
             if (verifyIndex === $onboardingProfile?.mnemonic.length - 1) {
@@ -66,7 +64,7 @@
 
 <svelte:window on:keypress={onKeyPress} />
 
-<OnboardingLayout {onBackClick} {busy}>
+<OnboardingLayout {onBackClick}>
     <title-container slot="title" class="block">
         <Text type={TextType.h2} classes={isVerified && 'hidden'}>
             {localize('views.onboarding.profileBackup.verifyMnemonic.title')}
@@ -86,7 +84,7 @@
                     class="w-full flex flex-row p-4 mb-4 rounded-2xl border border-solid items-center justify-between
                     border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700
                     focus:border-gray-500 dark:focus:border-gray-700"
-                    on:click={() => handleChoice(word)}
+                    on:click={() => onChoiceClick(word)}
                     bind:this={wordElements[i]}
                 >
                     <Text smaller classes="ml-3">{`${i + 1}. ${word}`}</Text>
