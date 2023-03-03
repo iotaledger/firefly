@@ -2,6 +2,7 @@
     import { Text, FontWeight } from 'shared/components'
 
     export let data = ''
+    export let useSlot = false
     export let textColor = 'gray-800'
     export let darkTextColor = ''
     export let backgroundColor = ''
@@ -22,6 +23,9 @@
     "
 >
     {#if data}
+        {#if useSlot}
+            <slot />
+        {/if}
         {data}
     {:else}
         <slot />

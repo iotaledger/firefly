@@ -17,7 +17,7 @@
     import { localize } from '@core/i18n'
     import { openPopup } from '@auxiliary/popup/actions'
     import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
-    import { getVotingEvent } from '@contexts/governance/actions'
+    import { clearProposalDataPoll, getVotingEvent, pollProposalData } from '@contexts/governance/actions'
     import { ABSTAIN_VOTE_VALUE } from '@contexts/governance/constants'
     import { ProposalStatus } from '@contexts/governance/enums'
     import {
@@ -39,11 +39,8 @@
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
     import { visibleSelectedAccountAssets } from '@core/wallet/stores'
     import { handleError } from '@core/error/handlers'
-    import {
-        clearParticipationEventStatusPoll,
-        pollParticipationEventStatus,
-    } from '@contexts/governance/actions/pollParticipationEventStatus'
     import { PopupId } from '@auxiliary/popup'
+    import { Icon } from '@auxiliary/icon'
 
     const { metadata } = $visibleSelectedAccountAssets?.baseCoin
 
@@ -202,7 +199,7 @@
     }
 
     onMount(async () => {
-        pollParticipationEventStatus($selectedProposal?.id).then(() => (statusLoaded = true))
+        pollProposalData($selectedProposal?.id).then(() => (statusLoaded = true))
         // TODO: this api call gets all overviews, we need to change it so that we just get one
         // We then need to update the latest overview manually if we perform an action
         void updateParticipationOverview($selectedAccountIndex)
@@ -212,7 +209,7 @@
     })
 
     onDestroy(() => {
-        clearParticipationEventStatusPoll()
+        clearProposalDataPoll()
         clearSelectedParticipationEventStatus()
     })
 </script>
@@ -221,7 +218,11 @@
     <div class="w-2/5 flex flex-col space-y-4">
         <Pane classes="p-6 flex flex-col h-fit">
             <header-container class="flex justify-between items-center mb-4">
-                <ProposalStatusPill status={$selectedProposal?.status} />
+                <ProposalStatusPill
+                    status={$selectedProposal?.status}
+                    isNodeOutdated={$selectedProposal?.isNodeOutdated}
+                    icon={Icon.StatusError}
+                />
                 <ProposalDetailsButton proposal={$selectedProposal} />
             </header-container>
             <div class="flex flex-1 flex-col justify-between">

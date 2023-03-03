@@ -2206,7 +2206,8 @@
             "upcoming": "Announcement",
             "commencing": "Voting open",
             "holding": "Counting",
-            "ended": "Closed"
+            "ended": "Closed",
+            "nodeOutdated": "Outdated node URL"
         }
     },
     "menus": {

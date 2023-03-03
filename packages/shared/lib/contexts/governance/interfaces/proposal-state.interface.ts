@@ -25,4 +25,5 @@ export interface IProposalMetadata {
     additionalInfo: string
     title: string
     nodeUrl: string
+    isNodeOutdated: boolean
 }
