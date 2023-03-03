@@ -12,6 +12,7 @@
 </script>
 
 <button
+    type="button"
     on:click={onClick}
     class="w-10 h-10 relative flex items-center justify-center rounded-full bg-blue-500 leading-100"
 >

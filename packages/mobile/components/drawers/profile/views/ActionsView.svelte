@@ -71,7 +71,7 @@
 </script>
 
 {#if $activeProfile?.id}
-    <div class="w-full flex flex-col space-y-14">
+    <profile-actions-view class="w-full flex flex-col space-y-14">
         <div class="flex flex-col">
             <div class="flex flex-row justify-center">
                 <div class="relative">
@@ -123,5 +123,5 @@
                 />
             {/if}
         </div>
-    </div>
+    </profile-actions-view>
 {/if}

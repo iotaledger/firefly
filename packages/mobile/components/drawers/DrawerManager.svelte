@@ -56,6 +56,7 @@
             closeDrawer(drawerId)
         }
     }
+
     function onBack(drawerId: DrawerId): void {
         const drawerRouter = get(getDrawerRouter(drawerId))
         if (drawerRouter) {
