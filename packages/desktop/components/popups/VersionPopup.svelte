@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { Button, Logo, Text } from 'shared/components'
+    import { Button, KeyValueBox, Text, TextType, TextHint } from 'shared/components'
     import {
         setAppVersionDetails,
         appUpdateBusy,
@@ -34,63 +34,40 @@
     })
 </script>
 
-<Text type="h4" classes="mb-5"
-    >{localize('popups.version.title', { values: { version: $appVersionDetails.currentVersion } })}</Text
->
-<div class="flex w-full flex-row flex-wrap">
-    <div class="w-full p-4 bg-gray-50 dark:bg-gray-800 flex justify-center content-center">
-        <Logo width="50%" logo="logo-firefly-full" />
-    </div>
-    {#if $appVersionDetails.upToDate}
-        <div class="w-full text-center my-6 px-8">
-            <Text type="h5" highlighted classes="mb-2">
-                {#if isPreRelease}
-                    {localize('popups.version.preReleaseUpToDateTitle')}
-                {:else}
-                    {localize('popups.version.upToDateTitle')}
-                {/if}
-            </Text>
-            <Text smaller secondary>
-                {#if isPreRelease}
-                    {localize('popups.version.preReleaseDescription')}
-                {:else}
-                    {localize('popups.version.upToDateDescription', {
-                        values: { version: $appVersionDetails.currentVersion },
-                    })}
-                {/if}
-            </Text>
-        </div>
-        <div class="flex flex-row justify-center w-full">
-            <Button outline onClick={handleCloseClick}>{localize('actions.close')}</Button>
-        </div>
-    {:else}
-        <div class="my-6">
-            <Text smaller highlighted classes="mb-2">
-                {localize('popups.version.updateAvailable', { values: { version: $appVersionDetails.currentVersion } })}
-            </Text>
-            <Text type="h5" classes="mb-2">
-                {localize('popups.version.updateDetails', {
-                    values: {
-                        version: $appVersionDetails.newVersion,
-                        date: formatDate($appVersionDetails.newVersionReleaseDate, { format: 'long' }),
-                    },
+<Text type={TextType.h5} classes="mb-5">{localize('popups.appUpdate.title')}</Text>
+<div class="flex w-full flex-col space-y-6">
+    <div class="flex w-full flex-col space-y-2">
+        <KeyValueBox
+            keyText={localize('popups.appUpdate.installedVersion')}
+            valueText={$appVersionDetails.currentVersion}
+        />
+        <KeyValueBox
+            keyText={localize('popups.appUpdate.stage')}
+            valueText={localize(`popups.appUpdate.${get(appStage)}`)}
+        />
+        {#if $appVersionDetails.upToDate}
+            <TextHint success classes="w-full" text={localize('popups.appUpdate.latestInstalled')} />
+        {:else}
+            <KeyValueBox keyText={localize('popups.appUpdate.newVerion')} valueText={$appVersionDetails.newVersion} />
+            <KeyValueBox
+                keyText={localize('popups.appUpdate.releasedAt')}
+                valueText={formatDate($appVersionDetails.newVersionReleaseDate, {
+                    dateStyle: 'long',
+                    timeStyle: 'medium',
                 })}
-            </Text>
-            <div class="changelog overflow-y-auto">
-                <Text secondary classes="whitespace-pre-wrap">{$appVersionDetails.changelog}</Text>
-            </div>
-        </div>
-        <div class="flex flex-row justify-between space-x-4 w-full md:px-8">
+            />
+            <TextHint info classes="w-full" text={localize('popups.appUpdate.updateAvailable')} />
+        {/if}
+    </div>
+
+    <div class="flex flex-row justify-center w-full space-x-4">
+        {#if $appVersionDetails.upToDate}
+            <Button classes="w-full" outline onClick={handleCloseClick}>{localize('actions.close')}</Button>
+        {:else}
             <Button outline classes="w-1/2" onClick={handleCloseClick}>{localize('actions.cancel')}</Button>
             <Button classes="w-1/2" onClick={handleDownload} disabled={$appUpdateBusy}>
                 {localize('actions.updateFirefly')}
             </Button>
-        </div>
-    {/if}
+        {/if}
+    </div>
 </div>
-
-<style type="text/scss">
-    .changelog {
-        max-height: 50vh;
-    }
-</style>

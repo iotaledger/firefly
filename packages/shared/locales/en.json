@@ -698,15 +698,17 @@
         "qr": {
             "title": "Your QR code"
         },
-        "version": {
-            "title": "Current version: {version}",
-            "upToDateTitle": "Firefly is up to date",
-            "preReleaseUpToDateTitle": "Pre-released Firefly is up to date",
-            "upToDateDescription": "You are running the latest and safest version of Firefly.",
-            "preReleaseDescription": "You are running the latest pre-released version of Firefly.",
-            "updateAvailable": "Firefly update available",
-            "updateDetails": "Version {version} - {date}",
-            "noAutoUpdate": "Auto-update is disabled in this Windows version, please go to https://firefly.iota.org to download the update."
+        "appUpdate": {
+            "title": "Check for updates",
+            "installedVersion": "Installed version",
+            "newVerion": "New version",
+            "stage": "Stage",
+            "prod": "Production",
+            "alpha": "Alpha",
+            "beta": "Beta",
+            "releasedAt": "Released at",
+            "updateAvailable": "Update is available",
+            "latestInstalled": "You are running the latest and safest version"
         },
         "backupStronghold": {
             "title": "Backup your stronghold file",
