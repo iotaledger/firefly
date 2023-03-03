@@ -12,6 +12,8 @@ export function createProposalFromError(
     account: IAccount,
     err: unknown | Record<string, unknown>
 ): IProposal {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     const isEventError = err?.error?.match(/(the requested data)|(was not found)/)?.length > 0
     if (isEventError) {
         const status = getProposalStatusForMilestone(get(networkStatus)?.currentMilestone, proposal.milestones)
