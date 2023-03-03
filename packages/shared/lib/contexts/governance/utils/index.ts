@@ -1,4 +1,5 @@
 export * from './calculateTotalVotesForTrackedParticipations'
+export * from './createProposalFromError'
 export * from './createProposalFromEvent'
 export * from './getActiveParticipation'
 export * from './getNextProposalPhase'

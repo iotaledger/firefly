@@ -1,5 +1,5 @@
 import type { ParticipationEventStatus, Question } from '@iota/wallet'
-import { IOrganization } from '..'
+import { IOrganization, ProposalErrorMode } from '..'
 import { ProposalStatus, ProposalType } from '../enums'
 
 export interface IProposal extends IProposalMetadata {
@@ -25,5 +25,5 @@ export interface IProposalMetadata {
     additionalInfo: string
     title: string
     nodeUrl: string
-    isNodeOutdated: boolean
+    errorMode?: ProposalErrorMode
 }

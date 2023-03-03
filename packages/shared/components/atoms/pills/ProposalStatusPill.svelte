@@ -1,12 +1,11 @@
 <script lang="ts">
-    import { Pill } from 'shared/components'
+    import { Icon, Pill } from 'shared/components'
+    import { Icon as _Icon } from '@auxiliary/icon'
     import { localize } from '@core/i18n'
-    import { ProposalStatus } from '@contexts/governance/enums'
-    import Icon from '../Icon.svelte'
+    import { ProposalErrorMode, ProposalStatus } from '@contexts/governance/enums'
 
     export let status: string
-    export let isNodeOutdated: boolean
-    export let icon: Icon
+    export let errorMode: ProposalErrorMode
 
     const STATUS_COLORS: Record<ProposalStatus, string> = {
         [ProposalStatus.Upcoming]: 'purple-200',
@@ -17,15 +16,14 @@
 </script>
 
 <Pill
-    data={localize(`pills.proposalStatus.${isNodeOutdated ? 'nodeOutdated' : status}`)}
-    useSlot={isNodeOutdated}
-    textColor={isNodeOutdated ? 'red-700' : 'grey-800'}
-    darkTextColor={isNodeOutdated ? 'red-700' : 'grey-800'}
-    backgroundColor={isNodeOutdated ? 'red-200' : STATUS_COLORS[status]}
-    darkBackgroundColor={isNodeOutdated ? 'red-200' : STATUS_COLORS[status]}
+    data={localize(`pills.governance.proposalStatus.${errorMode ? errorMode : status}`)}
+    textColor={errorMode ? 'red-700' : 'grey-800'}
+    darkTextColor={errorMode ? 'red-700' : 'grey-800'}
+    backgroundColor={errorMode ? 'red-200' : STATUS_COLORS[status]}
+    darkBackgroundColor={errorMode ? 'red-200' : STATUS_COLORS[status]}
     classes="rounded-full px-2 py-1 flex items-center {status ? '' : 'invisible'}"
 >
-    {#if icon}
-        <Icon {icon} classes="text-red-700" />
+    {#if errorMode}
+        <Icon icon={errorMode ? _Icon.StatusError : undefined} classes="text-red-700" />
     {/if}
 </Pill>

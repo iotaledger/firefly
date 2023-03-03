@@ -8,6 +8,6 @@ import { createProposalFromEvent } from '../utils'
 export function addProposalsFromParticipationEventMap(eventMap: ParticipationEventMap, account: IAccountState): void {
     Object.values(eventMap).forEach((event: ParticipationEventWithNodes) => {
         const proposal = createProposalFromEvent(event)
-        addOrUpdateProposalToRegisteredProposals({ ...proposal, isNodeOutdated: false }, account.index)
+        addOrUpdateProposalToRegisteredProposals({ ...proposal }, account.index)
     })
 }

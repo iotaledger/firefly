@@ -10,10 +10,10 @@
 <Tooltip {anchor} {position}>
     <div class="flex flex-col text-left">
         <Text fontWeight={FontWeight.semibold} fontSize="16" classes="mb-2">
-            {localize('tooltips.governance.outdatedNode.title')}
+            {localize('tooltips.governance.resultsNotAvailable.title')}
         </Text>
         <Text fontWeight={FontWeight.normal}>
-            {localize('tooltips.governance.outdatedNode.body')}
+            {localize('tooltips.governance.resultsNotAvailable.body')}
         </Text>
     </div>
 </Tooltip>

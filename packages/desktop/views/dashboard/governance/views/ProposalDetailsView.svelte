@@ -17,7 +17,11 @@
     import { localize } from '@core/i18n'
     import { openPopup } from '@auxiliary/popup/actions'
     import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
-    import { clearProposalDataPoll, getVotingEvent, pollProposalData } from '@contexts/governance/actions'
+    import {
+        clearParticipationEventStatusPoll,
+        getVotingEvent,
+        pollParticipationEventStatus,
+    } from '@contexts/governance/actions'
     import { ABSTAIN_VOTE_VALUE } from '@contexts/governance/constants'
     import { ProposalStatus } from '@contexts/governance/enums'
     import {
@@ -199,7 +203,7 @@
     }
 
     onMount(async () => {
-        pollProposalData($selectedProposal?.id).then(() => (statusLoaded = true))
+        pollParticipationEventStatus($selectedProposal?.id).then(() => (statusLoaded = true))
         // TODO: this api call gets all overviews, we need to change it so that we just get one
         // We then need to update the latest overview manually if we perform an action
         void updateParticipationOverview($selectedAccountIndex)
@@ -209,7 +213,7 @@
     })
 
     onDestroy(() => {
-        clearProposalDataPoll()
+        clearParticipationEventStatusPoll()
         clearSelectedParticipationEventStatus()
     })
 </script>
@@ -220,7 +224,7 @@
             <header-container class="flex justify-between items-center mb-4">
                 <ProposalStatusPill
                     status={$selectedProposal?.status}
-                    isNodeOutdated={$selectedProposal?.isNodeOutdated}
+                    errorMode={$selectedProposal?.errorMode}
                     icon={Icon.StatusError}
                 />
                 <ProposalDetailsButton proposal={$selectedProposal} />
