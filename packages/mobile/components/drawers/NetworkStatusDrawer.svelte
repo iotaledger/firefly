@@ -1,11 +1,9 @@
 <script lang="ts">
-    import { localize } from '@core/i18n'
-    import { NetworkHealth, networkStatus, NETWORK_STATUS_DESCRIPTION, nodeInfo } from '@core/network'
     import { KeyValueBox } from '@ui'
 
-    let health: NetworkHealth
+    import { localize } from '@core/i18n'
+    import { NetworkHealth, networkStatus, NETWORK_STATUS_DESCRIPTION, nodeInfo } from '@core/network'
 
-    $: health = $networkStatus.health ?? NetworkHealth.Down
     $: description = $networkStatus.description ?? NETWORK_STATUS_DESCRIPTION[NetworkHealth.Disconnected]
     $: networkStatistics = {
         messagesPerSecond: Math.round($networkStatus.messagesPerSecond ?? 0),
@@ -13,7 +11,7 @@
     }
 </script>
 
-<div class="flex flex-col space-y-2">
+<network-status-drawer class="flex flex-col space-y-2">
     <KeyValueBox keyText={localize('general.network')} valueText={$nodeInfo?.protocol?.networkName} />
     <KeyValueBox
         keyText={localize('views.settings.networkStatus.title')}
@@ -29,4 +27,4 @@
             valueText={networkStatistics[networkStatisticKey]}
         />
     {/each}
-</div>
+</network-status-drawer>

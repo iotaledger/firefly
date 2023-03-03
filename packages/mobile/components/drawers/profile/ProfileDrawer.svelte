@@ -1,48 +1,27 @@
 <script lang="ts">
+    import ProfileRouterComponent from './ProfileRouter.svelte'
+
     import { appSettings } from '@core/app'
     import { localize } from '@core/i18n'
-    import { Drawer } from '@components'
+
+    import { DrawerId, updateDrawerProps } from '@/auxiliary/drawer'
     import { SETTINGS_ROUTE_META } from '@/contexts/settings'
     import {
         networkConfigurationSettingsRoute,
         NetworkConfigurationSettingsRoute,
-        networkConfigurationSettingsRouter,
-        NetworkConfigurationSettingsRouter,
         ProfileRoute,
         profileRoute,
-        ProfileRouter,
-        profileRouter,
         SettingsRoute,
         settingsRoute,
-        SettingsRouter,
-        settingsRouter,
     } from '@/routers'
-    import ProfileRouterComponent from './ProfileRouter.svelte'
-
-    export let onClose: () => unknown = () => {}
 
     let title: string
-    let allowBack: boolean
-    let activeRouter: ProfileRouter | SettingsRouter | NetworkConfigurationSettingsRouter = $profileRouter
 
-    $: $profileRoute,
-        $settingsRoute,
-        $networkConfigurationSettingsRoute,
-        (setTitle(), setAllowBack(), setActiveRouter())
-    $: $appSettings.language, setTitle()
+    $: $profileRoute, $settingsRoute, $networkConfigurationSettingsRoute, updateTitle()
+    $: $appSettings.language, updateTitle()
+    $: title, updateDrawerProps(DrawerId.Profile, { title })
 
-    function setActiveRouter(): void {
-        if ($profileRoute === ProfileRoute.Settings) {
-            if ($settingsRoute === SettingsRoute.NetworkConfiguration) {
-                activeRouter = $networkConfigurationSettingsRouter
-            } else {
-                activeRouter = $settingsRouter
-            }
-        } else {
-            activeRouter = $profileRouter
-        }
-    }
-    function setTitle(): void {
+    function updateTitle(): void {
         if ($profileRoute === ProfileRoute.Settings) {
             if ($settingsRoute === SettingsRoute.Init) {
                 title = localize('views.settings.settings')
@@ -74,24 +53,9 @@
                 title = localize(SETTINGS_ROUTE_META[$settingsRoute].name)
             }
         } else {
-            if ($profileRoute === ProfileRoute.NetworkStatus) {
-                title = localize('views.settings.networkStatus.title')
-            } else if ($profileRoute === ProfileRoute.Backup) {
-                title = localize('views.settings.exportStronghold.title')
-            } else {
-                title = localize('views.settings.profile.title')
-            }
-        }
-    }
-    function setAllowBack(): void {
-        switch ($profileRoute) {
-            default:
-                allowBack = true
-                break
+            title = localize('views.settings.profile.title')
         }
     }
 </script>
 
-<Drawer {onClose} {title} fullScreen enterFromSide {allowBack} onBackClick={() => activeRouter.previous()}>
-    <ProfileRouterComponent />
-</Drawer>
+<ProfileRouterComponent />

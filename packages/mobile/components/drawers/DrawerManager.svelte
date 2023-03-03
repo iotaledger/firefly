@@ -12,6 +12,8 @@
         EnterPasswordDrawer,
         ExpirationDrawer,
         FilterDrawer,
+        NetworkStatusDrawer,
+        ProfileDrawer,
         ReceiveDrawer,
         ReferencesDrawer,
         SelectedActivityDrawer,
@@ -38,6 +40,8 @@
         [DrawerId.Send]: SendDrawer,
         [DrawerId.References]: ReferencesDrawer,
         [DrawerId.Expiration]: ExpirationDrawer,
+        [DrawerId.Profile]: ProfileDrawer,
+        [DrawerId.NetworkStatus]: NetworkStatusDrawer,
     }
 </script>
 

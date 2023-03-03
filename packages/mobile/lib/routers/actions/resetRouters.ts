@@ -3,7 +3,6 @@ import { get } from 'svelte/store'
 import {
     appRouter,
     appSetupRouter,
-    dashboardRouter,
     loginRouter,
     networkConfigurationSettingsRouter,
     networkSetupRouter,
@@ -28,7 +27,6 @@ export function resetRouters(): void {
 function resetBaseRouters(): void {
     get(appRouter).reset()
     get(onboardingRouter).reset()
-    get(dashboardRouter).reset()
 }
 
 function resetSubrouters(): void {

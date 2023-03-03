@@ -1,16 +1,22 @@
 <script lang="ts">
+    import { NetworkStatusButton, ProfileActionButton, ProfileBackupButton, ProfileLockButton } from '@components'
+    import { FontWeight, Icon, NetworkIcon, Text, TextType } from '@ui'
+
     import { localize } from '@core/i18n'
     import { NetworkProtocol } from '@core/network'
     import { activeProfile, lockStronghold, logout } from '@core/profile'
-    import { isStrongholdUnlocked } from '@core/profile-manager'
     import { getInitials, isRecentDate } from '@core/utils'
+
+    import { showAppNotification } from '@auxiliary/notification'
+    import { exportStronghold } from '@contexts/settings'
+
+    import { DrawerId, openDrawer } from '@/auxiliary/drawer'
+    import { profileRouter } from '@/routers'
     import features from '@features/features'
     import { Icon as IconTypes } from '@lib/auxiliary/icon'
-    import { FontWeight, Icon, NetworkIcon, Text, TextType } from '@ui'
-    import { NetworkStatusButton, ProfileActionButton, ProfileBackupButton, ProfileLockButton } from '@components'
-    import { profileRouter } from '@/routers'
 
     const { isStrongholdLocked } = $activeProfile
+
     let networkProtocol: NetworkProtocol
     $: networkProtocol = $activeProfile.networkProtocol
 
@@ -21,24 +27,51 @@
     let initials: string
     $: initials = getInitials($activeProfile.name, 1)
 
-    function handleLogoutClick(): void {
-        logout()
+    function onLogoutClick(): void {
+        void logout()
     }
-    function handleProfileLockButtonClick(): void {
+
+    function onLockToggleClick(): void {
         if ($isStrongholdLocked) {
-            isStrongholdUnlocked().then((locked) => {
-                if (!locked) {
-                    $profileRouter.setNeedsUnlock(true)
-                }
-            })
+            openDrawer(DrawerId.EnterPassword)
         } else {
             lockStronghold()
         }
     }
+
+    function onBackupClick(): void {
+        function _handleExportStrongholdResponse(cancelled, error): void {
+            if (!cancelled) {
+                if (error) {
+                    showAppNotification({
+                        type: 'error',
+                        message: localize(error),
+                    })
+                } else {
+                    showAppNotification({
+                        type: 'info',
+                        message: localize('general.exportingStrongholdSuccess'),
+                    })
+                }
+            }
+        }
+        function _handleBackup(password): void {
+            exportStronghold(password, _handleExportStrongholdResponse)
+        }
+        openDrawer(DrawerId.EnterPassword, { returnPassword: true, onSuccess: _handleBackup })
+    }
+
+    function onNetworkStatusClick(): void {
+        openDrawer(DrawerId.NetworkStatus)
+    }
+
+    function onSettingsClick(): void {
+        $profileRouter.next()
+    }
 </script>
 
 {#if $activeProfile?.id}
-    <div class="w-full flex flex-col space-y-14">
+    <profile-actions-view class="w-full flex flex-col space-y-14">
         <div class="flex flex-col">
             <div class="flex flex-row justify-center">
                 <div class="relative">
@@ -61,7 +94,7 @@
                 {$activeProfile.name}
             </Text>
             <div class="flex justify-center">
-                <button class="inline-flex p-1" on:click={handleLogoutClick}>
+                <button class="inline-flex p-1" on:click={onLogoutClick}>
                     <Icon width="16" height="16" icon={IconTypes.Logout} classes="text-blue-500 my-auto" />
                     <Text type={TextType.p} overrideColor classes="text-blue-500 pl-1">
                         {localize('views.dashboard.profileModal.logout')}
@@ -69,15 +102,15 @@
                 </button>
             </div>
         </div>
-        <div class="flex flex-col space-y-4">
+        <div class="flex flex-col space-y-2">
             {#if features?.dashboard?.profileActions?.backupProfile?.enabled && !isBackupSafe}
-                <ProfileBackupButton {lastBackupDate} onClick={() => $profileRouter.next({ backup: true })} />
+                <ProfileBackupButton {lastBackupDate} onClick={onBackupClick} />
             {/if}
             {#if features?.dashboard?.profileActions?.networkStatus?.enabled}
-                <NetworkStatusButton onClick={() => $profileRouter.next({ networkStatus: true })} />
+                <NetworkStatusButton onClick={onNetworkStatusClick} />
             {/if}
             {#if features?.dashboard?.profileActions?.profileLock?.enabled}
-                <ProfileLockButton onClick={handleProfileLockButtonClick} />
+                <ProfileLockButton onClick={onLockToggleClick} />
             {/if}
             {#if features?.settings?.enabled}
                 <ProfileActionButton
@@ -86,9 +119,9 @@
                     icon={IconTypes.Settings}
                     iconColor="blue-500"
                     color="transparent"
-                    onClick={() => $profileRouter.next({ settings: true })}
+                    onClick={onSettingsClick}
                 />
             {/if}
         </div>
-    </div>
+    </profile-actions-view>
 {/if}

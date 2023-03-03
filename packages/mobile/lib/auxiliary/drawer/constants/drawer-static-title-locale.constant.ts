@@ -11,4 +11,5 @@ export const DRAWER_STATIC_TITLE_TITLES = {
     [DrawerId.References]: 'actions.addReference',
     [DrawerId.Expiration]: 'general.expirationTime',
     [DrawerId.Send]: 'popups.sendForm.title',
+    [DrawerId.NetworkStatus]: 'views.settings.networkStatus.title',
 }
