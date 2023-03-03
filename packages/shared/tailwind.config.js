@@ -307,6 +307,9 @@ module.exports = {
             height: {
                 fit: 'fit-content',
             },
+            width: {
+                100: pxToRem(400),
+            },
         },
         fontFamily: {
             'fira-mono': ['"Fira Mono"', 'monospace'],

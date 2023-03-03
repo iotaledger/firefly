@@ -1,20 +1,9 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { localeDirection, setupI18n, _ } from '@core/i18n'
-    import { checkAndMigrateProfiles, cleanupEmptyProfiles } from '@core/profile'
-    import { initialiseRouterManager, RouterManagerExtensionName } from '@core/router'
-    import {
-        appSettings,
-        appStage,
-        AppStage,
-        AppTheme,
-        initAppSettings,
-        Platform,
-        setPlatform,
-        shouldBeDarkMode,
-    } from '@core/app'
-    import { onboardingProfile } from '@contexts/onboarding'
-    import { DrawerManager, ToastContainer } from '@components'
+
+    import { DrawerManager } from '@components'
+    import { ToastContainer } from '@ui'
+
     import { isKeyboardOpen, keyboardHeight } from '@/auxiliary/keyboard'
     import {
         appRoute,
@@ -26,6 +15,23 @@
         resetRouterForAppContext,
         resetRouters,
     } from '@/routers'
+
+    import { onboardingProfile } from '@contexts/onboarding'
+
+    import {
+        appSettings,
+        appStage,
+        AppStage,
+        AppTheme,
+        initAppSettings,
+        Platform,
+        setPlatform,
+        shouldBeDarkMode,
+    } from '@core/app'
+    import { localeDirection, setupI18n, _ } from '@core/i18n'
+    import { checkAndMigrateProfiles, cleanupEmptyProfiles } from '@core/profile'
+    import { initialiseRouterManager, RouterManagerExtensionName } from '@core/router'
+
     import { DashboardView, LoginRouter, OnboardingRouter } from '@views'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
@@ -106,7 +112,7 @@
     {/key}
 {/if}
 <DrawerManager />
-<ToastContainer />
+<ToastContainer swipe fadeDuration={100} classes="fixed top-0 p-5 z-10 w-full" />
 
 {#if $isKeyboardOpen}
     <div class="keyboard" />
