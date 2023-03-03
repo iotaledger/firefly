@@ -15,7 +15,7 @@ import {
     NetworkConfigurationRouter,
     ThemeView,
     WalletFinderView,
-} from '@views/dashboard/drawers/profile/views/settings'
+} from '@components/drawers/profile/views/settings'
 import { SettingsRoute } from '@/routers'
 import { SettingsCategory } from '../enums'
 
