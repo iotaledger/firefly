@@ -1,11 +1,13 @@
 <script lang="ts">
+    import { OnboardingButton } from '@ui'
+
     import { localize } from '@core/i18n'
     import { FAUCET_URLS, nodeInfo } from '@core/network'
-    import { openPopup, PopupId } from '@auxiliary/popup'
-    import { OnboardingButton } from 'shared/components'
     import { activeProfile } from '@core/profile'
 
-    function handleGetTokens(): void {
+    import { openPopup, PopupId } from '@auxiliary/popup'
+
+    function onGetTokens(): void {
         openPopup({
             id: PopupId.FaucetRequest,
         })
@@ -20,6 +22,6 @@
         secondaryText={localize('general.faucetRequestDescription', {
             values: { network: $nodeInfo?.protocol?.networkName },
         })}
-        onClick={handleGetTokens}
+        onClick={onGetTokens}
     />
 {/if}
