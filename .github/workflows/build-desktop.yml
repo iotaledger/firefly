@@ -46,7 +46,7 @@ jobs:
         needs: [setup]
         strategy:
             matrix:
-                os: [ubuntu-20.04, macos-11, windows-2019]
+                os: [ubuntu-20.04]
             fail-fast: false
         env:
             VERSION: ${{ needs.setup.outputs.version }}
@@ -202,17 +202,17 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v2
 
-            - name: Downloading artifacts
-              uses: actions/download-artifact@v2
-              with:
-                  name: firefly-desktop-windows-2019
-                  path: assets
+            # - name: Downloading artifacts
+            #   uses: actions/download-artifact@v2
+            #   with:
+            #       name: firefly-desktop-windows-2019
+            #       path: assets
 
-            - name: Downloading artifacts
-              uses: actions/download-artifact@v2
-              with:
-                  name: firefly-desktop-macos-11
-                  path: assets
+            # - name: Downloading artifacts
+            #   uses: actions/download-artifact@v2
+            #   with:
+            #       name: firefly-desktop-macos-11
+            #       path: assets
 
             - name: Downloading artifacts
               uses: actions/download-artifact@v2
@@ -234,9 +234,7 @@ jobs:
                   echo '[How to verify the authenticity of your Firefly Desktop download](https://wiki.iota.org/chrysalis-docs/firefly/verify_download)' >> CHANGELOG.md
                   echo '| File | Platform | SHA256 Hash |' >> CHANGELOG.md
                   echo '| --- | --- | --- |' >> CHANGELOG.md
-                  echo '| firefly-desktop-${{ env.VERSION }}.exe | Windows |' $WIN_SHA256 '|' >> CHANGELOG.md
                   echo '| firefly-desktop-${{ env.VERSION }}.AppImage | Linux |' $LIN_SHA256 '|' >> CHANGELOG.md
-                  echo '| firefly-desktop-${{ env.VERSION }}.dmg | MacOS | ' $MAC_SHA256 '|' >> CHANGELOG.md
                   cat CHANGELOG.md
               working-directory: packages/desktop
 
@@ -252,25 +250,25 @@ jobs:
                   draft: true
                   prerelease: true
 
-            - name: Upload macOS binary asset
-              uses: actions/upload-release-asset@v1
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              with:
-                  upload_url: ${{ steps.create_release.outputs.upload_url }}
-                  asset_path: assets/firefly-desktop-${{ env.VERSION }}.dmg
-                  asset_name: firefly-desktop-${{ env.VERSION }}.dmg
-                  asset_content_type: application/octet-stream
+            # - name: Upload macOS binary asset
+            #   uses: actions/upload-release-asset@v1
+            #   env:
+            #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            #   with:
+            #       upload_url: ${{ steps.create_release.outputs.upload_url }}
+            #       asset_path: assets/firefly-desktop-${{ env.VERSION }}.dmg
+            #       asset_name: firefly-desktop-${{ env.VERSION }}.dmg
+            #       asset_content_type: application/octet-stream
 
-            - name: Upload Windows binary asset
-              uses: actions/upload-release-asset@v1
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              with:
-                  upload_url: ${{ steps.create_release.outputs.upload_url }}
-                  asset_path: assets/firefly-desktop-${{ env.VERSION }}.exe
-                  asset_name: firefly-desktop-${{ env.VERSION }}.exe
-                  asset_content_type: application/octet-stream
+            # - name: Upload Windows binary asset
+            #   uses: actions/upload-release-asset@v1
+            #   env:
+            #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            #   with:
+            #       upload_url: ${{ steps.create_release.outputs.upload_url }}
+            #       asset_path: assets/firefly-desktop-${{ env.VERSION }}.exe
+            #       asset_name: firefly-desktop-${{ env.VERSION }}.exe
+            #       asset_content_type: application/octet-stream
 
             - name: Upload Linux binary asset
               uses: actions/upload-release-asset@v1
