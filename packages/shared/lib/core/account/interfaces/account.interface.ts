@@ -75,7 +75,7 @@ export interface IAccount {
     getParticipationEventIds(node: Node, eventType?: ParticipationEventType): Promise<string[]>
     getParticipationEvents(): Promise<{ [eventId: string]: ParticipationEventWithNodes }>
     getParticipationEventStatus(eventId: string): Promise<ParticipationEventStatus>
-    getParticipationOverview(): Promise<ParticipationOverview>
+    getParticipationOverview(eventIds?: string[]): Promise<ParticipationOverview>
     getTransaction(transactionId: string): Promise<Transaction>
     getVotingPower(): Promise<string>
     incomingTransactions(): Promise<[string, Transaction][]>
