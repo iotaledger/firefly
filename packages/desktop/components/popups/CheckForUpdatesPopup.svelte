@@ -22,8 +22,7 @@
     }
 
     onMount(async () => {
-        // @ts-expect-error: This value is replaced by Webpack DefinePlugin
-        if (!devMode) {
+        if (process.env.NODE_ENV !== 'development') {
             await setAppVersionDetails()
             checkForAppUpdate()
         }
