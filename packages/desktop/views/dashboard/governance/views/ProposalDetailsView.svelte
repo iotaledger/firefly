@@ -23,10 +23,10 @@
     import {
         hasPendingGovernanceTransaction,
         selectedProposal,
-        updateParticipationOverview,
         participationOverviewForSelectedAccount,
         selectedParticipationEventStatus,
         clearSelectedParticipationEventStatus,
+        updateParticipationOverviewForEventId,
     } from '@contexts/governance/stores'
     import {
         calculateTotalVotesForTrackedParticipations,
@@ -56,9 +56,9 @@
     let proposalQuestions: HTMLElement
     let isVotingForProposal: boolean = false
     let statusLoaded: boolean = false
+    let overviewLoaded: boolean = false
 
     $: selectedProposalOverview = $participationOverviewForSelectedAccount?.participations?.[$selectedProposal?.id]
-    $: overviewLoaded = !!$participationOverviewForSelectedAccount
     $: trackedParticipations = Object.values(selectedProposalOverview ?? {})
     $: currentMilestone = $networkStatus.currentMilestone
 
@@ -205,7 +205,9 @@
         pollParticipationEventStatus($selectedProposal?.id).then(() => (statusLoaded = true))
         // TODO: this api call gets all overviews, we need to change it so that we just get one
         // We then need to update the latest overview manually if we perform an action
-        void updateParticipationOverview($selectedAccountIndex)
+        overviewLoaded = false
+        await updateParticipationOverviewForEventId($selectedProposal?.id)
+        overviewLoaded = true
         await setVotingEventPayload($selectedProposal?.id)
         await updateIsVoting()
         hasMounted = true

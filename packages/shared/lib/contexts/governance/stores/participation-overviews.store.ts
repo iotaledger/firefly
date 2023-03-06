@@ -30,6 +30,18 @@ export async function updateParticipationOverview(accountIndex: number = get(sel
     }
 }
 
+export async function updateParticipationOverviewForEventId(eventId: string): Promise<void> {
+    const accountIndex = get(selectedAccountIndex)
+    const overview = await getParticipationOverview(accountIndex, eventId)
+    allParticipationOverviews.update((state) => {
+        if (!state[accountIndex]) {
+            state[accountIndex] = { participations: {} }
+        }
+        state[accountIndex].participations.eventId = overview[eventId]
+        return state
+    })
+}
+
 export function resetProposalOverviews(): void {
     allParticipationOverviews.set({})
 }
