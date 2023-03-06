@@ -18,8 +18,10 @@
         closePopup()
         checkOrConnectLedger(async () => {
             try {
-                await sendOutput($ledgerPreparedOutput)
-                resetLedgerPreparedOutput()
+                if ($ledgerPreparedOutput) {
+                    await sendOutput($ledgerPreparedOutput)
+                    resetLedgerPreparedOutput()
+                }
             } catch (err) {
                 handleError(err)
             }
