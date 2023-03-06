@@ -128,17 +128,18 @@ function persistedProfileMigrationToV8(existingProfile: IPersistedProfile): void
 
 function persistedProfileMigrationToV9(existingProfile: IPersistedProfile): void {
     function migrateNode(node: INode): INode {
-        if (!node) {
-            return null
-        }
-        return {
-            url: node.url as string,
-            auth: {
-                jwt: node.auth?.jwt,
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
-                basicAuthNamePwd: [node.auth?.username, node.auth?.password],
-            },
+        if (node) {
+            return {
+                url: node.url as string,
+                auth: {
+                    jwt: node.auth?.jwt,
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore
+                    basicAuthNamePwd: [node.auth?.username, node.auth?.password],
+                },
+            }
+        } else {
+            return undefined
         }
     }
 
@@ -147,3 +148,5 @@ function persistedProfileMigrationToV9(existingProfile: IPersistedProfile): void
 
     saveProfile(existingProfile)
 }
+
+// TODO: Rename accountMetadata to accountPersistedData in next migration
