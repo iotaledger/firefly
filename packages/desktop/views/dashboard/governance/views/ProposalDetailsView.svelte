@@ -44,7 +44,6 @@
     import { visibleSelectedAccountAssets } from '@core/wallet/stores'
     import { handleError } from '@core/error/handlers'
     import { PopupId } from '@auxiliary/popup'
-    import { Icon } from '@auxiliary/icon'
 
     const { metadata } = $visibleSelectedAccountAssets?.baseCoin
 
@@ -82,7 +81,9 @@
     $: isVotingDisabled =
         !isProposalVotable($selectedProposal?.status) ||
         !hasChangedAnswers(selectedAnswerValues) ||
-        hasSelectedNoAnswers(selectedAnswerValues)
+        hasSelectedNoAnswers(selectedAnswerValues) ||
+        !!$selectedProposal?.error
+
     $: isTransferring = $hasPendingGovernanceTransaction?.[$selectedAccountIndex]
     $: $selectedParticipationEventStatus, (textHintString = getTextHintString())
 
@@ -222,11 +223,7 @@
     <div class="w-2/5 flex flex-col space-y-4">
         <Pane classes="p-6 flex flex-col h-fit">
             <header-container class="flex justify-between items-center mb-4">
-                <ProposalStatusPill
-                    status={$selectedProposal?.status}
-                    error={$selectedProposal?.error}
-                    icon={Icon.StatusError}
-                />
+                <ProposalStatusPill status={$selectedProposal?.status} error={$selectedProposal?.error} />
                 <ProposalDetailsButton proposal={$selectedProposal} />
             </header-container>
             <div class="flex flex-1 flex-col justify-between">
