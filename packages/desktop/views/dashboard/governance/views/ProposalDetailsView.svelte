@@ -202,6 +202,7 @@
     }
 
     onMount(async () => {
+        // Callbacks used, because we don't want to await the resolution of the promises.
         pollParticipationEventStatus($selectedProposal?.id).then(() => (statusLoaded = true))
         updateParticipationOverviewForEventId($selectedProposal?.id).then(() => (overviewLoaded = true))
         await setVotingEventPayload($selectedProposal?.id)
