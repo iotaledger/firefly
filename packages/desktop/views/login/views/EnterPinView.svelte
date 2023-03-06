@@ -7,7 +7,7 @@
     import { Platform } from '@core/app'
     import { openPopup, PopupId, popupState } from '@auxiliary/popup'
     import { isValidPin } from '@core/utils'
-    import { Icon, PinInput, Profile, Text } from 'shared/components'
+    import { Icon, PinInput, Profile, Text, TextHint } from 'shared/components'
     import { onDestroy } from 'svelte'
 
     let attempts = 0
@@ -21,6 +21,8 @@
 
     /** Waiting time in seconds after which a user should be allowed to enter pin again */
     const WAITING_TIME_AFTER_MAX_INCORRECT_ATTEMPTS = 30
+
+    const isStrongholdUpdated = true
 
     let timeRemainingBeforeNextAttempt = WAITING_TIME_AFTER_MAX_INCORRECT_ATTEMPTS
 
@@ -116,25 +118,30 @@
                 isLedgerProfile={$activeProfile?.type === ProfileType.Ledger}
                 bgColor="blue"
             />
-            <div class="flex mt-18 w-full items-center">
-                <div class="relative h-6">
-                    <button
-                        data-label="back-button"
-                        class="absolute right-5 disabled:opacity-50 cursor-pointer disabled:cursor-auto"
-                        disabled={hasReachedMaxAttempts}
-                        on:click={onBackClick}
-                    >
-                        <Icon icon="arrow-left" classes="text-gray-500 dark:text-gray-100" />
-                    </button>
+            <div class="flex flex-col gap-8 w-full items-center {isStrongholdUpdated ? 'mt-18' : 'mt-4'}">
+                {#if !isStrongholdUpdated}
+                    <TextHint warning text={localize('views.login.hintStronghold')} />
+                {/if}
+                <div class="flex w-full items-center">
+                    <div class="relative h-6">
+                        <button
+                            data-label="back-button"
+                            class="absolute right-5 disabled:opacity-50 cursor-pointer disabled:cursor-auto"
+                            disabled={hasReachedMaxAttempts}
+                            on:click={onBackClick}
+                        >
+                            <Icon icon="arrow-left" classes="text-gray-500 dark:text-gray-100" />
+                        </button>
+                    </div>
+                    <PinInput
+                        bind:this={pinRef}
+                        bind:value={pinCode}
+                        classes={shake && 'animate-shake'}
+                        on:submit={onSubmitClick}
+                        disabled={hasReachedMaxAttempts || isBusy}
+                        autofocus
+                    />
                 </div>
-                <PinInput
-                    bind:this={pinRef}
-                    bind:value={pinCode}
-                    classes={shake && 'animate-shake'}
-                    on:submit={onSubmitClick}
-                    disabled={hasReachedMaxAttempts || isBusy}
-                    autofocus
-                />
             </div>
             <Text type="p" bold classes="mt-4 text-center">
                 {attempts > 0
