@@ -1,20 +1,23 @@
 <script lang="ts">
-    import { needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService } from '@core/app'
+    import { onDestroy } from 'svelte'
+
+    import { Icon, PinInput, Profile, Text, TextHint } from '@ui'
+
+    import { needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService, Platform } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { activeProfile, login, ProfileType, resetActiveProfile } from '@core/profile'
     import { loginRouter } from '@core/router'
-    import { Platform } from '@core/app'
-    import { openPopup, PopupId, popupState } from '@auxiliary/popup'
     import { isValidPin } from '@core/utils'
-    import { Icon, PinInput, Profile, Text, TextHint } from 'shared/components'
-    import { onDestroy } from 'svelte'
 
-    let attempts = 0
-    let pinCode = ''
-    let isBusy = false
-    let pinRef
-    let shake = false
+    import { openPopup, PopupId, popupState } from '@auxiliary/popup'
+    import { Icon as IconEnum } from '@auxiliary/icon'
+
+    let attempts: number = 0
+    let pinCode: string = ''
+    let isBusy: boolean = false
+    let pinRef: PinInput
+    let shake: boolean = false
 
     /** Maximum number of consecutive (incorrect) attempts allowed to the user */
     const MAX_PINCODE_INCORRECT_ATTEMPTS = 3
@@ -24,7 +27,10 @@
 
     const isStrongholdUpdated = true
 
-    let timeRemainingBeforeNextAttempt = WAITING_TIME_AFTER_MAX_INCORRECT_ATTEMPTS
+    let timeRemainingBeforeNextAttempt: number = WAITING_TIME_AFTER_MAX_INCORRECT_ATTEMPTS
+    let buttonText: string = getButtonText(timeRemainingBeforeNextAttempt)
+    let maxAttemptsTimer: ReturnType<typeof setTimeout> = null
+    let shakeTimeout: ReturnType<typeof setTimeout> = null
 
     $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTermsOfService()) {
         openPopup({
@@ -33,11 +39,10 @@
             preventClose: true,
         })
     }
-
     $: hasReachedMaxAttempts = attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS
     $: {
         if (isValidPin(pinCode)) {
-            void onSubmitClick()
+            void onSubmit()
         }
     }
     $: {
@@ -46,16 +51,25 @@
         }
     }
 
-    let buttonText = setButtonText(timeRemainingBeforeNextAttempt)
-
-    function setButtonText(time): string {
+    function getButtonText(time: number): string {
         return localize('views.login.pleaseWait', { values: { time: time.toString() } })
     }
 
-    let maxAttemptsTimer = null
-    let shakeTimeout = null
+    function setShakeTimeout(): void {
+        shakeTimeout = setTimeout(() => {
+            shake = false
+            isBusy = false
+            attempts++
+            if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
+                clearInterval(maxAttemptsTimer)
+                maxAttemptsTimer = setInterval(attemptCountdown, 1000)
+            } else {
+                pinRef.resetAndFocus()
+            }
+        }, 1000)
+    }
 
-    function countdown(): void {
+    function attemptCountdown(): void {
         if (!hasReachedMaxAttempts) {
             return
         }
@@ -66,12 +80,12 @@
             timeRemainingBeforeNextAttempt = WAITING_TIME_AFTER_MAX_INCORRECT_ATTEMPTS
             pinRef.resetAndFocus()
         } else {
-            buttonText = setButtonText(timeRemainingBeforeNextAttempt)
+            buttonText = getButtonText(timeRemainingBeforeNextAttempt)
             timeRemainingBeforeNextAttempt--
         }
     }
 
-    async function onSubmitClick(): Promise<void> {
+    async function onSubmit(): Promise<void> {
         if (!hasReachedMaxAttempts) {
             isBusy = true
             const isVerified = await Platform.PincodeManager.verify($activeProfile?.id, pinCode)
@@ -80,17 +94,7 @@
                 $loginRouter.next()
             } else {
                 shake = true
-                shakeTimeout = setTimeout(() => {
-                    shake = false
-                    isBusy = false
-                    attempts++
-                    if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
-                        clearInterval(maxAttemptsTimer)
-                        maxAttemptsTimer = setInterval(countdown, 1000)
-                    } else {
-                        pinRef.resetAndFocus()
-                    }
-                }, 1000)
+                setShakeTimeout()
             }
         }
     }
@@ -108,7 +112,7 @@
     })
 </script>
 
-<div class="w-full h-full bg-white dark:bg-gray-900">
+<enter-pin-view class="block w-full h-full bg-white dark:bg-gray-900">
     <div class="flex w-full h-full justify-center items-center">
         <div class="w-96 flex flex-col flex-wrap items-center mb-20">
             <Profile
@@ -130,20 +134,20 @@
                             disabled={hasReachedMaxAttempts}
                             on:click={onBackClick}
                         >
-                            <Icon icon="arrow-left" classes="text-gray-500 dark:text-gray-100" />
+                            <Icon icon={IconEnum.ArrowLeft} classes="text-gray-500 dark:text-gray-100" />
                         </button>
                     </div>
                     <PinInput
                         bind:this={pinRef}
                         bind:value={pinCode}
-                        classes={shake && 'animate-shake'}
-                        on:submit={onSubmitClick}
+                        classes={shake ? 'animate-shake' : ''}
+                        on:submit={onSubmit}
                         disabled={hasReachedMaxAttempts || isBusy}
                         autofocus
                     />
                 </div>
             </div>
-            <Text type="p" bold classes="mt-4 text-center">
+            <Text bold classes="mt-4 text-center">
                 {attempts > 0
                     ? localize('views.login.incorrectAttempts', {
                           values: { attempts: attempts.toString() },
@@ -155,4 +159,4 @@
             {/if}
         </div>
     </div>
-</div>
+</enter-pin-view>
