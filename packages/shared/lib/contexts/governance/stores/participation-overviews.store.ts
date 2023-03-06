@@ -37,7 +37,7 @@ export async function updateParticipationOverviewForEventId(eventId: string): Pr
         if (!state[accountIndex]) {
             state[accountIndex] = { participations: {} }
         }
-        state[accountIndex].participations.eventId = overview[eventId]
+        state[accountIndex].participations[eventId] = overview[eventId]
         return state
     })
 }
