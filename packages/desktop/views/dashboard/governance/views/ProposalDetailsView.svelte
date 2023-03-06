@@ -16,7 +16,7 @@
     import { VotingEventPayload, ParticipationEventType, TrackedParticipationOverview } from '@iota/wallet/out/types'
     import { localize } from '@core/i18n'
     import { openPopup } from '@auxiliary/popup/actions'
-    import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
+    import { selectedAccount } from '@core/account/stores'
     import { getVotingEvent } from '@contexts/governance/actions'
     import { ABSTAIN_VOTE_VALUE } from '@contexts/governance/constants'
     import { ProposalStatus } from '@contexts/governance/enums'
