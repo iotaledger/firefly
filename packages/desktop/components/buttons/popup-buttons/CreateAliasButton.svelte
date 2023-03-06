@@ -1,9 +1,11 @@
 <script lang="ts">
-    import { localize } from '@core/i18n'
-    import { openPopup, PopupId } from '@auxiliary/popup'
-    import { OnboardingButton } from 'shared/components'
+    import { OnboardingButton } from '@ui'
 
-    function handleCreateAlias(): void {
+    import { localize } from '@core/i18n'
+
+    import { openPopup, PopupId } from '@auxiliary/popup'
+
+    function onCreateAlias(): void {
         openPopup({
             id: PopupId.AliasConfirmation,
         })
@@ -13,5 +15,5 @@
 <OnboardingButton
     primaryText={localize('actions.createAlias')}
     secondaryText={localize('actions.createAliasDescription')}
-    onClick={handleCreateAlias}
+    onClick={onCreateAlias}
 />
