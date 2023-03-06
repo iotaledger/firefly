@@ -7,7 +7,7 @@
     } from 'shared/components'
     import { Position } from 'shared/components/enums'
     import { IProposal } from '@contexts/governance/interfaces'
-    import { ProposalErrorMode } from '../lib/contexts/governance'
+    import { ProposalError } from '../lib/contexts/governance'
 
     export let proposal: IProposal
     export let position: Position = Position.Right
@@ -21,13 +21,13 @@
 </script>
 
 <div bind:this={anchor} on:mouseenter={() => showTooltip(true)} on:mouseleave={() => showTooltip(false)}>
-    <ProposalStatusPill status={proposal?.status} errorMode={proposal?.errorMode} />
+    <ProposalStatusPill status={proposal?.status} error={proposal?.error} />
 </div>
 {#if isTooltipVisible}
-    {#if proposal?.errorMode}
-        {#if proposal?.errorMode === ProposalErrorMode.NodeOutdated}
+    {#if proposal?.error}
+        {#if proposal?.error === ProposalError.NodeOutdated}
             <OutdatedNodeTooltip bind:anchor {position} />
-        {:else if proposal?.errorMode === ProposalErrorMode.ResultsNotAvailable}
+        {:else if proposal?.error === ProposalError.ResultsNotAvailable}
             <ResultsNotAvailableTooltip bind:anchor {position} />
         {/if}
     {:else}

@@ -5,7 +5,13 @@ import { writable } from 'svelte/store'
 export const selectedParticipationEventStatus = writable<ParticipationEventStatus>(null)
 
 export async function getAndSetSelectedParticipationEventStatus(eventId: string): Promise<void> {
-    selectedParticipationEventStatus.set(await getAccountsParticipationEventStatusForEvent(eventId))
+    let eventStatus: ParticipationEventStatus
+    try {
+        eventStatus = await getAccountsParticipationEventStatusForEvent(eventId)
+    } catch (error) {
+        eventStatus = undefined
+    }
+    selectedParticipationEventStatus.set(eventStatus)
 }
 
 export function clearSelectedParticipationEventStatus(): void {

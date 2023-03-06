@@ -3,7 +3,7 @@ import { get } from 'svelte/store'
 import { IAccountState, selectedAccount } from '@core/account'
 import { activeAccounts } from '@core/profile'
 
-import { IProposal, IRegisteredProposals } from '../interfaces'
+import { IRegisteredProposals } from '../interfaces'
 import { registeredProposals } from '../stores'
 import { createProposalFromError, createProposalFromEvent } from '../utils'
 import { getAccountsParticipationEventStatusForEvent } from './getAccountsParticipationEventStatusForEvent'
@@ -38,7 +38,7 @@ async function getParticipationEventsAndCreateProposalsForAccount(
         } catch (err) {
             proposals[event.id] = {
                 ...proposal,
-                ...createProposalFromError(<IProposal>proposal, account, err),
+                ...createProposalFromError(proposal, err),
             }
         }
     }

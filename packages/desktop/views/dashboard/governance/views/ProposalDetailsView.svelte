@@ -224,7 +224,7 @@
             <header-container class="flex justify-between items-center mb-4">
                 <ProposalStatusPill
                     status={$selectedProposal?.status}
-                    errorMode={$selectedProposal?.errorMode}
+                    error={$selectedProposal?.error}
                     icon={Icon.StatusError}
                 />
                 <ProposalDetailsButton proposal={$selectedProposal} />

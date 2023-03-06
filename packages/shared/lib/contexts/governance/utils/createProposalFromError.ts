@@ -1,15 +1,11 @@
 import { get } from 'svelte/store'
-
-import { IAccount } from '@core/account/interfaces'
 import { networkStatus } from '@core/network/stores'
-
-import { ProposalErrorMode, ProposalStatus } from '../enums'
-import { IProposal } from '../interfaces'
+import { ProposalError, ProposalStatus } from '../enums'
+import { IProposal, IProposalMetadata } from '../interfaces'
 import { getProposalStatusForMilestone } from './getProposalStatusForMilestone'
 
 export function createProposalFromError(
-    proposal: IProposal,
-    account: IAccount,
+    proposal: IProposalMetadata,
     err: unknown | Record<string, unknown>
 ): IProposal {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -18,11 +14,11 @@ export function createProposalFromError(
     if (isEventError) {
         const status = getProposalStatusForMilestone(get(networkStatus)?.currentMilestone, proposal.milestones)
         const isNodeOutdated = status !== ProposalStatus.Ended
-        const errorMode = isNodeOutdated ? ProposalErrorMode.NodeOutdated : ProposalErrorMode.ResultsNotAvailable
+        const error = isNodeOutdated ? ProposalError.NodeOutdated : ProposalError.ResultsNotAvailable
         return {
             ...proposal,
             status,
-            errorMode,
+            error,
         }
     }
 }
