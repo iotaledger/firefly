@@ -21,7 +21,6 @@
     import { ABSTAIN_VOTE_VALUE } from '@contexts/governance/constants'
     import { ProposalStatus } from '@contexts/governance/enums'
     import {
-        hasPendingGovernanceTransaction,
         selectedProposal,
         updateParticipationOverview,
         participationOverviewForSelectedAccount,
@@ -82,7 +81,8 @@
         !isProposalVotable($selectedProposal?.status) ||
         !hasChangedAnswers(selectedAnswerValues) ||
         hasSelectedNoAnswers(selectedAnswerValues)
-    $: isTransferring = $hasPendingGovernanceTransaction?.[$selectedAccountIndex]
+    $: hasGovernanceTransactionInProgress =
+        $selectedAccount?.hasVotingPowerTransactionInProgress || $selectedAccount?.hasVotingTransactionInProgress
     $: $selectedParticipationEventStatus, (textHintString = getTextHintString())
 
     function hasSelectedNoAnswers(_selectedAnswerValues: number[]): boolean {
@@ -284,13 +284,14 @@
                     outline
                     classes="w-full"
                     onClick={onStopVotingClick}
-                    disabled={!isVotingForProposal || isTransferring}
-                    isBusy={isVotingForProposal && isTransferring}>{localize('actions.stopVoting')}</Button
+                    disabled={!isVotingForProposal || hasGovernanceTransactionInProgress}
+                    isBusy={isVotingForProposal && hasGovernanceTransactionInProgress}
+                    >{localize('actions.stopVoting')}</Button
                 >
                 <Button
                     classes="w-full"
-                    disabled={isVotingDisabled || isTransferring}
-                    isBusy={isTransferring}
+                    disabled={isVotingDisabled || hasGovernanceTransactionInProgress}
+                    isBusy={hasGovernanceTransactionInProgress}
                     onClick={onVoteClick}
                 >
                     {localize('actions.vote')}
