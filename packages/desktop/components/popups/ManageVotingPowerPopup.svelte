@@ -9,10 +9,8 @@
     import { convertToRawAmount, visibleSelectedAccountAssets } from '@core/wallet'
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
     import { popupState } from '@auxiliary/popup/stores'
-    import { hasToRevote, hasPendingGovernanceTransaction } from '@contexts/governance/stores'
     import { onMount } from 'svelte'
-    import { modifyPopupState } from '@auxiliary/popup/helpers'
-    import { isSelectedAccountVoting } from '@contexts/governance/utils'
+    import { isAccountVoting } from '@contexts/governance/utils'
     import { PopupId } from '@auxiliary/popup'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
@@ -25,18 +23,19 @@
 
     $: asset = $visibleSelectedAccountAssets?.baseCoin
     $: votingPower = parseInt($selectedAccount?.votingPower, 10)
-    $: isTransferring = $hasPendingGovernanceTransaction?.[$selectedAccount.index] || $selectedAccount?.isTransferring
-    $: disabled = $hasToRevote || isTransferring
-
-    $: amount, disabled, setConfirmDisabled()
+    $: hasTransactionInProgress =
+        $selectedAccount?.hasVotingPowerTransactionInProgress ||
+        $selectedAccount?.hasVotingTransactionInProgress ||
+        $selectedAccount?.isTransferring
+    $: amount, hasTransactionInProgress, setConfirmDisabled()
 
     function setConfirmDisabled(): void {
-        if (disabled || !amount) {
+        if (!amount) {
             confirmDisabled = true
             return
         }
         const convertedSliderAmount = convertToRawAmount(amount, asset?.metadata).toString()
-        confirmDisabled = convertedSliderAmount === $selectedAccount?.votingPower || isTransferring
+        confirmDisabled = convertedSliderAmount === $selectedAccount?.votingPower || hasTransactionInProgress
     }
 
     function onCancelClick(): void {
@@ -47,8 +46,7 @@
         try {
             await assetAmountInput?.validate(true)
 
-            const isVoting = isSelectedAccountVoting()
-            if (amount === '0' && isVoting) {
+            if (amount === '0' && isAccountVoting($selectedAccount.index)) {
                 openPopup({ id: PopupId.VotingPowerToZero })
                 return
             }
@@ -58,7 +56,7 @@
 
             await checkActiveProfileAuth(
                 async () => {
-                    await setVotingPower(rawAmount, isVoting)
+                    await setVotingPower(rawAmount)
                 },
                 { stronghold: true, ledger: false }
             )
@@ -68,16 +66,9 @@
     }
 
     onMount(async () => {
-        disabled = true
         try {
             await _onMount()
-            if ($hasToRevote) {
-                modifyPopupState({ ...$popupState, preventClose: true, hideClose: true })
-            } else {
-                disabled = $selectedAccount?.isTransferring
-            }
         } catch (err) {
-            disabled = false
             handleError(err)
         }
     })
@@ -94,16 +85,21 @@
             {asset}
             containsSlider
             disableAssetSelection
-            {disabled}
+            disabled={hasTransactionInProgress}
             {votingPower}
         />
         <TextHint info text={localize('popups.manageVotingPower.hint')} />
     </div>
     <div class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button outline disabled={isTransferring} classes="w-full" onClick={onCancelClick}>
+        <Button outline disabled={hasTransactionInProgress} classes="w-full" onClick={onCancelClick}>
             {localize('actions.cancel')}
         </Button>
-        <Button type={HTMLButtonType.Submit} disabled={confirmDisabled} isBusy={isTransferring} classes="w-full">
+        <Button
+            type={HTMLButtonType.Submit}
+            disabled={confirmDisabled}
+            isBusy={hasTransactionInProgress}
+            classes="w-full"
+        >
             {localize('actions.confirm')}
         </Button>
     </div>

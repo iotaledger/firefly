@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Text, KeyValueBox, Button, ButtonSize } from 'shared/components'
+    import { Text, KeyValueBox, Button, ButtonSize, ProposalsDetailsButton } from 'shared/components'
     import { FontWeight } from './enums'
     import { localize } from '@core/i18n'
     import { activeProfileId } from '@core/profile'
@@ -58,10 +58,11 @@
 </script>
 
 <proposals-details class="space-y-4">
-    <header-container class="flex justify-left items-center">
+    <header-container class="flex justify-between items-center">
         <Text fontSize="14" fontWeight={FontWeight.semibold}>
             {localize('views.governance.proposalsDetails.title')}
         </Text>
+        <ProposalsDetailsButton />
     </header-container>
     <ul class="space-y-2">
         {#each Object.keys(details) as detailKey}

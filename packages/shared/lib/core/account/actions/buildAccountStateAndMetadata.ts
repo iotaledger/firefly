@@ -14,6 +14,7 @@ export async function buildAccountStateAndMetadata(
         name: name || `${localize('general.account')} ${index + 1}`,
         color: color || getRandomAccountColor(),
         hidden: false,
+        shouldRevote: false,
     }
     const accountState = await buildAccountState(account, metadata)
     return [accountState, metadata]
