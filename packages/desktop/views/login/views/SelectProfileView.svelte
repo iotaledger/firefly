@@ -1,6 +1,12 @@
 <script lang="ts">
     import { Icon, Logo, Profile } from 'shared/components'
-    import { AppContext, mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService } from '@core/app'
+    import {
+        AppContext,
+        isStrongholdUpdated,
+        mobile,
+        needsToAcceptLatestPrivacyPolicy,
+        needsToAcceptLatestTermsOfService,
+    } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { loadPersistedProfileIntoActiveProfile, profiles, ProfileType } from '@core/profile'
@@ -50,6 +56,7 @@
                     networkType={profile?.networkType ?? NetworkType.Devnet}
                     networkProtocol={profile?.networkProtocol ?? NetworkProtocol.IOTA}
                     isLedgerProfile={profile?.type === ProfileType.Ledger}
+                    updateRequired={profile?.type === ProfileType.Software && !isStrongholdUpdated(profile)}
                     classes="cursor-pointer"
                 />
             </div>

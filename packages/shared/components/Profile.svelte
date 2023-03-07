@@ -12,11 +12,11 @@
     export let bgColor: string = ''
     export let isDeveloper: boolean = false
     export let isLedgerProfile: boolean = false
+    export let updateRequired: boolean = false
 
     export let onClick: undefined | ((id: string) => void) = undefined
 
     const slots = $$props.$$slots
-    const isStrongholdUpdated: boolean = false
 
     function handleOnClick(): void {
         onClick && onClick(id)
@@ -46,7 +46,7 @@
                     <Text type="h3" classes="text-white">{getInitials()}</Text>
                 {/if}
             </div>
-            {#if !isStrongholdUpdated}
+            {#if !updateRequired}
                 <NetworkIconBadge {networkType} {networkProtocol} />
             {:else}
                 <StrongholdBadge />
