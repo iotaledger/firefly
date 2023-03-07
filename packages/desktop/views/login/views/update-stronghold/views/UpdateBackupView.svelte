@@ -1,9 +1,11 @@
 <script lang="ts">
     import { Animation, Button, Icon, Text, TextHint, TextType } from '@ui'
     import { OnboardingLayout } from '@components'
+
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { updateStrongholdRouter } from '@core/router'
+
     import { backupInitialStronghold, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
 
     export let busy = false

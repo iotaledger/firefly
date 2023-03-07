@@ -6,7 +6,6 @@
 
 {#if $updateStrongholdRoute === UpdateStrongholdRoute.Update}
     <UpdateStrongholdView />
-{/if}
-{#if $updateStrongholdRoute === UpdateStrongholdRoute.SaveBackup}
+{:else if $updateStrongholdRoute === UpdateStrongholdRoute.SaveBackup}
     <UpdateBackupView />
 {/if}
