@@ -436,7 +436,8 @@
         },
         "login": {
             "pleaseWait": "Zaczekaj {time, plural, one {# sekundę} few {# sekundy} many {# sekund} other {# sekund}}",
-            "incorrectAttempts": "{attempts, plural, one {# nieudana próba} few {# nieudane próby} many {# nieudanych prób} other {# nieudanych prób}}"
+            "incorrectAttempts": "{attempts, plural, one {# nieudana próba} few {# nieudane próby} many {# nieudanych prób} other {# nieudanych prób}}",
+            "hintStronghold": "Your Stronghold's version is out of date. Please log in to update your Stronghold."
         },
         "loadProfile": {
             "loginSteps": {
@@ -586,8 +587,8 @@
                 "title": "Propozycje",
                 "voted": "Zagłosowano",
                 "successEdit": "Propozycja została pomyślnie edytowana",
-                "successAdd": "Propozycja pomyślnie dodana",
-                "successAddAll": "Propozycja została pomyślnie dodana do wszystkich kont",
+                "successAdd": "{numberOfProposals, select, one {Propozycja dodana} other {Propozycje dodane}} pomyślnie",
+                "successAddAll": "{numberOfProposals, select, one {Propozycja została pomyślnie dodana} other {Propozycje zostały pomyślnie dodane}} do wszystkich kont",
                 "successRemove": "Propozycja została usunięta",
                 "emptyTitle": "Brak propozycji"
             },
@@ -721,7 +722,8 @@
         },
         "deleteAccount": {
             "title": "Usunąć {name}?",
-            "body": "Ten portfel nie ma historii transakcji. Można go więc bezpiecznie usunąć.",
+            "body": "Czy na pewno chcesz usunąć ten portfel?",
+            "hint": "Uwaga: po usunięciu, możesz przywrócić ten portfel za pomocą funkcji \"Wyszukiwarka portfeli\" w ustawieniach.",
             "typePassword": "Wpisz hasło portfela, aby potwierdzić.",
             "hideAccount": "Usuń portfel",
             "errorTitle": "Nie można usunąć {name}",
@@ -2067,6 +2069,9 @@
         },
         "governance": {
             "removeProposalWarning": "Musisz przestać głosować na tę propozycję, zanim ją usuniesz."
+        },
+        "updateStronghold": {
+            "profileBadge": "Your Stronghold is out of date. Log in to update Stronghold."
         }
     },
     "exports": {

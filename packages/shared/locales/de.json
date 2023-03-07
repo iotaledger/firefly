@@ -62,7 +62,7 @@
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Set up {protocol, select, IOTA {an} Shimmer {a} other {an}} {protocol} profile",
+                    "title": "Richte {protocol, select, IOTA {ein} Shimmer {ein} other {ein}} {protocol} Profil",
                     "body": "Wähle die geeignete Methode um dein {protocol} Profil einzurichten."
                 },
                 "setupNew": {
@@ -436,7 +436,8 @@
         },
         "login": {
             "pleaseWait": "Bitte warte {time, plural, one {1 Sekunde} other {# Sekunden}}",
-            "incorrectAttempts": "{attempts, plural, one {1 falscher Versuch} other {# falsche Versuche}}"
+            "incorrectAttempts": "{attempts, plural, one {1 falscher Versuch} other {# falsche Versuche}}",
+            "hintStronghold": "Your Stronghold's version is out of date. Please log in to update your Stronghold."
         },
         "loadProfile": {
             "loginSteps": {
@@ -586,8 +587,8 @@
                 "title": "Abstimmungen",
                 "voted": "Abgestimmt",
                 "successEdit": "Vorschlag erfolgreich aktualisiert",
-                "successAdd": "Vorschlag erfolgreich hinzugefügt",
-                "successAddAll": "Abstimmung erfolgreich zu allen Konten hinzugefügt",
+                "successAdd": "{numberOfProposals, select, one {Vorschlag} other {Vorschläge}} erfolgreich hinzugefügt",
+                "successAddAll": "{numberOfProposals, select, one {Vorschlag} other {Vorschläge}} erfolgreich zu allen Konten hinzugefügt",
                 "successRemove": "Abstimmung erfolgreich entfernt",
                 "emptyTitle": "Keine Vorschläge"
             },
@@ -721,7 +722,8 @@
         },
         "deleteAccount": {
             "title": "{name} löschen?",
-            "body": "Diese Wallet besitzt keinen Transaktionsverlauf. Sie kann bedenkenlos entfernt werden.",
+            "body": "Bist Du sicher, dass diese Wallet gelöscht werden soll?",
+            "hint": "Note: once deleted, you can restore this wallet by using the \"Wallet Finder\" in the settings.",
             "typePassword": "Gib dein Passwort zur Bestätigung ein.",
             "hideAccount": "Wallet löschen",
             "errorTitle": "{name} kann nicht gelöscht werden",
@@ -1153,7 +1155,7 @@
             "shimmer": "Ein bestehendes Shimmer Profil wiederherstellen"
         },
         "createWallet": "Ein neues {protocol} Profil erstellen",
-        "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
+        "createWalletDescription": "Erstelle ein neues Profil auf {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Unbekannt}}",
         "claimShimmer": "Shimmer Staking-Rewards beanspruchen",
         "claimShimmerDescription": "Importiere dein IOTA-Profil und beanspruche deine Shimmer Staking-Rewards",
         "createAlias": "Alias erstellen",
@@ -1631,7 +1633,7 @@
             "alias": "Alias",
             "foundry": "Foundry-Fabrik",
             "governance": "Governance",
-            "consolidation": "Consolidation"
+            "consolidation": "Konsolidierung"
         },
         "direction": {
             "label": "Richtung",
@@ -2067,6 +2069,9 @@
         },
         "governance": {
             "removeProposalWarning": "Du musst das Abstimmen für diese Abstimmung stoppen, bevor du sie entfernen kannst."
+        },
+        "updateStronghold": {
+            "profileBadge": "Your Stronghold is out of date. Log in to update Stronghold."
         }
     },
     "exports": {
