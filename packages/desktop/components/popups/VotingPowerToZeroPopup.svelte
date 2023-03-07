@@ -4,7 +4,6 @@
     import { selectedAccount } from '@core/account/stores'
     import { handleError } from '@core/error/handlers'
     import { setVotingPower } from '@contexts/governance/actions'
-    import { hasPendingGovernanceTransaction } from '@contexts/governance/stores'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
@@ -13,7 +12,8 @@
 
     const ZERO_VOTING_POWER = '0'
 
-    $: isTransferring = $hasPendingGovernanceTransaction?.[$selectedAccount.index]
+    $: isTransferring =
+        $selectedAccount?.hasVotingPowerTransactionInProgress || $selectedAccount?.hasVotingTransactionInProgress
 
     function onCancelClick(): void {
         closePopup()

@@ -16,17 +16,16 @@
     import { VotingEventPayload, ParticipationEventType, TrackedParticipationOverview } from '@iota/wallet/out/types'
     import { localize } from '@core/i18n'
     import { openPopup } from '@auxiliary/popup/actions'
-    import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
+    import { selectedAccount } from '@core/account/stores'
     import { getVotingEvent } from '@contexts/governance/actions'
     import { ABSTAIN_VOTE_VALUE } from '@contexts/governance/constants'
     import { ProposalStatus } from '@contexts/governance/enums'
     import {
-        hasPendingGovernanceTransaction,
         selectedProposal,
-        updateParticipationOverview,
         participationOverviewForSelectedAccount,
         selectedParticipationEventStatus,
         clearSelectedParticipationEventStatus,
+        updateParticipationOverviewForEventId,
     } from '@contexts/governance/stores'
     import {
         calculateTotalVotesForTrackedParticipations,
@@ -56,9 +55,9 @@
     let proposalQuestions: HTMLElement
     let isVotingForProposal: boolean = false
     let statusLoaded: boolean = false
+    let overviewLoaded: boolean = false
 
     $: selectedProposalOverview = $participationOverviewForSelectedAccount?.participations?.[$selectedProposal?.id]
-    $: overviewLoaded = !!$participationOverviewForSelectedAccount
     $: trackedParticipations = Object.values(selectedProposalOverview ?? {})
     $: currentMilestone = $networkStatus.currentMilestone
 
@@ -82,7 +81,8 @@
         !isProposalVotable($selectedProposal?.status) ||
         !hasChangedAnswers(selectedAnswerValues) ||
         hasSelectedNoAnswers(selectedAnswerValues)
-    $: isTransferring = $hasPendingGovernanceTransaction?.[$selectedAccountIndex]
+    $: hasGovernanceTransactionInProgress =
+        $selectedAccount?.hasVotingPowerTransactionInProgress || $selectedAccount?.hasVotingTransactionInProgress
     $: $selectedParticipationEventStatus, (textHintString = getTextHintString())
 
     function hasSelectedNoAnswers(_selectedAnswerValues: number[]): boolean {
@@ -202,10 +202,9 @@
     }
 
     onMount(async () => {
+        // Callbacks used, because we don't want to await the resolution of the promises.
         pollParticipationEventStatus($selectedProposal?.id).then(() => (statusLoaded = true))
-        // TODO: this api call gets all overviews, we need to change it so that we just get one
-        // We then need to update the latest overview manually if we perform an action
-        void updateParticipationOverview($selectedAccountIndex)
+        updateParticipationOverviewForEventId($selectedProposal?.id).then(() => (overviewLoaded = true))
         await setVotingEventPayload($selectedProposal?.id)
         await updateIsVoting()
         hasMounted = true
@@ -284,13 +283,14 @@
                     outline
                     classes="w-full"
                     onClick={onStopVotingClick}
-                    disabled={!isVotingForProposal || isTransferring}
-                    isBusy={isVotingForProposal && isTransferring}>{localize('actions.stopVoting')}</Button
+                    disabled={!isVotingForProposal || hasGovernanceTransactionInProgress}
+                    isBusy={isVotingForProposal && hasGovernanceTransactionInProgress}
+                    >{localize('actions.stopVoting')}</Button
                 >
                 <Button
                     classes="w-full"
-                    disabled={isVotingDisabled || isTransferring}
-                    isBusy={isTransferring}
+                    disabled={isVotingDisabled || hasGovernanceTransactionInProgress}
+                    isBusy={hasGovernanceTransactionInProgress}
                     onClick={onVoteClick}
                 >
                     {localize('actions.vote')}
