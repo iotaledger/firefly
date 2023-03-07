@@ -3,6 +3,7 @@
     import { Transition } from 'shared/components'
     import { onMount } from 'svelte'
     import { Update } from './views'
+    import { Locale } from '@core/i18n'
 
     export let locale: Locale
 
