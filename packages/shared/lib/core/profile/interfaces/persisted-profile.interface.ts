@@ -18,5 +18,5 @@ export interface IPersistedProfile {
     lastUsedAccountIndex?: number
     clientOptions: IClientOptions
     forceAssetRefresh: boolean
-    strongholdVerion: number
+    strongholdVersion: number
 }

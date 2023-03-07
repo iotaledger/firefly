@@ -15,7 +15,7 @@ export function buildOnboardingProfile(
     return {
         id: generateRandomId(),
         isDeveloperProfile,
-        strongholdVerion: STRONGHOLD_VERSION,
+        strongholdVersion: STRONGHOLD_VERSION,
         ...(networkProtocol && { networkProtocol }),
     }
 }
