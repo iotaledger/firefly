@@ -8,9 +8,6 @@ import { IRouterEvent } from '../interfaces'
 import { appRouter } from '../routers'
 import features from '../../../../../desktop/features/features'
 
-const requiresUpdate =
-    get(activeProfile) && get(activeProfile).type === ProfileType.Software && !isStrongholdUpdated(get(activeProfile)) // how do we add the feature flag here
-
 export const loginRoute = writable<LoginRoute>(null)
 export const loginRouter = writable<LoginRouter>(null)
 
