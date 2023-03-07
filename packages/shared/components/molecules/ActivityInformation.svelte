@@ -23,15 +23,15 @@
     let hasMetadata = false
     $: {
         const storedNft =
-            activity.type === ActivityType.Nft
-                ? getNftByIdFromAllAccountNfts($selectedAccountIndex, activity.nftId)
+            activity?.type === ActivityType.Nft
+                ? getNftByIdFromAllAccountNfts($selectedAccountIndex, activity?.nftId)
                 : undefined
         hasMetadata = !!storedNft?.metadata
     }
 
     let tabs: Tab[] = []
     $: {
-        switch (activity.type) {
+        switch (activity?.type) {
             case ActivityType.Basic:
                 tabs = [Tab.Transaction, ...(activity?.parsedLayer2Metadata ? [Tab.SmartContract] : [])]
                 break
@@ -59,22 +59,22 @@
         <Tabs bind:activeTab {tabs} />
     {/if}
     {#if activeTab === Tab.Transaction}
-        {#if activity.type === ActivityType.Governance}
+        {#if activity?.type === ActivityType.Governance}
             <GovernanceActivityInformation {activity} />
-        {:else if activity.type === ActivityType.Consolidation}
+        {:else if activity?.type === ActivityType.Consolidation}
             <ConsolidationActivityInformation {activity} />
         {:else}
             <GenericActivityInformation {activity} {networkAddress} />
         {/if}
-    {:else if activeTab === Tab.Alias && activity.type === ActivityType.Alias}
+    {:else if activeTab === Tab.Alias && activity?.type === ActivityType.Alias}
         <AliasActivityInformation {activity} />
-    {:else if activeTab === Tab.Nft && activity.type === ActivityType.Nft}
+    {:else if activeTab === Tab.Nft && activity?.type === ActivityType.Nft}
         <NftActivityInformation {activity} />
     {:else if activeTab === Tab.Foundry}
         <FoundryActivityInformation {activity} />
     {:else if activeTab === Tab.Token}
         <TokenActivityInformation {activity} />
-    {:else if activeTab === Tab.NftMetadata && activity.type === ActivityType.Nft}
+    {:else if activeTab === Tab.NftMetadata && activity?.type === ActivityType.Nft}
         <NftMetadataInformation {activity} />
     {:else if activeTab === Tab.SmartContract}
         <SmartContractActivityInformation {activity} />
