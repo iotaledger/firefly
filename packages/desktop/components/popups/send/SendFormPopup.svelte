@@ -92,6 +92,7 @@
                 nftId,
                 tag,
                 metadata,
+                layer2Parameters,
                 disableAssetSelection,
             })
         }
