@@ -1,7 +1,5 @@
 import { NetworkProtocol } from '@core/network'
-import { STRONGHOLD_VERSION } from '@core/stronghold'
 import { generateRandomId } from '@core/utils'
-import features from '@features/features'
 
 import { IOnboardingProfile } from '../interfaces'
 
@@ -16,7 +14,6 @@ export function buildOnboardingProfile(
     return {
         id: generateRandomId(),
         isDeveloperProfile,
-        strongholdVersion: features.onboarding.strongholdVersionCheck.enabled ? STRONGHOLD_VERSION : undefined,
         ...(networkProtocol && { networkProtocol }),
     }
 }
