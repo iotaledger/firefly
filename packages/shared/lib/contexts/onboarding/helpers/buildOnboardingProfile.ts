@@ -1,4 +1,5 @@
 import { NetworkProtocol } from '@core/network'
+import { STRONGHOLD_VERSION } from '@core/stronghold'
 import { generateRandomId } from '@core/utils'
 
 import { IOnboardingProfile } from '../interfaces'
@@ -14,6 +15,7 @@ export function buildOnboardingProfile(
     return {
         id: generateRandomId(),
         isDeveloperProfile,
+        strongholdVerion: STRONGHOLD_VERSION,
         ...(networkProtocol && { networkProtocol }),
     }
 }
