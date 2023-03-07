@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Animation, Button, Icon, Text, TextHint } from '@ui'
+    import { Animation, Button, Icon, Text, TextHint, TextType } from '@ui'
     import { OnboardingLayout } from '@components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
@@ -49,10 +49,10 @@
             <div class="bg-green-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
                 <Icon icon="success-check" classes="text-white" />
             </div>
-            <Text type="h2" classes="mb-5 text-center">{localize('views.onboarding.congratulations.title')}</Text>
-            <Text type="p" secondary classes="mb-2 text-center">{localize('views.onboarding.congratulations.')}</Text>
+            <Text type={TextType.h2} classes="mb-5 text-center">{localize('views.updateBackup.title')}</Text>
+            <Text secondary classes="mb-2 text-center">{localize('views.updateBackup.body')}</Text>
         </div>
-        <TextHint warning text={localize('views.onboarding.congratulations.ledgerHint')} />
+        <TextHint warning text={localize('views.updateBackup.hint')} />
     </div>
     <div slot="leftpane__action">
         <Button
