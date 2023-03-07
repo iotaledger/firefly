@@ -36,10 +36,7 @@ async function getParticipationEventsAndCreateProposalsForAccount(
             await getAccountsParticipationEventStatusForEvent(event.id, account)
             proposals[event.id] = proposal
         } catch (err) {
-            proposals[event.id] = {
-                ...proposal,
-                ...createProposalFromError(proposal, err),
-            }
+            proposals[event.id] = createProposalFromError(proposal, err)
         }
     }
     return proposals
