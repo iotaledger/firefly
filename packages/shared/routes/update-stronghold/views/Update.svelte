@@ -42,6 +42,7 @@
     function handleContinueClick() {
         api.setStrongholdPassword(password, {
             onSuccess() {
+                // TODO: add logic to migrate stronghold
                 dispatch('next')
             },
             onError(err) {
