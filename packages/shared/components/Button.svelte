@@ -39,7 +39,7 @@
 
     onMount(() => {
         if (autofocus) {
-            buttonElement.focus()
+            buttonElement?.focus()
         }
     })
 </script>
