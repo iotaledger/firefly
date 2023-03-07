@@ -1,17 +1,20 @@
 <script lang="ts">
     import { onDestroy } from 'svelte'
-
     import { Icon, PinInput, Profile, Text, TextHint } from '@ui'
-
-    import { needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService, Platform } from '@core/app'
+    import {
+        needsToAcceptLatestPrivacyPolicy,
+        needsToAcceptLatestTermsOfService,
+        Platform,
+        isStrongholdUpdated,
+    } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { activeProfile, login, ProfileType, resetActiveProfile } from '@core/profile'
     import { loginRouter } from '@core/router'
     import { isValidPin } from '@core/utils'
-
     import { openPopup, PopupId, popupState } from '@auxiliary/popup'
     import { Icon as IconEnum } from '@auxiliary/icon'
+    import features from '@features/features'
 
     let attempts: number = 0
     let pinCode: string = ''
@@ -25,8 +28,6 @@
     /** Waiting time in seconds after which a user should be allowed to enter pin again */
     const WAITING_TIME_AFTER_MAX_INCORRECT_ATTEMPTS = 30
 
-    const isStrongholdUpdated = true
-
     let timeRemainingBeforeNextAttempt: number = WAITING_TIME_AFTER_MAX_INCORRECT_ATTEMPTS
     let buttonText: string = getButtonText(timeRemainingBeforeNextAttempt)
     let maxAttemptsTimer: ReturnType<typeof setTimeout> = null
@@ -39,6 +40,10 @@
             preventClose: true,
         })
     }
+    $: updateRequired =
+        $activeProfile?.type === ProfileType.Software &&
+        !isStrongholdUpdated($activeProfile) &&
+        features.onboarding.strongholdVersionCheck.enabled
     $: hasReachedMaxAttempts = attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS
     $: {
         if (isValidPin(pinCode)) {
@@ -115,15 +120,16 @@
 <enter-pin-view class="block w-full h-full bg-white dark:bg-gray-900">
     <div class="flex w-full h-full justify-center items-center">
         <div class="w-96 flex flex-col flex-wrap items-center mb-20">
-            <Profile
-                name={$activeProfile?.name}
-                networkType={$activeProfile?.networkType ?? NetworkType.Devnet}
-                networkProtocol={$activeProfile?.networkProtocol ?? NetworkProtocol.Shimmer}
-                isLedgerProfile={$activeProfile?.type === ProfileType.Ledger}
-                bgColor="blue"
-            />
-            <div class="flex flex-col gap-8 w-full items-center {isStrongholdUpdated ? 'mt-18' : 'mt-4'}">
-                {#if !isStrongholdUpdated}
+            <div class="flex flex-col gap-8 w-full items-center">
+                <Profile
+                    name={$activeProfile?.name}
+                    networkType={$activeProfile?.networkType ?? NetworkType.Devnet}
+                    networkProtocol={$activeProfile?.networkProtocol ?? NetworkProtocol.Shimmer}
+                    isLedgerProfile={$activeProfile?.type === ProfileType.Ledger}
+                    {updateRequired}
+                    bgColor="blue"
+                />
+                {#if updateRequired}
                     <TextHint warning text={localize('views.login.hintStronghold')} />
                 {/if}
                 <div class="flex w-full items-center">
