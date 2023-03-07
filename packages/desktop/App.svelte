@@ -48,11 +48,16 @@
 
     const { loggedIn, hasLoadedAccounts } = $activeProfile
 
+    $: if ($activeProfile && !$loggedIn) {
+        closePopup(true)
+    }
+
     async function handleCrashReporting(sendCrashReports: boolean): Promise<void> {
         await Platform.updateAppSettings({ sendCrashReports })
     }
 
     $: void handleCrashReporting($appSettings.sendCrashReports)
+
     $: $appSettings.darkMode
         ? document.body.classList.add('scheme-dark')
         : document.body.classList.remove('scheme-dark')

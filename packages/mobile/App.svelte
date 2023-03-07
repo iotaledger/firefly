@@ -29,10 +29,11 @@
         shouldBeDarkMode,
     } from '@core/app'
     import { localeDirection, setupI18n, _ } from '@core/i18n'
-    import { checkAndMigrateProfiles, cleanupEmptyProfiles } from '@core/profile'
+    import { checkAndMigrateProfiles, cleanupEmptyProfiles, activeProfile } from '@core/profile'
     import { initialiseRouterManager, RouterManagerExtensionName } from '@core/router'
 
     import { DashboardView, LoginRouter, OnboardingRouter } from '@views'
+    import { closeAllDrawers } from '@/auxiliary/drawer'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -44,6 +45,11 @@
 
     $: if (document.dir !== $localeDirection) {
         document.dir = $localeDirection
+    }
+
+    const loggedIn = $activeProfile?.loggedIn
+    $: if ($activeProfile && !$loggedIn) {
+        closeAllDrawers()
     }
 
     let splash = true
