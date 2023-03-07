@@ -18,6 +18,7 @@ export enum AppRoute {
     Congratulations = 'congratulations',
     Dashboard = 'dashboard',
     Login = 'login',
+    UpdateStronghold = 'updateStronghold',
 }
 
 export enum LedgerRoute {
@@ -165,4 +166,10 @@ export enum WalletRoute {
 export enum ProfileRoute {
     ProfileActions = 'profileActions',
     Settings = 'settings',
+}
+
+export enum UpdateStrongholdRoute {
+    Update = 'update',
+    ChangePassword = 'changePassword',
+    SaveBackup = 'saveBackup',
 }
