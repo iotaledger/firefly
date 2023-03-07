@@ -8,6 +8,7 @@
     import { localize } from '@core/i18n'
     import { backButtonStore } from '@core/router'
     import { isAwareOfCrashReporting } from '@lib/appSettings'
+    import { isStrongholdUpdated } from '@lib/stronghold'
 
     const dispatch = createEventDispatcher()
 
@@ -65,6 +66,7 @@
                     isLedgerProfile={profile?.type === ProfileType.Ledger ||
                         profile?.type === ProfileType.LedgerSimulator}
                     classes="cursor-pointer"
+                    strongholdUpdateRequired={profile?.type === ProfileType.Software && !isStrongholdUpdated(profile)}
                 />
             </div>
         {/each}

@@ -73,6 +73,7 @@ export { default as SidebarTab } from './SidebarTab.svelte'
 export { default as Chip } from './Chip.svelte'
 export { default as PingingBadge } from './PingingBadge.svelte'
 export { default as GovernanceInfoTooltip } from './GovernanceInfoTooltip.svelte'
+export { default as WarningBadge } from './WarningBadge.svelte'
 
 export * from './modals'
 // Charts
