@@ -2069,6 +2069,9 @@
         },
         "governance": {
             "removeProposalWarning": "You must stop voting for this proposal before removing it."
+        },
+        "updateStronghold": {
+            "profileBadge": "Your Stronghold is out of date. Log in to update Stronghold."
         }
     },
     "exports": {

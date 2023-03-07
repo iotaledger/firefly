@@ -107,12 +107,12 @@
     </leftpane-content>
     <leftpane-action slot="leftpane__action" class="block">
         {#if isVerified}
-            <Button classes="w-full" onClick={onContinueClick} disabled={busy}>
+            <Button classes="w-full" onClick={onContinueClick}>
                 {localize('actions.continue')}
             </Button>
         {/if}
     </leftpane-action>
     <rightpane-container slot="rightpane" class="w-full h-full flex flex-col items-center justify-center p-4">
-        <RecoveryPhrase recoveryPhrase={$onboardingProfile?.mnemonic} {verifyRecoveryPhrase} disabled={busy} />
+        <RecoveryPhrase recoveryPhrase={$onboardingProfile?.mnemonic} {verifyRecoveryPhrase} />
     </rightpane-container>
 </OnboardingLayout>

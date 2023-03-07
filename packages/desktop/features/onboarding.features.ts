@@ -250,6 +250,9 @@ const onboardingFeatures = {
             },
         },
     },
+    strongholdVersionCheck: {
+        enabled: false,
+    },
 }
 
 export default onboardingFeatures
