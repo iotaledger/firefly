@@ -5,6 +5,8 @@ import { LoginRoute } from '../enums'
 import { IRouterEvent } from '../interfaces'
 import { appRouter } from '../routers'
 
+const isStrongholdUpdated = false
+
 export const loginRoute = writable<LoginRoute>(null)
 export const loginRouter = writable<LoginRouter>(null)
 
@@ -28,6 +30,13 @@ export class LoginRouter extends Subrouter<LoginRoute> {
                 break
             }
             case LoginRoute.EnterPin:
+                if (!isStrongholdUpdated) {
+                    nextRoute = LoginRoute.UpdateStronghold
+                } else {
+                    nextRoute = LoginRoute.LoadProfile
+                }
+                break
+            case LoginRoute.UpdateStronghold:
                 nextRoute = LoginRoute.LoadProfile
                 break
             case LoginRoute.LoadProfile:

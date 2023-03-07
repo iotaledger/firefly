@@ -16,6 +16,7 @@ import {
     shimmerClaimingRouter,
     storageProtectionSetupRouter,
     strongholdSetupRouter,
+    updateStrongholdRouter,
 } from '@core/router'
 
 export function resetRouters(): void {
@@ -34,6 +35,7 @@ function resetSubrouters(): void {
     get(profileSetupRouter).reset()
     get(storageProtectionSetupRouter).reset()
     get(shimmerClaimingRouter).reset()
+    get(updateStrongholdRouter).reset()
 }
 
 function resetBaseRouters(): void {
