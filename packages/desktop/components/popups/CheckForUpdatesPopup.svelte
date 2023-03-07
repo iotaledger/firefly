@@ -8,16 +8,21 @@
         checkForAppUpdate,
         downloadAppUpdate,
         appVersionDetails,
+        platform,
         appStage,
     } from '@core/app'
     import { formatDate, localize } from '@core/i18n'
     import { closePopup } from '@auxiliary/popup'
+    import features from '@features/features'
 
-    function handleDownload(): void {
+    let hasAutoUpdate = false
+
+    function onDownloadClick(): void {
         downloadAppUpdate()
         closePopup()
     }
-    function handleCloseClick(): void {
+
+    function onCloseClick(): void {
         closePopup()
     }
 
@@ -26,6 +31,7 @@
             await setAppVersionDetails()
             checkForAppUpdate()
         }
+        hasAutoUpdate = features.electron.autoUpdate[$platform]?.enabled
     })
 </script>
 
@@ -40,7 +46,7 @@
             keyText={localize('popups.appUpdate.stage')}
             valueText={localize(`popups.appUpdate.${get(appStage)}`)}
         />
-        {#if $appVersionDetails.upToDate}
+        {#if $appVersionDetails.upToDate || !hasAutoUpdate}
             <TextHint success classes="w-full" text={localize('popups.appUpdate.latestInstalled')} />
         {:else}
             <KeyValueBox keyText={localize('popups.appUpdate.newVerion')} valueText={$appVersionDetails.newVersion} />
@@ -56,11 +62,11 @@
     </div>
 
     <div class="flex flex-row justify-center w-full space-x-4">
-        {#if $appVersionDetails.upToDate}
-            <Button classes="w-full" outline onClick={handleCloseClick}>{localize('actions.close')}</Button>
+        {#if $appVersionDetails.upToDate || !hasAutoUpdate}
+            <Button classes="w-full" outline onClick={onCloseClick}>{localize('actions.close')}</Button>
         {:else}
-            <Button outline classes="w-1/2" onClick={handleCloseClick}>{localize('actions.cancel')}</Button>
-            <Button classes="w-1/2" onClick={handleDownload} disabled={$appUpdateBusy}>
+            <Button outline classes="w-1/2" onClick={onCloseClick}>{localize('actions.cancel')}</Button>
+            <Button classes="w-1/2" onClick={onDownloadClick} disabled={$appUpdateBusy}>
                 {localize('actions.updateFirefly')}
             </Button>
         {/if}
