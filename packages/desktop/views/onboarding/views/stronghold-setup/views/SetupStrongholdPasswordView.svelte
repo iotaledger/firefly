@@ -14,8 +14,7 @@
         updateOnboardingProfile,
     } from '@contexts/onboarding'
     import { showAppNotification } from '@auxiliary/notification'
-    import { PASSWORD_REASON_MAP, STRONGHOLD_VERSION } from '@core/stronghold'
-    import features from '@features/features'
+    import { PASSWORD_REASON_MAP } from '@core/stronghold'
 
     let strongholdPassword = ''
     let confirmedStrongholdPassword = ''
@@ -68,12 +67,7 @@
                     }
                 }
 
-                updateOnboardingProfile({
-                    strongholdPassword,
-                    strongholdVersion: features.onboarding.strongholdVersionCheck.enabled
-                        ? STRONGHOLD_VERSION
-                        : undefined,
-                })
+                updateOnboardingProfile({ strongholdPassword })
                 $onboardingRouter.next()
             } catch (err) {
                 console.error(err)
