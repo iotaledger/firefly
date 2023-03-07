@@ -192,6 +192,10 @@
     }
 
     function getTextHintString(): string {
+        if (!$selectedProposal) {
+            return ''
+        }
+
         const millis =
             milestoneToDate(
                 $networkStatus.currentMilestone,
