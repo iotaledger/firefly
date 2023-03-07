@@ -615,6 +615,12 @@
                 "fetching": "Fetching proposal data",
                 "hintVote": "You can not vote on a proposal that is in the announcement phase, voting will open in {time}."
             }
+        },
+        "updateStronghold": {
+            "update": {
+                "title": "Update Stronghold",
+                "body": "Your Stronghold's version is out of date. Provide your password to update Stronghold."
+            }
         }
     },
     "popups": {
