@@ -6,6 +6,7 @@ import { Subrouter } from '../classes'
 import { LoginRoute } from '../enums'
 import { IRouterEvent } from '../interfaces'
 import { appRouter } from '../routers'
+import features from '../../../../../desktop/features/features'
 
 const requiresUpdate =
     get(activeProfile) && get(activeProfile).type === ProfileType.Software && !isStrongholdUpdated(get(activeProfile)) // how do we add the feature flag here
@@ -21,6 +22,12 @@ export class LoginRouter extends Subrouter<LoginRoute> {
     next(event?: IRouterEvent): void {
         let nextRoute: LoginRoute
         const currentRoute = get(this.routeStore)
+
+        const requiresUpdate =
+            get(activeProfile) &&
+            get(activeProfile).type === ProfileType.Software &&
+            !isStrongholdUpdated(get(activeProfile)) &&
+            features.onboarding.strongholdVersionCheck.enabled
 
         switch (currentRoute) {
             case LoginRoute.SelectProfile: {
