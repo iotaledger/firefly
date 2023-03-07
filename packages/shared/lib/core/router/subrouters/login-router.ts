@@ -6,9 +6,13 @@ import { Subrouter } from '../classes'
 import { LoginRoute } from '../enums'
 import { IRouterEvent } from '../interfaces'
 import { appRouter } from '../routers'
+import features from '../../../../../desktop/features/features'
 
 const requiresUpdate =
-    get(activeProfile) && get(activeProfile).type === ProfileType.Software && !isStrongholdUpdated(get(activeProfile)) // how do we add the feature flag here
+    get(activeProfile) &&
+    get(activeProfile).type === ProfileType.Software &&
+    !isStrongholdUpdated(get(activeProfile)) &&
+    features.onboarding.strongholdVersionCheck.enabled
 
 export const loginRoute = writable<LoginRoute>(null)
 export const loginRouter = writable<LoginRouter>(null)
