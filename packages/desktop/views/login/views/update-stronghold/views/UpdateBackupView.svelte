@@ -1,14 +1,14 @@
 <script lang="ts">
-    import { Animation, Button, PasswordInput, Text, TextType, HTMLButtonType } from '@ui'
+    import { Animation, Button, Icon, Text, TextHint } from '@ui'
     import { OnboardingLayout } from '@components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { profileBackupRouter } from '@core/router'
+    import { updateStrongholdRouter } from '@core/router'
     import { backupInitialStronghold, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
 
     export let busy = false
 
-    let confirmPassword = ''
+    const confirmPassword = ''
     const skipBackup = false
 
     $: isStrongholdPasswordValid = $onboardingProfile?.strongholdPassword === confirmPassword
@@ -16,7 +16,7 @@
     function onAdvanceView(): void {
         updateOnboardingProfile({ mnemonic: null, strongholdPassword: null, importFile: null, importFilePath: null })
 
-        $profileBackupRouter.next()
+        $updateStrongholdRouter.next()
     }
 
     function onSkipBackupClick(): void {
@@ -36,36 +36,23 @@
 
     function onBackClick(): void {
         if ($onboardingProfile?.recoveryType) {
-            $profileBackupRouter.previous()
+            $updateStrongholdRouter.previous()
         } else {
-            $profileBackupRouter.reset()
+            $updateStrongholdRouter.reset()
         }
     }
 </script>
 
 <OnboardingLayout {onBackClick} {busy}>
-    <div slot="title">
-        <Text type={TextType.h2}>{localize('views.onboarding.profileBackup.backupStronghold.title')}</Text>
-    </div>
     <div slot="leftpane__content">
-        <form on:submit|preventDefault={onBackupClick} id="backup-form">
-            <Text type={TextType.p} secondary classes="mb-8"
-                >{localize('views.onboarding.profileBackup.backupStronghold.body1')}</Text
-            >
-            <PasswordInput bind:value={confirmPassword} autofocus disabled={busy} showRevealToggle classes="mb-8" />
-            <Text type={TextType.p} secondary classes="mb-4"
-                >{localize('views.onboarding.profileBackup.backupStronghold.body2')}</Text
-            >
-            <Text type={TextType.p} secondary smaller classes="mb-2"
-                >- {localize('views.onboarding.profileBackup.backupStronghold.reason1')}</Text
-            >
-            <Text type={TextType.p} secondary smaller classes="mb-2"
-                >- {localize('views.onboarding.profileBackup.backupStronghold.reason2')}</Text
-            >
-            <Text type={TextType.p} secondary smaller classes="mb-2"
-                >- {localize('views.onboarding.profileBackup.backupStronghold.reason3')}</Text
-            >
-        </form>
+        <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 mb-10 p-10 pb-6">
+            <div class="bg-green-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
+                <Icon icon="success-check" classes="text-white" />
+            </div>
+            <Text type="h2" classes="mb-5 text-center">{localize('views.onboarding.congratulations.title')}</Text>
+            <Text type="p" secondary classes="mb-2 text-center">{localize('views.onboarding.congratulations.')}</Text>
+        </div>
+        <TextHint warning text={localize('views.onboarding.congratulations.ledgerHint')} />
     </div>
     <div slot="leftpane__action">
         <Button
@@ -79,11 +66,11 @@
             {localize('actions.skipBackup')}
         </Button>
         <Button
-            type={HTMLButtonType.Submit}
             form="backup-form"
             classes="w-full"
             disabled={!isStrongholdPasswordValid || busy}
             isBusy={!skipBackup && busy}
+            onClick={onBackupClick}
             busyMessage={localize('general.creatingProfile')}
         >
             {localize('actions.saveBackup')}

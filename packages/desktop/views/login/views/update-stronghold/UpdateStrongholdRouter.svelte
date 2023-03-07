@@ -1,9 +1,12 @@
 <script lang="ts">
-    import { UpdateStrongholdView } from './views'
+    import { UpdateStrongholdView, UpdateBackupView } from './views'
     import { UpdateStrongholdRoute } from '@core/router/enums/login'
     import { updateStrongholdRoute } from '@core/router/subrouters/login'
 </script>
 
 {#if $updateStrongholdRoute === UpdateStrongholdRoute.Update}
     <UpdateStrongholdView />
+{/if}
+{#if $updateStrongholdRoute === UpdateStrongholdRoute.SaveBackup}
+    <UpdateBackupView />
 {/if}
