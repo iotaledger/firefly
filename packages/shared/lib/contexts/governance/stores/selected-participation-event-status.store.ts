@@ -1,6 +1,9 @@
-import { getAccountsParticipationEventStatusForEvent } from '@contexts/governance/actions'
 import { ParticipationEventStatus } from '@iota/wallet'
-import { writable } from 'svelte/store'
+import { get, writable } from 'svelte/store'
+import { selectedAccountIndex } from '@core/account/stores'
+import { getAccountsParticipationEventStatusForEvent } from '../actions'
+import { createProposalFromError } from '../utils'
+import { addOrUpdateProposalToRegisteredProposals, registeredProposals } from './registered-proposals.store'
 
 export const selectedParticipationEventStatus = writable<ParticipationEventStatus>(null)
 
@@ -8,8 +11,11 @@ export async function getAndSetSelectedParticipationEventStatus(eventId: string)
     let eventStatus: ParticipationEventStatus
     try {
         eventStatus = await getAccountsParticipationEventStatusForEvent(eventId)
-    } catch (error) {
-        eventStatus = undefined
+    } catch (err) {
+        const accountIndex = get(selectedAccountIndex)
+        const proposal = get(registeredProposals)[accountIndex][eventId]
+        const errorProposal = createProposalFromError(proposal, err)
+        addOrUpdateProposalToRegisteredProposals(errorProposal, accountIndex)
     }
     selectedParticipationEventStatus.set(eventStatus)
 }
