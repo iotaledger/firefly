@@ -1,3 +1,5 @@
+import { isStrongholdUpdated } from '@core/app'
+import { activeProfile, ProfileType } from '@core/profile'
 import { get, writable } from 'svelte/store'
 
 import { Subrouter } from '../classes'
@@ -5,7 +7,7 @@ import { LoginRoute } from '../enums'
 import { IRouterEvent } from '../interfaces'
 import { appRouter } from '../routers'
 
-const isStrongholdUpdated = false
+const requiresUpdate = get(activeProfile).type === ProfileType.Software && !isStrongholdUpdated(get(activeProfile)) // how do we add the feature flag here
 
 export const loginRoute = writable<LoginRoute>(null)
 export const loginRouter = writable<LoginRouter>(null)
@@ -30,7 +32,7 @@ export class LoginRouter extends Subrouter<LoginRoute> {
                 break
             }
             case LoginRoute.EnterPin:
-                if (!isStrongholdUpdated) {
+                if (requiresUpdate) {
                     nextRoute = LoginRoute.UpdateStronghold
                 } else {
                     nextRoute = LoginRoute.LoadProfile
