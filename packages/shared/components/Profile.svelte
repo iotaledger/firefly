@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { DeveloperIndicatorPill, Icon, NetworkIconBadge, Text } from 'shared/components'
+    import { DeveloperIndicatorPill, Icon, NetworkIconBadge, StrongholdBadge, Text } from 'shared/components'
     import { getInitials as _getInitials } from '@core/utils'
     import { NetworkProtocol, NetworkType } from '@core/network'
 
@@ -14,6 +14,8 @@
     export let bgColor: string = ''
 
     export let onClick: undefined | ((id: string) => void) = undefined
+
+    const isStrongholdUpdated = false
 
     function handleOnClick(): void {
         onClick && onClick(id)
@@ -46,7 +48,11 @@
                     <Text type="h3" classes="text-white">{getInitials()}</Text>
                 {/if}
             </div>
-            <NetworkIconBadge {networkType} {networkProtocol} />
+            {#if !isStrongholdUpdated}
+                <NetworkIconBadge {networkType} {networkProtocol} />
+            {:else}
+                <StrongholdBadge />
+            {/if}
         </div>
         <div class="flex flex-row items-baseline justify-center space-x-1.5 mb-2 w-full">
             {#if isLedgerProfile}
