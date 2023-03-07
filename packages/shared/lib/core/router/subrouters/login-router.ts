@@ -7,7 +7,8 @@ import { LoginRoute } from '../enums'
 import { IRouterEvent } from '../interfaces'
 import { appRouter } from '../routers'
 
-const requiresUpdate = get(activeProfile).type === ProfileType.Software && !isStrongholdUpdated(get(activeProfile)) // how do we add the feature flag here
+const requiresUpdate =
+    get(activeProfile) && get(activeProfile).type === ProfileType.Software && !isStrongholdUpdated(get(activeProfile)) // how do we add the feature flag here
 
 export const loginRoute = writable<LoginRoute>(null)
 export const loginRouter = writable<LoginRouter>(null)
