@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Locale } from '@core/i18n'
+    import { Locale, localize } from '@core/i18n'
     import {
         getKeyboardTransitionSpeed,
         isKeyboardOpened,
@@ -9,7 +9,7 @@
         needsToAcceptLatestTos,
     } from '@lib/app'
     import { isStrongholdUpdated } from '@lib/stronghold'
-    import { Icon, Pin, Profile, Text } from 'shared/components'
+    import { Icon, Pin, Profile, Text, TextHint } from 'shared/components'
     import { initAppSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -68,6 +68,7 @@
             pinRef.focus()
         }
     }
+    $: strongholdUpdateRequired = $isSoftwareProfile && !isStrongholdUpdated($activeProfile)
 
     let buttonText = setButtonText(timeRemainingBeforeNextAttempt)
 
@@ -184,11 +185,15 @@
                 : 0}px; ; transition: padding {getKeyboardTransitionSpeed($isKeyboardOpened) +
                 'ms'} var(--transition-scroll)"
         >
-            <Profile
-                name={$activeProfile?.name}
-                bgColor="blue"
-                strongholdUpdateRequired={$isSoftwareProfile && !isStrongholdUpdated($activeProfile)}
-            />
+            <Profile name={$activeProfile?.name} bgColor="blue" {strongholdUpdateRequired} />
+            {#if strongholdUpdateRequired}
+                <TextHint
+                    hint={localize('views.login.updateStrongholdWarning')}
+                    icon="exclamation"
+                    classes="mt-8 p-4 w-full rounded-2xl bg-yellow-50 dark:bg-opacity-10"
+                    iconClasses="text-yellow-700"
+                />
+            {/if}
             <Pin
                 bind:this={pinRef}
                 bind:value={pinCode}

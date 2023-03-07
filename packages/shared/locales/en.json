@@ -460,7 +460,8 @@
         },
         "login": {
             "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
-            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}",
+            "updateStrongholdWarning": "Your Stronghold is out of date. Log in to update Stronghold."
         },
         "dashboard": {
             "network": {
