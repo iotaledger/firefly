@@ -2,10 +2,13 @@
     import { Icon, Pill } from 'shared/components'
     import { Icon as _Icon } from '@auxiliary/icon'
     import { localize } from '@core/i18n'
-    import { ProposalError, ProposalStatus } from '@contexts/governance/enums'
+    import { ProposalStatus } from '@contexts/governance/enums'
+    import { IProposal } from '@contexts/governance/interfaces'
 
-    export let status: string
-    export let error: ProposalError
+    export let proposal: IProposal
+
+    $: status = proposal?.status
+    $: error = proposal?.error
 
     const STATUS_COLORS: Record<ProposalStatus, string> = {
         [ProposalStatus.Upcoming]: 'purple-200',

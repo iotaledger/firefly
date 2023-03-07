@@ -21,7 +21,7 @@
 </script>
 
 <div bind:this={anchor} on:mouseenter={() => showTooltip(true)} on:mouseleave={() => showTooltip(false)}>
-    <ProposalStatusPill status={proposal?.status} error={proposal?.error} />
+    <ProposalStatusPill {proposal} />
 </div>
 {#if isTooltipVisible}
     {#if proposal?.error}
