@@ -1,5 +1,7 @@
 <script lang="ts">
     import { ChangePasswordView, UpdateStrongholdView } from './views'
+    import { Transition } from '@ui'
+
     import { UpdateStrongholdRoute } from '@core/router/enums/login'
     import { updateStrongholdRoute } from '@core/router/subrouters/login'
 
@@ -7,7 +9,11 @@
 </script>
 
 {#if $updateStrongholdRoute === UpdateStrongholdRoute.Update}
-    <UpdateStrongholdView bind:password />
+    <Transition>
+        <UpdateStrongholdView bind:password />
+    </Transition>
 {:else if $updateStrongholdRoute === UpdateStrongholdRoute.ChangePassword}
-    <ChangePasswordView actualPassword={password} />
+    <Transition>
+        <ChangePasswordView actualPassword={password} />
+    </Transition>
 {/if}
