@@ -247,9 +247,8 @@ function createWindow() {
 
         windows.main.loadURL('http://localhost:8080')
     } else {
-        if (process.env.STAGE === 'prod') {
-            initAutoUpdate()
-        }
+        initAutoUpdate()
+
         // load the index.html of the app.
         windows.main.loadFile(paths.html)
     }
@@ -733,10 +732,6 @@ function getJsonConfig(filename) {
 
 export const updateAppVersionDetails = (details) => {
     versionDetails = Object.assign({}, versionDetails, details)
-    if (process.env.STAGE !== 'prod') {
-        // Always true to avoid triggering auto-updater
-        versionDetails.upToDate = true
-    }
 
     getOrInitWindow('main').webContents.send('version-details', versionDetails)
 }

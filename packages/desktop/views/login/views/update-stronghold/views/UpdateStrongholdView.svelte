@@ -7,7 +7,8 @@
     import { unlockStronghold } from '@core/profile'
     import { loginRouter, updateStrongholdRouter } from '@core/router'
 
-    let password: string = ''
+    export let password: string = ''
+
     let passwordError: string = ''
 
     async function onSubmit(): Promise<void> {
@@ -18,7 +19,6 @@
             passwordError = localize(err.message) ?? err.message
             return
         }
-        return
     }
 
     function onBackClick(): void {

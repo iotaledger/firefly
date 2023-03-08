@@ -621,6 +621,9 @@
             "update": {
                 "title": "Update Stronghold",
                 "body": "Your Stronghold's version is out of date. Provide your password to update Stronghold."
+            },
+            "changePassword": {
+                "hint": "We recommend to update your password"
             }
         }
     },
@@ -705,14 +708,18 @@
         "qr": {
             "title": "Your QR code"
         },
-        "version": {
-            "title": "Current version: {version}",
-            "upToDateTitle": "Firefly is up to date",
-            "upToDateDescription": "You are running the latest and safest version of Firefly.",
-            "updateAvailable": "Firefly update available",
-            "updateDetails": "Version {version} - {date}",
-            "noAutoUpdate": "Auto-update is disabled in this Windows version, please go to https://firefly.iota.org to download the update.",
-            "preReleaseDescription": "You are running a pre-release version of Firefly. Updates are disabled."
+        "appUpdate": {
+            "title": "Check for updates",
+            "installedVersion": "Installed version",
+            "newVerion": "New version",
+            "stage": "Stage",
+            "prod": "Production",
+            "alpha": "Alpha",
+            "beta": "Beta",
+            "releasedAt": "Released at",
+            "updateAvailable": "Update is available",
+            "updatesDisabled": "There are updates available, but in-app upgrade is disabled for your operating system.",
+            "latestInstalled": "You are running the latest and safest version"
         },
         "backupStronghold": {
             "title": "Backup your stronghold file",
@@ -1242,6 +1249,7 @@
         "finishSetup": "Finish setup",
         "readDocumentation": "Read the documentation",
         "visitFaq": "Visit FAQ",
+        "viewDownloads" : "View downloads",
         "viewStatus": "View status",
         "viewBalanceBreakdown": "View balance breakdown",
         "showHiddenAccounts": "Show hidden wallets",
@@ -1297,7 +1305,8 @@
         "removeProposal": "Remove proposal",
         "changeNode": "Change node",
         "stopVoting": "Stop voting",
-        "revote": "Revote"
+        "revote": "Revote",
+        "skipAndKeep": "Skip and keep old password"
     },
     "general": {
         "recipient": "Recipient",
@@ -1791,7 +1800,8 @@
             "similar": "This is similar to a common password.",
             "word": "A single word is easy to guess.",
             "incorrect": "Your password is incorrect.",
-            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}.",
+            "sameAsOld": "Your new password must be different from your old password."
         },
         "pincode": {
             "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
