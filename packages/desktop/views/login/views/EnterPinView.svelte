@@ -95,7 +95,7 @@
             isBusy = true
             const isVerified = await Platform.PincodeManager.verify($activeProfile?.id, pinCode)
             if (isVerified) {
-                void login()
+                void login({ avoidNextRoute: updateRequired })
                 $loginRouter.next()
             } else {
                 shake = true
