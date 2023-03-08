@@ -18,7 +18,7 @@ export function getStorageDepositFromOutput(
         return { storageDeposit: Number(storageDepositReturnUnlockCondition.amount), giftedStorageDeposit: 0 }
     } else if (output.type === OUTPUT_TYPE_NFT || (output?.nativeTokens?.length > 0 && Number(output?.amount) > 0)) {
         return { storageDeposit: 0, giftedStorageDeposit: Number(output?.amount) }
-    } else if (rawAmount && Number(rawAmount) > 0) {
+    } else if (rawAmount && Number(rawAmount) > 0 && Number(output?.amount) > Number(rawAmount)) {
         return { storageDeposit: 0, giftedStorageDeposit: Number(output?.amount) - Number(rawAmount) }
     } else {
         return { storageDeposit: 0, giftedStorageDeposit: 0 }
