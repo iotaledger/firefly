@@ -3,7 +3,7 @@
 
     import { OnboardingLayout } from '@components'
     import { Animation, Button, PasswordInput, Text, TextHint } from '@ui'
-    import { ButtonSize, HTMLButtonType, TextType } from '@ui/enums'
+    import { HTMLButtonType, TextType } from '@ui/enums'
 
     import { localize } from '@core/i18n'
     import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'
@@ -13,99 +13,60 @@
 
     export let actualPassword: string
 
-    let startOfPasswordChange: number
-
     let password: string = ''
     let passwordError: string = ''
     let confirmPassword: string = ''
     let confirmPasswordError: string = ''
-
     let busy: boolean = false
-    let submitButtonText: string = ''
 
     $: passwordStrength = zxcvbn(password)
+    $: isPasswordValid = passwordError === '' && confirmPasswordError === ''
 
-    async function onSubmit(): Promise<void> {
-        if (isPasswordValid()) {
-            busy = true
-            submitButtonText = localize('general.passwordUpdating')
-            startOfPasswordChange = Date.now()
-
-            try {
-                await changePasswordAndUnlockStronghold(actualPassword, password)
-                resetPasswordsOnSuccess()
-            } catch (err) {
-                console.error(err)
-                passwordError = localize('error.password.incorrect')
-                hideBusy(passwordError, 0)
-            }
-        }
-    }
-
-    function isPasswordValid(): boolean {
+    function validatePassword(): void {
         if (password && confirmPassword) {
-            resetErrors()
-
+            busy = false
             if (password.length > MAX_STRONGHOLD_PASSWORD_LENGTH) {
                 passwordError = localize('error.password.length', {
                     values: {
                         length: MAX_STRONGHOLD_PASSWORD_LENGTH,
                     },
                 })
-                return false
             } else if (password !== confirmPassword) {
                 passwordError = localize('error.password.doNotMatch')
-                return false
             } else if (passwordStrength.score !== 4) {
                 let errorLocale = 'error.password.tooWeak'
                 if (passwordStrength.feedback.warning && PASSWORD_REASON_MAP[passwordStrength.feedback.warning]) {
                     errorLocale = `error.password.${PASSWORD_REASON_MAP[passwordStrength.feedback.warning]}`
                 }
                 passwordError = localize(errorLocale)
-                return false
+            } else if (password === actualPassword) {
+                passwordError = localize('error.password.sameAsOld')
             }
-
-            return true
-        }
-        return false
-    }
-
-    function resetErrors(): void {
-        passwordError = ''
-        confirmPasswordError = ''
-        busy = false
-        submitButtonText = ''
-    }
-
-    function resetPasswordsOnSuccess(): void {
-        password = ''
-        confirmPassword = ''
-        hideBusy('general.passwordSuccess', 2000)
-    }
-
-    function hideBusy(messageLocale: string, timeout: number): void {
-        const diff = Date.now() - startOfPasswordChange
-        if (diff < timeout) {
-            setTimeout(() => {
-                showPasswordMessage(messageLocale)
-            }, timeout - diff)
-        } else {
-            showPasswordMessage(messageLocale)
         }
     }
 
-    function showPasswordMessage(message: string): void {
-        busy = false
-        submitButtonText = message
-        setTimeout(() => (submitButtonText = ''), 2000)
+    async function onSubmit(): Promise<void> {
+        validatePassword()
+        if (isPasswordValid) {
+            try {
+                busy = true
+                await changePasswordAndUnlockStronghold(actualPassword, password)
+                $updateStrongholdRouter.next()
+                busy = false
+            } catch (err) {
+                busy = false
+                console.error(err)
+                passwordError = localize('error.password.incorrect')
+            }
+        }
     }
 
-    function onBackClick(): void {
-        $updateStrongholdRouter.previous()
+    function onSkipClick(): void {
+        $updateStrongholdRouter.next()
     }
 </script>
 
-<OnboardingLayout {onBackClick}>
+<OnboardingLayout allowBack={false}>
     <div slot="title">
         <Text type={TextType.h2}>
             {localize('views.settings.changePassword.title')}
@@ -116,38 +77,39 @@
         <form on:submit|preventDefault={onSubmit} id="update-stronghold-form" class="mt-12">
             <PasswordInput
                 bind:error={passwordError}
-                classes="mb-5"
                 bind:value={password}
+                classes="mb-5"
                 showRevealToggle
                 strengthLevels={4}
                 showStrengthLevel
                 strength={passwordStrength.score}
                 placeholder={localize('general.password')}
                 disabled={busy}
-                submitHandler={isPasswordValid}
+                submitHandler={validatePassword}
             />
             <PasswordInput
                 bind:error={confirmPasswordError}
-                classes="mb-4"
                 bind:value={confirmPassword}
+                classes="mb-4"
                 showRevealToggle
                 placeholder={localize('general.confirmPassword')}
                 disabled={busy}
-                submitHandler={isPasswordValid}
+                submitHandler={validatePassword}
             />
         </form>
     </div>
-    <div slot="leftpane__action">
-        <Button outline type={HTMLButtonType.Button} form="update-stronghold-form" classes="w-full">
+    <div slot="leftpane__action" class="flex flex-col gap-4">
+        <Button type={HTMLButtonType.Button} outline classes="w-full" onClick={onSkipClick}>
             {localize('actions.skip')}
         </Button>
         <Button
-            size={ButtonSize.Medium}
+            form="update-stronghold-form"
             disabled={!password || !confirmPassword || busy}
             isBusy={busy}
             type={HTMLButtonType.Submit}
+            classes="w-full"
         >
-            {submitButtonText}
+            {localize('views.settings.changePassword.title')}
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
