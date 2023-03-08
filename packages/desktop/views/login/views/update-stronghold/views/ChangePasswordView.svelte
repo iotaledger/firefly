@@ -21,14 +21,14 @@
     let confirmPasswordError: string = ''
 
     let busy: boolean = false
-    let changeMessageLocale: string = ''
+    let submitButtonText: string = ''
 
     $: passwordStrength = zxcvbn(password)
 
     async function onSubmit(): Promise<void> {
         if (isPasswordValid()) {
             busy = true
-            changeMessageLocale = 'general.passwordUpdating'
+            submitButtonText = localize('general.passwordUpdating')
             startOfPasswordChange = Date.now()
 
             try {
@@ -36,7 +36,7 @@
                 resetPasswordsOnSuccess()
             } catch (err) {
                 console.error(err)
-                passwordError = 'error.password.incorrect'
+                passwordError = localize('error.password.incorrect')
                 hideBusy(passwordError, 0)
             }
         }
@@ -74,7 +74,7 @@
         passwordError = ''
         confirmPasswordError = ''
         busy = false
-        changeMessageLocale = ''
+        submitButtonText = ''
     }
 
     function resetPasswordsOnSuccess(): void {
@@ -96,8 +96,8 @@
 
     function showPasswordMessage(message: string): void {
         busy = false
-        changeMessageLocale = message
-        setTimeout(() => (changeMessageLocale = ''), 2000)
+        submitButtonText = message
+        setTimeout(() => (submitButtonText = ''), 2000)
     }
 
     function onBackClick(): void {
@@ -147,7 +147,7 @@
             isBusy={busy}
             type={HTMLButtonType.Submit}
         >
-            {changeMessageLocale}
+            {submitButtonText}
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
