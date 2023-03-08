@@ -40,6 +40,13 @@
     </Transition>
 {:else if $updateStrongholdRoute === UpdateStrongholdRoute.Success}
     <Transition>
-        <Success allowBack={!passwordUpdated} {currentPassword} on:next={next} on:previous={previous} {locale} />
+        <Success
+            allowBack={!passwordUpdated}
+            enforceBackup={passwordUpdated}
+            {currentPassword}
+            on:next={next}
+            on:previous={previous}
+            {locale}
+        />
     </Transition>
 {/if}

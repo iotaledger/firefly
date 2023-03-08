@@ -13,6 +13,7 @@
     export let locale: Locale
     export let currentPassword: string = ''
     export let allowBack: boolean = false
+    export let enforceBackup: boolean = false
 
     let busy: boolean = false
 
@@ -91,9 +92,11 @@
         />
     </div>
     <div slot="leftpane__action">
-        <Button secondary classes="w-full mb-4" onClick={handleSkipClick}>
-            {locale('actions.skipBackup')}
-        </Button>
+        {#if !enforceBackup}
+            <Button secondary classes="w-full mb-4" onClick={handleSkipClick}>
+                {locale('actions.skipBackup')}
+            </Button>
+        {/if}
         <Button classes="w-full" onClick={handleContinueClick}>
             {locale('actions.saveBackup')}
         </Button>
