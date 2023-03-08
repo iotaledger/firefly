@@ -20,9 +20,9 @@ export class UpdateStrongholdRouter extends Subrouter<UpdateStrongholdRoute> {
                 nextRoute = UpdateStrongholdRoute.ChangePassword
                 break
             case UpdateStrongholdRoute.ChangePassword:
-                nextRoute = UpdateStrongholdRoute.SaveBackup
+                nextRoute = UpdateStrongholdRoute.Success
                 break
-            case UpdateStrongholdRoute.SaveBackup:
+            case UpdateStrongholdRoute.Success:
                 get(appRouter).next()
                 return
         }

@@ -65,7 +65,7 @@
                 busy = true
                 api.changeStrongholdPassword(currentPassword, newPassword, {
                     onSuccess() {
-                        dispatch('next')
+                        dispatch('next', { password: newPassword })
                     },
                     onError(err) {
                         newPasswordError = localize(err.error)

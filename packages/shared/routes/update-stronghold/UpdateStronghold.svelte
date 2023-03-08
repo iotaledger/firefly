@@ -3,7 +3,7 @@
     import { allowBackButton, updateStrongholdRoute, UpdateStrongholdRoute, UpdateStrongholdRouter } from '@core/router'
     import { Transition } from 'shared/components'
     import { onMount } from 'svelte'
-    import { ChangePassword, Update } from './views'
+    import { ChangePassword, Success, Update } from './views'
 
     export let locale: Locale
 
@@ -32,5 +32,9 @@
 {:else if $updateStrongholdRoute === UpdateStrongholdRoute.ChangePassword}
     <Transition>
         <ChangePassword {currentPassword} on:next={next} {locale} />
+    </Transition>
+{:else if $updateStrongholdRoute === UpdateStrongholdRoute.Success}
+    <Transition>
+        <Success {currentPassword} on:next={next} {locale} />
     </Transition>
 {/if}
