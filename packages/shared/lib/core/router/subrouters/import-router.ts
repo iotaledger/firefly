@@ -92,7 +92,7 @@ export class ImportRouter extends Subrouter<ImportRoute> {
                     }
 
                     // TODO: add logic here to detect if the stronghold is on the latest version or not
-                    const strongholdUpdateRequired = true
+                    const strongholdUpdateRequired = false
                     if (strongholdUpdateRequired) {
                         get(appRouter).next({ importType: get(this.importType), strongholdUpdateRequired })
                     } else {
