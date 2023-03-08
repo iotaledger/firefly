@@ -621,6 +621,9 @@
             "update": {
                 "title": "Update Stronghold",
                 "body": "Your Stronghold's version is out of date. Provide your password to update Stronghold."
+            },
+            "changePassword": {
+                "hint": "We recommend to update your password"
             }
         }
     },
@@ -1297,7 +1300,8 @@
         "removeProposal": "Remove proposal",
         "changeNode": "Change Node",
         "stopVoting": "Stop voting",
-        "revote": "Revote"
+        "revote": "Revote",
+        "skipAndKeep": "Skip and keep old password"
     },
     "general": {
         "recipient": "Recipient",
