@@ -17,7 +17,11 @@
     import { localize } from '@core/i18n'
     import { openPopup } from '@auxiliary/popup/actions'
     import { selectedAccount } from '@core/account/stores'
-    import { getVotingEvent } from '@contexts/governance/actions'
+    import {
+        clearParticipationEventStatusPoll,
+        getVotingEvent,
+        pollParticipationEventStatus,
+    } from '@contexts/governance/actions'
     import { ABSTAIN_VOTE_VALUE } from '@contexts/governance/constants'
     import { ProposalStatus } from '@contexts/governance/enums'
     import {
@@ -38,10 +42,6 @@
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
     import { visibleSelectedAccountAssets } from '@core/wallet/stores'
     import { handleError } from '@core/error/handlers'
-    import {
-        clearParticipationEventStatusPoll,
-        pollParticipationEventStatus,
-    } from '@contexts/governance/actions/pollParticipationEventStatus'
     import { PopupId } from '@auxiliary/popup'
 
     const { metadata } = $visibleSelectedAccountAssets?.baseCoin
@@ -192,6 +192,10 @@
     }
 
     function getTextHintString(): string {
+        if (!$selectedProposal) {
+            return ''
+        }
+
         const millis =
             milestoneToDate(
                 $networkStatus.currentMilestone,
@@ -220,7 +224,7 @@
     <div class="w-2/5 flex flex-col space-y-4">
         <Pane classes="p-6 flex flex-col h-fit">
             <header-container class="flex justify-between items-center mb-4">
-                <ProposalStatusPill status={$selectedProposal?.status} />
+                <ProposalStatusPill proposal={$selectedProposal} />
                 <ProposalDetailsButton proposal={$selectedProposal} />
             </header-container>
             <div class="flex flex-1 flex-col justify-between">
