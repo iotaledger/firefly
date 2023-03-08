@@ -10,8 +10,9 @@
     import { changePasswordAndUnlockStronghold } from '@core/profile-manager'
     import { updateStrongholdRouter } from '@core/router/subrouters/login'
     import { PASSWORD_REASON_MAP } from '@core/stronghold'
+    import { showAppNotification } from '@auxiliary/notification'
 
-    export let actualPassword: string
+    export let currentPassword: string
 
     let password: string = ''
     let passwordError: string = ''
@@ -20,43 +21,52 @@
     let busy: boolean = false
 
     $: passwordStrength = zxcvbn(password)
-    $: isPasswordValid = passwordError === '' && confirmPasswordError === ''
 
-    function validatePassword(): void {
-        if (password && confirmPassword) {
-            busy = false
-            if (password.length > MAX_STRONGHOLD_PASSWORD_LENGTH) {
-                passwordError = localize('error.password.length', {
-                    values: {
-                        length: MAX_STRONGHOLD_PASSWORD_LENGTH,
-                    },
-                })
-            } else if (password !== confirmPassword) {
-                passwordError = localize('error.password.doNotMatch')
-            } else if (passwordStrength.score !== 4) {
-                let errorLocale = 'error.password.tooWeak'
-                if (passwordStrength.feedback.warning && PASSWORD_REASON_MAP[passwordStrength.feedback.warning]) {
-                    errorLocale = `error.password.${PASSWORD_REASON_MAP[passwordStrength.feedback.warning]}`
-                }
-                passwordError = localize(errorLocale)
-            } else if (password === actualPassword) {
-                passwordError = localize('error.password.sameAsOld')
+    function validatePassword(): boolean {
+        busy = false
+
+        if (!password || password.length > MAX_STRONGHOLD_PASSWORD_LENGTH) {
+            passwordError = localize('error.password.length', {
+                values: {
+                    length: MAX_STRONGHOLD_PASSWORD_LENGTH,
+                },
+            })
+            return false
+        } else if (password !== confirmPassword) {
+            passwordError = localize('error.password.doNotMatch')
+            return false
+        } else if (passwordStrength.score !== 4) {
+            let errorLocale = 'error.password.tooWeak'
+            if (passwordStrength.feedback.warning && PASSWORD_REASON_MAP[passwordStrength.feedback.warning]) {
+                errorLocale = `error.password.${PASSWORD_REASON_MAP[passwordStrength.feedback.warning]}`
             }
+            passwordError = localize(errorLocale)
+            return false
+        } else if (password === currentPassword) {
+            passwordError = localize('error.password.sameAsOld')
+            return false
+        } else {
+            return true
         }
     }
 
     async function onSubmit(): Promise<void> {
-        validatePassword()
+        const isPasswordValid = validatePassword()
+
         if (isPasswordValid) {
             try {
                 busy = true
-                await changePasswordAndUnlockStronghold(actualPassword, password)
+                await changePasswordAndUnlockStronghold(currentPassword, password)
+                showAppNotification({
+                    type: 'success',
+                    message: localize('general.passwordSuccess'),
+                })
                 $updateStrongholdRouter.next()
-                busy = false
             } catch (err) {
-                busy = false
                 console.error(err)
                 passwordError = localize('error.password.incorrect')
+            } finally {
+                busy = false
             }
         }
     }

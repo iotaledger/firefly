@@ -14,6 +14,6 @@
     </Transition>
 {:else if $updateStrongholdRoute === UpdateStrongholdRoute.ChangePassword}
     <Transition>
-        <ChangePasswordView actualPassword={password} />
+        <ChangePasswordView currentPassword={password} />
     </Transition>
 {/if}
