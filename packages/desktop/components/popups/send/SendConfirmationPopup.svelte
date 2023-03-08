@@ -63,6 +63,7 @@
     } = get(newTransactionDetails)
 
     let storageDeposit = 0
+    let visibleSurplus = 0
     let preparedOutput: Output
     let outputOptions: OutputOptions
     let expirationTimePicker: ExpirationTimePicker
@@ -75,8 +76,9 @@
     $: isInternal = recipient.type === 'account'
     $: expirationTimePicker?.setNull(giftStorageDeposit)
     $: hideGiftToggle =
-        transactionDetails.type === NewTransactionType.TokenTransfer &&
-        transactionDetails.assetId === $selectedAccountAssets?.baseCoin?.id
+        (transactionDetails.type === NewTransactionType.TokenTransfer &&
+            transactionDetails.assetId === $selectedAccountAssets?.baseCoin?.id) ||
+        (disableToggleGift && !giftStorageDeposit)
     $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
     $: isTransferring = $selectedAccount.isTransferring
 
@@ -86,6 +88,7 @@
         subject: recipient,
         isInternal,
         giftedStorageDeposit: 0,
+        surplus: visibleSurplus,
         type: ActivityType.Basic,
         direction: ActivityDirection.Outgoing,
         inclusionState: InclusionState.Pending,
@@ -145,8 +148,15 @@
     }
 
     function setStorageDeposit(preparedOutput: Output, surplus?: number): void {
+        const rawAmount =
+            transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.rawAmount : '0'
+
         const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
-            getStorageDepositFromOutput(preparedOutput)
+            getStorageDepositFromOutput(preparedOutput, rawAmount)
+
+        if (surplus > _storageDeposit) {
+            visibleSurplus = Number(surplus)
+        }
 
         if (giftStorageDeposit) {
             // Only giftedStorageDeposit needs adjusting, since that is derived
