@@ -14,8 +14,8 @@
     let password = ''
     let lastCheckedPassword = ''
     let error = ''
-    const busy = false
     let passwordContainer: HTMLElement
+    let busy = false
 
     $: passwordStrength = checkPasswordStrength(password) ?? passwordStrength
     $: password, (error = '')
@@ -40,13 +40,15 @@
     }
 
     function handleContinueClick() {
+        busy = true
         api.setStrongholdPassword(password, {
             onSuccess() {
                 // TODO: add logic to migrate stronghold
-                dispatch('next')
+                dispatch('next', { password })
             },
             onError(err) {
                 error = locale(err.error)
+                busy = false
             },
         })
     }
@@ -55,7 +57,7 @@
     }
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick}>
+<OnboardingLayout onBackClick={handleBackClick} {busy}>
     <div slot="title">
         <Text type="h2">{localize('views.updateStronghold.update.title')}</Text>
     </div>

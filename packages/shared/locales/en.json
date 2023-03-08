@@ -653,6 +653,9 @@
             "update": {
                 "title": "Update Stronghold",
                 "body": "Your Stronghold's version is out of date. Provide your password to update Stronghold."
+            },
+            "changePassword": {
+                "hint": "We recommend to update your Stronghold password"
             }
         }
     },
@@ -1310,7 +1313,8 @@
             "similar": "This is similar to a common password.",
             "word": "A single word is easy to guess.",
             "incorrect": "Your password is incorrect.",
-            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}.",
+            "sameAsOld": "Your new password must be different from your old password."
         },
         "pincode": {
             "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
