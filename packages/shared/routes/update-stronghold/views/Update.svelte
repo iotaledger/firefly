@@ -12,7 +12,7 @@
 
     $: bodyText = currentPassword
         ? localize('views.updateStronghold.update.body1')
-        : `${localize('views.updateStronghold.create.body1')} ${localize('views.updateStronghold.create.body2')}`
+        : `${localize('views.updateStronghold.update.body1')} ${localize('views.updateStronghold.update.body2')}`
 
     const dispatch = createEventDispatcher()
 
