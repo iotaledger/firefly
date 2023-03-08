@@ -76,8 +76,9 @@
     $: isInternal = recipient.type === 'account'
     $: expirationTimePicker?.setNull(giftStorageDeposit)
     $: hideGiftToggle =
-        transactionDetails.type === NewTransactionType.TokenTransfer &&
-        transactionDetails.assetId === $selectedAccountAssets?.baseCoin?.id
+        (transactionDetails.type === NewTransactionType.TokenTransfer &&
+            transactionDetails.assetId === $selectedAccountAssets?.baseCoin?.id) ||
+        (disableToggleGift && !giftStorageDeposit)
     $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
     $: isTransferring = $selectedAccount.isTransferring
 
