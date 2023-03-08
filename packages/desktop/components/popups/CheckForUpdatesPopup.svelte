@@ -10,6 +10,7 @@
         appVersionDetails,
         platform,
         appStage,
+        openUrlInBrowser,
     } from '@core/app'
     import { formatDate, localize } from '@core/i18n'
     import { closePopup } from '@auxiliary/popup'
@@ -20,6 +21,10 @@
     function onDownloadClick(): void {
         downloadAppUpdate()
         closePopup()
+    }
+
+    function onVisitDownloadsClick(): void {
+        openUrlInBrowser('https://firefly.iota.org')
     }
 
     function onCloseClick(): void {
@@ -66,12 +71,16 @@
     </div>
 
     <div class="flex flex-row justify-center w-full space-x-4">
-        {#if $appVersionDetails.upToDate || !hasAutoUpdate}
-            <Button classes="w-full" outline onClick={onCloseClick}>{localize('actions.close')}</Button>
-        {:else}
-            <Button outline classes="w-1/2" onClick={onCloseClick}>{localize('actions.cancel')}</Button>
+        <Button classes={$appVersionDetails.upToDate ? 'w-full' : 'w-1/2'} outline onClick={onCloseClick}
+            >{localize('actions.cancel')}</Button
+        >
+        {#if hasAutoUpdate && !$appVersionDetails.upToDate}
             <Button classes="w-1/2" onClick={onDownloadClick} disabled={$appUpdateBusy}>
                 {localize('actions.updateFirefly')}
+            </Button>
+        {:else if !$appVersionDetails.upToDate}
+            <Button classes="w-1/2" onClick={onVisitDownloadsClick}>
+                {localize('actions.viewDownloads')}
             </Button>
         {/if}
     </div>
