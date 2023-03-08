@@ -5,35 +5,22 @@
     import { getKeyboardTransitionSpeed, isKeyboardOpened, keyboardHeight, mobile } from 'shared/lib/app'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
-    import zxcvbn from 'zxcvbn'
 
     export let locale: Locale
 
     const dispatch = createEventDispatcher()
 
     let password = ''
-    let lastCheckedPassword = ''
     let error = ''
     const busy = false
     let passwordContainer: HTMLElement
 
-    $: passwordStrength = checkPasswordStrength(password) ?? passwordStrength
     $: password, (error = '')
     $: if ($isKeyboardOpened || error) {
         setTimeout(() => {
             passwordContainer?.parentElement?.scrollTo(0, passwordContainer?.parentElement?.scrollHeight)
         }, getKeyboardTransitionSpeed($isKeyboardOpened))
     }
-
-    function checkPasswordStrength(password: string): any {
-        const NUMBER_OF_STRENGTH_VALIDATION_CHARS = 64
-        const limitedPassword = password.substring(0, NUMBER_OF_STRENGTH_VALIDATION_CHARS - 1)
-        const hasCheckedPasswordChanged = lastCheckedPassword !== limitedPassword
-        if (hasCheckedPasswordChanged) {
-            lastCheckedPassword = limitedPassword
-            return zxcvbn(limitedPassword)
-        }
-    } // zxcvbn lib recommends to not validate long passwords because of performance issues https://github.com/dropbox/zxcvbn#user-content-performance
 
     function onKeyPress(e) {
         tabFormWithEnterKey(e, document, 'update-stronghold-form')
@@ -69,18 +56,7 @@
     >
         <Text type="p" secondary classes="mb-4">{localize('views.updateStronghold.update.body')}</Text>
         <form on:submit|preventDefault={handleContinueClick} on:keypress={onKeyPress} id="update-stronghold-form">
-            <Password
-                {error}
-                classes="mb-4"
-                bind:value={password}
-                strengthLevels={4}
-                showRevealToggle
-                showStrengthLevel
-                strength={passwordStrength?.score}
-                {locale}
-                autofocus={!$mobile}
-                disabled={busy}
-            />
+            <Password {error} classes="mb-4" bind:value={password} {locale} autofocus={!$mobile} disabled={busy} />
         </form>
     </div>
     <div
