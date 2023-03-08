@@ -10,6 +10,7 @@
 
     let updateStrongholdRouter: UpdateStrongholdRouter
     let currentPassword: string = $strongholdPassword
+    let passwordUpdated: boolean = false
 
     onMount(() => {
         updateStrongholdRouter = new UpdateStrongholdRouter()
@@ -18,6 +19,9 @@
     const next = (event: CustomEvent<any>): void => {
         const eventDetail = event?.detail
         if (eventDetail?.password) {
+            if ($updateStrongholdRoute === UpdateStrongholdRoute.ChangePassword) {
+                passwordUpdated = true
+            }
             currentPassword = eventDetail?.password
         }
         allowBackButton.set(false)
@@ -36,6 +40,6 @@
     </Transition>
 {:else if $updateStrongholdRoute === UpdateStrongholdRoute.Success}
     <Transition>
-        <Success {currentPassword} on:next={next} {locale} />
+        <Success allowBack={!passwordUpdated} {currentPassword} on:next={next} on:previous={previous} {locale} />
     </Transition>
 {/if}

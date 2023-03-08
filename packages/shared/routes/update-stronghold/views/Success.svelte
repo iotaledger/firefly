@@ -12,6 +12,7 @@
 
     export let locale: Locale
     export let currentPassword: string = ''
+    export let allowBack: boolean = false
 
     let busy: boolean = false
 
@@ -55,9 +56,13 @@
     function handleSkipClick(): void {
         dispatch('next')
     }
+
+    function handleBackClick() {
+        dispatch('previous')
+    }
 </script>
 
-<OnboardingLayout allowBack={false}>
+<OnboardingLayout onBackClick={handleBackClick} {allowBack}>
     <div slot="leftpane__content" class:w-full={$mobile} style={$mobile ? 'min-height: 60vh;' : ''}>
         <div
             class="relative flex flex-col items-center text-center bg-gray-100 dark:bg-gray-800 rounded-2xl mt-10 p-10 pb-6"
