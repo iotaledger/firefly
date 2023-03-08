@@ -24,6 +24,7 @@
     $: baseToken = BASE_TOKEN[$activeProfile?.networkProtocol]
     $: formattedStorageDeposit = formatTokenAmountPrecise(activity.storageDeposit ?? 0, baseToken)
     $: formattedGiftedStorageDeposit = formatTokenAmountPrecise(activity.giftedStorageDeposit ?? 0, baseToken)
+    $: formattedSurplus = formatTokenAmountPrecise(activity.surplus ?? 0, baseToken)
     $: formattedGasBudget = formatTokenAmountPrecise(Number(gasBudget ?? 0), baseToken)
 
     let transactionDetailsList: IKeyValueBoxList
@@ -42,6 +43,9 @@
         }),
         ...(hasStorageDeposit && {
             storageDeposit: { data: formattedStorageDeposit, isTooltipVisible: true },
+        }),
+        ...(activity?.surplus && {
+            surplus: { data: formattedSurplus },
         }),
         ...(activity?.giftedStorageDeposit && {
             giftedStorageDeposit: { data: formattedGiftedStorageDeposit, isTooltipVisible: true },
