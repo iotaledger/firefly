@@ -8,6 +8,8 @@ import { IRouterEvent } from '../interfaces'
 import { appRouter } from '../routers'
 import features from '../../../../../desktop/features/features'
 
+const isStrongholdUpdated = false
+
 export const loginRoute = writable<LoginRoute>(null)
 export const loginRouter = writable<LoginRouter>(null)
 
