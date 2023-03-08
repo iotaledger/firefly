@@ -436,7 +436,8 @@
         },
         "login": {
             "pleaseWait": "Kérjük várjon {time, plural, one {# másodpercet} other {# másodpercet}}",
-            "incorrectAttempts": "{attempts, plural, one {# hibás próbálkozás} other {# hibás próbálkozás}}"
+            "incorrectAttempts": "{attempts, plural, one {# hibás próbálkozás} other {# hibás próbálkozás}}",
+            "hintStronghold": "Your Stronghold's version is out of date. Please log in to update your Stronghold."
         },
         "loadProfile": {
             "loginSteps": {
@@ -586,8 +587,8 @@
                 "title": "Javaslatok",
                 "voted": "Szavazott",
                 "successEdit": "Indítvány sikeresen módosítva",
-                "successAdd": "Javaslat sikeresen hozzáadva",
-                "successAddAll": "A javaslat sikeresen hozzáadva az összes fiókhoz",
+                "successAdd": "{numberOfProposals, select, one {Indítvány} other {Indítványok}} sikeresen hozzáadva",
+                "successAddAll": "{numberOfProposals, select, one {Indítvány} other {Indítványok}} sikeresen hozzáadva az összes fiókhoz",
                 "successRemove": "Javaslat sikeresen törölve",
                 "emptyTitle": "Nincsenek javaslatok"
             },
@@ -721,7 +722,8 @@
         },
         "deleteAccount": {
             "title": "{name} törölhető?",
-            "body": "A tárcának nincs tranzakciós előzménye, ezért biztonságosan törölhető.",
+            "body": "Biztosan törölni szeretné ezt a tárcát?",
+            "hint": "Megjegyzés: ha egyszer törölte a tárcát, a beállítások között található \"Tárcakereső\" segítségével visszaállíthatja azt.",
             "typePassword": "Adja meg tárcájának jelszavát a törléshez.",
             "hideAccount": "Tárca törlése",
             "errorTitle": "{name} nem törölhető",
@@ -2067,6 +2069,9 @@
         },
         "governance": {
             "removeProposalWarning": "A javaslat eltávolítása előtt le kell állítani a szavazást."
+        },
+        "updateStronghold": {
+            "profileBadge": "Your Stronghold is out of date. Log in to update Stronghold."
         }
     },
     "exports": {

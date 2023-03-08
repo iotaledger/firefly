@@ -436,7 +436,8 @@
         },
         "login": {
             "pleaseWait": "Afvent {time, plural, one {1 sekund} other {# sekunder}}",
-            "incorrectAttempts": "{attempts, plural, one {1 forkert forsøg} other {# forkerte forsøg}}"
+            "incorrectAttempts": "{attempts, plural, one {1 forkert forsøg} other {# forkerte forsøg}}",
+            "hintStronghold": "Your Stronghold's version is out of date. Please log in to update your Stronghold."
         },
         "loadProfile": {
             "loginSteps": {
@@ -586,8 +587,8 @@
                 "title": "Forslag",
                 "voted": "Stemt",
                 "successEdit": "Forslag hermed redigeret",
-                "successAdd": "Forslag hermed tilføjet",
-                "successAddAll": "Proposal successfully added to all accounts",
+                "successAdd": "{numberOfProposals, select, one {Forslag} other {Forslag}} hermed tiløjet",
+                "successAddAll": "{numberOfProposals, select, one {Forslag} other {Forslag}} hermed tilføjet alle konti",
                 "successRemove": "Forslag fjernet",
                 "emptyTitle": "Ingen forslag"
             },
@@ -721,7 +722,8 @@
         },
         "deleteAccount": {
             "title": "Slet {name}?",
-            "body": "Denne wallet har ingen transaktionshistorik. Den kan slettes.",
+            "body": "Sikker på, at denne wallet skal slettes?",
+            "hint": "Bemærk: Når først slettet, kan denne wallet gendannes vha. \"Wallet Finder\" i indstillingerne.",
             "typePassword": "Indtast din wallet adgangskode for at bekræfte.",
             "hideAccount": "Slet wallet",
             "errorTitle": "Kan ikke slette {name}",
@@ -2067,6 +2069,9 @@
         },
         "governance": {
             "removeProposalWarning": "Før dette forslag fjernes, skal man ophøre med at stemme på det."
+        },
+        "updateStronghold": {
+            "profileBadge": "Your Stronghold is out of date. Log in to update Stronghold."
         }
     },
     "exports": {
