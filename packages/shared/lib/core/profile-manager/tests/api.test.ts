@@ -1,3 +1,4 @@
+import '@mocks/crypto.mock'
 import { MOCK_MNEMONIC, ProfileManagerMock } from '@mocks/profile-manager.mock'
 
 import { get } from 'svelte/store'
@@ -74,7 +75,7 @@ describe('File: api.test.ts', () => {
             spy = jest.spyOn(profileManagerMock, 'backup')
             const destination = './destination'
             await backup(destination, password)
-            expect(spy).toBeCalledWith(destination, password, true)
+            expect(spy).toBeCalledWith(destination, password)
             expect(spy).toBeCalledTimes(1)
             spy.mockRestore()
         })
