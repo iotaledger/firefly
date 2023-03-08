@@ -14,10 +14,11 @@ import { openPopup, PopupId } from '@auxiliary/popup'
 
 import { SendOperationParameter } from '../../../enums'
 import {
-    SurplusNotANumberError,
     InvalidAddressError,
     MetadataLengthError,
     NoAddressSpecifiedError,
+    SurplusNotANumberError,
+    SurplusNotSupportedError,
     TagLengthError,
     UnknownAssetError,
 } from '../../../errors'
@@ -72,6 +73,8 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): NewTrans
     const surplus = searchParams.get(SendOperationParameter.Surplus)
     if (surplus && parseInt(surplus).toString() !== surplus) {
         throw new SurplusNotANumberError(surplus)
+    } else if (surplus && asset.id === baseAsset.id) {
+        throw new SurplusNotSupportedError()
     }
 
     const metadata = searchParams.get(SendOperationParameter.Metadata)
