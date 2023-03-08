@@ -709,6 +709,7 @@
             "beta": "Beta",
             "releasedAt": "Released at",
             "updateAvailable": "Update is available",
+            "updatesDisabled": "There are updates available, but in-app upgrade is disabled for your operating system.",
             "latestInstalled": "You are running the latest and safest version"
         },
         "backupStronghold": {

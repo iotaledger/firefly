@@ -80,7 +80,7 @@ const buildTemplate = () => {
                 {
                     label: `${state.strings.checkForUpdates}...`,
                     click: () => getOrInitWindow('main').webContents.send('menu-check-for-update'),
-                    enabled: app.isPackaged && features?.electron?.autoUpdates?.enabled ? state.enabled : false,
+                    enabled: app.isPackaged ? state.enabled : false,
                 },
                 {
                     type: 'separator',
