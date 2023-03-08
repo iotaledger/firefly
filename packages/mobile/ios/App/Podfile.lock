@@ -1,9 +1,7 @@
 PODS:
   - Capacitor (3.4.1):
     - CapacitorCordova
-  - CapacitorCommunityBarcodeScanner (2.0.1):
-    - Capacitor
-  - CapacitorCommunityPrivacyScreen (2.1.1):
+  - CapacitorApp (1.1.1):
     - Capacitor
   - CapacitorCordova (3.4.1)
   - CapacitorSecureStoragePlugin (0.6.2):
@@ -11,20 +9,14 @@ PODS:
     - SwiftKeychainWrapper
   - CapacitorSplashScreen (1.2.2):
     - Capacitor
-  - FireflyActorSystemCapacitorBindings (0.0.1):
-    - Capacitor
-  - IotaWalletInternal (0.2.0)
   - SwiftKeychainWrapper (4.0.1)
 
 DEPENDENCIES:
   - "Capacitor (from `../../../../node_modules/@capacitor/ios`)"
-  - "CapacitorCommunityBarcodeScanner (from `../../../../node_modules/@capacitor-community/barcode-scanner`)"
-  - "CapacitorCommunityPrivacyScreen (from `../../../../node_modules/@capacitor-community/privacy-screen`)"
+  - "CapacitorApp (from `../../../../node_modules/@capacitor/app`)"
   - "CapacitorCordova (from `../../../../node_modules/@capacitor/ios`)"
   - CapacitorSecureStoragePlugin (from `../../../../node_modules/capacitor-secure-storage-plugin`)
   - "CapacitorSplashScreen (from `../../../../node_modules/@capacitor/splash-screen`)"
-  - FireflyActorSystemCapacitorBindings (from `../../node_modules/firefly-actor-system-capacitor-bindings`)
-  - IotaWalletInternal (from `https://raw.githubusercontent.com/iotaledger/wallet-ios-internal/main/IotaWalletInternal.podspec`)
 
 SPEC REPOS:
   trunk:
@@ -33,32 +25,23 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   Capacitor:
     :path: "../../../../node_modules/@capacitor/ios"
-  CapacitorCommunityBarcodeScanner:
-    :path: "../../../../node_modules/@capacitor-community/barcode-scanner"
-  CapacitorCommunityPrivacyScreen:
-    :path: "../../../../node_modules/@capacitor-community/privacy-screen"
+  CapacitorApp:
+    :path: "../../../../node_modules/@capacitor/app"
   CapacitorCordova:
     :path: "../../../../node_modules/@capacitor/ios"
   CapacitorSecureStoragePlugin:
     :path: "../../../../node_modules/capacitor-secure-storage-plugin"
   CapacitorSplashScreen:
     :path: "../../../../node_modules/@capacitor/splash-screen"
-  FireflyActorSystemCapacitorBindings:
-    :path: "../../node_modules/firefly-actor-system-capacitor-bindings"
-  IotaWalletInternal:
-    :podspec: https://raw.githubusercontent.com/iotaledger/wallet-ios-internal/main/IotaWalletInternal.podspec
 
 SPEC CHECKSUMS:
   Capacitor: 9ff0758671daabc97247c8c57a981379bc30bb5f
-  CapacitorCommunityBarcodeScanner: fb5a4e2bae89f0a0203cb4809c2f1bfd21579791
-  CapacitorCommunityPrivacyScreen: e5c4100887b28805918f92c28d3948b41cb8cc37
+  CapacitorApp: 6539a37b671391147dd0180e1483c051077254bf
   CapacitorCordova: 4cf19cbad01e5a9e143e2f28f66c621c362f0f79
   CapacitorSecureStoragePlugin: b24477bcde4004d0536135fa265c9f3318ec9e7e
   CapacitorSplashScreen: 466ab02fdfcfc0efdb6167631386289e82efe2c6
-  FireflyActorSystemCapacitorBindings: 59b64ff1b4cb89779283816f7d2c385849ee5247
-  IotaWalletInternal: 7bbe592b3b946075aaa4d52a55df10ba7bfb8281
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
 
-PODFILE CHECKSUM: f3819d7c43d77cbbb5ec173f589301ce631c14fb
+PODFILE CHECKSUM: ca11b82b83447028373f003120921f4635f1ac34
 
 COCOAPODS: 1.11.2
