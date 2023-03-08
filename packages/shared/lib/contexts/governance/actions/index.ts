@@ -1,5 +1,4 @@
 export * from './addProposalsFromParticipationEventMap'
-export * from './deregisterParticipationEvent'
 export * from './getVotingEvent'
 export * from './getAccountsParticipationEventStatusForEvent'
 export * from './initializeParticipationOverviews'

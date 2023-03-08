@@ -436,7 +436,8 @@
         },
         "login": {
             "pleaseWait": "Attendere {time, plural, one {1 secondo} other {# secondi}}",
-            "incorrectAttempts": "{attempts, plural, one {1 tentativo errato} other {# tentativi errati}}"
+            "incorrectAttempts": "{attempts, plural, one {1 tentativo errato} other {# tentativi errati}}",
+            "hintStronghold": "Your Stronghold's version is out of date. Please log in to update your Stronghold."
         },
         "loadProfile": {
             "loginSteps": {
@@ -586,8 +587,8 @@
                 "title": "Proposte",
                 "voted": "Votato",
                 "successEdit": "La proposta è stata aggiornata correttamente",
-                "successAdd": "Proposta aggiunta con successo",
-                "successAddAll": "Proposta aggiunta con successo a tutti gli account",
+                "successAdd": "{numberOfProposals, select, one {Proposta} other {Proposte}} aggiunte con successo",
+                "successAddAll": "{numberOfProposals, select, one {Proposta} other {Proposte}} aggiunte con successo",
                 "successRemove": "Proposta rimossa con successo",
                 "emptyTitle": "Nessuna proposta"
             },
@@ -721,7 +722,8 @@
         },
         "deleteAccount": {
             "title": "Eliminare {name}?",
-            "body": "Questo wallet non ha una cronologia delle transazioni. Può essere eliminato in sicurezza.",
+            "body": "Sei sicuro di voler eliminare questo portafoglio?",
+            "hint": "Nota: una volta eliminato, è possibile ripristinare questo portafoglio utilizzando il \"Wallet Finder\" nelle impostazioni.",
             "typePassword": "Digita la password del tuo wallet per confermare.",
             "hideAccount": "Elimina wallet",
             "errorTitle": "Impossibile eliminare {name}",
@@ -2067,6 +2069,9 @@
         },
         "governance": {
             "removeProposalWarning": "Devi interrompere la votazione a favore di questa proposta prima di rimuoverla."
+        },
+        "updateStronghold": {
+            "profileBadge": "Your Stronghold is out of date. Log in to update Stronghold."
         }
     },
     "exports": {
