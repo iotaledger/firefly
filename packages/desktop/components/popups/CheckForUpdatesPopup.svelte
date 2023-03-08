@@ -3,7 +3,6 @@
     import { get } from 'svelte/store'
     import { Button, KeyValueBox, Text, TextType, TextHint } from 'shared/components'
     import {
-        setAppVersionDetails,
         appUpdateBusy,
         checkForAppUpdate,
         downloadAppUpdate,
@@ -31,9 +30,8 @@
         closePopup()
     }
 
-    onMount(async () => {
+    onMount(() => {
         if (process.env.NODE_ENV !== 'development') {
-            await setAppVersionDetails()
             checkForAppUpdate()
         }
         hasAutoUpdate = features.electron.autoUpdate[$platform]?.enabled
