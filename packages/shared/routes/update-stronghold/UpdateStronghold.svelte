@@ -2,13 +2,14 @@
     import { Locale } from '@core/i18n'
     import { allowBackButton, updateStrongholdRoute, UpdateStrongholdRoute, UpdateStrongholdRouter } from '@core/router'
     import { Transition } from 'shared/components'
+    import { strongholdPassword } from 'shared/lib/app'
     import { onMount } from 'svelte'
     import { ChangePassword, Success, Update } from './views'
 
     export let locale: Locale
 
     let updateStrongholdRouter: UpdateStrongholdRouter
-    let currentPassword: string
+    let currentPassword: string = $strongholdPassword
 
     onMount(() => {
         updateStrongholdRouter = new UpdateStrongholdRouter()
@@ -27,7 +28,7 @@
 
 {#if $updateStrongholdRoute === UpdateStrongholdRoute.Update}
     <Transition>
-        <Update on:next={next} on:previous={previous} {locale} />
+        <Update {currentPassword} on:next={next} on:previous={previous} {locale} />
     </Transition>
 {:else if $updateStrongholdRoute === UpdateStrongholdRoute.ChangePassword}
     <Transition>

@@ -43,6 +43,7 @@ export class AppRouter extends Router<AppRoute> {
 
         switch (currentRoute) {
             case AppRoute.Login: {
+                walletSetupType.set(null)
                 if (params.shouldAddProfile) {
                     nextRoute = AppRoute.Profile
                 } else {
@@ -60,8 +61,13 @@ export class AppRouter extends Router<AppRoute> {
                 break
             }
             case AppRoute.UpdateStronghold:
-                login()
-                nextRoute = AppRoute.Dashboard
+                // if we come from onboarding
+                if (get(walletSetupType) === SetupType.Stronghold) {
+                    nextRoute = AppRoute.Protect
+                } else {
+                    login()
+                    nextRoute = AppRoute.Dashboard
+                }
                 break
             case AppRoute.Dashboard: {
                 if (params.reset) {
@@ -148,14 +154,18 @@ export class AppRouter extends Router<AppRoute> {
                 }
                 break
             case AppRoute.Import: {
-                const { importType } = params
+                const { importType, strongholdUpdateRequired } = params
                 walletSetupType.set(importType as unknown as SetupType)
                 nextRoute = AppRoute.Congratulations
                 if (importType === ImportType.Mnemonic) {
                     nextRoute = AppRoute.Secure
-                } else if (
-                    [ImportType.Stronghold, ImportType.TrinityLedger, ImportType.FireflyLedger].includes(importType)
-                ) {
+                } else if (importType === ImportType.Stronghold) {
+                    if (strongholdUpdateRequired) {
+                        nextRoute = AppRoute.UpdateStronghold
+                    } else {
+                        nextRoute = AppRoute.Password
+                    }
+                } else if ([ImportType.TrinityLedger, ImportType.FireflyLedger].includes(importType)) {
                     nextRoute = AppRoute.Protect
                 } else if (importType === ImportType.Seed || importType === ImportType.SeedVault) {
                     nextRoute = AppRoute.Balance

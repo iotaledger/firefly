@@ -652,7 +652,8 @@
         "updateStronghold": {
             "update": {
                 "title": "Update Stronghold",
-                "body": "Your Stronghold's version is out of date. Provide your password to update Stronghold."
+                "body1": "Your Stronghold's version is out of date.",
+                "body2": "Provide your password to update Stronghold."
             },
             "changePassword": {
                 "hint": "We recommend to update your Stronghold password"

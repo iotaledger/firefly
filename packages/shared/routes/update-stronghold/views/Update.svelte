@@ -8,6 +8,11 @@
     import zxcvbn from 'zxcvbn'
 
     export let locale: Locale
+    export let currentPassword: string = undefined
+
+    $: bodyText = currentPassword
+        ? localize('views.updateStronghold.update.body1')
+        : `${localize('views.updateStronghold.create.body1')} ${localize('views.updateStronghold.create.body2')}`
 
     const dispatch = createEventDispatcher()
 
@@ -41,10 +46,11 @@
 
     function handleContinueClick() {
         busy = true
-        api.setStrongholdPassword(password, {
+        const _password = currentPassword ?? password
+        api.setStrongholdPassword(_password, {
             onSuccess() {
                 // TODO: add logic to migrate stronghold
-                dispatch('next', { password })
+                dispatch('next', { password: _password })
             },
             onError(err) {
                 error = locale(err.error)
@@ -69,20 +75,22 @@
             'ms'} var(--transition-scroll)"
         bind:this={passwordContainer}
     >
-        <Text type="p" secondary classes="mb-4">{localize('views.updateStronghold.update.body')}</Text>
+        <Text type="p" secondary classes="mb-4">{bodyText}</Text>
         <form on:submit|preventDefault={handleContinueClick} on:keypress={onKeyPress} id="update-stronghold-form">
-            <Password
-                {error}
-                classes="mb-4"
-                bind:value={password}
-                strengthLevels={4}
-                showRevealToggle
-                showStrengthLevel
-                strength={passwordStrength?.score}
-                {locale}
-                autofocus={!$mobile}
-                disabled={busy}
-            />
+            {#if !currentPassword}
+                <Password
+                    {error}
+                    classes="mb-4"
+                    bind:value={password}
+                    strengthLevels={4}
+                    showRevealToggle
+                    showStrengthLevel
+                    strength={passwordStrength?.score}
+                    {locale}
+                    autofocus={!$mobile}
+                    disabled={busy}
+                />
+            {/if}
         </form>
     </div>
     <div
@@ -92,7 +100,12 @@
             : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened) +
             'ms'} var(--transition-scroll)"
     >
-        <Button type="submit" form="update-stronghold-form" classes="w-full" disabled={!password || busy}>
+        <Button
+            type="submit"
+            form="update-stronghold-form"
+            classes="w-full"
+            disabled={(!password && !currentPassword) || busy}
+        >
             {locale('actions.continue')}
         </Button>
     </div>

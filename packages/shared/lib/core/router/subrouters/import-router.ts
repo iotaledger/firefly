@@ -1,6 +1,6 @@
 import { get, writable } from 'svelte/store'
 
-import { mnemonic } from '@lib/app'
+import { mnemonic, strongholdPassword } from '@lib/app'
 import { getMigrationData } from '@lib/migration'
 import { Platform } from '@lib/platform'
 import { newProfile } from '@lib/profile'
@@ -86,11 +86,18 @@ export class ImportRouter extends Subrouter<ImportRoute> {
                             await getMigrationData(legacySeed)
                         }
                     } else {
+                        strongholdPassword.set(password)
                         await asyncRestoreBackup(this.importFilePath, password)
                         get(newProfile).lastStrongholdBackupTime = new Date()
                     }
 
-                    nextRoute = ImportRoute.Success
+                    // TODO: add logic here to detect if the stronghold is on the latest version or not
+                    const strongholdUpdateRequired = true
+                    if (strongholdUpdateRequired) {
+                        get(appRouter).next({ importType: get(this.importType), strongholdUpdateRequired })
+                    } else {
+                        nextRoute = ImportRoute.Success
+                    }
                 } finally {
                     this.isGettingMigrationData.set(false)
                 }
