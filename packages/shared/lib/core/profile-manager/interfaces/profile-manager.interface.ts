@@ -1,10 +1,10 @@
 import type {
-    SyncOptions,
     ClientOptions,
     EventType,
     GenerateAddressOptions,
     LedgerNanoStatus,
     NodeInfoWrapper,
+    SyncOptions,
     WalletEvent,
 } from '@iota/wallet'
 
@@ -48,4 +48,10 @@ export interface IProfileManager {
     storeMnemonic(mnemonic: string): Promise<void>
     verifyMnemonic(mnemonic: string): Promise<void>
     updateNodeAuth(url: string, auth?: IAuth): Promise<void>
+    migrateStrongholdSnapshotV2ToV3(
+        currentPath: string,
+        currentPassword: string,
+        newPath: string,
+        newPassword: string
+    ): Promise<void>
 }

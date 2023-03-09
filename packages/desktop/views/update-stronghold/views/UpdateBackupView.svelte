@@ -1,14 +1,19 @@
 <script lang="ts">
-    import { Animation, Button, Icon, Text, TextHint, TextType } from '@ui'
     import { OnboardingLayout } from '@components'
+    import { Animation, Button, Icon, Text, TextHint, TextType } from '@ui'
+
     import { localize } from '@core/i18n'
     import { updateStrongholdRouter } from '@core/router'
-    import { backupInitialStronghold, updateOnboardingProfile } from '@contexts/onboarding'
+
+    import { updateOnboardingProfile } from '@contexts/onboarding'
+    import { exportStronghold } from '@contexts/settings'
+
     import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let busy = false
     export let changedPassword: boolean
     export let isRecovery = false
+    export let password: string
 
     const skipBackup = false
 
@@ -24,7 +29,7 @@
 
     async function onBackupClick(): Promise<void> {
         try {
-            await backupInitialStronghold()
+            await exportStronghold(password)
             onAdvanceView()
         } catch (err) {
             console.error(err)

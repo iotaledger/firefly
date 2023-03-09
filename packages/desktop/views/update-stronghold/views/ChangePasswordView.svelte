@@ -7,14 +7,14 @@
 
     import { localize } from '@core/i18n'
     import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'
-    import { changePasswordAndUnlockStronghold } from '@core/profile-manager'
+    import { changeStrongholdPassword } from '@core/profile-manager'
     import { updateStrongholdRouter } from '@core/router/subrouters'
     import { PASSWORD_REASON_MAP } from '@core/stronghold'
+
     import { showAppNotification } from '@auxiliary/notification'
 
     export let oldPassword: string
     export let newPassword: string = ''
-    export let isRecovery = false
 
     let passwordError: string = ''
     let confirmPassword: string = ''
@@ -57,7 +57,7 @@
         if (isPasswordValid) {
             try {
                 busy = true
-                await changePasswordAndUnlockStronghold(oldPassword, newPassword)
+                await changeStrongholdPassword(oldPassword, newPassword)
                 showAppNotification({
                     type: 'success',
                     message: localize('general.passwordSuccess'),
