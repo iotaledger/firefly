@@ -16,6 +16,7 @@
         ProfileRecoveryRoute,
     } from '@core/router'
     import { showAppNotification } from '@auxiliary/notification'
+    import { UpdateStrongholdRouter } from '../../../login/views'
 
     setContext<ProfileRecoveryRouter>('importRouter', $profileRecoveryRouter)
     $profileRecoveryRouter.resetRoute()
@@ -62,6 +63,10 @@
 {:else if $profileRecoveryRoute === ProfileRecoveryRoute.LedgerImport}
     <Transition>
         <LedgerView on:next={next} on:previous={previous} />
+    </Transition>
+{:else if $profileRecoveryRoute === ProfileRecoveryRoute.UpdateStronghold}
+    <Transition>
+        <UpdateStrongholdRouter isRecovery />
     </Transition>
 {:else if $profileRecoveryRoute === ProfileRecoveryRoute.Success}
     <Transition>

@@ -10,6 +10,7 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let busy = false
+    export let isRecovery = false
 
     const confirmPassword = ''
     const skipBackup = false
@@ -53,10 +54,10 @@
                 <Icon icon={IconEnum.SuccessCheck} classes="text-white" />
             </div>
             <Text type={TextType.h2} classes="mb-5 text-center">
-                {localize('views.updateStronghold.updateBackup.title')}
+                {localize(`views.updateStronghold.updateBackup.${isRecovery ? 'recoveryTitle' : 'loginTitle'}`)}
             </Text>
             <Text secondary classes="mb-2 text-center">
-                {localize('views.updateStronghold.updateBackup.body')}
+                {localize(`views.updateStronghold.updateBackup.${isRecovery ? 'recoveryBody' : 'loginBody'}`)}
             </Text>
         </div>
         <TextHint warning text={localize('views.updateStronghold.updateBackup.hint')} />
