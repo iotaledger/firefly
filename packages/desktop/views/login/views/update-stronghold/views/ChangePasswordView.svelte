@@ -12,28 +12,28 @@
     import { PASSWORD_REASON_MAP } from '@core/stronghold'
     import { showAppNotification } from '@auxiliary/notification'
 
-    export let currentPassword: string
+    export let oldPassword: string
+    export let newPassword: string = ''
     export let isRecovery = false
 
-    let password: string = ''
     let passwordError: string = ''
     let confirmPassword: string = ''
     let confirmPasswordError: string = ''
     let busy: boolean = false
 
-    $: passwordStrength = zxcvbn(password)
+    $: passwordStrength = zxcvbn(newPassword)
 
     function validatePassword(): boolean {
         busy = false
 
-        if (!password || password.length > MAX_STRONGHOLD_PASSWORD_LENGTH) {
+        if (!newPassword || newPassword.length > MAX_STRONGHOLD_PASSWORD_LENGTH) {
             passwordError = localize('error.password.length', {
                 values: {
                     length: MAX_STRONGHOLD_PASSWORD_LENGTH,
                 },
             })
             return false
-        } else if (password !== confirmPassword) {
+        } else if (newPassword !== confirmPassword) {
             passwordError = localize('error.password.doNotMatch')
             return false
         } else if (passwordStrength.score !== 4) {
@@ -43,7 +43,7 @@
             }
             passwordError = localize(errorLocale)
             return false
-        } else if (password === currentPassword) {
+        } else if (newPassword === oldPassword) {
             passwordError = localize('error.password.sameAsOld')
             return false
         } else {
@@ -57,7 +57,7 @@
         if (isPasswordValid) {
             try {
                 busy = true
-                await changePasswordAndUnlockStronghold(currentPassword, password)
+                await changePasswordAndUnlockStronghold(oldPassword, newPassword)
                 showAppNotification({
                     type: 'success',
                     message: localize('general.passwordSuccess'),
@@ -73,6 +73,7 @@
     }
 
     function onSkipClick(): void {
+        newPassword = ''
         $updateStrongholdRouter.next()
     }
 </script>
@@ -88,7 +89,7 @@
         <form on:submit|preventDefault={onSubmit} id="update-stronghold-form" class="mt-12">
             <PasswordInput
                 bind:error={passwordError}
-                bind:value={password}
+                bind:value={newPassword}
                 classes="mb-5"
                 showRevealToggle
                 strengthLevels={4}
@@ -115,7 +116,7 @@
         </Button>
         <Button
             form="update-stronghold-form"
-            disabled={!password || !confirmPassword || busy}
+            disabled={!newPassword || !confirmPassword || busy}
             isBusy={busy}
             type={HTMLButtonType.Submit}
             classes="w-full"

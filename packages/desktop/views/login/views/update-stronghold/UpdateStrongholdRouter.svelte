@@ -8,6 +8,7 @@
     export let isRecovery = false
 
     let password: string = ''
+    let newPassword: string = ''
 </script>
 
 {#if $updateStrongholdRoute === UpdateStrongholdRoute.Update}
@@ -16,10 +17,10 @@
     </Transition>
 {:else if $updateStrongholdRoute === UpdateStrongholdRoute.ChangePassword}
     <Transition>
-        <ChangePasswordView currentPassword={password} {isRecovery} />
+        <ChangePasswordView bind:newPassword oldPassword={password} {isRecovery} />
     </Transition>
 {:else if $updateStrongholdRoute === UpdateStrongholdRoute.SaveBackup}
     <Transition>
-        <UpdateBackupView {isRecovery} />
+        <UpdateBackupView changedPassword={!!newPassword} {isRecovery} />
     </Transition>
 {/if}
