@@ -71,7 +71,6 @@
             {localize('actions.skipBackup')}
         </Button>
         <Button
-            form="backup-form"
             classes="w-full"
             disabled={!isStrongholdPasswordValid || busy}
             isBusy={!skipBackup && busy}
