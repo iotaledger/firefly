@@ -622,6 +622,11 @@
                 "title": "Update Stronghold",
                 "body": "Your Stronghold's version is out of date. Provide your password to update Stronghold."
             },
+            "updateBackup": {
+                "title": "Stronghold updated",
+                "body": "It's all good now - you're running the latest Stronghold version.",
+                "hint": "We highly recommend to delete all previous Stronghold backup files and save a new one"
+            },
             "changePassword": {
                 "hint": "We recommend to update your password"
             }

@@ -44,8 +44,6 @@ export class LoginRouter extends Subrouter<LoginRoute> {
                 }
                 break
             case LoginRoute.UpdateStronghold:
-                nextRoute = LoginRoute.LoadProfile
-                break
             case LoginRoute.LoadProfile:
                 this.parentRouter.next(event)
                 return
