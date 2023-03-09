@@ -7,6 +7,8 @@
 
     import { backupInitialStronghold, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
 
+    import { Icon as IconEnum } from '@auxiliary/icon'
+
     export let busy = false
 
     const confirmPassword = ''
@@ -48,7 +50,7 @@
     <div slot="leftpane__content">
         <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 mb-10 p-10 pb-6">
             <div class="bg-green-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
-                <Icon icon="success-check" classes="text-white" />
+                <Icon icon={IconEnum.SuccessCheck} classes="text-white" />
             </div>
             <Text type={TextType.h2} classes="mb-5 text-center">
                 {localize('views.updateStronghold.updateBackup.title')}
