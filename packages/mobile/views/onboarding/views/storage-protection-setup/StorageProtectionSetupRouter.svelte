@@ -1,6 +1,6 @@
-<script lang="typescript">
+<script lang="ts">
     import { SetupPinProtectionView } from './views'
-    import { storageProtectionSetupRoute, StorageProtectionSetupRoute } from '../../../../lib/routers'
+    import { storageProtectionSetupRoute, StorageProtectionSetupRoute } from '@/routers'
 
     const busy = false
 </script>

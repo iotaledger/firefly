@@ -62,7 +62,7 @@
             },
             "profileSetup": {
                 "setup": {
-                    "title": "设置 {protocol, select, IOTA {一个} Shimmer {一个}} {protocol} 档案",
+                    "title": "设置 {protocol, select, IOTA {一个} Shimmer {一个} other {一个}} {protocol} 档案",
                     "body": "请选择适当的方法来设置你的 {protocol} 配置文件。"
                 },
                 "setupNew": {
@@ -309,6 +309,10 @@
                 "title": "自动锁定",
                 "description": "自动锁定钱包并登出的待机时间"
             },
+            "maxMediaSize": {
+                "title": "最大文件大小",
+                "description": "尺寸大于此限制的NFT 媒体将不会下载，代表媒体类型的占位符将会被显示。"
+            },
             "changePassword": {
                 "title": "修改密码",
                 "description": "您的密码是用来保护您的钱包的。您必须使用一个强有力的密码来保护您的资金"
@@ -432,7 +436,8 @@
         },
         "login": {
             "pleaseWait": "请等待 {time, plural, one {1 秒} other {# 秒}}",
-            "incorrectAttempts": "{attempts, plural, one {1 次失败重试} other {# 次失败重试}}"
+            "incorrectAttempts": "{attempts, plural, one {1 次失败重试} other {# 次失败重试}}",
+            "hintStronghold": "Your Stronghold's version is out of date. Please log in to update your Stronghold."
         },
         "loadProfile": {
             "loginSteps": {
@@ -459,6 +464,7 @@
             },
             "profileModal": {
                 "allSettings": "所有设置",
+                "profileApplication": "档案、应用、安全",
                 "logout": "退出账号",
                 "stronghold": {
                     "title": "配置文件锁定",
@@ -545,6 +551,71 @@
                 "title": "取色器",
                 "hexCode": "颜色十六进制代码"
             }
+        },
+        "collectibles": {
+            "gallery": {
+                "title": "合集",
+                "emptyTitle": "暂无合集",
+                "noResults": "没有结果",
+                "emptyDescription": "现在存入或接收你的第一个合集！"
+            },
+            "details": {
+                "storageDepositDescription": "一个可退还的押金，用于将你的NFT易存储在Tangle上。",
+                "attributes": "属性",
+                "menu": {
+                    "download": "下载",
+                    "setAvatar": "设置 NFT 为配置文件头像",
+                    "view": "在浏览器中查看",
+                    "burn": "烧毁 NFT"
+                }
+            }
+        },
+        "governance": {
+            "votingPower": {
+                "title": "投票权重",
+                "maximal": "最大投票权重: {value}",
+                "manage": "管理投票权重"
+            },
+            "proposalsDetails": {
+                "title": "详情",
+                "totalProposals": "所有提案",
+                "activeProposals": "现行提案",
+                "votingProposals": "您正在投票的提案",
+                "votedProposals": "您投票的所有提案"
+            },
+            "proposals": {
+                "title": "提案",
+                "voted": "已投票",
+                "successEdit": "Proposal successfully edited",
+                "successAdd": "{numberOfProposals, select, one {Proposal} other {Proposals}} successfully added",
+                "successAddAll": "{numberOfProposals, select, one {Proposal} other {Proposals}} successfully added to all accounts",
+                "successRemove": "提案成功移除",
+                "emptyTitle": "暂无提案"
+            },
+            "statusTimeline": {
+                "upcoming": "通知",
+                "commencing": "投票开放",
+                "holding": "计数开始",
+                "ended": "计数停止"
+            },
+            "details": {
+                "yourVote": {
+                    "title": "您的投票",
+                    "total": "已计总票数",
+                    "power": "投票权重"
+                },
+                "proposalInformation": {
+                    "title": "提案信息",
+                    "votingOpens": "投票开始于",
+                    "countingStarts": "计数开始于",
+                    "countingEnds": "计数结束于",
+                    "countingEnded": "计数结束于",
+                    "eventId": "Event ID",
+                    "nodeUrl": "节点 URL"
+                },
+                "fetching": "正在获取提案数据",
+                "hintVote": "您不能对处于宣布阶段的提案进行投票，投票将在 {time} 进行。"
+            }
         }
     },
     "popups": {
@@ -556,13 +627,69 @@
             "step_3": "按右键导航到设置。然后按两个按钮进行验证。您的Ledger设备显示Blind签名。",
             "step_4": "按两个按钮以启用交易盲签。设备显示已启用。您已完成。"
         },
-        "storageDepositBreakdown": {
-            "title": "存储押金明细",
-            "totalStorageDeposit": "存储押金总额",
-            "pendingTransactions": {
-                "title": "锁定在待处理的交易",
-                "subtitle": "用于发送本地资产和小额 IOTA 金额"
-            }
+        "balanceBreakdown": {
+            "title": "Balance breakdown",
+            "available": {
+                "title": "Available",
+                "subtitle": "Funds fully available for spending"
+            },
+            "pending": {
+                "title": "Pending",
+                "subtitle": "Temporarily locked in transactions"
+            },
+            "locked": {
+                "title": "Locked",
+                "subtitle": "Temporarily locked for governance"
+            },
+            "storageDeposit": {
+                "title": "Storage deposit",
+                "subtitle": "These funds are reserved for storing native assets."
+            },
+            "totalBalance": {
+                "title": "Total balance",
+                "subtitle": ""
+            },
+            "basicOutputs": {
+                "title": "Native Tokens",
+                "subtitle": "Reserved for Native Token storage"
+            },
+            "nftOutputs": {
+                "title": "NFTs",
+                "subtitle": "Reserved for NFT storage"
+            },
+            "aliasOutputs": {
+                "title": "Aliases",
+                "subtitle": "Reserved for Alias storage"
+            },
+            "foundryOutputs": {
+                "title": "Foundries",
+                "subtitle": "Reserved for Native Token Foundry storage"
+            },
+            "unclaimed": {
+                "title": "Unclaimed transaction",
+                "subtitle": "Temporarily locked in unclaimed transactions"
+            },
+            "timelock": {
+                "title": "Time lock",
+                "subtitle": "Temporarily locked in timelocked transactions"
+            },
+            "storageDepositReturn": {
+                "title": "SDRUC",
+                "subtitle": "Temporarily locked in Storage Deposit Return"
+            },
+            "governance": {
+                "title": "Governance",
+                "subtitle": "Reserved for voting power"
+            },
+            "minimizeStorageDepositButton": "Minimize storage deposit"
+        },
+        "minimizeStorageDeposit": {
+            "title": "最小化存储押金",
+            "description": "合并输出以尽量减少您所需的存储押金并增加您可用的余额。",
+            "confirmButton": "合并"
+        },
+        "alias": {
+            "title": "确认别名创建"
         },
         "password": {
             "title": "需要输入密码",
@@ -595,11 +722,19 @@
         },
         "deleteAccount": {
             "title": "删除{name}?",
-            "body": "此钱包没有交易历史。它可以被安全地删除。",
+            "body": "Are you sure you want to delete this wallet?",
+            "hint": "Note: once deleted, you can restore this wallet by using the \"Wallet Finder\" in the settings.",
             "typePassword": "请输入您的钱包密码进行确认。",
             "hideAccount": "删除钱包",
             "errorTitle": "无法删除 {name}",
             "errorBody1": "您不能删除这个钱包，您必须至少有一个钱包"
+        },
+        "externalUrl": {
+            "title": "在浏览器中打开",
+            "body": "您确定要在浏览器中打开 \"{url}\" 吗？",
+            "hint": "此 URL 在Firefly未知。请在打开前重新检查URL。",
+            "action": "打开 URL",
+            "invalidProtocol": "无法打开含有无效协议的 URL"
         },
         "hideAccount": {
             "title": "是否隐藏 {name}？",
@@ -707,7 +842,7 @@
             "userPath": "用户路径"
         },
         "transaction": {
-            "title": "确认交易",
+            "title": "发送资产",
             "body": "您将要发送 {amount} 到",
             "surplusIncluded": "此交易包含一个剩余的金额。请仔细检查这是你要发送的金额。",
             "sendingFromStakedAccount": "您正在从目前正在质押的钱包中发送转账。这可能会取消质押您的令牌。 您可以随时发送传输，但您可能需要稍后重新质押您剩余的代币。",
@@ -868,24 +1003,104 @@
                 "verifyToken": "我验证此代币"
             }
         },
+        "sendNft": {
+            "formTitle": "发送 NFT",
+            "confirmationTitle": "确认发送 NFT",
+            "property": {
+                "nft": "NFT"
+            }
+        },
         "nativeToken": {
             "formTitle": "铸造原生代币",
+            "confirmationTitle": "铸造原生代币",
             "property": {
                 "totalSupply": "总供应量",
+                "maximumSupply": "最大供应量",
+                "mintedTokens": "铸造代币",
+                "meltedTokens": "熔化代币",
                 "circulatingSupply": "流通供应量",
+                "aliasAddress": "别名控制器地址",
                 "standard": "标准",
-                "name": "名称",
+                "tokenName": "名称",
+                "unit": "单位",
+                "subunit": "子单位",
+                "storageDeposit": "存储押金",
                 "description": "描述",
                 "symbol": "符号",
                 "decimals": "小数位数",
                 "url": "URL",
-                "logoUrl": "图标URL",
-                "logo": "图标"
+                "logoUrl": "Logo URL",
+                "logo": "Logo",
+                "alias": "别名",
+                "assetId": "资产 Id"
+            }
+        },
+        "noAlias": {
+            "title": "不能锻造",
+            "description": "您必须拥有别名输出才能锻造原生代币。若要继续，请先创建别名。"
+        },
+        "mintNftForm": {
+            "title": "锻造简单NFT",
+            "errors": {
+                "invalidMimetype": "Invalid MimeType, check if the file type is supported",
+                "quantityTooSmall": "Quantity needs to be greater than 0",
+                "quantityTooLarge": "Quantity needs to be smaller than 64",
+                "emptyName": "Name is a required field",
+                "invalidURI": "Invalid URI, please provide a valid URI",
+                "royaltiesMustBeJSON": "Royalties must be a valid JSON",
+                "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
+                "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",
+                "invalidRoyaltyValueSum": "Invalid value, the sum of all royalties must be less than or equal to 1'",
+                "attributesMustBeJSON": "Attributes must be a valid JSON",
+                "attributesMustBeArrayOfObjects": "Attributes must be an array of objects",
+                "attributesInvalidKeys": "Invalid key, attributes must have the keys \"trait_type\" and \"value\"",
+                "attributesInvalidValues": "Invalid value, \"trait_type\" must be a non empty string and \"value\" must be a non empty string or a number"
             }
         },
         "faucetRequest": {
             "title": "Faucet 请求",
             "body": "您确定要从 {network} faucet中请求 {token} 代币吗？"
+        },
+        "manageVotingPower": {
+            "title": "管理投票权重",
+            "body": "定义你对提案进行表决的投票权重。",
+            "hint": "你分配给投票的所有资金都被锁定。为了使它们再次被花费，你需要减少你的投票权。这将影响到所有有投票权的提案。",
+            "amountZero": "请注意，将您的投票权设置为零将停止您对目前正在投票的所有提案的投票。"
+        },
+        "addProposal": {
+            "title": "增加提案",
+            "body": "请提供以下信息以添加提案。",
+            "addToAllAccounts": "将提案添加到所有账户"
+        },
+        "editProposal": {
+            "title": "Edit proposal",
+            "body": "Please provide the new url for the node that contains this proposal."
+        },
+        "voteForProposal": {
+            "title": "对提案投票",
+            "body": "您即将投票给 {proposal} 提案。",
+            "key": "您的投票权",
+            "hasAbstained": "你正在弃权回答 {numberOfQuestions, plural, one {# 问题} other {# 问题}}.",
+            "noVotingPower": "您没有任何投票权。请从治理仪表板中增加您的投票权。"
+        },
+        "revote": {
+            "title": "对提案重新表决",
+            "body": "更改您的投票权暂时停止您对所有建议的投票。只需点击“重新投票”即可继续投票。",
+            "hint": "Firefly 会记录你之前投票的所有提案和答案选项。"
+        },
+        "removeProposal": {
+            "title": "移除提案",
+            "body": "你确定要删除这个提案吗？",
+            "hint": "请注意，在计票期间删除提案将停止你的投票，但不会影响任何已经计算的投票。"
+        },
+        "stopVoting": {
+            "title": "停止投票",
+            "body": "你将要为 {proposalName} 提案停止投票。",
+            "hint": "请注意，在计票期间停止投票不会影响任何已经计算过的投票。"
+        },
+        "nodeAuthRequired": {
+            "title": "需要验证",
+            "body": "此节点需要额外的验证。请填写适当的信息。"
         }
     },
     "charts": {
@@ -919,6 +1134,15 @@
             "description": "确定要忽略这项交易吗？",
             "node": "请注意，忽略一项交易只是将其从你的活动流水中隐藏起来。"
         },
+        "confirmTokenBurn": {
+            "title": "燃烧 {assetName}",
+            "hint": "请注意烧毁代币可能会释放它附带的存储押金，并且不可逆转。"
+        },
+        "confirmNftBurn": {
+            "title": "燃烧 {nftName}",
+            "description": "您确定要烧毁此 NFT 吗？",
+            "hint": "请注意烧毁NFT可能会释放它附带的存储押金，并且不可逆转。"
+        },
         "proceedAnyway": "仍要继续",
         "save": "保存",
         "importSeed": "导入已有的私钥种子",
@@ -931,9 +1155,11 @@
             "shimmer": "恢复一个Shimmer 配置文件"
         },
         "createWallet": "创建新的 {protocol} 配置文件",
-        "createWalletDescription": "创建一个运行在 {protocol, select, iota {Chrysalis} shimmer {Shimmer}} 的新配置文件",
+        "createWalletDescription": "创建一个运行在 {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {其他未知}} 的新配置文件",
         "claimShimmer": "认领您的 Shimmer 质押奖励",
         "claimShimmerDescription": "导入您的 IOTA个人资料并领取质押奖励。",
+        "createAlias": "创建别名",
+        "createAliasDescription": "创建别名Output",
         "savePassword": "保存密码",
         "useBiometric": "使用生物特征安全机制",
         "setupPinCode": "设置 PIN 码",
@@ -1011,7 +1237,7 @@
         "readDocumentation": "阅读文档",
         "visitFaq": "访问常见问题",
         "viewStatus": "查看状态",
-        "viewStorageDeposit": "查看存储押金",
+        "viewBalanceBreakdown": "View balance breakdown",
         "showHiddenAccounts": "显示隐藏钱包",
         "confirm": "确认",
         "hideNetworkStatistics": "隐藏网络统计信息",
@@ -1043,10 +1269,12 @@
         "backup": "备份",
         "mint": "锻造",
         "mintNativeToken": "铸造原生代币",
+        "mintNft": "铸造NFT",
         "verifyToken": "验证代币",
         "unverifyToken": "取消验证代币",
         "hideToken": "隐藏代币",
         "unhideToken": "显示代币",
+        "burn": "燃烧",
         "burnToken": "燃烧代币",
         "faucetRequest": "获得 {token} 代币",
         "refreshTokenMetadata": "刷新代币元数据",
@@ -1054,7 +1282,16 @@
         "testDeepLink": "测试深链接",
         "initialize": "初始化",
         "initializing": "正在初始化",
-        "delete": "删除"
+        "delete": "删除",
+        "remove": "移除",
+        "addReference": "添加引用",
+        "depositNft": "存入NFT",
+        "vote": "投票",
+        "addProposal": "增加提案",
+        "removeProposal": "移除提案",
+        "changeNode": "Change Node",
+        "stopVoting": "停止投票",
+        "revote": "重新投票"
     },
     "general": {
         "recipient": "接收人",
@@ -1067,22 +1304,55 @@
         "recoveryPhrase": "恢复密语",
         "recentActivity": "最新活动",
         "sent": "已发送",
+        "sending": "发送",
         "received": "已收到",
+        "receiving": "接收",
+        "newVotingPower": "新的投票权重",
+        "votingPower": "投票权重",
+        "increased": "投票权已增加",
+        "increasing": "增加投票权",
+        "decreased": "投票权重降低",
+        "decreasing": "降低投票权重",
+        "voted": "已投票",
+        "voting": "投票中",
+        "changedVote": "变更投票",
+        "changingVote": "投票变更中...",
+        "revoted": "已重新投票",
+        "revoting": "重新投票",
+        "unvoted": "已取消投票",
+        "unvoting": "取消投票中...",
+        "sentNft": "NFT 已发送",
+        "sendingNft": "发送 NFT",
+        "receivedNft": "NFT 已接收",
+        "receivingNft": "接收 NFT",
         "transfer": "转帐",
         "transferring": "转账中",
+        "transferNft": "传输NFT",
+        "transferringNft": "NFT 传输中",
+        "mintedNft": "铸造NFT",
+        "mintingNft": "正在锻造NFT",
         "shimmerClaimed": "已认领",
         "shimmerClaiming": "认领中...",
         "shimmerGenesis": "Shimmer 创世块",
         "minted": "已锻造",
         "minting": "锻造中",
+        "burned": "烧毁的",
+        "burning": "燃烧中",
+        "consolidated": "合并的Output",
+        "consolidating": "合并中Output",
+        "aliasCreated": "别名已创建",
+        "creatingAlias": "创建别名",
         "sendPayment": "发送资金",
         "moveFunds": "内部转账",
         "sendTo": "发送到",
-        "sendFunds": "发送资金",
+        "sendAssets": "发送资产",
+        "sendAssetToAddress": "将资产发送到地址",
         "sendToAddress": "发送至地址",
+        "sendToken": "发送代币",
+        "sendNft": "发送 NFT",
+        "sendNftToAddress": "发送 NFT 到地址",
         "scanQrOrPaste": "扫描二维码或粘贴地址",
         "moveFundsBetweenAccounts": "钱包间资金互转",
-        "sendTokensToAddress": "发送Token到另一个地址",
         "manageAccount": "管理钱包",
         "customizeAcount": "自定义你的钱包",
         "account": "钱包",
@@ -1114,6 +1384,7 @@
         "systemTheme": "系统",
         "balance": "余额",
         "balanceWithValue": "余额：{balance}",
+        "balanceWithNetwork": "{network} 余额",
         "all": "全部",
         "incoming": "收到",
         "outgoing": "转出",
@@ -1132,6 +1403,7 @@
         "security": "安全设置",
         "accountAddress": "钱包地址",
         "network": "网络",
+        "destinationNetwork": "目标网络",
         "nodes": "节点",
         "wallet": "钱包",
         "help": "帮助",
@@ -1197,8 +1469,6 @@
         "unvotedFor": "为 {account} 已取消投票",
         "stakingTransaction": "质押交易",
         "unstakingTransaction": "取消质押交易",
-        "receiving": "接收",
-        "sending": "发送",
         "legacyNetwork": "旧的网络",
         "capsLock": "大写锁定键已开启",
         "version": "版本 {version}",
@@ -1218,9 +1488,17 @@
         "surplus": "剩余",
         "storageDeposit": "存储押金",
         "giftedStorageDeposit": "赠与的存储押金",
+        "storageDepositPerNft": "Storage deposit per NFT",
+        "totalStorageDeposit": "Total storage deposit",
         "expirationTime": "过期时间",
         "timelockDate": "时间锁",
         "claimedTime": "认领于",
+        "nftAddress": "NFT 地址",
+        "nftId": "NFT ID",
+        "nftMetadata": "NFT 元数据",
+        "aliasId": "別名 ID",
+        "governorAddress": "治理者地址",
+        "stateControllerAddress": "状态控制器地址",
         "copiedToClipboard": "复制到剪贴板",
         "total": "总计: {balance}",
         "availableBalanceWithValue": "可用余额: {balance}",
@@ -1228,6 +1506,8 @@
         "availableBalanceTooltip": "资产的总余额减去任何需要支付存储押金的资金（即锁定在待处理的交易中的资金，为原生资产保留的资金，或为NFT保留的资金）。",
         "amountClaimed": "{amount} 已认领",
         "metadata": "元数据",
+        "amountConsolidatedInputs": "合并的Output",
+        "name": "名称",
         "tag": "标签",
         "nodeList": "节点列表",
         "claimedIn": "已认领于",
@@ -1235,6 +1515,7 @@
         "assets": "资产",
         "nativeTokens": "原生代币",
         "mintNativeTokenDescription": "按照 IRC30 标准锻造原生代币",
+        "mintNftDescription": "按照IRC27标准Mint NFT",
         "faucetRequestDescription": "从 {network} 水龙头中申请免费代币",
         "refreshTokenMetadataDescription": "重置并刷新所有代币元数据",
         "refreshTokenMetadataHint": "这将重置您所有的代币元数据，包括验证状态并取消隐藏任何隐藏的资产。",
@@ -1245,7 +1526,38 @@
         "url": "URL",
         "hash": "Hash",
         "creating": "正在创建",
-        "updating": "正在更新"
+        "updating": "正在更新",
+        "enterAddress": "输入地址",
+        "transaction": "交易记录",
+        "alias": "别名",
+        "foundry": "铸造厂",
+        "token": "代币",
+        "nft": "NFT",
+        "type": "类型",
+        "immutableIssuer": "不可变发行者",
+        "smartContract": "智能合约",
+        "targetContract": "目标合约",
+        "contractFunction": "合约功能",
+        "gasBudget": "Gas预算",
+        "standard": "标准",
+        "uri": "URI",
+        "issuer": "发行者",
+        "issuerAddress": "发行者地址",
+        "issuerName": "发行者名称",
+        "quantity": "Quantity",
+        "collection": "收藏",
+        "collectionId": "收藏 ID",
+        "collectionName": "收藏名称",
+        "royalties": "版税",
+        "description": "描述",
+        "attributes": "属性",
+        "details": "详情",
+        "availableAmount": "{amount} 可用",
+        "properties": "属性",
+        "statistics": "统计",
+        "username": "用户名",
+        "jwt": "JSON web 代币",
+        "internalTransaction": "内部交易"
     },
     "filters": {
         "title": "过滤",
@@ -1258,6 +1570,25 @@
             "label": "显示已拒绝",
             "yes": "是",
             "no": "否"
+        },
+        "showValueless": {
+            "label": "显示无价值",
+            "yes": "是",
+            "no": "否"
+        },
+        "ascDesc": {
+            "Asc": "升序",
+            "Desc": "降序"
+        },
+        "assetOrder": {
+            "label": "排序",
+            "Name": "名称",
+            "Amount": "金额"
+        },
+        "internalExternal": {
+            "label": "内部/外部",
+            "internal": "内部",
+            "external": "外部"
         },
         "verificationStatus": {
             "label": "验证状态",
@@ -1297,9 +1628,36 @@
         },
         "type": {
             "label": "类型",
+            "basic": "基本",
+            "nft": "NFT",
+            "alias": "别名",
+            "foundry": "铸造厂",
+            "governance": "治理",
+            "consolidation": "合并"
+        },
+        "direction": {
+            "label": "方向",
             "incoming": "传入",
             "outgoing": "转出",
-            "internal": "内部"
+            "selfTransaction": "自我交易"
+        },
+        "proposalType": {
+            "label": "类型",
+            "official": "官方",
+            "custom": "自定义"
+        },
+        "phase": {
+            "label": "阶段"
+        },
+        "participated": {
+            "label": "我参与的",
+            "yes": "是",
+            "no": "否"
+        },
+        "proposalOrder": {
+            "label": "订单",
+            "name": "名称",
+            "phase": "阶段"
         }
     },
     "dates": {
@@ -1342,8 +1700,11 @@
             "receivedWhileLoggedOut": "请登录以启动深链接",
             "notEnabled": "深链接没有被激活。",
             "invalidFormat": "您使用的深链接无效",
-            "invalidAmount": "深链接中的金额不是数字 {amount}",
+            "invalidAmount": "深链接中的金额不是整数 {amount}",
             "invalidSurplus": "深链接中的余额不是数字 {surplus}",
+            "governance": {
+                "unrecognizedOperation": "无法识别的治理操作: {operation}"
+            },
             "wallet": {
                 "send": {
                     "success": "从深链接添加的付款详细信息"
@@ -1368,6 +1729,15 @@
         "mintNativeToken": {
             "success": "已发送的原生代币锻造交易"
         },
+        "burnNativeToken": {
+            "success": "已发送的原生代币烧毁交易"
+        },
+        "mintNft": {
+            "success": "已发送的NFT锻造交易"
+        },
+        "burnNft": {
+            "success": "已发送的NFT燃烧交易"
+        },
         "refreshTokenMetadata": {
             "success": "所有代币元数据已被重置和刷新。"
         },
@@ -1382,6 +1752,12 @@
         "claimShimmerRewards": {
             "success": "为 {accountAlias} 领取 Shimmer 奖励",
             "error": "认领奖励时出现错误，请重试。"
+        },
+        "vote": {
+            "success": "投票成功"
+        },
+        "stopVoting": {
+            "success": "投票成功停止"
         }
     },
     "error": {
@@ -1417,9 +1793,12 @@
             "incorrect": "您当前的 PIN 码不正确。",
             "invalid": "无效 PIN 码。"
         },
+        "address": {
+            "wrongAddressType": "错误的地址类型"
+        },
         "account": {
+            "addressNotFound": "在您的帐户中找不到地址。",
             "length": "您的钱包名称不能超过 {length, plural, one {1 个字符} other {# 字符}}。",
-            "empty": "您必须先使用您最新的钱包之后才能创建一个新钱包。",
             "emptyName": "配置文件名称必须包含至少 1 个字符。",
             "notEmpty": "您必须在删除此帐户之前转移您的余额。",
             "duplicate": "此名称的钱包已经存在",
@@ -1442,12 +1821,13 @@
             "amountNoFloat": "在选择最小的单位时不能使用小数位数",
             "amountInvalidFormat": "金额似乎是一个无效的数字。",
             "amountSmallerThanSubunit": "金额必须大于最小的子单位。",
-            "tagTooLong": "标签的长度不能超过64个字符。",
-            "metadataTooLong": "元数据的长度不能超过8192个字符。",
+            "tagTooLong": "标签的长度不能超过64个字节。",
+            "metadataTooLong": "元数据的长度不能超过8192个字节。",
             "amountZero": "金额必须大于零。",
             "wrongAddressPrefix": "地址以前缀 {prefix} 开始。",
             "wrongAddressFormat": "地址格式不正确。",
             "invalidAddress": "地址无效的",
+            "invalidAssetId": "The asset id is not valid.",
             "unknownAsset": "该资产在这个账户中未知。",
             "insufficientFunds": "该账户资金不足。",
             "insufficientFundsStorageDeposit": "没有足够的资金来支付存储押金",
@@ -1458,8 +1838,18 @@
             "cancelled": "您的交易已被取消。",
             "transaction": "发送交易错误。请再次尝试。",
             "invalidExpirationDateTime": "选择的过期日期/时间无效。",
+            "noInputs": "找不到Input。",
+            "notEnoughBalance": "余额不足",
             "missingTransactionId": "事务 ID缺失。",
-            "missingTransactionProgressEventPayload": "交易进度事件的有效载荷缺失。"
+            "missingTransactionProgressEventPayload": "交易进度事件的有效载荷缺失。",
+            "recipientRequired": "收件人是必需的",
+            "nftRequired": "NFT 是必填项",
+            "nftNotInHex": "NFT 地址必须是十六进制格式",
+            "nftNotInPossession": "NFT 不存在",
+            "reservedTagKeyword": "无法使用保留标签关键字"
+        },
+        "layer2": {
+            "layer1Recipient": "L2事务不能发送到L1帐户。"
         },
         "node": {
             "invalid": "请输入有效的URL",
@@ -1470,7 +1860,6 @@
             "invalidCertificate": "无法与无效证书连接。",
             "https": "需要HTTPS。目前不支持通过 HTTP 进行不安全的连接。",
             "duplicate": "此节点已被添加。",
-            "unsynced": "节点未同步。",
             "noSyncedNode": "没有可用的同步节点。",
             "timeNotSynced": "设备时间不正确，无法同步节点。",
             "answer": "无法从所有节点获得响应。",
@@ -1540,6 +1929,52 @@
         "walletApiEvent": {
             "invalidAccountIndex": "{eventName} 事件的帐户索引无效",
             "invalidPayload": "{eventName} 事件的有效负载无效"
+        },
+        "aliasMinting": {
+            "aliasRequired": "别名是必需的",
+            "aliasNotInPossession": "别名不存在"
+        },
+        "noOutputsToConsolidate": "没有足够的Output来合并",
+        "eventId": {
+            "doesNotStartWith0x": "事件 ID 应该以 '0x' 开始",
+            "insufficientLength": "事件ID应该是66个字符长",
+            "alreadyRegistered": "事件ID已注册"
+        },
+        "nft": {
+            "unsupportedUrl": {
+                "short": "不支持 Url",
+                "long": "不支持Url模式"
+            },
+            "unsupportedFileType": {
+                "short": "不支持的媒体类型",
+                "long": "不支持此媒体类型。"
+            },
+            "notMatchingFileTypes": {
+                "short": "加载已阻止的",
+                "long": "NFT 文件类型与预期媒体类型不匹配"
+            },
+            "tooLargeFile": {
+                "short": "文件过大",
+                "long": "由于文件太大，无法加载 NFT"
+            },
+            "corsError": {
+                "short": "加载受阻",
+                "long": "NFT加载被CORS 策略阻止"
+            },
+            "unsafeToLoad": {
+                "short": "不安全加载",
+                "long": "检查 NFT 是否安全加载时出错"
+            },
+            "loadingError": {
+                "short": "无法加载",
+                "long": "加载 NFT 时出错"
+            }
+        },
+        "governance": {
+            "unableToAddProposal": {
+                "short": "无法添加提案",
+                "long": "Unable to find proposal {proposalId} on the specified node"
+            }
         }
     },
     "warning": {
@@ -1581,13 +2016,22 @@
         },
         "optionalInput": "这些可选数据将在explorer 上公开，并可由所有人查看。",
         "transactionDetails": {
+            "minting": {
+                "storageDeposit": "一个可退还的代币押金，用于将你的交易存储在Tangle上。",
+                "giftedStorageDeposit": "此项交易的存储押金是赠送给你的。你不需要退还押金。",
+                "expirationTime": "请在到期前认领这些资金，否则它们将被退回给发件人。",
+                "timelockDate": "发送者在这些资金上设置了一个时间锁。您将能够在到期后使用它们。",
+                "metadata": "一个可选的数据字段，用于在Tangle上持久性地存储数据。",
+                "tag": "一个简短的可选数据字段。对各组交易分别进行标记可以使它们更容易被搜索到。"
+            },
             "incoming": {
                 "storageDeposit": "一个可退还的代币押金，用于将你的交易存储在Tangle上。",
                 "giftedStorageDeposit": "此项交易的存储押金是赠送给你的。你不需要退还押金。",
                 "expirationTime": "请在到期前认领这些资金，否则它们将被退回给发件人。",
                 "timelockDate": "发送者在这些资金上设置了一个时间锁。您将能够在到期后使用它们。",
                 "metadata": "一个可选的数据字段，用于在Tangle上持久性地存储数据。",
-                "tag": "一个简短的可选数据字段。对交易组进行标记可以使它们更容易被搜索到。"
+                "tag": "一个简短的可选数据字段。对交易组进行标记可以使它们更容易被搜索到。",
+                "gasBudget": "为了在Shimmer EVM上进行交易或执行智能合约功能，需要有Gas预算。"
             },
             "outgoing": {
                 "storageDeposit": "存储押金是在Tangle上储存你的交易所需的可退还押金。",
@@ -1595,14 +2039,39 @@
                 "expirationTime": "如果接收人没有及时认领，你的代币将被退回给你。",
                 "timelockDate": "您为这笔交易添加了一个时间锁。收件人将无法花费这些资金，直到时间锁到期。",
                 "metadata": "一个可选的数据字段，用于在Tangle上持久性地存储数据。",
-                "tag": "一个简短的可选数据字段。对各组交易分别进行标记可以使它们更容易被搜索到。"
+                "tag": "一个简短的可选数据字段。对各组交易分别进行标记可以使它们更容易被搜索到。",
+                "gasBudget": "为了在Shimmer EVM上进行交易或执行智能合约功能，需要有Gas预算。"
+            },
+            "nftMetadata": {
+                "standard": "NFT 标准，例如 IRC27。",
+                "type": "NFT的MimeType，例如：image/png。",
+                "collectionId": "创建此 NFT 的收藏 NFT 的 UTXO 字符串",
+                "royalties": "一个包含键值对的地址的对象，映射到支付率上",
+                "issuerName": "创建者名称",
+                "attributes": "定义NFT 属性的特性和值数组"
             }
         },
-        "mintNativeTokenForm": {
+        "mintNativeToken": {
             "decimals": "IRC30 可选参数：代币使用的小数点数(将代币金额除以10^小数，以获得其用户代表权)。",
             "description": "IRC30的可选参数：代币的人性化描述。",
             "url": "IRC30 可选参数：指向有关该代币的更多资源的URL，如网站或社交媒体页面。",
             "logoUrl": "IRC30 可选参数：指向代币Logo的图像资源的URL。"
+        },
+        "mintNftForm": {
+            "collectionId": "可选参数：创建此 NFT 的收藏 NFT 的 UTXO 字符串",
+            "collectionName": "可选参数：收藏的名称",
+            "royalties": "可选参数：包含要支付百分比的地址的键值对的对象",
+            "issuerName": "可选参数：创建者名称",
+            "description": "可选参数：NFT 的描述",
+            "attributes": "可选参数：定义NFT属性的特性和值数组",
+            "uri": "要使用自定义媒体创建一个 URI，请先通过存储服务上传您的文件到IPFS (例如，https://nft.storage/)",
+            "quantity": "Optional parameter: The quantity of copies minted with this metadata."
+        },
+        "governance": {
+            "removeProposalWarning": "你必须在删除该提案之前停止对它进行表决。"
+        },
+        "updateStronghold": {
+            "profileBadge": "Your Stronghold is out of date. Log in to update Stronghold."
         }
     },
     "exports": {
@@ -1631,8 +2100,11 @@
     },
     "tabs": {
         "wallet": "钱包",
-        "staking": "质押",
-        "developer": "开发者"
+        "collectibles": "合集",
+        "governance": "治理",
+        "developer": "开发者",
+        "tokens": "代币",
+        "activity": "活动"
     },
     "pills": {
         "stake": {
@@ -1648,7 +2120,7 @@
             },
             "outgoing": {
                 "Pending": "正在发送给",
-                "Confirmed": "发送到",
+                "Confirmed": "已发送至",
                 "Conflicting": "发送失败"
             }
         },
@@ -1674,6 +2146,16 @@
             "Confirmed": "已锻造",
             "Conflicting": "锻造失败"
         },
+        "burn": {
+            "Pending": "燃烧中",
+            "Confirmed": "烧毁的",
+            "Conflicting": "燃烧失败"
+        },
+        "consolidation": {
+            "Pending": "合并中Output",
+            "Confirmed": "合并的Output",
+            "Conflicting": "合并Output失败"
+        },
         "migrate": {
             "Pending": "迁移到",
             "Confirmed": "已迁移",
@@ -1684,7 +2166,53 @@
             "claimed": "已认领",
             "expired": "已过期"
         },
-        "locked": "已锁定"
+        "governance": {
+            "increaseVotingPower": {
+                "Pending": "增加投票权",
+                "Confirmed": "增加投票权",
+                "Conflicting": "增加投票权失败"
+            },
+            "decreaseVotingPower": {
+                "Pending": "降低投票权",
+                "Confirmed": "降低投票权重",
+                "Conflicting": "降低投票权重失败"
+            },
+            "startVoting": {
+                "Pending": "投票给",
+                "Confirmed": "已投票给",
+                "Conflicting": "无法成功投票给"
+            },
+            "stopVoting": {
+                "Pending": "停止投票给",
+                "Confirmed": "已停止投票给",
+                "Conflicting": "无法停止投票给"
+            },
+            "changedVote": {
+                "Pending": "变更投票给",
+                "Confirmed": "已变更投票给",
+                "Conflicting": "无法变更投票给"
+            },
+            "revote": {
+                "Pending": "重新投票",
+                "Confirmed": "重新投票",
+                "Conflicting": "无法重新投票"
+            }
+        },
+        "alias": {
+            "creation": {
+                "Pending": "创建别名",
+                "Confirmed": "别名已创建",
+                "Failed": "创建别名失败"
+            }
+        },
+        "locked": "已锁定",
+        "smartContract": "智能合约",
+        "proposalStatus": {
+            "upcoming": "公告",
+            "commencing": "投票开放",
+            "holding": "计数中",
+            "ended": "已关闭"
+        }
     },
     "menus": {
         "expirationTimePicker": {

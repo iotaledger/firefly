@@ -3,37 +3,12 @@ import { marketCoinPrices } from '@core/market'
 import { activeProfileId } from '@core/profile'
 import { derived, get, Readable, writable, Writable } from 'svelte/store'
 import { getAccountAssetsForSelectedAccount } from '../actions/getAccountAssetsForSelectedAccount'
-import { AssetOrderOption, BooleanFilterOption, NotVerifiedStatus, OrderOption, VerifiedStatus } from '../enums'
+import { DEFAULT_ASSET_FILTER } from '../constants'
 import { AssetFilter, IAsset } from '../interfaces'
 import { IAccountAssets } from '../interfaces/account-assets.interface'
 import { persistedAssets } from './persisted-assets.store'
 
-export const assetFilter: Writable<AssetFilter> = writable({
-    verificationStatus: {
-        active: false,
-        type: 'selection',
-        localeKey: 'filters.verificationStatus',
-        selected: 'new',
-        choices: Object.values(NotVerifiedStatus)
-            .map((status) => String(status))
-            .concat(Object.values(VerifiedStatus).map((status) => String(status))),
-    },
-    showHidden: {
-        active: false,
-        type: 'selection',
-        localeKey: 'filters.showHidden',
-        selected: BooleanFilterOption.Yes,
-        choices: [BooleanFilterOption.Yes, BooleanFilterOption.No],
-    },
-    order: {
-        active: false,
-        type: 'order',
-        localeKey: 'filters.assetOrder',
-        selected: AssetOrderOption.Name,
-        ascDesc: OrderOption.Asc,
-        choices: [AssetOrderOption.Name, AssetOrderOption.Amount],
-    },
-})
+export const assetFilter: Writable<AssetFilter> = writable(DEFAULT_ASSET_FILTER)
 
 export const selectedAccountAssets: Readable<IAccountAssets> = derived(
     [activeProfileId, marketCoinPrices, selectedAccount, persistedAssets, assetFilter],

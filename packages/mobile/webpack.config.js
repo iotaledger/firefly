@@ -3,20 +3,15 @@ const CopyPlugin = require('copy-webpack-plugin')
 const { DefinePlugin } = require('webpack')
 const path = require('path')
 const sveltePreprocess = require('svelte-preprocess')
-const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin')
 
 const mode = process.env.NODE_ENV || 'development'
 const prod = mode === 'production'
 
 // ------------------------ Resolve ------------------------
-const tsConfigOptions = {
-    configFile: './tsconfig.json',
-}
-
 const resolve = {
     alias: {
         svelte: path.dirname(require.resolve('svelte/package.json')),
-        '@auxiliary': path.resolve(__dirname, './lib/auxiliary'),
+        '@auxiliary': path.resolve(__dirname, '../shared/lib/auxiliary'),
         '@contexts': path.resolve(__dirname, '../shared/lib/contexts'),
         '@components': path.resolve(__dirname, './components/'),
         '@core': path.resolve(__dirname, '../shared/lib/core'),
@@ -24,6 +19,7 @@ const resolve = {
         '@lib': path.resolve(__dirname, '../shared/lib'),
         '@ui': path.resolve(__dirname, '../shared/components/'),
         '@views': path.resolve(__dirname, './views/'),
+        '@': path.resolve(__dirname, './lib/'),
     },
     extensions: ['.mjs', '.js', '.ts', '.svelte'],
     mainFields: ['svelte', 'browser', 'module', 'main'],
@@ -114,7 +110,6 @@ const rendererPlugins = [
         filename: '[name].css',
     }),
     new DefinePlugin({
-        devMode: JSON.stringify(mode === 'development'),
         'process.env.PLATFORM': JSON.stringify(process.env.PLATFORM),
         'process.env.STAGE': JSON.stringify(process.env.STAGE),
     }),

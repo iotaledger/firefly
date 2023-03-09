@@ -62,7 +62,7 @@
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Configura {protocol, select, IOTA {un} Shimmer {un}} profilo di {protocol}",
+                    "title": "Configura {protocol, select, IOTA {un profilo di} Shimmer {un profilo di} other {un profilo di}} {protocol}",
                     "body": "Seleziona il metodo appropriato per impostare il tuo profilo {protocol}."
                 },
                 "setupNew": {
@@ -198,10 +198,10 @@
             "videoGuide": "Video guida di migrazione di Ledger"
         },
         "ledgerInstallationGuide": {
-            "title": "Have you installed the {protocol} app on your Ledger device?",
+            "title": "Hai installato l'app {protocol} sul tuo dispositivo Ledger?",
             "body1": "Prima di procedere, devi usare Ledger Live per trovare e installare l'app di {protocol}.",
             "body2": "Assicurati che il tuo firmware Ledger sia aggiornato. Tutte le app preinstallate dovrebbero essere aggiornate alle loro ultime versioni.",
-            "action": "Yes, I've installed the {protocol} app"
+            "action": "Sì, ho installato l'app {protocol}"
         },
         "importFromLedger": {
             "title": "Ripristina o Migra il tuo Ledger",
@@ -308,6 +308,10 @@
             "appLock": {
                 "title": "Blocco Automatico",
                 "description": "Tempo d'inattività prima del blocco dei tuoi portafogli e della tua disconnessione"
+            },
+            "maxMediaSize": {
+                "title": "Dimensione massima media",
+                "description": "I media NFT con dimensioni superiori a questo limite non verranno scaricati e verrà invece visualizzato un segnaposto che rappresenta il tipo di media"
             },
             "changePassword": {
                 "title": "Modifica la password",
@@ -432,7 +436,8 @@
         },
         "login": {
             "pleaseWait": "Attendere {time, plural, one {1 secondo} other {# secondi}}",
-            "incorrectAttempts": "{attempts, plural, one {1 tentativo errato} other {# tentativi errati}}"
+            "incorrectAttempts": "{attempts, plural, one {1 tentativo errato} other {# tentativi errati}}",
+            "hintStronghold": "Your Stronghold's version is out of date. Please log in to update your Stronghold."
         },
         "loadProfile": {
             "loginSteps": {
@@ -459,6 +464,7 @@
             },
             "profileModal": {
                 "allSettings": "Tutte le impostazioni",
+                "profileApplication": "Profilo, applicazione, sicurezza",
                 "logout": "Esci",
                 "stronghold": {
                     "title": "Profilo bloccato",
@@ -545,6 +551,71 @@
                 "title": "Selezione Colore",
                 "hexCode": "Codice colore"
             }
+        },
+        "collectibles": {
+            "gallery": {
+                "title": "Collezionabili",
+                "emptyTitle": "Nessun collectibles",
+                "noResults": "Nessun risultato",
+                "emptyDescription": "Deposita o Ricevi il tuo primo collezionabile ora!"
+            },
+            "details": {
+                "storageDepositDescription": "Un deposito rimborsabile è richiesto per memorizzare il vostro NFT sul Tangle.",
+                "attributes": "Attributi",
+                "menu": {
+                    "download": "Download",
+                    "setAvatar": "Imposta questo NFT come avatar del profilo",
+                    "view": "Visualizza il media nel browser",
+                    "burn": "Brucia NFT"
+                }
+            }
+        },
+        "governance": {
+            "votingPower": {
+                "title": "Potere di voto",
+                "maximal": "Potere di voto massimo: {value}",
+                "manage": "Gestisci il potere di voto"
+            },
+            "proposalsDetails": {
+                "title": "Dettagli",
+                "totalProposals": "Totale proposte",
+                "activeProposals": "Proposte attive",
+                "votingProposals": "Proposte su cui stai votando",
+                "votedProposals": "Totale delle proposte votate"
+            },
+            "proposals": {
+                "title": "Proposte",
+                "voted": "Votato",
+                "successEdit": "La proposta è stata aggiornata correttamente",
+                "successAdd": "{numberOfProposals, select, one {Proposta} other {Proposte}} aggiunte con successo",
+                "successAddAll": "{numberOfProposals, select, one {Proposta} other {Proposte}} aggiunte con successo",
+                "successRemove": "Proposta rimossa con successo",
+                "emptyTitle": "Nessuna proposta"
+            },
+            "statusTimeline": {
+                "upcoming": "Annuncio",
+                "commencing": "Votazione aperta",
+                "holding": "Inizio conteggio",
+                "ended": "Conteggio terminato"
+            },
+            "details": {
+                "yourVote": {
+                    "title": "Il tuo voto",
+                    "total": "Totale voti contati",
+                    "power": "Potere di voto"
+                },
+                "proposalInformation": {
+                    "title": "Informazioni sulle proposte",
+                    "votingOpens": "Inizia la votazione su",
+                    "countingStarts": "Il conteggio inizia il",
+                    "countingEnds": "Conteggio terminato",
+                    "countingEnded": "Conteggio terminato il",
+                    "eventId": "ID Evento",
+                    "nodeUrl": "URL del nodo"
+                },
+                "fetching": "Recupero dati proposta",
+                "hintVote": "Non puoi votare una proposta nella fase di annuncio, il voto sarà aperto tra {time}."
+            }
         }
     },
     "popups": {
@@ -556,13 +627,69 @@
             "step_3": "Premere il pulsante destro per passare alle Impostazioni. Quindi premere entrambi i pulsanti per convalidare. Il dispositivo Ledger visualizza la firma cieca.",
             "step_4": "Premi entrambi i pulsanti per abilitare la firma della transazione cieca. Il dispositivo viene visualizzato Abilitato. Hai finito."
         },
-        "storageDepositBreakdown": {
-            "title": "Ripartizione dei depositi",
-            "totalStorageDeposit": "Totale storage deposit\n",
-            "pendingTransactions": {
-                "title": "Bloccati in transazioni pendenti",
-                "subtitle": "Per l'invio di beni nativi e piccoli importi IOTA"
-            }
+        "balanceBreakdown": {
+            "title": "Balance breakdown",
+            "available": {
+                "title": "Available",
+                "subtitle": "Funds fully available for spending"
+            },
+            "pending": {
+                "title": "Pending",
+                "subtitle": "Temporarily locked in transactions"
+            },
+            "locked": {
+                "title": "Locked",
+                "subtitle": "Temporarily locked for governance"
+            },
+            "storageDeposit": {
+                "title": "Storage deposit",
+                "subtitle": "These funds are reserved for storing native assets."
+            },
+            "totalBalance": {
+                "title": "Total balance",
+                "subtitle": ""
+            },
+            "basicOutputs": {
+                "title": "Native Tokens",
+                "subtitle": "Reserved for Native Token storage"
+            },
+            "nftOutputs": {
+                "title": "NFTs",
+                "subtitle": "Reserved for NFT storage"
+            },
+            "aliasOutputs": {
+                "title": "Aliases",
+                "subtitle": "Reserved for Alias storage"
+            },
+            "foundryOutputs": {
+                "title": "Foundries",
+                "subtitle": "Reserved for Native Token Foundry storage"
+            },
+            "unclaimed": {
+                "title": "Unclaimed transaction",
+                "subtitle": "Temporarily locked in unclaimed transactions"
+            },
+            "timelock": {
+                "title": "Time lock",
+                "subtitle": "Temporarily locked in timelocked transactions"
+            },
+            "storageDepositReturn": {
+                "title": "SDRUC",
+                "subtitle": "Temporarily locked in Storage Deposit Return"
+            },
+            "governance": {
+                "title": "Governance",
+                "subtitle": "Reserved for voting power"
+            },
+            "minimizeStorageDepositButton": "Minimize storage deposit"
+        },
+        "minimizeStorageDeposit": {
+            "title": "Minimizza il deposito di archiviazione",
+            "description": "Consolidare le uscite per ridurre al minimo il deposito di archiviazione richiesto e aumentare il saldo disponibile.",
+            "confirmButton": "Consolida"
+        },
+        "alias": {
+            "title": "Conferma la creazione dell'alias"
         },
         "password": {
             "title": "Password necessaria",
@@ -595,11 +722,19 @@
         },
         "deleteAccount": {
             "title": "Eliminare {name}?",
-            "body": "Questo wallet non ha una cronologia delle transazioni. Può essere eliminato in sicurezza.",
+            "body": "Sei sicuro di voler eliminare questo portafoglio?",
+            "hint": "Nota: una volta eliminato, è possibile ripristinare questo portafoglio utilizzando il \"Wallet Finder\" nelle impostazioni.",
             "typePassword": "Digita la password del tuo wallet per confermare.",
             "hideAccount": "Elimina wallet",
             "errorTitle": "Impossibile eliminare {name}",
             "errorBody1": "Non puoi eliminare questo wallet, è necessario averne almeno uno."
+        },
+        "externalUrl": {
+            "title": "Apri nel Browser",
+            "body": "Sei sicuro di voler aprire \"{url}\" nel browser?",
+            "hint": "Questo URL non è noto a Firefly. Si prega di controllare l'URL prima di aprirlo.",
+            "action": "Apri URL",
+            "invalidProtocol": "Impossibile aprire l'URL con protocollo non valido"
         },
         "hideAccount": {
             "title": "Nascondere {name}?",
@@ -707,7 +842,7 @@
             "userPath": "Percorso Utente"
         },
         "transaction": {
-            "title": "Conferma la transazione",
+            "title": "Invia asset",
             "body": "Stai per inviare {amount} a",
             "surplusIncluded": "Questa transazione contiene un importo in eccesso. Si prega di controllare due volte questo è l'importo che si desidera inviare.",
             "sendingFromStakedAccount": "Stai inviando un trasferimento da un wallet che si trova attualmente in staking. Questo potrebbe annullare lo staking dei token. L'invio della transazione è possible, ma è necessario rimettere in stake i token rimanenti.",
@@ -749,12 +884,12 @@
             "confirm": "Per procedere, conferma il prompt visualizzato sul tuo dispositivo Ledger"
         },
         "ledgerAppGuide": {
-            "title": "Guide to installing the {legacy} app",
+            "title": "Guida all'installazione dell'app {legacy}",
             "steps": {
                 "0": "Installare e aprire l'applicazione Ledger Live",
                 "1": "Assicurati che il tuo Ledger sia connesso",
-                "2": "Search for the {legacy} app. You may need to enable Ledger Live developer mode.",
-                "3": "Install the {legacy} app",
+                "2": "Cerca l'app {legacy}. Potrebbe essere necessario abilitare la modalità sviluppatore Ledger Live.",
+                "3": "Installa l'applicazione {legacy}",
                 "4": "Ricorda che è importante chiudere Ledger Live prima di tornare a Firefly"
             }
         },
@@ -868,24 +1003,104 @@
                 "verifyToken": "Verifico questo token"
             }
         },
+        "sendNft": {
+            "formTitle": "Invia NFT",
+            "confirmationTitle": "Conferma l'invio di NFT",
+            "property": {
+                "nft": "NFT"
+            }
+        },
         "nativeToken": {
             "formTitle": "Conia token nativi",
+            "confirmationTitle": "Conia token nativi",
             "property": {
-                "totalSupply": "Disponibilità Totale",
-                "circulatingSupply": "Disponibilità Circolante",
+                "totalSupply": "Quantità totale",
+                "maximumSupply": "Disponibilità massima",
+                "mintedTokens": "Token coniati",
+                "meltedTokens": "Token coniati",
+                "circulatingSupply": "Quantità circolante",
+                "aliasAddress": "Indirizzo del controller Alias",
                 "standard": "Standard",
-                "name": "Nome",
+                "tokenName": "Nome",
+                "unit": "Unità",
+                "subunit": "Sotto-unità",
+                "storageDeposit": "Storage deposit",
                 "description": "Descrizione",
                 "symbol": "Simbolo",
                 "decimals": "Decimali",
                 "url": "URL",
                 "logoUrl": "URL del Logo",
-                "logo": "Logo"
+                "logo": "Logo",
+                "alias": "Alias",
+                "assetId": "Asset Id"
+            }
+        },
+        "noAlias": {
+            "title": "Impossibile coniare",
+            "description": "È necessario possedere un output alias per coniare token nativi. Per continuare, si prega di creare un alias prima"
+        },
+        "mintNftForm": {
+            "title": "Conia un NFT semplice",
+            "errors": {
+                "invalidMimetype": "MimeType non valido, controlla se il tipo di file è supportato",
+                "quantityTooSmall": "La quantità deve essere maggiore di 0",
+                "quantityTooLarge": "La quantità deve essere inferiore a 64",
+                "emptyName": "Nome è un campo obbligatorio",
+                "invalidURI": "URI non valido, fornire un URI valido",
+                "royaltiesMustBeJSON": "Le royalties devono essere un JSON valido",
+                "invalidAddress": "Indirizzo non valido, deve essere un indirizzo {networkHrp} valido al quale verranno inviate le royalties",
+                "invalidRoyaltyValue": "Valore non valido, deve essere un decimale numerico rappresentativo della percentuale richiesta. Ad esempio 0.05",
+                "invalidRoyaltyValueSum": "Valore non valido, la somma di tutte le royalties deve essere inferiore o uguale a 1",
+                "attributesMustBeJSON": "Gli attributi devono essere un JSON valido",
+                "attributesMustBeArrayOfObjects": "Gli attributi devono essere un insieme di oggetti",
+                "attributesInvalidKeys": "Chiave non valida, gli attributi devono avere le chiavi \"trait_type\" e \"value\"",
+                "attributesInvalidValues": "Valore non valido, \"trait_type\" deve essere una stringa non vuota e \"value\" deve essere una stringa non vuota o un numero"
             }
         },
         "faucetRequest": {
             "title": "Richiesta faucet",
             "body": "Sei sicuro di voler richiedere {token} token dal faucet {network}?"
+        },
+        "manageVotingPower": {
+            "title": "Gestisci il potere di voto",
+            "body": "Definisci il tuo potere di voto per votare sulle proposte.",
+            "hint": "Tutti i fondi stanziati per il voto sono bloccati. Al fine di renderli spendibili di nuovo, è necessario ridurre il vostro potere di voto. Ciò riguarda tutte le proposte con una votazione attiva.",
+            "amountZero": "Si prega di essere consapevoli che l'impostazione del potere di voto a zero interromperà tutti i voti per tutte le proposte su cui si sta attualmente votando."
+        },
+        "addProposal": {
+            "title": "Aggiungi proposta",
+            "body": "Si prega di fornire le informazioni elencate di seguito per aggiungere una proposta.",
+            "addToAllAccounts": "Aggiungi la proposta a tutti gli account"
+        },
+        "editProposal": {
+            "title": "Modifica proposta",
+            "body": "Si prega di fornire il nuovo url per il nodo che contiene questa proposta."
+        },
+        "voteForProposal": {
+            "title": "Votazione per la proposta",
+            "body": "Stai per votare la proposta {proposal}.",
+            "key": "Il tuo potere di voto",
+            "hasAbstained": "Ti stai astenendo dalla risposta {numberOfQuestions, plural, one {# domanda} other {# domande}}.",
+            "noVotingPower": "Non hai alcun potere di voto, aumenta il tuo potere di voto dal cruscotto della governance."
+        },
+        "revote": {
+            "title": "Vota nuovamente le proposte",
+            "body": "Cambiare il tuo potere di voto interrompe temporaneamente i tuoi voti per tutte le proposte da contare. Basta cliccare su \"Revote\" per riprendere il voto.",
+            "hint": "Firefly ricorda tutte le proposte e le opzioni di risposta votate in precedenza."
+        },
+        "removeProposal": {
+            "title": "Rimuovi la proposta",
+            "body": "Sei sicuro di voler eliminare questa proposta?",
+            "hint": "Si prega di notare che la rimozione di una proposta durante il periodo di conteggio fermerà i vostri voti, ma non influirà su tutti i voti che sono già stati conteggiati."
+        },
+        "stopVoting": {
+            "title": "Interrompi la votazione",
+            "body": "Stai per smettere di votare per la proposta {proposalName}.",
+            "hint": "Si prega di notare che interrompere la votazione durante il periodo di conteggio non avrà impatto su qualsiasi voto già contato."
+        },
+        "nodeAuthRequired": {
+            "title": "Autenticazione richiesta",
+            "body": "Questo nodo richiede ulteriore autenticazione. Si prega di compilare le informazioni appropriate."
         }
     },
     "charts": {
@@ -919,6 +1134,15 @@
             "description": "Sei sicuro di voler rifiutare questa transazione?",
             "node": "Si prega di notare che il rifiuto di una transazione la nasconde solo dal tuo feed Attività"
         },
+        "confirmTokenBurn": {
+            "title": "Distruggi {assetName}",
+            "hint": "Si prega di notare che la distruzione di un token potrebbe liberare lo storage deposit collegato a esso e non è reversibile"
+        },
+        "confirmNftBurn": {
+            "title": "Distruggi {nftName}",
+            "description": "Sei sicuro di voler distruggere questo NFT?",
+            "hint": "Si prega di notare che la distruzione di un NFT libera il deposito collegato ad esso e non è reversibile."
+        },
         "proceedAnyway": "Procedi comunque",
         "save": "Salva",
         "importSeed": "Importa un seed esistente",
@@ -931,9 +1155,11 @@
             "shimmer": "Ripristina un profilo Shimmer esistente"
         },
         "createWallet": "Crea un nuovo profilo {protocol}",
-        "createWalletDescription": "Crea un nuovo profilo in esecuzione su {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
+        "createWalletDescription": "Crea un nuovo profilo su {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
         "claimShimmer": "Rivendica ricompense di staking Shimmer",
         "claimShimmerDescription": "Importa il tuo profilo di IOTA e richiedi le ricompense di staking del tuo Shimmer",
+        "createAlias": "Crea alias",
+        "createAliasDescription": "Crea output alias",
         "savePassword": "Salva password",
         "useBiometric": "Usa sicurezza biometrica",
         "setupPinCode": "Imposta un codice PIN",
@@ -1011,7 +1237,7 @@
         "readDocumentation": "Leggi la documentazione",
         "visitFaq": "Visita le Domande Frequenti",
         "viewStatus": "Visualizza stato",
-        "viewStorageDeposit": "Visualizza lo storage deposit ",
+        "viewBalanceBreakdown": "View balance breakdown",
         "showHiddenAccounts": "Mostra wallet nascosti",
         "confirm": "Conferma",
         "hideNetworkStatistics": "Nascondi le statistiche della rete",
@@ -1043,10 +1269,12 @@
         "backup": "Backup",
         "mint": "Conia",
         "mintNativeToken": "Conia token nativo",
+        "mintNft": "Conia NFT",
         "verifyToken": "Verifica il token",
         "unverifyToken": "Rimuovi verifica del token",
         "hideToken": "Nascondi token",
         "unhideToken": "Mostra token",
+        "burn": "Distruggi",
         "burnToken": "Brucia token",
         "faucetRequest": "Ottieni {token} token",
         "refreshTokenMetadata": "Aggiorna i metadati del token",
@@ -1054,7 +1282,16 @@
         "testDeepLink": "Test deep link",
         "initialize": "Inizializza",
         "initializing": "Inizializzazione",
-        "delete": "Elimina"
+        "delete": "Elimina",
+        "remove": "Rimuovi",
+        "addReference": "Aggiungi riferimento",
+        "depositNft": "Deposita NFTs",
+        "vote": "Vota",
+        "addProposal": "Aggiungi proposta",
+        "removeProposal": "Rimuovi la proposta",
+        "changeNode": "Cambia nodo",
+        "stopVoting": "Interrompi la votazione",
+        "revote": "Revote"
     },
     "general": {
         "recipient": "Destinatario",
@@ -1067,22 +1304,55 @@
         "recoveryPhrase": "Frase di Recupero",
         "recentActivity": "Attività Recenti",
         "sent": "Inviato",
+        "sending": "Invio",
         "received": "Ricevuto",
+        "receiving": "Ricezione",
+        "newVotingPower": "Nuovo potere di voto",
+        "votingPower": "Potere di voto",
+        "increased": "Potere di voto aumentato",
+        "increasing": "Potere di voto in aumento",
+        "decreased": "Potere di voto ridotto",
+        "decreasing": "Potere di voto in riduzione",
+        "voted": "Votato",
+        "voting": "Votazione",
+        "changedVote": "Voto modificato",
+        "changingVote": "Modifica del voto",
+        "revoted": "Revocato",
+        "revoting": "In fase di revocazione",
+        "unvoted": "Non Votato",
+        "unvoting": "Annulla Voto",
+        "sentNft": "NFT Inviato",
+        "sendingNft": "Invio NFT",
+        "receivedNft": "NFT Ricevuto",
+        "receivingNft": "Ricezione NFT",
         "transfer": "Trasferimento",
         "transferring": "Trasferimento in corso",
+        "transferNft": "Trasferisci NFT",
+        "transferringNft": "Trasferimento NFT",
+        "mintedNft": "NFT coniato",
+        "mintingNft": "Conio NFT",
         "shimmerClaimed": "Rivendicato",
         "shimmerClaiming": "Rivendicazione in corso",
         "shimmerGenesis": "Shimmer Genesis",
         "minted": "Coniato",
         "minting": "Coniando",
+        "burned": "Bruciato",
+        "burning": "Bruciando",
+        "consolidated": "Risultati consolidati",
+        "consolidating": "Consolidamento risultati",
+        "aliasCreated": "Alias creato",
+        "creatingAlias": "Creazione Alias",
         "sendPayment": "Invia Pagamento",
         "moveFunds": "Trasferimento Interno",
         "sendTo": "Invia a",
-        "sendFunds": "Invia fondi",
+        "sendAssets": "Invia asset",
+        "sendAssetToAddress": "Invia asset ad un indirizzo",
         "sendToAddress": "Invia all’indirizzo",
+        "sendToken": "Invia token",
+        "sendNft": "Invia NFT",
+        "sendNftToAddress": "Invia NFT a un indirizzo",
         "scanQrOrPaste": "Scansiona un codice QR o incolla un indirizzo",
         "moveFundsBetweenAccounts": "Sposta fondi tra wallet",
-        "sendTokensToAddress": "Invia token ad un indirizzo",
         "manageAccount": "Gestisci Wallet",
         "customizeAcount": "Personalizza il tuo wallet",
         "account": "Portafoglio",
@@ -1114,6 +1384,7 @@
         "systemTheme": "Sistema",
         "balance": "Saldo",
         "balanceWithValue": "Saldo: {balance}",
+        "balanceWithNetwork": "Saldo {network}",
         "all": "Tutto",
         "incoming": "In entrata",
         "outgoing": "In uscita",
@@ -1132,6 +1403,7 @@
         "security": "Sicurezza",
         "accountAddress": "Indirizzo Wallet",
         "network": "Rete",
+        "destinationNetwork": "Rete di destinazione",
         "nodes": "Nodi",
         "wallet": "Portafoglio",
         "help": "Aiuto",
@@ -1197,8 +1469,6 @@
         "unvotedFor": "Tolto dal voto per {account}",
         "stakingTransaction": "Transazione per staking",
         "unstakingTransaction": "Transazione per rimozione staking",
-        "receiving": "Ricezione",
-        "sending": "Invio",
         "legacyNetwork": "Rete Legacy",
         "capsLock": "Blocco maiuscole è attivo",
         "version": "Versione {version}",
@@ -1218,9 +1488,17 @@
         "surplus": "Eccedenza",
         "storageDeposit": "Storage deposit",
         "giftedStorageDeposit": "Deposito d'archiviazione regalato",
+        "storageDepositPerNft": "Deposito per NFT",
+        "totalStorageDeposit": "Totale storage deposit\n",
         "expirationTime": "Ora di scadenza",
         "timelockDate": "Timelock",
         "claimedTime": "Rivendicato il",
+        "nftAddress": "Indirizzo NFT",
+        "nftId": "NFT ID",
+        "nftMetadata": "Metadati NFT",
+        "aliasId": "Alias ID",
+        "governorAddress": "Indirizzo Governor",
+        "stateControllerAddress": "State Controller Address\n",
         "copiedToClipboard": "Copiato negli appunti",
         "total": "Saldo totale",
         "availableBalanceWithValue": "Saldo disponibile: {balance}",
@@ -1228,6 +1506,8 @@
         "availableBalanceTooltip": "Saldo totale di un asset meno tutti i fondi che sono necessari per coprire il deposito (es. fondi bloccati in transazioni in sospeso, riservati ai nativi token o riservati agli NFT).",
         "amountClaimed": "{amount} reclamato",
         "metadata": "Metadati",
+        "amountConsolidatedInputs": "Risultati consolidati",
+        "name": "Nome",
         "tag": "Tag",
         "nodeList": "Elenco dei nodi",
         "claimedIn": "Reclamato il",
@@ -1235,6 +1515,7 @@
         "assets": "Asset",
         "nativeTokens": "Token nativi",
         "mintNativeTokenDescription": "Conia token nativi seguendo lo standard IRC30",
+        "mintNftDescription": "Conia NFT seguendo lo standard IRC27",
         "faucetRequestDescription": "Richiedi i token dal faucet di {network}",
         "refreshTokenMetadataDescription": "Ripristina e aggiorna i metadati di tutti i token",
         "refreshTokenMetadataHint": "Questo ripristinerà i metadati di tutti i tuoi token, incluso lo stato di verifica, e mostrerà ogni risorsa nascosta.",
@@ -1245,7 +1526,38 @@
         "url": "URL",
         "hash": "Hash",
         "creating": "Creazione",
-        "updating": "Aggiornamento"
+        "updating": "Aggiornamento",
+        "enterAddress": "Inserisci l’indirizzo",
+        "transaction": "Transazione",
+        "alias": "Alias",
+        "foundry": "Fonderia",
+        "token": "Token",
+        "nft": "NFT",
+        "type": "Tipo",
+        "immutableIssuer": "Emittente Immutabile",
+        "smartContract": "Smart Contract",
+        "targetContract": "Contratto di destinazione",
+        "contractFunction": "Funzione del contratto",
+        "gasBudget": "Gas budget\n",
+        "standard": "Standard",
+        "uri": "URI",
+        "issuer": "Emittente",
+        "issuerAddress": "Indirizzo Emittente",
+        "issuerName": "Nome Emittente",
+        "quantity": "Quantità",
+        "collection": "Collezione",
+        "collectionId": "ID Collezione\n",
+        "collectionName": "Nome Della Collezione",
+        "royalties": "Diritti d'Autore",
+        "description": "Descrizione",
+        "attributes": "Attributi",
+        "details": "Dettagli",
+        "availableAmount": "{amount} disponibile",
+        "properties": "Proprietà",
+        "statistics": "Statistiche",
+        "username": "Username",
+        "jwt": "JSON web token",
+        "internalTransaction": "Transazione interna"
     },
     "filters": {
         "title": "Filtri",
@@ -1258,6 +1570,25 @@
             "label": "Mostra rifiutati",
             "yes": "Sì",
             "no": "No"
+        },
+        "showValueless": {
+            "label": "Mostra senza valore",
+            "yes": "Sì",
+            "no": "No"
+        },
+        "ascDesc": {
+            "Asc": "Crescente",
+            "Desc": "Descendente"
+        },
+        "assetOrder": {
+            "label": "Ordine",
+            "Name": "Nome",
+            "Amount": "Importo"
+        },
+        "internalExternal": {
+            "label": "Interno / Esterno",
+            "internal": "Interno",
+            "external": "Esterno"
         },
         "verificationStatus": {
             "label": "Stato di verifica",
@@ -1297,9 +1628,36 @@
         },
         "type": {
             "label": "Tipo",
-            "incoming": "in entrata",
-            "outgoing": "in uscita",
-            "internal": "interno"
+            "basic": "Base",
+            "nft": "NFT",
+            "alias": "Alias",
+            "foundry": "Foundry",
+            "governance": "Governance",
+            "consolidation": "Consolidazione"
+        },
+        "direction": {
+            "label": "Direzione",
+            "incoming": "In entrata",
+            "outgoing": "In uscita",
+            "selfTransaction": "Auto transazione"
+        },
+        "proposalType": {
+            "label": "Tipo",
+            "official": "Ufficiale",
+            "custom": "Personalizzato"
+        },
+        "phase": {
+            "label": "Fase"
+        },
+        "participated": {
+            "label": "Partecipato",
+            "yes": "Sì",
+            "no": "No"
+        },
+        "proposalOrder": {
+            "label": "Ordine",
+            "name": "Nome",
+            "phase": "Fase"
         }
     },
     "dates": {
@@ -1342,8 +1700,11 @@
             "receivedWhileLoggedOut": "Effettua il login per avviare il link",
             "notEnabled": "I link di Iota non sono abilitati",
             "invalidFormat": "Il link che hai attivato non è valido",
-            "invalidAmount": "L'importo nel deep link non è un numero {amount}",
+            "invalidAmount": "L'importo nel deep link non è un numero intero {amount}",
             "invalidSurplus": "L'eccedenza nel deep link non è un numero {surplus}",
+            "governance": {
+                "unrecognizedOperation": "Operazione di governance non riconosciuta: {operation}"
+            },
             "wallet": {
                 "send": {
                     "success": "Dettagli di pagamento aggiunti dal link"
@@ -1368,6 +1729,15 @@
         "mintNativeToken": {
             "success": "Transazione di conio del token nativo inviata"
         },
+        "burnNativeToken": {
+            "success": "Transazione di conio del token nativo inviata"
+        },
+        "mintNft": {
+            "success": "Transazione di conio del NFT inviata"
+        },
+        "burnNft": {
+            "success": "Transazione di distruzione del NFT inviata"
+        },
         "refreshTokenMetadata": {
             "success": "I metadati di tutti i token sono stati ripristinati e aggiornati"
         },
@@ -1382,6 +1752,12 @@
         "claimShimmerRewards": {
             "success": "Ricompense Shimmer richiester per {accountAlias}",
             "error": "Si è verificato un errore durante la richiesta. Riprova."
+        },
+        "vote": {
+            "success": "Votazione registrata correttamente"
+        },
+        "stopVoting": {
+            "success": "Conto interrotto con successo"
         }
     },
     "error": {
@@ -1417,9 +1793,12 @@
             "incorrect": "Il tuo PIN attuale non è corretto.",
             "invalid": "PIN non valido."
         },
+        "address": {
+            "wrongAddressType": "Tipo di indirizzo errato"
+        },
         "account": {
+            "addressNotFound": "L'indirizzo non può essere trovato nel tuo account.",
             "length": "Il nome del wallet non può essere più lungo di {length, plural, one {1 carattere} other {# caratteri}}.",
-            "empty": "Devi usare il tuo ultimo wallet prima di crearne uno nuovo.",
             "emptyName": "Un nome del profilo deve contenere almeno 1 carattere.",
             "notEmpty": "Devi trasferire il tuo saldo prima di eliminare questo wallet.",
             "duplicate": "Un wallet con questo nome esiste già.",
@@ -1442,12 +1821,13 @@
             "amountNoFloat": "Impossibile usare le posizioni decimali con l'unità più piccola selezionata",
             "amountInvalidFormat": "L'importo sembra essere un numero non valido.",
             "amountSmallerThanSubunit": "L'importo deve essere maggiore della subunità più piccola.",
-            "tagTooLong": "Il tag non può essere più lungo di 64 caratteri.",
-            "metadataTooLong": "I metadati non possono essere più lunghi di 8192 caratteri.",
+            "tagTooLong": "Il tag non può essere più lungo di 64 byte.",
+            "metadataTooLong": "I metadati non possono essere più lunghi di 8192 byte.",
             "amountZero": "L'importo deve essere maggiore di 0.",
             "wrongAddressPrefix": "Gli indirizzi iniziano con il prefisso {prefix}.",
             "wrongAddressFormat": "L'indirizzo non è formattato correttamente.",
             "invalidAddress": "L'indirizzo non è valido.",
+            "invalidAssetId": "L'id dell'asset non è valido.",
             "unknownAsset": "L'asset non è noto a questo conto.",
             "insufficientFunds": "Questo wallet non ha fondi sufficienti.",
             "insufficientFundsStorageDeposit": "Fondi insufficienti per coprire lo torage deposit",
@@ -1458,19 +1838,28 @@
             "cancelled": "La transazione è stata annullata.",
             "transaction": "Si è verificato un errore durante l'invio della transazione. Riprova.",
             "invalidExpirationDateTime": "La data di scadenza/ora scelta non è valida.",
+            "noInputs": "Nessun inputs trovato.",
+            "notEnoughBalance": "Saldo insufficiente.",
             "missingTransactionId": "L'ID della transazione è mancante",
-            "missingTransactionProgressEventPayload": "Manca il transaction progress event payload"
+            "missingTransactionProgressEventPayload": "Manca il transaction progress event payload",
+            "recipientRequired": "Il destinatario è obbligatorio",
+            "nftRequired": "NFT è obbligatorio",
+            "nftNotInHex": "L'indirizzo NFT deve essere in formato HEX",
+            "nftNotInPossession": "NFT non posseduto",
+            "reservedTagKeyword": "Impossibile usare la parola chiave riservata al tag"
+        },
+        "layer2": {
+            "layer1Recipient": "Una transazione layer 2 non può essere inviata a un account layer 1."
         },
         "node": {
             "invalid": "Per favore, inserisci un URL valido.",
-            "dns": "Impossibile trovare la risoluzione DNS per il nodo.",
+            "dns": "Impossibile trovare la risoluzione DNS per il nodo",
             "timedOut": "Timeout della connessione.",
             "refused": "La connessione è stata rifiutata.",
             "handshake": "Impossibile completare l' handshake con il nodo.",
             "invalidCertificate": "Impossibile connettersi con un certificato non valido.",
             "https": "HTTPS è richiesto; connessioni non sicure tramite HTTP non sono supportate in questo momento.",
             "duplicate": "Questo nodo è già stato aggiunto.",
-            "unsynced": "Il nodo non è sincronizzato.",
             "noSyncedNode": "Nessun nodo sincronizzato disponibile.",
             "timeNotSynced": "Il tempo del dispositivo non è corretto, impossibile sincronizzare il nodo.",
             "answer": "Impossibile ottenere una risposta da tutti i nodi.",
@@ -1540,6 +1929,52 @@
         "walletApiEvent": {
             "invalidAccountIndex": "Indice account non valido per l'evento {eventName}",
             "invalidPayload": "Payload non valido per l'evento {eventName}"
+        },
+        "aliasMinting": {
+            "aliasRequired": "L'Alias è richiesto",
+            "aliasNotInPossession": "Alias non in possesso"
+        },
+        "noOutputsToConsolidate": "Output non sufficienti per consolidare",
+        "eventId": {
+            "doesNotStartWith0x": "L'ID evento dovrebbe iniziare con '0x'",
+            "insufficientLength": "L'ID evento deve essere lungo 66 caratteri",
+            "alreadyRegistered": "ID Evento già registrato"
+        },
+        "nft": {
+            "unsupportedUrl": {
+                "short": "Url non supportato",
+                "long": "Schema URL non supportato"
+            },
+            "unsupportedFileType": {
+                "short": "Tipo multimediale non supportato",
+                "long": "Il formato non è attualmente supportato"
+            },
+            "notMatchingFileTypes": {
+                "short": "Caricamento bloccato",
+                "long": "Il tipo di file NFT non corrisponde al tipo di media previsto"
+            },
+            "tooLargeFile": {
+                "short": "Il file è troppo grande",
+                "long": "Caricamento NFT bloccato perché il file è troppo grande"
+            },
+            "corsError": {
+                "short": "Caricamento bloccato",
+                "long": "Caricamento NFT bloccato dalla politica CORS"
+            },
+            "unsafeToLoad": {
+                "short": "Non sicuro da caricare",
+                "long": "Si è verificato un errore verificando se il NFT fosse sicuro da caricare"
+            },
+            "loadingError": {
+                "short": "Impossibile caricare",
+                "long": "Si è verificato un errore caricando il NFT"
+            }
+        },
+        "governance": {
+            "unableToAddProposal": {
+                "short": "Impossibile aggiungere la proposta",
+                "long": "Impossibile trovare la proposta {proposalId} sul nodo specificato"
+            }
         }
     },
     "warning": {
@@ -1581,13 +2016,22 @@
         },
         "optionalInput": "Questi dati opzionali saranno pubblici sull'esplorer e visualizzabili da tutti.",
         "transactionDetails": {
+            "minting": {
+                "storageDeposit": "Un deposito rimborsabile del token necessario per memorizzare la tua transazione sul Tangle.",
+                "giftedStorageDeposit": "Il deposito d'archiviazione per questa transazione ti è stato regalato. Non necessiti di rimbosarlo.",
+                "expirationTime": "Rivendica questi fondi prima dell'ora di scadenza o saranno restituiti al mittente.",
+                "timelockDate": "Il mittente ha impostato una scadenza su questi fondi. Potrai spenderli alla scadenza del blocco orario.",
+                "metadata": "Un campo di dati facoltativo per memorizzare persistentemente i dati sul Tangle.",
+                "tag": "Un campo di dati facoltativi breve. Etichettare i gruppi di transazione può renderli più facili da cercare."
+            },
             "incoming": {
                 "storageDeposit": "Deposito di token rimborsabili necessario per memorizzare la transazione sul Tangle.",
                 "giftedStorageDeposit": "Il deposito per questa transazione è stato regalato. Non è necessario rimborsare il deposito.",
                 "expirationTime": "Richiedi questi fondi prima del tempo di scadenza o i fondi saranno restituiti al mittente.",
                 "timelockDate": "Il mittente ha impostato un timelock su questi fondi. Sarai in grado di spenderli una volta scaduto il timeloce.",
                 "metadata": "Campo di dati opzionale per memorizzare i dati in modo persistente sul Tangle.",
-                "tag": "Breve campo di dati opzionale. I gruppi di transazioni possono facilitarne la ricerca."
+                "tag": "Breve campo di dati opzionale. I gruppi di transazioni possono facilitarne la ricerca.",
+                "gasBudget": "Il budget di gas è necessario per condurre una transazione o eseguire la funzione di un contatto intelligente sull'EVM di Shimmer."
             },
             "outgoing": {
                 "storageDeposit": "Un deposito è un importo rimborsabile necessario per memorizzare la transazione sul Tangle.",
@@ -1595,14 +2039,39 @@
                 "expirationTime": "Se il destinatario non riscuote in tempo utile, i tuoi token ti saranno restituiti.",
                 "timelockDate": "Hai aggiunto un timelock a questa transazione. Il destinatario non sarà in grado di spendere questi fondi fino alla scadenza del timelock .",
                 "metadata": "Campo di dati opzionale per memorizzare i dati in modo persistente sul Tangle.",
-                "tag": "Breve campo di dati opzionale. I gruppi di transazioni possono facilitarne la ricerca."
+                "tag": "Breve campo di dati opzionale. I gruppi di transazioni possono facilitarne la ricerca.",
+                "gasBudget": "Il budget di gas è necessario per condurre una transazione o eseguire la funzione di un contatto intelligente sull'EVM di Shimmer."
+            },
+            "nftMetadata": {
+                "standard": "Lo standard del NFT, es. IRC27.",
+                "type": "Il MimeType del NFT, es. immagine/png.",
+                "collectionId": "Stringa UTXO della collezione di NFT che ha coniato questo NFT",
+                "royalties": "Un oggetto contenente coppie chiave-valore di indirizzi che mappano alle percentuali di pagamento",
+                "issuerName": "Il nome del creatore",
+                "attributes": "Un insieme di tratti e valori che definisce gli attributi del NFT"
             }
         },
-        "mintNativeTokenForm": {
-            "decimals": "Parametro opzionale IRC30: Numero di decimali che il token usa (divide la quantità di token per 10^decimals per ottenere la sua rappresentazione utente).",
-            "description": "Parametro opzionale IRC30: La descrizione del token leggibile dall'uomo.",
-            "url": "Parametro opzionale IRC30: URL che indica più risorse sul token come un sito web o una pagina di social media.",
-            "logoUrl": "Parametro opzionale IRC30: URL che punta a una risorsa immagine del logo token."
+        "mintNativeToken": {
+            "decimals": "Parametro facoltativo IRC30: Numero di decimali utilizzati dal token (divide l'importo del token per decimali 10^ per ottenerne la rappresentazione dell'utente).",
+            "description": "Parametro facoltativo IRC30: La descrizione del token leggibile dall'uomo.",
+            "url": "Parametro facoltativo IRC30: URL che punta a ulteriori risorse sul token, come un sito web o la pagina social.",
+            "logoUrl": "Parametro facoltativo IRC30: URL che punta a una risorsa immagine del logo del token."
+        },
+        "mintNftForm": {
+            "collectionId": "Parametro facoltativo: Stringa UTXO della raccolta NFT che ha coniato questo NFT",
+            "collectionName": "Parametro facoltativo: Il nome della collezione",
+            "royalties": "Parametro facoltativo: Un oggetto contenente coppie chiave-valore di indirizzi che mappano alle percentuali di pagamento",
+            "issuerName": "Parametro facoltativo: Il nome del creatore",
+            "description": "Parametro facoltativo: Una descrizione del NFT",
+            "attributes": "Parametro facoltativo: Un insieme di tratti e valori che definisce gli attributi del NFT",
+            "uri": "Per creare un URI utilizzando multimedia personalizzati, prima, carica il tuo file a IPFS tramite un servizio d'archiviazione (es. https://nft.storage/)",
+            "quantity": "Parametro opzionale: la quantità di copie coniate con questi metadati."
+        },
+        "governance": {
+            "removeProposalWarning": "Devi interrompere la votazione a favore di questa proposta prima di rimuoverla."
+        },
+        "updateStronghold": {
+            "profileBadge": "Your Stronghold is out of date. Log in to update Stronghold."
         }
     },
     "exports": {
@@ -1631,8 +2100,11 @@
     },
     "tabs": {
         "wallet": "Portafoglio",
-        "staking": "Staking",
-        "developer": "Sviluppatore"
+        "collectibles": "Collezionabili",
+        "governance": "Governance",
+        "developer": "Sviluppatore",
+        "tokens": "Token",
+        "activity": "Attività"
     },
     "pills": {
         "stake": {
@@ -1672,7 +2144,17 @@
         "mint": {
             "Pending": "coniando",
             "Confirmed": "coniato",
-            "Conflicting": "impossibile coniare"
+            "Conflicting": "impossibile copiare"
+        },
+        "burn": {
+            "Pending": "bruciando",
+            "Confirmed": "bruciato",
+            "Conflicting": "impossibile bruciare"
+        },
+        "consolidation": {
+            "Pending": "Consolidamento risultati",
+            "Confirmed": "Risultati consolidati",
+            "Conflicting": "consolidamento dei risultati non riuscito"
         },
         "migrate": {
             "Pending": "migrazione per",
@@ -1684,7 +2166,53 @@
             "claimed": "rivendicato",
             "expired": "scaduto"
         },
-        "locked": "locked"
+        "governance": {
+            "increaseVotingPower": {
+                "Pending": "aumentando il potere di voto",
+                "Confirmed": "potere di voto aumentato",
+                "Conflicting": "impossibile aumentare il potere di voto"
+            },
+            "decreaseVotingPower": {
+                "Pending": "riducecndo il potere di voto",
+                "Confirmed": "potere di voto ridotto",
+                "Conflicting": "impossibile ridurre il potere di voto"
+            },
+            "startVoting": {
+                "Pending": "voto per",
+                "Confirmed": "votato per",
+                "Conflicting": "votazione non riuscita per"
+            },
+            "stopVoting": {
+                "Pending": "interrompere la votazione per",
+                "Confirmed": "votazione interrota per",
+                "Conflicting": "non è stato possibile interrompere la votazione per"
+            },
+            "changedVote": {
+                "Pending": "modifica della votazione per",
+                "Confirmed": "votazione modificata",
+                "Conflicting": "non è stato possibile modificare il voto per"
+            },
+            "revote": {
+                "Pending": "in fase di revocazione",
+                "Confirmed": "revocato",
+                "Conflicting": "impossibile revocare"
+            }
+        },
+        "alias": {
+            "creation": {
+                "Pending": "creando alias",
+                "Confirmed": "alias creato",
+                "Failed": "Impossibile creare l'alias"
+            }
+        },
+        "locked": "bloccato",
+        "smartContract": "smart Contract",
+        "proposalStatus": {
+            "upcoming": "Annuncio",
+            "commencing": "Votazione aperta",
+            "holding": "Conteggio",
+            "ended": "Chiuso"
+        }
     },
     "menus": {
         "expirationTimePicker": {

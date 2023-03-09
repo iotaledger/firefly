@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import {
         initialiseOnboardingProfile,
         initialiseProfileManagerFromOnboardingProfile,
@@ -11,10 +11,10 @@
     import { formatProtocolName, getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
     import { ProfileType } from '@core/profile'
     import { destroyProfileManager } from '@core/profile-manager'
-    import { profileSetupRouter } from '../../../../../lib/routers'
-    import { OnboardingButton } from 'shared/components'
+    import { profileSetupRouter } from '@/routers'
+    import { OnboardingButton } from '@ui'
     import { onMount } from 'svelte'
-    import { OnboardingLayout } from '../../../../../components'
+    import { OnboardingLayout } from '@components'
     import features from '@features/features'
 
     const title = localize('views.onboarding.profileSetup.setup.title', {
@@ -33,9 +33,9 @@
         $profileSetupRouter.previous()
     }
 
-    onMount(() => {
+    onMount(async () => {
         if (!$onboardingProfile?.id) {
-            initialiseOnboardingProfile(
+            await initialiseOnboardingProfile(
                 $onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile(),
                 NetworkProtocol.Shimmer
             )
@@ -48,7 +48,7 @@
             )
             updateOnboardingProfile({ clientOptions })
         }
-        destroyProfileManager()
+        await destroyProfileManager()
         updateOnboardingProfile({
             mustVisitProfileName: true,
             setupType: null,
@@ -60,6 +60,17 @@
 
 <OnboardingLayout {onBackClick} {title} animation="setup-desktop">
     <div slot="footer" class="flex flex-col space-y-4">
+        <OnboardingButton
+            primaryText={localize('actions.claimShimmer')}
+            icon="tokens"
+            iconHeight="24"
+            iconWidth="24"
+            hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
+                ?.claimRewards?.hidden}
+            disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
+                ?.claimRewards?.enabled}
+            onClick={() => onProfileSetupSelectionClick(ProfileSetupType.Claimed)}
+        />
         <OnboardingButton
             primaryText={localize('actions.createWallet', {
                 values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },

@@ -1,9 +1,10 @@
-<script lang="typescript">
+<script lang="ts">
     import { Modal, SelectorInput, IOption, NftImageOrIconBox } from 'shared/components'
     import { selectedAccountNfts } from '@core/nfts'
     import { getNftByIdFromAllAccountNfts } from '@core/nfts'
     import { selectedAccountIndex } from '@core/account'
     import { localize } from '@core/i18n'
+    import { time } from '@core/app'
 
     export let nftId: string = ''
     export let error: string = ''
@@ -15,7 +16,9 @@
         ? { key: getNftByIdFromAllAccountNfts($selectedAccountIndex, nftId).name, value: nftId }
         : {}
 
-    const nftOptions: IOption[] = $selectedAccountNfts.map((_nft) => ({ key: _nft.name, value: _nft.id }))
+    const nftOptions: IOption[] = $selectedAccountNfts
+        .filter((nft) => nft.isSpendable && (!nft.timelockTime || nft.timelockTime < $time.getTime()))
+        .map((_nft) => ({ key: _nft.name, value: _nft.id }))
 
     $: nftId = selected?.value
 

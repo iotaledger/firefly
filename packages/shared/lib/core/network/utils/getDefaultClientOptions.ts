@@ -4,5 +4,5 @@ import { getOfficialNodes } from './getOfficialNodes'
 
 export function getDefaultClientOptions(networkProtocol: NetworkProtocol, networkType: NetworkType): IClientOptions {
     const nodes = getOfficialNodes(networkProtocol, networkType)
-    return { nodes }
+    return { nodes, primaryNode: nodes[0] }
 }

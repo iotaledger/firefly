@@ -1,4 +1,11 @@
-import { writable } from 'svelte/store'
 import { IProposal } from '@contexts/governance/interfaces'
+import { writable, Readable, derived } from 'svelte/store'
+import { registeredProposalsForSelectedAccount } from './registered-proposals.store'
 
-export const selectedProposal = writable<IProposal>(null)
+export const selectedProposalId = writable<string>(null)
+
+export const selectedProposal: Readable<IProposal> = derived(
+    [selectedProposalId, registeredProposalsForSelectedAccount],
+    ([$selectedProposalId, $registeredProposalsForSelectedAccount]) =>
+        $registeredProposalsForSelectedAccount[$selectedProposalId]
+)

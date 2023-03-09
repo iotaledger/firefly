@@ -1,14 +1,18 @@
 import { get } from 'svelte/store'
 
-import { addError } from '@core/error'
-import { DashboardRoute, dashboardRouter } from '@core/router'
+import { closePopup, openPopup } from '@auxiliary/popup/actions'
+import { visibleActiveAccounts } from '@core/profile/stores'
+import { dashboardRouter } from '@core/router/routers'
+import { DashboardRoute } from '@core/router/enums'
 
 import { resetDeepLink } from '../actions'
 import { DeepLinkContext } from '../enums'
 import { isDeepLinkRequestActive } from '../stores'
+
+import { handleDeepLinkGovernanceContext } from './governance/handleDeepLinkGovernanceContext'
 import { handleDeepLinkWalletContext } from './wallet/handleDeepLinkWalletContext'
-import { closePopup, openPopup } from '@auxiliary/popup'
-import { visibleActiveAccounts } from '@core/profile/stores/active-accounts.store'
+import { handleError } from '@core/error/handlers'
+import { PopupId } from '@auxiliary/popup'
 
 /**
  * Parses an IOTA deep link, i.e. a URL that begins with the app protocol i.e "firefly://".
@@ -31,7 +35,7 @@ export function handleDeepLink(input: string): void {
 
         if (get(visibleActiveAccounts).length > 1) {
             openPopup({
-                type: 'accountSwitcher',
+                id: PopupId.AccountSwitcher,
                 overflow: true,
                 props: {
                     onConfirm: () => {
@@ -44,7 +48,7 @@ export function handleDeepLink(input: string): void {
             handleDeepLinkForHostname(url)
         }
     } catch (err) {
-        addError({ time: Date.now(), type: 'deepLink', message: `Error handling deep link. ${err.message}` })
+        handleError(err)
     } finally {
         resetDeepLink()
     }
@@ -55,6 +59,10 @@ function handleDeepLinkForHostname(url: URL): void {
         case DeepLinkContext.Wallet:
             get(dashboardRouter).goTo(DashboardRoute.Wallet)
             handleDeepLinkWalletContext(url)
+            break
+        case DeepLinkContext.Governance:
+            get(dashboardRouter).goTo(DashboardRoute.Governance)
+            handleDeepLinkGovernanceContext(url)
             break
         default:
             throw new Error(`Unrecognized context '${url.host}'`)

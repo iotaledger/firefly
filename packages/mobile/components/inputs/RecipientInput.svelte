@@ -1,19 +1,20 @@
-<script lang="typescript">
+<script lang="ts">
     import { localize } from '@core/i18n'
     import { networkHrp } from '@core/network/stores'
     import { BECH32_ADDRESS_LENGTH } from '@core/utils/constants'
     import { validateBech32Address } from '@core/utils/crypto'
-    import { IAddressSubject } from '@core/wallet/interfaces'
+    import { IAccountSubject, IAddressSubject } from '@core/wallet/interfaces'
 
-    export let recipient: IAddressSubject
+    export let recipient: IAddressSubject | IAccountSubject
     export let disabled: boolean = false
     export let error: string = undefined
+    export let inputElement: HTMLInputElement = undefined
 
     let addressPrefix: string
     let value: string
 
     $: addressPrefix = $networkHrp
-    $: value = recipient?.address ?? ''
+    $: value = recipient?.type === 'address' ? recipient?.address ?? '' : recipient?.account?.name ?? ''
     $: value, validateValue()
 
     function onInputChange(e: Event): void {
@@ -23,19 +24,28 @@
 
     function validateValue(): void {
         error = null
-        if (!value?.length) {
-            error = localize('general.enterAddress')
-        } else if (value?.length !== BECH32_ADDRESS_LENGTH + addressPrefix.length) {
-            error = localize('error.send.addressLength', {
-                values: {
-                    length: BECH32_ADDRESS_LENGTH + addressPrefix.length,
-                },
-            })
-        } else {
-            try {
-                validateBech32Address(addressPrefix, value)
-            } catch (err) {
-                error = err?.message ?? err
+        if (!recipient) {
+            error = localize('error.send.recipientRequired')
+        } else if (recipient?.type === 'address') {
+            localize('error.send.recipientRequired')
+            if (!value?.length) {
+                error = localize('general.enterAddress')
+            } else if (value?.length !== BECH32_ADDRESS_LENGTH + addressPrefix.length) {
+                error = localize('error.send.addressLength', {
+                    values: {
+                        length: BECH32_ADDRESS_LENGTH + addressPrefix.length,
+                    },
+                })
+            } else {
+                try {
+                    validateBech32Address(addressPrefix, value)
+                } catch (err) {
+                    error = err?.message ?? err
+                }
+            }
+        } else if (recipient?.type === 'account') {
+            if (!recipient?.account?.depositAddress?.length) {
+                error = localize('error.send.recipientRequired')
             }
         }
     }
@@ -46,6 +56,7 @@
     <input
         type="text"
         {value}
+        bind:this={inputElement}
         on:input={onInputChange}
         class="w-full bg-white dark:bg-gray-800 text-gray-800 dark:text-white"
         {disabled}

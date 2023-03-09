@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { handleDeepLink } from '@auxiliary/deep-link'
     import { localize } from '@core/i18n'
     import { nodeInfo } from '@core/network'
@@ -39,7 +39,7 @@
 
     onMount(() => {
         Platform.onEvent('menu-logout', () => {
-            void logout()
+            logout()
         })
 
         Platform.onEvent('deep-link-params', (data: string) => {
@@ -90,7 +90,7 @@
     <div class="flex flex-row flex-auto h-1">
         <Sidebar />
         <!-- Dashboard Pane -->
-        <div class="flex flex-col w-full h-full">
+        <div class="flex flex-col h-full dashboard-w">
             <svelte:component this={tabs[$dashboardRoute]} on:next={$appRouter.next} />
         </div>
     </div>
@@ -99,5 +99,10 @@
 <style type="text/scss">
     :global(:not(body.platform-win32)) .dashboard-wrapper {
         margin-top: calc(env(safe-area-inset-top) / 2);
+    }
+
+    .dashboard-w {
+        --sidebar-width: 4.5rem;
+        width: calc(100vw - var(--sidebar-width));
     }
 </style>

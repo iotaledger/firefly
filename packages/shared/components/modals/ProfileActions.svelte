@@ -1,9 +1,9 @@
-<script lang="typescript">
+<script lang="ts">
     import { fade } from 'svelte/transition'
     import { Button, ButtonSize, DeveloperIndicatorPill, HR, Icon, Modal, Text, Toggle } from 'shared/components'
     import { localize } from '@core/i18n'
     import { LedgerConnectionState, ledgerConnectionState } from '@core/ledger'
-    import { closePopup, openPopup, popupState } from '@auxiliary/popup'
+    import { closePopup, openPopup, PopupId, popupState } from '@auxiliary/popup'
     import { routerManager } from '@core/router'
     import { diffDates, getBackupWarningColor, getInitials, isRecentDate } from '@core/utils'
     import { appVersionDetails } from '@core/app'
@@ -28,7 +28,7 @@
     $: backupWarningColor = getBackupWarningColor(lastBackupDate)
     // used to prevent the modal from closing when interacting with the password popup
     // to be able to see the stronghold toggle change
-    $: isPasswordPopupOpen = $popupState?.active && $popupState?.type === 'password'
+    $: isPasswordPopupOpen = $popupState?.active && $popupState?.id === 'password'
     $: if ($isActiveLedgerProfile && $ledgerConnectionState) {
         updateLedgerConnectionText()
     }
@@ -40,7 +40,7 @@
     }
 
     function handleLogoutClick(): void {
-        void logout()
+        logout()
     }
 
     function handleStrongholdToggleClick(): void {
@@ -58,13 +58,13 @@
     function handleBackupClick(): void {
         modal?.close()
         openPopup({
-            type: 'backupStronghold',
+            id: PopupId.BackupStronghold,
         })
     }
 
-    function handleVersionUpdateClick(): void {
+    function handleCheckForUpdatesClick(): void {
         modal?.close()
-        openPopup({ type: 'version' })
+        openPopup({ id: PopupId.CheckForUpdates })
     }
 </script>
 
@@ -105,7 +105,7 @@
                             </Text>
                         </div>
                     </div>
-                    <Button size={ButtonSize.Small} onClick={handleVersionUpdateClick}>
+                    <Button size={ButtonSize.Small} onClick={handleCheckForUpdatesClick}>
                         {localize('views.dashboard.profileModal.version.button')}
                     </Button>
                 </div>

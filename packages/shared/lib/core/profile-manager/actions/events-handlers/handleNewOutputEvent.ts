@@ -1,5 +1,9 @@
 import { syncBalance } from '@core/account/actions/syncBalance'
-import { addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput, getIsSpendableFromUnspentNftOutput } from '@core/nfts'
+import {
+    addOrUpdateNftInAllAccountNfts,
+    buildNftFromNftOutput,
+    getSpendableStatusFromUnspentNftOutput,
+} from '@core/nfts'
 import { activeAccounts } from '@core/profile/stores'
 import { ActivityType, addPersistedAsset, generateActivities, getOrRequestAssetFromPersistedAssets } from '@core/wallet'
 import { OUTPUT_TYPE_ALIAS, OUTPUT_TYPE_NFT } from '@core/wallet/constants'
@@ -35,7 +39,7 @@ export async function handleNewOutputEventInternal(
         !get(allAccountActivities)[accountIndex].find((_activity) => _activity.id === output.outputId)
     const isNftOutput = output.output.type === OUTPUT_TYPE_NFT
 
-    if ((account.depositAddress === address && !output?.remainder) || isNewAliasOutput) {
+    if ((account?.depositAddress === address && !output?.remainder) || isNewAliasOutput) {
         await syncBalance(account.index)
 
         const processedOutput = preprocessGroupedOutputs([output], payload?.transactionInputs ?? [], account)
@@ -51,8 +55,11 @@ export async function handleNewOutputEventInternal(
     }
 
     if (isNftOutput) {
-        const isSpendable = getIsSpendableFromUnspentNftOutput(account.depositAddress, output.output as INftOutput)
-        const nft = buildNftFromNftOutput(output.output as INftOutput, output.outputId, isSpendable)
+        const { isSpendable, timeLockTime } = getSpendableStatusFromUnspentNftOutput(
+            account?.depositAddress,
+            output.output as INftOutput
+        )
+        const nft = buildNftFromNftOutput(output.output as INftOutput, output.outputId, isSpendable, timeLockTime)
         addOrUpdateNftInAllAccountNfts(account.index, nft)
     }
 }

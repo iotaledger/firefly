@@ -1,4 +1,4 @@
-import { openPopup, popupState } from '@auxiliary/popup'
+import { openPopup, PopupId, popupState } from '@auxiliary/popup'
 import { get } from 'svelte/store'
 import { LedgerConnectionState } from '../interfaces'
 import { ledgerConnectionState } from '../stores'
@@ -22,7 +22,7 @@ export function checkOrConnectLedger(
             return callback()
         } else {
             openPopup({
-                type: 'connectLedger',
+                id: PopupId.ConnectLedger,
                 hideClose: true,
                 props: {
                     onContinue: _callback,

@@ -179,12 +179,20 @@ if (app.isPackaged) {
  * Handles url navigation events
  */
 const handleNavigation = (e, url) => {
-    e.preventDefault()
+    if (url === 'http://localhost:8080/') {
+        // if localhost would be opened on the build versions, we need to block it to prevent errors
+        if (app.isPackaged) {
+            e.preventDefault()
+        }
+        // else: re-open localhost in electron for hot reload
+    } else {
+        e.preventDefault()
 
-    try {
-        shell.openExternal(url)
-    } catch (err) {
-        console.error(err)
+        try {
+            shell.openExternal(url)
+        } catch (err) {
+            console.error(err)
+        }
     }
 }
 
@@ -239,9 +247,8 @@ function createWindow() {
 
         windows.main.loadURL('http://localhost:8080')
     } else {
-        if (process.env.STAGE === 'prod') {
-            initAutoUpdate()
-        }
+        initAutoUpdate()
+
         // load the index.html of the app.
         windows.main.loadFile(paths.html)
     }
@@ -725,10 +732,6 @@ function getJsonConfig(filename) {
 
 export const updateAppVersionDetails = (details) => {
     versionDetails = Object.assign({}, versionDetails, details)
-    if (process.env.STAGE !== 'prod') {
-        // Always true to avoid triggering auto-updater
-        versionDetails.upToDate = true
-    }
 
     getOrInitWindow('main').webContents.send('version-details', versionDetails)
 }

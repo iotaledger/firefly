@@ -1,16 +1,12 @@
 import {
-    AccountSwitcherRouter,
-    accountSwitcherRouter,
-    ActivityRouter,
-    activityRouter,
     appRouter,
     AppRouter,
     AppSetupRouter,
     appSetupRouter,
-    dashboardRouter,
-    DashboardRouter,
     LoginRouter,
     loginRouter,
+    NetworkConfigurationSettingsRouter,
+    networkConfigurationSettingsRouter,
     NetworkSetupRouter,
     networkSetupRouter,
     onboardingRouter,
@@ -25,14 +21,14 @@ import {
     profileSetupRouter,
     SendRouter,
     sendRouter,
+    ShimmerClaimingRouter,
+    shimmerClaimingRouter,
     SettingsRouter,
     settingsRouter,
     storageProtectionSetupRouter,
     StorageProtectionSetupRouter,
     strongholdSetupRouter,
     StrongholdSetupRouter,
-    TokenRouter,
-    tokenRouter,
 } from '../routers'
 
 export function initialiseRouters(): void {
@@ -43,6 +39,7 @@ export function initialiseRouters(): void {
      */
     initialiseBaseRouters()
     initialiseSubrouters()
+    initializeDrawersRouters()
 }
 
 export function initialiseOnboardingRouters(): void {
@@ -53,21 +50,17 @@ export function initialiseOnboardingRouters(): void {
 function initialiseBaseRouters(): void {
     appRouter.set(new AppRouter())
     initialiseBaseOnboardingRouters()
-    initialiseBaseDashboardRouters()
 }
 
 function initialiseBaseOnboardingRouters(): void {
     onboardingRouter.set(new OnboardingRouter())
 }
 
-function initialiseBaseDashboardRouters(): void {
-    dashboardRouter.set(new DashboardRouter())
-}
-
 function initialiseSubrouters(): void {
     loginRouter.set(new LoginRouter())
     initialiseOnboardingSubrouters()
     initialiseDashboardSubrouters()
+    initialiseSettingsSubrouters()
 }
 
 function initialiseOnboardingSubrouters(): void {
@@ -77,14 +70,19 @@ function initialiseOnboardingSubrouters(): void {
     profileBackupRouter.set(new ProfileBackupRouter())
     profileRecoveryRouter.set(new ProfileRecoveryRouter())
     profileSetupRouter.set(new ProfileSetupRouter())
+    shimmerClaimingRouter.set(new ShimmerClaimingRouter())
     storageProtectionSetupRouter.set(new StorageProtectionSetupRouter())
 }
 
 function initialiseDashboardSubrouters(): void {
-    accountSwitcherRouter.set(new AccountSwitcherRouter())
-    activityRouter.set(new ActivityRouter())
-    sendRouter.set(new SendRouter())
-    tokenRouter.set(new TokenRouter())
     profileRouter.set(new ProfileRouter())
     settingsRouter.set(new SettingsRouter())
+}
+
+function initialiseSettingsSubrouters(): void {
+    networkConfigurationSettingsRouter.set(new NetworkConfigurationSettingsRouter())
+}
+
+function initializeDrawersRouters(): void {
+    sendRouter.set(new SendRouter())
 }

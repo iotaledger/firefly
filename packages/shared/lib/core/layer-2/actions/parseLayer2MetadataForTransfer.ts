@@ -1,12 +1,6 @@
 import { Converter } from '@core/utils'
 import { ReadStream } from '@iota/util.js'
-import {
-    Allowance,
-    CONTRACT_FUNCTIONS,
-    FORCE_OPEN_ACCOUNT,
-    ILayer2TransferAllowanceMetadata,
-    TARGET_CONTRACTS,
-} from '@core/layer-2'
+import { Allowance, CONTRACT_FUNCTIONS, ILayer2TransferAllowanceMetadata, TARGET_CONTRACTS } from '@core/layer-2'
 import { NativeTokenAmount, TOKEN_ID_BYTE_LENGTH } from '@core/token'
 import { ILayer2Allowance } from '@core/layer-2/interfaces/layer2-allowance.interface'
 
@@ -20,7 +14,6 @@ export function parseLayer2MetadataForTransfer(metadata: Uint8Array): ILayer2Tra
 
     const smartContractParameters = parseSmartContractParameters(readStream)
     const ethereumAddress = '0x' + smartContractParameters['a'].substring(2)
-    const forceOpenAccount = smartContractParameters['c'] === FORCE_OPEN_ACCOUNT
 
     const allowance = parseAllowance(readStream)
 
@@ -30,7 +23,6 @@ export function parseLayer2MetadataForTransfer(metadata: Uint8Array): ILayer2Tra
         contractFunction: CONTRACT_FUNCTIONS[contractFunction] ?? Converter.decimalToHex(contractFunction, true),
         gasBudget: gasBudget.toString(),
         ethereumAddress,
-        forceOpenAccount,
         baseTokenAmount: allowance?.baseTokenAmount,
         nativeTokens: allowance?.nativeTokens,
     }

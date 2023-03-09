@@ -13,7 +13,6 @@ import {
     getAsyncDataFromOutput,
     getMetadataFromOutput,
     getSendingInformation,
-    getStorageDepositFromOutput,
     getTagFromOutput,
 } from './helper'
 
@@ -21,7 +20,7 @@ export function generateSingleFoundryActivity(
     account: IAccountState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
 ): FoundryActivity {
-    const { transactionId, claimingData, utxoInputs, time, direction, inclusionState } = processedTransaction
+    const { transactionId, claimingData, time, direction, inclusionState } = processedTransaction
 
     const output = wrappedOutput.output as IFoundryOutput
     const outputId = wrappedOutput.outputId
@@ -37,14 +36,13 @@ export function generateSingleFoundryActivity(
     const isAssetHidden = false
     const containsValue = true
 
-    const inputs = utxoInputs
-
     const id = outputId || transactionId
     const nativeToken = getNativeTokenFromOutput(output)
     const assetId = nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol])
 
-    const { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output) // probably we need to sum up all storage deposits
-    const rawAmount = nativeToken ? Number(nativeToken?.amount) : getAmountFromOutput(output) - storageDeposit
+    const storageDeposit = getAmountFromOutput(output)
+    const giftedStorageDeposit = 0
+    const rawAmount = Number(nativeToken?.amount ?? 0)
     const metadata = getMetadataFromOutput(output)
     const tag = getTagFromOutput(output)
 
@@ -67,7 +65,6 @@ export function generateSingleFoundryActivity(
         giftedStorageDeposit,
         rawAmount,
         time,
-        inputs,
         inclusionState,
         containsValue,
         isAssetHidden,

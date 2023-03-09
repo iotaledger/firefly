@@ -1,4 +1,4 @@
-import { get, writable, Writable } from 'svelte/store'
+import { get, writable } from 'svelte/store'
 import { ISettingsRouterEvent } from '../interfaces'
 
 import { Subrouter } from '@core/router'
@@ -8,9 +8,6 @@ import { SettingsRoute } from '../enums'
 
 export const settingsRoute = writable<SettingsRoute>(null)
 export const settingsRouter = writable<SettingsRouter>(null)
-
-const needsUnlockStore = writable<boolean>(false)
-const needsUnlockStoreCallbackStore = writable<(() => unknown) | undefined>(() => {})
 
 export class SettingsRouter extends Subrouter<SettingsRoute> {
     constructor() {
@@ -36,33 +33,5 @@ export class SettingsRouter extends Subrouter<SettingsRoute> {
         }
 
         this.setNext(nextRoute)
-    }
-    previous(): void {
-        if (get(needsUnlockStore)) {
-            const callback = get(needsUnlockStoreCallbackStore)
-            if (callback && typeof callback === 'function') {
-                callback()
-            }
-            needsUnlockStore.set(false)
-        } else {
-            super.previous()
-        }
-    }
-    getNeedsUnlockStore(): Writable<boolean> {
-        return needsUnlockStore
-    }
-    getNeedsUnlockCallbackStore(): Writable<(() => unknown) | undefined> {
-        return needsUnlockStoreCallbackStore
-    }
-    setNeedsUnlock(value: boolean, callback: (() => unknown) | undefined = undefined): void {
-        needsUnlockStore.set(value)
-        if (callback) {
-            needsUnlockStoreCallbackStore.set(callback)
-        }
-    }
-    reset(): void {
-        super.reset()
-        needsUnlockStore.set(false)
-        needsUnlockStoreCallbackStore.set(undefined)
     }
 }

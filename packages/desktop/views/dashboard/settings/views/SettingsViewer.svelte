@@ -1,6 +1,7 @@
-<script lang="typescript">
+<script lang="ts">
     import { onMount } from 'svelte'
-    import { Scroller, SettingsNavigator, Text, TextType } from 'shared/components'
+    import { SettingsNavigator, Text, TextType } from '@ui'
+    import { Scroller } from '@components'
     import features from '@features/features'
     import { mobile } from '@core/app'
     import { localize, _ } from '@core/i18n'

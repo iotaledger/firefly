@@ -1,28 +1,27 @@
-<script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
-    import { LedgerAnimation, Button, Icon, Link, OnboardingLayout, Text } from 'shared/components'
+<script lang="ts">
+    import { LedgerAnimation, Button, Icon, Link, Text } from '@ui'
+    import { OnboardingLayout } from '@components'
     import { localize } from '@core/i18n'
-    import { openPopup } from '@auxiliary/popup'
+    import { openPopup, PopupId } from '@auxiliary/popup'
     import { LedgerAppName } from '@core/ledger'
+    import { ledgerSetupRouter } from '@core/router/subrouters'
 
-    const dispatch = createEventDispatcher()
-
-    function handleContinueClick(): void {
-        dispatch('next')
+    function onContinueClick(): void {
+        $ledgerSetupRouter.next()
     }
 
-    function handleBackClick(): void {
-        dispatch('previous')
+    function onBackClick(): void {
+        $ledgerSetupRouter.previous()
     }
 
-    function handlePopupOpen(): void {
+    function onPopupOpenClick(): void {
         openPopup({
-            type: 'ledgerAppGuide',
+            id: PopupId.LedgerAppGuide,
         })
     }
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick}>
+<OnboardingLayout {onBackClick}>
     <div slot="leftpane__content">
         <Text type="h2" classes="mb-5"
             >{localize('views.ledgerInstallationGuide.title', { values: { protocol: LedgerAppName.Shimmer } })}</Text
@@ -41,10 +40,10 @@
         </div>
     </div>
     <div slot="leftpane__action">
-        <Link icon="info" onClick={handlePopupOpen} classes="mb-10 justify-center"
+        <Link icon="info" onClick={onPopupOpenClick} classes="mb-10 justify-center"
             >{localize('popups.ledgerAppGuide.title', { values: { legacy: LedgerAppName.Shimmer } })}</Link
         >
-        <Button classes="w-full" onClick={handleContinueClick}
+        <Button classes="w-full" onClick={onContinueClick}
             >{localize('views.ledgerInstallationGuide.action', { values: { protocol: LedgerAppName.Shimmer } })}</Button
         >
     </div>

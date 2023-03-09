@@ -5,7 +5,6 @@ const path = require('path')
 const sveltePreprocess = require('svelte-preprocess')
 const SentryWebpackPlugin = require('@sentry/webpack-plugin')
 const { version } = require('./package.json')
-const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin')
 
 const mode = process.env.NODE_ENV || 'development'
 const prod = mode === 'production'
@@ -59,8 +58,7 @@ const output = {
 const mainRules = [
     {
         test: /\.ts$/,
-        loader: 'ts-loader',
-        exclude: /node_modules/,
+        loader: 'esbuild-loader',
     },
     {
         test: /\.node$/,
@@ -74,8 +72,7 @@ const mainRules = [
 const rendererRules = [
     {
         test: /\.ts$/,
-        loader: 'ts-loader',
-        exclude: /node_modules/,
+        loader: 'esbuild-loader',
     },
     {
         test: /\.json$/,
@@ -157,7 +154,6 @@ const rendererPlugins = [
         filename: '[name].css',
     }),
     new DefinePlugin({
-        devMode: JSON.stringify(mode === 'development'),
         'process.env.PLATFORM': JSON.stringify(process.env.PLATFORM || 'desktop'),
         'process.env.STAGE': JSON.stringify(stage),
         SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),

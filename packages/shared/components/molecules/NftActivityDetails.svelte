@@ -1,11 +1,11 @@
-<script lang="typescript">
+<script lang="ts">
     import { closePopup } from '@auxiliary/popup'
     import { selectedAccountIndex } from '@core/account/stores'
     import { time } from '@core/app'
     import { localize } from '@core/i18n'
     import { getNftByIdFromAllAccountNfts, selectedAccountNfts, selectedNftId } from '@core/nfts'
     import { CollectiblesRoute, collectiblesRouter, DashboardRoute, dashboardRouter } from '@core/router'
-    import { NftActivity } from '@core/wallet'
+    import { ActivityAsyncStatus, NftActivity } from '@core/wallet'
     import {
         ActivityAsyncStatusPill,
         FontWeight,
@@ -48,13 +48,14 @@
         <transaction-status class="flex flex-row w-full space-x-2 justify-center">
             {#if activity?.inclusionState && activity?.direction}
                 <TransactionActivityStatusPill
+                    type={activity.type}
                     action={activity?.action}
                     direction={activity?.direction}
                     isInternal={activity?.isInternal}
                     inclusionState={activity?.inclusionState}
                 />
             {/if}
-            {#if activity?.asyncData?.asyncStatus}
+            {#if activity?.asyncData?.asyncStatus && activity?.asyncData?.asyncStatus !== ActivityAsyncStatus.Timelocked}
                 <ActivityAsyncStatusPill asyncStatus={activity?.asyncData?.asyncStatus} />
             {/if}
             {#if isTimelocked}

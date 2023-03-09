@@ -1,8 +1,8 @@
-<script lang="typescript">
+<script lang="ts">
     import { localize } from '@core/i18n'
     import { getOfficialNodes, INode, isOfficialNetwork } from '@core/network'
     import { activeProfile } from '@core/profile'
-    import { openPopup } from '@auxiliary/popup'
+    import { openPopup, PopupId } from '@auxiliary/popup'
     import { Text, NodeActionsButton, Pill } from 'shared/components'
 
     export let nodesContainer: HTMLElement = undefined
@@ -15,7 +15,7 @@
 
     function handleViewNodeInfoClick(node: INode): void {
         openPopup({
-            type: 'nodeInfo',
+            id: PopupId.NodeInfo,
             props: {
                 node,
             },

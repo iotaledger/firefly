@@ -1,15 +1,16 @@
-<script lang="typescript">
-    import { Icon as IconEnum } from '@auxiliary/icon'
-    import { selectedAccount } from '@core/account'
-    import { Icon } from 'shared/components'
-    import { AccountLabel } from 'shared/components/atoms/'
-    import { DashboardRoute, dashboardRoute, dashboardRouter } from '../../lib/routers'
+<script lang="ts">
+    import { AccountLabel, Icon } from '@ui'
 
-    $: isDrawerOpen = $dashboardRoute === DashboardRoute.AccountSwitcher
+    import { selectedAccount } from '@core/account'
+
+    import { DrawerId, drawers, openDrawer } from '@/auxiliary/drawer'
+    import { Icon as IconEnum } from '@auxiliary/icon'
+
+    $: isDrawerOpen = $drawers.find((drawer) => drawer.id === DrawerId.AccountSwitcher)
 </script>
 
 <button
-    on:click={() => $dashboardRouter.goTo(DashboardRoute.AccountSwitcher)}
+    on:click={() => openDrawer(DrawerId.AccountSwitcher)}
     class="flex flex-row justify-center items-center space-x-2"
 >
     <AccountLabel account={$selectedAccount} />

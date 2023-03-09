@@ -9,6 +9,7 @@
         "@iota/types": "^1.0.0-beta.9",
         "@typescript-eslint/eslint-plugin": "^4.29.2",
         "@typescript-eslint/parser": "^4.29.2",
+        "@types/node": "^16.4.2",
         "eslint": "^7.32.0",
         "eslint-plugin-security": "^1.4.0",
         "eslint-plugin-svelte3": "^3.4.1",
@@ -17,10 +18,12 @@
         "patch-package": "^6.4.7",
         "prettier": "^2.3.2",
         "prettier-plugin-svelte": "^2.7.0",
-        "retypeapp": "^2.3.0",
-        "@types/node": "^14.11.1"
+        "retypeapp": "^2.3.0"
     },
     "scripts": {
+        "check-types": "yarn check-types:shared && yarn check-types:desktop",
+        "check-types:desktop": "cd packages/desktop && tsc --pretty --noEmit",
+        "check-types:shared": "cd packages/shared && tsc --pretty --noEmit",
         "docs:start": "cd docs/ && retype watch",
         "format": "yarn format:write",
         "format:check": "prettier -c \"**/*.{ts,js,json,scss,css,svelte}\"",
@@ -28,9 +31,9 @@
         "lint": "yarn lint:fix",
         "lint:check": "eslint . --cache",
         "lint:fix": "eslint . --cache --fix",
-        "postinstall": "patch-package",
         "pre-commit": "yarn format-check && yarn lint",
         "prepare": "husky install",
+        "postinstall": "patch-package",
         "test": "yarn test:shared",
         "test:shared": "cd packages/shared && yarn test"
     },

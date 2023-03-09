@@ -1,5 +1,6 @@
-<script lang="typescript">
-    import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
+<script lang="ts">
+    import { Animation, Button, Icon, Text } from '@ui'
+    import { OnboardingLayout } from '@components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { BASE_TOKEN, NetworkProtocol } from '@core/network'

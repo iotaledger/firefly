@@ -1,11 +1,11 @@
-import { selectedAccount, updateSelectedAccount } from '@core/account'
-import { handleLedgerError } from '@core/ledger'
-import { activeProfile, ProfileType } from '@core/profile'
 import { get } from 'svelte/store'
-import { DEFAULT_TRANSACTION_OPTIONS } from '../constants'
-import { addActivitiesToAccountActivitiesInAllAccountActivities, resetNewTokenTransactionDetails } from '../stores'
+import { selectedAccount, updateSelectedAccount } from '@core/account'
+import { updateNftInAllAccountNfts } from '@core/nfts/actions'
+
+import { DEFAULT_TRANSACTION_OPTIONS, OUTPUT_TYPE_NFT } from '../constants'
+import { resetNewTokenTransactionDetails } from '../stores'
 import { Output } from '../types'
-import { generateActivities, preprocessTransaction } from '../utils'
+import { processAndAddToActivities } from '../utils'
 
 export async function sendOutput(output: Output): Promise<void> {
     try {
@@ -13,18 +13,17 @@ export async function sendOutput(output: Output): Promise<void> {
         const account = get(selectedAccount)
         const transaction = await account.sendOutputs([output], DEFAULT_TRANSACTION_OPTIONS)
         // Reset transaction details state, since the transaction has been sent
+        if (output.type === OUTPUT_TYPE_NFT) {
+            updateNftInAllAccountNfts(account.index, output.nftId, { isSpendable: false })
+        }
+
         resetNewTokenTransactionDetails()
-        const processedTransaction = await preprocessTransaction(transaction, account)
-        const activities = generateActivities(processedTransaction, account)
-        addActivitiesToAccountActivitiesInAllAccountActivities(account.index, activities)
+
+        await processAndAddToActivities(transaction, account)
         updateSelectedAccount({ isTransferring: false })
         return
     } catch (err) {
         updateSelectedAccount({ isTransferring: false })
-        const _activeProfile = get(activeProfile)
-        if (_activeProfile.type === ProfileType.Ledger) {
-            handleLedgerError(err.error)
-        }
         throw err
     }
 }

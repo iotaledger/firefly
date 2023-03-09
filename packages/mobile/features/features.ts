@@ -6,12 +6,36 @@ const features = {
         enabled: false,
         profileActions: {
             enabled: true,
+            backupProfile: {
+                enabled: true,
+            },
+            networkStatus: {
+                enabled: true,
+            },
+            profileLock: {
+                enabled: true,
+            },
         },
         accountSwitcher: {
             enabled: true,
         },
         accountActions: {
-            enabled: false,
+            enabled: true,
+            customize: {
+                enabled: true,
+            },
+            toggleVisibility: {
+                enabled: true,
+            },
+            delete: {
+                enabled: true,
+            },
+            balanceBreakdown: {
+                enabled: true,
+            },
+            exportTransactions: {
+                enabled: false,
+            },
         },
         createAccount: {
             enabled: true,
@@ -48,6 +72,9 @@ const features = {
             actions: {
                 enabled: true,
             },
+            burnAsset: {
+                enabled: false,
+            },
         },
         governance: {
             enabled: false,
@@ -67,7 +94,7 @@ const features = {
                 enabled: true,
             },
             currency: {
-                enabled: false,
+                enabled: true,
             },
             notifications: {
                 enabled: false,
@@ -76,16 +103,16 @@ const features = {
                 enabled: false,
             },
             changeProfileName: {
-                enabled: false,
+                enabled: true,
             },
         },
         security: {
             enabled: true,
             exportStronghold: {
-                enabled: false,
+                enabled: true,
             },
             appLock: {
-                enabled: false,
+                enabled: true,
             },
             changePassword: {
                 enabled: true,
@@ -94,13 +121,13 @@ const features = {
                 enabled: false,
             },
             deleteProfile: {
-                enabled: false,
+                enabled: true,
             },
         },
         advanced: {
             enabled: true,
             networkConfiguration: {
-                enabled: false,
+                enabled: true,
             },
             deepLinks: {
                 enabled: false,
@@ -109,7 +136,7 @@ const features = {
                 enabled: true,
             },
             hiddenAccounts: {
-                enabled: false,
+                enabled: true,
             },
             errorLog: {
                 enabled: true,
@@ -125,18 +152,18 @@ const features = {
             },
         },
         helpAndInfo: {
-            enabled: false,
+            enabled: true,
             documentation: {
-                enabled: false,
+                enabled: true,
             },
             faq: {
-                enabled: false,
+                enabled: true,
             },
             discord: {
-                enabled: false,
+                enabled: true,
             },
             reportAnIssue: {
-                enabled: false,
+                enabled: true,
             },
         },
     },

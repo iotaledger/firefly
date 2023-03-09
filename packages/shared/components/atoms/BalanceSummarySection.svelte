@@ -1,72 +1,65 @@
-<script lang="typescript">
-    import { formatCurrency } from '@core/i18n'
+<script lang="ts">
+    import { formatCurrency, localize } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
-    import { formatTokenAmountPrecise, IAsset } from '@core/wallet'
-    import { FontWeight, Text } from 'shared/components'
+    import { formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
+    import { BalanceSummaryRow, Icon } from 'shared/components'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
-    export let totalRow = false
-    export let title: string
-    export let subtitle: string = ''
+    export let titleKey: string
+    export let subtitleKey: string = ''
+    export let subBreakdown: { [key: string]: { amount: number } } = undefined
     export let amount: number
-    export let asset: IAsset
+    export let bold: boolean = false
 
-    $: formattedAmount = formatTokenAmountPrecise(amount, asset.metadata)
-    $: convertedAmount = formatCurrency(getMarketAmountFromAssetValue(amount, asset))
+    let expanded = false
 
-    const PRIMARY_COLOR = 'gray-800'
-    const PRIMARY_DARK_COLOR = 'white'
-    const PRIMARY_FONT_SIZE = '15'
-    const PRIMARY_FONT_WEIGHT = FontWeight.normal
-    const PRIMARY_LINE_HEIGHT = '5'
+    $: hasChildren = !!Object.keys(subBreakdown ?? {}).length
+    $: ({ baseCoin } = $selectedAccountAssets)
 
-    const SECONDARY_COLOR = 'gray-600'
-    const SECONDARY_DARK_COLOR = 'gray-400'
-    const SECONDARY_FONT_SIZE = '13'
-    const SECONDARY_FONT_WEIGHT = FontWeight.normal
-    const SECONDARY_LINE_HEIGHT = '4'
+    function getAmount(amount: number): string {
+        return formatTokenAmountBestMatch(amount, baseCoin.metadata)
+    }
+
+    function getCurrencyAmount(amount: number): string {
+        return formatCurrency(getMarketAmountFromAssetValue(amount, baseCoin))
+    }
+
+    function toggleExpandedView(): void {
+        expanded = !expanded
+    }
 </script>
 
-<div class="flex justify-between">
-    <div class={title ? 'flex flex-col space-y-0.5' : ''}>
-        <Text
-            color={PRIMARY_COLOR}
-            darkColor={PRIMARY_DARK_COLOR}
-            fontSize={PRIMARY_FONT_SIZE}
-            fontWeight={totalRow ? FontWeight.semibold : PRIMARY_FONT_WEIGHT}
-            lineHeight={PRIMARY_LINE_HEIGHT}
-        >
-            {title}
-        </Text>
-        {#if subtitle}
-            <Text
-                color={SECONDARY_COLOR}
-                darkColor={SECONDARY_DARK_COLOR}
-                fontSize={SECONDARY_FONT_SIZE}
-                fontWeight={SECONDARY_FONT_WEIGHT}
-                lineHeight={SECONDARY_LINE_HEIGHT}
-            >
-                {subtitle}
-            </Text>
+<div class="flex flex-col space-y-8">
+    <div
+        class="w-full flex flex-row flex-grow justify-between space-x-2 {hasChildren ? 'cursor-pointer ' : ''}"
+        on:click={toggleExpandedView}
+        on:keydown={() => {}}
+    >
+        {#if hasChildren}
+            <Icon
+                icon={expanded ? IconEnum.ChevronUp : IconEnum.ChevronDown}
+                width="12"
+                height="12"
+                classes="dark:text-white mt-1"
+            />
         {/if}
+        <BalanceSummaryRow
+            title={titleKey ? localize(`popups.balanceBreakdown.${titleKey}.title`) : ''}
+            subtitle={subtitleKey ? localize(`popups.balanceBreakdown.${subtitleKey}.subtitle`) : ''}
+            amount={getAmount(amount)}
+            convertedAmount={getCurrencyAmount(amount)}
+            {bold}
+        />
     </div>
-    <div class={formattedAmount ? 'flex flex-col items-end space-y-0.5' : ''}>
-        <Text
-            color={PRIMARY_COLOR}
-            darkColor={PRIMARY_DARK_COLOR}
-            fontSize={PRIMARY_FONT_SIZE}
-            fontWeight={totalRow ? FontWeight.semibold : PRIMARY_FONT_WEIGHT}
-            lineHeight={PRIMARY_LINE_HEIGHT}
-        >
-            {formattedAmount}
-        </Text>
-        <Text
-            color={SECONDARY_COLOR}
-            darkColor={SECONDARY_DARK_COLOR}
-            fontSize={SECONDARY_FONT_SIZE}
-            fontWeight={SECONDARY_FONT_WEIGHT}
-            lineHeight={SECONDARY_LINE_HEIGHT}
-        >
-            {convertedAmount}
-        </Text>
-    </div>
+    {#if expanded}
+        {#each Object.keys(subBreakdown ?? {}) as breakdownKey}
+            <BalanceSummaryRow
+                title={localize(`popups.balanceBreakdown.${breakdownKey}.title`)}
+                subtitle={localize(`popups.balanceBreakdown.${breakdownKey}.subtitle`)}
+                amount={getAmount(subBreakdown[breakdownKey].amount)}
+                convertedAmount={getCurrencyAmount(subBreakdown[breakdownKey].amount)}
+                classes="ml-8"
+            />
+        {/each}
+    {/if}
 </div>

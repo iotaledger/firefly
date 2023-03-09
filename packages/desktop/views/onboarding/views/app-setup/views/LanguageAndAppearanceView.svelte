@@ -1,6 +1,7 @@
-<script lang="typescript">
+<script lang="ts">
     import { onMount } from 'svelte'
-    import { Animation, Button, ButtonRadio, Dropdown, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, Button, ButtonRadio, Dropdown, Text } from '@ui'
+    import { OnboardingLayout } from '@components'
     import { appSettings, AppTheme, hasCompletedAppSetup, mobile, shouldBeDarkMode } from '@core/app'
     import { localize, setLanguage, SUPPORTED_LOCALES } from '@core/i18n'
     import { appSetupRouter } from '@core/router'
@@ -52,9 +53,9 @@
         $appSetupRouter.previous()
     }
 
-    onMount(() => {
+    onMount(async () => {
         _clonedVariable = appTheme
-        initialiseOnboardingProfile(
+        await initialiseOnboardingProfile(
             $onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile(),
             NetworkProtocol.Shimmer
         )

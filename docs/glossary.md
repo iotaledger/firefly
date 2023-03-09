@@ -26,7 +26,7 @@ m / purpose' / coin_type' / account' / change / address
 - `change` - `0'` or `1'` depending on if the address was generated for moving a transaction's remainder funds (`1`) or is an external address for receiving funds (`0`)
 - `address` - the index for an address, of which there are 2,147,483,648 possible values (in Firefly these are the individual addresses per each wallet in a single profile)
 
-\* _The added apostrophe indicates a hardened derivation at that level, which means that it is not possible to link a public key with its parent or child public keys via the public keys alone. With this mechanism being used at at least the `account` level, the case of an accidental leak of account-specific keys does __NOT__ compromise other accounts or the master (`m`)._
+\* _The added apostrophe indicates a hardened derivation at that level, which means that it is not possible to link a public key with its parent or child public keys via the public keys alone. With this mechanism being used at least the `account` level, the case of an accidental leak of account-specific keys does __NOT__ compromise other accounts or the master (`m`)._
 
 BIP32 is important as without it, you may not necessarily be able to gain access to your funds - you __must__ know which indices the funds reside on to gain access (i.e. you can know which private / public key-pair to generate from the seed). Do not worry though as Firefly sequentially generates new accounts and addresses, which is what allows the balance finder in the settings to more easily find your funds should they be "lost".
 
@@ -48,7 +48,7 @@ To help understand the technical definition, please read the above description a
 
 ## 🌐 IOTA Networks
 
-The IOTA ecosystem contains a variety of networks each with different purposes and use-cases.
+The IOTA ecosystem contains a variety of networks each with different purposes and use cases.
 
 ### Mainnet
 

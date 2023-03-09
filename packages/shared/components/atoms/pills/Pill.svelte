@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Text, FontWeight } from 'shared/components'
 
     export let data = ''
@@ -22,6 +22,7 @@
     "
 >
     {#if data}
+        <slot />
         {data}
     {:else}
         <slot />

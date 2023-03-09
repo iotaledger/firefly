@@ -1,12 +1,10 @@
 import { get } from 'svelte/store'
 
 import {
-    accountSwitcherRouter,
-    activityRouter,
     appRouter,
     appSetupRouter,
-    dashboardRouter,
     loginRouter,
+    networkConfigurationSettingsRouter,
     networkSetupRouter,
     onboardingRouter,
     profileBackupRouter,
@@ -15,25 +13,26 @@ import {
     profileSetupRouter,
     sendRouter,
     settingsRouter,
+    shimmerClaimingRouter,
     storageProtectionSetupRouter,
     strongholdSetupRouter,
-    tokenRouter,
 } from '../routers'
 
 export function resetRouters(): void {
     resetSubrouters()
     resetBaseRouters()
+    resetDrawersRouters()
 }
 
 function resetBaseRouters(): void {
     get(appRouter).reset()
     get(onboardingRouter).reset()
-    get(dashboardRouter).reset()
 }
 
 function resetSubrouters(): void {
     resetOnboardingSubrouters()
     resetDashboardSubrouters()
+    resetSettingsSubrouters()
 }
 
 function resetOnboardingSubrouters(): void {
@@ -44,15 +43,19 @@ function resetOnboardingSubrouters(): void {
     get(profileBackupRouter).reset()
     get(profileRecoveryRouter).reset()
     get(profileSetupRouter).reset()
+    get(shimmerClaimingRouter).reset()
     get(storageProtectionSetupRouter).reset()
 }
 
 function resetDashboardSubrouters(): void {
-    get(accountSwitcherRouter).reset()
-    get(activityRouter).reset()
-    get(sendRouter).reset()
-    get(settingsRouter).reset()
-    get(tokenRouter).reset()
     get(profileRouter).reset()
     get(settingsRouter).reset()
+}
+
+function resetSettingsSubrouters(): void {
+    get(networkConfigurationSettingsRouter).reset()
+}
+
+function resetDrawersRouters(): void {
+    get(sendRouter).reset()
 }

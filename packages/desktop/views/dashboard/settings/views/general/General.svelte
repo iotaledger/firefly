@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { HR } from 'shared/components'
     import { GeneralSettingsRoute } from '@core/router'
     import { Currency, Language, NetworkStatus, Notifications, Theme } from './'

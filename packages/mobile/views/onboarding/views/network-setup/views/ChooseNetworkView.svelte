@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import {
         initialiseOnboardingProfile,
         onboardingProfile,
@@ -7,11 +7,11 @@
     } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
     import { getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
-    import { networkSetupRouter } from '../../../../../lib/routers'
+    import { networkSetupRouter } from '@/routers'
     import features from '@features/features'
-    import { OnboardingButton } from 'shared/components'
+    import { OnboardingButton } from '@ui'
     import { onMount } from 'svelte'
-    import { OnboardingLayout } from '../../../../../components'
+    import { OnboardingLayout } from '@components'
 
     const title = localize('views.onboarding.networkSetup.chooseNetwork.title')
 
@@ -37,9 +37,9 @@
         $networkSetupRouter.previous()
     }
 
-    onMount(() => {
+    onMount(async () => {
         if (!$onboardingProfile?.id) {
-            initialiseOnboardingProfile(
+            await initialiseOnboardingProfile(
                 $onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile(),
                 NetworkProtocol.Shimmer
             )

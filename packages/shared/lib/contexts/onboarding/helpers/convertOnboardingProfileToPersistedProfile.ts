@@ -17,6 +17,7 @@ export function convertOnboardingProfileToPersistedProfile(
             lastStrongholdBackupTime: onboardingProfile.lastStrongholdBackupTime,
         }),
         ...(onboardingProfile?.settings && { settings: onboardingProfile.settings }),
+        ...(onboardingProfile?.strongholdVersion && { strongholdVersion: onboardingProfile.strongholdVersion }),
         ...(onboardingProfile?.accountMetadata && { accountMetadata: onboardingProfile.accountMetadata }),
         ...(onboardingProfile?.isDeveloperProfile && { isDeveloperProfile: onboardingProfile.isDeveloperProfile }),
         ...(onboardingProfile?.hasVisitedDashboard && { hasVisitedDashboard: onboardingProfile.hasVisitedDashboard }),

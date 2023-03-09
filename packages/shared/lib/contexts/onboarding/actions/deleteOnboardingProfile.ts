@@ -12,7 +12,7 @@ export async function deleteOnboardingProfile(): Promise<void> {
     const profile = get(onboardingProfile)
     if (profile) {
         try {
-            destroyProfileManager()
+            await destroyProfileManager()
             await removeProfileFolder(profile.id)
         } catch (err) {
             console.error(err)

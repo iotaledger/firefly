@@ -22,6 +22,6 @@ export function getTimeDifference(lateDate: Date, earlyDate: Date): string {
     } else if (seconds > 0) {
         return '<1min'
     } else {
-        return '-'
+        return undefined
     }
 }

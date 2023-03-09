@@ -1,4 +1,7 @@
 import { get } from 'svelte/store'
+
+import { INode } from '@core/network/interfaces'
+
 import { DEFAULT_PERSISTED_PROFILE_OBJECT, PROFILE_VERSION } from '../../constants'
 import { IPersistedProfile } from '../../interfaces'
 import { currentProfileVersion, profiles, saveProfile } from '../../stores'
@@ -40,6 +43,7 @@ const persistedProfileMigrationsMap: Record<number, (existingProfile: unknown) =
     5: persistedProfileMigrationToV6,
     6: persistedProfileMigrationToV7,
     7: persistedProfileMigrationToV8,
+    8: persistedProfileMigrationToV9,
 }
 
 function persistedProfileMigrationToV4(existingProfile: unknown): void {
@@ -121,3 +125,28 @@ function persistedProfileMigrationToV8(existingProfile: IPersistedProfile): void
 
     saveProfile(existingProfile)
 }
+
+function persistedProfileMigrationToV9(existingProfile: IPersistedProfile): void {
+    function migrateNode(node: INode): INode {
+        if (node) {
+            return {
+                url: node.url as string,
+                auth: {
+                    jwt: node.auth?.jwt,
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore
+                    basicAuthNamePwd: [node.auth?.username, node.auth?.password],
+                },
+            }
+        } else {
+            return undefined
+        }
+    }
+
+    existingProfile.clientOptions.nodes = existingProfile.clientOptions.nodes.map(migrateNode)
+    existingProfile.clientOptions.primaryNode = migrateNode(existingProfile.clientOptions.primaryNode)
+
+    saveProfile(existingProfile)
+}
+
+// TODO: Rename accountMetadata to accountPersistedData in next migration

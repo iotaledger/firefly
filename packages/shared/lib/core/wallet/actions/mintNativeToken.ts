@@ -1,17 +1,16 @@
 import { showAppNotification } from '@auxiliary/notification'
 import { selectedAccount, updateSelectedAccount } from '@core/account'
 import { localize } from '@core/i18n'
-import { handleLedgerError } from '@core/ledger'
-import { activeProfile, ProfileType } from '@core/profile'
 import { Converter } from '@core/utils'
+import { handleError } from '@core/error/handlers'
 import { NativeTokenOptions, TransactionOptions } from '@iota/wallet'
 import { get } from 'svelte/store'
 import { VerifiedStatus } from '../enums'
 import { buildPersistedAssetFromIrc30Metadata } from '../helpers'
 import { IIrc30Metadata, IPersistedAsset } from '../interfaces'
-import { addActivitiesToAccountActivitiesInAllAccountActivities, resetMintTokenDetails } from '../stores'
+import { resetMintTokenDetails } from '../stores'
 import { addPersistedAsset } from '../stores/persisted-assets.store'
-import { generateActivities, preprocessTransaction } from '../utils'
+import { processAndAddToActivities } from '../utils'
 
 export async function mintNativeToken(
     maximumSupply: number,
@@ -36,10 +35,10 @@ export async function mintNativeToken(
             metadata,
             { verified: true, status: VerifiedStatus.SelfVerified }
         )
-        const processedTransaction = await preprocessTransaction(mintTokenTransaction.transaction, account)
         addPersistedAsset(persistedAsset)
-        const activities = generateActivities(processedTransaction, account)
-        addActivitiesToAccountActivitiesInAllAccountActivities(account.index, activities)
+
+        await processAndAddToActivities(mintTokenTransaction.transaction, account)
+
         showAppNotification({
             type: 'success',
             message: localize('notifications.mintNativeToken.success'),
@@ -51,10 +50,7 @@ export async function mintNativeToken(
     } catch (err) {
         updateSelectedAccount({ isTransferring: false })
 
-        const _activeProfile = get(activeProfile)
-        if (_activeProfile.type === ProfileType.Ledger) {
-            handleLedgerError(err?.error)
-        }
+        handleError(err)
 
         return Promise.reject(err)
     }

@@ -1,58 +1,101 @@
-<script lang="typescript">
-    import { mobile } from '@core/app'
+<script lang="ts">
+    import { appSettings } from '@core/app'
 
-    export let recoveryPhrase = []
-    export let verifyRecoveryPhrase = undefined
+    export let recoveryPhrase: string[] = []
+    export let verifyRecoveryPhrase: string[] = undefined
 
-    export let hide = false
-    export let classes = ''
-    export let disabled = false
+    export let blurred: boolean = false
+    export let disabled: boolean = false
+    export let boxed: boolean = false
+
+    $: dark = $appSettings.darkMode
 </script>
 
 {#if recoveryPhrase}
-    <div
-        data-label="recovery-phrase"
-        class="grid w-full text-12 {$mobile ? 'grid-cols-1 overflow-y-auto p-3' : 'grid-cols-3'} gap-3 {classes}"
-        class:hide
-    >
+    <recovery-phrase data-label="recovery-phrase" class:blurred class:boxed>
         {#each recoveryPhrase as word, i}
-            <span
+            {@const errored =
+                verifyRecoveryPhrase && verifyRecoveryPhrase[i] && verifyRecoveryPhrase[i] !== recoveryPhrase[i]}
+            {@const selected =
+                verifyRecoveryPhrase &&
+                verifyRecoveryPhrase.length === i &&
+                verifyRecoveryPhrase[i - 1] === recoveryPhrase[i - 1]}
+            {@const unmatched = verifyRecoveryPhrase && !verifyRecoveryPhrase[i]}
+            <recovery-word
                 id="recovery-word-{i}"
-                class="px-6 py-4 flex flex-row items-center rounded-2xl {$mobile
-                    ? 'bg-transparent text-gray-500 border border-solid border-gray-300'
-                    : 'bg-gray-200 dark:bg-gray-800'}"
-                class:unmatched={verifyRecoveryPhrase && !verifyRecoveryPhrase[i]}
+                class:boxed
+                class:dark
                 class:disabled
-                class:errored={verifyRecoveryPhrase &&
-                    verifyRecoveryPhrase[i] &&
-                    verifyRecoveryPhrase[i] !== recoveryPhrase[i]}
+                class:errored
+                class:selected
+                class:unmatched
             >
                 <span class="text-gray-500 mr-2">{`${i + 1}. `}</span>
-                <span class="{$mobile ? 'text-gray-500' : 'text-gray-800'} dark:text-white">{word}</span>
-            </span>
+                <span class="text-gray-700 dark:text-white">{blurred || errored || unmatched ? '*****' : word}</span>
+            </recovery-word>
         {/each}
-    </div>
+    </recovery-phrase>
 {/if}
 
-<style type="text/scss">
-    div {
+<style lang="scss">
+    recovery-phrase {
+        @apply grid grid-cols-3 w-full mb-8 text-12;
         max-width: 460px;
 
-        &.hide {
-            filter: blur(4px);
+        &.blurred {
+            @apply filter blur-sm;
         }
-        span {
-            &.disabled {
-                @apply pointer-events-none;
-            }
-            &.unmatched {
-                filter: blur(4px);
-            }
 
-            &.errored {
-                filter: blur(4px);
-                @apply bg-red-500;
-            }
+        &.boxed {
+            @apply overflow-y-auto p-3 rounded-2xl border border-solid border-gray-300;
+        }
+
+        &:not(.boxed) {
+            @apply gap-3;
+        }
+    }
+
+    recovery-word {
+        @apply flex flex-row items-center;
+
+        &.disabled {
+            @apply pointer-events-none;
+        }
+    }
+
+    recovery-word:not(.boxed) {
+        @apply px-6 py-4 rounded-2xl bg-gray-200;
+
+        &.dark {
+            @apply bg-gray-800;
+        }
+
+        &.unmatched {
+            @apply filter blur-sm;
+        }
+
+        &.errored {
+            @apply bg-red-500 filter blur-sm;
+        }
+    }
+
+    recovery-word.boxed {
+        @apply p-3 border border-solid border-transparent bg-transparent text-gray-500;
+
+        &.selected {
+            @apply rounded border border-solid border-blue-500 bg-blue-50;
+        }
+
+        &.errored {
+            @apply rounded border border-solid border-red-500 bg-red-50;
+        }
+
+        &.dark.selected {
+            @apply bg-blue-300 bg-opacity-10;
+        }
+
+        &.dark.errored {
+            @apply bg-red-300 bg-opacity-10;
         }
     }
 </style>

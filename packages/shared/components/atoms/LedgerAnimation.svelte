@@ -1,8 +1,8 @@
-<script lang="typescript">
+<script lang="ts">
     import { Animation, Illustration } from 'shared/components'
 
-    export let animation: string
-    export let illustration: string
+    export let animation: string = undefined
+    export let illustration: string = undefined
     export let classes: string = ''
     export let bgClasses: string = ''
 </script>

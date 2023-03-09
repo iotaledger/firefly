@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
 
 import { networkHrp } from '@core/network'
-import { isStringTrue, isValidBech32AddressAndPrefix, getByteLengthOfString } from '@core/utils'
+import { isStringTrue, isValidBech32AddressAndPrefix, getByteLengthOfString, validateAssetId } from '@core/utils'
 import {
     getAssetById,
     NewTransactionDetails,
@@ -10,14 +10,15 @@ import {
     setNewTransactionDetails,
     Subject,
 } from '@core/wallet'
-import { openPopup } from '@auxiliary/popup'
+import { openPopup, PopupId } from '@auxiliary/popup'
 
 import { SendOperationParameter } from '../../../enums'
 import {
-    SurplusNotANumberError,
     InvalidAddressError,
     MetadataLengthError,
     NoAddressSpecifiedError,
+    SurplusNotANumberError,
+    SurplusNotSupportedError,
     TagLengthError,
     UnknownAssetError,
 } from '../../../errors'
@@ -29,7 +30,7 @@ export function handleDeepLinkSendConfirmationOperation(searchParams: URLSearchP
     if (transactionDetails) {
         setNewTransactionDetails(transactionDetails)
         openPopup({
-            type: 'sendConfirmation',
+            id: PopupId.SendConfirmation,
             overflow: true,
             props: {
                 disableBack: true,
@@ -60,6 +61,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): NewTrans
     const recipient: Subject = { type: 'address', address }
 
     const assetId = searchParams.get(SendOperationParameter.AssetId)
+    assetId && validateAssetId(assetId)
     const baseAsset = get(selectedAccountAssets).baseCoin
     const asset = assetId ? getAssetById(assetId) : baseAsset
     if (!asset) {
@@ -71,6 +73,8 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): NewTrans
     const surplus = searchParams.get(SendOperationParameter.Surplus)
     if (surplus && parseInt(surplus).toString() !== surplus) {
         throw new SurplusNotANumberError(surplus)
+    } else if (surplus && asset.id === baseAsset.id) {
+        throw new SurplusNotSupportedError()
     }
 
     const metadata = searchParams.get(SendOperationParameter.Metadata)
@@ -90,7 +94,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): NewTrans
 
     return {
         type: NewTransactionType.TokenTransfer,
-        ...(assetId && { assetId }),
+        assetId: asset.id,
         ...(recipient && { recipient }),
         ...(rawAmount && { rawAmount }),
         ...(unit && { unit }),

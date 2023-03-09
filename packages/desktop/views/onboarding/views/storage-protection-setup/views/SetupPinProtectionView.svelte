@@ -1,5 +1,6 @@
-<script lang="typescript">
-    import { Animation, Button, OnboardingLayout, PinInput, Text, HTMLButtonType } from 'shared/components'
+<script lang="ts">
+    import { Animation, Button, PinInput, Text, HTMLButtonType } from '@ui'
+    import { OnboardingLayout } from '@components'
     import { onMount } from 'svelte'
     import {
         initialiseFirstShimmerClaimingAccount,

@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Text, TooltipIcon, FontWeight } from 'shared/components'
     import { onMount } from 'svelte'
     import CopyableBox from './CopyableBox.svelte'
@@ -17,6 +17,7 @@
     export let shrink: boolean = false
     export let isPreText: boolean = false
     export let maxHeight: number = undefined
+    export let isLoading: boolean = false
 
     let isVertical: boolean = false
     let valueContainer: HTMLElement
@@ -37,7 +38,7 @@
         {backgroundColor}
         {darkBackgroundColor}
         clearBoxPadding
-        classes="w-full overflow-hidden {padding} {classes}"
+        classes="w-full overflow-hidden {padding} {classes} {isLoading ? 'animate-pulse' : ''}"
     >
         <div
             class="

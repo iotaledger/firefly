@@ -1,13 +1,18 @@
-<script lang="typescript">
+<script lang="ts">
+    import { onDestroy } from 'svelte'
+
+    import { Icon, PinInput, Profile, Text, TextType } from '@ui'
+
     import { needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService, Platform } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { activeProfile, login, resetActiveProfile } from '@core/profile'
-    import { loginRouter } from '../../../lib/routers'
-    import { openPopup, popupState } from '@auxiliary/popup'
     import { isValidPin } from '@core/utils'
-    import { Icon, PinInput, Profile, Text, TextType } from 'shared/components'
-    import { onDestroy } from 'svelte'
+
+    import { Icon as IconEnum } from '@auxiliary/icon'
+
+    import { DrawerId, drawers, openDrawer } from '@/auxiliary/drawer'
+    import { loginRouter } from '@/routers'
 
     let attempts = 0
     let pinCode = ''
@@ -24,11 +29,7 @@
     let timeRemainingBeforeNextAttempt = WAITING_TIME_AFTER_MAX_INCORRECT_ATTEMPTS
 
     $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTermsOfService()) {
-        openPopup({
-            type: 'legalUpdate',
-            hideClose: true,
-            preventClose: true,
-        })
+        openDrawer(DrawerId.LegalUpdate, { preventClose: true })
     }
 
     $: hasReachedMaxAttempts = attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS
@@ -38,7 +39,7 @@
         }
     }
     $: {
-        if (pinRef && !$popupState.active) {
+        if (pinRef && !$drawers?.length) {
             pinRef.focus()
         }
     }
@@ -114,7 +115,7 @@
             disabled={hasReachedMaxAttempts}
             on:click={onBackClick}
         >
-            <Icon icon="arrow-left" classes="text-gray-500 dark:text-gray-100" />
+            <Icon icon={IconEnum.ArrowLeft} classes="text-gray-500 dark:text-gray-100" />
         </button>
     </header>
     <div class="flex w-full justify-center items-center mt-16">

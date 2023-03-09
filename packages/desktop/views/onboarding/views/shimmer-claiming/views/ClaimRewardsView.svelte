@@ -1,6 +1,7 @@
-<script lang="typescript">
+<script lang="ts">
     import { onDestroy, onMount } from 'svelte'
-    import { Animation, Button, OnboardingLayout, ShimmerClaimingAccountList, Text } from 'shared/components'
+    import { Animation, Button, ShimmerClaimingAccountList, Text } from '@ui'
+    import { OnboardingLayout } from '@components'
     import { localize } from '@core/i18n'
     import {
         checkOrConnectLedger,
@@ -155,7 +156,7 @@
     })
 
     async function onDestroyHelper(): Promise<void> {
-        unsubscribeFromWalletApiEvents(shimmerClaimingProfileManager)
+        await unsubscribeFromWalletApiEvents(shimmerClaimingProfileManager)
         await $shimmerClaimingProfileManager?.stopBackgroundSync()
         if ($isOnboardingLedgerProfile) {
             stopPollingLedgerNanoStatus()

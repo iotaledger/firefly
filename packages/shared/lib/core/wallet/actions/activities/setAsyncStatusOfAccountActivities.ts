@@ -1,9 +1,9 @@
 import { syncBalance } from '@core/account/actions/syncBalance'
-import { Activity } from '@core/wallet/types'
 import { updateNftInAllAccountNfts } from '@core/nfts'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType } from '@core/wallet/enums'
 import { allAccountActivities } from '../../stores'
 import { refreshAccountAssetsForActiveProfile } from '../refreshAccountAssetsForActiveProfile'
+import { getAsyncStatus } from '@core/wallet/utils/generateActivity/helper'
 
 export function setAsyncStatusOfAccountActivities(time: Date): void {
     const balancesToUpdate: number[] = []
@@ -14,8 +14,13 @@ export function setAsyncStatusOfAccountActivities(time: Date): void {
                 if (oldAsyncStatus === ActivityAsyncStatus.Claimed || oldAsyncStatus === ActivityAsyncStatus.Expired) {
                     continue
                 }
-                activity.asyncData.asyncStatus = getAsyncStatus(activity, time)
-
+                activity.asyncData.asyncStatus = getAsyncStatus(
+                    false,
+                    activity.asyncData.expirationDate,
+                    activity.asyncData.timelockDate,
+                    !!activity.storageDeposit,
+                    time.getTime()
+                )
                 if (oldAsyncStatus !== null && oldAsyncStatus !== activity.asyncData.asyncStatus) {
                     if (!balancesToUpdate.includes(accountIndex)) {
                         balancesToUpdate.push(accountIndex)
@@ -38,21 +43,5 @@ export function setAsyncStatusOfAccountActivities(time: Date): void {
     }
     if (balancesToUpdate.length) {
         void refreshAccountAssetsForActiveProfile()
-    }
-}
-
-function getAsyncStatus(activity: Activity, time: Date): ActivityAsyncStatus {
-    if (activity.asyncData?.timelockDate) {
-        if (activity.asyncData.timelockDate.getTime() > time.getTime()) {
-            return ActivityAsyncStatus.Timelocked
-        }
-    } else if (activity.asyncData) {
-        if (activity.asyncData.asyncStatus !== ActivityAsyncStatus.Claimed) {
-            if (time > activity.asyncData.expirationDate) {
-                return ActivityAsyncStatus.Expired
-            } else {
-                return ActivityAsyncStatus.Unclaimed
-            }
-        }
     }
 }

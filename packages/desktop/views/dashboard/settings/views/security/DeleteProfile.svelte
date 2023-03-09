@@ -1,12 +1,12 @@
-<script lang="typescript">
+<script lang="ts">
     import { Button, Text, ButtonVariant, ButtonSize } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { openPopup } from '@auxiliary/popup'
+    import { openPopup, PopupId } from '@auxiliary/popup'
     import { deleteProfile } from '@contexts/settings'
 
     function handleDeleteClick(): void {
         openPopup({
-            type: 'confirmation',
+            id: PopupId.Confirmation,
             props: {
                 title: localize('popups.deleteProfile.title'),
                 hint: localize('popups.deleteProfile.confirmation'),

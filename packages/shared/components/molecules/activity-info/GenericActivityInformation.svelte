@@ -1,57 +1,53 @@
-<script lang="typescript">
+<script lang="ts">
     import { KeyValueBox } from 'shared/components'
-    import { formatDate, localize } from '@core/i18n'
+    import { getFormattedTimeStamp, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import { Activity, formatTokenAmountPrecise } from '@core/wallet'
     import { BASE_TOKEN, ExplorerEndpoint } from '@core/network'
     import { getOfficialExplorerUrl } from '@core/network/utils'
     import { openUrlInBrowser } from '@core/app'
-    import { truncateString } from '@core/utils'
+    import { IKeyValueBoxList, truncateString } from '@core/utils'
     import { setClipboard } from '@core/utils'
 
     export let activity: Activity
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
-    $: expirationTime = getDateFormat(activity.asyncData?.expirationDate)
-    $: claimedTime = getDateFormat(activity.asyncData?.claimedDate)
+    $: expirationTime = getFormattedTimeStamp(activity.asyncData?.expirationDate)
+    $: claimedTime = getFormattedTimeStamp(activity.asyncData?.claimedDate)
     $: hasStorageDeposit =
         activity.storageDeposit || (activity.storageDeposit === 0 && activity.giftedStorageDeposit === 0)
     $: gasBudget = activity?.parsedLayer2Metadata?.gasBudget
 
-    $: formattedTransactionTime = getDateFormat(activity.time)
-    $: formattedTimelockDate = getDateFormat(activity.asyncData?.timelockDate)
-    $: formattedStorageDeposit = formatTokenAmountPrecise(
-        activity.storageDeposit ?? 0,
-        BASE_TOKEN[$activeProfile?.networkProtocol]
-    )
-    $: formattedGiftedStorageDeposit = formatTokenAmountPrecise(
-        activity.giftedStorageDeposit ?? 0,
-        BASE_TOKEN[$activeProfile?.networkProtocol]
-    )
-    $: formattedGasBudget = formatTokenAmountPrecise(
-        Number(gasBudget ?? 0),
-        BASE_TOKEN[$activeProfile?.networkProtocol]
-    )
+    $: formattedTransactionTime = getFormattedTimeStamp(activity.time)
+    $: formattedTimelockDate = getFormattedTimeStamp(activity.asyncData?.timelockDate)
+    $: baseToken = BASE_TOKEN[$activeProfile?.networkProtocol]
+    $: formattedStorageDeposit = formatTokenAmountPrecise(activity.storageDeposit ?? 0, baseToken)
+    $: formattedGiftedStorageDeposit = formatTokenAmountPrecise(activity.giftedStorageDeposit ?? 0, baseToken)
+    $: formattedSurplus = formatTokenAmountPrecise(activity.surplus ?? 0, baseToken)
+    $: formattedGasBudget = formatTokenAmountPrecise(Number(gasBudget ?? 0), baseToken)
 
-    let transactionDetailsList: { [key in string]: { data: string; isTooltipVisible?: boolean } }
+    let transactionDetailsList: IKeyValueBoxList
     $: transactionDetailsList = {
         ...(activity?.destinationNetwork && {
             destinationNetwork: { data: activity?.destinationNetwork },
         }),
-        ...(activity.time && {
+        ...(activity?.time && {
             transactionTime: { data: formattedTransactionTime },
         }),
-        ...(activity.metadata && {
+        ...(activity?.metadata && {
             metadata: { data: activity.metadata, isTooltipVisible: true },
         }),
-        ...(activity.tag && {
+        ...(activity?.tag && {
             tag: { data: activity.tag, isTooltipVisible: true },
         }),
         ...(hasStorageDeposit && {
             storageDeposit: { data: formattedStorageDeposit, isTooltipVisible: true },
         }),
-        ...(activity.giftedStorageDeposit && {
+        ...(activity?.surplus && {
+            surplus: { data: formattedSurplus },
+        }),
+        ...(activity?.giftedStorageDeposit && {
             giftedStorageDeposit: { data: formattedGiftedStorageDeposit, isTooltipVisible: true },
         }),
         ...(gasBudget && {
@@ -60,7 +56,7 @@
         ...(expirationTime && {
             expirationTime: { data: expirationTime, isTooltipVisible: true },
         }),
-        ...(activity.asyncData?.timelockDate && {
+        ...(activity?.asyncData?.timelockDate && {
             timelockDate: { data: formattedTimelockDate, isTooltipVisible: true },
         }),
         ...(claimedTime && { claimedTime: { data: claimedTime } }),
@@ -69,24 +65,9 @@
     function handleTransactionIdClick(): void {
         explorerUrl
             ? openUrlInBrowser(
-                  `${explorerUrl}/${ExplorerEndpoint.Transaction}/${activity.asyncData?.claimingTransactionId}`
+                  `${explorerUrl}/${ExplorerEndpoint.Transaction}/${activity?.asyncData?.claimingTransactionId}`
               )
-            : setClipboard(activity.asyncData?.claimingTransactionId)
-    }
-
-    function getDateFormat(date: Date): string {
-        try {
-            if (date) {
-                return formatDate(date, {
-                    dateStyle: 'long',
-                    timeStyle: 'medium',
-                })
-            } else {
-                return undefined
-            }
-        } catch (err) {
-            return undefined
-        }
+            : setClipboard(activity?.asyncData?.claimingTransactionId)
     }
 </script>
 
@@ -99,7 +80,7 @@
             : undefined}
     />
 {/each}
-{#if activity.asyncData?.claimingTransactionId}
+{#if activity?.asyncData?.claimingTransactionId}
     <KeyValueBox keyText={localize(activity.asyncData?.isClaiming ? 'general.claimingIn' : 'general.claimedIn')}>
         <button
             slot="value"

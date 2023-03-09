@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import Big from 'big.js'
     import { Text, AssetDropdown, InputContainer, SliderInput, AmountInput, TooltipIcon } from 'shared/components'
     import UnitInput from './UnitInput.svelte'
@@ -16,15 +16,16 @@
     export let inputElement: HTMLInputElement = undefined
     export let disabled = false
     export let isFocused = false
+    export let votingPower: number = 0
     export let asset: IAsset = $visibleSelectedAccountAssets?.baseCoin
     export let rawAmount: string = undefined
     export let unit: string = undefined
     export let containsSlider: boolean = false
     export let disableAssetSelection: boolean = null
-
-    let amount: string = rawAmount
+    export let amount: string = rawAmount
         ? formatTokenAmountDefault(Number(rawAmount), asset?.metadata, unit, false)
         : undefined
+
     let amountInputElement: HTMLInputElement
     let error: string
 
@@ -41,19 +42,19 @@
         allowedDecimals = IOTA_UNIT_MAP?.[unit?.substring(0, 1)] ?? 0
     }
 
-    $: bigAmount = convertToRawAmount(amount, unit, asset?.metadata)
+    $: availableBalance = asset?.balance?.available + votingPower
+    $: bigAmount = convertToRawAmount(amount, asset?.metadata, unit)
     $: marketAmount = getMarketAmountFromAssetValue(bigAmount, asset)
-    $: max = parseCurrency(formatTokenAmountDefault(asset?.balance?.available, asset.metadata, unit, false))
+    $: max = parseCurrency(formatTokenAmountDefault(availableBalance, asset?.metadata, unit, false))
 
     function onClickAvailableBalance(): void {
         const isRawAmount = asset?.metadata?.decimals && asset?.metadata?.unit
         if (isRawAmount) {
-            const parsedAmount = formatTokenAmountDefault(asset?.balance?.available, asset?.metadata, unit)
+            const parsedAmount = formatTokenAmountDefault(availableBalance, asset?.metadata, unit, false)
             amount = parsedAmount
-            unit = asset?.metadata?.unit
             return
         }
-        amount = asset?.balance.available.toString() ?? '0'
+        amount = availableBalance.toString() ?? '0'
         unit = undefined
     }
 
@@ -61,7 +62,9 @@
         const amountAsFloat = parseCurrency(amount)
         const isAmountZeroOrNull = !Number(amountAsFloat)
         // Zero value transactions can still contain metadata/tags
+        error = ''
         if (allowZeroOrNull && isAmountZeroOrNull) {
+            rawAmount = Big(0).toString()
             return
         } else if (isAmountZeroOrNull) {
             error = localize('error.send.amountInvalidFormat')
@@ -71,7 +74,7 @@
             Number.parseInt(amount, 10).toString() !== amount
         ) {
             error = localize('error.send.amountNoFloat')
-        } else if (bigAmount.gt(Big(asset?.balance?.available))) {
+        } else if (bigAmount.gt(Big(availableBalance))) {
             error = localize('error.send.amountTooHigh')
         } else if (bigAmount.lte(Big(0))) {
             error = localize('error.send.amountZero')
@@ -86,14 +89,7 @@
     }
 </script>
 
-<InputContainer
-    bind:this={inputElement}
-    bind:inputElement={amountInputElement}
-    col
-    {isFocused}
-    {error}
-    on:clickOutside={() => (isFocused = false)}
->
+<InputContainer bind:this={inputElement} bind:inputElement={amountInputElement} col {isFocused} {error}>
     <div class="flex flex-row w-full items-center space-x-0.5 relative">
         <AssetDropdown bind:asset readonly={disableAssetSelection} />
         <AmountInput
@@ -108,18 +104,18 @@
             {disabled}
         />
         {#if asset?.metadata?.unit}
-            <UnitInput bind:unit bind:isFocused tokenMetadata={asset?.metadata} />
+            <UnitInput bind:unit bind:isFocused {disabled} tokenMetadata={asset?.metadata} />
         {/if}
     </div>
     {#if containsSlider}
         <div class="flex flex-col mt-5">
-            <SliderInput bind:value={amount} {max} decimals={asset.metadata.decimals} />
+            <SliderInput bind:value={amount} {max} decimals={allowedDecimals} {disabled} />
             <div class="flex flex-row justify-between">
                 <Text color="gray-800" darkColor="gray-500" fontSize="xs"
-                    >{formatTokenAmountBestMatch(0, asset?.metadata)}</Text
+                    >{formatTokenAmountDefault(0, asset?.metadata, unit)} {unit}</Text
                 >
                 <Text color="gray-800" darkColor="gray-500" fontSize="xs"
-                    >{formatTokenAmountBestMatch(asset?.balance?.available, asset?.metadata)}</Text
+                    >{formatTokenAmountDefault(availableBalance, asset?.metadata, unit)} {unit}</Text
                 >
             </div>
         </div>
@@ -131,7 +127,7 @@
                         <Text color="gray-600" darkColor="gray-500" fontSize="xs" classes="cursor-pointer">
                             {localize('general.availableBalanceWithValue', {
                                 values: {
-                                    balance: formatTokenAmountBestMatch(asset?.balance?.available, asset?.metadata),
+                                    balance: formatTokenAmountBestMatch(availableBalance, asset?.metadata),
                                 },
                             })}
                         </Text>

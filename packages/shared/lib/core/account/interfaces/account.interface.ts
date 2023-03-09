@@ -1,16 +1,8 @@
-import type {
-    HexEncodedAmount,
-    IAliasOutput,
-    IBasicOutput,
-    IFoundryOutput,
-    INftOutput,
-    IOutputResponse,
-    ITransactionPayload,
-    OutputTypes,
-} from '@iota/types'
+import type { HexEncodedAmount, IAliasOutput, IBasicOutput, IFoundryOutput, INftOutput, OutputTypes } from '@iota/types'
 import type {
     AccountBalance,
-    AccountSyncOptions,
+    AccountMetadata,
+    SyncOptions,
     Address,
     AddressGenerationOptions,
     AddressNativeTokens,
@@ -18,25 +10,30 @@ import type {
     AddressWithAmount,
     AddressWithMicroAmount,
     AddressWithUnspentOutputs,
+    AliasOutputOptions,
     BuildAliasOutputData,
     BuildBasicOutputData,
     BuildFoundryOutputData,
     BuildNftOutputData,
+    FilterOptions,
+    IncreaseNativeTokenSupplyOptions,
     MintTokenTransaction,
     NativeTokenOptions,
     NftOptions,
+    Node,
     OutputData,
+    OutputOptions,
     OutputsToClaim,
+    ParticipationEventWithNodes,
+    ParticipationEventStatus,
+    ParticipationEventType,
+    ParticipationOverview,
+    PreparedTransactionData,
     SignedTransactionEssence,
     Transaction,
     TransactionOptions,
-    PreparedTransactionData,
-    OutputOptions,
-    FilterOptions,
-    IncreaseNativeTokenSupplyOptions,
-    AccountMetadata,
-    AliasOutputOptions,
-    ParticipationOverview,
+    ParticipationEventRegistrationOptions,
+    ParticipationEventMap,
 } from '@iota/wallet'
 
 export interface IAccount {
@@ -64,6 +61,7 @@ export interface IAccount {
         transactionOptions?: TransactionOptions
     ): Promise<Transaction>
     decreaseVotingPower(amount: string): Promise<Transaction>
+    deregisterParticipationEvent(eventId: string): Promise<void>
     destroyAlias(aliasId: string, transactionOptions?: TransactionOptions): Promise<Transaction>
     destroyFoundry(foundryId: string, transactionOptions?: TransactionOptions): Promise<Transaction>
     generateAddress(options?: AddressGenerationOptions): Promise<Address>
@@ -73,10 +71,14 @@ export interface IAccount {
     getMetadata(): AccountMetadata
     getOutput(outputId: string): Promise<OutputData>
     getOutputsWithAdditionalUnlockConditions(outputs: OutputsToClaim): Promise<string[]>
-    getParticipationOverview(): Promise<ParticipationOverview>
+    getParticipationEvent(eventId: string): Promise<ParticipationEventWithNodes>
+    getParticipationEventIds(node: Node, eventType?: ParticipationEventType): Promise<string[]>
+    getParticipationEvents(): Promise<{ [eventId: string]: ParticipationEventWithNodes }>
+    getParticipationEventStatus(eventId: string): Promise<ParticipationEventStatus>
+    getParticipationOverview(eventIds?: string[]): Promise<ParticipationOverview>
     getTransaction(transactionId: string): Promise<Transaction>
     getVotingPower(): Promise<string>
-    incomingTransactions(): Promise<[string, [ITransactionPayload, IOutputResponse[]]][]>
+    incomingTransactions(): Promise<[string, Transaction][]>
     increaseNativeTokenSupply(
         tokenId: string,
         mintAmount: HexEncodedAmount,
@@ -98,11 +100,13 @@ export interface IAccount {
         options?: TransactionOptions
     ): Promise<PreparedTransactionData>
     prepareTransaction(outputs: OutputTypes[], options?: TransactionOptions): Promise<PreparedTransactionData>
+    registerParticipationEvents(options: ParticipationEventRegistrationOptions): Promise<ParticipationEventMap>
     retryTransactionUntilIncluded(
         transactionId: string,
         interval?: number,
         maxAttempts?: number
     ): Promise<PreparedTransactionData>
+    requestFundsFromFaucet(url: string, address: string): Promise<string>
     sendAmount(addressesWithAmount: AddressWithAmount[], transactionOptions?: TransactionOptions): Promise<Transaction>
     sendMicroTransaction(
         addressesWithMicroAmount: AddressWithMicroAmount[],
@@ -118,7 +122,7 @@ export interface IAccount {
     signTransactionEssence(preparedTransactionData: PreparedTransactionData): Promise<SignedTransactionEssence>
     stopParticipating(eventId: string): Promise<Transaction>
     submitAndStoreTransaction(signedTransactionData: SignedTransactionEssence): Promise<Transaction>
-    sync(options?: AccountSyncOptions): Promise<AccountBalance>
+    sync(options?: SyncOptions): Promise<AccountBalance>
     transactions(): Promise<Transaction[]>
     unspentOutputs(filterOptions?: FilterOptions): Promise<OutputData[]>
     vote(eventId?: string, answers?: number[]): Promise<Transaction>

@@ -1,6 +1,6 @@
-<script lang="typescript">
+<script lang="ts">
     import { SetupStrongholdPasswordView } from './views'
-    import { strongholdSetupRoute, StrongholdSetupRoute } from '../../../../lib/routers'
+    import { strongholdSetupRoute, StrongholdSetupRoute } from '@/routers'
 </script>
 
 {#if $strongholdSetupRoute === StrongholdSetupRoute.SetupStrongholdPassword}

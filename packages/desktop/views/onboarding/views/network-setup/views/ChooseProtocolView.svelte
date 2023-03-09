@@ -1,6 +1,7 @@
-<script lang="typescript">
+<script lang="ts">
     import { onMount } from 'svelte'
-    import { Animation, OnboardingButton, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, OnboardingButton, Text } from '@ui'
+    import { OnboardingLayout } from '@components'
     import features from '@features/features'
     import { cleanupOnboarding, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
     import { mobile } from '@core/app'

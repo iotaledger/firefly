@@ -1,6 +1,7 @@
-<script lang="typescript">
+<script lang="ts">
     import { onMount } from 'svelte'
-    import { Animation, Button, Input, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, Button, Input, Text } from '@ui'
+    import { OnboardingLayout } from '@components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { formatProtocolName } from '@core/network'

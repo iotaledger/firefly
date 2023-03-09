@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Modal, MenuItem } from 'shared/components'
     import { localize } from '@core/i18n'
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
@@ -6,16 +6,18 @@
     import { burnNft } from '@core/wallet'
     import { INft, rewriteIpfsUri } from '@core/nfts'
     import { CollectiblesRoute, collectiblesRouter } from '@core/router'
-    import { openUrlInBrowser } from '@core/app'
+    import { openUrlInBrowser, time } from '@core/app'
+    import { PopupId } from '@auxiliary/popup'
 
     export let modal: Modal = undefined
     export let nft: INft
 
     $: url = composeUrl(nft?.parsedMetadata?.uri)
+    $: isLocked = nft.timelockTime > $time.getTime()
 
     function openBurnNft(): void {
         openPopup({
-            type: 'confirmation',
+            id: PopupId.Confirmation,
             props: {
                 title: localize('actions.confirmNftBurn.title', {
                     values: {
@@ -25,9 +27,9 @@
                 description: localize('actions.confirmNftBurn.description'),
                 hint: localize('actions.confirmNftBurn.hint'),
                 warning: true,
-                confirmText: localize('actions.burnToken'),
-                onConfirm: () => {
-                    checkActiveProfileAuth(
+                confirmText: localize('actions.burn'),
+                onConfirm: async () => {
+                    await checkActiveProfileAuth(
                         async () => {
                             await burnNft(nft.id)
                             $collectiblesRouter.goTo(CollectiblesRoute.Gallery)
@@ -73,6 +75,11 @@
             onClick={handleOpenMediaClick}
             disabled={!url}
         />
-        <MenuItem icon="delete" title={localize('views.collectibles.details.menu.burn')} onClick={openBurnNft} />
+        <MenuItem
+            icon="delete"
+            title={localize('views.collectibles.details.menu.burn')}
+            onClick={openBurnNft}
+            disabled={isLocked}
+        />
     </div>
 </Modal>

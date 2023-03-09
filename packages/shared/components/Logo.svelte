@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { appSettings, appStage } from '@core/app'
     import { get } from 'svelte/store'
 

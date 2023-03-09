@@ -1,26 +1,34 @@
-<script lang="typescript">
+<script lang="ts">
+    import { TabPane, TogglableAssetBalanceLabel, TopBar } from '@components'
+    import { Button } from '@ui'
+    import { TabNavigator } from './tabs'
+
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { BASE_TOKEN } from '@core/network'
     import { activeProfile, hasStrongholdLocked, reflectLockedStronghold, saveActiveProfile } from '@core/profile'
     import { selectedAccountAssets } from '@core/wallet'
-    import { Button, TogglableAssetBalanceLabel } from 'shared/components'
-    import { TabPane, TopBar } from '../../components'
+
+    import { DrawerId, openDrawer } from '@/auxiliary/drawer'
+    import { activeDashboardTab, DASHBOARD_TAB_COMPONENT } from '@/contexts/dashboard'
     import features from '@features/features'
-    import { activeDashboardTab, DASHBOARD_TAB_COMPONENT } from '../../lib/contexts/dashboard'
-    import { DashboardRoute, dashboardRouter } from '../../lib/routers'
-    import DashboardRouter from './DashboardRouter.svelte'
-    import { TabNavigator } from './tabs'
 
     $: activeDashboardTabComponent = DASHBOARD_TAB_COMPONENT[$activeDashboardTab]
 
     $: $activeProfile, saveActiveProfile()
 
     $: $hasStrongholdLocked && reflectLockedStronghold()
+
+    function handleReceiveClick(): void {
+        openDrawer(DrawerId.Receive)
+    }
+    function handleSendClick(): void {
+        openDrawer(DrawerId.Send, { fullScreen: true })
+    }
 </script>
 
 {#if $selectedAccount}
-    <div class="flex flex-col w-screen h-screen bg-gray-50 dark:bg-gray-900">
+    <dashboard-view class="flex flex-col w-screen h-screen bg-gray-50 dark:bg-gray-900">
         <div class="px-5 py-6">
             <TopBar />
             <div class="flex justify-center w-full mt-5">
@@ -34,12 +42,12 @@
             {#if features?.dashboard?.send?.enabled || features?.dashboard?.receive?.enabled}
                 <div class="flex flex-row items-center justify-center w-full space-x-2 mt-8">
                     {#if features?.dashboard?.send?.enabled}
-                        <Button classes="w-full h-10" onClick={() => $dashboardRouter.goTo(DashboardRoute.Send)}>
+                        <Button classes="w-full h-10" onClick={handleSendClick}>
                             {localize('actions.send')}
                         </Button>
                     {/if}
                     {#if features?.dashboard?.receive?.enabled}
-                        <Button classes="w-full h-10" onClick={() => $dashboardRouter.goTo(DashboardRoute.Receive)}>
+                        <Button classes="w-full h-10" onClick={handleReceiveClick}>
                             {localize('actions.receive')}
                         </Button>
                     {/if}
@@ -54,6 +62,5 @@
                 <TabNavigator />
             </div>
         {/if}
-    </div>
+    </dashboard-view>
 {/if}>
-<DashboardRouter />

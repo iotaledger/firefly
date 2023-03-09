@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { selectedAccountIndex } from '@core/account'
     import { localize } from '@core/i18n'
     import { getNftByIdFromAllAccountNfts, rewriteIpfsUri } from '@core/nfts'
@@ -22,7 +22,7 @@
     let hasError = false
 
     $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, nftId)
-    $: url = composeUrl(nft?.parsedMetadata?.uri)
+    $: ({ url, backupUrl } = composeUrl(nft?.parsedMetadata?.uri))
 
     $: nftId, resetProps()
 
@@ -31,13 +31,14 @@
         hasError = false
     }
 
-    function composeUrl(targetUrl: string): string {
+    function composeUrl(targetUrl: string): { url: string; backupUrl: string } {
         if (!targetUrl) {
-            return undefined
+            return { url: undefined, backupUrl: undefined }
         }
 
         const url = new URL(targetUrl)
         let newUrl
+        let backupUrl
 
         switch (url.protocol) {
             case 'http:':
@@ -51,14 +52,14 @@
                 break
             default:
                 error = localize('error.nft.unsupportedUrl.' + translationSuffix)
-                return undefined
+                return { url: undefined, backupUrl: undefined }
         }
 
         if (nft?.parsedMetadata?.issuerName === 'Soonaverse') {
-            return newUrl + '/' + nft?.parsedMetadata?.name
-        } else {
-            return newUrl
+            backupUrl = newUrl + '/' + encodeURIComponent(nft?.parsedMetadata?.name)
         }
+
+        return { url: newUrl, backupUrl }
     }
 
     function handleLoadingError(err): void {
@@ -82,7 +83,8 @@
     </slot>
 {:else}
     <MediaDisplay
-        src={url}
+        {url}
+        {backupUrl}
         expectedType={nft.parsedMetadata.type}
         alt={`Media display for ${nft.name}`}
         classes="hidden {classes}"
@@ -97,7 +99,8 @@
         </slot>
     {:else}
         <MediaDisplay
-            src={url}
+            {url}
+            {backupUrl}
             expectedType={nft.parsedMetadata.type}
             alt={`Media display for ${nft.name}`}
             {autoplay}

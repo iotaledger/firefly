@@ -1,12 +1,13 @@
-<script lang="typescript">
+<script lang="ts">
     import { localize } from '@core/i18n'
     import { unlockStronghold } from '@core/profile'
-    import { Button, HTMLButtonType, PasswordInput, Text } from 'shared/components'
+    import { Button, HTMLButtonType, PasswordInput, Text, TextType } from '@ui'
 
     export let busyMessage: string = ''
 
-    export let onSuccess: () => unknown
+    export let onSuccess: (password?: string) => unknown
     export let onCancel: () => unknown
+    export let returnPassword = false
 
     let password: string
     let error: string
@@ -17,7 +18,7 @@
             error = ''
             isBusy = true
             await unlockStronghold(password)
-            onSuccess && onSuccess()
+            onSuccess && onSuccess(returnPassword ? password : undefined)
             isBusy = false
         } catch (err) {
             console.error(err)
@@ -32,7 +33,7 @@
 </script>
 
 <div class="mb-5">
-    <Text type="p" secondary>{localize('popups.password.subtitle')}</Text>
+    <Text type={TextType.p} secondary>{localize('popups.password.subtitle')}</Text>
 </div>
 <form
     id="password-popup-form"
@@ -40,7 +41,7 @@
     on:submit|preventDefault={handleSubmit}
 >
     <PasswordInput
-        {error}
+        bind:error
         classes="w-full mb-5"
         bind:value={password}
         showRevealToggle

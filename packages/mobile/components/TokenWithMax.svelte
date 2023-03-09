@@ -1,8 +1,8 @@
-<script lang="typescript">
+<script lang="ts">
     import { localize } from '@core/i18n'
     import { truncateString } from '@core/utils'
     import { formatTokenAmountBestMatch, IAsset } from '@core/wallet'
-    import { AssetIcon, Button, ButtonSize, FontWeight, Text, TextType } from 'shared/components'
+    import { AssetIcon, Button, ButtonSize, FontWeight, Text, TextType } from '@ui'
 
     export let asset: IAsset
     export let onMaxClick: () => unknown
@@ -19,7 +19,10 @@
                 <Text type={TextType.p} secondary smaller>
                     {localize('general.availableAmount', {
                         values: {
-                            amount: formatTokenAmountBestMatch(asset?.balance.total, asset?.metadata),
+                            amount: formatTokenAmountBestMatch(
+                                asset?.balance.available ?? asset?.balance.total,
+                                asset?.metadata
+                            ),
                         },
                     })}
                 </Text>

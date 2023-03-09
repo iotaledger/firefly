@@ -1,7 +1,9 @@
-import { addError } from '@core/error'
+import { PopupId } from '@auxiliary/popup'
+import { openPopup } from '@auxiliary/popup/actions'
+import { addError } from '@core/error/stores'
 import { localize } from '@core/i18n'
-import { openPopup } from '@auxiliary/popup'
 
+import { URL_CLEANUP_REGEX } from '../../constants'
 import { WalletOperation } from '../../enums'
 import { handleDeepLinkSendConfirmationOperation, handleDeepLinkSendFormOperation } from './operations'
 
@@ -16,10 +18,10 @@ import { handleDeepLinkSendConfirmationOperation, handleDeepLinkSendFormOperatio
  */
 export function handleDeepLinkWalletContext(url: URL): void {
     // Remove any leading and trailing slashes
-    const pathnameParts = url.pathname.replace(/^\/+|\/+$/g, '').split('/')
+    const pathnameParts = url.pathname.replace(URL_CLEANUP_REGEX, '').split('/')
     try {
         if (pathnameParts.length === 0 || !pathnameParts[0]) {
-            throw new Error('No operation specified in the url')
+            throw new Error('No operation specified in the URL')
         }
         switch (pathnameParts[0]) {
             case WalletOperation.SendForm:
@@ -38,7 +40,7 @@ export function handleDeepLinkWalletContext(url: URL): void {
         }
     } catch (err) {
         openPopup({
-            type: 'deepLinkError',
+            id: PopupId.DeepLinkError,
             props: { error: err, url },
         })
         addError({ time: Date.now(), type: 'deepLink', message: `Error handling deep link. ${err.message}` })

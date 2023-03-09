@@ -1,9 +1,13 @@
-<script lang="typescript">
+<script lang="ts">
     import { Icon, Text, FontWeight, TextType } from 'shared/components'
+    import { localize } from '@core/i18n'
+    import { removeDisplayNotification } from '@auxiliary/notification/stores'
 
     export let type: string
     export let message: string
     export let classes: string = ''
+    export let showDismiss: boolean = false
+    export let id: string = ''
 
     const TOAST_STYLE = {
         info: {
@@ -31,6 +35,10 @@
             messageColor: 'red-700',
         },
     }
+
+    function onDismissClick(): void {
+        removeDisplayNotification(id)
+    }
 </script>
 
 <div class="{classes} flex flex-row items-center rounded-xl p-4 bg-{TOAST_STYLE[type].backgroundColor}">
@@ -48,4 +56,14 @@
             class="flex text-13 text text-{TOAST_STYLE[type].messageColor}">{message}</Text
         >
     </div>
+    {#if showDismiss}
+        <button
+            type="button"
+            on:click={onDismissClick}
+            class="dismiss-min-wh cursor-pointer text-center rounded-lg
+            font-bold text-11 text-{TOAST_STYLE[type].messageColor}"
+        >
+            {localize('actions.dismiss')}
+        </button>
+    {/if}
 </div>

@@ -1,22 +1,10 @@
 import { get } from 'svelte/store'
+import type { TrackedParticipationOverview } from '@iota/wallet'
+import { selectedAccountIndex } from '@core/account'
+import { getParticipationsForProposal } from './getParticipationsForProposal'
 
-import { TrackedParticipationOverview } from '@iota/wallet'
-
-import { getParticipationOverview } from '@core/account/api'
-import { selectedAccount } from '@core/account/stores'
-
-export async function isVotingForProposal(proposalId: string): Promise<boolean> {
-    const overview = await getParticipationOverview(get(selectedAccount)?.index)
-    if (overview) {
-        if (proposalId in overview.participations) {
-            const participationOutputs: TrackedParticipationOverview[] = Object.values(
-                overview.participations[proposalId]
-            )
-            return participationOutputs.some((output) => output?.endMilestoneIndex === 0)
-        } else {
-            return false
-        }
-    } else {
-        return false
-    }
+export function isVotingForProposal(proposalId: string, accountIndex = get(selectedAccountIndex)): boolean {
+    const participations = getParticipationsForProposal(proposalId, accountIndex) ?? {}
+    const participationOutputs: TrackedParticipationOverview[] = Object.values(participations)
+    return participationOutputs.some((output) => output?.endMilestoneIndex === 0)
 }

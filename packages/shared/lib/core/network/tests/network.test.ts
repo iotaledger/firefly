@@ -19,7 +19,6 @@ describe('File: network.ts', () => {
     function _buildNode(url: string): INode {
         return {
             url,
-            auth: { username: '', password: '' },
             disabled: false,
         }
     }
@@ -171,15 +170,13 @@ describe('File: network.ts', () => {
         },
     }
 
-    const EMPTY_NODE_AUTH = { username: '', password: '' }
+    const EMPTY_NODE_AUTH = { basicAuthNamePwd: ['', ''] }
     const FAKE_NODE_AUTH = <IAuth>{
-        username: 'theUser',
-        password: 'mY-rEaLlY-sEcUrE-pAsSwOrD',
+        basicAuthNamePwd: ['theUser', 'mY-rEaLlY-sEcUrE-pAsSwOrD'],
     }
     const FAKE_NODE_AUTH_JWT = <IAuth>{
         jwt: 'SOME JWT',
-        username: 'theUser',
-        password: 'mY-rEaLlY-sEcUrE-pAsSwOrD',
+        basicAuthNamePwd: ['theUser', 'mY-rEaLlY-sEcUrE-pAsSwOrD'],
     }
 
     describe('Function: getClientOptions', () => {
@@ -191,6 +188,7 @@ describe('File: network.ts', () => {
                     _buildNode(OFFICIAL_NODE_URLS[NetworkProtocol.IOTA][NetworkType.Mainnet][1]),
                     _buildNode(OFFICIAL_NODE_URLS[NetworkProtocol.IOTA][NetworkType.Mainnet][2]),
                 ],
+                primaryNode: _buildNode(OFFICIAL_NODE_URLS[NetworkProtocol.IOTA][NetworkType.Mainnet][0]),
             })
         })
     })

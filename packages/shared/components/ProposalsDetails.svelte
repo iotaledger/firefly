@@ -1,34 +1,64 @@
-<script lang="typescript">
-    import { ProposalsDetailsButton, Text } from 'shared/components'
+<script lang="ts">
+    import { Text, KeyValueBox, Button, ButtonSize, ProposalsDetailsButton } from 'shared/components'
     import { FontWeight } from './enums'
     import { localize } from '@core/i18n'
+    import { activeProfileId } from '@core/profile'
     import { IProposalsDetails } from '@contexts/governance/interfaces'
-    import { proposalsState } from '@contexts/governance/stores'
+    import {
+        participationOverviewForSelectedAccount,
+        registeredProposalsForSelectedAccount,
+        updateParticipationOverview,
+    } from '@contexts/governance/stores'
     import {
         getNumberOfActiveProposals,
         getNumberOfVotingProposals,
-        getTotalNumberOfProposals,
+        getNumberOfVotedProposals,
+        getNumberOfTotalProposals,
     } from '@contexts/governance/utils'
+    import { openPopup, PopupId } from '@auxiliary/popup'
+    import { onMount } from 'svelte'
+    import { selectedAccount } from '@core/account'
 
     let details = <IProposalsDetails>{
+        totalProposals: null,
         activeProposals: null,
         votingProposals: null,
         votedProposals: null,
     }
 
-    $: $proposalsState, void updateProposalsDetails()
+    $: isOverviewLoaded = !!$participationOverviewForSelectedAccount
+    $: $registeredProposalsForSelectedAccount, $participationOverviewForSelectedAccount, updateProposalsDetails()
+    $: $selectedAccount, setParticipationOverview()
 
-    async function updateProposalsDetails(): Promise<void> {
-        details = {
-            activeProposals: getNumberOfActiveProposals(),
-            votingProposals: await getNumberOfVotingProposals(),
-            votedProposals: await getTotalNumberOfProposals(),
+    function updateProposalsDetails(): void {
+        if ($activeProfileId) {
+            details = {
+                totalProposals: getNumberOfTotalProposals(),
+                activeProposals: getNumberOfActiveProposals(),
+                votingProposals: getNumberOfVotingProposals(),
+                votedProposals: getNumberOfVotedProposals(),
+            }
         }
     }
+
+    async function setParticipationOverview(): Promise<void> {
+        if (!isOverviewLoaded || getNumberOfVotedProposals() === 0) {
+            await updateParticipationOverview($selectedAccount.index)
+        }
+    }
+
+    function onAddProposalClick(): void {
+        openPopup({
+            id: PopupId.AddProposal,
+            overflow: true,
+        })
+    }
+
+    onMount(setParticipationOverview)
 </script>
 
-<proposals-details>
-    <header-container class="flex justify-between items-center mb-4">
+<proposals-details class="space-y-4">
+    <header-container class="flex justify-between items-center">
         <Text fontSize="14" fontWeight={FontWeight.semibold}>
             {localize('views.governance.proposalsDetails.title')}
         </Text>
@@ -36,14 +66,16 @@
     </header-container>
     <ul class="space-y-2">
         {#each Object.keys(details) as detailKey}
-            <li class="flex justify-between bg-gray-50 px-4 py-3 rounded-lg">
-                <Text fontWeight={FontWeight.medium} overrideColor classes="text-gray-600">
-                    {localize(`views.governance.proposalsDetails.${detailKey}`)}
-                </Text>
-                <Text overrideColor classes="text-gray-600">
-                    {details[detailKey] ?? '-'}
-                </Text>
+            <li>
+                <KeyValueBox
+                    keyText={localize(`views.governance.proposalsDetails.${detailKey}`)}
+                    valueText={details[detailKey]?.toString() ?? '-'}
+                    isLoading={details[detailKey] === undefined}
+                />
             </li>
         {/each}
     </ul>
+    <Button size={ButtonSize.Medium} outline onClick={onAddProposalClick} classes="w-full">
+        {localize('actions.addProposal')}
+    </Button>
 </proposals-details>

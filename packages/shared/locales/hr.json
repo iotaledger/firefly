@@ -62,7 +62,7 @@
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Postavi {protocol, select, IOTA {} Shimmer {}} {protocol} profil",
+                    "title": "Set up {protocol, select, IOTA {an} Shimmer {a} other {an}} {protocol} profile",
                     "body": "Odaberite odgovarajuću metodu koju ćete koristiti za postavljanje {protocol} profila."
                 },
                 "setupNew": {
@@ -198,10 +198,10 @@
             "videoGuide": "Video upute za Ledger migraciju"
         },
         "ledgerInstallationGuide": {
-            "title": "Have you installed the {protocol} app on your Ledger device?",
+            "title": "Jeste li instalirali {protocol} aplikaciju na svoj Ledger uređaj?",
             "body1": "Prije nego što nastavite, morate koristiti Ledger Live za pronalaženje i instaliranje {protocol} aplikacije.",
             "body2": "Uvjeri se da je tvoj Ledger na najnovijoj verziji firmwarea. Sve predinstalirane aplikacije trebaju biti na najnovijim verzijama.",
-            "action": "Yes, I've installed the {protocol} app"
+            "action": "Da, instalirao sam {protocol} aplikaciju"
         },
         "importFromLedger": {
             "title": "Oporavi ili migriraj svoj Ledger",
@@ -308,6 +308,10 @@
             "appLock": {
                 "title": "Automatsko zaključavanje",
                 "description": "Vrijeme neaktivnosti preostalo do zaključavanja novčanika i odjave iz sustava"
+            },
+            "maxMediaSize": {
+                "title": "Maximum media size",
+                "description": "NFT media with sizes greater than this limit will not be downloaded and a placeholder representing the media type will be displayed instead"
             },
             "changePassword": {
                 "title": "Promijenite lozinku",
@@ -432,7 +436,8 @@
         },
         "login": {
             "pleaseWait": "Molimo pričekajte {time, plural, one {# sekundu} few {# sekunde} other {# sekundi}}",
-            "incorrectAttempts": "{attempts, plural, one {# neuspjeli pokušaj} few {# neuspjela pokušaja} other {# neuspjelih pokušaja}}"
+            "incorrectAttempts": "{attempts, plural, one {# neuspjeli pokušaj} few {# neuspjela pokušaja} other {# neuspjelih pokušaja}}",
+            "hintStronghold": "Your Stronghold's version is out of date. Please log in to update your Stronghold."
         },
         "loadProfile": {
             "loginSteps": {
@@ -459,6 +464,7 @@
             },
             "profileModal": {
                 "allSettings": "Sve postavke",
+                "profileApplication": "Profile, application, security",
                 "logout": "Odjavi se",
                 "stronghold": {
                     "title": "Zaključavanje profila",
@@ -545,6 +551,71 @@
                 "title": "Birač boje",
                 "hexCode": "Hex kȏd boje"
             }
+        },
+        "collectibles": {
+            "gallery": {
+                "title": "Collectibles",
+                "emptyTitle": "No collectibles",
+                "noResults": "No results",
+                "emptyDescription": "Deposit or Receive your first collectible now!"
+            },
+            "details": {
+                "storageDepositDescription": "A refundable deposit required to store your NFT on the Tangle.",
+                "attributes": "Attributes",
+                "menu": {
+                    "download": "Download",
+                    "setAvatar": "Set NFT as profile avatar",
+                    "view": "View media in browser",
+                    "burn": "Burn NFT"
+                }
+            }
+        },
+        "governance": {
+            "votingPower": {
+                "title": "Voting power",
+                "maximal": "Maximal voting power: {value}",
+                "manage": "Manage voting power"
+            },
+            "proposalsDetails": {
+                "title": "Details",
+                "totalProposals": "Total proposals",
+                "activeProposals": "Active proposals",
+                "votingProposals": "Proposals you are voting on",
+                "votedProposals": "Total proposals you voted on"
+            },
+            "proposals": {
+                "title": "Proposals",
+                "voted": "Voted",
+                "successEdit": "Proposal successfully edited",
+                "successAdd": "{numberOfProposals, select, one {Proposal} other {Proposals}} successfully added",
+                "successAddAll": "{numberOfProposals, select, one {Proposal} other {Proposals}} successfully added to all accounts",
+                "successRemove": "Proposal successfully removed",
+                "emptyTitle": "No proposals"
+            },
+            "statusTimeline": {
+                "upcoming": "Announcement",
+                "commencing": "Voting open",
+                "holding": "Counting starts",
+                "ended": "Counting stops"
+            },
+            "details": {
+                "yourVote": {
+                    "title": "Your vote",
+                    "total": "Total votes counted",
+                    "power": "Voting power"
+                },
+                "proposalInformation": {
+                    "title": "Proposal information",
+                    "votingOpens": "Voting opens on",
+                    "countingStarts": "Counting starts on",
+                    "countingEnds": "Counting ends on",
+                    "countingEnded": "Counting ended on",
+                    "eventId": "Event ID",
+                    "nodeUrl": "Node URL"
+                },
+                "fetching": "Fetching proposal data",
+                "hintVote": "You can not vote on a proposal that is in the announcement phase, voting will open in {time}."
+            }
         }
     },
     "popups": {
@@ -556,13 +627,69 @@
             "step_3": "Pritisnite desni gumb da bi navigirali do Postavka. Zatim pritisnite oba gumba za potvrdu. Vaš Ledger uređaj prikazuje Blind Signing.",
             "step_4": "Pritisnite oba gumba da bi omogućili Blind Signing transakcije. Uređaj prikazuje Enabled. Gotovo."
         },
-        "storageDepositBreakdown": {
-            "title": "Raščlamba depozita za pohranu",
-            "totalStorageDeposit": "Ukupno depozita za pohranu",
-            "pendingTransactions": {
-                "title": "Zaključano u transakcijama na čekanju",
-                "subtitle": "Za slanje nativnih sredstava i malih IOTA iznosa"
-            }
+        "balanceBreakdown": {
+            "title": "Balance breakdown",
+            "available": {
+                "title": "Available",
+                "subtitle": "Funds fully available for spending"
+            },
+            "pending": {
+                "title": "Pending",
+                "subtitle": "Temporarily locked in transactions"
+            },
+            "locked": {
+                "title": "Locked",
+                "subtitle": "Temporarily locked for governance"
+            },
+            "storageDeposit": {
+                "title": "Storage deposit",
+                "subtitle": "These funds are reserved for storing native assets."
+            },
+            "totalBalance": {
+                "title": "Total balance",
+                "subtitle": ""
+            },
+            "basicOutputs": {
+                "title": "Native Tokens",
+                "subtitle": "Reserved for Native Token storage"
+            },
+            "nftOutputs": {
+                "title": "NFTs",
+                "subtitle": "Reserved for NFT storage"
+            },
+            "aliasOutputs": {
+                "title": "Aliases",
+                "subtitle": "Reserved for Alias storage"
+            },
+            "foundryOutputs": {
+                "title": "Foundries",
+                "subtitle": "Reserved for Native Token Foundry storage"
+            },
+            "unclaimed": {
+                "title": "Unclaimed transaction",
+                "subtitle": "Temporarily locked in unclaimed transactions"
+            },
+            "timelock": {
+                "title": "Time lock",
+                "subtitle": "Temporarily locked in timelocked transactions"
+            },
+            "storageDepositReturn": {
+                "title": "SDRUC",
+                "subtitle": "Temporarily locked in Storage Deposit Return"
+            },
+            "governance": {
+                "title": "Governance",
+                "subtitle": "Reserved for voting power"
+            },
+            "minimizeStorageDepositButton": "Minimize storage deposit"
+        },
+        "minimizeStorageDeposit": {
+            "title": "Minimize storage deposit",
+            "description": "Consolidate outputs to minimize your required storage deposit and increase your available balance.",
+            "confirmButton": "Consolidate"
+        },
+        "alias": {
+            "title": "Confirm alias creation"
         },
         "password": {
             "title": "Potrebna je lozinka",
@@ -595,11 +722,19 @@
         },
         "deleteAccount": {
             "title": "Obriši {name}?",
-            "body": "Ovaj novčanik nema povijest transakcija i zato ga je sigurno obrisati.",
+            "body": "Are you sure you want to delete this wallet?",
+            "hint": "Note: once deleted, you can restore this wallet by using the \"Wallet Finder\" in the settings.",
             "typePassword": "Za potvrdu unesite lozinku novčanika.",
             "hideAccount": "Obriši novčanik",
             "errorTitle": "Nije moguće ukloniti {name}",
             "errorBody1": "Ne možete obrisati ovaj novčanik. Mora postojati barem jedan."
+        },
+        "externalUrl": {
+            "title": "Open URL in Browser",
+            "body": "Are you sure you want to open \"{url}\" in the browser?",
+            "hint": "This URL is unknown to Firefly. Please double check the URL before opening it.",
+            "action": "Open URL",
+            "invalidProtocol": "Cannot open URL with invalid protocol"
         },
         "hideAccount": {
             "title": "Sakrij {name}?",
@@ -707,7 +842,7 @@
             "userPath": "Korisnička putanja"
         },
         "transaction": {
-            "title": "Potvrdi transakciju",
+            "title": "Send asset",
             "body": "Ovim ćete poslati {amount} na račun",
             "surplusIncluded": "Ova transakcija sadrži višak iznosa. Provjerite da li je to stvarno iznos koji želite poslati.",
             "sendingFromStakedAccount": "Šaljete transfer s novčanika koji trenutno stakea. Ovo može prekinuti staking vaših tokena. Možete slobodno poslati transfer, no možda ćete nakon toga morati ponovno pokrenuti staking vaših preostalih tokena.",
@@ -749,12 +884,12 @@
             "confirm": "Za nastavak potvrdi ovaj korak na svojem Ledger uređaju"
         },
         "ledgerAppGuide": {
-            "title": "Guide to installing the {legacy} app",
+            "title": "Vodič za instaliranje {legacy} aplikacije",
             "steps": {
                 "0": "Instaliraj i otvori Ledger Live aplikaciju",
                 "1": "Uvjeri se da je tvoj Ledger spojen",
-                "2": "Search for the {legacy} app. You may need to enable Ledger Live developer mode.",
-                "3": "Install the {legacy} app",
+                "2": "Potražite {legacy} aplikaciju. Možda ćete morati omogućiti Ledger Live developer način rada.",
+                "3": "Instaliraj {legacy} aplikaciju",
                 "4": "Ne zaboravi da je važno zatvoriti Ledger Live prije povratka u Firefly"
             }
         },
@@ -868,24 +1003,104 @@
                 "verifyToken": "Verificiram ovaj token"
             }
         },
-        "nativeToken": {
-            "formTitle": "Mintaj nativne tokene",
+        "sendNft": {
+            "formTitle": "Send NFT",
+            "confirmationTitle": "Confirm sending NFT",
             "property": {
-                "totalSupply": "Ukupna količina tokena",
-                "circulatingSupply": "Količina tokena u optjecaju",
-                "standard": "Standardni",
-                "name": "Ime",
-                "description": "Opis",
-                "symbol": "Simbol",
-                "decimals": "Decimalnih mjesta",
+                "nft": "NFT"
+            }
+        },
+        "nativeToken": {
+            "formTitle": "Mint native tokens",
+            "confirmationTitle": "Mint native tokens",
+            "property": {
+                "totalSupply": "Total supply",
+                "maximumSupply": "Maximum supply",
+                "mintedTokens": "Minted tokens",
+                "meltedTokens": "Melted tokens",
+                "circulatingSupply": "Circulating supply",
+                "aliasAddress": "Alias controller address",
+                "standard": "Standard",
+                "tokenName": "Name",
+                "unit": "Unit",
+                "subunit": "Subunit",
+                "storageDeposit": "Storage Deposit",
+                "description": "Description",
+                "symbol": "Symbol",
+                "decimals": "Decimals",
                 "url": "URL",
                 "logoUrl": "Logo URL",
-                "logo": "Logo"
+                "logo": "Logo",
+                "alias": "Alias",
+                "assetId": "Asset Id"
+            }
+        },
+        "noAlias": {
+            "title": "Unable to mint",
+            "description": "You must own an alias output to mint native tokens. To continue, please create an alias first"
+        },
+        "mintNftForm": {
+            "title": "Mint simple NFT",
+            "errors": {
+                "invalidMimetype": "Invalid MimeType, check if the file type is supported",
+                "quantityTooSmall": "Quantity needs to be greater than 0",
+                "quantityTooLarge": "Quantity needs to be smaller than 64",
+                "emptyName": "Name is a required field",
+                "invalidURI": "Invalid URI, please provide a valid URI",
+                "royaltiesMustBeJSON": "Royalties must be a valid JSON",
+                "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
+                "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",
+                "invalidRoyaltyValueSum": "Invalid value, the sum of all royalties must be less than or equal to 1'",
+                "attributesMustBeJSON": "Attributes must be a valid JSON",
+                "attributesMustBeArrayOfObjects": "Attributes must be an array of objects",
+                "attributesInvalidKeys": "Invalid key, attributes must have the keys \"trait_type\" and \"value\"",
+                "attributesInvalidValues": "Invalid value, \"trait_type\" must be a non empty string and \"value\" must be a non empty string or a number"
             }
         },
         "faucetRequest": {
             "title": "Zahtjev za tokene s fauceta",
             "body": "Jeste li sigurni da želite zatražiti {token} tokene iz {network} fauceta?"
+        },
+        "manageVotingPower": {
+            "title": "Manage voting power",
+            "body": "Define your voting power to vote on proposals.",
+            "hint": "All funds that you allocate to voting are locked. In order to make them spendable again, you need to decrease your voting power. This affects all proposals with an active vote.",
+            "amountZero": "Please be aware that setting your voting power to zero will stop all your votes for all proposals you are currently voting on."
+        },
+        "addProposal": {
+            "title": "Add proposal",
+            "body": "Please provide the information listed below to add a proposal.",
+            "addToAllAccounts": "Add the proposal to all accounts"
+        },
+        "editProposal": {
+            "title": "Edit proposal",
+            "body": "Please provide the new url for the node that contains this proposal."
+        },
+        "voteForProposal": {
+            "title": "Vote for proposal",
+            "body": "You're about to vote for {proposal} proposal.",
+            "key": "Your voting power",
+            "hasAbstained": "You are abstaining from answering {numberOfQuestions, plural, one {# question} other {# questions}}.",
+            "noVotingPower": "You do not have any voting power. Please increase your voting power from the Governance dashboard."
+        },
+        "revote": {
+            "title": "Revote on proposals",
+            "body": "Changing your voting power temporarily stops your votes for all proposals from being counted. Simply click \"Revote\" to resume voting.",
+            "hint": "Firefly remembers all of the proposals and answer options you previously voted for."
+        },
+        "removeProposal": {
+            "title": "Remove proposal",
+            "body": "Are you sure you want to remove this proposal?",
+            "hint": "Please note that removing a proposal during the counting period will stop your votes but won't impact any votes that have already been counted."
+        },
+        "stopVoting": {
+            "title": "Stop voting",
+            "body": "You're about to stop voting for the {proposalName} proposal.",
+            "hint": "Please note that stopping voting during the counting period won't impact any votes that have already been counted."
+        },
+        "nodeAuthRequired": {
+            "title": "Authentication required",
+            "body": "This node requires additional authentication. Please fill in the appropriate information."
         }
     },
     "charts": {
@@ -919,6 +1134,15 @@
             "description": "Jeste li sigurni da želite odbiti ovu transakciju?",
             "node": "Molimo imajte na umu da odbijanje transakciju samo skriva transakciju iz vašeg sažetka aktivnosti"
         },
+        "confirmTokenBurn": {
+            "title": "Burn {assetName}",
+            "hint": "Please note that burning a token may free storage deposit attached to it and is not reversible"
+        },
+        "confirmNftBurn": {
+            "title": "Burn {nftName}",
+            "description": "Are you sure you want to burn this NFT?",
+            "hint": "Please note that burning an NFT frees the storage deposit attached to it and is not reversible."
+        },
         "proceedAnyway": "Ipak nastavi",
         "save": "Spremi",
         "importSeed": "Uvezite postojeći Seed",
@@ -931,9 +1155,11 @@
             "shimmer": "Oporavi postojeći Shimmer profil"
         },
         "createWallet": "Stvori novi {protocol} profil",
-        "createWalletDescription": "Stvori novi profil za {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
+        "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
         "claimShimmer": "Preuzmi Shimmer staking nagrade",
         "claimShimmerDescription": "Uvezi IOTA profil i preuzmi Shimmer staking nagrade",
+        "createAlias": "Create alias",
+        "createAliasDescription": "Create alias output",
         "savePassword": "Spremi lozinku",
         "useBiometric": "Koristi biometričku zaštitu",
         "setupPinCode": "Postavite PIN kȏd",
@@ -1011,7 +1237,7 @@
         "readDocumentation": "Pročitajte dokumentaciju",
         "visitFaq": "Posjeti često postavljana pitanja",
         "viewStatus": "Vidi status",
-        "viewStorageDeposit": "Prikaz depozita za pohranu",
+        "viewBalanceBreakdown": "View balance breakdown",
         "showHiddenAccounts": "Prikaži skrivene novčanike",
         "confirm": "Potvrdi",
         "hideNetworkStatistics": "Sakrij statistiku mreže",
@@ -1043,10 +1269,12 @@
         "backup": "Stvori sigurnosnu kopiju",
         "mint": "Mintaj",
         "mintNativeToken": "Mintaj nativni token",
+        "mintNft": "Mint NFT",
         "verifyToken": "Verificiraj token",
         "unverifyToken": "Poništi verifikaciju tokena",
         "hideToken": "Sakrij token",
         "unhideToken": "Poništi skrivanje tokena",
+        "burn": "Burn",
         "burnToken": "Spali (uništi) token",
         "faucetRequest": "Pribavi {token} tokene",
         "refreshTokenMetadata": "Osvježi metapodatke tokena",
@@ -1054,7 +1282,16 @@
         "testDeepLink": "Testiraj deep link",
         "initialize": "Inicijaliziraj",
         "initializing": "Inicijalizacija u tijeku",
-        "delete": "Obriši"
+        "delete": "Obriši",
+        "remove": "Remove",
+        "addReference": "Add reference",
+        "depositNft": "Deposit NFTs",
+        "vote": "Vote",
+        "addProposal": "Add proposal",
+        "removeProposal": "Remove proposal",
+        "changeNode": "Change Node",
+        "stopVoting": "Stop voting",
+        "revote": "Revote"
     },
     "general": {
         "recipient": "Primatelj",
@@ -1067,22 +1304,55 @@
         "recoveryPhrase": "Fraza za oporavak",
         "recentActivity": "Nedavne Aktivnosti",
         "sent": "Poslano",
+        "sending": "Slanje u tijeku",
         "received": "Primljeno",
+        "receiving": "Primanje u tijeku",
+        "newVotingPower": "New voting power",
+        "votingPower": "Voting power",
+        "increased": "Voting power increased",
+        "increasing": "Increasing voting power",
+        "decreased": "Voting power decreased",
+        "decreasing": "Decreasing voting power",
+        "voted": "Glasano",
+        "voting": "Glasanje",
+        "changedVote": "Changed vote",
+        "changingVote": "Changing vote",
+        "revoted": "Revoted",
+        "revoting": "Revoting",
+        "unvoted": "Glasanje prekinuto",
+        "unvoting": "Prekid glasanja",
+        "sentNft": "NFT sent",
+        "sendingNft": "Sending NFT",
+        "receivedNft": "NFT received",
+        "receivingNft": "Receiving NFT",
         "transfer": "Prijenos",
         "transferring": "Prijenos u tijeku",
+        "transferNft": "Transfer NFT",
+        "transferringNft": "Transferring NFT",
+        "mintedNft": "Minted NFT",
+        "mintingNft": "Minting NFT",
         "shimmerClaimed": "Preuzeto",
         "shimmerClaiming": "Preuzimanje",
         "shimmerGenesis": "Shimmer Genesis",
         "minted": "Mintano",
         "minting": "Mintanje",
+        "burned": "Burned",
+        "burning": "Burning",
+        "consolidated": "Outputs consolidated",
+        "consolidating": "Consolidating outputs",
+        "aliasCreated": "Alias created",
+        "creatingAlias": "Creating Alias",
         "sendPayment": "Pošalji uplatu",
         "moveFunds": "Interni prijenos",
         "sendTo": "Pošalji",
-        "sendFunds": "Pošalji sredstva",
+        "sendAssets": "Send assets",
+        "sendAssetToAddress": "Send asset to an address",
         "sendToAddress": "Slanje na adresu",
+        "sendToken": "Send token",
+        "sendNft": "Send NFT",
+        "sendNftToAddress": "Send NFT to an address",
         "scanQrOrPaste": "Skenirajte QR kȏd ili zalijepite Adresu",
         "moveFundsBetweenAccounts": "Prebacite sredstva između svojih novčanika",
-        "sendTokensToAddress": "Šalji tokene na adresu",
         "manageAccount": "Upravljanje novčanikom",
         "customizeAcount": "Personaliziraj novčanik",
         "account": "Novčanik",
@@ -1114,6 +1384,7 @@
         "systemTheme": "Sistemska",
         "balance": "Stanje računa",
         "balanceWithValue": "Stanje: {balance}",
+        "balanceWithNetwork": "{network} Balance",
         "all": "Sve",
         "incoming": "Dolazne transakcije",
         "outgoing": "Odlazne transakcije",
@@ -1132,6 +1403,7 @@
         "security": "Sigurnost",
         "accountAddress": "Adresa novčanika",
         "network": "Mreža",
+        "destinationNetwork": "Destination network",
         "nodes": "Nodeovi",
         "wallet": "Novčanik",
         "help": "Pomoć",
@@ -1197,8 +1469,6 @@
         "unvotedFor": "Glasanje prekinuto za {account}",
         "stakingTransaction": "Staking transakcija",
         "unstakingTransaction": "Transakcija prekida stakinga",
-        "receiving": "Primanje u tijeku",
-        "sending": "Slanje u tijeku",
         "legacyNetwork": "Stara mreža",
         "capsLock": "Caps Lock je uključen",
         "version": "Verzija {version}",
@@ -1218,9 +1488,17 @@
         "surplus": "Višak",
         "storageDeposit": "Depozit za pohranu",
         "giftedStorageDeposit": "Poklonjeni depozit za pohranu",
+        "storageDepositPerNft": "Storage deposit per NFT",
+        "totalStorageDeposit": "Total storage deposit",
         "expirationTime": "Vrijeme isteka",
         "timelockDate": "Vremensko zaključavanje",
         "claimedTime": "Preuzeto u",
+        "nftAddress": "NFT Address",
+        "nftId": "NFT ID",
+        "nftMetadata": "NFT Metadata",
+        "aliasId": "Alias ID",
+        "governorAddress": "Governor Address",
+        "stateControllerAddress": "State Controller Address",
         "copiedToClipboard": "Kopirano u međuspremnik",
         "total": "Ukupno: {balance}",
         "availableBalanceWithValue": "Raspoloživo stanje: {balance}",
@@ -1228,6 +1506,8 @@
         "availableBalanceTooltip": "Ukupni saldo sredstava minus sva sredstva koja su potrebna za pokrivanje depozita za pohranu (tj. sredstva koja su zaključana u transakcijama u tijeku, rezervirana za nativne tokene ili rezervirana za NFT-ove).",
         "amountClaimed": "{amount} preuzeto",
         "metadata": "Metapodaci",
+        "amountConsolidatedInputs": "Consolidated outputs",
+        "name": "Name",
         "tag": "Tag",
         "nodeList": "Lista nodeova",
         "claimedIn": "Preuzeto u",
@@ -1235,6 +1515,7 @@
         "assets": "Sredstva",
         "nativeTokens": "Nativni tokeni",
         "mintNativeTokenDescription": "Mintaj nativne tokene koristeći IRC30 standard",
+        "mintNftDescription": "Mint NFT following IRC27 standard",
         "faucetRequestDescription": "Zatraži tokene iz {network} fauceta",
         "refreshTokenMetadataDescription": "Resetiraj i osvježi sve metapodatke tokena",
         "refreshTokenMetadataHint": "Ovo će resetirati sve metapodatke vaših tokena, uključujući status verifikacije i otkriti sva skrivena sredstva.",
@@ -1245,7 +1526,38 @@
         "url": "URL",
         "hash": "Hash",
         "creating": "Stvaranje",
-        "updating": "Ažuriranje"
+        "updating": "Ažuriranje",
+        "enterAddress": "Enter address",
+        "transaction": "Transaction",
+        "alias": "Alias",
+        "foundry": "Foundry",
+        "token": "Token",
+        "nft": "NFT",
+        "type": "Type",
+        "immutableIssuer": "Immutable Issuer",
+        "smartContract": "Smart Contract",
+        "targetContract": "Target contract",
+        "contractFunction": "Contract function",
+        "gasBudget": "Gas budget",
+        "standard": "Standard",
+        "uri": "URI",
+        "issuer": "Issuer",
+        "issuerAddress": "Issuer Address",
+        "issuerName": "Issuer Name",
+        "quantity": "Quantity",
+        "collection": "Collection",
+        "collectionId": "Collection ID",
+        "collectionName": "Collection Name",
+        "royalties": "Royalties",
+        "description": "Description",
+        "attributes": "Attributes",
+        "details": "Details",
+        "availableAmount": "{amount} available",
+        "properties": "Properties",
+        "statistics": "Statistics",
+        "username": "Username",
+        "jwt": "JSON web token",
+        "internalTransaction": "Internal transaction"
     },
     "filters": {
         "title": "Filteri",
@@ -1258,6 +1570,25 @@
             "label": "Prikaži odbijeno",
             "yes": "Da",
             "no": "Ne"
+        },
+        "showValueless": {
+            "label": "Show valueless",
+            "yes": "Yes",
+            "no": "No"
+        },
+        "ascDesc": {
+            "Asc": "Ascending",
+            "Desc": "Descending"
+        },
+        "assetOrder": {
+            "label": "Order",
+            "Name": "Name",
+            "Amount": "Amount"
+        },
+        "internalExternal": {
+            "label": "Internal / External",
+            "internal": "Internal",
+            "external": "External"
         },
         "verificationStatus": {
             "label": "Status verifikacije",
@@ -1297,9 +1628,36 @@
         },
         "type": {
             "label": "Tip",
-            "incoming": "dolazne",
-            "outgoing": "odlazne",
-            "internal": "interne"
+            "basic": "Basic",
+            "nft": "NFT",
+            "alias": "Alias",
+            "foundry": "Foundry",
+            "governance": "Governance",
+            "consolidation": "Consolidation"
+        },
+        "direction": {
+            "label": "Direction",
+            "incoming": "Incoming",
+            "outgoing": "Outgoing",
+            "selfTransaction": "Self transaction"
+        },
+        "proposalType": {
+            "label": "Type",
+            "official": "Official",
+            "custom": "Custom"
+        },
+        "phase": {
+            "label": "Phase"
+        },
+        "participated": {
+            "label": "Participated",
+            "yes": "Yes",
+            "no": "No"
+        },
+        "proposalOrder": {
+            "label": "Order",
+            "name": "Name",
+            "phase": "Phase"
         }
     },
     "dates": {
@@ -1342,8 +1700,11 @@
             "receivedWhileLoggedOut": "Potrebno se prijaviti za pokretanje deep linka",
             "notEnabled": "Deep linkovi nisu omogućeni",
             "invalidFormat": "Deep link koji ste slijedili nije važeći",
-            "invalidAmount": "Iznos u deep linku nije broj {amount}",
+            "invalidAmount": "The amount in deep link is not an integer number {amount}",
             "invalidSurplus": "Višak u deep linku nije broj {surplus}",
+            "governance": {
+                "unrecognizedOperation": "Unrecognized Governance operation: {operation}"
+            },
             "wallet": {
                 "send": {
                     "success": "Podaci o plaćanju dodani s deep linka"
@@ -1368,6 +1729,15 @@
         "mintNativeToken": {
             "success": "Transakcija mintanja nativnih tokena poslana"
         },
+        "burnNativeToken": {
+            "success": "Native token burning transaction sent"
+        },
+        "mintNft": {
+            "success": "NFT minting transaction sent"
+        },
+        "burnNft": {
+            "success": "NFT burning transaction sent"
+        },
         "refreshTokenMetadata": {
             "success": "Svi metapodaci tokena su resetirani i osvježeni"
         },
@@ -1382,6 +1752,12 @@
         "claimShimmerRewards": {
             "success": "Shimmer nagrade preuzete za {accountAlias}",
             "error": "Došlo je do greške prilikom preuzimanja nagrada. Pokušajte ponovno."
+        },
+        "vote": {
+            "success": "Votes successfully casted"
+        },
+        "stopVoting": {
+            "success": "Voting successfully stopped"
         }
     },
     "error": {
@@ -1417,9 +1793,12 @@
             "incorrect": "Vaš trenutni PIN je netočan.",
             "invalid": "Nevažeći PIN kȏd."
         },
+        "address": {
+            "wrongAddressType": "Wrong address type"
+        },
         "account": {
+            "addressNotFound": "The address cannot be found in your account.",
             "length": "Ime novčanika ne smije biti dulje od {length, plural, one {# znaka} few {# znaka} other {# znakova}}.",
-            "empty": "Morate upotrijebiti najnoviji novčanik prije no što možete stvoriti još jedan.",
             "emptyName": "Ime profila mora sadržavati najmanje 1 znak.",
             "notEmpty": "Morate prebaciti sredstva drugdje prije no što možete obrisati novčanik.",
             "duplicate": "Novčanik s ovim imenom već postoji.",
@@ -1442,12 +1821,13 @@
             "amountNoFloat": "Nije moguće koristiti decimalna mjesta s odabranom najmanjom jedinicom",
             "amountInvalidFormat": "Djeluje da je iznos nevažeći broj.",
             "amountSmallerThanSubunit": "Iznos mora biti veći od najmanje podjedinice.",
-            "tagTooLong": "Tag ne može biti dulji od 64 znaka.",
-            "metadataTooLong": "Metapodaci ne mogu biti dulji od 8192 znaka.",
+            "tagTooLong": "The tag cannot be longer than 64 bytes.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "Iznos mora biti veći od 0.",
             "wrongAddressPrefix": "Adrese započinju prefiksom {prefix}.",
             "wrongAddressFormat": "Adresa nije u ispravnom formatu.",
             "invalidAddress": "Adresa nije valjana.",
+            "invalidAssetId": "The asset id is not valid.",
             "unknownAsset": "Sredstvo nije poznato ovom računu.",
             "insufficientFunds": "Ovaj novčanik nema dovoljno sredstava.",
             "insufficientFundsStorageDeposit": "Nedovoljno sredstava za pokrivanje depozita za pohranu",
@@ -1458,19 +1838,28 @@
             "cancelled": "Transakcija je otkazana.",
             "transaction": "Došlo je do greške prilikom slanja vaše transakcije. Molimo pokušajte ponovno.",
             "invalidExpirationDateTime": "Odabrani datum/vrijeme isteka nije važeći.",
+            "noInputs": "No inputs found.",
+            "notEnoughBalance": "Not enough balance.",
             "missingTransactionId": "Nedostaje ID transakcije",
-            "missingTransactionProgressEventPayload": "Nedostaju podaci za \"transaction progress event payload\""
+            "missingTransactionProgressEventPayload": "Nedostaju podaci za \"transaction progress event payload\"",
+            "recipientRequired": "Recipient is required",
+            "nftRequired": "NFT is required",
+            "nftNotInHex": "NFT address has to be in HEX format",
+            "nftNotInPossession": "NFT not in possession",
+            "reservedTagKeyword": "Unable to use reserved tag keyword"
+        },
+        "layer2": {
+            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account."
         },
         "node": {
             "invalid": "Molimo unesite valjani URL.",
-            "dns": "Nije bilo moguće izvršiti DNS rezoluciju za node.",
+            "dns": "Unable to find DNS resolution for node",
             "timedOut": "Veza je istekla.",
             "refused": "Veza je odbijena.",
             "handshake": "Nije bilo moguće dovršiti rukovanje s nodeom.",
             "invalidCertificate": "Nije bilo moguće povezivanje s nevažećim certifikatom.",
             "https": "HTTPS je obavezan; nesigurne veze putem HTTP-a trenutno nisu podržane.",
             "duplicate": "Ovaj je node već dodan.",
-            "unsynced": "Node nije sinkroniziran.",
             "noSyncedNode": "Nema dostupnih sinkroniziranih nodeova.",
             "timeNotSynced": "Neispravno vrijeme uređaja, nije moguće sinkronizirati node.",
             "answer": "Nije bilo moguće dobiti odgovor od svih nodeova.",
@@ -1540,6 +1929,52 @@
         "walletApiEvent": {
             "invalidAccountIndex": "Nevažeći indeks računa za {eventName} događaj",
             "invalidPayload": "Nevažeći payload za {eventName} događaj"
+        },
+        "aliasMinting": {
+            "aliasRequired": "Alias is required",
+            "aliasNotInPossession": "Alias not in possession"
+        },
+        "noOutputsToConsolidate": "Not enough outputs to consolidate",
+        "eventId": {
+            "doesNotStartWith0x": "Event ID should start with '0x'",
+            "insufficientLength": "Event ID should be 66 characters long",
+            "alreadyRegistered": "Event ID already registered"
+        },
+        "nft": {
+            "unsupportedUrl": {
+                "short": "Url not supported",
+                "long": "Url schema not supported"
+            },
+            "unsupportedFileType": {
+                "short": "Unsupported media type",
+                "long": "The media type is not currently supported"
+            },
+            "notMatchingFileTypes": {
+                "short": "Loading blocked",
+                "long": "NFT file type does not match the expected media type"
+            },
+            "tooLargeFile": {
+                "short": "File is too large",
+                "long": "Loading NFT blocked because the file is too large"
+            },
+            "corsError": {
+                "short": "Loading blocked",
+                "long": "Loading NFT blocked by CORS policy"
+            },
+            "unsafeToLoad": {
+                "short": "Unsafe to load",
+                "long": "An error occurred while checking if the NFT was safe to load"
+            },
+            "loadingError": {
+                "short": "Unable to load",
+                "long": "An error occurred while loading the NFT"
+            }
+        },
+        "governance": {
+            "unableToAddProposal": {
+                "short": "Unable to add proposal",
+                "long": "Unable to find proposal {proposalId} on the specified node"
+            }
         }
     },
     "warning": {
@@ -1581,13 +2016,22 @@
         },
         "optionalInput": "Ovi neobavezni podaci bit će javno dostupni na pretraživaču i vidljivi svima.",
         "transactionDetails": {
+            "minting": {
+                "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
+                "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
+                "expirationTime": "Claim these funds before the expiration time or they will be returned to the sender.",
+                "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
+                "metadata": "An optional data field for storing data persistently on the Tangle.",
+                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
+            },
             "incoming": {
                 "storageDeposit": "Povratni token depozit potreban za pohranu vaše transakcije na Tangle.",
                 "giftedStorageDeposit": "Depozit za pohranu ove transakciju vam je poklonjen. Ovaj depozit nije potrebno vratiti.",
                 "expirationTime": "Preuzmite ova sredstva prije isteka vremena ili će biti vraćena pošiljatelju.",
                 "timelockDate": "Pošiljatelj je postavio vremensko zaključavanje ovih sredstava. Moći ćete ih potrošiti nakon isteka vremenskog zaključavanja.",
                 "metadata": "Neobavezno podatkovno polje za trajno pohranjivanje podataka na Tangle.",
-                "tag": "Kratko neobavezno podatkovno polje. Označavanje grupa transakcija može olakšati njihovo traženje."
+                "tag": "Kratko neobavezno podatkovno polje. Označavanje grupa transakcija može olakšati njihovo traženje.",
+                "gasBudget": "Gas budget is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "outgoing": {
                 "storageDeposit": "Depozit za pohranu je povratni depozit potreban za pohranu vaše transakcije na Tangle.",
@@ -1595,14 +2039,39 @@
                 "expirationTime": "Ako primatelj ne preuzme sredstva na vrijeme, tokeni će vam biti vraćeni.",
                 "timelockDate": "Dodali ste vremensko zaključavanje ovoj transakciji. Primatelj neće moći potrošiti ova sredstva sve dok ne istekne vremenska blokada.",
                 "metadata": "Neobavezno podatkovno polje za trajno pohranjivanje podataka na Tangle.",
-                "tag": "Kratko neobavezno podatkovno polje. Označavanje grupa transakcija može olakšati njihovo traženje."
+                "tag": "Kratko neobavezno podatkovno polje. Označavanje grupa transakcija može olakšati njihovo traženje.",
+                "gasBudget": "Gas budget is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
+            },
+            "nftMetadata": {
+                "standard": "The NFT standard e.g. IRC27.",
+                "type": "The MimeType of the NFT. e.g. image/png.",
+                "collectionId": "UTXO string of the collection NFT that minted this NFT",
+                "royalties": "An object containing key-value pairs of addresses that map to payout percentages",
+                "issuerName": "The name of the creator",
+                "attributes": "An array of traits and values that define attributes of the NFT"
             }
         },
-        "mintNativeTokenForm": {
-            "decimals": "Izborni parametar IRC30: Broj decimala koje token koristi (podijelite iznos tokena s 10^decimala da biste dobili njegov korisnički prikaz).",
-            "description": "Neobavezni IRC30 parametar: Opis tokena čitljiv čovjeku.",
-            "url": "Neobavezni IRC30 parametar: URL koji upućuje na više resursa o tokenu poput web stranice ili stranice društvenih medija.",
-            "logoUrl": "Neobavezni IRC30 parametar: URL koji upućuje na slikovni prikaz logotipa tokena."
+        "mintNativeToken": {
+            "decimals": "IRC30 optional parameter: Number of decimals the token uses (divide the token amount by 10^decimals to get its user representation).",
+            "description": "IRC30 optional parameter: The human-readable description of the token.",
+            "url": "IRC30 optional parameter: URL pointing to more resources about the token like a website or social media page.",
+            "logoUrl": "IRC30 optional parameter: URL pointing to an image resource of the token logo."
+        },
+        "mintNftForm": {
+            "collectionId": "Optional parameter: UTXO string of the collection NFT that minted this NFT",
+            "collectionName": "Optional parameter: The collection's name",
+            "royalties": "Optional parameter: An object containing key-value pairs of addresses that map to payout percentages",
+            "issuerName": "Optional parameter: The name of the creator",
+            "description": "Optional parameter: A description of the NFT",
+            "attributes": "Optional parameter: An array of traits and values that define attributes of the NFT",
+            "uri": "To create a URI using custom media, first upload your file to IPFS via a storage service (e.g. https://nft.storage/)",
+            "quantity": "Optional parameter: The quantity of copies minted with this metadata."
+        },
+        "governance": {
+            "removeProposalWarning": "You must stop voting for this proposal before removing it."
+        },
+        "updateStronghold": {
+            "profileBadge": "Your Stronghold is out of date. Log in to update Stronghold."
         }
     },
     "exports": {
@@ -1631,8 +2100,11 @@
     },
     "tabs": {
         "wallet": "Novčanik",
-        "staking": "Staking",
-        "developer": "Developer"
+        "collectibles": "Collectibles",
+        "governance": "Upravljanje",
+        "developer": "Developer",
+        "tokens": "Tokeni",
+        "activity": "Aktivnost"
     },
     "pills": {
         "stake": {
@@ -1642,37 +2114,47 @@
         },
         "external": {
             "incoming": {
-                "Pending": "primanje od",
-                "Confirmed": "primljeno od",
-                "Conflicting": "primanje nije uspjelo"
+                "Pending": "receiving from",
+                "Confirmed": "received from",
+                "Conflicting": "failed to receive"
             },
             "outgoing": {
-                "Pending": "slanje na",
-                "Confirmed": "poslano na",
-                "Conflicting": "slanje nije uspjelo"
+                "Pending": "sending to",
+                "Confirmed": "sent to",
+                "Conflicting": "failed to send"
             }
         },
         "internal": {
             "incoming": {
-                "Pending": "prijenos s",
-                "Confirmed": "preneseno s",
-                "Conflicting": "prijenos nije uspio"
+                "Pending": "transferring from",
+                "Confirmed": "transferred from",
+                "Conflicting": "failed to transfer"
             },
             "outgoing": {
-                "Pending": "prijenos na",
-                "Confirmed": "preneseno na",
-                "Conflicting": "prijenos nije uspio"
+                "Pending": "transferring to",
+                "Confirmed": "transferred to",
+                "Conflicting": "failed to transfer"
             },
             "selfTransaction": {
-                "Pending": "prijenos na",
-                "Confirmed": "preneseno na",
-                "Conflicting": "prijenos nije uspio"
+                "Pending": "transferring to",
+                "Confirmed": "transferred to",
+                "Conflicting": "failed to transfer"
             }
         },
         "mint": {
-            "Pending": "mintanje u tijeku",
-            "Confirmed": "mintano",
-            "Conflicting": "mintanje nije uspjelo"
+            "Pending": "minting",
+            "Confirmed": "minted",
+            "Conflicting": "failed to mint"
+        },
+        "burn": {
+            "Pending": "burning",
+            "Confirmed": "burned",
+            "Conflicting": "failed to burn"
+        },
+        "consolidation": {
+            "Pending": "Consolidating outputs",
+            "Confirmed": "Outputs consolidated",
+            "Conflicting": "failed to consolidate outputs"
         },
         "migrate": {
             "Pending": "migracija za",
@@ -1684,7 +2166,53 @@
             "claimed": "Preuzeta",
             "expired": "isteklo"
         },
-        "locked": "zaključano"
+        "governance": {
+            "increaseVotingPower": {
+                "Pending": "increasing voting power",
+                "Confirmed": "increased voting power",
+                "Conflicting": "failed to increased voting power"
+            },
+            "decreaseVotingPower": {
+                "Pending": "decreasing voting power",
+                "Confirmed": "decreased voting power",
+                "Conflicting": "failed to decreased voting power"
+            },
+            "startVoting": {
+                "Pending": "voting for",
+                "Confirmed": "voted for",
+                "Conflicting": "failed to vote for"
+            },
+            "stopVoting": {
+                "Pending": "stopping voting for",
+                "Confirmed": "stopped voting for",
+                "Conflicting": "failed to stopped voting for"
+            },
+            "changedVote": {
+                "Pending": "changing vote for",
+                "Confirmed": "changed vote for",
+                "Conflicting": "failed to change vote for"
+            },
+            "revote": {
+                "Pending": "revoting",
+                "Confirmed": "revote",
+                "Conflicting": "failed to revote"
+            }
+        },
+        "alias": {
+            "creation": {
+                "Pending": "creating alias",
+                "Confirmed": "alias created",
+                "Failed": "Failed to create alias"
+            }
+        },
+        "locked": "zaključano",
+        "smartContract": "smart contract",
+        "proposalStatus": {
+            "upcoming": "Announcement",
+            "commencing": "Voting open",
+            "holding": "Counting",
+            "ended": "Closed"
+        }
     },
     "menus": {
         "expirationTimePicker": {

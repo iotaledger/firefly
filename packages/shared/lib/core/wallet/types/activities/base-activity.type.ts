@@ -1,5 +1,4 @@
 import { ActivityAsyncStatus, ActivityDirection, InclusionState, ActivityAction } from '../../enums'
-import { IUTXOInput } from '@iota/types'
 import { Subject } from '../subject.type'
 import { Layer2Metadata } from '@core/layer-2'
 
@@ -9,7 +8,6 @@ export type BaseActivity = {
     transactionId: string
     time: Date
     inclusionState: InclusionState
-    inputs: IUTXOInput[]
     isHidden?: boolean
     containsValue: boolean
     isAssetHidden: boolean
@@ -18,6 +16,7 @@ export type BaseActivity = {
     isInternal: boolean
     storageDeposit: number
     giftedStorageDeposit: number
+    surplus?: number
     subject: Subject
     metadata?: string
     tag?: string

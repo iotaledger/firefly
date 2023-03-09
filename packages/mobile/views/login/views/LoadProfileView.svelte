@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { LoadingScreen } from 'shared/components'
+    import { LoadingScreen } from '@ui'
     import { localize } from '@core/i18n'
     import { loginProgress, LOGIN_STEPS } from '@core/profile'
 

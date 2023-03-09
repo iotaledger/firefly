@@ -1,6 +1,6 @@
-<script lang="typescript">
-    import { OnboardingLayout } from '../../../../../components'
-    import { Button, PinInput, Text, HTMLButtonType, TextType } from 'shared/components'
+<script lang="ts">
+    import { OnboardingLayout } from '@components'
+    import { Button, PinInput, Text, HTMLButtonType, TextType } from '@ui'
     import {
         initialiseFirstShimmerClaimingAccount,
         initialisePincodeManager,
@@ -13,7 +13,7 @@
     import { ProfileType } from '@core/profile'
     import { isValidPin } from '@core/utils'
     import { onMount } from 'svelte'
-    import { storageProtectionSetupRouter } from '../../../../../lib/routers'
+    import { storageProtectionSetupRouter } from '@/routers'
 
     export let busy = false
 
@@ -97,11 +97,8 @@
 <OnboardingLayout {onBackClick} {busy} {title} animation="pin-desktop">
     <div slot="content">
         <div class="flex flex-col">
-            <Text type={TextType.p} secondary classes="mb-4"
+            <Text type={TextType.p} secondary fontSize="15" classes="mb-4"
                 >{localize('views.onboarding.storageProtectionSetup.setupPinProtection.body1')}</Text
-            >
-            <Text type={TextType.p} secondary highlighted
-                >{localize('views.onboarding.storageProtectionSetup.setupPinProtection.body2')}</Text
             >
         </div>
         <form id="setup-pin" class="flex flex-col mb-8" on:submit|preventDefault={onSetPinClick}>

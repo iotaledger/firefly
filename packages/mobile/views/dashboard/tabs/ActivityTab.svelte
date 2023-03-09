@@ -1,20 +1,34 @@
-<script lang="typescript">
-    import { isStrongholdUnlocked } from '@core/profile-manager'
-    import { Activity } from '@core/wallet'
-    import { ActivityList } from '../../../../mobile/components'
-    import { ActivityAction } from '../../../lib/contexts/dashboard'
-    import { activityRouter } from '../../../lib/routers'
+<script lang="ts">
+    import { ActivityList } from '@components'
+
+    import { Activity, ActivityType, getAssetFromPersistedAssets, NotVerifiedStatus } from '@core/wallet'
+
+    import { DrawerId, openDrawer } from '@/auxiliary/drawer'
+    import { handleClaimActivity, handleRejectActivity } from '@/contexts/wallet'
 
     function onTileClick(activity: Activity): void {
-        $activityRouter?.next({ activity })
-    }
-    function onReject(activity: Activity): void {
-        $activityRouter?.next({ action: ActivityAction.FastReject, activity })
+        const asset =
+            activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry
+                ? getAssetFromPersistedAssets(activity.assetId)
+                : undefined
+        if (asset?.verification?.status === NotVerifiedStatus.New) {
+            openDrawer(DrawerId.SelectedToken, {
+                asset,
+                activityId: activity.id,
+            })
+        } else {
+            openDrawer(DrawerId.SelectedActivity, {
+                activityId: activity.id,
+            })
+        }
     }
 
-    async function onClaim(activity: Activity): Promise<void> {
-        const isUnlocked = await isStrongholdUnlocked()
-        $activityRouter?.next({ action: ActivityAction.FastClaim, activity, isUnlocked })
+    function onReject(activityId: string): void {
+        handleRejectActivity(activityId)
+    }
+
+    function onClaim(activity: Activity): void {
+        void handleClaimActivity(activity)
     }
 </script>
 

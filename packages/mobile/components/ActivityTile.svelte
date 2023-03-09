@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Activity, ActivityAsyncStatus, ActivityType, InclusionState } from '@core/wallet'
     import {
         AliasActivityTileContent,
@@ -7,8 +7,8 @@
         NftActivityTileContent,
         TimelockActivityTileFooter,
         TransactionActivityTileContent,
-    } from 'shared/components'
-    import { AsyncActivityTileFooter } from '../components'
+    } from '@ui'
+    import { AsyncActivityTileFooter } from '@components'
 
     export let activity: Activity
     export let onClick: () => unknown = () => {}

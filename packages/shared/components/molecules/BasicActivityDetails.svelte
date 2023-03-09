@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import {
         TransactionActivityStatusPill,
         ActivityAsyncStatusPill,
@@ -7,7 +7,12 @@
         SubjectBox,
     } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { formatTokenAmountDefault, TransactionActivity, getAssetFromPersistedAssets } from '@core/wallet'
+    import {
+        formatTokenAmountDefault,
+        TransactionActivity,
+        getAssetFromPersistedAssets,
+        ActivityAsyncStatus,
+    } from '@core/wallet'
     import { time } from '@core/app'
 
     export let activity: TransactionActivity
@@ -41,7 +46,7 @@
                 inclusionState={activity.inclusionState}
             />
         {/if}
-        {#if activity.asyncData?.asyncStatus}
+        {#if activity.asyncData?.asyncStatus && activity?.asyncData?.asyncStatus !== ActivityAsyncStatus.Timelocked}
             <ActivityAsyncStatusPill asyncStatus={activity.asyncData.asyncStatus} />
         {/if}
         {#if isTimelocked}

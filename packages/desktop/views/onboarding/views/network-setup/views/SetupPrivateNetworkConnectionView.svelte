@@ -1,6 +1,7 @@
-<script lang="typescript">
+<script lang="ts">
     import { onMount } from 'svelte'
-    import { Animation, OnboardingLayout, Text, Button, NodeConfigurationForm, HTMLButtonType } from 'shared/components'
+    import { Animation, Text, Button, NodeConfigurationForm, HTMLButtonType, TextType } from '@ui'
+    import { OnboardingLayout } from '@components'
     import {
         cleanupOnboardingProfileManager,
         initialiseProfileManagerFromOnboardingProfile,
@@ -26,16 +27,17 @@
         isBusy = true
         try {
             await nodeConfigurationForm.validate({
-                validateUrl: true,
                 uniqueCheck: false,
                 checkSameNetwork: false,
                 checkNodeInfo: false,
                 validateClientOptions: false,
             })
-            updateOnboardingProfile({ clientOptions: { nodes: [node] } })
+            updateOnboardingProfile({ clientOptions: { nodes: [node], primaryNode: node } })
             await initialiseProfileManagerFromOnboardingProfile(true)
+
+            // The API request to check if a node is reachable requires an existing account manager.
             await getNodeInfo(node.url)
-            destroyProfileManager()
+            await destroyProfileManager()
             $networkSetupRouter.next()
         } catch (err) {
             console.error(err)
@@ -62,10 +64,10 @@
 
 <OnboardingLayout {onBackClick}>
     <div slot="title">
-        <Text type="h2">{localize('views.onboarding.networkSetup.setupPrivateNetworkConnection.title')}</Text>
+        <Text type={TextType.h2}>{localize('views.onboarding.networkSetup.setupPrivateNetworkConnection.title')}</Text>
     </div>
     <div slot="leftpane__content">
-        <Text type="p" secondary classes="mb-8"
+        <Text type={TextType.p} secondary classes="mb-8"
             >{localize('views.onboarding.networkSetup.setupPrivateNetworkConnection.body')}</Text
         >
         <NodeConfigurationForm

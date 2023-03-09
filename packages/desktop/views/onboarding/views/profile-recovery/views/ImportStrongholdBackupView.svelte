@@ -1,5 +1,6 @@
-<script lang="typescript">
-    import { Animation, Button, Dropzone, OnboardingLayout, Text } from 'shared/components'
+<script lang="ts">
+    import { Animation, Button, Dropzone, Text } from '@ui'
+    import { OnboardingLayout } from '@components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { profileRecoveryRouter } from '@core/router'

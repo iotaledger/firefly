@@ -1,6 +1,7 @@
-<script lang="typescript">
+<script lang="ts">
     import { onMount } from 'svelte'
-    import { Animation, OnboardingButton, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, OnboardingButton, Text } from '@ui'
+    import { OnboardingLayout } from '@components'
     import features from '@features/features'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
@@ -13,9 +14,9 @@
     } from '@contexts/onboarding'
     import { profileSetupRouter } from '@core/router'
 
-    function onProfileTypeSelectionClick(type: ProfileType): void {
+    async function onProfileTypeSelectionClick(type: ProfileType): Promise<void> {
         updateOnboardingProfile({ type })
-        initialiseProfileManagerFromOnboardingProfile()
+        await initialiseProfileManagerFromOnboardingProfile()
         $profileSetupRouter.next()
     }
 
@@ -23,8 +24,8 @@
         $profileSetupRouter.previous()
     }
 
-    onMount(() => {
-        destroyProfileManager()
+    onMount(async () => {
+        await destroyProfileManager()
         updateOnboardingProfile({ type: null, hasInitialisedProfileManager: false })
     })
 </script>

@@ -5,6 +5,7 @@ import {
     ProfileRecoveryType,
     ProfileSetupType,
     shouldBeDeveloperProfile,
+    updateOnboardingProfile,
 } from '@contexts/onboarding'
 
 import { hasCompletedAppSetup } from '@core/app'
@@ -13,7 +14,7 @@ import { Router } from '@core/router'
 
 import { appRouter } from './app-router'
 import { OnboardingRoute, ProfileSetupRoute } from '../enums'
-import { profileSetupRoute } from '.'
+import { profileRecoveryRouter, profileSetupRoute } from '.'
 
 export const onboardingRoute = writable<OnboardingRoute>(null)
 export const onboardingRouter = writable<OnboardingRouter>(null)
@@ -21,6 +22,19 @@ export const onboardingRouter = writable<OnboardingRouter>(null)
 export class OnboardingRouter extends Router<OnboardingRoute> {
     constructor() {
         super(getInitialRoute(), onboardingRoute)
+    }
+
+    resetRecovery(): void {
+        updateOnboardingProfile({ type: null, recoveryType: null })
+        this.filterHistory(OnboardingRoute.ProfileRecovery)
+        get(profileRecoveryRouter).reset()
+        const profileSetupType = get(onboardingProfile)?.setupType
+        if (profileSetupType === ProfileSetupType.Claimed) {
+            profileSetupRoute.set(ProfileSetupRoute.SetupClaimed)
+        } else {
+            profileSetupRoute.set(ProfileSetupRoute.SetupRecovered)
+        }
+        this.previous()
     }
 
     next(): void {
@@ -111,12 +125,7 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 break
             }
             case OnboardingRoute.ShimmerClaiming: {
-                const profileRecoveryType = get(onboardingProfile)?.recoveryType
-                if (profileRecoveryType === ProfileRecoveryType.Mnemonic) {
-                    nextRoute = OnboardingRoute.ProfileBackup
-                } else {
-                    nextRoute = OnboardingRoute.Congratulations
-                }
+                nextRoute = OnboardingRoute.Congratulations
                 break
             }
             case OnboardingRoute.Congratulations:

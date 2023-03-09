@@ -1,5 +1,7 @@
-<script lang="typescript">
-    import { MeatballMenuButton } from 'shared/components'
+<script lang="ts">
+    import { MeatballMenuButton } from '@ui'
+
+    import { DrawerId, openDrawer } from '@/auxiliary/drawer'
 </script>
 
-<MeatballMenuButton onClick={() => {}} classes="items-center text-gray-500" />
+<MeatballMenuButton onClick={() => openDrawer(DrawerId.AccountActions)} classes="items-center text-gray-500" />

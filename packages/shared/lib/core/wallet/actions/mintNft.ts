@@ -1,9 +1,7 @@
 import { showAppNotification } from '@auxiliary/notification'
 import { selectedAccount, updateSelectedAccount } from '@core/account'
 import { localize } from '@core/i18n'
-import { handleLedgerError } from '@core/ledger'
 import { addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput, IIrc27Metadata } from '@core/nfts'
-import { activeProfile, ProfileType } from '@core/profile'
 import { Converter } from '@core/utils'
 import { NftOptions } from '@iota/wallet'
 import { get } from 'svelte/store'
@@ -13,8 +11,9 @@ import { addActivityToAccountActivitiesInAllAccountActivities, resetMintNftDetai
 import { NftActivity } from '../types'
 import { preprocessTransaction } from '../utils'
 import { generateSingleNftActivity } from '../utils/generateActivity/generateSingleNftActivity'
+import { handleError } from '@core/error/handlers'
 
-export async function mintNft(metadata: IIrc27Metadata, amount: number): Promise<void> {
+export async function mintNft(metadata: IIrc27Metadata, quantity: number): Promise<void> {
     try {
         const account = get(selectedAccount)
         updateSelectedAccount({ isTransferring: true })
@@ -24,7 +23,7 @@ export async function mintNft(metadata: IIrc27Metadata, amount: number): Promise
             issuer: account.depositAddress,
             immutableMetadata: Converter.utf8ToHex(JSON.stringify(metadata), true),
         }
-        const allNfts: NftOptions[] = Array(amount).fill(nftOptions)
+        const allNfts: NftOptions[] = Array(quantity).fill(nftOptions)
 
         // Mint NFT
         const mintNftTransaction = await account.mintNfts(allNfts, DEFAULT_TRANSACTION_OPTIONS)
@@ -57,10 +56,7 @@ export async function mintNft(metadata: IIrc27Metadata, amount: number): Promise
 
         return Promise.resolve()
     } catch (err) {
-        const _activeProfile = get(activeProfile)
-        if (_activeProfile.type === ProfileType.Ledger) {
-            handleLedgerError(err?.error)
-        }
+        handleError(err)
 
         return Promise.reject(err)
     } finally {

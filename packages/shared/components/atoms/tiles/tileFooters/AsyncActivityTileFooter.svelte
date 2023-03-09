@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import {
         ActivityAsyncStatus,
         ActivityDirection,
@@ -22,7 +22,7 @@
     import { localize } from '@core/i18n'
     import { showInternalVerificationPopup } from '@core/ledger'
     import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
-    import { closePopup, openPopup } from '@auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
 
     export let activity: Activity
 
@@ -30,13 +30,13 @@
         (activity.direction === ActivityDirection.Incoming ||
             activity.direction === ActivityDirection.SelfTransaction) &&
         activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
-    $: shouldShowAsyncFooter = activity.asyncData?.asyncStatus !== ActivityAsyncStatus.Claimed
 
     $: timeDiff = getTimeDiff(activity)
+    $: hasExpirationTime = !!activity.asyncData?.expirationDate
 
     function handleRejectClick(): void {
         openPopup({
-            type: 'confirmation',
+            id: PopupId.Confirmation,
             props: {
                 title: localize('actions.confirmRejection.title'),
                 description: localize('actions.confirmRejection.description'),
@@ -68,45 +68,49 @@
                 return getTimeDifference(expirationDate, $time)
             }
         }
-        return localize('general.none')
+        return undefined
     }
 </script>
 
-{#if shouldShowAsyncFooter}
-    <TileFooter>
-        <svelte:fragment slot="left">
+<TileFooter>
+    <svelte:fragment slot="left">
+        {#if timeDiff}
             <TooltipIcon
-                icon={IconEnum.ExpirationTime}
+                icon={hasExpirationTime ? IconEnum.ExpirationTime : IconEnum.Timelock}
                 iconClasses="text-gray-600 dark:text-gray-200"
-                title={localize('general.expirationTime')}
-                text={localize(`tooltips.transactionDetails.${activity.direction}.expirationTime`)}
+                title={localize(`general.${hasExpirationTime ? 'expirationTime' : 'timelockDate'}`)}
+                text={localize(
+                    `tooltips.transactionDetails.${activity.direction}.${
+                        hasExpirationTime ? 'expirationTime' : 'timelockDate'
+                    }`
+                )}
                 position={Position.Top}
             />
             <Text fontSize="13" color="gray-600" fontWeight={FontWeight.semibold}>{timeDiff}</Text>
-        </svelte:fragment>
-        <svelte:fragment slot="right">
-            {#if shouldShowActions}
-                <Button
-                    onClick={handleRejectClick}
-                    disabled={activity.asyncData?.isClaiming || activity.asyncData?.isRejected}
-                    inlineStyle="min-width: 4rem;"
-                    size={ButtonSize.Small}
-                    outline
-                >
-                    {localize('actions.reject')}
-                </Button>
-                <Button
-                    onClick={handleClaimClick}
-                    disabled={activity.asyncData?.isClaiming}
-                    isBusy={activity.asyncData?.isClaiming}
-                    inlineStyle="min-width: 4rem;"
-                    size={ButtonSize.Small}
-                >
-                    {localize('actions.claim')}
-                </Button>
-            {:else}
-                <ActivityAsyncStatusPill asyncStatus={activity.asyncData?.asyncStatus} />
-            {/if}
-        </svelte:fragment>
-    </TileFooter>
-{/if}
+        {/if}
+    </svelte:fragment>
+    <svelte:fragment slot="right">
+        {#if shouldShowActions}
+            <Button
+                onClick={handleRejectClick}
+                disabled={activity.asyncData?.isClaiming || activity.asyncData?.isRejected}
+                inlineStyle="min-width: 4rem;"
+                size={ButtonSize.Small}
+                outline
+            >
+                {localize('actions.reject')}
+            </Button>
+            <Button
+                onClick={handleClaimClick}
+                disabled={activity.asyncData?.isClaiming}
+                isBusy={activity.asyncData?.isClaiming}
+                inlineStyle="min-width: 4rem;"
+                size={ButtonSize.Small}
+            >
+                {localize('actions.claim')}
+            </Button>
+        {:else}
+            <ActivityAsyncStatusPill asyncStatus={activity.asyncData?.asyncStatus} />
+        {/if}
+    </svelte:fragment>
+</TileFooter>

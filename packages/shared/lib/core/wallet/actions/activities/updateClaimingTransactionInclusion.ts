@@ -25,7 +25,7 @@ export function updateClaimingTransactionInclusion(
                         asyncStatus: ActivityAsyncStatus.Claimed,
                     },
                 })
-                addClaimedActivity(accountIndex, activity.transactionId, {
+                addClaimedActivity(accountIndex, activity?.transactionId, {
                     id: activity.id,
                     claimingTransactionId: transactionId,
                     claimedTimestamp: new Date().getTime(),

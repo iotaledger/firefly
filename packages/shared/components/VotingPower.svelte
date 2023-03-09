@@ -1,21 +1,25 @@
-<script lang="typescript">
+<script lang="ts">
     import { Text, Button } from 'shared/components'
     import { ButtonSize, FontWeight, TextType } from './enums'
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { formatTokenAmountBestMatch, visibleSelectedAccountAssets } from '@core/wallet'
-    import { openPopup } from '@auxiliary/popup'
+    import { openPopup, PopupId } from '@auxiliary/popup'
 
     const asset = $visibleSelectedAccountAssets?.baseCoin
 
     $: votingPower = parseInt($selectedAccount?.votingPower, 10)
-    $: maxVotingPower = parseInt($selectedAccount?.balances?.baseCoin?.available)
+    $: maxVotingPower = parseInt($selectedAccount?.balances?.baseCoin?.available) + votingPower
     $: formattedVotingPower = formatTokenAmountBestMatch(votingPower, asset?.metadata)
     $: formattedMaxVotingPower = formatTokenAmountBestMatch(maxVotingPower, asset?.metadata)
+    $: hasTransactionInProgress =
+        $selectedAccount?.hasVotingPowerTransactionInProgress ||
+        $selectedAccount?.hasVotingTransactionInProgress ||
+        $selectedAccount?.isTransferring
 
     function handleManageVotingPower(): void {
         openPopup({
-            type: 'manageVotingPower',
+            id: PopupId.ManageVotingPower,
         })
     }
 </script>
@@ -25,15 +29,15 @@
         {localize('views.governance.votingPower.title')}
     </Text>
     <Text type={TextType.h1}>{formattedVotingPower}</Text>
-    <Text fontWeight={FontWeight.medium} overrideColor classes="mb-4 text-gray-600">
+    <Text fontWeight={FontWeight.medium} overrideColor classes="mb-4 text-gray-600 dark:text-white">
         {localize('views.governance.votingPower.maximal', { values: { value: formattedMaxVotingPower } })}
     </Text>
     <Button
         size={ButtonSize.Medium}
         onClick={handleManageVotingPower}
         classes="w-full"
-        disabled={$selectedAccount.isTransferring}
-        isBusy={$selectedAccount.isTransferring}
+        disabled={hasTransactionInProgress}
+        isBusy={hasTransactionInProgress}
     >
         {localize('views.governance.votingPower.manage')}
     </Button>

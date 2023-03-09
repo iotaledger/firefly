@@ -1,5 +1,6 @@
-<script lang="typescript">
-    import { Animation, Button, Icon, OnboardingLayout, Text, TextHint } from 'shared/components'
+<script lang="ts">
+    import { Animation, Button, Icon, Text, TextHint } from '@ui'
+    import { OnboardingLayout } from '@components'
     import { onDestroy, onMount } from 'svelte'
     import { mobile } from '@core/app'
     import { onboardingRouter, ledgerSetupRouter } from '@core/router'
@@ -9,8 +10,11 @@
         completeOnboardingProcess,
         isOnboardingLedgerProfile,
         ProfileRecoveryType,
+        updateOnboardingProfile,
     } from '@contexts/onboarding'
     import { checkOrConnectLedger } from '@core/ledger'
+    import features from '@features/features'
+    import { STRONGHOLD_VERSION } from '@core/stronghold/constants'
 
     // TODO: what are these localised bodies they are not self documenting?
     let localizedBody = 'body'
@@ -19,6 +23,9 @@
         if ($isOnboardingLedgerProfile) {
             checkOrConnectLedger(_continue)
         } else {
+            updateOnboardingProfile({
+                strongholdVersion: features.onboarding.strongholdVersionCheck.enabled ? STRONGHOLD_VERSION : undefined,
+            })
             void _continue()
         }
     }

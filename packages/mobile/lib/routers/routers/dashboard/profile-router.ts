@@ -1,30 +1,26 @@
 import { get, writable } from 'svelte/store'
 
-import { Subrouter } from '@core/router'
+import { Router } from '@core/router'
 
+import { closeDrawer, DrawerId } from '@/auxiliary/drawer'
+import { networkConfigurationSettingsRouter, settingsRouter } from '../'
 import { ProfileRoute } from '../../enums'
-import { IProfileRouterEvent } from '../../interfaces'
 import { resetRouterWithDrawerDelay } from '../../utils'
-import { dashboardRouter } from '../dashboard-router'
 
 export const profileRoute = writable<ProfileRoute>(null)
 export const profileRouter = writable<ProfileRouter>(null)
 
-export class ProfileRouter extends Subrouter<ProfileRoute> {
+export class ProfileRouter extends Router<ProfileRoute> {
     constructor() {
-        super(ProfileRoute.Actions, profileRoute, get(dashboardRouter))
+        super(ProfileRoute.Actions, profileRoute)
     }
-    public next(event: IProfileRouterEvent = {}): void {
-        const { settings } = event
-
+    public next(): void {
         let nextRoute: ProfileRoute
         const currentRoute = get(this.routeStore)
 
         switch (currentRoute) {
             case ProfileRoute.Actions: {
-                if (settings) {
-                    nextRoute = ProfileRoute.Settings
-                }
+                nextRoute = ProfileRoute.Settings
                 break
             }
         }
@@ -32,8 +28,18 @@ export class ProfileRouter extends Subrouter<ProfileRoute> {
         this.setNext(nextRoute)
     }
 
+    previous(): void {
+        if (this.history.length > 0) {
+            super.previous()
+        } else {
+            this.closeDrawer()
+        }
+    }
+
     closeDrawer(): void {
-        get(dashboardRouter).previous()
+        closeDrawer(DrawerId.Profile)
+        resetRouterWithDrawerDelay(get(settingsRouter))
+        resetRouterWithDrawerDelay(get(networkConfigurationSettingsRouter))
         resetRouterWithDrawerDelay(get(profileRouter))
     }
 }

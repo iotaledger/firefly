@@ -83,6 +83,25 @@ try {
 }
 ```
 
+## Handling an Error
+
+To handle use the following syntax:
+
+```typescript
+import { handleError } from '@core/error/handlers'
+
+try {
+    ...
+} catch (err) {
+    handleError(error)
+}
+
+```
+`handleError()` handles the error differently depending on if it is a:
+- wallet.rs error
+- ledger error
+- default: generic error
+
 ## Errors from wallet.rs
 
 We handle errors from wallet.rs by using the `handleError` function, e.g.

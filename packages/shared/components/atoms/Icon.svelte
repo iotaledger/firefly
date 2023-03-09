@@ -1,5 +1,5 @@
-<script lang="typescript">
-    import { ICON_SVG, Icon } from '@lib/auxiliary/icon'
+<script lang="ts">
+    import { ICON_SVG_MAP, Icon } from '@lib/auxiliary/icon'
 
     export let icon: Icon = undefined
     export let width: number | string = undefined
@@ -10,19 +10,34 @@
     export let boxStyles = ''
     export let primaryColor: string = undefined
     export let secondaryColor: string = undefined
+    export let removeWhitespace = false
 
-    $: selected = ICON_SVG[icon]
+    let svg: SVGSVGElement
+    let viewBox = { x: 0, y: 0, width: 0, height: 0 }
+
+    function setViewBox(): void {
+        if (removeWhitespace) {
+            const { x, y, width, height } = svg.getBBox()
+            viewBox = { x, y, width, height }
+        } else {
+            viewBox = { x: 0, y: 0, width: selected.width, height: selected.height }
+        }
+    }
+
+    $: selected = ICON_SVG_MAP[icon]
+    $: selected, svg && setViewBox()
 </script>
 
 {#if selected}
     {#if boxed}
         <div class="boxed w-8 h-8 flex justify-center items-center {boxClasses}" style={boxStyles}>
             <svg
+                bind:this={svg}
                 data-label="icon"
                 class="flex-shrink-0 {classes}"
                 width={width || selected.width || '100%'}
                 height={height || selected.height || '100%'}
-                viewBox="0 0 {selected.width} {selected.height}"
+                viewBox="{viewBox.x} {viewBox.y} {viewBox.width} {viewBox.height}"
                 xmlns="http://www.w3.org/2000/svg"
             >
                 {#each selected.path as path}
@@ -45,15 +60,28 @@
                             : path.fill ?? ''}
                     />
                 {/each}
+                {#if selected.circles}
+                    {#each selected.circles as circle}
+                        <circle
+                            cx={circle.cx}
+                            cy={circle.cy}
+                            r={circle.r}
+                            fill={circle.fill}
+                            stroke-width={circle.strokeWidth || ''}
+                            stroke={circle.strokeColor || ''}
+                        />
+                    {/each}
+                {/if}
             </svg>
         </div>
     {:else}
         <svg
+            bind:this={svg}
             data-label="icon"
             class="flex-shrink-0 {classes}"
             width={width || selected.width || '100%'}
             height={height || selected.height || '100%'}
-            viewBox="0 0 {selected.width} {selected.height}"
+            viewBox="{viewBox.x} {viewBox.y} {viewBox.width} {viewBox.height}"
             xmlns="http://www.w3.org/2000/svg"
         >
             {#each selected.path as path}
@@ -81,6 +109,18 @@
                         : path.fill ?? ''}
                 />
             {/each}
+            {#if selected.circles}
+                {#each selected.circles as circle}
+                    <circle
+                        cx={circle.cx}
+                        cy={circle.cy}
+                        r={circle.r}
+                        fill={circle.fill}
+                        stroke-width={circle.strokeWidth || ''}
+                        stroke={circle.strokeColor || ''}
+                    />
+                {/each}
+            {/if}
         </svg>
     {/if}
 {/if}

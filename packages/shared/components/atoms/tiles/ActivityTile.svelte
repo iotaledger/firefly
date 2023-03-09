@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import {
         InclusionState,
         selectedAccountAssets,
@@ -9,16 +9,19 @@
         NotVerifiedStatus,
         ActivityAsyncStatus,
     } from '@core/wallet'
-    import { openPopup } from '@auxiliary/popup'
+    import { openPopup, PopupId } from '@auxiliary/popup'
     import {
         ClickableTile,
         TransactionActivityTileContent,
         FoundryActivityTileContent,
+        ConsolidationActivityTileContent,
         AliasActivityTileContent,
         TimelockActivityTileFooter,
         AsyncActivityTileFooter,
         NftActivityTileContent,
+        GovernanceActivityTileContent,
     } from 'shared/components'
+    import { time } from '@core/app'
 
     export let activity: Activity
 
@@ -28,11 +31,13 @@
             activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry
                 ? getAssetFromPersistedAssets(activity.assetId)
                 : undefined)
+    $: isTimelocked = activity?.asyncData?.timelockDate > $time
+    $: shouldShowAsyncFooter = activity.asyncData && activity.asyncData.asyncStatus !== ActivityAsyncStatus.Claimed
 
     function handleTransactionClick(): void {
         if (asset?.verification?.status === NotVerifiedStatus.New) {
             openPopup({
-                type: 'tokenInformation',
+                id: PopupId.TokenInformation,
                 overflow: true,
                 props: {
                     activityId: activity.id,
@@ -41,7 +46,7 @@
             })
         } else {
             openPopup({
-                type: 'activityDetails',
+                id: PopupId.ActivityDetails,
                 props: { activityId: activity.id },
             })
         }
@@ -60,13 +65,17 @@
                 <AliasActivityTileContent {activity} />
             {:else if activity.type === ActivityType.Nft}
                 <NftActivityTileContent {activity} />
+            {:else if activity.type === ActivityType.Governance}
+                <GovernanceActivityTileContent {activity} />
+            {:else if activity.type === ActivityType.Consolidation}
+                <ConsolidationActivityTileContent {activity} />
             {:else}
                 <FoundryActivityTileContent {activity} />
             {/if}
         </tile-content>
-        {#if activity.asyncData?.asyncStatus === ActivityAsyncStatus.Timelocked}
+        {#if isTimelocked}
             <TimelockActivityTileFooter {activity} />
-        {:else if activity.asyncData}
+        {:else if shouldShowAsyncFooter}
             <AsyncActivityTileFooter {activity} />
         {/if}
     </activity-tile>

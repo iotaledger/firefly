@@ -1,21 +1,15 @@
-<script lang="typescript">
-    import { onMount } from 'svelte'
-    import { DetailsView, ProposalsView } from './views'
-    import { selectedAccount } from '@core/account'
-    import { GovernanceRoute, governanceRoute } from '@core/router'
-    import { pollProposalsState } from '@contexts/governance/actions'
+<script lang="ts">
+    import { GovernanceDashboardView, ProposalDetailsView } from './views'
+    import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
+    import { GovernanceRoute, governanceRoute, governanceRouter } from '@core/router'
 
-    onMount(async () => {
-        await pollProposalsState()
-    })
+    $: $selectedAccountIndex !== undefined && $governanceRouter.reset()
 </script>
 
 {#if $selectedAccount}
-    {#key $selectedAccount?.index}
-        {#if $governanceRoute === GovernanceRoute.Proposals}
-            <ProposalsView />
-        {:else if $governanceRoute === GovernanceRoute.Details}
-            <DetailsView />
-        {/if}
-    {/key}
+    {#if $governanceRoute === GovernanceRoute.Proposals}
+        <GovernanceDashboardView />
+    {:else if $governanceRoute === GovernanceRoute.Details}
+        <ProposalDetailsView />
+    {/if}
 {/if}

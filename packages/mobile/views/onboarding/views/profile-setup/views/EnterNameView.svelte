@@ -1,19 +1,12 @@
-<script lang="typescript">
+<script lang="ts">
     import { onMount } from 'svelte'
-    import { OnboardingLayout } from '../../../../../components'
-    import { Button, Input, Text, TextType } from 'shared/components'
+    import { OnboardingLayout } from '@components'
+    import { Button, Input, Text, TextType } from '@ui'
     import { localize } from '@core/i18n'
     import { formatProtocolName } from '@core/network'
     import { profiles, validateProfileName } from '@core/profile'
-    import {
-        OnboardingRoute,
-        onboardingRouter,
-        profileRecoveryRouter,
-        ProfileSetupRoute,
-        profileSetupRoute,
-        profileSetupRouter,
-    } from '../../../../../lib/routers'
-    import { onboardingProfile, ProfileSetupType, updateOnboardingProfile } from '@contexts/onboarding'
+    import { profileRecoveryRouter, profileSetupRouter } from '@/routers'
+    import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
 
     const title = localize('views.onboarding.profileSetup.enterName.title', {
         values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },
@@ -27,14 +20,7 @@
 
     function onBackClick(): void {
         if ($onboardingProfile?.recoveryType) {
-            updateOnboardingProfile({ type: null, recoveryType: null })
-            $onboardingRouter.filterHistory(OnboardingRoute.ProfileRecovery)
-            $profileRecoveryRouter.reset()
-            profileSetupRoute.set(
-                $onboardingProfile?.setupType === ProfileSetupType.Recovered
-                    ? ProfileSetupRoute.SetupRecovered
-                    : ProfileSetupRoute.SetupClaimed
-            )
+            $profileRecoveryRouter.resetRecovery()
         } else {
             $profileSetupRouter.previous()
         }
@@ -58,10 +44,10 @@
 
 <OnboardingLayout {onBackClick} {title} animation="profile-desktop">
     <div slot="content">
-        <Text type={TextType.p} secondary classes="mb-4"
+        <Text type={TextType.p} secondary fontSize="15" classes="mb-4"
             >{localize('views.onboarding.profileSetup.enterName.body1')}</Text
         >
-        <Text type={TextType.p} secondary classes="mb-4">
+        <Text type={TextType.p} secondary fontSize="15" classes="mb-4">
             {localize(
                 `views.onboarding.profileSetup.enterName.body2.${$profiles?.length === 0 ? 'first' : 'nonFirst'}`
             )}

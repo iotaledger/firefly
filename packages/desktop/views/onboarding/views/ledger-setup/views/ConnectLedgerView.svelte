@@ -1,5 +1,6 @@
-<script lang="typescript">
-    import { Button, Icon, LedgerAnimation, Link, OnboardingLayout, Text } from 'shared/components'
+<script lang="ts">
+    import { Button, Icon, LedgerAnimation, Link, Text } from '@ui'
+    import { OnboardingLayout } from '@components'
     import { localize } from '@core/i18n'
     import {
         displayNotificationForLedgerProfile,
@@ -15,7 +16,7 @@
         ProfileSetupType,
         isOnboardingLedgerProfile,
     } from '@contexts/onboarding'
-    import { openPopup } from '@auxiliary/popup'
+    import { openPopup, PopupId } from '@auxiliary/popup'
 
     let isBusy = false
 
@@ -41,7 +42,7 @@
 
     function handleGuidePopup(): void {
         openPopup({
-            type: 'ledgerConnectionGuide',
+            id: PopupId.LedgerConnection,
         })
     }
 

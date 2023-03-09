@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { clickOutside } from '@core/utils'
     import { fade } from 'svelte/transition'
     import { createEventDispatcher } from 'svelte'

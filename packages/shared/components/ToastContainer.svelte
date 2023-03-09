@@ -1,9 +1,14 @@
-<script lang="typescript">
-    import { Toast } from 'shared/components'
-    import { mobile } from '@core/app'
-    import { notifications } from '@auxiliary/notification'
+<script lang="ts">
     import { fade } from 'svelte/transition'
-    import Alert from './Alert.svelte'
+
+    import { Swiper, Toast } from './'
+
+    import { notifications } from '@auxiliary/notification/stores'
+
+    export let classes: string = ''
+    export let swipe: boolean = false
+    export let fadeDuration: number = 0
+    export let showDismiss = false
 
     $: toasts = $notifications.map((notification) => ({
         type: notification.type,
@@ -11,6 +16,7 @@
         message: notification.message,
         subMessage: notification.subMessage,
         progress: notification.progress,
+        id: notification.id,
         actions: notification.actions.map((action, actionIndex) => ({
             ...action,
             onClick: () => action.callback(notification, actionIndex),
@@ -18,38 +24,38 @@
     }))
 </script>
 
-<toast-container class="flex flex-col relative z-20 {$mobile ? 'mobile-container' : 'desktop-container'}">
-    <ul class="space-y-2">
-        {#each toasts as toast}
-            <li in:fade={{ duration: 100 }} out:fade={{ duration: 100 }}>
-                {#if toast.alert}
-                    <Alert type={toast.type} message={toast.message} />
-                {:else}
-                    <Toast
-                        type={toast.type}
-                        message={toast.message}
-                        subMessage={toast.subMessage}
-                        progress={toast.progress}
-                        actions={toast.actions}
-                    />
-                {/if}
-            </li>
-        {/each}
-    </ul>
-</toast-container>
-
-<style type="text/scss">
-    .mobile-container {
-        position: absolute;
-        top: calc(env(safe-area-inset-top) * 1.2);
-        left: 20px;
-        right: 20px;
-    }
-
-    .desktop-container {
-        position: absolute;
-        right: 20px;
-        bottom: 20px;
-        width: 400px;
-    }
-</style>
+{#if toasts?.length > 0}
+    <toast-container class={`flex flex-col z-20 ${classes}`} transition:fade|local={{ duration: fadeDuration }}>
+        <ul class="space-y-2">
+            {#each toasts as toast (toast.id)}
+                <li transition:fade|local={{ duration: fadeDuration }}>
+                    {#if swipe}
+                        <Swiper toastId={toast.id}>
+                            <Toast
+                                alert
+                                type={toast.type}
+                                message={toast.message}
+                                subMessage={toast.subMessage}
+                                progress={toast.progress}
+                                actions={toast.actions}
+                                id={toast.id}
+                                {showDismiss}
+                            />
+                        </Swiper>
+                    {:else}
+                        <Toast
+                            alert
+                            type={toast.type}
+                            message={toast.message}
+                            subMessage={toast.subMessage}
+                            progress={toast.progress}
+                            actions={toast.actions}
+                            id={toast.id}
+                            {showDismiss}
+                        />
+                    {/if}
+                </li>
+            {/each}
+        </ul>
+    </toast-container>
+{/if}

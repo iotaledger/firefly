@@ -1,133 +1,19 @@
-import onboardingFeatures from './onboarding.features'
+import collectiblesFeatures from './collectibles.features'
 import developerToolsFeatures from './developer-tools.features'
+import electronFeatures from './electron.features'
 import governanceFeatures from './governance.features'
+import onboardingFeatures from './onboarding.features'
+import settingsFeatures from './settings.features'
+import walletFeatures from './wallet.features'
 
 const features = {
-    onboarding: onboardingFeatures,
+    collectibles: collectiblesFeatures,
     developerTools: developerToolsFeatures,
+    electron: electronFeatures,
     governance: governanceFeatures,
-    settings: {
-        enabled: true,
-        general: {
-            enabled: true,
-            theme: {
-                enabled: true,
-            },
-            language: {
-                enabled: true,
-            },
-            currency: {
-                enabled: true,
-            },
-            notifications: {
-                enabled: true,
-            },
-            networkStatus: {
-                enabled: true,
-            },
-            changeProfileName: {
-                enabled: true,
-            },
-        },
-        security: {
-            enabled: true,
-            exportStronghold: {
-                enabled: true,
-            },
-            appLock: {
-                enabled: true,
-            },
-            changePassword: {
-                enabled: true,
-            },
-            changePincode: {
-                enabled: false,
-            },
-            deleteProfile: {
-                enabled: true,
-            },
-            maxMediaSize: {
-                enabled: true,
-            },
-        },
-        advanced: {
-            enabled: true,
-            networkConfiguration: {
-                enabled: true,
-            },
-            deepLinks: {
-                enabled: true,
-            },
-            walletFinder: {
-                enabled: true,
-            },
-            hiddenAccounts: {
-                enabled: true,
-            },
-            errorLog: {
-                enabled: true,
-            },
-            crashReporting: {
-                enabled: true,
-            },
-            diagnostics: {
-                enabled: true,
-            },
-            migrateLedgerIndex: {
-                enabled: false,
-            },
-        },
-        helpAndInfo: {
-            enabled: true,
-            documentation: {
-                enabled: true,
-            },
-            faq: {
-                enabled: true,
-            },
-            discord: {
-                enabled: true,
-            },
-            reportAnIssue: {
-                enabled: true,
-            },
-        },
-    },
-    electron: {
-        developerTools: {
-            enabled: false,
-        },
-    },
-    wallet: {
-        enabled: true,
-        accountSummary: {
-            enabled: true,
-        },
-        sendAndReceive: {
-            enabled: true,
-            nft: {
-                enabled: true,
-            },
-        },
-        assets: {
-            enabled: true,
-            burnAsset: {
-                enabled: false,
-            },
-        },
-        activityHistory: {
-            enabled: true,
-            sync: {
-                enabled: true,
-            },
-            search: {
-                enabled: true,
-            },
-        },
-    },
-    collectibles: {
-        enabled: true,
-    },
+    onboarding: onboardingFeatures,
+    settings: settingsFeatures,
+    wallet: walletFeatures,
 }
 
 export default features

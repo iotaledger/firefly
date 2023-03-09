@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import {
         // routers
         AppSetupRouter,
@@ -7,10 +7,11 @@
         ProfileBackupRouter,
         ProfileSetupRouter,
         ProfileRecoveryRouter,
+        ShimmerClaimingRouter,
         StorageProtectionSetupRouter,
         StrongholdSetupRouter,
     } from './views'
-    import { OnboardingRoute, onboardingRoute } from '../../lib/routers'
+    import { OnboardingRoute, onboardingRoute } from '@/routers'
 </script>
 
 {#if $onboardingRoute === OnboardingRoute.AppSetup}
@@ -21,6 +22,8 @@
     <ProfileSetupRouter />
 {:else if $onboardingRoute === OnboardingRoute.ProfileBackup}
     <ProfileBackupRouter />
+{:else if $onboardingRoute === OnboardingRoute.ShimmerClaiming}
+    <ShimmerClaimingRouter />
 {:else if $onboardingRoute === OnboardingRoute.StrongholdSetup}
     <StrongholdSetupRouter />
 {:else if $onboardingRoute === OnboardingRoute.StorageProtectionSetup}
