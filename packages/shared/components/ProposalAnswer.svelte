@@ -111,6 +111,7 @@
         @apply p-3;
         @apply relative;
         @apply rounded-md;
+        @apply overflow-hidden;
 
         > * {
             z-index: 2;
