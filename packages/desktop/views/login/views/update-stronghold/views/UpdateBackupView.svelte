@@ -2,7 +2,6 @@
     import { Animation, Button, Icon, Text, TextHint, TextType } from '@ui'
     import { OnboardingLayout } from '@components'
 
-    import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { updateStrongholdRouter } from '@core/router'
 
@@ -82,7 +81,7 @@
             {localize('actions.saveBackup')}
         </Button>
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-blue dark:bg-gray-900'}">
+    <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
         <Animation classes="setup-anim-aspect-ratio" animation="backup-recovery-phrase-desktop" />
     </div>
 </OnboardingLayout>
