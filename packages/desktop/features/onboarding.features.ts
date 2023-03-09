@@ -251,7 +251,7 @@ const onboardingFeatures = {
         },
     },
     strongholdVersionCheck: {
-        enabled: true,
+        enabled: false,
     },
 }
 
