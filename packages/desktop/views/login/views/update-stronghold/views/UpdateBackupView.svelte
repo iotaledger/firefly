@@ -1,20 +1,15 @@
 <script lang="ts">
     import { Animation, Button, Icon, Text, TextHint, TextType } from '@ui'
     import { OnboardingLayout } from '@components'
-
     import { localize } from '@core/i18n'
     import { updateStrongholdRouter } from '@core/router'
-
-    import { backupInitialStronghold, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
-
+    import { backupInitialStronghold, updateOnboardingProfile } from '@contexts/onboarding'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let busy = false
+    export let changedPassword: boolean
 
-    const confirmPassword = ''
     const skipBackup = false
-
-    $: isStrongholdPasswordValid = $onboardingProfile?.strongholdPassword === confirmPassword
 
     function onAdvanceView(): void {
         updateOnboardingProfile({ mnemonic: null, strongholdPassword: null, importFile: null, importFilePath: null })
@@ -27,26 +22,20 @@
     }
 
     async function onBackupClick(): Promise<void> {
-        if (isStrongholdPasswordValid) {
-            try {
-                await backupInitialStronghold()
-                onAdvanceView()
-            } catch (err) {
-                console.error(err)
-            }
+        try {
+            await backupInitialStronghold()
+            onAdvanceView()
+        } catch (err) {
+            console.error(err)
         }
     }
 
     function onBackClick(): void {
-        if ($onboardingProfile?.recoveryType) {
-            $updateStrongholdRouter.previous()
-        } else {
-            $updateStrongholdRouter.reset()
-        }
+        $updateStrongholdRouter.previous()
     }
 </script>
 
-<OnboardingLayout {onBackClick} {busy}>
+<OnboardingLayout {onBackClick} {busy} allowBack={!changedPassword}>
     <div slot="leftpane__content">
         <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 mb-6 p-10 pb-6">
             <div class="bg-green-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
@@ -65,7 +54,7 @@
         <Button
             outline
             classes="w-full mb-4"
-            disabled={busy}
+            disabled={busy || changedPassword}
             onClick={onSkipBackupClick}
             isBusy={skipBackup && busy}
             busyMessage={localize('general.creatingProfile')}
@@ -74,7 +63,7 @@
         </Button>
         <Button
             classes="w-full"
-            disabled={!isStrongholdPasswordValid || busy}
+            disabled={busy}
             isBusy={!skipBackup && busy}
             onClick={onBackupClick}
             busyMessage={localize('general.creatingProfile')}
