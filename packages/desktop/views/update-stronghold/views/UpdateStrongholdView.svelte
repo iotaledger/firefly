@@ -1,12 +1,16 @@
 <script lang="ts">
     import { onMount } from 'svelte'
+
     import { OnboardingLayout } from '@components'
     import { Animation, Button, PasswordInput, Text } from '@ui'
     import { HTMLButtonType, TextType } from '@ui/enums'
+
     import { localize } from '@core/i18n'
-    import { unlockStronghold } from '@core/profile'
     import { updateStrongholdRouter } from '@core/router'
+
     import { onboardingProfile } from '@contexts/onboarding'
+    import { unlockStronghold } from '@core/profile'
+    import { updateStronghold } from '@core/profile-manager'
 
     export let password: string = ''
     export let isRecovery: boolean = false
@@ -16,6 +20,7 @@
     async function onSubmit(): Promise<void> {
         try {
             await unlockStronghold(password)
+            await updateStronghold(password, isRecovery)
             $updateStrongholdRouter.next()
         } catch (err) {
             passwordError = localize(err.message) ?? err.message
