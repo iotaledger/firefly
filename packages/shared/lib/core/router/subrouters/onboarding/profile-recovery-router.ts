@@ -6,7 +6,7 @@ import { Subrouter } from '../../classes'
 import { ProfileRecoveryRoute } from '../../enums'
 import { onboardingRouter } from '../../routers'
 import { STRONGHOLD_VERSION } from '@core/stronghold'
-import { UpdateStrongholdRouter, updateStrongholdRouter } from '../login/update-stronghold-router'
+import { UpdateStrongholdRouter, updateStrongholdRouter } from '../update-stronghold-router'
 
 export const profileRecoveryRoute = writable<ProfileRecoveryRoute>(null)
 export const profileRecoveryRouter = writable<ProfileRecoveryRouter>(null)

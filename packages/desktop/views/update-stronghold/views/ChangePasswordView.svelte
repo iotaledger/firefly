@@ -8,7 +8,7 @@
     import { localize } from '@core/i18n'
     import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'
     import { changePasswordAndUnlockStronghold } from '@core/profile-manager'
-    import { updateStrongholdRouter } from '@core/router/subrouters/login'
+    import { updateStrongholdRouter } from '@core/router/subrouters'
     import { PASSWORD_REASON_MAP } from '@core/stronghold'
     import { showAppNotification } from '@auxiliary/notification'
 
