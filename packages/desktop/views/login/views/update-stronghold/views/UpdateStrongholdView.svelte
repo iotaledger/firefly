@@ -6,7 +6,7 @@
     import { localize } from '@core/i18n'
     import { unlockStronghold } from '@core/profile'
     import { updateStrongholdRouter } from '@core/router'
-    import {onboardingProfile} from '@contexts/onboarding'
+    import { onboardingProfile } from '@contexts/onboarding'
 
     export let password: string = ''
     export let isRecovery: boolean = false
@@ -31,6 +31,7 @@
         if (isRecovery) {
             password = $onboardingProfile.strongholdPassword
         }
+    })
 </script>
 
 <OnboardingLayout {onBackClick}>
