@@ -1,11 +1,12 @@
 <script lang="ts">
+    import { onMount } from 'svelte'
     import { OnboardingLayout } from '@components'
     import { Animation, Button, PasswordInput, Text } from '@ui'
     import { HTMLButtonType, TextType } from '@ui/enums'
-
     import { localize } from '@core/i18n'
     import { unlockStronghold } from '@core/profile'
     import { updateStrongholdRouter } from '@core/router'
+    import {onboardingProfile} from '@contexts/onboarding'
 
     export let password: string = ''
     export let isRecovery: boolean = false
@@ -25,6 +26,11 @@
     function onBackClick(): void {
         $updateStrongholdRouter.previous()
     }
+
+    onMount(() => {
+        if (isRecovery) {
+            password = $onboardingProfile.strongholdPassword
+        }
 </script>
 
 <OnboardingLayout {onBackClick}>
@@ -38,7 +44,9 @@
             {localize('views.updateStronghold.update.body')}
         </Text>
         <form on:submit|preventDefault={onSubmit} id="update-stronghold-form">
-            <PasswordInput bind:value={password} bind:error={passwordError} autofocus showRevealToggle />
+            {#if !isRecovery}
+                <PasswordInput bind:value={password} bind:error={passwordError} autofocus showRevealToggle />
+            {/if}
         </form>
     </div>
     <div slot="leftpane__action">

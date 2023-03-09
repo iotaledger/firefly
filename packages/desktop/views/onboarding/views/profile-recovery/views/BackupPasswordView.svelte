@@ -40,7 +40,7 @@
                 $profileRecoveryRouter.next()
             } catch (err) {
                 if (err === 'hoi') {
-                    updateOnboardingProfile({ strongholdVersion: undefined })
+                    updateOnboardingProfile({ strongholdPassword, strongholdVersion: undefined })
                     $profileRecoveryRouter.next()
                 }
 
@@ -82,14 +82,9 @@
 
 <OnboardingLayout {onBackClick} {busy}>
     <div slot="title">
-        {#if $mobile}
-            <Text type="h2" classes="mb-4">
-                {`${localize('general.import')} ${localize(`general.${$onboardingProfile?.recoveryType}`)}`}
-            </Text>
-        {:else}
-            <Text type="h2" classes="mb-4">{localize('general.import')}</Text>
-            <Text type="h3" highlighted>{localize(`general.${$onboardingProfile?.recoveryType}`)}</Text>
-        {/if}
+        <Text type="h2" classes="mb-4">
+            {`${localize('general.import')} ${localize(`general.${$onboardingProfile?.recoveryType}`)}`}
+        </Text>
     </div>
     <div slot="leftpane__content">
         <Text type="p" secondary classes="mb-4"
