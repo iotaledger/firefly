@@ -7,7 +7,7 @@ import { LoginRoute } from '../enums'
 import { IRouterEvent } from '../interfaces'
 import { appRouter } from '../routers'
 import features from '../../../../../desktop/features/features'
-import { UpdateStrongholdRouter, updateStrongholdRouter } from './login/update-stronghold-router'
+import { UpdateStrongholdRouter, updateStrongholdRouter } from './update-stronghold-router'
 
 export const loginRoute = writable<LoginRoute>(null)
 export const loginRouter = writable<LoginRouter>(null)

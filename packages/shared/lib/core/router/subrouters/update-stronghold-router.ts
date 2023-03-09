@@ -1,7 +1,7 @@
 import { get, writable } from 'svelte/store'
 
-import { UpdateStrongholdRoute } from '../../enums'
-import { Subrouter } from '../../classes'
+import { UpdateStrongholdRoute } from '../enums'
+import { Subrouter } from '../classes'
 import { IRouter } from '@core/router/interfaces'
 
 export const updateStrongholdRoute = writable<UpdateStrongholdRoute>(null)

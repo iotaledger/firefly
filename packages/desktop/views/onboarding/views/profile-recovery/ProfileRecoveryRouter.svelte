@@ -16,7 +16,7 @@
         ProfileRecoveryRoute,
     } from '@core/router'
     import { showAppNotification } from '@auxiliary/notification'
-    import { UpdateStrongholdRouter } from '../../../login/views'
+    import { UpdateStrongholdRouter } from '@views'
 
     setContext<ProfileRecoveryRouter>('importRouter', $profileRecoveryRouter)
     $profileRecoveryRouter.resetRoute()

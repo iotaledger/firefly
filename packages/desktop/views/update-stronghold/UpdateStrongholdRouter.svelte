@@ -2,8 +2,8 @@
     import { ChangePasswordView, UpdateBackupView, UpdateStrongholdView } from './views'
     import { Transition } from '@ui'
 
-    import { UpdateStrongholdRoute } from '@core/router/enums/login'
-    import { updateStrongholdRoute } from '@core/router/subrouters/login'
+    import { UpdateStrongholdRoute } from '@core/router/enums'
+    import { updateStrongholdRoute } from '@core/router/subrouters'
 
     export let isRecovery = false
 
