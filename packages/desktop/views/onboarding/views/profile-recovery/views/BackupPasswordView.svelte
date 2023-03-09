@@ -39,12 +39,11 @@
                 updateOnboardingProfile({ strongholdPassword, strongholdVersion: STRONGHOLD_VERSION })
                 $profileRecoveryRouter.next()
             } catch (err) {
-                if (err === 'hoi') {
-                    updateOnboardingProfile({ strongholdVersion: undefined })
+                // TODO: update this condition when we have a better way to detect the stronghold version
+                if (err === 'OLD_STRONGHOLD_VERSION') {
+                    updateOnboardingProfile({ strongholdPassword, strongholdVersion: undefined })
                     $profileRecoveryRouter.next()
-                }
-
-                if (err instanceof CannotRestoreWithMismatchedCoinTypeError) {
+                } else if (err instanceof CannotRestoreWithMismatchedCoinTypeError) {
                     await initialiseProfileManagerFromOnboardingProfile(false)
 
                     if ($onboardingProfile?.setupType === ProfileSetupType.Claimed) {
@@ -82,14 +81,9 @@
 
 <OnboardingLayout {onBackClick} {busy}>
     <div slot="title">
-        {#if $mobile}
-            <Text type="h2" classes="mb-4">
-                {`${localize('general.import')} ${localize(`general.${$onboardingProfile?.recoveryType}`)}`}
-            </Text>
-        {:else}
-            <Text type="h2" classes="mb-4">{localize('general.import')}</Text>
-            <Text type="h3" highlighted>{localize(`general.${$onboardingProfile?.recoveryType}`)}</Text>
-        {/if}
+        <Text type="h2" classes="mb-4">
+            {`${localize('general.import')} ${localize(`general.${$onboardingProfile?.recoveryType}`)}`}
+        </Text>
     </div>
     <div slot="leftpane__content">
         <Text type="p" secondary classes="mb-4"
