@@ -13,6 +13,7 @@
     import { showAppNotification } from '@auxiliary/notification'
 
     export let currentPassword: string
+    export let isRecovery = false
 
     let password: string = ''
     let passwordError: string = ''

@@ -8,8 +8,8 @@
     import { loginRouter, updateStrongholdRouter } from '@core/router'
 
     export let password: string = ''
-
-    let passwordError: string = ''
+    export let passwordError: string = ''
+    export let isRecovery: boolean = false
 
     async function onSubmit(): Promise<void> {
         try {
