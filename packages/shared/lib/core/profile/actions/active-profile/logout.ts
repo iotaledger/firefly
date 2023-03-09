@@ -1,4 +1,3 @@
-import { closePopup } from '@auxiliary/popup'
 import { resetSelectedAccountIndex } from '@core/account'
 import {
     clearSelectedParticipationEventStatus,
@@ -48,9 +47,8 @@ export function logout(clearActiveProfile = true, _lockStronghold = true): void 
 function cleanupProfileState(clearActiveProfile: boolean): void {
     const { lastActiveAt, loggedIn, hasLoadedAccounts } = get(activeProfile)
 
-    lastActiveAt.set(new Date())
-    closePopup(true)
     loggedIn.set(false)
+    lastActiveAt.set(new Date())
     hasLoadedAccounts.set(false)
     resetSelectedAccountIndex()
 

@@ -1,6 +1,7 @@
 <script lang="ts">
     import { Transition } from 'shared/components'
-    import { EnterPinView, SelectProfileView, LoadProfileView, UpdateStrongholdRouter } from './views'
+    import { EnterPinView, SelectProfileView, LoadProfileView } from './views'
+    import { UpdateStrongholdRouter } from '@views'
     import { loginRoute, LoginRoute } from '@core/router'
 </script>
 
