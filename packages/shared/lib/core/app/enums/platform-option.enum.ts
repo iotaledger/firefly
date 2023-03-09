@@ -1,5 +1,5 @@
 export enum PlatformOption {
-    iOS = 'ios',
+    IOS = 'ios',
     Android = 'android',
     MacOs = 'darwin',
     Windows = 'win32',
