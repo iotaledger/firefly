@@ -5,11 +5,12 @@
 
     import { localize } from '@core/i18n'
     import { unlockStronghold } from '@core/profile'
-    import { loginRouter, updateStrongholdRouter } from '@core/router'
+    import { updateStrongholdRouter } from '@core/router'
 
     export let password: string = ''
-    export let passwordError: string = ''
     export let isRecovery: boolean = false
+
+    let passwordError: string = ''
 
     async function onSubmit(): Promise<void> {
         try {
@@ -22,7 +23,7 @@
     }
 
     function onBackClick(): void {
-        $loginRouter.previous()
+        $updateStrongholdRouter.previous()
     }
 </script>
 

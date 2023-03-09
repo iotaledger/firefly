@@ -31,7 +31,7 @@
             updateOnboardingProfile({ importFile, importFilePath, strongholdVersion: STRONGHOLD_VERSION })
             $profileRecoveryRouter.next()
         } catch (e) {
-            updateOnboardingProfile({ strongholdVersion: undefined })
+            updateOnboardingProfile({ importFile, importFilePath, strongholdVersion: undefined })
             $profileRecoveryRouter.next()
         }
     }

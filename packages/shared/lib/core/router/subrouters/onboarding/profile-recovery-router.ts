@@ -6,6 +6,7 @@ import { Subrouter } from '../../classes'
 import { ProfileRecoveryRoute } from '../../enums'
 import { onboardingRouter } from '../../routers'
 import { STRONGHOLD_VERSION } from '@core/stronghold'
+import { UpdateStrongholdRouter, updateStrongholdRouter } from '../login/update-stronghold-router'
 
 export const profileRecoveryRoute = writable<ProfileRecoveryRoute>(null)
 export const profileRecoveryRouter = writable<ProfileRecoveryRouter>(null)
@@ -42,6 +43,8 @@ export class ProfileRecoveryRouter extends Subrouter<ProfileRecoveryRoute> {
                     get(onboardingProfile) && get(onboardingProfile)?.strongholdVersion !== STRONGHOLD_VERSION
 
                 if (requiresUpdate) {
+                    updateStrongholdRouter.set(new UpdateStrongholdRouter(this))
+
                     nextRoute = ProfileRecoveryRoute.UpdateStronghold
                 } else {
                     nextRoute = ProfileRecoveryRoute.BackupPassword

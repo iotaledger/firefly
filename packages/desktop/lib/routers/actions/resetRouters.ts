@@ -35,7 +35,7 @@ function resetSubrouters(): void {
     get(profileSetupRouter).reset()
     get(storageProtectionSetupRouter).reset()
     get(shimmerClaimingRouter).reset()
-    get(updateStrongholdRouter).reset()
+    get(updateStrongholdRouter)?.reset() // Is potentially not initialized
 }
 
 function resetBaseRouters(): void {
