@@ -51,10 +51,14 @@
             <div class="bg-green-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
                 <Icon icon="success-check" classes="text-white" />
             </div>
-            <Text type={TextType.h2} classes="mb-5 text-center">{localize('views.updateBackup.title')}</Text>
-            <Text secondary classes="mb-2 text-center">{localize('views.updateBackup.body')}</Text>
+            <Text type={TextType.h2} classes="mb-5 text-center">
+                {localize('views.updateStronghold.updateBackup.title')}
+            </Text>
+            <Text secondary classes="mb-2 text-center">
+                {localize('views.updateStronghold.updateBackup.body')}
+            </Text>
         </div>
-        <TextHint warning text={localize('views.updateBackup.hint')} />
+        <TextHint warning text={localize('views.updateStronghold.updateBackup.hint')} />
     </div>
     <div slot="leftpane__action">
         <Button
