@@ -436,7 +436,8 @@
         },
         "login": {
             "pleaseWait": "Por favor, espera {time, plural, one {# segundo} other {# segundos}}",
-            "incorrectAttempts": "{attempts, plural, one {# intento incorrecto} other {# intentos incorrectos}}"
+            "incorrectAttempts": "{attempts, plural, one {# intento incorrecto} other {# intentos incorrectos}}",
+            "hintStronghold": "Your Stronghold's version is out of date. Please log in to update your Stronghold."
         },
         "loadProfile": {
             "loginSteps": {
@@ -586,8 +587,8 @@
                 "title": "Propuestas",
                 "voted": "Votado",
                 "successEdit": "Propuesta editada correctamente",
-                "successAdd": "Propuesta añadida correctamente",
-                "successAddAll": "Propuesta añadida correctamente a todas las cuentas",
+                "successAdd": "{numberOfProposals, select, one {Proposal} other {Proposals}} añadida(s) correctamente",
+                "successAddAll": "{numberOfProposals, select, one {Proposal} other {Proposals}} añadida(s) correctamente a todas las cuentas",
                 "successRemove": "Propuesta eliminada correctamente",
                 "emptyTitle": "No hay propuestas"
             },
@@ -721,7 +722,8 @@
         },
         "deleteAccount": {
             "title": "¿Eliminar {name}?",
-            "body": "Esta cartera no tiene historial de transacciones. Puede ser eliminada con seguridad.",
+            "body": "¿Estás seguro de que quieres eliminar esta cartera?",
+            "hint": "Nota: una vez eliminada, puede restaurar esta cartera usando el \"Buscador de Carteras\" en la configuración.",
             "typePassword": "Escribe la contraseña de tu cartera para confirmar.",
             "hideAccount": "Eliminar cartera",
             "errorTitle": "Incapaz de eliminar {name}",
@@ -2067,6 +2069,9 @@
         },
         "governance": {
             "removeProposalWarning": "Debes dejar de votar en esta propuesta antes de eliminarla."
+        },
+        "updateStronghold": {
+            "profileBadge": "Your Stronghold is out of date. Log in to update Stronghold."
         }
     },
     "exports": {

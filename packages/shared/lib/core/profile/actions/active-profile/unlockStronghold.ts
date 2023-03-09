@@ -1,10 +1,10 @@
 import { setStrongholdPassword } from '@core/profile-manager'
-import { activeProfile } from '@core/profile'
+import { activeProfile, IProfile } from '@core/profile'
 import { get } from 'svelte/store'
 import { setTimeStrongholdLastUnlocked } from '@core/profile/stores'
 
-export async function unlockStronghold(password: string): Promise<void> {
-    const { isStrongholdLocked } = get(activeProfile)
+export async function unlockStronghold(password: string, profile: IProfile = get(activeProfile)): Promise<void> {
+    const { isStrongholdLocked } = profile
     if (get(isStrongholdLocked)) {
         try {
             await setStrongholdPassword(password)

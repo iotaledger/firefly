@@ -436,7 +436,8 @@
         },
         "login": {
             "pleaseWait": "Por favor, aguarde {time, plural, one {# segundo} other {# segundos}}",
-            "incorrectAttempts": "{attempts, plural, one {# tentativa incorreta} other {# tentativas incorretas}}"
+            "incorrectAttempts": "{attempts, plural, one {# tentativa incorreta} other {# tentativas incorretas}}",
+            "hintStronghold": "Your Stronghold's version is out of date. Please log in to update your Stronghold."
         },
         "loadProfile": {
             "loginSteps": {
@@ -586,8 +587,8 @@
                 "title": "Proposals",
                 "voted": "Voted",
                 "successEdit": "Proposal successfully edited",
-                "successAdd": "Proposal successfully added",
-                "successAddAll": "Proposal successfully added to all accounts",
+                "successAdd": "{numberOfProposals, select, one {Proposal} other {Proposals}} successfully added",
+                "successAddAll": "{numberOfProposals, select, one {Proposal} other {Proposals}} successfully added to all accounts",
                 "successRemove": "Proposal successfully removed",
                 "emptyTitle": "No proposals"
             },
@@ -721,7 +722,8 @@
         },
         "deleteAccount": {
             "title": "Excluir {name}?",
-            "body": "Esta carteira não tem histórico de transações. Ela pode ser excluída com segurança.",
+            "body": "Are you sure you want to delete this wallet?",
+            "hint": "Note: once deleted, you can restore this wallet by using the \"Wallet Finder\" in the settings.",
             "typePassword": "Digite a senha da carteira para confirmar.",
             "hideAccount": "Excluir carteira",
             "errorTitle": "Não foi possível excluir {name}",
@@ -2067,6 +2069,9 @@
         },
         "governance": {
             "removeProposalWarning": "You must stop voting for this proposal before removing it."
+        },
+        "updateStronghold": {
+            "profileBadge": "Your Stronghold is out of date. Log in to update Stronghold."
         }
     },
     "exports": {

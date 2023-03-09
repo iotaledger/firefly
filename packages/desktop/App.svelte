@@ -24,6 +24,8 @@
         platform,
         Platform,
         PlatformOption,
+        registerAppEvents,
+        setAppVersionDetails,
         setPlatform,
     } from '@core/app'
     import { showAppNotification } from '@auxiliary/notification'
@@ -114,12 +116,15 @@
 
         // await pollMarketData()
 
-        /* eslint-disable no-undef */
-        // @ts-expect-error: This value is replaced by Webpack DefinePlugin
-        // if (!devMode && get(appStage) === AppStage.PROD) {
-        //     await setAppVersionDetails()
-        //     pollCheckForAppUpdate()
-        // }
+        // Used for auto updates
+        if (process.env.NODE_ENV !== 'development') {
+            registerAppEvents()
+            await setAppVersionDetails()
+            if ($appVersionDetails.upToDate === false) {
+                openPopup({ id: PopupId.CheckForUpdates })
+            }
+        }
+
         Platform.onEvent('menu-navigate-wallet', () => {
             $dashboardRouter.goTo(DashboardRoute.Wallet)
         })
@@ -133,7 +138,7 @@
         })
         Platform.onEvent('menu-check-for-update', () => {
             openPopup({
-                id: PopupId.Version,
+                id: PopupId.CheckForUpdates,
                 props: {
                     currentVersion: $appVersionDetails.currentVersion,
                 },
