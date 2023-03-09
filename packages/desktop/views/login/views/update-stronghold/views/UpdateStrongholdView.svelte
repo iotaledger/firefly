@@ -42,7 +42,7 @@
     </div>
     <div slot="leftpane__content">
         <Text secondary classes="mb-12">
-            {localize('views.updateStronghold.update.body')}
+            {localize(`views.updateStronghold.update.${isRecovery ? 'recoveryBody' : 'loginBody'}`)}
         </Text>
         <form on:submit|preventDefault={onSubmit} id="update-stronghold-form">
             {#if !isRecovery}
@@ -57,7 +57,7 @@
             classes="w-full"
             disabled={!password || !!passwordError}
         >
-            {localize('actions.continue')}
+            {localize('actions.updateAndContinue')}
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">

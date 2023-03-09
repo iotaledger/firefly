@@ -39,12 +39,11 @@
                 updateOnboardingProfile({ strongholdPassword, strongholdVersion: STRONGHOLD_VERSION })
                 $profileRecoveryRouter.next()
             } catch (err) {
-                if (err === 'hoi') {
+                // TODO: update this condition when we have a better way to detect the stronghold version
+                if (err === 'OLD_STRONGHOLD_VERSION') {
                     updateOnboardingProfile({ strongholdPassword, strongholdVersion: undefined })
                     $profileRecoveryRouter.next()
-                }
-
-                if (err instanceof CannotRestoreWithMismatchedCoinTypeError) {
+                } else if (err instanceof CannotRestoreWithMismatchedCoinTypeError) {
                     await initialiseProfileManagerFromOnboardingProfile(false)
 
                     if ($onboardingProfile?.setupType === ProfileSetupType.Claimed) {

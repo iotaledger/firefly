@@ -111,7 +111,7 @@
     </div>
     <div slot="leftpane__action" class="flex flex-col gap-4">
         <Button type={HTMLButtonType.Button} outline classes="w-full" onClick={onSkipClick}>
-            {localize('actions.skip')}
+            {localize('actions.skipAndKeep')}
         </Button>
         <Button
             form="update-stronghold-form"
