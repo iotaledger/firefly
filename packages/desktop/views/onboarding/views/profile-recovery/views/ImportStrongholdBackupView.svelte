@@ -11,7 +11,6 @@
         validateBackupFile,
     } from '@contexts/onboarding'
     import { onMount } from 'svelte'
-    import { STRONGHOLD_VERSION } from '@core/stronghold'
 
     interface FileWithPath extends File {
         path?: string
@@ -25,15 +24,10 @@
     let dropping = false
 
     function onContinueClick(): void {
-        try {
-            validateBackupFile(importFileName)
-            setProfileRecoveryTypeFromFilename(importFileName)
-            updateOnboardingProfile({ importFile, importFilePath, strongholdVersion: STRONGHOLD_VERSION })
-            $profileRecoveryRouter.next()
-        } catch (e) {
-            updateOnboardingProfile({ importFile, importFilePath, strongholdVersion: undefined })
-            $profileRecoveryRouter.next()
-        }
+        validateBackupFile(importFileName)
+        setProfileRecoveryTypeFromFilename(importFileName)
+        updateOnboardingProfile({ importFile, importFilePath })
+        $profileRecoveryRouter.next()
     }
 
     function onBackClick(): void {

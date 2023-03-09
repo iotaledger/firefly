@@ -18,6 +18,7 @@
     } from '@contexts/onboarding'
     import { showAppNotification } from '@auxiliary/notification'
     import { ClientError, CLIENT_ERROR_REGEXES } from '@core/error'
+    import { STRONGHOLD_VERSION } from '@core/stronghold/constants'
 
     export let error = ''
     export let busy = false
@@ -35,9 +36,14 @@
                     await restoreBackupFromStrongholdFile(strongholdPassword)
                 }
 
-                updateOnboardingProfile({ strongholdPassword })
+                updateOnboardingProfile({ strongholdPassword, strongholdVersion: STRONGHOLD_VERSION })
                 $profileRecoveryRouter.next()
             } catch (err) {
+                if (err === 'hoi') {
+                    updateOnboardingProfile({ strongholdVersion: undefined })
+                    $profileRecoveryRouter.next()
+                }
+
                 if (err instanceof CannotRestoreWithMismatchedCoinTypeError) {
                     await initialiseProfileManagerFromOnboardingProfile(false)
 
