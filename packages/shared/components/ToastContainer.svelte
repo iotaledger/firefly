@@ -8,6 +8,7 @@
     export let classes: string = ''
     export let swipe: boolean = false
     export let fadeDuration: number = 0
+    export let showDismiss = false
 
     $: toasts = $notifications.map((notification) => ({
         type: notification.type,
@@ -38,7 +39,7 @@
                                 progress={toast.progress}
                                 actions={toast.actions}
                                 id={toast.id}
-                                showDismiss
+                                {showDismiss}
                             />
                         </Swiper>
                     {:else}
@@ -50,7 +51,7 @@
                             progress={toast.progress}
                             actions={toast.actions}
                             id={toast.id}
-                            showDismiss
+                            {showDismiss}
                         />
                     {/if}
                 </li>
