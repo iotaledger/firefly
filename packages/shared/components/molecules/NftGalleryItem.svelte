@@ -46,7 +46,7 @@
                 nftId={nft.id}
                 bind:error
                 bind:warning
-                classes="bg-gray-200 dark:bg-gray-700 min-w-full min-h-full object-cover"
+                classes="min-w-full min-h-full object-cover"
                 translationSuffix="short"
                 loop
                 muted

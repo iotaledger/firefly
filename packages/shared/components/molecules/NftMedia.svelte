@@ -71,10 +71,6 @@
         hasError = true
         warning = localize(warn + translationSuffix)
     }
-
-    function handleOnLoad(): void {
-        isLoaded = true
-    }
 </script>
 
 {#if !url || hasError}
@@ -87,29 +83,12 @@
         {backupUrl}
         expectedType={nft.parsedMetadata.type}
         alt={`Media display for ${nft.name}`}
-        classes="hidden {classes}"
-        onLoad={handleOnLoad}
+        {autoplay}
+        {controls}
+        {loop}
+        {muted}
+        {classes}
         onError={handleLoadingError}
         onWarning={handleWarning}
     />
-
-    {#if !isLoaded}
-        <slot name="placeholder">
-            <MediaPlaceholder type={nft?.parsedMetadata?.type} {bgColor} {darkBgColor} classes="animate-pulse" />
-        </slot>
-    {:else}
-        <MediaDisplay
-            {url}
-            {backupUrl}
-            expectedType={nft.parsedMetadata.type}
-            alt={`Media display for ${nft.name}`}
-            {autoplay}
-            {controls}
-            {loop}
-            {muted}
-            {classes}
-            onError={handleLoadingError}
-            onWarning={handleWarning}
-        />
-    {/if}
 {/if}

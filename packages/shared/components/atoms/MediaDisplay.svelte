@@ -10,7 +10,7 @@
     export let alt = ''
     export let onError: (a?: string) => unknown
     export let onWarning: (a?: string) => unknown
-    export let onLoad: () => unknown
+    export let onLoad: () => unknown = () => {}
     export let autoplay: boolean = false
     export let controls: boolean = false
     export let muted: boolean = false
