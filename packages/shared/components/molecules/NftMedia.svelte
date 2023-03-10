@@ -71,6 +71,10 @@
         hasError = true
         warning = localize(warn + translationSuffix)
     }
+
+    function handleOnLoad(): void {
+        isLoaded = true
+    }
 </script>
 
 {#if !url || hasError}
@@ -87,7 +91,8 @@
         {controls}
         {loop}
         {muted}
-        {classes}
+        classes="{isLoaded ? '' : 'hidden'} {classes}"
+        onLoad={handleOnLoad}
         onError={handleLoadingError}
         onWarning={handleWarning}
     />
