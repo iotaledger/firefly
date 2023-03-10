@@ -58,7 +58,7 @@
 </script>
 
 {#if alert}
-    <Alert {type} {message} {id} showDismiss />
+    <Alert {type} {message} {id} {showDismiss} />
 {:else}
     <div class="{classes} flex flex-row items-center bg-{TOAST_STYLE[type].backgroundColor} rounded-lg px-6 py-4">
         <div
