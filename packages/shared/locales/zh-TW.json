@@ -616,6 +616,23 @@
                 "fetching": "正在取得提案資料",
                 "hintVote": "您不能投票給尚在公告期的提案，投票將於 {time} 開始。"
             }
+        },
+        "updateStronghold": {
+            "update": {
+                "title": "Update Stronghold",
+                "loginBody": "Your Stronghold's version is out of date. Provide your password to update Stronghold.",
+                "recoveryBody": "The imported Stronghold’s version is out of date, to continue we will need to update the stronghold to the latest version."
+            },
+            "updateBackup": {
+                "loginTitle": "Stronghold updated",
+                "loginBody": "It's all good now - you're running the latest Stronghold version",
+                "recoveryTitle": "Stronghold is successfully recovered and updated",
+                "recoveryBody": "You can now continue setting up your wallet",
+                "hint": "We highly recommend to delete all previous Stronghold backup files and save a new one"
+            },
+            "changePassword": {
+                "hint": "Your Stronghold was out of date and has been updated. We recommend that you change your Stronghold password."
+            }
         }
     },
     "popups": {
@@ -699,14 +716,18 @@
         "qr": {
             "title": "您的QR碼"
         },
-        "version": {
-            "title": "目前版本: {version}",
-            "upToDateTitle": "Firefly 已是最新版本",
-            "upToDateDescription": "您正在運行的 Firefly 是最新、最安全的版本。",
-            "updateAvailable": "Firefly 有可用的更新",
-            "updateDetails": "版本 {version} - {date}",
-            "noAutoUpdate": "此 Windows 版本不支援自動更新，請至 https://firefly.iota.org 下載更新檔。",
-            "preReleaseDescription": "您在運行的是Firefly的先行發布版，更新已停用。"
+        "appUpdate": {
+            "title": "Check for updates",
+            "installedVersion": "Installed version",
+            "newVerion": "New version",
+            "stage": "Stage",
+            "prod": "Production",
+            "alpha": "Alpha",
+            "beta": "Beta",
+            "releasedAt": "Released at",
+            "updateAvailable": "Update is available",
+            "updatesDisabled": "There are updates available, but in-app upgrade is disabled for your operating system.",
+            "latestInstalled": "You are running the latest and safest version"
         },
         "backupStronghold": {
             "title": "備份您的stronghold檔案",
@@ -1177,6 +1198,7 @@
         "send": "發送",
         "receive": "收款",
         "create": "建立",
+        "updateAndContinue": "Update and continue",
         "beginTransfer": "開始交易",
         "tryAgain": "重新嘗試",
         "visitDiscord": "探訪 Discord",
@@ -1232,10 +1254,11 @@
         "skip": "跳過",
         "reset": "重置",
         "downloadRecoveryKit": "保存 Recovery Kit 範本",
-        "skipBackup": "跳過文件備份",
+        "skipBackup": "Skip wallet backup",
         "finishSetup": "完成設置",
         "readDocumentation": "閱讀文檔",
         "visitFaq": "訪問常見問題解答",
+        "viewDownloads": "View downloads",
         "viewStatus": "查看狀態",
         "viewBalanceBreakdown": "檢視餘額明細",
         "showHiddenAccounts": "顯示隱藏錢包",
@@ -1289,9 +1312,10 @@
         "vote": "投票",
         "addProposal": "新增提案",
         "removeProposal": "移除提案",
-        "changeNode": "Change Node",
+        "changeNode": "Change node",
         "stopVoting": "停止投票",
-        "revote": "重新投票"
+        "revote": "重新投票",
+        "skipAndKeep": "Skip and keep old password"
     },
     "general": {
         "recipient": "接收方",
@@ -1702,6 +1726,7 @@
             "invalidFormat": "您所追蹤的 深度連結 無效",
             "invalidAmount": "深度連結中的填寫的數量不是一個整數: {amount}",
             "invalidSurplus": "深度連結中的填寫的數量不是一個數字: {surplus}",
+            "surplusNotSupported": "The surplus is only supported for native tokens",
             "governance": {
                 "unrecognizedOperation": "無法辨識的治理操作: {operation}"
             },
@@ -1785,7 +1810,8 @@
             "similar": "這和常見的密碼相似。",
             "word": "只有一個單字很容易被猜中。",
             "incorrect": "密碼不正確",
-            "length": "您的密碼長度不能超過 {length, plural, one {# 字元} other {# 字元}}。"
+            "length": "您的密碼長度不能超過 {length, plural, one {# 字元} other {# 字元}}。",
+            "sameAsOld": "Your new password must be different from your old password."
         },
         "pincode": {
             "length": "您的 PIN 碼必須符合長度 {length, plural, one {# 位數} other {# 位數}}",
@@ -2068,7 +2094,15 @@
             "quantity": "Optional parameter: The quantity of copies minted with this metadata."
         },
         "governance": {
-            "removeProposalWarning": "You must stop voting for this proposal before removing it."
+            "removeProposalWarning": "You must stop voting for this proposal before removing it.",
+            "outdatedNode": {
+                "title": "Outdated node URL",
+                "body": "The node URL for this proposal is outdated. Please update it to access the latest voting results."
+            },
+            "resultsNotAvailable": {
+                "title": "Results not available",
+                "body": "The results are no longer available on this proposal's corresponding node. Please update it to access the results."
+            }
         },
         "updateStronghold": {
             "profileBadge": "Your Stronghold is out of date. Log in to update Stronghold."
@@ -2196,6 +2230,14 @@
                 "Pending": "重新投票中",
                 "Confirmed": "重新投票",
                 "Conflicting": "重新投票失敗"
+            },
+            "proposalStatus": {
+                "upcoming": "Announcement",
+                "commencing": "Voting open",
+                "holding": "Counting",
+                "ended": "Closed",
+                "nodeOutdated": "Outdated node URL",
+                "resultsNotAvailable": "Results not available"
             }
         },
         "alias": {
@@ -2206,13 +2248,7 @@
             }
         },
         "locked": "已鎖定",
-        "smartContract": "智能合約",
-        "proposalStatus": {
-            "upcoming": "公告",
-            "commencing": "開放投票",
-            "holding": "計票中",
-            "ended": "已關閉"
-        }
+        "smartContract": "智能合約"
     },
     "menus": {
         "expirationTimePicker": {
