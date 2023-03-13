@@ -32,7 +32,7 @@
                     {#if swipe}
                         <Swiper toastId={toast.id}>
                             <Toast
-                                alert
+                                alert={toast.alert}
                                 type={toast.type}
                                 message={toast.message}
                                 subMessage={toast.subMessage}
@@ -44,7 +44,7 @@
                         </Swiper>
                     {:else}
                         <Toast
-                            alert
+                            alert={toast.alert}
                             type={toast.type}
                             message={toast.message}
                             subMessage={toast.subMessage}
