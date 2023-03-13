@@ -163,6 +163,13 @@
             return
         }
 
+        const isObject = typeof royalties === 'object' && !Array.isArray(royalties) && royalties !== null
+
+        if (!isObject) {
+            optionalInputs.royalties.error = localize('popups.mintNftForm.errors.royaltiesMustBeObject')
+            return
+        }
+
         try {
             Object.keys(royalties).forEach((key) => validateBech32Address($networkHrp, key))
         } catch (err) {
@@ -172,8 +179,8 @@
             return
         }
 
-        const isValuesValid = Object.values(royalties).every((value) => value >= 0 && value <= 1)
-        if (!isValuesValid) {
+        const areValuesValid = Object.values(royalties).every((value) => value >= 0 && value <= 1)
+        if (!areValuesValid) {
             optionalInputs.royalties.error = localize('popups.mintNftForm.errors.invalidRoyaltyValue')
             return
         }
