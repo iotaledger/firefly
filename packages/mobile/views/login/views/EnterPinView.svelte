@@ -11,7 +11,7 @@
 
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { DrawerId, drawers, openDrawer } from '@/auxiliary/drawer'
-    
+
     import { loginRouter } from '@/routers'
 
     let attempts = 0
