@@ -6,6 +6,7 @@ export * from './panes'
 export * from './popups'
 
 export { default as AccountActivity } from './AccountActivity.svelte'
+export { default as AccountSummary } from './AccountSummary.svelte'
 export { default as AccountSwitcher } from './AccountSwitcher.svelte'
 export { default as OnboardingLayout } from './OnboardingLayout.svelte'
 export { default as Proposals } from './Proposals.svelte'

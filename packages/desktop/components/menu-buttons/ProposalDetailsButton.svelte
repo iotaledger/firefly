@@ -39,11 +39,23 @@
             onClick: onRemoveProposalClick,
             variant: 'error',
             isLoading: isBusy,
-            disabled: !features.governance.removeProposals.enabled || isVotingForProposal,
+            disabled: getDisabled(proposal, isVotingForProposal),
             enableTooltipVisible: isVotingForProposal !== undefined,
             tooltip: localize('tooltips.governance.removeProposalWarning'),
         },
     ]
+
+    function getDisabled(proposal: IProposal, isVoting: boolean): boolean {
+        if (features.governance.removeProposals.enabled) {
+            if (proposal.error === undefined) {
+                return isVoting
+            } else {
+                return false
+            }
+        } else {
+            return true
+        }
+    }
 
     function onChangeNodeClick(): void {
         openPopup({

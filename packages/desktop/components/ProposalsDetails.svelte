@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte'
 
-    import { Button, KeyValueBox, Text } from '@ui'
+    import { Button, KeyValueBox, Text, ProposalsDetailsButton } from '@ui'
     import { ButtonSize, FontWeight } from '@ui/enums'
 
     import { selectedAccount } from '@core/account'
@@ -62,10 +62,11 @@
 </script>
 
 <proposals-details class="space-y-4">
-    <header-container class="flex justify-left items-center">
+    <header-container class="flex justify-between items-center">
         <Text fontSize="14" fontWeight={FontWeight.semibold}>
             {localize('views.governance.proposalsDetails.title')}
         </Text>
+        <ProposalsDetailsButton />
     </header-container>
     <ul class="space-y-2">
         {#each Object.keys(details) as detailKey}

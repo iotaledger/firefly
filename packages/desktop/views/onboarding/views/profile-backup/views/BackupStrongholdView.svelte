@@ -9,30 +9,25 @@
     export let busy = false
 
     let confirmPassword = ''
-    let skipBackup = false
+    const skipBackup = false
 
     $: isStrongholdPasswordValid = $onboardingProfile?.strongholdPassword === confirmPassword
 
-    async function onAdvanceView(): Promise<void> {
-        if (!skipBackup) {
-            await backupInitialStronghold()
-        }
-
+    function onAdvanceView(): void {
         updateOnboardingProfile({ mnemonic: null, strongholdPassword: null, importFile: null, importFilePath: null })
 
         $profileBackupRouter.next()
     }
 
-    async function onSkipBackupClick(): Promise<void> {
-        skipBackup = true
-        await onAdvanceView()
+    function onSkipBackupClick(): void {
+        onAdvanceView()
     }
 
     async function onBackupClick(): Promise<void> {
         if (isStrongholdPasswordValid) {
             try {
-                skipBackup = false
-                await onAdvanceView()
+                await backupInitialStronghold()
+                onAdvanceView()
             } catch (err) {
                 console.error(err)
             }

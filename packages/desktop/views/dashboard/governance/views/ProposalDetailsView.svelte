@@ -6,7 +6,7 @@
     import { Button, KeyValueBox, MarkdownBlock, Pane, ProposalStatusPill, Text, TextHint, TextType } from '@ui'
     import { ProposalDetailsButton, ProposalInformationPane, ProposalQuestion } from '@components'
 
-    import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
+    import { selectedAccount } from '@core/account/stores'
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
     import { networkStatus } from '@core/network/stores'
@@ -23,11 +23,10 @@
     import { ProposalStatus } from '@contexts/governance/enums'
     import {
         clearSelectedParticipationEventStatus,
-        hasPendingGovernanceTransaction,
         participationOverviewForSelectedAccount,
         selectedParticipationEventStatus,
         selectedProposal,
-        updateParticipationOverview,
+        updateParticipationOverviewForEventId,
     } from '@contexts/governance/stores'
     import {
         calculateTotalVotesForTrackedParticipations,
@@ -35,7 +34,6 @@
         isProposalVotable,
         isVotingForSelectedProposal,
     } from '@contexts/governance/utils'
-
     import { PopupId } from '@auxiliary/popup'
     import { openPopup } from '@auxiliary/popup/actions'
 
@@ -50,9 +48,9 @@
     let proposalQuestions: HTMLElement
     let isVotingForProposal: boolean = false
     let statusLoaded: boolean = false
+    let overviewLoaded: boolean = false
 
     $: selectedProposalOverview = $participationOverviewForSelectedAccount?.participations?.[$selectedProposal?.id]
-    $: overviewLoaded = !!$participationOverviewForSelectedAccount
     $: trackedParticipations = Object.values(selectedProposalOverview ?? {})
     $: currentMilestone = $networkStatus.currentMilestone
 
@@ -76,7 +74,8 @@
         !isProposalVotable($selectedProposal?.status) ||
         !hasChangedAnswers(selectedAnswerValues) ||
         hasSelectedNoAnswers(selectedAnswerValues)
-    $: isTransferring = $hasPendingGovernanceTransaction?.[$selectedAccountIndex]
+    $: hasGovernanceTransactionInProgress =
+        $selectedAccount?.hasVotingPowerTransactionInProgress || $selectedAccount?.hasVotingTransactionInProgress
     $: $selectedParticipationEventStatus, (textHintString = getTextHintString())
 
     function hasSelectedNoAnswers(_selectedAnswerValues: number[]): boolean {
@@ -186,6 +185,10 @@
     }
 
     function getTextHintString(): string {
+        if (!$selectedProposal) {
+            return ''
+        }
+
         const millis =
             milestoneToDate(
                 $networkStatus.currentMilestone,
@@ -196,10 +199,9 @@
     }
 
     onMount(async () => {
+        // Callbacks used, because we don't want to await the resolution of the promises.
         pollParticipationEventStatus($selectedProposal?.id).then(() => (statusLoaded = true))
-        // TODO: this api call gets all overviews, we need to change it so that we just get one
-        // We then need to update the latest overview manually if we perform an action
-        void updateParticipationOverview($selectedAccountIndex)
+        updateParticipationOverviewForEventId($selectedProposal?.id).then(() => (overviewLoaded = true))
         await setVotingEventPayload($selectedProposal?.id)
         await updateIsVoting()
         hasMounted = true
@@ -215,7 +217,7 @@
     <div class="w-2/5 flex flex-col space-y-4">
         <Pane classes="p-6 flex flex-col h-fit">
             <header-container class="flex justify-between items-center mb-4">
-                <ProposalStatusPill status={$selectedProposal?.status} />
+                <ProposalStatusPill proposal={$selectedProposal} />
                 <ProposalDetailsButton proposal={$selectedProposal} />
             </header-container>
             <div class="flex flex-1 flex-col justify-between">
@@ -278,13 +280,14 @@
                     outline
                     classes="w-full"
                     onClick={onStopVotingClick}
-                    disabled={!isVotingForProposal || isTransferring}
-                    isBusy={isVotingForProposal && isTransferring}>{localize('actions.stopVoting')}</Button
+                    disabled={!isVotingForProposal || hasGovernanceTransactionInProgress}
+                    isBusy={isVotingForProposal && hasGovernanceTransactionInProgress}
+                    >{localize('actions.stopVoting')}</Button
                 >
                 <Button
                     classes="w-full"
-                    disabled={isVotingDisabled || isTransferring}
-                    isBusy={isTransferring}
+                    disabled={isVotingDisabled || hasGovernanceTransactionInProgress}
+                    isBusy={hasGovernanceTransactionInProgress}
                     onClick={onVoteClick}
                 >
                     {localize('actions.vote')}

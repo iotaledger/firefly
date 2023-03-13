@@ -136,7 +136,9 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             lastActiveAt.set(new Date())
             loggedIn.set(true)
             setTimeout(() => {
-                loginRouter?.next()
+                if (!loginOptions?.avoidNextRoute) {
+                    loginRouter?.next()
+                }
                 resetLoginProgress()
             }, 500)
 

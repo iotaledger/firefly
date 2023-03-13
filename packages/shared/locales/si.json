@@ -436,7 +436,8 @@
         },
         "login": {
             "pleaseWait": "කරුණාකර රැඳී සිටින්න {time, plural, one {# දෙවැනි} other {# තත්පර}}",
-            "incorrectAttempts": "{attempts, plural, one {# වැරදි උත්සාහයක්} other {# වැරදි උත්සාහයන්}}"
+            "incorrectAttempts": "{attempts, plural, one {# වැරදි උත්සාහයක්} other {# වැරදි උත්සාහයන්}}",
+            "hintStronghold": "Your Stronghold's version is out of date. Please log in to update your Stronghold."
         },
         "loadProfile": {
             "loginSteps": {
@@ -586,8 +587,8 @@
                 "title": "Proposals",
                 "voted": "Voted",
                 "successEdit": "Proposal successfully edited",
-                "successAdd": "Proposal successfully added",
-                "successAddAll": "Proposal successfully added to all accounts",
+                "successAdd": "{numberOfProposals, select, one {Proposal} other {Proposals}} successfully added",
+                "successAddAll": "{numberOfProposals, select, one {Proposal} other {Proposals}} successfully added to all accounts",
                 "successRemove": "Proposal successfully removed",
                 "emptyTitle": "No proposals"
             },
@@ -614,6 +615,23 @@
                 },
                 "fetching": "Fetching proposal data",
                 "hintVote": "You can not vote on a proposal that is in the announcement phase, voting will open in {time}."
+            }
+        },
+        "updateStronghold": {
+            "update": {
+                "title": "Update Stronghold",
+                "loginBody": "Your Stronghold's version is out of date. Provide your password to update Stronghold.",
+                "recoveryBody": "The imported Stronghold’s version is out of date, to continue we will need to update the stronghold to the latest version."
+            },
+            "updateBackup": {
+                "loginTitle": "Stronghold updated",
+                "loginBody": "It's all good now - you're running the latest Stronghold version",
+                "recoveryTitle": "Stronghold is successfully recovered and updated",
+                "recoveryBody": "You can now continue setting up your wallet",
+                "hint": "We highly recommend to delete all previous Stronghold backup files and save a new one"
+            },
+            "changePassword": {
+                "hint": "Your Stronghold was out of date and has been updated. We recommend that you change your Stronghold password."
             }
         }
     },
@@ -698,14 +716,18 @@
         "qr": {
             "title": "ඔබේ QR කේතය"
         },
-        "version": {
-            "title": "වත්මන් අනුවාදය: {version}",
-            "upToDateTitle": "Firefly යාවත්කාලීනයි",
-            "upToDateDescription": "ඔබ Firefly හි නවතම සහ ආරක්ෂිතම අනුවාදය ධාවනය කරයි.",
-            "updateAvailable": "Firefly යාවත්කාලීන ලබා ගත හැක",
-            "updateDetails": "අනුවාදය {version} - {date}",
-            "noAutoUpdate": "මෙම Windows අනුවාදයේ ස්වයංක්‍රීය යාවත්කාලීන කිරීම අබල කර ඇත, යාවත්කාලීනය බාගැනීමට කරුණාකර https://firefly.iota.org වෙත යන්න.",
-            "preReleaseDescription": "ඔබ Firefly හි පූර්ව නිකුතු අනුවාදයක් ධාවනය කරයි. යාවත්කාල කිරීම් අබල කර ඇත."
+        "appUpdate": {
+            "title": "Check for updates",
+            "installedVersion": "Installed version",
+            "newVerion": "New version",
+            "stage": "Stage",
+            "prod": "Production",
+            "alpha": "Alpha",
+            "beta": "Beta",
+            "releasedAt": "Released at",
+            "updateAvailable": "Update is available",
+            "updatesDisabled": "There are updates available, but in-app upgrade is disabled for your operating system.",
+            "latestInstalled": "You are running the latest and safest version"
         },
         "backupStronghold": {
             "title": "Backup your stronghold file",
@@ -721,7 +743,8 @@
         },
         "deleteAccount": {
             "title": "{name}මකන්නද?",
-            "body": "මෙම මුදල් පසුම්බියට ගනුදෙනු ඉතිහාසයක් නොමැත. එය ආරක්ෂිතව මකා දැමිය හැක.",
+            "body": "Are you sure you want to delete this wallet?",
+            "hint": "Note: once deleted, you can restore this wallet by using the \"Wallet Finder\" in the settings.",
             "typePassword": "තහවුරු කිරීමට ඔබගේ පසුම්බිය මුරපදය ටයිප් කරන්න.",
             "hideAccount": "මුදල් පසුම්බිය මකන්න",
             "errorTitle": "{name}මකා දැමිය නොහැක",
@@ -1175,6 +1198,7 @@
         "send": "යවන්න",
         "receive": "ලබාගන්න",
         "create": "නිර්මාණය කරන්න",
+        "updateAndContinue": "Update and continue",
         "beginTransfer": "මාරු කිරීම ආරම්භ කරන්න",
         "tryAgain": "නැවත උත්සහා කරන්න",
         "visitDiscord": "Discord වෙත පිවිසෙන්න",
@@ -1230,10 +1254,11 @@
         "skip": "මඟ හරින්න",
         "reset": "යළි පිහිටුවන්න",
         "downloadRecoveryKit": "Recovery Kit ආකෘතිය සුරකින්න",
-        "skipBackup": "ගොනු උපස්ථය මඟ හරින්න",
+        "skipBackup": "Skip wallet backup",
         "finishSetup": "පිහිටුවීම අවසන් කරන්න",
         "readDocumentation": "ලියකියවිලි කියවන්න",
         "visitFaq": "නිතර අසන පැන වෙත පිවිසෙන්න",
+        "viewDownloads": "View downloads",
         "viewStatus": "තත්ත්වය බලන්න",
         "viewBalanceBreakdown": "View balance breakdown",
         "showHiddenAccounts": "සැඟවුණු පසුම්බි පෙන්වන්න",
@@ -1287,9 +1312,10 @@
         "vote": "Vote",
         "addProposal": "Add proposal",
         "removeProposal": "Remove proposal",
-        "changeNode": "Change Node",
+        "changeNode": "Change node",
         "stopVoting": "Stop voting",
-        "revote": "Revote"
+        "revote": "Revote",
+        "skipAndKeep": "Skip and keep old password"
     },
     "general": {
         "recipient": "Recipient",
@@ -1700,6 +1726,7 @@
             "invalidFormat": "The deep link you followed is invalid",
             "invalidAmount": "The amount in deep link is not an integer number {amount}",
             "invalidSurplus": "The surplus in deep link is not a number {surplus}",
+            "surplusNotSupported": "The surplus is only supported for native tokens",
             "governance": {
                 "unrecognizedOperation": "Unrecognized Governance operation: {operation}"
             },
@@ -1783,7 +1810,8 @@
             "similar": "මෙය පොදු මුරපදයකට සමාන වේ.",
             "word": "තනි වචනයක් අනුමාන කිරීම පහසුය.",
             "incorrect": "ඔබගේ මුරපදය වැරදියි.",
-            "length": "ඔබගේ මුරපදය වඩා දිගු විය නොහැක {length, plural, one {# ස්වභාවය} other {අක්ෂර #}}."
+            "length": "ඔබගේ මුරපදය වඩා දිගු විය නොහැක {length, plural, one {# ස්වභාවය} other {අක්ෂර #}}.",
+            "sameAsOld": "Your new password must be different from your old password."
         },
         "pincode": {
             "length": "ඔබගේ PIN අංකය විය යුතුය {length, plural, one {# ඉලක්කම්} other {ඉලක්කම් #ක්}} දිගු.",
@@ -2066,7 +2094,18 @@
             "quantity": "Optional parameter: The quantity of copies minted with this metadata."
         },
         "governance": {
-            "removeProposalWarning": "You must stop voting for this proposal before removing it."
+            "removeProposalWarning": "You must stop voting for this proposal before removing it.",
+            "outdatedNode": {
+                "title": "Outdated node URL",
+                "body": "The node URL for this proposal is outdated. Please update it to access the latest voting results."
+            },
+            "resultsNotAvailable": {
+                "title": "Results not available",
+                "body": "The results are no longer available on this proposal's corresponding node. Please update it to access the results."
+            }
+        },
+        "updateStronghold": {
+            "profileBadge": "Your Stronghold is out of date. Log in to update Stronghold."
         }
     },
     "exports": {
@@ -2191,6 +2230,14 @@
                 "Pending": "revoting",
                 "Confirmed": "revote",
                 "Conflicting": "failed to revote"
+            },
+            "proposalStatus": {
+                "upcoming": "Announcement",
+                "commencing": "Voting open",
+                "holding": "Counting",
+                "ended": "Closed",
+                "nodeOutdated": "Outdated node URL",
+                "resultsNotAvailable": "Results not available"
             }
         },
         "alias": {
@@ -2201,13 +2248,7 @@
             }
         },
         "locked": "locked",
-        "smartContract": "smart contract",
-        "proposalStatus": {
-            "upcoming": "Announcement",
-            "commencing": "Voting open",
-            "holding": "Counting",
-            "ended": "Closed"
-        }
+        "smartContract": "smart contract"
     },
     "menus": {
         "expirationTimePicker": {

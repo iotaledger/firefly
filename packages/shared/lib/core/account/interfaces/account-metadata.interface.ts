@@ -3,4 +3,5 @@ export interface IAccountMetadata {
     name: string
     color: string
     hidden: boolean
+    shouldRevote: boolean
 }
