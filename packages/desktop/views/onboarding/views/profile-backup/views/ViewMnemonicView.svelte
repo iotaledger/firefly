@@ -1,19 +1,23 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { Button, Icon, OnboardingLayout, RecoveryPhrase, Text } from 'shared/components'
-    import { mobile } from '@core/app'
+
+    import { Button, Icon, RecoveryPhrase, Text, TextType } from '@ui'
+    import { OnboardingLayout } from '@components'
+
     import { localize } from '@core/i18n'
     import { profileBackupRouter } from '@core/router'
-    import {
-        onboardingProfile,
-        generateMnemonicForOnboardingProfile,
-        updateOnboardingProfile,
-    } from '@contexts/onboarding'
     import { downloadRecoveryKit } from '@core/utils'
 
-    const busy = false
-    let hide = true
-    let hasRevealedRecoveryPhrase = false
+    import {
+        generateMnemonicForOnboardingProfile,
+        onboardingProfile,
+        updateOnboardingProfile,
+    } from '@contexts/onboarding'
+
+    import { Icon as IconEnum } from '@auxiliary/icon'
+
+    let isHidden: boolean = true
+    let hasRevealedRecoveryPhrase: boolean = false
 
     function onContinueClick(): void {
         $profileBackupRouter.next()
@@ -25,7 +29,7 @@
     }
 
     function onMnemonicVisibilityClick(): void {
-        hide = !hide
+        isHidden = !isHidden
         hasRevealedRecoveryPhrase = true
     }
 
@@ -38,67 +42,59 @@
     })
 </script>
 
-<OnboardingLayout {onBackClick} {busy} reverseContent={$mobile}>
-    <div slot="title">
-        <Text type="h2">{localize('views.onboarding.profileBackup.viewMnemonic.title')}</Text>
-    </div>
-    <div slot="leftpane__content">
-        <Text type="p" secondary classes="mb-4">{localize('views.onboarding.profileBackup.viewMnemonic.body1')}</Text>
-        <Text type="p" secondary highlighted classes="font-bold mb-4"
-            >{localize('views.onboarding.profileBackup.viewMnemonic.body2')}</Text
-        >
-        <Text type="p" secondary classes="mb-4">{localize('views.onboarding.profileBackup.viewMnemonic.body3')}</Text>
-    </div>
-    <div slot="leftpane__action" class="flex flex-col space-y-4">
-        {#if !$mobile}
-            <Button outline classes="w-full" onClick={onDownloadClick}>
-                {localize('actions.downloadRecoveryKit')}
-            </Button>
-        {/if}
+<OnboardingLayout {onBackClick}>
+    <title-container slot="title" class="block">
+        <Text type={TextType.h2}>{localize('views.onboarding.profileBackup.viewMnemonic.title')}</Text>
+    </title-container>
+    <leftpane-content slot="leftpane__content" class="block">
+        <Text secondary classes="mb-4">{localize('views.onboarding.profileBackup.viewMnemonic.body1')}</Text>
+        <Text secondary highlighted classes="font-bold mb-4">
+            {localize('views.onboarding.profileBackup.viewMnemonic.body2')}
+        </Text>
+        <Text secondary classes="mb-4">{localize('views.onboarding.profileBackup.viewMnemonic.body3')}</Text>
+    </leftpane-content>
+    <leftpane-action slot="leftpane__action" class="flex flex-col space-y-4">
+        <Button outline classes="w-full" onClick={onDownloadClick}>
+            {localize('actions.downloadRecoveryKit')}
+        </Button>
         <Button
-            disabled={!$mobile && !hasRevealedRecoveryPhrase}
+            disabled={!hasRevealedRecoveryPhrase}
             classes="w-full"
             onClick={hasRevealedRecoveryPhrase ? onContinueClick : onMnemonicVisibilityClick}
         >
-            {localize(
-                $mobile && !hasRevealedRecoveryPhrase
-                    ? 'views.onboarding.profileBackup.viewMnemonic.revealRecoveryPhrase'
-                    : 'actions.continue'
-            )}
+            {localize('actions.continue')}
         </Button>
-    </div>
-    <div slot="rightpane" class="w-full h-full flex flex-col items-center justify-center {$mobile ? 'p-0' : 'p-4'}">
+    </leftpane-action>
+    <rightpane-container slot="rightpane" class="w-full h-full flex flex-col items-center justify-center p-4">
         {#if $onboardingProfile?.mnemonic}
-            <RecoveryPhrase classes="mb-8" recoveryPhrase={$onboardingProfile?.mnemonic} {hide} />
-            {#if !$mobile}
-                {#if !hasRevealedRecoveryPhrase}
-                    {#if hide}
-                        <Button onClick={onMnemonicVisibilityClick} classes="absolute">
-                            {localize('views.onboarding.profileBackup.viewMnemonic.revealRecoveryPhrase')}
-                        </Button>
-                    {/if}
-                {:else}
-                    <button
-                        on:click={onMnemonicVisibilityClick}
-                        class="absolute top-10 right-10 flex flex-row items-center highlight"
-                        type="button"
-                    >
-                        <Text smaller overrideColor classes="text-blue-500 mr-2">
-                            {localize(
-                                `views.onboarding.profileBackup.viewMnemonic.${
-                                    hide ? 'revealRecoveryPhrase' : 'hideRecoveryPhrase'
-                                }`
-                            )}
-                        </Text>
-                        <Icon icon={hide ? 'view' : 'hide'} classes="text-blue-500" />
-                    </button>
+            <RecoveryPhrase recoveryPhrase={$onboardingProfile?.mnemonic} blurred={isHidden} />
+            {#if !hasRevealedRecoveryPhrase}
+                {#if isHidden}
+                    <Button onClick={onMnemonicVisibilityClick} classes="absolute">
+                        {localize('views.onboarding.profileBackup.viewMnemonic.revealRecoveryPhrase')}
+                    </Button>
                 {/if}
+            {:else}
+                <button
+                    on:click={onMnemonicVisibilityClick}
+                    class="absolute top-10 right-10 flex flex-row items-center highlight"
+                    type="button"
+                >
+                    <Text smaller overrideColor classes="text-blue-500 mr-2">
+                        {localize(
+                            `views.onboarding.profileBackup.viewMnemonic.${
+                                isHidden ? 'revealRecoveryPhrase' : 'hideRecoveryPhrase'
+                            }`
+                        )}
+                    </Text>
+                    <Icon icon={isHidden ? IconEnum.View : IconEnum.Hide} classes="text-blue-500" />
+                </button>
             {/if}
         {/if}
-    </div>
+    </rightpane-container>
 </OnboardingLayout>
 
-<style type="text/scss">
+<style lang="scss">
     .highlight {
         transition: filter 0.2s;
 

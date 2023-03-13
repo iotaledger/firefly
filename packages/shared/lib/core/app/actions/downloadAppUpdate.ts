@@ -33,6 +33,8 @@ function resetAppUpdateStores(): void {
 export function downloadAppUpdate(): void {
     resetAppUpdateStores()
 
+    let notificationId = undefined
+
     const unsubscribeProgress = appUpdateProgress.subscribe((progress) => {
         updateDisplayNotificationProgress(notificationId, progress)
     })
@@ -125,7 +127,7 @@ export function downloadAppUpdate(): void {
         timeout: NOTIFICATION_TIMEOUT_NEVER,
     }
 
-    const notificationId = showAppNotification(downloadingNotification)
+    notificationId = showAppNotification(downloadingNotification)
 
     void Platform.downloadAppUpdate()
 }

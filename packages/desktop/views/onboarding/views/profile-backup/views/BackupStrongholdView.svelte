@@ -1,13 +1,6 @@
 <script lang="ts">
-    import {
-        Animation,
-        Button,
-        OnboardingLayout,
-        PasswordInput,
-        Text,
-        TextType,
-        HTMLButtonType,
-    } from 'shared/components'
+    import { Animation, Button, PasswordInput, Text, TextType, HTMLButtonType } from '@ui'
+    import { OnboardingLayout } from '@components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { profileBackupRouter } from '@core/router'
@@ -16,30 +9,25 @@
     export let busy = false
 
     let confirmPassword = ''
-    let skipBackup = false
+    const skipBackup = false
 
     $: isStrongholdPasswordValid = $onboardingProfile?.strongholdPassword === confirmPassword
 
-    async function onAdvanceView(): Promise<void> {
-        if (!skipBackup) {
-            await backupInitialStronghold()
-        }
-
+    function onAdvanceView(): void {
         updateOnboardingProfile({ mnemonic: null, strongholdPassword: null, importFile: null, importFilePath: null })
 
         $profileBackupRouter.next()
     }
 
-    async function onSkipBackupClick(): Promise<void> {
-        skipBackup = true
-        await onAdvanceView()
+    function onSkipBackupClick(): void {
+        onAdvanceView()
     }
 
     async function onBackupClick(): Promise<void> {
         if (isStrongholdPasswordValid) {
             try {
-                skipBackup = false
-                await onAdvanceView()
+                await backupInitialStronghold()
+                onAdvanceView()
             } catch (err) {
                 console.error(err)
             }

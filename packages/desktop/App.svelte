@@ -24,6 +24,8 @@
         platform,
         Platform,
         PlatformOption,
+        registerAppEvents,
+        setAppVersionDetails,
         setPlatform,
     } from '@core/app'
     import { showAppNotification } from '@auxiliary/notification'
@@ -48,11 +50,16 @@
 
     const { loggedIn, hasLoadedAccounts } = $activeProfile
 
+    $: if ($activeProfile && !$loggedIn) {
+        closePopup(true)
+    }
+
     async function handleCrashReporting(sendCrashReports: boolean): Promise<void> {
         await Platform.updateAppSettings({ sendCrashReports })
     }
 
     $: void handleCrashReporting($appSettings.sendCrashReports)
+
     $: $appSettings.darkMode
         ? document.body.classList.add('scheme-dark')
         : document.body.classList.remove('scheme-dark')
@@ -85,6 +92,9 @@
     void setupI18n({ fallbackLocale: 'en', initialLocale: $appSettings.language })
 
     onMount(async () => {
+        await cleanupEmptyProfiles()
+        checkAndMigrateProfiles()
+
         setTimeout(() => {
             splash = false
             initialiseRouters()
@@ -106,12 +116,15 @@
 
         // await pollMarketData()
 
-        /* eslint-disable no-undef */
-        // @ts-expect-error: This value is replaced by Webpack DefinePlugin
-        // if (!devMode && get(appStage) === AppStage.PROD) {
-        //     await setAppVersionDetails()
-        //     pollCheckForAppUpdate()
-        // }
+        // Used for auto updates
+        if (process.env.NODE_ENV !== 'development') {
+            registerAppEvents()
+            await setAppVersionDetails()
+            if ($appVersionDetails.upToDate === false) {
+                openPopup({ id: PopupId.CheckForUpdates })
+            }
+        }
+
         Platform.onEvent('menu-navigate-wallet', () => {
             $dashboardRouter.goTo(DashboardRoute.Wallet)
         })
@@ -125,7 +138,7 @@
         })
         Platform.onEvent('menu-check-for-update', () => {
             openPopup({
-                id: PopupId.Version,
+                id: PopupId.CheckForUpdates,
                 props: {
                     currentVersion: $appVersionDetails.currentVersion,
                 },
@@ -156,9 +169,6 @@
         })
 
         Platform.onEvent('deep-link-request', showDeepLinkNotification)
-
-        await cleanupEmptyProfiles()
-        checkAndMigrateProfiles()
 
         const platform = await Platform.getOS()
         setPlatform(platform)
@@ -212,7 +222,7 @@
             {#if settings}
                 <Settings handleClose={() => (settings = false)} />
             {/if}
-            <ToastContainer />
+            <ToastContainer classes="absolute right-5 bottom-5 w-100" />
         {/if}
     </app-body>
 </app-container>

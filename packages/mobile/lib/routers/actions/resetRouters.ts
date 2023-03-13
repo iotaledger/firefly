@@ -3,7 +3,6 @@ import { get } from 'svelte/store'
 import {
     appRouter,
     appSetupRouter,
-    dashboardRouter,
     loginRouter,
     networkConfigurationSettingsRouter,
     networkSetupRouter,
@@ -22,12 +21,12 @@ import {
 export function resetRouters(): void {
     resetSubrouters()
     resetBaseRouters()
+    resetDrawersRouters()
 }
 
 function resetBaseRouters(): void {
     get(appRouter).reset()
     get(onboardingRouter).reset()
-    get(dashboardRouter).reset()
 }
 
 function resetSubrouters(): void {
@@ -49,11 +48,14 @@ function resetOnboardingSubrouters(): void {
 }
 
 function resetDashboardSubrouters(): void {
-    get(sendRouter).reset()
     get(profileRouter).reset()
     get(settingsRouter).reset()
 }
 
 function resetSettingsSubrouters(): void {
     get(networkConfigurationSettingsRouter).reset()
+}
+
+function resetDrawersRouters(): void {
+    get(sendRouter).reset()
 }

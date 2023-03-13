@@ -1,4 +1,3 @@
-import { AccountMock } from '@mocks/account.mock'
 import '@mocks/crypto.mock'
 import { MOCK_MNEMONIC, ProfileManagerMock } from '@mocks/profile-manager.mock'
 
@@ -7,15 +6,7 @@ import { get } from 'svelte/store'
 import { generateRandomId } from '@core/utils'
 
 import { destroyProfileManager } from '../actions'
-import {
-    generateMnemonic,
-    setStrongholdPassword,
-    storeMnemonic,
-    verifyMnemonic,
-    backup,
-    restoreBackup,
-    createAccount,
-} from '../api'
+import { generateMnemonic, setStrongholdPassword, storeMnemonic, verifyMnemonic, backup, restoreBackup } from '../api'
 import { profileManager } from '../stores'
 
 describe('File: api.test.ts', () => {
@@ -95,7 +86,7 @@ describe('File: api.test.ts', () => {
             spy = jest.spyOn(profileManagerMock, 'restoreBackup')
             const importFilePath = './backup.stronghold'
             await restoreBackup(importFilePath, password)
-            expect(spy).toBeCalledWith(importFilePath, password)
+            expect(spy).toBeCalledWith(importFilePath, password, true)
             expect(spy).toBeCalledTimes(1)
             spy.mockRestore()
         })

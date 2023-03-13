@@ -3,5 +3,6 @@ export enum ProfileRecoveryRoute {
     ImportStrongholdBackup = 'importStrongholdBackup',
     LedgerImport = 'ledgerImport',
     BackupPassword = 'backupPassword',
+    UpdateStronghold = 'updateStronghold',
     Success = 'success',
 }

@@ -3,8 +3,6 @@ import {
     AppRouter,
     AppSetupRouter,
     appSetupRouter,
-    dashboardRouter,
-    DashboardRouter,
     LoginRouter,
     loginRouter,
     NetworkConfigurationSettingsRouter,
@@ -41,6 +39,7 @@ export function initialiseRouters(): void {
      */
     initialiseBaseRouters()
     initialiseSubrouters()
+    initializeDrawersRouters()
 }
 
 export function initialiseOnboardingRouters(): void {
@@ -51,15 +50,10 @@ export function initialiseOnboardingRouters(): void {
 function initialiseBaseRouters(): void {
     appRouter.set(new AppRouter())
     initialiseBaseOnboardingRouters()
-    initialiseBaseDashboardRouters()
 }
 
 function initialiseBaseOnboardingRouters(): void {
     onboardingRouter.set(new OnboardingRouter())
-}
-
-function initialiseBaseDashboardRouters(): void {
-    dashboardRouter.set(new DashboardRouter())
 }
 
 function initialiseSubrouters(): void {
@@ -81,11 +75,14 @@ function initialiseOnboardingSubrouters(): void {
 }
 
 function initialiseDashboardSubrouters(): void {
-    sendRouter.set(new SendRouter())
     profileRouter.set(new ProfileRouter())
     settingsRouter.set(new SettingsRouter())
 }
 
 function initialiseSettingsSubrouters(): void {
     networkConfigurationSettingsRouter.set(new NetworkConfigurationSettingsRouter())
+}
+
+function initializeDrawersRouters(): void {
+    sendRouter.set(new SendRouter())
 }

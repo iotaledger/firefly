@@ -13,17 +13,18 @@
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
-    $: expirationTime = getFormattedTimeStamp(activity.asyncData?.expirationDate)
-    $: claimedTime = getFormattedTimeStamp(activity.asyncData?.claimedDate)
+    $: expirationTime = getFormattedTimeStamp(activity?.asyncData?.expirationDate)
+    $: claimedTime = getFormattedTimeStamp(activity?.asyncData?.claimedDate)
     $: hasStorageDeposit =
-        activity.storageDeposit || (activity.storageDeposit === 0 && activity.giftedStorageDeposit === 0)
+        activity?.storageDeposit || (activity?.storageDeposit === 0 && activity?.giftedStorageDeposit === 0)
     $: gasBudget = activity?.parsedLayer2Metadata?.gasBudget
 
-    $: formattedTransactionTime = getFormattedTimeStamp(activity.time)
-    $: formattedTimelockDate = getFormattedTimeStamp(activity.asyncData?.timelockDate)
+    $: formattedTransactionTime = getFormattedTimeStamp(activity?.time)
+    $: formattedTimelockDate = getFormattedTimeStamp(activity?.asyncData?.timelockDate)
     $: baseToken = BASE_TOKEN[$activeProfile?.networkProtocol]
-    $: formattedStorageDeposit = formatTokenAmountPrecise(activity.storageDeposit ?? 0, baseToken)
-    $: formattedGiftedStorageDeposit = formatTokenAmountPrecise(activity.giftedStorageDeposit ?? 0, baseToken)
+    $: formattedStorageDeposit = formatTokenAmountPrecise(activity?.storageDeposit ?? 0, baseToken)
+    $: formattedGiftedStorageDeposit = formatTokenAmountPrecise(activity?.giftedStorageDeposit ?? 0, baseToken)
+    $: formattedSurplus = formatTokenAmountPrecise(activity?.surplus ?? 0, baseToken)
     $: formattedGasBudget = formatTokenAmountPrecise(Number(gasBudget ?? 0), baseToken)
 
     let transactionDetailsList: IKeyValueBoxList
@@ -35,13 +36,16 @@
             transactionTime: { data: formattedTransactionTime },
         }),
         ...(activity?.metadata && {
-            metadata: { data: activity.metadata, isTooltipVisible: true },
+            metadata: { data: activity?.metadata, isTooltipVisible: true },
         }),
         ...(activity?.tag && {
-            tag: { data: activity.tag, isTooltipVisible: true },
+            tag: { data: activity?.tag, isTooltipVisible: true },
         }),
         ...(hasStorageDeposit && {
             storageDeposit: { data: formattedStorageDeposit, isTooltipVisible: true },
+        }),
+        ...(activity?.surplus && {
+            surplus: { data: formattedSurplus },
         }),
         ...(activity?.giftedStorageDeposit && {
             giftedStorageDeposit: { data: formattedGiftedStorageDeposit, isTooltipVisible: true },
@@ -77,13 +81,13 @@
     />
 {/each}
 {#if activity?.asyncData?.claimingTransactionId}
-    <KeyValueBox keyText={localize(activity.asyncData?.isClaiming ? 'general.claimingIn' : 'general.claimedIn')}>
+    <KeyValueBox keyText={localize(activity?.asyncData?.isClaiming ? 'general.claimingIn' : 'general.claimedIn')}>
         <button
             slot="value"
             class="action w-fit flex justify-start text-center font-medium text-14 text-blue-500"
             on:click={onTransactionIdClick}
         >
-            {truncateString(activity.asyncData?.claimingTransactionId, 12, 12)}
+            {truncateString(activity?.asyncData?.claimingTransactionId, 12, 12)}
         </button>
     </KeyValueBox>
 {/if}

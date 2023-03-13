@@ -77,7 +77,7 @@
     function onSendClick(): void {
         updateNewTransactionDetails({ type: NewTransactionType.TokenTransfer, assetId: asset.id })
         _closeDrawer()
-        openDrawer(DrawerId.Send)
+        openDrawer(DrawerId.Send, { fullScreen: true })
     }
 </script>
 

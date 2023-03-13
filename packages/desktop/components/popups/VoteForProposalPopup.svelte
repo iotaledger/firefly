@@ -10,7 +10,7 @@
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
     import { vote } from '@contexts/governance/actions'
     import { ABSTAIN_VOTE_VALUE } from '@contexts/governance/constants'
-    import { hasPendingGovernanceTransaction, selectedProposal } from '@contexts/governance/stores'
+    import { selectedProposal } from '@contexts/governance/stores'
     import { PopupId } from '@auxiliary/popup'
 
     export let selectedAnswerValues: number[]
@@ -21,7 +21,8 @@
     )
     $: hasVotingPower = Number($selectedAccount?.votingPower) > 0
 
-    $: isTransferring = $hasPendingGovernanceTransaction?.[$selectedAccount.index]
+    $: hasGovernanceTransactionInProgress =
+        $selectedAccount?.hasVotingPowerTransactionInProgress || $selectedAccount?.hasVotingTransactionInProgress
 
     $: numberOfAbstainedQuestions =
         selectedAnswerValues?.filter((answerValue) => answerValue === ABSTAIN_VOTE_VALUE).length ?? 0
@@ -67,10 +68,15 @@
         {/if}
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" disabled={isTransferring} outline onClick={closePopup}
+        <Button classes="w-full" disabled={hasGovernanceTransactionInProgress} outline onClick={closePopup}
             >{localize('actions.cancel')}</Button
         >
-        <Button type={HTMLButtonType.Submit} classes="w-full" disabled={isTransferring} isBusy={isTransferring}>
+        <Button
+            type={HTMLButtonType.Submit}
+            classes="w-full"
+            disabled={hasGovernanceTransactionInProgress}
+            isBusy={hasGovernanceTransactionInProgress}
+        >
             {hasVotingPower ? localize('actions.vote') : localize('views.governance.votingPower.manage')}
         </Button>
     </popup-buttons>

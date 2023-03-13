@@ -1,6 +1,16 @@
 <script lang="ts">
     import { fade } from 'svelte/transition'
-    import { Button, ButtonSize, DeveloperIndicatorPill, HR, Icon, Modal, Text, Toggle } from 'shared/components'
+    import {
+        Button,
+        ButtonSize,
+        DeveloperIndicatorPill,
+        HR,
+        Icon,
+        Modal,
+        Text,
+        TextType,
+        Toggle,
+    } from 'shared/components'
     import { localize } from '@core/i18n'
     import { LedgerConnectionState, ledgerConnectionState } from '@core/ledger'
     import { closePopup, openPopup, PopupId, popupState } from '@auxiliary/popup'
@@ -62,9 +72,9 @@
         })
     }
 
-    function onVersionUpdateClick(): void {
+    function onVersionUpdateCheckClick(): void {
         modal?.close()
-        openPopup({ id: PopupId.Version })
+        openPopup({ id: PopupId.CheckForUpdates })
     }
 </script>
 
@@ -97,15 +107,15 @@
                     <div class="flex flex-row items-center space-x-3">
                         <Icon icon="warning" boxed classes="text-blue-500" />
                         <div>
-                            <Text type="p">{localize('views.dashboard.profileModal.version.title')}</Text>
-                            <Text type="p" overrideColor classes="text-gray-500 -mt-0.5">
+                            <Text type={TextType.p}>{localize('views.dashboard.profileModal.version.title')}</Text>
+                            <Text type={TextType.p} overrideColor classes="text-gray-500 -mt-0.5">
                                 {localize('views.dashboard.profileModal.version.updateVersion', {
                                     values: { version: $appVersionDetails.newVersion },
                                 })}
                             </Text>
                         </div>
                     </div>
-                    <Button size={ButtonSize.Small} onClick={onVersionUpdateClick}>
+                    <Button size={ButtonSize.Small} onClick={onVersionUpdateCheckClick}>
                         {localize('views.dashboard.profileModal.version.button')}
                     </Button>
                 </div>
@@ -121,8 +131,8 @@
                         <div class="flex flex-row items-center space-x-3">
                             <Icon icon="warning" boxed classes="text-{backupWarningColor}-500" />
                             <div>
-                                <Text type="p">{localize('views.dashboard.profileModal.backup.title')}</Text>
-                                <Text type="p" overrideColor classes="text-gray-500 -mt-0.5">
+                                <Text type={TextType.p}>{localize('views.dashboard.profileModal.backup.title')}</Text>
+                                <Text type={TextType.p} overrideColor classes="text-gray-500 -mt-0.5">
                                     {$activeProfile?.lastStrongholdBackupTime
                                         ? localize('views.dashboard.profileModal.backup.lastBackup', {
                                               values: {
@@ -151,8 +161,8 @@
                         boxClasses="bg-blue-100 dark:bg-gray-800"
                     />
                     <div>
-                        <Text type="p">{localize('views.dashboard.profileModal.stronghold.title')}</Text>
-                        <Text type="p" overrideColor classes="text-gray-500 -mt-0.5">
+                        <Text type={TextType.p}>{localize('views.dashboard.profileModal.stronghold.title')}</Text>
+                        <Text type={TextType.p} overrideColor classes="text-gray-500 -mt-0.5">
                             {localize(
                                 `views.dashboard.profileModal.stronghold.${$isStrongholdLocked ? 'locked' : 'unlocked'}`
                             )}
@@ -176,8 +186,10 @@
                             : 'bg-gray-100 dark:bg-gray-800'}
                     />
                     <div>
-                        <Text type="p">{localize('views.dashboard.profileModal.hardware.title')}</Text>
-                        <Text type="p" overrideColor classes="text-gray-500 -mt-0.5">{ledgerConnectionText}</Text>
+                        <Text type={TextType.p}>{localize('views.dashboard.profileModal.hardware.title')}</Text>
+                        <Text type={TextType.p} overrideColor classes="text-gray-500 -mt-0.5"
+                            >{ledgerConnectionText}</Text
+                        >
                     </div>
                 </div>
             </div>

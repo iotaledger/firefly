@@ -1,20 +1,21 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { OnboardingLayout, RecoveryPhrase } from '@components'
-    import { Button, Text, TextType } from '@ui'
+
+    import { OnboardingLayout } from '@components'
+    import { Button, Text, TextType, RecoveryPhrase } from '@ui'
+
     import { localize } from '@core/i18n'
-    import { profileBackupRouter } from '@/routers'
+
     import {
-        onboardingProfile,
         generateMnemonicForOnboardingProfile,
+        onboardingProfile,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
 
-    const busy = false
-    const title = localize('views.onboarding.profileBackup.viewMnemonic.title')
+    import { profileBackupRouter } from '@/routers'
 
-    let hide = true
-    let hasRevealedRecoveryPhrase = false
+    let isHidden: boolean = true
+    let hasRevealedRecoveryPhrase: boolean = false
 
     function onContinueClick(): void {
         $profileBackupRouter.next()
@@ -26,7 +27,7 @@
     }
 
     function onMnemonicVisibilityClick(): void {
-        hide = !hide
+        isHidden = !isHidden
         hasRevealedRecoveryPhrase = true
     }
 
@@ -35,23 +36,23 @@
     })
 </script>
 
-<OnboardingLayout {onBackClick} {busy} {title}>
-    <div slot="content" class="w-full h-full flex flex-col p-0">
-        <Text type={TextType.p} secondary fontSize="15" classes="mb-4"
-            >{localize('views.onboarding.profileBackup.viewMnemonic.body1')}</Text
-        >
-        <Text type={TextType.p} secondary fontSize="15" classes="mb-4"
-            >{localize('views.onboarding.profileBackup.viewMnemonic.body3')}</Text
-        >
-        <Text type={TextType.p} secondary overrideColor color="gray-800" fontSize="15" classes="font-bold mb-4"
-            >{localize('views.onboarding.profileBackup.viewMnemonic.body2')}</Text
-        >
+<OnboardingLayout {onBackClick} title={localize('views.onboarding.profileBackup.viewMnemonic.title')}>
+    <content-container slot="content" class="w-full h-full flex flex-col p-0">
+        <Text type={TextType.p} secondary fontSize="15" classes="mb-4">
+            {localize('views.onboarding.profileBackup.viewMnemonic.body1')}
+        </Text>
+        <Text type={TextType.p} secondary fontSize="15" classes="mb-4">
+            {localize('views.onboarding.profileBackup.viewMnemonic.body3')}
+        </Text>
+        <Text type={TextType.p} secondary overrideColor color="gray-800" fontSize="15" classes="font-bold mb-4">
+            {localize('views.onboarding.profileBackup.viewMnemonic.body2')}
+        </Text>
         {#if $onboardingProfile?.mnemonic}
-            <RecoveryPhrase classes="mb-8" recoveryPhrase={$onboardingProfile?.mnemonic} {hide} />
+            <RecoveryPhrase recoveryPhrase={$onboardingProfile?.mnemonic} blurred={isHidden} boxed />
         {/if}
-    </div>
-    <div slot="footer">
-        {#if hasRevealedRecoveryPhrase === false}
+    </content-container>
+    <footer-container slot="footer" class="block">
+        {#if !hasRevealedRecoveryPhrase}
             <Button classes="w-full" onClick={hasRevealedRecoveryPhrase ? onContinueClick : onMnemonicVisibilityClick}>
                 {localize(
                     !hasRevealedRecoveryPhrase
@@ -64,5 +65,5 @@
                 {localize('actions.continue')}
             </Button>
         {/if}
-    </div>
+    </footer-container>
 </OnboardingLayout>

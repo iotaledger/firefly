@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Button, PasswordInput, Text, Error, ButtonVariant, HTMLButtonType } from 'shared/components'
+    import { Button, PasswordInput, Text, Error, ButtonVariant, HTMLButtonType, TextHint, TextType } from '@ui'
     import { closePopup } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
     import { setStrongholdPassword } from '@core/profile-manager'
@@ -39,30 +39,33 @@
 </script>
 
 <div class="mb-5">
-    <Text type="h4">
+    <Text type={TextType.h4}>
         {localize('popups.deleteAccount.title', {
             values: { name: $selectedAccount?.name },
         })}
     </Text>
 </div>
-<form on:submit|preventDefault={onDeleteClick} class="flex w-full flex-row flex-wrap">
-    <Text type="p" secondary classes="mb-5">{localize('popups.deleteAccount.body')}</Text>
-    {#if $isSoftwareProfile}
-        <Text type="p" secondary classes="mb-3">{localize('popups.deleteAccount.typePassword')}</Text>
-        <PasswordInput
-            classes="w-full mb-3"
-            bind:value={password}
-            showRevealToggle
-            placeholder={localize('general.password')}
-            autofocus
-            submitHandler={onDeleteClick}
-            disabled={isBusy}
-        />
-    {/if}
-    {#if error}
-        <Error {error} />
-    {/if}
-    <div class="flex flex-row w-full space-x-4 justify-center mt-5">
+<form on:submit|preventDefault={onDeleteClick} class="flex w-full flex-col space-y-5">
+    <Text secondary>{localize('popups.deleteAccount.body')}</Text>
+    <TextHint info text={localize('popups.deleteAccount.hint')} />
+    <div class="flex w-full flex-col space-y-3">
+        {#if $isSoftwareProfile}
+            <Text secondary>{localize('popups.deleteAccount.typePassword')}</Text>
+            <PasswordInput
+                classes="w-full"
+                bind:value={password}
+                showRevealToggle
+                placeholder={localize('general.password')}
+                autofocus
+                submitHandler={onDeleteClick}
+                disabled={isBusy}
+            />
+        {/if}
+        {#if error}
+            <Error {error} />
+        {/if}
+    </div>
+    <div class="flex flex-row w-full space-x-4 justify-center">
         <Button outline classes="w-1/2" onClick={onCancelClick} disabled={isBusy}>
             {localize('actions.cancel')}
         </Button>

@@ -436,7 +436,8 @@
         },
         "login": {
             "pleaseWait": "Veuillez patienter {time, plural, one {# seconde} other {# secondes}}",
-            "incorrectAttempts": "{attempts, plural, one {# tentative incorrecte} other {# tentatives incorrectes}}"
+            "incorrectAttempts": "{attempts, plural, one {# tentative incorrecte} other {# tentatives incorrectes}}",
+            "hintStronghold": "Votre Stronghold est obsolète. Veuillez vous connecter pour le mettre à jour."
         },
         "loadProfile": {
             "loginSteps": {
@@ -586,8 +587,8 @@
                 "title": "Proposals",
                 "voted": "Voted",
                 "successEdit": "La proposition a été mise à jour avec succès",
-                "successAdd": "Proposition ajoutée avec succès",
-                "successAddAll": "Proposition ajoutée avec succès à tous les comptes",
+                "successAdd": "{numberOfProposals, select, one {Proposal} other {Proposals}} successfully added",
+                "successAddAll": "{numberOfProposals, select, one {Proposal} other {Proposals}} successfully added to all accounts",
                 "successRemove": "Proposal successfully removed",
                 "emptyTitle": "Aucune proposition"
             },
@@ -614,6 +615,23 @@
                 },
                 "fetching": "Récupération des données de la proposition",
                 "hintVote": "Vous ne pouvez pas voter sur une proposition qui est en phase d'annonce, le vote s'ouvrira dans {time}."
+            }
+        },
+        "updateStronghold": {
+            "update": {
+                "title": "Mettre à jour Stronghold",
+                "loginBody": "Your Stronghold's version is out of date. Provide your password to update Stronghold.",
+                "recoveryBody": "The imported Stronghold’s version is out of date, to continue we will need to update the stronghold to the latest version."
+            },
+            "updateBackup": {
+                "loginTitle": "Stronghold updated",
+                "loginBody": "It's all good now - you're running the latest Stronghold version",
+                "recoveryTitle": "Stronghold is successfully recovered and updated",
+                "recoveryBody": "You can now continue setting up your wallet",
+                "hint": "We highly recommend to delete all previous Stronghold backup files and save a new one"
+            },
+            "changePassword": {
+                "hint": "Your Stronghold was out of date and has been updated. We recommend that you change your Stronghold password."
             }
         }
     },
@@ -698,14 +716,18 @@
         "qr": {
             "title": "Votre QR code"
         },
-        "version": {
-            "title": "Version actuelle : {version}",
-            "upToDateTitle": "Firefly est à jour",
-            "upToDateDescription": "Vous utilisez la dernière et la plus sûre version de Firefly.",
-            "updateAvailable": "Mise à jour de Firefly disponible",
-            "updateDetails": "Version {version} - {date}",
-            "noAutoUpdate": "La mise à jour automatique est désactivée dans cette version de Windows, veuillez vous rendre sur https://firefly.iota.org pour télécharger la mise à jour.",
-            "preReleaseDescription": "Vous utilisez une pré-version de Firefly. Les mises à jour sont désactivées."
+        "appUpdate": {
+            "title": "Vérifier les mises à jour",
+            "installedVersion": "Version installée",
+            "newVerion": "Nouvelle version",
+            "stage": "Étape",
+            "prod": "Production",
+            "alpha": "Alpha",
+            "beta": "Bêta",
+            "releasedAt": "Publié le",
+            "updateAvailable": "Mise à jour disponible",
+            "updatesDisabled": "Il y a des mises à jour disponibles, mais la mise à jour dans l'application est désactivée pour votre système d'exploitation.",
+            "latestInstalled": "Vous utilisez la dernière et la plus sûre version"
         },
         "backupStronghold": {
             "title": "Sauvegarder votre fichier stronghold",
@@ -721,7 +743,8 @@
         },
         "deleteAccount": {
             "title": "Supprimer {name} ?",
-            "body": "Ce portefeuille n'a pas d'historique de transaction. Il peut être supprimé en toute sécurité.",
+            "body": "Êtes-vous certain de vouloir supprimer ce portefeuille ?",
+            "hint": "Remarque : une fois supprimé, vous pouvez restaurer ce portefeuille en utilisant \"Rechercher portefeuille\" dans les paramètres.",
             "typePassword": "Saisissez le mot de passe de votre portefeuille pour confirmer.",
             "hideAccount": "Supprimer le portefeuille",
             "errorTitle": "Impossible de supprimer {name}",
@@ -1175,6 +1198,7 @@
         "send": "Envoyer",
         "receive": "Recevoir",
         "create": "Créer",
+        "updateAndContinue": "Update and continue",
         "beginTransfer": "Démarrer le Transfert",
         "tryAgain": "Réessayez",
         "visitDiscord": "Visitez Discord",
@@ -1230,10 +1254,11 @@
         "skip": "Passer",
         "reset": "Réinitialiser",
         "downloadRecoveryKit": "Enregistrer le modèle de kit de récupération",
-        "skipBackup": "Ignorer la sauvegarde du fichier",
+        "skipBackup": "Skip wallet backup",
         "finishSetup": "Terminer la configuration",
         "readDocumentation": "Consulter la documentation",
         "visitFaq": "Visitez la FAQ",
+        "viewDownloads": "Afficher les téléchargements",
         "viewStatus": "Voir le statut",
         "viewBalanceBreakdown": "Voir la répartition du solde",
         "showHiddenAccounts": "Afficher les portefeuilles cachés",
@@ -1287,9 +1312,10 @@
         "vote": "Vote",
         "addProposal": "Ajouter une proposition",
         "removeProposal": "Remove proposal",
-        "changeNode": "Changer de serveur",
+        "changeNode": "Changer le noeud",
         "stopVoting": "Stop voting",
-        "revote": "Voter à nouveau"
+        "revote": "Voter à nouveau",
+        "skipAndKeep": "Ignorer et conserver l'ancien mot de passe"
     },
     "general": {
         "recipient": "Destinataire",
@@ -1700,6 +1726,7 @@
             "invalidFormat": "Le lien ciblé que vous avez suivi n'est pas valide",
             "invalidAmount": "The amount in deep link is not an integer number {amount}",
             "invalidSurplus": "The surplus in deep link is not a number {surplus}",
+            "surplusNotSupported": "The surplus is only supported for native tokens",
             "governance": {
                 "unrecognizedOperation": "Unrecognized Governance operation: {operation}"
             },
@@ -1783,7 +1810,8 @@
             "similar": "Ceci est similaire à un mot de passe couramment utilisé.",
             "word": "Un simple mot est facile à deviner.",
             "incorrect": "Votre mot de passe est incorrect.",
-            "length": "Votre mot de passe ne doit pas contenir plus de {length, plural, one {# caractère} other {# caractères}}."
+            "length": "Votre mot de passe ne doit pas contenir plus de {length, plural, one {# caractère} other {# caractères}}.",
+            "sameAsOld": "Your new password must be different from your old password."
         },
         "pincode": {
             "length": "Votre code PIN doit être composé de {length, plural, one {# chiffre} other {# chiffres}}.",
@@ -1825,7 +1853,7 @@
             "wrongAddressPrefix": "Les adresses commencent par le préfixe {prefix}.",
             "wrongAddressFormat": "L'adresse n'est pas correctement formatée.",
             "invalidAddress": "Cette adresse n'est pas valide.",
-            "invalidAssetId": "The asset id is not valid.",
+            "invalidAssetId": "L'identifiant de la ressource n'est pas valide.",
             "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "Ce portefeuille a des fonds insuffisants.",
             "insufficientFundsStorageDeposit": "Fonds insuffisants pour couvrir la caution de stockage",
@@ -2066,7 +2094,18 @@
             "quantity": "Paramètre optionnel : La quantité de copies minées avec cette métadonnée."
         },
         "governance": {
-            "removeProposalWarning": "Vous devez arrêter de voter pour cette proposition avant de la supprimer."
+            "removeProposalWarning": "Vous devez arrêter de voter pour cette proposition avant de la supprimer.",
+            "outdatedNode": {
+                "title": "Outdated node URL",
+                "body": "The node URL for this proposal is outdated. Please update it to access the latest voting results."
+            },
+            "resultsNotAvailable": {
+                "title": "Results not available",
+                "body": "The results are no longer available on this proposal's corresponding node. Please update it to access the results."
+            }
+        },
+        "updateStronghold": {
+            "profileBadge": "Your Stronghold is out of date. Log in to update Stronghold."
         }
     },
     "exports": {
@@ -2191,6 +2230,14 @@
                 "Pending": "vote à nouveau",
                 "Confirmed": "voter à nouveau",
                 "Conflicting": "échec du nouveau vote"
+            },
+            "proposalStatus": {
+                "upcoming": "Announcement",
+                "commencing": "Voting open",
+                "holding": "Counting",
+                "ended": "Closed",
+                "nodeOutdated": "Outdated node URL",
+                "resultsNotAvailable": "Results not available"
             }
         },
         "alias": {
@@ -2201,13 +2248,7 @@
             }
         },
         "locked": "locked",
-        "smartContract": "smart contract",
-        "proposalStatus": {
-            "upcoming": "Announcement",
-            "commencing": "Voting open",
-            "holding": "Counting",
-            "ended": "Closed"
-        }
+        "smartContract": "smart contract"
     },
     "menus": {
         "expirationTimePicker": {

@@ -1,7 +1,6 @@
 <script lang="ts">
     import { TabPane, TogglableAssetBalanceLabel, TopBar } from '@components'
-    import { Button } from '@ui'
-    import DashboardRouter from './DashboardRouter.svelte'
+    import { Button, Idle } from '@ui'
     import { TabNavigator } from './tabs'
 
     import { selectedAccount } from '@core/account'
@@ -12,7 +11,6 @@
 
     import { DrawerId, openDrawer } from '@/auxiliary/drawer'
     import { activeDashboardTab, DASHBOARD_TAB_COMPONENT } from '@/contexts/dashboard'
-    import { DashboardRoute, dashboardRouter } from '@/routers'
     import features from '@features/features'
 
     $: activeDashboardTabComponent = DASHBOARD_TAB_COMPONENT[$activeDashboardTab]
@@ -24,10 +22,14 @@
     function onReceiveClick(): void {
         openDrawer(DrawerId.Receive)
     }
+    function handleSendClick(): void {
+        openDrawer(DrawerId.Send, { fullScreen: true })
+    }
 </script>
 
+<Idle />
 {#if $selectedAccount}
-    <div class="flex flex-col w-screen h-screen bg-gray-50 dark:bg-gray-900">
+    <dashboard-view class="flex flex-col w-screen h-screen bg-gray-50 dark:bg-gray-900">
         <div class="px-5 py-6">
             <TopBar />
             <div class="flex justify-center w-full mt-5">
@@ -41,7 +43,7 @@
             {#if features?.dashboard?.send?.enabled || features?.dashboard?.receive?.enabled}
                 <div class="flex flex-row items-center justify-center w-full space-x-2 mt-8">
                     {#if features?.dashboard?.send?.enabled}
-                        <Button classes="w-full h-10" onClick={() => $dashboardRouter.goTo(DashboardRoute.Send)}>
+                        <Button classes="w-full h-10" onClick={handleSendClick}>
                             {localize('actions.send')}
                         </Button>
                     {/if}
@@ -61,6 +63,5 @@
                 <TabNavigator />
             </div>
         {/if}
-    </div>
+    </dashboard-view>
 {/if}>
-<DashboardRouter />
