@@ -62,9 +62,9 @@
         })
     }
 
-    function handleVersionUpdateClick(): void {
+    function handleCheckForUpdatesClick(): void {
         modal?.close()
-        openPopup({ id: PopupId.Version })
+        openPopup({ id: PopupId.CheckForUpdates })
     }
 </script>
 
@@ -105,7 +105,7 @@
                             </Text>
                         </div>
                     </div>
-                    <Button size={ButtonSize.Small} onClick={handleVersionUpdateClick}>
+                    <Button size={ButtonSize.Small} onClick={handleCheckForUpdatesClick}>
                         {localize('views.dashboard.profileModal.version.button')}
                     </Button>
                 </div>

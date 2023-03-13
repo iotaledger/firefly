@@ -10,6 +10,7 @@ import {
     shimmerClaimingRouter,
     storageProtectionSetupRouter,
     strongholdSetupRouter,
+    updateStrongholdRouter,
 } from '@core/router/subrouters'
 import { get } from 'svelte/store'
 
@@ -18,7 +19,7 @@ export function getSubroutersForAppContext(context: AppContext): IRouter[] {
         case AppContext.Dashboard:
             return []
         case AppContext.Login:
-            return []
+            return [get(updateStrongholdRouter)]
         case AppContext.Onboarding:
             return [
                 get(appSetupRouter),

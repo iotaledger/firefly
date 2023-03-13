@@ -62,7 +62,7 @@
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Set up {protocol, select, IOTA {an} Shimmer {a} other {an}} {protocol} profile",
+                    "title": "Richte {protocol, select, IOTA {ein} Shimmer {ein} other {ein}} {protocol} Profil",
                     "body": "Wähle die geeignete Methode um dein {protocol} Profil einzurichten."
                 },
                 "setupNew": {
@@ -436,7 +436,8 @@
         },
         "login": {
             "pleaseWait": "Bitte warte {time, plural, one {1 Sekunde} other {# Sekunden}}",
-            "incorrectAttempts": "{attempts, plural, one {1 falscher Versuch} other {# falsche Versuche}}"
+            "incorrectAttempts": "{attempts, plural, one {1 falscher Versuch} other {# falsche Versuche}}",
+            "hintStronghold": "Deine Stronghold-Version ist veraltet. Bitte melde dich an, um deine Stronghold-Version zu aktualisieren."
         },
         "loadProfile": {
             "loginSteps": {
@@ -586,8 +587,8 @@
                 "title": "Abstimmungen",
                 "voted": "Abgestimmt",
                 "successEdit": "Vorschlag erfolgreich aktualisiert",
-                "successAdd": "Vorschlag erfolgreich hinzugefügt",
-                "successAddAll": "Abstimmung erfolgreich zu allen Konten hinzugefügt",
+                "successAdd": "{numberOfProposals, select, one {Vorschlag} other {Vorschläge}} erfolgreich hinzugefügt",
+                "successAddAll": "{numberOfProposals, select, one {Vorschlag} other {Vorschläge}} erfolgreich zu allen Konten hinzugefügt",
                 "successRemove": "Abstimmung erfolgreich entfernt",
                 "emptyTitle": "Keine Vorschläge"
             },
@@ -614,6 +615,23 @@
                 },
                 "fetching": "Abrufen der Abstimmungsdaten",
                 "hintVote": "Du kannst nicht über eine Abstimmung abstimmen, die sich noch in der Ankündigungsphase befindet. Die Abstimmung wird in {time} geöffnet."
+            }
+        },
+        "updateStronghold": {
+            "update": {
+                "title": "Stronghold aktualisieren",
+                "loginBody": "Deine Stronghold-Version ist veraltet. Bitte melde dich an, um deine Stronghold-Version zu aktualisieren.",
+                "recoveryBody": "Die importierte Version von Stronghold ist veraltet, um fortzufahren, müssen wir Stronghold auf die neueste Version aktualisieren."
+            },
+            "updateBackup": {
+                "loginTitle": "Stronghold aktualisiert",
+                "loginBody": "Es ist jetzt alles in Ordnung - du verwendest die neueste Stronghold Version",
+                "recoveryTitle": "Stronghold ist erfolgreich wiederhergestellt und aktualisiert",
+                "recoveryBody": "Du kannst nun mit der Einrichtung deiner Wallet fortfahren",
+                "hint": "Wir empfehlen dringend, alle vorherigen Stronghold-Backups zu löschen und ein neues zu speichern"
+            },
+            "changePassword": {
+                "hint": "Dein Stronghold war veraltet und wurde aktualisiert. Wir empfehlen dir, dein Stronghold-Passwort zu ändern."
             }
         }
     },
@@ -698,14 +716,18 @@
         "qr": {
             "title": "Dein QR Code"
         },
-        "version": {
-            "title": "Aktuelle Version: {version}",
-            "upToDateTitle": "Firefly ist auf dem neuesten Stand",
-            "upToDateDescription": "Du verwendest die neueste und sicherste Version von Firefly.",
-            "updateAvailable": "Firefly Update verfügbar",
-            "updateDetails": "Version {version} - {date}",
-            "noAutoUpdate": "Automatische Updates sind in dieser Windows-Version deaktiviert. Bitte besuche https://firefly.iota.org, um das Update herunterzuladen.",
-            "preReleaseDescription": "Du verwendest eine Vorabversion von Firefly.\nUpdates sind deaktiviert."
+        "appUpdate": {
+            "title": "Nach Updates suchen",
+            "installedVersion": "Installierte Version",
+            "newVerion": "Neue Version",
+            "stage": "Phase",
+            "prod": "Produktion",
+            "alpha": "Alpha",
+            "beta": "Beta",
+            "releasedAt": "Veröffentlicht am",
+            "updateAvailable": "Ein Update ist verfügbar",
+            "updatesDisabled": "Es sind Updates verfügbar, aber In-App-Upgrade ist für Ihr Betriebssystem deaktiviert.",
+            "latestInstalled": "Du verwendest die neueste und sicherste Version von Firefly"
         },
         "backupStronghold": {
             "title": "Stronghold-Backup erstellen",
@@ -721,7 +743,8 @@
         },
         "deleteAccount": {
             "title": "{name} löschen?",
-            "body": "Diese Wallet besitzt keinen Transaktionsverlauf. Sie kann bedenkenlos entfernt werden.",
+            "body": "Bist Du sicher, dass diese Wallet gelöscht werden soll?",
+            "hint": "Note: once deleted, you can restore this wallet by using the \"Wallet Finder\" in the settings.",
             "typePassword": "Gib dein Passwort zur Bestätigung ein.",
             "hideAccount": "Wallet löschen",
             "errorTitle": "{name} kann nicht gelöscht werden",
@@ -1153,7 +1176,7 @@
             "shimmer": "Ein bestehendes Shimmer Profil wiederherstellen"
         },
         "createWallet": "Ein neues {protocol} Profil erstellen",
-        "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
+        "createWalletDescription": "Erstelle ein neues Profil auf {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Unbekannt}}",
         "claimShimmer": "Shimmer Staking-Rewards beanspruchen",
         "claimShimmerDescription": "Importiere dein IOTA-Profil und beanspruche deine Shimmer Staking-Rewards",
         "createAlias": "Alias erstellen",
@@ -1175,6 +1198,7 @@
         "send": "Senden",
         "receive": "Empfangen",
         "create": "Erstellen",
+        "updateAndContinue": "Aktualisieren und fortfahren",
         "beginTransfer": "Transfer starten",
         "tryAgain": "Erneut versuchen",
         "visitDiscord": "Besuche uns auf Discord",
@@ -1234,6 +1258,7 @@
         "finishSetup": "Einrichtung abschließen",
         "readDocumentation": "Lese die Dokumentation",
         "visitFaq": "Gehe zu den FAQs",
+        "viewDownloads": "Downloads anzeigen",
         "viewStatus": "Status ansehen",
         "viewBalanceBreakdown": "Saldenaufteilung anzeigen",
         "showHiddenAccounts": "Ausgeblendete Wallets anzeigen",
@@ -1289,7 +1314,8 @@
         "removeProposal": "Abstimmung entfernen",
         "changeNode": "Node wechseln",
         "stopVoting": "Abstimmen beenden",
-        "revote": "Wiederabstimmen"
+        "revote": "Wiederabstimmen",
+        "skipAndKeep": "Überspringen und altes Passwort behalten"
     },
     "general": {
         "recipient": "Empfänger",
@@ -1631,7 +1657,7 @@
             "alias": "Alias",
             "foundry": "Foundry-Fabrik",
             "governance": "Governance",
-            "consolidation": "Consolidation"
+            "consolidation": "Konsolidierung"
         },
         "direction": {
             "label": "Richtung",
@@ -1700,6 +1726,7 @@
             "invalidFormat": "Der gewählte Deep-Link ist ungültig",
             "invalidAmount": "Der Betrag im Deeplink ist keine ganze Zahl {amount}",
             "invalidSurplus": "Der Überschuss im Deep-Link ist keine Zahl {surplus}",
+            "surplusNotSupported": "Der Überschuss wird nur für native Token unterstützt",
             "governance": {
                 "unrecognizedOperation": "Unbekannte Governance-Operation: {operation}"
             },
@@ -1783,7 +1810,8 @@
             "similar": "Deine Eingabe ähnelt einem häufig verwendeten Passwort.",
             "word": "Ein einzelnes Wort ist zu leicht zu erraten.",
             "incorrect": "Dein Passwort ist falsch.",
-            "length": "Dein Passwort darf nicht länger als {length, plural, one {1 Zeichen} other {# Zeichen}} sein."
+            "length": "Dein Passwort darf nicht länger als {length, plural, one {1 Zeichen} other {# Zeichen}} sein.",
+            "sameAsOld": "Das neue Passwort darf nicht mit dem alten Passwort übereinstimmen."
         },
         "pincode": {
             "length": "Deine PIN muss {length, plural, one {1 Ziffer} other {# Ziffern}} lang sein.",
@@ -2066,7 +2094,18 @@
             "quantity": "Optionaler Parameter: Die Anzahl der mit diesen Metadaten geprägten Kopien."
         },
         "governance": {
-            "removeProposalWarning": "Du musst das Abstimmen für diese Abstimmung stoppen, bevor du sie entfernen kannst."
+            "removeProposalWarning": "Du musst das Abstimmen für diese Abstimmung stoppen, bevor du sie entfernen kannst.",
+            "outdatedNode": {
+                "title": "Veraltete Node URL",
+                "body": "Die Node URL für diesen Vorschlag ist veraltet. Bitte aktualisiere sie, um auf die neuesten Abstimmungsergebnisse zuzugreifen."
+            },
+            "resultsNotAvailable": {
+                "title": "Ergebnisse nicht verfügbar",
+                "body": "Die Ergebnisse sind auf der mit diesem Vorschlag verknüpften Node nicht mehr verfügbar. Bitte aktualisiere sie, um auf die Ergebnisse zuzugreifen."
+            }
+        },
+        "updateStronghold": {
+            "profileBadge": "Dein Stronghold ist veraltet. Melde dich an, um Stronghold zu aktualisieren."
         }
     },
     "exports": {
@@ -2191,6 +2230,14 @@
                 "Pending": "erneutes Abstimmen",
                 "Confirmed": "wieder abstimmen",
                 "Conflicting": "erneutes Abstimmen fehlgeschlagen"
+            },
+            "proposalStatus": {
+                "upcoming": "Ankündigung",
+                "commencing": "Abstimmung verfügbar",
+                "holding": "Zählend",
+                "ended": "Geschlossen",
+                "nodeOutdated": "Veraltete Node URL",
+                "resultsNotAvailable": "Ergebnisse nicht verfügbar"
             }
         },
         "alias": {
@@ -2201,13 +2248,7 @@
             }
         },
         "locked": "gesperrt",
-        "smartContract": "Smart-Contract",
-        "proposalStatus": {
-            "upcoming": "Ankündigung",
-            "commencing": "Abstimmung verfügbar",
-            "holding": "Zählen",
-            "ended": "Geschlossen"
-        }
+        "smartContract": "Smart-Contract"
     },
     "menus": {
         "expirationTimePicker": {
