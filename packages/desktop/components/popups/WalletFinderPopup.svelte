@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onDestroy } from 'svelte'
-    import { Button, KeyValueBox, Text, TextHint, FontWeight } from 'shared/components'
+    import { Button, KeyValueBox, Text, TextHint, FontWeight, TextType } from 'shared/components'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { showAppNotification } from '@auxiliary/notification'
     import { displayNotificationForLedgerProfile, ledgerNanoStatus } from '@core/ledger'
@@ -39,10 +39,10 @@
     let isBusy = false
     let hasUsedWalletFinder = false
 
-    $: searchForBalancesOnLoad && !$isStrongholdLocked && onHandleFindBalancesClick()
+    $: searchForBalancesOnLoad && !$isStrongholdLocked && onFindBalancesClick()
     $: totalBalance = sumBalanceForAccounts($visibleActiveAccounts)
 
-    async function onHandleFindBalancesClick(): Promise<void> {
+    async function onFindBalancesClick(): Promise<void> {
         if ($isSoftwareProfile && $isStrongholdLocked) {
             openPopup({
                 id: PopupId.UnlockStronghold,
@@ -116,21 +116,21 @@
     })
 </script>
 
-<Text type="h4" fontSize="18" lineHeight="6" fontWeight={FontWeight.semibold} classes="mb-6"
+<Text type={TextType.h4} fontSize="18" lineHeight="6" fontWeight={FontWeight.semibold} classes="mb-6"
     >{localize('popups.walletFinder.title')}</Text
 >
 
 <div class="space-y-4">
-    <Text type="p" color="gray-600" fontSize="15" lineHeight="5">{localize('popups.walletFinder.body')}</Text>
+    <Text type={TextType.p} color="gray-600" fontSize="15" lineHeight="5">{localize('popups.walletFinder.body')}</Text>
 
     <div class="w-full flex-col space-y-2">
         <KeyValueBox
             keyText={localize('popups.walletFinder.accountsSearched')}
-            valueText={previousAccountGapLimit || '-'}
+            valueText={previousAccountGapLimit.toString() || '-'}
         />
         <KeyValueBox
             keyText={localize('popups.walletFinder.accountsFound')}
-            valueText={$activeAccounts.length || '0'}
+            valueText={$activeAccounts.length.toString() || '0'}
         />
         <KeyValueBox
             keyText={localize('popups.walletFinder.totalWalletBalance')}
@@ -149,7 +149,7 @@
     </Button>
     <Button
         classes="w-full"
-        onClick={onHandleFindBalancesClick}
+        onClick={onFindBalancesClick}
         disabled={isBusy}
         {isBusy}
         busyMessage={localize('actions.searching')}
