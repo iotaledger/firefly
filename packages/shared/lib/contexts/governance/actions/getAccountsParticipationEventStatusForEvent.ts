@@ -1,16 +1,13 @@
 import { get } from 'svelte/store'
-import type { ParticipationEventId, ParticipationEventStatus } from '@iota/wallet'
-import { selectedAccount } from '@core/account/stores'
-import { IAccount } from '@core/account'
 
-export async function getAccountsParticipationEventStatusForEvent(
+import type { ParticipationEventId, ParticipationEventStatus } from '@iota/wallet'
+
+import { IAccount } from '@core/account/interfaces'
+import { selectedAccount } from '@core/account/stores'
+
+export function getAccountsParticipationEventStatusForEvent(
     eventId: ParticipationEventId,
     account: IAccount = get(selectedAccount)
 ): Promise<ParticipationEventStatus> {
-    try {
-        const status = await account?.getParticipationEventStatus(eventId)
-        return status
-    } catch (err) {
-        return undefined
-    }
+    return account?.getParticipationEventStatus(eventId)
 }

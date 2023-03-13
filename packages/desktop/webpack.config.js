@@ -154,7 +154,6 @@ const rendererPlugins = [
         filename: '[name].css',
     }),
     new DefinePlugin({
-        devMode: JSON.stringify(mode === 'development'),
         'process.env.PLATFORM': JSON.stringify(process.env.PLATFORM || 'desktop'),
         'process.env.STAGE': JSON.stringify(stage),
         SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),

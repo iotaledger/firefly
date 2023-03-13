@@ -67,6 +67,10 @@ export function updateInstall() {
     autoUpdater.quitAndInstall()
 }
 
-export function updateCheck() {
-    autoUpdater.checkForUpdates()
+export async function updateCheck() {
+    try {
+        await autoUpdater.checkForUpdates()
+    } catch (error) {
+        console.error(error)
+    }
 }

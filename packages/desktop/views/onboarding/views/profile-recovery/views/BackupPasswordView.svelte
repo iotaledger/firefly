@@ -18,6 +18,7 @@
     } from '@contexts/onboarding'
     import { showAppNotification } from '@auxiliary/notification'
     import { ClientError, CLIENT_ERROR_REGEXES } from '@core/error'
+    import { STRONGHOLD_VERSION } from '@core/stronghold/constants'
 
     export let error = ''
     export let busy = false
@@ -35,10 +36,14 @@
                     await restoreBackupFromStrongholdFile(strongholdPassword)
                 }
 
-                updateOnboardingProfile({ strongholdPassword })
+                updateOnboardingProfile({ strongholdPassword, strongholdVersion: STRONGHOLD_VERSION })
                 $profileRecoveryRouter.next()
             } catch (err) {
-                if (err instanceof CannotRestoreWithMismatchedCoinTypeError) {
+                // TODO: update this condition when we have a better way to detect the stronghold version
+                if (err === 'OLD_STRONGHOLD_VERSION') {
+                    updateOnboardingProfile({ strongholdPassword, strongholdVersion: undefined })
+                    $profileRecoveryRouter.next()
+                } else if (err instanceof CannotRestoreWithMismatchedCoinTypeError) {
                     await initialiseProfileManagerFromOnboardingProfile(false)
 
                     if ($onboardingProfile?.setupType === ProfileSetupType.Claimed) {
@@ -76,14 +81,9 @@
 
 <OnboardingLayout {onBackClick} {busy}>
     <div slot="title">
-        {#if $mobile}
-            <Text type="h2" classes="mb-4">
-                {`${localize('general.import')} ${localize(`general.${$onboardingProfile?.recoveryType}`)}`}
-            </Text>
-        {:else}
-            <Text type="h2" classes="mb-4">{localize('general.import')}</Text>
-            <Text type="h3" highlighted>{localize(`general.${$onboardingProfile?.recoveryType}`)}</Text>
-        {/if}
+        <Text type="h2" classes="mb-4">
+            {`${localize('general.import')} ${localize(`general.${$onboardingProfile?.recoveryType}`)}`}
+        </Text>
     </div>
     <div slot="leftpane__content">
         <Text type="p" secondary classes="mb-4"

@@ -1,7 +1,13 @@
 <script lang="ts">
-    import { IProposal } from '@contexts/governance/interfaces'
-    import { ProposalStatusPill, ProposalStatusTimelineTooltip } from 'shared/components'
+    import {
+        ProposalStatusPill,
+        ProposalStatusTimelineTooltip,
+        OutdatedNodeTooltip,
+        ResultsNotAvailableTooltip,
+    } from 'shared/components'
     import { Position } from 'shared/components/enums'
+    import { IProposal } from '@contexts/governance/interfaces'
+    import { ProposalError } from '../lib/contexts/governance'
 
     export let proposal: IProposal
     export let position: Position = Position.Right
@@ -15,8 +21,21 @@
 </script>
 
 <div bind:this={anchor} on:mouseenter={() => showTooltip(true)} on:mouseleave={() => showTooltip(false)}>
-    <ProposalStatusPill status={proposal?.status} />
+    <ProposalStatusPill {proposal} />
 </div>
 {#if isTooltipVisible}
-    <ProposalStatusTimelineTooltip bind:anchor milestones={proposal.milestones} status={proposal?.status} {position} />
+    {#if proposal?.error}
+        {#if proposal?.error === ProposalError.NodeOutdated}
+            <OutdatedNodeTooltip bind:anchor {position} />
+        {:else if proposal?.error === ProposalError.ResultsNotAvailable}
+            <ResultsNotAvailableTooltip bind:anchor {position} />
+        {/if}
+    {:else}
+        <ProposalStatusTimelineTooltip
+            bind:anchor
+            milestones={proposal.milestones}
+            status={proposal?.status}
+            {position}
+        />
+    {/if}
 {/if}
