@@ -639,10 +639,10 @@
   dependencies:
     big-integer "^1.6.51"
 
-"@iota/wallet@2.0.3-rc.25":
-  version "2.0.3-rc.25"
-  resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.3-rc.25.tgz#ff401a132fc74301fee7de1f46a5cf2ae66b4139"
-  integrity sha512-MTvBh90JGiH0vKh8AqHGyDqEHei9l3mzVPmZMHojyg7ATmxuyr+WVtxv417UF3Cxff90t7CmNHzYZqdgwxWhrQ==
+"@iota/wallet@2.0.3-rc.26":
+  version "2.0.3-rc.26"
+  resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.3-rc.26.tgz#05b0aeb575372adbd401e9a161ef86e4971bd951"
+  integrity sha512-/Mkhe3otgZ6ckySuTZx/+TNz4e0KJ4gOVHFYShmwB09VRdold87/DcQ8OYvsrN/uncExeWoib86nFOXWzxd04Q==
   dependencies:
     "@iota/types" "^1.0.0-beta.15"
     cargo-cp-artifact "^0.1.6"
