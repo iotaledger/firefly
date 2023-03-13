@@ -228,7 +228,7 @@
                         color="green"
                         disabled={disableToggleGift}
                         active={giftStorageDeposit}
-                        handleClick={toggleGiftStorageDeposit}
+                        onClick={toggleGiftStorageDeposit}
                     />
                 </KeyValueBox>
             {/if}

@@ -21,7 +21,7 @@
     let initials: string
     $: initials = getInitials($activeProfile.name, 1)
 
-    function handleLogoutClick(): void {
+    function onLogoutClick(): void {
         logout()
     }
     function onProfileLockButtonClick(): void {
@@ -61,7 +61,7 @@
                 {$activeProfile.name}
             </Text>
             <div class="flex justify-center">
-                <button class="inline-flex p-1" on:click={handleLogoutClick}>
+                <button class="inline-flex p-1" on:click={onLogoutClick}>
                     <Icon width="16" height="16" icon={IconTypes.Logout} classes="text-blue-500 my-auto" />
                     <Text type={TextType.p} overrideColor classes="text-blue-500 pl-1">
                         {localize('views.dashboard.profileModal.logout')}

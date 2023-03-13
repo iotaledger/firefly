@@ -20,7 +20,7 @@
         hasVoted = isVotingForProposal(proposal?.id)
     }
 
-    function handleProposalClick(): void {
+    function onProposalClick(): void {
         $selectedProposalId = proposal?.id
         $governanceRouter.goTo(GovernanceRoute.Details)
     }
@@ -29,8 +29,8 @@
 </script>
 
 <proposal-card
-    on:click={handleProposalClick}
-    on:keydown={(e) => e.key === 'Enter' && handleProposalClick()}
+    on:click={onProposalClick}
+    on:keydown={(e) => e.key === 'Enter' && onProposalClick()}
     class="flex flex-col p-6 border border-solid border-gray-200 dark:border-transparent rounded-xl cursor-pointer h-fit shadow-elevation-1 focus:shadow-inner
     {proposal?.status === ProposalStatus.Ended ? 'bg-transparent' : 'bg-white dark:bg-gray-850'}"
 >

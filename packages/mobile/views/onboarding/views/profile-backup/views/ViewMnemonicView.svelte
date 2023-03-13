@@ -20,7 +20,7 @@
         $profileBackupRouter.next()
     }
 
-    function handleBackClick(): void {
+    function onBackClick(): void {
         updateOnboardingProfile({ mnemonic: null })
         $profileBackupRouter.previous()
     }
@@ -35,7 +35,7 @@
     })
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick} {busy} {title}>
+<OnboardingLayout {onBackClick} {busy} {title}>
     <div slot="content" class="w-full h-full flex flex-col p-0">
         <Text type={TextType.p} secondary fontSize="15" classes="mb-4"
             >{localize('views.onboarding.profileBackup.viewMnemonic.body1')}</Text

@@ -24,7 +24,7 @@
     $: allowDisableOrRemove = node?.disabled || clientOptions?.nodes?.filter((node) => !node.disabled)?.length > 1
     $: isPrimary = clientOptions?.primaryNode?.url === node.url
 
-    function handleEditNodeDetailsClick(): void {
+    function onEditNodeDetailsClick(): void {
         openPopup({
             id: PopupId.AddNode,
             props: {
@@ -38,7 +38,7 @@
         modal?.toggle()
     }
 
-    async function handleTogglePrimaryNodeClick(): Promise<void> {
+    async function onTogglePrimaryNodeClick(): Promise<void> {
         if (isPrimary) {
             openPopup({
                 id: PopupId.Confirmation,
@@ -62,7 +62,7 @@
         modal?.toggle()
     }
 
-    function handleRemoveNodeClick(): void {
+    function onRemoveNodeClick(): void {
         openPopup({
             id: PopupId.Confirmation,
             props: {
@@ -79,7 +79,7 @@
         modal?.toggle()
     }
 
-    function handleToggleDisabledNodeClick(): void {
+    function onToggleDisabledNodeClick(): void {
         if (node.disabled) {
             void toggleDisabledNodeInClientOptions(node)
         } else {
@@ -104,24 +104,24 @@
 <Modal bind:this={modal} size="small">
     <MenuItem
         title={localize('views.settings.configureNodeList.editDetails')}
-        onClick={handleEditNodeDetailsClick}
+        onClick={onEditNodeDetailsClick}
         disabled={isOfficialNode}
     />
     <MenuItem
         disabled={node?.disabled}
         title={localize(`views.settings.configureNodeList.${isPrimary ? 'unsetAsPrimary' : 'setAsPrimary'}`)}
-        onClick={handleTogglePrimaryNodeClick}
+        onClick={onTogglePrimaryNodeClick}
     />
     <MenuItem
         disabled={!allowDisableOrRemove}
         title={localize(`views.settings.configureNodeList.${node.disabled ? 'include' : 'exclude'}Node`)}
-        onClick={handleToggleDisabledNodeClick}
+        onClick={onToggleDisabledNodeClick}
     />
     <HR />
     <MenuItem
         disabled={!allowDisableOrRemove}
         title={localize('views.settings.configureNodeList.removeNode')}
-        onClick={handleRemoveNodeClick}
+        onClick={onRemoveNodeClick}
         variant="error"
     />
 </Modal>

@@ -85,7 +85,7 @@
                         color="green"
                         disabled={$newTransactionDetails.disableToggleGift}
                         active={$newTransactionDetails.giftStorageDeposit}
-                        handleClick={toggleGiftStorageDeposit}
+                        onClick={toggleGiftStorageDeposit}
                     />
                 </KeyValueBox>
             {/if}

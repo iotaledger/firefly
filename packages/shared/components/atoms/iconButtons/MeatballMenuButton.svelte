@@ -7,7 +7,7 @@
 
     let active = false
 
-    function handleClick(event: any): void {
+    function onButtonClick(event: any): void {
         active = !active
         onClick(event)
     }
@@ -18,7 +18,7 @@
 </script>
 
 <button
-    on:click|stopPropagation={handleClick}
+    on:click|stopPropagation={onButtonClick}
     use:clickOutside
     on:clickOutside={onClickOutside}
     class="

@@ -94,12 +94,12 @@
         }
     }
 
-    function handleNodeInfoTabClick(tab: NodeInfoTab): void {
+    function onNodeInfoTabClick(tab: NodeInfoTab): void {
         if (!tab) return
         nodeInfoTab = tab
     }
 
-    function handleCopyAllInformationClick(): void {
+    function onCopyAllInformationClick(): void {
         if (!nodeInfo) return
         setClipboard(JSON.stringify(nodeInfo, null, '\t'))
     }
@@ -124,7 +124,7 @@
             <div class="flex flex-row">
                 {#key nodeInfoTab}
                     {#each Object.values(NodeInfoTab) as _nodeInfoTab}
-                        <button on:click={() => handleNodeInfoTabClick(_nodeInfoTab)} class="mr-3">
+                        <button on:click={() => onNodeInfoTabClick(_nodeInfoTab)} class="mr-3">
                             <Text
                                 fontSize="sm"
                                 classes="font-11 hover:text-blue-500"
@@ -173,7 +173,7 @@
                 busyMessage={localize('popups.node.loadingNodeInfo')}
                 classes="w-full"
                 outline
-                onClick={handleCopyAllInformationClick}
+                onClick={onCopyAllInformationClick}
             >
                 {localize('actions.copyAllInformation')}
             </Button>

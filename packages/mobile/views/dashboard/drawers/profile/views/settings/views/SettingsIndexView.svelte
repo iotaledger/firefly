@@ -29,7 +29,7 @@
         },
     }
 
-    function handleSettingClick(route: SettingsRoute | string, external: boolean = false): void {
+    function onSettingClick(route: SettingsRoute | string, external: boolean = false): void {
         if (external) {
             if (typeof route === 'string') {
                 openUrlInBrowser(route)
@@ -58,10 +58,7 @@
                             <button
                                 class="p-2 w-full flex flex-row items-center space-x-4"
                                 on:click={() =>
-                                    handleSettingClick(
-                                        setting?.external ? setting?.url : setting.route,
-                                        setting?.external
-                                    )}
+                                    onSettingClick(setting?.external ? setting?.url : setting.route, setting?.external)}
                             >
                                 <Icon width="18" height="18" icon={setting.icon} classes="text-blue-500" />
                                 <Text type={TextType.p} secondary fontSize="15">{localize(setting.name)}</Text>

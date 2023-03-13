@@ -33,17 +33,17 @@
         updateLedgerConnectionText()
     }
 
-    function handleSettingsClick(): void {
+    function onSettingsClick(): void {
         closePopup()
         $routerManager.openSettings()
         modal?.close()
     }
 
-    function handleLogoutClick(): void {
+    function onLogoutClick(): void {
         logout()
     }
 
-    function handleStrongholdToggleClick(): void {
+    function onStrongholdToggleClick(): void {
         if ($isStrongholdLocked) {
             checkOrUnlockStronghold()
         } else {
@@ -159,11 +159,7 @@
                         </Text>
                     </div>
                 </div>
-                <Toggle
-                    active={$isStrongholdLocked}
-                    handleClick={() => handleStrongholdToggleClick()}
-                    classes="cursor-pointer"
-                />
+                <Toggle active={$isStrongholdLocked} onClick={onStrongholdToggleClick} classes="cursor-pointer" />
             </div>
             <HR />
         {:else}
@@ -188,7 +184,7 @@
             <HR />
         {/if}
         <button
-            on:click={() => handleSettingsClick()}
+            on:click={() => onSettingsClick()}
             class="group flex flex-row space-x-3 justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full"
         >
             <Icon icon="settings" classes="text-gray-500 group-hover:text-blue-500" />
@@ -197,7 +193,7 @@
             </Text>
         </button>
         <button
-            on:click={() => handleLogoutClick()}
+            on:click={() => onLogoutClick()}
             class="group flex flex-row space-x-3 justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full"
         >
             <Icon icon="logout" classes="text-gray-500 group-hover:text-blue-500" />

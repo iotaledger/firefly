@@ -21,7 +21,7 @@
             >{localize(filterUnit.labelKey ?? filterUnit.localeKey + '.label')}</Text
         >
         <Toggle
-            handleClick={() => (filterUnit.active = !filterUnit.active)}
+            onClick={() => (filterUnit.active = !filterUnit.active)}
             bind:active={filterUnit.active}
             color="green"
         />

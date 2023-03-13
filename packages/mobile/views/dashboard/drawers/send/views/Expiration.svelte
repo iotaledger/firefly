@@ -18,7 +18,7 @@
     const dateIn1Week = new Date(DATE_NOW)
     dateIn1Week.setDate(dateIn1Week.getDate() + 7)
 
-    function handleChooseExpirationTimeClick(_expiration: ExpirationTime): void {
+    function onChooseExpirationTimeClick(_expiration: ExpirationTime): void {
         let expirationDate: Date
         switch (_expiration) {
             case ExpirationTime.OneHour:
@@ -43,16 +43,16 @@
 </script>
 
 <div class="w-full flex flex-col space-y-4">
-    <Button outline onClick={() => handleChooseExpirationTimeClick(ExpirationTime.None)} classes="w-full">
+    <Button outline onClick={() => onChooseExpirationTimeClick(ExpirationTime.None)} classes="w-full">
         {localize('menus.expirationTimePicker.none')}
     </Button>
-    <Button outline onClick={() => handleChooseExpirationTimeClick(ExpirationTime.OneHour)} classes="w-full">
+    <Button outline onClick={() => onChooseExpirationTimeClick(ExpirationTime.OneHour)} classes="w-full">
         {localize('menus.expirationTimePicker.1hour')}
     </Button>
-    <Button outline onClick={() => handleChooseExpirationTimeClick(ExpirationTime.OneDay)} classes="w-full">
+    <Button outline onClick={() => onChooseExpirationTimeClick(ExpirationTime.OneDay)} classes="w-full">
         {localize('menus.expirationTimePicker.1day')}
     </Button>
-    <Button outline onClick={() => handleChooseExpirationTimeClick(ExpirationTime.OneWeek)} classes="w-full">
+    <Button outline onClick={() => onChooseExpirationTimeClick(ExpirationTime.OneWeek)} classes="w-full">
         {localize('menus.expirationTimePicker.1week')}
     </Button>
     <HR />

@@ -15,7 +15,7 @@
 
     export let onClick: undefined | ((id: string) => void) = undefined
 
-    function handleOnClick(): void {
+    function onProfileClick(): void {
         onClick && onClick(id)
     }
 
@@ -34,7 +34,7 @@
 
 <div class="flex items-center justify-center w-24">
     <div class="flex flex-col justify-between items-center w-full">
-        <div on:click={handleOnClick} class="relative cursor-pointer mb-3">
+        <div on:click={onProfileClick} class="relative cursor-pointer mb-3">
             <div
                 class="h-18 w-18 {bgColor
                     ? `bg-${bgColor}-500`

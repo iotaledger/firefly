@@ -13,7 +13,7 @@
     const showDeleteAccount =
         $selectedAccount?.index === $activeAccounts?.length - 1 && $visibleActiveAccounts?.length > 1
 
-    function handleCustomiseAccountClick(): void {
+    function onCustomiseAccountClick(): void {
         openPopup({ id: PopupId.ManageAccount })
         modal.close()
     }
@@ -23,7 +23,7 @@
         modal.close()
     }
 
-    function handleDeleteAccountClick(): void {
+    function onDeleteAccountClick(): void {
         openPopup({
             id: PopupId.DeleteAccount,
             props: {
@@ -38,18 +38,14 @@
 <Modal bind:this={modal} {...$$restProps}>
     <div class="flex flex-col">
         <MenuItem icon={Icon.Doc} title={localize('actions.viewBalanceBreakdown')} onClick={onViewBalanceClick} />
-        <MenuItem
-            icon={Icon.Customize}
-            title={localize('actions.customizeAcount')}
-            onClick={handleCustomiseAccountClick}
-        />
+        <MenuItem icon={Icon.Customize} title={localize('actions.customizeAcount')} onClick={onCustomiseAccountClick} />
         <ToggleHiddenAccountMenuItem onClick={() => modal.close()} />
         <HR />
         {#if showDeleteAccount}
             <MenuItem
                 icon={Icon.Delete}
                 title={localize('actions.deleteAccount')}
-                onClick={handleDeleteAccountClick}
+                onClick={onDeleteAccountClick}
                 variant="error"
             />
         {/if}
