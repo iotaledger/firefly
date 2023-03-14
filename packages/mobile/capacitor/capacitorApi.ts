@@ -23,22 +23,22 @@ export const CapacitorApi: IPlatform = {
         activeProfileId = id
     },
 
-    /**
-     * TODO: https://github.com/iotaledger/firefly/issues/5577
-     * TODO: https://github.com/iotaledger/firefly/issues/5578
-     */
-    renameProfileFolder: () => new Promise((resolve) => resolve),
+    // TODO: https://github.com/iotaledger/firefly/issues/5577
+    // TODO: https://github.com/iotaledger/firefly/issues/5578
+    renameProfileFolder: () => {
+        throw new Error('Function not implemented.')
+    },
 
-    /**
-     * TODO: https://github.com/iotaledger/firefly/issues/5577
-     * TODO: https://github.com/iotaledger/firefly/issues/5578
-     */
-    removeProfileFolder: () => new Promise((resolve) => resolve),
+    // TODO: https://github.com/iotaledger/firefly/issues/5577
+    // TODO: https://github.com/iotaledger/firefly/issues/5578
 
-    /**
-     * TODO: https://github.com/iotaledger/firefly/issues/5577
-     * TODO: https://github.com/iotaledger/firefly/issues/5578
-     */
+    removeProfileFolder: () => {
+        throw new Error('Function not implemented.')
+    },
+
+    // TODO: https://github.com/iotaledger/firefly/issues/5577
+    // TODO: https://github.com/iotaledger/firefly/issues/5578
+
     listProfileFolders: () => new Promise<string[]>((resolve) => resolve),
 
     PincodeManager: PincodeManager,
@@ -47,17 +47,19 @@ export const CapacitorApi: IPlatform = {
 
     NotificationManager: NotificationManager,
 
-    /**
-     * TODO: https://github.com/iotaledger/firefly/issues/5577
-     * TODO: https://github.com/iotaledger/firefly/issues/5578
-     */
-    getStrongholdBackupDestination: () => new Promise((resolve) => resolve),
+    // TODO: https://github.com/iotaledger/firefly/issues/5577
+    // TODO: https://github.com/iotaledger/firefly/issues/5578
 
-    /**
-     * TODO: https://github.com/iotaledger/firefly/issues/5577
-     * TODO: https://github.com/iotaledger/firefly/issues/5578
-     */
-    exportTransactionHistory: () => new Promise((resolve) => resolve),
+    getStrongholdBackupDestination: () => {
+        throw new Error('Function not implemented.')
+    },
+
+    // TODO: https://github.com/iotaledger/firefly/issues/5577
+    // TODO: https://github.com/iotaledger/firefly/issues/5578
+
+    exportTransactionHistory: () => {
+        throw new Error('Function not implemented.')
+    },
 
     /**
      * Gets directory for app's configuration files
@@ -90,8 +92,19 @@ export const CapacitorApi: IPlatform = {
         ]
     },
 
-    getOS: () => new Promise<string>((resolve) => resolve(Capacitor.getPlatform())),
+    /**
+     * Gets os information for the system
+     *
+     * @method getOS
+     */
+    getOS: (): Promise<string> => new Promise<string>((resolve) => resolve(Capacitor.getPlatform())),
 
+    /**
+     * Gets machine ID mockup mehotd
+     * (We don't use Sentry for mobile)
+     *
+     * @method getMachineId
+     */
     getMachineId: () => new Promise<string>((resolve) => resolve('')),
 
     /**
