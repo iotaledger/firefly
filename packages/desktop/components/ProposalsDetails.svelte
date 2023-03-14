@@ -1,8 +1,13 @@
 <script lang="ts">
-    import { Text, KeyValueBox, Button, ButtonSize, ProposalsDetailsButton } from 'shared/components'
-    import { FontWeight } from './enums'
+    import { onMount } from 'svelte'
+
+    import { Button, KeyValueBox, Text, ProposalsDetailsButton } from '@ui'
+    import { ButtonSize, FontWeight } from '@ui/enums'
+
+    import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { activeProfileId } from '@core/profile'
+
     import { IProposalsDetails } from '@contexts/governance/interfaces'
     import {
         participationOverviewForSelectedAccount,
@@ -11,13 +16,12 @@
     } from '@contexts/governance/stores'
     import {
         getNumberOfActiveProposals,
-        getNumberOfVotingProposals,
-        getNumberOfVotedProposals,
         getNumberOfTotalProposals,
+        getNumberOfVotedProposals,
+        getNumberOfVotingProposals,
     } from '@contexts/governance/utils'
+
     import { openPopup, PopupId } from '@auxiliary/popup'
-    import { onMount } from 'svelte'
-    import { selectedAccount } from '@core/account'
 
     let details = <IProposalsDetails>{
         totalProposals: null,
