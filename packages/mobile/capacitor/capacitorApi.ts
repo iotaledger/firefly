@@ -47,15 +47,17 @@ export const CapacitorApi: IPlatform = {
 
     NotificationManager: NotificationManager,
 
-    getStrongholdBackupDestination: () => new Promise<string>(() => {}),
+    /**
+     * TODO: https://github.com/iotaledger/firefly/issues/5577
+     * TODO: https://github.com/iotaledger/firefly/issues/5578
+     */
+    getStrongholdBackupDestination: () => new Promise((resolve) => resolve),
 
-    exportTransactionHistory: async () => new Promise<string>(() => {}),
-
-    exportMigrationLog: () => new Promise<boolean>(() => {}),
-
-    exportLedgerMigrationLog: () => new Promise<boolean>(() => {}),
-
-    importLegacySeed: () => new Promise<string>(() => {}),
+    /**
+     * TODO: https://github.com/iotaledger/firefly/issues/5577
+     * TODO: https://github.com/iotaledger/firefly/issues/5578
+     */
+    exportTransactionHistory: () => new Promise((resolve) => resolve),
 
     getUserDataPath: () =>
         new Promise<string>((resolve) => {
