@@ -1,10 +1,14 @@
 <script lang="ts">
     import type { Answer } from '@iota/wallet'
-    import { Text, FontWeight, TooltipIcon, PingingBadge, Icon } from 'shared/components'
-    import { Position } from 'shared/components/enums'
+
+    import { Icon, PingingBadge, Text, TooltipIcon } from '@ui'
+    import { FontWeight, Position } from '@ui/enums'
+
     import { appSettings } from '@core/app/stores'
-    import { Icon as IconEnum } from '@auxiliary/icon'
+
     import { ProposalStatus } from '@contexts/governance'
+
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let onAnswerClick: () => void
 
@@ -101,30 +105,18 @@
     </div>
 </proposal-answer>
 
-<style type="text/scss">
+<style lang="scss">
     proposal-answer {
-        @apply border-solid;
-        @apply border;
-        @apply border-gray-200;
-        @apply items-center;
-        @apply justify-between;
-        @apply p-3;
-        @apply relative;
-        @apply rounded-md;
+        @apply rounded-md border border-solid border-gray-200;
+        @apply relative flex items-center justify-between p-3;
 
         > * {
             z-index: 2;
         }
 
         &::after {
-            @apply -ml-3;
-            @apply absolute;
-            @apply bg-gray-100;
-            @apply h-full;
-            @apply inline-block;
-            @apply mr-auto;
-            @apply rounded-l-md;
-            @apply z-10;
+            @apply z-10 absolute inline-block h-full -ml-3 mr-auto;
+            @apply rounded-l-md bg-gray-100;
             content: '';
             width: var(--percentage);
             z-index: 1;
@@ -146,8 +138,7 @@
             @apply border-blue-500;
 
             answer-index {
-                @apply bg-blue-500;
-                @apply text-white;
+                @apply bg-blue-500 text-white;
             }
         }
 
@@ -169,8 +160,7 @@
             }
 
             answer-index {
-                @apply bg-blue-600;
-                @apply text-white;
+                @apply bg-blue-600 text-white;
             }
 
             :global(*) {
@@ -190,8 +180,7 @@
             }
 
             answer-index {
-                @apply bg-gray-900;
-                @apply border-gray-800;
+                @apply bg-gray-900 border-gray-800;
             }
         }
 
@@ -200,18 +189,9 @@
         }
 
         answer-index {
-            @apply bg-white;
-            @apply border-gray-200;
-            @apply border-solid;
-            @apply border;
-            @apply flex;
-            @apply font-bold;
-            @apply h-5;
-            @apply items-center;
-            @apply justify-center;
-            @apply text-12;
-            @apply text-gray-500;
-            @apply w-5;
+            @apply flex items-center justify-center h-5 w-5 bg-white;
+            @apply border border-solid border-gray-200;
+            @apply font-bold text-12 text-gray-500;
         }
     }
 </style>
