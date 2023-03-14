@@ -59,8 +59,6 @@ function validateFile(nft: INft, headers: Headers): Partial<NftDownloadMetadata>
     } else if (hasValidFileSize) {
         return { warning: { type: DownloadWarningType.FileTooLarge } }
     }
-
-    return {}
 }
 
 async function getUrlAndHeadersFromOldSoonaverseStructure(
