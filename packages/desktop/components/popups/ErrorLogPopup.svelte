@@ -5,12 +5,12 @@
     import { closePopup } from '@auxiliary/popup'
     import { setClipboard } from '@core/utils'
 
-    function handleClearClick(): () => void {
+    function onClearClick(): void {
         errorLog.set([])
         closePopup()
     }
 
-    function handleCopyClick(): () => void {
+    function onCopyClick(): void {
         const str = []
 
         for (const err of $errorLog) {
@@ -43,8 +43,8 @@
 </div>
 {#if $errorLog.length > 0}
     <div class="flex w-full justify-center pt-8 space-x-4">
-        <Button classes="w-1/2" onClick={handleClearClick}>{localize('actions.clear')}</Button>
-        <Button classes="w-1/2" onClick={handleCopyClick}>{localize('actions.copy')}</Button>
+        <Button classes="w-1/2" onClick={onClearClick}>{localize('actions.clear')}</Button>
+        <Button classes="w-1/2" onClick={onCopyClick}>{localize('actions.copy')}</Button>
     </div>
 {/if}
 

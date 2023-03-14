@@ -5,7 +5,7 @@
 
     import { openPopup, PopupId } from '@auxiliary/popup'
 
-    function onCreateAlias(): void {
+    function onCreateAliasClick(): void {
         openPopup({
             id: PopupId.AliasConfirmation,
         })
@@ -15,5 +15,5 @@
 <OnboardingButton
     primaryText={localize('actions.createAlias')}
     secondaryText={localize('actions.createAliasDescription')}
-    onClick={onCreateAlias}
+    onClick={onCreateAliasClick}
 />

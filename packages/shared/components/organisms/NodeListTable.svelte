@@ -13,7 +13,7 @@
         return node.url === clientOptions?.primaryNode?.url
     }
 
-    function handleViewNodeInfoClick(node: INode): void {
+    function onViewNodeInfoClick(node: INode): void {
         openPopup({
             id: PopupId.NodeInfo,
             props: {
@@ -35,7 +35,7 @@
         {#each clientOptions.nodes.length === 0 ? getOfficialNodes($activeProfile.networkProtocol, $activeProfile.networkType) : clientOptions.nodes as node}
             <button
                 class="flex flex-row items-center justify-between py-4 px-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
-                on:click={() => handleViewNodeInfoClick(node)}
+                on:click={() => onViewNodeInfoClick(node)}
             >
                 <div class="flex flex-row items-center space-x-4 overflow-hidden">
                     <Text classes={'self-start overflow-hidden whitespace-nowrap overflow-ellipsis'}>

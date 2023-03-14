@@ -18,7 +18,7 @@ export function debounce(callback: () => void, wait = 500): (...args: unknown[])
  * source: https://svelte.dev/repl/0ace7a508bd843b798ae599940a91783?version=3.16.7
  */
 export function clickOutside(node: any, options?: { includeScroll }): { destroy } {
-    const handleClick: (event: MouseEvent) => void = (event) => {
+    const onClick: (event: MouseEvent) => void = (event) => {
         if (node && !node.contains(event.target) && !event.defaultPrevented) {
             node.dispatchEvent(new CustomEvent('clickOutside', node))
         }
@@ -28,7 +28,7 @@ export function clickOutside(node: any, options?: { includeScroll }): { destroy 
         node.dispatchEvent(new CustomEvent('clickOutside', node))
     }
 
-    document.addEventListener('mousedown', handleClick, true)
+    document.addEventListener('mousedown', onClick, true)
 
     if (options?.includeScroll) {
         document.addEventListener('scroll', handleScroll, true)
@@ -36,7 +36,7 @@ export function clickOutside(node: any, options?: { includeScroll }): { destroy 
 
     return {
         destroy(): void {
-            document.removeEventListener('click', handleClick, true)
+            document.removeEventListener('click', onClick, true)
             if (options?.includeScroll) {
                 document.removeEventListener('scroll', handleScroll, true)
             }

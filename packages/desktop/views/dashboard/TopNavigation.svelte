@@ -42,7 +42,7 @@
         }
     }
 
-    function handleBackClick(): void {
+    function onBackClick(): void {
         switch ($dashboardRoute) {
             case DashboardRoute.Settings:
                 $settingsRouter.previous()
@@ -61,7 +61,7 @@
 
 <top-navigation class:disabled={$platform === PlatformOption.Windows && isPopupVisible}>
     {#if isBackButtonVisible}
-        <button type="button" on:click={handleBackClick}>
+        <button type="button" on:click={onBackClick}>
             <Icon width="18" icon={IconEnum.ArrowLeft} classes="text-gray-800 dark:text-gray-500" />
             <Text overrideColor classes="text-gray-800 dark:text-gray-500">{localize('actions.back')}</Text>
         </button>
