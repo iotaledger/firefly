@@ -13,39 +13,41 @@ export async function downloadNftMedia(nft: INft, accountIndex: number): Promise
     try {
         const alreadyDownloaded = await isFileAlreadyDownloaded(nft)
 
-        if (!alreadyDownloaded) {
-            if (nft.composedUrl) {
-                let downloadUrl = nft.composedUrl
+        if (alreadyDownloaded) {
+            downloadMetadata.isLoaded = true
+            return
+        }
 
-                const response = await fetch(downloadUrl, { method: 'HEAD', cache: 'force-cache' })
-                let headers = response.headers
+        if (!nft.composedUrl) {
+            downloadMetadata.isLoaded = true
+            downloadMetadata.error = { type: DownloadErrorType.UnsupportedUrl }
+            return
+        }
 
-                const hasOldSoonaverseStructure =
-                    headers.get(HttpHeader.ContentType) !== nft.parsedMetadata?.type &&
-                    nft.parsedMetadata?.issuerName === 'Soonaverse'
-                if (hasOldSoonaverseStructure) {
-                    const backupUrl = nft.composedUrl + '/' + encodeURIComponent(nft?.parsedMetadata?.name)
-                    const backupResponse = await fetch(backupUrl, { method: 'HEAD', cache: 'force-cache' })
-                    downloadUrl = backupUrl
-                    headers = backupResponse.headers
-                }
+        let downloadUrl = nft.composedUrl
 
-                const isValidMediaType = headers.get(HttpHeader.ContentType) !== nft.parsedMetadata?.type
-                const hasValidFileSize =
-                    MAX_FILE_SIZE_IN_BYTES > 0 && Number(headers.get(HttpHeader.ContentLength)) > MAX_FILE_SIZE_IN_BYTES
-                if (isValidMediaType) {
-                    downloadMetadata.error = { type: DownloadErrorType.NotMatchingFileTypes }
-                } else if (hasValidFileSize) {
-                    downloadMetadata.warning = { type: DownloadWarningType.FileTooLarge }
-                } else {
-                    await Platform.downloadFile(nft.composedUrl, nft.filePath)
-                    downloadMetadata.isLoaded = true
-                }
-            } else {
-                downloadMetadata.isLoaded = true
-                downloadMetadata.error = { type: DownloadErrorType.UnsupportedUrl }
-            }
+        const response = await fetch(downloadUrl, { method: 'HEAD', cache: 'force-cache' })
+        let headers = response.headers
+
+        const hasOldSoonaverseStructure =
+            headers.get(HttpHeader.ContentType) !== nft.parsedMetadata?.type &&
+            nft.parsedMetadata?.issuerName === 'Soonaverse'
+        if (hasOldSoonaverseStructure) {
+            const backupUrl = nft.composedUrl + '/' + encodeURIComponent(nft?.parsedMetadata?.name)
+            const backupResponse = await fetch(backupUrl, { method: 'HEAD', cache: 'force-cache' })
+            downloadUrl = backupUrl
+            headers = backupResponse.headers
+        }
+
+        const isValidMediaType = headers.get(HttpHeader.ContentType) !== nft.parsedMetadata?.type
+        const hasValidFileSize =
+            MAX_FILE_SIZE_IN_BYTES > 0 && Number(headers.get(HttpHeader.ContentLength)) > MAX_FILE_SIZE_IN_BYTES
+        if (isValidMediaType) {
+            downloadMetadata.error = { type: DownloadErrorType.NotMatchingFileTypes }
+        } else if (hasValidFileSize) {
+            downloadMetadata.warning = { type: DownloadWarningType.FileTooLarge }
         } else {
+            await Platform.downloadFile(nft.composedUrl, nft.filePath)
             downloadMetadata.isLoaded = true
         }
     } catch (err) {
@@ -59,7 +61,7 @@ async function isFileAlreadyDownloaded(nft: INft): Promise<boolean> {
     const basePath =
         process.env.NODE_ENV === 'development' ? 'build/__storage__' : await getStorageDirectoryOfProfiles()
 
-    let status
+    let status: number | undefined
     try {
         const localFile = await fetch(`${basePath}/${nft.filePath}/original`)
         status = localFile.status
