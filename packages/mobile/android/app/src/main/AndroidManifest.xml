@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="org.iota.firefly.mobile">
+    package="org.iota.firefly.mobile.alpha">
     <!-- Permissions -->
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -17,19 +17,24 @@
     <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <meta-data android:name="android.webkit.WebView.MetricsOptOut" android:value="true" />
+
         <activity
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
-            android:name="org.iota.firefly.mobile.MainActivity"
+            android:name="org.iota.firefly.mobile.alpha.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBarLaunch"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"
+            tools:ignore="LockedOrientationActivity"
             android:exported="true">
             <!-- android:requestLegacyExternalStorage="true">-->
 
