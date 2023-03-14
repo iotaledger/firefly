@@ -1,5 +1,5 @@
-<script lang="ts">
-    import { INft } from '@core/nfts'
+<script lang="typescript">
+    import { DownloadErrorType, DownloadWarningType, INft } from '@core/nfts'
     import { Text, FontWeight, NftMedia, TooltipIcon, Position } from 'shared/components'
     import { CollectiblesRoute, collectiblesRouter } from '@core/router'
     import { selectedNftId } from '@core/nfts/stores'
@@ -10,8 +10,6 @@
     export let nft: INft
 
     let nftWrapperClientWidth: number
-    let error: string
-    let warning: string
     $: isLocked = nft.timelockTime > $time.getTime()
 
     function openCollectiblesDetailsView(): void {
@@ -20,17 +18,23 @@
     }
 
     let tooltipContent
-    $: if (error) {
+    $: if (nft.downloadMetadata.error) {
         tooltipContent = {
             icon: 'error-filled',
             iconClasses: 'fill-current text-red-700',
-            text: error,
+            text:
+                nft.downloadMetadata.error.type === DownloadErrorType.Generic
+                    ? nft.downloadMetadata.error.message
+                    : `error.nft.${nft.downloadMetadata.error.type}.short`,
         }
-    } else if (warning) {
+    } else if (nft.downloadMetadata.warning) {
         tooltipContent = {
             icon: 'exclamation-filled',
             iconClasses: 'fill-current text-yellow-700',
-            text: warning,
+            text:
+                nft.downloadMetadata.warning.type === DownloadWarningType.Generic
+                    ? nft.downloadMetadata.warning.message
+                    : `error.nft.${nft.downloadMetadata.warning.type}.short`,
         }
     }
 </script>
@@ -44,21 +48,18 @@
         >
             <NftMedia
                 nftId={nft.id}
-                bind:error
-                bind:warning
                 classes="bg-gray-200 dark:bg-gray-700 min-w-full min-h-full object-cover"
-                translationSuffix="short"
                 loop
                 muted
             />
-            {#if error || warning}
+            {#if nft.downloadMetadata.error || nft.downloadMetadata.warning}
                 <div class="absolute right-3 top-3">
                     <TooltipIcon
                         height={24}
                         width={24}
                         icon={tooltipContent.icon}
                         iconClasses={tooltipContent.iconClasses}
-                        text={tooltipContent.text}
+                        text={localize(tooltipContent.text)}
                         size="small"
                         primaryColor="white"
                         position={Position.Left}
