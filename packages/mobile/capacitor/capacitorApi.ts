@@ -11,7 +11,7 @@ let activeProfileId = null
 
 export const nativeSplash = SplashScreen
 
-export const CapacitorApi: IPlatform = {
+export const CapacitorApi: Partial<IPlatform> = {
     // TODO: https://github.com/iotaledger/firefly/issues/6172
     updateAppSettings: () => new Promise((resolve) => resolve),
 
@@ -31,15 +31,15 @@ export const CapacitorApi: IPlatform = {
 
     // TODO: https://github.com/iotaledger/firefly/issues/5577
     // TODO: https://github.com/iotaledger/firefly/issues/5578
-
     removeProfileFolder: () => {
         throw new Error('Function not implemented.')
     },
 
     // TODO: https://github.com/iotaledger/firefly/issues/5577
     // TODO: https://github.com/iotaledger/firefly/issues/5578
-
-    listProfileFolders: () => new Promise<string[]>((resolve) => resolve),
+    listProfileFolders: () => {
+        throw new Error('Function not implemented.')
+    },
 
     PincodeManager: PincodeManager,
 
@@ -49,34 +49,24 @@ export const CapacitorApi: IPlatform = {
 
     // TODO: https://github.com/iotaledger/firefly/issues/5577
     // TODO: https://github.com/iotaledger/firefly/issues/5578
-
     getStrongholdBackupDestination: () => {
         throw new Error('Function not implemented.')
     },
 
     // TODO: https://github.com/iotaledger/firefly/issues/5577
     // TODO: https://github.com/iotaledger/firefly/issues/5578
-
     exportTransactionHistory: () => {
         throw new Error('Function not implemented.')
     },
 
     /**
      * Gets directory for app's configuration files
-     * On mobile is handled by the Capacitor wallet plugin
-     *
-     * @method getUserDataPath
-     *
-     * @returns {Promise}
+     * (On mobile is handled by the Capacitor wallet plugin)
      */
     getUserDataPath: (): Promise<string> => new Promise<string>((resolve) => resolve('/DATA')),
 
     /**
      * Gets diagnostics information for the system
-     *
-     * @method getDiagnostics
-     *
-     * @returns {Promise}
      */
     getDiagnostics: async (): Promise<{ label: string; value: string }[]> => {
         const info = await Device.getInfo()
@@ -94,16 +84,12 @@ export const CapacitorApi: IPlatform = {
 
     /**
      * Gets os information for the system
-     *
-     * @method getOS
      */
     getOS: (): Promise<string> => new Promise<string>((resolve) => resolve(Capacitor.getPlatform())),
 
     /**
      * Gets machine ID mockup mehotd
      * (We don't use Sentry for mobile)
-     *
-     * @method getMachineId
      */
     getMachineId: () => new Promise<string>((resolve) => resolve('')),
 
