@@ -25,7 +25,7 @@ export function buildNftFromNftOutput(
     const metadata = getMetadataFromNftOutput(nftOutput)
     const parsedMetadata = parseNftMetadata(metadata)
     const composedUrl = composeUrlFromNftMetadata(parsedMetadata)
-    const filePath = `${get(activeProfileId)}/${id}`
+    const filePath = `${get(activeProfileId)}/nfts/${id}`
 
     return {
         id,

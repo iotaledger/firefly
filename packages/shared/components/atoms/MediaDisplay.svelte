@@ -15,6 +15,8 @@
     export let loop: boolean = false
 
     const type: string = convertMimeTypeToHtmlTag(expectedType)
+    let isMounted = false
+
     let basePath: string
     $: isLoaded && muteVideo()
 
@@ -49,23 +51,30 @@
     }
 
     onMount(async () => {
-        basePath = await getStorageDirectoryOfProfiles()
+        if (process.env.NODE_ENV === 'development') {
+            basePath = 'build/__storage__'
+        } else {
+            basePath = await getStorageDirectoryOfProfiles()
+        }
+        isMounted = true
     })
 </script>
 
-{#key isLoaded && basePath}
-    <svelte:element
-        this={type}
-        bind:this={Media}
-        src="file://{basePath}/nfts/{filePath}"
-        {alt}
-        autoplay={autoplay ? true : undefined}
-        controls={controls ? true : undefined}
-        loop={loop ? true : undefined}
-        muted
-        class={classes}
-        preload="metadata"
-        on:mouseenter={startPlaying}
-        on:mouseleave={stopPlaying}
-    />
-{/key}
+{#if isMounted}
+    {#key isLoaded && basePath}
+        <svelte:element
+            this={type}
+            bind:this={Media}
+            src="{basePath}/{filePath}/original"
+            {alt}
+            autoplay={autoplay ? true : undefined}
+            controls={controls ? true : undefined}
+            loop={loop ? true : undefined}
+            muted
+            class={classes}
+            preload="metadata"
+            on:mouseenter={startPlaying}
+            on:mouseleave={stopPlaying}
+        />
+    {/key}
+{/if}

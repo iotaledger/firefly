@@ -13,33 +13,29 @@ export async function downloadNftMedia(nft: INft, accountIndex: number): Promise
 
         if (alreadyDownloaded) {
             downloadMetadata.isLoaded = true
-            return
-        }
-
-        if (!nft.composedUrl) {
+        } else if (!nft.composedUrl) {
             downloadMetadata.isLoaded = true
             downloadMetadata.error = { type: DownloadErrorType.UnsupportedUrl }
-            return
-        }
-
-        let downloadUrl = nft.composedUrl
-
-        const response = await fetch(downloadUrl, { method: 'HEAD', cache: 'force-cache' })
-        let headers = response.headers
-
-        const isSoonaverse = nft.parsedMetadata?.issuerName === 'Soonaverse'
-        if (isSoonaverse) {
-            const newUrlAndHeaders = await getUrlAndHeadersFromOldSoonaverseStructure(nft, headers)
-            downloadUrl = newUrlAndHeaders?.url ?? downloadUrl
-            headers = newUrlAndHeaders?.headers ?? headers
-        }
-
-        const validation = validateFile(nft, headers)
-        if (validation?.error || validation?.warning) {
-            downloadMetadata = { ...downloadMetadata, ...validation }
         } else {
-            await Platform.downloadFile(nft.composedUrl, nft.filePath)
-            downloadMetadata.isLoaded = true
+            let downloadUrl = nft.composedUrl
+
+            const response = await fetch(downloadUrl, { method: 'HEAD', cache: 'force-cache' })
+            let headers = response.headers
+
+            const isSoonaverse = nft.parsedMetadata?.issuerName === 'Soonaverse'
+            if (isSoonaverse) {
+                const newUrlAndHeaders = await getUrlAndHeadersFromOldSoonaverseStructure(nft, headers)
+                downloadUrl = newUrlAndHeaders?.url ?? downloadUrl
+                headers = newUrlAndHeaders?.headers ?? headers
+            }
+
+            const validation = validateFile(nft, headers)
+            if (validation?.error || validation?.warning) {
+                downloadMetadata = { ...downloadMetadata, ...validation }
+            } else {
+                await Platform.downloadFile(nft.composedUrl, nft.filePath)
+                downloadMetadata.isLoaded = true
+            }
         }
     } catch (err) {
         downloadMetadata.error = { type: DownloadErrorType.Generic, message: err.message }
