@@ -1,22 +1,16 @@
 {
     "name": "firefly-mobile",
-    "version": "1.0.0",
+    "version": "2.0.0-alpha.0",
     "description": "Official IOTA wallet on mobile",
     "main": "main.js",
     "repository": "git@github.com:iotaledger/firefly.git",
     "author": "IOTA Foundation <contact@iota.org>",
     "license": "Apache-2.0",
     "scripts": {
-        "build": "NODE_ENV=production PLATFORM=mobile webpack && yarn assets:alpha",
-        "ios": "cap copy ios && cap open ios",
-        "ios:update": "cap sync ios && cap open ios",
-        "android": "cap copy android && cap open android",
-        "android:update": "cap sync android && cap open android",
-        "dev": "NODE_ENV=development PLATFORM=mobile webpack serve --content-base public --host 0.0.0.0 --client-log-level none",
-        "dev:device": "NODE_ENV=development PLATFORM=mobile webpack --stats && cap copy",
-        "assets:alpha": "capacitor/assets/assetgen.sh alpha.png",
-        "assets:beta": "capacitor/assets/assetgen.sh beta.png",
-        "assets:prod": "capacitor/assets/assetgen.sh prod.png"
+        "start": "bash -c 'capacitor/assets/assetgen.sh ${1}.png && NODE_ENV=development cap sync ${0} && cap open ${0} && STAGE=${1} NODE_ENV=development PLATFORM=mobile webpack-dev-server --progress'",
+        "build": "webpack info && rm -rf public/build && bash -c 'capacitor/assets/assetgen.sh ${1}.png && STAGE=${0} NODE_ENV=production PLATFORM=mobile webpack --progress --stats && NODE_ENV=production cap sync ${0} && cap open ${0}'",
+        "rename-appid-android": "mv android/app/src/main/java/org/iota/firefly/alpha/mobile/* android/app/src/main/java/org/iota/firefly/mobile/",
+        "force-install-pods": "cd ios/App && rm -rf ~/Library/Caches/CocoaPods Pods ~/Library/Developer/Xcode/DerivedData && pod deintegrate && pod install"
     },
     "devDependencies": {
         "@capacitor/android": "3.4.1",
