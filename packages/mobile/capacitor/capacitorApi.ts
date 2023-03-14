@@ -23,11 +23,23 @@ export const CapacitorApi: IPlatform = {
         activeProfileId = id
     },
 
-    renameProfileFolder: () => new Promise<void>(() => {}),
+    /**
+     * TODO: https://github.com/iotaledger/firefly/issues/5577
+     * TODO: https://github.com/iotaledger/firefly/issues/5578
+     */
+    renameProfileFolder: () => new Promise((resolve) => resolve),
 
-    removeProfileFolder: () => new Promise<void>(() => {}),
+    /**
+     * TODO: https://github.com/iotaledger/firefly/issues/5577
+     * TODO: https://github.com/iotaledger/firefly/issues/5578
+     */
+    removeProfileFolder: () => new Promise((resolve) => resolve),
 
-    listProfileFolders: () => new Promise<string[]>(() => {}),
+    /**
+     * TODO: https://github.com/iotaledger/firefly/issues/5577
+     * TODO: https://github.com/iotaledger/firefly/issues/5578
+     */
+    listProfileFolders: () => new Promise<string[]>((resolve) => resolve),
 
     PincodeManager: PincodeManager,
 
