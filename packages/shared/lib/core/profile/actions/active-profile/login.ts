@@ -9,8 +9,8 @@ import { handleError } from '@core/error/handlers'
 import { pollLedgerNanoStatus } from '@core/ledger/actions'
 import { pollMarketPrices } from '@core/market/actions'
 import { getAndUpdateNodeInfo, pollNetworkStatus } from '@core/network/actions'
-import { loadNftsForActiveProfile } from '@core/nfts/actions'
 import { initialiseProfileManager } from '@core/profile-manager/actions'
+import { downloadAllNftMedia, loadNftsForActiveProfile } from '@core/nfts'
 import {
     getAccounts,
     isStrongholdUnlocked,
@@ -107,6 +107,8 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             // Step 6: generate and store activities for all accounts
             incrementLoginProgress()
             await generateAndStoreActivitiesForAllAccounts()
+
+            downloadAllNftMedia()
 
             if (type === ProfileType.Software) {
                 // Step 7: set initial stronghold status

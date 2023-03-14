@@ -1,4 +1,5 @@
 export * from './addOrUpdateNftInAllAccountNfts'
+export * from './downloadNftMedia'
 export * from './getNftByIdFromAllAccountNfts'
 export * from './loadNftsForActiveProfile'
 export * from './setAccountNftsInAllAccountNfts'
