@@ -7,6 +7,7 @@ import { LoginRoute } from '../enums'
 import { IRouterEvent } from '../interfaces'
 import { appRouter } from '../routers'
 import features from '../../../../../desktop/features/features'
+import { UpdateStrongholdRouter, updateStrongholdRouter } from './update-stronghold-router'
 
 export const loginRoute = writable<LoginRoute>(null)
 export const loginRouter = writable<LoginRouter>(null)
@@ -38,14 +39,13 @@ export class LoginRouter extends Subrouter<LoginRoute> {
             }
             case LoginRoute.EnterPin:
                 if (requiresUpdate) {
+                    updateStrongholdRouter.set(new UpdateStrongholdRouter(this))
                     nextRoute = LoginRoute.UpdateStronghold
                 } else {
                     nextRoute = LoginRoute.LoadProfile
                 }
                 break
             case LoginRoute.UpdateStronghold:
-                nextRoute = LoginRoute.LoadProfile
-                break
             case LoginRoute.LoadProfile:
                 this.parentRouter.next(event)
                 return

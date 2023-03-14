@@ -616,6 +616,23 @@
                 "fetching": "Fetching proposal data",
                 "hintVote": "You can not vote on a proposal that is in the announcement phase, voting will open in {time}."
             }
+        },
+        "updateStronghold": {
+            "update": {
+                "title": "Update Stronghold",
+                "loginBody": "Your Stronghold's version is out of date. Provide your password to update Stronghold.",
+                "recoveryBody": "The imported Stronghold’s version is out of date, to continue we will need to update the stronghold to the latest version."
+            },
+            "updateBackup": {
+                "loginTitle": "Stronghold updated",
+                "loginBody": "It's all good now - you're running the latest Stronghold version",
+                "recoveryTitle": "Stronghold is successfully recovered and updated",
+                "recoveryBody": "You can now continue setting up your wallet",
+                "hint": "We highly recommend to delete all previous Stronghold backup files and save a new one"
+            },
+            "changePassword": {
+                "hint": "Your Stronghold was out of date and has been updated. We recommend that you change your Stronghold password."
+            }
         }
     },
     "popups": {
@@ -699,14 +716,18 @@
         "qr": {
             "title": "Din QR-kod"
         },
-        "version": {
-            "title": "Nuvarande version: {version}",
-            "upToDateTitle": "Firefly är uppdaterad",
-            "upToDateDescription": "Du kör den senaste och säkraste versionen av Firefly.",
-            "updateAvailable": "Firefly-uppdatering tillgänglig",
-            "updateDetails": "Version {version} - {date}",
-            "noAutoUpdate": "Automatisk uppdatering är inaktiverad i denna Windows-version, gå till https://firefly.iota.org för att ladda ner uppdateringen.",
-            "preReleaseDescription": "Du kör en förhandsversion av Firefly. Uppdateringar är inaktiverade."
+        "appUpdate": {
+            "title": "Check for updates",
+            "installedVersion": "Installed version",
+            "newVerion": "New version",
+            "stage": "Stage",
+            "prod": "Production",
+            "alpha": "Alpha",
+            "beta": "Beta",
+            "releasedAt": "Released at",
+            "updateAvailable": "Update is available",
+            "updatesDisabled": "There are updates available, but in-app upgrade is disabled for your operating system.",
+            "latestInstalled": "You are running the latest and safest version"
         },
         "backupStronghold": {
             "title": "Säkerhetskopiera din Stronghold-fil",
@@ -1177,6 +1198,7 @@
         "send": "Skicka",
         "receive": "Ta emot",
         "create": "Skapa",
+        "updateAndContinue": "Update and continue",
         "beginTransfer": "Påbörja överföring",
         "tryAgain": "Försök igen",
         "visitDiscord": "Besök Discord",
@@ -1232,10 +1254,11 @@
         "skip": "Hoppa över",
         "reset": "Återställ",
         "downloadRecoveryKit": "Spara återställningsblad",
-        "skipBackup": "Hoppa över säkerhetskopiering",
+        "skipBackup": "Skip wallet backup",
         "finishSetup": "Slutför installationen",
         "readDocumentation": "Läs dokumentationen",
         "visitFaq": "Besök FAQ",
+        "viewDownloads": "View downloads",
         "viewStatus": "Visa status",
         "viewBalanceBreakdown": "View balance breakdown",
         "showHiddenAccounts": "Visa dolda plånböcker",
@@ -1289,9 +1312,10 @@
         "vote": "Rösta",
         "addProposal": "Add proposal",
         "removeProposal": "Ta bort förslag",
-        "changeNode": "Change Node",
+        "changeNode": "Change node",
         "stopVoting": "Sluta rösta",
-        "revote": "Revote"
+        "revote": "Revote",
+        "skipAndKeep": "Skip and keep old password"
     },
     "general": {
         "recipient": "Mottagare",
@@ -1702,6 +1726,7 @@
             "invalidFormat": "Hyperlänken du följde är ogiltig",
             "invalidAmount": "The amount in deep link is not an integer number {amount}",
             "invalidSurplus": "Överskottet i hyperlänken är inte ett nummer {surplus}",
+            "surplusNotSupported": "The surplus is only supported for native tokens",
             "governance": {
                 "unrecognizedOperation": "Unrecognized Governance operation: {operation}"
             },
@@ -1785,7 +1810,8 @@
             "similar": "Detta liknar ett vanligt lösenord.",
             "word": "Ett enda ord är enkelt att gissa.",
             "incorrect": "Ditt lösenord är felaktigt.",
-            "length": "Ditt lösenord kan inte vara längre än {length, plural, one {# tecken} other {# tecken}}."
+            "length": "Ditt lösenord kan inte vara längre än {length, plural, one {# tecken} other {# tecken}}.",
+            "sameAsOld": "Your new password must be different from your old password."
         },
         "pincode": {
             "length": "Din PIN-kod måste vara {length, plural, one {# siffra} other {# siffror}} lång.",
@@ -2068,7 +2094,15 @@
             "quantity": "Optional parameter: The quantity of copies minted with this metadata."
         },
         "governance": {
-            "removeProposalWarning": "You must stop voting for this proposal before removing it."
+            "removeProposalWarning": "You must stop voting for this proposal before removing it.",
+            "outdatedNode": {
+                "title": "Outdated node URL",
+                "body": "The node URL for this proposal is outdated. Please update it to access the latest voting results."
+            },
+            "resultsNotAvailable": {
+                "title": "Results not available",
+                "body": "The results are no longer available on this proposal's corresponding node. Please update it to access the results."
+            }
         },
         "updateStronghold": {
             "profileBadge": "Your Stronghold is out of date. Log in to update Stronghold."
@@ -2196,6 +2230,14 @@
                 "Pending": "revoting",
                 "Confirmed": "revote",
                 "Conflicting": "failed to revote"
+            },
+            "proposalStatus": {
+                "upcoming": "Announcement",
+                "commencing": "Voting open",
+                "holding": "Counting",
+                "ended": "Closed",
+                "nodeOutdated": "Outdated node URL",
+                "resultsNotAvailable": "Results not available"
             }
         },
         "alias": {
@@ -2206,13 +2248,7 @@
             }
         },
         "locked": "låst",
-        "smartContract": "smartkontrakt",
-        "proposalStatus": {
-            "upcoming": "Meddelande",
-            "commencing": "Röstning öppen",
-            "holding": "Räknar",
-            "ended": "Stängd"
-        }
+        "smartContract": "smartkontrakt"
     },
     "menus": {
         "expirationTimePicker": {

@@ -437,7 +437,7 @@
         "login": {
             "pleaseWait": "Zaczekaj {time, plural, one {# sekundę} few {# sekundy} many {# sekund} other {# sekund}}",
             "incorrectAttempts": "{attempts, plural, one {# nieudana próba} few {# nieudane próby} many {# nieudanych prób} other {# nieudanych prób}}",
-            "hintStronghold": "Your Stronghold's version is out of date. Please log in to update your Stronghold."
+            "hintStronghold": "Wersja Twojej kopii Stronghold jest przestarzała. Zaloguj się, aby zaktualizować Twoją kopię Stronghold."
         },
         "loadProfile": {
             "loginSteps": {
@@ -616,6 +616,23 @@
                 "fetching": "Pobieranie danych propozycji",
                 "hintVote": "Nie możesz głosować nad propozycją, która dopiero została zapowiedziana. Głosowanie zostanie otwarte za {time}."
             }
+        },
+        "updateStronghold": {
+            "update": {
+                "title": "Zaktualizuj Stronghold",
+                "loginBody": "Wersja Twojej kopii Stronghold jest przestarzała. Wpisz swoje hasło, aby zaktualizować Stronghold.",
+                "recoveryBody": "Importowana kopia Stronghold jest nieaktualna, aby kontynuować, będziemy musieli zaktualizować stronghold do najnowszej wersji."
+            },
+            "updateBackup": {
+                "loginTitle": "Stronghold zaktualizowany",
+                "loginBody": "Już wszystko w porządku - używasz najnowszej wersji Stronghold",
+                "recoveryTitle": "Stronghold został pomyślnie przywrócony i zaktualizowany",
+                "recoveryBody": "Możesz teraz kontynuować konfigurację portfela",
+                "hint": "Zalecamy usunięcie wszystkich poprzednich plików kopii Stronghold i zapisanie jedynie tej nowej"
+            },
+            "changePassword": {
+                "hint": "Twoja kopia Stronghold była nieaktualna i została zaktualizowana. Zalecamy zmianę hasła do Twojej kopii Stronghold."
+            }
         }
     },
     "popups": {
@@ -631,19 +648,19 @@
             "title": "Zestawienie środków",
             "available": {
                 "title": "Dostępne",
-                "subtitle": "Środki w pełni dostępne do użycia"
+                "subtitle": "Środki aktualnie dostępne do użycia"
             },
             "pending": {
                 "title": "Oczekujące",
                 "subtitle": "Tymczasowo zablokowane w transakcjach"
             },
             "locked": {
-                "title": "Zablokowano",
-                "subtitle": "Tymczasowo zablokowane przez zarządzanie"
+                "title": "Zablokowane",
+                "subtitle": "Tymczasowo zablokowane przez aktywność w panelu zarządzania"
             },
             "storageDeposit": {
                 "title": "Depozyt magazynowy",
-                "subtitle": "Środki te są zarezerwowane na przechowywanie natywnych assetów."
+                "subtitle": "Środki te są zarezerwowane na przechowywanie natywnych assetów"
             },
             "totalBalance": {
                 "title": "Wszystkie środki",
@@ -651,40 +668,40 @@
             },
             "basicOutputs": {
                 "title": "Natywne tokeny",
-                "subtitle": "Zarezerwowano do przechowywania natywnych tokenów"
+                "subtitle": "Zarezerwowane do przechowywania natywnych tokenów"
             },
             "nftOutputs": {
                 "title": "NFT",
-                "subtitle": "Zarezerwowano do przechowywania NFT"
+                "subtitle": "Zarezerwowane do przechowywania NFT"
             },
             "aliasOutputs": {
                 "title": "Aliasy",
-                "subtitle": "Zarezerwowano do przechowywania aliasu"
+                "subtitle": "Zarezerwowane do przechowywania aliasu"
             },
             "foundryOutputs": {
                 "title": "Produkcja",
-                "subtitle": "Zarezerwowano do przechowywania wyprodukowanych tokenów"
+                "subtitle": "Zarezerwowane do przechowywania wyprodukowanych tokenów"
             },
             "unclaimed": {
-                "title": "Nieodebrana transakcja",
-                "subtitle": "Tymczasowo zablokowano w nieodebranych transakcjach"
+                "title": "Nieodebrane transakcje",
+                "subtitle": "Tymczasowo zablokowane w nieodebranych transakcjach"
             },
             "timelock": {
                 "title": "Blokada czasowa",
-                "subtitle": "Tymczasowo zablokowano w blokadach czasowych transakcji"
+                "subtitle": "Tymczasowo zablokowane w blokadach czasowych transakcji"
             },
             "storageDepositReturn": {
-                "title": "SDRUC",
-                "subtitle": "Tymczasowo zablokowano w zwrocie depozytu magazynowego"
+                "title": "Zwroty depozytu",
+                "subtitle": "Tymczasowo zablokowane w zwrocie depozytu magazynowego"
             },
             "governance": {
                 "title": "Zarządzanie",
                 "subtitle": "Zarezerwowane na siłę głosu"
             },
-            "minimizeStorageDepositButton": "Zmniejsz depozyt magazynowy"
+            "minimizeStorageDepositButton": "Pomniejsz depozyt magazynowy"
         },
         "minimizeStorageDeposit": {
-            "title": "Zmniejsz depozyt magazynowy",
+            "title": "Pomniejsz depozyt magazynowy",
             "description": "Skonsoliduj wyjścia, aby zminimalizować wymagany depozyt i zwiększyć dostępne saldo.",
             "confirmButton": "Skonsoliduj"
         },
@@ -699,14 +716,18 @@
         "qr": {
             "title": "Twój kod QR"
         },
-        "version": {
-            "title": "Aktualna wersja: {version}",
-            "upToDateTitle": "Firefly jest aktualny",
-            "upToDateDescription": "Używasz najnowszej i najbezpieczniejszej wersji Firefly.",
-            "updateAvailable": "Dostępna aktualizacja Firefly",
-            "updateDetails": "Wersja {version} - {date}",
-            "noAutoUpdate": "Automatyczna aktualizacja jest wyłączona w tej wersji Windows, przejdź do https://firefly.iota.org aby pobrać aktualizację.",
-            "preReleaseDescription": "Używasz wczesnej wersji Firefly. Aktualizacje są wyłączone."
+        "appUpdate": {
+            "title": "Sprawdź dostępność aktualizacji",
+            "installedVersion": "Zainstalowana wersja",
+            "newVerion": "Nowa wersja",
+            "stage": "Kanał",
+            "prod": "Oficjalny",
+            "alpha": "Alpha",
+            "beta": "Beta",
+            "releasedAt": "Opublikowana",
+            "updateAvailable": "Aktualizacja jest dostępna",
+            "updatesDisabled": "Dostępne są aktualizacje, ale aktualizacja automatyczna jest niedostępna dla Twojego systemu operacyjnego.",
+            "latestInstalled": "Używasz najnowszej oraz najbardziej bezpiecznej wersji"
         },
         "backupStronghold": {
             "title": "Kopia zapasowa pliku stronghold",
@@ -1148,7 +1169,7 @@
         "importSeed": "Importuj istniejący klucz seed",
         "restoreWallet": {
             "iota": "Migruj lub przywróć portfel",
-            "shimmer": "Odzyskaj profil Shimmer"
+            "shimmer": "Przywróć profil Shimmer"
         },
         "restoreWalletDescription": {
             "iota": "Migracja do sieci Chrysalis lub przywrócenie istniejącego portfela",
@@ -1177,6 +1198,7 @@
         "send": "Wyślij",
         "receive": "Odbierz",
         "create": "Utwórz",
+        "updateAndContinue": "Aktualizuj i kontynuuj",
         "beginTransfer": "Rozpocznij transfer",
         "tryAgain": "Spróbuj ponownie",
         "visitDiscord": "Odwiedź nasz Discord",
@@ -1232,12 +1254,13 @@
         "skip": "Pomiń",
         "reset": "Resetuj",
         "downloadRecoveryKit": "Zapisz szablon odzyskiwania",
-        "skipBackup": "Pomiń kopię zapasową do pliku",
+        "skipBackup": "Pomiń kopię zapasową portfela",
         "finishSetup": "Zakończ konfigurację",
         "readDocumentation": "Przeczytaj dokumentację",
         "visitFaq": "Odwiedź FAQ",
+        "viewDownloads": "Pobierz aktualizację własnoręcznie",
         "viewStatus": "Pokaż status",
-        "viewBalanceBreakdown": "Pokaż zestawienie środków",
+        "viewBalanceBreakdown": "Zestawienie środków",
         "showHiddenAccounts": "Pokaż ukryte portfele",
         "confirm": "Potwierdź",
         "hideNetworkStatistics": "Ukryj statystyki sieci",
@@ -1291,7 +1314,8 @@
         "removeProposal": "Usuń propozycję",
         "changeNode": "Zmień serwer",
         "stopVoting": "Zatrzymaj głosowanie",
-        "revote": "Odnów głosy"
+        "revote": "Odnów głosy",
+        "skipAndKeep": "Pomiń i zachowaj stare hasło"
     },
     "general": {
         "recipient": "Odbiorca",
@@ -1338,7 +1362,7 @@
         "minting": "Mintowanie",
         "burned": "Spalono",
         "burning": "Spalanie",
-        "consolidated": "Wyjścia skonsolidowane",
+        "consolidated": "Skonsolidowano wyjścia",
         "consolidating": "Konsolidowanie wyjść",
         "aliasCreated": "Alias utworzony",
         "creatingAlias": "Tworzenie aliasu",
@@ -1702,6 +1726,7 @@
             "invalidFormat": "Deep link, który wybrałeś, jest nieprawidłowy",
             "invalidAmount": "Kwota w deep linku nie jest liczbą całkowitą {amount}",
             "invalidSurplus": "Nadwyżka w deep linku nie jest liczbą {surplus}",
+            "surplusNotSupported": "Nadwyżka jest obsługiwana tylko dla natywnych tokenów",
             "governance": {
                 "unrecognizedOperation": "Nierozpoznana operacja zarządzania: {operation}"
             },
@@ -1785,7 +1810,8 @@
             "similar": "To jest podobne do powszechnie używanego hasła.",
             "word": "Jedno słowo jest łatwe do odgadnięcia.",
             "incorrect": "Twoje hasło jest niepoprawne.",
-            "length": "Twoje hasło nie może być dłuższe niż {length, plural, one {# znak} few {# znaki} many {# znaków} other {# znaków}}."
+            "length": "Twoje hasło nie może być dłuższe niż {length, plural, one {# znak} few {# znaki} many {# znaków} other {# znaków}}.",
+            "sameAsOld": "Twoje nowe hasło musi być inne niż poprzednie hasło."
         },
         "pincode": {
             "length": "Twój PIN musi składać się z {length, plural, one {# cyfry} few {# cyfr} many {# cyfr} other {# cyfr}}.",
@@ -2068,10 +2094,18 @@
             "quantity": "Opcjonalny parametr: Ilość kopii mintowanych za pomocą tych metadanych."
         },
         "governance": {
-            "removeProposalWarning": "Musisz przestać głosować na tę propozycję, zanim ją usuniesz."
+            "removeProposalWarning": "Musisz przestać głosować na tę propozycję, zanim ją usuniesz.",
+            "outdatedNode": {
+                "title": "Nieaktualny adres URL serwera",
+                "body": "Adres URL serwera dla tej propozycji jest przestarzały. Proszę go zaktualizować, aby uzyskać dostęp do najnowszych wyników głosowania."
+            },
+            "resultsNotAvailable": {
+                "title": "Wyniki niedostępne",
+                "body": "Wyniki tej propozycji nie są już dostępne na wskazanym serwerze. Proszę go zaktualizować, aby uzyskać dostęp do wyników."
+            }
         },
         "updateStronghold": {
-            "profileBadge": "Your Stronghold is out of date. Log in to update Stronghold."
+            "profileBadge": "Kopia Stronghold jest nieaktualna. Zaloguj się, aby zaktualizować Stronghold."
         }
     },
     "exports": {
@@ -2196,6 +2230,14 @@
                 "Pending": "odnawianie głosów",
                 "Confirmed": "odnów głosy",
                 "Conflicting": "nie udało się odnowić głosów"
+            },
+            "proposalStatus": {
+                "upcoming": "Nadchodzące głosowanie",
+                "commencing": "Głosowanie otwarte",
+                "holding": "Zliczanie głosów",
+                "ended": "Głosowanie zamknięte",
+                "nodeOutdated": "Nieaktualny adres URL serwera",
+                "resultsNotAvailable": "Wyniki niedostępne"
             }
         },
         "alias": {
@@ -2206,13 +2248,7 @@
             }
         },
         "locked": "zablokowano",
-        "smartContract": "smart kontrakt",
-        "proposalStatus": {
-            "upcoming": "Nadchodzące głosowanie",
-            "commencing": "Głosowanie otwarte",
-            "holding": "Zliczanie głosów",
-            "ended": "Głosowanie zamknięte"
-        }
+        "smartContract": "smart kontrakt"
     },
     "menus": {
         "expirationTimePicker": {

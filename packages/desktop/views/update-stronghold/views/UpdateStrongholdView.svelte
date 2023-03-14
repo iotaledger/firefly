@@ -1,13 +1,15 @@
 <script lang="ts">
+    import { onMount } from 'svelte'
     import { OnboardingLayout } from '@components'
     import { Animation, Button, PasswordInput, Text } from '@ui'
     import { HTMLButtonType, TextType } from '@ui/enums'
-
     import { localize } from '@core/i18n'
     import { unlockStronghold } from '@core/profile'
-    import { loginRouter, updateStrongholdRouter } from '@core/router'
+    import { updateStrongholdRouter } from '@core/router'
+    import { onboardingProfile } from '@contexts/onboarding'
 
     export let password: string = ''
+    export let isRecovery: boolean = false
 
     let passwordError: string = ''
 
@@ -22,8 +24,14 @@
     }
 
     function onBackClick(): void {
-        $loginRouter.previous()
+        $updateStrongholdRouter.previous()
     }
+
+    onMount(() => {
+        if (isRecovery) {
+            password = $onboardingProfile.strongholdPassword
+        }
+    })
 </script>
 
 <OnboardingLayout {onBackClick}>
@@ -34,10 +42,12 @@
     </div>
     <div slot="leftpane__content">
         <Text secondary classes="mb-12">
-            {localize('views.updateStronghold.update.body')}
+            {localize(`views.updateStronghold.update.${isRecovery ? 'recoveryBody' : 'loginBody'}`)}
         </Text>
         <form on:submit|preventDefault={onSubmit} id="update-stronghold-form">
-            <PasswordInput bind:value={password} bind:error={passwordError} autofocus showRevealToggle />
+            {#if !isRecovery}
+                <PasswordInput bind:value={password} bind:error={passwordError} autofocus showRevealToggle />
+            {/if}
         </form>
     </div>
     <div slot="leftpane__action">
@@ -47,10 +57,10 @@
             classes="w-full"
             disabled={!password || !!passwordError}
         >
-            {localize('actions.continue')}
+            {localize('actions.updateAndContinue')}
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-        <Animation classes="setup-anim-aspect-ratio" animation="backup-recovery-phrase-desktop" />
+        <Animation classes="setup-anim-aspect-ratio" animation="import-from-file-password-desktop" />
     </div>
 </OnboardingLayout>

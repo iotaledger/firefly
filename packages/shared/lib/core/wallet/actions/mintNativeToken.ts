@@ -2,7 +2,6 @@ import { showAppNotification } from '@auxiliary/notification'
 import { selectedAccount, updateSelectedAccount } from '@core/account'
 import { localize } from '@core/i18n'
 import { Converter } from '@core/utils'
-import { handleError } from '@core/error/handlers'
 import { NativeTokenOptions, TransactionOptions } from '@iota/wallet'
 import { get } from 'svelte/store'
 import { VerifiedStatus } from '../enums'
@@ -45,13 +44,9 @@ export async function mintNativeToken(
             alert: true,
         })
         resetMintTokenDetails()
-        updateSelectedAccount({ isTransferring: false })
-        return Promise.resolve()
     } catch (err) {
-        updateSelectedAccount({ isTransferring: false })
-
-        handleError(err)
-
         return Promise.reject(err)
+    } finally {
+        updateSelectedAccount({ isTransferring: false })
     }
 }

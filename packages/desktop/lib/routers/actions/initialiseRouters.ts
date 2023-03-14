@@ -33,8 +33,6 @@ import {
     storageProtectionSetupRouter,
     StrongholdSetupRouter,
     strongholdSetupRouter,
-    UpdateStrongholdRouter,
-    updateStrongholdRouter,
 } from '@core/router/subrouters'
 
 export function initialiseRouters(): void {
@@ -80,5 +78,4 @@ function initialiseOnboardingSubrouters(): void {
     profileSetupRouter.set(new ProfileSetupRouter())
     storageProtectionSetupRouter.set(new StorageProtectionSetupRouter())
     shimmerClaimingRouter.set(new ShimmerClaimingRouter())
-    updateStrongholdRouter.set(new UpdateStrongholdRouter())
 }
