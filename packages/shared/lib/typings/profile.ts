@@ -38,6 +38,7 @@ export interface Profile {
     accounts?: ProfileAccount[]
     stakingRewards?: AccountStakingRewards[]
     hasFinishedSingleAccountGuide?: boolean
+    strongholdVersion?: number
 }
 
 /**
