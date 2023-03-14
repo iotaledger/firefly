@@ -17,7 +17,8 @@
             "@ui/*": ["../shared/components/*"],
             "@views": ["./views"],
             "@/*": ["./lib/*"]
-        }
+        },
+        "types": ["node"],
     },
     "include": ["./capacitor"]
 }
