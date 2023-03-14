@@ -29,14 +29,11 @@ export async function downloadNftMedia(nft: INft, accountIndex: number): Promise
         const response = await fetch(downloadUrl, { method: 'HEAD', cache: 'force-cache' })
         let headers = response.headers
 
-        const hasOldSoonaverseStructure =
-            headers.get(HttpHeader.ContentType) !== nft.parsedMetadata?.type &&
-            nft.parsedMetadata?.issuerName === 'Soonaverse'
-        if (hasOldSoonaverseStructure) {
-            const backupUrl = nft.composedUrl + '/' + encodeURIComponent(nft?.parsedMetadata?.name)
-            const backupResponse = await fetch(backupUrl, { method: 'HEAD', cache: 'force-cache' })
-            downloadUrl = backupUrl
-            headers = backupResponse.headers
+        const isSoonaverse = nft.parsedMetadata?.issuerName === 'Soonaverse'
+        if (isSoonaverse) {
+            const newUrlAndHeaders = await getUrlAndHeadersFromOldSoonaverseStructure(nft, headers)
+            downloadUrl = newUrlAndHeaders?.url ?? downloadUrl
+            headers = newUrlAndHeaders?.headers ?? headers
         }
 
         const isValidMediaType = headers.get(HttpHeader.ContentType) !== nft.parsedMetadata?.type
@@ -55,6 +52,18 @@ export async function downloadNftMedia(nft: INft, accountIndex: number): Promise
     }
     nft.downloadMetadata = downloadMetadata
     addOrUpdateNftInAllAccountNfts(accountIndex, nft)
+}
+
+async function getUrlAndHeadersFromOldSoonaverseStructure(
+    nft: INft,
+    headers: Headers
+): Promise<{ url: string; headers: Headers }> {
+    const isContentTypeEqualNftType = headers.get(HttpHeader.ContentType) === nft.parsedMetadata?.type
+    if (!isContentTypeEqualNftType) {
+        const backupUrl = nft.composedUrl + '/' + encodeURIComponent(nft?.parsedMetadata?.name)
+        const backupResponse = await fetch(backupUrl, { method: 'HEAD', cache: 'force-cache' })
+        return { url: backupUrl, headers: backupResponse.headers }
+    }
 }
 
 async function isFileAlreadyDownloaded(nft: INft): Promise<boolean> {
