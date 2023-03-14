@@ -15,7 +15,9 @@ export async function downloadNftMedia(nft: INft, accountIndex: number): Promise
 
         if (!alreadyDownloaded) {
             if (nft.composedUrl) {
-                const response = await fetch(nft.composedUrl, { method: 'HEAD', cache: 'force-cache' })
+                let downloadUrl = nft.composedUrl
+
+                const response = await fetch(downloadUrl, { method: 'HEAD', cache: 'force-cache' })
                 let headers = response.headers
 
                 const hasOldSoonaverseStructure =
@@ -24,6 +26,7 @@ export async function downloadNftMedia(nft: INft, accountIndex: number): Promise
                 if (hasOldSoonaverseStructure) {
                     const backupUrl = nft.composedUrl + '/' + encodeURIComponent(nft?.parsedMetadata?.name)
                     const backupResponse = await fetch(backupUrl, { method: 'HEAD', cache: 'force-cache' })
+                    downloadUrl = backupUrl
                     headers = backupResponse.headers
                 }
 
