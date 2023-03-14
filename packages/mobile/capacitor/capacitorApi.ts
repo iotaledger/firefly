@@ -1,6 +1,6 @@
 import { Capacitor } from '@capacitor/core'
 import { SplashScreen } from '@capacitor/splash-screen'
-
+import { Device } from '@capacitor/device'
 import { IAppVersionDetails, IPlatform } from '@core/app'
 
 import { DeepLinkManager } from './lib/deepLinkManager'
@@ -69,7 +69,26 @@ export const CapacitorApi: IPlatform = {
      */
     getUserDataPath: (): Promise<string> => new Promise<string>((resolve) => resolve('')),
 
-    getDiagnostics: () => new Promise<{ label: string; value: string }[]>(() => {}),
+    /**
+     * Gets diagnostics information for the system
+     *
+     * @method getDiagnostics
+     *
+     * @returns {Promise}
+     */
+    getDiagnostics: async (): Promise<{ label: string; value: string }[]> => {
+        const info = await Device.getInfo()
+        return [
+            { label: 'Name', value: info.name },
+            { label: 'Model', value: info.model },
+            { label: 'OS', value: info.operatingSystem },
+            { label: 'OS version', value: info.osVersion },
+            { label: 'Manufacturer', value: info.manufacturer },
+            { label: 'Webview version', value: info.webViewVersion },
+            { label: 'Memory used', value: `${(info.memUsed / 1024 / 1024).toFixed(2)} MB` },
+            { label: 'Disk free', value: `${(info.realDiskFree / 1024 / 1024).toFixed(2)} MB` },
+        ]
+    },
 
     getOS: () => new Promise<string>((resolve) => resolve(Capacitor.getPlatform())),
 
