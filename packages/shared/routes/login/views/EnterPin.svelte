@@ -185,7 +185,11 @@
                 : 0}px; ; transition: padding {getKeyboardTransitionSpeed($isKeyboardOpened) +
                 'ms'} var(--transition-scroll)"
         >
-            <Profile name={$activeProfile?.name} bgColor="blue" {strongholdUpdateRequired} />
+            <Profile
+                name={$activeProfile?.name}
+                bgColor="blue"
+                strongholdUpdateRequired={$isSoftwareProfile && !isStrongholdUpdated($activeProfile)}
+            />
             {#if strongholdUpdateRequired}
                 <TextHint
                     hint={localize('views.login.updateStrongholdWarning')}
