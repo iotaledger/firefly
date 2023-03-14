@@ -69,5 +69,7 @@ function composeUrlFromNftMetadata(metadata: IIrc27Metadata): string {
         default:
             return undefined
     }
+
+    newUrl = newUrl.replace(/\/+$/, '')
     return newUrl
 }

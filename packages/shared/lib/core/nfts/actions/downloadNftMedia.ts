@@ -33,7 +33,7 @@ export async function downloadNftMedia(nft: INft, accountIndex: number): Promise
             if (validation?.error || validation?.warning) {
                 downloadMetadata = { ...downloadMetadata, ...validation }
             } else {
-                await Platform.downloadFile(nft.composedUrl, nft.filePath)
+                await Platform.downloadFile(downloadUrl, nft.filePath)
                 downloadMetadata.isLoaded = true
             }
         }
