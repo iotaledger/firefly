@@ -35,7 +35,7 @@ export async function downloadNftMedia(nft: INft, accountIndex: number): Promise
         }
 
         const validation = validateFile(nft, headers)
-        if (validation.error || validation.warning) {
+        if (validation?.error || validation?.warning) {
             downloadMetadata = { ...downloadMetadata, ...validation }
         } else {
             await Platform.downloadFile(nft.composedUrl, nft.filePath)
@@ -59,8 +59,6 @@ function validateFile(nft: INft, headers: Headers): Partial<NftDownloadMetadata>
     } else if (hasValidFileSize) {
         return { warning: { type: DownloadWarningType.FileTooLarge } }
     }
-
-    return {}
 }
 
 async function getUrlAndHeadersFromOldSoonaverseStructure(
