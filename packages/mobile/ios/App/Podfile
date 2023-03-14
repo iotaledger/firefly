@@ -1,4 +1,4 @@
-platform :ios, '12.1'
+platform :ios, '13.0'
 use_frameworks!
 
 # workaround to avoid Xcode caching of Pods that requires
@@ -9,44 +9,12 @@ install! 'cocoapods', :disable_input_output_paths => true
 def capacitor_pods
   pod 'Capacitor', :path => '../../../../node_modules/@capacitor/ios'
   pod 'CapacitorCordova', :path => '../../../../node_modules/@capacitor/ios'
+  pod 'CapacitorApp', :path => '../../../../node_modules/@capacitor/app'
+  pod 'CapacitorDevice', :path => '../../../../node_modules/@capacitor/device'
   pod 'CapacitorSplashScreen', :path => '../../../../node_modules/@capacitor/splash-screen'
-  pod 'CapacitorCommunityBarcodeScanner', :path => '../../../../node_modules/@capacitor-community/barcode-scanner'
-  pod 'CapacitorCommunityPrivacyScreen', :path => '../../../../node_modules/@capacitor-community/privacy-screen'
   pod 'CapacitorSecureStoragePlugin', :path => '../../../../node_modules/capacitor-secure-storage-plugin'
-  pod 'FireflyActorSystemCapacitorBindings', :path => '../../node_modules/firefly-actor-system-capacitor-bindings'
 end
 
 target 'App' do
   capacitor_pods
-  # Add your Pods here
-  pod 'IotaWalletInternal', :podspec => 'https://raw.githubusercontent.com/iotaledger/wallet-ios-internal/main/IotaWalletInternal.podspec'
-
-end
-
-post_install do |installer|
-  installer.pods_project.build_configurations.each do |config|
-    config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
-  end
-
-  # Add IOTAWalletInternal.xcframework as a dependency of FireflyActorSystemCapacitorBindings
-  # Based on https://github.com/CocoaPods/Xcodeproj/issues/408#issuecomment-249347379
-  # and https://www.rubydoc.info/github/CocoaPods/Xcodeproj/Xcodeproj/Project
-
-  # Get the PBXFileReference to the framework
-  pods = installer.pods_project.groups.find { |group| group.name == 'Pods' }
-  pod = pods.children.find { |child| child.name == 'IotaWalletInternal' }
-  frameworks = pod.children.find { |child| child.name == 'Frameworks' }
-  framework_file_ref = frameworks.children.first
-
-  target = installer.pods_project.targets.find { |target| target.name == 'FireflyActorSystemCapacitorBindings' }
-
-  # Add the framework to "Link Binary with Libraries"
-  frameworks_build_phase = target.build_phases.find { |build_phase| build_phase.to_s == 'FrameworksBuildPhase' }
-  frameworks_build_phase.add_file_reference(framework_file_ref)
-
-  # Create the "Embed Frameworks" build phase and add the framework
-  embed_frameworks_build_phase = target.new_copy_files_build_phase('Embed Frameworks')
-  embed_frameworks_build_phase.symbol_dst_subfolder_spec = :frameworks
-  build_file = embed_frameworks_build_phase.add_file_reference(framework_file_ref)
-  build_file.settings = { 'ATTRIBUTES' => ['CodeSignOnCopy', 'RemoveHeadersOnCopy'] }
 end
