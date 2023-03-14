@@ -6,9 +6,8 @@ This is the directory for the mobile application of Firefly - IOTA's new officia
 
 The following __must__ be installed on all platforms:
 
-- [Node.js](https://nodejs.org/en/) 16+
+- [Node.js](https://nodejs.org/) 18+
 - [Yarn](https://classic.yarnpkg.com/en/docs/install)
-- [Rust](https://www.rust-lang.org/tools/install)
 - [ImageMagick](https://imagemagick.org/script/download.php)
 
 ### Linux, Windows
@@ -32,39 +31,23 @@ $ cd packages/mobile
 packages/mobile $ yarn
 ```
 
-Generate assets:
-```bash
-# Choose `prod`, `beta` or `alpha` option
-packages/mobile $ yarn assets:prod
-```
-
-Update Capacitor plugins on `android` / `ios` project folders and open Android Studio / XCode IDE:
-```bash
-packages/mobile $ yarn android:update
-packages/mobile $ yarn ios:update
-```
-
-
 ### Development
 
-Capacitor Live Reload setup:
-```bash
-packages/mobile $ cp capacitor-sample.config.ts capacitor.config.ts 
-# modify the url field "XXX.XXX.XXX.XXX" with your local IP
+Capacitor development local IP setup
 
-# or hide "Server" block to build directly on device in next step
+Use `ifconfig` / `ipconfig` to get `YOUR_LOCAL_LAN_IP`
+``` js
+Define environmnet variable: CAP_IP=YOUR_LOCAL_LAN_IP on .bashrc / .zchrc
 ```
 
-Run development server, or instead build for device:
-```bash
-# Run development server with HMR to test on simulators, emulators and phones
-packages/mobile $ yarn dev
+Generate assets, open Android Studio / XCode, run development server:
 
-# Build the app in development mode to get logs and copy files to "./ios" and "./android" project folders
-packages/mobile $ yarn dev:device
-# It is needed to be executed with every change
+```bash
+# Choose stage `prod`, `beta` or `alpha` option
+# Choose platform `android` or `ios` option
+# yarn start [platform] [stage]
+packages/mobile $ yarn start android beta
 ```
-Next run on Android Studio / XCode IDE.
 
 Debug
 - For Android, open a Chromium browser and type `chrome://inspect` to see the attached emulator / phone, finally click on `Inspect` to get DevTools window of the emulator webview.
@@ -75,9 +58,7 @@ Debug
 
 Optimized production ready build:
 ```bash
-packages/mobile $ yarn build
-packages/mobile $ yarn ios
-packages/mobile $ yarn android
+# yarn build [platform] [stage]
+packages/mobile $ yarn build ios beta
 ```
-Finally build / run in Android Studio / XCode IDE.
-
+Finally build / run in Android Studio / XCode IDE to install the app on emulators / simulators or mobile phones.
