@@ -27,6 +27,7 @@ describe('File: getOutputOptions.ts', () => {
     const surplus = '50000'
 
     it('should return output options for base token with metadata and tag', () => {
+        // TODO: allow null expiration date -> maybe fixed with what's in my stack
         // @ts-ignore
         const output = getOutputOptions(null, recipientAddress, amount, metadata, tag)
         const expectedOutput = {
