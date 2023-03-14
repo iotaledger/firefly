@@ -1,6 +1,6 @@
 <script lang="ts">
     import { TabPane, TogglableAssetBalanceLabel, TopBar } from '@components'
-    import { Button } from '@ui'
+    import { Button, Idle } from '@ui'
     import { TabNavigator } from './tabs'
 
     import { selectedAccount } from '@core/account'
@@ -27,6 +27,7 @@
     }
 </script>
 
+<Idle />
 {#if $selectedAccount}
     <dashboard-view class="flex flex-col w-screen h-screen bg-gray-50 dark:bg-gray-900">
         <div class="px-5 py-6">

@@ -1,15 +1,15 @@
 import { get, writable } from 'svelte/store'
 
-import { UpdateStrongholdRoute } from '../../enums'
-import { Subrouter } from '../../classes'
-import { loginRouter } from '../login-router'
+import { UpdateStrongholdRoute } from '../enums'
+import { Subrouter } from '../classes'
+import { IRouter } from '@core/router/interfaces'
 
 export const updateStrongholdRoute = writable<UpdateStrongholdRoute>(null)
 export const updateStrongholdRouter = writable<UpdateStrongholdRouter>(null)
 
 export class UpdateStrongholdRouter extends Subrouter<UpdateStrongholdRoute> {
-    constructor() {
-        super(UpdateStrongholdRoute.Update, updateStrongholdRoute, get(loginRouter))
+    constructor(parentRouter: IRouter) {
+        super(UpdateStrongholdRoute.Update, updateStrongholdRoute, parentRouter)
     }
 
     next(): void {
