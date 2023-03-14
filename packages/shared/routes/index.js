@@ -27,3 +27,6 @@ export { default as Governance } from 'shared/routes/dashboard/governance/Govern
 
 // login
 export { default as Login } from 'shared/routes/login/Login.svelte'
+
+// update stronghold
+export { default as UpdateStronghold } from 'shared/routes/update-stronghold/UpdateStronghold.svelte'

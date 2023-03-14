@@ -648,6 +648,12 @@
             },
             "votes": "votes",
             "manageVote": "Manage vote"
+        },
+        "updateStronghold": {
+            "update": {
+                "title": "Update Stronghold",
+                "body": "Your Stronghold's version is out of date. Provide your password to update Stronghold."
+            }
         }
     },
     "popups": {
