@@ -67,7 +67,7 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns {Promise}
      */
-    getUserDataPath: (): Promise<string> => new Promise<string>((resolve) => resolve('')),
+    getUserDataPath: (): Promise<string> => new Promise<string>((resolve) => resolve('/DATA')),
 
     /**
      * Gets diagnostics information for the system
