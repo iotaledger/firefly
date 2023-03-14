@@ -59,10 +59,15 @@ export const CapacitorApi: IPlatform = {
      */
     exportTransactionHistory: () => new Promise((resolve) => resolve),
 
-    getUserDataPath: () =>
-        new Promise<string>((resolve) => {
-            resolve('DATA')
-        }),
+    /**
+     * Gets directory for app's configuration files
+     * On mobile is handled by the Capacitor wallet plugin
+     *
+     * @method getUserDataPath
+     *
+     * @returns {Promise}
+     */
+    getUserDataPath: (): Promise<string> => new Promise<string>((resolve) => resolve('')),
 
     getDiagnostics: () => new Promise<{ label: string; value: string }[]>(() => {}),
 
