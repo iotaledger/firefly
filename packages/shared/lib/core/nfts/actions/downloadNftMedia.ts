@@ -7,9 +7,7 @@ import { DownloadErrorType, DownloadWarningType, HttpHeader } from '../enums'
 import { NftDownloadMetadata, INft } from '../interfaces'
 
 export async function downloadNftMedia(nft: INft, accountIndex: number): Promise<void> {
-    const MAX_FILE_SIZE_IN_BYTES = (get(activeProfile)?.settings?.maxMediaSizeInMegaBytes ?? 0) * BYTES_PER_MEGABYTE
-
-    const downloadMetadata: NftDownloadMetadata = { isLoaded: false }
+    let downloadMetadata: NftDownloadMetadata = { isLoaded: false }
     try {
         const alreadyDownloaded = await isFileAlreadyDownloaded(nft)
 
@@ -36,13 +34,9 @@ export async function downloadNftMedia(nft: INft, accountIndex: number): Promise
             headers = newUrlAndHeaders?.headers ?? headers
         }
 
-        const isValidMediaType = headers.get(HttpHeader.ContentType) !== nft.parsedMetadata?.type
-        const hasValidFileSize =
-            MAX_FILE_SIZE_IN_BYTES > 0 && Number(headers.get(HttpHeader.ContentLength)) > MAX_FILE_SIZE_IN_BYTES
-        if (isValidMediaType) {
-            downloadMetadata.error = { type: DownloadErrorType.NotMatchingFileTypes }
-        } else if (hasValidFileSize) {
-            downloadMetadata.warning = { type: DownloadWarningType.FileTooLarge }
+        const validation = validateFile(nft, headers)
+        if (validation.error || validation.warning) {
+            downloadMetadata = { ...downloadMetadata, ...validation }
         } else {
             await Platform.downloadFile(nft.composedUrl, nft.filePath)
             downloadMetadata.isLoaded = true
@@ -52,6 +46,19 @@ export async function downloadNftMedia(nft: INft, accountIndex: number): Promise
     }
     nft.downloadMetadata = downloadMetadata
     addOrUpdateNftInAllAccountNfts(accountIndex, nft)
+}
+
+function validateFile(nft: INft, headers: Headers): Partial<NftDownloadMetadata> {
+    const MAX_FILE_SIZE_IN_BYTES = (get(activeProfile)?.settings?.maxMediaSizeInMegaBytes ?? 0) * BYTES_PER_MEGABYTE
+
+    const isValidMediaType = headers.get(HttpHeader.ContentType) !== nft.parsedMetadata?.type
+    const hasValidFileSize =
+        MAX_FILE_SIZE_IN_BYTES > 0 && Number(headers.get(HttpHeader.ContentLength)) > MAX_FILE_SIZE_IN_BYTES
+    if (isValidMediaType) {
+        return { error: { type: DownloadErrorType.NotMatchingFileTypes } }
+    } else if (hasValidFileSize) {
+        return { warning: { type: DownloadWarningType.FileTooLarge } }
+    }
 }
 
 async function getUrlAndHeadersFromOldSoonaverseStructure(
