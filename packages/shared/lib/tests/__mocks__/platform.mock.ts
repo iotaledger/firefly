@@ -72,6 +72,9 @@ const Platform: IPlatform = {
     installAppUpdate(): Promise<void> {
         return Promise.resolve(undefined)
     },
+    downloadFile(): Promise<void> {
+        return Promise.resolve(undefined)
+    },
     updateMenu(attribute: string, value: unknown): void {},
     copyFile(copyFilePath: string, destinationFilePath: string): Promise<void> {
         return Promise.resolve()

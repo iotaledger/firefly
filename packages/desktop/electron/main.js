@@ -9,6 +9,7 @@ const { execSync } = require('child_process')
 const { machineIdSync } = require('node-machine-id')
 const Keychain = require('./lib/keychain')
 const { initMenu, contextMenu } = require('./lib/menu')
+const { download } = require('electron-dl')
 
 const canSendCrashReports = () => {
     let sendCrashReports = loadJsonConfig('settings.json')?.sendCrashReports
@@ -176,6 +177,17 @@ if (app.isPackaged) {
 }
 
 /**
+ * Check URL against blocklist
+ */
+function isUrlAllowed(targetUrl) {
+    const externalBlocklist = ['localhost']
+    const url = new URL(targetUrl)
+    const domain = url.hostname.replace(/^www\./, '')
+
+    return !externalBlocklist.includes(domain) && !externalBlocklist.includes(domain + url.pathname)
+}
+
+/**
  * Handles url navigation events
  */
 const handleNavigation = (e, url) => {
@@ -268,7 +280,9 @@ function createWindow() {
      *  This happens e.g. when clicking on a link (<a href="www.iota.org").
      *  The handler only allows navigation to an external browser.
      */
-    windows.main.webContents.on('will-navigate', handleNavigation)
+    windows.main.webContents.on('will-navigate', (a, b) => {
+        handleNavigation(a, b)
+    })
 
     windows.main.on('close', () => {
         closeAboutWindow()
@@ -298,7 +312,7 @@ function createWindow() {
      * Handle permissions requests
      */
     session.defaultSession.setPermissionRequestHandler((_webContents, permission, cb, details) => {
-        if (permission === 'openExternal' && details && details.externalURL) {
+        if (permission === 'openExternal' && details && details.externalURL && isUrlAllowed(details.externalURL)) {
             return cb(true)
         }
 
@@ -372,7 +386,9 @@ app.once('ready', () => {
 // IPC handlers for APIs exposed from main proces
 
 // URLs
-ipcMain.handle('open-url', (_e, url) => handleNavigation(_e, url))
+ipcMain.handle('open-url', (_e, url) => {
+    handleNavigation(_e, url)
+})
 
 // Keychain
 ipcMain.handle('keychain-getAll', (_e) => Keychain.getAll())
@@ -399,6 +415,22 @@ ipcMain.handle('copy-file', (_e, sourceFilePath, destinationFilePath) => {
     const srcFileBuffer = fs.readFileSync(src)
     const dest = path.resolve(destinationFilePath)
     fs.writeFileSync(dest, srcFileBuffer)
+})
+
+ipcMain.handle('download', async (event, url, destination) => {
+    try {
+        const userPath = app.getPath('userData')
+        const directory = app.isPackaged ? userPath : __dirname
+
+        await download(windows.main, url, {
+            directory: directory + '/__storage__/' + destination,
+            filename: 'original',
+            overwrite: true,
+            saveAs: false,
+        })
+    } catch (err) {
+        return Promise.reject(err)
+    }
 })
 
 // Diagnostics

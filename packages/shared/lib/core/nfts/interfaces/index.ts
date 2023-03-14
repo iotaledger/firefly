@@ -1,5 +1,6 @@
 export * from './irc27-attribute.interface'
 export * from './irc27-metadata.interface'
 export * from './nft.interface'
+export * from './nft-download-metadata.interface'
 export * from './soonaverse-attribute.interface'
 export * from './soonaverse-attributes.interface'
