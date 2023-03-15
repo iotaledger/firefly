@@ -17,7 +17,7 @@ let activeProfileId = null
 
 export const nativeSplash = SplashScreen
 
-export const CapacitorApi: Partial<IPlatform> = {
+const CapacitorApi: Partial<IPlatform> = {
     // TODO: https://github.com/iotaledger/firefly/issues/6172
     updateAppSettings: () => new Promise((resolve) => resolve),
 
