@@ -2,31 +2,43 @@
     import { Button, Text, TextType, TextHint } from 'shared/components'
     import { ButtonVariant } from 'shared/components/enums'
     import { handleError } from '@core/error/handlers'
-    import { deregisterParticipationEvent } from '@contexts/governance/actions'
     import { ProposalStatus } from '@contexts/governance/enums'
-    import { selectedProposal } from '@contexts/governance/stores'
+    import {
+        clearSelectedParticipationEventStatus,
+        removePersistedProposal,
+        selectedProposal,
+        selectedProposalId,
+    } from '@contexts/governance/stores'
     import { localize } from '@core/i18n'
     import { governanceRouter } from '@core/router'
     import { closePopup } from '@auxiliary/popup'
     import { showAppNotification } from '@auxiliary/notification'
+    import { selectedAccount } from '@core/account/stores'
 
-    function handleCancel(): void {
+    function onCancelClick(): void {
         closePopup()
     }
 
-    async function handleConfirm(): Promise<void> {
+    async function onConfirmClick(): Promise<void> {
         try {
-            await deregisterParticipationEvent($selectedProposal.id)
+            await $selectedAccount.deregisterParticipationEvent($selectedProposalId)
+            $governanceRouter.previous()
+            clearEvent()
+            closePopup()
             showAppNotification({
                 type: 'success',
                 message: localize('views.governance.proposals.successRemove'),
                 alert: true,
             })
-            closePopup()
-            $governanceRouter.previous()
         } catch (err) {
             handleError(err)
         }
+    }
+
+    function clearEvent(): void {
+        removePersistedProposal($selectedProposalId, $selectedAccount.index)
+        $selectedProposalId = null
+        clearSelectedParticipationEventStatus()
     }
 
     // TODO: User can only remove a proposal when he is not voting for it
@@ -43,8 +55,8 @@
         {/if}
     </div>
     <div class="flex w-full space-x-4 mt-6">
-        <Button outline classes="w-full" onClick={handleCancel}>{localize('actions.cancel')}</Button>
-        <Button variant={ButtonVariant.Warning} classes="w-full" onClick={handleConfirm}
+        <Button outline classes="w-full" onClick={onCancelClick}>{localize('actions.cancel')}</Button>
+        <Button variant={ButtonVariant.Warning} classes="w-full" onClick={onConfirmClick}
             >{localize('actions.remove')}</Button
         >
     </div>

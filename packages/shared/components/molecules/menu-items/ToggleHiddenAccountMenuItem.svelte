@@ -7,12 +7,12 @@
 
     export let onClick: () => unknown
 
-    function handleShowAccountClick(): void {
+    function onShowAccountClick(): void {
         updateActiveAccountMetadata($selectedAccount.index, { hidden: false })
         onClick && onClick()
     }
 
-    function handleHideAccountClick(): void {
+    function onHideAccountClick(): void {
         if ($nonHiddenActiveAccounts.length > 1) {
             updateActiveAccountMetadata($selectedAccount.index, { hidden: true })
             if (!$activeProfile.showHiddenAccounts) {
@@ -28,7 +28,7 @@
 <MenuItem
     icon={$selectedAccount.hidden ? Icon.View : Icon.Hide}
     title={localize($selectedAccount.hidden ? 'actions.showAccount' : 'actions.hideAccount')}
-    onClick={() => ($selectedAccount.hidden ? handleShowAccountClick() : handleHideAccountClick())}
+    onClick={() => ($selectedAccount.hidden ? onShowAccountClick() : onHideAccountClick())}
     disabled={!$selectedAccount.hidden && $nonHiddenActiveAccounts.length <= 1}
     {...$$restProps}
 />

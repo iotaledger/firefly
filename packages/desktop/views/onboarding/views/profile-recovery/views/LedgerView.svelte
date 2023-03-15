@@ -7,16 +7,16 @@
     import { profileRecoveryRouter } from '@core/router'
     import { onboardingProfile } from '@contexts/onboarding'
 
-    function handleContinueClick(): void {
+    function onContinueClick(): void {
         $profileRecoveryRouter.next()
     }
 
-    function handleBackClick(): void {
+    function onBackClick(): void {
         $profileRecoveryRouter.previous()
     }
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick}>
+<OnboardingLayout {onBackClick}>
     <div slot="title">
         <Text type="h2">{localize('views.importFromLedger.title')}</Text>
     </div>
@@ -28,14 +28,14 @@
             primaryText={localize('views.importFromLedger.haveFireflyLedger')}
             secondaryText={localize('views.importFromLedger.haveFireflyLedgerDescription')}
             icon="settings"
-            onClick={handleContinueClick}
+            onClick={onContinueClick}
         />
         <OnboardingButton
             primaryText={localize('views.importFromLedger.haveTrinityLedger')}
             secondaryText={localize('views.importFromLedger.haveTrinityLedgerDescription')}
             icon="settings"
             hidden={$onboardingProfile.networkProtocol === NetworkProtocol.Shimmer}
-            onClick={handleContinueClick}
+            onClick={onContinueClick}
         />
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-purple dark:bg-gray-900'}">

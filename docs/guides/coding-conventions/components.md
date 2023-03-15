@@ -44,7 +44,7 @@ It's not enforced, since regular typescript handles store variables differently.
     
     $: double = $count * 2
 
-    function increment(): void {
+    function onClick(): void {
         $count += 1
     }
 </script>
@@ -53,7 +53,7 @@ It's not enforced, since regular typescript handles store variables differently.
     The count is {$count}
     The double is {double}
 </h1>
-<button on:click={increment}>
+<button on:click={onClick}>
     Click to update count!
 </button>
 ```
@@ -70,7 +70,7 @@ The same code can be written without using Svelte language features. The followi
     const count = writable(0)
     let double = 0
 
-    function increment(): void {
+    function onClick(): void {
         count.update(n => n + 1)
     }
  
@@ -87,7 +87,7 @@ The same code can be written without using Svelte language features. The followi
     The count is {$count}
     The double is {double}
 </h1>
-<button on:click={increment}>
+<button on:click={onClick}>
     Click to update count!
 </button>
 ```

@@ -9,7 +9,7 @@
 
     $: hasAliases = $selectedAccount.balances?.aliases.length > 0
 
-    function onMintNativeToken(): void {
+    function onMintNativeTokenClick(): void {
         resetMintTokenDetails()
         if (hasAliases) {
             openPopup({
@@ -38,5 +38,5 @@
 <OnboardingButton
     primaryText={localize('actions.mintNativeToken')}
     secondaryText={localize('general.mintNativeTokenDescription')}
-    onClick={onMintNativeToken}
+    onClick={onMintNativeTokenClick}
 />

@@ -5,7 +5,7 @@
 
     const busy = false
 
-    function handleCancelClick(): void {
+    function onCancelClick(): void {
         closePopup()
     }
 </script>
@@ -25,7 +25,7 @@
         </div>
     </div>
     <div class="flex flex-row justify-between space-x-4 w-full">
-        <Button outline classes="w-1/2" onClick={handleCancelClick} disabled={busy}>
+        <Button outline classes="w-1/2" onClick={onCancelClick} disabled={busy}>
             {localize('actions.cancel')}
         </Button>
         <ExportStrongholdButton showNotification overrideTitle={localize('actions.backup')} classes="w-1/2" />

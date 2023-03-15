@@ -1,9 +1,12 @@
+import { get } from 'svelte/store'
+
 import { IAccountState, selectedAccount } from '@core/account'
 import { activeAccounts } from '@core/profile'
-import { get } from 'svelte/store'
+
 import { IRegisteredProposals } from '../interfaces'
 import { registeredProposals } from '../stores'
-import { createProposalFromEvent } from '../utils'
+import { createProposalFromError, createProposalFromEvent } from '../utils'
+import { getAccountsParticipationEventStatusForEvent } from './getAccountsParticipationEventStatusForEvent'
 
 export async function initializeRegisteredProposals(): Promise<void> {
     const allProposals: { [accountId: number]: IRegisteredProposals } = {}
@@ -28,7 +31,13 @@ async function getParticipationEventsAndCreateProposalsForAccount(
     const proposals: IRegisteredProposals = {}
     const events = await account.getParticipationEvents()
     for (const event of Object.values(events)) {
-        proposals[event.id] = createProposalFromEvent(event)
+        const proposal = createProposalFromEvent(event)
+        try {
+            await getAccountsParticipationEventStatusForEvent(event.id, account)
+            proposals[event.id] = proposal
+        } catch (err) {
+            proposals[event.id] = createProposalFromError(proposal, err)
+        }
     }
     return proposals
 }

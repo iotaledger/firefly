@@ -148,3 +148,5 @@ function persistedProfileMigrationToV9(existingProfile: IPersistedProfile): void
 
     saveProfile(existingProfile)
 }
+
+// TODO: Rename accountMetadata to accountPersistedData in next migration

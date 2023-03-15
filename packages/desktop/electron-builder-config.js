@@ -6,6 +6,7 @@ const STAGE = process.env.STAGE || 'alpha'
 const APP_NAME = getAppName()
 const APP_ID = getAppId()
 const APP_PROTOCOL = getAppProtocol()
+const CHANNEL_NAME = getChannelName()
 
 /**
  * If stage = 'prod' -> 'Firefly'
@@ -27,6 +28,17 @@ function getAppId() {
         return defaultAppId
     }
     return `${defaultAppId}.${STAGE}`
+}
+
+function getChannelName() {
+    switch (STAGE) {
+        case 'alpha':
+            return 'shimmer-alpha'
+        case 'beta':
+            return 'shimmer-beta'
+        default:
+            return 'shimmer'
+    }
 }
 
 const prodConfig = () => ({
@@ -94,8 +106,8 @@ const prodConfig = () => ({
     publish: {
         provider: 'generic',
         url: 'https://dl.firefly.iota.org/',
-        publishAutoUpdate: false,
-        channel: 'latest',
+        publishAutoUpdate: true,
+        channel: CHANNEL_NAME,
     },
 })
 
@@ -126,11 +138,7 @@ const prereleaseNsisOptions = {
 
 const testConfig = () => {
     const icons = getIconPaths()
-    const publish = {
-        publishAutoUpdate: false,
-    }
-
-    return merge({}, prodConfig(), icons, { appId: APP_ID }, prereleaseNsisOptions, { publish })
+    return merge({}, prodConfig(), icons, { appId: APP_ID }, prereleaseNsisOptions)
 }
 
 const build = () => {

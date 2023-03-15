@@ -1,8 +1,6 @@
-import { closePopup } from '@auxiliary/popup'
-import { resetSelectedAccount } from '@core/account'
+import { resetSelectedAccountIndex } from '@core/account'
 import {
     clearSelectedParticipationEventStatus,
-    resetHasPendingGovernanceTransaction,
     resetProposalOverviews,
     resetRegisteredProposals,
 } from '@contexts/governance/stores'
@@ -49,14 +47,12 @@ export function logout(clearActiveProfile = true, _lockStronghold = true): void 
 function cleanupProfileState(clearActiveProfile: boolean): void {
     const { lastActiveAt, loggedIn, hasLoadedAccounts } = get(activeProfile)
 
-    lastActiveAt.set(new Date())
-    closePopup(true)
     loggedIn.set(false)
+    lastActiveAt.set(new Date())
     hasLoadedAccounts.set(false)
-    resetSelectedAccount()
+    resetSelectedAccountIndex()
 
     // Governance Stores
-    resetHasPendingGovernanceTransaction()
     resetRegisteredProposals()
     resetProposalOverviews()
     clearSelectedParticipationEventStatus()

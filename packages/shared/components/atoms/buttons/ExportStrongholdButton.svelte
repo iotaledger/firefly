@@ -37,7 +37,7 @@
         }
     }
 
-    function handleExportClick(): void {
+    function onExportClick(): void {
         isBusy = false
         message = ''
 
@@ -59,7 +59,7 @@
 <Button
     size={ButtonSize.Medium}
     inlineStyle="min-width: 156px;"
-    onClick={handleExportClick}
+    onClick={onExportClick}
     disabled={isBusy}
     {...$$restProps}
 >

@@ -7,12 +7,12 @@
 
     $: receiveAddress = $selectedAccount?.depositAddress
 
-    function handleClick(): void {
+    function onClick(): void {
         addressBoxElement.copyAddress()
     }
 </script>
 
-<receive-details on:click={handleClick} class="w-full flex-auto flex flex-col items-center justify-center">
+<receive-details on:click={onClick} class="w-full flex-auto flex flex-col items-center justify-center">
     <div class="flex w-full flex-col items-center space-y-6">
         <QR data={receiveAddress} />
         <Text type={TextType.h4}>{$selectedAccount?.name}</Text>

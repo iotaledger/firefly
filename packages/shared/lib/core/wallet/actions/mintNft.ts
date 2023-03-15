@@ -11,7 +11,6 @@ import { addActivityToAccountActivitiesInAllAccountActivities, resetMintNftDetai
 import { NftActivity } from '../types'
 import { preprocessTransaction } from '../utils'
 import { generateSingleNftActivity } from '../utils/generateActivity/generateSingleNftActivity'
-import { handleError } from '@core/error/handlers'
 
 export async function mintNft(metadata: IIrc27Metadata, quantity: number): Promise<void> {
     try {
@@ -53,11 +52,7 @@ export async function mintNft(metadata: IIrc27Metadata, quantity: number): Promi
                 addOrUpdateNftInAllAccountNfts(account.index, nft)
             }
         }
-
-        return Promise.resolve()
     } catch (err) {
-        handleError(err)
-
         return Promise.reject(err)
     } finally {
         updateSelectedAccount({ isTransferring: false })
