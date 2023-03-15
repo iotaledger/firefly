@@ -5,19 +5,20 @@ import { generateRandomId } from '@core/utils'
 import { api } from '../api'
 import { IProfileManager } from '../interfaces'
 
-export function initialiseProfileManager(
+export async function initialiseProfileManager(
     storagePath: string,
     coinType: CoinType,
     clientOptions?: ClientOptions,
     secretManager?: SecretManager,
     id?: string
-): IProfileManager {
+): Promise<IProfileManager> {
     id = id ?? generateRandomId()
 
-    return api.createAccountManager(id, {
+    const profileManager =  await api.createAccountManager(id, {
         storagePath,
         ...(clientOptions && { clientOptions }),
         coinType,
         ...(secretManager && { secretManager }),
     })
+    return profileManager
 }
