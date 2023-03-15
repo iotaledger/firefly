@@ -1,5 +1,4 @@
 import { Capacitor } from '@capacitor/core'
-import { SplashScreen } from '@capacitor/splash-screen'
 import { Device } from '@capacitor/device'
 import { IAppVersionDetails, IPlatform } from '@core/app'
 
@@ -14,8 +13,6 @@ import { WalletApi } from '@iota/wallet-mobile'
 window['__WALLET__API__'] = WalletApi
 
 let activeProfileId = null
-
-export const nativeSplash = SplashScreen
 
 const CapacitorApi: Partial<IPlatform> = {
     // TODO: https://github.com/iotaledger/firefly/issues/6172
