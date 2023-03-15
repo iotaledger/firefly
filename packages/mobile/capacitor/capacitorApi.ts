@@ -99,58 +99,40 @@ export const CapacitorApi: Partial<IPlatform> = {
 
     /**
      * Starts an update of the application
-     *
-     * @method updateDownload
-     *
-     * @returns void
+     * (On mobile the only way to update the app is acroos the stores,
+     *  we only can show a drawer / notification to redirecto to stores)
      */
     downloadAppUpdate: () => new Promise<void>(() => {}),
 
     /**
      * Cancels an update of the application
-     *
-     * @method updateCancel
-     *
-     * @returns void
+     * (Not needed on mobile)
      */
     cancelAppUpdateDownload: () => new Promise<void>(() => {}),
 
     /**
      * Install an update of the application
-     *
-     * @method updateInstall
-     *
-     * @returns void
+     * (Not needed on mobile)
      */
     installAppUpdate: () => new Promise<void>(() => {}),
 
     /**
      * Check for an update of the application
-     *
-     * @method updateCheck
-     *
-     * @returns void
      */
     checkForAppUpdate: () => new Promise<void>(() => {}),
 
     /**
      * Get version details
-     *
-     * @method getVersionDetails
-     *
-     * @returns void
      */
     getAppVersionDetails: () => new Promise<IAppVersionDetails>(() => {}),
 
     /**
      * Change menu state to determine what menu items to display
-     * @returns {undefined}
      */
     updateMenu: () => new Promise<void>(() => {}),
 
     /**
      * Show the popup menu
-     * @returns {undefined}
      */
     popupMenu: () => new Promise<void>(() => {}),
 
@@ -162,7 +144,6 @@ export const CapacitorApi: Partial<IPlatform> = {
 
     /**
      * Close the app
-     * @returns {undefined}
      */
     close: () => new Promise<void>(() => {}),
 
@@ -170,8 +151,6 @@ export const CapacitorApi: Partial<IPlatform> = {
 
     /**
      * Log unhandled exception
-     * @param {string} errorType The type of eerror
-     * @param {Errir} error The error
      */
     unhandledException: () => new Promise<void>(() => {}),
 
