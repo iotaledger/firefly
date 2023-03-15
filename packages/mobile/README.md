@@ -27,6 +27,8 @@ The following __must__ be installed on all platforms:
 
 Install yarn dependencies:
 ```bash
+## in the root directory
+$ yarn
 $ cd packages/mobile
 packages/mobile $ yarn
 ```
