@@ -70,6 +70,12 @@ function composeUrlFromNftMetadata(metadata: IIrc27Metadata): string {
             return undefined
     }
 
-    newUrl = newUrl.replace(/\/+$/, '')
-    return newUrl
+    return cleanupUrl(newUrl)
+}
+
+function cleanupUrl(url: string): string {
+    const removedQueryParams = url.split('?')[0]
+    const removedTrailingSlashes = removedQueryParams.replace(/\/+$/, '')
+
+    return removedTrailingSlashes
 }

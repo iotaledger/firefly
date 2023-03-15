@@ -425,7 +425,6 @@ ipcMain.handle('download', async (event, url, destination) => {
         await download(windows.main, url, {
             directory: directory + '/__storage__/' + destination,
             filename: 'original',
-            overwrite: true,
             saveAs: false,
         })
     } catch (err) {
