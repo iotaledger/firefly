@@ -9,6 +9,10 @@ import { PincodeManager } from './lib/pincodeManager'
 
 import features from '@features/features'
 
+import { WalletApi } from '@iota/wallet-mobile'
+
+window['__WALLET__API__'] = WalletApi
+
 let activeProfileId = null
 
 export const nativeSplash = SplashScreen
