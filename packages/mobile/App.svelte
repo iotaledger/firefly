@@ -1,6 +1,8 @@
 <script lang="ts">
     import { onMount } from 'svelte'
 
+    import { SplashScreen } from '@capacitor/splash-screen'
+
     import { DrawerManager } from '@components'
     import { ToastContainer } from '@ui'
 
@@ -52,13 +54,11 @@
         closeAllDrawers()
     }
 
-    let splash = true
-
     void setupI18n({ fallbackLocale: 'en', initialLocale: $appSettings.language })
 
     onMount(async () => {
         setTimeout(() => {
-            splash = false
+            SplashScreen.hide()
             initialiseRouters()
         }, 3000)
 
