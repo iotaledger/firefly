@@ -178,7 +178,6 @@ export const CapacitorApi: Partial<IPlatform> = {
     removeListenersForEvent: () => new Promise<void>(() => {}),
 
     saveRecoveryKit: () => new Promise<void>(() => {}),
-    ledger: undefined,
     isFeatureFlagEnabled(keyPath) {
         return keyPath?.split('.').reduce((prev, cur) => prev && prev[cur], features)?.enabled ?? false
     },
