@@ -1,19 +1,19 @@
 <script lang="ts">
     import {
+        Alert,
         Button,
         CollectibleDetailsMenu,
-        FontWeight,
         KeyValueBox,
         MeatballMenuButton,
         Modal,
         NftMedia,
-        Text,
-        TextType,
-        Alert,
         Pane,
+        Text,
     } from '@ui'
-    import { openPopup } from '@auxiliary/popup/actions'
+    import { FontWeight, TextType } from '@ui/enums'
+
     import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
+    import { time } from '@core/app'
     import { openUrlInBrowser } from '@core/app/utils'
     import { localize } from '@core/i18n'
     import { ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
@@ -21,13 +21,13 @@
     import {
         allAccountNfts,
         convertAndFormatNftMetadata,
-        DownloadErrorType,
-        DownloadWarningType,
         getNftByIdFromAllAccountNfts,
         INft,
+        NftDownloadMetadata,
         selectedNftId,
     } from '@core/nfts'
     import { activeProfile } from '@core/profile/stores'
+    import { collectiblesRouter } from '@core/router/routers'
     import { truncateString } from '@core/utils'
     import {
         ActivityType,
@@ -42,60 +42,23 @@
         OUTPUT_TYPE_NFT,
     } from '@core/wallet'
     import { NewTransactionType, selectedAccountActivities, setNewTransactionDetails } from '@core/wallet/stores'
+
+    import { openPopup } from '@auxiliary/popup/actions'
     import { PopupId } from '@auxiliary/popup'
-    import { collectiblesRouter } from '@core/router/routers'
-    import { time } from '@core/app'
 
     let modal: Modal
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
     const nft: INft = getNftByIdFromAllAccountNfts($selectedAccountIndex, $selectedNftId)
 
-    const { id, name, issuer, address, metadata } = nft ?? {}
+    const { id, name, issuer, address, metadata, downloadMetadata } = nft ?? {}
     const { standard, version, type, uri, description, issuerName, collectionName, attributes, soonaverseAttributes } =
         nft?.parsedMetadata || {}
 
     const issuerAddress = getBech32AddressFromAddressTypes(issuer)
     const collectionId = getHexAddressFromAddressTypes(issuer)
+
     let storageDeposit: string = undefined
-
-    $: nftActivity = $selectedAccountActivities
-        .sort((a1, a2) => a1.time.getTime() - a2.time.getTime())
-        .find((activity) => activity?.type === ActivityType.Nft && activity?.nftId === id)
-
-    $: formattedMetadata = convertAndFormatNftMetadata(metadata)
-    $: returnIfNftWasSent($allAccountNfts[$selectedAccountIndex], $time)
-    $: timeDiff = getTimeDifference(new Date(nft.timelockTime), $time)
-
-    $: nftActivity, setStorageDeposit()
-    async function setStorageDeposit() {
-        const outputs = await $selectedAccount.outputs()
-        const nftOutputs = outputs
-            .filter((output) => output.output.type === OUTPUT_TYPE_NFT)
-            .sort((a, b) => b.metadata.milestoneTimestampBooked - a.metadata.milestoneTimestampBooked)
-        const recentNftOutput = nftOutputs.find(
-            (o) => o.output.type === OUTPUT_TYPE_NFT && getNftId(o.output.nftId, o.outputId) === id
-        )
-
-        storageDeposit = formatTokenAmountPrecise(
-            Number(recentNftOutput?.output.amount ?? 0),
-            BASE_TOKEN[$activeProfile?.networkProtocol]
-        )
-    }
-
-    let alertText
-    $: if (nft.downloadMetadata.error) {
-        alertText =
-            nft.downloadMetadata.error.type === DownloadErrorType.Generic
-                ? nft.downloadMetadata.error.message
-                : localize(`error.nft.${nft.downloadMetadata.error.type}.long`)
-    } else if (nft.downloadMetadata.warning) {
-        alertText =
-            nft.downloadMetadata.warning.type === DownloadWarningType.Generic
-                ? nft.downloadMetadata.warning.message
-                : localize(`error.nft.${nft.downloadMetadata.warning.type}.long`)
-    }
-
     let detailsList: {
         [key in string]: {
             data: string
@@ -105,6 +68,15 @@
             maxHeight?: number
         }
     }
+
+    $: nftActivity = $selectedAccountActivities
+        .sort((a1, a2) => a1.time.getTime() - a2.time.getTime())
+        .find((activity) => activity?.type === ActivityType.Nft && activity?.nftId === id)
+    $: formattedMetadata = convertAndFormatNftMetadata(metadata)
+    $: returnIfNftWasSent($allAccountNfts[$selectedAccountIndex], $time)
+    $: timeDiff = getTimeDifference(new Date(nft.timelockTime), $time)
+    $: nftActivity, setStorageDeposit()
+    $: alertText = getAlertText(downloadMetadata)
     $: detailsList = {
         ...(id && {
             nftId: { data: truncateString(id, 20, 20), copyValue: id, isCopyable: true },
@@ -142,6 +114,21 @@
             }),
     }
 
+    async function setStorageDeposit(): Promise<void> {
+        const outputs = await $selectedAccount.outputs()
+        const nftOutputs = outputs
+            .filter((output) => output.output.type === OUTPUT_TYPE_NFT)
+            .sort((a, b) => b.metadata.milestoneTimestampBooked - a.metadata.milestoneTimestampBooked)
+        const recentNftOutput = nftOutputs.find(
+            (o) => o.output.type === OUTPUT_TYPE_NFT && getNftId(o.output.nftId, o.outputId) === id
+        )
+
+        storageDeposit = formatTokenAmountPrecise(
+            Number(recentNftOutput?.output.amount ?? 0),
+            BASE_TOKEN[$activeProfile?.networkProtocol]
+        )
+    }
+
     function returnIfNftWasSent(selectedAccountNfts: INft[], currentTime: Date): void {
         const nft = selectedAccountNfts.find((nft) => nft.id === id)
         const isLocked = nft.timelockTime > currentTime.getTime()
@@ -152,11 +139,11 @@
         }
     }
 
-    function handleExplorerClick(): void {
+    function onExplorerClick(): void {
         openUrlInBrowser(`${explorerUrl}/${ExplorerEndpoint.Nft}/${id}`)
     }
 
-    function handleSendClick(): void {
+    function onSendClick(): void {
         setNewTransactionDetails({
             type: NewTransactionType.NftTransfer,
             nftId: id,
@@ -168,9 +155,21 @@
             overflow: true,
         })
     }
+
+    function getAlertText(downloadMetadata: NftDownloadMetadata): string {
+        const { error, warning } = downloadMetadata ?? {}
+        const errorOrWarning = error || warning
+
+        if (!errorOrWarning) {
+            return
+        }
+
+        const { type, message } = errorOrWarning
+        return type === 'generic' ? message : localize(`error.nft.${type}.long`)
+    }
 </script>
 
-<div class="flex flex-row w-full h-full space-x-4">
+<collectibles-details-view class="flex flex-row w-full h-full space-x-4">
     <div class="flex w-full h-full items-center justify-center">
         <div class="relative w-full h-full flex rounded-2xl overflow-hidden">
             <NftMedia
@@ -182,10 +181,8 @@
                 muted
             />
             <div class="absolute right-6 bottom-6 w-auto">
-                {#if nft.downloadMetadata.error}
-                    <Alert type="error" message={alertText} />
-                {:else if nft.downloadMetadata.warning}
-                    <Alert type="warning" message={alertText} />
+                {#if alertText}
+                    <Alert type={downloadMetadata?.error ? 'error' : 'warning'} message={alertText} />
                 {/if}
             </div>
         </div>
@@ -259,15 +256,15 @@
                 {/if}
             {/if}
         </div>
-        <div class="flex w-full space-x-4 self-end mt-auto pt-4">
-            <Button outline classes="flex-1" onClick={handleExplorerClick} disabled={!explorerUrl}>
+        <buttons-container class="flex w-full space-x-4 self-end mt-auto pt-4">
+            <Button outline classes="flex-1" onClick={onExplorerClick} disabled={!explorerUrl}>
                 {localize('general.viewOnExplorer')}
             </Button>
-            <Button classes="flex-1" onClick={handleSendClick} disabled={!!timeDiff}>
+            <Button classes="flex-1" onClick={onSendClick} disabled={!!timeDiff}>
                 {timeDiff
                     ? localize('popups.balanceBreakdown.locked.title') + ' ' + String(timeDiff)
                     : localize('actions.send')}
             </Button>
-        </div>
+        </buttons-container>
     </Pane>
-</div>
+</collectibles-details-view>
