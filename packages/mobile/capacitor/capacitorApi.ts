@@ -60,15 +60,11 @@ const CapacitorApi: Partial<IPlatform> = {
         throw new Error('Function not implemented.')
     },
 
-    /**
-     * Gets directory for app's configuration files
-     * (On mobile is handled by the Capacitor wallet plugin)
-     */
+    // Gets directory for app's configuration files
+    // (On mobile is handled by the Capacitor wallet plugin)
     getUserDataPath: (): Promise<string> => new Promise<string>((resolve) => resolve('/DATA')),
 
-    /**
-     * Gets diagnostics information for the system
-     */
+    // Gets diagnostics information for the system
     getDiagnostics: async (): Promise<{ label: string; value: string }[]> => {
         const info = await Device.getInfo()
         return [
@@ -83,54 +79,35 @@ const CapacitorApi: Partial<IPlatform> = {
         ]
     },
 
-    /**
-     * Gets os information for the system
-     */
+    // Gets os information for the system
     getOS: (): Promise<string> => new Promise<string>((resolve) => resolve(Capacitor.getPlatform())),
 
-    /**
-     * Gets machine ID mockup mehotd
-     * (We don't use Sentry for mobile)
-     */
-    getMachineId: () => new Promise<string>((resolve) => resolve('')),
-
-    /**
-     * Starts an update of the application
-     * (On mobile the only way to update the app is acroos the stores,
-     *  we only can show a drawer / notification to redirecto to stores)
-     */
-    downloadAppUpdate: () => new Promise<void>(() => {}),
-
-    /**
-     * Cancels an update of the application
-     * (Not needed on mobile)
-     */
-    cancelAppUpdateDownload: () => new Promise<void>(() => {}),
-
-    /**
-     * Install an update of the application
-     * (Not needed on mobile)
-     */
-    installAppUpdate: () => new Promise<void>(() => {}),
-
-    /**
-     * Check for an update of the application
-     */
+    // Check for an update of the application
+    // TODO https://github.com/iotaledger/firefly/issues/6191
     checkForAppUpdate: () => new Promise<void>(() => {}),
 
-    /**
-     * Get version details
-     */
+    // Get version details
+    // TODO https://github.com/iotaledger/firefly/issues/6190
     getAppVersionDetails: () => new Promise<IAppVersionDetails>(() => {}),
 
-    /**
-     * Change menu state to determine what menu items to display
-     */
-    updateMenu: () => new Promise<void>(() => {}),
+    isFeatureFlagEnabled(keyPath) {
+        return keyPath?.split('.').reduce((prev, cur) => prev && prev[cur], features)?.enabled ?? false
+    },
 
     /**
-     * Show the popup menu
+     * Methods not needed on mobile
      */
+
+    getMachineId: () => new Promise<string>((resolve) => resolve('')),
+
+    downloadAppUpdate: () => new Promise<void>(() => {}),
+
+    cancelAppUpdateDownload: () => new Promise<void>(() => {}),
+
+    installAppUpdate: () => new Promise<void>(() => {}),
+
+    updateMenu: () => new Promise<void>(() => {}),
+
     popupMenu: () => new Promise<void>(() => {}),
 
     minimize: () => new Promise<void>(() => {}),
@@ -139,26 +116,17 @@ const CapacitorApi: Partial<IPlatform> = {
 
     isMaximized: () => new Promise<boolean>(() => {}),
 
-    /**
-     * Close the app
-     */
     close: () => new Promise<void>(() => {}),
-
-    openUrl: () => new Promise<void>(() => {}),
-
-    /**
-     * Log unhandled exception
-     */
-    unhandledException: () => new Promise<void>(() => {}),
 
     onEvent: () => new Promise<void>(() => {}),
 
     removeListenersForEvent: () => new Promise<void>(() => {}),
 
+    openUrl: () => new Promise<void>(() => {}),
+
+    unhandledException: () => new Promise<void>(() => {}),
+
     saveRecoveryKit: () => new Promise<void>(() => {}),
-    isFeatureFlagEnabled(keyPath) {
-        return keyPath?.split('.').reduce((prev, cur) => prev && prev[cur], features)?.enabled ?? false
-    },
 }
 
 window['__CAPACITOR__'] = CapacitorApi
