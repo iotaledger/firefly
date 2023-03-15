@@ -46,11 +46,11 @@
     let decimalsInput: OptionalInput
     let aliasInput: AliasInput
 
-    function handleCancel(): void {
+    function onCancelClick(): void {
         closePopup()
     }
 
-    async function handleContinue(): Promise<void> {
+    async function onContinueClick(): Promise<void> {
         const valid = await validate()
         if (valid) {
             setMintTokenDetails({
@@ -224,10 +224,10 @@
     </div>
 
     <div class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button outline classes="w-full" onClick={handleCancel}>
+        <Button outline classes="w-full" onClick={onCancelClick}>
             {localize('actions.cancel')}
         </Button>
-        <Button classes="w-full" onClick={handleContinue}>
+        <Button classes="w-full" onClick={onContinueClick}>
             {localize('actions.continue')}
         </Button>
     </div>

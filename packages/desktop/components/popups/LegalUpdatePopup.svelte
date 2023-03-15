@@ -19,15 +19,15 @@
     const tos = needsToAcceptLatestTermsOfService()
     const privacyPolicy = needsToAcceptLatestPrivacyPolicy()
 
-    function handleViewTosClick(): void {
+    function onViewTosClick(): void {
         openUrlInBrowser(TOS_LINK)
     }
 
-    function handleViewPrivPolicyClick(): void {
+    function onViewPrivPolicyClick(): void {
         openUrlInBrowser(PRIVACY_POLICY_LINK)
     }
 
-    function handleConfirmClick(): void {
+    function onConfirmClick(): void {
         if (tos) {
             lastAcceptedTermsOfService.set(TERMS_OF_SERVICE_VERSION)
         }
@@ -74,22 +74,22 @@
     <Text type="p" secondary>{localize(getBodyText())}</Text>
     {#if tos && privacyPolicy}
         <ul>
-            <li><Link onClick={handleViewTosClick}>{localize('popups.legalUpdate.tosTitle')}</Link></li>
-            <li><Link onClick={handleViewPrivPolicyClick}>{localize('popups.legalUpdate.privPolicyTitle')}</Link></li>
+            <li><Link onClick={onViewTosClick}>{localize('popups.legalUpdate.tosTitle')}</Link></li>
+            <li><Link onClick={onViewPrivPolicyClick}>{localize('popups.legalUpdate.privPolicyTitle')}</Link></li>
         </ul>
     {:else if tos}
         <ul>
-            <li><Link onClick={handleViewTosClick}>{localize('popups.legalUpdate.tosTitle')}</Link></li>
+            <li><Link onClick={onViewTosClick}>{localize('popups.legalUpdate.tosTitle')}</Link></li>
         </ul>
     {:else if privacyPolicy}
         <ul>
-            <li><Link onClick={handleViewPrivPolicyClick}>{localize('popups.legalUpdate.privPolicyTitle')}</Link></li>
+            <li><Link onClick={onViewPrivPolicyClick}>{localize('popups.legalUpdate.privPolicyTitle')}</Link></li>
         </ul>
     {/if}
     <Checkbox label={localize(getCheckboxText())} bind:checked classes="mt-4" />
 </div>
 <div class="flex flex-row flex-nowrap w-full space-x-4">
-    <Button classes="w-full" onClick={handleConfirmClick} disabled={!checked}>{localize('actions.confirm')}</Button>
+    <Button classes="w-full" onClick={onConfirmClick} disabled={!checked}>{localize('actions.confirm')}</Button>
 </div>
 
 <style type="text/scss">

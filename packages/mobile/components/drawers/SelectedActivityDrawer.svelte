@@ -24,10 +24,10 @@
             activity?.direction === ActivityDirection.SelfTransaction) &&
         activity?.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
 
-    function onReject(): void {
+    function onRejectClick(): void {
         void handleRejectActivity(activity?.id)
     }
-    function onClaim(): void {
+    function onClaimClick(): void {
         void handleClaimActivity(activity)
     }
 </script>
@@ -50,7 +50,7 @@
             <Button
                 classes="w-full"
                 disabled={activity?.asyncData?.isClaiming}
-                onClick={onClaim}
+                onClick={onClaimClick}
                 isBusy={activity?.asyncData?.isClaiming}
             >
                 {localize('actions.claim')}
@@ -59,7 +59,7 @@
                 outline
                 classes="w-full"
                 disabled={activity?.asyncData?.isClaiming || activity?.asyncData?.isRejected}
-                onClick={onReject}
+                onClick={onRejectClick}
             >
                 {localize('actions.reject')}
             </Button>

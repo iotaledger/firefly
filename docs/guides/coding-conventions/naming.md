@@ -244,6 +244,42 @@ type UtxoInput {
     }
     ```
 
+- User action handlers **must** start with `on` and **should** end in `Click`. They **mustn’t** end in `Click` when the user action can be triggered by pressing *enter button* as well. (Note: for mobile development purposes a touch equals a click)
+    
+    .**Bad**
+    
+    ```tsx
+    function handleCreateProfileClick(): void {
+        // ...
+    }
+    ```
+    
+    **Good**
+    
+    ```tsx
+    function onCreateProfileClick(): void {
+        // ...
+    }
+    ```
+    
+- Handlers that aren’t directly triggered by user actions **must** start with `handle`
+    
+    **Bad**
+    
+    ```tsx
+    function onTransactionInclusionEvent(): void {
+        // ...
+    }
+    ```
+    
+    **Good**
+    
+    ```tsx
+    function handleTransactionInclusionEvent(): void {
+        // ...
+    }
+    ```
+
 ### Interfaces
 
 - All interface names __must__ be in `PascalCase` preceded with an `I`

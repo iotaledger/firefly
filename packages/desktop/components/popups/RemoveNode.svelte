@@ -7,7 +7,7 @@
     export let removeAll = false
     export let onSuccess: (..._: any[]) => void
 
-    function removeCustomNode(): void {
+    function onRemoveCustomNodeClick(): void {
         if (onSuccess) {
             onSuccess(node)
         }
@@ -21,5 +21,5 @@
 </div>
 <div class="flex flex-row justify-between space-x-4 w-full md:px-8 ">
     <Button outline classes="w-1/2" onClick={closePopup}>{localize('actions.no')}</Button>
-    <Button classes="w-1/2" onClick={removeCustomNode}>{localize('actions.yes')}</Button>
+    <Button classes="w-1/2" onClick={onRemoveCustomNodeClick}>{localize('actions.yes')}</Button>
 </div>

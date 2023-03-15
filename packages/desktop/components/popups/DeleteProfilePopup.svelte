@@ -10,7 +10,7 @@
     let error = ''
     let password: string
 
-    async function handleDeleteClick(): Promise<void> {
+    async function onDeleteClick(): Promise<void> {
         isBusy = true
         error = ''
 
@@ -37,7 +37,7 @@
             showRevealToggle
             placeholder={localize('general.password')}
             autofocus
-            submitHandler={handleDeleteClick}
+            submitHandler={onDeleteClick}
             disabled={isBusy}
         />
     {/if}
@@ -47,7 +47,7 @@
     <Button
         disabled={(!password && $isSoftwareProfile) || isBusy}
         classes="w-1/2"
-        onClick={handleDeleteClick}
+        onClick={onDeleteClick}
         variant={ButtonVariant.Warning}
         {isBusy}
     >

@@ -38,7 +38,7 @@
         }
     }
 
-    function handleOnClick(): () => void {
+    function onMenuItemClick(): () => void {
         if (!disabled && onClick) {
             return onClick()
         }
@@ -51,7 +51,7 @@
 
 <button
     bind:this={menuItem}
-    on:click|stopPropagation={handleOnClick}
+    on:click|stopPropagation={onMenuItemClick}
     on:mouseenter={() => toggleTooltip(true)}
     on:mouseleave={() => toggleTooltip(false)}
     class="group w-full flex flex-row justify-between items-center p-3
