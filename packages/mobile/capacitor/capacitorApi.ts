@@ -43,9 +43,7 @@ export const CapacitorApi: Partial<IPlatform> = {
 
     // TODO: https://github.com/iotaledger/firefly/issues/5577
     // TODO: https://github.com/iotaledger/firefly/issues/5578
-    listProfileFolders: () => {
-        throw new Error('Function not implemented.')
-    },
+    listProfileFolders: () => new Promise<string[]>((resolve) => resolve([''])),
 
     PincodeManager: PincodeManager,
 
