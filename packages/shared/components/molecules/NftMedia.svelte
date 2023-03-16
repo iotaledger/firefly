@@ -1,8 +1,9 @@
 <script lang="ts">
+    import MediaPlaceholder from './MediaPlaceholder.svelte'
+    import { MediaDisplay } from 'shared/components'
+
     import { selectedAccountIndex } from '@core/account'
     import { getNftByIdFromAllAccountNfts } from '@core/nfts'
-    import { MediaDisplay } from 'shared/components'
-    import MediaPlaceholder from './MediaPlaceholder.svelte'
 
     export let nftId: string
     export let autoplay: boolean = false
