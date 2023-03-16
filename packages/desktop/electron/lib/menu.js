@@ -98,11 +98,11 @@ const buildTemplate = () => {
                     click: () => getOrInitWindow('main').webContents.send('menu-create-developer-profile'),
                     visible: state.canCreateNewProfile,
                 },
-                {
+                /* {
                     label: state.strings.createNormalProfile,
                     click: () => getOrInitWindow('main').webContents.send('menu-create-normal-profile'),
                     visible: state.canCreateNewProfile,
-                },
+                }, */
                 {
                     label: state.strings.diagnostics,
                     click: () => getOrInitWindow('main').webContents.send('menu-diagnostics'),
