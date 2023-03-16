@@ -215,7 +215,7 @@
 
 <proposal-details class="w-full h-full flex flex-nowrap p-8 relative flex-1 space-x-4 bg-gray-50 dark:bg-gray-900">
     <div class="w-2/5 flex flex-col space-y-4">
-        <Pane classes="p-6 flex flex-col h-fit">
+        <Pane classes="p-6 flex flex-col h-fit overflow-hidden">
             <header-container class="flex justify-between items-center mb-4">
                 <ProposalStatusPill proposal={$selectedProposal} />
                 <ProposalDetailsButton proposal={$selectedProposal} />
@@ -229,7 +229,7 @@
                 </div>
             </div>
         </Pane>
-        <Pane classes="p-6 h-fit">
+        <Pane classes="p-6 h-fit flex-shrink-0">
             <Text smaller classes="mb-5">
                 {localize('views.governance.details.yourVote.title')}
             </Text>
@@ -249,7 +249,7 @@
                 </li>
             </ul>
         </Pane>
-        <ProposalInformationPane />
+        <ProposalInformationPane classes="flex-shrink-0" />
     </div>
     <Pane classes="w-3/5 h-full p-6 pr-3 flex flex-col justify-between">
         <proposal-questions
