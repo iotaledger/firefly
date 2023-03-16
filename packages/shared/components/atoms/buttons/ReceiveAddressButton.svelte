@@ -9,7 +9,7 @@
     $: receiveAddress = $selectedAccount.depositAddress
     $: darkModeEnabled = $appSettings.darkMode
 
-    function handleReceiveClick(): void {
+    function onReceiveClick(): void {
         addressBoxElement.copyAddress()
     }
 </script>
@@ -17,7 +17,7 @@
 <div
     class="flex flex-col px-4 py-4 space-y-2 rounded-xl cursor-pointer"
     class:darkmode={darkModeEnabled}
-    on:click={handleReceiveClick}
+    on:click={onReceiveClick}
 >
     <Text type="h5" fontWeight={FontWeight.semibold} classes="text-left">{localize('general.receiveFunds')}</Text>
     <inner-box class="flex flex-col space-y-6 pt-7 pb-6">

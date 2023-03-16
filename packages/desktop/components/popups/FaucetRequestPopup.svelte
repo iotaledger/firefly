@@ -9,7 +9,7 @@
     let isBusy = false
     let error: string
 
-    async function onConfirm(): Promise<void> {
+    async function onConfirmClick(): Promise<void> {
         error = null
         try {
             isBusy = true
@@ -23,7 +23,7 @@
         }
     }
 
-    function onBack(): void {
+    function onBackClick(): void {
         closePopup()
     }
 </script>
@@ -43,8 +43,8 @@
         {/if}
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" outline onClick={onBack} disabled={isBusy}>{localize('actions.back')}</Button>
-        <Button classes="w-full" onClick={onConfirm} disabled={isBusy} {isBusy}>
+        <Button classes="w-full" outline onClick={onBackClick} disabled={isBusy}>{localize('actions.back')}</Button>
+        <Button classes="w-full" onClick={onConfirmClick} disabled={isBusy} {isBusy}>
             {localize('actions.confirm')}
         </Button>
     </popup-buttons>

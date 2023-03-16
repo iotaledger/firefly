@@ -13,7 +13,7 @@
     let password: string
     let error = ''
 
-    async function handleSubmit(): Promise<void> {
+    async function onSubmit(): Promise<void> {
         try {
             const response = await unlockStronghold(password)
             closePopup()
@@ -24,7 +24,7 @@
         }
     }
 
-    function handleCancelClick(): void {
+    function onCancelClick(): void {
         closePopup()
         if ('function' === typeof onCancelled) {
             onCancelled()
@@ -39,7 +39,7 @@
 <form
     id="password-popup-form"
     class="flex justify-center w-full flex-row flex-wrap"
-    on:submit|preventDefault={handleSubmit}
+    on:submit|preventDefault={onSubmit}
 >
     <PasswordInput
         bind:error
@@ -50,7 +50,7 @@
         autofocus
     />
     <div class="flex flex-row justify-between w-full space-x-4">
-        <Button outline classes="w-1/2" onClick={handleCancelClick}>{localize('actions.cancel')}</Button>
+        <Button outline classes="w-1/2" onClick={onCancelClick}>{localize('actions.cancel')}</Button>
         <Button classes="w-1/2" type={HTMLButtonType.Submit} disabled={!password || password.length === 0}>
             {localize('actions.unlock')}
         </Button>

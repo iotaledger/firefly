@@ -4,7 +4,7 @@
     import { openPopup, PopupId } from '@auxiliary/popup'
     import { deleteProfile } from '@contexts/settings'
 
-    function handleDeleteClick(): void {
+    function onDeleteClick(): void {
         openPopup({
             id: PopupId.Confirmation,
             props: {
@@ -24,7 +24,7 @@
     size={ButtonSize.Medium}
     inlineStyle="min-width: 156px;"
     variant={ButtonVariant.Warning}
-    onClick={handleDeleteClick}
+    onClick={onDeleteClick}
 >
     {localize('views.settings.deleteProfile.title')}
 </Button>
