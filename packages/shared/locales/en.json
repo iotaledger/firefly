@@ -620,10 +620,18 @@
         "updateStronghold": {
             "update": {
                 "title": "Update Stronghold",
-                "body": "Your Stronghold's version is out of date. Provide your password to update Stronghold."
+                "loginBody": "Your Stronghold's version is out of date. Provide your password to update Stronghold.",
+                "recoveryBody": "The imported Stronghold’s version is out of date, to continue we will need to update the stronghold to the latest version."
+            },
+            "updateBackup": {
+                "loginTitle": "Stronghold updated",
+                "loginBody": "It's all good now - you're running the latest Stronghold version",
+                "recoveryTitle": "Stronghold is successfully recovered and updated",
+                "recoveryBody": "You can now continue setting up your wallet",
+                "hint": "We highly recommend to delete all previous Stronghold backup files and save a new one"
             },
             "changePassword": {
-                "hint": "We recommend to update your password"
+                "hint": "Your Stronghold was out of date and has been updated. We recommend that you change your Stronghold password."
             }
         }
     },
@@ -1191,6 +1199,7 @@
         "send": "Send",
         "receive": "Receive",
         "create": "Create",
+        "updateAndContinue": "Update and continue",
         "beginTransfer": "Begin Transfer",
         "tryAgain": "Try again",
         "visitDiscord": "Visit Discord",
@@ -1246,7 +1255,7 @@
         "skip": "Skip",
         "reset": "Reset",
         "downloadRecoveryKit": "Save Recovery Kit template",
-        "skipBackup": "Skip file backup",
+        "skipBackup": "Skip wallet backup",
         "finishSetup": "Finish setup",
         "readDocumentation": "Read the documentation",
         "visitFaq": "Visit FAQ",
@@ -2095,6 +2104,9 @@
                 "title": "Results not available",
                 "body": "The results are no longer available on this proposal's corresponding node. Please update it to access the results."
             }
+        },
+        "updateStronghold": {
+            "profileBadge": "Your Stronghold is out of date. Log in to update Stronghold."
         }
     },
     "exports": {

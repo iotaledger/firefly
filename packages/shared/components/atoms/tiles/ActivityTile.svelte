@@ -34,7 +34,7 @@
     $: isTimelocked = activity?.asyncData?.timelockDate > $time
     $: shouldShowAsyncFooter = activity.asyncData && activity.asyncData.asyncStatus !== ActivityAsyncStatus.Claimed
 
-    function handleTransactionClick(): void {
+    function onTransactionClick(): void {
         if (asset?.verification?.status === NotVerifiedStatus.New) {
             openPopup({
                 id: PopupId.TokenInformation,
@@ -54,7 +54,7 @@
 </script>
 
 <ClickableTile
-    onClick={handleTransactionClick}
+    onClick={onTransactionClick}
     classes={activity.inclusionState === InclusionState.Pending ? 'opacity-80 animate-pulse' : ''}
 >
     <activity-tile class="w-full flex flex-col space-y-4">

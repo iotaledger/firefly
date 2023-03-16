@@ -36,18 +36,18 @@
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
     $: activity = $selectedAccountActivities.find((_activity) => _activity.id === activityId)
-    $: isTimelocked = activity.asyncData?.asyncStatus === ActivityAsyncStatus.Timelocked
+    $: isTimelocked = activity?.asyncData?.asyncStatus === ActivityAsyncStatus.Timelocked
     $: isActivityIncomingAndUnclaimed =
-        activity.asyncData &&
-        (activity.direction === ActivityDirection.Incoming ||
-            activity.direction === ActivityDirection.SelfTransaction) &&
-        activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
+        activity?.asyncData &&
+        (activity?.direction === ActivityDirection.Incoming ||
+            activity?.direction === ActivityDirection.SelfTransaction) &&
+        activity?.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
 
-    function handleExplorerClick(): void {
+    function onExplorerClick(): void {
         openUrlInBrowser(`${explorerUrl}/${ExplorerEndpoint.Transaction}/${activity?.transactionId}`)
     }
 
-    function handleTransactionIdClick(): void {
+    function onTransactionIdClick(): void {
         setClipboard(activity?.transactionId)
     }
 
@@ -63,7 +63,7 @@
         await checkActiveProfileAuth(claim, { stronghold: true, ledger: false })
     }
 
-    function reject(): void {
+    function onRejectClick(): void {
         openPopup({
             id: PopupId.Confirmation,
             props: {
@@ -103,14 +103,14 @@
         {#if explorerUrl && activity?.transactionId}
             <button
                 class="action w-max flex justify-start text-center font-medium text-14 text-blue-500"
-                on:click={handleExplorerClick}
+                on:click={onExplorerClick}
             >
                 {localize('general.viewOnExplorer')}
             </button>
         {:else if activity?.transactionId}
             <button
                 class="action w-fit flex justify-start text-center font-medium text-14 text-blue-500"
-                on:click={handleTransactionIdClick}
+                on:click={onTransactionIdClick}
             >
                 {truncateString(activity.transactionId, 12, 12)}
             </button>
@@ -138,7 +138,7 @@
                 outline
                 classes="w-full"
                 disabled={activity.asyncData?.isClaiming || activity.asyncData?.isRejected}
-                onClick={reject}
+                onClick={onRejectClick}
             >
                 {localize('actions.reject')}
             </Button>

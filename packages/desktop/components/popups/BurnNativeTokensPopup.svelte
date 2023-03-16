@@ -9,7 +9,7 @@
 
     let assetAmountInput: AssetAmountInput
 
-    async function confirmClick(): Promise<void> {
+    async function onContinueClick(): Promise<void> {
         try {
             await assetAmountInput.validate()
             openPopup({
@@ -36,6 +36,6 @@
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" outline onClick={closePopup}>{localize('actions.cancel')}</Button>
-        <Button classes="w-full" onClick={confirmClick}>{localize('actions.continue')}</Button>
+        <Button classes="w-full" onClick={onContinueClick}>{localize('actions.continue')}</Button>
     </popup-buttons>
 </div>

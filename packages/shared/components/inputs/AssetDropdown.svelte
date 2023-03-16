@@ -20,28 +20,28 @@
             icon = 'tokens'
     }
 
-    function handleDropdownClick(): void {
+    function onDropdownClick(): void {
         if (!isReadonly) {
             isDropdownOpen = !isDropdownOpen
         }
     }
 
-    function handleAssetClick(_asset: IAsset): void {
+    function onAssetClick(_asset: IAsset): void {
         asset = _asset
         isDropdownOpen = false
     }
 
-    function handleOnClickOutside(): void {
+    function onOutsideClick(): void {
         isDropdownOpen = false
     }
 </script>
 
 {#if asset}
-    <div class="flex flex-col" use:clickOutside on:clickOutside={handleOnClickOutside}>
+    <div class="flex flex-col" use:clickOutside on:clickOutside={onOutsideClick}>
         <div
             class="flex flex-row items-center p-2 space-x-2 text-left bg-gray-100 dark:bg-gray-700 rounded-md cursor-default"
             class:cursor-pointer={!isReadonly}
-            on:click={handleDropdownClick}
+            on:click={onDropdownClick}
         >
             <AssetIcon small {asset} />
             <div class="w-full relative" style="max-width: 75px;">
@@ -68,7 +68,7 @@
                 <ul class="overflow-y-auto h-full -mr-2 pr-2">
                     <li>
                         <AssetTile
-                            onClick={() => handleAssetClick($visibleSelectedAccountAssets?.baseCoin)}
+                            onClick={() => onAssetClick($visibleSelectedAccountAssets?.baseCoin)}
                             asset={$visibleSelectedAccountAssets?.baseCoin}
                             classes="bg-white hover:bg-gray-50 dark:bg-transparent"
                         />
@@ -76,7 +76,7 @@
                     {#each $visibleSelectedAccountAssets?.nativeTokens as nativeToken}
                         <li>
                             <AssetTile
-                                onClick={() => handleAssetClick(nativeToken)}
+                                onClick={() => onAssetClick(nativeToken)}
                                 asset={nativeToken}
                                 classes="bg-white hover:bg-gray-50 dark:bg-transparent"
                             />

@@ -5,20 +5,20 @@
 
     export let busyMessage: string = ''
 
-    export let onSuccess: (password?: string) => unknown
-    export let onCancel: () => unknown
+    export let handleSuccess: (password?: string) => unknown
+    export let handleCancel: () => unknown
     export let returnPassword = false
 
     let password: string
     let error: string
     let isBusy = false
 
-    async function handleSubmit(): Promise<void> {
+    async function onSubmit(): Promise<void> {
         try {
             error = ''
             isBusy = true
             await unlockStronghold(password)
-            onSuccess && onSuccess(returnPassword ? password : undefined)
+            handleSuccess && handleSuccess(returnPassword ? password : undefined)
             isBusy = false
         } catch (err) {
             console.error(err)
@@ -27,8 +27,8 @@
         }
     }
 
-    function handleCancelClick(): void {
-        onCancel && onCancel()
+    function onCancelClick(): void {
+        handleCancel && handleCancel()
     }
 </script>
 
@@ -38,7 +38,7 @@
 <form
     id="password-popup-form"
     class="flex justify-center w-full flex-row flex-wrap"
-    on:submit|preventDefault={handleSubmit}
+    on:submit|preventDefault={onSubmit}
 >
     <PasswordInput
         bind:error
@@ -49,7 +49,7 @@
         autofocus
     />
     <div class="flex flex-row justify-between w-full space-x-4">
-        <Button outline classes="w-1/2" onClick={handleCancelClick} disabled={isBusy}>
+        <Button outline classes="w-1/2" onClick={onCancelClick} disabled={isBusy}>
             {localize('actions.cancel')}
         </Button>
         <Button

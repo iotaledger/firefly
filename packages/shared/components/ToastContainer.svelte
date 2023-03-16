@@ -18,10 +18,10 @@
                 <li transition:fade|local={{ duration: fadeDuration }}>
                     {#if swipe}
                         <Swiper toastId={toast.id}>
-                            <Toast {toast} {showDismiss} />
+                            <Toast alert {toast} {showDismiss} />
                         </Swiper>
                     {:else}
-                        <Toast {toast} {showDismiss} />
+                        <Toast alert {toast} {showDismiss} />
                     {/if}
                 </li>
             {/each}

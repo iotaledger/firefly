@@ -27,7 +27,7 @@
     $: numberOfAbstainedQuestions =
         selectedAnswerValues?.filter((answerValue) => answerValue === ABSTAIN_VOTE_VALUE).length ?? 0
 
-    async function handleSubmit(): Promise<void> {
+    async function onSubmit(): Promise<void> {
         if (hasVotingPower) {
             await checkActiveProfileAuth(async () => {
                 await vote($selectedProposal?.id, selectedAnswerValues)
@@ -41,7 +41,7 @@
 
 <form
     id="vote-proposal"
-    on:submit|preventDefault={handleSubmit}
+    on:submit|preventDefault={onSubmit}
     class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0"
 >
     <Text type={TextType.h4} fontWeight={FontWeight.semibold} classes="text-left">

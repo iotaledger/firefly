@@ -66,7 +66,7 @@
         }
     }
 
-    function handleBack(): void {
+    function onBackClick(): void {
         closePopup()
         openPopup({
             id: PopupId.MintNftForm,
@@ -74,7 +74,7 @@
         })
     }
 
-    async function handleMint(): Promise<void> {
+    async function onConfirmClick(): Promise<void> {
         try {
             await checkActiveProfileAuth(mintAction, { stronghold: true, ledger: false })
         } catch (err) {
@@ -146,13 +146,13 @@
         </nft-details>
     </div>
     <div class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button outline classes="w-full" disabled={$selectedAccount.isTransferring} onClick={handleBack}>
+        <Button outline classes="w-full" disabled={$selectedAccount.isTransferring} onClick={onBackClick}>
             {localize('actions.back')}
         </Button>
         <Button
             classes="w-full"
             disabled={$selectedAccount.isTransferring}
-            onClick={handleMint}
+            onClick={onConfirmClick}
             isBusy={$selectedAccount.isTransferring}
         >
             {localize('actions.confirm')}

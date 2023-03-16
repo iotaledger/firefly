@@ -82,6 +82,7 @@ const typescriptEslintRules = {
     '@typescript-eslint/restrict-template-expressions': 'off', // OFF b/c using any is useful in template expressions
     '@typescript-eslint/require-await': 'error',
     '@typescript-eslint/unbound-method': 'error',
+    '@typescript-eslint/no-namespace': 'off', // OFF b/c used in Svelte components for exporting types inside of a namespace
 }
 
 const linterRules = {

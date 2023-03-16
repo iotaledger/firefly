@@ -4,9 +4,9 @@
     export let href = ''
     export let title = undefined
 
-    function handleLinkClick(): void {
+    function onLinkClick(): void {
         openUrlInBrowser(href)
     }
 </script>
 
-<button on:click={handleLinkClick}><slot /></button>
+<button on:click={onLinkClick}><slot /></button>

@@ -50,11 +50,16 @@
 
     const { loggedIn, hasLoadedAccounts } = $activeProfile
 
+    $: if ($activeProfile && !$loggedIn) {
+        closePopup(true)
+    }
+
     async function handleCrashReporting(sendCrashReports: boolean): Promise<void> {
         await Platform.updateAppSettings({ sendCrashReports })
     }
 
     $: void handleCrashReporting($appSettings.sendCrashReports)
+
     $: $appSettings.darkMode
         ? document.body.classList.add('scheme-dark')
         : document.body.classList.remove('scheme-dark')
@@ -145,16 +150,16 @@
         Platform.onEvent('menu-diagnostics', () => {
             openPopup({ id: PopupId.Diagnostics })
         })
-        Platform.onEvent('menu-create-developer-profile', () => {
-            void initialiseOnboardingFlow({
+        Platform.onEvent('menu-create-developer-profile', async () => {
+            await initialiseOnboardingFlow({
                 isDeveloperProfile: true,
                 networkProtocol: NetworkProtocol.Shimmer,
             })
             $routerManager.goToAppContext(AppContext.Onboarding)
             $onboardingRouter.goTo(OnboardingRoute.NetworkSetup)
         })
-        Platform.onEvent('menu-create-normal-profile', () => {
-            void initialiseOnboardingFlow({
+        Platform.onEvent('menu-create-normal-profile', async () => {
+            await initialiseOnboardingFlow({
                 isDeveloperProfile: false,
                 networkProtocol: NetworkProtocol.Shimmer,
                 networkType: NetworkType.Mainnet,

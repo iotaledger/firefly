@@ -17,7 +17,7 @@
         closePopup()
     }
 
-    function onRefreshTokenMetadata(): void {
+    function onRefreshTokenMetadataClick(): void {
         openPopup({
             id: PopupId.Confirmation,
             props: {
@@ -34,5 +34,5 @@
 <OnboardingButton
     primaryText={localize('actions.refreshTokenMetadata')}
     secondaryText={localize('general.refreshTokenMetadataDescription')}
-    onClick={onRefreshTokenMetadata}
+    onClick={onRefreshTokenMetadataClick}
 />

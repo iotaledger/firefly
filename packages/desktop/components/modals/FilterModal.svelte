@@ -6,26 +6,26 @@
     export let modal: Modal = undefined
     export let filter: Filter
     export let isChanged: boolean
-    export let onSetFilters: () => void
-    export let onClose: () => void
+    export let setFilters: () => void
+    export let closeFilters: () => void
 
-    function clear(): void {
+    function onClearClick(): void {
         for (const key in filter) {
             filter[key].active = false
             filter[key].value = undefined
         }
-        onSetFilters()
+        setFilters()
     }
 
-    function confirm(): void {
-        onSetFilters()
+    function onConfirmClick(): void {
+        setFilters()
         modal.toggle()
     }
 </script>
 
 <Modal
     bind:this={modal}
-    on:close={onClose}
+    on:close={closeFilters}
     position={{ absolute: true, right: '0', top: '30px' }}
     classes="overflow-visible"
 >
@@ -33,13 +33,13 @@
         <filter-modal-header
             class="flex flex-row items-center justify-between bg-gray-50 dark:bg-transparent px-4 py-2 rounded-t-xl"
         >
-            <Button outline size={ButtonSize.Small} onClick={clear}>
+            <Button outline size={ButtonSize.Small} onClick={onClearClick}>
                 {localize('actions.clear')}
             </Button>
             <Text fontWeight={FontWeight.semibold} fontSize="14" classes="text-center flex grow-1">
                 {localize('filters.title')}
             </Text>
-            <Button disabled={!isChanged} size={ButtonSize.Small} onClick={confirm}>
+            <Button disabled={!isChanged} size={ButtonSize.Small} onClick={onConfirmClick}>
                 {localize('actions.apply')}
             </Button>
         </filter-modal-header>
