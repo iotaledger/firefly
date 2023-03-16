@@ -1,23 +1,25 @@
 <script lang="ts">
+    import { onMount } from 'svelte'
+
     import { MimeType, ParentMimeType } from '@core/nfts'
     import { getStorageDirectoryOfProfiles } from '@core/profile/utils'
-    import { onMount } from 'svelte'
 
     export let Media: HTMLImageElement | HTMLVideoElement = undefined
     export let filePath: string
     export let isLoaded: boolean
     export let expectedType: MimeType
     export let classes: string = ''
-    export let alt = ''
+    export let alt: string = ''
     export let autoplay: boolean = false
     export let controls: boolean = false
     export let muted: boolean = false
     export let loop: boolean = false
 
     const type: string = convertMimeTypeToHtmlTag(expectedType)
-    let isMounted = false
 
+    let isMounted = false
     let basePath: string
+
     $: isLoaded && muteVideo()
 
     function muteVideo() {
