@@ -1,0 +1,95 @@
+import { activeProfile, getStorageDirectoryOfProfiles } from '@core/profile'
+import { MILLISECONDS_PER_SECOND } from '@core/utils'
+import { get } from 'svelte/store'
+import { BYTES_PER_MEGABYTE } from '../constants'
+import { DownloadErrorType, DownloadWarningType, HttpHeader } from '../enums'
+import { NftDownloadMetadata, INft } from '../interfaces'
+
+export async function validateNftMedia(
+    nft: INft
+): Promise<{ needsDownload: boolean; downloadMetadata?: NftDownloadMetadata; downloadUrl?: string }> {
+    let downloadMetadata: NftDownloadMetadata = { isLoaded: false }
+    try {
+        const alreadyDownloaded = await isFileAlreadyDownloaded(nft)
+
+        if (alreadyDownloaded) {
+            downloadMetadata.isLoaded = true
+        } else if (!nft.composedUrl) {
+            downloadMetadata.isLoaded = true
+            downloadMetadata.error = { type: DownloadErrorType.UnsupportedUrl }
+        } else {
+            let downloadUrl = nft.composedUrl
+
+            const response = await fetchWithTimeout(downloadUrl, 1, { method: 'HEAD', cache: 'force-cache' })
+            let headers = response.headers
+
+            const isSoonaverse = nft.parsedMetadata?.issuerName === 'Soonaverse'
+            if (isSoonaverse) {
+                const newUrlAndHeaders = await getUrlAndHeadersFromOldSoonaverseStructure(nft, headers)
+                downloadUrl = newUrlAndHeaders?.url ?? downloadUrl
+                headers = newUrlAndHeaders?.headers ?? headers
+            }
+
+            const validation = validateFile(nft, headers)
+            if (validation?.error || validation?.warning) {
+                downloadMetadata = { ...downloadMetadata, ...validation }
+            } else {
+                return { needsDownload: true, downloadUrl }
+            }
+        }
+    } catch (err) {
+        downloadMetadata.error = { type: DownloadErrorType.Generic, message: err.message }
+    }
+
+    return { needsDownload: false, downloadMetadata }
+}
+
+function validateFile(nft: INft, headers: Headers): Partial<NftDownloadMetadata> {
+    const MAX_FILE_SIZE_IN_BYTES = (get(activeProfile)?.settings?.maxMediaSizeInMegaBytes ?? 0) * BYTES_PER_MEGABYTE
+
+    const isValidMediaType =
+        headers.get(HttpHeader.ContentType) !== nft.parsedMetadata?.type &&
+        headers.get(HttpHeader.ContentType) !== 'video/mp4'
+    const hasValidFileSize =
+        MAX_FILE_SIZE_IN_BYTES > 0 && Number(headers.get(HttpHeader.ContentLength)) > MAX_FILE_SIZE_IN_BYTES
+    if (isValidMediaType) {
+        return { error: { type: DownloadErrorType.NotMatchingFileTypes } }
+    } else if (hasValidFileSize) {
+        return { warning: { type: DownloadWarningType.FileTooLarge } }
+    }
+}
+
+async function getUrlAndHeadersFromOldSoonaverseStructure(
+    nft: INft,
+    headers: Headers
+): Promise<{ url: string; headers: Headers }> {
+    const isContentTypeEqualNftType = headers.get(HttpHeader.ContentType) === nft.parsedMetadata?.type
+    if (!isContentTypeEqualNftType) {
+        const backupUrl = nft.composedUrl + '/' + encodeURIComponent(nft?.parsedMetadata?.name)
+        const backupResponse = await fetchWithTimeout(backupUrl, 1, { method: 'HEAD', cache: 'force-cache' })
+        return { url: backupUrl, headers: backupResponse.headers }
+    }
+}
+
+async function isFileAlreadyDownloaded(nft: INft): Promise<boolean> {
+    const basePath =
+        process.env.NODE_ENV === 'development' ? 'build/__storage__' : await getStorageDirectoryOfProfiles()
+
+    let status: number | undefined
+    try {
+        const localFile = await fetch(`${basePath}/${nft.filePath}/original`)
+        status = localFile.status
+    } catch (err) {
+        status = undefined
+    }
+
+    return status === 200 || status === 304
+}
+
+async function fetchWithTimeout(url: string, secondsToTimeout: number, options: RequestInit): Promise<Response> {
+    const controller = new AbortController()
+
+    setTimeout(() => controller.abort(), secondsToTimeout * MILLISECONDS_PER_SECOND)
+
+    return fetch(url, { ...options, signal: controller.signal })
+}
