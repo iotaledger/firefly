@@ -93,23 +93,28 @@ const buildTemplate = () => {
                 {
                     type: 'separator',
                 },
-                {
-                    label: state.strings.createDeveloperProfile,
-                    click: () => getOrInitWindow('main').webContents.send('menu-create-developer-profile'),
-                    visible: state.canCreateNewProfile,
-                },
-                {
-                    label: state.strings.createNormalProfile,
-                    click: () => getOrInitWindow('main').webContents.send('menu-create-normal-profile'),
-                    visible: state.canCreateNewProfile,
-                },
-                {
-                    label: state.strings.diagnostics,
-                    click: () => getOrInitWindow('main').webContents.send('menu-diagnostics'),
-                },
             ],
         },
     ]
+
+    if (process.env.stage === 'prod') {
+        template[0].submenu.push({
+            label: state.strings.createDeveloperProfile,
+            click: () => getOrInitWindow('main').webContents.send('menu-create-developer-profile'),
+            visible: state.canCreateNewProfile,
+        })
+    } else {
+        template[0].submenu.push({
+            label: state.strings.createNormalProfile,
+            click: () => getOrInitWindow('main').webContents.send('menu-create-normal-profile'),
+            visible: state.canCreateNewProfile,
+        })
+    }
+
+    template[0].submenu.push({
+        label: state.strings.diagnostics,
+        click: () => getOrInitWindow('main').webContents.send('menu-diagnostics'),
+    })
 
     if (!app.isPackaged || features?.electron?.developerTools?.enabled) {
         template[0].submenu.push({
