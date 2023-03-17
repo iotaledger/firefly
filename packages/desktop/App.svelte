@@ -117,8 +117,8 @@
         // await pollMarketData()
 
         // Used for auto updates
+        registerAppEvents()
         if (process.env.NODE_ENV !== 'development') {
-            registerAppEvents()
             await setAppVersionDetails()
             if ($appVersionDetails.upToDate === false) {
                 openPopup({ id: PopupId.CheckForUpdates })
