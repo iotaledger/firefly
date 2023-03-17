@@ -40,7 +40,7 @@ const CapacitorApi: Partial<IPlatform> = {
 
     // TODO: https://github.com/iotaledger/firefly/issues/5577
     // TODO: https://github.com/iotaledger/firefly/issues/5578
-    listProfileFolders: () => new Promise<string[]>((resolve) => resolve([''])),
+    listProfileFolders: () => new Promise<string[]>(() => {}),
 
     PincodeManager: PincodeManager,
 
