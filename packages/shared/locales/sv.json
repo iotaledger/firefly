@@ -1779,7 +1779,7 @@
             "error": "Ett fel inträffade när belöningar skulle hämtas. Försök igen."
         },
         "vote": {
-            "success": "Votes successfully casted"
+            "success": "Votes successfully cast"
         },
         "stopVoting": {
             "success": "Voting successfully stopped"
