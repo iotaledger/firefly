@@ -1,17 +1,21 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { Modal, MenuItem, MeatballMenuButton } from 'shared/components'
+
+    import { Modal, MenuItem, MeatballMenuButton } from '@ui'
+
+    import { selectedAccount } from '@core/account/stores'
+    import { handleError } from '@core/error/handlers'
+    import { localize } from '@core/i18n'
+
+    import { IProposal } from '@contexts/governance'
+    import { participationOverviewForSelectedAccount } from '@contexts/governance/stores'
+    import { isVotingForSelectedProposal } from '@contexts/governance/utils'
+
     import { Icon } from '@auxiliary/icon'
     import { openPopup } from '@auxiliary/popup/actions'
-    import { handleError } from '@core/error/handlers'
-    import { isVotingForSelectedProposal } from '@contexts/governance/utils'
-    import { participationOverviewForSelectedAccount } from '@contexts/governance/stores'
-    import { localize } from '@core/i18n'
-    import { selectedAccount } from '@core/account/stores'
-    // TODO: https://github.com/iotaledger/firefly/issues/5801
-    import features from '../../../../desktop/features/features'
     import { PopupId } from '@auxiliary/popup'
-    import { IProposal } from '@contexts/governance'
+
+    import features from '@features/features'
 
     export let proposal: IProposal
     export let modal: Modal = undefined

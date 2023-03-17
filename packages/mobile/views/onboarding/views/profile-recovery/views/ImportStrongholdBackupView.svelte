@@ -19,7 +19,7 @@
     let importFilePath = ''
     const title = localize('views.onboarding.profileRecovery.importStrongholdBackup.title')
 
-    function onChooseFile(): void {
+    function onChooseFileClick(): void {
         // TODO: implement share functionality here for native mobile
         fakeSelectionInput.click()
     }
@@ -67,7 +67,7 @@
         >
     </div>
     <div slot="footer" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-        <Button classes="flex-1" onClick={onChooseFile}>
+        <Button classes="flex-1" onClick={onChooseFileClick}>
             {localize('actions.chooseFile')}
         </Button>
     </div>

@@ -16,7 +16,7 @@
         stepIndex += increment
     }
 
-    function handleCloseClick(): void {
+    function onCloseClick(): void {
         closePopup()
     }
 </script>
@@ -49,7 +49,7 @@
         {#if stepIndex < Object.keys(localize('popups.ledgerConnectionGuide.steps')).length - 1}
             <Button classes="w-1/2" outline onClick={() => changeIndex(1)}>{localize('actions.next')}</Button>
         {:else}
-            <Button classes="w-1/2" onClick={handleCloseClick}>{localize('actions.close')}</Button>
+            <Button classes="w-1/2" onClick={onCloseClick}>{localize('actions.close')}</Button>
         {/if}
     </div>
 </div>

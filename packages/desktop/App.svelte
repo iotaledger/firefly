@@ -117,8 +117,8 @@
         // await pollMarketData()
 
         // Used for auto updates
+        registerAppEvents()
         if (process.env.NODE_ENV !== 'development') {
-            registerAppEvents()
             await setAppVersionDetails()
             if ($appVersionDetails.upToDate === false) {
                 openPopup({ id: PopupId.CheckForUpdates })
@@ -150,16 +150,16 @@
         Platform.onEvent('menu-diagnostics', () => {
             openPopup({ id: PopupId.Diagnostics })
         })
-        Platform.onEvent('menu-create-developer-profile', () => {
-            void initialiseOnboardingFlow({
+        Platform.onEvent('menu-create-developer-profile', async () => {
+            await initialiseOnboardingFlow({
                 isDeveloperProfile: true,
                 networkProtocol: NetworkProtocol.Shimmer,
             })
             $routerManager.goToAppContext(AppContext.Onboarding)
             $onboardingRouter.goTo(OnboardingRoute.NetworkSetup)
         })
-        Platform.onEvent('menu-create-normal-profile', () => {
-            void initialiseOnboardingFlow({
+        Platform.onEvent('menu-create-normal-profile', async () => {
+            await initialiseOnboardingFlow({
                 isDeveloperProfile: false,
                 networkProtocol: NetworkProtocol.Shimmer,
                 networkType: NetworkType.Mainnet,

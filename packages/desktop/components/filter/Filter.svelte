@@ -11,12 +11,12 @@
     let modal: Modal
     let openFilterItemIndex = -1
 
-    function onSetFilters(): void {
+    function setFilters(): void {
         $filterStore = deepCopy(filter)
         filterActive = false
     }
 
-    function onClose(): void {
+    function closeFilters(): void {
         filter = deepCopy($filterStore)
         filterActive = false
     }
@@ -56,7 +56,7 @@
             {activeFilterCount}
         </filter-badge>
     {/if}
-    <FilterModal bind:modal bind:filter {isChanged} {onSetFilters} {onClose}>
+    <FilterModal bind:modal bind:filter {isChanged} {setFilters} {closeFilters}>
         {#each Object.keys(filter) as filterUnit, index}
             <FilterItem
                 bind:filterUnit={filter[filterUnit]}

@@ -14,14 +14,14 @@
 
     $: formattedAmount = formatTokenAmountBestMatch(Number(rawAmount), asset?.metadata)
 
-    function onBack(): void {
+    function onBackClick(): void {
         openPopup({
             id: PopupId.BurnNativeTokens,
             props: { asset, rawAmount },
         })
     }
 
-    async function confirmClick(): Promise<void> {
+    async function onBurnTokenClick(): Promise<void> {
         try {
             await checkActiveProfileAuth(
                 async () => {
@@ -58,13 +58,13 @@
         <TextHint warning text={localize('actions.confirmTokenBurn.hint')} />
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" outline onClick={onBack}>{localize('actions.back')}</Button>
+        <Button classes="w-full" outline onClick={onBackClick}>{localize('actions.back')}</Button>
         <Button
             classes="w-full"
             variant={ButtonVariant.Warning}
             isBusy={$selectedAccount.isTransferring}
             disabled={$selectedAccount.isTransferring}
-            onClick={confirmClick}
+            onClick={onBurnTokenClick}
         >
             {localize('actions.burnToken')}
         </Button>

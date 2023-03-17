@@ -417,19 +417,31 @@ ipcMain.handle('copy-file', (_e, sourceFilePath, destinationFilePath) => {
     fs.writeFileSync(dest, srcFileBuffer)
 })
 
-ipcMain.handle('download', async (event, url, destination) => {
-    try {
-        const userPath = app.getPath('userData')
-        const directory = app.isPackaged ? userPath : __dirname
+ipcMain.handle('download', (event, url, destination) => {
+    const userPath = app.getPath('userData')
+    const directory = app.isPackaged ? userPath : __dirname
 
-        await download(windows.main, url, {
-            directory: directory + '/__storage__/' + destination,
-            filename: 'original',
-            saveAs: false,
+    download(windows.main, url, {
+        directory: directory + '/__storage__/' + destination,
+        filename: 'original',
+        saveAs: false,
+    }).then(async (downloadItem) => {
+        downloadItem.once('done', () => {
+            windows.main.webContents.send('download-done')
         })
-    } catch (err) {
-        return Promise.reject(err)
-    }
+
+        downloadItem.on('updated', (state) => {
+            if (state === 'interrupted') {
+                windows.main.webContents.send('download-interrupted')
+            }
+        })
+
+        const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+        delay(10_000).then(() => {
+            downloadItem.pause()
+            downloadItem.cancel()
+        })
+    })
 })
 
 // Diagnostics

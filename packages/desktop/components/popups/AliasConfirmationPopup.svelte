@@ -65,11 +65,11 @@
         }
     }
 
-    async function onConfirm(): Promise<void> {
+    async function onConfirmClick(): Promise<void> {
         await checkActiveProfileAuth(createAlias, { stronghold: true, ledger: false })
     }
 
-    function onCancel(): void {
+    function onCancelClick(): void {
         closePopup()
     }
 
@@ -103,10 +103,10 @@
         />
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" outline onClick={onCancel} disabled={isTransferring}>
+        <Button classes="w-full" outline onClick={onCancelClick} disabled={isTransferring}>
             {localize('actions.cancel')}
         </Button>
-        <Button autofocus classes="w-full" onClick={onConfirm} disabled={isTransferring} isBusy={isTransferring}>
+        <Button autofocus classes="w-full" onClick={onConfirmClick} disabled={isTransferring} isBusy={isTransferring}>
             {localize('actions.confirm')}
         </Button>
     </popup-buttons>

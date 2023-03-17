@@ -8,13 +8,12 @@
     export let url: string
     export let actionLocale: string
 
-    function handleClick(): void {
+    function onClick(): void {
         openUrlInBrowser(url)
     }
 </script>
 
 <Text type="h4" classes="mb-3">{localize(`views.settings.${route}.title`)}</Text>
 <Text type="p" secondary classes="mb-5">{localize(`views.settings.${route}.description`)}</Text>
-<Button size={ButtonSize.Medium} inlineStyle="min-width: 156px;" onClick={handleClick}
-    >{localize(`actions.${actionLocale}`)}</Button
+<Button size={ButtonSize.Medium} inlineStyle="min-width: 156px;" {onClick}>{localize(`actions.${actionLocale}`)}</Button
 >

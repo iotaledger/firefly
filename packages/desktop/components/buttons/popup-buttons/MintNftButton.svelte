@@ -3,10 +3,9 @@
 
     import { localize } from '@core/i18n'
     import { resetMintNftDetails } from '@core/wallet'
-
     import { openPopup, PopupId } from '@auxiliary/popup'
 
-    function onMintNft(): void {
+    function onMintNftClick(): void {
         resetMintNftDetails()
         openPopup({
             id: PopupId.MintNftForm,
@@ -17,5 +16,5 @@
 <OnboardingButton
     primaryText={localize('actions.mintNft')}
     secondaryText={localize('general.mintNftDescription')}
-    onClick={onMintNft}
+    onClick={onMintNftClick}
 />

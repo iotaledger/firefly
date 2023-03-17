@@ -32,7 +32,7 @@
         closeDrawer(DrawerId.SelectedToken)
     }
 
-    function handleVerify(): void {
+    function onVerifyClick(): void {
         verifyAsset(asset.id, VerifiedStatus.SelfVerified)
         if (activityId) {
             _closeDrawer()
@@ -43,13 +43,13 @@
             })
         }
     }
-    function handleUnverify(): void {
+    function onUnverifyClick(): void {
         unverifyAsset(asset.id, NotVerifiedStatus.Skipped)
         updateDrawerProps(DrawerId.SelectedToken, {
             asset: { ...asset, verification: { verified: false, status: NotVerifiedStatus.Skipped } },
         })
     }
-    function handleSkip(): void {
+    function onSkipClick(): void {
         unverifyAsset(asset.id, NotVerifiedStatus.Skipped)
         if (activityId) {
             _closeDrawer()
@@ -60,21 +60,21 @@
             })
         }
     }
-    function handleHide(): void {
+    function onHideClick(): void {
         hideAsset(asset.id)
         hideActivitiesForHiddenAssets()
         updateDrawerProps(DrawerId.SelectedToken, {
             asset: { ...asset, hidden: true },
         })
     }
-    function handleUnhide(): void {
+    function onUnhideClick(): void {
         unhideAsset(asset.id)
         hideActivitiesForHiddenAssets()
         updateDrawerProps(DrawerId.SelectedToken, {
             asset: { ...asset, hidden: false },
         })
     }
-    function handleSend(): void {
+    function onSendClick(): void {
         updateNewTransactionDetails({ type: NewTransactionType.TokenTransfer, assetId: asset.id })
         _closeDrawer()
         openDrawer(DrawerId.Send, { fullScreen: true })
@@ -122,32 +122,32 @@
     {#if features.dashboard.tokens.actions.enabled}
         <token-actions class="space-y-4">
             {#if asset?.verification?.status === NotVerifiedStatus.New}
-                <Button classes="w-full" onClick={handleVerify}>
+                <Button classes="w-full" onClick={onVerifyClick}>
                     {localize('popups.tokenInformation.buttons.verifyToken')}
                 </Button>
-                <Button outline classes="w-full" onClick={handleSkip}>
+                <Button outline classes="w-full" onClick={onSkipClick}>
                     {localize('actions.skip')}
                 </Button>
             {:else}
                 {#if asset?.verification?.status === VerifiedStatus.SelfVerified}
-                    <Button outline classes="w-full" onClick={handleUnverify}>
+                    <Button outline classes="w-full" onClick={onUnverifyClick}>
                         {localize('actions.unverifyToken')}
                     </Button>
                 {:else}
-                    <Button outline classes="w-full" onClick={handleVerify}>
+                    <Button outline classes="w-full" onClick={onVerifyClick}>
                         {localize('actions.verifyToken')}
                     </Button>
                 {/if}
                 {#if asset?.hidden}
-                    <Button outline classes="w-full" onClick={handleUnhide}>
+                    <Button outline classes="w-full" onClick={onUnhideClick}>
                         {localize('actions.unhideToken')}
                     </Button>
                 {:else}
-                    <Button outline classes="w-full" onClick={handleHide}>
+                    <Button outline classes="w-full" onClick={onHideClick}>
                         {localize('actions.hideToken')}
                     </Button>
                 {/if}
-                <Button classes="w-full" onClick={handleSend}>
+                <Button classes="w-full" onClick={onSendClick}>
                     {localize('actions.send')}
                 </Button>
             {/if}

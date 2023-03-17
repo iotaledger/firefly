@@ -3,7 +3,7 @@
 
     import { openUrlInBrowser, time } from '@core/app'
     import { localize } from '@core/i18n'
-    import { INft } from '@core/nfts'
+    import { INft, rewriteIpfsUri } from '@core/nfts'
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { CollectiblesRoute, collectiblesRouter } from '@core/router'
     import { burnNft } from '@core/wallet'
@@ -14,6 +14,7 @@
     export let modal: Modal = undefined
     export let nft: INft
 
+    $: url = composeUrl(nft?.parsedMetadata?.uri)
     $: isLocked = nft.timelockTime > $time.getTime()
 
     function openBurnNft(): void {
@@ -43,8 +44,26 @@
         })
     }
 
+    function composeUrl(targetUrl: string): string {
+        if (!targetUrl) {
+            return undefined
+        }
+        const url = new URL(targetUrl)
+
+        switch (url.protocol) {
+            case 'http:':
+                return targetUrl.replace('http:', 'https:')
+            case 'https:':
+                return targetUrl
+            case 'ipfs:':
+                return rewriteIpfsUri(targetUrl)
+            default:
+                return undefined
+        }
+    }
+
     function onOpenMediaClick(): void {
-        openUrlInBrowser(nft.composedUrl)
+        openUrlInBrowser(url)
     }
 </script>
 
@@ -56,7 +75,7 @@
             icon="export"
             title={localize('views.collectibles.details.menu.view')}
             onClick={onOpenMediaClick}
-            disabled={!nft?.composedUrl}
+            disabled={!url}
         />
         <MenuItem
             icon="delete"

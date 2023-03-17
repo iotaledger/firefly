@@ -6,9 +6,13 @@
 
     let modal: Modal
     let isModalOpened: boolean = false
+
+    function onClick(): void {
+        isModalOpened = modal?.isOpened()
+    }
 </script>
 
-<svelte:window on:click={() => (isModalOpened = modal?.isOpened())} />
+<svelte:window on:click={onClick} />
 <account-switcher>
     <button type="button" on:click={modal?.toggle} class="flex flex-row justify-center items-center space-x-2">
         <AccountLabel account={$selectedAccount} />

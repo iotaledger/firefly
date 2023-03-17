@@ -52,7 +52,7 @@
         }
     }
 
-    function handleChooseExpirationTimeClick(_selected: ExpirationTime): void {
+    function onChooseExpirationTimeClick(_selected: ExpirationTime): void {
         if (_selected === ExpirationTime.Custom) {
             canShowDateTimePicker = !canShowDateTimePicker
         } else {
@@ -63,14 +63,14 @@
         selected = _selected
     }
 
-    function handleExpirationTimeCancelClick(): void {
+    function onCancelExpirationTimeClick(): void {
         if (!customDate) {
             selected = previouslySelected
         }
         canShowDateTimePicker = false
     }
 
-    function handleExpirationTimeConfirmClick(): void {
+    function onConfirmExpirationTimeClick(): void {
         value = customDate
         canShowDateTimePicker = false
     }
@@ -81,7 +81,7 @@
         <MenuItem
             icon="calendar"
             title={localize('menus.expirationTimePicker.none')}
-            onClick={() => handleChooseExpirationTimeClick(ExpirationTime.None)}
+            onClick={() => onChooseExpirationTimeClick(ExpirationTime.None)}
             selected={selected === ExpirationTime.None}
         />
         <HR />
@@ -92,7 +92,7 @@
                 dateStyle: 'medium',
                 timeStyle: 'medium',
             })}
-            onClick={() => handleChooseExpirationTimeClick(ExpirationTime.OneHour)}
+            onClick={() => onChooseExpirationTimeClick(ExpirationTime.OneHour)}
             selected={selected === ExpirationTime.OneHour}
         />
         <MenuItem
@@ -102,7 +102,7 @@
                 dateStyle: 'medium',
                 timeStyle: 'medium',
             })}
-            onClick={() => handleChooseExpirationTimeClick(ExpirationTime.OneDay)}
+            onClick={() => onChooseExpirationTimeClick(ExpirationTime.OneDay)}
             selected={selected === ExpirationTime.OneDay}
         />
         <MenuItem
@@ -112,7 +112,7 @@
                 dateStyle: 'medium',
                 timeStyle: 'medium',
             })}
-            onClick={() => handleChooseExpirationTimeClick(ExpirationTime.OneWeek)}
+            onClick={() => onChooseExpirationTimeClick(ExpirationTime.OneWeek)}
             selected={selected === ExpirationTime.OneWeek}
         />
         <HR />
@@ -122,7 +122,7 @@
             subtitle={customDate
                 ? formatDate(customDate, { dateStyle: 'medium', timeStyle: 'medium' })
                 : localize('menus.expirationTimePicker.customDate.subtitle')}
-            onClick={() => handleChooseExpirationTimeClick(ExpirationTime.Custom)}
+            onClick={() => onChooseExpirationTimeClick(ExpirationTime.Custom)}
             selected={selected === ExpirationTime.Custom}
         />
     </expiration-time-picker-modal>
@@ -132,7 +132,7 @@
         position="top"
         {anchor}
         bind:value={customDate}
-        on:cancel={handleExpirationTimeCancelClick}
-        on:confirm={handleExpirationTimeConfirmClick}
+        on:cancel={onCancelExpirationTimeClick}
+        on:confirm={onConfirmExpirationTimeClick}
     />
 {/if}
