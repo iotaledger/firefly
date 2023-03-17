@@ -1779,7 +1779,7 @@
             "error": "Hiba történt a jutalom beváltása közben. Próbálja újra."
         },
         "vote": {
-            "success": "Votes successfully casted"
+            "success": "Votes successfully cast"
         },
         "stopVoting": {
             "success": "Voting successfully stopped"
