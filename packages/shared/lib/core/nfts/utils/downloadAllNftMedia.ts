@@ -9,9 +9,11 @@ import {
     CHECK_CURRENTLY_DOWNLOADING_INTERVAL,
     CHECK_CURRENTLY_DOWNLOADING_MAX_COUNT,
 } from '../constants/check-currently-downloading.constants'
+import { activeProfile } from '@core/profile'
 
 export async function downloadAllNftMedia(): Promise<void> {
-    const nftsToDownload: { nft: INft; downloadUrl: string; path: string; accountIndex: number }[] = []
+    const nftsToDownload: { [nftId: string]: { nft: INft; downloadUrl: string; path: string; accountIndex: number } } =
+        {}
     const _allAccountNfts = get(allAccountNfts)
 
     for (const [accountIndex, accountNfts] of get(allAccountNfts).entries()) {
@@ -19,7 +21,10 @@ export async function downloadAllNftMedia(): Promise<void> {
             const { needsDownload, downloadMetadata, downloadUrl } = await validateNftMedia(nft)
 
             if (needsDownload) {
-                nftsToDownload.push({ nft: nft, downloadUrl, path: nft.filePath, accountIndex })
+                const alreadyIncluded = !!nftsToDownload[nft.id]
+                if (!alreadyIncluded) {
+                    nftsToDownload[nft.id] = { nft: nft, downloadUrl, path: nft.filePath, accountIndex }
+                }
                 nft.downloadMetadata = { isLoaded: false }
             } else {
                 nft.downloadMetadata = downloadMetadata
@@ -29,7 +34,10 @@ export async function downloadAllNftMedia(): Promise<void> {
 
     allAccountNfts.set(_allAccountNfts)
 
-    for (const { nft, accountIndex, downloadUrl, path } of nftsToDownload) {
+    for (const { nft, accountIndex, downloadUrl, path } of Object.values(nftsToDownload)) {
+        if (!get(activeProfile)?.loggedIn) {
+            break
+        }
         try {
             await waitForDownloadToBeFinished()
             downloadingNftId.set(nft.id)
@@ -38,7 +46,7 @@ export async function downloadAllNftMedia(): Promise<void> {
             nft.downloadMetadata.isLoaded = true
             addOrUpdateNftInAllAccountNfts(accountIndex, nft)
         } catch (error) {
-            return
+            downloadingNftId.set(undefined)
         }
     }
 }
