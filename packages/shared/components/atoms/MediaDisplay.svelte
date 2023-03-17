@@ -1,29 +1,25 @@
 <script lang="ts">
+    import { onMount } from 'svelte'
+
     import { MimeType, ParentMimeType } from '@core/nfts'
-    import { activeProfile } from '@core/profile'
+    import { getStorageDirectoryOfProfiles } from '@core/profile/utils'
 
     export let Media: HTMLImageElement | HTMLVideoElement = undefined
-    export let url: string
-    export let backupUrl: string
+    export let filePath: string
+    export let isLoaded: boolean
     export let expectedType: MimeType
     export let classes: string = ''
-    export let alt = ''
-    export let onError: (a?: string) => unknown
-    export let onWarning: (a?: string) => unknown
-    export let onLoad: () => unknown
+    export let alt: string = ''
     export let autoplay: boolean = false
     export let controls: boolean = false
     export let muted: boolean = false
     export let loop: boolean = false
 
-    let src: string
-
     const type: string = convertMimeTypeToHtmlTag(expectedType)
-    let safeToLoad = false
-    let isLoaded = false
-    const MAX_FILE_SIZE_IN_BYTES = ($activeProfile?.settings?.maxMediaSizeInMegaBytes ?? 0) * 1000000
 
-    $: url && void checkContentIsSafeToLoad()
+    let isMounted = false
+    let basePath: string
+
     $: isLoaded && muteVideo()
 
     function muteVideo() {
@@ -52,75 +48,35 @@
             case ParentMimeType.Video:
                 return 'video'
             default:
-                onWarning('error.nft.unsupportedFileType.')
                 return undefined
         }
     }
 
-    function handleLoadedMetadata() {
-        isLoaded = true
-        if (type === 'video') {
-            onLoad && onLoad()
+    onMount(async () => {
+        if (process.env.NODE_ENV === 'development') {
+            basePath = 'build/__storage__'
+        } else {
+            basePath = await getStorageDirectoryOfProfiles()
         }
-    }
-
-    function handleLoaded() {
-        isLoaded = true
-        onLoad && onLoad()
-    }
-
-    async function checkContentIsSafeToLoad() {
-        try {
-            if (type && url && typeof url === 'string') {
-                const response = await fetch(url, { method: 'HEAD', cache: 'force-cache' })
-                if (response.headers.get('Content-Type') !== expectedType) {
-                    if (backupUrl) {
-                        const response = await fetch(backupUrl, { method: 'HEAD', cache: 'force-cache' })
-                        if (response.headers.get('Content-Type') !== expectedType) {
-                            safeToLoad = false
-                            onError('error.nft.notMatchingFileTypes.')
-                        } else {
-                            src = backupUrl
-                            safeToLoad = true
-                        }
-                    } else {
-                        safeToLoad = false
-                        onError('error.nft.notMatchingFileTypes.')
-                    }
-                } else if (
-                    MAX_FILE_SIZE_IN_BYTES > 0 &&
-                    Number(response.headers.get('Content-Length')) > MAX_FILE_SIZE_IN_BYTES
-                ) {
-                    safeToLoad = false
-                    onWarning('error.nft.tooLargeFile.')
-                } else {
-                    src = url
-                    safeToLoad = true
-                }
-            }
-        } catch (error) {
-            safeToLoad = false
-            onError('error.nft.unsafeToLoad.')
-        }
-    }
+        isMounted = true
+    })
 </script>
 
-{#if safeToLoad}
-    <svelte:element
-        this={type}
-        bind:this={Media}
-        {src}
-        {alt}
-        autoplay={autoplay ? true : undefined}
-        controls={controls ? true : undefined}
-        loop={loop ? true : undefined}
-        muted
-        class={classes}
-        preload="metadata"
-        on:load={handleLoaded}
-        on:loadedmetadata={handleLoadedMetadata}
-        on:error={onError}
-        on:mouseenter={startPlaying}
-        on:mouseleave={stopPlaying}
-    />
+{#if isMounted}
+    {#key isLoaded && basePath}
+        <svelte:element
+            this={type}
+            bind:this={Media}
+            src="{basePath}/{filePath}/original"
+            {alt}
+            autoplay={autoplay ? true : undefined}
+            controls={controls ? true : undefined}
+            loop={loop ? true : undefined}
+            muted
+            class={classes}
+            preload="metadata"
+            on:mouseenter={startPlaying}
+            on:mouseleave={stopPlaying}
+        />
+    {/key}
 {/if}

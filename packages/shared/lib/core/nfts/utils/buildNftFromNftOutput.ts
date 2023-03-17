@@ -25,7 +25,7 @@ export function buildNftFromNftOutput(
     const metadata = getMetadataFromNftOutput(nftOutput)
     const parsedMetadata = parseNftMetadata(metadata)
     const composedUrl = composeUrlFromNftMetadata(parsedMetadata)
-    const filePath = `${get(activeProfileId)}/${id}`
+    const filePath = `${get(activeProfileId)}/nfts/${id}`
 
     return {
         id,
@@ -69,5 +69,13 @@ function composeUrlFromNftMetadata(metadata: IIrc27Metadata): string {
         default:
             return undefined
     }
-    return newUrl
+
+    return cleanupUrl(newUrl)
+}
+
+function cleanupUrl(url: string): string {
+    const removedQueryParams = url.split('?')[0]
+    const removedTrailingSlashes = removedQueryParams.replace(/\/+$/, '')
+
+    return removedTrailingSlashes
 }

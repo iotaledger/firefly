@@ -1,13 +1,15 @@
 <script lang="ts">
-    import { Modal, MenuItem } from 'shared/components'
-    import { localize } from '@core/i18n'
-    import { closePopup, openPopup } from '@auxiliary/popup/actions'
-    import { checkActiveProfileAuth } from '@core/profile/actions'
-    import { burnNft } from '@core/wallet'
-    import { INft, rewriteIpfsUri } from '@core/nfts'
-    import { CollectiblesRoute, collectiblesRouter } from '@core/router'
+    import { MenuItem, Modal } from 'shared/components'
+
     import { openUrlInBrowser, time } from '@core/app'
+    import { localize } from '@core/i18n'
+    import { INft, rewriteIpfsUri } from '@core/nfts'
+    import { checkActiveProfileAuth } from '@core/profile/actions'
+    import { CollectiblesRoute, collectiblesRouter } from '@core/router'
+    import { burnNft } from '@core/wallet'
+
     import { PopupId } from '@auxiliary/popup'
+    import { closePopup, openPopup } from '@auxiliary/popup/actions'
 
     export let modal: Modal = undefined
     export let nft: INft
