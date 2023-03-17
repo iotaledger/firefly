@@ -3,10 +3,11 @@ import type { OutputOptions, Assets } from '@iota/wallet'
 
 import { selectedAccount } from '@core/account'
 import { convertDateToUnixTimestamp, Converter } from '@core/utils'
+import { getLayer2MetadataForTransfer } from '@core/layer-2/actions'
+import { ILayer2Parameters } from '@core/layer-2/interfaces'
+import { addGasBudget } from '@core/layer-2/utils'
 import { IAsset } from '../interfaces'
 import { selectedAccountAssets } from '../stores'
-import { getLayer2MetadataForTransfer, ILayer2Parameters } from '@core/layer-2'
-import { addGasBudget } from '@core/layer-2/utils/addGasBudget'
 
 export function getOutputOptions(
     expirationDate: Date,
