@@ -9,11 +9,11 @@
 
     const dispatch = createEventDispatcher()
 
-    function handleCancelClick(): void {
+    function onCancelClick(): void {
         dispatch('cancel')
     }
 
-    function handleConfirmClick(): void {
+    function onConfirmClick(): void {
         if (isValidExpirationDateTime(value)) {
             dispatch('confirm')
         } else {
@@ -28,7 +28,7 @@
 <DateTimePicker
     {...$$restProps}
     bind:value
-    on:cancel={handleCancelClick}
-    on:confirm={handleConfirmClick}
+    on:cancel={onCancelClick}
+    on:confirm={onConfirmClick}
     startTime={new Date()}
 />

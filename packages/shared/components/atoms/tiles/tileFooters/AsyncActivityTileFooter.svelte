@@ -34,7 +34,7 @@
     $: timeDiff = getTimeDiff(activity)
     $: hasExpirationTime = !!activity.asyncData?.expirationDate
 
-    function handleRejectClick(): void {
+    function onRejectClick(): void {
         openPopup({
             id: PopupId.Confirmation,
             props: {
@@ -51,7 +51,7 @@
         })
     }
 
-    function handleClaimClick(): void {
+    function onClaimClick(): void {
         if ($isActiveLedgerProfile) {
             $showInternalVerificationPopup = true
         }
@@ -92,7 +92,7 @@
     <svelte:fragment slot="right">
         {#if shouldShowActions}
             <Button
-                onClick={handleRejectClick}
+                onClick={onRejectClick}
                 disabled={activity.asyncData?.isClaiming || activity.asyncData?.isRejected}
                 inlineStyle="min-width: 4rem;"
                 size={ButtonSize.Small}
@@ -101,7 +101,7 @@
                 {localize('actions.reject')}
             </Button>
             <Button
-                onClick={handleClaimClick}
+                onClick={onClaimClick}
                 disabled={activity.asyncData?.isClaiming}
                 isBusy={activity.asyncData?.isClaiming}
                 inlineStyle="min-width: 4rem;"

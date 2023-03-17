@@ -8,7 +8,7 @@
     let tooltipAnchor: HTMLButtonElement
     let showTooltip = false
 
-    function handleClick(): void {
+    function onClick(): void {
         _showTooltip(false)
         tab?.onClick()
     }
@@ -23,7 +23,7 @@
     on:mouseleave={() => _showTooltip(false)}
     bind:this={tooltipAnchor}
     class="{$dashboardRoute === tab?.route ? 'text-blue-500' : 'text-gray-500'} relative"
-    on:click={handleClick}
+    on:click={onClick}
 >
     <Icon width="24" height="24" icon={tab?.icon} />
     {#if tab?.notificationType}

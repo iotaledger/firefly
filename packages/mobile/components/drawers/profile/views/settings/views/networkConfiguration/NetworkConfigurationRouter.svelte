@@ -35,7 +35,7 @@
             $networkConfigurationSettingsRouter.previous()
         }
     }
-    function handleTogglePrimaryNode(): void {
+    function onTogglePrimaryClick(): void {
         const isPrimary = $activeProfile?.clientOptions?.primaryNode?.url === $selectedNode.url
         if ($networkConfigurationSettingsRoute === NetworkConfigurationSettingsRoute.NodeDetails) {
             if (!isPrimary) {
@@ -53,7 +53,7 @@
             $networkConfigurationSettingsRouter.reset()
         }
     }
-    function handleToggleDisabledNodeClick(): void {
+    function onToggleDisabledClick(): void {
         if ($networkConfigurationSettingsRoute === NetworkConfigurationSettingsRoute.NodeDetails) {
             if ($selectedNode.disabled) {
                 void toggleDisabledNodeInClientOptions($selectedNode)
@@ -68,7 +68,7 @@
             $networkConfigurationSettingsRouter.reset()
         }
     }
-    function handleDeleteNodeClick(): void {
+    function onDeleteNodeClick(): void {
         if ($networkConfigurationSettingsRoute === NetworkConfigurationSettingsRoute.NodeDetails) {
             $networkConfigurationSettingsRouter.next({
                 action: NetworkConfigurationSettingsAction.DeleteNode,
@@ -89,9 +89,9 @@
     <NetworkConfigurationNodeInfoView
         node={$selectedNode}
         onEditClick={onNodeEditClick}
-        onTogglePrimaryClick={handleTogglePrimaryNode}
-        onToggleDisabledClick={handleToggleDisabledNodeClick}
-        onRemoveClick={handleDeleteNodeClick}
+        {onTogglePrimaryClick}
+        {onToggleDisabledClick}
+        onRemoveClick={onDeleteNodeClick}
     />
 {:else if $networkConfigurationSettingsRoute === NetworkConfigurationSettingsRoute.AddNode}
     <NetworkConfigurationAddUpdateNodeView node={$selectedNode} onSuccess={onAddNodeSuccess} />
@@ -100,21 +100,21 @@
 {:else if $networkConfigurationSettingsRoute === NetworkConfigurationSettingsRoute.UnsetAsPrimaryNodeConfirmation}
     <NetworkConfigurationNodeConfirmationView
         action={NetworkConfigurationSettingsAction.UnsetAsPrimaryNode}
-        onConfirm={handleTogglePrimaryNode}
+        onConfirm={onTogglePrimaryClick}
         onCancel={onConfirmViewCancelClick}
         node={$selectedNode}
     />
 {:else if $networkConfigurationSettingsRoute === NetworkConfigurationSettingsRoute.ExcludeNodeConfirmation}
     <NetworkConfigurationNodeConfirmationView
         action={NetworkConfigurationSettingsAction.ExcludeNode}
-        onConfirm={handleToggleDisabledNodeClick}
+        onConfirm={onToggleDisabledClick}
         onCancel={onConfirmViewCancelClick}
         node={$selectedNode}
     />
 {:else if $networkConfigurationSettingsRoute === NetworkConfigurationSettingsRoute.DeleteNodeConfirmation}
     <NetworkConfigurationNodeConfirmationView
         action={NetworkConfigurationSettingsAction.DeleteNode}
-        onConfirm={handleDeleteNodeClick}
+        onConfirm={onDeleteNodeClick}
         onCancel={onConfirmViewCancelClick}
         node={$selectedNode}
     />

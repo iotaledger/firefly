@@ -10,7 +10,7 @@
     export let onClick: () => unknown
     export let id: string = ''
 
-    function handleAccountClick(accountIndex: number): void {
+    function onAccountClick(accountIndex: number): void {
         setSelectedAccount(accountIndex)
         onClick && onClick()
     }
@@ -18,7 +18,7 @@
 
 <button
     {id}
-    on:click={() => handleAccountClick(account.index)}
+    on:click={() => onAccountClick(account.index)}
     class="hover:bg-gray-50 dark:hover:bg-gray-800 flex flex-row justify-between p-4 rounded"
 >
     <div class="flex flex-row items-center space-x-4">

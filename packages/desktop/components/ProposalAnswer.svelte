@@ -108,8 +108,7 @@
 <style lang="scss">
     proposal-answer {
         @apply rounded-md border border-solid border-gray-200;
-        @apply relative flex items-center justify-between p-3;
-
+        @apply relative flex items-center justify-between p-3 overflow-hidden;
         > * {
             z-index: 2;
         }

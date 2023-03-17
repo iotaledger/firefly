@@ -90,7 +90,7 @@
         }
     }
 
-    function handleBack(): void {
+    function onBackClick(): void {
         closePopup()
         openPopup({
             id: PopupId.MintNativeTokenForm,
@@ -98,7 +98,7 @@
         })
     }
 
-    async function handleMint(): Promise<void> {
+    async function onConfirmClick(): Promise<void> {
         try {
             await checkActiveProfileAuth(mintAction, { stronghold: true, ledger: false })
         } catch (err) {
@@ -135,10 +135,10 @@
         {/if}
     </div>
     <div class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button outline classes="w-full" disabled={isTransferring} onClick={handleBack}>
+        <Button outline classes="w-full" disabled={isTransferring} onClick={onBackClick}>
             {localize('actions.back')}
         </Button>
-        <Button classes="w-full" disabled={isTransferring} onClick={handleMint} isBusy={isTransferring}>
+        <Button classes="w-full" disabled={isTransferring} onClick={onConfirmClick} isBusy={isTransferring}>
             {localize('actions.confirm')}
         </Button>
     </div>
