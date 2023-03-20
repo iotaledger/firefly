@@ -1779,7 +1779,7 @@
             "error": "Lunastaessa tapahtui virhe. Yritä uudelleen."
         },
         "vote": {
-            "success": "Votes successfully casted"
+            "success": "Votes successfully cast"
         },
         "stopVoting": {
             "success": "Voting successfully stopped"
