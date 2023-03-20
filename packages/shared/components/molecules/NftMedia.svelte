@@ -3,7 +3,7 @@
     import { MediaDisplay } from 'shared/components'
 
     import { selectedAccountIndex } from '@core/account'
-    import { getNftByIdFromAllAccountNfts } from '@core/nfts'
+    import { getNftByIdFromAllAccountNfts, INft, selectedAccountNfts } from '@core/nfts'
 
     export let nftId: string
     export let autoplay: boolean = false
@@ -15,7 +15,8 @@
     const bgColor = 'gray-200'
     const darkBgColor = 'gray-700'
 
-    $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, nftId)
+    let nft: INft
+    $: $selectedAccountNfts, (nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, nftId))
 </script>
 
 {#if !nft?.composedUrl || !nft.downloadMetadata.isLoaded}

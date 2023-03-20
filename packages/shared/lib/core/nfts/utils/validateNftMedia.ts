@@ -5,6 +5,8 @@ import { DownloadErrorType, DownloadWarningType, HttpHeader } from '../enums'
 import { fetchWithTimeout } from './fetchWithTimeout'
 import { NftDownloadMetadata, INft } from '../interfaces'
 
+const HEAD_FETCH_TIMEOUT_SECONDS = 3
+
 export async function validateNftMedia(
     nft: INft
 ): Promise<{ needsDownload: boolean; downloadMetadata?: NftDownloadMetadata; downloadUrl?: string }> {
@@ -20,7 +22,10 @@ export async function validateNftMedia(
         } else {
             let downloadUrl = nft.composedUrl
 
-            const response = await fetchWithTimeout(downloadUrl, 1, { method: 'HEAD', cache: 'force-cache' })
+            const response = await fetchWithTimeout(downloadUrl, HEAD_FETCH_TIMEOUT_SECONDS, {
+                method: 'HEAD',
+                cache: 'force-cache',
+            })
             let headers = response.headers
 
             const isSoonaverse = nft.parsedMetadata?.issuerName === 'Soonaverse'
@@ -38,7 +43,11 @@ export async function validateNftMedia(
             }
         }
     } catch (err) {
-        downloadMetadata.error = { type: DownloadErrorType.Generic, message: err.message }
+        if (err?.message === 'The user aborted a request.') {
+            downloadMetadata.error = { type: DownloadErrorType.NotReachable }
+        } else {
+            downloadMetadata.error = { type: DownloadErrorType.Generic, message: err.message }
+        }
     }
 
     return { needsDownload: false, downloadMetadata }
@@ -55,7 +64,7 @@ function validateFile(nft: INft, headers: Headers): Partial<NftDownloadMetadata>
     if (isValidMediaType) {
         return { error: { type: DownloadErrorType.NotMatchingFileTypes } }
     } else if (hasValidFileSize) {
-        return { warning: { type: DownloadWarningType.FileTooLarge } }
+        return { warning: { type: DownloadWarningType.TooLargeFile } }
     }
 }
 
@@ -66,7 +75,10 @@ async function getUrlAndHeadersFromOldSoonaverseStructure(
     const isContentTypeEqualNftType = headers.get(HttpHeader.ContentType) === nft.parsedMetadata?.type
     if (!isContentTypeEqualNftType) {
         const backupUrl = nft.composedUrl + '/' + encodeURIComponent(nft?.parsedMetadata?.name)
-        const backupResponse = await fetchWithTimeout(backupUrl, 1, { method: 'HEAD', cache: 'force-cache' })
+        const backupResponse = await fetchWithTimeout(backupUrl, HEAD_FETCH_TIMEOUT_SECONDS, {
+            method: 'HEAD',
+            cache: 'force-cache',
+        })
         return { url: backupUrl, headers: backupResponse.headers }
     }
 }
