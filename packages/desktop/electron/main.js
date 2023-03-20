@@ -417,7 +417,7 @@ ipcMain.handle('copy-file', (_e, sourceFilePath, destinationFilePath) => {
     fs.writeFileSync(dest, srcFileBuffer)
 })
 
-ipcMain.handle('download', (event, url, destination) => {
+ipcMain.handle('download', (event, url, destination, nftId, accountIndex) => {
     const userPath = app.getPath('userData')
     const directory = app.isPackaged ? userPath : __dirname
 
@@ -427,19 +427,14 @@ ipcMain.handle('download', (event, url, destination) => {
         saveAs: false,
     }).then(async (downloadItem) => {
         downloadItem.once('done', () => {
-            windows.main.webContents.send('download-done')
-        })
-
-        downloadItem.on('updated', (state) => {
-            if (state === 'interrupted') {
-                windows.main.webContents.send('download-interrupted')
-            }
+            windows.main.webContents.send('download-done', { nftId, accountIndex })
         })
 
         const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
         delay(10_000).then(() => {
             downloadItem.pause()
             downloadItem.cancel()
+            windows.main.webContents.send('download-interrupted', { nftId, accountIndex })
         })
     })
 })
