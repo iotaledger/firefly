@@ -10,7 +10,7 @@
     export let id = ''
     export let isDeveloper = false
     export let isLedgerProfile = false
-    export let strongholdVersion = -1
+    export let strongholdVersion: number
     export let bgColor: string
 
     export let onClick: undefined | ((id: string) => void) = undefined
@@ -53,14 +53,14 @@
                     <Text type="h3" classes="text-white">{getInitials()}</Text>
                 {/if}
             </div>
-            {#if true}
+            {#if strongholdVersion && isStrongholdOutdated(strongholdVersion)}
                 <div
                     on:mouseenter={toggleTooltip}
                     on:mouseleave={toggleTooltip}
                     bind:this={strongholdTooltipAnchor}
-                    class="absolute right-0 bottom-0 bg-yellow-700 rounded-2xl relative w-2"
+                    class="absolute right-0 bottom-0 bg-yellow-700 rounded-2xl"
                 >
-                    <Icon icon="exclamation" classes="text-white" />
+                    <Icon icon="exclamation-no-border" classes="transform translate-x-2.5 translate-y-1 text-white" />
                 </div>
             {/if}
         </div>
