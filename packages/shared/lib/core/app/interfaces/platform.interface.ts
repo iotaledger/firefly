@@ -27,7 +27,7 @@ export interface IPlatform {
     saveRecoveryKit(kitData: ArrayBuffer): Promise<void>
     openUrl(url: string): void
     copyFile(sourceFilePath: string, destinationFilePath: string): Promise<void>
-    downloadFile(url: string, destinationFilePath: string): Promise<void>
+    downloadFile(url: string, destinationFilePath: string, nftId: string, accountIndex: number): Promise<void>
 
     NotificationManager: INotificationManager | undefined
     DeepLinkManager: IDeepLinkManager | undefined

@@ -3,7 +3,6 @@ import { allAccountNfts, downloadingNftId } from '../stores'
 import { sleep } from '@core/utils'
 import { validateNftMedia } from './validateNftMedia'
 import { Platform } from '@core/app'
-import { addOrUpdateNftInAllAccountNfts } from '../actions'
 import { INft } from '../interfaces'
 import {
     CHECK_CURRENTLY_DOWNLOADING_INTERVAL,
@@ -41,10 +40,7 @@ export async function downloadAllNftMedia(): Promise<void> {
         try {
             await waitForDownloadToBeFinished()
             downloadingNftId.set(nft.id)
-            await Platform.downloadFile(downloadUrl, path)
-
-            nft.downloadMetadata.isLoaded = true
-            addOrUpdateNftInAllAccountNfts(accountIndex, nft)
+            await Platform.downloadFile(downloadUrl, path, nft.id, accountIndex)
         } catch (error) {
             downloadingNftId.set(undefined)
         }
