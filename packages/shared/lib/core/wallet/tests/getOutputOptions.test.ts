@@ -1,11 +1,14 @@
-import { TokenStandard, VerifiedStatus } from '../enums'
-import { IAsset, IPersistedAsset } from '../interfaces'
-import { mockStore } from '@mocks/store.mock'
+import { CoinType } from '@iota/wallet/out/types'
+
 import { Converter, convertDateToUnixTimestamp } from '@core/utils'
 import { getLayer2MetadataForTransfer } from '@core/layer-2/actions'
+import { addGasBudget } from '@core/layer-2/utils'
 
-import { CoinType } from '@iota/wallet/out/types'
 import { getOutputOptions } from '../utils'
+import { TokenStandard, VerifiedStatus } from '../enums'
+import { IAsset, IPersistedAsset } from '../interfaces'
+
+import { NewTransactionType, newTransactionDetails } from '../stores'
 
 const PERSISTED_ASSET_SHIMMER: IPersistedAsset = {
     id: CoinType[CoinType.Shimmer],
@@ -14,10 +17,8 @@ const PERSISTED_ASSET_SHIMMER: IPersistedAsset = {
     verification: { verified: true, status: VerifiedStatus.Official },
 }
 
-// TODO: Correctly mock newTransactionDetails
-jest.mock('../stores', () => ({
+jest.mock('../stores/persisted-assets.store', () => ({
     getPersistedAsset: jest.fn(() => PERSISTED_ASSET_SHIMMER),
-    newTransactionDetails: mockStore,
 }))
 
 describe('File: getOutputOptions.ts', () => {
@@ -25,6 +26,7 @@ describe('File: getOutputOptions.ts', () => {
     const metadata = 'metadata'
     const expirationDate = new Date()
     const recipientAddress = 'rms1qqqp07ychhkc3u68ueug0zqq9g0wtfgeatynr6ksm9jwud30rvlkyqnhpl5'
+    const senderAddress = 'rms1abcp07ychhkc3u68ueug0zqq9g0wtfgeatynr6ksm9jwud30rvlkyqnhdef'
     const amount = '1000000000'
     const nativeTokenAsset: IAsset = {
         id: '0x08cd4dcad7ccc383111942671ee8cdc487ddd250398331ca2692b8b1a81551a1c30100000000',
@@ -42,11 +44,18 @@ describe('File: getOutputOptions.ts', () => {
     const nftId = '0xcd9430ff870a22f81f92428e5c06975fa3ec1a993331aa3db9fb2298e931ade1'
     const surplus = '50000'
 
-    // const mockTransactionDetails = mockStore<NewTransactionDetails>({
-    //     recipient: {
-    //         type: 'address', address: 'rms1qqqp07ychhkc3u68ueug0zqq9g0wtfgeatynr6ksm9jwud30rvlkyqnhpl5',
-    //     }, type: NewTransactionType.TokenTransfer, rawAmount: amount, unit: 'glow', assetId: nativeTokenAsset.id
-    // })
+    beforeEach(() => {
+        newTransactionDetails.set({
+            recipient: {
+                type: 'address',
+                address: 'rms1qqqp07ychhkc3u68ueug0zqq9g0wtfgeatynr6ksm9jwud30rvlkyqnhpl5',
+            },
+            type: NewTransactionType.TokenTransfer,
+            rawAmount: amount,
+            unit: 'glow',
+            assetId: nativeTokenAsset.id,
+        })
+    })
 
     it('should return output options for base token with metadata and tag', () => {
         // TODO: allow null expiration date -> maybe fixed with what's in my stack
@@ -111,12 +120,17 @@ describe('File: getOutputOptions.ts', () => {
             undefined,
             undefined,
             undefined,
-            layer2Parameters
+            layer2Parameters,
+            undefined,
+            senderAddress
         )
         const expectedOutput = {
-            recipientAddress,
-            amount,
-            features: {},
+            recipientAddress: layer2Parameters.networkAddress,
+            amount: addGasBudget(amount),
+            features: {
+                metadata: getLayer2MetadataForTransfer(recipientAddress),
+                sender: senderAddress,
+            },
             unlocks: { expirationUnixTime: convertDateToUnixTimestamp(expirationDate) },
             storageDeposit: { returnStrategy: 'Return' },
         }
@@ -133,16 +147,22 @@ describe('File: getOutputOptions.ts', () => {
             nativeTokenAsset,
             undefined,
             undefined,
+            layer2Parameters,
             undefined,
-            nftId
+            senderAddress
         )
         const expectedOutput = {
-            recipientAddress,
-            amount: '0',
+            recipientAddress: layer2Parameters.networkAddress,
+            amount: addGasBudget('0'),
             assets: {
-                nftId,
+                nativeTokens: [
+                    {
+                        amount: '0x3b9aca00',
+                        id: nativeTokenAsset.id,
+                    },
+                ],
             },
-            features: { metadata: getLayer2MetadataForTransfer(recipientAddress) },
+            features: { metadata: getLayer2MetadataForTransfer(recipientAddress), sender: senderAddress },
             unlocks: { expirationUnixTime: convertDateToUnixTimestamp(expirationDate) },
             storageDeposit: { returnStrategy: 'Return' },
         }
