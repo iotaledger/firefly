@@ -2,7 +2,8 @@ import { get } from 'svelte/store'
 import BigInteger from 'big-integer'
 
 import { WriteStream } from '@iota/util.js'
-import { getPersistedAsset, newTransactionDetails, NewTransactionType, TokenStandard } from '@core/wallet'
+import { getPersistedAsset, newTransactionDetails, NewTransactionType } from '@core/wallet/stores'
+import { TokenStandard } from '@core/wallet/enums'
 import { Converter } from '@core/utils'
 import {
     ACCOUNTS_CONTRACT,
