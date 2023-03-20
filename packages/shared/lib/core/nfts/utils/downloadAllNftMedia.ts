@@ -9,11 +9,11 @@ import {
     CHECK_CURRENTLY_DOWNLOADING_MAX_COUNT,
 } from '../constants/check-currently-downloading.constants'
 import { activeProfile } from '@core/profile'
+import { updateNftInAllAccountNfts } from '../actions'
 
 export async function downloadAllNftMedia(): Promise<void> {
     const nftsToDownload: { [nftId: string]: { nft: INft; downloadUrl: string; path: string; accountIndex: number } } =
         {}
-    const _allAccountNfts = get(allAccountNfts)
 
     for (const [accountIndex, accountNfts] of get(allAccountNfts).entries()) {
         for (const nft of accountNfts) {
@@ -28,10 +28,9 @@ export async function downloadAllNftMedia(): Promise<void> {
             } else {
                 nft.downloadMetadata = downloadMetadata
             }
+            updateNftInAllAccountNfts(accountIndex, nft.id, { downloadMetadata })
         }
     }
-
-    allAccountNfts.set(_allAccountNfts)
 
     for (const { nft, accountIndex, downloadUrl, path } of Object.values(nftsToDownload)) {
         if (!get(activeProfile)?.loggedIn) {

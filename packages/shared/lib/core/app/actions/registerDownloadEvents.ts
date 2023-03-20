@@ -1,4 +1,4 @@
-import { downloadingNftId, updateNftInAllAccountNfts } from '@core/nfts'
+import { downloadingNftId, DownloadWarningType, updateNftInAllAccountNfts } from '@core/nfts'
 import { Platform } from '../classes'
 
 /**
@@ -10,7 +10,9 @@ export function registerDownloadEvents(): void {
         downloadingNftId.set(undefined)
     })
     Platform.onEvent('download-interrupted', ({ nftId, accountIndex }) => {
-        updateNftInAllAccountNfts(accountIndex, nftId, { downloadMetadata: { isLoaded: false } })
+        updateNftInAllAccountNfts(accountIndex, nftId, {
+            downloadMetadata: { isLoaded: false, warning: { type: DownloadWarningType.DownloadTooLong } },
+        })
         downloadingNftId.set(undefined)
     })
 }
