@@ -220,13 +220,11 @@
                 <ProposalStatusPill proposal={$selectedProposal} />
                 <ProposalDetailsButton proposal={$selectedProposal} />
             </header-container>
-            <div class="flex flex-1 flex-col justify-between">
+            <div class="flex flex-1 flex-col space-y-4 justify-between scrollable-y">
                 <Text type={TextType.h2}>{$selectedProposal?.title}</Text>
-                <div class="mt-4 max-h-40 overflow-hidden">
-                    {#if $selectedProposal?.additionalInfo}
-                        <MarkdownBlock text={$selectedProposal?.additionalInfo} />
-                    {/if}
-                </div>
+                {#if $selectedProposal?.additionalInfo}
+                    <MarkdownBlock text={$selectedProposal?.additionalInfo} />
+                {/if}
             </div>
         </Pane>
         <Pane classes="p-6 h-fit flex-shrink-0">
