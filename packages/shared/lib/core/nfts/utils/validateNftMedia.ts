@@ -39,7 +39,7 @@ export async function validateNftMedia(
             if (validation?.error || validation?.warning) {
                 downloadMetadata = { ...downloadMetadata, ...validation }
             } else {
-                return { needsDownload: true, downloadUrl }
+                return { needsDownload: true, downloadUrl, downloadMetadata: { isLoaded: false } }
             }
         }
     } catch (err) {

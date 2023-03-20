@@ -21,9 +21,9 @@ export function updateNftInAllAccountNfts(accountIndex: number, nftId: string, p
         if (!state[accountIndex]) {
             state[accountIndex] = []
         }
-        let nft = state[accountIndex].find((_nft) => _nft.id === nftId)
+        const nft = state[accountIndex].find((_nft) => _nft.id === nftId)
         if (nft) {
-            nft = { ...nft, ...partialNft }
+            Object.assign(nft, { ...nft, ...partialNft })
         }
         return state
     })
