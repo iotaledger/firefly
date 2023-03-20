@@ -9,9 +9,9 @@ import {
 import { INftOutput } from '@iota/types'
 import { get } from 'svelte/store'
 import { DEFAULT_NFT_NAME } from '../constants'
-import { IIrc27Metadata, INft } from '../interfaces'
+import { INft } from '../interfaces'
 import { parseNftMetadata } from './parseNftMetadata'
-import { rewriteIpfsUri } from './rewriteIpfsUri'
+import { composeUrlFromNftUri } from './composeUrlFromNftUri'
 
 export function buildNftFromNftOutput(
     nftOutput: INftOutput,
@@ -24,7 +24,7 @@ export function buildNftFromNftOutput(
     const issuer = getIssuerFromNftOutput(nftOutput)
     const metadata = getMetadataFromNftOutput(nftOutput)
     const parsedMetadata = parseNftMetadata(metadata)
-    const composedUrl = composeUrlFromNftMetadata(parsedMetadata)
+    const composedUrl = composeUrlFromNftUri(parsedMetadata?.uri)
     const filePath = `${get(activeProfileId)}/nfts/${id}`
 
     return {
@@ -45,37 +45,4 @@ export function buildNftFromNftOutput(
             isLoaded: false,
         },
     }
-}
-
-function composeUrlFromNftMetadata(metadata: IIrc27Metadata): string {
-    const targetUrl = metadata?.uri
-    if (!targetUrl) {
-        return undefined
-    }
-
-    const url = new URL(targetUrl)
-    let newUrl
-
-    switch (url.protocol) {
-        case 'http:':
-            newUrl = targetUrl.replace('http:', 'https:')
-            break
-        case 'https:':
-            newUrl = targetUrl
-            break
-        case 'ipfs:':
-            newUrl = rewriteIpfsUri(targetUrl)
-            break
-        default:
-            return undefined
-    }
-
-    return cleanupUrl(newUrl)
-}
-
-function cleanupUrl(url: string): string {
-    const removedQueryParams = url.split('?')[0]
-    const removedTrailingSlashes = removedQueryParams.replace(/\/+$/, '')
-
-    return removedTrailingSlashes
 }

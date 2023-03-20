@@ -1,8 +1,8 @@
 import { activeProfile, getStorageDirectoryOfProfiles } from '@core/profile'
-import { MILLISECONDS_PER_SECOND } from '@core/utils'
 import { get } from 'svelte/store'
 import { BYTES_PER_MEGABYTE } from '../constants'
 import { DownloadErrorType, DownloadWarningType, HttpHeader } from '../enums'
+import { fetchWithTimeout } from './fetchWithTimeout'
 import { NftDownloadMetadata, INft } from '../interfaces'
 
 const HEAD_FETCH_TIMEOUT_SECONDS = 3
@@ -96,12 +96,4 @@ async function isFileAlreadyDownloaded(nft: INft): Promise<boolean> {
     }
 
     return status === 200 || status === 304
-}
-
-async function fetchWithTimeout(url: string, secondsToTimeout: number, options: RequestInit): Promise<Response> {
-    const controller = new AbortController()
-
-    setTimeout(() => controller.abort(), secondsToTimeout * MILLISECONDS_PER_SECOND)
-
-    return fetch(url, { ...options, signal: controller.signal })
 }
