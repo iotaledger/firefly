@@ -49,6 +49,7 @@
     let isVotingForProposal: boolean = false
     let statusLoaded: boolean = false
     let overviewLoaded: boolean = false
+    let openedQuestionIndex: number = -1
 
     $: selectedProposalOverview = $participationOverviewForSelectedAccount?.participations?.[$selectedProposal?.id]
     $: trackedParticipations = Object.values(selectedProposalOverview ?? {})
@@ -149,8 +150,6 @@
         votedAnswerValues = lastActiveOverview?.answers ?? []
     }
 
-    let openedQuestionIndex = 0
-
     function onQuestionClick(questionIndex: number): void {
         openedQuestionIndex = questionIndex === openedQuestionIndex ? null : questionIndex
     }
@@ -204,6 +203,7 @@
         updateParticipationOverviewForEventId($selectedProposal?.id).then(() => (overviewLoaded = true))
         await setVotingEventPayload($selectedProposal?.id)
         await updateIsVoting()
+        openedQuestionIndex = votingPayload?.questions.length > 1 ? -1 : 0
         hasMounted = true
     })
 
