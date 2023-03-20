@@ -56,6 +56,7 @@
                     isDeveloper={profile.isDeveloperProfile}
                     isLedgerProfile={profile?.type === ProfileType.Ledger ||
                         profile?.type === ProfileType.LedgerSimulator}
+                    strongholdVersion={profile?.strongholdVersion ?? -1}
                     classes="cursor-pointer"
                 />
             </div>

@@ -167,7 +167,7 @@
     </button>
     <div class="pt-40 pb-16 flex w-full h-full flex-col items-center justify-between">
         <div class="w-96 flex flex-col flex-wrap items-center mb-20">
-            <Profile name={$activeProfile?.name} bgColor="blue" />
+            <Profile name={$activeProfile?.name} strongholdVersion={$activeProfile?.strongholdVersion} bgColor="blue" />
             <Pin
                 bind:this={pinRef}
                 bind:value={pinCode}
