@@ -32,7 +32,7 @@ import { HistoryDataProps, PriceData } from './typings/market'
 import { Message } from './typings/message'
 import { RecoveryPhrase } from './typings/mnemonic'
 import { NodeAuth, NodeInfo } from './typings/node'
-import { ProfileType } from './typings/profile'
+import { Profile, ProfileType } from './typings/profile'
 import { SetupType } from './typings/setup'
 import { AccountMessage, BalanceHistory, BalanceOverview, WalletAccount, WalletState } from './typings/wallet'
 import { IWalletApi } from './typings/walletApi'
@@ -49,6 +49,8 @@ export const DUST_THRESHOLD: number = 1_000_000
 export const STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS = 0
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
+
+export const STRONGHOLD_VERSION = 2
 
 interface ActorState {
     [id: string]: IActorHandler
@@ -1148,7 +1150,7 @@ export const formatAccountWithMetadata = (account: Account, meta: AccountMetadat
         signerType,
         balance: formatUnitBestMatch(balance, true, 3),
         balanceEquiv: formatCurrency(
-            convertToFiat(balance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[activeCurrency])
+            convertToFiat(balance, get(currencies)?.[CurrencyTypes.USD], get(exchangeRates)?.[activeCurrency])
         ),
     })
 }
@@ -1544,4 +1546,9 @@ export const handleTransactionEventData = (eventData: TransferProgressEventData)
     } else {
         return txData
     }
+}
+
+export function isStrongholdOutdated(profile: Profile): boolean {
+    const strongholdVersion = profile?.strongholdVersion ?? -1
+    return strongholdVersion < STRONGHOLD_VERSION
 }
