@@ -241,8 +241,8 @@ const ElectronApi = {
     close() {
         return ipcRenderer.invoke('close')
     },
-    downloadFile(url, destinationFilePath) {
-        return ipcRenderer.invoke('download', url, destinationFilePath)
+    downloadFile(url, destinationFilePath, nftId, accountIndex) {
+        return ipcRenderer.invoke('download', url, destinationFilePath, nftId, accountIndex)
     },
     /*
      * Opens url and checks against acceptlist

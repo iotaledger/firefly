@@ -1,5 +1,6 @@
 import { IAppUpdateDownloadProgress } from './app-update-download-progress.interface'
 import { IAppVersionDetails } from './app-version-details.interface'
+import { INFTDownloadState } from './nft-download-state.interface'
 
 export interface IPlatformEventMap {
     'menu-logout': void
@@ -18,6 +19,6 @@ export interface IPlatformEventMap {
     'version-complete': void
     'version-error': Error
     'notification-activated': unknown
-    'download-done': void
-    'download-interrupted': void
+    'download-done': INFTDownloadState
+    'download-interrupted': INFTDownloadState
 }

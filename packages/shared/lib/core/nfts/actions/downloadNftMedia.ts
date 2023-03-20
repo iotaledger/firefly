@@ -33,7 +33,7 @@ export async function downloadNftMedia(nft: INft, accountIndex: number): Promise
             if (validation?.error || validation?.warning) {
                 downloadMetadata = { ...downloadMetadata, ...validation }
             } else {
-                await Platform.downloadFile(downloadUrl, nft.filePath)
+                await Platform.downloadFile(downloadUrl, nft.filePath, nft.id, accountIndex)
                 downloadMetadata.isLoaded = true
             }
         }
@@ -53,7 +53,7 @@ function validateFile(nft: INft, headers: Headers): Partial<NftDownloadMetadata>
     if (isValidMediaType) {
         return { error: { type: DownloadErrorType.NotMatchingFileTypes } }
     } else if (hasValidFileSize) {
-        return { warning: { type: DownloadWarningType.FileTooLarge } }
+        return { warning: { type: DownloadWarningType.TooLargeFile } }
     }
 }
 

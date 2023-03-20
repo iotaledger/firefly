@@ -1,4 +1,5 @@
 export enum DownloadWarningType {
-    FileTooLarge = 'fileTooLarge',
+    TooLargeFile = 'tooLargeFile',
+    DownloadTooLong = 'downloadTooLong',
     Generic = 'generic',
 }
