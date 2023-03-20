@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Icon, Pin, Profile, Text } from 'shared/components'
+    import { Icon, Pin, Profile, Text, TextHint } from 'shared/components'
     import { initAppSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -12,6 +12,7 @@
     import { Locale } from '@core/i18n'
     import { get } from 'svelte/store'
     import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos } from '@lib/app'
+    import { isStrongholdOutdated } from '../../../lib/wallet'
 
     export let locale: Locale
 
@@ -172,10 +173,19 @@
                 strongholdVersion={$activeProfile?.strongholdVersion ?? -1}
                 bgColor="blue"
             />
+            {#if isStrongholdOutdated($activeProfile?.strongholdVersion)}
+                <TextHint
+                    classes="p-4 w-full rounded-2xl bg-yellow-50 dark:bg-gray-800 mt-6 mb-4"
+                    icon="exclamation"
+                    iconClasses="fill-current text-yellow-500 dark:text-yellow-500"
+                    hint={locale('views.login.outdatedStronghold')}
+                    hintClasses="text-gray-700 dark:text-gray-700"
+                />
+            {/if}
             <Pin
                 bind:this={pinRef}
                 bind:value={pinCode}
-                classes="mt-10 {shake && 'animate-shake'}"
+                classes="mt-6 {shake && 'animate-shake'}"
                 on:submit={onSubmit}
                 disabled={hasReachedMaxAttempts || isBusy}
                 autofocus
