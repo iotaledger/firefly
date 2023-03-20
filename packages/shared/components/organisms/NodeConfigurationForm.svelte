@@ -7,7 +7,7 @@
     import { checkNodeUrlValidity, checkNetworkId } from '@core/network/utils'
     import { localize } from '@core/i18n'
     import { getNodeInfo } from '@core/profile-manager'
-    import { deepCopy, stripSpaces, stripTrailingSlash } from '@core/utils'
+    import { cleanUrl, deepCopy } from '@core/utils'
     import { activeProfile } from '@core/profile'
 
     interface NodeValidationOptions {
@@ -42,7 +42,7 @@
     }
 
     function cleanNodeUrl(): void {
-        node.url = stripTrailingSlash(stripSpaces(node?.url))
+        node.url = cleanUrl(node?.url)
     }
 
     export async function validate(options: NodeValidationOptions): Promise<INode> {
