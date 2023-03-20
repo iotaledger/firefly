@@ -136,7 +136,8 @@
             giftStorageDeposit,
             transactionDetails.surplus,
             transactionDetails.layer2Parameters,
-            transactionDetails.type === NewTransactionType.NftTransfer ? transactionDetails.nftId : undefined
+            transactionDetails.type === NewTransactionType.NftTransfer ? transactionDetails.nftId : undefined,
+            $selectedAccount.depositAddress
         )
         preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
 
