@@ -12,6 +12,7 @@
     import { Locale } from '@core/i18n'
     import { get } from 'svelte/store'
     import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos } from '@lib/app'
+    import { isStrongholdOutdated } from '@lib/wallet'
 
     export let locale: Locale
 
@@ -169,7 +170,7 @@
         <div class="w-96 flex flex-col flex-wrap items-center mb-20">
             <Profile
                 name={$activeProfile?.name}
-                strongholdVersion={$activeProfile?.strongholdVersion ?? -1}
+                isStrongholdOutdated={isStrongholdOutdated($activeProfile)}
                 bgColor="blue"
             />
             <Pin
