@@ -4,5 +4,4 @@ export enum SecuritySettingsRoute {
     MaxMediaSize = 'maxMediaSize',
     ChangePassword = 'changePassword',
     ChangePincode = 'changePincode',
-    DeleteProfile = 'deleteProfile',
 }

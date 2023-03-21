@@ -1,20 +1,25 @@
-import { AdvancedSettingsRoute, GeneralSettingsRoute, HelpAndInfoRoute, SecuritySettingsRoute } from '@core/router'
+import {
+    AdvancedSettingsRoute,
+    GeneralSettingsRoute,
+    HelpAndInfoRoute,
+    ProfileSettingsRoute,
+    SecuritySettingsRoute,
+} from '@core/router'
 
 import { Icon } from '../enums'
 
 export const SETTINGS_ICON_SVG = {
     [GeneralSettingsRoute.Theme]: Icon.Theme,
     [GeneralSettingsRoute.Language]: Icon.Language,
-    [GeneralSettingsRoute.Currency]: Icon.Currency,
+    [ProfileSettingsRoute.Currency]: Icon.Currency,
     [GeneralSettingsRoute.Notifications]: Icon.Bell,
-    [GeneralSettingsRoute.NetworkStatus]: Icon.View,
-    [GeneralSettingsRoute.ChangeProfileName]: Icon.Profile,
+    [ProfileSettingsRoute.ChangeProfileName]: Icon.Profile,
     [SecuritySettingsRoute.ExportStronghold]: Icon.Export,
     [SecuritySettingsRoute.AppLock]: Icon.Lock3,
     [SecuritySettingsRoute.MaxMediaSize]: Icon.File,
     [SecuritySettingsRoute.ChangePassword]: Icon.Lock2,
     [SecuritySettingsRoute.ChangePincode]: Icon.Lock,
-    [SecuritySettingsRoute.DeleteProfile]: Icon.Delete,
+    [ProfileSettingsRoute.DeleteProfile]: Icon.Delete,
     [AdvancedSettingsRoute.NetworkConfiguration]: Icon.Wifi,
     [AdvancedSettingsRoute.DeepLinks]: Icon.Link,
     [AdvancedSettingsRoute.WalletFinder]: Icon.Reset,

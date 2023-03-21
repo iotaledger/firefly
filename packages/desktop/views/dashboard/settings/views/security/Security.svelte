@@ -2,7 +2,7 @@
     import { isSoftwareProfile } from '@core/profile'
     import { SecuritySettingsRoute } from '@core/router'
     import { HR } from 'shared/components'
-    import { AppLock, ChangePassword, ChangePincode, DeleteProfile, ExportStronghold, MaxMediaSize } from './'
+    import { AppLock, ChangePassword, ChangePincode, ExportStronghold, MaxMediaSize } from './'
     import features from '@features/features'
 
     const settings: {
@@ -15,7 +15,6 @@
         { component: MaxMediaSize, childRoute: SecuritySettingsRoute.MaxMediaSize },
         { component: ChangePassword, childRoute: SecuritySettingsRoute.ChangePassword, requireSoftware: true },
         { component: ChangePincode, childRoute: SecuritySettingsRoute.ChangePincode },
-        { component: DeleteProfile, childRoute: SecuritySettingsRoute.DeleteProfile },
     ]
     const visibleSettings = settings.filter((setting) => features?.settings?.security?.[setting.childRoute]?.enabled)
 </script>

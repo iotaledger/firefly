@@ -1,25 +1,6 @@
-<script lang="ts" context="module">
-    import {
-        AdvancedSettingsRoute,
-        AdvancedSettingsRouteNoProfile,
-        GeneralSettingsRoute,
-        GeneralSettingsRouteNoProfile,
-        HelpAndInfoRoute,
-        SecuritySettingsRoute,
-    } from '@core/router'
-
-    export namespace SettingsNavigatorTypes {
-        export type Settings = {
-            general: typeof GeneralSettingsRoute | typeof GeneralSettingsRouteNoProfile
-            security?: typeof SecuritySettingsRoute
-            advanced: typeof AdvancedSettingsRoute | typeof AdvancedSettingsRouteNoProfile
-            helpAndInfo: typeof HelpAndInfoRoute
-        }
-    }
-</script>
-
 <script lang="ts">
     import { Icon as IconEnum, SETTINGS_ICON_SVG } from '@auxiliary/icon'
+    import { SettingsNavigatorTypes } from '@components'
     import { localize } from '@core/i18n'
     import { Icon, Text, TextType } from '@ui'
 

@@ -4,9 +4,9 @@
     import { activeProfile, isActiveLedgerProfile, isSoftwareProfile } from '@core/profile'
     import {
         AdvancedSettingsRoute,
-        AdvancedSettingsRouteNoProfile,
         GeneralSettingsRoute,
         HelpAndInfoRoute,
+        ProfileSettingsRoute,
         SecuritySettingsRoute,
         settingsRoute,
         SettingsRoute,
@@ -15,7 +15,7 @@
     } from '@core/router'
     import features from '@features/features'
     import { onMount } from 'svelte'
-    import { Advanced, General, Help, Security } from './'
+    import { Advanced, General, Help, ProfileSettings, Security } from './'
 
     const { loggedIn } = $activeProfile
 
@@ -37,6 +37,7 @@
     $: if ($loggedIn) {
         settings = {
             general: GeneralSettingsRoute,
+            profile: ProfileSettingsRoute,
             security: securitySettings,
             advanced: advancedSettings,
             helpAndInfo: HelpAndInfoRoute,
@@ -44,7 +45,6 @@
     } else {
         settings = {
             general: GeneralSettingsRoute,
-            advanced: AdvancedSettingsRouteNoProfile,
             helpAndInfo: HelpAndInfoRoute,
         }
     }
@@ -94,6 +94,8 @@
                 <div class="md:w-11/12">
                     {#if $settingsRoute === SettingsRoute.General}
                         <General />
+                    {:else if $settingsRoute === SettingsRoute.Profile}
+                        <ProfileSettings />
                     {:else if $settingsRoute === SettingsRoute.Security}
                         <Security />
                     {:else if $settingsRoute === SettingsRoute.Advanced}

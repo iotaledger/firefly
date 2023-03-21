@@ -1,5 +1,6 @@
 export enum SettingsRoute {
     General = 'general',
+    Profile = 'profile',
     Security = 'security',
     Advanced = 'advanced',
     HelpAndInfo = 'helpAndInfo',
@@ -7,6 +8,5 @@ export enum SettingsRoute {
 
 export enum SettingsRouteNoProfile {
     General = 'general',
-    Advanced = 'advanced',
     HelpAndInfo = 'helpAndInfo',
 }
