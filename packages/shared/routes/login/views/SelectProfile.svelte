@@ -57,7 +57,7 @@
                     isDeveloper={profile.isDeveloperProfile}
                     isLedgerProfile={profile?.type === ProfileType.Ledger ||
                         profile?.type === ProfileType.LedgerSimulator}
-                    isStrongholdOutdated={isStrongholdOutdated(profile)}
+                    showStrongholdWarning={isStrongholdOutdated(profile)}
                     classes="cursor-pointer"
                 />
             </div>

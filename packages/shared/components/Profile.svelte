@@ -9,7 +9,7 @@
     export let id = ''
     export let isDeveloper = false
     export let isLedgerProfile = false
-    export let isStrongholdOutdated = false
+    export let showStrongholdWarning = false
     export let bgColor: string
 
     export let onClick: undefined | ((id: string) => void) = undefined
@@ -46,7 +46,7 @@
                     <Text type="h3" classes="text-white">{getInitials()}</Text>
                 {/if}
             </div>
-            {#if isStrongholdOutdated}
+            {#if showStrongholdWarning}
                 <StrongholdWarningBadge />
             {/if}
         </div>

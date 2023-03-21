@@ -1,6 +1,5 @@
 <script lang="ts">
-    import { Text, Tooltip } from './'
-    import WarningBadge from './WarningBadge.svelte'
+    import { Text, Tooltip, WarningBadge } from './'
     import { localize } from '@core/i18n'
 
     let strongholdTooltipAnchor = undefined
