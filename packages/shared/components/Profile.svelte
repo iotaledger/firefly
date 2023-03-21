@@ -1,8 +1,7 @@
 <script lang="typescript">
-    import { Chip, Icon, Text, Tooltip } from 'shared/components'
+    import { Chip, Icon, Text, StrongholdWarningBadge } from 'shared/components'
     import { getInitials as _getInitials } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
-    import { isStrongholdOutdated } from '@lib/wallet'
 
     export let classes = undefined
 
@@ -10,7 +9,7 @@
     export let id = ''
     export let isDeveloper = false
     export let isLedgerProfile = false
-    export let strongholdVersion: number
+    export let showStrongholdWarning = false
     export let bgColor: string
 
     export let onClick: undefined | ((id: string) => void) = undefined
@@ -30,12 +29,6 @@
             return letters[0] + letters[letters.length - 1]
         }
     }
-
-    let strongholdTooltipAnchor = undefined
-    let showStrongholdTooltip = false
-    function toggleTooltip(): void {
-        showStrongholdTooltip = !showStrongholdTooltip
-    }
 </script>
 
 <div class="flex items-center justify-center w-24">
@@ -53,15 +46,8 @@
                     <Text type="h3" classes="text-white">{getInitials()}</Text>
                 {/if}
             </div>
-            {#if strongholdVersion && isStrongholdOutdated(strongholdVersion)}
-                <div
-                    on:mouseenter={toggleTooltip}
-                    on:mouseleave={toggleTooltip}
-                    bind:this={strongholdTooltipAnchor}
-                    class="absolute right-0 bottom-0 bg-yellow-700 rounded-2xl"
-                >
-                    <Icon icon="exclamation-no-border" classes="transform translate-x-2.5 translate-y-1 text-white" />
-                </div>
+            {#if showStrongholdWarning}
+                <StrongholdWarningBadge />
             {/if}
         </div>
         <div class="flex flex-row items-baseline space-x-1.5">
@@ -80,8 +66,3 @@
         {/if}
     </div>
 </div>
-{#if showStrongholdTooltip}
-    <Tooltip anchor={strongholdTooltipAnchor} position="right" size="small">
-        <Text type="p">{localize('views.login.outdatedStronghold')}</Text>
-    </Tooltip>
-{/if}
