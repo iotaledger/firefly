@@ -9,6 +9,7 @@ import {
     getProfileDataPath,
     getWalletDataPath,
     selectedAccountIdStore,
+    STRONGHOLD_VERSION,
 } from 'shared/lib/wallet'
 import { Platform } from './platform'
 import { AccountColor } from './typings/color'
@@ -93,6 +94,7 @@ const buildProfile = (profileName: string, isDeveloperProfile: boolean): Profile
     name: profileName,
     type: null,
     lastStrongholdBackupTime: null,
+    strongholdVersion: STRONGHOLD_VERSION,
     isDeveloperProfile,
     settings: {
         currency: AvailableExchangeRates.USD,
