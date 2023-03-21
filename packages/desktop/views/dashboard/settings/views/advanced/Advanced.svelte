@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { HR } from 'shared/components'
     import { activeProfile, isActiveLedgerProfile } from '@core/profile'
     import { AdvancedSettingsRoute } from '@core/router'
-    import { Diagnostics, ErrorLog, HiddenAccounts, MigrateLedgerIndex, NetworkConfiguration, WalletFinder } from './'
     import features from '@features/features'
+    import { HR } from 'shared/components'
+    import { HiddenAccounts, WalletFinder } from './'
 
     const settings: {
         component: unknown
@@ -11,12 +11,8 @@
         requireLogin?: boolean
         requireLedger?: boolean
     }[] = [
-        { component: NetworkConfiguration, childRoute: AdvancedSettingsRoute.NetworkConfiguration, requireLogin: true },
         { component: WalletFinder, childRoute: AdvancedSettingsRoute.WalletFinder, requireLogin: true },
         { component: HiddenAccounts, childRoute: AdvancedSettingsRoute.HiddenAccounts, requireLogin: true },
-        { component: ErrorLog, childRoute: AdvancedSettingsRoute.ErrorLog },
-        { component: Diagnostics, childRoute: AdvancedSettingsRoute.Diagnostics },
-        { component: MigrateLedgerIndex, childRoute: AdvancedSettingsRoute.MigrateLedgerIndex, requireLedger: true },
     ]
     const visibleSettings = settings.filter((setting) => features?.settings?.advanced?.[setting.childRoute]?.enabled)
 
