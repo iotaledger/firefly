@@ -67,6 +67,7 @@ export { default as Chip } from './Chip.svelte'
 export { default as PingingBadge } from './PingingBadge.svelte'
 export { default as GovernanceInfoTooltip } from './GovernanceInfoTooltip.svelte'
 export { default as WarningBadge } from './WarningBadge.svelte'
+export { default as StrongholdWarningBadge } from './StrongholdWarningBadge.svelte'
 
 export * from './modals'
 // Charts

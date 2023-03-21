@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Chip, Icon, Text, Tooltip, WarningBadge } from 'shared/components'
+    import { Chip, Icon, Text, StrongholdWarningBadge } from 'shared/components'
     import { getInitials as _getInitials } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
 
@@ -29,12 +29,6 @@
             return letters[0] + letters[letters.length - 1]
         }
     }
-
-    const strongholdTooltipAnchor = undefined
-    let showStrongholdTooltip = false
-    function toggleTooltip(): void {
-        showStrongholdTooltip = !showStrongholdTooltip
-    }
 </script>
 
 <div class="flex items-center justify-center w-24">
@@ -53,7 +47,7 @@
                 {/if}
             </div>
             {#if isStrongholdOutdated}
-                <WarningBadge />
+                <StrongholdWarningBadge />
             {/if}
         </div>
         <div class="flex flex-row items-baseline space-x-1.5">
@@ -72,8 +66,3 @@
         {/if}
     </div>
 </div>
-{#if showStrongholdTooltip}
-    <Tooltip anchor={strongholdTooltipAnchor} position="right" size="small">
-        <Text type="p">{localize('views.login.outdatedStronghold')}</Text>
-    </Tooltip>
-{/if}
