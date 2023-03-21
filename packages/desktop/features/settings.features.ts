@@ -32,17 +32,17 @@ const settingsFeatures = {
     },
     security: {
         enabled: true,
-        exportStronghold: {
-            enabled: true,
-        },
         appLock: {
-            enabled: true,
-        },
-        changePassword: {
             enabled: true,
         },
         changePincode: {
             enabled: false,
+        },
+        changePassword: {
+            enabled: true,
+        },
+        exportStronghold: {
+            enabled: true,
         },
     },
     collectibles: {
