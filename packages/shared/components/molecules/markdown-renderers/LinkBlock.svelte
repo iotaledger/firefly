@@ -9,4 +9,4 @@
     }
 </script>
 
-<button on:click={onLinkClick}><slot /></button>
+<button class="inline-block break-words w-full text-left" on:click={onLinkClick}><slot /></button>
