@@ -1,14 +1,15 @@
 import { CoinType } from '@iota/wallet/out/types'
 
 import { Converter, convertDateToUnixTimestamp } from '@core/utils'
+import { activeProfileId } from '@core/profile/stores'
 import { getLayer2MetadataForTransfer } from '@core/layer-2/actions'
 import { addGasBudget } from '@core/layer-2/utils'
 
 import { getOutputOptions } from '../utils'
 import { TokenStandard, VerifiedStatus } from '../enums'
 import { IAsset, IPersistedAsset } from '../interfaces'
-
-import { NewTransactionType, newTransactionDetails } from '../stores'
+import { NewTransactionType } from '../stores'
+import { NewTransactionDetails } from '../types'
 
 const PERSISTED_ASSET_SHIMMER: IPersistedAsset = {
     id: CoinType[CoinType.Shimmer],
@@ -16,51 +17,69 @@ const PERSISTED_ASSET_SHIMMER: IPersistedAsset = {
     hidden: false,
     verification: { verified: true, status: VerifiedStatus.Official },
 }
+const tag = 'tag'
+const metadata = 'metadata'
+const expirationDate = new Date()
+const recipientAddress = 'rms1qqqp07ychhkc3u68ueug0zqq9g0wtfgeatynr6ksm9jwud30rvlkyqnhpl5'
+const senderAddress = 'rms1abcp07ychhkc3u68ueug0zqq9g0wtfgeatynr6ksm9jwud30rvlkyqnhdef'
+const amount = '1000000000'
+const nativeTokenAsset: IAsset = {
+    id: '0x08cd4dcad7ccc383111942671ee8cdc487ddd250398331ca2692b8b1a81551a1c30100000000',
+    standard: 'erc20',
+    balance: {
+        total: Number(amount),
+    },
+    hidden: false,
+    verification: { verified: true, status: VerifiedStatus.SelfVerified },
+}
+
+const layer2Parameters = {
+    networkAddress: 'rms1pp4kmrl9n9yy9n049x7kk8h4atm0tu76redhj5wrc2jsskk2vukwxvtgk9u',
+}
+const nftId = '0xcd9430ff870a22f81f92428e5c06975fa3ec1a993331aa3db9fb2298e931ade1'
+const surplus = '50000'
+
+const baseTransaction: NewTransactionDetails = {
+    type: NewTransactionType.TokenTransfer,
+    assetId: CoinType[CoinType.Shimmer],
+    recipient: {
+        type: 'address',
+        address: recipientAddress,
+    },
+    rawAmount: amount,
+    unit: 'glow',
+}
 
 jest.mock('../stores/persisted-assets.store', () => ({
     getPersistedAsset: jest.fn(() => PERSISTED_ASSET_SHIMMER),
+    getAssetById: jest.fn((id) => (id === PERSISTED_ASSET_SHIMMER.id ? PERSISTED_ASSET_SHIMMER : nativeTokenAsset)),
+}))
+
+jest.mock('../actions/getAccountAssetsForSelectedAccount', () => ({
+    getAccountAssetsForSelectedAccount: jest.fn((_) => {
+        return {
+            baseCoin: PERSISTED_ASSET_SHIMMER,
+            nativeTokens: [nativeTokenAsset],
+        }
+    }),
 }))
 
 describe('File: getOutputOptions.ts', () => {
-    const tag = 'tag'
-    const metadata = 'metadata'
-    const expirationDate = new Date()
-    const recipientAddress = 'rms1qqqp07ychhkc3u68ueug0zqq9g0wtfgeatynr6ksm9jwud30rvlkyqnhpl5'
-    const senderAddress = 'rms1abcp07ychhkc3u68ueug0zqq9g0wtfgeatynr6ksm9jwud30rvlkyqnhdef'
-    const amount = '1000000000'
-    const nativeTokenAsset: IAsset = {
-        id: '0x08cd4dcad7ccc383111942671ee8cdc487ddd250398331ca2692b8b1a81551a1c30100000000',
-        standard: 'erc20',
-        balance: {
-            total: Number(amount),
-        },
-        hidden: false,
-        verification: { verified: true, status: VerifiedStatus.SelfVerified },
-    }
+    let newTransactionDetails: NewTransactionDetails
 
-    const layer2Parameters = {
-        networkAddress: 'rms1pp4kmrl9n9yy9n049x7kk8h4atm0tu76redhj5wrc2jsskk2vukwxvtgk9u',
-    }
-    const nftId = '0xcd9430ff870a22f81f92428e5c06975fa3ec1a993331aa3db9fb2298e931ade1'
-    const surplus = '50000'
-
-    beforeEach(() => {
-        newTransactionDetails.set({
-            recipient: {
-                type: 'address',
-                address: 'rms1qqqp07ychhkc3u68ueug0zqq9g0wtfgeatynr6ksm9jwud30rvlkyqnhpl5',
-            },
-            type: NewTransactionType.TokenTransfer,
-            rawAmount: amount,
-            unit: 'glow',
-            assetId: nativeTokenAsset.id,
-        })
+    beforeAll(() => {
+        // TODO: refactor getOutpuOptions to not rely on this store
+        activeProfileId.set('id')
     })
 
     it('should return output options for base token with metadata and tag', () => {
-        // TODO: allow null expiration date -> maybe fixed with what's in my stack
-        // @ts-ignore
-        const output = getOutputOptions(null, recipientAddress, amount, metadata, tag)
+        newTransactionDetails = {
+            ...baseTransaction,
+            metadata,
+            tag,
+        }
+        const output = getOutputOptions(newTransactionDetails)
+
         const expectedOutput = {
             recipientAddress,
             amount,
@@ -72,7 +91,12 @@ describe('File: getOutputOptions.ts', () => {
     })
 
     it('should return output options for base token with expiration date', () => {
-        const output = getOutputOptions(expirationDate, recipientAddress, amount)
+        newTransactionDetails = {
+            ...baseTransaction,
+            expirationDate,
+        }
+        const output = getOutputOptions(newTransactionDetails)
+
         const expectedOutput = {
             recipientAddress,
             amount,
@@ -84,14 +108,13 @@ describe('File: getOutputOptions.ts', () => {
     })
 
     it('should return output options for native token without surplus', () => {
-        const output = getOutputOptions(
+        newTransactionDetails = {
+            ...baseTransaction,
             expirationDate,
-            recipientAddress,
-            amount,
-            undefined,
-            undefined,
-            nativeTokenAsset
-        )
+            assetId: nativeTokenAsset.id,
+        }
+        const output = getOutputOptions(newTransactionDetails)
+
         const expectedOutput = {
             recipientAddress,
             amount: '0',
@@ -111,24 +134,18 @@ describe('File: getOutputOptions.ts', () => {
     })
 
     it('should return output options for base token to layer 2', () => {
-        const output = getOutputOptions(
+        newTransactionDetails = {
+            ...baseTransaction,
             expirationDate,
-            recipientAddress,
-            amount,
-            undefined,
-            undefined,
-            undefined,
-            undefined,
-            undefined,
             layer2Parameters,
-            undefined,
-            senderAddress
-        )
+        }
+        const output = getOutputOptions(newTransactionDetails, senderAddress)
+
         const expectedOutput = {
             recipientAddress: layer2Parameters.networkAddress,
             amount: addGasBudget(amount),
             features: {
-                metadata: getLayer2MetadataForTransfer(recipientAddress),
+                metadata: getLayer2MetadataForTransfer(newTransactionDetails),
                 sender: senderAddress,
             },
             unlocks: { expirationUnixTime: convertDateToUnixTimestamp(expirationDate) },
@@ -138,19 +155,14 @@ describe('File: getOutputOptions.ts', () => {
     })
 
     it('should return output options for native token to layer 2', () => {
-        const output = getOutputOptions(
+        newTransactionDetails = {
+            ...baseTransaction,
             expirationDate,
-            recipientAddress,
-            amount,
-            undefined,
-            undefined,
-            nativeTokenAsset,
-            undefined,
-            undefined,
+            assetId: nativeTokenAsset.id,
             layer2Parameters,
-            undefined,
-            senderAddress
-        )
+        }
+        const output = getOutputOptions(newTransactionDetails, senderAddress)
+
         const expectedOutput = {
             recipientAddress: layer2Parameters.networkAddress,
             amount: addGasBudget('0'),
@@ -162,7 +174,7 @@ describe('File: getOutputOptions.ts', () => {
                     },
                 ],
             },
-            features: { metadata: getLayer2MetadataForTransfer(recipientAddress), sender: senderAddress },
+            features: { metadata: getLayer2MetadataForTransfer(newTransactionDetails), sender: senderAddress },
             unlocks: { expirationUnixTime: convertDateToUnixTimestamp(expirationDate) },
             storageDeposit: { returnStrategy: 'Return' },
         }
@@ -170,19 +182,14 @@ describe('File: getOutputOptions.ts', () => {
     })
 
     it('should return output options for nft transfer', () => {
-        // TODO: Correct amount when sending NFT
-        const output = getOutputOptions(
+        newTransactionDetails = {
+            type: NewTransactionType.NftTransfer,
+            recipient: baseTransaction.recipient,
+            nftId,
             expirationDate,
-            recipientAddress,
-            '0',
-            undefined,
-            undefined,
-            undefined,
-            undefined,
-            undefined,
-            undefined,
-            nftId
-        )
+        }
+        const output = getOutputOptions(newTransactionDetails, senderAddress)
+
         const expectedOutput = {
             recipientAddress,
             amount: '0',
@@ -197,16 +204,14 @@ describe('File: getOutputOptions.ts', () => {
     })
 
     it('should return output options for native token with surplus', () => {
-        const output = getOutputOptions(
+        newTransactionDetails = {
+            ...baseTransaction,
             expirationDate,
-            recipientAddress,
-            amount,
-            undefined,
-            undefined,
-            nativeTokenAsset,
-            false,
-            surplus
-        )
+            assetId: nativeTokenAsset.id,
+            surplus,
+        }
+        const output = getOutputOptions(newTransactionDetails)
+
         const expectedOutput = {
             recipientAddress,
             amount: surplus,
@@ -226,16 +231,13 @@ describe('File: getOutputOptions.ts', () => {
     })
 
     it('should return output options for base token with surplus', () => {
-        const output = getOutputOptions(
+        newTransactionDetails = {
+            ...baseTransaction,
             expirationDate,
-            recipientAddress,
-            amount,
-            undefined,
-            undefined,
-            undefined,
-            false,
-            surplus
-        )
+            surplus,
+        }
+        const output = getOutputOptions(newTransactionDetails)
+
         const expectedOutput = {
             recipientAddress,
             amount,
@@ -247,7 +249,14 @@ describe('File: getOutputOptions.ts', () => {
     })
 
     it('should return output options for transfer with gifted storage deposit', () => {
-        const output = getOutputOptions(expirationDate, recipientAddress, amount, undefined, undefined, undefined, true)
+        newTransactionDetails = {
+            ...baseTransaction,
+            expirationDate,
+            surplus,
+            giftStorageDeposit: true,
+        }
+        const output = getOutputOptions(newTransactionDetails)
+
         const expectedOutput = {
             recipientAddress,
             amount,
