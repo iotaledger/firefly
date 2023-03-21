@@ -6,7 +6,6 @@
         AdvancedSettingsRoute,
         AdvancedSettingsRouteNoProfile,
         GeneralSettingsRoute,
-        GeneralSettingsRouteNoProfile,
         HelpAndInfoRoute,
         SecuritySettingsRoute,
         settingsRoute,
@@ -44,7 +43,7 @@
         }
     } else {
         settings = {
-            general: GeneralSettingsRouteNoProfile,
+            general: GeneralSettingsRoute,
             advanced: AdvancedSettingsRouteNoProfile,
             helpAndInfo: HelpAndInfoRoute,
         }

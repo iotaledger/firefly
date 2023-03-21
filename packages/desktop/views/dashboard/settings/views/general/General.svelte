@@ -1,8 +1,7 @@
 <script lang="ts">
     import { HR } from 'shared/components'
     import { GeneralSettingsRoute } from '@core/router'
-    import { Currency, Language, NetworkStatus, Notifications, Theme } from './'
-    import ChangeProfileName from './ChangeProfileName.svelte'
+    import { CrashReporting, DeepLinks, Language, Notifications, Theme } from './'
     import { activeProfile } from '@core/profile'
     import features from '@features/features'
 
@@ -13,10 +12,9 @@
     }[] = [
         { component: Theme, childRoute: GeneralSettingsRoute.Theme },
         { component: Language, childRoute: GeneralSettingsRoute.Language },
-        { component: Currency, childRoute: GeneralSettingsRoute.Currency, requireLogin: true },
         { component: Notifications, childRoute: GeneralSettingsRoute.Notifications },
-        { component: NetworkStatus, childRoute: GeneralSettingsRoute.NetworkStatus, requireLogin: true },
-        { component: ChangeProfileName, childRoute: GeneralSettingsRoute.ChangeProfileName, requireLogin: true },
+        { component: DeepLinks, childRoute: GeneralSettingsRoute.DeepLinks },
+        { component: CrashReporting, childRoute: GeneralSettingsRoute.CrashReporting },
     ]
     const visibleSettings = settings.filter((setting) => features?.settings?.general?.[setting.childRoute]?.enabled)
 

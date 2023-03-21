@@ -8,16 +8,13 @@ const settingsFeatures = {
         language: {
             enabled: true,
         },
-        currency: {
-            enabled: true,
-        },
         notifications: {
             enabled: true,
         },
-        networkStatus: {
+        crashReporting: {
             enabled: true,
         },
-        changeProfileName: {
+        deepLinks: {
             enabled: true,
         },
     },
@@ -47,9 +44,6 @@ const settingsFeatures = {
         networkConfiguration: {
             enabled: true,
         },
-        deepLinks: {
-            enabled: true,
-        },
         walletFinder: {
             enabled: true,
         },
@@ -59,9 +53,7 @@ const settingsFeatures = {
         errorLog: {
             enabled: true,
         },
-        crashReporting: {
-            enabled: true,
-        },
+
         diagnostics: {
             enabled: true,
         },

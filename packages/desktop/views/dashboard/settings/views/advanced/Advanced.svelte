@@ -2,16 +2,7 @@
     import { HR } from 'shared/components'
     import { activeProfile, isActiveLedgerProfile } from '@core/profile'
     import { AdvancedSettingsRoute } from '@core/router'
-    import {
-        CrashReporting,
-        DeepLinks,
-        Diagnostics,
-        ErrorLog,
-        HiddenAccounts,
-        MigrateLedgerIndex,
-        NetworkConfiguration,
-        WalletFinder,
-    } from './'
+    import { Diagnostics, ErrorLog, HiddenAccounts, MigrateLedgerIndex, NetworkConfiguration, WalletFinder } from './'
     import features from '@features/features'
 
     const settings: {
@@ -21,11 +12,9 @@
         requireLedger?: boolean
     }[] = [
         { component: NetworkConfiguration, childRoute: AdvancedSettingsRoute.NetworkConfiguration, requireLogin: true },
-        { component: DeepLinks, childRoute: AdvancedSettingsRoute.DeepLinks },
         { component: WalletFinder, childRoute: AdvancedSettingsRoute.WalletFinder, requireLogin: true },
         { component: HiddenAccounts, childRoute: AdvancedSettingsRoute.HiddenAccounts, requireLogin: true },
         { component: ErrorLog, childRoute: AdvancedSettingsRoute.ErrorLog },
-        { component: CrashReporting, childRoute: AdvancedSettingsRoute.CrashReporting },
         { component: Diagnostics, childRoute: AdvancedSettingsRoute.Diagnostics },
         { component: MigrateLedgerIndex, childRoute: AdvancedSettingsRoute.MigrateLedgerIndex, requireLedger: true },
     ]
