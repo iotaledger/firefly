@@ -35,6 +35,7 @@ const nativeTokenAsset: IAsset = {
 
 const layer2Parameters = {
     networkAddress: 'rms1pp4kmrl9n9yy9n049x7kk8h4atm0tu76redhj5wrc2jsskk2vukwxvtgk9u',
+    senderAddress,
 }
 const nftId = '0xcd9430ff870a22f81f92428e5c06975fa3ec1a993331aa3db9fb2298e931ade1'
 const surplus = '50000'
@@ -139,7 +140,7 @@ describe('File: getOutputOptions.ts', () => {
             expirationDate,
             layer2Parameters,
         }
-        const output = getOutputOptions(newTransactionDetails, senderAddress)
+        const output = getOutputOptions(newTransactionDetails)
 
         const expectedOutput = {
             recipientAddress: layer2Parameters.networkAddress,
@@ -161,7 +162,7 @@ describe('File: getOutputOptions.ts', () => {
             assetId: nativeTokenAsset.id,
             layer2Parameters,
         }
-        const output = getOutputOptions(newTransactionDetails, senderAddress)
+        const output = getOutputOptions(newTransactionDetails)
 
         const expectedOutput = {
             recipientAddress: layer2Parameters.networkAddress,
@@ -188,7 +189,7 @@ describe('File: getOutputOptions.ts', () => {
             nftId,
             expirationDate,
         }
-        const output = getOutputOptions(newTransactionDetails, senderAddress)
+        const output = getOutputOptions(newTransactionDetails)
 
         const expectedOutput = {
             recipientAddress,

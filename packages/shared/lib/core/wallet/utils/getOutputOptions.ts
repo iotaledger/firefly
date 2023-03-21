@@ -8,8 +8,7 @@ import { addGasBudget } from '@core/layer-2/utils/addGasBudget'
 import { NewTransactionDetails } from '@core/wallet/types'
 import { getAddressFromSubject } from '@core/wallet/utils'
 
-// senderAddress is required when sending an L2 transaction
-export function getOutputOptions(transactionDetails: NewTransactionDetails, senderAddress?: string): OutputOptions {
+export function getOutputOptions(transactionDetails: NewTransactionDetails): OutputOptions {
     const { expirationDate, layer2Parameters, giftStorageDeposit, recipient } = transactionDetails ?? {}
 
     let amount = getAmountFromTransactionDetails(transactionDetails)
@@ -35,7 +34,7 @@ export function getOutputOptions(transactionDetails: NewTransactionDetails, send
         features: {
             ...(metadata && { metadata }),
             ...(tag && { tag }),
-            ...(layer2Parameters && { sender: senderAddress }),
+            ...(layer2Parameters && { sender: layer2Parameters.senderAddress }),
         },
         unlocks: {
             ...(expirationUnixTime && { expirationUnixTime }),

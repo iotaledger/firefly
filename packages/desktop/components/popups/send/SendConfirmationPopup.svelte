@@ -115,7 +115,7 @@
     async function prepareTransactionOutput(): Promise<void> {
         const transactionDetails = get(newTransactionDetails)
 
-        outputOptions = getOutputOptions(transactionDetails, $selectedAccount.depositAddress)
+        outputOptions = getOutputOptions(transactionDetails)
         preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
 
         setStorageDeposit(preparedOutput, Number(surplus))
