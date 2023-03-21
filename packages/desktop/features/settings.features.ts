@@ -18,6 +18,18 @@ const settingsFeatures = {
             enabled: true,
         },
     },
+    profile: {
+        enabled: true,
+        changeProfileName: {
+            enabled: true,
+        },
+        currency: {
+            enabled: true,
+        },
+        deleteProfile: {
+            enabled: true,
+        },
+    },
     security: {
         enabled: true,
         exportStronghold: {
@@ -30,39 +42,38 @@ const settingsFeatures = {
             enabled: true,
         },
         changePincode: {
-            enabled: false,
-        },
-        deleteProfile: {
             enabled: true,
         },
+    },
+    collectibles: {
+        enabled: true,
         maxMediaSize: {
+            enabled: true,
+        },
+    },
+    network: {
+        enabled: true,
+        networkConfiguration: {
             enabled: true,
         },
     },
     advanced: {
         enabled: true,
-        networkConfiguration: {
-            enabled: true,
-        },
         walletFinder: {
             enabled: true,
         },
         hiddenAccounts: {
             enabled: true,
         },
-        errorLog: {
-            enabled: true,
-        },
-
-        diagnostics: {
-            enabled: true,
-        },
-        migrateLedgerIndex: {
-            enabled: false,
-        },
     },
     helpAndInfo: {
         enabled: true,
+        diagnostics: {
+            enabled: true,
+        },
+        errorLog: {
+            enabled: true,
+        },
         documentation: {
             enabled: true,
         },
