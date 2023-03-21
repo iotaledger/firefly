@@ -42,7 +42,7 @@ const settingsFeatures = {
             enabled: true,
         },
         changePincode: {
-            enabled: true,
+            enabled: false,
         },
     },
     collectibles: {
