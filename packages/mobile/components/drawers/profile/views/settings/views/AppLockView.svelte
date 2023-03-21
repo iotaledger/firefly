@@ -2,10 +2,12 @@
     import { Radio, Text, TextType } from '@ui'
 
     import { localize } from '@core/i18n'
-    import { activeProfile, updateActiveProfileSettings } from '@core/profile'
+    import { activeProfile, DEFAULT_PERSISTED_PROFILE_OBJECT, updateActiveProfileSettings } from '@core/profile'
     import type { IDropdownChoice } from '@core/utils'
 
-    let selectedLockTimeout: number = $activeProfile?.settings?.lockScreenTimeoutInMinutes
+    let selectedLockTimeout: number =
+        $activeProfile?.settings?.lockScreenTimeoutInMinutes ??
+        DEFAULT_PERSISTED_PROFILE_OBJECT.settings.lockScreenTimeoutInMinutes
     $: selectedLockTimeout, updateActiveProfileSettings({ lockScreenTimeoutInMinutes: selectedLockTimeout })
 
     function lockScreenTimeoutOptions(): IDropdownChoice[] {

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'
-    import { activeProfile, logout } from '@core/profile'
+    import { activeProfile, DEFAULT_PERSISTED_PROFILE_OBJECT, logout } from '@core/profile'
     import { debounce, MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from '@core/utils'
 
     let timeout
@@ -21,7 +21,10 @@
             const ap = get(activeProfile)
             if (ap) {
                 const timeoutDuration =
-                    MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE * ap.settings.lockScreenTimeoutInMinutes
+                    MILLISECONDS_PER_SECOND *
+                    SECONDS_PER_MINUTE *
+                    (ap?.settings?.lockScreenTimeoutInMinutes ??
+                        DEFAULT_PERSISTED_PROFILE_OBJECT.settings.lockScreenTimeoutInMinutes)
 
                 if (!isIdleTimeValid(new Date(), timeoutDuration)) lock()
 
