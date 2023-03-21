@@ -459,7 +459,7 @@
         "login": {
             "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
             "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}",
-            "outdatedStronghold": "Your Stronghold is outdated. Please login to update it."
+            "outdatedStronghold": "Your Stronghold's version is outdated. Please login to update it."
         },
         "dashboard": {
             "network": {
