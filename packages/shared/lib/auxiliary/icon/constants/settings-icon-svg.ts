@@ -1,5 +1,6 @@
 import {
     AdvancedSettingsRoute,
+    CollectiblesSettingsRoute,
     GeneralSettingsRoute,
     HelpAndInfoRoute,
     NetworkSettingsRoute,
@@ -18,10 +19,10 @@ export const SETTINGS_ICON_SVG = {
     [ProfileSettingsRoute.ChangeProfileName]: Icon.Profile,
     [ProfileSettingsRoute.Currency]: Icon.Currency,
     [ProfileSettingsRoute.DeleteProfile]: Icon.Delete,
+    [CollectiblesSettingsRoute.MaxMediaSize]: Icon.File,
     [NetworkSettingsRoute.NetworkConfiguration]: Icon.Wifi,
     [SecuritySettingsRoute.ExportStronghold]: Icon.Export,
     [SecuritySettingsRoute.AppLock]: Icon.Lock3,
-    [SecuritySettingsRoute.MaxMediaSize]: Icon.File,
     [SecuritySettingsRoute.ChangePassword]: Icon.Lock2,
     [SecuritySettingsRoute.ChangePincode]: Icon.Lock,
     [AdvancedSettingsRoute.WalletFinder]: Icon.Reset,

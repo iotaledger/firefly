@@ -267,6 +267,9 @@
             "network": {
                 "title": "Network"
             },
+            "collectibles": {
+                "title": "Collectibles"
+            },
             "security": {
                 "title": "Security",
                 "description": "Change your password and adjust security-related settings"

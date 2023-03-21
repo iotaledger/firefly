@@ -1,4 +1,5 @@
 export { default as Advanced } from './advanced/Advanced.svelte'
+export { default as CollectiblesSettings } from './collectibles/CollectiblesSettings.svelte'
 export { default as General } from './general/General.svelte'
 export { default as Help } from './help/Help.svelte'
 export { default as NetworkSettings } from './network/NetworkSettings.svelte'

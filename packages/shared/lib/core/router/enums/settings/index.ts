@@ -1,4 +1,5 @@
 export * from './advanced-settings-route.enum'
+export * from './collectibles-settings-route.enum'
 export * from './general-settings-route.enum'
 export * from './help-and-info-route.enum'
 export * from './network-settings-route.enum'

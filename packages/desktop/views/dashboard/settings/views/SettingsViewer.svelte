@@ -1,6 +1,7 @@
 <script lang="ts" context="module">
     import {
         AdvancedSettingsRoute,
+        CollectiblesSettingsRoute,
         GeneralSettingsRoute,
         HelpAndInfoRoute,
         NetworkSettingsRoute,
@@ -11,6 +12,7 @@
         export type Settings = {
             general: typeof GeneralSettingsRoute
             profile?: typeof ProfileSettingsRoute
+            collectibles?: typeof CollectiblesSettingsRoute
             network?: typeof NetworkSettingsRoute
             security?: typeof SecuritySettingsRoute
             advanced?: typeof AdvancedSettingsRoute
@@ -26,7 +28,7 @@
     import { settingsRoute, SettingsRoute, SettingsRouteNoProfile, settingsRouter } from '@core/router'
     import features from '@features/features'
     import { onMount } from 'svelte'
-    import { Advanced, General, Help, NetworkSettings, ProfileSettings, Security } from './'
+    import { Advanced, CollectiblesSettings, General, Help, NetworkSettings, ProfileSettings, Security } from './'
 
     const { loggedIn } = $activeProfile
 
@@ -49,8 +51,9 @@
         settings = {
             general: GeneralSettingsRoute,
             profile: ProfileSettingsRoute,
-            security: securitySettings,
+            collectibles: CollectiblesSettingsRoute,
             network: NetworkSettingsRoute,
+            security: securitySettings,
             advanced: advancedSettings,
             helpAndInfo: HelpAndInfoRoute,
         }
@@ -108,6 +111,8 @@
                         <General />
                     {:else if $settingsRoute === SettingsRoute.Profile}
                         <ProfileSettings />
+                    {:else if $settingsRoute === SettingsRoute.Collectibles}
+                        <CollectiblesSettings />
                     {:else if $settingsRoute === SettingsRoute.Network}
                         <NetworkSettings />
                     {:else if $settingsRoute === SettingsRoute.Security}
