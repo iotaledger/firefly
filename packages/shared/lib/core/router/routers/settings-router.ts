@@ -10,7 +10,7 @@ const settingsChildRoute = writable<string>(null)
 
 export class SettingsRouter extends Router<SettingsRoute> {
     constructor() {
-        super(SettingsRoute.Init, settingsRoute)
+        super(SettingsRoute.General, settingsRoute)
     }
 
     goToChildRoute(route: SettingsRoute, childRoute: string): void {

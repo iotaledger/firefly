@@ -19,11 +19,9 @@
 </script>
 
 <script lang="ts">
-    import { Icon, Text, TextType } from '@ui'
-
-    import { localize } from '@core/i18n'
-
     import { Icon as IconEnum, SETTINGS_ICON_SVG } from '@auxiliary/icon'
+    import { localize } from '@core/i18n'
+    import { Icon, Text, TextType } from '@ui'
 
     export let settings: SettingsNavigatorTypes.Settings
     export let routes: string[]
@@ -41,6 +39,9 @@
 </script>
 
 <settings-navigator class="flex flex-col w-1/3 h-full justify-start items-start">
+    <Text type={TextType.h2} classes="mb-7">
+        {localize('views.settings.settings')}
+    </Text>
     {#each routes as setting}
         <setting-container class="flex flex-col items-start">
             <button
@@ -56,7 +57,7 @@
                         classes="text-blue-500 absolute left-1 text-xl"
                     />
                 {/if}
-                <Text type={TextType.p}>
+                <Text type={TextType.h4}>
                     {localize(`views.settings.${setting}.title`)}
                 </Text>
             </button>

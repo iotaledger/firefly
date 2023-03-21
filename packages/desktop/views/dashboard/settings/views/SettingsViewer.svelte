@@ -1,11 +1,6 @@
 <script lang="ts">
-    import { onMount } from 'svelte'
-
     import { Scroller, SettingsNavigator, SettingsNavigatorTypes } from '@components'
-    import { Text, TextType } from '@ui'
-
-    import { Advanced, General, Help, Security } from './'
-    import { localize, _ } from '@core/i18n'
+    import { _ } from '@core/i18n'
     import { activeProfile, isActiveLedgerProfile, isSoftwareProfile } from '@core/profile'
     import {
         AdvancedSettingsRoute,
@@ -19,14 +14,13 @@
         SettingsRouteNoProfile,
         settingsRouter,
     } from '@core/router'
-
     import features from '@features/features'
+    import { onMount } from 'svelte'
+    import { Advanced, General, Help, Security } from './'
 
     const { loggedIn } = $activeProfile
 
-    const routes = Object.values($loggedIn ? SettingsRoute : SettingsRouteNoProfile).filter(
-        (route) => route !== SettingsRoute.Init
-    )
+    const routes = Object.values($loggedIn ? SettingsRoute : SettingsRouteNoProfile)
 
     const securitySettings = structuredClone(SecuritySettingsRoute)
     const advancedSettings = structuredClone(AdvancedSettingsRoute)
@@ -97,16 +91,8 @@
             bind:route={$settingsRoute}
         />
         <div class="h-full w-full pb-10">
-            <Text type={TextType.p} secondary highlighted classes="mb-8">
-                {localize('views.settings.settings')}
-                /
-                {localize(`views.settings.${$settingsRoute}.title`)}
-            </Text>
-            <Scroller classes="w-full md:w-3/4 h-full md:pr-100" threshold={70}>
+            <Scroller classes="w-full md:w-3/4 h-full md:pr-100" threshold={100}>
                 <div class="md:w-11/12">
-                    <Text type={TextType.h2} classes="mb-7">
-                        {localize(`views.settings.${$settingsRoute}.title`)}
-                    </Text>
                     {#if $settingsRoute === SettingsRoute.General}
                         <General />
                     {:else if $settingsRoute === SettingsRoute.Security}
