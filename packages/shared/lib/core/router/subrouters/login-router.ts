@@ -1,11 +1,13 @@
 import { get, writable } from 'svelte/store'
 
-import { migrateProfile } from '@lib/profile'
+import { activeProfile, migrateProfile } from '@lib/profile'
 
 import { appRouter } from '../app-router'
 import { LoginRoute } from '../enums'
 import { Subrouter } from './subrouter'
 import { FireflyEvent } from '../types'
+import { isStrongholdOutdated } from '@lib/wallet'
+import { UpdateStrongholdRouter, updateStrongholdRouter } from '@core/router'
 
 export const loginRoute = writable<LoginRoute>(null)
 
@@ -27,8 +29,12 @@ export class LoginRouter extends Subrouter<LoginRoute> {
                 break
             }
             case LoginRoute.EnterPin:
-                migrateProfile()
-                get(appRouter).next(event)
+                if (isStrongholdOutdated(get(activeProfile))) {
+                    nextRoute = LoginRoute.UpdateStronghold
+                } else {
+                    migrateProfile()
+                    get(appRouter).next(event)
+                }
                 break
         }
         this.setNext(nextRoute)
