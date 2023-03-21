@@ -20,22 +20,17 @@
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
     import { ExpirationTime } from '@core/utils'
+    import { ActivityDirection, ActivityType, InclusionState, ActivityAction } from '@core/wallet/enums'
     import {
-        ActivityDirection,
-        ActivityType,
-        getOutputOptions,
-        InclusionState,
-        sendOutput,
-        validateSendConfirmation,
         selectedAccountAssets,
-        DEFAULT_TRANSACTION_OPTIONS,
         newTransactionDetails,
         updateNewTransactionDetails,
         NewTransactionType,
-        Output,
-        getAssetById,
-        ActivityAction,
-    } from '@core/wallet'
+    } from '@core/wallet/stores'
+    import { sendOutput } from '@core/wallet/actions'
+    import { DEFAULT_TRANSACTION_OPTIONS } from '@core/wallet/constants'
+    import { getOutputOptions, validateSendConfirmation, getAddressFromSubject } from '@core/wallet/utils'
+    import { Output } from '@core/wallet/types'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { ledgerPreparedOutput } from '@core/ledger'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
@@ -72,7 +67,6 @@
     let activeTab: Tab
 
     $: transactionDetails = get(newTransactionDetails)
-    $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
     $: isInternal = recipient.type === 'account'
     $: expirationTimePicker?.setNull(giftStorageDeposit)
     $: hideGiftToggle =
@@ -96,18 +90,13 @@
         destinationNetwork: getDestinationNetworkFromAddress(layer2Parameters?.networkAddress),
         ...(layer2Parameters?.networkAddress && {
             parsedLayer2Metadata: {
-                ethereumAddress: recipientAddress,
+                ethereumAddress: getAddressFromSubject(recipient),
                 targetContract: TARGET_CONTRACTS[ACCOUNTS_CONTRACT],
                 contractFunction: CONTRACT_FUNCTIONS[TRANSFER_ALLOWANCE],
                 gasBudget: GAS_BUDGET,
             },
         }),
     }
-
-    $: asset =
-        transactionDetails.type === NewTransactionType.TokenTransfer
-            ? getAssetById(transactionDetails.assetId)
-            : undefined
 
     function refreshSendConfirmationState(): void {
         void prepareTransactionOutput()
@@ -125,20 +114,8 @@
 
     async function prepareTransactionOutput(): Promise<void> {
         const transactionDetails = get(newTransactionDetails)
-        // TODO: move arguments into transactionDetails object
-        outputOptions = getOutputOptions(
-            expirationDate,
-            recipientAddress,
-            transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.rawAmount : '0',
-            transactionDetails?.metadata,
-            transactionDetails.tag,
-            asset,
-            giftStorageDeposit,
-            transactionDetails.surplus,
-            transactionDetails.layer2Parameters,
-            transactionDetails.type === NewTransactionType.NftTransfer ? transactionDetails.nftId : undefined,
-            $selectedAccount.depositAddress
-        )
+
+        outputOptions = getOutputOptions(transactionDetails, $selectedAccount.depositAddress)
         preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
 
         setStorageDeposit(preparedOutput, Number(surplus))

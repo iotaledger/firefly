@@ -8,9 +8,9 @@ import {
     resetNewTokenTransactionDetails,
     setNewTransactionDetails,
     NewTransactionType,
+    NewTokenTransactionDetails,
 } from '@core/wallet'
 import { showAppNotification } from '@auxiliary/notification'
-import type { Transaction } from '@iota/wallet'
 
 import { ShimmerClaimingAccountState } from '../enums'
 import { IShimmerClaimingAccount } from '../interfaces'
@@ -61,30 +61,27 @@ async function claimShimmerRewardsForShimmerClaimingAccounts(
 async function claimShimmerRewardsForShimmerClaimingAccount(
     shimmerClaimingAccount: IShimmerClaimingAccount
 ): Promise<void> {
-    const recipientAddress = await getDepositAddress(shimmerClaimingAccount?.twinAccount)
     const rawAmount = shimmerClaimingAccount?.unclaimedRewards
-    const outputOptions = getOutputOptions(null, recipientAddress, rawAmount.toString(), '', '')
+    const recipientAddress = await getDepositAddress(shimmerClaimingAccount?.twinAccount)
+
+    const newTransactionDetails: NewTokenTransactionDetails = {
+        type: NewTransactionType.TokenTransfer,
+        assetId: COIN_TYPE[NetworkProtocol.Shimmer].toString(),
+        rawAmount: rawAmount.toString(),
+        unit: '',
+        recipient: {
+            type: 'address',
+            address: recipientAddress,
+        },
+    }
+    setNewTransactionDetails(newTransactionDetails)
+
+    const outputOptions = getOutputOptions(newTransactionDetails)
     const preparedOutput = await shimmerClaimingAccount?.prepareOutput(outputOptions, DEFAULT_TRANSACTION_OPTIONS)
 
-    let claimingTransaction: Transaction
-    if (get(isOnboardingLedgerProfile)) {
-        setNewTransactionDetails({
-            type: NewTransactionType.TokenTransfer,
-            assetId: COIN_TYPE[NetworkProtocol.Shimmer].toString(),
-            rawAmount: rawAmount.toString(),
-            unit: '',
-            recipient: {
-                type: 'address',
-                address: recipientAddress,
-            },
-            metadata: '',
-            tag: '',
-        })
-        claimingTransaction = await shimmerClaimingAccount?.sendOutputs([preparedOutput])
-        resetNewTokenTransactionDetails()
-    } else {
-        claimingTransaction = await shimmerClaimingAccount?.sendOutputs([preparedOutput])
-    }
+    const claimingTransaction = await shimmerClaimingAccount?.sendOutputs([preparedOutput])
+    resetNewTokenTransactionDetails()
+
     persistShimmerClaimingTransaction(claimingTransaction?.transactionId)
 
     const claimedRewards = shimmerClaimingAccount?.claimedRewards + rawAmount

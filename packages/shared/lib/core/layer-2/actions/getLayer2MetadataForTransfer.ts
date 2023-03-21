@@ -1,9 +1,10 @@
-import { get } from 'svelte/store'
 import BigInteger from 'big-integer'
 
 import { WriteStream } from '@iota/util.js'
-import { getPersistedAsset, newTransactionDetails, NewTransactionType } from '@core/wallet/stores'
+import { getPersistedAsset, NewTransactionType } from '@core/wallet/stores'
+import { getAddressFromSubject } from '@core/wallet/utils'
 import { TokenStandard } from '@core/wallet/enums'
+import type { NewTransactionDetails } from '@core/wallet/types'
 import { Converter } from '@core/utils'
 import {
     ACCOUNTS_CONTRACT,
@@ -17,7 +18,7 @@ import {
     TRANSFER_ALLOWANCE,
 } from '@core/layer-2'
 
-export function getLayer2MetadataForTransfer(layer2Address: string): string {
+export function getLayer2MetadataForTransfer(transactionDetails: NewTransactionDetails): string {
     const metadataStream = new WriteStream()
 
     metadataStream.writeUInt32('senderContract', EXTERNALLY_OWNED_ACCOUNT)
@@ -25,12 +26,14 @@ export function getLayer2MetadataForTransfer(layer2Address: string): string {
     metadataStream.writeUInt32('contractFunction', TRANSFER_ALLOWANCE)
     metadataStream.writeUInt64('gasBudget', GAS_BUDGET)
 
-    const encodedAddress = encodeAddress(layer2Address.toLowerCase())
+    const address = getAddressFromSubject(transactionDetails.recipient)
+    const encodedAddress = encodeAddress(address.toLowerCase())
+
     const smartContractParameters = Object.entries({ a: encodedAddress })
     const parameters = encodeSmartContractParameters(smartContractParameters)
     metadataStream.writeBytes('smartContractParameters', parameters.length, parameters)
 
-    const allowance = encodeAllowance()
+    const allowance = encodeAllowance(transactionDetails)
     metadataStream.writeBytes('allowance', allowance.length, allowance)
 
     metadataStream.writeUInt16('end', ENDING_SIGNAL_BYTE)
@@ -66,11 +69,10 @@ function encodeAddress(address: string): string {
     return encodedAddress.finalHex()
 }
 
-function encodeAllowance(): Uint8Array {
+function encodeAllowance(transactionDetails: NewTransactionDetails): Uint8Array {
     const allowance = new WriteStream()
     const tokenBuffer = new WriteStream()
 
-    const transactionDetails = get(newTransactionDetails)
     if (transactionDetails.type === NewTransactionType.TokenTransfer) {
         allowance.writeUInt8('encodedAllowance', Allowance.Set)
 
