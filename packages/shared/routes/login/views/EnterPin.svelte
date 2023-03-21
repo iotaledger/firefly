@@ -172,7 +172,7 @@
                 showStrongholdWarning={isStrongholdOutdated($activeProfile)}
                 bgColor="blue"
             />
-            {#if true}
+            {#if isStrongholdOutdated($activeProfile)}
                 <TextHint
                     hint={locale('views.login.outdatedStronghold')}
                     hintClasses="text-gray-700 dark:text-gray-400"
