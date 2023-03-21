@@ -1549,6 +1549,7 @@ export const handleTransactionEventData = (eventData: TransferProgressEventData)
 }
 
 export function isStrongholdOutdated(profile: Profile): boolean {
-    const strongholdVersion = profile?.strongholdVersion ?? -1
-    return strongholdVersion < STRONGHOLD_VERSION
+    const isSoftwareProfile = profile?.type === ProfileType.Software
+    const mustUpdateStronghold = (profile?.strongholdVersion ?? -1) < STRONGHOLD_VERSION
+    return isSoftwareProfile && mustUpdateStronghold
 }

@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { createEventDispatcher, onMount } from 'svelte'
+    import { createEventDispatcher } from 'svelte'
     import { Icon, Logo, Profile } from 'shared/components'
     import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos } from 'shared/lib/app'
     import { openPopup, popupState } from 'shared/lib/popup'
@@ -7,6 +7,7 @@
     import { ProfileType } from 'shared/lib/typings/profile'
     import { localize } from '@core/i18n'
     import { isAwareOfCrashReporting } from '@lib/appSettings'
+    import { isStrongholdOutdated } from '@lib/wallet'
 
     const dispatch = createEventDispatcher()
 
@@ -56,6 +57,7 @@
                     isDeveloper={profile.isDeveloperProfile}
                     isLedgerProfile={profile?.type === ProfileType.Ledger ||
                         profile?.type === ProfileType.LedgerSimulator}
+                    showStrongholdWarning={isStrongholdOutdated(profile)}
                     classes="cursor-pointer"
                 />
             </div>
