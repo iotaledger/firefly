@@ -8,7 +8,7 @@
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
     import { truncateString } from '@core/utils/string'
     import { registeredProposalsForSelectedAccount, registerProposalsForAccounts } from '@contexts/governance'
-    import { activeAccounts } from '@core/profile'
+    import { activeAccounts, updateActiveAccountMetadata } from '@core/profile'
     import { selectedAccount } from '@core/account'
     import { PopupId } from '@auxiliary/popup'
 
@@ -40,6 +40,11 @@
                 nodeInput?.validate(),
             ])
             await registerParticipationWrapper()
+            if ($selectedAccount?.removedProposalsIds?.includes(inputtedEventId)) {
+                updateActiveAccountMetadata($selectedAccount.index, {
+                    removedProposalsIds: $selectedAccount.removedProposalsIds.filter((id) => id !== inputtedEventId),
+                })
+            }
             isBusy = false
         } catch (err) {
             isBusy = false

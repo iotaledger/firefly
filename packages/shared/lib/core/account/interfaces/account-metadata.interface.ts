@@ -4,4 +4,5 @@ export interface IAccountMetadata {
     color: string
     hidden: boolean
     shouldRevote: boolean
+    removedProposalsIds?: string[]
 }
