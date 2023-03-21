@@ -12,7 +12,6 @@
     import { Locale } from '@core/i18n'
     import { get } from 'svelte/store'
     import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos } from '@lib/app'
-    import { isStrongholdOutdated } from '@lib/wallet'
 
     export let locale: Locale
 
@@ -173,13 +172,13 @@
                 showStrongholdWarning={isStrongholdOutdated($activeProfile)}
                 bgColor="blue"
             />
-            {#if isStrongholdOutdated($activeProfile?.strongholdVersion)}
+            {#if true}
                 <TextHint
-                    classes="p-4 w-full rounded-2xl bg-yellow-50 dark:bg-gray-800 mt-6 mb-4"
-                    icon="exclamation"
-                    iconClasses="fill-current text-yellow-500 dark:text-yellow-500"
                     hint={locale('views.login.outdatedStronghold')}
-                    hintClasses="text-gray-700 dark:text-gray-700"
+                    hintClasses="text-gray-700 dark:text-gray-400"
+                    icon="exclamation"
+                    classes="mt-8 p-4 w-full rounded-2xl bg-yellow-50 dark:bg-opacity-10"
+                    iconClasses="text-yellow-700"
                 />
             {/if}
             <Pin
