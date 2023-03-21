@@ -1,21 +1,32 @@
-<script lang="ts">
-    import { Scroller, SettingsNavigator, SettingsNavigatorTypes } from '@components'
-    import { _ } from '@core/i18n'
-    import { activeProfile, isActiveLedgerProfile, isSoftwareProfile } from '@core/profile'
+<script lang="ts" context="module">
     import {
         AdvancedSettingsRoute,
         GeneralSettingsRoute,
         HelpAndInfoRoute,
+        NetworkSettingsRoute,
         ProfileSettingsRoute,
         SecuritySettingsRoute,
-        settingsRoute,
-        SettingsRoute,
-        SettingsRouteNoProfile,
-        settingsRouter,
     } from '@core/router'
+    export namespace SettingsNavigatorTypes {
+        export type Settings = {
+            general: typeof GeneralSettingsRoute
+            profile?: typeof ProfileSettingsRoute
+            network?: typeof NetworkSettingsRoute
+            security?: typeof SecuritySettingsRoute
+            advanced?: typeof AdvancedSettingsRoute
+            helpAndInfo: typeof HelpAndInfoRoute
+        }
+    }
+</script>
+
+<script lang="ts">
+    import { Scroller, SettingsNavigator } from '@components'
+    import { _ } from '@core/i18n'
+    import { activeProfile, isActiveLedgerProfile, isSoftwareProfile } from '@core/profile'
+    import { settingsRoute, SettingsRoute, SettingsRouteNoProfile, settingsRouter } from '@core/router'
     import features from '@features/features'
     import { onMount } from 'svelte'
-    import { Advanced, General, Help, ProfileSettings, Security } from './'
+    import { Advanced, General, Help, NetworkSettings, ProfileSettings, Security } from './'
 
     const { loggedIn } = $activeProfile
 
@@ -39,6 +50,7 @@
             general: GeneralSettingsRoute,
             profile: ProfileSettingsRoute,
             security: securitySettings,
+            network: NetworkSettingsRoute,
             advanced: advancedSettings,
             helpAndInfo: HelpAndInfoRoute,
         }
@@ -96,6 +108,8 @@
                         <General />
                     {:else if $settingsRoute === SettingsRoute.Profile}
                         <ProfileSettings />
+                    {:else if $settingsRoute === SettingsRoute.Network}
+                        <NetworkSettings />
                     {:else if $settingsRoute === SettingsRoute.Security}
                         <Security />
                     {:else if $settingsRoute === SettingsRoute.Advanced}
