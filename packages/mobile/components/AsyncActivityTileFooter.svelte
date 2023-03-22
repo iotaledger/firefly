@@ -7,8 +7,8 @@
     import { Position } from '@ui/enums'
     import { localize } from '@core/i18n'
 
-    export let onClaim: () => unknown = () => {}
-    export let onReject: () => unknown = () => {}
+    export let onClaimClick: () => unknown = () => {}
+    export let onRejectClick: () => unknown = () => {}
     export let activity: Activity
 
     $: shouldShowActions =
@@ -48,7 +48,7 @@
         <svelte:fragment slot="right">
             {#if shouldShowActions}
                 <Button
-                    onClick={onReject}
+                    onClick={onRejectClick}
                     disabled={activity.asyncData?.isClaiming || activity.asyncData?.isRejected}
                     inlineStyle="min-width: 4rem;"
                     size={ButtonSize.Small}
@@ -57,7 +57,7 @@
                     {localize('actions.reject')}
                 </Button>
                 <Button
-                    onClick={onClaim}
+                    onClick={onClaimClick}
                     disabled={activity.asyncData?.isClaiming}
                     isBusy={activity.asyncData?.isClaiming}
                     inlineStyle="min-width: 4rem;"

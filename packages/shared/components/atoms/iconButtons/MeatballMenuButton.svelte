@@ -7,20 +7,20 @@
 
     let active = false
 
-    function handleClick(event: any): void {
+    function onButtonClick(event: any): void {
         active = !active
         onClick(event)
     }
 
-    function handleClickOutside(): void {
+    function onClickOutside(): void {
         active = false
     }
 </script>
 
 <button
-    on:click|stopPropagation={handleClick}
+    on:click|stopPropagation={onButtonClick}
     use:clickOutside
-    on:clickOutside={handleClickOutside}
+    on:clickOutside={onClickOutside}
     class="
         flex flex-row space-x-1 px-2 py-3
         text-gray-500 dark:text-white rounded-lg

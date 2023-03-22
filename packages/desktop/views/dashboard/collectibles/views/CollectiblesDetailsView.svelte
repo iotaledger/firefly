@@ -139,11 +139,11 @@
         }
     }
 
-    function handleExplorerClick(): void {
+    function onExplorerClick(): void {
         openUrlInBrowser(`${explorerUrl}/${ExplorerEndpoint.Nft}/${id}`)
     }
 
-    function handleSendClick(): void {
+    function onSendClick(): void {
         setNewTransactionDetails({
             type: NewTransactionType.NftTransfer,
             nftId: id,
@@ -249,10 +249,10 @@
             {/if}
         </div>
         <div class="flex w-full space-x-4 self-end mt-auto pt-4">
-            <Button outline classes="flex-1" onClick={handleExplorerClick} disabled={!explorerUrl}>
+            <Button outline classes="flex-1" onClick={onExplorerClick} disabled={!explorerUrl}>
                 {localize('general.viewOnExplorer')}
             </Button>
-            <Button classes="flex-1" onClick={handleSendClick} disabled={!!timeDiff}>
+            <Button classes="flex-1" onClick={onSendClick} disabled={!!timeDiff}>
                 {timeDiff
                     ? localize('popups.balanceBreakdown.locked.title') + ' ' + String(timeDiff)
                     : localize('actions.send')}

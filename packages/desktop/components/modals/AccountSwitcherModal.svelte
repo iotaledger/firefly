@@ -20,7 +20,7 @@
         element?.scrollIntoView({ behavior: 'auto' })
     }
 
-    function handleCreateAccountClick(): void {
+    function onCreateAccountClick(): void {
         modal?.close()
         openPopup({ id: PopupId.CreateAccount })
     }
@@ -44,7 +44,7 @@
     <button
         type="button"
         class=" flex flex-row justify-between w-full p-8 hover:bg-gray-50 dark:hover:bg-gray-800"
-        on:click={handleCreateAccountClick}
+        on:click={onCreateAccountClick}
     >
         <div class="flex flex-row items-center space-x-4">
             <Icon icon={IconEnum.Plus} height="12" width="12" classes="text-blue-500" />

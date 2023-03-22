@@ -14,7 +14,7 @@
     let error: string
     let isBusy = false
 
-    async function handleDeleteClick(): Promise<void> {
+    async function onDeleteAccountSubmit(): Promise<void> {
         error = null
         isBusy = true
         await deleteStrongholdAccount(password)
@@ -37,7 +37,7 @@
 
 <delete-account-drawer>
     <form
-        on:submit|preventDefault={handleDeleteClick}
+        on:submit|preventDefault={onDeleteAccountSubmit}
         class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0"
     >
         <div class="space-y-4">
@@ -50,7 +50,7 @@
                     showRevealToggle
                     placeholder={localize('general.password')}
                     autofocus
-                    submitHandler={handleDeleteClick}
+                    submitHandler={onDeleteAccountSubmit}
                     disabled={isBusy}
                 />
             {/if}

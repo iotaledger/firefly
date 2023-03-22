@@ -62,7 +62,7 @@
         ...(claimedTime && { claimedTime: { data: claimedTime } }),
     }
 
-    function handleTransactionIdClick(): void {
+    function onTransactionIdClick(): void {
         explorerUrl
             ? openUrlInBrowser(
                   `${explorerUrl}/${ExplorerEndpoint.Transaction}/${activity?.asyncData?.claimingTransactionId}`
@@ -85,7 +85,7 @@
         <button
             slot="value"
             class="action w-fit flex justify-start text-center font-medium text-14 text-blue-500"
-            on:click={handleTransactionIdClick}
+            on:click={onTransactionIdClick}
         >
             {truncateString(activity?.asyncData?.claimingTransactionId, 12, 12)}
         </button>

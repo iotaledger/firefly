@@ -60,7 +60,7 @@
         }
     }
 
-    function handleOpenMediaClick(): void {
+    function onOpenMediaClick(): void {
         openUrlInBrowser(url)
     }
 </script>
@@ -72,7 +72,7 @@
         <MenuItem
             icon="export"
             title={localize('views.collectibles.details.menu.view')}
-            onClick={handleOpenMediaClick}
+            onClick={onOpenMediaClick}
             disabled={!url}
         />
         <MenuItem

@@ -1,1 +1,1 @@
-export const SECONDS_PER_MILESTONE = 10
+export const SECONDS_PER_MILESTONE = 5

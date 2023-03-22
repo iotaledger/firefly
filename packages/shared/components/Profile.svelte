@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { DeveloperIndicatorPill, Icon, NetworkIconBadge, StrongholdBadge, Text } from 'shared/components'
+    import { DeveloperIndicatorPill, Icon, NetworkIconBadge, StrongholdBadge, Text, TextType } from 'shared/components'
 
     import { getInitials as _getInitials } from '@core/utils'
     import { NetworkProtocol, NetworkType } from '@core/network'
@@ -18,7 +18,7 @@
 
     const slots = $$props.$$slots
 
-    function handleOnClick(): void {
+    function onProfileClick(): void {
         onClick && onClick(id)
     }
 
@@ -35,7 +35,7 @@
 
 <profile-container class="flex items-center justify-center w-24">
     <div class="flex flex-col justify-between items-center w-full">
-        <button type="button" on:click={handleOnClick} class="relative cursor-pointer mb-3">
+        <button type="button" on:click={onProfileClick} class="relative cursor-pointer mb-3">
             <div
                 class="h-18 w-18 rounded-full font-bold text-center flex items-center justify-center
                 {bgColor ? `bg-${bgColor}-500` : ''} {classes}"
@@ -43,7 +43,7 @@
                 {#if slots}
                     <slot />
                 {:else}
-                    <Text type="h3" classes="text-white">{getInitials()}</Text>
+                    <Text type={TextType.h3} classes="text-white">{getInitials()}</Text>
                 {/if}
             </div>
             {#if !updateRequired}
@@ -55,13 +55,13 @@
         <div class="flex flex-row items-baseline justify-center space-x-1.5 mb-2 w-full">
             {#if isLedgerProfile}
                 <Icon
-                    icon="ledger"
+                    icon={'ledger'}
                     classes="text-gray-900 dark:text-gray-100 relative top-0.5"
                     width={14}
                     height={14}
                 />
             {/if}
-            <Text type="h5" classes="text-center truncate">{name}</Text>
+            <Text type={TextType.h5} classes="text-center truncate">{name}</Text>
         </div>
         {#if isDeveloper}
             <DeveloperIndicatorPill />

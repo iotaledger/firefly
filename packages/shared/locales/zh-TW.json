@@ -1779,7 +1779,7 @@
             "error": "領取獎勵時發生錯誤."
         },
         "vote": {
-            "success": "Votes successfully casted"
+            "success": "Votes successfully cast"
         },
         "stopVoting": {
             "success": "Voting successfully stopped"

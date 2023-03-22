@@ -1,13 +1,10 @@
 <script lang="ts">
-    import {
-        ProposalStatusPill,
-        ProposalStatusTimelineTooltip,
-        OutdatedNodeTooltip,
-        ResultsNotAvailableTooltip,
-    } from 'shared/components'
-    import { Position } from 'shared/components/enums'
+    import { ProposalStatusTimelineTooltip } from '@components'
+    import { OutdatedNodeTooltip, ProposalStatusPill, ResultsNotAvailableTooltip } from '@ui'
+    import { Position } from '@ui/enums'
+
     import { IProposal } from '@contexts/governance/interfaces'
-    import { ProposalError } from '../lib/contexts/governance'
+    import { ProposalError } from '@lib/contexts/governance'
 
     export let proposal: IProposal
     export let position: Position = Position.Right

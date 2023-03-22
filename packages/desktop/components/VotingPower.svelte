@@ -1,6 +1,7 @@
 <script lang="ts">
-    import { Text, Button } from 'shared/components'
-    import { ButtonSize, FontWeight, TextType } from './enums'
+    import { Button, Text } from '@ui'
+    import { ButtonSize, FontWeight, TextType } from '@ui/enums'
+
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { formatTokenAmountBestMatch, visibleSelectedAccountAssets } from '@core/wallet'
@@ -17,7 +18,7 @@
         $selectedAccount?.hasVotingTransactionInProgress ||
         $selectedAccount?.isTransferring
 
-    function handleManageVotingPower(): void {
+    function onManageVotingPowerClick(): void {
         openPopup({
             id: PopupId.ManageVotingPower,
         })
@@ -34,7 +35,7 @@
     </Text>
     <Button
         size={ButtonSize.Medium}
-        onClick={handleManageVotingPower}
+        onClick={onManageVotingPowerClick}
         classes="w-full"
         disabled={hasTransactionInProgress}
         isBusy={hasTransactionInProgress}

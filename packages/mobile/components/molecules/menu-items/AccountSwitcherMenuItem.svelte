@@ -10,13 +10,13 @@
     export let onClick: () => unknown
     export let id: string = ''
 
-    function handleAccountClick(accountIndex: number): void {
+    function onAccountClick(accountIndex: number): void {
         setSelectedAccount(accountIndex)
         onClick && onClick()
     }
 </script>
 
-<button {id} on:click={() => handleAccountClick(account.index)} class="flex flex-row justify-between py-4">
+<button {id} on:click={() => onAccountClick(account.index)} class="flex flex-row justify-between py-4">
     <AccountLabel selected={account.index === $selectedAccount?.index} {account} />
     <Text classes={account.index === $selectedAccount?.index ? '' : 'opacity-50'} type={TextType.h5}>
         {formatTokenAmountBestMatch(
