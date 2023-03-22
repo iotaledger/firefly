@@ -22,6 +22,7 @@ import { RecoverAccountsPayload } from '@core/profile-manager/interfaces'
 import { profileManager } from '@core/profile-manager/stores'
 import { buildProfileManagerOptionsFromProfileData } from '@core/profile-manager/utils'
 import { routerManager } from '@core/router/stores'
+import { SECONDS_PER_MINUTE } from '@core/utils'
 import { sleep } from '@core/utils/os'
 import { generateAndStoreActivitiesForAllAccounts, refreshAccountAssetsForActiveProfile } from '@core/wallet/actions'
 import { get } from 'svelte/store'
@@ -29,7 +30,6 @@ import {
     CHECK_PREVIOUS_MANAGER_IS_DESTROYED_INTERVAL,
     CHECK_PREVIOUS_MANAGER_IS_DESTROYED_MAX_COUNT,
     DEFAULT_ACCOUNT_RECOVERY_CONFIGURATION,
-    STRONGHOLD_PASSWORD_CLEAR_INTERVAL,
 } from '../../constants'
 import { ProfileType } from '../../enums'
 import { ILoginOptions } from '../../interfaces'
@@ -116,7 +116,9 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 incrementLoginProgress()
                 const strongholdUnlocked = await isStrongholdUnlocked()
                 isStrongholdLocked.set(!strongholdUnlocked)
-                setStrongholdPasswordClearInterval(STRONGHOLD_PASSWORD_CLEAR_INTERVAL)
+                setStrongholdPasswordClearInterval(
+                    _activeProfile.settings.strongholdPasswordTimeoutInMinutes * SECONDS_PER_MINUTE
+                )
                 if (strongholdUnlocked) {
                     setTimeStrongholdLastUnlocked()
                 }

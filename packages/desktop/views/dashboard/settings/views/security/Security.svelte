@@ -3,7 +3,7 @@
     import { SecuritySettingsRoute } from '@core/router'
     import features from '@features/features'
     import { HR } from 'shared/components'
-    import { AppLock, ChangePassword, ChangePincode, ExportStronghold } from './'
+    import { AppLock, ChangePassword, ChangePincode, ExportStronghold, StrongholdPasswordTimeout } from './'
 
     const settings: {
         component: unknown
@@ -11,6 +11,11 @@
         requireSoftware?: boolean
     }[] = [
         { component: AppLock, childRoute: SecuritySettingsRoute.AppLock },
+        {
+            component: StrongholdPasswordTimeout,
+            childRoute: SecuritySettingsRoute.StrongholdPasswordTimeout,
+            requireSoftware: true,
+        },
         { component: ChangePincode, childRoute: SecuritySettingsRoute.ChangePincode },
         { component: ChangePassword, childRoute: SecuritySettingsRoute.ChangePassword, requireSoftware: true },
         { component: ExportStronghold, childRoute: SecuritySettingsRoute.ExportStronghold, requireSoftware: true },

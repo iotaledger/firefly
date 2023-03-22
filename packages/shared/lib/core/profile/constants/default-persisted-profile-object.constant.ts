@@ -13,6 +13,7 @@ export const DEFAULT_PERSISTED_PROFILE_OBJECT: IPersistedProfile = {
     settings: {
         marketCurrency: DEFAULT_MARKET_CURRENCY,
         lockScreenTimeoutInMinutes: 5,
+        strongholdPasswordTimeoutInMinutes: 2,
         maxMediaSizeInMegaBytes: 50,
         hideNetworkStatistics: true,
     },

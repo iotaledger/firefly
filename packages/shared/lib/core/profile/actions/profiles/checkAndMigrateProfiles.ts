@@ -44,6 +44,7 @@ const persistedProfileMigrationsMap: Record<number, (existingProfile: unknown) =
     6: persistedProfileMigrationToV7,
     7: persistedProfileMigrationToV8,
     8: persistedProfileMigrationToV9,
+    9: persistedProfileMigrationToV10,
 }
 
 function persistedProfileMigrationToV4(existingProfile: unknown): void {
@@ -146,6 +147,11 @@ function persistedProfileMigrationToV9(existingProfile: IPersistedProfile): void
     existingProfile.clientOptions.nodes = existingProfile?.clientOptions?.nodes?.map(migrateNode)
     existingProfile.clientOptions.primaryNode = migrateNode(existingProfile?.clientOptions?.primaryNode)
 
+    saveProfile(existingProfile)
+}
+
+function persistedProfileMigrationToV10(existingProfile: IPersistedProfile): void {
+    existingProfile.settings = { ...existingProfile.settings, strongholdPasswordTimeoutInMinutes: 2 }
     saveProfile(existingProfile)
 }
 

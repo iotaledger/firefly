@@ -41,6 +41,7 @@
 
     $: if (!$isSoftwareProfile) {
         delete securitySettings.ExportStronghold
+        delete securitySettings.StrongholdPasswordTimeout
         delete securitySettings.ChangePassword
     }
     $: if (!$isActiveLedgerProfile) {
