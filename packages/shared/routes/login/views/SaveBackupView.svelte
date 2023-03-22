@@ -5,8 +5,6 @@
 
     export let loginRouter: LoginRouter
 
-    const busy = false
-
     function onSkipBackupClick(): void {
         loginRouter.next()
     }
@@ -17,7 +15,7 @@
 </script>
 
 <save-backup-view>
-    <OnboardingLayout allowBack={false} {busy}>
+    <OnboardingLayout allowBack={false}>
         <div slot="leftpane__content">
             <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-10 pb-6">
                 <div class="bg-green-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">

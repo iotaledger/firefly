@@ -7,8 +7,6 @@
 
     export let loginRouter: LoginRouter
 
-    const busy = false
-
     function onBackClick(): void {
         destroyActor($activeProfileId)
         $updateStrongholdRouter.previous()
@@ -21,7 +19,7 @@
 </script>
 
 <update-stronghold-view>
-    <OnboardingLayout {onBackClick} {busy}>
+    <OnboardingLayout {onBackClick}>
         <div slot="title">
             <Text type="h2" classes="mb-5">{localize('views.login.updateStronghold.title')}</Text>
         </div>

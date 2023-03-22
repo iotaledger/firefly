@@ -7,7 +7,7 @@
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { ChangePasswordView, EnterPin, SaveBackupView, SelectProfile, UpdateStrongholdView } from './views/'
-    import { updateStrongholdRoute, UpdateStrongholdRoute } from '../../lib/core/router'
+    import { updateStrongholdRoute, UpdateStrongholdRoute } from '@core/router'
 
     export let locale: Locale
 

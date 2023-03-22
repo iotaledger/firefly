@@ -3,8 +3,6 @@
     import { localize } from '@core/i18n'
     import { updateStrongholdRouter } from '@core/router'
 
-    const busy = false
-
     function onBackClick(): void {
         $updateStrongholdRouter.previous()
     }
@@ -19,7 +17,7 @@
 </script>
 
 <change-password-view>
-    <OnboardingLayout {onBackClick} {busy}>
+    <OnboardingLayout {onBackClick}>
         <div slot="title">
             <Text type="h2" classes="mb-5">{localize('views.login.changePassword.title')}</Text>
         </div>
