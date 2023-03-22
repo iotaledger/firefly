@@ -19,11 +19,7 @@
 {/if}
 <div class="flex flex-col w-full space-y-0.5">
     <div class="flex flex-row justify-between space-x-2 overflow-hidden">
-        <Text
-            fontWeight={FontWeight.semibold}
-            lineHeight="140"
-            classes="overflow-hidden overflow-ellipsis multiwrap-line2"
-        >
+        <Text fontWeight={FontWeight.semibold} lineHeight="140" classes="">
             {action}
         </Text>
         <Text
