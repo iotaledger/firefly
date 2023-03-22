@@ -143,8 +143,8 @@ function persistedProfileMigrationToV9(existingProfile: IPersistedProfile): void
         }
     }
 
-    existingProfile.clientOptions.nodes = existingProfile.clientOptions.nodes.map(migrateNode)
-    existingProfile.clientOptions.primaryNode = migrateNode(existingProfile.clientOptions.primaryNode)
+    existingProfile.clientOptions.nodes = existingProfile?.clientOptions?.nodes?.map(migrateNode)
+    existingProfile.clientOptions.primaryNode = migrateNode(existingProfile?.clientOptions?.primaryNode)
 
     saveProfile(existingProfile)
 }
