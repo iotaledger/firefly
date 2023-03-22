@@ -44,7 +44,7 @@
         "cross-env": "^7.0.2",
         "css-loader": "^5.0.1",
         "electron": "22.3.0",
-        "electron-builder": "^23.5.1",
+        "electron-builder": "^24.0.0",
         "electron-notarize": "^1.0.0",
         "esbuild-loader": "^3.0.0",
         "lodash.merge": "^4.6.2",
