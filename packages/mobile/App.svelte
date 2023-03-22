@@ -132,8 +132,9 @@
     html,
     body {
         @apply bg-white;
-        @apply select-none;
         -webkit-user-drag: none;
+        user-select: none;
+        -webkit-user-select: none;
 
         /* ===== Scrollbar CSS ===== */
         /* Chrome, Edge, and Safari */
