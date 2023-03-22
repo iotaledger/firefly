@@ -459,7 +459,20 @@
         "login": {
             "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
             "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}",
-            "outdatedStronghold": "Your Stronghold's version is outdated. Please login to update it."
+            "outdatedStronghold": "Your Stronghold's version is outdated. Please login to update it.",
+            "updateStronghold": {
+                "title": "Update Stronghold",
+                "body": "Your Stronghold’s version is out of date. Provide your password to update Stronghold."
+            },
+            "changePassword": {
+                "title": "Change password",
+                "hint": "We recommend to update your password"
+            },
+            "saveBackup": {
+                "title": "Save backup",
+                "body": "It's all good now - you're running the latest Stronghold version.",
+                "hint": "We highly recommend to delete all previous Stronghold backup files and save a new one."
+            }
         },
         "dashboard": {
             "network": {

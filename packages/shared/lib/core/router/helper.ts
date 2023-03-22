@@ -10,13 +10,7 @@ import { DashboardRouter, dashboardRouter } from './dashboard-router'
 import { DashboardRoute } from './enums'
 import { GovernanceRouter, governanceRouter } from './governance-router'
 import { SettingsRouter, settingsRouter } from './settings-router'
-import {
-    ledgerRouter,
-    LedgerRouter,
-    updateStrongholdRoute,
-    UpdateStrongholdRouter,
-    updateStrongholdRouter,
-} from './subrouters'
+import { ledgerRouter, LedgerRouter } from './subrouters'
 import { clearSendParams } from '@lib/app'
 
 export const initRouters = (): void => {
@@ -26,7 +20,6 @@ export const initRouters = (): void => {
     accountRouter.set(new AccountRouter())
     settingsRouter.set(new SettingsRouter())
     governanceRouter.set(new GovernanceRouter())
-    updateStrongholdRouter.set(new UpdateStrongholdRouter())
 }
 
 export const resetRouters = (): void => {
@@ -35,7 +28,6 @@ export const resetRouters = (): void => {
     get(accountRouter).reset()
     get(settingsRouter).reset()
     get(governanceRouter).reset()
-    get(updateStrongholdRouter).reset()
     isDeepLinkRequestActive.set(false)
 }
 

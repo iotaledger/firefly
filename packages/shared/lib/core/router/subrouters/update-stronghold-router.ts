@@ -1,7 +1,7 @@
 import { get, writable } from 'svelte/store'
 
 import { UpdateStrongholdRoute } from '../enums'
-import { Subrouter } from '../subrouters'
+import { Subrouter } from '../subrouters/subrouter'
 import { FireflyEvent } from '../types'
 
 export const updateStrongholdRoute = writable<UpdateStrongholdRoute>(null)
