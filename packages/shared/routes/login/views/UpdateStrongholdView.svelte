@@ -4,6 +4,7 @@
     import { LoginRouter, updateStrongholdRouter } from '@core/router'
     import { activeProfileId } from '@lib/profile'
     import { destroyActor } from '@lib/wallet'
+    import { strongholdPassword } from '@lib/app'
 
     export let loginRouter: LoginRouter
 
@@ -22,6 +23,7 @@
     function onContinueClick(): void {
         // TODO: Remove later once real logic is hooked in
         if (password === 'test') {
+            strongholdPassword.set(password)
             $updateStrongholdRouter.next()
         } else {
             error = 'Must use "test" password'

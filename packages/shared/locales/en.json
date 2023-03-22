@@ -466,7 +466,7 @@
             },
             "changePassword": {
                 "title": "Change password",
-                "hint": "We recommend to update your password"
+                "hint": "We recommend to update your password."
             },
             "saveBackup": {
                 "title": "Stronghold updated",
