@@ -1,11 +1,17 @@
 <script lang="ts">
-    import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, Button, OnboardingLayout, Password, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { LoginRouter, updateStrongholdRouter } from '@core/router'
     import { activeProfileId } from '@lib/profile'
     import { destroyActor } from '@lib/wallet'
 
     export let loginRouter: LoginRouter
+
+    const busy = false
+    let password: string = ''
+    let error: string = ''
+
+    $: password, (error = '')
 
     function onBackClick(): void {
         destroyActor($activeProfileId)
@@ -14,7 +20,12 @@
     }
 
     function onContinueClick(): void {
-        $updateStrongholdRouter.next()
+        // TODO: Remove later once real logic is hooked in
+        if (password === 'test') {
+            $updateStrongholdRouter.next()
+        } else {
+            error = 'Must use "test" password'
+        }
     }
 </script>
 
@@ -25,6 +36,16 @@
         </div>
         <div slot="leftpane__content">
             <Text type="p" secondary classes="mb-8">{localize('views.login.updateStronghold.body')}</Text>
+            <Password
+                classes="mb-6"
+                {error}
+                bind:value={password}
+                locale={localize}
+                showRevealToggle
+                autofocus
+                disabled={busy}
+                submitHandler={onContinueClick}
+            />
         </div>
         <div slot="leftpane__action">
             <Button classes="w-full" onClick={onContinueClick}>
