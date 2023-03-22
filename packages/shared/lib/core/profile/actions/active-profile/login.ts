@@ -116,7 +116,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 incrementLoginProgress()
                 const strongholdUnlocked = await isStrongholdUnlocked()
                 isStrongholdLocked.set(!strongholdUnlocked)
-                setStrongholdPasswordClearInterval(
+                await setStrongholdPasswordClearInterval(
                     _activeProfile.settings.strongholdPasswordTimeoutInMinutes * SECONDS_PER_MINUTE
                 )
                 if (strongholdUnlocked) {
