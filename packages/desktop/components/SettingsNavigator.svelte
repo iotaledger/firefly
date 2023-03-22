@@ -2,7 +2,7 @@
     import { Icon as IconEnum, SETTINGS_ICON_SVG } from '@auxiliary/icon'
     import { SettingsNavigatorTypes } from '@components'
     import { localize } from '@core/i18n'
-    import { Icon, Text, TextType } from '@ui'
+    import { FontWeight, Icon, Text, TextType } from '@ui'
 
     export let settings: SettingsNavigatorTypes.Settings
     export let routes: string[]
@@ -38,7 +38,7 @@
                         classes="text-blue-500 absolute left-1 text-xl"
                     />
                 {/if}
-                <Text type={TextType.h4}>
+                <Text type={TextType.h5} fontWeight={FontWeight.medium}>
                     {localize(`views.settings.${setting}.title`)}
                 </Text>
             </button>
