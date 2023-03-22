@@ -38,7 +38,7 @@
     <Transition>
         {#if $updateStrongholdRoute === UpdateStrongholdRoute.UpdateStronghold}
             <Transition>
-                <UpdateStrongholdView />
+                <UpdateStrongholdView {loginRouter} />
             </Transition>
         {:else if $updateStrongholdRoute === UpdateStrongholdRoute.ChangePassword}
             <Transition>

@@ -1,13 +1,17 @@
 <script lang="ts">
     import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { updateStrongholdRouter } from '@core/router'
+    import { LoginRouter, updateStrongholdRouter } from '@core/router'
+    import { clearActiveProfile } from '../../../lib/profile'
+
+    export let loginRouter: LoginRouter
 
     const busy = false
 
     function onBackClick(): void {
         // TODO: Fix this logic (if needed)
         $updateStrongholdRouter.previous()
+        loginRouter.previous()
     }
 
     function onContinueClick(): void {

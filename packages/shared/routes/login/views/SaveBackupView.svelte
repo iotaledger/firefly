@@ -9,7 +9,11 @@
         $updateStrongholdRouter.previous()
     }
 
-    function onContinueClick(): void {
+    function onSkipBackupClick(): void {
+        $updateStrongholdRouter.next()
+    }
+
+    function onSaveBackupClick(): void {
         $updateStrongholdRouter.next()
     }
 </script>
@@ -23,8 +27,11 @@
             <Text type="p" secondary classes="mb-8">{localize('views.login.saveBackup.body')}</Text>
         </div>
         <div slot="leftpane__action">
-            <Button classes="w-full" onClick={onContinueClick}>
-                {localize('actions.continue')}
+            <Button classes="w-full" secondary onClick={onSkipBackupClick}>
+                {localize('actions.skipWalletBackup')}
+            </Button>
+            <Button classes="w-full mt-6" onClick={onSaveBackupClick}>
+                {localize('actions.saveStrongholdBackupLocally')}
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-orange dark:bg-gray-900">

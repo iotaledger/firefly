@@ -29,7 +29,9 @@ export class LoginRouter extends Subrouter<LoginRoute> {
                 break
             }
             case LoginRoute.EnterPin:
-                if (isStrongholdOutdated(get(activeProfile))) {
+                /* eslint-disable no-constant-condition */
+                if (true) {
+                    // isStrongholdOutdated(get(activeProfile))) {
                     nextRoute = LoginRoute.UpdateStronghold
                     updateStrongholdRouter.set(new UpdateStrongholdRouter())
                 } else {
