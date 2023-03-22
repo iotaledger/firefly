@@ -42,8 +42,7 @@ const output = {
 const rendererRules = [
     {
         test: /\.ts$/,
-        loader: 'ts-loader',
-        exclude: /node_modules/,
+        loader: 'esbuild-loader',
     },
     {
         test: /\.json$/,
@@ -110,6 +109,7 @@ const rendererPlugins = [
         filename: '[name].css',
     }),
     new DefinePlugin({
+        devMode: JSON.stringify(mode === 'development'),
         'process.env.PLATFORM': JSON.stringify(process.env.PLATFORM),
         'process.env.STAGE': JSON.stringify(process.env.STAGE),
     }),
@@ -131,6 +131,16 @@ module.exports = [
         devtool: prod ? false : 'cheap-module-source-map',
         devServer: {
             hot: true,
+            static: path.join(__dirname, 'public'),
+            host: '0.0.0.0',
+            client: {
+                reconnect: true,
+                progress: true,
+                overlay: {
+                    errors: true,
+                    warnings: false,
+                },
+            },
         },
     },
 ]
