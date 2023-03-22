@@ -1,6 +1,7 @@
 import { get, writable } from 'svelte/store'
 
-import { migrateProfile } from '@lib/profile'
+import { activeProfile, migrateProfile } from '@lib/profile'
+import { isStrongholdOutdated } from '@lib/wallet'
 
 import { appRouter } from '../app-router'
 import { LoginRoute } from '../enums'
@@ -28,9 +29,7 @@ export class LoginRouter extends Subrouter<LoginRoute> {
                 break
             }
             case LoginRoute.EnterPin:
-                /* eslint-disable no-constant-condition */
-                if (true) {
-                    // isStrongholdOutdated(get(activeProfile))) {
+                if (isStrongholdOutdated(get(activeProfile))) {
                     nextRoute = LoginRoute.UpdateStronghold
                     updateStrongholdRouter.set(new UpdateStrongholdRouter())
                 } else {
