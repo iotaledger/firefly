@@ -5,6 +5,8 @@ export type PickerOptions = {
 
 export interface SecureFilesystemAccessTypes {
     showPicker(options: PickerOptions): Promise<{ selected: string }>
+    allowAccess(): Promise<void>
+    revokeAccess(): Promise<void>
     finishBackup(): Promise<void>
     removeProfileFolder(options: { folder: string }): Promise<void>
     renameProfileFolder(options: { oldName: string; newName: string }): Promise<void>
