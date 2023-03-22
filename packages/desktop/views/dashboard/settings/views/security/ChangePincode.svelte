@@ -15,10 +15,8 @@
     let pinCodeBusy = false
     let pinCodeMessage = ''
 
-    function changePincode(): void {
+    async function changePincode(): void {
         if (currentPincode && newPincode && confirmedPincode) {
-            reset()
-
             if (newPincode.length !== PIN_LENGTH) {
                 newPincodeError = localize('error.pincode.length', {
                     values: {
@@ -42,41 +40,33 @@
                     } else {
                         pinCodeMessage = localize('general.pinCodeSuccess')
                     }
+                    reset()
                 }
 
-                Platform.PincodeManager.verify(get(activeProfile)?.id, currentPincode)
-                    .then((valid) => {
-                        if (valid) {
-                            // return new Promise<void>((resolve, reject) => {
-                            //     api.setStoragePassword(newPincode, {
-                            //         onSuccess() {
-                            //             Platform.PincodeManager.set(get(activeProfile)?.id, newPincode)
-                            //                 .then(() => {
-                            //                     currentPincode = ''
-                            //                     newPincode = ''
-                            //                     confirmedPincode = ''
-                            //                     _clear()
-                            //                     resolve()
-                            //                 })
-                            //                 .catch(reject)
-                            //         },
-                            //         onError(err) {
-                            //             _clear(localize(err.error))
-                            //         },
-                            //     })
-                            // })
-                        } else {
-                            _clear(localize('error.pincode.incorrect'))
+                try {
+                    const isValid = await Platform.PincodeManager.verify(get(activeProfile)?.id, currentPincode)
+                    if (isValid) {
+                        try {
+                            await Platform.PincodeManager.set(get(activeProfile)?.id, newPincode)
+                            _clear()
+                        } catch (err) {
+                            _clear(err.message)
                         }
-                    })
-                    .catch((err) => {
-                        _clear(err.message)
-                    })
+                        Platform.PincodeManager.set(get(activeProfile)?.id, newPincode)
+                    } else {
+                        _clear(localize('error.pincode.incorrect'))
+                    }
+                } catch (err) {
+                    _clear(localize('error.pincode.incorrect'))
+                }
             }
         }
     }
 
     function reset(): void {
+        currentPincode = ''
+        newPincode = ''
+        confirmedPincode = ''
         currentPincodeError = ''
         newPincodeError = ''
         confirmationPincodeError = ''
