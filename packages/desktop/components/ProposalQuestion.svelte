@@ -1,12 +1,16 @@
 <script lang="ts">
     import type { AnswerStatus, Question } from '@iota/wallet'
-    import { Text, FontWeight, Icon, ProposalAnswer, TooltipIcon } from 'shared/components'
+
+    import { ProposalAnswer } from '@components'
+    import { Icon, Text, TooltipIcon } from '@ui'
+    import { FontWeight, Position } from '@ui/enums'
+
     import { ABSTAIN_VOTE_VALUE } from '@contexts/governance/constants'
     import { ProposalStatus } from '@contexts/governance/enums'
-    import { selectedProposal } from '@contexts/governance/stores'
-    import { Icon as IconEnum } from '@auxiliary/icon'
-    import { Position } from './enums'
     import { getPercentagesFromAnswerStatuses, IProposalAnswerPercentages } from '@contexts/governance'
+    import { selectedProposal } from '@contexts/governance/stores'
+
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let onQuestionClick: (questionIndex: number) => void
     export let onAnswerClick: (answerValue: number, questionIndex: number) => void
@@ -45,9 +49,9 @@
 </script>
 
 <proposal-question
-    class="flex flex-col px-5 py-4 rounded-xl border border-solid border-gray-200 cursor-pointer dark:border-transparent dark:bg-gray-850 {isLoading
-        ? 'animate-pulse'
-        : ' '}"
+    class="flex flex-col px-5 py-4 rounded-xl border border-solid border-gray-200
+    cursor-pointer dark:border-transparent dark:bg-gray-850"
+    class:animate-pulse={isLoading}
 >
     <div on:click={() => onQuestionClick(questionIndex)} class="flex justify-between items-center">
         <div class="flex flex-col min-w-0">

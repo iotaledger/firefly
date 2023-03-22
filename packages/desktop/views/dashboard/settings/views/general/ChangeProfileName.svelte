@@ -11,7 +11,7 @@
     $: newName, (error = '')
     $: disabled = invalidName(trimmedProfileName)
 
-    function onSubmitClick(): void {
+    function onSubmit(): void {
         try {
             validateProfileName(trimmedProfileName)
             updateActiveProfile({ name: trimmedProfileName })
@@ -31,7 +31,7 @@
     }
 </script>
 
-<form id="form-change-profile-name" on:submit|preventDefault={onSubmitClick}>
+<form id="form-change-profile-name" on:submit|preventDefault={onSubmit}>
     <Text type={TextType.h4} classes="mb-3">
         {localize('views.settings.changeProfileName.title')}
     </Text>

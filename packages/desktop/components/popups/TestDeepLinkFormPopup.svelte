@@ -8,11 +8,11 @@
     const PREFIX = process.env.APP_PROTOCOL + '://'
     let url: string = PREFIX
 
-    function handleCancel(): void {
+    function onCancelClick(): void {
         closePopup()
     }
 
-    function handleTest(): void {
+    function onTestClick(): void {
         closePopup()
         handleDeepLink(url)
     }
@@ -28,10 +28,10 @@
     </div>
 
     <div class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button outline classes="w-full" onClick={handleCancel}>
+        <Button outline classes="w-full" onClick={onCancelClick}>
             {localize('actions.cancel')}
         </Button>
-        <Button classes="w-full" onClick={handleTest}>
+        <Button classes="w-full" onClick={onTestClick}>
             {localize('actions.test')}
         </Button>
     </div>

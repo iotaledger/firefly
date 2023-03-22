@@ -150,16 +150,16 @@
         Platform.onEvent('menu-diagnostics', () => {
             openPopup({ id: PopupId.Diagnostics })
         })
-        Platform.onEvent('menu-create-developer-profile', () => {
-            void initialiseOnboardingFlow({
+        Platform.onEvent('menu-create-developer-profile', async () => {
+            await initialiseOnboardingFlow({
                 isDeveloperProfile: true,
                 networkProtocol: NetworkProtocol.Shimmer,
             })
             $routerManager.goToAppContext(AppContext.Onboarding)
             $onboardingRouter.goTo(OnboardingRoute.NetworkSetup)
         })
-        Platform.onEvent('menu-create-normal-profile', () => {
-            void initialiseOnboardingFlow({
+        Platform.onEvent('menu-create-normal-profile', async () => {
+            await initialiseOnboardingFlow({
                 isDeveloperProfile: false,
                 networkProtocol: NetworkProtocol.Shimmer,
                 networkType: NetworkType.Mainnet,

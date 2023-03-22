@@ -96,12 +96,12 @@ const buildTemplate = () => {
                 {
                     label: state.strings.createDeveloperProfile,
                     click: () => getOrInitWindow('main').webContents.send('menu-create-developer-profile'),
-                    visible: state.canCreateNewProfile,
+                    visible: state.canCreateNewProfile && process.env.stage === 'prod',
                 },
                 {
                     label: state.strings.createNormalProfile,
                     click: () => getOrInitWindow('main').webContents.send('menu-create-normal-profile'),
-                    visible: state.canCreateNewProfile,
+                    visible: state.canCreateNewProfile && process.env.stage !== 'prod',
                 },
                 {
                     label: state.strings.diagnostics,

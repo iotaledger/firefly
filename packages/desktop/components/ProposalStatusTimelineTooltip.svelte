@@ -1,8 +1,11 @@
 <script lang="ts">
+    import { Text, Tooltip } from '@ui'
+    import { Position, TextType } from '@ui/enums'
+
     import { formatDate, localize } from '@core/i18n'
     import { networkStatus } from '@core/network'
     import { DATE_FORMAT, milestoneToDate } from '@core/utils'
-    import { Position, Text, TextType, Tooltip } from 'shared/components'
+
     import { ProposalStatus } from '@contexts/governance/enums'
 
     export let milestones: Record<ProposalStatus, number>

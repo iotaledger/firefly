@@ -83,12 +83,12 @@
         }
     }
 
-    function handleNodeInfoTabClick(tab: NodeInfoTab): void {
+    function onNodeInfoTabClick(tab: NodeInfoTab): void {
         if (!tab) return
         nodeInfoTab = tab
     }
 
-    function handleCopyAllInformationClick(): void {
+    function onCopyAllInformationClick(): void {
         if (!nodeInfo) return
         setClipboard(JSON.stringify(nodeInfo, null, '\t'))
     }
@@ -115,7 +115,7 @@
     <div class="mb-4 flex flex-row">
         {#key nodeInfoTab}
             {#each Object.values(NodeInfoTab) as _nodeInfoTab}
-                <button on:click={() => handleNodeInfoTabClick(_nodeInfoTab)} class="mr-3">
+                <button on:click={() => onNodeInfoTabClick(_nodeInfoTab)} class="mr-3">
                     <Text
                         fontSize="sm"
                         classes="font-11 hover:text-blue-500"
@@ -154,7 +154,7 @@
         {/each}
     </div>
     <div class="flex w-full justify-center pt-6">
-        <Button classes="w-full" outline onClick={handleCopyAllInformationClick} disabled={!nodeInfo}>
+        <Button classes="w-full" outline onClick={onCopyAllInformationClick} disabled={!nodeInfo}>
             {localize('actions.copyAllInformation')}
         </Button>
     </div>

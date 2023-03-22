@@ -1,7 +1,7 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
     import {
-        addOfficialNodesToClientOptions,
+        addOfficialNodesToClientOptions as onAddOfficialNodesClick,
         NetworkHealth,
         networkStatus,
         NETWORK_STATUS_DESCRIPTION,
@@ -19,7 +19,7 @@
     const { networkType } = $activeProfile
     $: clientOptions = $activeProfile?.clientOptions
 
-    function handleAddNodeClick(): void {
+    function onAddNodeClick(): void {
         openPopup({
             id: PopupId.AddNode,
             props: {
@@ -77,7 +77,7 @@
                     size={ButtonSize.Medium}
                     inlineStyle="min-width: 156px;"
                     classes="w-1/2"
-                    onClick={addOfficialNodesToClientOptions}
+                    onClick={onAddOfficialNodesClick}
                 >
                     {localize('actions.addOfficialNodes')}
                 </Button>
@@ -86,7 +86,7 @@
                 inlineStyle="min-width: 156px;"
                 size={ButtonSize.Medium}
                 classes={networkType === NetworkType.PrivateNet ? '' : 'w-1/2'}
-                onClick={handleAddNodeClick}
+                onClick={onAddNodeClick}
             >
                 {localize('actions.addNode')}
             </Button>

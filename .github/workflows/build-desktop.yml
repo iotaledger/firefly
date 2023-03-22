@@ -231,7 +231,7 @@ jobs:
                   echo '### Changelog' >> CHANGELOG.md
                   echo '------' >> CHANGELOG.md
                   echo '### File Hashes' >> CHANGELOG.md
-                  echo '[How to verify the authenticity of your Firefly Desktop download](https://wiki.iota.org/chrysalis-docs/firefly/verify_download)' >> CHANGELOG.md
+                  echo '[How to verify the authenticity of your Firefly Desktop download](https://wiki.iota.org/shimmer/introduction/how_tos/verify_download/#verify-your-firefly-desktop-download)' >> CHANGELOG.md
                   echo '| File | Platform | SHA256 Hash |' >> CHANGELOG.md
                   echo '| --- | --- | --- |' >> CHANGELOG.md
                   echo '| firefly-desktop-${{ env.VERSION }}.exe | Windows |' $WIN_SHA256 '|' >> CHANGELOG.md

@@ -7,7 +7,7 @@
 
     import { openPopup, PopupId } from '@auxiliary/popup'
 
-    function onGetTokens(): void {
+    function onGetTokensClick(): void {
         openPopup({
             id: PopupId.FaucetRequest,
         })
@@ -22,6 +22,6 @@
         secondaryText={localize('general.faucetRequestDescription', {
             values: { network: $nodeInfo?.protocol?.networkName },
         })}
-        onClick={onGetTokens}
+        onClick={onGetTokensClick}
     />
 {/if}
