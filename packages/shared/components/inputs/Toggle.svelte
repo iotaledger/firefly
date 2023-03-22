@@ -6,7 +6,7 @@
 
     export let onClick: () => void
 
-    function handleClick(): void {
+    function onToggleClick(): void {
         if (!disabled && onClick) {
             onClick()
         }
@@ -14,7 +14,7 @@
 </script>
 
 <toggle
-    on:click={handleClick}
+    on:click={onToggleClick}
     class:active
     disabled
     class="

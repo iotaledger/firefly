@@ -30,7 +30,7 @@
         }
     }
 
-    function handleAssetTileClick(asset: IAsset): void {
+    function onAssetTileClick(asset: IAsset): void {
         openPopup({
             id: PopupId.TokenInformation,
             overflow: true,
@@ -50,7 +50,7 @@
         <div class="flex-auto h-full pb-10">
             {#if assetList.length > 0}
                 <VirtualList items={assetList} let:item>
-                    <AssetTile classes="mb-2" onClick={() => handleAssetTileClick(item)} asset={item} />
+                    <AssetTile classes="mb-2" onClick={() => onAssetTileClick(item)} asset={item} />
                 </VirtualList>
             {:else}
                 <div class="h-full flex flex-col items-center justify-center text-center">

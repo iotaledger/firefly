@@ -12,7 +12,7 @@
 
     export let onClick: undefined | ((id: string) => void) = undefined
 
-    function handleOnClick(): void {
+    function onProfileClick(): void {
         onClick && onClick(id)
     }
 
@@ -34,7 +34,7 @@
     type="button"
     {disabled}
     class="rounded-xl px-4 py-3 w-full"
-    on:click={handleOnClick}
+    on:click={onProfileClick}
     class:darkmode={darkModeEnabled}
 >
     <div class="flex flex-row">

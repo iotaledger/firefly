@@ -1779,7 +1779,7 @@
             "error": "En fejl opstod under indløsning. Forsøg igen."
         },
         "vote": {
-            "success": "Votes successfully casted"
+            "success": "Votes successfully cast"
         },
         "stopVoting": {
             "success": "Voting successfully stopped"

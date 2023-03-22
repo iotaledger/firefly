@@ -53,7 +53,7 @@
             : recipientQuickListOptions
     }
 
-    function handleClick(option: IOption): void {
+    function onClick(option: IOption): void {
         recipient = getSubjectFromAddress(option?.value)
     }
 </script>
@@ -63,7 +63,7 @@
     <div class="flex flex-col flex-1 space-y-1 overflow-y-auto">
         {#each filteredQuickListOptions as option}
             <button
-                on:click={() => handleClick(option)}
+                on:click={() => onClick(option)}
                 class="w-full flex flex-row w-full justify-between items-center px-2 py-3 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20"
             >
                 <div class="flex flex-row gap-3 justify-start items-center" style="max-width: 50%;">
