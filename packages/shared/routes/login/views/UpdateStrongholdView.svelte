@@ -2,14 +2,15 @@
     import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { LoginRouter, updateStrongholdRouter } from '@core/router'
-    import { clearActiveProfile } from '../../../lib/profile'
+    import { activeProfileId } from '@lib/profile'
+    import { destroyActor } from '@lib/wallet'
 
     export let loginRouter: LoginRouter
 
     const busy = false
 
     function onBackClick(): void {
-        // TODO: Fix this logic (if needed)
+        destroyActor($activeProfileId)
         $updateStrongholdRouter.previous()
         loginRouter.previous()
     }

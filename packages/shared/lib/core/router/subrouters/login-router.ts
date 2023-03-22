@@ -1,7 +1,6 @@
 import { get, writable } from 'svelte/store'
 
-import { activeProfile, migrateProfile } from '@lib/profile'
-import { isStrongholdOutdated } from '@lib/wallet'
+import { migrateProfile } from '@lib/profile'
 
 import { appRouter } from '../app-router'
 import { LoginRoute } from '../enums'
@@ -38,6 +37,10 @@ export class LoginRouter extends Subrouter<LoginRoute> {
                     migrateProfile()
                     get(appRouter).next(event)
                 }
+                break
+            case LoginRoute.UpdateStronghold:
+                migrateProfile()
+                get(appRouter).next(event)
                 break
         }
         this.setNext(nextRoute)

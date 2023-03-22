@@ -46,7 +46,7 @@
             </Transition>
         {:else if $updateStrongholdRoute === UpdateStrongholdRoute.SaveBackup}
             <Transition>
-                <SaveBackupView />
+                <SaveBackupView {loginRouter} />
             </Transition>
         {/if}
     </Transition>
