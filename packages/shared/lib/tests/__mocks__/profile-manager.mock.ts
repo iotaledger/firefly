@@ -206,13 +206,4 @@ export class ProfileManagerMock implements IProfileManager {
     updateNodeAuth(url: string, auth?: IAuth): Promise<void> {
         return Promise.resolve()
     }
-
-    migrateStrongholdSnapshotV2ToV3(
-        currentPath: string,
-        currentPassword: string,
-        newPath: string,
-        newPassword: string
-    ): Promise<void> {
-        return Promise.resolve()
-    }
 }
