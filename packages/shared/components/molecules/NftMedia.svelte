@@ -87,29 +87,13 @@
         {backupUrl}
         expectedType={nft.parsedMetadata.type}
         alt={`Media display for ${nft.name}`}
-        classes="hidden {classes}"
+        {autoplay}
+        {controls}
+        {loop}
+        {muted}
+        classes="{isLoaded ? '' : 'hidden'} {classes}"
         onLoad={handleOnLoad}
         onError={handleLoadingError}
         onWarning={handleWarning}
     />
-
-    {#if !isLoaded}
-        <slot name="placeholder">
-            <MediaPlaceholder type={nft?.parsedMetadata?.type} {bgColor} {darkBgColor} classes="animate-pulse" />
-        </slot>
-    {:else}
-        <MediaDisplay
-            {url}
-            {backupUrl}
-            expectedType={nft.parsedMetadata.type}
-            alt={`Media display for ${nft.name}`}
-            {autoplay}
-            {controls}
-            {loop}
-            {muted}
-            {classes}
-            onError={handleLoadingError}
-            onWarning={handleWarning}
-        />
-    {/if}
 {/if}

@@ -8,7 +8,10 @@ export async function buildProfileManagerOptionsFromProfileData(
     const { id, networkProtocol, type } = profileData
     const storagePath = await getStorageDirectoryOfProfile(id)
     const coinType = COIN_TYPE[networkProtocol]
-    const useDefaultClientOptions = !profileData.clientOptions || profileData?.clientOptions?.nodes?.length < 1
+    const useDefaultClientOptions =
+        !profileData?.clientOptions ||
+        !profileData?.clientOptions?.nodes ||
+        profileData?.clientOptions?.nodes?.length < 1
     const clientOptions = useDefaultClientOptions
         ? getDefaultClientOptions(networkProtocol, profileData?.networkType)
         : profileData?.clientOptions

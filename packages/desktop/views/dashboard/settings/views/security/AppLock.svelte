@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Dropdown, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { activeProfile, updateActiveProfileSettings } from '@core/profile'
+    import { activeProfile, DEFAULT_PERSISTED_PROFILE_OBJECT, updateActiveProfileSettings } from '@core/profile'
     import type { IDropdownChoice } from '@core/utils'
 
     function updateLockTimeout(option): void {
@@ -28,6 +28,9 @@
 <Text type="p" secondary classes="mb-5">{localize('views.settings.appLock.description')}</Text>
 <Dropdown
     onSelect={updateLockTimeout}
-    value={assignTimeoutOptionLabel($activeProfile?.settings.lockScreenTimeoutInMinutes)}
+    value={assignTimeoutOptionLabel(
+        $activeProfile?.settings?.lockScreenTimeoutInMinutes ??
+            DEFAULT_PERSISTED_PROFILE_OBJECT.settings.lockScreenTimeoutInMinutes
+    )}
     items={lockScreenTimeoutOptions()}
 />
