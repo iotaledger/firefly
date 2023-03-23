@@ -36,9 +36,9 @@ jobs:
                     STAGE="prod"
                   fi
 
-                  echo "{version}={$VERSION}" >> $GITHUB_OUTPUT
-                  echo "{release_name}={$RELEASE_NAME}" >> $GITHUB_OUTPUT
-                  echo "{stage}={$STAGE}" >> $GITHUB_OUTPUT
+                  echo "version=$VERSION" >> $GITHUB_OUTPUT
+                  echo "release_name=$RELEASE_NAME" >> $GITHUB_OUTPUT
+                  echo "stage=$STAGE" >> $GITHUB_OUTPUT
 
     build:
         runs-on: ${{ matrix.os }}
