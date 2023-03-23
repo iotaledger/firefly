@@ -2,7 +2,7 @@ import { get } from 'svelte/store'
 
 import { updateNftInAllAccountNfts } from '../actions'
 import { DownloadQueueNftItem, INft, NftDownloadMetadata } from '../interfaces'
-import { allAccountNfts, downloadingNftId } from '../stores'
+import { downloadingNftId } from '../stores'
 import { validateNftMedia } from './validateNftMedia'
 import {
     CHECK_CURRENTLY_DOWNLOADING_INTERVAL,
@@ -13,9 +13,8 @@ import { Platform } from '@core/app'
 import { sleep } from '@core/utils'
 import { activeProfile } from '@core/profile'
 
-export async function downloadNftMedia(accountIndex: number, nft?: INft): Promise<void> {
+export async function downloadNftMedia(accountIndex: number, nfts: INft[]): Promise<void> {
     const downloadQueuePromises: Promise<DownloadQueueNftItem>[] = []
-    const nfts = nft ? [nft] : get(allAccountNfts)?.[accountIndex]
     for (const nft of nfts) {
         if (!isValidated(nft.downloadMetadata)) {
             downloadQueuePromises.push(validateNft(accountIndex, nft))

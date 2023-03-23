@@ -61,7 +61,7 @@ export async function handleNewOutputEventInternal(
             output.output as INftOutput
         )
         const nft = buildNftFromNftOutput(output.output as INftOutput, output.outputId, isSpendable, timeLockTime)
-        void downloadNftMedia(nft, accountIndex)
+        void downloadNftMedia(accountIndex, [nft])
         addOrUpdateNftInAllAccountNfts(account.index, nft)
     }
 }
