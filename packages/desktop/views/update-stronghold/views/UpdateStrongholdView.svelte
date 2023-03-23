@@ -9,7 +9,6 @@
     import { updateStrongholdRouter } from '@core/router'
 
     import { onboardingProfile } from '@contexts/onboarding'
-    import { unlockStronghold } from '@core/profile'
     import { updateStronghold } from '@core/profile-manager'
 
     export let password: string = ''
@@ -19,7 +18,6 @@
 
     async function onSubmit(): Promise<void> {
         try {
-            await unlockStronghold(password)
             await updateStronghold(password, isRecovery)
             $updateStrongholdRouter.next()
         } catch (err) {
