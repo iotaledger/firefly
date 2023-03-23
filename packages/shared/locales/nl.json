@@ -1779,7 +1779,7 @@
             "error": "Er is een fout opgetreden tijdens het claimen. Probeer het opnieuw."
         },
         "vote": {
-            "success": "Votes successfully casted"
+            "success": "Votes successfully cast"
         },
         "stopVoting": {
             "success": "Voting successfully stopped"

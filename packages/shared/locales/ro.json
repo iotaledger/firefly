@@ -1779,7 +1779,7 @@
             "error": "An error occurred while claiming. Try again."
         },
         "vote": {
-            "success": "Votes successfully casted"
+            "success": "Votes successfully cast"
         },
         "stopVoting": {
             "success": "Voting successfully stopped"
