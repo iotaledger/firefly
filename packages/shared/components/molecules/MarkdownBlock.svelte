@@ -38,12 +38,12 @@
     .markdown {
         :global(p) {
             @apply text-gray-600;
+        }
+        :global(p),
+        :global(p a) {
             @apply leading-140;
             @apply font-500;
             @apply text-14;
-        }
-        :global(button) {
-            @apply underline;
         }
     }
 </style>
