@@ -15,12 +15,16 @@
     export let isRecovery: boolean = false
 
     let passwordError: string = ''
+    let isBusy = false
 
     async function onSubmit(): Promise<void> {
         try {
+            isBusy = true
             await updateStronghold(password, isRecovery)
+            isBusy = false
             $updateStrongholdRouter.next()
         } catch (err) {
+            isBusy = false
             passwordError = localize(err.message) ?? err.message
             return
         }
@@ -58,7 +62,8 @@
             type={HTMLButtonType.Submit}
             form="update-stronghold-form"
             classes="w-full"
-            disabled={!password || !!passwordError}
+            disabled={!password || !!passwordError || isBusy}
+            {isBusy}
         >
             {localize('actions.updateAndContinue')}
         </Button>
