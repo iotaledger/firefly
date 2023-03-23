@@ -417,25 +417,19 @@ ipcMain.handle('copy-file', (_e, sourceFilePath, destinationFilePath) => {
     fs.writeFileSync(dest, srcFileBuffer)
 })
 
-ipcMain.handle('download', (event, url, destination, nftId, accountIndex) => {
+ipcMain.handle('download', async (event, url, destination, nftId, accountIndex) => {
     const userPath = app.getPath('userData')
     const directory = app.isPackaged ? userPath : __dirname
 
-    download(windows.main, url, {
+    await download(windows.main, url, {
         directory: directory + '/__storage__/' + destination,
         filename: 'original',
         saveAs: false,
-    }).then(async (downloadItem) => {
-        downloadItem.once('done', () => {
+        showBadge: true,
+        showProgressBar: true,
+        onCompleted: () => {
             windows.main.webContents.send('download-done', { nftId, accountIndex })
-        })
-
-        const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
-        delay(10_000).then(() => {
-            downloadItem.pause()
-            downloadItem.cancel()
-            windows.main.webContents.send('download-interrupted', { nftId, accountIndex })
-        })
+        },
     })
 })
 
