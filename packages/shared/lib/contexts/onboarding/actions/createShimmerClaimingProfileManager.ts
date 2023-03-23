@@ -18,6 +18,12 @@ export async function createShimmerClaimingProfileManager(): Promise<void> {
     const clientOptions = profile?.clientOptions
     const secretManager = getSecretManagerFromProfileType(profile?.type, storagePath)
 
-    const manager = await initialiseProfileManager(storagePath, coinType, clientOptions, secretManager, generateRandomId())
+    const manager = await initialiseProfileManager(
+        storagePath,
+        coinType,
+        clientOptions,
+        secretManager,
+        generateRandomId()
+    )
     shimmerClaimingProfileManager.set(manager)
 }
