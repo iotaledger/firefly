@@ -1,0 +1,1 @@
+export const TEMPORARY_PROFILE_MANAGER_DIRECTORY_NAME = 'temp'

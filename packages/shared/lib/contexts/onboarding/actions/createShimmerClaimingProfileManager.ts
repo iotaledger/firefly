@@ -4,7 +4,7 @@ import { COIN_TYPE, NetworkProtocol } from '@core/network'
 import { getSecretManagerFromProfileType, initialiseProfileManager } from '@core/profile-manager'
 import { generateRandomId } from '@core/utils'
 
-import { getShimmerClaimingProfileManagerStorageDirectory } from '../helpers'
+import { getTemporaryProfileManagerStorageDirectory } from '../helpers'
 import { shimmerClaimingProfileManager, onboardingProfile } from '../stores'
 
 export async function createShimmerClaimingProfileManager(): Promise<void> {
@@ -13,7 +13,7 @@ export async function createShimmerClaimingProfileManager(): Promise<void> {
         return
     }
 
-    const storagePath = await getShimmerClaimingProfileManagerStorageDirectory()
+    const storagePath = await getTemporaryProfileManagerStorageDirectory()
     const coinType = COIN_TYPE[NetworkProtocol.IOTA]
     const clientOptions = profile?.clientOptions
     const secretManager = getSecretManagerFromProfileType(profile?.type, storagePath)

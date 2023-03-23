@@ -5,7 +5,7 @@ import { getStorageDirectoryOfProfile } from '@core/profile'
 import { profileManager } from '@core/profile-manager'
 
 import {
-    getShimmerClaimingProfileManagerStorageDirectory,
+    getTemporaryProfileManagerStorageDirectory,
     restoreBackupByCopyingFile,
     validateStrongholdCoinType,
 } from '../helpers'
@@ -15,7 +15,7 @@ export async function restoreBackupForShimmerClaimingProfileManager(strongholdPa
     try {
         const { id, importFilePath, clientOptions } = get(onboardingProfile)
 
-        const tempProfileDirectory = await getShimmerClaimingProfileManagerStorageDirectory()
+        const tempProfileDirectory = await getTemporaryProfileManagerStorageDirectory()
         await restoreBackupByCopyingFile(
             importFilePath,
             tempProfileDirectory,
