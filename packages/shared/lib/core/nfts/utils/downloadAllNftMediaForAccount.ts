@@ -5,22 +5,16 @@ import {
     CHECK_CURRENTLY_DOWNLOADING_INTERVAL,
     CHECK_CURRENTLY_DOWNLOADING_MAX_COUNT,
 } from '../constants/check-currently-downloading.constants'
-import { INft } from '../interfaces'
+import { DownloadQueueNftItem } from '../interfaces'
 import { allAccountNfts, downloadingNftId } from '../stores'
 import { validateNftMedia } from './validateNftMedia'
 
 import { Platform } from '@core/app'
 import { activeProfile } from '@core/profile'
 import { sleep } from '@core/utils'
-interface DownloadQueueItem {
-    nft: INft
-    downloadUrl: string
-    path: string
-    accountIndex: number
-}
 
 export async function downloadAllNftMediaForAccount(accountIndex: number): Promise<void> {
-    const downloadQueuePromises: Promise<DownloadQueueItem>[] = []
+    const downloadQueuePromises: Promise<DownloadQueueNftItem>[] = []
     for (const nft of get(allAccountNfts)[accountIndex]) {
         const isAlreadyValidated =
             nft.downloadMetadata.isLoaded || nft.downloadMetadata.error || nft.downloadMetadata.warning
@@ -28,7 +22,7 @@ export async function downloadAllNftMediaForAccount(accountIndex: number): Promi
             downloadQueuePromises.push(validateNft(accountIndex, nft))
         }
     }
-    const downloadQueue: DownloadQueueItem[] = await Promise.all(downloadQueuePromises)
+    const downloadQueue: DownloadQueueNftItem[] = await Promise.all(downloadQueuePromises)
 
     for (const { nft, accountIndex, downloadUrl, path } of downloadQueue.filter((item) => !!item)) {
         if (!get(activeProfile)?.loggedIn) {
@@ -44,10 +38,10 @@ export async function downloadAllNftMediaForAccount(accountIndex: number): Promi
     }
 }
 
-function validateNft(accountIndex, nft): Promise<DownloadQueueItem> {
-    const promise = new Promise<DownloadQueueItem>((resolve) => {
+function validateNft(accountIndex, nft): Promise<DownloadQueueNftItem> {
+    const promise = new Promise<DownloadQueueNftItem>((resolve) => {
         void validateNftMedia(nft).then(({ needsDownload, downloadMetadata, downloadUrl }) => {
-            let downloadQueueItem: DownloadQueueItem = undefined
+            let downloadQueueItem: DownloadQueueNftItem = undefined
             if (needsDownload) {
                 nft.downloadMetadata = { isLoaded: false }
                 downloadQueueItem = { nft: nft, downloadUrl, path: nft.filePath, accountIndex }
