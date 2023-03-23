@@ -104,7 +104,7 @@
             {settings}
             bind:route={$settingsRoute}
         />
-        <div class="h-full w-full pb-10">
+        <div class="h-full w-full">
             <Scroller classes="w-full md:w-3/4 h-full md:pr-100" threshold={100}>
                 <div class="md:w-11/12">
                     {#if $settingsRoute === SettingsRoute.General}
