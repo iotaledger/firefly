@@ -38,10 +38,10 @@
         <button
             on:click|preventDefault={onClick}
             disabled={!nftIsOwned}
-            class="flex w-max items-center justify-center space-x-2 cursor-{nftIsOwned ? 'pointer' : 'default'}"
+            class="flex w-full items-start justify-center space-x-2 cursor-{nftIsOwned ? 'pointer' : 'default'}"
         >
             <NftImageOrIconBox nftId={activity.nftId} size="small" />
-            <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="whitespace-pre truncate">
+            <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="whitespace-normal text-left">
                 {nft?.name}
             </Text>
         </button>
