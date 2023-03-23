@@ -2,7 +2,7 @@
     import { isSoftwareProfile } from '@core/profile'
     import { SecuritySettingsRoute } from '@core/router'
     import features from '@features/features'
-    import { HR } from 'shared/components'
+    import { HR } from '@ui'
     import { AppLock, ChangePassword, ChangePincode, ExportStronghold } from './'
 
     const settings: {

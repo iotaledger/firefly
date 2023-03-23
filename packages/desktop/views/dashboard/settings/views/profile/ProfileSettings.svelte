@@ -2,7 +2,7 @@
     import { activeProfile } from '@core/profile'
     import { ProfileSettingsRoute } from '@core/router'
     import features from '@features/features'
-    import { HR } from 'shared/components'
+    import { HR } from '@ui'
     import { ChangeProfileName, Currency, DeleteProfile } from './'
 
     const settings: {

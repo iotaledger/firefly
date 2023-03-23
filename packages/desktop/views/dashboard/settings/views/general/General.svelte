@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { HR } from 'shared/components'
+    import { HR } from '@ui'
     import { GeneralSettingsRoute } from '@core/router'
     import { CrashReporting, DeepLinks, Language, Notifications, Theme } from './'
     import { activeProfile } from '@core/profile'

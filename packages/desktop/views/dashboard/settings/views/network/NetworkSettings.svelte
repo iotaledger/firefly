@@ -2,7 +2,7 @@
     import { activeProfile } from '@core/profile'
     import { NetworkSettingsRoute } from '@core/router'
     import features from '@features/features'
-    import { HR } from 'shared/components'
+    import { HR } from '@ui'
     import { NetworkConfiguration } from './'
 
     const settings: {

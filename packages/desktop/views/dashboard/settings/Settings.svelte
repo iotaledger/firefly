@@ -2,7 +2,7 @@
     import { mobile } from '@core/app'
     import { isLocaleLoaded } from '@core/i18n'
     import { dashboardRouter, settingsRouter } from '@core/router'
-    import { Icon } from 'shared/components'
+    import { Icon } from '@ui'
     import { onDestroy } from 'svelte'
     import { SettingsViewer } from './views'
 

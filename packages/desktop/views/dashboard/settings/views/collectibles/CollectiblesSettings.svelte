@@ -2,7 +2,7 @@
     import { activeProfile, isActiveLedgerProfile } from '@core/profile'
     import { CollectiblesSettingsRoute } from '@core/router'
     import features from '@features/features'
-    import { HR } from 'shared/components'
+    import { HR } from '@ui'
     import MaxMediaSize from './MaxMediaSize.svelte'
 
     const settings: {
