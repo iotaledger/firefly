@@ -5,13 +5,13 @@
 
     import { selectedAccountIndex } from '@core/account/stores'
     import { collectiblesRoute, CollectiblesRoute, collectiblesRouter } from '@core/router'
-    import { downloadAllNftMediaForAccount } from '@core/nfts'
+    import { downloadNftMedia } from '@core/nfts'
 
     $: $selectedAccountIndex !== undefined && $collectiblesRouter.reset()
-    $: downloadAllNftMediaForAccount($selectedAccountIndex)
+    $: downloadNftMedia($selectedAccountIndex)
 
     onMount(() => {
-        void downloadAllNftMediaForAccount($selectedAccountIndex)
+        void downloadNftMedia($selectedAccountIndex)
     })
 </script>
 

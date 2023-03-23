@@ -13,16 +13,10 @@ import { Platform } from '@core/app'
 import { sleep } from '@core/utils'
 import { activeProfile } from '@core/profile'
 
-export async function downloadNftMedia(nft: INft, accountIndex: number): Promise<void> {
-    if (!isValidated(nft.downloadMetadata)) {
-        const validationStatus: DownloadQueueNftItem = await validateNft(accountIndex, nft)
-        await tryDownloadNft(validationStatus)
-    }
-}
-
-export async function downloadAllNftMediaForAccount(accountIndex: number): Promise<void> {
+export async function downloadNftMedia(accountIndex: number, nft?: INft): Promise<void> {
     const downloadQueuePromises: Promise<DownloadQueueNftItem>[] = []
-    for (const nft of get(allAccountNfts)[accountIndex]) {
+    const nfts = nft ? [nft] : get(allAccountNfts)?.[accountIndex]
+    for (const nft of nfts) {
         if (!isValidated(nft.downloadMetadata)) {
             downloadQueuePromises.push(validateNft(accountIndex, nft))
         }
