@@ -14,6 +14,7 @@
         ProfileSetupType,
         restoreBackupForShimmerClaimingProfileManager,
         restoreBackupFromStrongholdFile,
+        StrongholdMigrationRequiredError,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
     import { showAppNotification } from '@auxiliary/notification'
@@ -39,8 +40,7 @@
                 updateOnboardingProfile({ strongholdPassword, strongholdVersion: STRONGHOLD_VERSION })
                 $profileRecoveryRouter.next()
             } catch (err) {
-                // TODO: update this condition when we have a better way to detect the stronghold version
-                if (err === 'OLD_STRONGHOLD_VERSION') {
+                if (err instanceof StrongholdMigrationRequiredError) {
                     updateOnboardingProfile({ strongholdPassword, strongholdVersion: undefined })
                     $profileRecoveryRouter.next()
                 } else if (err instanceof CannotRestoreWithMismatchedCoinTypeError) {
