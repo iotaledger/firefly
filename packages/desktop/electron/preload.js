@@ -106,6 +106,9 @@ try {
             accounts.forEach((account) => bindMethodsAcrossContextBridge(WalletApi.Account.prototype, account))
             return accounts
         },
+        async migrateStrongholdSnapshotV2ToV3(currentPath, newPath, currentPassword, newPassword) {
+            return WalletApi.migrateStrongholdSnapshotV2ToV3(currentPath, newPath, currentPassword, newPassword)
+        },
     })
     contextBridge.exposeInMainWorld('__ELECTRON__', ElectronApi)
 } catch (err) {

@@ -41,6 +41,16 @@ const api: IApi = {
             resolve([])
         })
     },
+    migrateStrongholdSnapshotV2ToV3(
+        _currentPath: string,
+        _newPath: string,
+        _currentPassword: string,
+        _newPassword: string
+    ): Promise<void> {
+        return new Promise((resolve) => {
+            resolve()
+        })
+    },
 }
 
 window['__WALLET__API__'] = api
