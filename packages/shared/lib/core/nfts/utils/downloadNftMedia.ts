@@ -2,7 +2,7 @@ import { get } from 'svelte/store'
 
 import { updateNftInAllAccountNfts } from '../actions'
 import { DownloadQueueNftItem, INft } from '../interfaces'
-import { downloadingNftId } from '../stores'
+import { allAccountNfts, downloadingNftId } from '../stores'
 import { validateNftMedia } from './validateNftMedia'
 import {
     CHECK_CURRENTLY_DOWNLOADING_INTERVAL,
@@ -11,6 +11,7 @@ import {
 
 import { Platform } from '@core/app'
 import { sleep } from '@core/utils'
+import { activeProfile } from '@core/profile'
 
 export async function downloadNftMedia(nft: INft, accountIndex: number): Promise<void> {
     const isAlreadyValidated =
@@ -26,6 +27,31 @@ export async function downloadNftMedia(nft: INft, accountIndex: number): Promise
         await Platform.downloadFile(validationStatus.downloadUrl, validationStatus.path, nft.id, accountIndex)
     } catch (error) {
         downloadingNftId.set(undefined)
+    }
+}
+
+export async function downloadAllNftMediaForAccount(accountIndex: number): Promise<void> {
+    const downloadQueuePromises: Promise<DownloadQueueNftItem>[] = []
+    for (const nft of get(allAccountNfts)[accountIndex]) {
+        const isAlreadyValidated =
+            nft.downloadMetadata.isLoaded || nft.downloadMetadata.error || nft.downloadMetadata.warning
+        if (!isAlreadyValidated) {
+            downloadQueuePromises.push(validateNft(accountIndex, nft))
+        }
+    }
+    const downloadQueue: DownloadQueueNftItem[] = await Promise.all(downloadQueuePromises)
+
+    for (const { nft, accountIndex, downloadUrl, path } of downloadQueue.filter((item) => !!item)) {
+        if (!get(activeProfile)?.loggedIn) {
+            break
+        }
+        try {
+            await waitForDownloadToBeFinished()
+            downloadingNftId.set(nft.id)
+            await Platform.downloadFile(downloadUrl, path, nft.id, accountIndex)
+        } catch (error) {
+            downloadingNftId.set(undefined)
+        }
     }
 }
 
