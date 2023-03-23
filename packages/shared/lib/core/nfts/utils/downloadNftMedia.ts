@@ -20,14 +20,7 @@ export async function downloadNftMedia(nft: INft, accountIndex: number): Promise
         return
     }
     const validationStatus: DownloadQueueNftItem = await validateNft(accountIndex, nft)
-
-    try {
-        await waitForDownloadToBeFinished()
-        downloadingNftId.set(nft.id)
-        await Platform.downloadFile(validationStatus.downloadUrl, validationStatus.path, nft.id, accountIndex)
-    } catch (error) {
-        downloadingNftId.set(undefined)
-    }
+    await tryDownloadNft(validationStatus)
 }
 
 export async function downloadAllNftMediaForAccount(accountIndex: number): Promise<void> {
@@ -41,21 +34,26 @@ export async function downloadAllNftMediaForAccount(accountIndex: number): Promi
     }
     const downloadQueue: DownloadQueueNftItem[] = await Promise.all(downloadQueuePromises)
 
-    for (const { nft, accountIndex, downloadUrl, path } of downloadQueue.filter((item) => !!item)) {
+    for (const downloadQueueItem of downloadQueue.filter((item) => !!item)) {
         if (!get(activeProfile)?.loggedIn) {
             break
         }
-        try {
-            await waitForDownloadToBeFinished()
-            downloadingNftId.set(nft.id)
-            await Platform.downloadFile(downloadUrl, path, nft.id, accountIndex)
-        } catch (error) {
-            downloadingNftId.set(undefined)
-        }
+        await tryDownloadNft(downloadQueueItem)
     }
 }
 
-function validateNft(accountIndex, nft): Promise<DownloadQueueNftItem> {
+async function tryDownloadNft(downloadQueue: DownloadQueueNftItem): Promise<void> {
+    try {
+        await waitForDownloadToBeFinished()
+        const { downloadUrl, path, nft, accountIndex } = downloadQueue
+        downloadingNftId.set(nft.id)
+        await Platform.downloadFile(downloadUrl, path, nft.id, accountIndex)
+    } catch (error) {
+        downloadingNftId.set(undefined)
+    }
+}
+
+function validateNft(accountIndex: number, nft: INft): Promise<DownloadQueueNftItem> {
     const promise = new Promise<DownloadQueueNftItem>((resolve) => {
         void validateNftMedia(nft).then(({ needsDownload, downloadMetadata, downloadUrl }) => {
             let downloadQueueItem: DownloadQueueNftItem = undefined
