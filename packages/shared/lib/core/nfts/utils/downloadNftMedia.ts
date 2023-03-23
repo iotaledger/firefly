@@ -1,14 +1,16 @@
 import { get } from 'svelte/store'
-import { downloadingNftId } from '../stores'
-import { sleep } from '@core/utils'
-import { validateNftMedia } from './validateNftMedia'
-import { Platform } from '@core/app'
+
+import { updateNftInAllAccountNfts } from '../actions'
 import { INft } from '../interfaces'
+import { downloadingNftId } from '../stores'
+import { validateNftMedia } from './validateNftMedia'
 import {
     CHECK_CURRENTLY_DOWNLOADING_INTERVAL,
     CHECK_CURRENTLY_DOWNLOADING_MAX_COUNT,
 } from '../constants/check-currently-downloading.constants'
-import { updateNftInAllAccountNfts } from '../actions'
+
+import { Platform } from '@core/app'
+import { sleep } from '@core/utils'
 
 interface DownloadQueueItem {
     nft: INft

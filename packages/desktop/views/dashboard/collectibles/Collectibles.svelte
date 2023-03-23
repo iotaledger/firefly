@@ -1,8 +1,10 @@
 <script lang="ts">
+    import { onMount } from 'svelte'
+
     import { CollectiblesDetailsView, CollectiblesGalleryView } from './views'
+
     import { selectedAccountIndex } from '@core/account/stores'
     import { collectiblesRoute, CollectiblesRoute, collectiblesRouter } from '@core/router'
-    import { onMount } from 'svelte'
     import { downloadAllNftMediaForAccount } from '@core/nfts'
 
     $: $selectedAccountIndex !== undefined && $collectiblesRouter.reset()
