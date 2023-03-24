@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Dropdown, Text } from 'shared/components'
+    import { Dropdown, Text, TextType } from '@ui'
     import { localize } from '@core/i18n'
     import { activeProfile, DEFAULT_PERSISTED_PROFILE_OBJECT, updateActiveProfileSettings } from '@core/profile'
     import { IDropdownChoice, SECONDS_PER_MINUTE } from '@core/utils'
@@ -27,8 +27,10 @@
     }
 </script>
 
-<Text type="h4" classes="mb-3">{localize('views.settings.strongholdPasswordTimeout.title')}</Text>
-<Text type="p" secondary classes="mb-5">{localize('views.settings.strongholdPasswordTimeout.description')}</Text>
+<Text type={TextType.h4} classes="mb-3">{localize('views.settings.strongholdPasswordTimeout.title')}</Text>
+<Text type={TextType.p} secondary classes="mb-5"
+    >{localize('views.settings.strongholdPasswordTimeout.description')}</Text
+>
 <Dropdown
     {onSelect}
     value={assignTimeoutOptionLabel(
