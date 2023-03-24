@@ -1,10 +1,11 @@
 <script lang="ts">
-    import { get } from 'svelte/store'
-    import { Button, PinInput, Spinner, Text, HTMLButtonType, ButtonSize, TextType } from 'shared/components'
+    import { showAppNotification } from '@auxiliary/notification'
+    import { Platform } from '@core/app'
     import { localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
-    import { Platform } from '@core/app'
     import { PIN_LENGTH } from '@core/utils'
+    import { Button, ButtonSize, HTMLButtonType, PinInput, Text, TextType } from 'shared/components'
+    import { get } from 'svelte/store'
 
     let currentPincode: string = ''
     let newPincode: string = ''
@@ -13,7 +14,6 @@
     let newPincodeError: string = ''
     let confirmationPincodeError = ''
     let busy: boolean = false
-    let message: string = ''
 
     $: currentPincode, newPincode, confirmedPincode, resetErrors()
 
@@ -32,23 +32,25 @@
     function resetForm(): void {
         resetInputs()
         resetErrors()
-        message = ''
     }
 
     function onSuccess(_message: string): void {
-        message = _message
         busy = false
-        setTimeout(() => {
-            resetForm()
-        }, 2000)
+        showAppNotification({
+            type: 'success',
+            alert: true,
+            message: _message,
+        })
+        resetForm()
     }
 
     function onError(_message: string): void {
-        message = _message
         busy = false
-        setTimeout(() => {
-            message = ''
-        }, 2000)
+        showAppNotification({
+            type: 'error',
+            alert: true,
+            message: _message,
+        })
     }
 
     async function validateFormAndSetErrors(): Promise<boolean> {
@@ -71,26 +73,23 @@
                     return true
                 }
             } else {
-                message = localize('error.pincode.empty')
                 return false
             }
         } catch (err) {
-            message = localize('general.pinCodeFailed')
             return false
         }
     }
 
     async function changePincode(): Promise<void> {
-        if (await validateFormAndSetErrors()) {
-            busy = true
-            message = localize('general.pinCodeUpdating')
-            try {
+        try {
+            if (await validateFormAndSetErrors()) {
+                busy = true
                 await Platform.PincodeManager.set(get(activeProfile)?.id, newPincode)
                 onSuccess(localize('general.pinCodeSuccess'))
-            } catch {
+            } else {
                 onError(localize('general.pinCodeFailed'))
             }
-        } else {
+        } catch {
             onError(localize('general.pinCodeFailed'))
         }
     }
@@ -139,9 +138,9 @@
                 currentPincode?.length < PIN_LENGTH ||
                 newPincode?.length < PIN_LENGTH ||
                 confirmedPincode?.length < PIN_LENGTH}
+            isBusy={busy}
         >
             {localize('views.settings.changePincode.action')}
         </Button>
-        <Spinner {busy} {message} classes="ml-2" />
     </div>
 </form>
