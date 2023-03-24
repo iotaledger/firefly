@@ -6,3 +6,6 @@ export { default as NetworkSettings } from './network/NetworkSettings.svelte'
 export { default as ProfileSettings } from './profile/ProfileSettings.svelte'
 export { default as Security } from './security/Security.svelte'
 export { default as SettingsViewer } from './SettingsViewer.svelte'
+export { default as SettingsListForCategory } from './SettingsListForCategory.svelte'
+
+export * from './settings.constant.js'

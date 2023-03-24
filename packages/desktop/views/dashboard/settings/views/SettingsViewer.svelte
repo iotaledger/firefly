@@ -24,28 +24,17 @@
 <script lang="ts">
     import { Scroller, SettingsNavigator } from '@components'
     import { _ } from '@core/i18n'
-    import { activeProfile, isActiveLedgerProfile, isSoftwareProfile } from '@core/profile'
+    import { activeProfile } from '@core/profile'
     import { settingsRoute, SettingsRoute, SettingsRouteNoProfile, settingsRouter } from '@core/router'
     import features from '@features/features'
     import { onMount } from 'svelte'
-    import { Advanced, CollectiblesSettings, General, Help, NetworkSettings, ProfileSettings, Security } from './'
+    import { SettingsListForCategory } from './'
 
     const { loggedIn } = $activeProfile
 
     const routes = Object.values($loggedIn ? SettingsRoute : SettingsRouteNoProfile)
 
-    const securitySettings = structuredClone(SecuritySettingsRoute)
-    const advancedSettings = structuredClone(AdvancedSettingsRoute)
-
     let settings: SettingsNavigatorTypes.Settings
-
-    $: if (!$isSoftwareProfile) {
-        delete securitySettings.ExportStronghold
-        delete securitySettings.ChangePassword
-    }
-    $: if (!$isActiveLedgerProfile) {
-        delete advancedSettings.MigrateLedgerIndex
-    }
 
     $: if ($loggedIn) {
         settings = {
@@ -53,8 +42,8 @@
             profile: ProfileSettingsRoute,
             collectibles: CollectiblesSettingsRoute,
             network: NetworkSettingsRoute,
-            security: securitySettings,
-            advanced: advancedSettings,
+            security: SecuritySettingsRoute,
+            advanced: AdvancedSettingsRoute,
             helpAndInfo: HelpAndInfoRoute,
         }
     } else {
@@ -107,21 +96,7 @@
         <div class="h-full w-full">
             <Scroller classes="w-full md:w-3/4 h-full md:pr-100" threshold={100}>
                 <div class="md:w-11/12">
-                    {#if $settingsRoute === SettingsRoute.General}
-                        <General />
-                    {:else if $settingsRoute === SettingsRoute.Profile}
-                        <ProfileSettings />
-                    {:else if $settingsRoute === SettingsRoute.Collectibles}
-                        <CollectiblesSettings />
-                    {:else if $settingsRoute === SettingsRoute.Network}
-                        <NetworkSettings />
-                    {:else if $settingsRoute === SettingsRoute.Security}
-                        <Security />
-                    {:else if $settingsRoute === SettingsRoute.Advanced}
-                        <Advanced />
-                    {:else if $settingsRoute === SettingsRoute.HelpAndInfo}
-                        <Help />
-                    {/if}
+                    <SettingsListForCategory category={$settingsRoute} />
                 </div>
             </Scroller>
         </div>
