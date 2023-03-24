@@ -2,15 +2,25 @@
     import { HR } from 'shared/components'
     import { HelpAndInfoRoute } from '@core/router'
     import HelpSection from './HelpSection.svelte'
+    import Diagnostics from './Diagnostics.svelte'
+    import ErrorLog from './ErrorLog.svelte'
     import features from '@features/features'
     import { DISCORD_URL, DOCUMENTATION_URL, FAQ_URL, ISSUE_REPORT_URL } from '@contexts/settings'
 
     const settings: {
         component: unknown
         childRoute: HelpAndInfoRoute
-        actionLocale: string
-        url: string
+        actionLocale?: string
+        url?: string
     }[] = [
+        {
+            component: Diagnostics,
+            childRoute: HelpAndInfoRoute.Diagnostics,
+        },
+        {
+            component: ErrorLog,
+            childRoute: HelpAndInfoRoute.ErrorLog,
+        },
         {
             component: HelpSection,
             childRoute: HelpAndInfoRoute.Documentation,
