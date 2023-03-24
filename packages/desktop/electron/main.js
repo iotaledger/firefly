@@ -398,8 +398,18 @@ ipcMain.handle('copy-file', (_e, sourceFilePath, destinationFilePath) => {
     const src = path.resolve(sourceFilePath)
     const srcFileBuffer = fs.readFileSync(src)
     const dest = path.resolve(destinationFilePath)
+    ensureDirectoryExistence(dest)
     fs.writeFileSync(dest, srcFileBuffer)
 })
+
+function ensureDirectoryExistence(filePath) {
+    const dirname = path.dirname(filePath)
+    if (fs.existsSync(dirname)) {
+        return true
+    }
+    ensureDirectoryExistence(dirname)
+    fs.mkdirSync(dirname)
+}
 
 // Diagnostics
 const getDiagnostics = () => {
