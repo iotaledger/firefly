@@ -1,21 +1,36 @@
 <script lang="ts">
     import { Icon as IconEnum, SETTINGS_ICON_SVG } from '@auxiliary/icon'
-    import { SettingsNavigatorTypes } from '@components'
+    import { ISetting, isSettingVisible } from '@contexts/settings'
     import { localize } from '@core/i18n'
+    import { activeProfile, isActiveLedgerProfile } from '@core/profile'
+    import { SettingsRoute, SettingsRouteNoProfile } from '@core/router'
+    import features from '@features/features'
     import { FontWeight, Icon, Text, TextType } from '@ui'
+    import { SETTINGS } from './settings.constant'
 
-    export let settings: SettingsNavigatorTypes.Settings
-    export let routes: string[]
-    export let route: string
+    export let currentCategory: string
     export let onSettingClick: (..._: any[]) => void
 
-    function changeRoute(setting: string): void {
+    const { loggedIn } = $activeProfile
+    const categories = Object.values($loggedIn ? SettingsRoute : SettingsRouteNoProfile)
+
+    function changeCategory(category: string): void {
         document.getElementById('scroller').scrollTop = 0
-        route = setting
+        currentCategory = category
     }
 
     function getSettingRoutes(): string[] {
-        return Object.values(settings[route])
+        const visibleSettings =
+            (SETTINGS?.[currentCategory] as ISetting[])?.filter((setting) =>
+                isSettingVisible(
+                    setting,
+                    features?.settings?.[currentCategory]?.[setting.childRoute]?.enabled,
+                    $loggedIn,
+                    !$isActiveLedgerProfile,
+                    $isActiveLedgerProfile
+                )
+            ) ?? []
+        return visibleSettings.map((setting) => setting.childRoute)
     }
 </script>
 
@@ -23,14 +38,14 @@
     <Text type={TextType.h2} classes="mb-7">
         {localize('views.settings.settings')}
     </Text>
-    {#each routes as setting}
+    {#each categories as category}
         <setting-container class="flex flex-col items-start">
             <button
                 type="button"
-                on:click={() => changeRoute(setting)}
+                on:click={() => changeCategory(category)}
                 class="mb-2 pl-7 relative text-left flex flex-row items-center"
             >
-                {#if route === setting}
+                {#if currentCategory === category}
                     <Icon
                         width="16"
                         height="16"
@@ -39,10 +54,10 @@
                     />
                 {/if}
                 <Text type={TextType.h5} fontWeight={FontWeight.medium}>
-                    {localize(`views.settings.${setting}.title`)}
+                    {localize(`views.settings.${category}.title`)}
                 </Text>
             </button>
-            {#if route === setting}
+            {#if currentCategory === category}
                 {@const settingRoutes = getSettingRoutes()}
                 {#each settingRoutes as setting, i}
                     {@const isLast = settingRoutes.length - 1 === i}
