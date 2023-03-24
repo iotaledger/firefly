@@ -1,8 +1,7 @@
 <script lang="ts">
-    import { mobile } from '@core/app'
     import { isLocaleLoaded } from '@core/i18n'
     import { dashboardRouter, settingsRouter } from '@core/router'
-    import { Icon } from 'shared/components'
+    import { Icon } from '@ui'
     import { onDestroy } from 'svelte'
     import { SettingsViewer } from './views'
 
@@ -22,10 +21,8 @@
 </script>
 
 <div class="relative h-full w-full p-8 md:bg-white md:dark:bg-gray-900 flex flex-1">
-    {#if !$mobile}
-        <button on:click={handleClose || closeSettings} class="absolute top-8 right-8">
-            <Icon icon="close" classes="text-gray-800 dark:text-white" />
-        </button>
-    {/if}
+    <button on:click={handleClose || closeSettings} class="absolute top-8 right-8">
+        <Icon icon="close" classes="text-gray-800 dark:text-white" />
+    </button>
     <SettingsViewer />
 </div>
