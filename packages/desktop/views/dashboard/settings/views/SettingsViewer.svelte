@@ -1,32 +1,38 @@
-<script lang="ts">
-    import { onMount } from 'svelte'
-
-    import { Scroller, SettingsNavigator, SettingsNavigatorTypes } from '@components'
-    import { Text, TextType } from '@ui'
-
-    import { Advanced, General, Help, Security } from './'
-    import { localize, _ } from '@core/i18n'
-    import { activeProfile, isActiveLedgerProfile, isSoftwareProfile } from '@core/profile'
+<script lang="ts" context="module">
     import {
         AdvancedSettingsRoute,
-        AdvancedSettingsRouteNoProfile,
+        CollectiblesSettingsRoute,
         GeneralSettingsRoute,
-        GeneralSettingsRouteNoProfile,
         HelpAndInfoRoute,
+        NetworkSettingsRoute,
+        ProfileSettingsRoute,
         SecuritySettingsRoute,
-        settingsRoute,
-        SettingsRoute,
-        SettingsRouteNoProfile,
-        settingsRouter,
     } from '@core/router'
+    export namespace SettingsNavigatorTypes {
+        export type Settings = {
+            general: typeof GeneralSettingsRoute
+            profile?: typeof ProfileSettingsRoute
+            collectibles?: typeof CollectiblesSettingsRoute
+            network?: typeof NetworkSettingsRoute
+            security?: typeof SecuritySettingsRoute
+            advanced?: typeof AdvancedSettingsRoute
+            helpAndInfo: typeof HelpAndInfoRoute
+        }
+    }
+</script>
 
+<script lang="ts">
+    import { Scroller, SettingsNavigator } from '@components'
+    import { _ } from '@core/i18n'
+    import { activeProfile, isActiveLedgerProfile, isSoftwareProfile } from '@core/profile'
+    import { settingsRoute, SettingsRoute, SettingsRouteNoProfile, settingsRouter } from '@core/router'
     import features from '@features/features'
+    import { onMount } from 'svelte'
+    import { Advanced, CollectiblesSettings, General, Help, NetworkSettings, ProfileSettings, Security } from './'
 
     const { loggedIn } = $activeProfile
 
-    const routes = Object.values($loggedIn ? SettingsRoute : SettingsRouteNoProfile).filter(
-        (route) => route !== SettingsRoute.Init
-    )
+    const routes = Object.values($loggedIn ? SettingsRoute : SettingsRouteNoProfile)
 
     const securitySettings = structuredClone(SecuritySettingsRoute)
     const advancedSettings = structuredClone(AdvancedSettingsRoute)
@@ -44,14 +50,16 @@
     $: if ($loggedIn) {
         settings = {
             general: GeneralSettingsRoute,
+            profile: ProfileSettingsRoute,
+            collectibles: CollectiblesSettingsRoute,
+            network: NetworkSettingsRoute,
             security: securitySettings,
             advanced: advancedSettings,
             helpAndInfo: HelpAndInfoRoute,
         }
     } else {
         settings = {
-            general: GeneralSettingsRouteNoProfile,
-            advanced: AdvancedSettingsRouteNoProfile,
+            general: GeneralSettingsRoute,
             helpAndInfo: HelpAndInfoRoute,
         }
     }
@@ -96,19 +104,17 @@
             {settings}
             bind:route={$settingsRoute}
         />
-        <div class="h-full w-full pb-10">
-            <Text type={TextType.p} secondary highlighted classes="mb-8">
-                {localize('views.settings.settings')}
-                /
-                {localize(`views.settings.${$settingsRoute}.title`)}
-            </Text>
-            <Scroller classes="w-full md:w-3/4 h-full md:pr-100" threshold={70}>
+        <div class="h-full w-full">
+            <Scroller classes="w-full md:w-3/4 h-full md:pr-100" threshold={100}>
                 <div class="md:w-11/12">
-                    <Text type={TextType.h2} classes="mb-7">
-                        {localize(`views.settings.${$settingsRoute}.title`)}
-                    </Text>
                     {#if $settingsRoute === SettingsRoute.General}
                         <General />
+                    {:else if $settingsRoute === SettingsRoute.Profile}
+                        <ProfileSettings />
+                    {:else if $settingsRoute === SettingsRoute.Collectibles}
+                        <CollectiblesSettings />
+                    {:else if $settingsRoute === SettingsRoute.Network}
+                        <NetworkSettings />
                     {:else if $settingsRoute === SettingsRoute.Security}
                         <Security />
                     {:else if $settingsRoute === SettingsRoute.Advanced}
