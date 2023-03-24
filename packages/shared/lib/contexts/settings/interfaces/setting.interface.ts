@@ -4,4 +4,5 @@ export interface ISetting {
     requiresLogin?: boolean
     requiresLedgerProfile?: boolean
     requiresSoftwareProfile?: boolean
+    props?: Record<string, unknown>
 }

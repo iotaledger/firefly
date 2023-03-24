@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { isSettingVisible } from '@contexts/settings'
+    import { ISetting, isSettingVisible } from '@contexts/settings'
     import { activeProfile, isActiveLedgerProfile } from '@core/profile'
     import { SettingsRoute } from '@core/router'
     import features from '@features/features'
@@ -11,7 +11,7 @@
     const { loggedIn } = $activeProfile
 
     $: visibleSettings =
-        SETTINGS?.[category]?.filter((setting) =>
+        (SETTINGS?.[category] as ISetting[])?.filter((setting) =>
             isSettingVisible(
                 setting,
                 features?.settings?.[category]?.[setting.childRoute]?.enabled,
@@ -23,9 +23,9 @@
 </script>
 
 <div class="flex flex-col space-y-5">
-    {#each visibleSettings as { component, childRoute }, index}
+    {#each visibleSettings as { component, childRoute, props }, index}
         <section id={childRoute} class="w-full sm:w-3/4">
-            <svelte:component this={component} />
+            <svelte:component this={component} {...props} route={childRoute} />
         </section>
         {#if index < visibleSettings.length - 1}
             <HR classes="justify-center" />

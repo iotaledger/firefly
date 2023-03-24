@@ -14,5 +14,5 @@ export const SETTINGS = {
     [SettingsRoute.Collectibles]: COLLECTIBLES_SETTINGS,
     [SettingsRoute.Security]: SECURITY_SETTINGS,
     [SettingsRoute.Advanced]: ADVANCED_SETTINGS,
-    [SettingsRoute.Help]: HELP_SETTINGS,
+    [SettingsRoute.HelpAndInfo]: HELP_SETTINGS,
 }
