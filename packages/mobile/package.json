@@ -33,6 +33,7 @@
         "@capacitor-community/privacy-screen": "^2.1.1",
         "@capacitor/app": "^1.1.1",
         "@capacitor/device": "1.1.2",
+        "@capacitor/share": "^1.1.2",
         "@capacitor/splash-screen": "^1.2.2",
         "capacitor-secure-storage-plugin": "^0.6.2",
         "shared": "0.2.0"
