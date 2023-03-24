@@ -1,20 +1,19 @@
 <script lang="ts">
     import { activeProfile, isActiveLedgerProfile } from '@core/profile'
-    import { AdvancedSettingsRoute } from '@core/router'
+    import { CollectiblesSettingsRoute } from '@core/router'
     import features from '@features/features'
-    import { HR } from 'shared/components'
-    import { HiddenAccounts, WalletFinder } from './'
+    import { HR } from '@ui'
+    import MaxMediaSize from './MaxMediaSize.svelte'
 
     const settings: {
         component: unknown
-        childRoute: AdvancedSettingsRoute
+        childRoute: CollectiblesSettingsRoute
         requireLogin?: boolean
         requireLedger?: boolean
-    }[] = [
-        { component: WalletFinder, childRoute: AdvancedSettingsRoute.WalletFinder, requireLogin: true },
-        { component: HiddenAccounts, childRoute: AdvancedSettingsRoute.HiddenAccounts, requireLogin: true },
-    ]
-    const visibleSettings = settings.filter((setting) => features?.settings?.advanced?.[setting.childRoute]?.enabled)
+    }[] = [{ component: MaxMediaSize, childRoute: CollectiblesSettingsRoute.MaxMediaSize }]
+    const visibleSettings = settings.filter(
+        (setting) => features?.settings?.collectibles?.[setting.childRoute]?.enabled
+    )
 
     const { loggedIn } = $activeProfile
 </script>

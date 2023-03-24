@@ -1,21 +1,19 @@
 <script lang="ts">
     import { isSoftwareProfile } from '@core/profile'
     import { SecuritySettingsRoute } from '@core/router'
-    import { HR } from 'shared/components'
-    import { AppLock, ChangePassword, ChangePincode, DeleteProfile, ExportStronghold, MaxMediaSize } from './'
     import features from '@features/features'
+    import { HR } from '@ui'
+    import { AppLock, ChangePassword, ChangePincode, ExportStronghold } from './'
 
     const settings: {
         component: unknown
         childRoute: SecuritySettingsRoute
         requireSoftware?: boolean
     }[] = [
-        { component: ExportStronghold, childRoute: SecuritySettingsRoute.ExportStronghold, requireSoftware: true },
         { component: AppLock, childRoute: SecuritySettingsRoute.AppLock },
-        { component: MaxMediaSize, childRoute: SecuritySettingsRoute.MaxMediaSize },
-        { component: ChangePassword, childRoute: SecuritySettingsRoute.ChangePassword, requireSoftware: true },
         { component: ChangePincode, childRoute: SecuritySettingsRoute.ChangePincode },
-        { component: DeleteProfile, childRoute: SecuritySettingsRoute.DeleteProfile },
+        { component: ChangePassword, childRoute: SecuritySettingsRoute.ChangePassword, requireSoftware: true },
+        { component: ExportStronghold, childRoute: SecuritySettingsRoute.ExportStronghold, requireSoftware: true },
     ]
     const visibleSettings = settings.filter((setting) => features?.settings?.security?.[setting.childRoute]?.enabled)
 </script>

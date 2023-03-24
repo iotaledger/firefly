@@ -260,6 +260,16 @@
                 "title": "General",
                 "description": "Configure your app's appearance and other general settings"
             },
+            "profile": {
+                "title": "Profile",
+                "description": "Change your profile name or set an avatar"
+            },
+            "network": {
+                "title": "Network"
+            },
+            "collectibles": {
+                "title": "Collectibles"
+            },
             "security": {
                 "title": "Security",
                 "description": "Change your password and adjust security-related settings"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "Help & Information",
                 "description": "Find the answer to a question or get help with an issue"
-            },
-            "profile": {
-                "title": "Profile",
-                "description": "Change your profile name or set an avatar"
             },
             "sync": {
                 "title": "Sync wallets",
