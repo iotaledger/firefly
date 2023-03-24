@@ -122,8 +122,7 @@ jobs:
               shell: bash
               env:
                   HARDCODE_NODE_ENV: true
-                  SENTRY: ${{ startsWith(github.ref, 'refs/tags/desktop') }}
-                  SENTRY_DSN: ${{ secrets.SENTRY_DSN_PROD_DESKTOP }}
+                  SENTRY_DSN: ${{ secrets.SENTRY_DSN_SHIMMER_DESKTOP }}
                   SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
             - name: Build Electron app (macOS)

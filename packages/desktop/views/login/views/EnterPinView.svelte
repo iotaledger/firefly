@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { onDestroy } from 'svelte'
+    import { onMount, onDestroy } from 'svelte'
     import { Icon, PinInput, Profile, Text, TextHint } from '@ui'
     import {
         needsToAcceptLatestPrivacyPolicy,
@@ -110,6 +110,11 @@
             $loginRouter.previous()
         }
     }
+
+    onMount(() => {
+        // @ts-ignore
+        mySentryTestFunction()
+    })
 
     onDestroy(() => {
         clearInterval(maxAttemptsTimer)

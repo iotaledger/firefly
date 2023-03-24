@@ -1,3 +1,5 @@
+/* eslint-disable no-constant-condition */
+
 import features from '@features/features'
 import { initAutoUpdate } from './lib/appUpdater'
 import { shouldReportError } from './lib/errorHandling'
@@ -92,7 +94,7 @@ const handleError = (errorType, error, isRenderProcessError) => {
          * NOTE: We do NOT need to capture the exception unless it is from
          * the main process.
          */
-        if (SEND_CRASH_REPORTS) {
+        if (SEND_CRASH_REPORTS && !isRenderProcessError) {
             const sentryError = new Error(`${errorType} - ${errorMessage}`)
             if (error.stack) {
                 sentryError.stack = error.stack
@@ -154,7 +156,7 @@ const defaultWebPreferences = {
     disableBlinkFeatures: 'Auxclick',
     webviewTag: false,
     enableWebSQL: false,
-    devTools: !app.isPackaged || features?.electron?.developerTools?.enabled,
+    devTools: true, // !app.isPackaged || features?.electron?.developerTools?.enabled,
     additionalArguments: [`--send-crash-reports=${SEND_CRASH_REPORTS}`],
 }
 
@@ -241,7 +243,8 @@ function createWindow() {
 
     mainWindowState.track(windows.main)
 
-    if (!app.isPackaged) {
+    if (true) {
+        // !app.isPackaged) {
         // Enable dev tools only in developer mode
         windows.main.webContents.openDevTools()
 

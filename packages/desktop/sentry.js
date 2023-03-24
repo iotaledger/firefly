@@ -1,7 +1,11 @@
 /** NOTE: SENTRY_MAIN_PROCESS, SENTRY_DSN, SENTRY_ENVIRONMENT, and PRELOAD_SCRIPT are replaced by Webpack at compile-time. */
 
-/* eslint-disable-next-line no-undef */
-const Sentry = SENTRY_MAIN_PROCESS ? require('@sentry/electron/dist/main') : require('@sentry/electron/dist/renderer')
+/* eslint-disable no-undef */
+const Sentry = SENTRY_MAIN_PROCESS
+    ? require('@sentry/electron/main')
+    : SENTRY_RENDERER_PROCESS
+    ? require('@sentry/electron/renderer')
+    : require('@sentry/electron/preload')
 
 const appName = 'Firefly'
 const debug = true
@@ -29,11 +33,17 @@ if (SENTRY_MAIN_PROCESS || PRELOAD_SCRIPT) {
 
 module.exports = function (initialize) {
     if (initialize) {
+        /* eslint-disable no-console */
+        console.log({ appName, debug, dsn, environment })
         Sentry.init({ appName, debug, dsn, environment })
         Sentry.setUser({ id: machineId })
     }
 
     return {
-        captureException: Sentry.captureException,
+        captureException: (...args) => {
+            /* eslint-disable no-console */
+            console.log('SENTRY INIT: ', args)
+            return Sentry.captureException
+        },
     }
 }

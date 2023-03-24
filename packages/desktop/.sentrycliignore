@@ -4,3 +4,5 @@ scripts/
 postcss.config.js
 webpack.config.js
 electron-builder-config.js
+
+tsconfig.json

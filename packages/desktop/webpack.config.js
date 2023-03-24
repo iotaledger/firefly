@@ -9,7 +9,9 @@ const { version } = require('./package.json')
 const mode = process.env.NODE_ENV || 'development'
 const prod = mode === 'production'
 const hardcodeNodeEnv = typeof process.env.HARDCODE_NODE_ENV !== 'undefined'
-const SENTRY = process.env.SENTRY === 'true'
+const SENTRY = Boolean(process.env.SENTRY_DSN)
+/* eslint-disable no-console */
+console.log('WEBPACK: ', SENTRY, process.env.SENTRY_DSN)
 const stage = process.env.STAGE || 'alpha'
 /**
  * If stage = 'prod' -> 'Firefly'
@@ -122,6 +124,7 @@ const mainPlugins = [
         PLATFORM_LINUX: JSON.stringify(process.platform === 'linux'),
         SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),
         SENTRY_MAIN_PROCESS: JSON.stringify(true),
+        SENTRY_RENDERER_PROCESS: JSON.stringify(false),
         SENTRY_ENVIRONMENT: JSON.stringify(stage),
         PRELOAD_SCRIPT: JSON.stringify(false),
         APP_NAME: JSON.stringify(appName),
@@ -158,6 +161,7 @@ const rendererPlugins = [
         'process.env.STAGE': JSON.stringify(stage),
         SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),
         SENTRY_MAIN_PROCESS: JSON.stringify(false),
+        SENTRY_RENDERER_PROCESS: JSON.stringify(true),
         SENTRY_ENVIRONMENT: JSON.stringify(stage),
         PRELOAD_SCRIPT: JSON.stringify(false),
         'process.env.APP_PROTOCOL': JSON.stringify(appProtocol),
@@ -169,6 +173,7 @@ const preloadPlugins = [
         PLATFORM_LINUX: JSON.stringify(process.platform === 'linux'),
         SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),
         SENTRY_MAIN_PROCESS: JSON.stringify(false),
+        SENTRY_RENDERER_PROCESS: JSON.stringify(false),
         SENTRY_ENVIRONMENT: JSON.stringify(stage),
         PRELOAD_SCRIPT: JSON.stringify(true),
         APP_NAME: JSON.stringify(appName),
@@ -184,7 +189,7 @@ const sentryPlugins = [
         release: `Firefly@${version}`,
         ignoreFile: '.sentrycliignore',
         org: 'iota-foundation-h4',
-        project: 'firefly-desktop',
+        project: 'firefly-shimmer-desktop',
         finalize: false,
         deploy: {
             env: stage,
