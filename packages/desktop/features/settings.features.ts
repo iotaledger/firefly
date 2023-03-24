@@ -39,7 +39,7 @@ const settingsFeatures = {
             enabled: true,
         },
         changePincode: {
-            enabled: false,
+            enabled: true,
         },
         changePassword: {
             enabled: true,
