@@ -18,7 +18,14 @@
     const skipBackup = false
 
     function onAdvanceView(): void {
-        updateOnboardingProfile({ mnemonic: null, strongholdPassword: null, importFile: null, importFilePath: null })
+        if (isRecovery) {
+            updateOnboardingProfile({
+                mnemonic: null,
+                strongholdPassword: null,
+                importFile: null,
+                importFilePath: null,
+            })
+        }
 
         $updateStrongholdRouter.next()
     }
