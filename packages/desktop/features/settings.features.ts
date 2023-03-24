@@ -35,8 +35,11 @@ const settingsFeatures = {
         appLock: {
             enabled: true,
         },
+        strongholdPasswordTimeout: {
+            enabled: true,
+        },
         changePincode: {
-            enabled: false,
+            enabled: true,
         },
         changePassword: {
             enabled: true,

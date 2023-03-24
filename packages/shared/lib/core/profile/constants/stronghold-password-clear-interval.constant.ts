@@ -1,3 +1,0 @@
-import { SECONDS_PER_MINUTE } from '@core/utils'
-
-export const STRONGHOLD_PASSWORD_CLEAR_INTERVAL = 2 * SECONDS_PER_MINUTE
