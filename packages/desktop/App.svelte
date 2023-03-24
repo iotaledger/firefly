@@ -172,8 +172,6 @@
 
         const platform = await Platform.getOS()
         setPlatform(platform)
-
-        throw new Error('Sentry Test')
     })
 
     onDestroy(() => {
