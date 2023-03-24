@@ -121,6 +121,7 @@ export enum ExternalRoute {
 export enum LoginRoute {
     Init = 'init',
     EnterPin = 'enterPin',
+    UpdateStronghold = 'updateStronghold',
 }
 
 export enum BackupRoute {

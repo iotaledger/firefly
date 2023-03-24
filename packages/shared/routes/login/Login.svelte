@@ -6,7 +6,8 @@
     import { mobile } from 'shared/lib/app'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { EnterPin, SelectProfile } from './views/'
+    import { ChangePasswordView, EnterPin, SaveBackupView, SelectProfile, UpdateStrongholdView } from './views/'
+    import { updateStrongholdRoute, UpdateStrongholdRoute } from '@core/router'
 
     export let locale: Locale
 
@@ -32,5 +33,21 @@
 {:else if $loginRoute === LoginRoute.EnterPin}
     <Transition>
         <EnterPin on:next={next} on:previous={previous} {locale} />
+    </Transition>
+{:else if $loginRoute === LoginRoute.UpdateStronghold}
+    <Transition>
+        {#if $updateStrongholdRoute === UpdateStrongholdRoute.UpdateStronghold}
+            <Transition>
+                <UpdateStrongholdView {loginRouter} />
+            </Transition>
+        {:else if $updateStrongholdRoute === UpdateStrongholdRoute.ChangePassword}
+            <Transition>
+                <ChangePasswordView />
+            </Transition>
+        {:else if $updateStrongholdRoute === UpdateStrongholdRoute.SaveBackup}
+            <Transition>
+                <SaveBackupView {loginRouter} />
+            </Transition>
+        {/if}
     </Transition>
 {/if}
