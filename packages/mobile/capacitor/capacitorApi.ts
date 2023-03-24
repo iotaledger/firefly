@@ -1,6 +1,6 @@
 import { Capacitor } from '@capacitor/core'
 import { SplashScreen } from '@capacitor/splash-screen'
-
+import { Share } from '@capacitor/share'
 import { IAppVersionDetails, IPlatform } from '@core/app'
 
 import { DeepLinkManager } from './lib/deepLinkManager'
@@ -141,6 +141,12 @@ export const CapacitorApi: IPlatform = {
 
     saveRecoveryKit: () => new Promise<void>(() => {}),
     ledger: undefined,
+
+    share: async (text: string = '') => {
+        await Share.share({
+            text,
+        })
+    },
 }
 
 window['__CAPACITOR__'] = CapacitorApi
