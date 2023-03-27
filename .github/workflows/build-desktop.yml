@@ -46,7 +46,7 @@ jobs:
         needs: [setup]
         strategy:
             matrix:
-                os: [ubuntu-20.04, macos-11, windows-2019]
+                os: [windows-2019]
             fail-fast: false
         env:
             VERSION: ${{ needs.setup.outputs.version }}
@@ -209,24 +209,13 @@ jobs:
                   name: firefly-desktop-windows-2019
                   path: assets
 
-            - name: Downloading artifacts
-              uses: actions/download-artifact@v2
-              with:
-                  name: firefly-desktop-macos-11
-                  path: assets
-
-            - name: Downloading artifacts
-              uses: actions/download-artifact@v2
-              with:
-                  name: firefly-desktop-ubuntu-20.04
-                  path: assets
+            - name: Listing artifacts
+              run: ls -al ../../assets
 
             - name: Preparing release body
               run: |
                   sed -i 's/\r$//' ../../assets/*.sha256 && sed -i '/^$/d' ../../assets/*.sha256 && sed -i -e 's/\(.*\)/\L\1/' ../../assets/*.sha256
                   WIN_SHA256=$(cat ../../assets/firefly-desktop-${{ env.VERSION }}.exe.sha256)
-                  LIN_SHA256=$(cat ../../assets/firefly-desktop-${{ env.VERSION }}.AppImage.sha256)
-                  MAC_SHA256=$(cat ../../assets/firefly-desktop-${{ env.VERSION }}.dmg.sha256)
                   echo $WIN_SHA256 $LIN_SHA256 $MAC_SHA256
                   touch CHANGELOG.md
                   echo '### Changelog' >> CHANGELOG.md
