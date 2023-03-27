@@ -4,7 +4,7 @@ import { BYTES_PER_MEGABYTE } from '../constants'
 import { DownloadErrorType, DownloadWarningType, HttpHeader } from '../enums'
 import { fetchWithTimeout } from './fetchWithTimeout'
 import { NftDownloadMetadata, INft } from '../interfaces'
-import { persistedNftForActiveProfile } from '../stores'
+import { addPersistedNftData, persistedNftForActiveProfile } from '../stores'
 
 const HEAD_FETCH_TIMEOUT_SECONDS = 3
 
@@ -12,7 +12,10 @@ export async function validateNftMedia(
     nft: INft
 ): Promise<{ needsDownload: boolean; downloadMetadata?: NftDownloadMetadata; downloadUrl?: string }> {
     let downloadMetadata: NftDownloadMetadata = { isLoaded: false }
+    const persistedNftData = get(persistedNftForActiveProfile)?.[nft.id]
+
     try {
+        // TODO: do we want to trust the persisted store if a file is downloaded or do we check it everytime?
         const alreadyDownloaded = await isFileAlreadyDownloaded(nft)
 
         if (alreadyDownloaded) {
@@ -22,13 +25,13 @@ export async function validateNftMedia(
             downloadMetadata.error = { type: DownloadErrorType.UnsupportedUrl }
         } else {
             let downloadUrl = nft.composedUrl
-
-            const persistedNftData = get(persistedNftForActiveProfile)?.[nft.id]
             let contentLength, contentType
+
             if (persistedNftData) {
                 if (persistedNftData.error) {
                     throw persistedNftData.error
                 }
+                downloadUrl = persistedNftData.downloadUrl
                 contentLength = persistedNftData.contentLength
                 contentType = persistedNftData.contentType
             } else {
@@ -46,6 +49,8 @@ export async function validateNftMedia(
                 }
                 contentLength = headers.get(HttpHeader.ContentLength)
                 contentType = headers.get(HttpHeader.ContentType)
+
+                addPersistedNftData(nft.id, { contentLength, contentType, responseCode: response.status, downloadUrl })
             }
 
             const validation = validateFile(nft, contentType, contentLength)
@@ -61,6 +66,8 @@ export async function validateNftMedia(
         } else {
             downloadMetadata.error = { type: DownloadErrorType.Generic, message: err.message }
         }
+
+        addPersistedNftData(nft.id, { error: { message: err?.message } })
     }
 
     return { needsDownload: false, downloadMetadata }
@@ -69,7 +76,7 @@ export async function validateNftMedia(
 function validateFile(nft: INft, contentType: string, contentLength: string): Partial<NftDownloadMetadata> {
     const MAX_FILE_SIZE_IN_BYTES = (get(activeProfile)?.settings?.maxMediaSizeInMegaBytes ?? 0) * BYTES_PER_MEGABYTE
 
-    const isValidMediaType = contentType !== nft.parsedMetadata?.type && contentType !== 'video/mp4'
+    const isValidMediaType = contentType !== nft.parsedMetadata?.type
     const hasValidFileSize = MAX_FILE_SIZE_IN_BYTES > 0 && Number(contentLength) > MAX_FILE_SIZE_IN_BYTES
     if (isValidMediaType) {
         return { error: { type: DownloadErrorType.NotMatchingFileTypes } }

@@ -7,16 +7,16 @@ import { IPersistedNftData, IPersistedNftStore } from '../interfaces'
 export const persistedNfts = persistent<IPersistedNftStore>('persistedNfts', {})
 
 export const persistedNftForActiveProfile: Readable<{ [nftId: string]: IPersistedNftData }> = derived(
-    [persistedNfts],
-    ($persistedNfts) => $persistedNfts[get(activeProfile)?.id]
+    [persistedNfts, activeProfile],
+    ([$persistedNfts, $activeProfile]) => $persistedNfts[$activeProfile?.id]
 )
 
-export function addPersistedNftData(nftId: string, newPersistedNft: IPersistedNftData, accountIndex: number): void {
+export function addPersistedNftData(nftId: string, newPersistedNft: IPersistedNftData): void {
     persistedNfts.update((state) => {
-        if (!state[accountIndex]) {
-            state[accountIndex] = {}
+        if (!state[get(activeProfile)?.id]) {
+            state[get(activeProfile)?.id] = {}
         }
-        state[accountIndex][nftId] = newPersistedNft
+        state[get(activeProfile)?.id][nftId] = newPersistedNft
         return state
     })
 }
