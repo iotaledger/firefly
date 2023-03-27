@@ -22,7 +22,7 @@ export function addItemsToNftDownloadQueue(items: DownloadQueueNftItem[]): void 
     })
 }
 
-export function removeItemToNftDownloadQueue(nftId: string): void {
+export function removeItemFromNftDownloadQueue(nftId: string): void {
     nftDownloadQueue.update((state) => state.filter((item) => item.nft.id !== nftId))
 }
 
@@ -38,7 +38,7 @@ export async function downloadNextItemInQueue(): Promise<void> {
         downloadingNftId.set(nft.id)
         await Platform.downloadFile(downloadUrl, path, nft.id, accountIndex)
     } catch (error) {
-        removeItemToNftDownloadQueue(get(downloadingNftId))
+        removeItemFromNftDownloadQueue(get(downloadingNftId))
         downloadingNftId.set(undefined)
     }
 }
