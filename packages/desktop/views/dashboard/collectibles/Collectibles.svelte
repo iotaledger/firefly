@@ -3,14 +3,14 @@
 
     import { selectedAccountIndex } from '@core/account/stores'
     import { collectiblesRoute, CollectiblesRoute, collectiblesRouter } from '@core/router'
-    import { downloadNftMedia, selectedAccountNfts } from '@core/nfts'
+    import { addNftToDownloadQueue, selectedAccountNfts } from '@core/nfts'
 
     $: $selectedAccountIndex !== undefined && $collectiblesRouter.reset()
-    $: downloadNftsForSelectedAccountNfts($selectedAccountIndex)
+    $: addSelectedAccountNftsToDownloadQueue($selectedAccountIndex)
 
     // This is needed because we only want to call it when the account index changes, but not the selectedAccountNfts
-    function downloadNftsForSelectedAccountNfts(accountIndex: number) {
-        void downloadNftMedia(accountIndex, $selectedAccountNfts)
+    function addSelectedAccountNftsToDownloadQueue(accountIndex: number) {
+        void addNftToDownloadQueue(accountIndex, $selectedAccountNfts)
     }
 </script>
 

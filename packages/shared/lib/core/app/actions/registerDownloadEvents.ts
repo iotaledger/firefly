@@ -1,4 +1,10 @@
-import { allAccountNfts, downloadingNftId, DownloadWarningType, updateNftInAllAccountNfts } from '@core/nfts'
+import {
+    allAccountNfts,
+    downloadingNftId,
+    DownloadWarningType,
+    removeItemToNftDownloadQueue,
+    updateNftInAllAccountNfts,
+} from '@core/nfts'
 import { get } from 'svelte/store'
 import { Platform } from '../classes'
 
@@ -9,6 +15,7 @@ export function registerDownloadEvents(): void {
     Platform.onEvent('download-done', ({ nftId, accountIndex }) => {
         updateNftInAllAccountNfts(accountIndex, nftId, { downloadMetadata: { isLoaded: true } })
         downloadingNftId.set(undefined)
+        removeItemToNftDownloadQueue(nftId)
     })
     Platform.onEvent('download-interrupted', ({ nftId, accountIndex }) => {
         const alreadyLoaded = get(allAccountNfts)?.[accountIndex]?.find((nft) => nft.id === nftId)?.downloadMetadata
@@ -18,6 +25,7 @@ export function registerDownloadEvents(): void {
                 downloadMetadata: { isLoaded: false, warning: { type: DownloadWarningType.DownloadTooLong } },
             })
         }
+        removeItemToNftDownloadQueue(nftId)
         downloadingNftId.set(undefined)
     })
 }

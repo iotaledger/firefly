@@ -3,7 +3,7 @@ import {
     addOrUpdateNftInAllAccountNfts,
     buildNftFromNftOutput,
     getSpendableStatusFromUnspentNftOutput,
-    downloadNftMedia,
+    addNftToDownloadQueue,
 } from '@core/nfts'
 import { activeAccounts } from '@core/profile/stores'
 import { ActivityType, addPersistedAsset, generateActivities, getOrRequestAssetFromPersistedAssets } from '@core/wallet'
@@ -61,7 +61,7 @@ export async function handleNewOutputEventInternal(
             output.output as INftOutput
         )
         const nft = buildNftFromNftOutput(output.output as INftOutput, output.outputId, isSpendable, timeLockTime)
-        void downloadNftMedia(accountIndex, [nft])
         addOrUpdateNftInAllAccountNfts(account.index, nft)
+        void addNftToDownloadQueue(accountIndex, [nft])
     }
 }
