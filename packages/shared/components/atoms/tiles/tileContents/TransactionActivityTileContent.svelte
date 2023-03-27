@@ -30,6 +30,7 @@
     $: formattedAsset = {
         text: amount,
         color: isIncoming || activity.direction === ActivityDirection.SelfTransaction ? 'blue-700' : '',
+        classes: 'flex-shrink-0',
     }
 
     function getSubjectLocale(_activity: TransactionActivity): string {
