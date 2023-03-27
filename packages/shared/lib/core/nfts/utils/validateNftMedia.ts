@@ -3,7 +3,7 @@ import { get } from 'svelte/store'
 import { BYTES_PER_MEGABYTE } from '../constants'
 import { DownloadErrorType, DownloadWarningType, HttpHeader } from '../enums'
 import { fetchWithTimeout } from './fetchWithTimeout'
-import { NftDownloadMetadata, INft } from '../interfaces'
+import { NftDownloadMetadata, INft, IPersistedNftData } from '../interfaces'
 import { addPersistedNftData, persistedNftForActiveProfile } from '../stores'
 
 const HEAD_FETCH_TIMEOUT_SECONDS = 3
@@ -12,7 +12,6 @@ export async function validateNftMedia(
     nft: INft
 ): Promise<{ needsDownload: boolean; downloadMetadata?: NftDownloadMetadata; downloadUrl?: string }> {
     let downloadMetadata: NftDownloadMetadata = { isLoaded: false }
-    const persistedNftData = get(persistedNftForActiveProfile)?.[nft.id]
 
     try {
         // TODO: do we want to trust the persisted store if a file is downloaded or do we check it everytime?
@@ -24,33 +23,13 @@ export async function validateNftMedia(
             downloadMetadata.isLoaded = true
             downloadMetadata.error = { type: DownloadErrorType.UnsupportedUrl }
         } else {
-            let downloadUrl = nft.composedUrl
-            let contentLength: string
-            let contentType: string
+            const nftData = await getNftData(nft)
 
-            if (persistedNftData) {
-                if (persistedNftData.error) {
-                    throw persistedNftData.error
-                }
-                ({ downloadUrl, contentLength, contentType } = persistedNftData)
-            } else {
-                const response = await fetchWithTimeout(downloadUrl, HEAD_FETCH_TIMEOUT_SECONDS, {
-                    method: 'HEAD',
-                    cache: 'force-cache',
-                })
-                let headers = response.headers
-
-                const isSoonaverse = nft.parsedMetadata?.issuerName === 'Soonaverse'
-                if (isSoonaverse) {
-                    const newUrlAndHeaders = await getUrlAndHeadersFromOldSoonaverseStructure(nft, headers)
-                    downloadUrl = newUrlAndHeaders?.url ?? downloadUrl
-                    headers = newUrlAndHeaders?.headers ?? headers
-                }
-                contentLength = headers.get(HttpHeader.ContentLength)
-                contentType = headers.get(HttpHeader.ContentType)
-
-                addPersistedNftData(nft.id, { contentLength, contentType, responseCode: response.status, downloadUrl })
+            if (!get(persistedNftForActiveProfile)?.[nft.id]) {
+                addPersistedNftData(nft.id, nftData)
             }
+
+            const { downloadUrl, contentType, contentLength } = nftData
 
             const validation = validateFile(nft, contentType, contentLength)
             if (validation?.error || validation?.warning) {
@@ -81,6 +60,40 @@ function validateFile(nft: INft, contentType: string, contentLength: string): Pa
         return { error: { type: DownloadErrorType.NotMatchingFileTypes } }
     } else if (hasValidFileSize) {
         return { warning: { type: DownloadWarningType.TooLargeFile } }
+    }
+}
+
+async function getNftData(nft: INft): Promise<IPersistedNftData> {
+    const persistedNftData = get(persistedNftForActiveProfile)?.[nft.id]
+
+    if (persistedNftData) {
+        if (persistedNftData.error) {
+            throw persistedNftData.error
+        }
+        return persistedNftData
+    } else {
+        let downloadUrl = nft.composedUrl
+
+        const response = await fetchWithTimeout(downloadUrl, HEAD_FETCH_TIMEOUT_SECONDS, {
+            method: 'HEAD',
+            cache: 'force-cache',
+        })
+        let headers = response.headers
+
+        const isSoonaverse = nft.parsedMetadata?.issuerName === 'Soonaverse'
+        if (isSoonaverse) {
+            const newUrlAndHeaders = await getUrlAndHeadersFromOldSoonaverseStructure(nft, headers)
+            downloadUrl = newUrlAndHeaders?.url ?? downloadUrl
+            headers = newUrlAndHeaders?.headers ?? headers
+        }
+
+        const nftData = {
+            downloadUrl,
+            contentLength: headers.get(HttpHeader.ContentLength),
+            contentType: headers.get(HttpHeader.ContentType),
+            responseCode: response.status,
+        }
+        return nftData
     }
 }
 
