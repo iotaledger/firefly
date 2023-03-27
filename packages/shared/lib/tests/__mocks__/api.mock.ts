@@ -9,7 +9,7 @@ import { IAccount } from '@core/account'
 const profileManagers = {}
 
 const api: IApi = {
-    createAccountManager(id: string, _: AccountManagerOptions): ProfileManagerMock {
+    async createAccountManager(id: string, _: AccountManagerOptions): Promise<ProfileManagerMock> {
         const manager = new ProfileManagerMock(id)
 
         profileManagers[id] = manager
