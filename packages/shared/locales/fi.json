@@ -378,7 +378,7 @@
                 "noNodes": "Solmuja ei ole, yhteyden muodostaminen verkkoon ei ole mahdollista",
                 "noNodesAuto": "Solmuja ei ole, käytetään sen sijaan automaattista valintaa"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Todiste työstä (PoW)",
                 "description": "Suorita työntodiste (PoW) paikallisesti laitteellasi tai ulkoista se solmulle"
             },

@@ -378,7 +378,7 @@
                 "noNodes": "Nejsou k dispozici žádné uzly, nelze se připojit k síti",
                 "noNodesAuto": "Nejsou k dispozici žádné uzly, místo toho bude použit automatický výběr"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Proof of Work",
                 "description": "Proveďte Proof-of-work lokálně na vašem zařízení nebo externalizujte na Node"
             },

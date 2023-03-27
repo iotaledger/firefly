@@ -378,7 +378,7 @@
                 "noNodes": "Il n'y a aucun nœud, impossible de se connecter au réseau",
                 "noNodesAuto": "Il n'y a pas de nœud, la sélection automatique sera utilisée à la place"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Preuve de travail",
                 "description": "Effectuer la preuve de travail localement sur votre appareil ou la faire prendre en charge par le nœud"
             },

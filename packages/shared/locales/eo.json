@@ -378,7 +378,7 @@
                 "noNodes": "Ne estas nodoj, ne eblas konekti al la reto",
                 "noNodesAuto": "Ne ekzistas nodoj, aŭtomata elektado estos uzata anstataŭe"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Pruvo de funkciado",
                 "description": "Kompleta pruvo de loka funkciado sur via aparato aŭ subkontraktado al la nodo"
             },

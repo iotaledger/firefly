@@ -378,7 +378,7 @@
                 "noNodes": "Momentálne nie sú k dispozícii žiadne uzly, nie je množné pripojiť sa k sieti",
                 "noNodesAuto": "Neexistujú žiadne uzly, bude použitý automatický výber"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Proof of Work",
                 "description": "Vykonajte proof of work lokálne na vašom zariadení alebo ho prenechajte na uzol"
             },
