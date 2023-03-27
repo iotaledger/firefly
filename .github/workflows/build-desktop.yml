@@ -209,12 +209,10 @@ jobs:
                   name: firefly-desktop-windows-2019
                   path: assets
 
-            - name: Listing artifacts
-              run: ls -al ../../assets
-
             - name: Preparing release body
               run: |
                   sed -i 's/\r$//' ../../assets/*.sha256 && sed -i '/^$/d' ../../assets/*.sha256 && sed -i -e 's/\(.*\)/\L\1/' ../../assets/*.sha256
+                  ls -al ../../assets
                   WIN_SHA256=$(cat ../../assets/firefly-desktop-${{ env.VERSION }}.exe.sha256)
                   echo $WIN_SHA256 $LIN_SHA256 $MAC_SHA256
                   touch CHANGELOG.md
