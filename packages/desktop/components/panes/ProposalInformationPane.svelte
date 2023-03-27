@@ -6,6 +6,8 @@
     import { ProposalStatus } from '@contexts/governance/enums'
     import { selectedProposal } from '@contexts/governance/stores'
 
+    export let classes: string = ''
+
     interface IProposalDateData {
         propertyKey: 'votingOpens' | 'countingStarts' | 'countingEnds' | 'countingEnded'
         milestone: number
@@ -59,7 +61,7 @@
     }
 </script>
 
-<Pane classes="p-6 h-fit">
+<Pane classes="p-6 h-fit {classes}">
     <Text smaller classes="mb-5">
         {localize('views.governance.details.proposalInformation.title')}
     </Text>
