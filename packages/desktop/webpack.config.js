@@ -212,7 +212,7 @@ module.exports = [
             static: {
                 directory: path.join(__dirname, 'public'),
                 watch: {
-                    ignored: '**/__storage__/**/*',
+                    ignored: path.resolve(__dirname, 'public/build/__storage__'),
                     usePolling: false,
                 },
             },
