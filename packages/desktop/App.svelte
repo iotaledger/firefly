@@ -45,7 +45,7 @@
         resetRouters,
     } from './lib/routers'
     import { openSettings } from './lib/routers/actions/openSettings'
-    import {downloadNextItemInQueue, nftDownloadQueue} from '@core/nfts'
+    import { downloadNextItemInQueue, nftDownloadQueue } from '@core/nfts'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
