@@ -1,54 +1,51 @@
-<script lang="ts" context="module">
-    import {
-        AdvancedSettingsRoute,
-        AdvancedSettingsRouteNoProfile,
-        GeneralSettingsRoute,
-        GeneralSettingsRouteNoProfile,
-        HelpAndInfoRoute,
-        SecuritySettingsRoute,
-    } from '@core/router'
-
-    export namespace SettingsNavigatorTypes {
-        export type Settings = {
-            general: typeof GeneralSettingsRoute | typeof GeneralSettingsRouteNoProfile
-            security?: typeof SecuritySettingsRoute
-            advanced: typeof AdvancedSettingsRoute | typeof AdvancedSettingsRouteNoProfile
-            helpAndInfo: typeof HelpAndInfoRoute
-        }
-    }
-</script>
-
 <script lang="ts">
-    import { Icon, Text, TextType } from '@ui'
-
-    import { localize } from '@core/i18n'
-
     import { Icon as IconEnum, SETTINGS_ICON_SVG } from '@auxiliary/icon'
+    import { ISetting, isSettingVisible } from '@contexts/settings'
+    import { localize } from '@core/i18n'
+    import { activeProfile, isActiveLedgerProfile } from '@core/profile'
+    import { SettingsRoute, SettingsRouteNoProfile } from '@core/router'
+    import features from '@features/features'
+    import { FontWeight, Icon, Text, TextType } from '@ui'
+    import { SETTINGS } from './settings.constant'
 
-    export let settings: SettingsNavigatorTypes.Settings
-    export let routes: string[]
-    export let route: string
+    export let currentCategory: string
     export let onSettingClick: (..._: any[]) => void
 
-    function changeRoute(setting: string): void {
+    const { loggedIn } = $activeProfile
+    const categories = Object.values($loggedIn ? SettingsRoute : SettingsRouteNoProfile)
+
+    function changeCategory(category: string): void {
         document.getElementById('scroller').scrollTop = 0
-        route = setting
+        currentCategory = category
     }
 
     function getSettingRoutes(): string[] {
-        return Object.values(settings[route])
+        const visibleSettings =
+            (SETTINGS?.[currentCategory] as ISetting[])?.filter((setting) =>
+                isSettingVisible(
+                    setting,
+                    features?.settings?.[currentCategory]?.[setting.childRoute]?.enabled,
+                    $loggedIn,
+                    !$isActiveLedgerProfile,
+                    $isActiveLedgerProfile
+                )
+            ) ?? []
+        return visibleSettings.map((setting) => setting.childRoute)
     }
 </script>
 
 <settings-navigator class="flex flex-col w-1/3 h-full justify-start items-start">
-    {#each routes as setting}
+    <Text type={TextType.h2} classes="mb-7">
+        {localize('views.settings.settings')}
+    </Text>
+    {#each categories as category}
         <setting-container class="flex flex-col items-start">
             <button
                 type="button"
-                on:click={() => changeRoute(setting)}
+                on:click={() => changeCategory(category)}
                 class="mb-2 pl-7 relative text-left flex flex-row items-center"
             >
-                {#if route === setting}
+                {#if currentCategory === category}
                     <Icon
                         width="16"
                         height="16"
@@ -56,11 +53,11 @@
                         classes="text-blue-500 absolute left-1 text-xl"
                     />
                 {/if}
-                <Text type={TextType.p}>
-                    {localize(`views.settings.${setting}.title`)}
+                <Text type={TextType.h5} fontWeight={FontWeight.medium}>
+                    {localize(`views.settings.${category}.title`)}
                 </Text>
             </button>
-            {#if route === setting}
+            {#if currentCategory === category}
                 {@const settingRoutes = getSettingRoutes()}
                 {#each settingRoutes as setting, i}
                     {@const isLast = settingRoutes.length - 1 === i}

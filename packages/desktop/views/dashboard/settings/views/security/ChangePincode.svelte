@@ -1,128 +1,146 @@
 <script lang="ts">
-    import { get } from 'svelte/store'
-    import { Button, PinInput, Spinner, Text, HTMLButtonType, ButtonSize } from 'shared/components'
+    import { showAppNotification } from '@auxiliary/notification'
+    import { Platform } from '@core/app'
     import { localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
-    import { Platform } from '@core/app'
     import { PIN_LENGTH } from '@core/utils'
+    import { Button, ButtonSize, HTMLButtonType, PinInput, Text, TextType } from 'shared/components'
+    import { get } from 'svelte/store'
 
-    let currentPincode = ''
-    let newPincode = ''
-    let confirmedPincode = ''
-    let currentPincodeError = ''
-    let newPincodeError = ''
+    let currentPincode: string = ''
+    let newPincode: string = ''
+    let confirmedPincode: string = ''
+    let currentPincodeError: string = ''
+    let newPincodeError: string = ''
     let confirmationPincodeError = ''
-    let pinCodeBusy = false
-    let pinCodeMessage = ''
+    let busy: boolean = false
 
-    function changePincode(): void {
-        if (currentPincode && newPincode && confirmedPincode) {
-            reset()
+    $: currentPincode, newPincode, confirmedPincode, resetErrors()
 
-            if (newPincode.length !== PIN_LENGTH) {
-                newPincodeError = localize('error.pincode.length', {
-                    values: {
-                        length: PIN_LENGTH,
-                    },
-                })
-            } else if (newPincode !== confirmedPincode) {
-                confirmationPincodeError = localize('error.pincode.match')
-            } else {
-                pinCodeBusy = true
-                pinCodeMessage = localize('general.pinCodeUpdating')
-
-                const _clear: (err?: unknown) => void = (err?) => {
-                    setTimeout(() => {
-                        pinCodeMessage = ''
-                    }, 2000)
-                    pinCodeBusy = false
-                    if (err) {
-                        currentPincodeError = err
-                        pinCodeMessage = localize('general.pinCodeFailed')
-                    } else {
-                        pinCodeMessage = localize('general.pinCodeSuccess')
-                    }
-                }
-
-                Platform.PincodeManager.verify(get(activeProfile)?.id, currentPincode)
-                    .then((valid) => {
-                        if (valid) {
-                            // return new Promise<void>((resolve, reject) => {
-                            //     api.setStoragePassword(newPincode, {
-                            //         onSuccess() {
-                            //             Platform.PincodeManager.set(get(activeProfile)?.id, newPincode)
-                            //                 .then(() => {
-                            //                     currentPincode = ''
-                            //                     newPincode = ''
-                            //                     confirmedPincode = ''
-                            //                     _clear()
-                            //                     resolve()
-                            //                 })
-                            //                 .catch(reject)
-                            //         },
-                            //         onError(err) {
-                            //             _clear(localize(err.error))
-                            //         },
-                            //     })
-                            // })
-                        } else {
-                            _clear(localize('error.pincode.incorrect'))
-                        }
-                    })
-                    .catch((err) => {
-                        _clear(err.message)
-                    })
-            }
-        }
-    }
-
-    function reset(): void {
+    function resetErrors(): void {
         currentPincodeError = ''
         newPincodeError = ''
         confirmationPincodeError = ''
-        pinCodeBusy = false
-        pinCodeMessage = ''
+    }
+
+    function resetInputs(): void {
+        currentPincode = ''
+        newPincode = ''
+        confirmedPincode = ''
+    }
+
+    function resetForm(): void {
+        resetInputs()
+        resetErrors()
+    }
+
+    function onSuccess(_message: string): void {
+        busy = false
+        showAppNotification({
+            type: 'success',
+            alert: true,
+            message: _message,
+        })
+        resetForm()
+    }
+
+    function onError(_message: string): void {
+        busy = false
+        showAppNotification({
+            type: 'error',
+            alert: true,
+            message: _message,
+        })
+    }
+
+    async function validateFormAndSetErrors(): Promise<boolean> {
+        try {
+            if (currentPincode && newPincode && confirmedPincode) {
+                if (newPincode.length !== PIN_LENGTH) {
+                    newPincodeError = localize('error.pincode.length', {
+                        values: {
+                            length: PIN_LENGTH,
+                        },
+                    })
+                    return false
+                } else if (newPincode !== confirmedPincode) {
+                    confirmationPincodeError = localize('error.pincode.match')
+                    return false
+                } else if (!(await Platform.PincodeManager.verify(get(activeProfile)?.id, currentPincode))) {
+                    currentPincodeError = localize('error.pincode.incorrect')
+                    return false
+                } else {
+                    return true
+                }
+            } else {
+                return false
+            }
+        } catch (err) {
+            return false
+        }
+    }
+
+    async function changePincode(): Promise<void> {
+        try {
+            if (await validateFormAndSetErrors()) {
+                busy = true
+                await Platform.PincodeManager.set(get(activeProfile)?.id, newPincode)
+                onSuccess(localize('general.pinCodeSuccess'))
+            } else {
+                onError(localize('general.pinCodeFailed'))
+            }
+        } catch {
+            onError(localize('general.pinCodeFailed'))
+        }
     }
 </script>
 
 <form on:submit|preventDefault={changePincode} id="pincode-change-form">
-    <Text type="h4" classes="mb-3">{localize('views.settings.changePincode.title')}</Text>
-    <Text type="p" secondary classes="mb-5">{localize('views.settings.changePincode.description')}</Text>
-    <Text type="p" secondary smaller classes="mb-2">{localize('views.settings.changePincode.currentPincode')}</Text>
+    <Text type={TextType.h4} classes="mb-3">{localize('views.settings.changePincode.title')}</Text>
+    <Text type={TextType.p} secondary classes="mb-5">{localize('views.settings.changePincode.description')}</Text>
+    <Text type={TextType.p} secondary smaller classes="mb-2"
+        >{localize('views.settings.changePincode.currentPincode')}</Text
+    >
     <PinInput
         smaller
         error={currentPincodeError}
         classes="mb-4"
         bind:value={currentPincode}
-        disabled={pinCodeBusy}
+        disabled={busy}
         on:submit={changePincode}
     />
-    <Text type="p" secondary smaller classes="mb-2">{localize('views.settings.changePincode.newPincode')}</Text>
+    <Text type={TextType.p} secondary smaller classes="mb-2">{localize('views.settings.changePincode.newPincode')}</Text
+    >
     <PinInput
         smaller
         error={newPincodeError}
         classes="mb-4"
         bind:value={newPincode}
-        disabled={pinCodeBusy}
+        disabled={busy}
         on:submit={changePincode}
     />
-    <Text type="p" secondary smaller classes="mb-2">{localize('views.settings.changePincode.confirmNewPincode')}</Text>
+    <Text type={TextType.p} secondary smaller classes="mb-2"
+        >{localize('views.settings.changePincode.confirmNewPincode')}</Text
+    >
     <PinInput
         smaller
         error={confirmationPincodeError}
         classes="mb-4"
         bind:value={confirmedPincode}
-        disabled={pinCodeBusy}
+        disabled={busy}
         on:submit={changePincode}
     />
     <div class="flex flex-row items-center">
         <Button
             size={ButtonSize.Medium}
             type={HTMLButtonType.Submit}
-            disabled={!currentPincode || !newPincode || !confirmedPincode || pinCodeBusy}
+            disabled={busy ||
+                currentPincode?.length < PIN_LENGTH ||
+                newPincode?.length < PIN_LENGTH ||
+                confirmedPincode?.length < PIN_LENGTH}
+            isBusy={busy}
         >
             {localize('views.settings.changePincode.action')}
         </Button>
-        <Spinner busy={pinCodeBusy} message={pinCodeMessage} classes="ml-2" />
     </div>
 </form>
