@@ -1,7 +1,7 @@
 export interface IPersistedNftData {
     contentType?: string
-    contentLength?: number
+    contentLength?: string
     responseCode?: number
     downloadUrl?: string
-    error?: unknown
+    error?: { message: string }
 }

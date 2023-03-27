@@ -25,15 +25,14 @@ export async function validateNftMedia(
             downloadMetadata.error = { type: DownloadErrorType.UnsupportedUrl }
         } else {
             let downloadUrl = nft.composedUrl
-            let contentLength, contentType
+            let contentLength: string
+            let contentType: string
 
             if (persistedNftData) {
                 if (persistedNftData.error) {
                     throw persistedNftData.error
                 }
-                downloadUrl = persistedNftData.downloadUrl
-                contentLength = persistedNftData.contentLength
-                contentType = persistedNftData.contentType
+                ({ downloadUrl, contentLength, contentType } = persistedNftData)
             } else {
                 const response = await fetchWithTimeout(downloadUrl, HEAD_FETCH_TIMEOUT_SECONDS, {
                     method: 'HEAD',
