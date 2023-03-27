@@ -882,6 +882,9 @@ caniuse-lite@^1.0.30001449:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001466.tgz#c1e6197c540392e09709ecaa9e3e403428c53375"
   integrity sha512-ewtFBSfWjEmxUgNBSZItFSmVtvk9zkwkl1OfRZlKA8slltRN+/C/tuGVrF9styXkN36Yu3+SeJ1qkXxDEyNZ5w==
 
+capacitor-secure-filesystem-access@./capacitor/plugins/secure-filesystem-access:
+  version "0.0.2"
+
 capacitor-secure-storage-plugin@^0.6.2:
   version "0.6.4"
   resolved "https://registry.yarnpkg.com/capacitor-secure-storage-plugin/-/capacitor-secure-storage-plugin-0.6.4.tgz#282d77f030a2686beca3276836bf97603e78bf07"
