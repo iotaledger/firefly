@@ -1,12 +1,13 @@
 import { Capacitor } from '@capacitor/core'
 import { Device } from '@capacitor/device'
+import { SecureFilesystemAccess } from 'capacitor-secure-filesystem-access'
+
 import { IAppVersionDetails, IPlatform } from '@core/app'
+import features from '@features/features'
 
 import { DeepLinkManager } from './lib/deepLinkManager'
 import { NotificationManager } from './lib/notificationManager'
 import { PincodeManager } from './lib/pincodeManager'
-
-import features from '@features/features'
 
 import { WalletApi } from '@iota/wallet-mobile'
 
@@ -48,10 +49,15 @@ const CapacitorApi: Partial<IPlatform> = {
 
     NotificationManager: NotificationManager,
 
-    // TODO: https://github.com/iotaledger/firefly/issues/5577
-    // TODO: https://github.com/iotaledger/firefly/issues/5578
-    getStrongholdBackupDestination: () => {
-        throw new Error('Function not implemented.')
+    getStrongholdBackupDestination: async (defaultPath) => {
+        // only with folder param the picker needs filename to save,
+        // we pass explicity null on mobile to pick files
+        const type = defaultPath === null ? 'file' : 'folder'
+        const { selected } = await SecureFilesystemAccess.showPicker({
+            type,
+            defaultPath,
+        })
+        return `${selected}`
     },
 
     // TODO: https://github.com/iotaledger/firefly/issues/5577
