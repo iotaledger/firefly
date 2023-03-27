@@ -1,4 +1,4 @@
-import { derived, get } from 'svelte/store'
+import { derived, get, Readable } from 'svelte/store'
 
 import { activeProfile } from '@core/profile'
 import { persistent } from '@core/utils/store'
@@ -6,7 +6,7 @@ import { IPersistedNftData, IPersistedNftStore } from '../interfaces'
 
 export const persistedNfts = persistent<IPersistedNftStore>('persistedNfts', {})
 
-export const persistedNftForActiveProfile = derived(
+export const persistedNftForActiveProfile: Readable<{ [nftId: string]: IPersistedNftData }> = derived(
     [persistedNfts],
     ($persistedNfts) => $persistedNfts[get(activeProfile)?.id]
 )

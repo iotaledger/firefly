@@ -4,6 +4,7 @@ import { BYTES_PER_MEGABYTE } from '../constants'
 import { DownloadErrorType, DownloadWarningType, HttpHeader } from '../enums'
 import { fetchWithTimeout } from './fetchWithTimeout'
 import { NftDownloadMetadata, INft } from '../interfaces'
+import { persistedNftForActiveProfile } from '../stores'
 
 const HEAD_FETCH_TIMEOUT_SECONDS = 3
 
@@ -22,20 +23,32 @@ export async function validateNftMedia(
         } else {
             let downloadUrl = nft.composedUrl
 
-            const response = await fetchWithTimeout(downloadUrl, HEAD_FETCH_TIMEOUT_SECONDS, {
-                method: 'HEAD',
-                cache: 'force-cache',
-            })
-            let headers = response.headers
+            const persistedNftData = get(persistedNftForActiveProfile)?.[nft.id]
+            let contentLength, contentType
+            if (persistedNftData) {
+                if (persistedNftData.error) {
+                    throw persistedNftData.error
+                }
+                contentLength = persistedNftData.contentLength
+                contentType = persistedNftData.contentType
+            } else {
+                const response = await fetchWithTimeout(downloadUrl, HEAD_FETCH_TIMEOUT_SECONDS, {
+                    method: 'HEAD',
+                    cache: 'force-cache',
+                })
+                let headers = response.headers
 
-            const isSoonaverse = nft.parsedMetadata?.issuerName === 'Soonaverse'
-            if (isSoonaverse) {
-                const newUrlAndHeaders = await getUrlAndHeadersFromOldSoonaverseStructure(nft, headers)
-                downloadUrl = newUrlAndHeaders?.url ?? downloadUrl
-                headers = newUrlAndHeaders?.headers ?? headers
+                const isSoonaverse = nft.parsedMetadata?.issuerName === 'Soonaverse'
+                if (isSoonaverse) {
+                    const newUrlAndHeaders = await getUrlAndHeadersFromOldSoonaverseStructure(nft, headers)
+                    downloadUrl = newUrlAndHeaders?.url ?? downloadUrl
+                    headers = newUrlAndHeaders?.headers ?? headers
+                }
+                contentLength = headers.get(HttpHeader.ContentLength)
+                contentType = headers.get(HttpHeader.ContentType)
             }
 
-            const validation = validateFile(nft, headers)
+            const validation = validateFile(nft, contentType, contentLength)
             if (validation?.error || validation?.warning) {
                 downloadMetadata = { ...downloadMetadata, ...validation }
             } else {
@@ -53,14 +66,11 @@ export async function validateNftMedia(
     return { needsDownload: false, downloadMetadata }
 }
 
-function validateFile(nft: INft, headers: Headers): Partial<NftDownloadMetadata> {
+function validateFile(nft: INft, contentType: string, contentLength: string): Partial<NftDownloadMetadata> {
     const MAX_FILE_SIZE_IN_BYTES = (get(activeProfile)?.settings?.maxMediaSizeInMegaBytes ?? 0) * BYTES_PER_MEGABYTE
 
-    const isValidMediaType =
-        headers.get(HttpHeader.ContentType) !== nft.parsedMetadata?.type &&
-        headers.get(HttpHeader.ContentType) !== 'video/mp4'
-    const hasValidFileSize =
-        MAX_FILE_SIZE_IN_BYTES > 0 && Number(headers.get(HttpHeader.ContentLength)) > MAX_FILE_SIZE_IN_BYTES
+    const isValidMediaType = contentType !== nft.parsedMetadata?.type && contentType !== 'video/mp4'
+    const hasValidFileSize = MAX_FILE_SIZE_IN_BYTES > 0 && Number(contentLength) > MAX_FILE_SIZE_IN_BYTES
     if (isValidMediaType) {
         return { error: { type: DownloadErrorType.NotMatchingFileTypes } }
     } else if (hasValidFileSize) {
