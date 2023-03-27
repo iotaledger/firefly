@@ -1,14 +1,14 @@
 export enum SettingsRoute {
-    Init = 'init',
     General = 'general',
+    Profile = 'profile',
+    Network = 'network',
+    Collectibles = 'collectibles',
     Security = 'security',
     Advanced = 'advanced',
     HelpAndInfo = 'helpAndInfo',
 }
 
 export enum SettingsRouteNoProfile {
-    Init = 'init',
     General = 'general',
-    Advanced = 'advanced',
     HelpAndInfo = 'helpAndInfo',
 }
