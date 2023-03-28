@@ -32,6 +32,7 @@ export async function updateStronghold(password: string, isRecovery: boolean = f
     const updateProfile = isRecovery ? updateOnboardingProfile : updateActiveProfile
     updateProfile({ strongholdVersion: STRONGHOLD_VERSION })
 
+    // TODO: This was a try to fix the XCHACHA20-POLY1305 issue by reseting profile manager, but it doesn't work. After the error is fixed in backend side, check if this code is needed.
     get(profileManager) && (await destroyProfileManager())
     if (isRecovery) {
         await initialiseProfileManagerFromOnboardingProfile()
