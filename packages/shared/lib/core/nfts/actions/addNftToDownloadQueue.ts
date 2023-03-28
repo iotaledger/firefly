@@ -1,7 +1,7 @@
-import { updateNftInAllAccountNfts } from '../actions'
+import { updateNftInAllAccountNfts } from '.'
 import { DownloadQueueNftItem, INft, NftDownloadMetadata } from '../interfaces'
 import { addItemsToNftDownloadQueue } from '../stores'
-import { validateNftMedia } from './validateNftMedia'
+import { validateNftMedia } from '../utils/validateNftMedia'
 
 export async function addNftToDownloadQueue(accountIndex: number, nfts: INft[]): Promise<void> {
     const downloadQueuePromises: Promise<DownloadQueueNftItem>[] = []

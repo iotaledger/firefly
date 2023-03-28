@@ -1,3 +1,4 @@
+export * from './addNftToDownloadQueue'
 export * from './addOrUpdateNftInAllAccountNfts'
 export * from './downloadNextNftInQueue'
 export * from './getNftByIdFromAllAccountNfts'
