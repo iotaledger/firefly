@@ -6,21 +6,10 @@
     import { removeDisplayNotification } from '@auxiliary/notification/stores'
 
     import Logo from './Logo.svelte'
+    import { INotificationData } from '@auxiliary/notification'
 
-    type Action = {
-        label: string
-        isPrimary?: boolean
-        onClick?: () => void
-    }
-
-    export let alert: boolean = false
-    export let type: string
-    export let message: string
+    export let toast: INotificationData
     export let classes: string = ''
-    export let subMessage: string = ''
-    export let progress: number = undefined
-    export let actions: Action[] = []
-    export let id: string = ''
     export let showDismiss: boolean = false
 
     const TOAST_STYLE = {
@@ -52,44 +41,45 @@
         },
     }
 
+    $: style = TOAST_STYLE[toast.type]
+
     function onDismissClick(): void {
-        removeDisplayNotification(id)
+        removeDisplayNotification(toast.id)
     }
 </script>
 
-{#if alert}
-    <Alert {type} {message} {id} showDismiss />
+{#if toast.alert}
+    <Alert type={toast.type} message={toast.message} id={toast.id} {showDismiss} />
 {:else}
-    <div class="{classes} flex flex-row items-center bg-{TOAST_STYLE[type].backgroundColor} rounded-lg px-6 py-4">
+    <div class="{classes} flex flex-row items-center bg-{style.backgroundColor} rounded-lg px-6 py-4">
         <div
             style={'width:40px;height:40px'}
-            class="flex flex-shrink-0 justify-center items-center bg-{TOAST_STYLE[type]
-                .iconBackgroundColor} rounded-lg text-{TOAST_STYLE[type].iconColor}"
+            class="flex flex-shrink-0 justify-center items-center bg-{style.iconBackgroundColor} rounded-lg text-{style.iconColor}"
         >
-            {#if TOAST_STYLE[type].logo}
-                <Logo logo={TOAST_STYLE[type].logo} overrideStage="prod" />
+            {#if style.logo}
+                <Logo logo={style.logo} overrideStage="prod" />
             {:else}
-                <Icon icon={TOAST_STYLE[type].icon} />
+                <Icon icon={style.icon} />
             {/if}
         </div>
         <div class="flex flex-auto flex-col px-4">
-            <span class="flex text-12 text-{TOAST_STYLE[type].messageColor}">{message}</span>
-            {#if progress !== undefined}
-                <span class="block bg-{TOAST_STYLE[type].subMessageColor}" style={'width:100%;height:2px;margin:4px 0'}>
-                    <span class="block bg-{TOAST_STYLE[type].messageColor}" style={`width:${progress}%;height:2px`} />
+            <span class="flex text-12 text-{style.messageColor}">{toast.message}</span>
+            {#if toast.progress !== undefined}
+                <span class="block bg-{style.subMessageColor}" style={'width:100%;height:2px;margin:4px 0'}>
+                    <span class="block bg-{style.messageColor}" style={`width:${toast.progress}%;height:2px`} />
                 </span>
             {/if}
-            {#if subMessage}<span class="flex text-11 text-{TOAST_STYLE[type].subMessageColor}">{subMessage}</span>{/if}
+            {#if toast.subMessage}<span class="flex text-11 text-{style.subMessageColor}">{toast.subMessage}</span>{/if}
         </div>
-        {#if actions.length > 0}
+        {#if toast.actions.length > 0}
             <div class="flex flex-col" style="min-width:90px">
-                {#each actions as action}
+                {#each toast.actions as action, actionIndex}
                     <button
                         class="cursor-pointer text-center rounded-lg font-bold text-11 {action.isPrimary
                             ? 'bg-white'
-                            : ''} text-{action.isPrimary ? 'black' : TOAST_STYLE[type].buttonSecondary}"
+                            : ''} text-{action.isPrimary ? 'black' : style.buttonSecondary}"
                         style={'min-width:90px;min-height:32px'}
-                        on:click={() => action.onClick()}
+                        on:click={() => action.callback(toast, actionIndex)}
                     >
                         {action.label}
                     </button>
@@ -100,7 +90,7 @@
                 type="button"
                 on:click={onDismissClick}
                 class="dismiss-min-wh cursor-pointer text-center rounded-lg
-                font-bold text-11 text-{TOAST_STYLE[type].messageColor}"
+                font-bold text-11 text-{style.messageColor}"
             >
                 {localize('actions.dismiss')}
             </button>

@@ -10,18 +10,18 @@
     // TODO: Move this to dashboard or onload logic
     // $: healthStatus !== 2 && showNetworkIssuesNotification()
 
-    function onClick(): void {
+    function openModalAndUpdateNodeInfo(): void {
         modal?.open()
         getAndUpdateNodeInfo()
     }
 </script>
 
 <div class="flex flex-col items-center relative">
-    <button on:click={onClick}>
+    <button on:click={openModalAndUpdateNodeInfo}>
         <Icon width="48" height="48" icon={$activeProfile?.networkProtocol} classes="dark:text-white" />
     </button>
     {#if healthStatus !== 2}
-        <div class="absolute -bottom-7" on:mouseenter={onClick} on:mouseleave={modal?.close}>
+        <div class="absolute -bottom-7" on:mouseenter={openModalAndUpdateNodeInfo} on:mouseleave={modal?.close}>
             <Icon width="18" icon="warning-filled" classes="text-{NETWORK_HEALTH_COLORS[healthStatus]}-500" />
         </div>
     {/if}

@@ -19,11 +19,11 @@
         return date?.toLocaleString('sv')
     }
 
-    function handleCancelClick(): void {
+    function onCancelClick(): void {
         dispatch('cancel')
     }
 
-    function handleConfirmClick(): void {
+    function onConfirmClick(): void {
         value = new Date(sveltyPickerDate)
         dispatch('confirm')
     }
@@ -43,12 +43,10 @@
         on:change={tooltip?.refreshPosition}
     />
     <div class="flex flex-row justify-center items-center space-x-4 w-full">
-        <Button size={ButtonSize.Small} outline onClick={handleCancelClick} classes="w-full"
+        <Button size={ButtonSize.Small} outline onClick={onCancelClick} classes="w-full"
             >{localize('actions.cancel')}</Button
         >
-        <Button size={ButtonSize.Small} onClick={handleConfirmClick} classes="w-full"
-            >{localize('actions.confirm')}</Button
-        >
+        <Button size={ButtonSize.Small} onClick={onConfirmClick} classes="w-full">{localize('actions.confirm')}</Button>
     </div>
 </Tooltip>
 

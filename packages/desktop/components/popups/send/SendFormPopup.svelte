@@ -144,7 +144,7 @@
         })
     }
 
-    async function onContinue(): Promise<void> {
+    async function onContinueClick(): Promise<void> {
         const valid = await validate()
         if (valid) {
             setTransactionDetails()
@@ -155,7 +155,7 @@
         }
     }
 
-    function onCancel(): void {
+    function onCancelClick(): void {
         closePopup()
     }
 </script>
@@ -203,10 +203,10 @@
         </optional-inputs>
     </send-form-inputs>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" outline onClick={onCancel}>
+        <Button classes="w-full" outline onClick={onCancelClick}>
             {localize('actions.cancel')}
         </Button>
-        <Button classes="w-full" onClick={onContinue}>
+        <Button classes="w-full" onClick={onContinueClick}>
             {localize('actions.next')}
         </Button>
     </popup-buttons>

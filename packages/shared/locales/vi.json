@@ -378,7 +378,7 @@
                 "noNodes": "Không có nút, không thể kết nối với mạng",
                 "noNodesAuto": "Không có nút nào, lựa chọn tự động sẽ được sử dụng để thay thế"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Bằng chứng công việc (PoW)",
                 "description": "Hoàn thành bằng chứng công việc cục bộ trên thiết bị của bạn hoặc thuê ngoài nút"
             },
@@ -436,7 +436,8 @@
         },
         "login": {
             "pleaseWait": "Vui lòng đợi {time, plural, one {# giây} other {# giây}}",
-            "incorrectAttempts": "{attempts, plural, one {# lần thử sai} other {# lần thử sai}}"
+            "incorrectAttempts": "{attempts, plural, one {# lần thử sai} other {# lần thử sai}}",
+            "hintStronghold": "Your Stronghold's version is out of date. Please log in to update your Stronghold."
         },
         "loadProfile": {
             "loginSteps": {
@@ -586,8 +587,8 @@
                 "title": "Proposals",
                 "voted": "Voted",
                 "successEdit": "Proposal successfully edited",
-                "successAdd": "Proposal successfully added",
-                "successAddAll": "Proposal successfully added to all accounts",
+                "successAdd": "{numberOfProposals, select, one {Proposal} other {Proposals}} successfully added",
+                "successAddAll": "{numberOfProposals, select, one {Proposal} other {Proposals}} successfully added to all accounts",
                 "successRemove": "Proposal successfully removed",
                 "emptyTitle": "No proposals"
             },
@@ -614,6 +615,23 @@
                 },
                 "fetching": "Fetching proposal data",
                 "hintVote": "You can not vote on a proposal that is in the announcement phase, voting will open in {time}."
+            }
+        },
+        "updateStronghold": {
+            "update": {
+                "title": "Update Stronghold",
+                "loginBody": "Your Stronghold's version is out of date. Provide your password to update Stronghold.",
+                "recoveryBody": "The imported Stronghold’s version is out of date, to continue we will need to update the stronghold to the latest version."
+            },
+            "updateBackup": {
+                "loginTitle": "Stronghold updated",
+                "loginBody": "It's all good now - you're running the latest Stronghold version",
+                "recoveryTitle": "Stronghold is successfully recovered and updated",
+                "recoveryBody": "You can now continue setting up your wallet",
+                "hint": "We highly recommend to delete all previous Stronghold backup files and save a new one"
+            },
+            "changePassword": {
+                "hint": "Your Stronghold was out of date and has been updated. We recommend that you change your Stronghold password."
             }
         }
     },
@@ -698,14 +716,18 @@
         "qr": {
             "title": "Mã QR của bạn"
         },
-        "version": {
-            "title": "Phiên bản hiện tại: {version}",
-            "upToDateTitle": "Firefly đã cập nhật mới nhất",
-            "upToDateDescription": "Bạn đang chạy trên phiên bản Firefly mới nhất và an toàn nhất.",
-            "updateAvailable": "Phiên bản cập nhật Firefly đang hiện hữu",
-            "updateDetails": "Phiên bản {version} - {date}",
-            "noAutoUpdate": "Tự động cập nhật được vô hiệu hóa trong phiên bản Windows này, vui lòng truy cập https://firefly.iota.org để tải bản cập nhật.",
-            "preReleaseDescription": "You are running a pre-release version of Firefly. Updates are disabled."
+        "appUpdate": {
+            "title": "Check for updates",
+            "installedVersion": "Installed version",
+            "newVerion": "New version",
+            "stage": "Stage",
+            "prod": "Production",
+            "alpha": "Alpha",
+            "beta": "Beta",
+            "releasedAt": "Released at",
+            "updateAvailable": "Update is available",
+            "updatesDisabled": "There are updates available, but in-app upgrade is disabled for your operating system.",
+            "latestInstalled": "You are running the latest and safest version"
         },
         "backupStronghold": {
             "title": "Backup your stronghold file",
@@ -721,7 +743,8 @@
         },
         "deleteAccount": {
             "title": "Xóa {name}?",
-            "body": "Ví này không có lịch sử giao dịch. Nó có thể được xóa một cách an toàn.",
+            "body": "Are you sure you want to delete this wallet?",
+            "hint": "Note: once deleted, you can restore this wallet by using the \"Wallet Finder\" in the settings.",
             "typePassword": "Nhập mật khẩu ví của bạn để xác nhận.",
             "hideAccount": "Xóa ví",
             "errorTitle": "Không thể xóa {name}",
@@ -1175,6 +1198,7 @@
         "send": "Gửi",
         "receive": "Nhận",
         "create": "Tạo mới",
+        "updateAndContinue": "Update and continue",
         "beginTransfer": "Bắt đầu chuyển",
         "tryAgain": "Thử lại",
         "visitDiscord": "Thăm Discord",
@@ -1230,10 +1254,11 @@
         "skip": "Bỏ qua",
         "reset": "Thiết lập lại",
         "downloadRecoveryKit": "Lưu mẫu bộ phục hồi",
-        "skipBackup": "Bỏ qua tệp sao lưu",
+        "skipBackup": "Skip wallet backup",
         "finishSetup": "Hoàn tất cài đặt",
         "readDocumentation": "Đọc tài liệu",
         "visitFaq": "Truy cập câu hỏi thường gặp",
+        "viewDownloads": "View downloads",
         "viewStatus": "Xem trạng thái",
         "viewBalanceBreakdown": "View balance breakdown",
         "showHiddenAccounts": "Hiển thị các ví ẩn",
@@ -1287,9 +1312,10 @@
         "vote": "Vote",
         "addProposal": "Add proposal",
         "removeProposal": "Remove proposal",
-        "changeNode": "Change Node",
+        "changeNode": "Change node",
         "stopVoting": "Stop voting",
-        "revote": "Revote"
+        "revote": "Revote",
+        "skipAndKeep": "Skip and keep old password"
     },
     "general": {
         "recipient": "Recipient",
@@ -1700,6 +1726,7 @@
             "invalidFormat": "The deep link you followed is invalid",
             "invalidAmount": "The amount in deep link is not an integer number {amount}",
             "invalidSurplus": "The surplus in deep link is not a number {surplus}",
+            "surplusNotSupported": "The surplus is only supported for native tokens",
             "governance": {
                 "unrecognizedOperation": "Unrecognized Governance operation: {operation}"
             },
@@ -1752,7 +1779,7 @@
             "error": "An error occurred while claiming. Try again."
         },
         "vote": {
-            "success": "Votes successfully casted"
+            "success": "Votes successfully cast"
         },
         "stopVoting": {
             "success": "Voting successfully stopped"
@@ -1783,7 +1810,8 @@
             "similar": "Đây tương tự như một mật khẩu thường gặp.",
             "word": "Một từ dễ đoán.",
             "incorrect": "Mật khẩu của bạn không đúng.",
-            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}.",
+            "sameAsOld": "Your new password must be different from your old password."
         },
         "pincode": {
             "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
@@ -2066,7 +2094,18 @@
             "quantity": "Optional parameter: The quantity of copies minted with this metadata."
         },
         "governance": {
-            "removeProposalWarning": "You must stop voting for this proposal before removing it."
+            "removeProposalWarning": "You must stop voting for this proposal before removing it.",
+            "outdatedNode": {
+                "title": "Outdated node URL",
+                "body": "The node URL for this proposal is outdated. Please update it to access the latest voting results."
+            },
+            "resultsNotAvailable": {
+                "title": "Results not available",
+                "body": "The results are no longer available on this proposal's corresponding node. Please update it to access the results."
+            }
+        },
+        "updateStronghold": {
+            "profileBadge": "Your Stronghold is out of date. Log in to update Stronghold."
         }
     },
     "exports": {
@@ -2191,6 +2230,14 @@
                 "Pending": "revoting",
                 "Confirmed": "revote",
                 "Conflicting": "failed to revote"
+            },
+            "proposalStatus": {
+                "upcoming": "Announcement",
+                "commencing": "Voting open",
+                "holding": "Counting",
+                "ended": "Closed",
+                "nodeOutdated": "Outdated node URL",
+                "resultsNotAvailable": "Results not available"
             }
         },
         "alias": {
@@ -2201,13 +2248,7 @@
             }
         },
         "locked": "locked",
-        "smartContract": "smart contract",
-        "proposalStatus": {
-            "upcoming": "Announcement",
-            "commencing": "Voting open",
-            "holding": "Counting",
-            "ended": "Closed"
-        }
+        "smartContract": "smart contract"
     },
     "menus": {
         "expirationTimePicker": {

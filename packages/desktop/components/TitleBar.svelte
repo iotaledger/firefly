@@ -42,14 +42,14 @@
         <!-- We need to add this element to allow fix the windows resize area issue due to -webkit-app-region: drag -->
         <windows-resize-area />
         <button
-            on:click={() => Platform.popupMenu()}
+            on:click={Platform.popupMenu}
             class="flex justify-center items-center p-3 text-gray-500 dark:text-gray-100 w-20"
             type="button"
         >
             <Icon icon={IconEnum.Hamburger} />
         </button>
         <window-control-buttons class="flex flex-row justify-end space-x-4 w-36 pr-6">
-            <button on:click={() => Platform.minimize()} class="p-2 text-gray-500 dark:text-gray-100" type="button">
+            <button on:click={Platform.minimize} class="p-2 text-gray-500 dark:text-gray-100" type="button">
                 <Icon icon={IconEnum.Minimize} />
             </button>
             <button
@@ -63,7 +63,7 @@
                     <Icon icon={IconEnum.Maximize} />
                 {/if}
             </button>
-            <button on:click={() => Platform.close()} class="p-2 text-gray-500 dark:text-gray-100" type="button">
+            <button on:click={Platform.close} class="p-2 text-gray-500 dark:text-gray-100" type="button">
                 <Icon icon={IconEnum.CloseThin} />
             </button>
         </window-control-buttons>

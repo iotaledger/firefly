@@ -24,6 +24,8 @@
         platform,
         Platform,
         PlatformOption,
+        registerAppEvents,
+        setAppVersionDetails,
         setPlatform,
     } from '@core/app'
     import { showAppNotification } from '@auxiliary/notification'
@@ -48,11 +50,16 @@
 
     const { loggedIn, hasLoadedAccounts } = $activeProfile
 
+    $: if ($activeProfile && !$loggedIn) {
+        closePopup(true)
+    }
+
     async function handleCrashReporting(sendCrashReports: boolean): Promise<void> {
         await Platform.updateAppSettings({ sendCrashReports })
     }
 
     $: void handleCrashReporting($appSettings.sendCrashReports)
+
     $: $appSettings.darkMode
         ? document.body.classList.add('scheme-dark')
         : document.body.classList.remove('scheme-dark')
@@ -109,12 +116,15 @@
 
         // await pollMarketData()
 
-        /* eslint-disable no-undef */
-        // @ts-expect-error: This value is replaced by Webpack DefinePlugin
-        // if (!devMode && get(appStage) === AppStage.PROD) {
-        //     await setAppVersionDetails()
-        //     pollCheckForAppUpdate()
-        // }
+        // Used for auto updates
+        if (process.env.NODE_ENV !== 'development') {
+            registerAppEvents()
+            await setAppVersionDetails()
+            if ($appVersionDetails.upToDate === false) {
+                openPopup({ id: PopupId.CheckForUpdates })
+            }
+        }
+
         Platform.onEvent('menu-navigate-wallet', () => {
             $dashboardRouter.goTo(DashboardRoute.Wallet)
         })
@@ -128,7 +138,7 @@
         })
         Platform.onEvent('menu-check-for-update', () => {
             openPopup({
-                id: PopupId.Version,
+                id: PopupId.CheckForUpdates,
                 props: {
                     currentVersion: $appVersionDetails.currentVersion,
                 },
@@ -140,16 +150,16 @@
         Platform.onEvent('menu-diagnostics', () => {
             openPopup({ id: PopupId.Diagnostics })
         })
-        Platform.onEvent('menu-create-developer-profile', () => {
-            void initialiseOnboardingFlow({
+        Platform.onEvent('menu-create-developer-profile', async () => {
+            await initialiseOnboardingFlow({
                 isDeveloperProfile: true,
                 networkProtocol: NetworkProtocol.Shimmer,
             })
             $routerManager.goToAppContext(AppContext.Onboarding)
             $onboardingRouter.goTo(OnboardingRoute.NetworkSetup)
         })
-        Platform.onEvent('menu-create-normal-profile', () => {
-            void initialiseOnboardingFlow({
+        Platform.onEvent('menu-create-normal-profile', async () => {
+            await initialiseOnboardingFlow({
                 isDeveloperProfile: false,
                 networkProtocol: NetworkProtocol.Shimmer,
                 networkType: NetworkType.Mainnet,

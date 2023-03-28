@@ -1,6 +1,16 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { Button, Dropdown, Error, FontWeight, OptionalInput, Text, TextInput, TooltipIcon } from 'shared/components'
+    import {
+        Button,
+        Dropdown,
+        Error,
+        FontWeight,
+        OptionalInput,
+        Text,
+        TextInput,
+        TextType,
+        TooltipIcon,
+    } from 'shared/components'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { BaseError } from '@core/error/classes'
     import { handleError } from '@core/error/handlers/handleError'
@@ -85,11 +95,11 @@
             value: type as MimeType,
         }))
 
-    function handleCancel(): void {
+    function onCancelClick(): void {
         closePopup()
     }
 
-    function handleContinue(): void {
+    function onContinueClick(): void {
         resetErrors()
         const valid = validate()
         if (valid) {
@@ -101,7 +111,7 @@
         }
     }
 
-    function handleSelectNftType(item: { label: MimeType; value: MimeType }): void {
+    function onSelectNftTypeClick(item: { label: MimeType; value: MimeType }): void {
         type = item.value
     }
 
@@ -163,6 +173,13 @@
             return
         }
 
+        const isObject = typeof royalties === 'object' && !Array.isArray(royalties) && royalties !== null
+
+        if (!isObject) {
+            optionalInputs.royalties.error = localize('popups.mintNftForm.errors.royaltiesMustBeObject')
+            return
+        }
+
         try {
             Object.keys(royalties).forEach((key) => validateBech32Address($networkHrp, key))
         } catch (err) {
@@ -172,8 +189,8 @@
             return
         }
 
-        const isValuesValid = Object.values(royalties).every((value) => value >= 0 && value <= 1)
-        if (!isValuesValid) {
+        const areValuesValid = Object.values(royalties).every((value) => value >= 0 && value <= 1)
+        if (!areValuesValid) {
             optionalInputs.royalties.error = localize('popups.mintNftForm.errors.invalidRoyaltyValue')
             return
         }
@@ -253,7 +270,7 @@
 </script>
 
 <div class="space-y-6">
-    <Text type="h4" fontSize="18" lineHeight="6" fontWeight={FontWeight.semibold}>
+    <Text type={TextType.h4} fontSize="18" lineHeight="6" fontWeight={FontWeight.semibold}>
         {localize('popups.mintNftForm.title')}
     </Text>
 
@@ -261,7 +278,7 @@
         <Dropdown
             bind:value={type}
             bind:error={typeError}
-            onSelect={handleSelectNftType}
+            onSelect={onSelectNftTypeClick}
             label={localize('general.type')}
             placeholder={localize('general.type')}
             items={nftTypeOptions}
@@ -300,7 +317,7 @@
                     isInteger={optionalInputs[key]?.isInteger}
                     label={localize(`general.${key}`)}
                     description={localize(`tooltips.mintNftForm.${key}`)}
-                    fontSize="14"
+                    fontSize={14}
                 />
             {/each}
         </optional-inputs>
@@ -309,10 +326,10 @@
         {/if}
     </popup-inputs>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button outline classes="w-full" onClick={handleCancel}>
+        <Button outline classes="w-full" onClick={onCancelClick}>
             {localize('actions.cancel')}
         </Button>
-        <Button classes="w-full" onClick={handleContinue}>
+        <Button classes="w-full" onClick={onContinueClick}>
             {localize('actions.continue')}
         </Button>
     </popup-buttons>

@@ -1,30 +1,31 @@
 <script lang="ts">
-    import {
-        Button,
-        KeyValueBox,
-        Pane,
-        ProposalDetailsButton,
-        ProposalQuestion,
-        ProposalStatusPill,
-        Text,
-        TextType,
-        TextHint,
-        MarkdownBlock,
-    } from '@ui'
-    import { ProposalInformationPane } from '@components'
-    import { onMount, onDestroy } from 'svelte'
     import { VotingEventPayload, ParticipationEventType, TrackedParticipationOverview } from '@iota/wallet/out/types'
-    import { localize } from '@core/i18n'
-    import { openPopup } from '@auxiliary/popup/actions'
+
+    import { onMount, onDestroy } from 'svelte'
+
+    import { Button, KeyValueBox, MarkdownBlock, Pane, ProposalStatusPill, Text, TextHint, TextType } from '@ui'
+    import { ProposalDetailsButton, ProposalInformationPane, ProposalQuestion } from '@components'
+
     import { selectedAccount } from '@core/account/stores'
+    import { handleError } from '@core/error/handlers'
+    import { localize } from '@core/i18n'
+    import { networkStatus } from '@core/network/stores'
+    import { getBestTimeDuration, milestoneToDate } from '@core/utils'
+    import { visibleSelectedAccountAssets } from '@core/wallet/stores'
+    import { formatTokenAmountBestMatch } from '@core/wallet/utils'
+
     import { getVotingEvent } from '@contexts/governance/actions'
+    import {
+        clearParticipationEventStatusPoll,
+        pollParticipationEventStatus,
+    } from '@contexts/governance/actions/pollParticipationEventStatus'
     import { ABSTAIN_VOTE_VALUE } from '@contexts/governance/constants'
     import { ProposalStatus } from '@contexts/governance/enums'
     import {
-        selectedProposal,
+        clearSelectedParticipationEventStatus,
         participationOverviewForSelectedAccount,
         selectedParticipationEventStatus,
-        clearSelectedParticipationEventStatus,
+        selectedProposal,
         updateParticipationOverviewForEventId,
     } from '@contexts/governance/stores'
     import {
@@ -33,16 +34,8 @@
         isProposalVotable,
         isVotingForSelectedProposal,
     } from '@contexts/governance/utils'
-    import { getBestTimeDuration, milestoneToDate } from '@core/utils'
-    import { networkStatus } from '@core/network/stores'
-    import { formatTokenAmountBestMatch } from '@core/wallet/utils'
-    import { visibleSelectedAccountAssets } from '@core/wallet/stores'
-    import { handleError } from '@core/error/handlers'
-    import {
-        clearParticipationEventStatusPoll,
-        pollParticipationEventStatus,
-    } from '@contexts/governance/actions/pollParticipationEventStatus'
     import { PopupId } from '@auxiliary/popup'
+    import { openPopup } from '@auxiliary/popup/actions'
 
     const { metadata } = $visibleSelectedAccountAssets?.baseCoin
 
@@ -56,6 +49,7 @@
     let isVotingForProposal: boolean = false
     let statusLoaded: boolean = false
     let overviewLoaded: boolean = false
+    let openedQuestionIndex: number = -1
 
     $: selectedProposalOverview = $participationOverviewForSelectedAccount?.participations?.[$selectedProposal?.id]
     $: trackedParticipations = Object.values(selectedProposalOverview ?? {})
@@ -156,8 +150,6 @@
         votedAnswerValues = lastActiveOverview?.answers ?? []
     }
 
-    let openedQuestionIndex = 0
-
     function onQuestionClick(questionIndex: number): void {
         openedQuestionIndex = questionIndex === openedQuestionIndex ? null : questionIndex
     }
@@ -192,6 +184,10 @@
     }
 
     function getTextHintString(): string {
+        if (!$selectedProposal) {
+            return ''
+        }
+
         const millis =
             milestoneToDate(
                 $networkStatus.currentMilestone,
@@ -207,6 +203,7 @@
         updateParticipationOverviewForEventId($selectedProposal?.id).then(() => (overviewLoaded = true))
         await setVotingEventPayload($selectedProposal?.id)
         await updateIsVoting()
+        openedQuestionIndex = votingPayload?.questions.length > 1 ? -1 : 0
         hasMounted = true
     })
 
@@ -216,23 +213,21 @@
     })
 </script>
 
-<div class="w-full h-full flex flex-nowrap p-8 relative flex-1 space-x-4 bg-gray-50 dark:bg-gray-900">
+<proposal-details class="w-full h-full flex flex-nowrap p-8 relative flex-1 space-x-4 bg-gray-50 dark:bg-gray-900">
     <div class="w-2/5 flex flex-col space-y-4">
-        <Pane classes="p-6 flex flex-col h-fit">
+        <Pane classes="p-6 flex flex-col h-fit overflow-hidden">
             <header-container class="flex justify-between items-center mb-4">
-                <ProposalStatusPill status={$selectedProposal?.status} />
+                <ProposalStatusPill proposal={$selectedProposal} />
                 <ProposalDetailsButton proposal={$selectedProposal} />
             </header-container>
-            <div class="flex flex-1 flex-col justify-between">
+            <div class="flex flex-1 flex-col space-y-4 justify-between scrollable-y">
                 <Text type={TextType.h2}>{$selectedProposal?.title}</Text>
-                <div class="mt-4 max-h-40 overflow-hidden">
-                    {#if $selectedProposal?.additionalInfo}
-                        <MarkdownBlock text={$selectedProposal?.additionalInfo} />
-                    {/if}
-                </div>
+                {#if $selectedProposal?.additionalInfo}
+                    <MarkdownBlock text={$selectedProposal?.additionalInfo} />
+                {/if}
             </div>
         </Pane>
-        <Pane classes="p-6 h-fit">
+        <Pane classes="p-6 h-fit flex-shrink-0">
             <Text smaller classes="mb-5">
                 {localize('views.governance.details.yourVote.title')}
             </Text>
@@ -252,7 +247,7 @@
                 </li>
             </ul>
         </Pane>
-        <ProposalInformationPane />
+        <ProposalInformationPane classes="flex-shrink-0" />
     </div>
     <Pane classes="w-3/5 h-full p-6 pr-3 flex flex-col justify-between">
         <proposal-questions
@@ -298,4 +293,4 @@
             </buttons-container>
         {/if}
     </Pane>
-</div>
+</proposal-details>

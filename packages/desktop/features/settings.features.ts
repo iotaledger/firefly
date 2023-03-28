@@ -8,69 +8,81 @@ const settingsFeatures = {
         language: {
             enabled: true,
         },
-        currency: {
-            enabled: true,
-        },
         notifications: {
             enabled: true,
         },
-        networkStatus: {
-            enabled: true,
-        },
-        changeProfileName: {
-            enabled: true,
-        },
-    },
-    security: {
-        enabled: true,
-        exportStronghold: {
-            enabled: true,
-        },
-        appLock: {
-            enabled: true,
-        },
-        changePassword: {
-            enabled: true,
-        },
-        changePincode: {
-            enabled: false,
-        },
-        deleteProfile: {
-            enabled: true,
-        },
-        maxMediaSize: {
-            enabled: true,
-        },
-    },
-    advanced: {
-        enabled: true,
-        networkConfiguration: {
+        crashReporting: {
             enabled: true,
         },
         deepLinks: {
             enabled: true,
         },
+    },
+    profile: {
+        enabled: true,
+        changeProfileName: {
+            enabled: true,
+        },
+        currency: {
+            enabled: true,
+        },
+        deleteProfile: {
+            enabled: true,
+        },
+    },
+    security: {
+        enabled: true,
+        appLock: {
+            enabled: true,
+        },
+        strongholdPasswordTimeout: {
+            enabled: true,
+        },
+        changePincode: {
+            enabled: true,
+        },
+        changePassword: {
+            enabled: true,
+        },
+        exportStronghold: {
+            enabled: true,
+        },
+    },
+    collectibles: {
+        enabled: true,
+        maxMediaSize: {
+            enabled: true,
+        },
+    },
+    network: {
+        enabled: true,
+        networkInformation: {
+            enabled: true,
+        },
+        configureNodeList: {
+            enabled: true,
+        },
+        localProofOfWork: {
+            enabled: true,
+        },
+    },
+    advanced: {
+        enabled: true,
         walletFinder: {
             enabled: true,
         },
         hiddenAccounts: {
             enabled: true,
         },
-        errorLog: {
-            enabled: true,
-        },
-        crashReporting: {
-            enabled: true,
-        },
-        diagnostics: {
-            enabled: true,
-        },
-        migrateLedgerIndex: {
-            enabled: false,
-        },
     },
     helpAndInfo: {
         enabled: true,
+        diagnostics: {
+            enabled: true,
+        },
+        errorLog: {
+            enabled: true,
+        },
         documentation: {
             enabled: true,
         },

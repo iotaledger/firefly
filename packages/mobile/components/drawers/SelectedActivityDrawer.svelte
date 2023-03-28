@@ -16,18 +16,18 @@
 
     export let activityId: string
 
-    $: activity = $selectedAccountActivities.find((_activity) => _activity.id === activityId)
-    $: isTimelocked = activity.asyncData?.asyncStatus === ActivityAsyncStatus.Timelocked
+    $: activity = $selectedAccountActivities.find((_activity) => _activity?.id === activityId)
+    $: isTimelocked = activity?.asyncData?.asyncStatus === ActivityAsyncStatus.Timelocked
     $: isActivityIncomingAndUnclaimed =
-        activity.asyncData &&
-        (activity.direction === ActivityDirection.Incoming ||
-            activity.direction === ActivityDirection.SelfTransaction) &&
-        activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
+        activity?.asyncData &&
+        (activity?.direction === ActivityDirection.Incoming ||
+            activity?.direction === ActivityDirection.SelfTransaction) &&
+        activity?.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
 
-    function onReject(): void {
-        void handleRejectActivity(activity.id)
+    function onRejectClick(): void {
+        void handleRejectActivity(activity?.id)
     }
-    function onClaim(): void {
+    function onClaimClick(): void {
         void handleClaimActivity(activity)
     }
 </script>
@@ -36,30 +36,30 @@
     <activity-content class="flex flex-col space-y-8">
         {#if activity?.type === ActivityType.Basic}
             <BasicActivityDetails {activity} />
-        {:else if activity.type === ActivityType.Foundry}
+        {:else if activity?.type === ActivityType.Foundry}
             <FoundryActivityDetails {activity} />
-        {:else if activity.type === ActivityType.Nft}
+        {:else if activity?.type === ActivityType.Nft}
             <NftActivityDetails {activity} />
-        {:else if activity.type === ActivityType.Alias}
+        {:else if activity?.type === ActivityType.Alias}
             <AliasActivityDetails {activity} />
         {/if}
         <ActivityInformation {activity} />
     </activity-content>
-    {#if !isTimelocked && isActivityIncomingAndUnclaimed && features.dashboard.activity.actions.enabled}
+    {#if !isTimelocked && isActivityIncomingAndUnclaimed && features.dashboard.activity?.actions.enabled}
         <activity-actions class="space-y-4">
             <Button
                 classes="w-full"
-                disabled={activity.asyncData?.isClaiming}
-                onClick={onClaim}
-                isBusy={activity.asyncData?.isClaiming}
+                disabled={activity?.asyncData?.isClaiming}
+                onClick={onClaimClick}
+                isBusy={activity?.asyncData?.isClaiming}
             >
                 {localize('actions.claim')}
             </Button>
             <Button
                 outline
                 classes="w-full"
-                disabled={activity.asyncData?.isClaiming || activity.asyncData?.isRejected}
-                onClick={onReject}
+                disabled={activity?.asyncData?.isClaiming || activity?.asyncData?.isRejected}
+                onClick={onRejectClick}
             >
                 {localize('actions.reject')}
             </Button>

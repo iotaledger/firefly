@@ -16,15 +16,15 @@
     function _closeDrawer(): void {
         closeDrawer(DrawerId.AccountActions)
     }
-    function handleCustomizeAccountClick(): void {
+    function onCustomizeAccountClick(): void {
         openDrawer(DrawerId.CustomizeAccount)
         _closeDrawer()
     }
-    function handleShowAccountClick(): void {
+    function onShowAccountClick(): void {
         updateActiveAccountMetadata($selectedAccount.index, { hidden: false })
         _closeDrawer()
     }
-    function handleHideAccountClick(): void {
+    function onHideAccountClick(): void {
         if ($nonHiddenActiveAccounts.length > 1) {
             updateActiveAccountMetadata($selectedAccount.index, { hidden: true })
             if (!$activeProfile.showHiddenAccounts) {
@@ -35,7 +35,7 @@
             console.error('Not enough accounts visible: ', $nonHiddenActiveAccounts.length)
         }
     }
-    function handleDeleteAccountClick(): void {
+    function onDeleteAccountClick(): void {
         openDrawer(DrawerId.DeleteAccount, {
             title: localize('popups.deleteAccount.title', {
                 values: { name: $selectedAccount?.name },
@@ -43,7 +43,7 @@
         })
         _closeDrawer()
     }
-    function handleBalanceBreakdownClick(): void {
+    function onBalanceBreakdownClick(): void {
         openDrawer(DrawerId.BalanceBreakdown)
         _closeDrawer()
     }
@@ -51,12 +51,12 @@
 
 <div class="flex flex-col space-y-4">
     {#if features?.dashboard?.accountActions?.balanceBreakdown?.enabled}
-        <Button outline onClick={handleBalanceBreakdownClick} icon={Icon.Doc}>
+        <Button outline onClick={onBalanceBreakdownClick} icon={Icon.Doc}>
             {localize('actions.viewBalanceBreakdown')}
         </Button>
     {/if}
     {#if features?.dashboard?.accountActions?.customize?.enabled}
-        <Button outline onClick={handleCustomizeAccountClick} icon={Icon.Customize}>
+        <Button outline onClick={onCustomizeAccountClick} icon={Icon.Customize}>
             {localize('actions.customizeAcount')}
         </Button>
     {/if}
@@ -64,7 +64,7 @@
         <Button
             outline
             disabled={!$selectedAccount.hidden && $nonHiddenActiveAccounts.length <= 1}
-            onClick={() => ($selectedAccount.hidden ? handleShowAccountClick() : handleHideAccountClick())}
+            onClick={() => ($selectedAccount.hidden ? onShowAccountClick() : onHideAccountClick())}
             icon={$selectedAccount.hidden ? Icon.View : Icon.Hide}
         >
             {localize($selectedAccount.hidden ? 'actions.showAccount' : 'actions.hideAccount')}
@@ -76,7 +76,7 @@
             variant={ButtonVariant.Warning}
             icon={Icon.Delete}
             disabled={!$selectedAccount.hidden && $nonHiddenActiveAccounts.length <= 1}
-            onClick={handleDeleteAccountClick}
+            onClick={onDeleteAccountClick}
         >
             {localize('actions.deleteAccount')}
         </Button>

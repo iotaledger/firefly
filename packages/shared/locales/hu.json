@@ -378,7 +378,7 @@
                 "noNodes": "Nincs csomópont, a hálózathoz nem lehet csatlakozni",
                 "noNodesAuto": "Nincs csomópont, automatikus csomópont kiválasztás engedélyezve"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Tranzakcíók hitelesítéséhez szükséges számítás",
                 "description": "Számítás saját eszközön történő elvégzése vagy csomópontra történő kiszervezése"
             },
@@ -436,7 +436,8 @@
         },
         "login": {
             "pleaseWait": "Kérjük várjon {time, plural, one {# másodpercet} other {# másodpercet}}",
-            "incorrectAttempts": "{attempts, plural, one {# hibás próbálkozás} other {# hibás próbálkozás}}"
+            "incorrectAttempts": "{attempts, plural, one {# hibás próbálkozás} other {# hibás próbálkozás}}",
+            "hintStronghold": "Az ön Strongholdjának verziója elavult. Kérjük, jelentkezzen be a Stronghold frissítéséhez."
         },
         "loadProfile": {
             "loginSteps": {
@@ -586,8 +587,8 @@
                 "title": "Javaslatok",
                 "voted": "Szavazott",
                 "successEdit": "Indítvány sikeresen módosítva",
-                "successAdd": "Javaslat sikeresen hozzáadva",
-                "successAddAll": "A javaslat sikeresen hozzáadva az összes fiókhoz",
+                "successAdd": "{numberOfProposals, select, one {Indítvány} other {Indítványok}} sikeresen hozzáadva",
+                "successAddAll": "{numberOfProposals, select, one {Indítvány} other {Indítványok}} sikeresen hozzáadva az összes fiókhoz",
                 "successRemove": "Javaslat sikeresen törölve",
                 "emptyTitle": "Nincsenek javaslatok"
             },
@@ -614,6 +615,23 @@
                 },
                 "fetching": "Javaslattal kapcsolatos adatok letöltése",
                 "hintVote": "Nem lehet szavazni olyan javaslatról, amely még közzétételi szakaszban van, a szavazás kezdete: {time}."
+            }
+        },
+        "updateStronghold": {
+            "update": {
+                "title": "Stronghold frissítése",
+                "loginBody": "Az ön Strongholdjának verziója elavult. Adja meg a jelszavát a Stronghold frissítéséhez.",
+                "recoveryBody": "Az importált Stronghold verziója elavult, a folytatáshoz frissíteni kell a Stronghold legújabb verziójára."
+            },
+            "updateBackup": {
+                "loginTitle": "Stronghold frissítve",
+                "loginBody": "Most már minden rendben - ön a legújabb Stronghold verziót futtatja",
+                "recoveryTitle": "Stronghold sikeresen helyreállítva és frissítve",
+                "recoveryBody": "Most már folytathatja a tárcája beállítását",
+                "hint": "Javasoljuk, hogy törölje az összes korábbi Stronghold biztonsági mentési fájlt, és mentsen egy el újat"
+            },
+            "changePassword": {
+                "hint": "Az ön Stronghold verziója elavult volt, és frissítettük. Javasoljuk, hogy változtassa meg Stronghold-jelszavát."
             }
         }
     },
@@ -698,14 +716,18 @@
         "qr": {
             "title": "QR-kód"
         },
-        "version": {
-            "title": "Jelenlegi verzió: {version}",
-            "upToDateTitle": "Nincs elérhető szoftverfrissítés",
-            "upToDateDescription": "Ön a Firefly legújabb és legbiztonságosabb verzióját használja.",
-            "updateAvailable": "Firefly frissítés elérhető",
-            "updateDetails": "Verzió {version} - {date}",
-            "noAutoUpdate": "Az automatikus frissítés nincs engedélyezve a tárca ezen Windows verziójában. Kérjük látogasson el a https://firefly.iota.org címre és töltse le a frissítést.",
-            "preReleaseDescription": "A Firefly egy kiadás előtti verzióját használja. A szoftverfrissítés le van tiltva."
+        "appUpdate": {
+            "title": "Frissítések keresése",
+            "installedVersion": "Telepített verzió",
+            "newVerion": "Új verzió",
+            "stage": "Szakasz",
+            "prod": "Termelés",
+            "alpha": "Alfa",
+            "beta": "Béta",
+            "releasedAt": "Kibocsátás ideje",
+            "updateAvailable": "Frissítés elérhető",
+            "updatesDisabled": "Frissítések érhetők el, de az alkalmazáson belüli frissítés le van tiltva az ön operációs rendszere esetében.",
+            "latestInstalled": "Ön a legújabb és legbiztonságosabb verziót használja"
         },
         "backupStronghold": {
             "title": "Készítsen Stronghold biztonsági mentést",
@@ -721,7 +743,8 @@
         },
         "deleteAccount": {
             "title": "{name} törölhető?",
-            "body": "A tárcának nincs tranzakciós előzménye, ezért biztonságosan törölhető.",
+            "body": "Biztosan törölni szeretné ezt a tárcát?",
+            "hint": "Megjegyzés: ha egyszer törölte a tárcát, a beállítások között található \"Tárcakereső\" segítségével visszaállíthatja azt.",
             "typePassword": "Adja meg tárcájának jelszavát a törléshez.",
             "hideAccount": "Tárca törlése",
             "errorTitle": "{name} nem törölhető",
@@ -1175,6 +1198,7 @@
         "send": "Küldés",
         "receive": "Fogadás",
         "create": "Létrehozás",
+        "updateAndContinue": "Frissítés és folytatás",
         "beginTransfer": "Tranzakció indítása",
         "tryAgain": "Újrapróbálkozás",
         "visitDiscord": "Discord meglátogatása",
@@ -1230,10 +1254,11 @@
         "skip": "Kihagyás",
         "reset": "Visszaállítás",
         "downloadRecoveryKit": "Helyreállító kódszólista sablon mentése",
-        "skipBackup": "Biztonsági mentés kihagyása",
+        "skipBackup": "Tárca biztonsági mentésének kihagyása",
         "finishSetup": "Beállítás befejezése",
         "readDocumentation": "Dokumentáció elolvasása",
         "visitFaq": "GYIK megtekintése",
+        "viewDownloads": "Letöltések megtekintése",
         "viewStatus": "Állapot megtekintése",
         "viewBalanceBreakdown": "Egyenleg részletezésének megtekintése",
         "showHiddenAccounts": "Rejtett tárcák megjelenítése",
@@ -1287,9 +1312,10 @@
         "vote": "Vote",
         "addProposal": "Add proposal",
         "removeProposal": "Remove proposal",
-        "changeNode": "Csomópont megváltoztatása",
+        "changeNode": "Csomópontváltás",
         "stopVoting": "Stop voting",
-        "revote": "Revote"
+        "revote": "Revote",
+        "skipAndKeep": "Kihagyás és a reégi jelszó használata"
     },
     "general": {
         "recipient": "Címzett",
@@ -1700,6 +1726,7 @@
             "invalidFormat": "A megadott mélyhivatkozás érvénytelen",
             "invalidAmount": "The amount in deep link is not an integer number {amount}",
             "invalidSurplus": "A mélyhivatkozásban szereplő többlet összeg nem egy szám: {surplus}",
+            "surplusNotSupported": "A többlet csak a natív tokenek esetében támogatott",
             "governance": {
                 "unrecognizedOperation": "Unrecognized Governance operation: {operation}"
             },
@@ -1752,7 +1779,7 @@
             "error": "Hiba történt a jutalom beváltása közben. Próbálja újra."
         },
         "vote": {
-            "success": "Votes successfully casted"
+            "success": "Votes successfully cast"
         },
         "stopVoting": {
             "success": "Voting successfully stopped"
@@ -1783,7 +1810,8 @@
             "similar": "Ez nagyon hasonlít egy gyakran használt jelszóra.",
             "word": "Az egyetlen szóból álló jelszót könnyen kitalálhatják.",
             "incorrect": "A jelszó helytelen.",
-            "length": "A jelszó nem lehet {length, plural, one {# karakternél } other {# karakternél}} hosszabb."
+            "length": "A jelszó nem lehet {length, plural, one {# karakternél } other {# karakternél}} hosszabb.",
+            "sameAsOld": "Az ön új és a régi jelszava nem egyezhet meg."
         },
         "pincode": {
             "length": "A PIN-kódnak {length, plural, one {# számjegyűnek} other {# számjegyűnek}} kell lennie.",
@@ -2066,7 +2094,18 @@
             "quantity": "Választható paraméter: A metaadatokkal veretett példányok mennyisége."
         },
         "governance": {
-            "removeProposalWarning": "A javaslat eltávolítása előtt le kell állítani a szavazást."
+            "removeProposalWarning": "A javaslat eltávolítása előtt le kell állítani a szavazást.",
+            "outdatedNode": {
+                "title": "Elavult csomópont URL",
+                "body": "Az indítvány csomópont URL-címe elavult. Kérjük, frissítse a legfrissebb szavazási eredmények eléréséhez."
+            },
+            "resultsNotAvailable": {
+                "title": "Eredmények nem érhetők el",
+                "body": "Az eredmények már nem érhetők el az indítvány vonatkozó csomópontján. Kérjük, frissítse az eredmények eléréséhez."
+            }
+        },
+        "updateStronghold": {
+            "profileBadge": "Az ön Strongholdjának verziója elavult. Jelentkezzen be a Stronghold frissítéséhez."
         }
     },
     "exports": {
@@ -2191,6 +2230,14 @@
                 "Pending": "átdolgozás folyamatban",
                 "Confirmed": "átdolgozás",
                 "Conflicting": "átdolgozás sikertelen"
+            },
+            "proposalStatus": {
+                "upcoming": "Közlemény",
+                "commencing": "Szavazás megkezdődött",
+                "holding": "Szavazatszámlálás",
+                "ended": "Lezárult",
+                "nodeOutdated": "Elavult csomópont URL",
+                "resultsNotAvailable": "Eredmények nem érhetők el"
             }
         },
         "alias": {
@@ -2201,13 +2248,7 @@
             }
         },
         "locked": "lezárva",
-        "smartContract": "smart contract",
-        "proposalStatus": {
-            "upcoming": "Announcement",
-            "commencing": "Voting open",
-            "holding": "Counting",
-            "ended": "Closed"
-        }
+        "smartContract": "smart contract"
     },
     "menus": {
         "expirationTimePicker": {

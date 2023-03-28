@@ -378,7 +378,7 @@
                 "noNodes": "Der er ingen noder, kan ikke oprettes forbindelse til netværket",
                 "noNodesAuto": "Der er ingen noder, automatisk valg bruges i stedet"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Proof of work",
                 "description": "Udfør proof of work lokalt på din enhed eller outsource til noden"
             },
@@ -436,7 +436,8 @@
         },
         "login": {
             "pleaseWait": "Afvent {time, plural, one {1 sekund} other {# sekunder}}",
-            "incorrectAttempts": "{attempts, plural, one {1 forkert forsøg} other {# forkerte forsøg}}"
+            "incorrectAttempts": "{attempts, plural, one {1 forkert forsøg} other {# forkerte forsøg}}",
+            "hintStronghold": "Aktuel Stronghold-version forældet, log ind for at opdatere."
         },
         "loadProfile": {
             "loginSteps": {
@@ -586,8 +587,8 @@
                 "title": "Forslag",
                 "voted": "Stemt",
                 "successEdit": "Forslag hermed redigeret",
-                "successAdd": "Forslag hermed tilføjet",
-                "successAddAll": "Proposal successfully added to all accounts",
+                "successAdd": "{numberOfProposals, select, one {Forslag} other {Forslag}} hermed tiløjet",
+                "successAddAll": "{numberOfProposals, select, one {Forslag} other {Forslag}} hermed tilføjet alle konti",
                 "successRemove": "Forslag fjernet",
                 "emptyTitle": "Ingen forslag"
             },
@@ -614,6 +615,23 @@
                 },
                 "fetching": "Henter forslagsdata",
                 "hintVote": "Du kan ikke stemme på et forslag, der er i annonceringsfasen. Afstemningen åbner om {time}."
+            }
+        },
+        "updateStronghold": {
+            "update": {
+                "title": "Opdatér Stronghold",
+                "loginBody": "Aktuel Stronghold-version forældet. Angiv adgangskode for at opdatere den.",
+                "recoveryBody": "Importeret Stronghold-version forældet. For at fortsætte, skal den opdateres til seneste version."
+            },
+            "updateBackup": {
+                "loginTitle": "Stronghold opdateret",
+                "loginBody": "Alt er fint nu - den seneste Stronghold-version anvendes",
+                "recoveryTitle": "Stronghold hermed genoprettet og opdateret",
+                "recoveryBody": "Opsætningen af en wallet kan nu fortsættes",
+                "hint": "Det anbefales kraftigt at slette alle tidligere Stronghold-sikkerhedskopifiler og generere en ny"
+            },
+            "changePassword": {
+                "hint": "Stronghold-versionen var forældet og er blevet opdateret. Det anbefales, at der skiftes Stronghold-adgangskode."
             }
         }
     },
@@ -698,14 +716,18 @@
         "qr": {
             "title": "Din QR-kode"
         },
-        "version": {
-            "title": "Nuværende version: {version}",
-            "upToDateTitle": "Firefly er opdateret",
-            "upToDateDescription": "Du kører den nyeste og sikreste version af Firefly.",
-            "updateAvailable": "Firefly opdatering tilgængelig",
-            "updateDetails": "Version {version} - {date}",
-            "noAutoUpdate": "Auto-opdatering er deaktiveret i denne Windows-version, gå til https://firefly.iota.org for at downloade opdateringen.",
-            "preReleaseDescription": "Der anvendes en præudgivelsesversion af Firefly. Opdateringer er deaktiveret."
+        "appUpdate": {
+            "title": "Søg efter opdateringer",
+            "installedVersion": "Installeret version",
+            "newVerion": "Ny version",
+            "stage": "Trin",
+            "prod": "Produktion",
+            "alpha": "Alpha",
+            "beta": "Beta",
+            "releasedAt": "Udgivet d.",
+            "updateAvailable": "Opdatering er tilgængelig",
+            "updatesDisabled": "Opdateringer er tilgængelige, men in-app opgradering er deaktiveret for operativsystemet.",
+            "latestInstalled": "Den seneste og sikreste version af Firefly anvendes"
         },
         "backupStronghold": {
             "title": "Backup your stronghold file",
@@ -721,7 +743,8 @@
         },
         "deleteAccount": {
             "title": "Slet {name}?",
-            "body": "Denne wallet har ingen transaktionshistorik. Den kan slettes.",
+            "body": "Sikker på, at denne wallet skal slettes?",
+            "hint": "Bemærk: Når først slettet, kan denne wallet gendannes vha. \"Wallet Finder\" i indstillingerne.",
             "typePassword": "Indtast din wallet adgangskode for at bekræfte.",
             "hideAccount": "Slet wallet",
             "errorTitle": "Kan ikke slette {name}",
@@ -1175,6 +1198,7 @@
         "send": "Send",
         "receive": "Modtag",
         "create": "Opret",
+        "updateAndContinue": "Opdtér og fortsæt",
         "beginTransfer": "Begynd Overførsel",
         "tryAgain": "Prøv igen",
         "visitDiscord": "Besøg Discord",
@@ -1230,10 +1254,11 @@
         "skip": "Spring over",
         "reset": "Nulstil",
         "downloadRecoveryKit": "Gem Recovery Kit skabelon",
-        "skipBackup": "Spring sikkerhedskopi af fil over",
+        "skipBackup": "Overspring wallet-sikkerhedskopiering",
         "finishSetup": "Afslut opsætning",
         "readDocumentation": "Læs dokumentationen",
         "visitFaq": "Besøg FAQ",
+        "viewDownloads": "Se downloads",
         "viewStatus": "Vis Status",
         "viewBalanceBreakdown": "View balance breakdown",
         "showHiddenAccounts": "Vis skjulte wallets",
@@ -1289,7 +1314,8 @@
         "removeProposal": "Remove proposal",
         "changeNode": "Skift node",
         "stopVoting": "Stop voting",
-        "revote": "Stem igen"
+        "revote": "Stem igen",
+        "skipAndKeep": "Overspring og behold gammel adgangskode"
     },
     "general": {
         "recipient": "Recipient",
@@ -1700,6 +1726,7 @@
             "invalidFormat": "The deep link you followed is invalid",
             "invalidAmount": "The amount in deep link is not an integer number {amount}",
             "invalidSurplus": "Dybt link-overskuddet er ikke et tal {surplus}",
+            "surplusNotSupported": "Overskuddet understøttes kun for medfødte tokens",
             "governance": {
                 "unrecognizedOperation": "Unrecognized Governance operation: {operation}"
             },
@@ -1752,7 +1779,7 @@
             "error": "En fejl opstod under indløsning. Forsøg igen."
         },
         "vote": {
-            "success": "Votes successfully casted"
+            "success": "Votes successfully cast"
         },
         "stopVoting": {
             "success": "Voting successfully stopped"
@@ -1783,7 +1810,8 @@
             "similar": "Dette ligner en almen anvendt adgangskode.",
             "word": "Et enkelt ord er nemt at gætte.",
             "incorrect": "Adgangskoden er forkert.",
-            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}.",
+            "sameAsOld": "Tidligere og ny adgangskode skal være forskellige."
         },
         "pincode": {
             "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
@@ -2066,7 +2094,18 @@
             "quantity": "Valgfri parameter: Mængden af kopier mintet med disse metadata."
         },
         "governance": {
-            "removeProposalWarning": "Før dette forslag fjernes, skal man ophøre med at stemme på det."
+            "removeProposalWarning": "Før dette forslag fjernes, skal man ophøre med at stemme på det.",
+            "outdatedNode": {
+                "title": "Forældet node-URL",
+                "body": "Node-URL'en til dette forslag er forældet. Opdatér den for at tilgå de seneste afstemningsresultater."
+            },
+            "resultsNotAvailable": {
+                "title": "Resultater utilgængelige",
+                "body": "Resultaterne er ikke længere tilgængelige på dette forslags relaterede node. Opdatér den for at tilgå resultaterne."
+            }
+        },
+        "updateStronghold": {
+            "profileBadge": "Aktuel Stronghold forældet. Log ind for at opdatere."
         }
     },
     "exports": {
@@ -2191,6 +2230,14 @@
                 "Pending": "revoting",
                 "Confirmed": "revote",
                 "Conflicting": "failed to revote"
+            },
+            "proposalStatus": {
+                "upcoming": "Bekendtgørelse",
+                "commencing": "Afstemning åben",
+                "holding": "Optælling",
+                "ended": "Lukket",
+                "nodeOutdated": "Forældet node-URL",
+                "resultsNotAvailable": "Resultater utilgængelige"
             }
         },
         "alias": {
@@ -2201,13 +2248,7 @@
             }
         },
         "locked": "låst",
-        "smartContract": "smart contract",
-        "proposalStatus": {
-            "upcoming": "Announcement",
-            "commencing": "Voting open",
-            "holding": "Counting",
-            "ended": "Closed"
-        }
+        "smartContract": "smart contract"
     },
     "menus": {
         "expirationTimePicker": {

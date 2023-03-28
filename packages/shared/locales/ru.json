@@ -378,7 +378,7 @@
                 "noNodes": "Нет узлов, не удается подключиться к сети",
                 "noNodesAuto": "Нет узлов, вместо них будет использоваться автоматический выбор"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Доказательство Работы (PoW)",
                 "description": "Завершите подтверждение работы локально на вашем устройстве или аутсорсите на узел"
             },
@@ -436,7 +436,8 @@
         },
         "login": {
             "pleaseWait": "Пожалуйста подождите {time, plural, one {# секунду} other {# секунд}}",
-            "incorrectAttempts": "{attempts, plural, one {# неправильная попытка} other {# неправильные попытки}}"
+            "incorrectAttempts": "{attempts, plural, one {# неправильная попытка} other {# неправильные попытки}}",
+            "hintStronghold": "Your Stronghold's version is out of date. Please log in to update your Stronghold."
         },
         "loadProfile": {
             "loginSteps": {
@@ -586,8 +587,8 @@
                 "title": "Предложения",
                 "voted": "Проголосовано",
                 "successEdit": "Proposal successfully edited",
-                "successAdd": "Предложение успешно добавлено",
-                "successAddAll": "Предложение успешно добавлено во все аккаунты",
+                "successAdd": "{numberOfProposals, select, one {Proposal} other {Proposals}} successfully added",
+                "successAddAll": "{numberOfProposals, select, one {Proposal} other {Proposals}} successfully added to all accounts",
                 "successRemove": "Предложение успешно удалено",
                 "emptyTitle": "Нет предложений"
             },
@@ -614,6 +615,23 @@
                 },
                 "fetching": "Получение данных предложения",
                 "hintVote": "Вы не можете голосовать по предложению, которое находится на стадии объявления, голосование откроется в {time}."
+            }
+        },
+        "updateStronghold": {
+            "update": {
+                "title": "Update Stronghold",
+                "loginBody": "Your Stronghold's version is out of date. Provide your password to update Stronghold.",
+                "recoveryBody": "The imported Stronghold’s version is out of date, to continue we will need to update the stronghold to the latest version."
+            },
+            "updateBackup": {
+                "loginTitle": "Stronghold updated",
+                "loginBody": "It's all good now - you're running the latest Stronghold version",
+                "recoveryTitle": "Stronghold is successfully recovered and updated",
+                "recoveryBody": "You can now continue setting up your wallet",
+                "hint": "We highly recommend to delete all previous Stronghold backup files and save a new one"
+            },
+            "changePassword": {
+                "hint": "Your Stronghold was out of date and has been updated. We recommend that you change your Stronghold password."
             }
         }
     },
@@ -698,14 +716,18 @@
         "qr": {
             "title": "Ваш QR-код"
         },
-        "version": {
-            "title": "Актуальная версия: {version}",
-            "upToDateTitle": "Firefly актуальный",
-            "upToDateDescription": "Ты использушь последнюю и безопасную версию Firefly.",
-            "updateAvailable": "Доступно обновление Firefly",
-            "updateDetails": "Версия {version} - {date}",
-            "noAutoUpdate": "Автообновление отключено в этой версии Windows, пожалуйста, перейдите на сайт https://firefly.iota.org для скачивания обновления.",
-            "preReleaseDescription": "У вас запущена предварительная версия Firefly. Обновления отключены."
+        "appUpdate": {
+            "title": "Check for updates",
+            "installedVersion": "Installed version",
+            "newVerion": "New version",
+            "stage": "Stage",
+            "prod": "Production",
+            "alpha": "Alpha",
+            "beta": "Beta",
+            "releasedAt": "Released at",
+            "updateAvailable": "Update is available",
+            "updatesDisabled": "There are updates available, but in-app upgrade is disabled for your operating system.",
+            "latestInstalled": "You are running the latest and safest version"
         },
         "backupStronghold": {
             "title": "Создайте запасную копию stronghold файла",
@@ -721,7 +743,8 @@
         },
         "deleteAccount": {
             "title": "Удалить {name}?",
-            "body": "Этот кошелек не имеет истории транзакций. Он может быть безопасно удален.",
+            "body": "Are you sure you want to delete this wallet?",
+            "hint": "Note: once deleted, you can restore this wallet by using the \"Wallet Finder\" in the settings.",
             "typePassword": "Введите пароль для подтверждения.",
             "hideAccount": "Удалить кошелёк",
             "errorTitle": "Не удается удалить {name}",
@@ -1175,6 +1198,7 @@
         "send": "Отправить",
         "receive": "Получить",
         "create": "Создать",
+        "updateAndContinue": "Update and continue",
         "beginTransfer": "Начать перевод",
         "tryAgain": "Попрoбуйте снова",
         "visitDiscord": "Перейти в Discord",
@@ -1230,10 +1254,11 @@
         "skip": "Пропустить",
         "reset": "Сбросить",
         "downloadRecoveryKit": "Сохранить шаблон документа для востановления",
-        "skipBackup": "Пропустить резервную копию",
+        "skipBackup": "Skip wallet backup",
         "finishSetup": "Завершить настройку",
         "readDocumentation": "Читать документацию",
         "visitFaq": "Посетить FAQ",
+        "viewDownloads": "View downloads",
         "viewStatus": "Просмотр статуса",
         "viewBalanceBreakdown": "View balance breakdown",
         "showHiddenAccounts": "Показать скрытые кошельки",
@@ -1287,9 +1312,10 @@
         "vote": "Голосовать",
         "addProposal": "Добавить предложение",
         "removeProposal": "Удалить предложение",
-        "changeNode": "Change Node",
+        "changeNode": "Change node",
         "stopVoting": "Прекратить голосование",
-        "revote": "Переголосовать"
+        "revote": "Переголосовать",
+        "skipAndKeep": "Skip and keep old password"
     },
     "general": {
         "recipient": "Получатель",
@@ -1700,6 +1726,7 @@
             "invalidFormat": "Глубокая ссылка, по которой вы перешли, недействительна",
             "invalidAmount": "Сумма в глубокой ссылке не является целым числом {amount}",
             "invalidSurplus": "Избыток в глубинной ссылке - это не число {surplus}",
+            "surplusNotSupported": "The surplus is only supported for native tokens",
             "governance": {
                 "unrecognizedOperation": "Нераспознанная операция управления: {operation}"
             },
@@ -1783,7 +1810,8 @@
             "similar": "Похоже на один из широко распространенных паролей.",
             "word": "Одно слово легко угадать.",
             "incorrect": "Неправильный пароль.",
-            "length": "Твой пароль не может быть длиннее {length, plural, one {1 символа} other {# символов}}."
+            "length": "Твой пароль не может быть длиннее {length, plural, one {1 символа} other {# символов}}.",
+            "sameAsOld": "Your new password must be different from your old password."
         },
         "pincode": {
             "length": "Твой PIN-код должен быть {length, plural, one {# цифра} other {# цифр}}.",
@@ -2066,7 +2094,18 @@
             "quantity": "Optional parameter: The quantity of copies minted with this metadata."
         },
         "governance": {
-            "removeProposalWarning": "Вы должны прекратить голосование за это предложение, прежде чем удалить его."
+            "removeProposalWarning": "Вы должны прекратить голосование за это предложение, прежде чем удалить его.",
+            "outdatedNode": {
+                "title": "Outdated node URL",
+                "body": "The node URL for this proposal is outdated. Please update it to access the latest voting results."
+            },
+            "resultsNotAvailable": {
+                "title": "Results not available",
+                "body": "The results are no longer available on this proposal's corresponding node. Please update it to access the results."
+            }
+        },
+        "updateStronghold": {
+            "profileBadge": "Your Stronghold is out of date. Log in to update Stronghold."
         }
     },
     "exports": {
@@ -2191,6 +2230,14 @@
                 "Pending": "переголосование",
                 "Confirmed": "переголосовать",
                 "Conflicting": "не удалось переголосовать"
+            },
+            "proposalStatus": {
+                "upcoming": "Announcement",
+                "commencing": "Voting open",
+                "holding": "Counting",
+                "ended": "Closed",
+                "nodeOutdated": "Outdated node URL",
+                "resultsNotAvailable": "Results not available"
             }
         },
         "alias": {
@@ -2201,13 +2248,7 @@
             }
         },
         "locked": "заблокировано",
-        "smartContract": "умный контракт",
-        "proposalStatus": {
-            "upcoming": "Объявление",
-            "commencing": "Голосование открыто",
-            "holding": "Подсчёт",
-            "ended": "Закрыто"
-        }
+        "smartContract": "умный контракт"
     },
     "menus": {
         "expirationTimePicker": {

@@ -28,7 +28,7 @@
         Timelock = 'timelock',
     }
 
-    $: accountBalance = $selectedAccount.balances
+    $: accountBalance = $selectedAccount?.balances
 
     let breakdown: { [key: string]: Breakdown } = {}
     $: accountBalance, void setBreakdown()

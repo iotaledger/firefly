@@ -45,7 +45,7 @@
             : options
     }
 
-    function handleClick(option: IOption): void {
+    function onClick(option: IOption): void {
         modal?.close()
         selected = option
         value = option?.key ?? option.value
@@ -90,7 +90,7 @@
             <picker-modal class="{maxHeight} flex flex-col space-y-1 scrollable-y" in:fade={{ duration: 100 }}>
                 {#each filteredOptions as option, index}
                     <button
-                        on:click={() => handleClick(option)}
+                        on:click={() => onClick(option)}
                         class="w-full flex flex-row flex-1 justify-between items-center px-2 py-3 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20"
                     >
                         <div class="flex flex-row gap-3 justify-start items-center flex-1">

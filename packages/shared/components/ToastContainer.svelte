@@ -8,50 +8,20 @@
     export let classes: string = ''
     export let swipe: boolean = false
     export let fadeDuration: number = 0
-
-    $: toasts = $notifications.map((notification) => ({
-        type: notification.type,
-        alert: notification.alert,
-        message: notification.message,
-        subMessage: notification.subMessage,
-        progress: notification.progress,
-        id: notification.id,
-        actions: notification.actions.map((action, actionIndex) => ({
-            ...action,
-            onClick: () => action.callback(notification, actionIndex),
-        })),
-    }))
+    export let showDismiss = false
 </script>
 
-{#if toasts?.length > 0}
+{#if $notifications?.length > 0}
     <toast-container class={`flex flex-col z-20 ${classes}`} transition:fade|local={{ duration: fadeDuration }}>
         <ul class="space-y-2">
-            {#each toasts as toast (toast.id)}
+            {#each $notifications as toast (toast.id)}
                 <li transition:fade|local={{ duration: fadeDuration }}>
                     {#if swipe}
                         <Swiper toastId={toast.id}>
-                            <Toast
-                                alert
-                                type={toast.type}
-                                message={toast.message}
-                                subMessage={toast.subMessage}
-                                progress={toast.progress}
-                                actions={toast.actions}
-                                id={toast.id}
-                                showDismiss
-                            />
+                            <Toast alert {toast} {showDismiss} />
                         </Swiper>
                     {:else}
-                        <Toast
-                            alert
-                            type={toast.type}
-                            message={toast.message}
-                            subMessage={toast.subMessage}
-                            progress={toast.progress}
-                            actions={toast.actions}
-                            id={toast.id}
-                            showDismiss
-                        />
+                        <Toast alert {toast} {showDismiss} />
                     {/if}
                 </li>
             {/each}

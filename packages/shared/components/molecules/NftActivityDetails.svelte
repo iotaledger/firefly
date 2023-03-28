@@ -24,7 +24,7 @@
     $: nftIsOwned = $selectedAccountNfts.some((nft) => nft.id === activity.nftId)
     $: isTimelocked = activity?.asyncData?.timelockDate > $time
 
-    async function handleClick(): Promise<void> {
+    async function onClick(): Promise<void> {
         closePopup()
         $selectedNftId = activity.nftId
         $dashboardRouter.goTo(DashboardRoute.Collectibles)
@@ -36,12 +36,12 @@
 <nft-transaction-details class="w-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-3 overflow-hidden">
         <button
-            on:click|preventDefault={handleClick}
+            on:click|preventDefault={onClick}
             disabled={!nftIsOwned}
-            class="flex w-max items-center justify-center space-x-2 cursor-{nftIsOwned ? 'pointer' : 'default'}"
+            class="flex w-full items-start justify-center space-x-2 cursor-{nftIsOwned ? 'pointer' : 'default'}"
         >
             <NftImageOrIconBox nftId={activity.nftId} size="small" />
-            <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="whitespace-pre truncate">
+            <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="whitespace-normal text-left">
                 {nft?.name}
             </Text>
         </button>

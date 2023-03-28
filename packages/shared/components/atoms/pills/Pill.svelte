@@ -22,6 +22,7 @@
     "
 >
     {#if data}
+        <slot />
         {data}
     {:else}
         <slot />

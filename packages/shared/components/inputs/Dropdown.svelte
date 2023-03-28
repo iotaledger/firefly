@@ -43,7 +43,7 @@
 
     $: value, (error = '')
 
-    function handleClickOutside(): void {
+    function onClickOutside(): void {
         dropdown = false
     }
 
@@ -70,7 +70,7 @@
         focusedItem = document.getElementById(itemId)
     }
 
-    function handleKey(event: KeyboardEvent): void {
+    function onKey(event: KeyboardEvent): void {
         if (!enableTyping) {
             return
         }
@@ -135,8 +135,8 @@
         toggleDropDown()
     }}
     use:clickOutside
-    on:clickOutside={handleClickOutside}
-    on:keydown={handleKey}
+    on:clickOutside={onClickOutside}
+    on:keydown={onKey}
     class:active={dropdown}
     class:small
     class:floating-active={value && label}

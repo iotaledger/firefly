@@ -39,7 +39,7 @@ export interface IProfileManager {
     listen(eventTypes: EventType[], callback: WalletApiEventHandler): void
     clearListeners(eventTypes: EventType[]): Promise<void>
     removeLatestAccount(): Promise<void>
-    restoreBackup(source: string, password: string): Promise<void>
+    restoreBackup(source: string, password: string, ignoreIfCoinTypeMismatch?: boolean): Promise<void>
     setClientOptions(options: ClientOptions): Promise<void>
     setStrongholdPassword(password: string): Promise<void>
     setStrongholdPasswordClearInterval(intervalInMilliseconds?: number): Promise<void>

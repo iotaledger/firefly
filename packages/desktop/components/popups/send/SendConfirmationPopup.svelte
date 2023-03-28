@@ -63,6 +63,7 @@
     } = get(newTransactionDetails)
 
     let storageDeposit = 0
+    let visibleSurplus = 0
     let preparedOutput: Output
     let outputOptions: OutputOptions
     let expirationTimePicker: ExpirationTimePicker
@@ -75,8 +76,9 @@
     $: isInternal = recipient.type === 'account'
     $: expirationTimePicker?.setNull(giftStorageDeposit)
     $: hideGiftToggle =
-        transactionDetails.type === NewTransactionType.TokenTransfer &&
-        transactionDetails.assetId === $selectedAccountAssets?.baseCoin?.id
+        (transactionDetails.type === NewTransactionType.TokenTransfer &&
+            transactionDetails.assetId === $selectedAccountAssets?.baseCoin?.id) ||
+        (disableToggleGift && !giftStorageDeposit)
     $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
     $: isTransferring = $selectedAccount.isTransferring
 
@@ -86,6 +88,7 @@
         subject: recipient,
         isInternal,
         giftedStorageDeposit: 0,
+        surplus: visibleSurplus,
         type: ActivityType.Basic,
         direction: ActivityDirection.Outgoing,
         inclusionState: InclusionState.Pending,
@@ -145,8 +148,15 @@
     }
 
     function setStorageDeposit(preparedOutput: Output, surplus?: number): void {
+        const rawAmount =
+            transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.rawAmount : '0'
+
         const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
-            getStorageDepositFromOutput(preparedOutput)
+            getStorageDepositFromOutput(preparedOutput, rawAmount)
+
+        if (surplus > _storageDeposit) {
+            visibleSurplus = Number(surplus)
+        }
 
         if (giftStorageDeposit) {
             // Only giftedStorageDeposit needs adjusting, since that is derived
@@ -172,7 +182,7 @@
         giftStorageDeposit = !giftStorageDeposit
     }
 
-    async function onConfirm(): Promise<void> {
+    async function onConfirmClick(): Promise<void> {
         try {
             validateSendConfirmation(outputOptions, preparedOutput)
 
@@ -186,7 +196,7 @@
         }
     }
 
-    function onBack(): void {
+    function onBackClick(): void {
         closePopup()
         openPopup({
             id: PopupId.SendForm,
@@ -194,7 +204,7 @@
         })
     }
 
-    function onCancel(): void {
+    function onCancelClick(): void {
         closePopup()
     }
 
@@ -250,16 +260,16 @@
     {/if}
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         {#if disableBack}
-            <Button classes="w-full" outline onClick={onCancel} disabled={isTransferring}>
+            <Button classes="w-full" outline onClick={onCancelClick} disabled={isTransferring}>
                 {localize('actions.cancel')}
             </Button>
         {:else}
-            <Button classes="w-full" outline onClick={onBack} disabled={isTransferring}>
+            <Button classes="w-full" outline onClick={onBackClick} disabled={isTransferring}>
                 {localize('actions.back')}
             </Button>
         {/if}
 
-        <Button classes="w-full" onClick={onConfirm} disabled={isTransferring} isBusy={isTransferring}>
+        <Button classes="w-full" onClick={onConfirmClick} disabled={isTransferring} isBusy={isTransferring}>
             {localize('actions.send')}
         </Button>
     </popup-buttons>

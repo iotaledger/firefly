@@ -378,7 +378,7 @@
                 "noNodes": "目前找不到結點，無法連上網絡",
                 "noNodesAuto": "找不到節點，將改採自動選擇方式"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "工作證明",
                 "description": "在您的設備或外包節點完成工作量證明"
             },
@@ -436,7 +436,8 @@
         },
         "login": {
             "pleaseWait": "請等候 {time, plural, one {# 秒} other {# 秒}}",
-            "incorrectAttempts": "{attempts, plural, one {錯誤輸入 # 次} other {輸入錯誤 # 次}}"
+            "incorrectAttempts": "{attempts, plural, one {錯誤輸入 # 次} other {輸入錯誤 # 次}}",
+            "hintStronghold": "Your Stronghold's version is out of date. Please log in to update your Stronghold."
         },
         "loadProfile": {
             "loginSteps": {
@@ -586,8 +587,8 @@
                 "title": "提案",
                 "voted": "已投票",
                 "successEdit": "Proposal successfully edited",
-                "successAdd": "已成功新增提案",
-                "successAddAll": "提案已順利新增到全部帳號",
+                "successAdd": "{numberOfProposals, select, one {Proposal} other {Proposals}} successfully added",
+                "successAddAll": "{numberOfProposals, select, one {Proposal} other {Proposals}} successfully added to all accounts",
                 "successRemove": "已成功移除提案",
                 "emptyTitle": "暫無提案"
             },
@@ -615,6 +616,23 @@
                 "fetching": "正在取得提案資料",
                 "hintVote": "您不能投票給尚在公告期的提案，投票將於 {time} 開始。"
             }
+        },
+        "updateStronghold": {
+            "update": {
+                "title": "Update Stronghold",
+                "loginBody": "Your Stronghold's version is out of date. Provide your password to update Stronghold.",
+                "recoveryBody": "The imported Stronghold’s version is out of date, to continue we will need to update the stronghold to the latest version."
+            },
+            "updateBackup": {
+                "loginTitle": "Stronghold updated",
+                "loginBody": "It's all good now - you're running the latest Stronghold version",
+                "recoveryTitle": "Stronghold is successfully recovered and updated",
+                "recoveryBody": "You can now continue setting up your wallet",
+                "hint": "We highly recommend to delete all previous Stronghold backup files and save a new one"
+            },
+            "changePassword": {
+                "hint": "Your Stronghold was out of date and has been updated. We recommend that you change your Stronghold password."
+            }
         }
     },
     "popups": {
@@ -633,7 +651,7 @@
                 "subtitle": "Funds fully available for spending"
             },
             "pending": {
-                "title": "Pending",
+                "title": "等待中",
                 "subtitle": "Temporarily locked in transactions"
             },
             "locked": {
@@ -641,7 +659,7 @@
                 "subtitle": "Temporarily locked for governance"
             },
             "storageDeposit": {
-                "title": "Storage deposit",
+                "title": "存儲空間費用",
                 "subtitle": "These funds are reserved for storing native assets."
             },
             "totalBalance": {
@@ -657,15 +675,15 @@
                 "subtitle": "保留給 NFT 儲存空間"
             },
             "aliasOutputs": {
-                "title": "Aliases",
-                "subtitle": "Reserved for Alias storage"
+                "title": "別名",
+                "subtitle": "保留給別名儲存空間"
             },
             "foundryOutputs": {
-                "title": "Foundries",
+                "title": "鑄造廠",
                 "subtitle": "Reserved for Native Token Foundry storage"
             },
             "unclaimed": {
-                "title": "Unclaimed transaction",
+                "title": "尚未領取的交易",
                 "subtitle": "Temporarily locked in unclaimed transactions"
             },
             "timelock": {
@@ -678,7 +696,7 @@
             },
             "governance": {
                 "title": "治理",
-                "subtitle": "Reserved for voting power"
+                "subtitle": "保留給表決權"
             },
             "minimizeStorageDepositButton": "把存儲空間費用最小化"
         },
@@ -698,14 +716,18 @@
         "qr": {
             "title": "您的QR碼"
         },
-        "version": {
-            "title": "目前版本: {version}",
-            "upToDateTitle": "Firefly 已是最新版本",
-            "upToDateDescription": "您正在運行的 Firefly 是最新、最安全的版本。",
-            "updateAvailable": "Firefly 有可用的更新",
-            "updateDetails": "版本 {version} - {date}",
-            "noAutoUpdate": "此 Windows 版本不支援自動更新，請至 https://firefly.iota.org 下載更新檔。",
-            "preReleaseDescription": "您在運行的是Firefly的先行發布版，更新已停用。"
+        "appUpdate": {
+            "title": "Check for updates",
+            "installedVersion": "Installed version",
+            "newVerion": "New version",
+            "stage": "Stage",
+            "prod": "Production",
+            "alpha": "Alpha",
+            "beta": "Beta",
+            "releasedAt": "Released at",
+            "updateAvailable": "Update is available",
+            "updatesDisabled": "There are updates available, but in-app upgrade is disabled for your operating system.",
+            "latestInstalled": "You are running the latest and safest version"
         },
         "backupStronghold": {
             "title": "備份您的stronghold檔案",
@@ -721,7 +743,8 @@
         },
         "deleteAccount": {
             "title": "刪除 {name}?",
-            "body": "這個錢包沒有交易記錄。 可以安全地刪除它。",
+            "body": "Are you sure you want to delete this wallet?",
+            "hint": "Note: once deleted, you can restore this wallet by using the \"Wallet Finder\" in the settings.",
             "typePassword": "輸入您的錢包密碼進行確認。",
             "hideAccount": "刪除錢包",
             "errorTitle": "無法刪除 {name}",
@@ -1071,7 +1094,7 @@
             "addToAllAccounts": "Add the proposal to all accounts"
         },
         "editProposal": {
-            "title": "Edit proposal",
+            "title": "編輯提案",
             "body": "Please provide the new url for the node that contains this proposal."
         },
         "voteForProposal": {
@@ -1175,6 +1198,7 @@
         "send": "發送",
         "receive": "收款",
         "create": "建立",
+        "updateAndContinue": "Update and continue",
         "beginTransfer": "開始交易",
         "tryAgain": "重新嘗試",
         "visitDiscord": "探訪 Discord",
@@ -1230,10 +1254,11 @@
         "skip": "跳過",
         "reset": "重置",
         "downloadRecoveryKit": "保存 Recovery Kit 範本",
-        "skipBackup": "跳過文件備份",
+        "skipBackup": "Skip wallet backup",
         "finishSetup": "完成設置",
         "readDocumentation": "閱讀文檔",
         "visitFaq": "訪問常見問題解答",
+        "viewDownloads": "View downloads",
         "viewStatus": "查看狀態",
         "viewBalanceBreakdown": "檢視餘額明細",
         "showHiddenAccounts": "顯示隱藏錢包",
@@ -1287,9 +1312,10 @@
         "vote": "投票",
         "addProposal": "新增提案",
         "removeProposal": "移除提案",
-        "changeNode": "Change Node",
+        "changeNode": "Change node",
         "stopVoting": "停止投票",
-        "revote": "重新投票"
+        "revote": "重新投票",
+        "skipAndKeep": "Skip and keep old password"
     },
     "general": {
         "recipient": "接收方",
@@ -1586,7 +1612,7 @@
         "internalExternal": {
             "label": "內部 / 外部",
             "internal": "內部的",
-            "external": "External"
+            "external": "外部"
         },
         "verificationStatus": {
             "label": "驗證狀態",
@@ -1626,36 +1652,36 @@
         },
         "type": {
             "label": "類型",
-            "basic": "Basic",
+            "basic": "基本",
             "nft": "NFT",
-            "alias": "Alias",
-            "foundry": "Foundry",
-            "governance": "Governance",
-            "consolidation": "Consolidation"
+            "alias": "別名",
+            "foundry": "鑄造廠",
+            "governance": "治理",
+            "consolidation": "合併"
         },
         "direction": {
-            "label": "Direction",
-            "incoming": "Incoming",
-            "outgoing": "Outgoing",
-            "selfTransaction": "Self transaction"
+            "label": "方向",
+            "incoming": "傳入",
+            "outgoing": "送出",
+            "selfTransaction": "對自己交易"
         },
         "proposalType": {
-            "label": "Type",
-            "official": "Official",
-            "custom": "Custom"
+            "label": "類型",
+            "official": "官方",
+            "custom": "自定"
         },
         "phase": {
-            "label": "Phase"
+            "label": "階段"
         },
         "participated": {
-            "label": "Participated",
-            "yes": "Yes",
-            "no": "No"
+            "label": "已參加",
+            "yes": "是",
+            "no": "否"
         },
         "proposalOrder": {
-            "label": "Order",
-            "name": "Name",
-            "phase": "Phase"
+            "label": "順序",
+            "name": "名稱",
+            "phase": "階段"
         }
     },
     "dates": {
@@ -1700,6 +1726,7 @@
             "invalidFormat": "您所追蹤的 深度連結 無效",
             "invalidAmount": "深度連結中的填寫的數量不是一個整數: {amount}",
             "invalidSurplus": "深度連結中的填寫的數量不是一個數字: {surplus}",
+            "surplusNotSupported": "The surplus is only supported for native tokens",
             "governance": {
                 "unrecognizedOperation": "無法辨識的治理操作: {operation}"
             },
@@ -1752,7 +1779,7 @@
             "error": "領取獎勵時發生錯誤."
         },
         "vote": {
-            "success": "Votes successfully casted"
+            "success": "Votes successfully cast"
         },
         "stopVoting": {
             "success": "Voting successfully stopped"
@@ -1783,7 +1810,8 @@
             "similar": "這和常見的密碼相似。",
             "word": "只有一個單字很容易被猜中。",
             "incorrect": "密碼不正確",
-            "length": "您的密碼長度不能超過 {length, plural, one {# 字元} other {# 字元}}。"
+            "length": "您的密碼長度不能超過 {length, plural, one {# 字元} other {# 字元}}。",
+            "sameAsOld": "Your new password must be different from your old password."
         },
         "pincode": {
             "length": "您的 PIN 碼必須符合長度 {length, plural, one {# 位數} other {# 位數}}",
@@ -2066,7 +2094,18 @@
             "quantity": "Optional parameter: The quantity of copies minted with this metadata."
         },
         "governance": {
-            "removeProposalWarning": "You must stop voting for this proposal before removing it."
+            "removeProposalWarning": "You must stop voting for this proposal before removing it.",
+            "outdatedNode": {
+                "title": "Outdated node URL",
+                "body": "The node URL for this proposal is outdated. Please update it to access the latest voting results."
+            },
+            "resultsNotAvailable": {
+                "title": "Results not available",
+                "body": "The results are no longer available on this proposal's corresponding node. Please update it to access the results."
+            }
+        },
+        "updateStronghold": {
+            "profileBadge": "Your Stronghold is out of date. Log in to update Stronghold."
         }
     },
     "exports": {
@@ -2142,14 +2181,14 @@
             "Conflicting": "failed to mint"
         },
         "burn": {
-            "Pending": "burning",
-            "Confirmed": "burned",
-            "Conflicting": "failed to burn"
+            "Pending": "燒毀中",
+            "Confirmed": "已燒毀",
+            "Conflicting": "燒毀失敗"
         },
         "consolidation": {
-            "Pending": "Consolidating outputs",
-            "Confirmed": "Outputs consolidated",
-            "Conflicting": "failed to consolidate outputs"
+            "Pending": "合併輸出中",
+            "Confirmed": "已合併輸出",
+            "Conflicting": "合併輸出失敗"
         },
         "migrate": {
             "Pending": "遷移到",
@@ -2163,17 +2202,17 @@
         },
         "governance": {
             "increaseVotingPower": {
-                "Pending": "increasing voting power",
-                "Confirmed": "increased voting power",
-                "Conflicting": "failed to increased voting power"
+                "Pending": "正在增加表決權",
+                "Confirmed": "已增加表決權",
+                "Conflicting": "增加表決權失敗"
             },
             "decreaseVotingPower": {
-                "Pending": "decreasing voting power",
-                "Confirmed": "decreased voting power",
-                "Conflicting": "failed to decreased voting power"
+                "Pending": "正在減少表決權",
+                "Confirmed": "已減少表決權",
+                "Conflicting": "減少表決權失敗"
             },
             "startVoting": {
-                "Pending": "voting for",
+                "Pending": "正在投票給",
                 "Confirmed": "已投票給",
                 "Conflicting": "投票失敗"
             },
@@ -2191,6 +2230,14 @@
                 "Pending": "重新投票中",
                 "Confirmed": "重新投票",
                 "Conflicting": "重新投票失敗"
+            },
+            "proposalStatus": {
+                "upcoming": "Announcement",
+                "commencing": "Voting open",
+                "holding": "Counting",
+                "ended": "Closed",
+                "nodeOutdated": "Outdated node URL",
+                "resultsNotAvailable": "Results not available"
             }
         },
         "alias": {
@@ -2201,13 +2248,7 @@
             }
         },
         "locked": "已鎖定",
-        "smartContract": "智能合約",
-        "proposalStatus": {
-            "upcoming": "公告",
-            "commencing": "開放投票",
-            "holding": "計票中",
-            "ended": "已關閉"
-        }
+        "smartContract": "智能合約"
     },
     "menus": {
         "expirationTimePicker": {

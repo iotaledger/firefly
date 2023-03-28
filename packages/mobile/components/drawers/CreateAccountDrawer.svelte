@@ -16,7 +16,7 @@
 
     $: accountAlias, (error = null)
 
-    async function handleCreateClick(): Promise<void> {
+    async function onCreate(): Promise<void> {
         try {
             const trimmedAccountAlias = accountAlias.trim()
 
@@ -32,7 +32,7 @@
                 closeDrawer(DrawerId.CreateAccount)
             } else {
                 openDrawer(DrawerId.EnterPassword, {
-                    onSuccess: handleCreateClick,
+                    onSuccess: onCreate,
                 })
             }
             isBusy = false
@@ -52,7 +52,7 @@
                 bind:value={accountAlias}
                 placeholder={localize('general.accountName')}
                 autofocus
-                submitHandler={handleCreateClick}
+                submitHandler={onCreate}
                 disabled={isBusy}
                 classes="mb-4"
             />
@@ -62,7 +62,7 @@
     <Button
         disabled={!getTrimmedLength(accountAlias) || isBusy}
         classes="w-full"
-        onClick={handleCreateClick}
+        onClick={onCreate}
         {isBusy}
         busyMessage={localize('general.creating')}
     >
