@@ -1,6 +1,5 @@
 import { get } from 'svelte/store'
 
-import { localize } from '@core/i18n'
 import { COIN_TYPE, NetworkProtocol } from '@core/network'
 import {
     DEFAULT_TRANSACTION_OPTIONS,
@@ -10,7 +9,7 @@ import {
     NewTransactionType,
     NewTokenTransactionDetails,
 } from '@core/wallet'
-import { showAppNotification } from '@auxiliary/notification'
+import { logAndNotifyError } from '@core/error/actions'
 
 import { ShimmerClaimingAccountState } from '../enums'
 import { IShimmerClaimingAccount } from '../interfaces'
@@ -48,10 +47,12 @@ async function claimShimmerRewardsForShimmerClaimingAccounts(
             if (get(isOnboardingLedgerProfile)) {
                 handleLedgerError(err?.error ?? err)
             } else {
-                showAppNotification({
+                logAndNotifyError({
                     type: 'error',
-                    alert: true,
-                    message: localize('notifications.claimShimmerRewards.error'),
+                    message: err,
+                    localizationKey: 'notifications.claimShimmerRewards.error',
+                    logToConsole: true,
+                    saveToErrorLog: true,
                 })
             }
         }
