@@ -69,7 +69,11 @@
                     <span class="block bg-{style?.messageColor}" style={`width:${toast.progress}%;height:2px`} />
                 </span>
             {/if}
-            {#if toast.subMessage}<span class="flex text-11 text-{style?.subMessageColor}">{toast.subMessage}</span>{/if}
+            {#if toast.subMessage}
+                <span class="flex text-11 text-{style?.subMessageColor}">
+                    {toast.subMessage}
+                </span>
+            {/if}
         </div>
         {#if toast.actions.length > 0}
             <div class="flex flex-col" style="min-width:90px">
