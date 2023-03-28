@@ -13,7 +13,7 @@ export async function downloadNextNftInQueue(): Promise<void> {
         downloadingNftId.set(nft.id)
         await Platform.downloadFile(downloadUrl, path, nft.id, accountIndex)
     } catch (error) {
-        removeNftFromDownloadQueue(get(downloadingNftId))
         downloadingNftId.set(undefined)
+        removeNftFromDownloadQueue(get(downloadingNftId))
     }
 }
