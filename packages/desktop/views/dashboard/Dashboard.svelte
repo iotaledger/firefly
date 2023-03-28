@@ -23,8 +23,14 @@
     import { Governance } from './governance'
     import Sidebar from './Sidebar.svelte'
     import TopNavigation from './TopNavigation.svelte'
-
-    $: $activeProfile, saveActiveProfile()
+    import {
+        addNftsToDownloadQueue,
+        selectedAccountNfts,
+        downloadNextNftInQueue,
+        nftDownloadQueue,
+        resetNftDownloadQueue,
+    } from '@core/nfts'
+    import { selectedAccountIndex } from '@core/account'
 
     const tabs = {
         wallet: Wallet,
@@ -36,6 +42,22 @@
 
     let fundsSoonNotificationId
     let developerProfileNotificationId
+
+    $: $activeProfile, saveActiveProfile()
+    $: $hasStrongholdLocked && reflectLockedStronghold()
+    $: $nftDownloadQueue, downloadNextNftInQueue()
+    $: addSelectedAccountNftsToDownloadQueue($selectedAccountIndex)
+
+    function addSelectedAccountNftsToDownloadQueue(accountIndex: number) {
+        resetNftDownloadQueue()
+        void addNftsToDownloadQueue(accountIndex, $selectedAccountNfts)
+    }
+
+    function handleDeepLinkRequest(data: string): void {
+        if ($activeProfile?.hasLoadedAccounts) {
+            handleDeepLink(data)
+        }
+    }
 
     onMount(() => {
         Platform.onEvent('menu-logout', () => {
@@ -73,15 +95,6 @@
             stopPollingLedgerNanoStatus()
         }
     })
-
-    // TODO: handle deep link requests for new send form
-    const handleDeepLinkRequest = (data: string): void => {
-        if ($activeProfile?.hasLoadedAccounts) {
-            handleDeepLink(data)
-        }
-    }
-
-    $: $hasStrongholdLocked && reflectLockedStronghold()
 </script>
 
 <Idle />

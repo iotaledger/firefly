@@ -7,9 +7,9 @@ import { NftDownloadMetadata, INft } from '../interfaces'
 
 const HEAD_FETCH_TIMEOUT_SECONDS = 3
 
-export async function validateNftMedia(
+export async function checkIfNftShouldBeDownloaded(
     nft: INft
-): Promise<{ needsDownload: boolean; downloadMetadata?: NftDownloadMetadata; downloadUrl?: string }> {
+): Promise<{ shouldDownload: boolean; downloadMetadata?: NftDownloadMetadata; downloadUrl?: string }> {
     let downloadMetadata: NftDownloadMetadata = { isLoaded: false }
     try {
         const alreadyDownloaded = await isFileAlreadyDownloaded(nft)
@@ -39,7 +39,7 @@ export async function validateNftMedia(
             if (validation?.error || validation?.warning) {
                 downloadMetadata = { ...downloadMetadata, ...validation }
             } else {
-                return { needsDownload: true, downloadUrl, downloadMetadata: { isLoaded: false } }
+                return { shouldDownload: true, downloadUrl, downloadMetadata: { isLoaded: false } }
             }
         }
     } catch (err) {
@@ -50,7 +50,7 @@ export async function validateNftMedia(
         }
     }
 
-    return { needsDownload: false, downloadMetadata }
+    return { shouldDownload: false, downloadMetadata }
 }
 
 function validateFile(nft: INft, headers: Headers): Partial<NftDownloadMetadata> {
