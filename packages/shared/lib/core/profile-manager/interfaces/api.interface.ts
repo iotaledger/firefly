@@ -6,7 +6,7 @@ import { IProfileManager } from './profile-manager.interface'
 import { RecoverAccountsPayload } from './recover-account-payload.interface'
 
 export interface IApi {
-    createAccountManager(id: string, options: AccountManagerOptions): IProfileManager
+    createAccountManager(id: string, options: AccountManagerOptions): Promise<IProfileManager>
     createAccount(managerId: string, payload: CreateAccountPayload): Promise<IAccount>
     deleteAccountManager(id: string): void
     getAccount(profileManagerId: string, index: number): Promise<IAccount>

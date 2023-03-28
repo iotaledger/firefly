@@ -378,7 +378,7 @@
                 "noNodes": "There are no nodes, unable to connect to the network",
                 "noNodesAuto": "There are no nodes, automatic selection will be used instead"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "پروف آف ورک",
                 "description": "اپنے آلہ پر مقامی طور پر پروف آف ورک کریں یا نوڈ کو دے دیں"
             },

@@ -378,7 +378,7 @@
                 "noNodes": "Não há nós, não foi possível conectar-se à rede",
                 "noNodesAuto": "Não há nós, a seleção automática será usada em vez disso"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Prova de Trabalho",
                 "description": "Complete a prova de trabalho localmente em seu dispositivo ou terceirize para um nó de rede"
             },

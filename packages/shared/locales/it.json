@@ -378,7 +378,7 @@
                 "noNodes": "Non ci sono nodi, impossibile connettersi alla rete",
                 "noNodesAuto": "Non ci sono nodi, verrà utilizzata la selezione automatica"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Proof of Work",
                 "description": "Esegui la \"prova di lavoro\" localmente sul tuo dispositivo o richiede che la esegua il nodo"
             },

@@ -378,7 +378,7 @@
                 "noNodes": "לא נמצאו צומתי רשת, לא ניתן להתחבר לתקשורת",
                 "noNodesAuto": "לא נמצאו צומתי רשת, הבחירה האוטומטית תבחר במקום זאת"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "מערכת הוכחת עבודה",
                 "description": "Complete proof of work locally on your device or outsource to the node"
             },

@@ -378,7 +378,7 @@
                 "noNodes": "There are no nodes, unable to connect to the network",
                 "noNodesAuto": "There are no nodes, automatic selection will be used instead"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Proof of Work",
                 "description": "Изврешете proof of work локално на вашиот уред или пренасочете го тоа кон јазолот"
             },

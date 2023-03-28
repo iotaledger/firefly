@@ -1,8 +1,7 @@
 export enum SecuritySettingsRoute {
-    ExportStronghold = 'exportStronghold',
     AppLock = 'appLock',
-    MaxMediaSize = 'maxMediaSize',
-    ChangePassword = 'changePassword',
+    StrongholdPasswordTimeout = 'strongholdPasswordTimeout',
     ChangePincode = 'changePincode',
-    DeleteProfile = 'deleteProfile',
+    ChangePassword = 'changePassword',
+    ExportStronghold = 'exportStronghold',
 }

@@ -378,7 +378,7 @@
                 "noNodes": "Nincs csomópont, a hálózathoz nem lehet csatlakozni",
                 "noNodesAuto": "Nincs csomópont, automatikus csomópont kiválasztás engedélyezve"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Tranzakcíók hitelesítéséhez szükséges számítás",
                 "description": "Számítás saját eszközön történő elvégzése vagy csomópontra történő kiszervezése"
             },

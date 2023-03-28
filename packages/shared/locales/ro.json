@@ -378,7 +378,7 @@
                 "noNodes": "There are no nodes, unable to connect to the network",
                 "noNodesAuto": "There are no nodes, automatic selection will be used instead"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Dovadã de lucru",
                 "description": "Completează dovada de lucru local pe dispozitivul tău sau externalizează către nod"
             },
