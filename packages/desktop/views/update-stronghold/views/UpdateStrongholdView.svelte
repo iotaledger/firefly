@@ -17,15 +17,23 @@
     let passwordError: string = ''
     let isBusy = false
 
+    $: isPasswordInputVisible = !isRecovery
+
     async function onSubmit(): Promise<void> {
         try {
             isBusy = true
+            if (isRecovery && isPasswordInputVisible) {
+                $onboardingProfile.strongholdPassword = password
+            }
             await updateStronghold(password, isRecovery)
             isBusy = false
             $updateStrongholdRouter.next()
         } catch (err) {
             isBusy = false
-            passwordError = localize(err.message) ?? err.message
+            if (isRecovery) {
+                isPasswordInputVisible = true
+            }
+            passwordError = localize(err.message)
             return
         }
     }
@@ -52,9 +60,13 @@
             {localize(`views.updateStronghold.update.${isRecovery ? 'recoveryBody' : 'loginBody'}`)}
         </Text>
         <form on:submit|preventDefault={onSubmit} id="update-stronghold-form">
-            {#if !isRecovery}
-                <PasswordInput bind:value={password} bind:error={passwordError} autofocus showRevealToggle />
-            {/if}
+            <PasswordInput
+                bind:value={password}
+                bind:error={passwordError}
+                autofocus
+                showRevealToggle
+                classes={isPasswordInputVisible ? '' : 'invisible'}
+            />
         </form>
     </div>
     <div slot="leftpane__action">
@@ -62,7 +74,7 @@
             type={HTMLButtonType.Submit}
             form="update-stronghold-form"
             classes="w-full"
-            disabled={!password || !!passwordError || isBusy}
+            disabled={isBusy || !password || !!passwordError}
             {isBusy}
         >
             {localize('actions.updateAndContinue')}
