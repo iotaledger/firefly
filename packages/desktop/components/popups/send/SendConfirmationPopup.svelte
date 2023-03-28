@@ -99,6 +99,7 @@
     }
 
     function refreshSendConfirmationState(): void {
+        updateNewTransactionDetails({ type: transactionDetails.type, expirationDate, giftStorageDeposit, surplus })
         void prepareTransactionOutput()
     }
 
@@ -164,7 +165,6 @@
         try {
             validateSendConfirmation(outputOptions, preparedOutput)
 
-            updateNewTransactionDetails({ type: transactionDetails.type, expirationDate, giftStorageDeposit, surplus })
             if ($isActiveLedgerProfile) {
                 ledgerPreparedOutput.set(preparedOutput)
             }
