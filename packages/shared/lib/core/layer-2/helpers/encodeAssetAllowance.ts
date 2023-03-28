@@ -1,24 +1,22 @@
 import BigInteger from 'big-integer'
-import { get } from 'svelte/store'
 import { WriteStream, Converter } from '@iota/util.js'
 
 import { EMPTY_BUFFER_BYTE_LENGTH, EMPTY_BUFFER } from '../constants'
 import { Allowance } from '../enums'
 import {
-    newTransactionDetails,
     NewTransactionType,
     getPersistedAsset,
     TokenStandard,
     NewTokenTransactionDetails,
     IPersistedAsset,
     NewNftTransactionDetails,
+    NewTransactionDetails,
 } from '@core/wallet'
 
-export function encodeAssetAllowance(): Uint8Array {
+export function encodeAssetAllowance(transactionDetails: NewTransactionDetails): Uint8Array {
     const allowance = new WriteStream()
     allowance.writeUInt8('encodedAllowance', Allowance.Set)
 
-    const transactionDetails = get(newTransactionDetails)
     if (transactionDetails.type === NewTransactionType.TokenTransfer) {
         const asset = getPersistedAsset(transactionDetails.assetId)
         if (asset.standard === TokenStandard.BaseCoin) {
