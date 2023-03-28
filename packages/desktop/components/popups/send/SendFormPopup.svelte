@@ -2,7 +2,7 @@
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
     import { isLayer1Destination } from '@core/layer-2'
-    import { selectedAccountNfts } from '@core/nfts'
+    import { ownedNfts } from '@core/nfts'
     import { getByteLengthOfString, MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
     import {
         getAssetById,
@@ -66,7 +66,7 @@
     let activeTab: SendForm =
         transactionDetails.type === NewTransactionType.TokenTransfer ? SendForm.SendToken : SendForm.SendNft
 
-    $: hasSpendableNfts = $selectedAccountNfts.some((nft) => nft.isSpendable)
+    $: hasSpendableNfts = $ownedNfts.some((nft) => nft.isSpendable)
     $: isLayer2 = !isLayer1Destination(networkAddress)
     $: isSendTokenTab = activeTab === SendForm.SendToken
 
