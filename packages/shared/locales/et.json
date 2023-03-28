@@ -378,7 +378,7 @@
                 "noNodes": "There are no nodes, unable to connect to the network",
                 "noNodesAuto": "There are no nodes, automatic selection will be used instead"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Töötõend",
                 "description": "Complete proof of work locally on your device or outsource to the node"
             },
