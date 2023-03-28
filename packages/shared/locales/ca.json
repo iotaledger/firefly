@@ -378,7 +378,7 @@
                 "noNodes": "No hi ha nodes, no us podeu connectar a la xarxa",
                 "noNodesAuto": "No hi ha nodes, en lloc d'això s'utilitzarà la selecció automàtica"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Prova de Treball",
                 "description": "Realitza la prova de treball localment en el teu dispositiu o delegar-ho al node"
             },

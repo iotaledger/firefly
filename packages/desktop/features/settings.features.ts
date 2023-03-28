@@ -56,7 +56,13 @@ const settingsFeatures = {
     },
     network: {
         enabled: true,
-        networkConfiguration: {
+        networkInformation: {
+            enabled: true,
+        },
+        configureNodeList: {
+            enabled: true,
+        },
+        localProofOfWork: {
             enabled: true,
         },
     },
