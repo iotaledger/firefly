@@ -3,7 +3,7 @@ import { encodeAddress, encodeAssetAllowance, encodeSmartContractParameters } fr
 import { WriteStream } from '@iota/util.js'
 import { getAddressFromSubject } from '@core/wallet/utils'
 import type { NewTransactionDetails } from '@core/wallet/types'
-import { ACCOUNTS_CONTRACT, EXTERNALLY_OWNED_ACCOUNT, GAS_BUDGET, TRANSFER_ALLOWANCE } from '@core/layer-2'
+import { ACCOUNTS_CONTRACT, EXTERNALLY_OWNED_ACCOUNT, GAS_BUDGET, TRANSFER_ALLOWANCE } from '../constants'
 
 export function getLayer2MetadataForTransfer(transactionDetails: NewTransactionDetails): string {
     const metadataStream = new WriteStream()
