@@ -247,6 +247,9 @@ const ElectronApi = {
     checkIfFileExists(filePath) {
         return ipcRenderer.invoke('check-if-file-exists', filePath)
     },
+    cancelDownload(nftId) {
+        return ipcRenderer.invoke('cancel-download', nftId)
+    },
     /*
      * Opens url and checks against acceptlist
      * @param {string} url - Target url

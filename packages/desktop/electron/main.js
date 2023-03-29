@@ -417,6 +417,7 @@ ipcMain.handle('copy-file', (_e, sourceFilePath, destinationFilePath) => {
     fs.writeFileSync(dest, srcFileBuffer)
 })
 
+const downloadItems = {}
 ipcMain.handle('download', async (event, url, destination, nftId, accountIndex) => {
     const userPath = app.getPath('userData')
     const directory = app.isPackaged ? userPath : __dirname
@@ -428,8 +429,14 @@ ipcMain.handle('download', async (event, url, destination, nftId, accountIndex) 
         showBadge: true,
         showProgressBar: true,
         onCompleted: () => {
+            delete downloadItems[nftId]
             windows.main.webContents.send('download-done', { nftId, accountIndex })
         },
+        onCancel: () => {
+            delete downloadItems[nftId]
+            windows.main.webContents.send('download-interrupted', { nftId, accountIndex })
+        },
+        onStarted: (item) => (downloadItems[nftId] = item),
     })
 })
 
@@ -438,6 +445,11 @@ ipcMain.handle('check-if-file-exists', (_e, filePath) => {
     const directory = app.isPackaged ? userPath : __dirname
 
     return fs.existsSync(`${directory}/__storage__/${filePath}`)
+})
+
+ipcMain.handle('cancel-download', async (event, nftId) => {
+    const downloadItem = downloadItems[nftId]
+    downloadItem?.cancel()
 })
 
 // Diagnostics
