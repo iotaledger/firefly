@@ -90,7 +90,8 @@
         class="py-6 px-5 fixed w-full flex flex-col flex-auto overflow-hidden {fullScreen
             ? 'h-screen'
             : ''} bg-white dark:bg-gray-800 {enterFromSide ? '' : 'rounded-t-2xl'}"
-        style="{enterFromSide ? `left: ${position}px;` : `bottom: ${position}px;`} {$isKeyboardOpen && `padding-bottom: ${$keyboardHeight}px`}"
+        style="{enterFromSide ? `left: ${position}px;` : `bottom: ${position}px;`} {$isKeyboardOpen &&
+            `padding-bottom: ${$keyboardHeight}px`}"
     >
         {#if enterFromSide === false}
             <decorator
