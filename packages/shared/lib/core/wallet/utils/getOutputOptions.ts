@@ -17,11 +17,11 @@ export function getOutputOptions(transactionDetails: NewTransactionDetails): Out
 
     const assets = getAssetFromTransactionDetails(transactionDetails)
 
-    const tag = Converter.utf8ToHex(transactionDetails?.tag, true)
+    const tag = Converter.utf8ToHex(transactionDetails?.tag)
 
     const metadata = layer2Parameters
         ? getLayer2MetadataForTransfer(transactionDetails)
-        : Converter.utf8ToHex(transactionDetails?.metadata, true)
+        : Converter.utf8ToHex(transactionDetails?.metadata)
 
     const expirationUnixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
 
