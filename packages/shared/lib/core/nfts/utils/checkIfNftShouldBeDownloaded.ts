@@ -1,10 +1,11 @@
-import { activeProfile, getStorageDirectoryOfProfiles } from '@core/profile'
+import { activeProfile } from '@core/profile'
 import { get } from 'svelte/store'
 import { BYTES_PER_MEGABYTE } from '../constants'
 import { DownloadErrorType, DownloadWarningType, HttpHeader } from '../enums'
 import { fetchWithTimeout } from './fetchWithTimeout'
 import { NftDownloadMetadata, INft, IPersistedNftData } from '../interfaces'
 import { addPersistedNftData, persistedNftForActiveProfile } from '../stores'
+import { Platform } from '@core/app'
 
 const HEAD_FETCH_TIMEOUT_SECONDS = 3
 
@@ -14,8 +15,7 @@ export async function checkIfNftShouldBeDownloaded(
     let downloadMetadata: NftDownloadMetadata = { isLoaded: false }
 
     try {
-        // TODO: do we want to trust the persisted store if a file is downloaded or do we check it everytime?
-        const alreadyDownloaded = await isFileAlreadyDownloaded(nft)
+        const alreadyDownloaded = await Platform.checkIfFileExists(`${nft.filePath}/original`)
 
         if (alreadyDownloaded) {
             downloadMetadata.isLoaded = true
@@ -110,19 +110,4 @@ async function getUrlAndHeadersFromOldSoonaverseStructure(
         })
         return { url: backupUrl, headers: backupResponse.headers }
     }
-}
-
-async function isFileAlreadyDownloaded(nft: INft): Promise<boolean> {
-    const basePath =
-        process.env.NODE_ENV === 'development' ? 'build/__storage__' : await getStorageDirectoryOfProfiles()
-
-    let status: number | undefined
-    try {
-        const localFile = await fetch(`${basePath}/${nft.filePath}/original`)
-        status = localFile.status
-    } catch (err) {
-        status = undefined
-    }
-
-    return status === 200 || status === 304
 }
