@@ -53,7 +53,7 @@ function cleanupProfileState(clearActiveProfile: boolean): void {
     hasLoadedAccounts.set(false)
     resetSelectedAccountIndex()
 
-    clearDownloading()
+    void clearDownloading()
 
     // Governance Stores
     resetRegisteredProposals()

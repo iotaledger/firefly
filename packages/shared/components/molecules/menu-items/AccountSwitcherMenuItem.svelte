@@ -5,12 +5,14 @@
     import { BASE_TOKEN } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { formatTokenAmountBestMatch } from '@core/wallet'
+    import { clearDownloading } from '@core/nfts'
 
     export let account: IAccountState
     export let onClick: () => unknown
     export let id: string = ''
 
-    function onAccountClick(accountIndex: number): void {
+    async function onAccountClick(accountIndex: number): Promise<void> {
+        await clearDownloading()
         setSelectedAccount(accountIndex)
         onClick && onClick()
     }
