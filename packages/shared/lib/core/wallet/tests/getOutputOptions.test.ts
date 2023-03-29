@@ -181,6 +181,28 @@ describe('File: getOutputOptions.ts', () => {
         expect(output).toStrictEqual(expectedOutput)
     })
 
+    it('should return output options for nft to layer 2', () => {
+        newTransactionDetails = {
+            type: NewTransactionType.NftTransfer,
+            recipient: baseTransaction.recipient,
+            nftId,
+            layer2Parameters,
+        }
+        const output = getOutputOptions(newTransactionDetails)
+
+        const expectedOutput = {
+            recipientAddress: layer2Parameters.networkAddress,
+            amount: addGasBudget('0'),
+            assets: {
+                nftId,
+            },
+            features: { metadata: getLayer2MetadataForTransfer(newTransactionDetails), sender: senderAddress },
+            unlocks: {},
+            storageDeposit: { returnStrategy: ReturnStrategy.Return },
+        }
+        expect(output).toStrictEqual(expectedOutput)
+    })
+
     it('should return output options for nft transfer', () => {
         newTransactionDetails = {
             type: NewTransactionType.NftTransfer,
