@@ -24,7 +24,7 @@
         try {
             await $selectedAccount.deregisterParticipationEvent($selectedProposalId)
             updateActiveAccountMetadata($selectedAccount.index, {
-                removedProposalsIds: [...($selectedAccount.removedProposalsIds ?? []), $selectedProposalId],
+                removedProposalIds: [...($selectedAccount.removedProposalIds ?? []), $selectedProposalId],
             })
             $governanceRouter.previous()
             clearEvent()

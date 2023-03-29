@@ -40,11 +40,9 @@
                 nodeInput?.validate(),
             ])
             await registerParticipationWrapper()
-            if ($selectedAccount?.removedProposalsIds?.includes(inputtedEventId)) {
-                updateActiveAccountMetadata($selectedAccount.index, {
-                    removedProposalsIds: $selectedAccount.removedProposalsIds.filter((id) => id !== inputtedEventId),
-                })
-            }
+            updateActiveAccountMetadata($selectedAccount.index, {
+                removedProposalIds: $selectedAccount.removedProposalIds.filter((id) => id !== inputtedEventId),
+            })
             isBusy = false
         } catch (err) {
             isBusy = false

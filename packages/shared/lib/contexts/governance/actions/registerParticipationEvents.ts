@@ -11,16 +11,15 @@ export async function registerParticipationEvents(
     registrationOptions: ParticipationEventRegistrationOptions,
     account: IAccountState
 ): Promise<ParticipationEventMap> {
-    const eventMap = await account.registerParticipationEvents(registrationOptions)
-
-    if (get(selectedAccount).removedProposalsIds?.length > 0) {
-        const notRemovedEventMap = Object.keys(eventMap)
-            .filter((eventId) => !get(selectedAccount).removedProposalsIds.includes(eventId))
-            .reduce((obj, key) => (obj[key] = eventMap[key]), {})
-        addProposalsFromParticipationEventMap(eventMap, account)
-        return notRemovedEventMap
-    } else {
-        addProposalsFromParticipationEventMap(eventMap, account)
-        return eventMap
+    let newRegistrationOptions = registrationOptions
+    if (get(selectedAccount)?.removedProposalIds?.length > 0) {
+        newRegistrationOptions = {
+            ...registrationOptions,
+            eventsToIgnore: get(selectedAccount).removedProposalIds,
+        }
     }
+
+    const eventMap = await account.registerParticipationEvents(newRegistrationOptions)
+    addProposalsFromParticipationEventMap(eventMap, account)
+    return eventMap
 }
