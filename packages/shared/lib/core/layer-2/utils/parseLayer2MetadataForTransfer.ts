@@ -19,9 +19,9 @@ export function parseLayer2MetadataForTransfer(metadata: Uint8Array): ILayer2Tra
     const allowance = parseAllowance(readStream)
 
     return {
-        senderContract: Converter.decimalToHex(senderContract, true),
-        targetContract: TARGET_CONTRACTS[targetContract] ?? Converter.decimalToHex(targetContract, true),
-        contractFunction: CONTRACT_FUNCTIONS[contractFunction] ?? Converter.decimalToHex(contractFunction, true),
+        senderContract: Converter.decimalToHex(senderContract),
+        targetContract: TARGET_CONTRACTS[targetContract] ?? Converter.decimalToHex(targetContract),
+        contractFunction: CONTRACT_FUNCTIONS[contractFunction] ?? Converter.decimalToHex(contractFunction),
         gasBudget: gasBudget.toString(),
         ethereumAddress,
         baseTokenAmount: allowance?.baseTokenAmount,
