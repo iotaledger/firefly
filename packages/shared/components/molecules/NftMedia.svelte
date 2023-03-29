@@ -17,7 +17,7 @@
 
     let nft: INft
     $: $ownedNfts, (nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, nftId))
-    $: isDownloading = $nftDownloadQueue.some(queueItem => queueItem.nft.id === nftId)
+    $: isDownloading = $nftDownloadQueue.some((queueItem) => queueItem.nft.id === nftId)
 </script>
 
 {#if !nft?.composedUrl || !nft.downloadMetadata?.isLoaded}
