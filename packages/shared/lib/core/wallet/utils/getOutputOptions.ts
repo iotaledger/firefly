@@ -3,8 +3,7 @@ import { OutputOptions, Assets, ReturnStrategy } from '@iota/wallet'
 
 import { convertDateToUnixTimestamp, Converter } from '@core/utils'
 import { getAssetById, NewTransactionType, selectedAccountAssets } from '../stores'
-import { getLayer2MetadataForTransfer } from '@core/layer-2'
-import { addGasBudget } from '@core/layer-2/utils/addGasBudget'
+import { addGasBudget, getLayer2MetadataForTransfer } from '@core/layer-2/utils'
 import { NewTransactionDetails } from '@core/wallet/types'
 import { getAddressFromSubject } from '@core/wallet/utils'
 

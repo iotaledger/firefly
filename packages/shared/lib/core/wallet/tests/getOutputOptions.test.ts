@@ -2,8 +2,7 @@ import { CoinType } from '@iota/wallet/out/types'
 
 import { Converter, convertDateToUnixTimestamp } from '@core/utils'
 import { activeProfileId } from '@core/profile/stores'
-import { getLayer2MetadataForTransfer } from '@core/layer-2/actions'
-import { addGasBudget } from '@core/layer-2/utils'
+import { addGasBudget, getLayer2MetadataForTransfer } from '@core/layer-2/utils'
 
 import { getOutputOptions } from '../utils'
 import { ReturnStrategy, TokenStandard, VerifiedStatus } from '../enums'
