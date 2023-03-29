@@ -6,7 +6,7 @@ import { getLayer2MetadataForTransfer } from '@core/layer-2/actions'
 import { addGasBudget } from '@core/layer-2/utils'
 
 import { getOutputOptions } from '../utils'
-import { TokenStandard, VerifiedStatus } from '../enums'
+import { ReturnStrategy, TokenStandard, VerifiedStatus } from '../enums'
 import { IAsset, IPersistedAsset } from '../interfaces'
 import { NewTransactionType } from '../stores'
 import { NewTransactionDetails } from '../types'
@@ -86,7 +86,7 @@ describe('File: getOutputOptions.ts', () => {
             amount,
             unlocks: {},
             features: { metadata: Converter.utf8ToHex(metadata, true), tag: Converter.utf8ToHex(tag, true) },
-            storageDeposit: { returnStrategy: 'Return' },
+            storageDeposit: { returnStrategy: ReturnStrategy.Return },
         }
         expect(output).toStrictEqual(expectedOutput)
     })
@@ -103,7 +103,7 @@ describe('File: getOutputOptions.ts', () => {
             amount,
             features: {},
             unlocks: { expirationUnixTime: convertDateToUnixTimestamp(expirationDate) },
-            storageDeposit: { returnStrategy: 'Return' },
+            storageDeposit: { returnStrategy: ReturnStrategy.Return },
         }
         expect(output).toStrictEqual(expectedOutput)
     })
@@ -129,7 +129,7 @@ describe('File: getOutputOptions.ts', () => {
             },
             features: {},
             unlocks: { expirationUnixTime: convertDateToUnixTimestamp(expirationDate) },
-            storageDeposit: { returnStrategy: 'Return' },
+            storageDeposit: { returnStrategy: ReturnStrategy.Return },
         }
         expect(output).toStrictEqual(expectedOutput)
     })
@@ -150,7 +150,7 @@ describe('File: getOutputOptions.ts', () => {
                 sender: senderAddress,
             },
             unlocks: { expirationUnixTime: convertDateToUnixTimestamp(expirationDate) },
-            storageDeposit: { returnStrategy: 'Return' },
+            storageDeposit: { returnStrategy: ReturnStrategy.Return },
         }
         expect(output).toStrictEqual(expectedOutput)
     })
@@ -177,7 +177,7 @@ describe('File: getOutputOptions.ts', () => {
             },
             features: { metadata: getLayer2MetadataForTransfer(newTransactionDetails), sender: senderAddress },
             unlocks: { expirationUnixTime: convertDateToUnixTimestamp(expirationDate) },
-            storageDeposit: { returnStrategy: 'Return' },
+            storageDeposit: { returnStrategy: ReturnStrategy.Return },
         }
         expect(output).toStrictEqual(expectedOutput)
     })
@@ -199,7 +199,7 @@ describe('File: getOutputOptions.ts', () => {
             },
             features: {},
             unlocks: { expirationUnixTime: convertDateToUnixTimestamp(expirationDate) },
-            storageDeposit: { returnStrategy: 'Return' },
+            storageDeposit: { returnStrategy: ReturnStrategy.Return },
         }
         expect(output).toStrictEqual(expectedOutput)
     })
@@ -226,7 +226,7 @@ describe('File: getOutputOptions.ts', () => {
             },
             features: {},
             unlocks: { expirationUnixTime: convertDateToUnixTimestamp(expirationDate) },
-            storageDeposit: { returnStrategy: 'Return' },
+            storageDeposit: { returnStrategy: ReturnStrategy.Return },
         }
         expect(output).toStrictEqual(expectedOutput)
     })
@@ -244,7 +244,7 @@ describe('File: getOutputOptions.ts', () => {
             amount,
             features: {},
             unlocks: { expirationUnixTime: convertDateToUnixTimestamp(expirationDate) },
-            storageDeposit: { returnStrategy: 'Return' },
+            storageDeposit: { returnStrategy: ReturnStrategy.Return },
         }
         expect(output).toStrictEqual(expectedOutput)
     })
@@ -263,7 +263,7 @@ describe('File: getOutputOptions.ts', () => {
             amount,
             features: {},
             unlocks: { expirationUnixTime: convertDateToUnixTimestamp(expirationDate) },
-            storageDeposit: { returnStrategy: 'Gift' },
+            storageDeposit: { returnStrategy: ReturnStrategy.Gift },
         }
         expect(output).toStrictEqual(expectedOutput)
     })
