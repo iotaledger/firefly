@@ -13,6 +13,8 @@
     } from '@/auxiliary/drawer'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
 
+    import { isKeyboardOpen, keyboardHeight } from '@/auxiliary/keyboard'
+
     export let onBack: () => unknown = () => {}
     export let onClose: () => unknown = () => {}
     export let allowBack: boolean = false
@@ -88,7 +90,7 @@
         class="py-6 px-5 fixed w-full flex flex-col flex-auto overflow-hidden {fullScreen
             ? 'h-screen'
             : ''} bg-white dark:bg-gray-800 {enterFromSide ? '' : 'rounded-t-2xl'}"
-        style={enterFromSide ? `left: ${position}px;` : `bottom: ${position}px;`}
+        style="{enterFromSide ? `left: ${position}px;` : `bottom: ${position}px;`} {$isKeyboardOpen && `margin-bottom: ${$keyboardHeight}px`}"
     >
         {#if enterFromSide === false}
             <decorator
