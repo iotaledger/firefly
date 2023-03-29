@@ -3,7 +3,7 @@
     import { MediaDisplay } from 'shared/components'
 
     import { selectedAccountIndex } from '@core/account'
-    import { getNftByIdFromAllAccountNfts, INft, ownedNfts } from '@core/nfts'
+    import { getNftByIdFromAllAccountNfts, INft, nftDownloadQueue, ownedNfts } from '@core/nfts'
 
     export let nftId: string
     export let autoplay: boolean = false
@@ -17,11 +17,12 @@
 
     let nft: INft
     $: $ownedNfts, (nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, nftId))
+    $: isDownloading = $nftDownloadQueue.some((queueItem) => queueItem.nft.id === nftId)
 </script>
 
 {#if !nft?.composedUrl || !nft.downloadMetadata?.isLoaded}
     <slot name="placeholder">
-        <MediaPlaceholder type={nft?.parsedMetadata?.type} {bgColor} {darkBgColor} />
+        <MediaPlaceholder type={nft?.parsedMetadata?.type} {bgColor} {darkBgColor} {isDownloading} />
     </slot>
 {:else}
     <MediaDisplay
