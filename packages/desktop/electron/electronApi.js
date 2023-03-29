@@ -244,6 +244,9 @@ const ElectronApi = {
     downloadFile(url, destinationFilePath, nftId, accountIndex) {
         return ipcRenderer.invoke('download', url, destinationFilePath, nftId, accountIndex)
     },
+    checkIfFileExists(filePath) {
+        return ipcRenderer.invoke('check-if-file-exists', filePath)
+    },
     /*
      * Opens url and checks against acceptlist
      * @param {string} url - Target url

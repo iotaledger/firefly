@@ -433,6 +433,13 @@ ipcMain.handle('download', async (event, url, destination, nftId, accountIndex) 
     })
 })
 
+ipcMain.handle('check-if-file-exists', (_e, filePath) => {
+    const userPath = app.getPath('userData')
+    const directory = app.isPackaged ? userPath : __dirname
+
+    return fs.existsSync(`${directory}/__storage__/${filePath}`)
+})
+
 // Diagnostics
 const getDiagnostics = () => {
     const osXNameMap = new Map([

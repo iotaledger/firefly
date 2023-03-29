@@ -75,6 +75,9 @@ const Platform: IPlatform = {
     downloadFile(): Promise<void> {
         return Promise.resolve(undefined)
     },
+    checkIfFileExists(): Promise<boolean> {
+        return Promise.resolve(false)
+    },
     updateMenu(attribute: string, value: unknown): void {},
     copyFile(copyFilePath: string, destinationFilePath: string): Promise<void> {
         return Promise.resolve()
