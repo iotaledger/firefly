@@ -116,7 +116,7 @@
             try {
                 const response = await fetchWithTimeout(composeUrlFromNftUri(uri), 1, { method: 'HEAD' })
                 if (response.status === 200 || response.status === 304) {
-                    type = response.headers.get[HttpHeader.ContentType]
+                    type = response.headers.get(HttpHeader.ContentType)
                 } else {
                     uriError = localize('popups.mintNftForm.errors.notReachable')
                 }

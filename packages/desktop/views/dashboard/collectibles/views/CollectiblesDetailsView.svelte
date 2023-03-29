@@ -129,8 +129,8 @@
         )
     }
 
-    function returnIfNftWasSent(selectedAccountNfts: INft[], currentTime: Date): void {
-        const nft = selectedAccountNfts.find((nft) => nft.id === id)
+    function returnIfNftWasSent(ownedNfts: INft[], currentTime: Date): void {
+        const nft = ownedNfts.find((nft) => nft.id === id)
         const isLocked = nft.timelockTime > currentTime.getTime()
         if (nft?.isSpendable || isLocked) {
             // empty

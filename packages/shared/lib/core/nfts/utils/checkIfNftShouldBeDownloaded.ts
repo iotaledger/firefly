@@ -8,9 +8,9 @@ import { addPersistedNftData, persistedNftForActiveProfile } from '../stores'
 
 const HEAD_FETCH_TIMEOUT_SECONDS = 3
 
-export async function validateNftMedia(
+export async function checkIfNftShouldBeDownloaded(
     nft: INft
-): Promise<{ needsDownload: boolean; downloadMetadata?: NftDownloadMetadata; downloadUrl?: string }> {
+): Promise<{ shouldDownload: boolean; downloadMetadata?: NftDownloadMetadata; downloadUrl?: string }> {
     let downloadMetadata: NftDownloadMetadata = { isLoaded: false }
 
     try {
@@ -35,7 +35,7 @@ export async function validateNftMedia(
             if (validation?.error || validation?.warning) {
                 downloadMetadata = { ...downloadMetadata, ...validation }
             } else {
-                return { needsDownload: true, downloadUrl, downloadMetadata: { isLoaded: false } }
+                return { shouldDownload: true, downloadUrl, downloadMetadata: { isLoaded: false } }
             }
         }
     } catch (err) {
@@ -48,7 +48,7 @@ export async function validateNftMedia(
         addPersistedNftData(nft.id, { error: { message: err?.message } })
     }
 
-    return { needsDownload: false, downloadMetadata }
+    return { shouldDownload: false, downloadMetadata }
 }
 
 function validateFile(nft: INft, contentType: string, contentLength: string): Partial<NftDownloadMetadata> {
