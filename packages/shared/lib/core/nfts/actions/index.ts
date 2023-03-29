@@ -1,5 +1,6 @@
 export * from './addNftsToDownloadQueue'
 export * from './addOrUpdateNftInAllAccountNfts'
+export * from './clearDownloading'
 export * from './downloadNextNftInQueue'
 export * from './getNftByIdFromAllAccountNfts'
 export * from './loadNftsForActiveProfile'
