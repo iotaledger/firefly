@@ -103,20 +103,19 @@
         setPlatform(platform)
     })
 
-    $keyboardHeight = window.innerHeight / 2
     // Press ctrl + k to toggle the fake keyboard
-    document.onkeydown = function (e): void {
-        if (e.ctrlKey && e.key === 'c') {
-            $appSettings.theme = $appSettings.theme === AppTheme.Light ? AppTheme.Dark : AppTheme.Light
-            $appSettings.darkMode = shouldBeDarkMode($appSettings.theme)
-        }
-        if (e.ctrlKey && e.key === 'd') {
-            $onboardingProfile.isDeveloperProfile = true
-        }
-        if (e.ctrlKey && e.key === 'k') {
-            $isKeyboardOpen = !$isKeyboardOpen
-        }
-    }
+    // document.onkeydown = function (e): void {
+    //     if (e.ctrlKey && e.key === 'c') {
+    //         $appSettings.theme = $appSettings.theme === AppTheme.Light ? AppTheme.Dark : AppTheme.Light
+    //         $appSettings.darkMode = shouldBeDarkMode($appSettings.theme)
+    //     }
+    //     if (e.ctrlKey && e.key === 'd') {
+    //         $onboardingProfile.isDeveloperProfile = true
+    //     }
+    //     if (e.ctrlKey && e.key === 'k') {
+    //         $isKeyboardOpen = !$isKeyboardOpen
+    //     }
+    // }
 </script>
 
 <!-- empty div to avoid auto-purge removing dark classes -->
@@ -133,9 +132,9 @@
 <DrawerManager />
 <ToastContainer swipe fadeDuration={100} classes="fixed top-0 p-5 z-10 w-full" showDismiss />
 
-{#if $isKeyboardOpen}
+<!-- {#if $isKeyboardOpen}
     <div class="keyboard" />
-{/if}
+{/if} -->
 
 <style global type="text/scss">
     @tailwind base;
