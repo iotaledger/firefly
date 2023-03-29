@@ -1,19 +1,20 @@
-import { ILayer2Parameters } from '@core/layer-2'
-import { Subject, NewTransactionType } from '@core/wallet'
+import type { ILayer2Parameters } from '@core/layer-2'
+import type { Subject } from '@core/wallet'
+import { NewTransactionType } from '@core/wallet/stores'
 
 export type NewTransactionDetails = NewNftTransactionDetails | NewTokenTransactionDetails
 
 type NewBaseTransactionDetails = {
-    metadata?: string
     recipient: Subject
     tag?: string
+    metadata?: string
     expirationDate?: Date
-    giftStorageDeposit?: boolean
     surplus?: string
+    giftStorageDeposit?: boolean
     layer2Parameters?: ILayer2Parameters
+    addSenderFeature?: boolean
     disableToggleGift?: boolean
     disableChangeExpiration?: boolean
-    addSenderFeature?: boolean
     disableAssetSelection?: boolean
 }
 

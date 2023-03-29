@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { get } from 'svelte/store'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
     import { isLayer1Destination } from '@core/layer-2'
@@ -12,6 +13,7 @@
         NewTransactionType,
         setNewTransactionDetails,
     } from '@core/wallet'
+    import { selectedAccount } from '@core/account/stores'
     import {
         AssetAmountInput,
         Button,
@@ -24,7 +26,6 @@
         Text,
         TextType,
     } from 'shared/components'
-    import { get } from 'svelte/store'
     import features from '@features/features'
 
     enum SendForm {
@@ -71,7 +72,7 @@
     $: isSendTokenTab = activeTab === SendForm.SendToken
 
     function setTransactionDetails(): void {
-        layer2Parameters = isLayer2 ? { networkAddress } : null
+        layer2Parameters = isLayer2 ? { networkAddress, senderAddress: $selectedAccount.depositAddress } : null
 
         if (isSendTokenTab) {
             setNewTransactionDetails({

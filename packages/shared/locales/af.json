@@ -378,7 +378,7 @@
                 "noNodes": "Daar is geen nodes nie, kan nie aan die netwerk koppel nie",
                 "noNodesAuto": "Daar is geen nodes nie, outomatiese seleksie sal eerder gebruik word"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Proof of work",
                 "description": "Voltooi proof of work op jou toestel of uitvoer dit na 'n node"
             },

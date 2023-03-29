@@ -378,7 +378,7 @@
                 "noNodes": "Det er ingen noder, og klarer derfor ikke å koble til nettverket",
                 "noNodesAuto": "Ingen noder, automatisk selektering av noder brukes i stedet"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Proof of work",
                 "description": "Fullfør proof of work lokalt på din enhet eller deleger arbeidet til noden"
             },

@@ -378,7 +378,7 @@
                 "noNodes": "Düğüm yok, ağa bağlanamıyor",
                 "noNodesAuto": "Düğüm yok, bunun yerine otomatik seçim kullanılacak"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "İş Kanıtı",
                 "description": "PoW'u cihazınızda lokal olarak tamamlayın veya Node'a yaptırın"
             },

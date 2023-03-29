@@ -1,8 +1,9 @@
 {
-    "name": "firefly-mobile",
-    "version": "2.0.0-alpha.0",
-    "description": "Official IOTA wallet on mobile",
-    "main": "main.js",
+    "name": "mobile",
+    "productName": "Firefly Shimmer",
+    "version": "2.0.0",
+    "description": "Official wallet application of Shimmer",
+    "main": "public/build/main.js",
     "repository": "git@github.com:iotaledger/firefly.git",
     "author": "IOTA Foundation <contact@iota.org>",
     "license": "Apache-2.0",
@@ -36,9 +37,5 @@
         "@capacitor/splash-screen": "^1.2.2",
         "capacitor-secure-storage-plugin": "^0.6.2",
         "shared": "0.2.0"
-    },
-    "engineStrict": true,
-    "engines": {
-        "node": ">=18"
     }
 }

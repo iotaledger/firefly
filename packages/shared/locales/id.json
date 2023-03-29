@@ -378,7 +378,7 @@
                 "noNodes": "Tidak ada nodes, tidak dapat terhubung ke jaringan",
                 "noNodesAuto": "Tidak ada node, pilihan otomatis akan digunakan sebagai gantinya"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Bukti kerja",
                 "description": "Bukti lengkap pekerjaan secara lokal di perangkat Anda atau melakukan outsourcing ke node"
             },

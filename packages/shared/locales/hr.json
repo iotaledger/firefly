@@ -378,7 +378,7 @@
                 "noNodes": "Nema nodeova, nije se moguće povezati s mrežom",
                 "noNodesAuto": "Nema nodeova na raspolaganju. Upotrijebit ćemo automatski odabir."
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Proof of Work",
                 "description": "Odradi Proof of Work lokalno na svojem uređaju ili ga outsourceaj nodeu"
             },
