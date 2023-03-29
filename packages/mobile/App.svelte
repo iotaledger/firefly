@@ -2,6 +2,7 @@
     import { onMount } from 'svelte'
 
     import { SplashScreen } from '@capacitor/splash-screen'
+    import { Keyboard } from '@capacitor/keyboard'
 
     import { DrawerManager } from '@components'
     import { ToastContainer } from '@ui'
@@ -53,6 +54,18 @@
     $: if ($activeProfile && !$loggedIn) {
         closeAllDrawers()
     }
+
+    $keyboardHeight = window.screen.height / 3.5 // set initial state
+
+    void Keyboard.addListener('keyboardWillShow', (info) => {
+        // Listen for when the keyboard is about to be showed.
+        $keyboardHeight = info.keyboardHeight
+        $isKeyboardOpen = true
+    })
+    void Keyboard.addListener('keyboardWillHide', () => {
+        // Listen for when the keyboard is about to be hidden.
+        $isKeyboardOpen = false
+    })
 
     void setupI18n({ fallbackLocale: 'en', initialLocale: $appSettings.language })
 
