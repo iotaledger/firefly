@@ -179,11 +179,7 @@
         {:else}
             <NftInput bind:this={nftInput} bind:nftId readonly={disableAssetSelection} />
         {/if}
-        <NetworkInput
-            bind:this={networkInput}
-            bind:networkAddress
-            showLayer2={features?.wallet?.sendToLayer2?.enabled}
-        />
+        <NetworkInput bind:this={networkInput} bind:networkAddress showLayer2={features?.wallet?.showLayer2?.enabled} />
         <RecipientInput bind:this={recipientInput} bind:recipient {isLayer2} />
         <optional-inputs class="flex flex-row flex-wrap gap-4">
             <OptionalInput
