@@ -91,7 +91,7 @@
             ? 'h-screen'
             : ''} bg-white dark:bg-gray-800 {enterFromSide ? '' : 'rounded-t-2xl'}"
         style="{enterFromSide ? `left: ${position}px;` : `bottom: ${position}px;`} {$isKeyboardOpen &&
-            `padding-bottom: ${$keyboardHeight}px`}"
+            `border-bottom: ${$keyboardHeight}px solid transparent`}"
     >
         {#if enterFromSide === false}
             <decorator
