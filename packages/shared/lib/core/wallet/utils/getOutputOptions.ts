@@ -1,11 +1,11 @@
 import { get } from 'svelte/store'
-import { OutputOptions, Assets, ReturnStrategy } from '@iota/wallet'
-
+import { OutputOptions, Assets } from '@iota/wallet/out/types'
 import { convertDateToUnixTimestamp, Converter } from '@core/utils'
 import { getAssetById, NewTransactionType, selectedAccountAssets } from '../stores'
 import { addGasBudget, getLayer2MetadataForTransfer } from '@core/layer-2/utils'
 import { NewTransactionDetails } from '@core/wallet/types'
 import { getAddressFromSubject } from '@core/wallet/utils'
+import { ReturnStrategy } from '../enums'
 
 export function getOutputOptions(transactionDetails: NewTransactionDetails): OutputOptions {
     const { recipient, expirationDate, giftStorageDeposit, layer2Parameters } = transactionDetails ?? {}
