@@ -269,6 +269,10 @@ export class Converter {
         return prefix ? '0x' + number.toString(16) : number.toString(16)
     }
 
+    public static bigIntToHex(bigInt: BigInt, prefix = true): string {
+        return prefix ? '0x' + bigInt.toString(16) : bigInt.toString(16)
+    }
+
     /**
      * Is the data hex format.
      * @param value The value to test.

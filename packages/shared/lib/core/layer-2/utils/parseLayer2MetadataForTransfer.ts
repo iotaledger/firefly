@@ -1,8 +1,9 @@
 import { Converter } from '@core/utils'
 import { ReadStream } from '@iota/util.js'
-import { Allowance, CONTRACT_FUNCTIONS, ILayer2TransferAllowanceMetadata, TARGET_CONTRACTS } from '@core/layer-2'
 import { NativeTokenAmount, TOKEN_ID_BYTE_LENGTH } from '@core/token'
-import { ILayer2Allowance } from '@core/layer-2/interfaces/layer2-allowance.interface'
+import { ILayer2Allowance, ILayer2TransferAllowanceMetadata } from '../interfaces'
+import { CONTRACT_FUNCTIONS, TARGET_CONTRACTS } from '../constants'
+import { Allowance } from '../enums'
 
 export function parseLayer2MetadataForTransfer(metadata: Uint8Array): ILayer2TransferAllowanceMetadata {
     const readStream = new ReadStream(metadata)
