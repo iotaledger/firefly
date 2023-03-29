@@ -15,7 +15,7 @@ export async function registerParticipationEvents(
     if (get(selectedAccount)?.removedProposalIds?.length > 0) {
         newRegistrationOptions = {
             ...registrationOptions,
-            eventsToIgnore: get(selectedAccount).removedProposalIds,
+            eventsToIgnore: get(selectedAccount)?.removedProposalIds ?? [],
         }
     }
 
