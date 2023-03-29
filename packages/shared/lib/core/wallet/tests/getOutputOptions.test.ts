@@ -84,7 +84,7 @@ describe('File: getOutputOptions.ts', () => {
             recipientAddress,
             amount,
             unlocks: {},
-            features: { metadata: Converter.utf8ToHex(metadata, true), tag: Converter.utf8ToHex(tag, true) },
+            features: { metadata: Converter.utf8ToHex(metadata), tag: Converter.utf8ToHex(tag) },
             storageDeposit: { returnStrategy: ReturnStrategy.Return },
         }
         expect(output).toStrictEqual(expectedOutput)
