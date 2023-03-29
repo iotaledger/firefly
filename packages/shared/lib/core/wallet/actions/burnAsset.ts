@@ -10,10 +10,7 @@ export async function burnAsset(assetId: string, rawAmount: string): Promise<voi
     const account = get(selectedAccount)
     try {
         updateSelectedAccount({ isTransferring: true })
-        const burnTokenTransaction = await account.burnNativeToken(
-            assetId,
-            Converter.decimalToHex(Number(rawAmount), true)
-        )
+        const burnTokenTransaction = await account.burnNativeToken(assetId, Converter.decimalToHex(Number(rawAmount)))
 
         await processAndAddToActivities(burnTokenTransaction, account)
 

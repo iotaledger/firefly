@@ -20,7 +20,7 @@ export async function mintNft(metadata: IIrc27Metadata, quantity: number): Promi
         // Set NFT options
         const nftOptions: NftOptions = {
             issuer: account.depositAddress,
-            immutableMetadata: Converter.utf8ToHex(JSON.stringify(metadata), true),
+            immutableMetadata: Converter.utf8ToHex(JSON.stringify(metadata)),
         }
         const allNfts: NftOptions[] = Array(quantity).fill(nftOptions)
 
