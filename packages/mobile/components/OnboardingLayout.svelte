@@ -30,7 +30,7 @@
             </button>
         {/if}
     </header>
-    <div class="flex flex-col overflow-y-auto h-full pt-5">
+    <div class="flex flex-col h-full pt-5">
         {#if animation && $isKeyboardOpen === false}
             <div class="mt-24 w-full flex justify-center">
                 <Animation {animation} />
