@@ -4,7 +4,7 @@ import { downloadingNftId, nftDownloadQueue, removeNftFromDownloadQueue } from '
 
 export async function downloadNextNftInQueue(): Promise<void> {
     const nextDownload = get(nftDownloadQueue)?.[0]
-    if (!nextDownload && get(downloadingNftId)) {
+    if (!nextDownload || get(downloadingNftId)) {
         return
     }
 
