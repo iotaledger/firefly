@@ -1,5 +1,6 @@
 <script lang="ts">
     import { Text, ExpirationTimePickerMenu, Icon } from 'shared/components'
+    import { Icon as IconEnum } from '@auxiliary/icon'
     import { formatDate, localize } from '@core/i18n'
     import { ExpirationTime } from '@core/utils'
 
@@ -45,7 +46,7 @@
                 : localize('general.none')}
         </Text>
         {#if !disabled}
-            <Icon icon="chevron-down" width="10" classes="text-blue-500 ml-1" />
+            <Icon icon={IconEnum.ChevronDown} width="10" classes="text-blue-500 ml-1" />
         {/if}
     </div>
 </button>
