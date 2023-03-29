@@ -62,18 +62,18 @@ async function claimShimmerRewardsForShimmerClaimingAccounts(
 async function claimShimmerRewardsForShimmerClaimingAccount(
     shimmerClaimingAccount: IShimmerClaimingAccount
 ): Promise<void> {
-    const rawAmount = shimmerClaimingAccount?.unclaimedRewards
     const recipientAddress = await getDepositAddress(shimmerClaimingAccount?.twinAccount)
+    const rawAmount = shimmerClaimingAccount?.unclaimedRewards
 
     const newTransactionDetails: NewTokenTransactionDetails = {
-        type: NewTransactionType.TokenTransfer,
-        assetId: COIN_TYPE[NetworkProtocol.Shimmer].toString(),
-        rawAmount: rawAmount.toString(),
-        unit: '',
         recipient: {
             type: 'address',
             address: recipientAddress,
         },
+        type: NewTransactionType.TokenTransfer,
+        assetId: COIN_TYPE[NetworkProtocol.Shimmer].toString(),
+        rawAmount: rawAmount.toString(),
+        unit: '',
     }
     setNewTransactionDetails(newTransactionDetails)
 
