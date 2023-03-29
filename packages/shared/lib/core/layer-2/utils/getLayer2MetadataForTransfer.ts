@@ -8,7 +8,6 @@ import type { NewTransactionDetails } from '@core/wallet/types'
 import { Converter } from '@core/utils'
 import {
     ACCOUNTS_CONTRACT,
-    Allowance,
     EMPTY_BUFFER,
     EMPTY_BUFFER_BYTE_LENGTH,
     ENDING_SIGNAL_BYTE,
@@ -16,7 +15,8 @@ import {
     EXTERNALLY_OWNED_ACCOUNT_TYPE_ID,
     GAS_BUDGET,
     TRANSFER_ALLOWANCE,
-} from '@core/layer-2'
+} from '../constants'
+import { Allowance } from '../enums'
 
 export function getLayer2MetadataForTransfer(transactionDetails: NewTransactionDetails): string {
     const metadataStream = new WriteStream()

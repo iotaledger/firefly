@@ -1,5 +1,5 @@
 import { Converter } from '@iota/util.js'
-import { parseLayer2MetadataForTransfer } from '../actions/parseLayer2MetadataForTransfer'
+import { parseLayer2MetadataForTransfer } from '../utils/parseLayer2MetadataForTransfer'
 
 describe('Function: parseLayer2MetadataForTransfer.ts', () => {
     it('should correctly parse metadata with base token', () => {
