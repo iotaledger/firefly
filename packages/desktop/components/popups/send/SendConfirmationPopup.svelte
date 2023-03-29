@@ -72,7 +72,8 @@
     $: hideGiftToggle =
         (transactionDetails.type === NewTransactionType.TokenTransfer &&
             transactionDetails.assetId === $selectedAccountAssets?.baseCoin?.id) ||
-        (disableToggleGift && !giftStorageDeposit)
+        (disableToggleGift && !giftStorageDeposit) ||
+        layer2Parameters !== undefined
     $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
     $: isTransferring = $selectedAccount.isTransferring
 
