@@ -74,7 +74,8 @@
     $: isVotingDisabled =
         !isProposalVotable($selectedProposal?.status) ||
         !hasChangedAnswers(selectedAnswerValues) ||
-        hasSelectedNoAnswers(selectedAnswerValues)
+        hasSelectedNoAnswers(selectedAnswerValues) ||
+        JSON.stringify(selectedAnswerValues) === JSON.stringify(votedAnswerValues)
     $: hasGovernanceTransactionInProgress =
         $selectedAccount?.hasVotingPowerTransactionInProgress || $selectedAccount?.hasVotingTransactionInProgress
     $: $selectedParticipationEventStatus, (textHintString = getTextHintString())
