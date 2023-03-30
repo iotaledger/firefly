@@ -260,6 +260,16 @@
                 "title": "General",
                 "description": "Configura la apariencia de la app y otros ajustes generales"
             },
+            "profile": {
+                "title": "Perfil",
+                "description": "Cambia tu nombre de perfil o establece un avatar"
+            },
+            "network": {
+                "title": "Network"
+            },
+            "collectibles": {
+                "title": "Collectibles"
+            },
             "security": {
                 "title": "Seguridad",
                 "description": "Modifica tu contraseña y configura los ajustes de privacidad"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "Ayuda & Información",
                 "description": "Encuentra la respuesta a una pregunta u obtén ayuda con un problema"
-            },
-            "profile": {
-                "title": "Perfil",
-                "description": "Cambia tu nombre de perfil o establece un avatar"
             },
             "sync": {
                 "title": "Sincronizar carteras",
@@ -306,8 +312,12 @@
                 "description": "Exportar a fichero de Stronghold - una copia completa y encriptada de tus billeteras y el historial de transacciones"
             },
             "appLock": {
-                "title": "Bloqueo Automático",
+                "title": "Automatic logout",
                 "description": "Tiempo de inactividad antes de que se bloqueen tus carteras y se te cierre la sesión"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold Timeout",
+                "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
                 "title": "Tamaño máximo de archivo",
@@ -346,22 +356,9 @@
                 "title": "Enlaces profundos",
                 "description": "Rellenar automáticamente los datos de transacción en Firefly al hacer clic en un enlace profundo que comienza con {appProtocol}://"
             },
-            "networkConfiguration": {
-                "title": "Configuración de red",
-                "title2": "Configuración de red",
-                "description": {
-                    "dev": "Su configuración de red se actualizará automáticamente de acuerdo a la configuración actual del nodo (cambiar de red restablecerá el estado de la billetera)",
-                    "nonDev": "La configuración de red se actualizará automáticamente de acuerdo a la configuración actual del nodo"
-                },
-                "switchedNetworks": "Se ha cambiado correctamente la red a \"{networkName}\".",
-                "resetWallet": "Se ha restablecido su estado de la cartera.",
-                "connectedTo": "Conectado a",
-                "nodeConfiguration": {
-                    "title": "Selección de nodo",
-                    "description": "Selecciona \"Manual\" para configurar los ajustes del nodo y conectarte a tu propio nodo (s)",
-                    "automatic": "Automática",
-                    "manual": "Manual"
-                }
+            "networkInformation": {
+                "title": "Información de Red",
+                "connectedTo": "Conectado a"
             },
             "configureNodeList": {
                 "title": "Configuración de nodo",
@@ -1068,6 +1065,7 @@
                 "quantityTooLarge": "Quantity needs to be smaller than 64",
                 "emptyName": "Name is a required field",
                 "invalidURI": "Invalid URI, please provide a valid URI",
+                "royaltiesMustBeObject": "Royalties must be an object",
                 "royaltiesMustBeJSON": "Royalties must be a valid JSON",
                 "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
                 "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",
@@ -1779,7 +1777,7 @@
             "error": "Se ha producido un error al reclamar. Inténtalo de nuevo."
         },
         "vote": {
-            "success": "Votos emitidos con éxito"
+            "success": "Votes successfully cast"
         },
         "stopVoting": {
             "success": "Votación detenida con éxito"

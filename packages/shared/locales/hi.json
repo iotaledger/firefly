@@ -260,6 +260,16 @@
                 "title": "General",
                 "description": "Configure your app's appearance and other general settings"
             },
+            "profile": {
+                "title": "प्रोफाइल",
+                "description": "अपना प्रोफ़ाइल नाम बदलें या अवतार सेट करें"
+            },
+            "network": {
+                "title": "Network"
+            },
+            "collectibles": {
+                "title": "Collectibles"
+            },
             "security": {
                 "title": "सुरक्षा",
                 "description": "अपना पासवर्ड बदलें और सुरक्षा-संबंधी सेटिंग्स समायोजित करें"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "मदद सूचना",
                 "description": "किसी प्रश्न का उत्तर ढूंढें या किसी मुद्दे पर मदद लें"
-            },
-            "profile": {
-                "title": "प्रोफाइल",
-                "description": "अपना प्रोफ़ाइल नाम बदलें या अवतार सेट करें"
             },
             "sync": {
                 "title": "सिंक वॉलेट",
@@ -306,8 +312,12 @@
                 "description": "एक स्ट्रॉन्गहोल्ड फ़ाइल में निर्यात करें - अपने वॉलेट और नवीनतम लेनदेन इतिहास का एक पूर्ण एन्क्रिप्टेड बैकअप।"
             },
             "appLock": {
-                "title": "Automatic lock",
+                "title": "Automatic logout",
                 "description": "आपकी जेब लॉक होने से पहले निष्क्रियता का समय और आप लॉग आउट हो गए हैं"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold Timeout",
+                "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
                 "title": "Maximum media size",
@@ -346,22 +356,9 @@
                 "title": "Deep links",
                 "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
-            "networkConfiguration": {
-                "title": "नेटवर्क विन्यास",
-                "title2": "Network configuration",
-                "description": {
-                    "dev": "आपकी नेटवर्क सेटिंग्स वर्तमान नोड कॉन्फ़िगरेशन के अनुसार स्वचालित रूप से अपडेट हो जाएंगी (नेटवर्क स्विच करने से वॉलेट स्थिति रीसेट हो जाएगी)",
-                    "nonDev": "आपकी नेटवर्क सेटिंग्स वर्तमान नोड कॉन्फ़िगरेशन के अनुसार स्वचालित रूप से अपडेट हो जाएंगी"
-                },
-                "switchedNetworks": "नेटवर्क को \"{नेटवर्क का नाम}\" पर सफलतापूर्वक परिवर्तन किया गया।",
-                "resetWallet": "आपकी वॉलेट स्थिति वापस सामान्य स्थिति कर दी गई है",
-                "connectedTo": "Connected to",
-                "nodeConfiguration": {
-                    "title": "नोड चयन",
-                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
-                    "automatic": "Automatic",
-                    "manual": "Manual"
-                }
+            "networkInformation": {
+                "title": "Network information",
+                "connectedTo": "Connected to"
             },
             "configureNodeList": {
                 "title": "Node configuration",
@@ -379,8 +376,8 @@
                 "noNodesAuto": "There are no nodes, automatic selection will be used instead"
             },
             "localProofOfWork": {
-                "title": "प्रूफ ऑफ़ वर्क",
-                "description": "अपने डिवाइस पर स्थानीय रूप से PoW का पूरा प्रमाण या नोड को आउटसोर्स करें"
+                "title": "Proof of work",
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "त्रुटि लॉग",
@@ -1068,6 +1065,7 @@
                 "quantityTooLarge": "Quantity needs to be smaller than 64",
                 "emptyName": "Name is a required field",
                 "invalidURI": "Invalid URI, please provide a valid URI",
+                "royaltiesMustBeObject": "Royalties must be an object",
                 "royaltiesMustBeJSON": "Royalties must be a valid JSON",
                 "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
                 "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",

@@ -260,6 +260,16 @@
                 "title": "General",
                 "description": "Configure your app's appearance and other general settings"
             },
+            "profile": {
+                "title": "Profiel",
+                "description": "Verander jou profielnaam of stel 'n avatar in"
+            },
+            "network": {
+                "title": "Network"
+            },
+            "collectibles": {
+                "title": "Collectibles"
+            },
             "security": {
                 "title": "Sekuriteit",
                 "description": "Verander kou wagwoord en pas die veiligheidsverwante instellings aan"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "Help & Inligting",
                 "description": "Vind die antwoord op 'n vraag of kry hulp met 'n probleem"
-            },
-            "profile": {
-                "title": "Profiel",
-                "description": "Verander jou profielnaam of stel 'n avatar in"
             },
             "sync": {
                 "title": "Sinkroniseer beursies",
@@ -306,8 +312,12 @@
                 "description": "Uitvoer na 'n Stronghold lêer - 'n volledige geïnkripteer back-up van jou beursies en die nuutste transaksiegeskiedenis"
             },
             "appLock": {
-                "title": "Sluit outomaties",
+                "title": "Automatic logout",
                 "description": "Onaktiwiteitstyd voordat jou beursies sluit en jou uitgeteken"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold Timeout",
+                "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
                 "title": "Maximum media size",
@@ -346,22 +356,9 @@
                 "title": "Deep links",
                 "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
-            "networkConfiguration": {
-                "title": "Netwerk konfigurasie",
-                "title2": "Netwerk konfigurasie",
-                "description": {
-                    "dev": "Jou netwerkinstellings sal outomaties opgedateer word volgens die huidige noduskonfigurasie (om van netwerke om te skakel sal lei tot die terugstelling van die beursiestatus)",
-                    "nonDev": "Jou netwerkinstellings sal outomaties opgedateer word volgens die huidige noduskonfigurasie"
-                },
-                "switchedNetworks": "Het netwerk suksesvol na \"{networkName}\" oorgeskakel.",
-                "resetWallet": "Jou beursiestatus is teruggestel.",
-                "connectedTo": "Gekoppel aan",
-                "nodeConfiguration": {
-                    "title": "Node keuse",
-                    "description": "Kies \"Manual\" om nodusinstellings op te stel en aan jou eie node(s) te koppel",
-                    "automatic": "Automatic",
-                    "manual": "Manual"
-                }
+            "networkInformation": {
+                "title": "Network information",
+                "connectedTo": "Connected to"
             },
             "configureNodeList": {
                 "title": "Node konfigurasie",
@@ -380,7 +377,7 @@
             },
             "localProofOfWork": {
                 "title": "Proof of work",
-                "description": "Voltooi proof of work op jou toestel of uitvoer dit na 'n node"
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "Foutlêer",
@@ -1068,6 +1065,7 @@
                 "quantityTooLarge": "Quantity needs to be smaller than 64",
                 "emptyName": "Name is a required field",
                 "invalidURI": "Invalid URI, please provide a valid URI",
+                "royaltiesMustBeObject": "Royalties must be an object",
                 "royaltiesMustBeJSON": "Royalties must be a valid JSON",
                 "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
                 "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",
