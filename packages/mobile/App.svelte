@@ -19,17 +19,13 @@
         resetRouters,
     } from '@/routers'
 
-    import { onboardingProfile } from '@contexts/onboarding'
-
     import {
         appSettings,
         appStage,
         AppStage,
-        AppTheme,
         initAppSettings,
         Platform,
         setPlatform,
-        shouldBeDarkMode,
     } from '@core/app'
     import { localeDirection, setupI18n, _ } from '@core/i18n'
     import { checkAndMigrateProfiles, cleanupEmptyProfiles, activeProfile } from '@core/profile'
