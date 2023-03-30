@@ -21,7 +21,7 @@ import { profileManager } from '@core/profile-manager/stores'
 import { routerManager } from '@core/router/stores'
 import { get } from 'svelte/store'
 import { clearFilters } from '@core/utils'
-import { clearNftMediaDownloading } from '@core/nfts'
+import { stopDownloadingNftMediaFromQueue } from '@core/nfts'
 
 /**
  * Logout from active profile
@@ -53,7 +53,7 @@ function cleanupProfileState(clearActiveProfile: boolean): void {
     hasLoadedAccounts.set(false)
     resetSelectedAccountIndex()
 
-    void clearNftMediaDownloading()
+    void stopDownloadingNftMediaFromQueue()
 
     // Governance Stores
     resetRegisteredProposals()
