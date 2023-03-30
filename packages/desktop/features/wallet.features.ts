@@ -9,8 +9,8 @@ const walletFeatures = {
             enabled: true,
         },
     },
-    sendToLayer2: {
-        enabled: false,
+    showLayer2: {
+        enabled: true,
     },
     assets: {
         enabled: true,

@@ -18,6 +18,9 @@ const config: CapacitorConfig = {
             launchAutoHide: false,
             backgroundColor: '#ffffffff',
         },
+        Keyboard: {
+            resize: 'none',
+        },
     },
     server: prod ? undefined : serverConfig,
     cordova: {
