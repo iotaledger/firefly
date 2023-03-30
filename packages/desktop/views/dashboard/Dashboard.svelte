@@ -30,7 +30,7 @@
         nftDownloadQueue,
         resetNftDownloadQueue,
         downloadingNftId,
-        startInterruptTimer,
+        interruptNftDownloadAfterTimeout,
     } from '@core/nfts'
     import { selectedAccountIndex } from '@core/account'
 
@@ -48,7 +48,7 @@
     $: $activeProfile, saveActiveProfile()
     $: $hasStrongholdLocked && reflectLockedStronghold()
     $: $nftDownloadQueue, downloadNextNftInQueue()
-    $: $downloadingNftId && startInterruptTimer()
+    $: $downloadingNftId && interruptNftDownloadAfterTimeout()
     $: addSelectedAccountNftsToDownloadQueue($selectedAccountIndex)
 
     function addSelectedAccountNftsToDownloadQueue(accountIndex: number) {

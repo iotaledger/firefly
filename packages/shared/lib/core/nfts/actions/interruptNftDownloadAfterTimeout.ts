@@ -4,7 +4,7 @@ import { get } from 'svelte/store'
 import { MAX_DOWNLOADING_TIME_IN_SECONDS } from '../constants'
 import { downloadingNftId } from '../stores'
 
-export async function startInterruptTimer(): Promise<void> {
+export async function interruptNftDownloadAfterTimeout(): Promise<void> {
     const currentlyDownloadingNft = get(downloadingNftId)
 
     await sleep(MAX_DOWNLOADING_TIME_IN_SECONDS * MILLISECONDS_PER_SECOND)
