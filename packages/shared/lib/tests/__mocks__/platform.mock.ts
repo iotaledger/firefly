@@ -7,7 +7,7 @@ const Platform: IPlatform = {
     PincodeManager: undefined,
     close(): void {},
     exportTransactionHistory(defaultPath: string, contents: string): Promise<string | null> {
-        return Promise.resolve(undefined)
+        return Promise.resolve(null)
     },
     getActiveProfile(): string {
         return ''
@@ -22,7 +22,7 @@ const Platform: IPlatform = {
         return Promise.resolve('')
     },
     getStrongholdBackupDestination(defaultPath: string): Promise<string | null> {
-        return Promise.resolve(undefined)
+        return Promise.resolve(null)
     },
     getUserDataPath(): Promise<string> {
         return Promise.resolve('')
@@ -73,6 +73,9 @@ const Platform: IPlatform = {
         return Promise.resolve(undefined)
     },
     downloadFile(): Promise<void> {
+        return Promise.resolve(undefined)
+    },
+    cancelDownload(nftId: string): Promise<void> {
         return Promise.resolve(undefined)
     },
     checkIfFileExists(): Promise<boolean> {
