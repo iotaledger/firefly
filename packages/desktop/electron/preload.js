@@ -1,4 +1,4 @@
-const { ipcRenderer, contextBridge } = require('electron')
+const { app, ipcRenderer, contextBridge } = require('electron')
 const ElectronApi = require('./electronApi')
 const WalletApi = require('@iota/wallet')
 const fs = require('fs')
@@ -49,11 +49,11 @@ try {
             if (!fs.existsSync(logDir)) {
                 fs.mkdirSync(logDir)
             }
-
+            deleteOldLogs(logDir)
             const today = new Date().toISOString().slice(0, 16).replace('T', '-').replace(':', '-')
             const loggerOptions = {
                 colorEnabled: true,
-                name: `${logDir}/wallet-${today}.log`,
+                name: `${logDir}/wallet-${app.getVersion()}-${today}.log`,
                 levelFilter: 'debug',
                 targetExclusions: ['h2', 'hyper', 'rustls', 'message_handler'],
             }
@@ -62,6 +62,15 @@ try {
     }
 } catch (err) {
     console.error('[Preload Context] Error:', err)
+}
+
+function deleteOldLogs(path) {
+    const files = fs.readdirSync(path)
+
+    files.forEach((file) => {
+        const stat = fs.statSync(path + '/' + file)
+        stat.mtime
+    })
 }
 
 try {
