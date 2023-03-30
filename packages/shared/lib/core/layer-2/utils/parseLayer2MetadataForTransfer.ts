@@ -1,8 +1,10 @@
 import { Converter } from '@core/utils'
 import { ReadStream } from '@iota/util.js'
-import { Allowance, CONTRACT_FUNCTIONS, ILayer2TransferAllowanceMetadata, TARGET_CONTRACTS } from '@core/layer-2'
 import { NativeTokenAmount, TOKEN_ID_BYTE_LENGTH } from '@core/token'
-import { ILayer2Allowance } from '@core/layer-2/interfaces/layer2-allowance.interface'
+import { NFT_ID_BYTE_LENGTH } from '@core/nfts/constants'
+import { ILayer2AssetAllowance, ILayer2TransferAllowanceMetadata } from '../interfaces'
+import { CONTRACT_FUNCTIONS, TARGET_CONTRACTS } from '../constants'
+import { Allowance } from '../enums'
 
 export function parseLayer2MetadataForTransfer(metadata: Uint8Array): ILayer2TransferAllowanceMetadata {
     const readStream = new ReadStream(metadata)
@@ -13,18 +15,19 @@ export function parseLayer2MetadataForTransfer(metadata: Uint8Array): ILayer2Tra
     const gasBudget = readStream.readUInt64('gasBudget')
 
     const smartContractParameters = parseSmartContractParameters(readStream)
-    const ethereumAddress = '0x' + smartContractParameters['a'].substring(2)
+    const ethereumAddress = '0x' + smartContractParameters['a'].substring(4)
 
-    const allowance = parseAllowance(readStream)
+    const allowance = parseAssetAllowance(readStream)
 
     return {
-        senderContract: Converter.decimalToHex(senderContract, true),
-        targetContract: TARGET_CONTRACTS[targetContract] ?? Converter.decimalToHex(targetContract, true),
-        contractFunction: CONTRACT_FUNCTIONS[contractFunction] ?? Converter.decimalToHex(contractFunction, true),
+        senderContract: Converter.decimalToHex(senderContract),
+        targetContract: TARGET_CONTRACTS[targetContract] ?? Converter.decimalToHex(targetContract),
+        contractFunction: CONTRACT_FUNCTIONS[contractFunction] ?? Converter.decimalToHex(contractFunction),
         gasBudget: gasBudget.toString(),
         ethereumAddress,
         baseTokenAmount: allowance?.baseTokenAmount,
         nativeTokens: allowance?.nativeTokens,
+        nfts: allowance?.nfts,
     }
 }
 
@@ -48,7 +51,7 @@ function parseSmartContractParameters(readStream: ReadStream): Record<string, st
     return smartContractParameters
 }
 
-function parseAllowance(readStream: ReadStream): ILayer2Allowance {
+function parseAssetAllowance(readStream: ReadStream): ILayer2AssetAllowance {
     const allowance = readStream.readUInt8('allowance')
 
     if (allowance === Allowance.Set) {
@@ -63,9 +66,17 @@ function parseAllowance(readStream: ReadStream): ILayer2Allowance {
             nativeTokens.push({ tokenId, amount })
         }
 
+        const nftAmount = readStream.readUInt16('nftAmount')
+        const nfts: string[] = []
+        for (let nft = 0; nft < nftAmount; nft++) {
+            const nftId = Converter.bytesToHex(readStream.readBytes('nftId', NFT_ID_BYTE_LENGTH))
+            nfts.push(nftId)
+        }
+
         return {
             baseTokenAmount,
             nativeTokens,
+            nfts,
         }
     } else {
         return

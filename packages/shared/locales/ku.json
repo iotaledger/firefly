@@ -378,7 +378,7 @@
                 "noNodes": "There are no nodes, unable to connect to the network",
                 "noNodesAuto": "There are no nodes, automatic selection will be used instead"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Delîlên kar",
                 "description": "Li ser cîhaza xwe proof of work biqedînin an xwe bavêjin Node"
             },

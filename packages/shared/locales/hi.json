@@ -378,7 +378,7 @@
                 "noNodes": "कोई नोड नहीं हैं, नेटवर्क से कनेक्ट करने में असमर्थ हैं",
                 "noNodesAuto": "There are no nodes, automatic selection will be used instead"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "प्रूफ ऑफ़ वर्क",
                 "description": "अपने डिवाइस पर स्थानीय रूप से PoW का पूरा प्रमाण या नोड को आउटसोर्स करें"
             },

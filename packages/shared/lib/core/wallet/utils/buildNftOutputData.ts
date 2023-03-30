@@ -19,7 +19,7 @@ export function buildNftOutputData(metadata: IIrc27Metadata, address: string): B
     const immutableFeatures: FeatureTypes[] = [
         {
             type: FEATURE_TYPE_METADATA,
-            data: Converter.utf8ToHex(JSON.stringify(metadata), true),
+            data: Converter.utf8ToHex(JSON.stringify(metadata)),
         },
     ]
 
