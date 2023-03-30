@@ -8,7 +8,7 @@ export const NETWORK_ADDRESS: Readonly<{ [key in NetworkType]?: { [key in Destin
     },
     [NetworkType.Devnet]: {
         [DestinationNetwork.Shimmer]: '-',
-        [DestinationNetwork.ShimmerTestnetEvm]: 'rms1prwgvvw472spqusqeufvlmp8xdpyxtrnmvt26jnuk6sxdcq2hk8scku26h7',
+        [DestinationNetwork.ShimmerEvmTestnet]: 'rms1prwgvvw472spqusqeufvlmp8xdpyxtrnmvt26jnuk6sxdcq2hk8scku26h7',
     },
     [NetworkType.PrivateNet]: {
         [DestinationNetwork.Shimmer]: '-',
