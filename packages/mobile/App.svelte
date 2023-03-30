@@ -19,14 +19,7 @@
         resetRouters,
     } from '@/routers'
 
-    import {
-        appSettings,
-        appStage,
-        AppStage,
-        initAppSettings,
-        Platform,
-        setPlatform,
-    } from '@core/app'
+    import { appSettings, appStage, AppStage, initAppSettings, Platform, setPlatform } from '@core/app'
     import { localeDirection, setupI18n, _ } from '@core/i18n'
     import { checkAndMigrateProfiles, cleanupEmptyProfiles, activeProfile } from '@core/profile'
     import { initialiseRouterManager, RouterManagerExtensionName } from '@core/router'
