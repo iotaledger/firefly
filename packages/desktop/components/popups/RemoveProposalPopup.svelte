@@ -14,6 +14,7 @@
     import { closePopup } from '@auxiliary/popup'
     import { showAppNotification } from '@auxiliary/notification'
     import { selectedAccount } from '@core/account/stores'
+    import { updateActiveAccountMetadata } from '@core/profile'
 
     function onCancelClick(): void {
         closePopup()
@@ -22,6 +23,9 @@
     async function onConfirmClick(): Promise<void> {
         try {
             await $selectedAccount.deregisterParticipationEvent($selectedProposalId)
+            updateActiveAccountMetadata($selectedAccount.index, {
+                removedProposalIds: [...($selectedAccount.removedProposalIds ?? []), $selectedProposalId],
+            })
             $governanceRouter.previous()
             clearEvent()
             closePopup()
