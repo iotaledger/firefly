@@ -135,7 +135,6 @@
 <!-- {#if $isKeyboardOpen}
     <div class="keyboard" />
 {/if} -->
-
 <style global type="text/scss">
     @tailwind base;
     @tailwind components;
