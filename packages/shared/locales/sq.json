@@ -260,6 +260,16 @@
                 "title": "General",
                 "description": "Configure your app's appearance and other general settings"
             },
+            "profile": {
+                "title": "Profile",
+                "description": "Change your profile name or set an avatar"
+            },
+            "network": {
+                "title": "Network"
+            },
+            "collectibles": {
+                "title": "Collectibles"
+            },
             "security": {
                 "title": "Security",
                 "description": "Change your password and adjust security-related settings"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "Help & Information",
                 "description": "Find the answer to a question or get help with an issue"
-            },
-            "profile": {
-                "title": "Profile",
-                "description": "Change your profile name or set an avatar"
             },
             "sync": {
                 "title": "Sync wallets",
@@ -306,8 +312,12 @@
                 "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
-                "title": "Automatic lock",
+                "title": "Automatic logout",
                 "description": "Inactivity time before your wallets lock and you are logged out"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold Timeout",
+                "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
                 "title": "Maximum media size",
@@ -346,22 +356,9 @@
                 "title": "Deep links",
                 "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
-            "networkConfiguration": {
-                "title": "Network config",
-                "title2": "Network configuration",
-                "description": {
-                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
-                    "nonDev": "Your network settings will update automatically according to the current node configuration"
-                },
-                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
-                "resetWallet": "Your wallet state has been reset.",
-                "connectedTo": "Connected to",
-                "nodeConfiguration": {
-                    "title": "Node selection",
-                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
-                    "automatic": "Automatic",
-                    "manual": "Manual"
-                }
+            "networkInformation": {
+                "title": "Network information",
+                "connectedTo": "Connected to"
             },
             "configureNodeList": {
                 "title": "Node configuration",
@@ -1068,6 +1065,7 @@
                 "quantityTooLarge": "Quantity needs to be smaller than 64",
                 "emptyName": "Name is a required field",
                 "invalidURI": "Invalid URI, please provide a valid URI",
+                "royaltiesMustBeObject": "Royalties must be an object",
                 "royaltiesMustBeJSON": "Royalties must be a valid JSON",
                 "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
                 "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",
