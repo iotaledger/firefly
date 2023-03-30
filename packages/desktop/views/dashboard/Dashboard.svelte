@@ -29,8 +29,11 @@
         downloadNextNftInQueue,
         nftDownloadQueue,
         resetNftDownloadQueue,
+        downloadingNftId,
+        interruptNftDownloadAfterTimeout,
     } from '@core/nfts'
     import { selectedAccountIndex } from '@core/account'
+    import { get } from 'svelte/store'
 
     const tabs = {
         wallet: Wallet,
@@ -46,6 +49,7 @@
     $: $activeProfile, saveActiveProfile()
     $: $hasStrongholdLocked && reflectLockedStronghold()
     $: $nftDownloadQueue, downloadNextNftInQueue()
+    $: $downloadingNftId && interruptNftDownloadAfterTimeout(get(selectedAccountIndex))
     $: addSelectedAccountNftsToDownloadQueue($selectedAccountIndex)
 
     function addSelectedAccountNftsToDownloadQueue(accountIndex: number) {
