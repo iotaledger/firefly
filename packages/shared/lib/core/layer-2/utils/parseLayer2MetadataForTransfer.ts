@@ -1,7 +1,8 @@
 import { Converter } from '@core/utils'
 import { ReadStream } from '@iota/util.js'
 import { NativeTokenAmount, TOKEN_ID_BYTE_LENGTH } from '@core/token'
-import { ILayer2Allowance, ILayer2TransferAllowanceMetadata } from '../interfaces'
+import { NFT_ID_BYTE_LENGTH } from '@core/nfts/constants'
+import { ILayer2AssetAllowance, ILayer2TransferAllowanceMetadata } from '../interfaces'
 import { CONTRACT_FUNCTIONS, TARGET_CONTRACTS } from '../constants'
 import { Allowance } from '../enums'
 
@@ -14,9 +15,9 @@ export function parseLayer2MetadataForTransfer(metadata: Uint8Array): ILayer2Tra
     const gasBudget = readStream.readUInt64('gasBudget')
 
     const smartContractParameters = parseSmartContractParameters(readStream)
-    const ethereumAddress = '0x' + smartContractParameters['a'].substring(2)
+    const ethereumAddress = '0x' + smartContractParameters['a'].substring(4)
 
-    const allowance = parseAllowance(readStream)
+    const allowance = parseAssetAllowance(readStream)
 
     return {
         senderContract: Converter.decimalToHex(senderContract),
@@ -26,6 +27,7 @@ export function parseLayer2MetadataForTransfer(metadata: Uint8Array): ILayer2Tra
         ethereumAddress,
         baseTokenAmount: allowance?.baseTokenAmount,
         nativeTokens: allowance?.nativeTokens,
+        nfts: allowance?.nfts,
     }
 }
 
@@ -49,7 +51,7 @@ function parseSmartContractParameters(readStream: ReadStream): Record<string, st
     return smartContractParameters
 }
 
-function parseAllowance(readStream: ReadStream): ILayer2Allowance {
+function parseAssetAllowance(readStream: ReadStream): ILayer2AssetAllowance {
     const allowance = readStream.readUInt8('allowance')
 
     if (allowance === Allowance.Set) {
@@ -64,9 +66,17 @@ function parseAllowance(readStream: ReadStream): ILayer2Allowance {
             nativeTokens.push({ tokenId, amount })
         }
 
+        const nftAmount = readStream.readUInt16('nftAmount')
+        const nfts: string[] = []
+        for (let nft = 0; nft < nftAmount; nft++) {
+            const nftId = Converter.bytesToHex(readStream.readBytes('nftId', NFT_ID_BYTE_LENGTH))
+            nfts.push(nftId)
+        }
+
         return {
             baseTokenAmount,
             nativeTokens,
+            nfts,
         }
     } else {
         return

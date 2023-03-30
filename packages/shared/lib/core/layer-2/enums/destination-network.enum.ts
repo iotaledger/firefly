@@ -1,5 +1,5 @@
 export enum DestinationNetwork {
     Shimmer = 'Shimmer',
-    ShimmerEvm = 'Shimmer EVM',
-    ShimmerTestnetEvm = 'Shimmer Testnet EVM',
+    ShimmerEvm = 'ShimmerEVM',
+    ShimmerEvmTestnet = 'ShimmerEVM Testnet',
 }

@@ -193,7 +193,8 @@ export class Converter {
         array: ArrayLike<number>,
         startIndex?: number,
         length?: number | undefined,
-        reverse?: boolean
+        reverse?: boolean,
+        prefix = true
     ): string {
         let hex = ''
         this.buildHexLookups()
@@ -210,7 +211,7 @@ export class Converter {
                 }
             }
         }
-        return hex
+        return prefix ? '0x' + hex : hex
     }
 
     /**
@@ -247,9 +248,7 @@ export class Converter {
      */
     public static utf8ToHex(utf8: string, prefix = true): string {
         if (utf8) {
-            return prefix
-                ? '0x' + Converter.bytesToHex(Converter.utf8ToBytes(utf8))
-                : Converter.bytesToHex(Converter.utf8ToBytes(utf8))
+            return Converter.bytesToHex(Converter.utf8ToBytes(utf8), undefined, undefined, undefined, prefix)
         } else {
             return utf8
         }
