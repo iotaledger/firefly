@@ -47,12 +47,10 @@
     $keyboardHeight = window.screen.height / 3.5 // set initial state
 
     void Keyboard.addListener('keyboardWillShow', (info) => {
-        // Listen for when the keyboard is about to be showed.
         $keyboardHeight = info.keyboardHeight
         $isKeyboardOpen = true
     })
     void Keyboard.addListener('keyboardWillHide', () => {
-        // Listen for when the keyboard is about to be hidden.
         $isKeyboardOpen = false
     })
 
