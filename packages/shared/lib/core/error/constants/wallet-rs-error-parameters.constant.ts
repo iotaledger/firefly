@@ -23,7 +23,7 @@ export const WALLET_RS_ERROR_PARAMETERS: Readonly<{
         [ClientError.InsufficientAmount]: {
             localizationKey: 'error.send.insufficientFundsStorageDeposit',
             logToConsole: true,
-            saveToErrorLog: true,
+            saveToErrorLog: false,
             showNotification: true,
         },
     },
@@ -43,13 +43,13 @@ export const WALLET_RS_ERROR_PARAMETERS: Readonly<{
         [IotaClientError.NoInputs]: {
             localizationKey: `error.send.${IotaClientError.NoInputs}`,
             logToConsole: true,
-            saveToErrorLog: true,
+            saveToErrorLog: false,
             showNotification: true,
         },
         [IotaClientError.NotEnoughBalance]: {
             localizationKey: `error.send.${IotaClientError.NotEnoughBalance}`,
             logToConsole: true,
-            saveToErrorLog: true,
+            saveToErrorLog: false,
             showNotification: true,
         },
     },
