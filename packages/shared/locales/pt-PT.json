@@ -260,6 +260,16 @@
                 "title": "General",
                 "description": "Configure your app's appearance and other general settings"
             },
+            "profile": {
+                "title": "Perfil",
+                "description": "Altere o nome do seu perfil ou defina um avatar"
+            },
+            "network": {
+                "title": "Network"
+            },
+            "collectibles": {
+                "title": "Collectibles"
+            },
             "security": {
                 "title": "Segurança",
                 "description": "Altere a sua palavra-passe e ajuste as configurações relacionadas à segurança"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "Ajuda & Informação",
                 "description": "Encontre a resposta para uma pergunta ou obtenha ajuda num problema"
-            },
-            "profile": {
-                "title": "Perfil",
-                "description": "Altere o nome do seu perfil ou defina um avatar"
             },
             "sync": {
                 "title": "Sincronizar carteiras",
@@ -306,8 +312,12 @@
                 "description": "Exportar arquivo Stronghold - um backup completo encriptado da sua carteira e do histórico recente de transações"
             },
             "appLock": {
-                "title": "Bloqueio Automático",
+                "title": "Automatic logout",
                 "description": "Tempo de inatividade antes do bloqueio das suas carteiras e encerra a sessão"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold Timeout",
+                "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
                 "title": "Maximum media size",
@@ -346,22 +356,9 @@
                 "title": "Deep links",
                 "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
-            "networkConfiguration": {
-                "title": "Network config",
-                "title2": "Network configuration",
-                "description": {
-                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
-                    "nonDev": "Your network settings will update automatically according to the current node configuration"
-                },
-                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
-                "resetWallet": "Your wallet state has been reset.",
-                "connectedTo": "Connected to",
-                "nodeConfiguration": {
-                    "title": "Node selection",
-                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
-                    "automatic": "Automatic",
-                    "manual": "Manual"
-                }
+            "networkInformation": {
+                "title": "Network information",
+                "connectedTo": "Connected to"
             },
             "configureNodeList": {
                 "title": "Node configuration",
@@ -379,8 +376,8 @@
                 "noNodesAuto": "There are no nodes, automatic selection will be used instead"
             },
             "localProofOfWork": {
-                "title": "Prova de Trabalho",
-                "description": "Complete a prova de trabalho localmente no seu dispositivo ou terceirize para um servidor"
+                "title": "Proof of work",
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "Registo de erro",
@@ -1068,6 +1065,7 @@
                 "quantityTooLarge": "Quantity needs to be smaller than 64",
                 "emptyName": "Name is a required field",
                 "invalidURI": "Invalid URI, please provide a valid URI",
+                "royaltiesMustBeObject": "Royalties must be an object",
                 "royaltiesMustBeJSON": "Royalties must be a valid JSON",
                 "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
                 "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",

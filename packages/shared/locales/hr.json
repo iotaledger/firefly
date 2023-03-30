@@ -260,6 +260,16 @@
                 "title": "Opće",
                 "description": "Odredite izgled aplikacije i druge opće postavke"
             },
+            "profile": {
+                "title": "Profil",
+                "description": "Promjena imena profila i postavljanje avatara"
+            },
+            "network": {
+                "title": "Network"
+            },
+            "collectibles": {
+                "title": "Collectibles"
+            },
             "security": {
                 "title": "Sigurnost",
                 "description": "Promijena lozinke i ostale postavke sigurnosti"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "Pomoć i informacije",
                 "description": "Pronađite odgovor na pitanje ili potražite pomoć za određeni problem"
-            },
-            "profile": {
-                "title": "Profil",
-                "description": "Promjena imena profila i postavljanje avatara"
             },
             "sync": {
                 "title": "Sinkroniziraj novčanike",
@@ -306,8 +312,12 @@
                 "description": "Izvoz u Stronghold datoteku - potpunu enkriptiranu kopiju vaših novčanika i najnovijih transakcija"
             },
             "appLock": {
-                "title": "Automatsko zaključavanje",
+                "title": "Automatic logout",
                 "description": "Vrijeme neaktivnosti preostalo do zaključavanja novčanika i odjave iz sustava"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold Timeout",
+                "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
                 "title": "Maximum media size",
@@ -346,22 +356,9 @@
                 "title": "Deep linkovi",
                 "description": "Automatski popunite podatke o transakciji u Fireflyu nakon klika na deep link koji počinje s {appProtocol}://"
             },
-            "networkConfiguration": {
-                "title": "Mrežna konfiguracija",
-                "title2": "Mrežna konfiguracija",
-                "description": {
-                    "dev": "Tvoje mrežne postavke će se automatski ažurirati u skladu s trenutnom node konfiguracijom (promjena mreže rezultirat će resetiranjem stanja novčanika)",
-                    "nonDev": "Tvoje mrežne postavke će se automatski ažurirati u skladu s trenutnom node konfiguracijom"
-                },
-                "switchedNetworks": "Mreža uspješno promijenjena na \"{networkName}\".",
-                "resetWallet": "Stanje vašeg novčanika je resetirano.",
-                "connectedTo": "Povezano s",
-                "nodeConfiguration": {
-                    "title": "Odabir nodea",
-                    "description": "Odaberi \"Ručni odabir nodea\" za konfiguriranje node-a i spajanje na vlastiti node",
-                    "automatic": "Automatski odabir nodea",
-                    "manual": "Ručni odabir nodea"
-                }
+            "networkInformation": {
+                "title": "Network information",
+                "connectedTo": "Connected to"
             },
             "configureNodeList": {
                 "title": "Node konfiguracija",
@@ -379,8 +376,8 @@
                 "noNodesAuto": "Nema nodeova na raspolaganju. Upotrijebit ćemo automatski odabir."
             },
             "localProofOfWork": {
-                "title": "Proof of Work",
-                "description": "Odradi Proof of Work lokalno na svojem uređaju ili ga outsourceaj nodeu"
+                "title": "Proof of work",
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "Evidencija grešaka",
@@ -1068,6 +1065,7 @@
                 "quantityTooLarge": "Quantity needs to be smaller than 64",
                 "emptyName": "Name is a required field",
                 "invalidURI": "Invalid URI, please provide a valid URI",
+                "royaltiesMustBeObject": "Royalties must be an object",
                 "royaltiesMustBeJSON": "Royalties must be a valid JSON",
                 "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
                 "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",
