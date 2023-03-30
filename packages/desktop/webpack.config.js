@@ -183,7 +183,7 @@ const sentryPlugins = [
     new SentryWebpackPlugin({
         authToken: process.env.SENTRY_AUTH_TOKEN,
         include: '.',
-        release: `Firefly@${version}`,
+        release: `Firefly Shimmer Desktop v${version}`,
         ignoreFile: '.sentrycliignore',
         org: 'iota-foundation-h4',
         project: 'firefly-shimmer-desktop',
