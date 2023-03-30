@@ -1,11 +1,7 @@
 /** NOTE: SENTRY_MAIN_PROCESS, SENTRY_DSN, SENTRY_ENVIRONMENT, and PRELOAD_SCRIPT are replaced by Webpack at compile-time. */
 
 /* eslint-disable no-undef */
-const Sentry = SENTRY_MAIN_PROCESS
-    ? require('@sentry/electron/main')
-    : SENTRY_RENDERER_PROCESS
-    ? require('@sentry/electron/renderer')
-    : require('@sentry/electron/preload')
+const Sentry = SENTRY_MAIN_PROCESS ? require('@sentry/electron/dist/main') : require('@sentry/electron/dist/renderer')
 
 const appName = 'Firefly'
 const debug = true

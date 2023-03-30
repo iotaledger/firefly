@@ -1,6 +1,6 @@
 {
     "name": "desktop",
-    "productName": "Firefly Shimmer - Alpha",
+    "productName": "Firefly Shimmer - Beta",
     "version": "2.1.0",
     "description": "Official wallet application of Shimmer",
     "main": "public/build/main.js",
@@ -28,7 +28,7 @@
         "compile:prod:win": "cross-env STAGE=prod electron-builder --win --x64 --config electron-builder-config.js"
     },
     "dependencies": {
-        "@sentry/electron": "^4.3.0",
+        "@sentry/electron": "^2.5.4",
         "argon2": "^0.27.1",
         "electron-log": "^4.3.1",
         "electron-updater": "4.3.5",
@@ -37,7 +37,7 @@
         "shared": "0.0.0"
     },
     "devDependencies": {
-        "@sentry/webpack-plugin": "^1.20.0",
+        "@sentry/webpack-plugin": "^1.18.5",
         "@tsconfig/svelte": "^1.0.10",
         "@types/node": "^16.4.2",
         "copy-webpack-plugin": "^7.0.0",
