@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { get } from 'svelte/store'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
     import { isLayer1Destination } from '@core/layer-2'
@@ -12,6 +13,7 @@
         NewTransactionType,
         setNewTransactionDetails,
     } from '@core/wallet'
+    import { selectedAccount } from '@core/account/stores'
     import {
         AssetAmountInput,
         Button,
@@ -24,7 +26,6 @@
         Text,
         TextType,
     } from 'shared/components'
-    import { get } from 'svelte/store'
     import features from '@features/features'
 
     enum SendForm {
@@ -71,7 +72,7 @@
     $: isSendTokenTab = activeTab === SendForm.SendToken
 
     function setTransactionDetails(): void {
-        layer2Parameters = isLayer2 ? { networkAddress } : null
+        layer2Parameters = isLayer2 ? { networkAddress, senderAddress: $selectedAccount.depositAddress } : null
 
         if (isSendTokenTab) {
             setNewTransactionDetails({
@@ -92,6 +93,7 @@
                 nftId,
                 tag,
                 metadata,
+                layer2Parameters,
                 disableAssetSelection,
             })
         }
@@ -178,11 +180,7 @@
         {:else}
             <NftInput bind:this={nftInput} bind:nftId readonly={disableAssetSelection} />
         {/if}
-        <NetworkInput
-            bind:this={networkInput}
-            bind:networkAddress
-            showLayer2={features?.wallet?.sendToLayer2?.enabled && isSendTokenTab}
-        />
+        <NetworkInput bind:this={networkInput} bind:networkAddress showLayer2={features?.wallet?.showLayer2?.enabled} />
         <RecipientInput bind:this={recipientInput} bind:recipient {isLayer2} />
         <optional-inputs class="flex flex-row flex-wrap gap-4">
             <OptionalInput

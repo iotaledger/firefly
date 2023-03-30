@@ -378,7 +378,7 @@
                 "noNodes": "目前找不到結點，無法連上網絡",
                 "noNodesAuto": "找不到節點，將改採自動選擇方式"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "工作證明",
                 "description": "在您的設備或外包節點完成工作量證明"
             },

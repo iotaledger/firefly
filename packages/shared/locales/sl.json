@@ -378,7 +378,7 @@
                 "noNodes": "Ni vozlišč, ni mogoče vzpostaviti povezave z omrežjem",
                 "noNodesAuto": "Vozlišč ni, namesto tega se uporabi samodejna izbira"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Dokazilo o delu",
                 "description": "Izvedite dokazilo o delu lokalno v svoji napravi ali ga prenesite v vozlišče"
             },

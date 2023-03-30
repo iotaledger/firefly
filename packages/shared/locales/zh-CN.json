@@ -378,7 +378,7 @@
                 "noNodes": "没有节点，无法连接到网络",
                 "noNodesAuto": "尚未配置节点，将使用节点自动选择功能"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "工作量证明",
                 "description": "在您的本地设备或在外包节点上完成工作量证明"
             },

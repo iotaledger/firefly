@@ -378,7 +378,7 @@
                 "noNodes": "Der er ingen noder, kan ikke oprettes forbindelse til netværket",
                 "noNodesAuto": "Der er ingen noder, automatisk valg bruges i stedet"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Proof of work",
                 "description": "Udfør proof of work lokalt på din enhed eller outsource til noden"
             },
