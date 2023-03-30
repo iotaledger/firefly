@@ -12,10 +12,11 @@ export async function registerParticipationEvents(
     account: IAccountState
 ): Promise<ParticipationEventMap> {
     let newRegistrationOptions = registrationOptions
-    if (get(selectedAccount)?.removedProposalIds?.length > 0) {
+    const { removedProposalIds } = get(selectedAccount) ?? {}
+    if (removedProposalIds?.length > 0) {
         newRegistrationOptions = {
             ...registrationOptions,
-            eventsToIgnore: get(selectedAccount)?.removedProposalIds ?? [],
+            eventsToIgnore: removedProposalIds ?? [],
         }
     }
 
