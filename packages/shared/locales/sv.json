@@ -378,7 +378,7 @@
                 "noNodes": "Det finns inga noder, det går inte att ansluta till nätverket",
                 "noNodesAuto": "Det finns inga noder, val av nod kommer ske automatiskt istället"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Proof of work",
                 "description": "Genomför Proof of Work (PoW) lokalt på din enhet eller outsourca till noden"
             },

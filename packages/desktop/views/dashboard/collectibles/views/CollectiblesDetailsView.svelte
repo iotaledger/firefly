@@ -207,14 +207,16 @@
                 </Text>
                 <key-value-list class="flex flex-col space-y-2">
                     {#each Object.entries(detailsList) as [key, value]}
-                        <KeyValueBox
-                            keyText={localize('general.' + key)}
-                            copyValue={value.copyValue ?? value.data}
-                            isCopyable={value.isCopyable}
-                            valueText={value.data}
-                            isPreText={value.isPreText}
-                            maxHeight={value.maxHeight}
-                        />
+                        {#key value}
+                            <KeyValueBox
+                                keyText={localize('general.' + key)}
+                                copyValue={value.copyValue ?? value.data}
+                                isCopyable={value.isCopyable}
+                                valueText={value.data}
+                                isPreText={value.isPreText}
+                                maxHeight={value.maxHeight}
+                            />
+                        {/key}
                     {/each}
                 </key-value-list>
             </nft-details>

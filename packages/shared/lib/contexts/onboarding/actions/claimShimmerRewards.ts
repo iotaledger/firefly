@@ -1,6 +1,5 @@
 import { get } from 'svelte/store'
 
-import { localize } from '@core/i18n'
 import { COIN_TYPE, NetworkProtocol } from '@core/network'
 import {
     DEFAULT_TRANSACTION_OPTIONS,
@@ -8,9 +7,9 @@ import {
     resetNewTokenTransactionDetails,
     setNewTransactionDetails,
     NewTransactionType,
+    NewTokenTransactionDetails,
 } from '@core/wallet'
-import { showAppNotification } from '@auxiliary/notification'
-import type { Transaction } from '@iota/wallet'
+import { logAndNotifyError } from '@core/error/actions'
 
 import { ShimmerClaimingAccountState } from '../enums'
 import { IShimmerClaimingAccount } from '../interfaces'
@@ -48,10 +47,12 @@ async function claimShimmerRewardsForShimmerClaimingAccounts(
             if (get(isOnboardingLedgerProfile)) {
                 handleLedgerError(err?.error ?? err)
             } else {
-                showAppNotification({
+                logAndNotifyError({
                     type: 'error',
-                    alert: true,
-                    message: localize('notifications.claimShimmerRewards.error'),
+                    message: err,
+                    localizationKey: 'notifications.claimShimmerRewards.error',
+                    logToConsole: true,
+                    saveToErrorLog: true,
                 })
             }
         }
@@ -63,28 +64,25 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
 ): Promise<void> {
     const recipientAddress = await getDepositAddress(shimmerClaimingAccount?.twinAccount)
     const rawAmount = shimmerClaimingAccount?.unclaimedRewards
-    const outputOptions = getOutputOptions(null, recipientAddress, rawAmount.toString(), '', '')
+
+    const newTransactionDetails: NewTokenTransactionDetails = {
+        recipient: {
+            type: 'address',
+            address: recipientAddress,
+        },
+        type: NewTransactionType.TokenTransfer,
+        assetId: COIN_TYPE[NetworkProtocol.Shimmer].toString(),
+        rawAmount: rawAmount.toString(),
+        unit: '',
+    }
+    setNewTransactionDetails(newTransactionDetails)
+
+    const outputOptions = getOutputOptions(newTransactionDetails)
     const preparedOutput = await shimmerClaimingAccount?.prepareOutput(outputOptions, DEFAULT_TRANSACTION_OPTIONS)
 
-    let claimingTransaction: Transaction
-    if (get(isOnboardingLedgerProfile)) {
-        setNewTransactionDetails({
-            type: NewTransactionType.TokenTransfer,
-            assetId: COIN_TYPE[NetworkProtocol.Shimmer].toString(),
-            rawAmount: rawAmount.toString(),
-            unit: '',
-            recipient: {
-                type: 'address',
-                address: recipientAddress,
-            },
-            metadata: '',
-            tag: '',
-        })
-        claimingTransaction = await shimmerClaimingAccount?.sendOutputs([preparedOutput])
-        resetNewTokenTransactionDetails()
-    } else {
-        claimingTransaction = await shimmerClaimingAccount?.sendOutputs([preparedOutput])
-    }
+    const claimingTransaction = await shimmerClaimingAccount?.sendOutputs([preparedOutput])
+    resetNewTokenTransactionDetails()
+
     persistShimmerClaimingTransaction(claimingTransaction?.transactionId)
 
     const claimedRewards = shimmerClaimingAccount?.claimedRewards + rawAmount

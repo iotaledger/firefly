@@ -378,7 +378,7 @@
                 "noNodes": "Không có nút, không thể kết nối với mạng",
                 "noNodesAuto": "Không có nút nào, lựa chọn tự động sẽ được sử dụng để thay thế"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Bằng chứng công việc (PoW)",
                 "description": "Hoàn thành bằng chứng công việc cục bộ trên thiết bị của bạn hoặc thuê ngoài nút"
             },

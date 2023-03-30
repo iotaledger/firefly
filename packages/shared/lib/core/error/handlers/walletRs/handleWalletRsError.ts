@@ -11,7 +11,7 @@ import {
 export function handleWalletRsError(error: IError): void {
     if (error?.type) {
         switch (error.type) {
-            case WalletRsError.ClientError.valueOf():
+            case WalletRsError.Client.valueOf():
                 handleClientError(error)
                 break
             case WalletRsError.InsufficientFunds.valueOf():

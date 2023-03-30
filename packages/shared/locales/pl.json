@@ -378,7 +378,7 @@
                 "noNodes": "Brak serwerów, nie można połączyć się z siecią",
                 "noNodesAuto": "Nie ma żadnych serwerów, zamiast tego zostanie użyty automatyczny wybór"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Proof of work",
                 "description": "Wykonaj proof of work lokalnie na swoim urządzeniu lub zleć tę operację zewnętrznemu serwerowi"
             },

@@ -378,7 +378,7 @@
                 "noNodes": "Es sind keine Nodes vorhanden, Verbindung zum Netzwerk fehlgeschlagen",
                 "noNodesAuto": "Es sind keine Nodes vorhanden, automatische Auswahl wird stattdessen verwendet"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Proof of Work",
                 "description": "Proof of Work lokal auf deinem Gerät ausführen oder an den Node ausgliedern"
             },
