@@ -7,7 +7,7 @@ export enum WalletRsError {
     Block = 'block',
     BlockDtoError = 'blockDtoError',
     BurningOrMeltingFailed = 'burningOrMeltingFailed',
-    ClientError = 'clientError',
+    Client = 'client',
     ConsolidationRequired = 'consolidationRequired',
     CryptoError = 'cryptoError',
     CustomInputError = 'customInputError',
