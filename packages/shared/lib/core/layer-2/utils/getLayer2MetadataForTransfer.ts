@@ -23,6 +23,5 @@ export function getLayer2MetadataForTransfer(transactionDetails: NewTransactionD
     const allowance = encodeAssetAllowance(transactionDetails)
     metadataStream.writeBytes('allowance', allowance.length, allowance)
 
-    const metadata = '0x' + metadataStream.finalHex()
-    return metadata
+    return '0x' + metadataStream.finalHex()
 }
