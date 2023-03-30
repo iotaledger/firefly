@@ -1,4 +1,4 @@
-const { app, ipcRenderer, contextBridge } = require('electron')
+const { ipcRenderer, contextBridge } = require('electron')
 const ElectronApi = require('./electronApi')
 const WalletApi = require('@iota/wallet')
 const fs = require('fs')
@@ -44,32 +44,42 @@ try {
     if (process.env.STAGE === 'prod') {
         // empty
     } else {
-        ipcRenderer.invoke('get-path', 'userData').then((baseDir) => {
+        ipcRenderer.invoke('get-path', 'userData').then(async (baseDir) => {
             const logDir = `${baseDir}/logs`
             if (!fs.existsSync(logDir)) {
                 fs.mkdirSync(logDir)
             }
-            deleteOldLogs(logDir)
+            const versionDetails = await ipcRenderer.invoke('get-version-details')
             const today = new Date().toISOString().slice(0, 16).replace('T', '-').replace(':', '-')
             const loggerOptions = {
                 colorEnabled: true,
-                name: `${logDir}/wallet-${app.getVersion()}-${today}.log`,
+                name: `${logDir}/wallet-v${versionDetails.currentVersion}-d${today}.log`,
                 levelFilter: 'debug',
                 targetExclusions: ['h2', 'hyper', 'rustls', 'message_handler'],
             }
             WalletApi.initLogger(loggerOptions)
+
+            deleteOldLogs(logDir, versionDetails.currentVersion)
         })
     }
 } catch (err) {
     console.error('[Preload Context] Error:', err)
 }
 
-function deleteOldLogs(path) {
+function deleteOldLogs(path, currentVersion) {
     const files = fs.readdirSync(path)
+    const dayInMilliSeconds = 1000 * 60 * 60 * 24
 
     files.forEach((file) => {
-        const stat = fs.statSync(path + '/' + file)
-        stat.mtime
+        const filePath = path + '/' + file
+        const stat = fs.statSync(filePath)
+
+        const isOlderThan30Days = new Date() - new Date(stat.mtime) > 15 * dayInMilliSeconds
+        const version = file.match(/wallet-v((\w*.)*)-d((\w*.)*).log/)?.[1]
+        const isDifferentVersion = version !== currentVersion
+        if (!version || isDifferentVersion || isOlderThan30Days) {
+            fs.unlinkSync(filePath)
+        }
     })
 }
 
