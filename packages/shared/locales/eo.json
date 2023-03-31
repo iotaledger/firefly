@@ -260,6 +260,16 @@
                 "title": "General",
                 "description": "Configure your app's appearance and other general settings"
             },
+            "profile": {
+                "title": "Profilo",
+                "description": "Ŝanĝu vian profilnomon aŭ agordu avataron"
+            },
+            "network": {
+                "title": "Network"
+            },
+            "collectibles": {
+                "title": "Collectibles"
+            },
             "security": {
                 "title": "Sekureco",
                 "description": "Ŝanĝu vian pasvorton kaj ĝustigu sekurecajn agordojn"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "Helpo kaj informoj",
                 "description": "Trovu la respondon al demando aŭ ricevu helpon pri afero"
-            },
-            "profile": {
-                "title": "Profilo",
-                "description": "Ŝanĝu vian profilnomon aŭ agordu avataron"
             },
             "sync": {
                 "title": "Sinkronigi monujojn",
@@ -306,8 +312,12 @@
                 "description": "Eksporti al Stronghold dosiero - kompleta ĉifrita sekurkopio de viaj monujoj kaj plej nova transakcia historio"
             },
             "appLock": {
-                "title": "Aŭtomata Ŝlosado",
+                "title": "Automatic logout",
                 "description": "Neaktiva tempo antaŭ ol viaj monujoj ŝlosiĝas kaj vi estas elsalutita"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold Timeout",
+                "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
                 "title": "Maximum media size",
@@ -346,22 +356,9 @@
                 "title": "Deep links",
                 "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
-            "networkConfiguration": {
-                "title": "Reto agordo",
-                "title2": "Reta agordo",
-                "description": {
-                    "dev": "Viaj retaj agordoj aŭtomate ĝisdatigos laŭ la nuna noda agordo (ŝanĝi retojn rezultos restarigi la monujon)",
-                    "nonDev": "Viaj retaj agordoj aŭtomate ĝisdatigos laŭ la nuna noda agordo"
-                },
-                "switchedNetworks": "Sukcese ŝanĝis reton al \"{networkName}\".",
-                "resetWallet": "Via monujo stato estis rekomencigita.",
-                "connectedTo": "Ligita al",
-                "nodeConfiguration": {
-                    "title": "Elekto de nodo",
-                    "description": "Elektu \"Manlibro\" por agordi nodagordojn kaj konekti al via propra nodo(j)",
-                    "automatic": "Aŭtomata",
-                    "manual": "Manlibro"
-                }
+            "networkInformation": {
+                "title": "Network information",
+                "connectedTo": "Connected to"
             },
             "configureNodeList": {
                 "title": "Noda agordo",
@@ -379,8 +376,8 @@
                 "noNodesAuto": "Ne ekzistas nodoj, aŭtomata elektado estos uzata anstataŭe"
             },
             "localProofOfWork": {
-                "title": "Pruvo de funkciado",
-                "description": "Kompleta pruvo de loka funkciado sur via aparato aŭ subkontraktado al la nodo"
+                "title": "Proof of work",
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "Erar-protokolo",
@@ -1068,6 +1065,7 @@
                 "quantityTooLarge": "Quantity needs to be smaller than 64",
                 "emptyName": "Name is a required field",
                 "invalidURI": "Invalid URI, please provide a valid URI",
+                "royaltiesMustBeObject": "Royalties must be an object",
                 "royaltiesMustBeJSON": "Royalties must be a valid JSON",
                 "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
                 "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",

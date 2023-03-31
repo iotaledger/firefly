@@ -260,6 +260,16 @@
                 "title": "General",
                 "description": "Configure your app's appearance and other general settings"
             },
+            "profile": {
+                "title": "පැතිකඩ",
+                "description": "ඔබගේ පැතිකඩ නම වෙනස් කරන්න හෝ අවතාරයක් සකසන්න"
+            },
+            "network": {
+                "title": "Network"
+            },
+            "collectibles": {
+                "title": "Collectibles"
+            },
             "security": {
                 "title": "ආරක්ෂක",
                 "description": "ඔබගේ මුරපදය වෙනස් කර ආරක්ෂාවට අදාළ සැකසුම් සකස් කරන්න"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "උදව් සහ තොරතුරු",
                 "description": "ප්‍රශ්නයකට පිළිතුර සොයන්න හෝ ගැටලුවක් සම්බන්ධයෙන් උදවු ලබා ගන්න"
-            },
-            "profile": {
-                "title": "පැතිකඩ",
-                "description": "ඔබගේ පැතිකඩ නම වෙනස් කරන්න හෝ අවතාරයක් සකසන්න"
             },
             "sync": {
                 "title": "මුදල් පසුම්බි සමමුහුර්ත කරන්න",
@@ -306,8 +312,12 @@
                 "description": "Stronghold ගොනුවකට අපනයනය කරන්න - ඔබගේ මුදල් පසුම්බි සහ නවතම ගණුදෙණු ඉතිහාසය සම්පූර්ණ සංකේතාත්මක උපස්ථයක්"
             },
             "appLock": {
-                "title": "ස්වයංක්රීය අගුල",
+                "title": "Automatic logout",
                 "description": "ඔබගේ මුදල් පසුම්බි අගුළු දැමීමට පෙර අක්‍රිය කාලය සහ ඔබ ලොග් අවුට් වී ඇත"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold Timeout",
+                "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
                 "title": "Maximum media size",
@@ -346,22 +356,9 @@
                 "title": "Deep links",
                 "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
-            "networkConfiguration": {
-                "title": "ජාල වින්යාසය",
-                "title2": "ජාල වින්‍යාසය",
-                "description": {
-                    "dev": "වත්මන් නෝඩ් වින්‍යාසයට අනුව ඔබගේ ජාල සැකසීම් ස්වයංක්‍රීයව යාවත්කාලීන වේ (ජාල මාරු කිරීම මුදල් පසුම්බිය නැවත සැකසීමට හේතු වේ)",
-                    "nonDev": "වත්මන් නෝඩ් වින්‍යාසය අනුව ඔබගේ ජාල සැකසීම් ස්වයංක්‍රීයව යාවත්කාලීන වේ"
-                },
-                "switchedNetworks": "ජාලය \"{networkName}\" වෙත සාර්ථකව මාරු කරන ලදී.",
-                "resetWallet": "ඔබගේ පසුම්බි තත්ත්වය යළි සකසා ඇත.",
-                "connectedTo": "වෙත සම්බන්ධ කර ඇත",
-                "nodeConfiguration": {
-                    "title": "නෝඩ් තේරීම",
-                    "description": "නෝඩ් සැකසුම් වින්‍යාස කිරීමට සහ ඔබේම නෝඩ(ය) වෙත සම්බන්ධ කිරීමට \"අත්පොත\" තෝරන්න",
-                    "automatic": "ස්වයංක්රීය",
-                    "manual": "අත්පොත"
-                }
+            "networkInformation": {
+                "title": "Network information",
+                "connectedTo": "Connected to"
             },
             "configureNodeList": {
                 "title": "නෝඩ් වින්‍යාසය",
@@ -379,8 +376,8 @@
                 "noNodesAuto": "නෝඩ් නොමැත, ඒ වෙනුවට ස්වයංක්‍රීය තේරීම භාවිතා කරනු ඇත"
             },
             "localProofOfWork": {
-                "title": "වැඩ ඔප්පු",
-                "description": "ඔබගේ උපාංගයේ දේශීයව වැඩ කිරීමේ සම්පූර්ණ සාක්ෂිය හෝ නෝඩයට බාහිරින් ලබා දීම"
+                "title": "Proof of work",
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "දෝෂ ලොගය",
@@ -1068,6 +1065,7 @@
                 "quantityTooLarge": "Quantity needs to be smaller than 64",
                 "emptyName": "Name is a required field",
                 "invalidURI": "Invalid URI, please provide a valid URI",
+                "royaltiesMustBeObject": "Royalties must be an object",
                 "royaltiesMustBeJSON": "Royalties must be a valid JSON",
                 "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
                 "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",

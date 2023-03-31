@@ -260,6 +260,16 @@
                 "title": "General",
                 "description": "Configure your app's appearance and other general settings"
             },
+            "profile": {
+                "title": "Профил",
+                "description": "Променете го името на вашиот профил или поставете аватар"
+            },
+            "network": {
+                "title": "Network"
+            },
+            "collectibles": {
+                "title": "Collectibles"
+            },
             "security": {
                 "title": "Безбедност",
                 "description": "Променете ја вашата лозинка и подесете ги подесувањата за безбедност"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "Помош и информации",
                 "description": "Најдете го одговорот на дадено прашање или добијте помош за даден проблем"
-            },
-            "profile": {
-                "title": "Профил",
-                "description": "Променете го името на вашиот профил или поставете аватар"
             },
             "sync": {
                 "title": "Синхронизирај ги паричниците",
@@ -306,8 +312,12 @@
                 "description": "Експортирај во Stronghold датотека - целосна енкриптирана резервна копија од вашите паричници и историја на неодамнешни трансакции"
             },
             "appLock": {
-                "title": "Automatic lock",
+                "title": "Automatic logout",
                 "description": "Време на неактивност пред вашите паричници да се заклучат и да бидете одјавени"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold Timeout",
+                "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
                 "title": "Maximum media size",
@@ -346,22 +356,9 @@
                 "title": "Deep links",
                 "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
-            "networkConfiguration": {
-                "title": "Network config",
-                "title2": "Network configuration",
-                "description": {
-                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
-                    "nonDev": "Your network settings will update automatically according to the current node configuration"
-                },
-                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
-                "resetWallet": "Your wallet state has been reset.",
-                "connectedTo": "Connected to",
-                "nodeConfiguration": {
-                    "title": "Node selection",
-                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
-                    "automatic": "Automatic",
-                    "manual": "Manual"
-                }
+            "networkInformation": {
+                "title": "Network information",
+                "connectedTo": "Connected to"
             },
             "configureNodeList": {
                 "title": "Node configuration",
@@ -379,8 +376,8 @@
                 "noNodesAuto": "There are no nodes, automatic selection will be used instead"
             },
             "localProofOfWork": {
-                "title": "Proof of Work",
-                "description": "Изврешете proof of work локално на вашиот уред или пренасочете го тоа кон јазолот"
+                "title": "Proof of work",
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "Записник на грешки",
@@ -1068,6 +1065,7 @@
                 "quantityTooLarge": "Quantity needs to be smaller than 64",
                 "emptyName": "Name is a required field",
                 "invalidURI": "Invalid URI, please provide a valid URI",
+                "royaltiesMustBeObject": "Royalties must be an object",
                 "royaltiesMustBeJSON": "Royalties must be a valid JSON",
                 "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
                 "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",
