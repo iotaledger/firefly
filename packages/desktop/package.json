@@ -33,8 +33,7 @@
         "electron-log": "^4.3.1",
         "electron-updater": "4.3.5",
         "keytar": "^7.9.0",
-        "node-machine-id": "^1.1.12",
-        "shared": "0.0.0"
+        "node-machine-id": "^1.1.12"
     },
     "devDependencies": {
         "@sentry/webpack-plugin": "^1.18.5",
@@ -43,7 +42,7 @@
         "copy-webpack-plugin": "^7.0.0",
         "cross-env": "^7.0.2",
         "css-loader": "^5.0.1",
-        "electron": "22.3.0",
+        "electron": "22.3.5",
         "electron-builder": "^24.0.0",
         "electron-notarize": "^1.0.0",
         "esbuild-loader": "^3.0.0",
