@@ -260,6 +260,16 @@
                 "title": "General",
                 "description": "Configure your app's appearance and other general settings"
             },
+            "profile": {
+                "title": "الملف الشخصي",
+                "description": "تغيير اسم ملفك الشخصي أو تعيين صورة شخصية"
+            },
+            "network": {
+                "title": "Network"
+            },
+            "collectibles": {
+                "title": "Collectibles"
+            },
             "security": {
                 "title": "الحماية",
                 "description": "تغيير كلمة المرور الخاصة بك وضبط الإعدادات المتصلة بالأمن"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "المساعدة والمعلومات",
                 "description": "ابحث عن إجابة على سؤال أو احصل على مساعدة في مشكلة"
-            },
-            "profile": {
-                "title": "الملف الشخصي",
-                "description": "تغيير اسم ملفك الشخصي أو تعيين صورة شخصية"
             },
             "sync": {
                 "title": "مزامنة المحافظ",
@@ -306,8 +312,12 @@
                 "description": "تصدير نسخة احتياطية مشفرة إلى ملف Stronghold - لكامل محتويات المحافظ الخاصة بك مع أخر سجلات المعاملات لديك"
             },
             "appLock": {
-                "title": "قفل تلقائي",
+                "title": "Automatic logout",
                 "description": "فترة عدم النشاط قبل قفل محافظك وتسجيل الخروج"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold Timeout",
+                "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
                 "title": "Maximum media size",
@@ -346,22 +356,9 @@
                 "title": "Deep links",
                 "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
-            "networkConfiguration": {
-                "title": "إعدادات الشبكة",
-                "title2": "إعدادات الشبكة",
-                "description": {
-                    "dev": "سيتم تحديث إعدادات الشبكة الخاصة بك تلقائياً وفقاً لإعدادات الوسيط البرمجي الحالي (سيؤدي تبديل الشبكات إلى إعادة تعيين حالة المحفظة)",
-                    "nonDev": "سيتم تحديث إعدادات الشبكة الخاصة بك تلقائياً وفقاً لإعدادات الوسيط البرمجي الحالي"
-                },
-                "switchedNetworks": "تم تبديل الشبكة إلى \"{networkName}\" بنجاح.",
-                "resetWallet": "تم إعادة ضبط محفظتك الى ضبط المنشأ.",
-                "connectedTo": "متصل بـ",
-                "nodeConfiguration": {
-                    "title": "اختيار الوسيط الرمجي",
-                    "description": "إختر الإعدادات \"يدوي\" لتهيئة خصائص الوسيط البرمجي (الوسطاء البرمجيين) المنشأ من قبلك والاتصال به",
-                    "automatic": "آلي",
-                    "manual": "يدوي"
-                }
+            "networkInformation": {
+                "title": "Network information",
+                "connectedTo": "Connected to"
             },
             "configureNodeList": {
                 "title": "خصائص الوسيط البرمجي",
@@ -379,8 +376,8 @@
                 "noNodesAuto": "لا يوجد وسطاء برمجيون, سيتم استخدام خاصية الاختيار الآلي للوسطاء بدلا من اليدوي"
             },
             "localProofOfWork": {
-                "title": "إثبات العمل",
-                "description": "اكمل عملية إثبات العمل للوسيط البرمجي محليا على جهازك أو من مصدر خارجي"
+                "title": "Proof of work",
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "سجل الخطأ",
@@ -1068,6 +1065,7 @@
                 "quantityTooLarge": "Quantity needs to be smaller than 64",
                 "emptyName": "Name is a required field",
                 "invalidURI": "Invalid URI, please provide a valid URI",
+                "royaltiesMustBeObject": "Royalties must be an object",
                 "royaltiesMustBeJSON": "Royalties must be a valid JSON",
                 "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
                 "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",

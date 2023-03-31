@@ -260,6 +260,16 @@
                 "title": "Général",
                 "description": "Configurez l'apparence de votre application et d'autres paramètres généraux"
             },
+            "profile": {
+                "title": "Profil",
+                "description": "Changer le nom de votre profil ou définir un avatar"
+            },
+            "network": {
+                "title": "Network"
+            },
+            "collectibles": {
+                "title": "Collectibles"
+            },
             "security": {
                 "title": "Sécurité",
                 "description": "Changez votre mot de passe et ajustez les paramètres de sécurité"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "Aide & Information",
                 "description": "Trouver la réponse à une question ou obtenir de l'aide sur un problème"
-            },
-            "profile": {
-                "title": "Profil",
-                "description": "Changer le nom de votre profil ou définir un avatar"
             },
             "sync": {
                 "title": "Synchroniser les portefeuilles",
@@ -306,8 +312,12 @@
                 "description": "Exporter vers un fichier Stronghold - une sauvegarde chiffrée complète de vos portefeuilles et l'historique récent des transactions"
             },
             "appLock": {
-                "title": "Verrouillage automatique",
+                "title": "Automatic logout",
                 "description": "Temps d'inactivité avant le verrouillage de vos portefeuilles et vous êtes déconnecté"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold Timeout",
+                "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
                 "title": "Maximum media size",
@@ -346,22 +356,9 @@
                 "title": "Liaisons ciblées",
                 "description": "Remplir automatiquement les données de transaction dans Firefly en cliquant sur un lien profond commençant par {appProtocol}://"
             },
-            "networkConfiguration": {
-                "title": "Configuration du réseau",
-                "title2": "Configuration du réseau",
-                "description": {
-                    "dev": "Vos paramètres de réseau seront automatiquement mis à jour en fonction de la configuration actuelle du nœud (les changements de réseau entraîneront la réinitialisation de l'état du portefeuille)",
-                    "nonDev": "Vos paramètres réseau seront mis à jour automatiquement en fonction de la configuration actuelle du noeud"
-                },
-                "switchedNetworks": "Le réseau a été basculé avec succès vers \"{networkName}\".",
-                "resetWallet": "L'état de votre portefeuille a été réinitialisé.",
-                "connectedTo": "Connecté à",
-                "nodeConfiguration": {
-                    "title": "Sélection du noeud",
-                    "description": "Sélectionnez le mode Manuel pour la configuration des nœuds et pour vous connecter à votre propre nœud",
-                    "automatic": "Automatique",
-                    "manual": "Manuel"
-                }
+            "networkInformation": {
+                "title": "Network information",
+                "connectedTo": "Connected to"
             },
             "configureNodeList": {
                 "title": "Configuration du noeud",
@@ -379,8 +376,8 @@
                 "noNodesAuto": "Il n'y a pas de nœud, la sélection automatique sera utilisée à la place"
             },
             "localProofOfWork": {
-                "title": "Preuve de travail",
-                "description": "Effectuer la preuve de travail localement sur votre appareil ou la faire prendre en charge par le nœud"
+                "title": "Proof of work",
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "Journal des erreurs",
@@ -1068,6 +1065,7 @@
                 "quantityTooLarge": "La quantité doit être inférieure à 64",
                 "emptyName": "Le nom est un champ obligatoire",
                 "invalidURI": "URI invalide, veuillez fournir une URI valide",
+                "royaltiesMustBeObject": "Les redevances doivent être un objet",
                 "royaltiesMustBeJSON": "Les royalties doivent être un JSON valide",
                 "invalidAddress": "Adresse invalide, doit être une adresse {networkHrp} valide où les redevances seront envoyées à",
                 "invalidRoyaltyValue": "Valeur non valide, elle doit être un nombre décimal représentant le pourcentage requis i. e. 0.05",
@@ -1779,7 +1777,7 @@
             "error": "An error occurred while claiming. Try again."
         },
         "vote": {
-            "success": "Votes successfully cast"
+            "success": "Vote ajouté avec succès"
         },
         "stopVoting": {
             "success": "Voting successfully stopped"
