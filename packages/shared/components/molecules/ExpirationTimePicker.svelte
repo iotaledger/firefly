@@ -38,12 +38,7 @@
             darkColor="gray-500"
             classes={disabled ? '' : 'hover:text-blue-600'}
         >
-            {value
-                ? formatDate(value, {
-                      dateStyle: 'long',
-                      timeStyle: 'medium',
-                  })
-                : localize('general.none')}
+            {value ? formatDate(value, { dateStyle: 'long', timeStyle: 'medium' }) : localize('general.none')}
         </Text>
         {#if !disabled}
             <Icon icon={IconEnum.ChevronDown} width="10" classes="text-blue-500 ml-1" />

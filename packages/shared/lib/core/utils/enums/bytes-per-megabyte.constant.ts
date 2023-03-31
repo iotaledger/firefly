@@ -1,0 +1,1 @@
+export const BYTES_PER_MEGABYTE = 1_000_000

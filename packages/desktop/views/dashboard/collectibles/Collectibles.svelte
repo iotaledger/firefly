@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { CollectiblesDetailsView, CollectiblesGalleryView } from './views'
     import { selectedAccountIndex } from '@core/account/stores'
     import { collectiblesRoute, CollectiblesRoute, collectiblesRouter } from '@core/router'
+    import { CollectiblesDetailsView, CollectiblesGalleryView } from './views'
 
     $: $selectedAccountIndex !== undefined && $collectiblesRouter.reset()
 </script>
