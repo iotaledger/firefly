@@ -32,6 +32,8 @@ module.exports = function (initialize) {
         /* eslint-disable no-console */
         console.log({ appName, debug, dsn, environment })
         Sentry.init({ appName, debug, dsn, environment })
+        /* eslint-disable no-console */
+        console.log('MACHINE ID: ', machineId)
         Sentry.setUser({ id: machineId })
     }
 
