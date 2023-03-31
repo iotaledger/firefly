@@ -95,6 +95,7 @@ export class ImportRouter extends Subrouter<ImportRoute> {
                             updateStrongholdRouter.set(new UpdateStrongholdRouter())
                         } else {
                             await asyncRestoreBackup(this.importFilePath, password)
+                            strongholdPassword.set(undefined)
                             get(newProfile).lastStrongholdBackupTime = new Date()
                             nextRoute = ImportRoute.Success
                         }
@@ -107,6 +108,7 @@ export class ImportRouter extends Subrouter<ImportRoute> {
             case ImportRoute.UpdateStronghold:
                 // TODO: https://github.com/iotaledger/firefly/issues/6141
                 await asyncRestoreBackup(this.importFilePath, get(strongholdPassword))
+                strongholdPassword.set(undefined)
                 get(newProfile).lastStrongholdBackupTime = new Date()
                 get(appRouter).next({ importType: get(this.importType) })
                 return
