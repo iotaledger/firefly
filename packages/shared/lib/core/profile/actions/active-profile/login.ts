@@ -9,8 +9,8 @@ import { handleError } from '@core/error/handlers'
 import { pollLedgerNanoStatus } from '@core/ledger/actions'
 import { pollMarketPrices } from '@core/market/actions'
 import { getAndUpdateNodeInfo, pollNetworkStatus } from '@core/network/actions'
-import { loadNftsForActiveProfile } from '@core/nfts/actions'
 import { initialiseProfileManager } from '@core/profile-manager/actions'
+import { loadNftsForActiveProfile } from '@core/nfts'
 import {
     getAccounts,
     isStrongholdUnlocked,
