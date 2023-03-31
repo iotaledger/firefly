@@ -38,10 +38,6 @@ module.exports = function (initialize) {
     }
 
     return {
-        captureException: (...args) => {
-            /* eslint-disable no-console */
-            console.log('SENTRY INIT: ', args)
-            return Sentry.captureException
-        },
+        captureException: Sentry.captureException,
     }
 }

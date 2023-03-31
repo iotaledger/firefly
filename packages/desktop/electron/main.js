@@ -244,8 +244,7 @@ function createWindow() {
 
     mainWindowState.track(windows.main)
 
-    if (true) {
-        // !app.isPackaged) {
+    if (!app.isPackaged) {
         // Enable dev tools only in developer mode
         windows.main.webContents.openDevTools()
 
