@@ -1,6 +1,6 @@
 import { activeProfile } from '@core/profile'
 import { get } from 'svelte/store'
-import { BYTES_PER_MEGABYTE } from '../constants'
+import { BYTES_PER_MEGABYTE, NFT_MEDIA_FILE_NAME } from '../constants'
 import { DownloadErrorType, DownloadWarningType } from '../enums'
 import { fetchWithTimeout } from './fetchWithTimeout'
 import { NftDownloadMetadata, INft, IPersistedNftData } from '../interfaces'
@@ -16,7 +16,7 @@ export async function checkIfNftShouldBeDownloaded(
     let downloadMetadata: NftDownloadMetadata = { isLoaded: false }
 
     try {
-        const alreadyDownloaded = await Platform.checkIfFileExists(`${nft.filePath}/original`)
+        const alreadyDownloaded = await Platform.checkIfFileExists(`${nft.filePath}/${NFT_MEDIA_FILE_NAME}`)
 
         if (alreadyDownloaded) {
             downloadMetadata.isLoaded = true

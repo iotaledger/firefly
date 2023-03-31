@@ -1,8 +1,9 @@
 <script lang="ts">
     import { onMount } from 'svelte'
 
-    import { MimeType, ParentMimeType } from '@core/nfts'
+    import { MimeType, NFT_MEDIA_FILE_NAME, ParentMimeType } from '@core/nfts'
     import { getStorageDirectoryOfProfiles } from '@core/profile/utils'
+    import { DEV_STORAGE_DIRECTORY } from '@core/profile'
 
     export let Media: HTMLImageElement | HTMLVideoElement = undefined
     export let filePath: string
@@ -21,6 +22,7 @@
     let basePath: string
 
     $: isLoaded && muteVideo()
+    $: fullPath = `${basePath}/${filePath}/${NFT_MEDIA_FILE_NAME}`
 
     function muteVideo() {
         if (muted && Media instanceof HTMLVideoElement) {
@@ -54,7 +56,7 @@
 
     onMount(async () => {
         if (process.env.NODE_ENV === 'development') {
-            basePath = 'build/__storage__'
+            basePath = DEV_STORAGE_DIRECTORY
         } else {
             basePath = await getStorageDirectoryOfProfiles()
         }
@@ -67,7 +69,7 @@
         <svelte:element
             this={type}
             bind:this={Media}
-            src="{basePath}/{filePath}/original"
+            src={fullPath}
             {alt}
             autoplay={autoplay ? true : undefined}
             controls={controls ? true : undefined}
