@@ -27,7 +27,6 @@
 {:else}
     <MediaDisplay
         filePath={nft.filePath}
-        url={nft.downloadUrl}
         isLoaded={nft.downloadMetadata.isLoaded}
         expectedType={nft.parsedMetadata.type}
         alt={`Media display for ${nft.name}`}

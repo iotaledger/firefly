@@ -19,7 +19,6 @@ async function validateNftThenAddToQueue(accountIndex: number, nft: INft): Promi
     try {
         const { shouldDownload, downloadMetadata, downloadUrl } = await checkIfNftShouldBeDownloaded(nft)
         nft.downloadMetadata = downloadMetadata
-        nft.downloadUrl = downloadUrl
         updateNftInAllAccountNfts(accountIndex, nft.id, { downloadMetadata })
 
         if (shouldDownload) {

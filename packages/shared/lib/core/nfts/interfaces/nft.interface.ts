@@ -12,7 +12,6 @@ export interface INft {
     timelockTime: number
     latestOutputId: string
     composedUrl: string
-    downloadUrl: string
     filePath: string
     downloadMetadata: NftDownloadMetadata
 }
