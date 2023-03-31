@@ -1,11 +1,10 @@
 <script lang="ts">
-    import { localize } from '@core/i18n'
-    import { ActivityDirection, getActivityTileTitle, NftActivity, Subject } from '@core/wallet'
-    import { truncateString } from '@core/utils'
-    import { NftImageOrIconBox, ActivityTileContent } from 'shared/components'
-    import { networkHrp } from '@core/network'
-    import { getNftByIdFromAllAccountNfts } from '@core/nfts'
     import { selectedAccountIndex } from '@core/account'
+    import { localize } from '@core/i18n'
+    import { getNftByIdFromAllAccountNfts } from '@core/nfts'
+    import { truncateString } from '@core/utils'
+    import { ActivityDirection, getActivityTileTitle, NftActivity, Subject } from '@core/wallet'
+    import { ActivityTileContent, NftImageOrIconBox } from 'shared/components'
 
     export let activity: NftActivity
 
@@ -30,7 +29,7 @@
             description = truncateString(subject?.account?.name, 13, 0)
         }
         if (subject?.type === 'address') {
-            description = truncateString(subject?.address, $networkHrp.length, 6)
+            description = truncateString(subject?.address, 6, 6)
         }
         return description ? description : localize('general.unknownAddress')
     }
