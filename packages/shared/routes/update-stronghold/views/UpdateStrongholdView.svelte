@@ -1,12 +1,13 @@
 <script lang="ts">
     import { Animation, Button, OnboardingLayout, Password, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { LoginRouter, updateStrongholdRouter } from '@core/router'
+    import { updateStrongholdRouter } from '@core/router'
+    import { Router } from '@core/router/router'
     import { activeProfileId } from '@lib/profile'
     import { destroyActor } from '@lib/wallet'
     import { strongholdPassword } from '@lib/app'
 
-    export let loginRouter: LoginRouter
+    export let parentRouter: Router<unknown>
 
     const busy = false
     let password: string = ''
@@ -17,7 +18,7 @@
     function onBackClick(): void {
         destroyActor($activeProfileId)
         $updateStrongholdRouter.previous()
-        loginRouter.previous()
+        parentRouter.previous()
     }
 
     function onContinueClick(): void {
