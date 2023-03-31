@@ -92,7 +92,7 @@ export class ImportRouter extends Subrouter<ImportRoute> {
                         /* eslint-disable no-constant-condition */
                         if (true) {
                             nextRoute = ImportRoute.UpdateStronghold
-                            updateStrongholdRouter.set(new UpdateStrongholdRouter())
+                            updateStrongholdRouter.set(new UpdateStrongholdRouter(this))
                         } else {
                             await asyncRestoreBackup(this.importFilePath, password)
                             strongholdPassword.set(undefined)

@@ -33,7 +33,7 @@ export class LoginRouter extends Subrouter<LoginRoute> {
                 /* eslint-disable no-constant-condition */
                 if (true) {
                     nextRoute = LoginRoute.UpdateStronghold
-                    updateStrongholdRouter.set(new UpdateStrongholdRouter())
+                    updateStrongholdRouter.set(new UpdateStrongholdRouter(this))
                 } else {
                     migrateProfile()
                     get(appRouter).next(event)
