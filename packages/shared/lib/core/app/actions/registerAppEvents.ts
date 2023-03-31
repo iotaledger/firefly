@@ -1,10 +1,10 @@
 import { registerAppUpdateEvents } from './registerAppUpdateEvents'
-import { registerNftMediaDownloadEvents } from './registerNftMediaDownloadEvents'
+import { registerNftDownloadEvents } from './registerNftDownloadEvents'
 
 /**
  * Registers all event handlers for the application.
  */
 export function registerAppEvents(): void {
     registerAppUpdateEvents()
-    registerNftMediaDownloadEvents()
+    registerNftDownloadEvents()
 }

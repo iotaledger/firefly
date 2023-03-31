@@ -1,6 +1,6 @@
 import features from '@features/features'
 import { initAutoUpdate } from './lib/appUpdater'
-import { initNftMediaDownload } from './lib/nftMediaDownload'
+import { initNftDownloadHandlers } from './lib/nftDownloadHandlers'
 import { shouldReportError } from './lib/errorHandling'
 const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = require('electron')
 const path = require('path')
@@ -254,7 +254,7 @@ function createWindow() {
         windows.main.loadFile(paths.html)
     }
 
-    initNftMediaDownload()
+    initNftDownloadHandlers()
 
     /**
      * Right click context menu for inputs

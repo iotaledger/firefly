@@ -6,7 +6,7 @@ const fs = require('fs')
 
 const downloadItems = {}
 
-export function initNftMediaDownload() {
+export function initNftDownloadHandlers() {
     ipcMain.handle('nft-download', async (event, url, destination, nftId, accountIndex) => {
         const userPath = app.getPath('userData')
         const directory = app.isPackaged ? userPath : __dirname
