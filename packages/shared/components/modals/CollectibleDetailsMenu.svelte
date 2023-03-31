@@ -1,13 +1,11 @@
 <script lang="ts">
     import { MenuItem, Modal } from 'shared/components'
-
     import { openUrlInBrowser, time } from '@core/app'
     import { localize } from '@core/i18n'
     import { INft, rewriteIpfsUri } from '@core/nfts'
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { CollectiblesRoute, collectiblesRouter } from '@core/router'
     import { burnNft } from '@core/wallet'
-
     import { PopupId } from '@auxiliary/popup'
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
 
