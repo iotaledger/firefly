@@ -6,7 +6,6 @@
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
     import { networkHrp } from '@core/network/stores'
-    import { HttpHeader } from '@core/nfts/enums'
     import { MimeType } from '@core/nfts/types'
     import { isValidUri } from '@core/utils/validation'
     import { validateBech32Address } from '@core/utils/crypto'
@@ -15,6 +14,7 @@
     import { IMintNftDetails } from '@core/wallet'
     import { fetchWithTimeout } from '@core/nfts/utils/fetchWithTimeout'
     import { composeUrlFromNftUri } from '@core/nfts'
+    import { HttpHeader } from '@core/utils'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
