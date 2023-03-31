@@ -43,8 +43,8 @@
         }
         if (subject?.type === 'address') {
             const address = activity.parsedLayer2Metadata?.ethereumAddress ?? subject?.address
-            const hrpLength = activity.parsedLayer2Metadata ? '0x'.length : $networkHrp.length
-            return truncateString(address, hrpLength + 4, 4)
+            const visibleStartLength = activity.parsedLayer2Metadata ? '0x'.length + 4 : $networkHrp.length
+            return truncateString(address, visibleStartLength, 4)
         }
         return localize('general.unknownAddress')
     }
