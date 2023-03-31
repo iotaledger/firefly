@@ -36,6 +36,6 @@
     </Transition>
 {:else if $loginRoute === LoginRoute.UpdateStronghold}
     <Transition>
-        <UpdateStrongholdRouter parentRouter={loginRouter} />
+        <UpdateStrongholdRouter parentRouter={loginRouter} isRecovery={false} />
     </Transition>
 {/if}

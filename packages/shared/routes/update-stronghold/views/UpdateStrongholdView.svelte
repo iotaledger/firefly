@@ -8,6 +8,7 @@
     import { strongholdPassword } from '@lib/app'
 
     export let parentRouter: Router<unknown>
+    export let isRecovery: boolean
 
     const busy = false
     let password: string = ''
@@ -22,12 +23,16 @@
     }
 
     function onContinueClick(): void {
-        // TODO: Remove later once real logic is hooked in
-        if (password === 'test') {
-            strongholdPassword.set(password)
+        if (isRecovery) {
             $updateStrongholdRouter.next()
         } else {
-            error = 'Must use "test" password'
+            // TODO: Remove later once real logic is hooked in
+            if (password === 'test') {
+                strongholdPassword.set(password)
+                $updateStrongholdRouter.next()
+            } else {
+                error = 'Must use "test" password'
+            }
         }
     }
 </script>
@@ -39,16 +44,18 @@
         </div>
         <div slot="leftpane__content">
             <Text type="p" secondary classes="mb-8">{localize('views.login.updateStronghold.body')}</Text>
-            <Password
-                classes="mb-6"
-                {error}
-                bind:value={password}
-                locale={localize}
-                showRevealToggle
-                autofocus
-                disabled={busy}
-                submitHandler={onContinueClick}
-            />
+            {#if !isRecovery}
+                <Password
+                    classes="mb-6"
+                    {error}
+                    bind:value={password}
+                    locale={localize}
+                    showRevealToggle
+                    autofocus
+                    disabled={busy}
+                    submitHandler={onContinueClick}
+                />
+            {/if}
         </div>
         <div slot="leftpane__action">
             <Button classes="w-full" onClick={onContinueClick}>

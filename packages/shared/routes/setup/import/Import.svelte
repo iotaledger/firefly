@@ -66,7 +66,7 @@
     </Transition>
 {:else if $importRoute === ImportRoute.UpdateStronghold}
     <Transition>
-        <UpdateStrongholdRouter parentRouter={importRouter} />
+        <UpdateStrongholdRouter parentRouter={importRouter} isRecovery={true} />
     </Transition>
 {:else if $importRoute === ImportRoute.Success}
     <Transition>

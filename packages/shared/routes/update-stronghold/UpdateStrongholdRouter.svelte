@@ -5,11 +5,12 @@
     import { Router } from '@core/router/router'
 
     export let parentRouter: Router<unknown>
+    export let isRecovery: boolean
 </script>
 
 {#if $updateStrongholdRoute === UpdateStrongholdRoute.UpdateStronghold}
     <Transition>
-        <UpdateStrongholdView {parentRouter} />
+        <UpdateStrongholdView {parentRouter} {isRecovery} />
     </Transition>
 {:else if $updateStrongholdRoute === UpdateStrongholdRoute.ChangePassword}
     <Transition>
