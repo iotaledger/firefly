@@ -61,6 +61,11 @@
   resolved "https://registry.yarnpkg.com/@capacitor/ios/-/ios-3.4.1.tgz#0ae173056924294aa1e468b70377d603abea790e"
   integrity sha512-ycFCyKI8DsgedVg7PW5MpCVgqFuD0PMHQGVfC5ichXc2C/jAATX32EVdEMCB0N3guKoH2k6T3Efwg59+Fcdx2w==
 
+"@capacitor/keyboard@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@capacitor/keyboard/-/keyboard-1.2.3.tgz#8046d8256e1c72ed3a2dad6ff01dc37a0c415077"
+  integrity sha512-KTSzJkMa6CrmDIDhWfswNPqS7gvYlL25E1gqXbY7w/EhyBjJhEdF0bc6QUFufS+ZVMlcPafc0/E5P+pTfLnKiA==
+
 "@capacitor/splash-screen@^1.2.2":
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/@capacitor/splash-screen/-/splash-screen-1.2.2.tgz#fabd52ffbb922c38e2b3ef605332f29c830bd508"
@@ -882,10 +887,10 @@ caniuse-lite@^1.0.30001449:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001466.tgz#c1e6197c540392e09709ecaa9e3e403428c53375"
   integrity sha512-ewtFBSfWjEmxUgNBSZItFSmVtvk9zkwkl1OfRZlKA8slltRN+/C/tuGVrF9styXkN36Yu3+SeJ1qkXxDEyNZ5w==
 
-capacitor-secure-storage-plugin@^0.6.2:
-  version "0.6.4"
-  resolved "https://registry.yarnpkg.com/capacitor-secure-storage-plugin/-/capacitor-secure-storage-plugin-0.6.4.tgz#282d77f030a2686beca3276836bf97603e78bf07"
-  integrity sha512-Uv5uRRiPmvELmtsz89gSt9i/hyliM1H19T3S7ZsUeaxQTiWj1UOzhuADSA1zwTd7tMr8WTHja7Y12uies1hBjw==
+capacitor-secure-storage-plugin@^0.8.1:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/capacitor-secure-storage-plugin/-/capacitor-secure-storage-plugin-0.8.1.tgz#515528c0821de28c43066d74701e2d26c1cafd70"
+  integrity sha512-PvTMZsjh5NAopdabp7b+zpu6N/zboBfB1dMldI7wbdCGSaH4LZo8cZLp9U2V1i2Y0V3JI1oWR3iysUrG0m7uPQ==
 
 chalk@^4.1.0:
   version "4.1.2"
