@@ -29,7 +29,7 @@
     }
 </script>
 
-<filter-item class="block border-t border-solid border-gray-200 dark:border-gray-800 ">
+<filter-item class="block border-t border-solid border-gray-200 dark:border-gray-800">
     <filter-item-toggle class="flex flex-row justify-between px-4 py-2">
         <Checkbox
             label={localize(filterUnit.labelKey ?? filterUnit.localeKey + '.label')}
