@@ -176,10 +176,11 @@ export const api = {
     },
     startBackgroundSync: function (
         pollingInterval: Duration,
-        automaticOutputConsolidation: boolean
+        automaticOutputConsolidation: boolean,
+        gapLimit: number
     ): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) =>
-            _startBackgroundSync(sendMessage, __ids, pollingInterval, automaticOutputConsolidation)
+            _startBackgroundSync(sendMessage, __ids, pollingInterval, automaticOutputConsolidation, gapLimit)
     },
     stopBackgroundSync: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _stopBackgroundSync(sendMessage, __ids)

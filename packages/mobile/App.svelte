@@ -1,16 +1,19 @@
 <script lang="typescript">
+    import { App } from '@capacitor/app'
     import { nativeSplash } from 'capacitor/capacitorApi'
+    import { Keyboard } from '@capacitor/keyboard'
+    import { StatusBar, Style } from '@capacitor/status-bar'
     import { onMount, tick } from 'svelte'
     import { QRScanner, Route, ToastContainer, Popup } from 'shared/components'
-    import { popupState } from 'shared/lib/popup'
-    import { mobile, stage } from 'shared/lib/app'
-    import { appSettings } from 'shared/lib/appSettings'
-    import { goto } from 'shared/lib/helpers'
+    import { popupState } from '@lib/popup'
+    import { logout, keyboardHeight, isKeyboardOpened, mobile, stage, isAndroid } from '@lib/app'
+    import { appSettings } from '@lib/appSettings'
+    import { goto } from '@lib/helpers'
     import { localeDirection, isLocaleLoaded, setupI18n, _ } from '@core/i18n'
-    import { pollMarketData } from 'shared/lib/market'
-    import { pollNetworkStatus } from 'shared/lib/networkStatus'
-    import { AppRoute, initRouters } from '@core/router'
-    import { Platforms } from 'shared/lib/typings/platform'
+    import { pollMarketData } from '@lib/market'
+    import { pollNetworkStatus } from '@lib/networkStatus'
+    import { allowBackButton, AppRoute, appRoute, BackButtonHeap, backButtonStore, initRouters } from '@core/router'
+    import { Platforms } from '@lib/typings/platform'
     import {
         Appearance,
         Backup,
@@ -28,50 +31,118 @@
         Protect,
         Secure,
         Setup,
+        UpdateStronghold,
         Welcome,
     } from 'shared/routes'
     import { Stage } from 'shared/lib/typings/stage'
+    import { Platform } from '@lib/platform'
+    import { getVersionDetails } from '@lib/appUpdater'
 
     mobile.set(process.env.PLATFORM == Platforms.MOBILE)
     stage.set(Stage[process.env.STAGE?.toUpperCase()] ?? Stage.ALPHA)
 
     let showSplash = true
 
-    $: $appSettings.darkMode
-        ? document.body.classList.add('scheme-dark')
-        : document.body.classList.remove('scheme-dark')
+    $: if ($appSettings.darkMode) {
+        document.body.classList.add('scheme-dark')
+
+        void StatusBar.setStyle({ style: Style.Dark })
+        // Android only status bar background color
+        void StatusBar.setBackgroundColor({ color: '#25395f' })
+    } else {
+        document.body.classList.remove('scheme-dark')
+        void StatusBar.setStyle({ style: Style.Light })
+        void StatusBar.setBackgroundColor({ color: '#ffffff' })
+    }
+
+    /**
+     * Handle Android darkmode top status bar
+     * @todo remove when implement status bar overlay
+     */
+    $: if ($appRoute !== AppRoute.Dashboard) {
+        if ($appSettings.darkMode) {
+            void StatusBar.setBackgroundColor({ color: '#1B2D4B' })
+        }
+    } else {
+        if ($appSettings.darkMode) {
+            void StatusBar.setBackgroundColor({ color: '#25395f' })
+        }
+    }
 
     $: if (document.dir !== $localeDirection) {
         document.dir = $localeDirection
     }
 
-    $: if ($isLocaleLoaded) {
+    $: if ($isLocaleLoaded && showSplash) {
         void hideSplashScreen()
     }
+
+    backButtonStore.set(
+        new BackButtonHeap(async () => {
+            await logout()
+            App.exitApp()
+        })
+    )
+
+    // Note: added hideClose condition to popups only as it is the only way we use it
+    void App.addListener('backButton', () => {
+        if (!$popupState.hideClose && $allowBackButton) {
+            const next = $backButtonStore.pop()
+            if (next) {
+                next()
+            }
+        }
+    })
+
+    $keyboardHeight = window.innerHeight / 2
+    void Keyboard.addListener('keyboardWillShow', (info) => {
+        // Listen for when the keyboard is about to be showed.
+        $keyboardHeight = info.keyboardHeight
+        $isKeyboardOpened = true
+    })
+    void Keyboard.addListener('keyboardWillHide', () => {
+        // Listen for when the keyboard is about to be hidden.
+        $isKeyboardOpened = false
+    })
 
     async function hideSplashScreen() {
         await tick()
         nativeSplash.hide()
+        $isAndroid = (await Platform.getOS()) !== 'ios'
+
+        // Display splash screen at least for 3 seconds
+        // only on Welcome onboarding screen needed to wait
+        // for locales glitch on Android devices
+        if ($appRoute === AppRoute.Welcome && $isAndroid) {
+            setTimeout(() => {
+                showSplash = false
+            }, 3000)
+        } else {
+            showSplash = true
+        }
     }
 
-    void setupI18n({ fallbackLocale: 'en', initialLocale: $appSettings.language })
-
     onMount(async () => {
-        // Display splash screen at least for 3 seconds
-        setTimeout(() => {
-            showSplash = false
-        }, 3000)
-
         initRouters()
+        await getVersionDetails()
         await pollMarketData()
         await pollNetworkStatus()
+
+        const systemLanguage = await Platform.getLanguageCode()
+        let initialLocale = $appRoute === AppRoute.Welcome ? systemLanguage : $appSettings.language
+        // handle 'es' & 'pt' cases when we can't get the region code
+        initialLocale = initialLocale === 'es' ? 'es-ES' : initialLocale === 'pt' ? 'pt-PT' : initialLocale
+        void setupI18n({ fallbackLocale: 'en', initialLocale })
     })
+
+    // TODO: Has to be enabled again when system notifications are implemented
+    $appSettings.notifications = false
 </script>
 
-{#if $isLocaleLoaded && !showSplash}
+{#if $isLocaleLoaded}
     <!-- empty div to avoid auto-purge removing dark classes -->
     <div class="scheme-dark" />
-    <div class="scanner-hide">
+    <div class="scanner-hide" style="--transition-scroll: cubic-bezier(0, 0.3, 0, 1)">
         {#if $popupState.active}
             <Popup
                 type={$popupState.type}
@@ -134,6 +205,9 @@
         <Route route={AppRoute.Login}>
             <Login locale={$_} {goto} />
         </Route>
+        <Route route={AppRoute.UpdateStronghold}>
+            <UpdateStronghold locale={$_} {goto} />
+        </Route>
         <ToastContainer />
     </div>
     <div class="scanner-ui">
@@ -164,7 +238,7 @@
         }
     }
     .setup-anim-aspect-ratio {
-        aspect-ratio: 19/15;
+        aspect-ratio: auto;
     }
     // QR Scanner
     .scanner-ui {
@@ -172,6 +246,7 @@
     }
     .scanner-hide {
         @apply visible;
+        --transition-scroll: cubic-bezier(0, 0.3, 0, 1);
     }
 
     button,
@@ -197,5 +272,14 @@
     button:active,
     button:focus {
         outline: 0px solid transparent;
+    }
+    /** Force Android inner divs scrolbars, iOS is not affected */
+    ::-webkit-scrollbar {
+        width: 3px;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: rgba(127, 127, 127, 0.5);
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
     }
 </style>

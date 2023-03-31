@@ -66,6 +66,9 @@ const ElectronApi = {
             }
         })
     },
+    loadJsonFile(filepath) {
+        return ipcRenderer.invoke('load-json-file', filepath).then((jsonFile) => jsonFile)
+    },
     PincodeManager: PincodeManager,
     DeepLinkManager: DeepLinkManager,
     NotificationManager: NotificationManager,
@@ -85,7 +88,7 @@ const ElectronApi = {
             }),
 
     saveStrongholdBackup: ({ allowAccess }) => null,
-    exportTransactionHistory: async (defaultPath, contents) =>
+    exportTransactionHistory: async (contents, defaultPath) =>
         ipcRenderer
             .invoke('show-save-dialog', {
                 properties: ['createDirectory', 'showOverwriteConfirmation'],

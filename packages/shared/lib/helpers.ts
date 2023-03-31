@@ -269,3 +269,18 @@ export const isBright = (color: string): boolean => {
         }
     }
 }
+
+/**
+ * Parse plain text and add <a> html tags to every link found
+ * @param plainText The text to be parsed
+ * @param classes the classes to add to the <a> tag
+ * @returns The input plain text with <a> tags added
+ */
+export function addLinkHtmlTagsToPlainText(plainText: string, classes: string = ''): string {
+    if (!plainText) {
+        return
+    } else {
+        const regex = /((http|https)?:\/\/[^\s]+)/g
+        return plainText.replace(regex, (url) => `<a href=${url} class="link-from-plaintext ${classes}">${url}</a>`)
+    }
+}

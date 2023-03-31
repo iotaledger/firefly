@@ -191,6 +191,7 @@ function isUrlAllowed(targetUrl) {
         'wiki.iota.org',
         'explorer.iota.org',
         'iotatreasury.org',
+        'govern.iota.org',
 
         // Assembly / Shimmer
         'assembly.sc',
@@ -489,6 +490,8 @@ ipcMain.handle('handle-error', (_e, errorType, error) => {
 ipcMain.handle('get-os', (_e) => process.platform)
 ipcMain.handle('get-machine-id', (_e) => getMachineId())
 
+ipcMain.handle('load-json-file', (_e, filepath) => loadJsonFile(path.resolve(__dirname, filepath)))
+
 // Settings
 ipcMain.handle('update-app-settings', (_e, settings) => updateSettings(settings))
 
@@ -741,14 +744,18 @@ function saveJsonConfig(filename, data) {
     }
 }
 
-function loadJsonConfig(filename) {
+function loadJsonFile(filepath) {
     try {
-        return JSON.parse(fs.readFileSync(getJsonConfig(filename)).toString())
+        return JSON.parse(fs.readFileSync(filepath).toString())
     } catch (err) {
         if (!err.message.includes('ENOENT')) {
             console.error(err)
         }
     }
+}
+
+function loadJsonConfig(filename) {
+    return loadJsonFile(getJsonConfig(filename))
 }
 
 function getJsonConfig(filename) {

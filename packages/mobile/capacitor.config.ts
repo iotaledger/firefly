@@ -15,11 +15,14 @@ const config: CapacitorConfig = {
     bundledWebRuntime: false,
     plugins: {
         PrivacyScreen: {
-            enable: false,
+            enable: true,
         },
         SplashScreen: {
             launchAutoHide: false,
             backgroundColor: '#ffffffff',
+        },
+        Keyboard: {
+            resize: 'none',
         },
     },
     server: prod ? undefined : serverConfig,
@@ -28,6 +31,7 @@ const config: CapacitorConfig = {
             DisableDeploy: 'true',
         },
     },
+    loggingBehavior: prod ? 'none' : 'debug',
 }
 
 export default config

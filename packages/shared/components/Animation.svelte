@@ -85,6 +85,10 @@
             lightmode: 'congratulations-desktop.json',
             darkmode: 'congratulations-desktop-darkmode.json',
         },
+        'butterfly-chrysalis': {
+            lightmode: 'butterfly-chrysalis.json',
+            darkmode: 'butterfly-chrysalis-darkmode.json',
+        },
         'migrate-desktop': {
             lightmode: 'migrate-desktop.json',
             darkmode: 'migrate-desktop-darkmode.json',

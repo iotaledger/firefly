@@ -4,6 +4,7 @@
     import { activeProfile } from 'shared/lib/profile'
     import { Settings } from 'shared/routes'
     import {
+        backButtonStore,
         profileRoute,
         profileRouter,
         ProfileRoute,
@@ -13,8 +14,6 @@
     } from '@core/router'
     import { localize } from '@core/i18n'
     import { AccountColor } from '@lib/typings/color'
-
-    export let opacity = 1
 
     const profileColor = AccountColor.Blue // TODO: each profile will have a different color
     let drawer: Drawer
@@ -33,7 +32,10 @@
 
     function handleClick(): void {
         $profileRouter.goTo(ProfileRoute.ProfileActions)
-        drawer.open()
+        if (drawer) {
+            drawer.open()
+            $backButtonStore?.add(drawer.close)
+        }
     }
 
     function handleSettingsClick(): void {
@@ -43,12 +45,12 @@
 
 <button
     class="menu-button fixed left-6 z-10 w-11 h-11 flex items-center justify-center rounded-full leading-100"
-    style="--background-color: {profileColor}; --opacity: {opacity}"
+    style="--background-color: {profileColor};"
     on:click={handleClick}
 >
     <span class="text-14 font-600 text-center text-white uppercase">{profileInitial || 'A'}</span>
 </button>
-<Drawer bind:this={drawer} fromLeft classes="flex">
+<Drawer bind:this={drawer} fromLeft classes="flex" on:close={$backButtonStore?.reset()}>
     <section class="flex flex-col w-full">
         <header
             class="w-full mt-3 py-3 px-9 mb-3 flex items-centers justify-center bg-white dark:bg-gray-800"
@@ -65,7 +67,7 @@
                 )}
             </Text>
         </header>
-        <main class="h-full overflow-y-auto px-5 mb-10">
+        <main class="h-full overflow-y-auto overflow-x-hidden px-5 mb-10">
             {#if $profileRoute === ProfileRoute.ProfileActions}
                 <ProfileActions {profileColor} {profileInitial} {handleSettingsClick} />
             {:else if $profileRoute === ProfileRoute.Settings}

@@ -9,7 +9,7 @@
 
     $: currencyList = Object.keys($exchangeRates)
         .map((currency) => ({ value: currency, label: currency }))
-        .sort()
+        .sort((a, b) => a.label.localeCompare(b.label))
 
     const handleCurrencySelect = (item) => {
         updateProfile('settings.currency', item.value)

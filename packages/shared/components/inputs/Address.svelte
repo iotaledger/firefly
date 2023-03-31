@@ -37,6 +37,9 @@
             {placeholder}
             {disabled}
             spellcheck={false}
+            autocapitalize="off"
+            autocorrect="off"
+            autocomplete="off"
             maxlength={ADDRESS_LENGTH}
             class:mobile={$mobile}
         />

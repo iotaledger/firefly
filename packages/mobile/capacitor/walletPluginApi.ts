@@ -58,6 +58,10 @@ import {
     storeMnemonic as _storeMnemonic,
     verifyMnemonic as _verifyMnemonic,
 } from '@lib/typings/wallet'
+import {
+    getParticipationOverview as _getParticipationOverview,
+    getParticipationEvents as _getParticipationEvents,
+} from '@lib/participation/bridge'
 
 const onMessageListeners: ((payload: MessageResponse) => void)[] = []
 
@@ -158,9 +162,9 @@ export const api = {
         (__ids) =>
             _syncAccounts(sendMessage, __ids, addressIndex, gapLimit, accountDiscoveryThreshold),
     startBackgroundSync:
-        (pollingInterval: Duration, automaticOutputConsolidation: boolean): Api =>
+        (pollingInterval: Duration, automaticOutputConsolidation: boolean, gapLimit: number): Api =>
         (__ids) =>
-            _startBackgroundSync(sendMessage, __ids, pollingInterval, automaticOutputConsolidation),
+            _startBackgroundSync(sendMessage, __ids, pollingInterval, automaticOutputConsolidation, gapLimit),
     stopBackgroundSync: (): Api => (__ids) => _stopBackgroundSync(sendMessage, __ids),
     areLatestAddressesUnused: (): Api => (__ids) => _areLatestAddressesUnused(sendMessage, __ids),
     generateAddress:
@@ -303,6 +307,12 @@ export const api = {
         (address: string): Api =>
         (__ids) =>
             _getLegacyAddressChecksum(sendMessage, __ids, address),
+    // participation
+    getParticipationOverview:
+        (assemblyEventId: string): Api =>
+        (__ids) =>
+            _getParticipationOverview(sendMessage, __ids, assemblyEventId),
+    getParticipationEvents: (): Api => (__ids) => _getParticipationEvents(sendMessage, __ids),
 
     // Event emitters
     onError: (): Api => (__ids) =>

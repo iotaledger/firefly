@@ -1,17 +1,25 @@
 <script lang="typescript">
-    import { Icon, Pin, Profile, Text } from 'shared/components'
+    import { Locale, localize } from '@core/i18n'
+    import {
+        getKeyboardTransitionSpeed,
+        isKeyboardOpened,
+        keyboardHeight,
+        mobile,
+        needsToAcceptLatestPrivacyPolicy,
+        needsToAcceptLatestTos,
+    } from '@lib/app'
+    import { isStrongholdUpdated } from '@lib/stronghold'
+    import { Icon, Pin, Profile, Text, TextHint } from 'shared/components'
     import { initAppSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { Platform } from 'shared/lib/platform'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { activeProfile, clearActiveProfile } from 'shared/lib/profile'
+    import { activeProfile, clearActiveProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
-    import { api, getProfileDataPath, initialise } from 'shared/lib/wallet'
+    import { api, destroyActor, getProfileDataPath, initialise } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy } from 'svelte'
-    import { Locale } from '@core/i18n'
     import { get } from 'svelte/store'
-    import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos } from '@lib/app'
 
     export let locale: Locale
 
@@ -60,6 +68,7 @@
             pinRef.focus()
         }
     }
+    $: strongholdUpdateRequired = $isSoftwareProfile && !isStrongholdUpdated($activeProfile)
 
     let buttonText = setButtonText(timeRemainingBeforeNextAttempt)
 
@@ -114,6 +123,7 @@
                                             type: 'error',
                                             message: locale(err.error),
                                         })
+                                        destroyActor(profile.id)
                                     },
                                 })
                             })
@@ -167,16 +177,30 @@
             <Text type="h5">{locale('general.profiles')}</Text>
         </div>
     </button>
-    <div class="pt-40 pb-16 flex w-full h-full flex-col items-center justify-between">
-        <div class="{$mobile ? 'w-full' : 'w-96'} flex flex-col flex-wrap items-center mb-20">
-            <Profile name={$activeProfile?.name} bgColor="blue" />
+    <div class="flex w-full h-full flex-col items-center {$mobile ? 'justify-end' : 'justify-between pt-40 pb-16 '}">
+        <div
+            class="flex flex-col items-center {$mobile ? 'w-80' : 'w-96 flex-wrap mb-20'}"
+            style="padding-bottom: {$mobile
+                ? $keyboardHeight + 15
+                : 0}px; ; transition: padding {getKeyboardTransitionSpeed($isKeyboardOpened) +
+                'ms'} var(--transition-scroll)"
+        >
+            <Profile name={$activeProfile?.name} bgColor="blue" {strongholdUpdateRequired} />
+            {#if strongholdUpdateRequired}
+                <TextHint
+                    hint={localize('views.login.updateStrongholdWarning')}
+                    icon="exclamation"
+                    classes="mt-8 p-4 w-full rounded-2xl bg-yellow-50 dark:bg-opacity-10"
+                    iconClasses="text-yellow-700"
+                />
+            {/if}
             <Pin
                 bind:this={pinRef}
                 bind:value={pinCode}
                 classes="mt-10 {shake && 'animate-shake'}"
-                on:submit={onSubmit}
+                on:submit={!$mobile ? onSubmit : null}
                 disabled={hasReachedMaxAttempts || isBusy}
-                autofocus={!$mobile}
+                autofocus
             />
             <Text type="p" bold classes="mt-4 text-center">
                 {attempts > 0

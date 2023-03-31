@@ -1,9 +1,11 @@
 <script lang="typescript">
+    import { onDestroy } from 'svelte'
+    import { Button, Password, Spinner, Text, TextHint } from 'shared/components'
     import { Locale } from '@core/i18n'
     import { displayErrorEventToUser } from '@lib/errors'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from '@lib/ledger'
     import { cacheAllStakingPeriods, StakingAirdrop } from '@lib/participation'
-    import { closePopup } from '@lib/popup'
+    import { closePopup, popupState } from '@lib/popup'
     import { isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from '@lib/profile'
     import {
         asyncSetStrongholdPassword,
@@ -12,9 +14,7 @@
         isSyncing,
         wallet,
     } from '@lib/wallet'
-    import { Button, Password, Spinner, Text, TextHint } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
-    import { onDestroy } from 'svelte'
+    import { mobile, isKeyboardOpened, keyboardHeight, getKeyboardTransitionSpeed } from 'shared/lib/app'
 
     export let locale: Locale
 
@@ -34,6 +34,10 @@
     $: if (isBusy && !$isSyncing && $currentSyncingAccountStore === null) {
         isBusy = false
         hasUsedBalanceFinder = true
+    }
+
+    $: if ($mobile) {
+        $popupState.hideClose = isBusy
     }
 
     async function handleFindBalances() {
@@ -78,7 +82,7 @@
     })
 </script>
 
-<Text type="h4" classes="mb-2">{locale('popups.balanceFinder.title')}</Text>
+<Text type="h4" classes="mb-2 {$mobile && 'text-center -mt-4'}">{locale('popups.balanceFinder.title')}</Text>
 <Text type="p" secondary classes="mb-4">{locale('popups.balanceFinder.body')}</Text>
 
 <div class="flex w-full flex-row flex-wrap mb-4">
@@ -128,7 +132,13 @@
     />
 {/if}
 
-<div class="flex flex-row flex-nowrap w-full space-x-4">
+<div
+    class="flex flex-row flex-nowrap w-full space-x-4"
+    style="padding-bottom: {$mobile && $isKeyboardOpened
+        ? $keyboardHeight - 20
+        : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened) +
+        'ms'} var(--transition-scroll)"
+>
     <Button classes="w-full" secondary onClick={handleCancelClick} disabled={isBusy}>
         {locale('actions.done')}
     </Button>

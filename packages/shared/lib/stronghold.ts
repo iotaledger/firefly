@@ -7,6 +7,9 @@ import { StrongholdStatus } from './typings/wallet'
 import { showAppNotification } from './notifications'
 import { localize } from '@core/i18n'
 import { isLedgerProfile } from './profile'
+import { Profile } from './typings/profile'
+
+export const STRONGHOLD_VERSION = 1
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
@@ -44,4 +47,8 @@ export const checkStronghold = (callback: any): void => {
             })
         },
     })
+}
+
+export function isStrongholdUpdated(profile: Profile): boolean {
+    return profile.strongholdVersion === STRONGHOLD_VERSION
 }

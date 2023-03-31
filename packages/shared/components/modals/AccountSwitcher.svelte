@@ -8,6 +8,7 @@
     import { getAccountColor } from '@lib/profile'
     import { WalletAccount } from '@lib/typings/wallet'
     import {
+        accountSyncingQueueStore,
         isTransferring,
         selectedAccountStore,
         setSelectedAccount,
@@ -28,7 +29,11 @@
             showWarning(localize('notifications.participating'))
         } else {
             setSelectedAccount(accountId)
-            updateAccountSyncingQueue($selectedAccountStore)
+
+            if ($accountSyncingQueueStore?.length > 1) {
+                updateAccountSyncingQueue($selectedAccountStore)
+            }
+
             resetAccountRouter(false)
         }
         modal?.close()

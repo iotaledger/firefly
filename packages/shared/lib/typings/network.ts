@@ -51,4 +51,5 @@ export enum NetworkStatusHealthText {
     Down = 'networkDown',
     Degraded = 'networkDegraded',
     Operational = 'networkOperational',
+    Unreachable = 'networkUnreachable',
 }

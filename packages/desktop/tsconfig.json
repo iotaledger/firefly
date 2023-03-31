@@ -12,5 +12,6 @@
             "@lib/*": ["../shared/lib/*"]
         }
     },
-    "include": ["./lib/**/*.ts", "../shared/lib/**/*.ts"]
+    "include": ["./lib/**/*.ts", "../shared/lib/**/*.ts"],
+    "exclude": ["../**/tests"]
 }

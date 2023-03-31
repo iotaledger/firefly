@@ -1,6 +1,7 @@
 import { localize } from '@core/i18n'
 import { displayErrorEventToUser } from '@lib/errors'
 import { setProfileAccount } from 'shared/lib/profile'
+
 import type {
     ErrorEventPayload,
     Event,
@@ -35,6 +36,8 @@ import { ProfileType } from './typings/profile'
 import { SetupType } from './typings/setup'
 import { AccountMessage, BalanceHistory, BalanceOverview, WalletAccount, WalletState } from './typings/wallet'
 import { IWalletApi } from './typings/walletApi'
+
+export const haveStakingResultsCached = writable<boolean>(null)
 
 export const MAX_ACCOUNT_NAME_LENGTH = 20
 export const MAX_PASSWORD_LENGTH = 256
@@ -99,10 +102,12 @@ export const resetWallet = (): void => {
     transferState.set(null)
     hasGeneratedALedgerReceiveAddress.set(false)
     isSyncing.set(null)
+    accountSyncingQueueStore.set(null)
     isFirstSessionSync.set(true)
     isFirstManualSync.set(true)
     isBackgroundSyncing.set(false)
     walletSetupType.set(null)
+    haveStakingResultsCached.set(null)
 }
 
 // Created to help selectedAccount reactivity.
@@ -457,10 +462,11 @@ export function initializeAccountSyncingQueue(): void {
 }
 
 export function updateAccountSyncingQueue(account: WalletAccount): void {
-    if (!account) return
+    const accountSyncingQueue = get(accountSyncingQueueStore)
+    if (!account || !accountSyncingQueue) return
 
     // It can be assumed that if the account is not currently in the queue then it has already been synced.
-    const isAccountInSyncingQueue = get(accountSyncingQueueStore).some((_account) => _account.id === account.id)
+    const isAccountInSyncingQueue = accountSyncingQueue?.some((_account) => _account.id === account.id)
     if (!isAccountInSyncingQueue) return
 
     // If the account is already first in the queue then no need to update the queue.
@@ -497,35 +503,41 @@ export function asyncSyncAccount(account: WalletAccount, showErrorNotification: 
     return new Promise((resolve, reject) => {
         currentSyncingAccountStore.set(account)
 
-        api.syncAccount(account.id, {
-            onSuccess(response: Event<SyncedAccount>) {
-                const syncedAccount = response.payload
-                processMigratedTransactions(syncedAccount.id, syncedAccount.messages, syncedAccount.addresses)
+        const { gapLimit } = getAccountSyncOptions()
 
-                void updateAccount(get(wallet).accounts, syncedAccount)
-                    .then(() => {
-                        currentSyncingAccountStore.set(null)
-                    })
-                    .catch((err) => {
-                        currentSyncingAccountStore.set(null)
+        api.syncAccount(
+            account.id,
+            { gapLimit },
+            {
+                onSuccess(response: Event<SyncedAccount>) {
+                    const syncedAccount = response.payload
+                    processMigratedTransactions(syncedAccount.id, syncedAccount.messages, syncedAccount.addresses)
 
-                        console.error(err)
-                        reject(err)
-                    })
+                    void updateAccount(get(wallet).accounts, syncedAccount)
+                        .then(() => {
+                            currentSyncingAccountStore.set(null)
+                        })
+                        .catch((err) => {
+                            currentSyncingAccountStore.set(null)
 
-                resolve()
-            },
-            onError(err: ErrorEventPayload) {
-                currentSyncingAccountStore.set(null)
+                            console.error(err)
+                            reject(err)
+                        })
 
-                if (showErrorNotification) {
-                    displayErrorEventToUser(err)
-                }
+                    resolve()
+                },
+                onError(err: ErrorEventPayload) {
+                    currentSyncingAccountStore.set(null)
 
-                console.error(err)
-                reject(err)
-            },
-        })
+                    if (showErrorNotification) {
+                        displayErrorEventToUser(err)
+                    }
+
+                    console.error(err)
+                    reject(err)
+                },
+            }
+        )
     })
 }
 
@@ -1145,14 +1157,13 @@ export const formatAccountWithMetadata = (account: Account, meta: AccountMetadat
 
 export const processMigratedTransactions = (accountId: string, messages: Message[], addresses: Address[]): void => {
     const { accounts } = get(wallet)
-
+    const _activeProfile = get(activeProfile)
+    // Patch: in mobile we have a race condition where get(accounts) is not yet populated, so we also look into active profile
+    const _accounts = get(accounts) ?? _activeProfile?.accounts ?? []
+    const account = _accounts?.find((account) => account.id === accountId)
     messages.forEach((message: Message) => {
         if (message.payload?.type === 'Milestone') {
-            const account = get(accounts).find((account) => account.id === accountId)
-
             if (account) {
-                const _activeProfile = get(activeProfile)
-
                 if (
                     _activeProfile &&
                     _activeProfile.migratedTransactions &&
@@ -1165,16 +1176,13 @@ export const processMigratedTransactions = (accountId: string, messages: Message
                     const updatedMigratedTransactions = _activeProfile.migratedTransactions.filter(
                         (transaction) => !tailTransactionHashes.includes(transaction.tailTransactionHash)
                     )
-
                     updateProfile('migratedTransactions', updatedMigratedTransactions)
                 }
             }
         }
     })
 
-    const _activeProfile = get(activeProfile)
-
-    if (_activeProfile.migratedTransactions && _activeProfile.migratedTransactions.length) {
+    if (_activeProfile?.migratedTransactions && _activeProfile?.migratedTransactions.length) {
         // For pre-snapshot migrations, there will be no messages
         addresses.forEach((address) => {
             const { outputs } = address
@@ -1392,6 +1400,18 @@ export const findAccountWithAnyAddress = (
     }
 }
 
+export const findExternalAddress = (addresses: string[]): string => {
+    if (!addresses) {
+        return
+    }
+    const accounts = get(get(wallet).accounts)
+    const internalAddresses = accounts.flatMap((acc) => acc.addresses.map((addr) => addr.address))
+    const externalAddress = addresses.filter((add) => !internalAddresses.includes(add))
+    if (externalAddress.length > 0) {
+        return externalAddress[0]
+    }
+}
+
 /**
  * Get the sync options for an account
  * @param {boolean} isManualSync A boolean value indicating if a user (via the UI) invoked this function
@@ -1417,11 +1437,11 @@ const calculateInitialAccountSyncOptions = (setupType: SetupType): AccountSyncOp
         case SetupType.Mnemonic:
         case SetupType.Stronghold:
             gapLimit = 25
-            accountDiscoveryThreshold = 1
+            accountDiscoveryThreshold = 2
             break
         case SetupType.FireflyLedger:
             gapLimit = 10
-            accountDiscoveryThreshold = 1
+            accountDiscoveryThreshold = 2
             break
     }
 
@@ -1431,7 +1451,6 @@ const calculateInitialAccountSyncOptions = (setupType: SetupType): AccountSyncOp
 const calculateRegularAccountSyncOptions = (profileType: ProfileType, isManualSync: boolean): AccountSyncOptions => {
     let gapLimit = 1
     let accountDiscoveryThreshold = 0
-
     const _isFirstSessionSync = get(isFirstSessionSync)
 
     switch (profileType) {
@@ -1441,7 +1460,7 @@ const calculateRegularAccountSyncOptions = (profileType: ProfileType, isManualSy
         case ProfileType.Ledger:
         case ProfileType.LedgerSimulator:
         default:
-            gapLimit = 1
+            gapLimit = 0
             break
     }
 

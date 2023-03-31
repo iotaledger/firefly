@@ -1,5 +1,7 @@
 <script lang="typescript">
     import { Button, Checkbox, Password, Spinner, Text } from 'shared/components'
+    import { mobile, isKeyboardOpened, getKeyboardTransitionSpeed } from '@lib/app'
+    import { tabFormWithEnterKey } from '@lib/keyboard'
     import { localize } from '@core/i18n'
     import passwordInfo from 'shared/lib/password'
     import { api, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
@@ -96,6 +98,10 @@
         }
     }
 
+    function onKeyPress(e) {
+        tabFormWithEnterKey(e, document, 'change-password')
+    }
+
     function reset() {
         currentPasswordError = ''
         newPasswordError = ''
@@ -105,7 +111,16 @@
 </script>
 
 <!-- TODO: improve UX for mobile, 3 step screen -->
-<form id="form-change-password" on:submit={changePassword}>
+<form
+    id="form-change-password"
+    name="change-password"
+    on:submit|preventDefault={changePassword}
+    on:keypress={onKeyPress}
+    style="margin-top: {$mobile && $isKeyboardOpened
+        ? '-25%'
+        : '0px'}; transition: margin-top {getKeyboardTransitionSpeed($isKeyboardOpened) +
+        'ms'} var(--transition-scroll)"
+>
     <Text type="h4" classes="mb-3">{localize('views.settings.changePassword.title')}</Text>
     <Text type="p" secondary classes="mb-5">{localize('views.settings.changePassword.description')}</Text>
     <Password

@@ -1,5 +1,6 @@
 <script lang="typescript">
-    import { Icon } from 'shared/components'
+    import { mobile } from '@lib/app'
+    import { ButtonMobile, Icon } from 'shared/components'
     import { appSettings } from 'shared/lib/appSettings'
     import { bindEvents } from 'shared/lib/utils'
     import { onMount } from 'svelte'
@@ -38,12 +39,16 @@
 
     onMount(() => {
         if (autofocus) {
-            buttonElement.focus()
+            buttonElement?.focus()
         }
     })
 </script>
 
-{#if xl}
+{#if $mobile}
+    <ButtonMobile {...$$props}>
+        <slot />
+    </ButtonMobile>
+{:else if xl}
     <button
         {type}
         {form}

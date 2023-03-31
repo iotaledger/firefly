@@ -23,23 +23,8 @@
     $: lastBackupDateFormatted = diffDates(lastBackupDate, new Date())
     $: backupWarningColor = getBackupWarningColor(lastBackupDate)
 
-    let healthStatus = 2
-    let healthStatusText = 'networkOperational'
-    let messagesPerSecond = 0
-    let referencedRate = 0
-
-    const unsubscribe = networkStatus.subscribe((data) => {
-        healthStatus = data.health ?? 0
-        healthStatusText = data.healthText ?? NetworkStatusHealthText.Down
-        messagesPerSecond = data.messagesPerSecond ?? 0
-        referencedRate = data.referencedRate ?? 0
-    })
-
-    $: healthStatusColor = NETWORK_HEALTH_COLORS[healthStatus]
-
-    onDestroy(() => {
-        unsubscribe()
-    })
+    $: healthStatusColor = NETWORK_HEALTH_COLORS[$networkStatus?.health ?? 0]
+    $: healthStatusText = $networkStatus.healthText ?? NetworkStatusHealthText.Down
 
     async function handleLogoutClick(): Promise<void> {
         // @todo on desktop uses true as param, on mobile we get errors
@@ -49,13 +34,6 @@
     function handleNetworkStatusClick(): void {
         openPopup({
             type: 'networkStatus',
-            props: {
-                healthStatus,
-                healthStatusText,
-                healthStatusColor,
-                messagesPerSecond,
-                referencedRate,
-            },
         })
     }
 
@@ -119,13 +97,13 @@
     {#if !isUpToDate}
         <button
             on:click={handleVersionUpdateClick}
-            class="main-button bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 rounded-xl border-solid border-white"
+            class="main-button bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 ring-gray-300 rounded-xl border-solid"
         >
             <Icon icon="warning" classes="row-span-3 text-blue-500" />
-            <Text type="p" unwrapped classes="col-span-6">
+            <Text type="h5" unwrapped classes="text-left col-span-6" fontWeight="font-600">
                 {localize('views.dashboard.profileModal.version.title')}
             </Text>
-            <Text type="p" overrideColor classes="text-gray-500 -mt-0.5">
+            <Text type="h5" classes="text-left" color="gray-600" darkColor="gray-500" fontWeight="font-400">
                 {localize('views.dashboard.profileModal.version.updateVersion', {
                     values: { version: $versionDetails.newVersion },
                 })}
@@ -134,19 +112,19 @@
                 width={18}
                 height={18}
                 icon="chevron-right"
-                classes="row-span-3 justify-self-end text-gray-500 dark:text-white"
+                classes="row-span-3 justify-self-end text-gray-600 dark:text-white"
             />
         </button>
     {/if}
     <button
         on:click={handleBackupClick}
-        class="main-button bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 rounded-xl border-solid border-white"
+        class="main-button bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 rounded-xl border-solid ring-1 ring-gray-300 dark:ring-opacity-30"
     >
-        <Icon icon="warning" classes="row-span-3 text-{backupWarningColor}-500" />
-        <Text type="p" unwrapped classes="col-span-3">
+        <Icon icon="warning-filled" classes="row-span-3 text-{backupWarningColor}-500" />
+        <Text type="h5" unwrapped classes="text-left col-span-3" fontWeight="font-600">
             {localize('views.dashboard.profileModal.backup.title')}
         </Text>
-        <Text type="p" overrideColor classes="text-gray-500 -mt-0.5">
+        <Text type="h5" classes="text-left" color="gray-600" darkColor="gray-500" fontWeight="font-400">
             {$activeProfile?.lastStrongholdBackupTime
                 ? localize('views.dashboard.profileModal.backup.lastBackup', {
                       values: {
@@ -161,56 +139,56 @@
             width={18}
             height={18}
             icon="chevron-right"
-            classes="row-span-3 justify-self-end text-gray-500 dark:text-white"
+            classes="row-span-3 justify-self-end text-gray-600 dark:text-white"
         />
     </button>
     <button
         on:click={handleNetworkStatusClick}
-        class="main-button bg-{healthStatusColor}-50 dark:bg-{healthStatusColor}-500 dark:bg-opacity-10 rounded-xl border-solid border-white"
+        class="main-button bg-{healthStatusColor}-50 dark:bg-{healthStatusColor}-500 dark:bg-opacity-10 rounded-xl border-solid border-white ring-1 ring-gray-300 dark:ring-opacity-30"
     >
         <Icon icon="network" classes="row-span-3 text-{healthStatusColor}-500" />
-        <Text type="p" unwrapped classes="col-span-6">
+        <Text type="h5" unwrapped classes="text-left col-span-6" fontWeight="font-600">
             {localize('views.dashboard.network.status')}
         </Text>
-        <Text type="p" overrideColor classes="text-gray-500 -mt-0.5">
-            {localize('views.dashboard.network.networkOperational')}
+        <Text type="h5" classes="text-left" color="gray-600" darkColor="gray-500" fontWeight="font-400">
+            {localize(`views.dashboard.network.${healthStatusText}`)}
         </Text>
         <Icon
             width={18}
             height={18}
             icon="chevron-right"
-            classes="row-span-3 justify-self-end text-gray-500 dark:text-white"
+            classes="row-span-3 justify-self-end text-gray-600 dark:text-white"
         />
     </button>
     <button
         on:click={handleStrongholdToggleClick}
-        class="main-button bg-blue-50 dark:bg-blue-500 dark:bg-opacity-10 rounded-xl border-solid border-white"
+        class="main-button bg-gray-50 dark:bg-gray-500 dark:bg-opacity-10 rounded-xl border-solid border-white ring-1 ring-gray-300 dark:ring-opacity-30"
     >
         <Icon icon={$isStrongholdLocked ? 'lock' : 'unlock'} classes="row-span-3 text-blue-500" />
-        <Text type="p" unwrapped classes="col-span-6">
+        <Text type="h5" unwrapped classes="text-left col-span-6" fontWeight="font-600">
             {localize('views.dashboard.profileModal.stronghold.title')}
         </Text>
-        <Text type="p" overrideColor classes="text-gray-500 -mt-0.5">
+        <Text type="h5" classes="text-left" color="gray-600" darkColor="gray-500" fontWeight="font-400">
             {localize(`views.dashboard.profileModal.stronghold.${$isStrongholdLocked ? 'locked' : 'unlocked'}`)}
         </Text>
         <Toggle active={!$isStrongholdLocked} classes="row-span-3 justify-self-end" />
     </button>
     <button
         on:click={handleSettingsClick}
-        class="main-button bg-blue-50 dark:bg-blue-500 dark:bg-opacity-10 rounded-xl border-solid border-white"
+        class="main-button bg-white dark:bg-gray-400 dark:bg-opacity-10 rounded-xl border-solid border-white ring-1 ring-gray-300 dark:ring-opacity-30"
     >
         <Icon icon="settings" classes="row-span-3 text-blue-500" />
-        <Text type="p" unwrapped classes="col-span-4">
+        <Text type="h5" unwrapped classes="text-left col-span-4" fontWeight="font-600">
             {localize('views.dashboard.profileModal.allSettings.title')}
         </Text>
-        <Text type="p" overrideColor classes="text-gray-500 -mt-0.5">
+        <Text type="h5" classes="text-left" color="gray-600" darkColor="gray-500" fontWeight="font-400">
             {localize('views.dashboard.profileModal.allSettings.description')}
         </Text>
         <Icon
             width={18}
             height={18}
             icon="chevron-right"
-            classes="row-span-3 justify-self-end text-gray-500 dark:text-white"
+            classes="row-span-3 justify-self-end text-gray-600 dark:text-white"
         />
     </button>
 </div>

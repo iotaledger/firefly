@@ -31,27 +31,28 @@
 </script>
 
 {#if $mobile}
-    <div
-        class="grid grid-flow-row-dense h-screen items-center justify-items-center p-5"
-        style="grid-template-rows: 18fr 1fr 1fr 5fr 1fr"
+    <main
+        class="grid grid-flow-row-dense items-center justify-items-center p-5"
+        style="grid-template-rows: 1fr 1fr 20fr 5fr"
     >
+        <div class="w-full text-center">
+            <Text bold bigger>{localize('general.receiveFunds')}</Text>
+        </div>
         <div class="grid mt-44 rounded-xl bg-white">
             <QRImage size={5} data={$selectedAccountStore.depositAddress} />
         </div>
-        <Text type="h4" classes="p-4">
-            {$activeProfile?.isDeveloperProfile
-                ? `${$activeProfile.settings.networkConfig.network.name} ${localize('general.address')}`
-                : localize('general.myAddress')}
-        </Text>
-        <Text type="pre" classes="px-4">{$selectedAccountStore.depositAddress}</Text>
-        <button
-            class="flex flex-row justify-center items-start h-12 w-full text-blue-500 -mt-10"
-            disabled={isGeneratingAddress}
-            on:click={() => setClipboard($selectedAccountStore.depositAddress)}
-        >
-            <Icon icon="copy" classes="text-blue-500 dark:text-blue-500" />
-            {localize('general.copyAddress')}
-        </button>
+        <div class="w-full">
+            <Text type="h4" classes="p-4 text-center">
+                {$activeProfile?.isDeveloperProfile
+                    ? `${$activeProfile.settings.networkConfig.network.name} ${localize('general.address')}`
+                    : localize('general.myAddress')}
+            </Text>
+            <div on:click={() => setClipboard($selectedAccountStore.depositAddress)}>
+                <Text type="pre" overrideColor classes="text-13 px-4 mb-10 text-blue-500">
+                    {$selectedAccountStore.depositAddress}
+                </Text>
+            </div>
+        </div>
         <div class="flex flex-col space-y-4 justify-center items-center h-12 w-full">
             <Button
                 disabled={isGeneratingAddress}
@@ -61,7 +62,7 @@
                 {localize('general.shareAddress')}
             </Button>
         </div>
-    </div>
+    </main>
 {:else}
     <div
         class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0 p-6"
@@ -120,3 +121,9 @@
         {/if}
     </div>
 {/if}
+
+<style type="text/scss">
+    main {
+        height: calc(97vh - env(safe-area-inset-top));
+    }
+</style>

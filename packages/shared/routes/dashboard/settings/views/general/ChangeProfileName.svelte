@@ -31,7 +31,7 @@
     }
 </script>
 
-<form id="form-change-profile-name" on:submit={onSubmitClick}>
+<form id="form-change-profile-name" on:submit|preventDefault={onSubmitClick}>
     <Text type="h4" classes="mb-3">
         {localize('views.settings.changeProfileName.title')}
     </Text>

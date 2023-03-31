@@ -12,25 +12,43 @@
 	@function {() => Promise<viod>} open - Opens drawer.
 	@function {() => Promise<void>} close - Closes drawer.
 -->
+<script context="module" lang="typescript">
+    type Drawers = Set<{ close: () => Promise<void> }>
+    const drawers: Drawers = new Set()
+
+    export function closePreviousDrawer(): void {
+        const last = [...drawers].pop()
+        last?.close()
+        drawers.delete(last)
+    }
+
+    export function closeDrawers(): void {
+        drawers.forEach((d) => {
+            void d.close()
+            drawers.delete(d)
+        })
+    }
+</script>
+
 <script lang="typescript">
     import { appSettings } from 'shared/lib/appSettings'
-    import { createEventDispatcher, onMount } from 'svelte'
+    import { createEventDispatcher, onMount, tick } from 'svelte'
     import { quintOut } from 'svelte/easing'
     import { tweened } from 'svelte/motion'
+    import { slidable } from '@lib/actions'
 
     $: darkModeEnabled = $appSettings.darkMode
 
     export let opened = false
     export let fromLeft = false
     export let classes = ''
-    export let fullScreen = false
+    export let backgroundBlur = false
     export let preventClose = false
     export let zIndex = 'z-30'
 
     let content: HTMLElement = undefined
     let isOpen = false
     let isVelocityReached = false
-    let preventSlide = true
 
     const dispatch = createEventDispatcher()
     const viewportLength = fromLeft ? window.innerWidth : window.innerHeight
@@ -46,94 +64,24 @@
         if (opened) {
             await open()
         }
+        const currentDrawer = { close }
+        drawers.add(currentDrawer)
     })
 
-    function slidable(node: HTMLElement, use: boolean = true) {
-        if (!use) {
-            return
-        }
-        let x: number
-        let y: number
-        let init: number
-        // Define arrays for calc velocity later
-        const positionQueue = [0, 0, 0]
-        const timeQueue = [0, 0, 0]
-
-        function handleTouchstart(event: TouchEvent): void {
-            if (preventSlide) {
-                event.preventDefault()
-                event.stopImmediatePropagation()
-                event.stopPropagation()
-            }
-
-            if (event.targetTouches.length === 1) {
-                init = window.performance.now()
-                x = event.touches[0].pageX
-                y = event.touches[0].pageY
-            }
-
-            node.addEventListener('touchmove', handleTouchmove)
-            node.addEventListener('touchend', handleTouchend)
-        }
-
-        function handleTouchmove(event: TouchEvent) {
-            positionQueue.push(event.touches[0].pageY)
-            timeQueue.push(window.performance.now())
-            positionQueue.shift()
-            timeQueue.shift()
-            const initY = positionQueue[0]
-            const endY = positionQueue[positionQueue.length - 1]
-            const initTime = timeQueue[0]
-            const endTime = timeQueue[timeQueue.length - 1]
-
-            if (event.targetTouches.length === 1) {
-                const sx = event.touches[0].pageX - x
-                const sy = event.touches[0].pageY - y
-                x = event.touches[0].pageX
-                y = event.touches[0].pageY
-
-                node.dispatchEvent(
-                    new CustomEvent('slideMove', {
-                        detail: { x, y, sx, sy, initY, endY, initTime, endTime },
-                    })
-                )
-            }
-        }
-
-        function handleTouchend() {
-            node.dispatchEvent(new CustomEvent('slideEnd'))
-
-            const elapsed = window.performance.now()
-            if (init >= elapsed - 300) {
-                node.dispatchEvent(new CustomEvent('tap'))
-            }
-
-            node.removeEventListener('touchmove', handleTouchmove)
-            node.removeEventListener('touchend', handleTouchend)
-        }
-
-        node.addEventListener('touchstart', handleTouchstart)
-
-        return {
-            destroy() {
-                node.removeEventListener('touchstart', handleTouchstart)
-            },
-        }
-    }
-
     async function handleSlideMove(event: CustomEvent): Promise<void> {
+        if (preventClose) return
         // Calc slide gesture velocity between events
-        const displacement = event.detail.endY - event.detail.initY
+        const displacement = fromLeft ? event.detail.endX - event.detail.initX : event.detail.endY - event.detail.initY
         const time = (event.detail.endTime - event.detail.initTime) / 1000
         const slideVelocity = Math.round(displacement / time) || 0
 
-        if (slideVelocity > 600) {
+        if (fromLeft ? slideVelocity < -600 : slideVelocity > 600) {
             isVelocityReached = true
         } else {
             isVelocityReached = false
         }
 
-        if ($coords.y < 0 || $coords.y + event.detail.sy < 0) {
+        if ($coords.y < 0 || $coords.y + event.detail.sy < 0 || $coords.x + event.detail.sx > 0) {
             return
         }
         await coords.update(
@@ -143,6 +91,7 @@
             }),
             { duration: 0 }
         )
+        await tick()
     }
 
     async function handleSlideEnd() {
@@ -162,6 +111,7 @@
     }
 
     export async function close(): Promise<void> {
+        if (preventClose) return
         await coords.set(
             {
                 x: fromLeft ? -viewportLength : 0,
@@ -187,6 +137,7 @@
 <drawer class="absolute top-0 {zIndex}" class:invisible={!isOpen}>
     <dim-zone
         class="fixed h-screen w-screen"
+        class:prevent-default={isOpen}
         use:slidable={!preventClose}
         on:slideMove={handleSlideMove}
         on:slideEnd={handleSlideEnd}
@@ -196,35 +147,39 @@
     </dim-zone>
     <content
         bind:this={content}
-        use:slidable={!fromLeft && !preventClose}
+        use:slidable={!preventClose}
         on:slideMove={handleSlideMove}
         on:slideEnd={handleSlideEnd}
-        on:tap={() => (preventSlide = false)}
         class="fixed bottom-0 overflow-auto w-screen h-screen bg-white dark:bg-gray-800 {classes}"
         class:darkmode={darkModeEnabled}
+        class:prevent-default={isOpen}
         style="--y: {fromLeft ? 0 : $coords.y}px; 
 			--x: {fromLeft ? $coords.x : 0}px; 
 			--opacity: {contentOpacity}; 
 			--height: {fromLeft && '100vh'};
 			--border-radius: {fromLeft ? '0' : '24px 24px 0 0'};
 			--display-mark: {fromLeft ? 'none' : 'block'};
-            --top-mark: {fullScreen ? '20%' : '8px'};
-            --blur: {fullScreen ? '10px' : '0px'};
-            --tw-bg-opacity: {fullScreen ? 0.8 : 1};"
+            --top-mark: 8px;
+            --blur: {backgroundBlur ? '10px' : '0px'};
+            --tw-bg-opacity: {backgroundBlur ? 0.8 : 1};"
     >
         <slot />
     </content>
 </drawer>
 
 <style type="text/scss">
+    .prevent-default {
+        touch-action: none;
+    }
     content {
         will-change: transform;
-        transform: translate(var(--x), var(--y));
+        transform: translate3d(var(--x), var(--y), 0);
         border-radius: var(--border-radius);
         height: var(--height);
-        opacity: var(--opacity);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
+        // We get better perf without opacity
+        // opacity: var(--opacity);
+        backdrop-filter: blur(var(--blur));
+        -webkit-backdrop-filter: blur(var(--blur));
         --bg-mark-color: #d0d0d0;
         --top-mark: 8px;
         &.darkmode {

@@ -17,12 +17,14 @@
     <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data android:name="android.webkit.WebView.MetricsOptOut" android:value="true" />
 
         <activity
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
@@ -31,6 +33,7 @@
             android:theme="@style/AppTheme.NoActionBarLaunch"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"
             tools:ignore="LockedOrientationActivity"
             android:exported="true">
             <!-- android:requestLegacyExternalStorage="true">-->

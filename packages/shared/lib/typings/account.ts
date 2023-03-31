@@ -124,13 +124,14 @@ export function startBackgroundSync(
     bridge: Bridge,
     __ids: CommunicationIds,
     pollingInterval: Duration,
-    automaticOutputConsolidation: boolean
+    automaticOutputConsolidation: boolean,
+    gapLimit: number
 ): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
         cmd: 'StartBackgroundSync',
-        payload: { pollingInterval, automaticOutputConsolidation },
+        payload: { pollingInterval, automaticOutputConsolidation, gapLimit },
     })
 }
 

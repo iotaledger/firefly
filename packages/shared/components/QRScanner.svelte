@@ -1,9 +1,15 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
     import { Locale } from '@core/i18n'
+    import { backButtonStore } from '@core/router'
     import { showCameraScanner, stopQRScanner } from 'shared/lib/device'
 
     export let locale: Locale
+
+    function onCloseButton() {
+        $backButtonStore?.pop()
+        stopQRScanner()
+    }
 </script>
 
 {#if $showCameraScanner}
@@ -17,7 +23,7 @@
             </div>
         </div>
         <button
-            on:click={stopQRScanner}
+            on:click={onCloseButton}
             class="flex justify-center items-center close absolute top-6 right-8 text-white bg-white rounded-full w-10 h-10"
             style="--tw-bg-opacity: 0.2"
         >
@@ -35,12 +41,12 @@
         @apply w-full;
         @apply relative;
         @apply overflow-hidden;
+        @apply rounded-xl;
         &:after {
             content: '';
             padding-bottom: 100%;
             @apply block;
             @apply top-0;
-            @apply rounded-xl;
             @apply border-2;
             @apply border-gray-700;
             @apply border-opacity-60;

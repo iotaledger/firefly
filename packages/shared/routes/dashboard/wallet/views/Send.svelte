@@ -1,9 +1,16 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { accountRouter } from '@core/router'
+    import { accountRouter, backButtonStore } from '@core/router'
     import { Unit } from '@iota/unit-converter'
     import { Address, Amount, Button, Dropdown, Icon, Illustration, Input, ProgressBar, Text } from 'shared/components'
-    import { clearSendParams, mobile, sendParams } from 'shared/lib/app'
+    import {
+        clearSendParams,
+        keyboardHeight,
+        isKeyboardOpened,
+        mobile,
+        sendParams,
+        getKeyboardTransitionSpeed,
+    } from 'shared/lib/app'
     import {
         convertFromFiat,
         convertToFiat,
@@ -13,7 +20,7 @@
         isFiatCurrency,
         parseCurrency,
     } from 'shared/lib/currency'
-    import { startQRScanner } from 'shared/lib/device'
+    import { startQRScanner, stopQRScanner } from 'shared/lib/device'
     import {
         displayNotificationForLedgerProfile,
         ledgerDeviceState,
@@ -424,16 +431,19 @@
 
     const onQRClick = (): void => {
         const onSuccess = (result: string) => {
+            $backButtonStore?.pop()
             selectedSendType = SEND_TYPE.EXTERNAL
             to = null
             address = result
         }
         const onError = (): void => {
+            $backButtonStore?.pop()
             showAppNotification({
                 type: 'error',
                 message: localize('error.global.generic'),
             })
         }
+        $backButtonStore?.add(stopQRScanner as () => Promise<void>)
         void startQRScanner(onSuccess, onError)
     }
 
@@ -504,7 +514,7 @@
 </script>
 
 {#if $mobile}
-    <div class="send-drawer h-full flex flex-col justify-between p-6 overflow-hidden">
+    <div class="send-drawer h-full flex flex-col justify-between p-6 overflow-hidden pb-8">
         <div>
             <div class="w-full text-center">
                 <Text bold bigger>{localize('general.sendFunds')}</Text>
@@ -514,8 +524,17 @@
                     </button>
                 </div>
             </div>
-            <Illustration background height={230} illustration="send-mobile" />
-            <div class="w-full h-full flex flex-col justify-between">
+            <div
+                style="margin-top: {$isKeyboardOpened ? '-230px' : '0px'}; opacity: {$isKeyboardOpened
+                    ? 0
+                    : 1}; transition: opacity {getKeyboardTransitionSpeed($isKeyboardOpened) +
+                    'ms'} var(--transition-scroll); transition: margin-top {getKeyboardTransitionSpeed(
+                    $isKeyboardOpened
+                ) + 'ms'} var(--transition-scroll)"
+            >
+                <Illustration height={230} background illustration="send-mobile" />
+            </div>
+            <div class="w-full h-full flex flex-col justify-between {$isKeyboardOpened && 'pt-6'}">
                 <div>
                     <div class="w-full block">
                         {#if selectedSendType === SEND_TYPE.INTERNAL}
@@ -531,7 +550,7 @@
                                 />
                             </span>
                             <div class="mb-4 w-full" on:click={selectInternal}>
-                                <Input style="text-align: left;" type="button" value={to?.label || null} />
+                                <Input autofocus type="button" value={to?.label || null} />
                             </div>
                         {:else}
                             {#if accountsDropdownItems.length > 1 && address.length === 0}
@@ -559,18 +578,24 @@
                             customUnitPresentation={showUnitActionSheet}
                             onMaxClick={handleMaxClick}
                             disabled={$isTransferring}
-                            autofocus={false}
+                            autofocus={address !== '' ? true : false}
                         />
                     </div>
                 </div>
             </div>
         </div>
         {#if !$isTransferring}
-            <div class="mt-8 flex flex-row justify-between px-2">
-                <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>
+            <div
+                class="mt-8 flex flex-row justify-between px-2 space-x-8"
+                style="margin-bottom: {$isKeyboardOpened
+                    ? $keyboardHeight
+                    : 0}px; transition: margin-bottom {getKeyboardTransitionSpeed($isKeyboardOpened) +
+                    'ms'} var(--transition-scroll)"
+            >
+                <Button secondary classes="-ml-1 w-1/2" onClick={() => handleBackClick()}>
                     {localize('actions.cancel')}
                 </Button>
-                <Button classes="-mx-2 w-1/2" onClick={() => handleSendClick()}>{localize('actions.send')}</Button>
+                <Button classes="-mr-1 w-1/2" onClick={() => handleSendClick()}>{localize('actions.send')}</Button>
             </div>
         {/if}
         {#if $isTransferring}
@@ -689,7 +714,7 @@
 
 <style type="text/scss">
     .send-drawer {
-        height: calc(98vh - env(safe-area-inset-top));
+        height: calc(97vh - env(safe-area-inset-top));
     }
     button.active {
         @apply relative;

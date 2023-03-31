@@ -3,11 +3,13 @@
     import { clickOutside } from 'shared/lib/actions'
     import { closePopup, popupState } from 'shared/lib/popup'
     import { Locale } from '@core/i18n'
+    import { backButtonStore } from '@core/router'
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
     import AddNode from './AddNode.svelte'
     import AddressHistory from './AddressHistory.svelte'
     import AirdropNetworkInfo from './AirdropNetworkInfo.svelte'
+    import AirdropNetworkWarning from './AirdropNetworkWarning.svelte'
     import Backup from './Backup.svelte'
     import BalanceFinder from './BalanceFinder.svelte'
     import Busy from './Busy.svelte'
@@ -45,8 +47,10 @@
     import Version from './Version.svelte'
     import Video from './Video.svelte'
     import ConfirmDeveloperProfile from './ConfirmDeveloperProfile.svelte'
+    import ConfirmCloseApp from './ConfirmCloseApp.svelte'
     import LegalUpdate from './LegalUpdate.svelte'
     import SingleAccountGuide from './SingleAccountGuide.svelte'
+    import NodeConfigOptions from './NodeConfigOptions.svelte'
     import { mobile } from 'shared/lib/app'
     import { Platform } from 'shared/lib/platform'
 
@@ -130,11 +134,14 @@
         stakingManager: StakingManager,
         newStakingPeriodNotification: NewStakingPeriodNotification,
         airdropNetworkInfo: AirdropNetworkInfo,
+        airdropNetworkWarning: AirdropNetworkWarning,
         confirmDeveloperProfile: ConfirmDeveloperProfile,
+        confirmCloseApp: ConfirmCloseApp,
         legalUpdate: LegalUpdate,
         governanceManager: GovernanceManager,
         success: Success,
         singleAccountGuide: SingleAccountGuide,
+        nodeConfigOptions: NodeConfigOptions,
     }
 
     const onKey = (e) => {
@@ -174,7 +181,13 @@
         e.preventDefault()
     }
 
+    const handleDrawerClose = () => {
+        closePopup($popupState?.preventClose)
+        $backButtonStore?.pop()
+    }
+
     onMount(async () => {
+        $backButtonStore?.add(closePopup as () => Promise<void>)
         const elems = focusableElements()
         if (elems && elems.length > 0) {
             elems[hideClose || elems.length === 1 || !autofocusContent ? 0 : 1].focus()
@@ -185,8 +198,8 @@
 
 <svelte:window on:keydown={onKey} />
 {#if $mobile && !fullScreen}
-    <Drawer opened zIndex="z-40" preventClose={hideClose} on:close={() => closePopup($popupState?.preventClose)}>
-        <div bind:this={popupContent} class="py-10 px-5">
+    <Drawer opened zIndex="z-40" preventClose={hideClose} on:close={handleDrawerClose}>
+        <div bind:this={popupContent} class="pt-10 pb-8 px-5">
             <svelte:component this={types[type]} {...props} {locale} />
         </div>
     </Drawer>

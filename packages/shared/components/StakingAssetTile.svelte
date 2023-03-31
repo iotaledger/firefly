@@ -28,6 +28,7 @@
     import { capitalize } from 'shared/lib/utils'
     import { activeProfile } from 'shared/lib/profile'
     import { selectedAccountStore } from 'shared/lib/wallet'
+    import { mobile } from 'shared/lib/app'
 
     export let asset: Asset
 
@@ -47,7 +48,12 @@
     let tooltipText: TooltipText
     let remainingTime: number
 
+    $: if (!tooltipAnchor) {
+        showTooltip = false
+    }
+
     const FIAT_PLACEHOLDER = '---'
+    $: SHOW_SHIMMER_TOKEN_FORMATTING_WARNING = asset?.name === Token.Shimmer
 
     $: $activeProfile.stakingRewards
     $: isDarkModeEnabled = $appSettings.darkMode
@@ -65,17 +71,47 @@
                 $selectedAccountParticipationOverview?.[`${airdrop}Rewards`] <= 0
         }
     }
+
     $: showWarningState =
         isPartiallyStakedAndCanStake ||
         (isBelowMinimumRewards && !getAccount($stakedAccounts) && isParticipationPossible(stakingEventState)) ||
         (isBelowMinimumRewards && hasStakingEnded)
 
     function toggleTooltip(): void {
-        showTooltip = !showTooltip
+        if (!$mobile) {
+            showTooltip = !showTooltip
+        }
     }
 
     function handleTileClick(): void {
-        openPopup({ type: 'airdropNetworkInfo', props: { airdrop } })
+        let popupInfoBox
+        if ($mobile) {
+            if (SHOW_SHIMMER_TOKEN_FORMATTING_WARNING) {
+                popupInfoBox = {
+                    title: localize('tooltips.shimmerTokenFormatting.title'),
+                    body: [
+                        localize('tooltips.shimmerTokenFormatting.body1'),
+                        localize('tooltips.shimmerTokenFormatting.body2'),
+                    ],
+                }
+            }
+            if (tooltipText?.body.length > 0) {
+                openPopup({
+                    type: 'airdropNetworkWarning',
+                    props: { title: tooltipText?.title, body: tooltipText?.body },
+                })
+            } else {
+                openPopup({
+                    type: 'airdropNetworkInfo',
+                    props: { airdrop, infoBox: popupInfoBox },
+                })
+            }
+        } else {
+            openPopup({
+                type: 'airdropNetworkInfo',
+                props: { airdrop, infoBox: popupInfoBox },
+            })
+        }
     }
 
     function getAccount(accounts: WalletAccount[]): WalletAccount {
@@ -83,7 +119,7 @@
     }
 
     function getLocalizedTooltipText(): TooltipText {
-        if (isPartiallyStakedAndCanStake) {
+        if (isPartiallyStakedAndCanStake && !$mobile) {
             return {
                 title: localize('tooltips.partiallyStakedFunds.title', {
                     values: { amount: formatUnitBestMatch(getUnstakedFunds()) },
@@ -132,6 +168,14 @@
                     body: _getBody(),
                 }
             }
+        } else if (SHOW_SHIMMER_TOKEN_FORMATTING_WARNING && !$mobile) {
+            return {
+                title: localize('tooltips.shimmerTokenFormatting.title'),
+                body: [
+                    localize('tooltips.shimmerTokenFormatting.body1'),
+                    localize('tooltips.shimmerTokenFormatting.body2'),
+                ],
+            }
         }
     }
 </script>
@@ -149,13 +193,15 @@
         <div class="flex flex-col flex-wrap space-y-1 text-left">
             <div class="flex flex-row items-center space-x-1">
                 <Text classes="font-semibold">{asset?.name}</Text>
-                {#if showWarningState && tooltipText?.body.length > 0}
+                {#if (showWarningState || SHOW_SHIMMER_TOKEN_FORMATTING_WARNING) && tooltipText?.body.length > 0}
                     <div bind:this={tooltipAnchor} on:mouseenter={toggleTooltip} on:mouseleave={toggleTooltip}>
                         <Icon
                             icon="exclamation"
                             width="17"
                             height="17"
-                            classes="fill-current text-yellow-600 group-hover:text-gray-900"
+                            classes="fill-current text-{showWarningState
+                                ? 'yellow-600'
+                                : 'gray-500'} group-hover:text-gray-900"
                         />
                     </div>
                 {/if}
@@ -172,7 +218,7 @@
 </button>
 {#if showTooltip && tooltipText?.body.length > 0}
     <Tooltip anchor={tooltipAnchor} position="right">
-        <Text type="p" classes="text-gray-900 bold mb-2 text-left">{tooltipText?.title}</Text>
+        <Text type="h3" classes="text-left">{tooltipText?.title}</Text>
         {#each tooltipText?.body as paragraph}
             <Text
                 type="p"

@@ -16,6 +16,7 @@
     import {
         api,
         currentSyncingAccountStore,
+        getAccountSyncOptions,
         getIncomingFlag,
         isFirstSessionSync,
         isParticipationPayload,
@@ -47,27 +48,33 @@
         if (!$isSyncing) {
             const _syncAccount = () => {
                 $isSyncing = true
-                api.syncAccount($selectedAccountStore?.id, {
-                    onSuccess() {
-                        $isSyncing = false
-                    },
-                    onError(err) {
-                        $isSyncing = false
+                const { gapLimit } = getAccountSyncOptions()
 
-                        const shouldHideErrorNotification =
-                            err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
-                        if (!shouldHideErrorNotification) {
-                            if ($isLedgerProfile) {
-                                displayNotificationForLedgerProfile('error', true, true, false, false, err)
-                            } else {
-                                showAppNotification({
-                                    type: 'error',
-                                    message: localize(err.error),
-                                })
+                api.syncAccount(
+                    $selectedAccountStore?.id,
+                    { gapLimit },
+                    {
+                        onSuccess() {
+                            $isSyncing = false
+                        },
+                        onError(err) {
+                            $isSyncing = false
+
+                            const shouldHideErrorNotification =
+                                err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
+                            if (!shouldHideErrorNotification) {
+                                if ($isLedgerProfile) {
+                                    displayNotificationForLedgerProfile('error', true, true, false, false, err)
+                                } else {
+                                    showAppNotification({
+                                        type: 'error',
+                                        message: localize(err.error),
+                                    })
+                                }
                             }
-                        }
-                    },
-                })
+                        },
+                    }
+                )
             }
 
             if ($isSoftwareProfile) {
@@ -205,14 +212,12 @@
                     {localize('general.transactions')}
                     <span class="text-gray-500 font-bold">• {queryTransactions.length}</span>
                 </Text>
-                {#if $mobile}
-                    <button on:click={handleSyncAccountClick} class:pointer-events-none={isSelectedAccountSyncing}>
-                        <Icon
-                            icon="refresh"
-                            classes="{isSelectedAccountSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white"
-                        />
-                    </button>
-                {/if}
+                <button on:click={handleSyncAccountClick} class:pointer-events-none={isSelectedAccountSyncing}>
+                    <Icon
+                        icon="refresh"
+                        classes="{isSelectedAccountSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white"
+                    />
+                </button>
             </div>
             <div class="relative flex flex-row items-center justify-between text-white mt-4">
                 <ul class="flex flex-row justify-between space-x-8">
@@ -256,20 +261,24 @@
         <ActivityDetail onBackClick={handleBackClick} {...$selectedMessage} />
     {:else}
         <div
-            class="activity-wrapper flex-auto h-1 space-y-2.5 -mr-2 pr-2 {scroll
+            class="flex-auto h-1 space-y-2.5 -mr-2 pr-2 {$mobile && 'activity-wrapper pb-4'} {scroll
                 ? 'overflow-y-auto scroll-secondary'
                 : ''}"
             style="--bottom-offset: {bottomOffset}"
             use:scrollDetection
         >
             {#if $isSyncing && shouldShowFirstSync()}
-                <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
+                <div class="h-full flex flex-col items-center justify-center text-center">
+                    <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
+                </div>
             {:else if queryTransactions.length}
                 {#each queryTransactions as transaction}
                     <ActivityRow onClick={() => handleTransactionClick(transaction)} {...transaction} />
                 {/each}
             {:else}
-                <div class="h-full flex flex-col items-center justify-center text-center">
+                <div
+                    class="h-full flex flex-col items-center {$mobile ? 'justify-start' : 'justify-center'} text-center"
+                >
                     <Text secondary>{localize('general.noRecentHistory')}</Text>
                 </div>
             {/if}
@@ -279,6 +288,6 @@
 
 <style>
     .activity-wrapper {
-        padding-bottom: var(--bottom-offset);
+        margin-bottom: var(--bottom-offset);
     }
 </style>

@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { get } from 'svelte/store'
 
-    import { mobile } from 'shared/lib/app'
+    import { mobile, isKeyboardOpened, keyboardHeight, getKeyboardTransitionSpeed } from 'shared/lib/app'
     import { Button, Icon, Password, Spinner, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
     import {
@@ -154,7 +154,13 @@
         />
     </form>
 {/if}
-<div class="flex flex-row justify-between space-x-4 w-full md:px-8">
+<div
+    class="flex flex-row justify-between space-x-4 w-full md:px-8"
+    style="margin-bottom: {$mobile && $isKeyboardOpened
+        ? $keyboardHeight
+        : 0}px; transition: margin-bottom {getKeyboardTransitionSpeed($isKeyboardOpened) +
+        'ms'} var(--transition-scroll)"
+>
     <Button secondary classes="w-1/2" onClick={handleCancelNetworkSwitchClick} disabled={isSwitchingNetwork}>
         {locale('actions.cancel')}
     </Button>

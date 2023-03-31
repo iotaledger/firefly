@@ -1,6 +1,9 @@
 <script lang="typescript">
-    import { Icon } from 'shared/components'
+    import { localize } from '@core/i18n'
+    import { Icon, Text } from 'shared/components'
     import Logo from './Logo.svelte'
+    import { mobile } from '@lib/app'
+    import { removeDisplayNotification } from '@lib/notifications'
 
     type Action = {
         label: string
@@ -14,6 +17,8 @@
     export let subMessage: string
     export let progress: number
     export let actions: Action[] = []
+    export let id: string
+    export let hideDismiss: boolean = false
 
     const TOAST_STYLE = {
         info: {
@@ -42,6 +47,10 @@
             subMessageColor: 'gray-600',
             buttonSecondary: 'black',
         },
+    }
+
+    function onDismissClick(): void {
+        removeDisplayNotification(id)
     }
 </script>
 
@@ -74,11 +83,19 @@
                         ? 'bg-white'
                         : ''} text-{action.isPrimary ? 'black' : TOAST_STYLE[type].buttonSecondary}"
                     style={'min-width:90px;min-height:32px'}
-                    on:click={() => action.onClick()}
+                    on:click={action.onClick}
                 >
                     {action.label}
                 </button>
             {/each}
         </div>
+    {:else if $mobile && !hideDismiss}
+        <button
+            class="cursor-pointer text-center rounded-lg font-bold text-11 text-{TOAST_STYLE[type].messageColor}"
+            style={'min-width:90px;min-height:32px'}
+            on:click={onDismissClick}
+        >
+            {localize('actions.dismiss')}
+        </button>
     {/if}
 </div>

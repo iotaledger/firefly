@@ -1,7 +1,7 @@
 {
     "name": "desktop",
     "productName": "Firefly",
-    "version": "1.6.2",
+    "version": "1.6.5",
     "description": "Official IOTA wallet on desktop",
     "main": "public/build/main.js",
     "repository": "git@github.com:iotaledger/firefly.git",
@@ -10,7 +10,7 @@
     "scripts": {
         "start": "npm-run-all -p start:dev start:electron",
         "start:dev": "cross-env NODE_ENV=development PLATFORM=desktop webpack serve --content-base public",
-        "start:electron": "cross-env NODE_ENV=development PLATFORM=desktop electron public/build/main.js",
+        "start:electron": "cross-env NODE_ENV=development PLATFORM=desktop electron --no-sandbox public/build/main.js",
         "start:electron-prod": "cross-env NODE_ENV=production PLATFORM=desktop electron public/build/main.js",
         "build": "yarn build:alpha",
         "build:dev": "cross-env NODE_ENV=development PLATFORM=desktop webpack",

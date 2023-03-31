@@ -84,40 +84,52 @@ export const updateNetworkStatus = async (accountId: string, node: Node): Promis
     if (!accountId || !node) return
 
     if (node || isOfficialNetwork(get(activeProfile)?.settings.networkConfig.network.type)) {
-        const response = await asyncGetNodeInfo(accountId, node?.url, cleanNodeAuth(node?.auth))
-        const timeSinceLastMsInMinutes =
-            (Date.now() - response.nodeinfo.latestMilestoneTimestamp * MILLISECONDS_PER_SECOND) /
-            (MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE)
+        try {
+            const response = await asyncGetNodeInfo(accountId, node?.url, cleanNodeAuth(node?.auth))
+            const timeSinceLastMsInMinutes =
+                (Date.now() - response.nodeinfo.latestMilestoneTimestamp * MILLISECONDS_PER_SECOND) /
+                (MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE)
 
-        let health = 0 // bad
-        if (timeSinceLastMsInMinutes < 2) {
-            health = 2 // good
-        } else if (timeSinceLastMsInMinutes < 5) {
-            health = 1 // degraded
+            let health = 0 // bad
+            if (timeSinceLastMsInMinutes < 2) {
+                health = 2 // good
+            } else if (timeSinceLastMsInMinutes < 5) {
+                health = 1 // degraded
+            }
+
+            let healthText: NetworkStatusHealthText
+            switch (health) {
+                case 2:
+                    healthText = NetworkStatusHealthText.Operational
+                    break
+                case 1:
+                    healthText = NetworkStatusHealthText.Degraded
+                    break
+                case 0:
+                default:
+                    healthText = NetworkStatusHealthText.Down
+                    break
+            }
+
+            networkStatus.set({
+                messagesPerSecond: response.nodeinfo.messagesPerSecond,
+                referencedRate: response.nodeinfo.referencedRate,
+                health,
+                healthText,
+                currentMilestone: response.nodeinfo.confirmedMilestoneIndex,
+                nodePlugins: response.nodeinfo.features,
+            })
+        } catch (error) {
+            networkStatus.set({
+                messagesPerSecond: 0,
+                referencedRate: 0,
+                health: 0,
+                healthText: NetworkStatusHealthText.Unreachable,
+                currentMilestone: -1,
+                nodePlugins: [],
+            })
+            throw new Error(error)
         }
-
-        let healthText: NetworkStatusHealthText
-        switch (health) {
-            case 2:
-                healthText = NetworkStatusHealthText.Operational
-                break
-            case 1:
-                healthText = NetworkStatusHealthText.Degraded
-                break
-            case 0:
-            default:
-                healthText = NetworkStatusHealthText.Down
-                break
-        }
-
-        networkStatus.set({
-            messagesPerSecond: response.nodeinfo.messagesPerSecond,
-            referencedRate: response.nodeinfo.referencedRate,
-            health,
-            healthText,
-            currentMilestone: response.nodeinfo.confirmedMilestoneIndex,
-            nodePlugins: response.nodeinfo.features,
-        })
     } else {
         networkStatus.set({
             messagesPerSecond: 0,

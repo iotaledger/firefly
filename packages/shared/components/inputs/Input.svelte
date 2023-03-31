@@ -46,10 +46,12 @@
             }
             if ((float || integer) && !isEnter) {
                 // if the input is float, we accept one dot or comma depending on localization
-                if (float && e.key === decimalSeparator) {
-                    if (value.indexOf(decimalSeparator) >= 0) {
-                        e.preventDefault()
+                if (float && allDecimalSeparators.find((sep) => sep === e.key)) {
+                    if (allDecimalSeparators.some((sep) => value.indexOf(sep) >= 0)) {
+                        return e.preventDefault()
                     }
+                    value += decimalSeparator
+                    e.preventDefault()
                 } else if ('0123456789'.indexOf(e.key) < 0) {
                     // if float or interger we accept numbers
                     e.preventDefault()
