@@ -44,7 +44,7 @@
         if (subject?.type === 'address') {
             const address = activity.parsedLayer2Metadata?.ethereumAddress ?? subject?.address
             const visibleStartLength = activity.parsedLayer2Metadata ? '0x'.length + 4 : $networkHrp.length
-            return truncateString(address, visibleStartLength, 4)
+            return truncateString(address, visibleStartLength, 6)
         }
         return localize('general.unknownAddress')
     }
