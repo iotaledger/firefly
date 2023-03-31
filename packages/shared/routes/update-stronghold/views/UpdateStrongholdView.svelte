@@ -43,7 +43,10 @@
             <Text type="h2" classes="mb-5">{localize('views.login.updateStronghold.title')}</Text>
         </div>
         <div slot="leftpane__content">
-            <Text type="p" secondary classes="mb-8">{localize('views.login.updateStronghold.body')}</Text>
+            <Text type="p" secondary classes="mb-8">
+                {localize('views.login.updateStronghold.body')}
+                {localize(`views.login.updateStronghold.${isRecovery ? 'continue' : 'providePassword'}`)}
+            </Text>
             {#if !isRecovery}
                 <Password
                     classes="mb-6"
