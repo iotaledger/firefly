@@ -11,7 +11,7 @@ import { appRouter } from '../app-router'
 import { ImportRoute } from '../enums'
 import { Subrouter } from './subrouter'
 import { FireflyEvent } from '../types'
-import { UpdateStrongholdRouter, updateStrongholdRouter } from '@core/router'
+import { UpdateStrongholdRouter, updateStrongholdRouter } from './update-stronghold-router'
 
 export const importRoute = writable<ImportRoute>(null)
 

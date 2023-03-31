@@ -6,7 +6,7 @@
     import { showAppNotification } from '@lib/notifications'
     import passwordInfo from '@lib/password'
     import { MAX_PASSWORD_LENGTH } from '@lib/wallet'
-    import { strongholdPassword } from '../../../lib/app'
+    import { strongholdPassword } from '@lib/app'
 
     let password = ''
     let error = ''

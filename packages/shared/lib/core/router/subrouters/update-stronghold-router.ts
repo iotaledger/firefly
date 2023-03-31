@@ -1,11 +1,11 @@
 import { get, writable } from 'svelte/store'
 
+import { strongholdPassword } from '@lib/app'
+
 import { UpdateStrongholdRoute } from '../enums'
 import { Subrouter } from '../subrouters/subrouter'
 import { FireflyEvent } from '../types'
-import { appRouter } from '@core/router'
-import { Router } from '@core/router/router'
-import { strongholdPassword } from '@lib/app'
+import { Router } from '../router'
 
 export const updateStrongholdRoute = writable<UpdateStrongholdRoute>(null)
 export const updateStrongholdRouter = writable<UpdateStrongholdRouter>(null)
