@@ -1,1 +1,0 @@
-export const MAX_DOWNLOADING_TIME_IN_SECONDS = 120

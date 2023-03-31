@@ -1,3 +1,4 @@
+export * from './bytes-per-megabyte.constant'
 export * from './currency.enum'
 export * from './http-header.enum'
 export * from './exchange-rate.enum'

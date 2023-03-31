@@ -1,12 +1,12 @@
 import { activeProfile } from '@core/profile'
 import { get } from 'svelte/store'
-import { BYTES_PER_MEGABYTE, NFT_MEDIA_FILE_NAME } from '../constants'
+import { NFT_MEDIA_FILE_NAME } from '../constants'
 import { DownloadErrorType, DownloadWarningType } from '../enums'
 import { fetchWithTimeout } from './fetchWithTimeout'
 import { NftDownloadMetadata, INft, IPersistedNftData } from '../interfaces'
 import { addPersistedNftData, persistedNftForActiveProfile } from '../stores'
 import { Platform } from '@core/app'
-import { HttpHeader } from '@core/utils'
+import { BYTES_PER_MEGABYTE, HttpHeader } from '@core/utils'
 
 const HEAD_FETCH_TIMEOUT_SECONDS = 3
 
