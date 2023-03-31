@@ -1,6 +1,6 @@
 import { get, writable } from 'svelte/store'
 
-import { mnemonic } from '@lib/app'
+import { mnemonic, strongholdPassword } from '@lib/app'
 import { getMigrationData } from '@lib/migration'
 import { Platform } from '@lib/platform'
 import { newProfile } from '@lib/profile'
@@ -104,6 +104,12 @@ export class ImportRouter extends Subrouter<ImportRoute> {
                 }
                 break
             }
+            case ImportRoute.UpdateStronghold:
+                // TODO: https://github.com/iotaledger/firefly/issues/6141
+                await asyncRestoreBackup(this.importFilePath, get(strongholdPassword))
+                get(newProfile).lastStrongholdBackupTime = new Date()
+                get(appRouter).next({ importType: get(this.importType) })
+                return
             case ImportRoute.LedgerImport: {
                 const { importType } = params
                 this.importType.set(importType)
@@ -112,7 +118,7 @@ export class ImportRouter extends Subrouter<ImportRoute> {
             }
             case ImportRoute.Success:
                 get(appRouter).next({ importType: get(this.importType) })
-                break
+                return
         }
         this.setNext(nextRoute)
     }

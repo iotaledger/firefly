@@ -29,9 +29,9 @@ export class LoginRouter extends Subrouter<LoginRoute> {
                 break
             }
             case LoginRoute.EnterPin:
+                // TODO: https://github.com/iotaledger/firefly/issues/6141
                 /* eslint-disable no-constant-condition */
                 if (true) {
-                    // isStrongholdOutdated(get(activeProfile))) {
                     nextRoute = LoginRoute.UpdateStronghold
                     updateStrongholdRouter.set(new UpdateStrongholdRouter())
                 } else {
