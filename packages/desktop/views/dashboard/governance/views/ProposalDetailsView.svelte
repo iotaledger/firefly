@@ -47,6 +47,7 @@
     let textHintString = ''
     let proposalQuestions: HTMLElement
     let isVotingForProposal: boolean = false
+    let isVotingDisabled: boolean = true
     let statusLoaded: boolean = false
     let overviewLoaded: boolean = false
     let openedQuestionIndex: number = -1
@@ -72,10 +73,10 @@
     }
 
     $: isVotingDisabled =
+        hasGovernanceTransactionInProgress ||
         !isProposalVotable($selectedProposal?.status) ||
-        !hasChangedAnswers(selectedAnswerValues) ||
-        hasSelectedNoAnswers(selectedAnswerValues) ||
-        JSON.stringify(selectedAnswerValues) === JSON.stringify(votedAnswerValues)
+        JSON.stringify(selectedAnswerValues) === JSON.stringify(votedAnswerValues) ||
+        hasSelectedNoAnswers(selectedAnswerValues)
     $: hasGovernanceTransactionInProgress =
         $selectedAccount?.hasVotingPowerTransactionInProgress || $selectedAccount?.hasVotingTransactionInProgress
     $: $selectedParticipationEventStatus, (textHintString = getTextHintString())
@@ -85,25 +86,6 @@
             _selectedAnswerValues.length === 0 ||
             _selectedAnswerValues.every((answerValue) => answerValue === undefined)
         )
-    }
-
-    function hasChangedAnswers(_selectedAnswerValues: number[]): boolean {
-        const activeParticipationAnswerValues = getActiveParticipation($selectedProposal?.id)?.answers
-        if (activeParticipationAnswerValues) {
-            /**
-             * NOTE: If any of the values between what's active and selected differ, it means
-             * that the user has changed at least one answer.
-             */
-            return _selectedAnswerValues.some(
-                (selectedAnswerValue, idx) => selectedAnswerValue !== activeParticipationAnswerValues[idx]
-            )
-        } else {
-            /**
-             * NOTE: If the user hasn't voted for the participation yet, the user has not changed (all) answers
-             * yet until every value is not undefined.
-             */
-            return _selectedAnswerValues.some((selectedAnswerValue) => selectedAnswerValue !== undefined)
-        }
     }
 
     async function setVotingEventPayload(eventId: string): Promise<void> {
@@ -285,7 +267,7 @@
                 >
                 <Button
                     classes="w-full"
-                    disabled={isVotingDisabled || hasGovernanceTransactionInProgress}
+                    disabled={isVotingDisabled}
                     isBusy={hasGovernanceTransactionInProgress}
                     onClick={onVoteClick}
                 >
