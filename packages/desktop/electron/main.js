@@ -177,17 +177,6 @@ if (app.isPackaged) {
 }
 
 /**
- * Check URL against blocklist
- */
-function isUrlAllowed(targetUrl) {
-    const externalBlocklist = ['localhost']
-    const url = new URL(targetUrl)
-    const domain = url.hostname.replace(/^www\./, '')
-
-    return !externalBlocklist.includes(domain) && !externalBlocklist.includes(domain + url.pathname)
-}
-
-/**
  * Handles url navigation events
  */
 const handleNavigation = (e, url) => {
@@ -314,7 +303,7 @@ function createWindow() {
      * Handle permissions requests
      */
     session.defaultSession.setPermissionRequestHandler((_webContents, permission, cb, details) => {
-        if (permission === 'openExternal' && details && details.externalURL && isUrlAllowed(details.externalURL)) {
+        if (permission === 'openExternal' && details && details.externalURL) {
             return cb(true)
         }
 
