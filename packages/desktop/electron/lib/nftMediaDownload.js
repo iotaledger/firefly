@@ -7,7 +7,7 @@ const fs = require('fs')
 const downloadItems = {}
 
 export function initNftMediaDownload() {
-    ipcMain.handle('download', async (event, url, destination, nftId, accountIndex) => {
+    ipcMain.handle('nft-download', async (event, url, destination, nftId, accountIndex) => {
         const userPath = app.getPath('userData')
         const directory = app.isPackaged ? userPath : __dirname
 
@@ -19,24 +19,17 @@ export function initNftMediaDownload() {
             showProgressBar: true,
             onCompleted: () => {
                 delete downloadItems[nftId]
-                getOrInitWindow('main').webContents.send('download-done', { nftId, accountIndex })
+                getOrInitWindow('main').webContents.send('nft-download-done', { nftId, accountIndex })
             },
             onCancel: () => {
                 delete downloadItems[nftId]
-                getOrInitWindow('main').webContents.send('download-interrupted', { nftId, accountIndex })
+                getOrInitWindow('main').webContents.send('nft-download-interrupted', { nftId, accountIndex })
             },
             onStarted: (item) => (downloadItems[nftId] = item),
         })
     })
 
-    ipcMain.handle('check-if-file-exists', (_e, filePath) => {
-        const userPath = app.getPath('userData')
-        const directory = app.isPackaged ? userPath : __dirname
-
-        return fs.existsSync(`${directory}/__storage__/${filePath}`)
-    })
-
-    ipcMain.handle('cancel-download', async (event, nftId) => {
+    ipcMain.handle('cancel-nft-download', async (event, nftId) => {
         const downloadItem = downloadItems[nftId]
         downloadItem?.cancel()
     })

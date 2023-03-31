@@ -4,6 +4,6 @@ import { downloadingNftId, resetNftDownloadQueue } from '../stores'
 
 export async function stopDownloadingNftMediaFromQueue(): Promise<void> {
     resetNftDownloadQueue()
-    await Platform.cancelDownload(get(downloadingNftId))
+    await Platform.cancelNftDownload(get(downloadingNftId))
     downloadingNftId.set(undefined)
 }

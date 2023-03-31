@@ -241,14 +241,14 @@ const ElectronApi = {
     close() {
         return ipcRenderer.invoke('close')
     },
-    downloadFile(url, destinationFilePath, nftId, accountIndex) {
-        return ipcRenderer.invoke('download', url, destinationFilePath, nftId, accountIndex)
+    downloadNftFile(url, destinationFilePath, nftId, accountIndex) {
+        return ipcRenderer.invoke('nft-download', url, destinationFilePath, nftId, accountIndex)
     },
     checkIfFileExists(filePath) {
         return ipcRenderer.invoke('check-if-file-exists', filePath)
     },
-    cancelDownload(nftId) {
-        return ipcRenderer.invoke('cancel-download', nftId)
+    cancelNftDownload(nftId) {
+        return ipcRenderer.invoke('cancel-nft-download', nftId)
     },
     /*
      * Opens url and checks against acceptlist

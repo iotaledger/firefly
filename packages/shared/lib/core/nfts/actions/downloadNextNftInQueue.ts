@@ -11,7 +11,7 @@ export async function downloadNextNftInQueue(): Promise<void> {
     try {
         const { downloadUrl, path, nft, accountIndex } = nextDownload
         downloadingNftId.set(nft.id)
-        await Platform.downloadFile(downloadUrl, path, nft.id, accountIndex)
+        await Platform.downloadNftFile(downloadUrl, path, nft.id, accountIndex)
     } catch (error) {
         downloadingNftId.set(undefined)
         removeNftFromDownloadQueue(get(downloadingNftId))

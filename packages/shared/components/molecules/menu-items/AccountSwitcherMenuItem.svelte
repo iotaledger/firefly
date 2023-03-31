@@ -1,7 +1,6 @@
 <script lang="ts">
     import { IAccountState, selectedAccount, setSelectedAccount } from '@core/account'
     import { BASE_TOKEN } from '@core/network'
-    import { resetNftDownloadQueue } from '@core/nfts'
     import { activeProfile } from '@core/profile'
     import { formatTokenAmountBestMatch } from '@core/wallet'
     import { Text } from 'shared/components'
@@ -12,7 +11,6 @@
     export let id: string = ''
 
     function onAccountClick(accountIndex: number): void {
-        resetNftDownloadQueue(true)
         setSelectedAccount(accountIndex)
         onClick && onClick()
     }

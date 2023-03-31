@@ -19,6 +19,6 @@ export interface IPlatformEventMap {
     'version-complete': void
     'version-error': Error
     'notification-activated': unknown
-    'download-done': INFTDownloadState
-    'download-interrupted': INFTDownloadState
+    'nft-download-done': INFTDownloadState
+    'nft-download-interrupted': INFTDownloadState
 }

@@ -13,7 +13,7 @@ export async function interruptNftDownloadAfterTimeout(accountIndex: number): Pr
     const updatedDownloadingNft = get(downloadingNftId)
 
     if (currentlyDownloadingNft && currentlyDownloadingNft === updatedDownloadingNft) {
-        await Platform.cancelDownload(currentlyDownloadingNft)
+        await Platform.cancelNftDownload(currentlyDownloadingNft)
         updateNftInAllAccountNfts(accountIndex, currentlyDownloadingNft, {
             downloadMetadata: { isLoaded: false, warning: { type: DownloadWarningType.DownloadTooLong } },
         })

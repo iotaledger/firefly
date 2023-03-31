@@ -72,10 +72,10 @@ const Platform: IPlatform = {
     installAppUpdate(): Promise<void> {
         return Promise.resolve(undefined)
     },
-    downloadFile(): Promise<void> {
+    downloadNftFile(): Promise<void> {
         return Promise.resolve(undefined)
     },
-    cancelDownload(nftId: string): Promise<void> {
+    cancelNftDownload(nftId: string): Promise<void> {
         return Promise.resolve(undefined)
     },
     checkIfFileExists(): Promise<boolean> {

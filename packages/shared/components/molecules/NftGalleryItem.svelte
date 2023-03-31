@@ -12,19 +12,19 @@
     export let nft: INft
 
     let nftWrapperClientWidth: number
-    let tooltipIconProps: Partial<{ icon: string; iconClasses: string; text: string }> = {}
+    let tooltipIconProps: { icon?: Icon; iconClasses?: string; text?: string } = {}
 
     $: isLocked = nft.timelockTime > $time.getTime()
 
     $: if (nft.downloadMetadata.error) {
         tooltipIconProps = {
-            icon: 'error-filled',
+            icon: Icon.ErrorFilled,
             iconClasses: 'fill-current text-red-700',
             text: getTooltipText('error'),
         }
     } else if (nft.downloadMetadata.warning) {
         tooltipIconProps = {
-            icon: 'exclamation-filled',
+            icon: Icon.ExclamationFilled,
             iconClasses: 'fill-current text-yellow-700',
             text: getTooltipText('warning'),
         }
