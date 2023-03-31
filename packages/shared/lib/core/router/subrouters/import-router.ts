@@ -11,6 +11,7 @@ import { appRouter } from '../app-router'
 import { ImportRoute } from '../enums'
 import { Subrouter } from './subrouter'
 import { FireflyEvent } from '../types'
+import { UpdateStrongholdRouter, updateStrongholdRouter } from '@core/router'
 
 export const importRoute = writable<ImportRoute>(null)
 
@@ -85,12 +86,19 @@ export class ImportRouter extends Subrouter<ImportRoute> {
                         if (legacySeed) {
                             await getMigrationData(legacySeed)
                         }
-                    } else {
-                        await asyncRestoreBackup(this.importFilePath, password)
-                        get(newProfile).lastStrongholdBackupTime = new Date()
-                    }
 
-                    nextRoute = ImportRoute.Success
+                        nextRoute = ImportRoute.Success
+                    } else {
+                        /* eslint-disable no-constant-condition */
+                        if (true) {
+                            nextRoute = ImportRoute.UpdateStronghold
+                            updateStrongholdRouter.set(new UpdateStrongholdRouter())
+                        } else {
+                            await asyncRestoreBackup(this.importFilePath, password)
+                            get(newProfile).lastStrongholdBackupTime = new Date()
+                            nextRoute = ImportRoute.Success
+                        }
+                    }
                 } finally {
                     this.isGettingMigrationData.set(false)
                 }

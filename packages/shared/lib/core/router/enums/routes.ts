@@ -137,6 +137,7 @@ export enum ImportRoute {
     FileImport = 'fileImport',
     LedgerImport = 'ledgerImport',
     BackupPassword = 'backupPassword',
+    UpdateStronghold = 'updateStronghold',
     Success = 'Success',
 }
 

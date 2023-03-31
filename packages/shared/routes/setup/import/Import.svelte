@@ -2,6 +2,7 @@
     import { setContext } from 'svelte'
     import { Transition } from 'shared/components'
     import { BackupPassword, FileImport, Import, Ledger, Success, TextImport } from './views/'
+    import UpdateStrongholdRouter from '../../update-stronghold/UpdateStrongholdRouter.svelte'
     import { Locale } from '@core/i18n'
     import { FireflyEvent, importRoute, ImportRouter, ImportRoute } from '@core/router'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -62,6 +63,10 @@
 {:else if $importRoute === ImportRoute.BackupPassword}
     <Transition>
         <BackupPassword on:next={next} on:previous={previous} {error} {locale} {busy} />
+    </Transition>
+{:else if $importRoute === ImportRoute.UpdateStronghold}
+    <Transition>
+        <UpdateStrongholdRouter parentRouter={importRouter} />
     </Transition>
 {:else if $importRoute === ImportRoute.Success}
     <Transition>
