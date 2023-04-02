@@ -1065,6 +1065,7 @@
                 "quantityTooLarge": "Ilość musi być mniejsza niż 64",
                 "emptyName": "Nazwa jest wymaganym polem",
                 "invalidURI": "Nieprawidłowy URI, proszę podać poprawny URI",
+                "notReachable": "URI nieosiągalny, nie można sprawdzić typu NFT",
                 "royaltiesMustBeObject": "Tantiemy muszą być obiektem",
                 "royaltiesMustBeJSON": "Tantiemy muszą być w poprawnym formacie JSON",
                 "invalidAddress": "Nieprawidłowy adres, musisz wpisać poprawny adres {networkHrp}, na który będą wysyłane tantiemy",
@@ -1977,9 +1978,17 @@
                 "short": "Ładowanie zablokowane",
                 "long": "Typ pliku NFT nie pasuje do oczekiwanego typu multimediów"
             },
+            "notReachable": {
+                "short": "Nieosiągalny",
+                "long": "Typ pliku NFT nieosiągalny"
+            },
             "tooLargeFile": {
                 "short": "Plik jest zbyt duży",
                 "long": "Ładowanie NFT zablokowane, ponieważ plik jest zbyt duży"
+            },
+            "downloadTooLong": {
+                "short": "Pobieranie pliku trwało zbyt długo",
+                "long": "Ładowanie NFT zostało zaniechane, ponieważ pobieranie pliku trwało zbyt długo"
             },
             "corsError": {
                 "short": "Ładowanie zablokowane",
