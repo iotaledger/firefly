@@ -110,8 +110,6 @@
     {#if label}
         <Text type={TextType.p} secondary classes="mb-1">{label}</Text>
     {/if}
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
     <pin-input
         style="--pin-input-size: {PIN_LENGTH}"
         class="{smaller ? 'h-16' : 'h-20'} w-full 
