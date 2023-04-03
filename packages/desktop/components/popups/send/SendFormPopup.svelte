@@ -3,7 +3,7 @@
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
     import { isLayer1Destination } from '@core/layer-2'
-    import { selectedAccountNfts } from '@core/nfts'
+    import { ownedNfts } from '@core/nfts'
     import { getByteLengthOfString, MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
     import {
         getAssetById,
@@ -67,7 +67,7 @@
     let activeTab: SendForm =
         transactionDetails.type === NewTransactionType.TokenTransfer ? SendForm.SendToken : SendForm.SendNft
 
-    $: hasSpendableNfts = $selectedAccountNfts.some((nft) => nft.isSpendable)
+    $: hasSpendableNfts = $ownedNfts.some((nft) => nft.isSpendable)
     $: isLayer2 = !isLayer1Destination(networkAddress)
     $: isSendTokenTab = activeTab === SendForm.SendToken
 
@@ -93,6 +93,7 @@
                 nftId,
                 tag,
                 metadata,
+                layer2Parameters,
                 disableAssetSelection,
             })
         }
@@ -179,11 +180,7 @@
         {:else}
             <NftInput bind:this={nftInput} bind:nftId readonly={disableAssetSelection} />
         {/if}
-        <NetworkInput
-            bind:this={networkInput}
-            bind:networkAddress
-            showLayer2={features?.wallet?.sendToLayer2?.enabled && isSendTokenTab}
-        />
+        <NetworkInput bind:this={networkInput} bind:networkAddress showLayer2={features?.wallet?.showLayer2?.enabled} />
         <RecipientInput bind:this={recipientInput} bind:recipient {isLayer2} />
         <optional-inputs class="flex flex-row flex-wrap gap-4">
             <OptionalInput

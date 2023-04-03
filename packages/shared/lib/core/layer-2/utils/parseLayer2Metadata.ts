@@ -6,13 +6,7 @@ export function parseLayer2Metadata(metadata: string): Layer2Metadata {
     const parsedData = JSON.parse(metadata)
     validate(parsedData)
 
-    return {
-        senderContract: parsedData.senderContract,
-        targetContract: parsedData.targetContract,
-        contractFunction: parsedData.contractFunction,
-        gasBudget: parsedData.gasBudget,
-        ethereumAddress: parsedData.ethereumAddress,
-    }
+    return { ...parsedData }
 }
 
 function validate(data: Layer2Metadata): void {

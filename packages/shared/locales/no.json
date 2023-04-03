@@ -260,6 +260,16 @@
                 "title": "General",
                 "description": "Configure your app's appearance and other general settings"
             },
+            "profile": {
+                "title": "Profil",
+                "description": "Endre profilnavnet ditt eller velg en avatar"
+            },
+            "network": {
+                "title": "Network"
+            },
+            "collectibles": {
+                "title": "Collectibles"
+            },
             "security": {
                 "title": "Sikkerhet",
                 "description": "Endre passordet ditt og juster sikkerhetsrelaterte innstillinger"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "Hjelp & Informasjon",
                 "description": "Finn svaret på et spørsmål eller få hjelp med et problem"
-            },
-            "profile": {
-                "title": "Profil",
-                "description": "Endre profilnavnet ditt eller velg en avatar"
             },
             "sync": {
                 "title": "Synkroniser lommebøker",
@@ -306,8 +312,12 @@
                 "description": "Eksporter til en Stronghold-fil - en fullstendig kryptert sikkerhetskopi av lommeboken din og den seneste transaksjonshistorikken"
             },
             "appLock": {
-                "title": "Lås automatisk",
+                "title": "Automatic logout",
                 "description": "Inaktivitetstid før lommeboken låses og du blir logget ut"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold Timeout",
+                "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
                 "title": "Maximum media size",
@@ -346,22 +356,9 @@
                 "title": "Deep links",
                 "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
-            "networkConfiguration": {
-                "title": "Nettverks konfigurasjon",
-                "title2": "Nettverkskonfigurasjon",
-                "description": {
-                    "dev": "Dine nettverksinnstillinger vil oppdateres automatisk i henhold til gjeldende node-konfigurasjon (hvis nettverket byttes vil det resultere i at lommebokstatusen tilbakestilles)",
-                    "nonDev": "Dine nettverksinnstillinger vil oppdateres automatisk i henhold til gjeldende node-konfigurasjon"
-                },
-                "switchedNetworks": "Nettverket ble endret til \"{networkName}.",
-                "resetWallet": "Din lommebokstatus er tilbakestilt.",
-                "connectedTo": "Koblet til",
-                "nodeConfiguration": {
-                    "title": "Valg av node",
-                    "description": "Velg \"Manual\" for å konfigurere node-innstillinger og koble til en eller flere egne noder",
-                    "automatic": "Automatisk",
-                    "manual": "Manuelt"
-                }
+            "networkInformation": {
+                "title": "Network information",
+                "connectedTo": "Connected to"
             },
             "configureNodeList": {
                 "title": "Rediger nodekonfigurasjon",
@@ -380,7 +377,7 @@
             },
             "localProofOfWork": {
                 "title": "Proof of work",
-                "description": "Fullfør proof of work lokalt på din enhet eller deleger arbeidet til noden"
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "Feilmeldingslogg",
@@ -1068,6 +1065,7 @@
                 "quantityTooLarge": "Quantity needs to be smaller than 64",
                 "emptyName": "Name is a required field",
                 "invalidURI": "Invalid URI, please provide a valid URI",
+                "royaltiesMustBeObject": "Royalties must be an object",
                 "royaltiesMustBeJSON": "Royalties must be a valid JSON",
                 "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
                 "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",

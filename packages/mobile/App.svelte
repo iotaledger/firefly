@@ -2,6 +2,7 @@
     import { onMount } from 'svelte'
 
     import { SplashScreen } from '@capacitor/splash-screen'
+    import { Keyboard } from '@capacitor/keyboard'
 
     import { DrawerManager } from '@components'
     import { ToastContainer } from '@ui'
@@ -18,18 +19,7 @@
         resetRouters,
     } from '@/routers'
 
-    import { onboardingProfile } from '@contexts/onboarding'
-
-    import {
-        appSettings,
-        appStage,
-        AppStage,
-        AppTheme,
-        initAppSettings,
-        Platform,
-        setPlatform,
-        shouldBeDarkMode,
-    } from '@core/app'
+    import { appSettings, appStage, AppStage, initAppSettings, Platform, setPlatform } from '@core/app'
     import { localeDirection, setupI18n, _ } from '@core/i18n'
     import { checkAndMigrateProfiles, cleanupEmptyProfiles, activeProfile } from '@core/profile'
     import { initialiseRouterManager, RouterManagerExtensionName } from '@core/router'
@@ -53,6 +43,16 @@
     $: if ($activeProfile && !$loggedIn) {
         closeAllDrawers()
     }
+
+    $keyboardHeight = window.screen.height / 3.5 // set initial state
+
+    void Keyboard.addListener('keyboardWillShow', (info) => {
+        $keyboardHeight = info.keyboardHeight
+        $isKeyboardOpen = true
+    })
+    void Keyboard.addListener('keyboardWillHide', () => {
+        $isKeyboardOpen = false
+    })
 
     void setupI18n({ fallbackLocale: 'en', initialLocale: $appSettings.language })
 
@@ -89,21 +89,6 @@
         const platform = await Platform.getOS()
         setPlatform(platform)
     })
-
-    $keyboardHeight = window.innerHeight / 2
-    // Press ctrl + k to toggle the fake keyboard
-    document.onkeydown = function (e): void {
-        if (e.ctrlKey && e.key === 'c') {
-            $appSettings.theme = $appSettings.theme === AppTheme.Light ? AppTheme.Dark : AppTheme.Light
-            $appSettings.darkMode = shouldBeDarkMode($appSettings.theme)
-        }
-        if (e.ctrlKey && e.key === 'd') {
-            $onboardingProfile.isDeveloperProfile = true
-        }
-        if (e.ctrlKey && e.key === 'k') {
-            $isKeyboardOpen = !$isKeyboardOpen
-        }
-    }
 </script>
 
 <!-- empty div to avoid auto-purge removing dark classes -->
@@ -119,10 +104,6 @@
 {/if}
 <DrawerManager />
 <ToastContainer swipe fadeDuration={100} classes="fixed top-0 p-5 z-10 w-full" showDismiss />
-
-{#if $isKeyboardOpen}
-    <div class="keyboard" />
-{/if}
 
 <style global type="text/scss">
     @tailwind base;
@@ -193,14 +174,5 @@
     }
     img {
         -webkit-user-drag: none;
-    }
-
-    .keyboard {
-        position: absolute;
-        bottom: 0;
-        height: 50%;
-        width: 100%;
-        background-color: black;
-        z-index: 100;
     }
 </style>
