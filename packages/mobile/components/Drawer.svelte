@@ -88,9 +88,12 @@
         bind:clientWidth={panelWidth}
         class:moving
         class="pt-7 px-5 fixed w-full flex flex-col flex-auto overflow-hidden safe-area-bottom {fullScreen
-            ? enterFromSide ? 'h-screen safe-area-top-from-side' : 'safe-area-top'
+            ? enterFromSide
+                ? 'h-screen safe-area-top-from-side'
+                : 'safe-area-top'
             : ''} bg-white dark:bg-gray-800 {enterFromSide ? '' : 'rounded-t-2xl'}"
-        style="{enterFromSide ? `left: ${position}px;` : `bottom: ${position}px;`} {$isKeyboardOpen && `border-bottom: ${$keyboardHeight}px solid transparent`}"
+        style="{enterFromSide ? `left: ${position}px;` : `bottom: ${position}px;`} {$isKeyboardOpen &&
+            `border-bottom: ${$keyboardHeight}px solid transparent`}"
     >
         {#if enterFromSide === false}
             <decorator
@@ -134,5 +137,4 @@
     .safe-area-bottom {
         padding-bottom: calc(env(safe-area-inset-bottom) + 1.5rem);
     }
-    
 </style>

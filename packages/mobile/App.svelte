@@ -169,7 +169,7 @@
             display: -webkit-box;
         }
     }
-    
+
     @layer utilities {
         .scrollable-y {
             @apply overflow-y-auto;
