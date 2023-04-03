@@ -5,6 +5,7 @@ const path = require('path')
 const sveltePreprocess = require('svelte-preprocess')
 const SentryWebpackPlugin = require('@sentry/webpack-plugin')
 const { version } = require('./package.json')
+const features = require('./features/features.js')
 
 const mode = process.env.NODE_ENV || 'development'
 const prod = mode === 'production'
@@ -156,6 +157,7 @@ const rendererPlugins = [
     new DefinePlugin({
         'process.env.PLATFORM': JSON.stringify(process.env.PLATFORM || 'desktop'),
         'process.env.STAGE': JSON.stringify(stage),
+        features: features,
         SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),
         SENTRY_MAIN_PROCESS: JSON.stringify(false),
         SENTRY_ENVIRONMENT: JSON.stringify(stage),

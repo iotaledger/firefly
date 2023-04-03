@@ -4,7 +4,7 @@
     import { MimeType, NFT_MEDIA_FILE_NAME, ParentMimeType } from '@core/nfts'
     import { getStorageDirectoryOfProfiles } from '@core/profile/utils'
     import { DEV_STORAGE_DIRECTORY } from '@core/profile'
-    import features from '../../../desktop/features/features'
+    import features from '@features/features'
 
     export let Media: HTMLImageElement | HTMLVideoElement = undefined
     export let filePath: string

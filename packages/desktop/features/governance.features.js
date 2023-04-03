@@ -5,4 +5,4 @@ const governanceFeatures = {
     },
 }
 
-export default governanceFeatures
+module.exports = governanceFeatures

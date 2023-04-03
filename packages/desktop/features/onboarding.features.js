@@ -255,4 +255,4 @@ const onboardingFeatures = {
     },
 }
 
-export default onboardingFeatures
+module.exports = onboardingFeatures

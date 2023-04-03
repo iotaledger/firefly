@@ -5,4 +5,4 @@ const collectiblesFeatures = {
     },
 }
 
-export default collectiblesFeatures
+module.exports = collectiblesFeatures

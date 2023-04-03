@@ -29,4 +29,4 @@ const walletFeatures = {
     },
 }
 
-export default walletFeatures
+module.exports = walletFeatures

@@ -20,4 +20,4 @@ const developerToolsFeatures = {
     },
 }
 
-export default developerToolsFeatures
+module.exports = developerToolsFeatures

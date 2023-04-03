@@ -98,4 +98,4 @@ const settingsFeatures = {
     },
 }
 
-export default settingsFeatures
+module.exports = settingsFeatures

@@ -16,4 +16,4 @@ const electronFeatures = {
     },
 }
 
-export default electronFeatures
+module.exports = electronFeatures
