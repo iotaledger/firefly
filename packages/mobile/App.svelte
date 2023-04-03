@@ -117,6 +117,10 @@
         user-select: none;
         -webkit-user-select: none;
 
+        /** CSS safe-area margins */
+        padding-top: calc(env(safe-area-inset-top) / 3);
+        padding-bottom: env(safe-area-inset-bottom);
+
         /* ===== Scrollbar CSS ===== */
         /* Chrome, Edge, and Safari */
         *::-webkit-scrollbar {
@@ -165,6 +169,7 @@
             display: -webkit-box;
         }
     }
+    
     @layer utilities {
         .scrollable-y {
             @apply overflow-y-auto;
