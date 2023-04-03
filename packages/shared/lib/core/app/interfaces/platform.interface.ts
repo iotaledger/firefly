@@ -48,4 +48,6 @@ export interface IPlatform {
     removeListenersForEvent<K extends keyof IPlatformEventMap>(eventName: K): void
 
     isFeatureFlagEnabled(keyPath: string): boolean
+
+    captureException(exception: unknown): void
 }

@@ -127,6 +127,8 @@ const CapacitorApi: Partial<IPlatform> = {
     unhandledException: () => new Promise<void>(() => {}),
 
     saveRecoveryKit: () => new Promise<void>(() => {}),
+
+    captureException: () => {},
 }
 
 window['__CAPACITOR__'] = CapacitorApi
