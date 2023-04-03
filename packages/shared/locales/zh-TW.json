@@ -1065,6 +1065,7 @@
                 "quantityTooLarge": "數量必須小於 64",
                 "emptyName": "名稱為必填欄位",
                 "invalidURI": "網址無效，請提供有效的網址",
+                "notReachable": "URI not reachable, unable to check NFT type",
                 "royaltiesMustBeObject": "版稅必須是一個物件",
                 "royaltiesMustBeJSON": "版稅必須是有效的 JSON",
                 "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
@@ -1977,9 +1978,17 @@
                 "short": "載入被阻擋了",
                 "long": "NFT file type does not match the expected media type"
             },
+            "notReachable": {
+                "short": "Not reachable",
+                "long": "NFT file is not reachable"
+            },
             "tooLargeFile": {
                 "short": "檔案過大",
                 "long": "Loading NFT blocked because the file is too large"
+            },
+            "downloadTooLong": {
+                "short": "File took too long to download",
+                "long": "Loading NFT blocked because the file took too long to download"
             },
             "corsError": {
                 "short": "載入被阻擋了",
