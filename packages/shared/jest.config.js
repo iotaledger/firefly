@@ -3,12 +3,14 @@ const config = {
         'ts-jest': {
             tsconfig: 'tsconfig.test.json',
         },
+        features: {},
     },
     moduleFileExtensions: ['ts', 'js'],
     moduleNameMapper: {
         '@auxiliary/(.*)': '<rootDir>/lib/auxiliary/$1',
         '@contexts/(.*)': '<rootDir>/lib/contexts/$1',
         '@core/(.*)': '<rootDir>/lib/core/$1',
+        '@features/(.*)': '<rootDir>/lib/features/$1',
         '@lib/(.*)': '<rootDir>/lib/$1',
         '@mocks/(.*)': '<rootDir>/lib/tests/__mocks__/$1',
     },
