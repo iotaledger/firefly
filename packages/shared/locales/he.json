@@ -260,6 +260,16 @@
                 "title": "General",
                 "description": "Configure your app's appearance and other general settings"
             },
+            "profile": {
+                "title": "פרופיל",
+                "description": "שנה את שם או תמונת הפרופיל"
+            },
+            "network": {
+                "title": "Network"
+            },
+            "collectibles": {
+                "title": "Collectibles"
+            },
             "security": {
                 "title": "אבטחה",
                 "description": "שנה את הסיסמה שלך והגדר את הגדרות האבטחה"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "עזרה ומידע",
                 "description": "חפש תשובה לשאלה או קבל עזרה בנושא"
-            },
-            "profile": {
-                "title": "פרופיל",
-                "description": "שנה את שם או תמונת הפרופיל"
             },
             "sync": {
                 "title": "סנכרן ארנקים",
@@ -306,8 +312,12 @@
                 "description": "מיצא לקובץ ה stronghold - גיבוי מוצפן מלא של הארנקים שלך והיסטורית העיסקאות האחרונות"
             },
             "appLock": {
-                "title": "נעילה אוטומטית",
+                "title": "Automatic logout",
                 "description": "זמן שהיה לפני נעילת הארנקים והתנתקות"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold Timeout",
+                "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
                 "title": "Maximum media size",
@@ -346,22 +356,9 @@
                 "title": "Deep links",
                 "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
-            "networkConfiguration": {
-                "title": "תצורת רשת",
-                "title2": "תצורת רשת",
-                "description": {
-                    "dev": "הגדרות הרשת שלך יעודכנו אוטומטית עם תצורת צומת הרשת הנכונה (שינוי תקשורות יגרום לאיפוס הגדרות הארנק)",
-                    "nonDev": "הגדרות הרשת שלך יעודכנו אוטומטית עם תצורת צומת הרשת הנכונה"
-                },
-                "switchedNetworks": "הרשת שונתה בהצלחה ל \"{networkName}\".",
-                "resetWallet": "הגדרות הארנק שלך אופסו.",
-                "connectedTo": "התחבר ל",
-                "nodeConfiguration": {
-                    "title": "בחירת צומת רשת",
-                    "description": "תבחר ״ידני״ להגדרות תצוגת צומת רשת והתחבר לצומת(צמתי) הרשת שלך",
-                    "automatic": "אוטומטי",
-                    "manual": "ידני"
-                }
+            "networkInformation": {
+                "title": "Network information",
+                "connectedTo": "Connected to"
             },
             "configureNodeList": {
                 "title": "תצורת רשת",
@@ -379,7 +376,7 @@
                 "noNodesAuto": "לא נמצאו צומתי רשת, הבחירה האוטומטית תבחר במקום זאת"
             },
             "localProofOfWork": {
-                "title": "מערכת הוכחת עבודה",
+                "title": "Proof of work",
                 "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
@@ -1068,6 +1065,8 @@
                 "quantityTooLarge": "Quantity needs to be smaller than 64",
                 "emptyName": "Name is a required field",
                 "invalidURI": "Invalid URI, please provide a valid URI",
+                "notReachable": "URI not reachable, unable to check NFT type",
+                "royaltiesMustBeObject": "Royalties must be an object",
                 "royaltiesMustBeJSON": "Royalties must be a valid JSON",
                 "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
                 "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",
@@ -1979,9 +1978,17 @@
                 "short": "Loading blocked",
                 "long": "NFT file type does not match the expected media type"
             },
+            "notReachable": {
+                "short": "Not reachable",
+                "long": "NFT file is not reachable"
+            },
             "tooLargeFile": {
                 "short": "File is too large",
                 "long": "Loading NFT blocked because the file is too large"
+            },
+            "downloadTooLong": {
+                "short": "File took too long to download",
+                "long": "Loading NFT blocked because the file took too long to download"
             },
             "corsError": {
                 "short": "Loading blocked",

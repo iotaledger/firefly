@@ -13,7 +13,8 @@ export function validateSendConfirmation(outputOptions: OutputOptions, outputTyp
     const { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(outputTypes)
     const expirationDateTime = convertUnixTimestampToDate(outputOptions?.unlocks?.expirationUnixTime)
 
-    if (balance < amount + storageDeposit || balance < amount + giftedStorageDeposit) {
+    const isNft = !!outputOptions?.assets?.nftId
+    if (!isNft && (balance < amount + storageDeposit || balance < amount + giftedStorageDeposit)) {
         throw new InsufficientFundsForStorageDepositError()
     } else if (expirationDateTime && !isValidExpirationDateTime(expirationDateTime)) {
         throw new InvalidExpirationDateTimeError()

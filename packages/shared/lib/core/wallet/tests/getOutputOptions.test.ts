@@ -1,8 +1,7 @@
 import { CoinType } from '@iota/wallet/out/types'
 
-import { Converter, convertDateToUnixTimestamp } from '@core/utils'
 import { activeProfileId } from '@core/profile/stores'
-import { addGasBudget, getLayer2MetadataForTransfer } from '@core/layer-2/utils'
+import { GAS_BUDGET } from '@core/layer-2/constants'
 
 import { getOutputOptions } from '../utils'
 import { ReturnStrategy, TokenStandard, VerifiedStatus } from '../enums'
@@ -18,7 +17,7 @@ const PERSISTED_ASSET_SHIMMER: IPersistedAsset = {
 }
 const tag = 'tag'
 const metadata = 'metadata'
-const expirationDate = new Date()
+const expirationDate = new Date('2023-03-30T08:04:34.932Z')
 const recipientAddress = 'rms1qqqp07ychhkc3u68ueug0zqq9g0wtfgeatynr6ksm9jwud30rvlkyqnhpl5'
 const senderAddress = 'rms1abcp07ychhkc3u68ueug0zqq9g0wtfgeatynr6ksm9jwud30rvlkyqnhdef'
 const amount = '1000000000'
@@ -68,7 +67,7 @@ describe('File: getOutputOptions.ts', () => {
     let newTransactionDetails: NewTransactionDetails
 
     beforeAll(() => {
-        // TODO: refactor getOutpuOptions to not rely on this store
+        // TODO: refactor getOutputOptions to not rely on this store
         activeProfileId.set('id')
     })
 
@@ -84,7 +83,7 @@ describe('File: getOutputOptions.ts', () => {
             recipientAddress,
             amount,
             unlocks: {},
-            features: { metadata: Converter.utf8ToHex(metadata), tag: Converter.utf8ToHex(tag) },
+            features: { metadata: '0x6d65746164617461', tag: '0x746167' },
             storageDeposit: { returnStrategy: ReturnStrategy.Return },
         }
         expect(output).toStrictEqual(expectedOutput)
@@ -101,7 +100,7 @@ describe('File: getOutputOptions.ts', () => {
             recipientAddress,
             amount,
             features: {},
-            unlocks: { expirationUnixTime: convertDateToUnixTimestamp(expirationDate) },
+            unlocks: { expirationUnixTime: 1680163475 },
             storageDeposit: { returnStrategy: ReturnStrategy.Return },
         }
         expect(output).toStrictEqual(expectedOutput)
@@ -127,7 +126,7 @@ describe('File: getOutputOptions.ts', () => {
                 ],
             },
             features: {},
-            unlocks: { expirationUnixTime: convertDateToUnixTimestamp(expirationDate) },
+            unlocks: { expirationUnixTime: 1680163475 },
             storageDeposit: { returnStrategy: ReturnStrategy.Return },
         }
         expect(output).toStrictEqual(expectedOutput)
@@ -143,12 +142,13 @@ describe('File: getOutputOptions.ts', () => {
 
         const expectedOutput = {
             recipientAddress: layer2Parameters.networkAddress,
-            amount: addGasBudget(amount),
+            amount: (Number(GAS_BUDGET) + Number(amount)).toString(),
             features: {
-                metadata: getLayer2MetadataForTransfer(newTransactionDetails),
+                metadata:
+                    '0x00000000025e4b3ca1e3f42320a1070000000000010000000100611f00000003010000070c000c30680e00000090000f0ea000060009000d3000000000000000ca9a3b00000000020000000000',
                 sender: senderAddress,
             },
-            unlocks: { expirationUnixTime: convertDateToUnixTimestamp(expirationDate) },
+            unlocks: { expirationUnixTime: 1680163475 },
             storageDeposit: { returnStrategy: ReturnStrategy.Return },
         }
         expect(output).toStrictEqual(expectedOutput)
@@ -165,7 +165,7 @@ describe('File: getOutputOptions.ts', () => {
 
         const expectedOutput = {
             recipientAddress: layer2Parameters.networkAddress,
-            amount: addGasBudget('0'),
+            amount: GAS_BUDGET.toString(),
             assets: {
                 nativeTokens: [
                     {
@@ -174,8 +174,38 @@ describe('File: getOutputOptions.ts', () => {
                     },
                 ],
             },
-            features: { metadata: getLayer2MetadataForTransfer(newTransactionDetails), sender: senderAddress },
-            unlocks: { expirationUnixTime: convertDateToUnixTimestamp(expirationDate) },
+            features: {
+                metadata:
+                    '0x00000000025e4b3ca1e3f42320a1070000000000010000000100611f00000003010000070c000c30680e00000090000f0ea000060009000d3000000000000000ca9a3b00000000020000000000',
+                sender: senderAddress,
+            },
+            unlocks: { expirationUnixTime: 1680163475 },
+            storageDeposit: { returnStrategy: ReturnStrategy.Return },
+        }
+        expect(output).toStrictEqual(expectedOutput)
+    })
+
+    it('should return output options for nft to layer 2', () => {
+        newTransactionDetails = {
+            type: NewTransactionType.NftTransfer,
+            recipient: baseTransaction.recipient,
+            nftId,
+            layer2Parameters,
+        }
+        const output = getOutputOptions(newTransactionDetails)
+
+        const expectedOutput = {
+            recipientAddress: layer2Parameters.networkAddress,
+            amount: GAS_BUDGET.toString(),
+            assets: {
+                nftId,
+            },
+            features: {
+                metadata:
+                    '0x00000000025e4b3ca1e3f42320a1070000000000010000000100611f00000003010000070c000c30680e00000090000f0ea000060009000d300000000000000000000000000000020000000100cd9430ff870a22f81f92428e5c06975fa3ec1a993331aa3db9fb2298e931ade1',
+                sender: senderAddress,
+            },
+            unlocks: {},
             storageDeposit: { returnStrategy: ReturnStrategy.Return },
         }
         expect(output).toStrictEqual(expectedOutput)
@@ -197,7 +227,7 @@ describe('File: getOutputOptions.ts', () => {
                 nftId,
             },
             features: {},
-            unlocks: { expirationUnixTime: convertDateToUnixTimestamp(expirationDate) },
+            unlocks: { expirationUnixTime: 1680163475 },
             storageDeposit: { returnStrategy: ReturnStrategy.Return },
         }
         expect(output).toStrictEqual(expectedOutput)
@@ -224,7 +254,7 @@ describe('File: getOutputOptions.ts', () => {
                 ],
             },
             features: {},
-            unlocks: { expirationUnixTime: convertDateToUnixTimestamp(expirationDate) },
+            unlocks: { expirationUnixTime: 1680163475 },
             storageDeposit: { returnStrategy: ReturnStrategy.Return },
         }
         expect(output).toStrictEqual(expectedOutput)
@@ -242,7 +272,7 @@ describe('File: getOutputOptions.ts', () => {
             recipientAddress,
             amount,
             features: {},
-            unlocks: { expirationUnixTime: convertDateToUnixTimestamp(expirationDate) },
+            unlocks: { expirationUnixTime: 1680163475 },
             storageDeposit: { returnStrategy: ReturnStrategy.Return },
         }
         expect(output).toStrictEqual(expectedOutput)
@@ -261,7 +291,7 @@ describe('File: getOutputOptions.ts', () => {
             recipientAddress,
             amount,
             features: {},
-            unlocks: { expirationUnixTime: convertDateToUnixTimestamp(expirationDate) },
+            unlocks: { expirationUnixTime: 1680163475 },
             storageDeposit: { returnStrategy: ReturnStrategy.Gift },
         }
         expect(output).toStrictEqual(expectedOutput)

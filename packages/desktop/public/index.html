@@ -9,9 +9,9 @@
                 default-src 'self';
                 connect-src 'self' https://*;
                 object-src 'none';
-                img-src data: *;
+                img-src 'self' data:;
                 style-src 'self' 'unsafe-inline';
-                media-src  *
+                media-src 'self' data:;
             "
         />
 

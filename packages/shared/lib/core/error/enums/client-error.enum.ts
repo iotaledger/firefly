@@ -3,5 +3,6 @@ export enum ClientError {
     MigrationRequired = 'migrationRequired',
     NoSyncedNode = 'noSyncedNode',
     NotEnoughFundsToClaim = 'notEnoughFundsToClaim',
+    InsufficientAmount = 'insufficientAmount',
     TimeNotSynced = 'timeNotSynced',
 }

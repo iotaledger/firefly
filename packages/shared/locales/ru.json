@@ -260,6 +260,16 @@
                 "title": "Общее",
                 "description": "Настройте внешний вид приложения и другие общие настройки"
             },
+            "profile": {
+                "title": "Профиль",
+                "description": "Измени имя профиля или установи аватар"
+            },
+            "network": {
+                "title": "Network"
+            },
+            "collectibles": {
+                "title": "Collectibles"
+            },
             "security": {
                 "title": "Настройки Безопасности",
                 "description": "Измени пароль и настрой параметры безопасности"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "Помощь и Информация",
                 "description": "Найди ответ на вопрос или получи помощь для проблемы"
-            },
-            "profile": {
-                "title": "Профиль",
-                "description": "Измени имя профиля или установи аватар"
             },
             "sync": {
                 "title": "Синхронизировать кошельки",
@@ -306,8 +312,12 @@
                 "description": "Экспорт в файл Stronghold - полная зашифрованная резервная копия ваших кошельков и последней истории транзакций"
             },
             "appLock": {
-                "title": "Автоматическая блокировка",
+                "title": "Automatic logout",
                 "description": "Время бездействия до блокировки кошелька и выхода из системы"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold Timeout",
+                "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
                 "title": "Максимальный размер медиафайла",
@@ -346,22 +356,9 @@
                 "title": "Глубокие ссылки",
                 "description": "Автоматически заполнять данные транзакций в Firefly при нажатии на глубокую ссылку, начинающуюся с {appProtocol}://"
             },
-            "networkConfiguration": {
-                "title": "Конфигурация сети",
-                "title2": "Конфигурация сети",
-                "description": {
-                    "dev": "Ваши сетевые настройки будут обновляться автоматически в соответствии с текущей конфигурацией узла (переключение сети приведет к сбросу состояния кошелька)",
-                    "nonDev": "Ваши сетевые настройки будут обновляться автоматически в соответствии с текущей настройкой узла"
-                },
-                "switchedNetworks": "Сеть успешно переключена на \"{networkName}\".",
-                "resetWallet": "Состояние вашего кошелька было сброшено.",
-                "connectedTo": "Подключено к",
-                "nodeConfiguration": {
-                    "title": "Выбор узла",
-                    "description": "Выберите \"Вручную\" для настройки параметров узла и подключения к собственному узлу (узлам)",
-                    "automatic": "Автоматически",
-                    "manual": "Вручную"
-                }
+            "networkInformation": {
+                "title": "Network information",
+                "connectedTo": "Connected to"
             },
             "configureNodeList": {
                 "title": "Настройка узла",
@@ -379,8 +376,8 @@
                 "noNodesAuto": "Нет узлов, вместо них будет использоваться автоматический выбор"
             },
             "localProofOfWork": {
-                "title": "Доказательство Работы (PoW)",
-                "description": "Завершите подтверждение работы локально на вашем устройстве или аутсорсите на узел"
+                "title": "Proof of work",
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "Журнал ошибок",
@@ -1068,6 +1065,8 @@
                 "quantityTooLarge": "Quantity needs to be smaller than 64",
                 "emptyName": "Name is a required field",
                 "invalidURI": "Invalid URI, please provide a valid URI",
+                "notReachable": "URI not reachable, unable to check NFT type",
+                "royaltiesMustBeObject": "Royalties must be an object",
                 "royaltiesMustBeJSON": "Royalties must be a valid JSON",
                 "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
                 "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",
@@ -1779,7 +1778,7 @@
             "error": "Произошла ошибка при востребовании. Попробуйте еще раз."
         },
         "vote": {
-            "success": "Голоса успешно приняты"
+            "success": "Votes successfully cast"
         },
         "stopVoting": {
             "success": "Голосование успешно остановлено"
@@ -1979,9 +1978,17 @@
                 "short": "Загрузка блокирована",
                 "long": "Тип файла NFT не соответствует ожидаемому типу медиафайла"
             },
+            "notReachable": {
+                "short": "Not reachable",
+                "long": "NFT file is not reachable"
+            },
             "tooLargeFile": {
                 "short": "Файл слишком большой",
                 "long": "Загрузка NFT заблокирована из-за слишком большого размера файла"
+            },
+            "downloadTooLong": {
+                "short": "File took too long to download",
+                "long": "Loading NFT blocked because the file took too long to download"
             },
             "corsError": {
                 "short": "Загрузка блокирована",

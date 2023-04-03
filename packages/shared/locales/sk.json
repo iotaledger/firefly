@@ -260,6 +260,16 @@
                 "title": "General",
                 "description": "Configure your app's appearance and other general settings"
             },
+            "profile": {
+                "title": "Profil",
+                "description": "Zmeniť názov vášho profilu alebo nastaviť obrázok"
+            },
+            "network": {
+                "title": "Network"
+            },
+            "collectibles": {
+                "title": "Collectibles"
+            },
             "security": {
                 "title": "Zabezpečenie",
                 "description": "Zmeňte svoje heslo a upravte nastavenia bezpečnosti"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "Pomoc a informácie",
                 "description": "Nájsť odpoveď na otázku alebo získať pomoc s problémom"
-            },
-            "profile": {
-                "title": "Profil",
-                "description": "Zmeniť názov vášho profilu alebo nastaviť obrázok"
             },
             "sync": {
                 "title": "Synchronizovať peňaženky",
@@ -306,8 +312,12 @@
                 "description": "Exportovať do Stronghold súboru - kompletná šifrovaná záloha vašich peňaženiek a najnovšej histórie transakcii"
             },
             "appLock": {
-                "title": "Automatické uzamknutie",
+                "title": "Automatic logout",
                 "description": "Čas nečinnosti, po ktorom sa vaše peňaženky uzamknú a budete odhlásený"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold Timeout",
+                "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
                 "title": "Maximum media size",
@@ -346,22 +356,9 @@
                 "title": "Deep links",
                 "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
-            "networkConfiguration": {
-                "title": "Nastavenie siete",
-                "title2": "Konfigurácia siete",
-                "description": {
-                    "dev": "Nastavenia vašej siete sa aktualizujú automaticky podľa aktuálnych nastavení uzla (pepínanie medzi sieťami spôsobi obnovenie stavu peňaženky)",
-                    "nonDev": "Nastavenia vašej siete sa aktualizujú automaticky podľa aktuálnych nastavení uzla"
-                },
-                "switchedNetworks": "Sieť úspešne zmenaná na \"{networkName}\".",
-                "resetWallet": "Stav vašej peňaženky bol obnovený.",
-                "connectedTo": "Pripojené k",
-                "nodeConfiguration": {
-                    "title": "Výber uzla",
-                    "description": "Zvoľte \"Manuálne\" pre konfiguráciu uzlov a pripojenie sa na vlastný uzol(y)",
-                    "automatic": "Automatické",
-                    "manual": "Príručka"
-                }
+            "networkInformation": {
+                "title": "Network information",
+                "connectedTo": "Connected to"
             },
             "configureNodeList": {
                 "title": "Konfigurácia nodu",
@@ -379,8 +376,8 @@
                 "noNodesAuto": "Neexistujú žiadne uzly, bude použitý automatický výber"
             },
             "localProofOfWork": {
-                "title": "Proof of Work",
-                "description": "Vykonajte proof of work lokálne na vašom zariadení alebo ho prenechajte na uzol"
+                "title": "Proof of work",
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "Záznam chýb",
@@ -1068,6 +1065,8 @@
                 "quantityTooLarge": "Quantity needs to be smaller than 64",
                 "emptyName": "Name is a required field",
                 "invalidURI": "Invalid URI, please provide a valid URI",
+                "notReachable": "URI not reachable, unable to check NFT type",
+                "royaltiesMustBeObject": "Royalties must be an object",
                 "royaltiesMustBeJSON": "Royalties must be a valid JSON",
                 "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
                 "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",
@@ -1979,9 +1978,17 @@
                 "short": "Loading blocked",
                 "long": "NFT file type does not match the expected media type"
             },
+            "notReachable": {
+                "short": "Not reachable",
+                "long": "NFT file is not reachable"
+            },
             "tooLargeFile": {
                 "short": "File is too large",
                 "long": "Loading NFT blocked because the file is too large"
+            },
+            "downloadTooLong": {
+                "short": "File took too long to download",
+                "long": "Loading NFT blocked because the file took too long to download"
             },
             "corsError": {
                 "short": "Loading blocked",
