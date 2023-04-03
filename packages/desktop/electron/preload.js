@@ -74,10 +74,10 @@ function deleteOldLogs(path, currentVersion) {
         const filePath = path + '/' + file
         const stat = fs.statSync(filePath)
 
-        const isOlderThan30Days = new Date() - new Date(stat.mtime) > 15 * dayInMilliSeconds
+        const isOlderThan30Days = new Date() - new Date(stat.mtime) > 30 * dayInMilliSeconds
         const version = file.match(/wallet-v((\w*.)*)-d((\w*.)*).log/)?.[1]
         const isDifferentVersion = version !== currentVersion
-        if (!version || isDifferentVersion || isOlderThan30Days) {
+        if (isDifferentVersion || isOlderThan30Days) {
             fs.unlinkSync(filePath)
         }
     })
