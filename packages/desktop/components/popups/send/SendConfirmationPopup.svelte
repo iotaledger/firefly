@@ -228,7 +228,7 @@
                         bind:this={expirationTimePicker}
                         bind:value={expirationDate}
                         initialSelected={initialExpirationDate}
-                        disabled={disableChangeExpiration}
+                        disabled={disableChangeExpiration || isTransferring}
                     />
                 </KeyValueBox>
             {/if}

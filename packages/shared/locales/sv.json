@@ -260,6 +260,16 @@
                 "title": "Allmänt",
                 "description": "Konfigurera appens utseende och andra allmänna inställningar"
             },
+            "profile": {
+                "title": "Profil",
+                "description": "Ändra ditt profilnamn eller välj en avatar"
+            },
+            "network": {
+                "title": "Network"
+            },
+            "collectibles": {
+                "title": "Collectibles"
+            },
             "security": {
                 "title": "Säkerhet",
                 "description": "Ändra ditt lösenord och anpassa efter säkerhetsinställningar"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "Hjälp & Information",
                 "description": "Hitta svaret på en fråga eller få hjälp med ett problem"
-            },
-            "profile": {
-                "title": "Profil",
-                "description": "Ändra ditt profilnamn eller välj en avatar"
             },
             "sync": {
                 "title": "Synkronisera plånböcker",
@@ -306,8 +312,12 @@
                 "description": "Exportera till en Stronghold-fil - en komplett krypterad säkerhetskopia av dina plånböcker och senaste transaktionshistorik"
             },
             "appLock": {
-                "title": "Automatiskt lås",
+                "title": "Automatic logout",
                 "description": "Inaktivitetstid innan din plånbok låses och du loggas ut"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold Timeout",
+                "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
                 "title": "Maximal mediestorlek",
@@ -346,22 +356,9 @@
                 "title": "Hyperlänkar",
                 "description": "Fyll automatiskt i transaktionsdata i Firefly när du klickar på en hyperlänk som börjar med {appProtocol}://"
             },
-            "networkConfiguration": {
-                "title": "Nätverkskonfiguration",
-                "title2": "Nätverkskonfiguration",
-                "description": {
-                    "dev": "Dina nätverksinställningar uppdateras automatiskt enligt nuvarande nodkonfiguration (byte av nätverk resulterar i att plånbokens tillstånd återställs)",
-                    "nonDev": "Dina nätverksinställningar uppdateras automatiskt enligt nuvarande nodkonfiguration"
-                },
-                "switchedNetworks": "Nätverket ändrades framgångsrikt till \"{networkName}\".",
-                "resetWallet": "Plånbokens tillstånd har återställts.",
-                "connectedTo": "Ansluten till",
-                "nodeConfiguration": {
-                    "title": "Val av nod",
-                    "description": "Välj \"Manuell\" för att konfigurera nodinställningarna och ansluta till din egen nod",
-                    "automatic": "Automatisk",
-                    "manual": "Manuell"
-                }
+            "networkInformation": {
+                "title": "Network information",
+                "connectedTo": "Connected to"
             },
             "configureNodeList": {
                 "title": "Konfiguration av nod",
@@ -380,7 +377,7 @@
             },
             "localProofOfWork": {
                 "title": "Proof of work",
-                "description": "Genomför Proof of Work (PoW) lokalt på din enhet eller outsourca till noden"
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "Felmeddelanden",
@@ -1068,6 +1065,8 @@
                 "quantityTooLarge": "Quantity needs to be smaller than 64",
                 "emptyName": "Name is a required field",
                 "invalidURI": "Invalid URI, please provide a valid URI",
+                "notReachable": "URI not reachable, unable to check NFT type",
+                "royaltiesMustBeObject": "Royalties must be an object",
                 "royaltiesMustBeJSON": "Royalties must be a valid JSON",
                 "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
                 "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",
@@ -1979,9 +1978,17 @@
                 "short": "Loading blocked",
                 "long": "NFT file type does not match the expected media type"
             },
+            "notReachable": {
+                "short": "Not reachable",
+                "long": "NFT file is not reachable"
+            },
             "tooLargeFile": {
                 "short": "File is too large",
                 "long": "Loading NFT blocked because the file is too large"
+            },
+            "downloadTooLong": {
+                "short": "File took too long to download",
+                "long": "Loading NFT blocked because the file took too long to download"
             },
             "corsError": {
                 "short": "Loading blocked",

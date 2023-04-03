@@ -260,6 +260,16 @@
                 "title": "General",
                 "description": "Configure your app's appearance and other general settings"
             },
+            "profile": {
+                "title": "Профил",
+                "description": "Промяна на името на профила и задаване на снимка"
+            },
+            "network": {
+                "title": "Network"
+            },
+            "collectibles": {
+                "title": "Collectibles"
+            },
             "security": {
                 "title": "Сигурност",
                 "description": "Промяна на паролата и промяна на настройки за сигурността"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "Помощна информация",
                 "description": "Намерете отговор на въпрос или помъчете помощ за проблем"
-            },
-            "profile": {
-                "title": "Профил",
-                "description": "Промяна на името на профила и задаване на снимка"
             },
             "sync": {
                 "title": "Синхронизация портфейли",
@@ -306,8 +312,12 @@
                 "description": "Експортиране в Stronghold файл - пълно криптирано резервно копие на портфейла и история на последните трансакции"
             },
             "appLock": {
-                "title": "Автоматично заключване",
+                "title": "Automatic logout",
                 "description": "Време на неактивност преди заключване на портфейла и изход от профила"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold Timeout",
+                "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
                 "title": "Maximum media size",
@@ -346,22 +356,9 @@
                 "title": "Deep links",
                 "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
-            "networkConfiguration": {
-                "title": "Мрежови настройки",
-                "title2": "Мрежова конфигурация",
-                "description": {
-                    "dev": "Мрежовите настройки ще бъдат автоматично обновени според тези на текущият нод (промяната на мрежа ще довете до нулиране на състоятнието на портфейла)",
-                    "nonDev": "Настройките на мрежата ще се обновят автоматично според конфигурацията на текущият нод"
-                },
-                "switchedNetworks": "Мрежата беше успешно сменена с \"{networkName}\".",
-                "resetWallet": "Състоянието на портфейла беше нулирано.",
-                "connectedTo": "Свързан към",
-                "nodeConfiguration": {
-                    "title": "Избор на node сървър",
-                    "description": "Изберете \"Ръчен\", за да управлявате настройките за node сървър и да се свържете към собствен node сървър(и)",
-                    "automatic": "Автоматично",
-                    "manual": "Ръчно"
-                }
+            "networkInformation": {
+                "title": "Network information",
+                "connectedTo": "Connected to"
             },
             "configureNodeList": {
                 "title": "Node конфигурация",
@@ -379,8 +376,8 @@
                 "noNodesAuto": "Няма избрани Node сървъри, автоматичен избор ще бъде използван"
             },
             "localProofOfWork": {
-                "title": "Доказателство за работа PoW",
-                "description": "Извършете PoW доказателството за работа локално на устройството или пренасочете към Node сървър"
+                "title": "Proof of work",
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "Регистър на грешки",
@@ -1068,6 +1065,8 @@
                 "quantityTooLarge": "Quantity needs to be smaller than 64",
                 "emptyName": "Name is a required field",
                 "invalidURI": "Invalid URI, please provide a valid URI",
+                "notReachable": "URI not reachable, unable to check NFT type",
+                "royaltiesMustBeObject": "Royalties must be an object",
                 "royaltiesMustBeJSON": "Royalties must be a valid JSON",
                 "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
                 "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",
@@ -1979,9 +1978,17 @@
                 "short": "Loading blocked",
                 "long": "NFT file type does not match the expected media type"
             },
+            "notReachable": {
+                "short": "Not reachable",
+                "long": "NFT file is not reachable"
+            },
             "tooLargeFile": {
                 "short": "File is too large",
                 "long": "Loading NFT blocked because the file is too large"
+            },
+            "downloadTooLong": {
+                "short": "File took too long to download",
+                "long": "Loading NFT blocked because the file took too long to download"
             },
             "corsError": {
                 "short": "Loading blocked",

@@ -260,6 +260,16 @@
                 "title": "Generale",
                 "description": "Configura l'aspetto della tua app e altre impostazioni generali"
             },
+            "profile": {
+                "title": "Profilo",
+                "description": "Cambia il nome del tuo profilo o imposta un avatar"
+            },
+            "network": {
+                "title": "Network"
+            },
+            "collectibles": {
+                "title": "Collectibles"
+            },
             "security": {
                 "title": "Sicurezza",
                 "description": "Modifica la tua password e regola le impostazioni correlate alla sicurezza"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "Supporto e Informazioni",
                 "description": "Trova la risposta a una domanda o ricevi supporto con un problema"
-            },
-            "profile": {
-                "title": "Profilo",
-                "description": "Cambia il nome del tuo profilo o imposta un avatar"
             },
             "sync": {
                 "title": "Sincronizza i portafogli",
@@ -306,8 +312,12 @@
                 "description": "Esporta in un file Stronghold - un backup crittografato completo del tuo wallet e l'ultima cronologia delle transazioni"
             },
             "appLock": {
-                "title": "Blocco Automatico",
+                "title": "Automatic logout",
                 "description": "Tempo d'inattività prima del blocco dei tuoi portafogli e della tua disconnessione"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold Timeout",
+                "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
                 "title": "Dimensione massima media",
@@ -346,22 +356,9 @@
                 "title": "Deep links",
                 "description": "Riempi automaticamente i dati delle transazioni in Firefly facendo clic su un link che inizia con {appProtocol}://"
             },
-            "networkConfiguration": {
-                "title": "Configurazione di rete",
-                "title2": "Configurazione di rete",
-                "description": {
-                    "dev": "Le tue impostazioni di rete si aggiorneranno automaticamente secondo la configurazione corrente del nodo (cambiare reti risulterà nel ripristino dello stato del portafoglio)",
-                    "nonDev": "Le impostazioni di rete verranno aggiornate automaticamente in base alla configurazione del nodo corrente"
-                },
-                "switchedNetworks": "Rete commutata con successo a \"{networkName}\".",
-                "resetWallet": "Il tuo stato del portafoglio è stato resettato.",
-                "connectedTo": "Connesso a",
-                "nodeConfiguration": {
-                    "title": "Selezione del nodo",
-                    "description": "Selezionare \"Manuale\" per configurare le impostazioni del nodo e connettersi ai propri nodi",
-                    "automatic": "Automatico",
-                    "manual": "Manuale"
-                }
+            "networkInformation": {
+                "title": "Network information",
+                "connectedTo": "Connected to"
             },
             "configureNodeList": {
                 "title": "Configurazione del nodo",
@@ -379,8 +376,8 @@
                 "noNodesAuto": "Non ci sono nodi, verrà utilizzata la selezione automatica"
             },
             "localProofOfWork": {
-                "title": "Proof of Work",
-                "description": "Esegui la \"prova di lavoro\" localmente sul tuo dispositivo o richiede che la esegua il nodo"
+                "title": "Proof of work",
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "Registro degli errori",
@@ -1068,6 +1065,8 @@
                 "quantityTooLarge": "La quantità deve essere inferiore a 64",
                 "emptyName": "Nome è un campo obbligatorio",
                 "invalidURI": "URI non valido, fornire un URI valido",
+                "notReachable": "URI not reachable, unable to check NFT type",
+                "royaltiesMustBeObject": "Royalties must be an object",
                 "royaltiesMustBeJSON": "Le royalties devono essere un JSON valido",
                 "invalidAddress": "Indirizzo non valido, deve essere un indirizzo {networkHrp} valido al quale verranno inviate le royalties",
                 "invalidRoyaltyValue": "Valore non valido, deve essere un decimale numerico rappresentativo della percentuale richiesta. Ad esempio 0.05",
@@ -1779,7 +1778,7 @@
             "error": "Si è verificato un errore durante la richiesta. Riprova."
         },
         "vote": {
-            "success": "Votazione registrata correttamente"
+            "success": "Votes successfully cast"
         },
         "stopVoting": {
             "success": "Conto interrotto con successo"
@@ -1979,9 +1978,17 @@
                 "short": "Caricamento bloccato",
                 "long": "Il tipo di file NFT non corrisponde al tipo di media previsto"
             },
+            "notReachable": {
+                "short": "Not reachable",
+                "long": "NFT file is not reachable"
+            },
             "tooLargeFile": {
                 "short": "Il file è troppo grande",
                 "long": "Caricamento NFT bloccato perché il file è troppo grande"
+            },
+            "downloadTooLong": {
+                "short": "File took too long to download",
+                "long": "Loading NFT blocked because the file took too long to download"
             },
             "corsError": {
                 "short": "Caricamento bloccato",

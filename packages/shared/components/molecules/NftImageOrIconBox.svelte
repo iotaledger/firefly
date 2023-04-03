@@ -28,7 +28,7 @@
             <div
                 slot="placeholder"
                 class="
-                    w-full h-full 
+                    w-full h-full
                     {size === 'small' && 'p-1'}
                     {size === 'medium' && 'p-2'}
                     {size === 'large' && 'p-2'}
@@ -40,7 +40,7 @@
     {:else}
         <div
             class="
-                w-full h-full 
+                w-full h-full
                 {size === 'small' && 'p-1'}
                 {size === 'medium' && 'p-2'}
                 {size === 'large' && 'p-2'}

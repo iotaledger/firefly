@@ -1,17 +1,16 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { networkHrp } from '@core/network'
+    import { truncateString } from '@core/utils'
     import {
         ActivityDirection,
-        IPersistedAsset,
-        getFormattedAmountFromActivity,
-        TransactionActivity,
-        selectedAccountAssets,
-        getAssetFromPersistedAssets,
         getActivityTileTitle,
+        getAssetFromPersistedAssets,
+        getFormattedAmountFromActivity,
+        IPersistedAsset,
+        selectedAccountAssets,
+        TransactionActivity,
     } from '@core/wallet'
-    import { truncateString } from '@core/utils'
-    import { AssetIcon, ActivityTileContent } from 'shared/components'
+    import { ActivityTileContent, AssetIcon } from 'shared/components'
 
     export let activity: TransactionActivity
 
@@ -43,8 +42,7 @@
         }
         if (subject?.type === 'address') {
             const address = activity.parsedLayer2Metadata?.ethereumAddress ?? subject?.address
-            const hrpLength = activity.parsedLayer2Metadata ? '0x'.length : $networkHrp.length
-            return truncateString(address, hrpLength, 6)
+            return truncateString(address, 6, 6)
         }
         return localize('general.unknownAddress')
     }
