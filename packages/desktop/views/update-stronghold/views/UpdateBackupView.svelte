@@ -9,6 +9,7 @@
     import { exportStronghold } from '@contexts/settings'
 
     import { Icon as IconEnum } from '@auxiliary/icon'
+    import { showAppNotification } from '@auxiliary/notification'
 
     export let busy = false
     export let changedPassword: boolean
@@ -36,10 +37,26 @@
 
     async function onBackupClick(): Promise<void> {
         try {
-            await exportStronghold(password)
+            await exportStronghold(password, handleExportStrongholdResponse)
             onAdvanceView()
         } catch (err) {
             console.error(err)
+        }
+    }
+
+    function handleExportStrongholdResponse(cancelled: boolean, error: string): void {
+        if (!cancelled) {
+            if (error) {
+                showAppNotification({
+                    type: 'error',
+                    message: localize(error),
+                })
+            } else {
+                showAppNotification({
+                    type: 'info',
+                    message: localize('general.exportingStrongholdSuccess'),
+                })
+            }
         }
     }
 
