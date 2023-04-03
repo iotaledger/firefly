@@ -14,14 +14,14 @@ const { initMenu, contextMenu } = require('./lib/menu')
 const canSendCrashReports = () => {
     let sendCrashReports = loadJsonConfig('settings.json')?.sendCrashReports
     if (typeof sendCrashReports === 'undefined') {
-        sendCrashReports = false
+        sendCrashReports = true
         updateSettings({ sendCrashReports })
     }
 
     return sendCrashReports
 }
 
-const CAN_LOAD_SENTRY = app.isPackaged
+const CAN_LOAD_SENTRY = app.isPackaged && Boolean(process.env.SENTRY_DSN)
 const SEND_CRASH_REPORTS = CAN_LOAD_SENTRY && canSendCrashReports()
 
 let captureException = (..._) => {}
