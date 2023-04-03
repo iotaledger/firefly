@@ -1,6 +1,7 @@
 <script lang="ts">
     import { OnboardingLayout } from '@components'
-    import { Button, PinInput, Text, HTMLButtonType, TextType } from '@ui'
+    import { Button, Text, HTMLButtonType, TextType } from '@ui'
+    import { PinInput } from '@components'
     import {
         initialiseFirstShimmerClaimingAccount,
         initialisePincodeManager,
