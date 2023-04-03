@@ -12,7 +12,7 @@ const settingsFeatures = {
             enabled: true,
         },
         crashReporting: {
-            enabled: true,
+            enabled: false,
         },
         deepLinks: {
             enabled: true,
