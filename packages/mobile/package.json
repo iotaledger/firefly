@@ -36,6 +36,7 @@
         "@capacitor/device": "1.1.2",
         "@capacitor/keyboard": "^1.2.3",
         "@capacitor/splash-screen": "^1.2.2",
+        "@iota/wallet-mobile": "/home/amadeo/.mydevs/isdk/wallet/bindings/capacitorjs/",
         "capacitor-secure-storage-plugin": "^0.6.2",
         "shared": "0.2.0"
     }

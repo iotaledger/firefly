@@ -87,11 +87,10 @@
         bind:clientHeight={panelHeight}
         bind:clientWidth={panelWidth}
         class:moving
-        class="py-6 px-5 fixed w-full flex flex-col flex-auto overflow-hidden {fullScreen
-            ? 'h-screen'
+        class="pt-7 px-5 fixed w-full flex flex-col flex-auto overflow-hidden safe-area-bottom {fullScreen
+            ? enterFromSide ? 'h-screen safe-area-top-from-side' : 'safe-area-top'
             : ''} bg-white dark:bg-gray-800 {enterFromSide ? '' : 'rounded-t-2xl'}"
-        style="{enterFromSide ? `left: ${position}px;` : `bottom: ${position}px;`} {$isKeyboardOpen &&
-            `border-bottom: ${$keyboardHeight}px solid transparent`}"
+        style="{enterFromSide ? `left: ${position}px;` : `bottom: ${position}px;`} {$isKeyboardOpen && `border-bottom: ${$keyboardHeight}px solid transparent`}"
     >
         {#if enterFromSide === false}
             <decorator
@@ -126,4 +125,14 @@
             transition: none;
         }
     }
+    .safe-area-top {
+        height: calc(100vh - env(safe-area-inset-top) - 1.75rem);
+    }
+    .safe-area-top-from-side {
+        padding-top: calc(env(safe-area-inset-top) + 1.75rem);
+    }
+    .safe-area-bottom {
+        padding-bottom: calc(env(safe-area-inset-bottom) + 1.5rem);
+    }
+    
 </style>
