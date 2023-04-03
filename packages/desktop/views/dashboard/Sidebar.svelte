@@ -105,7 +105,7 @@
                 </div>
             {/each}
         </div>
-        <div class="flex flex-col  items-center">
+        <div class="flex flex-col items-center">
             <button
                 class="w-10 h-10 relative flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
                 on:click={profileModal?.open}
