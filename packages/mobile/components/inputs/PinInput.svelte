@@ -112,7 +112,7 @@
     <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
     <pin-input
         style="--pin-input-size: {PIN_LENGTH}"
-        class="{smaller ? 'h-16' : 'h-20'} w-full 
+        class="{smaller ? 'h-16' : 'h-20'} w-full
                 flex items-center justify-between relative z-0 rounded-xl border border-solid
                 bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700
                 {smaller ? 'h-14 pl-6 pr-4' : 'pl-10 pr-10'}"
