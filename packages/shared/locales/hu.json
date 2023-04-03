@@ -1065,6 +1065,7 @@
                 "quantityTooLarge": "A mennyiségnek többnek kell lennie mint 64",
                 "emptyName": "A név mezőt ki kell tölteni",
                 "invalidURI": "Érvénytelen URI, kérjük, érvényes URI-t adjon meg",
+                "notReachable": "URI nem elérhető, az NFT-típus ellenőrzése nem lehetséges",
                 "royaltiesMustBeObject": "A jogdíjnak objektum típusúnak kell lennie",
                 "royaltiesMustBeJSON": "A jogdíjcímnek érvényes JSON formátumúnak kell lennie",
                 "invalidAddress": "Érvénytelen cím, érvényes {networkHrp}-címnek kell lennie, ahová a jogdíjakat küldik",
@@ -1977,9 +1978,17 @@
                 "short": "Loading blocked",
                 "long": "NFT file type does not match the expected media type"
             },
+            "notReachable": {
+                "short": "Nem elérhető",
+                "long": "NFT-fájl nem elérhető"
+            },
             "tooLargeFile": {
                 "short": "File is too large",
                 "long": "Loading NFT blocked because the file is too large"
+            },
+            "downloadTooLong": {
+                "short": "A fájl letöltése túl sok időt vett igénybe",
+                "long": "Az NFT betöltése nem lehetséges, mert a fájl letöltése túl sok időt vett igénybe"
             },
             "corsError": {
                 "short": "Loading blocked",

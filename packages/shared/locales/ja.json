@@ -1065,6 +1065,7 @@
                 "quantityTooLarge": "Quantity needs to be smaller than 64",
                 "emptyName": "Name is a required field",
                 "invalidURI": "Invalid URI, please provide a valid URI",
+                "notReachable": "URI not reachable, unable to check NFT type",
                 "royaltiesMustBeObject": "Royalties must be an object",
                 "royaltiesMustBeJSON": "Royalties must be a valid JSON",
                 "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
@@ -1977,9 +1978,17 @@
                 "short": "Loading blocked",
                 "long": "NFT file type does not match the expected media type"
             },
+            "notReachable": {
+                "short": "Not reachable",
+                "long": "NFT file is not reachable"
+            },
             "tooLargeFile": {
                 "short": "File is too large",
                 "long": "Loading NFT blocked because the file is too large"
+            },
+            "downloadTooLong": {
+                "short": "File took too long to download",
+                "long": "Loading NFT blocked because the file took too long to download"
             },
             "corsError": {
                 "short": "Loading blocked",

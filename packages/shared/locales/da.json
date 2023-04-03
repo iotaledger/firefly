@@ -1065,6 +1065,7 @@
                 "quantityTooLarge": "Mængde skal være mindre end 64",
                 "emptyName": "Navn er obligatorisk",
                 "invalidURI": "URI ugyldig, angiv en gyldig i stedet",
+                "notReachable": "URI utilgængelig, NFT-type kan ikke tjekkes",
                 "royaltiesMustBeObject": "Royalties skal udgøre et objekt",
                 "royaltiesMustBeJSON": "Royalties skal være en gyldig JSON",
                 "invalidAddress": "Ugyldig adresse. Skal være en gyldig {networkHrp}-adresse, hvortil royalties sendes",
@@ -1977,9 +1978,17 @@
                 "short": "Loading blocked",
                 "long": "NFT file type does not match the expected media type"
             },
+            "notReachable": {
+                "short": "Utilgængelig",
+                "long": "NFT- fil utilgængelig"
+            },
             "tooLargeFile": {
                 "short": "File is too large",
                 "long": "Loading NFT blocked because the file is too large"
+            },
+            "downloadTooLong": {
+                "short": "Filen tog for lang tid at downloade",
+                "long": "Indlæsning af NFT blokeret, da filen tog for lang tid at downloade"
             },
             "corsError": {
                 "short": "Loading blocked",
