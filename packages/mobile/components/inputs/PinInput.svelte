@@ -4,6 +4,7 @@
     import { createEventDispatcher, onMount } from 'svelte'
     import { isValidPin, PIN_LENGTH } from '@core/utils'
 
+    const inputElements: HTMLInputElement[] = []
     const dispatch = createEventDispatcher()
 
     export let value = ''
@@ -24,8 +25,6 @@
         dispatch('filled')
     }
 
-    const inputElements: HTMLInputElement[] = []
-
     onMount(() => {
         if (autofocus) {
             focus()
@@ -33,8 +32,7 @@
     })
 
     function onBackspace() {
-        // Search for the last child with a value
-        // and remove it
+        // Search for the last child with a value and remove it
         for (let j = 1; j <= PIN_LENGTH; j++) {
             if (j === PIN_LENGTH || !inputs[j]) {
                 inputs[j - 1] = ''
