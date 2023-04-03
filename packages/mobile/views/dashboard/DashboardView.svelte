@@ -29,8 +29,8 @@
 
 <Idle />
 {#if $selectedAccount}
-    <dashboard-view class="flex flex-col w-screen h-screen bg-gray-50 dark:bg-gray-900">
-        <div class="px-5 py-6">
+    <dashboard-view class="flex flex-col w-screen h-full bg-gray-50 dark:bg-gray-900">
+        <div class="px-5 pt-4 pb-6">
             <TopBar />
             <div class="flex justify-center w-full mt-5">
                 <TogglableAssetBalanceLabel
