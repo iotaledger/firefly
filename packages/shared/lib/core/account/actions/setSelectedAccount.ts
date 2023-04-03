@@ -4,8 +4,11 @@ import { resetSendOptionIndex } from '@core/wallet/stores'
 
 import { selectedAccountIndex } from '../stores'
 import { clearFilters } from '@core/utils'
+import { resetNftDownloadQueue } from '@core/nfts'
 
 export function setSelectedAccount(index: number): void {
+    resetNftDownloadQueue(true)
+
     const account = get(activeAccounts)?.find((_account) => _account.index === index)
     if (account) {
         selectedAccountIndex.set(index)

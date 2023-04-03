@@ -741,7 +741,7 @@
         "deleteAccount": {
             "title": "{name} löschen?",
             "body": "Bist Du sicher, dass diese Wallet gelöscht werden soll?",
-            "hint": "Note: once deleted, you can restore this wallet by using the \"Wallet Finder\" in the settings.",
+            "hint": "Hinweis: Wenn du die Wallet gelöscht hast, kannst du sie mit dem \"Wallet-Finder\" in den Einstellungen wiederherstellen.",
             "typePassword": "Gib dein Passwort zur Bestätigung ein.",
             "hideAccount": "Wallet löschen",
             "errorTitle": "{name} kann nicht gelöscht werden",
@@ -1065,6 +1065,7 @@
                 "quantityTooLarge": "Menge muss kleiner als 64 sein",
                 "emptyName": "Name ist ein Pflichtfeld",
                 "invalidURI": "Ungültige URL, bitte gib eine gültige URL ein",
+                "notReachable": "URL nicht erreichbar, NFT Typ kann nicht überprüft werden",
                 "royaltiesMustBeObject": "Lizenzgebühren müssen ein Objekt sein",
                 "royaltiesMustBeJSON": "Lizenzgebühren müssen ein gültiges JSON sein",
                 "invalidAddress": "Ungültige Adresse, muss eine gültige {networkHrp} Adresse sein, an die Lizenzgebühren gesendet werden",
@@ -1977,9 +1978,17 @@
                 "short": "Laden blockiert",
                 "long": "NFT-Dateityp stimmt nicht mit dem erwarteten Medientyp überein"
             },
+            "notReachable": {
+                "short": "Nicht erreichbar",
+                "long": "NFT-Datei ist nicht erreichbar"
+            },
             "tooLargeFile": {
                 "short": "Datei ist zu groß",
                 "long": "Laden des NFT's geblockt, weil die Datei zu groß ist"
+            },
+            "downloadTooLong": {
+                "short": "Datei dauerte zu lange zum Herunterladen",
+                "long": "Herunterladen des NFT wurde gesperrt, weil die Datei zu lange zum Herunterladen benötigt hat"
             },
             "corsError": {
                 "short": "Laden blockiert",

@@ -1,28 +1,20 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import {
-        Button,
-        Dropdown,
-        Error,
-        FontWeight,
-        OptionalInput,
-        Text,
-        TextInput,
-        TextType,
-        TooltipIcon,
-    } from 'shared/components'
+    import { Button, Error, FontWeight, OptionalInput, Text, TextInput, TextType, TooltipIcon } from 'shared/components'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { BaseError } from '@core/error/classes'
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
     import { networkHrp } from '@core/network/stores'
-    import { SupportedMimeType } from '@core/nfts/enums'
     import { MimeType } from '@core/nfts/types'
     import { isValidUri } from '@core/utils/validation'
     import { validateBech32Address } from '@core/utils/crypto'
     import { TokenStandard } from '@core/wallet/enums'
     import { mintNftDetails, setMintNftDetails } from '@core/wallet/stores'
     import { IMintNftDetails } from '@core/wallet'
+    import { fetchWithTimeout } from '@core/nfts/utils/fetchWithTimeout'
+    import { composeUrlFromNftUri } from '@core/nfts'
+    import { HttpHeader } from '@core/utils'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -84,24 +76,17 @@
         },
     }
 
-    let typeError: string, uriError: string, nameError: string
+    let uriError: string, nameError: string
 
     const error: BaseError = null
-
-    const nftTypeOptions = Object.keys(SupportedMimeType)
-        .filter((key) => Number.isNaN(Number(key)))
-        .map((type) => ({
-            label: type as MimeType,
-            value: type as MimeType,
-        }))
 
     function onCancelClick(): void {
         closePopup()
     }
 
-    function onContinueClick(): void {
+    async function onContinueClick(): Promise<void> {
         resetErrors()
-        const valid = validate()
+        const valid = await validate()
         if (valid) {
             setMintNftDetails(convertInputsToMetadataType())
             openPopup({
@@ -111,15 +96,7 @@
         }
     }
 
-    function onSelectNftTypeClick(item: { label: MimeType; value: MimeType }): void {
-        type = item.value
-    }
-
-    function validate(): boolean {
-        if (!nftTypeOptions.map((e) => e.value).includes(type as MimeType)) {
-            typeError = localize('popups.mintNftForm.errors.invalidMimetype')
-        }
-
+    async function validate(): Promise<boolean> {
         if (name.length === 0) {
             nameError = localize('popups.mintNftForm.errors.emptyName')
         }
@@ -135,6 +112,17 @@
 
         if (uri.length === 0 || !isValidUri(uri)) {
             uriError = localize('popups.mintNftForm.errors.invalidURI')
+        } else {
+            try {
+                const response = await fetchWithTimeout(composeUrlFromNftUri(uri), 1, { method: 'HEAD' })
+                if (response.status === 200 || response.status === 304) {
+                    type = response.headers.get(HttpHeader.ContentType)
+                } else {
+                    uriError = localize('popups.mintNftForm.errors.notReachable')
+                }
+            } catch (err) {
+                uriError = localize('popups.mintNftForm.errors.notReachable')
+            }
         }
 
         if (optionalInputs.royalties.isOpen) {
@@ -147,15 +135,12 @@
 
         const optionalInputsErrors = Object.values(optionalInputs).map((optionalInput) => optionalInput.error)
 
-        const hasErrors = Object.values({ ...optionalInputsErrors, typeError, nameError, uriError }).some(
-            (e) => e !== ''
-        )
+        const hasErrors = Object.values({ ...optionalInputsErrors, nameError, uriError }).some((e) => e !== '')
 
         return !hasErrors
     }
 
     function resetErrors(): void {
-        typeError = ''
         nameError = ''
         uriError = ''
 
@@ -275,17 +260,6 @@
     </Text>
 
     <popup-inputs class="block space-y-4 max-h-100 scrollable-y overflow-x-hidden flex-1">
-        <Dropdown
-            bind:value={type}
-            bind:error={typeError}
-            onSelect={onSelectNftTypeClick}
-            label={localize('general.type')}
-            placeholder={localize('general.type')}
-            items={nftTypeOptions}
-            fontSize="sm"
-            lineHeight="140"
-            fontWeight={FontWeight.medium}
-        />
         <TextInput
             bind:value={uri}
             bind:error={uriError}
