@@ -43,7 +43,7 @@
             </div>
         </strength-meter>
     {/if}
-    <div class="flex  w-full relative">
+    <div class="flex w-full relative">
         <Input
             bind:error
             bind:value

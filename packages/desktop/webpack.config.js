@@ -211,7 +211,13 @@ module.exports = [
         devtool: prod ? (SENTRY ? 'source-map' : false) : 'cheap-module-source-map',
         devServer: {
             hot: true,
-            static: path.join(__dirname, 'public'),
+            static: {
+                directory: path.join(__dirname, 'public'),
+                watch: {
+                    ignored: path.resolve(__dirname, 'public/build/__storage__'),
+                    usePolling: false,
+                },
+            },
             client: {
                 overlay: {
                     errors: true,
