@@ -47,10 +47,10 @@
     let textHintString = ''
     let proposalQuestions: HTMLElement
     let isVotingForProposal: boolean = false
-    let isVotingDisabled: boolean = true
     let statusLoaded: boolean = false
     let overviewLoaded: boolean = false
     let openedQuestionIndex: number = -1
+    let isUpdatingVotedAnswerValues: boolean = false
 
     $: selectedProposalOverview = $participationOverviewForSelectedAccount?.participations?.[$selectedProposal?.id]
     $: trackedParticipations = Object.values(selectedProposalOverview ?? {})
@@ -72,14 +72,25 @@
         ]
     }
 
+    $: $selectedParticipationEventStatus, (textHintString = getTextHintString())
+
     $: isVotingDisabled =
-        hasGovernanceTransactionInProgress ||
+        !isLoaded ||
         !isProposalVotable($selectedProposal?.status) ||
-        JSON.stringify(selectedAnswerValues) === JSON.stringify(votedAnswerValues) ||
-        hasSelectedNoAnswers(selectedAnswerValues)
+        hasSelectedNoAnswers(selectedAnswerValues) ||
+        isUpdatingVotedAnswerValues ||
+        isSelectedEqualVotedAnswers
+
+    $: isSelectedEqualVotedAnswers = JSON.stringify(selectedAnswerValues) === JSON.stringify(votedAnswerValues)
+    $: if (hasGovernanceTransactionInProgress) {
+        isUpdatingVotedAnswerValues = true
+    }
+    $: if (isUpdatingVotedAnswerValues && isSelectedEqualVotedAnswers) {
+        isUpdatingVotedAnswerValues = false
+    }
+    $: isLoaded = questions && overviewLoaded && statusLoaded
     $: hasGovernanceTransactionInProgress =
         $selectedAccount?.hasVotingPowerTransactionInProgress || $selectedAccount?.hasVotingTransactionInProgress
-    $: $selectedParticipationEventStatus, (textHintString = getTextHintString())
 
     function hasSelectedNoAnswers(_selectedAnswerValues: number[]): boolean {
         return (
