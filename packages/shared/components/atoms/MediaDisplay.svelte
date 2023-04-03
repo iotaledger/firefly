@@ -4,9 +4,11 @@
     import { MimeType, NFT_MEDIA_FILE_NAME, ParentMimeType } from '@core/nfts'
     import { getStorageDirectoryOfProfiles } from '@core/profile/utils'
     import { DEV_STORAGE_DIRECTORY } from '@core/profile'
+    import features from '../../../desktop/features/features'
 
     export let Media: HTMLImageElement | HTMLVideoElement = undefined
     export let filePath: string
+    export let url: string
     export let isLoaded: boolean
     export let expectedType: MimeType
     export let classes: string = ''
@@ -22,7 +24,7 @@
     let basePath: string
 
     $: isLoaded && muteVideo()
-    $: fullPath = `${basePath}/${filePath}/${NFT_MEDIA_FILE_NAME}`
+    $: src = features?.collectibles?.useCaching?.enabled ? `${basePath}/${filePath}/${NFT_MEDIA_FILE_NAME}` : url
 
     function muteVideo() {
         if (muted && Media instanceof HTMLVideoElement) {
@@ -69,7 +71,7 @@
         <svelte:element
             this={type}
             bind:this={Media}
-            src={fullPath}
+            {src}
             {alt}
             autoplay={autoplay ? true : undefined}
             controls={controls ? true : undefined}
