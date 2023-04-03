@@ -88,6 +88,7 @@ const Platform: IPlatform = {
     isFeatureFlagEnabled(keyPath: string): boolean {
         return false
     },
+    captureException(exception: unknown): void {},
 }
 
 window['__CAPACITOR__'] = Platform
