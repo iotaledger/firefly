@@ -5,23 +5,14 @@ import { handleLedgerError } from '@core/ledger/utils'
 import { ProfileType } from '@core/profile/enums'
 import { activeProfile } from '@core/profile/stores'
 
+import { DEFAULT_ERROR_HANDLER_PARAMETERS } from '../constants'
 import { WalletRsError } from '../enums'
 import { handleGenericError } from './handleGenericError'
 import { IError } from '../interfaces'
 import { handleWalletRsError } from './walletRs'
 
-export interface IErrorHandlerParams {
-    resetConfirmationPropsOnDenial?: boolean
-    sendToTracker?: boolean
-}
-
-export const DEFAULT_ERROR_HANDLER_PARAMS: IErrorHandlerParams = {
-    resetConfirmationPropsOnDenial: true,
-    sendToTracker: true,
-}
-
-export function handleError(err: IError, errorHandlerParams: IErrorHandlerParams = DEFAULT_ERROR_HANDLER_PARAMS): void {
-    const { resetConfirmationPropsOnDenial, sendToTracker } = errorHandlerParams
+export function handleError(err: IError, errorHandlerParameters = DEFAULT_ERROR_HANDLER_PARAMETERS): void {
+    const { resetConfirmationPropsOnDenial, sendToTracker } = errorHandlerParameters
 
     if (sendToTracker) {
         Platform.captureException(err)

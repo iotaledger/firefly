@@ -10,8 +10,6 @@ const mode = process.env.NODE_ENV || 'development'
 const prod = mode === 'production'
 const hardcodeNodeEnv = typeof process.env.HARDCODE_NODE_ENV !== 'undefined'
 const SENTRY = Boolean(process.env.SENTRY_DSN)
-/* eslint-disable no-console */
-console.log('WEBPACK: ', SENTRY, process.env.SENTRY_DSN)
 const stage = process.env.STAGE || 'alpha'
 /**
  * If stage = 'prod' -> 'Firefly'

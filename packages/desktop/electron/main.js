@@ -1,5 +1,3 @@
-/* eslint-disable no-constant-condition */
-
 import features from '@features/features'
 import { initAutoUpdate } from './lib/appUpdater'
 import { initNftDownloadHandlers } from './lib/nftDownloadHandlers'
@@ -157,7 +155,7 @@ const defaultWebPreferences = {
     disableBlinkFeatures: 'Auxclick',
     webviewTag: false,
     enableWebSQL: false,
-    devTools: true, // !app.isPackaged || features?.electron?.developerTools?.enabled,
+    devTools: !app.isPackaged || features?.electron?.developerTools?.enabled,
     additionalArguments: [`--send-crash-reports=${SEND_CRASH_REPORTS}`],
 }
 
