@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Error, Icon, Text, TextType } from 'shared/components'
-    import { Icon as IconType } from "@auxiliary/icon";
+    import { Icon as IconType } from '@auxiliary/icon'
     import { createEventDispatcher, onMount } from 'svelte'
     import { isValidPin, PIN_LENGTH } from '@core/utils'
 
@@ -16,7 +16,7 @@
     export let smaller = false
 
     let inputs = new Array(PIN_LENGTH)
-    
+
     $: {
         if (!value) {
             inputs = new Array(PIN_LENGTH)
@@ -104,64 +104,64 @@
             setTimeout(() => resetAndFocus(), 100)
         }
     }
-    </script>
+</script>
 
-    <div class="w-full {classes}">
-        {#if label}
-            <Text type={TextType.p} secondary classes="mb-1">{label}</Text>
-        {/if}
-        <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-        <pin-input
-            style="--pin-input-size: {PIN_LENGTH}"
-            class="{(smaller ? 'h-16' : 'h-20')} w-full 
+<div class="w-full {classes}">
+    {#if label}
+        <Text type={TextType.p} secondary classes="mb-1">{label}</Text>
+    {/if}
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+    <pin-input
+        style="--pin-input-size: {PIN_LENGTH}"
+        class="{smaller ? 'h-16' : 'h-20'} w-full 
                 flex items-center justify-between relative z-0 rounded-xl border border-solid
                 bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700
                 {smaller ? 'h-14 pl-6 pr-4' : 'pl-10 pr-10'}"
-            class:disabled
-            on:click={onSelectFirstEmpty}
-            on:focus={onSelectFirstEmpty}
-            tabindex="0"
-        >
-            <div class="flex flex-row inputs-wrapper">
-                <div class="input-wrapper absolute items-center w-full flex flex-row flex-no-wrap justify-between">
-                    {#each inputs as _item, i}
-                        <input
-                            bind:value={inputs[i]}
-                            maxLength="1"
-                            id={`input-${i}`}
-                            type="password"
-                            inputmode="numeric"
-                            autocomplete="off"
-                            bind:this={inputElements[i]}
-                            class:active={!inputs[i] || inputs[i].length === 0}
-                            class:glimpse
-                            {disabled}
-                            on:input={(event) => onChangeHandler(event, i)}
-                            on:keydown={onBackspaceHelper}
-                            on:focus={() => onFocus(i)}
-                            on:contextmenu|preventDefault
-                        />
-                    {/each}
-                </div>
-                <div
-                    class="input-decorator-wrapper items-center absolute w-full flex flex-row flex-no-wrap justify-between"
-                >
-                    {#each inputs as _item, i}
-                        <input-decorator class:active={inputs[i] && inputs[i].length !== 0} class:disabled />
-                    {/each}
-                </div>
+        class:disabled
+        on:click={onSelectFirstEmpty}
+        on:focus={onSelectFirstEmpty}
+        tabindex="0"
+    >
+        <div class="flex flex-row inputs-wrapper">
+            <div class="input-wrapper absolute items-center w-full flex flex-row flex-no-wrap justify-between">
+                {#each inputs as _item, i}
+                    <input
+                        bind:value={inputs[i]}
+                        maxLength="1"
+                        id={`input-${i}`}
+                        type="password"
+                        inputmode="numeric"
+                        autocomplete="off"
+                        bind:this={inputElements[i]}
+                        class:active={!inputs[i] || inputs[i].length === 0}
+                        class:glimpse
+                        {disabled}
+                        on:input={(event) => onChangeHandler(event, i)}
+                        on:keydown={onBackspaceHelper}
+                        on:focus={() => onFocus(i)}
+                        on:contextmenu|preventDefault
+                    />
+                {/each}
             </div>
-            <button type="button" on:click={handleBackspace} {disabled} tabindex="-1">
-                <Icon icon={IconType.Backspace} classes={smaller ? 'text-blue-500' : 'text-gray-500'} />
-            </button>
-        </pin-input>
+            <div
+                class="input-decorator-wrapper items-center absolute w-full flex flex-row flex-no-wrap justify-between"
+            >
+                {#each inputs as _item, i}
+                    <input-decorator class:active={inputs[i] && inputs[i].length !== 0} class:disabled />
+                {/each}
+            </div>
+        </div>
+        <button type="button" on:click={handleBackspace} {disabled} tabindex="-1">
+            <Icon icon={IconType.Backspace} classes={smaller ? 'text-blue-500' : 'text-gray-500'} />
+        </button>
+    </pin-input>
     {#if error}
         <Error {error} />
     {/if}
-    </div>
+</div>
 
-    <style type="text/scss">
+<style type="text/scss">
     pin-input {
         &:not(.disabled):focus-within,
         &:not(.disabled):hover {
@@ -225,4 +225,4 @@
             }
         }
     }
-    </style>
+</style>
