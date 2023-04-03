@@ -10,7 +10,7 @@ const config = {
         '@auxiliary/(.*)': '<rootDir>/lib/auxiliary/$1',
         '@contexts/(.*)': '<rootDir>/lib/contexts/$1',
         '@core/(.*)': '<rootDir>/lib/core/$1',
-        '@features/(.*)': '<rootDir>/lib/features/$1',
+        '@features/features': '<rootDir>/lib/features/features',
         '@lib/(.*)': '<rootDir>/lib/$1',
         '@mocks/(.*)': '<rootDir>/lib/tests/__mocks__/$1',
     },
