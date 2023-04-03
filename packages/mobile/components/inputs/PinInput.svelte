@@ -17,12 +17,12 @@
 
     let inputs = new Array(PIN_LENGTH)
 
-    $: {
-        if (!value) {
-            inputs = new Array(PIN_LENGTH)
-        }
+    $: if (!value) {
+        inputs = new Array(PIN_LENGTH)
     }
-    $: value.length === PIN_LENGTH && dispatch('filled')
+    $: if (value.length === PIN_LENGTH) {
+        dispatch('filled')
+    }
 
     const inputElements: HTMLInputElement[] = []
 
@@ -32,7 +32,7 @@
         }
     })
 
-    function handleBackspace() {
+    function onBackspace() {
         // Search for the last child with a value
         // and remove it
         for (let j = 1; j <= PIN_LENGTH; j++) {
@@ -58,7 +58,7 @@
             return
         }
         if (event.inputType === 'deleteContentBackward') {
-            handleBackspace()
+            onBackspace()
         } else if (event.inputType === 'insertText') {
             inputElements[i + 1]?.focus()
             value = inputs.join('')
@@ -70,7 +70,7 @@
 
     function onBackspaceHelper(event: KeyboardEvent): void {
         if (event.key === 'Backspace') {
-            handleBackspace()
+            onBackspace()
         }
     }
 
@@ -110,6 +110,8 @@
     {#if label}
         <Text type={TextType.p} secondary classes="mb-1">{label}</Text>
     {/if}
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
     <pin-input
         style="--pin-input-size: {PIN_LENGTH}"
         class="{smaller ? 'h-16' : 'h-20'} w-full 
@@ -150,7 +152,7 @@
                 {/each}
             </div>
         </div>
-        <button type="button" on:click={handleBackspace} {disabled} tabindex="-1">
+        <button type="button" on:click={onBackspace} {disabled} tabindex="-1">
             <Icon icon={IconType.Backspace} classes={smaller ? 'text-blue-500' : 'text-gray-500'} />
         </button>
     </pin-input>
