@@ -140,7 +140,7 @@
                     {localize('actions.skip')}
                 </Button>
             {:else}
-                {#if asset?.standard !== TokenStandard.Irc30}
+                {#if asset?.standard === TokenStandard.Irc30}
                     {#if asset?.verification?.status === VerifiedStatus.SelfVerified}
                         <Button outline classes="w-full" onClick={onUnverifyClick}>
                             {localize('actions.unverifyToken')}
