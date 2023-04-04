@@ -26,7 +26,7 @@
     import { initialiseRouterManager, RouterManagerExtensionName } from '@core/router'
 
     import { DashboardView, LoginRouter, OnboardingRouter } from '@views'
-    import { closeAllDrawers, drawers } from '@/auxiliary/drawer'
+    import { closeAllDrawers, DrawerId, drawers } from '@/auxiliary/drawer'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -39,7 +39,8 @@
      */
     $: if ($drawers[0]?.id !== DrawerId.Profile) {
         if ($appSettings.darkMode) {
-            void StatusBar.setBackgroundColor({ color: configColors['gray']['50'] })
+            void StatusBar.setBackgroundColor({ color: '#1B2D4B' })
+            void StatusBar.setStyle({ style: Style.Dark })
         } else if ($appRoute === AppRoute.Dashboard) {
             void StatusBar.setBackgroundColor({ color: '#F6F9FF' })
             void StatusBar.setStyle({ style: Style.Light })
@@ -50,6 +51,7 @@
     } else {
         if ($appSettings.darkMode) {
             void StatusBar.setBackgroundColor({ color: '#25395f' })
+            void StatusBar.setStyle({ style: Style.Dark })
         } else {
             void StatusBar.setBackgroundColor({ color: '#FFFFFF' })
             void StatusBar.setStyle({ style: Style.Light })
