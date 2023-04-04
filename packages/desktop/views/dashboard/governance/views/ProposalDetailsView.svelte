@@ -85,8 +85,8 @@
     $: if (hasGovernanceTransactionInProgress) {
         isUpdatingVotedAnswerValues = true
     }
-    $: if (isUpdatingVotedAnswerValues && isSelectedEqualVotedAnswers) {
-        isUpdatingVotedAnswerValues = false
+    $: if (selectedAnswerValues && isSelectedEqualVotedAnswers) {
+        isUpdatingVotedAnswerValues = hasGovernanceTransactionInProgress
     }
     $: isLoaded = questions && overviewLoaded && statusLoaded
     $: hasGovernanceTransactionInProgress =
