@@ -39,7 +39,7 @@
      */
     $: if ($drawers[0]?.id !== DrawerId.Profile) {
         if ($appSettings.darkMode) {
-            void StatusBar.setBackgroundColor({ color: '#1B2D4B' })
+            void StatusBar.setBackgroundColor({ color: configColors['gray']['50'] })
         } else if ($appRoute === AppRoute.Dashboard) {
             void StatusBar.setBackgroundColor({ color: '#F6F9FF' })
             void StatusBar.setStyle({ style: Style.Light })
