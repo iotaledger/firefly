@@ -73,7 +73,7 @@
         (transactionDetails.type === NewTransactionType.TokenTransfer &&
             transactionDetails.assetId === $selectedAccountAssets?.baseCoin?.id) ||
         (disableToggleGift && !giftStorageDeposit) ||
-        layer2Parameters !== undefined
+        !!layer2Parameters
     $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
     $: isTransferring = $selectedAccount.isTransferring
 
