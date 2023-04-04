@@ -35,6 +35,7 @@ const resolve = {
         '@ui': path.resolve(__dirname, '../shared/components/'),
         '@views': path.resolve(__dirname, './views/'),
     },
+    conditionNames: ['svelte', 'module', 'import', 'require', 'node', 'default'],
     extensions: ['.mjs', '.js', '.ts', '.svelte'],
     mainFields: ['svelte', 'browser', 'module', 'main'],
     fallback: {

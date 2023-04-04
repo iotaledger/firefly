@@ -1,7 +1,8 @@
 <script lang="ts">
     import { onDestroy } from 'svelte'
 
-    import { Icon, PinInput, Profile, Text, TextType } from '@ui'
+    import { PinInput } from '@components'
+    import { Icon, Profile, Text, TextType } from '@ui'
 
     import { needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService, Platform } from '@core/app'
     import { localize } from '@core/i18n'
