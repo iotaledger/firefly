@@ -1,15 +1,21 @@
 import { get, writable } from 'svelte/store'
 
+import { strongholdPassword } from '@lib/app'
+
 import { UpdateStrongholdRoute } from '../enums'
 import { Subrouter } from '../subrouters/subrouter'
 import { FireflyEvent } from '../types'
+import { Router } from '../router'
 
 export const updateStrongholdRoute = writable<UpdateStrongholdRoute>(null)
 export const updateStrongholdRouter = writable<UpdateStrongholdRouter>(null)
 
 export class UpdateStrongholdRouter extends Subrouter<UpdateStrongholdRoute> {
-    constructor() {
+    private readonly _parentRouter: Router<unknown>
+
+    constructor(parentRouter: Router<unknown>) {
         super(UpdateStrongholdRoute.UpdateStronghold, updateStrongholdRoute)
+        this._parentRouter = parentRouter
     }
 
     next(_?: FireflyEvent): void {
@@ -26,5 +32,14 @@ export class UpdateStrongholdRouter extends Subrouter<UpdateStrongholdRoute> {
                 return
         }
         this.setNext(nextRoute)
+    }
+
+    previous(): void {
+        if (this.history.length === 0) {
+            strongholdPassword.set(undefined)
+            this._parentRouter.previous()
+        } else {
+            super.previous()
+        }
     }
 }

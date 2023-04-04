@@ -1,16 +1,16 @@
 <script lang="ts">
     import { Animation, Button, Icon, OnboardingLayout, Text, TextHint } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { LoginRouter } from '@core/router'
+    import { Router } from '@core/router/router'
 
-    export let loginRouter: LoginRouter
+    export let parentRouter: Router<unknown>
 
     function onSkipBackupClick(): void {
-        loginRouter.next()
+        parentRouter.next()
     }
 
     function onSaveBackupClick(): void {
-        loginRouter.next()
+        parentRouter.next()
     }
 </script>
 

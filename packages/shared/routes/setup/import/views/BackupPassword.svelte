@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, Password, Spinner, Text } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
+    import { mobile, strongholdPassword } from 'shared/lib/app'
     import { Locale } from '@core/i18n'
     import { createEventDispatcher, getContext } from 'svelte'
     import { ImportRouter } from '@core/router'
@@ -18,6 +18,7 @@
 
     function handleContinue(): void {
         if (password) {
+            strongholdPassword.set(password)
             dispatch('next', { password })
         }
     }

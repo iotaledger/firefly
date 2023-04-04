@@ -6,6 +6,7 @@
     import { showAppNotification } from '@lib/notifications'
     import passwordInfo from '@lib/password'
     import { MAX_PASSWORD_LENGTH } from '@lib/wallet'
+    import { strongholdPassword } from '@lib/app'
 
     let password = ''
     let error = ''
@@ -45,7 +46,8 @@
         } else {
             try {
                 busy = true
-                // TODO: Write password changing logic here
+                // TODO: https://github.com/iotaledger/firefly/issues/6141
+                strongholdPassword.set(password)
                 $updateStrongholdRouter.next()
             } catch (err) {
                 showAppNotification({

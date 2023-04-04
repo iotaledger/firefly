@@ -462,7 +462,9 @@
             "outdatedStronghold": "Your Stronghold's version is outdated. Please login to update it.",
             "updateStronghold": {
                 "title": "Update Stronghold",
-                "body": "Your Stronghold’s version is out of date. Provide your password to update Stronghold."
+                "body": "Your Stronghold’s version is out of date.",
+                "providePassword": "Please provide your password to update Stronghold.",
+                "continue": "Please continue to update Stronghold."
             },
             "changePassword": {
                 "title": "Change password",
