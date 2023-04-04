@@ -1,4 +1,4 @@
-module.exports = {
+const settingsFeatures = {
     enabled: true,
     general: {
         enabled: true,
@@ -97,3 +97,5 @@ module.exports = {
         },
     },
 }
+
+export default settingsFeatures

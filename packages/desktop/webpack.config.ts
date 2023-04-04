@@ -1,11 +1,11 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const CopyPlugin = require('copy-webpack-plugin')
-const { DefinePlugin } = require('webpack')
-const path = require('path')
-const sveltePreprocess = require('svelte-preprocess')
-const SentryWebpackPlugin = require('@sentry/webpack-plugin')
-const { version } = require('./package.json')
-const features = require('./features/features.js')
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import CopyPlugin from 'copy-webpack-plugin'
+import { DefinePlugin } from 'webpack'
+import path from 'path'
+import sveltePreprocess from 'svelte-preprocess'
+import SentryWebpackPlugin from '@sentry/webpack-plugin'
+import { version } from './package.json'
+import features from './features/features'
 
 const mode = process.env.NODE_ENV || 'development'
 const prod = mode === 'production'
@@ -100,7 +100,7 @@ const rendererRules = [
         test: /\.(woff|woff2)?$/,
         type: 'asset/resource',
         generator: {
-            filename: ({ filename }) => filename.replace('../shared/', ''),
+            filename: ({ filename }): { filename: string } => filename.replace('../shared/', ''),
         },
     },
     {
@@ -196,7 +196,7 @@ const sentryPlugins = [
 
 // / ------------------------ Webpack config ------------------------
 
-module.exports = [
+const webpackConfig = [
     {
         entry: {
             'build/index': ['./index.js'],
@@ -268,3 +268,5 @@ module.exports = [
         },
     },
 ]
+
+export default webpackConfig

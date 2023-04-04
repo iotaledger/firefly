@@ -1,4 +1,4 @@
-module.exports = {
+const electronFeatures = {
     developerTools: {
         enabled: false,
     },
@@ -15,3 +15,4 @@ module.exports = {
         },
     },
 }
+export default electronFeatures
