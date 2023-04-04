@@ -1,7 +1,9 @@
 <script lang="ts">
-    import { OnboardingLayout } from '@components'
-    import { Button, Text, HTMLButtonType, TextType } from '@ui'
-    import { PinInput } from '@components'
+    import { onMount } from 'svelte'
+
+    import { OnboardingLayout, PinInput } from '@components'
+    import { Button, HTMLButtonType, Text, TextType } from '@ui'
+
     import {
         initialiseFirstShimmerClaimingAccount,
         initialisePincodeManager,
@@ -13,7 +15,7 @@
     import { pollLedgerNanoStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
     import { ProfileType } from '@core/profile'
     import { isValidPin } from '@core/utils'
-    import { onMount } from 'svelte'
+
     import { storageProtectionSetupRouter } from '@/routers'
 
     export let busy = false

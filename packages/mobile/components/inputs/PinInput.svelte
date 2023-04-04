@@ -1,7 +1,9 @@
 <script lang="ts">
-    import { Error, Icon, Text, TextType } from 'shared/components'
-    import { Icon as IconType } from '@auxiliary/icon'
     import { createEventDispatcher, onMount } from 'svelte'
+
+    import { Error, Icon, Text, TextType } from '@ui'
+
+    import { Icon as IconType } from '@auxiliary/icon'
     import { isValidPin, PIN_LENGTH } from '@core/utils'
 
     const inputElements: HTMLInputElement[] = []
