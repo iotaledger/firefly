@@ -74,6 +74,17 @@
             asset: { ...asset, hidden: false },
         })
     }
+    function onBurnClick(): void {
+        _closeDrawer()
+        openDrawer(DrawerId.BurnNativeTokens, {
+            title: localize('actions.confirmTokenBurn.title', {
+                values: {
+                    assetName: asset?.metadata?.name,
+                },
+            }),
+            asset,
+        })
+    }
     function onSendClick(): void {
         updateNewTransactionDetails({ type: NewTransactionType.TokenTransfer, assetId: asset.id })
         _closeDrawer()
@@ -147,6 +158,9 @@
                         {localize('actions.hideToken')}
                     </Button>
                 {/if}
+                <Button outline classes="w-full" onClick={onBurnClick}>
+                    {localize('actions.burnToken')}
+                </Button>
                 <Button classes="w-full" onClick={onSendClick}>
                     {localize('actions.send')}
                 </Button>

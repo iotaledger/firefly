@@ -6,6 +6,7 @@
         AccountActionsDrawer,
         AccountSwitcherDrawer,
         BalanceBreakdownDrawer,
+        BurnNativeTokensDrawer,
         ConfirmDrawer,
         CreateAccountDrawer,
         CustomizeAccountDrawer,
@@ -49,6 +50,7 @@
         [DrawerId.NetworkStatus]: NetworkStatusDrawer,
         [DrawerId.LegalUpdate]: LegalUpdateDrawer,
         [DrawerId.Legal]: LegalDrawer,
+        [DrawerId.BurnNativeTokens]: BurnNativeTokensDrawer,
     }
 
     function onClose(drawerId: DrawerId): void {

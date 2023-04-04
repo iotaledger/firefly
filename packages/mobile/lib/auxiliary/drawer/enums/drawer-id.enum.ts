@@ -19,4 +19,5 @@ export enum DrawerId {
     DateTimePicker = 'dateTimePicker',
     NetworkStatus = 'networkStatus',
     LegalUpdate = 'LegalUpdate',
+    BurnNativeTokens = 'burnNativeTokens',
 }
