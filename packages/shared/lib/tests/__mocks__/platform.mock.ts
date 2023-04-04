@@ -85,6 +85,9 @@ const Platform: IPlatform = {
     copyFile(copyFilePath: string, destinationFilePath: string): Promise<void> {
         return Promise.resolve()
     },
+    deleteNft(filePath: string, accountIndex: number, nftId: string): Promise<void> {
+        return Promise.resolve()
+    },
     isFeatureFlagEnabled(keyPath: string): boolean {
         return false
     },

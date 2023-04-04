@@ -408,6 +408,16 @@ ipcMain.handle('copy-file', (_e, sourceFilePath, destinationFilePath) => {
     fs.writeFileSync(dest, srcFileBuffer)
 })
 
+ipcMain.handle('delete-nft', (_e, { filePath, accountIndex, nftId }) => {
+    const userPath = app.getPath('userData')
+    const directory = app.isPackaged ? userPath : __dirname
+    const src = path.resolve(`${directory}/__storage__/${filePath}`)
+
+    fs.rmdir(src, { recursive: true, force: true }, () => {
+        windows.main.webContents.send('nft-delete-done', { accountIndex, nftId })
+    })
+})
+
 ipcMain.handle('check-if-file-exists', (_e, filePath) => {
     const userPath = app.getPath('userData')
     const directory = app.isPackaged ? userPath : __dirname

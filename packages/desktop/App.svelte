@@ -45,7 +45,7 @@
         resetRouters,
     } from './lib/routers'
     import { openSettings } from './lib/routers/actions/openSettings'
-    import { downloadNextNftInQueue, nftDownloadQueue } from '@core/nfts'
+    import { deleteNextNftInQueue, downloadNextNftInQueue, nftDeleteQueue, nftDownloadQueue } from '@core/nfts'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -88,6 +88,7 @@
     $: isWindows = $platform === PlatformOption.Windows
 
     $: $nftDownloadQueue, downloadNextNftInQueue()
+    $: $nftDeleteQueue, deleteNextNftInQueue()
 
     let splash = true
     let settings = false

@@ -25,12 +25,14 @@
     import TopNavigation from './TopNavigation.svelte'
     import {
         addNftsToDownloadQueue,
-        selectedAccountNfts,
+        deleteNextNftInQueue,
+        downloadingNftId,
         downloadNextNftInQueue,
+        interruptNftDownloadAfterTimeout,
+        nftDeleteQueue,
         nftDownloadQueue,
         resetNftDownloadQueue,
-        downloadingNftId,
-        interruptNftDownloadAfterTimeout,
+        selectedAccountNfts,
     } from '@core/nfts'
     import { selectedAccountIndex } from '@core/account'
     import { get } from 'svelte/store'
@@ -49,6 +51,7 @@
     $: $activeProfile, saveActiveProfile()
     $: $hasStrongholdLocked && reflectLockedStronghold()
     $: $nftDownloadQueue, downloadNextNftInQueue()
+    $: $nftDeleteQueue, deleteNextNftInQueue()
     $: $downloadingNftId && interruptNftDownloadAfterTimeout(get(selectedAccountIndex))
     $: addSelectedAccountNftsToDownloadQueue($selectedAccountIndex)
 

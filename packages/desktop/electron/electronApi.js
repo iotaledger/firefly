@@ -261,6 +261,9 @@ const ElectronApi = {
     copyFile(sourceFilePath, destinationFilePath) {
         return ipcRenderer.invoke('copy-file', sourceFilePath, destinationFilePath)
     },
+    deleteNft(filePath, accountIndex, nftId) {
+        return ipcRenderer.invoke('delete-nft', { filePath, accountIndex, nftId })
+    },
     /**
      * Log unhandled exception
      * @param {string} errorType The type of eerror
