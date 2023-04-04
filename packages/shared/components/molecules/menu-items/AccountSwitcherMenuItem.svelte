@@ -23,12 +23,12 @@
 <button
     {id}
     on:click={() => onAccountClick(account.index)}
-    class="hover:bg-gray-50 dark:hover:bg-gray-800 flex flex-row justify-between p-4 rounded"
+    class="hover:bg-gray-50 dark:hover:bg-gray-800 flex flex-row items-center justify-between py-2 px-4 rounded"
 >
     <div class="flex flex-row items-center space-x-4">
         <AccountLabel selected={account.index === $selectedAccount?.index} {account} />
     </div>
-    <div class="flex flex-row items-end space-x-1">
+    <div class="flex flex-col items-end space-x-1">
         <Text
             fontSize="14"
             lineHeight="20"
