@@ -10,7 +10,7 @@
             "@auxiliary/*": ["./lib/auxiliary/*"],
             "@contexts/*": ["./lib/contexts/*"],
             "@core/*": ["./lib/core/*"],
-            "@features2/*": ["./lib/features/*"],
+            "@features/*": ["./lib/features/*"],
             "@lib/*": ["./lib/*"]
         },
         "types": ["node"]

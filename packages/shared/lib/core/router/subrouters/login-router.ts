@@ -6,7 +6,7 @@ import { Subrouter } from '../classes'
 import { LoginRoute } from '../enums'
 import { IRouterEvent } from '../interfaces'
 import { appRouter } from '../routers'
-import features from '@features2/features'
+import features from '@features/features'
 import { UpdateStrongholdRouter, updateStrongholdRouter } from './update-stronghold-router'
 
 export const loginRoute = writable<LoginRoute>(null)
