@@ -37,7 +37,7 @@
      * @todo remove when implement status bar overlay
      * https://github.com/iotaledger/firefly/issues/6345
      */
-    $: if ($drawers[0]?.id !== 'profile') {
+    $: if ($drawers[0]?.id !== DrawerId.Profile) {
         if ($appSettings.darkMode) {
             void StatusBar.setBackgroundColor({ color: '#1B2D4B' })
         } else if ($appRoute === AppRoute.Dashboard) {
