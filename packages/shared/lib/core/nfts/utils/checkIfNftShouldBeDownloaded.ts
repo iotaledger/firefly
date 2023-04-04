@@ -8,7 +8,7 @@ import { addPersistedNftData, persistedNftForActiveProfile } from '../stores'
 import { Platform } from '@core/app'
 import { BYTES_PER_MEGABYTE } from '@core/utils'
 import { HttpHeader } from '@core/utils'
-import features from '@features/features'
+import features from '@features2/features'
 
 const HEAD_FETCH_TIMEOUT_SECONDS = 3
 
