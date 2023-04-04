@@ -1,12 +1,12 @@
 <script lang="ts">
-    import { Text, FontWeight } from 'shared/components'
-    import { AccountLabel } from 'shared/components/atoms'
     import { IAccountState, selectedAccount, setSelectedAccount } from '@core/account'
+    import { formatCurrency } from '@core/i18n'
+    import { getMarketAmountFromAssetValue } from '@core/market/utils'
     import { BASE_TOKEN } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
-    import { getMarketAmountFromAssetValue } from '@core/market/utils'
-    import { formatCurrency } from '@core/i18n'
+    import { FontWeight, Text } from 'shared/components'
+    import { AccountLabel } from 'shared/components/atoms'
 
     export let account: IAccountState
     export let onClick: () => unknown

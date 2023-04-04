@@ -260,6 +260,16 @@
                 "title": "Általános",
                 "description": "Applikáció megjelenésének és általános beállításainak módosítása"
             },
+            "profile": {
+                "title": "Profil",
+                "description": "Profilnév megváltoztatása és avatar beállítása"
+            },
+            "network": {
+                "title": "Hálózat"
+            },
+            "collectibles": {
+                "title": "Gyűjtemények"
+            },
             "security": {
                 "title": "Biztonság",
                 "description": "Jelszóváltoztatás és biztonsági beállítások"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "Segítség és egyéb információk",
                 "description": "Gyakran ismételt kérdések és segítség kérés"
-            },
-            "profile": {
-                "title": "Profil",
-                "description": "Profilnév megváltoztatása és avatar beállítása"
             },
             "sync": {
                 "title": "Tárcák szinkronizálása",
@@ -306,8 +312,12 @@
                 "description": "Biztonsági mentés Stronghold-ba: a tárcák és a legutóbbi tranzakciók titkosított fájlba mentése"
             },
             "appLock": {
-                "title": "Automatikus zárolás",
+                "title": "Automatikus kiléptetés",
                 "description": "Tétlenség ideje, mielőtt tárcája automatikusan zárolódik és kilépteti Önt"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold időtúllépés",
+                "description": "Az időtartam, amely eltelte után újból meg kell adnia a Stronghold jelszavát"
             },
             "maxMediaSize": {
                 "title": "Maximális médiafájl méret",
@@ -346,22 +356,9 @@
                 "title": "Mélyhivatkozások",
                 "description": "Egy {appProtocol}:// karakterlánccal kezdődő mélyhivatkozásra történő kattintáskor automatikusan töltse ki a tranzakciós adatokat a Firefly-ban"
             },
-            "networkConfiguration": {
-                "title": "Hálózati beállítás",
-                "title2": "Hálózati beállítás",
-                "description": {
-                    "dev": "A hálózati beállítások a jelenlegi csomópont beállítások szerint automatikusan frissülnek (a hálózatok közötti váltás a tárca állapotának alaphelyzetbe állításával jár)",
-                    "nonDev": "A hálózati beállítások a jelenlegi csomópont beállítások szerint automatikusan frissülnek"
-                },
-                "switchedNetworks": "Sikeresen átváltott a \"{networkName}\" hálózatra.",
-                "resetWallet": "A tárca alaphelyzetbe lett állítva.",
-                "connectedTo": "Csatlakoztatva",
-                "nodeConfiguration": {
-                    "title": "Csomópont kiválasztása",
-                    "description": "Használja a \"kézi\" csomópont kiválasztást és csatlakozzon a saját csomópontjához",
-                    "automatic": "Automatikus",
-                    "manual": "Kézi"
-                }
+            "networkInformation": {
+                "title": "Hálózati információk",
+                "connectedTo": "Csatlakoztatva ehhez:"
             },
             "configureNodeList": {
                 "title": "Csomópont beállítása",
@@ -378,9 +375,9 @@
                 "noNodes": "Nincs csomópont, a hálózathoz nem lehet csatlakozni",
                 "noNodesAuto": "Nincs csomópont, automatikus csomópont kiválasztás engedélyezve"
             },
-            "proofOfWork": {
-                "title": "Tranzakcíók hitelesítéséhez szükséges számítás",
-                "description": "Számítás saját eszközön történő elvégzése vagy csomópontra történő kiszervezése"
+            "localProofOfWork": {
+                "title": "Munkabizonyíték",
+                "description": "Munkabizonyíték előállítása saját eszközön vagy csomópontra történő kiszervezése"
             },
             "errorLog": {
                 "title": "Hibanapló",
@@ -1068,6 +1065,8 @@
                 "quantityTooLarge": "A mennyiségnek többnek kell lennie mint 64",
                 "emptyName": "A név mezőt ki kell tölteni",
                 "invalidURI": "Érvénytelen URI, kérjük, érvényes URI-t adjon meg",
+                "notReachable": "URI nem elérhető, az NFT-típus ellenőrzése nem lehetséges",
+                "royaltiesMustBeObject": "A jogdíjnak objektum típusúnak kell lennie",
                 "royaltiesMustBeJSON": "A jogdíjcímnek érvényes JSON formátumúnak kell lennie",
                 "invalidAddress": "Érvénytelen cím, érvényes {networkHrp}-címnek kell lennie, ahová a jogdíjakat küldik",
                 "invalidRoyaltyValue": "Érvénytelen érték, a kívánt százalékos arányt képviselő tizedes számnak kell lennie, például 0,05",
@@ -1779,7 +1778,7 @@
             "error": "Hiba történt a jutalom beváltása közben. Próbálja újra."
         },
         "vote": {
-            "success": "Votes successfully cast"
+            "success": "Szavazatok sikeresen leadva"
         },
         "stopVoting": {
             "success": "Voting successfully stopped"
@@ -1979,9 +1978,17 @@
                 "short": "Loading blocked",
                 "long": "NFT file type does not match the expected media type"
             },
+            "notReachable": {
+                "short": "Nem elérhető",
+                "long": "NFT-fájl nem elérhető"
+            },
             "tooLargeFile": {
                 "short": "File is too large",
                 "long": "Loading NFT blocked because the file is too large"
+            },
+            "downloadTooLong": {
+                "short": "A fájl letöltése túl sok időt vett igénybe",
+                "long": "Az NFT betöltése nem lehetséges, mert a fájl letöltése túl sok időt vett igénybe"
             },
             "corsError": {
                 "short": "Loading blocked",

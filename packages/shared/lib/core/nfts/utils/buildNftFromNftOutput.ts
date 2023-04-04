@@ -1,3 +1,4 @@
+import { activeProfileId } from '@core/profile/stores/active-profile-id.store'
 import {
     ADDRESS_TYPE_NFT,
     getBech32AddressFromAddressTypes,
@@ -6,9 +7,11 @@ import {
     getNftId,
 } from '@core/wallet'
 import { INftOutput } from '@iota/types'
+import { get } from 'svelte/store'
 import { DEFAULT_NFT_NAME } from '../constants'
 import { INft } from '../interfaces'
 import { parseNftMetadata } from './parseNftMetadata'
+import { composeUrlFromNftUri } from './composeUrlFromNftUri'
 
 export function buildNftFromNftOutput(
     nftOutput: INftOutput,
@@ -21,6 +24,9 @@ export function buildNftFromNftOutput(
     const issuer = getIssuerFromNftOutput(nftOutput)
     const metadata = getMetadataFromNftOutput(nftOutput)
     const parsedMetadata = parseNftMetadata(metadata)
+    const composedUrl = composeUrlFromNftUri(parsedMetadata?.uri)
+    const filePath = `${get(activeProfileId)}/nfts/${id}`
+
     return {
         id,
         address,
@@ -31,5 +37,12 @@ export function buildNftFromNftOutput(
         metadata,
         parsedMetadata,
         latestOutputId: outputId,
+        composedUrl,
+        filePath,
+        downloadMetadata: {
+            error: undefined,
+            warning: undefined,
+            isLoaded: false,
+        },
     }
 }

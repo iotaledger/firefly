@@ -260,6 +260,16 @@
                 "title": "Algemeen",
                 "description": "Het uiterlijk van uw app en andere algemene instellingen configureren"
             },
+            "profile": {
+                "title": "Profiel",
+                "description": "Verander uw profielnaam of stel een avatar in"
+            },
+            "network": {
+                "title": "Network"
+            },
+            "collectibles": {
+                "title": "Collectibles"
+            },
             "security": {
                 "title": "Beveiliging",
                 "description": "Wijzig uw wachtwoord en pas de beveiligingsinstellingen aan"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "Hulp en Informatie",
                 "description": "Zoek het antwoord op een vraag of krijg hulp bij een probleem"
-            },
-            "profile": {
-                "title": "Profiel",
-                "description": "Verander uw profielnaam of stel een avatar in"
             },
             "sync": {
                 "title": "Synchroniseer portemonnees",
@@ -306,8 +312,12 @@
                 "description": "Exporteren naar een Stronghold bestand - een complete versleutelde back-up van uw portemonnees en de nieuwste transactiegeschiedenis"
             },
             "appLock": {
-                "title": "Automatisch vergrendelen",
+                "title": "Automatic logout",
                 "description": "Inactiviteit tijd voordat uw portemonnees vergrendelen en u bent uitgelogd"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold Timeout",
+                "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
                 "title": "Maximum media size",
@@ -346,22 +356,9 @@
                 "title": "Diepe links",
                 "description": "Automatisch transactiegegevens invullen in Firefly bij het klikken op een diepe link beginnend met {appProtocol}://"
             },
-            "networkConfiguration": {
-                "title": "Netwerk configuratie",
-                "title2": "Netwerk configuratie",
-                "description": {
-                    "dev": "Uw netwerkinstellingen worden automatisch bijgewerkt volgens de huidige node configuratie (van netwerken wisselen zal resulteren in het opnieuw instellen van de portemonnee status)",
-                    "nonDev": "Uw netwerkinstellingen worden automatisch bijgewerkt volgens de huidige node configuratie"
-                },
-                "switchedNetworks": "Netwerk succesvol gewisseld naar \"{networkName}\".",
-                "resetWallet": "Uw portemonnee staat is gereset.",
-                "connectedTo": "Verbonden met",
-                "nodeConfiguration": {
-                    "title": "Node selectie",
-                    "description": "Selecteer \"Handmatig\" om node instellingen te configureren en verbinding te maken met uw eigen node(s)",
-                    "automatic": "Automatisch",
-                    "manual": "Handmatig"
-                }
+            "networkInformation": {
+                "title": "Network information",
+                "connectedTo": "Connected to"
             },
             "configureNodeList": {
                 "title": "Node configuratie",
@@ -378,9 +375,9 @@
                 "noNodes": "Er zijn geen nodes, niet mogelijk om verbinding te maken met het netwerk",
                 "noNodesAuto": "Er zijn geen nodes, automatische selectie zal in plaats daarvan worden gebruikt"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Proof of work",
-                "description": "Voltooi proof-of-work lokaal op uw apparaat of besteed deze uit aan de node"
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "Foutenlogboek",
@@ -1068,6 +1065,8 @@
                 "quantityTooLarge": "Quantity needs to be smaller than 64",
                 "emptyName": "Name is a required field",
                 "invalidURI": "Invalid URI, please provide a valid URI",
+                "notReachable": "URI not reachable, unable to check NFT type",
+                "royaltiesMustBeObject": "Royalties must be an object",
                 "royaltiesMustBeJSON": "Royalties must be a valid JSON",
                 "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
                 "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",
@@ -1779,7 +1778,7 @@
             "error": "Er is een fout opgetreden tijdens het claimen. Probeer het opnieuw."
         },
         "vote": {
-            "success": "Votes successfully cast"
+            "success": "Stem succesvol verzonden"
         },
         "stopVoting": {
             "success": "Voting successfully stopped"
@@ -1979,9 +1978,17 @@
                 "short": "Loading blocked",
                 "long": "NFT file type does not match the expected media type"
             },
+            "notReachable": {
+                "short": "Not reachable",
+                "long": "NFT file is not reachable"
+            },
             "tooLargeFile": {
                 "short": "File is too large",
                 "long": "Loading NFT blocked because the file is too large"
+            },
+            "downloadTooLong": {
+                "short": "File took too long to download",
+                "long": "Loading NFT blocked because the file took too long to download"
             },
             "corsError": {
                 "short": "Loading blocked",

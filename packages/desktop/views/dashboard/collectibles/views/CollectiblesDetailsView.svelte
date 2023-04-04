@@ -1,19 +1,19 @@
 <script lang="ts">
     import {
+        Alert,
         Button,
         CollectibleDetailsMenu,
-        FontWeight,
         KeyValueBox,
         MeatballMenuButton,
         Modal,
         NftMedia,
-        Text,
-        TextType,
-        Alert,
         Pane,
+        Text,
     } from '@ui'
-    import { openPopup } from '@auxiliary/popup/actions'
+    import { FontWeight, TextType } from '@ui/enums'
+
     import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
+    import { time } from '@core/app'
     import { openUrlInBrowser } from '@core/app/utils'
     import { localize } from '@core/i18n'
     import { ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
@@ -23,9 +23,11 @@
         convertAndFormatNftMetadata,
         getNftByIdFromAllAccountNfts,
         INft,
+        NftDownloadMetadata,
         selectedNftId,
     } from '@core/nfts'
     import { activeProfile } from '@core/profile/stores'
+    import { collectiblesRouter } from '@core/router/routers'
     import { truncateString } from '@core/utils'
     import {
         ActivityType,
@@ -40,49 +42,23 @@
         OUTPUT_TYPE_NFT,
     } from '@core/wallet'
     import { NewTransactionType, selectedAccountActivities, setNewTransactionDetails } from '@core/wallet/stores'
+
+    import { openPopup } from '@auxiliary/popup/actions'
     import { PopupId } from '@auxiliary/popup'
-    import { collectiblesRouter } from '@core/router/routers'
-    import { time } from '@core/app'
 
     let modal: Modal
-    let error: string
-    let warning: string
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
     const nft: INft = getNftByIdFromAllAccountNfts($selectedAccountIndex, $selectedNftId)
 
-    const { id, name, issuer, address, metadata } = nft ?? {}
+    const { id, name, issuer, address, metadata, downloadMetadata } = nft ?? {}
     const { standard, version, type, uri, description, issuerName, collectionName, attributes, soonaverseAttributes } =
         nft?.parsedMetadata || {}
 
     const issuerAddress = getBech32AddressFromAddressTypes(issuer)
     const collectionId = getHexAddressFromAddressTypes(issuer)
+
     let storageDeposit: string = undefined
-
-    $: nftActivity = $selectedAccountActivities
-        .sort((a1, a2) => a1.time.getTime() - a2.time.getTime())
-        .find((activity) => activity?.type === ActivityType.Nft && activity?.nftId === id)
-
-    $: formattedMetadata = convertAndFormatNftMetadata(metadata)
-    $: returnIfNftWasSent($allAccountNfts[$selectedAccountIndex], $time)
-    $: timeDiff = getTimeDifference(new Date(nft.timelockTime), $time)
-
-    $: nftActivity, setStorageDeposit()
-    async function setStorageDeposit() {
-        const outputs = await $selectedAccount.outputs()
-        const nftOutputs = outputs
-            .filter((output) => output.output.type === OUTPUT_TYPE_NFT)
-            .sort((a, b) => b.metadata.milestoneTimestampBooked - a.metadata.milestoneTimestampBooked)
-        const recentNftOutput = nftOutputs.find(
-            (o) => o.output.type === OUTPUT_TYPE_NFT && getNftId(o.output.nftId, o.outputId) === id
-        )
-
-        storageDeposit = formatTokenAmountPrecise(
-            Number(recentNftOutput?.output.amount ?? 0),
-            BASE_TOKEN[$activeProfile?.networkProtocol]
-        )
-    }
-
     let detailsList: {
         [key in string]: {
             data: string
@@ -92,6 +68,15 @@
             maxHeight?: number
         }
     }
+
+    $: nftActivity = $selectedAccountActivities
+        .sort((a1, a2) => a1.time.getTime() - a2.time.getTime())
+        .find((activity) => activity?.type === ActivityType.Nft && activity?.nftId === id)
+    $: formattedMetadata = convertAndFormatNftMetadata(metadata)
+    $: returnIfNftWasSent($allAccountNfts[$selectedAccountIndex], $time)
+    $: timeDiff = getTimeDifference(new Date(nft.timelockTime), $time)
+    $: nftActivity, setStorageDeposit()
+    $: alertText = getAlertText(downloadMetadata)
     $: detailsList = {
         ...(id && {
             nftId: { data: truncateString(id, 20, 20), copyValue: id, isCopyable: true },
@@ -129,8 +114,23 @@
             }),
     }
 
-    function returnIfNftWasSent(selectedAccountNfts: INft[], currentTime: Date): void {
-        const nft = selectedAccountNfts.find((nft) => nft.id === id)
+    async function setStorageDeposit(): Promise<void> {
+        const outputs = await $selectedAccount.outputs()
+        const nftOutputs = outputs
+            .filter((output) => output.output.type === OUTPUT_TYPE_NFT)
+            .sort((a, b) => b.metadata.milestoneTimestampBooked - a.metadata.milestoneTimestampBooked)
+        const recentNftOutput = nftOutputs.find(
+            (o) => o.output.type === OUTPUT_TYPE_NFT && getNftId(o.output.nftId, o.outputId) === id
+        )
+
+        storageDeposit = formatTokenAmountPrecise(
+            Number(recentNftOutput?.output.amount ?? 0),
+            BASE_TOKEN[$activeProfile?.networkProtocol]
+        )
+    }
+
+    function returnIfNftWasSent(ownedNfts: INft[], currentTime: Date): void {
+        const nft = ownedNfts.find((nft) => nft.id === id)
         const isLocked = nft.timelockTime > currentTime.getTime()
         if (nft?.isSpendable || isLocked) {
             // empty
@@ -155,15 +155,25 @@
             overflow: true,
         })
     }
+
+    function getAlertText(downloadMetadata: NftDownloadMetadata): string {
+        const { error, warning } = downloadMetadata ?? {}
+        const errorOrWarning = error || warning
+
+        if (!errorOrWarning) {
+            return
+        }
+
+        const { type, message } = errorOrWarning
+        return type === 'generic' ? message : localize(`error.nft.${type}.long`)
+    }
 </script>
 
-<div class="flex flex-row w-full h-full space-x-4">
+<collectibles-details-view class="flex flex-row w-full h-full space-x-4">
     <div class="flex w-full h-full items-center justify-center">
         <div class="relative w-full h-full flex rounded-2xl overflow-hidden">
             <NftMedia
                 nftId={id}
-                bind:error
-                bind:warning
                 classes="rounded-2xl overflow-hidden flex-1 w-auto h-auto max-w-full max-h-full object-contain absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
                 autoplay
                 controls
@@ -171,10 +181,8 @@
                 muted
             />
             <div class="absolute right-6 bottom-6 w-auto">
-                {#if error}
-                    <Alert type="error" message={error} />
-                {:else if warning}
-                    <Alert type="warning" message={warning} />
+                {#if alertText}
+                    <Alert type={downloadMetadata?.error ? 'error' : 'warning'} message={alertText} />
                 {/if}
             </div>
         </div>
@@ -192,21 +200,23 @@
                 </Text>
             </nft-description>
         {/if}
-        <div class="overflow-y-scroll h-full flex flex-col space-y-4 pr-2 -mr-4 ">
+        <div class="overflow-y-scroll h-full flex flex-col space-y-4 pr-2 -mr-4">
             <nft-details class="flex flex-col space-y-4">
                 <Text type={TextType.h5} fontWeight={FontWeight.semibold}>
                     {localize('general.details')}
                 </Text>
                 <key-value-list class="flex flex-col space-y-2">
                     {#each Object.entries(detailsList) as [key, value]}
-                        <KeyValueBox
-                            keyText={localize('general.' + key)}
-                            copyValue={value.copyValue ?? value.data}
-                            isCopyable={value.isCopyable}
-                            valueText={value.data}
-                            isPreText={value.isPreText}
-                            maxHeight={value.maxHeight}
-                        />
+                        {#key value}
+                            <KeyValueBox
+                                keyText={localize('general.' + key)}
+                                copyValue={value.copyValue ?? value.data}
+                                isCopyable={value.isCopyable}
+                                valueText={value.data}
+                                isPreText={value.isPreText}
+                                maxHeight={value.maxHeight}
+                            />
+                        {/key}
                     {/each}
                 </key-value-list>
             </nft-details>
@@ -248,7 +258,7 @@
                 {/if}
             {/if}
         </div>
-        <div class="flex w-full space-x-4 self-end mt-auto pt-4">
+        <buttons-container class="flex w-full space-x-4 self-end mt-auto pt-4">
             <Button outline classes="flex-1" onClick={onExplorerClick} disabled={!explorerUrl}>
                 {localize('general.viewOnExplorer')}
             </Button>
@@ -257,6 +267,6 @@
                     ? localize('popups.balanceBreakdown.locked.title') + ' ' + String(timeDiff)
                     : localize('actions.send')}
             </Button>
-        </div>
+        </buttons-container>
     </Pane>
-</div>
+</collectibles-details-view>

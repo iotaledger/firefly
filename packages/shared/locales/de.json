@@ -260,6 +260,16 @@
                 "title": "Allgemein",
                 "description": "Passe das Erscheinungsbild deiner Wallet an und nimm weitere allgemeine Einstellungen vor"
             },
+            "profile": {
+                "title": "Profil",
+                "description": "Ändere deinen Profilnamen oder bestimme deinen Avatar"
+            },
+            "network": {
+                "title": "Netzwerk"
+            },
+            "collectibles": {
+                "title": "Sammlerstücke"
+            },
             "security": {
                 "title": "Sicherheit",
                 "description": "Ändere dein Passwort und passe sicherheitsrelevante Einstellungen an"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "Hilfe und Information",
                 "description": "Finde die Antwort auf eine Frage oder bekomme Hilfe bei einem Problem"
-            },
-            "profile": {
-                "title": "Profil",
-                "description": "Ändere deinen Profilnamen oder bestimme deinen Avatar"
             },
             "sync": {
                 "title": "Wallets synchronisieren",
@@ -306,8 +312,12 @@
                 "description": "In eine Stronghold-Datei exportieren - ein komplett verschlüsseltes Backup deiner Wallets und Transaktionsverläufe"
             },
             "appLock": {
-                "title": "Automatische Sperre",
+                "title": "Automatische Abmeldung",
                 "description": "Zeit bei Inaktivität, bis die Wallet gesperrt und du ausgeloggt wirst"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold Timeout",
+                "description": "Dauer der Zeit, bis dein Stronghold Passwort erneut benötigt wird"
             },
             "maxMediaSize": {
                 "title": "Maximale Dateigröße",
@@ -346,22 +356,9 @@
                 "title": "Deep-Links",
                 "description": "Transaktionsdaten in Firefly durch das Anklicken eines Deep-Links, beginnend mit {appProtocol}://, automatisch ausfüllen"
             },
-            "networkConfiguration": {
-                "title": "Netzwerkkonfiguration",
-                "title2": "Netzwerkkonfiguration",
-                "description": {
-                    "dev": "Deine Netzwerkeinstellungen werden automatisch entsprechend der aktuellen Node-Konfiguration aktualisiert (Netzwerkwechsel führt zum Zurücksetzen der Wallet)",
-                    "nonDev": "Deine Netzwerkeinstellungen werden automatisch entsprechend der aktuellen Node-Konfiguration aktualisiert"
-                },
-                "switchedNetworks": "Netzwerk erfolgreich auf \"{networkName}\" umgestellt.",
-                "resetWallet": "Deine Wallet wurde zurückgesetzt.",
-                "connectedTo": "Verbunden mit",
-                "nodeConfiguration": {
-                    "title": "Node-Auswahl",
-                    "description": "Wähle Manuell, um die Node-Einstellungen zu konfigurieren und dich mit deinen eigenen Nodes zu verbinden",
-                    "automatic": "Automatisch",
-                    "manual": "Manuell"
-                }
+            "networkInformation": {
+                "title": "Netzwerk-Informationen",
+                "connectedTo": "Verbunden mit"
             },
             "configureNodeList": {
                 "title": "Node-Konfiguration",
@@ -378,7 +375,7 @@
                 "noNodes": "Es sind keine Nodes vorhanden, Verbindung zum Netzwerk fehlgeschlagen",
                 "noNodesAuto": "Es sind keine Nodes vorhanden, automatische Auswahl wird stattdessen verwendet"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Proof of Work",
                 "description": "Proof of Work lokal auf deinem Gerät ausführen oder an den Node ausgliedern"
             },
@@ -744,7 +741,7 @@
         "deleteAccount": {
             "title": "{name} löschen?",
             "body": "Bist Du sicher, dass diese Wallet gelöscht werden soll?",
-            "hint": "Note: once deleted, you can restore this wallet by using the \"Wallet Finder\" in the settings.",
+            "hint": "Hinweis: Wenn du die Wallet gelöscht hast, kannst du sie mit dem \"Wallet-Finder\" in den Einstellungen wiederherstellen.",
             "typePassword": "Gib dein Passwort zur Bestätigung ein.",
             "hideAccount": "Wallet löschen",
             "errorTitle": "{name} kann nicht gelöscht werden",
@@ -1068,6 +1065,8 @@
                 "quantityTooLarge": "Menge muss kleiner als 64 sein",
                 "emptyName": "Name ist ein Pflichtfeld",
                 "invalidURI": "Ungültige URL, bitte gib eine gültige URL ein",
+                "notReachable": "URL nicht erreichbar, NFT Typ kann nicht überprüft werden",
+                "royaltiesMustBeObject": "Lizenzgebühren müssen ein Objekt sein",
                 "royaltiesMustBeJSON": "Lizenzgebühren müssen ein gültiges JSON sein",
                 "invalidAddress": "Ungültige Adresse, muss eine gültige {networkHrp} Adresse sein, an die Lizenzgebühren gesendet werden",
                 "invalidRoyaltyValue": "Ungültiger Wert, muss ein numerischer Dezimaldarsteller des benötigten Prozentsatzes sein. 0,05",
@@ -1979,9 +1978,17 @@
                 "short": "Laden blockiert",
                 "long": "NFT-Dateityp stimmt nicht mit dem erwarteten Medientyp überein"
             },
+            "notReachable": {
+                "short": "Nicht erreichbar",
+                "long": "NFT-Datei ist nicht erreichbar"
+            },
             "tooLargeFile": {
                 "short": "Datei ist zu groß",
                 "long": "Laden des NFT's geblockt, weil die Datei zu groß ist"
+            },
+            "downloadTooLong": {
+                "short": "Datei dauerte zu lange zum Herunterladen",
+                "long": "Herunterladen des NFT wurde gesperrt, weil die Datei zu lange zum Herunterladen benötigt hat"
             },
             "corsError": {
                 "short": "Laden blockiert",

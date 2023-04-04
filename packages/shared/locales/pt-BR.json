@@ -260,6 +260,16 @@
                 "title": "General",
                 "description": "Configure your app's appearance and other general settings"
             },
+            "profile": {
+                "title": "Perfil",
+                "description": "Altere o nome do seu perfil ou defina um avatar"
+            },
+            "network": {
+                "title": "Network"
+            },
+            "collectibles": {
+                "title": "Collectibles"
+            },
             "security": {
                 "title": "Segurança",
                 "description": "Altere sua senha e ajuste as configurações de segurança relacionadas"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "Ajuda & Informação",
                 "description": "Encontre a resposta para uma pergunta ou obtenha ajuda para um problema"
-            },
-            "profile": {
-                "title": "Perfil",
-                "description": "Altere o nome do seu perfil ou defina um avatar"
             },
             "sync": {
                 "title": "Sincronizar carteiras",
@@ -306,8 +312,12 @@
                 "description": "Exportar para um arquivo Stronghold - um backup criptografado completo de suas carteiras e do histórico de transações mais recente"
             },
             "appLock": {
-                "title": "Bloqueio Automático",
+                "title": "Automatic logout",
                 "description": "Tempo de inatividade antes do bloqueio de suas carteiras e você ser desconectado"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold Timeout",
+                "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
                 "title": "Maximum media size",
@@ -346,22 +356,9 @@
                 "title": "Deep links",
                 "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
-            "networkConfiguration": {
-                "title": "Configuração de rede",
-                "title2": "Configuração de rede",
-                "description": {
-                    "dev": "Suas configurações de rede serão atualizadas automaticamente de acordo com a configuração atual do nó (alterando a rede resultará em redefinir o estado da carteira)",
-                    "nonDev": "Suas configurações de rede serão atualizadas automaticamente de acordo com a configuração atual do nó"
-                },
-                "switchedNetworks": "Rede alterada com sucesso para \"{networkName}\".",
-                "resetWallet": "O estado da sua carteira foi redefinido.",
-                "connectedTo": "Conectado em",
-                "nodeConfiguration": {
-                    "title": "Seleção de nó",
-                    "description": "Selecione \"Manual\" para configurar as opções de nó da rede e conecte-se ao seu próprio nó",
-                    "automatic": "Automático",
-                    "manual": "Manual"
-                }
+            "networkInformation": {
+                "title": "Network information",
+                "connectedTo": "Connected to"
             },
             "configureNodeList": {
                 "title": "Configuração do Nó",
@@ -378,9 +375,9 @@
                 "noNodes": "Não há nós, não foi possível conectar-se à rede",
                 "noNodesAuto": "Não há nós, a seleção automática será usada em vez disso"
             },
-            "proofOfWork": {
-                "title": "Prova de Trabalho",
-                "description": "Complete a prova de trabalho localmente em seu dispositivo ou terceirize para um nó de rede"
+            "localProofOfWork": {
+                "title": "Proof of work",
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "Registro de erros",
@@ -1068,6 +1065,8 @@
                 "quantityTooLarge": "Quantity needs to be smaller than 64",
                 "emptyName": "Name is a required field",
                 "invalidURI": "Invalid URI, please provide a valid URI",
+                "notReachable": "URI not reachable, unable to check NFT type",
+                "royaltiesMustBeObject": "Royalties must be an object",
                 "royaltiesMustBeJSON": "Royalties must be a valid JSON",
                 "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
                 "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",
@@ -1979,9 +1978,17 @@
                 "short": "Loading blocked",
                 "long": "NFT file type does not match the expected media type"
             },
+            "notReachable": {
+                "short": "Not reachable",
+                "long": "NFT file is not reachable"
+            },
             "tooLargeFile": {
                 "short": "File is too large",
                 "long": "Loading NFT blocked because the file is too large"
+            },
+            "downloadTooLong": {
+                "short": "File took too long to download",
+                "long": "Loading NFT blocked because the file took too long to download"
             },
             "corsError": {
                 "short": "Loading blocked",

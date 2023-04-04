@@ -1,3 +1,5 @@
 export enum NetworkSettingsRoute {
-    NetworkConfiguration = 'networkConfiguration',
+    NetworkInformation = 'networkInformation',
+    ConfigureNodeList = 'configureNodeList',
+    LocalProofOfWork = 'localProofOfWork',
 }
