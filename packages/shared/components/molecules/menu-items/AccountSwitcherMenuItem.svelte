@@ -31,6 +31,7 @@
     <div class="flex flex-row items-end space-x-1">
         <Text
             fontSize="14"
+            lineHeight="20"
             fontWeight={FontWeight.semibold}
             classes="{account.index === $selectedAccount?.index ? '' : 'opacity-50'} text-right"
         >
