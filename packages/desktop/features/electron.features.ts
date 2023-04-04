@@ -1,4 +1,4 @@
-const electronFeatures = {
+module.exports = {
     developerTools: {
         enabled: false,
     },
@@ -15,5 +15,3 @@ const electronFeatures = {
         },
     },
 }
-
-module.exports = electronFeatures

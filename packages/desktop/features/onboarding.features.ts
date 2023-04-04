@@ -1,4 +1,4 @@
-const onboardingFeatures = {
+module.exports = {
     enabled: true,
     iota: {
         enabled: false,
@@ -254,5 +254,3 @@ const onboardingFeatures = {
         enabled: false,
     },
 }
-
-module.exports = onboardingFeatures

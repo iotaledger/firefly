@@ -1,4 +1,4 @@
-const walletFeatures = {
+module.exports = {
     enabled: true,
     accountSummary: {
         enabled: true,
@@ -28,5 +28,3 @@ const walletFeatures = {
         },
     },
 }
-
-module.exports = walletFeatures

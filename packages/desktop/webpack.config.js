@@ -5,7 +5,7 @@ const path = require('path')
 const sveltePreprocess = require('svelte-preprocess')
 const SentryWebpackPlugin = require('@sentry/webpack-plugin')
 const { version } = require('./package.json')
-const features = require('./features/features.js')
+const features = require('./features/features.ts')
 
 const mode = process.env.NODE_ENV || 'development'
 const prod = mode === 'production'

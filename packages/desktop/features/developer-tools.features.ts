@@ -1,4 +1,4 @@
-const developerToolsFeatures = {
+module.exports = {
     enabled: true,
     faucet: {
         enabled: true,
@@ -19,5 +19,3 @@ const developerToolsFeatures = {
         enabled: true,
     },
 }
-
-module.exports = developerToolsFeatures

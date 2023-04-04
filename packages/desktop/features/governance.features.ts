@@ -1,8 +1,6 @@
-const governanceFeatures = {
+module.exports = {
     enabled: true,
     removeProposals: {
         enabled: true,
     },
 }
-
-module.exports = governanceFeatures
