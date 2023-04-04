@@ -1,4 +1,4 @@
-import { ITokenMetadata } from '../../wallet/interfaces'
+import { ITokenMetadata } from '@core/wallet/interfaces'
 
 import { IAuth, IClientOptions, INetwork, INode } from '../interfaces'
 
