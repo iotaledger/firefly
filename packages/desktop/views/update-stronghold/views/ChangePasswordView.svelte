@@ -6,7 +6,7 @@
     import { HTMLButtonType, TextType } from '@ui/enums'
 
     import { localize } from '@core/i18n'
-    import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'
+    import { MAX_STRONGHOLD_PASSWORD_LENGTH, unlockStronghold } from '@core/profile'
     import { changeStrongholdPassword } from '@core/profile-manager'
     import { updateStrongholdRouter } from '@core/router/subrouters'
     import { PASSWORD_REASON_MAP } from '@core/stronghold'
@@ -73,8 +73,10 @@
         }
     }
 
-    function onSkipClick(): void {
+    async function onSkipClick(): Promise<void> {
         newPassword = ''
+        confirmPassword = ''
+        await unlockStronghold(oldPassword)
         $updateStrongholdRouter.next()
     }
 </script>
