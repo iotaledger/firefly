@@ -51,6 +51,7 @@
     let overviewLoaded: boolean = false
     let openedQuestionIndex: number = -1
     let isUpdatingVotedAnswerValues: boolean = false
+    let lastAction: 'vote' | 'stopVote'
 
     $: selectedProposalOverview = $participationOverviewForSelectedAccount?.participations?.[$selectedProposal?.id]
     $: trackedParticipations = Object.values(selectedProposalOverview ?? {})
@@ -74,23 +75,22 @@
 
     $: $selectedParticipationEventStatus, (textHintString = getTextHintString())
 
-    $: isVotingDisabled =
-        !isLoaded ||
-        !isProposalVotable($selectedProposal?.status) ||
-        hasSelectedNoAnswers(selectedAnswerValues) ||
-        isUpdatingVotedAnswerValues ||
-        isSelectedEqualVotedAnswers
-
-    $: isSelectedEqualVotedAnswers = JSON.stringify(selectedAnswerValues) === JSON.stringify(votedAnswerValues)
-    $: if (hasGovernanceTransactionInProgress) {
-        isUpdatingVotedAnswerValues = true
-    }
-    $: if (selectedAnswerValues && isSelectedEqualVotedAnswers) {
-        isUpdatingVotedAnswerValues = hasGovernanceTransactionInProgress
-    }
-    $: isLoaded = questions && overviewLoaded && statusLoaded
     $: hasGovernanceTransactionInProgress =
         $selectedAccount?.hasVotingPowerTransactionInProgress || $selectedAccount?.hasVotingTransactionInProgress
+
+    $: areSelectedAndVotedAnswersEqual = JSON.stringify(selectedAnswerValues) === JSON.stringify(votedAnswerValues)
+
+    $: {
+        if (hasGovernanceTransactionInProgress) {
+            isUpdatingVotedAnswerValues = true
+        }
+
+        const hasVoted = lastAction === 'vote' && areSelectedAndVotedAnswersEqual
+        const hasStoppedVoting = lastAction === 'stopVote' && !areSelectedAndVotedAnswersEqual
+        if (hasVoted || hasStoppedVoting) {
+            isUpdatingVotedAnswerValues = hasGovernanceTransactionInProgress
+        }
+    }
 
     function hasSelectedNoAnswers(_selectedAnswerValues: number[]): boolean {
         return (
@@ -149,12 +149,14 @@
     }
 
     function onStopVotingClick(): void {
+        lastAction = 'stopVote'
         openPopup({
             id: PopupId.StopVoting,
         })
     }
 
     function onVoteClick(): void {
+        lastAction = 'vote'
         const chosenAnswerValues = selectedAnswerValues.map((answerValue) =>
             answerValue === undefined ? ABSTAIN_VOTE_VALUE : answerValue
         )
@@ -267,21 +269,27 @@
         {#if $selectedProposal?.status === ProposalStatus.Upcoming}
             <TextHint info text={textHintString} />
         {:else if [ProposalStatus.Commencing, ProposalStatus.Holding].includes($selectedProposal?.status)}
+            {@const isLoaded = questions && overviewLoaded && statusLoaded}
+            {@const isStoppingVote = lastAction === 'stopVote' && hasGovernanceTransactionInProgress}
+            {@const isStopVotingDisabled = !isLoaded || !isVotingForProposal || isUpdatingVotedAnswerValues}
+            {@const isVoting = lastAction === 'vote' && hasGovernanceTransactionInProgress}
+            {@const isVotingDisabled =
+                !isLoaded ||
+                !isProposalVotable($selectedProposal?.status) ||
+                hasSelectedNoAnswers(selectedAnswerValues) ||
+                isUpdatingVotedAnswerValues ||
+                areSelectedAndVotedAnswersEqual}
             <buttons-container class="flex w-full space-x-4 mt-6">
                 <Button
                     outline
                     classes="w-full"
                     onClick={onStopVotingClick}
-                    disabled={!isVotingForProposal || hasGovernanceTransactionInProgress}
-                    isBusy={isVotingForProposal && hasGovernanceTransactionInProgress}
-                    >{localize('actions.stopVoting')}</Button
+                    disabled={isStopVotingDisabled}
+                    isBusy={isStoppingVote}
                 >
-                <Button
-                    classes="w-full"
-                    disabled={isVotingDisabled}
-                    isBusy={hasGovernanceTransactionInProgress}
-                    onClick={onVoteClick}
-                >
+                    {localize('actions.stopVoting')}
+                </Button>
+                <Button classes="w-full" onClick={onVoteClick} disabled={isVotingDisabled} isBusy={isVoting}>
                     {localize('actions.vote')}
                 </Button>
             </buttons-container>
