@@ -260,6 +260,16 @@
                 "title": "General",
                 "description": "Configure your app's appearance and other general settings"
             },
+            "profile": {
+                "title": "Профіль",
+                "description": "Зміни ім'я профілю або встанови аватар"
+            },
+            "network": {
+                "title": "Network"
+            },
+            "collectibles": {
+                "title": "Collectibles"
+            },
             "security": {
                 "title": "Безпека",
                 "description": "Зміни пароль і налаштування параметри безпеки"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "Допомога та інформація",
                 "description": "Знайди відповідь на питання або отримай допомогу з питання"
-            },
-            "profile": {
-                "title": "Профіль",
-                "description": "Зміни ім'я профілю або встанови аватар"
             },
             "sync": {
                 "title": "Синхронізувати гаманці",
@@ -306,8 +312,12 @@
                 "description": "Експорт у файл Stronghold - повна зашифрована резервна копія ваших гаманців та найновіша історія транзакцій"
             },
             "appLock": {
-                "title": "Автоблокування",
+                "title": "Automatic logout",
                 "description": "Час бездіяльності, перш ніж ваші гаманці заблокуються, і ви вийдете"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold Timeout",
+                "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
                 "title": "Maximum media size",
@@ -346,22 +356,9 @@
                 "title": "Deep links",
                 "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
-            "networkConfiguration": {
-                "title": "Налаштування мережі",
-                "title2": "Конфігурація мережі",
-                "description": {
-                    "dev": "Ваші налаштування мережі оновляться автоматично відповідно до поточної конфігурації вузла (перемикання мереж призведе до скидання стану гаманця)",
-                    "nonDev": "Ваші налаштування мережі оновляться автоматично відповідно до поточної конфігурації вузла"
-                },
-                "switchedNetworks": "Успішно переключено мережу на \"{networkName}\".",
-                "resetWallet": "Стан вашого гаманця скинуто.",
-                "connectedTo": "Підключено до",
-                "nodeConfiguration": {
-                    "title": "Вибір вузла",
-                    "description": "Виберіть «Вручну», щоб налаштувати параметри вузла та підключитися до власних вузла(ів)",
-                    "automatic": "Автоматично",
-                    "manual": "Вручну"
-                }
+            "networkInformation": {
+                "title": "Network information",
+                "connectedTo": "Connected to"
             },
             "configureNodeList": {
                 "title": "Конфігурація вузла",
@@ -378,9 +375,9 @@
                 "noNodes": "Немає вузлів, неможливо підключитися до мережі",
                 "noNodesAuto": "Немає вузлів, замість них буде використовуватися автоматичний вибір"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Proof of work",
-                "description": "Завершіть підтвердження роботи локально на вашому пристрої або аутсорсити на вузол"
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "Журнал помилок",
@@ -1068,6 +1065,8 @@
                 "quantityTooLarge": "Quantity needs to be smaller than 64",
                 "emptyName": "Name is a required field",
                 "invalidURI": "Invalid URI, please provide a valid URI",
+                "notReachable": "URI not reachable, unable to check NFT type",
+                "royaltiesMustBeObject": "Royalties must be an object",
                 "royaltiesMustBeJSON": "Royalties must be a valid JSON",
                 "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
                 "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",
@@ -1979,9 +1978,17 @@
                 "short": "Loading blocked",
                 "long": "NFT file type does not match the expected media type"
             },
+            "notReachable": {
+                "short": "Not reachable",
+                "long": "NFT file is not reachable"
+            },
             "tooLargeFile": {
                 "short": "File is too large",
                 "long": "Loading NFT blocked because the file is too large"
+            },
+            "downloadTooLong": {
+                "short": "File took too long to download",
+                "long": "Loading NFT blocked because the file took too long to download"
             },
             "corsError": {
                 "short": "Loading blocked",

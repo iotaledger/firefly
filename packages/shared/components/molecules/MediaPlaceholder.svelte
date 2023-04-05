@@ -5,6 +5,7 @@
     import { appSettings } from '@core/app'
 
     export let type: MimeType = undefined
+    export let isDownloading = false
     export let iconOnly = false
     export let bgColor = 'gray-500'
     export let darkBgColor = 'gray-500'
@@ -49,5 +50,7 @@
     {height}
     {primaryColor}
     {secondaryColor}
-    classes={`text-white dark:text-gray-800 bg-${bgColor} dark:bg-${darkBgColor} text-center ${classes}`}
+    classes={`text-white dark:text-gray-800 bg-${bgColor} dark:bg-${darkBgColor} text-center ${
+        isDownloading ? 'animate-pulse' : ''
+    } ${classes}`}
 />

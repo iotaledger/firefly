@@ -6,6 +6,7 @@
 
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
+    import { getDestinationNetworkFromAddress } from '@core/layer-2'
     import { isStrongholdUnlocked } from '@core/profile-manager'
     import { ExpirationTime } from '@core/utils'
     import {
@@ -16,6 +17,7 @@
         NewTransactionType,
         selectedAccountAssets,
     } from '@core/wallet'
+    import { ActivityAction } from '@core/wallet/enums'
 
     import { DrawerId, openDrawer } from '@/auxiliary/drawer'
     import { sendRouter } from '@/routers'
@@ -24,8 +26,10 @@
     export let storageDeposit: number
     export let initialExpirationDate: ExpirationTime
     export let expirationDate: Date
+    export let visibleSurplus: number = 0
 
-    const { recipient, surplus, layer2Parameters, disableChangeExpiration } = get(newTransactionDetails)
+    const { recipient, giftStorageDeposit, surplus, disableChangeExpiration, disableToggleGift, layer2Parameters } =
+        get(newTransactionDetails)
 
     let loading: boolean = false
 
@@ -39,8 +43,10 @@
     $: isInternal = recipient?.type === 'account'
     $: isTransferring = $selectedAccount.isTransferring
     $: hideGiftToggle =
-        transactionDetails.type === NewTransactionType.TokenTransfer &&
-        transactionDetails.assetId === $selectedAccountAssets?.baseCoin?.id
+        (transactionDetails.type === NewTransactionType.TokenTransfer &&
+            transactionDetails.assetId === $selectedAccountAssets?.baseCoin?.id) ||
+        (disableToggleGift && !giftStorageDeposit) ||
+        layer2Parameters !== undefined
 
     $: activity = {
         ...transactionDetails,
@@ -48,9 +54,12 @@
         subject: recipient,
         isInternal,
         giftedStorageDeposit: 0,
+        surplus: visibleSurplus,
         type: ActivityType.Basic,
         direction: ActivityDirection.Outgoing,
         inclusionState: InclusionState.Pending,
+        action: ActivityAction.Send,
+        destinationNetwork: getDestinationNetworkFromAddress(layer2Parameters?.networkAddress),
     }
 
     async function asyncSendTransaction(): Promise<void> {

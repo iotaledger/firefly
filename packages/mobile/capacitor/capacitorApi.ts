@@ -1,20 +1,22 @@
 import { Capacitor } from '@capacitor/core'
-import { SplashScreen } from '@capacitor/splash-screen'
-
+import { Device } from '@capacitor/device'
 import { IAppVersionDetails, IPlatform } from '@core/app'
 
 import { DeepLinkManager } from './lib/deepLinkManager'
 import { NotificationManager } from './lib/notificationManager'
 import { PincodeManager } from './lib/pincodeManager'
 
+import features from '@features/features'
+
+import { WalletApi } from '@iota/wallet-mobile'
+
+window['__WALLET__API__'] = WalletApi
+
 let activeProfileId = null
 
-export const nativeSplash = SplashScreen
-
-export const CapacitorApi: IPlatform = {
-    updateAppSettings() {
-        return new Promise((resolve) => resolve())
-    },
+const CapacitorApi: Partial<IPlatform> = {
+    // TODO: https://github.com/iotaledger/firefly/issues/6172
+    updateAppSettings: () => new Promise((resolve) => resolve),
 
     getActiveProfile() {
         return activeProfileId
@@ -24,10 +26,20 @@ export const CapacitorApi: IPlatform = {
         activeProfileId = id
     },
 
-    renameProfileFolder: () => new Promise<void>(() => {}),
+    // TODO: https://github.com/iotaledger/firefly/issues/5577
+    // TODO: https://github.com/iotaledger/firefly/issues/5578
+    renameProfileFolder: () => {
+        throw new Error('Function not implemented.')
+    },
 
-    removeProfileFolder: () => new Promise<void>(() => {}),
+    // TODO: https://github.com/iotaledger/firefly/issues/5577
+    // TODO: https://github.com/iotaledger/firefly/issues/5578
+    removeProfileFolder: () => {
+        throw new Error('Function not implemented.')
+    },
 
+    // TODO: https://github.com/iotaledger/firefly/issues/5577
+    // TODO: https://github.com/iotaledger/firefly/issues/5578
     listProfileFolders: () => new Promise<string[]>(() => {}),
 
     PincodeManager: PincodeManager,
@@ -36,82 +48,68 @@ export const CapacitorApi: IPlatform = {
 
     NotificationManager: NotificationManager,
 
-    getStrongholdBackupDestination: () => new Promise<string>(() => {}),
+    // TODO: https://github.com/iotaledger/firefly/issues/5577
+    // TODO: https://github.com/iotaledger/firefly/issues/5578
+    getStrongholdBackupDestination: () => {
+        throw new Error('Function not implemented.')
+    },
 
-    exportTransactionHistory: async () => new Promise<string>(() => {}),
+    // TODO: https://github.com/iotaledger/firefly/issues/5577
+    // TODO: https://github.com/iotaledger/firefly/issues/5578
+    exportTransactionHistory: () => {
+        throw new Error('Function not implemented.')
+    },
 
-    exportMigrationLog: () => new Promise<boolean>(() => {}),
+    // Gets directory for app's configuration files
+    // (On mobile is handled by the Capacitor wallet plugin)
+    getUserDataPath: (): Promise<string> => new Promise<string>((resolve) => resolve('/DATA')),
 
-    exportLedgerMigrationLog: () => new Promise<boolean>(() => {}),
+    // Gets diagnostics information for the system
+    getDiagnostics: async (): Promise<{ label: string; value: string }[]> => {
+        const info = await Device.getInfo()
+        return [
+            { label: 'Name', value: info.name },
+            { label: 'Model', value: info.model },
+            { label: 'OS', value: info.operatingSystem },
+            { label: 'OS version', value: info.osVersion },
+            { label: 'Manufacturer', value: info.manufacturer },
+            { label: 'Webview version', value: info.webViewVersion },
+            { label: 'Memory used', value: `${(info.memUsed / 1024 / 1024).toFixed(2)} MB` },
+            { label: 'Disk free', value: `${(info.realDiskFree / 1024 / 1024).toFixed(2)} MB` },
+        ]
+    },
 
-    importLegacySeed: () => new Promise<string>(() => {}),
+    // Gets os information for the system
+    getOS: (): Promise<string> => new Promise<string>((resolve) => resolve(Capacitor.getPlatform())),
 
-    getUserDataPath: () =>
-        new Promise<string>((resolve) => {
-            resolve('DATA')
-        }),
+    // Check for an update of the application
+    // TODO https://github.com/iotaledger/firefly/issues/6191
+    checkForAppUpdate: () => new Promise<void>(() => {}),
 
-    getDiagnostics: () => new Promise<{ label: string; value: string }[]>(() => {}),
+    // Get version details
+    // TODO https://github.com/iotaledger/firefly/issues/6190
+    getAppVersionDetails: () => new Promise<IAppVersionDetails>(() => {}),
 
-    getOS: () => new Promise<string>((resolve) => resolve(Capacitor.getPlatform())),
+    isFeatureFlagEnabled(keyPath) {
+        return keyPath?.split('.').reduce((prev, cur) => prev && prev[cur], features)?.enabled ?? false
+    },
+
+    cancelNftDownload: () => new Promise<void>(() => {}),
+
+    /**
+     * Methods not needed on mobile
+     */
 
     getMachineId: () => new Promise<string>((resolve) => resolve('')),
 
-    /**
-     * Starts an update of the application
-     *
-     * @method updateDownload
-     *
-     * @returns void
-     */
     downloadAppUpdate: () => new Promise<void>(() => {}),
 
-    /**
-     * Cancels an update of the application
-     *
-     * @method updateCancel
-     *
-     * @returns void
-     */
     cancelAppUpdateDownload: () => new Promise<void>(() => {}),
 
-    /**
-     * Install an update of the application
-     *
-     * @method updateInstall
-     *
-     * @returns void
-     */
     installAppUpdate: () => new Promise<void>(() => {}),
 
-    /**
-     * Check for an update of the application
-     *
-     * @method updateCheck
-     *
-     * @returns void
-     */
-    checkForAppUpdate: () => new Promise<void>(() => {}),
-
-    /**
-     * Get version details
-     *
-     * @method getVersionDetails
-     *
-     * @returns void
-     */
-    getAppVersionDetails: () => new Promise<IAppVersionDetails>(() => {}),
-
-    /**
-     * Change menu state to determine what menu items to display
-     * @returns {undefined}
-     */
     updateMenu: () => new Promise<void>(() => {}),
 
-    /**
-     * Show the popup menu
-     * @returns {undefined}
-     */
     popupMenu: () => new Promise<void>(() => {}),
 
     minimize: () => new Promise<void>(() => {}),
@@ -120,27 +118,17 @@ export const CapacitorApi: IPlatform = {
 
     isMaximized: () => new Promise<boolean>(() => {}),
 
-    /**
-     * Close the app
-     * @returns {undefined}
-     */
     close: () => new Promise<void>(() => {}),
-
-    openUrl: () => new Promise<void>(() => {}),
-
-    /**
-     * Log unhandled exception
-     * @param {string} errorType The type of eerror
-     * @param {Errir} error The error
-     */
-    unhandledException: () => new Promise<void>(() => {}),
 
     onEvent: () => new Promise<void>(() => {}),
 
     removeListenersForEvent: () => new Promise<void>(() => {}),
 
+    openUrl: () => new Promise<void>(() => {}),
+
+    unhandledException: () => new Promise<void>(() => {}),
+
     saveRecoveryKit: () => new Promise<void>(() => {}),
-    ledger: undefined,
 }
 
 window['__CAPACITOR__'] = CapacitorApi

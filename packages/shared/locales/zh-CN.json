@@ -260,6 +260,16 @@
                 "title": "常规",
                 "description": "配置您的应用外观和其他常规设置"
             },
+            "profile": {
+                "title": "个人档案",
+                "description": "更改您的档案名称或设置头像"
+            },
+            "network": {
+                "title": "Network"
+            },
+            "collectibles": {
+                "title": "Collectibles"
+            },
             "security": {
                 "title": "安全设置",
                 "description": "更改您的密码并调整安全相关的设置"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "帮助和信息",
                 "description": "找到问题的答案或通过提交Issue来获得帮助"
-            },
-            "profile": {
-                "title": "个人档案",
-                "description": "更改您的档案名称或设置头像"
             },
             "sync": {
                 "title": "同步钱包",
@@ -306,8 +312,12 @@
                 "description": "导出到 Stronghold文件 - 完整加密备份您的钱包及其最新交易记录"
             },
             "appLock": {
-                "title": "自动锁定",
+                "title": "Automatic logout",
                 "description": "自动锁定钱包并登出的待机时间"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold Timeout",
+                "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
                 "title": "最大文件大小",
@@ -346,22 +356,9 @@
                 "title": "深链接",
                 "description": "当点击开始于 {appProtocol}:// 的深链接时自动填充交易数据"
             },
-            "networkConfiguration": {
-                "title": "网络配置",
-                "title2": "网络配置",
-                "description": {
-                    "dev": "您的网络设置将根据当前节点配置自动更新(切换网络将导致重置钱包状态)",
-                    "nonDev": "您的网络设置将根据当前节点配置自动更新"
-                },
-                "switchedNetworks": "成功切换到\"{networkName}\"。",
-                "resetWallet": "您的钱包状态已重置。",
-                "connectedTo": "已连接到",
-                "nodeConfiguration": {
-                    "title": "节点选择",
-                    "description": "选择“手动”来配置节点设置并连接到您自己的节点",
-                    "automatic": "自动",
-                    "manual": "手动"
-                }
+            "networkInformation": {
+                "title": "Network information",
+                "connectedTo": "Connected to"
             },
             "configureNodeList": {
                 "title": "节点配置",
@@ -378,9 +375,9 @@
                 "noNodes": "没有节点，无法连接到网络",
                 "noNodesAuto": "尚未配置节点，将使用节点自动选择功能"
             },
-            "proofOfWork": {
-                "title": "工作量证明",
-                "description": "在您的本地设备或在外包节点上完成工作量证明"
+            "localProofOfWork": {
+                "title": "Proof of work",
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "错误日志",
@@ -1068,6 +1065,8 @@
                 "quantityTooLarge": "Quantity needs to be smaller than 64",
                 "emptyName": "Name is a required field",
                 "invalidURI": "Invalid URI, please provide a valid URI",
+                "notReachable": "URI not reachable, unable to check NFT type",
+                "royaltiesMustBeObject": "Royalties must be an object",
                 "royaltiesMustBeJSON": "Royalties must be a valid JSON",
                 "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
                 "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",
@@ -1779,7 +1778,7 @@
             "error": "认领奖励时出现错误，请重试。"
         },
         "vote": {
-            "success": "投票成功"
+            "success": "Votes successfully cast"
         },
         "stopVoting": {
             "success": "投票成功停止"
@@ -1979,9 +1978,17 @@
                 "short": "加载已阻止的",
                 "long": "NFT 文件类型与预期媒体类型不匹配"
             },
+            "notReachable": {
+                "short": "Not reachable",
+                "long": "NFT file is not reachable"
+            },
             "tooLargeFile": {
                 "short": "文件过大",
                 "long": "由于文件太大，无法加载 NFT"
+            },
+            "downloadTooLong": {
+                "short": "File took too long to download",
+                "long": "Loading NFT blocked because the file took too long to download"
             },
             "corsError": {
                 "short": "加载受阻",

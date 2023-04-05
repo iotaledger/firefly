@@ -1,71 +1,94 @@
 import { get } from 'svelte/store'
-import type { OutputOptions, Assets } from '@iota/wallet'
-
-import { selectedAccount } from '@core/account'
+import { OutputOptions, Assets } from '@iota/wallet/out/types'
 import { convertDateToUnixTimestamp, Converter } from '@core/utils'
-import { IAsset } from '../interfaces'
-import { selectedAccountAssets } from '../stores'
-import { getLayer2MetadataForTransfer, ILayer2Parameters } from '@core/layer-2'
-import { addGasBudget } from '@core/layer-2/utils/addGasBudget'
+import { getAssetById, NewTransactionType, selectedAccountAssets } from '../stores'
+import { addGasBudget, getLayer2MetadataForTransfer } from '@core/layer-2/utils'
+import { NewTransactionDetails } from '@core/wallet/types'
+import { getAddressFromSubject } from '@core/wallet/utils'
+import { ReturnStrategy } from '../enums'
 
-export function getOutputOptions(
-    expirationDate: Date,
-    recipientAddress: string,
-    rawAmount: string,
-    metadata?: string,
-    tag?: string,
-    asset?: IAsset,
-    giftStorageDeposit?: boolean,
-    surplus?: string,
-    layer2Parameters?: ILayer2Parameters,
-    nftId?: string
-): OutputOptions {
-    const unixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
-    const nativeTokenId = asset?.id !== get(selectedAccountAssets)?.baseCoin?.id ? asset?.id : undefined
-    const bigAmount = BigInt(rawAmount)
+export function getOutputOptions(transactionDetails: NewTransactionDetails): OutputOptions {
+    const { recipient, expirationDate, giftStorageDeposit, layer2Parameters } = transactionDetails ?? {}
 
-    let amount: string
-    if (nativeTokenId && surplus) {
-        amount = surplus
-    } else {
-        amount = nativeTokenId ? '0' : bigAmount.toString()
-    }
+    const recipientAddress = layer2Parameters ? layer2Parameters.networkAddress : getAddressFromSubject(recipient)
 
-    tag = Converter.utf8ToHex(tag, true)
-    if (layer2Parameters) {
-        amount = addGasBudget(amount)
-        metadata = getLayer2MetadataForTransfer(recipientAddress)
-        recipientAddress = layer2Parameters.networkAddress
-    } else {
-        metadata = Converter.utf8ToHex(metadata, true)
-    }
+    let amount = getAmountFromTransactionDetails(transactionDetails)
+    amount = layer2Parameters ? addGasBudget(amount) : amount
 
-    const assets: Assets = {}
-    if (nftId) {
-        assets.nftId = nftId
-    } else if (nativeTokenId) {
-        assets.nativeTokens = [
-            {
-                id: nativeTokenId,
-                amount: '0x' + bigAmount.toString(16),
-            },
-        ]
-    }
+    const assets = getAssetFromTransactionDetails(transactionDetails)
+
+    const tag = Converter.utf8ToHex(transactionDetails?.tag)
+
+    const metadata = layer2Parameters
+        ? getLayer2MetadataForTransfer(transactionDetails)
+        : Converter.utf8ToHex(transactionDetails?.metadata)
+
+    const expirationUnixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
 
     return <OutputOptions>{
         recipientAddress,
         amount,
+        ...(assets && { assets }),
         features: {
-            ...(metadata && { metadata }),
             ...(tag && { tag }),
-            ...(layer2Parameters && { sender: get(selectedAccount).depositAddress }),
+            ...(metadata && { metadata }),
+            ...(layer2Parameters && { sender: layer2Parameters.senderAddress }),
         },
         unlocks: {
-            ...(unixTime && { expirationUnixTime: unixTime }),
+            ...(expirationUnixTime && { expirationUnixTime }),
         },
-        ...((nativeTokenId || nftId) && { assets }),
         storageDeposit: {
-            returnStrategy: giftStorageDeposit ? 'Gift' : 'Return',
+            returnStrategy: giftStorageDeposit ? ReturnStrategy.Gift : ReturnStrategy.Return,
         },
     }
+}
+
+function getAmountFromTransactionDetails(transactionDetails: NewTransactionDetails): string {
+    let rawAmount: string
+    if (transactionDetails.type === NewTransactionType.TokenTransfer) {
+        const asset = getAssetById(transactionDetails.assetId)
+        const nativeTokenId = asset?.id === get(selectedAccountAssets)?.baseCoin?.id ? undefined : asset?.id
+
+        if (nativeTokenId) {
+            rawAmount = transactionDetails?.surplus ?? '0'
+        } else {
+            rawAmount = BigInt(transactionDetails.rawAmount).toString()
+        }
+    } else if (transactionDetails.type === NewTransactionType.NftTransfer) {
+        rawAmount = transactionDetails?.surplus ?? '0'
+    } else {
+        rawAmount = '0'
+    }
+    return rawAmount
+}
+
+function getAssetFromTransactionDetails(transactionDetails: NewTransactionDetails): Assets {
+    let assets: Assets
+
+    if (transactionDetails.type === NewTransactionType.NftTransfer) {
+        assets = { nftId: transactionDetails.nftId }
+    } else if (transactionDetails.type === NewTransactionType.TokenTransfer) {
+        const asset = getAssetById(transactionDetails.assetId)
+        const nativeTokenId = asset?.id === get(selectedAccountAssets)?.baseCoin?.id ? undefined : asset?.id
+
+        if (nativeTokenId) {
+            const bigAmount = BigInt(transactionDetails.rawAmount)
+            assets = {
+                nativeTokens: [
+                    {
+                        id: nativeTokenId,
+                        amount: Converter.bigIntToHex(bigAmount),
+                    },
+                ],
+            }
+
+            // If it's a base coin transaction, we don't need to specify assets
+        } else {
+            assets = undefined
+        }
+    } else {
+        throw new Error('Invalid transaction type')
+    }
+
+    return assets
 }

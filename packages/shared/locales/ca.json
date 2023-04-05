@@ -260,6 +260,16 @@
                 "title": "General",
                 "description": "Configure your app's appearance and other general settings"
             },
+            "profile": {
+                "title": "Perfil",
+                "description": "Canvieu el nom del vostre perfil o configureu un avatar"
+            },
+            "network": {
+                "title": "Network"
+            },
+            "collectibles": {
+                "title": "Collectibles"
+            },
             "security": {
                 "title": "Seguretat",
                 "description": "Canvieu la contrasenya i ajusteu la configuració relacionada amb la seguretat"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "Informació i ajuda",
                 "description": "Cerqueu la resposta a una pregunta o obteniu ajuda amb un problema"
-            },
-            "profile": {
-                "title": "Perfil",
-                "description": "Canvieu el nom del vostre perfil o configureu un avatar"
             },
             "sync": {
                 "title": "Sincronitza moneders",
@@ -306,8 +312,12 @@
                 "description": "Exporta a un fitxer Stronghold - una còpia completa de seguretat xifrada dels vostres moneders i l'historial de les darreres transaccions"
             },
             "appLock": {
-                "title": "Bloqueig automàtic",
+                "title": "Automatic logout",
                 "description": "Temps d'inactivitat abans que els moneders es bloquegin i us tanqui la sessió"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold Timeout",
+                "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
                 "title": "Mida màxima del contingut multimèdia",
@@ -346,22 +356,9 @@
                 "title": "Deep links",
                 "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
-            "networkConfiguration": {
-                "title": "Configuració de la xarxa",
-                "title2": "Configuració de la xarxa",
-                "description": {
-                    "dev": "Els paràmetres de la vostra xarxa s'actualitzaran automàticament, d'acord amb la configuració actual del node (canviar de xarxa comportarà el restabliment de l'estat del moneder)",
-                    "nonDev": "Els paràmetres de la vostra xarxa s'actualitzaran automàticament, d'acord amb la configuració actual del node"
-                },
-                "switchedNetworks": "La xarxa ha canviat correctament a \"{networkName}\".",
-                "resetWallet": "S'ha restablert l'estat del vostre moneder.",
-                "connectedTo": "Connectat a",
-                "nodeConfiguration": {
-                    "title": "Selecció de node",
-                    "description": "Trieu \"Manual\" per a configurar els paràmetres del node i connectar-vos al vostre propi node o nodes",
-                    "automatic": "Automàtic",
-                    "manual": "Manual"
-                }
+            "networkInformation": {
+                "title": "Network information",
+                "connectedTo": "Connected to"
             },
             "configureNodeList": {
                 "title": "Configuració del node",
@@ -378,9 +375,9 @@
                 "noNodes": "No hi ha nodes, no us podeu connectar a la xarxa",
                 "noNodesAuto": "No hi ha nodes, en lloc d'això s'utilitzarà la selecció automàtica"
             },
-            "proofOfWork": {
-                "title": "Prova de Treball",
-                "description": "Realitza la prova de treball localment en el teu dispositiu o delegar-ho al node"
+            "localProofOfWork": {
+                "title": "Proof of work",
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "Registres d'errors",
@@ -1068,6 +1065,8 @@
                 "quantityTooLarge": "Quantity needs to be smaller than 64",
                 "emptyName": "Name is a required field",
                 "invalidURI": "Invalid URI, please provide a valid URI",
+                "notReachable": "URI not reachable, unable to check NFT type",
+                "royaltiesMustBeObject": "Royalties must be an object",
                 "royaltiesMustBeJSON": "Royalties must be a valid JSON",
                 "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
                 "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",
@@ -1979,9 +1978,17 @@
                 "short": "Loading blocked",
                 "long": "NFT file type does not match the expected media type"
             },
+            "notReachable": {
+                "short": "Not reachable",
+                "long": "NFT file is not reachable"
+            },
             "tooLargeFile": {
                 "short": "File is too large",
                 "long": "Loading NFT blocked because the file is too large"
+            },
+            "downloadTooLong": {
+                "short": "File took too long to download",
+                "long": "Loading NFT blocked because the file took too long to download"
             },
             "corsError": {
                 "short": "Loading blocked",
