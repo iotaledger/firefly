@@ -1,6 +1,6 @@
 import { CoinType } from '@iota/wallet/out/types'
 
-import { activeProfileId } from '@core/profile/stores'
+import { activeProfileId } from '@core/profile/stores/active-profile-id.store'
 import { GAS_BUDGET } from '@core/layer-2/constants'
 
 import { getOutputOptions } from '../utils'
