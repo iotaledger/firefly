@@ -6,8 +6,15 @@ import sveltePreprocess from 'svelte-preprocess'
 import SentryWebpackPlugin from '@sentry/webpack-plugin'
 import { version } from './package.json'
 import features from './features/features'
+import { Configuration as WebpackConfiguration } from 'webpack'
+import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server'
 
-const mode = process.env.NODE_ENV || 'development'
+type Mode = 'none' | 'development' | 'production'
+interface Configuration extends WebpackConfiguration {
+    devServer?: WebpackDevServerConfiguration
+}
+
+const mode: Mode = (process.env.NODE_ENV as Mode) || 'development'
 const prod = mode === 'production'
 const hardcodeNodeEnv = typeof process.env.HARDCODE_NODE_ENV !== 'undefined'
 const SENTRY = process.env.SENTRY === 'true'
@@ -24,6 +31,12 @@ const appProtocol = stage === 'prod' ? 'firefly' : `firefly-${stage.toLowerCase(
 
 // / ------------------------ Resolve ------------------------
 
+const fallback: { [index: string]: string | false | string[] } = {
+    path: false,
+    fs: false,
+    crypto: false,
+}
+
 const resolve = {
     alias: {
         svelte: path.dirname(require.resolve('svelte/package.json')),
@@ -38,11 +51,7 @@ const resolve = {
     },
     extensions: ['.mjs', '.js', '.ts', '.svelte'],
     mainFields: ['svelte', 'browser', 'module', 'main'],
-    fallback: {
-        path: false,
-        fs: false,
-        crypto: false,
-    },
+    fallback,
 }
 
 // / ------------------------ Output ------------------------
@@ -196,7 +205,7 @@ const sentryPlugins = [
 
 // / ------------------------ Webpack config ------------------------
 
-const webpackConfig = [
+const webpackConfig: Configuration[] = [
     {
         entry: {
             'build/index': ['./index.js'],

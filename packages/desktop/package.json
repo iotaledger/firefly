@@ -29,6 +29,7 @@
     },
     "dependencies": {
         "@sentry/electron": "^2.5.4",
+        "@types/webpack-dev-server": "^4.7.2",
         "argon2": "^0.27.1",
         "electron-dl": "^3.5.0",
         "electron-log": "^4.3.1",
