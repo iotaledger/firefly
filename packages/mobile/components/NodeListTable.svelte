@@ -40,10 +40,15 @@
                         <Pill
                             data={localize('views.settings.configureNodeList.primaryNode').toLowerCase()}
                             textColor="blue-500"
+                            classes="flex-shrink-0"
                         />
                     {/if}
                     {#if node?.disabled}
-                        <Pill data={localize('general.excluded').toLowerCase()} textColor="red-500" />
+                        <Pill
+                            data={localize('general.excluded').toLowerCase()}
+                            textColor="red-500"
+                            classes="flex-shrink-0"
+                        />
                     {/if}
                 </div>
             </button>
