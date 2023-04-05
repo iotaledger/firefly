@@ -21,7 +21,8 @@
 
     let animationHeight: number = 0
 
-    $: $isKeyboardOpen,
+    $: animation,
+        $isKeyboardOpen,
         windowElementHeight,
         headerElementHeight,
         contentElementHeight,
@@ -29,9 +30,11 @@
         updateHeight()
 
     function updateHeight(): void {
-        animationHeight = !$isKeyboardOpen
-            ? windowElementHeight - (headerElementHeight + contentElementHeight + footerElementHeight + HEIGHT_OFFSET)
-            : 0
+        animationHeight =
+            $isKeyboardOpen || !animation
+                ? 0
+                : windowElementHeight -
+                  (headerElementHeight + contentElementHeight + footerElementHeight + HEIGHT_OFFSET)
     }
 </script>
 
