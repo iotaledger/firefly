@@ -100,6 +100,8 @@ const CapacitorApi: Partial<IPlatform> = {
         return keyPath?.split('.').reduce((prev, cur) => prev && prev[cur], features)?.enabled ?? false
     },
 
+    cancelNftDownload: () => new Promise<void>(() => {}),
+
     /**
      * Methods not needed on mobile
      */

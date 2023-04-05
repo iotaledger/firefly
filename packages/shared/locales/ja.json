@@ -260,6 +260,16 @@
                 "title": "General",
                 "description": "Configure your app's appearance and other general settings"
             },
+            "profile": {
+                "title": "プロフィール",
+                "description": "プロフィール名を変更するか、アバターを設定します"
+            },
+            "network": {
+                "title": "Network"
+            },
+            "collectibles": {
+                "title": "Collectibles"
+            },
             "security": {
                 "title": "セキュリティ",
                 "description": "パスワードを変更し、セキュリティ関連の設定を調整する"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "ヘルプ & 情報",
                 "description": "質問に対する答えを見つけるか、問題のヘルプを表示します"
-            },
-            "profile": {
-                "title": "プロフィール",
-                "description": "プロフィール名を変更するか、アバターを設定します"
             },
             "sync": {
                 "title": "ウォレットを同期",
@@ -306,8 +312,12 @@
                 "description": "Stronghold ファイルへのエクスポート - ウォレットと最新の取引履歴の暗号化されたバックアップです"
             },
             "appLock": {
-                "title": "自動ロック",
+                "title": "Automatic logout",
                 "description": "ウォレットがロックされ、ログアウトされるまでの非アクティブ時間"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold Timeout",
+                "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
                 "title": "Maximum media size",
@@ -346,22 +356,9 @@
                 "title": "Deep links",
                 "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
-            "networkConfiguration": {
-                "title": "ネットワーク設定",
-                "title2": "ネットワーク設定",
-                "description": {
-                    "dev": "ネットワーク設定は、現在のノード構成に従って自動的に更新されます（ネットワークを切り替えると、ウォレットの状態がリセットされます）",
-                    "nonDev": "ネットワーク設定は現在のノード構成に従って自動的に更新されます"
-                },
-                "switchedNetworks": "ネットワークを \"{networkName}\" に切り替えました。",
-                "resetWallet": "ウォレットの状態がリセットされました。",
-                "connectedTo": "に接続しました",
-                "nodeConfiguration": {
-                    "title": "ノードの選択",
-                    "description": "\"手動\" を選択してノード設定を構成し、独自のノードに接続します",
-                    "automatic": "自動",
-                    "manual": "手動入力"
-                }
+            "networkInformation": {
+                "title": "Network information",
+                "connectedTo": "Connected to"
             },
             "configureNodeList": {
                 "title": "ノード設定",
@@ -378,9 +375,9 @@
                 "noNodes": "ノードがないため、ネットワークに接続できません",
                 "noNodesAuto": "ノードがありません。自動選択が代わりに使用されます"
             },
-            "proofOfWork": {
-                "title": "プルーフ・オブ・ワーク",
-                "description": "デバイス上ででプルーフオブワーク(POW)を完了するか、ノードにアウトソーシングします"
+            "localProofOfWork": {
+                "title": "Proof of work",
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "エラーログ",
@@ -1068,6 +1065,8 @@
                 "quantityTooLarge": "Quantity needs to be smaller than 64",
                 "emptyName": "Name is a required field",
                 "invalidURI": "Invalid URI, please provide a valid URI",
+                "notReachable": "URI not reachable, unable to check NFT type",
+                "royaltiesMustBeObject": "Royalties must be an object",
                 "royaltiesMustBeJSON": "Royalties must be a valid JSON",
                 "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
                 "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",
@@ -1979,9 +1978,17 @@
                 "short": "Loading blocked",
                 "long": "NFT file type does not match the expected media type"
             },
+            "notReachable": {
+                "short": "Not reachable",
+                "long": "NFT file is not reachable"
+            },
             "tooLargeFile": {
                 "short": "File is too large",
                 "long": "Loading NFT blocked because the file is too large"
+            },
+            "downloadTooLong": {
+                "short": "File took too long to download",
+                "long": "Loading NFT blocked because the file took too long to download"
             },
             "corsError": {
                 "short": "Loading blocked",

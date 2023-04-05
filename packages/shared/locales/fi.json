@@ -260,6 +260,16 @@
                 "title": "Yleiset",
                 "description": "Määritä sovelluksen ulkoasu ja muut yleiset asetukset"
             },
+            "profile": {
+                "title": "Profiili",
+                "description": "Vaihda profiilisi nimeä tai aseta profiilikuva"
+            },
+            "network": {
+                "title": "Network"
+            },
+            "collectibles": {
+                "title": "Collectibles"
+            },
             "security": {
                 "title": "Suojaus",
                 "description": "Vaihda salasanasi ja säädä turvallisuuteen liittyviä asetuksia"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "Apua ja tietoa",
                 "description": "Etsi vastaus kysymykseen tai hae apua ongelmaan"
-            },
-            "profile": {
-                "title": "Profiili",
-                "description": "Vaihda profiilisi nimeä tai aseta profiilikuva"
             },
             "sync": {
                 "title": "Synkronoi lompakot",
@@ -306,8 +312,12 @@
                 "description": "Vie Stronghold-tiedostoon - täydellinen salattu varmuuskopio lompakoistasi ja viimeisimmästä transaktiohistoriastasi"
             },
             "appLock": {
-                "title": "Automaattinen lukitus",
+                "title": "Automatic logout",
                 "description": "Käyttämättömyysaika ennen kuin lompakkosi lukittuvat ja sinut kirjataan ulos"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold Timeout",
+                "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
                 "title": "Maximum media size",
@@ -346,22 +356,9 @@
                 "title": "Syvälinkit",
                 "description": "Täytä transaktion tiedot automaattisesti Fireflyssä, kun napsautat syvälinkkiä, joka alkaa {appProtocol}://"
             },
-            "networkConfiguration": {
-                "title": "Verkkoasetukset",
-                "title2": "Verkkoasetukset",
-                "description": {
-                    "dev": "Verkkoasetuksesi päivittyvät automaattisesti nykyisten solmuasetusten mukaan (verkon vaihtaminen johtaa lompakon tilan nollaamiseen)",
-                    "nonDev": "Verkkoasetuksesi päivittyvät automaattisesti nykyisten solmuasetusten mukaan"
-                },
-                "switchedNetworks": "Siirrytty onnistuneesti verkkoon \"{networkName}\".",
-                "resetWallet": "Lompakon tila on nollattu.",
-                "connectedTo": "Yhdistetty",
-                "nodeConfiguration": {
-                    "title": "Solmun valinta",
-                    "description": "Valitse \"Manuaalinen\" määrittääksesi solmuasetukset ja yhdistääksesi omaan solmuusi",
-                    "automatic": "Automaattinen",
-                    "manual": "Manuaalinen"
-                }
+            "networkInformation": {
+                "title": "Network information",
+                "connectedTo": "Connected to"
             },
             "configureNodeList": {
                 "title": "Solmuasetukset",
@@ -378,9 +375,9 @@
                 "noNodes": "Solmuja ei ole, yhteyden muodostaminen verkkoon ei ole mahdollista",
                 "noNodesAuto": "Solmuja ei ole, käytetään sen sijaan automaattista valintaa"
             },
-            "proofOfWork": {
-                "title": "Todiste työstä (PoW)",
-                "description": "Suorita työntodiste (PoW) paikallisesti laitteellasi tai ulkoista se solmulle"
+            "localProofOfWork": {
+                "title": "Proof of work",
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "Virheloki",
@@ -1068,6 +1065,8 @@
                 "quantityTooLarge": "Quantity needs to be smaller than 64",
                 "emptyName": "Name is a required field",
                 "invalidURI": "Invalid URI, please provide a valid URI",
+                "notReachable": "URI not reachable, unable to check NFT type",
+                "royaltiesMustBeObject": "Royalties must be an object",
                 "royaltiesMustBeJSON": "Royalties must be a valid JSON",
                 "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
                 "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",
@@ -1979,9 +1978,17 @@
                 "short": "Loading blocked",
                 "long": "NFT file type does not match the expected media type"
             },
+            "notReachable": {
+                "short": "Not reachable",
+                "long": "NFT file is not reachable"
+            },
             "tooLargeFile": {
                 "short": "File is too large",
                 "long": "Loading NFT blocked because the file is too large"
+            },
+            "downloadTooLong": {
+                "short": "File took too long to download",
+                "long": "Loading NFT blocked because the file took too long to download"
             },
             "corsError": {
                 "short": "Loading blocked",

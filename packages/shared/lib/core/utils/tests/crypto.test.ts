@@ -1,6 +1,6 @@
 import '@mocks/i18n.mock'
 
-import { validateBech32Address } from '../crypto/utils'
+import { validateBech32Address } from '../crypto/utils/validateBech32Address'
 
 describe('Module: crypto', () => {
     describe('Function: validateBech32Address', () => {

@@ -260,6 +260,16 @@
                 "title": "General",
                 "description": "Configure your app's appearance and other general settings"
             },
+            "profile": {
+                "title": "프로필",
+                "description": "프로필 이름을 바꾸거나 사진 등록하기"
+            },
+            "network": {
+                "title": "Network"
+            },
+            "collectibles": {
+                "title": "Collectibles"
+            },
             "security": {
                 "title": "보안",
                 "description": "비밀번호 변경 및 다른 보안 관련 설정들"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "도움말 및 정보",
                 "description": "질문에 대한 답변들 및 도움말"
-            },
-            "profile": {
-                "title": "프로필",
-                "description": "프로필 이름을 바꾸거나 사진 등록하기"
             },
             "sync": {
                 "title": "지갑 동기화하기",
@@ -306,8 +312,12 @@
                 "description": "Stronghold 파일로 내보내기 - 지갑과 최신 거래 내역의 완전한 암호화 백업"
             },
             "appLock": {
-                "title": "자동 잠금",
+                "title": "Automatic logout",
                 "description": "지갑이 잠기고 로그아웃 되기 전 비활성 시간"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold Timeout",
+                "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
                 "title": "Maximum media size",
@@ -346,22 +356,9 @@
                 "title": "Deep links",
                 "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
-            "networkConfiguration": {
-                "title": "네트워크 구성",
-                "title2": "네트워크 구성",
-                "description": {
-                    "dev": "현재 노드 구성에 의해 네트워크 설정이 자동으로 갱신될 것입니다 (네트워크 변경 시 지갑 상태가 초기화됩니다)",
-                    "nonDev": "현재 노드 구성에 의해 네트워크 설정이 자동으로 갱신될 것입니다"
-                },
-                "switchedNetworks": "\"{networkName}\" 네트워크로 성공적으로 변경했습니다.",
-                "resetWallet": "지갑 상태가 초기화되었습니다.",
-                "connectedTo": "연결함:",
-                "nodeConfiguration": {
-                    "title": "노드 선택",
-                    "description": "\"수동\"을 선택하여 노드 설정을 구성하고 노드로 연결",
-                    "automatic": "자동",
-                    "manual": "수동"
-                }
+            "networkInformation": {
+                "title": "Network information",
+                "connectedTo": "Connected to"
             },
             "configureNodeList": {
                 "title": "노드 구성",
@@ -378,9 +375,9 @@
                 "noNodes": "노드가 없으며, 네트워크에 연결할 수 없습니다",
                 "noNodesAuto": "노드가 없으며 대신 자동 선택이 사용됩니다"
             },
-            "proofOfWork": {
-                "title": "작업증명",
-                "description": "작업증명을 기기에서 수행하거나 또는 외부 노드에서 수행"
+            "localProofOfWork": {
+                "title": "Proof of work",
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "오류 로그",
@@ -1068,6 +1065,8 @@
                 "quantityTooLarge": "Quantity needs to be smaller than 64",
                 "emptyName": "Name is a required field",
                 "invalidURI": "Invalid URI, please provide a valid URI",
+                "notReachable": "URI not reachable, unable to check NFT type",
+                "royaltiesMustBeObject": "Royalties must be an object",
                 "royaltiesMustBeJSON": "Royalties must be a valid JSON",
                 "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
                 "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",
@@ -1979,9 +1978,17 @@
                 "short": "Loading blocked",
                 "long": "NFT file type does not match the expected media type"
             },
+            "notReachable": {
+                "short": "Not reachable",
+                "long": "NFT file is not reachable"
+            },
             "tooLargeFile": {
                 "short": "File is too large",
                 "long": "Loading NFT blocked because the file is too large"
+            },
+            "downloadTooLong": {
+                "short": "File took too long to download",
+                "long": "Loading NFT blocked because the file took too long to download"
             },
             "corsError": {
                 "short": "Loading blocked",
