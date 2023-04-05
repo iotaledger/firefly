@@ -59,6 +59,7 @@
                 busy = true
                 await changeStrongholdPassword(oldPassword, newPassword)
                 showAppNotification({
+                    alert: true,
                     type: 'success',
                     message: localize('general.passwordSuccess'),
                 })
