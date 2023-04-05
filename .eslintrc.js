@@ -76,7 +76,7 @@ const typescriptEslintRules = {
     '@typescript-eslint/no-unsafe-return': 'off', // OFF b/c used in Svelte components for UI logic
     '@typescript-eslint/unused-export-let': 'off', // OFF b/c used in Svelte components for UI logic
     '@typescript-eslint/no-unused-vars': 'error',
-    '@typescript-eslint/no-var-requires': 'warn',
+    '@typescript-eslint/no-var-requires': 'error',
     '@typescript-eslint/prefer-regexp-exec': 'error',
     '@typescript-eslint/restrict-plus-operands': 'off', // OFF b/c not entirely accurate despite proper typings
     '@typescript-eslint/restrict-template-expressions': 'off', // OFF b/c using any is useful in template expressions

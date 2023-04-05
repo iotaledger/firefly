@@ -15,4 +15,5 @@ const electronFeatures = {
         },
     },
 }
+
 export default electronFeatures
