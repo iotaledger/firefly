@@ -31,11 +31,6 @@
 
 <network-configuration-init-view class="flex flex-col justify-between space-y-4 h-full">
     <div class="flex flex-col space-y-4">
-        <Text type={TextType.p} secondary classes="mb-3">
-            {localize(
-                `views.settings.networkInformation.description.${$activeProfile?.isDeveloperProfile ? 'dev' : 'nonDev'}`
-            )}
-        </Text>
         <div class="flex flex-row justify-between space-x-2">
             <div>
                 <Text type={TextType.p} classes="inline" secondary>
