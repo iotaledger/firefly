@@ -1,7 +1,7 @@
 import { IAccountState } from '@core/account'
 import { ActivityDirection } from '@core/wallet/enums'
 import { IProcessedTransaction } from '@core/wallet/interfaces'
-import { Output, Subject } from '@core/wallet/types'
+import { Output, SenderInfo } from '@core/wallet/types'
 import { getSubjectFromAddress } from '../../getSubjectFromAddress'
 import { isSubjectInternal } from '../../isSubjectInternal'
 import { getRecipientFromOutput } from '../../outputs'
@@ -11,10 +11,7 @@ export function getSendingInformation(
     processedTransaction: IProcessedTransaction,
     output: Output,
     account: IAccountState
-): {
-    subject: Subject
-    isInternal: boolean
-} {
+): SenderInfo {
     const { direction, wrappedInputs } = processedTransaction
 
     const recipient = getRecipientFromOutput(output)
