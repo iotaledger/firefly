@@ -14,6 +14,7 @@
     export let value: string
     export let type = Type.Mnemonic
     export let disabled = false
+    export let minHeight: number = 200
 
     let statusMessage = ''
     let content = ''
@@ -113,6 +114,7 @@
         placeholder=""
         spellcheck={false}
         autofocus
+        style:min-height="{minHeight}px"
     />
     <div class="flex flex-row items-start justify-between">
         <Text type="p" secondary {error}>{statusMessage}&nbsp;</Text>
@@ -121,7 +123,7 @@
 
 <style type="text/scss">
     textarea {
-        min-height: 200px;
+        min-height: var(--min-height);
 
         &:disabled {
             @apply pointer-events-none;

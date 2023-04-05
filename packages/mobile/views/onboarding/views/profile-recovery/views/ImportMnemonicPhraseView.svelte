@@ -43,14 +43,14 @@
 
 <OnboardingLayout {onBackClick} {title}>
     <div slot="content">
-        <Text type={TextType.p} secondary fontSize="15" classes="mb-8"
-            >{localize('views.onboarding.profileRecovery.importMnemonicPhrase.body')}</Text
-        >
-        <Text type={TextType.h5} classes="mb-3"
-            >{localize('views.onboarding.profileRecovery.importMnemonicPhrase.enter')}</Text
-        >
-        <form on:submit|preventDefault={onContinueClick} id="text-import-form">
-            <ImportTextfield type={$onboardingProfile?.recoveryType} bind:value={input} />
+        <Text type={TextType.p} secondary fontSize="15" classes="mb-8">
+            {localize('views.onboarding.profileRecovery.importMnemonicPhrase.body')}
+        </Text>
+        <Text type={TextType.h5} classes="mb-3">
+            {localize('views.onboarding.profileRecovery.importMnemonicPhrase.enter')}
+        </Text>
+        <form on:submit|preventDefault={onContinueClick} id="text-import-form" class="h-4">
+            <ImportTextfield type={$onboardingProfile?.recoveryType} bind:value={input} minHeight={120} />
         </form>
     </div>
     <div slot="footer" class="flex flex-row flex-wrap justify-between items-center space-x-4">
