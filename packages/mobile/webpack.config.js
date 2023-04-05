@@ -23,6 +23,7 @@ const resolve = {
     },
     extensions: ['.mjs', '.js', '.ts', '.svelte'],
     mainFields: ['svelte', 'browser', 'module', 'main'],
+    // conditionNames: ['svelte'],
     fallback: {
         path: false,
         fs: false,
@@ -43,6 +44,7 @@ const rendererRules = [
     {
         test: /\.ts$/,
         loader: 'esbuild-loader',
+        exclude: /node_modules/,
     },
     {
         test: /\.json$/,
@@ -58,6 +60,30 @@ const rendererRules = [
                 },
                 emitCss: prod,
                 hotReload: !prod,
+                // TODO remove comments
+                // https://github.com/sveltejs/svelte-loader#hot-reload
+                hotOptions: {
+                    // Prevent preserving local component state
+                    preserveLocalState: false,
+
+                    // Prevent doing a full reload on next HMR update after fatal error
+                    noReload: true,
+
+                    // Try to recover after runtime errors in component init
+                    optimistic: true,
+
+                    // --- Advanced ---
+
+                    // Prevent adding an HMR accept handler to components with
+                    // accessors option to true, or to components with named exports
+                    // (from <script context="module">). This have the effect of
+                    // recreating the consumer of those components, instead of the
+                    // component themselves, on HMR updates. This might be needed to
+                    // reflect changes to accessors / named exports in the parents,
+                    // depending on how you use them.
+                    acceptAccessors: false,
+                    acceptNamedExports: true,
+                },
                 preprocess: sveltePreprocess({
                     sourceMap: false,
                     postcss: true,
