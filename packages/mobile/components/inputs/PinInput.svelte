@@ -4,7 +4,7 @@
     import { Error, Icon, Text, TextType } from '@ui'
 
     import { Icon as IconType } from '@auxiliary/icon'
-    import { isValidPin, PIN_LENGTH } from '@core/utils'
+    import { PIN_LENGTH } from '@core/utils'
 
     const inputElements: HTMLInputElement[] = []
     const dispatch = createEventDispatcher()
@@ -62,9 +62,6 @@
         } else if (event.inputType === 'insertText') {
             inputElements[i + 1]?.focus()
             value = inputs.join('')
-            if (isValidPin(value)) {
-                dispatch('submit')
-            }
         }
     }
 

@@ -132,7 +132,6 @@
                     bind:this={pinRef}
                     bind:value={pinCode}
                     classes={shake && 'animate-shake'}
-                    on:submit={onSubmitClick}
                     disabled={hasReachedMaxAttempts || isBusy}
                     autofocus
                 />
