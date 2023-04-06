@@ -14,22 +14,14 @@
         ActivityAsyncStatus,
     } from '@core/wallet'
     import { time } from '@core/app'
+    import { getSubjectFromActivity } from '@core/wallet/utils/generateActivity/helper'
 
     export let activity: TransactionActivity
 
     $: asset = getAssetFromPersistedAssets(activity.assetId)
     $: amount = formatTokenAmountDefault(Number(activity.rawAmount), asset?.metadata, asset?.metadata?.unit)
     $: isTimelocked = activity.asyncData?.timelockDate > $time
-
-    let subjectData = activity.subject
-    $: if (activity.parsedLayer2Metadata) {
-        subjectData = {
-            ...activity.subject,
-            ...(activity.subject?.type === 'address' && {
-                address: activity.parsedLayer2Metadata?.ethereumAddress,
-            }),
-        }
-    }
+    $: subject = getSubjectFromActivity(activity)
 </script>
 
 <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-3">
@@ -60,7 +52,7 @@
             </Pill>
         {/if}
     </transaction-status>
-    {#if activity.subject}
-        <SubjectBox subject={subjectData} />
+    {#if activity?.subject}
+        <SubjectBox {subject} />
     {/if}
 </main-content>

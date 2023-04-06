@@ -1,6 +1,6 @@
 const config = {
     globals: {
-        'ts-jest': {
+        '@swc/jest': {
             tsconfig: 'tsconfig.test.json',
         },
         features: {},
@@ -18,7 +18,14 @@ const config = {
     testEnvironment: 'jsdom',
     testPathIgnorePatterns: ['./node_modules/'],
     transform: {
-        '^.+\\.ts$': 'ts-jest',
+        '^.+\\.ts$': [
+            '@swc/jest',
+            {
+                jsc: {
+                    target: 'es2021',
+                },
+            },
+        ],
     },
     verbose: true,
 }
