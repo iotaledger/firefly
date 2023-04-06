@@ -418,6 +418,14 @@ function ensureDirectoryExistence(filePath) {
     fs.mkdirSync(dirname)
 }
 
+ipcMain.handle('delete-file', (_e, filePath) => {
+    const userPath = app.getPath('userData')
+    const directory = app.isPackaged ? userPath : __dirname
+    const src = path.resolve(`${directory}/__storage__/${filePath}`)
+
+    fs.rmSync(src, { recursive: true, force: true })
+})
+
 ipcMain.handle('check-if-file-exists', (_e, filePath) => {
     const userPath = app.getPath('userData')
     const directory = app.isPackaged ? userPath : __dirname
