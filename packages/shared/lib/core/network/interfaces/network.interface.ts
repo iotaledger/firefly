@@ -1,6 +1,6 @@
 import { ITokenMetadata } from '@core/wallet'
-import { Network, NetworkProtocol, NetworkType } from '../enums'
-import { IRentStructure } from './rent-structure'
+import { Network } from '../enums'
+import { IProtocol } from './protocol.interface'
 
 /**
  * Holds relevant data
@@ -10,9 +10,6 @@ import { IRentStructure } from './rent-structure'
 export interface INetwork {
     id: Network
     name: string
-    protocol: NetworkProtocol
-    type: NetworkType
-    bech32Hrp?: string
+    protocol: IProtocol
     baseToken?: ITokenMetadata
-    rentStructure?: IRentStructure
 }
