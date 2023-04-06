@@ -9,7 +9,6 @@ import {
     cleanAuth,
     getDefaultClientOptions,
     getNetwork,
-    getOfficialNetwork,
     getOfficialNodes,
     isOfficialNetwork,
 } from '../utils'
@@ -188,18 +187,6 @@ describe('File: network.ts', () => {
                     _buildNode(OFFICIAL_NODE_URLS[NetworkProtocol.IOTA][NetworkType.Mainnet][2]),
                 ],
                 primaryNode: _buildNode(OFFICIAL_NODE_URLS[NetworkProtocol.IOTA][NetworkType.Mainnet][0]),
-            })
-        })
-    })
-
-    describe('Function: getOfficialNetwork', () => {
-        it('should return the correct official network metadata given a valid network type', () => {
-            Object.values(NetworkProtocol).forEach((networkProtocol) => {
-                Object.values(NetworkType).forEach((networkType) => {
-                    expect(getOfficialNetwork(networkProtocol, networkType)).toEqual(
-                        NETWORK[networkProtocol][networkType]
-                    )
-                })
             })
         })
     })
