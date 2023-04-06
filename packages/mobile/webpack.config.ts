@@ -1,13 +1,27 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const CopyPlugin = require('copy-webpack-plugin')
-const { DefinePlugin } = require('webpack')
-const path = require('path')
-const sveltePreprocess = require('svelte-preprocess')
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import CopyPlugin from 'copy-webpack-plugin'
+import { DefinePlugin } from 'webpack'
+import path from 'path'
+import sveltePreprocess from 'svelte-preprocess'
+import { Configuration as WebpackConfiguration } from 'webpack'
+import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server'
+import features from './features/features'
 
-const mode = process.env.NODE_ENV || 'development'
+type Mode = 'none' | 'development' | 'production'
+interface Configuration extends WebpackConfiguration {
+    devServer?: WebpackDevServerConfiguration
+}
+const mode: Mode = (process.env.NODE_ENV as Mode) || 'development'
 const prod = mode === 'production'
 
 // ------------------------ Resolve ------------------------
+
+const fallback: { [index: string]: string | false | string[] } = {
+    path: false,
+    fs: false,
+    crypto: false,
+}
+
 const resolve = {
     alias: {
         svelte: path.dirname(require.resolve('svelte/package.json')),
@@ -23,12 +37,7 @@ const resolve = {
     },
     extensions: ['.mjs', '.js', '.ts', '.svelte'],
     mainFields: ['svelte', 'browser', 'module', 'main'],
-    // conditionNames: ['svelte'],
-    fallback: {
-        path: false,
-        fs: false,
-        crypto: false,
-    },
+    fallback,
 }
 
 // ------------------------ Output ------------------------
@@ -60,27 +69,10 @@ const rendererRules = [
                 },
                 emitCss: prod,
                 hotReload: !prod,
-                // TODO remove comments
-                // https://github.com/sveltejs/svelte-loader#hot-reload
                 hotOptions: {
-                    // Prevent preserving local component state
                     preserveLocalState: false,
-
-                    // Prevent doing a full reload on next HMR update after fatal error
                     noReload: true,
-
-                    // Try to recover after runtime errors in component init
                     optimistic: true,
-
-                    // --- Advanced ---
-
-                    // Prevent adding an HMR accept handler to components with
-                    // accessors option to true, or to components with named exports
-                    // (from <script context="module">). This have the effect of
-                    // recreating the consumer of those components, instead of the
-                    // component themselves, on HMR updates. This might be needed to
-                    // reflect changes to accessors / named exports in the parents,
-                    // depending on how you use them.
                     acceptAccessors: false,
                     acceptNamedExports: true,
                 },
@@ -95,7 +87,7 @@ const rendererRules = [
         test: /\.(woff|woff2)?$/,
         type: 'asset/resource',
         generator: {
-            filename: ({ filename }) => filename.replace('../shared/', ''),
+            filename: ({ filename }): { filename: string } => filename.replace('../shared/', ''),
         },
     },
     {
@@ -135,14 +127,14 @@ const rendererPlugins = [
         filename: '[name].css',
     }),
     new DefinePlugin({
-        devMode: JSON.stringify(mode === 'development'),
+        features: features,
         'process.env.PLATFORM': JSON.stringify(process.env.PLATFORM),
         'process.env.STAGE': JSON.stringify(process.env.STAGE),
     }),
 ]
 
 // ------------------------ Webpack config ------------------------
-module.exports = [
+const webpackConfig: Configuration[] = [
     {
         entry: {
             'build/index': ['./main.js'],
@@ -170,3 +162,5 @@ module.exports = [
         },
     },
 ]
+
+export default webpackConfig
