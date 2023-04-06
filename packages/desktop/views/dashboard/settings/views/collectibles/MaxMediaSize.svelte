@@ -5,7 +5,14 @@
     import { selectedAccountIndex } from '@core/account/stores'
     import { Platform } from '@core/app'
     import { localize } from '@core/i18n'
-    import { addNftsToDownloadQueue, INft, persistedNftForActiveProfile, selectedAccountNfts } from '@core/nfts'
+    import {
+        addNftsToDownloadQueue,
+        DownloadWarningType,
+        INft,
+        persistedNftForActiveProfile,
+        selectedAccountNfts,
+        updateNftInAllAccountNfts,
+    } from '@core/nfts'
     import { activeProfile, updateActiveProfileSettings } from '@core/profile/stores'
     import type { IDropdownChoice } from '@core/utils'
 
@@ -52,10 +59,13 @@
             }
         })
 
-        addNftsToDownloadQueue($selectedAccountIndex, nftsToDownload)
+        addNftsToDownloadQueue($selectedAccountIndex, nftsToDownload, true)
         await Promise.all(
-            nftsToDelete.map((nft) => {
-                Platform.deleteFile(nft.filePath)
+            nftsToDelete.map(async (nft) => {
+                await Platform.deleteFile(nft.filePath)
+                updateNftInAllAccountNfts($selectedAccountIndex, nft.id, {
+                    downloadMetadata: { isLoaded: false, warning: { type: DownloadWarningType.TooLargeFile } },
+                })
             })
         )
     }

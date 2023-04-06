@@ -413,7 +413,7 @@ ipcMain.handle('delete-file', (_e, filePath) => {
     const directory = app.isPackaged ? userPath : __dirname
     const src = path.resolve(`${directory}/__storage__/${filePath}`)
 
-    fs.rmdirSync(src, { recursive: true, force: true })
+    fs.rmSync(src, { recursive: true, force: true })
 })
 
 ipcMain.handle('check-if-file-exists', (_e, filePath) => {
