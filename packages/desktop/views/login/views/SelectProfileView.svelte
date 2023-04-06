@@ -54,6 +54,7 @@
                     name={profile.name}
                     id={profile.id}
                     isDeveloper={profile.isDeveloperProfile}
+                    network={profile?.network}
                     networkType={profile?.networkType ?? NetworkType.Devnet}
                     networkProtocol={profile?.networkProtocol ?? NetworkProtocol.IOTA}
                     isLedgerProfile={profile?.type === ProfileType.Ledger}

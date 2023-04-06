@@ -1,11 +1,11 @@
 <script lang="ts">
-    import { DeveloperIndicatorPill, Icon, NetworkIconBadge, StrongholdBadge, Text, TextType } from 'shared/components'
-
+    import { Network, NetworkProtocol, NetworkType } from '@core/network'
     import { getInitials as _getInitials } from '@core/utils'
-    import { NetworkProtocol, NetworkType } from '@core/network'
+    import { DeveloperIndicatorPill, Icon, NetworkIconBadge, StrongholdBadge, Text, TextType } from 'shared/components'
 
     export let name: string = ''
     export let id: string = ''
+    export let network: Network = undefined
     export let networkType: NetworkType = undefined
     export let networkProtocol: NetworkProtocol = undefined
     export let classes: string = undefined
@@ -47,7 +47,7 @@
                 {/if}
             </div>
             {#if !updateRequired}
-                <NetworkIconBadge {networkType} {networkProtocol} />
+                <NetworkIconBadge {network} />
             {:else}
                 <StrongholdBadge />
             {/if}
