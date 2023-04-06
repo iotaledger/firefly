@@ -23,6 +23,8 @@
         [ProfileRecoveryType.Ledger]: false,
     }
 
+    $: networkId = $onboardingProfile?.network?.id
+
     async function onProfileRecoverySelectionClick(recoveryType: ProfileRecoveryType): Promise<void> {
         if (Object.keys(isBusy).some((key) => isBusy[key])) {
             return
@@ -60,10 +62,8 @@
                 : ''}
             icon="language"
             busy={isBusy[ProfileRecoveryType.Mnemonic]}
-            hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.claimRewards?.recoveryPhrase?.hidden}
-            disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.claimRewards?.recoveryPhrase?.enabled}
+            hidden={features?.onboarding?.[networkId]?.claimRewards?.recoveryPhrase?.hidden}
+            disabled={!features?.onboarding?.[networkId]?.claimRewards?.recoveryPhrase?.enabled}
             onClick={() => onProfileRecoverySelectionClick(ProfileRecoveryType.Mnemonic)}
         />
         <OnboardingButton
@@ -73,10 +73,8 @@
                 : ''}
             icon="file"
             busy={isBusy[ProfileRecoveryType.Stronghold]}
-            hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.claimRewards?.strongholdBackup?.hidden}
-            disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.claimRewards?.strongholdBackup?.enabled}
+            hidden={features?.onboarding?.[networkId]?.claimRewards?.strongholdBackup?.hidden}
+            disabled={!features?.onboarding?.[networkId]?.claimRewards?.strongholdBackup?.enabled}
             onClick={() => onProfileRecoverySelectionClick(ProfileRecoveryType.Stronghold)}
         />
         {#if !$mobile}
@@ -85,11 +83,8 @@
                 secondaryText={localize('views.onboarding.profileSetup.setupRecovered.importLedgerDescription')}
                 icon="chip"
                 busy={isBusy[ProfileRecoveryType.Ledger]}
-                hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                    ?.claimRewards?.ledgerBackup?.hidden}
-                disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[
-                    $onboardingProfile?.networkType
-                ]?.claimRewards?.ledgerBackup?.enabled}
+                hidden={features?.onboarding?.[networkId]?.claimRewards?.ledgerBackup?.hidden}
+                disabled={!features?.onboarding?.[networkId]?.claimRewards?.ledgerBackup?.enabled}
                 onClick={() => onProfileRecoverySelectionClick(ProfileRecoveryType.Ledger)}
             />
         {/if}
