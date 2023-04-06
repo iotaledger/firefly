@@ -4,7 +4,6 @@
         "allowJs": true,
         "baseUrl": ".",
         "isolatedModules": false,
-        "resolveJsonModule": true,
         "importsNotUsedAsValues": "remove",
         "lib": ["DOM", "ESNext"],
         "paths": {
@@ -21,5 +20,6 @@
         },
         "types": ["node"]
     },
-    "include": ["./capacitor"]
+    "include": ["./capacitor"],
+    "exclude": ["./capacitor/plugins", "../**/tests"]
 }
