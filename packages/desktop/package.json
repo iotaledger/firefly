@@ -28,7 +28,7 @@
         "compile:prod:win": "cross-env STAGE=prod electron-builder --win --x64 --config electron-builder-config.js"
     },
     "dependencies": {
-        "@sentry/electron": "^2.5.4",
+        "@sentry/electron": "^4.4.0",
         "@types/webpack-dev-server": "^4.7.2",
         "argon2": "^0.27.1",
         "electron-dl": "^3.5.0",
@@ -38,7 +38,7 @@
         "node-machine-id": "^1.1.12"
     },
     "devDependencies": {
-        "@sentry/webpack-plugin": "^1.18.5",
+        "@sentry/webpack-plugin": "^1.20.0",
         "@tsconfig/svelte": "^1.0.10",
         "@types/node": "^16.18.23",
         "@types/webpack": "^5.28.1",

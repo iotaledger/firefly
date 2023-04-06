@@ -2,7 +2,7 @@ import App from './App.svelte'
 import { Electron } from './lib/electron'
 import { shouldReportError } from './electron/lib/errorHandling'
 
-const captureException = require('./sentry')(false).captureException || function (..._) {}
+const captureException = require('./sentry')(true).captureException || function (..._) {}
 
 window.addEventListener('error', (event) => {
     const errorType = '[Render Context] Error'

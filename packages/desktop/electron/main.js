@@ -250,6 +250,9 @@ function createWindow() {
     } else {
         initAutoUpdate()
 
+        // TODO: Remove before merge
+        windows.main.webContents.openDevTools()
+
         // load the index.html of the app.
         windows.main.loadFile(paths.html)
     }
