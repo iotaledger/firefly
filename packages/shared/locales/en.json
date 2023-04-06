@@ -27,32 +27,20 @@
                     "title": "Choose network",
                     "body": "Set the network for your profile.",
                     "iota": {
-                        "mainnet": {
-                            "title": "Mainnet",
-                            "body": "IOTA Mainnet"
-                        },
-                        "devnet": {
-                            "title": "Devnet",
-                            "body": "Developer network for IOTA"
-                        },
-                        "private-net": {
-                            "title": "Private net",
-                            "body": "Support for custom networks with active TIPs"
-                        }
+                        "title": "IOTA",
+                        "body": "IOTA Mainnet"
                     },
                     "shimmer": {
-                        "mainnet": {
-                            "title": "Shimmer",
-                            "body": "Staging network for IOTA"
-                        },
-                        "devnet": {
-                            "title": "Testnet",
-                            "body": "Public beta network for Shimmer"
-                        },
-                        "private-net": {
-                            "title": "Private net",
-                            "body": "Support for custom networks with draft TIPs"
-                        }
+                        "title": "Shimmer",
+                        "body": "Staging network for IOTA"
+                    },
+                    "testnet": {
+                        "title": "Testnet",
+                        "body": "Public beta network for Shimmer"
+                    },
+                    "custom": {
+                        "title": "Custom network",
+                        "body": "Support for custom networks and/or nodes"
                     }
                 },
                 "setupPrivateNetworkConnection": {
