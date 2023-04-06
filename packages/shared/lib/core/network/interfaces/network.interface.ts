@@ -1,5 +1,5 @@
 import { ITokenMetadata } from '@core/wallet'
-import { NetworkProtocol, NetworkType } from '../enums'
+import { Network, NetworkProtocol, NetworkType } from '../enums'
 import { IRentStructure } from './rent-structure'
 
 /**
@@ -8,7 +8,7 @@ import { IRentStructure } from './rent-structure'
  * of a particular network.
  */
 export interface INetwork {
-    id: string
+    id: Network
     name: string
     protocol: NetworkProtocol
     type: NetworkType

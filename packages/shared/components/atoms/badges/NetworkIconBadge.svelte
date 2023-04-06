@@ -1,16 +1,14 @@
 <script lang="ts">
-    import { NETWORK, Network, NetworkProtocol, NetworkType } from '@core/network'
+    import { NETWORK, Network } from '@core/network'
     import { FontWeight, NetworkIcon, Text, Tooltip } from 'shared/components'
     import { Position } from 'shared/components/enums'
 
     export let network: Network
-    export let networkProtocol: NetworkProtocol
-    export let networkType: NetworkType
 
     let tooltipAnchor: HTMLElement
     let isTooltipVisible = false
 
-    $: tooltipText = NETWORK?.[networkProtocol]?.[networkType]?.name
+    $: tooltipText = NETWORK?.[network]?.name
 
     function showTooltip(show: boolean): void {
         isTooltipVisible = show
