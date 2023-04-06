@@ -29,6 +29,8 @@ if (SENTRY_MAIN_PROCESS || PRELOAD_SCRIPT) {
 
 module.exports = function (initialize) {
     if (initialize) {
+        /* eslint-disable no-console */
+        console.log({ appName, debug, dsn, environment })
         Sentry.init({ appName, debug, dsn, environment })
         Sentry.setUser({ id: machineId })
     }

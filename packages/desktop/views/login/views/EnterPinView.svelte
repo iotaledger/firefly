@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { onDestroy } from 'svelte'
+    import { onDestroy, onMount } from 'svelte'
     import { Icon, PinInput, Profile, Text, TextHint } from '@ui'
     import {
         needsToAcceptLatestPrivacyPolicy,
@@ -15,6 +15,7 @@
     import { openPopup, PopupId, popupState } from '@auxiliary/popup'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import features from '@features/features'
+    import { handleError } from 'shared/lib/core/error/handlers'
 
     let attempts: number = 0
     let pinCode: string = ''
@@ -110,6 +111,15 @@
             $loginRouter.previous()
         }
     }
+
+    onMount(() => {
+        try {
+            // @ts-ignore
+            myUndefinedFunction()
+        } catch (err) {
+            handleError(err)
+        }
+    })
 
     onDestroy(() => {
         clearInterval(maxAttemptsTimer)
