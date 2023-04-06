@@ -111,12 +111,12 @@ const buildTemplate = () => {
         },
     ]
 
-    if (!app.isPackaged || features?.electron?.developerTools?.enabled) {
-        template[0].submenu.push({
-            label: 'Developer Tools',
-            role: 'toggleDevTools',
-        })
-    }
+    // if (!app.isPackaged || features?.electron?.developerTools?.enabled) {
+    template[0].submenu.push({
+        label: 'Developer Tools',
+        role: 'toggleDevTools',
+    })
+    // }
 
     template[0].submenu = template[0].submenu.concat([
         {
