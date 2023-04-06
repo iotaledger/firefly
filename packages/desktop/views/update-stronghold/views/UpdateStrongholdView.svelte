@@ -10,6 +10,7 @@
 
     import { onboardingProfile } from '@contexts/onboarding'
     import { updateStronghold } from '@core/profile-manager'
+    import { isValidJson } from '@core/utils'
 
     export let password: string = ''
     export let isRecovery: boolean = false
@@ -33,7 +34,8 @@
             if (isRecovery) {
                 isPasswordInputVisible = true
             }
-            passwordError = localize(err.message)
+            const parsedError = isValidJson(err.message) ? JSON.parse(err.message) : null
+            passwordError = parsedError?.payload?.error ?? localize(err.message)
             return
         }
     }

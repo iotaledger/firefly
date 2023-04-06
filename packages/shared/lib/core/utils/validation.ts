@@ -19,6 +19,15 @@ export function isValidHttpsUrl(url: string): boolean {
     return validUrl.isHttpsUri(url)
 }
 
+export function isValidJson(text: string): boolean {
+    try {
+        JSON.parse(text)
+    } catch (e) {
+        return false
+    }
+    return true
+}
+
 export function containsControlCharacters(stringToTest: string): boolean {
     /* eslint-disable no-control-regex */
     return /[\u0000-\u001f\u0080-\u009f]/g.test(stringToTest)
