@@ -4,14 +4,7 @@ import { IAuth, IClientOptions, INetwork, INode } from '../interfaces'
 
 import { NetworkProtocol, NetworkType } from '../enums'
 
-import {
-    checkNodeUrlValidity,
-    cleanAuth,
-    getDefaultClientOptions,
-    getNetwork,
-    getOfficialNodes,
-    isOfficialNetwork,
-} from '../utils'
+import { checkNodeUrlValidity, cleanAuth, getDefaultClientOptions, getOfficialNodes, isOfficialNetwork } from '../utils'
 
 describe('File: network.ts', () => {
     function _buildNode(url: string): INode {
@@ -220,28 +213,6 @@ describe('File: network.ts', () => {
         })
         it('should return false given an invalid network type', () => {
             expect(isOfficialNetwork(undefined)).toBe(false)
-        })
-    })
-
-    describe('Function: getNetwork', () => {
-        it('should return all metadata for official networks', () => {
-            Object.values(NetworkProtocol).forEach((networkProtocol) => {
-                Object.values(NETWORK[networkProtocol]).forEach((network) => {
-                    if (network.type !== NetworkType.PrivateNet) {
-                        expect(getNetwork(networkProtocol, network.type)).toEqual(
-                            NETWORK[networkProtocol][network.type]
-                        )
-                    }
-                })
-            })
-        })
-        it('should return partial metadata for unofficial networks', () => {
-            expect(getNetwork(NetworkProtocol.IOTA, NetworkType.PrivateNet, 'another-tangle')).toEqual(<INetwork>{
-                id: 'another-tangle',
-                name: 'Private Net',
-                protocol: NetworkProtocol.IOTA,
-                type: NetworkType.PrivateNet,
-            })
         })
     })
 
