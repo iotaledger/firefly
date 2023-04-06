@@ -191,6 +191,7 @@ const preloadPlugins = [
 
 const sentryPlugins = [
     new SentryWebpackPlugin({
+        debug: true,
         authToken: process.env.SENTRY_AUTH_TOKEN,
         include: '.',
         release: `${appName} v${version}`,
