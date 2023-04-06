@@ -21,6 +21,7 @@
 
     $: isProfileNameValid = profileName && profileName.trim()
     $: profileName, (error = '') // Error clears when profileName changes
+    $: networkId = $onboardingProfile?.network?.id
 
     function onBackClick(): void {
         if ($onboardingProfile?.recoveryType) {
@@ -57,7 +58,7 @@
     <div slot="title">
         <Text type="h2"
             >{localize('views.onboarding.profileSetup.enterName.title', {
-                values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },
+                values: { protocol: formatProtocolName(networkId) },
             })}</Text
         >
     </div>
