@@ -331,6 +331,8 @@ const ElectronApi = {
     },
 
     captureException(exception) {
+        /* eslint-disable no-console */
+        console.log('ELECTRON API: ', exception, Sentry.captureException, Boolean(Sentry.captureException))
         if (Sentry.captureException) {
             Sentry.captureException(exception)
         }
