@@ -1,7 +1,5 @@
-import { get } from 'svelte/store'
-
 import { INode } from '@core/network/interfaces'
-
+import { get } from 'svelte/store'
 import {
     DEFAULT_PERSISTED_PROFILE_OBJECT,
     DEFAULT_STRONGHOLD_PASSWORD_TIMEOUT_IN_MINUTES,
@@ -9,6 +7,7 @@ import {
 } from '../../constants'
 import { IPersistedProfile } from '../../interfaces'
 import { currentProfileVersion, profiles, saveProfile } from '../../stores'
+import { Network } from '@core/network'
 
 /**
  * Migrates profile data in need of being modified to accommodate changes
@@ -155,6 +154,25 @@ function persistedProfileMigrationToV9(existingProfile: IPersistedProfile): void
 }
 
 function persistedProfileMigrationToV10(existingProfile: IPersistedProfile): void {
+    let network
+    if (existingProfile.networkProtocol === 'shimmer') {
+        switch (existingProfile.networkType) {
+            case 'mainnet':
+                network = Network.Shimmer
+                break
+            case 'devnet':
+                network = Network.Testnet
+                break
+        }
+    } else if (existingProfile.networkProtocol === 'iota') {
+        switch (existingProfile.networkType) {
+            case 'mainnet':
+                network = Network.Iota
+                break
+        }
+    }
+    existingProfile.network = network
+
     existingProfile.settings = {
         ...existingProfile.settings,
         strongholdPasswordTimeoutInMinutes: DEFAULT_STRONGHOLD_PASSWORD_TIMEOUT_IN_MINUTES,
