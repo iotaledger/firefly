@@ -8,7 +8,7 @@ export function getSubjectFromAddress(address: string): Subject {
     if (account) {
         return { type: 'account', account: account }
     } else if (network) {
-        return { type: 'network', network }
+        return { type: 'network', address, network }
     } else {
         return { type: 'address', address }
     }
