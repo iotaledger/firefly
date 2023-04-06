@@ -8,8 +8,8 @@ import walletFeatures from './wallet.features'
 
 const features = {
     collectibles: collectiblesFeatures,
-    developerTools: developerToolsFeatures,
     electron: electronFeatures,
+    developerTools: developerToolsFeatures,
     governance: governanceFeatures,
     onboarding: onboardingFeatures,
     settings: settingsFeatures,

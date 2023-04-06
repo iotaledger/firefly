@@ -25,12 +25,12 @@
     import TopNavigation from './TopNavigation.svelte'
     import {
         addNftsToDownloadQueue,
-        selectedAccountNfts,
+        downloadingNftId,
         downloadNextNftInQueue,
+        interruptNftDownloadAfterTimeout,
         nftDownloadQueue,
         resetNftDownloadQueue,
-        downloadingNftId,
-        interruptNftDownloadAfterTimeout,
+        selectedAccountNfts,
     } from '@core/nfts'
     import { selectedAccountIndex } from '@core/account'
     import { get } from 'svelte/store'
