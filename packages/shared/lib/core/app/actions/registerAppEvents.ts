@@ -1,5 +1,4 @@
 import { registerAppUpdateEvents } from './registerAppUpdateEvents'
-import { registerNftDeleteEvents } from './registerNftDeleteEvents'
 import { registerNftDownloadEvents } from './registerNftDownloadEvents'
 
 /**
@@ -8,5 +7,4 @@ import { registerNftDownloadEvents } from './registerNftDownloadEvents'
 export function registerAppEvents(): void {
     registerAppUpdateEvents()
     registerNftDownloadEvents()
-    registerNftDeleteEvents()
 }

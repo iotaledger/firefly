@@ -1,6 +1,5 @@
 import { IAppUpdateDownloadProgress } from './app-update-download-progress.interface'
 import { IAppVersionDetails } from './app-version-details.interface'
-import { INFTDeleteState } from './nft-delete-state.interface'
 import { INFTDownloadState } from './nft-download-state.interface'
 
 export interface IPlatformEventMap {
@@ -22,5 +21,4 @@ export interface IPlatformEventMap {
     'notification-activated': unknown
     'nft-download-done': INFTDownloadState
     'nft-download-interrupted': INFTDownloadState
-    'nft-delete-done': INFTDeleteState
 }

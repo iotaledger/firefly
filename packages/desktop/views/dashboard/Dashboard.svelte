@@ -25,11 +25,9 @@
     import TopNavigation from './TopNavigation.svelte'
     import {
         addNftsToDownloadQueue,
-        deleteNextNftInQueue,
         downloadingNftId,
         downloadNextNftInQueue,
         interruptNftDownloadAfterTimeout,
-        nftDeleteQueue,
         nftDownloadQueue,
         resetNftDownloadQueue,
         selectedAccountNfts,
@@ -51,7 +49,6 @@
     $: $activeProfile, saveActiveProfile()
     $: $hasStrongholdLocked && reflectLockedStronghold()
     $: $nftDownloadQueue, downloadNextNftInQueue()
-    $: $nftDeleteQueue, deleteNextNftInQueue()
     $: $downloadingNftId && interruptNftDownloadAfterTimeout(get(selectedAccountIndex))
     $: addSelectedAccountNftsToDownloadQueue($selectedAccountIndex)
 

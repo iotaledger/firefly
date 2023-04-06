@@ -2,16 +2,12 @@
     import { Dropdown, Text } from '@ui'
     import { TextType } from '@ui/enums'
 
+    import { selectedAccountIndex } from '@core/account/stores'
+    import { Platform } from '@core/app'
     import { localize } from '@core/i18n'
-    import {
-        addNftsToDeleteQueue,
-        addNftsToDownloadQueue,
-        persistedNftForActiveProfile,
-        selectedAccountNfts,
-    } from '@core/nfts'
-    import { activeProfile, updateActiveProfileSettings } from '@core/profile'
+    import { addNftsToDownloadQueue, INft, persistedNftForActiveProfile, selectedAccountNfts } from '@core/nfts'
+    import { activeProfile, updateActiveProfileSettings } from '@core/profile/stores'
     import type { IDropdownChoice } from '@core/utils'
-    import { selectedAccountIndex } from '@core/account'
 
     function updateMediaSizeLimit(option): void {
         const maxMediaSizeInMegaBytes = option.value
@@ -33,11 +29,11 @@
         }))
     }
 
-    function deleteOrDownloadNfts(maxMediaSizeInBytes: number): void {
-        const nftsToDownload = []
-        const nftsToDelete = []
+    async function deleteOrDownloadNfts(maxMediaSizeInBytes: number): Promise<void> {
+        const nftsToDownload: INft[] = []
+        const nftsToDelete: INft[] = []
 
-        Object.keys($persistedNftForActiveProfile).forEach((nftId) => {
+        Object.keys($persistedNftForActiveProfile ?? {}).forEach((nftId) => {
             const nft = $selectedAccountNfts.find((nft) => nft.id === nftId)
             if (!nft) {
                 return
@@ -57,7 +53,11 @@
         })
 
         addNftsToDownloadQueue($selectedAccountIndex, nftsToDownload)
-        addNftsToDeleteQueue($selectedAccountIndex, nftsToDelete)
+        await Promise.all(
+            nftsToDelete.map((nft) => {
+                Platform.deleteFile(nft.filePath)
+            })
+        )
     }
 </script>
 

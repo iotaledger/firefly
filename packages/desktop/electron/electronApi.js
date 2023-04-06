@@ -261,8 +261,8 @@ const ElectronApi = {
     copyFile(sourceFilePath, destinationFilePath) {
         return ipcRenderer.invoke('copy-file', sourceFilePath, destinationFilePath)
     },
-    deleteNft(filePath, accountIndex, nftId) {
-        return ipcRenderer.invoke('delete-nft', { filePath, accountIndex, nftId })
+    deleteFile(filePath) {
+        return ipcRenderer.invoke('delete-file', filePath)
     },
     /**
      * Log unhandled exception
