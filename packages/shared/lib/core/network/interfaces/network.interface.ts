@@ -1,5 +1,5 @@
 import { ITokenMetadata } from '@core/wallet'
-import { Network } from '../enums'
+import { NetworkId } from '../enums'
 import { IProtocol } from './protocol.interface'
 
 /**
@@ -8,7 +8,7 @@ import { IProtocol } from './protocol.interface'
  * of a particular network.
  */
 export interface INetwork {
-    id: Network
+    id: NetworkId
     name: string
     protocol: IProtocol
     baseToken?: ITokenMetadata

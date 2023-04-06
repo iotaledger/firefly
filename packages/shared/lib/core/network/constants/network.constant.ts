@@ -1,10 +1,10 @@
 import { BASE_TOKEN } from '../constants'
-import { Network, NetworkProtocol } from '../enums'
+import { NetworkId, NetworkProtocol } from '../enums'
 import { INetwork } from '../interfaces'
 
-export const NETWORK: Readonly<{ [key in Network]?: INetwork }> = {
-    [Network.Iota]: {
-        id: Network.Iota,
+export const NETWORK: Readonly<{ [key in NetworkId]?: INetwork }> = {
+    [NetworkId.Iota]: {
+        id: NetworkId.Iota,
         name: 'IOTA',
         protocol: {
             version: 1,
@@ -21,8 +21,8 @@ export const NETWORK: Readonly<{ [key in Network]?: INetwork }> = {
         },
         baseToken: BASE_TOKEN[NetworkProtocol.IOTA],
     },
-    [Network.Shimmer]: {
-        id: Network.Shimmer,
+    [NetworkId.Shimmer]: {
+        id: NetworkId.Shimmer,
         name: 'Shimmer',
         protocol: {
             version: 2,
@@ -39,8 +39,8 @@ export const NETWORK: Readonly<{ [key in Network]?: INetwork }> = {
         },
         baseToken: BASE_TOKEN[NetworkProtocol.Shimmer],
     },
-    [Network.Testnet]: {
-        id: Network.Testnet,
+    [NetworkId.Testnet]: {
+        id: NetworkId.Testnet,
         name: 'Testnet',
         protocol: {
             version: 2,

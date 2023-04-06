@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { Network } from '@core/network'
+    import { NetworkId } from '@core/network'
     import { Icon } from 'shared/components'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
-    export let network: Network
+    export let networkId: NetworkId
     export let height = 22
     export let width = 22
 
@@ -12,18 +12,18 @@
     let icon: IconEnum
 
     $: {
-        switch (network) {
-            case Network.Iota:
+        switch (networkId) {
+            case NetworkId.Iota:
                 backgroundColor = 'black'
                 iconColor = 'white'
                 icon = IconEnum.Iota
                 break
-            case Network.Shimmer:
+            case NetworkId.Shimmer:
                 backgroundColor = 'shimmer-highlight'
                 iconColor = 'black'
                 icon = IconEnum.Shimmer
                 break
-            case Network.Testnet:
+            case NetworkId.Testnet:
                 backgroundColor = 'gray-400'
                 iconColor = 'black'
                 icon = IconEnum.Shimmer

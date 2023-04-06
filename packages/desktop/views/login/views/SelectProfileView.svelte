@@ -49,14 +49,10 @@
         {#each $profiles as profile}
             <div class="mx-7 mb-8">
                 <Profile
+                    {profile}
+                    }
                     bgColor="blue"
                     onClick={onContinueClick}
-                    name={profile.name}
-                    id={profile.id}
-                    isDeveloper={profile.isDeveloperProfile}
-                    network={profile?.network}
-                    networkType={profile?.networkType ?? NetworkType.Devnet}
-                    networkProtocol={profile?.networkProtocol ?? NetworkProtocol.IOTA}
                     isLedgerProfile={profile?.type === ProfileType.Ledger}
                     updateRequired={profile?.type === ProfileType.Software &&
                         !isStrongholdUpdated(profile) &&

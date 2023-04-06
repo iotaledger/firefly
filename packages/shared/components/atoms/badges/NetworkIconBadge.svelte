@@ -1,14 +1,14 @@
 <script lang="ts">
-    import { NETWORK, Network } from '@core/network'
+    import { INetwork } from '@core/network'
     import { FontWeight, NetworkIcon, Text, Tooltip } from 'shared/components'
     import { Position } from 'shared/components/enums'
 
-    export let network: Network
+    export let network: INetwork
 
     let tooltipAnchor: HTMLElement
     let isTooltipVisible = false
 
-    $: tooltipText = NETWORK?.[network]?.name
+    $: tooltipText = network?.name
 
     function showTooltip(show: boolean): void {
         isTooltipVisible = show
@@ -23,7 +23,7 @@
         on:wheel={() => showTooltip(false)}
         class="block absolute -right-1 -bottom-1"
     >
-        <NetworkIcon {network} />
+        <NetworkIcon networkId={network.id} />
     </network-icon-badge>
     {#if isTooltipVisible}
         <Tooltip anchor={tooltipAnchor} size="small" position={Position.Right} offset={6}>
