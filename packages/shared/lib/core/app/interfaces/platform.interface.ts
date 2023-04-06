@@ -27,6 +27,7 @@ export interface IPlatform {
     saveRecoveryKit(kitData: ArrayBuffer): Promise<void>
     openUrl(url: string): void
     copyFile(sourceFilePath: string, destinationFilePath: string): Promise<void>
+    deleteFile(filePath: string): Promise<void>
     downloadNft(url: string, destinationFilePath: string, nftId: string, accountIndex: number): Promise<void>
     cancelNftDownload(nftId: string): Promise<void>
     checkIfFileExists(filePath: string): Promise<boolean>
