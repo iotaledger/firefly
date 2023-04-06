@@ -1,11 +1,11 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { nftSearchTerm, queriedNfts, selectedAccountNfts } from '@core/nfts'
+    import { nftSearchTerm, queriedNfts, ownedNfts } from '@core/nfts'
     import { FontWeight, Illustration, NftGallery, Text, ReceiveButton, SearchInput } from 'shared/components'
 </script>
 
 <div class="flex flex-col w-full h-full space-y-4">
-    {#if $selectedAccountNfts.length}
+    {#if $ownedNfts.length}
         <div class="flex flex-row justify-between">
             <div class="flex flex-row text-left space-x-1 items-center">
                 <Text fontSize="text-14" fontWeight={FontWeight.semibold}

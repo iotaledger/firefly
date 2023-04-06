@@ -260,6 +260,16 @@
                 "title": "Ogólne",
                 "description": "Skonfiguruj wygląd aplikacji oraz inne ustawienia ogólne"
             },
+            "profile": {
+                "title": "Profil",
+                "description": "Zmień nazwę profilu lub ustaw awatar"
+            },
+            "network": {
+                "title": "Sieć"
+            },
+            "collectibles": {
+                "title": "Kolekcje"
+            },
             "security": {
                 "title": "Bezpieczeństwo",
                 "description": "Zmień hasło i dostosuj ustawienia związane z bezpieczeństwem"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "Pomoc i informacje",
                 "description": "Znajdź odpowiedź na pytanie lub uzyskaj pomoc"
-            },
-            "profile": {
-                "title": "Profil",
-                "description": "Zmień nazwę profilu lub ustaw awatar"
             },
             "sync": {
                 "title": "Synchronizuj portfele",
@@ -306,8 +312,12 @@
                 "description": "Eksport do pliku Stronghold - kompletna zaszyfrowana kopia zapasowa portfeli wraz z ostatnią historią transakcji"
             },
             "appLock": {
-                "title": "Automatyczna blokada",
+                "title": "Automatyczne wylogowanie",
                 "description": "Czas bezczynności przed zablokowaniem ekranu aplikacji i wylogowaniem z portfeli"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Limit czasu Stronghold",
+                "description": "Czas, po którym hasło do Stronghold będzie ponownie wymagane"
             },
             "maxMediaSize": {
                 "title": "Maksymalny rozmiar pliku",
@@ -346,22 +356,9 @@
                 "title": "Deep linki",
                 "description": "Automatycznie wypełnij dane transakcji w Firefly po kliknięciu na deep link zaczynający się od {appProtocol}://"
             },
-            "networkConfiguration": {
-                "title": "Konfiguracja sieci",
-                "title2": "Konfiguracja sieci",
-                "description": {
-                    "dev": "Ustawienia Twojej sieci będą aktualizowane automatycznie zgodnie z aktualną konfiguracją serwera (przełączenie sieci spowoduje zresetowanie stanu portfela)",
-                    "nonDev": "Twoje ustawienia sieci zostaną automatycznie zaktualizowane zgodnie z aktualną konfiguracją serwera"
-                },
-                "switchedNetworks": "Pomyślnie zmieniono sieć na \"{networkName}\".",
-                "resetWallet": "Twój stan portfela został zresetowany.",
-                "connectedTo": "Połączono z",
-                "nodeConfiguration": {
-                    "title": "Wybór serwera",
-                    "description": "Wybierz \"Manualny\", aby skonfigurować ustawienia serwera i połączyć się z własnymi serwerami",
-                    "automatic": "Automatyczny",
-                    "manual": "Manualny"
-                }
+            "networkInformation": {
+                "title": "Informacje o sieci",
+                "connectedTo": "Połączono z"
             },
             "configureNodeList": {
                 "title": "Konfiguracja serwera",
@@ -625,7 +622,7 @@
             },
             "updateBackup": {
                 "loginTitle": "Stronghold zaktualizowany",
-                "loginBody": "Już wszystko w porządku - używasz najnowszej wersji Stronghold",
+                "loginBody": "Wszystko w porządku - używasz najnowszej wersji Stronghold",
                 "recoveryTitle": "Stronghold został pomyślnie przywrócony i zaktualizowany",
                 "recoveryBody": "Możesz teraz kontynuować konfigurację portfela",
                 "hint": "Zalecamy usunięcie wszystkich poprzednich plików kopii Stronghold i zapisanie jedynie tej nowej"
@@ -724,10 +721,10 @@
             "prod": "Oficjalny",
             "alpha": "Alpha",
             "beta": "Beta",
-            "releasedAt": "Opublikowana",
+            "releasedAt": "Opublikowano",
             "updateAvailable": "Aktualizacja jest dostępna",
             "updatesDisabled": "Dostępne są aktualizacje, ale aktualizacja automatyczna jest niedostępna dla Twojego systemu operacyjnego.",
-            "latestInstalled": "Używasz najnowszej oraz najbardziej bezpiecznej wersji"
+            "latestInstalled": "Używasz najnowszej i najbezpieczniejszej wersji"
         },
         "backupStronghold": {
             "title": "Kopia zapasowa pliku stronghold",
@@ -1068,6 +1065,8 @@
                 "quantityTooLarge": "Ilość musi być mniejsza niż 64",
                 "emptyName": "Nazwa jest wymaganym polem",
                 "invalidURI": "Nieprawidłowy URI, proszę podać poprawny URI",
+                "notReachable": "URI nieosiągalny, nie można sprawdzić typu NFT",
+                "royaltiesMustBeObject": "Tantiemy muszą być obiektem",
                 "royaltiesMustBeJSON": "Tantiemy muszą być w poprawnym formacie JSON",
                 "invalidAddress": "Nieprawidłowy adres, musisz wpisać poprawny adres {networkHrp}, na który będą wysyłane tantiemy",
                 "invalidRoyaltyValue": "Nieprawidłowa wartość, musi być to liczba dziesiętna reprezentująca wymagany procent, np. 0,05",
@@ -1258,7 +1257,7 @@
         "finishSetup": "Zakończ konfigurację",
         "readDocumentation": "Przeczytaj dokumentację",
         "visitFaq": "Odwiedź FAQ",
-        "viewDownloads": "Pobierz aktualizację własnoręcznie",
+        "viewDownloads": "Aktualizacja ręczna",
         "viewStatus": "Pokaż status",
         "viewBalanceBreakdown": "Zestawienie środków",
         "showHiddenAccounts": "Pokaż ukryte portfele",
@@ -1979,9 +1978,17 @@
                 "short": "Ładowanie zablokowane",
                 "long": "Typ pliku NFT nie pasuje do oczekiwanego typu multimediów"
             },
+            "notReachable": {
+                "short": "Nieosiągalny",
+                "long": "Typ pliku NFT nieosiągalny"
+            },
             "tooLargeFile": {
                 "short": "Plik jest zbyt duży",
                 "long": "Ładowanie NFT zablokowane, ponieważ plik jest zbyt duży"
+            },
+            "downloadTooLong": {
+                "short": "Pobieranie pliku trwało zbyt długo",
+                "long": "Ładowanie NFT zostało zaniechane, ponieważ pobieranie pliku trwało zbyt długo"
             },
             "corsError": {
                 "short": "Ładowanie zablokowane",
@@ -2101,7 +2108,7 @@
             },
             "resultsNotAvailable": {
                 "title": "Wyniki niedostępne",
-                "body": "Wyniki tej propozycji nie są już dostępne na wskazanym serwerze. Proszę go zaktualizować, aby uzyskać dostęp do wyników."
+                "body": "Wyniki tej propozycji nie są już dostępne na wskazanym serwerze. Zaktualizuj serwer dla tej propozycji, aby uzyskać dostęp do wyników."
             }
         },
         "updateStronghold": {

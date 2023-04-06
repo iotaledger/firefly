@@ -1,5 +1,6 @@
 import features from '@features/features'
 import { initAutoUpdate } from './lib/appUpdater'
+import { initNftDownloadHandlers } from './lib/nftDownloadHandlers'
 import { shouldReportError } from './lib/errorHandling'
 const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = require('electron')
 const path = require('path')
@@ -253,6 +254,8 @@ function createWindow() {
         windows.main.loadFile(paths.html)
     }
 
+    initNftDownloadHandlers()
+
     /**
      * Right click context menu for inputs
      */
@@ -268,7 +271,9 @@ function createWindow() {
      *  This happens e.g. when clicking on a link (<a href="www.iota.org").
      *  The handler only allows navigation to an external browser.
      */
-    windows.main.webContents.on('will-navigate', handleNavigation)
+    windows.main.webContents.on('will-navigate', (a, b) => {
+        handleNavigation(a, b)
+    })
 
     windows.main.on('close', () => {
         closeAboutWindow()
@@ -372,7 +377,9 @@ app.once('ready', () => {
 // IPC handlers for APIs exposed from main proces
 
 // URLs
-ipcMain.handle('open-url', (_e, url) => handleNavigation(_e, url))
+ipcMain.handle('open-url', (_e, url) => {
+    handleNavigation(_e, url)
+})
 
 // Keychain
 ipcMain.handle('keychain-getAll', (_e) => Keychain.getAll())
@@ -399,6 +406,21 @@ ipcMain.handle('copy-file', (_e, sourceFilePath, destinationFilePath) => {
     const srcFileBuffer = fs.readFileSync(src)
     const dest = path.resolve(destinationFilePath)
     fs.writeFileSync(dest, srcFileBuffer)
+})
+
+ipcMain.handle('delete-file', (_e, filePath) => {
+    const userPath = app.getPath('userData')
+    const directory = app.isPackaged ? userPath : __dirname
+    const src = path.resolve(`${directory}/__storage__/${filePath}`)
+
+    fs.rmSync(src, { recursive: true, force: true })
+})
+
+ipcMain.handle('check-if-file-exists', (_e, filePath) => {
+    const userPath = app.getPath('userData')
+    const directory = app.isPackaged ? userPath : __dirname
+
+    return fs.existsSync(`${directory}/__storage__/${filePath}`)
 })
 
 // Diagnostics

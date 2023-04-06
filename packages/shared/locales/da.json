@@ -260,6 +260,16 @@
                 "title": "General",
                 "description": "Configure your app's appearance and other general settings"
             },
+            "profile": {
+                "title": "Profil",
+                "description": "Skift profilnavnet eller tilføj en avatar"
+            },
+            "network": {
+                "title": "Netværk"
+            },
+            "collectibles": {
+                "title": "Samleobjekter"
+            },
             "security": {
                 "title": "Sikkerhed",
                 "description": "Skift adgangskode og tilpas sikkerhedsrelaterede indstillinger"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "Hjælp og Information",
                 "description": "Find svaret på et spørgsmål eller få hjælp med et problem"
-            },
-            "profile": {
-                "title": "Profil",
-                "description": "Skift profilnavnet eller tilføj en avatar"
             },
             "sync": {
                 "title": "Synk wallets",
@@ -306,8 +312,12 @@
                 "description": "Eksportér til en Stronghold-fil - en komplet, krypteret sikkerhedskopi af wallets og seneste transaktionshistorik"
             },
             "appLock": {
-                "title": "Automatisk lås",
+                "title": "Automatisk udlogning",
                 "description": "Inaktivitetstid før wallets låses, og man logges ud"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold-timeout",
+                "description": "Tidsperiode, inden Stronghold igen afkræver adgangskode"
             },
             "maxMediaSize": {
                 "title": "Maks. mediestørrelse",
@@ -346,22 +356,9 @@
                 "title": "Deep links",
                 "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
-            "networkConfiguration": {
-                "title": "Netværksopsætning",
-                "title2": "Netværksopsætning",
-                "description": {
-                    "dev": "Netværksindstillingerne opdateres automatisk iht. den aktuelle node-opsætning (skift af netværk vil resultere i nulstilling af wallet-tilstand)",
-                    "nonDev": "Netværksindstillingerne opdateres automatisk iht. den aktuelle node-opsætning"
-                },
-                "switchedNetworks": "Netværket blev skiftet til \"{networkName}\".",
-                "resetWallet": "Wallet-tilstanden er blevet nulstillet.",
-                "connectedTo": "Forbundet til",
-                "nodeConfiguration": {
-                    "title": "Node-valg",
-                    "description": "Vælg \"Manuel\" for at opsætte node-indstillinger og oprette forbindelse til egne node(r)",
-                    "automatic": "Automatisk",
-                    "manual": "Manualt"
-                }
+            "networkInformation": {
+                "title": "Netværksinformation",
+                "connectedTo": "Forbundet til"
             },
             "configureNodeList": {
                 "title": "Node-opsætning",
@@ -380,7 +377,7 @@
             },
             "localProofOfWork": {
                 "title": "Proof of work",
-                "description": "Udfør proof of work lokalt på din enhed eller outsource til noden"
+                "description": "Udfør enten proof of work lokalt på enheden eller outsource til noden"
             },
             "errorLog": {
                 "title": "Fejllog",
@@ -1068,6 +1065,8 @@
                 "quantityTooLarge": "Mængde skal være mindre end 64",
                 "emptyName": "Navn er obligatorisk",
                 "invalidURI": "URI ugyldig, angiv en gyldig i stedet",
+                "notReachable": "URI utilgængelig, NFT-type kan ikke tjekkes",
+                "royaltiesMustBeObject": "Royalties skal udgøre et objekt",
                 "royaltiesMustBeJSON": "Royalties skal være en gyldig JSON",
                 "invalidAddress": "Ugyldig adresse. Skal være en gyldig {networkHrp}-adresse, hvortil royalties sendes",
                 "invalidRoyaltyValue": "Ugyldig værdi. Skal være en numerisk decimal repræsentant for den ønskede procentdel, dvs. 0,05",
@@ -1779,7 +1778,7 @@
             "error": "En fejl opstod under indløsning. Forsøg igen."
         },
         "vote": {
-            "success": "Votes successfully cast"
+            "success": "Stemmer afgivet"
         },
         "stopVoting": {
             "success": "Voting successfully stopped"
@@ -1979,9 +1978,17 @@
                 "short": "Loading blocked",
                 "long": "NFT file type does not match the expected media type"
             },
+            "notReachable": {
+                "short": "Utilgængelig",
+                "long": "NFT- fil utilgængelig"
+            },
             "tooLargeFile": {
                 "short": "File is too large",
                 "long": "Loading NFT blocked because the file is too large"
+            },
+            "downloadTooLong": {
+                "short": "Filen tog for lang tid at downloade",
+                "long": "Indlæsning af NFT blokeret, da filen tog for lang tid at downloade"
             },
             "corsError": {
                 "short": "Loading blocked",

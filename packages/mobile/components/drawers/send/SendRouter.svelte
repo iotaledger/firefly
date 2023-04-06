@@ -13,7 +13,6 @@
     import { ExpirationTime } from '@core/utils'
     import {
         DEFAULT_TRANSACTION_OPTIONS,
-        getAssetById,
         getOutputOptions,
         newTransactionDetails,
         NewTransactionType,
@@ -26,19 +25,15 @@
 
     import { sendRoute, SendRoute, sendRouter } from '@/routers'
 
-    $: ({ recipient, expirationDate, giftStorageDeposit, surplus } = $newTransactionDetails)
+    $: ({ expirationDate, giftStorageDeposit, surplus } = $newTransactionDetails)
 
     let storageDeposit = 0
+    let visibleSurplus = 0
     let preparedOutput: Output
     let outputOptions: OutputOptions
     let initialExpirationDate: ExpirationTime = getInitialExpirationDate()
 
     $: transactionDetails = get(newTransactionDetails)
-    $: recipientAddress = recipient?.type === 'account' ? recipient?.account?.depositAddress : recipient?.address
-    $: asset =
-        transactionDetails.type === NewTransactionType.TokenTransfer
-            ? getAssetById(transactionDetails.assetId)
-            : undefined
     $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
 
     onMount(() => {
@@ -70,32 +65,26 @@
     }
 
     async function prepareTransactionOutput(): Promise<void> {
-        // TODO: move arguments into transactionDetails object
-        outputOptions = getOutputOptions(
-            expirationDate,
-            recipientAddress,
-            $newTransactionDetails.type === NewTransactionType.TokenTransfer ? $newTransactionDetails.rawAmount : '0',
-            $newTransactionDetails.metadata,
-            $newTransactionDetails.tag,
-            asset,
-            giftStorageDeposit,
-            $newTransactionDetails.surplus,
-            $newTransactionDetails.layer2Parameters,
-            $newTransactionDetails.type === NewTransactionType.NftTransfer ? $newTransactionDetails.nftId : undefined
-        )
+        const transactionDetails = get(newTransactionDetails)
+        if (!transactionDetails.recipient) {
+            return
+        }
+        outputOptions = getOutputOptions(transactionDetails)
         preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
-
         setStorageDeposit(preparedOutput, Number(surplus))
-
         if (!initialExpirationDate) {
             initialExpirationDate = getInitialExpirationDate()
         }
     }
 
     function setStorageDeposit(preparedOutput: Output, surplus?: number): void {
+        const rawAmount =
+            transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.rawAmount : '0'
         const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
-            getStorageDepositFromOutput(preparedOutput)
-
+            getStorageDepositFromOutput(preparedOutput, rawAmount)
+        if (surplus > _storageDeposit) {
+            visibleSurplus = Number(surplus)
+        }
         if (giftStorageDeposit) {
             // Only giftedStorageDeposit needs adjusting, since that is derived
             // from the amount property instead of the unlock condition
@@ -112,6 +101,7 @@
     }
 
     function refreshSendConfirmationState(): void {
+        updateNewTransactionDetails({ type: transactionDetails.type, expirationDate, giftStorageDeposit, surplus })
         void prepareTransactionOutput()
     }
 
@@ -133,5 +123,5 @@
 {:else if $sendRoute === SendRoute.Amount}
     <AmountView />
 {:else if $sendRoute === SendRoute.Review}
-    <ReviewView {sendTransaction} {storageDeposit} {initialExpirationDate} bind:expirationDate />
+    <ReviewView {sendTransaction} {storageDeposit} {initialExpirationDate} bind:expirationDate bind:visibleSurplus />
 {/if}

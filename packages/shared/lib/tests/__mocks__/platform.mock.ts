@@ -7,7 +7,7 @@ const Platform: IPlatform = {
     PincodeManager: undefined,
     close(): void {},
     exportTransactionHistory(defaultPath: string, contents: string): Promise<string | null> {
-        return Promise.resolve(undefined)
+        return Promise.resolve(null)
     },
     getActiveProfile(): string {
         return ''
@@ -22,7 +22,7 @@ const Platform: IPlatform = {
         return Promise.resolve('')
     },
     getStrongholdBackupDestination(defaultPath: string): Promise<string | null> {
-        return Promise.resolve(undefined)
+        return Promise.resolve(null)
     },
     getUserDataPath(): Promise<string> {
         return Promise.resolve('')
@@ -72,8 +72,20 @@ const Platform: IPlatform = {
     installAppUpdate(): Promise<void> {
         return Promise.resolve(undefined)
     },
+    downloadNft(): Promise<void> {
+        return Promise.resolve(undefined)
+    },
+    cancelNftDownload(nftId: string): Promise<void> {
+        return Promise.resolve(undefined)
+    },
+    checkIfFileExists(): Promise<boolean> {
+        return Promise.resolve(false)
+    },
     updateMenu(attribute: string, value: unknown): void {},
     copyFile(copyFilePath: string, destinationFilePath: string): Promise<void> {
+        return Promise.resolve()
+    },
+    deleteFile(filePath: string): Promise<void> {
         return Promise.resolve()
     },
     isFeatureFlagEnabled(keyPath: string): boolean {

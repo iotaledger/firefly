@@ -9,7 +9,7 @@
 
     $: action = localize(getActivityTileTitle(activity))
     $: formattedAsset = {
-        text: truncateString(activity.aliasId, 5, 3),
+        text: truncateString(activity.aliasId, 6, 6),
         color: 'blue-700',
     }
 </script>

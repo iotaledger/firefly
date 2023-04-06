@@ -42,7 +42,7 @@
     >
         <div
             class="
-                w-full flex text-left  
+                w-full flex text-left
                 {isVertical ? 'flex-col space-y-1 overflow-y-auto' : 'flex-row space-x-2 justify-between'}
                 {maxHeight ? `min-h-${maxHeight}` : 'max-h-20'}
             "

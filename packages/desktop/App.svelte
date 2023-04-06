@@ -45,6 +45,7 @@
         resetRouters,
     } from './lib/routers'
     import { openSettings } from './lib/routers/actions/openSettings'
+    import { downloadNextNftInQueue, nftDownloadQueue } from '@core/nfts'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -86,6 +87,8 @@
     $: isDashboardVisible = $appRoute === AppRoute.Dashboard && $hasLoadedAccounts && $popupState.id !== 'busy'
     $: isWindows = $platform === PlatformOption.Windows
 
+    $: $nftDownloadQueue, downloadNextNftInQueue()
+
     let splash = true
     let settings = false
 
@@ -117,8 +120,8 @@
         // await pollMarketData()
 
         // Used for auto updates
+        registerAppEvents()
         if (process.env.NODE_ENV !== 'development') {
-            registerAppEvents()
             await setAppVersionDetails()
             if ($appVersionDetails.upToDate === false) {
                 openPopup({ id: PopupId.CheckForUpdates })

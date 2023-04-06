@@ -45,7 +45,12 @@
                 tabs = [Tab.Transaction, Tab.Alias]
                 break
             case ActivityType.Nft:
-                tabs = [Tab.Transaction, Tab.Nft, ...(hasMetadata ? [Tab.NftMetadata] : [])]
+                tabs = [
+                    Tab.Transaction,
+                    Tab.Nft,
+                    ...(hasMetadata ? [Tab.NftMetadata] : []),
+                    ...(activity?.parsedLayer2Metadata ? [Tab.SmartContract] : []),
+                ]
                 break
             case ActivityType.Foundry:
                 tabs = [Tab.Transaction, Tab.Foundry, Tab.Token]
