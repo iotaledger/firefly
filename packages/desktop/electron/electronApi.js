@@ -261,6 +261,9 @@ const ElectronApi = {
     copyFile(sourceFilePath, destinationFilePath) {
         return ipcRenderer.invoke('copy-file', sourceFilePath, destinationFilePath)
     },
+    deleteFile(filePath) {
+        return ipcRenderer.invoke('delete-file', filePath)
+    },
     /**
      * Log unhandled exception
      * @param {string} errorType The type of eerror

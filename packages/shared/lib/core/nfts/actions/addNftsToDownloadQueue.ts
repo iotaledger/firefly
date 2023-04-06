@@ -3,11 +3,11 @@ import { INft } from '../interfaces'
 import { addNftToDownloadQueue } from '../stores'
 import { checkIfNftShouldBeDownloaded } from '../utils/checkIfNftShouldBeDownloaded'
 
-export function addNftsToDownloadQueue(accountIndex: number, nfts: INft[]): void {
+export function addNftsToDownloadQueue(accountIndex: number, nfts: INft[], forceDownload: boolean = true): void {
     for (const nft of nfts) {
         const shouldNotDownloadNft =
             nft?.downloadMetadata?.isLoaded || !!nft?.downloadMetadata?.error || !!nft?.downloadMetadata?.warning
-        if (shouldNotDownloadNft) {
+        if (shouldNotDownloadNft && !forceDownload) {
             continue
         } else {
             void validateNftThenAddToQueue(accountIndex, nft)
