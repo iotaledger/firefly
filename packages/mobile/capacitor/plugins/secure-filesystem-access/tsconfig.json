@@ -17,8 +17,5 @@
         "target": "es2017",
         "typeRoots": ["./node_modules/@types"]
     },
-    "files": [
-        "src/index.ts",
-        "src/definitions.ts",
-    ]
+    "files": ["src/index.ts", "src/definitions.ts"]
 }
