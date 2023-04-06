@@ -7,7 +7,7 @@ import {
 } from '../../constants'
 import { IPersistedProfile } from '../../interfaces'
 import { currentProfileVersion, profiles, saveProfile } from '../../stores'
-import { Network } from '@core/network'
+import { NETWORK, Network } from '@core/network'
 
 /**
  * Migrates profile data in need of being modified to accommodate changes
@@ -158,16 +158,16 @@ function persistedProfileMigrationToV10(existingProfile: IPersistedProfile): voi
     if (existingProfile.networkProtocol === 'shimmer') {
         switch (existingProfile.networkType) {
             case 'mainnet':
-                network = Network.Shimmer
+                network = NETWORK?.[Network.Shimmer]
                 break
             case 'devnet':
-                network = Network.Testnet
+                network = NETWORK?.[Network.Testnet]
                 break
         }
     } else if (existingProfile.networkProtocol === 'iota') {
         switch (existingProfile.networkType) {
             case 'mainnet':
-                network = Network.Iota
+                network = NETWORK?.[Network.Iota]
                 break
         }
     }
