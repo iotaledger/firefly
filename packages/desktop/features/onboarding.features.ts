@@ -28,7 +28,8 @@ interface IOnboardingFeatures extends IFeatureFlag {
 const onboardingFeatures: IOnboardingFeatures = {
     enabled: true,
     iota: {
-        enabled: true,
+        enabled: false,
+        hidden: true,
         newProfile: {
             enabled: false,
             softwareProfile: {
