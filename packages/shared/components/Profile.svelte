@@ -56,7 +56,9 @@
                     height={14}
                 />
             {/if}
-            <Text type={TextType.h5} classes="text-center truncate">{profile?.name}</Text>
+            {#if profile?.name}
+                <Text type={TextType.h5} classes="text-center truncate">{profile?.name}</Text>
+            {/if}
         </div>
         {#if profile?.isDeveloperProfile}
             <DeveloperIndicatorPill />
