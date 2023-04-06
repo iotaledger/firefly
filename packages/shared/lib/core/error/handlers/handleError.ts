@@ -15,6 +15,8 @@ export function handleError(err: IError, errorHandlerParameters = DEFAULT_ERROR_
     const { resetConfirmationPropsOnDenial, sendToTracker } = errorHandlerParameters
 
     if (sendToTracker) {
+        /* eslint-disable no-console */
+        console.log('SENDING ERROR: ', err)
         Platform.captureException(err)
     }
 

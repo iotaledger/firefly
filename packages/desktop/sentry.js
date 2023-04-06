@@ -35,6 +35,8 @@ module.exports = function (initialize) {
         Sentry.setUser({ id: machineId })
     }
 
+    console.log('SENTRY: ', Sentry)
+
     return {
         captureException: Sentry.captureException,
     }
