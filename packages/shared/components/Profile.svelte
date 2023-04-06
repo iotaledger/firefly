@@ -9,12 +9,12 @@
     export let isLedgerProfile: boolean = false
     export let updateRequired: boolean = false
 
-    export let onClick: undefined | ((id: string) => void) = undefined
+    export let onClick: undefined | ((profileId: string) => void) = undefined
 
     const slots = $$props.$$slots
 
     function onProfileClick(): void {
-        onClick && onClick(profile.id)
+        onClick && onClick(profile?.id)
     }
 
     function getInitials(): string {

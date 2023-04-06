@@ -1,41 +1,46 @@
 <script lang="ts">
-    import { onDestroy, onMount } from 'svelte'
-    import { _, isLocaleLoaded, Locale, localeDirection, setupI18n } from '@core/i18n'
-    import { activeProfile, checkAndMigrateProfiles, cleanupEmptyProfiles } from '@core/profile'
-    import {
-        AppRoute,
-        appRoute,
-        DashboardRoute,
-        dashboardRouter,
-        initialiseRouterManager,
-        OnboardingRoute,
-        onboardingRoute,
-        onboardingRouter,
-        routerManager,
-        RouterManagerExtensionName,
-    } from '@core/router'
+    // Must be imported first to run
+    import { Locale, _, isLocaleLoaded, localeDirection, setupI18n } from '@core/i18n'
+
+    // Other imports
+    import { showAppNotification } from '@auxiliary/notification'
+    import { PopupId, closePopup, openPopup, popupState } from '@auxiliary/popup'
+    import { Popup, TitleBar } from '@components'
+    import { initialiseOnboardingFlow } from '@contexts/onboarding'
     import {
         AppContext,
+        AppStage,
+        Platform,
+        PlatformOption,
         appSettings,
         appStage,
-        AppStage,
         appVersionDetails,
         initAppSettings,
         platform,
-        Platform,
-        PlatformOption,
         registerAppEvents,
         setAppVersionDetails,
         setPlatform,
     } from '@core/app'
-    import { showAppNotification } from '@auxiliary/notification'
-    import { closePopup, openPopup, PopupId, popupState } from '@auxiliary/popup'
-    import { initialiseOnboardingFlow } from '@contexts/onboarding'
-    import { NetworkProtocol, NetworkType } from '@core/network'
-    import { getLocalisedMenuItems } from './lib/helpers'
+    import { NetworkId } from '@core/network'
+    import { downloadNextNftInQueue, nftDownloadQueue } from '@core/nfts'
+    import { activeProfile, checkAndMigrateProfiles, cleanupEmptyProfiles } from '@core/profile'
+    import {
+        AppRoute,
+        DashboardRoute,
+        OnboardingRoute,
+        RouterManagerExtensionName,
+        appRoute,
+        dashboardRouter,
+        initialiseRouterManager,
+        onboardingRoute,
+        onboardingRouter,
+        routerManager,
+    } from '@core/router'
+
     import { ToastContainer, Transition } from '@ui'
-    import { TitleBar, Popup } from '@components'
     import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from '@views'
+    import { onDestroy, onMount } from 'svelte'
+    import { getLocalisedMenuItems } from './lib/helpers'
     import {
         getAppRouter,
         getRouterForAppContext,
@@ -45,7 +50,6 @@
         resetRouters,
     } from './lib/routers'
     import { openSettings } from './lib/routers/actions/openSettings'
-    import { downloadNextNftInQueue, nftDownloadQueue } from '@core/nfts'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -156,7 +160,6 @@
         Platform.onEvent('menu-create-developer-profile', async () => {
             await initialiseOnboardingFlow({
                 isDeveloperProfile: true,
-                networkProtocol: NetworkProtocol.Shimmer,
             })
             $routerManager.goToAppContext(AppContext.Onboarding)
             $onboardingRouter.goTo(OnboardingRoute.NetworkSetup)
@@ -164,8 +167,7 @@
         Platform.onEvent('menu-create-normal-profile', async () => {
             await initialiseOnboardingFlow({
                 isDeveloperProfile: false,
-                networkProtocol: NetworkProtocol.Shimmer,
-                networkType: NetworkType.Mainnet,
+                networkId: NetworkId.Shimmer,
             })
             $routerManager.goToAppContext(AppContext.Onboarding)
             $onboardingRouter.goTo(OnboardingRoute.ProfileSetup)

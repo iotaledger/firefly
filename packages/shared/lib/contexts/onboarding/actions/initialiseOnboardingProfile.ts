@@ -1,9 +1,6 @@
-import { get } from 'svelte/store'
-
 import { stopPollingLedgerNanoStatus } from '@core/ledger'
-import { NetworkProtocol } from '@core/network'
 import { destroyProfileManager, profileManager } from '@core/profile-manager'
-
+import { get } from 'svelte/store'
 import { OnboardingProfileManagerAlreadyInitializedError } from '../errors'
 import { buildOnboardingProfile } from '../helpers'
 import { isOnboardingLedgerProfile, onboardingProfile } from '../stores'
@@ -13,7 +10,6 @@ import { isOnboardingLedgerProfile, onboardingProfile } from '../stores'
  */
 export async function initialiseOnboardingProfile(
     isDeveloperProfile: boolean,
-    networkProtocol?: NetworkProtocol,
     overrideExistingProfileManager = false
 ): Promise<void> {
     if (get(profileManager)) {
@@ -27,6 +23,6 @@ export async function initialiseOnboardingProfile(
         }
     }
 
-    const _newProfile = buildOnboardingProfile(isDeveloperProfile, networkProtocol)
+    const _newProfile = buildOnboardingProfile(isDeveloperProfile)
     onboardingProfile.set(_newProfile)
 }
