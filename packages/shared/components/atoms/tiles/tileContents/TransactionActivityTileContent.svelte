@@ -36,13 +36,13 @@
         const { isShimmerClaiming, subject } = _activity
         if (isShimmerClaiming) {
             return localize('general.shimmerGenesis')
-        }
-        if (subject?.type === 'account') {
+        } else if (subject?.type === 'account') {
             return truncateString(subject?.account?.name, 13, 0)
-        }
-        if (subject?.type === 'address') {
+        } else if (subject?.type === 'address') {
             const address = activity.parsedLayer2Metadata?.ethereumAddress ?? subject?.address
             return truncateString(address, 6, 6)
+        } else if (subject?.type === 'network') {
+            return subject?.network
         }
         return localize('general.unknownAddress')
     }
