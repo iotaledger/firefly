@@ -3,7 +3,7 @@
     "compilerOptions": {
         "baseUrl": "./",
         "importsNotUsedAsValues": "remove",
-        "isolatedModules": false,
+        "isolatedModules": true,
         "lib": ["DOM", "ESNext"],
         "paths": {
             "@auxiliary/*": ["./lib/auxiliary/*"],
