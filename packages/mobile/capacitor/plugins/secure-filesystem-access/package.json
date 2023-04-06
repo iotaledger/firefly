@@ -32,12 +32,16 @@
     },
     "author": "IOTA Stiftung",
     "license": "Apache-2.0",
+    "dependencies": {
+        "@capacitor/core": "^3.4.1",
+        "rollup": "^2.29.0"
+    },
     "devDependencies": {
         "@capacitor/android": "^3.4.1",
         "@capacitor/core": "^3.4.1",
         "@capacitor/docgen": "^0.0.10",
         "@capacitor/ios": "^3.4.1",
-        "rollup": "^2.32.0",
+        "rollup": "^2.29.0",
         "rimraf": "^3.0.2",
         "typescript": "~4.0.3"
     },
