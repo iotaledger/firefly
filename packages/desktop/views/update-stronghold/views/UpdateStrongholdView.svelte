@@ -35,7 +35,7 @@
                 isPasswordInputVisible = true
             }
             const parsedError = isValidJson(err.message) ? JSON.parse(err.message) : null
-            passwordError = parsedError?.payload?.error ?? localize(err.message)
+            passwordError = parsedError?.payload?.error.replaceAll('`', '') ?? localize(err.message)
             return
         }
     }
