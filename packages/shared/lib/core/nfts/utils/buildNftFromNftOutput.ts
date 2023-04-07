@@ -38,6 +38,7 @@ export function buildNftFromNftOutput(
         parsedMetadata,
         latestOutputId: outputId,
         composedUrl,
+        downloadUrl: composedUrl,
         filePath,
         downloadMetadata: {
             error: undefined,

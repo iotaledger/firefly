@@ -41,7 +41,7 @@
             ])
             await registerParticipationWrapper()
             updateActiveAccountMetadata($selectedAccount.index, {
-                removedProposalIds: $selectedAccount.removedProposalIds.filter((id) => id !== inputtedEventId),
+                removedProposalIds: $selectedAccount.removedProposalIds?.filter((id) => id !== inputtedEventId),
             })
             isBusy = false
         } catch (err) {

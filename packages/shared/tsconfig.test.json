@@ -3,12 +3,13 @@
     "compilerOptions": {
         "baseUrl": "./",
         "importsNotUsedAsValues": "remove",
-        "isolatedModules": false,
+        "isolatedModules": true,
         "lib": ["DOM", "ESNext"],
         "paths": {
             "@auxiliary/*": ["./lib/auxiliary/*"],
             "@contexts/*": ["./lib/contexts/*"],
             "@core/*": ["./lib/core/*"],
+            "@features/*": ["./lib/features/*"],
             "@lib/*": ["./lib/*"],
             "@mocks/*": ["./lib/tests/__mocks__/*"]
         },

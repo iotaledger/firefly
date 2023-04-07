@@ -1,6 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte'
 
+    import { StatusBar, Style } from '@capacitor/status-bar'
     import { SplashScreen } from '@capacitor/splash-screen'
     import { Keyboard } from '@capacitor/keyboard'
 
@@ -25,11 +26,37 @@
     import { initialiseRouterManager, RouterManagerExtensionName } from '@core/router'
 
     import { DashboardView, LoginRouter, OnboardingRouter } from '@views'
-    import { closeAllDrawers } from '@/auxiliary/drawer'
+    import { closeAllDrawers, DrawerId, drawers } from '@/auxiliary/drawer'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
     checkAndMigrateProfiles()
+
+    /**
+     * Handle Android top status bar (not needed for iOS)
+     * @todo remove when implement status bar overlay
+     * https://github.com/iotaledger/firefly/issues/6345
+     */
+    $: if ($drawers[0]?.id !== DrawerId.Profile) {
+        if ($appSettings.darkMode) {
+            void StatusBar.setBackgroundColor({ color: '#1B2D4B' })
+            void StatusBar.setStyle({ style: Style.Dark })
+        } else if ($appRoute === AppRoute.Dashboard) {
+            void StatusBar.setBackgroundColor({ color: '#F6F9FF' })
+            void StatusBar.setStyle({ style: Style.Light })
+        } else {
+            void StatusBar.setBackgroundColor({ color: '#FFFFFF' })
+            void StatusBar.setStyle({ style: Style.Light })
+        }
+    } else {
+        if ($appSettings.darkMode) {
+            void StatusBar.setBackgroundColor({ color: '#25395f' })
+            void StatusBar.setStyle({ style: Style.Dark })
+        } else {
+            void StatusBar.setBackgroundColor({ color: '#FFFFFF' })
+            void StatusBar.setStyle({ style: Style.Light })
+        }
+    }
 
     $: $appSettings.darkMode
         ? document.body.classList.add('scheme-dark')

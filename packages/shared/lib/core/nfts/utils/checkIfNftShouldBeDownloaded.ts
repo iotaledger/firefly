@@ -6,7 +6,9 @@ import { fetchWithTimeout } from './fetchWithTimeout'
 import { NftDownloadMetadata, INft, IPersistedNftData } from '../interfaces'
 import { addPersistedNftData, persistedNftForActiveProfile } from '../stores'
 import { Platform } from '@core/app'
-import { BYTES_PER_MEGABYTE, HttpHeader } from '@core/utils'
+import { BYTES_PER_MEGABYTE } from '@core/utils'
+import { HttpHeader } from '@core/utils'
+import features from '@features/features'
 
 const HEAD_FETCH_TIMEOUT_SECONDS = 3
 
@@ -16,7 +18,9 @@ export async function checkIfNftShouldBeDownloaded(
     let downloadMetadata: NftDownloadMetadata = { isLoaded: false }
 
     try {
-        const alreadyDownloaded = await Platform.checkIfFileExists(`${nft.filePath}/${NFT_MEDIA_FILE_NAME}`)
+        const alreadyDownloaded = features?.collectibles?.useCaching?.enabled
+            ? await Platform.checkIfFileExists(`${nft.filePath}/${NFT_MEDIA_FILE_NAME}`)
+            : false
 
         if (alreadyDownloaded) {
             downloadMetadata.isLoaded = true
@@ -36,7 +40,11 @@ export async function checkIfNftShouldBeDownloaded(
             if (validation?.error || validation?.warning) {
                 downloadMetadata = { ...downloadMetadata, ...validation }
             } else {
-                return { shouldDownload: true, downloadUrl, downloadMetadata: { isLoaded: false } }
+                if (features.collectibles.useCaching.enabled) {
+                    return { shouldDownload: true, downloadUrl, downloadMetadata: { isLoaded: false } }
+                } else {
+                    return { shouldDownload: false, downloadUrl, downloadMetadata: { isLoaded: true } }
+                }
             }
         }
     } catch (err) {
