@@ -3,13 +3,14 @@
 
     import { Icon, Text, TextType } from '@ui'
 
+    import { appSettings } from '@core/app'
     import { localize } from '@core/i18n'
 
     import {
-        DrawerId,
         DRAWER_IN_ANIMATION_DURATION_MS,
         DRAWER_OUT_ANIMATION_DURATION_MS,
         DRAWER_STATIC_TITLE_TITLES,
+        DrawerId,
     } from '@/auxiliary/drawer'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
 
@@ -32,6 +33,8 @@
 
     $: staticTile = DRAWER_STATIC_TITLE_TITLES[id] ? localize(DRAWER_STATIC_TITLE_TITLES[id]) : undefined
     $: displayedTitle = title ?? staticTile
+
+    $: darkModeEnabled = $appSettings.darkMode
 
     const directon = enterFromSide ? { x: -100 } : { y: 100 }
 
@@ -74,6 +77,7 @@
 
 <svelte:window on:touchend={onTouchEnd} on:touchmove={onTouchMove} />
 <drawer class="fixed top-0 left-0 w-screen h-screen">
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
     <overlay
         in:fade|local={{ duration: DRAWER_IN_ANIMATION_DURATION_MS }}
         out:fade|local={{ duration: DRAWER_OUT_ANIMATION_DURATION_MS }}
@@ -87,13 +91,14 @@
         bind:clientHeight={panelHeight}
         bind:clientWidth={panelWidth}
         class:moving
-        class="pt-7 px-5 fixed w-full flex flex-col flex-auto overflow-hidden safe-area-bottom {fullScreen
-            ? enterFromSide
-                ? 'h-screen safe-area-top-from-side'
-                : 'safe-area-top'
-            : ''} bg-white dark:bg-gray-800 {enterFromSide ? '' : 'rounded-t-2xl'}"
-        style="{enterFromSide ? `left: ${position}px;` : `bottom: ${position}px;`} {$isKeyboardOpen &&
-            `border-bottom: ${$keyboardHeight}px solid transparent`}"
+        class:h-screen={fullScreen && enterFromSide}
+        class:safe-area-top-from-side={fullScreen && enterFromSide}
+        class:safe-area-top={fullScreen && !enterFromSide}
+        class:rounded-t-2xl={!enterFromSide}
+        class:darkmode={darkModeEnabled}
+        style:--left={enterFromSide ? `${position}px` : '0px'}
+        style:--bottom={enterFromSide ? '0px' : `${position}px`}
+        style:--border-bottom={`${$isKeyboardOpen ? $keyboardHeight : 0}px solid transparent`}
     >
         {#if enterFromSide === false}
             <decorator
@@ -122,10 +127,20 @@
 
 <style type="text/scss">
     panel {
+        @apply fixed w-full max-h-full;
+        @apply flex flex-col flex-auto overflow-hidden;
+        @apply pt-7 px-5;
+        @apply bg-white;
+        @apply safe-area-bottom;
         transition: bottom 0.2s ease;
-        max-height: 100%;
+        left: var(--left);
+        bottom: var(--bottom);
+        border-bottom: var(--border-bottom);
         &.moving {
-            transition: none;
+            @apply transition-none;
+        }
+        &.darkmode {
+            @apply bg-gray-800;
         }
     }
     .safe-area-top {
