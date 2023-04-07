@@ -53,6 +53,9 @@ const settingsFeatures = {
         maxMediaSize: {
             enabled: true,
         },
+        refreshNftMedia: {
+            enabled: true,
+        },
     },
     network: {
         enabled: true,
