@@ -19,12 +19,12 @@
     let passwordError: string = ''
     let confirmPassword: string = ''
     let confirmPasswordError: string = ''
-    let busy: boolean = false
+    let isBusy: boolean = false
 
     $: passwordStrength = zxcvbn(newPassword)
 
     function validatePassword(): boolean {
-        busy = false
+        isBusy = false
 
         if (!newPassword || newPassword.length > MAX_STRONGHOLD_PASSWORD_LENGTH) {
             passwordError = localize('error.password.length', {
@@ -56,7 +56,7 @@
 
         if (isPasswordValid) {
             try {
-                busy = true
+                isBusy = true
                 await changeStrongholdPassword(oldPassword, newPassword)
                 showAppNotification({
                     alert: true,
@@ -68,7 +68,7 @@
                 console.error(err)
                 passwordError = localize('error.password.incorrect')
             } finally {
-                busy = false
+                isBusy = false
             }
         }
     }
@@ -99,7 +99,7 @@
                 showStrengthLevel
                 strength={passwordStrength.score}
                 placeholder={localize('general.password')}
-                disabled={busy}
+                disabled={isBusy}
                 submitHandler={validatePassword}
             />
             <PasswordInput
@@ -108,21 +108,21 @@
                 classes="mb-4"
                 showRevealToggle
                 placeholder={localize('general.confirmPassword')}
-                disabled={busy}
+                disabled={isBusy}
                 submitHandler={validatePassword}
             />
         </form>
     </div>
     <div slot="leftpane__action" class="flex flex-col gap-4">
-        <Button type={HTMLButtonType.Button} outline classes="w-full" onClick={onSkipClick}>
+        <Button type={HTMLButtonType.Button} outline classes="w-full" onClick={onSkipClick} disabled={isBusy} {isBusy}>
             {localize('actions.skipAndKeep')}
         </Button>
         <Button
             form="update-stronghold-form"
-            disabled={!newPassword || !confirmPassword || busy}
-            isBusy={busy}
             type={HTMLButtonType.Submit}
             classes="w-full"
+            disabled={!newPassword || !confirmPassword || isBusy}
+            {isBusy}
         >
             {localize('views.settings.changePassword.title')}
         </Button>
