@@ -12,10 +12,6 @@
     </Box>
 {:else if subject.type === 'address'}
     <AddressBox clearBackground clearPadding isCopyable address={subject.address} />
-{:else if subject.type === 'network'}
-    <Text type={TextType.pre} fontSize="base" fontWeight={FontWeight.medium}>
-        {subject.network}
-    </Text>
 {:else}
     <Box row clearBackground clearPadding classes="justify-center">
         <Text type={TextType.pre} fontSize="base" fontWeight={FontWeight.medium}>
