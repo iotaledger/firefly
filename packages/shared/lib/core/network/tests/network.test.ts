@@ -1,6 +1,6 @@
 import { ITokenMetadata } from '@core/wallet/interfaces'
 
-import { IAuth, IClientOptions, INetwork, INode } from '../interfaces'
+import { IAuth, IClientOptions, INetworkInfo, INode } from '../interfaces'
 
 import { NetworkProtocol, NetworkType } from '../enums'
 
@@ -8,8 +8,8 @@ import {
     checkNodeUrlValidity,
     cleanAuth,
     getDefaultClientOptions,
-    getNetwork,
-    getOfficialNetwork,
+    getNetworkInfo,
+    getOfficialNetworkInfo,
     getOfficialNodes,
     isOfficialNetwork,
 } from '../utils'
@@ -48,7 +48,7 @@ describe('File: network.ts', () => {
         },
     }
 
-    const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkType]?: INetwork } }> = {
+    const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkType]?: INetworkInfo } }> = {
         iota: {
             [NetworkType.Mainnet]: {
                 id: 'iota-mainnet',
@@ -76,7 +76,7 @@ describe('File: network.ts', () => {
                     vByteFactorKey: 1,
                 },
             },
-            [NetworkType.PrivateNet]: <INetwork>{
+            [NetworkType.PrivateNet]: <INetworkInfo>{
                 name: 'Private Net',
                 protocol: NetworkProtocol.IOTA,
                 type: NetworkType.PrivateNet,
@@ -109,7 +109,7 @@ describe('File: network.ts', () => {
                     vByteFactorKey: 1,
                 },
             },
-            [NetworkType.PrivateNet]: <INetwork>{
+            [NetworkType.PrivateNet]: <INetworkInfo>{
                 name: 'Private Net',
                 protocol: NetworkProtocol.Shimmer,
                 type: NetworkType.PrivateNet,
@@ -192,11 +192,11 @@ describe('File: network.ts', () => {
         })
     })
 
-    describe('Function: getOfficialNetwork', () => {
+    describe('Function: getOfficialNetworkInfo', () => {
         it('should return the correct official network metadata given a valid network type', () => {
             Object.values(NetworkProtocol).forEach((networkProtocol) => {
                 Object.values(NetworkType).forEach((networkType) => {
-                    expect(getOfficialNetwork(networkProtocol, networkType)).toEqual(
+                    expect(getOfficialNetworkInfo(networkProtocol, networkType)).toEqual(
                         NETWORK[networkProtocol][networkType]
                     )
                 })
@@ -236,12 +236,12 @@ describe('File: network.ts', () => {
         })
     })
 
-    describe('Function: getNetwork', () => {
+    describe('Function: getNetworkInfo', () => {
         it('should return all metadata for official networks', () => {
             Object.values(NetworkProtocol).forEach((networkProtocol) => {
                 Object.values(NETWORK[networkProtocol]).forEach((network) => {
                     if (network.type !== NetworkType.PrivateNet) {
-                        expect(getNetwork(networkProtocol, network.type)).toEqual(
+                        expect(getNetworkInfo(networkProtocol, network.type)).toEqual(
                             NETWORK[networkProtocol][network.type]
                         )
                     }
@@ -249,7 +249,9 @@ describe('File: network.ts', () => {
             })
         })
         it('should return partial metadata for unofficial networks', () => {
-            expect(getNetwork(NetworkProtocol.IOTA, NetworkType.PrivateNet, 'another-tangle')).toEqual(<INetwork>{
+            expect(getNetworkInfo(NetworkProtocol.IOTA, NetworkType.PrivateNet, 'another-tangle')).toEqual(<
+                INetworkInfo
+            >{
                 id: 'another-tangle',
                 name: 'Private Net',
                 protocol: NetworkProtocol.IOTA,

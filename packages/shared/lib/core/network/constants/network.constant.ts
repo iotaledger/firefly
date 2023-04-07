@@ -1,8 +1,8 @@
 import { BASE_TOKEN } from '../constants'
 import { NetworkProtocol, NetworkType } from '../enums'
-import { INetwork } from '../interfaces'
+import { INetworkInfo } from '../interfaces'
 
-export const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkType]?: INetwork } }> = {
+export const NETWORK_INFO_MAP: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkType]?: INetworkInfo } }> = {
     [NetworkProtocol.IOTA]: {
         [NetworkType.Mainnet]: {
             id: 'iota-mainnet',
@@ -30,7 +30,7 @@ export const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkTyp
                 vByteFactorKey: 1,
             },
         },
-        [NetworkType.PrivateNet]: <INetwork>{
+        [NetworkType.PrivateNet]: <INetworkInfo>{
             name: 'Private Net',
             protocol: NetworkProtocol.IOTA,
             type: NetworkType.PrivateNet,
@@ -63,7 +63,7 @@ export const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkTyp
                 vByteFactorKey: 1,
             },
         },
-        [NetworkType.PrivateNet]: <INetwork>{
+        [NetworkType.PrivateNet]: <INetworkInfo>{
             name: 'Private Net',
             protocol: NetworkProtocol.Shimmer,
             type: NetworkType.PrivateNet,

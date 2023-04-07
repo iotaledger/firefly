@@ -1,6 +1,6 @@
-import { NETWORK } from '../constants'
+import { NETWORK_INFO_MAP } from '../constants'
 import { NetworkProtocol, NetworkType } from '../enums'
-import { INetwork } from '../interfaces'
+import { INetworkInfo } from '../interfaces'
 
 /**
  * Constructs an official IOTA network object given the type of network
@@ -11,6 +11,6 @@ import { INetwork } from '../interfaces'
  *
  * @returns {Network}
  */
-export function getOfficialNetwork(protocol: NetworkProtocol, type: NetworkType): INetwork {
-    return NETWORK?.[protocol]?.[type] ?? <INetwork>{}
+export function getOfficialNetworkInfo(protocol: NetworkProtocol, type: NetworkType): INetworkInfo {
+    return NETWORK_INFO_MAP?.[protocol]?.[type] ?? <INetworkInfo>{}
 }
