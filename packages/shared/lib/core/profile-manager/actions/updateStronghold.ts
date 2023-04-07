@@ -1,10 +1,11 @@
 import { get } from 'svelte/store'
 
+import { destroyProfileManager } from './'
+import { api } from '../api'
+import { getSecretManagerPath } from '../utils'
+
 import { getStorageDirectoryOfProfile } from '@core/profile'
 import { activeProfileId, updateActiveProfile } from '@core/profile/stores'
-import { destroyProfileManager } from '@core/profile-manager/actions'
-import { api } from '@core/profile-manager/api'
-import { getSecretManagerPath } from '@core/profile-manager/utils'
 import { STRONGHOLD_VERSION } from '@core/stronghold'
 
 import { copyStrongholdFileToProfileDirectory } from '@contexts/onboarding/helpers'
