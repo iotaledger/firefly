@@ -74,6 +74,7 @@ const typescriptEslintRules = {
     '@typescript-eslint/no-unsafe-call': 'off', // OFF b/c used in Svelte components for UI logic
     '@typescript-eslint/no-unsafe-member-access': 'off', // OFF b/c there are simply too many linting errors
     '@typescript-eslint/no-unsafe-return': 'off', // OFF b/c used in Svelte components for UI logic
+    '@typescript-eslint/no-unsafe-argument': 'off',
     '@typescript-eslint/unused-export-let': 'off', // OFF b/c used in Svelte components for UI logic
     '@typescript-eslint/no-unused-vars': 'error',
     '@typescript-eslint/no-var-requires': 'error',
