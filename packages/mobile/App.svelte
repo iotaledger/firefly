@@ -32,29 +32,26 @@
 
     checkAndMigrateProfiles()
 
+    const htmlElement = document.getElementsByTagName('html')[0]
+
     /**
      * Handle Android top status bar (not needed for iOS)
      * @todo remove when implement status bar overlay
      * https://github.com/iotaledger/firefly/issues/6345
      */
-    $: if ($drawers[0]?.id !== DrawerId.Profile) {
-        if ($appSettings.darkMode) {
-            void StatusBar.setBackgroundColor({ color: '#1B2D4B' })
-            void StatusBar.setStyle({ style: Style.Dark })
-        } else if ($appRoute === AppRoute.Dashboard) {
-            void StatusBar.setBackgroundColor({ color: '#F6F9FF' })
-            void StatusBar.setStyle({ style: Style.Light })
-        } else {
-            void StatusBar.setBackgroundColor({ color: '#FFFFFF' })
-            void StatusBar.setStyle({ style: Style.Light })
-        }
+    $: if ($drawers[0]?.id !== DrawerId.Profile && $appSettings.darkMode) {
+        void StatusBar.setBackgroundColor({ color: '#1B2D4B' })
+        void StatusBar.setStyle({ style: Style.Dark })
+        htmlElement.style.backgroundColor = '#1B2D4B'
     } else {
         if ($appSettings.darkMode) {
             void StatusBar.setBackgroundColor({ color: '#25395f' })
             void StatusBar.setStyle({ style: Style.Dark })
+            htmlElement.style.backgroundColor = '#25395f'
         } else {
             void StatusBar.setBackgroundColor({ color: '#FFFFFF' })
             void StatusBar.setStyle({ style: Style.Light })
+            void StatusBar.setBackgroundColor({ color: '#FFFFFF' })
         }
     }
 
