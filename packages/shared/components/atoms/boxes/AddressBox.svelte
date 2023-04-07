@@ -14,11 +14,17 @@
 
 {#if address}
     <CopyableBox bind:this={copyableBoxElement} col {isCopyable} value={address} clearBoxPadding {...$$restProps}>
-        <Text type="pre" {fontSize} fontWeight={FontWeight.medium}>
-            {address.slice(0, address.length / 2)}
-        </Text>
-        <Text type="pre" {fontSize} fontWeight={FontWeight.medium}>
-            {address.slice(address.length / 2)}
-        </Text>
+        {#if address.length > 20}
+            <Text type="pre" {fontSize} fontWeight={FontWeight.medium}>
+                {address.slice(0, address.length / 2)}
+            </Text>
+            <Text type="pre" {fontSize} fontWeight={FontWeight.medium}>
+                {address.slice(address.length / 2)}
+            </Text>
+        {:else}
+            <Text type="pre" {fontSize} fontWeight={FontWeight.medium}>
+                {address}
+            </Text>
+        {/if}
     </CopyableBox>
 {/if}
