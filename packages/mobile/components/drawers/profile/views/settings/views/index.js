@@ -12,4 +12,4 @@ export { default as SettingsIndexView } from './SettingsIndexView.svelte'
 export { default as ThemeView } from './ThemeView.svelte'
 export { default as WalletFinderView } from './WalletFinderView.svelte'
 
-export * from './networkConfiguration'
+export * from './networkInformation'
