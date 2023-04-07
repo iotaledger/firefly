@@ -37,7 +37,7 @@
     import { PopupId } from '@auxiliary/popup'
     import { openPopup } from '@auxiliary/popup/actions'
 
-    const { metadata } = $visibleSelectedAccountAssets?.baseCoin
+    const { metadata } = $visibleSelectedAccountAssets?.baseCoin ?? {}
 
     let selectedAnswerValues: number[] = []
     let votedAnswerValues: number[] = []
