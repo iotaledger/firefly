@@ -4,9 +4,9 @@
     import { localize } from '@core/i18n'
     import { INode } from '@core/network'
 
-    import { NetworkConfigurationSettingsAction } from '@/contexts/settings'
+    import { NetworkInformationSettingsAction } from '@/contexts/settings'
 
-    export let action: NetworkConfigurationSettingsAction = undefined
+    export let action: NetworkInformationSettingsAction = undefined
     export let node: INode = { url: '' }
     export let onConfirm: () => void = undefined
     export let onCancel: () => void = undefined
@@ -18,15 +18,15 @@
 
     function setContent(): void {
         switch (action) {
-            case NetworkConfigurationSettingsAction.UnsetAsPrimaryNode:
+            case NetworkInformationSettingsAction.UnsetAsPrimaryNode:
                 descriptionText = localize('popups.unsetAsPrimaryNode.body', { values: { url: node.url } })
                 confirmButtonText = localize('actions.clear')
                 break
-            case NetworkConfigurationSettingsAction.ExcludeNode:
+            case NetworkInformationSettingsAction.ExcludeNode:
                 descriptionText = localize('popups.excludeNode.body', { values: { url: node?.url } })
                 confirmButtonText = localize('views.settings.configureNodeList.excludeNode')
                 break
-            case NetworkConfigurationSettingsAction.DeleteNode:
+            case NetworkInformationSettingsAction.DeleteNode:
                 descriptionText = localize('popups.node.removeConfirmation')
                 confirmButtonText = localize('actions.removeNode')
                 break

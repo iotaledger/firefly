@@ -110,6 +110,7 @@
             : 'border-gray-300 hover:border-gray-500 dark:border-gray-700 dark:hover:border-gray-700'}
         text-gray-500 dark:text-white bg-white dark:bg-gray-800"
         bind:value={content}
+        on:input={debounce(handleKeyDown)}
         on:keydown={debounce(handleKeyDown)}
         placeholder=""
         spellcheck={false}

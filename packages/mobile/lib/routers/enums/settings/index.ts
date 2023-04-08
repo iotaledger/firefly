@@ -1,1 +1,1 @@
-export * from './network-configuration-settings-route.enum'
+export * from './network-information-settings-route.enum'

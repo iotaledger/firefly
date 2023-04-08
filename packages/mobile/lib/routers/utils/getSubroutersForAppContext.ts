@@ -6,7 +6,7 @@ import { IRouter } from '@core/router/interfaces'
 import {
     appSetupRouter,
     networkSetupRouter,
-    networkConfigurationSettingsRouter,
+    networkInformationSettingsRouter,
     profileBackupRouter,
     profileRecoveryRouter,
     profileRouter,
@@ -19,7 +19,7 @@ import {
 export function getSubroutersForAppContext(context: AppContext): IRouter[] {
     switch (context) {
         case AppContext.Dashboard:
-            return [get(profileRouter), get(settingsRouter), get(networkConfigurationSettingsRouter)]
+            return [get(profileRouter), get(settingsRouter), get(networkInformationSettingsRouter)]
         case AppContext.Login:
             return []
         case AppContext.Onboarding:
