@@ -50,6 +50,8 @@
     let statusLoaded: boolean = false
     let overviewLoaded: boolean = false
     let openedQuestionIndex: number = -1
+    let isUpdatingVotedAnswerValues: boolean = false
+    let lastAction: 'vote' | 'stopVote'
 
     $: selectedProposalOverview = $participationOverviewForSelectedAccount?.participations?.[$selectedProposal?.id]
     $: trackedParticipations = Object.values(selectedProposalOverview ?? {})
@@ -71,38 +73,30 @@
         ]
     }
 
-    $: isVotingDisabled =
-        !isProposalVotable($selectedProposal?.status) ||
-        !hasChangedAnswers(selectedAnswerValues) ||
-        hasSelectedNoAnswers(selectedAnswerValues)
+    $: $selectedParticipationEventStatus, (textHintString = getTextHintString())
+
     $: hasGovernanceTransactionInProgress =
         $selectedAccount?.hasVotingPowerTransactionInProgress || $selectedAccount?.hasVotingTransactionInProgress
-    $: $selectedParticipationEventStatus, (textHintString = getTextHintString())
+
+    $: areSelectedAndVotedAnswersEqual = JSON.stringify(selectedAnswerValues) === JSON.stringify(votedAnswerValues)
+
+    $: {
+        if (hasGovernanceTransactionInProgress) {
+            isUpdatingVotedAnswerValues = true
+        }
+
+        const hasVoted = lastAction === 'vote' && areSelectedAndVotedAnswersEqual
+        const hasStoppedVoting = lastAction === 'stopVote' && !areSelectedAndVotedAnswersEqual
+        if (hasVoted || hasStoppedVoting) {
+            isUpdatingVotedAnswerValues = hasGovernanceTransactionInProgress
+        }
+    }
 
     function hasSelectedNoAnswers(_selectedAnswerValues: number[]): boolean {
         return (
             _selectedAnswerValues.length === 0 ||
             _selectedAnswerValues.every((answerValue) => answerValue === undefined)
         )
-    }
-
-    function hasChangedAnswers(_selectedAnswerValues: number[]): boolean {
-        const activeParticipationAnswerValues = getActiveParticipation($selectedProposal?.id)?.answers
-        if (activeParticipationAnswerValues) {
-            /**
-             * NOTE: If any of the values between what's active and selected differ, it means
-             * that the user has changed at least one answer.
-             */
-            return _selectedAnswerValues.some(
-                (selectedAnswerValue, idx) => selectedAnswerValue !== activeParticipationAnswerValues[idx]
-            )
-        } else {
-            /**
-             * NOTE: If the user hasn't voted for the participation yet, the user has not changed (all) answers
-             * yet until every value is not undefined.
-             */
-            return _selectedAnswerValues.some((selectedAnswerValue) => selectedAnswerValue !== undefined)
-        }
     }
 
     async function setVotingEventPayload(eventId: string): Promise<void> {
@@ -155,12 +149,14 @@
     }
 
     function onStopVotingClick(): void {
+        lastAction = 'stopVote'
         openPopup({
             id: PopupId.StopVoting,
         })
     }
 
     function onVoteClick(): void {
+        lastAction = 'vote'
         const chosenAnswerValues = selectedAnswerValues.map((answerValue) =>
             answerValue === undefined ? ABSTAIN_VOTE_VALUE : answerValue
         )
@@ -273,21 +269,27 @@
         {#if $selectedProposal?.status === ProposalStatus.Upcoming}
             <TextHint info text={textHintString} />
         {:else if [ProposalStatus.Commencing, ProposalStatus.Holding].includes($selectedProposal?.status)}
+            {@const isLoaded = questions && overviewLoaded && statusLoaded}
+            {@const isStoppingVote = lastAction === 'stopVote' && hasGovernanceTransactionInProgress}
+            {@const isStopVotingDisabled = !isLoaded || !isVotingForProposal || isUpdatingVotedAnswerValues}
+            {@const isVoting = lastAction === 'vote' && hasGovernanceTransactionInProgress}
+            {@const isVotingDisabled =
+                !isLoaded ||
+                !isProposalVotable($selectedProposal?.status) ||
+                hasSelectedNoAnswers(selectedAnswerValues) ||
+                isUpdatingVotedAnswerValues ||
+                areSelectedAndVotedAnswersEqual}
             <buttons-container class="flex w-full space-x-4 mt-6">
                 <Button
                     outline
                     classes="w-full"
                     onClick={onStopVotingClick}
-                    disabled={!isVotingForProposal || hasGovernanceTransactionInProgress}
-                    isBusy={isVotingForProposal && hasGovernanceTransactionInProgress}
-                    >{localize('actions.stopVoting')}</Button
+                    disabled={isStopVotingDisabled}
+                    isBusy={isStoppingVote}
                 >
-                <Button
-                    classes="w-full"
-                    disabled={isVotingDisabled || hasGovernanceTransactionInProgress}
-                    isBusy={hasGovernanceTransactionInProgress}
-                    onClick={onVoteClick}
-                >
+                    {localize('actions.stopVoting')}
+                </Button>
+                <Button classes="w-full" onClick={onVoteClick} disabled={isVotingDisabled} isBusy={isVoting}>
                     {localize('actions.vote')}
                 </Button>
             </buttons-container>
