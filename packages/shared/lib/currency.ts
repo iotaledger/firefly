@@ -62,11 +62,20 @@ export const currencies = writable<Currencies>({} as Currencies)
  *
  * @returns {number}
  */
-export const convertToFiat = (amount: number, usdPrice: number, conversionRate: number): number =>
+export const convertToFiat = (amount: number, usdPrice: number, conversionRate: number): number => {
+    if (!usdPrice) {
+        usdPrice = 0
+    }
+
+    if (!conversionRate) {
+        conversionRate = 0
+    }
+
     /**
      * NOTE: 1_000_000 is referring to 1Mi worth of value.
      */
-    +(((amount * usdPrice) / 1_000_000) * conversionRate).toFixed(2)
+    return +(((amount * usdPrice) / 1_000_000) * conversionRate).toFixed(2)
+}
 
 /**
  *
@@ -80,11 +89,20 @@ export const convertToFiat = (amount: number, usdPrice: number, conversionRate: 
  *
  * @returns {number}
  */
-export const convertFromFiat = (amount: number, usdPrice: number, conversionRate: number): number =>
+export const convertFromFiat = (amount: number, usdPrice: number, conversionRate: number): number => {
+    if (!usdPrice) {
+        usdPrice = 0
+    }
+
+    if (!conversionRate) {
+        conversionRate = 0
+    }
+
     /**
      * NOTE: 1_000_000 is referring to 1Mi worth of value.
      */
-    +((amount / conversionRate / usdPrice) * 1_000_000).toFixed(0)
+    return +((amount / conversionRate / usdPrice) * 1_000_000).toFixed(0)
+}
 
 /**
  * Determines if a currency is a fiat or not via its ISO 4217 code
