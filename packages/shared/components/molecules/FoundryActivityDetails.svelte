@@ -22,7 +22,7 @@
             action={activity.action}
         />
     </foundry-status>
-    {#if activity.subject}
+    {#if activity?.subject}
         <SubjectBox subject={activity.subject} />
     {/if}
 </main-content>
