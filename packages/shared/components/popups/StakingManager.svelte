@@ -56,7 +56,10 @@
 
     function getFormattedFiatAmount(amount: number): string {
         const currency = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
-        return formatCurrency(convertToFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[currency]), currency)
+        return formatCurrency(
+            convertToFiat(amount, $currencies?.[CurrencyTypes.USD], $exchangeRates?.[currency]),
+            currency
+        )
     }
 
     async function handleParticipationAction(): Promise<void> {

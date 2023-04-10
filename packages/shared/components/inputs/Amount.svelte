@@ -52,7 +52,7 @@
                     amount = formatUnitPrecision(MAX_NUM_IOTAS, unit as Unit, false)
                 }
             } else {
-                const rawAmount = convertFromFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[currency])
+                const rawAmount = convertFromFiat(amount, $currencies?.[CurrencyTypes.USD], $exchangeRates?.[currency])
                 if (rawAmount > MAX_NUM_IOTAS) {
                     amount = convertToFiat(
                         MAX_NUM_IOTAS,
