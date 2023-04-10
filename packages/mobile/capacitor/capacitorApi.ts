@@ -1,5 +1,7 @@
 import { Capacitor } from '@capacitor/core'
 import { Device } from '@capacitor/device'
+import { App } from '@capacitor/app'
+
 import { IAppVersionDetails, IPlatform } from '@core/app'
 
 import { DeepLinkManager } from './lib/deepLinkManager'
@@ -87,8 +89,16 @@ const CapacitorApi: Partial<IPlatform> = {
     checkForAppUpdate: () => new Promise<void>(() => {}),
 
     // Get version details
-    // TODO https://github.com/iotaledger/firefly/issues/6190
-    getAppVersionDetails: () => new Promise<IAppVersionDetails>(() => {}),
+    getAppVersionDetails: async (): Promise<IAppVersionDetails> => {
+        const { version, build } = await App.getInfo()
+        return {
+            upToDate: true,
+            currentVersion: `${version} (${build})`,
+            newVersion: '',
+            newVersionReleaseDate: new Date(),
+            changelog: '',
+        }
+    },
 
     isFeatureFlagEnabled(keyPath) {
         return keyPath?.split('.').reduce((prev, cur) => prev && prev[cur], features)?.enabled ?? false

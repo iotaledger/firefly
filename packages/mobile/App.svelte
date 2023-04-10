@@ -20,7 +20,15 @@
         resetRouters,
     } from '@/routers'
 
-    import { appSettings, appStage, AppStage, initAppSettings, Platform, setPlatform } from '@core/app'
+    import {
+        appSettings,
+        appStage,
+        AppStage,
+        initAppSettings,
+        Platform,
+        setAppVersionDetails,
+        setPlatform,
+    } from '@core/app'
     import { localeDirection, setupI18n, _ } from '@core/i18n'
     import { checkAndMigrateProfiles, cleanupEmptyProfiles, activeProfile } from '@core/profile'
     import { initialiseRouterManager, RouterManagerExtensionName } from '@core/router'
@@ -91,15 +99,6 @@
 
         initAppSettings.set($appSettings)
 
-        // await pollMarketData()
-
-        /* eslint-disable no-undef */
-        // @ts-expect-error: This value is replaced by Webpack DefinePlugin
-        // if (!devMode && get(appStage) === AppStage.PROD) {
-        //     await setAppVersionDetails()
-        //     pollCheckForAppUpdate()
-        // }
-
         initialiseRouterManager({
             extensions: [
                 [RouterManagerExtensionName.GetAppRouter, getAppRouter],
@@ -110,8 +109,11 @@
             ],
         })
 
+        if (process.env.NODE_ENV !== 'development') {
+            await setAppVersionDetails()
+        }
+
         await cleanupEmptyProfiles()
-        // loadPersistedProfileIntoActiveProfile($activeProfileId)
 
         const platform = await Platform.getOS()
         setPlatform(platform)
