@@ -1,6 +1,9 @@
 <script lang="ts">
     import { Icon, Input, Text } from 'shared/components'
+
     import { localize } from '@core/i18n'
+
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let value = ''
     export let classes = ''
@@ -57,12 +60,18 @@
             disableContextMenu={true}
             spellcheck="false"
             capsLockWarning={true}
-        />
-        {#if showRevealToggle === true && !disabled}
-            <button type="button" on:click={() => revealToggle()} tabindex="-1" class="absolute top-3 right-3">
-                <Icon icon={revealed ? 'view' : 'hide'} classes="text-blue-500" />
+        >
+            <button
+                type="button"
+                on:mousedown|preventDefault|stopPropagation={revealToggle}
+                tabindex="-1"
+                class="absolute top-3 right-3"
+                class:hidden={!showRevealToggle || disabled}
+                slot="right"
+            >
+                <Icon icon={revealed ? IconEnum.View : IconEnum.Hide} classes="text-blue-500" />
             </button>
-        {/if}
+        </Input>
     </div>
 </div>
 
