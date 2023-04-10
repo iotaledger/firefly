@@ -20,7 +20,15 @@
         resetRouters,
     } from '@/routers'
 
-    import { appSettings, appStage, AppStage, initAppSettings, Platform, setPlatform } from '@core/app'
+    import {
+        appSettings,
+        appStage,
+        AppStage,
+        hasCompletedAppSetup,
+        initAppSettings,
+        Platform,
+        setPlatform,
+    } from '@core/app'
     import { localeDirection, setupI18n, _ } from '@core/i18n'
     import { checkAndMigrateProfiles, cleanupEmptyProfiles, activeProfile } from '@core/profile'
     import { initialiseRouterManager, RouterManagerExtensionName } from '@core/router'
@@ -81,13 +89,16 @@
         $isKeyboardOpen = false
     })
 
-    void setupI18n({ fallbackLocale: 'en', initialLocale: $appSettings.language })
-
     onMount(async () => {
         setTimeout(() => {
             SplashScreen.hide()
             initialiseRouters()
         }, 3000)
+
+        let initialLocale = $hasCompletedAppSetup ? $appSettings.language : await Platform.getLanguageCode()
+        // patch for 'es' & 'pt' cases where we can't get the region code
+        initialLocale = initialLocale === 'es' ? 'es-ES' : initialLocale === 'pt' ? 'pt-PT' : initialLocale
+        void setupI18n({ fallbackLocale: 'en', initialLocale })
 
         initAppSettings.set($appSettings)
 
