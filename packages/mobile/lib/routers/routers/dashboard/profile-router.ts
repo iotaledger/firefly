@@ -3,7 +3,7 @@ import { get, writable } from 'svelte/store'
 import { Router } from '@core/router'
 
 import { closeDrawer, DrawerId } from '@/auxiliary/drawer'
-import { networkConfigurationSettingsRouter, settingsRouter } from '../'
+import { networkInformationSettingsRouter, settingsRouter } from '../'
 import { ProfileRoute } from '../../enums'
 import { resetRouterWithDrawerDelay } from '../../utils'
 
@@ -39,7 +39,7 @@ export class ProfileRouter extends Router<ProfileRoute> {
     closeDrawer(): void {
         closeDrawer(DrawerId.Profile)
         resetRouterWithDrawerDelay(get(settingsRouter))
-        resetRouterWithDrawerDelay(get(networkConfigurationSettingsRouter))
+        resetRouterWithDrawerDelay(get(networkInformationSettingsRouter))
         resetRouterWithDrawerDelay(get(profileRouter))
     }
 }

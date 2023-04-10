@@ -3,7 +3,7 @@ import { get, Writable } from 'svelte/store'
 import { IRouter } from '@core/router/interfaces'
 
 import {
-    networkConfigurationSettingsRouter,
+    networkInformationSettingsRouter,
     ProfileRoute,
     profileRoute,
     profileRouter,
@@ -20,8 +20,8 @@ export function getDrawerRouter(drawerId: DrawerId): Writable<IRouter> | undefin
             const $profileRoute = get(profileRoute)
             const $settingsRoute = get(settingsRoute)
             if ($profileRoute === ProfileRoute.Settings) {
-                if ($settingsRoute === SettingsRoute.NetworkConfiguration) {
-                    return networkConfigurationSettingsRouter
+                if ($settingsRoute === SettingsRoute.NetworkInformation) {
+                    return networkInformationSettingsRouter
                 } else {
                     return settingsRouter
                 }

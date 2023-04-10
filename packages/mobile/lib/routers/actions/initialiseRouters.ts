@@ -5,8 +5,8 @@ import {
     appSetupRouter,
     LoginRouter,
     loginRouter,
-    NetworkConfigurationSettingsRouter,
-    networkConfigurationSettingsRouter,
+    NetworkInformationSettingsRouter,
+    networkInformationSettingsRouter,
     NetworkSetupRouter,
     networkSetupRouter,
     onboardingRouter,
@@ -80,7 +80,7 @@ function initialiseDashboardSubrouters(): void {
 }
 
 function initialiseSettingsSubrouters(): void {
-    networkConfigurationSettingsRouter.set(new NetworkConfigurationSettingsRouter())
+    networkInformationSettingsRouter.set(new NetworkInformationSettingsRouter())
 }
 
 function initializeDrawersRouters(): void {
