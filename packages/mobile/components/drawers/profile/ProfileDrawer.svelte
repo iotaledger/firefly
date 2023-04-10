@@ -7,8 +7,8 @@
     import { DrawerId, updateDrawerProps } from '@/auxiliary/drawer'
     import { SETTINGS_ROUTE_META } from '@/contexts/settings'
     import {
-        networkConfigurationSettingsRoute,
-        NetworkConfigurationSettingsRoute,
+        networkInformationSettingsRoute,
+        NetworkInformationSettingsRoute,
         ProfileRoute,
         profileRoute,
         SettingsRoute,
@@ -17,7 +17,7 @@
 
     let title: string
 
-    $: $profileRoute, $settingsRoute, $networkConfigurationSettingsRoute, updateTitle()
+    $: $profileRoute, $settingsRoute, $networkInformationSettingsRoute, updateTitle()
     $: $appSettings.language, updateTitle()
     $: title, updateDrawerProps(DrawerId.Profile, { title })
 
@@ -26,26 +26,26 @@
             if ($settingsRoute === SettingsRoute.Init) {
                 title = localize('views.settings.settings')
             } else if (
-                $settingsRoute === SettingsRoute.NetworkConfiguration &&
-                $networkConfigurationSettingsRoute !== NetworkConfigurationSettingsRoute.Init
+                $settingsRoute === SettingsRoute.NetworkInformation &&
+                $networkInformationSettingsRoute !== NetworkInformationSettingsRoute.Init
             ) {
-                switch ($networkConfigurationSettingsRoute) {
-                    case NetworkConfigurationSettingsRoute.NodeDetails:
+                switch ($networkInformationSettingsRoute) {
+                    case NetworkInformationSettingsRoute.NodeDetails:
                         title = localize('popups.node.titleDetails')
                         break
-                    case NetworkConfigurationSettingsRoute.AddNode:
+                    case NetworkInformationSettingsRoute.AddNode:
                         title = localize('popups.node.titleAdd')
                         break
-                    case NetworkConfigurationSettingsRoute.EditNode:
+                    case NetworkInformationSettingsRoute.EditNode:
                         title = localize('popups.node.titleUpdate')
                         break
-                    case NetworkConfigurationSettingsRoute.DeleteNodeConfirmation:
+                    case NetworkInformationSettingsRoute.DeleteNodeConfirmation:
                         title = localize('popups.node.titleRemove')
                         break
-                    case NetworkConfigurationSettingsRoute.ExcludeNodeConfirmation:
+                    case NetworkInformationSettingsRoute.ExcludeNodeConfirmation:
                         title = localize('popups.excludeNode.title')
                         break
-                    case NetworkConfigurationSettingsRoute.UnsetAsPrimaryNodeConfirmation:
+                    case NetworkInformationSettingsRoute.UnsetAsPrimaryNodeConfirmation:
                         title = localize('popups.unsetAsPrimaryNode.title')
                         break
                 }
