@@ -1,4 +1,4 @@
-import { networkHrp } from '@core/network/stores'
+import { networkHrp } from '@core/profile/stores'
 import { Converter } from '@core/utils/convert'
 import { validateBech32Address } from '@core/utils/crypto'
 import { isValidUri } from '@core/utils/validation'
