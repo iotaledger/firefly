@@ -4,7 +4,7 @@ import {
     appRouter,
     appSetupRouter,
     loginRouter,
-    networkConfigurationSettingsRouter,
+    networkInformationSettingsRouter,
     networkSetupRouter,
     onboardingRouter,
     profileBackupRouter,
@@ -53,7 +53,7 @@ function resetDashboardSubrouters(): void {
 }
 
 function resetSettingsSubrouters(): void {
-    get(networkConfigurationSettingsRouter).reset()
+    get(networkInformationSettingsRouter).reset()
 }
 
 function resetDrawersRouters(): void {

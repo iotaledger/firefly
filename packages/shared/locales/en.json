@@ -311,6 +311,10 @@
                 "title": "Maximum media size",
                 "description": "NFT media with sizes greater than this limit will not be downloaded and a placeholder representing the media type will be displayed instead"
             },
+            "refreshNftMedia": {
+                "title": "Refresh NFT media",
+                "description": "NFT media cached for this account will be deleted and then downloaded again"
+            },
             "changePassword": {
                 "title": "Change password",
                 "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
@@ -1164,6 +1168,10 @@
             "shimmer": "Restore an existing Shimmer profile",
             "testnet": "Restore an existing Testnet profile"
         },
+        "refreshNftMedia": {
+            "title": "Refresh NFT media",
+            "description": "Do you want to delete and re-download all NFT media for this account?"
+        },
         "createWallet": "Create a new {protocol} profile",
         "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} other {Unknown}}",
         "claimShimmer": "Claim Shimmer staking rewards",
@@ -1209,6 +1217,7 @@
         "unlock": "Unlock",
         "updateFirefly": "Update Firefly",
         "restartNow": "Restart now",
+        "refresh": "Refresh",
         "saveBackup": "Save Stronghold backup",
         "customizeAcount": "Customise wallet",
         "hideAccount": "Hide wallet",

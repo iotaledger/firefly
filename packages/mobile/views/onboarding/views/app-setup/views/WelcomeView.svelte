@@ -4,7 +4,13 @@
     import { OnboardingLayout } from '@components'
     import { Button, Checkbox, Link, Text, TextType } from '@ui'
 
-    import { hasCompletedAppSetup } from '@core/app'
+    import {
+        hasCompletedAppSetup,
+        lastAcceptedPrivacyPolicy,
+        lastAcceptedTermsOfService,
+        PRIVACY_POLICY_VERSION,
+        TERMS_OF_SERVICE_VERSION,
+    } from '@core/app'
     import { localize } from '@core/i18n'
     import { formatProtocolName, NetworkProtocol, NetworkType } from '@core/network'
 
@@ -23,6 +29,8 @@
 
     function onContinueClick(): void {
         hasCompletedAppSetup.set(true)
+        lastAcceptedTermsOfService.set(TERMS_OF_SERVICE_VERSION)
+        lastAcceptedPrivacyPolicy.set(PRIVACY_POLICY_VERSION)
         $appSetupRouter.next()
     }
 
