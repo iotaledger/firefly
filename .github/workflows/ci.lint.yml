@@ -38,7 +38,7 @@ jobs:
         run: yarn --ignore-scripts
 
       - name: Format
-        run: yarn format:check
+        run: yarn format-check
 
   lint:
     runs-on: ubuntu-20.04
@@ -54,4 +54,4 @@ jobs:
         run: yarn --ignore-scripts
 
       - name: Lint
-        run: yarn lint:check
+        run: yarn lint
