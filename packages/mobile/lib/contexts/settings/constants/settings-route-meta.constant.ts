@@ -12,7 +12,7 @@ import {
     ExportStrongholdView,
     HiddenAccountsView,
     LanguageView,
-    NetworkConfigurationRouter,
+    NetworkInformationRouter,
     ThemeView,
     WalletFinderView,
 } from '@components/drawers/profile/views/settings'
@@ -88,12 +88,12 @@ export const SETTINGS_ROUTE_META = {
         view: DeleteProfileView,
     },
     // Advanced
-    [SettingsRoute.NetworkConfiguration]: {
-        name: `views.settings.${SettingsRoute.NetworkConfiguration}.title`,
+    [SettingsRoute.NetworkInformation]: {
+        name: `views.settings.${SettingsRoute.NetworkInformation}.title`,
         category: SettingsCategory.Advanced,
-        enabled: advanced?.[SettingsRoute.NetworkConfiguration]?.enabled,
-        icon: SETTINGS_ICON_SVG[SettingsRoute.NetworkConfiguration],
-        view: NetworkConfigurationRouter,
+        enabled: advanced?.[SettingsRoute.NetworkInformation]?.enabled,
+        icon: SETTINGS_ICON_SVG[SettingsRoute.NetworkInformation],
+        view: NetworkInformationRouter,
     },
     [SettingsRoute.WalletFinder]: {
         name: `views.settings.${SettingsRoute.WalletFinder}.title`,

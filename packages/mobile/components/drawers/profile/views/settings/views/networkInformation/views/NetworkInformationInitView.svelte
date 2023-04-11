@@ -15,33 +15,26 @@
     } from '@core/network'
     import { activeProfile } from '@core/profile'
 
-    import { NetworkConfigurationSettingsAction } from '@/contexts/settings'
-    import { networkConfigurationSettingsRouter } from '@/routers'
+    import { NetworkInformationSettingsAction } from '@/contexts/settings'
+    import { networkInformationSettingsRouter } from '@/routers'
 
     const { networkType } = $activeProfile
 
     function onAddNodeClick(): void {
-        $networkConfigurationSettingsRouter.next({ action: NetworkConfigurationSettingsAction.AddNode })
+        $networkInformationSettingsRouter.next({ action: NetworkInformationSettingsAction.AddNode })
     }
 
     function onNodeClick(node: INode) {
-        $networkConfigurationSettingsRouter.next({ node })
+        $networkInformationSettingsRouter.next({ node })
     }
 </script>
 
 <network-configuration-init-view class="flex flex-col justify-between space-y-4 h-full">
     <div class="flex flex-col space-y-4">
-        <Text type={TextType.p} secondary classes="mb-3">
-            {localize(
-                `views.settings.networkConfiguration.description.${
-                    $activeProfile?.isDeveloperProfile ? 'dev' : 'nonDev'
-                }`
-            )}
-        </Text>
         <div class="flex flex-row justify-between space-x-2">
             <div>
                 <Text type={TextType.p} classes="inline" secondary>
-                    {localize('views.settings.networkConfiguration.connectedTo')}:
+                    {localize('views.settings.networkInformation.connectedTo')}:
                 </Text>
                 <Text type={TextType.p} highlighted>{$nodeInfo?.protocol?.networkName}</Text>
             </div>

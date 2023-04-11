@@ -14,9 +14,10 @@
 
 <style type="text/scss">
     tab-pane {
-        box-shadow: 0px 4px 4px rgb(0 0 0 / 25%), 0px 2px 12px rgb(0 25 66 / 10%);
+        box-shadow: 0px 0px 110px rgba(26, 101, 161, 0.15);
+        clip-path: inset(-300px 0px 0px 0px); // needed to prevent the shadow from showing at the bottom
         &.darkmode {
-            box-shadow: 0px 4px 4px rgb(0 0 0 / 25%), 0px 2px 12px rgb(0 25 66 / 20%);
+            box-shadow: 0px 0px 110px rgba(26, 101, 161, 0.15);
         }
     }
 </style>

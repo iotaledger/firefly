@@ -1,4 +1,4 @@
-export enum NetworkConfigurationSettingsAction {
+export enum NetworkInformationSettingsAction {
     AddNode = 'addNode',
     EditNode = 'editNode',
     DeleteNode = 'deleteNode',
