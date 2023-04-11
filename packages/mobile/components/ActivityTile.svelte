@@ -32,7 +32,7 @@
         {#if activity.asyncData?.asyncStatus === ActivityAsyncStatus.Timelocked}
             <TimelockActivityTileFooter {activity} />
         {:else if activity.asyncData}
-            <AsyncActivityTileFooter {activity} {onClaim} {onReject} />
+            <AsyncActivityTileFooter {activity} onClaimClick={onClaim} onRejectClick={onReject} />
         {/if}
     </activity-tile>
 </ClickableTile>
