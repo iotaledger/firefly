@@ -1,14 +1,16 @@
 <script lang="ts">
     import { get } from 'svelte/store'
-    import { Input, PasswordInput } from 'shared/components'
+    import { Error, PasswordInput, Dropdown, NumberInput, TextInput } from 'shared/components'
     import { INode, IClientOptions, INodeInfoResponse } from '@core/network/interfaces'
-    import { EMPTY_NODE } from '@core/network/constants'
+    import { COIN_TYPE, EMPTY_NODE } from '@core/network/constants'
     import { nodeInfo } from '@core/network/stores'
+    import { NetworkId } from '@core/network/enums'
     import { checkNodeUrlValidity, checkNetworkId } from '@core/network/utils'
     import { localize } from '@core/i18n'
     import { getNodeInfo } from '@core/profile-manager'
-    import { cleanUrl, deepCopy } from '@core/utils'
+    import { IDropdownChoice, cleanUrl, deepCopy } from '@core/utils'
     import { activeProfile } from '@core/profile'
+    import features from '../../../desktop/features/features'
 
     interface NodeValidationOptions {
         checkNodeInfo: boolean
@@ -17,18 +19,40 @@
         validateClientOptions: boolean
     }
 
+    export let showNetworkChoice = false
     export let node: INode = deepCopy(EMPTY_NODE)
+    export let networkId: NetworkId = NetworkId.Custom
+    export let chainId: string
     export let isBusy = false
     export let formError = ''
     export let currentClientOptions: IClientOptions = undefined
     export let isDeveloperProfile: boolean = false
     export let onSubmit: () => void = () => {}
 
+    const networkItems: IDropdownChoice[] = [
+        {
+            label: 'IOTA',
+            value: NetworkId.Iota,
+        },
+        {
+            label: 'Shimmer',
+            value: NetworkId.Shimmer,
+        },
+        {
+            label: 'Testnet',
+            value: NetworkId.Testnet,
+        },
+        {
+            label: 'Custom',
+            value: NetworkId.Custom,
+        },
+    ].filter((item) => features.onboarding?.[item.value]?.enabled)
+
     let [username, password] = node.auth?.basicAuthNamePwd ?? ['', '']
     let jwt = node.auth?.jwt
 
-    $: node.url, (formError = '')
-
+    $: networkId, chainId, node.url, (formError = '')
+    $: networkId, (chainId = COIN_TYPE?.[networkId] ? String(COIN_TYPE?.[networkId]) : undefined)
     $: node = {
         url: node.url,
         auth: {
@@ -92,31 +116,51 @@
     }
 </script>
 
-<form id="node-configuration-form" class="w-full h-full" on:submit|preventDefault={onSubmit}>
-    <Input
+<form id="node-configuration-form" class="w-full h-full flex-col space-y-3" on:submit|preventDefault={onSubmit}>
+    {#if showNetworkChoice}
+        <Dropdown
+            onSelect={(selected) => {
+                networkId = selected.value
+            }}
+            placeholder={localize('network')}
+            disabled={isBusy}
+            value={networkId}
+            items={networkItems}
+        />
+    {/if}
+    {#if showNetworkChoice && networkId === NetworkId.Custom}
+        <NumberInput
+            bind:value={chainId}
+            placeholder={localize('popups.node.chainId')}
+            label={localize('popups.node.chainId')}
+            disabled={isBusy}
+            isInteger
+        />
+    {/if}
+    <TextInput
         bind:value={node.url}
         placeholder={localize('popups.node.nodeAddress')}
-        error={formError}
+        label={localize('popups.node.nodeAddress')}
         disabled={isBusy}
-        autofocus
         on:change={cleanNodeUrl}
     />
-    <Input
-        classes="mt-3"
+    <TextInput
         bind:value={username}
         placeholder={localize('popups.node.optionalUsername')}
+        label={localize('popups.node.username')}
         disabled={isBusy}
     />
     <PasswordInput
-        classes="mt-3"
         bind:value={password}
-        placeholder={localize('popups.node.optionalPassword')}
+        placeholder={localize('popups.node.otionalPassword')}
+        label={localize('popups.node.password')}
         disabled={isBusy}
     />
     <PasswordInput
-        classes="mt-3"
         bind:value={jwt}
         placeholder={localize('popups.node.optionalJwt')}
+        label={localize('popups.node.optionalJwt')}
         disabled={isBusy}
     />
+    <Error error={formError} />
 </form>

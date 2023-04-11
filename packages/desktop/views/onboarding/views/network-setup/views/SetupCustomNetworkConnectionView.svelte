@@ -1,6 +1,5 @@
 <script lang="ts">
-    import { onMount } from 'svelte'
-    import { Animation, Text, Button, NodeConfigurationForm, HTMLButtonType, TextType } from '@ui'
+    import { showAppNotification } from '@auxiliary/notification'
     import { OnboardingLayout } from '@components'
     import {
         cleanupOnboardingProfileManager,
@@ -9,12 +8,15 @@
     } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { INode } from '@core/network'
+    import { INode, NetworkId, buildNetworkFromNodeInfoResponse, getNetworkIdFromNetworkName } from '@core/network'
     import { destroyProfileManager, getNodeInfo } from '@core/profile-manager'
     import { networkSetupRouter } from '@core/router'
-    import { showAppNotification } from '@auxiliary/notification'
+    import { Animation, Button, HTMLButtonType, NodeConfigurationForm, Text, TextType } from '@ui'
+    import { onMount } from 'svelte'
 
     let nodeConfigurationForm: NodeConfigurationForm
+    let networkId: NetworkId
+    let chainId: string
     let node: INode
     let isBusy = false
     let formError = ''
@@ -33,10 +35,19 @@
                 validateClientOptions: false,
             })
             updateOnboardingProfile({ clientOptions: { nodes: [node], primaryNode: node } })
-            await initialiseProfileManagerFromOnboardingProfile(true)
+            await initialiseProfileManagerFromOnboardingProfile(true, Number(chainId) || undefined)
 
             // The API request to check if a node is reachable requires an existing account manager.
-            await getNodeInfo(node.url)
+            const nodeInfoResponse = await getNodeInfo(node.url)
+            // check network Id
+            if (
+                networkId !== NetworkId.Custom &&
+                networkId !== getNetworkIdFromNetworkName(nodeInfoResponse?.nodeInfo?.protocol?.networkName)
+            ) {
+                throw new Error('error.node.networkIdMismatch')
+            }
+            const network = buildNetworkFromNodeInfoResponse(nodeInfoResponse)
+            updateOnboardingProfile({ network })
             await destroyProfileManager()
             $networkSetupRouter.next()
         } catch (err) {
@@ -74,9 +85,12 @@
             onSubmit={onContinueClick}
             bind:this={nodeConfigurationForm}
             bind:node
+            bind:networkId
+            bind:chainId
             bind:formError
             {isBusy}
             isDeveloperProfile
+            showNetworkChoice
         />
     </div>
     <div slot="leftpane__action">

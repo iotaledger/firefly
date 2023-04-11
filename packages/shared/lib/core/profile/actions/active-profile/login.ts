@@ -8,9 +8,10 @@ import { AppContext } from '@core/app/enums'
 import { handleError } from '@core/error/handlers'
 import { pollLedgerNanoStatus } from '@core/ledger/actions'
 import { pollMarketPrices } from '@core/market/actions'
+import { NetworkId, buildNetworkFromNodeInfoResponse, getNetworkIdFromNetworkName } from '@core/network'
 import { getAndUpdateNodeInfo, pollNetworkStatus } from '@core/network/actions'
-import { initialiseProfileManager } from '@core/profile-manager/actions'
 import { loadNftsForActiveProfile } from '@core/nfts'
+import { initialiseProfileManager } from '@core/profile-manager/actions'
 import {
     getAccounts,
     isStrongholdUnlocked,
@@ -68,7 +69,17 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
 
             // Step 2: get node info to check we have a synced node
             incrementLoginProgress()
-            await getAndUpdateNodeInfo(true)
+            const nodeInfoResponse = await getAndUpdateNodeInfo(true)
+            const networkId = _activeProfile?.network?.id
+            if (
+                networkId &&
+                networkId !== NetworkId.Custom &&
+                networkId !== getNetworkIdFromNetworkName(nodeInfoResponse?.nodeInfo?.protocol?.networkName)
+            ) {
+                throw new Error('error.node.networkIdMismatch')
+            }
+            const network = buildNetworkFromNodeInfoResponse(nodeInfoResponse)
+            updateActiveProfile({ network })
             void pollNetworkStatus()
 
             // Step 3: load and build all the profile data

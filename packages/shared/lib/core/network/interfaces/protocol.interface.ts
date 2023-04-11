@@ -5,7 +5,7 @@ export interface IProtocol {
     networkName: string
     bech32Hrp: string
     minPowScore: number
-    belowMaxDepth: number
+    belowMaxDepth?: number
     rentStructure: IRentStructure
     tokenSupply: string
 }

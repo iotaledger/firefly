@@ -9,7 +9,10 @@ import {
 import { onboardingProfile, updateOnboardingProfile } from '../stores'
 import { removeProfileFolder } from '@core/profile'
 
-export async function initialiseProfileManagerFromOnboardingProfile(checkForExistingManager?: boolean): Promise<void> {
+export async function initialiseProfileManagerFromOnboardingProfile(
+    checkForExistingManager?: boolean,
+    chainId?: number
+): Promise<void> {
     const existingManager = get(profileManager)
     if (existingManager) {
         if (!checkForExistingManager) {
@@ -20,7 +23,11 @@ export async function initialiseProfileManagerFromOnboardingProfile(checkForExis
         }
     }
 
-    const profileManagerOptions = await buildProfileManagerOptionsFromProfileData(get(onboardingProfile))
+    const profileManagerOptions = await buildProfileManagerOptionsFromProfileData(
+        get(onboardingProfile),
+        get(onboardingProfile).network?.id,
+        chainId
+    )
     const { storagePath, coinType, clientOptions, secretManager } = profileManagerOptions
     const { id } = get(onboardingProfile)
     const manager = await initialiseProfileManager(storagePath, coinType, clientOptions, secretManager, id)
