@@ -2,7 +2,7 @@
     import { AmountBox, ActivityInclusionStatusPill, Text, FontWeight } from 'shared/components'
     import { formatTokenAmountDefault, getAssetFromPersistedAssets } from '@core/wallet'
     import { GovernanceActivity } from '@core/wallet'
-    import { BASE_TOKEN, COIN_TYPE } from '@core/network'
+    import { BASE_TOKEN } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { getVotingEvent } from '@contexts/governance/actions'
     import { truncateString } from '@core/utils'
@@ -11,7 +11,7 @@
 
     let proposalName: string
 
-    $: asset = getAssetFromPersistedAssets(String(COIN_TYPE[$activeProfile.networkProtocol]))
+    $: asset = getAssetFromPersistedAssets(String($activeProfile.network.coinType))
     $: amount = activity.votingPowerDifference
         ? formatTokenAmountDefault(
               Number(activity.votingPowerDifference),

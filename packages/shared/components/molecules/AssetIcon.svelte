@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { COIN_TYPE, NetworkProtocol } from '@core/network'
+    import { COIN_TYPE, NetworkId } from '@core/network'
     import { getAssetInitials, IPersistedAsset, NotVerifiedStatus, ANIMATED_TOKEN_IDS } from '@core/wallet'
     import { isBright } from '@core/utils'
     import { Animation, Icon, VerificationBadge } from 'shared/components'
@@ -20,10 +20,7 @@
         icon = ''
         assetIconBackgroundColor = asset?.metadata?.primaryColor
         assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
-        if (
-            asset?.id === String(COIN_TYPE[NetworkProtocol.IOTA]) ||
-            asset?.id === String(COIN_TYPE[NetworkProtocol.Shimmer])
-        ) {
+        if (asset?.id === String(COIN_TYPE[NetworkId.Iota]) || asset?.id === String(COIN_TYPE[NetworkId.Shimmer])) {
             icon = asset?.metadata?.name?.toLocaleLowerCase()
         } else {
             assetInitials = getAssetInitials(asset)

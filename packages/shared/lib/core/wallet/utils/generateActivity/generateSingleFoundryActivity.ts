@@ -1,5 +1,4 @@
 import { IAccountState } from '@core/account'
-import { COIN_TYPE } from '@core/network'
 import { activeProfile } from '@core/profile'
 import { ADDRESS_TYPE_ALIAS, UNLOCK_CONDITION_IMMUTABLE_ALIAS } from '@core/wallet/constants'
 import { ActivityType } from '@core/wallet/enums'
@@ -38,7 +37,7 @@ export function generateSingleFoundryActivity(
 
     const id = outputId || transactionId
     const nativeToken = getNativeTokenFromOutput(output)
-    const assetId = nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol])
+    const assetId = nativeToken?.id ?? String(get(activeProfile).network.coinType)
 
     const storageDeposit = getAmountFromOutput(output)
     const giftedStorageDeposit = 0

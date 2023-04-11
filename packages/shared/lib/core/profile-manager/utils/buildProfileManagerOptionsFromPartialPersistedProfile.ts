@@ -1,4 +1,4 @@
-import { COIN_TYPE, getDefaultClientOptions, TESTNET_COIN_TYPE } from '@core/network'
+import { getDefaultClientOptions, TESTNET_COIN_TYPE } from '@core/network'
 import { getStorageDirectoryOfProfile, IPersistedProfile } from '@core/profile'
 import { getSecretManagerFromProfileType, ProfileManagerOptions } from '@core/profile-manager'
 
@@ -7,7 +7,7 @@ export async function buildProfileManagerOptionsFromPartialPersistedProfile(
 ): Promise<ProfileManagerOptions> {
     const { id, type, network } = partialPersistedProfile
     const storagePath = await getStorageDirectoryOfProfile(id)
-    const coinType = COIN_TYPE?.[network?.id] ?? TESTNET_COIN_TYPE
+    const coinType = network?.coinType ?? TESTNET_COIN_TYPE
     const useDefaultClientOptions =
         !partialPersistedProfile?.clientOptions ||
         !partialPersistedProfile?.clientOptions?.nodes ||
