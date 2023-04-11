@@ -1,11 +1,11 @@
 import { BASE_TOKEN } from '../constants'
-import { NetworkProtocol, NetworkType } from '../enums'
+import { NetworkId, NetworkProtocol, NetworkType } from '../enums'
 import { INetwork } from '../interfaces'
 
 export const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkType]?: INetwork } }> = {
     [NetworkProtocol.IOTA]: {
         [NetworkType.Mainnet]: {
-            id: 'iota-mainnet',
+            id: NetworkId.Iota,
             name: 'IOTA',
             protocol: NetworkProtocol.IOTA,
             type: NetworkType.Mainnet,
@@ -18,7 +18,7 @@ export const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkTyp
             },
         },
         [NetworkType.Devnet]: {
-            id: 'iota-devnet',
+            id: NetworkId.Custom,
             name: 'IOTA Devnet',
             protocol: NetworkProtocol.IOTA,
             type: NetworkType.Devnet,
@@ -31,14 +31,14 @@ export const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkTyp
             },
         },
         [NetworkType.PrivateNet]: <INetwork>{
-            name: 'Private Net',
+            name: NetworkId.Custom,
             protocol: NetworkProtocol.IOTA,
             type: NetworkType.PrivateNet,
         },
     },
     [NetworkProtocol.Shimmer]: {
         [NetworkType.Mainnet]: {
-            id: 'shimmer-mainnet',
+            id: NetworkId.Shimmer,
             name: 'Shimmer',
             protocol: NetworkProtocol.Shimmer,
             type: NetworkType.Mainnet,
@@ -51,7 +51,7 @@ export const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkTyp
             },
         },
         [NetworkType.Devnet]: {
-            id: 'testnet',
+            id: NetworkId.Testnet,
             name: 'Testnet',
             protocol: NetworkProtocol.Shimmer,
             type: NetworkType.Devnet,
@@ -64,7 +64,7 @@ export const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkTyp
             },
         },
         [NetworkType.PrivateNet]: <INetwork>{
-            name: 'Private Net',
+            name: NetworkId.Custom,
             protocol: NetworkProtocol.Shimmer,
             type: NetworkType.PrivateNet,
         },
