@@ -61,6 +61,25 @@ const CapacitorApi: Partial<IPlatform> = {
         return `${selected}`
     },
 
+    saveStrongholdBackup: async ({ allowAccess }) => {
+        const os: string = Capacitor.getPlatform()
+        switch (os) {
+            case 'ios':
+                if (allowAccess) {
+                    await SecureFilesystemAccess.allowAccess()
+                } else {
+                    await SecureFilesystemAccess.revokeAccess()
+                }
+                break
+            case 'android':
+                if (!allowAccess) {
+                    await SecureFilesystemAccess.finishBackup()
+                }
+                break
+        }
+        return
+    },
+
     // TODO: https://github.com/iotaledger/firefly/issues/5577
     // TODO: https://github.com/iotaledger/firefly/issues/5578
     exportTransactionHistory: () => {
