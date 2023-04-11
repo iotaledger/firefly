@@ -1,1 +1,1 @@
-export * from './network-configuration-settings-router'
+export * from './network-information-settings-router'

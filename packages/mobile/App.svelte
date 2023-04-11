@@ -1,6 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte'
 
+    import { StatusBar, Style } from '@capacitor/status-bar'
     import { SplashScreen } from '@capacitor/splash-screen'
     import { Keyboard } from '@capacitor/keyboard'
 
@@ -19,17 +20,49 @@
         resetRouters,
     } from '@/routers'
 
-    import { appSettings, appStage, AppStage, initAppSettings, Platform, setPlatform } from '@core/app'
+    import {
+        appSettings,
+        appStage,
+        AppStage,
+        initAppSettings,
+        Platform,
+        setAppVersionDetails,
+        setPlatform,
+    } from '@core/app'
     import { localeDirection, setupI18n, _ } from '@core/i18n'
     import { checkAndMigrateProfiles, cleanupEmptyProfiles, activeProfile } from '@core/profile'
     import { initialiseRouterManager, RouterManagerExtensionName } from '@core/router'
 
     import { DashboardView, LoginRouter, OnboardingRouter } from '@views'
-    import { closeAllDrawers } from '@/auxiliary/drawer'
+    import { closeAllDrawers, DrawerId, drawers } from '@/auxiliary/drawer'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
     checkAndMigrateProfiles()
+
+    const htmlElement = document.getElementsByTagName('html')[0]
+
+    /**
+     * Handle Android top status bar (not needed for iOS)
+     * @todo remove when implement status bar overlay
+     * https://github.com/iotaledger/firefly/issues/6345
+     */
+    $: if ($appSettings.darkMode) {
+        if ($drawers[0]?.id === DrawerId.Profile) {
+            void StatusBar.setBackgroundColor({ color: '#25395f' })
+            void StatusBar.setStyle({ style: Style.Dark })
+            htmlElement.style.backgroundColor = '#25395f'
+        } else {
+            void StatusBar.setBackgroundColor({ color: '#1B2D4B' })
+            void StatusBar.setStyle({ style: Style.Dark })
+            htmlElement.style.backgroundColor = '#1B2D4B'
+        }
+    } else {
+        void StatusBar.setBackgroundColor({ color: '#FFFFFF' })
+        void StatusBar.setStyle({ style: Style.Light })
+        void StatusBar.setBackgroundColor({ color: '#FFFFFF' })
+        htmlElement.style.backgroundColor = '#FFFFFF'
+    }
 
     $: $appSettings.darkMode
         ? document.body.classList.add('scheme-dark')
@@ -64,15 +97,6 @@
 
         initAppSettings.set($appSettings)
 
-        // await pollMarketData()
-
-        /* eslint-disable no-undef */
-        // @ts-expect-error: This value is replaced by Webpack DefinePlugin
-        // if (!devMode && get(appStage) === AppStage.PROD) {
-        //     await setAppVersionDetails()
-        //     pollCheckForAppUpdate()
-        // }
-
         initialiseRouterManager({
             extensions: [
                 [RouterManagerExtensionName.GetAppRouter, getAppRouter],
@@ -83,8 +107,11 @@
             ],
         })
 
+        if (process.env.NODE_ENV !== 'development') {
+            await setAppVersionDetails()
+        }
+
         await cleanupEmptyProfiles()
-        // loadPersistedProfileIntoActiveProfile($activeProfileId)
 
         const platform = await Platform.getOS()
         setPlatform(platform)
@@ -116,6 +143,10 @@
         -webkit-user-drag: none;
         user-select: none;
         -webkit-user-select: none;
+
+        /** CSS safe-area margins */
+        padding-top: calc(env(safe-area-inset-top) / 3);
+        padding-bottom: env(safe-area-inset-bottom);
 
         /* ===== Scrollbar CSS ===== */
         /* Chrome, Edge, and Safari */
@@ -165,6 +196,7 @@
             display: -webkit-box;
         }
     }
+
     @layer utilities {
         .scrollable-y {
             @apply overflow-y-auto;
