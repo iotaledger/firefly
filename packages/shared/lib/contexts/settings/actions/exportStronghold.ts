@@ -11,7 +11,9 @@ export async function exportStronghold(
         const destination = await Platform.getStrongholdBackupDestination(getDefaultStrongholdName())
         if (destination) {
             try {
+                Platform.saveStrongholdBackup({ allowAccess: true })
                 await backup(destination, password)
+                Platform.saveStrongholdBackup({ allowAccess: false })
                 updateActiveProfile({ lastStrongholdBackupTime: new Date() })
                 callback(false)
             } catch (err) {
