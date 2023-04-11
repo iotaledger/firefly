@@ -1,23 +1,32 @@
-import { NetworkProtocol, NetworkType } from '@core/network'
 import { IFeatureFlag } from './feature-flag.interface'
 
-interface IOnboardingFeaturesForNetwork extends IFeatureFlag {
-    newProfile: IFeatureFlag & {
-        softwareProfile: IFeatureFlag
-        ledgerProfile: IFeatureFlag
-    }
-    restoreProfile: IFeatureFlag & {
-        recoveryPhrase: IFeatureFlag
-        strongholdBackup: IFeatureFlag
-        ledgerBackup: IFeatureFlag
-    }
-    claimRewards: IFeatureFlag & {
-        recoveryPhrase: IFeatureFlag
-        strongholdBackup: IFeatureFlag
-        ledgerBackup: IFeatureFlag
-    }
+interface INewProfileFeatures extends IFeatureFlag {
+    softwareProfile: IFeatureFlag
+    ledgerProfile: IFeatureFlag
 }
 
-export type OnboardingFeatures = {
-    [key in NetworkProtocol]?: { [key in NetworkType]?: IOnboardingFeaturesForNetwork }
-} & { strongholdVersionCheck: IFeatureFlag } & IFeatureFlag
+interface IRestoreProfileFeatures extends IFeatureFlag {
+    recoveryPhrase: IFeatureFlag
+    strongholdBackup: IFeatureFlag
+    ledgerBackup: IFeatureFlag
+}
+
+interface IClaimRewardsFeatures extends IFeatureFlag {
+    recoveryPhrase: IFeatureFlag
+    strongholdBackup: IFeatureFlag
+    ledgerBackup: IFeatureFlag
+}
+
+interface IOnboardingFeaturesForNetwork extends IFeatureFlag {
+    newProfile: INewProfileFeatures
+    restoreProfile: IRestoreProfileFeatures
+    claimRewards: IClaimRewardsFeatures
+}
+
+export interface IOnboardingFeatures extends IFeatureFlag {
+    iota: IOnboardingFeaturesForNetwork
+    shimmer: IOnboardingFeaturesForNetwork
+    testnet: IOnboardingFeaturesForNetwork
+    custom: IOnboardingFeaturesForNetwork
+    strongholdVersionCheck: IFeatureFlag
+}

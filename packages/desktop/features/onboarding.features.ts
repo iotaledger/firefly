@@ -1,20 +1,26 @@
 import { IFeatureFlag } from './feature-flag.interface'
 
+interface INewProfileFeatures extends IFeatureFlag {
+    softwareProfile: IFeatureFlag
+    ledgerProfile: IFeatureFlag
+}
+
+interface IRestoreProfileFeatures extends IFeatureFlag {
+    recoveryPhrase: IFeatureFlag
+    strongholdBackup: IFeatureFlag
+    ledgerBackup: IFeatureFlag
+}
+
+interface IClaimRewardsFeatures extends IFeatureFlag {
+    recoveryPhrase: IFeatureFlag
+    strongholdBackup: IFeatureFlag
+    ledgerBackup: IFeatureFlag
+}
+
 interface IOnboardingFeaturesForNetwork extends IFeatureFlag {
-    newProfile: IFeatureFlag & {
-        softwareProfile: IFeatureFlag
-        ledgerProfile: IFeatureFlag
-    }
-    restoreProfile: IFeatureFlag & {
-        recoveryPhrase: IFeatureFlag
-        strongholdBackup: IFeatureFlag
-        ledgerBackup: IFeatureFlag
-    }
-    claimRewards: IFeatureFlag & {
-        recoveryPhrase: IFeatureFlag
-        strongholdBackup: IFeatureFlag
-        ledgerBackup: IFeatureFlag
-    }
+    newProfile: INewProfileFeatures
+    restoreProfile: IRestoreProfileFeatures
+    claimRewards: IClaimRewardsFeatures
 }
 
 interface IOnboardingFeatures extends IFeatureFlag {
