@@ -9,6 +9,7 @@ import {
 } from '../../constants'
 import { IPersistedProfile } from '../../interfaces'
 import { currentProfileVersion, profiles, saveProfile } from '../../stores'
+import { DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_MINUTES } from '@core/nfts'
 
 /**
  * Migrates profile data in need of being modified to accommodate changes
@@ -49,6 +50,7 @@ const persistedProfileMigrationsMap: Record<number, (existingProfile: unknown) =
     7: persistedProfileMigrationToV8,
     8: persistedProfileMigrationToV9,
     9: persistedProfileMigrationToV10,
+    10: persistedProfileMigrationToV11,
 }
 
 function persistedProfileMigrationToV4(existingProfile: unknown): void {
@@ -162,4 +164,12 @@ function persistedProfileMigrationToV10(existingProfile: IPersistedProfile): voi
     saveProfile(existingProfile)
 }
 
-// TODO: Rename accountMetadata to accountPersistedData in next migration
+function persistedProfileMigrationToV11(existingProfile: IPersistedProfile): void {
+    existingProfile.settings = {
+        ...existingProfile.settings,
+        maxMediaDownloadTimeInMinutes: DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_MINUTES,
+        maxMediaSizeInMegaBytes: undefined,
+    }
+    // TODO: Rename accountMetadata to accountPersistedData
+    saveProfile(existingProfile)
+}
