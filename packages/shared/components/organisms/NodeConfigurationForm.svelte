@@ -29,7 +29,7 @@
     export let isDeveloperProfile: boolean = false
     export let onSubmit: () => void = () => {}
 
-    const networkItems: IDropdownChoice[] = [
+    const networkItems: IDropdownChoice<NetworkId>[] = [
         {
             label: 'IOTA',
             value: NetworkId.Iota,
@@ -67,6 +67,10 @@
 
     function cleanNodeUrl(): void {
         node.url = cleanUrl(node?.url)
+    }
+
+    function onSelectNetworkId(selected: IDropdownChoice<NetworkId>): void {
+        networkId = selected.value
     }
 
     export async function validate(options: NodeValidationOptions): Promise<INode> {
@@ -119,13 +123,11 @@
 <form id="node-configuration-form" class="w-full h-full flex-col space-y-3" on:submit|preventDefault={onSubmit}>
     {#if showNetworkChoice}
         <Dropdown
-            onSelect={(selected) => {
-                networkId = selected.value
-            }}
             placeholder={localize('network')}
-            disabled={isBusy}
             value={networkId}
             items={networkItems}
+            disabled={isBusy}
+            onSelect={onSelectNetworkId}
         />
     {/if}
     {#if showNetworkChoice && networkId === NetworkId.Custom}
