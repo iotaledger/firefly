@@ -53,6 +53,9 @@ const settingsFeatures = {
         maxMediaSize: {
             enabled: true,
         },
+        maxMediaDownloadTime: {
+            enabled: true,
+        },
         refreshNftMedia: {
             enabled: true,
         },
