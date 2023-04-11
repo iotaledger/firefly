@@ -58,7 +58,7 @@ jobs:
             - name: Set up Node.js
               uses: actions/setup-node@v1
               with:
-                  node-version: 16.4.2
+                  node-version: 18
 
             # Used to read the `binding.gyp` file from `@iota/wallet`
             - name: Set up Python 3.10
