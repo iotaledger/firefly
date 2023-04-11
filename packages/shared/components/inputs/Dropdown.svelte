@@ -1,41 +1,36 @@
 <script lang="ts">
-    import { onMount } from 'svelte'
-    import { FontWeight, Icon, Text, TextPropTypes, TextType, Error } from 'shared/components'
-    import { clickOutside, IDropdownChoice, isNumberLetterOrPunctuation } from '@core/utils'
+    import { Icon as IconEnum } from '@auxiliary/icon'
+    import { IDropdownChoice, clickOutside, isNumberLetterOrPunctuation } from '@core/utils'
+    import { FontWeight, Icon, Text, TextPropTypes, TextType } from 'shared/components'
 
     export let value: string
-    export let label: string = 'Network'
+    export let label: string
     export let placeholder: string = ''
     export let disabled = false
-    export let sortItems = false
     export let items: IDropdownChoice[] = []
-    export let small = false
-    export let error = ''
-    export let classes = ''
-    export let autofocus = false
-    export let isFocused = false
+    export let sortItems = false
     export let enableTyping = false
+    export let small = false
     export let onSelect: (..._: IDropdownChoice[]) => void
 
-    export let textType = TextType.p
-    export let fontWeight: FontWeight = FontWeight.normal
-    export let fontSize = 'sm'
-    export let lineHeight = '140'
+    const textProps: TextPropTypes = {
+        type: TextType.p,
+        fontSize: 'sm',
+        lineHeight: '140',
+        fontWeight: FontWeight.normal,
+    }
 
     let dropdown = false
-    let navContainer
     let divContainer: HTMLElement
-    let focusedItem: HTMLElement
-    let search = ''
+    let navContainer
     let navWidth: string
+    let search = ''
     let selectedItem: IDropdownChoice
+    let focusedItem: HTMLElement
+    let isFocused = false
 
-    let textProps: TextPropTypes
-    $: textProps = { type: textType, fontSize, lineHeight, fontWeight }
-
-    $: items = sortItems ? items.sort((a, b) => (a.label > b.label ? 1 : -1)) : items
     $: placeholderColor = value ? '' : 'gray-500'
-    $: value, (error = '')
+    $: items = sortItems ? items.sort((a, b) => (a.label > b.label ? 1 : -1)) : items
     $: value, (selectedItem = items.find((item) => item.value === value))
 
     export function handleSelect(item: IDropdownChoice): void {
@@ -118,16 +113,10 @@
             }
         }
     }
-
-    onMount(() => {
-        if (autofocus) {
-            divContainer.focus()
-        }
-    })
 </script>
 
 <dropdown-input
-    class="relative hasBorder 'w-full' {classes}"
+    class="relative hasBorder w-full"
     on:click={(e) => {
         e.stopPropagation()
         toggleDropDown()
@@ -148,7 +137,7 @@
             ? 'border-blue-500'
             : 'focus:border-blue-500 border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700'}
         "
-        tabindex="0"
+        tabindex="-1"
         bind:this={divContainer}
     >
         <div class="w-full text-12 leading-140 text-gray-800 dark:text-white">
@@ -157,7 +146,7 @@
             </Text>
         </div>
         <Icon
-            icon={small ? 'small-chevron-down' : 'chevron-down'}
+            icon={small ? IconEnum.SmallChevronDown : IconEnum.ChevronDown}
             width={small ? 16 : 24}
             height={small ? 16 : 24}
             classes="absolute text-gray-500 fill-current"
@@ -166,9 +155,6 @@
             <floating-label class:floating-active={value && label}>{label}</floating-label>
         {/if}
     </div>
-    {#if error}
-        <Error {error} />
-    {/if}
     <nav
         class:active={dropdown}
         class="absolute w-full overflow-hidden pointer-events-none opacity-0 z-10 text-left
