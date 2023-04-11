@@ -1,4 +1,4 @@
-import { BASE_TOKEN } from '../constants'
+import { BASE_TOKEN, COIN_TYPE } from '../constants'
 import { NetworkId, NetworkProtocol } from '../enums'
 import { INetwork } from '../interfaces'
 
@@ -6,6 +6,7 @@ export const NETWORK: Readonly<{ [key in NetworkId]?: INetwork }> = {
     [NetworkId.Iota]: {
         id: NetworkId.Iota,
         name: 'IOTA',
+        coinType: COIN_TYPE[NetworkId.Iota],
         protocol: {
             version: 1,
             networkName: 'iota',
@@ -24,6 +25,7 @@ export const NETWORK: Readonly<{ [key in NetworkId]?: INetwork }> = {
     [NetworkId.Shimmer]: {
         id: NetworkId.Shimmer,
         name: 'Shimmer',
+        coinType: COIN_TYPE[NetworkId.Shimmer],
         protocol: {
             version: 2,
             networkName: 'shimmer',
@@ -42,6 +44,7 @@ export const NETWORK: Readonly<{ [key in NetworkId]?: INetwork }> = {
     [NetworkId.Testnet]: {
         id: NetworkId.Testnet,
         name: 'Testnet',
+        coinType: COIN_TYPE[NetworkId.Testnet],
         protocol: {
             version: 2,
             networkName: 'testnet',

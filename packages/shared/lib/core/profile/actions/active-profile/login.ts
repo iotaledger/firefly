@@ -73,15 +73,12 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             incrementLoginProgress()
             const nodeInfoResponse = await getAndUpdateNodeInfo(true)
             const networkId = _activeProfile?.network?.id
-            if (
-                networkId &&
-                networkId !== NetworkId.Custom &&
-                networkId !== getNetworkIdFromNetworkName(nodeInfoResponse?.nodeInfo?.protocol?.networkName)
-            ) {
+            if (!networkId || networkId === NetworkId.Custom) {
+                const network = buildNetworkFromNodeInfoResponse(nodeInfoResponse, _activeProfile?.network?.coinType)
+                updateActiveProfile({ network })
+            } else if (networkId !== getNetworkIdFromNetworkName(nodeInfoResponse?.nodeInfo?.protocol?.networkName)) {
                 throw new Error('error.node.networkIdMismatch')
             }
-            const network = buildNetworkFromNodeInfoResponse(nodeInfoResponse)
-            updateActiveProfile({ network })
             void pollNetworkStatus()
 
             // Step 3: load and build all the profile data

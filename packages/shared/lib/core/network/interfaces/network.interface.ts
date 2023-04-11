@@ -10,6 +10,7 @@ import { IProtocol } from './protocol.interface'
 export interface INetwork {
     id: NetworkId
     name: string
+    coinType: number
     protocol: IProtocol
     baseToken?: ITokenMetadata
 }

@@ -9,7 +9,7 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { INode, NetworkId, buildNetworkFromNodeInfoResponse, getNetworkIdFromNetworkName } from '@core/network'
-    import { destroyProfileManager, getNodeInfo } from '@core/profile-manager'
+    import { getNodeInfo } from '@core/profile-manager'
     import { networkSetupRouter } from '@core/router'
     import { Animation, Button, HTMLButtonType, NodeConfigurationForm, Text, TextType } from '@ui'
     import { onMount } from 'svelte'
@@ -46,15 +46,15 @@
             ) {
                 throw new Error('error.node.networkIdMismatch')
             }
-            const network = buildNetworkFromNodeInfoResponse(nodeInfoResponse)
+            const network = buildNetworkFromNodeInfoResponse(nodeInfoResponse, Number(chainId))
             updateOnboardingProfile({ network })
-            await destroyProfileManager()
+            await cleanupOnboardingProfileManager()
             $networkSetupRouter.next()
         } catch (err) {
             console.error(err)
             if (err?.error?.includes('error sending request for url')) {
                 formError = localize('error.node.unabledToConnect')
-                updateOnboardingProfile({ clientOptions: null })
+                updateOnboardingProfile({ clientOptions: undefined, network: undefined })
                 await cleanupOnboardingProfileManager()
             } else if (err?.type !== 'validationError') {
                 showAppNotification({
@@ -68,7 +68,7 @@
     }
 
     onMount(() => {
-        updateOnboardingProfile({ clientOptions: null })
+        updateOnboardingProfile({ clientOptions: undefined })
         void cleanupOnboardingProfileManager()
     })
 </script>
