@@ -11,13 +11,11 @@
         Text,
     } from '@ui'
     import { FontWeight, TextType } from '@ui/enums'
-
     import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
     import { time } from '@core/app'
     import { openUrlInBrowser } from '@core/app/utils'
     import { localize } from '@core/i18n'
     import { ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
-    import { BASE_TOKEN } from '@core/network/constants'
     import {
         allAccountNfts,
         convertAndFormatNftMetadata,
@@ -26,7 +24,7 @@
         NftDownloadMetadata,
         selectedNftId,
     } from '@core/nfts'
-    import { activeProfile } from '@core/profile/stores'
+    import { activeProfile, baseToken } from '@core/profile/stores'
     import { collectiblesRouter } from '@core/router/routers'
     import { truncateString } from '@core/utils'
     import {
@@ -123,10 +121,7 @@
             (o) => o.output.type === OUTPUT_TYPE_NFT && getNftId(o.output.nftId, o.outputId) === id
         )
 
-        storageDeposit = formatTokenAmountPrecise(
-            Number(recentNftOutput?.output.amount ?? 0),
-            BASE_TOKEN[$activeProfile?.networkProtocol]
-        )
+        storageDeposit = formatTokenAmountPrecise(Number(recentNftOutput?.output.amount ?? 0), $baseToken)
     }
 
     function returnIfNftWasSent(ownedNfts: INft[], currentTime: Date): void {

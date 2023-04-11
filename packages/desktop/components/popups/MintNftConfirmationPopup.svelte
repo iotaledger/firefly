@@ -4,11 +4,10 @@
     import { localize } from '@core/i18n'
     import { selectedAccount } from '@core/account'
     import { buildNftOutputData, formatTokenAmountPrecise, mintNft, mintNftDetails } from '@core/wallet'
-    import { activeProfile, checkActiveProfileAuth } from '@core/profile'
+    import { baseToken, checkActiveProfileAuth } from '@core/profile'
     import { handleError } from '@core/error/handlers/handleError'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { CURRENT_IRC27_VERSION } from '@core/nfts'
-    import { BASE_TOKEN } from '@core/network'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -106,25 +105,16 @@
                         <KeyValueBox keyText={localize('general.quantity')} valueText={quantity} />
                         <KeyValueBox
                             keyText={localize('general.storageDepositPerNft')}
-                            valueText={formatTokenAmountPrecise(
-                                storageDeposit,
-                                BASE_TOKEN[$activeProfile?.networkProtocol]
-                            )}
+                            valueText={formatTokenAmountPrecise(storageDeposit, $baseToken)}
                         />
                         <KeyValueBox
                             keyText={localize('general.totalStorageDeposit')}
-                            valueText={formatTokenAmountPrecise(
-                                totalStorageDeposit,
-                                BASE_TOKEN[$activeProfile?.networkProtocol]
-                            )}
+                            valueText={formatTokenAmountPrecise(totalStorageDeposit, $baseToken)}
                         />
                     {:else}
                         <KeyValueBox
                             keyText={localize('general.storageDeposit')}
-                            valueText={formatTokenAmountPrecise(
-                                storageDeposit,
-                                BASE_TOKEN[$activeProfile?.networkProtocol]
-                            )}
+                            valueText={formatTokenAmountPrecise(storageDeposit, $baseToken)}
                         />
                     {/if}
                     <KeyValueBox

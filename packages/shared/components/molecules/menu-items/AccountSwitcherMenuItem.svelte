@@ -2,8 +2,7 @@
     import { IAccountState, selectedAccount, setSelectedAccount } from '@core/account'
     import { formatCurrency } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
-    import { BASE_TOKEN } from '@core/network'
-    import { activeProfile } from '@core/profile'
+    import { baseToken } from '@core/profile'
     import { formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
     import { FontWeight, Text } from 'shared/components'
     import { AccountLabel } from 'shared/components/atoms'
@@ -35,10 +34,7 @@
             fontWeight={FontWeight.semibold}
             classes="{account.index === $selectedAccount?.index ? '' : 'opacity-50'} text-right"
         >
-            {formatTokenAmountBestMatch(
-                Number(account.balances.baseCoin.total),
-                BASE_TOKEN[$activeProfile.networkProtocol]
-            )}
+            {formatTokenAmountBestMatch(Number(account.balances.baseCoin.total), $baseToken)}
         </Text>
         <Text
             fontSize="12"

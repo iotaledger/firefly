@@ -2,7 +2,7 @@
     import { Button, KeyValueBox, Text, FontWeight, TextType } from 'shared/components'
     import { selectedAccount, updateSelectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { checkActiveProfileAuth, activeProfile } from '@core/profile'
+    import { checkActiveProfileAuth, baseToken } from '@core/profile'
     import {
         convertBech32ToHexAddress,
         formatTokenAmountPrecise,
@@ -13,7 +13,6 @@
     } from '@core/wallet'
     import { closePopup } from '@auxiliary/popup'
     import { onMount } from 'svelte'
-    import { BASE_TOKEN } from '@core/network'
     import { handleError } from '@core/error/handlers/handleError'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
@@ -46,7 +45,7 @@
     async function setStorageDeposit(aliasOutput): Promise<void> {
         try {
             const { amount } = await $selectedAccount.buildAliasOutput(aliasOutput)
-            storageDeposit = formatTokenAmountPrecise(Number(amount), BASE_TOKEN[$activeProfile?.networkProtocol])
+            storageDeposit = formatTokenAmountPrecise(Number(amount), $baseToken)
         } catch (err) {
             handleError(err)
         }
