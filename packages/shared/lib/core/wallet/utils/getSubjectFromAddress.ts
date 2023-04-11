@@ -6,6 +6,6 @@ export function getSubjectFromAddress(address: string): Subject {
     if (account) {
         return { type: 'account', account: account }
     } else {
-        return { type: 'address', address: address }
+        return { type: 'address', address }
     }
 }
