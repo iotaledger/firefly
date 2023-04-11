@@ -7,12 +7,12 @@
 
     export let filterUnit: OrderFilterUnit
 
-    const choices: IDropdownChoice[] = filterUnit.choices.map((choice) => ({
+    const choices: IDropdownChoice<string>[] = filterUnit.choices.map((choice) => ({
         label: localize(`${filterUnit.localeKey}.${choice}`),
         value: choice,
     }))
 
-    const ascDescChoices: IDropdownChoice[] = [OrderOption.Asc, OrderOption.Desc].map((choice) => ({
+    const ascDescChoices: IDropdownChoice<OrderOption>[] = [OrderOption.Asc, OrderOption.Desc].map((choice) => ({
         label: localize(`filters.ascDesc.${choice}`),
         value: choice,
     }))
@@ -20,11 +20,11 @@
     $: value = localize(`${filterUnit.localeKey}.${filterUnit.selected}`)
     $: ascDescvalue = localize(`filters.ascDesc.${filterUnit.ascDesc}`)
 
-    function onSelect(item): void {
+    function onSelect(item: IDropdownChoice<string>): void {
         filterUnit.selected = item.value
     }
 
-    function onSelectAscDesc(item): void {
+    function onSelectAscDesc(item: IDropdownChoice<OrderOption>): void {
         filterUnit.ascDesc = item.value
     }
 </script>

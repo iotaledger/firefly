@@ -16,7 +16,7 @@
     import { activeProfile, updateActiveProfileSettings } from '@core/profile/stores'
     import type { IDropdownChoice } from '@core/utils'
 
-    function updateMediaSizeLimit(option): void {
+    function updateMediaSizeLimit(option: IDropdownChoice<number>): void {
         const maxMediaSizeInMegaBytes = option.value
 
         updateActiveProfileSettings({ maxMediaSizeInMegaBytes })
@@ -29,7 +29,7 @@
         return amount ? amount + ' MB' : 'None'
     }
 
-    function maxSizeOptions(): IDropdownChoice[] {
+    function maxSizeOptions(): IDropdownChoice<number>[] {
         return [5, 10, 25, 50, 100, undefined].map((amount) => ({
             value: amount,
             label: amount ? amount + ' MB' : 'None',

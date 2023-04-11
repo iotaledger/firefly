@@ -30,7 +30,7 @@
     let segments = BLINK_SEGMENTS
     let appTheme = $appSettings.theme ?? AppTheme.Light
 
-    let languageList: IDropdownChoice[]
+    let languageList: IDropdownChoice<string>[]
     $: languageList = Object.values(SUPPORTED_LOCALES).map((locale) => ({ value: locale, label: locale }))
 
     $: $appSettings.theme = appTheme
@@ -40,7 +40,7 @@
         segments = SWITCH_SEGMENTS
     }
 
-    function onLanguageSelectionClick(item: IDropdownChoice): void {
+    function onLanguageSelectionClick(item: IDropdownChoice<string>): void {
         setLanguage(item)
     }
 

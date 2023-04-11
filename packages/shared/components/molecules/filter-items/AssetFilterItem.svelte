@@ -7,7 +7,7 @@
     export let filterUnit: AssetFilterUnit
     const { baseCoin, nativeTokens } = $visibleSelectedAccountAssets
 
-    const choices: IDropdownChoice[] = [baseCoin, ...nativeTokens].map((choice) => ({
+    const choices: IDropdownChoice<string>[] = [baseCoin, ...nativeTokens].map((choice) => ({
         label: choice.metadata.name,
         value: choice.metadata.name,
     }))
@@ -26,7 +26,7 @@
         }
     }
 
-    function onSelect(item): void {
+    function onSelect(item: IDropdownChoice<string>): void {
         let asset = undefined
         if (item.value === baseCoin.metadata.name) {
             asset = baseCoin

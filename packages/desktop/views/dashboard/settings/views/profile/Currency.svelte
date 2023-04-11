@@ -5,12 +5,12 @@
     import type { IDropdownChoice } from '@core/utils'
     import { Dropdown, Text } from 'shared/components'
 
-    let currencyList: IDropdownChoice[]
+    let currencyList: IDropdownChoice<MarketCurrency>[]
     $: currencyList = Object.values(MarketCurrency)
         .map((currency) => ({ value: currency, label: currency.toUpperCase() }))
         .sort()
 
-    function handleCurrencySelect(item): void {
+    function handleCurrencySelect(item: IDropdownChoice<MarketCurrency>): void {
         updateActiveProfileSettings({ marketCurrency: item.value })
     }
 </script>

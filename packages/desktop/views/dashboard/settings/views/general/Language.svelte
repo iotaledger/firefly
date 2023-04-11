@@ -4,10 +4,10 @@
     import { SUPPORTED_LOCALES, localize, setLanguage } from '@core/i18n'
     import type { IDropdownChoice } from '@core/utils'
 
-    let languageList: IDropdownChoice[]
+    let languageList: IDropdownChoice<string>[]
     $: languageList = Object.values(SUPPORTED_LOCALES).map((locale) => ({ value: locale, label: locale }))
 
-    function handleLanguage(item): void {
+    function handleLanguage(item: IDropdownChoice<string>): void {
         setLanguage(item)
     }
 </script>

@@ -7,12 +7,12 @@
 
     export let filterUnit: DateFilterUnit
 
-    const choices: IDropdownChoice[] = filterUnit.choices.map((choice) => ({
+    const choices: IDropdownChoice<DateFilterOption>[] = filterUnit.choices.map((choice) => ({
         label: localize(`${filterUnit.localeKey}.${choice}`),
         value: choice,
     }))
 
-    const unitChoices: IDropdownChoice[] = Object.keys(DateUnit).map((val) => ({
+    const unitChoices: IDropdownChoice<string>[] = Object.keys(DateUnit).map((val) => ({
         label: localize(`${filterUnit.localeKey}.${val}`),
         value: val,
     }))
@@ -21,7 +21,7 @@
     $: selectedDateUnit =
         filterUnit.subunit.type === 'unit' ? localize(`${filterUnit.localeKey}.${filterUnit.subunit.unit}`) : ''
 
-    function onSelect(item): void {
+    function onSelect(item: IDropdownChoice<DateFilterOption>): void {
         filterUnit.selected = item.value
 
         switch (filterUnit.selected) {
@@ -51,9 +51,9 @@
         }
     }
 
-    function onUnitSelect(item): void {
+    function onUnitSelect(item: IDropdownChoice<string>): void {
         if (filterUnit.subunit.type === 'unit') {
-            filterUnit.subunit.unit = item.value
+            filterUnit.subunit.unit = <DateUnit>item.value
         }
     }
 </script>
