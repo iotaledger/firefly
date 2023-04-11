@@ -780,6 +780,8 @@
             "addingNode": "Adding node",
             "updatingNode": "Updating node",
             "loadingNodeInfo": "Loading node info",
+            "network": "Network",
+            "chainId": "Chain ID",
             "nodeAddress": "Node address",
             "optionalUsername": "Username (optional)",
             "optionalPassword": "Password (optional)",

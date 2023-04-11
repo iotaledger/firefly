@@ -123,7 +123,8 @@
 <form id="node-configuration-form" class="w-full h-full flex-col space-y-3" on:submit|preventDefault={onSubmit}>
     {#if showNetworkChoice}
         <Dropdown
-            placeholder={localize('network')}
+            label={localize('popups.node.network')}
+            placeholder={localize('popups.node.network')}
             value={networkId}
             items={networkItems}
             disabled={isBusy}
@@ -154,7 +155,7 @@
     />
     <PasswordInput
         bind:value={password}
-        placeholder={localize('popups.node.otionalPassword')}
+        placeholder={localize('popups.node.optionalPassword')}
         label={localize('popups.node.password')}
         disabled={isBusy}
     />
