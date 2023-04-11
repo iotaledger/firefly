@@ -21,7 +21,7 @@ import {
 } from '@core/profile-manager/api'
 import { RecoverAccountsPayload } from '@core/profile-manager/interfaces'
 import { profileManager } from '@core/profile-manager/stores'
-import { buildProfileManagerOptionsFromProfileData } from '@core/profile-manager/utils'
+import { buildProfileManagerOptionsFromPartialPersistedProfile } from '@core/profile-manager/utils'
 import { routerManager } from '@core/router/stores'
 import { SECONDS_PER_MINUTE } from '@core/utils'
 import { sleep } from '@core/utils/os'
@@ -59,7 +59,9 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             incrementLoginProgress()
             await waitForPreviousManagerToBeDestroyed()
             if (!get(profileManager)) {
-                const profileManagerOptions = await buildProfileManagerOptionsFromProfileData(_activeProfile)
+                const profileManagerOptions = await buildProfileManagerOptionsFromPartialPersistedProfile(
+                    _activeProfile
+                )
                 const { storagePath, coinType, clientOptions, secretManager } = profileManagerOptions
                 // Make sure the profile has the latest client options that we are using
                 updateActiveProfile({ clientOptions })

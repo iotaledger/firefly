@@ -35,7 +35,7 @@
                 validateClientOptions: false,
             })
             updateOnboardingProfile({ clientOptions: { nodes: [node], primaryNode: node } })
-            await initialiseProfileManagerFromOnboardingProfile(true, Number(chainId) || undefined)
+            await initialiseProfileManagerFromOnboardingProfile(true)
 
             // The API request to check if a node is reachable requires an existing account manager.
             const nodeInfoResponse = await getNodeInfo(node.url)
