@@ -4,7 +4,7 @@
     import { activeProfile, DEFAULT_PERSISTED_PROFILE_OBJECT, updateActiveProfileSettings } from '@core/profile'
     import type { IDropdownChoice } from '@core/utils'
 
-    function updateLockTimeout(option): void {
+    function updateLockTimeout(option: IDropdownChoice<number>): void {
         updateActiveProfileSettings({ lockScreenTimeoutInMinutes: option.value })
     }
 
@@ -16,7 +16,7 @@
         return localize('times.minute', { values: { time: timeInMinutes } })
     }
 
-    function lockScreenTimeoutOptions(): IDropdownChoice[] {
+    function lockScreenTimeoutOptions(): IDropdownChoice<number>[] {
         return [1, 5, 10, 30, 60].map((time) => ({
             value: time,
             label: assignTimeoutOptionLabel(time),

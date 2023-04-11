@@ -7,11 +7,11 @@
     export let label: string
     export let placeholder: string = ''
     export let disabled = false
-    export let items: IDropdownChoice[] = []
+    export let items: IDropdownChoice<unknown>[] = []
     export let sortItems = false
     export let enableTyping = false
     export let small = false
-    export let onSelect: (..._: IDropdownChoice[]) => void
+    export let onSelect: (..._: IDropdownChoice<unknown>[]) => void
 
     const textProps: TextPropTypes = {
         type: TextType.p,
@@ -25,7 +25,7 @@
     let navContainer
     let navWidth: string
     let search = ''
-    let selectedItem: IDropdownChoice
+    let selectedItem: IDropdownChoice<unknown>
     let focusedItem: HTMLElement
     let isFocused = false
 
@@ -33,7 +33,7 @@
     $: items = sortItems ? items.sort((a, b) => (a.label > b.label ? 1 : -1)) : items
     $: value, (selectedItem = items.find((item) => item.value === value))
 
-    export function handleSelect(item: IDropdownChoice): void {
+    export function handleSelect(item: IDropdownChoice<unknown>): void {
         selectedItem = item
         value = String(item.value)
         onSelect && onSelect(item)
@@ -47,7 +47,7 @@
         dropdown = !dropdown
         isFocused = !isFocused
         if (dropdown) {
-            let elem = document.getElementById(value)
+            let elem = document.getElementById(String(value))
             if (!elem) {
                 elem = navContainer.firstChild
             }

@@ -6,14 +6,14 @@
 
     export let filterUnit: SelectionFilterUnit
 
-    const choices: IDropdownChoice[] = filterUnit.choices.map((choice) => ({
+    const choices: IDropdownChoice<string>[] = filterUnit.choices.map((choice) => ({
         label: localize(`${filterUnit.localeKey}.${choice}`),
         value: choice,
     }))
 
     $: value = localize(`${filterUnit.localeKey}.${filterUnit.selected}`)
 
-    function onSelect(item): void {
+    function onSelect(item: IDropdownChoice<string>): void {
         filterUnit.selected = item.value
     }
 </script>
