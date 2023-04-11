@@ -17,7 +17,6 @@
     } from '@contexts/onboarding'
     import { showAppNotification } from '@auxiliary/notification'
     import { ClientError, CLIENT_ERROR_REGEXES } from '@core/error'
-    import { isKeyboardOpen, keyboardHeight } from '@/auxiliary/keyboard'
     export let error = ''
     export let busy = false
     const title = `${localize('general.import')} ${localize(`general.${$onboardingProfile?.recoveryType}`)}`
@@ -86,11 +85,7 @@
             submitHandler={onContinueClick}
         />
     </div>
-    <div
-        style={$isKeyboardOpen && `margin-bottom: ${$keyboardHeight}px`}
-        slot="footer"
-        class="flex flex-row flex-wrap justify-between items-center space-x-4"
-    >
+    <div slot="footer" class="flex flex-row flex-wrap justify-between items-center space-x-4">
         <Button
             classes="flex-1"
             disabled={strongholdPassword.length === 0 || busy}
