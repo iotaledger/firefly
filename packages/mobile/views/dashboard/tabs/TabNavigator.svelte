@@ -35,7 +35,7 @@
 </script>
 
 <tab-navigator
-    class="w-full bg-white dark:bg-gray-800 grid grid-cols-{NAVIGATION_ITEMS.length} grid-rows-1 gap-4 pt-4 pb-7 px-5"
+    class="w-full bg-white dark:bg-gray-900 grid grid-cols-{NAVIGATION_ITEMS.length} grid-rows-1 gap-4 pt-4 pb-7 px-5"
     class:darkmode={darkModeEnabled}
 >
     {#each NAVIGATION_ITEMS as item}
@@ -55,6 +55,7 @@
 <style type="text/scss">
     tab-navigator {
         box-shadow: 0px 4px 4px rgb(0 0 0 / 25%), 0px 2px 12px rgb(0 25 66 / 16%);
+        clip-path: inset(-150px 0px 0px 0px); // needed to prevent the shadow from showing at the bottom
         &.darkmode {
             box-shadow: 0px 4px 4px rgb(0 0 0 / 25%), 0px 2px 12px rgb(0 25 66 / 30%);
         }

@@ -4,6 +4,7 @@
     import { TabNavigator } from './tabs'
 
     import { selectedAccount } from '@core/account'
+    import { appSettings } from '@core/app'
     import { localize } from '@core/i18n'
     import { BASE_TOKEN } from '@core/network'
     import { activeProfile, hasStrongholdLocked, reflectLockedStronghold, saveActiveProfile } from '@core/profile'
@@ -19,6 +20,8 @@
 
     $: $hasStrongholdLocked && reflectLockedStronghold()
 
+    $: darkModeEnabled = $appSettings.darkMode
+
     function onReceiveClick(): void {
         openDrawer(DrawerId.Receive)
     }
@@ -29,13 +32,12 @@
 
 <Idle />
 {#if $selectedAccount}
-    <dashboard-view class="flex flex-col w-screen h-screen bg-gray-50 dark:bg-gray-900">
-        <div class="px-5 py-6">
+    <dashboard-view class:darkmode={darkModeEnabled}>
+        <div class="px-5 pt-4 pb-6">
             <TopBar />
             <div class="flex justify-center w-full mt-5">
                 <TogglableAssetBalanceLabel
                     asset={$selectedAccountAssets?.baseCoin}
-                    <TogglableAmountLabel
                     amount={$selectedAccount.balances?.baseCoin?.available}
                     tokenMetadata={BASE_TOKEN[$activeProfile?.networkProtocol]}
                 />
@@ -64,4 +66,15 @@
             </div>
         {/if}
     </dashboard-view>
-{/if}>
+{/if}
+
+<style type="text/scss">
+    dashboard-view {
+        @apply flex flex-col w-screen;
+        @apply bg-white;
+        height: calc(100vh - env(safe-area-inset-bottom));
+        &.darkmode {
+            @apply bg-gray-900;
+        }
+    }
+</style>
