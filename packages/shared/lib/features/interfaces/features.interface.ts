@@ -12,5 +12,4 @@ export interface IFeatures {
     collectibles: ICollectiblesFeatures
     governance: IGovernanceFeatures
     developerTools: IDeveloperFeatures
-    electron?: unknown
 }
