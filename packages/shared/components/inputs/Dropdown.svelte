@@ -137,7 +137,7 @@
             ? 'border-blue-500'
             : 'focus:border-blue-500 border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700'}
         "
-        tabindex="-1"
+        tabindex="0"
         bind:this={divContainer}
     >
         <div class="w-full text-12 leading-140 text-gray-800 dark:text-white">
