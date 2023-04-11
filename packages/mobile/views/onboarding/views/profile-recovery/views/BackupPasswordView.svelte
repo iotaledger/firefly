@@ -1,9 +1,10 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Button, PasswordInput, Text, TextType } from '@ui'
-    import { localize } from '@core/i18n'
+
     import { OnboardingLayout } from '@components'
-    import { profileRecoveryRouter } from '@/routers'
+    import { Button, PasswordInput, Text, TextType } from '@ui'
+
+    import { showAppNotification } from '@auxiliary/notification'
     import {
         CannotRestoreWithMismatchedCoinTypeError,
         createShimmerClaimingProfileManager,
@@ -15,14 +16,23 @@
         restoreBackupFromStrongholdFile,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
-    import { showAppNotification } from '@auxiliary/notification'
-    import { ClientError, CLIENT_ERROR_REGEXES } from '@core/error'
-    import { isKeyboardOpen, keyboardHeight } from '@/auxiliary/keyboard'
+    import { CLIENT_ERROR_REGEXES, ClientError } from '@core/error'
+    import { localize } from '@core/i18n'
+
+    import { profileRecoveryRouter } from '@/routers'
+
     export let error = ''
     export let busy = false
+
     const title = `${localize('general.import')} ${localize(`general.${$onboardingProfile?.recoveryType}`)}`
+
     let strongholdPassword = ''
     $: strongholdPassword, (error = '')
+
+    onMount(() => {
+        updateOnboardingProfile({ strongholdPassword: null, lastStrongholdBackupTime: null })
+    })
+
     async function onContinueClick(): Promise<void> {
         if (strongholdPassword) {
             busy = true
@@ -56,6 +66,7 @@
             }
         }
     }
+
     function onBackClick(): void {
         // We are deliberately using "isGettingMigrationData"
         // We do not want to display the spinner if stronghold is being imported.
@@ -63,19 +74,16 @@
             $profileRecoveryRouter.previous()
         }
     }
-    onMount(() => {
-        updateOnboardingProfile({ strongholdPassword: null, lastStrongholdBackupTime: null })
-    })
 </script>
 
 <OnboardingLayout {onBackClick} {busy} {title} animation="import-from-file-password-desktop">
     <div slot="content">
-        <Text type={TextType.p} secondary fontSize="15" classes="mb-4"
-            >{localize('views.onboarding.profileRecovery.backupPassword.body1')}</Text
-        >
-        <Text type={TextType.p} secondary fontSize="15" classes="mb-8"
-            >{localize('views.onboarding.profileRecovery.backupPassword.body2')}</Text
-        >
+        <Text type={TextType.p} secondary fontSize="15" classes="mb-4">
+            {localize('views.onboarding.profileRecovery.backupPassword.body1')}
+        </Text>
+        <Text type={TextType.p} secondary fontSize="15" classes="mb-8">
+            {localize('views.onboarding.profileRecovery.backupPassword.body2')}
+        </Text>
         <PasswordInput
             classes="mb-6"
             {error}
@@ -86,11 +94,7 @@
             submitHandler={onContinueClick}
         />
     </div>
-    <div
-        style={$isKeyboardOpen && `margin-bottom: ${$keyboardHeight}px`}
-        slot="footer"
-        class="flex flex-row flex-wrap justify-between items-center space-x-4"
-    >
+    <div slot="footer" class="flex flex-row flex-wrap justify-between items-center space-x-4">
         <Button
             classes="flex-1"
             disabled={strongholdPassword.length === 0 || busy}
