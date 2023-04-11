@@ -150,13 +150,13 @@
     <TextInput
         bind:value={username}
         placeholder={localize('popups.node.optionalUsername')}
-        label={localize('popups.node.username')}
+        label={localize('popups.node.optionalUsername')}
         disabled={isBusy}
     />
     <PasswordInput
         bind:value={password}
+        label={localize('popups.node.optionalPassword')}
         placeholder={localize('popups.node.optionalPassword')}
-        label={localize('popups.node.password')}
         disabled={isBusy}
     />
     <PasswordInput
