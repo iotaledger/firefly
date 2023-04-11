@@ -1,4 +1,4 @@
-name: Build and Release - Firefly (Desktop)
+name: Build and Release Desktop
 
 on:
     push:
@@ -47,7 +47,7 @@ jobs:
         strategy:
             matrix:
                 os: [ubuntu-20.04, macos-11, windows-2019]
-            fail-fast: false
+            fail-fast: true
         env:
             VERSION: ${{ needs.setup.outputs.version }}
             STAGE: ${{ needs.setup.outputs.stage || github.event.inputs.stage }}
