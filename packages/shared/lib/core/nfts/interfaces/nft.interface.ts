@@ -1,5 +1,5 @@
 import { AddressTypes } from '@iota/types'
-import { IIrc27Metadata } from '../interfaces'
+import { NftDownloadMetadata, IIrc27Metadata } from '../interfaces'
 
 export interface INft {
     id: string
@@ -11,4 +11,8 @@ export interface INft {
     isSpendable: boolean
     timelockTime: number
     latestOutputId: string
+    composedUrl: string
+    downloadUrl: string
+    filePath: string
+    downloadMetadata: NftDownloadMetadata
 }

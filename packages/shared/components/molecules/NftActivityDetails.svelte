@@ -3,9 +3,10 @@
     import { selectedAccountIndex } from '@core/account/stores'
     import { time } from '@core/app'
     import { localize } from '@core/i18n'
-    import { getNftByIdFromAllAccountNfts, selectedAccountNfts, selectedNftId } from '@core/nfts'
+    import { getNftByIdFromAllAccountNfts, ownedNfts, selectedNftId } from '@core/nfts'
     import { CollectiblesRoute, collectiblesRouter, DashboardRoute, dashboardRouter } from '@core/router'
     import { ActivityAsyncStatus, NftActivity } from '@core/wallet'
+    import { getSubjectFromActivity } from '@core/wallet/utils/generateActivity/helper'
     import {
         ActivityAsyncStatusPill,
         FontWeight,
@@ -21,8 +22,9 @@
     export let activity: NftActivity
 
     $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, activity.nftId)
-    $: nftIsOwned = $selectedAccountNfts.some((nft) => nft.id === activity.nftId)
+    $: nftIsOwned = $ownedNfts.some((nft) => nft.id === activity.nftId)
     $: isTimelocked = activity?.asyncData?.timelockDate > $time
+    $: subject = getSubjectFromActivity(activity)
 
     async function onClick(): Promise<void> {
         closePopup()
@@ -65,7 +67,7 @@
             {/if}
         </transaction-status>
         {#if activity?.subject}
-            <SubjectBox subject={activity?.subject} />
+            <SubjectBox {subject} />
         {/if}
     </main-content>
 </nft-transaction-details>

@@ -241,6 +241,15 @@ const ElectronApi = {
     close() {
         return ipcRenderer.invoke('close')
     },
+    downloadNft(url, destinationFilePath, nftId, accountIndex) {
+        return ipcRenderer.invoke('nft-download', url, destinationFilePath, nftId, accountIndex)
+    },
+    cancelNftDownload(nftId) {
+        return ipcRenderer.invoke('cancel-nft-download', nftId)
+    },
+    checkIfFileExists(filePath) {
+        return ipcRenderer.invoke('check-if-file-exists', filePath)
+    },
     /*
      * Opens url and checks against acceptlist
      * @param {string} url - Target url
@@ -251,6 +260,9 @@ const ElectronApi = {
     },
     copyFile(sourceFilePath, destinationFilePath) {
         return ipcRenderer.invoke('copy-file', sourceFilePath, destinationFilePath)
+    },
+    deleteFile(filePath) {
+        return ipcRenderer.invoke('delete-file', filePath)
     },
     /**
      * Log unhandled exception

@@ -4,7 +4,13 @@ import { IActivityGenerationParameters } from '@core/wallet/interfaces'
 import { NftActivity } from '@core/wallet/types'
 import type { INftOutput } from '@iota/types'
 import { getNftId } from '../outputs/getNftId'
-import { getAsyncDataFromOutput, getMetadataFromOutput, getSendingInformation, getTagFromOutput } from './helper'
+import {
+    getAsyncDataFromOutput,
+    getLayer2ActivityInformation,
+    getMetadataFromOutput,
+    getSendingInformation,
+    getTagFromOutput,
+} from './helper'
 
 export function generateSingleNftActivity(
     account: IAccountState,
@@ -21,13 +27,15 @@ export function generateSingleNftActivity(
     const containsValue = true
 
     const nftId = nftIdFromInput ? nftIdFromInput : getNftId(output.nftId, outputId)
-    const storageDeposit = Number(output.amount)
     const giftedStorageDeposit = 0
     const metadata = getMetadataFromOutput(output)
     const tag = getTagFromOutput(output)
 
     const sendingInfo = getSendingInformation(processedTransaction, output, account)
     const { subject, isInternal } = sendingInfo
+
+    const layer2ActivityInformation = getLayer2ActivityInformation(metadata, sendingInfo)
+    const storageDeposit = Number(output.amount) - Number(layer2ActivityInformation?.parsedLayer2Metadata?.gasBudget)
 
     const asyncData = getAsyncDataFromOutput(output, outputId, claimingData, account)
 
@@ -51,5 +59,6 @@ export function generateSingleNftActivity(
         subject,
         isInternal,
         direction,
+        ...layer2ActivityInformation,
     }
 }

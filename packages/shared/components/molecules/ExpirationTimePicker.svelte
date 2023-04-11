@@ -1,5 +1,6 @@
 <script lang="ts">
     import { Text, ExpirationTimePickerMenu, Icon } from 'shared/components'
+    import { Icon as IconEnum } from '@auxiliary/icon'
     import { formatDate, localize } from '@core/i18n'
     import { ExpirationTime } from '@core/utils'
 
@@ -37,15 +38,10 @@
             darkColor="gray-500"
             classes={disabled ? '' : 'hover:text-blue-600'}
         >
-            {value
-                ? formatDate(value, {
-                      dateStyle: 'long',
-                      timeStyle: 'medium',
-                  })
-                : localize('general.none')}
+            {value ? formatDate(value, { dateStyle: 'long', timeStyle: 'medium' }) : localize('general.none')}
         </Text>
         {#if !disabled}
-            <Icon icon="chevron-down" width="10" classes="text-blue-500 ml-1" />
+            <Icon icon={IconEnum.ChevronDown} width="10" classes="text-blue-500 ml-1" />
         {/if}
     </div>
 </button>

@@ -260,6 +260,16 @@
                 "title": "General",
                 "description": "Configure your app's appearance and other general settings"
             },
+            "profile": {
+                "title": "Προφίλ",
+                "description": "Αλλάξτε το όνομα του προφίλ σας ή ορίστε ένα avatar"
+            },
+            "network": {
+                "title": "Network"
+            },
+            "collectibles": {
+                "title": "Collectibles"
+            },
             "security": {
                 "title": "Ασφάλεια",
                 "description": "Αλλάξτε τον κωδικό πρόσβασής σας και ρυθμίστε τις ρυθμίσεις ασφαλείας"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "Βοήθεια και πληροφορίες",
                 "description": "Βρείτε την απάντηση σε μια ερώτηση ή λάβετε βοήθεια με ένα θέμα"
-            },
-            "profile": {
-                "title": "Προφίλ",
-                "description": "Αλλάξτε το όνομα του προφίλ σας ή ορίστε ένα avatar"
             },
             "sync": {
                 "title": "Συγχρονισμός πορτοφολιών",
@@ -306,8 +312,12 @@
                 "description": "Εξαγωγή σε ένα αρχείο Stronghold - ένα πλήρες κρυπτογραφημένο αντίγραφο ασφαλείας των πορτοφολιών σας και το τελευταίο ιστορικό συναλλαγών"
             },
             "appLock": {
-                "title": "Αυτόματο Κλείδωμα",
+                "title": "Automatic logout",
                 "description": "Χρόνος αδράνειας πριν από το κλείδωμα του πορτοφολιού σας και αποσυνδεθείτε"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold Timeout",
+                "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
                 "title": "Maximum media size",
@@ -346,22 +356,9 @@
                 "title": "Deep links",
                 "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
-            "networkConfiguration": {
-                "title": "Ρυθμίσεις δικτύου",
-                "title2": "Διαμόρφωση δικτύου",
-                "description": {
-                    "dev": "Οι ρυθμίσεις του δικτύου σας θα ενημερώνονται αυτόματα σύμφωνα με την τρέχουσα διαμόρφωση του κόμβου (η αλλαγή δικτύων θα έχει ως αποτέλεσμα την επαναφορά της κατάστασης του πορτοφολιού)",
-                    "nonDev": "Οι ρυθμίσεις του δικτύου σας θα ενημερώνονται αυτόματα σύμφωνα με την τρέχουσα διαμόρφωση του κόμβου"
-                },
-                "switchedNetworks": "Επιτυχής εναλλαγή δικτύου σε \"{networkName}\".",
-                "resetWallet": "Έχει γίνει επαναφορά της κατάστασης του πορτοφολιού σας.",
-                "connectedTo": "Έγινε σύνδεση με",
-                "nodeConfiguration": {
-                    "title": "Επιλογή κόμβου",
-                    "description": "Επιλέξτε \"Χειροκίνητο\" για να ρυθμίσετε τις ρυθμίσεις κόμβου και να συνδεθείτε με τον δικό σας κόμβο(ους)",
-                    "automatic": "Αυτόματο",
-                    "manual": "Χειροκίνητο"
-                }
+            "networkInformation": {
+                "title": "Network information",
+                "connectedTo": "Connected to"
             },
             "configureNodeList": {
                 "title": "Ρύθμιση παραμέτρων κόμβου",
@@ -378,9 +375,9 @@
                 "noNodes": "Δεν υπάρχουν κόμβοι, δεν είναι δυνατή η σύνδεση στο δίκτυο",
                 "noNodesAuto": "Δεν υπάρχουν κόμβοι, θα χρησιμοποιηθεί αυτόματη επιλογή"
             },
-            "proofOfWork": {
-                "title": "Απόδειξη της εργασίας (Proof of work)",
-                "description": "Πλήρης απόδειξη εργασίας (proof of work) τοπικά στη συσκευή σας ή εξωτερική ανάθεση στον κόμβο"
+            "localProofOfWork": {
+                "title": "Proof of work",
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "Αρχείο Σφαλμάτων",
@@ -1068,6 +1065,8 @@
                 "quantityTooLarge": "Quantity needs to be smaller than 64",
                 "emptyName": "Name is a required field",
                 "invalidURI": "Invalid URI, please provide a valid URI",
+                "notReachable": "URI not reachable, unable to check NFT type",
+                "royaltiesMustBeObject": "Royalties must be an object",
                 "royaltiesMustBeJSON": "Royalties must be a valid JSON",
                 "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
                 "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",
@@ -1979,9 +1978,17 @@
                 "short": "Loading blocked",
                 "long": "NFT file type does not match the expected media type"
             },
+            "notReachable": {
+                "short": "Not reachable",
+                "long": "NFT file is not reachable"
+            },
             "tooLargeFile": {
                 "short": "File is too large",
                 "long": "Loading NFT blocked because the file is too large"
+            },
+            "downloadTooLong": {
+                "short": "File took too long to download",
+                "long": "Loading NFT blocked because the file took too long to download"
             },
             "corsError": {
                 "short": "Loading blocked",

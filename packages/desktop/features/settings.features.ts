@@ -35,8 +35,11 @@ const settingsFeatures = {
         appLock: {
             enabled: true,
         },
+        strongholdPasswordTimeout: {
+            enabled: true,
+        },
         changePincode: {
-            enabled: false,
+            enabled: true,
         },
         changePassword: {
             enabled: true,
@@ -50,10 +53,19 @@ const settingsFeatures = {
         maxMediaSize: {
             enabled: true,
         },
+        refreshNftMedia: {
+            enabled: true,
+        },
     },
     network: {
         enabled: true,
-        networkConfiguration: {
+        networkInformation: {
+            enabled: true,
+        },
+        configureNodeList: {
+            enabled: true,
+        },
+        localProofOfWork: {
             enabled: true,
         },
     },

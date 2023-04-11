@@ -2,7 +2,11 @@ import { get } from 'svelte/store'
 
 import { INode } from '@core/network/interfaces'
 
-import { DEFAULT_PERSISTED_PROFILE_OBJECT, PROFILE_VERSION } from '../../constants'
+import {
+    DEFAULT_PERSISTED_PROFILE_OBJECT,
+    DEFAULT_STRONGHOLD_PASSWORD_TIMEOUT_IN_MINUTES,
+    PROFILE_VERSION,
+} from '../../constants'
 import { IPersistedProfile } from '../../interfaces'
 import { currentProfileVersion, profiles, saveProfile } from '../../stores'
 
@@ -44,6 +48,7 @@ const persistedProfileMigrationsMap: Record<number, (existingProfile: unknown) =
     6: persistedProfileMigrationToV7,
     7: persistedProfileMigrationToV8,
     8: persistedProfileMigrationToV9,
+    9: persistedProfileMigrationToV10,
 }
 
 function persistedProfileMigrationToV4(existingProfile: unknown): void {
@@ -146,6 +151,14 @@ function persistedProfileMigrationToV9(existingProfile: IPersistedProfile): void
     existingProfile.clientOptions.nodes = existingProfile?.clientOptions?.nodes?.map(migrateNode)
     existingProfile.clientOptions.primaryNode = migrateNode(existingProfile?.clientOptions?.primaryNode)
 
+    saveProfile(existingProfile)
+}
+
+function persistedProfileMigrationToV10(existingProfile: IPersistedProfile): void {
+    existingProfile.settings = {
+        ...existingProfile.settings,
+        strongholdPasswordTimeoutInMinutes: DEFAULT_STRONGHOLD_PASSWORD_TIMEOUT_IN_MINUTES,
+    }
     saveProfile(existingProfile)
 }
 

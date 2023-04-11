@@ -22,15 +22,15 @@ export function buildFoundryOutputData(
     ]
     const tokenScheme: TokenSchemeTypes = {
         type: 0,
-        maximumSupply: Converter.decimalToHex(totalSupply, true),
-        meltedTokens: Converter.decimalToHex(0, true),
-        mintedTokens: Converter.decimalToHex(circulatingSupply, true),
+        maximumSupply: Converter.decimalToHex(totalSupply),
+        meltedTokens: Converter.decimalToHex(0),
+        mintedTokens: Converter.decimalToHex(circulatingSupply),
     }
 
     const immutableFeatures: FeatureTypes[] = [
         {
             type: FEATURE_TYPE_METADATA,
-            data: Converter.utf8ToHex(JSON.stringify(metadata), true),
+            data: Converter.utf8ToHex(JSON.stringify(metadata)),
         },
     ]
 

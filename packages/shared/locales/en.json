@@ -312,12 +312,20 @@
                 "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
-                "title": "Automatic lock",
+                "title": "Automatic logout",
                 "description": "Inactivity time before your wallets lock and you are logged out"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold Timeout",
+                "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
                 "title": "Maximum media size",
                 "description": "NFT media with sizes greater than this limit will not be downloaded and a placeholder representing the media type will be displayed instead"
+            },
+            "refreshNftMedia": {
+                "title": "Refresh NFT media",
+                "description": "NFT media cached for this account will be deleted and then downloaded again"
             },
             "changePassword": {
                 "title": "Change password",
@@ -352,22 +360,9 @@
                 "title": "Deep links",
                 "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
-            "networkConfiguration": {
-                "title": "Network config",
-                "title2": "Network configuration",
-                "description": {
-                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
-                    "nonDev": "Your network settings will update automatically according to the current node configuration"
-                },
-                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
-                "resetWallet": "Your wallet state has been reset.",
-                "connectedTo": "Connected to",
-                "nodeConfiguration": {
-                    "title": "Node selection",
-                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
-                    "automatic": "Automatic",
-                    "manual": "Manual"
-                }
+            "networkInformation": {
+                "title": "Network information",
+                "connectedTo": "Connected to"
             },
             "configureNodeList": {
                 "title": "Node configuration",
@@ -384,7 +379,7 @@
                 "noNodes": "There are no nodes, unable to connect to the network",
                 "noNodesAuto": "There are no nodes, automatic selection will be used instead"
             },
-            "proofOfWork": {
+            "localProofOfWork": {
                 "title": "Proof of work",
                 "description": "Complete proof of work locally on your device or outsource to the node"
             },
@@ -1074,6 +1069,7 @@
                 "quantityTooLarge": "Quantity needs to be smaller than 64",
                 "emptyName": "Name is a required field",
                 "invalidURI": "Invalid URI, please provide a valid URI",
+                "notReachable": "URI not reachable, unable to check NFT type",
                 "royaltiesMustBeObject": "Royalties must be an object",
                 "royaltiesMustBeJSON": "Royalties must be a valid JSON",
                 "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
@@ -1182,6 +1178,10 @@
             "iota": "Migrate to Chrysalis or restore an existing wallet",
             "shimmer": "Restore an existing Shimmer profile"
         },
+        "refreshNftMedia": {
+            "title": "Refresh NFT media",
+            "description": "Do you want to delete and re-download all NFT media for this account?"
+        },
         "createWallet": "Create a new {protocol} profile",
         "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
         "claimShimmer": "Claim Shimmer staking rewards",
@@ -1227,6 +1227,7 @@
         "unlock": "Unlock",
         "updateFirefly": "Update Firefly",
         "restartNow": "Restart now",
+        "refresh": "Refresh",
         "saveBackup": "Save Stronghold backup",
         "customizeAcount": "Customise wallet",
         "hideAccount": "Hide wallet",
@@ -1986,9 +1987,17 @@
                 "short": "Loading blocked",
                 "long": "NFT file type does not match the expected media type"
             },
+            "notReachable": {
+                "short": "Not reachable",
+                "long": "NFT file is not reachable"
+            },
             "tooLargeFile": {
                 "short": "File is too large",
                 "long": "Loading NFT blocked because the file is too large"
+            },
+            "downloadTooLong": {
+                "short": "File took too long to download",
+                "long": "Loading NFT blocked because the file took too long to download"
             },
             "corsError": {
                 "short": "Loading blocked",

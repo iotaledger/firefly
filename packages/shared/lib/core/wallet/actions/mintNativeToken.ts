@@ -21,9 +21,9 @@ export async function mintNativeToken(
         const account = get(selectedAccount)
 
         const nativeTokenOptions: NativeTokenOptions = {
-            maximumSupply: Converter.decimalToHex(maximumSupply, true),
-            circulatingSupply: Converter.decimalToHex(circulatingSupply, true),
-            foundryMetadata: Converter.utf8ToHex(JSON.stringify(metadata), true),
+            maximumSupply: Converter.decimalToHex(maximumSupply),
+            circulatingSupply: Converter.decimalToHex(circulatingSupply),
+            foundryMetadata: Converter.utf8ToHex(JSON.stringify(metadata)),
         }
         const transactionOptions: TransactionOptions = {
             remainderValueStrategy: { strategy: 'ReuseAddress', value: null },

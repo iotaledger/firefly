@@ -260,6 +260,16 @@
                 "title": "General",
                 "description": "Configure your app's appearance and other general settings"
             },
+            "profile": {
+                "title": "Profil",
+                "description": "Profil isminizi değiştirin veya bir avatar ayarlayın"
+            },
+            "network": {
+                "title": "Network"
+            },
+            "collectibles": {
+                "title": "Collectibles"
+            },
             "security": {
                 "title": "Güvenlik",
                 "description": "Parolanızı değiştirin ve güvenlikle ilgili ayarları yapın"
@@ -271,10 +281,6 @@
             "helpAndInfo": {
                 "title": "Yardım ve Bilgiler",
                 "description": "Bir sorunun cevabını bulun veya problem ile ilgili yardım alın"
-            },
-            "profile": {
-                "title": "Profil",
-                "description": "Profil isminizi değiştirin veya bir avatar ayarlayın"
             },
             "sync": {
                 "title": "Cüzdanları senkronize et",
@@ -306,8 +312,12 @@
                 "description": "Bir Stronghold dosyasına aktarın - cüzdanlarınızın ve en son işlem geçmişinizin şifrelenmiş tam yedeği"
             },
             "appLock": {
-                "title": "Otomatik kilitleme",
+                "title": "Automatic logout",
                 "description": "Cüzdanlarınız kilitlenmeden ve çıkış yapılmadan önce hareketsizlik süresi"
+            },
+            "strongholdPasswordTimeout": {
+                "title": "Stronghold Timeout",
+                "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
                 "title": "Maximum media size",
@@ -346,22 +356,9 @@
                 "title": "Deep links",
                 "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
-            "networkConfiguration": {
-                "title": "Ağ yapılandırma",
-                "title2": "Ağ yapılandırması",
-                "description": {
-                    "dev": "Ağ ayarlarınız, mevcut düğüm yapılandırmasına göre otomatik olarak güncellenecektir (ağları değiştirmek, cüzdan durumunun sıfırlanmasına neden olacaktır)",
-                    "nonDev": "Ağ ayarlarınız, mevcut düğüm yapılandırmasına göre otomatik olarak güncellenecektir"
-                },
-                "switchedNetworks": "Ağ başarıyla \"{networkName}\" olarak değiştirildi.",
-                "resetWallet": "Cüzdan durumunuz sıfırlandı.",
-                "connectedTo": "Bağlanıldı",
-                "nodeConfiguration": {
-                    "title": "Düğüm Seçimi",
-                    "description": "Düğüm ayarlarınızı yapmak ve kendi düğümünüze bağlanmak için Manual’i seçiniz)",
-                    "automatic": "Otomatik",
-                    "manual": "Manuel"
-                }
+            "networkInformation": {
+                "title": "Network information",
+                "connectedTo": "Connected to"
             },
             "configureNodeList": {
                 "title": "Düğüm yapılandırması",
@@ -378,9 +375,9 @@
                 "noNodes": "Düğüm yok, ağa bağlanamıyor",
                 "noNodesAuto": "Düğüm yok, bunun yerine otomatik seçim kullanılacak"
             },
-            "proofOfWork": {
-                "title": "İş Kanıtı",
-                "description": "PoW'u cihazınızda lokal olarak tamamlayın veya Node'a yaptırın"
+            "localProofOfWork": {
+                "title": "Proof of work",
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "Hata Kaydı",
@@ -1068,6 +1065,8 @@
                 "quantityTooLarge": "Quantity needs to be smaller than 64",
                 "emptyName": "Name is a required field",
                 "invalidURI": "Invalid URI, please provide a valid URI",
+                "notReachable": "URI not reachable, unable to check NFT type",
+                "royaltiesMustBeObject": "Royalties must be an object",
                 "royaltiesMustBeJSON": "Royalties must be a valid JSON",
                 "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
                 "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",
@@ -1979,9 +1978,17 @@
                 "short": "Loading blocked",
                 "long": "NFT file type does not match the expected media type"
             },
+            "notReachable": {
+                "short": "Not reachable",
+                "long": "NFT file is not reachable"
+            },
             "tooLargeFile": {
                 "short": "File is too large",
                 "long": "Loading NFT blocked because the file is too large"
+            },
+            "downloadTooLong": {
+                "short": "File took too long to download",
+                "long": "Loading NFT blocked because the file took too long to download"
             },
             "corsError": {
                 "short": "Loading blocked",
