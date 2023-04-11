@@ -4,7 +4,7 @@ import { get } from 'svelte/store'
 import { DownloadWarningType } from '../enums'
 import { downloadingNftId } from '../stores'
 import { updateNftInAllAccountNfts } from './updateNftInAllAccountNfts'
-import { activeProfile } from '@core/profile'
+import { activeProfile } from '@core/profile/stores'
 
 export async function interruptNftDownloadAfterTimeout(accountIndex: number): Promise<void> {
     const currentlyDownloadingNft = get(downloadingNftId)
