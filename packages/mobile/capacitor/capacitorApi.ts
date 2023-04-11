@@ -133,6 +133,7 @@ const CapacitorApi: Partial<IPlatform> = {
     /**
      * Methods not needed on mobile
      */
+    copyFile: () => new Promise((resolve) => resolve),
 
     getMachineId: () => new Promise<string>((resolve) => resolve('')),
 
