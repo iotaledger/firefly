@@ -1,5 +1,5 @@
 import { ICollectiblesFeatures } from './collectibles-features.interface'
-import { IFeatureFlag } from './feature-flag.interface'
+import { IDeveloperFeatures } from './developer-features.interface'
 import { IGovernanceFeatures } from './governance-features.interface'
 import { OnboardingFeatures } from './onboarding-features.interface'
 import { ISettingsFeatures } from './settings-features.interface'
@@ -11,6 +11,6 @@ export interface IFeatures {
     wallet: IWalletFeatures
     collectibles: ICollectiblesFeatures
     governance: IGovernanceFeatures
-    developerTools: unknown & IFeatureFlag
+    developerTools: IDeveloperFeatures
     electron?: unknown
 }
