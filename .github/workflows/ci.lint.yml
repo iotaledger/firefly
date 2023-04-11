@@ -1,40 +1,40 @@
 name: Format & Lint
 
 on:
-    pull_request:
-    push:
-        branches:
-            - 'develop'
+  pull_request:
+  push:
+    branches:
+      - 'develop'
 
 jobs:
-    rust:
-        runs-on: ubuntu-20.04
-        steps:
-            - uses: actions/checkout@v2
+  format:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
 
-            - name: Install rustfmt with nightly toolchain
-              uses: actions-rs/toolchain@v1
-              with:
-                  profile: minimal
-                  toolchain: nightly
-                  override: true
-                  components: rustfmt
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18
 
-    js:
-        runs-on: ubuntu-20.04
-        steps:
-            - uses: actions/checkout@v2
+      - name: Install Dependencies
+        run: yarn --ignore-scripts
 
-            - name: Setup Node.js
-              uses: actions/setup-node@v2
-              with:
-                  node-version: 18
+      - name: Format
+        run: yarn format:check
 
-            - name: Install Dependencies
-              run: yarn --ignore-scripts
+  lint:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
 
-            - name: Format
-              run: yarn format:check
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18
 
-            - name: Lint
-              run: yarn lint:check
+      - name: Install Dependencies
+        run: yarn --ignore-scripts
+
+      - name: Lint
+        run: yarn lint:check

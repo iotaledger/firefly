@@ -1,4 +1,4 @@
-export enum NetworkConfigurationSettingsRoute {
+export enum NetworkInformationSettingsRoute {
     Init = 'init',
     AddNode = 'addNode',
     NodeDetails = 'nodeDetails',
