@@ -3,6 +3,7 @@ import { NetworkProtocol, NetworkType } from '@core/network/enums'
 import { ProfileType } from '../enums'
 import { IPersistedProfile } from '../interfaces'
 import { DEFAULT_STRONGHOLD_PASSWORD_TIMEOUT_IN_MINUTES } from './default_stronghold_password_timeout_in_minutes.constant'
+import { DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_MINUTES, DEFAULT_MAX_NFT_SIZE_IN_MEGABYTES } from '@core/nfts'
 
 export const DEFAULT_PERSISTED_PROFILE_OBJECT: IPersistedProfile = {
     id: '',
@@ -15,7 +16,8 @@ export const DEFAULT_PERSISTED_PROFILE_OBJECT: IPersistedProfile = {
         marketCurrency: DEFAULT_MARKET_CURRENCY,
         lockScreenTimeoutInMinutes: 5,
         strongholdPasswordTimeoutInMinutes: DEFAULT_STRONGHOLD_PASSWORD_TIMEOUT_IN_MINUTES,
-        maxMediaSizeInMegaBytes: 50,
+        maxMediaSizeInMegaBytes: DEFAULT_MAX_NFT_SIZE_IN_MEGABYTES,
+        maxMediaDownloadTimeInMinutes: DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_MINUTES,
         hideNetworkStatistics: true,
     },
     accountMetadata: [],

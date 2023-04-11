@@ -9,7 +9,7 @@ import {
 } from '../../constants'
 import { IPersistedProfile } from '../../interfaces'
 import { currentProfileVersion, profiles, saveProfile } from '../../stores'
-import { DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_MINUTES } from '@core/nfts'
+import { DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_MINUTES, DEFAULT_MAX_NFT_SIZE_IN_MEGABYTES } from '@core/nfts'
 
 /**
  * Migrates profile data in need of being modified to accommodate changes
@@ -168,7 +168,7 @@ function persistedProfileMigrationToV11(existingProfile: IPersistedProfile): voi
     existingProfile.settings = {
         ...existingProfile.settings,
         maxMediaDownloadTimeInMinutes: DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_MINUTES,
-        maxMediaSizeInMegaBytes: undefined,
+        maxMediaSizeInMegaBytes: DEFAULT_MAX_NFT_SIZE_IN_MEGABYTES,
     }
     // TODO: Rename accountMetadata to accountPersistedData
     saveProfile(existingProfile)

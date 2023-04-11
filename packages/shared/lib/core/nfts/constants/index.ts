@@ -1,5 +1,6 @@
 export * from './current-irc27-version.constant'
 export * from './default-nft-name.constant'
 export * from './max-nft-downloading-time.constant'
+export * from './max-nft-size.constant'
 export * from './nft-id-byte-length.constant'
 export * from './nft-media-file-name.constant'
