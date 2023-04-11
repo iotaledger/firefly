@@ -1,47 +1,43 @@
 <script lang="ts">
-    import { onMount } from 'svelte'
-    import { FontWeight, Icon, Text, TextPropTypes, TextType, Error } from 'shared/components'
-    import { clickOutside, IDropdownChoice, isNumberLetterOrPunctuation } from '@core/utils'
+    import { Icon as IconEnum } from '@auxiliary/icon'
+    import { IDropdownChoice, clickOutside, isNumberLetterOrPunctuation } from '@core/utils'
+    import { FontWeight, Icon, Text, TextPropTypes, TextType } from 'shared/components'
 
     export let value: string
-    export let label: string = ''
+    export let label: string
     export let placeholder: string = ''
     export let disabled = false
-    export let valueKey = 'label'
-    export let sortItems = false
     export let items: IDropdownChoice[] = []
-    export let small = false
-    export let contentWidth = false
-    export let error = ''
-    export let classes = ''
-    export let autofocus = false
-    export let showBorderWhenClosed = true
-    export let isFocused = false
+    export let sortItems = false
     export let enableTyping = false
-
-    // Text Props
-    export let type = TextType.p
-    export let fontSize = '12'
-    export let lineHeight = '120'
-    export let fontWeight: FontWeight = FontWeight.normal
-
-    let textProps: TextPropTypes
-    $: textProps = { type, fontSize, lineHeight, fontWeight }
-    $: placeholderColor = value ? '' : 'gray-500'
-
+    export let small = false
     export let onSelect: (..._: IDropdownChoice[]) => void
 
+    const textProps: TextPropTypes = {
+        type: TextType.p,
+        fontSize: 'sm',
+        lineHeight: '140',
+        fontWeight: FontWeight.normal,
+    }
+
     let dropdown = false
-    let navContainer
     let divContainer: HTMLElement
-    let focusedItem: HTMLElement
-    let search = ''
-
-    items = sortItems ? items.sort((a, b) => (a.label > b.label ? 1 : -1)) : items
-
+    let navContainer
     let navWidth: string
+    let search = ''
+    let selectedItem: IDropdownChoice
+    let focusedItem: HTMLElement
+    let isFocused = false
 
-    $: value, (error = '')
+    $: placeholderColor = value ? '' : 'gray-500'
+    $: items = sortItems ? items.sort((a, b) => (a.label > b.label ? 1 : -1)) : items
+    $: value, (selectedItem = items.find((item) => item.value === value))
+
+    export function handleSelect(item: IDropdownChoice): void {
+        selectedItem = item
+        value = String(item.value)
+        onSelect && onSelect(item)
+    }
 
     function onClickOutside(): void {
         dropdown = false
@@ -117,19 +113,10 @@
             }
         }
     }
-
-    onMount(() => {
-        if (contentWidth) {
-            navWidth = `width: ${navContainer.clientWidth + 8}px`
-        }
-        if (autofocus) {
-            divContainer.focus()
-        }
-    })
 </script>
 
 <dropdown-input
-    class="relative {contentWidth ? '' : 'w-full'} {classes}"
+    class="relative hasBorder w-full"
     on:click={(e) => {
         e.stopPropagation()
         toggleDropDown()
@@ -141,26 +128,25 @@
     class:small
     class:floating-active={value && label}
     class:disabled
-    class:hasBorder={showBorderWhenClosed || dropdown}
     style={navWidth}
 >
     <div
-        class="selection relative flex items-center w-full whitespace-nowrap cursor-pointer
-    bg-white dark:bg-gray-800 {dropdown
+        class="
+            selection relative flex items-center w-full whitespace-nowrap cursor-pointer bg-white dark:bg-gray-800
+            {dropdown
             ? 'border-blue-500'
-            : showBorderWhenClosed
-            ? 'focus:border-blue-500 border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700'
-            : 'border-transparent'}"
+            : 'focus:border-blue-500 border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700'}
+        "
         tabindex="0"
         bind:this={divContainer}
     >
         <div class="w-full text-12 leading-140 text-gray-800 dark:text-white">
-            <Text color="{placeholderColor}," darkColor={placeholderColor} {...textProps} classes="overflow-hidden">
-                {search || value || placeholder || ''}
+            <Text {...textProps} color="{placeholderColor}," darkColor={placeholderColor} classes="overflow-hidden">
+                {search || selectedItem?.label || value || placeholder || ''}
             </Text>
         </div>
         <Icon
-            icon={small ? 'small-chevron-down' : 'chevron-down'}
+            icon={small ? IconEnum.SmallChevronDown : IconEnum.ChevronDown}
             width={small ? 16 : 24}
             height={small ? 16 : 24}
             classes="absolute text-gray-500 fill-current"
@@ -169,9 +155,6 @@
             <floating-label class:floating-active={value && label}>{label}</floating-label>
         {/if}
     </div>
-    {#if error}
-        <Error {error} />
-    {/if}
     <nav
         class:active={dropdown}
         class="absolute w-full overflow-hidden pointer-events-none opacity-0 z-10 text-left
@@ -181,16 +164,18 @@
         <div class="inner overflow-y-auto" bind:this={navContainer}>
             {#each items as item}
                 <button
+                    id={String(item.label)}
                     class="relative flex items-center p-4 w-full whitespace-nowrap
-                        {item[valueKey] === value && 'bg-gray-100 dark:bg-gray-700 dark:bg-opacity-20'}
+                        {item.value === value && 'bg-gray-100 dark:bg-gray-700 dark:bg-opacity-20'}
                         hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20
                         focus:bg-gray-200 dark:focus:bg-gray-600 dark:focus:bg-opacity-20"
-                    id={item[valueKey]}
-                    on:click={() => onSelect(item)}
-                    on:focus={() => focusItem(item[valueKey])}
+                    class:active={item.value === value}
+                    on:click={() => handleSelect(item)}
+                    on:focus={() => focusItem(item.label)}
                     tabindex={dropdown ? 0 : -1}
-                    class:active={item[valueKey] === value}><Text {...textProps}>{item[valueKey]}</Text></button
                 >
+                    <Text {...textProps}>{item.label}</Text>
+                </button>
             {/each}
         </div>
     </nav>
