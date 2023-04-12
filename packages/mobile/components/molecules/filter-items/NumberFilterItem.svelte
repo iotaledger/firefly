@@ -2,7 +2,7 @@
     import { Icon, NumberInput, Radio, Text } from '@ui'
 
     import { localize } from '@core/i18n'
-    import type { IDropdownChoice } from '@core/utils'
+    import type { IDropdownItem } from '@core/utils'
     import { NumberFilterOption } from '@core/utils/enums/filters'
     import { NumberFilterUnit } from '@core/utils/interfaces/filter'
 
@@ -10,7 +10,7 @@
 
     export let filterUnit: NumberFilterUnit
 
-    const choices: IDropdownChoice[] = filterUnit.choices.map((choice) => ({
+    const choices: IDropdownItem<NumberFilterOption>[] = filterUnit.choices.map((choice) => ({
         label: localize(`${filterUnit.localeKey}.${choice}`),
         value: choice,
     }))
