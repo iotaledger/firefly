@@ -34,7 +34,7 @@
     $: isFocused && (error = '')
 
     let allowedDecimals = 0
-    $: if (asset?.metadata?.standard === TokenStandard.BaseCoin) {
+    $: if (asset?.metadata?.standard === TokenStandard.BaseToken) {
         if (asset?.metadata?.useMetricPrefix) {
             allowedDecimals = IOTA_UNIT_MAP?.[unit?.substring(0, 1)] ?? 0
         } else if (unit === asset?.metadata.unit) {
@@ -73,7 +73,7 @@
         } else if (isAmountZeroOrNull) {
             error = localize('error.send.amountInvalidFormat')
         } else if (
-            ((asset?.metadata?.standard === TokenStandard.BaseCoin && unit === asset?.metadata?.subunit) ||
+            ((asset?.metadata?.standard === TokenStandard.BaseToken && unit === asset?.metadata?.subunit) ||
                 (unit === getUnitFromTokenMetadata(asset?.metadata) && asset?.metadata?.decimals === 0)) &&
             Number.parseInt(amount, 10).toString() !== amount
         ) {

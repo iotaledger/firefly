@@ -11,7 +11,7 @@ import { NewTransactionDetails } from '../types'
 
 const PERSISTED_ASSET_SHIMMER: IPersistedAsset = {
     id: CoinType[CoinType.Shimmer],
-    standard: TokenStandard.BaseCoin,
+    standard: TokenStandard.BaseToken,
     hidden: false,
     verification: { verified: true, status: VerifiedStatus.Official },
 }

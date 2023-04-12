@@ -17,7 +17,7 @@ export function convertToRawAmount(amount: string, tokenMetadata: TokenMetadata,
 }
 
 function convertToRawAmountFromMetadata(amount: number, tokenMetadata: TokenMetadata, unit: string): Big {
-    const isBaseToken = tokenMetadata?.standard === TokenStandard.BaseCoin
+    const isBaseToken = tokenMetadata?.standard === TokenStandard.BaseToken
     if (isBaseToken && tokenMetadata.useMetricPrefix) {
         return Big(amount * IOTA_UNIT_MAP?.[unit?.substring(0, 1)] ?? 0)
     } else {

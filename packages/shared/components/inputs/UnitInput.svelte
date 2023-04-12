@@ -17,7 +17,7 @@
     }
 
     let items: DropdownItem<string> = []
-    $: if (tokenMetadata.standard === TokenStandard.BaseCoin) {
+    $: if (tokenMetadata.standard === TokenStandard.BaseToken) {
         if (tokenMetadata.useMetricPrefix) {
             items = [
                 { label: tokenMetadata?.unit, value: tokenMetadata?.unit },

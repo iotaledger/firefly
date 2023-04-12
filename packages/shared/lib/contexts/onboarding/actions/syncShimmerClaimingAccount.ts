@@ -29,7 +29,7 @@ export async function syncShimmerClaimingAccount(account: IAccount): Promise<voi
     if (syncedShimmerClaimingAccount?.unclaimedRewards > 0) {
         const foundRewardsAmount = syncedShimmerClaimingAccount?.unclaimedRewards
         const foundRewardsAmountFormatted = formatTokenAmountBestMatch(foundRewardsAmount, {
-            standard: TokenStandard.BaseCoin,
+            standard: TokenStandard.BaseToken,
             ...BASE_TOKEN[NetworkProtocol.Shimmer],
         })
 

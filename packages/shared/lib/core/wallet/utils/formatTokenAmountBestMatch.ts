@@ -12,7 +12,7 @@ export function formatTokenAmountBestMatch(
     overrideDecimalPlaces?: number,
     withUnit = true
 ): string {
-    const isBaseToken = tokenMetadata?.standard === TokenStandard.BaseCoin
+    const isBaseToken = tokenMetadata?.standard === TokenStandard.BaseToken
 
     let amountWithoutUnit: string
     let amountWithUnit: string

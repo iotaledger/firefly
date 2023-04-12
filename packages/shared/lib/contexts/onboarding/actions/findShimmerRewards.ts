@@ -145,7 +145,7 @@ export function setTotalUnclaimedShimmerRewards(_totalUnclaimedShimmerRewards: n
 function showRewardsFoundNotification(updatedTotalUnclaimedShimmerRewards: number): void {
     const foundRewardsAmount = updatedTotalUnclaimedShimmerRewards - totalUnclaimedShimmerRewards
     const foundRewardsAmountFormatted = formatTokenAmountBestMatch(foundRewardsAmount, {
-        standard: TokenStandard.BaseCoin,
+        standard: TokenStandard.BaseToken,
         ...BASE_TOKEN[NetworkProtocol.Shimmer],
     })
     showAppNotification({

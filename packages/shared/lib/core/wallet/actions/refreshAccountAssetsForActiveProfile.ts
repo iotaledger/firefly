@@ -24,9 +24,9 @@ export async function refreshAccountAssetsForActiveProfile(
 
     const persistedBaseCoin: IPersistedAsset = {
         id: getCoinType(),
-        standard: TokenStandard.BaseCoin,
+        standard: TokenStandard.BaseToken,
         metadata: {
-            standard: TokenStandard.BaseCoin,
+            standard: TokenStandard.BaseToken,
             ...getBaseToken(),
         },
         hidden: false,

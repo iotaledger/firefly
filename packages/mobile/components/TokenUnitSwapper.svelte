@@ -9,7 +9,7 @@
 
     let unitSwapper: string = null
     $: if (
-        tokenMetadata.standard === TokenStandard.BaseCoin &&
+        tokenMetadata.standard === TokenStandard.BaseToken &&
         !tokenMetadata?.useMetricPrefix &&
         tokenMetadata?.unit
     ) {

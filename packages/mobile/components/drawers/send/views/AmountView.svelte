@@ -33,7 +33,7 @@
     let amountInputElement: HTMLInputElement
 
     let allowedDecimals = 0
-    $: if (asset?.metadata?.standard === TokenStandard.BaseCoin) {
+    $: if (asset?.metadata?.standard === TokenStandard.BaseToken) {
         if (!asset?.metadata?.useMetricPrefix) {
             if (unit === asset?.metadata.unit) {
                 allowedDecimals = Math.min(asset?.metadata.decimals, 18)
@@ -73,7 +73,7 @@
         } else if (isAmountZeroOrNull) {
             error = localize('error.send.amountInvalidFormat')
         } else if (
-            ((asset?.metadata?.standard === TokenStandard.BaseCoin && unit === asset?.metadata?.subunit) ||
+            ((asset?.metadata?.standard === TokenStandard.BaseToken && unit === asset?.metadata?.subunit) ||
                 (unit === getUnitFromTokenMetadata(asset?.metadata) && asset?.metadata?.decimals === 0)) &&
             Number.parseInt(amount, 10).toString() !== amount
         ) {
