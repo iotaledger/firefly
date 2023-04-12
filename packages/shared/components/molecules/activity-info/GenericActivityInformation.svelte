@@ -34,11 +34,11 @@
         ...(activity?.time && {
             transactionTime: { data: formattedTransactionTime },
         }),
-        ...(activity?.metadata && {
-            metadata: { data: activity?.metadata, isTooltipVisible: true },
-        }),
         ...(activity?.tag && {
             tag: { data: activity?.tag, isTooltipVisible: true },
+        }),
+        ...(activity?.metadata && {
+            metadata: { data: activity?.metadata, isTooltipVisible: true },
         }),
         ...(hasStorageDeposit && {
             storageDeposit: { data: formattedStorageDeposit, isTooltipVisible: true },
