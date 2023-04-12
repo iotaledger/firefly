@@ -4,8 +4,7 @@
 
     import { sumBalanceForAccounts } from '@core/account'
     import { localize } from '@core/i18n'
-    import { BASE_TOKEN } from '@core/network'
-    import { activeProfile, visibleActiveAccounts } from '@core/profile'
+    import { visibleActiveAccounts, getBaseToken } from '@core/profile'
     import { formatTokenAmountBestMatch } from '@core/wallet'
 
     import { closeDrawer, DrawerId, openDrawer } from '@/auxiliary/drawer'
@@ -37,7 +36,7 @@
         <Text classes="opacity-50 m-auto w-full text-right" type={TextType.h5}>
             {localize('general.total', {
                 values: {
-                    balance: formatTokenAmountBestMatch(totalBalance, BASE_TOKEN[$activeProfile.networkProtocol]),
+                    balance: formatTokenAmountBestMatch(totalBalance, getBaseToken()),
                 },
             })}
         </Text>

@@ -24,6 +24,7 @@
         appSettings,
         appStage,
         AppStage,
+        hasCompletedAppSetup,
         initAppSettings,
         Platform,
         setAppVersionDetails,
@@ -87,13 +88,16 @@
         $isKeyboardOpen = false
     })
 
-    void setupI18n({ fallbackLocale: 'en', initialLocale: $appSettings.language })
-
     onMount(async () => {
         setTimeout(() => {
             SplashScreen.hide()
             initialiseRouters()
         }, 3000)
+
+        let initialLocale = $hasCompletedAppSetup ? $appSettings.language : await Platform.getLanguageCode()
+        // patch for 'es' & 'pt' cases where we can't get the region code
+        initialLocale = initialLocale === 'es' ? 'es-ES' : initialLocale === 'pt' ? 'pt-PT' : initialLocale
+        void setupI18n({ fallbackLocale: 'en', initialLocale })
 
         initAppSettings.set($appSettings)
 
