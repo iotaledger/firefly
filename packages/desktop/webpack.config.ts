@@ -167,7 +167,7 @@ const rendererPlugins = [
     new DefinePlugin({
         'process.env.PLATFORM': JSON.stringify(process.env.PLATFORM || 'desktop'),
         'process.env.STAGE': JSON.stringify(stage),
-        features: features,
+        features: JSON.stringify(features),
         SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),
         SENTRY_MAIN_PROCESS: JSON.stringify(false),
         SENTRY_ENVIRONMENT: JSON.stringify(stage),
