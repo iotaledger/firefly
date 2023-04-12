@@ -10,17 +10,16 @@
         TERMS_OF_SERVICE_VERSION,
         PRIVACY_POLICY_VERSION,
         openUrlInBrowser,
+        TERMS_OF_SERVICE_LINK,
+        PRIVACY_POLICY_LINK,
     } from '@core/app'
-
-    const TOS_LINK = 'https://firefly.iota.org/terms'
-    const PRIVACY_POLICY_LINK = 'https://firefly.iota.org/privacy'
 
     let checked = false
     const tos = needsToAcceptLatestTermsOfService()
     const privacyPolicy = needsToAcceptLatestPrivacyPolicy()
 
     function onViewTosClick(): void {
-        openUrlInBrowser(TOS_LINK)
+        openUrlInBrowser(TERMS_OF_SERVICE_LINK)
     }
 
     function onViewPrivPolicyClick(): void {

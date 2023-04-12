@@ -9,13 +9,12 @@
         openUrlInBrowser,
         PRIVACY_POLICY_VERSION,
         TERMS_OF_SERVICE_VERSION,
+        TERMS_OF_SERVICE_LINK,
+        PRIVACY_POLICY_LINK,
     } from '@core/app'
     import { localize } from '@core/i18n'
 
     import { closeDrawer, DrawerId, updateDrawerProps } from '@/auxiliary/drawer'
-
-    const TOS_LINK = 'https://firefly.iota.org/terms'
-    const PRIVACY_POLICY_LINK = 'https://firefly.iota.org/privacy'
 
     const needsToAcceptTermsOfService = needsToAcceptLatestTermsOfService()
     const needsToAcceptPrivacyPolicy = needsToAcceptLatestPrivacyPolicy()
@@ -29,7 +28,7 @@
     let checked = false
 
     function handleViewTosClick(): void {
-        openUrlInBrowser(TOS_LINK)
+        openUrlInBrowser(TERMS_OF_SERVICE_LINK)
     }
 
     function handleViewPrivPolicyClick(): void {
