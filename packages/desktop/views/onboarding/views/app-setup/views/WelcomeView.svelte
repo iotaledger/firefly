@@ -4,7 +4,7 @@
     import { NetworkProtocol, formatProtocolName } from '@core/network'
     import { appSetupRouter } from '@core/router'
     import features from '@features/features'
-    import { Animation, Button, Logo, Text, TextType } from '@ui'
+    import { Animation, Button, Text, TextType } from '@ui'
 
     function onContinueClick(): void {
         $appSetupRouter.next()
@@ -14,7 +14,6 @@
 <OnboardingLayout allowBack={false}>
     <div slot="leftpane__content">
         <div class="flex flex-col space-y-4 mb-8">
-            <Logo width="64px" logo="logo-firefly" classes="mb-6" />
             <Text type={TextType.h1}
                 >{localize('views.onboarding.appSetup.welcome.title', {
                     values: {
