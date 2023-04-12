@@ -1,12 +1,16 @@
 import { formatNumber } from '@core/i18n'
-
-import { TokenMetadata } from '../interfaces'
+import { TokenStandard } from '../enums'
+import { TokenMetadata } from '../types'
 
 export function formatTokenAmountPrecise(amount: number, tokenMetadata: TokenMetadata): string {
     const formattedAmount = formatNumber(amount, 0, 0, 0, true)
-    if (tokenMetadata?.useMetricPrefix) {
-        return formattedAmount + ' ' + tokenMetadata?.unit
+    if (tokenMetadata.standard === TokenStandard.BaseCoin) {
+        if (tokenMetadata?.useMetricPrefix) {
+            return formattedAmount + ' ' + tokenMetadata?.unit
+        } else {
+            return formattedAmount + ' ' + tokenMetadata?.subunit
+        }
     } else {
-        return formattedAmount + ' ' + tokenMetadata?.subunit
+        return formattedAmount + ' ' + tokenMetadata?.symbol
     }
 }
