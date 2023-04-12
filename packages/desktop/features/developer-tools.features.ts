@@ -1,4 +1,6 @@
-const developerToolsFeatures = {
+import { IDeveloperFeatures } from '@lib/features/interfaces'
+
+const developerToolsFeatures: IDeveloperFeatures = {
     enabled: true,
     faucet: {
         enabled: true,

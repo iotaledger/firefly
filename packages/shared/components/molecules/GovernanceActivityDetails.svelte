@@ -2,26 +2,21 @@
     import { AmountBox, ActivityInclusionStatusPill, Text, FontWeight } from 'shared/components'
     import { formatTokenAmountDefault, getAssetFromPersistedAssets } from '@core/wallet'
     import { GovernanceActivity } from '@core/wallet'
-    import { BASE_TOKEN, COIN_TYPE } from '@core/network'
-    import { activeProfile } from '@core/profile'
+    import { getCoinType, getBaseToken } from '@core/profile'
     import { getVotingEvent } from '@contexts/governance/actions'
     import { truncateString } from '@core/utils'
 
     export let activity: GovernanceActivity
 
-    let proposalName: string
+    const asset = getAssetFromPersistedAssets(getCoinType())
 
-    $: asset = getAssetFromPersistedAssets(String(COIN_TYPE[$activeProfile.networkProtocol]))
     $: amount = activity.votingPowerDifference
-        ? formatTokenAmountDefault(
-              Number(activity.votingPowerDifference),
-              BASE_TOKEN[$activeProfile.networkProtocol],
-              asset?.metadata?.unit
-          )
+        ? formatTokenAmountDefault(Number(activity.votingPowerDifference), getBaseToken(), asset?.metadata?.unit)
         : ''
     $: localizationKey = 'governance.' + activity.governanceAction
     $: activity.participation?.eventId, setProposalName()
 
+    let proposalName: string
     async function setProposalName(): Promise<void> {
         try {
             if (activity?.participation?.eventId) {

@@ -1,4 +1,6 @@
-const onboardingFeatures = {
+import { OnboardingFeatures } from '@lib/features/types'
+
+const onboardingFeatures: OnboardingFeatures = {
     enabled: true,
     iota: {
         enabled: false,
