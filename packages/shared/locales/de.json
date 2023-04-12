@@ -323,6 +323,10 @@
                 "title": "Maximale Dateigröße",
                 "description": "NFT-Medien mit Größen größer als dieses Limit werden nicht heruntergeladen und stattdessen ein Platzhalter angezeigt, der den Medientyp repräsentiert"
             },
+            "refreshNftMedia": {
+                "title": "NFT Medien aktualisieren",
+                "description": "NFT Media Cache für dieses Konto wird gelöscht und erneut heruntergeladen"
+            },
             "changePassword": {
                 "title": "Passwort ändern",
                 "description": "Dein Passwort wird zum Sichern deiner Wallets genutzt. Du solltest ein starkes Passwort verwenden, um dein Guthaben zu schützen"
@@ -1174,6 +1178,10 @@
             "iota": "Zu Chrysalis migrieren oder vorhandene Wallet wiederherstellen",
             "shimmer": "Ein bestehendes Shimmer Profil wiederherstellen"
         },
+        "refreshNftMedia": {
+            "title": "NFT Medien aktualisieren",
+            "description": "Möchtest Du alle NFT Medien für dieses Konto löschen und erneut herunterladen?"
+        },
         "createWallet": "Ein neues {protocol} Profil erstellen",
         "createWalletDescription": "Erstelle ein neues Profil auf {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Unbekannt}}",
         "claimShimmer": "Shimmer Staking-Rewards beanspruchen",
@@ -1219,6 +1227,7 @@
         "unlock": "Entsperren",
         "updateFirefly": "Firefly aktualisieren",
         "restartNow": "Jetzt Neustarten",
+        "refresh": "Aktualisieren",
         "saveBackup": "Stronghold-Backup speichern",
         "customizeAcount": "Wallet anpassen",
         "hideAccount": "Wallet ausblenden",

@@ -1,4 +1,6 @@
-const settingsFeatures = {
+import { ISettingsFeatures } from '@lib/features/interfaces'
+
+const settingsFeatures: ISettingsFeatures = {
     enabled: true,
     general: {
         enabled: true,
