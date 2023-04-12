@@ -17,18 +17,24 @@
     let assetIconWrapperWidth: number
 
     $: isAnimation = asset?.id in ANIMATED_TOKEN_IDS
-    $: {
-        icon = ''
-        assetIconBackgroundColor = getIconColorFromString(asset?.metadata?.name)
-        assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
-        if (
-            asset?.id === String(COIN_TYPE[NetworkProtocol.IOTA]) ||
-            asset?.id === String(COIN_TYPE[NetworkProtocol.Shimmer])
-        ) {
+    $: switch (asset.id) {
+        case String(COIN_TYPE[NetworkProtocol.IOTA]):
+            assetInitials = ''
+            assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
+            assetIconBackgroundColor = '#6E82A4'
             icon = asset?.metadata?.name?.toLocaleLowerCase()
-        } else {
+            break
+        case String(COIN_TYPE[NetworkProtocol.Shimmer]):
+            assetInitials = ''
+            assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
+            assetIconBackgroundColor = '#25DFCA'
+            icon = asset?.metadata?.name?.toLocaleLowerCase()
+            break
+        default:
             assetInitials = getAssetInitials(asset)
-        }
+            assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
+            assetIconBackgroundColor = getIconColorFromString(asset?.metadata?.name)
+            icon = ''
     }
 
     $: shouldShowBadge = showVerifiedBadgeOnly
