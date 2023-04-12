@@ -1,9 +1,10 @@
+import { get } from 'svelte/store'
 import { showAppNotification } from '@auxiliary/notification'
 import { selectedAccount, updateSelectedAccount } from '@core/account'
 import { localize } from '@core/i18n'
 import { Converter } from '@core/utils'
-import { NativeTokenOptions, TransactionOptions } from '@iota/wallet'
-import { get } from 'svelte/store'
+import { NativeTokenOptions } from '@iota/wallet'
+import { DEFAULT_TRANSACTION_OPTIONS } from '../constants'
 import { VerifiedStatus } from '../enums'
 import { buildPersistedAssetFromIrc30Metadata } from '../helpers'
 import { IIrc30Metadata, IPersistedAsset } from '../interfaces'
@@ -25,10 +26,8 @@ export async function mintNativeToken(
             circulatingSupply: Converter.decimalToHex(circulatingSupply),
             foundryMetadata: Converter.utf8ToHex(JSON.stringify(metadata)),
         }
-        const transactionOptions: TransactionOptions = {
-            remainderValueStrategy: { strategy: 'ReuseAddress', value: null },
-        }
-        const mintTokenTransaction = await account.mintNativeToken(nativeTokenOptions, transactionOptions)
+
+        const mintTokenTransaction = await account.mintNativeToken(nativeTokenOptions, DEFAULT_TRANSACTION_OPTIONS)
         const persistedAsset: IPersistedAsset = buildPersistedAssetFromIrc30Metadata(
             mintTokenTransaction.tokenId,
             metadata,

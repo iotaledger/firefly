@@ -1,6 +1,6 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { activeProfile, checkActiveProfileAuth } from '@core/profile'
+    import { getBaseToken, checkActiveProfileAuth } from '@core/profile'
     import {
         mintNativeToken,
         mintTokenDetails,
@@ -14,7 +14,6 @@
     import { onMount } from 'svelte'
     import { selectedAccount } from '@core/account'
     import { handleError } from '@core/error/handlers/handleError'
-    import { BASE_TOKEN } from '@core/network'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -47,10 +46,7 @@
     async function prepareFoundryOutput(): Promise<void> {
         const outputData = buildFoundryOutputData(Number(totalSupply), Number(circulatingSupply), metadata, aliasId)
         const preparedOutput = await $selectedAccount.buildFoundryOutput(outputData)
-        storageDeposit = formatTokenAmountPrecise(
-            Number(preparedOutput.amount) ?? 0,
-            BASE_TOKEN[$activeProfile?.networkProtocol]
-        )
+        storageDeposit = formatTokenAmountPrecise(Number(preparedOutput.amount) ?? 0, getBaseToken())
     }
 
     let detailsList: { [key: string]: { data: string; tooltipText?: string; isCopyable?: boolean } }
