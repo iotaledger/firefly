@@ -1,6 +1,6 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { baseToken, checkActiveProfileAuth } from '@core/profile'
+    import { getBaseToken, checkActiveProfileAuth } from '@core/profile'
     import {
         mintNativeToken,
         mintTokenDetails,
@@ -46,7 +46,7 @@
     async function prepareFoundryOutput(): Promise<void> {
         const outputData = buildFoundryOutputData(Number(totalSupply), Number(circulatingSupply), metadata, aliasId)
         const preparedOutput = await $selectedAccount.buildFoundryOutput(outputData)
-        storageDeposit = formatTokenAmountPrecise(Number(preparedOutput.amount) ?? 0, $baseToken)
+        storageDeposit = formatTokenAmountPrecise(Number(preparedOutput.amount) ?? 0, getBaseToken())
     }
 
     let detailsList: { [key: string]: { data: string; tooltipText?: string; isCopyable?: boolean } }

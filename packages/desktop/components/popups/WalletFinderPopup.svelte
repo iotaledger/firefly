@@ -9,7 +9,7 @@
     import {
         activeAccounts,
         activeProfile,
-        baseToken,
+        getBaseToken,
         DEFAULT_ACCOUNT_RECOVERY_CONFIGURATION,
         isActiveLedgerProfile,
         isSoftwareProfile,
@@ -134,7 +134,7 @@
         />
         <KeyValueBox
             keyText={localize('popups.walletFinder.totalWalletBalance')}
-            valueText={formatTokenAmountBestMatch(totalBalance, $baseToken)}
+            valueText={formatTokenAmountBestMatch(totalBalance, getBaseToken())}
         />
     </div>
 

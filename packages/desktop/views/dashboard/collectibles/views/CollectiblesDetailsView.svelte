@@ -24,7 +24,7 @@
         NftDownloadMetadata,
         selectedNftId,
     } from '@core/nfts'
-    import { activeProfile, baseToken } from '@core/profile/stores'
+    import { activeProfile, getBaseToken } from '@core/profile/stores'
     import { collectiblesRouter } from '@core/router/routers'
     import { truncateString } from '@core/utils'
     import {
@@ -121,7 +121,7 @@
             (o) => o.output.type === OUTPUT_TYPE_NFT && getNftId(o.output.nftId, o.outputId) === id
         )
 
-        storageDeposit = formatTokenAmountPrecise(Number(recentNftOutput?.output.amount ?? 0), $baseToken)
+        storageDeposit = formatTokenAmountPrecise(Number(recentNftOutput?.output.amount ?? 0), getBaseToken())
     }
 
     function returnIfNftWasSent(ownedNfts: INft[], currentTime: Date): void {

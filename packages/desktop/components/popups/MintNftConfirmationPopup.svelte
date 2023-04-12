@@ -4,7 +4,7 @@
     import { localize } from '@core/i18n'
     import { selectedAccount } from '@core/account'
     import { buildNftOutputData, formatTokenAmountPrecise, mintNft, mintNftDetails } from '@core/wallet'
-    import { baseToken, checkActiveProfileAuth } from '@core/profile'
+    import { getBaseToken, checkActiveProfileAuth } from '@core/profile'
     import { handleError } from '@core/error/handlers/handleError'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { CURRENT_IRC27_VERSION } from '@core/nfts'
@@ -105,16 +105,16 @@
                         <KeyValueBox keyText={localize('general.quantity')} valueText={quantity} />
                         <KeyValueBox
                             keyText={localize('general.storageDepositPerNft')}
-                            valueText={formatTokenAmountPrecise(storageDeposit, $baseToken)}
+                            valueText={formatTokenAmountPrecise(storageDeposit, getBaseToken())}
                         />
                         <KeyValueBox
                             keyText={localize('general.totalStorageDeposit')}
-                            valueText={formatTokenAmountPrecise(totalStorageDeposit, $baseToken)}
+                            valueText={formatTokenAmountPrecise(totalStorageDeposit, getBaseToken())}
                         />
                     {:else}
                         <KeyValueBox
                             keyText={localize('general.storageDeposit')}
-                            valueText={formatTokenAmountPrecise(storageDeposit, $baseToken)}
+                            valueText={formatTokenAmountPrecise(storageDeposit, getBaseToken())}
                         />
                     {/if}
                     <KeyValueBox

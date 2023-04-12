@@ -1,5 +1,5 @@
 import { COIN_TYPE } from '@core/network'
-import { activeAccounts, activeProfile, baseToken } from '@core/profile'
+import { activeAccounts, activeProfile, getBaseToken } from '@core/profile'
 import { get } from 'svelte/store'
 import {
     clearPersistedAssetForActiveProfile,
@@ -24,13 +24,12 @@ export async function refreshAccountAssetsForActiveProfile(
     clearPersistedAssets && clearPersistedAssetForActiveProfile()
 
     const networkProtocol = get(activeProfile)?.networkProtocol
-    const baseCoin = get(baseToken)
 
     const persistedBaseCoin: IPersistedAsset = {
         id: String(COIN_TYPE[networkProtocol]),
         standard: TokenStandard.BaseCoin,
         metadata: {
-            ...baseCoin,
+            ...getBaseToken(),
         },
         hidden: false,
         verification: { verified: true, status: VerifiedStatus.Official },

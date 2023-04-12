@@ -5,7 +5,7 @@
     import { selectedAccount } from '@core/account/stores'
     import { formatCurrency, localize } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
-    import { baseToken, visibleActiveAccounts } from '@core/profile'
+    import { getBaseToken, visibleActiveAccounts } from '@core/profile'
     import { formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
     import { AccountSwitcherMenuItem, FontWeight, HR, Icon, Modal, Text, TextType } from '@ui'
     import { tick } from 'svelte'
@@ -53,7 +53,7 @@
         </div>
         <div class="flex flex-col items-end text-right space-y-1">
             <Text type={TextType.h5}>
-                {formatTokenAmountBestMatch(totalBalance, $baseToken)}
+                {formatTokenAmountBestMatch(totalBalance, getBaseToken())}
             </Text>
             <Text fontSize="12" fontWeight={FontWeight.semibold} lineHeight="20" color="blue-500">
                 {formatCurrency(getMarketAmountFromAssetValue(totalBalance, baseCoin))}

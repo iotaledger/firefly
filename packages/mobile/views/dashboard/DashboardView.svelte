@@ -8,7 +8,7 @@
     import { localize } from '@core/i18n'
     import {
         activeProfile,
-        baseToken,
+        getBaseToken,
         hasStrongholdLocked,
         reflectLockedStronghold,
         saveActiveProfile,
@@ -44,7 +44,7 @@
                 <TogglableAssetBalanceLabel
                     asset={$selectedAccountAssets?.baseCoin}
                     amount={$selectedAccount.balances?.baseCoin?.available}
-                    tokenMetadata={$baseToken}
+                    tokenMetadata={getBaseToken()}
                 />
             </div>
             {#if features?.dashboard?.send?.enabled || features?.dashboard?.receive?.enabled}

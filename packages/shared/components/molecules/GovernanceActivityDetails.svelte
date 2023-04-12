@@ -3,7 +3,7 @@
     import { formatTokenAmountDefault, getAssetFromPersistedAssets } from '@core/wallet'
     import { GovernanceActivity } from '@core/wallet'
     import { COIN_TYPE } from '@core/network'
-    import { activeProfile, baseToken } from '@core/profile'
+    import { activeProfile, getBaseToken } from '@core/profile'
     import { getVotingEvent } from '@contexts/governance/actions'
     import { truncateString } from '@core/utils'
 
@@ -13,7 +13,7 @@
 
     $: asset = getAssetFromPersistedAssets(String(COIN_TYPE[$activeProfile.networkProtocol]))
     $: amount = activity.votingPowerDifference
-        ? formatTokenAmountDefault(Number(activity.votingPowerDifference), $baseToken, asset?.metadata?.unit)
+        ? formatTokenAmountDefault(Number(activity.votingPowerDifference), getBaseToken(), asset?.metadata?.unit)
         : ''
     $: localizationKey = 'governance.' + activity.governanceAction
     $: activity.participation?.eventId, setProposalName()

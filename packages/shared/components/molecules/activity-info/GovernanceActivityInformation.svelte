@@ -2,7 +2,7 @@
     import { KeyValueBox } from 'shared/components'
     import { getFormattedTimeStamp, localize } from '@core/i18n'
     import { formatTokenAmountBestMatch, GovernanceAction, GovernanceActivity } from '@core/wallet'
-    import { baseToken } from '@core/profile'
+    import { getBaseToken } from '@core/profile'
     import { IKeyValueBoxList } from '@core/utils'
 
     export let activity: GovernanceActivity
@@ -16,7 +16,7 @@
         }),
         ...(activity.votingPower !== undefined && {
             votingPower: {
-                data: formatTokenAmountBestMatch(activity.votingPower, $baseToken, 2),
+                data: formatTokenAmountBestMatch(activity.votingPower, getBaseToken(), 2),
                 alternateKey:
                     activity.governanceAction === GovernanceAction.DecreaseVotingPower ||
                     activity.governanceAction === GovernanceAction.IncreaseVotingPower

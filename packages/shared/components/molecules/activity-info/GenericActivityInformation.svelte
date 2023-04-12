@@ -1,7 +1,7 @@
 <script lang="ts">
     import { KeyValueBox } from 'shared/components'
     import { getFormattedTimeStamp, localize } from '@core/i18n'
-    import { activeProfile, baseToken } from '@core/profile'
+    import { activeProfile, getBaseToken } from '@core/profile'
     import { Activity, formatTokenAmountPrecise } from '@core/wallet'
     import { ExplorerEndpoint } from '@core/network'
     import { getOfficialExplorerUrl } from '@core/network/utils'
@@ -21,10 +21,10 @@
 
     $: formattedTransactionTime = getFormattedTimeStamp(activity?.time)
     $: formattedTimelockDate = getFormattedTimeStamp(activity?.asyncData?.timelockDate)
-    $: formattedStorageDeposit = formatTokenAmountPrecise(activity?.storageDeposit ?? 0, $baseToken)
-    $: formattedGiftedStorageDeposit = formatTokenAmountPrecise(activity?.giftedStorageDeposit ?? 0, $baseToken)
-    $: formattedSurplus = formatTokenAmountPrecise(activity?.surplus ?? 0, $baseToken)
-    $: formattedGasBudget = formatTokenAmountPrecise(Number(gasBudget ?? 0), $baseToken)
+    $: formattedStorageDeposit = formatTokenAmountPrecise(activity?.storageDeposit ?? 0, getBaseToken())
+    $: formattedGiftedStorageDeposit = formatTokenAmountPrecise(activity?.giftedStorageDeposit ?? 0, getBaseToken())
+    $: formattedSurplus = formatTokenAmountPrecise(activity?.surplus ?? 0, getBaseToken())
+    $: formattedGasBudget = formatTokenAmountPrecise(Number(gasBudget ?? 0), getBaseToken())
 
     let transactionDetailsList: IKeyValueBoxList
     $: transactionDetailsList = {

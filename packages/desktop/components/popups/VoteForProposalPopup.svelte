@@ -5,7 +5,7 @@
     import { selectedAccount } from '@core/account/stores'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile/actions'
-    import { baseToken } from '@core/profile/stores'
+    import { getBaseToken } from '@core/profile/stores'
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
     import { vote } from '@contexts/governance/actions'
     import { ABSTAIN_VOTE_VALUE } from '@contexts/governance/constants'
@@ -14,7 +14,7 @@
 
     export let selectedAnswerValues: number[]
 
-    $: formattedVotingPower = formatTokenAmountBestMatch(Number($selectedAccount?.votingPower), $baseToken)
+    $: formattedVotingPower = formatTokenAmountBestMatch(Number($selectedAccount?.votingPower), getBaseToken())
     $: hasVotingPower = Number($selectedAccount?.votingPower) > 0
 
     $: hasGovernanceTransactionInProgress =

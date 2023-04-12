@@ -2,7 +2,7 @@
     import { Button, KeyValueBox, Text, FontWeight, TextType } from 'shared/components'
     import { selectedAccount, updateSelectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { checkActiveProfileAuth, baseToken } from '@core/profile'
+    import { checkActiveProfileAuth, getBaseToken } from '@core/profile'
     import {
         convertBech32ToHexAddress,
         formatTokenAmountPrecise,
@@ -45,7 +45,7 @@
     async function setStorageDeposit(aliasOutput): Promise<void> {
         try {
             const { amount } = await $selectedAccount.buildAliasOutput(aliasOutput)
-            storageDeposit = formatTokenAmountPrecise(Number(amount), $baseToken)
+            storageDeposit = formatTokenAmountPrecise(Number(amount), getBaseToken())
         } catch (err) {
             handleError(err)
         }
