@@ -323,6 +323,10 @@
                 "title": "Maximum media size",
                 "description": "NFT media with sizes greater than this limit will not be downloaded and a placeholder representing the media type will be displayed instead"
             },
+            "refreshNftMedia": {
+                "title": "Refresh NFT media",
+                "description": "NFT media cached for this account will be deleted and then downloaded again"
+            },
             "changePassword": {
                 "title": "Vaihda salasana",
                 "description": "Salasanaasi käytetään lompakkojesi suojaamiseen. Sinun on käytettävä vahvaa salasanaa varojesi turvaamiseksi"
@@ -1174,6 +1178,10 @@
             "iota": "Siirry Chrysalis-verkkoon tai palauta olemassaoleva lompakko",
             "shimmer": "Palauta olemassaoleva Shimmer-profiili"
         },
+        "refreshNftMedia": {
+            "title": "Refresh NFT media",
+            "description": "Do you want to delete and re-download all NFT media for this account?"
+        },
         "createWallet": "Luo uusi {protocol}-profiili",
         "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
         "claimShimmer": "Lunasta Shimmer-palkkiosi stakingista",
@@ -1219,6 +1227,7 @@
         "unlock": "Avaa",
         "updateFirefly": "Päivitä Firefly",
         "restartNow": "Käynnistä uudelleen nyt",
+        "refresh": "Refresh",
         "saveBackup": "Tallenna Stronghold-varmuuskopio",
         "customizeAcount": "Mukauta lompakkoa",
         "hideAccount": "Piilota lompakko",
