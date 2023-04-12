@@ -106,6 +106,7 @@
     <TopNavigation />
     <div class="flex flex-row flex-auto h-1">
         <Sidebar />
+        <!-- Dashboard Pane -->
         <div class="flex flex-col h-full dashboard-w">
             <svelte:component this={tabs[$dashboardRoute]} on:next={$appRouter.next} />
         </div>
