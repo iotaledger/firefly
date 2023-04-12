@@ -77,7 +77,6 @@ export interface IAccount {
     getParticipationEventStatus(eventId: string): Promise<ParticipationEventStatus>
     getParticipationOverview(eventIds?: string[]): Promise<ParticipationOverview>
     getTransaction(transactionId: string): Promise<Transaction>
-    getVotingPower(): Promise<string>
     incomingTransactions(): Promise<[string, Transaction][]>
     increaseNativeTokenSupply(
         tokenId: string,
