@@ -862,10 +862,10 @@
   dependencies:
     big-integer "^1.6.51"
 
-"@iota/wallet@2.0.3-rc.31":
-  version "2.0.3-rc.31"
-  resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.3-rc.31.tgz#15eaca048f9882f235fa7308dbdf6b51c3986bb2"
-  integrity sha512-cdvP/6izz7UgXJan5H/CcCx+Uejjv+0iNFQ2sJbKRDTULMWlmlHTRjjjQxC1lkBzTwGJsnggYUVEQlMLJ75/HQ==
+"@iota/wallet@2.0.3-rc.32":
+  version "2.0.3-rc.32"
+  resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.3-rc.32.tgz#ea1d452595b9c65d147259f108ebe94dc7c5a001"
+  integrity sha512-nvBDJca64EITtMNYcNIP0nUtaMSHc6c60FBQFldTpibK7fRwqbg9BJGeme0Lt+Mc7WRS7ZnuYnSGIEZFs/pzEA==
   dependencies:
     "@iota/types" "^1.0.0-beta.15"
     cargo-cp-artifact "^0.1.6"
