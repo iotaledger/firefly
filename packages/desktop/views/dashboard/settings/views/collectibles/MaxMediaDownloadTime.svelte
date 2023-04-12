@@ -3,25 +3,23 @@
     import { TextType } from '@ui/enums'
     import { localize } from '@core/i18n'
     import { activeProfile, updateActiveProfileSettings } from '@core/profile/stores'
-    import type { IDropdownChoice } from '@core/utils'
     import { DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_SECONDS } from '@core/nfts'
+    import { IDropdownItem } from '@core/utils'
 
-    function updateMediaDownloadTimeLimit(option): void {
+    function onMaxMediaDownloadTimeChange(option: IDropdownItem<number>): void {
         const maxMediaDownloadTimeInSeconds = option.value
 
         updateActiveProfileSettings({ maxMediaDownloadTimeInSeconds })
     }
 
     function assignMaxMediaDownloadTimeOptionLabel(amount: number): string {
-        return amount ? amount + ' min' : 'None'
+        return amount ? amount + ' min' : localize('general.none')
     }
 
-    function maxSizeOptions(): IDropdownChoice[] {
-        return [30, 60, 90, 120, 150, 180].map((amount) => ({
-            value: amount,
-            label: amount + ' min',
-        }))
-    }
+    const maxSizeOptions: IDropdownItem<number>[] = [30, 60, 90, 120, 150, 180].map((amount) => ({
+        value: amount,
+        label: assignMaxMediaDownloadTimeOptionLabel(amount),
+    }))
 </script>
 
 <Text type={TextType.h4} classes="mb-3">
@@ -31,9 +29,7 @@
     {localize('views.settings.maxMediaDownloadTime.description')}
 </Text>
 <Dropdown
-    onSelect={updateMediaDownloadTimeLimit}
-    value={assignMaxMediaDownloadTimeOptionLabel(
-        $activeProfile?.settings.maxMediaDownloadTimeInSeconds || DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_SECONDS
-    )}
-    items={maxSizeOptions()}
+    onSelect={onMaxMediaDownloadTimeChange}
+    value={$activeProfile?.settings.maxMediaDownloadTimeInSeconds || DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_SECONDS}
+    items={maxSizeOptions}
 />
