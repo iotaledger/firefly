@@ -1,18 +1,44 @@
 <script lang="ts">
     import { fade, fly } from 'svelte/transition'
-    import { appSettings } from '@core/app'
+    import { SideDrawerDirection, closeSideDrawer, sideDrawerState } from '@auxiliary/side-drawer'
 
     export let onClose: () => unknown = () => {}
-    export let preventClose: boolean = false
 
     const DRAWER_ANIMATION_DURATION_MS = 200
-    const directon = { x: 100 }
 
-    const position = 0
+    let direction, position, isVertical
+
+    $: setDirection($sideDrawerState.direction)
+    function setDirection(sideDrawerDirection: SideDrawerDirection): void {
+        switch (sideDrawerDirection) {
+            case SideDrawerDirection.Bottom:
+                direction = { x: 0, y: -100 }
+                position = 'bottom-0'
+                isVertical = false
+                break
+            case SideDrawerDirection.Top:
+                direction = { x: 0, y: 100 }
+                position = 'top-0'
+                isVertical = false
+                break
+            case SideDrawerDirection.Left:
+                direction = { x: -100, y: 0 }
+                position = 'left-0'
+                isVertical = true
+                break
+            case SideDrawerDirection.Right:
+            default:
+                direction = { x: 100, y: 0 }
+                position = 'right-0'
+                isVertical = true
+                break
+        }
+    }
 
     function onOverlayClick(): void {
-        if (!preventClose) {
+        if (!$sideDrawerState.preventClose) {
             onClose && onClose()
+            closeSideDrawer()
         }
     }
 </script>
@@ -26,11 +52,9 @@
         class="fixed top-0 left-0 w-full h-full z-0 bg-gray-700 dark:bg-gray-900 bg-opacity-60 dark:bg-opacity-60"
     />
     <panel
-        in:fly|local={{ ...directon, duration: DRAWER_ANIMATION_DURATION_MS }}
-        out:fly|local={{ ...directon, duration: DRAWER_ANIMATION_DURATION_MS }}
-        class="h-screen"
-        class:darkmode={$appSettings.darkMode}
-        style:--right={`${position}px`}
+        in:fly|local={{ ...direction, duration: DRAWER_ANIMATION_DURATION_MS }}
+        out:fly|local={{ ...direction, duration: DRAWER_ANIMATION_DURATION_MS }}
+        class="h-screen bg-white dark:bg-gray-800 {position} {isVertical ? 'vertical' : 'horizontal'}"
     >
         <slot />
     </panel>
@@ -38,16 +62,19 @@
 
 <style type="text/scss">
     panel {
-        @apply fixed w-full max-h-full;
+        @apply fixed;
         @apply flex flex-col flex-auto overflow-hidden;
         @apply pt-7 px-5;
-        @apply bg-white;
-        width: 420px;
-        transition: bottom 0.2s ease;
-        right: var(--right);
+        transition: right 0.2s ease;
 
-        &.darkmode {
-            @apply bg-gray-800;
+        &.vertical {
+            width: 420px;
+            height: 100%;
+        }
+
+        &.height {
+            height: 420px;
+            width: 100%;
         }
     }
 </style>
