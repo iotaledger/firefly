@@ -64,16 +64,6 @@
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
         <OnboardingButton
-            primaryText={localize('actions.claimShimmer')}
-            secondaryText={!$mobile ? localize('actions.claimShimmerDescription') : ''}
-            icon="tokens"
-            iconHeight="24"
-            iconWidth="24"
-            hidden={features?.onboarding?.[networkId]?.claimRewards?.hidden}
-            disabled={!features?.onboarding?.[networkId]?.claimRewards?.enabled}
-            onClick={() => onProfileSetupSelectionClick(ProfileSetupType.Claimed)}
-        />
-        <OnboardingButton
             primaryText={localize('actions.createWallet', {
                 values: {
                     protocol: formatProtocolName(networkId),
@@ -98,6 +88,16 @@
             hidden={features?.onboarding?.[networkId]?.restoreProfile?.hidden}
             disabled={!features?.onboarding?.[networkId]?.restoreProfile?.enabled}
             onClick={() => onProfileSetupSelectionClick(ProfileSetupType.Recovered)}
+        />
+        <OnboardingButton
+            primaryText={localize('actions.claimShimmer')}
+            secondaryText={!$mobile ? localize('actions.claimShimmerDescription') : ''}
+            icon="tokens"
+            iconHeight="24"
+            iconWidth="24"
+            hidden={features?.onboarding?.[networkId]?.claimRewards?.hidden}
+            disabled={!features?.onboarding?.[networkId]?.claimRewards?.enabled}
+            onClick={() => onProfileSetupSelectionClick(ProfileSetupType.Claimed)}
         />
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-green dark:bg-gray-900'}">
