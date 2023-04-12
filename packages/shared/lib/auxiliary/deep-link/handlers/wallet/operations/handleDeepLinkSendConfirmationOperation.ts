@@ -1,5 +1,4 @@
 import { PopupId, openPopup } from '@auxiliary/popup'
-import { networkHrp } from '@core/profile/stores'
 import { getByteLengthOfString, isStringTrue, isValidBech32AddressAndPrefix, validateAssetId } from '@core/utils'
 import {
     NewTransactionDetails,
@@ -21,6 +20,7 @@ import {
     UnknownAssetError,
 } from '../../../errors'
 import { getRawAmountFromSearchParam } from '../../../utils'
+import { getNetworkHrp } from '@core/profile'
 
 export function handleDeepLinkSendConfirmationOperation(searchParams: URLSearchParams): void {
     const transactionDetails = parseSendConfirmationOperation(searchParams)
@@ -52,7 +52,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): NewTrans
     if (!address) {
         throw new NoAddressSpecifiedError()
     }
-    if (!isValidBech32AddressAndPrefix(address, get(networkHrp))) {
+    if (!isValidBech32AddressAndPrefix(address, getNetworkHrp())) {
         throw new InvalidAddressError()
     }
 
