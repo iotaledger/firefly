@@ -1,5 +1,5 @@
 import { NetworkProtocol, NetworkType } from '@core/network'
-import { IFeatureFlag } from './feature-flag.interface'
+import { IFeatureFlag } from '../interfaces/feature-flag.interface'
 
 interface IOnboardingFeaturesForNetwork extends IFeatureFlag {
     newProfile: IFeatureFlag & {
@@ -10,6 +10,7 @@ interface IOnboardingFeaturesForNetwork extends IFeatureFlag {
         recoveryPhrase: IFeatureFlag
         strongholdBackup: IFeatureFlag
         ledgerBackup: IFeatureFlag
+        migrateSeed: IFeatureFlag
     }
     claimRewards: IFeatureFlag & {
         recoveryPhrase: IFeatureFlag
@@ -19,5 +20,5 @@ interface IOnboardingFeaturesForNetwork extends IFeatureFlag {
 }
 
 export type OnboardingFeatures = {
-    [key in NetworkProtocol]?: { [key in NetworkType]?: IOnboardingFeaturesForNetwork }
+    [key in NetworkProtocol]?: { [key in NetworkType]?: IOnboardingFeaturesForNetwork } & IFeatureFlag
 } & { strongholdVersionCheck: IFeatureFlag } & IFeatureFlag
