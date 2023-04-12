@@ -1,13 +1,12 @@
 import { isShimmerClaimingTransaction } from '@contexts/onboarding'
 import { IAccountState } from '@core/account'
-import { COIN_TYPE } from '@core/network'
-import { activeProfile, activeProfileId } from '@core/profile'
+import { activeProfileId, getCoinType } from '@core/profile'
 import { IActivityGenerationParameters } from '@core/wallet/interfaces'
 import { TransactionActivity } from '@core/wallet/types'
 import { IBasicOutput } from '@iota/types'
 import { get } from 'svelte/store'
-import { ActivityAction, ActivityType } from '../../enums'
 import { activityOutputContainsValue, getNativeTokenFromOutput } from '..'
+import { ActivityAction, ActivityType } from '../../enums'
 import {
     getAmountFromOutput,
     getAsyncDataFromOutput,
@@ -54,7 +53,7 @@ export function generateSingleBasicActivity(
     const baseTokenAmount = getAmountFromOutput(output) - storageDeposit - gasBudget
 
     const nativeToken = getNativeTokenFromOutput(output)
-    const assetId = fallbackAssetId ?? nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol])
+    const assetId = fallbackAssetId ?? nativeToken?.id ?? getCoinType()
 
     let rawAmount: number
     if (fallbackAmount === undefined) {
