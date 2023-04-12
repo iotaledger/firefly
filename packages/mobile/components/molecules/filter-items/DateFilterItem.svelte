@@ -3,7 +3,7 @@
     import { Icon, NumberInput, Radio, Text } from '@ui'
 
     import { localize } from '@core/i18n'
-    import type { IDropdownChoice } from '@core/utils'
+    import type { IDropdownItem } from '@core/utils'
     import { DateFilterOption, DateUnit } from '@core/utils/enums/filters'
     import { DateFilterUnit } from '@core/utils/interfaces/filter'
 
@@ -11,12 +11,12 @@
 
     export let filterUnit: DateFilterUnit
 
-    const choices: IDropdownChoice[] = filterUnit.choices.map((choice) => ({
+    const choices: IDropdownItem<DateFilterOption>[] = filterUnit.choices.map((choice) => ({
         label: localize(`${filterUnit.localeKey}.${choice}`),
         value: choice,
     }))
 
-    const unitChoices: IDropdownChoice[] = Object.keys(DateUnit).map((val) => ({
+    const unitChoices: IDropdownItem<string>[] = Object.keys(DateUnit).map((val) => ({
         label: localize(`${filterUnit.localeKey}.${val}`),
         value: val,
     }))

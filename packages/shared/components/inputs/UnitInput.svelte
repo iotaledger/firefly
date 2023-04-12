@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { Dropdown2, DropdownItem } from 'shared/components'
+    import { Dropdown2 } from 'shared/components'
     import { ITokenMetadata } from '@core/wallet'
-    import { IotaUnit } from '@core/utils'
+    import { IDropdownItem, IotaUnit } from '@core/utils'
 
     export let unit: string
     export let isFocused: boolean
@@ -16,7 +16,7 @@
         previousTokenMetadata = tokenMetadata
     }
 
-    let items: DropdownItem<string> = []
+    let items: IDropdownItem<string>[] = []
     $: if (!tokenMetadata?.useMetricPrefix && tokenMetadata?.unit) {
         items = [{ label: tokenMetadata?.unit, value: tokenMetadata?.unit }]
         if (tokenMetadata.subunit) {
@@ -33,7 +33,7 @@
         ]
     }
 
-    function onSelect(selected: DropdownItem<string>): void {
+    function onSelect(selected: IDropdownItem<string>): void {
         unit = selected.value
     }
 </script>
