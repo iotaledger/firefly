@@ -9,7 +9,7 @@
 
 {#if $selectedAccount}
     <wallet-container
-        class="w-full h-full flex flex-nowrap p-8 relative flex-1
+        class="h-full flex flex-nowrap relative flex-1
         bg-gray-50 dark:bg-gray-900 justify-center items-center"
     >
         {#key $selectedAccount?.index}

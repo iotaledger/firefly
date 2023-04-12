@@ -104,10 +104,10 @@
 <Idle />
 <div class="dashboard-wrapper flex flex-row flex-auto w-full h-full">
     <Sidebar />
-    <div class="flex flex-col mt-9">
+    <div class="flex flex-col mt-16">
         <TopNavigation />
         <!-- Dashboard Pane -->
-        <div class="flex flex-col h-full dashboard-w">
+        <div class="flex flex-col h-full dashboard-w p-8 pt-0">
             <svelte:component this={tabs[$dashboardRoute]} on:next={$appRouter.next} />
         </div>
         <NetworkSideDrawer />

@@ -17,7 +17,7 @@
     }
 </script>
 
-<drawer class="fixed top-0 left-0 w-screen h-screen">
+<drawer class="fixed top-0 left-0 w-screen h-screen z-50">
     <overlay
         in:fade|local={{ duration: DRAWER_ANIMATION_DURATION_MS }}
         out:fade|local={{ duration: DRAWER_ANIMATION_DURATION_MS }}
