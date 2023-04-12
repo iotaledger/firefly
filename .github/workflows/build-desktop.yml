@@ -3,18 +3,29 @@ name: Build Desktop
 on:
     workflow_dispatch:
         inputs:
+            os:
+                description: 'OS'
+                required: true
+                type: choice
+                options:
+                - macos-11
+                - ubuntu-20.04
+                - windows-2019
             debugElectronBuilder:
                 description: 'Verbose electron-builder output'
                 required: true
-                default: 'true'
+                type: choice
+                options:
+                - 'true'
+                - 'false'
             stage:
-                description: 'Stage (alpha, beta, or prod)'
+                description: 'Stage'
                 required: true
-                default: 'alpha'
-            os:
-                description: 'OS (macos-11, ubuntu-20.04, windows-2019)'
-                required: true
-                default: 'macos-11'
+                type: choice
+                options:
+                - alpha
+                - beta
+                - prod
 
 jobs:
     build:
