@@ -24,13 +24,25 @@
         [NetworkId.Custom]: 'settings',
     }
 
+    function getIconColor(networkId: NetworkId): string {
+        switch (networkId) {
+            case NetworkId.Iota:
+                return 'iota-highlight'
+            case NetworkId.Shimmer:
+                return 'shimmer-highlight'
+            case NetworkId.Testnet:
+                return 'blue-500'
+            case NetworkId.Custom:
+                return 'blue-500'
+        }
+    }
+
     function onNetworkSelectionClick(networkId: NetworkId): void {
         if (networkId !== NetworkId.Custom) {
+            const network = NETWORK?.[networkId]
             const clientOptions = getDefaultClientOptions(networkId)
-            updateOnboardingProfile({ clientOptions })
+            updateOnboardingProfile({ network, clientOptions })
         }
-        const network = NETWORK?.[networkId]
-        updateOnboardingProfile({ network })
         $networkSetupRouter.next()
     }
 
@@ -44,19 +56,6 @@
         }
         updateOnboardingProfile({ network: undefined })
     })
-
-    function getIconColor(networkId: NetworkId): string {
-        switch (networkId) {
-            case NetworkId.Iota:
-                return 'iota-highlight'
-            case NetworkId.Shimmer:
-                return 'shimmer-highlight'
-            case NetworkId.Testnet:
-                return 'blue-500'
-            case NetworkId.Custom:
-                return 'blue-500'
-        }
-    }
 </script>
 
 <OnboardingLayout allowBack={$profiles.length > 0} {onBackClick}>
