@@ -13,8 +13,8 @@
 </script>
 
 <svelte:window on:click={onClick} />
-<account-switcher class="block relative left-8 bg-white dark:bg-gray-800 rounded-lg p-2">
-    <button type="button" on:click={modal?.toggle} class="flex flex-row justify-center items-center space-x-2">
+<account-switcher class="block relative left-8 bg-white dark:bg-gray-800 rounded-lg">
+    <button type="button" on:click={modal?.toggle} class="flex flex-row justify-center items-center space-x-2 p-2">
         <AccountLabel account={$selectedAccount} />
         <icon-container class:rotate={isModalOpened}>
             <Icon height="18" width="18" icon={IconEnum.ChevronDown} classes="text-gray-800 dark:text-white" />
@@ -25,6 +25,7 @@
 
 <style lang="scss">
     account-switcher {
+        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.08);
         -webkit-app-region: none;
     }
 

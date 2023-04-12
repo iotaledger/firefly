@@ -19,6 +19,7 @@
     } from '@core/router'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { popupState } from '@auxiliary/popup'
+    import { isNetworkSideDrawerOpen } from '@core/network'
 
     let isBackButtonVisible = false
 
@@ -57,31 +58,48 @@
                 break
         }
     }
+
+    function onNetworkClick(): void {
+        $isNetworkSideDrawerOpen = true
+    }
 </script>
 
 <top-navigation class:disabled={$platform === PlatformOption.Windows && isPopupVisible}>
     {#if isBackButtonVisible}
-        <button type="button" on:click={onBackClick}>
+        <button type="button" class="back-button" on:click={onBackClick}>
             <Icon width="18" icon={IconEnum.ArrowLeft} classes="text-gray-800 dark:text-gray-500" />
             <Text overrideColor classes="text-gray-800 dark:text-gray-500">{localize('actions.back')}</Text>
         </button>
+    {:else}
+        <div />
     {/if}
+
     <AccountSwitcher />
+
+    <button type="button" class="network-button" on:click={onNetworkClick}>
+        <Icon width="22" icon={IconEnum.Network} primaryColor="white" />
+    </button>
 </top-navigation>
 
 <style type="text/scss">
     top-navigation {
-        @apply fixed flex flex-row justify-center items-center z-10 top-0 left-20;
-        @apply py-2 w-full;
-        width: calc(100% - 14rem);
+        @apply fixed flex flex-row justify-between items-center z-10 top-0 py-2 px-8;
+        width: calc(100% - 4.5rem);
+        height: 4rem;
 
         &.disabled {
             @apply opacity-50 pointer-events-none;
         }
 
-        button {
-            @apply absolute flex items-center left-2 gap-2 cursor-pointer;
+        .back-button {
+            @apply flex items-center left-2 gap-2 cursor-pointer;
             -webkit-app-region: none;
+        }
+
+        .network-button {
+            @apply flex items-center left-2 gap-2 cursor-pointer px-3 py-2 bg-white dark:bg-gray-800 text-gray-800 dark:text-white rounded-lg;
+            -webkit-app-region: none;
+            box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.08);
         }
     }
 </style>
