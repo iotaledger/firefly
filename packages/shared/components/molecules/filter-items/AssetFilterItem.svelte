@@ -1,13 +1,13 @@
 <script lang="ts">
     import { Dropdown } from 'shared/components'
-    import type { IDropdownChoice } from '@core/utils'
+    import type { IDropdownItem } from '@core/utils'
     import { visibleSelectedAccountAssets } from '@core/wallet'
     import { AssetFilterUnit } from '@core/utils/interfaces/filter'
 
     export let filterUnit: AssetFilterUnit
     const { baseCoin, nativeTokens } = $visibleSelectedAccountAssets
 
-    const choices: IDropdownChoice[] = [baseCoin, ...nativeTokens].map((choice) => ({
+    const choices: IDropdownItem<string>[] = [baseCoin, ...nativeTokens].map((choice) => ({
         label: choice.metadata.name,
         value: choice.metadata.name,
     }))
@@ -26,7 +26,7 @@
         }
     }
 
-    function onSelect(item): void {
+    function onSelect(item: IDropdownItem<string>): void {
         let asset = undefined
         if (item.value === baseCoin.metadata.name) {
             asset = baseCoin

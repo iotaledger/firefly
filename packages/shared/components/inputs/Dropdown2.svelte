@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { Icon, Text, Error, DropdownItem } from 'shared/components'
-    import { clickOutside, isNumberLetterOrPunctuation } from '@core/utils'
+    import { Icon, Text, Error } from 'shared/components'
+    import { IDropdownItem, clickOutside, isNumberLetterOrPunctuation } from '@core/utils'
 
     export let value: string
     export let label: string = ''
@@ -9,7 +9,7 @@
     export let disabled = false
     export let valueKey = 'label'
     export let sortItems = false
-    export let items: DropdownItem<unknown>[] = []
+    export let items: IDropdownItem<unknown>[] = []
     export let small = false
     export let contentWidth = false
     export let error = ''

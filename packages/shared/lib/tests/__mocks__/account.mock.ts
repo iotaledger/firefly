@@ -184,10 +184,6 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    getVotingPower(): Promise<string> {
-        throw new Error('Method not implemented.')
-    }
-
     incomingTransactions(): Promise<[string, Transaction][]> {
         throw new Error('Method not implemented.')
     }
@@ -272,13 +268,6 @@ export class AccountMock implements IAccount {
 
     sendAmount(
         addressesWithAmount: AddressWithAmount[],
-        transactionOptions?: TransactionOptions
-    ): Promise<Transaction> {
-        throw new Error('Method not implemented.')
-    }
-
-    sendMicroTransaction(
-        addressesWithMicroAmount: AddressWithMicroAmount[],
         transactionOptions?: TransactionOptions
     ): Promise<Transaction> {
         throw new Error('Method not implemented.')

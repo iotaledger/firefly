@@ -21,16 +21,6 @@ export class NetworkSetupRouter extends Subrouter<NetworkSetupRoute> {
         const _onboardingProfile = get(onboardingProfile)
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
-            case NetworkSetupRoute.ChooseProtocol: {
-                const isDeveloperProfile = _onboardingProfile?.isDeveloperProfile
-                if (isDeveloperProfile) {
-                    nextRoute = NetworkSetupRoute.ChooseNetwork
-                    break
-                } else {
-                    this.parentRouter.next()
-                    return
-                }
-            }
             case NetworkSetupRoute.ChooseNetwork: {
                 const networkType = _onboardingProfile?.networkType ?? NetworkType.Devnet
                 if (networkType === NetworkType.PrivateNet) {

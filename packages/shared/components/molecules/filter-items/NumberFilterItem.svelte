@@ -1,20 +1,20 @@
 <script lang="ts">
     import { Dropdown, Icon, Text, NumberInput } from 'shared/components'
     import { localize } from '@core/i18n'
-    import type { IDropdownChoice } from '@core/utils'
+    import type { IDropdownItem } from '@core/utils'
     import { NumberFilterUnit } from '@core/utils/interfaces/filter'
     import { NumberFilterOption } from '@core/utils/enums/filters'
 
     export let filterUnit: NumberFilterUnit
 
-    const choices: IDropdownChoice[] = filterUnit.choices.map((choice) => ({
+    const choices: IDropdownItem<NumberFilterOption>[] = filterUnit.choices.map((choice) => ({
         label: localize(`${filterUnit.localeKey}.${choice}`),
         value: choice,
     }))
 
     $: value = localize(`${filterUnit.localeKey}.${filterUnit.selected}`)
 
-    function onSelect(item): void {
+    function onSelect(item: IDropdownItem<NumberFilterOption>): void {
         filterUnit.selected = item.value
 
         switch (filterUnit.selected) {
