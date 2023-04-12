@@ -1,4 +1,5 @@
 export * from './checkActiveProfileAuth'
+export * from './getBaseToken'
 export * from './getCoinType'
 export * from './loadAccounts'
 export * from './loadPersistedProfileIntoActiveProfile'

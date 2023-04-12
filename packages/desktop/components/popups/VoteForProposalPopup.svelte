@@ -4,9 +4,7 @@
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
     import { selectedAccount } from '@core/account/stores'
     import { localize } from '@core/i18n'
-    import { BASE_TOKEN } from '@core/network/constants'
-    import { checkActiveProfileAuth } from '@core/profile/actions'
-    import { activeProfile } from '@core/profile/stores'
+    import { checkActiveProfileAuth, getBaseToken } from '@core/profile/actions'
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
     import { vote } from '@contexts/governance/actions'
     import { ABSTAIN_VOTE_VALUE } from '@contexts/governance/constants'
@@ -15,10 +13,7 @@
 
     export let selectedAnswerValues: number[]
 
-    $: formattedVotingPower = formatTokenAmountBestMatch(
-        Number($selectedAccount?.votingPower),
-        BASE_TOKEN[$activeProfile.networkProtocol]
-    )
+    $: formattedVotingPower = formatTokenAmountBestMatch(Number($selectedAccount?.votingPower), getBaseToken())
     $: hasVotingPower = Number($selectedAccount?.votingPower) > 0
 
     $: hasGovernanceTransactionInProgress =
