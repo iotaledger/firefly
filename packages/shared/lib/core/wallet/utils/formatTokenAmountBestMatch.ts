@@ -4,6 +4,7 @@ import { getIotaUnit, IOTA_UNIT_MAP } from '@core/utils'
 import { TokenMetadata } from '../types'
 import { formatTokenAmountDefault } from './formatTokenAmountDefault'
 import { TokenStandard } from '../enums'
+import { getUnitFromTokenMetadata } from './getUnitFromTokenMetadata'
 
 export function formatTokenAmountBestMatch(
     amount: number,
@@ -23,12 +24,10 @@ export function formatTokenAmountBestMatch(
         amountWithoutUnit = formatNumber(convertedAmount, 0, maxDecimals, undefined, true)
         amountWithUnit = amountWithoutUnit + ' ' + metricUnit + tokenMetadata.unit
     } else {
+        const unit = getUnitFromTokenMetadata(tokenMetadata)
         amountWithoutUnit = !isNaN(amount) ? formatTokenAmountDefault(amount, tokenMetadata) : '0'
-        amountWithUnit = amountWithoutUnit + (isBaseToken && tokenMetadata?.unit ? ' ' + tokenMetadata.unit : '')
+        amountWithUnit = amountWithoutUnit + (unit ? ' ' + unit : '')
     }
 
-    if (withUnit) {
-        return amountWithUnit
-    }
-    return amountWithoutUnit
+    return withUnit ? amountWithUnit : amountWithoutUnit
 }

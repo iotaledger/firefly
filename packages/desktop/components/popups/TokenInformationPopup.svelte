@@ -10,6 +10,7 @@
         NotVerifiedStatus,
         VerifiedStatus,
         NewTransactionType,
+        getUnitFromTokenMetadata,
     } from '@core/wallet'
     import { openPopup, PopupId, updatePopupProps } from '@auxiliary/popup'
     import { AssetIcon, Button, Text, TextHint, AssetActionsButton, KeyValueBox, FontWeight } from 'shared/components'
@@ -80,7 +81,7 @@
     <div class="space-y-3 flex flex-col items-center justify-center">
         <AssetIcon {asset} large showVerifiedBadgeOnly />
         <Text type="h2" fontWeight={FontWeight.bold}>
-            {asset?.metadata?.tickerSymbol ?? asset?.metadata?.unit}
+            {getUnitFromTokenMetadata(asset?.metadata)}
         </Text>
     </div>
 

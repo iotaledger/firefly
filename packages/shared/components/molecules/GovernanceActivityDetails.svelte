@@ -1,6 +1,6 @@
 <script lang="ts">
     import { AmountBox, ActivityInclusionStatusPill, Text, FontWeight } from 'shared/components'
-    import { formatTokenAmountDefault, getAssetFromPersistedAssets } from '@core/wallet'
+    import { formatTokenAmountDefault, getAssetFromPersistedAssets, getUnitFromTokenMetadata } from '@core/wallet'
     import { GovernanceActivity } from '@core/wallet'
     import { getCoinType, getBaseToken } from '@core/profile'
     import { getVotingEvent } from '@contexts/governance/actions'
@@ -11,7 +11,11 @@
     const asset = getAssetFromPersistedAssets(getCoinType())
 
     $: amount = activity.votingPowerDifference
-        ? formatTokenAmountDefault(Number(activity.votingPowerDifference), getBaseToken(), asset?.metadata?.unit)
+        ? formatTokenAmountDefault(
+              Number(activity.votingPowerDifference),
+              getBaseToken(),
+              getUnitFromTokenMetadata(asset?.metadata)
+          )
         : ''
     $: localizationKey = 'governance.' + activity.governanceAction
     $: activity.participation?.eventId, setProposalName()
@@ -30,7 +34,7 @@
 
 <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-3">
     {#if amount}
-        <AmountBox {amount} unit={asset?.metadata?.unit} {asset} />
+        <AmountBox {amount} {asset} />
     {/if}
     <governance-status class="flex flex-row w-full space-x-2 justify-center">
         <ActivityInclusionStatusPill {localizationKey} inclusionState={activity.inclusionState} />

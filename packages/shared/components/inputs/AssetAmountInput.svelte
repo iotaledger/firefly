@@ -9,6 +9,8 @@
         IAsset,
         formatTokenAmountDefault,
         visibleSelectedAccountAssets,
+        getUnitFromTokenMetadata,
+        TokenStandard,
     } from '@core/wallet'
     import { IOTA_UNIT_MAP } from '@core/utils'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
@@ -32,14 +34,16 @@
     $: isFocused && (error = '')
 
     let allowedDecimals = 0
-    $: if (!asset?.metadata?.useMetricPrefix) {
-        if (unit === asset?.metadata.unit) {
+    $: if (asset?.metadata?.standard === TokenStandard.BaseCoin) {
+        if (asset?.metadata?.useMetricPrefix) {
+            allowedDecimals = IOTA_UNIT_MAP?.[unit?.substring(0, 1)] ?? 0
+        } else if (unit === asset?.metadata.unit) {
             allowedDecimals = Math.min(asset?.metadata.decimals, 18)
         } else if (unit === asset?.metadata?.subunit) {
             allowedDecimals = 0
         }
-    } else if (asset?.metadata?.useMetricPrefix) {
-        allowedDecimals = IOTA_UNIT_MAP?.[unit?.substring(0, 1)] ?? 0
+    } else {
+        allowedDecimals = Math.min(asset?.metadata.decimals, 18)
     }
 
     $: availableBalance = asset?.balance?.available + votingPower
@@ -48,7 +52,7 @@
     $: max = parseCurrency(formatTokenAmountDefault(availableBalance, asset?.metadata, unit, false))
 
     function onClickAvailableBalance(): void {
-        const isRawAmount = asset?.metadata?.decimals && asset?.metadata?.unit
+        const isRawAmount = asset?.metadata?.decimals && getUnitFromTokenMetadata(asset?.metadata)
         if (isRawAmount) {
             const parsedAmount = formatTokenAmountDefault(availableBalance, asset?.metadata, unit, false)
             amount = parsedAmount
@@ -69,8 +73,8 @@
         } else if (isAmountZeroOrNull) {
             error = localize('error.send.amountInvalidFormat')
         } else if (
-            (unit === asset?.metadata?.subunit ||
-                (unit === asset?.metadata?.unit && asset?.metadata?.decimals === 0)) &&
+            ((asset?.metadata?.standard === TokenStandard.BaseCoin && unit === asset?.metadata?.subunit) ||
+                (unit === getUnitFromTokenMetadata(asset?.metadata) && asset?.metadata?.decimals === 0)) &&
             Number.parseInt(amount, 10).toString() !== amount
         ) {
             error = localize('error.send.amountNoFloat')
@@ -103,7 +107,7 @@
             clearBorder
             {disabled}
         />
-        {#if asset?.metadata?.unit}
+        {#if getUnitFromTokenMetadata(asset?.metadata)}
             <UnitInput bind:unit bind:isFocused {disabled} tokenMetadata={asset?.metadata} />
         {/if}
     </div>
