@@ -1,12 +1,12 @@
 import { formatNumber } from '@core/i18n'
 import { getIotaUnit, IOTA_UNIT_MAP } from '@core/utils'
 
-import { ITokenMetadata } from '../interfaces'
+import { TokenMetadata } from '../interfaces'
 import { formatTokenAmountDefault } from './formatTokenAmountDefault'
 
 export function formatTokenAmountBestMatch(
     amount: number,
-    tokenMetadata: ITokenMetadata,
+    tokenMetadata: TokenMetadata,
     overrideDecimalPlaces?: number,
     withUnit = true
 ): string {

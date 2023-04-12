@@ -1,7 +1,7 @@
-import { ITokenMetadata } from '@core/wallet'
+import { TokenMetadata } from '@core/wallet'
 import { NetworkProtocol } from '../enums'
 
-export const BASE_TOKEN: Readonly<{ [key in NetworkProtocol]: ITokenMetadata }> = {
+export const BASE_TOKEN: Readonly<{ [key in NetworkProtocol]: TokenMetadata }> = {
     [NetworkProtocol.IOTA]: {
         name: 'IOTA',
         tickerSymbol: 'MIOTA',

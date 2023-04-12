@@ -1,4 +1,4 @@
-export interface ITokenMetadata {
+export interface TokenMetadata {
     name: string
     unit: string
     decimals: number

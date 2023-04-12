@@ -1,10 +1,10 @@
 import { formatNumber } from '@core/i18n'
 
-import { ITokenMetadata } from '../interfaces'
+import { TokenMetadata } from '../interfaces'
 
 export function formatTokenAmountDefault(
     amount: number,
-    tokenMetadata: ITokenMetadata,
+    tokenMetadata: TokenMetadata,
     unit?: string,
     useGrouping: boolean = true
 ): string {

@@ -1,8 +1,8 @@
 import { formatNumber } from '@core/i18n'
 
-import { ITokenMetadata } from '../interfaces'
+import { TokenMetadata } from '../interfaces'
 
-export function formatTokenAmountPrecise(amount: number, tokenMetadata: ITokenMetadata): string {
+export function formatTokenAmountPrecise(amount: number, tokenMetadata: TokenMetadata): string {
     const formattedAmount = formatNumber(amount, 0, 0, 0, true)
     if (tokenMetadata?.useMetricPrefix) {
         return formattedAmount + ' ' + tokenMetadata?.unit
