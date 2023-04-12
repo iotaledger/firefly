@@ -1,4 +1,36 @@
 <script lang="ts">
+    import { PopupId } from '@auxiliary/popup'
+    import { openPopup } from '@auxiliary/popup/actions'
+    import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
+    import { time } from '@core/app'
+    import { openUrlInBrowser } from '@core/app/utils'
+    import { localize } from '@core/i18n'
+    import { ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
+    import {
+        INft,
+        NftDownloadMetadata,
+        allAccountNfts,
+        convertAndFormatNftMetadata,
+        getNftByIdFromAllAccountNfts,
+        selectedNftId,
+    } from '@core/nfts'
+    import { getBaseToken } from '@core/profile/actions'
+    import { activeProfile } from '@core/profile/stores'
+    import { collectiblesRouter } from '@core/router/routers'
+    import { truncateString } from '@core/utils'
+    import {
+        ADDRESS_TYPE_ALIAS,
+        ADDRESS_TYPE_ED25519,
+        ADDRESS_TYPE_NFT,
+        ActivityType,
+        OUTPUT_TYPE_NFT,
+        formatTokenAmountPrecise,
+        getBech32AddressFromAddressTypes,
+        getHexAddressFromAddressTypes,
+        getNftId,
+        getTimeDifference,
+    } from '@core/wallet'
+    import { NewTransactionType, selectedAccountActivities, setNewTransactionDetails } from '@core/wallet/stores'
     import {
         Alert,
         Button,
@@ -11,40 +43,6 @@
         Text,
     } from '@ui'
     import { FontWeight, TextType } from '@ui/enums'
-
-    import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
-    import { time } from '@core/app'
-    import { openUrlInBrowser } from '@core/app/utils'
-    import { localize } from '@core/i18n'
-    import { ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
-    import { BASE_TOKEN } from '@core/network/constants'
-    import {
-        allAccountNfts,
-        convertAndFormatNftMetadata,
-        getNftByIdFromAllAccountNfts,
-        INft,
-        NftDownloadMetadata,
-        selectedNftId,
-    } from '@core/nfts'
-    import { activeProfile } from '@core/profile/stores'
-    import { collectiblesRouter } from '@core/router/routers'
-    import { truncateString } from '@core/utils'
-    import {
-        ActivityType,
-        ADDRESS_TYPE_ALIAS,
-        ADDRESS_TYPE_ED25519,
-        ADDRESS_TYPE_NFT,
-        formatTokenAmountPrecise,
-        getBech32AddressFromAddressTypes,
-        getHexAddressFromAddressTypes,
-        getNftId,
-        getTimeDifference,
-        OUTPUT_TYPE_NFT,
-    } from '@core/wallet'
-    import { NewTransactionType, selectedAccountActivities, setNewTransactionDetails } from '@core/wallet/stores'
-
-    import { openPopup } from '@auxiliary/popup/actions'
-    import { PopupId } from '@auxiliary/popup'
 
     let modal: Modal
 
@@ -123,10 +121,7 @@
             (o) => o.output.type === OUTPUT_TYPE_NFT && getNftId(o.output.nftId, o.outputId) === id
         )
 
-        storageDeposit = formatTokenAmountPrecise(
-            Number(recentNftOutput?.output.amount ?? 0),
-            BASE_TOKEN[$activeProfile?.networkProtocol]
-        )
+        storageDeposit = formatTokenAmountPrecise(Number(recentNftOutput?.output.amount ?? 0), getBaseToken())
     }
 
     function returnIfNftWasSent(ownedNfts: INft[], currentTime: Date): void {
