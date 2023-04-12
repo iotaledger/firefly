@@ -1,29 +1,24 @@
 <script lang="ts">
+    import { IPersistedProfile } from '@core/profile'
+    import { getInitials as _getInitials } from '@core/utils'
     import { DeveloperIndicatorPill, Icon, NetworkIconBadge, StrongholdBadge, Text, TextType } from 'shared/components'
 
-    import { getInitials as _getInitials } from '@core/utils'
-    import { NetworkProtocol, NetworkType } from '@core/network'
-
-    export let name: string = ''
-    export let id: string = ''
-    export let networkType: NetworkType = undefined
-    export let networkProtocol: NetworkProtocol = undefined
+    export let profile: IPersistedProfile
     export let classes: string = undefined
     export let bgColor: string = ''
-    export let isDeveloper: boolean = false
     export let isLedgerProfile: boolean = false
     export let updateRequired: boolean = false
 
-    export let onClick: undefined | ((id: string) => void) = undefined
+    export let onClick: undefined | ((profileId: string) => void) = undefined
 
     const slots = $$props.$$slots
 
     function onProfileClick(): void {
-        onClick && onClick(id)
+        onClick && onClick(profile?.id)
     }
 
     function getInitials(): string {
-        const initials = _getInitials(name, 1)
+        const initials = _getInitials(profile.name, 1)
         if (initials.length === 1) {
             return initials
         } else {
@@ -47,7 +42,7 @@
                 {/if}
             </div>
             {#if !updateRequired}
-                <NetworkIconBadge {networkType} {networkProtocol} />
+                <NetworkIconBadge network={profile?.network} />
             {:else}
                 <StrongholdBadge />
             {/if}
@@ -61,9 +56,11 @@
                     height={14}
                 />
             {/if}
-            <Text type={TextType.h5} classes="text-center truncate">{name}</Text>
+            {#if profile?.name}
+                <Text type={TextType.h5} classes="text-center truncate">{profile?.name}</Text>
+            {/if}
         </div>
-        {#if isDeveloper}
+        {#if profile?.isDeveloperProfile}
             <DeveloperIndicatorPill />
         {/if}
     </div>
