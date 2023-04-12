@@ -22,9 +22,9 @@ export async function initialiseOnboardingFlow(options: IOnboardingInitialisatio
     await unsubscribeFromWalletApiEvents()
     await destroyProfileManager()
 
-    const { isDeveloperProfile, networkProtocol, networkType } = options
+    const { isDeveloperProfile, networkType } = options
 
-    await initialiseOnboardingProfile(isDeveloperProfile, networkProtocol, true)
+    await initialiseOnboardingProfile(isDeveloperProfile, true)
 
     if (networkType) {
         updateOnboardingProfile({ networkType })

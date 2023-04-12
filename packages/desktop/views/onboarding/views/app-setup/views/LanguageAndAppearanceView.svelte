@@ -1,18 +1,18 @@
 <script lang="ts">
-    import { onMount } from 'svelte'
-    import { Animation, Button, ButtonRadio, Dropdown, Text } from '@ui'
     import { OnboardingLayout } from '@components'
-    import { appSettings, AppTheme, hasCompletedAppSetup, mobile, shouldBeDarkMode } from '@core/app'
-    import { localize, setLanguage, SUPPORTED_LOCALES } from '@core/i18n'
-    import { appSetupRouter } from '@core/router'
-    import type { IDropdownItem } from '@core/utils'
     import {
         initialiseOnboardingProfile,
         onboardingProfile,
         shouldBeDeveloperProfile,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
-    import { NetworkProtocol, NetworkType } from '@core/network'
+    import { AppTheme, appSettings, hasCompletedAppSetup, mobile, shouldBeDarkMode } from '@core/app'
+    import { SUPPORTED_LOCALES, localize, setLanguage } from '@core/i18n'
+    import { NetworkType } from '@core/network'
+    import { appSetupRouter } from '@core/router'
+    import type { IDropdownItem } from '@core/utils'
+    import { Animation, Button, ButtonRadio, Dropdown, Text } from '@ui'
+    import { onMount } from 'svelte'
 
     /**
      * NOTE: It is necessary to use locale directly rather than the
@@ -55,10 +55,7 @@
 
     onMount(async () => {
         _clonedVariable = appTheme
-        await initialiseOnboardingProfile(
-            $onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile(),
-            NetworkProtocol.Shimmer
-        )
+        await initialiseOnboardingProfile($onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile())
         if (!shouldBeDeveloperProfile()) {
             updateOnboardingProfile({ networkType: NetworkType.Mainnet })
         }
