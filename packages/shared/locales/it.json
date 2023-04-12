@@ -323,6 +323,10 @@
                 "title": "Dimensione massima media",
                 "description": "I media NFT con dimensioni superiori a questo limite non verranno scaricati e verrà invece visualizzato un segnaposto che rappresenta il tipo di media"
             },
+            "refreshNftMedia": {
+                "title": "Refresh NFT media",
+                "description": "NFT media cached for this account will be deleted and then downloaded again"
+            },
             "changePassword": {
                 "title": "Modifica la password",
                 "description": "La tua password è usata per proteggere i tuoi portafogli. Devi usare una password forte per proteggere i tuoi fondi"
@@ -1174,6 +1178,10 @@
             "iota": "Migrare a Chrysalis o ripristinare un portafoglio esistente",
             "shimmer": "Ripristina un profilo Shimmer esistente"
         },
+        "refreshNftMedia": {
+            "title": "Refresh NFT media",
+            "description": "Do you want to delete and re-download all NFT media for this account?"
+        },
         "createWallet": "Crea un nuovo profilo {protocol}",
         "createWalletDescription": "Crea un nuovo profilo su {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
         "claimShimmer": "Rivendica ricompense di staking Shimmer",
@@ -1219,6 +1227,7 @@
         "unlock": "Sblocca",
         "updateFirefly": "Aggiorna Firefly",
         "restartNow": "Riavvia ora",
+        "refresh": "Refresh",
         "saveBackup": "Salva un backup di Stronghold",
         "customizeAcount": "Personalizza wallet",
         "hideAccount": "Nascondi wallet",

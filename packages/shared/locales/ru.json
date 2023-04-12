@@ -323,6 +323,10 @@
                 "title": "Максимальный размер медиафайла",
                 "description": "Медиафайлы NFT с размерами, превышающими этот предел, не будут загружены, и вместо них будет отображено место, представляющее тип медиафайла"
             },
+            "refreshNftMedia": {
+                "title": "Refresh NFT media",
+                "description": "NFT media cached for this account will be deleted and then downloaded again"
+            },
             "changePassword": {
                 "title": "Изменить пароль",
                 "description": "Ваш пароль используется для защиты ваших кошельков. Вы должны использовать надежный пароль для защиты своих средств"
@@ -1174,6 +1178,10 @@
             "iota": "Перенос на Chrysalis или восстановление существующего кошелька",
             "shimmer": "Восстановить существующий профиль Shimmer"
         },
+        "refreshNftMedia": {
+            "title": "Refresh NFT media",
+            "description": "Do you want to delete and re-download all NFT media for this account?"
+        },
         "createWallet": "Создать новый профиль {protocol}",
         "createWalletDescription": "Создайте новый профиль, работающий на {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
         "claimShimmer": "Запросить вознаграждение за ставки в Shimmer",
@@ -1219,6 +1227,7 @@
         "unlock": "Разблокировать",
         "updateFirefly": "Обновить Firefly",
         "restartNow": "Перезагрузить сейчас",
+        "refresh": "Refresh",
         "saveBackup": "Сохранить резервную копию Stronghold",
         "customizeAcount": "Персонализация кошелька",
         "hideAccount": "Спрятать кошелек",

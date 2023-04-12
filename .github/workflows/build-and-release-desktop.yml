@@ -9,11 +9,18 @@ on:
             debugElectronBuilder:
                 description: 'Verbose electron-builder output'
                 required: true
-                default: 'false'
+                type: choice
+                options:
+                - 'false'
+                - 'true'
             stage:
-                description: 'Stage (alpha, beta, or prod)'
+                description: 'Stage'
                 required: true
-                default: 'prod'
+                type: choice
+                options:
+                - alpha
+                - beta
+                - prod
 
 jobs:
     setup:
