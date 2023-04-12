@@ -3,7 +3,7 @@
     import { activeProfile } from '@core/profile'
     import { NETWORK_ADDRESS, DestinationNetwork } from '@core/layer-2'
     import { validateBech32Address } from '@core/utils'
-    import { networkHrp } from '@core/network'
+    import { networkHrp } from '@core/profile/stores'
 
     const readonlyAttribute = $activeProfile?.isDeveloperProfile ? {} : { readonly: true }
     const networkAddresses = NETWORK_ADDRESS[$activeProfile.networkType]

@@ -21,10 +21,10 @@
         values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },
     })
 
-    function onProfileSetupSelectionClick(setupType: ProfileSetupType): void {
+    async function onProfileSetupSelectionClick(setupType: ProfileSetupType): Promise<void> {
         // We dont support Ledger profiles on mobile yet, so we hardcode the type to Software
         updateOnboardingProfile({ setupType, type: ProfileType.Software })
-        initialiseProfileManagerFromOnboardingProfile()
+        await initialiseProfileManagerFromOnboardingProfile()
         $profileSetupRouter.next()
     }
 
@@ -34,6 +34,7 @@
     }
 
     onMount(async () => {
+        await destroyProfileManager()
         if (!$onboardingProfile?.id) {
             await initialiseOnboardingProfile(
                 $onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile(),
@@ -48,7 +49,6 @@
             )
             updateOnboardingProfile({ clientOptions })
         }
-        await destroyProfileManager()
         updateOnboardingProfile({
             mustVisitProfileName: true,
             setupType: null,

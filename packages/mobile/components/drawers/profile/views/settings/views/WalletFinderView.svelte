@@ -7,11 +7,11 @@
     import { DEFAULT_SYNC_OPTIONS, sumBalanceForAccounts } from '@core/account'
     import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile, ledgerNanoStatus } from '@core/ledger'
-    import { BASE_TOKEN } from '@core/network'
     import { loadNftsForActiveProfile } from '@core/nfts'
     import {
         activeAccounts,
         activeProfile,
+        getBaseToken,
         DEFAULT_ACCOUNT_RECOVERY_CONFIGURATION,
         isActiveLedgerProfile,
         isSoftwareProfile,
@@ -121,7 +121,7 @@
             />
             <KeyValueBox
                 keyText={localize('popups.walletFinder.totalWalletBalance')}
-                valueText={formatTokenAmountBestMatch(totalBalance, BASE_TOKEN[$activeProfile.networkProtocol])}
+                valueText={formatTokenAmountBestMatch(totalBalance, getBaseToken())}
             />
         </div>
         {#if hasUsedWalletFinder}

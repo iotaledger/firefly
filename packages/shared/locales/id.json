@@ -323,6 +323,10 @@
                 "title": "Maximum media size",
                 "description": "NFT media with sizes greater than this limit will not be downloaded and a placeholder representing the media type will be displayed instead"
             },
+            "refreshNftMedia": {
+                "title": "Refresh NFT media",
+                "description": "NFT media cached for this account will be deleted and then downloaded again"
+            },
             "changePassword": {
                 "title": "Ubah kata sandinya",
                 "description": "Password Anda digunakan untuk mengamankan dompet Anda. Anda perlu menggunakan password yang kuat untuk melindungi dana Anda"
@@ -1174,6 +1178,10 @@
             "iota": "Migrate to Chrysalis or restore an existing wallet",
             "shimmer": "Restore an existing Shimmer profile"
         },
+        "refreshNftMedia": {
+            "title": "Refresh NFT media",
+            "description": "Do you want to delete and re-download all NFT media for this account?"
+        },
         "createWallet": "Create a new {protocol} profile",
         "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
         "claimShimmer": "Claim Shimmer staking rewards",
@@ -1219,6 +1227,7 @@
         "unlock": "Buka",
         "updateFirefly": "Memperbarui Firefly",
         "restartNow": "Start ulang sekarang",
+        "refresh": "Refresh",
         "saveBackup": "Simpan cadangan Stronghold",
         "customizeAcount": "Penyesuaian dompet",
         "hideAccount": "Sembunyikan dompet",
