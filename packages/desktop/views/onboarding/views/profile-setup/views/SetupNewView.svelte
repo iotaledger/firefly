@@ -14,6 +14,8 @@
     } from '@contexts/onboarding'
     import { profileSetupRouter } from '@core/router'
 
+    $: networkId = $onboardingProfile?.network?.id
+
     async function onProfileTypeSelectionClick(type: ProfileType): Promise<void> {
         updateOnboardingProfile({ type })
         await initialiseProfileManagerFromOnboardingProfile()
@@ -44,20 +46,16 @@
                 ? localize('views.onboarding.profileSetup.setupNew.softwareAccount.description')
                 : ''}
             icon="file"
-            hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.newProfile?.softwareProfile?.hidden}
-            disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.newProfile?.softwareProfile?.enabled}
+            hidden={features?.onboarding?.[networkId]?.newProfile?.softwareProfile?.hidden}
+            disabled={!features?.onboarding?.[networkId]?.newProfile?.softwareProfile?.enabled}
             onClick={() => onProfileTypeSelectionClick(ProfileType.Software)}
         />
         <OnboardingButton
             primaryText={localize('views.onboarding.profileSetup.setupNew.ledgerAccount.title')}
             secondaryText={!$mobile ? localize('views.onboarding.profileSetup.setupNew.ledgerAccount.description') : ''}
             icon="chip"
-            hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.newProfile?.ledgerProfile?.hidden}
-            disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.newProfile?.ledgerProfile?.enabled}
+            hidden={features?.onboarding?.[networkId]?.newProfile?.ledgerProfile?.hidden}
+            disabled={!features?.onboarding?.[networkId]?.newProfile?.ledgerProfile?.enabled}
             onClick={() => onProfileTypeSelectionClick(ProfileType.Ledger)}
         />
     </div>
