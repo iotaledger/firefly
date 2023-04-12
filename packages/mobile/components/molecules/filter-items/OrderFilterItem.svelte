@@ -8,12 +8,12 @@
 
     export let filterUnit: OrderFilterUnit
 
-    const choices: IDropdownItem[] = filterUnit.choices.map((choice) => ({
+    const choices: IDropdownItem<string>[] = filterUnit.choices.map((choice) => ({
         label: localize(`${filterUnit.localeKey}.${choice}`),
         value: choice,
     }))
 
-    const ascDescChoices: IDropdownItem[] = [OrderOption.Asc, OrderOption.Desc].map((choice) => ({
+    const ascDescChoices: IDropdownItem<OrderOption>[] = [OrderOption.Asc, OrderOption.Desc].map((choice) => ({
         label: localize(`filters.ascDesc.${choice}`),
         value: choice,
     }))

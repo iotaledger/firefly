@@ -5,7 +5,7 @@
     import { activeProfile, updateActiveProfileSettings } from '@core/profile'
     import type { IDropdownItem } from '@core/utils'
 
-    let currencyList: IDropdownItem[]
+    let currencyList: IDropdownItem<MarketCurrency>[]
     $: currencyList = Object.values(MarketCurrency)
         .map((currency) => ({ value: currency, label: currency.toUpperCase() }))
         .sort()

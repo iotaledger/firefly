@@ -10,7 +10,7 @@
 
     export let filterUnit: NumberFilterUnit
 
-    const choices: IDropdownItem[] = filterUnit.choices.map((choice) => ({
+    const choices: IDropdownItem<NumberFilterOption>[] = filterUnit.choices.map((choice) => ({
         label: localize(`${filterUnit.localeKey}.${choice}`),
         value: choice,
     }))

@@ -10,7 +10,7 @@
         DEFAULT_PERSISTED_PROFILE_OBJECT.settings.lockScreenTimeoutInMinutes
     $: selectedLockTimeout, updateActiveProfileSettings({ lockScreenTimeoutInMinutes: selectedLockTimeout })
 
-    function lockScreenTimeoutOptions(): IDropdownItem[] {
+    function lockScreenTimeoutOptions(): IDropdownItem<number>[] {
         return [1, 5, 10, 30, 60].map((time) => ({
             value: time,
             label: assignTimeoutOptionLabel(time),

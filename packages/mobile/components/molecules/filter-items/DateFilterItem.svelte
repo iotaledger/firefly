@@ -11,12 +11,12 @@
 
     export let filterUnit: DateFilterUnit
 
-    const choices: IDropdownItem[] = filterUnit.choices.map((choice) => ({
+    const choices: IDropdownItem<DateFilterOption>[] = filterUnit.choices.map((choice) => ({
         label: localize(`${filterUnit.localeKey}.${choice}`),
         value: choice,
     }))
 
-    const unitChoices: IDropdownItem[] = Object.keys(DateUnit).map((val) => ({
+    const unitChoices: IDropdownItem<string>[] = Object.keys(DateUnit).map((val) => ({
         label: localize(`${filterUnit.localeKey}.${val}`),
         value: val,
     }))
