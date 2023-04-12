@@ -102,7 +102,7 @@
 </script>
 
 <Idle />
-<div class="dashboard-wrapper flex flex-row flex-auto w-full h-full">
+<div class="dashboard-wrapper flex flex-row flex-auto w-full h-full bg-gray-50 dark:bg-gray-900">
     <Sidebar />
     <div class="flex flex-col mt-16">
         <TopNavigation />

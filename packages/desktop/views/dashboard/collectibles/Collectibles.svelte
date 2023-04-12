@@ -6,7 +6,7 @@
     $: $selectedAccountIndex !== undefined && $collectiblesRouter.reset()
 </script>
 
-<div class="h-full flex flex-col flex-nowrap relative flex-1 bg-gray-50 dark:bg-gray-900">
+<div class="h-full flex flex-col flex-nowrap relative flex-1">
     {#if $collectiblesRoute === CollectiblesRoute.Gallery}
         <CollectiblesGalleryView />
     {/if}
