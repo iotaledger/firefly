@@ -3,7 +3,7 @@
     import { IDropdownChoice, clickOutside, isNumberLetterOrPunctuation } from '@core/utils'
     import { FontWeight, Icon, Text, TextPropTypes, TextType } from 'shared/components'
 
-    export let value: string
+    export let value: unknown
     export let label: string
     export let placeholder: string = ''
     export let disabled = false
@@ -35,7 +35,7 @@
 
     export function handleSelect(item: IDropdownChoice<unknown>): void {
         selectedItem = item
-        value = String(item.value)
+        value = item.value
         onSelect && onSelect(item)
     }
 

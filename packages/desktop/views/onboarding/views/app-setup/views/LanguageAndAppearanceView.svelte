@@ -40,7 +40,7 @@
         segments = SWITCH_SEGMENTS
     }
 
-    function onLanguageSelectionClick(item: IDropdownChoice<string>): void {
+    function onLanguageChange(item: IDropdownChoice<string>): void {
         setLanguage(item)
     }
 
@@ -78,7 +78,7 @@
                 {#each languageList as language}
                     <button
                         class="relative flex items-center p-2 w-full whitespace-nowrap rounded-md"
-                        on:click={() => onLanguageSelectionClick(language)}
+                        on:click={() => onLanguageChange(language)}
                         class:active={language?.label === SUPPORTED_LOCALES[$appSettings.language]}
                     >
                         <Text type="p" smaller>{language?.label}</Text>
@@ -89,10 +89,10 @@
             <div class="mb-8 flex flex-col">
                 <Text type="p" secondary classes="mb-2" smaller>{localize('general.language')}</Text>
                 <Dropdown
-                    sortItems
-                    onSelect={onLanguageSelectionClick}
                     value={SUPPORTED_LOCALES[$appSettings.language]}
                     items={languageList}
+                    sortItems
+                    onSelect={onLanguageChange}
                     enableTyping
                 />
             </div>

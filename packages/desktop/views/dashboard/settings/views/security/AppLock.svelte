@@ -4,7 +4,7 @@
     import { activeProfile, DEFAULT_PERSISTED_PROFILE_OBJECT, updateActiveProfileSettings } from '@core/profile'
     import type { IDropdownChoice } from '@core/utils'
 
-    function updateLockTimeout(option: IDropdownChoice<number>): void {
+    function onLockScreenTimeoutChange(option: IDropdownChoice<number>): void {
         updateActiveProfileSettings({ lockScreenTimeoutInMinutes: option.value })
     }
 
@@ -27,10 +27,8 @@
 <Text type="h4" classes="mb-3">{localize('views.settings.appLock.title')}</Text>
 <Text type="p" secondary classes="mb-5">{localize('views.settings.appLock.description')}</Text>
 <Dropdown
-    onSelect={updateLockTimeout}
-    value={assignTimeoutOptionLabel(
-        $activeProfile?.settings?.lockScreenTimeoutInMinutes ??
-            DEFAULT_PERSISTED_PROFILE_OBJECT.settings.lockScreenTimeoutInMinutes
-    )}
+    value={$activeProfile?.settings?.lockScreenTimeoutInMinutes ??
+        DEFAULT_PERSISTED_PROFILE_OBJECT.settings.lockScreenTimeoutInMinutes}
     items={lockScreenTimeoutOptions()}
+    onSelect={onLockScreenTimeoutChange}
 />

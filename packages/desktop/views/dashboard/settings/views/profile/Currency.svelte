@@ -10,7 +10,7 @@
         .map((currency) => ({ value: currency, label: currency.toUpperCase() }))
         .sort()
 
-    function handleCurrencySelect(item: IDropdownChoice<MarketCurrency>): void {
+    function onCurrencyChange(item: IDropdownChoice<MarketCurrency>): void {
         updateActiveProfileSettings({ marketCurrency: item.value })
     }
 </script>
@@ -18,9 +18,9 @@
 <Text type="h4" classes="mb-3">{localize('views.settings.currency.title')}</Text>
 <Text type="p" secondary classes="mb-5">{localize('views.settings.currency.description')}</Text>
 <Dropdown
-    sortItems={true}
-    onSelect={handleCurrencySelect}
     value={$activeProfile?.settings.marketCurrency}
     items={currencyList}
+    sortItems
+    onSelect={onCurrencyChange}
     enableTyping
 />
