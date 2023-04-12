@@ -14,7 +14,7 @@ export enum SettingsRoute {
     ChangePincode = 'changePincode',
     DeleteProfile = 'deleteProfile',
     // Advanced
-    NetworkConfiguration = 'networkConfiguration',
+    NetworkInformation = 'networkInformation',
     DeepLinks = 'deepLinks',
     WalletFinder = 'walletFinder',
     HiddenAccounts = 'hiddenAccounts',

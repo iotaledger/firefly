@@ -91,6 +91,9 @@ const Platform: IPlatform = {
     isFeatureFlagEnabled(keyPath: string): boolean {
         return false
     },
+    getLanguageCode(): Promise<string> {
+        return Promise.resolve('')
+    },
 }
 
 window['__CAPACITOR__'] = Platform
