@@ -13,7 +13,7 @@
 </script>
 
 <svelte:window on:click={onClick} />
-<account-switcher>
+<account-switcher class="block relative left-8 bg-white dark:bg-gray-800 rounded-lg p-2">
     <button type="button" on:click={modal?.toggle} class="flex flex-row justify-center items-center space-x-2">
         <AccountLabel account={$selectedAccount} />
         <icon-container class:rotate={isModalOpened}>
@@ -25,7 +25,6 @@
 
 <style lang="scss">
     account-switcher {
-        @apply block relative left-8;
         -webkit-app-region: none;
     }
 

@@ -194,10 +194,7 @@
 
 <app-container class="block w-full h-full">
     <TitleBar />
-    <app-body
-        class="block fixed left-0 right-0 bottom-0 z-50 top-0"
-        class:top-placement={isWindows || isDashboardVisible}
-    >
+    <app-body class="block fixed left-0 right-0 bottom-0 z-50 top-0">
         <div class="scheme-dark" />
         {#if !$isLocaleLoaded || splash}
             <Splash />
@@ -298,8 +295,5 @@
     }
     img {
         -webkit-user-drag: none;
-    }
-    app-body.top-placement {
-        @apply top-9;
     }
 </style>

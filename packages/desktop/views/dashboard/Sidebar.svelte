@@ -92,7 +92,7 @@
 </script>
 
 <aside
-    class="flex flex-col justify-center items-center bg-white dark:bg-gray-800 relative w-18 px-5 pt-10 pb-5 border-solid border-r border-gray-100 dark:border-gray-800"
+    class="flex flex-col justify-center items-center bg-white dark:bg-gray-800 relative w-18 px-5 pb-5 border-solid border-r border-gray-100 dark:border-gray-800"
 >
     <nav class="flex flex-grow flex-col items-center justify-between">
         <div class="flex flex-col items-center">
@@ -123,6 +123,6 @@
 <style type="text/scss">
     :global(body.platform-win32) aside {
         @apply -top-0;
-        @apply pt-10;
+        padding-top: 4.75rem;
     }
 </style>

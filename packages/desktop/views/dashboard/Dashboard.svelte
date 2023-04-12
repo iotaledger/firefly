@@ -102,10 +102,10 @@
 </script>
 
 <Idle />
-<div class="dashboard-wrapper flex flex-col w-full h-full">
-    <TopNavigation />
-    <div class="flex flex-row flex-auto h-1">
-        <Sidebar />
+<div class="dashboard-wrapper flex flex-row flex-auto w-full h-full">
+    <Sidebar />
+    <div class="flex flex-col mt-9">
+        <TopNavigation />
         <!-- Dashboard Pane -->
         <div class="flex flex-col h-full dashboard-w">
             <svelte:component this={tabs[$dashboardRoute]} on:next={$appRouter.next} />
