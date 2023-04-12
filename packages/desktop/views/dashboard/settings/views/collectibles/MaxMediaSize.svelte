@@ -14,9 +14,9 @@
         updateNftInAllAccountNfts,
     } from '@core/nfts'
     import { activeProfile, updateActiveProfileSettings } from '@core/profile/stores'
-    import type { IDropdownChoice } from '@core/utils'
+    import type { IDropdownItem } from '@core/utils'
 
-    function onMaxMediaSizeChange(option: IDropdownChoice<number>): void {
+    function onMaxMediaSizeChange(option: IDropdownItem<number>): void {
         const maxMediaSizeInMegaBytes = option.value
 
         updateActiveProfileSettings({ maxMediaSizeInMegaBytes })
@@ -29,7 +29,7 @@
         return amount ? amount + ' MB' : localize('general.none')
     }
 
-    function maxMediaSizeOptions(): IDropdownChoice<number>[] {
+    function maxMediaSizeOptions(): IDropdownItem<number>[] {
         return [5, 10, 25, 50, 100, undefined].map((amount) => ({
             value: amount,
             label: assignMaxMediaSizeOptionLabel(amount),

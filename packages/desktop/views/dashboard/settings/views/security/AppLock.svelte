@@ -2,9 +2,9 @@
     import { Dropdown, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { activeProfile, DEFAULT_PERSISTED_PROFILE_OBJECT, updateActiveProfileSettings } from '@core/profile'
-    import type { IDropdownChoice } from '@core/utils'
+    import type { IDropdownItem } from '@core/utils'
 
-    function onLockScreenTimeoutChange(option: IDropdownChoice<number>): void {
+    function onLockScreenTimeoutChange(option: IDropdownItem<number>): void {
         updateActiveProfileSettings({ lockScreenTimeoutInMinutes: option.value })
     }
 
@@ -16,7 +16,7 @@
         return localize('times.minute', { values: { time: timeInMinutes } })
     }
 
-    function lockScreenTimeoutOptions(): IDropdownChoice<number>[] {
+    function lockScreenTimeoutOptions(): IDropdownItem<number>[] {
         return [1, 5, 10, 30, 60].map((time) => ({
             value: time,
             label: assignTimeoutOptionLabel(time),

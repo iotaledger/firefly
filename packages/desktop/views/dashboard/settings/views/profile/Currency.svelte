@@ -2,15 +2,15 @@
     import { localize } from '@core/i18n'
     import { MarketCurrency } from '@core/market'
     import { activeProfile, updateActiveProfileSettings } from '@core/profile'
-    import type { IDropdownChoice } from '@core/utils'
+    import type { IDropdownItem } from '@core/utils'
     import { Dropdown, Text } from 'shared/components'
 
-    let currencyList: IDropdownChoice<MarketCurrency>[]
+    let currencyList: IDropdownItem<MarketCurrency>[]
     $: currencyList = Object.values(MarketCurrency)
         .map((currency) => ({ value: currency, label: currency.toUpperCase() }))
         .sort()
 
-    function onCurrencyChange(item: IDropdownChoice<MarketCurrency>): void {
+    function onCurrencyChange(item: IDropdownItem<MarketCurrency>): void {
         updateActiveProfileSettings({ marketCurrency: item.value })
     }
 </script>

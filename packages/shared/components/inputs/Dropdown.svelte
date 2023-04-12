@@ -1,17 +1,17 @@
 <script lang="ts">
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { IDropdownChoice, clickOutside, isNumberLetterOrPunctuation } from '@core/utils'
+    import { IDropdownItem, clickOutside, isNumberLetterOrPunctuation } from '@core/utils'
     import { FontWeight, Icon, Text, TextPropTypes, TextType } from 'shared/components'
 
     export let value: unknown
     export let label: string
     export let placeholder: string = ''
     export let disabled = false
-    export let items: IDropdownChoice<unknown>[] = []
+    export let items: IDropdownItem<unknown>[] = []
     export let sortItems = false
     export let enableTyping = false
     export let small = false
-    export let onSelect: (..._: IDropdownChoice<unknown>[]) => void
+    export let onSelect: (..._: IDropdownItem<unknown>[]) => void
 
     const textProps: TextPropTypes = {
         type: TextType.p,
@@ -25,7 +25,7 @@
     let navContainer
     let navWidth: string
     let search = ''
-    let selectedItem: IDropdownChoice<unknown>
+    let selectedItem: IDropdownItem<unknown>
     let focusedItem: HTMLElement
     let isFocused = false
 
@@ -33,7 +33,7 @@
     $: items = sortItems ? items.sort((a, b) => (a.label > b.label ? 1 : -1)) : items
     $: value, (selectedItem = items.find((item) => item.value === value))
 
-    export function handleSelect(item: IDropdownChoice<unknown>): void {
+    export function handleSelect(item: IDropdownItem<unknown>): void {
         selectedItem = item
         value = item.value
         onSelect && onSelect(item)

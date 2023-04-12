@@ -5,7 +5,7 @@
     import { appSettings, AppTheme, hasCompletedAppSetup, mobile, shouldBeDarkMode } from '@core/app'
     import { localize, setLanguage, SUPPORTED_LOCALES } from '@core/i18n'
     import { appSetupRouter } from '@core/router'
-    import type { IDropdownChoice } from '@core/utils'
+    import type { IDropdownItem } from '@core/utils'
     import {
         initialiseOnboardingProfile,
         onboardingProfile,
@@ -30,7 +30,7 @@
     let segments = BLINK_SEGMENTS
     let appTheme = $appSettings.theme ?? AppTheme.Light
 
-    let languageList: IDropdownChoice<string>[]
+    let languageList: IDropdownItem<string>[]
     $: languageList = Object.values(SUPPORTED_LOCALES).map((locale) => ({ value: locale, label: locale }))
 
     $: $appSettings.theme = appTheme
@@ -40,7 +40,7 @@
         segments = SWITCH_SEGMENTS
     }
 
-    function onLanguageChange(item: IDropdownChoice<string>): void {
+    function onLanguageChange(item: IDropdownItem<string>): void {
         setLanguage(item)
     }
 

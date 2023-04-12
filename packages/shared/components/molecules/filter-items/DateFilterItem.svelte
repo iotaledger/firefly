@@ -1,18 +1,18 @@
 <script lang="ts">
     import { DateInputButton, Dropdown, Icon, Text, NumberInput } from 'shared/components'
     import { localize } from '@core/i18n'
-    import type { IDropdownChoice } from '@core/utils'
+    import type { IDropdownItem } from '@core/utils'
     import { DateFilterUnit } from '@core/utils/interfaces/filter'
     import { DateFilterOption, DateUnit } from '@core/utils/enums/filters'
 
     export let filterUnit: DateFilterUnit
 
-    const choices: IDropdownChoice<DateFilterOption>[] = filterUnit.choices.map((choice) => ({
+    const choices: IDropdownItem<DateFilterOption>[] = filterUnit.choices.map((choice) => ({
         label: localize(`${filterUnit.localeKey}.${choice}`),
         value: choice,
     }))
 
-    const unitChoices: IDropdownChoice<string>[] = Object.keys(DateUnit).map((val) => ({
+    const unitChoices: IDropdownItem<string>[] = Object.keys(DateUnit).map((val) => ({
         label: localize(`${filterUnit.localeKey}.${val}`),
         value: val,
     }))
@@ -21,7 +21,7 @@
     $: selectedDateUnit =
         filterUnit.subunit.type === 'unit' ? localize(`${filterUnit.localeKey}.${filterUnit.subunit.unit}`) : ''
 
-    function onSelect(item: IDropdownChoice<DateFilterOption>): void {
+    function onSelect(item: IDropdownItem<DateFilterOption>): void {
         filterUnit.selected = item.value
 
         switch (filterUnit.selected) {
@@ -51,7 +51,7 @@
         }
     }
 
-    function onUnitSelect(item: IDropdownChoice<string>): void {
+    function onUnitSelect(item: IDropdownItem<string>): void {
         if (filterUnit.subunit.type === 'unit') {
             filterUnit.subunit.unit = <DateUnit>item.value
         }

@@ -2,14 +2,14 @@
     import { Dropdown, Text } from 'shared/components'
     import { appSettings } from '@core/app'
     import { SUPPORTED_LOCALES, localize, setLanguage } from '@core/i18n'
-    import type { IDropdownChoice } from '@core/utils'
+    import type { IDropdownItem } from '@core/utils'
 
-    const languageList: IDropdownChoice<string>[] = Object.values(SUPPORTED_LOCALES).map((locale) => ({
+    const languageList: IDropdownItem<string>[] = Object.values(SUPPORTED_LOCALES).map((locale) => ({
         value: locale,
         label: locale,
     }))
 
-    function onLanguageChange(item: IDropdownChoice<string>): void {
+    function onLanguageChange(item: IDropdownItem<string>): void {
         setLanguage(item)
     }
 </script>

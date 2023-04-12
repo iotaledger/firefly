@@ -1,14 +1,14 @@
 <script lang="ts">
     import { Radio } from '@ui'
 
-    import type { IDropdownChoice } from '@core/utils'
+    import type { IDropdownItem } from '@core/utils'
     import { AssetFilterUnit } from '@core/utils/interfaces/filter'
     import { visibleSelectedAccountAssets } from '@core/wallet'
 
     export let filterUnit: AssetFilterUnit
     const { baseCoin, nativeTokens } = $visibleSelectedAccountAssets
 
-    const choices: IDropdownChoice[] = [baseCoin, ...nativeTokens].map((choice) => ({
+    const choices: IDropdownItem[] = [baseCoin, ...nativeTokens].map((choice) => ({
         label: choice.metadata.name,
         value: choice.id,
     }))
