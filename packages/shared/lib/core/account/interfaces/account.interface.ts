@@ -8,7 +8,6 @@ import type {
     AddressNativeTokens,
     AddressNftId,
     AddressWithAmount,
-    AddressWithMicroAmount,
     AddressWithUnspentOutputs,
     AliasOutputOptions,
     BuildAliasOutputData,
@@ -107,10 +106,6 @@ export interface IAccount {
     ): Promise<PreparedTransactionData>
     requestFundsFromFaucet(url: string, address: string): Promise<string>
     sendAmount(addressesWithAmount: AddressWithAmount[], transactionOptions?: TransactionOptions): Promise<Transaction>
-    sendMicroTransaction(
-        addressesWithMicroAmount: AddressWithMicroAmount[],
-        transactionOptions?: TransactionOptions
-    ): Promise<Transaction>
     sendNativeTokens(
         addressesNativeTokens: AddressNativeTokens[],
         transactionOptions?: TransactionOptions

@@ -273,13 +273,6 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    sendMicroTransaction(
-        addressesWithMicroAmount: AddressWithMicroAmount[],
-        transactionOptions?: TransactionOptions
-    ): Promise<Transaction> {
-        throw new Error('Method not implemented.')
-    }
-
     sendNativeTokens(
         addressesNativeTokens: AddressNativeTokens[],
         transactionOptions?: TransactionOptions
