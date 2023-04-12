@@ -11,13 +11,6 @@ on:
                 - macos-11
                 - ubuntu-20.04
                 - windows-2019
-            debugElectronBuilder:
-                description: 'Verbose electron-builder output'
-                required: true
-                type: choice
-                options:
-                - 'true'
-                - 'false'
             stage:
                 description: 'Stage'
                 required: true
@@ -84,11 +77,11 @@ jobs:
 
             - name: Enable verbose output for electron-builder (macOS/Linux)
               run: echo "DEBUG=electron-builder" >> $GITHUB_ENV
-              if: matrix.os != 'windows-2019' && github.event.inputs.debugElectronBuilder && github.event.inputs.debugElectronBuilder == 'true'
+              if: matrix.os != 'windows-2019'
 
             - name: Enable verbose output for electron-builder (Windows)
               run: echo "DEBUG=electron-builder" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-              if: matrix.os == 'windows-2019' && github.event.inputs.debugElectronBuilder && github.event.inputs.debugElectronBuilder == 'true'
+              if: matrix.os == 'windows-2019'
 
             - name: Install dependencies
               # Increase network timeout threshold to reduce build failures on Windows
