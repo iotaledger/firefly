@@ -8,13 +8,14 @@
     } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { INode, buildNetworkFromNodeInfoResponse } from '@core/network'
+    import { INode, NetworkId, buildNetworkFromNodeInfoResponse, getNetworkIdFromNetworkName } from '@core/network'
     import { getNodeInfo } from '@core/profile-manager'
     import { networkSetupRouter } from '@core/router'
     import { Animation, Button, HTMLButtonType, NodeConfigurationForm, Text, TextType } from '@ui'
     import { onMount } from 'svelte'
 
     let nodeConfigurationForm: NodeConfigurationForm
+    let networkId: NetworkId = NetworkId.Custom
     let node: INode
     let isBusy = false
     let formError = ''
@@ -37,6 +38,13 @@
 
             // The API request to check if a node is reachable requires an existing account manager.
             const nodeInfoResponse = await getNodeInfo(node.url)
+            // Check network of node matches selected id
+            if (
+                networkId !== NetworkId.Custom &&
+                networkId !== getNetworkIdFromNetworkName(nodeInfoResponse?.nodeInfo?.protocol?.networkName)
+            ) {
+                throw new Error('error.node.networkIdMismatch')
+            }
             const network = buildNetworkFromNodeInfoResponse(nodeInfoResponse)
             updateOnboardingProfile({ network })
             await cleanupOnboardingProfileManager()
@@ -75,10 +83,12 @@
         <NodeConfigurationForm
             onSubmit={onContinueClick}
             bind:this={nodeConfigurationForm}
+            bind:networkId
             bind:node
             bind:formError
             {isBusy}
             isDeveloperProfile
+            showNetworkFields
         />
     </div>
     <div slot="leftpane__action">
