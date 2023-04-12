@@ -1,7 +1,7 @@
 import { activeProfile } from '@core/profile'
 import { derived } from 'svelte/store'
-import { NETWORK } from '../constants'
-import { nodeInfo } from './node-info.store'
+import { NETWORK } from '../../network/constants'
+import { nodeInfo } from '../../network/stores/node-info.store'
 
 export const networkHrp = derived([nodeInfo, activeProfile], ([$nodeInfo, $activeProfile]) => {
     if ($nodeInfo) {
