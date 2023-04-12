@@ -1,14 +1,9 @@
 <script lang="ts">
     import { OnboardingLayout } from '@components'
-    import {
-        initialiseOnboardingProfile,
-        onboardingProfile,
-        shouldBeDeveloperProfile,
-        updateOnboardingProfile,
-    } from '@contexts/onboarding'
+    import { initialiseOnboardingFlow, onboardingProfile, shouldBeDeveloperProfile } from '@contexts/onboarding'
     import { AppTheme, appSettings, hasCompletedAppSetup, mobile, shouldBeDarkMode } from '@core/app'
     import { SUPPORTED_LOCALES, localize, setLanguage } from '@core/i18n'
-    import { NetworkType } from '@core/network'
+    import { NetworkId } from '@core/network'
     import { appSetupRouter } from '@core/router'
     import type { IDropdownItem } from '@core/utils'
     import { Animation, Button, ButtonRadio, Dropdown, Text } from '@ui'
@@ -55,10 +50,11 @@
 
     onMount(async () => {
         _clonedVariable = appTheme
-        await initialiseOnboardingProfile($onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile())
-        if (!shouldBeDeveloperProfile()) {
-            updateOnboardingProfile({ networkType: NetworkType.Mainnet })
-        }
+        const isDeveloperProfile = $onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile()
+        await initialiseOnboardingFlow({
+            isDeveloperProfile,
+            ...(!isDeveloperProfile && { networkId: NetworkId.Shimmer }),
+        })
     })
 </script>
 
