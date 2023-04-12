@@ -3,15 +3,17 @@
     import { IDropdownItem, clickOutside, isNumberLetterOrPunctuation } from '@core/utils'
     import { FontWeight, Icon, Text, TextPropTypes, TextType } from 'shared/components'
 
-    export let value: unknown
-    export let label: string
+    type T = $$Generic
+
+    export let value: T
+    export let label: string = ''
     export let placeholder: string = ''
     export let disabled = false
-    export let items: IDropdownItem<unknown>[] = []
+    export let items: IDropdownItem<T>[] = []
     export let sortItems = false
     export let enableTyping = false
     export let small = false
-    export let onSelect: (..._: IDropdownItem<unknown>[]) => void
+    export let onSelect: (..._: IDropdownItem<T>[]) => void
 
     const textProps: TextPropTypes = {
         type: TextType.p,
@@ -25,7 +27,7 @@
     let navContainer
     let navWidth: string
     let search = ''
-    let selectedItem: IDropdownItem<unknown>
+    let selectedItem: IDropdownItem<T>
     let focusedItem: HTMLElement
     let isFocused = false
 
@@ -33,7 +35,7 @@
     $: items = sortItems ? items.sort((a, b) => (a.label > b.label ? 1 : -1)) : items
     $: value, (selectedItem = items.find((item) => item.value === value))
 
-    export function handleSelect(item: IDropdownItem<unknown>): void {
+    export function handleSelect(item: IDropdownItem<T>): void {
         selectedItem = item
         value = item.value
         onSelect && onSelect(item)
