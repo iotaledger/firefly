@@ -47,8 +47,7 @@
                         onClick={onContinueClick}
                         name={profile.name}
                         id={profile.id}
-                        networkType={profile?.networkType ?? NetworkType.Devnet}
-                        networkProtocol={profile?.networkProtocol ?? NetworkProtocol.IOTA}
+                        networkId={profile?.network.id}
                     />
                 </div>
             {/each}

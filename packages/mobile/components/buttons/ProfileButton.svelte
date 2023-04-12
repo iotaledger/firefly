@@ -1,13 +1,12 @@
 <script lang="ts">
     import { appSettings } from '@core/app'
-    import { Icon, NetworkIcon, Text, FontWeight, TextType } from '@ui'
+    import { NetworkId } from '@core/network'
     import { getInitials as _getInitials } from '@core/utils'
-    import { NetworkProtocol, NetworkType } from '@core/network'
+    import { FontWeight, Icon, NetworkIcon, Text, TextType } from '@ui'
 
     export let name = ''
     export let id = ''
-    export let networkType: NetworkType
-    export let networkProtocol: NetworkProtocol
+    export let networkId: NetworkId
     export let disabled = false
 
     export let onClick: undefined | ((id: string) => void) = undefined
@@ -43,7 +42,7 @@
                 <Text type={TextType.h5} classes="text-white">{getInitials()}</Text>
             </div>
             <div class="absolute right-0 bottom-0">
-                <NetworkIcon {networkType} {networkProtocol} height={14} width={14} />
+                <NetworkIcon {networkId} height={14} width={14} />
             </div>
         </div>
         <Text
