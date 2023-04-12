@@ -3,6 +3,7 @@
     import { getAssetInitials, IPersistedAsset, NotVerifiedStatus, ANIMATED_TOKEN_IDS } from '@core/wallet'
     import { isBright } from '@core/utils'
     import { Animation, Icon, VerificationBadge } from 'shared/components'
+    import { getIconColorFromString } from '@core/account'
 
     export let asset: IPersistedAsset
     export let large = false
@@ -18,7 +19,7 @@
     $: isAnimation = asset?.id in ANIMATED_TOKEN_IDS
     $: {
         icon = ''
-        assetIconBackgroundColor = asset?.metadata?.primaryColor
+        assetIconBackgroundColor = getIconColorFromString(asset?.metadata?.name)
         assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
         if (
             asset?.id === String(COIN_TYPE[NetworkProtocol.IOTA]) ||
