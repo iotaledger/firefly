@@ -55,7 +55,7 @@
                         }
                     }
                 },
-                "setupPrivateNetworkConnection": {
+                "setupCustomNetworkConnection": {
                     "title": "Opret forbindelse til et privat netværk",
                     "body": "Udfyld formularen med node-oplysningerne og opret forbindelse til et privat netværk."
                 }

@@ -66,11 +66,11 @@
 
 <OnboardingLayout {onBackClick}>
     <div slot="title">
-        <Text type={TextType.h2}>{localize('views.onboarding.networkSetup.setupPrivateNetworkConnection.title')}</Text>
+        <Text type={TextType.h2}>{localize('views.onboarding.networkSetup.setupCustomNetworkConnection.title')}</Text>
     </div>
     <div slot="leftpane__content">
         <Text type={TextType.p} secondary classes="mb-8"
-            >{localize('views.onboarding.networkSetup.setupPrivateNetworkConnection.body')}</Text
+            >{localize('views.onboarding.networkSetup.setupCustomNetworkConnection.body')}</Text
         >
         <NodeConfigurationForm
             onSubmit={onContinueClick}

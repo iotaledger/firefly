@@ -55,7 +55,7 @@
                         }
                     }
                 },
-                "setupPrivateNetworkConnection": {
+                "setupCustomNetworkConnection": {
                     "title": "Conectarse a una red privada",
                     "body": "Rellene el formulario con la información del nodo y conéctese a una red privada."
                 }
