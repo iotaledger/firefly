@@ -323,6 +323,10 @@
                 "title": "Maximum media size",
                 "description": "NFT media with sizes greater than this limit will not be downloaded and a placeholder representing the media type will be displayed instead"
             },
+            "refreshNftMedia": {
+                "title": "Refresh NFT media",
+                "description": "NFT media cached for this account will be deleted and then downloaded again"
+            },
             "changePassword": {
                 "title": "Wachtwoord wijzigen",
                 "description": "Uw wachtwoord wordt gebruikt om uw portemonnees te beveiligen. Gebruik een sterk wachtwoord om uw tegoeden te beschermen"
@@ -1174,6 +1178,10 @@
             "iota": "Migreren naar Chrysalis of een bestaande portemonnee herstellen",
             "shimmer": "Een bestaand Shimmer profiel herstellen"
         },
+        "refreshNftMedia": {
+            "title": "Refresh NFT media",
+            "description": "Do you want to delete and re-download all NFT media for this account?"
+        },
         "createWallet": "Maak een nieuw {protocol} profiel aan",
         "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
         "claimShimmer": "Claim Shimmer staking beloningen",
@@ -1219,6 +1227,7 @@
         "unlock": "Ontgrendel",
         "updateFirefly": "Firefly bijwerken",
         "restartNow": "Herstart nu",
+        "refresh": "Refresh",
         "saveBackup": "Sla Stronghold back-up op",
         "customizeAcount": "Portemonnee aanpassen",
         "hideAccount": "Verberg portemonnee",
