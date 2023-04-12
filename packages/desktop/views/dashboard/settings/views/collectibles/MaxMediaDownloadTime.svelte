@@ -13,7 +13,7 @@
     }
 
     function assignMaxMediaDownloadTimeOptionLabel(amount: number): string {
-        return amount ? amount + ' min' : localize('general.none')
+        return amount ? localize('times.second', { values: { time: amount } }) : localize('general.none')
     }
 
     const maxSizeOptions: IDropdownItem<number>[] = [30, 60, 90, 120, 150, 180].map((amount) => ({
