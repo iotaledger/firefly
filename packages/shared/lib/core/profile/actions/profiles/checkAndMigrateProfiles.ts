@@ -162,6 +162,8 @@ function persistedProfileMigrationToV10(existingProfile: IPersistedProfile): voi
         strongholdPasswordTimeoutInMinutes: DEFAULT_STRONGHOLD_PASSWORD_TIMEOUT_IN_MINUTES,
     }
 
+    existingProfile.forceAssetRefresh = true
+
     saveProfile(existingProfile)
 }
 
