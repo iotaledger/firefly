@@ -461,7 +461,10 @@
                 "disconnected": "Disconnected from node",
                 "status": "Status",
                 "messagesPerSecond": "Messages per second",
-                "referencedRate": "Referenced rate"
+                "referencedRate": "Referenced rate",
+                "drawer": {
+                    "title": "Connected Chains"
+                }
             },
             "profileModal": {
                 "allSettings": "All settings",
