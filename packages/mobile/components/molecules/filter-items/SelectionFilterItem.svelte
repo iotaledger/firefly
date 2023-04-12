@@ -2,12 +2,12 @@
     import { Radio } from '@ui'
 
     import { localize } from '@core/i18n'
-    import type { IDropdownChoice } from '@core/utils'
+    import type { IDropdownItem } from '@core/utils'
     import { SelectionFilterUnit } from '@core/utils/interfaces/filter'
 
     export let filterUnit: SelectionFilterUnit
 
-    const choices: IDropdownChoice[] = filterUnit.choices.map((choice) => ({
+    const choices: IDropdownItem<string>[] = filterUnit.choices.map((choice) => ({
         label: localize(`${filterUnit.localeKey}.${choice}`),
         value: choice,
     }))

@@ -1,0 +1,44 @@
+# To get started with Dependabot version updates, you'll need to specify which
+# package ecosystems to update and where the package manifests are located.
+# Please see the documentation for all configuration options:
+# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/" # Top level
+    schedule:
+      interval: "weekly"
+    labels:
+      - "v2"
+      - "scope:dependencies"
+    milestone: 5
+    
+  - package-ecosystem: "npm"
+    directory: "/packages/desktop"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "v2"
+      - "scope:dependencies"
+      - "platform:desktop"
+    milestone: 5
+      
+  - package-ecosystem: "npm"
+    directory: "/packages/mobile"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "v2"
+      - "scope:dependencies"
+      - "platform:mobile"
+    milestone: 5
+
+  - package-ecosystem: "npm"
+    directory: "/packages/shared"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "v2"
+      - "scope:dependencies"
+    milestone: 5
