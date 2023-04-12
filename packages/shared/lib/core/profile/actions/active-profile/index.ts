@@ -1,4 +1,5 @@
 export * from './checkActiveProfileAuth'
+export * from './getCoinType'
 export * from './loadAccounts'
 export * from './loadPersistedProfileIntoActiveProfile'
 export * from './lockStronghold'

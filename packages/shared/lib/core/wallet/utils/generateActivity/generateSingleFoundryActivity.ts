@@ -1,11 +1,10 @@
 import { IAccountState } from '@core/account'
-import { coinType } from '@core/profile'
+import { getCoinType } from '@core/profile'
 import { ADDRESS_TYPE_ALIAS, UNLOCK_CONDITION_IMMUTABLE_ALIAS } from '@core/wallet/constants'
 import { ActivityType } from '@core/wallet/enums'
 import { IActivityGenerationParameters } from '@core/wallet/interfaces'
 import { FoundryActivity } from '@core/wallet/types'
 import type { IAliasAddress, IFoundryOutput, IImmutableAliasUnlockCondition } from '@iota/types'
-import { get } from 'svelte/store'
 import { convertHexAddressToBech32, getNativeTokenFromOutput } from '..'
 import {
     getAmountFromOutput,
@@ -37,7 +36,7 @@ export function generateSingleFoundryActivity(
 
     const id = outputId || transactionId
     const nativeToken = getNativeTokenFromOutput(output)
-    const assetId = nativeToken?.id ?? String(get(coinType))
+    const assetId = nativeToken?.id ?? getCoinType()
 
     const storageDeposit = getAmountFromOutput(output)
     const giftedStorageDeposit = 0

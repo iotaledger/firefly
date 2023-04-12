@@ -1,5 +1,5 @@
 import { BASE_TOKEN } from '@core/network'
-import { activeAccounts, activeProfile, coinType } from '@core/profile'
+import { activeAccounts, activeProfile, getCoinType } from '@core/profile'
 import { get } from 'svelte/store'
 import { getOrRequestAssetFromPersistedAssets } from '../actions'
 import { TokenStandard, VerifiedStatus } from '../enums'
@@ -27,7 +27,7 @@ export async function refreshAccountAssetsForActiveProfile(
     const baseCoin = BASE_TOKEN?.[networkProtocol]
 
     const persistedBaseCoin: IPersistedAsset = {
-        id: String(get(coinType)),
+        id: getCoinType(),
         standard: TokenStandard.BaseCoin,
         metadata: {
             ...baseCoin,
