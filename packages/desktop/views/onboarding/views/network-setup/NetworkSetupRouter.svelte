@@ -1,14 +1,10 @@
 <script lang="ts">
-    import { Transition } from 'shared/components'
-    import { ChooseNetworkView, ChooseProtocolView, SetupPrivateNetworkConnectionView } from './views'
     import { NetworkSetupRoute, networkSetupRoute } from '@core/router'
+    import { Transition } from 'shared/components'
+    import { ChooseNetworkView, SetupPrivateNetworkConnectionView } from './views'
 </script>
 
-{#if $networkSetupRoute === NetworkSetupRoute.ChooseProtocol}
-    <Transition>
-        <ChooseProtocolView />
-    </Transition>
-{:else if $networkSetupRoute === NetworkSetupRoute.ChooseNetwork}
+{#if $networkSetupRoute === NetworkSetupRoute.ChooseNetwork}
     <Transition>
         <ChooseNetworkView />
     </Transition>

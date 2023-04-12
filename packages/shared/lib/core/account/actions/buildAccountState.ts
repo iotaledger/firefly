@@ -9,6 +9,7 @@ export async function buildAccountState(account: IAccount, metadata: IAccountMet
         baseCoin: {
             total: '0',
             available: '0',
+            votingPower: '0',
         },
         requiredStorageDeposit: {
             alias: '0',
@@ -27,7 +28,7 @@ export async function buildAccountState(account: IAccount, metadata: IAccountMet
     try {
         balances = await account.getBalance()
         depositAddress = await getDepositAddress(account)
-        votingPower = await account.getVotingPower()
+        votingPower = balances.baseCoin.votingPower
     } catch (err) {
         console.error(err)
     }

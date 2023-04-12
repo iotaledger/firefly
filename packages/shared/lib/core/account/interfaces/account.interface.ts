@@ -8,7 +8,6 @@ import type {
     AddressNativeTokens,
     AddressNftId,
     AddressWithAmount,
-    AddressWithMicroAmount,
     AddressWithUnspentOutputs,
     AliasOutputOptions,
     BuildAliasOutputData,
@@ -77,7 +76,6 @@ export interface IAccount {
     getParticipationEventStatus(eventId: string): Promise<ParticipationEventStatus>
     getParticipationOverview(eventIds?: string[]): Promise<ParticipationOverview>
     getTransaction(transactionId: string): Promise<Transaction>
-    getVotingPower(): Promise<string>
     incomingTransactions(): Promise<[string, Transaction][]>
     increaseNativeTokenSupply(
         tokenId: string,
@@ -108,10 +106,6 @@ export interface IAccount {
     ): Promise<PreparedTransactionData>
     requestFundsFromFaucet(url: string, address: string): Promise<string>
     sendAmount(addressesWithAmount: AddressWithAmount[], transactionOptions?: TransactionOptions): Promise<Transaction>
-    sendMicroTransaction(
-        addressesWithMicroAmount: AddressWithMicroAmount[],
-        transactionOptions?: TransactionOptions
-    ): Promise<Transaction>
     sendNativeTokens(
         addressesNativeTokens: AddressNativeTokens[],
         transactionOptions?: TransactionOptions
