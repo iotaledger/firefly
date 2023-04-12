@@ -1,11 +1,10 @@
 <script lang="ts">
-    import { Animation, Button, Logo, Text } from '@ui'
     import { OnboardingLayout } from '@components'
-    import features from '@features/features'
-    import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { formatProtocolName, NetworkProtocol } from '@core/network'
+    import { NetworkProtocol, formatProtocolName } from '@core/network'
     import { appSetupRouter } from '@core/router'
+    import features from '@features/features'
+    import { Animation, Button, Logo, Text, TextType } from '@ui'
 
     function onContinueClick(): void {
         $appSetupRouter.next()
@@ -14,11 +13,9 @@
 
 <OnboardingLayout allowBack={false}>
     <div slot="leftpane__content">
-        <div class="flex flex-col {$mobile && 'items-center text-center px-10'} space-y-4 mb-8">
-            {#if !$mobile}
-                <Logo width="64px" logo="logo-firefly" classes="mb-6" />
-            {/if}
-            <Text type={$mobile ? 'h3' : 'h1'}
+        <div class="flex flex-col space-y-4 mb-8">
+            <Logo width="64px" logo="logo-firefly" classes="mb-6" />
+            <Text type={TextType.h1}
                 >{localize('views.onboarding.appSetup.welcome.title', {
                     values: {
                         protocol: features?.onboarding?.iota?.enabled
@@ -32,7 +29,7 @@
     <div slot="leftpane__action">
         <Button onClick={onContinueClick} classes="w-full">{localize('actions.continue')}</Button>
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-blue dark:bg-gray-900'}">
+    <div slot="rightpane" class="w-full h-full flex justify-center">
         <Animation classes="setup-anim-aspect-ratio" animation="welcome-desktop" />
     </div>
 </OnboardingLayout>
