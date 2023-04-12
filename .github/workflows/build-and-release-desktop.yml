@@ -6,6 +6,7 @@ on:
             - desktop-*
     workflow_dispatch:
         inputs:
+            debugElectronBuilder:
                 description: 'Verbose electron-builder output'
                 required: true
                 type: choice
