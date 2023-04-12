@@ -1,8 +1,6 @@
 <script lang="ts">
-    import { onMount } from 'svelte'
-    import { Animation, OnboardingButton, Text, TextType } from '@ui'
+    import { Icon } from '@auxiliary/icon'
     import { OnboardingLayout } from '@components'
-    import features from '@features/features'
     import {
         initialiseOnboardingProfile,
         onboardingProfile,
@@ -11,25 +9,28 @@
     } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
-    import { networkSetupRouter } from '@core/router'
+    import { NETWORK, NetworkId, getDefaultClientOptions } from '@core/network'
     import { profiles } from '@core/profile'
+    import { networkSetupRouter } from '@core/router'
+    import features from '@features/features'
+    import { Animation, OnboardingButton, Text, TextType } from '@ui'
+    import { onMount } from 'svelte'
 
-    $: networkProtocol = $onboardingProfile?.networkProtocol ?? NetworkProtocol.Shimmer
-
-    let networkIcon: { [key in NetworkType]: string }
+    let networkIcon: { [key in NetworkId]: string }
     $: networkIcon = {
-        [NetworkType.Mainnet]: networkProtocol,
-        [NetworkType.Devnet]: 'settings',
-        [NetworkType.PrivateNet]: 'settings',
+        [NetworkId.Iota]: Icon.Iota,
+        [NetworkId.Shimmer]: Icon.Shimmer,
+        [NetworkId.Testnet]: 'settings',
+        [NetworkId.Custom]: 'settings',
     }
 
-    function onNetworkSelectionClick(networkType: NetworkType): void {
-        if (networkType !== NetworkType.PrivateNet) {
-            const clientOptions = getDefaultClientOptions($onboardingProfile?.networkProtocol, networkType)
+    function onNetworkSelectionClick(networkId: NetworkId): void {
+        if (networkId !== NetworkId.Custom) {
+            const clientOptions = getDefaultClientOptions(networkId)
             updateOnboardingProfile({ clientOptions })
         }
-        updateOnboardingProfile({ networkType })
+        const network = NETWORK?.[networkId]
+        updateOnboardingProfile({ network })
         $networkSetupRouter.next()
     }
 
@@ -39,13 +40,23 @@
 
     onMount(async () => {
         if (!$onboardingProfile?.id) {
-            await initialiseOnboardingProfile(
-                $onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile(),
-                NetworkProtocol.Shimmer
-            )
+            await initialiseOnboardingProfile($onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile())
         }
-        updateOnboardingProfile({ networkType: null })
+        updateOnboardingProfile({ network: undefined })
     })
+
+    function getIconColor(networkId: NetworkId): string {
+        switch (networkId) {
+            case NetworkId.Iota:
+                return 'iota-highlight'
+            case NetworkId.Shimmer:
+                return 'shimmer-highlight'
+            case NetworkId.Testnet:
+                return 'blue-500'
+            case NetworkId.Custom:
+                return 'blue-500'
+        }
+    }
 </script>
 
 <OnboardingLayout allowBack={$profiles.length > 0} {onBackClick}>
@@ -56,19 +67,17 @@
         <Text secondary classes="mb-8">{localize('views.onboarding.networkSetup.chooseNetwork.body')}</Text>
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
-        {#each Object.values(NetworkType) as networkType}
+        {#each Object.values(NetworkId) as networkId}
             <OnboardingButton
-                primaryText={localize(
-                    `views.onboarding.networkSetup.chooseNetwork.${networkProtocol}.${networkType}.title`
-                )}
+                primaryText={localize(`views.onboarding.networkSetup.chooseNetwork.${networkId}.title`)}
                 secondaryText={!$mobile
-                    ? localize(`views.onboarding.networkSetup.chooseNetwork.${networkProtocol}.${networkType}.body`)
+                    ? localize(`views.onboarding.networkSetup.chooseNetwork.${networkId}.body`)
                     : ''}
-                icon={networkIcon[networkType]}
-                iconColor={networkType === NetworkType.Mainnet ? `${networkProtocol}-highlight` : 'blue-500'}
-                hidden={features?.onboarding?.[networkProtocol]?.[networkType]?.hidden}
-                disabled={!features?.onboarding?.[networkProtocol]?.[networkType]?.enabled}
-                onClick={() => onNetworkSelectionClick(networkType)}
+                icon={networkIcon[networkId]}
+                iconColor={getIconColor(networkId)}
+                hidden={features?.onboarding?.[networkId]?.hidden}
+                disabled={!features?.onboarding?.[networkId]?.enabled}
+                onClick={() => onNetworkSelectionClick(networkId)}
             />
         {/each}
     </div>
