@@ -164,6 +164,11 @@ const CapacitorApi: Partial<IPlatform> = {
     unhandledException: () => new Promise<void>(() => {}),
 
     saveRecoveryKit: () => new Promise<void>(() => {}),
+
+    getLanguageCode: async () => {
+        const { value } = await Device.getLanguageCode()
+        return value
+    },
 }
 
 window['__CAPACITOR__'] = CapacitorApi

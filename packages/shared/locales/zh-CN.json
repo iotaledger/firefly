@@ -323,6 +323,10 @@
                 "title": "最大文件大小",
                 "description": "尺寸大于此限制的NFT 媒体将不会下载，代表媒体类型的占位符将会被显示。"
             },
+            "refreshNftMedia": {
+                "title": "Refresh NFT media",
+                "description": "NFT media cached for this account will be deleted and then downloaded again"
+            },
             "changePassword": {
                 "title": "修改密码",
                 "description": "您的密码是用来保护您的钱包的。您必须使用一个强有力的密码来保护您的资金"
@@ -1174,6 +1178,10 @@
             "iota": "迁移到 Chrysalis 或恢复一个现有钱包",
             "shimmer": "恢复一个Shimmer 配置文件"
         },
+        "refreshNftMedia": {
+            "title": "Refresh NFT media",
+            "description": "Do you want to delete and re-download all NFT media for this account?"
+        },
         "createWallet": "创建新的 {protocol} 配置文件",
         "createWalletDescription": "创建一个运行在 {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {其他未知}} 的新配置文件",
         "claimShimmer": "认领您的 Shimmer 质押奖励",
@@ -1219,6 +1227,7 @@
         "unlock": "解锁",
         "updateFirefly": "更新Firefly",
         "restartNow": "立即重启",
+        "refresh": "Refresh",
         "saveBackup": "保存Stronghold备份",
         "customizeAcount": "自定义钱包",
         "hideAccount": "隐藏钱包",

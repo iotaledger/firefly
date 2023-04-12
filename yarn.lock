@@ -869,10 +869,10 @@
   dependencies:
     big-integer "^1.6.51"
 
-"@iota/wallet@2.0.3-rc.27":
-  version "2.0.3-rc.27"
-  resolved "https://registry.npmjs.org/@iota/wallet/-/wallet-2.0.3-rc.27.tgz"
-  integrity sha512-oyqWHpwvCbm6XApNcZnnoSMMkL5bqol5Gs2vqrh2du8hI400wTAyPRZly0hMNHGyQJCpvnxuRIijeLPRVZoQYA==
+"@iota/wallet@2.0.3-rc.32":
+  version "2.0.3-rc.32"
+  resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.3-rc.32.tgz#ea1d452595b9c65d147259f108ebe94dc7c5a001"
+  integrity sha512-nvBDJca64EITtMNYcNIP0nUtaMSHc6c60FBQFldTpibK7fRwqbg9BJGeme0Lt+Mc7WRS7ZnuYnSGIEZFs/pzEA==
   dependencies:
     "@iota/types" "^1.0.0-beta.15"
     cargo-cp-artifact "^0.1.6"
