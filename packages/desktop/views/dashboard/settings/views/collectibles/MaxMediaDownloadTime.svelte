@@ -4,12 +4,12 @@
     import { localize } from '@core/i18n'
     import { activeProfile, updateActiveProfileSettings } from '@core/profile/stores'
     import type { IDropdownChoice } from '@core/utils'
-    import { DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_MINUTES } from '@core/nfts'
+    import { DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_SECONDS } from '@core/nfts'
 
     function updateMediaDownloadTimeLimit(option): void {
-        const maxMediaDownloadTimeInMinutes = option.value
+        const maxMediaDownloadTimeInSeconds = option.value
 
-        updateActiveProfileSettings({ maxMediaDownloadTimeInMinutes })
+        updateActiveProfileSettings({ maxMediaDownloadTimeInSeconds })
     }
 
     function assignMaxMediaDownloadTimeOptionLabel(amount: number): string {
@@ -17,7 +17,7 @@
     }
 
     function maxSizeOptions(): IDropdownChoice[] {
-        return [0.5, 1, 2, 5].map((amount) => ({
+        return [30, 60, 90, 120, 150, 180].map((amount) => ({
             value: amount,
             label: amount + ' min',
         }))
@@ -33,7 +33,7 @@
 <Dropdown
     onSelect={updateMediaDownloadTimeLimit}
     value={assignMaxMediaDownloadTimeOptionLabel(
-        $activeProfile?.settings.maxMediaDownloadTimeInMinutes || DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_MINUTES
+        $activeProfile?.settings.maxMediaDownloadTimeInSeconds || DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_SECONDS
     )}
     items={maxSizeOptions()}
 />

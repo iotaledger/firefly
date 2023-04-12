@@ -5,6 +5,6 @@ export interface IProfileSettings {
     lockScreenTimeoutInMinutes: number
     strongholdPasswordTimeoutInMinutes: number
     maxMediaSizeInMegaBytes: number
-    maxMediaDownloadTimeInMinutes: number
+    maxMediaDownloadTimeInSeconds: number
     hideNetworkStatistics: boolean
 }
