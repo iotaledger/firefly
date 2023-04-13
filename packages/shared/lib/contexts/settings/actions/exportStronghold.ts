@@ -1,5 +1,5 @@
 import { updateActiveProfile } from '@core/profile'
-import { backup, clearStrongholdPassword } from '@core/profile-manager'
+import { backup, setStrongholdPassword } from '@core/profile-manager'
 import { Platform } from '@core/app'
 import { getDefaultStrongholdName } from '@core/stronghold'
 
@@ -12,7 +12,7 @@ export async function exportStronghold(
         if (destination) {
             try {
                 Platform.saveStrongholdBackup({ allowAccess: true })
-                await clearStrongholdPassword()
+                await setStrongholdPassword(password)
                 await backup(destination, password)
                 Platform.saveStrongholdBackup({ allowAccess: false })
                 updateActiveProfile({ lastStrongholdBackupTime: new Date() })
