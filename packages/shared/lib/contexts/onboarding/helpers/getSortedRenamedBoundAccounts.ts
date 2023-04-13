@@ -12,7 +12,7 @@ export async function getSortedRenamedBoundAccounts(
     return (
         await Promise.all(
             accounts.map(async (account) => {
-                const { index, alias } = account?.getMetadata()
+                const { index, alias } = account?.getMetadata() ?? {}
                 const boundAccount = await getBoundAccount(index, true, profileManager)
                 const boundAccountAlias = Number.isNaN(alias) ? alias : `${localize('general.account')} ${index + 1}`
                 await boundAccount.setAlias(boundAccountAlias)

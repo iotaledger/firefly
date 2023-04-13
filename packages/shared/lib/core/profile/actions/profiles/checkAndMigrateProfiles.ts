@@ -8,6 +8,7 @@ import {
 } from '../../constants'
 import { IPersistedProfile } from '../../interfaces'
 import { currentProfileVersion, profiles, saveProfile } from '../../stores'
+import { DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_SECONDS, DEFAULT_MAX_NFT_SIZE_IN_MEGABYTES } from '@core/nfts'
 
 /**
  * Migrates profile data in need of being modified to accommodate changes
@@ -160,9 +161,11 @@ function persistedProfileMigrationToV10(existingProfile: IPersistedProfile): voi
     existingProfile.settings = {
         ...existingProfile.settings,
         strongholdPasswordTimeoutInMinutes: DEFAULT_STRONGHOLD_PASSWORD_TIMEOUT_IN_MINUTES,
+        maxMediaDownloadTimeInSeconds: DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_SECONDS,
+        maxMediaSizeInMegaBytes: DEFAULT_MAX_NFT_SIZE_IN_MEGABYTES,
     }
 
     saveProfile(existingProfile)
 }
 
-// TODO: Rename accountMetadata to accountPersistedData in next migration
+// TODO: Rename accountMetadata to accountPersistedData

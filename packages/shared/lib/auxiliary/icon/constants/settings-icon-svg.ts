@@ -20,6 +20,7 @@ export const SETTINGS_ICON_SVG = {
     [ProfileSettingsRoute.Currency]: Icon.Currency,
     [ProfileSettingsRoute.DeleteProfile]: Icon.Delete,
     [CollectiblesSettingsRoute.MaxMediaSize]: Icon.File,
+    [CollectiblesSettingsRoute.MaxMediaDownloadTime]: Icon.Timer,
     [CollectiblesSettingsRoute.RefreshNftMedia]: Icon.Refresh,
     [NetworkSettingsRoute.NetworkInformation]: Icon.Wifi,
     [NetworkSettingsRoute.ConfigureNodeList]: Icon.Customize,
