@@ -1,7 +1,6 @@
-import { get } from 'svelte/store'
-
+import { NETWORK } from '@core/network'
 import { INode } from '@core/network/interfaces'
-
+import { get } from 'svelte/store'
 import {
     DEFAULT_PERSISTED_PROFILE_OBJECT,
     DEFAULT_STRONGHOLD_PASSWORD_TIMEOUT_IN_MINUTES,
@@ -50,6 +49,7 @@ const persistedProfileMigrationsMap: Record<number, (existingProfile: unknown) =
     7: persistedProfileMigrationToV8,
     8: persistedProfileMigrationToV9,
     9: persistedProfileMigrationToV10,
+    10: persistedProfileMigrationToV11,
 }
 
 function persistedProfileMigrationToV4(existingProfile: unknown): void {
@@ -159,9 +159,21 @@ function persistedProfileMigrationToV10(existingProfile: IPersistedProfile): voi
     existingProfile.settings = {
         ...existingProfile.settings,
         strongholdPasswordTimeoutInMinutes: DEFAULT_STRONGHOLD_PASSWORD_TIMEOUT_IN_MINUTES,
-        maxMediaDownloadTimeInSeconds: DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_SECONDS,
         maxMediaSizeInMegaBytes: DEFAULT_MAX_NFT_SIZE_IN_MEGABYTES,
     }
+
+    saveProfile(existingProfile)
+}
+
+function persistedProfileMigrationToV11(existingProfile: IPersistedProfile): void {
+    const network = NETWORK?.[existingProfile?.networkProtocol]?.[existingProfile?.networkType]
+    existingProfile.network = network
+
+    existingProfile.settings = {
+        ...existingProfile.settings,
+        maxMediaDownloadTimeInSeconds: DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_SECONDS,
+    }
+
     saveProfile(existingProfile)
 }
 
