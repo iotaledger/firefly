@@ -21,7 +21,7 @@ export function updateActiveProfileSettings(payload: Partial<IProfileSettings>):
 export function addAccountMetadataToActiveProfile(metadata: IAccountMetadata): void {
     activeProfile?.update((state) => ({
         ...state,
-        accountMetadata: [...state?.accountMetadata, metadata],
+        accountMetadata: [...(state?.accountMetadata ?? []), metadata],
     }))
 }
 
