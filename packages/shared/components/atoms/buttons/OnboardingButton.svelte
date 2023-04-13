@@ -99,11 +99,11 @@
             @apply border-blue-400;
         }
         &:disabled {
+            @apply opacity-60;
+            @apply pointer-events-none;
             :global(svg) {
                 @apply text-gray-500;
             }
-            @apply pointer-events-none;
-            @apply bg-gray-50;
         }
 
         &.darkmode {
