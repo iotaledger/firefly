@@ -170,13 +170,13 @@ const onboardingFeatures = {
         devnet: {
             enabled: true,
             claimRewards: {
-                enabled: true,
-                hidden: false,
+                enabled: false,
+                hidden: true,
                 recoveryPhrase: {
-                    enabled: true,
+                    enabled: false,
                 },
                 strongholdBackup: {
-                    enabled: true,
+                    enabled: false,
                 },
                 ledgerBackup: {
                     enabled: false,
