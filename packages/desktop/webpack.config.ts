@@ -8,6 +8,7 @@ import { version } from './package.json'
 import features from './features/features'
 import { Configuration as WebpackConfiguration } from 'webpack'
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server'
+import assert from 'assert'
 
 type Mode = 'none' | 'development' | 'production'
 interface Configuration extends WebpackConfiguration {
@@ -150,13 +151,14 @@ const rendererPlugins = [
                 // we ignore the fonts since the `asset/resource` handles them
                 filter: prod ? (asset) => !asset.includes('fonts') : undefined,
                 to({ context, absoluteFilename }) {
+                    assert(typeof absoluteFilename === 'string')
                     return path.relative(context, absoluteFilename).replace(/..[\\/]shared[\\/]/g, '')
                 },
             },
             {
                 from: '../shared/locales/*',
                 to() {
-                    return 'locales/[name].[ext]'
+                    return 'locales/[name][ext]'
                 },
             },
         ],
