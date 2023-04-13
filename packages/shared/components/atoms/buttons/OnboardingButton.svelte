@@ -23,7 +23,7 @@
 
 <button
     type="button"
-    {disabled}
+    disabled={disabled || busy}
     class="rounded-xl px-4 py-3.5 cursor-pointer text-center {classes}"
     on:click|stopPropagation={onClick}
     class:hidden
