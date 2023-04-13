@@ -1,11 +1,10 @@
 <script lang="ts">
     import { onMount } from 'svelte'
+
     import { OnboardingLayout } from '@components'
     import { OnboardingButton, Text, TextType } from '@ui'
-    import features from '@features/features'
-    import { localize } from '@core/i18n'
-    import { formatProtocolName } from '@core/network'
-    import { profileSetupRouter } from '@/routers'
+
+    import { showAppNotification } from '@auxiliary/notification'
     import {
         getProfileTypeFromProfileRecoveryType,
         initialiseProfileManagerFromOnboardingProfile,
@@ -14,6 +13,13 @@
         resetOnboardingProfileWithProfileManager,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
+    import { localize } from '@core/i18n'
+    import { formatProtocolName } from '@core/network'
+
+    import { profileSetupRouter } from '@/routers'
+    import features from '@features/features'
+
+    const RECOVERY_TIMES = [ProfileRecoveryType.Mnemonic, ProfileRecoveryType.Stronghold, ProfileRecoveryType.Ledger]
 
     const title = localize('views.onboarding.profileSetup.setupRecovered.title', {
         values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },
@@ -24,13 +30,32 @@
         [ProfileRecoveryType.Stronghold]: false,
         [ProfileRecoveryType.Ledger]: false,
     }
+    let isDisabled = {
+        [ProfileRecoveryType.Mnemonic]: false,
+        [ProfileRecoveryType.Stronghold]: false,
+        [ProfileRecoveryType.Ledger]: false,
+    }
 
     async function onProfileRecoverySelectionClick(recoveryType: ProfileRecoveryType): Promise<void> {
-        isBusy = { ...isBusy, [recoveryType]: true }
-        const type = getProfileTypeFromProfileRecoveryType(recoveryType)
-        updateOnboardingProfile({ type, recoveryType })
-        await initialiseProfileManagerFromOnboardingProfile(true)
-        $profileSetupRouter.next()
+        isBusy = { ...isBusy, ...RECOVERY_TIMES.reduce((obj, type) => ({ ...obj, [type]: type === recoveryType }), {}) }
+        isDisabled = {
+            ...isDisabled,
+            ...RECOVERY_TIMES.reduce((obj, type) => ({ ...obj, [type]: type !== recoveryType }), {}),
+        }
+        try {
+            const type = getProfileTypeFromProfileRecoveryType(recoveryType)
+            updateOnboardingProfile({ type, recoveryType })
+            await initialiseProfileManagerFromOnboardingProfile(true)
+            $profileSetupRouter.next()
+        } catch (error) {
+            showAppNotification({
+                type: 'error',
+                message: localize(error),
+            })
+        } finally {
+            isBusy = { ...isBusy, ...RECOVERY_TIMES.reduce((obj, type) => ({ ...obj, [type]: false }), {}) }
+            isDisabled = { ...isDisabled, ...RECOVERY_TIMES.reduce((obj, type) => ({ ...obj, [type]: false }), {}) }
+        }
     }
 
     function onBackClick() {
@@ -55,8 +80,9 @@
             busy={isBusy[ProfileRecoveryType.Mnemonic]}
             hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                 ?.restoreProfile?.recoveryPhrase?.hidden}
-            disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.restoreProfile?.recoveryPhrase?.enabled}
+            disabled={isDisabled[ProfileRecoveryType.Mnemonic] ||
+                !features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
+                    ?.restoreProfile?.recoveryPhrase?.enabled}
             onClick={() => onProfileRecoverySelectionClick(ProfileRecoveryType.Mnemonic)}
         />
         <OnboardingButton
@@ -65,8 +91,9 @@
             busy={isBusy[ProfileRecoveryType.Stronghold]}
             hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                 ?.restoreProfile?.strongholdBackup?.hidden}
-            disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.restoreProfile?.strongholdBackup?.enabled}
+            disabled={isDisabled[ProfileRecoveryType.Stronghold] ||
+                !features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
+                    ?.restoreProfile?.strongholdBackup?.enabled}
             onClick={() => onProfileRecoverySelectionClick(ProfileRecoveryType.Stronghold)}
         />
     </div>
