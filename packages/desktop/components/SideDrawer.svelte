@@ -13,12 +13,12 @@
     function setDirection(sideDrawerDirection: SideDrawerDirection): void {
         switch (sideDrawerDirection) {
             case SideDrawerDirection.Bottom:
-                direction = { x: 0, y: -100 }
+                direction = { x: 0, y: 100 }
                 position = 'bottom-0'
                 isVertical = false
                 break
             case SideDrawerDirection.Top:
-                direction = { x: 0, y: 100 }
+                direction = { x: 0, y: -100 }
                 position = 'top-0'
                 isVertical = false
                 break
@@ -28,7 +28,6 @@
                 isVertical = true
                 break
             case SideDrawerDirection.Right:
-            default:
                 direction = { x: 100, y: 0 }
                 position = 'right-0'
                 isVertical = true
@@ -56,7 +55,7 @@
         <panel
             in:fly|local={{ ...direction, duration: DRAWER_ANIMATION_DURATION_MS }}
             out:fly|local={{ ...direction, duration: DRAWER_ANIMATION_DURATION_MS }}
-            class="h-screen bg-white dark:bg-gray-800 {position} {isVertical ? 'vertical' : 'horizontal'}"
+            class="bg-white dark:bg-gray-800 {position} {isVertical ? 'vertical' : 'horizontal'}"
         >
             {#if $sideDrawerState.type === SideDrawerType.Network}
                 <NetworkConfigRouter />
@@ -74,12 +73,12 @@
 
         &.vertical {
             width: 420px;
-            height: 100%;
+            height: 100vw;
         }
 
-        &.height {
-            height: 420px;
-            width: 100%;
+        &.horizontal {
+            height: 350px;
+            width: 100vw;
         }
     }
 </style>
