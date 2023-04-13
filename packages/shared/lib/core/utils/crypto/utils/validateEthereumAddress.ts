@@ -1,9 +1,6 @@
 import { get } from 'svelte/store'
-
 import { Keccak } from 'sha3'
-
-import { networkHrp } from '@core/network/stores'
-
+import { networkHrp } from '@core/profile/stores'
 import { KECCAK_HASH_SIZE } from '../constants'
 import { validateBech32Address } from './validateBech32Address'
 import { Layer1RecipientError } from '@core/layer-2/errors'
