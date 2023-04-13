@@ -152,18 +152,18 @@ const features = {
             },
         },
         helpAndInfo: {
-            enabled: true,
+            enabled: false,
             documentation: {
-                enabled: true,
+                enabled: false,
             },
             faq: {
-                enabled: true,
+                enabled: false,
             },
             discord: {
-                enabled: true,
+                enabled: false,
             },
             reportAnIssue: {
-                enabled: true,
+                enabled: false,
             },
         },
     },
