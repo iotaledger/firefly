@@ -1,6 +1,6 @@
 import { derived, get, Readable } from 'svelte/store'
 
-import { activeProfile } from '@core/profile'
+import { activeProfile } from '@core/profile/stores'
 import { persistent } from '@core/utils/store'
 import { IPersistedNftData, IPersistedNftStore } from '../interfaces'
 
