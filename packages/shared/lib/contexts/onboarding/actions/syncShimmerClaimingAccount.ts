@@ -16,7 +16,7 @@ export async function syncShimmerClaimingAccount(account: IAccount): Promise<voi
     if (!_shimmerClaimingProfileManager) {
         throw new MissingShimmerClaimingProfileManagerError()
     }
-    const { index } = account?.getMetadata()
+    const { index } = account?.getMetadata() ?? {}
     const boundShimmerClaimingAccount = await getAccount(index, shimmerClaimingProfileManager)
     const boundTwinAccount = await getAccount(index, profileManager)
 

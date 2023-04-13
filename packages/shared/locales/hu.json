@@ -323,6 +323,10 @@
                 "title": "Maximális médiafájl méret",
                 "description": "Az ennél nagyobb méretű NFT média fájlokat nem tölti le, csak a média típusát jelölő ikont jeleníti meg"
             },
+            "refreshNftMedia": {
+                "title": "NFT-média frissítése",
+                "description": "A fiókhoz gyorsítótárazott NFT-média törlődik, majd újból letöltődik"
+            },
             "changePassword": {
                 "title": "Jelszó módosítása",
                 "description": "A jelszava a tárcái adatainak biztonságos tárolásához szükséges. Vagyonának biztonsága érdekében megfelelően erős jelszót használjon"
@@ -1174,6 +1178,10 @@
             "iota": "Költöztetés a Chrysalis-hálózatra vagy egy meglévő tárca helyreállítása",
             "shimmer": "Egy meglévő Shimmer-profil helyreállítása"
         },
+        "refreshNftMedia": {
+            "title": "NFT-média frissítése",
+            "description": "Szeretné törölni és újra letölteni a jelen fiókhoz tartozó összes NFT-médiát?"
+        },
         "createWallet": "Hozzon létre egy új {protocol}-profilt",
         "createWalletDescription": "Hozzon létre egy új profilt, ami {protocol, select, iota {a Chrysalis-} shimmer {a Shimmer-} other {egy ismertelen }}protokollon fut!",
         "claimShimmer": "Shimmer jutalom igénylése",
@@ -1219,6 +1227,7 @@
         "unlock": "Felold",
         "updateFirefly": "Firefly frissítése",
         "restartNow": "Újraindítás most",
+        "refresh": "Frissítés",
         "saveBackup": "Mentés Stronghold-ba",
         "customizeAcount": "Tárca testre szabása",
         "hideAccount": "Tárca elrejtése",

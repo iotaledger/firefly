@@ -1,5 +1,5 @@
 import { BASE_TOKEN } from '../constants'
-import { NetworkId, NetworkProtocol } from '../enums'
+import { NetworkId, NetworkProtocol, TokenSupply } from '../enums'
 import { INetwork } from '../interfaces'
 
 export const NETWORK: Readonly<{ [key in NetworkId]?: INetwork }> = {
@@ -17,7 +17,7 @@ export const NETWORK: Readonly<{ [key in NetworkId]?: INetwork }> = {
                 vByteFactorData: 1,
                 vByteFactorKey: 10,
             },
-            tokenSupply: undefined,
+            tokenSupply: TokenSupply.Iota,
         },
         baseToken: BASE_TOKEN[NetworkProtocol.IOTA],
     },
@@ -35,7 +35,7 @@ export const NETWORK: Readonly<{ [key in NetworkId]?: INetwork }> = {
                 vByteFactorData: 1,
                 vByteFactorKey: 10,
             },
-            tokenSupply: '1813620509061365',
+            tokenSupply: TokenSupply.Shimmer,
         },
         baseToken: BASE_TOKEN[NetworkProtocol.Shimmer],
     },
@@ -53,7 +53,7 @@ export const NETWORK: Readonly<{ [key in NetworkId]?: INetwork }> = {
                 vByteFactorData: 1,
                 vByteFactorKey: 10,
             },
-            tokenSupply: '1450896407249092',
+            tokenSupply: TokenSupply.Testnet,
         },
         baseToken: BASE_TOKEN[NetworkProtocol.Shimmer],
     },

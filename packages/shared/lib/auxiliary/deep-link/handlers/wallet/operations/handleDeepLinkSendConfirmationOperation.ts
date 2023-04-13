@@ -1,18 +1,16 @@
-import { get } from 'svelte/store'
-
-import { networkHrp } from '@core/network'
-import { isStringTrue, isValidBech32AddressAndPrefix, getByteLengthOfString, validateAssetId } from '@core/utils'
+import { PopupId, openPopup } from '@auxiliary/popup'
+import { networkHrp } from '@core/profile/stores'
+import { getByteLengthOfString, isStringTrue, isValidBech32AddressAndPrefix, validateAssetId } from '@core/utils'
 import {
-    getAssetById,
-    getUnitFromTokenMetadata,
     NewTransactionDetails,
     NewTransactionType,
+    Subject,
+    getAssetById,
+    getUnitFromTokenMetadata,
     selectedAccountAssets,
     setNewTransactionDetails,
-    Subject,
 } from '@core/wallet'
-import { openPopup, PopupId } from '@auxiliary/popup'
-
+import { get } from 'svelte/store'
 import { SendOperationParameter } from '../../../enums'
 import {
     InvalidAddressError,

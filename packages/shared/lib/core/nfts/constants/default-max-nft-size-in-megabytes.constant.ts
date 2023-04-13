@@ -1,0 +1,1 @@
+export const DEFAULT_MAX_NFT_SIZE_IN_MEGABYTES = 50
