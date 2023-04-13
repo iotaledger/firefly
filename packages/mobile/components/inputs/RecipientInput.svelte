@@ -1,6 +1,6 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { networkHrp } from '@core/network/stores'
+    import { networkHrp } from '@core/profile/stores'
     import { BECH32_ADDRESS_LENGTH } from '@core/utils/constants'
     import { validateBech32Address } from '@core/utils/crypto'
     import { IAccountSubject, IAddressSubject } from '@core/wallet/interfaces'
