@@ -42,7 +42,7 @@
         "@tsconfig/svelte": "^1.0.10",
         "@types/node": "^16.18.23",
         "@types/webpack": "^5.28.1",
-        "copy-webpack-plugin": "^7.0.0",
+        "copy-webpack-plugin": "^11.0.0",
         "cross-env": "^7.0.2",
         "css-loader": "^5.0.1",
         "electron": "22.3.5",
