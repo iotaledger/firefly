@@ -1,5 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli'
 
+import features from './features/features'
+
 const prod = process.env.NODE_ENV === 'production'
 const ip = process.env.CAP_IP || 'localhost'
 
@@ -20,6 +22,9 @@ const config: CapacitorConfig = {
         },
         Keyboard: {
             resize: 'none',
+        },
+        PrivacyScreen: {
+            enable: features.capacitor.privacyScreen.enabled,
         },
     },
     server: prod ? undefined : serverConfig,

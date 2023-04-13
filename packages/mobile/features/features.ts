@@ -1,6 +1,8 @@
+import capacitorFeatures from './capacitor.features'
 import onboardingFeatures from './onboarding.features'
 
 const features = {
+    capacitor: capacitorFeatures,
     onboarding: onboardingFeatures,
     dashboard: {
         enabled: false,
