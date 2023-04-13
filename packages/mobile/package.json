@@ -18,7 +18,7 @@
         "@capacitor/cli": "^3.4.1",
         "@capacitor/core": "3.4.1",
         "@capacitor/ios": "3.4.1",
-        "copy-webpack-plugin": "^7.0.0",
+        "copy-webpack-plugin": "^11.0.0",
         "css-loader": "^5.0.1",
         "esbuild-loader": "^3.0.0",
         "imagemagick": "^0.1.3",
