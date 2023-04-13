@@ -40,7 +40,7 @@ export async function prepareShimmerClaimingAccount(
      * NOTE: We filter only the basic outputs with one unlock condition to ensure
      * that asynchronous transactions aren't considered (extremely unlikely edge case).
      */
-    const unspentOutputs = (await account?.unspentOutputs()).filter(filterShimmerClaimingOutputs)
+    const unspentOutputs = (await account?.unspentOutputs())?.filter(filterShimmerClaimingOutputs)
     const unclaimedRewards = sumTotalFromOutputs(unspentOutputs)
 
     state = state ?? deriveShimmerClaimingAccountState(claimedRewards, unclaimedRewards)

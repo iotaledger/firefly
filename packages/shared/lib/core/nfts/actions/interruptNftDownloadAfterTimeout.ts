@@ -1,15 +1,16 @@
 import { Platform } from '@core/app'
 import { MILLISECONDS_PER_SECOND, sleep } from '@core/utils'
 import { get } from 'svelte/store'
-import { MAX_NFT_DOWNLOADING_TIME_IN_SECONDS } from '../constants'
 import { DownloadWarningType } from '../enums'
 import { downloadingNftId } from '../stores'
 import { updateNftInAllAccountNfts } from './updateNftInAllAccountNfts'
+import { activeProfile } from '@core/profile/stores'
 
 export async function interruptNftDownloadAfterTimeout(accountIndex: number): Promise<void> {
     const currentlyDownloadingNft = get(downloadingNftId)
 
-    await sleep(MAX_NFT_DOWNLOADING_TIME_IN_SECONDS * MILLISECONDS_PER_SECOND)
+    const downloadTimeout = get(activeProfile).settings.maxMediaDownloadTimeInSeconds * MILLISECONDS_PER_SECOND
+    await sleep(downloadTimeout)
     const updatedDownloadingNft = get(downloadingNftId)
 
     if (currentlyDownloadingNft && currentlyDownloadingNft === updatedDownloadingNft) {

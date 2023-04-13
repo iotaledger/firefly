@@ -21,5 +21,6 @@
         },
         "types": ["node"]
     },
-    "include": ["./capacitor"]
+    "include": ["./capacitor"],
+    "exclude": ["./capacitor/plugins", "../**/tests"]
 }

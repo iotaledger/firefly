@@ -1,6 +1,5 @@
 import { get } from 'svelte/store'
-
-import { networkHrp } from '@core/network/stores'
+import { networkHrp } from '@core/profile/stores'
 import { Converter } from '@core/utils/convert'
 import { Bech32Helper } from '@core/utils/crypto'
 

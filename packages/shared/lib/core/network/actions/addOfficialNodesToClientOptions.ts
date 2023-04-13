@@ -3,9 +3,9 @@ import { activeProfile } from '@core/profile'
 import { get } from 'svelte/store'
 
 export function addOfficialNodesToClientOptions(): void {
-    const { clientOptions, networkProtocol, networkType } = get(activeProfile)
+    const { clientOptions, network } = get(activeProfile)
     const currentNodes = clientOptions?.nodes
-    const officialNodes = getOfficialNodes(networkProtocol, networkType)
+    const officialNodes = getOfficialNodes(network.id)
     const newOfficialNodes = officialNodes.filter(
         (officialNode) => !currentNodes.some((currentNode) => currentNode.url === officialNode.url)
     )
