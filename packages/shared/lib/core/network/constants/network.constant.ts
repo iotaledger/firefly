@@ -1,72 +1,60 @@
 import { BASE_TOKEN } from '../constants'
-import { NetworkProtocol, NetworkType } from '../enums'
+import { NetworkId, NetworkProtocol, TokenSupply } from '../enums'
 import { INetwork } from '../interfaces'
 
-export const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkType]?: INetwork } }> = {
-    [NetworkProtocol.IOTA]: {
-        [NetworkType.Mainnet]: {
-            id: 'iota-mainnet',
-            name: 'IOTA',
-            protocol: NetworkProtocol.IOTA,
-            type: NetworkType.Mainnet,
+export const NETWORK: Readonly<{ [key in NetworkId]?: INetwork }> = {
+    [NetworkId.Iota]: {
+        id: NetworkId.Iota,
+        name: 'IOTA',
+        protocol: {
+            version: 1,
+            networkName: 'iota',
             bech32Hrp: 'iota',
-            baseToken: BASE_TOKEN[NetworkProtocol.IOTA],
+            minPowScore: 1500,
+            belowMaxDepth: 15,
             rentStructure: {
                 vByteCost: 500,
-                vByteFactorData: 10,
-                vByteFactorKey: 1,
+                vByteFactorData: 1,
+                vByteFactorKey: 10,
             },
+            tokenSupply: TokenSupply.Iota,
         },
-        [NetworkType.Devnet]: {
-            id: 'iota-devnet',
-            name: 'IOTA Devnet',
-            protocol: NetworkProtocol.IOTA,
-            type: NetworkType.Devnet,
-            bech32Hrp: 'atoi',
-            baseToken: BASE_TOKEN[NetworkProtocol.IOTA],
-            rentStructure: {
-                vByteCost: 500,
-                vByteFactorData: 10,
-                vByteFactorKey: 1,
-            },
-        },
-        [NetworkType.PrivateNet]: <INetwork>{
-            name: 'Private Net',
-            protocol: NetworkProtocol.IOTA,
-            type: NetworkType.PrivateNet,
-        },
+        baseToken: BASE_TOKEN[NetworkProtocol.IOTA],
     },
-    [NetworkProtocol.Shimmer]: {
-        [NetworkType.Mainnet]: {
-            id: 'shimmer-mainnet',
-            name: 'Shimmer',
-            protocol: NetworkProtocol.Shimmer,
-            type: NetworkType.Mainnet,
+    [NetworkId.Shimmer]: {
+        id: NetworkId.Shimmer,
+        name: 'Shimmer',
+        protocol: {
+            version: 2,
+            networkName: 'shimmer',
             bech32Hrp: 'smr',
-            baseToken: BASE_TOKEN[NetworkProtocol.Shimmer],
+            minPowScore: 1500,
+            belowMaxDepth: 15,
             rentStructure: {
-                vByteCost: 500,
-                vByteFactorData: 10,
-                vByteFactorKey: 1,
+                vByteCost: 100,
+                vByteFactorData: 1,
+                vByteFactorKey: 10,
             },
+            tokenSupply: TokenSupply.Shimmer,
         },
-        [NetworkType.Devnet]: {
-            id: 'testnet',
-            name: 'Testnet',
-            protocol: NetworkProtocol.Shimmer,
-            type: NetworkType.Devnet,
+        baseToken: BASE_TOKEN[NetworkProtocol.Shimmer],
+    },
+    [NetworkId.Testnet]: {
+        id: NetworkId.Testnet,
+        name: 'Testnet',
+        protocol: {
+            version: 2,
+            networkName: 'testnet',
             bech32Hrp: 'rms',
-            baseToken: BASE_TOKEN[NetworkProtocol.Shimmer],
+            minPowScore: 1500,
+            belowMaxDepth: 15,
             rentStructure: {
-                vByteCost: 500,
-                vByteFactorData: 10,
-                vByteFactorKey: 1,
+                vByteCost: 100,
+                vByteFactorData: 1,
+                vByteFactorKey: 10,
             },
+            tokenSupply: TokenSupply.Testnet,
         },
-        [NetworkType.PrivateNet]: <INetwork>{
-            name: 'Private Net',
-            protocol: NetworkProtocol.Shimmer,
-            type: NetworkType.PrivateNet,
-        },
+        baseToken: BASE_TOKEN[NetworkProtocol.Shimmer],
     },
 }
