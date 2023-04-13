@@ -121,7 +121,7 @@ const features = {
                 enabled: false,
             },
             deleteProfile: {
-                enabled: true,
+                enabled: false,
             },
         },
         advanced: {
