@@ -9,6 +9,7 @@ export const DEFAULT_PERSISTED_PROFILE_OBJECT: IPersistedProfile = {
     id: '',
     name: '',
     type: ProfileType.Software,
+    network: undefined,
     networkProtocol: NetworkProtocol?.Shimmer,
     networkType: NetworkType?.Mainnet,
     lastStrongholdBackupTime: undefined,
