@@ -11,7 +11,7 @@
         saveActiveProfile,
     } from '@core/profile'
     import { appRouter, dashboardRoute } from '@core/router'
-    import { Idle, NetworkSideDrawer } from 'shared/components'
+    import { Idle } from 'shared/components'
     import { stopPollingLedgerNanoStatus } from '@core/ledger'
     import { removeDisplayNotification, showAppNotification } from '@auxiliary/notification'
     import { Platform } from '@core/app'
@@ -23,6 +23,8 @@
     import { Governance } from './governance'
     import Sidebar from './Sidebar.svelte'
     import TopNavigation from './TopNavigation.svelte'
+    import { SideDrawer } from '@components'
+
     import {
         addNftsToDownloadQueue,
         downloadingNftId,
@@ -110,7 +112,7 @@
         <div class="flex flex-col h-full dashboard-w">
             <svelte:component this={tabs[$dashboardRoute]} on:next={$appRouter.next} />
         </div>
-        <NetworkSideDrawer />
+        <SideDrawer />
     </div>
 </div>
 

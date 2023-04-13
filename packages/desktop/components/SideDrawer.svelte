@@ -1,6 +1,7 @@
 <script lang="ts">
     import { fade, fly } from 'svelte/transition'
-    import { SideDrawerDirection, closeSideDrawer, sideDrawerState } from '@auxiliary/side-drawer'
+    import { NetworkConfigRouter } from '@components'
+    import { SideDrawerDirection, closeSideDrawer, sideDrawerState, SideDrawerType } from '../lib/side-drawer'
 
     export let onClose: () => unknown = () => {}
 
@@ -43,22 +44,26 @@
     }
 </script>
 
-<drawer class="fixed top-0 left-0 w-screen h-screen">
-    <overlay
-        in:fade|local={{ duration: DRAWER_ANIMATION_DURATION_MS }}
-        out:fade|local={{ duration: DRAWER_ANIMATION_DURATION_MS }}
-        on:click={onOverlayClick}
-        on:keydown={() => {}}
-        class="fixed top-0 left-0 w-full h-full z-0 bg-gray-700 dark:bg-gray-900 bg-opacity-60 dark:bg-opacity-60"
-    />
-    <panel
-        in:fly|local={{ ...direction, duration: DRAWER_ANIMATION_DURATION_MS }}
-        out:fly|local={{ ...direction, duration: DRAWER_ANIMATION_DURATION_MS }}
-        class="h-screen bg-white dark:bg-gray-800 {position} {isVertical ? 'vertical' : 'horizontal'}"
-    >
-        <slot />
-    </panel>
-</drawer>
+{#if $sideDrawerState.active}
+    <drawer class="fixed top-0 left-0 w-screen h-screen">
+        <overlay
+            in:fade|local={{ duration: DRAWER_ANIMATION_DURATION_MS }}
+            out:fade|local={{ duration: DRAWER_ANIMATION_DURATION_MS }}
+            on:click={onOverlayClick}
+            on:keydown={() => {}}
+            class="fixed top-0 left-0 w-full h-full z-0 bg-gray-700 dark:bg-gray-900 bg-opacity-60 dark:bg-opacity-60"
+        />
+        <panel
+            in:fly|local={{ ...direction, duration: DRAWER_ANIMATION_DURATION_MS }}
+            out:fly|local={{ ...direction, duration: DRAWER_ANIMATION_DURATION_MS }}
+            class="h-screen bg-white dark:bg-gray-800 {position} {isVertical ? 'vertical' : 'horizontal'}"
+        >
+            {#if $sideDrawerState.type === SideDrawerType.Network}
+                <NetworkConfigRouter />
+            {/if}
+        </panel>
+    </drawer>
+{/if}
 
 <style type="text/scss">
     panel {
