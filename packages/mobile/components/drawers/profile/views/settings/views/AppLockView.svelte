@@ -3,14 +3,14 @@
 
     import { localize } from '@core/i18n'
     import { activeProfile, DEFAULT_PERSISTED_PROFILE_OBJECT, updateActiveProfileSettings } from '@core/profile'
-    import type { IDropdownChoice } from '@core/utils'
+    import type { IDropdownItem } from '@core/utils'
 
     let selectedLockTimeout: number =
         $activeProfile?.settings?.lockScreenTimeoutInMinutes ??
         DEFAULT_PERSISTED_PROFILE_OBJECT.settings.lockScreenTimeoutInMinutes
     $: selectedLockTimeout, updateActiveProfileSettings({ lockScreenTimeoutInMinutes: selectedLockTimeout })
 
-    function lockScreenTimeoutOptions(): IDropdownChoice[] {
+    function lockScreenTimeoutOptions(): IDropdownItem<number>[] {
         return [1, 5, 10, 30, 60].map((time) => ({
             value: time,
             label: assignTimeoutOptionLabel(time),

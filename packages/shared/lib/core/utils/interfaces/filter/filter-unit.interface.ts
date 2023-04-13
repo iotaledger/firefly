@@ -23,7 +23,7 @@ export type OrderFilterUnit = {
     type: 'order'
     active: boolean
     choices: string[]
-    ascDesc: OrderOption.Asc
+    ascDesc: OrderOption
     selected: string
     labelKey?: string
     localeKey: string

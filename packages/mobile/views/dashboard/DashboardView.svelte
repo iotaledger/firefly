@@ -6,8 +6,13 @@
     import { selectedAccount } from '@core/account'
     import { appSettings } from '@core/app'
     import { localize } from '@core/i18n'
-    import { BASE_TOKEN } from '@core/network'
-    import { activeProfile, hasStrongholdLocked, reflectLockedStronghold, saveActiveProfile } from '@core/profile'
+    import {
+        activeProfile,
+        getBaseToken,
+        hasStrongholdLocked,
+        reflectLockedStronghold,
+        saveActiveProfile,
+    } from '@core/profile'
     import { selectedAccountAssets } from '@core/wallet'
 
     import { DrawerId, openDrawer } from '@/auxiliary/drawer'
@@ -39,7 +44,7 @@
                 <TogglableAssetBalanceLabel
                     asset={$selectedAccountAssets?.baseCoin}
                     amount={$selectedAccount.balances?.baseCoin?.available}
-                    tokenMetadata={BASE_TOKEN[$activeProfile?.networkProtocol]}
+                    tokenMetadata={getBaseToken()}
                 />
             </div>
             {#if features?.dashboard?.send?.enabled || features?.dashboard?.receive?.enabled}
