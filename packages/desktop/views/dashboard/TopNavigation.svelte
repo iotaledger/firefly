@@ -19,6 +19,7 @@
     } from '@core/router'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { popupState } from '@auxiliary/popup'
+    import { SideDrawerType, openSideDrawer } from '@desktop/side-drawer'
 
     let isBackButtonVisible = false
 
@@ -57,6 +58,10 @@
                 break
         }
     }
+
+    function onNetworkClick(): void {
+        openSideDrawer({ type: SideDrawerType.Network })
+    }
 </script>
 
 <top-navigation class:disabled={$platform === PlatformOption.Windows && isPopupVisible}>
@@ -65,23 +70,23 @@
             <Icon width="18" icon={IconEnum.ArrowLeft} classes="text-gray-800 dark:text-gray-500" />
             <Text overrideColor classes="text-gray-800 dark:text-gray-500">{localize('actions.back')}</Text>
         </button>
+    {:else}
+        <div />
     {/if}
+
     <AccountSwitcher />
+
+    <button class="bg-white rounded-xl text-14 px-2" on:click={onNetworkClick}>Shimmer</button>
 </top-navigation>
 
 <style type="text/scss">
     top-navigation {
-        @apply fixed flex flex-row justify-center items-center z-10 top-0 left-20;
-        @apply py-2 w-full;
-        width: calc(100% - 14rem);
+        @apply fixed flex flex-row justify-between items-center z-10 top-0 left-18 h-9 px-8;
+        @apply py-1;
+        width: calc(100% - 4.5rem);
 
         &.disabled {
             @apply opacity-50 pointer-events-none;
-        }
-
-        button {
-            @apply absolute flex items-center left-2 gap-2 cursor-pointer;
-            -webkit-app-region: none;
         }
     }
 </style>
