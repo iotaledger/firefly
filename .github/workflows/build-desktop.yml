@@ -3,24 +3,27 @@ name: Build Desktop
 on:
     workflow_dispatch:
         inputs:
-            debugElectronBuilder:
-                description: 'Verbose electron-builder output'
-                required: true
-                default: 'true'
-            stage:
-                description: 'Stage (alpha, beta, or prod)'
-                required: true
-                default: 'alpha'
             os:
-                description: 'OS (macos-11, ubuntu-20.04, windows-2019)'
+                description: 'OS'
                 required: true
-                default: 'macos-11'
+                type: choice
+                options:
+                - macos-11
+                - ubuntu-20.04
+                - windows-2019
+            stage:
+                description: 'Stage'
+                required: true
+                type: choice
+                options:
+                - alpha
+                - beta
+                - prod
 
 jobs:
     build:
         runs-on: ${{ matrix.os }}
         if: ${{ always() }}
-        needs: [setup]
         strategy:
             matrix:
                 os: ['${{ inputs.os }}']
@@ -35,7 +38,7 @@ jobs:
             - name: Set up Node.js
               uses: actions/setup-node@v1
               with:
-                  node-version: 16.4.2
+                  node-version: 18.15.0
 
             # Used to read the `binding.gyp` file from `@iota/wallet`
             - name: Set up Python 3.10
@@ -74,11 +77,11 @@ jobs:
 
             - name: Enable verbose output for electron-builder (macOS/Linux)
               run: echo "DEBUG=electron-builder" >> $GITHUB_ENV
-              if: matrix.os != 'windows-2019' && github.event.inputs.debugElectronBuilder && github.event.inputs.debugElectronBuilder == 'true'
+              if: matrix.os != 'windows-2019'
 
             - name: Enable verbose output for electron-builder (Windows)
               run: echo "DEBUG=electron-builder" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-              if: matrix.os == 'windows-2019' && github.event.inputs.debugElectronBuilder && github.event.inputs.debugElectronBuilder == 'true'
+              if: matrix.os == 'windows-2019'
 
             - name: Install dependencies
               # Increase network timeout threshold to reduce build failures on Windows

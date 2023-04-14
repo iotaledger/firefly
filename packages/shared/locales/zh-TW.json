@@ -323,6 +323,14 @@
                 "title": "最大媒體大小",
                 "description": "超出此大小限制的 NFT 媒體將不會被下載，而由該媒體類型的佔位符號代替呈現。"
             },
+            "maxMediaDownloadTime": {
+                "title": "Maximum download time",
+                "description": "NFT media which take longer than this limit to download will be canceled and a placeholder representing the media type will be displayed instead"
+            },
+            "refreshNftMedia": {
+                "title": "Refresh NFT media",
+                "description": "NFT media cached for this account will be deleted and then downloaded again"
+            },
             "changePassword": {
                 "title": "修改密碼",
                 "description": "您的密碼是用來保護錢包的防線，必須使用足夠強大的密碼才能保護您的資產。"
@@ -1174,6 +1182,10 @@
             "iota": "遷移至Chrysalis或恢復一個既存錢包",
             "shimmer": "復原既有的Shimmer檔"
         },
+        "refreshNftMedia": {
+            "title": "Refresh NFT media",
+            "description": "Do you want to delete and re-download all NFT media for this account?"
+        },
         "createWallet": "建立一個新的 {protocol} 檔案",
         "createWalletDescription": "創建一個在 {protocol, select,iota {Chrysalis} shimmer {Shimmer} other {Unknown}} 上運行的新設定檔",
         "claimShimmer": "領取Shimmer質押獎勵",
@@ -1219,6 +1231,7 @@
         "unlock": "解鎖",
         "updateFirefly": "更新 Firefly",
         "restartNow": "立即重新啟動",
+        "refresh": "Refresh",
         "saveBackup": "保存 Stronghold 備份",
         "customizeAcount": "自訂錢包",
         "hideAccount": "隱藏錢包",

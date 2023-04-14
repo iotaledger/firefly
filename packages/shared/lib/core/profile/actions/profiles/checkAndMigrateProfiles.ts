@@ -1,7 +1,6 @@
-import { get } from 'svelte/store'
-
+import { NETWORK } from '@core/network'
 import { INode } from '@core/network/interfaces'
-
+import { get } from 'svelte/store'
 import {
     DEFAULT_PERSISTED_PROFILE_OBJECT,
     DEFAULT_STRONGHOLD_PASSWORD_TIMEOUT_IN_MINUTES,
@@ -9,6 +8,7 @@ import {
 } from '../../constants'
 import { IPersistedProfile } from '../../interfaces'
 import { currentProfileVersion, profiles, saveProfile } from '../../stores'
+import { DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_SECONDS, DEFAULT_MAX_NFT_SIZE_IN_MEGABYTES } from '@core/nfts'
 
 /**
  * Migrates profile data in need of being modified to accommodate changes
@@ -49,6 +49,7 @@ const persistedProfileMigrationsMap: Record<number, (existingProfile: unknown) =
     7: persistedProfileMigrationToV8,
     8: persistedProfileMigrationToV9,
     9: persistedProfileMigrationToV10,
+    10: persistedProfileMigrationToV11,
 }
 
 function persistedProfileMigrationToV4(existingProfile: unknown): void {
@@ -158,8 +159,22 @@ function persistedProfileMigrationToV10(existingProfile: IPersistedProfile): voi
     existingProfile.settings = {
         ...existingProfile.settings,
         strongholdPasswordTimeoutInMinutes: DEFAULT_STRONGHOLD_PASSWORD_TIMEOUT_IN_MINUTES,
+        maxMediaSizeInMegaBytes: DEFAULT_MAX_NFT_SIZE_IN_MEGABYTES,
     }
+
     saveProfile(existingProfile)
 }
 
-// TODO: Rename accountMetadata to accountPersistedData in next migration
+function persistedProfileMigrationToV11(existingProfile: IPersistedProfile): void {
+    const network = NETWORK?.[existingProfile?.networkProtocol]?.[existingProfile?.networkType]
+    existingProfile.network = network
+
+    existingProfile.settings = {
+        ...existingProfile.settings,
+        maxMediaDownloadTimeInSeconds: DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_SECONDS,
+    }
+
+    saveProfile(existingProfile)
+}
+
+// TODO: Rename accountMetadata to accountPersistedData

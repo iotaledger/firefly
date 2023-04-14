@@ -10,6 +10,7 @@ export function saveActiveProfile(): void {
             id: _activeProfile?.id,
             name: _activeProfile?.name,
             type: _activeProfile?.type,
+            network: _activeProfile?.network,
             networkProtocol: _activeProfile?.networkProtocol,
             networkType: _activeProfile?.networkType,
             lastStrongholdBackupTime: _activeProfile?.lastStrongholdBackupTime,
