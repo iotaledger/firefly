@@ -323,6 +323,10 @@
                 "title": "Maximale Dateigröße",
                 "description": "NFT-Medien mit Größen größer als dieses Limit werden nicht heruntergeladen und stattdessen ein Platzhalter angezeigt, der den Medientyp repräsentiert"
             },
+            "maxMediaDownloadTime": {
+                "title": "Maximum download time",
+                "description": "NFT media which take longer than this limit to download will be canceled and a placeholder representing the media type will be displayed instead"
+            },
             "refreshNftMedia": {
                 "title": "NFT Medien aktualisieren",
                 "description": "NFT Media Cache für dieses Konto wird gelöscht und erneut heruntergeladen"
