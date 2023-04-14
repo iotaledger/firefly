@@ -20,6 +20,7 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { popupState } from '@auxiliary/popup'
     import { DrawerId, openDrawer } from '@desktop/auxilary/drawer'
+    import features from '@features/features'
 
     let isBackButtonVisible = false
 
@@ -60,23 +61,27 @@
     }
 
     function onNetworkClick(): void {
-        openDrawer({ id: DrawerId.Network })
+        openDrawer({ id: DrawerId.NetworkConfig })
     }
 </script>
 
 <top-navigation class:disabled={$platform === PlatformOption.Windows && isPopupVisible}>
-    {#if isBackButtonVisible}
-        <button type="button" on:click={onBackClick}>
-            <Icon width="18" icon={IconEnum.ArrowLeft} classes="text-gray-800 dark:text-gray-500" />
-            <Text overrideColor classes="text-gray-800 dark:text-gray-500">{localize('actions.back')}</Text>
-        </button>
-    {:else}
-        <div />
-    {/if}
+    <div class="left-button">
+        {#if isBackButtonVisible}
+            <button type="button" on:click={onBackClick}>
+                <Icon width="18" icon={IconEnum.ArrowLeft} classes="text-gray-800 dark:text-gray-500" />
+                <Text overrideColor classes="text-gray-800 dark:text-gray-500">{localize('actions.back')}</Text>
+            </button>
+        {/if}
+    </div>
 
     <AccountSwitcher />
 
-    <button class="bg-white rounded-xl text-14 px-2" on:click={onNetworkClick}>Shimmer</button>
+    <div class="right-button flex justify-end">
+        {#if features?.network?.config?.enabled}
+            <button class="bg-white rounded-xl text-14 px-2" on:click={onNetworkClick}>Shimmer</button>
+        {/if}
+    </div>
 </top-navigation>
 
 <style type="text/scss">
@@ -87,6 +92,16 @@
 
         &.disabled {
             @apply opacity-50 pointer-events-none;
+        }
+
+        button {
+            @apply flex items-center gap-2;
+            -webkit-app-region: none;
+        }
+
+        .left-button,
+        .right-button {
+            width: 150px;
         }
     }
 </style>

@@ -59,7 +59,7 @@
             out:fly|local={{ ...direction, duration: DRAWER_ANIMATION_DURATION_MS }}
             class="bg-white dark:bg-gray-800 {position} {isVertical ? 'vertical' : 'horizontal'}"
         >
-            {#if $drawerState.id === DrawerId.Network}
+            {#if $drawerState.id === DrawerId.NetworkConfig}
                 <NetworkConfigRouter />
             {/if}
 
