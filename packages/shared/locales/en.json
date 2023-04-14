@@ -502,7 +502,7 @@
             "drawers": {
                 "networkConfig": {
                     "connectedChains": {
-                        "title": "Connected Chains"
+                        "title": "Connected chains"
                     }
                 }
             }
