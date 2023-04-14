@@ -3,11 +3,11 @@ import { ISideDrawerState } from '../interfaces'
 import { sideDrawerState } from '../stores'
 
 export function openSideDrawer({
-    type,
+    id,
     direction = SideDrawerDirection.Right,
     hideClose = false,
     preventClose = false,
     overflow = false,
 }: Omit<ISideDrawerState, 'active'>): void {
-    sideDrawerState.set({ active: true, type, hideClose, preventClose, direction, overflow })
+    sideDrawerState.set({ active: true, id, hideClose, preventClose, direction, overflow })
 }

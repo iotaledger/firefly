@@ -1,12 +1,7 @@
 <script lang="ts">
     import { fade, fly } from 'svelte/transition'
     import { NetworkConfigRouter } from '@components'
-    import {
-        SideDrawerDirection,
-        closeSideDrawer,
-        sideDrawerState,
-        SideDrawerType,
-    } from '@desktop/auxilary/side-drawer'
+    import { SideDrawerDirection, closeSideDrawer, sideDrawerState, SideDrawerId } from '@desktop/auxilary/side-drawer'
 
     export let onClose: () => unknown = () => {}
 
@@ -62,7 +57,7 @@
             out:fly|local={{ ...direction, duration: DRAWER_ANIMATION_DURATION_MS }}
             class="bg-white dark:bg-gray-800 {position} {isVertical ? 'vertical' : 'horizontal'}"
         >
-            {#if $sideDrawerState.type === SideDrawerType.Network}
+            {#if $sideDrawerState.id === SideDrawerId.Network}
                 <NetworkConfigRouter />
             {/if}
         </panel>

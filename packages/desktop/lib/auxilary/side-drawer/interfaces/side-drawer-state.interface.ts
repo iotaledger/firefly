@@ -1,8 +1,8 @@
-import { SideDrawerDirection, SideDrawerType } from '../enums'
+import { SideDrawerDirection, SideDrawerId } from '../enums'
 
 export interface ISideDrawerState {
     active: boolean
-    type: SideDrawerType
+    id: SideDrawerId
     hideClose?: boolean
     preventClose?: boolean
     direction?: SideDrawerDirection
