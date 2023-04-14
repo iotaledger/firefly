@@ -1,6 +1,7 @@
 <script lang="ts">
     import { fade, fly } from 'svelte/transition'
-    import { Icon } from '@ui'
+    import { Icon, Text, TextType } from '@ui'
+    import { localize } from '@core/i18n'
     import { NetworkConfigDrawerRouter } from '@components'
     import { Router } from '@core/router'
     import { Icon as IconEnum } from '@auxiliary/icon/enums'
@@ -12,6 +13,7 @@
 
     let drawerRoute: unknown
     let drawerRouter: Router<unknown>
+    $: showBackButton = drawerRoute && drawerRouter?.hasHistory()
 
     let direction: { x: number; y: number }
     let position: string
@@ -71,26 +73,32 @@
             out:fly|local={{ ...direction, duration: DRAWER_ANIMATION_DURATION_MS }}
             class="bg-white dark:bg-gray-800 {position} {isVertical ? 'vertical' : 'horizontal'}"
         >
-            {#if drawerRoute && drawerRouter?.hasHistory()}
-                <button on:click={onBackClick} class="absolute top-7 left-7 focus:text-blue-500">
-                    <Icon
-                        icon={IconEnum.ArrowLeft}
-                        classes="text-gray-500 dark:text-white hover:text-gray-600 dark:hover:text-gray-100"
-                    />
-                </button>
-            {/if}
+            <div class="flex flex-row items-center mb-12">
+                {#if showBackButton}
+                    <button on:click={onBackClick} class="absolute top-6.5 focus:text-blue-500">
+                        <Icon
+                            icon={IconEnum.ArrowLeft}
+                            classes="text-gray-500 dark:text-white hover:text-gray-600 dark:hover:text-gray-100"
+                        />
+                    </button>
+                {/if}
+
+                <Text type={TextType.h4} classes="text-center {showBackButton ? 'ml-9' : ''}">
+                    {localize(`views.dashboard.drawers.${$drawerState?.id}.${drawerRoute}.title`)}
+                </Text>
+
+                {#if !$drawerState.hideClose}
+                    <button on:click={onCloseClick} class="absolute top-7 right-7 focus:text-blue-500">
+                        <Icon
+                            icon={IconEnum.Close}
+                            classes="text-gray-500 dark:text-white hover:text-gray-600 dark:hover:text-gray-100"
+                        />
+                    </button>
+                {/if}
+            </div>
 
             {#if $drawerState.id === DrawerId.NetworkConfig}
                 <NetworkConfigDrawerRouter bind:drawerRoute bind:drawerRouter />
-            {/if}
-
-            {#if !$drawerState.hideClose}
-                <button on:click={onCloseClick} class="absolute top-7 right-7 focus:text-blue-500">
-                    <Icon
-                        icon={IconEnum.Close}
-                        classes="text-gray-500 dark:text-white hover:text-gray-600 dark:hover:text-gray-100"
-                    />
-                </button>
             {/if}
         </panel>
     </drawer>

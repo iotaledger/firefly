@@ -1,6 +1,5 @@
 <script lang="ts">
-    import { Button, Text, TextType } from '@ui'
-    import { localize } from '@core/i18n'
+    import { Button } from '@ui'
     import { NetworkConfigRoute, networkConfigRouter } from '@desktop/routers'
 
     function onNetworkCardClick(): void {
@@ -17,13 +16,7 @@
 </script>
 
 <connected-chains-side-drawer class="flex flex-col justify-between mb-6">
-    <div class="flex flex-row self-start justify-center content-center">
-        <Text type={TextType.h4} classes="text-center">
-            {localize('views.dashboard.drawers.networkConfig.connectedChains.title')}
-        </Text>
-    </div>
-
-    <Button onClick={onNetworkCardClick} classes="mt-12">Chain information</Button>
-    <Button onClick={onQrCodeIconClick} classes="mt-12">Chain deposit address</Button>
-    <Button onClick={onAddChainClick} classes="mt-12">Add chain</Button>
+    <Button onClick={onNetworkCardClick}>Chain information</Button>
+    <Button onClick={onQrCodeIconClick} classes="mt-6">Chain deposit address</Button>
+    <Button onClick={onAddChainClick} classes="mt-6">Add chain</Button>
 </connected-chains-side-drawer>
