@@ -1,6 +1,8 @@
+import capacitorFeatures from './capacitor.features'
 import onboardingFeatures from './onboarding.features'
 
 const features = {
+    capacitor: capacitorFeatures,
     onboarding: onboardingFeatures,
     dashboard: {
         enabled: false,
@@ -121,7 +123,7 @@ const features = {
                 enabled: false,
             },
             deleteProfile: {
-                enabled: true,
+                enabled: false,
             },
         },
         advanced: {
@@ -152,18 +154,18 @@ const features = {
             },
         },
         helpAndInfo: {
-            enabled: true,
+            enabled: false,
             documentation: {
-                enabled: true,
+                enabled: false,
             },
             faq: {
-                enabled: true,
+                enabled: false,
             },
             discord: {
-                enabled: true,
+                enabled: false,
             },
             reportAnIssue: {
-                enabled: true,
+                enabled: false,
             },
         },
     },

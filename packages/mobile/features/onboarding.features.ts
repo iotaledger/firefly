@@ -127,7 +127,7 @@ const onboardingFeatures = {
     shimmer: {
         enabled: true,
         mainnet: {
-            enabled: true,
+            enabled: false,
             claimRewards: {
                 enabled: false,
                 hidden: false,
@@ -142,22 +142,22 @@ const onboardingFeatures = {
                 },
             },
             newProfile: {
-                enabled: true,
+                enabled: false,
                 softwareProfile: {
-                    enabled: true,
+                    enabled: false,
                 },
                 ledgerProfile: {
                     enabled: false,
                 },
             },
             restoreProfile: {
-                enabled: true,
+                enabled: false,
                 migrateSeed: {
                     enabled: false,
-                    hidden: true,
+                    hidden: false,
                 },
                 recoveryPhrase: {
-                    enabled: true,
+                    enabled: false,
                 },
                 strongholdBackup: {
                     enabled: false,
@@ -170,13 +170,13 @@ const onboardingFeatures = {
         devnet: {
             enabled: true,
             claimRewards: {
-                enabled: true,
-                hidden: false,
+                enabled: false,
+                hidden: true,
                 recoveryPhrase: {
-                    enabled: true,
+                    enabled: false,
                 },
                 strongholdBackup: {
-                    enabled: true,
+                    enabled: false,
                 },
                 ledgerBackup: {
                     enabled: false,
