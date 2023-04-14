@@ -1,12 +1,17 @@
 <script lang="ts">
-    import { localize } from '@core/i18n'
-    import { Text, TextType } from '@ui'
+    import { onDestroy, onMount } from 'svelte'
+    import { NetworkConfigRoute, NetworkConfigRouter, networkConfigRoute, networkConfigRouter } from '@desktop/routers'
+    import { ConnectedChainsSideDrawer } from './drawers'
+
+    onMount(() => {
+        $networkConfigRouter = new NetworkConfigRouter()
+    })
+
+    onDestroy(() => {
+        $networkConfigRouter = null
+    })
 </script>
 
-<div class="flex flex-row justify-between mb-6">
-    <div class="flex justify-center content-center">
-        <Text type={TextType.h4} classes="text-center"
-            >{localize('views.dashboard.drawers.networkConfig.connectedChains.title')}</Text
-        >
-    </div>
-</div>
+{#if $networkConfigRoute === NetworkConfigRoute.ConnectedChains}
+    <ConnectedChainsSideDrawer />
+{/if}

@@ -7,7 +7,7 @@
     import { activeProfile } from '@core/profile/stores'
     import { collectiblesRouter, DashboardRoute, dashboardRouter, governanceRouter, settingsRouter } from '@core/router'
     import { localize } from '@core/i18n'
-    import { ISidebarTab } from '../../lib/routers'
+    import { ISidebarTab } from '@desktop/routers'
 
     let profileModal: Modal
 
