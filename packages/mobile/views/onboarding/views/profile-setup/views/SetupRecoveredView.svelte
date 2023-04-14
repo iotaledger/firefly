@@ -19,8 +19,7 @@
     import { profileSetupRouter } from '@/routers'
     import features from '@features/features'
 
-    const RECOVERY_TIMES = [ProfileRecoveryType.Mnemonic, ProfileRecoveryType.Stronghold, ProfileRecoveryType.Ledger]
-
+    const RECOVERY_TYPES = [ProfileRecoveryType.Mnemonic, ProfileRecoveryType.Stronghold, ProfileRecoveryType.Ledger]
     const title = localize('views.onboarding.profileSetup.setupRecovered.title', {
         values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },
     })
@@ -37,10 +36,10 @@
     }
 
     async function onProfileRecoverySelectionClick(recoveryType: ProfileRecoveryType): Promise<void> {
-        isBusy = { ...isBusy, ...RECOVERY_TIMES.reduce((obj, type) => ({ ...obj, [type]: type === recoveryType }), {}) }
+        isBusy = { ...isBusy, ...RECOVERY_TYPES.reduce((obj, type) => ({ ...obj, [type]: type === recoveryType }), {}) }
         isDisabled = {
             ...isDisabled,
-            ...RECOVERY_TIMES.reduce((obj, type) => ({ ...obj, [type]: type !== recoveryType }), {}),
+            ...RECOVERY_TYPES.reduce((obj, type) => ({ ...obj, [type]: type !== recoveryType }), {}),
         }
         try {
             const type = getProfileTypeFromProfileRecoveryType(recoveryType)
@@ -53,8 +52,8 @@
                 message: localize(error),
             })
         } finally {
-            isBusy = { ...isBusy, ...RECOVERY_TIMES.reduce((obj, type) => ({ ...obj, [type]: false }), {}) }
-            isDisabled = { ...isDisabled, ...RECOVERY_TIMES.reduce((obj, type) => ({ ...obj, [type]: false }), {}) }
+            isBusy = { ...isBusy, ...RECOVERY_TYPES.reduce((obj, type) => ({ ...obj, [type]: false }), {}) }
+            isDisabled = { ...isDisabled, ...RECOVERY_TYPES.reduce((obj, type) => ({ ...obj, [type]: false }), {}) }
         }
     }
 
