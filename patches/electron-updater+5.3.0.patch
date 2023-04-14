@@ -19,6 +19,7 @@ index 9d35ee9..b117791 100644
                  handleError(logger, e, null);
 -                resolve(null);
 -                return;
++                logger.warn(`Cannot execute Get-AuthenticodeSignature: ${error || stderr}. Aborting update.`);
 +                throw e;
              }
          });
