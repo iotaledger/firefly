@@ -15,8 +15,8 @@
     }
 </script>
 
-<connected-chains-side-drawer class="flex flex-col justify-between mb-6">
+<connected-chains-drawer class="flex flex-col justify-between mb-6">
     <Button onClick={onNetworkCardClick}>Chain information</Button>
     <Button onClick={onQrCodeIconClick} classes="mt-6">Chain deposit address</Button>
     <Button onClick={onAddChainClick} classes="mt-6">Add chain</Button>
-</connected-chains-side-drawer>
+</connected-chains-drawer>

@@ -3,12 +3,12 @@
     import { Router } from '@core/router'
     import { NetworkConfigRoute, NetworkConfigRouter, networkConfigRoute, networkConfigRouter } from '@desktop/routers'
     import {
-        AddChainSideDrawer,
-        ChainDepositAddressSideDrawer,
-        ChainInformationSideDrawer,
-        ConnectedChainsSideDrawer,
-        EditChainSideDrawer,
-        RemoveChainSideDrawer,
+        AddChainDrawer,
+        ChainDepositAddressDrawer,
+        ChainInformationDrawer,
+        ConnectedChainsDrawer,
+        EditChainDrawer,
+        RemoveChainDrawer,
     } from './drawers'
 
     export let drawerRoute: unknown
@@ -27,15 +27,15 @@
 </script>
 
 {#if $networkConfigRoute === NetworkConfigRoute.ConnectedChains}
-    <ConnectedChainsSideDrawer />
+    <ConnectedChainsDrawer />
 {:else if $networkConfigRoute === NetworkConfigRoute.ChainInformation}
-    <ChainInformationSideDrawer />
+    <ChainInformationDrawer />
 {:else if $networkConfigRoute === NetworkConfigRoute.EditChain}
-    <EditChainSideDrawer />
+    <EditChainDrawer />
 {:else if $networkConfigRoute === NetworkConfigRoute.RemoveChain}
-    <RemoveChainSideDrawer />
+    <RemoveChainDrawer />
 {:else if $networkConfigRoute === NetworkConfigRoute.ChainDepositAddress}
-    <ChainDepositAddressSideDrawer />
+    <ChainDepositAddressDrawer />
 {:else if $networkConfigRoute === NetworkConfigRoute.AddChain}
-    <AddChainSideDrawer />
+    <AddChainDrawer />
 {/if}
