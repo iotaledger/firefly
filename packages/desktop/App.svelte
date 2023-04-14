@@ -46,6 +46,7 @@
     } from './lib/routers'
     import { openSettings } from './lib/routers/actions/openSettings'
     import { downloadNextNftInQueue, nftDownloadQueue } from '@core/nfts'
+    import { closeDrawer } from '@desktop/auxilary/drawer'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -134,12 +135,14 @@
         Platform.onEvent('menu-navigate-settings', () => {
             if ($loggedIn) {
                 closePopup()
+                closeDrawer()
                 $routerManager.openSettings()
             } else {
                 settings = true
             }
         })
         Platform.onEvent('menu-check-for-update', () => {
+            closeDrawer()
             openPopup({
                 id: PopupId.CheckForUpdates,
                 props: {
@@ -148,9 +151,11 @@
             })
         })
         Platform.onEvent('menu-error-log', () => {
+            closeDrawer()
             openPopup({ id: PopupId.ErrorLog })
         })
         Platform.onEvent('menu-diagnostics', () => {
+            closeDrawer()
             openPopup({ id: PopupId.Diagnostics })
         })
         Platform.onEvent('menu-create-developer-profile', async () => {
