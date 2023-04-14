@@ -11,9 +11,6 @@ const walletFeatures: IWalletFeatures = {
             enabled: true,
         },
     },
-    showLayer2: {
-        enabled: true,
-    },
     assets: {
         enabled: true,
         burnAsset: {
