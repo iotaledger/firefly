@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Modal, NetworkIndicator, NotificationBadge, ProfileActionsModal } from '@ui'
+    import { Modal, NotificationBadge, ProfileActionsModal, Icon } from '@ui'
     import { SidebarTab } from '@components'
     import features from '@features/features'
     import { appVersionDetails } from '@core/app/stores'
@@ -96,7 +96,7 @@
 >
     <nav class="flex flex-grow flex-col items-center justify-between">
         <div class="flex flex-col items-center">
-            <NetworkIndicator />
+            <Icon width="48" height="48" icon={$activeProfile?.networkProtocol} classes="dark:text-white" />
         </div>
         <div class="flex flex-col flex-auto items-center justify-center mb-7 space-y-8">
             {#each sidebarTabs as tab}
