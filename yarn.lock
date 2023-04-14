@@ -859,10 +859,10 @@
     "@types/warning" "^3.0.0"
     warning "^4.0.3"
 
-"@iota/types@2.0.0-rc.1":
-  version "2.0.0-rc.1"
-  resolved "https://registry.npmjs.org/@iota/types/-/types-2.0.0-rc.1.tgz"
-  integrity sha512-IDov83MBDlRJJXj98sPhBVslgCSqFexsvelDTDeWKZwYG8G7I+BnMCjdVXiOzLrWy3ScWJljqx1yW4cqmTdpRg==
+"@iota/types@2.0.0-rc.2":
+  version "2.0.0-rc.2"
+  resolved "https://registry.yarnpkg.com/@iota/types/-/types-2.0.0-rc.2.tgz#a4b8e5c3423a2afd322fc05ebfaa6b27587d9a96"
+  integrity sha512-huL+171zMQgGYV4/zhHLFcE8heTLRJhtlqLEJaM1Q+klb2KxNqFX0EySU8pxZ/nslh0Dem3QQ+Jmwv1FdBmpFQ==
 
 "@iota/types@^1.0.0-beta.15", "@iota/types@^1.0.0-beta.9":
   version "1.0.0-beta.15"
@@ -884,10 +884,10 @@
   dependencies:
     big-integer "^1.6.51"
 
-"@iota/util.js@^1.9.0-stardust.5":
-  version "1.9.0-stardust.5"
-  resolved "https://registry.npmjs.org/@iota/util.js/-/util.js-1.9.0-stardust.5.tgz"
-  integrity sha512-BGXzzjUQQYaV/H0bXJYKW+Zgd9PIN+HLPH8BcYhubI65X4G2ID23/osmpK/za+Ds6t/MkpdPKIiBwZPGXuCUBw==
+"@iota/util.js@^2.0.0-rc.1":
+  version "2.0.0-rc.1"
+  resolved "https://registry.yarnpkg.com/@iota/util.js/-/util.js-2.0.0-rc.1.tgz#444c47cf7a236489ca118d7dc0e8468e856a5c5d"
+  integrity sha512-tG+qsCHhztGuthUPqLlckih3Ump+IcKCDEl+Sb7ACOOR7JM73KOGaRud8NlLu4GNqQyQh7s9Gn2GRkXBJ1apiA==
   dependencies:
     big-integer "^1.6.51"
 
