@@ -1,7 +1,12 @@
 <script lang="ts">
     import { fade, fly } from 'svelte/transition'
     import { NetworkConfigRouter } from '@components'
-    import { SideDrawerDirection, closeSideDrawer, sideDrawerState, SideDrawerType } from '../lib/side-drawer'
+    import {
+        SideDrawerDirection,
+        closeSideDrawer,
+        sideDrawerState,
+        SideDrawerType,
+    } from '@desktop/auxilary/side-drawer'
 
     export let onClose: () => unknown = () => {}
 
