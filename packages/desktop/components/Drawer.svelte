@@ -2,6 +2,8 @@
     import { fade, fly } from 'svelte/transition'
     import { NetworkConfigRouter } from '@components'
     import { DrawerDirection, closeDrawer, drawerState, DrawerId } from '@desktop/auxilary/drawer'
+    import { Icon } from '@ui'
+    import { Icon as IconEnum } from '@auxiliary/icon/enums'
 
     export let onClose: () => unknown = () => {}
 
@@ -35,7 +37,7 @@
         }
     }
 
-    function onOverlayClick(): void {
+    function tryCloseDrawer(): void {
         if (!$drawerState.preventClose) {
             onClose && onClose()
             closeDrawer()
@@ -48,7 +50,7 @@
         <overlay
             in:fade|local={{ duration: DRAWER_ANIMATION_DURATION_MS }}
             out:fade|local={{ duration: DRAWER_ANIMATION_DURATION_MS }}
-            on:click={onOverlayClick}
+            on:click={tryCloseDrawer}
             on:keydown={() => {}}
             class="fixed top-0 left-0 w-full h-full z-0 bg-gray-700 dark:bg-gray-900 bg-opacity-60 dark:bg-opacity-60"
         />
@@ -59,6 +61,15 @@
         >
             {#if $drawerState.id === DrawerId.Network}
                 <NetworkConfigRouter />
+            {/if}
+
+            {#if !$drawerState.hideClose}
+                <button on:click={tryCloseDrawer} class="absolute top-7 right-7 focus:text-blue-500">
+                    <Icon
+                        icon={IconEnum.Close}
+                        classes="text-gray-500 dark:text-white hover:text-gray-600 dark:hover:text-gray-100"
+                    />
+                </button>
             {/if}
         </panel>
     </drawer>
