@@ -12,7 +12,6 @@
 
     let drawerRoute: DrawerRoute
     let drawerRouter: Router<DrawerRoute>
-    $: showBackButton = drawerRoute && drawerRouter?.hasHistory()
 
     let direction: { x: number; y: number }
     let position: string
