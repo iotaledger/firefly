@@ -20,7 +20,7 @@
     import { profileSetupRouter } from '@/routers'
     import features from '@features/features'
 
-    const RECOVERY_TYPES = [ProfileRecoveryType.Mnemonic, ProfileRecoveryType.Stronghold, ProfileRecoveryType.Ledger]
+    const RECOVERY_TYPES = Object.values(ProfileRecoveryType)
     const title = localize('views.onboarding.profileSetup.setupClaimed.title')
 
     let isBusy = {
