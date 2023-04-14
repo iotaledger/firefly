@@ -1,6 +1,6 @@
 <script lang="ts">
     import { fade, fly } from 'svelte/transition'
-    import { NetworkConfigRouter } from '@components'
+    import { NetworkConfigDrawerRouter } from '@components'
     import { DrawerDirection, closeDrawer, drawerState, DrawerId } from '@desktop/auxilary/drawer'
     import { Icon } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon/enums'
@@ -60,7 +60,7 @@
             class="bg-white dark:bg-gray-800 {position} {isVertical ? 'vertical' : 'horizontal'}"
         >
             {#if $drawerState.id === DrawerId.NetworkConfig}
-                <NetworkConfigRouter />
+                <NetworkConfigDrawerRouter />
             {/if}
 
             {#if !$drawerState.hideClose}

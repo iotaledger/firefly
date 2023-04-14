@@ -1,1 +1,1 @@
-export { default as NetworkConfigRouter } from './network-config/NetworkConfigRouter.svelte'
+export { default as NetworkConfigDrawerRouter } from './network-config/NetworkConfigDrawerRouter.svelte'
