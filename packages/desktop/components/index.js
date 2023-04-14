@@ -20,6 +20,6 @@ export { default as ProposalStatusTimelineTooltip } from './ProposalStatusTimeli
 export { default as Scroller } from './Scroller.svelte'
 export { default as SendButton } from './SendButton.svelte'
 export { default as SidebarTab } from './SidebarTab.svelte'
-export { default as SideDrawer } from './SideDrawer.svelte'
+export { default as Drawer } from './Drawer.svelte'
 export { default as TitleBar } from './TitleBar.svelte'
 export { default as VotingPower } from './VotingPower.svelte'

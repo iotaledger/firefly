@@ -1,7 +1,7 @@
 <script lang="ts">
     import { fade, fly } from 'svelte/transition'
     import { NetworkConfigRouter } from '@components'
-    import { SideDrawerDirection, closeSideDrawer, sideDrawerState, SideDrawerId } from '@desktop/auxilary/side-drawer'
+    import { DrawerDirection, closeDrawer, drawerState, DrawerId } from '@desktop/auxilary/drawer'
 
     export let onClose: () => unknown = () => {}
 
@@ -9,25 +9,25 @@
 
     let direction, position, isVertical
 
-    $: setDirection($sideDrawerState.direction)
-    function setDirection(sideDrawerDirection: SideDrawerDirection): void {
-        switch (sideDrawerDirection) {
-            case SideDrawerDirection.Bottom:
+    $: setDirection($drawerState.direction)
+    function setDirection(drawerDirection: DrawerDirection): void {
+        switch (drawerDirection) {
+            case DrawerDirection.Bottom:
                 direction = { x: 0, y: 100 }
                 position = 'bottom-0'
                 isVertical = false
                 break
-            case SideDrawerDirection.Top:
+            case DrawerDirection.Top:
                 direction = { x: 0, y: -100 }
                 position = 'top-0'
                 isVertical = false
                 break
-            case SideDrawerDirection.Left:
+            case DrawerDirection.Left:
                 direction = { x: -100, y: 0 }
                 position = 'left-0'
                 isVertical = true
                 break
-            case SideDrawerDirection.Right:
+            case DrawerDirection.Right:
                 direction = { x: 100, y: 0 }
                 position = 'right-0'
                 isVertical = true
@@ -36,14 +36,14 @@
     }
 
     function onOverlayClick(): void {
-        if (!$sideDrawerState.preventClose) {
+        if (!$drawerState.preventClose) {
             onClose && onClose()
-            closeSideDrawer()
+            closeDrawer()
         }
     }
 </script>
 
-{#if $sideDrawerState.active}
+{#if $drawerState.active}
     <drawer class="fixed top-0 left-0 w-screen h-screen z-30">
         <overlay
             in:fade|local={{ duration: DRAWER_ANIMATION_DURATION_MS }}
@@ -57,7 +57,7 @@
             out:fly|local={{ ...direction, duration: DRAWER_ANIMATION_DURATION_MS }}
             class="bg-white dark:bg-gray-800 {position} {isVertical ? 'vertical' : 'horizontal'}"
         >
-            {#if $sideDrawerState.id === SideDrawerId.Network}
+            {#if $drawerState.id === DrawerId.Network}
                 <NetworkConfigRouter />
             {/if}
         </panel>

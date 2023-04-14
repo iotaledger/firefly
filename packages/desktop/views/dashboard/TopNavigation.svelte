@@ -19,7 +19,7 @@
     } from '@core/router'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { popupState } from '@auxiliary/popup'
-    import { SideDrawerId, openSideDrawer } from '@desktop/auxilary/side-drawer'
+    import { DrawerId, openDrawer } from '@desktop/auxilary/drawer'
 
     let isBackButtonVisible = false
 
@@ -60,7 +60,7 @@
     }
 
     function onNetworkClick(): void {
-        openSideDrawer({ id: SideDrawerId.Network })
+        openDrawer({ id: DrawerId.Network })
     }
 </script>
 

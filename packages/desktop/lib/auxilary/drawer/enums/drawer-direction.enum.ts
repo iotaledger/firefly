@@ -1,4 +1,4 @@
-export enum SideDrawerDirection {
+export enum DrawerDirection {
     Right = 'right',
     Left = 'left',
     Top = 'top',

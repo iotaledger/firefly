@@ -1,3 +1,3 @@
-export enum SideDrawerId {
+export enum DrawerId {
     Network = 'network',
 }

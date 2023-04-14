@@ -1,6 +1,6 @@
-import { ISideDrawerState } from '../interfaces'
+import { IDrawerState } from '../interfaces'
 
-export const DEFAULT_SIDE_DRAWER_STATE: ISideDrawerState = {
+export const DEFAULT_DRAWER_STATE: IDrawerState = {
     active: false,
     id: null,
     hideClose: false,
