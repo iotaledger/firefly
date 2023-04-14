@@ -11,11 +11,11 @@
     }
 </script>
 
-<div class="flex flex-col justify-between mb-6">
+<chain-information-side-drawer class="flex flex-col justify-between mb-6">
     <div class="flex flex-row self-start justify-center content-center">
         <Text type={TextType.h4} classes="text-center">Chain information</Text>
     </div>
 
     <Button onClick={onEditChainClick} classes="mt-12">Edit chain</Button>
     <Button onClick={onRemoveChainClick} classes="mt-12">Remove chain</Button>
-</div>
+</chain-information-side-drawer>
