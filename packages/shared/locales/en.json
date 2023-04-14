@@ -465,10 +465,7 @@
                 "disconnected": "Disconnected from node",
                 "status": "Status",
                 "messagesPerSecond": "Messages per second",
-                "referencedRate": "Referenced rate",
-                "drawer": {
-                    "title": "Connected Chains"
-                }
+                "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "All settings",
@@ -500,6 +497,13 @@
                     "title": "New update available",
                     "updateVersion": "Firefly v{version}",
                     "button": "Update"
+                }
+            },
+            "drawers": {
+                "networkConfig": {
+                    "connectedChains": {
+                        "title": "Connected Chains"
+                    }
                 }
             }
         },

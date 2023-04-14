@@ -1,3 +1,3 @@
 export enum DrawerId {
-    Network = 'network',
+    NetworkConfig = 'networkConfig',
 }

@@ -5,6 +5,8 @@
 
 <div class="flex flex-row justify-between mb-6">
     <div class="flex justify-center content-center">
-        <Text type={TextType.h4} classes="text-center">{localize('views.dashboard.network.drawer.title')}</Text>
+        <Text type={TextType.h4} classes="text-center"
+            >{localize('views.dashboard.drawers.networkConfig.connectedChains.title')}</Text
+        >
     </div>
 </div>
