@@ -24,16 +24,8 @@
         values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },
     })
 
-    let isBusy = {
-        [ProfileRecoveryType.Mnemonic]: false,
-        [ProfileRecoveryType.Stronghold]: false,
-        [ProfileRecoveryType.Ledger]: false,
-    }
-    let isDisabled = {
-        [ProfileRecoveryType.Mnemonic]: false,
-        [ProfileRecoveryType.Stronghold]: false,
-        [ProfileRecoveryType.Ledger]: false,
-    }
+    let isBusy = RECOVERY_TYPES.reduce((obj, type) => ({ ...obj, [type]: false }), {})
+    let isDisabled = RECOVERY_TYPES.reduce((obj, type) => ({ ...obj, [type]: false }), {})
 
     async function onProfileRecoverySelectionClick(recoveryType: ProfileRecoveryType): Promise<void> {
         isBusy = { ...isBusy, ...RECOVERY_TYPES.reduce((obj, type) => ({ ...obj, [type]: type === recoveryType }), {}) }
@@ -52,8 +44,8 @@
                 message: localize(error),
             })
         } finally {
-            isBusy = { ...isBusy, ...RECOVERY_TYPES.reduce((obj, type) => ({ ...obj, [type]: false }), {}) }
-            isDisabled = { ...isDisabled, ...RECOVERY_TYPES.reduce((obj, type) => ({ ...obj, [type]: false }), {}) }
+            isBusy = RECOVERY_TYPES.reduce((obj, type) => ({ ...obj, [type]: false }), {})
+            isDisabled = RECOVERY_TYPES.reduce((obj, type) => ({ ...obj, [type]: false }), {})
         }
     }
 

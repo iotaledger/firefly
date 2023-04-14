@@ -17,19 +17,26 @@
     const title = localize('views.onboarding.profileRecovery.importMnemonicPhrase.title')
 
     let input = ''
+    let isBusy = false
 
     async function onContinueClick(): Promise<void> {
-        const isClaimedProfileSetupType = $onboardingProfile?.setupType === ProfileSetupType.Claimed
-        const mnemonic = input.split(' ')
-        updateOnboardingProfile({ mnemonic })
-        await setStrongholdPassword(DEFAULT_STRONGHOLD_PASSWORD)
-        updateOnboardingProfile({ strongholdPassword: DEFAULT_STRONGHOLD_PASSWORD })
-        await verifyAndStoreMnemonic()
-        if (isClaimedProfileSetupType) {
-            await $shimmerClaimingProfileManager?.setStrongholdPassword(DEFAULT_STRONGHOLD_PASSWORD)
-            await $shimmerClaimingProfileManager?.storeMnemonic(mnemonic.join(' '))
+        try {
+            const isClaimedProfileSetupType = $onboardingProfile?.setupType === ProfileSetupType.Claimed
+            const mnemonic = input.split(' ')
+            updateOnboardingProfile({ mnemonic })
+            await setStrongholdPassword(DEFAULT_STRONGHOLD_PASSWORD)
+            updateOnboardingProfile({ strongholdPassword: DEFAULT_STRONGHOLD_PASSWORD })
+            await verifyAndStoreMnemonic()
+            if (isClaimedProfileSetupType) {
+                await $shimmerClaimingProfileManager?.setStrongholdPassword(DEFAULT_STRONGHOLD_PASSWORD)
+                await $shimmerClaimingProfileManager?.storeMnemonic(mnemonic.join(' '))
+            }
+            $profileRecoveryRouter.next()
+        } catch (err) {
+            console.error(err)
+        } finally {
+            isBusy = false
         }
-        $profileRecoveryRouter.next()
     }
 
     function onBackClick(): void {
@@ -54,7 +61,13 @@
         </form>
     </div>
     <div slot="footer" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-        <Button type={HTMLButtonType.Submit} form="text-import-form" classes="flex-1" disabled={input.length === 0}>
+        <Button
+            type={HTMLButtonType.Submit}
+            form="text-import-form"
+            classes="flex-1"
+            disabled={input.length === 0}
+            {isBusy}
+        >
             {localize('actions.continue')}
         </Button>
     </div>
