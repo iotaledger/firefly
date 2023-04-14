@@ -4,9 +4,10 @@
     import { Router } from '@core/router'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { drawerState } from '@desktop/auxilary/drawer'
+    import { DrawerRoute } from '@desktop/routers'
 
-    export let drawerRoute: unknown
-    export let drawerRouter: Router<unknown>
+    export let drawerRoute: DrawerRoute
+    export let drawerRouter: Router<DrawerRoute>
     export let onClose: (..._: unknown[]) => void = () => {}
 
     $: showBackButton = drawerRoute && drawerRouter?.hasHistory()

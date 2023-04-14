@@ -4,13 +4,14 @@
     import DrawerHeader from './DrawerHeader.svelte'
     import { Router } from '@core/router'
     import { closeDrawer, DrawerDirection, DrawerId, drawerState } from '@desktop/auxilary/drawer'
+    import { DrawerRoute } from '@desktop/routers'
 
     export let onClose: () => unknown = () => {}
 
     const DRAWER_ANIMATION_DURATION_MS = 200
 
-    let drawerRoute: unknown
-    let drawerRouter: Router<unknown>
+    let drawerRoute: DrawerRoute
+    let drawerRouter: Router<DrawerRoute>
     $: showBackButton = drawerRoute && drawerRouter?.hasHistory()
 
     let direction: { x: number; y: number }

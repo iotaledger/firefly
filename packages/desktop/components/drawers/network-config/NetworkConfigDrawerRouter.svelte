@@ -11,8 +11,8 @@
         RemoveChainDrawer,
     } from './drawers'
 
-    export let drawerRoute: unknown
-    export let drawerRouter: Router<unknown>
+    export let drawerRoute: NetworkConfigRoute
+    export let drawerRouter: Router<NetworkConfigRoute>
 
     $: drawerRoute = $networkConfigRoute
 
