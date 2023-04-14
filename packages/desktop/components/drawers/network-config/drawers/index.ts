@@ -1,2 +1,6 @@
+export { default as AddChainSideDrawer } from './AddChainSideDrawer.svelte'
+export { default as ChainDepositAddressSideDrawer } from './ChainDepositAddressSideDrawer.svelte'
 export { default as ChainInformationSideDrawer } from './ChainInformationSideDrawer.svelte'
 export { default as ConnectedChainsSideDrawer } from './ConnectedChainsSideDrawer.svelte'
+export { default as EditChainSideDrawer } from './EditChainSideDrawer.svelte'
+export { default as RemoveChainSideDrawer } from './RemoveChainSideDrawer.svelte'
