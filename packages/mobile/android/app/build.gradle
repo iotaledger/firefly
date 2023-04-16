@@ -15,6 +15,17 @@ android {
             ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
+    productFlavors {
+        alpha {
+            applicationIdSuffix ".shimmer.alpha"
+        }
+        beta {
+            applicationIdSuffix ".shimmer.beta"
+        }
+        prod {
+            applicationIdSuffix ".shimmer"
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
