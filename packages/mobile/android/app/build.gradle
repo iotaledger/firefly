@@ -15,14 +15,23 @@ android {
             ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
+    flavorDimensions "version"
     productFlavors {
         alpha {
+            dimension "version"
             applicationIdSuffix ".shimmer.alpha"
+            versionNameSuffix "-alpha"
+
         }
         beta {
+            
+            dimension "version"
             applicationIdSuffix ".shimmer.beta"
+            versionNameSuffix "-beta"
         }
         prod {
+            
+            dimension "version"
             applicationIdSuffix ".shimmer"
         }
     }
