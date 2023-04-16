@@ -10,7 +10,6 @@
     "scripts": {
         "start": "bash -c 'capacitor/assets/assetgen.sh ${1}.png && NODE_ENV=development cap sync ${0} && cap open ${0} && STAGE=${1} NODE_ENV=development PLATFORM=mobile webpack-dev-server --progress'",
         "build": "webpack info && rm -rf public/build && bash -c 'capacitor/assets/assetgen.sh ${1}.png && STAGE=${0} NODE_ENV=production PLATFORM=mobile webpack --progress --stats && NODE_ENV=production cap sync ${0} && cap open ${0}'",
-        "rename-appid-android": "mv android/app/src/main/java/org/iota/firefly/alpha/mobile/* android/app/src/main/java/org/iota/firefly/mobile/",
         "force-install-pods": "cd ios/App && rm -rf ~/Library/Caches/CocoaPods Pods ~/Library/Developer/Xcode/DerivedData && pod deintegrate && pod install"
     },
     "devDependencies": {
