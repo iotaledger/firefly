@@ -498,6 +498,13 @@
                     "updateVersion": "Firefly v{version}",
                     "button": "업데이트"
                 }
+            },
+            "drawers": {
+                "networkConfig": {
+                    "connectedChains": {
+                        "title": "Connected chains"
+                    }
+                }
             }
         },
         "staking": {
