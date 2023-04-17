@@ -1,12 +1,11 @@
 <script lang="ts">
-    import { IPersistedProfile } from '@core/profile'
+    import { IPersistedProfile, ProfileType } from '@core/profile'
     import { getInitials as _getInitials } from '@core/utils'
-    import { DeveloperIndicatorPill, Icon, NetworkIconBadge, StrongholdBadge, Text, TextType } from 'shared/components'
+    import { DeveloperIndicatorPill, Icon, NetworkIconBadge, StrongholdBadge, Text, TextType } from '@ui'
 
     export let profile: IPersistedProfile
     export let classes: string = undefined
     export let bgColor: string = ''
-    export let isLedgerProfile: boolean = false
     export let updateRequired: boolean = false
 
     export let onClick: undefined | ((profileId: string) => void) = undefined
@@ -48,7 +47,7 @@
             {/if}
         </button>
         <div class="flex flex-row items-baseline justify-center space-x-1.5 mb-2 w-full">
-            {#if isLedgerProfile}
+            {#if profile?.type === ProfileType.Ledger}
                 <Icon
                     icon={'ledger'}
                     classes="text-gray-900 dark:text-gray-100 relative top-0.5"

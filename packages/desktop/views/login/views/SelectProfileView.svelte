@@ -13,7 +13,7 @@
     import { ProfileType, loadPersistedProfileIntoActiveProfile, profiles } from '@core/profile'
     import { OnboardingRoute, loginRouter, onboardingRouter, routerManager } from '@core/router'
     import features from '@features/features'
-    import { Icon, Logo, Profile } from 'shared/components'
+    import { Icon, Logo, Profile } from '@ui'
 
     function onContinueClick(profileId: string): void {
         loadPersistedProfileIntoActiveProfile(profileId)
@@ -51,7 +51,6 @@
                     {profile}
                     bgColor="blue"
                     onClick={onContinueClick}
-                    isLedgerProfile={profile?.type === ProfileType.Ledger}
                     updateRequired={profile?.type === ProfileType.Software &&
                         !isStrongholdUpdated(profile) &&
                         features.onboarding.strongholdVersionCheck.enabled}
