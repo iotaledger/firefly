@@ -1,12 +1,41 @@
 <script lang="ts">
-    import { localize } from '@core/i18n'
-    import { Text, TextType } from '@ui'
+    import { onDestroy, onMount } from 'svelte'
+    import { Router } from '@core/router'
+    import { NetworkConfigRoute, NetworkConfigRouter, networkConfigRoute, networkConfigRouter } from '@desktop/routers'
+    import {
+        AddChainDrawer,
+        ChainDepositAddressDrawer,
+        ChainInformationDrawer,
+        ConnectedChainsDrawer,
+        EditChainDrawer,
+        RemoveChainDrawer,
+    } from './drawers'
+
+    export let drawerRoute: NetworkConfigRoute
+    export let drawerRouter: Router<NetworkConfigRoute>
+
+    $: drawerRoute = $networkConfigRoute
+
+    onMount(() => {
+        $networkConfigRouter = new NetworkConfigRouter()
+        drawerRouter = $networkConfigRouter
+    })
+
+    onDestroy(() => {
+        $networkConfigRouter = null
+    })
 </script>
 
-<div class="flex flex-row justify-between mb-6">
-    <div class="flex justify-center content-center">
-        <Text type={TextType.h4} classes="text-center"
-            >{localize('views.dashboard.drawers.networkConfig.connectedChains.title')}</Text
-        >
-    </div>
-</div>
+{#if $networkConfigRoute === NetworkConfigRoute.ConnectedChains}
+    <ConnectedChainsDrawer />
+{:else if $networkConfigRoute === NetworkConfigRoute.ChainInformation}
+    <ChainInformationDrawer />
+{:else if $networkConfigRoute === NetworkConfigRoute.EditChain}
+    <EditChainDrawer />
+{:else if $networkConfigRoute === NetworkConfigRoute.RemoveChain}
+    <RemoveChainDrawer />
+{:else if $networkConfigRoute === NetworkConfigRoute.ChainDepositAddress}
+    <ChainDepositAddressDrawer />
+{:else if $networkConfigRoute === NetworkConfigRoute.AddChain}
+    <AddChainDrawer />
+{/if}
