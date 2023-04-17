@@ -7,7 +7,6 @@
         addOfficialNodesToClientOptions,
         INode,
         NETWORK_HEALTH_COLORS,
-        NETWORK_STATUS_DESCRIPTION,
         NetworkHealth,
         networkStatus,
         NetworkType,
@@ -19,6 +18,7 @@
     import { networkInformationSettingsRouter } from '@/routers'
 
     const { networkType } = $activeProfile
+    $: health = $networkStatus.health ?? NetworkHealth.Disconnected
 
     function onAddNodeClick(): void {
         $networkInformationSettingsRouter.next({ action: NetworkInformationSettingsAction.AddNode })
@@ -41,12 +41,8 @@
             <div>
                 <Text type={TextType.p} classes="inline" secondary>{localize('views.dashboard.network.status')}:</Text>
                 <div>
-                    <p class="text-13 text-{NETWORK_HEALTH_COLORS[$networkStatus.health || 0]}-500">
-                        {localize(
-                            `views.dashboard.network.${
-                                $networkStatus.description || NETWORK_STATUS_DESCRIPTION[NetworkHealth.Disconnected]
-                            }`
-                        )}
+                    <p class="text-13 text-{NETWORK_HEALTH_COLORS[health]}-500">
+                        {localize(`views.dashboard.network.${health}`)}
                     </p>
                 </div>
             </div>

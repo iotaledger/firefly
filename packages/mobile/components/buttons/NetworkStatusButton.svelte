@@ -1,12 +1,6 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import {
-        NetworkHealth,
-        networkStatus,
-        NETWORK_HEALTH_COLORS,
-        NETWORK_STATUS_DESCRIPTION,
-        nodeInfo,
-    } from '@core/network'
+    import { NetworkHealth, networkStatus, NETWORK_HEALTH_COLORS, nodeInfo } from '@core/network'
     import { Icon as IconTypes } from '@lib/auxiliary/icon'
     import { ProfileActionButton } from '@components'
 
@@ -16,7 +10,7 @@
 
     $: health = $networkStatus.health ?? NetworkHealth.Down
     $: healthColor = `${NETWORK_HEALTH_COLORS[health]}-500`
-    $: description = $networkStatus.description ?? NETWORK_STATUS_DESCRIPTION[NetworkHealth.Disconnected]
+    $: description = $networkStatus.health ?? NetworkHealth.Disconnected
 </script>
 
 <ProfileActionButton
