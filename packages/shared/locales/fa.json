@@ -498,6 +498,13 @@
                     "updateVersion": "فایرفلای نسخه {version}",
                     "button": "به‌روزرسانی"
                 }
+            },
+            "drawers": {
+                "networkConfig": {
+                    "connectedChains": {
+                        "title": "Connected chains"
+                    }
+                }
             }
         },
         "staking": {

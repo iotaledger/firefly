@@ -498,6 +498,13 @@
                     "updateVersion": "פיירפליי v{version}",
                     "button": "עדכון"
                 }
+            },
+            "drawers": {
+                "networkConfig": {
+                    "connectedChains": {
+                        "title": "Connected chains"
+                    }
+                }
             }
         },
         "staking": {
