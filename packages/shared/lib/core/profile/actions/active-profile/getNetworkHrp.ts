@@ -1,4 +1,4 @@
-import { activeProfile } from '@core/profile/stores'
+import { activeProfile } from '../../stores'
 import { get } from 'svelte/store'
 
 export function getNetworkHrp(): string {
