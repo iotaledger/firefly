@@ -8282,10 +8282,10 @@ svelte@^3.49.0:
   resolved "https://registry.npmjs.org/svelte/-/svelte-3.58.0.tgz"
   integrity sha512-brIBNNB76mXFmU/Kerm4wFnkskBbluBDCjx/8TcpYRb298Yh2dztS2kQ6bhtjMcvUhd5ynClfwpz5h2gnzdQ1A==
 
-svelty-picker@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.npmjs.org/svelty-picker/-/svelty-picker-1.3.0.tgz"
-  integrity sha512-cmcTg1BunSsPzWF5PDVuSjwtw5BhaMafGCbSZsiIYMh3yEfxVWeLwFokE5D76c/DZRY0jlef8aJqXXdBiQDLAQ==
+svelty-picker@^3.4.6:
+  version "3.4.6"
+  resolved "https://registry.yarnpkg.com/svelty-picker/-/svelty-picker-3.4.6.tgz#80c4f9b4b17adac841cf29707f3b087eba0469ca"
+  integrity sha512-7WFJ20LyegQKRPzCLAYtsVpebsuBMHT0EO67gHM14VIBvQkv1O9KeaqccLV8zZnDU7TSjpvNz/G/oEymCwBizA==
 
 symbol-tree@^3.2.4:
   version "3.2.4"
