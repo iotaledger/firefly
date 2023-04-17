@@ -19,9 +19,9 @@
     }
 </script>
 
-<drawer-header class="flex flex-row items-center mb-12">
+<drawer-header class="flex flex-row items-center mb-12 gap-2">
     {#if showBackButton}
-        <button on:click={onBackClick} class="absolute top-6.5 focus:text-blue-500">
+        <button on:click={onBackClick} class=" focus:text-blue-500">
             <Icon
                 icon={IconEnum.ArrowLeft}
                 classes="text-gray-500 dark:text-white hover:text-gray-600 dark:hover:text-gray-100"
@@ -29,7 +29,7 @@
         </button>
     {/if}
 
-    <Text type={TextType.h4} classes="text-center {showBackButton ? 'ml-9' : ''}">
+    <Text type={TextType.h4} classes="text-center">
         {localize(`views.dashboard.drawers.${$drawerState?.id}.${drawerRoute}.title`)}
     </Text>
 
