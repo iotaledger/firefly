@@ -323,6 +323,10 @@
                 "title": "Maks. mediestørrelse",
                 "description": "NFT-mediestørrelser over end denne grænse downloades ikke, men en pladsholder for medietypen vises i stedet"
             },
+            "maxMediaDownloadTime": {
+                "title": "Maks. downloadtid",
+                "description": "NFT-medie, hvis downloadtid overskrider denne grænse, afbrydes, og en pladsholder for medietypen vises i stedet"
+            },
             "refreshNftMedia": {
                 "title": "Opdatér NFT-medier",
                 "description": "NFT-medier, cachelagret for denne konto, slettes og gendownloades derefter"
@@ -493,6 +497,13 @@
                     "title": "Ny opdatering tilgængelig",
                     "updateVersion": "Firefly v{version}",
                     "button": "Opdatér"
+                }
+            },
+            "drawers": {
+                "networkConfig": {
+                    "connectedChains": {
+                        "title": "Forbundne kæder"
+                    }
                 }
             }
         },

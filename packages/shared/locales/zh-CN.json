@@ -323,6 +323,10 @@
                 "title": "最大文件大小",
                 "description": "尺寸大于此限制的NFT 媒体将不会下载，代表媒体类型的占位符将会被显示。"
             },
+            "maxMediaDownloadTime": {
+                "title": "Maximum download time",
+                "description": "NFT media which take longer than this limit to download will be canceled and a placeholder representing the media type will be displayed instead"
+            },
             "refreshNftMedia": {
                 "title": "Refresh NFT media",
                 "description": "NFT media cached for this account will be deleted and then downloaded again"
@@ -493,6 +497,13 @@
                     "title": "有新的更新可用",
                     "updateVersion": "Firefly v{version}",
                     "button": "更新"
+                }
+            },
+            "drawers": {
+                "networkConfig": {
+                    "connectedChains": {
+                        "title": "Connected chains"
+                    }
                 }
             }
         },
