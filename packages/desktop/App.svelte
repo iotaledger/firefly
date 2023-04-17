@@ -43,8 +43,8 @@
         initialiseRouters,
         resetRouterForAppContext,
         resetRouters,
-    } from './lib/routers'
-    import { openSettings } from './lib/routers/actions/openSettings'
+        openSettings,
+    } from '@desktop/routers'
     import { downloadNextNftInQueue, nftDownloadQueue } from '@core/nfts'
     import { closeDrawer } from '@desktop/auxilary/drawer'
 

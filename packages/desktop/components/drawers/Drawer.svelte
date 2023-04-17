@@ -1,15 +1,21 @@
 <script lang="ts">
     import { fade, fly } from 'svelte/transition'
     import { NetworkConfigDrawerRouter } from '@components'
-    import { DrawerDirection, closeDrawer, drawerState, DrawerId } from '@desktop/auxilary/drawer'
-    import { Icon } from '@ui'
-    import { Icon as IconEnum } from '@auxiliary/icon/enums'
+    import DrawerHeader from './DrawerHeader.svelte'
+    import { Router } from '@core/router'
+    import { closeDrawer, DrawerDirection, DrawerId, drawerState } from '@desktop/auxilary/drawer'
+    import { DrawerRoute } from '@desktop/routers'
 
     export let onClose: () => unknown = () => {}
 
     const DRAWER_ANIMATION_DURATION_MS = 200
 
-    let direction, position, isVertical
+    let drawerRoute: DrawerRoute
+    let drawerRouter: Router<DrawerRoute>
+
+    let direction: { x: number; y: number }
+    let position: string
+    let isVertical: boolean
 
     $: setDirection($drawerState.direction)
     function setDirection(drawerDirection: DrawerDirection): void {
@@ -37,7 +43,7 @@
         }
     }
 
-    function tryCloseDrawer(): void {
+    function onCloseClick(): void {
         if (!$drawerState.preventClose) {
             onClose && onClose()
             closeDrawer()
@@ -50,7 +56,7 @@
         <overlay
             in:fade|local={{ duration: DRAWER_ANIMATION_DURATION_MS }}
             out:fade|local={{ duration: DRAWER_ANIMATION_DURATION_MS }}
-            on:click={tryCloseDrawer}
+            on:click={onCloseClick}
             on:keydown={() => {}}
             class="fixed top-0 left-0 w-full h-full z-0 bg-gray-700 dark:bg-gray-900 bg-opacity-60 dark:bg-opacity-60"
         />
@@ -59,17 +65,9 @@
             out:fly|local={{ ...direction, duration: DRAWER_ANIMATION_DURATION_MS }}
             class="bg-white dark:bg-gray-800 {position} {isVertical ? 'vertical' : 'horizontal'}"
         >
+            <DrawerHeader {drawerRoute} {drawerRouter} onClose={onCloseClick} />
             {#if $drawerState.id === DrawerId.NetworkConfig}
-                <NetworkConfigDrawerRouter />
-            {/if}
-
-            {#if !$drawerState.hideClose}
-                <button on:click={tryCloseDrawer} class="absolute top-7 right-7 focus:text-blue-500">
-                    <Icon
-                        icon={IconEnum.Close}
-                        classes="text-gray-500 dark:text-white hover:text-gray-600 dark:hover:text-gray-100"
-                    />
-                </button>
+                <NetworkConfigDrawerRouter bind:drawerRoute bind:drawerRouter />
             {/if}
         </panel>
     </drawer>
