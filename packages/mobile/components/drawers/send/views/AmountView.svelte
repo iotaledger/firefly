@@ -3,7 +3,6 @@
     import { onMount } from 'svelte'
 
     import { localize, parseCurrency } from '@core/i18n'
-    import { IOTA_UNIT_MAP } from '@core/utils'
     import {
         convertToRawAmount,
         formatTokenAmountDefault,
@@ -22,6 +21,7 @@
     import { getAssetById } from '@core/wallet'
     import { TokenUnitSwapper, TokenWithMax } from '@components'
     import { sendRouter } from '@/routers'
+    import { getMaxDecimalsFromTokenMetadata } from '@core/token/utils'
 
     let amount: string
     let rawAmount: string
@@ -32,21 +32,7 @@
     let error: string = null
     let amountInputElement: HTMLInputElement
 
-    let allowedDecimals = 0
-    $: if (asset?.metadata?.standard === TokenStandard.BaseToken) {
-        if (!asset?.metadata?.useMetricPrefix) {
-            if (unit === asset?.metadata.unit) {
-                allowedDecimals = Math.min(asset?.metadata.decimals, 18)
-            } else if (unit === asset?.metadata?.subunit) {
-                allowedDecimals = 0
-            }
-        } else if (asset?.metadata?.useMetricPrefix) {
-            allowedDecimals = IOTA_UNIT_MAP?.[unit?.substring(0, 1)] ?? 0
-        }
-    } else {
-        allowedDecimals = Math.min(asset?.metadata.decimals, 18)
-    }
-
+    $: allowedDecimals = getMaxDecimalsFromTokenMetadata(asset?.metadata, unit)
     $: bigAmount = convertToRawAmount(amount, asset?.metadata, unit)
     $: (amount, unit), validate()
     $: marketAmount = getMarketAmountFromAssetValue(bigAmount, asset)

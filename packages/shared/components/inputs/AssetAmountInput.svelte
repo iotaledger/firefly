@@ -1,19 +1,19 @@
 <script lang="ts">
-    import Big from 'big.js'
-    import { Text, AssetDropdown, InputContainer, SliderInput, AmountInput, TooltipIcon } from 'shared/components'
-    import UnitInput from './UnitInput.svelte'
     import { formatCurrency, localize, parseCurrency } from '@core/i18n'
-    import {
-        formatTokenAmountBestMatch,
-        convertToRawAmount,
-        IAsset,
-        formatTokenAmountDefault,
-        visibleSelectedAccountAssets,
-        getUnitFromTokenMetadata,
-        TokenStandard,
-    } from '@core/wallet'
-    import { IOTA_UNIT_MAP } from '@core/utils'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
+    import { getMaxDecimalsFromTokenMetadata } from '@core/token/utils'
+    import {
+        IAsset,
+        TokenStandard,
+        convertToRawAmount,
+        formatTokenAmountBestMatch,
+        formatTokenAmountDefault,
+        getUnitFromTokenMetadata,
+        visibleSelectedAccountAssets,
+    } from '@core/wallet'
+    import Big from 'big.js'
+    import { AmountInput, AssetDropdown, InputContainer, SliderInput, Text, TooltipIcon } from 'shared/components'
+    import UnitInput from './UnitInput.svelte'
 
     export let inputElement: HTMLInputElement = undefined
     export let disabled = false
@@ -33,19 +33,7 @@
 
     $: isFocused && (error = '')
 
-    let allowedDecimals = 0
-    $: if (asset?.metadata?.standard === TokenStandard.BaseToken) {
-        if (asset?.metadata?.useMetricPrefix) {
-            allowedDecimals = IOTA_UNIT_MAP?.[unit?.substring(0, 1)] ?? 0
-        } else if (unit === asset?.metadata.unit) {
-            allowedDecimals = Math.min(asset?.metadata.decimals, 18)
-        } else if (unit === asset?.metadata?.subunit) {
-            allowedDecimals = 0
-        }
-    } else {
-        allowedDecimals = Math.min(asset?.metadata.decimals, 18)
-    }
-
+    $: allowedDecimals = getMaxDecimalsFromTokenMetadata(asset?.metadata, unit)
     $: availableBalance = asset?.balance?.available + votingPower
     $: bigAmount = convertToRawAmount(amount, asset?.metadata, unit)
     $: marketAmount = getMarketAmountFromAssetValue(bigAmount, asset)
