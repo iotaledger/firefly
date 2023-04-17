@@ -25,7 +25,7 @@
 
 <style lang="scss">
     account-switcher {
-        @apply block relative left-8;
+        @apply block relative;
         -webkit-app-region: none;
     }
 

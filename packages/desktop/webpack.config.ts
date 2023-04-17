@@ -47,6 +47,7 @@ const resolve = {
         '@core': path.resolve(__dirname, '../shared/lib/core'),
         '@features': path.resolve(__dirname, './features'),
         '@lib': path.resolve(__dirname, '../shared/lib'),
+        '@desktop': path.resolve(__dirname, './lib'),
         '@ui': path.resolve(__dirname, '../shared/components/'),
         '@views': path.resolve(__dirname, './views/'),
     },
