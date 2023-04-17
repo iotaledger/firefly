@@ -498,6 +498,13 @@
                     "updateVersion": "ෆයර්ෆ්ලයි v{version}",
                     "button": "යාවත්කාලීන කරන්න"
                 }
+            },
+            "drawers": {
+                "networkConfig": {
+                    "connectedChains": {
+                        "title": "Connected chains"
+                    }
+                }
             }
         },
         "staking": {
