@@ -1,7 +1,7 @@
 <script lang="ts">
     import { PopupId } from '@auxiliary/popup'
     import { openPopup } from '@auxiliary/popup/actions'
-    import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
+    import { selectedAccountIndex } from '@core/account/stores'
     import { time } from '@core/app'
     import { openUrlInBrowser } from '@core/app/utils'
     import { localize } from '@core/i18n'
@@ -22,15 +22,12 @@
         ADDRESS_TYPE_ALIAS,
         ADDRESS_TYPE_ED25519,
         ADDRESS_TYPE_NFT,
-        ActivityType,
-        OUTPUT_TYPE_NFT,
         formatTokenAmountPrecise,
         getBech32AddressFromAddressTypes,
         getHexAddressFromAddressTypes,
-        getNftId,
         getTimeDifference,
     } from '@core/wallet'
-    import { NewTransactionType, selectedAccountActivities, setNewTransactionDetails } from '@core/wallet/stores'
+    import { NewTransactionType, setNewTransactionDetails } from '@core/wallet/stores'
     import {
         Alert,
         Button,
@@ -49,14 +46,13 @@
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
     const nft: INft = getNftByIdFromAllAccountNfts($selectedAccountIndex, $selectedNftId)
 
-    const { id, name, issuer, address, metadata, downloadMetadata } = nft ?? {}
+    const { id, name, issuer, address, metadata, downloadMetadata, storageDeposit } = nft ?? {}
     const { standard, version, type, uri, description, issuerName, collectionName, attributes, soonaverseAttributes } =
         nft?.parsedMetadata || {}
 
     const issuerAddress = getBech32AddressFromAddressTypes(issuer)
     const collectionId = getHexAddressFromAddressTypes(issuer)
 
-    let storageDeposit: string = undefined
     let detailsList: {
         [key in string]: {
             data: string
@@ -67,13 +63,9 @@
         }
     }
 
-    $: nftActivity = $selectedAccountActivities
-        .sort((a1, a2) => a1.time.getTime() - a2.time.getTime())
-        .find((activity) => activity?.type === ActivityType.Nft && activity?.nftId === id)
     $: formattedMetadata = convertAndFormatNftMetadata(metadata)
     $: returnIfNftWasSent($allAccountNfts[$selectedAccountIndex], $time)
     $: timeDiff = getTimeDifference(new Date(nft.timelockTime), $time)
-    $: nftActivity, setStorageDeposit()
     $: alertText = getAlertText(downloadMetadata)
     $: detailsList = {
         ...(id && {
@@ -83,7 +75,7 @@
             address: { data: truncateString(address, 20, 20), copyValue: address, isCopyable: true },
         }),
         ...(storageDeposit && {
-            storageDeposit: { data: String(storageDeposit) },
+            storageDeposit: { data: formatTokenAmountPrecise(storageDeposit, getBaseToken()) },
         }),
         ...(standard && {
             standard: { data: version ? `${standard} - ${version}` : standard },
@@ -110,18 +102,6 @@
             formattedMetadata && {
                 metadata: { data: formattedMetadata, isCopyable: true, isPreText: true, maxHeight: 72 },
             }),
-    }
-
-    async function setStorageDeposit(): Promise<void> {
-        const outputs = await $selectedAccount.outputs()
-        const nftOutputs = outputs
-            .filter((output) => output.output.type === OUTPUT_TYPE_NFT)
-            .sort((a, b) => b.metadata.milestoneTimestampBooked - a.metadata.milestoneTimestampBooked)
-        const recentNftOutput = nftOutputs.find(
-            (o) => o.output.type === OUTPUT_TYPE_NFT && getNftId(o.output.nftId, o.outputId) === id
-        )
-
-        storageDeposit = formatTokenAmountPrecise(Number(recentNftOutput?.output.amount ?? 0), getBaseToken())
     }
 
     function returnIfNftWasSent(ownedNfts: INft[], currentTime: Date): void {

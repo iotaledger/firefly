@@ -1,9 +1,5 @@
-import {
-    getExpirationUnixTimeFromOutput,
-    getRecipientAddressFromOutput,
-    isOutputAsync,
-    UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN,
-} from '@core/wallet'
+import { UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN } from '@core/wallet/constants'
+import { getExpirationUnixTimeFromOutput, getRecipientAddressFromOutput, isOutputAsync } from '@core/wallet/utils'
 import { getTimelockDateFromOutput } from '@core/wallet/utils/generateActivity/helper'
 import { INftOutput } from '@iota/types'
 
