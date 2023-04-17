@@ -17,7 +17,7 @@
     let assetIconWrapperWidth: number
 
     $: isAnimation = asset?.id in ANIMATED_TOKEN_IDS
-    $: switch (asset.id) {
+    $: switch (asset?.id) {
         case String(COIN_TYPE[NetworkProtocol.IOTA]):
             assetInitials = ''
             assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'

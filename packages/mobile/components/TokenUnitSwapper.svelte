@@ -9,11 +9,11 @@
 
     let unitSwapper: string = null
     $: if (
-        tokenMetadata.standard === TokenStandard.BaseToken &&
+        tokenMetadata?.standard === TokenStandard.BaseToken &&
         !tokenMetadata?.useMetricPrefix &&
         tokenMetadata?.unit
     ) {
-        if (selectedUnit === tokenMetadata.unit) {
+        if (selectedUnit === tokenMetadata?.unit) {
             unitSwapper = tokenMetadata?.subunit
         } else if (selectedUnit === tokenMetadata?.subunit) {
             unitSwapper = tokenMetadata?.unit
