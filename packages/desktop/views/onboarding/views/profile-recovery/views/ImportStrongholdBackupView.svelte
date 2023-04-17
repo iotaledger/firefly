@@ -94,13 +94,9 @@
             if ($onboardingProfile?.setupType !== ProfileSetupType.Claimed) {
                 await restoreBackup(importFilePath, '')
             }
-            return false
         } catch (err) {
-            if (CLIENT_ERROR_REGEXES[ClientError.MigrationRequired].test(err?.error)) {
-                return true
-            } else {
-                return false
-            }
+            const isMigrationRequiredError = CLIENT_ERROR_REGEXES[ClientError.MigrationRequired].test(err?.error)
+            return isMigrationRequiredError
         }
     }
 
