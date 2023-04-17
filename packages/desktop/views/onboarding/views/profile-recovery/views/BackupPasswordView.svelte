@@ -14,12 +14,10 @@
         ProfileSetupType,
         restoreBackupForShimmerClaimingProfileManager,
         restoreBackupFromStrongholdFile,
-        StrongholdMigrationRequiredError,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
     import { showAppNotification } from '@auxiliary/notification'
     import { ClientError, CLIENT_ERROR_REGEXES } from '@core/error'
-    import { STRONGHOLD_VERSION } from '@core/stronghold/constants'
 
     export let error = ''
     export let busy = false
@@ -37,13 +35,10 @@
                     await restoreBackupFromStrongholdFile(strongholdPassword)
                 }
 
-                updateOnboardingProfile({ strongholdPassword, strongholdVersion: STRONGHOLD_VERSION })
+                updateOnboardingProfile({ strongholdPassword })
                 $profileRecoveryRouter.next()
             } catch (err) {
-                if (err instanceof StrongholdMigrationRequiredError) {
-                    updateOnboardingProfile({ strongholdPassword, strongholdVersion: undefined })
-                    $profileRecoveryRouter.next()
-                } else if (err instanceof CannotRestoreWithMismatchedCoinTypeError) {
+                if (err instanceof CannotRestoreWithMismatchedCoinTypeError) {
                     await initialiseProfileManagerFromOnboardingProfile(false)
 
                     if ($onboardingProfile?.setupType === ProfileSetupType.Claimed) {

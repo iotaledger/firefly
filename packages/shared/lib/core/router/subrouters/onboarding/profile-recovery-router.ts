@@ -39,10 +39,6 @@ export class ProfileRecoveryRouter extends Subrouter<ProfileRecoveryRoute> {
                 break
             }
             case ProfileRecoveryRoute.ImportStrongholdBackup: {
-                nextRoute = ProfileRecoveryRoute.BackupPassword
-                break
-            }
-            case ProfileRecoveryRoute.BackupPassword: {
                 const requiresUpdate =
                     get(onboardingProfile) && get(onboardingProfile)?.strongholdVersion !== STRONGHOLD_VERSION
 
@@ -51,8 +47,12 @@ export class ProfileRecoveryRouter extends Subrouter<ProfileRecoveryRoute> {
 
                     nextRoute = ProfileRecoveryRoute.UpdateStronghold
                 } else {
-                    nextRoute = ProfileRecoveryRoute.Success
+                    nextRoute = ProfileRecoveryRoute.BackupPassword
                 }
+                break
+            }
+            case ProfileRecoveryRoute.BackupPassword: {
+                nextRoute = ProfileRecoveryRoute.Success
                 break
             }
             case ProfileRecoveryRoute.UpdateStronghold: {
