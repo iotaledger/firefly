@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Icon, Text, TextType } from 'shared/components'
+    import { Icon, Text, TextType } from '@ui'
 
     export let label = undefined
     export let checked = false

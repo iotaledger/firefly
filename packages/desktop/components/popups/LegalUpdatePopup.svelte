@@ -10,8 +10,8 @@
         TERMS_OF_SERVICE_VERSION,
         PRIVACY_POLICY_VERSION,
         openUrlInBrowser,
-        TERMS_OF_SERVICE_LINK,
-        PRIVACY_POLICY_LINK,
+        TERMS_OF_SERVICE_URL,
+        PRIVACY_POLICY_URL,
     } from '@core/app'
 
     let checked = false
@@ -19,11 +19,11 @@
     const privacyPolicy = needsToAcceptLatestPrivacyPolicy()
 
     function onViewTosClick(): void {
-        openUrlInBrowser(TERMS_OF_SERVICE_LINK)
+        openUrlInBrowser(TERMS_OF_SERVICE_URL)
     }
 
     function onViewPrivPolicyClick(): void {
-        openUrlInBrowser(PRIVACY_POLICY_LINK)
+        openUrlInBrowser(PRIVACY_POLICY_URL)
     }
 
     function onConfirmClick(): void {

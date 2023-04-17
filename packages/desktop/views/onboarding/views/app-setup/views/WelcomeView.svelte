@@ -1,9 +1,9 @@
 <script lang="ts">
     import { OnboardingLayout } from '@components'
     import {
-        PRIVACY_POLICY_LINK,
+        PRIVACY_POLICY_URL,
         PRIVACY_POLICY_VERSION,
-        TERMS_OF_SERVICE_LINK,
+        TERMS_OF_SERVICE_URL,
         TERMS_OF_SERVICE_VERSION,
     } from '@core/app/constants'
     import { lastAcceptedPrivacyPolicy, lastAcceptedTermsOfService } from '@core/app/stores'
@@ -17,11 +17,11 @@
     let termsAccepted: boolean = false
 
     function onTermsOfServiceClick(): void {
-        openUrlInBrowser(TERMS_OF_SERVICE_LINK)
+        openUrlInBrowser(TERMS_OF_SERVICE_URL)
     }
 
     function onPrivacyPolicyClick(): void {
-        openUrlInBrowser(PRIVACY_POLICY_LINK)
+        openUrlInBrowser(PRIVACY_POLICY_URL)
     }
 
     function onContinueClick(): void {

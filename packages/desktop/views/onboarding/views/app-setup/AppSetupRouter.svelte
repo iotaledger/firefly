@@ -1,6 +1,6 @@
 <script lang="ts">
     import { AppSetupRoute, appSetupRoute } from '@core/router'
-    import { Transition } from 'shared/components'
+    import { Transition } from '@ui'
     import { LanguageAndAppearanceView, WelcomeView } from './views'
 </script>
 
