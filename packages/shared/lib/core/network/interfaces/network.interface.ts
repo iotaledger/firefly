@@ -1,5 +1,6 @@
 import { ITokenMetadata } from '@core/wallet'
 import { NetworkId } from '../enums'
+import { ChainMetadata } from '../types'
 import { IProtocol } from './protocol.interface'
 
 /**
@@ -12,4 +13,5 @@ export interface INetwork {
     name: string
     protocol: IProtocol
     baseToken: ITokenMetadata
+    chains: ChainMetadata[]
 }
