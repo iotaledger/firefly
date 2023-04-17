@@ -8,6 +8,7 @@ import { version } from './package.json'
 import features from './features/features'
 import { Configuration as WebpackConfiguration } from 'webpack'
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server'
+import assert from 'assert'
 
 type Mode = 'none' | 'development' | 'production'
 interface Configuration extends WebpackConfiguration {
@@ -46,6 +47,7 @@ const resolve = {
         '@core': path.resolve(__dirname, '../shared/lib/core'),
         '@features': path.resolve(__dirname, './features'),
         '@lib': path.resolve(__dirname, '../shared/lib'),
+        '@desktop': path.resolve(__dirname, './lib'),
         '@ui': path.resolve(__dirname, '../shared/components/'),
         '@views': path.resolve(__dirname, './views/'),
     },
@@ -150,13 +152,14 @@ const rendererPlugins = [
                 // we ignore the fonts since the `asset/resource` handles them
                 filter: prod ? (asset) => !asset.includes('fonts') : undefined,
                 to({ context, absoluteFilename }) {
+                    assert(typeof absoluteFilename === 'string')
                     return path.relative(context, absoluteFilename).replace(/..[\\/]shared[\\/]/g, '')
                 },
             },
             {
                 from: '../shared/locales/*',
                 to() {
-                    return 'locales/[name].[ext]'
+                    return 'locales/[name][ext]'
                 },
             },
         ],
@@ -167,7 +170,7 @@ const rendererPlugins = [
     new DefinePlugin({
         'process.env.PLATFORM': JSON.stringify(process.env.PLATFORM || 'desktop'),
         'process.env.STAGE': JSON.stringify(stage),
-        features: features,
+        features: JSON.stringify(features),
         SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),
         SENTRY_MAIN_PROCESS: JSON.stringify(false),
         SENTRY_ENVIRONMENT: JSON.stringify(stage),

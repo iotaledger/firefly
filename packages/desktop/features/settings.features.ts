@@ -1,4 +1,6 @@
-const settingsFeatures = {
+import { ISettingsFeatures } from '@lib/features/interfaces'
+
+const settingsFeatures: ISettingsFeatures = {
     enabled: true,
     general: {
         enabled: true,
@@ -51,6 +53,9 @@ const settingsFeatures = {
     collectibles: {
         enabled: true,
         maxMediaSize: {
+            enabled: true,
+        },
+        maxMediaDownloadTime: {
             enabled: true,
         },
         refreshNftMedia: {

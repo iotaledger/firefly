@@ -323,6 +323,14 @@
                 "title": "Maximum media size",
                 "description": "NFT media with sizes greater than this limit will not be downloaded and a placeholder representing the media type will be displayed instead"
             },
+            "maxMediaDownloadTime": {
+                "title": "Maximum download time",
+                "description": "NFT media which take longer than this limit to download will be canceled and a placeholder representing the media type will be displayed instead"
+            },
+            "refreshNftMedia": {
+                "title": "Refresh NFT media",
+                "description": "NFT media cached for this account will be deleted and then downloaded again"
+            },
             "changePassword": {
                 "title": "Cambiar contraseña",
                 "description": "Su contraseña es usada para asegurar sus billeteras. Deberás usar una contraseña fuerte para proteger sus fondos"
@@ -489,6 +497,13 @@
                     "title": "Nueva actualización disponible",
                     "updateVersion": "Firefly v{version}",
                     "button": "Actualizar"
+                }
+            },
+            "drawers": {
+                "networkConfig": {
+                    "connectedChains": {
+                        "title": "Connected chains"
+                    }
                 }
             }
         },
@@ -1174,6 +1189,10 @@
             "iota": "Migrar a Chrysalis o restaurar una billetera existente",
             "shimmer": "Restaurar un perfil de Shimmer existente"
         },
+        "refreshNftMedia": {
+            "title": "Refresh NFT media",
+            "description": "Do you want to delete and re-download all NFT media for this account?"
+        },
         "createWallet": "Crear un nuevo perfil de {protocol}",
         "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
         "claimShimmer": "Reclamar recompensas de staking de Shimmer",
@@ -1219,6 +1238,7 @@
         "unlock": "Desbloquear",
         "updateFirefly": "Actualizar Firefly",
         "restartNow": "Reiniciar ahora",
+        "refresh": "Refresh",
         "saveBackup": "Guardar copia de seguridad de Stronghold",
         "customizeAcount": "Personalizar billetera",
         "hideAccount": "Ocultar cartera",

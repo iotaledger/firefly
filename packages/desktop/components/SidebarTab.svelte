@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Icon, Text, Tooltip, PingingBadge } from '@ui'
     import { dashboardRoute } from '@core/router'
-    import { ISidebarTab } from '../lib/routers'
+    import { ISidebarTab } from '@desktop/routers'
 
     export let tab: ISidebarTab = undefined
 

@@ -323,6 +323,14 @@
                 "title": "Maximum media size",
                 "description": "NFT media with sizes greater than this limit will not be downloaded and a placeholder representing the media type will be displayed instead"
             },
+            "maxMediaDownloadTime": {
+                "title": "Maximum download time",
+                "description": "NFT media which take longer than this limit to download will be canceled and a placeholder representing the media type will be displayed instead"
+            },
+            "refreshNftMedia": {
+                "title": "Refresh NFT media",
+                "description": "NFT media cached for this account will be deleted and then downloaded again"
+            },
             "changePassword": {
                 "title": "پاس ورڈ تبدیل کریں",
                 "description": "آپ کا پاس ورڈ آپ کے والیٹس کو محفوظ بنانے کے لئے استعمال ہوتا ہے۔ اپنے فنڈز کی حفاظت کے لیئے آپ کو ایک مضبوط پاس ورڈ استعمال کرنا چاہئے"
@@ -489,6 +497,13 @@
                     "title": "New update available",
                     "updateVersion": "Firefly v{version}",
                     "button": "Update"
+                }
+            },
+            "drawers": {
+                "networkConfig": {
+                    "connectedChains": {
+                        "title": "Connected chains"
+                    }
                 }
             }
         },
@@ -1174,6 +1189,10 @@
             "iota": "Migrate to Chrysalis or restore an existing wallet",
             "shimmer": "Restore an existing Shimmer profile"
         },
+        "refreshNftMedia": {
+            "title": "Refresh NFT media",
+            "description": "Do you want to delete and re-download all NFT media for this account?"
+        },
         "createWallet": "Create a new {protocol} profile",
         "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
         "claimShimmer": "Claim Shimmer staking rewards",
@@ -1219,6 +1238,7 @@
         "unlock": "ان لاک کریں",
         "updateFirefly": "فائر فلائی اپ ڈیٹ کریں",
         "restartNow": "ابھی ری سٹارٹ کریں",
+        "refresh": "Refresh",
         "saveBackup": "سٹرانگ ہولڈ کا بیک اپ محفوظ کریں",
         "customizeAcount": "اپنے والٹ کو اپنی مرضی کے مطابق بنائیں",
         "hideAccount": "Hide wallet",

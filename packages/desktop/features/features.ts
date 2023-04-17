@@ -2,15 +2,18 @@ import collectiblesFeatures from './collectibles.features'
 import developerToolsFeatures from './developer-tools.features'
 import electronFeatures from './electron.features'
 import governanceFeatures from './governance.features'
+import networkFeatures from './network.features'
 import onboardingFeatures from './onboarding.features'
 import settingsFeatures from './settings.features'
 import walletFeatures from './wallet.features'
+import { IDesktopFeatures } from './interfaces'
 
-const features = {
+const features: IDesktopFeatures = {
     collectibles: collectiblesFeatures,
-    electron: electronFeatures,
     developerTools: developerToolsFeatures,
+    electron: electronFeatures,
     governance: governanceFeatures,
+    network: networkFeatures,
     onboarding: onboardingFeatures,
     settings: settingsFeatures,
     wallet: walletFeatures,

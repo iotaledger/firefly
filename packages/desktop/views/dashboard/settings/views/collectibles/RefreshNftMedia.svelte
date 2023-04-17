@@ -2,7 +2,12 @@
     import { Button, Text, ButtonSize, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-    import { addNftsToDownloadQueue, selectedAccountNfts, updateNftInAllAccountNfts } from '@core/nfts'
+    import {
+        addNftsToDownloadQueue,
+        selectedAccountNfts,
+        stopDownloadingNftMediaFromQueue,
+        updateNftInAllAccountNfts,
+    } from '@core/nfts'
     import { Platform } from '@core/app'
     import { selectedAccountIndex } from '@core/account'
 
@@ -25,6 +30,7 @@
     async function refreshNftMedia(): Promise<void> {
         isLoading = true
         try {
+            await stopDownloadingNftMediaFromQueue()
             await Promise.all(
                 $selectedAccountNfts.map(async (nft) => {
                     await Platform.deleteFile(nft.filePath)

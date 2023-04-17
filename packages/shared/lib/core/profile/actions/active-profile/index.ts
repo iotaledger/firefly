@@ -1,4 +1,7 @@
 export * from './checkActiveProfileAuth'
+export * from './checkAndUpdateActiveProfileNetwork'
+export * from './getBaseToken'
+export * from './getCoinType'
 export * from './loadAccounts'
 export * from './loadPersistedProfileIntoActiveProfile'
 export * from './lockStronghold'

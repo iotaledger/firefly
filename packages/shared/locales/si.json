@@ -323,6 +323,14 @@
                 "title": "Maximum media size",
                 "description": "NFT media with sizes greater than this limit will not be downloaded and a placeholder representing the media type will be displayed instead"
             },
+            "maxMediaDownloadTime": {
+                "title": "Maximum download time",
+                "description": "NFT media which take longer than this limit to download will be canceled and a placeholder representing the media type will be displayed instead"
+            },
+            "refreshNftMedia": {
+                "title": "Refresh NFT media",
+                "description": "NFT media cached for this account will be deleted and then downloaded again"
+            },
             "changePassword": {
                 "title": "මුරපදය වෙනස් කරන්න",
                 "description": "ඔබගේ පසුම්බි සුරක්ෂිත කිරීමට ඔබගේ මුරපදය භාවිතා වේ. ඔබේ අරමුදල් ආරක්ෂා කිරීම සඳහා ඔබ ශක්තිමත් මුරපදයක් භාවිතා කළ යුතුය"
@@ -489,6 +497,13 @@
                     "title": "නව යාවත්කාලීන ලබා ගත හැක",
                     "updateVersion": "ෆයර්ෆ්ලයි v{version}",
                     "button": "යාවත්කාලීන කරන්න"
+                }
+            },
+            "drawers": {
+                "networkConfig": {
+                    "connectedChains": {
+                        "title": "Connected chains"
+                    }
                 }
             }
         },
@@ -1174,6 +1189,10 @@
             "iota": "Migrate to Chrysalis or restore an existing wallet",
             "shimmer": "Restore an existing Shimmer profile"
         },
+        "refreshNftMedia": {
+            "title": "Refresh NFT media",
+            "description": "Do you want to delete and re-download all NFT media for this account?"
+        },
         "createWallet": "Create a new {protocol} profile",
         "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
         "claimShimmer": "Claim Shimmer staking rewards",
@@ -1219,6 +1238,7 @@
         "unlock": "අගුළු හරින්න",
         "updateFirefly": "Firefly යාවත්කාලීන කරන්න",
         "restartNow": "දැන් නැවත ආරම්භ කරන්න",
+        "refresh": "Refresh",
         "saveBackup": "Stronghold උපස්ථය සුරකින්න",
         "customizeAcount": "මුදල් පසුම්බිය අභිරුචිකරණය කරන්න",
         "hideAccount": "මුදල් පසුම්බිය සඟවන්න",

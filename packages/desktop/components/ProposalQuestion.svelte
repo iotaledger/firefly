@@ -26,7 +26,7 @@
     let percentages: IProposalAnswerPercentages = {}
     let winnerAnswerIndex: number
 
-    $: answers = [...question?.answers, { value: 0, text: 'Abstain', additionalInfo: '' }]
+    $: answers = [...(question?.answers ?? []), { value: 0, text: 'Abstain', additionalInfo: '' }]
     $: percentages = getPercentagesFromAnswerStatuses(answerStatuses)
     $: disabled =
         $selectedProposal?.status === ProposalStatus.Upcoming ||
