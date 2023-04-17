@@ -20,7 +20,7 @@ export async function updateStronghold(password: string, isRecovery: boolean = f
     if (isRecovery) {
         const { importFilePath } = get(onboardingProfile) ?? {}
         await copyStrongholdFileToProfileDirectory(profileDirectory, importFilePath)
-        updateOnboardingProfile({ importFilePath: secretManagerPath, importFile: null })
+        updateOnboardingProfile({ strongholdPassword: password, importFilePath: secretManagerPath, importFile: null })
     }
 
     await api.migrateStrongholdSnapshotV2ToV3(secretManagerPath, password, secretManagerPath, password)

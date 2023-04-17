@@ -1,6 +1,4 @@
 <script lang="ts">
-    import { onMount } from 'svelte'
-
     import { OnboardingLayout } from '@components'
     import { Animation, Button, PasswordInput, Text } from '@ui'
     import { HTMLButtonType, TextType } from '@ui/enums'
@@ -8,7 +6,6 @@
     import { localize } from '@core/i18n'
     import { updateStrongholdRouter } from '@core/router'
 
-    import { onboardingProfile } from '@contexts/onboarding'
     import { updateStronghold } from '@core/profile-manager'
     import { isValidJson } from '@core/utils'
 
@@ -18,22 +15,14 @@
     let passwordError: string = ''
     let isBusy = false
 
-    $: isPasswordInputVisible = !isRecovery
-
     async function onSubmit(): Promise<void> {
         try {
             isBusy = true
-            if (isRecovery && isPasswordInputVisible) {
-                $onboardingProfile.strongholdPassword = password
-            }
             await updateStronghold(password, isRecovery)
             isBusy = false
             $updateStrongholdRouter.next()
         } catch (err) {
             isBusy = false
-            if (isRecovery) {
-                isPasswordInputVisible = true
-            }
             const parsedError = isValidJson(err.message) ? JSON.parse(err.message) : null
             passwordError = parsedError?.payload?.error.replaceAll('`', '') ?? localize(err.message)
             return
@@ -43,12 +32,6 @@
     function onBackClick(): void {
         $updateStrongholdRouter.previous()
     }
-
-    onMount(() => {
-        if (isRecovery) {
-            password = $onboardingProfile.strongholdPassword
-        }
-    })
 </script>
 
 <OnboardingLayout {onBackClick}>
@@ -62,13 +45,7 @@
             {localize(`views.updateStronghold.update.${isRecovery ? 'recoveryBody' : 'loginBody'}`)}
         </Text>
         <form on:submit|preventDefault={onSubmit} id="update-stronghold-form">
-            <PasswordInput
-                bind:value={password}
-                bind:error={passwordError}
-                autofocus
-                showRevealToggle
-                classes={isPasswordInputVisible ? '' : 'invisible'}
-            />
+            <PasswordInput bind:value={password} bind:error={passwordError} autofocus showRevealToggle />
         </form>
     </div>
     <div slot="leftpane__action">

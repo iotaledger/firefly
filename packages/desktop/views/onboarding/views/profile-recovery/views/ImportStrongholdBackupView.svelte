@@ -1,16 +1,25 @@
 <script lang="ts">
+    import { onMount } from 'svelte'
+
     import { Animation, Button, Dropzone, Text } from '@ui'
     import { OnboardingLayout } from '@components'
+
     import { mobile } from '@core/app'
+    import { CLIENT_ERROR_REGEXES } from '@core/error/constants'
+    import { ClientError } from '@core/error/enums'
     import { localize } from '@core/i18n'
+    import { restoreBackup } from '@core/profile-manager/api'
     import { profileRecoveryRouter } from '@core/router'
+    import { STRONGHOLD_VERSION } from '@core/stronghold'
+
     import {
         ImportFile,
+        onboardingProfile,
+        ProfileSetupType,
         setProfileRecoveryTypeFromFilename,
         updateOnboardingProfile,
         validateBackupFile,
     } from '@contexts/onboarding'
-    import { onMount } from 'svelte'
 
     interface FileWithPath extends File {
         path?: string
@@ -23,10 +32,15 @@
     let importFilePath = ''
     let dropping = false
 
-    function onContinueClick(): void {
+    async function onContinueClick(): Promise<void> {
         validateBackupFile(importFileName)
         setProfileRecoveryTypeFromFilename(importFileName)
-        updateOnboardingProfile({ importFile, importFilePath })
+        const _shouldMigrate = await shouldMigrate()
+        updateOnboardingProfile({
+            importFile,
+            importFilePath,
+            strongholdVersion: _shouldMigrate ? undefined : STRONGHOLD_VERSION,
+        })
         $profileRecoveryRouter.next()
     }
 
@@ -73,6 +87,21 @@
         }
 
         reader.readAsArrayBuffer(fileWithPath)
+    }
+
+    async function shouldMigrate(): Promise<boolean> {
+        try {
+            if ($onboardingProfile?.setupType !== ProfileSetupType.Claimed) {
+                await restoreBackup(importFilePath, '')
+            }
+            return false
+        } catch (err) {
+            if (CLIENT_ERROR_REGEXES[ClientError.MigrationRequired].test(err?.error)) {
+                return true
+            } else {
+                return false
+            }
+        }
     }
 
     onMount(() => {
