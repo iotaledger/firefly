@@ -324,8 +324,8 @@
                 "description": "Az ennél nagyobb méretű NFT média fájlokat nem tölti le, csak a média típusát jelölő ikont jeleníti meg"
             },
             "maxMediaDownloadTime": {
-                "title": "Maximum download time",
-                "description": "NFT media which take longer than this limit to download will be canceled and a placeholder representing the media type will be displayed instead"
+                "title": "Maximális letöltési idő",
+                "description": "Azok az NFT-médiák, amelyek letöltése ennél a határértéknél tovább tart, törlődnek, és helyette egy, a médiatípust képviselő helyőrző jelenik meg"
             },
             "refreshNftMedia": {
                 "title": "NFT-média frissítése",
@@ -497,6 +497,13 @@
                     "title": "Új frissítés elérhető",
                     "updateVersion": "Firefly v{version}",
                     "button": "Frissítés"
+                }
+            },
+            "drawers": {
+                "networkConfig": {
+                    "connectedChains": {
+                        "title": "Csatlakoztatott láncok"
+                    }
                 }
             }
         },
