@@ -12,6 +12,7 @@
         TransactionActivity,
         getAssetFromPersistedAssets,
         ActivityAsyncStatus,
+        getUnitFromTokenMetadata,
     } from '@core/wallet'
     import { time } from '@core/app'
     import { getSubjectFromActivity } from '@core/wallet/utils/generateActivity/helper'
@@ -19,14 +20,18 @@
     export let activity: TransactionActivity
 
     $: asset = getAssetFromPersistedAssets(activity.assetId)
-    $: amount = formatTokenAmountDefault(Number(activity.rawAmount), asset?.metadata, asset?.metadata?.unit)
+    $: amount = formatTokenAmountDefault(
+        Number(activity.rawAmount),
+        asset?.metadata,
+        getUnitFromTokenMetadata(asset?.metadata)
+    )
     $: isTimelocked = activity.asyncData?.timelockDate > $time
     $: subject = getSubjectFromActivity(activity)
 </script>
 
 <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-3">
     {#if amount}
-        <AmountBox {amount} unit={asset?.metadata?.unit} {asset} />
+        <AmountBox {amount} {asset} />
     {/if}
     <transaction-status class="flex flex-row w-full space-x-2 justify-center">
         {#if activity.inclusionState && activity.direction}

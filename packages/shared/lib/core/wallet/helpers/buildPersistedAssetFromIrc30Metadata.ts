@@ -1,6 +1,5 @@
 import { NotVerifiedStatus, TokenStandard } from '../enums'
 import { IIrc30Metadata, IPersistedAsset } from '../interfaces'
-import { getIconColorFromString } from '@core/account'
 import { AssetVerification } from '../types'
 
 export function buildPersistedAssetFromIrc30Metadata(
@@ -12,11 +11,10 @@ export function buildPersistedAssetFromIrc30Metadata(
         id: tokenId,
         standard: TokenStandard.Irc30,
         metadata: {
+            standard: TokenStandard.Irc30,
             name: metadata.name,
-            unit: metadata.symbol,
+            symbol: metadata.symbol,
             decimals: metadata.decimals,
-            useMetricPrefix: false,
-            primaryColor: getIconColorFromString(metadata?.name),
             ...(metadata?.description && { description: metadata?.description }),
             ...(metadata?.url && { url: metadata?.url }),
             ...(metadata?.logoUrl && { logoUrl: metadata?.logoUrl }),
