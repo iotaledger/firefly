@@ -3,15 +3,16 @@
     import { onMount } from 'svelte'
 
     import { localize, parseCurrency } from '@core/i18n'
-    import { IOTA_UNIT_MAP } from '@core/utils'
     import {
         convertToRawAmount,
         formatTokenAmountDefault,
         IAsset,
-        ITokenMetadata,
+        TokenMetadata,
         newTransactionDetails,
         NewTransactionType,
         updateNewTransactionDetails,
+        TokenStandard,
+        getUnitFromTokenMetadata,
     } from '@core/wallet'
     import { AmountInput, Button, HR, Text } from '@ui'
 
@@ -20,27 +21,18 @@
     import { getAssetById } from '@core/wallet'
     import { TokenUnitSwapper, TokenWithMax } from '@components'
     import { sendRouter } from '@/routers'
+    import { getMaxDecimalsFromTokenMetadata } from '@core/token/utils'
 
     let amount: string
     let rawAmount: string
     let asset: IAsset
     let unit: string
-    let tokenMetadata: ITokenMetadata
+    let tokenMetadata: TokenMetadata
 
     let error: string = null
     let amountInputElement: HTMLInputElement
 
-    let allowedDecimals = 0
-    $: if (!asset?.metadata?.useMetricPrefix) {
-        if (unit === asset?.metadata.unit) {
-            allowedDecimals = Math.min(asset?.metadata.decimals, 18)
-        } else if (unit === asset?.metadata?.subunit) {
-            allowedDecimals = 0
-        }
-    } else if (asset?.metadata?.useMetricPrefix) {
-        allowedDecimals = IOTA_UNIT_MAP?.[unit?.substring(0, 1)] ?? 0
-    }
-
+    $: allowedDecimals = getMaxDecimalsFromTokenMetadata(asset?.metadata, unit)
     $: bigAmount = convertToRawAmount(amount, asset?.metadata, unit)
     $: (amount, unit), validate()
     $: marketAmount = getMarketAmountFromAssetValue(bigAmount, asset)
@@ -50,7 +42,7 @@
             const storedRawAmount = $newTransactionDetails?.rawAmount
             asset = getAssetById($newTransactionDetails.assetId)
             tokenMetadata = asset?.metadata
-            unit = $newTransactionDetails.unit ?? tokenMetadata?.unit
+            unit = $newTransactionDetails.unit ?? getUnitFromTokenMetadata(asset?.metadata)
             amount = storedRawAmount
                 ? formatTokenAmountDefault(Number(storedRawAmount), asset?.metadata, unit, false)
                 : ''
@@ -67,8 +59,8 @@
         } else if (isAmountZeroOrNull) {
             error = localize('error.send.amountInvalidFormat')
         } else if (
-            (unit === asset?.metadata?.subunit ||
-                (unit === asset?.metadata?.unit && asset?.metadata?.decimals === 0)) &&
+            ((asset?.metadata?.standard === TokenStandard.BaseToken && unit === asset?.metadata?.subunit) ||
+                (unit === getUnitFromTokenMetadata(asset?.metadata) && asset?.metadata?.decimals === 0)) &&
             Number.parseInt(amount, 10).toString() !== amount
         ) {
             error = localize('error.send.amountNoFloat')
@@ -93,15 +85,15 @@
     }
 
     function onClickAvailableBalance(): void {
-        const isRawAmount = asset?.metadata?.decimals && asset?.metadata?.unit
+        const isRawAmount = asset?.metadata?.decimals && getUnitFromTokenMetadata(asset?.metadata)
         if (isRawAmount) {
             const parsedAmount = formatTokenAmountDefault(asset?.balance?.available, asset?.metadata, unit)
             amount = parsedAmount
-            unit = asset?.metadata?.unit
+            unit = getUnitFromTokenMetadata(asset?.metadata)
             return
         }
         amount = asset?.balance.available.toString() ?? '0'
-        unit = asset?.metadata?.unit
+        unit = getUnitFromTokenMetadata(asset?.metadata)
     }
 
     function onContinueClick(): void {

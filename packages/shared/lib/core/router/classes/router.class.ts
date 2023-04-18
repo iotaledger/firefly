@@ -54,6 +54,10 @@ export abstract class Router<R> implements IRouter {
         this.setRoute(this.initialRoute)
     }
 
+    hasHistory(): boolean {
+        return this.history.length > 0
+    }
+
     filterHistory(route: R): void {
         if (this.history.length && route !== get(this.routeStore)) {
             this.history = this.history.filter((_route) => _route !== route)

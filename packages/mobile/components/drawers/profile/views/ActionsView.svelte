@@ -1,25 +1,19 @@
 <script lang="ts">
-    import { NetworkStatusButton, ProfileActionButton, ProfileBackupButton, ProfileLockButton } from '@components'
-    import { FontWeight, Icon, NetworkIcon, Text, TextType } from '@ui'
-
-    import { localize } from '@core/i18n'
-    import { NetworkProtocol } from '@core/network'
-    import { activeProfile, lockStronghold, logout } from '@core/profile'
-    import { getInitials, isRecentDate } from '@core/utils'
-
-    import { showAppNotification } from '@auxiliary/notification'
-    import { exportStronghold } from '@contexts/settings'
-
     import { DrawerId, openDrawer } from '@/auxiliary/drawer'
     import { profileRouter } from '@/routers'
+    import { showAppNotification } from '@auxiliary/notification'
+    import { NetworkStatusButton, ProfileActionButton, ProfileBackupButton, ProfileLockButton } from '@components'
+    import { exportStronghold } from '@contexts/settings'
+    import { localize } from '@core/i18n'
+    import { activeProfile, lockStronghold, logout } from '@core/profile'
+    import { getInitials, isRecentDate } from '@core/utils'
     import features from '@features/features'
     import { Icon as IconTypes } from '@lib/auxiliary/icon'
+    import { FontWeight, Icon, NetworkIcon, Text, TextType } from '@ui'
 
     const { isStrongholdLocked } = $activeProfile
 
-    let networkProtocol: NetworkProtocol
-    $: networkProtocol = $activeProfile.networkProtocol
-
+    $: network = $activeProfile.network
     $: lastStrongholdBackupTime = $activeProfile?.lastStrongholdBackupTime
     $: lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
     $: isBackupSafe = lastBackupDate && isRecentDate(lastBackupDate)?.lessThanAMonth
@@ -79,7 +73,7 @@
                         <Text type={TextType.h5} classes="text-white">{initials}</Text>
                     </div>
                     <div class="absolute right-0 bottom-0">
-                        <NetworkIcon {networkProtocol} height={14} width={14} />
+                        <NetworkIcon networkId={network.id} height={14} width={14} />
                     </div>
                 </div>
             </div>

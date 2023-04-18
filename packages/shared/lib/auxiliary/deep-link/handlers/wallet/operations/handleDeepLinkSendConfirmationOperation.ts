@@ -1,11 +1,11 @@
 import { PopupId, openPopup } from '@auxiliary/popup'
-import { networkHrp } from '@core/profile/stores'
 import { getByteLengthOfString, isStringTrue, isValidBech32AddressAndPrefix, validateAssetId } from '@core/utils'
 import {
     NewTransactionDetails,
     NewTransactionType,
     Subject,
     getAssetById,
+    getUnitFromTokenMetadata,
     selectedAccountAssets,
     setNewTransactionDetails,
 } from '@core/wallet'
@@ -21,6 +21,7 @@ import {
     UnknownAssetError,
 } from '../../../errors'
 import { getRawAmountFromSearchParam } from '../../../utils'
+import { getNetworkHrp } from '@core/profile'
 
 export function handleDeepLinkSendConfirmationOperation(searchParams: URLSearchParams): void {
     const transactionDetails = parseSendConfirmationOperation(searchParams)
@@ -52,7 +53,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): NewTrans
     if (!address) {
         throw new NoAddressSpecifiedError()
     }
-    if (!isValidBech32AddressAndPrefix(address, get(networkHrp))) {
+    if (!isValidBech32AddressAndPrefix(address, getNetworkHrp())) {
         throw new InvalidAddressError()
     }
 
@@ -85,7 +86,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): NewTrans
         throw new TagLengthError()
     }
 
-    const unit = searchParams.get(SendOperationParameter.Unit) ?? asset.metadata?.unit
+    const unit = searchParams.get(SendOperationParameter.Unit) ?? getUnitFromTokenMetadata(asset.metadata)
     const giftStorageDeposit = isStringTrue(searchParams.get(SendOperationParameter.GiftStorageDeposit))
     const disableToggleGift = isStringTrue(searchParams.get(SendOperationParameter.DisableToggleGift))
     const disableChangeExpiration = isStringTrue(searchParams.get(SendOperationParameter.DisableChangeExpiration))

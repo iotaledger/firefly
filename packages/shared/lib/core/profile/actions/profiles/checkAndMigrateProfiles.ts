@@ -177,6 +177,8 @@ function persistedProfileMigrationToV11(existingProfile: IPersistedProfile): voi
         maxMediaDownloadTimeInSeconds: DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_SECONDS,
     }
 
+    existingProfile.forceAssetRefresh = true
+
     saveProfile(existingProfile)
 }
 

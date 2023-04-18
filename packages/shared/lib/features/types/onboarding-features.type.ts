@@ -1,6 +1,5 @@
 import { NetworkId } from '@core/network'
-import { IFeatureFlag } from '../interfaces/feature-flag.interface'
-import { IOnboardingFeaturesForNetwork } from '@features/interfaces'
+import { IFeatureFlag, IOnboardingFeaturesForNetwork } from '../interfaces'
 
 export type OnboardingFeatures = {
     [key in NetworkId]?: IOnboardingFeaturesForNetwork & IFeatureFlag

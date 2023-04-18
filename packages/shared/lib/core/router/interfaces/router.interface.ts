@@ -5,4 +5,6 @@ export interface IRouter {
     previous(): void
 
     reset?(): void
+
+    hasHistory(): boolean
 }

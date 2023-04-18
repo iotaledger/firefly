@@ -2,19 +2,14 @@
     import { ProfileButton } from '@components'
     import { Button, Logo } from '@ui'
 
-    import { initialiseOnboardingRouters, loginRouter } from '@/routers'
     import { appSettings, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService } from '@core/app'
     import { localize } from '@core/i18n'
-    import { NetworkProtocol, NetworkType } from '@core/network'
     import { loadPersistedProfileIntoActiveProfile, profiles } from '@core/profile'
 
-    import {
-        initialiseOnboardingProfile,
-        shouldBeDeveloperProfile,
-        updateOnboardingProfile,
-    } from '@contexts/onboarding'
+    import { initialiseOnboardingFlow, shouldBeDeveloperProfile } from '@contexts/onboarding'
 
     import { DrawerId, openDrawer } from '@/auxiliary/drawer'
+    import { initialiseOnboardingRouters, loginRouter } from '@/routers'
 
     $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTermsOfService()) {
         openDrawer(DrawerId.LegalUpdate, { preventClose: true })
@@ -22,16 +17,17 @@
 
     $: dark = $appSettings.darkMode
 
-    function onContinueClick(id: string): void {
-        loadPersistedProfileIntoActiveProfile(id)
+    function onContinueClick(profileId: string): void {
+        loadPersistedProfileIntoActiveProfile(profileId)
         $loginRouter.next()
     }
 
     async function onAddProfileClick(): Promise<void> {
-        await initialiseOnboardingProfile(shouldBeDeveloperProfile(), NetworkProtocol.Shimmer)
-        if (!shouldBeDeveloperProfile()) {
-            updateOnboardingProfile({ networkType: NetworkType.Mainnet })
-        }
+        const isDeveloperProfile = shouldBeDeveloperProfile()
+        await initialiseOnboardingFlow({
+            isDeveloperProfile,
+            ...(!isDeveloperProfile && { networkId: NetworkId.Shimmer }),
+        })
         initialiseOnboardingRouters()
         $loginRouter.next({ shouldAddProfile: true })
     }
@@ -43,13 +39,7 @@
         <div class="w-full flex flex-col mt-10">
             {#each $profiles as profile}
                 <div class="w-full item-center mb-4">
-                    <ProfileButton
-                        onClick={onContinueClick}
-                        name={profile.name}
-                        id={profile.id}
-                        networkType={profile?.networkType ?? NetworkType.Devnet}
-                        networkProtocol={profile?.networkProtocol ?? NetworkProtocol.IOTA}
-                    />
+                    <ProfileButton {profile} onClick={onContinueClick} />
                 </div>
             {/each}
         </div>

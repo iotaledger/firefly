@@ -3,6 +3,7 @@
 
     import { localize } from '@core/i18n'
     import {
+        getUnitFromTokenMetadata,
         hideActivitiesForHiddenAssets,
         hideAsset,
         IAsset,
@@ -86,7 +87,7 @@
         <div class="space-y-3 flex flex-col items-center justify-center">
             <AssetIcon {asset} large showVerifiedBadgeOnly />
             <Text type={TextType.h2} fontWeight={FontWeight.bold}>
-                {asset?.metadata?.tickerSymbol ?? asset?.metadata?.unit}
+                {getUnitFromTokenMetadata(asset?.metadata)}
             </Text>
         </div>
 
