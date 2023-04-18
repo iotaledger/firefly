@@ -5,6 +5,7 @@
     import { activeProfile } from '@core/profile'
     import { selectedAccount } from '@core/account'
     import { NetworkHealth } from '@core/network'
+    import { Icon } from '@auxiliary/icon'
 
     type ConnectedChain = { name: string; address: string; status: NetworkHealth }
 
@@ -37,11 +38,11 @@
     }
 </script>
 
-<connected-chains-drawer class="flex flex-col justify-between">
+<connected-chains-drawer class="h-full flex flex-col justify-between">
     <div class="flex flex-col gap-4">
         {#each connectedChains as chain}
             <NetworkCard {...chain} />
         {/each}
     </div>
-    <Button onClick={onAddChainClick} classes="mt-4">Add chain</Button>
+    <Button outline icon={Icon.Plus} iconHeight={12} onClick={onAddChainClick} classes="mt-4">Add chain</Button>
 </connected-chains-drawer>

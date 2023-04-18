@@ -2293,6 +2293,12 @@
                 "Failed": "Failed to create alias"
             }
         },
+        "networkHealth": {
+            "down": "down",
+            "degraded": "degraded",
+            "operational": "operational",
+            "disconnected": "disconnected"
+        },
         "locked": "locked",
         "smartContract": "smart contract"
     },
