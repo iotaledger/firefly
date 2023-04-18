@@ -374,10 +374,10 @@
   resolved "https://registry.npmjs.org/@capacitor/device/-/device-1.1.2.tgz"
   integrity sha512-1i6yvuSC7Ys7fs4JsUtfwG/00d2FF2TvWpbYs7YbkXhp1vOTL510gwjc5S6FTyhh8M9sAaUU5tKB68XwlSK/GA==
 
-"@capacitor/ios@3.4.1":
-  version "3.4.1"
-  resolved "https://registry.npmjs.org/@capacitor/ios/-/ios-3.4.1.tgz"
-  integrity sha512-ycFCyKI8DsgedVg7PW5MpCVgqFuD0PMHQGVfC5ichXc2C/jAATX32EVdEMCB0N3guKoH2k6T3Efwg59+Fcdx2w==
+"@capacitor/ios@4.7.3":
+  version "4.7.3"
+  resolved "https://registry.yarnpkg.com/@capacitor/ios/-/ios-4.7.3.tgz#4e4f675afc8a12f458d397bb6cd333a6eb2be183"
+  integrity sha512-CXVvEzg9WWyhGdLSZsWfa69RyNlKH03g4OKpWh9OW0A7uL4aYA8Z7m4jE4mCu/2TTWDEgUPp0BrWEDPaj73eow==
 
 "@capacitor/keyboard@^1.2.3":
   version "1.2.3"
