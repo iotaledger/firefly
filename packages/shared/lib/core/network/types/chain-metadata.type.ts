@@ -1,3 +1,3 @@
-import { IEvmChainMetadata, IIscpChainMetadata } from '../interfaces/chain-metadata.interface'
+import { IEvmChainMetadata, IIscpChainMetadata } from '../interfaces'
 
 export type ChainMetadata = IIscpChainMetadata | IEvmChainMetadata
