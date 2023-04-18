@@ -19,7 +19,7 @@
     }
 </script>
 
-<drawer-header class="flex flex-row items-center mb-12 gap-2">
+<drawer-header class="flex flex-row items-center mb-6 gap-2">
     {#if showBackButton}
         <button on:click={onBackClick} class=" focus:text-blue-500">
             <Icon

@@ -490,7 +490,11 @@
             "drawers": {
                 "networkConfig": {
                     "addChain": {
-                        "title": "Add chain"
+                        "title": "Add chain",
+                        "chainId": "Chain ID",
+                        "aliasAddress": "Alias Address",
+                        "iscpEndpoint": "ISCP Endpoint",
+                        "explorerEndpoint": "Explorer Endpoint (optional)"
                     },
                     "chainDepositAddress": {
                         "title": "Chain deposit address"
