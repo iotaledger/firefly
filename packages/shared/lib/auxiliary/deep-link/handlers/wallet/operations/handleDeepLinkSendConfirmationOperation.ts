@@ -6,6 +6,7 @@ import {
     NewTransactionType,
     Subject,
     getAssetById,
+    getUnitFromTokenMetadata,
     selectedAccountAssets,
     setNewTransactionDetails,
 } from '@core/wallet'
@@ -85,7 +86,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): NewTrans
         throw new TagLengthError()
     }
 
-    const unit = searchParams.get(SendOperationParameter.Unit) ?? asset.metadata?.unit
+    const unit = searchParams.get(SendOperationParameter.Unit) ?? getUnitFromTokenMetadata(asset.metadata)
     const giftStorageDeposit = isStringTrue(searchParams.get(SendOperationParameter.GiftStorageDeposit))
     const disableToggleGift = isStringTrue(searchParams.get(SendOperationParameter.DisableToggleGift))
     const disableChangeExpiration = isStringTrue(searchParams.get(SendOperationParameter.DisableChangeExpiration))
