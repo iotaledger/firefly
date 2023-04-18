@@ -6,16 +6,12 @@
 
     export let onClick: () => unknown
 
-    let health: NetworkHealth
-
-    $: health = $networkStatus.health ?? NetworkHealth.Down
-    $: healthColor = `${NETWORK_HEALTH_COLORS[health]}-500`
-    $: description = $networkStatus.health ?? NetworkHealth.Disconnected
+    $: healthColor = `${NETWORK_HEALTH_COLORS[$networkStatus.health ?? NetworkHealth.Down]}-500`
 </script>
 
 <ProfileActionButton
     primaryText={$nodeInfo?.protocol?.networkName}
-    secondaryText={localize(`views.dashboard.network.${description}`)}
+    secondaryText={localize(`views.dashboard.network.${$networkStatus.health ?? NetworkHealth.Disconnected}`)}
     icon={IconTypes.Network}
     iconColor={healthColor}
     color={healthColor}
