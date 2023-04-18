@@ -1,4 +1,4 @@
-export * from './buildOnboardingProfile'
+export * from './buildInitialOnboardingProfile'
 export * from './convertOnboardingProfileToPersistedProfile'
 export * from './copyStrongholdFileToProfileDirectory'
 export * from './deriveShimmerClaimingAccountState'

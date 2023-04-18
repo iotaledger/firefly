@@ -1,6 +1,5 @@
 <script lang="ts">
-    import { onMount } from 'svelte'
-    import { Animation, Text, Button, NodeConfigurationForm, HTMLButtonType, TextType } from '@ui'
+    import { showAppNotification } from '@auxiliary/notification'
     import { OnboardingLayout } from '@components'
     import {
         cleanupOnboardingProfileManager,
@@ -9,10 +8,11 @@
     } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { INode } from '@core/network'
-    import { destroyProfileManager, getNodeInfo } from '@core/profile-manager'
+    import { INode, buildNetworkFromNodeInfoResponse } from '@core/network'
+    import { getNodeInfo } from '@core/profile-manager'
     import { networkSetupRouter } from '@core/router'
-    import { showAppNotification } from '@auxiliary/notification'
+    import { Animation, Button, HTMLButtonType, NodeConfigurationForm, Text, TextType } from '@ui'
+    import { onMount } from 'svelte'
 
     let nodeConfigurationForm: NodeConfigurationForm
     let node: INode
@@ -36,14 +36,16 @@
             await initialiseProfileManagerFromOnboardingProfile(true)
 
             // The API request to check if a node is reachable requires an existing account manager.
-            await getNodeInfo(node.url)
-            await destroyProfileManager()
+            const nodeInfoResponse = await getNodeInfo(node.url)
+            const network = buildNetworkFromNodeInfoResponse(nodeInfoResponse)
+            updateOnboardingProfile({ network })
+            await cleanupOnboardingProfileManager()
             $networkSetupRouter.next()
         } catch (err) {
             console.error(err)
             if (err?.error?.includes('error sending request for url')) {
                 formError = localize('error.node.unabledToConnect')
-                updateOnboardingProfile({ clientOptions: null })
+                updateOnboardingProfile({ clientOptions: null, network: undefined })
                 await cleanupOnboardingProfileManager()
             } else if (err?.type !== 'validationError') {
                 showAppNotification({

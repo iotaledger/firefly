@@ -1,4 +1,10 @@
 <script lang="ts">
+    import { onMount } from 'svelte'
+
+    import { OnboardingLayout } from '@components'
+    import { OnboardingButton } from '@ui'
+
+    import { Icon } from '@auxiliary/icon'
     import {
         initialiseOnboardingProfile,
         onboardingProfile,
@@ -6,30 +12,41 @@
         updateOnboardingProfile,
     } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
-    import { getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
+    import { NETWORK, NetworkId, getDefaultClientOptions } from '@core/network'
+
     import { networkSetupRouter } from '@/routers'
     import features from '@features/features'
-    import { OnboardingButton } from '@ui'
-    import { onMount } from 'svelte'
-    import { OnboardingLayout } from '@components'
 
     const title = localize('views.onboarding.networkSetup.chooseNetwork.title')
 
-    $: networkProtocol = $onboardingProfile?.networkProtocol ?? NetworkProtocol.Shimmer
+    let networkIcon: { [key in NetworkId]: string }
 
-    let networkIcon: { [key in NetworkType]: string }
     $: networkIcon = {
-        [NetworkType.Mainnet]: networkProtocol,
-        [NetworkType.Devnet]: 'settings',
-        [NetworkType.PrivateNet]: 'settings',
+        [NetworkId.Iota]: Icon.Iota,
+        [NetworkId.Shimmer]: Icon.Shimmer,
+        [NetworkId.Testnet]: 'settings',
+        [NetworkId.Custom]: 'settings',
     }
 
-    function onNetworkSelectionClick(networkType: NetworkType): void {
-        if (networkType !== NetworkType.PrivateNet) {
-            const clientOptions = getDefaultClientOptions($onboardingProfile?.networkProtocol, networkType)
-            updateOnboardingProfile({ clientOptions })
+    function getIconColor(networkId: NetworkId): string {
+        switch (networkId) {
+            case NetworkId.Iota:
+                return 'iota-highlight'
+            case NetworkId.Shimmer:
+                return 'shimmer-highlight'
+            case NetworkId.Testnet:
+                return 'blue-500'
+            case NetworkId.Custom:
+                return 'blue-500'
         }
-        updateOnboardingProfile({ networkType })
+    }
+
+    function onNetworkSelectionClick(networkId: NetworkId): void {
+        if (networkId !== NetworkId.Custom) {
+            const network = NETWORK?.[networkId]
+            const clientOptions = getDefaultClientOptions(networkId)
+            updateOnboardingProfile({ network, clientOptions })
+        }
         $networkSetupRouter.next()
     }
 
@@ -39,30 +56,23 @@
 
     onMount(async () => {
         if (!$onboardingProfile?.id) {
-            await initialiseOnboardingProfile(
-                $onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile(),
-                NetworkProtocol.Shimmer
-            )
+            await initialiseOnboardingProfile($onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile())
         }
-        updateOnboardingProfile({ networkType: null })
+        updateOnboardingProfile({ network: undefined })
     })
 </script>
 
 <OnboardingLayout {onBackClick} {title} animation="onboarding-network-desktop">
     <div slot="footer" class="flex flex-col space-y-4">
-        {#each Object.values(NetworkType) as networkType}
+        {#each Object.values(NetworkId) as networkId}
             <OnboardingButton
-                primaryText={localize(
-                    `views.onboarding.networkSetup.chooseNetwork.${networkProtocol}.${networkType}.title`
-                )}
-                secondaryText={localize(
-                    `views.onboarding.networkSetup.chooseNetwork.${networkProtocol}.${networkType}.body`
-                )}
-                icon={networkIcon[networkType]}
-                iconColor={networkType === NetworkType.Mainnet ? `${networkProtocol}-highlight` : 'blue-500'}
-                hidden={features?.onboarding?.[networkProtocol]?.[networkType]?.hidden}
-                disabled={!features?.onboarding?.[networkProtocol]?.[networkType]?.enabled}
-                onClick={() => onNetworkSelectionClick(networkType)}
+                primaryText={localize(`views.onboarding.networkSetup.chooseNetwork.${networkId}.title`)}
+                secondaryText={localize(`views.onboarding.networkSetup.chooseNetwork.${networkId}.body`)}
+                icon={networkIcon[networkId]}
+                iconColor={getIconColor(networkId)}
+                hidden={features?.onboarding?.[networkId]?.hidden}
+                disabled={!features?.onboarding?.[networkId]?.enabled}
+                onClick={() => onNetworkSelectionClick(networkId)}
             />
         {/each}
     </div>
