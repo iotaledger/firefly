@@ -1,6 +1,7 @@
 export { default as AccountActionsDrawer } from './AccountActionsDrawer.svelte'
 export { default as AccountSwitcherDrawer } from './AccountSwitcherDrawer.svelte'
 export { default as BalanceBreakdownDrawer } from './BalanceBreakdownDrawer.svelte'
+export { default as BurnNativeTokensDrawer } from './BurnNativeTokensDrawer.svelte'
 export { default as ConfirmDrawer } from './ConfirmDrawer.svelte'
 export { default as CreateAccountDrawer } from './CreateAccountDrawer.svelte'
 export { default as CustomizeAccountDrawer } from './CustomizeAccountDrawer.svelte'
