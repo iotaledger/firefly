@@ -50,7 +50,7 @@
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Set up {protocol, select, IOTA {an} Shimmer {a} other {an}} {protocol} profile",
+                    "title": "Set up {protocol, select, IOTA {an} Shimmer {a} Testnet {a} other {a}} {protocol} profile",
                     "body": "Select the appropriate method to set up your {protocol} profile."
                 },
                 "setupNew": {
