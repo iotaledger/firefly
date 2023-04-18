@@ -1,7 +1,6 @@
 <script lang="ts">
     import { NodeListTable } from '@components'
     import { Button, HR, Text, TextType } from '@ui'
-
     import { localize } from '@core/i18n'
     import {
         addOfficialNodesToClientOptions,
@@ -13,12 +12,10 @@
         nodeInfo,
     } from '@core/network'
     import { activeProfile } from '@core/profile'
-
     import { NetworkInformationSettingsAction } from '@/contexts/settings'
     import { networkInformationSettingsRouter } from '@/routers'
 
     const { networkType } = $activeProfile
-    $: health = $networkStatus.health ?? NetworkHealth.Disconnected
 
     function onAddNodeClick(): void {
         $networkInformationSettingsRouter.next({ action: NetworkInformationSettingsAction.AddNode })
@@ -41,8 +38,12 @@
             <div>
                 <Text type={TextType.p} classes="inline" secondary>{localize('views.dashboard.network.status')}:</Text>
                 <div>
-                    <p class="text-13 text-{NETWORK_HEALTH_COLORS[health]}-500">
-                        {localize(`views.dashboard.network.${health}`)}
+                    <p
+                        class="text-13 text-{NETWORK_HEALTH_COLORS[
+                            $networkStatus.health ?? NetworkHealth.Disconnected
+                        ]}-500"
+                    >
+                        {localize(`views.dashboard.network.${$networkStatus.health ?? NetworkHealth.Disconnected}`)}
                     </p>
                 </div>
             </div>
