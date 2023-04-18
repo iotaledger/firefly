@@ -39,7 +39,7 @@
                     {truncateString(address, 8, 8)}
                 </Text>
             </div>
-            <button on:click={onQrCodeIconClick}>
+            <button on:click|stopPropagation={onQrCodeIconClick}>
                 <Icon icon={IconEnum.Qr} classes="text-gray-500" />
             </button>
         </div>
