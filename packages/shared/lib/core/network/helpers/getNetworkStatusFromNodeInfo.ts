@@ -1,5 +1,4 @@
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from '@core/utils'
-import { NETWORK_STATUS_DESCRIPTION } from '../constants'
 import { NetworkHealth } from '../enums'
 import { INetworkStatus } from '../interfaces'
 import { INodeInfo } from '@iota/types'
@@ -23,13 +22,10 @@ export function getNetworkStatusFromNodeInfo(nodeInfo: INodeInfo): INetworkStatu
         health = NetworkHealth.Degraded
     }
 
-    const description = NETWORK_STATUS_DESCRIPTION?.[health]
-
     return {
         messagesPerSecond: nodeInfo.metrics.blocksPerSecond,
         referencedRate: nodeInfo.metrics.referencedRate,
         health,
-        description,
         currentMilestone: nodeInfo.status.confirmedMilestone.index,
     }
 }

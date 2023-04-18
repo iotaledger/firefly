@@ -1,3 +1,4 @@
+export * from './chain-type.enum'
 export * from './explorer-endpoint.enum'
 export * from './network-health.enum'
 export * from './network-id.enum'
