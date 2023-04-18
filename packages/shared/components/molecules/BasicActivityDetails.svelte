@@ -17,16 +17,17 @@
     import { getSubjectFromActivity } from '@core/wallet/utils/generateActivity/helper'
 
     export let activity: TransactionActivity
+    export let unit: string = undefined
 
     $: asset = getAssetFromPersistedAssets(activity.assetId)
-    $: amount = formatTokenAmountDefault(Number(activity.rawAmount), asset?.metadata, asset?.metadata?.unit)
+    $: amount = formatTokenAmountDefault(Number(activity.rawAmount), asset?.metadata, unit ?? asset?.metadata?.unit)
     $: isTimelocked = activity.asyncData?.timelockDate > $time
     $: subject = getSubjectFromActivity(activity)
 </script>
 
 <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-3">
     {#if amount}
-        <AmountBox {amount} unit={asset?.metadata?.unit} {asset} />
+        <AmountBox {amount} unit={unit ?? asset?.metadata?.unit} {asset} />
     {/if}
     <transaction-status class="flex flex-row w-full space-x-2 justify-center">
         {#if activity.inclusionState && activity.direction}
