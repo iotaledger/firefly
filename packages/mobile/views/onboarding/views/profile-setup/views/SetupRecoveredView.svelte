@@ -20,9 +20,8 @@
         [ProfileRecoveryType.Stronghold]: false,
         [ProfileRecoveryType.Ledger]: false,
     }
-
-    $: networkId = $onboardingProfile?.network?.id
-    $: title = localize('views.onboarding.profileSetup.setupRecovered.title', {
+    const networkId = $onboardingProfile?.network?.id
+    const title = localize('views.onboarding.profileSetup.setupRecovered.title', {
         values: { protocol: formatProtocolName(networkId) },
     })
 

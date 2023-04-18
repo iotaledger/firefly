@@ -17,7 +17,7 @@
     import { Animation, OnboardingButton, Text } from '@ui'
     import { onMount } from 'svelte'
 
-    $: networkId = $onboardingProfile?.network?.id
+    const networkId = $onboardingProfile?.network?.id
 
     function onProfileSetupSelectionClick(setupType: ProfileSetupType): void {
         updateOnboardingProfile({ setupType })

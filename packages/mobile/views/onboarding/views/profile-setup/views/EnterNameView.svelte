@@ -13,9 +13,8 @@
 
     $: isProfileNameValid = profileName && profileName.trim()
     $: profileName, (error = '') // Error clears when profileName changes
-    $: networkId = $onboardingProfile?.network?.id
     $: title = localize('views.onboarding.profileSetup.enterName.title', {
-        values: { protocol: formatProtocolName(networkId) },
+        values: { protocol: formatProtocolName($onboardingProfile?.network?.id) },
     })
 
     function onBackClick(): void {

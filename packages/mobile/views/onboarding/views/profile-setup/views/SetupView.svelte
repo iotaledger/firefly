@@ -20,8 +20,8 @@
     import { profileSetupRouter } from '@/routers'
     import features from '@features/features'
 
-    $: networkId = $onboardingProfile?.network?.id
-    $: title = localize('views.onboarding.profileSetup.setup.title', {
+    const networkId = $onboardingProfile?.network?.id
+    const title = localize('views.onboarding.profileSetup.setup.title', {
         values: { protocol: formatProtocolName(networkId) },
     })
 

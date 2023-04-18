@@ -23,7 +23,7 @@
         [ProfileRecoveryType.Ledger]: false,
     }
 
-    $: networkId = $onboardingProfile?.network?.id
+    const networkId = $onboardingProfile?.network?.id
 
     async function onProfileRecoverySelectionClick(recoveryType: ProfileRecoveryType): Promise<void> {
         if (Object.keys(isBusy).some((key) => isBusy[key])) {
