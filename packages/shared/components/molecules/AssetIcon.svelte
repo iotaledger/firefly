@@ -3,6 +3,7 @@
     import { getAssetInitials, IPersistedAsset, NotVerifiedStatus, ANIMATED_TOKEN_IDS } from '@core/wallet'
     import { isBright } from '@core/utils'
     import { Animation, Icon, VerificationBadge } from 'shared/components'
+    import { getIconColorFromString } from '@core/account'
 
     export let asset: IPersistedAsset
     export let large = false
@@ -16,18 +17,24 @@
     let assetIconWrapperWidth: number
 
     $: isAnimation = asset?.id in ANIMATED_TOKEN_IDS
-    $: {
-        icon = ''
-        assetIconBackgroundColor = asset?.metadata?.primaryColor
-        assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
-        if (
-            asset?.id === String(COIN_TYPE[NetworkProtocol.IOTA]) ||
-            asset?.id === String(COIN_TYPE[NetworkProtocol.Shimmer])
-        ) {
+    $: switch (asset?.id) {
+        case String(COIN_TYPE[NetworkProtocol.IOTA]):
+            assetInitials = ''
+            assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
+            assetIconBackgroundColor = '#6E82A4'
             icon = asset?.metadata?.name?.toLocaleLowerCase()
-        } else {
+            break
+        case String(COIN_TYPE[NetworkProtocol.Shimmer]):
+            assetInitials = ''
+            assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
+            assetIconBackgroundColor = '#25DFCA'
+            icon = asset?.metadata?.name?.toLocaleLowerCase()
+            break
+        default:
             assetInitials = getAssetInitials(asset)
-        }
+            assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
+            assetIconBackgroundColor = getIconColorFromString(asset?.metadata?.name)
+            icon = ''
     }
 
     $: shouldShowBadge = showVerifiedBadgeOnly
