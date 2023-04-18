@@ -10,12 +10,12 @@
 
     let error = ''
     let profileName = $onboardingProfile?.name ?? ''
+    const title = localize('views.onboarding.profileSetup.enterName.title', {
+        values: { protocol: formatProtocolName($onboardingProfile?.network?.id) },
+    })
 
     $: isProfileNameValid = profileName && profileName.trim()
     $: profileName, (error = '') // Error clears when profileName changes
-    $: title = localize('views.onboarding.profileSetup.enterName.title', {
-        values: { protocol: formatProtocolName($onboardingProfile?.network?.id) },
-    })
 
     function onBackClick(): void {
         if ($onboardingProfile?.recoveryType) {
