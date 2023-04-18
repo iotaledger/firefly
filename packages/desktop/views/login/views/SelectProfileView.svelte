@@ -24,7 +24,7 @@
         const isDeveloperProfile = shouldBeDeveloperProfile()
         await initialiseOnboardingFlow({
             isDeveloperProfile,
-            ...(!isDeveloperProfile && { networkId: NetworkId.Testnet }),
+            ...(!isDeveloperProfile && { networkId: NetworkId.Shimmer }),
         })
         $routerManager.goToAppContext(AppContext.Onboarding)
         $onboardingRouter.goTo(isDeveloperProfile ? OnboardingRoute.NetworkSetup : OnboardingRoute.ProfileSetup)
