@@ -1,28 +1,25 @@
 <script lang="ts">
     import { KeyValueBox } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { FoundryActivity, getAssetFromPersistedAssets, ITokenMetadata } from '@core/wallet'
+    import { FoundryActivity, getAssetFromPersistedAssets, IIrc30Metadata } from '@core/wallet'
     import { IKeyValueBoxList } from '@core/utils'
 
     export let activity: FoundryActivity
 
-    let metadata: ITokenMetadata
-    $: metadata = getAssetFromPersistedAssets(activity.assetId)?.metadata
+    let metadata: IIrc30Metadata
+    $: metadata = <IIrc30Metadata>getAssetFromPersistedAssets(activity.assetId)?.metadata
 
     let detailsList: IKeyValueBoxList
     $: detailsList = {
         ...(metadata?.name && {
             tokenName: { data: metadata.name },
         }),
-        ...(metadata?.unit && {
-            unit: { data: metadata.unit },
+        ...(metadata?.symbol && {
+            unit: { data: metadata.symbol },
         }),
         decimals: { data: String(metadata.decimals) },
         ...(metadata?.description && {
             description: { data: metadata.description },
-        }),
-        ...(metadata?.tickerSymbol && {
-            tickerSymbol: { data: metadata.tickerSymbol },
         }),
         ...(metadata?.url && {
             url: { data: metadata.url, isCopyable: true },

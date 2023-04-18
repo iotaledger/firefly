@@ -596,6 +596,13 @@ export const openAboutWindow = () => {
         height: 230,
         useContentSize: true,
         titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'hidden',
+
+        // affects only WindowsOS
+        titleBarOverlay: {
+            color: '#192742',
+            symbolColor: '#ffffff',
+        },
+
         show: false,
         fullscreenable: false,
         resizable: false,
