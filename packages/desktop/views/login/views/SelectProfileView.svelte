@@ -1,5 +1,8 @@
 <script lang="ts">
-    import { Icon, Logo, Profile } from 'shared/components'
+    import { Icon, Logo, Profile } from '@ui'
+
+    import { PopupId, openPopup } from '@auxiliary/popup'
+    import { initialiseOnboardingFlow, shouldBeDeveloperProfile } from '@contexts/onboarding'
     import {
         AppContext,
         isStrongholdUpdated,
@@ -8,11 +11,10 @@
         needsToAcceptLatestTermsOfService,
     } from '@core/app'
     import { localize } from '@core/i18n'
-    import { NetworkProtocol, NetworkType } from '@core/network'
-    import { loadPersistedProfileIntoActiveProfile, profiles, ProfileType } from '@core/profile'
-    import { loginRouter, OnboardingRoute, onboardingRouter, routerManager } from '@core/router'
-    import { initialiseOnboardingFlow, shouldBeDeveloperProfile } from '@contexts/onboarding'
-    import { openPopup, PopupId } from '@auxiliary/popup'
+    import { NetworkId, NetworkProtocol, NetworkType } from '@core/network'
+    import { ProfileType, loadPersistedProfileIntoActiveProfile, profiles } from '@core/profile'
+    import { OnboardingRoute, loginRouter, onboardingRouter, routerManager } from '@core/router'
+
     import features from '@features/features'
 
     function onContinueClick(id: string): void {
@@ -24,7 +26,7 @@
         const isDeveloperProfile = shouldBeDeveloperProfile()
         await initialiseOnboardingFlow({
             isDeveloperProfile,
-            ...(isDeveloperProfile && { networkProtocol: NetworkProtocol.Shimmer }),
+            ...(!isDeveloperProfile && { networkId: NetworkId.Shimmer }),
         })
         $routerManager.goToAppContext(AppContext.Onboarding)
         $onboardingRouter.goTo(isDeveloperProfile ? OnboardingRoute.NetworkSetup : OnboardingRoute.ProfileSetup)
