@@ -8,13 +8,13 @@ import { checkNodeUrlValidity, cleanAuth, getDefaultClientOptions, getOfficialNo
 
 describe('File: network.ts', () => {
     function _buildNode(url: string | undefined): INode | undefined {
-        if (!url) {
-            return undefined
-        } else {
+        if (url) {
             return {
                 url,
                 disabled: false,
             }
+        } else {
+            return undefined
         }
     }
 
