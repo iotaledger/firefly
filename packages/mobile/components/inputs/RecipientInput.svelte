@@ -1,6 +1,6 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { networkHrp } from '@core/profile/stores'
+    import { getNetworkHrp } from '@core/profile'
     import { BECH32_ADDRESS_LENGTH } from '@core/utils/constants'
     import { validateBech32Address } from '@core/utils/crypto'
     import { IAccountSubject, IAddressSubject } from '@core/wallet/interfaces'
@@ -10,10 +10,9 @@
     export let error: string = undefined
     export let inputElement: HTMLInputElement = undefined
 
-    let addressPrefix: string
+    const addressPrefix = getNetworkHrp()
     let value: string
 
-    $: addressPrefix = $networkHrp
     $: value = recipient?.type === 'address' ? recipient?.address ?? '' : recipient?.account?.name ?? ''
     $: value, validateValue()
 
