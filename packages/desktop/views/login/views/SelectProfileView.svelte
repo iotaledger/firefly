@@ -1,6 +1,4 @@
 <script lang="ts">
-    import { Icon, Logo, Profile } from '@ui'
-
     import { PopupId, openPopup } from '@auxiliary/popup'
     import { initialiseOnboardingFlow, shouldBeDeveloperProfile } from '@contexts/onboarding'
     import {
@@ -11,14 +9,14 @@
         needsToAcceptLatestTermsOfService,
     } from '@core/app'
     import { localize } from '@core/i18n'
-    import { NetworkId, NetworkProtocol, NetworkType } from '@core/network'
+    import { NetworkId } from '@core/network'
     import { ProfileType, loadPersistedProfileIntoActiveProfile, profiles } from '@core/profile'
     import { OnboardingRoute, loginRouter, onboardingRouter, routerManager } from '@core/router'
-
     import features from '@features/features'
+    import { Icon, Logo, Profile } from '@ui'
 
-    function onContinueClick(id: string): void {
-        loadPersistedProfileIntoActiveProfile(id)
+    function onContinueClick(profileId: string): void {
+        loadPersistedProfileIntoActiveProfile(profileId)
         $loginRouter.next()
     }
 
@@ -50,14 +48,9 @@
         {#each $profiles as profile}
             <div class="mx-7 mb-8">
                 <Profile
+                    {profile}
                     bgColor="blue"
                     onClick={onContinueClick}
-                    name={profile.name}
-                    id={profile.id}
-                    isDeveloper={profile.isDeveloperProfile}
-                    networkType={profile?.networkType ?? NetworkType.Devnet}
-                    networkProtocol={profile?.networkProtocol ?? NetworkProtocol.IOTA}
-                    isLedgerProfile={profile?.type === ProfileType.Ledger}
                     updateRequired={profile?.type === ProfileType.Software &&
                         !isStrongholdUpdated(profile) &&
                         features.onboarding.strongholdVersionCheck.enabled}

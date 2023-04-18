@@ -486,6 +486,28 @@
                     "updateVersion": "Firefly v{version}",
                     "button": "Update"
                 }
+            },
+            "drawers": {
+                "networkConfig": {
+                    "addChain": {
+                        "title": "Add chain"
+                    },
+                    "chainDepositAddress": {
+                        "title": "Chain deposit address"
+                    },
+                    "chainInformation": {
+                        "title": "Chain information"
+                    },
+                    "connectedChains": {
+                        "title": "Connected chains"
+                    },
+                    "editChain": {
+                        "title": "Edit chain"
+                    },
+                    "removeChain": {
+                        "title": "Remove chain"
+                    }
+                }
             }
         },
         "staking": {
