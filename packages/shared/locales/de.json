@@ -324,8 +324,8 @@
                 "description": "NFT-Medien mit Größen größer als dieses Limit werden nicht heruntergeladen und stattdessen ein Platzhalter angezeigt, der den Medientyp repräsentiert"
             },
             "maxMediaDownloadTime": {
-                "title": "Maximum download time",
-                "description": "NFT media which take longer than this limit to download will be canceled and a placeholder representing the media type will be displayed instead"
+                "title": "Maximale Downloadzeit",
+                "description": "NFT Medien, die länger als dieses Limit zum Download benötigen, werden abgebrochen und stattdessen wird ein Platzhalter angezeigt, der den Medientyp repräsentiert"
             },
             "refreshNftMedia": {
                 "title": "NFT Medien aktualisieren",
@@ -497,6 +497,13 @@
                     "title": "Neues Update verfügbar",
                     "updateVersion": "Firefly v{version}",
                     "button": "Aktualisieren"
+                }
+            },
+            "drawers": {
+                "networkConfig": {
+                    "connectedChains": {
+                        "title": "Verbundene Chains"
+                    }
                 }
             }
         },

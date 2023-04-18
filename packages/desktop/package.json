@@ -41,7 +41,7 @@
         "@sentry/webpack-plugin": "^1.18.5",
         "@tsconfig/svelte": "^1.0.10",
         "@types/webpack": "^5.28.1",
-        "copy-webpack-plugin": "^7.0.0",
+        "copy-webpack-plugin": "^11.0.0",
         "cross-env": "^7.0.2",
         "css-loader": "^6.7.3",
         "electron": "22.3.5",

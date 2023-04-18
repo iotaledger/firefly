@@ -6,7 +6,6 @@
 
     import { needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService, Platform } from '@core/app'
     import { localize } from '@core/i18n'
-    import { NetworkProtocol, NetworkType } from '@core/network'
     import { activeProfile, login, resetActiveProfile } from '@core/profile'
     import { isValidPin } from '@core/utils'
 
@@ -121,12 +120,7 @@
     </header>
     <div class="flex w-full justify-center items-center mt-16">
         <div class="flex flex-col items-center w-96">
-            <Profile
-                name={$activeProfile?.name}
-                networkType={$activeProfile?.networkType ?? NetworkType.Devnet}
-                networkProtocol={$activeProfile?.networkProtocol ?? NetworkProtocol.Shimmer}
-                bgColor="blue"
-            />
+            <Profile profile={$activeProfile} bgColor="blue" />
             <div class="flex w-full items-center mt-12">
                 <PinInput
                     bind:this={pinRef}

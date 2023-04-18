@@ -1,15 +1,19 @@
 <script lang="ts">
-    import { ITokenMetadata } from '@core/wallet'
+    import { TokenMetadata, TokenStandard } from '@core/wallet'
     import { Text, TextType, FontWeight } from '@ui'
 
-    export let tokenMetadata: ITokenMetadata
+    export let tokenMetadata: TokenMetadata
     export let selectedUnit: string
     export let onClick: undefined | ((unit: string) => void) = undefined
     export let disabled: boolean = false
 
     let unitSwapper: string = null
-    $: if (!tokenMetadata?.useMetricPrefix && tokenMetadata?.unit) {
-        if (selectedUnit === tokenMetadata.unit) {
+    $: if (
+        tokenMetadata?.standard === TokenStandard.BaseToken &&
+        !tokenMetadata?.useMetricPrefix &&
+        tokenMetadata?.unit
+    ) {
+        if (selectedUnit === tokenMetadata?.unit) {
             unitSwapper = tokenMetadata?.subunit
         } else if (selectedUnit === tokenMetadata?.subunit) {
             unitSwapper = tokenMetadata?.unit

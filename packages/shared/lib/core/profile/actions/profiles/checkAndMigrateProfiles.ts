@@ -9,7 +9,6 @@ import {
 import { IPersistedProfile } from '../../interfaces'
 import { currentProfileVersion, profiles, saveProfile } from '../../stores'
 import { DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_SECONDS, DEFAULT_MAX_NFT_SIZE_IN_MEGABYTES } from '@core/nfts'
-import { deepCopy } from '@core/utils'
 
 /**
  * Migrates profile data in need of being modified to accommodate changes
@@ -168,12 +167,14 @@ function persistedProfileMigrationToV10(existingProfile: IPersistedProfile): voi
 
 function persistedProfileMigrationToV11(existingProfile: IPersistedProfile): void {
     const network = NETWORK?.[existingProfile?.networkProtocol]?.[existingProfile?.networkType]
-    existingProfile.network = deepCopy(network)
+    existingProfile.network = structuredClone(network)
 
     existingProfile.settings = {
         ...existingProfile.settings,
         maxMediaDownloadTimeInSeconds: DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_SECONDS,
     }
+
+    existingProfile.forceAssetRefresh = true
 
     saveProfile(existingProfile)
 }

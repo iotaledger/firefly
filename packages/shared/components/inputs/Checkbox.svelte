@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Icon, Text } from 'shared/components'
+    import { Icon, Text, TextType } from '@ui'
 
     export let label = undefined
     export let checked = false
@@ -13,26 +13,30 @@
     $: isSecondaryColor = !keepSameColor && (!checked || disabled)
 </script>
 
-<button
-    data-label="checkbox-input"
-    class="flex items-center text-left cursor-pointer {classes}"
-    type="button"
-    {disabled}
-    on:click={() => {
-        checked = !checked
-        onClick && onClick()
-    }}
->
-    <Icon
-        icon={checked ? `checkbox${round ? '-round' : ''}` : `checkbox-unchecked${round ? '-round' : ''}`}
-        width={small ? '16px' : undefined}
-        height={small ? '16px' : undefined}
-        classes={`${label ? 'mr-3' : ''} ${checked ? 'active' : ''}`}
-    />
+<div class="flex flex-row space-x-4 items-center text-left">
+    <button
+        data-label="checkbox-input"
+        class="cursor-pointer {classes}"
+        type="button"
+        {disabled}
+        on:click={() => {
+            checked = !checked
+            onClick && onClick()
+        }}
+    >
+        <Icon
+            icon={checked ? `checkbox${round ? '-round' : ''}` : `checkbox-unchecked${round ? '-round' : ''}`}
+            width={small ? '16px' : undefined}
+            height={small ? '16px' : undefined}
+            classes={`${checked ? 'active' : ''}`}
+        />
+    </button>
     {#if label}
-        <Text type="p" secondary={isSecondaryColor}>{label}</Text>
+        <Text type={TextType.p} secondary={isSecondaryColor}>{label}</Text>
+    {:else if $$slots.label}
+        <slot name="label" />
     {/if}
-</button>
+</div>
 
 <style type="text/scss">
     button {

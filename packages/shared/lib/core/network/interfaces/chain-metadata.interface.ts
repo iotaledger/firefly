@@ -1,19 +1,19 @@
 import { ChainType } from '../enums'
 
-export interface IChainMetadata {
+export interface IBaseChainMetadata {
     type: ChainType
     chainId: number
     name: string
     explorerUrl?: string
 }
 
-export interface IIscpChainMetadata extends IChainMetadata {
+export interface IIscpChainMetadata extends IBaseChainMetadata {
     type: ChainType.Iscp
     aliasAddress: string
     iscpEndpoint: string
 }
 
-export interface IEvmChainMetadata extends IChainMetadata {
+export interface IEvmChainMetadata extends IBaseChainMetadata {
     type: ChainType.Evm
     symbol: string
     ticker: string

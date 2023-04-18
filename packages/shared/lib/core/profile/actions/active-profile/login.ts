@@ -41,7 +41,6 @@ import {
     resetLoginProgress,
     setTimeStrongholdLastUnlocked,
     updateActiveProfile,
-    updateProfile,
 } from '../../stores'
 import { isLedgerProfile } from '../../utils'
 import { loadAccounts } from './loadAccounts'
@@ -105,7 +104,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 _activeProfile.forceAssetRefresh,
                 _activeProfile.forceAssetRefresh
             )
-            updateProfile(_activeProfile.id, { forceAssetRefresh: false })
+            updateActiveProfile({ forceAssetRefresh: false })
             await loadNftsForActiveProfile()
 
             // Step 6: generate and store activities for all accounts
