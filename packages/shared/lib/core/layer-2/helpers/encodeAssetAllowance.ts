@@ -19,7 +19,7 @@ export function encodeAssetAllowance(transactionDetails: NewTransactionDetails):
 
     if (transactionDetails.type === NewTransactionType.TokenTransfer) {
         const asset = getPersistedAsset(transactionDetails.assetId)
-        if (asset.standard === TokenStandard.BaseCoin) {
+        if (asset.standard === TokenStandard.BaseToken) {
             encodeBaseTokenTransfer(allowance, transactionDetails.rawAmount)
         } else {
             encodeNativeTokenTransfer(allowance, asset, transactionDetails)

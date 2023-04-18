@@ -1,17 +1,19 @@
 <script lang="ts">
-    import Big from 'big.js'
-    import { Text, AssetDropdown, InputContainer, SliderInput, AmountInput, TooltipIcon } from 'shared/components'
-    import UnitInput from './UnitInput.svelte'
     import { formatCurrency, localize, parseCurrency } from '@core/i18n'
+    import { getMarketAmountFromAssetValue } from '@core/market/utils'
+    import { getMaxDecimalsFromTokenMetadata } from '@core/token/utils'
     import {
-        formatTokenAmountBestMatch,
-        convertToRawAmount,
         IAsset,
+        TokenStandard,
+        convertToRawAmount,
+        formatTokenAmountBestMatch,
         formatTokenAmountDefault,
+        getUnitFromTokenMetadata,
         visibleSelectedAccountAssets,
     } from '@core/wallet'
-    import { IOTA_UNIT_MAP } from '@core/utils'
-    import { getMarketAmountFromAssetValue } from '@core/market/utils'
+    import Big from 'big.js'
+    import { AmountInput, AssetDropdown, InputContainer, SliderInput, Text, TooltipIcon } from 'shared/components'
+    import UnitInput from './UnitInput.svelte'
 
     export let inputElement: HTMLInputElement = undefined
     export let disabled = false
@@ -31,24 +33,14 @@
 
     $: isFocused && (error = '')
 
-    let allowedDecimals = 0
-    $: if (!asset?.metadata?.useMetricPrefix) {
-        if (unit === asset?.metadata.unit) {
-            allowedDecimals = Math.min(asset?.metadata.decimals, 18)
-        } else if (unit === asset?.metadata?.subunit) {
-            allowedDecimals = 0
-        }
-    } else if (asset?.metadata?.useMetricPrefix) {
-        allowedDecimals = IOTA_UNIT_MAP?.[unit?.substring(0, 1)] ?? 0
-    }
-
+    $: allowedDecimals = getMaxDecimalsFromTokenMetadata(asset?.metadata, unit)
     $: availableBalance = asset?.balance?.available + votingPower
     $: bigAmount = convertToRawAmount(amount, asset?.metadata, unit)
     $: marketAmount = getMarketAmountFromAssetValue(bigAmount, asset)
     $: max = parseCurrency(formatTokenAmountDefault(availableBalance, asset?.metadata, unit, false))
 
     function onClickAvailableBalance(): void {
-        const isRawAmount = asset?.metadata?.decimals && asset?.metadata?.unit
+        const isRawAmount = asset?.metadata?.decimals && getUnitFromTokenMetadata(asset?.metadata)
         if (isRawAmount) {
             const parsedAmount = formatTokenAmountDefault(availableBalance, asset?.metadata, unit, false)
             amount = parsedAmount
@@ -69,8 +61,8 @@
         } else if (isAmountZeroOrNull) {
             error = localize('error.send.amountInvalidFormat')
         } else if (
-            (unit === asset?.metadata?.subunit ||
-                (unit === asset?.metadata?.unit && asset?.metadata?.decimals === 0)) &&
+            ((asset?.metadata?.standard === TokenStandard.BaseToken && unit === asset?.metadata?.subunit) ||
+                (unit === getUnitFromTokenMetadata(asset?.metadata) && asset?.metadata?.decimals === 0)) &&
             Number.parseInt(amount, 10).toString() !== amount
         ) {
             error = localize('error.send.amountNoFloat')
@@ -103,7 +95,7 @@
             clearBorder
             {disabled}
         />
-        {#if asset?.metadata?.unit}
+        {#if getUnitFromTokenMetadata(asset?.metadata)}
             <UnitInput bind:unit bind:isFocused {disabled} tokenMetadata={asset?.metadata} />
         {/if}
     </div>
