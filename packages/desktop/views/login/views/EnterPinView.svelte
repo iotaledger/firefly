@@ -1,20 +1,19 @@
 <script lang="ts">
-    import { onDestroy } from 'svelte'
-    import { Icon, PinInput, Profile, Text, TextHint } from '@ui'
+    import { Icon as IconEnum } from '@auxiliary/icon'
+    import { PopupId, openPopup, popupState } from '@auxiliary/popup'
     import {
-        needsToAcceptLatestPrivacyPolicy,
-        needsToAcceptLatestTermsOfService,
         Platform,
         isStrongholdUpdated,
+        needsToAcceptLatestPrivacyPolicy,
+        needsToAcceptLatestTermsOfService,
     } from '@core/app'
     import { localize } from '@core/i18n'
-    import { NetworkProtocol, NetworkType } from '@core/network'
-    import { activeProfile, login, ProfileType, resetActiveProfile } from '@core/profile'
+    import { ProfileType, activeProfile, login, resetActiveProfile } from '@core/profile'
     import { loginRouter } from '@core/router'
     import { isValidPin } from '@core/utils'
-    import { openPopup, PopupId, popupState } from '@auxiliary/popup'
-    import { Icon as IconEnum } from '@auxiliary/icon'
     import features from '@features/features'
+    import { Icon, PinInput, Profile, Text, TextHint } from '@ui'
+    import { onDestroy } from 'svelte'
 
     let attempts: number = 0
     let pinCode: string = ''
@@ -122,9 +121,7 @@
         <div class="w-96 flex flex-col flex-wrap items-center mb-20">
             <div class="flex flex-col gap-8 w-full items-center">
                 <Profile
-                    name={$activeProfile?.name}
-                    networkType={$activeProfile?.networkType ?? NetworkType.Devnet}
-                    networkProtocol={$activeProfile?.networkProtocol ?? NetworkProtocol.Shimmer}
+                    profile={$activeProfile}
                     isLedgerProfile={$activeProfile?.type === ProfileType.Ledger}
                     {updateRequired}
                     bgColor="blue"
