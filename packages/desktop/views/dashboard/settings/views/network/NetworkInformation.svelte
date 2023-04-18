@@ -1,15 +1,11 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import {
-        NetworkHealth,
-        networkStatus,
-        NETWORK_HEALTH_COLORS,
-        NETWORK_STATUS_DESCRIPTION,
-        nodeInfo,
-    } from '@core/network'
+    import { NetworkHealth, networkStatus, NETWORK_HEALTH_COLORS, nodeInfo } from '@core/network'
     import { NetworkSettingsRoute } from '@core/router'
     import { Text } from 'shared/components'
     import SettingsSection from '../SettingsSection.svelte'
+
+    $: health = $networkStatus.health ?? NetworkHealth.Disconnected
 </script>
 
 <SettingsSection setting={NetworkSettingsRoute.NetworkInformation}>
@@ -22,12 +18,8 @@
         </div>
         <div class="flex flex-col space-y-1">
             <Text secondary>{localize('views.dashboard.network.status')}:</Text>
-            <Text color="{NETWORK_HEALTH_COLORS[$networkStatus.health || 0]}-500">
-                {localize(
-                    `views.dashboard.network.${
-                        $networkStatus.description || NETWORK_STATUS_DESCRIPTION[NetworkHealth.Disconnected]
-                    }`
-                )}
+            <Text color="{NETWORK_HEALTH_COLORS[health]}-500">
+                {localize(`views.dashboard.network.${health}`)}
             </Text>
         </div>
     </div>
