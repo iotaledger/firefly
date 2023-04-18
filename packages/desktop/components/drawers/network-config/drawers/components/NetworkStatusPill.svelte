@@ -31,5 +31,5 @@
 </script>
 
 <Pill {backgroundColor} {darkBackgroundColor} {textColor}>
-    {localize(`pills.${status}`)}
+    • {localize(`pills.networkHealth.${status}`)}
 </Pill>
