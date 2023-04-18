@@ -140,22 +140,27 @@
                     {localize('actions.skip')}
                 </Button>
             {:else}
-                {#if asset?.verification?.status === VerifiedStatus.SelfVerified}
-                    <Button outline classes="w-full" onClick={onUnverifyClick}>
-                        {localize('actions.unverifyToken')}
-                    </Button>
-                {:else}
-                    <Button outline classes="w-full" onClick={onVerifyClick}>
-                        {localize('actions.verifyToken')}
-                    </Button>
-                {/if}
-                {#if asset?.hidden}
-                    <Button outline classes="w-full" onClick={onUnhideClick}>
-                        {localize('actions.unhideToken')}
-                    </Button>
-                {:else}
-                    <Button outline classes="w-full" onClick={onHideClick}>
-                        {localize('actions.hideToken')}
+                {#if asset?.standard === TokenStandard.Irc30}
+                    {#if asset?.verification?.status === VerifiedStatus.SelfVerified}
+                        <Button outline classes="w-full" onClick={onUnverifyClick}>
+                            {localize('actions.unverifyToken')}
+                        </Button>
+                    {:else}
+                        <Button outline classes="w-full" onClick={onVerifyClick}>
+                            {localize('actions.verifyToken')}
+                        </Button>
+                    {/if}
+                    {#if asset?.hidden}
+                        <Button outline classes="w-full" onClick={onUnhideClick}>
+                            {localize('actions.unhideToken')}
+                        </Button>
+                    {:else}
+                        <Button outline classes="w-full" onClick={onHideClick}>
+                            {localize('actions.hideToken')}
+                        </Button>
+                    {/if}
+                    <Button outline classes="w-full" onClick={onBurnClick}>
+                        {localize('actions.burnToken')}
                     </Button>
                 {/if}
                 <Button outline classes="w-full" onClick={onBurnClick}>
