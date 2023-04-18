@@ -38,8 +38,9 @@
         theme="datetime-picker-colors"
         bind:value={sveltyPickerDate}
     />
-    <Button onClick={onConfirmClick} disabled={!sveltyPickerDate} classes="w-full">{localize('actions.confirm')}</Button
-    >
+    <Button onClick={onConfirmClick} disabled={!sveltyPickerDate} classes="w-full">
+        {localize('actions.confirm')}
+    </Button>
 </datetime-picker-drawer>
 
 <style type="text/scss">
