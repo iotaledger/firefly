@@ -11,7 +11,7 @@
     export let filterType: FilterType
 
     function onClick(): void {
-        openDrawer(DrawerId.Filter, { filterType, fullScreen: true })
+        openDrawer({ id: DrawerId.Filter, props: { filterType, fullScreen: true } })
     }
 
     $: activeFilterCount = Object.keys(filterStoreValue).filter((f) => filterStoreValue[f].active).length

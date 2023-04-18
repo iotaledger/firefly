@@ -1,6 +1,5 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { getOfficialExplorerUrl } from '@core/network/utils'
     import {
         Text,
         Button,
@@ -23,17 +22,16 @@
         rejectActivity,
         selectedAccountActivities,
     } from '@core/wallet'
-    import { activeProfile, checkActiveProfileAuth } from '@core/profile'
+    import { checkActiveProfileAuth } from '@core/profile'
     import { setClipboard } from '@core/utils'
     import { truncateString } from '@core/utils'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { onMount } from 'svelte'
-    import { ExplorerEndpoint } from '@core/network'
 
     export let activityId: string
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
-    const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
+    const explorerUrl = 'https://mattmaxwell.dev' // getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
     $: activity = $selectedAccountActivities.find((_activity) => _activity.id === activityId)
     $: isTimelocked = activity?.asyncData?.asyncStatus === ActivityAsyncStatus.Timelocked
@@ -44,7 +42,8 @@
         activity?.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
 
     function onExplorerClick(): void {
-        openUrlInBrowser(`${explorerUrl}/${ExplorerEndpoint.Transaction}/${activity?.transactionId}`)
+        openUrlInBrowser(`${explorerUrl}`)
+        // openUrlInBrowser(`${explorerUrl}/${ExplorerEndpoint.Transaction}/${activity?.transactionId}`)
     }
 
     function onTransactionIdClick(): void {

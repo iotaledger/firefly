@@ -1,4 +1,4 @@
-import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+import { PopupId } from '@auxiliary/popup'
 import { localize } from '@core/i18n'
 import { Platform } from '../classes/platform.class'
 import { externalAllowedLinks } from '../constants'
@@ -19,7 +19,7 @@ export function openUrlInBrowser(targetUrl: string): void {
     if (isAllowed) {
         openHttpsUrlsOnly(url.protocol, targetUrl)
     } else {
-        openPopup({
+        Platform.openOverlayUi({
             id: PopupId.Confirmation,
             props: {
                 title: localize('popups.externalUrl.title'),
@@ -29,7 +29,7 @@ export function openUrlInBrowser(targetUrl: string): void {
                 confirmText: localize('popups.externalUrl.action'),
                 onConfirm: () => {
                     openHttpsUrlsOnly(url.protocol, targetUrl)
-                    closePopup()
+                    Platform.closeOverlayUi()
                 },
             },
         })

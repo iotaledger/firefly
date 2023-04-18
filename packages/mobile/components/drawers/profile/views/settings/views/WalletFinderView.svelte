@@ -48,7 +48,7 @@
 
     function onSearchClick(): void {
         if ($isSoftwareProfile && $isStrongholdLocked) {
-            openDrawer(DrawerId.EnterPassword, { onSuccess: handleFindBalances })
+            openDrawer({ id: DrawerId.EnterPassword, props: { onSuccess: handleFindBalances } })
         } else {
             void handleFindBalances()
         }

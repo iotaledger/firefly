@@ -7,13 +7,16 @@ export function handleRejectActivity(activityId: string): void {
         rejectActivity(activityId)
         closeDrawer(DrawerId.Confirm)
     }
-    openDrawer(DrawerId.Confirm, {
-        title: localize('actions.confirmRejection.title'),
-        description: localize('actions.confirmRejection.description'),
-        hint: localize('actions.confirmRejection.node'),
-        info: true,
-        confirmText: localize('actions.reject'),
-        warning: true,
-        onConfirm: _onConfirm,
+    openDrawer({
+        id: DrawerId.Confirm,
+        props: {
+            title: localize('actions.confirmRejection.title'),
+            description: localize('actions.confirmRejection.description'),
+            hint: localize('actions.confirmRejection.node'),
+            info: true,
+            confirmText: localize('actions.reject'),
+            warning: true,
+            onConfirm: _onConfirm,
+        },
     })
 }

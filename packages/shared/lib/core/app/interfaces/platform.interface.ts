@@ -33,6 +33,12 @@ export interface IPlatform {
     cancelNftDownload(nftId: string): Promise<void>
     checkIfFileExists(filePath: string): Promise<boolean>
 
+    /**
+     * WARNING: Do NOT use these methods - they are temporary!
+     */
+    openOverlayUi(args: unknown): void
+    closeOverlayUi(args?: unknown): void
+
     NotificationManager: INotificationManager | undefined
     DeepLinkManager: IDeepLinkManager | undefined
     PincodeManager: IPincodeManager | undefined

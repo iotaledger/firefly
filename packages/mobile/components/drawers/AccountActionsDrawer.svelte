@@ -17,7 +17,7 @@
         closeDrawer(DrawerId.AccountActions)
     }
     function onCustomizeAccountClick(): void {
-        openDrawer(DrawerId.CustomizeAccount)
+        openDrawer({ id: DrawerId.CustomizeAccount })
         _closeDrawer()
     }
     function onShowAccountClick(): void {
@@ -36,15 +36,18 @@
         }
     }
     function onDeleteAccountClick(): void {
-        openDrawer(DrawerId.DeleteAccount, {
-            title: localize('popups.deleteAccount.title', {
-                values: { name: $selectedAccount?.name },
-            }),
+        openDrawer({
+            id: DrawerId.DeleteAccount,
+            props: {
+                title: localize('popups.deleteAccount.title', {
+                    values: { name: $selectedAccount?.name },
+                }),
+            },
         })
         _closeDrawer()
     }
     function onBalanceBreakdownClick(): void {
-        openDrawer(DrawerId.BalanceBreakdown)
+        openDrawer({ id: DrawerId.BalanceBreakdown })
         _closeDrawer()
     }
 </script>

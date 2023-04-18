@@ -11,7 +11,7 @@ export enum DrawerId {
     EnterPassword = 'enterPassword',
     References = 'references',
     Expiration = 'expiration',
-    Confirm = 'confirm',
+    Confirm = 'confirmation',
     CustomizeAccount = 'customizeAccount',
     BalanceBreakdown = 'balanceBreakdown',
     DeleteAccount = 'deleteAccount',

@@ -7,7 +7,7 @@
     $: profileInitial = getInitials($activeProfile?.name, 1)
 
     function onClick(): void {
-        openDrawer(DrawerId.Profile, { fullScreen: true, enterFromSide: true, allowBack: true })
+        openDrawer({ id: DrawerId.Profile, props: { fullScreen: true, enterFromSide: true, allowBack: true } })
     }
 </script>
 

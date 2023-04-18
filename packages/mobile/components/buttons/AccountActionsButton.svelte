@@ -4,4 +4,4 @@
     import { DrawerId, openDrawer } from '@/auxiliary/drawer'
 </script>
 
-<MeatballMenuButton onClick={() => openDrawer(DrawerId.AccountActions)} classes="items-center text-gray-500" />
+<MeatballMenuButton onClick={() => openDrawer({ id: DrawerId.AccountActions })} classes="items-center text-gray-500" />

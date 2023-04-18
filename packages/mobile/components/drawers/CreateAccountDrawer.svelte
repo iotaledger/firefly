@@ -31,8 +31,11 @@
                 await tryCreateAdditionalAccount(accountAlias, color)
                 closeDrawer(DrawerId.CreateAccount)
             } else {
-                openDrawer(DrawerId.EnterPassword, {
-                    onSuccess: onCreate,
+                openDrawer({
+                    id: DrawerId.EnterPassword,
+                    props: {
+                        onSuccess: onCreate,
+                    },
                 })
             }
             isBusy = false

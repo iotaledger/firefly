@@ -10,6 +10,7 @@ import { DeepLinkManager } from './lib/deepLinkManager'
 import { NotificationManager } from './lib/notificationManager'
 import { PincodeManager } from './lib/pincodeManager'
 
+import { closeDrawer } from '@/auxiliary/drawer'
 import { WalletApi } from '@iota/wallet-mobile'
 
 window['__WALLET__API__'] = WalletApi
@@ -168,6 +169,13 @@ const CapacitorApi: Partial<IPlatform> = {
     getLanguageCode: async () => {
         const { value } = await Device.getLanguageCode()
         return value
+    },
+
+    openOverlayUi(args): void {
+        closeDrawer(args)
+    },
+    closeOverlayUi(args): void {
+        closeDrawer(args)
     },
 }
 

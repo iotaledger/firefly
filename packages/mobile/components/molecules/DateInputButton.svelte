@@ -15,7 +15,7 @@
     $: formattedDate = value ? formatDate(new Date(value), { dateStyle: 'short', locale: $appSettings.language }) : ''
 
     function onShowDateTimePickerClick(): void {
-        openDrawer(DrawerId.DateTimePicker, { onConfirm, mode: 'date' })
+        openDrawer({ id: DrawerId.DateTimePicker, props: { onConfirm, mode: 'date' } })
     }
 </script>
 

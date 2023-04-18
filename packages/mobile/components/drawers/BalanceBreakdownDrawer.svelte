@@ -128,16 +128,19 @@
                 await consolidateOutputs()
                 closeDrawer(DrawerId.Confirm)
             } else {
-                openDrawer(DrawerId.EnterPassword, { onSuccess: _onConfirm })
+                openDrawer({ id: DrawerId.EnterPassword, props: { onSuccess: _onConfirm } })
             }
         }
 
-        openDrawer(DrawerId.Confirm, {
-            title: localize('popups.minimizeStorageDeposit.title'),
-            description: localize('popups.minimizeStorageDeposit.description'),
-            hint: localize('popups.minimizeStorageDeposit.confirmButton'),
-            info: true,
-            onConfirm: _onConfirm,
+        openDrawer({
+            id: DrawerId.Confirm,
+            props: {
+                title: localize('popups.minimizeStorageDeposit.title'),
+                description: localize('popups.minimizeStorageDeposit.description'),
+                hint: localize('popups.minimizeStorageDeposit.confirmButton'),
+                info: true,
+                onConfirm: _onConfirm,
+            },
         })
     }
 </script>

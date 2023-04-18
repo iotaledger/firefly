@@ -21,7 +21,7 @@
     }
     function onAddClick(): void {
         _closeDrawer()
-        openDrawer(DrawerId.CreateAccount)
+        openDrawer({ id: DrawerId.CreateAccount })
     }
 </script>
 

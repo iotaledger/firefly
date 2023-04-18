@@ -6,6 +6,7 @@ const DeepLinkManager = require('./lib/deepLinkManager')
 const NotificationManager = require('./lib/notificationManager')
 const { menuState } = require('./lib/menuState')
 const features = require('../features/features').default
+const { openPopup, closePopup } = require('../../shared/lib/auxiliary/popup')
 
 let activeProfileId = null
 const eventListeners = {}
@@ -331,6 +332,13 @@ const ElectronApi = {
 
     isFeatureFlagEnabled(keyPath) {
         return keyPath?.split('.').reduce((prev, cur) => prev && prev[cur], features)?.enabled ?? false
+    },
+
+    openOverlayUi(args) {
+        openPopup(args)
+    },
+    closeOverlayUi() {
+        closePopup()
     },
 }
 

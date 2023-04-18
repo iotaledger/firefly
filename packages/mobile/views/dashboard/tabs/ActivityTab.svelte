@@ -12,13 +12,19 @@
                 ? getAssetFromPersistedAssets(activity.assetId)
                 : undefined
         if (asset?.verification?.status === NotVerifiedStatus.New) {
-            openDrawer(DrawerId.SelectedToken, {
-                asset,
-                activityId: activity.id,
+            openDrawer({
+                id: DrawerId.SelectedToken,
+                props: {
+                    asset,
+                    activityId: activity.id,
+                },
             })
         } else {
-            openDrawer(DrawerId.SelectedActivity, {
-                activityId: activity.id,
+            openDrawer({
+                id: DrawerId.SelectedActivity,
+                props: {
+                    activityId: activity.id,
+                },
             })
         }
     }

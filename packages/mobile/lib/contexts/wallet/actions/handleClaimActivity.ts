@@ -12,6 +12,6 @@ export async function handleClaimActivity(activity: Activity): Promise<void> {
             await handleClaimActivity(activity)
             closeDrawer(DrawerId.EnterPassword)
         }
-        openDrawer(DrawerId.EnterPassword, { onSuccess: _onSuccess })
+        openDrawer({ id: DrawerId.EnterPassword, props: { onSuccess: _onSuccess } })
     }
 }

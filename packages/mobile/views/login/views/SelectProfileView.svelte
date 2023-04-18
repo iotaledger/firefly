@@ -12,7 +12,7 @@
     import { initialiseOnboardingRouters, loginRouter } from '@/routers'
 
     $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTermsOfService()) {
-        openDrawer(DrawerId.LegalUpdate, { preventClose: true })
+        openDrawer({ id: DrawerId.LegalUpdate, props: { preventClose: true } })
     }
 
     $: dark = $appSettings.darkMode

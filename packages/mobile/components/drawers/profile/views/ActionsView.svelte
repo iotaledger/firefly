@@ -27,7 +27,7 @@
 
     function onLockToggleClick(): void {
         if ($isStrongholdLocked) {
-            openDrawer(DrawerId.EnterPassword)
+            openDrawer({ id: DrawerId.EnterPassword })
         } else {
             lockStronghold()
         }
@@ -52,11 +52,11 @@
         function _handleBackup(password): void {
             exportStronghold(password, _handleExportStrongholdResponse)
         }
-        openDrawer(DrawerId.EnterPassword, { returnPassword: true, onSuccess: _handleBackup })
+        openDrawer({ id: DrawerId.EnterPassword, props: { returnPassword: true, onSuccess: _handleBackup } })
     }
 
     function onNetworkStatusClick(): void {
-        openDrawer(DrawerId.NetworkStatus)
+        openDrawer({ id: DrawerId.NetworkStatus })
     }
 
     function onSettingsClick(): void {

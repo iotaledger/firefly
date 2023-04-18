@@ -82,16 +82,16 @@
         if (isUnlocked) {
             _onConfirm()
         } else {
-            openDrawer(DrawerId.EnterPassword, { onSuccess: _onConfirm })
+            openDrawer({ id: DrawerId.EnterPassword, props: { onSuccess: _onConfirm } })
         }
     }
 
     function onAddReferenceClick(): void {
-        openDrawer(DrawerId.References)
+        openDrawer({ id: DrawerId.References })
     }
 
     function onAddExpirationClick(): void {
-        openDrawer(DrawerId.Expiration)
+        openDrawer({ id: DrawerId.Expiration })
     }
 
     function toggleGiftStorageDeposit(): void {

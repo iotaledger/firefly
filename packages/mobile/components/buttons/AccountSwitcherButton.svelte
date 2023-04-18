@@ -10,7 +10,7 @@
 </script>
 
 <button
-    on:click={() => openDrawer(DrawerId.AccountSwitcher)}
+    on:click={() => openDrawer({ id: DrawerId.AccountSwitcher })}
     class="flex flex-row justify-center items-center space-x-2"
 >
     <AccountLabel account={$selectedAccount} />

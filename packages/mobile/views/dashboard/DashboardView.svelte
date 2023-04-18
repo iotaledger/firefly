@@ -28,10 +28,10 @@
     $: darkModeEnabled = $appSettings.darkMode
 
     function onReceiveClick(): void {
-        openDrawer(DrawerId.Receive)
+        openDrawer({ id: DrawerId.Receive })
     }
     function handleSendClick(): void {
-        openDrawer(DrawerId.Send, { fullScreen: true })
+        openDrawer({ id: DrawerId.Send, props: { fullScreen: true } })
     }
 </script>
 

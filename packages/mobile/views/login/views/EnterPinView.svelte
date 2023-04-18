@@ -29,7 +29,7 @@
     let timeRemainingBeforeNextAttempt = WAITING_TIME_AFTER_MAX_INCORRECT_ATTEMPTS
 
     $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTermsOfService()) {
-        openDrawer(DrawerId.LegalUpdate, { preventClose: true })
+        openDrawer({ id: DrawerId.LegalUpdate, props: { preventClose: true } })
     }
 
     $: hasReachedMaxAttempts = attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS

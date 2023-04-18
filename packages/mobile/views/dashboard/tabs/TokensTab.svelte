@@ -6,8 +6,11 @@
     import { DrawerId, openDrawer } from '@/auxiliary/drawer'
 
     function onAssetTileClick(asset: IAsset): void {
-        openDrawer(DrawerId.SelectedToken, {
-            asset,
+        openDrawer({
+            id: DrawerId.SelectedToken,
+            props: {
+                asset,
+            },
         })
     }
 </script>

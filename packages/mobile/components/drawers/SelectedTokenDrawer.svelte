@@ -37,7 +37,7 @@
         verifyAsset(asset.id, VerifiedStatus.SelfVerified)
         if (activityId) {
             _closeDrawer()
-            openDrawer(DrawerId.SelectedActivity, { activityId })
+            openDrawer({ id: DrawerId.SelectedActivity, props: { activityId } })
         } else {
             updateDrawerProps(DrawerId.SelectedToken, {
                 asset: { ...asset, verification: { verified: true, status: VerifiedStatus.SelfVerified } },
@@ -54,7 +54,7 @@
         unverifyAsset(asset.id, NotVerifiedStatus.Skipped)
         if (activityId) {
             _closeDrawer()
-            openDrawer(DrawerId.SelectedActivity, { activityId })
+            openDrawer({ id: DrawerId.SelectedActivity, props: { activityId } })
         } else {
             updateDrawerProps(DrawerId.SelectedToken, {
                 asset: { ...asset, verification: { verified: false, status: NotVerifiedStatus.Skipped } },
@@ -78,7 +78,7 @@
     function onSendClick(): void {
         updateNewTransactionDetails({ type: NewTransactionType.TokenTransfer, assetId: asset.id })
         _closeDrawer()
-        openDrawer(DrawerId.Send, { fullScreen: true })
+        openDrawer({ id: DrawerId.Send, props: { fullScreen: true } })
     }
 </script>
 

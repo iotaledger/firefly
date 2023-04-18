@@ -45,7 +45,7 @@
     })
 
     function onShowLegalClick(): void {
-        openDrawer(DrawerId.Legal, { fullScreen: true })
+        openDrawer({ id: DrawerId.Legal, props: { fullScreen: true } })
     }
 </script>
 

@@ -43,7 +43,7 @@
         }
         isBusy = false
         message = ''
-        openDrawer(DrawerId.EnterPassword, { returnPassword: true, onSuccess: _handleExport })
+        openDrawer({ id: DrawerId.EnterPassword, props: { returnPassword: true, onSuccess: _handleExport } })
     }
 </script>
 
