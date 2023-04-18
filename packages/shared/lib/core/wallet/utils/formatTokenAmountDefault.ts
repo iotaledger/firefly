@@ -1,10 +1,10 @@
 import { formatNumber } from '@core/i18n'
-
-import { ITokenMetadata } from '../interfaces'
+import { TokenStandard } from '../enums'
+import { TokenMetadata } from '../types'
 
 export function formatTokenAmountDefault(
     amount: number,
-    tokenMetadata: ITokenMetadata,
+    tokenMetadata: TokenMetadata,
     unit?: string,
     useGrouping: boolean = true
 ): string {
@@ -12,7 +12,7 @@ export function formatTokenAmountDefault(
         throw new Error('Amount is negative')
     } else if (isDecimal(amount)) {
         throw new Error('Amount is a decimal number')
-    } else if (unit && unit === tokenMetadata?.subunit) {
+    } else if (unit && tokenMetadata?.standard === TokenStandard.BaseToken && unit === tokenMetadata?.subunit) {
         return formatNumber(amount, 0, 0, 0, useGrouping)
     } else {
         const value = tokenMetadata?.decimals ? amount / 10 ** tokenMetadata?.decimals : amount

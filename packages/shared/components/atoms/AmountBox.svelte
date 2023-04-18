@@ -1,11 +1,10 @@
 <script lang="ts">
     import { AssetIcon, Text, FontWeight, TextType, Tooltip } from 'shared/components'
     import { getNthOccurrenceIndex } from '@core/utils'
-    import { IPersistedAsset } from '@core/wallet'
+    import { IPersistedAsset, getUnitFromTokenMetadata } from '@core/wallet'
     import { getDecimalSeparator, getGroupSeparator } from '@core/i18n'
 
     export let asset: IPersistedAsset
-    export let unit: string
     export let amount: string = ''
 
     const MAX_LENGTH_PER_LINE = 15
@@ -16,6 +15,7 @@
 
     $: hasDecimal = amount.includes(getDecimalSeparator())
     $: amountWithoutDecimals = amount.split(getDecimalSeparator())[0]
+    $: unit = getUnitFromTokenMetadata(asset?.metadata)
 
     $: {
         if (amount.length > MAX_LENGTH_PER_LINE) {

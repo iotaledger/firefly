@@ -1,10 +1,10 @@
 import { AssetVerification } from '../types'
-import { ITokenMetadata } from './token-metadata.interface'
+import { TokenMetadata } from '../types/token-metadata.type'
 
 export interface IPersistedAsset {
     id: string
     standard: string
-    metadata?: ITokenMetadata
+    metadata?: TokenMetadata
     hidden: boolean
     verification: AssetVerification
 }
