@@ -20,6 +20,7 @@ export const NETWORK: Readonly<{ [key in NetworkId]?: INetwork }> = {
             tokenSupply: TokenSupply.Iota,
         },
         baseToken: BASE_TOKEN[NetworkProtocol.IOTA],
+        chains: [],
     },
     [NetworkId.Shimmer]: {
         id: NetworkId.Shimmer,
@@ -38,6 +39,7 @@ export const NETWORK: Readonly<{ [key in NetworkId]?: INetwork }> = {
             tokenSupply: TokenSupply.Shimmer,
         },
         baseToken: BASE_TOKEN[NetworkProtocol.Shimmer],
+        chains: [],
     },
     [NetworkId.Testnet]: {
         id: NetworkId.Testnet,
@@ -56,5 +58,6 @@ export const NETWORK: Readonly<{ [key in NetworkId]?: INetwork }> = {
             tokenSupply: TokenSupply.Testnet,
         },
         baseToken: BASE_TOKEN[NetworkProtocol.Shimmer],
+        chains: [],
     },
 }

@@ -167,7 +167,7 @@ function persistedProfileMigrationToV10(existingProfile: IPersistedProfile): voi
 
 function persistedProfileMigrationToV11(existingProfile: IPersistedProfile): void {
     const network = NETWORK?.[existingProfile?.networkProtocol]?.[existingProfile?.networkType]
-    existingProfile.network = network
+    existingProfile.network = structuredClone(network)
 
     existingProfile.settings = {
         ...existingProfile.settings,
