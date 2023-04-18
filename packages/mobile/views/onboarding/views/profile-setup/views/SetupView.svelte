@@ -1,4 +1,9 @@
 <script lang="ts">
+    import { onMount } from 'svelte'
+
+    import { OnboardingLayout } from '@components'
+    import { OnboardingButton } from '@ui'
+
     import {
         initialiseOnboardingProfile,
         initialiseProfileManagerFromOnboardingProfile,
@@ -8,17 +13,16 @@
         updateOnboardingProfile,
     } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
-    import { formatProtocolName, getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
+    import { formatProtocolName, getDefaultClientOptions } from '@core/network'
     import { ProfileType } from '@core/profile'
     import { destroyProfileManager } from '@core/profile-manager'
+
     import { profileSetupRouter } from '@/routers'
-    import { OnboardingButton } from '@ui'
-    import { onMount } from 'svelte'
-    import { OnboardingLayout } from '@components'
     import features from '@features/features'
 
-    const title = localize('views.onboarding.profileSetup.setup.title', {
-        values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },
+    $: networkId = $onboardingProfile?.network?.id
+    $: title = localize('views.onboarding.profileSetup.setup.title', {
+        values: { protocol: formatProtocolName(networkId) },
     })
 
     async function onProfileSetupSelectionClick(setupType: ProfileSetupType): Promise<void> {
@@ -36,17 +40,11 @@
     onMount(async () => {
         await destroyProfileManager()
         if (!$onboardingProfile?.id) {
-            await initialiseOnboardingProfile(
-                $onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile(),
-                NetworkProtocol.Shimmer
-            )
-            updateOnboardingProfile({ networkType: NetworkType.Mainnet })
+            await initialiseOnboardingProfile($onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile())
+            updateOnboardingProfile({ network: undefined })
         }
         if (!$onboardingProfile?.clientOptions) {
-            const clientOptions = getDefaultClientOptions(
-                $onboardingProfile?.networkProtocol,
-                $onboardingProfile?.networkType
-            )
+            const clientOptions = getDefaultClientOptions(networkId)
             updateOnboardingProfile({ clientOptions })
         }
         updateOnboardingProfile({
@@ -65,32 +63,28 @@
             icon="tokens"
             iconHeight="24"
             iconWidth="24"
-            hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.claimRewards?.hidden}
-            disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.claimRewards?.enabled}
+            hidden={features?.onboarding?.[networkId]?.claimRewards?.hidden}
+            disabled={!features?.onboarding?.[networkId]?.claimRewards?.enabled}
             onClick={() => onProfileSetupSelectionClick(ProfileSetupType.Claimed)}
         />
         <OnboardingButton
             primaryText={localize('actions.createWallet', {
-                values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },
+                values: {
+                    protocol: formatProtocolName(networkId),
+                },
             })}
             icon="plus"
             iconHeight="11"
             iconWidth="11"
-            hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.newProfile?.hidden}
-            disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.newProfile?.enabled}
+            hidden={features?.onboarding?.[networkId]?.newProfile?.hidden}
+            disabled={!features?.onboarding?.[networkId]?.newProfile?.enabled}
             onClick={() => onProfileSetupSelectionClick(ProfileSetupType.New)}
         />
         <OnboardingButton
-            primaryText={localize(`actions.restoreWallet.${$onboardingProfile?.networkProtocol}`)}
+            primaryText={localize(`actions.restoreWallet.${networkId}`)}
             icon="transfer"
-            hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.restoreProfile?.hidden}
-            disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.restoreProfile?.enabled}
+            hidden={features?.onboarding?.[networkId]?.restoreProfile?.hidden}
+            disabled={!features?.onboarding?.[networkId]?.restoreProfile?.enabled}
             onClick={() => onProfileSetupSelectionClick(ProfileSetupType.Recovered)}
         />
     </div>

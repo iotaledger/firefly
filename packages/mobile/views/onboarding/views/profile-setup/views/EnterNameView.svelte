@@ -8,15 +8,15 @@
     import { profileRecoveryRouter, profileSetupRouter } from '@/routers'
     import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
 
-    const title = localize('views.onboarding.profileSetup.enterName.title', {
-        values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },
-    })
-
     let error = ''
     let profileName = $onboardingProfile?.name ?? ''
 
     $: isProfileNameValid = profileName && profileName.trim()
     $: profileName, (error = '') // Error clears when profileName changes
+    $: networkId = $onboardingProfile?.network?.id
+    $: title = localize('views.onboarding.profileSetup.enterName.title', {
+        values: { protocol: formatProtocolName(networkId) },
+    })
 
     function onBackClick(): void {
         if ($onboardingProfile?.recoveryType) {
