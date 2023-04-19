@@ -1,10 +1,10 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
     import { NetworkConfigRoute, networkConfigRouter } from '@desktop/routers'
-    import { ClickableTile, Text, Icon, FontWeight, TextType, NetworkStatusPill } from '@ui'
+    import { ClickableTile, Text, Icon, FontWeight, TextType, NetworkIcon, NetworkStatusPill } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { truncateString } from '@core/utils'
-    import { NetworkHealth } from '@core/network'
+    import { NetworkHealth, NetworkId } from '@core/network'
 
     export let name: string
     export let address: string
@@ -21,8 +21,9 @@
 
 <ClickableTile classes="bg-transparent border border-solid border-gray-200" onClick={onTileClick}>
     <div class="w-full flex flex-col gap-5">
-        <div class="flex flex-row justify-between">
-            <div class="flex flex-row">
+        <div class="flex flex-row justify-between items-center">
+            <div class="flex flex-row gap-2 items-center">
+                <NetworkIcon networkId={NetworkId.Shimmer} />
                 <Text type={TextType.h4} fontWeight={FontWeight.semibold}>
                     {name}
                 </Text>
