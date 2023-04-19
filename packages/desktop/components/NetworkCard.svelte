@@ -1,11 +1,10 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
     import { NetworkConfigRoute, networkConfigRouter } from '@desktop/routers'
-    import { ClickableTile, Text, Icon, FontWeight, TextType } from '@ui'
+    import { ClickableTile, Text, Icon, FontWeight, TextType, NetworkStatusPill } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { truncateString } from '@core/utils'
     import { NetworkHealth } from '@core/network'
-    import NetworkStatusPill from './NetworkStatusPill.svelte'
 
     export let name: string
     export let address: string
@@ -30,7 +29,7 @@
             </div>
             <NetworkStatusPill {status} />
         </div>
-        <div class="flex flex-row justify-between">
+        <div class="flex flex-row justify-between items-end">
             <div class="flex flex-col">
                 <Text fontWeight={FontWeight.medium} color="gray-600">
                     {localize('general.myAddress')}

@@ -1,11 +1,11 @@
 <script lang="ts">
     import { Button } from '@ui'
     import { NetworkConfigRoute, networkConfigRouter } from '@desktop/routers'
-    import { NetworkCard } from './components'
     import { activeProfile } from '@core/profile'
     import { selectedAccount } from '@core/account'
-    import { NetworkHealth } from '@core/network'
+    import { NetworkHealth, networkStatus } from '@core/network'
     import { Icon } from '@auxiliary/icon'
+    import { NetworkCard } from '@components'
 
     type ConnectedChain = { name: string; address: string; status: NetworkHealth }
 
@@ -18,7 +18,7 @@
         const mainChain = {
             name: $activeProfile.network.name,
             address: $selectedAccount.depositAddress,
-            status: NetworkHealth.Operational,
+            status: $networkStatus.health,
         }
         chains.push(mainChain)
 
