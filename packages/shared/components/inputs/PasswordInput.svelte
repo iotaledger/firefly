@@ -9,7 +9,7 @@
     export let showStrengthLevel = false
     export let showRevealToggle = false
     export let strengthLevels = 4
-    export let label = undefined
+    export let label: string = undefined
     export let placeholder = undefined
     export let maxlength = undefined
     export let error = null

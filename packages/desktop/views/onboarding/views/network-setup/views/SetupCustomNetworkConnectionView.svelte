@@ -43,7 +43,7 @@
                 networkId !== NetworkId.Custom &&
                 networkId !== getNetworkIdFromNetworkName(nodeInfoResponse?.nodeInfo?.protocol?.networkName)
             ) {
-                throw new Error('error.node.networkIdMismatch')
+                throw new Error('error.node.differentNetwork')
             }
             const network = buildNetworkFromNodeInfoResponse(nodeInfoResponse)
             updateOnboardingProfile({ network })
@@ -51,10 +51,14 @@
             $networkSetupRouter.next()
         } catch (err) {
             console.error(err)
+
+            updateOnboardingProfile({ clientOptions: undefined, network: undefined })
+            await cleanupOnboardingProfileManager()
+
             if (err?.error?.includes('error sending request for url')) {
                 formError = localize('error.node.unabledToConnect')
-                updateOnboardingProfile({ clientOptions: null, network: undefined })
-                await cleanupOnboardingProfileManager()
+            } else if (err?.message === 'error.node.differentNetwork') {
+                formError = localize('error.node.differentNetwork')
             } else if (err?.type !== 'validationError') {
                 showAppNotification({
                     type: 'error',
