@@ -19,8 +19,9 @@ export function convertToRawAmount(amount: string, tokenMetadata: TokenMetadata,
 function convertToRawAmountFromMetadata(amount: number, tokenMetadata: TokenMetadata, selectedUnit: string): Big {
     if (tokenMetadata?.standard === TokenStandard.BaseToken) {
         if (tokenMetadata.useMetricPrefix) {
-            return Big(amount * IOTA_UNIT_MAP?.[selectedUnit?.substring(0, 1)] ?? 0)
+            return Big(amount).mul(Big(10).pow(IOTA_UNIT_MAP?.[selectedUnit?.substring(0, 1)]?.decimalPlaces ?? 0))
         } else {
+            // returns undefined if selectedUnit is not provided or doesn't match unit or subunit
             if (selectedUnit === tokenMetadata.unit) {
                 const decimals = Math.min(tokenMetadata.decimals, MAX_SUPPORTED_DECIMALS)
                 return Big(amount).mul(Big(10).pow(decimals))
