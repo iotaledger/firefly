@@ -1,4 +1,4 @@
-import { NetworkType } from '../enums'
+import { NetworkId } from '../enums'
 
 /**
  * Determines whether the type of a given network is 'official', meaning
@@ -7,6 +7,6 @@ import { NetworkType } from '../enums'
  * @param {NetworkType} type
  * @returns {boolean}
  */
-export function isOfficialNetwork(type: NetworkType): boolean {
-    return type !== NetworkType.PrivateNet && Object.values(NetworkType).some((networkType) => networkType === type)
+export function isOfficialNetwork(networkId: NetworkId): boolean {
+    return networkId !== NetworkId.Custom && Object.values(NetworkId).some((_networkId) => _networkId === networkId)
 }
