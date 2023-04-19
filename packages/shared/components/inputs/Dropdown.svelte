@@ -166,6 +166,7 @@
         <div class="inner overflow-y-auto" bind:this={navContainer}>
             {#each items as item}
                 <button
+                    type="button"
                     id={String(item.label)}
                     class="relative flex items-center p-4 w-full whitespace-nowrap
                         {item.value === value && 'bg-gray-100 dark:bg-gray-700 dark:bg-opacity-20'}

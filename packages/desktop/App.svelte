@@ -31,7 +31,7 @@
     import { showAppNotification } from '@auxiliary/notification'
     import { closePopup, openPopup, PopupId, popupState } from '@auxiliary/popup'
     import { initialiseOnboardingFlow } from '@contexts/onboarding'
-    import { NetworkProtocol, NetworkType } from '@core/network'
+    import { NetworkId } from '@core/network'
     import { getLocalisedMenuItems } from './lib/helpers'
     import { ToastContainer, Transition } from '@ui'
     import { TitleBar, Popup } from '@components'
@@ -161,7 +161,6 @@
         Platform.onEvent('menu-create-developer-profile', async () => {
             await initialiseOnboardingFlow({
                 isDeveloperProfile: true,
-                networkProtocol: NetworkProtocol.Shimmer,
             })
             $routerManager.goToAppContext(AppContext.Onboarding)
             $onboardingRouter.goTo(OnboardingRoute.NetworkSetup)
@@ -169,8 +168,7 @@
         Platform.onEvent('menu-create-normal-profile', async () => {
             await initialiseOnboardingFlow({
                 isDeveloperProfile: false,
-                networkProtocol: NetworkProtocol.Shimmer,
-                networkType: NetworkType.Mainnet,
+                networkId: NetworkId.Shimmer,
             })
             $routerManager.goToAppContext(AppContext.Onboarding)
             $onboardingRouter.goTo(OnboardingRoute.ProfileSetup)

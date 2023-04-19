@@ -1,4 +1,4 @@
-import { NetworkProtocol } from '../enums'
+import { NetworkId } from '../enums'
 
 /**
  * Formats a protocol name to be displayed in localized text (e.g. 'iota' -> 'IOTA').
@@ -7,11 +7,13 @@ import { NetworkProtocol } from '../enums'
  * @param {NetworkProtocol} protocol list of current nodes
  * @returns {string}
  */
-export function formatProtocolName(protocol: NetworkProtocol): string {
-    switch (protocol) {
-        case NetworkProtocol.IOTA:
+export function formatProtocolName(networkId: NetworkId): string {
+    switch (networkId) {
+        case NetworkId.Iota:
             return 'IOTA'
-        case NetworkProtocol.Shimmer:
+        case NetworkId.Shimmer:
             return 'Shimmer'
+        case NetworkId.Testnet:
+            return 'Testnet'
     }
 }

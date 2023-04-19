@@ -121,7 +121,7 @@ const rendererPlugins = [
         filename: '[name].css',
     }),
     new DefinePlugin({
-        features: features,
+        features: JSON.stringify(features),
         'process.env.PLATFORM': JSON.stringify(process.env.PLATFORM),
         'process.env.STAGE': JSON.stringify(process.env.STAGE),
     }),

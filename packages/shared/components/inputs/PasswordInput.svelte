@@ -1,9 +1,7 @@
 <script lang="ts">
-    import { Icon, Input, Text } from 'shared/components'
-
-    import { localize } from '@core/i18n'
-
     import { Icon as IconEnum } from '@auxiliary/icon'
+    import { localize } from '@core/i18n'
+    import { Icon, Text, TextInput } from 'shared/components'
 
     export let value = ''
     export let classes = ''
@@ -11,6 +9,7 @@
     export let showStrengthLevel = false
     export let showRevealToggle = false
     export let strengthLevels = 4
+    export let label: string = undefined
     export let placeholder = undefined
     export let maxlength = undefined
     export let error = null
@@ -47,14 +46,15 @@
         </strength-meter>
     {/if}
     <div class="flex w-full relative">
-        <Input
+        <TextInput
             bind:error
             bind:value
-            {type}
+            inputType={type}
             {maxlength}
             {integer}
             {autofocus}
             {disabled}
+            {label}
             placeholder={placeholder || localize('general.password')}
             {submitHandler}
             disableContextMenu={true}
@@ -68,10 +68,11 @@
                 class="absolute top-3 right-3"
                 class:hidden={!showRevealToggle || disabled}
                 slot="right"
+                {...$$restProps}
             >
                 <Icon icon={revealed ? IconEnum.View : IconEnum.Hide} classes="text-blue-500" />
             </button>
-        </Input>
+        </TextInput>
     </div>
 </div>
 

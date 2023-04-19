@@ -1,7 +1,6 @@
-import { NetworkProtocol, NetworkType } from '@core/network'
+import { NetworkId } from '@core/network'
 
 export interface IOnboardingInitialisationOptions {
     isDeveloperProfile: boolean
-    networkProtocol: NetworkProtocol
-    networkType?: NetworkType
+    networkId?: NetworkId
 }

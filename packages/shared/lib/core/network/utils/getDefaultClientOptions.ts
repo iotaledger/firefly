@@ -1,8 +1,8 @@
-import { NetworkProtocol, NetworkType } from '../enums'
+import { NetworkId } from '../enums'
 import { IClientOptions } from '../interfaces'
 import { getOfficialNodes } from './getOfficialNodes'
 
-export function getDefaultClientOptions(networkProtocol: NetworkProtocol, networkType: NetworkType): IClientOptions {
-    const nodes = getOfficialNodes(networkProtocol, networkType)
-    return { nodes, primaryNode: nodes[0] }
+export function getDefaultClientOptions(networkId: NetworkId): IClientOptions {
+    const nodes = getOfficialNodes(networkId)
+    return { nodes }
 }

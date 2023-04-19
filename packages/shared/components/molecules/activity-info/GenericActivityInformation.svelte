@@ -11,7 +11,7 @@
 
     export let activity: Activity
 
-    const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
+    const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
 
     $: expirationTime = getFormattedTimeStamp(activity?.asyncData?.expirationDate)
     $: claimedTime = getFormattedTimeStamp(activity?.asyncData?.claimedDate)

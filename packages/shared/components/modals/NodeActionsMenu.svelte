@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { HR, MenuItem, Modal } from 'shared/components'
+    import { HR, MenuItem, Modal } from '@ui'
+
     import { localize } from '@core/i18n'
-    import { closePopup, openPopup } from '@auxiliary/popup/actions'
     import {
         removeNodeFromClientOptions,
         toggleDisabledNodeInClientOptions,
@@ -10,15 +10,15 @@
     import { IClientOptions, INode } from '@core/network/interfaces'
     import { getOfficialNodes } from '@core/network/utils'
     import { activeProfile } from '@core/profile/stores'
+
     import { PopupId } from '@auxiliary/popup'
+    import { closePopup, openPopup } from '@auxiliary/popup/actions'
 
     export let node: INode
     export let clientOptions: IClientOptions
     export let modal: Modal = undefined
 
-    $: isOfficialNode = getOfficialNodes($activeProfile?.networkProtocol, $activeProfile?.networkType).some(
-        (n) => n.url === node?.url
-    )
+    $: isOfficialNode = getOfficialNodes($activeProfile?.network?.id).some((n) => n.url === node?.url)
     $: allowDisableOrRemove = node?.disabled || clientOptions?.nodes?.filter((node) => !node.disabled)?.length > 1
     $: isPrimary = clientOptions?.primaryNode?.url === node.url
 
