@@ -25,14 +25,14 @@ jobs:
         working-directory: packages/backend
 
   format:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 16.4.2
+          node-version: 14.x
 
       - name: Install Dependencies
         run: yarn --ignore-scripts
@@ -41,14 +41,14 @@ jobs:
         run: yarn format-check
 
   lint:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 16.4.2
+          node-version: 14.x
 
       - name: Install Dependencies
         run: yarn --ignore-scripts
