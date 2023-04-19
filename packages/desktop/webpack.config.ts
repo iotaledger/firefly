@@ -143,7 +143,27 @@ const mainPlugins = [
         'process.env.STAGE': JSON.stringify(stage),
         'process.env.APP_PROTOCOL': JSON.stringify(appProtocol),
     }),
-    new NodePolyfillPlugin(),
+    new NodePolyfillPlugin({
+        includeAliases: [
+            'punycode',
+            'process',
+            'querystring',
+            'stream',
+            // '_stream_passthrough',
+            // '_stream_duplex',
+            // '_stream_readable',
+            // '_stream_transform',
+            // '_stream_writable',
+            // 'string_decoder',
+            // 'sys',
+            // 'timers',
+            // 'tty',
+            // 'url',
+            // 'util',
+            // 'vm',
+            // 'zlib'
+        ],
+    }),
 ]
 
 const rendererPlugins = [
