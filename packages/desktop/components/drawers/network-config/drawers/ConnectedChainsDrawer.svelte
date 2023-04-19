@@ -1,11 +1,12 @@
 <script lang="ts">
-    import { Button } from '@ui'
+    import { Icon } from '@ui'
     import { NetworkConfigRoute, networkConfigRouter } from '@desktop/routers'
     import { activeProfile } from '@core/profile'
     import { selectedAccount } from '@core/account'
     import { NetworkHealth, networkStatus } from '@core/network'
-    import { Icon } from '@auxiliary/icon'
+    import { Icon as IconEnum } from '@auxiliary/icon'
     import { NetworkCard } from '@components'
+    import { localize } from '@core/i18n'
 
     type ConnectedChain = { name: string; address: string; status: NetworkHealth }
 
@@ -44,5 +45,12 @@
             <NetworkCard {...chain} />
         {/each}
     </div>
-    <Button outline icon={Icon.Plus} iconHeight={12} onClick={onAddChainClick} classes="mt-4">Add chain</Button>
+    <button
+        type="button"
+        class="mt-4 flex flex-row items-center justify-center w-full space-x-2 bg-transparent text-blue-500 px-8 py-3 text-15 rounded-lg"
+        on:click|stopPropagation={onAddChainClick}
+    >
+        <Icon icon={IconEnum.Plus} height={12} />
+        {localize('views.dashboard.drawers.networkConfig.addChain.title')}
+    </button>
 </connected-chains-drawer>

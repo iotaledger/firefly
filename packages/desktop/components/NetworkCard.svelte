@@ -31,7 +31,7 @@
         </div>
         <div class="flex flex-row justify-between items-end">
             <div class="flex flex-col">
-                <Text fontWeight={FontWeight.medium} color="gray-600">
+                <Text type={TextType.pre} fontWeight={FontWeight.medium} color="gray-600">
                     {localize('general.myAddress')}
                 </Text>
                 <Text type={TextType.h4} fontWeight={FontWeight.medium}>
