@@ -8,13 +8,14 @@
     } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { INode, buildNetworkFromNodeInfoResponse } from '@core/network'
+    import { INode, NetworkId, buildNetworkFromNodeInfoResponse, getNetworkIdFromNetworkName } from '@core/network'
     import { getNodeInfo } from '@core/profile-manager'
     import { networkSetupRouter } from '@core/router'
     import { Animation, Button, HTMLButtonType, NodeConfigurationForm, Text, TextType } from '@ui'
     import { onMount } from 'svelte'
 
     let nodeConfigurationForm: NodeConfigurationForm
+    let networkId: NetworkId = NetworkId.Custom
     let node: INode
     let isBusy = false
     let formError = ''
@@ -37,16 +38,27 @@
 
             // The API request to check if a node is reachable requires an existing account manager.
             const nodeInfoResponse = await getNodeInfo(node.url)
+            // Check network of node matches selected id
+            if (
+                networkId !== NetworkId.Custom &&
+                networkId !== getNetworkIdFromNetworkName(nodeInfoResponse?.nodeInfo?.protocol?.networkName)
+            ) {
+                throw new Error('error.node.differentNetwork')
+            }
             const network = buildNetworkFromNodeInfoResponse(nodeInfoResponse)
             updateOnboardingProfile({ network })
             await cleanupOnboardingProfileManager()
             $networkSetupRouter.next()
         } catch (err) {
             console.error(err)
+
+            updateOnboardingProfile({ clientOptions: undefined, network: undefined })
+            await cleanupOnboardingProfileManager()
+
             if (err?.error?.includes('error sending request for url')) {
                 formError = localize('error.node.unabledToConnect')
-                updateOnboardingProfile({ clientOptions: null, network: undefined })
-                await cleanupOnboardingProfileManager()
+            } else if (err?.message === 'error.node.differentNetwork') {
+                formError = localize('error.node.differentNetwork')
             } else if (err?.type !== 'validationError') {
                 showAppNotification({
                     type: 'error',
@@ -66,19 +78,21 @@
 
 <OnboardingLayout {onBackClick}>
     <div slot="title">
-        <Text type={TextType.h2}>{localize('views.onboarding.networkSetup.setupPrivateNetworkConnection.title')}</Text>
+        <Text type={TextType.h2}>{localize('views.onboarding.networkSetup.setupCustomNetworkConnection.title')}</Text>
     </div>
     <div slot="leftpane__content">
         <Text type={TextType.p} secondary classes="mb-8"
-            >{localize('views.onboarding.networkSetup.setupPrivateNetworkConnection.body')}</Text
+            >{localize('views.onboarding.networkSetup.setupCustomNetworkConnection.body')}</Text
         >
         <NodeConfigurationForm
             onSubmit={onContinueClick}
             bind:this={nodeConfigurationForm}
+            bind:networkId
             bind:node
             bind:formError
             {isBusy}
             isDeveloperProfile
+            showNetworkFields
         />
     </div>
     <div slot="leftpane__action">

@@ -55,7 +55,7 @@
                         }
                     }
                 },
-                "setupPrivateNetworkConnection": {
+                "setupCustomNetworkConnection": {
                     "title": "Połącz się z siecią prywatną",
                     "body": "Wypełnij formularz informacjami o serwerze i połącz się z prywatną siecią."
                 }
