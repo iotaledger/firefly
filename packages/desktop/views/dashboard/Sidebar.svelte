@@ -7,9 +7,8 @@
     import { activeProfile } from '@core/profile/stores'
     import { collectiblesRouter, DashboardRoute, dashboardRouter, governanceRouter, settingsRouter } from '@core/router'
     import { localize } from '@core/i18n'
-    import { NetworkId } from '@core/network'
 
-    import { Icon as IconEnum } from '@auxiliary/icon'
+    import { Icon as IconEnum, NETWORK_ICON_SVG } from '@auxiliary/icon'
     import { ISidebarTab } from '@desktop/routers'
     import features from '@features/features'
 
@@ -25,27 +24,11 @@
     $: lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
     $: isBackupSafe = lastBackupDate && isRecentDate(lastBackupDate)?.lessThanThreeMonths
 
-    let networkIcon: IconEnum
-    $: networkId = $activeProfile?.network?.id
-    $: switch (networkId) {
-        case NetworkId.Custom:
-        case NetworkId.Testnet:
-        case NetworkId.Shimmer:
-            networkIcon = NetworkId.Shimmer as unknown as IconEnum
-            break
-        case NetworkId.Iota:
-            networkIcon = NetworkId.Iota as unknown as IconEnum
-            break
-        default:
-            networkIcon = undefined
-            break
-    }
-
     const sidebarTabs: ISidebarTab[] = [
         ...(features?.wallet?.enabled
             ? [
                   {
-                      icon: 'wallet',
+                      icon: IconEnum.Wallet,
                       label: localize('tabs.wallet'),
                       route: DashboardRoute.Wallet,
                       onClick: openWallet,
@@ -55,7 +38,7 @@
         ...(features?.collectibles?.enabled
             ? [
                   {
-                      icon: 'collectibles',
+                      icon: IconEnum.Collectibles,
                       label: localize('tabs.collectibles'),
                       route: DashboardRoute.Collectibles,
                       onClick: openCollectibles,
@@ -65,7 +48,7 @@
         ...(features?.governance?.enabled
             ? [
                   {
-                      icon: 'governance',
+                      icon: IconEnum.Governance,
                       label: localize('tabs.governance'),
                       route: DashboardRoute.Governance,
                       onClick: openGovernance,
@@ -75,7 +58,7 @@
         ...(features?.developerTools?.enabled && $activeProfile?.isDeveloperProfile
             ? [
                   {
-                      icon: 'tools',
+                      icon: IconEnum.Tools,
                       label: localize('tabs.developer'),
                       route: DashboardRoute.Developer,
                       onClick: openDeveloper,
@@ -116,7 +99,12 @@
 >
     <nav class="flex flex-grow flex-col items-center justify-between">
         <div class="flex flex-col items-center">
-            <Icon width="48" height="48" icon={networkIcon} classes="dark:text-white" />
+            <Icon
+                width="48"
+                height="48"
+                icon={NETWORK_ICON_SVG[$activeProfile?.network?.id]}
+                classes="dark:text-white"
+            />
         </div>
         <div class="flex flex-col flex-auto items-center justify-center mb-7 space-y-8">
             {#each sidebarTabs as tab}
