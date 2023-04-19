@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="org.iota.firefly.mobile.alpha">
+    package="org.iota.firefly.mobile">
     <!-- Permissions -->
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -28,7 +28,7 @@
 
         <activity
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
-            android:name="org.iota.firefly.mobile.alpha.MainActivity"
+            android:name="org.iota.firefly.mobile.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBarLaunch"
             android:launchMode="singleTask"

@@ -3,9 +3,9 @@ apply plugin: 'com.android.application'
 android {
     compileSdk 30
     defaultConfig {
-        applicationId 'org.iota.firefly.mobile.alpha'
+        applicationId 'org.iota.firefly.mobile'
         minSdkVersion rootProject.ext.minSdkVersion
-        targetSdk 30
+        targetSdk 31
         versionCode 1
         versionName '2.0.1'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -13,6 +13,26 @@ android {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
              // Default: https://android.googlesource.com/platform/frameworks/base/+/282e181b58cf72b6ca770dc7ca5f91f135444502/tools/aapt/AaptAssets.cpp#61
             ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
+        }
+    }
+    flavorDimensions "version"
+    productFlavors {
+        alpha {
+            dimension "version"
+            applicationIdSuffix ".shimmer.alpha"
+            versionNameSuffix "-alpha"
+
+        }
+        beta {
+            
+            dimension "version"
+            applicationIdSuffix ".shimmer.beta"
+            versionNameSuffix "-beta"
+        }
+        prod {
+            
+            dimension "version"
+            applicationIdSuffix ".shimmer"
         }
     }
     buildTypes {

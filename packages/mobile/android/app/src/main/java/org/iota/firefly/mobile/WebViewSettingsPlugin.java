@@ -1,4 +1,4 @@
-package org.iota.firefly.mobile.alpha;
+package org.iota.firefly.mobile;
 
 import android.webkit.WebSettings;
 import android.webkit.WebView;
