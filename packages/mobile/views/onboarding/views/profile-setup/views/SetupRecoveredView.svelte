@@ -15,15 +15,15 @@
         updateOnboardingProfile,
     } from '@contexts/onboarding'
 
-    const title = localize('views.onboarding.profileSetup.setupRecovered.title', {
-        values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },
-    })
-
     let isBusy = {
         [ProfileRecoveryType.Mnemonic]: false,
         [ProfileRecoveryType.Stronghold]: false,
         [ProfileRecoveryType.Ledger]: false,
     }
+    const networkId = $onboardingProfile?.network?.id
+    const title = localize('views.onboarding.profileSetup.setupRecovered.title', {
+        values: { protocol: formatProtocolName(networkId) },
+    })
 
     async function onProfileRecoverySelectionClick(recoveryType: ProfileRecoveryType): Promise<void> {
         isBusy = { ...isBusy, [recoveryType]: true }
@@ -53,20 +53,16 @@
             primaryText={localize('views.onboarding.profileSetup.setupRecovered.importMnemonic')}
             icon="language"
             busy={isBusy[ProfileRecoveryType.Mnemonic]}
-            hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.restoreProfile?.recoveryPhrase?.hidden}
-            disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.restoreProfile?.recoveryPhrase?.enabled}
+            hidden={features?.onboarding?.[networkId]?.restoreProfile?.recoveryPhrase?.hidden}
+            disabled={!features?.onboarding?.[networkId]?.restoreProfile?.recoveryPhrase?.enabled}
             onClick={() => onProfileRecoverySelectionClick(ProfileRecoveryType.Mnemonic)}
         />
         <OnboardingButton
             primaryText={localize('views.onboarding.profileSetup.setupRecovered.importFile')}
             icon="file"
             busy={isBusy[ProfileRecoveryType.Stronghold]}
-            hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.restoreProfile?.strongholdBackup?.hidden}
-            disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.restoreProfile?.strongholdBackup?.enabled}
+            hidden={features?.onboarding?.[networkId]?.restoreProfile?.strongholdBackup?.hidden}
+            disabled={!features?.onboarding?.[networkId]?.restoreProfile?.strongholdBackup?.enabled}
             onClick={() => onProfileRecoverySelectionClick(ProfileRecoveryType.Stronghold)}
         />
     </div>

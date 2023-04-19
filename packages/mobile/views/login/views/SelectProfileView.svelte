@@ -4,6 +4,7 @@
 
     import { appSettings, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService } from '@core/app'
     import { localize } from '@core/i18n'
+    import { NetworkId } from '@core/network'
     import { loadPersistedProfileIntoActiveProfile, profiles } from '@core/profile'
 
     import { initialiseOnboardingFlow, shouldBeDeveloperProfile } from '@contexts/onboarding'

@@ -6,7 +6,7 @@ import { showAppNotification } from '@auxiliary/notification'
 import { get } from 'svelte/store'
 
 export async function requestTokensFromFaucet(): Promise<void> {
-    const url = FAUCET_URLS?.[get(activeProfile)?.networkProtocol]?.[get(activeProfile)?.networkType]
+    const url = FAUCET_URLS?.[get(activeProfile)?.network?.id]
 
     if (url) {
         const headers = new Headers()

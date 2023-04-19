@@ -1,20 +1,18 @@
 import { getStorageDirectoryOfProfile, IPersistedProfile } from '@core/profile'
 import { getSecretManagerFromProfileType, ProfileManagerOptions } from '@core/profile-manager'
-import { COIN_TYPE, getDefaultClientOptions } from '@core/network'
+import { COIN_TYPE, getDefaultClientOptions, NetworkProtocol } from '@core/network'
 
 export async function buildProfileManagerOptionsFromProfileData(
     profileData: Partial<IPersistedProfile>
 ): Promise<ProfileManagerOptions> {
-    const { id, networkProtocol, type } = profileData
+    const { id, type, network } = profileData
     const storagePath = await getStorageDirectoryOfProfile(id)
-    const coinType = COIN_TYPE[networkProtocol]
+    const coinType = COIN_TYPE[NetworkProtocol.Shimmer]
     const useDefaultClientOptions =
         !profileData?.clientOptions ||
         !profileData?.clientOptions?.nodes ||
         profileData?.clientOptions?.nodes?.length < 1
-    const clientOptions = useDefaultClientOptions
-        ? getDefaultClientOptions(networkProtocol, profileData?.networkType)
-        : profileData?.clientOptions
+    const clientOptions = useDefaultClientOptions ? getDefaultClientOptions(network.id) : profileData?.clientOptions
     const secretManager = getSecretManagerFromProfileType(type, storagePath)
 
     return {

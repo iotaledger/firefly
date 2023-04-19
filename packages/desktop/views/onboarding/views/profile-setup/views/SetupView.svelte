@@ -1,21 +1,23 @@
 <script lang="ts">
-    import { onMount } from 'svelte'
-    import { Animation, OnboardingButton, Text } from '@ui'
     import { OnboardingLayout } from '@components'
-    import features from '@features/features'
     import {
+        ProfileSetupType,
         initialiseOnboardingProfile,
         onboardingProfile,
-        ProfileSetupType,
         shouldBeDeveloperProfile,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { formatProtocolName, getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
+    import { formatProtocolName, getDefaultClientOptions } from '@core/network'
+    import { profiles } from '@core/profile'
     import { destroyProfileManager } from '@core/profile-manager'
     import { profileSetupRouter } from '@core/router'
-    import { profiles } from '@core/profile'
+    import features from '@features/features'
+    import { Animation, OnboardingButton, Text } from '@ui'
+    import { onMount } from 'svelte'
+
+    const networkId = $onboardingProfile?.network?.id
 
     function onProfileSetupSelectionClick(setupType: ProfileSetupType): void {
         updateOnboardingProfile({ setupType })
@@ -29,17 +31,11 @@
 
     onMount(async () => {
         if (!$onboardingProfile?.id) {
-            await initialiseOnboardingProfile(
-                $onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile(),
-                NetworkProtocol.Shimmer
-            )
-            updateOnboardingProfile({ networkType: NetworkType.Mainnet })
+            await initialiseOnboardingProfile($onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile())
+            updateOnboardingProfile({ network: undefined })
         }
         if (!$onboardingProfile?.clientOptions) {
-            const clientOptions = getDefaultClientOptions(
-                $onboardingProfile?.networkProtocol,
-                $onboardingProfile?.networkType
-            )
+            const clientOptions = getDefaultClientOptions(networkId)
             updateOnboardingProfile({ clientOptions })
         }
         await destroyProfileManager()
@@ -52,7 +48,7 @@
         <Text type="h2"
             >{localize('views.onboarding.profileSetup.setup.title', {
                 values: {
-                    protocol: formatProtocolName($onboardingProfile?.networkProtocol ?? NetworkProtocol.Shimmer),
+                    protocol: formatProtocolName(networkId),
                 },
             })}</Text
         >
@@ -61,55 +57,47 @@
         <Text type="p" secondary classes="mb-8"
             >{localize('views.onboarding.profileSetup.setup.body', {
                 values: {
-                    protocol: formatProtocolName($onboardingProfile?.networkProtocol ?? NetworkProtocol.Shimmer),
+                    protocol: formatProtocolName(networkId),
                 },
             })}</Text
         >
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
         <OnboardingButton
-            primaryText={localize('actions.claimShimmer')}
-            secondaryText={!$mobile ? localize('actions.claimShimmerDescription') : ''}
-            icon="tokens"
-            iconHeight="24"
-            iconWidth="24"
-            hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.claimRewards?.hidden}
-            disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.claimRewards?.enabled}
-            onClick={() => onProfileSetupSelectionClick(ProfileSetupType.Claimed)}
-        />
-        <OnboardingButton
             primaryText={localize('actions.createWallet', {
                 values: {
-                    protocol: formatProtocolName($onboardingProfile?.networkProtocol ?? NetworkProtocol.Shimmer),
+                    protocol: formatProtocolName(networkId),
                 },
             })}
             secondaryText={!$mobile
                 ? localize('actions.createWalletDescription', {
-                      values: { protocol: $onboardingProfile?.networkProtocol ?? NetworkProtocol.Shimmer },
+                      values: { protocol: networkId },
                   })
                 : ''}
             icon="plus"
             iconHeight="11"
             iconWidth="11"
-            hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.newProfile?.hidden}
-            disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.newProfile?.enabled}
+            hidden={features?.onboarding?.[networkId]?.newProfile?.hidden}
+            disabled={!features?.onboarding?.[networkId]?.newProfile?.enabled}
             onClick={() => onProfileSetupSelectionClick(ProfileSetupType.New)}
         />
         <OnboardingButton
-            primaryText={localize(`actions.restoreWallet.${$onboardingProfile?.networkProtocol}`)}
-            secondaryText={!$mobile
-                ? localize(`actions.restoreWalletDescription.${$onboardingProfile?.networkProtocol}`)
-                : ''}
+            primaryText={localize(`actions.restoreWallet.${networkId}`)}
+            secondaryText={!$mobile ? localize(`actions.restoreWalletDescription.${networkId}`) : ''}
             icon="transfer"
-            hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.restoreProfile?.hidden}
-            disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.restoreProfile?.enabled}
+            hidden={features?.onboarding?.[networkId]?.restoreProfile?.hidden}
+            disabled={!features?.onboarding?.[networkId]?.restoreProfile?.enabled}
             onClick={() => onProfileSetupSelectionClick(ProfileSetupType.Recovered)}
+        />
+        <OnboardingButton
+            primaryText={localize('actions.claimShimmer')}
+            secondaryText={!$mobile ? localize('actions.claimShimmerDescription') : ''}
+            icon="tokens"
+            iconHeight="24"
+            iconWidth="24"
+            hidden={features?.onboarding?.[networkId]?.claimRewards?.hidden}
+            disabled={!features?.onboarding?.[networkId]?.claimRewards?.enabled}
+            onClick={() => onProfileSetupSelectionClick(ProfileSetupType.Claimed)}
         />
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-green dark:bg-gray-900'}">
