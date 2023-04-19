@@ -27,7 +27,7 @@ function convertToRawAmountFromMetadata(amount: number, tokenMetadata: TokenMeta
             } else if (selectedUnit === tokenMetadata.subunit) {
                 return Big(amount)
             } else {
-                throw new Error('convertToRawAmountFromMetadata: Invalid or missing unit')
+                return undefined
             }
         }
     } else if (tokenMetadata?.standard === TokenStandard.Irc30) {
