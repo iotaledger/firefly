@@ -1,5 +1,6 @@
 import { get } from 'svelte/store'
 
+import { localize } from '@core/i18n'
 import { IAccount } from '@core/account'
 import { getAccount, profileManager } from '@core/profile-manager'
 
@@ -36,7 +37,9 @@ export async function syncShimmerClaimingAccount(account: IAccount): Promise<voi
         showAppNotification({
             type: 'success',
             alert: true,
-            message: `Successfully found ${foundRewardsAmountFormatted}`,
+            message: localize('views.onboarding.shimmerClaiming.success.successfullyFound', {
+                values: { amount: foundRewardsAmountFormatted },
+            }),
         })
         setTotalUnclaimedShimmerRewards(syncedShimmerClaimingAccount?.unclaimedRewards)
     }
