@@ -15,7 +15,7 @@
     import { NetworkInformationSettingsAction } from '@/contexts/settings'
     import { networkInformationSettingsRouter } from '@/routers'
 
-    const { network } = $activeProfile
+    $: networkId = $activeProfile?.network?.id
 
     function onAddNodeClick(): void {
         $networkInformationSettingsRouter.next({ action: NetworkInformationSettingsAction.AddNode })
@@ -56,7 +56,7 @@
         </div>
     </div>
     <div class="flex flex-col space-y-4 w-full">
-        {#if network?.id !== NetworkId.Custom}
+        {#if networkId !== NetworkId.Custom}
             <Button outline classes="w-full" onClick={addOfficialNodesToClientOptions}>
                 {localize('actions.addOfficialNodes')}
             </Button>

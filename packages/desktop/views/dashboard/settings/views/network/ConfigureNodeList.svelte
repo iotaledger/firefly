@@ -9,7 +9,7 @@
 
     let nodesContainer: HTMLElement
 
-    const { network } = $activeProfile
+    $: networkId = $activeProfile?.network?.id
 
     function onAddNodeClick(): void {
         openPopup({
@@ -33,7 +33,7 @@
 <SettingsSection setting={NetworkSettingsRoute.ConfigureNodeList}>
     <NodeListTable bind:nodesContainer />
     <div class="flex flex-row justify-between space-x-3 w-full mt-4">
-        {#if network?.id !== NetworkId.Custom}
+        {#if networkId !== NetworkId.Custom}
             <Button
                 outline
                 size={ButtonSize.Medium}
@@ -47,7 +47,7 @@
         <Button
             inlineStyle="min-width: 156px;"
             size={ButtonSize.Medium}
-            classes={network?.id === NetworkId.Custom ? '' : 'w-1/2'}
+            classes={networkId === NetworkId.Custom ? '' : 'w-1/2'}
             onClick={onAddNodeClick}
         >
             {localize('actions.addNode')}
