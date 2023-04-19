@@ -8,14 +8,14 @@
         NETWORK_HEALTH_COLORS,
         NetworkHealth,
         networkStatus,
-        NetworkType,
+        NetworkId,
         nodeInfo,
     } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { NetworkInformationSettingsAction } from '@/contexts/settings'
     import { networkInformationSettingsRouter } from '@/routers'
 
-    const { networkType } = $activeProfile
+    const { network } = $activeProfile
 
     function onAddNodeClick(): void {
         $networkInformationSettingsRouter.next({ action: NetworkInformationSettingsAction.AddNode })
@@ -56,7 +56,7 @@
         </div>
     </div>
     <div class="flex flex-col space-y-4 w-full">
-        {#if networkType !== NetworkType.PrivateNet}
+        {#if network?.id !== NetworkId.Custom}
             <Button outline classes="w-full" onClick={addOfficialNodesToClientOptions}>
                 {localize('actions.addOfficialNodes')}
             </Button>

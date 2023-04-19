@@ -5,7 +5,7 @@
     import { validateBech32Address } from '@core/utils'
 
     const readonlyAttribute = $activeProfile?.isDeveloperProfile ? {} : { readonly: true }
-    const networkAddresses = NETWORK_ADDRESS[$activeProfile.networkType]
+    const networkAddresses = NETWORK_ADDRESS[$activeProfile?.network?.id]
 
     const LAYER_1_NETWORK_OPTION = {
         key: DestinationNetwork.Shimmer,

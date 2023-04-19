@@ -1,7 +1,7 @@
 <script lang="ts">
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
-    import { addOfficialNodesToClientOptions as onAddOfficialNodesClick, NetworkType } from '@core/network'
+    import { addOfficialNodesToClientOptions as onAddOfficialNodesClick, NetworkId } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { NetworkSettingsRoute } from '@core/router'
     import { Button, ButtonSize, NodeListTable } from 'shared/components'
@@ -9,7 +9,7 @@
 
     let nodesContainer: HTMLElement
 
-    const { networkType } = $activeProfile
+    const { network } = $activeProfile
 
     function onAddNodeClick(): void {
         openPopup({
@@ -33,7 +33,7 @@
 <SettingsSection setting={NetworkSettingsRoute.ConfigureNodeList}>
     <NodeListTable bind:nodesContainer />
     <div class="flex flex-row justify-between space-x-3 w-full mt-4">
-        {#if networkType !== NetworkType.PrivateNet}
+        {#if network?.id !== NetworkId.Custom}
             <Button
                 outline
                 size={ButtonSize.Medium}
@@ -47,7 +47,7 @@
         <Button
             inlineStyle="min-width: 156px;"
             size={ButtonSize.Medium}
-            classes={networkType === NetworkType.PrivateNet ? '' : 'w-1/2'}
+            classes={network?.id === NetworkId.Custom ? '' : 'w-1/2'}
             onClick={onAddNodeClick}
         >
             {localize('actions.addNode')}
