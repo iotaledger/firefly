@@ -1,21 +1,21 @@
 <script lang="ts">
-    import { INetwork } from '@core/network'
+    import { IStardustNetworkMetadata } from '@core/network'
     import { FontWeight, NetworkIcon, Text, Tooltip } from 'shared/components'
     import { Position } from 'shared/components/enums'
 
-    export let network: INetwork
+    export let networkMetadata: IStardustNetworkMetadata
 
     let tooltipAnchor: HTMLElement
     let isTooltipVisible = false
 
-    $: tooltipText = network?.name
+    $: tooltipText = networkMetadata?.name
 
     function showTooltip(show: boolean): void {
         isTooltipVisible = show
     }
 </script>
 
-{#if network}
+{#if networkMetadata}
     <network-icon-badge
         bind:this={tooltipAnchor}
         on:mouseenter={() => showTooltip(true)}
@@ -23,7 +23,7 @@
         on:wheel={() => showTooltip(false)}
         class="block absolute -right-1 -bottom-1"
     >
-        <NetworkIcon networkId={network.id} />
+        <NetworkIcon networkId={networkMetadata.id} />
     </network-icon-badge>
     {#if isTooltipVisible}
         <Tooltip anchor={tooltipAnchor} size="small" position={Position.Right} offset={6}>

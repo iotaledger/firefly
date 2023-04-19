@@ -41,7 +41,7 @@
                 {/if}
             </div>
             {#if !updateRequired}
-                <NetworkIconBadge network={profile?.network} />
+                <NetworkIconBadge networkMetadata={profile?.network} />
             {:else}
                 <StrongholdBadge />
             {/if}

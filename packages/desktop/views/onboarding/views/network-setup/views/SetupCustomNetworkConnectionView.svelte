@@ -8,7 +8,12 @@
     } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { INode, NetworkId, buildNetworkFromNodeInfoResponse, getNetworkIdFromNetworkName } from '@core/network'
+    import {
+        INode,
+        NetworkId,
+        buildNetworkMetadataFromNodeInfoResponse,
+        getNetworkIdFromNetworkName,
+    } from '@core/network'
     import { getNodeInfo } from '@core/profile-manager'
     import { networkSetupRouter } from '@core/router'
     import { Animation, Button, HTMLButtonType, NodeConfigurationForm, Text, TextType } from '@ui'
@@ -45,8 +50,8 @@
             ) {
                 throw new Error('error.node.differentNetwork')
             }
-            const network = buildNetworkFromNodeInfoResponse(nodeInfoResponse)
-            updateOnboardingProfile({ network })
+            const networkMetadata = buildNetworkMetadataFromNodeInfoResponse(nodeInfoResponse)
+            updateOnboardingProfile({ network: networkMetadata })
             await cleanupOnboardingProfileManager()
             $networkSetupRouter.next()
         } catch (err) {

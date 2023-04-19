@@ -1,5 +1,5 @@
 import { IAccountMetadata } from '@core/account'
-import { IClientOptions, INetwork, NetworkProtocol, NetworkType } from '@core/network'
+import { IClientOptions, IStardustNetworkMetadata, NetworkProtocol, NetworkType } from '@core/network'
 import { ProfileType } from '../enums'
 import { IProfileSettings } from './profile-settings.interface'
 
@@ -7,7 +7,7 @@ export interface IPersistedProfile {
     id: string
     name: string
     type: ProfileType
-    network: INetwork
+    network: IStardustNetworkMetadata
     networkProtocol: NetworkProtocol
     networkType: NetworkType
     lastStrongholdBackupTime: Date

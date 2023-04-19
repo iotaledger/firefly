@@ -13,7 +13,7 @@
 
     const { isStrongholdLocked } = $activeProfile
 
-    $: network = $activeProfile.network
+    $: networkMetadata = $activeProfile.network
     $: lastStrongholdBackupTime = $activeProfile?.lastStrongholdBackupTime
     $: lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
     $: isBackupSafe = lastBackupDate && isRecentDate(lastBackupDate)?.lessThanAMonth

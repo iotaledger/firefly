@@ -1,10 +1,11 @@
 import { ITokenMetadata } from '@core/wallet/interfaces'
 
-import { IAuth, IClientOptions, INetwork, INode } from '../interfaces'
+import { IAuth, IClientOptions, INode } from '../interfaces'
 
 import { NetworkId, NetworkProtocol, TokenSupply } from '../enums'
 
 import { checkNodeUrlValidity, cleanAuth, getDefaultClientOptions, getOfficialNodes, isOfficialNetwork } from '../utils'
+import { NetworkMetadataMap } from '@core/network/types'
 
 describe('File: network.ts', () => {
     function _buildNode(url: string | undefined): INode | undefined {
@@ -44,7 +45,7 @@ describe('File: network.ts', () => {
         },
     }
 
-    const EXPECTED_NETWORK: Readonly<{ [key in NetworkId]?: INetwork }> = {
+    const EXPECTED_NETWORK_METADATA_MAP: Readonly<NetworkMetadataMap> = {
         [NetworkId.Iota]: {
             id: NetworkId.Iota,
             name: 'IOTA',
@@ -62,6 +63,7 @@ describe('File: network.ts', () => {
                 tokenSupply: TokenSupply.Iota,
             },
             baseToken: EXPECTED_BASE_TOKEN[NetworkProtocol.IOTA],
+            chains: [],
         },
         [NetworkId.Shimmer]: {
             id: NetworkId.Shimmer,
@@ -80,6 +82,7 @@ describe('File: network.ts', () => {
                 tokenSupply: TokenSupply.Shimmer,
             },
             baseToken: EXPECTED_BASE_TOKEN[NetworkProtocol.Shimmer],
+            chains: [],
         },
         [NetworkId.Testnet]: {
             id: NetworkId.Testnet,
@@ -98,6 +101,7 @@ describe('File: network.ts', () => {
                 tokenSupply: TokenSupply.Testnet,
             },
             baseToken: EXPECTED_BASE_TOKEN[NetworkProtocol.Shimmer],
+            chains: [],
         },
     }
 
@@ -113,12 +117,12 @@ describe('File: network.ts', () => {
 
     const EXPECTED_CLIENT_OPTIONS: Readonly<{ [key in NetworkId]?: IClientOptions }> = {
         [NetworkId.Iota]: {
-            network: EXPECTED_NETWORK[NetworkId.Iota]?.id,
+            network: EXPECTED_NETWORK_METADATA_MAP[NetworkId.Iota]?.id,
             nodes: _buildNodes(NetworkId.Iota) as INode[],
             localPow: true,
         },
         [NetworkId.Shimmer]: {
-            network: EXPECTED_NETWORK?.[NetworkId.Shimmer]?.id,
+            network: EXPECTED_NETWORK_METADATA_MAP?.[NetworkId.Shimmer]?.id,
             nodes: _buildNodes(NetworkId.Shimmer) as INode[],
             localPow: true,
         },

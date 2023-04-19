@@ -1,8 +1,8 @@
 import { BASE_TOKEN } from '../constants'
 import { NetworkId, NetworkProtocol, TokenSupply } from '../enums'
-import { INetwork } from '../interfaces'
+import { NetworkMetadataMap } from '../types'
 
-export const NETWORK: Readonly<{ [key in NetworkId]?: INetwork }> = {
+export const NETWORK_METADATA_MAP: Readonly<NetworkMetadataMap> = {
     [NetworkId.Iota]: {
         id: NetworkId.Iota,
         name: 'IOTA',
