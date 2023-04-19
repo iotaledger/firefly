@@ -61,7 +61,7 @@ describe('File: network.ts', () => {
                 },
                 tokenSupply: TokenSupply.Iota,
             },
-            baseToken: EXPECTED_BASE_TOKEN[NetworkProtocol.IOTA],
+            baseToken: EXPECTED_BASE_TOKEN[NetworkId.Iota],
         },
         [NetworkId.Shimmer]: {
             id: NetworkId.Shimmer,
@@ -79,7 +79,7 @@ describe('File: network.ts', () => {
                 },
                 tokenSupply: TokenSupply.Shimmer,
             },
-            baseToken: EXPECTED_BASE_TOKEN[NetworkProtocol.Shimmer],
+            baseToken: EXPECTED_BASE_TOKEN[NetworkId.Shimmer],
         },
         [NetworkId.Testnet]: {
             id: NetworkId.Testnet,
@@ -97,7 +97,7 @@ describe('File: network.ts', () => {
                 },
                 tokenSupply: TokenSupply.Testnet,
             },
-            baseToken: EXPECTED_BASE_TOKEN[NetworkProtocol.Shimmer],
+            baseToken: EXPECTED_BASE_TOKEN[NetworkId.Testnet],
         },
     }
 

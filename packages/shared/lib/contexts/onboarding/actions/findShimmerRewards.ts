@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
 
 import { IAccount } from '@core/account'
-import { BASE_TOKEN, NetworkProtocol } from '@core/network'
+import { BASE_TOKEN, NetworkId } from '@core/network'
 import { AccountRecoveryProfileConfiguration, UnableToFindProfileTypeError } from '@core/profile'
 import { zip } from '@core/utils'
 import { TokenStandard, formatTokenAmountBestMatch } from '@core/wallet'
@@ -146,7 +146,7 @@ function showRewardsFoundNotification(updatedTotalUnclaimedShimmerRewards: numbe
     const foundRewardsAmount = updatedTotalUnclaimedShimmerRewards - totalUnclaimedShimmerRewards
     const foundRewardsAmountFormatted = formatTokenAmountBestMatch(foundRewardsAmount, {
         standard: TokenStandard.BaseToken,
-        ...BASE_TOKEN[NetworkProtocol.Shimmer],
+        ...BASE_TOKEN[NetworkId.Shimmer],
     })
     showAppNotification({
         type: 'success',

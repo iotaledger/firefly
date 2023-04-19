@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Icon, Text, Tile, FontWeight, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { BASE_TOKEN, NetworkProtocol } from '@core/network'
+    import { BASE_TOKEN, NetworkId } from '@core/network'
     import { formatTokenAmountBestMatch } from '@core/wallet'
     import { IShimmerClaimingAccount, ShimmerClaimingAccountState } from '@contexts/onboarding'
 
@@ -42,7 +42,7 @@
                             <Text type={TextType.p} fontWeight={FontWeight.semibold}>
                                 {formatTokenAmountBestMatch(
                                     shimmerClaimingAccount?.unclaimedRewards,
-                                    BASE_TOKEN[NetworkProtocol.Shimmer]
+                                    BASE_TOKEN[NetworkId.Shimmer]
                                 )}
                             </Text>
                         </div>
@@ -60,7 +60,7 @@
                                     values: {
                                         amount: formatTokenAmountBestMatch(
                                             shimmerClaimingAccount?.claimedRewards,
-                                            BASE_TOKEN[NetworkProtocol.Shimmer]
+                                            BASE_TOKEN[NetworkId.Shimmer]
                                         ),
                                     },
                                 })}

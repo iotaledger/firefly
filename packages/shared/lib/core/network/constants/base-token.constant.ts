@@ -1,21 +1,26 @@
 import { IBaseToken } from '@core/wallet'
-import { NetworkProtocol } from '../enums'
+import { NetworkId } from '../enums'
 
-export const BASE_TOKEN: Readonly<{ [key in NetworkProtocol]: IBaseToken }> = {
-    [NetworkProtocol.IOTA]: {
-        name: 'IOTA',
-        tickerSymbol: 'MIOTA',
-        unit: 'i',
-        decimals: 0,
-        subunit: null,
-        useMetricPrefix: true,
-    },
-    [NetworkProtocol.Shimmer]: {
-        name: 'Shimmer',
-        tickerSymbol: 'SMR',
-        unit: 'SMR',
-        decimals: 6,
-        subunit: 'glow',
-        useMetricPrefix: false,
-    },
+const IOTA_BASE_TOKEN: IBaseToken = {
+    name: 'IOTA',
+    tickerSymbol: 'MIOTA',
+    unit: 'i',
+    decimals: 0,
+    subunit: null,
+    useMetricPrefix: true,
+}
+const SHIMMER_BASE_TOKEN: IBaseToken = {
+    name: 'IOTA',
+    tickerSymbol: 'MIOTA',
+    unit: 'i',
+    decimals: 0,
+    subunit: null,
+    useMetricPrefix: true,
+}
+
+export const BASE_TOKEN: Readonly<{ [key in NetworkId]: IBaseToken }> = {
+    [NetworkId.Iota]: IOTA_BASE_TOKEN,
+    [NetworkId.Shimmer]: SHIMMER_BASE_TOKEN,
+    [NetworkId.Testnet]: SHIMMER_BASE_TOKEN,
+    [NetworkId.Custom]: undefined,
 }

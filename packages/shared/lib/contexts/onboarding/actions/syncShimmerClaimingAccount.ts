@@ -8,7 +8,7 @@ import { prepareShimmerClaimingAccount } from '../helpers'
 import { shimmerClaimingProfileManager, updateShimmerClaimingAccount } from '../stores'
 import { setTotalUnclaimedShimmerRewards } from '@contexts/onboarding'
 import { TokenStandard, formatTokenAmountBestMatch } from '@core/wallet'
-import { BASE_TOKEN, NetworkProtocol } from '@core/network'
+import { BASE_TOKEN, NetworkId } from '@core/network'
 import { showAppNotification } from '@auxiliary/notification'
 
 export async function syncShimmerClaimingAccount(account: IAccount): Promise<void> {
@@ -30,7 +30,7 @@ export async function syncShimmerClaimingAccount(account: IAccount): Promise<voi
         const foundRewardsAmount = syncedShimmerClaimingAccount?.unclaimedRewards
         const foundRewardsAmountFormatted = formatTokenAmountBestMatch(foundRewardsAmount, {
             standard: TokenStandard.BaseToken,
-            ...BASE_TOKEN[NetworkProtocol.Shimmer],
+            ...BASE_TOKEN[NetworkId.Shimmer],
         })
 
         showAppNotification({

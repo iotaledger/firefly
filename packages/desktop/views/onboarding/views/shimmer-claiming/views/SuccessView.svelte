@@ -3,7 +3,7 @@
     import { OnboardingLayout } from '@components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { BASE_TOKEN, NetworkProtocol } from '@core/network'
+    import { BASE_TOKEN, NetworkId } from '@core/network'
     import { shimmerClaimingRouter } from '@core/router'
     import { formatTokenAmountBestMatch } from '@core/wallet'
     import { onboardingProfile, sumTotalClaimedRewards } from '@contexts/onboarding'
@@ -29,7 +29,7 @@
             </Text>
             <div class="flex flex-col justify-center items-center">
                 <Text type="p" highlighted>{localize('views.onboarding.shimmerClaiming.success.totalRewards')}</Text>
-                <Text type="h3">{formatTokenAmountBestMatch(totalRewards, BASE_TOKEN[NetworkProtocol.Shimmer])}</Text>
+                <Text type="h3">{formatTokenAmountBestMatch(totalRewards, BASE_TOKEN[NetworkId.Shimmer])}</Text>
             </div>
         </div>
     </div>
