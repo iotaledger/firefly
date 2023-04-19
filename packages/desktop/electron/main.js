@@ -2,6 +2,7 @@ import features from '@features/features'
 import { initAutoUpdate } from './lib/appUpdater'
 import { initNftDownloadHandlers } from './lib/nftDownloadHandlers'
 import { shouldReportError } from './lib/errorHandling'
+import { getEthereumInfo } from './lib/ledger'
 const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = require('electron')
 const path = require('path')
 const os = require('os')
@@ -570,6 +571,8 @@ ipcMain.on('notification-activated', (ev, contextData) => {
     windows.main.focus()
     windows.main.webContents.send('notification-activated', contextData)
 })
+
+ipcMain.on('request-ethereum-info', () => getEthereumInfo(false))
 
 /**
  * Create about window

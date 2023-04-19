@@ -21,4 +21,5 @@ export interface IPlatformEventMap {
     'notification-activated': unknown
     'nft-download-done': INFTDownloadState
     'nft-download-interrupted': INFTDownloadState
+    'get-ethereum-info': string
 }

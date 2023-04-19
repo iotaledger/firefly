@@ -9,6 +9,7 @@ import features from './features/features'
 import { Configuration as WebpackConfiguration } from 'webpack'
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server'
 import assert from 'assert'
+import NodePolyfillPlugin from 'node-polyfill-webpack-plugin'
 
 type Mode = 'none' | 'development' | 'production'
 interface Configuration extends WebpackConfiguration {
@@ -142,6 +143,7 @@ const mainPlugins = [
         'process.env.STAGE': JSON.stringify(stage),
         'process.env.APP_PROTOCOL': JSON.stringify(appProtocol),
     }),
+    new NodePolyfillPlugin(),
 ]
 
 const rendererPlugins = [

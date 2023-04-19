@@ -11,6 +11,9 @@ let activeProfileId = null
 const eventListeners = {}
 
 const ElectronApi = {
+    requestEthereumInfo() {
+        return ipcRenderer.invoke('request-ethereum-info')
+    },
     updateAppSettings(settings) {
         return ipcRenderer.invoke('update-app-settings', settings)
     },

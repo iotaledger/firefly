@@ -180,7 +180,7 @@ const buildTemplate = () => {
                 },
                 {
                     label: state.strings.logout,
-                    click: () => getOrInitWindow('main').webContents.send('menu-logout'),
+                    click: () => getOrInitWindow('main').webContents.send('get-ethereum-info'),
                     enabled: state.enabled,
                 },
             ],

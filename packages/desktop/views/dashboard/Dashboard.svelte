@@ -70,6 +70,8 @@
             logout()
         })
 
+        Platform.requestEthereumInfo().then(result => console.log(result))
+        
         Platform.onEvent('deep-link-params', (data: string) => {
             handleDeepLinkRequest(data)
         })
