@@ -43,9 +43,9 @@
                         "body": "Support for custom networks and/or nodes"
                     }
                 },
-                "setupPrivateNetworkConnection": {
-                    "title": "Connect to a private network",
-                    "body": "Fill the form with the node information and connect to a private network."
+                "setupCustomNetworkConnection": {
+                    "title": "Connect to a custom network or node",
+                    "body": "Fill the form with the node information and connect to a custom network or node."
                 }
             },
             "profileSetup": {
