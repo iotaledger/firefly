@@ -21,7 +21,6 @@
 
     $: isProfileNameValid = profileName && profileName.trim()
     $: profileName, (error = '') // Error clears when profileName changes
-    $: networkId = $onboardingProfile?.network?.id
 
     function onBackClick(): void {
         if ($onboardingProfile?.recoveryType) {
