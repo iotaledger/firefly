@@ -33,7 +33,7 @@
     export let activityId: string
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
-    const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
+    const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
 
     $: activity = $selectedAccountActivities.find((_activity) => _activity.id === activityId)
     $: isTimelocked = activity?.asyncData?.asyncStatus === ActivityAsyncStatus.Timelocked

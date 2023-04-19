@@ -46,7 +46,7 @@
 
     let modal: Modal
 
-    const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
+    const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
     const nft: INft = getNftByIdFromAllAccountNfts($selectedAccountIndex, $selectedNftId)
 
     const { id, name, issuer, address, metadata, downloadMetadata } = nft ?? {}
