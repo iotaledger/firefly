@@ -6,7 +6,7 @@
     export let inputElement: HTMLInputElement = undefined
     export let hasFocus: boolean = false
     export let error: string = ''
-    export let inputType: 'text' | 'number' = 'text'
+    export let inputType: 'text' | 'number' | 'password' = 'text'
     export let alignment: 'left' | 'right' | 'center' | 'justify' = 'left'
 
     // Text Props
@@ -16,7 +16,7 @@
     export let lineHeight = '140'
 
     let textProps: TextPropTypes
-    $: textProps = { textType, fontSize, lineHeight, fontWeight }
+    $: textProps = { type: textType, fontSize, lineHeight, fontWeight }
 </script>
 
 <Input bind:inputElement bind:value bind:hasFocus bind:error type={inputType} {textProps} {alignment} {...$$restProps}>

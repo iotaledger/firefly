@@ -49,7 +49,7 @@
         <TextInput
             bind:error
             bind:value
-            {type}
+            inputType={type}
             {maxlength}
             {integer}
             {autofocus}
