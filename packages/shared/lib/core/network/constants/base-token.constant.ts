@@ -10,12 +10,12 @@ const IOTA_BASE_TOKEN: IBaseToken = {
     useMetricPrefix: true,
 }
 const SHIMMER_BASE_TOKEN: IBaseToken = {
-    name: 'IOTA',
-    tickerSymbol: 'MIOTA',
-    unit: 'i',
-    decimals: 0,
-    subunit: null,
-    useMetricPrefix: true,
+    name: 'Shimmer',
+    tickerSymbol: 'SMR',
+    unit: 'SMR',
+    decimals: 6,
+    subunit: 'glow',
+    useMetricPrefix: false,
 }
 
 export const BASE_TOKEN: Readonly<{ [key in NetworkId]: IBaseToken }> = {

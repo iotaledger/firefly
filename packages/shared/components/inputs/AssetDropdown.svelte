@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { NetworkProtocol } from '@core/network'
     import { IAsset, visibleSelectedAccountAssets } from '@core/wallet'
     import { AssetTile, Icon, Text, AssetIcon, FontWeight } from 'shared/components'
     import { clickOutside } from '@core/utils'
@@ -8,18 +7,8 @@
     export let readonly: boolean = false
 
     let isDropdownOpen = false
-    let icon: string
 
     $: isReadonly = readonly || $visibleSelectedAccountAssets?.nativeTokens.length === 0
-    $: switch (asset?.metadata?.name?.toLocaleLowerCase()) {
-        case NetworkProtocol.IOTA:
-        case NetworkProtocol.Shimmer:
-            icon = asset?.metadata?.name?.toLocaleLowerCase()
-            break
-        default:
-            icon = 'tokens'
-    }
-
     function onDropdownClick(): void {
         if (!isReadonly) {
             isDropdownOpen = !isDropdownOpen

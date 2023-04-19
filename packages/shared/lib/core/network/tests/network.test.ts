@@ -2,7 +2,7 @@ import { ITokenMetadata } from '@core/wallet/interfaces'
 
 import { IAuth, IClientOptions, INetwork, INode } from '../interfaces'
 
-import { NetworkId, NetworkProtocol, TokenSupply } from '../enums'
+import { NetworkId, TokenSupply } from '../enums'
 
 import { checkNodeUrlValidity, cleanAuth, getDefaultClientOptions, getOfficialNodes, isOfficialNetwork } from '../utils'
 
@@ -22,25 +22,30 @@ describe('File: network.ts', () => {
         return EXPECTED_NODE_URLS?.[networkId]?.map((url) => _buildNode(url)) ?? []
     }
 
-    const EXPECTED_BASE_TOKEN: Readonly<{ [key in NetworkProtocol]: ITokenMetadata }> = {
-        iota: {
+    const EXPECTED_BASE_TOKEN: Readonly<{ [key in NetworkId]: ITokenMetadata }> = {
+        [NetworkId.Iota]: {
             name: 'IOTA',
             tickerSymbol: 'MIOTA',
             unit: 'i',
             decimals: 0,
             subunit: null,
             useMetricPrefix: true,
-            primaryColor: '#6E82A4',
         },
-        shimmer: {
+        [NetworkId.Shimmer]: {
             name: 'Shimmer',
             tickerSymbol: 'SMR',
             unit: 'SMR',
             decimals: 6,
             subunit: 'glow',
             useMetricPrefix: false,
-            primaryColor: '#25DFCA',
-            url: 'https://shimmer.network/',
+        },
+        [NetworkId.Testnet]: {
+            name: 'Shimmer',
+            tickerSymbol: 'SMR',
+            unit: 'SMR',
+            decimals: 6,
+            subunit: 'glow',
+            useMetricPrefix: false,
         },
     }
 
