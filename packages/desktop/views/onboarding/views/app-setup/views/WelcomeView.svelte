@@ -9,7 +9,7 @@
     import { lastAcceptedPrivacyPolicy, lastAcceptedTermsOfService } from '@core/app/stores'
     import { openUrlInBrowser } from '@core/app/utils'
     import { localize } from '@core/i18n'
-    import { formatProtocolName, NetworkId } from '@core/network'
+    import { getNetworkNameFromNetworkId, NetworkId } from '@core/network'
     import { appSetupRouter } from '@core/router'
     import features from '@features/features'
     import { Animation, Button, Checkbox, Text, TextType, Link } from '@ui'
@@ -37,8 +37,8 @@
             >{localize('views.onboarding.appSetup.welcome.title', {
                 values: {
                     protocol: features?.onboarding?.iota?.enabled
-                        ? formatProtocolName(NetworkId.Iota)
-                        : formatProtocolName(NetworkId.Shimmer),
+                        ? getNetworkNameFromNetworkId(NetworkId.Iota)
+                        : getNetworkNameFromNetworkId(NetworkId.Shimmer),
                 },
             })}
         </Text>

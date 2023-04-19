@@ -13,7 +13,7 @@
         TERMS_OF_SERVICE_VERSION,
     } from '@core/app'
     import { localize } from '@core/i18n'
-    import { formatProtocolName, NetworkId } from '@core/network'
+    import { getNetworkNameFromNetworkId, NetworkId } from '@core/network'
 
     import { DrawerId, openDrawer } from '@/auxiliary/drawer'
     import { appSetupRouter } from '@/routers'
@@ -48,8 +48,8 @@
                 {localize('views.onboarding.appSetup.welcome.title', {
                     values: {
                         protocol: features?.onboarding?.iota?.enabled
-                            ? formatProtocolName(NetworkId.Iota)
-                            : formatProtocolName(NetworkId.Shimmer),
+                            ? getNetworkNameFromNetworkId(NetworkId.Iota)
+                            : getNetworkNameFromNetworkId(NetworkId.Shimmer),
                     },
                 })}
             </Text>

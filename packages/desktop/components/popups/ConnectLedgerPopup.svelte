@@ -2,7 +2,7 @@
     import { onboardingProfile } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
     import { LedgerConnectionState, ledgerConnectionState } from '@core/ledger'
-    import { formatProtocolName } from '@core/network'
+    import { getNetworkNameFromNetworkId } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { isFunction } from '@core/utils'
     import { Button, LedgerAnimation, Text, TextHint, FontWeight, TextType } from 'shared/components'
@@ -65,7 +65,7 @@
         <TextHint
             info
             text={localize('popups.ledgerNotConnected.appNotOpen', {
-                values: { protocol: formatProtocolName(networkId) },
+                values: { protocol: getNetworkNameFromNetworkId(networkId) },
             })}
         />
     {:else if isCorrectAppOpen}

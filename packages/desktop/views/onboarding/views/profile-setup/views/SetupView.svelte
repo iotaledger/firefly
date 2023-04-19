@@ -9,7 +9,7 @@
     } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { formatProtocolName, getDefaultClientOptions } from '@core/network'
+    import { getNetworkNameFromNetworkId, getDefaultClientOptions } from '@core/network'
     import { profiles } from '@core/profile'
     import { destroyProfileManager } from '@core/profile-manager'
     import { profileSetupRouter } from '@core/router'
@@ -48,7 +48,7 @@
         <Text type="h2"
             >{localize('views.onboarding.profileSetup.setup.title', {
                 values: {
-                    protocol: formatProtocolName(networkId),
+                    protocol: getNetworkNameFromNetworkId(networkId),
                 },
             })}</Text
         >
@@ -57,7 +57,7 @@
         <Text type="p" secondary classes="mb-8"
             >{localize('views.onboarding.profileSetup.setup.body', {
                 values: {
-                    protocol: formatProtocolName(networkId),
+                    protocol: getNetworkNameFromNetworkId(networkId),
                 },
             })}</Text
         >
@@ -66,7 +66,7 @@
         <OnboardingButton
             primaryText={localize('actions.createWallet', {
                 values: {
-                    protocol: formatProtocolName(networkId),
+                    protocol: getNetworkNameFromNetworkId(networkId),
                 },
             })}
             secondaryText={!$mobile

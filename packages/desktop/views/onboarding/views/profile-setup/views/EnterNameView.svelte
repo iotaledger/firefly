@@ -4,7 +4,7 @@
     import { OnboardingLayout } from '@components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { formatProtocolName } from '@core/network'
+    import { getNetworkNameFromNetworkId } from '@core/network'
     import { profiles, validateProfileName } from '@core/profile'
     import {
         OnboardingRoute,
@@ -57,7 +57,7 @@
     <div slot="title">
         <Text type="h2"
             >{localize('views.onboarding.profileSetup.enterName.title', {
-                values: { protocol: formatProtocolName($onboardingProfile?.network?.id) },
+                values: { protocol: getNetworkNameFromNetworkId($onboardingProfile?.network?.id) },
             })}</Text
         >
     </div>
