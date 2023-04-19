@@ -13,5 +13,7 @@ export function formatProtocolName(networkId: NetworkId): string {
             return 'IOTA'
         case NetworkId.Shimmer:
             return 'Shimmer'
+        case NetworkId.Testnet:
+            return 'Testnet'
     }
 }

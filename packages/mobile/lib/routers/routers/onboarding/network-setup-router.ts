@@ -1,7 +1,7 @@
 import { get, writable } from 'svelte/store'
 
-import { onboardingProfile } from '@contexts/onboarding'
-import { NetworkType } from '@core/network'
+import { IOnboardingProfile, onboardingProfile } from '@contexts/onboarding'
+import { NetworkId } from '@core/network'
 import { Subrouter } from '@core/router'
 
 import { NetworkSetupRoute } from '../../enums'
@@ -18,12 +18,12 @@ export class NetworkSetupRouter extends Subrouter<NetworkSetupRoute> {
     next(): void {
         let nextRoute: NetworkSetupRoute
 
-        const _onboardingProfile = get(onboardingProfile)
+        const _onboardingProfile: IOnboardingProfile = get(onboardingProfile)
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
             case NetworkSetupRoute.ChooseNetwork: {
-                const networkType = _onboardingProfile?.networkType ?? NetworkType.Devnet
-                if (networkType === NetworkType.PrivateNet) {
+                const networkId = _onboardingProfile?.network?.id ?? NetworkId.Shimmer
+                if (networkId === NetworkId.Custom) {
                     nextRoute = NetworkSetupRoute.SetupCustomNetworkConnection
                     break
                 } else {

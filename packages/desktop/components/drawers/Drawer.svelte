@@ -63,12 +63,14 @@
         <panel
             in:fly|local={{ ...direction, duration: DRAWER_ANIMATION_DURATION_MS }}
             out:fly|local={{ ...direction, duration: DRAWER_ANIMATION_DURATION_MS }}
-            class="bg-white dark:bg-gray-800 {position} {isVertical ? 'vertical' : 'horizontal'}"
+            class="flex flex-col bg-white dark:bg-gray-800 {position} {isVertical ? 'vertical' : 'horizontal'}"
         >
             <DrawerHeader {drawerRoute} {drawerRouter} onClose={onCloseClick} />
-            {#if $drawerState.id === DrawerId.NetworkConfig}
-                <NetworkConfigDrawerRouter bind:drawerRoute bind:drawerRouter />
-            {/if}
+            <div class="flex-grow">
+                {#if $drawerState.id === DrawerId.NetworkConfig}
+                    <NetworkConfigDrawerRouter bind:drawerRoute bind:drawerRouter />
+                {/if}
+            </div>
         </panel>
     </drawer>
 {/if}
@@ -77,12 +79,12 @@
     panel {
         @apply fixed;
         @apply flex flex-col flex-auto overflow-hidden;
-        @apply pt-7 px-5;
+        @apply py-7 px-5;
         transition: right 0.2s ease;
 
         &.vertical {
             width: 420px;
-            height: 100vw;
+            height: 100%;
         }
 
         &.horizontal {

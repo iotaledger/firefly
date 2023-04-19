@@ -58,7 +58,7 @@
     <div slot="title">
         <Text type="h2"
             >{localize('views.onboarding.profileSetup.enterName.title', {
-                values: { protocol: formatProtocolName(networkId) },
+                values: { protocol: formatProtocolName($onboardingProfile?.network?.id) },
             })}</Text
         >
     </div>
