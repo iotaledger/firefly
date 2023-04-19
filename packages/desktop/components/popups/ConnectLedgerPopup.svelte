@@ -11,7 +11,7 @@
     export let onCancel: () => void
     export let onContinue: () => void
 
-    const networkProtocol = $activeProfile?.networkProtocol ?? $onboardingProfile?.networkProtocol
+    const networkId = $activeProfile?.network?.id ?? $onboardingProfile?.network?.id
 
     $: isNotConnected = $ledgerConnectionState === LedgerConnectionState.NotConnected
     $: isLocked = $ledgerConnectionState === LedgerConnectionState.Locked
@@ -65,7 +65,7 @@
         <TextHint
             info
             text={localize('popups.ledgerNotConnected.appNotOpen', {
-                values: { protocol: formatProtocolName(networkProtocol) },
+                values: { protocol: formatProtocolName(networkId) },
             })}
         />
     {:else if isCorrectAppOpen}
