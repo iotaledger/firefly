@@ -5,6 +5,7 @@
     import { Animation, Button, PasswordInput, Text, TextHint } from '@ui'
     import { HTMLButtonType, TextType } from '@ui/enums'
 
+    import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
     import { MAX_STRONGHOLD_PASSWORD_LENGTH, unlockStronghold } from '@core/profile'
     import { changeStrongholdPassword } from '@core/profile-manager'
@@ -19,12 +20,14 @@
     let passwordError: string = ''
     let confirmPassword: string = ''
     let confirmPasswordError: string = ''
-    let isBusy: boolean = false
+    let isSubmitBusy: boolean = false
+    let isSkipBusy: boolean = false
 
     $: passwordStrength = zxcvbn(newPassword)
+    $: isBusy = isSubmitBusy || isSkipBusy
 
     function validatePassword(): boolean {
-        isBusy = false
+        isSubmitBusy = false
 
         if (!newPassword || newPassword.length > MAX_STRONGHOLD_PASSWORD_LENGTH) {
             passwordError = localize('error.password.length', {
@@ -56,7 +59,7 @@
 
         if (isPasswordValid) {
             try {
-                isBusy = true
+                isSubmitBusy = true
                 await changeStrongholdPassword(oldPassword, newPassword)
                 showAppNotification({
                     alert: true,
@@ -68,16 +71,23 @@
                 console.error(err)
                 passwordError = localize('error.password.incorrect')
             } finally {
-                isBusy = false
+                isSubmitBusy = false
             }
         }
     }
 
     async function onSkipClick(): Promise<void> {
-        newPassword = ''
-        confirmPassword = ''
-        await unlockStronghold(oldPassword)
-        $updateStrongholdRouter.next()
+        try {
+            isSkipBusy = true
+            newPassword = ''
+            confirmPassword = ''
+            await unlockStronghold(oldPassword)
+            $updateStrongholdRouter.next()
+        } catch (err) {
+            handleError(err)
+        } finally {
+            isSkipBusy = false
+        }
     }
 </script>
 
@@ -114,7 +124,14 @@
         </form>
     </div>
     <div slot="leftpane__action" class="flex flex-col gap-4">
-        <Button type={HTMLButtonType.Button} outline classes="w-full" onClick={onSkipClick} disabled={isBusy} {isBusy}>
+        <Button
+            type={HTMLButtonType.Button}
+            outline
+            classes="w-full"
+            onClick={onSkipClick}
+            disabled={isBusy}
+            isBusy={isSkipBusy}
+        >
             {localize('actions.skipAndKeep')}
         </Button>
         <Button
@@ -122,7 +139,7 @@
             type={HTMLButtonType.Submit}
             classes="w-full"
             disabled={!newPassword || !confirmPassword || isBusy}
-            {isBusy}
+            isBusy={isSubmitBusy}
         >
             {localize('views.settings.changePassword.title')}
         </Button>
