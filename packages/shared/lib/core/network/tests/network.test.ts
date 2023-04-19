@@ -1,11 +1,9 @@
 import { ITokenMetadata } from '@core/wallet/interfaces'
 
-import { IAuth, IClientOptions, INode } from '../interfaces'
-
 import { NetworkId, NetworkProtocol, TokenSupply } from '../enums'
-
+import { IAuth, IClientOptions, INode } from '../interfaces'
+import { NetworkMetadataMap } from '../types'
 import { checkNodeUrlValidity, cleanAuth, getDefaultClientOptions, getOfficialNodes, isOfficialNetwork } from '../utils'
-import { NetworkMetadataMap } from '@core/network/types'
 
 describe('File: network.ts', () => {
     function _buildNode(url: string | undefined): INode | undefined {
