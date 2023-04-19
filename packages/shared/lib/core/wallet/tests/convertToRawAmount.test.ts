@@ -84,9 +84,15 @@ describe('File: convertToRawAmount.ts', () => {
                 it('should return same Big(amount) if selectedUnit is subunit', () => {
                     expect(convertToRawAmount('1', shimmerMetadata, 'glow')).toStrictEqual(Big('1'))
                 })
-                it('should return undefined if a unit is not provided', () => {
-                    // fails
-                    expect(convertToRawAmount('1', shimmerMetadata)).not.toBeUndefined()
+                it('should throw an error if a unit is not provided', () => {
+                    expect(() => {
+                        convertToRawAmount('1', shimmerMetadata)
+                    }).toThrow(new Error('convertToRawAmountFromMetadata: Invalid or missing unit'))
+                })
+                it('should throw an error if provided unit does not match the tokenMetadata unit or subunit', () => {
+                    expect(() => {
+                        convertToRawAmount('1', shimmerMetadata, 'test')
+                    }).toThrow(new Error('convertToRawAmountFromMetadata: Invalid or missing unit'))
                 })
             })
         })

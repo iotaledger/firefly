@@ -21,12 +21,13 @@ function convertToRawAmountFromMetadata(amount: number, tokenMetadata: TokenMeta
         if (tokenMetadata.useMetricPrefix) {
             return Big(amount).mul(Big(10).pow(IOTA_UNIT_MAP?.[selectedUnit?.substring(0, 1)]?.decimalPlaces ?? 0))
         } else {
-            // returns undefined if selectedUnit is not provided or doesn't match unit or subunit
             if (selectedUnit === tokenMetadata.unit) {
                 const decimals = Math.min(tokenMetadata.decimals, MAX_SUPPORTED_DECIMALS)
                 return Big(amount).mul(Big(10).pow(decimals))
             } else if (selectedUnit === tokenMetadata.subunit) {
                 return Big(amount)
+            } else {
+                throw new Error('convertToRawAmountFromMetadata: Invalid or missing unit')
             }
         }
     } else if (tokenMetadata?.standard === TokenStandard.Irc30) {
