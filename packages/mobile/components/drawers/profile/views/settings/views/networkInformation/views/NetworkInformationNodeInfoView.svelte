@@ -74,9 +74,7 @@
     }
 
     $: isPrimary = $activeProfile?.clientOptions?.primaryNode?.url === node.url
-    $: isOfficialNode = getOfficialNodes($activeProfile?.networkProtocol, $activeProfile?.networkType).some(
-        (n) => n.url === node?.url
-    )
+    $: isOfficialNode = getOfficialNodes($activeProfile?.network?.id).some((n) => n.url === node?.url)
     $: allowDisableOrRemove =
         node?.disabled || $activeProfile?.clientOptions?.nodes?.filter((node) => !node.disabled)?.length > 1
 

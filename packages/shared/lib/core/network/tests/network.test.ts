@@ -2,7 +2,7 @@ import { ITokenMetadata } from '@core/wallet/interfaces'
 
 import { IAuth, IClientOptions, INetwork, INode } from '../interfaces'
 
-import { NetworkId, NetworkProtocol, NetworkType, TokenSupply } from '../enums'
+import { NetworkId, NetworkProtocol, TokenSupply } from '../enums'
 
 import { checkNodeUrlValidity, cleanAuth, getDefaultClientOptions, getOfficialNodes, isOfficialNetwork } from '../utils'
 
@@ -170,11 +170,11 @@ describe('File: network.ts', () => {
 
     describe('Function: isOfficialNetwork', () => {
         it('should return the correct values given a valid network type', () => {
-            Object.values(NetworkType).forEach((networkType) => {
-                if (networkType === NetworkType.PrivateNet) {
-                    expect(isOfficialNetwork(networkType)).toBe(false)
+            Object.values(NetworkId).forEach((networkId) => {
+                if (networkId === NetworkId.Custom) {
+                    expect(isOfficialNetwork(networkId)).toBe(false)
                 } else {
-                    expect(isOfficialNetwork(networkType)).toBe(true)
+                    expect(isOfficialNetwork(networkId)).toBe(true)
                 }
             })
         })
