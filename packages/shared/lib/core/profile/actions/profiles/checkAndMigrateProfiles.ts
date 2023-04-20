@@ -198,6 +198,7 @@ function persistedProfileMigrationToV12(existingProfile: unknown): void {
         'lastUsedAccountIndex',
         'clientOptions',
         'forceAssetRefresh',
+        'network',
     ]
 
     keysToKeep.forEach((key) => {
