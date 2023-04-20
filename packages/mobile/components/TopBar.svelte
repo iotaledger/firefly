@@ -4,7 +4,7 @@
     import features from '@features/features'
 </script>
 
-<top-bar class="grid grid-cols-4 h-10">
+<top-bar class="grid grid-cols-4 h-10 items-center">
     <div class="col-span-1">
         {#if features?.dashboard?.profileActions?.enabled}
             <DashboardProfileButton />
