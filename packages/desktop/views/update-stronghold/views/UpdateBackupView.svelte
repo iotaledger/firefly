@@ -16,6 +16,8 @@
     export let isRecovery = false
     export let password: string
 
+    const allowBack = !changedPassword
+
     const skipBackup = false
 
     function onAdvanceView(): void {
@@ -65,9 +67,13 @@
     }
 </script>
 
-<OnboardingLayout {onBackClick} {busy} allowBack={!changedPassword}>
+<OnboardingLayout {onBackClick} {busy} {allowBack}>
     <div slot="leftpane__content">
-        <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 mb-6 p-10 pb-6">
+        <div
+            class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl {allowBack
+                ? ''
+                : 'mt-10'} mb-6 p-10 pb-6"
+        >
             <div class="bg-green-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
                 <Icon icon={IconEnum.SuccessCheck} classes="text-white" />
             </div>

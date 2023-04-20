@@ -626,10 +626,10 @@
             },
             "updateBackup": {
                 "loginTitle": "Stronghold updated",
-                "loginBody": "It's all good now - you're running the latest Stronghold version",
+                "loginBody": "It's all good now - you're running the latest Stronghold version.",
                 "recoveryTitle": "Stronghold is successfully recovered and updated",
-                "recoveryBody": "You can now continue setting up your wallet",
-                "hint": "We highly recommend to delete all previous Stronghold backup files and save a new one"
+                "recoveryBody": "You can now continue setting up your wallet.",
+                "hint": "We highly recommend to delete all previous Stronghold backup files and save a new one."
             },
             "changePassword": {
                 "hint": "Your Stronghold was out of date and has been updated. We recommend that you change your Stronghold password."
