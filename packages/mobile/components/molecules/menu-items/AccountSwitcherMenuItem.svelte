@@ -17,7 +17,7 @@
 </script>
 
 <button {id} on:click={() => onAccountClick(account.index)} class="flex flex-row justify-between py-4">
-    <AccountLabel selected={account.index === $selectedAccount?.index} {account} />
+    <AccountLabel fontSize="15" selected={account.index === $selectedAccount?.index} {account} />
     <Text classes={account.index === $selectedAccount?.index ? '' : 'opacity-50'} type={TextType.h5}>
         {formatTokenAmountBestMatch(
             Number(account.balances.baseCoin.total),
