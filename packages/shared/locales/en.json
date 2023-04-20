@@ -163,7 +163,8 @@
                 "success": {
                     "title": "Shimmer claimed",
                     "body": "You have successfully claimed your Shimmer tokens.",
-                    "totalRewards": "Total rewards"
+                    "totalRewards": "Total rewards",
+                    "successfullyFound": "Successfully found {amount}"
                 }
             },
             "congratulations": {
