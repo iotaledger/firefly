@@ -8,8 +8,6 @@ export interface IPersistedProfile {
     name: string
     type: ProfileType
     network: INetwork
-    networkProtocol?: NetworkProtocol
-    networkType?: NetworkType
     lastStrongholdBackupTime: Date
     settings: IProfileSettings
     accountMetadata: IAccountMetadata[]
@@ -19,4 +17,7 @@ export interface IPersistedProfile {
     clientOptions: IClientOptions
     forceAssetRefresh: boolean
     strongholdVersion: number
+    // not used anymore, but kept for migration purposes
+    networkProtocol?: NetworkProtocol
+    networkType?: NetworkType
 }
