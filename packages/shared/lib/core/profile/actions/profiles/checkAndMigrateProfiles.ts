@@ -183,7 +183,7 @@ function persistedProfileMigrationToV11(existingProfile: IPersistedProfile): voi
     saveProfile(existingProfile)
 }
 
-function persistedProfileMigrationToV12(existingProfile: unknown): void {
+function persistedProfileMigrationToV12(existingProfile: IPersistedProfile): void {
     const newProfile = {}
 
     const keysToKeep = [
