@@ -1,3 +1,4 @@
+import { TokenStandard } from '@core/wallet/enums'
 import { NETWORK } from '../constants'
 import { NetworkId } from '../enums'
 import { INetwork, INodeInfoResponse } from '../interfaces'
@@ -10,7 +11,7 @@ export function buildNetworkFromNodeInfoResponse(nodeInfoResponse: INodeInfoResp
         id: networkId,
         name: networkId === NetworkId.Custom ? networkName : NETWORK?.[networkId]?.name,
         protocol: nodeInfoResponse?.nodeInfo?.protocol,
-        baseToken: nodeInfoResponse?.nodeInfo?.baseToken,
+        baseToken: { standard: TokenStandard.BaseToken, ...nodeInfoResponse?.nodeInfo?.baseToken },
         chains: [],
     }
 }

@@ -1,15 +1,19 @@
 import { get } from 'svelte/store'
 
 import { IAccount } from '@core/account'
-import { BASE_TOKEN, NetworkProtocol } from '@core/network'
 import { AccountRecoveryProfileConfiguration, UnableToFindProfileTypeError } from '@core/profile'
 import { zip } from '@core/utils'
-import { TokenStandard, formatTokenAmountBestMatch } from '@core/wallet'
+import { formatTokenAmountBestMatch } from '@core/wallet/utils'
 import { showAppNotification } from '@auxiliary/notification'
 
 import { SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS, SHIMMER_CLAIMING_ACCOUNT_RECOVERY_CONFIGURATION } from '../constants'
 import { getSortedRenamedBoundAccounts, prepareShimmerClaimingAccount } from '../helpers'
-import { onboardingProfile, shimmerClaimingProfileManager, updateShimmerClaimingAccount } from '../stores'
+import {
+    getOnboardingBaseToken,
+    onboardingProfile,
+    shimmerClaimingProfileManager,
+    updateShimmerClaimingAccount,
+} from '../stores'
 import { sumTotalUnclaimedRewards } from '../utils'
 import { RecoverAccountsPayload, recoverAccounts } from '@core/profile-manager'
 
@@ -144,10 +148,7 @@ export function setTotalUnclaimedShimmerRewards(_totalUnclaimedShimmerRewards: n
 
 function showRewardsFoundNotification(updatedTotalUnclaimedShimmerRewards: number): void {
     const foundRewardsAmount = updatedTotalUnclaimedShimmerRewards - totalUnclaimedShimmerRewards
-    const foundRewardsAmountFormatted = formatTokenAmountBestMatch(foundRewardsAmount, {
-        standard: TokenStandard.BaseToken,
-        ...BASE_TOKEN[NetworkProtocol.Shimmer],
-    })
+    const foundRewardsAmountFormatted = formatTokenAmountBestMatch(foundRewardsAmount, getOnboardingBaseToken())
     showAppNotification({
         type: 'success',
         alert: true,
