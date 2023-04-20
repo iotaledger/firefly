@@ -198,6 +198,7 @@ function persistedProfileMigrationToV12(existingProfile: IPersistedProfile): voi
         'lastUsedAccountIndex',
         'clientOptions',
         'forceAssetRefresh',
+        'strongholdVersion',
         'network',
     ]
 
