@@ -1,10 +1,12 @@
 <script lang="ts">
     import { onMount } from 'svelte'
+
     import { OnboardingLayout } from '@components'
     import { Button, HTMLButtonType, ImportTextfield, Text, TextType } from '@ui'
+
     import { localize } from '@core/i18n'
     import { setStrongholdPassword } from '@core/profile-manager'
-    import { profileRecoveryRouter } from '@/routers'
+
     import {
         DEFAULT_STRONGHOLD_PASSWORD,
         onboardingProfile,
@@ -14,6 +16,8 @@
         shimmerClaimingProfileManager,
     } from '@contexts/onboarding'
 
+    import { profileRecoveryRouter } from '@/routers'
+
     const title = localize('views.onboarding.profileRecovery.importMnemonicPhrase.title')
 
     let input = ''
@@ -21,6 +25,7 @@
 
     async function onContinueClick(): Promise<void> {
         try {
+            isBusy = true
             const isClaimedProfileSetupType = $onboardingProfile?.setupType === ProfileSetupType.Claimed
             const mnemonic = input.split(' ')
             updateOnboardingProfile({ mnemonic })
