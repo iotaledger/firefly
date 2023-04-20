@@ -36,6 +36,9 @@ const fallback: { [index: string]: string | false | string[] } = {
     path: false,
     fs: false,
     crypto: false,
+    https: require.resolve('https-browserify'),
+    url: require.resolve('url/'),
+    http: require.resolve('stream-http'),
 }
 
 const resolve = {

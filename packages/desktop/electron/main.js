@@ -10,6 +10,9 @@ const { execSync } = require('child_process')
 const { machineIdSync } = require('node-machine-id')
 const Keychain = require('./lib/keychain')
 const { initMenu, contextMenu } = require('./lib/menu')
+const { init, track } = require('@amplitude/analytics-node')
+
+init('API_KEY')
 
 const canSendCrashReports = () => {
     let sendCrashReports = loadJsonConfig('settings.json')?.sendCrashReports
@@ -379,6 +382,10 @@ app.once('ready', () => {
 // URLs
 ipcMain.handle('open-url', (_e, url) => {
     handleNavigation(_e, url)
+})
+
+ipcMain.handle('track-event', (_e, event, properties) => {
+    track(event, properties, { device_id: getMachineId() })
 })
 
 // Keychain

@@ -96,6 +96,7 @@
     void setupI18n({ fallbackLocale: 'en', initialLocale: $appSettings.language })
 
     onMount(async () => {
+        Platform.trackEvent('app-start')
         await cleanupEmptyProfiles()
         checkAndMigrateProfiles()
 
