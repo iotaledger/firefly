@@ -3,7 +3,7 @@ import { NetworkId } from '../enums'
 import { INetwork, INodeInfoResponse } from '../interfaces'
 import { getNetworkIdFromNetworkName } from './getNetworkIdFromNetworkName'
 
-export function buildNetworkFromNodeInfoResponse(nodeInfoResponse: INodeInfoResponse, coinType: number): INetwork {
+export function buildNetworkFromNodeInfoResponse(nodeInfoResponse: INodeInfoResponse, coinType?: number): INetwork {
     const networkName = nodeInfoResponse?.nodeInfo?.protocol?.networkName
     const networkId = getNetworkIdFromNetworkName(networkName)
     const _coinType = coinType ?? COIN_TYPE[networkId] ?? 1
