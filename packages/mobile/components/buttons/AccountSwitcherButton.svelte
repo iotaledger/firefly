@@ -13,7 +13,7 @@
     on:click={() => openDrawer(DrawerId.AccountSwitcher)}
     class="flex flex-row justify-center items-center space-x-2"
 >
-    <AccountLabel account={$selectedAccount} />
+    <AccountLabel fontSize="16" account={$selectedAccount} />
     <div class="transform {isDrawerOpen ? 'rotate-180' : 'rotate-0'}">
         <Icon height="18" width="18" icon={IconEnum.ChevronDown} classes="text-gray-500 dark:text-white" />
     </div>
