@@ -21,7 +21,6 @@ const canSendCrashReports = () => {
 
     return sendCrashReports
 }
-const __dirname = '/home/tuditi/iota/firefly/packages/desktop'
 const CAN_LOAD_SENTRY = app.isPackaged
 const SEND_CRASH_REPORTS = CAN_LOAD_SENTRY && canSendCrashReports()
 
@@ -145,7 +144,7 @@ let versionDetails = {
     newVersionReleaseDate: new Date(),
     changelog: '',
 }
-/home/tuditi/iota/firefly/packages/desktop
+
 /**
  * Default web preferences (see https://www.electronjs.org/docs/tutorial/security)
  */
@@ -169,7 +168,6 @@ if (app.isPackaged) {
     paths.errorHtml = path.join(app.getAppPath(), '/public/error.html')
 } else {
     // __dirname is desktop/public/build
-    process.stderr.write(`__dirname: ${__dirname}`)
     paths.preload = path.join(__dirname, 'preload.js')
     paths.html = path.join(__dirname, '../index.html')
     paths.aboutPreload = path.join(__dirname, 'lib/aboutPreload.js')
@@ -395,7 +393,6 @@ ipcMain.handle('show-save-dialog', (_e, options) => dialog.showSaveDialog(option
 
 // Miscellaneous
 ipcMain.handle('get-path', (_e, path) => {
-    process.stderr.write(`Path ${path} is not allowed`)
     const allowedPaths = ['userData']
     if (allowedPaths.indexOf(path) === -1) {
         throw Error(`Path ${path} is not allowed`)

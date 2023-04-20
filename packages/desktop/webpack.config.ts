@@ -9,7 +9,6 @@ import features from './features/features'
 import { Configuration as WebpackConfiguration } from 'webpack'
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server'
 import assert from 'assert'
-import NodePolyfillPlugin from 'node-polyfill-webpack-plugin'
 
 type Mode = 'none' | 'development' | 'production'
 interface Configuration extends WebpackConfiguration {
@@ -142,27 +141,6 @@ const mainPlugins = [
         APP_ID: JSON.stringify(appId),
         'process.env.STAGE': JSON.stringify(stage),
         'process.env.APP_PROTOCOL': JSON.stringify(appProtocol),
-    }),
-    new NodePolyfillPlugin({
-        includeAliases: [
-            'punycode',
-            'process',
-            'querystring',
-            'stream',
-            // '_stream_passthrough',
-            // '_stream_duplex',
-            // '_stream_readable',
-            // '_stream_transform',
-            // '_stream_writable',
-            // 'string_decoder',
-            // 'sys',
-            // 'timers',
-            // 'tty',
-            // 'url',
-            // 'util',
-            // 'vm',
-            // 'zlib'
-        ],
     }),
 ]
 
