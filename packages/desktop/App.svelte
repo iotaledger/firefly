@@ -303,6 +303,6 @@
         -webkit-user-drag: none;
     }
     app-body.top-placement {
-        @apply top-9;
+        @apply top-12;
     }
 </style>

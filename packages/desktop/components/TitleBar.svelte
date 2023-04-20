@@ -36,7 +36,7 @@
 <nav
     class:dark
     class:with-borders={isDashboardVisible}
-    class="flex flex-row justify-between fixed z-50 top-0 left-0 right-0 w-full h-9 transition-none bg-transparent"
+    class="flex flex-row justify-between fixed z-50 top-0 left-0 right-0 w-full h-12 transition-none bg-transparent"
 >
     {#if isWindows}
         <!-- We need to add this element to allow fix the windows resize area issue due to -webkit-app-region: drag -->

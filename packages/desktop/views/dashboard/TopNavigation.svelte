@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Icon, Text } from '@ui'
+    import { FontWeight, Icon, Text, NetworkIcon } from '@ui'
     import { AccountSwitcher } from '@components'
     import { PlatformOption } from '@core/app'
     import { platform } from '@core/app/stores'
@@ -21,6 +21,7 @@
     import { popupState } from '@auxiliary/popup'
     import { DrawerId, openDrawer } from '@desktop/auxilary/drawer'
     import features from '@features/features'
+    import { activeProfile } from '@core/profile/stores'
 
     let isBackButtonVisible = false
 
@@ -79,15 +80,19 @@
 
     <div class="right-button flex justify-end">
         {#if features?.network?.config?.enabled}
-            <button class="bg-white rounded-xl text-14 px-2" on:click={onNetworkClick}>Shimmer</button>
+            <button class="bg-white dark:bg-gray-800 rounded-full text-14 pl-2 pr-3 py-1" on:click={onNetworkClick}>
+                <NetworkIcon height={16} width={16} networkId={$activeProfile.network.id} />
+                <Text fontWeight={FontWeight.semibold} color="gray-800" darkColor="white"
+                    >{$activeProfile.network.name}</Text
+                >
+            </button>
         {/if}
     </div>
 </top-navigation>
 
 <style type="text/scss">
     top-navigation {
-        @apply fixed flex flex-row justify-between items-center z-10 top-0 left-18 h-9 px-8;
-        @apply py-1;
+        @apply fixed flex flex-row justify-between items-center z-10 top-0 left-18 h-12 px-8 py-1;
         width: calc(100% - 4.5rem);
 
         &.disabled {
