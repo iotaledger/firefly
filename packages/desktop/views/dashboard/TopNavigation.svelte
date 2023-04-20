@@ -80,7 +80,7 @@
 
     <div class="right-button flex justify-end">
         {#if features?.network?.config?.enabled}
-            <button class="bg-white dark:bg-gray-800 rounded-full text-14 pl-2 pr-3 py-1" on:click={onNetworkClick}>
+            <button class="network-button" on:click={onNetworkClick}>
                 <NetworkIcon height={16} width={16} networkId={$activeProfile.network.id} />
                 <Text fontWeight={FontWeight.semibold} color="gray-800" darkColor="white"
                     >{$activeProfile.network.name}</Text
@@ -102,6 +102,12 @@
         button {
             @apply flex items-center gap-2;
             -webkit-app-region: none;
+        }
+
+        .network-button {
+            @apply bg-white dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 rounded-full text-14;
+            @apply border border-solid border-white dark:border-gray-800;
+            @apply pl-2 pr-3 py-1;
         }
 
         .left-button,
