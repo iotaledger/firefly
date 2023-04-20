@@ -1612,7 +1612,9 @@
         "statistics": "Statistics",
         "username": "Username",
         "jwt": "JSON web token",
-        "internalTransaction": "Internal transaction"
+        "internalTransaction": "Internal transaction",
+        "coinType":"Coin type",
+        "custom": "Custom"
     },
     "filters":{
         "title": "Filters",

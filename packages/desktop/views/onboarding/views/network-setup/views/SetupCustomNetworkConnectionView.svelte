@@ -16,6 +16,7 @@
 
     let nodeConfigurationForm: NodeConfigurationForm
     let networkId: NetworkId = NetworkId.Custom
+    let coinType: string
     let node: INode
     let isBusy = false
     let formError = ''
@@ -45,7 +46,7 @@
             ) {
                 throw new Error('error.node.differentNetwork')
             }
-            const network = buildNetworkFromNodeInfoResponse(nodeInfoResponse)
+            const network = buildNetworkFromNodeInfoResponse(nodeInfoResponse, Number(coinType))
             updateOnboardingProfile({ network })
             await cleanupOnboardingProfileManager()
             $networkSetupRouter.next()
@@ -81,13 +82,11 @@
         <Text type={TextType.h2}>{localize('views.onboarding.networkSetup.setupCustomNetworkConnection.title')}</Text>
     </div>
     <div slot="leftpane__content">
-        <Text type={TextType.p} secondary classes="mb-8"
-            >{localize('views.onboarding.networkSetup.setupCustomNetworkConnection.body')}</Text
-        >
         <NodeConfigurationForm
             onSubmit={onContinueClick}
             bind:this={nodeConfigurationForm}
             bind:networkId
+            bind:coinType
             bind:node
             bind:formError
             {isBusy}

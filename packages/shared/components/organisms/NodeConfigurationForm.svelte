@@ -4,12 +4,12 @@
     import { EMPTY_NODE } from '@core/network/constants'
     import { IClientOptions, INode, INodeInfoResponse } from '@core/network/interfaces'
     import { nodeInfo } from '@core/network/stores'
-    import { checkNetworkId, checkNodeUrlValidity } from '@core/network/utils'
+    import { checkNetworkId, checkNodeUrlValidity, formatProtocolName } from '@core/network/utils'
     import { activeProfile } from '@core/profile'
     import { getNodeInfo } from '@core/profile-manager'
     import { IDropdownItem, cleanUrl, deepCopy } from '@core/utils'
     import features from '@features/features'
-    import { Dropdown, Error, PasswordInput, TextInput } from 'shared/components'
+    import { Dropdown, Error, NumberInput, PasswordInput, TextInput } from 'shared/components'
     import { get } from 'svelte/store'
 
     interface NodeValidationOptions {
@@ -21,6 +21,7 @@
 
     export let node: INode = deepCopy(EMPTY_NODE)
     export let networkId: NetworkId
+    export let coinType: string
     export let isBusy = false
     export let formError = ''
     export let currentClientOptions: IClientOptions = undefined
@@ -30,19 +31,19 @@
 
     const networkItems: IDropdownItem<NetworkId>[] = [
         {
-            label: 'IOTA',
+            label: formatProtocolName(NetworkId.Iota),
             value: NetworkId.Iota,
         },
         {
-            label: 'Shimmer',
+            label: formatProtocolName(NetworkId.Shimmer),
             value: NetworkId.Shimmer,
         },
         {
-            label: 'Testnet',
+            label: formatProtocolName(NetworkId.Testnet),
             value: NetworkId.Testnet,
         },
         {
-            label: 'Custom',
+            label: localize('general.custom'),
             value: NetworkId.Custom,
         },
     ].filter((item) => features.onboarding?.[item.value]?.enabled)
@@ -128,7 +129,17 @@
             disabled={isBusy}
             onSelect={onNetworkIdChanges}
         />
+        {#if networkId === NetworkId.Custom}
+            <NumberInput
+                bind:value={coinType}
+                placeholder={localize('general.coinType')}
+                label={localize('general.coinType')}
+                disabled={isBusy}
+                isInteger
+            />
+        {/if}
     {/if}
+
     <TextInput
         bind:value={node.url}
         placeholder={localize('popups.node.nodeAddress')}
