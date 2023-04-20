@@ -14,7 +14,7 @@
 <button
     type="button"
     on:click={onClick}
-    class="w-10 h-10 relative flex items-center justify-center rounded-full bg-blue-500 leading-100"
+    class="w-11 h-11 relative flex items-center justify-center rounded-full bg-blue-500 leading-100"
 >
-    <span class="text-12 text-center text-white uppercase">{profileInitial}</span>
+    <span class="text-14 text-center text-white uppercase">{profileInitial}</span>
 </button>
