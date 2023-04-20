@@ -1,9 +1,10 @@
 <script lang="ts">
-    import { COIN_TYPE, NetworkProtocol } from '@core/network'
-    import { getAssetInitials, IPersistedAsset, NotVerifiedStatus, ANIMATED_TOKEN_IDS } from '@core/wallet'
-    import { isBright } from '@core/utils'
-    import { Animation, Icon, VerificationBadge } from 'shared/components'
+    import { NETWORK_ICON_SVG } from '@auxiliary/icon'
     import { getIconColorFromString } from '@core/account'
+    import { COIN_TYPE, NetworkId, NetworkProtocol } from '@core/network'
+    import { isBright } from '@core/utils'
+    import { ANIMATED_TOKEN_IDS, IPersistedAsset, NotVerifiedStatus, getAssetInitials } from '@core/wallet'
+    import { Animation, Icon, VerificationBadge } from '@ui'
 
     export let asset: IPersistedAsset
     export let large = false
@@ -22,13 +23,13 @@
             assetInitials = ''
             assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
             assetIconBackgroundColor = '#6E82A4'
-            icon = asset?.metadata?.name?.toLocaleLowerCase()
+            icon = NETWORK_ICON_SVG[NetworkId.Iota]
             break
         case String(COIN_TYPE[NetworkProtocol.Shimmer]):
             assetInitials = ''
             assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
             assetIconBackgroundColor = '#25DFCA'
-            icon = asset?.metadata?.name?.toLocaleLowerCase()
+            icon = NETWORK_ICON_SVG[NetworkId.Shimmer]
             break
         default:
             assetInitials = getAssetInitials(asset)
