@@ -5,6 +5,8 @@ import { generateRandomId } from '@core/utils'
 
 import { getShimmerClaimingProfileManagerStorageDirectory } from '../helpers'
 import { shimmerClaimingProfileManager, onboardingProfile } from '../stores'
+import { COIN_TYPE } from '@core/network/constants'
+import { NetworkId } from '@core/network/enums'
 
 export async function createShimmerClaimingProfileManager(): Promise<void> {
     const $onboardingProfile = get(onboardingProfile)
@@ -13,7 +15,7 @@ export async function createShimmerClaimingProfileManager(): Promise<void> {
     }
 
     const storagePath = await getShimmerClaimingProfileManagerStorageDirectory()
-    const coinType = $onboardingProfile?.network?.coinType
+    const coinType = COIN_TYPE[NetworkId.Iota]
     const clientOptions = $onboardingProfile?.clientOptions
     const secretManager = getSecretManagerFromProfileType($onboardingProfile?.type, storagePath)
 

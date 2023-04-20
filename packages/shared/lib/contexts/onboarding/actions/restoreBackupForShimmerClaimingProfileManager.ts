@@ -9,10 +9,11 @@ import {
     validateStrongholdCoinType,
 } from '../helpers'
 import { onboardingProfile, shimmerClaimingProfileManager } from '../stores'
+import { NetworkId } from '@core/network/enums'
 
 export async function restoreBackupForShimmerClaimingProfileManager(strongholdPassword: string): Promise<void> {
     try {
-        const { id, importFilePath, clientOptions, network } = get(onboardingProfile)
+        const { id, importFilePath, clientOptions } = get(onboardingProfile)
 
         const tempProfileDirectory = await getShimmerClaimingProfileManagerStorageDirectory()
         await restoreBackupByCopyingFile(
@@ -27,7 +28,7 @@ export async function restoreBackupForShimmerClaimingProfileManager(strongholdPa
          * NOTE: We must check that the Stronghold was an IOTA-based backup and
          * not a Shimmer one.
          */
-        await validateStrongholdCoinType(shimmerClaimingProfileManager, network?.id)
+        await validateStrongholdCoinType(shimmerClaimingProfileManager, NetworkId.Iota)
 
         const profileDirectory = await getStorageDirectoryOfProfile(id)
         await restoreBackupByCopyingFile(
