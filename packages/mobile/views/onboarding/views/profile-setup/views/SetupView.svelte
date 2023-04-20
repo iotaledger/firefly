@@ -13,7 +13,7 @@
         updateOnboardingProfile,
     } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
-    import { formatProtocolName, getDefaultClientOptions } from '@core/network'
+    import { getNetworkNameFromNetworkId, getDefaultClientOptions } from '@core/network'
     import { ProfileType } from '@core/profile'
     import { destroyProfileManager } from '@core/profile-manager'
 
@@ -22,7 +22,7 @@
 
     const networkId = $onboardingProfile?.network?.id
     const title = localize('views.onboarding.profileSetup.setup.title', {
-        values: { protocol: formatProtocolName(networkId) },
+        values: { protocol: getNetworkNameFromNetworkId(networkId) },
     })
 
     async function onProfileSetupSelectionClick(setupType: ProfileSetupType): Promise<void> {
@@ -70,7 +70,7 @@
         <OnboardingButton
             primaryText={localize('actions.createWallet', {
                 values: {
-                    protocol: formatProtocolName(networkId),
+                    protocol: getNetworkNameFromNetworkId(networkId),
                 },
             })}
             icon="plus"
