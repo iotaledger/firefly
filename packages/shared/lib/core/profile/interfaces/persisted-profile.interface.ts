@@ -8,8 +8,8 @@ export interface IPersistedProfile {
     name: string
     type: ProfileType
     network: INetwork
-    networkProtocol: NetworkProtocol
-    networkType: NetworkType
+    networkProtocol?: NetworkProtocol
+    networkType?: NetworkType
     lastStrongholdBackupTime: Date
     settings: IProfileSettings
     accountMetadata: IAccountMetadata[]
