@@ -3,8 +3,8 @@
         "onboarding": {
             "appSetup": {
                 "welcome": {
-                    "title": "Invia, Ricevi e Gestisci i tuoi token {protocol}",
-                    "body": "Firefly è il portafoglio ufficiale per {protocol}."
+                    "title": "Invia, Ricevi e Gestisci i tuoi token {network}",
+                    "body": "Firefly è il portafoglio ufficiale per {network}."
                 },
                 "legal": {
                     "title": "Politica sulla Privacy e Termini di Servizio",
@@ -62,8 +62,8 @@
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Configura {protocol, select, IOTA {un profilo di} Shimmer {un profilo di} other {un profilo di}} {protocol}",
-                    "body": "Seleziona il metodo appropriato per impostare il tuo profilo {protocol}."
+                    "title": "Configura {network, select, IOTA {un profilo di} Shimmer {un profilo di} other {un profilo di}} {network}",
+                    "body": "Seleziona il metodo appropriato per impostare il tuo profilo {network}."
                 },
                 "setupNew": {
                     "title": "Crea un profilo",
@@ -78,7 +78,7 @@
                     }
                 },
                 "setupRecovered": {
-                    "title": "Recupera il profilo di {protocol}",
+                    "title": "Recupera il profilo di {network}",
                     "body": "Se hai un file di backup mnemonico o Stronghold esistente, puoi importarlo qui.",
                     "importMnemonic": "Usa la frase di recupero",
                     "importMnemonicDescription": "Inserisci la tua frase mnemonica di 24 parole",
@@ -92,7 +92,7 @@
                     "body": "Importa il tuo profilo di IOTA e rivendica le ricompense di staking del tuo Shimmer."
                 },
                 "enterName": {
-                    "title": "Crea il tuo profilo di {protocol}",
+                    "title": "Crea il tuo profilo di {network}",
                     "profileName": "Nome del profilo",
                     "body1": "Puoi creare più profili utente per organizzare i tuoi portafogli e migliorare la privacy.",
                     "body2": {
@@ -198,10 +198,10 @@
             "videoGuide": "Video guida di migrazione di Ledger"
         },
         "ledgerInstallationGuide": {
-            "title": "Hai installato l'app {protocol} sul tuo dispositivo Ledger?",
-            "body1": "Prima di procedere, devi usare Ledger Live per trovare e installare l'app di {protocol}.",
+            "title": "Hai installato l'app {network} sul tuo dispositivo Ledger?",
+            "body1": "Prima di procedere, devi usare Ledger Live per trovare e installare l'app di {network}.",
             "body2": "Assicurati che il tuo firmware Ledger sia aggiornato. Tutte le app preinstallate dovrebbero essere aggiornate alle loro ultime versioni.",
-            "action": "Sì, ho installato l'app {protocol}"
+            "action": "Sì, ho installato l'app {network}"
         },
         "importFromLedger": {
             "title": "Ripristina o Migra il tuo Ledger",
@@ -910,7 +910,7 @@
             "title": "Collega il tuo Ledger",
             "notConnected": "Collega il tuo dispositivo Ledger per continuare.",
             "locked": "Sblocca il tuo dispositivo Ledger per continuare.",
-            "appNotOpen": "Apri l'app {protocol} sul tuo dispositivo Ledger per continuare.",
+            "appNotOpen": "Apri l'app Shimmer sul tuo dispositivo Ledger per continuare.",
             "correctAppOpen": "Ledger collegato con successo, per favore continua."
         },
         "ledgerConfirmation": {
@@ -1193,8 +1193,8 @@
             "title": "Refresh NFT media",
             "description": "Do you want to delete and re-download all NFT media for this account?"
         },
-        "createWallet": "Crea un nuovo profilo {protocol}",
-        "createWalletDescription": "Crea un nuovo profilo su {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
+        "createWallet": "Crea un nuovo profilo {network}",
+        "createWalletDescription": "Crea un nuovo profilo su {network, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
         "claimShimmer": "Rivendica ricompense di staking Shimmer",
         "claimShimmerDescription": "Importa il tuo profilo di IOTA e richiedi le ricompense di staking del tuo Shimmer",
         "createAlias": "Crea alias",
@@ -1306,7 +1306,7 @@
         "searchForRewards": "Cerca le ricompense",
         "claimRewards": "Richiedi ricompense",
         "rerunClaimProcess": "Ripeti il processo di ricichiesta",
-        "finishProfileSetupWithProtocol": "Termina la configurazione del profilo {protocol}",
+        "finishProfileSetupWithProtocol": "Termina la configurazione del profilo {network}",
         "addPublicNote": "Aggiungi nota pubblica",
         "backup": "Backup",
         "mint": "Conia",
