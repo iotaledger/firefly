@@ -47,7 +47,7 @@
             <Text type={TextType.h3}>
                 {localize('views.onboarding.appSetup.welcome.title', {
                     values: {
-                        protocol: features?.onboarding?.iota?.enabled
+                        network: features?.onboarding?.iota?.enabled
                             ? getNetworkNameFromNetworkId(NetworkId.Iota)
                             : getNetworkNameFromNetworkId(NetworkId.Shimmer),
                     },

@@ -22,7 +22,7 @@
     }
     const networkId = $onboardingProfile?.network?.id
     const title = localize('views.onboarding.profileSetup.setupRecovered.title', {
-        values: { protocol: getNetworkNameFromNetworkId(networkId) },
+        values: { network: getNetworkNameFromNetworkId(networkId) },
     })
 
     async function onProfileRecoverySelectionClick(recoveryType: ProfileRecoveryType): Promise<void> {

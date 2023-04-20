@@ -57,7 +57,7 @@
     <div slot="title">
         <Text type="h2"
             >{localize('views.onboarding.profileSetup.enterName.title', {
-                values: { protocol: getNetworkNameFromNetworkId($onboardingProfile?.network?.id) },
+                values: { network: getNetworkNameFromNetworkId($onboardingProfile?.network?.id) },
             })}</Text
         >
     </div>

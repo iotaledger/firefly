@@ -45,7 +45,7 @@
     <div slot="title">
         <Text type="h2"
             >{localize('views.onboarding.profileSetup.setupRecovered.title', {
-                values: { protocol: getNetworkNameFromNetworkId(networkId) },
+                values: { network: getNetworkNameFromNetworkId(networkId) },
             })}</Text
         >
     </div>

@@ -11,7 +11,7 @@
     let error = ''
     let profileName = $onboardingProfile?.name ?? ''
     const title = localize('views.onboarding.profileSetup.enterName.title', {
-        values: { protocol: getNetworkNameFromNetworkId($onboardingProfile?.network?.id) },
+        values: { network: getNetworkNameFromNetworkId($onboardingProfile?.network?.id) },
     })
 
     $: isProfileNameValid = profileName && profileName.trim()

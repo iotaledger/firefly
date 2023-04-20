@@ -22,7 +22,7 @@
 
     const networkId = $onboardingProfile?.network?.id
     const title = localize('views.onboarding.profileSetup.setup.title', {
-        values: { protocol: getNetworkNameFromNetworkId(networkId) },
+        values: { network: getNetworkNameFromNetworkId(networkId) },
     })
 
     async function onProfileSetupSelectionClick(setupType: ProfileSetupType): Promise<void> {

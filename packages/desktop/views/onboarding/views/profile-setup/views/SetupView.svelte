@@ -48,7 +48,7 @@
         <Text type="h2"
             >{localize('views.onboarding.profileSetup.setup.title', {
                 values: {
-                    protocol: getNetworkNameFromNetworkId(networkId),
+                    network: getNetworkNameFromNetworkId(networkId),
                 },
             })}</Text
         >
@@ -57,7 +57,7 @@
         <Text type="p" secondary classes="mb-8"
             >{localize('views.onboarding.profileSetup.setup.body', {
                 values: {
-                    protocol: getNetworkNameFromNetworkId(networkId),
+                    network: getNetworkNameFromNetworkId(networkId),
                 },
             })}</Text
         >
@@ -66,12 +66,12 @@
         <OnboardingButton
             primaryText={localize('actions.createWallet', {
                 values: {
-                    protocol: getNetworkNameFromNetworkId(networkId),
+                    network: getNetworkNameFromNetworkId(networkId),
                 },
             })}
             secondaryText={!$mobile
                 ? localize('actions.createWalletDescription', {
-                      values: { protocol: networkId },
+                      values: { network: networkId },
                   })
                 : ''}
             icon="plus"
