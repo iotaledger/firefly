@@ -3,8 +3,8 @@
     import { Text, FontWeight, ColoredCircle } from 'shared/components/'
 
     export let account: IAccountState
-    export let selected = true
-    export let fontSize = '14'
+    export let selected: boolean = true
+    export let fontSize: string = '14'
 </script>
 
 <div class="flex flex-row items-center space-x-3">
