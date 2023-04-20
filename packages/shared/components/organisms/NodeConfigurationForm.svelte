@@ -51,7 +51,8 @@
     let [username, password] = node.auth?.basicAuthNamePwd ?? ['', '']
     let jwt = node.auth?.jwt
 
-    $: networkId, node.url, (formError = '')
+    $: networkId, (coinType = undefined)
+    $: networkId, coinType, node.url, (formError = '')
     $: node = {
         url: node.url,
         auth: {
@@ -73,6 +74,11 @@
     }
 
     export async function validate(options: NodeValidationOptions): Promise<INode> {
+        if (networkId === NetworkId.Custom && !coinType) {
+            formError = localize('error.node.noCoinType')
+            return Promise.reject({ type: 'validationError', error: formError })
+        }
+
         const errorUrlValidity = checkNodeUrlValidity(currentClientOptions?.nodes, node.url, isDeveloperProfile)
         if (errorUrlValidity) {
             formError = localize(errorUrlValidity) ?? ''

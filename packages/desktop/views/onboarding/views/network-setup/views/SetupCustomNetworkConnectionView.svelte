@@ -15,7 +15,7 @@
     import { onMount } from 'svelte'
 
     let nodeConfigurationForm: NodeConfigurationForm
-    let networkId: NetworkId = NetworkId.Custom
+    let networkId: NetworkId = NetworkId.Shimmer
     let coinType: string
     let node: INode
     let isBusy = false
