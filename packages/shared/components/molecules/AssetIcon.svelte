@@ -1,10 +1,10 @@
 <script lang="ts">
     import { NETWORK_ICON_SVG } from '@auxiliary/icon'
     import { getIconColorFromString } from '@core/account'
-    import { COIN_TYPE, NetworkId, NetworkProtocol } from '@core/network'
+    import { COIN_TYPE, NetworkId } from '@core/network'
     import { isBright } from '@core/utils'
     import { ANIMATED_TOKEN_IDS, IPersistedAsset, NotVerifiedStatus, getAssetInitials } from '@core/wallet'
-    import { Animation, Icon, VerificationBadge } from '@ui'
+    import { Animation, Icon, VerificationBadge } from 'shared/components'
 
     export let asset: IPersistedAsset
     export let large = false
@@ -19,13 +19,14 @@
 
     $: isAnimation = asset?.id in ANIMATED_TOKEN_IDS
     $: switch (asset?.id) {
-        case String(COIN_TYPE[NetworkProtocol.IOTA]):
+        case String(COIN_TYPE[NetworkId.Iota]):
             assetInitials = ''
             assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
             assetIconBackgroundColor = '#6E82A4'
             icon = NETWORK_ICON_SVG[NetworkId.Iota]
             break
-        case String(COIN_TYPE[NetworkProtocol.Shimmer]):
+        case String(COIN_TYPE[NetworkId.Shimmer]):
+        case String(COIN_TYPE[NetworkId.Testnet]):
             assetInitials = ''
             assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
             assetIconBackgroundColor = '#25DFCA'
