@@ -1,6 +1,5 @@
 import { get } from 'svelte/store'
 
-import { NetworkProtocol } from '@core/network'
 import { getStorageDirectoryOfProfile } from '@core/profile'
 import { profileManager } from '@core/profile-manager'
 
@@ -13,7 +12,7 @@ import { onboardingProfile, shimmerClaimingProfileManager } from '../stores'
 
 export async function restoreBackupForShimmerClaimingProfileManager(strongholdPassword: string): Promise<void> {
     try {
-        const { id, importFilePath, clientOptions } = get(onboardingProfile)
+        const { id, importFilePath, clientOptions, network } = get(onboardingProfile)
 
         const tempProfileDirectory = await getShimmerClaimingProfileManagerStorageDirectory()
         await restoreBackupByCopyingFile(
@@ -28,7 +27,7 @@ export async function restoreBackupForShimmerClaimingProfileManager(strongholdPa
          * NOTE: We must check that the Stronghold was an IOTA-based backup and
          * not a Shimmer one.
          */
-        await validateStrongholdCoinType(shimmerClaimingProfileManager, NetworkProtocol.IOTA)
+        await validateStrongholdCoinType(shimmerClaimingProfileManager, network?.id)
 
         const profileDirectory = await getStorageDirectoryOfProfile(id)
         await restoreBackupByCopyingFile(
