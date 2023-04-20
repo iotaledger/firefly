@@ -1,6 +1,5 @@
 import { get } from 'svelte/store'
 
-import { COIN_TYPE } from '@core/network'
 import { getSecretManagerFromProfileType, initialiseProfileManager } from '@core/profile-manager'
 import { generateRandomId } from '@core/utils'
 
