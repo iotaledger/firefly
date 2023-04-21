@@ -4,7 +4,7 @@
     import { EMPTY_NODE } from '@core/network/constants'
     import { IClientOptions, INode, INodeInfoResponse } from '@core/network/interfaces'
     import { nodeInfo } from '@core/network/stores'
-    import { checkNetworkId, checkNodeUrlValidity, formatProtocolName } from '@core/network/utils'
+    import { checkNetworkId, checkNodeUrlValidity, getNetworkNameFromNetworkId } from '@core/network/utils'
     import { activeProfile } from '@core/profile'
     import { getNodeInfo } from '@core/profile-manager'
     import { IDropdownItem, cleanUrl, deepCopy } from '@core/utils'
@@ -31,15 +31,15 @@
 
     const networkItems: IDropdownItem<NetworkId>[] = [
         {
-            label: formatProtocolName(NetworkId.Iota),
+            label: getNetworkNameFromNetworkId(NetworkId.Iota),
             value: NetworkId.Iota,
         },
         {
-            label: formatProtocolName(NetworkId.Shimmer),
+            label: getNetworkNameFromNetworkId(NetworkId.Shimmer),
             value: NetworkId.Shimmer,
         },
         {
-            label: formatProtocolName(NetworkId.Testnet),
+            label: getNetworkNameFromNetworkId(NetworkId.Testnet),
             value: NetworkId.Testnet,
         },
         {
