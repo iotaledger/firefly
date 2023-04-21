@@ -39,7 +39,7 @@
 
     function onNetworkSelectionClick(networkId: NetworkId): void {
         if (networkId !== NetworkId.Custom) {
-            const network = NETWORK_METADATA?.[networkId]
+            const network = NETWORK_METADATA[networkId]
             const clientOptions = getDefaultClientOptions(networkId)
             updateOnboardingProfile({ network, clientOptions })
         }
