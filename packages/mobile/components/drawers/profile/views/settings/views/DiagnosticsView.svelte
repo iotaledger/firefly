@@ -25,7 +25,7 @@
             },
             {
                 label: 'views.settings.currency.title',
-                value: $activeProfile?.settings?.currency,
+                value: $activeProfile?.settings?.marketCurrency,
             },
             {
                 label: 'general.nodeList',
