@@ -1,11 +1,12 @@
-import { BASE_TOKEN } from '../constants'
-import { NetworkId, NetworkProtocol, TokenSupply } from '../enums'
+import { COIN_TYPE, DEFAULT_BASE_TOKEN } from '../constants'
+import { NetworkId, TokenSupply } from '../enums'
 import { INetwork } from '../interfaces'
 
 export const NETWORK: Readonly<{ [key in NetworkId]?: INetwork }> = {
     [NetworkId.Iota]: {
         id: NetworkId.Iota,
         name: 'IOTA',
+        coinType: COIN_TYPE[NetworkId.Iota],
         protocol: {
             version: 1,
             networkName: 'iota',
@@ -19,12 +20,13 @@ export const NETWORK: Readonly<{ [key in NetworkId]?: INetwork }> = {
             },
             tokenSupply: TokenSupply.Iota,
         },
-        baseToken: BASE_TOKEN[NetworkProtocol.IOTA],
+        baseToken: DEFAULT_BASE_TOKEN[NetworkId.Iota],
         chains: [],
     },
     [NetworkId.Shimmer]: {
         id: NetworkId.Shimmer,
         name: 'Shimmer',
+        coinType: COIN_TYPE[NetworkId.Shimmer],
         protocol: {
             version: 2,
             networkName: 'shimmer',
@@ -38,12 +40,13 @@ export const NETWORK: Readonly<{ [key in NetworkId]?: INetwork }> = {
             },
             tokenSupply: TokenSupply.Shimmer,
         },
-        baseToken: BASE_TOKEN[NetworkProtocol.Shimmer],
+        baseToken: DEFAULT_BASE_TOKEN[NetworkId.Shimmer],
         chains: [],
     },
     [NetworkId.Testnet]: {
         id: NetworkId.Testnet,
         name: 'Testnet',
+        coinType: COIN_TYPE[NetworkId.Testnet],
         protocol: {
             version: 2,
             networkName: 'testnet',
@@ -57,7 +60,7 @@ export const NETWORK: Readonly<{ [key in NetworkId]?: INetwork }> = {
             },
             tokenSupply: TokenSupply.Testnet,
         },
-        baseToken: BASE_TOKEN[NetworkProtocol.Shimmer],
+        baseToken: DEFAULT_BASE_TOKEN[NetworkId.Testnet],
         chains: [],
     },
 }
