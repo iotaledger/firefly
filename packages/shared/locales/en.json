@@ -1419,7 +1419,7 @@
         "and": "and",
         "receiveFunds": "Receive funds",
         "address": "Address",
-        "myAddress": "My Address",
+        "myAddress": "My address",
         "myNetworkAddress": "My {networkName} address",
         "shareAddress": "Share an address",
         "yourAddress": "Your address",
@@ -2287,7 +2287,7 @@
         },
         "networkHealth": {
             "down": "Down",
-            "degraded": "Ddegraded",
+            "degraded": "Degraded",
             "operational": "Operational",
             "disconnected": "Disconnected"
         },

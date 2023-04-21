@@ -2,13 +2,10 @@
     import { Icon } from '@ui'
     import { NetworkConfigRoute, networkConfigRouter } from '@desktop/routers'
     import { activeProfile } from '@core/profile'
-    import { selectedAccount } from '@core/account'
-    import { NetworkHealth, networkStatus } from '@core/network'
+    import { NetworkHealth, ConnectedChain, buildChainFromNetwork } from '@core/network'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { NetworkCard } from '@components'
     import { localize } from '@core/i18n'
-
-    type ConnectedChain = { name: string; address: string; status: NetworkHealth }
 
     let connectedChains: ConnectedChain[] = []
 
@@ -16,11 +13,7 @@
     function setConnectedChains(): void {
         const chains = []
 
-        const mainChain = {
-            name: $activeProfile.network.name,
-            address: $selectedAccount.depositAddress,
-            status: $networkStatus.health,
-        }
+        const mainChain = buildChainFromNetwork()
         chains.push(mainChain)
 
         for (const chain of $activeProfile.network.chains) {

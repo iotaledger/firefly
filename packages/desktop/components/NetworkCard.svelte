@@ -23,7 +23,7 @@
     <div class="w-full flex flex-col gap-5">
         <div class="flex flex-row justify-between items-center">
             <div class="flex flex-row gap-2 items-center">
-                <NetworkIcon networkId={NetworkId.Shimmer} />
+                <NetworkIcon networkId={NetworkId.Testnet} />
                 <Text type={TextType.h4} fontWeight={FontWeight.semibold}>
                     {name}
                 </Text>
@@ -32,10 +32,10 @@
         </div>
         <div class="flex flex-row justify-between items-end">
             <div class="flex flex-col">
-                <Text type={TextType.pre} fontWeight={FontWeight.medium} color="gray-600">
+                <Text type={TextType.p} fontWeight={FontWeight.medium} color="gray-600">
                     {localize('general.myAddress')}
                 </Text>
-                <Text type={TextType.h4} fontWeight={FontWeight.medium}>
+                <Text type={TextType.pre} fontSize="16" fontWeight={FontWeight.medium}>
                     {truncateString(address, 8, 8)}
                 </Text>
             </div>
