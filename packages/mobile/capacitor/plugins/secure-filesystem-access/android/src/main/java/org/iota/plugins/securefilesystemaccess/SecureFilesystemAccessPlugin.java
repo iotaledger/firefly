@@ -13,6 +13,7 @@ import android.util.Log;
 import androidx.activity.result.ActivityResult;
 import androidx.core.content.FileProvider;
 
+import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.PermissionState;
 import com.getcapacitor.Plugin;
@@ -28,6 +29,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Objects;
 
 @CapacitorPlugin(
@@ -206,9 +208,13 @@ public class SecureFilesystemAccessPlugin extends Plugin {
             return;
         }
         String folder = call.getString("folder");
-        assert folder != null;
+        if (folder == null) {
+            call.reject("folder is null, can't get string");
+            return;
+        }
         File toDelete = new File(getContext().getFilesDir(), folder);
         deleteRecursively(toDelete);
+        Log.d("Profile folder deleted:", getContext().getFilesDir() + folder);
         call.resolve();
     }
 
@@ -239,9 +245,9 @@ public class SecureFilesystemAccessPlugin extends Plugin {
         }
         String oldName = call.getString("oldName");
         String newName = call.getString("newName");
-        assert oldName != null;
+        if (oldName == null) return;
         File oldFilename = new File(getContext().getFilesDir(), oldName);
-        assert newName != null;
+        if (newName == null) return;
         File newFilename = new File(getContext().getFilesDir(), newName);
         boolean isRenamed = false;
         String error = "";
@@ -263,16 +269,27 @@ public class SecureFilesystemAccessPlugin extends Plugin {
             call.reject("folder is required");
             return;
         }
+
         String folder = call.getString("folder");
-        String[] files = null;
-        File fileObject = new File(getContext().getFilesDir(), "__storage__" + File.separator + folder);
-        if (fileObject.exists()) {
-            files = fileObject.list();
-        } else {
+        if (folder == null) {
+            call.reject("folder is null, can not get string");
+            return;
+        }
+        
+        File fileObject = new File(getContext().getFilesDir(), folder);
+        if (!fileObject.exists()) {
             call.reject("Folder does not exist");
         }
+        
+        String[] files = fileObject.list();
+        if (files == null) {
+            call.reject("Can't files list");
+            return;
+        }
+
         JSObject response = new JSObject();
-        response.put("folderList", files);
+        JSArray list = JSArray.from(files);
+        response.put("files", list);
         call.resolve(response);
     }
 
