@@ -4,5 +4,5 @@ import { get } from 'svelte/store'
 
 export function getBaseToken(): IBaseToken {
     const $activeProfile = get(activeProfile)
-    return $activeProfile.network.baseToken
+    return $activeProfile?.network?.baseToken
 }
