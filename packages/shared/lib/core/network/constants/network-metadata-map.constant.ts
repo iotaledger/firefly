@@ -2,7 +2,7 @@ import { COIN_TYPE, DEFAULT_BASE_TOKEN } from '../constants'
 import { NetworkId, TokenSupply } from '../enums'
 import { NetworkMetadataMap } from '../types'
 
-export const NETWORK_METADATA: Readonly<NetworkMetadataMap> = {
+export const NETWORK_METADATA_MAP: Readonly<NetworkMetadataMap> = {
     [NetworkId.Iota]: {
         id: NetworkId.Iota,
         name: 'IOTA',

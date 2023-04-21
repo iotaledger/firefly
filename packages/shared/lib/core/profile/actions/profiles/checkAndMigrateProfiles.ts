@@ -1,4 +1,4 @@
-import { COIN_TYPE, NETWORK_METADATA, NetworkId } from '@core/network'
+import { COIN_TYPE, NETWORK_METADATA_MAP, NetworkId } from '@core/network'
 import { INode } from '@core/network/interfaces'
 import { get } from 'svelte/store'
 import {
@@ -159,7 +159,7 @@ function persistedProfileMigrationToV9(existingProfile: IPersistedProfile): void
 function persistedProfileMigrationToV10(
     existingProfile: IPersistedProfile & { networkProtocol: string; networkType: string }
 ): void {
-    const network = NETWORK_METADATA[existingProfile?.networkProtocol]?.[existingProfile?.networkType]
+    const network = NETWORK_METADATA_MAP[existingProfile?.networkProtocol]?.[existingProfile?.networkType]
     existingProfile.network = network
 
     existingProfile.settings = {
@@ -189,10 +189,10 @@ function persistedProfileMigrationToV11(
     if (!existingProfile?.network) {
         if (existingProfile?.networkType) {
             const networkId = getNetworkIdFromOldNetworkType(existingProfile?.networkType)
-            const network = NETWORK_METADATA[networkId]
+            const network = NETWORK_METADATA_MAP[networkId]
             existingProfile.network = structuredClone(network)
         } else {
-            existingProfile.network = structuredClone(NETWORK_METADATA[NetworkId.Custom])
+            existingProfile.network = structuredClone(NETWORK_METADATA_MAP[NetworkId.Custom])
         }
     }
 

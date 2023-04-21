@@ -9,7 +9,7 @@
     } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { NETWORK_METADATA, NetworkId, getDefaultClientOptions } from '@core/network'
+    import { NETWORK_METADATA_MAP, NetworkId, getDefaultClientOptions } from '@core/network'
     import { profiles } from '@core/profile'
     import { networkSetupRouter } from '@core/router'
     import features from '@features/features'
@@ -39,7 +39,7 @@
 
     function onNetworkSelectionClick(networkId: NetworkId): void {
         if (networkId !== NetworkId.Custom) {
-            const network = NETWORK_METADATA[networkId]
+            const network = NETWORK_METADATA_MAP[networkId]
             const clientOptions = getDefaultClientOptions(networkId)
             updateOnboardingProfile({ network, clientOptions })
         }
