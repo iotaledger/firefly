@@ -4,5 +4,5 @@ import { get } from 'svelte/store'
 
 export function getCoinType(): string {
     const $activeProfile = get(activeProfile)
-    return COIN_TYPE[$activeProfile.networkProtocol].toString()
+    return COIN_TYPE[$activeProfile.network?.id].toString()
 }
