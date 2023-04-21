@@ -186,6 +186,8 @@ function persistedProfileMigrationToV11(existingProfile: IPersistedProfile): voi
             const networkId = getNetworkIdFromOldNetworkType(existingProfile?.networkType)
             const network = NETWORK?.[networkId]
             existingProfile.network = structuredClone(network)
+        } else {
+            existingProfile.network = structuredClone(NETWORK?.[NetworkId.Custom])
         }
     }
 
