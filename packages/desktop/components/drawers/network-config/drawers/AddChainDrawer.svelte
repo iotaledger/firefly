@@ -1,8 +1,9 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { IIscpChainMetadata } from '@core/network'
+    import { ChainMetadata, IIscpChainMetadata, network } from '@core/network'
     import { ChainType } from '@core/network/enums'
     import { Button, HTMLButtonType, Input } from '@ui'
+    import { onMount } from 'svelte'
 
     const isBusy = false
 
@@ -19,6 +20,18 @@
 
     function handleSubmit(): void {
         // TODO: Fetch chainId from ISCP node before adding it to profile
+    }
+
+    onMount(() => {
+        void onMountHelper()
+    })
+
+    async function onMountHelper(): Promise<void> {
+        /* eslint-disable no-console */
+        console.log('NETWORK: ', $network)
+        /* eslint-disable no-console */
+        console.log('NETWORK STATUS: ', $network.getStatus())
+        await $network.addChain(<ChainMetadata>{})
     }
 </script>
 
