@@ -24,10 +24,10 @@
 <OnboardingLayout {onBackClick}>
     <div slot="leftpane__content">
         <Text type="h2" classes="mb-5"
-            >{localize('views.ledgerInstallationGuide.title', { values: { protocol: LedgerAppName.Shimmer } })}</Text
+            >{localize('views.ledgerInstallationGuide.title', { values: { network: LedgerAppName.Shimmer } })}</Text
         >
         <Text type="p" secondary classes="mb-5">
-            {localize('views.ledgerInstallationGuide.body1', { values: { protocol: LedgerAppName.Shimmer } })}
+            {localize('views.ledgerInstallationGuide.body1', { values: { network: LedgerAppName.Shimmer } })}
         </Text>
         <Text type="p" secondary classes="mb-5">{localize('views.ledgerInstallationGuide.body2')}</Text>
         <div class="flex flex-row flex-nowrap items-center justify-center space-x-4 text-center mt-28">
@@ -44,7 +44,7 @@
             >{localize('popups.ledgerAppGuide.title', { values: { legacy: LedgerAppName.Shimmer } })}</Link
         >
         <Button classes="w-full" onClick={onContinueClick}
-            >{localize('views.ledgerInstallationGuide.action', { values: { protocol: LedgerAppName.Shimmer } })}</Button
+            >{localize('views.ledgerInstallationGuide.action', { values: { network: LedgerAppName.Shimmer } })}</Button
         >
     </div>
     <LedgerAnimation slot="rightpane" illustration="ledger-install-new-app-desktop" />
