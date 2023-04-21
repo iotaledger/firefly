@@ -11,11 +11,19 @@
     import { INode, NetworkId, buildNetworkFromNodeInfoResponse, getNetworkIdFromNetworkName } from '@core/network'
     import { getNodeInfo } from '@core/profile-manager'
     import { networkSetupRouter } from '@core/router'
+    import features from '@features/features'
     import { Animation, Button, HTMLButtonType, NodeConfigurationForm, Text, TextType } from '@ui'
     import { onMount } from 'svelte'
 
     let nodeConfigurationForm: NodeConfigurationForm
-    let networkId: NetworkId = NetworkId.Custom
+    let networkId: NetworkId = features?.onboarding?.iota?.enabled
+        ? NetworkId.Iota
+        : features?.onboarding?.shimmer?.enabled
+        ? NetworkId.Shimmer
+        : features?.onboarding?.testnet?.enabled
+        ? NetworkId.Testnet
+        : NetworkId.Custom
+    let coinType: string
     let node: INode
     let isBusy = false
     let formError = ''
@@ -45,7 +53,8 @@
             ) {
                 throw new Error('error.node.differentNetwork')
             }
-            const network = buildNetworkFromNodeInfoResponse(nodeInfoResponse)
+            const customCoinType = networkId === NetworkId.Custom ? Number(coinType) : undefined
+            const network = buildNetworkFromNodeInfoResponse(nodeInfoResponse, customCoinType)
             updateOnboardingProfile({ network })
             await cleanupOnboardingProfileManager()
             $networkSetupRouter.next()
@@ -81,13 +90,11 @@
         <Text type={TextType.h2}>{localize('views.onboarding.networkSetup.setupCustomNetworkConnection.title')}</Text>
     </div>
     <div slot="leftpane__content">
-        <Text type={TextType.p} secondary classes="mb-8"
-            >{localize('views.onboarding.networkSetup.setupCustomNetworkConnection.body')}</Text
-        >
         <NodeConfigurationForm
             onSubmit={onContinueClick}
             bind:this={nodeConfigurationForm}
             bind:networkId
+            bind:coinType
             bind:node
             bind:formError
             {isBusy}

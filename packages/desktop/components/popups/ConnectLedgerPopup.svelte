@@ -1,17 +1,12 @@
 <script lang="ts">
-    import { onboardingProfile } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
     import { LedgerConnectionState, ledgerConnectionState } from '@core/ledger'
-    import { formatProtocolName } from '@core/network'
-    import { activeProfile } from '@core/profile'
     import { isFunction } from '@core/utils'
     import { Button, LedgerAnimation, Text, TextHint, FontWeight, TextType } from 'shared/components'
     import { closePopup } from '@auxiliary/popup'
 
     export let onCancel: () => void
     export let onContinue: () => void
-
-    const networkProtocol = $activeProfile?.networkProtocol ?? $onboardingProfile?.networkProtocol
 
     $: isNotConnected = $ledgerConnectionState === LedgerConnectionState.NotConnected
     $: isLocked = $ledgerConnectionState === LedgerConnectionState.Locked
@@ -62,12 +57,7 @@
     {:else if isLocked}
         <TextHint warning text={localize('popups.ledgerNotConnected.locked')} />
     {:else if isAppNotOpen}
-        <TextHint
-            info
-            text={localize('popups.ledgerNotConnected.appNotOpen', {
-                values: { protocol: formatProtocolName(networkProtocol) },
-            })}
-        />
+        <TextHint info text={localize('popups.ledgerNotConnected.appNotOpen')} />
     {:else if isCorrectAppOpen}
         <TextHint success text={localize('popups.ledgerNotConnected.correctAppOpen')} />
     {/if}
