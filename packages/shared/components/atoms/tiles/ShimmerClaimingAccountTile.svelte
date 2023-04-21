@@ -1,11 +1,12 @@
 <script lang="ts">
     import { Icon, Text, Tile, FontWeight, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { BASE_TOKEN, NetworkProtocol } from '@core/network'
-    import { formatTokenAmountBestMatch } from '@core/wallet'
+    import { formatTokenAmountBestMatch } from '@core/wallet/utils'
     import { IShimmerClaimingAccount, ShimmerClaimingAccountState } from '@contexts/onboarding'
+    import { IBaseToken } from '@core/wallet/interfaces'
 
     export let shimmerClaimingAccount: IShimmerClaimingAccount
+    export let baseToken: IBaseToken
 
     $: shouldDisplayFailedState = shimmerClaimingAccount?.state === ShimmerClaimingAccountState.Failed
     $: shouldDisplayUnclaimedRewards = shimmerClaimingAccount?.state !== ShimmerClaimingAccountState.FullyClaimed
@@ -40,10 +41,7 @@
                                 />
                             {/if}
                             <Text type={TextType.p} fontWeight={FontWeight.semibold}>
-                                {formatTokenAmountBestMatch(
-                                    shimmerClaimingAccount?.unclaimedRewards,
-                                    BASE_TOKEN[NetworkProtocol.Shimmer]
-                                )}
+                                {formatTokenAmountBestMatch(shimmerClaimingAccount?.unclaimedRewards, baseToken)}
                             </Text>
                         </div>
                     {/if}
@@ -60,7 +58,7 @@
                                     values: {
                                         amount: formatTokenAmountBestMatch(
                                             shimmerClaimingAccount?.claimedRewards,
-                                            BASE_TOKEN[NetworkProtocol.Shimmer]
+                                            baseToken
                                         ),
                                     },
                                 })}

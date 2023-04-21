@@ -1,4 +1,4 @@
-export * from './base-token.constant'
+export * from './default-base-token.constant'
 export * from './coin-type.constant'
 export * from './empty-node.constant'
 export * from './explorer-urls.constant'
