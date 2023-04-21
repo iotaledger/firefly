@@ -1,13 +1,16 @@
 <script lang="ts">
     import { Modal, NotificationBadge, ProfileActionsModal, Icon } from '@ui'
     import { SidebarTab } from '@components'
-    import features from '@features/features'
+
     import { appVersionDetails } from '@core/app/stores'
     import { getInitials, isRecentDate } from '@core/utils'
     import { activeProfile } from '@core/profile/stores'
     import { collectiblesRouter, DashboardRoute, dashboardRouter, governanceRouter, settingsRouter } from '@core/router'
     import { localize } from '@core/i18n'
+
+    import { Icon as IconEnum, NETWORK_ICON_SVG } from '@auxiliary/icon'
     import { ISidebarTab } from '@desktop/routers'
+    import features from '@features/features'
 
     let profileModal: Modal
 
@@ -25,7 +28,7 @@
         ...(features?.wallet?.enabled
             ? [
                   {
-                      icon: 'wallet',
+                      icon: IconEnum.Wallet,
                       label: localize('tabs.wallet'),
                       route: DashboardRoute.Wallet,
                       onClick: openWallet,
@@ -35,7 +38,7 @@
         ...(features?.collectibles?.enabled
             ? [
                   {
-                      icon: 'collectibles',
+                      icon: IconEnum.Collectibles,
                       label: localize('tabs.collectibles'),
                       route: DashboardRoute.Collectibles,
                       onClick: openCollectibles,
@@ -45,7 +48,7 @@
         ...(features?.governance?.enabled
             ? [
                   {
-                      icon: 'governance',
+                      icon: IconEnum.Governance,
                       label: localize('tabs.governance'),
                       route: DashboardRoute.Governance,
                       onClick: openGovernance,
@@ -55,7 +58,7 @@
         ...(features?.developerTools?.enabled && $activeProfile?.isDeveloperProfile
             ? [
                   {
-                      icon: 'tools',
+                      icon: IconEnum.Tools,
                       label: localize('tabs.developer'),
                       route: DashboardRoute.Developer,
                       onClick: openDeveloper,
@@ -96,7 +99,12 @@
 >
     <nav class="flex flex-grow flex-col items-center justify-between">
         <div class="flex flex-col items-center">
-            <Icon width="48" height="48" icon={$activeProfile?.networkProtocol} classes="dark:text-white" />
+            <Icon
+                width="48"
+                height="48"
+                icon={NETWORK_ICON_SVG[$activeProfile?.network?.id]}
+                classes="dark:text-white"
+            />
         </div>
         <div class="flex flex-col flex-auto items-center justify-center mb-7 space-y-8">
             {#each sidebarTabs as tab}

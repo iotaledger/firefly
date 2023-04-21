@@ -11,6 +11,7 @@ import { IProtocol } from './protocol.interface'
 export interface IStardustNetworkMetadata {
     id: NetworkId
     name: string
+    coinType: number
     protocol: IProtocol
     chains: ChainMetadata[]
     baseToken: IBaseToken
