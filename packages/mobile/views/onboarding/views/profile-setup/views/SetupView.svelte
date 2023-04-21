@@ -27,8 +27,14 @@
         values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },
     })
 
-    const isBusy = SETUP_TYPES.reduce((obj, type) => (obj[type] = false), {}) as Record<ProfileSetupType, boolean>
-    const isDisabled = SETUP_TYPES.reduce((obj, type) => (obj[type] = false), {}) as Record<ProfileSetupType, boolean>
+    const isBusy = SETUP_TYPES.reduce((obj, type) => ({ ...obj, [type]: false }), {}) as Record<
+        ProfileSetupType,
+        boolean
+    >
+    const isDisabled = SETUP_TYPES.reduce((obj, type) => ({ ...obj, [type]: false }), {}) as Record<
+        ProfileSetupType,
+        boolean
+    >
 
     async function onProfileSetupSelectionClick(setupType: ProfileSetupType): Promise<void> {
         isBusy[setupType] = true
