@@ -10,44 +10,48 @@ const DESKTOP_PURGE_ROUTES = ['../desktop/**/*.svelte']
 const MOBILE_PURGE_ROUTES = ['../mobile/**/*.svelte']
 
 module.exports = {
-    future: {
-        // removeDeprecatedGapUtilities: true,
-        // purgeLayersByDefault: true,
-    },
-    purge: {
-        content: [...SHARED_PURGE_ROUTES, ...(IS_DESKOP ? DESKTOP_PURGE_ROUTES : MOBILE_PURGE_ROUTES)],
-        options: {
-            // Needed to prevent purgecss from removing classes declared with string concatenation
-            safelist: [
-                // `from-${color}` (gradients)
-                /^from-/,
-                // `to-${color}` (gradients)
-                /^to-/,
-                // `bg-${color}`
-                /^bg-/,
-                /^hover:bg-/,
-                /^dark:bg-/,
-                /^border-/,
-                /^hover:border-/,
-                /^dark:border-/,
-                /^dark:hover:border-/,
-                // `text-${color}`
-                /^text-/,
-                /^hover:text-/,
-                /^dark:text-/,
-                /^font-/,
-                /^hover:font-/,
-                /^dark:font-/,
-                /^grid-cols-/,
-                /^rounded-/,
-                // `p-${size}`
-                /^p-/,
-                'scheme-dark',
-                'fill-current',
-                'stroke-current',
-            ],
+    content: [...SHARED_PURGE_ROUTES, ...(IS_DESKOP ? DESKTOP_PURGE_ROUTES : MOBILE_PURGE_ROUTES)],
+    safelist: [
+        'scheme-dark',
+        'fill-current',
+        'stroke-current',
+        {
+            // `from-${color}` (gradients)
+            pattern: /^from-/,
         },
-    },
+        {
+            // `to-${color}` (gradients)
+            pattern: /^to-/,
+        },
+        {
+            // `p-${size}`
+            pattern: /^p-/,
+        },
+        {
+            pattern: /^grid-cols-/,
+        },
+        {
+            pattern: /^rounded-/,
+        },
+        {
+            // `bg-${color}`
+            pattern: /^bg-/,
+            variants: ['hover', 'dark'],
+        },
+        {
+            pattern: /^border-/,
+            variants: ['hover', 'dark'],
+        },
+        {
+            // `text-${color}`
+            pattern: /^text-/,
+            variants: ['hover', 'dark'],
+        },
+        {
+            pattern: /^font-/,
+            variants: ['hover', 'dark'],
+        },
+    ],
     theme: {
         colors: {
             blue: {
@@ -196,6 +200,7 @@ module.exports = {
                 highlight: '#FF3FF2',
             },
             'verification-blue': '#3897F0',
+            current: 'currentColor',
         },
         extend: {
             fontSize: {
@@ -316,14 +321,6 @@ module.exports = {
             inter: ['Inter'],
         },
     },
-    variants: {
-        fontWeight: ['hover', 'focus', 'group-hover'],
-        textColor: ['dark', 'responsive', 'hover', 'dark-hover', 'focus', 'dark-focus', 'group-hover'],
-        backgroundColor: ['dark', 'responsive', 'hover', 'dark-hover', 'focus', 'dark-focus', 'group-hover'],
-        backgroundOpacity: ['dark'],
-        opacity: ['responsive', 'group-hover', 'focus-within', 'hover', 'focus', 'disabled', 'dark'],
-        cursor: ['responsive', 'disabled'],
-    },
     plugins: [
         // Add individual border colors
         // Source: https://github.com/tailwindlabs/tailwindcss/issues/559#issuecomment-639118372
@@ -366,13 +363,13 @@ module.exports = {
         }),
         // Add darkmode
         // Source: https://dev.to/smartmointy/tailwind-css-dark-mode-switch-with-javascript-2kl9
-        plugin(({ addVariant, prefix }) => {
+        plugin(({ addVariant }) => {
             addVariant('dark', ({ modifySelectors, separator }) => {
                 modifySelectors(({ selector }) =>
                     selectorParser((selectors) => {
                         selectors.walkClasses((sel) => {
                             sel.value = `dark${separator}${sel.value}`
-                            sel.parent.insertBefore(sel, selectorParser().astSync(prefix('.scheme-dark ')))
+                            sel.parent.insertBefore(sel, selectorParser().astSync('.scheme-dark '))
                         })
                     }).processSync(selector)
                 )
