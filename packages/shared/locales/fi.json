@@ -3,8 +3,8 @@
         "onboarding": {
             "appSetup": {
                 "welcome": {
-                    "title": "Lähetä, vastaanota ja hallitse {protocol}-tokeneitasi",
-                    "body": "Firefly on virallinen lompakkosovellus {protocol}:lle."
+                    "title": "Lähetä, vastaanota ja hallitse {network}-tokeneitasi",
+                    "body": "Firefly on virallinen lompakkosovellus {network}:lle."
                 },
                 "legal": {
                     "title": "Tietosuojakäytäntö ja käyttöehdot",
@@ -62,8 +62,8 @@
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Set up {protocol, select, IOTA {an} Shimmer {a} other {an}} {protocol} profile",
-                    "body": "Valitse sopiva tapa määrittää {protocol}-profiilisi."
+                    "title": "Set up {network, select, IOTA {an} Shimmer {a} other {an}} {network} profile",
+                    "body": "Valitse sopiva tapa määrittää {network}-profiilisi."
                 },
                 "setupNew": {
                     "title": "Luo profiili",
@@ -78,7 +78,7 @@
                     }
                 },
                 "setupRecovered": {
-                    "title": "Palauta {protocol}-profiili",
+                    "title": "Palauta {network}-profiili",
                     "body": "Jos sinulla on olemassaoleva palautuslauseke tai Stronghold-varmuuskopiotiedosto, voit tuoda sen tässä.",
                     "importMnemonic": "Käytä palautuslauseketta",
                     "importMnemonicDescription": "Syötä 24 sanan palautuslausekkeesi",
@@ -92,7 +92,7 @@
                     "body": "Tuo IOTA-profiilisi ja lunasta Shimmer-stakingpalkkiosi."
                 },
                 "enterName": {
-                    "title": "Luo {protocol}-profiilisi",
+                    "title": "Luo {network}-profiilisi",
                     "profileName": "Profiilin nimi",
                     "body1": "Voit luoda useita käyttäjäprofiileja lompakkojesi järjestämiseksi ja yksityisyyden parantamiseksi.",
                     "body2": {
@@ -198,10 +198,10 @@
             "videoGuide": "Ledger-migraation opasvideo"
         },
         "ledgerInstallationGuide": {
-            "title": "Oletko asentanut {protocol}-sovelluksen Ledger-laitteeseesi?",
-            "body1": "Ennen kuin jatkat, sinun on käytettävä Ledger Liveä löytääksesi ja asentaaksesi {protocol} -sovelluksen.",
+            "title": "Oletko asentanut {network}-sovelluksen Ledger-laitteeseesi?",
+            "body1": "Ennen kuin jatkat, sinun on käytettävä Ledger Liveä löytääksesi ja asentaaksesi {network} -sovelluksen.",
             "body2": "Varmista, että Ledger-laitteesi laiteohjelmisto on ajan tasalla. Kaikki valmiiksi asennetut sovellukset tulee päivittää uusimpiin versioihin.",
-            "action": "Kyllä, olen asentanut {protocol}-sovelluksen"
+            "action": "Kyllä, olen asentanut {network}-sovelluksen"
         },
         "importFromLedger": {
             "title": "Palauta tai siirrä Ledger-laitteesi",
@@ -910,7 +910,7 @@
             "title": "Yhdistä Ledger-laitteesi",
             "notConnected": "Yhdistä Ledger-laitteesi jatkaaksesi.",
             "locked": "Avaa Ledger-laitteesi jatkaaksesi.",
-            "appNotOpen": "Avaa {protocol}-sovellus Ledger-laitteellasi jatkaaksesi.",
+            "appNotOpen": "Avaa Shimmer-sovellus Ledger-laitteellasi jatkaaksesi.",
             "correctAppOpen": "Ledger yhdistetty onnistuneesti, ole hyvä ja jatka."
         },
         "ledgerConfirmation": {
@@ -1193,8 +1193,8 @@
             "title": "Refresh NFT media",
             "description": "Do you want to delete and re-download all NFT media for this account?"
         },
-        "createWallet": "Luo uusi {protocol}-profiili",
-        "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
+        "createWallet": "Luo uusi {network}-profiili",
+        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
         "claimShimmer": "Lunasta Shimmer-palkkiosi stakingista",
         "claimShimmerDescription": "Tuo IOTA-profiili ja lunasta staking-palkkiot",
         "createAlias": "Create alias",
@@ -1306,7 +1306,7 @@
         "searchForRewards": "Etsi palkkioita",
         "claimRewards": "Lunasta palkkiot",
         "rerunClaimProcess": "Suorita lunastusprosessi uudelleen",
-        "finishProfileSetupWithProtocol": "Viimeistele {protocol}-profiilin määritys",
+        "finishProfileSetupWithProtocol": "Viimeistele {network}-profiilin määritys",
         "addPublicNote": "Lisää julkinen merkintä",
         "backup": "Varmuuskopioi",
         "mint": "Lyö",

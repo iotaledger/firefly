@@ -1,5 +1,6 @@
 import { get } from 'svelte/store'
 
+import { localize } from '@core/i18n'
 import { IAccount } from '@core/account'
 import { AccountRecoveryProfileConfiguration, UnableToFindProfileTypeError } from '@core/profile'
 import { zip } from '@core/utils'
@@ -152,6 +153,8 @@ function showRewardsFoundNotification(updatedTotalUnclaimedShimmerRewards: numbe
     showAppNotification({
         type: 'success',
         alert: true,
-        message: `Successfully found ${foundRewardsAmountFormatted}`,
+        message: localize('views.onboarding.shimmerClaiming.success.successfullyFound', {
+            values: { amount: foundRewardsAmountFormatted },
+        }),
     })
 }
