@@ -1,19 +1,23 @@
 <script lang="ts">
     import { Icon } from '@ui'
     import { NetworkConfigRoute, networkConfigRouter } from '@desktop/routers'
-    import { activeProfile } from '@core/profile'
-    import { NetworkHealth, ConnectedChain, buildChainFromNetwork } from '@core/network'
+    import { activeProfile } from '@core/profile/stores'
+    import { NetworkHealth, IConnectedChain, buildChainFromNetwork, networkStatus } from '@core/network'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { NetworkCard } from '@components'
     import { localize } from '@core/i18n'
+    import { selectedAccount } from '@core/account/stores'
 
-    let connectedChains: ConnectedChain[] = []
+    let connectedChains: IConnectedChain[] = []
 
     $: setConnectedChains()
     function setConnectedChains(): void {
         const chains = []
-
-        const mainChain = buildChainFromNetwork()
+        const mainChain = buildChainFromNetwork(
+            $activeProfile.network.name,
+            $selectedAccount.depositAddress,
+            $networkStatus.health
+        )
         chains.push(mainChain)
 
         for (const chain of $activeProfile.network.chains) {

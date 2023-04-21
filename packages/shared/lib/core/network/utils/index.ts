@@ -1,5 +1,5 @@
-export * from './buildNetworkFromNodeInfoResponse'
 export * from './buildChainFromNetwork'
+export * from './buildNetworkFromNodeInfoResponse'
 export * from './checkNetworkId'
 export * from './checkNodeUrlValidity'
 export * from './cleanAuth'

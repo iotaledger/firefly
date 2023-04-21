@@ -1,6 +1,6 @@
 import { NetworkHealth } from '../enums'
 
-export interface ConnectedChain {
+export interface IConnectedChain {
     name: string
     address: string
     status: NetworkHealth

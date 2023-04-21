@@ -1,13 +1,10 @@
-import { selectedAccount } from '@core/account/stores'
-import { activeProfile } from '@core/profile'
-import { get } from 'svelte/store'
-import { networkStatus } from '../stores'
-import { ConnectedChain } from '../interfaces'
+import { IConnectedChain } from '../interfaces'
+import { NetworkHealth } from '../enums'
 
-export function buildChainFromNetwork(): ConnectedChain {
+export function buildChainFromNetwork(name: string, address: string, status: NetworkHealth): IConnectedChain {
     return {
-        name: get(activeProfile).network.name,
-        address: get(selectedAccount).depositAddress,
-        status: get(networkStatus).health,
+        name,
+        address,
+        status,
     }
 }
