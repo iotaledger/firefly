@@ -1,4 +1,15 @@
 <script lang="ts">
+    import { onMount } from 'svelte'
+
+    import { OnboardingLayout } from '@components'
+    import { OnboardingButton } from '@ui'
+
+    import { localize } from '@core/i18n'
+    import { formatProtocolName, getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
+    import { ProfileType } from '@core/profile'
+    import { destroyProfileManager } from '@core/profile-manager'
+
+    import { showAppNotification } from '@auxiliary/notification'
     import {
         initialiseOnboardingProfile,
         initialiseProfileManagerFromOnboardingProfile,
@@ -7,25 +18,44 @@
         shouldBeDeveloperProfile,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
-    import { localize } from '@core/i18n'
-    import { formatProtocolName, getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
-    import { ProfileType } from '@core/profile'
-    import { destroyProfileManager } from '@core/profile-manager'
+
     import { profileSetupRouter } from '@/routers'
-    import { OnboardingButton } from '@ui'
-    import { onMount } from 'svelte'
-    import { OnboardingLayout } from '@components'
     import features from '@features/features'
 
     const title = localize('views.onboarding.profileSetup.setup.title', {
         values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },
     })
 
+    const isBusy: Record<ProfileSetupType, boolean> = {
+        [ProfileSetupType.Claimed]: false,
+        [ProfileSetupType.New]: false,
+        [ProfileSetupType.Recovered]: false,
+    }
+
+    const isDisabled: Record<ProfileSetupType, boolean> = {
+        [ProfileSetupType.Claimed]: false,
+        [ProfileSetupType.New]: false,
+        [ProfileSetupType.Recovered]: false,
+    }
+
     async function onProfileSetupSelectionClick(setupType: ProfileSetupType): Promise<void> {
-        // We dont support Ledger profiles on mobile yet, so we hardcode the type to Software
-        updateOnboardingProfile({ setupType, type: ProfileType.Software })
-        await initialiseProfileManagerFromOnboardingProfile()
-        $profileSetupRouter.next()
+        isBusy[setupType] = true
+        Object.keys(isDisabled).forEach((type) => (isDisabled[type] = setupType !== type))
+
+        try {
+            // We dont support Ledger profiles on mobile yet, so we hardcode the type to Software
+            updateOnboardingProfile({ setupType, type: ProfileType.Software })
+            await initialiseProfileManagerFromOnboardingProfile()
+            $profileSetupRouter.next()
+        } catch (error) {
+            showAppNotification({
+                type: 'error',
+                message: localize(error),
+            })
+        } finally {
+            isBusy[setupType] = false
+            Object.keys(isDisabled).forEach((type) => (isDisabled[type] = false))
+        }
     }
 
     function onBackClick(): void {
@@ -60,15 +90,16 @@
 
 <OnboardingLayout {onBackClick} {title} animation="setup-desktop">
     <div slot="footer" class="flex flex-col space-y-4">
+        {@const onboardingFeatures =
+            features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]}
         <OnboardingButton
             primaryText={localize('actions.claimShimmer')}
             icon="tokens"
             iconHeight="24"
             iconWidth="24"
-            hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.claimRewards?.hidden}
-            disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.claimRewards?.enabled}
+            busy={isBusy[ProfileSetupType.Claimed]}
+            hidden={onboardingFeatures?.claimRewards?.hidden}
+            disabled={isDisabled[ProfileSetupType.Claimed] || !onboardingFeatures?.claimRewards?.enabled}
             onClick={() => onProfileSetupSelectionClick(ProfileSetupType.Claimed)}
         />
         <OnboardingButton
@@ -78,19 +109,17 @@
             icon="plus"
             iconHeight="11"
             iconWidth="11"
-            hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.newProfile?.hidden}
-            disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.newProfile?.enabled}
+            busy={isBusy[ProfileSetupType.New]}
+            hidden={onboardingFeatures?.newProfile?.hidden}
+            disabled={isDisabled[ProfileSetupType.New] || !onboardingFeatures?.newProfile?.enabled}
             onClick={() => onProfileSetupSelectionClick(ProfileSetupType.New)}
         />
         <OnboardingButton
             primaryText={localize(`actions.restoreWallet.${$onboardingProfile?.networkProtocol}`)}
             icon="transfer"
-            hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.restoreProfile?.hidden}
-            disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.restoreProfile?.enabled}
+            busy={isBusy[ProfileSetupType.Recovered]}
+            hidden={onboardingFeatures?.restoreProfile?.hidden}
+            disabled={isDisabled[ProfileSetupType.Recovered] || !onboardingFeatures?.restoreProfile?.enabled}
             onClick={() => onProfileSetupSelectionClick(ProfileSetupType.Recovered)}
         />
     </div>

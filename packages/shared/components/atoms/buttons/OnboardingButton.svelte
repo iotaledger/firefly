@@ -23,7 +23,7 @@
 
 <button
     type="button"
-    {disabled}
+    disabled={disabled || busy}
     class="rounded-xl px-4 py-3.5 cursor-pointer text-center {classes}"
     on:click|stopPropagation={onClick}
     class:hidden
@@ -99,11 +99,11 @@
             @apply border-blue-400;
         }
         &:disabled {
+            @apply opacity-60;
+            @apply pointer-events-none;
             :global(svg) {
                 @apply text-gray-500;
             }
-            @apply pointer-events-none;
-            @apply bg-gray-50;
         }
 
         &.darkmode {
