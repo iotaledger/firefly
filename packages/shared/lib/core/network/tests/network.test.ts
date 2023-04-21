@@ -57,7 +57,7 @@ describe('File: network.ts', () => {
         },
     }
 
-    const EXPECTED_NETWORK_METADATA_MAP: Readonly<NetworkMetadataMap> = {
+    const EXPECTED_NETWORK_METADATA: Readonly<NetworkMetadataMap> = {
         [NetworkId.Iota]: {
             id: NetworkId.Iota,
             name: 'IOTA',
@@ -129,12 +129,12 @@ describe('File: network.ts', () => {
 
     const EXPECTED_CLIENT_OPTIONS: Readonly<{ [key in NetworkId]?: IClientOptions }> = {
         [NetworkId.Iota]: {
-            network: EXPECTED_NETWORK_METADATA_MAP[NetworkId.Iota]?.id,
+            network: EXPECTED_NETWORK_METADATA[NetworkId.Iota]?.id,
             nodes: _buildNodes(NetworkId.Iota) as INode[],
             localPow: true,
         },
         [NetworkId.Shimmer]: {
-            network: EXPECTED_NETWORK_METADATA_MAP?.[NetworkId.Shimmer]?.id,
+            network: EXPECTED_NETWORK_METADATA?.[NetworkId.Shimmer]?.id,
             nodes: _buildNodes(NetworkId.Shimmer) as INode[],
             localPow: true,
         },
