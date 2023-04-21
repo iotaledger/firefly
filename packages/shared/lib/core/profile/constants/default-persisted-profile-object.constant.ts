@@ -1,5 +1,4 @@
 import { DEFAULT_MARKET_CURRENCY } from '@core/market'
-import { NetworkProtocol, NetworkType } from '@core/network/enums'
 import { ProfileType } from '../enums'
 import { IPersistedProfile } from '../interfaces'
 import { DEFAULT_STRONGHOLD_PASSWORD_TIMEOUT_IN_MINUTES } from './default_stronghold_password_timeout_in_minutes.constant'
@@ -10,8 +9,6 @@ export const DEFAULT_PERSISTED_PROFILE_OBJECT: IPersistedProfile = {
     name: '',
     type: ProfileType.Software,
     network: undefined,
-    networkProtocol: NetworkProtocol?.Shimmer,
-    networkType: NetworkType?.Mainnet,
     lastStrongholdBackupTime: undefined,
     settings: {
         marketCurrency: DEFAULT_MARKET_CURRENCY,

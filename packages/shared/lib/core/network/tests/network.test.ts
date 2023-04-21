@@ -1,10 +1,11 @@
-import { ITokenMetadata } from '@core/wallet/interfaces'
-
 import { IAuth, IClientOptions, INetwork, INode } from '../interfaces'
 
-import { NetworkId, NetworkProtocol, TokenSupply } from '../enums'
+import { NetworkId, TokenSupply } from '../enums'
 
 import { checkNodeUrlValidity, cleanAuth, getDefaultClientOptions, getOfficialNodes, isOfficialNetwork } from '../utils'
+
+import { IBaseToken } from '@core/wallet/interfaces'
+import { TokenStandard } from '@core/wallet/enums'
 
 describe('File: network.ts', () => {
     function _buildNode(url: string | undefined): INode | undefined {
@@ -22,8 +23,9 @@ describe('File: network.ts', () => {
         return EXPECTED_NODE_URLS?.[networkId]?.map((url) => _buildNode(url)) ?? []
     }
 
-    const EXPECTED_BASE_TOKEN: Readonly<{ [key in NetworkProtocol]: ITokenMetadata }> = {
-        iota: {
+    const EXPECTED_BASE_TOKEN: Readonly<{ [key in NetworkId]?: IBaseToken }> = {
+        [NetworkId.Iota]: {
+            standard: TokenStandard.BaseToken,
             name: 'IOTA',
             tickerSymbol: 'MIOTA',
             unit: 'i',
@@ -32,7 +34,19 @@ describe('File: network.ts', () => {
             useMetricPrefix: true,
             primaryColor: '#6E82A4',
         },
-        shimmer: {
+        [NetworkId.Shimmer]: {
+            standard: TokenStandard.BaseToken,
+            name: 'Shimmer',
+            tickerSymbol: 'SMR',
+            unit: 'SMR',
+            decimals: 6,
+            subunit: 'glow',
+            useMetricPrefix: false,
+            primaryColor: '#25DFCA',
+            url: 'https://shimmer.network/',
+        },
+        [NetworkId.Testnet]: {
+            standard: TokenStandard.BaseToken,
             name: 'Shimmer',
             tickerSymbol: 'SMR',
             unit: 'SMR',
@@ -61,7 +75,8 @@ describe('File: network.ts', () => {
                 },
                 tokenSupply: TokenSupply.Iota,
             },
-            baseToken: EXPECTED_BASE_TOKEN[NetworkProtocol.IOTA],
+            baseToken: EXPECTED_BASE_TOKEN[NetworkId.Iota],
+            chains: [],
         },
         [NetworkId.Shimmer]: {
             id: NetworkId.Shimmer,
@@ -79,7 +94,8 @@ describe('File: network.ts', () => {
                 },
                 tokenSupply: TokenSupply.Shimmer,
             },
-            baseToken: EXPECTED_BASE_TOKEN[NetworkProtocol.Shimmer],
+            baseToken: EXPECTED_BASE_TOKEN[NetworkId.Shimmer],
+            chains: [],
         },
         [NetworkId.Testnet]: {
             id: NetworkId.Testnet,
@@ -97,7 +113,8 @@ describe('File: network.ts', () => {
                 },
                 tokenSupply: TokenSupply.Testnet,
             },
-            baseToken: EXPECTED_BASE_TOKEN[NetworkProtocol.Shimmer],
+            baseToken: EXPECTED_BASE_TOKEN[NetworkId.Testnet],
+            chains: [],
         },
     }
 
