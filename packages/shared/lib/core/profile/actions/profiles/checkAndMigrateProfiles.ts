@@ -156,7 +156,9 @@ function persistedProfileMigrationToV9(existingProfile: IPersistedProfile): void
     saveProfile(existingProfile)
 }
 
-function persistedProfileMigrationToV10(existingProfile: IPersistedProfile): void {
+function persistedProfileMigrationToV10(
+    existingProfile: IPersistedProfile & { networkProtocol: string; networkType: string }
+): void {
     const network = NETWORK?.[existingProfile?.networkProtocol]?.[existingProfile?.networkType]
     existingProfile.network = network
 
@@ -181,7 +183,9 @@ function getNetworkIdFromOldNetworkType(networkType: 'mainnet' | 'devnet' | 'pri
     }
 }
 
-function persistedProfileMigrationToV11(existingProfile: IPersistedProfile): void {
+function persistedProfileMigrationToV11(
+    existingProfile: IPersistedProfile & { networkType: 'mainnet' | 'devnet' | 'private-net' }
+): void {
     if (!existingProfile?.network) {
         if (existingProfile?.networkType) {
             const networkId = getNetworkIdFromOldNetworkType(existingProfile?.networkType)
