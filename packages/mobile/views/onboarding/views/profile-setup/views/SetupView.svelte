@@ -22,19 +22,21 @@
     import { profileSetupRouter } from '@/routers'
     import features from '@features/features'
 
-    const SETUP_TYPES = Object.values(ProfileSetupType)
     const title = localize('views.onboarding.profileSetup.setup.title', {
         values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },
     })
 
-    const isBusy = SETUP_TYPES.reduce((obj, type) => ({ ...obj, [type]: false }), {}) as Record<
-        ProfileSetupType,
-        boolean
-    >
-    const isDisabled = SETUP_TYPES.reduce((obj, type) => ({ ...obj, [type]: false }), {}) as Record<
-        ProfileSetupType,
-        boolean
-    >
+    const isBusy: Record<ProfileSetupType, boolean> = {
+        [ProfileSetupType.Claimed]: false,
+        [ProfileSetupType.New]: false,
+        [ProfileSetupType.Recovered]: false,
+    }
+
+    const isDisabled: Record<ProfileSetupType, boolean> = {
+        [ProfileSetupType.Claimed]: false,
+        [ProfileSetupType.New]: false,
+        [ProfileSetupType.Recovered]: false,
+    }
 
     async function onProfileSetupSelectionClick(setupType: ProfileSetupType): Promise<void> {
         isBusy[setupType] = true
