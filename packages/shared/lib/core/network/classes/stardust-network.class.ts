@@ -31,9 +31,9 @@ export class StardustNetwork implements INetwork {
         console.log('ADDING CHAIN: ', payload)
 
         try {
-            const jsonRpcEndpoint = 'https://json-rpc.evm.testnet.shimmer.network'
             const aliasAddress = 'rms1prwgvvw472spqusqeufvlmp8xdpyxtrnmvt26jnuk6sxdcq2hk8scku26h7'
             const iscpEndpoint = `https://json-rpc.evm.testnet.shimmer.network/v1/chains/${aliasAddress}/evm`
+            const evmEndpoint = 'https://json-rpc.evm.testnet.shimmer.network'
 
             const web3 = new Web3(iscpEndpoint)
 
