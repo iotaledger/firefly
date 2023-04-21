@@ -152,21 +152,25 @@ function processMarketData(marketData) {
             }
         })
 
-        // Store currencies
-        currencies.set(marketData.currencies)
+        if (marketData && marketData.currencies && marketData.rates) {
+            // Store currencies
+            currencies.set(marketData.currencies)
 
-        // Store price data
-        priceData.set(_priceData)
+            // Store price data
+            priceData.set(_priceData)
 
-        // Store exchange rates in store
-        exchangeRates.set(marketData.rates)
+            // Store exchange rates in store
+            exchangeRates.set(marketData.rates)
 
-        // Store market statistics
-        mcap.set(marketData.market.usd_market_cap)
-        volume.set(marketData.market.usd_24h_vol)
-        change24h.set(marketData.market.usd_24h_change)
+            // Store market statistics
+            mcap.set(marketData.market.usd_market_cap)
+            volume.set(marketData.market.usd_24h_vol)
+            change24h.set(marketData.market.usd_24h_change)
 
-        void addProfileCurrencyPriceData()
+            void addProfileCurrencyPriceData()
+        } else {
+            throw new Error('Unable to retrieve the market data.')
+        }
     } else {
         throw new Error(payload.error)
     }
