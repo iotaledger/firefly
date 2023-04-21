@@ -27,9 +27,7 @@
     })
 
     async function onMountHelper(): Promise<void> {
-        /* eslint-disable no-console */
         console.log('NETWORK: ', $network)
-        /* eslint-disable no-console */
         console.log('NETWORK STATUS: ', $network.getStatus())
         await $network.addChain(<ChainMetadata>{})
     }
