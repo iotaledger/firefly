@@ -1,5 +1,5 @@
 import { IAccountMetadata } from '@core/account'
-import { IClientOptions, INetwork, NetworkProtocol, NetworkType } from '@core/network'
+import { IClientOptions, INetwork } from '@core/network'
 import { ProfileType } from '../enums'
 import { IProfileSettings } from './profile-settings.interface'
 
@@ -17,7 +17,4 @@ export interface IPersistedProfile {
     clientOptions: IClientOptions
     forceAssetRefresh: boolean
     strongholdVersion: number
-    // not used anymore, but kept for migration purposes
-    networkProtocol?: NetworkProtocol
-    networkType?: NetworkType
 }
