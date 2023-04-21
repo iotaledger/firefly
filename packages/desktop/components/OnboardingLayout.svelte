@@ -37,7 +37,7 @@
                     <slot name="leftpane__content" />
                 </leftpane-content-container>
             </div>
-            <leftpane-action-container data-label="leftpane-action" class="block mt-6">
+            <leftpane-action-container data-label="leftpane-action" class="block">
                 <slot name="leftpane__action" />
             </leftpane-action-container>
         </div>

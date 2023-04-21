@@ -3,6 +3,7 @@ import { derived, get, Readable, writable } from 'svelte/store'
 import { isLedgerProfile } from '@core/profile'
 
 import { IOnboardingProfile, IShimmerClaimingAccount } from '../interfaces'
+import { IBaseToken } from '@core/wallet/interfaces'
 
 export const onboardingProfile = writable<Partial<IOnboardingProfile>>(null)
 
@@ -28,4 +29,8 @@ export function updateShimmerClaimingAccount(shimmerClaimingAccount: IShimmerCla
                   : _shimmerClaimingAccount
           )
     updateOnboardingProfile({ shimmerClaimingAccounts })
+}
+
+export function getOnboardingBaseToken(): IBaseToken {
+    return get(onboardingProfile)?.network?.baseToken
 }

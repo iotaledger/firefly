@@ -178,7 +178,7 @@
         <Text type="p" secondary classes="mb-5">
             {localize('views.onboarding.shimmerClaiming.claimRewards.body')}
         </Text>
-        <ShimmerClaimingAccountList {shimmerClaimingAccounts} />
+        <ShimmerClaimingAccountList {shimmerClaimingAccounts} baseToken={$onboardingProfile?.network?.baseToken} />
     </div>
     <div slot="leftpane__action">
         <Button

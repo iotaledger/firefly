@@ -5,7 +5,7 @@
     import features from '@features/features'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { formatProtocolName } from '@core/network'
+    import { getNetworkNameFromNetworkId } from '@core/network'
     import { profileSetupRouter } from '@core/router'
     import {
         getProfileTypeFromProfileRecoveryType,
@@ -45,7 +45,7 @@
     <div slot="title">
         <Text type="h2"
             >{localize('views.onboarding.profileSetup.setupRecovered.title', {
-                values: { protocol: formatProtocolName(networkId) },
+                values: { network: getNetworkNameFromNetworkId(networkId) },
             })}</Text
         >
     </div>
