@@ -156,7 +156,7 @@ function persistedProfileMigrationToV9(existingProfile: IPersistedProfile): void
 }
 
 function persistedProfileMigrationToV10(existingProfile: IPersistedProfile): void {
-    const network = NETWORK_METADATA_MAP?.[existingProfile?.networkProtocol]?.[existingProfile?.networkType]
+    const network = NETWORK_METADATA_MAP[existingProfile?.networkProtocol]?.[existingProfile?.networkType]
     existingProfile.network = network
 
     existingProfile.settings = {
@@ -169,7 +169,7 @@ function persistedProfileMigrationToV10(existingProfile: IPersistedProfile): voi
 }
 
 function persistedProfileMigrationToV11(existingProfile: IPersistedProfile): void {
-    const network = NETWORK_METADATA_MAP?.[existingProfile?.networkProtocol]?.[existingProfile?.networkType]
+    const network = NETWORK_METADATA_MAP[existingProfile?.networkProtocol]?.[existingProfile?.networkType]
     existingProfile.network = structuredClone(network)
 
     existingProfile.settings = {
