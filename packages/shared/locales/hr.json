@@ -3,8 +3,8 @@
         "onboarding": {
             "appSetup": {
                 "welcome": {
-                    "title": "Šaljite, primajte i upravljajte svojim {protocol} tokenima",
-                    "body": "Firefly je službeni {protocol} novčanik."
+                    "title": "Šaljite, primajte i upravljajte svojim {network} tokenima",
+                    "body": "Firefly je službeni {network} novčanik."
                 },
                 "legal": {
                     "title": "Politika privatnosti i Uvjeti korištenja",
@@ -62,8 +62,8 @@
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Set up {protocol, select, IOTA {an} Shimmer {a} other {an}} {protocol} profile",
-                    "body": "Odaberite odgovarajuću metodu koju ćete koristiti za postavljanje {protocol} profila."
+                    "title": "Set up {network, select, IOTA {an} Shimmer {a} other {an}} {network} profile",
+                    "body": "Odaberite odgovarajuću metodu koju ćete koristiti za postavljanje {network} profila."
                 },
                 "setupNew": {
                     "title": "Stvori novi profil",
@@ -78,7 +78,7 @@
                     }
                 },
                 "setupRecovered": {
-                    "title": "Oporavi {protocol} profil",
+                    "title": "Oporavi {network} profil",
                     "body": "Ako imate mnemoničku frazu za oporavak ili Stronghold pričuvnu kopiju, možete ih uvesti ovdje.",
                     "importMnemonic": "Koristi frazu za oporavak",
                     "importMnemonicDescription": "Unesi svoju mnemoničku frazu od 24 riječi",
@@ -92,7 +92,7 @@
                     "body": "Uvezi svoj IOTA profil i preuzmi svoje Shimmer staking nagrade."
                 },
                 "enterName": {
-                    "title": "Stvori svoj {protocol} profil",
+                    "title": "Stvori svoj {network} profil",
                     "profileName": "Ime profila",
                     "body1": "Možete stvoriti više korisničkih profila kako biste organizirali svoje novčanike i poboljšali privatnost.",
                     "body2": {
@@ -198,10 +198,10 @@
             "videoGuide": "Video upute za Ledger migraciju"
         },
         "ledgerInstallationGuide": {
-            "title": "Jeste li instalirali {protocol} aplikaciju na svoj Ledger uređaj?",
-            "body1": "Prije nego što nastavite, morate koristiti Ledger Live za pronalaženje i instaliranje {protocol} aplikacije.",
+            "title": "Jeste li instalirali {network} aplikaciju na svoj Ledger uređaj?",
+            "body1": "Prije nego što nastavite, morate koristiti Ledger Live za pronalaženje i instaliranje {network} aplikacije.",
             "body2": "Uvjeri se da je tvoj Ledger na najnovijoj verziji firmwarea. Sve predinstalirane aplikacije trebaju biti na najnovijim verzijama.",
-            "action": "Da, instalirao sam {protocol} aplikaciju"
+            "action": "Da, instalirao sam {network} aplikaciju"
         },
         "importFromLedger": {
             "title": "Oporavi ili migriraj svoj Ledger",
@@ -910,7 +910,7 @@
             "title": "Spoji svoj Ledger",
             "notConnected": "Spoji svoj Ledger uređaj za nastavak.",
             "locked": "Otključaj svoj Ledger uređaj za nastavak.",
-            "appNotOpen": "Otvori {protocol} aplikaciju na svom Ledger uređaju za nastavak.",
+            "appNotOpen": "Otvori Shimmer aplikaciju na svom Ledger uređaju za nastavak.",
             "correctAppOpen": "Ledger uspješno spojen, molimo nastavite."
         },
         "ledgerConfirmation": {
@@ -1193,8 +1193,8 @@
             "title": "Refresh NFT media",
             "description": "Do you want to delete and re-download all NFT media for this account?"
         },
-        "createWallet": "Stvori novi {protocol} profil",
-        "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
+        "createWallet": "Stvori novi {network} profil",
+        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
         "claimShimmer": "Preuzmi Shimmer staking nagrade",
         "claimShimmerDescription": "Uvezi IOTA profil i preuzmi Shimmer staking nagrade",
         "createAlias": "Create alias",
@@ -1306,7 +1306,7 @@
         "searchForRewards": "Potraži nagrade",
         "claimRewards": "Preuzmi nagrade",
         "rerunClaimProcess": "Ponovno pokreni postupak preuzimanja",
-        "finishProfileSetupWithProtocol": "Dovrši postavljanje {protocol} profila",
+        "finishProfileSetupWithProtocol": "Dovrši postavljanje {network} profila",
         "addPublicNote": "Dodaj javnu bilješku",
         "backup": "Stvori sigurnosnu kopiju",
         "mint": "Mintaj",
