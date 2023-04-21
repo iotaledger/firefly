@@ -25,7 +25,7 @@ export async function initialiseOnboardingFlow(options: IOnboardingInitialisatio
     await initialiseOnboardingProfile(isDeveloperProfile, true)
 
     if (networkId) {
-        const network = NETWORK_METADATA?.[networkId]
+        const network = NETWORK_METADATA[networkId]
         updateOnboardingProfile({ network })
     }
 }

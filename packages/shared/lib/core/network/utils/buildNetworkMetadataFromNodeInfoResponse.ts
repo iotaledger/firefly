@@ -13,7 +13,7 @@ export function buildNetworkMetadataFromNodeInfoResponse(
     const _coinType = coinType ?? COIN_TYPE[networkId] ?? 1
     return {
         id: networkId,
-        name: networkId === NetworkId.Custom ? networkName : NETWORK_METADATA?.[networkId]?.name,
+        name: networkId === NetworkId.Custom ? networkName : NETWORK_METADATA[networkId]?.name,
         coinType: _coinType,
         protocol: nodeInfoResponse?.nodeInfo?.protocol,
         baseToken: { standard: TokenStandard.BaseToken, ...nodeInfoResponse?.nodeInfo?.baseToken },

@@ -134,7 +134,7 @@ describe('File: network.ts', () => {
             localPow: true,
         },
         [NetworkId.Shimmer]: {
-            network: EXPECTED_NETWORK_METADATA?.[NetworkId.Shimmer]?.id,
+            network: EXPECTED_NETWORK_METADATA[NetworkId.Shimmer]?.id,
             nodes: _buildNodes(NetworkId.Shimmer) as INode[],
             localPow: true,
         },
