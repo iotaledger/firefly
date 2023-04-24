@@ -12,7 +12,7 @@ export function convertToRawAmount(amount: string, tokenMetadata: TokenMetadata,
         const parsedAmount = parseCurrency(amount)
         return convertToRawAmountFromMetadata(parsedAmount, tokenMetadata, unit)
     } else {
-        return undefined
+        return -1
     }
 }
 
@@ -27,7 +27,7 @@ function convertToRawAmountFromMetadata(amount: number, tokenMetadata: TokenMeta
             } else if (selectedUnit === tokenMetadata.subunit) {
                 return Big(amount)
             } else {
-                return undefined
+                return -1
             }
         }
     } else if (tokenMetadata?.standard === TokenStandard.Irc30) {
