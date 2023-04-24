@@ -1,4 +1,4 @@
-export * from './buildNetworkMetadataFromNodeInfoResponse'
+export * from './buildPersistedNetworkFromNodeInfoResponse'
 export * from './checkNetworkId'
 export * from './checkNodeUrlValidity'
 export * from './cleanAuth'

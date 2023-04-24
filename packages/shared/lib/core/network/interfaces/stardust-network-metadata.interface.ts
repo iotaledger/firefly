@@ -1,6 +1,5 @@
 import { IBaseToken } from '@core/wallet'
 import { NetworkId } from '../enums'
-import { ChainMetadata } from '../types'
 import { IProtocol } from './protocol.interface'
 
 /**
@@ -13,6 +12,5 @@ export interface IStardustNetworkMetadata {
     name: string
     coinType: number
     protocol: IProtocol
-    chains: ChainMetadata[]
     baseToken: IBaseToken
 }

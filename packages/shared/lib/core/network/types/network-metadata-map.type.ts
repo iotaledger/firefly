@@ -1,6 +1,6 @@
 import { NetworkId } from '../enums'
-import { IStardustNetworkMetadata } from '../interfaces'
+import { NetworkMetadata } from '../types'
 
 export type NetworkMetadataMap = {
-    [key in NetworkId]?: IStardustNetworkMetadata
+    [key in NetworkId]?: NetworkMetadata
 }

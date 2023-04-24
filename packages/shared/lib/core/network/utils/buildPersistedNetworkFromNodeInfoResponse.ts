@@ -1,13 +1,13 @@
 import { TokenStandard } from '@core/wallet/enums'
 import { COIN_TYPE, NETWORK_METADATA_MAP } from '../constants'
 import { NetworkId } from '../enums'
-import { IStardustNetworkMetadata, INodeInfoResponse } from '../interfaces'
+import { INodeInfoResponse, IPersistedNetwork } from '../interfaces'
 import { getNetworkIdFromNetworkName } from './getNetworkIdFromNetworkName'
 
-export function buildNetworkMetadataFromNodeInfoResponse(
+export function buildPersistedNetworkFromNodeInfoResponse(
     nodeInfoResponse: INodeInfoResponse,
     coinType?: number
-): IStardustNetworkMetadata {
+): IPersistedNetwork {
     const networkName = nodeInfoResponse?.nodeInfo?.protocol?.networkName
     const networkId = getNetworkIdFromNetworkName(networkName)
     const _coinType = coinType ?? COIN_TYPE[networkId] ?? 1
