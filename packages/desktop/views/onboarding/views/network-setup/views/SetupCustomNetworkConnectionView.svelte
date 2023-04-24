@@ -11,7 +11,7 @@
     import {
         INode,
         NetworkId,
-        buildNetworkMetadataFromNodeInfoResponse,
+        buildPersistedNetworkFromNodeInfoResponse,
         getNetworkIdFromNetworkName,
     } from '@core/network'
     import { getNodeInfo } from '@core/profile-manager'
@@ -59,8 +59,8 @@
                 throw new Error('error.node.differentNetwork')
             }
             const customCoinType = networkId === NetworkId.Custom ? Number(coinType) : undefined
-            const networkMetadata = buildNetworkMetadataFromNodeInfoResponse(nodeInfoResponse, customCoinType)
-            updateOnboardingProfile({ network: networkMetadata })
+            const network = buildPersistedNetworkFromNodeInfoResponse(nodeInfoResponse, customCoinType)
+            updateOnboardingProfile({ network })
             await cleanupOnboardingProfileManager()
             $networkSetupRouter.next()
         } catch (err) {
