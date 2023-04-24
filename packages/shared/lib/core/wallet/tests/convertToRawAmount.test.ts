@@ -4,17 +4,9 @@ import { convertToRawAmount } from '../utils'
 import { TokenMetadata } from '../types'
 import { TokenStandard } from '../enums'
 import { MAX_SUPPORTED_DECIMALS } from '../constants'
-import { BASE_TOKEN, NetworkProtocol } from '@core/network'
+import { DEFAULT_BASE_TOKEN, NetworkId } from '@core/network'
 import { IotaUnit } from '@core/utils'
 
-const IOTA_METADATA: TokenMetadata = {
-    ...BASE_TOKEN[NetworkProtocol.IOTA],
-    standard: TokenStandard.BaseToken,
-}
-const SHIMMER_METADATA: TokenMetadata = {
-    ...BASE_TOKEN[NetworkProtocol.Shimmer],
-    standard: TokenStandard.BaseToken,
-}
 const WEB3_TOKEN_METADATA: TokenMetadata = {
     name: 'RAWR',
     tickerSymbol: 'RAWR',
@@ -59,32 +51,32 @@ describe('File: convertToRawAmount.ts', () => {
                 { amount: '1', unit: IotaUnit.T, expected: Big('1').mul(Big(10).pow(12)) },
                 { amount: '1', unit: IotaUnit.P, expected: Big('1').mul(Big(10).pow(15)) },
             ])('should return amount * $expected when unit is $unit', ({ amount, unit, expected }) => {
-                expect(convertToRawAmount(amount, IOTA_METADATA, unit)).toStrictEqual(expected)
+                expect(convertToRawAmount(amount, DEFAULT_BASE_TOKEN[NetworkId.Iota], unit)).toStrictEqual(expected)
             })
             it("should treat unit as 'i' and return Big(amount) if the unit provided isn't in the IotaUnit enum", () => {
-                expect(convertToRawAmount('1', IOTA_METADATA, 'test')).toStrictEqual(Big('1'))
+                expect(convertToRawAmount('1', DEFAULT_BASE_TOKEN[NetworkId.Iota], 'test')).toStrictEqual(Big('1'))
             })
             it("should treat unit as 'i' and return Big(amount) if a unit isn't provided", () => {
-                expect(convertToRawAmount('1', IOTA_METADATA)).toStrictEqual(Big('1'))
+                expect(convertToRawAmount('1', DEFAULT_BASE_TOKEN[NetworkId.Iota])).toStrictEqual(Big('1'))
             })
         })
         describe("given useMetricPrefix is false (currently Shimmer's case)", () => {
             it("should return Big(amount) * decimal property if selectedUnit is unit and baseToken's decimal is less than MAX_SUPPORTED_DECIMALS", () => {
-                let value = convertToRawAmount('1', SHIMMER_METADATA, 'SMR')
-                expect(value).toStrictEqual(Big('1').mul(Big(10).pow(SHIMMER_METADATA.decimals)))
+                let value = convertToRawAmount('1', DEFAULT_BASE_TOKEN[NetworkId.Shimmer], 'SMR')
+                expect(value).toStrictEqual(Big('1').mul(Big(10).pow(DEFAULT_BASE_TOKEN[NetworkId.Shimmer].decimals)))
             })
             it("should return XXX if selectedUnit is unit and baseToken's decimals property is greater than MAX_SUPPORTED_DECIMALS", () => {
                 let value = convertToRawAmount('1', WEB3_TOKEN_METADATA, 'RAWR')
                 expect(value).toStrictEqual(Big('1').mul(Big(10).pow(MAX_SUPPORTED_DECIMALS)))
             })
             it('should return same Big(amount) if selectedUnit is subunit', () => {
-                expect(convertToRawAmount('1', SHIMMER_METADATA, 'glow')).toStrictEqual(Big('1'))
+                expect(convertToRawAmount('1', DEFAULT_BASE_TOKEN[NetworkId.Shimmer], 'glow')).toStrictEqual(Big('1'))
             })
             it('should return undefined if a unit is not provided', () => {
-                expect(convertToRawAmount('1', SHIMMER_METADATA)).toStrictEqual(-1)
+                expect(convertToRawAmount('1', DEFAULT_BASE_TOKEN[NetworkId.Shimmer])).toStrictEqual(-1)
             })
             it('should return undefined if provided unit does not match the tokenMetadata unit or subunit', () => {
-                expect(convertToRawAmount('1', SHIMMER_METADATA, 'test')).toStrictEqual(-1)
+                expect(convertToRawAmount('1', DEFAULT_BASE_TOKEN[NetworkId.Shimmer], 'test')).toStrictEqual(-1)
             })
         })
     })
