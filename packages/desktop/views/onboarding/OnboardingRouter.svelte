@@ -1,8 +1,12 @@
 <script lang="ts">
+    import { Platform } from '@core/app'
+    import { OnboardingRoute, onboardingRoute } from '@core/router'
     import { Transition } from 'shared/components'
     import {
         // routers
         AppSetupRouter,
+        // views
+        CongratulationsView,
         LedgerSetupRouter,
         NetworkSetupRouter,
         ProfileBackupRouter,
@@ -11,11 +15,9 @@
         ShimmerClaimingRouter,
         StorageProtectionSetupRouter,
         StrongholdSetupRouter,
-
-        // views
-        CongratulationsView,
     } from './views'
-    import { OnboardingRoute, onboardingRoute } from '@core/router'
+
+    $: if ($onboardingRoute) Platform.trackEvent('onboarding-route', { route: $onboardingRoute })
 </script>
 
 {#if $onboardingRoute === OnboardingRoute.AppSetup}

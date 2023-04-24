@@ -54,6 +54,8 @@
     $: $downloadingNftId && interruptNftDownloadAfterTimeout(get(selectedAccountIndex))
     $: addSelectedAccountNftsToDownloadQueue($selectedAccountIndex)
 
+    $: if ($dashboardRoute) Platform.trackEvent('dashboard-route', { route: $dashboardRoute })
+
     function addSelectedAccountNftsToDownloadQueue(accountIndex: number) {
         resetNftDownloadQueue()
         void addNftsToDownloadQueue(accountIndex, $selectedAccountNfts)
