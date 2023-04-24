@@ -170,7 +170,7 @@
         <Text type={TextType.p} secondary fontSize="15" classes="mb-5">
             {localize('views.onboarding.shimmerClaiming.claimRewards.body')}
         </Text>
-        <ShimmerClaimingAccountList {shimmerClaimingAccounts} />
+        <ShimmerClaimingAccountList {shimmerClaimingAccounts} baseToken={$onboardingProfile?.network?.baseToken} />
     </div>
     <div slot="footer">
         <div class="flex flex-col space-y-4">

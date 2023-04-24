@@ -1611,7 +1611,9 @@
         "statistics": "Statistics",
         "username": "Username",
         "jwt": "JSON web token",
-        "internalTransaction": "Internal transaction"
+        "internalTransaction": "Internal transaction",
+        "coinType":"Coin type",
+        "custom": "Custom"
     },
     "filters":{
         "title": "Filters",
@@ -1923,7 +1925,8 @@
             "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node.",
             "unabledToConnect": "Unable to connect to the node",
             "differentNetwork": "The node is located on a different network",
-            "duplicateNodes": "Unable to add duplicate node"
+            "duplicateNodes": "Unable to add duplicate node",
+            "noCoinType": "No coin type specified"
         },
         "network": {
             "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
