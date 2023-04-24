@@ -26,17 +26,13 @@ const MAC_OS_NAME_MAP = new Map([
 // Diagnostics
 export function getDiagnostics() {
     return [
-        { label: 'popups.diagnostics.platform', value: getPlatform() },
+        { label: 'popups.diagnostics.platform', value: os.platform() === 'darwin' ? 'macOS' : os.platform() },
         { label: 'popups.diagnostics.platformVersion', value: getPlatformVersion() },
         { label: 'popups.diagnostics.platformArchitecture', value: os.arch() },
         { label: 'popups.diagnostics.cpuCount', value: os.cpus().length },
         { label: 'popups.diagnostics.totalMem', value: `${(os.totalmem() / 1048576).toFixed(1)} MB` },
         { label: 'popups.diagnostics.freeMem', value: `${(os.freemem() / 1048576).toFixed(1)} MB` },
     ]
-}
-
-export function getPlatform() {
-    return os.platform() === 'darwin' ? 'macOS' : os.platform()
 }
 
 export function getPlatformVersion() {
@@ -57,8 +53,4 @@ export function getPlatformVersion() {
     } else {
         return os.release()
     }
-}
-
-export function getPlatformArchitecture() {
-    return os.arch()
 }

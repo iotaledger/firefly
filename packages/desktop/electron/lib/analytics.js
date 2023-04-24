@@ -1,7 +1,8 @@
 import { Identify, identify, init, track } from '@amplitude/analytics-node'
 import { app, ipcMain } from 'electron'
 import { getMachineId } from './machineId'
-import { getPlatformArchitecture, getPlatform, getPlatformVersion } from './diagnostics'
+import { getPlatformVersion } from './diagnostics'
+import os from 'os'
 
 export function initialiseAnalytics() {
     // Initialise Amplitude with API key
@@ -21,14 +22,13 @@ function handleTrackEvent(event, properties) {
 function setInitialIdentify() {
     const identifyObj = new Identify()
 
-    // Platform Information
-    identifyObj.setOnce('platform', getPlatform())
-    identifyObj.setOnce('platformArchitecture', getPlatformArchitecture())
-    identifyObj.set('platformVersion', getPlatformVersion())
-
     // Application Information
-    identifyObj.set('applicationName', app.getName())
-    identifyObj.set('applicationVersion', app.getVersion())
+    identifyObj.set('app_version', app.getVersion())
+
+    // Platform Information
+    identifyObj.setOnce('platform', os.platform())
+    identifyObj.setOnce('platformArchitecture', os.arch())
+    identifyObj.set('platformVersion', getPlatformVersion())
 
     identify(identifyObj, { device_id: getMachineId() })
 }
