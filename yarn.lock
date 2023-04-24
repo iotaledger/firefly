@@ -323,10 +323,10 @@
   resolved "https://registry.npmjs.org/@capacitor-community/privacy-screen/-/privacy-screen-2.1.1.tgz"
   integrity sha512-KhUyMNOSHPXKpDF4HBU4T8mfLnbq6owMCZHt6Q2SAHn2zT7Zsl9Nkv6paFrgUD+WUD+iHERqsFJNbpmWzkdBtg==
 
-"@capacitor/android@3.4.1":
-  version "3.4.1"
-  resolved "https://registry.npmjs.org/@capacitor/android/-/android-3.4.1.tgz"
-  integrity sha512-4qQGEdZTW8W01PTOzSScmx9NBDcsi1GRl32tyYnpQrjdH2f7hI9OX2MLbNkirtOwKNCDeinQfEqqn0hVCkgHag==
+"@capacitor/android@4.7.3":
+  version "4.7.3"
+  resolved "https://registry.yarnpkg.com/@capacitor/android/-/android-4.7.3.tgz#ab7dea3746032c01a04b00b1fac1da5974eda45e"
+  integrity sha512-TmVg7vbAt6Iw0FWc51dLlW1gRMtSeIQ6qVLFJ1/sl2SYLXpgCHh8v/LfhqQ93NurgM+6SKFxOycGgg1FIBaLGw==
 
 "@capacitor/app@^1.1.1":
   version "1.1.1"
@@ -6485,9 +6485,9 @@ nice-try@^1.0.4:
   integrity sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
 
 node-abi@^3.0.0, node-abi@^3.3.0, node-abi@^3.8.0:
-  version "3.35.0"
-  resolved "https://registry.yarnpkg.com/node-abi/-/node-abi-3.35.0.tgz#c7f171af995cc5286fa95612c4ca97b3910eaa79"
-  integrity sha512-jAlSOFR1Bls963NmFwxeQkNTzqjUF0NThm8Le7eRIRGzFUVJuMOFZDLv5Y30W/Oaw+KEebEJLAigwO9gQHoEmw==
+  version "3.40.0"
+  resolved "https://registry.yarnpkg.com/node-abi/-/node-abi-3.40.0.tgz#51d8ed44534f70ff1357dfbc3a89717b1ceac1b4"
+  integrity sha512-zNy02qivjjRosswoYmPi8hIKJRr8MpQyeKT6qlcq/OnOgA3Rhoae+IYOqsM9V5+JnHWmxKnWOT2GxvtqdtOCXA==
   dependencies:
     semver "^7.3.5"
 
