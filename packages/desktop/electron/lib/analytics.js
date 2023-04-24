@@ -5,7 +5,7 @@ import { getPlatformArchitecture, getPlatform, getPlatformVersion } from './diag
 
 export function initialiseAnalytics() {
     // Initialise Amplitude with API key
-    init('API_KEY')
+    init('process.env.AMPLITUDE_API_KEY')
 
     // Set initial identify
     setInitialIdentify()
