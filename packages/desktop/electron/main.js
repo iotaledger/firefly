@@ -2,17 +2,17 @@ import features from '@features/features'
 import { initAutoUpdate } from './lib/appUpdater'
 import { initNftDownloadHandlers } from './lib/nftDownloadHandlers'
 import { shouldReportError } from './lib/errorHandling'
+import { initialiseAnalytics } from './lib/analytics'
+import { getMachineId } from './lib/machineId'
 const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = require('electron')
 const path = require('path')
 const os = require('os')
 const fs = require('fs')
 const { execSync } = require('child_process')
-const { machineIdSync } = require('node-machine-id')
 const Keychain = require('./lib/keychain')
 const { initMenu, contextMenu } = require('./lib/menu')
-const { init, track } = require('@amplitude/analytics-node')
 
-init('API_KEY')
+initialiseAnalytics()
 
 const canSendCrashReports = () => {
     let sendCrashReports = loadJsonConfig('settings.json')?.sendCrashReports
@@ -57,21 +57,6 @@ if (
  * Expose Garbage Collector flag for manual trigger after seed usage
  */
 app.commandLine.appendSwitch('js-flags', '--expose-gc')
-
-let machineId = null
-function getMachineId() {
-    // Will only be null the first time
-    // If this fails, it will probably fail again, so set it to an empty string
-    if (machineId === null) {
-        try {
-            machineId = machineIdSync()
-        } catch (err) {
-            machineId = ''
-            console.error(err)
-        }
-    }
-    return machineId
-}
 
 let lastError = {}
 
@@ -382,10 +367,6 @@ app.once('ready', () => {
 // URLs
 ipcMain.handle('open-url', (_e, url) => {
     handleNavigation(_e, url)
-})
-
-ipcMain.handle('track-event', (_e, event, properties) => {
-    track(event, properties, { device_id: getMachineId() })
 })
 
 // Keychain

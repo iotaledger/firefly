@@ -2,9 +2,6 @@ const { ipcRenderer, contextBridge } = require('electron')
 const ElectronApi = require('./electronApi')
 const WalletApi = require('@iota/wallet')
 const fs = require('fs')
-const { init } = require('@amplitude/analytics-node')
-
-init('API_KEY')
 
 const SEND_CRASH_REPORTS = window.process.argv.includes('--send-crash-reports=true')
 let captureException = (..._) => {}
