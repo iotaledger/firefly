@@ -59,8 +59,8 @@
                 throw new Error('error.node.differentNetwork')
             }
             const customCoinType = networkId === NetworkId.Custom ? Number(coinType) : undefined
-            const networkMetadata = buildPersistedNetworkFromNodeInfoResponse(nodeInfoResponse, customCoinType)
-            updateOnboardingProfile({ network: networkMetadata })
+            const network = buildPersistedNetworkFromNodeInfoResponse(nodeInfoResponse, customCoinType)
+            updateOnboardingProfile({ network })
             await cleanupOnboardingProfileManager()
             $networkSetupRouter.next()
         } catch (err) {
