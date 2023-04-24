@@ -1,5 +1,5 @@
 import { Identify, identify, init, track } from '@amplitude/analytics-node'
-import { ipcMain } from 'electron'
+import { app, ipcMain } from 'electron'
 import { getMachineId } from './machineId'
 import { getPlatformArchitecture, getPlatform, getPlatformVersion } from './diagnostics'
 
@@ -25,6 +25,10 @@ function setInitialIdentify() {
     identifyObj.setOnce('platform', getPlatform())
     identifyObj.setOnce('platformArchitecture', getPlatformArchitecture())
     identifyObj.set('platformVersion', getPlatformVersion())
+
+    // Application Information
+    identifyObj.set('applicationName', app.getName())
+    identifyObj.set('applicationVersion', app.getVersion())
 
     identify(identifyObj, { device_id: getMachineId() })
 }
