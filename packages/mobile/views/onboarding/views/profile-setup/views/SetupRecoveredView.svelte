@@ -4,7 +4,7 @@
     import { OnboardingButton, Text, TextType } from '@ui'
     import features from '@features/features'
     import { localize } from '@core/i18n'
-    import { formatProtocolName } from '@core/network'
+    import { getNetworkNameFromNetworkId } from '@core/network'
     import { profileSetupRouter } from '@/routers'
     import {
         getProfileTypeFromProfileRecoveryType,
@@ -22,7 +22,7 @@
     }
     const networkId = $onboardingProfile?.network?.id
     const title = localize('views.onboarding.profileSetup.setupRecovered.title', {
-        values: { protocol: formatProtocolName(networkId) },
+        values: { network: getNetworkNameFromNetworkId(networkId) },
     })
 
     async function onProfileRecoverySelectionClick(recoveryType: ProfileRecoveryType): Promise<void> {
