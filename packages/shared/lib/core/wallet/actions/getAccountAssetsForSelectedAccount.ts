@@ -1,6 +1,6 @@
 import { selectedAccount } from '@core/account'
 import { MarketCoinPrices } from '@core/market'
-import { NetworkProtocol } from '@core/network'
+import { NetworkId } from '@core/network'
 import { activeProfile, getCoinType } from '@core/profile'
 import { isValidIrc30 } from '@core/token'
 import { get } from 'svelte/store'
@@ -11,7 +11,7 @@ import { sortAssets } from '../utils/sortAssets'
 
 export function getAccountAssetsForSelectedAccount(marketCoinPrices: MarketCoinPrices): IAccountAssets {
     const account = get(selectedAccount)
-    const networkProtocol = get(activeProfile)?.networkProtocol
+    const networkId = get(activeProfile)?.network?.id
 
     const persistedBaseCoin = getAssetFromPersistedAssets(getCoinType())
     const baseCoin: IAsset = {
@@ -20,7 +20,7 @@ export function getAccountAssetsForSelectedAccount(marketCoinPrices: MarketCoinP
             total: Number(account?.balances?.baseCoin?.total),
             available: Number(account?.balances?.baseCoin?.available),
         },
-        ...(networkProtocol === NetworkProtocol.Shimmer && { marketPrices: marketCoinPrices?.shimmer }),
+        ...(networkId === NetworkId.Shimmer && { marketPrices: marketCoinPrices?.shimmer }),
     }
 
     const nativeTokens: IAsset[] = []

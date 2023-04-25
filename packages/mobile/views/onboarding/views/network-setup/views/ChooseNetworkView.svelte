@@ -12,7 +12,7 @@
         updateOnboardingProfile,
     } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
-    import { NETWORK, NetworkId, getDefaultClientOptions } from '@core/network'
+    import { NetworkId, getDefaultClientOptions, getDefaultPersistedNetwork } from '@core/network'
 
     import { networkSetupRouter } from '@/routers'
     import features from '@features/features'
@@ -43,7 +43,7 @@
 
     function onNetworkSelectionClick(networkId: NetworkId): void {
         if (networkId !== NetworkId.Custom) {
-            const network = NETWORK?.[networkId]
+            const network = getDefaultPersistedNetwork(networkId)
             const clientOptions = getDefaultClientOptions(networkId)
             updateOnboardingProfile({ network, clientOptions })
         }

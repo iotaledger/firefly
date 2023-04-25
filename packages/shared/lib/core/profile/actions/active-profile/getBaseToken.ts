@@ -1,11 +1,8 @@
 import { activeProfile } from '@core/profile/stores'
-import { IBaseToken, TokenStandard } from '@core/wallet'
+import { IBaseToken } from '@core/wallet'
 import { get } from 'svelte/store'
 
-export function getBaseToken(): { standard: TokenStandard.BaseToken } & IBaseToken {
+export function getBaseToken(): IBaseToken {
     const $activeProfile = get(activeProfile)
-    return {
-        standard: TokenStandard.BaseToken,
-        ...$activeProfile.network.baseToken,
-    }
+    return $activeProfile?.network?.baseToken
 }

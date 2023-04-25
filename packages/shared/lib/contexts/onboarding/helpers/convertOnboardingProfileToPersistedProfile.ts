@@ -12,8 +12,6 @@ export function convertOnboardingProfileToPersistedProfile(
         ...(onboardingProfile?.name && { name: onboardingProfile.name }),
         ...(onboardingProfile?.type && { type: onboardingProfile.type }),
         ...(onboardingProfile?.network && { network: onboardingProfile.network }),
-        ...(onboardingProfile?.networkProtocol && { networkProtocol: onboardingProfile.networkProtocol }),
-        ...(onboardingProfile?.networkType && { networkType: onboardingProfile.networkType }),
         ...(onboardingProfile?.lastStrongholdBackupTime && {
             lastStrongholdBackupTime: onboardingProfile.lastStrongholdBackupTime,
         }),
