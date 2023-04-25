@@ -24,11 +24,11 @@ export class NetworkSetupRouter extends Subrouter<NetworkSetupRoute> {
                     this.parentRouter.next()
                     return
                 } else {
-                    nextRoute = NetworkSetupRoute.SetupCustomNetworkConnection
+                    nextRoute = NetworkSetupRoute.SetupCustomNetworkView
                     break
                 }
             }
-            case NetworkSetupRoute.SetupCustomNetworkConnection:
+            case NetworkSetupRoute.SetupCustomNetworkView:
                 this.parentRouter.next()
                 return
         }

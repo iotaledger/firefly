@@ -3,7 +3,7 @@
     import { NetworkSetupRoute, networkSetupRoute } from '@core/router'
     import features from '@features/features'
     import { Transition } from 'shared/components'
-    import { ChooseNetworkView, SetupCustomNetworkConnectionView } from './views'
+    import { ChooseNetworkView, SetupCustomNetworkView } from './views'
 
     $: if (features.analytics.onboardingRoute.networkSetupRoute.enabled && $networkSetupRoute) {
         Platform.trackEvent('network-setup-route', { route: $networkSetupRoute })
@@ -14,8 +14,8 @@
     <Transition>
         <ChooseNetworkView />
     </Transition>
-{:else if $networkSetupRoute === NetworkSetupRoute.SetupCustomNetworkConnection}
+{:else if $networkSetupRoute === NetworkSetupRoute.SetupCustomNetworkView}
     <Transition>
-        <SetupCustomNetworkConnectionView />
+        <SetupCustomNetworkView />
     </Transition>
 {/if}

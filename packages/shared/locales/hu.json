@@ -55,7 +55,7 @@
                         }
                     }
                 },
-                "setupCustomNetworkConnection": {
+                "setupCustomNetwork": {
                     "title": "Csatlakozás privát hálózathoz",
                     "body": "Töltse ki az űrlapot a csomópontok adataival, és csatlakozzon egy privát hálózathoz."
                 }
