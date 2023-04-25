@@ -23,12 +23,13 @@ function setInitialIdentify() {
     const identifyObj = new Identify()
 
     // Application Information
+    identifyObj.set('app_name', app.getName())
     identifyObj.set('app_version', app.getVersion())
 
     // Platform Information
     identifyObj.setOnce('platform', os.platform())
-    identifyObj.setOnce('platformArchitecture', os.arch())
-    identifyObj.set('platformVersion', getPlatformVersion())
+    identifyObj.setOnce('platform_architecture', os.arch())
+    identifyObj.set('platform_version', getPlatformVersion())
 
     identify(identifyObj, { device_id: getMachineId() })
 }
