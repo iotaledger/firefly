@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onDestroy, onMount } from 'svelte'
     import { _, isLocaleLoaded, Locale, localeDirection, setupI18n } from '@core/i18n'
-    import { activeProfile, checkAndMigrateProfiles, cleanupEmptyProfiles } from '@core/profile'
+    import { activeProfile, checkAndMigrateProfiles, cleanupEmptyProfiles, saveActiveProfile } from '@core/profile'
     import {
         AppRoute,
         appRoute,
@@ -54,6 +54,8 @@
     $: if ($activeProfile && !$loggedIn) {
         closePopup(true)
     }
+
+    $: $activeProfile, saveActiveProfile()
 
     async function handleCrashReporting(sendCrashReports: boolean): Promise<void> {
         await Platform.updateAppSettings({ sendCrashReports })
