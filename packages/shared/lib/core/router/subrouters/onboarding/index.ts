@@ -1,4 +1,3 @@
-export * from './app-setup-router'
 export * from './profile-backup-router'
 export * from './ledger-setup-router'
 export * from './network-setup-router'

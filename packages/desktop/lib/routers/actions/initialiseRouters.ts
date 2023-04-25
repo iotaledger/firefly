@@ -13,8 +13,6 @@ import {
     settingsRouter,
 } from '@core/router/routers'
 import {
-    AppSetupRouter,
-    appSetupRouter,
     LedgerSetupRouter,
     ledgerSetupRouter,
     loginRouter,
@@ -69,7 +67,6 @@ function initialiseSubrouters(): void {
 }
 
 function initialiseOnboardingSubrouters(): void {
-    appSetupRouter.set(new AppSetupRouter())
     ledgerSetupRouter.set(new LedgerSetupRouter())
     networkSetupRouter.set(new NetworkSetupRouter())
     strongholdSetupRouter.set(new StrongholdSetupRouter())

@@ -17,7 +17,7 @@ export class AppRouter extends Router<AppRoute> {
     }
 
     public init(): void {
-        const hasCompletedOnboarding = get(profiles).length > 20
+        const hasCompletedOnboarding = get(profiles).length > 0
         this.routeStore.set(hasCompletedOnboarding ? AppRoute.Login : AppRoute.Onboarding)
     }
 

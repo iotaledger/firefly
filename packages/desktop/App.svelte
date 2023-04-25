@@ -77,7 +77,7 @@
         'canCreateNewProfile',
         $appRoute === AppRoute.Login ||
             ($appRoute === AppRoute.Onboarding &&
-                $onboardingRoute !== OnboardingRoute.AppSetup &&
+                $onboardingRoute !== OnboardingRoute.Welcome &&
                 $onboardingRoute !== OnboardingRoute.ShimmerClaiming &&
                 $onboardingRoute !== OnboardingRoute.Congratulations)
     )

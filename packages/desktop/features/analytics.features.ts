@@ -7,9 +7,6 @@ const analyticsFeatures: IAnalyticsFeatures = {
     },
     onboardingRoute: {
         enabled: true,
-        appSetupRoute: {
-            enabled: true,
-        },
         networkSetupRoute: {
             enabled: true,
         },

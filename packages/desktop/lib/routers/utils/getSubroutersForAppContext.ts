@@ -1,7 +1,6 @@
 import { AppContext } from '@core/app/enums'
 import { IRouter } from '@core/router/interfaces'
 import {
-    appSetupRouter,
     ledgerSetupRouter,
     networkSetupRouter,
     profileBackupRouter,
@@ -22,7 +21,6 @@ export function getSubroutersForAppContext(context: AppContext): IRouter[] {
             return [get(updateStrongholdRouter)]
         case AppContext.Onboarding:
             return [
-                get(appSetupRouter),
                 get(ledgerSetupRouter),
                 get(networkSetupRouter),
                 get(strongholdSetupRouter),

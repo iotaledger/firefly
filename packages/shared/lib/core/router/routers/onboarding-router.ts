@@ -32,7 +32,7 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 break
             }
             case OnboardingRoute.NetworkSetup:
-                nextRoute = OnboardingRoute.ProfileSetup
+                nextRoute = OnboardingRoute.ChooseFlow
                 break
             case OnboardingRoute.ProfileSetup: {
                 const _onboardingProfile = get(onboardingProfile)

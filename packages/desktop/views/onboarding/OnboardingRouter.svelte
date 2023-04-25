@@ -9,11 +9,11 @@
         NetworkSetupRouter,
         ProfileBackupRouter,
         ProfileRecoveryRouter,
-        ProfileSetupRouter,
         ShimmerClaimingRouter,
         StorageProtectionSetupRouter,
         StrongholdSetupRouter,
     } from './views'
+    import ChooseFlowView from './views/ChooseFlowView.svelte'
     import WelcomeView from './views/WelcomeView.svelte'
 
     $: if (features.analytics.onboardingRoute.enabled && $onboardingRoute) {
@@ -29,9 +29,9 @@
     <Transition>
         <NetworkSetupRouter />
     </Transition>
-{:else if $onboardingRoute === OnboardingRoute.ProfileSetup}
+{:else if $onboardingRoute === OnboardingRoute.ChooseFlow}
     <Transition>
-        <ProfileSetupRouter />
+        <ChooseFlowView />
     </Transition>
 {:else if $onboardingRoute === OnboardingRoute.LedgerSetup}
     <Transition>

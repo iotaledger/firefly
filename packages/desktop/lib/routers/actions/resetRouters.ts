@@ -1,7 +1,6 @@
 import { get } from 'svelte/store'
 import {
     appRouter,
-    appSetupRouter,
     collectiblesRouter,
     dashboardRouter,
     governanceRouter,
@@ -25,7 +24,6 @@ export function resetRouters(): void {
 }
 
 function resetSubrouters(): void {
-    get(appSetupRouter).reset()
     get(loginRouter).reset()
     get(ledgerSetupRouter).reset()
     get(networkSetupRouter).reset()

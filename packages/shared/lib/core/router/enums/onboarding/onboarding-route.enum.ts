@@ -1,8 +1,9 @@
 export enum OnboardingRoute {
     Welcome = 'welcome',
+    NetworkSetup = 'networkSetup',
+    ChooseFlow = 'chooseFlow',
     Congratulations = 'congratulations',
     LedgerSetup = 'ledgerSetup',
-    NetworkSetup = 'networkSetup',
     StrongholdSetup = 'strongholdSetup',
     ProfileBackup = 'profileBackup',
     ProfileRecovery = 'profileRecovery',
