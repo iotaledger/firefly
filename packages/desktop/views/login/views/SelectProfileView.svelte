@@ -58,7 +58,7 @@
                     networkProtocol={profile?.networkProtocol ?? NetworkProtocol.IOTA}
                     isLedgerProfile={profile?.type === ProfileType.Ledger}
                     updateRequired={profile?.type === ProfileType.Software &&
-                        !isStrongholdUpdated(profile) &&
+                        !isStrongholdUpdated(profile?.strongholdVersion) &&
                         features.onboarding.strongholdVersionCheck.enabled}
                     classes="cursor-pointer"
                 />

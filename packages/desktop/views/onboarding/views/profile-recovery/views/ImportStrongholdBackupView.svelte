@@ -9,17 +9,17 @@
     import { ClientError } from '@core/error/enums'
     import { localize } from '@core/i18n'
     import { restoreBackup } from '@core/profile-manager/api'
-    import { profileRecoveryRouter } from '@core/router'
-    import { STRONGHOLD_VERSION } from '@core/stronghold'
+    import { profileRecoveryRouter } from '@core/router/stores'
+    import { STRONGHOLD_VERSION } from '@core/stronghold/constants'
+    import { StrongholdVersion } from '@core/stronghold/enums'
 
     import {
         ImportFile,
-        onboardingProfile,
         ProfileSetupType,
         setProfileRecoveryTypeFromFilename,
-        updateOnboardingProfile,
         validateBackupFile,
     } from '@contexts/onboarding'
+    import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding/stores'
 
     interface FileWithPath extends File {
         path?: string
@@ -39,7 +39,8 @@
         updateOnboardingProfile({
             importFile,
             importFilePath,
-            strongholdVersion: _shouldMigrate ? undefined : STRONGHOLD_VERSION,
+            // TODO: we don't have a way to know the stronghold version of the backup file yet
+            strongholdVersion: _shouldMigrate ? StrongholdVersion.V2 : STRONGHOLD_VERSION,
         })
         $profileRecoveryRouter.next()
     }
@@ -82,7 +83,7 @@
         reader.onload = (e): void => {
             setFile(e.target.result, fileWithPath)
             if ($mobile) {
-                onContinueClick()
+                void onContinueClick()
             }
         }
 

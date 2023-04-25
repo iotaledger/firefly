@@ -42,7 +42,7 @@
     }
     $: updateRequired =
         $activeProfile?.type === ProfileType.Software &&
-        !isStrongholdUpdated($activeProfile) &&
+        !isStrongholdUpdated($activeProfile?.strongholdVersion) &&
         features.onboarding.strongholdVersionCheck.enabled
     $: hasReachedMaxAttempts = attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS
     $: {
@@ -95,7 +95,9 @@
             isBusy = true
             const isVerified = await Platform.PincodeManager.verify($activeProfile?.id, pinCode)
             if (isVerified) {
-                void login({ avoidNextRoute: updateRequired })
+                if (!updateRequired) {
+                    void login()
+                }
                 $loginRouter.next()
             } else {
                 shake = true

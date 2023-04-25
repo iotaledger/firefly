@@ -1,11 +1,12 @@
 import { get, writable } from 'svelte/store'
 
-import { onboardingProfile, ProfileRecoveryType } from '@contexts/onboarding'
+import { ProfileRecoveryType } from '@contexts/onboarding/enums'
+import { onboardingProfile } from '@contexts/onboarding/stores'
 
+import { isStrongholdUpdated } from '../../../app/utils'
 import { Subrouter } from '../../classes'
 import { ProfileRecoveryRoute } from '../../enums'
 import { onboardingRouter } from '../../routers'
-import { STRONGHOLD_VERSION } from '@core/stronghold'
 import { UpdateStrongholdRouter, updateStrongholdRouter } from '../update-stronghold-router'
 
 export const profileRecoveryRoute = writable<ProfileRecoveryRoute>(null)
@@ -39,8 +40,7 @@ export class ProfileRecoveryRouter extends Subrouter<ProfileRecoveryRoute> {
                 break
             }
             case ProfileRecoveryRoute.ImportStrongholdBackup: {
-                const requiresUpdate =
-                    get(onboardingProfile) && get(onboardingProfile)?.strongholdVersion !== STRONGHOLD_VERSION
+                const requiresUpdate = !isStrongholdUpdated(get(onboardingProfile)?.strongholdVersion)
 
                 if (requiresUpdate) {
                     updateStrongholdRouter.set(new UpdateStrongholdRouter(this))

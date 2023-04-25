@@ -5,9 +5,10 @@
 
     import { localize } from '@core/i18n'
     import { updateStrongholdRouter } from '@core/router'
-
-    import { updateStronghold } from '@core/profile-manager'
     import { isValidJson } from '@core/utils'
+    import { migrateStrongholdFromActiveProfile } from '@core/profile/actions/active-profile'
+
+    import { migrateStrongholdFromOnboardingProfile } from '@contexts/onboarding/actions'
 
     export let password: string = ''
     export let isRecovery: boolean = false
@@ -18,13 +19,18 @@
     async function onSubmit(): Promise<void> {
         try {
             isBusy = true
-            await updateStronghold(password, isRecovery)
+            if (isRecovery) {
+                await migrateStrongholdFromOnboardingProfile(password)
+            } else {
+                await migrateStrongholdFromActiveProfile(password)
+            }
             isBusy = false
             $updateStrongholdRouter.next()
         } catch (err) {
             isBusy = false
-            const parsedError = isValidJson(err.message) ? JSON.parse(err.message) : null
-            passwordError = parsedError?.payload?.error.replaceAll('`', '') ?? localize(err.message)
+            const message = err?.message ?? ''
+            const parsedError = isValidJson(message) ? JSON.parse(message) : ''
+            passwordError = parsedError?.payload?.error.replaceAll('`', '') ?? localize(message)
             return
         }
     }

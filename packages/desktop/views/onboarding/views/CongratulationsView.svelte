@@ -13,7 +13,6 @@
         updateOnboardingProfile,
     } from '@contexts/onboarding'
     import { checkOrConnectLedger } from '@core/ledger'
-    import features from '@features/features'
     import { STRONGHOLD_VERSION } from '@core/stronghold/constants'
 
     // TODO: what are these localised bodies they are not self documenting?
@@ -24,7 +23,7 @@
             checkOrConnectLedger(_continue)
         } else {
             updateOnboardingProfile({
-                strongholdVersion: features.onboarding.strongholdVersionCheck.enabled ? STRONGHOLD_VERSION : undefined,
+                strongholdVersion: STRONGHOLD_VERSION,
             })
             void _continue()
         }

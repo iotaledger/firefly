@@ -4,6 +4,8 @@
     import { getInitials as _getInitials } from '@core/utils'
     import { NetworkProtocol, NetworkType } from '@core/network'
 
+    import { Icon as IconEnum } from '@auxiliary/icon/enums'
+
     export let name: string = ''
     export let id: string = ''
     export let networkType: NetworkType = undefined
@@ -55,7 +57,7 @@
         <div class="flex flex-row items-baseline justify-center space-x-1.5 mb-2 w-full">
             {#if isLedgerProfile}
                 <Icon
-                    icon={'ledger'}
+                    icon={IconEnum.Ledger}
                     classes="text-gray-900 dark:text-gray-100 relative top-0.5"
                     width={14}
                     height={14}

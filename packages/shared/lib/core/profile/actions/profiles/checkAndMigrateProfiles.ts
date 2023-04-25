@@ -1,6 +1,7 @@
 import { get } from 'svelte/store'
 
 import { INode } from '@core/network/interfaces'
+import { StrongholdVersion } from '@core/stronghold/enums'
 
 import {
     DEFAULT_PERSISTED_PROFILE_OBJECT,
@@ -49,6 +50,7 @@ const persistedProfileMigrationsMap: Record<number, (existingProfile: unknown) =
     7: persistedProfileMigrationToV8,
     8: persistedProfileMigrationToV9,
     9: persistedProfileMigrationToV10,
+    10: persistedProfileMigrationToV11,
 }
 
 function persistedProfileMigrationToV4(existingProfile: unknown): void {
@@ -159,6 +161,11 @@ function persistedProfileMigrationToV10(existingProfile: IPersistedProfile): voi
         ...existingProfile.settings,
         strongholdPasswordTimeoutInMinutes: DEFAULT_STRONGHOLD_PASSWORD_TIMEOUT_IN_MINUTES,
     }
+    saveProfile(existingProfile)
+}
+
+function persistedProfileMigrationToV11(existingProfile: IPersistedProfile): void {
+    existingProfile.strongholdVersion = StrongholdVersion.V2
     saveProfile(existingProfile)
 }
 
