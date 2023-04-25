@@ -1,4 +1,4 @@
-import { COIN_TYPE, NETWORK, NetworkId } from '@core/network'
+import { COIN_TYPE, getDefaultPersistedNetwork, NetworkId } from '@core/network'
 import { INode } from '@core/network/interfaces'
 import { get } from 'svelte/store'
 import {
@@ -156,12 +156,7 @@ function persistedProfileMigrationToV9(existingProfile: IPersistedProfile): void
     saveProfile(existingProfile)
 }
 
-function persistedProfileMigrationToV10(
-    existingProfile: IPersistedProfile & { networkProtocol: string; networkType: string }
-): void {
-    const network = NETWORK?.[existingProfile?.networkProtocol]?.[existingProfile?.networkType]
-    existingProfile.network = network
-
+function persistedProfileMigrationToV10(existingProfile: IPersistedProfile): void {
     existingProfile.settings = {
         ...existingProfile.settings,
         strongholdPasswordTimeoutInMinutes: DEFAULT_STRONGHOLD_PASSWORD_TIMEOUT_IN_MINUTES,
@@ -180,6 +175,8 @@ function getNetworkIdFromOldNetworkType(networkType: 'mainnet' | 'devnet' | 'pri
             return NetworkId.Testnet
         case 'private-net':
             return NetworkId.Custom
+        default:
+            return
     }
 }
 
@@ -187,12 +184,10 @@ function persistedProfileMigrationToV11(
     existingProfile: IPersistedProfile & { networkType: 'mainnet' | 'devnet' | 'private-net' }
 ): void {
     if (!existingProfile?.network) {
-        if (existingProfile?.networkType) {
-            const networkId = getNetworkIdFromOldNetworkType(existingProfile?.networkType)
-            const network = NETWORK?.[networkId]
+        const networkId = getNetworkIdFromOldNetworkType(existingProfile?.networkType)
+        if (networkId === NetworkId.Shimmer || networkId === NetworkId.Testnet) {
+            const network = getDefaultPersistedNetwork(networkId)
             existingProfile.network = structuredClone(network)
-        } else {
-            existingProfile.network = structuredClone(NETWORK?.[NetworkId.Custom])
         }
     }
 
