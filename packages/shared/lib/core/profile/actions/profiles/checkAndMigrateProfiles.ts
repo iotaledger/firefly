@@ -175,6 +175,8 @@ function getNetworkIdFromOldNetworkType(networkType: 'mainnet' | 'devnet' | 'pri
             return NetworkId.Testnet
         case 'private-net':
             return NetworkId.Custom
+        default:
+            return
     }
 }
 
@@ -182,12 +184,10 @@ function persistedProfileMigrationToV11(
     existingProfile: IPersistedProfile & { networkType: 'mainnet' | 'devnet' | 'private-net' }
 ): void {
     if (!existingProfile?.network) {
-        if (existingProfile?.networkType) {
-            const networkId = getNetworkIdFromOldNetworkType(existingProfile?.networkType)
+        const networkId = getNetworkIdFromOldNetworkType(existingProfile?.networkType)
+        if (networkId === NetworkId.Shimmer || networkId === NetworkId.Testnet) {
             const network = getDefaultPersistedNetwork(networkId)
             existingProfile.network = structuredClone(network)
-        } else {
-            existingProfile.network = structuredClone(getDefaultPersistedNetwork(NetworkId.Custom))
         }
     }
 

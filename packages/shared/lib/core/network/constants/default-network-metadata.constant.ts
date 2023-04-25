@@ -4,25 +4,6 @@ import { IStardustNetworkMetadata } from '../interfaces'
 import { NetworkMetadata } from '../types'
 
 export const DEFAULT_NETWORK_METADATA: Readonly<{ [key in NetworkId]?: NetworkMetadata }> = {
-    [NetworkId.Iota]: <IStardustNetworkMetadata>{
-        id: NetworkId.Iota,
-        name: 'IOTA',
-        coinType: COIN_TYPE[NetworkId.Iota],
-        protocol: {
-            version: 1,
-            networkName: 'iota',
-            bech32Hrp: 'iota',
-            minPowScore: 1500,
-            belowMaxDepth: 15,
-            rentStructure: {
-                vByteCost: 500,
-                vByteFactorData: 1,
-                vByteFactorKey: 10,
-            },
-            tokenSupply: TokenSupply.Iota,
-        },
-        baseToken: DEFAULT_BASE_TOKEN[NetworkId.Iota],
-    },
     [NetworkId.Shimmer]: <IStardustNetworkMetadata>{
         id: NetworkId.Shimmer,
         name: 'Shimmer',
