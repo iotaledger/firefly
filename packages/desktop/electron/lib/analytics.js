@@ -1,18 +1,18 @@
-import { Identify, identify, init, track } from '@amplitude/analytics-node'
+import { Identify, identify, init, track, LogLevel } from '@amplitude/analytics-node'
 import { app, ipcMain } from 'electron'
 import { getMachineId } from './machineId'
 import { getPlatformVersion } from './diagnostics'
 import os from 'os'
 
-export function initialiseAnalytics() {
-    // Initialise Amplitude with API key
-    init(process.env.AMPLITUDE_API_KEY)
-
-    // Set initial identify
-    setInitialIdentify()
-
-    // Register event handlers
-    ipcMain.handle('track-event', (_e, event, properties) => handleTrackEvent(event, properties))
+export async function initialiseAnalytics() {
+    if (process.env.AMPLITUDE_API_KEY) {
+        // Initialise Amplitude with API key
+        init(process.env.AMPLITUDE_API_KEY, { logLevel: LogLevel.None })
+        // Set initial identify
+        setInitialIdentify()
+        // Register event handlers
+        ipcMain.handle('track-event', (_e, event, properties) => handleTrackEvent(event, properties))
+    }
 }
 
 function handleTrackEvent(event, properties) {
