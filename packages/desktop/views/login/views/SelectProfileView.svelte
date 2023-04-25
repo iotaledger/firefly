@@ -52,7 +52,7 @@
                     bgColor="blue"
                     onClick={onContinueClick}
                     updateRequired={profile?.type === ProfileType.Software &&
-                        !isStrongholdUpdated(profile) &&
+                        !isStrongholdUpdated(profile?.strongholdVersion) &&
                         features.onboarding.strongholdVersionCheck.enabled}
                     classes="cursor-pointer"
                 />

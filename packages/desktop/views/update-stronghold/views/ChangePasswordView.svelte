@@ -1,6 +1,8 @@
 <script lang="ts">
     import zxcvbn from 'zxcvbn'
 
+    import { onMount } from 'svelte'
+
     import { OnboardingLayout } from '@components'
     import { Animation, Button, PasswordInput, Text, TextHint } from '@ui'
     import { HTMLButtonType, TextType } from '@ui/enums'
@@ -8,14 +10,19 @@
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
     import { MAX_STRONGHOLD_PASSWORD_LENGTH, unlockStronghold } from '@core/profile'
-    import { changeStrongholdPassword } from '@core/profile-manager'
+    import { activeProfile, updateActiveProfile } from '@core/profile/stores'
+    import { changeStrongholdPassword } from '@core/profile-manager/api'
+    import { initialiseProfileManager } from '@core/profile-manager/actions'
+    import { profileManager } from '@core/profile-manager/stores'
+    import { buildProfileManagerOptionsFromProfileData } from '@core/profile-manager/utils'
     import { updateStrongholdRouter } from '@core/router/subrouters'
     import { PASSWORD_REASON_MAP } from '@core/stronghold'
 
     import { showAppNotification } from '@auxiliary/notification'
 
-    export let oldPassword: string = ''
-    export let newPassword: string = ''
+    export let oldPassword: string
+    export let newPassword: string
+    export let isRecovery: boolean
 
     let passwordError: string = ''
     let confirmPassword: string = ''
@@ -89,6 +96,22 @@
             isSkipBusy = false
         }
     }
+
+    onMount(async () => {
+        if (!isRecovery && !$profileManager) {
+            const profileManagerOptions = await buildProfileManagerOptionsFromProfileData($activeProfile)
+            const { storagePath, coinType, clientOptions, secretManager } = profileManagerOptions
+            updateActiveProfile({ clientOptions })
+            const manager = await initialiseProfileManager(
+                storagePath,
+                coinType,
+                clientOptions,
+                secretManager,
+                $activeProfile?.id
+            )
+            profileManager.set(manager)
+        }
+    })
 </script>
 
 <OnboardingLayout allowBack={false}>

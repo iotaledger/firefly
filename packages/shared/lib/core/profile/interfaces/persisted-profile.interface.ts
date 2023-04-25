@@ -1,5 +1,7 @@
 import { IAccountMetadata } from '@core/account'
 import { IClientOptions, IPersistedNetwork } from '@core/network'
+import { StrongholdVersion } from '@core/stronghold/enums'
+
 import { ProfileType } from '../enums'
 import { IProfileSettings } from './profile-settings.interface'
 
@@ -16,5 +18,5 @@ export interface IPersistedProfile {
     lastUsedAccountIndex?: number
     clientOptions: IClientOptions
     forceAssetRefresh: boolean
-    strongholdVersion: number
+    strongholdVersion: StrongholdVersion
 }

@@ -5,11 +5,12 @@
     import { localize } from '@core/i18n'
     import { updateStrongholdRouter } from '@core/router'
 
-    import { updateOnboardingProfile } from '@contexts/onboarding'
-    import { exportStronghold } from '@contexts/settings'
+    import { updateOnboardingProfile } from '@contexts/onboarding/stores'
+    import { exportStronghold } from '@contexts/settings/actions'
 
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { showAppNotification } from '@auxiliary/notification'
+    import { login } from '@core/profile/actions'
 
     export let busy = false
     export let changedPassword: boolean
@@ -26,6 +27,8 @@
                 importFile: null,
                 importFilePath: null,
             })
+        } else {
+            void login()
         }
 
         $updateStrongholdRouter.next()
