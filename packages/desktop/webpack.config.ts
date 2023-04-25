@@ -144,7 +144,7 @@ const mainPlugins = [
         APP_ID: JSON.stringify(appId),
         'process.env.STAGE': JSON.stringify(stage),
         'process.env.APP_PROTOCOL': JSON.stringify(appProtocol),
-        'process.env.AMPLITUDE_API_KEY': process.env.AMPLITUDE_API_KEY,
+        'process.env.AMPLITUDE_API_KEY': JSON.stringify(process.env.AMPLITUDE_API_KEY),
     }),
 ]
 
