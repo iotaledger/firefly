@@ -1,9 +1,9 @@
 import { COIN_TYPE, DEFAULT_BASE_TOKEN } from '../constants'
 import { NetworkId, TokenSupply } from '../enums'
 import { IStardustNetworkMetadata } from '../interfaces'
-import { NetworkMetadataMap } from '../types'
+import { NetworkMetadata } from '../types'
 
-export const NETWORK_METADATA_MAP: Readonly<NetworkMetadataMap> = {
+export const DEFAULT_NETWORK_METADATA: Readonly<{ [key in NetworkId]?: NetworkMetadata }> = {
     [NetworkId.Iota]: <IStardustNetworkMetadata>{
         id: NetworkId.Iota,
         name: 'IOTA',
@@ -22,7 +22,6 @@ export const NETWORK_METADATA_MAP: Readonly<NetworkMetadataMap> = {
             tokenSupply: TokenSupply.Iota,
         },
         baseToken: DEFAULT_BASE_TOKEN[NetworkId.Iota],
-        chains: [],
     },
     [NetworkId.Shimmer]: <IStardustNetworkMetadata>{
         id: NetworkId.Shimmer,
@@ -42,7 +41,6 @@ export const NETWORK_METADATA_MAP: Readonly<NetworkMetadataMap> = {
             tokenSupply: TokenSupply.Shimmer,
         },
         baseToken: DEFAULT_BASE_TOKEN[NetworkId.Shimmer],
-        chains: [],
     },
     [NetworkId.Testnet]: <IStardustNetworkMetadata>{
         id: NetworkId.Testnet,
@@ -62,6 +60,5 @@ export const NETWORK_METADATA_MAP: Readonly<NetworkMetadataMap> = {
             tokenSupply: TokenSupply.Testnet,
         },
         baseToken: DEFAULT_BASE_TOKEN[NetworkId.Testnet],
-        chains: [],
     },
 }

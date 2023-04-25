@@ -1,10 +1,7 @@
-import { NetworkId, TokenSupply } from '../enums'
+import { DEFAULT_NETWORK_METADATA } from '../constants'
+import { NetworkId } from '../enums'
 import { IAuth, IClientOptions, INode } from '../interfaces'
-import { NetworkMetadataMap } from '../types'
-
 import { checkNodeUrlValidity, cleanAuth, getDefaultClientOptions, getOfficialNodes, isOfficialNetwork } from '../utils'
-
-import { TokenStandard } from '@core/wallet/enums'
 
 describe('File: network.ts', () => {
     function _buildNode(url: string | undefined): INode | undefined {
@@ -22,101 +19,6 @@ describe('File: network.ts', () => {
         return EXPECTED_NODE_URLS?.[networkId]?.map((url) => _buildNode(url)) ?? []
     }
 
-    const EXPECTED_BASE_TOKEN: Readonly<NetworkMetadataMap> = {
-        [NetworkId.Iota]: {
-            standard: TokenStandard.BaseToken,
-            name: 'IOTA',
-            tickerSymbol: 'MIOTA',
-            unit: 'i',
-            decimals: 0,
-            subunit: null,
-            useMetricPrefix: true,
-            primaryColor: '#6E82A4',
-        },
-        [NetworkId.Shimmer]: {
-            standard: TokenStandard.BaseToken,
-            name: 'Shimmer',
-            tickerSymbol: 'SMR',
-            unit: 'SMR',
-            decimals: 6,
-            subunit: 'glow',
-            useMetricPrefix: false,
-            primaryColor: '#25DFCA',
-            url: 'https://shimmer.network/',
-        },
-        [NetworkId.Testnet]: {
-            standard: TokenStandard.BaseToken,
-            name: 'Shimmer',
-            tickerSymbol: 'SMR',
-            unit: 'SMR',
-            decimals: 6,
-            subunit: 'glow',
-            useMetricPrefix: false,
-            primaryColor: '#25DFCA',
-            url: 'https://shimmer.network/',
-        },
-    }
-
-    const EXPECTED_NETWORK_METADATA_MAP: Readonly<NetworkMetadataMap> = {
-        [NetworkId.Iota]: {
-            id: NetworkId.Iota,
-            name: 'IOTA',
-            protocol: {
-                version: 1,
-                networkName: 'iota',
-                bech32Hrp: 'iota',
-                minPowScore: 1500,
-                belowMaxDepth: 15,
-                rentStructure: {
-                    vByteCost: 500,
-                    vByteFactorData: 1,
-                    vByteFactorKey: 10,
-                },
-                tokenSupply: TokenSupply.Iota,
-            },
-            baseToken: EXPECTED_BASE_TOKEN[NetworkId.Iota],
-            chains: [],
-        },
-        [NetworkId.Shimmer]: {
-            id: NetworkId.Shimmer,
-            name: 'Shimmer',
-            protocol: {
-                version: 2,
-                networkName: 'shimmer',
-                bech32Hrp: 'smr',
-                minPowScore: 1500,
-                belowMaxDepth: 15,
-                rentStructure: {
-                    vByteCost: 100,
-                    vByteFactorData: 1,
-                    vByteFactorKey: 10,
-                },
-                tokenSupply: TokenSupply.Shimmer,
-            },
-            baseToken: EXPECTED_BASE_TOKEN[NetworkId.Shimmer],
-            chains: [],
-        },
-        [NetworkId.Testnet]: {
-            id: NetworkId.Testnet,
-            name: 'Testnet',
-            protocol: {
-                version: 2,
-                networkName: 'testnet',
-                bech32Hrp: 'rms',
-                minPowScore: 1500,
-                belowMaxDepth: 15,
-                rentStructure: {
-                    vByteCost: 100,
-                    vByteFactorData: 1,
-                    vByteFactorKey: 10,
-                },
-                tokenSupply: TokenSupply.Testnet,
-            },
-            baseToken: EXPECTED_BASE_TOKEN[NetworkId.Testnet],
-            chains: [],
-        },
-    }
-
     const EXPECTED_NODE_URLS: Readonly<{ [key in NetworkId]?: string[] }> = {
         [NetworkId.Iota]: [
             'https://chrysalis-nodes.iota.org',
@@ -129,12 +31,12 @@ describe('File: network.ts', () => {
 
     const EXPECTED_CLIENT_OPTIONS: Readonly<{ [key in NetworkId]?: IClientOptions }> = {
         [NetworkId.Iota]: {
-            network: EXPECTED_NETWORK_METADATA_MAP[NetworkId.Iota]?.id,
+            network: DEFAULT_NETWORK_METADATA[NetworkId.Iota]?.id,
             nodes: _buildNodes(NetworkId.Iota) as INode[],
             localPow: true,
         },
         [NetworkId.Shimmer]: {
-            network: EXPECTED_NETWORK_METADATA_MAP[NetworkId.Shimmer]?.id,
+            network: DEFAULT_NETWORK_METADATA[NetworkId.Shimmer]?.id,
             nodes: _buildNodes(NetworkId.Shimmer) as INode[],
             localPow: true,
         },
