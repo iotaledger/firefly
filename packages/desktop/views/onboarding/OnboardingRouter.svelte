@@ -4,7 +4,6 @@
     import features from '@features/features'
     import { Transition } from 'shared/components'
     import {
-        AppSetupRouter,
         CongratulationsView,
         LedgerSetupRouter,
         NetworkSetupRouter,
@@ -15,15 +14,16 @@
         StorageProtectionSetupRouter,
         StrongholdSetupRouter,
     } from './views'
+    import WelcomeView from './views/WelcomeView.svelte'
 
     $: if (features.analytics.onboardingRoute.enabled && $onboardingRoute) {
         Platform.trackEvent('onboarding-route', { route: $onboardingRoute })
     }
 </script>
 
-{#if $onboardingRoute === OnboardingRoute.AppSetup}
+{#if $onboardingRoute === OnboardingRoute.Welcome}
     <Transition>
-        <AppSetupRouter />
+        <WelcomeView />
     </Transition>
 {:else if $onboardingRoute === OnboardingRoute.NetworkSetup}
     <Transition>

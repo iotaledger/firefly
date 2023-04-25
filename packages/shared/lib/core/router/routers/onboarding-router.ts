@@ -27,13 +27,8 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
 
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
-            case OnboardingRoute.AppSetup: {
-                const _onboardingProfile = get(onboardingProfile)
-                if (_onboardingProfile?.isDeveloperProfile) {
-                    nextRoute = OnboardingRoute.NetworkSetup
-                } else {
-                    nextRoute = OnboardingRoute.ProfileSetup
-                }
+            case OnboardingRoute.Welcome: {
+                nextRoute = OnboardingRoute.NetworkSetup
                 break
             }
             case OnboardingRoute.NetworkSetup:
@@ -158,6 +153,6 @@ function getInitialRoute(): OnboardingRoute {
             }
         }
     } else {
-        return OnboardingRoute.AppSetup
+        return OnboardingRoute.Welcome
     }
 }

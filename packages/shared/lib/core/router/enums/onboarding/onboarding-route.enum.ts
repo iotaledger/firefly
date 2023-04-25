@@ -1,5 +1,5 @@
 export enum OnboardingRoute {
-    AppSetup = 'appSetup',
+    Welcome = 'welcome',
     Congratulations = 'congratulations',
     LedgerSetup = 'ledgerSetup',
     NetworkSetup = 'networkSetup',

@@ -9,10 +9,10 @@
     import { lastAcceptedPrivacyPolicy, lastAcceptedTermsOfService } from '@core/app/stores'
     import { openUrlInBrowser } from '@core/app/utils'
     import { localize } from '@core/i18n'
-    import { getNetworkNameFromNetworkId, NetworkId } from '@core/network'
-    import { appSetupRouter } from '@core/router'
+    import { NetworkId, getNetworkNameFromNetworkId } from '@core/network'
+    import { onboardingRouter } from '@core/router'
     import features from '@features/features'
-    import { Animation, Button, Checkbox, Text, TextType, Link } from '@ui'
+    import { Animation, Button, Checkbox, Link, Text, TextType } from '@ui'
 
     let termsAccepted: boolean = false
 
@@ -27,7 +27,7 @@
     function onContinueClick(): void {
         lastAcceptedTermsOfService.set(TERMS_OF_SERVICE_VERSION)
         lastAcceptedPrivacyPolicy.set(PRIVACY_POLICY_VERSION)
-        $appSetupRouter.next()
+        $onboardingRouter.next()
     }
 </script>
 
