@@ -1,6 +1,17 @@
 <script lang="ts">
-    import { setContext } from 'svelte'
+    import { showAppNotification } from '@auxiliary/notification'
+    import { Platform } from '@core/app'
+    import { localize } from '@core/i18n'
+    import {
+        ProfileRecoveryRoute,
+        ProfileRecoveryRouter,
+        profileRecoveryRoute,
+        profileRecoveryRouter,
+    } from '@core/router'
+    import features from '@features/features'
+    import { UpdateStrongholdRouter } from '@views'
     import { Transition } from 'shared/components'
+    import { setContext } from 'svelte'
     import {
         BackupPasswordView,
         ImportMnemonicPhraseView,
@@ -8,15 +19,6 @@
         LedgerView,
         SuccessView,
     } from './views'
-    import { localize } from '@core/i18n'
-    import {
-        profileRecoveryRoute,
-        profileRecoveryRouter,
-        ProfileRecoveryRouter,
-        ProfileRecoveryRoute,
-    } from '@core/router'
-    import { showAppNotification } from '@auxiliary/notification'
-    import { UpdateStrongholdRouter } from '@views'
 
     setContext<ProfileRecoveryRouter>('importRouter', $profileRecoveryRouter)
     $profileRecoveryRouter.resetRoute()
@@ -45,6 +47,10 @@
 
     function previous(): void {
         $profileRecoveryRouter.previous()
+    }
+
+    $: if (features.analytics.onboardingRoute.profileRecoveryRoute.enabled && $profileRecoveryRoute) {
+        Platform.trackEvent('profile-recovery-route', { route: $profileRecoveryRoute })
     }
 </script>
 
