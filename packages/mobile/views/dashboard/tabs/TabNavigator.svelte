@@ -35,7 +35,7 @@
 </script>
 
 <tab-navigator
-    class="w-full bg-white dark:bg-gray-900 grid grid-cols-{NAVIGATION_ITEMS.length} grid-rows-1 gap-4 pt-4 pb-7 px-5"
+    class="w-full bg-white dark:bg-gray-900 grid grid-cols-{NAVIGATION_ITEMS.length} grid-rows-1 gap-4 pt-4 pb-8 px-5"
     class:darkmode={darkModeEnabled}
 >
     {#each NAVIGATION_ITEMS as item}
