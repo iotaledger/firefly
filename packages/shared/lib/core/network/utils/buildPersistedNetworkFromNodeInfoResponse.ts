@@ -1,5 +1,5 @@
 import { TokenStandard } from '@core/wallet/enums'
-import { COIN_TYPE, NETWORK_METADATA_MAP } from '../constants'
+import { COIN_TYPE, DEFAULT_NETWORK_METADATA } from '../constants'
 import { NetworkId } from '../enums'
 import { INodeInfoResponse, IPersistedNetwork } from '../interfaces'
 import { getNetworkIdFromNetworkName } from './getNetworkIdFromNetworkName'
@@ -13,7 +13,7 @@ export function buildPersistedNetworkFromNodeInfoResponse(
     const _coinType = coinType ?? COIN_TYPE[networkId] ?? 1
     return {
         id: networkId,
-        name: networkId === NetworkId.Custom ? networkName : NETWORK_METADATA_MAP[networkId]?.name,
+        name: networkId === NetworkId.Custom ? networkName : DEFAULT_NETWORK_METADATA?.[networkId]?.name,
         coinType: _coinType,
         protocol: nodeInfoResponse?.nodeInfo?.protocol,
         baseToken: { standard: TokenStandard.BaseToken, ...nodeInfoResponse?.nodeInfo?.baseToken },
