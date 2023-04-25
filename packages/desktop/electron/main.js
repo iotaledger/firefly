@@ -405,7 +405,6 @@ ipcMain.handle('copy-file', (_e, sourceFilePath, destinationFilePath) => {
     const src = path.resolve(sourceFilePath)
     const srcFileBuffer = fs.readFileSync(src)
     const dest = path.resolve(destinationFilePath)
-    ensureDirectoryExistence(dest)
     fs.writeFileSync(dest, srcFileBuffer)
 })
 

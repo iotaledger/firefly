@@ -10,10 +10,8 @@
         completeOnboardingProcess,
         isOnboardingLedgerProfile,
         ProfileRecoveryType,
-        updateOnboardingProfile,
     } from '@contexts/onboarding'
     import { checkOrConnectLedger } from '@core/ledger'
-    import { STRONGHOLD_VERSION } from '@core/stronghold/constants'
 
     // TODO: what are these localised bodies they are not self documenting?
     let localizedBody = 'body'
@@ -22,9 +20,6 @@
         if ($isOnboardingLedgerProfile) {
             checkOrConnectLedger(_continue)
         } else {
-            updateOnboardingProfile({
-                strongholdVersion: STRONGHOLD_VERSION,
-            })
             void _continue()
         }
     }
