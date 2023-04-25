@@ -16,8 +16,10 @@
         StorageProtectionSetupRouter,
         StrongholdSetupRouter,
     } from './views'
+    import features from '@features/features'
 
-    $: if ($onboardingRoute) Platform.trackEvent('onboarding-route', { route: $onboardingRoute })
+    $: if (features.analytics.onboardingRoute.enabled && $onboardingRoute)
+        Platform.trackEvent('onboarding-route', { route: $onboardingRoute })
 </script>
 
 {#if $onboardingRoute === OnboardingRoute.AppSetup}

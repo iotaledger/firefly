@@ -11,7 +11,7 @@ const fs = require('fs')
 const Keychain = require('./lib/keychain')
 const { initMenu, contextMenu } = require('./lib/menu')
 
-initialiseAnalytics()
+features.analytics.enabled && initialiseAnalytics()
 
 const canSendCrashReports = () => {
     let sendCrashReports = loadJsonConfig('settings.json')?.sendCrashReports

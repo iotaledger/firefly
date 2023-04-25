@@ -4,8 +4,10 @@
     import { UpdateStrongholdRouter } from '@views'
     import { Transition } from 'shared/components'
     import { EnterPinView, LoadProfileView, SelectProfileView } from './views'
+    import features from '@features/features'
 
-    $: if ($loginRoute) Platform.trackEvent('login-route', { route: $loginRoute })
+    $: if (features.analytics.loginRoute.enabled && $loginRoute)
+        Platform.trackEvent('login-route', { route: $loginRoute })
 </script>
 
 {#if $loginRoute === LoginRoute.SelectProfile}
