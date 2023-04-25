@@ -38,6 +38,7 @@
     import { getLocalisedMenuItems } from './lib/helpers'
     import { Stage } from 'shared/lib/typings/stage'
     import { get } from 'svelte/store'
+    import { WALLET } from 'shared/lib/shell/walletApi'
 
     stage.set(Stage[process.env.STAGE.toUpperCase()] ?? Stage.ALPHA)
 
@@ -119,6 +120,12 @@
         Electron.onEvent('deep-link-request', showDeepLinkNotification)
 
         await cleanupEmptyProfiles()
+
+        try {
+            WALLET.migrateStrongholdSnapshotV2ToV3('', '', '', '')
+        } catch (err) {
+            console.error(err)
+        }
     })
 
     onDestroy(() => {

@@ -128,6 +128,15 @@ export function initLogger(config: LoggerConfig): void {
     addon.initLogger(JSON.stringify(config))
 }
 
+export function migrateStrongholdSnapshotV2ToV3(
+    currentPath: string,
+    currentPassword: string,
+    newPath: string,
+    newPassword: string
+): void {
+    addon.migrateStrongholdSnapshotV2ToV3(currentPath, currentPassword, newPath, newPassword)
+}
+
 export const api = {
     setAlias: function (
         accountId: AccountIdentifier,
