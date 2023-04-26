@@ -57,7 +57,6 @@ const CapacitorApi: Partial<IPlatform> = {
                 const { files } = await SecureFilesystemAccess.listProfileFolders({
                     folder: profileStoragePath,
                 })
-                console.error(files)
                 return files
             } catch (err) {
                 console.error(err)
