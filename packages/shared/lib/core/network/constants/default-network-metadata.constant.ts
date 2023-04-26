@@ -1,29 +1,10 @@
 import { COIN_TYPE, DEFAULT_BASE_TOKEN } from '../constants'
 import { NetworkId, TokenSupply } from '../enums'
-import { INetwork } from '../interfaces'
+import { IStardustNetworkMetadata } from '../interfaces'
+import { NetworkMetadata } from '../types'
 
-export const NETWORK: Readonly<{ [key in NetworkId]?: INetwork }> = {
-    [NetworkId.Iota]: {
-        id: NetworkId.Iota,
-        name: 'IOTA',
-        coinType: COIN_TYPE[NetworkId.Iota],
-        protocol: {
-            version: 1,
-            networkName: 'iota',
-            bech32Hrp: 'iota',
-            minPowScore: 1500,
-            belowMaxDepth: 15,
-            rentStructure: {
-                vByteCost: 500,
-                vByteFactorData: 1,
-                vByteFactorKey: 10,
-            },
-            tokenSupply: TokenSupply.Iota,
-        },
-        baseToken: DEFAULT_BASE_TOKEN[NetworkId.Iota],
-        chains: [],
-    },
-    [NetworkId.Shimmer]: {
+export const DEFAULT_NETWORK_METADATA: Readonly<{ [key in NetworkId]?: NetworkMetadata }> = {
+    [NetworkId.Shimmer]: <IStardustNetworkMetadata>{
         id: NetworkId.Shimmer,
         name: 'Shimmer',
         coinType: COIN_TYPE[NetworkId.Shimmer],
@@ -41,9 +22,8 @@ export const NETWORK: Readonly<{ [key in NetworkId]?: INetwork }> = {
             tokenSupply: TokenSupply.Shimmer,
         },
         baseToken: DEFAULT_BASE_TOKEN[NetworkId.Shimmer],
-        chains: [],
     },
-    [NetworkId.Testnet]: {
+    [NetworkId.Testnet]: <IStardustNetworkMetadata>{
         id: NetworkId.Testnet,
         name: 'Testnet',
         coinType: COIN_TYPE[NetworkId.Testnet],
@@ -61,6 +41,5 @@ export const NETWORK: Readonly<{ [key in NetworkId]?: INetwork }> = {
             tokenSupply: TokenSupply.Testnet,
         },
         baseToken: DEFAULT_BASE_TOKEN[NetworkId.Testnet],
-        chains: [],
     },
 }

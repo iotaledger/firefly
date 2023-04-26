@@ -12,26 +12,33 @@ export function convertToRawAmount(amount: string, tokenMetadata: TokenMetadata,
         const parsedAmount = parseCurrency(amount)
         return convertToRawAmountFromMetadata(parsedAmount, tokenMetadata, unit)
     } else {
-        return undefined
+        return -1
     }
 }
 
 function convertToRawAmountFromMetadata(amount: number, tokenMetadata: TokenMetadata, selectedUnit: string): Big {
     if (tokenMetadata?.standard === TokenStandard.BaseToken) {
         if (tokenMetadata.useMetricPrefix) {
-            return Big(amount * IOTA_UNIT_MAP?.[selectedUnit?.substring(0, 1)] ?? 0)
+            const decimals = IOTA_UNIT_MAP?.[selectedUnit?.substring(0, 1)]?.decimalPlaces ?? 0
+            return convertAmountToMatchUnit(amount, decimals)
         } else {
             if (selectedUnit === tokenMetadata.unit) {
                 const decimals = Math.min(tokenMetadata.decimals, MAX_SUPPORTED_DECIMALS)
-                return Big(amount).mul(Big(10).pow(decimals))
+                return convertAmountToMatchUnit(amount, decimals)
             } else if (selectedUnit === tokenMetadata.subunit) {
                 return Big(amount)
+            } else {
+                return -1
             }
         }
     } else if (tokenMetadata?.standard === TokenStandard.Irc30) {
         const decimals = Math.min(tokenMetadata.decimals, MAX_SUPPORTED_DECIMALS)
-        return Big(amount).mul(Big(10).pow(decimals))
+        return convertAmountToMatchUnit(amount, decimals)
     } else {
         throw new Error('convertToRawAmountFromMetadata: Invalid token standard')
     }
+}
+
+function convertAmountToMatchUnit(amount: number, decimalsInUnit: number): Big {
+    return Big(amount).mul(Big(10).pow(decimalsInUnit))
 }
