@@ -15,10 +15,10 @@
         getNetworkIdFromNetworkName,
     } from '@core/network'
     import { getNodeInfo } from '@core/profile-manager'
-    import { networkSetupRouter } from '@core/router'
     import features from '@features/features'
     import { Animation, Button, HTMLButtonType, NodeConfigurationForm, Text, TextType } from '@ui'
     import { onMount } from 'svelte'
+    import { networkSetupRouter } from '../network-setup-router'
 
     let nodeConfigurationForm: NodeConfigurationForm
     let networkId: NetworkId = features?.onboarding?.iota?.enabled
