@@ -1,7 +1,7 @@
 <script lang="ts">
     import { showAppNotification } from '@auxiliary/notification'
     import { OnboardingLayout } from '@components'
-    import { verifyAndStoreMnemonic } from '@contexts/onboarding'
+    import { updateOnboardingProfile, verifyAndStoreMnemonic } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'
@@ -46,6 +46,7 @@
                 busy = true
                 await setStrongholdPassword(strongholdPassword)
                 await verifyAndStoreMnemonic()
+                updateOnboardingProfile({ strongholdPassword })
                 router.next()
             } catch (err) {
                 console.error(err)

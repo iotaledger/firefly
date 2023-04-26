@@ -1,7 +1,5 @@
-import { get } from 'svelte/store'
-
 import { storeMnemonic, verifyMnemonic } from '@core/profile-manager'
-
+import { get } from 'svelte/store'
 import { onboardingProfile, updateOnboardingProfile } from '../stores'
 
 /**
@@ -17,5 +15,5 @@ export async function verifyAndStoreMnemonic(): Promise<void> {
      * CAUTION: This side-effect is here to ensure that the mnemonic
      * is cleaned up after being stored in the Stronghold.
      */
-    updateOnboardingProfile({ hasStoredMnemonic: true, mnemonic: null })
+    updateOnboardingProfile({ hasStoredMnemonic: true })
 }

@@ -1,7 +1,29 @@
 <script lang="ts">
-    import { onDestroy, onMount } from 'svelte'
-    import { Animation, Button, ShimmerClaimingAccountList, Text } from '@ui'
+    import { closePopup } from '@auxiliary/popup'
     import { OnboardingLayout } from '@components'
+    import {
+        ClaimShimmerRewardsError,
+        FindShimmerRewardsError,
+        RestoreProfileType,
+        ShimmerClaimingAccountState,
+        canUserClaimRewards,
+        canUserRecoverFromShimmerClaiming,
+        claimShimmerRewards,
+        createShimmerClaimingProfileManager,
+        findShimmerRewards,
+        hasUserClaimedRewards,
+        initialiseAccountRecoveryConfigurationForShimmerClaiming,
+        initialiseFirstShimmerClaimingAccount,
+        isOnboardingLedgerProfile,
+        onboardingProfile,
+        shimmerClaimingProfileManager,
+        subscribeToWalletApiEventsForShimmerClaiming,
+        syncShimmerClaimingAccount,
+    } from '@contexts/onboarding'
+    import {
+        copyStrongholdFileToProfileDirectory,
+        getShimmerClaimingProfileManagerStorageDirectory,
+    } from '@contexts/onboarding/helpers'
     import { localize } from '@core/i18n'
     import {
         checkOrConnectLedger,
@@ -11,23 +33,8 @@
     } from '@core/ledger'
     import { unsubscribeFromWalletApiEvents } from '@core/profile-manager'
     import { shimmerClaimingRouter } from '@core/router'
-    import {
-        canUserClaimRewards,
-        claimShimmerRewards,
-        ClaimShimmerRewardsError,
-        findShimmerRewards,
-        FindShimmerRewardsError,
-        syncShimmerClaimingAccount,
-        canUserRecoverFromShimmerClaiming,
-        hasUserClaimedRewards,
-        isOnboardingLedgerProfile,
-        onboardingProfile,
-        ShimmerClaimingAccountState,
-        shimmerClaimingProfileManager,
-        subscribeToWalletApiEventsForShimmerClaiming,
-        initialiseAccountRecoveryConfigurationForShimmerClaiming,
-    } from '@contexts/onboarding'
-    import { closePopup } from '@auxiliary/popup'
+    import { Animation, Button, ShimmerClaimingAccountList, Text } from '@ui'
+    import { onDestroy, onMount } from 'svelte'
 
     $: shimmerClaimingAccounts = $onboardingProfile?.shimmerClaimingAccounts ?? []
 
@@ -48,16 +55,32 @@
         hasUserClaimedRewards(shimmerClaimingAccounts) ||
         (hasSearchedForRewardsBefore && canUserRecoverFromShimmerClaiming(shimmerClaimingAccounts))
 
+    function onContinueClick(): void {
+        $shimmerClaimingRouter.next()
+    }
+
     function onBackClick(): void {
         $shimmerClaimingRouter.previous()
+    }
+
+    async function ledgerRaceConditionProtectionWrapper(_function: () => unknown): Promise<void> {
+        try {
+            if ($isOnboardingLedgerProfile) {
+                stopPollingLedgerNanoStatus()
+            }
+            await _function()
+        } catch (err) {
+            console.error('Error in ledgerRaceConditionProtectionWrapper')
+        } finally {
+            if ($isOnboardingLedgerProfile) {
+                pollLedgerNanoStatus()
+            }
+        }
     }
 
     async function searchForRewards(): Promise<void> {
         try {
             isSearchingForRewards = true
-            if ($isOnboardingLedgerProfile) {
-                stopPollingLedgerNanoStatus()
-            }
             await findShimmerRewards()
             hasSearchedForRewardsBefore = true
         } catch (err) {
@@ -67,27 +90,21 @@
                 throw new FindShimmerRewardsError(err)
             }
         } finally {
-            if ($isOnboardingLedgerProfile) {
-                pollLedgerNanoStatus()
-            }
             isSearchingForRewards = false
         }
     }
 
     async function onSearchForRewardsClick(): Promise<void> {
         if ($isOnboardingLedgerProfile) {
-            void checkOrConnectLedger(searchForRewards)
+            void checkOrConnectLedger(() => ledgerRaceConditionProtectionWrapper(searchForRewards))
         } else {
-            await searchForRewards()
+            await ledgerRaceConditionProtectionWrapper(searchForRewards)
         }
     }
 
     async function claimRewards(): Promise<void> {
         try {
             hasTriedClaimingRewards = true
-            if ($isOnboardingLedgerProfile) {
-                stopPollingLedgerNanoStatus()
-            }
             await $shimmerClaimingProfileManager.startBackgroundSync({ syncOnlyMostBasicOutputs: true })
             await claimShimmerRewards()
         } catch (err) {
@@ -99,7 +116,6 @@
         } finally {
             if ($isOnboardingLedgerProfile) {
                 closePopup(true)
-                pollLedgerNanoStatus()
             }
             hasTriedClaimingRewards = true
         }
@@ -107,64 +123,55 @@
 
     async function onClaimRewardsClick(): Promise<void> {
         if ($isOnboardingLedgerProfile) {
-            void checkOrConnectLedger(claimRewards)
+            void checkOrConnectLedger(() => ledgerRaceConditionProtectionWrapper(claimRewards))
         } else {
-            await claimRewards()
+            await ledgerRaceConditionProtectionWrapper(claimRewards)
         }
     }
 
-    function onContinueClick(): void {
-        $shimmerClaimingRouter.next()
-    }
-
-    async function onMountHelper(): Promise<void> {
+    async function setupShimmerClaiming(): Promise<void> {
         subscribeToWalletApiEventsForShimmerClaiming()
-
-        /**
-         * NOTE: If the user only has one Shimmer claiming account,
-         * it is likely they have just navigated to this view for
-         * the first time. If they truly only have one account
-         * with unclaimed rewards, then this will just sync every
-         * time the user navigates to this view.
-         */
-        if ($onboardingProfile?.shimmerClaimingAccounts?.length === 1) {
+        initialiseAccountRecoveryConfigurationForShimmerClaiming()
+        if (!$onboardingProfile?.shimmerClaimingAccounts || $onboardingProfile?.shimmerClaimingAccounts?.length < 1) {
             try {
-                isSearchingForRewards = true
-                if ($isOnboardingLedgerProfile) {
-                    stopPollingLedgerNanoStatus()
+                if ($onboardingProfile?.restoreProfileType === RestoreProfileType.Stronghold) {
+                    const shimmerClaimingProfileDirectory = await getShimmerClaimingProfileManagerStorageDirectory()
+                    await copyStrongholdFileToProfileDirectory(
+                        shimmerClaimingProfileDirectory,
+                        $onboardingProfile?.importFilePath
+                    )
                 }
-                await syncShimmerClaimingAccount($onboardingProfile?.shimmerClaimingAccounts[0])
-                await findShimmerRewards()
+                await createShimmerClaimingProfileManager()
+                if ($onboardingProfile?.restoreProfileType === RestoreProfileType.Mnemonic) {
+                    await $shimmerClaimingProfileManager?.setStrongholdPassword($onboardingProfile?.strongholdPassword)
+                    await $shimmerClaimingProfileManager?.storeMnemonic($onboardingProfile?.mnemonic?.join(' '))
+                } else if ($onboardingProfile?.restoreProfileType === RestoreProfileType.Stronghold) {
+                    await $shimmerClaimingProfileManager?.setStrongholdPassword($onboardingProfile?.strongholdPassword)
+                }
+                await initialiseFirstShimmerClaimingAccount()
+                await syncShimmerClaimingAccount($onboardingProfile?.shimmerClaimingAccounts?.[0])
+                onSearchForRewardsClick()
             } catch (err) {
                 if ($isOnboardingLedgerProfile) {
                     handleLedgerError(err?.error ?? err)
                 } else {
                     throw new FindShimmerRewardsError(err)
                 }
-            } finally {
-                if ($isOnboardingLedgerProfile) {
-                    pollLedgerNanoStatus()
-                }
-                isSearchingForRewards = false
             }
         }
     }
 
     onMount(() => {
-        initialiseAccountRecoveryConfigurationForShimmerClaiming()
-        void onMountHelper()
+        void ledgerRaceConditionProtectionWrapper(setupShimmerClaiming)
     })
 
-    async function onDestroyHelper(): Promise<void> {
+    async function teardownShimmerClaiming(): Promise<void> {
         await unsubscribeFromWalletApiEvents(shimmerClaimingProfileManager)
         await $shimmerClaimingProfileManager?.stopBackgroundSync()
-        if ($isOnboardingLedgerProfile) {
-            stopPollingLedgerNanoStatus()
-        }
     }
 
     onDestroy(() => {
-        void onDestroyHelper()
+        void teardownShimmerClaiming()
     })
 </script>
 
