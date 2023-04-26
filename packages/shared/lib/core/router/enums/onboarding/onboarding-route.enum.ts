@@ -4,7 +4,6 @@ export enum OnboardingRoute {
     ChooseOnboardingFlow = 'chooseOnboardingFlow',
     CreateProfile = 'createProfile',
     RestoreProfile = 'restoreProfile',
-    ClaimProfile = 'claimProfile',
     CompleteOnboarding = 'completeOnboarding',
     Congratulations = 'congratulations',
     LedgerSetup = 'ledgerSetup',

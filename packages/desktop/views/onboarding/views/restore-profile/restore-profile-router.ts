@@ -1,4 +1,4 @@
-import { RestoreProfileType, onboardingProfile } from '@contexts/onboarding'
+import { OnboardingType, RestoreProfileType, onboardingProfile } from '@contexts/onboarding'
 import { Subrouter } from '@core/router'
 import { onboardingRouter } from '@core/router/routers/onboarding-router'
 import { get, writable } from 'svelte/store'
@@ -39,6 +39,15 @@ export class RestoreProfileRouter extends Subrouter<RestoreProfileRoute> {
             case RestoreProfileRoute.RestoreFromMnemonic:
             case RestoreProfileRoute.RestoreFromStronghold:
             case RestoreProfileRoute.RestoreFromLedger:
+                if (_onboardingProfile.onboardingType === OnboardingType.Claim) {
+                    nextRoute = RestoreProfileRoute.ClaimFinder
+                } else {
+                    this.parentRouter.next()
+                    return
+                }
+                break
+            case RestoreProfileRoute.BalanceFinder:
+            case RestoreProfileRoute.ClaimFinder:
                 this.parentRouter.next()
                 return
         }

@@ -3,4 +3,6 @@ export enum RestoreProfileRoute {
     RestoreFromMnemonic = 'restoreFromMnemonic',
     RestoreFromStronghold = 'restoreFromStronghold',
     RestoreFromLedger = 'restoreFromLedger',
+    BalanceFinder = 'balanceFinder',
+    ClaimFinder = 'claimFinder',
 }

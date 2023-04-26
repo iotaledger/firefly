@@ -42,14 +42,10 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                         nextRoute = OnboardingRoute.CreateProfile
                         break
                     }
-                    case OnboardingType.Restore: {
+                    case OnboardingType.Restore:
+                    case OnboardingType.Claim:
                         nextRoute = OnboardingRoute.RestoreProfile
                         break
-                    }
-                    case OnboardingType.Claim: {
-                        nextRoute = OnboardingRoute.ClaimProfile
-                        break
-                    }
                 }
                 break
             }
@@ -58,10 +54,6 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 break
             }
             case OnboardingRoute.RestoreProfile: {
-                nextRoute = OnboardingRoute.CompleteOnboarding
-                break
-            }
-            case OnboardingRoute.ClaimProfile: {
                 nextRoute = OnboardingRoute.CompleteOnboarding
                 break
             }
