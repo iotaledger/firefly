@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { FontWeight, Icon, Text, NetworkIcon } from '@ui'
-    import { AccountSwitcher } from '@components'
+    import { Icon, Text } from '@ui'
+    import { AccountSwitcher, NetworkDrawerButton } from '@components'
     import { PlatformOption } from '@core/app'
     import { platform } from '@core/app/stores'
     import { localize } from '@core/i18n'
@@ -19,9 +19,7 @@
     } from '@core/router'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { popupState } from '@auxiliary/popup'
-    import { DrawerId, openDrawer } from '@desktop/auxilary/drawer'
     import features from '@features/features'
-    import { activeProfile } from '@core/profile/stores'
 
     let isBackButtonVisible = false
 
@@ -60,10 +58,6 @@
                 break
         }
     }
-
-    function onNetworkClick(): void {
-        openDrawer({ id: DrawerId.NetworkConfig })
-    }
 </script>
 
 <top-navigation class:disabled={$platform === PlatformOption.Windows && isPopupVisible}>
@@ -80,12 +74,7 @@
 
     <div class="right-button flex justify-end">
         {#if features?.network?.config?.enabled}
-            <button class="network-button" on:click={onNetworkClick}>
-                <NetworkIcon height={16} width={16} networkId={$activeProfile.network.id} />
-                <Text fontWeight={FontWeight.semibold} color="gray-800" darkColor="white"
-                    >{$activeProfile.network.name}</Text
-                >
-            </button>
+            <NetworkDrawerButton />
         {/if}
     </div>
 </top-navigation>
@@ -102,12 +91,6 @@
         button {
             @apply flex items-center gap-2;
             -webkit-app-region: none;
-        }
-
-        .network-button {
-            @apply bg-white dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 rounded-full text-14;
-            @apply border border-solid border-white dark:border-gray-800;
-            @apply pl-2 pr-3 py-1;
         }
 
         .left-button,
