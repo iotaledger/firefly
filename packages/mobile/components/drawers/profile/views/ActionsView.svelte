@@ -73,7 +73,7 @@
                         <Text type={TextType.h5} classes="text-white">{initials}</Text>
                     </div>
                     <div class="absolute right-0 bottom-0">
-                        <NetworkIcon networkId={network.id} height={14} width={14} />
+                        <NetworkIcon networkId={network.id} height={14} width={14} outlined />
                     </div>
                 </div>
             </div>

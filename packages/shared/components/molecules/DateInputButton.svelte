@@ -46,6 +46,7 @@
 
 <style lang="scss">
     button {
-        width: 93px;
+        // fits variations of MM.DD.YY and will grow to fit variations of MM.DD.YYYY
+        min-width: 93px;
     }
 </style>

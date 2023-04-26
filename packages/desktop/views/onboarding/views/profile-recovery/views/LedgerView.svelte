@@ -3,7 +3,7 @@
     import { OnboardingLayout } from '@components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { NetworkProtocol } from '@core/network'
+    import { NetworkId } from '@core/network'
     import { profileRecoveryRouter } from '@core/router'
     import { onboardingProfile } from '@contexts/onboarding'
 
@@ -34,7 +34,7 @@
             primaryText={localize('views.importFromLedger.haveTrinityLedger')}
             secondaryText={localize('views.importFromLedger.haveTrinityLedgerDescription')}
             icon="settings"
-            hidden={$onboardingProfile.networkProtocol === NetworkProtocol.Shimmer}
+            hidden={$onboardingProfile.network?.id !== NetworkId.Iota}
             onClick={onContinueClick}
         />
     </div>

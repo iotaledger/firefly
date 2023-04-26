@@ -9,15 +9,15 @@ import { COIN_TYPE } from '@core/network/constants'
 import { NetworkId } from '@core/network/enums'
 
 export async function createShimmerClaimingProfileManager(): Promise<void> {
-    const profile = get(onboardingProfile)
-    if (!profile) {
+    const $onboardingProfile = get(onboardingProfile)
+    if (!$onboardingProfile) {
         return
     }
 
     const storagePath = await getShimmerClaimingProfileManagerStorageDirectory()
     const coinType = COIN_TYPE[NetworkId.Iota]
-    const clientOptions = profile?.clientOptions
-    const secretManager = getSecretManagerFromProfileType(profile?.type, storagePath)
+    const clientOptions = $onboardingProfile?.clientOptions
+    const secretManager = getSecretManagerFromProfileType($onboardingProfile?.type, storagePath)
 
     const manager = await initialiseProfileManager(
         storagePath,
