@@ -25,7 +25,7 @@ export class CreateProfileRouter extends Subrouter<CreateProfileRoute> {
         switch (currentRoute) {
             case CreateProfileRoute.ChooseCreateProfileFlow:
                 switch (_onboardingProfile.createProfileType) {
-                    case CreateProfileType.mnemonic:
+                    case CreateProfileType.Mnemonic:
                         nextRoute = CreateProfileRoute.CreateFromMnemonic
                         break
                     case CreateProfileType.Ledger:
