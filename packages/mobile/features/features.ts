@@ -123,7 +123,7 @@ const features = {
                 enabled: false,
             },
             deleteProfile: {
-                enabled: false,
+                enabled: true,
             },
         },
         advanced: {

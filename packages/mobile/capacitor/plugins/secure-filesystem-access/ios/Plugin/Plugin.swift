@@ -73,8 +73,8 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
 
     public func getAppPath(folder: String) -> URL {
         let fm = FileManager.default
-        let documents = fm.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let appPath = documents.appendingPathComponent("__storage__/" + folder, isDirectory: true)
+        let documents = fm.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
+        let appPath = documents.appendingPathComponent(folder, isDirectory: true)
         return appPath
     }
 
@@ -86,6 +86,7 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
         let fileUrl = getAppPath(folder: folder)
         if FileManager.default.fileExists(atPath: fileUrl.path) {
             try? FileManager.default.removeItem(atPath: fileUrl.path)
+            print("Profile folder removed!", fileUrl.path)
         }
 
         call.resolve()
@@ -109,8 +110,8 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
             return call.reject("folder is required")
         }
         let fileUrl = getAppPath(folder: folder)
-        if let result = try? FileManager.default.contentsOfDirectory(at: fileUrl, includingPropertiesForKeys: nil, options: []) {
-            call.resolve(["result": result])
+        if let result = try? FileManager.default.contentsOfDirectory(atPath: fileUrl.path) {
+            call.resolve(["files": result])
         } else {
             call.reject("failed to access the directory resource")
         }
