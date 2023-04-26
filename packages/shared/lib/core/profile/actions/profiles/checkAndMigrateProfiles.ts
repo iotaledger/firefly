@@ -1,4 +1,4 @@
-import { NETWORK } from '@core/network'
+import { COIN_TYPE, getDefaultPersistedNetwork, NetworkId } from '@core/network'
 import { INode } from '@core/network/interfaces'
 import { get } from 'svelte/store'
 import {
@@ -9,6 +9,7 @@ import {
 import { IPersistedProfile } from '../../interfaces'
 import { currentProfileVersion, profiles, saveProfile } from '../../stores'
 import { DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_SECONDS, DEFAULT_MAX_NFT_SIZE_IN_MEGABYTES } from '@core/nfts'
+import { TokenStandard } from '@core/wallet'
 
 /**
  * Migrates profile data in need of being modified to accommodate changes
@@ -156,9 +157,6 @@ function persistedProfileMigrationToV9(existingProfile: IPersistedProfile): void
 }
 
 function persistedProfileMigrationToV10(existingProfile: IPersistedProfile): void {
-    const network = NETWORK?.[existingProfile?.networkProtocol]?.[existingProfile?.networkType]
-    existingProfile.network = network
-
     existingProfile.settings = {
         ...existingProfile.settings,
         strongholdPasswordTimeoutInMinutes: DEFAULT_STRONGHOLD_PASSWORD_TIMEOUT_IN_MINUTES,
@@ -168,9 +166,33 @@ function persistedProfileMigrationToV10(existingProfile: IPersistedProfile): voi
     saveProfile(existingProfile)
 }
 
-function persistedProfileMigrationToV11(existingProfile: IPersistedProfile): void {
-    const network = NETWORK?.[existingProfile?.networkProtocol]?.[existingProfile?.networkType]
-    existingProfile.network = structuredClone(network)
+function getNetworkIdFromOldNetworkType(networkType: 'mainnet' | 'devnet' | 'private-net'): NetworkId {
+    // At this point you have not been able to create IOTA profiles so we can assume that the network protocol was Shimmer
+    switch (networkType) {
+        case 'mainnet':
+            return NetworkId.Shimmer
+        case 'devnet':
+            return NetworkId.Testnet
+        case 'private-net':
+            return NetworkId.Custom
+        default:
+            return
+    }
+}
+
+function persistedProfileMigrationToV11(
+    existingProfile: IPersistedProfile & { networkType: 'mainnet' | 'devnet' | 'private-net' }
+): void {
+    if (!existingProfile?.network) {
+        const networkId = getNetworkIdFromOldNetworkType(existingProfile?.networkType)
+        if (networkId === NetworkId.Shimmer || networkId === NetworkId.Testnet) {
+            const network = getDefaultPersistedNetwork(networkId)
+            existingProfile.network = structuredClone(network)
+        }
+    }
+
+    existingProfile.network.coinType = COIN_TYPE[NetworkId.Shimmer]
+    existingProfile.network.baseToken = { ...existingProfile.network.baseToken, standard: TokenStandard.BaseToken }
 
     existingProfile.settings = {
         ...existingProfile.settings,
@@ -179,7 +201,28 @@ function persistedProfileMigrationToV11(existingProfile: IPersistedProfile): voi
 
     existingProfile.forceAssetRefresh = true
 
-    saveProfile(existingProfile)
+    const newProfile = {}
+    const keysToKeep = [
+        'id',
+        'name',
+        'type',
+        'lastStrongholdBackupTime',
+        'settings',
+        'accountMetadata',
+        'isDeveloperProfile',
+        'hasVisitedDashboard',
+        'lastUsedAccountIndex',
+        'clientOptions',
+        'forceAssetRefresh',
+        'strongholdVersion',
+        'network',
+    ]
+    keysToKeep.forEach((key) => {
+        const existingValue = existingProfile?.[key]
+        newProfile[key] = existingValue
+    })
+
+    saveProfile(newProfile as IPersistedProfile)
 }
 
 // TODO: Rename accountMetadata to accountPersistedData

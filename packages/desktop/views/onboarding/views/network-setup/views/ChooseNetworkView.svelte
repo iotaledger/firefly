@@ -9,7 +9,7 @@
     } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { NETWORK, NetworkId, getDefaultClientOptions } from '@core/network'
+    import { NetworkId, getDefaultClientOptions, getDefaultPersistedNetwork } from '@core/network'
     import { profiles } from '@core/profile'
     import features from '@features/features'
     import { Animation, OnboardingButton, Text, TextType } from '@ui'
@@ -39,7 +39,7 @@
 
     function onNetworkSelectionClick(networkId: NetworkId): void {
         if (networkId !== NetworkId.Custom) {
-            const network = NETWORK?.[networkId]
+            const network = getDefaultPersistedNetwork(networkId)
             const clientOptions = getDefaultClientOptions(networkId)
             updateOnboardingProfile({ network, clientOptions })
         }
