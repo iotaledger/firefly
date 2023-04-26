@@ -29,6 +29,7 @@
         }
     }
     $: isPopupVisible = $popupState?.active && $popupState?.id !== 'busy'
+    $: isWindows = $platform === PlatformOption.Windows
 
     function isCorrectRoute(): boolean {
         switch ($dashboardRoute) {
@@ -61,7 +62,7 @@
 </script>
 
 <top-navigation class:disabled={$platform === PlatformOption.Windows && isPopupVisible}>
-    <div class="left-button">
+    <div class="left-button" class:large={isWindows}>
         {#if isBackButtonVisible}
             <button type="button" on:click={onBackClick}>
                 <Icon width="18" icon={IconEnum.ArrowLeft} classes="text-gray-800 dark:text-gray-500" />
@@ -72,9 +73,12 @@
 
     <AccountSwitcher />
 
-    <div class="right-button flex justify-end">
+    <div class="right-button flex justify-end" class:large={isWindows}>
         {#if features?.network?.config?.enabled}
             <NetworkDrawerButton />
+            {#if isWindows}
+                <div class="windows-buttons" />
+            {/if}
         {/if}
     </div>
 </top-navigation>
@@ -96,6 +100,14 @@
         .left-button,
         .right-button {
             width: 150px;
+
+            &.large {
+                width: 225px;
+            }
+        }
+
+        .windows-buttons {
+            width: 30rem;
         }
     }
 </style>
