@@ -6,10 +6,12 @@
     import { localize } from '@core/i18n'
     import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'
     import { setStrongholdPassword } from '@core/profile-manager'
+    import { Subrouter } from '@core/router'
     import { PASSWORD_REASON_MAP } from '@core/stronghold'
     import { Animation, Button, HTMLButtonType, PasswordInput, Text, TextType } from '@ui'
     import zxcvbn from 'zxcvbn'
-    import { createFromMnemonicRouter } from '../create-from-mnemonic-router'
+
+    export let router: Subrouter<unknown>
 
     let strongholdPassword = ''
     let confirmedStrongholdPassword = ''
@@ -44,7 +46,7 @@
                 busy = true
                 await setStrongholdPassword(strongholdPassword)
                 await verifyAndStoreMnemonic()
-                $createFromMnemonicRouter.next()
+                router.next()
             } catch (err) {
                 console.error(err)
                 showAppNotification({
@@ -58,7 +60,7 @@
     }
 
     function onBackClick(): void {
-        $createFromMnemonicRouter.previous()
+        router.previous()
     }
 
     function checkPasswordStrength(password: string): unknown {
