@@ -61,7 +61,7 @@
     }
 </script>
 
-<top-navigation class:disabled={$platform === PlatformOption.Windows && isPopupVisible}>
+<top-navigation class:disabled={isWindows && isPopupVisible} class:is-windows={isWindows}>
     <div class="left-button" class:large={isWindows}>
         {#if isBackButtonVisible}
             <button type="button" on:click={onBackClick}>
@@ -73,12 +73,9 @@
 
     <AccountSwitcher />
 
-    <div class="right-button flex justify-end" class:large={isWindows}>
+    <div class="right-button flex justify-end">
         {#if features?.network?.config?.enabled}
             <NetworkDrawerButton />
-            {#if isWindows}
-                <div class="windows-buttons" />
-            {/if}
         {/if}
     </div>
 </top-navigation>
@@ -92,6 +89,11 @@
             @apply opacity-50 pointer-events-none;
         }
 
+        &.is-windows {
+            @apply pr-0;
+            width: calc(100% - 15rem);
+        }
+
         button {
             @apply flex items-center gap-2;
             -webkit-app-region: none;
@@ -99,10 +101,10 @@
 
         .left-button,
         .right-button {
-            width: 150px;
+            width: 10rem;
 
             &.large {
-                width: 225px;
+                width: 19rem;
             }
         }
 
