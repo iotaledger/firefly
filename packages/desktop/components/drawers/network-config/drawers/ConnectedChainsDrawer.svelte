@@ -7,6 +7,7 @@
     import { NetworkCard } from '@components'
     import { localize } from '@core/i18n'
     import { selectedAccount } from '@core/account/stores'
+    import networkFeatures from '@features/network.features'
 
     let connectedChains: IConnectedChain[] = []
 
@@ -42,12 +43,14 @@
             <NetworkCard {...chain} />
         {/each}
     </div>
-    <button
-        type="button"
-        class="mt-4 flex flex-row items-center justify-center w-full space-x-2 bg-transparent text-blue-500 px-8 py-3 text-15 rounded-lg"
-        on:click|stopPropagation={onAddChainClick}
-    >
-        <Icon icon={IconEnum.Plus} height={12} />
-        {localize('views.dashboard.drawers.networkConfig.addChain.title')}
-    </button>
+    {#if networkFeatures.config.addChain.enabled}
+        <button
+            type="button"
+            class="mt-4 flex flex-row items-center justify-center w-full space-x-2 bg-transparent text-blue-500 px-8 py-3 text-15 rounded-lg"
+            on:click|stopPropagation={onAddChainClick}
+        >
+            <Icon icon={IconEnum.Plus} height={12} />
+            {localize('views.dashboard.drawers.networkConfig.addChain.title')}
+        </button>
+    {/if}
 </connected-chains-drawer>

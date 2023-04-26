@@ -66,9 +66,12 @@
             <Icon height="24" width="20" icon="arrow-right" />
         {/if}
         {#if filterUnit.subunit.type === 'range'}
-            <DateInputButton bind:value={filterUnit.subunit.start} />
-            <Text>{localize('general.and')}</Text>
-            <DateInputButton bind:value={filterUnit.subunit.end} />
+            <!-- negative right margin prevents dates from wrapping to a second row unless length is MM.DD.YYYY -->
+            <div class="flex items-center flex-wrap gap-2 -mr-1">
+                <DateInputButton bind:value={filterUnit.subunit.start} />
+                <Text>{localize('general.and')}</Text>
+                <DateInputButton bind:value={filterUnit.subunit.end} />
+            </div>
         {:else if filterUnit.subunit.type === 'single'}
             <DateInputButton bind:value={filterUnit.subunit.value} />
         {:else if filterUnit.subunit.type === 'unit'}
