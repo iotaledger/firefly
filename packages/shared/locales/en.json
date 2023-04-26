@@ -1419,7 +1419,7 @@
         "and": "and",
         "receiveFunds": "Receive funds",
         "address": "Address",
-        "myAddress": "My Address",
+        "myAddress": "My address",
         "myNetworkAddress": "My {networkName} address",
         "shareAddress": "Share an address",
         "yourAddress": "Your address",
@@ -2287,6 +2287,12 @@
                 "Confirmed": "alias created",
                 "Failed": "Failed to create alias"
             }
+        },
+        "networkHealth": {
+            "down": "Down",
+            "degraded": "Degraded",
+            "operational": "Operational",
+            "disconnected": "Disconnected"
         },
         "locked": "locked",
         "smartContract": "smart contract"
