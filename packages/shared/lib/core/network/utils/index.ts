@@ -1,3 +1,4 @@
+export * from './buildChainFromNetwork'
 export * from './buildPersistedNetworkFromNodeInfoResponse'
 export * from './checkNetworkId'
 export * from './checkNodeUrlValidity'
