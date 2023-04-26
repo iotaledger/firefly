@@ -8,6 +8,7 @@
     } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
+    import { ProfileType } from '@core/profile'
     import { destroyProfileManager } from '@core/profile-manager'
     import features from '@features/features'
     import { Animation, OnboardingButton, Text } from '@ui'
@@ -17,7 +18,8 @@
     $: networkId = $onboardingProfile?.network?.id
 
     async function onProfileTypeSelectionClick(createProfileType: CreateProfileType): Promise<void> {
-        updateOnboardingProfile({ createProfileType })
+        const type = createProfileType === CreateProfileType.Ledger ? ProfileType.Ledger : ProfileType.Software
+        updateOnboardingProfile({ createProfileType, type })
         await initialiseProfileManagerFromOnboardingProfile()
         $createProfileRouter.next()
     }
@@ -48,7 +50,7 @@
             icon="file"
             hidden={features?.onboarding?.[networkId]?.newProfile?.softwareProfile?.hidden}
             disabled={!features?.onboarding?.[networkId]?.newProfile?.softwareProfile?.enabled}
-            onClick={() => onProfileTypeSelectionClick(CreateProfileType.Software)}
+            onClick={() => onProfileTypeSelectionClick(CreateProfileType.Mnemonic)}
         />
         <OnboardingButton
             primaryText={localize('views.onboarding.profileSetup.setupNew.ledgerAccount.title')}

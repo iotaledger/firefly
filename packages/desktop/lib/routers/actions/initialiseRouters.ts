@@ -41,6 +41,10 @@ import {
     createFromMnemonicRouter,
 } from '../../../views/onboarding/views/create-from-mnemonic/create-from-mnemonic-router'
 import {
+    CreateFromLedgerRouter,
+    createFromLedgerRouter,
+} from '../../../views/onboarding/views/create-from-ledger/create-from-ledger-router'
+import {
     CompleteOnboardingRouter,
     completeOnboardingRouter,
 } from '../../../views/onboarding/views/complete-onboarding/complete-onboarding-router'
@@ -82,6 +86,7 @@ function initialiseOnboardingSubrouters(): void {
     networkSetupRouter.set(new NetworkSetupRouter())
     createProfileRouter.set(new CreateProfileRouter())
     createFromMnemonicRouter.set(new CreateFromMnemonicRouter())
+    createFromLedgerRouter.set(new CreateFromLedgerRouter())
     completeOnboardingRouter.set(new CompleteOnboardingRouter())
     ledgerSetupRouter.set(new LedgerSetupRouter())
     strongholdSetupRouter.set(new StrongholdSetupRouter())

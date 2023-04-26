@@ -1,5 +1,5 @@
 export enum CreateProfileRoute {
     ChooseCreateProfileFlow = 'chooseCreateProfileFlow',
     CreateFromMnemonic = 'createFromMnemonic',
-    CreateFromLedger = 'createFromMnemonic',
+    CreateFromLedger = 'createFromLedger',
 }

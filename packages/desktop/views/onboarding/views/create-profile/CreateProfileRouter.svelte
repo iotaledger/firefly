@@ -1,9 +1,10 @@
 <script lang="ts">
-    import { Transition } from 'shared/components'
+    import { Transition } from '@ui'
+    import { CreateFromLedgerRouter } from '../create-from-ledger'
+    import { CreateFromMnemonicRouter } from '../create-from-mnemonic'
     import { CreateProfileRoute } from './create-profile-route.enum'
     import { createProfileRoute } from './create-profile-router'
-    import ChooseCreateProfileFlowView from './views/ChooseCreateProfileFlowView.svelte'
-    import CreateFromMnemonicRouter from '../create-from-mnemonic/CreateFromMnemonicRouter.svelte'
+    import { ChooseCreateProfileFlowView } from './views'
 </script>
 
 {#if $createProfileRoute === CreateProfileRoute.ChooseCreateProfileFlow}
@@ -15,5 +16,7 @@
         <CreateFromMnemonicRouter />
     </Transition>
 {:else if $createProfileRoute === CreateProfileRoute.CreateFromLedger}
-    <Transition />
+    <Transition>
+        <CreateFromLedgerRouter />
+    </Transition>
 {/if}

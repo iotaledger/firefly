@@ -1,4 +1,4 @@
 export enum CreateProfileType {
-    Software = 'software',
+    Mnemonic = 'mnemonic',
     Ledger = 'ledger',
 }
