@@ -67,8 +67,8 @@
         convertToFiat(
             // Only show actually migrated balance to user
             $totalMigratedBalance,
-            get(currencies)[CurrencyTypes.USD],
-            get(exchangeRates)[AvailableExchangeRates.USD]
+            get(currencies)?.[CurrencyTypes.USD],
+            get(exchangeRates)?.[AvailableExchangeRates.USD]
         ),
         AvailableExchangeRates.USD
     )

@@ -41,8 +41,8 @@
     const getFiatBalance = (balance: number) => {
         const balanceAsFiat = convertToFiat(
             balance,
-            get(currencies)[CurrencyTypes.USD],
-            get(exchangeRates)[AvailableExchangeRates.USD]
+            get(currencies)?.[CurrencyTypes.USD],
+            get(exchangeRates)?.[AvailableExchangeRates.USD]
         )
 
         if (balanceAsFiat === 0) {
