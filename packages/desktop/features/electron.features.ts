@@ -2,7 +2,7 @@ import { IElectronFeatures } from './interfaces'
 
 const electronFeatures: IElectronFeatures = {
     developerTools: {
-        enabled: false,
+        enabled: true,
     },
     autoUpdate: {
         enabled: true,
