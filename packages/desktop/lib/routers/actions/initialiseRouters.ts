@@ -17,8 +17,6 @@ import {
     ledgerSetupRouter,
     loginRouter,
     LoginRouter,
-    NetworkSetupRouter,
-    networkSetupRouter,
     ProfileBackupRouter,
     profileBackupRouter,
     ProfileRecoveryRouter,
@@ -32,6 +30,10 @@ import {
     StrongholdSetupRouter,
     strongholdSetupRouter,
 } from '@core/router/subrouters'
+import {
+    NetworkSetupRouter,
+    networkSetupRouter,
+} from '../../../views/onboarding/views/network-setup/network-setup-router'
 import {
     CreateProfileRouter,
     createProfileRouter,

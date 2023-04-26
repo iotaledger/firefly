@@ -11,10 +11,10 @@
     import { localize } from '@core/i18n'
     import { NETWORK, NetworkId, getDefaultClientOptions } from '@core/network'
     import { profiles } from '@core/profile'
-    import { networkSetupRouter } from '@core/router'
     import features from '@features/features'
     import { Animation, OnboardingButton, Text, TextType } from '@ui'
     import { onMount } from 'svelte'
+    import { networkSetupRouter } from '../network-setup-router'
 
     let networkIcon: { [key in NetworkId]: string }
     $: networkIcon = {

@@ -1,9 +1,10 @@
 <script lang="ts">
     import { Platform } from '@core/app'
-    import { NetworkSetupRoute, networkSetupRoute } from '@core/router'
     import features from '@features/features'
-    import { Transition } from 'shared/components'
-    import { ChooseNetworkView, SetupCustomNetworkView } from './views'
+    import { Transition } from '@ui'
+    import { NetworkSetupRoute } from './network-setup-route.enum'
+    import { networkSetupRoute } from './network-setup-router'
+    import { ChooseNetworkView, CustomNetworkView } from './views'
 
     $: if (features.analytics.onboardingRoute.networkSetupRoute.enabled && $networkSetupRoute) {
         Platform.trackEvent('network-setup-route', { route: $networkSetupRoute })
@@ -14,8 +15,8 @@
     <Transition>
         <ChooseNetworkView />
     </Transition>
-{:else if $networkSetupRoute === NetworkSetupRoute.SetupCustomNetworkView}
+{:else if $networkSetupRoute === NetworkSetupRoute.CustomNetworkView}
     <Transition>
-        <SetupCustomNetworkView />
+        <CustomNetworkView />
     </Transition>
 {/if}

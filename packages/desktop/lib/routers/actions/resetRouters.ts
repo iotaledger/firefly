@@ -1,4 +1,3 @@
-import { get } from 'svelte/store'
 import {
     appRouter,
     collectiblesRouter,
@@ -6,7 +5,6 @@ import {
     governanceRouter,
     ledgerSetupRouter,
     loginRouter,
-    networkSetupRouter,
     onboardingRouter,
     profileBackupRouter,
     profileRecoveryRouter,
@@ -17,6 +15,12 @@ import {
     strongholdSetupRouter,
     updateStrongholdRouter,
 } from '@core/router'
+import { get } from 'svelte/store'
+import { completeOnboardingRouter } from '../../../views/onboarding/views/complete-onboarding/complete-onboarding-router'
+import { createFromLedgerRouter } from '../../../views/onboarding/views/create-from-ledger/create-from-ledger-router'
+import { createFromMnemonicRouter } from '../../../views/onboarding/views/create-from-mnemonic/create-from-mnemonic-router'
+import { createProfileRouter } from '../../../views/onboarding/views/create-profile/create-profile-router'
+import { networkSetupRouter } from '../../../views/onboarding/views/network-setup/network-setup-router'
 
 export function resetRouters(): void {
     resetSubrouters()
@@ -25,8 +29,12 @@ export function resetRouters(): void {
 
 function resetSubrouters(): void {
     get(loginRouter).reset()
-    get(ledgerSetupRouter).reset()
     get(networkSetupRouter).reset()
+    get(createProfileRouter).reset()
+    get(createFromMnemonicRouter).reset()
+    get(createFromLedgerRouter).reset()
+    get(completeOnboardingRouter).reset()
+    get(ledgerSetupRouter).reset()
     get(strongholdSetupRouter).reset()
     get(profileBackupRouter).reset()
     get(profileRecoveryRouter).reset()

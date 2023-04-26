@@ -1,8 +1,8 @@
-import { onboardingProfile } from '@contexts/onboarding'
 import { get, writable } from 'svelte/store'
-import { Subrouter } from '../../classes'
-import { NetworkSetupRoute } from '../../enums'
-import { onboardingRouter } from '../../routers'
+import { onboardingProfile } from '@contexts/onboarding/stores'
+import { Subrouter } from '@core/router'
+import { onboardingRouter } from '@core/router/routers/onboarding-router'
+import { NetworkSetupRoute } from './network-setup-route.enum'
 
 export const networkSetupRoute = writable<NetworkSetupRoute>(null)
 export const networkSetupRouter = writable<NetworkSetupRouter>(null)
@@ -24,11 +24,11 @@ export class NetworkSetupRouter extends Subrouter<NetworkSetupRoute> {
                     this.parentRouter.next()
                     return
                 } else {
-                    nextRoute = NetworkSetupRoute.SetupCustomNetworkView
+                    nextRoute = NetworkSetupRoute.CustomNetworkView
                     break
                 }
             }
-            case NetworkSetupRoute.SetupCustomNetworkView:
+            case NetworkSetupRoute.CustomNetworkView:
                 this.parentRouter.next()
                 return
         }
