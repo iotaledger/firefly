@@ -1,3 +1,5 @@
+export * from './create-profile-type.enum'
+export * from './onboarding-type.enum'
 export * from './profile-protection-type.enum'
 export * from './profile-setup-type.enum'
 export * from './profile-recovery-type.enum'

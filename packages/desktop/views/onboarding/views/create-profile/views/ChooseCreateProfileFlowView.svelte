@@ -1,0 +1,65 @@
+<script lang="ts">
+    import { OnboardingLayout } from '@components'
+    import {
+        CreateProfileType,
+        initialiseProfileManagerFromOnboardingProfile,
+        onboardingProfile,
+        updateOnboardingProfile,
+    } from '@contexts/onboarding'
+    import { mobile } from '@core/app'
+    import { localize } from '@core/i18n'
+    import { destroyProfileManager } from '@core/profile-manager'
+    import features from '@features/features'
+    import { Animation, OnboardingButton, Text } from '@ui'
+    import { onMount } from 'svelte'
+    import { createProfileRouter } from '../create-profile-router'
+
+    $: networkId = $onboardingProfile?.network?.id
+
+    async function onProfileTypeSelectionClick(createProfileType: CreateProfileType): Promise<void> {
+        updateOnboardingProfile({ createProfileType })
+        await initialiseProfileManagerFromOnboardingProfile()
+        $createProfileRouter.next()
+    }
+
+    function onBackClick(): void {
+        $createProfileRouter.previous()
+    }
+
+    onMount(async () => {
+        await destroyProfileManager()
+        updateOnboardingProfile({ type: null, hasInitialisedProfileManager: false })
+    })
+</script>
+
+<OnboardingLayout {onBackClick}>
+    <div slot="title">
+        <Text type="h2">{localize('views.onboarding.profileSetup.setupNew.title')}</Text>
+    </div>
+    <div slot="leftpane__content">
+        <Text type="p" secondary classes="mb-8">{localize('views.onboarding.profileSetup.setupNew.body')}</Text>
+    </div>
+    <div slot="leftpane__action" class="flex flex-col space-y-4">
+        <OnboardingButton
+            primaryText={localize('views.onboarding.profileSetup.setupNew.softwareAccount.title')}
+            secondaryText={!$mobile
+                ? localize('views.onboarding.profileSetup.setupNew.softwareAccount.description')
+                : ''}
+            icon="file"
+            hidden={features?.onboarding?.[networkId]?.newProfile?.softwareProfile?.hidden}
+            disabled={!features?.onboarding?.[networkId]?.newProfile?.softwareProfile?.enabled}
+            onClick={() => onProfileTypeSelectionClick(CreateProfileType.Software)}
+        />
+        <OnboardingButton
+            primaryText={localize('views.onboarding.profileSetup.setupNew.ledgerAccount.title')}
+            secondaryText={!$mobile ? localize('views.onboarding.profileSetup.setupNew.ledgerAccount.description') : ''}
+            icon="chip"
+            hidden={features?.onboarding?.[networkId]?.newProfile?.ledgerProfile?.hidden}
+            disabled={!features?.onboarding?.[networkId]?.newProfile?.ledgerProfile?.enabled}
+            onClick={() => onProfileTypeSelectionClick(CreateProfileType.Ledger)}
+        />
+    </div>
+    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-purple dark:bg-gray-900'}">
+        <Animation classes="setup-anim-aspect-ratio" animation="import-desktop" />
+    </div>
+</OnboardingLayout>

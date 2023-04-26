@@ -32,6 +32,18 @@ import {
     StrongholdSetupRouter,
     strongholdSetupRouter,
 } from '@core/router/subrouters'
+import {
+    CreateProfileRouter,
+    createProfileRouter,
+} from '../../../views/onboarding/views/create-profile/create-profile-router'
+import {
+    CreateFromMnemonicRouter,
+    createFromMnemonicRouter,
+} from '../../../views/onboarding/views/create-from-mnemonic/create-from-mnemonic-router'
+import {
+    CompleteOnboardingRouter,
+    completeOnboardingRouter,
+} from '../../../views/onboarding/views/complete-onboarding/complete-onboarding-router'
 
 export function initialiseRouters(): void {
     /**
@@ -67,8 +79,11 @@ function initialiseSubrouters(): void {
 }
 
 function initialiseOnboardingSubrouters(): void {
-    ledgerSetupRouter.set(new LedgerSetupRouter())
     networkSetupRouter.set(new NetworkSetupRouter())
+    createProfileRouter.set(new CreateProfileRouter())
+    createFromMnemonicRouter.set(new CreateFromMnemonicRouter())
+    completeOnboardingRouter.set(new CompleteOnboardingRouter())
+    ledgerSetupRouter.set(new LedgerSetupRouter())
     strongholdSetupRouter.set(new StrongholdSetupRouter())
     profileBackupRouter.set(new ProfileBackupRouter())
     profileRecoveryRouter.set(new ProfileRecoveryRouter())

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { OnboardingLayout } from '@components'
     import {
-        ProfileSetupType,
+        OnboardingType,
         initialiseOnboardingProfile,
         onboardingProfile,
         shouldBeDeveloperProfile,
@@ -12,21 +12,21 @@
     import { getNetworkNameFromNetworkId, getDefaultClientOptions } from '@core/network'
     import { profiles } from '@core/profile'
     import { destroyProfileManager } from '@core/profile-manager'
-    import { profileSetupRouter } from '@core/router'
+    import { onboardingRouter } from '@core/router'
     import features from '@features/features'
     import { Animation, OnboardingButton, Text } from '@ui'
     import { onMount } from 'svelte'
 
     const networkId = $onboardingProfile?.network?.id
 
-    function onProfileSetupSelectionClick(setupType: ProfileSetupType): void {
-        updateOnboardingProfile({ setupType })
-        $profileSetupRouter.next()
+    function onProfileSetupSelectionClick(onboardingType: OnboardingType): void {
+        updateOnboardingProfile({ onboardingType })
+        $onboardingRouter.next()
     }
 
     function onBackClick(): void {
         updateOnboardingProfile({ clientOptions: undefined })
-        $profileSetupRouter.previous()
+        $onboardingRouter.previous()
     }
 
     onMount(async () => {
@@ -79,7 +79,7 @@
             iconWidth="11"
             hidden={features?.onboarding?.[networkId]?.newProfile?.hidden}
             disabled={!features?.onboarding?.[networkId]?.newProfile?.enabled}
-            onClick={() => onProfileSetupSelectionClick(ProfileSetupType.New)}
+            onClick={() => onProfileSetupSelectionClick(OnboardingType.Create)}
         />
         <OnboardingButton
             primaryText={localize(`actions.restoreWallet.${networkId}`)}
@@ -87,7 +87,7 @@
             icon="transfer"
             hidden={features?.onboarding?.[networkId]?.restoreProfile?.hidden}
             disabled={!features?.onboarding?.[networkId]?.restoreProfile?.enabled}
-            onClick={() => onProfileSetupSelectionClick(ProfileSetupType.Recovered)}
+            onClick={() => onProfileSetupSelectionClick(OnboardingType.Restore)}
         />
         <OnboardingButton
             primaryText={localize('actions.claimShimmer')}
@@ -97,7 +97,7 @@
             iconWidth="24"
             hidden={features?.onboarding?.[networkId]?.claimRewards?.hidden}
             disabled={!features?.onboarding?.[networkId]?.claimRewards?.enabled}
-            onClick={() => onProfileSetupSelectionClick(ProfileSetupType.Claimed)}
+            onClick={() => onProfileSetupSelectionClick(OnboardingType.Claim)}
         />
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-green dark:bg-gray-900'}">

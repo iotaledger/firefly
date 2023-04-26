@@ -2,6 +2,7 @@ import { get, writable } from 'svelte/store'
 
 import {
     onboardingProfile,
+    OnboardingType,
     ProfileRecoveryType,
     ProfileSetupType,
     shouldBeDeveloperProfile,
@@ -31,9 +32,43 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 nextRoute = OnboardingRoute.NetworkSetup
                 break
             }
-            case OnboardingRoute.NetworkSetup:
-                nextRoute = OnboardingRoute.ChooseFlow
+            case OnboardingRoute.NetworkSetup: {
+                nextRoute = OnboardingRoute.ChooseOnboardingFlow
                 break
+            }
+            case OnboardingRoute.ChooseOnboardingFlow: {
+                switch (get(onboardingProfile)?.onboardingType) {
+                    case OnboardingType.Create: {
+                        nextRoute = OnboardingRoute.CreateProfile
+                        break
+                    }
+                    case OnboardingType.Restore: {
+                        nextRoute = OnboardingRoute.RestoreProfile
+                        break
+                    }
+                    case OnboardingType.Claim: {
+                        nextRoute = OnboardingRoute.ClaimProfile
+                        break
+                    }
+                }
+                break
+            }
+            case OnboardingRoute.CreateProfile: {
+                nextRoute = OnboardingRoute.CompleteOnboarding
+                break
+            }
+            case OnboardingRoute.RestoreProfile: {
+                nextRoute = OnboardingRoute.CompleteOnboarding
+                break
+            }
+            case OnboardingRoute.ClaimProfile: {
+                nextRoute = OnboardingRoute.CompleteOnboarding
+                break
+            }
+            case OnboardingRoute.CompleteOnboarding: {
+                get(appRouter).next()
+                return
+            }
             case OnboardingRoute.ProfileSetup: {
                 const _onboardingProfile = get(onboardingProfile)
                 if (!_onboardingProfile?.mustVisitProfileName) {

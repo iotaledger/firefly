@@ -15,6 +15,10 @@
         },
         "types": ["node"]
     },
-    "include": ["./lib"],
+    "include": [
+        "./lib",
+        "../desktop/views/onboarding/views/create-profile/create-profile-route.enum.ts",
+        "../desktop/views/onboarding/views/create-profile/create-profile-router.ts"
+    ],
     "exclude": ["**/node_modules", "**/tests"]
 }
