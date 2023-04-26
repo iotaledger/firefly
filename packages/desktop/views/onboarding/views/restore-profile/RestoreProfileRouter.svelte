@@ -6,7 +6,7 @@
     import { restoreProfileRoute } from './restore-profile-router'
     import { ChooseRestoreProfileFlowView } from './views'
     import { CreateFromLedgerRouter } from '../create-from-ledger'
-    import { restoreFromStrongholdRouter } from '../restore-from-stronghold/restore-from-stronghold-router'
+    import { restoreProfileRouter } from '../restore-profile/restore-profile-router'
 </script>
 
 {#if $restoreProfileRoute === RestoreProfileRoute.ChooseRestoreProfileFlow}
@@ -23,6 +23,6 @@
     </Transition>
 {:else if $restoreProfileRoute === RestoreProfileRoute.RestoreFromLedger}
     <Transition>
-        <CreateFromLedgerRouter router={$restoreFromStrongholdRouter} />
+        <CreateFromLedgerRouter router={$restoreProfileRouter} />
     </Transition>
 {/if}
