@@ -3,6 +3,7 @@
     import { RestoreProfileRoute } from './restore-profile-route.enum'
     import { ChooseRestoreProfileFlowView } from './views'
     import { restoreProfileRoute } from './restore-profile-router'
+    import { RestoreFromMnemonicRouter } from '../restore-from-mnemonic/'
 </script>
 
 {#if $restoreProfileRoute === RestoreProfileRoute.ChooseRestoreProfileFlow}
@@ -10,7 +11,9 @@
         <ChooseRestoreProfileFlowView />
     </Transition>
 {:else if $restoreProfileRoute === RestoreProfileRoute.RestoreFromMnemonic}
-    <Transition>RestoreFromMnemonic</Transition>
+    <Transition>
+        <RestoreFromMnemonicRouter />
+    </Transition>
 {:else if $restoreProfileRoute === RestoreProfileRoute.RestoreFromStronghold}
     <Transition>RestoreFromStronghold</Transition>
 {:else if $restoreProfileRoute === RestoreProfileRoute.RestoreFromLedger}

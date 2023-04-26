@@ -22,6 +22,7 @@ import { createFromMnemonicRouter } from '../../../views/onboarding/views/create
 import { createProfileRouter } from '../../../views/onboarding/views/create-profile/create-profile-router'
 import { networkSetupRouter } from '../../../views/onboarding/views/network-setup/network-setup-router'
 import { restoreProfileRouter } from '../../../views/onboarding/views/restore-profile/restore-profile-router'
+import { restoreFromMnemonicRouter } from '../../../views/onboarding/views/restore-from-mnemonic/restore-from-mnemonic-router'
 
 export function resetRouters(): void {
     resetSubrouters()
@@ -35,6 +36,7 @@ function resetSubrouters(): void {
     get(createFromMnemonicRouter).reset()
     get(createFromLedgerRouter).reset()
     get(restoreProfileRouter).reset()
+    get(restoreFromMnemonicRouter).reset()
     get(completeOnboardingRouter).reset()
     get(ledgerSetupRouter).reset()
     get(strongholdSetupRouter).reset()
