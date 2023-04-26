@@ -8,7 +8,12 @@
     } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { INode, NetworkId, buildNetworkFromNodeInfoResponse, getNetworkIdFromNetworkName } from '@core/network'
+    import {
+        INode,
+        NetworkId,
+        buildPersistedNetworkFromNodeInfoResponse,
+        getNetworkIdFromNetworkName,
+    } from '@core/network'
     import { getNodeInfo } from '@core/profile-manager'
     import { networkSetupRouter } from '@core/router'
     import features from '@features/features'
@@ -54,7 +59,7 @@
                 throw new Error('error.node.differentNetwork')
             }
             const customCoinType = networkId === NetworkId.Custom ? Number(coinType) : undefined
-            const network = buildNetworkFromNodeInfoResponse(nodeInfoResponse, customCoinType)
+            const network = buildPersistedNetworkFromNodeInfoResponse(nodeInfoResponse, customCoinType)
             updateOnboardingProfile({ network })
             await cleanupOnboardingProfileManager()
             $networkSetupRouter.next()

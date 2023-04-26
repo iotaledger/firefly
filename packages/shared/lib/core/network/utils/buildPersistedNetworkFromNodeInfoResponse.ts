@@ -1,16 +1,19 @@
 import { TokenStandard } from '@core/wallet/enums'
-import { COIN_TYPE, NETWORK } from '../constants'
+import { COIN_TYPE, DEFAULT_NETWORK_METADATA } from '../constants'
 import { NetworkId } from '../enums'
-import { INetwork, INodeInfoResponse } from '../interfaces'
+import { INodeInfoResponse, IPersistedNetwork } from '../interfaces'
 import { getNetworkIdFromNetworkName } from './getNetworkIdFromNetworkName'
 
-export function buildNetworkFromNodeInfoResponse(nodeInfoResponse: INodeInfoResponse, coinType?: number): INetwork {
+export function buildPersistedNetworkFromNodeInfoResponse(
+    nodeInfoResponse: INodeInfoResponse,
+    coinType?: number
+): IPersistedNetwork {
     const networkName = nodeInfoResponse?.nodeInfo?.protocol?.networkName
     const networkId = getNetworkIdFromNetworkName(networkName)
     const _coinType = coinType ?? COIN_TYPE[networkId] ?? 1
     return {
         id: networkId,
-        name: networkId === NetworkId.Custom ? networkName : NETWORK?.[networkId]?.name,
+        name: networkId === NetworkId.Custom ? networkName : DEFAULT_NETWORK_METADATA?.[networkId]?.name,
         coinType: _coinType,
         protocol: nodeInfoResponse?.nodeInfo?.protocol,
         baseToken: { standard: TokenStandard.BaseToken, ...nodeInfoResponse?.nodeInfo?.baseToken },

@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { INetwork } from '@core/network'
+    import { IPersistedNetwork } from '@core/network'
     import { FontWeight, NetworkIcon, Text, Tooltip } from 'shared/components'
     import { Position } from 'shared/components/enums'
 
-    export let network: INetwork
+    export let network: IPersistedNetwork
 
     let tooltipAnchor: HTMLElement
     let isTooltipVisible = false
