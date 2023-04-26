@@ -2,13 +2,13 @@
 
 import { get } from 'svelte/store'
 
-import Web3 from 'web3'
+import { activeProfile } from '@core/profile/stores'
 
-import { activeProfile } from '@core/profile'
-
-import { IChain, INetwork, INetworkStatus } from '../interfaces'
+import { IChain, IIscpChainMetadata, INetwork, INetworkStatus } from '../interfaces'
 import { networkStatus } from '../stores'
 import { ChainMetadata, NetworkMetadata } from '../types'
+
+import { IscpChain } from './iscp-chain.class'
 
 export class StardustNetwork implements INetwork {
     getMetadata(): NetworkMetadata {
@@ -27,24 +27,12 @@ export class StardustNetwork implements INetwork {
         return []
     }
 
-    async addChain(payload: ChainMetadata): Promise<IChain> {
-        console.log('ADDING CHAIN: ', payload)
+    addChain(payload: ChainMetadata): IChain {
+        const chain = new IscpChain(<IIscpChainMetadata>payload)
 
-        try {
-            const aliasAddress = 'rms1prwgvvw472spqusqeufvlmp8xdpyxtrnmvt26jnuk6sxdcq2hk8scku26h7'
-            const iscpEndpoint = `https://json-rpc.evm.testnet.shimmer.network/v1/chains/${aliasAddress}/evm`
-            const evmEndpoint = 'https://json-rpc.evm.testnet.shimmer.network'
+        // persist metadata in store
 
-            const web3 = new Web3(iscpEndpoint)
-
-            const latestBlockNumber = await web3.eth.getBlockNumber()
-            const block = await web3.eth.getBlock(latestBlockNumber)
-            console.log('LATEST BLOCK: ', block)
-        } catch (err) {
-            console.error(err)
-        }
-
-        return undefined
+        return chain
     }
 
     editChain(chainId: number, payload: Partial<ChainMetadata>): Promise<void> {

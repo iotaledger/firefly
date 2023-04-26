@@ -29,7 +29,15 @@
     async function onMountHelper(): Promise<void> {
         console.log('NETWORK: ', $network)
         console.log('NETWORK STATUS: ', $network.getStatus())
-        await $network.addChain(<ChainMetadata>{})
+        const chainMetadata = <ChainMetadata>{
+            name: 'ShimmerEVM',
+            chainId: 1071,
+            aliasAddress: 'rms1prwgvvw472spqusqeufvlmp8xdpyxtrnmvt26jnuk6sxdcq2hk8scku26h7',
+            iscpEndpoint: 'https://json-rpc.evm.testnet.shimmer.network',
+        }
+        const chain = await $network.addChain(chainMetadata)
+        const latestBlock = await chain.getLatestBlock()
+        console.log('LATEST BLOCK: ', latestBlock)
     }
 </script>
 
