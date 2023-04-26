@@ -130,6 +130,7 @@
     }
 
     async function setupShimmerClaiming(): Promise<void> {
+        isSearchingForRewards = true
         initialiseAccountRecoveryConfigurationForShimmerClaiming()
         if (!$onboardingProfile?.shimmerClaimingAccounts || $onboardingProfile?.shimmerClaimingAccounts?.length < 1) {
             try {
@@ -161,6 +162,7 @@
 
                 onSearchForRewardsClick()
             } catch (err) {
+                isSearchingForRewards = false
                 if ($isOnboardingLedgerProfile) {
                     handleLedgerError(err?.error ?? err)
                 } else {
