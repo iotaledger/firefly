@@ -32,9 +32,9 @@
         stopPollingLedgerNanoStatus,
     } from '@core/ledger'
     import { unsubscribeFromWalletApiEvents } from '@core/profile-manager'
-    import { shimmerClaimingRouter } from '@core/router'
     import { Animation, Button, ShimmerClaimingAccountList, Text } from '@ui'
     import { onDestroy, onMount } from 'svelte'
+    import { restoreProfileRouter } from '../restore-profile-router'
 
     $: shimmerClaimingAccounts = $onboardingProfile?.shimmerClaimingAccounts ?? []
 
@@ -56,11 +56,11 @@
         (hasSearchedForRewardsBefore && canUserRecoverFromShimmerClaiming(shimmerClaimingAccounts))
 
     function onContinueClick(): void {
-        $shimmerClaimingRouter.next()
+        $restoreProfileRouter.next()
     }
 
     function onBackClick(): void {
-        $shimmerClaimingRouter.previous()
+        $restoreProfileRouter.previous()
     }
 
     async function ledgerRaceConditionProtectionWrapper(_function: () => unknown): Promise<void> {
