@@ -3,7 +3,7 @@
     import { CreateFromLedgerRouter } from '../create-from-ledger'
     import { CreateFromMnemonicRouter } from '../create-from-mnemonic'
     import { CreateProfileRoute } from './create-profile-route.enum'
-    import { createProfileRoute } from './create-profile-router'
+    import { createProfileRoute, createProfileRouter } from './create-profile-router'
     import { ChooseCreateProfileFlowView } from './views'
 </script>
 
@@ -17,6 +17,6 @@
     </Transition>
 {:else if $createProfileRoute === CreateProfileRoute.CreateFromLedger}
     <Transition>
-        <CreateFromLedgerRouter />
+        <CreateFromLedgerRouter router={$createProfileRouter} />
     </Transition>
 {/if}

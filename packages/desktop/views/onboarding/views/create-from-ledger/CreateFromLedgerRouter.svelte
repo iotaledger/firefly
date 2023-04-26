@@ -3,6 +3,9 @@
     import { CreateFromLedgerRoute } from './create-from-ledger-route.enum'
     import { createFromLedgerRoute } from './create-from-ledger-router'
     import { ConnectLedgerView, InstallLedgerView } from './views'
+    import { Subrouter } from '@core/router'
+
+    export let router: Subrouter<unknown>
 </script>
 
 {#if $createFromLedgerRoute === CreateFromLedgerRoute.InstallLedger}
@@ -11,6 +14,6 @@
     </Transition>
 {:else if $createFromLedgerRoute === CreateFromLedgerRoute.ConnectLedger}
     <Transition>
-        <ConnectLedgerView />
+        <ConnectLedgerView {router} />
     </Transition>
 {/if}

@@ -3,11 +3,11 @@
     import { OnboardingRoute, onboardingRoute } from '@core/router'
     import features from '@features/features'
     import { Transition } from 'shared/components'
-    import { NetworkSetupRouter } from './views'
     import ChooseOnboardingFlowView from './views/ChooseOnboardingFlowView.svelte'
     import WelcomeView from './views/WelcomeView.svelte'
     import { CompleteOnboardingRouter } from './views/complete-onboarding'
     import { CreateProfileRouter } from './views/create-profile'
+    import { NetworkSetupRouter } from './views/network-setup'
     import { RestoreProfileRouter } from './views/restore-profile'
 
     $: if (features.analytics.onboardingRoute.enabled && $onboardingRoute) {

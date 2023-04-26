@@ -16,8 +16,9 @@
         stopPollingLedgerNanoStatus,
     } from '@core/ledger'
     import { Button, Icon, LedgerAnimation, Link, Text } from '@ui'
-    import { createFromLedgerRouter } from '../create-from-ledger-router'
+    import { Subrouter } from '@core/router'
 
+    export let router: Subrouter<unknown>
     let isBusy = false
 
     $: isNotConnected = $ledgerConnectionState === LedgerConnectionState.NotConnected
@@ -57,7 +58,7 @@
                 }
                 await initialiseFirstShimmerClaimingAccount()
             }
-            $createFromLedgerRouter.next()
+            router.next()
         } catch (err) {
             displayNotificationForLedgerProfile('error', true, true, err)
             console.error(err)
@@ -70,7 +71,7 @@
     }
 
     function onBackClick(): void {
-        $createFromLedgerRouter.previous()
+        router.previous()
     }
 </script>
 
