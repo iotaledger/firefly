@@ -23,6 +23,7 @@ import { createProfileRouter } from '../../../views/onboarding/views/create-prof
 import { networkSetupRouter } from '../../../views/onboarding/views/network-setup/network-setup-router'
 import { restoreProfileRouter } from '../../../views/onboarding/views/restore-profile/restore-profile-router'
 import { restoreFromMnemonicRouter } from '../../../views/onboarding/views/restore-from-mnemonic/restore-from-mnemonic-router'
+import { restoreFromStrongholdRouter } from '../../../views/onboarding/views/restore-from-stronghold/restore-from-stronghold-router'
 
 export function resetRouters(): void {
     resetSubrouters()
@@ -37,6 +38,7 @@ function resetSubrouters(): void {
     get(createFromLedgerRouter).reset()
     get(restoreProfileRouter).reset()
     get(restoreFromMnemonicRouter).reset()
+    get(restoreFromStrongholdRouter).reset()
     get(completeOnboardingRouter).reset()
     get(ledgerSetupRouter).reset()
     get(strongholdSetupRouter).reset()

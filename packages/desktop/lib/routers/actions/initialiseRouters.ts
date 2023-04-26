@@ -58,6 +58,10 @@ import {
     RestoreFromMnemonicRouter,
     restoreFromMnemonicRouter,
 } from '../../../views/onboarding/views/restore-from-mnemonic/restore-from-mnemonic-router'
+import {
+    RestoreFromStrongholdRouter,
+    restoreFromStrongholdRouter,
+} from '../../../views/onboarding/views/restore-from-stronghold/restore-from-stronghold-router'
 
 export function initialiseRouters(): void {
     /**
@@ -99,6 +103,7 @@ function initialiseOnboardingSubrouters(): void {
     createFromLedgerRouter.set(new CreateFromLedgerRouter())
     restoreProfileRouter.set(new RestoreProfileRouter())
     restoreFromMnemonicRouter.set(new RestoreFromMnemonicRouter())
+    restoreFromStrongholdRouter.set(new RestoreFromStrongholdRouter())
     completeOnboardingRouter.set(new CompleteOnboardingRouter())
     ledgerSetupRouter.set(new LedgerSetupRouter())
     strongholdSetupRouter.set(new StrongholdSetupRouter())
