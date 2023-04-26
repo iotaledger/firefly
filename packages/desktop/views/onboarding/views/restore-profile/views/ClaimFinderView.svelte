@@ -130,7 +130,6 @@
     }
 
     async function setupShimmerClaiming(): Promise<void> {
-        subscribeToWalletApiEventsForShimmerClaiming()
         initialiseAccountRecoveryConfigurationForShimmerClaiming()
         if (!$onboardingProfile?.shimmerClaimingAccounts || $onboardingProfile?.shimmerClaimingAccounts?.length < 1) {
             try {
@@ -141,15 +140,25 @@
                         $onboardingProfile?.importFilePath
                     )
                 }
+
                 await createShimmerClaimingProfileManager()
+
+                subscribeToWalletApiEventsForShimmerClaiming()
+                await $shimmerClaimingProfileManager.startBackgroundSync({
+                    syncOnlyMostBasicOutputs: true,
+                    syncIncomingTransactions: true,
+                })
+
                 if ($onboardingProfile?.restoreProfileType === RestoreProfileType.Mnemonic) {
                     await $shimmerClaimingProfileManager?.setStrongholdPassword($onboardingProfile?.strongholdPassword)
                     await $shimmerClaimingProfileManager?.storeMnemonic($onboardingProfile?.mnemonic?.join(' '))
                 } else if ($onboardingProfile?.restoreProfileType === RestoreProfileType.Stronghold) {
                     await $shimmerClaimingProfileManager?.setStrongholdPassword($onboardingProfile?.strongholdPassword)
                 }
+
                 await initialiseFirstShimmerClaimingAccount()
                 await syncShimmerClaimingAccount($onboardingProfile?.shimmerClaimingAccounts?.[0])
+
                 onSearchForRewardsClick()
             } catch (err) {
                 if ($isOnboardingLedgerProfile) {
