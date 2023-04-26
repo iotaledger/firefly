@@ -41,8 +41,8 @@
     const fiatbalance = formatCurrency(
         convertToFiat(
             migratableBalance,
-            get(currencies)[CurrencyTypes.USD],
-            get(exchangeRates)[AvailableExchangeRates.USD]
+            get(currencies)?.[CurrencyTypes.USD],
+            get(exchangeRates)?.[AvailableExchangeRates.USD]
         ),
         AvailableExchangeRates.USD
     )
