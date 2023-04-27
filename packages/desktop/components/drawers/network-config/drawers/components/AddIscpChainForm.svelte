@@ -1,7 +1,7 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { IIscpChainMetadata, MAX_CHAIN_NAME_LENGTH } from '@core/network'
-    import { ChainType } from '@core/network/enums'
+    import { IIscpChainMetadata, MAX_CHAIN_NAME_LENGTH, ChainType } from '@core/network'
+    import { activeProfile } from '@core/profile'
     import { isValidHexAddress, isValidUrl } from '@core/utils'
     import { Button, HTMLButtonType, Input } from '@ui'
 
@@ -32,8 +32,14 @@
     }
 
     function validateAliasAddress(): void {
+        const chains = $activeProfile.network.chains
+
         if (!isValidHexAddress(chain.aliasAddress)) {
             aliasAddressError = localize(`${localeKey}.errors.aliasAddressMustBeHex`)
+        } else if (
+            chains.some((_chain) => _chain.type === ChainType.Iscp && _chain.aliasAddress === chain.aliasAddress)
+        ) {
+            aliasAddressError = localize(`${localeKey}.errors.aliasAddressAlreadyInUse`)
         }
     }
 
@@ -67,7 +73,7 @@
         resetErrors()
         validate()
         const hasError = !!nameError || !!aliasAddressError || !!iscpEndpointError || !!explorerUrlError
-        if (hasError) {
+        if (!hasError) {
             // TODO: Fetch chainId from ISCP node before adding it to profile
         }
     }
