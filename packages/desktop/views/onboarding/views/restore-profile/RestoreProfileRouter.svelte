@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Transition } from '@ui'
     import { CreateFromLedgerRouterView } from '../create-from-ledger'
-    import { RestoreFromMnemonicRouter } from '../restore-from-mnemonic/'
+    import { RestoreFromMnemonicRouterView } from '../restore-from-mnemonic/'
     import { RestoreFromStrongholdRouter } from '../restore-from-stronghold'
     import { restoreProfileRouter } from '../restore-profile/restore-profile-router'
     import { RestoreProfileRoute } from './restore-profile-route.enum'
@@ -15,7 +15,7 @@
     </Transition>
 {:else if $restoreProfileRoute === RestoreProfileRoute.RestoreFromMnemonic}
     <Transition>
-        <RestoreFromMnemonicRouter />
+        <RestoreFromMnemonicRouterView />
     </Transition>
 {:else if $restoreProfileRoute === RestoreProfileRoute.RestoreFromStronghold}
     <Transition>

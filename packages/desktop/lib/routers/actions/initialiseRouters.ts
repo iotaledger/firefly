@@ -24,11 +24,9 @@ import {
     networkSetupRouter,
     OnboardingRouter,
     onboardingRouter,
-} from '@views/onboarding'
-import {
     RestoreFromMnemonicRouter,
     restoreFromMnemonicRouter,
-} from '../../../views/onboarding/views/restore-from-mnemonic/restore-from-mnemonic-router'
+} from '@views/onboarding'
 import {
     RestoreFromStrongholdRouter,
     restoreFromStrongholdRouter,

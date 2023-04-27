@@ -14,9 +14,9 @@ import {
     createProfileRouter,
     networkSetupRouter,
     onboardingRouter,
+    restoreFromMnemonicRouter,
 } from '@views/onboarding'
 import { get } from 'svelte/store'
-import { restoreFromMnemonicRouter } from '../../../views/onboarding/views/restore-from-mnemonic/restore-from-mnemonic-router'
 import { restoreFromStrongholdRouter } from '../../../views/onboarding/views/restore-from-stronghold/restore-from-stronghold-router'
 import { restoreProfileRouter } from '../../../views/onboarding/views/restore-profile/restore-profile-router'
 
