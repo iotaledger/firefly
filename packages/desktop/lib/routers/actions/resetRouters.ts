@@ -5,7 +5,6 @@ import {
     governanceRouter,
     ledgerSetupRouter,
     loginRouter,
-    onboardingRouter,
     profileBackupRouter,
     profileRecoveryRouter,
     profileSetupRouter,
@@ -24,6 +23,7 @@ import { networkSetupRouter } from '../../../views/onboarding/views/network-setu
 import { restoreProfileRouter } from '../../../views/onboarding/views/restore-profile/restore-profile-router'
 import { restoreFromMnemonicRouter } from '../../../views/onboarding/views/restore-from-mnemonic/restore-from-mnemonic-router'
 import { restoreFromStrongholdRouter } from '../../../views/onboarding/views/restore-from-stronghold/restore-from-stronghold-router'
+import { onboardingRouter } from '@views/onboarding'
 
 export function resetRouters(): void {
     resetSubrouters()

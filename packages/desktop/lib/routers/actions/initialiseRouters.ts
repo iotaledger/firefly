@@ -7,8 +7,6 @@ import {
     dashboardRouter,
     GovernanceRouter,
     governanceRouter,
-    OnboardingRouter,
-    onboardingRouter,
     SettingsRouter,
     settingsRouter,
 } from '@core/router/routers'
@@ -62,6 +60,7 @@ import {
     RestoreFromStrongholdRouter,
     restoreFromStrongholdRouter,
 } from '../../../views/onboarding/views/restore-from-stronghold/restore-from-stronghold-router'
+import { OnboardingRouter, onboardingRouter } from '@views/onboarding'
 
 export function initialiseRouters(): void {
     /**

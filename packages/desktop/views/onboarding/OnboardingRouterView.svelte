@@ -1,8 +1,9 @@
 <script lang="ts">
     import { Platform } from '@core/app'
-    import { OnboardingRoute, onboardingRoute } from '@core/router'
     import features from '@features/features'
     import { Transition } from 'shared/components'
+    import { OnboardingRoute } from './onboarding-route.enum'
+    import { onboardingRoute } from './onboarding-router'
     import ChooseOnboardingFlowView from './views/ChooseOnboardingFlowView.svelte'
     import WelcomeView from './views/WelcomeView.svelte'
     import { CompleteOnboardingRouter } from './views/complete-onboarding'

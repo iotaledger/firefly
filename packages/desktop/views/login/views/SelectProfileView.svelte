@@ -11,9 +11,10 @@
     import { localize } from '@core/i18n'
     import { NetworkId } from '@core/network'
     import { ProfileType, loadPersistedProfileIntoActiveProfile, profiles } from '@core/profile'
-    import { OnboardingRoute, loginRouter, onboardingRouter, routerManager } from '@core/router'
+    import { loginRouter, routerManager } from '@core/router'
     import features from '@features/features'
     import { Icon, Logo, Profile } from '@ui'
+    import { OnboardingRoute, onboardingRouter } from '@views/onboarding'
 
     function onContinueClick(profileId: string): void {
         loadPersistedProfileIntoActiveProfile(profileId)
