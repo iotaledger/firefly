@@ -51,6 +51,7 @@
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
     const { loggedIn, hasLoadedAccounts } = $activeProfile
+    const isWindows = $platform === PlatformOption.Windows
 
     $: if ($activeProfile && !$loggedIn) {
         closePopup(true)
@@ -86,7 +87,6 @@
     }
 
     $: isDashboardVisible = $appRoute === AppRoute.Dashboard && $hasLoadedAccounts && $popupState.id !== 'busy'
-    $: isWindows = $platform === PlatformOption.Windows
 
     $: $nftDownloadQueue, downloadNextNftInQueue()
 

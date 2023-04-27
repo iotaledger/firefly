@@ -9,11 +9,11 @@
     import { popupState } from '@auxiliary/popup/stores'
 
     const { hasLoadedAccounts } = $activeProfile
+    const isWindows = $platform === PlatformOption.Windows
 
     let isMaximized = false
 
     $: isDashboardVisible = $appRoute === AppRoute.Dashboard && $hasLoadedAccounts && $popupState.id !== 'busy'
-    $: isWindows = $platform === PlatformOption.Windows
     $: dark = $appSettings.darkMode
 
     async function onResize(): Promise<void> {

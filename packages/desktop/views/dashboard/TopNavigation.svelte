@@ -22,6 +22,8 @@
     import features from '@features/features'
     import { closeDrawer } from '@desktop/auxilary/drawer'
 
+    const isWindows = $platform === PlatformOption.Windows
+
     let isBackButtonVisible = false
 
     $: {
@@ -30,7 +32,6 @@
         }
     }
     $: isPopupVisible = $popupState?.active && $popupState?.id !== 'busy'
-    $: isWindows = $platform === PlatformOption.Windows
 
     function isCorrectRoute(): boolean {
         switch ($dashboardRoute) {
