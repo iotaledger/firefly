@@ -1,14 +1,13 @@
-import { Subrouter } from '@core/router'
+import { Router, Subrouter } from '@core/router'
 import { get, writable } from 'svelte/store'
-import { createProfileRouter } from '../create-profile/create-profile-router'
 import { CreateFromLedgerRoute } from './create-from-ledger-route.enum'
 
 export const createFromLedgerRoute = writable<CreateFromLedgerRoute>(undefined)
 export const createFromLedgerRouter = writable<CreateFromLedgerRouter>(undefined)
 
 export class CreateFromLedgerRouter extends Subrouter<CreateFromLedgerRoute> {
-    constructor() {
-        super(CreateFromLedgerRoute.InstallLedger, createFromLedgerRoute, get(createProfileRouter))
+    constructor(parentRouter: Router<unknown>) {
+        super(CreateFromLedgerRoute.InstallLedger, createFromLedgerRoute, parentRouter)
     }
 
     next(): void {

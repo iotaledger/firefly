@@ -7,6 +7,7 @@ import {
     to navigate to. */
     RestoreProfileRoute,
 } from './restore-profile-route.enum'
+import { CreateFromLedgerRouter, createFromLedgerRouter } from '../create-from-ledger'
 
 export const restoreProfileRoute = writable<RestoreProfileRoute>(undefined)
 export const restoreProfileRouter = writable<RestoreProfileRouter>(undefined)
@@ -31,6 +32,7 @@ export class RestoreProfileRouter extends Subrouter<RestoreProfileRoute> {
                         nextRoute = RestoreProfileRoute.RestoreFromStronghold
                         break
                     case RestoreProfileType.Ledger:
+                        createFromLedgerRouter.set(new CreateFromLedgerRouter(get(restoreProfileRouter)))
                         nextRoute = RestoreProfileRoute.RestoreFromLedger
                         break
                 }

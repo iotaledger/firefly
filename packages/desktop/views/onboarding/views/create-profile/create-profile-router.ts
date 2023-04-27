@@ -7,6 +7,7 @@ import {
     to navigate to. */
     CreateProfileRoute,
 } from './create-profile-route.enum'
+import { CreateFromLedgerRouter, createFromLedgerRouter } from '../create-from-ledger'
 
 export const createProfileRoute = writable<CreateProfileRoute>(undefined)
 export const createProfileRouter = writable<CreateProfileRouter>(undefined)
@@ -28,6 +29,7 @@ export class CreateProfileRouter extends Subrouter<CreateProfileRoute> {
                         nextRoute = CreateProfileRoute.CreateFromMnemonic
                         break
                     case CreateProfileType.Ledger:
+                        createFromLedgerRouter.set(new CreateFromLedgerRouter(get(createProfileRouter)))
                         nextRoute = CreateProfileRoute.CreateFromLedger
                         break
                 }
