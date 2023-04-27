@@ -6,7 +6,7 @@
     import { onboardingRoute } from './onboarding-router'
     import { ChooseOnboardingFlowView, CompleteOnboardingRouterView, WelcomeView } from './views'
     import { CreateProfileRouterView } from './views/create-profile'
-    import { NetworkSetupRouter } from './views/network-setup'
+    import { NetworkSetupRouterView } from './views/network-setup'
     import { RestoreProfileRouter } from './views/restore-profile'
 
     $: if (features.analytics.onboardingRoute.enabled && $onboardingRoute) {
@@ -20,7 +20,7 @@
     </Transition>
 {:else if $onboardingRoute === OnboardingRoute.NetworkSetup}
     <Transition>
-        <NetworkSetupRouter />
+        <NetworkSetupRouterView />
     </Transition>
 {:else if $onboardingRoute === OnboardingRoute.ChooseOnboardingFlow}
     <Transition>
