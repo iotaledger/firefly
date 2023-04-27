@@ -1,16 +1,22 @@
 import { activeProfile } from '@core/profile'
 import { Readable, Writable, derived, writable } from 'svelte/store'
 import { buildChainFromNetwork } from '../utils'
-import { ConnectedChain } from '../interfaces'
+import { IConnectedChain } from '../interfaces'
 import { NetworkHealth } from '../enums'
+import { selectedAccount } from '@core/account/stores'
+import { networkStatus } from './network-status.store'
 
 export const selectedConnectedChainIndex: Writable<number> = writable(undefined)
 
-export const selectedConnectedChain: Readable<ConnectedChain> = derived(
-    [activeProfile, selectedConnectedChainIndex],
-    ([$activeProfile, $selectedConnectedChainIndex]) => {
+export const selectedConnectedChain: Readable<IConnectedChain> = derived(
+    [activeProfile, selectedConnectedChainIndex, selectedAccount, networkStatus],
+    ([$activeProfile, $selectedConnectedChainIndex, $selectedAccount, $networkStatus]) => {
         if ($selectedConnectedChainIndex === 0) {
-            return buildChainFromNetwork()
+            return buildChainFromNetwork(
+                $activeProfile.network.name,
+                $selectedAccount.depositAddress,
+                $networkStatus.health
+            )
         } else {
             const index = $selectedConnectedChainIndex - 1
             const chain = $activeProfile.network.chains[index]
