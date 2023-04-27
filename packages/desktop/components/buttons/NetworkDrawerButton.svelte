@@ -16,7 +16,7 @@
     class="network-button hover:bg-gray-300 dark:hover:bg-gray-900 border-gray-400 dark:border-gray-700"
     on:click={onNetworkClick}
 >
-    <NetworkIcon height={16} width={16} networkId={$activeProfile.network.id} outlined={false} />
+    <NetworkIcon height={12} width={12} networkId={$activeProfile.network.id} outlined={false} />
     <Text fontWeight={FontWeight.semibold} color="gray-800" darkColor="white">{$activeProfile.network.name}</Text>
 </button>
 
