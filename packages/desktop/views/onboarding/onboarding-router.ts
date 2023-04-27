@@ -5,6 +5,7 @@ import { Router } from '../../../shared/lib/core/router/classes'
 import { appRouter } from '../../../shared/lib/core/router/routers/app-router'
 import { OnboardingRoute } from './onboarding-route.enum'
 import { NetworkSetupRouter, networkSetupRouter } from './views/network-setup'
+import { CreateProfileRouter, createProfileRouter } from './views/create-profile'
 
 export const onboardingRoute = writable<OnboardingRoute>(undefined)
 export const onboardingRouter = writable<OnboardingRouter>(undefined)
@@ -31,6 +32,7 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
             case OnboardingRoute.ChooseOnboardingFlow: {
                 switch (get(onboardingProfile)?.onboardingType) {
                     case OnboardingType.Create: {
+                        createProfileRouter.set(new CreateProfileRouter(get(onboardingRouter)))
                         nextRoute = OnboardingRoute.CreateProfile
                         break
                     }

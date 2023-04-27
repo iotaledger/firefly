@@ -1,6 +1,5 @@
 import { CreateProfileType, onboardingProfile } from '@contexts/onboarding'
-import { Subrouter } from '@core/router'
-import { onboardingRouter } from '@views/onboarding/onboarding-router'
+import { Router, Subrouter } from '@core/router'
 import { get, writable } from 'svelte/store'
 import {
     /* `CreateProfileRoute` is an enum that defines the different routes available in the create
@@ -13,8 +12,8 @@ export const createProfileRoute = writable<CreateProfileRoute>(undefined)
 export const createProfileRouter = writable<CreateProfileRouter>(undefined)
 
 export class CreateProfileRouter extends Subrouter<CreateProfileRoute> {
-    constructor() {
-        super(CreateProfileRoute.ChooseCreateProfileFlow, createProfileRoute, get(onboardingRouter))
+    constructor(parentRouter: Router<unknown>) {
+        super(CreateProfileRoute.ChooseCreateProfileFlow, createProfileRoute, parentRouter)
     }
 
     next(): void {

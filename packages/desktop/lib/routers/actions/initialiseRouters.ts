@@ -18,8 +18,6 @@ import {
     createFromLedgerRouter,
     CreateFromMnemonicRouter,
     createFromMnemonicRouter,
-    CreateProfileRouter,
-    createProfileRouter,
     OnboardingRouter,
     onboardingRouter,
     RestoreFromMnemonicRouter,
@@ -64,7 +62,6 @@ function initialiseSubrouters(): void {
 }
 
 function initialiseOnboardingSubrouters(): void {
-    createProfileRouter.set(new CreateProfileRouter())
     createFromMnemonicRouter.set(new CreateFromMnemonicRouter())
     createFromLedgerRouter.set(new CreateFromLedgerRouter())
     restoreProfileRouter.set(new RestoreProfileRouter())

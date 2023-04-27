@@ -11,7 +11,6 @@ import {
     completeOnboardingRouter,
     createFromLedgerRouter,
     createFromMnemonicRouter,
-    createProfileRouter,
     networkSetupRouter,
     onboardingRouter,
     restoreFromMnemonicRouter,
@@ -28,7 +27,6 @@ export function resetRouters(): void {
 function resetSubrouters(): void {
     get(loginRouter).reset()
     get(networkSetupRouter) && get(networkSetupRouter).reset()
-    get(createProfileRouter).reset()
     get(createFromMnemonicRouter).reset()
     get(createFromLedgerRouter).reset()
     get(restoreProfileRouter).reset()
