@@ -39,10 +39,10 @@ export class IscpChain implements IChain {
 
     getMetadata(): Promise<ChainMetadata> {
         if (this._metadata) {
-            return this._metadata
+            return Promise.resolve(this._metadata)
         } else {
             this._metadata = <IIscpChainMetadata>{} // await this.fetchChainMetadata()
-            return this._metadata
+            return Promise.resolve(this._metadata)
         }
     }
 
