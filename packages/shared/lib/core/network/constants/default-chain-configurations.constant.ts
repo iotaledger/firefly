@@ -1,7 +1,7 @@
 import { ChainType, NetworkId } from '../enums'
-import { ChainMetadata } from '../types'
+import { ChainConfiguration } from '../types'
 
-export const DEFAULT_CHAIN_METADATA: Readonly<{ [id in NetworkId]?: ChainMetadata }> = {
+export const DEFAULT_CHAIN_CONFIGURATIONS: Readonly<{ [id in NetworkId]?: ChainConfiguration }> = {
     [NetworkId.Shimmer]: {
         type: ChainType.Iscp,
         name: 'ShimmerEVM',

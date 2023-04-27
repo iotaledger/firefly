@@ -7,7 +7,7 @@ import { INetwork } from '../interfaces'
 
 export const network: Readable<INetwork> = derived([activeProfile], ([$activeProfile]) => {
     if ($activeProfile) {
-        return new StardustNetwork($activeProfile.network, $activeProfile.network.chains)
+        return new StardustNetwork($activeProfile.network, $activeProfile.network.chainConfigurations)
     } else {
         return undefined
     }

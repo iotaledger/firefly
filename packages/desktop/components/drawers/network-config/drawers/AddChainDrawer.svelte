@@ -1,13 +1,13 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { ChainType, DEFAULT_CHAIN_METADATA, IChain, IIscpChainMetadata, network } from '@core/network'
+    import { ChainType, DEFAULT_CHAIN_CONFIGURATIONS, IChain, IIscpChainConfiguration, network } from '@core/network'
     import { Button, HTMLButtonType, Input } from '@ui'
 
     const isBusy = false
 
     $: submitDisabled = !chain.name || !chain.aliasAddress || !chain.iscpEndpoint
 
-    const chain: IIscpChainMetadata = {
+    const chain: IIscpChainConfiguration = {
         type: ChainType.Iscp,
         chainId: undefined,
         name: '',
@@ -19,7 +19,7 @@
     async function onSubmitClick(): Promise<void> {
         let chain: IChain
         try {
-            chain = await $network.addChain(DEFAULT_CHAIN_METADATA[$network.getMetadata().id])
+            chain = await $network.addChain(DEFAULT_CHAIN_CONFIGURATIONS[$network.getMetadata().id])
         } catch (err) {
             chain = await $network.getChain(1071)
             $network.removeChain(1071)
@@ -27,6 +27,9 @@
         }
         const latestBlock = await chain.getLatestBlock()
         console.log('LATEST BLOCK: ', latestBlock)
+
+        const metadata = await chain.getMetadata()
+        console.log('CHAIN METADATA: ', metadata)
     }
 </script>
 

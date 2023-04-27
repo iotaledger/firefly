@@ -3,9 +3,9 @@ import { get } from 'svelte/store'
 import { activeProfile, updateActiveProfile } from '@core/profile/stores'
 
 import { ChainType } from '../enums'
-import { IChain, IIscpChainMetadata, INetwork, INetworkStatus } from '../interfaces'
+import { IChain, IIscpChainConfiguration, INetwork, INetworkStatus } from '../interfaces'
 import { networkStatus } from '../stores'
-import { ChainMetadata, NetworkMetadata } from '../types'
+import { ChainConfiguration, NetworkMetadata } from '../types'
 
 import { IscpChain } from './iscp-chain.class'
 
@@ -13,12 +13,18 @@ export class StardustNetwork implements INetwork {
     private readonly _metadata: NetworkMetadata
     private readonly _chains: IChain[]
 
-    constructor(metadata: NetworkMetadata, chainMetadata: ChainMetadata[]) {
+    constructor(metadata: NetworkMetadata, chainConfigurations: ChainConfiguration[]) {
         this._metadata = metadata
-        this._chains = chainMetadata.map((chain) => {
-            switch (chain.type) {
+        this._chains = this.constructChains(chainConfigurations)
+    }
+
+    private constructChains(chainConfigurations: ChainConfiguration[]): IChain[] {
+        return chainConfigurations.map((chainConfiguration) => {
+            switch (chainConfiguration.type) {
                 case ChainType.Iscp:
-                    return new IscpChain(chain)
+                    return new IscpChain(chainConfiguration)
+                case ChainType.Evm:
+                    return undefined
                 default:
                     return undefined
             }
@@ -34,19 +40,19 @@ export class StardustNetwork implements INetwork {
     }
 
     getChain(chainId: number): IChain {
-        return this._chains.find((chain) => chain.getMetadata().chainId === chainId)
+        return this._chains.find((chain) => chain.getConfiguration().chainId === chainId)
     }
 
     getChains(): IChain[] {
         return this._chains
     }
 
-    addChain(payload: ChainMetadata): IChain {
-        if (this.isChainAlreadyAdded(payload)) {
+    addChain(chainConfiguration: ChainConfiguration): IChain {
+        if (this.isChainAlreadyAdded(chainConfiguration)) {
             throw new Error('This chain has already been added.')
         } else {
             const network = get(activeProfile)?.network
-            network.chains.push(payload)
+            network.chainConfigurations.push(chainConfiguration)
             /**
              * NOTE: Updating the active profile will cause the network store object to be
              * re-instantiated, which will also instantiate an object for the newly added
@@ -54,20 +60,20 @@ export class StardustNetwork implements INetwork {
              */
             updateActiveProfile({ network })
 
-            return new IscpChain(<IIscpChainMetadata>payload)
+            return new IscpChain(<IIscpChainConfiguration>chainConfiguration)
         }
     }
 
-    private isChainAlreadyAdded(chainMetadata: ChainMetadata): boolean {
+    private isChainAlreadyAdded(chainConfiguration: ChainConfiguration): boolean {
         const network = get(activeProfile)?.network
-        return network.chains.some((chain) => {
-            const hasSameName = chain.name === chainMetadata.name
-            const hasSameChainId = chain.chainId === chainMetadata.chainId
+        return network.chainConfigurations.some((chain) => {
+            const hasSameName = chain.name === chainConfiguration.name
+            const hasSameChainId = chain.chainId === chainConfiguration.chainId
             return hasSameName || hasSameChainId
         })
     }
 
-    editChain(chainId: number, payload: Partial<ChainMetadata>): Promise<void> {
+    editChain(chainId: number, payload: Partial<ChainConfiguration>): Promise<void> {
         /* eslint-disable no-console */
         console.log('EDITING: ', chainId, payload)
         return Promise.resolve()
@@ -75,7 +81,9 @@ export class StardustNetwork implements INetwork {
 
     removeChain(chainId: number): void {
         const network = get(activeProfile).network
-        const newChains = network.chains.filter((chain) => chain.chainId !== chainId)
-        updateActiveProfile({ network: { ...network, chains: newChains } })
+        const newChains = network.chainConfigurations.filter(
+            (chainConfiguration) => chainConfiguration.chainId !== chainId
+        )
+        updateActiveProfile({ network: { ...network, chainConfigurations: newChains } })
     }
 }

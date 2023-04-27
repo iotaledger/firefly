@@ -21,7 +21,7 @@ export const selectedConnectedChain: Readable<IConnectedChain> = derived(
             )
         } else {
             const index = $selectedConnectedChainIndex - 1
-            const chain = $activeProfile.network.chains[index]
+            const chain = $activeProfile.network.chainConfigurations[index]
             return {
                 name: chain.name,
                 address: chain.name, // TODO

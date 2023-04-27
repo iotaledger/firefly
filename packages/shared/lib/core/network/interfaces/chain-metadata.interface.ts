@@ -1,21 +1,15 @@
-import { ChainType } from '../enums'
+import { IGasFeePolicy } from './gas-fee-policy.interface'
+import { IGasLimits } from './gas-limits.interface'
 
-export interface IIscpChainMetadata extends IBaseChainMetadata {
-    type: ChainType.Iscp
-    aliasAddress: string
-    iscpEndpoint: string
+export interface IIscpChainMetadata {
+    chainID: string
+    evmChainId: number
+    chainOwnerId: string
+    isActive: boolean
+    gasLimits: IGasLimits
+    gasFeePolicy: IGasFeePolicy
+    customMetadata: unknown
 }
 
-export interface IEvmChainMetadata extends IBaseChainMetadata {
-    type: ChainType.Evm
-    rpcEndpoint: string
-    symbol: string
-    ticker: string
-}
-
-export interface IBaseChainMetadata {
-    type: ChainType
-    chainId: number
-    name: string
-    explorerUrl?: string
-}
+/* eslint-disable @typescript-eslint/no-empty-interface */
+export interface IEvmChainMetadata {}
