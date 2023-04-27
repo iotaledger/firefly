@@ -10,24 +10,7 @@ import {
     SettingsRouter,
     settingsRouter,
 } from '@core/router/routers'
-import {
-    LedgerSetupRouter,
-    ledgerSetupRouter,
-    loginRouter,
-    LoginRouter,
-    ProfileBackupRouter,
-    profileBackupRouter,
-    ProfileRecoveryRouter,
-    profileRecoveryRouter,
-    ProfileSetupRouter,
-    profileSetupRouter,
-    ShimmerClaimingRouter,
-    shimmerClaimingRouter,
-    StorageProtectionSetupRouter,
-    storageProtectionSetupRouter,
-    StrongholdSetupRouter,
-    strongholdSetupRouter,
-} from '@core/router/subrouters'
+import { loginRouter, LoginRouter } from '@core/router/subrouters'
 import {
     CompleteOnboardingRouter,
     completeOnboardingRouter,
@@ -97,11 +80,4 @@ function initialiseOnboardingSubrouters(): void {
     restoreFromMnemonicRouter.set(new RestoreFromMnemonicRouter())
     restoreFromStrongholdRouter.set(new RestoreFromStrongholdRouter())
     completeOnboardingRouter.set(new CompleteOnboardingRouter())
-    ledgerSetupRouter.set(new LedgerSetupRouter())
-    strongholdSetupRouter.set(new StrongholdSetupRouter())
-    profileBackupRouter.set(new ProfileBackupRouter())
-    profileRecoveryRouter.set(new ProfileRecoveryRouter())
-    profileSetupRouter.set(new ProfileSetupRouter())
-    storageProtectionSetupRouter.set(new StorageProtectionSetupRouter())
-    shimmerClaimingRouter.set(new ShimmerClaimingRouter())
 }

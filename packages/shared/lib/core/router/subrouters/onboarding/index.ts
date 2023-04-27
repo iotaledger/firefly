@@ -1,7 +1,0 @@
-export * from './profile-backup-router'
-export * from './ledger-setup-router'
-export * from './stronghold-setup-router'
-export * from './profile-setup-router'
-export * from './storage-protection-setup-router'
-export * from './profile-recovery-router'
-export * from './shimmer-claiming-router'

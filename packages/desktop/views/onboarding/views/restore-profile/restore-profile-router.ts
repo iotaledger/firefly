@@ -1,11 +1,11 @@
 import { OnboardingType, RestoreProfileType, onboardingProfile } from '@contexts/onboarding'
 import { Subrouter } from '@core/router'
-import { onboardingRouter } from '@core/router/routers/onboarding-router'
+import { onboardingRouter } from '@views/onboarding/onboarding-router'
 import { get, writable } from 'svelte/store'
 import {
     /* `RestoreProfileRoute` is an enum that defines the different routes available in the restore
-profile flow. It is used to keep track of the current route and to determine the next route
-to navigate to. */
+    profile flow. It is used to keep track of the current route and to determine the next route
+    to navigate to. */
     RestoreProfileRoute,
 } from './restore-profile-route.enum'
 

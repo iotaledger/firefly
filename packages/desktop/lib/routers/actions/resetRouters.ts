@@ -3,15 +3,8 @@ import {
     collectiblesRouter,
     dashboardRouter,
     governanceRouter,
-    ledgerSetupRouter,
     loginRouter,
-    profileBackupRouter,
-    profileRecoveryRouter,
-    profileSetupRouter,
     settingsRouter,
-    shimmerClaimingRouter,
-    storageProtectionSetupRouter,
-    strongholdSetupRouter,
     updateStrongholdRouter,
 } from '@core/router'
 import {
@@ -42,13 +35,6 @@ function resetSubrouters(): void {
     get(restoreFromMnemonicRouter).reset()
     get(restoreFromStrongholdRouter).reset()
     get(completeOnboardingRouter).reset()
-    get(ledgerSetupRouter).reset()
-    get(strongholdSetupRouter).reset()
-    get(profileBackupRouter).reset()
-    get(profileRecoveryRouter).reset()
-    get(profileSetupRouter).reset()
-    get(storageProtectionSetupRouter).reset()
-    get(shimmerClaimingRouter).reset()
     get(updateStrongholdRouter)?.reset() // Is potentially null because we only initialize it in the respective parent router (login/recovery)
 }
 

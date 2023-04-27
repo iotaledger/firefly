@@ -9,8 +9,8 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { checkOrConnectLedger } from '@core/ledger'
-    import { onboardingRouter } from '@core/router'
     import { Animation, Button, Icon, Text, TextHint } from '@ui'
+    import { onboardingRouter } from '@views/onboarding/onboarding-router'
     import { onMount } from 'svelte'
 
     // TODO: what are these localised bodies they are not self documenting?

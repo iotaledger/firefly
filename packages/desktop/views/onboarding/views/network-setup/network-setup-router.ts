@@ -1,7 +1,7 @@
-import { get, writable } from 'svelte/store'
 import { onboardingProfile } from '@contexts/onboarding/stores'
 import { Subrouter } from '@core/router'
-import { onboardingRouter } from '@core/router/routers/onboarding-router'
+import { onboardingRouter } from '@views/onboarding/onboarding-router'
+import { get, writable } from 'svelte/store'
 import { NetworkSetupRoute } from './network-setup-route.enum'
 
 export const networkSetupRoute = writable<NetworkSetupRoute>(null)

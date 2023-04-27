@@ -10,9 +10,9 @@
     import { openUrlInBrowser } from '@core/app/utils'
     import { localize } from '@core/i18n'
     import { NetworkId, getNetworkNameFromNetworkId } from '@core/network'
-    import { onboardingRouter } from '@core/router'
     import features from '@features/features'
     import { Animation, Button, Checkbox, Link, Text, TextType } from '@ui'
+    import { onboardingRouter } from '../onboarding-router'
 
     let termsAccepted: boolean = false
 

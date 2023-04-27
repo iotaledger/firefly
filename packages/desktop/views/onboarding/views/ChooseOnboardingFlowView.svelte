@@ -9,13 +9,13 @@
     } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { getNetworkNameFromNetworkId, getDefaultClientOptions } from '@core/network'
+    import { getDefaultClientOptions, getNetworkNameFromNetworkId } from '@core/network'
     import { profiles } from '@core/profile'
     import { destroyProfileManager } from '@core/profile-manager'
-    import { onboardingRouter } from '@core/router'
     import features from '@features/features'
     import { Animation, OnboardingButton, Text } from '@ui'
     import { onMount } from 'svelte'
+    import { onboardingRouter } from '../onboarding-router'
 
     const networkId = $onboardingProfile?.network?.id
 
