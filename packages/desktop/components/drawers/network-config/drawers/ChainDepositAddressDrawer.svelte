@@ -1,5 +1,69 @@
-<script lang="ts"></script>
+<script lang="ts">
+    import { selectedConnectedChain } from '@core/network'
+    import { appSettings } from '@core/app'
+    import { QR, AddressBox, FontWeight } from '@ui'
+    import { Text } from '@ui'
+    import { localize } from '@core/i18n'
 
-<chain-deposit-address-drawer class="flex flex-col justify-between mb-6">
-    Chain deposit address
-</chain-deposit-address-drawer>
+    let addressBoxElement: AddressBox
+    $: chain = $selectedConnectedChain
+
+    function onReceiveClick(): void {
+        addressBoxElement.copyAddress()
+    }
+</script>
+
+<div class="w-full h-full flex items-center justify-center">
+    <button
+        class="flex flex-col px-4 py-4 space-y-2 rounded-xl cursor-pointer"
+        class:darkmode={$appSettings.darkMode}
+        on:click={onReceiveClick}
+    >
+        <inner-box class="flex flex-col space-y-6 pt-7 pb-6">
+            <QR data={chain.address} />
+            <div class="flex flex-col space-y-1">
+                <Text fontWeight={FontWeight.medium} color="gray-600" darkColor="white"
+                    >{localize('general.myAddress')}</Text
+                >
+                <AddressBox
+                    bind:this={addressBoxElement}
+                    clearBackground
+                    clearPadding
+                    address={chain.address}
+                    fontSize="sm"
+                    isCopyable
+                />
+            </div>
+        </inner-box>
+    </button>
+</div>
+
+<style type="text/scss">
+    button {
+        &:hover {
+            @apply bg-blue-50;
+            @apply border-gray-500;
+        }
+        &:active,
+        &:focus {
+            @apply bg-blue-100;
+            @apply border-blue-400;
+        }
+        &.darkmode {
+            @apply border-gray-700;
+            &:hover,
+            &:focus,
+            &:active {
+                @apply bg-gray-700;
+                @apply bg-opacity-20;
+                @apply border-opacity-50;
+            }
+            &:disabled {
+                @apply bg-gray-700;
+                @apply bg-opacity-10;
+                @apply border-gray-700;
+                @apply border-opacity-10;
+            }
+        }
+    }
+</style>

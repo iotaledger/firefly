@@ -9,6 +9,9 @@ import features from './features/features'
 import { Configuration as WebpackConfiguration } from 'webpack'
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server'
 import assert from 'assert'
+import dotenv from 'dotenv'
+
+dotenv.config() // used to read env vars from an .env file
 
 type Mode = 'none' | 'development' | 'production'
 interface Configuration extends WebpackConfiguration {
