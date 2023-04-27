@@ -45,7 +45,7 @@
     import { downloadNextNftInQueue, nftDownloadQueue } from '@core/nfts'
     import { closeDrawer } from '@desktop/auxilary/drawer'
     import features from '@features/features'
-    import { onboardingRouter, onboardingRoute, OnboardingRoute, OnboardingRouterView } from '@views/onboarding'
+    import { onboardingRoute, OnboardingRoute, OnboardingRouterView } from '@views/onboarding'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -75,9 +75,7 @@
         'canCreateNewProfile',
         $appRoute === AppRoute.Login ||
             ($appRoute === AppRoute.Onboarding &&
-                $onboardingRoute !== OnboardingRoute.Welcome &&
-                $onboardingRoute !== OnboardingRoute.ShimmerClaiming &&
-                $onboardingRoute !== OnboardingRoute.Congratulations)
+                ($onboardingRoute === OnboardingRoute.Welcome || $onboardingRoute === OnboardingRoute.NetworkSetup))
     )
 
     $: if (document.dir !== $localeDirection) {
@@ -163,7 +161,6 @@
                 isDeveloperProfile: true,
             })
             $routerManager.goToAppContext(AppContext.Onboarding)
-            $onboardingRouter.goTo(OnboardingRoute.NetworkSetup)
         })
         Platform.onEvent('menu-create-normal-profile', async () => {
             await initialiseOnboardingFlow({
@@ -171,7 +168,6 @@
                 networkId: NetworkId.Shimmer,
             })
             $routerManager.goToAppContext(AppContext.Onboarding)
-            $onboardingRouter.goTo(OnboardingRoute.ProfileSetup)
         })
 
         Platform.onEvent('deep-link-request', showDeepLinkNotification)

@@ -14,7 +14,6 @@
     import { loginRouter, routerManager } from '@core/router'
     import features from '@features/features'
     import { Icon, Logo, Profile } from '@ui'
-    import { OnboardingRoute, onboardingRouter } from '@views/onboarding'
 
     function onContinueClick(profileId: string): void {
         loadPersistedProfileIntoActiveProfile(profileId)
@@ -28,7 +27,6 @@
             ...(!isDeveloperProfile && { networkId: NetworkId.Shimmer }),
         })
         $routerManager.goToAppContext(AppContext.Onboarding)
-        $onboardingRouter.goTo(isDeveloperProfile ? OnboardingRoute.NetworkSetup : OnboardingRoute.ProfileSetup)
     }
 
     $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTermsOfService()) {
