@@ -23,14 +23,9 @@
             error = err.message
         }
     }
-
-    function onBackClick(): void {
-        updateOnboardingProfile({ name: undefined })
-        $completeOnboardingRouter.previous()
-    }
 </script>
 
-<OnboardingLayout {onBackClick}>
+<OnboardingLayout allowBack={false}>
     <div slot="title">
         <Text type="h2"
             >{localize('views.onboarding.profileSetup.enterName.title', {
