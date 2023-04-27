@@ -1,6 +1,6 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { ChainType, IChain, IIscpChainMetadata, network } from '@core/network'
+    import { ChainType, DEFAULT_CHAIN_METADATA, IChain, IIscpChainMetadata, network } from '@core/network'
     import { Button, HTMLButtonType, Input } from '@ui'
 
     const isBusy = false
@@ -19,15 +19,7 @@
     async function onSubmitClick(): Promise<void> {
         let chain: IChain
         try {
-            const chainMetadata = <IIscpChainMetadata>{
-                type: ChainType.Iscp,
-                name: 'ShimmerEVM',
-                chainId: 1071,
-                aliasAddress: 'rms1prwgvvw472spqusqeufvlmp8xdpyxtrnmvt26jnuk6sxdcq2hk8scku26h7',
-                iscpEndpoint: 'https://json-rpc.evm.testnet.shimmer.network',
-            }
-
-            chain = await $network.addChain(chainMetadata)
+            chain = await $network.addChain(DEFAULT_CHAIN_METADATA[$network.getMetadata().id])
         } catch (err) {
             chain = await $network.getChain(1071)
             $network.removeChain(1071)
