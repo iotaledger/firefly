@@ -1,5 +1,5 @@
 export enum CompleteOnboardingRoute {
-    EnterName = 'viewMnemonic',
-    EnterPin = 'verifyMnemonic',
+    EnterName = 'enterName',
+    EnterPin = 'enterPin',
     FinishOnboarding = 'finishOnboarding',
 }

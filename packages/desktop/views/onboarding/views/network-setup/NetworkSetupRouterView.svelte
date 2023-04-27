@@ -15,7 +15,7 @@
     <Transition>
         <ChooseNetworkView />
     </Transition>
-{:else if $networkSetupRoute === NetworkSetupRoute.CustomNetworkView}
+{:else if $networkSetupRoute === NetworkSetupRoute.CustomNetwork}
     <Transition>
         <CustomNetworkView />
     </Transition>

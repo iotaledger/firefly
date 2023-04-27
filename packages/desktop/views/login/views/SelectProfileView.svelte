@@ -9,7 +9,6 @@
         needsToAcceptLatestTermsOfService,
     } from '@core/app'
     import { localize } from '@core/i18n'
-    import { NetworkId } from '@core/network'
     import { ProfileType, loadPersistedProfileIntoActiveProfile, profiles } from '@core/profile'
     import { loginRouter, routerManager } from '@core/router'
     import features from '@features/features'
@@ -22,10 +21,7 @@
 
     async function onAddProfileClick(): Promise<void> {
         const isDeveloperProfile = shouldBeDeveloperProfile()
-        await initialiseOnboardingFlow({
-            isDeveloperProfile,
-            ...(!isDeveloperProfile && { networkId: NetworkId.Shimmer }),
-        })
+        await initialiseOnboardingFlow({ isDeveloperProfile })
         $routerManager.goToAppContext(AppContext.Onboarding)
     }
 
