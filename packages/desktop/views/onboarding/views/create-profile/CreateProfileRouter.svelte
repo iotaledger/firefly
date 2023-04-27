@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Transition } from '@ui'
     import { CreateFromLedgerRouterView } from '../create-from-ledger'
-    import { CreateFromMnemonicRouter } from '../create-from-mnemonic'
+    import { CreateFromMnemonicRouterView } from '../create-from-mnemonic'
     import { CreateProfileRoute } from './create-profile-route.enum'
     import { createProfileRoute, createProfileRouter } from './create-profile-router'
     import { ChooseCreateProfileFlowView } from './views'
@@ -13,7 +13,7 @@
     </Transition>
 {:else if $createProfileRoute === CreateProfileRoute.CreateFromMnemonic}
     <Transition>
-        <CreateFromMnemonicRouter />
+        <CreateFromMnemonicRouterView />
     </Transition>
 {:else if $createProfileRoute === CreateProfileRoute.CreateFromLedger}
     <Transition>

@@ -4,3 +4,4 @@ export { default as WelcomeView } from './WelcomeView.svelte'
 
 export * from './complete-onboarding'
 export * from './create-from-ledger'
+export * from './create-from-mnemonic'
