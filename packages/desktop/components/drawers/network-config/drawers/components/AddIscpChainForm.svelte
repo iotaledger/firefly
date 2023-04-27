@@ -1,13 +1,13 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { IIscpChainMetadata } from '@core/network'
+    import { IIscpChainMetadata, MAX_CHAIN_NAME_LENGTH } from '@core/network'
     import { ChainType } from '@core/network/enums'
     import { isValidHexAddress, isValidUrl } from '@core/utils'
     import { Button, HTMLButtonType, Input } from '@ui'
 
-    const isBusy = false
     const localeKey = 'views.dashboard.drawers.networkConfig.addChain'
 
+    const isBusy = false
     let nameError = ''
     let aliasAddressError = ''
     let iscpEndpointError = ''
@@ -26,7 +26,7 @@
     function validateName(): void {
         if (!chain.name) {
             nameError = localize(`${localeKey}.errors.cannotBeEmpty`)
-        } else if (chain.name.length > 64) {
+        } else if (chain.name.length > MAX_CHAIN_NAME_LENGTH) {
             nameError = localize(`${localeKey}.errors.nameTooLong`)
         }
     }
@@ -63,7 +63,7 @@
         explorerUrlError = ''
     }
 
-    function onSubmit(): void {
+    function onSubmitClick(): void {
         resetErrors()
         validate()
         const hasError = !!nameError || !!aliasAddressError || !!iscpEndpointError || !!explorerUrlError
@@ -74,7 +74,7 @@
 </script>
 
 <add-iscp-chain class="h-full flex flex-col justify-between">
-    <form id="add-chain-form" class="flex flex-col gap-3" on:submit|preventDefault={onSubmit}>
+    <form id="add-chain-form" class="flex flex-col gap-3" on:submit|preventDefault={onSubmitClick}>
         <Input bind:value={chain.name} placeholder={localize('general.name')} disabled={isBusy} error={nameError} />
         <Input
             bind:value={chain.aliasAddress}
