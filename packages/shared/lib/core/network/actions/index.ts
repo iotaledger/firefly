@@ -1,6 +1,6 @@
 export * from './addNodeToClientOptions'
 export * from './addOfficialNodesToClientOptions'
-export * from './buildNetworkAndChains'
+export * from './buildNetworkAndChainsObjects'
 export * from './editNodeInClientOptions'
 export * from './getAndUpdateNodeInfo'
 export * from './network-polling'

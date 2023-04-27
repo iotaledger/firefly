@@ -1,3 +1,2 @@
-export interface IBlock {
-    number: number
-}
+/* eslint-disable @typescript-eslint/no-empty-interface */
+export interface IBlock {}

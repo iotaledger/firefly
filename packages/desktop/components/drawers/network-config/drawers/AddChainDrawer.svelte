@@ -1,7 +1,6 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { ChainMetadata, IIscpChainMetadata, network } from '@core/network'
-    import { ChainType } from '@core/network/enums'
+    import { ChainMetadata, ChainType, IChain, IIscpChainMetadata, network } from '@core/network'
     import { Button, HTMLButtonType, Input } from '@ui'
     import { onMount } from 'svelte'
 
@@ -27,15 +26,21 @@
     })
 
     async function onMountHelper(): Promise<void> {
-        console.log('NETWORK: ', $network)
-        console.log('NETWORK STATUS: ', $network.getStatus())
-        const chainMetadata = <ChainMetadata>{
-            name: 'ShimmerEVM',
-            chainId: 1071,
-            aliasAddress: 'rms1prwgvvw472spqusqeufvlmp8xdpyxtrnmvt26jnuk6sxdcq2hk8scku26h7',
-            iscpEndpoint: 'https://json-rpc.evm.testnet.shimmer.network',
+        let chain: IChain
+        try {
+            const chainMetadata = <ChainMetadata>{
+                type: ChainType.Iscp,
+                name: 'ShimmerEVM',
+                chainId: 1071,
+                aliasAddress: 'rms1prwgvvw472spqusqeufvlmp8xdpyxtrnmvt26jnuk6sxdcq2hk8scku26h7',
+                iscpEndpoint: 'https://json-rpc.evm.testnet.shimmer.network',
+            }
+            chain = await $network.addChain(chainMetadata)
+        } catch (err) {
+            chain = await $network.getChain(1071)
+            $network.removeChain(1071)
+            console.error(err)
         }
-        const chain = await $network.addChain(chainMetadata)
         const latestBlock = await chain.getLatestBlock()
         console.log('LATEST BLOCK: ', latestBlock)
     }

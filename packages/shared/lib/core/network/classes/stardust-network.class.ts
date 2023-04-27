@@ -2,17 +2,24 @@
 
 import { get } from 'svelte/store'
 
-import { activeProfile } from '@core/profile/stores'
+import { activeProfile, updateActiveProfile } from '@core/profile/stores'
 
+import { ChainType } from '../enums'
 import { IChain, IIscpChainMetadata, INetwork, INetworkStatus } from '../interfaces'
-import { networkStatus } from '../stores'
+import { addChain, chains, getChain, networkStatus, removeChain } from '../stores'
 import { ChainMetadata, NetworkMetadata } from '../types'
 
 import { IscpChain } from './iscp-chain.class'
 
 export class StardustNetwork implements INetwork {
+    private readonly _metadata: NetworkMetadata
+
+    constructor(metadata: NetworkMetadata) {
+        this._metadata = metadata
+    }
+
     getMetadata(): NetworkMetadata {
-        return get(activeProfile)?.network
+        return this._metadata
     }
 
     getStatus(): INetworkStatus {
@@ -20,24 +27,51 @@ export class StardustNetwork implements INetwork {
     }
 
     getChain(chainId: number): IChain {
-        return undefined
+        return getChain(chainId)
     }
 
     getChains(): IChain[] {
-        return []
+        return get(chains)
     }
 
     addChain(payload: ChainMetadata): IChain {
-        const chain = new IscpChain(<IIscpChainMetadata>payload)
+        let chain: IChain
 
-        // persist metadata in store
+        const network = get(activeProfile)?.network
+        if (network) {
+            if (this.isChainAlreadyAdded(payload)) {
+                throw new Error('This chain has already been added.')
+            } else {
+                const isIscpChain = payload.type === ChainType.Iscp
+                chain = isIscpChain ? new IscpChain(payload) : undefined
+                addChain(chain)
+                network.chains.push(payload)
+                updateActiveProfile({ network })
+            }
+        } else {
+            throw new Error('Unable to find network.')
+        }
 
         return chain
+    }
+
+    private isChainAlreadyAdded(chainMetadata: ChainMetadata): boolean {
+        const network = get(activeProfile)?.network
+        return network.chains.some((chain) => {
+            const hasSameName = chain.name === chainMetadata.name
+            const hasSameChainId = chain.chainId === chainMetadata.chainId
+            return hasSameName || hasSameChainId
+        })
     }
 
     editChain(chainId: number, payload: Partial<ChainMetadata>): Promise<void> {
         return Promise.resolve()
     }
 
-    removeChain(chainId: number): void {}
+    removeChain(chainId: number): void {
+        const network = get(activeProfile).network
+        const newChains = network.chains.filter((chain) => chain.chainId !== chainId)
+        updateActiveProfile({ network: { ...network, chains: newChains } })
+        removeChain(chainId)
+    }
 }
