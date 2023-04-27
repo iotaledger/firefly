@@ -5,16 +5,19 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { truncateString } from '@core/utils'
     import { NetworkHealth, NetworkId } from '@core/network'
+    import { selectedConnectedChainIndex } from '@core/network/stores/selected-connected-chain-index.store'
 
     export let name: string
     export let address: string
     export let status: NetworkHealth
+    export let index: number
 
     function onTileClick(): void {
         $networkConfigRouter.goTo(NetworkConfigRoute.ChainInformation)
     }
 
     function onQrCodeIconClick(): void {
+        $selectedConnectedChainIndex = index
         $networkConfigRouter.goTo(NetworkConfigRoute.ChainDepositAddress)
     }
 </script>
