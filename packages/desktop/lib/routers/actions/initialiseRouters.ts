@@ -28,11 +28,9 @@ import {
     restoreFromMnemonicRouter,
     RestoreFromStrongholdRouter,
     restoreFromStrongholdRouter,
-} from '@views/onboarding'
-import {
     RestoreProfileRouter,
     restoreProfileRouter,
-} from '../../../views/onboarding/views/restore-profile/restore-profile-router'
+} from '@views/onboarding'
 
 export function initialiseRouters(): void {
     /**

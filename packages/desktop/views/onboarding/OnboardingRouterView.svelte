@@ -7,7 +7,7 @@
     import { ChooseOnboardingFlowView, CompleteOnboardingRouterView, WelcomeView } from './views'
     import { CreateProfileRouterView } from './views/create-profile'
     import { NetworkSetupRouterView } from './views/network-setup'
-    import { RestoreProfileRouter } from './views/restore-profile'
+    import { RestoreProfileRouterView } from './views/restore-profile'
 
     $: if (features.analytics.onboardingRoute.enabled && $onboardingRoute) {
         Platform.trackEvent('onboarding-route', { route: $onboardingRoute })
@@ -32,7 +32,7 @@
     </Transition>
 {:else if $onboardingRoute === OnboardingRoute.RestoreProfile}
     <Transition>
-        <RestoreProfileRouter />
+        <RestoreProfileRouterView />
     </Transition>
 {:else if $onboardingRoute === OnboardingRoute.CompleteOnboarding}
     <Transition>

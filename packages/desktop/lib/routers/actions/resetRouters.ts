@@ -16,9 +16,9 @@ import {
     onboardingRouter,
     restoreFromMnemonicRouter,
     restoreFromStrongholdRouter,
+    restoreProfileRouter,
 } from '@views/onboarding'
 import { get } from 'svelte/store'
-import { restoreProfileRouter } from '../../../views/onboarding/views/restore-profile/restore-profile-router'
 
 export function resetRouters(): void {
     resetSubrouters()

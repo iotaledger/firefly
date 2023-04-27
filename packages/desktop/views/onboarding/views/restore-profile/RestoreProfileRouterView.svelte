@@ -1,9 +1,9 @@
 <script lang="ts">
     import { Transition } from '@ui'
     import { CreateFromLedgerRouterView } from '../create-from-ledger'
-    import { RestoreFromMnemonicRouterView } from '../restore-from-mnemonic/'
+    import { RestoreFromMnemonicRouterView } from '../restore-from-mnemonic'
     import { RestoreFromStrongholdRouterView } from '../restore-from-stronghold'
-    import { restoreProfileRouter } from '../restore-profile/restore-profile-router'
+    import { restoreProfileRouter } from './restore-profile-router'
     import { RestoreProfileRoute } from './restore-profile-route.enum'
     import { restoreProfileRoute } from './restore-profile-router'
     import { ChooseRestoreProfileFlowView, ClaimFinderView } from './views'
