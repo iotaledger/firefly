@@ -1,8 +1,14 @@
 <script lang="ts">
-    import { onMount } from 'svelte'
+    import { Platform } from '@core/app'
+    import { LedgerSetupRoute, ledgerSetupRoute, ledgerSetupRouter } from '@core/router'
+    import features from '@features/features'
     import { Transition } from 'shared/components'
-    import { ledgerSetupRoute, ledgerSetupRouter, LedgerSetupRoute } from '@core/router'
+    import { onMount } from 'svelte'
     import { ConnectLedgerView, LedgerInstallationGuideView } from './views'
+
+    $: if (features.analytics.onboardingRoute.ledgerSetupRoute.enabled && $ledgerSetupRoute) {
+        Platform.trackEvent('ledger-setup-route', { route: $ledgerSetupRoute })
+    }
 
     onMount(() => {
         $ledgerSetupRouter.restartIfNotInLedgerFlow()

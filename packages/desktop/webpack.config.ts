@@ -9,6 +9,9 @@ import features from './features/features'
 import { Configuration as WebpackConfiguration } from 'webpack'
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server'
 import assert from 'assert'
+import dotenv from 'dotenv'
+
+dotenv.config() // used to read env vars from an .env file
 
 type Mode = 'none' | 'development' | 'production'
 interface Configuration extends WebpackConfiguration {
@@ -36,6 +39,10 @@ const fallback: { [index: string]: string | false | string[] } = {
     path: false,
     fs: false,
     crypto: false,
+    // These are required for the Amplitude SDK
+    https: require.resolve('https-browserify'),
+    url: require.resolve('url/'),
+    http: require.resolve('stream-http'),
 }
 
 const resolve = {
@@ -141,6 +148,7 @@ const mainPlugins = [
         APP_ID: JSON.stringify(appId),
         'process.env.STAGE': JSON.stringify(stage),
         'process.env.APP_PROTOCOL': JSON.stringify(appProtocol),
+        'process.env.AMPLITUDE_API_KEY': JSON.stringify(process.env.AMPLITUDE_API_KEY),
     }),
 ]
 

@@ -6,7 +6,7 @@
     export let networkId: NetworkId
     export let height = 22
     export let width = 22
-    export let outlined = false
+    export let outlined = true
 
     let backgroundColor: string
     let iconColor: string
@@ -34,7 +34,7 @@
 
 <network-icon
     class="flex items-center justify-center p-0.5 rounded-full bg-{backgroundColor} {outlined
-        ? 'ring-2 ring-white dark:ring-gray-900 '
+        ? 'ring-2 ring-white dark:ring-gray-900'
         : ''}"
 >
     <Icon {height} {width} icon={NETWORK_ICON_SVG[networkId]} classes="text-{iconColor}" />
