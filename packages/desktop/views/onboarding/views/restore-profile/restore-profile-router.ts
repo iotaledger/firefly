@@ -1,13 +1,9 @@
 import { OnboardingType, RestoreProfileType, onboardingProfile } from '@contexts/onboarding'
 import { Router, Subrouter } from '@core/router'
 import { get, writable } from 'svelte/store'
-import {
-    /* `RestoreProfileRoute` is an enum that defines the different routes available in the restore
-    profile flow. It is used to keep track of the current route and to determine the next route
-    to navigate to. */
-    RestoreProfileRoute,
-} from './restore-profile-route.enum'
 import { CreateFromLedgerRouter, createFromLedgerRouter } from '../create-from-ledger'
+import { RestoreFromMnemonicRouter, restoreFromMnemonicRouter } from '../restore-from-mnemonic'
+import { RestoreProfileRoute } from './restore-profile-route.enum'
 
 export const restoreProfileRoute = writable<RestoreProfileRoute>(undefined)
 export const restoreProfileRouter = writable<RestoreProfileRouter>(undefined)
@@ -26,6 +22,7 @@ export class RestoreProfileRouter extends Subrouter<RestoreProfileRoute> {
             case RestoreProfileRoute.ChooseRestoreProfileFlow:
                 switch (_onboardingProfile.restoreProfileType) {
                     case RestoreProfileType.Mnemonic:
+                        restoreFromMnemonicRouter.set(new RestoreFromMnemonicRouter(get(restoreProfileRouter)))
                         nextRoute = RestoreProfileRoute.RestoreFromMnemonic
                         break
                     case RestoreProfileType.Stronghold:
