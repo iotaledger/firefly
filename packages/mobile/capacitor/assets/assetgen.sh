@@ -7,7 +7,7 @@ dest_ios_splash="ios/App/App/Assets.xcassets/Splash.imageset"
 dest_android="android/app/src/main/res"
 # http://astroa.physics.metu.edu.tr/MANUALS/ImageMagick-6.2.5/www/command-line-options.html#filter
 # we use filter and support to get smooth
-icon_opts="-filter Gaussian -support 7.5 -background white"
+icon_opts="-filter Gaussian -support 7.5 -background #00121F -alpha remove -alpha off"
   
 if [ -z $1 ]
   then
