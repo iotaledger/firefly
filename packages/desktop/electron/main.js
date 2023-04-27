@@ -405,6 +405,7 @@ ipcMain.handle('copy-file', (_e, sourceFilePath, destinationFilePath) => {
     const src = path.resolve(sourceFilePath)
     const srcFileBuffer = fs.readFileSync(src)
     const dest = path.resolve(destinationFilePath)
+    ensureDirectoryExistence(dest)
     fs.writeFileSync(dest, srcFileBuffer)
 })
 
@@ -422,6 +423,15 @@ ipcMain.handle('check-if-file-exists', (_e, filePath) => {
 
     return fs.existsSync(`${directory}/__storage__/${filePath}`)
 })
+
+function ensureDirectoryExistence(filePath) {
+    const dirname = path.dirname(filePath)
+    if (fs.existsSync(dirname)) {
+        return true
+    }
+    ensureDirectoryExistence(dirname)
+    fs.mkdirSync(dirname)
+}
 
 // Diagnostics
 const getDiagnostics = () => {
