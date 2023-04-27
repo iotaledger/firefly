@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Transition } from '@ui'
-    import { CreateFromLedgerRouter } from '../create-from-ledger'
+    import { CreateFromLedgerRouterView } from '../create-from-ledger'
     import { RestoreFromMnemonicRouter } from '../restore-from-mnemonic/'
     import { RestoreFromStrongholdRouter } from '../restore-from-stronghold'
     import { restoreProfileRouter } from '../restore-profile/restore-profile-router'
@@ -23,7 +23,7 @@
     </Transition>
 {:else if $restoreProfileRoute === RestoreProfileRoute.RestoreFromLedger}
     <Transition>
-        <CreateFromLedgerRouter router={$restoreProfileRouter} />
+        <CreateFromLedgerRouterView router={$restoreProfileRouter} />
     </Transition>
 {:else if $restoreProfileRoute === RestoreProfileRoute.ClaimFinder}
     <Transition>

@@ -29,25 +29,25 @@ import {
     strongholdSetupRouter,
 } from '@core/router/subrouters'
 import {
-    NetworkSetupRouter,
-    networkSetupRouter,
-} from '../../../views/onboarding/views/network-setup/network-setup-router'
+    CreateFromMnemonicRouter,
+    createFromMnemonicRouter,
+} from '../../../views/onboarding/views/create-from-mnemonic/create-from-mnemonic-router'
 import {
     CreateProfileRouter,
     createProfileRouter,
 } from '../../../views/onboarding/views/create-profile/create-profile-router'
 import {
-    CreateFromMnemonicRouter,
-    createFromMnemonicRouter,
-} from '../../../views/onboarding/views/create-from-mnemonic/create-from-mnemonic-router'
+    NetworkSetupRouter,
+    networkSetupRouter,
+} from '../../../views/onboarding/views/network-setup/network-setup-router'
 import {
+    CompleteOnboardingRouter,
+    completeOnboardingRouter,
     CreateFromLedgerRouter,
     createFromLedgerRouter,
-} from '../../../views/onboarding/views/create-from-ledger/create-from-ledger-router'
-import {
-    RestoreProfileRouter,
-    restoreProfileRouter,
-} from '../../../views/onboarding/views/restore-profile/restore-profile-router'
+    OnboardingRouter,
+    onboardingRouter,
+} from '@views/onboarding'
 import {
     RestoreFromMnemonicRouter,
     restoreFromMnemonicRouter,
@@ -57,11 +57,9 @@ import {
     restoreFromStrongholdRouter,
 } from '../../../views/onboarding/views/restore-from-stronghold/restore-from-stronghold-router'
 import {
-    CompleteOnboardingRouter,
-    completeOnboardingRouter,
-    OnboardingRouter,
-    onboardingRouter,
-} from '@views/onboarding'
+    RestoreProfileRouter,
+    restoreProfileRouter,
+} from '../../../views/onboarding/views/restore-profile/restore-profile-router'
 
 export function initialiseRouters(): void {
     /**

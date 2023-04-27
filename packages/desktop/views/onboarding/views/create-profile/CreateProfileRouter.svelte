@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Transition } from '@ui'
-    import { CreateFromLedgerRouter } from '../create-from-ledger'
+    import { CreateFromLedgerRouterView } from '../create-from-ledger'
     import { CreateFromMnemonicRouter } from '../create-from-mnemonic'
     import { CreateProfileRoute } from './create-profile-route.enum'
     import { createProfileRoute, createProfileRouter } from './create-profile-router'
@@ -17,6 +17,6 @@
     </Transition>
 {:else if $createProfileRoute === CreateProfileRoute.CreateFromLedger}
     <Transition>
-        <CreateFromLedgerRouter router={$createProfileRouter} />
+        <CreateFromLedgerRouterView router={$createProfileRouter} />
     </Transition>
 {/if}
