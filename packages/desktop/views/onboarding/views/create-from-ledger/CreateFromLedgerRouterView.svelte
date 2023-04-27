@@ -6,6 +6,10 @@
     import { Subrouter } from '@core/router'
 
     export let router: Subrouter<unknown>
+
+    $: if (features.analytics.onboardingRoute.enabled && $createFromLedgerRoute) {
+        Platform.trackEvent('create-from-ledger-route', { route: $createFromLedgerRoute })
+    }
 </script>
 
 {#if $createFromLedgerRoute === CreateFromLedgerRoute.InstallLedger}

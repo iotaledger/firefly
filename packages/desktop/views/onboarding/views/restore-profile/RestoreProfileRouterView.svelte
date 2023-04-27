@@ -7,6 +7,10 @@
     import { RestoreProfileRoute } from './restore-profile-route.enum'
     import { restoreProfileRoute } from './restore-profile-router'
     import { ChooseRestoreProfileFlowView, ClaimFinderView } from './views'
+
+    $: if (features.analytics.onboardingRoute.enabled && $restoreProfileRoute) {
+        Platform.trackEvent('restore-profile-route', { route: $restoreProfileRoute })
+    }
 </script>
 
 {#if $restoreProfileRoute === RestoreProfileRoute.ChooseRestoreProfileFlow}

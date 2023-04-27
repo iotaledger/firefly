@@ -5,6 +5,10 @@
     import { CreateProfileRoute } from './create-profile-route.enum'
     import { createProfileRoute, createProfileRouter } from './create-profile-router'
     import { ChooseCreateProfileFlowView } from './views'
+
+    $: if (features.analytics.onboardingRoute.enabled && $createProfileRoute) {
+        Platform.trackEvent('create-profile-route', { route: $createProfileRoute })
+    }
 </script>
 
 {#if $createProfileRoute === CreateProfileRoute.ChooseCreateProfileFlow}

@@ -4,6 +4,10 @@
     import { restoreFromMnemonicRoute, restoreFromMnemonicRouter } from './restore-from-mnemonic-router'
     import { InputMnemonicView } from './views'
     import { EncryptMnemonicView } from '../shared'
+
+    $: if (features.analytics.onboardingRoute.enabled && $restoreFromMnemonicRoute) {
+        Platform.trackEvent('restore-from-mnemonic-route', { route: $restoreFromMnemonicRoute })
+    }
 </script>
 
 {#if $restoreFromMnemonicRoute === RestoreFromMnemonicRoute.InputMnemonic}

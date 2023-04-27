@@ -4,6 +4,10 @@
     import { createFromMnemonicRoute, createFromMnemonicRouter } from './create-from-mnemonic-router'
     import { VerifyMnemonicView, ViewMnemonicView } from './views'
     import { EncryptMnemonicView } from '../shared'
+
+    $: if (features.analytics.onboardingRoute.enabled && $createFromMnemonicRoute) {
+        Platform.trackEvent('create-from-mnemonic-route', { route: $createFromMnemonicRoute })
+    }
 </script>
 
 {#if $createFromMnemonicRoute === CreateFromMnemonicRoute.ViewMnemonic}

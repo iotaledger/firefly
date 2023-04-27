@@ -5,6 +5,10 @@
     import EnterNameView from './views/EnterNameView.svelte'
     import EnterPinView from './views/EnterPinView.svelte'
     import FinishOnboardingView from './views/FinishOnboardingView.svelte'
+
+    $: if (features.analytics.onboardingRoute.enabled && $completeOnboardingRoute) {
+        Platform.trackEvent('complete-onboarding-route', { route: $completeOnboardingRoute })
+    }
 </script>
 
 {#if $completeOnboardingRoute === CompleteOnboardingRoute.EnterName}

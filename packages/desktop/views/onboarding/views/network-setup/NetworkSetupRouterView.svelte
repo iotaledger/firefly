@@ -6,7 +6,7 @@
     import { networkSetupRoute } from './network-setup-router'
     import { ChooseNetworkView, CustomNetworkView } from './views'
 
-    $: if (features.analytics.onboardingRoute.networkSetupRoute.enabled && $networkSetupRoute) {
+    $: if (features.analytics.onboardingRoute.enabled && $networkSetupRoute) {
         Platform.trackEvent('network-setup-route', { route: $networkSetupRoute })
     }
 </script>
