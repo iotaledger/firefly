@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { IIscpChainMetadata, MAX_CHAIN_NAME_LENGTH, ChainType } from '@core/network'
     import { activeProfile } from '@core/profile'
-    import { isValidHexAddress, isValidUrl } from '@core/utils'
+    import { isValidHexAddress, isValidHttpsUrl } from '@core/utils'
     import { Button, HTMLButtonType, Input } from '@ui'
 
     const localeKey = 'views.dashboard.drawers.networkConfig.addChain'
@@ -44,13 +44,13 @@
     }
 
     function validateIscpEndpoint(): void {
-        if (!isValidUrl(chain.iscpEndpoint)) {
+        if (!isValidHttpsUrl(chain.iscpEndpoint)) {
             iscpEndpointError = localize(`${localeKey}.errors.invalidUrl`)
         }
     }
 
     function validateExplorerUrl(): void {
-        if (chain.explorerUrl && !isValidUrl(chain.explorerUrl)) {
+        if (chain.explorerUrl && !isValidHttpsUrl(chain.explorerUrl)) {
             explorerUrlError = localize(`${localeKey}.errors.invalidUrl`)
         }
     }
