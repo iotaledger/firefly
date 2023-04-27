@@ -12,8 +12,6 @@ import {
 } from '@core/router/routers'
 import { loginRouter, LoginRouter } from '@core/router/subrouters'
 import {
-    CreateFromMnemonicRouter,
-    createFromMnemonicRouter,
     OnboardingRouter,
     onboardingRouter,
     RestoreFromMnemonicRouter,
@@ -56,7 +54,6 @@ function initialiseSubrouters(): void {
 }
 
 function initialiseOnboardingSubrouters(): void {
-    createFromMnemonicRouter.set(new CreateFromMnemonicRouter())
     restoreFromMnemonicRouter.set(new RestoreFromMnemonicRouter())
     restoreFromStrongholdRouter.set(new RestoreFromStrongholdRouter())
 }

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Transition } from 'shared/components'
+    import { Transition } from '@ui'
     import { CreateFromMnemonicRoute } from './create-from-mnemonic-route.enum'
     import { createFromMnemonicRoute, createFromMnemonicRouter } from './create-from-mnemonic-router'
     import { VerifyMnemonicView, ViewMnemonicView } from './views'

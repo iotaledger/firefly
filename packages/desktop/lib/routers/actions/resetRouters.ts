@@ -7,12 +7,7 @@ import {
     settingsRouter,
     updateStrongholdRouter,
 } from '@core/router'
-import {
-    createFromMnemonicRouter,
-    onboardingRouter,
-    restoreFromMnemonicRouter,
-    restoreFromStrongholdRouter,
-} from '@views/onboarding'
+import { onboardingRouter, restoreFromMnemonicRouter, restoreFromStrongholdRouter } from '@views/onboarding'
 import { get } from 'svelte/store'
 
 export function resetRouters(): void {
@@ -22,7 +17,6 @@ export function resetRouters(): void {
 
 function resetSubrouters(): void {
     get(loginRouter).reset()
-    get(createFromMnemonicRouter).reset()
     get(restoreFromMnemonicRouter).reset()
     get(restoreFromStrongholdRouter).reset()
     get(updateStrongholdRouter)?.reset() // Is potentially null because we only initialize it in the respective parent router (login/recovery)
