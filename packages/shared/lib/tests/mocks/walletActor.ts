@@ -9,6 +9,12 @@ const walletActor: IWalletActor = {
     },
     initLogger(config: LoggerConfig): void {},
     onMessage(callback: (payload: unknown) => void): void {},
+    migrateStrongholdSnapshotV2ToV3(
+        currentPath: string,
+        currentPassword: string,
+        newPath: string,
+        newPassword: string
+    ) {},
 }
 
 window['__WALLET__'] = walletActor

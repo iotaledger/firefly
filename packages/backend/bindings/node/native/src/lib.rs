@@ -1,13 +1,16 @@
-use neon::prelude::*;
-use std::convert::TryInto;
-use std::sync::{
-    mpsc::{channel, Receiver},
-    Arc, Mutex,
-};
 use firefly_actor_system::{
-    destroy as destroy_actor, init as init_actor, init_logger as init_backend_logger,
-    listen as add_event_listener, remove_event_listeners as remove_actor_event_listeners,
-    send_message as send_actor_message, EventType, LoggerConfigBuilder, RUNTIME,
+    destroy as destroy_actor, init as init_actor, init_logger as init_backend_logger, listen as add_event_listener,
+    remove_event_listeners as remove_actor_event_listeners, send_message as send_actor_message, EventType,
+    LoggerConfigBuilder, RUNTIME,
+};
+use iota_wallet::account_manager::AccountManager;
+use neon::prelude::*;
+use std::{
+    convert::TryInto,
+    sync::{
+        mpsc::{channel, Receiver},
+        Arc, Mutex,
+    },
 };
 
 struct SendMessageTask {
@@ -27,11 +30,7 @@ impl Task for SendMessageTask {
         Ok(())
     }
 
-    fn complete(
-        self,
-        mut cx: TaskContext,
-        _: Result<Self::Output, Self::Error>,
-    ) -> JsResult<Self::JsEvent> {
+    fn complete(self, mut cx: TaskContext, _: Result<Self::Output, Self::Error>) -> JsResult<Self::JsEvent> {
         Ok(cx.undefined())
     }
 }
@@ -52,11 +51,7 @@ impl Task for ReceiveMessageTask {
         rx.recv().map_err(|e| e.to_string())
     }
 
-    fn complete(
-        self,
-        mut cx: TaskContext,
-        result: Result<Self::Output, Self::Error>,
-    ) -> JsResult<Self::JsEvent> {
+    fn complete(self, mut cx: TaskContext, result: Result<Self::Output, Self::Error>) -> JsResult<Self::JsEvent> {
         match result {
             Ok(s) => Ok(cx.string(s)),
             Err(e) => cx.throw_error(format!("ReceiveTask error: {}", e)),
@@ -179,12 +174,39 @@ pub fn init_logger(mut cx: FunctionContext) -> JsResult<JsUndefined> {
     Ok(cx.undefined())
 }
 
+pub fn migrate_stronghold_snapshot_v2_to_v3(mut cx: FunctionContext) -> JsResult<JsUndefined> {
+    let current_path = cx.argument::<JsString>(0)?.value();
+    let current_password = cx.argument::<JsString>(1)?.value();
+    let new_path = cx
+        .argument_opt(2)
+        .map(|opt| opt.downcast_or_throw::<JsString, _>(&mut cx))
+        .transpose()?
+        .map(|opt| opt.value());
+    let new_password = cx
+        .argument_opt(3)
+        .map(|opt| opt.downcast_or_throw::<JsString, _>(&mut cx))
+        .transpose()?
+        .map(|opt| opt.value());
+
+    AccountManager::migrate_stronghold_v2_to_v3(
+        &current_path,
+        &current_password,
+        new_path.as_ref(),
+        new_password.as_deref(),
+    )
+    .or_else(|e| cx.throw_error(e.to_string()))?;
+
+    Ok(cx.undefined())
+}
+
 register_module!(mut cx, {
     cx.export_function("sendMessage", send_message)?;
     cx.export_function("listen", listen)?;
     cx.export_function("initLogger", init_logger)?;
     // Expose the `JsActorSystem` class as `ActorSystem`.
     cx.export_class::<JsActorSystem>("ActorSystem")?;
+
+    cx.export_function("migrateStrongholdSnapshotV2ToV3", migrate_stronghold_snapshot_v2_to_v3)?;
 
     Ok(())
 });
