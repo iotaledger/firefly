@@ -4,6 +4,7 @@ import { get, writable } from 'svelte/store'
 import { CreateFromLedgerRouter, createFromLedgerRouter } from '../create-from-ledger'
 import { RestoreFromMnemonicRouter, restoreFromMnemonicRouter } from '../restore-from-mnemonic'
 import { RestoreProfileRoute } from './restore-profile-route.enum'
+import { RestoreFromStrongholdRouter, restoreFromStrongholdRouter } from '../restore-from-stronghold'
 
 export const restoreProfileRoute = writable<RestoreProfileRoute>(undefined)
 export const restoreProfileRouter = writable<RestoreProfileRouter>(undefined)
@@ -26,6 +27,7 @@ export class RestoreProfileRouter extends Subrouter<RestoreProfileRoute> {
                         nextRoute = RestoreProfileRoute.RestoreFromMnemonic
                         break
                     case RestoreProfileType.Stronghold:
+                        restoreFromStrongholdRouter.set(new RestoreFromStrongholdRouter(get(restoreProfileRouter)))
                         nextRoute = RestoreProfileRoute.RestoreFromStronghold
                         break
                     case RestoreProfileType.Ledger:

@@ -1,14 +1,13 @@
-import { Subrouter } from '@core/router'
+import { Router, Subrouter } from '@core/router'
 import { get, writable } from 'svelte/store'
-import { restoreProfileRouter } from '../restore-profile/restore-profile-router'
 import { RestoreFromStrongholdRoute } from './restore-from-stronghold-route.enum'
 
 export const restoreFromStrongholdRoute = writable<RestoreFromStrongholdRoute>(undefined)
 export const restoreFromStrongholdRouter = writable<RestoreFromStrongholdRouter>(undefined)
 
 export class RestoreFromStrongholdRouter extends Subrouter<RestoreFromStrongholdRoute> {
-    constructor() {
-        super(RestoreFromStrongholdRoute.ImportStronghold, restoreFromStrongholdRoute, get(restoreProfileRouter))
+    constructor(parentRouter: Router<unknown>) {
+        super(RestoreFromStrongholdRoute.ImportStronghold, restoreFromStrongholdRoute, parentRouter)
     }
 
     next(): void {

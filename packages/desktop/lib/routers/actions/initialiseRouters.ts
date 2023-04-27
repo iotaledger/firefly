@@ -11,12 +11,7 @@ import {
     settingsRouter,
 } from '@core/router/routers'
 import { loginRouter, LoginRouter } from '@core/router/subrouters'
-import {
-    OnboardingRouter,
-    onboardingRouter,
-    RestoreFromStrongholdRouter,
-    restoreFromStrongholdRouter,
-} from '@views/onboarding'
+import { OnboardingRouter, onboardingRouter } from '@views/onboarding'
 
 export function initialiseRouters(): void {
     /**
@@ -30,7 +25,6 @@ export function initialiseRouters(): void {
 
 export function initialiseOnboardingRouters(): void {
     initialiseBaseOnboardingRouters()
-    initialiseOnboardingSubrouters()
 }
 
 function initialiseBaseRouters(): void {
@@ -48,9 +42,4 @@ function initialiseBaseOnboardingRouters(): void {
 
 function initialiseSubrouters(): void {
     loginRouter.set(new LoginRouter())
-    initialiseOnboardingSubrouters()
-}
-
-function initialiseOnboardingSubrouters(): void {
-    restoreFromStrongholdRouter.set(new RestoreFromStrongholdRouter())
 }
