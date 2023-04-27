@@ -12,8 +12,6 @@ import {
 } from '@core/router/routers'
 import { loginRouter, LoginRouter } from '@core/router/subrouters'
 import {
-    CompleteOnboardingRouter,
-    completeOnboardingRouter,
     CreateFromLedgerRouter,
     createFromLedgerRouter,
     CreateFromMnemonicRouter,
@@ -64,5 +62,4 @@ function initialiseOnboardingSubrouters(): void {
     createFromLedgerRouter.set(new CreateFromLedgerRouter())
     restoreFromMnemonicRouter.set(new RestoreFromMnemonicRouter())
     restoreFromStrongholdRouter.set(new RestoreFromStrongholdRouter())
-    completeOnboardingRouter.set(new CompleteOnboardingRouter())
 }

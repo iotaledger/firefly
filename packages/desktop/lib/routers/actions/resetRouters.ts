@@ -8,7 +8,6 @@ import {
     updateStrongholdRouter,
 } from '@core/router'
 import {
-    completeOnboardingRouter,
     createFromLedgerRouter,
     createFromMnemonicRouter,
     onboardingRouter,
@@ -28,7 +27,6 @@ function resetSubrouters(): void {
     get(createFromLedgerRouter).reset()
     get(restoreFromMnemonicRouter).reset()
     get(restoreFromStrongholdRouter).reset()
-    get(completeOnboardingRouter).reset()
     get(updateStrongholdRouter)?.reset() // Is potentially null because we only initialize it in the respective parent router (login/recovery)
 }
 

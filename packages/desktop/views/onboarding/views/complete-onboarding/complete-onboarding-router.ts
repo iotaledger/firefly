@@ -1,5 +1,4 @@
-import { Subrouter } from '@core/router'
-import { onboardingRouter } from '@views/onboarding/onboarding-router'
+import { Router, Subrouter } from '@core/router'
 import { get, writable } from 'svelte/store'
 import { CompleteOnboardingRoute } from './complete-onboarding-route.enum'
 
@@ -7,8 +6,8 @@ export const completeOnboardingRoute = writable<CompleteOnboardingRoute>(undefin
 export const completeOnboardingRouter = writable<CompleteOnboardingRouter>(undefined)
 
 export class CompleteOnboardingRouter extends Subrouter<CompleteOnboardingRoute> {
-    constructor() {
-        super(CompleteOnboardingRoute.EnterName, completeOnboardingRoute, get(onboardingRouter))
+    constructor(parentRouter: Router<unknown>) {
+        super(CompleteOnboardingRoute.EnterName, completeOnboardingRoute, parentRouter)
     }
 
     next(): void {

@@ -4,6 +4,7 @@ import { get, writable } from 'svelte/store'
 import { Router } from '../../../shared/lib/core/router/classes'
 import { appRouter } from '../../../shared/lib/core/router/routers/app-router'
 import { OnboardingRoute } from './onboarding-route.enum'
+import { CompleteOnboardingRouter, completeOnboardingRouter } from './views/complete-onboarding'
 import { CreateProfileRouter, createProfileRouter } from './views/create-profile'
 import { NetworkSetupRouter, networkSetupRouter } from './views/network-setup'
 import { RestoreProfileRouter, restoreProfileRouter } from './views/restore-profile'
@@ -45,11 +46,9 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 }
                 break
             }
-            case OnboardingRoute.CreateProfile: {
-                nextRoute = OnboardingRoute.CompleteOnboarding
-                break
-            }
+            case OnboardingRoute.CreateProfile:
             case OnboardingRoute.RestoreProfile: {
+                completeOnboardingRouter.set(new CompleteOnboardingRouter(get(onboardingRouter)))
                 nextRoute = OnboardingRoute.CompleteOnboarding
                 break
             }
