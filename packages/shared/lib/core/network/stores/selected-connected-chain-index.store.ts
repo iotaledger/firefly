@@ -1,7 +1,8 @@
+import { Readable, Writable, derived, writable } from 'svelte/store'
+
 import { activeProfile } from '@core/profile/stores'
 import { selectedAccount } from '@core/account/stores'
 
-import { Readable, Writable, derived, writable } from 'svelte/store'
 import { buildChainFromNetwork } from '../utils'
 import { IConnectedChain } from '../interfaces'
 import { NetworkHealth } from '../enums'
