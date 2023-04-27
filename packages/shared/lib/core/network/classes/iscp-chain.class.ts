@@ -47,16 +47,16 @@ export class IscpChain implements IChain {
     }
 
     /**
-     * CAUTION: The API endpoint used by this function is broken...
+     * CAUTION: The API endpoint used by this method is not available
+     * with the public ShimmerEVM node URL (b/c it's actually just
+     * the EVM JSON-RPC endpoint rather than the underlying WASP
+     * node URL). See here for more: https://github.com/iotaledger/wasp/issues/2385
      */
     private async fetchChainMetadata(): Promise<IIscpChainMetadata> {
         const { aliasAddress, iscpEndpoint } = this._configuration
         const chainMetadataUrl = `${iscpEndpoint}/v1/chains/${aliasAddress}`
         const response = await fetch(chainMetadataUrl)
-        console.log('RESPONSE: ', response)
-        const metadata = (await response.json()) as IIscpChainMetadata
-        console.log('METADATA: ', metadata)
-        return metadata
+        return (await response.json()) as IIscpChainMetadata
     }
 
     getStatus(): Promise<IChainStatus> {

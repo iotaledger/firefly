@@ -1,6 +1,6 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { ChainType, DEFAULT_CHAIN_CONFIGURATIONS, IChain, IIscpChainConfiguration, network } from '@core/network'
+    import { ChainType, IIscpChainConfiguration } from '@core/network'
     import { Button, HTMLButtonType, Input } from '@ui'
 
     const isBusy = false
@@ -17,19 +17,19 @@
     }
 
     async function onSubmitClick(): Promise<void> {
-        let chain: IChain
-        try {
-            chain = await $network.addChain(DEFAULT_CHAIN_CONFIGURATIONS[$network.getMetadata().id])
-        } catch (err) {
-            chain = await $network.getChain(1071)
-            $network.removeChain(1071)
-            console.error(err)
-        }
-        const latestBlock = await chain.getLatestBlock()
-        console.log('LATEST BLOCK: ', latestBlock)
-
-        const metadata = await chain.getMetadata()
-        console.log('CHAIN METADATA: ', metadata)
+        // let chain: IChain
+        // try {
+        //     chain = await $network.addChain(DEFAULT_CHAIN_CONFIGURATIONS[$network.getMetadata().id])
+        // } catch (err) {
+        //     chain = await $network.getChain(1071)
+        //     $network.removeChain(1071)
+        //     console.error(err)
+        // }
+        // const latestBlock = await chain.getLatestBlock()
+        // console.log('LATEST BLOCK: ', latestBlock)
+        //
+        // const metadata = await chain.getMetadata()
+        // console.log('CHAIN METADATA: ', metadata)
     }
 </script>
 

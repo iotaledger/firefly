@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { get } from 'svelte/store'
 
 import { activeProfile, updateActiveProfile } from '@core/profile/stores'
@@ -74,8 +76,6 @@ export class StardustNetwork implements INetwork {
     }
 
     editChain(chainId: number, payload: Partial<ChainConfiguration>): Promise<void> {
-        /* eslint-disable no-console */
-        console.log('EDITING: ', chainId, payload)
         return Promise.resolve()
     }
 
