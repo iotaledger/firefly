@@ -4,11 +4,10 @@
     import { Transition } from 'shared/components'
     import { OnboardingRoute } from './onboarding-route.enum'
     import { onboardingRoute } from './onboarding-router'
-    import ChooseOnboardingFlowView from './views/ChooseOnboardingFlowView.svelte'
-    import { CreateProfileRouter } from './views/create-profile'
+    import { ChooseOnboardingFlowView, CompleteOnboardingRouterView, WelcomeView } from './views'
+    import { CreateProfileRouterView } from './views/create-profile'
     import { NetworkSetupRouter } from './views/network-setup'
     import { RestoreProfileRouter } from './views/restore-profile'
-    import { CompleteOnboardingRouterView, WelcomeView } from './views'
 
     $: if (features.analytics.onboardingRoute.enabled && $onboardingRoute) {
         Platform.trackEvent('onboarding-route', { route: $onboardingRoute })
@@ -29,7 +28,7 @@
     </Transition>
 {:else if $onboardingRoute === OnboardingRoute.CreateProfile}
     <Transition>
-        <CreateProfileRouter />
+        <CreateProfileRouterView />
     </Transition>
 {:else if $onboardingRoute === OnboardingRoute.RestoreProfile}
     <Transition>
@@ -40,4 +39,3 @@
         <CompleteOnboardingRouterView />
     </Transition>
 {/if}
-CompleteOnboardingRouterView

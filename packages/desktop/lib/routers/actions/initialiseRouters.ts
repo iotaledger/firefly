@@ -29,10 +29,6 @@ import {
     strongholdSetupRouter,
 } from '@core/router/subrouters'
 import {
-    CreateProfileRouter,
-    createProfileRouter,
-} from '../../../views/onboarding/views/create-profile/create-profile-router'
-import {
     NetworkSetupRouter,
     networkSetupRouter,
 } from '../../../views/onboarding/views/network-setup/network-setup-router'
@@ -43,6 +39,8 @@ import {
     createFromLedgerRouter,
     CreateFromMnemonicRouter,
     createFromMnemonicRouter,
+    CreateProfileRouter,
+    createProfileRouter,
     OnboardingRouter,
     onboardingRouter,
 } from '@views/onboarding'
