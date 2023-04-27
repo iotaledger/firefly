@@ -48,7 +48,7 @@ else
   mkdir -p "$dest_android/drawable-port-xxxhdpi"
   
   ### Add margin for adaptive icons
-  add_margin="-background white -gravity center -scale 248x248 -extent 384x384"
+  add_margin="-background #00121F -gravity center -scale 248x248 -extent 384x384"
   
   ## -adaptive-blur 1,1
   
