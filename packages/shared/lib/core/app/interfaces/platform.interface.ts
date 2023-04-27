@@ -50,6 +50,7 @@ export interface IPlatform {
     removeListenersForEvent<K extends keyof IPlatformEventMap>(eventName: K): void
 
     isFeatureFlagEnabled(keyPath: string): boolean
+    trackEvent(eventName: string, eventProperties?: Record<string, unknown>): void
 
     getLanguageCode(): Promise<string>
 }

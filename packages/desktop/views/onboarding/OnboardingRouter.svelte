@@ -1,8 +1,11 @@
 <script lang="ts">
+    import { Platform } from '@core/app'
+    import { OnboardingRoute, onboardingRoute } from '@core/router'
+    import features from '@features/features'
     import { Transition } from 'shared/components'
     import {
-        // routers
         AppSetupRouter,
+        CongratulationsView,
         LedgerSetupRouter,
         NetworkSetupRouter,
         ProfileBackupRouter,
@@ -11,11 +14,11 @@
         ShimmerClaimingRouter,
         StorageProtectionSetupRouter,
         StrongholdSetupRouter,
-
-        // views
-        CongratulationsView,
     } from './views'
-    import { OnboardingRoute, onboardingRoute } from '@core/router'
+
+    $: if (features.analytics.onboardingRoute.enabled && $onboardingRoute) {
+        Platform.trackEvent('onboarding-route', { route: $onboardingRoute })
+    }
 </script>
 
 {#if $onboardingRoute === OnboardingRoute.AppSetup}
