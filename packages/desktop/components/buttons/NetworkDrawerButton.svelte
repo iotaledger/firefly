@@ -1,10 +1,14 @@
 <script lang="ts">
     import { FontWeight, Text, NetworkIcon } from '@ui'
-    import { DrawerId, openDrawer } from '@desktop/auxilary/drawer'
+    import { DrawerId, closeDrawer, drawerState, openDrawer } from '@desktop/auxilary/drawer'
     import { activeProfile } from '@core/profile/stores'
 
     function onNetworkClick(): void {
-        openDrawer({ id: DrawerId.NetworkConfig })
+        if ($drawerState.active) {
+            closeDrawer()
+        } else {
+            openDrawer({ id: DrawerId.NetworkConfig })
+        }
     }
 </script>
 
