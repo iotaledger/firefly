@@ -1,6 +1,5 @@
 import { OnboardingType, RestoreProfileType, onboardingProfile } from '@contexts/onboarding'
-import { Subrouter } from '@core/router'
-import { onboardingRouter } from '@views/onboarding/onboarding-router'
+import { Router, Subrouter } from '@core/router'
 import { get, writable } from 'svelte/store'
 import {
     /* `RestoreProfileRoute` is an enum that defines the different routes available in the restore
@@ -13,8 +12,8 @@ export const restoreProfileRoute = writable<RestoreProfileRoute>(undefined)
 export const restoreProfileRouter = writable<RestoreProfileRouter>(undefined)
 
 export class RestoreProfileRouter extends Subrouter<RestoreProfileRoute> {
-    constructor() {
-        super(RestoreProfileRoute.ChooseRestoreProfileFlow, restoreProfileRoute, get(onboardingRouter))
+    constructor(parentRouter: Router<unknown>) {
+        super(RestoreProfileRoute.ChooseRestoreProfileFlow, restoreProfileRoute, parentRouter)
     }
 
     next(): void {

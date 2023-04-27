@@ -11,11 +11,9 @@ import {
     completeOnboardingRouter,
     createFromLedgerRouter,
     createFromMnemonicRouter,
-    networkSetupRouter,
     onboardingRouter,
     restoreFromMnemonicRouter,
     restoreFromStrongholdRouter,
-    restoreProfileRouter,
 } from '@views/onboarding'
 import { get } from 'svelte/store'
 
@@ -26,10 +24,8 @@ export function resetRouters(): void {
 
 function resetSubrouters(): void {
     get(loginRouter).reset()
-    get(networkSetupRouter) && get(networkSetupRouter).reset()
     get(createFromMnemonicRouter).reset()
     get(createFromLedgerRouter).reset()
-    get(restoreProfileRouter).reset()
     get(restoreFromMnemonicRouter).reset()
     get(restoreFromStrongholdRouter).reset()
     get(completeOnboardingRouter).reset()

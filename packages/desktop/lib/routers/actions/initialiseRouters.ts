@@ -24,8 +24,6 @@ import {
     restoreFromMnemonicRouter,
     RestoreFromStrongholdRouter,
     restoreFromStrongholdRouter,
-    RestoreProfileRouter,
-    restoreProfileRouter,
 } from '@views/onboarding'
 
 export function initialiseRouters(): void {
@@ -64,7 +62,6 @@ function initialiseSubrouters(): void {
 function initialiseOnboardingSubrouters(): void {
     createFromMnemonicRouter.set(new CreateFromMnemonicRouter())
     createFromLedgerRouter.set(new CreateFromLedgerRouter())
-    restoreProfileRouter.set(new RestoreProfileRouter())
     restoreFromMnemonicRouter.set(new RestoreFromMnemonicRouter())
     restoreFromStrongholdRouter.set(new RestoreFromStrongholdRouter())
     completeOnboardingRouter.set(new CompleteOnboardingRouter())
