@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { selectedConnectedChain } from '@core/network/stores/selected-connected-chain-index.store'
+    import { selectedConnectedChain } from '@core/network'
     import { appSettings } from '@core/app'
-    import { QR, AddressBox, FontWeight } from 'shared/components'
+    import { QR, AddressBox, FontWeight } from '@ui'
     import { Text } from '@ui'
     import { localize } from '@core/i18n'
 

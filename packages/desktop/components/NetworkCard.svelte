@@ -4,8 +4,7 @@
     import { ClickableTile, Text, Icon, FontWeight, TextType, NetworkIcon, NetworkStatusPill } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { truncateString } from '@core/utils'
-    import { NetworkHealth, NetworkId } from '@core/network'
-    import { selectedConnectedChainIndex } from '@core/network/stores/selected-connected-chain-index.store'
+    import { NetworkHealth, NetworkId, selectedConnectedChainIndex } from '@core/network'
 
     export let name: string
     export let address: string
