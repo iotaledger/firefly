@@ -15,7 +15,6 @@ import {
     updateStrongholdRouter,
 } from '@core/router'
 import { get } from 'svelte/store'
-import { completeOnboardingRouter } from '../../../views/onboarding/views/complete-onboarding/complete-onboarding-router'
 import { createFromLedgerRouter } from '../../../views/onboarding/views/create-from-ledger/create-from-ledger-router'
 import { createFromMnemonicRouter } from '../../../views/onboarding/views/create-from-mnemonic/create-from-mnemonic-router'
 import { createProfileRouter } from '../../../views/onboarding/views/create-profile/create-profile-router'
@@ -23,7 +22,7 @@ import { networkSetupRouter } from '../../../views/onboarding/views/network-setu
 import { restoreProfileRouter } from '../../../views/onboarding/views/restore-profile/restore-profile-router'
 import { restoreFromMnemonicRouter } from '../../../views/onboarding/views/restore-from-mnemonic/restore-from-mnemonic-router'
 import { restoreFromStrongholdRouter } from '../../../views/onboarding/views/restore-from-stronghold/restore-from-stronghold-router'
-import { onboardingRouter } from '@views/onboarding'
+import { onboardingRouter, completeOnboardingRouter } from '@views/onboarding'
 
 export function resetRouters(): void {
     resetSubrouters()

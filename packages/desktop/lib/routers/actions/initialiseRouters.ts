@@ -45,10 +45,6 @@ import {
     createFromLedgerRouter,
 } from '../../../views/onboarding/views/create-from-ledger/create-from-ledger-router'
 import {
-    CompleteOnboardingRouter,
-    completeOnboardingRouter,
-} from '../../../views/onboarding/views/complete-onboarding/complete-onboarding-router'
-import {
     RestoreProfileRouter,
     restoreProfileRouter,
 } from '../../../views/onboarding/views/restore-profile/restore-profile-router'
@@ -60,7 +56,12 @@ import {
     RestoreFromStrongholdRouter,
     restoreFromStrongholdRouter,
 } from '../../../views/onboarding/views/restore-from-stronghold/restore-from-stronghold-router'
-import { OnboardingRouter, onboardingRouter } from '@views/onboarding'
+import {
+    CompleteOnboardingRouter,
+    completeOnboardingRouter,
+    OnboardingRouter,
+    onboardingRouter,
+} from '@views/onboarding'
 
 export function initialiseRouters(): void {
     /**
