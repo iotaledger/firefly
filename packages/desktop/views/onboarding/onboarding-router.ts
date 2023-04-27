@@ -4,6 +4,7 @@ import { get, writable } from 'svelte/store'
 import { Router } from '../../../shared/lib/core/router/classes'
 import { appRouter } from '../../../shared/lib/core/router/routers/app-router'
 import { OnboardingRoute } from './onboarding-route.enum'
+import { NetworkSetupRouter, networkSetupRouter } from './views/network-setup'
 
 export const onboardingRoute = writable<OnboardingRoute>(undefined)
 export const onboardingRouter = writable<OnboardingRouter>(undefined)
@@ -19,6 +20,7 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
             case OnboardingRoute.Welcome: {
+                networkSetupRouter.set(new NetworkSetupRouter(get(onboardingRouter)))
                 nextRoute = OnboardingRoute.NetworkSetup
                 break
             }

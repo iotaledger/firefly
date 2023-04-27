@@ -27,7 +27,7 @@ export function resetRouters(): void {
 
 function resetSubrouters(): void {
     get(loginRouter).reset()
-    get(networkSetupRouter).reset()
+    get(networkSetupRouter) && get(networkSetupRouter).reset()
     get(createProfileRouter).reset()
     get(createFromMnemonicRouter).reset()
     get(createFromLedgerRouter).reset()
