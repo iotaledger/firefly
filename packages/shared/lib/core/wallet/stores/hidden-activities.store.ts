@@ -11,3 +11,13 @@ export function isActivityHiddenForAccountIndex(accountIndex: number, activityId
     const activities = get(hiddenActivities)?.[get(activeProfileId)]?.[accountIndex]
     return activities ? activities.includes(activityId) : false
 }
+
+export function removeActivityFromHiddenActivities(accountIndex: number, activityId: string): void {
+    const activities = get(hiddenActivities)?.[get(activeProfileId)]?.[accountIndex]
+    if (activities) {
+        hiddenActivities.update((state) => {
+            state[get(activeProfileId)][accountIndex] = activities.filter((id) => id !== activityId)
+            return state
+        })
+    }
+}
