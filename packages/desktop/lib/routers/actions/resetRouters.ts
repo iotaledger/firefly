@@ -15,9 +15,9 @@ import {
     networkSetupRouter,
     onboardingRouter,
     restoreFromMnemonicRouter,
+    restoreFromStrongholdRouter,
 } from '@views/onboarding'
 import { get } from 'svelte/store'
-import { restoreFromStrongholdRouter } from '../../../views/onboarding/views/restore-from-stronghold/restore-from-stronghold-router'
 import { restoreProfileRouter } from '../../../views/onboarding/views/restore-profile/restore-profile-router'
 
 export function resetRouters(): void {

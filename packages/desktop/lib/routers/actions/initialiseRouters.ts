@@ -26,11 +26,9 @@ import {
     onboardingRouter,
     RestoreFromMnemonicRouter,
     restoreFromMnemonicRouter,
-} from '@views/onboarding'
-import {
     RestoreFromStrongholdRouter,
     restoreFromStrongholdRouter,
-} from '../../../views/onboarding/views/restore-from-stronghold/restore-from-stronghold-router'
+} from '@views/onboarding'
 import {
     RestoreProfileRouter,
     restoreProfileRouter,
