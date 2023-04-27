@@ -20,6 +20,7 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { popupState } from '@auxiliary/popup'
     import features from '@features/features'
+    import { closeDrawer } from '@desktop/auxilary/drawer'
 
     let isBackButtonVisible = false
 
@@ -45,6 +46,7 @@
     }
 
     function onBackClick(): void {
+        closeDrawer()
         switch ($dashboardRoute) {
             case DashboardRoute.Settings:
                 $settingsRouter.previous()
