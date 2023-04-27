@@ -1,9 +1,10 @@
-import { activeProfile } from '@core/profile'
+import { activeProfile } from '@core/profile/stores'
+import { selectedAccount } from '@core/account/stores'
+
 import { Readable, Writable, derived, writable } from 'svelte/store'
 import { buildChainFromNetwork } from '../utils'
 import { IConnectedChain } from '../interfaces'
 import { NetworkHealth } from '../enums'
-import { selectedAccount } from '@core/account/stores'
 import { networkStatus } from './network-status.store'
 
 export const selectedConnectedChainIndex: Writable<number> = writable(undefined)
