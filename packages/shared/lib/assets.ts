@@ -33,8 +33,8 @@ export const assets = derived(
 
         const rawFiatPrice = convertToFiat(
             UNIT_MAP[Unit.Mi].val,
-            $currencies[CurrencyTypes.USD],
-            $exchangeRates[profileCurrency]
+            $currencies?.[CurrencyTypes.USD],
+            $exchangeRates?.[profileCurrency]
         )
         const numDecimalPlaces = getNumberOfDecimalPlaces(rawFiatPrice)
         const formattedFiatPrice = formatNumber(rawFiatPrice, numDecimalPlaces, numDecimalPlaces)
