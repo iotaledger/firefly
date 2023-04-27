@@ -190,7 +190,7 @@
 <popup
     in:fade={{ duration: transition ? 100 : 0 }}
     class={`flex items-center justify-center fixed ${
-        $platform === PlatformOption.Windows ? 'top-9' : 'top-0'
+        $platform === PlatformOption.Windows ? 'top-12' : 'top-0'
     } left-0 w-screen p-6 ${overflow ? '' : 'overflow-hidden'}
                 h-full z-20 ${
                     fullScreen

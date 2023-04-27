@@ -52,13 +52,13 @@
 </script>
 
 {#if $drawerState.active}
-    <drawer class="fixed top-0 left-0 w-screen h-screen z-30">
+    <drawer class="absolute top-0 left-0 w-full h-full z-30">
         <overlay
             in:fade|local={{ duration: DRAWER_ANIMATION_DURATION_MS }}
             out:fade|local={{ duration: DRAWER_ANIMATION_DURATION_MS }}
             on:click={onCloseClick}
             on:keydown={() => {}}
-            class="fixed top-0 left-0 w-full h-full z-0 bg-gray-700 dark:bg-gray-900 bg-opacity-60 dark:bg-opacity-60"
+            class="fixed top-12 left-0 w-full h-full z-0 bg-gray-700 dark:bg-gray-900 bg-opacity-60 dark:bg-opacity-60"
         />
         <panel
             in:fly|local={{ ...direction, duration: DRAWER_ANIMATION_DURATION_MS }}
@@ -89,7 +89,7 @@
 
         &.horizontal {
             height: 350px;
-            width: 100vw;
+            width: 100%;
         }
     }
 </style>
