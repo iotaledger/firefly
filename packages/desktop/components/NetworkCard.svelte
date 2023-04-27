@@ -4,17 +4,19 @@
     import { ClickableTile, Text, Icon, FontWeight, TextType, NetworkIcon, NetworkStatusPill } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { truncateString } from '@core/utils'
-    import { NetworkHealth, NetworkId } from '@core/network'
+    import { NetworkHealth, NetworkId, selectedConnectedChainIndex } from '@core/network'
 
     export let name: string
     export let address: string
     export let status: NetworkHealth
+    export let index: number
 
     function onTileClick(): void {
         $networkConfigRouter.goTo(NetworkConfigRoute.ChainInformation)
     }
 
     function onQrCodeIconClick(): void {
+        $selectedConnectedChainIndex = index
         $networkConfigRouter.goTo(NetworkConfigRoute.ChainDepositAddress)
     }
 </script>

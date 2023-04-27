@@ -39,8 +39,8 @@
 
 <connected-chains-drawer class="h-full flex flex-col justify-between">
     <div class="flex flex-col gap-4">
-        {#each connectedChains as chain}
-            <NetworkCard {...chain} />
+        {#each connectedChains as chain, index}
+            <NetworkCard {...chain} {index} />
         {/each}
     </div>
     {#if networkFeatures.config.addChain.enabled}

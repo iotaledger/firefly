@@ -115,8 +115,8 @@
         <!-- Dashboard Pane -->
         <div class="flex flex-col h-full dashboard-w">
             <svelte:component this={tabs[$dashboardRoute]} on:next={$appRouter.next} />
+            <Drawer />
         </div>
-        <Drawer />
     </div>
 </div>
 
