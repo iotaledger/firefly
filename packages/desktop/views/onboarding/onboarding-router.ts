@@ -15,6 +15,7 @@ export const onboardingRouter = writable<OnboardingRouter>(undefined)
 export class OnboardingRouter extends Router<OnboardingRoute> {
     constructor() {
         super(getInitialRoute(), onboardingRoute)
+        networkSetupRouter.set(new NetworkSetupRouter(get(onboardingRouter)))
     }
 
     next(): void {
@@ -23,7 +24,6 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
             case OnboardingRoute.Welcome: {
-                networkSetupRouter.set(new NetworkSetupRouter(get(onboardingRouter)))
                 nextRoute = OnboardingRoute.NetworkSetup
                 break
             }

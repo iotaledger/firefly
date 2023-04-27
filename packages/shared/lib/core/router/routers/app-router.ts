@@ -26,6 +26,10 @@ export class AppRouter extends Router<AppRoute> {
         this.init()
     }
 
+    public set(route: AppRoute): void {
+        this.setNext(route)
+    }
+
     public next(event?: IRouterEvent): void {
         const params = event || {}
         let nextRoute: AppRoute

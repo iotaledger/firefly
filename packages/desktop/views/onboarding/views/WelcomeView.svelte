@@ -6,7 +6,7 @@
         TERMS_OF_SERVICE_URL,
         TERMS_OF_SERVICE_VERSION,
     } from '@core/app/constants'
-    import { lastAcceptedPrivacyPolicy, lastAcceptedTermsOfService } from '@core/app/stores'
+    import { hasCompletedAppSetup, lastAcceptedPrivacyPolicy, lastAcceptedTermsOfService } from '@core/app/stores'
     import { openUrlInBrowser } from '@core/app/utils'
     import { localize } from '@core/i18n'
     import { NetworkId, getNetworkNameFromNetworkId } from '@core/network'
@@ -27,6 +27,7 @@
     function onContinueClick(): void {
         lastAcceptedTermsOfService.set(TERMS_OF_SERVICE_VERSION)
         lastAcceptedPrivacyPolicy.set(PRIVACY_POLICY_VERSION)
+        hasCompletedAppSetup.set(true)
         $onboardingRouter.next()
     }
 </script>
