@@ -1,21 +1,28 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import { get } from 'svelte/store'
 
 import { activeProfile, updateActiveProfile } from '@core/profile/stores'
 
 import { ChainType } from '../enums'
 import { IChain, IIscpChainMetadata, INetwork, INetworkStatus } from '../interfaces'
-import { addChain, chains, getChain, networkStatus, removeChain } from '../stores'
+import { networkStatus } from '../stores'
 import { ChainMetadata, NetworkMetadata } from '../types'
 
 import { IscpChain } from './iscp-chain.class'
 
 export class StardustNetwork implements INetwork {
     private readonly _metadata: NetworkMetadata
+    private readonly _chains: IChain[]
 
-    constructor(metadata: NetworkMetadata) {
+    constructor(metadata: NetworkMetadata, chainMetadata: ChainMetadata[]) {
         this._metadata = metadata
+        this._chains = chainMetadata.map((chain) => {
+            switch (chain.type) {
+                case ChainType.Iscp:
+                    return new IscpChain(chain)
+                default:
+                    return undefined
+            }
+        })
     }
 
     getMetadata(): NetworkMetadata {
@@ -27,32 +34,28 @@ export class StardustNetwork implements INetwork {
     }
 
     getChain(chainId: number): IChain {
-        return getChain(chainId)
+        return this._chains.find((chain) => chain.getMetadata().chainId === chainId)
     }
 
     getChains(): IChain[] {
-        return get(chains)
+        return this._chains
     }
 
     addChain(payload: ChainMetadata): IChain {
-        let chain: IChain
-
-        const network = get(activeProfile)?.network
-        if (network) {
-            if (this.isChainAlreadyAdded(payload)) {
-                throw new Error('This chain has already been added.')
-            } else {
-                const isIscpChain = payload.type === ChainType.Iscp
-                chain = isIscpChain ? new IscpChain(payload) : undefined
-                addChain(chain)
-                network.chains.push(payload)
-                updateActiveProfile({ network })
-            }
+        if (this.isChainAlreadyAdded(payload)) {
+            throw new Error('This chain has already been added.')
         } else {
-            throw new Error('Unable to find network.')
-        }
+            const network = get(activeProfile)?.network
+            network.chains.push(payload)
+            /**
+             * NOTE: Updating the active profile will cause the network store object to be
+             * re-instantiated, which will also instantiate an object for the newly added
+             * chain.
+             */
+            updateActiveProfile({ network })
 
-        return chain
+            return new IscpChain(<IIscpChainMetadata>payload)
+        }
     }
 
     private isChainAlreadyAdded(chainMetadata: ChainMetadata): boolean {
@@ -65,6 +68,8 @@ export class StardustNetwork implements INetwork {
     }
 
     editChain(chainId: number, payload: Partial<ChainMetadata>): Promise<void> {
+        /* eslint-disable no-console */
+        console.log('EDITING: ', chainId, payload)
         return Promise.resolve()
     }
 
@@ -72,6 +77,5 @@ export class StardustNetwork implements INetwork {
         const network = get(activeProfile).network
         const newChains = network.chains.filter((chain) => chain.chainId !== chainId)
         updateActiveProfile({ network: { ...network, chains: newChains } })
-        removeChain(chainId)
     }
 }
