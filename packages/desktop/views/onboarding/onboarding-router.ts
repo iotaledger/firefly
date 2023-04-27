@@ -15,7 +15,7 @@ export const onboardingRouter = writable<OnboardingRouter>(undefined)
 export class OnboardingRouter extends Router<OnboardingRoute> {
     constructor() {
         super(getInitialRoute(), onboardingRoute)
-        networkSetupRouter.set(new NetworkSetupRouter(get(onboardingRouter)))
+        networkSetupRouter.set(new NetworkSetupRouter(this))
     }
 
     next(): void {
