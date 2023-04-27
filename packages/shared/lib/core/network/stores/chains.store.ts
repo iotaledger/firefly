@@ -12,7 +12,9 @@ export function getChain(chainId: number): IChain {
 }
 
 export function removeChain(chainId: number): void {
-    chains.update((_chains) =>
-        _chains.filter((_chain) => _chain.getMetadata().chainId === chainId)
-    )
+    chains.update((_chains) => _chains.filter((_chain) => _chain.getMetadata().chainId === chainId))
+}
+
+export function resetChains(): void {
+    chains.set([])
 }

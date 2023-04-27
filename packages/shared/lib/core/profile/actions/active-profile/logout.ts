@@ -6,7 +6,7 @@ import {
 } from '@contexts/governance/stores'
 import { isPollingLedgerDeviceStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
 import { clearMarketPricesPoll } from '@core/market/actions'
-import { clearNetwork, clearNetworkPoll } from '@core/network'
+import { clearNetworkPoll, destroyNetworkAndChainObjects } from '@core/network'
 import {
     activeAccounts,
     activeProfile,
@@ -34,7 +34,7 @@ export function logout(clearActiveProfile = true, _lockStronghold = true): void 
     }
 
     clearNetworkPoll()
-    clearNetwork()
+    destroyNetworkAndChainObjects()
     clearMarketPricesPoll()
 
     const _activeProfile = get(activeProfile)

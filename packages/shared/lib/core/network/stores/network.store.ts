@@ -3,6 +3,6 @@ import { INetwork } from '../interfaces'
 
 export const network = writable<INetwork>(null)
 
-export function clearNetwork(): void {
+export function resetNetwork(): void {
     network.set(null)
 }
