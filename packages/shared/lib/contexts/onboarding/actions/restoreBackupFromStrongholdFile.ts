@@ -5,6 +5,7 @@ import { profileManager, restoreBackup } from '@core/profile-manager'
 
 import { onboardingProfile, updateOnboardingProfile } from '../stores'
 import { restoreBackupByCopyingFile, validateStrongholdCoinType } from '../helpers'
+import { ClientError, CLIENT_ERROR_REGEXES } from '@core/error'
 
 export async function restoreBackupFromStrongholdFile(strongholdPassword: string): Promise<void> {
     const { id, importFilePath, clientOptions, networkProtocol } = get(onboardingProfile)
@@ -13,13 +14,17 @@ export async function restoreBackupFromStrongholdFile(strongholdPassword: string
         await validateStrongholdCoinType(profileManager, networkProtocol)
         updateOnboardingProfile({ lastStrongholdBackupTime: new Date() })
     } catch (err) {
-        const storageDirectory = await getStorageDirectoryOfProfile(id)
-        await restoreBackupByCopyingFile(
-            importFilePath,
-            storageDirectory,
-            strongholdPassword,
-            clientOptions,
-            profileManager
-        )
+        if (CLIENT_ERROR_REGEXES[ClientError.InvalidStrongholdPassword].test(err?.error)) {
+            throw err
+        } else {
+            const storageDirectory = await getStorageDirectoryOfProfile(id)
+            await restoreBackupByCopyingFile(
+                importFilePath,
+                storageDirectory,
+                strongholdPassword,
+                clientOptions,
+                profileManager
+            )
+        }
     }
 }
