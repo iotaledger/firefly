@@ -1,7 +1,6 @@
 <script lang="ts">
     import { OnboardingLayout } from '@components'
     import {
-        ProfileRecoveryType,
         RestoreProfileType,
         initialiseProfileManagerFromOnboardingProfile,
         onboardingProfile,
@@ -62,7 +61,7 @@
             primaryText={localize('views.onboarding.profileSetup.setupRecovered.importMnemonic')}
             secondaryText={localize('views.onboarding.profileSetup.setupRecovered.importMnemonicDescription')}
             icon="language"
-            busy={isBusy[ProfileRecoveryType.Mnemonic]}
+            busy={isBusy[RestoreProfileType.Mnemonic]}
             hidden={features?.onboarding?.[networkId]?.restoreProfile?.recoveryPhrase?.hidden}
             disabled={!features?.onboarding?.[networkId]?.restoreProfile?.recoveryPhrase?.enabled}
             onClick={() => onProfileTypeClick(RestoreProfileType.Mnemonic)}
@@ -71,7 +70,7 @@
             primaryText={localize('views.onboarding.profileSetup.setupRecovered.importFile')}
             secondaryText={localize('views.onboarding.profileSetup.setupRecovered.importFileDescription')}
             icon="file"
-            busy={isBusy[ProfileRecoveryType.Stronghold]}
+            busy={isBusy[RestoreProfileType.Stronghold]}
             hidden={features?.onboarding?.[networkId]?.restoreProfile?.strongholdBackup?.hidden}
             disabled={!features?.onboarding?.[networkId]?.restoreProfile?.strongholdBackup?.enabled}
             onClick={() => onProfileTypeClick(RestoreProfileType.Stronghold)}
@@ -80,7 +79,7 @@
             primaryText={localize('views.onboarding.profileSetup.setupRecovered.importLedger')}
             secondaryText={localize('views.onboarding.profileSetup.setupRecovered.importLedgerDescription')}
             icon="chip"
-            busy={isBusy[ProfileRecoveryType.Ledger]}
+            busy={isBusy[RestoreProfileType.Ledger]}
             hidden={features?.onboarding?.[networkId]?.restoreProfile?.ledgerBackup?.hidden}
             disabled={!features?.onboarding?.[networkId]?.restoreProfile?.ledgerBackup?.enabled}
             onClick={() => onProfileTypeClick(RestoreProfileType.Ledger)}

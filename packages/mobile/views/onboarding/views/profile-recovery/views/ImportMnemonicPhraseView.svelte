@@ -50,7 +50,7 @@
             {localize('views.onboarding.profileRecovery.importMnemonicPhrase.enter')}
         </Text>
         <form on:submit|preventDefault={onContinueClick} id="text-import-form">
-            <ImportTextfield type={$onboardingProfile?.recoveryType} bind:value={input} minHeight={120} />
+            <ImportTextfield type={$onboardingProfile?.restoreProfileType} bind:value={input} minHeight={120} />
         </form>
     </div>
     <div slot="footer" class="flex flex-row flex-wrap justify-between items-center space-x-4">

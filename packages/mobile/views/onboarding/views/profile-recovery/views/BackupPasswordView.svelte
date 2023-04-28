@@ -24,7 +24,7 @@
     export let error = ''
     export let busy = false
 
-    const title = `${localize('general.import')} ${localize(`general.${$onboardingProfile?.recoveryType}`)}`
+    const title = `${localize('general.import')} ${localize(`general.${$onboardingProfile?.restoreProfileType}`)}`
 
     let strongholdPassword = ''
     $: strongholdPassword, (error = '')

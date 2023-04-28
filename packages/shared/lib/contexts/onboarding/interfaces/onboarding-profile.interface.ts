@@ -1,11 +1,5 @@
 import { IPersistedProfile } from '@core/profile'
-import {
-    CreateProfileType,
-    OnboardingType,
-    ProfileProtectionType,
-    ProfileRecoveryType,
-    RestoreProfileType,
-} from '../enums'
+import { CreateProfileType, OnboardingType, ProfileProtectionType, RestoreProfileType } from '../enums'
 import { ImportFile, Mnemonic } from '../types'
 import { IShimmerClaimingAccount } from './shimmer-claiming-account.interface'
 
@@ -33,7 +27,6 @@ export interface IOnboardingProfile extends IPersistedProfile {
     hasInitialisedProfileManager?: boolean
 
     // Mobile specific after refactor
-    recoveryType?: ProfileRecoveryType
     protectionType?: ProfileProtectionType
     mustVisitProfileName?: boolean
 }
