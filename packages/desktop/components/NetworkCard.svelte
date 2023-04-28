@@ -22,7 +22,7 @@
     }
 </script>
 
-<ClickableTile classes="bg-transparent border border-solid border-gray-200" onClick={onTileClick}>
+<ClickableTile classes="bg-white border border-solid border-gray-200" onClick={onTileClick}>
     <div class="w-full flex flex-col gap-5">
         <div class="flex flex-row justify-between items-center">
             <div class="flex flex-row gap-2 items-center">

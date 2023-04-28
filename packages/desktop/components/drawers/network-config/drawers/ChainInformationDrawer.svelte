@@ -2,6 +2,7 @@
     import { ChainType, IChain, network, selectedChainIndex } from '@core/network'
     import { selectedAccount } from '@core/account'
     import { IscpChainInformation, NetworkInformation } from './components'
+    import { Pane } from '@ui'
 
     let chain: IChain
 
@@ -17,12 +18,14 @@
     $: chainConfiguration = chain?.getConfiguration()
 </script>
 
-<div class="w-full h-full flex items-center justify-center">
-    {#if $selectedChainIndex === 0}
-        <NetworkInformation />
-    {:else if chainConfiguration?.type === ChainType.Iscp}
-        <IscpChainInformation {chainConfiguration} />
-    {:else}
-        <!-- else content here -->
-    {/if}
+<div class="w-full h-full">
+    <Pane>
+        {#if $selectedChainIndex === 0}
+            <NetworkInformation />
+        {:else if chainConfiguration?.type === ChainType.Iscp}
+            <IscpChainInformation {chainConfiguration} />
+        {:else}
+            <!-- else content here -->
+        {/if}
+    </Pane>
 </div>
