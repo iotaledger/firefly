@@ -11,11 +11,7 @@ import { IotaUnit } from './enums'
 Big.NE = -20
 
 export function convertIotaUnit(value: number, fromUnit: IotaUnit, toUnit: IotaUnit): number {
-    if (value === 0) {
-        return 0
-    }
-
-    if (fromUnit === toUnit) {
+    if (value === 0 || fromUnit === toUnit) {
         return value
     }
 
@@ -24,20 +20,22 @@ export function convertIotaUnit(value: number, fromUnit: IotaUnit, toUnit: IotaU
     return toUnit === IotaUnit._ ? Math.round(scaledValue) : scaledValue
 }
 
-export function formatIotaUnitPrecision(
-    valueRaw: number,
-    unit: IotaUnit,
-    includeUnits: boolean = true,
-    grouped: boolean = false,
+interface FormatIotaUnitOptions {
+    includeUnits?: boolean
+    grouped?: boolean
     overrideDecimalPlaces?: number
-): string {
+}
+
+export function formatIotaUnitPrecision(valueRaw: number, unit: IotaUnit, options: FormatIotaUnitOptions = {}): string {
+    const { includeUnits = true, grouped = false, overrideDecimalPlaces } = options
+
     // At the moment we have no symbol for IOTA so we always put the currency code
     // at the end, in the future when we have a symbol this can be updated to position
     // it correctly to the left when necessary
     const currencyPosition = getCurrencyPosition()
 
     if (!valueRaw) {
-        return includeUnits ? (currencyPosition === 'left' ? `0 ${unit}` : `0 ${unit}`) : '0'
+        return includeUnits ? `0 ${unit}` : '0'
     }
 
     const converted = convertIotaUnit(valueRaw, IotaUnit._, unit)
@@ -58,11 +56,10 @@ export function formatIotaUnitPrecision(
 }
 
 export function formatIotaUnitBestMatch(
-    value: number,
-    includeUnits: boolean = true,
-    overrideDecimalPlaces?: number
+    valueRaw: number,
+    options: FormatIotaUnitOptions = { includeUnits: true, grouped: false }
 ): string {
-    return formatIotaUnitPrecision(value, getIotaUnit(value), includeUnits, false, overrideDecimalPlaces)
+    return formatIotaUnitPrecision(valueRaw, getIotaUnit(valueRaw), options)
 }
 
 export function getIotaUnit(value: number): IotaUnit {

@@ -1,5 +1,5 @@
-import { convertIotaUnit, formatIotaUnitPrecision, formatIotaUnitBestMatch, getIotaUnit } from '@core/utils/unit'
 import { IotaUnit } from '@core/utils/enums'
+import { convertIotaUnit, formatIotaUnitPrecision, formatIotaUnitBestMatch, getIotaUnit } from '@core/utils/unit'
 
 describe('File: unit.ts', () => {
     describe('convertIotaUnit', () => {
@@ -22,19 +22,29 @@ describe('File: unit.ts', () => {
 
     describe('formatIotaUnitPrecision', () => {
         test('formats without units, ungrouped', () => {
-            expect(formatIotaUnitPrecision(1234567.89, IotaUnit.M, false)).toBe('1.234568')
+            expect(formatIotaUnitPrecision(1234567.89, IotaUnit.M, { includeUnits: false })).toBe('1.234568')
         })
         test('formats with units, ungrouped', () => {
             expect(formatIotaUnitPrecision(1234567.89, IotaUnit.M)).toBe('1.234568 M')
         })
         test('formats without units, grouped', () => {
-            expect(formatIotaUnitPrecision(1234567.89, IotaUnit.M, false, true)).toBe('1.234568')
+            expect(formatIotaUnitPrecision(1234567.89, IotaUnit.M, { includeUnits: false, grouped: true })).toBe(
+                '1.234568'
+            )
         })
         test('formats with units, grouped', () => {
-            expect(formatIotaUnitPrecision(1234567.89, IotaUnit.M, true, true)).toBe('1.234568 M')
+            expect(formatIotaUnitPrecision(1234567.89, IotaUnit.M, { includeUnits: true, grouped: true })).toBe(
+                '1.234568 M'
+            )
         })
         test('formats with overridden decimal places', () => {
-            expect(formatIotaUnitPrecision(1234567.89, IotaUnit.M, true, false, 3)).toBe('1.235 M')
+            expect(
+                formatIotaUnitPrecision(1234567.89, IotaUnit.M, {
+                    includeUnits: true,
+                    grouped: false,
+                    overrideDecimalPlaces: 3,
+                })
+            ).toBe('1.235 M')
         })
         test('formats large number', () => {
             expect(formatIotaUnitPrecision(123456789012345678, IotaUnit.P)).toBe('123.45678901234568 P')
@@ -52,16 +62,20 @@ describe('File: unit.ts', () => {
             expect(formatIotaUnitBestMatch(123)).toBe('123 _')
         })
         test('formats value in base unit without units', () => {
-            expect(formatIotaUnitBestMatch(123, false)).toBe('123')
+            expect(formatIotaUnitBestMatch(123, { includeUnits: false })).toBe('123')
         })
         test('formats value in K unit with units', () => {
             expect(formatIotaUnitBestMatch(123_000)).toBe('123.00 k')
         })
         test('formats value in T unit with units and 4 decimal places', () => {
-            expect(formatIotaUnitBestMatch(123_456_789_000_000, true, 4)).toBe('123.4568 T')
+            expect(formatIotaUnitBestMatch(123_456_789_000_000, { includeUnits: true, overrideDecimalPlaces: 4 })).toBe(
+                '123.4568 T'
+            )
         })
         test('formats value in P unit without units and 2 decimal places', () => {
-            expect(formatIotaUnitBestMatch(123_456_789_000_000_000, false, 2)).toBe('123.46')
+            expect(
+                formatIotaUnitBestMatch(123_456_789_000_000_000, { includeUnits: false, overrideDecimalPlaces: 2 })
+            ).toBe('123.46')
         })
     })
 
