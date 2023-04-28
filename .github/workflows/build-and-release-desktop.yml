@@ -11,16 +11,16 @@ on:
                 required: true
                 type: choice
                 options:
-                - 'false'
-                - 'true'
+                    - 'false'
+                    - 'true'
             stage:
                 description: 'Stage'
                 required: true
                 type: choice
                 options:
-                - alpha
-                - beta
-                - prod
+                    - alpha
+                    - beta
+                    - prod
 
 jobs:
     setup:
@@ -132,6 +132,7 @@ jobs:
                   SENTRY: ${{ startsWith(github.ref, 'refs/tags/desktop') }}
                   SENTRY_DSN: ${{ secrets.SENTRY_DSN_PROD_DESKTOP }}
                   SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+                  AMPLITUDE_API_KEY: ${{ secrets.AMPLITUDE_API_KEY }}
 
             - name: Build Electron app (macOS)
               run: yarn compile:${STAGE}:mac

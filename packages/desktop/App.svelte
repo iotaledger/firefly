@@ -47,10 +47,12 @@
     } from '@desktop/routers'
     import { downloadNextNftInQueue, nftDownloadQueue } from '@core/nfts'
     import { closeDrawer } from '@desktop/auxilary/drawer'
+    import features from '@features/features'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
     const { loggedIn, hasLoadedAccounts } = $activeProfile
+    const isWindows = $platform === PlatformOption.Windows
 
     $: if ($activeProfile && !$loggedIn) {
         closePopup(true)
@@ -88,7 +90,6 @@
     }
 
     $: isDashboardVisible = $appRoute === AppRoute.Dashboard && $hasLoadedAccounts && $popupState.id !== 'busy'
-    $: isWindows = $platform === PlatformOption.Windows
 
     $: $nftDownloadQueue, downloadNextNftInQueue()
 
@@ -98,6 +99,7 @@
     void setupI18n({ fallbackLocale: 'en', initialLocale: $appSettings.language })
 
     onMount(async () => {
+        features.analytics.appStart.enabled && Platform.trackEvent('app-start')
         await cleanupEmptyProfiles()
         checkAndMigrateProfiles()
 
@@ -305,6 +307,6 @@
         -webkit-user-drag: none;
     }
     app-body.top-placement {
-        @apply top-9;
+        @apply top-12;
     }
 </style>

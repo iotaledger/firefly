@@ -1,14 +1,35 @@
 <script lang="ts">
-    import { Button } from '@ui'
+    import { Icon } from '@ui'
     import { NetworkConfigRoute, networkConfigRouter } from '@desktop/routers'
+    import { activeProfile } from '@core/profile/stores'
+    import { NetworkHealth, IConnectedChain, buildChainFromNetwork, networkStatus } from '@core/network'
+    import { Icon as IconEnum } from '@auxiliary/icon'
+    import { NetworkCard } from '@components'
+    import { localize } from '@core/i18n'
+    import { selectedAccount } from '@core/account/stores'
     import networkFeatures from '@features/network.features'
 
-    function onNetworkCardClick(): void {
-        $networkConfigRouter.goTo(NetworkConfigRoute.ChainInformation)
-    }
+    let connectedChains: IConnectedChain[] = []
 
-    function onQrCodeIconClick(): void {
-        $networkConfigRouter.goTo(NetworkConfigRoute.ChainDepositAddress)
+    $: setConnectedChains()
+    function setConnectedChains(): void {
+        const chains = []
+        const mainChain = buildChainFromNetwork(
+            $activeProfile.network.name,
+            $selectedAccount.depositAddress,
+            $networkStatus.health
+        )
+        chains.push(mainChain)
+
+        for (const chain of $activeProfile.network.chains) {
+            chains.push({
+                name: chain.name,
+                address: chain.name, // TODO
+                status: NetworkHealth.Operational, // TODO
+            })
+        }
+
+        connectedChains = chains
     }
 
     function onAddChainClick(): void {
@@ -16,10 +37,20 @@
     }
 </script>
 
-<connected-chains-drawer class="flex flex-col justify-between mb-6">
-    <Button onClick={onNetworkCardClick}>Chain information</Button>
-    <Button onClick={onQrCodeIconClick} classes="mt-6">Chain deposit address</Button>
+<connected-chains-drawer class="h-full flex flex-col justify-between">
+    <div class="flex flex-col gap-4">
+        {#each connectedChains as chain, index}
+            <NetworkCard {...chain} {index} />
+        {/each}
+    </div>
     {#if networkFeatures.config.addChain.enabled}
-        <Button onClick={onAddChainClick} classes="mt-6">Add chain</Button>
+        <button
+            type="button"
+            class="mt-4 flex flex-row items-center justify-center w-full space-x-2 bg-transparent text-blue-500 px-8 py-3 text-15 rounded-lg"
+            on:click|stopPropagation={onAddChainClick}
+        >
+            <Icon icon={IconEnum.Plus} height={12} />
+            {localize('views.dashboard.drawers.networkConfig.addChain.title')}
+        </button>
     {/if}
 </connected-chains-drawer>
