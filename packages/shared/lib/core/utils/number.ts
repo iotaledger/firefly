@@ -11,6 +11,10 @@ export function range(size: number, start: number = 0): number[] {
 }
 
 export function tryNumberOrZero(numberCandidate: unknown): number {
+    if (typeof numberCandidate === 'number' && !Number.isNaN(numberCandidate)) {
+        return numberCandidate
+    }
+
     const numberCandidateCasted = Number(numberCandidate)
     return Number.isNaN(numberCandidateCasted) ? 0 : numberCandidateCasted
 }
