@@ -46,5 +46,5 @@ export function convertBech32AddressToEd25519Address(bech32Address: string, incl
         return ''
     }
 
-    return convertBytesToHexString(Array.from(Bech32.decode(bech32Address).data).slice(includeTypeByte ? 0 : 1))
+    return convertBytesToHexString(Array.from(Bech32.decode(bech32Address).data, false).slice(includeTypeByte ? 0 : 1))
 }
