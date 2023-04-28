@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { Platform } from '@core/app'
+    import features from '@features/features'
     import { Transition } from 'shared/components'
     import { RestoreFromStrongholdRoute } from './restore-from-stronghold-route.enum'
     import { restoreFromStrongholdRoute } from './restore-from-stronghold-router'

@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { Platform } from '@core/app'
+    import features from '@features/features'
     import { Transition } from '@ui'
     import { CreateFromLedgerRouterView } from '../create-from-ledger'
     import { CreateFromMnemonicRouterView } from '../create-from-mnemonic'
