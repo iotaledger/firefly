@@ -32,7 +32,11 @@ export function isNumberLetterOrPunctuation(key: string): boolean {
     return isNumber || isUpperCaseLetter || isLowerCaseLetter
 }
 
-export function round(value: number, precision: number): number {
-    const multiplier = Math.pow(10, precision || 0)
+export function round(value: number, precision: number = 0): number {
+    if (typeof value !== 'number' || Number.isNaN(value) || typeof precision !== 'number' || Number.isNaN(precision)) {
+        return null
+    }
+
+    const multiplier = 10 ** precision
     return Math.round(value * multiplier) / multiplier
 }
