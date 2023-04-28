@@ -3,11 +3,7 @@ import { MILLISECONDS_PER_SECOND } from './constants'
 import { IDateDifference } from './interfaces'
 
 export function datesOnSameDay(first: Date, second: Date): boolean {
-    return (
-        first.getFullYear() === second.getFullYear() &&
-        first.getMonth() === second.getMonth() &&
-        first.getDate() === second.getDate()
-    )
+    return first.toDateString() === second.toDateString()
 }
 
 export function dateIsBeforeOtherDate(first: Date, second: Date): boolean {
