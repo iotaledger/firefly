@@ -66,25 +66,17 @@ export function formatIotaUnitBestMatch(
 }
 
 export function getIotaUnit(value: number): IotaUnit {
-    let bestUnits: IotaUnit = IotaUnit._
-
     if (!value || value === 0) {
         return IotaUnit.M
     }
 
     const checkLength = Math.abs(value).toString().length
 
-    if (checkLength > IOTA_UNIT_MAP.P.decimalPlaces) {
-        bestUnits = IotaUnit.P
-    } else if (checkLength > IOTA_UNIT_MAP.T.decimalPlaces) {
-        bestUnits = IotaUnit.T
-    } else if (checkLength > IOTA_UNIT_MAP.G.decimalPlaces) {
-        bestUnits = IotaUnit.G
-    } else if (checkLength > IOTA_UNIT_MAP.M.decimalPlaces) {
-        bestUnits = IotaUnit.M
-    } else if (checkLength > IOTA_UNIT_MAP.k.decimalPlaces) {
-        bestUnits = IotaUnit.K
+    for (const unit of [IotaUnit.P, IotaUnit.T, IotaUnit.G, IotaUnit.M, IotaUnit.K]) {
+        if (checkLength > IOTA_UNIT_MAP[unit].decimalPlaces) {
+            return unit
+        }
     }
 
-    return bestUnits
+    return IotaUnit._
 }
