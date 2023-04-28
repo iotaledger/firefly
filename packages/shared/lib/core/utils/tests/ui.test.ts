@@ -1,4 +1,4 @@
-import { debounce, hex2rgb } from '@core/utils'
+import { debounce, isBright, hex2rgb } from '@core/utils'
 
 describe('File: ui.ts', () => {
     describe('Function: debounce', () => {
@@ -27,6 +27,19 @@ describe('File: ui.ts', () => {
             debounced()
             jest.advanceTimersByTime(100)
             expect(callback).toHaveBeenCalledTimes(2)
+        })
+    })
+    describe('Function: isBright', () => {
+        it('should return true if color is bright', () => {
+            expect(isBright('#FFFFFF')).toEqual(true)
+            expect(isBright('255,255,255')).toEqual(true)
+        })
+        it('should return false if color is not bright', () => {
+            expect(isBright('#000000')).toEqual(false)
+            expect(isBright('0,0,0')).toEqual(false)
+        })
+        it('should return false if color is empty', () => {
+            expect(isBright('')).toEqual(false)
         })
     })
     describe('Function: hex2rgb', () => {

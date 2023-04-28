@@ -59,6 +59,8 @@ export function isBright(color: string): boolean {
             const yiq = (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000
             return yiq >= 186
         }
+    } else {
+        return false
     }
 }
 
