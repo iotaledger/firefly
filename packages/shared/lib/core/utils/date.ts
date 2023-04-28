@@ -76,16 +76,12 @@ export function diffDates(firstDate: Date, secondDate: Date): IDateDifference {
 
 /**
  * Converts milestone to date based on current milestone
- *
- * @method milestoneToDate
- *
  * @param {number} baseMilestone - Milestone to start from, generally the current milestone
  * @param {number} milestone
- *
- * @returns {Date}
  */
 export function milestoneToDate(baseMilestone: number, milestone: number): Date {
-    const firstMilestoneMillis = Date.now() - baseMilestone * SECONDS_PER_MILESTONE * MILLISECONDS_PER_SECOND
-    const milestoneMillis = firstMilestoneMillis + milestone * SECONDS_PER_MILESTONE * MILLISECONDS_PER_SECOND
+    const millisecondsPerMilestone = SECONDS_PER_MILESTONE * MILLISECONDS_PER_SECOND
+    const firstMilestoneMillis = Date.now() - baseMilestone * millisecondsPerMilestone
+    const milestoneMillis = firstMilestoneMillis + milestone * millisecondsPerMilestone
     return new Date(milestoneMillis)
 }
