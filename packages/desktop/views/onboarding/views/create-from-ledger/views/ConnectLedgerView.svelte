@@ -1,33 +1,22 @@
 <script lang="ts">
     import { PopupId, openPopup } from '@auxiliary/popup'
     import { OnboardingLayout } from '@components'
-    import {
-        ProfileSetupType,
-        initialiseFirstShimmerClaimingAccount,
-        isOnboardingLedgerProfile,
-        onboardingProfile,
-    } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
-    import {
-        LedgerConnectionState,
-        displayNotificationForLedgerProfile,
-        ledgerConnectionState,
-        pollLedgerNanoStatus,
-        stopPollingLedgerNanoStatus,
-    } from '@core/ledger'
-    import { Button, Icon, LedgerAnimation, Link, Text } from '@ui'
+    import { LedgerConnectionState, ledgerConnectionState } from '@core/ledger'
     import { Subrouter } from '@core/router'
+    import { Button, Icon, LedgerAnimation, Link, Text } from '@ui'
 
     export let router: Subrouter<unknown>
-    let isBusy = false
+
+    const isBusy = false
 
     $: isNotConnected = $ledgerConnectionState === LedgerConnectionState.NotConnected
     $: isLocked = isNotConnected || $ledgerConnectionState === LedgerConnectionState.Locked
     $: isAppNotOpen = isLocked || $ledgerConnectionState === LedgerConnectionState.AppNotOpen
     $: isCorrectAppOpen = $ledgerConnectionState === LedgerConnectionState.CorrectAppOpen
+    $: $ledgerConnectionState, setAnimation()
 
     let animation: string
-    $: $ledgerConnectionState, setAnimation()
     function setAnimation(): void {
         if (isNotConnected) {
             animation = 'ledger-disconnected-desktop'
@@ -47,27 +36,8 @@
         })
     }
 
-    async function onContinueClick(): Promise<void> {
-        try {
-            isBusy = true
-            const canInitialiseFirstShimmerClaimingAccount = $onboardingProfile?.setupType === ProfileSetupType.Claimed
-            const shouldInitialiseFirstShimmerClaimingAccount = $onboardingProfile?.shimmerClaimingAccounts?.length < 1
-            if (canInitialiseFirstShimmerClaimingAccount && shouldInitialiseFirstShimmerClaimingAccount) {
-                if ($isOnboardingLedgerProfile) {
-                    stopPollingLedgerNanoStatus()
-                }
-                await initialiseFirstShimmerClaimingAccount()
-            }
-            router.next()
-        } catch (err) {
-            displayNotificationForLedgerProfile('error', true, true, err)
-            console.error(err)
-        } finally {
-            if ($isOnboardingLedgerProfile) {
-                pollLedgerNanoStatus()
-            }
-            isBusy = false
-        }
+    function onContinueClick(): void {
+        router.next()
     }
 
     function onBackClick(): void {

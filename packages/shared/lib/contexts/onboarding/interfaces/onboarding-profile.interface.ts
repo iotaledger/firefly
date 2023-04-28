@@ -1,5 +1,4 @@
 import { IPersistedProfile } from '@core/profile'
-
 import {
     CreateProfileType,
     OnboardingType,
@@ -9,22 +8,33 @@ import {
     RestoreProfileType,
 } from '../enums'
 import { ImportFile, Mnemonic } from '../types'
-
 import { IShimmerClaimingAccount } from './shimmer-claiming-account.interface'
 
 export interface IOnboardingProfile extends IPersistedProfile {
+    // Onboarding flow indicators
     onboardingType?: OnboardingType
     createProfileType?: CreateProfileType
     restoreProfileType?: RestoreProfileType
-    setupType: ProfileSetupType
-    recoveryType?: ProfileRecoveryType
-    protectionType?: ProfileProtectionType
+
+    // Stronghold setup data
     importFile?: ImportFile
     importFilePath?: string
+
+    // Mnemonic setup data
     mnemonic?: Mnemonic
-    strongholdPassword?: string
-    mustVisitProfileName?: boolean
     hasStoredMnemonic?: boolean
-    hasInitialisedProfileManager?: boolean
+
+    // Encryption password
+    strongholdPassword?: string
+
+    // Shimmer claiming data
     shimmerClaimingAccounts?: IShimmerClaimingAccount[]
+
+    hasInitialisedProfileManager?: boolean
+
+    // Mobile specific after refactor
+    setupType?: ProfileSetupType
+    recoveryType?: ProfileRecoveryType
+    protectionType?: ProfileProtectionType
+    mustVisitProfileName?: boolean
 }

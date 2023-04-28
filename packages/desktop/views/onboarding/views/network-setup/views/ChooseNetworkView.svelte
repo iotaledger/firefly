@@ -54,7 +54,7 @@
         if (!$onboardingProfile?.id) {
             await initialiseOnboardingProfile($onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile())
         }
-        updateOnboardingProfile({ network: undefined })
+        updateOnboardingProfile({ network: undefined, clientOptions: undefined })
     })
 </script>
 

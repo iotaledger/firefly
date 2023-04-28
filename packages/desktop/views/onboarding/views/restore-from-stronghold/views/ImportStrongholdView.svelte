@@ -3,12 +3,7 @@
     import { OnboardingLayout } from '@components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import {
-        ImportFile,
-        setProfileRecoveryTypeFromFilename,
-        updateOnboardingProfile,
-        validateBackupFile,
-    } from '@contexts/onboarding'
+    import { ImportFile, updateOnboardingProfile, validateBackupFile } from '@contexts/onboarding'
     import { onMount } from 'svelte'
     import { restoreFromStrongholdRouter } from '../../restore-from-stronghold/restore-from-stronghold-router'
 
@@ -25,7 +20,6 @@
 
     function onContinueClick(): void {
         validateBackupFile(importFileName)
-        setProfileRecoveryTypeFromFilename(importFileName)
         updateOnboardingProfile({ importFile, importFilePath })
         $restoreFromStrongholdRouter.next()
     }

@@ -1,17 +1,10 @@
 <script lang="ts">
     import { OnboardingLayout } from '@components'
-    import {
-        OnboardingType,
-        initialiseOnboardingProfile,
-        onboardingProfile,
-        shouldBeDeveloperProfile,
-        updateOnboardingProfile,
-    } from '@contexts/onboarding'
+    import { OnboardingType, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { getDefaultClientOptions, getNetworkNameFromNetworkId } from '@core/network'
+    import { getNetworkNameFromNetworkId } from '@core/network'
     import { profiles } from '@core/profile'
-    import { destroyProfileManager } from '@core/profile-manager'
     import features from '@features/features'
     import { Animation, OnboardingButton, Text } from '@ui'
     import { onMount } from 'svelte'
@@ -25,22 +18,10 @@
     }
 
     function onBackClick(): void {
-        updateOnboardingProfile({ clientOptions: undefined })
         $onboardingRouter.previous()
     }
 
-    onMount(async () => {
-        if (!$onboardingProfile?.id) {
-            await initialiseOnboardingProfile($onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile())
-            updateOnboardingProfile({ network: undefined })
-        }
-        if (!$onboardingProfile?.clientOptions) {
-            const clientOptions = getDefaultClientOptions(networkId)
-            updateOnboardingProfile({ clientOptions })
-        }
-        await destroyProfileManager()
-        updateOnboardingProfile({ mustVisitProfileName: true, setupType: null, hasInitialisedProfileManager: false })
-    })
+    onMount(async () => {})
 </script>
 
 <OnboardingLayout allowBack={$profiles.length > 0 || $onboardingProfile?.isDeveloperProfile} {onBackClick}>

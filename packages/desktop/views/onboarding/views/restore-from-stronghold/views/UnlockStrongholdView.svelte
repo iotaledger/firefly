@@ -1,17 +1,7 @@
 <script lang="ts">
     import { showAppNotification } from '@auxiliary/notification'
     import { OnboardingLayout } from '@components'
-    import {
-        CannotRestoreWithMismatchedCoinTypeError,
-        ProfileSetupType,
-        createShimmerClaimingProfileManager,
-        destroyShimmerClaimingProfileManager,
-        initialiseProfileManagerFromOnboardingProfile,
-        onboardingProfile,
-        restoreBackupForShimmerClaimingProfileManager,
-        restoreBackupFromStrongholdFile,
-        updateOnboardingProfile,
-    } from '@contexts/onboarding'
+    import { restoreBackupFromStrongholdFile, updateOnboardingProfile } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { CLIENT_ERROR_REGEXES, ClientError } from '@core/error'
     import { localize } from '@core/i18n'
@@ -30,12 +20,7 @@
         if (strongholdPassword) {
             busy = true
             try {
-                if ($onboardingProfile?.setupType === ProfileSetupType.Claimed) {
-                    await restoreBackupForShimmerClaimingProfileManager(strongholdPassword)
-                } else {
-                    await restoreBackupFromStrongholdFile(strongholdPassword)
-                }
-
+                await restoreBackupFromStrongholdFile(strongholdPassword)
                 updateOnboardingProfile({ strongholdPassword, strongholdVersion: STRONGHOLD_VERSION })
                 $restoreFromStrongholdRouter.next()
             } catch (err) {
@@ -43,13 +28,6 @@
                 if (err === 'OLD_STRONGHOLD_VERSION') {
                     updateOnboardingProfile({ strongholdPassword, strongholdVersion: undefined })
                     $restoreFromStrongholdRouter.next()
-                } else if (err instanceof CannotRestoreWithMismatchedCoinTypeError) {
-                    await initialiseProfileManagerFromOnboardingProfile(false)
-
-                    if ($onboardingProfile?.setupType === ProfileSetupType.Claimed) {
-                        await destroyShimmerClaimingProfileManager()
-                        await createShimmerClaimingProfileManager()
-                    }
                 } else if (CLIENT_ERROR_REGEXES[ClientError.InvalidStrongholdPassword].test(err?.error)) {
                     error = localize('error.password.incorrect')
                 } else {
@@ -75,14 +53,14 @@
     }
 
     onMount(() => {
-        updateOnboardingProfile({ strongholdPassword: null, lastStrongholdBackupTime: null })
+        updateOnboardingProfile({ strongholdPassword: undefined, lastStrongholdBackupTime: undefined })
     })
 </script>
 
 <OnboardingLayout {onBackClick} {busy}>
     <div slot="title">
         <Text type="h2" classes="mb-4">
-            {`${localize('general.import')} ${localize(`general.${$onboardingProfile?.recoveryType}`)}`}
+            {`${localize('general.import')} ${localize('general.stronghold')}`}
         </Text>
     </div>
     <div slot="leftpane__content">

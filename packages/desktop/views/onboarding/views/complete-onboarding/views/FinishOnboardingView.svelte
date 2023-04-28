@@ -1,20 +1,11 @@
 <script lang="ts">
     import { OnboardingLayout } from '@components'
-    import {
-        ProfileRecoveryType,
-        completeOnboardingProcess,
-        isOnboardingLedgerProfile,
-        onboardingProfile,
-    } from '@contexts/onboarding'
+    import { completeOnboardingProcess, isOnboardingLedgerProfile } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { checkOrConnectLedger } from '@core/ledger'
     import { Animation, Button, Icon, Text, TextHint } from '@ui'
     import { onboardingRouter } from '@views/onboarding/onboarding-router'
-    import { onMount } from 'svelte'
-
-    // TODO: what are these localised bodies they are not self documenting?
-    let localizedBody = 'body'
 
     function onContinueClick(): void {
         if ($isOnboardingLedgerProfile) {
@@ -29,12 +20,6 @@
         $onboardingRouter.next()
         return Promise.resolve()
     }
-
-    onMount(() => {
-        if ($onboardingProfile?.recoveryType === ProfileRecoveryType.FireflyLedger) {
-            localizedBody = 'fireflyLedgerBody'
-        }
-    })
 </script>
 
 <OnboardingLayout allowBack={false}>
@@ -45,7 +30,7 @@
             </div>
             <Text type="h2" classes="mb-5 text-center">{localize('views.onboarding.congratulations.title')}</Text>
             <Text type="p" secondary classes="mb-2 text-center"
-                >{localize(`views.onboarding.congratulations.${localizedBody}`)}</Text
+                >{localize('views.onboarding.congratulations.body')}</Text
             >
         </div>
         {#if $isOnboardingLedgerProfile}

@@ -85,7 +85,7 @@
     }
 
     onMount(() => {
-        updateOnboardingProfile({ clientOptions: null })
+        updateOnboardingProfile({ network: undefined, clientOptions: undefined })
         void cleanupOnboardingProfileManager()
     })
 </script>
