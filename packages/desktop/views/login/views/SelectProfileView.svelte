@@ -1,6 +1,6 @@
 <script lang="ts">
     import { PopupId, openPopup } from '@auxiliary/popup'
-    import { initialiseOnboardingFlow, onboardingProfile, shouldBeDeveloperProfile } from '@contexts/onboarding'
+    import { initialiseOnboardingProfile, onboardingProfile, shouldBeDeveloperProfile } from '@contexts/onboarding'
     import {
         AppContext,
         isStrongholdUpdated,
@@ -22,8 +22,7 @@
     }
 
     async function onAddProfileClick(): Promise<void> {
-        const isDeveloperProfile = shouldBeDeveloperProfile()
-        await initialiseOnboardingFlow({ isDeveloperProfile })
+        await initialiseOnboardingProfile(shouldBeDeveloperProfile())
         $routerManager.goToAppContext(AppContext.Onboarding)
     }
 

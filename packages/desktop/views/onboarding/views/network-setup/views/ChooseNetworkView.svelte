@@ -1,7 +1,12 @@
 <script lang="ts">
     import { Icon } from '@auxiliary/icon'
     import { OnboardingLayout } from '@components'
-    import { updateOnboardingProfile } from '@contexts/onboarding'
+    import {
+        initialiseOnboardingProfile,
+        shouldBeDeveloperProfile,
+        updateOnboardingProfile,
+        onboardingProfile,
+    } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkId, getDefaultClientOptions, getDefaultPersistedNetwork } from '@core/network'
@@ -45,9 +50,13 @@
         $networkSetupRouter.previous()
     }
 
-    onMount(() => {
+    onMount(async () => {
         // Clean up if user has navigated back to this view
         updateOnboardingProfile({ network: undefined, clientOptions: undefined })
+        // If coming from this view with no profiles, initialise a new profile
+        if (!$onboardingProfile?.id) {
+            await initialiseOnboardingProfile(shouldBeDeveloperProfile())
+        }
     })
 </script>
 
