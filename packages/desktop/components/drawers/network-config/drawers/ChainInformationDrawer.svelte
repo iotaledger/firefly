@@ -1,7 +1,7 @@
 <script lang="ts">
     import { ChainType, IChain, network, selectedChainIndex } from '@core/network'
     import { selectedAccount } from '@core/account'
-    import { IscpChainInformation, NetworkInformation } from './components'
+    import { EvmChainInformation, IscpChainInformation, NetworkInformation } from './components'
     import { Pane } from '@ui'
 
     let chain: IChain
@@ -24,8 +24,8 @@
             <NetworkInformation />
         {:else if chainConfiguration?.type === ChainType.Iscp}
             <IscpChainInformation {chainConfiguration} />
-        {:else}
-            <!-- else content here -->
+        {:else if chainConfiguration?.type === ChainType.Evm}
+            <EvmChainInformation />
         {/if}
     </Pane>
 </div>
