@@ -15,10 +15,6 @@
         },
         "types": ["node"]
     },
-    "include": [
-        "./lib",
-        "../desktop/views/onboarding/views/create-profile/create-profile-route.enum.ts",
-        "../desktop/views/onboarding/views/create-profile/create-profile-router.ts"
-    ],
+    "include": ["./lib"],
     "exclude": ["**/node_modules", "**/tests"]
 }
