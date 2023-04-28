@@ -58,7 +58,7 @@
             out:fade|local={{ duration: DRAWER_ANIMATION_DURATION_MS }}
             on:click={onCloseClick}
             on:keydown={() => {}}
-            class="fixed top-12 left-0 w-full h-full z-0 bg-gray-700 dark:bg-gray-900 bg-opacity-60 dark:bg-opacity-60"
+            class="fixed top-12 left-0 w-full z-0 bg-gray-700 dark:bg-gray-900 bg-opacity-60 dark:bg-opacity-60"
         />
         <panel
             in:fly|local={{ ...direction, duration: DRAWER_ANIMATION_DURATION_MS }}
@@ -76,6 +76,11 @@
 {/if}
 
 <style type="text/scss">
+    overlay,
+    panel {
+        height: calc(100% - 3rem);
+    }
+
     panel {
         @apply fixed;
         @apply flex flex-col flex-auto overflow-hidden;
@@ -84,7 +89,6 @@
 
         &.vertical {
             width: 420px;
-            height: 100%;
         }
 
         &.horizontal {
