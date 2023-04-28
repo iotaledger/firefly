@@ -11,7 +11,7 @@
         destroyShimmerClaimingProfileManager,
         initialiseProfileManagerFromOnboardingProfile,
         onboardingProfile,
-        ProfileSetupType,
+        OnboardingType,
         restoreBackupForShimmerClaimingProfileManager,
         restoreBackupFromStrongholdFile,
         updateOnboardingProfile,
@@ -37,7 +37,7 @@
         if (strongholdPassword) {
             busy = true
             try {
-                if ($onboardingProfile?.setupType === ProfileSetupType.Claimed) {
+                if ($onboardingProfile?.onboardingType === OnboardingType.Claim) {
                     await restoreBackupForShimmerClaimingProfileManager(strongholdPassword)
                 } else {
                     await restoreBackupFromStrongholdFile(strongholdPassword)
@@ -47,7 +47,7 @@
             } catch (err) {
                 if (err instanceof CannotRestoreWithMismatchedCoinTypeError) {
                     await initialiseProfileManagerFromOnboardingProfile(false)
-                    if ($onboardingProfile?.setupType === ProfileSetupType.Claimed) {
+                    if ($onboardingProfile?.onboardingType === OnboardingType.Claim) {
                         await destroyShimmerClaimingProfileManager()
                         await createShimmerClaimingProfileManager()
                     }

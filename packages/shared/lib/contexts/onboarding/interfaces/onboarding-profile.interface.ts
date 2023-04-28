@@ -4,7 +4,6 @@ import {
     OnboardingType,
     ProfileProtectionType,
     ProfileRecoveryType,
-    ProfileSetupType,
     RestoreProfileType,
 } from '../enums'
 import { ImportFile, Mnemonic } from '../types'
@@ -34,7 +33,6 @@ export interface IOnboardingProfile extends IPersistedProfile {
     hasInitialisedProfileManager?: boolean
 
     // Mobile specific after refactor
-    setupType?: ProfileSetupType
     recoveryType?: ProfileRecoveryType
     protectionType?: ProfileProtectionType
     mustVisitProfileName?: boolean
