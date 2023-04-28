@@ -499,7 +499,7 @@
                         "errors": {
                             "cannotBeEmpty": "Name cannot be empty",
                             "nameTooLong": "Name is too long",
-                            "aliasAddressMustBeHex": "Alias address must be in hex format",
+                            "aliasAddressWrongFormat": "Must be in either Hex or Bech32 format",
                             "aliasAddressAlreadyInUse": "Alias address already in use",
                             "invalidUrl": "Invalid URL"
                         }

@@ -1,8 +1,9 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
     import { IIscpChainMetadata, MAX_CHAIN_NAME_LENGTH, ChainType } from '@core/network'
-    import { activeProfile } from '@core/profile'
-    import { isValidHexAddress, isValidHttpsUrl } from '@core/utils'
+    import { activeProfile, getNetworkHrp } from '@core/profile'
+    import { isValidHexAddress, isValidHttpsUrl, validateBech32Address } from '@core/utils'
+    import { ADDRESS_TYPE_ALIAS } from '@core/wallet'
     import { Button, HTMLButtonType, Input } from '@ui'
 
     const localeKey = 'views.dashboard.drawers.networkConfig.addChain'
@@ -33,9 +34,16 @@
 
     function validateAliasAddress(): void {
         const chains = $activeProfile.network.chains
+        let isValidBechAddress = false
+        try {
+            validateBech32Address(getNetworkHrp(), chain.aliasAddress, ADDRESS_TYPE_ALIAS)
+            isValidBechAddress = true
+        } catch (error) {
+            isValidBechAddress = false
+        }
 
-        if (!isValidHexAddress(chain.aliasAddress)) {
-            aliasAddressError = localize(`${localeKey}.errors.aliasAddressMustBeHex`)
+        if (!isValidHexAddress(chain.aliasAddress) && !isValidBechAddress) {
+            aliasAddressError = localize(`${localeKey}.errors.aliasAddressWrongFormat`)
         } else if (
             chains.some((_chain) => _chain.type === ChainType.Iscp && _chain.aliasAddress === chain.aliasAddress)
         ) {
