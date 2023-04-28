@@ -1,4 +1,4 @@
-import { SECONDS_PER_MILESTONE } from '@core/network'
+import { SECONDS_PER_MILESTONE } from '../network/constants'
 import { MILLISECONDS_PER_SECOND } from './constants'
 import { IDateDifference } from './interfaces'
 
@@ -45,7 +45,7 @@ export function diffDates(firstDate: Date, secondDate: Date): IDateDifference {
     if (!(firstDate instanceof Date) || !(secondDate instanceof Date)) {
         return null
     }
-    const diff = Math.floor(secondDate.getTime() - firstDate.getTime())
+    const diff = Math.abs(secondDate.getTime() - firstDate.getTime())
     const day = 1000 * 60 * 60 * 24
 
     const days = Math.floor(diff / day)
@@ -62,14 +62,12 @@ export function diffDates(firstDate: Date, secondDate: Date): IDateDifference {
     if (weeks > 0) {
         return { unit: 'weeksAgo', value: weeks }
     }
-    if (days > 0) {
+    if (Math.abs(firstDate.getDate() - secondDate.getDate()) > 1) {
         return { unit: 'daysAgo', value: days }
     }
-
     if (firstDate.getDate() !== secondDate.getDate()) {
         return { unit: 'yesterday' }
     }
-
     return { unit: 'today' }
 }
 
