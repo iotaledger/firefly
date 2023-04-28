@@ -8,12 +8,17 @@ import { Duration } from './types'
  * has not yet expired.
  */
 export function isValidExpirationDateTime(expirationDateTime: Date): boolean {
-    if (expirationDateTime) {
+    if (isValidDate(expirationDateTime)) {
         const nowDateTime = new Date(Date.now())
         return expirationDateTime.getTime() > nowDateTime.getTime()
     } else {
         return false
     }
+}
+
+// https://stackoverflow.com/questions/643782/how-to-check-whether-an-object-is-a-date
+export function isValidDate(date: Date): boolean {
+    return !!date && date instanceof Date && !isNaN(date.getTime())
 }
 
 /**
