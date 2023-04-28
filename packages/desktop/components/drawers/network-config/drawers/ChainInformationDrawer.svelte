@@ -1,17 +1,30 @@
 <script lang="ts">
-    import { Button } from '@ui'
-    import { NetworkConfigRoute, networkConfigRouter } from '@desktop/routers'
+    import { ChainType, IChain, network, selectedChainIndex } from '@core/network'
+    import { selectedAccount } from '@core/account'
+    import { IscpChainInformation, NetworkInformation } from './components'
 
-    function onEditChainClick(): void {
-        $networkConfigRouter.goTo(NetworkConfigRoute.EditChain)
-    }
+    let chain: IChain
 
-    function onRemoveChainClick(): void {
-        $networkConfigRouter.goTo(NetworkConfigRoute.RemoveChain)
+    $: $selectedChainIndex, $selectedAccount, (chain = getChain())
+    function getChain(): IChain {
+        if ($selectedChainIndex === 0) {
+            return undefined
+        } else {
+            return $network.getChains()[$selectedChainIndex - 1]
+        }
     }
+    
+    $: chainConfiguration = chain?.getConfiguration()
 </script>
 
-<chain-information-drawer class="flex flex-col justify-between mb-6">
-    <Button onClick={onEditChainClick}>Edit chain</Button>
-    <Button onClick={onRemoveChainClick} classes="mt-6">Remove chain</Button>
-</chain-information-drawer>
+<div class="w-full h-full flex items-center justify-center">
+    {#if $selectedChainIndex === 0}
+        <NetworkInformation />
+    {:else}
+        {#if chainConfiguration?.type === ChainType.Iscp}
+             <IscpChainInformation {chainConfiguration} />
+        {:else}
+             <!-- else content here -->
+        {/if}
+    {/if}
+</div>

@@ -12,6 +12,7 @@
     export let index: number
 
     function onTileClick(): void {
+        $selectedChainIndex = index
         $networkConfigRouter.goTo(NetworkConfigRoute.ChainInformation)
     }
 
