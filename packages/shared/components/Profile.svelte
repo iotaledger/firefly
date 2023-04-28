@@ -1,7 +1,10 @@
 <script lang="ts">
+    import { DeveloperIndicatorPill, Icon, NetworkIconBadge, StrongholdBadge, Text, TextType } from '@ui'
+
     import { IPersistedProfile, ProfileType } from '@core/profile'
     import { getInitials as _getInitials } from '@core/utils'
-    import { DeveloperIndicatorPill, Icon, NetworkIconBadge, StrongholdBadge, Text, TextType } from '@ui'
+
+    import { Icon as IconEnum } from '@auxiliary/icon/enums'
 
     export let profile: IPersistedProfile
     export let classes: string = undefined
@@ -49,7 +52,7 @@
         <div class="flex flex-row items-baseline justify-center space-x-1.5 mb-2 w-full">
             {#if profile?.type === ProfileType.Ledger}
                 <Icon
-                    icon={'ledger'}
+                    icon={IconEnum.Ledger}
                     classes="text-gray-900 dark:text-gray-100 relative top-0.5"
                     width={14}
                     height={14}

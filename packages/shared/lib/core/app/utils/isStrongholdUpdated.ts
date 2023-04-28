@@ -1,6 +1,6 @@
-import { IPersistedProfile } from '@core/profile/interfaces'
 import { STRONGHOLD_VERSION } from '@core/stronghold/constants'
+import { StrongholdVersion } from '@core/stronghold/enums'
 
-export function isStrongholdUpdated(profile: IPersistedProfile): boolean {
-    return profile.strongholdVersion === STRONGHOLD_VERSION
+export function isStrongholdUpdated(strongholdVersion: StrongholdVersion): boolean {
+    return strongholdVersion === STRONGHOLD_VERSION
 }

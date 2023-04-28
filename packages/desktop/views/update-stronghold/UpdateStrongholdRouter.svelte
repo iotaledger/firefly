@@ -21,6 +21,6 @@
     </Transition>
 {:else if $updateStrongholdRoute === UpdateStrongholdRoute.SaveBackup}
     <Transition>
-        <UpdateBackupView changedPassword={!!newPassword} {isRecovery} />
+        <UpdateBackupView changedPassword={!!newPassword} {isRecovery} password={newPassword || password} />
     </Transition>
 {/if}

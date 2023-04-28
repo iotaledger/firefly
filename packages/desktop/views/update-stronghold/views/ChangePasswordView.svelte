@@ -1,30 +1,40 @@
 <script lang="ts">
     import zxcvbn from 'zxcvbn'
 
+    import { onMount } from 'svelte'
+
     import { OnboardingLayout } from '@components'
     import { Animation, Button, PasswordInput, Text, TextHint } from '@ui'
     import { HTMLButtonType, TextType } from '@ui/enums'
 
+    import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
-    import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'
-    import { changePasswordAndUnlockStronghold } from '@core/profile-manager'
+    import { MAX_STRONGHOLD_PASSWORD_LENGTH, unlockStronghold } from '@core/profile'
+    import { activeProfile, updateActiveProfile } from '@core/profile/stores'
+    import { changeStrongholdPassword } from '@core/profile-manager/api'
+    import { initialiseProfileManager } from '@core/profile-manager/actions'
+    import { profileManager } from '@core/profile-manager/stores'
+    import { buildProfileManagerOptionsFromProfileData } from '@core/profile-manager/utils'
     import { updateStrongholdRouter } from '@core/router/subrouters'
     import { PASSWORD_REASON_MAP } from '@core/stronghold'
+
     import { showAppNotification } from '@auxiliary/notification'
 
     export let oldPassword: string
-    export let newPassword: string = ''
-    export let isRecovery = false
+    export let newPassword: string
+    export let isRecovery: boolean
 
     let passwordError: string = ''
     let confirmPassword: string = ''
     let confirmPasswordError: string = ''
-    let busy: boolean = false
+    let isSubmitBusy: boolean = false
+    let isSkipBusy: boolean = false
 
     $: passwordStrength = zxcvbn(newPassword)
+    $: isBusy = isSubmitBusy || isSkipBusy
 
     function validatePassword(): boolean {
-        busy = false
+        isSubmitBusy = false
 
         if (!newPassword || newPassword.length > MAX_STRONGHOLD_PASSWORD_LENGTH) {
             passwordError = localize('error.password.length', {
@@ -56,9 +66,10 @@
 
         if (isPasswordValid) {
             try {
-                busy = true
-                await changePasswordAndUnlockStronghold(oldPassword, newPassword)
+                isSubmitBusy = true
+                await changeStrongholdPassword(oldPassword, newPassword)
                 showAppNotification({
+                    alert: true,
                     type: 'success',
                     message: localize('general.passwordSuccess'),
                 })
@@ -67,15 +78,40 @@
                 console.error(err)
                 passwordError = localize('error.password.incorrect')
             } finally {
-                busy = false
+                isSubmitBusy = false
             }
         }
     }
 
-    function onSkipClick(): void {
-        newPassword = ''
-        $updateStrongholdRouter.next()
+    async function onSkipClick(): Promise<void> {
+        try {
+            isSkipBusy = true
+            newPassword = ''
+            confirmPassword = ''
+            await unlockStronghold(oldPassword)
+            $updateStrongholdRouter.next()
+        } catch (err) {
+            handleError(err)
+        } finally {
+            isSkipBusy = false
+        }
     }
+
+    onMount(async () => {
+        if (!isRecovery && !$profileManager) {
+            const profileManagerOptions = await buildProfileManagerOptionsFromProfileData($activeProfile)
+            const { storagePath, coinType, clientOptions, secretManager } = profileManagerOptions
+            updateActiveProfile({ clientOptions })
+            const manager = await initialiseProfileManager(
+                storagePath,
+                coinType,
+                clientOptions,
+                secretManager,
+                $activeProfile?.id
+            )
+            profileManager.set(manager)
+        }
+    })
 </script>
 
 <OnboardingLayout allowBack={false}>
@@ -96,7 +132,7 @@
                 showStrengthLevel
                 strength={passwordStrength.score}
                 placeholder={localize('general.password')}
-                disabled={busy}
+                disabled={isBusy}
                 submitHandler={validatePassword}
             />
             <PasswordInput
@@ -105,21 +141,28 @@
                 classes="mb-4"
                 showRevealToggle
                 placeholder={localize('general.confirmPassword')}
-                disabled={busy}
+                disabled={isBusy}
                 submitHandler={validatePassword}
             />
         </form>
     </div>
     <div slot="leftpane__action" class="flex flex-col gap-4">
-        <Button type={HTMLButtonType.Button} outline classes="w-full" onClick={onSkipClick}>
+        <Button
+            type={HTMLButtonType.Button}
+            outline
+            classes="w-full"
+            onClick={onSkipClick}
+            disabled={isBusy}
+            isBusy={isSkipBusy}
+        >
             {localize('actions.skipAndKeep')}
         </Button>
         <Button
             form="update-stronghold-form"
-            disabled={!newPassword || !confirmPassword || busy}
-            isBusy={busy}
             type={HTMLButtonType.Submit}
             classes="w-full"
+            disabled={!newPassword || !confirmPassword || isBusy}
+            isBusy={isSubmitBusy}
         >
             {localize('views.settings.changePassword.title')}
         </Button>

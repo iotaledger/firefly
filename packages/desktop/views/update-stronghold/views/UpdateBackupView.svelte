@@ -1,19 +1,35 @@
 <script lang="ts">
-    import { Animation, Button, Icon, Text, TextHint, TextType } from '@ui'
     import { OnboardingLayout } from '@components'
+    import { Animation, Button, Icon, Text, TextHint, TextType } from '@ui'
+
     import { localize } from '@core/i18n'
     import { updateStrongholdRouter } from '@core/router'
-    import { backupInitialStronghold, updateOnboardingProfile } from '@contexts/onboarding'
+
+    import { updateOnboardingProfile } from '@contexts/onboarding/stores'
+    import { exportStronghold } from '@contexts/settings/actions'
+
     import { Icon as IconEnum } from '@auxiliary/icon'
+    import { showAppNotification } from '@auxiliary/notification'
+    import { login } from '@core/profile/actions'
 
     export let busy = false
     export let changedPassword: boolean
     export let isRecovery = false
+    export let password: string
 
     const skipBackup = false
 
     function onAdvanceView(): void {
-        updateOnboardingProfile({ mnemonic: null, strongholdPassword: null, importFile: null, importFilePath: null })
+        if (isRecovery) {
+            updateOnboardingProfile({
+                mnemonic: null,
+                strongholdPassword: null,
+                importFile: null,
+                importFilePath: null,
+            })
+        } else {
+            void login()
+        }
 
         $updateStrongholdRouter.next()
     }
@@ -24,10 +40,26 @@
 
     async function onBackupClick(): Promise<void> {
         try {
-            await backupInitialStronghold()
+            await exportStronghold(password, handleExportStrongholdResponse)
             onAdvanceView()
         } catch (err) {
             console.error(err)
+        }
+    }
+
+    function handleExportStrongholdResponse(cancelled: boolean, error: string): void {
+        if (!cancelled) {
+            if (error) {
+                showAppNotification({
+                    type: 'error',
+                    message: localize(error),
+                })
+            } else {
+                showAppNotification({
+                    type: 'info',
+                    message: localize('general.exportingStrongholdSuccess'),
+                })
+            }
         }
     }
 
