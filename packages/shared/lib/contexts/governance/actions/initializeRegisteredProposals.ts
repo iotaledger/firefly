@@ -18,6 +18,9 @@ export async function initializeRegisteredProposals(): Promise<void> {
 
     // Then get the rest of the accounts in the background
     for (const account of get(activeAccounts)) {
+        if (!get(selectedAccount)) {
+            break
+        }
         if (account.index !== _selectedAccount.index) {
             allProposals[account.index] = await getParticipationEventsAndCreateProposalsForAccount(account)
         }
@@ -31,6 +34,9 @@ async function getParticipationEventsAndCreateProposalsForAccount(
     const proposals: IRegisteredProposals = {}
     const events = await account.getParticipationEvents()
     for (const event of Object.values(events)) {
+        if (!get(selectedAccount)) {
+            break
+        }
         const proposal = createProposalFromEvent(event)
         try {
             await getAccountsParticipationEventStatusForEvent(event.id, account)
