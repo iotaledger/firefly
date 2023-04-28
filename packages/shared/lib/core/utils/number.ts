@@ -20,11 +20,16 @@ export function tryNumberOrZero(numberCandidate: unknown): number {
 }
 
 export function isNumberLetterOrPunctuation(key: string): boolean {
-    if (key.length !== 1) {
+    if (typeof key !== 'string' || key.length !== 1) {
         return false
     }
+
     const code = key.charCodeAt(0)
-    return (code >= 48 && code <= 57) || (code >= 65 && code <= 122)
+    const isNumber = code >= 48 && code <= 57
+    const isUpperCaseLetter = code >= 65 && code <= 90
+    const isLowerCaseLetter = code >= 97 && code <= 122
+
+    return isNumber || isUpperCaseLetter || isLowerCaseLetter
 }
 
 export function round(value: number, precision: number): number {
