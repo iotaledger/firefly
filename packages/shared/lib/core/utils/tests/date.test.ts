@@ -84,6 +84,12 @@ describe('isRecentDate', () => {
         expect(result.lessThanAMonth).toBe(false)
         expect(result.lessThanThreeMonths).toBe(false)
     })
+    test('returns null for a future date', () => {
+        const date = new Date()
+        date.setDate(date.getDate() + 10)
+        const result = isRecentDate(date)
+        expect(result).toBe(null)
+    })
 })
 
 describe('diffDates', () => {
