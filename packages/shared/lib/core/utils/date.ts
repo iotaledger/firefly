@@ -1,5 +1,7 @@
 import { SECONDS_PER_MILESTONE } from '../network/constants'
-import { MILLISECONDS_PER_SECOND } from './constants'
+
+import { DAYS_PER_WEEK, MILLISECONDS_PER_DAY, MILLISECONDS_PER_SECOND, MONTHS_PER_YEAR } from './constants'
+import { PastTimeUnit } from './enums'
 import { IDateDifference } from './interfaces'
 
 export function datesOnSameDay(first: Date, second: Date): boolean {
@@ -45,30 +47,31 @@ export function diffDates(firstDate: Date, secondDate: Date): IDateDifference {
     if (!(firstDate instanceof Date) || !(secondDate instanceof Date)) {
         return null
     }
-    const diff = Math.abs(secondDate.getTime() - firstDate.getTime())
-    const day = 1000 * 60 * 60 * 24
 
-    const days = Math.floor(diff / day)
-    const weeks = Math.floor(days / 7)
-    const months = Math.floor(weeks / 4.33)
-    const years = Math.floor(months / 12)
+    const timeDifference = Math.abs(secondDate.getTime() - firstDate.getTime())
+    const daysDifference = Math.floor(timeDifference / MILLISECONDS_PER_DAY)
+    const weeksDifference = Math.floor(daysDifference / DAYS_PER_WEEK)
+    const monthsDifference =
+        Math.abs(secondDate.getMonth() - firstDate.getMonth()) +
+        Math.abs(secondDate.getFullYear() - firstDate.getFullYear()) * MONTHS_PER_YEAR
+    const yearsDifference = Math.abs(secondDate.getFullYear() - firstDate.getFullYear())
 
-    if (years > 0) {
-        return { unit: 'yearsAgo', value: years }
+    if (yearsDifference >= 1) {
+        return { unit: PastTimeUnit.YearsAgo, value: yearsDifference }
     }
-    if (months > 0) {
-        return { unit: 'monthsAgo', value: months }
+    if (monthsDifference >= 1) {
+        return { unit: PastTimeUnit.MonthsAgo, value: monthsDifference }
     }
-    if (weeks > 0) {
-        return { unit: 'weeksAgo', value: weeks }
+    if (weeksDifference >= 1) {
+        return { unit: PastTimeUnit.WeeksAgo, value: weeksDifference }
     }
-    if (Math.abs(firstDate.getDate() - secondDate.getDate()) > 1) {
-        return { unit: 'daysAgo', value: days }
+    if (daysDifference > 1) {
+        return { unit: PastTimeUnit.DaysAgo, value: daysDifference }
     }
-    if (firstDate.getDate() !== secondDate.getDate()) {
-        return { unit: 'yesterday' }
+    if (daysDifference === 1) {
+        return { unit: PastTimeUnit.Yesterday }
     }
-    return { unit: 'today' }
+    return { unit: PastTimeUnit.Today }
 }
 
 /**
