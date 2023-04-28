@@ -38,12 +38,12 @@
         <Input bind:value={chain.name} placeholder={localize('general.name')} disabled={isBusy} />
         <Input
             bind:value={chain.aliasAddress}
-            placeholder={localize('views.dashboard.drawers.networkConfig.addChain.aliasAddress')}
+            placeholder={localize('views.dashboard.drawers.networkConfig.chain.aliasAddress')}
             disabled={isBusy}
         />
         <Input
             bind:value={chain.iscpEndpoint}
-            placeholder={localize('views.dashboard.drawers.networkConfig.addChain.iscpEndpoint')}
+            placeholder={localize('views.dashboard.drawers.networkConfig.chain.iscpEndpoint')}
             disabled={isBusy}
         />
         <Input

@@ -63,7 +63,7 @@
         <panel
             in:fly|local={{ ...direction, duration: DRAWER_ANIMATION_DURATION_MS }}
             out:fly|local={{ ...direction, duration: DRAWER_ANIMATION_DURATION_MS }}
-            class="flex flex-col bg-white dark:bg-gray-800 {position} {isVertical ? 'vertical' : 'horizontal'}"
+            class="flex flex-col bg-gray-50 dark:bg-gray-800 {position} {isVertical ? 'vertical' : 'horizontal'}"
         >
             <DrawerHeader {drawerRoute} {drawerRouter} onClose={onCloseClick} />
             <div class="flex-grow">

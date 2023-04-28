@@ -13,18 +13,16 @@
             return $network.getChains()[$selectedChainIndex - 1]
         }
     }
-    
+
     $: chainConfiguration = chain?.getConfiguration()
 </script>
 
 <div class="w-full h-full flex items-center justify-center">
     {#if $selectedChainIndex === 0}
         <NetworkInformation />
+    {:else if chainConfiguration?.type === ChainType.Iscp}
+        <IscpChainInformation {chainConfiguration} />
     {:else}
-        {#if chainConfiguration?.type === ChainType.Iscp}
-             <IscpChainInformation {chainConfiguration} />
-        {:else}
-             <!-- else content here -->
-        {/if}
+        <!-- else content here -->
     {/if}
 </div>
