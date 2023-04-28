@@ -1,9 +1,13 @@
 export function range(size: number, start: number = 0): number[] {
-    if (!size || size <= 0) return []
+    if (typeof size !== 'number' || size <= 0) {
+        return []
+    }
 
-    if (!start || typeof start !== 'number') start = 0
+    if (typeof start !== 'number') {
+        start = 0
+    }
 
-    return Array.from(Array(size), (_, idx) => idx + start)
+    return Array.from({ length: size }, (_, index) => index + start)
 }
 
 export function tryNumberOrZero(numberCandidate: unknown): number {
