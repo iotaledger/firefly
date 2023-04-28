@@ -1,3 +1,4 @@
-export * from './views'
+export { default as UpdateStrongholdRouterView } from './UpdateStrongholdRouterView.svelte'
 
-export { default as UpdateStrongholdRouter } from './UpdateStrongholdRouter'
+export * from './update-stronghold-route.enum'
+export * from './update-stronghold-router'

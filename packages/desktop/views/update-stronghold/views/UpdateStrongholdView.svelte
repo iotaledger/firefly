@@ -1,14 +1,12 @@
 <script lang="ts">
     import { OnboardingLayout } from '@components'
+    import { migrateStrongholdFromOnboardingProfile } from '@contexts/onboarding/actions'
+    import { localize } from '@core/i18n'
+    import { migrateStrongholdFromActiveProfile } from '@core/profile/actions/active-profile'
+    import { isValidJson } from '@core/utils'
     import { Animation, Button, PasswordInput, Text } from '@ui'
     import { HTMLButtonType, TextType } from '@ui/enums'
-
-    import { localize } from '@core/i18n'
-    import { updateStrongholdRouter } from '@core/router'
-    import { isValidJson } from '@core/utils'
-    import { migrateStrongholdFromActiveProfile } from '@core/profile/actions/active-profile'
-
-    import { migrateStrongholdFromOnboardingProfile } from '@contexts/onboarding/actions'
+    import { updateStrongholdRouter } from '../update-stronghold-router'
 
     export let password: string = ''
     export let isRecovery: boolean = false

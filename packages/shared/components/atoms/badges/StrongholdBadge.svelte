@@ -6,7 +6,7 @@
 
     import { Icon as IconEnum } from '@auxiliary/icon'
 
-    export let isStrongholdUpdated: boolean = false
+    export let isLatestStrongholdVersion: boolean = false
 
     let tooltipAnchor: HTMLElement
     let isTooltipVisible = false
@@ -16,7 +16,7 @@
     }
 </script>
 
-{#if !isStrongholdUpdated}
+{#if !isLatestStrongholdVersion}
     <stronghold-badge
         bind:this={tooltipAnchor}
         on:mouseenter={() => showTooltip(true)}

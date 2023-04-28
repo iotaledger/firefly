@@ -1,16 +1,13 @@
 <script lang="ts">
-    import { OnboardingLayout } from '@components'
-    import { Animation, Button, Icon, Text, TextHint, TextType } from '@ui'
-
-    import { localize } from '@core/i18n'
-    import { updateStrongholdRouter } from '@core/router'
-
-    import { updateOnboardingProfile } from '@contexts/onboarding/stores'
-    import { exportStronghold } from '@contexts/settings/actions'
-
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { showAppNotification } from '@auxiliary/notification'
+    import { OnboardingLayout } from '@components'
+    import { updateOnboardingProfile } from '@contexts/onboarding/stores'
+    import { exportStronghold } from '@contexts/settings/actions'
+    import { localize } from '@core/i18n'
     import { login } from '@core/profile/actions'
+    import { Animation, Button, Icon, Text, TextHint, TextType } from '@ui'
+    import { updateStrongholdRouter } from '../update-stronghold-router'
 
     export let busy = false
     export let changedPassword: boolean

@@ -3,7 +3,7 @@
     import { initialiseOnboardingProfile, onboardingProfile, shouldBeDeveloperProfile } from '@contexts/onboarding'
     import {
         AppContext,
-        isStrongholdUpdated,
+        isLatestStrongholdVersion,
         mobile,
         needsToAcceptLatestPrivacyPolicy,
         needsToAcceptLatestTermsOfService,
@@ -59,7 +59,7 @@
                     bgColor="blue"
                     onClick={onContinueClick}
                     updateRequired={profile?.type === ProfileType.Software &&
-                        !isStrongholdUpdated(profile?.strongholdVersion) &&
+                        !isLatestStrongholdVersion(profile?.strongholdVersion) &&
                         features.onboarding.strongholdVersionCheck.enabled}
                     classes="cursor-pointer"
                 />

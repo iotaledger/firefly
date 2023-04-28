@@ -3,7 +3,7 @@
     import { PopupId, openPopup, popupState } from '@auxiliary/popup'
     import {
         Platform,
-        isStrongholdUpdated,
+        isLatestStrongholdVersion,
         needsToAcceptLatestPrivacyPolicy,
         needsToAcceptLatestTermsOfService,
     } from '@core/app'
@@ -41,7 +41,7 @@
     }
     $: updateRequired =
         $activeProfile?.type === ProfileType.Software &&
-        !isStrongholdUpdated($activeProfile?.strongholdVersion) &&
+        !isLatestStrongholdVersion($activeProfile?.strongholdVersion) &&
         features.onboarding.strongholdVersionCheck.enabled
     $: hasReachedMaxAttempts = attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS
     $: {

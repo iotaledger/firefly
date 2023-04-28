@@ -1,9 +1,8 @@
 <script lang="ts">
-    import { ChangePasswordView, UpdateBackupView, UpdateStrongholdView } from './views'
     import { Transition } from '@ui'
-
-    import { UpdateStrongholdRoute } from '@core/router/enums'
-    import { updateStrongholdRoute } from '@core/router/subrouters'
+    import { UpdateStrongholdRoute } from './update-stronghold-route.enum'
+    import { updateStrongholdRoute } from './update-stronghold-router'
+    import { ChangePasswordView, UpdateBackupView, UpdateStrongholdView } from './views'
 
     export let isRecovery = false
 

@@ -1,24 +1,20 @@
 <script lang="ts">
-    import zxcvbn from 'zxcvbn'
-
-    import { onMount } from 'svelte'
-
+    import { showAppNotification } from '@auxiliary/notification'
     import { OnboardingLayout } from '@components'
-    import { Animation, Button, PasswordInput, Text, TextHint } from '@ui'
-    import { HTMLButtonType, TextType } from '@ui/enums'
-
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
     import { MAX_STRONGHOLD_PASSWORD_LENGTH, unlockStronghold } from '@core/profile'
-    import { activeProfile, updateActiveProfile } from '@core/profile/stores'
-    import { changeStrongholdPassword } from '@core/profile-manager/api'
     import { initialiseProfileManager } from '@core/profile-manager/actions'
+    import { changeStrongholdPassword } from '@core/profile-manager/api'
     import { profileManager } from '@core/profile-manager/stores'
     import { buildProfileManagerOptionsFromProfileData } from '@core/profile-manager/utils'
-    import { updateStrongholdRouter } from '@core/router/subrouters'
+    import { activeProfile, updateActiveProfile } from '@core/profile/stores'
     import { PASSWORD_REASON_MAP } from '@core/stronghold'
-
-    import { showAppNotification } from '@auxiliary/notification'
+    import { Animation, Button, PasswordInput, Text, TextHint } from '@ui'
+    import { HTMLButtonType, TextType } from '@ui/enums'
+    import { onMount } from 'svelte'
+    import zxcvbn from 'zxcvbn'
+    import { updateStrongholdRouter } from '../update-stronghold-router'
 
     export let oldPassword: string
     export let newPassword: string

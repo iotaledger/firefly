@@ -1,4 +1,4 @@
-import { isStrongholdUpdated } from '@core/app'
+import { isLatestStrongholdVersion } from '@core/app'
 import { activeProfile, ProfileType } from '@core/profile'
 import { get, writable } from 'svelte/store'
 
@@ -7,7 +7,10 @@ import { LoginRoute } from '../enums'
 import { IRouterEvent } from '../interfaces'
 import { appRouter } from '../routers'
 import features from '@features/features'
-import { UpdateStrongholdRouter, updateStrongholdRouter } from './update-stronghold-router'
+import {
+    UpdateStrongholdRouter,
+    updateStrongholdRouter,
+} from '../../../../../desktop/views/update-stronghold/update-stronghold-router'
 
 export const loginRoute = writable<LoginRoute>(null)
 export const loginRouter = writable<LoginRouter>(null)
@@ -24,7 +27,7 @@ export class LoginRouter extends Subrouter<LoginRoute> {
         const requiresUpdate =
             get(activeProfile) &&
             get(activeProfile).type === ProfileType.Software &&
-            !isStrongholdUpdated(get(activeProfile)?.strongholdVersion) &&
+            !isLatestStrongholdVersion(get(activeProfile)?.strongholdVersion) &&
             features.onboarding.strongholdVersionCheck.enabled
 
         switch (currentRoute) {
