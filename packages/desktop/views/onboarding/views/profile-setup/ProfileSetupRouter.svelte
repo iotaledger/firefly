@@ -1,7 +1,13 @@
 <script lang="ts">
+    import { Platform } from '@core/app'
+    import { ProfileSetupRoute, profileSetupRoute } from '@core/router'
+    import features from '@features/features'
     import { Transition } from 'shared/components'
     import { EnterNameView, SetupClaimedView, SetupNewView, SetupRecoveredView, SetupView } from './views'
-    import { ProfileSetupRoute, profileSetupRoute } from '@core/router'
+
+    $: if (features.analytics.onboardingRoute.profileSetupRoute.enabled && $profileSetupRoute) {
+        Platform.trackEvent('profile-setup-route', { route: $profileSetupRoute })
+    }
 </script>
 
 {#if $profileSetupRoute === ProfileSetupRoute.Setup}

@@ -36,6 +36,7 @@
     } from '@core/nfts'
     import { selectedAccountIndex } from '@core/account'
     import { get } from 'svelte/store'
+    import features from '@features/features'
 
     const tabs = {
         wallet: Wallet,
@@ -53,6 +54,9 @@
     $: $nftDownloadQueue, downloadNextNftInQueue()
     $: $downloadingNftId && interruptNftDownloadAfterTimeout(get(selectedAccountIndex))
     $: addSelectedAccountNftsToDownloadQueue($selectedAccountIndex)
+
+    $: if (features.analytics.dashboardRoute.enabled && $dashboardRoute)
+        Platform.trackEvent('dashboard-route', { route: $dashboardRoute })
 
     function addSelectedAccountNftsToDownloadQueue(accountIndex: number) {
         resetNftDownloadQueue()
@@ -111,8 +115,8 @@
         <!-- Dashboard Pane -->
         <div class="flex flex-col h-full dashboard-w">
             <svelte:component this={tabs[$dashboardRoute]} on:next={$appRouter.next} />
+            <Drawer />
         </div>
-        <Drawer />
     </div>
 </div>
 
