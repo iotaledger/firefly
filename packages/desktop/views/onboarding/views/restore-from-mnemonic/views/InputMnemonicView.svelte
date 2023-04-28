@@ -20,7 +20,8 @@
     }
 
     onMount(() => {
-        updateOnboardingProfile({ hasStoredMnemonic: false, mnemonic: undefined })
+        // Clean up if user has navigated back to this view
+        updateOnboardingProfile({ mnemonic: undefined, hasStoredMnemonic: false })
     })
 </script>
 

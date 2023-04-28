@@ -21,7 +21,10 @@
         $onboardingRouter.previous()
     }
 
-    onMount(async () => {})
+    onMount(() => {
+        // Clean up if user has navigated back to this view
+        updateOnboardingProfile({ onboardingType: undefined })
+    })
 </script>
 
 <OnboardingLayout allowBack={$profiles.length > 0 || $onboardingProfile?.isDeveloperProfile} {onBackClick}>

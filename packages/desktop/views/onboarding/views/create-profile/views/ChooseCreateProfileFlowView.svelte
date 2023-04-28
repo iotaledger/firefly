@@ -6,18 +6,23 @@
         onboardingProfile,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
-    import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { ProfileType } from '@core/profile'
-    import { destroyProfileManager } from '@core/profile-manager'
+    import { ProfileType, removeProfileFolder } from '@core/profile'
     import features from '@features/features'
     import { Animation, OnboardingButton, Text } from '@ui'
     import { onMount } from 'svelte'
     import { createProfileRouter } from '../create-profile-router'
+    import { destroyProfileManager } from '@core/profile-manager/actions'
 
-    $: networkId = $onboardingProfile?.network?.id
+    let isBusy = {
+        [CreateProfileType.Mnemonic]: false,
+        [CreateProfileType.Ledger]: false,
+    }
 
-    async function onProfileTypeSelectionClick(createProfileType: CreateProfileType): Promise<void> {
+    const networkId = $onboardingProfile?.network?.id
+
+    async function onProfileTypeClick(createProfileType: CreateProfileType): Promise<void> {
+        isBusy = { ...isBusy, [createProfileType]: true }
         const type = createProfileType === CreateProfileType.Ledger ? ProfileType.Ledger : ProfileType.Software
         updateOnboardingProfile({ createProfileType, type })
         await initialiseProfileManagerFromOnboardingProfile()
@@ -29,8 +34,12 @@
     }
 
     onMount(async () => {
-        await destroyProfileManager()
-        updateOnboardingProfile({ type: null, hasInitialisedProfileManager: false })
+        // Clean up if user has navigated back to this view
+        if ($onboardingProfile.hasInitialisedProfileManager) {
+            await destroyProfileManager()
+            await removeProfileFolder($onboardingProfile.id)
+        }
+        updateOnboardingProfile({ type: undefined, createProfileType: undefined, hasInitialisedProfileManager: false })
     })
 </script>
 
@@ -44,24 +53,24 @@
     <div slot="leftpane__action" class="flex flex-col space-y-4">
         <OnboardingButton
             primaryText={localize('views.onboarding.profileSetup.setupNew.softwareAccount.title')}
-            secondaryText={!$mobile
-                ? localize('views.onboarding.profileSetup.setupNew.softwareAccount.description')
-                : ''}
+            secondaryText={localize('views.onboarding.profileSetup.setupNew.softwareAccount.description')}
             icon="file"
+            busy={isBusy[CreateProfileType.Mnemonic]}
             hidden={features?.onboarding?.[networkId]?.newProfile?.softwareProfile?.hidden}
             disabled={!features?.onboarding?.[networkId]?.newProfile?.softwareProfile?.enabled}
-            onClick={() => onProfileTypeSelectionClick(CreateProfileType.Mnemonic)}
+            onClick={() => onProfileTypeClick(CreateProfileType.Mnemonic)}
         />
         <OnboardingButton
             primaryText={localize('views.onboarding.profileSetup.setupNew.ledgerAccount.title')}
-            secondaryText={!$mobile ? localize('views.onboarding.profileSetup.setupNew.ledgerAccount.description') : ''}
+            secondaryText={localize('views.onboarding.profileSetup.setupNew.ledgerAccount.description')}
             icon="chip"
+            busy={isBusy[CreateProfileType.Ledger]}
             hidden={features?.onboarding?.[networkId]?.newProfile?.ledgerProfile?.hidden}
             disabled={!features?.onboarding?.[networkId]?.newProfile?.ledgerProfile?.enabled}
-            onClick={() => onProfileTypeSelectionClick(CreateProfileType.Ledger)}
+            onClick={() => onProfileTypeClick(CreateProfileType.Ledger)}
         />
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-purple dark:bg-gray-900'}">
+    <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-purple dark:bg-gray-900">
         <Animation classes="setup-anim-aspect-ratio" animation="import-desktop" />
     </div>
 </OnboardingLayout>

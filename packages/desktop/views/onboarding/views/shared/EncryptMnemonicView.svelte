@@ -46,7 +46,7 @@
                 busy = true
                 await setStrongholdPassword(strongholdPassword)
                 await verifyAndStoreMnemonic()
-                updateOnboardingProfile({ strongholdPassword })
+                updateOnboardingProfile({ strongholdPassword, hasStoredMnemonic: true })
                 router.next()
             } catch (err) {
                 console.error(err)

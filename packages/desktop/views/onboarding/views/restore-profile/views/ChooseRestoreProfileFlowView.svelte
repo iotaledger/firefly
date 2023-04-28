@@ -5,16 +5,16 @@
         RestoreProfileType,
         initialiseProfileManagerFromOnboardingProfile,
         onboardingProfile,
-        resetOnboardingProfileWithProfileManager,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
     import { getNetworkNameFromNetworkId } from '@core/network'
-    import { ProfileType } from '@core/profile'
+    import { ProfileType, removeProfileFolder } from '@core/profile'
     import features from '@features/features'
     import { Animation, OnboardingButton, Text } from '@ui'
     import { onMount } from 'svelte'
     import { restoreProfileRouter } from '../restore-profile-router'
+    import { destroyProfileManager } from '@core/profile-manager/actions'
 
     let isBusy = {
         [RestoreProfileType.Mnemonic]: false,
@@ -24,11 +24,11 @@
 
     const networkId = $onboardingProfile?.network?.id
 
-    async function onProfileRecoverySelectionClick(restoreProfileType: RestoreProfileType): Promise<void> {
+    async function onProfileTypeClick(restoreProfileType: RestoreProfileType): Promise<void> {
         isBusy = { ...isBusy, [restoreProfileType]: true }
         const type = restoreProfileType === RestoreProfileType.Ledger ? ProfileType.Ledger : ProfileType.Software
         updateOnboardingProfile({ type, restoreProfileType })
-        await initialiseProfileManagerFromOnboardingProfile(true)
+        await initialiseProfileManagerFromOnboardingProfile()
         $restoreProfileRouter.next()
     }
 
@@ -36,8 +36,13 @@
         $restoreProfileRouter.previous()
     }
 
-    onMount(() => {
-        void resetOnboardingProfileWithProfileManager()
+    onMount(async () => {
+        // Clean up if user has navigated back to this view
+        if ($onboardingProfile.hasInitialisedProfileManager) {
+            await destroyProfileManager()
+            await removeProfileFolder($onboardingProfile.id)
+        }
+        updateOnboardingProfile({ type: undefined, restoreProfileType: undefined, hasInitialisedProfileManager: false })
     })
 </script>
 
@@ -60,7 +65,7 @@
             busy={isBusy[ProfileRecoveryType.Mnemonic]}
             hidden={features?.onboarding?.[networkId]?.restoreProfile?.recoveryPhrase?.hidden}
             disabled={!features?.onboarding?.[networkId]?.restoreProfile?.recoveryPhrase?.enabled}
-            onClick={() => onProfileRecoverySelectionClick(RestoreProfileType.Mnemonic)}
+            onClick={() => onProfileTypeClick(RestoreProfileType.Mnemonic)}
         />
         <OnboardingButton
             primaryText={localize('views.onboarding.profileSetup.setupRecovered.importFile')}
@@ -69,7 +74,7 @@
             busy={isBusy[ProfileRecoveryType.Stronghold]}
             hidden={features?.onboarding?.[networkId]?.restoreProfile?.strongholdBackup?.hidden}
             disabled={!features?.onboarding?.[networkId]?.restoreProfile?.strongholdBackup?.enabled}
-            onClick={() => onProfileRecoverySelectionClick(RestoreProfileType.Stronghold)}
+            onClick={() => onProfileTypeClick(RestoreProfileType.Stronghold)}
         />
         <OnboardingButton
             primaryText={localize('views.onboarding.profileSetup.setupRecovered.importLedger')}
@@ -78,7 +83,7 @@
             busy={isBusy[ProfileRecoveryType.Ledger]}
             hidden={features?.onboarding?.[networkId]?.restoreProfile?.ledgerBackup?.hidden}
             disabled={!features?.onboarding?.[networkId]?.restoreProfile?.ledgerBackup?.enabled}
-            onClick={() => onProfileRecoverySelectionClick(RestoreProfileType.Ledger)}
+            onClick={() => onProfileTypeClick(RestoreProfileType.Ledger)}
         />
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-purple dark:bg-gray-900">

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { OnboardingLayout } from '@components'
-    import { Mnemonic, getWordChoices, onboardingProfile } from '@contexts/onboarding'
+    import { Mnemonic, getWordChoices, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
     import { Button, Icon, RecoveryPhrase, Text, TextType } from '@ui'
     import { onMount } from 'svelte'
@@ -12,13 +12,14 @@
 
     let wordChoices: string[] = ['', '', '']
     let verifyIndex: number = 0
-    let isVerified: boolean = false
+    let isVerified: boolean = $onboardingProfile?.hasVerifiedMnemonic
 
     function onChoiceClick(word: string): void {
         verifyRecoveryPhrase[verifyIndex] = word
         if ($onboardingProfile?.mnemonic[verifyIndex] === word) {
             if (verifyIndex === $onboardingProfile?.mnemonic.length - 1) {
                 isVerified = true
+                updateOnboardingProfile({ hasVerifiedMnemonic: true })
             } else {
                 verifyIndex++
                 wordChoices = getWordChoices(verifyRecoveryPhrase.length)

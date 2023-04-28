@@ -1,6 +1,6 @@
 <script lang="ts">
     import { PopupId, openPopup } from '@auxiliary/popup'
-    import { initialiseOnboardingFlow, shouldBeDeveloperProfile } from '@contexts/onboarding'
+    import { initialiseOnboardingFlow, onboardingProfile, shouldBeDeveloperProfile } from '@contexts/onboarding'
     import {
         AppContext,
         isStrongholdUpdated,
@@ -9,10 +9,12 @@
         needsToAcceptLatestTermsOfService,
     } from '@core/app'
     import { localize } from '@core/i18n'
-    import { ProfileType, loadPersistedProfileIntoActiveProfile, profiles } from '@core/profile'
+    import { ProfileType, loadPersistedProfileIntoActiveProfile, profiles, removeProfileFolder } from '@core/profile'
+    import { destroyProfileManager } from '@core/profile-manager/actions'
     import { loginRouter, routerManager } from '@core/router'
     import features from '@features/features'
     import { Icon, Logo, Profile } from '@ui'
+    import { onMount } from 'svelte'
 
     function onContinueClick(profileId: string): void {
         loadPersistedProfileIntoActiveProfile(profileId)
@@ -32,6 +34,17 @@
             preventClose: true,
         })
     }
+
+    onMount(async () => {
+        // Clean up if user has navigated back to this view from onboarding
+        if ($onboardingProfile) {
+            if ($onboardingProfile.hasInitialisedProfileManager) {
+                await destroyProfileManager()
+                await removeProfileFolder($onboardingProfile.id)
+            }
+            $onboardingProfile = undefined
+        }
+    })
 </script>
 
 <section class="flex flex-col justify-center items-center h-full bg-white dark:bg-gray-900 px-40 pt-48 pb-20">

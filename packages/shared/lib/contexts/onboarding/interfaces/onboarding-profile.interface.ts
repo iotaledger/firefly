@@ -22,6 +22,7 @@ export interface IOnboardingProfile extends IPersistedProfile {
 
     // Mnemonic setup data
     mnemonic?: Mnemonic
+    hasVerifiedMnemonic?: boolean
     hasStoredMnemonic?: boolean
 
     // Encryption password

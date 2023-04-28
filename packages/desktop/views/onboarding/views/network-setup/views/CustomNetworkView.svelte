@@ -85,8 +85,8 @@
     }
 
     onMount(() => {
+        // Clean up if user has navigated back to this view
         updateOnboardingProfile({ network: undefined, clientOptions: undefined })
-        void cleanupOnboardingProfileManager()
     })
 </script>
 

@@ -24,7 +24,7 @@
     }
 
     function onBackClick(): void {
-        updateOnboardingProfile({ mnemonic: null })
+        updateOnboardingProfile({ mnemonic: undefined, hasVerifiedMnemonic: false, hasStoredMnemonic: false })
         $createFromMnemonicRouter.previous()
     }
 
@@ -38,7 +38,9 @@
     }
 
     onMount(() => {
-        generateMnemonicForOnboardingProfile()
+        if (!$onboardingProfile?.mnemonic) {
+            generateMnemonicForOnboardingProfile()
+        }
     })
 </script>
 

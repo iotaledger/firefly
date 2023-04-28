@@ -59,10 +59,6 @@
         $restoreProfileRouter.next()
     }
 
-    function onBackClick(): void {
-        $restoreProfileRouter.previous()
-    }
-
     async function ledgerRaceConditionProtectionWrapper(_function: () => unknown): Promise<void> {
         try {
             if ($isOnboardingLedgerProfile) {
@@ -186,7 +182,7 @@
     })
 </script>
 
-<OnboardingLayout {onBackClick}>
+<OnboardingLayout allowBack={false}>
     <div slot="title">
         <Text type="h2">
             {localize('views.onboarding.shimmerClaiming.claimRewards.title')}
