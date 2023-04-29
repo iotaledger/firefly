@@ -1,58 +1,7 @@
 <script lang="ts">
-    import { localize } from '@core/i18n'
-    import { ChainType, IIscpChainConfiguration } from '@core/network'
-    import { Button, HTMLButtonType, Input } from '@ui'
-
-    const isBusy = false
-
-    $: submitDisabled = !chain.name || !chain.aliasAddress || !chain.iscpEndpoint
-
-    const chain: IIscpChainConfiguration = {
-        type: ChainType.Iscp,
-        chainId: undefined,
-        name: '',
-        explorerUrl: undefined,
-        aliasAddress: '',
-        iscpEndpoint: '',
-    }
-
-    async function onSubmitClick(): Promise<void> {
-        // let chain: IChain
-        // try {
-        //     chain = await $network.addChain(DEFAULT_CHAIN_CONFIGURATIONS[$network.getMetadata().id])
-        // } catch (err) {
-        //     chain = await $network.getChain(1071)
-        //     $network.removeChain(1071)
-        //     console.error(err)
-        // }
-        // const latestBlock = await chain.getLatestBlock()
-        // console.log('LATEST BLOCK: ', latestBlock)
-        //
-        // const metadata = await chain.getMetadata()
-        // console.log('CHAIN METADATA: ', metadata)
-    }
+    import { AddIscpChainForm } from './components'
 </script>
 
-<add-chain-drawer class="h-full flex flex-col justify-between">
-    <form id="add-chain-form" class="flex flex-col gap-3" on:submit|preventDefault={onSubmitClick}>
-        <Input bind:value={chain.name} placeholder={localize('general.name')} disabled={isBusy} />
-        <Input
-            bind:value={chain.aliasAddress}
-            placeholder={localize('views.dashboard.drawers.networkConfig.chain.aliasAddress')}
-            disabled={isBusy}
-        />
-        <Input
-            bind:value={chain.iscpEndpoint}
-            placeholder={localize('views.dashboard.drawers.networkConfig.chain.iscpEndpoint')}
-            disabled={isBusy}
-        />
-        <Input
-            bind:value={chain.explorerUrl}
-            placeholder={localize('views.dashboard.drawers.networkConfig.addChain.explorerEndpoint')}
-            disabled={isBusy}
-        />
-    </form>
-    <Button type={HTMLButtonType.Submit} form="add-chain-form" classes="w-full" disabled={false} {isBusy}>
-        {localize('views.dashboard.drawers.networkConfig.addChain.title')}
-    </Button>
+<add-chain-drawer>
+    <AddIscpChainForm />
 </add-chain-drawer>
