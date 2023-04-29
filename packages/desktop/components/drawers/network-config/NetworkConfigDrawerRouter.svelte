@@ -10,6 +10,7 @@
         EditChainDrawer,
         RemoveChainDrawer,
     } from './drawers'
+    import { clearSelectedChain } from '@core/network'
 
     export let drawerRoute: NetworkConfigRoute
     export let drawerRouter: Router<NetworkConfigRoute>
@@ -23,6 +24,7 @@
 
     onDestroy(() => {
         $networkConfigRouter = null
+        clearSelectedChain()
     })
 </script>
 

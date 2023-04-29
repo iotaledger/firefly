@@ -1,25 +1,60 @@
 <script lang="ts">
+    import { onMount } from 'svelte'
     import { localize } from '@core/i18n'
     import { NetworkConfigRoute, networkConfigRouter } from '@desktop/routers'
-    import { ClickableTile, Text, Icon, FontWeight, TextType, NetworkIcon, NetworkStatusPill } from '@ui'
+    import { ClickableTile, FontWeight, Icon, NetworkIcon, NetworkStatusPill, Text, TextType } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { truncateString } from '@core/utils'
-    import { NetworkHealth, NetworkId, selectedChainIndex } from '@core/network'
+    import {
+        IChain,
+        IIscpChainConfiguration,
+        INetwork,
+        NetworkHealth,
+        NetworkId,
+        networkStatus,
+        setSelectedChain,
+    } from '@core/network'
+    import { selectedAccount } from '@core/account'
 
-    export let name: string
-    export let address: string
-    export let status: NetworkHealth
-    export let index: number
+    export let network: INetwork
+    export let chain: IChain
 
     function onTileClick(): void {
-        $selectedChainIndex = index
-        $networkConfigRouter.goTo(NetworkConfigRoute.ChainInformation)
+        if (network) {
+            // TODO: Go to network settings
+        } else if (chain) {
+            setSelectedChain(chain)
+            $networkConfigRouter.goTo(NetworkConfigRoute.ChainInformation)
+        }
     }
 
     function onQrCodeIconClick(): void {
-        $selectedChainIndex = index
+        if (chain) {
+            setSelectedChain(chain)
+        }
         $networkConfigRouter.goTo(NetworkConfigRoute.ChainDepositAddress)
     }
+
+    let name = ''
+    let address = ''
+    let status: NetworkHealth
+
+    function setNetworkCardData(): void {
+        if (network) {
+            name = network.getMetadata().name
+            address = $selectedAccount.depositAddress
+            status = $networkStatus.health
+        } else if (chain) {
+            const configuration = chain.getConfiguration() as IIscpChainConfiguration
+            name = configuration.name
+            address = configuration.aliasAddress
+            status = NetworkHealth.Operational
+        }
+    }
+
+    onMount(() => {
+        setNetworkCardData()
+    })
 </script>
 
 <ClickableTile classes="bg-white border border-solid border-gray-200" onClick={onTileClick}>

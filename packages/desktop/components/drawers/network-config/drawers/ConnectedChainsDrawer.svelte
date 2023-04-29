@@ -1,47 +1,30 @@
 <script lang="ts">
     import { Icon } from '@ui'
     import { NetworkConfigRoute, networkConfigRouter } from '@desktop/routers'
-    import { activeProfile } from '@core/profile/stores'
-    import { NetworkHealth, IConnectedChain, buildChainFromNetwork, networkStatus } from '@core/network'
+    import { clearSelectedChain, network, networkStatus } from '@core/network'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { NetworkCard } from '@components'
     import { localize } from '@core/i18n'
-    import { selectedAccount } from '@core/account/stores'
     import networkFeatures from '@features/network.features'
-
-    let connectedChains: IConnectedChain[] = []
-
-    $: setConnectedChains()
-    function setConnectedChains(): void {
-        const chains = []
-        const mainChain = buildChainFromNetwork(
-            $activeProfile.network.name,
-            $selectedAccount.depositAddress,
-            $networkStatus.health
-        )
-        chains.push(mainChain)
-
-        for (const chain of $activeProfile.network.chainConfigurations) {
-            chains.push({
-                name: chain.name,
-                address: chain.name, // TODO
-                status: NetworkHealth.Operational, // TODO
-            })
-        }
-
-        connectedChains = chains
-    }
+    import { onMount } from 'svelte'
 
     function onAddChainClick(): void {
         $networkConfigRouter.goTo(NetworkConfigRoute.AddChain)
     }
+
+    onMount(() => {
+        clearSelectedChain()
+    })
 </script>
 
 <connected-chains-drawer class="h-full flex flex-col justify-between">
     <div class="flex flex-col gap-4">
-        {#each connectedChains as chain, index}
-            <NetworkCard {...chain} {index} />
-        {/each}
+        {#key $networkStatus}
+            <NetworkCard network={$network} />
+            {#each $network.getChains() as chain}
+                <NetworkCard {chain} />
+            {/each}
+        {/key}
     </div>
     {#if networkFeatures.config.addChain.enabled}
         <button
