@@ -1,7 +1,7 @@
 import { MARKET_POLL_INTERVAL } from '../constants'
 import { getAndUpdateMarketPrices } from './getAndUpdateMarketPrices'
 
-let pollInterval
+let pollInterval: ReturnType<typeof setInterval>
 
 /**
  * Poll the network status at an interval.

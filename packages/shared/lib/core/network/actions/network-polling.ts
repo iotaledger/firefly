@@ -1,7 +1,7 @@
 import { NETWORK_STATUS_POLL_INTERVAL } from '../constants'
 import { getAndUpdateNodeInfo } from './getAndUpdateNodeInfo'
 
-let pollInterval
+let pollInterval: ReturnType<typeof setInterval>
 
 /**
  * Poll the network status at an interval.

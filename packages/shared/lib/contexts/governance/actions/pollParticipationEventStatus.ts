@@ -1,7 +1,7 @@
 import { PARTICIPATION_EVENT__STATUS_POLL_INTERVAL } from '../constants'
 import { getAndSetSelectedParticipationEventStatus } from '../stores'
 
-let pollInterval
+let pollInterval: ReturnType<typeof setInterval>
 
 export async function pollParticipationEventStatus(eventId: string): Promise<void> {
     await getAndSetSelectedParticipationEventStatus(eventId)
