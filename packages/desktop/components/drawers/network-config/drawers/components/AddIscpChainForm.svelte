@@ -82,7 +82,7 @@
         validate()
         const hasError = !!nameError || !!aliasAddressError || !!iscpEndpointError || !!explorerUrlError
         if (!hasError) {
-            // TODO: Fetch chainId from ISCP node before adding it to profile
+            // TODO: https://github.com/iotaledger/firefly/issues/6375
         }
     }
 </script>

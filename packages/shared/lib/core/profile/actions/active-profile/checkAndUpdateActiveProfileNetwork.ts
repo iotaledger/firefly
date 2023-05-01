@@ -9,7 +9,7 @@ export async function checkAndUpdateActiveProfileNetwork(): Promise<void> {
     const networkId = $activeProfile?.network?.id
     if (!networkId || networkId === NetworkId.Custom) {
         const network = buildPersistedNetworkFromNodeInfoResponse(nodeInfoResponse)
-        network.chains = $activeProfile.network?.chains || []
+        network.chainConfigurations = $activeProfile.network?.chainConfigurations || []
         updateActiveProfile({ network })
     } else if (networkId !== getNetworkIdFromNetworkName(nodeInfoResponse?.nodeInfo?.protocol?.networkName)) {
         throw new Error('error.node.networkIdMismatch')
