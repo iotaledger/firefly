@@ -61,7 +61,7 @@
             on:click|stopPropagation={onAddChainClick}
         >
             <Icon icon={IconEnum.Plus} height={12} />
-            {localize('views.dashboard.drawers.networkConfig.connectedChains.addChain')}
+            {localize('actions.addChain')}
         </button>
     {/if}
 </connected-chains-drawer>

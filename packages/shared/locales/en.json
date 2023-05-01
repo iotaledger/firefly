@@ -490,6 +490,9 @@
             },
             "drawers": {
                 "networkConfig": {
+                    "addChain": {
+                        "title": "Add chain"
+                    },
                     "chain": {
                         "chainId": "Chain ID",
                         "aliasAddress": "Alias Address",
@@ -511,8 +514,7 @@
                         "title": "Chain information"
                     },
                     "connectedChains": {
-                        "title": "Connected chains",
-                        "addChain": "Add chain"
+                        "title": "Connected chains"
                     },
                     "editChain": {
                         "title": "Edit chain"
@@ -1353,7 +1355,8 @@
         "changeNode": "Change node",
         "stopVoting": "Stop voting",
         "revote": "Revote",
-        "skipAndKeep": "Skip and keep old password"
+        "skipAndKeep": "Skip and keep old password",
+        "addChain": "Add chain"
     },
     "general": {
         "recipient": "Recipient",
