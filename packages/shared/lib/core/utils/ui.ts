@@ -65,8 +65,12 @@ export function isBright(color: string): boolean {
 }
 
 /**
- * Returns warning text color for last Stronghold backup
- * @param lastBackupDate: Blue if less than a month. Orange if less than three months. Red if more.
+ * Returns warning text color for last Stronghold backup.
+ *      Blue if less than a month.
+ *      Yellow if between one and three months.
+ *      Orange if three or more months.
+ *      Red if never.
+ * @param {Date} lastBackupDate
  */
 export function getBackupWarningColor(lastBackupDate: Date): string {
     if (!(lastBackupDate instanceof Date)) {

@@ -1,4 +1,4 @@
-import { debounce, isBright, hex2rgb } from '@core/utils'
+import { debounce, getBackupWarningColor, hex2rgb, isBright } from '@core/utils'
 
 describe('File: ui.ts', () => {
     describe('Function: debounce', () => {
@@ -29,6 +29,9 @@ describe('File: ui.ts', () => {
             expect(callback).toHaveBeenCalledTimes(2)
         })
     })
+    describe('Function: clickOutside', () => {
+        it.todo('')
+    })
     describe('Function: isBright', () => {
         it('should return true if color is bright', () => {
             expect(isBright('#FFFFFF')).toEqual(true)
@@ -41,6 +44,21 @@ describe('File: ui.ts', () => {
         it('should return false if color is empty', () => {
             expect(isBright('')).toEqual(false)
         })
+    })
+    describe('Function: getBackupWarningColor', () => {
+        it('should return a color depending on the last backup date', () => {
+            const oneWeekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
+            const twoMonthsAgo = new Date(Date.now() - 2 * 30 * 24 * 60 * 60 * 1000)
+            const oneYearAgo = new Date(Date.now() - 365 * 24 * 60 * 60 * 1000)
+
+            expect(getBackupWarningColor(oneWeekAgo)).toEqual('blue')
+            expect(getBackupWarningColor(twoMonthsAgo)).toEqual('yellow')
+            expect(getBackupWarningColor(oneYearAgo)).toEqual('orange')
+            expect(getBackupWarningColor(null)).toEqual('red')
+        })
+    })
+    describe('Function: slidable', () => {
+        it.todo('')
     })
     describe('Function: hex2rgb', () => {
         it('should convert hex to rgb', () => {
