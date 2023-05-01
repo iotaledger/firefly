@@ -1,8 +1,10 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { localize } from '@core/i18n'
+
     import { ClickableTile, FontWeight, Icon, NetworkIcon, NetworkStatusPill, Text, TextType } from '@ui'
-    import { Icon as IconEnum } from '@auxiliary/icon'
+
+    import { selectedAccount } from '@core/account'
+    import { localize } from '@core/i18n'
     import { truncateString, UiEventFunction } from '@core/utils'
     import {
         chainStatuses,
@@ -13,7 +15,8 @@
         NetworkId,
         networkStatus,
     } from '@core/network'
-    import { selectedAccount } from '@core/account'
+
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let network: INetwork
     export let chain: IChain
