@@ -163,9 +163,6 @@
                         {localize('actions.burnToken')}
                     </Button>
                 {/if}
-                <Button outline classes="w-full" onClick={onBurnClick}>
-                    {localize('actions.burnToken')}
-                </Button>
                 <Button classes="w-full" onClick={onSendClick}>
                     {localize('actions.send')}
                 </Button>
