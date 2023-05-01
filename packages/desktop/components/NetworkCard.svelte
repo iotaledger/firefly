@@ -1,39 +1,16 @@
 <script lang="ts">
     import { onMount } from 'svelte'
     import { localize } from '@core/i18n'
-    import { NetworkConfigRoute, networkConfigRouter } from '@desktop/routers'
     import { ClickableTile, FontWeight, Icon, NetworkIcon, NetworkStatusPill, Text, TextType } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { truncateString } from '@core/utils'
-    import {
-        IChain,
-        IIscpChainConfiguration,
-        INetwork,
-        NetworkHealth,
-        NetworkId,
-        networkStatus,
-        setSelectedChain,
-    } from '@core/network'
+    import { truncateString, UiEventFunction } from '@core/utils'
+    import { IChain, IIscpChainConfiguration, INetwork, NetworkHealth, NetworkId, networkStatus } from '@core/network'
     import { selectedAccount } from '@core/account'
 
     export let network: INetwork
     export let chain: IChain
-
-    function onTileClick(): void {
-        if (network) {
-            // TODO: Go to network settings
-        } else if (chain) {
-            setSelectedChain(chain)
-            $networkConfigRouter.goTo(NetworkConfigRoute.ChainInformation)
-        }
-    }
-
-    function onQrCodeIconClick(): void {
-        if (chain) {
-            setSelectedChain(chain)
-        }
-        $networkConfigRouter.goTo(NetworkConfigRoute.ChainDepositAddress)
-    }
+    export let onCardClick: UiEventFunction
+    export let onQrCodeIconClick: UiEventFunction
 
     let name = ''
     let address = ''
@@ -57,7 +34,7 @@
     })
 </script>
 
-<ClickableTile classes="bg-white border border-solid border-gray-200" onClick={onTileClick}>
+<ClickableTile classes="bg-white border border-solid border-gray-200" onClick={onCardClick}>
     <div class="w-full flex flex-col gap-5">
         <div class="flex flex-row justify-between items-center">
             <div class="flex flex-row gap-2 items-center">
