@@ -511,7 +511,8 @@
                         "title": "Chain information"
                     },
                     "connectedChains": {
-                        "title": "Connected chains"
+                        "title": "Connected chains",
+                        "addChain": "Add chain"
                     },
                     "editChain": {
                         "title": "Edit chain"
