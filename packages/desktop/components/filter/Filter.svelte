@@ -2,22 +2,22 @@
     import type { Writable } from 'svelte/store'
     import { TogglableButton, Modal } from '@ui'
     import { FilterItem, FilterModal } from '@components'
-    import { deepCopy, Filter } from '@core/utils'
+    import { Filter } from '@core/utils'
 
     export let filterStore: Writable<Filter>
-    let filter: Filter = deepCopy($filterStore)
+    let filter: Filter = structuredClone($filterStore)
 
     let filterActive = false
     let modal: Modal
     let openFilterItemIndex = -1
 
     function setFilters(): void {
-        $filterStore = deepCopy(filter)
+        $filterStore = structuredClone(filter)
         filterActive = false
     }
 
     function closeFilters(): void {
-        filter = deepCopy($filterStore)
+        filter = structuredClone($filterStore)
         filterActive = false
     }
 

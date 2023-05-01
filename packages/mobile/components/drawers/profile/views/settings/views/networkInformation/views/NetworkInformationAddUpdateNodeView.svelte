@@ -4,11 +4,10 @@
     import { localize } from '@core/i18n'
     import { addNodeToClientOptions, editNodeInClientOptions, EMPTY_NODE, INode } from '@core/network'
     import { activeProfile } from '@core/profile'
-    import { deepCopy } from '@core/utils'
 
     import { showAppNotification } from '@auxiliary/notification'
 
-    export let node: INode = deepCopy(EMPTY_NODE)
+    export let node: INode = structuredClone(EMPTY_NODE)
     export let isEditingNode: boolean = false
     export let onSuccess: (..._: any[]) => void
 
@@ -31,7 +30,7 @@
             } else {
                 await addNodeToClientOptions(node)
             }
-            node = deepCopy(EMPTY_NODE)
+            node = structuredClone(EMPTY_NODE)
             onSuccess()
         } catch (err) {
             if (err.type !== 'validationError') {

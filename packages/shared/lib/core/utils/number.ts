@@ -1,25 +1,42 @@
 export function range(size: number, start: number = 0): number[] {
-    if (!size || size <= 0) return []
+    if (typeof size !== 'number' || size <= 0) {
+        return []
+    }
 
-    if (!start || typeof start !== 'number') start = 0
+    if (typeof start !== 'number') {
+        start = 0
+    }
 
-    return Array.from(Array(size), (_, idx) => idx + start)
+    return Array.from({ length: size }, (_, index) => index + start)
 }
 
 export function tryNumberOrZero(numberCandidate: unknown): number {
+    if (typeof numberCandidate === 'number' && !Number.isNaN(numberCandidate)) {
+        return numberCandidate
+    }
+
     const numberCandidateCasted = Number(numberCandidate)
     return Number.isNaN(numberCandidateCasted) ? 0 : numberCandidateCasted
 }
 
 export function isNumberLetterOrPunctuation(key: string): boolean {
-    if (key.length !== 1) {
+    if (typeof key !== 'string' || key.length !== 1) {
         return false
     }
+
     const code = key.charCodeAt(0)
-    return (code >= 48 && code <= 57) || (code >= 65 && code <= 122)
+    const isNumber = code >= 48 && code <= 57
+    const isUpperCaseLetter = code >= 65 && code <= 90
+    const isLowerCaseLetter = code >= 97 && code <= 122
+
+    return isNumber || isUpperCaseLetter || isLowerCaseLetter
 }
 
-export function round(value: number, precision: number): number {
-    const multiplier = Math.pow(10, precision || 0)
+export function round(value: number, precision: number = 0): number {
+    if (typeof value !== 'number' || Number.isNaN(value) || typeof precision !== 'number' || Number.isNaN(precision)) {
+        return null
+    }
+
+    const multiplier = 10 ** precision
     return Math.round(value * multiplier) / multiplier
 }
