@@ -3,5 +3,8 @@ export function resolveObjectPath(object: Record<string, unknown>, path: string,
         return defaultValue
     }
 
-    return path.split('.').reduce((o, p) => o && o[p], object) ?? defaultValue
+    return (
+        path.split('.').reduce((currentObject, pathSegment) => currentObject && currentObject[pathSegment], object) ??
+        defaultValue
+    )
 }
