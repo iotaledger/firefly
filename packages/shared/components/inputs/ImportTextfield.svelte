@@ -65,7 +65,7 @@
         statusMessage = ''
         error = false
 
-        content = content.replace(/\r/g, '').replace(/\n/g, '').replace(/  +/g, ' ')
+        content = content.replace(/\r/g, ' ').replace(/\n/g, ' ').replace(/  +/g, ' ')
 
         const trimmedContent = content?.trim()
 
