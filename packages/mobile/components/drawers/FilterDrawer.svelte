@@ -6,7 +6,6 @@
     import { FontWeight, Text } from '@ui'
 
     import { localize } from '@core/i18n'
-    import { deepCopy } from '@core/utils'
     import { Filter } from '@core/utils/types'
 
     import { closeDrawer, DrawerId } from '@/auxiliary/drawer'
@@ -21,7 +20,7 @@
 
     onMount(() => {
         filterStore = getFilterStore(filterType)
-        filter = deepCopy($filterStore)
+        filter = structuredClone($filterStore)
     })
 
     function _closeDrawer(): void {
@@ -29,7 +28,7 @@
     }
 
     function handleApply(): void {
-        $filterStore = deepCopy(filter)
+        $filterStore = structuredClone(filter)
         _closeDrawer()
     }
 

@@ -7,7 +7,7 @@
     import { checkNetworkId, checkNodeUrlValidity, getNetworkNameFromNetworkId } from '@core/network/utils'
     import { activeProfile } from '@core/profile'
     import { getNodeInfo } from '@core/profile-manager'
-    import { IDropdownItem, cleanUrl, deepCopy } from '@core/utils'
+    import { IDropdownItem, cleanUrl } from '@core/utils'
     import features from '@features/features'
     import { Dropdown, Error, NumberInput, PasswordInput, TextInput } from 'shared/components'
     import { get } from 'svelte/store'
@@ -19,7 +19,7 @@
         validateClientOptions: boolean
     }
 
-    export let node: INode = deepCopy(EMPTY_NODE)
+    export let node: INode = structuredClone(EMPTY_NODE)
     export let networkId: NetworkId
     export let coinType: string
     export let isBusy = false
