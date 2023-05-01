@@ -2,8 +2,9 @@ import Big from 'big.js'
 
 import { formatNumber, getCurrencyPosition } from '@core/i18n'
 
-import { IOTA_UNIT_MAP } from './constants'
+import { DEFAULT_FORMAT_IOTA_UNIT_OPTIONS, IOTA_UNIT_MAP } from './constants'
 import { IotaUnit } from './enums'
+import { FormatIotaUnitOptions } from './interfaces'
 
 /**
  * CAUTION: Set this to avoid small numbers switching to exponential format.
@@ -20,14 +21,12 @@ export function convertIotaUnit(value: number, fromUnit: IotaUnit, toUnit: IotaU
     return toUnit === IotaUnit._ ? Math.round(scaledValue) : scaledValue
 }
 
-interface FormatIotaUnitOptions {
-    includeUnits?: boolean
-    grouped?: boolean
-    overrideDecimalPlaces?: number
-}
-
-export function formatIotaUnitPrecision(valueRaw: number, unit: IotaUnit, options: FormatIotaUnitOptions = {}): string {
-    const { includeUnits = true, grouped = false, overrideDecimalPlaces } = options
+export function formatIotaUnitPrecision(
+    valueRaw: number,
+    unit: IotaUnit,
+    options: FormatIotaUnitOptions = DEFAULT_FORMAT_IOTA_UNIT_OPTIONS
+): string {
+    const { includeUnits, grouped, overrideDecimalPlaces } = options
 
     // At the moment we have no symbol for IOTA so we always put the currency code
     // at the end, in the future when we have a symbol this can be updated to position
@@ -57,7 +56,7 @@ export function formatIotaUnitPrecision(valueRaw: number, unit: IotaUnit, option
 
 export function formatIotaUnitBestMatch(
     valueRaw: number,
-    options: FormatIotaUnitOptions = { includeUnits: true, grouped: false }
+    options: FormatIotaUnitOptions = DEFAULT_FORMAT_IOTA_UNIT_OPTIONS
 ): string {
     return formatIotaUnitPrecision(valueRaw, getIotaUnit(valueRaw), options)
 }
