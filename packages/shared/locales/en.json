@@ -495,7 +495,15 @@
                         "chainId": "Chain ID",
                         "aliasAddress": "Alias Address",
                         "iscpEndpoint": "ISCP Endpoint",
-                        "explorerEndpoint": "Explorer Endpoint (optional)"
+                        "explorerEndpoint": "Explorer Endpoint (optional)",
+                        "errors": {
+                            "cannotBeEmpty": "Name cannot be empty",
+                            "nameTooLong": "Name is too long",
+                            "aliasAddressWrongFormat": "Must be in either hex or Bech32 format",
+                            "aliasAddressAlreadyInUse": "Alias address already in use",
+                            "invalidUrl": "Invalid URL"
+                        }
+
                     },
                     "chainDepositAddress": {
                         "title": "Chain deposit address"
