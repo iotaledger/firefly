@@ -4,7 +4,7 @@ import { formatNumber, getCurrencyPosition } from '@core/i18n'
 
 import { DEFAULT_FORMAT_IOTA_UNIT_OPTIONS, IOTA_UNIT_MAP } from './constants'
 import { IotaUnit } from './enums'
-import { FormatIotaUnitOptions } from './interfaces'
+import { IFormatIotaUnitOptions } from './interfaces'
 
 /**
  * CAUTION: Set this to avoid small numbers switching to exponential format.
@@ -24,7 +24,7 @@ export function convertIotaUnit(value: number, fromUnit: IotaUnit, toUnit: IotaU
 export function formatIotaUnitPrecision(
     valueRaw: number,
     unit: IotaUnit,
-    options: FormatIotaUnitOptions = DEFAULT_FORMAT_IOTA_UNIT_OPTIONS
+    options: IFormatIotaUnitOptions = DEFAULT_FORMAT_IOTA_UNIT_OPTIONS
 ): string {
     const { includeUnits, grouped, overrideDecimalPlaces } = options
 
@@ -56,7 +56,7 @@ export function formatIotaUnitPrecision(
 
 export function formatIotaUnitBestMatch(
     valueRaw: number,
-    options: FormatIotaUnitOptions = DEFAULT_FORMAT_IOTA_UNIT_OPTIONS
+    options: IFormatIotaUnitOptions = DEFAULT_FORMAT_IOTA_UNIT_OPTIONS
 ): string {
     return formatIotaUnitPrecision(valueRaw, getIotaUnit(valueRaw), options)
 }
