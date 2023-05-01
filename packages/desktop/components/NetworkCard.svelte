@@ -4,7 +4,7 @@
     import { ClickableTile, Text, Icon, FontWeight, TextType, NetworkIcon, NetworkStatusPill } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { truncateString } from '@core/utils'
-    import { NetworkHealth, NetworkId, selectedConnectedChainIndex } from '@core/network'
+    import { NetworkHealth, NetworkId, selectedChainIndex } from '@core/network'
 
     export let name: string
     export let address: string
@@ -16,7 +16,7 @@
     }
 
     function onQrCodeIconClick(): void {
-        $selectedConnectedChainIndex = index
+        $selectedChainIndex = index
         $networkConfigRouter.goTo(NetworkConfigRoute.ChainDepositAddress)
     }
 </script>

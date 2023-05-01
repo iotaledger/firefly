@@ -21,7 +21,7 @@
         )
         chains.push(mainChain)
 
-        for (const chain of $activeProfile.network.chains) {
+        for (const chain of $activeProfile.network.chainConfigurations) {
             chains.push({
                 name: chain.name,
                 address: chain.name, // TODO
