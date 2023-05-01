@@ -4,8 +4,8 @@ import { IChainStatus } from './chain-status.interface'
 
 export interface IChain {
     getConfiguration(): ChainConfiguration
+    getStatus(): IChainStatus
     getMetadata(): Promise<ChainMetadata>
-    getStatus(): Promise<IChainStatus>
 
     getLatestBlock(): Promise<IBlock>
 }

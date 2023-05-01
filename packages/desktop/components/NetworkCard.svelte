@@ -1,11 +1,22 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { localize } from '@core/i18n'
+
     import { ClickableTile, FontWeight, Icon, NetworkIcon, NetworkStatusPill, Text, TextType } from '@ui'
-    import { Icon as IconEnum } from '@auxiliary/icon'
-    import { truncateString, UiEventFunction } from '@core/utils'
-    import { IChain, IIscpChainConfiguration, INetwork, NetworkHealth, NetworkId, networkStatus } from '@core/network'
+
     import { selectedAccount } from '@core/account'
+    import { localize } from '@core/i18n'
+    import { truncateString, UiEventFunction } from '@core/utils'
+    import {
+        chainStatuses,
+        IChain,
+        IIscpChainConfiguration,
+        INetwork,
+        NetworkHealth,
+        NetworkId,
+        networkStatus,
+    } from '@core/network'
+
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let network: INetwork
     export let chain: IChain
@@ -16,6 +27,8 @@
     let address = ''
     let status: NetworkHealth
 
+    $: $networkStatus, $chainStatuses, setNetworkCardData()
+
     function setNetworkCardData(): void {
         if (network) {
             name = network.getMetadata().name
@@ -25,7 +38,7 @@
             const configuration = chain.getConfiguration() as IIscpChainConfiguration
             name = configuration.name
             address = configuration.aliasAddress
-            status = NetworkHealth.Operational
+            status = chain.getStatus().health
         }
     }
 
@@ -43,7 +56,9 @@
                     {name}
                 </Text>
             </div>
-            <NetworkStatusPill {status} />
+            {#key status}
+                <NetworkStatusPill {status} />
+            {/key}
         </div>
         <div class="flex flex-row justify-between items-end">
             <div class="flex flex-col">
