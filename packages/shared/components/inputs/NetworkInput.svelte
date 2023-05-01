@@ -9,7 +9,7 @@
 
     const LAYER_1_NETWORK_OPTION = {
         key: DestinationNetwork.Shimmer,
-        value: networkAddresses[DestinationNetwork.Shimmer],
+        value: '-',
     }
 
     export let networkAddress: string = LAYER_1_NETWORK_OPTION.value

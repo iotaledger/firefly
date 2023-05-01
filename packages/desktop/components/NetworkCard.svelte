@@ -4,7 +4,15 @@
     import { ClickableTile, FontWeight, Icon, NetworkIcon, NetworkStatusPill, Text, TextType } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { truncateString, UiEventFunction } from '@core/utils'
-    import { IChain, IIscpChainConfiguration, INetwork, NetworkHealth, NetworkId, networkStatus } from '@core/network'
+    import {
+        chainStatuses,
+        IChain,
+        IIscpChainConfiguration,
+        INetwork,
+        NetworkHealth,
+        NetworkId,
+        networkStatus,
+    } from '@core/network'
     import { selectedAccount } from '@core/account'
 
     export let network: INetwork
@@ -16,6 +24,8 @@
     let address = ''
     let status: NetworkHealth
 
+    $: $networkStatus, $chainStatuses, setNetworkCardData()
+
     function setNetworkCardData(): void {
         if (network) {
             name = network.getMetadata().name
@@ -25,7 +35,7 @@
             const configuration = chain.getConfiguration() as IIscpChainConfiguration
             name = configuration.name
             address = configuration.aliasAddress
-            status = NetworkHealth.Operational
+            status = chain.getStatus().health
         }
     }
 
@@ -43,7 +53,9 @@
                     {name}
                 </Text>
             </div>
-            <NetworkStatusPill {status} />
+            {#key status}
+                <NetworkStatusPill {status} />
+            {/key}
         </div>
         <div class="flex flex-row justify-between items-end">
             <div class="flex flex-col">

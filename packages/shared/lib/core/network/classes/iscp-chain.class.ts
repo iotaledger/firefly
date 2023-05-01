@@ -2,12 +2,16 @@ import Web3 from 'web3'
 
 import { IBlock, IChain, IChainStatus, IIscpChainConfiguration, IIscpChainMetadata } from '../interfaces'
 import { ChainConfiguration, ChainMetadata, Web3Provider } from '../types'
+import { NetworkHealth } from '@core/network'
+import { chainStatuses } from '@core/network/stores/chain-statuses.store'
+import { get } from 'svelte/store'
 
 export class IscpChain implements IChain {
     private readonly _provider: Web3Provider
     private readonly _configuration: IIscpChainConfiguration
 
     private _metadata: IIscpChainMetadata
+    private _status: IChainStatus
 
     constructor(payload: IIscpChainConfiguration) {
         try {
@@ -20,6 +24,8 @@ export class IscpChain implements IChain {
 
             this._provider = new Web3(`${iscpEndpoint}/${evmJsonRpcPath}`)
             this._configuration = payload
+
+            void this.getStatus()
         } catch (err) {
             console.error(err)
         }
@@ -35,6 +41,10 @@ export class IscpChain implements IChain {
 
     getConfiguration(): ChainConfiguration {
         return this._configuration
+    }
+
+    getStatus(): IChainStatus {
+        return get(chainStatuses)?.[this._configuration.chainId] ?? { health: NetworkHealth.Disconnected }
     }
 
     getMetadata(): Promise<ChainMetadata> {
@@ -57,10 +67,6 @@ export class IscpChain implements IChain {
         const chainMetadataUrl = `${iscpEndpoint}/v1/chains/${aliasAddress}`
         const response = await fetch(chainMetadataUrl)
         return (await response.json()) as IIscpChainMetadata
-    }
-
-    getStatus(): Promise<IChainStatus> {
-        return undefined
     }
 
     async getLatestBlock(): Promise<IBlock> {
