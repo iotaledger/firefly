@@ -1,37 +1,37 @@
 #!/bin/sh
-base_dark="capacitor/assets/dark/$1"
-base_light="capacitor/assets/light/$1"
-base_light_ios="capacitor/assets/$1"
+base_splash="capacitor/assets/splash/$1"
+base_android="capacitor/assets/android/$1"
+base_ios="capacitor/assets/ios/$1"
 dest_ios="ios/App/App/Assets.xcassets/AppIcon.appiconset"
 dest_ios_splash="ios/App/App/Assets.xcassets/Splash.imageset"
 dest_android="android/app/src/main/res"
 # http://astroa.physics.metu.edu.tr/MANUALS/ImageMagick-6.2.5/www/command-line-options.html#filter
 # we use filter and support to get smooth
-icon_opts="-filter Gaussian -support 7.5 -background white"
+icon_opts="-filter Gaussian -support 7.5 -background #00121F -alpha remove -alpha off"
   
 if [ -z $1 ]
   then
     echo No argument given
 else
   ## iOS icon files 
-  convert "$base_light_ios" $icon_opts -resize 20x20!         "$dest_ios/AppIcon-20x20@1x.png"
-  convert "$base_light_ios" $icon_opts -resize 40x40!         "$dest_ios/AppIcon-20x20@2x.png"
-  convert "$base_light_ios" $icon_opts -resize 40x40!         "$dest_ios/AppIcon-20x20@2x-1.png"
-  convert "$base_light_ios" $icon_opts -resize 60x60!         "$dest_ios/AppIcon-20x20@3x.png"
-  convert "$base_light_ios" $icon_opts -resize 29x29!         "$dest_ios/AppIcon-29x29@1x.png"
-  convert "$base_light_ios" $icon_opts -resize 58x58!         "$dest_ios/AppIcon-29x29@2x.png"
-  convert "$base_light_ios" $icon_opts -resize 58x58!         "$dest_ios/AppIcon-29x29@2x-1.png"
-  convert "$base_light_ios" $icon_opts -resize 87x87!         "$dest_ios/AppIcon-29x29@3x.png"
-  convert "$base_light_ios" $icon_opts -resize 40x40!         "$dest_ios/AppIcon-40x40@1x.png"
-  convert "$base_light_ios" $icon_opts -resize 80x80!         "$dest_ios/AppIcon-40x40@2x.png"
-  convert "$base_light_ios" $icon_opts -resize 80x80!         "$dest_ios/AppIcon-40x40@2x-1.png"
-  convert "$base_light_ios" $icon_opts -resize 120x120!       "$dest_ios/AppIcon-40x40@3x.png"
-  convert "$base_light_ios" $icon_opts -resize 120x120!       "$dest_ios/AppIcon-60x60@2x.png"
-  convert "$base_light_ios" $icon_opts -resize 180x180!       "$dest_ios/AppIcon-60x60@3x.png"
-  convert "$base_light_ios" $icon_opts -resize 76x76!         "$dest_ios/AppIcon-76x76@1x.png"
-  convert "$base_light_ios" $icon_opts -resize 152x152!       "$dest_ios/AppIcon-76x76@2x.png"
-  convert "$base_light_ios" $icon_opts -resize 167x167!       "$dest_ios/AppIcon-83.5x83.5@2x.png"
-  convert "$base_light_ios" $icon_opts -resize 1024x1024!     "$dest_ios/AppIcon-512@2x.png"
+  convert "$base_ios" $icon_opts -resize 20x20!         "$dest_ios/AppIcon-20x20@1x.png"
+  convert "$base_ios" $icon_opts -resize 40x40!         "$dest_ios/AppIcon-20x20@2x.png"
+  convert "$base_ios" $icon_opts -resize 40x40!         "$dest_ios/AppIcon-20x20@2x-1.png"
+  convert "$base_ios" $icon_opts -resize 60x60!         "$dest_ios/AppIcon-20x20@3x.png"
+  convert "$base_ios" $icon_opts -resize 29x29!         "$dest_ios/AppIcon-29x29@1x.png"
+  convert "$base_ios" $icon_opts -resize 58x58!         "$dest_ios/AppIcon-29x29@2x.png"
+  convert "$base_ios" $icon_opts -resize 58x58!         "$dest_ios/AppIcon-29x29@2x-1.png"
+  convert "$base_ios" $icon_opts -resize 87x87!         "$dest_ios/AppIcon-29x29@3x.png"
+  convert "$base_ios" $icon_opts -resize 40x40!         "$dest_ios/AppIcon-40x40@1x.png"
+  convert "$base_ios" $icon_opts -resize 80x80!         "$dest_ios/AppIcon-40x40@2x.png"
+  convert "$base_ios" $icon_opts -resize 80x80!         "$dest_ios/AppIcon-40x40@2x-1.png"
+  convert "$base_ios" $icon_opts -resize 120x120!       "$dest_ios/AppIcon-40x40@3x.png"
+  convert "$base_ios" $icon_opts -resize 120x120!       "$dest_ios/AppIcon-60x60@2x.png"
+  convert "$base_ios" $icon_opts -resize 180x180!       "$dest_ios/AppIcon-60x60@3x.png"
+  convert "$base_ios" $icon_opts -resize 76x76!         "$dest_ios/AppIcon-76x76@1x.png"
+  convert "$base_ios" $icon_opts -resize 152x152!       "$dest_ios/AppIcon-76x76@2x.png"
+  convert "$base_ios" $icon_opts -resize 167x167!       "$dest_ios/AppIcon-83.5x83.5@2x.png"
+  convert "$base_ios" $icon_opts -resize 1024x1024!     "$dest_ios/AppIcon-512@2x.png"
   
   ## Android files
   ### Ensure needed directories exist
@@ -48,25 +48,25 @@ else
   mkdir -p "$dest_android/drawable-port-xxxhdpi"
   
   ### Add margin for adaptive icons
-  add_margin="-background white -gravity center -scale 248x248 -extent 384x384"
+  add_margin="-background #00121F -gravity center -scale 248x248 -extent 384x384"
   
   ## -adaptive-blur 1,1
   
-  convert "$base_light" $icon_opts -resize 48x48!                   "$dest_android/mipmap-mdpi/ic_launcher.png"
-  convert "$base_light" $icon_opts -resize 108x108!   $add_margin   "$dest_android/mipmap-mdpi/ic_launcher_foreground.png"
-  convert "$base_light" $icon_opts -resize 48x48!                   "$dest_android/mipmap-mdpi/ic_launcher_round.png"
-  convert "$base_light" $icon_opts -resize 72x72!                   "$dest_android/mipmap-hdpi/ic_launcher.png"
-  convert "$base_light" $icon_opts -resize 162x162!   $add_margin   "$dest_android/mipmap-hdpi/ic_launcher_foreground.png"
-  convert "$base_light" $icon_opts -resize 72x72!                   "$dest_android/mipmap-hdpi/ic_launcher_round.png"
-  convert "$base_light" $icon_opts -resize 96x96!                   "$dest_android/mipmap-xhdpi/ic_launcher.png"
-  convert "$base_light" $icon_opts -resize 216x216!   $add_margin   "$dest_android/mipmap-xhdpi/ic_launcher_foreground.png"
-  convert "$base_light" $icon_opts -resize 96x96!                   "$dest_android/mipmap-xhdpi/ic_launcher_round.png"
-  convert "$base_light" $icon_opts -resize 144x144!                 "$dest_android/mipmap-xxhdpi/ic_launcher.png"
-  convert "$base_light" $icon_opts -resize 324x324!   $add_margin   "$dest_android/mipmap-xxhdpi/ic_launcher_foreground.png"
-  convert "$base_light" $icon_opts -resize 144x144!                 "$dest_android/mipmap-xxhdpi/ic_launcher_round.png"
-  convert "$base_light" $icon_opts -resize 192x192!                 "$dest_android/mipmap-xxxhdpi/ic_launcher.png"
-  convert "$base_light" $icon_opts -resize 432x432!   $add_margin   "$dest_android/mipmap-xxxhdpi/ic_launcher_foreground.png"
-  convert "$base_light" $icon_opts -resize 192x192!                 "$dest_android/mipmap-xxxhdpi/ic_launcher_round.png"
+  convert "$base_android" $icon_opts -resize 48x48!                   "$dest_android/mipmap-mdpi/ic_launcher.png"
+  convert "$base_android" $icon_opts -resize 108x108!   $add_margin   "$dest_android/mipmap-mdpi/ic_launcher_foreground.png"
+  convert "$base_android" $icon_opts -resize 48x48!                   "$dest_android/mipmap-mdpi/ic_launcher_round.png"
+  convert "$base_android" $icon_opts -resize 72x72!                   "$dest_android/mipmap-hdpi/ic_launcher.png"
+  convert "$base_android" $icon_opts -resize 162x162!   $add_margin   "$dest_android/mipmap-hdpi/ic_launcher_foreground.png"
+  convert "$base_android" $icon_opts -resize 72x72!                   "$dest_android/mipmap-hdpi/ic_launcher_round.png"
+  convert "$base_android" $icon_opts -resize 96x96!                   "$dest_android/mipmap-xhdpi/ic_launcher.png"
+  convert "$base_android" $icon_opts -resize 216x216!   $add_margin   "$dest_android/mipmap-xhdpi/ic_launcher_foreground.png"
+  convert "$base_android" $icon_opts -resize 96x96!                   "$dest_android/mipmap-xhdpi/ic_launcher_round.png"
+  convert "$base_android" $icon_opts -resize 144x144!                 "$dest_android/mipmap-xxhdpi/ic_launcher.png"
+  convert "$base_android" $icon_opts -resize 324x324!   $add_margin   "$dest_android/mipmap-xxhdpi/ic_launcher_foreground.png"
+  convert "$base_android" $icon_opts -resize 144x144!                 "$dest_android/mipmap-xxhdpi/ic_launcher_round.png"
+  convert "$base_android" $icon_opts -resize 192x192!                 "$dest_android/mipmap-xxxhdpi/ic_launcher.png"
+  convert "$base_android" $icon_opts -resize 432x432!   $add_margin   "$dest_android/mipmap-xxxhdpi/ic_launcher_foreground.png"
+  convert "$base_android" $icon_opts -resize 192x192!                 "$dest_android/mipmap-xxxhdpi/ic_launcher_round.png"
 
   ## Launch screen
   ### Add margin for center logo
@@ -83,15 +83,15 @@ else
   android_splash_opts="-fuzz 30% -background $background_color -gravity center -extent 600x1600 -matte -bordercolor none -border 1 -fill $border_color"
 
   ## iOS
-  convert "$base_dark" $ios_splash_opts -resize 2732x2732!   $add_margin  "$dest_ios_splash/splash-2732x2732.png"
-  convert "$base_dark" $ios_splash_opts -resize 2732x2732!   $add_margin  "$dest_ios_splash/splash-2732x2732-1.png"
-  convert "$base_dark" $ios_splash_opts -resize 2732x2732!   $add_margin  "$dest_ios_splash/splash-2732x2732-2.png"
+  convert "$base_splash" $ios_splash_opts -resize 2732x2732!   $add_margin  "$dest_ios_splash/splash-2732x2732.png"
+  convert "$base_splash" $ios_splash_opts -resize 2732x2732!   $add_margin  "$dest_ios_splash/splash-2732x2732-1.png"
+  convert "$base_splash" $ios_splash_opts -resize 2732x2732!   $add_margin  "$dest_ios_splash/splash-2732x2732-2.png"
   
   ## Android
-  convert "$base_dark" -resize 96x96! $android_splash_opts -draw "$leftside_top" -draw "$leftside_bottom" -draw "$topside_left" -draw "$topside_right" "$dest_android/drawable/splash.9.png"
-  convert "$base_dark" -resize 96x96! $android_splash_opts -draw "$leftside_top" -draw "$leftside_bottom" -draw "$topside_left" -draw "$topside_right" "$dest_android/drawable-port-mdpi/splash.9.png"
-  convert "$base_dark" -resize 256x256! $android_splash_opts -draw "$leftside_top" -draw "$leftside_bottom" -draw "$topside_left" -draw "$topside_right" "$dest_android/drawable-port-hdpi/splash.9.png"
-  convert "$base_dark" -resize 256x256! $android_splash_opts -draw "$leftside_top" -draw "$leftside_bottom" -draw "$topside_left" -draw "$topside_right" "$dest_android/drawable-port-xhdpi/splash.9.png"
-  convert "$base_dark" -resize 256x256! $android_splash_opts -draw "$leftside_top" -draw "$leftside_bottom" -draw "$topside_left" -draw "$topside_right" "$dest_android/drawable-port-xxhdpi/splash.9.png"
-  convert "$base_dark" -resize 512x512! $android_splash_opts -draw "$leftside_top" -draw "$leftside_bottom" -draw "$topside_left" -draw "$topside_right" "$dest_android/drawable-port-xxxhdpi/splash.9.png"
+  convert "$base_splash" -resize 96x96! $android_splash_opts -draw "$leftside_top" -draw "$leftside_bottom" -draw "$topside_left" -draw "$topside_right" "$dest_android/drawable/splash.9.png"
+  convert "$base_splash" -resize 96x96! $android_splash_opts -draw "$leftside_top" -draw "$leftside_bottom" -draw "$topside_left" -draw "$topside_right" "$dest_android/drawable-port-mdpi/splash.9.png"
+  convert "$base_splash" -resize 256x256! $android_splash_opts -draw "$leftside_top" -draw "$leftside_bottom" -draw "$topside_left" -draw "$topside_right" "$dest_android/drawable-port-hdpi/splash.9.png"
+  convert "$base_splash" -resize 256x256! $android_splash_opts -draw "$leftside_top" -draw "$leftside_bottom" -draw "$topside_left" -draw "$topside_right" "$dest_android/drawable-port-xhdpi/splash.9.png"
+  convert "$base_splash" -resize 256x256! $android_splash_opts -draw "$leftside_top" -draw "$leftside_bottom" -draw "$topside_left" -draw "$topside_right" "$dest_android/drawable-port-xxhdpi/splash.9.png"
+  convert "$base_splash" -resize 512x512! $android_splash_opts -draw "$leftside_top" -draw "$leftside_bottom" -draw "$topside_left" -draw "$topside_right" "$dest_android/drawable-port-xxxhdpi/splash.9.png"
 fi
