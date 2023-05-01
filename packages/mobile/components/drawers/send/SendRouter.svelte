@@ -34,7 +34,7 @@
     let initialExpirationDate: ExpirationTime = getInitialExpirationDate()
 
     $: transactionDetails = get(newTransactionDetails)
-    $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
+    $: $sendRoute, expirationDate, giftStorageDeposit, refreshSendConfirmationState()
 
     onMount(() => {
         if (transactionDetails.type === NewTransactionType.TokenTransfer && transactionDetails?.assetId) {
