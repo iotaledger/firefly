@@ -6,14 +6,13 @@
     import { closePopup } from '@auxiliary/popup'
     import { Platform } from '@core/app'
     import { activeAccounts, activeProfile } from '@core/profile'
-    import { deepCopy } from '@core/utils'
     import { registerProposalsForAccounts } from '@contexts/governance'
 
-    export let node: INode = deepCopy(EMPTY_NODE)
+    export let node: INode = structuredClone(EMPTY_NODE)
     export let isEditingNode: boolean = false
     export let onSuccess: (..._: any[]) => void
 
-    const currentNode = deepCopy(node)
+    const currentNode = structuredClone(node)
 
     let nodeConfigurationForm: NodeConfigurationForm
     let isBusy = false
