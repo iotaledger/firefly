@@ -65,11 +65,6 @@
         statusMessage = ''
         error = false
 
-        // Copilot describe what this is doing:
-        // 1. Remove all line breaks
-        // 2. Remove all double spaces
-        // 3. Remove all leading and trailing spaces
-
         content = content.replace(/\r/g, ' ').replace(/\n/g, ' ').replace(/  +/g, ' ')
 
         const trimmedContent = content?.trim()
