@@ -1,12 +1,24 @@
 <script lang="ts">
-    import { selectedConnectedChain } from '@core/network'
+    import { selectedChainIndex } from '@core/network'
     import { appSettings } from '@core/app'
     import { QR, AddressBox, FontWeight } from '@ui'
     import { Text } from '@ui'
     import { localize } from '@core/i18n'
+    import { selectedAccount } from '@core/account'
 
     let addressBoxElement: AddressBox
-    $: chain = $selectedConnectedChain
+    let address: string = ''
+
+    $: $selectedChainIndex, $selectedAccount, (address = getAddress())
+    function getAddress(): string {
+        if ($selectedChainIndex === 0) {
+            return $selectedAccount.depositAddress
+        } else {
+            // TODO: Get address from selected chain
+            // const chain = $network.getChain($selectedChainIndex - 1)
+            return ''
+        }
+    }
 
     function onReceiveClick(): void {
         addressBoxElement.copyAddress()
@@ -20,7 +32,7 @@
         on:click={onReceiveClick}
     >
         <inner-box class="flex flex-col space-y-6 pt-7 pb-6">
-            <QR data={chain.address} />
+            <QR data={address} />
             <div class="flex flex-col space-y-1">
                 <Text fontWeight={FontWeight.medium} color="gray-600" darkColor="white"
                     >{localize('general.myAddress')}</Text
@@ -29,7 +41,7 @@
                     bind:this={addressBoxElement}
                     clearBackground
                     clearPadding
-                    address={chain.address}
+                    {address}
                     fontSize="sm"
                     isCopyable
                 />
