@@ -20,7 +20,7 @@ export function dateIsAfterOtherDate(first: Date, second: Date): boolean {
  * Get if a date is considered "recent". Less than 1 month is considered recent.
  */
 export function isRecentDate(date: Date): { lessThanAMonth: boolean; lessThanThreeMonths: boolean } {
-    if (!(date instanceof Date)) {
+    if (!isValidDate(date)) {
         return null
     }
 
@@ -40,11 +40,16 @@ export function isRecentDate(date: Date): { lessThanAMonth: boolean; lessThanThr
     }
 }
 
+// https://stackoverflow.com/questions/643782/how-to-check-whether-an-object-is-a-date
+export function isValidDate(date: Date): boolean {
+    return !!date && date instanceof Date && !isNaN(date.getTime())
+}
+
 /**
  * Get difference between two dates in weeks
  */
 export function diffDates(firstDate: Date, secondDate: Date): IDateDifference {
-    if (!(firstDate instanceof Date) || !(secondDate instanceof Date)) {
+    if (!isValidDate(firstDate) || !isValidDate(secondDate)) {
         return null
     }
 

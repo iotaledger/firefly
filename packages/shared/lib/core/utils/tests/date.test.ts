@@ -3,6 +3,7 @@ import {
     dateIsBeforeOtherDate,
     dateIsAfterOtherDate,
     isRecentDate,
+    isValidDate,
     diffDates,
     milestoneToDate,
 } from '../date'
@@ -89,6 +90,21 @@ describe('isRecentDate', () => {
         date.setDate(date.getDate() + 10)
         const result = isRecentDate(date)
         expect(result).toBe(null)
+    })
+})
+
+describe('isValidDate', () => {
+    it('should return true for a past date', () => {
+        expect(isValidDate(new Date(Date.now() - 100_000_000))).toBe(true)
+    })
+    it('should return true for a future date', () => {
+        expect(isValidDate(new Date(Date.now() + 100_000_000))).toBe(true)
+    })
+    it('should return true for a present date', () => {
+        expect(isValidDate(new Date())).toBe(true)
+    })
+    it('should return false if date is instantiated with a string', () => {
+        expect(isValidDate(new Date(''))).toBe(false)
     })
 })
 
