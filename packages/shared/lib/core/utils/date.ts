@@ -40,6 +40,11 @@ export function isRecentDate(date: Date): { lessThanAMonth: boolean; lessThanThr
     }
 }
 
+// https://stackoverflow.com/questions/643782/how-to-check-whether-an-object-is-a-date
+export function isValidDate(date: Date): boolean {
+    return !!date && date instanceof Date && !isNaN(date.getTime())
+}
+
 /**
  * Get difference between two dates in weeks
  */

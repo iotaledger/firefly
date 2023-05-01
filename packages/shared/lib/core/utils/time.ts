@@ -2,6 +2,7 @@ import { localize } from '@core/i18n'
 
 import { HOURS_PER_DAY, MILLISECONDS_PER_SECOND, MINUTES_PER_HOUR, SECONDS_PER_MINUTE } from './constants'
 import { Duration } from './types'
+import { isValidDate } from './'
 
 /**
  * Returns true if a given expiration date/time is valid or
@@ -14,11 +15,6 @@ export function isValidExpirationDateTime(expirationDateTime: Date): boolean {
     } else {
         return false
     }
-}
-
-// https://stackoverflow.com/questions/643782/how-to-check-whether-an-object-is-a-date
-export function isValidDate(date: Date): boolean {
-    return !!date && date instanceof Date && !isNaN(date.getTime())
 }
 
 /**
