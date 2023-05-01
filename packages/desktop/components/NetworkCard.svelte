@@ -1,27 +1,40 @@
 <script lang="ts">
+    import { onMount } from 'svelte'
     import { localize } from '@core/i18n'
-    import { NetworkConfigRoute, networkConfigRouter } from '@desktop/routers'
-    import { ClickableTile, Text, Icon, FontWeight, TextType, NetworkIcon, NetworkStatusPill } from '@ui'
+    import { ClickableTile, FontWeight, Icon, NetworkIcon, NetworkStatusPill, Text, TextType } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { truncateString } from '@core/utils'
-    import { NetworkHealth, NetworkId, selectedChainIndex } from '@core/network'
+    import { truncateString, UiEventFunction } from '@core/utils'
+    import { IChain, IIscpChainConfiguration, INetwork, NetworkHealth, NetworkId, networkStatus } from '@core/network'
+    import { selectedAccount } from '@core/account'
 
-    export let name: string
-    export let address: string
-    export let status: NetworkHealth
-    export let index: number
+    export let network: INetwork
+    export let chain: IChain
+    export let onCardClick: UiEventFunction
+    export let onQrCodeIconClick: UiEventFunction
 
-    function onTileClick(): void {
-        $networkConfigRouter.goTo(NetworkConfigRoute.ChainInformation)
+    let name = ''
+    let address = ''
+    let status: NetworkHealth
+
+    function setNetworkCardData(): void {
+        if (network) {
+            name = network.getMetadata().name
+            address = $selectedAccount.depositAddress
+            status = $networkStatus.health
+        } else if (chain) {
+            const configuration = chain.getConfiguration() as IIscpChainConfiguration
+            name = configuration.name
+            address = configuration.aliasAddress
+            status = NetworkHealth.Operational
+        }
     }
 
-    function onQrCodeIconClick(): void {
-        $selectedChainIndex = index
-        $networkConfigRouter.goTo(NetworkConfigRoute.ChainDepositAddress)
-    }
+    onMount(() => {
+        setNetworkCardData()
+    })
 </script>
 
-<ClickableTile classes="bg-transparent border border-solid border-gray-200" onClick={onTileClick}>
+<ClickableTile classes="bg-white border border-solid border-gray-200" onClick={onCardClick}>
     <div class="w-full flex flex-col gap-5">
         <div class="flex flex-row justify-between items-center">
             <div class="flex flex-row gap-2 items-center">
