@@ -1,4 +1,6 @@
+import { PastTimeUnit } from '../enums'
+
 export interface IDateDifference {
-    unit: string
+    unit: PastTimeUnit
     value?: number
 }
