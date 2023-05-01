@@ -4,13 +4,15 @@
     import { resetNewTokenTransactionDetails } from '@core/wallet'
     import { openPopup, PopupId } from '@auxiliary/popup'
     import { OnboardingButton } from '@ui'
+    import { SendFlowRouter, sendFlowRouter } from '@views/dashboard/send-flow'
 
     function onSendClick(): void {
         resetNewTokenTransactionDetails()
         resetLedgerPreparedOutput()
         resetShowInternalVerificationPopup()
+        sendFlowRouter.set(new SendFlowRouter(undefined))
         openPopup({
-            id: PopupId.SendForm,
+            id: PopupId.SendFlow,
             overflow: true,
         })
     }
