@@ -17,6 +17,6 @@ export function buildPersistedNetworkFromNodeInfoResponse(
         coinType: _coinType,
         protocol: nodeInfoResponse?.nodeInfo?.protocol,
         baseToken: { standard: TokenStandard.BaseToken, ...nodeInfoResponse?.nodeInfo?.baseToken },
-        chains: [],
+        chainConfigurations: [],
     }
 }

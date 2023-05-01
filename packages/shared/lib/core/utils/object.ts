@@ -8,7 +8,3 @@ export function resolveObjectPath(object: Record<string, unknown>, path: string,
         defaultValue
     )
 }
-
-export function deepCopy<T>(object: T): T {
-    return JSON.parse(JSON.stringify(object)) as T
-}
