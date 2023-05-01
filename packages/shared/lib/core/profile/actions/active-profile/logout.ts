@@ -1,27 +1,24 @@
-import { resetSelectedAccountIndex } from '@core/account'
+import { get } from 'svelte/store'
+
+import { resetSelectedAccountIndex } from '@core/account/actions'
 import {
     clearSelectedParticipationEventStatus,
     resetProposalOverviews,
     resetRegisteredProposals,
 } from '@contexts/governance/stores'
-import { isPollingLedgerDeviceStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
+import { stopPollingLedgerNanoStatus } from '@core/ledger/actions'
+import { isPollingLedgerDeviceStatus } from '@core/ledger/stores'
 import { clearMarketPricesPoll } from '@core/market/actions'
-import { clearChainStatusesPoll, clearNetworkPoll } from '@core/network'
-import {
-    activeAccounts,
-    activeProfile,
-    isLedgerProfile,
-    isSoftwareProfile,
-    lockStronghold,
-    resetActiveProfile,
-    isDestroyingManager,
-} from '@core/profile'
-import { destroyProfileManager, IProfileManager, unsubscribeFromWalletApiEvents } from '@core/profile-manager'
+import { clearChainStatusesPoll, clearNetworkPoll } from '@core/network/actions'
+import { stopDownloadingNftMediaFromQueue } from '@core/nfts/actions'
+import { lockStronghold, resetActiveProfile } from '@core/profile/actions'
+import { activeAccounts, activeProfile, isSoftwareProfile, isDestroyingManager } from '@core/profile/stores'
+import { isLedgerProfile } from '@core/profile/utils'
+import { destroyProfileManager, unsubscribeFromWalletApiEvents } from '@core/profile-manager/actions'
+import { IProfileManager } from '@core/profile-manager/interfaces'
 import { profileManager } from '@core/profile-manager/stores'
 import { routerManager } from '@core/router/stores'
-import { get } from 'svelte/store'
-import { clearFilters } from '@core/utils'
-import { stopDownloadingNftMediaFromQueue } from '@core/nfts'
+import { clearFilters } from '@core/utils/clearFilters'
 
 /**
  * Logout from active profile

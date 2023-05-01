@@ -1,17 +1,17 @@
+import { get } from 'svelte/store'
+
 import Web3 from 'web3'
 
+import { NetworkHealth } from '../enums'
 import { IBlock, IChain, IChainStatus, IIscpChainConfiguration, IIscpChainMetadata } from '../interfaces'
+import { chainStatuses } from '../stores'
 import { ChainConfiguration, ChainMetadata, Web3Provider } from '../types'
-import { NetworkHealth } from '@core/network'
-import { chainStatuses } from '@core/network/stores/chain-statuses.store'
-import { get } from 'svelte/store'
 
 export class IscpChain implements IChain {
     private readonly _provider: Web3Provider
     private readonly _configuration: IIscpChainConfiguration
 
     private _metadata: IIscpChainMetadata
-    private _status: IChainStatus
 
     constructor(payload: IIscpChainConfiguration) {
         try {

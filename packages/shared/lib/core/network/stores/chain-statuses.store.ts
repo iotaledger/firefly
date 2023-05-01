@@ -1,4 +1,4 @@
 import { writable } from 'svelte/store'
-import { ChainStatuses } from '../types'
+import { IChainStatus } from '../interfaces'
 
-export const chainStatuses = writable<ChainStatuses>({})
+export const chainStatuses = writable<{ [chainId: string]: IChainStatus }>({})
