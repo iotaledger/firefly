@@ -6,7 +6,7 @@ import { isPollingLedgerDeviceStatus } from '../stores'
 
 import { getAndUpdateLedgerNanoStatus } from './getAndUpdateLedgerNanoStatus'
 
-let intervalTimer
+let intervalTimer: ReturnType<typeof setInterval>
 
 export function pollLedgerNanoStatus(config?: ILedgerNanoStatusPollingConfiguration): void {
     const { pollInterval, profileManager } = deconstructLedgerNanoStatusPollingConfiguration(config)

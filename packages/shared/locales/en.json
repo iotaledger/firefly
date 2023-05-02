@@ -43,7 +43,7 @@
                         "body": "Support for custom networks and/or nodes"
                     }
                 },
-                "setupCustomNetworkConnection": {
+                "setupCustomNetwork": {
                     "title": "Connect to a custom network or node",
                     "body": "Fill the form with the node information and connect to a custom network or node."
                 }
@@ -415,17 +415,13 @@
                 "title": "About",
                 "description": ""
             },
-            "createDeveloperProfile": {
-                "title": "Create Developer Profile",
-                "description": ""
-            },
-            "createNormalProfile": {
-                "title": "Create Normal Profile",
-                "description": ""
-            },
             "reportAnIssue": {
                 "title": "Report an issue",
                 "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
+            },
+            "developerToggle": {
+                "title": "Developer Mode",
+                "description": "Switch developer mode on to enable more features in experimental state"
             }
         },
         "login": {
@@ -491,7 +487,9 @@
             "drawers": {
                 "networkConfig": {
                     "addChain": {
-                        "title": "Add chain",
+                        "title": "Add chain"
+                    },
+                    "chain": {
                         "chainId": "Chain ID",
                         "aliasAddress": "Alias Address",
                         "iscpEndpoint": "ISCP Endpoint",
@@ -1353,7 +1351,8 @@
         "changeNode": "Change node",
         "stopVoting": "Stop voting",
         "revote": "Revote",
-        "skipAndKeep": "Skip and keep old password"
+        "skipAndKeep": "Skip and keep old password",
+        "addChain": "Add chain"
     },
     "general": {
         "recipient": "Recipient",

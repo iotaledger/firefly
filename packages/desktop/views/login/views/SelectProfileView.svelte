@@ -1,6 +1,6 @@
 <script lang="ts">
     import { PopupId, openPopup } from '@auxiliary/popup'
-    import { initialiseOnboardingFlow, shouldBeDeveloperProfile } from '@contexts/onboarding'
+    import { initialiseOnboardingProfile, onboardingProfile, shouldBeDeveloperProfile } from '@contexts/onboarding'
     import {
         AppContext,
         isStrongholdUpdated,
@@ -9,11 +9,12 @@
         needsToAcceptLatestTermsOfService,
     } from '@core/app'
     import { localize } from '@core/i18n'
-    import { NetworkId } from '@core/network'
-    import { ProfileType, loadPersistedProfileIntoActiveProfile, profiles } from '@core/profile'
-    import { OnboardingRoute, loginRouter, onboardingRouter, routerManager } from '@core/router'
+    import { ProfileType, loadPersistedProfileIntoActiveProfile, profiles, removeProfileFolder } from '@core/profile'
+    import { destroyProfileManager } from '@core/profile-manager/actions'
+    import { loginRouter, routerManager } from '@core/router'
     import features from '@features/features'
     import { Icon, Logo, Profile } from '@ui'
+    import { onMount } from 'svelte'
 
     function onContinueClick(profileId: string): void {
         loadPersistedProfileIntoActiveProfile(profileId)
@@ -21,13 +22,8 @@
     }
 
     async function onAddProfileClick(): Promise<void> {
-        const isDeveloperProfile = shouldBeDeveloperProfile()
-        await initialiseOnboardingFlow({
-            isDeveloperProfile,
-            ...(!isDeveloperProfile && { networkId: NetworkId.Shimmer }),
-        })
+        await initialiseOnboardingProfile(shouldBeDeveloperProfile())
         $routerManager.goToAppContext(AppContext.Onboarding)
-        $onboardingRouter.goTo(isDeveloperProfile ? OnboardingRoute.NetworkSetup : OnboardingRoute.ProfileSetup)
     }
 
     $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTermsOfService()) {
@@ -37,6 +33,17 @@
             preventClose: true,
         })
     }
+
+    onMount(async () => {
+        // Clean up if user has navigated back to this view from onboarding
+        if ($onboardingProfile) {
+            if ($onboardingProfile.hasInitialisedProfileManager) {
+                await destroyProfileManager()
+                await removeProfileFolder($onboardingProfile.id)
+            }
+            $onboardingProfile = undefined
+        }
+    })
 </script>
 
 <section class="flex flex-col justify-center items-center h-full bg-white dark:bg-gray-900 px-40 pt-48 pb-20">

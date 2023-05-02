@@ -1,6 +1,6 @@
-import { activeProfile, login, UnableToFindProfileSetupTypeError } from '@core/profile'
+import { activeProfile, login } from '@core/profile'
 import { get } from 'svelte/store'
-import { ProfileSetupType } from '../enums'
+import { OnboardingType } from '../enums'
 import { onboardingProfile } from '../stores'
 import { createNewProfileFromOnboardingProfile } from './createNewProfileFromOnboardingProfile'
 
@@ -12,12 +12,9 @@ export function completeOnboardingProcess(): void {
         createNewProfileFromOnboardingProfile()
     }
 
-    const setupType = get(onboardingProfile)?.setupType
-    if (!setupType) {
-        throw new UnableToFindProfileSetupTypeError()
-    }
+    const onboardingType = get(onboardingProfile)?.onboardingType
 
-    const shouldRecoverAccounts = setupType === ProfileSetupType.Recovered
-    const shouldCreateAccount = setupType === ProfileSetupType.New
+    const shouldRecoverAccounts = onboardingType === OnboardingType.Restore
+    const shouldCreateAccount = onboardingType === OnboardingType.Create
     void login({ isFromOnboardingFlow: true, shouldRecoverAccounts, shouldCreateAccount })
 }

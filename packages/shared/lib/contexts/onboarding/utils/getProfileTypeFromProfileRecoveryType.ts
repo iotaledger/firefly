@@ -1,6 +1,6 @@
 import { ProfileType } from '@core/profile'
-import { ProfileRecoveryType } from '@contexts/onboarding'
+import { RestoreProfileType } from '@contexts/onboarding'
 
-export function getProfileTypeFromProfileRecoveryType(recoveryType: ProfileRecoveryType): ProfileType {
-    return recoveryType === ProfileRecoveryType.Ledger ? ProfileType.Ledger : ProfileType.Software
+export function getProfileTypeFromProfileRecoveryType(restoreProfileType: RestoreProfileType): ProfileType {
+    return restoreProfileType === RestoreProfileType.Ledger ? ProfileType.Ledger : ProfileType.Software
 }

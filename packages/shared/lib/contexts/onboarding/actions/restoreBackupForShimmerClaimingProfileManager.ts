@@ -1,15 +1,13 @@
-import { get } from 'svelte/store'
-
-import { getStorageDirectoryOfProfile } from '@core/profile'
+import { NetworkId } from '@core/network/enums'
 import { profileManager } from '@core/profile-manager'
-
+import { getStorageDirectoryOfProfile } from '@core/profile/utils'
+import { get } from 'svelte/store'
 import {
     getShimmerClaimingProfileManagerStorageDirectory,
     restoreBackupByCopyingFile,
     validateStrongholdCoinType,
 } from '../helpers'
 import { onboardingProfile, shimmerClaimingProfileManager } from '../stores'
-import { NetworkId } from '@core/network/enums'
 
 export async function restoreBackupForShimmerClaimingProfileManager(strongholdPassword: string): Promise<void> {
     try {

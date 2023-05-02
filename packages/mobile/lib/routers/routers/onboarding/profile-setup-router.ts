@@ -1,6 +1,6 @@
 import { get, writable } from 'svelte/store'
 
-import { onboardingProfile, ProfileSetupType } from '@contexts/onboarding'
+import { onboardingProfile, OnboardingType } from '@contexts/onboarding'
 import { ProfileType } from '@core/profile'
 import { Subrouter } from '@core/router'
 
@@ -21,12 +21,12 @@ export class ProfileSetupRouter extends Subrouter<ProfileSetupRoute> {
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
             case ProfileSetupRoute.Setup: {
-                const setupType = get(onboardingProfile)?.setupType
-                if (setupType === ProfileSetupType.Claimed) {
+                const onboardingType = get(onboardingProfile)?.onboardingType
+                if (onboardingType === OnboardingType.Claim) {
                     nextRoute = ProfileSetupRoute.SetupClaimed
-                } else if (setupType === ProfileSetupType.New) {
+                } else if (onboardingType === OnboardingType.Create) {
                     nextRoute = ProfileSetupRoute.EnterName
-                } else if (setupType === ProfileSetupType.Recovered) {
+                } else if (onboardingType === OnboardingType.Restore) {
                     nextRoute = ProfileSetupRoute.SetupRecovered
                 }
                 break
