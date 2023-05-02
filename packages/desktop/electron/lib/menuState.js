@@ -1,6 +1,5 @@
 export const menuState = {
     enabled: true,
-    canCreateNewProfile: false,
     strings: {
         about: 'About Firefly',
         checkForUpdates: 'Check for Updates',
@@ -9,8 +8,6 @@ export const menuState = {
         security: 'Security',
         advanced: 'Advanced',
         errorLog: 'Error Log',
-        createDeveloperProfile: 'Create Developer Profile',
-        createNormalProfile: 'Create Normal Profile',
         diagnostics: 'Diagnostics',
         logout: 'Log Out',
         hide: 'Hide',

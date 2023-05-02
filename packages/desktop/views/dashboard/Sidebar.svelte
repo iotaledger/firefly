@@ -24,7 +24,8 @@
     $: lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
     $: isBackupSafe = lastBackupDate && isRecentDate(lastBackupDate)?.lessThanThreeMonths
 
-    const sidebarTabs: ISidebarTab[] = [
+    let sidebarTabs: ISidebarTab[]
+    $: sidebarTabs = [
         ...(features?.wallet?.enabled
             ? [
                   {
