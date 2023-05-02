@@ -11,7 +11,7 @@
         getProfileTypeFromProfileRecoveryType,
         initialiseProfileManagerFromOnboardingProfile,
         onboardingProfile,
-        ProfileRecoveryType,
+        RestoreProfileType,
         resetOnboardingProfileWithProfileManager,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
@@ -19,20 +19,20 @@
     const title = localize('views.onboarding.profileSetup.setupClaimed.title')
 
     let isBusy = {
-        [ProfileRecoveryType.Mnemonic]: false,
-        [ProfileRecoveryType.Stronghold]: false,
-        [ProfileRecoveryType.Ledger]: false,
+        [RestoreProfileType.Mnemonic]: false,
+        [RestoreProfileType.Stronghold]: false,
+        [RestoreProfileType.Ledger]: false,
     }
 
     const networkId = $onboardingProfile?.network?.id
 
-    async function onProfileRecoverySelectionClick(recoveryType: ProfileRecoveryType): Promise<void> {
+    async function onProfileRecoverySelectionClick(restoreProfileType: RestoreProfileType): Promise<void> {
         if (Object.keys(isBusy).some((key) => isBusy[key])) {
             return
         } else {
-            isBusy = { ...isBusy, [recoveryType]: true }
-            const type = getProfileTypeFromProfileRecoveryType(recoveryType)
-            updateOnboardingProfile({ type, recoveryType, shimmerClaimingAccounts: [] })
+            isBusy = { ...isBusy, [restoreProfileType]: true }
+            const type = getProfileTypeFromProfileRecoveryType(restoreProfileType)
+            updateOnboardingProfile({ type, restoreProfileType, shimmerClaimingAccounts: [] })
             await initialiseProfileManagerFromOnboardingProfile(true)
             await createShimmerClaimingProfileManager()
             $profileSetupRouter.next()
@@ -58,18 +58,18 @@
         <OnboardingButton
             primaryText={localize('views.onboarding.profileSetup.setupRecovered.importMnemonic')}
             icon="language"
-            busy={isBusy[ProfileRecoveryType.Mnemonic]}
+            busy={isBusy[RestoreProfileType.Mnemonic]}
             hidden={features?.onboarding?.[networkId]?.claimRewards?.recoveryPhrase?.hidden}
             disabled={!features?.onboarding?.[networkId]?.claimRewards?.recoveryPhrase?.enabled}
-            onClick={() => onProfileRecoverySelectionClick(ProfileRecoveryType.Mnemonic)}
+            onClick={() => onProfileRecoverySelectionClick(RestoreProfileType.Mnemonic)}
         />
         <OnboardingButton
             primaryText={localize('views.onboarding.profileSetup.setupRecovered.importFile')}
             icon="file"
-            busy={isBusy[ProfileRecoveryType.Stronghold]}
+            busy={isBusy[RestoreProfileType.Stronghold]}
             hidden={features?.onboarding?.[networkId]?.claimRewards?.strongholdBackup?.hidden}
             disabled={!features?.onboarding?.[networkId]?.claimRewards?.strongholdBackup?.enabled}
-            onClick={() => onProfileRecoverySelectionClick(ProfileRecoveryType.Stronghold)}
+            onClick={() => onProfileRecoverySelectionClick(RestoreProfileType.Stronghold)}
         />
     </div>
 </OnboardingLayout>

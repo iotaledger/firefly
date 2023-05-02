@@ -55,7 +55,7 @@
                         }
                     }
                 },
-                "setupCustomNetworkConnection": {
+                "setupCustomNetwork": {
                     "title": "Подключение к личной сети",
                     "body": "Заполните форму информацией об узле и подключитесь к личной сети."
                 }

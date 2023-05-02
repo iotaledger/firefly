@@ -2,10 +2,10 @@ import { get, writable } from 'svelte/store'
 
 import {
     onboardingProfile,
-    ProfileRecoveryType,
-    ProfileSetupType,
+    RestoreProfileType,
     shouldBeDeveloperProfile,
     updateOnboardingProfile,
+    OnboardingType,
 } from '@contexts/onboarding'
 
 import { hasCompletedAppSetup } from '@core/app'
@@ -25,11 +25,11 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
     }
 
     resetRecovery(): void {
-        updateOnboardingProfile({ type: null, recoveryType: null })
+        updateOnboardingProfile({ type: null, restoreProfileType: null })
         this.filterHistory(OnboardingRoute.ProfileRecovery)
         get(profileRecoveryRouter).reset()
-        const profileSetupType = get(onboardingProfile)?.setupType
-        if (profileSetupType === ProfileSetupType.Claimed) {
+        const onboardingType = get(onboardingProfile)?.onboardingType
+        if (onboardingType === OnboardingType.Claim) {
             profileSetupRoute.set(ProfileSetupRoute.SetupClaimed)
         } else {
             profileSetupRoute.set(ProfileSetupRoute.SetupRecovered)
@@ -59,12 +59,12 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 if (!_onboardingProfile?.mustVisitProfileName) {
                     const profileType = _onboardingProfile?.type
                     if (profileType === ProfileType.Software) {
-                        const profileSetupType = _onboardingProfile?.setupType
-                        if (profileSetupType === ProfileSetupType.New) {
+                        const onboardingType = _onboardingProfile?.onboardingType
+                        if (onboardingType === OnboardingType.Create) {
                             nextRoute = OnboardingRoute.StrongholdSetup
                         } else {
-                            const profileRecoveryType = _onboardingProfile?.recoveryType
-                            if (profileRecoveryType === ProfileRecoveryType.Stronghold) {
+                            const restoreProfileType = _onboardingProfile?.restoreProfileType
+                            if (restoreProfileType === RestoreProfileType.Stronghold) {
                                 nextRoute = OnboardingRoute.StorageProtectionSetup
                             } else {
                                 nextRoute = OnboardingRoute.StrongholdSetup
@@ -84,10 +84,10 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 if (profileType === ProfileType.Ledger) {
                     nextRoute = OnboardingRoute.LedgerSetup
                 } else {
-                    const profileSetupType = _onboardingProfile?.setupType
-                    if (profileSetupType === ProfileSetupType.Claimed) {
+                    const onboardingType = _onboardingProfile?.onboardingType
+                    if (onboardingType === OnboardingType.Claim) {
                         nextRoute = OnboardingRoute.ShimmerClaiming
-                    } else if (profileSetupType === ProfileSetupType.New) {
+                    } else if (onboardingType === OnboardingType.Create) {
                         nextRoute = OnboardingRoute.ProfileBackup
                     } else {
                         nextRoute = OnboardingRoute.Congratulations
@@ -96,10 +96,10 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 break
             }
             case OnboardingRoute.ProfileRecovery: {
-                const profileRecoveryType = get(onboardingProfile)?.recoveryType
+                const restoreProfileType = get(onboardingProfile)?.restoreProfileType
                 if (
-                    profileRecoveryType === ProfileRecoveryType.Mnemonic ||
-                    profileRecoveryType === ProfileRecoveryType.Stronghold
+                    restoreProfileType === RestoreProfileType.Mnemonic ||
+                    restoreProfileType === RestoreProfileType.Stronghold
                 ) {
                     profileSetupRoute.set(ProfileSetupRoute.EnterName)
                     nextRoute = OnboardingRoute.ProfileSetup
@@ -116,8 +116,8 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 break
             }
             case OnboardingRoute.LedgerSetup: {
-                const profileSetupType = get(onboardingProfile)?.setupType
-                if (profileSetupType === ProfileSetupType.Claimed) {
+                const onboardingType = get(onboardingProfile)?.onboardingType
+                if (onboardingType === OnboardingType.Claim) {
                     nextRoute = OnboardingRoute.ShimmerClaiming
                 } else {
                     nextRoute = OnboardingRoute.Congratulations

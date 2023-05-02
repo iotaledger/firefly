@@ -9,7 +9,7 @@
         initialisePincodeManager,
         isOnboardingLedgerProfile,
         onboardingProfile,
-        ProfileSetupType,
+        OnboardingType,
     } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
     import { pollLedgerNanoStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
@@ -71,7 +71,7 @@
 
         const canInitialiseFirstShimmerClaimingAccount =
             $onboardingProfile?.type === ProfileType.Software &&
-            $onboardingProfile?.setupType === ProfileSetupType.Claimed
+            $onboardingProfile?.onboardingType === OnboardingType.Claim
         const shouldInitialiseFirstShimmerClaimingAccount = $onboardingProfile?.shimmerClaimingAccounts?.length < 1
         if (canInitialiseFirstShimmerClaimingAccount && shouldInitialiseFirstShimmerClaimingAccount) {
             await initialiseFirstShimmerClaimingAccount()

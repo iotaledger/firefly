@@ -1,13 +1,12 @@
-import { get } from 'svelte/store'
-
-import { localize } from '@core/i18n'
+import { showAppNotification } from '@auxiliary/notification'
 import { IAccount } from '@core/account'
+import { localize } from '@core/i18n'
 import { AccountRecoveryProfileConfiguration, UnableToFindProfileTypeError } from '@core/profile'
+import { RecoverAccountsPayload, recoverAccounts } from '@core/profile-manager'
 import { zip } from '@core/utils'
 import { formatTokenAmountBestMatch } from '@core/wallet/utils'
-import { showAppNotification } from '@auxiliary/notification'
-
-import { SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS, SHIMMER_CLAIMING_ACCOUNT_RECOVERY_CONFIGURATION } from '../constants'
+import { get } from 'svelte/store'
+import { SHIMMER_CLAIMING_ACCOUNT_RECOVERY_CONFIGURATION, SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS } from '../constants'
 import { getSortedRenamedBoundAccounts, prepareShimmerClaimingAccount } from '../helpers'
 import {
     getOnboardingBaseToken,
@@ -16,7 +15,6 @@ import {
     updateShimmerClaimingAccount,
 } from '../stores'
 import { sumTotalUnclaimedRewards } from '../utils'
-import { RecoverAccountsPayload, recoverAccounts } from '@core/profile-manager'
 
 const DEPTH_SEARCH_ACCOUNT_START_INDEX = 0
 const INITIAL_SEARCH_ADDRESS_START_INDEX = 0
@@ -65,7 +63,6 @@ export async function findShimmerRewards(): Promise<void> {
     if (hasOnlyDoneDepthSearch()) {
         await breadthSearchAndRecoverAccounts()
     }
-
     updateRewardsFinderParameters()
 }
 

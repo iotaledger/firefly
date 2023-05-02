@@ -8,9 +8,6 @@
         DashboardRoute,
         dashboardRouter,
         initialiseRouterManager,
-        OnboardingRoute,
-        onboardingRoute,
-        onboardingRouter,
         routerManager,
         RouterManagerExtensionName,
     } from '@core/router'
@@ -31,11 +28,10 @@
     import { showAppNotification } from '@auxiliary/notification'
     import { closePopup, openPopup, PopupId, popupState } from '@auxiliary/popup'
     import { initialiseOnboardingFlow } from '@contexts/onboarding'
-    import { NetworkId } from '@core/network'
     import { getLocalisedMenuItems } from './lib/helpers'
     import { ToastContainer, Transition } from '@ui'
     import { TitleBar, Popup } from '@components'
-    import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from '@views'
+    import { Dashboard, LoginRouter, Settings, Splash } from '@views'
     import {
         getAppRouter,
         getRouterForAppContext,
@@ -48,6 +44,7 @@
     import { downloadNextNftInQueue, nftDownloadQueue } from '@core/nfts'
     import { closeDrawer } from '@desktop/auxilary/drawer'
     import features from '@features/features'
+    import { onboardingRoute, OnboardingRoute, OnboardingRouterView } from '@views/onboarding'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -78,9 +75,7 @@
         'canCreateNewProfile',
         $appRoute === AppRoute.Login ||
             ($appRoute === AppRoute.Onboarding &&
-                $onboardingRoute !== OnboardingRoute.AppSetup &&
-                $onboardingRoute !== OnboardingRoute.ShimmerClaiming &&
-                $onboardingRoute !== OnboardingRoute.Congratulations)
+                ($onboardingRoute === OnboardingRoute.Welcome || $onboardingRoute === OnboardingRoute.NetworkSetup))
     )
 
     $: if (document.dir !== $localeDirection) {
@@ -161,19 +156,12 @@
             openPopup({ id: PopupId.Diagnostics })
         })
         Platform.onEvent('menu-create-developer-profile', async () => {
-            await initialiseOnboardingFlow({
-                isDeveloperProfile: true,
-            })
+            await initialiseOnboardingFlow({ isDeveloperProfile: true })
             $routerManager.goToAppContext(AppContext.Onboarding)
-            $onboardingRouter.goTo(OnboardingRoute.NetworkSetup)
         })
         Platform.onEvent('menu-create-normal-profile', async () => {
-            await initialiseOnboardingFlow({
-                isDeveloperProfile: false,
-                networkId: NetworkId.Shimmer,
-            })
+            await initialiseOnboardingFlow({ isDeveloperProfile: false })
             $routerManager.goToAppContext(AppContext.Onboarding)
-            $onboardingRouter.goTo(OnboardingRoute.ProfileSetup)
         })
 
         Platform.onEvent('deep-link-request', showDeepLinkNotification)
@@ -225,7 +213,7 @@
             {:else if $appRoute === AppRoute.Login}
                 <LoginRouter />
             {:else if $appRoute === AppRoute.Onboarding}
-                <OnboardingRouter />
+                <OnboardingRouterView />
             {/if}
             {#if settings}
                 <Settings handleClose={() => (settings = false)} />
