@@ -1,4 +1,5 @@
-import { debounce, getBackupWarningColor, hex2rgb, isBright } from '@core/utils'
+import { debounce, getBackupWarningColor, hex2rgb, isBright } from '../ui'
+import { DAYS_PER_WEEK, MILLISECONDS_PER_DAY } from '../constants'
 
 describe('File: ui.ts', () => {
     describe('Function: debounce', () => {
@@ -47,9 +48,9 @@ describe('File: ui.ts', () => {
     })
     describe('Function: getBackupWarningColor', () => {
         it('should return a color depending on the last backup date', () => {
-            const oneWeekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
-            const twoMonthsAgo = new Date(Date.now() - 2 * 30 * 24 * 60 * 60 * 1000)
-            const oneYearAgo = new Date(Date.now() - 365 * 24 * 60 * 60 * 1000)
+            const oneWeekAgo = new Date(Date.now() - DAYS_PER_WEEK * MILLISECONDS_PER_DAY)
+            const twoMonthsAgo = new Date(Date.now() - 2 * 30 * MILLISECONDS_PER_DAY)
+            const oneYearAgo = new Date(Date.now() - 365 * MILLISECONDS_PER_DAY)
 
             expect(getBackupWarningColor(oneWeekAgo)).toEqual('blue')
             expect(getBackupWarningColor(twoMonthsAgo)).toEqual('yellow')

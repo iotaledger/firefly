@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
-import { isRecentDate } from './date'
+import { isRecentDate, isValidDate } from './date'
 
 export function debounce(callback: () => void, wait = 500): (...args: unknown[]) => void {
     let _timeout
@@ -72,8 +72,8 @@ export function isBright(color: string): boolean {
  *      Red if never.
  * @param {Date} lastBackupDate
  */
-export function getBackupWarningColor(lastBackupDate: Date): string {
-    if (!(lastBackupDate instanceof Date)) {
+export function getBackupWarningColor(lastBackupDate: Date | null): string {
+    if (!isValidDate(lastBackupDate)) {
         return 'red'
     }
     const { lessThanAMonth, lessThanThreeMonths } = isRecentDate(lastBackupDate)
