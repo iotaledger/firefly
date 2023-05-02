@@ -1,16 +1,17 @@
 /* eslint-disable no-bitwise */
 
 import { HEXADECIMAL_PREFIX, MILLISECONDS_PER_SECOND } from './constants'
+import { isValidDate } from './date'
 import { Base64 } from './encode'
 
 /**
  * Returns a UNIX timestamp from a given Date object.
  */
 export function convertDateToUnixTimestamp(date: Date): number {
-    if (date) {
+    if (isValidDate(date)) {
         return Math.round(date.getTime() / MILLISECONDS_PER_SECOND)
     } else {
-        return undefined
+        throw new Error('"date" must be a valid Date object')
     }
 }
 
@@ -21,7 +22,7 @@ export function convertUnixTimestampToDate(timestamp: number): Date {
     if (typeof timestamp === 'number') {
         return new Date(timestamp * MILLISECONDS_PER_SECOND)
     } else {
-        return undefined
+        throw new Error('"timestamp" must be a number')
     }
 }
 
@@ -31,9 +32,9 @@ export function convertUInt16NumberToLittleEndianHex(num: number, withHexPrefix 
     return withHexPrefix ? HEXADECIMAL_PREFIX + hex : hex
 }
 
-export function convertBytesToHexString(bytes: number[], withHexPrefix = true): string | undefined {
+export function convertBytesToHexString(bytes: number[], withHexPrefix = true): string {
     if (!bytes) {
-        return undefined
+        throw new Error('"bytes" must be an array of numbers')
     }
 
     if (bytes.length === 0) {
@@ -50,8 +51,10 @@ export function convertBytesToHexString(bytes: number[], withHexPrefix = true): 
  * @param opacity: [0,100], default = 100
  */
 export function convertHexToRgba(hexCode: string, opacity: number = 100): string {
+    const clampedOpacity = Math.min(100, Math.max(0, opacity))
+
     if (!hexCode) {
-        return `rgba(0,0,0,${opacity / 100})`
+        return `rgba(0,0,0,${clampedOpacity / 100})`
     }
 
     let hex = hexCode.replace('#', '')
@@ -64,7 +67,7 @@ export function convertHexToRgba(hexCode: string, opacity: number = 100): string
     const g = fixNaN(parseInt(hex.substring(2, 4), 16))
     const b = fixNaN(parseInt(hex.substring(4, 6), 16))
 
-    return `rgba(${r},${g},${b},${opacity / 100})`
+    return `rgba(${r},${g},${b},${clampedOpacity / 100})`
 }
 
 function fixNaN(n: number): number {

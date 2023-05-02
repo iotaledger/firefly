@@ -1,11 +1,10 @@
 import {
     convertBytesToHexString,
-    convertBytesToUtf8String,
     convertDateToUnixTimestamp,
     convertHexToRgba,
     convertUInt16NumberToLittleEndianHex,
     convertUnixTimestampToDate,
-} from '@core/utils'
+} from '../convert'
 
 describe('File: convert.ts', () => {
     const TEST_DATE = new Date('2023-04-20T00:00:00.000Z')
@@ -15,8 +14,8 @@ describe('File: convert.ts', () => {
             expect(convertDateToUnixTimestamp(TEST_DATE)).toEqual(TEST_UNIX_TIMESTAMP)
         })
         it('should handle invalid date parameters', () => {
-            expect(convertDateToUnixTimestamp('' as Date)).toBeUndefined()
-            expect(convertDateToUnixTimestamp(undefined)).toBeUndefined()
+            expect(() => convertDateToUnixTimestamp('' as Date)).toThrowError()
+            expect(() => convertDateToUnixTimestamp(undefined)).toThrowError()
         })
     })
 
@@ -27,7 +26,7 @@ describe('File: convert.ts', () => {
             expect(convertUnixTimestampToDate(TEST_UNIX_TIMESTAMP)).toEqual(TEST_DATE)
         })
         it('should handle invalid timestamp parameters', () => {
-            expect(convertUnixTimestampToDate(undefined)).toBeUndefined()
+            expect(() => convertUnixTimestampToDate(undefined)).toThrowError()
         })
     })
 
@@ -66,7 +65,7 @@ describe('File: convert.ts', () => {
             )
         })
         it('should handle invalid input', () => {
-            expect(convertBytesToHexString(undefined)).toBeUndefined()
+            expect(() => convertBytesToHexString(undefined)).toThrowError()
         })
         it('should NOT use the hex prefix if specified', () => {
             expect(convertBytesToHexString([], false)).toEqual('')
@@ -88,6 +87,7 @@ describe('File: convert.ts', () => {
         it('should handle invalid input', () => {
             expect(convertHexToRgba('')).toEqual('rgba(0,0,0,1)')
             expect(convertHexToRgba('', 50)).toEqual('rgba(0,0,0,0.5)')
+            expect(convertHexToRgba('', 150)).toEqual('rgba(0,0,0,1)')
             expect(convertHexToRgba('randomString')).toEqual('rgba(0,0,0,1)')
             expect(convertHexToRgba('randomString', 25)).toEqual('rgba(0,0,0,0.25)')
             expect(convertHexToRgba(undefined)).toEqual('rgba(0,0,0,1)')
