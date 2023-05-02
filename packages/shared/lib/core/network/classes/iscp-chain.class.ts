@@ -24,8 +24,6 @@ export class IscpChain implements IChain {
 
             this._provider = new Web3(`${iscpEndpoint}/${evmJsonRpcPath}`)
             this._configuration = payload
-
-            void this.getStatus()
         } catch (err) {
             console.error(err)
         }
