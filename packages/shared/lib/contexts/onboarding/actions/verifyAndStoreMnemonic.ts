@@ -13,6 +13,6 @@ export async function verifyAndStoreMnemonic(): Promise<void> {
     await storeMnemonic(mnemonic)
 
     if (mobile) {
-        updateOnboardingProfile({ hasStoredMnemonic: true })
+        updateOnboardingProfile({ hasStoredMnemonic: true, mnemonic: null })
     }
 }

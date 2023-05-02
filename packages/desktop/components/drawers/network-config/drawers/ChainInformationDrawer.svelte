@@ -1,17 +1,28 @@
 <script lang="ts">
-    import { Button } from '@ui'
-    import { NetworkConfigRoute, networkConfigRouter } from '@desktop/routers'
+    import { onMount } from 'svelte'
+    import { ChainType, IscpChain, selectedChain } from '@core/network'
+    import { EvmChainInformation, IscpChainInformation } from './components'
+    import { Pane } from '@ui'
 
-    function onEditChainClick(): void {
-        $networkConfigRouter.goTo(NetworkConfigRoute.EditChain)
+    let chainConfiguration
+
+    function setChainConfiguration(): void {
+        if ($selectedChain instanceof IscpChain) {
+            chainConfiguration = $selectedChain.getConfiguration()
+        }
     }
 
-    function onRemoveChainClick(): void {
-        $networkConfigRouter.goTo(NetworkConfigRoute.RemoveChain)
-    }
+    onMount(() => {
+        setChainConfiguration()
+    })
 </script>
 
-<chain-information-drawer class="flex flex-col justify-between mb-6">
-    <Button onClick={onEditChainClick}>Edit chain</Button>
-    <Button onClick={onRemoveChainClick} classes="mt-6">Remove chain</Button>
-</chain-information-drawer>
+<div class="w-full h-full">
+    <Pane>
+        {#if chainConfiguration?.type === ChainType.Iscp}
+            <IscpChainInformation {chainConfiguration} />
+        {:else if chainConfiguration?.type === ChainType.Evm}
+            <EvmChainInformation />
+        {/if}
+    </Pane>
+</div>

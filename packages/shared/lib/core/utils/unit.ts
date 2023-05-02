@@ -2,8 +2,9 @@ import Big from 'big.js'
 
 import { formatNumber, getCurrencyPosition } from '@core/i18n'
 
-import { IOTA_UNIT_MAP } from './constants'
+import { DEFAULT_FORMAT_IOTA_UNIT_OPTIONS, IOTA_UNIT_MAP } from './constants'
 import { IotaUnit } from './enums'
+import { IFormatIotaUnitOptions } from './interfaces'
 
 /**
  * CAUTION: Set this to avoid small numbers switching to exponential format.
@@ -11,11 +12,7 @@ import { IotaUnit } from './enums'
 Big.NE = -20
 
 export function convertIotaUnit(value: number, fromUnit: IotaUnit, toUnit: IotaUnit): number {
-    if (value === 0) {
-        return 0
-    }
-
-    if (fromUnit === toUnit) {
+    if (value === 0 || fromUnit === toUnit) {
         return value
     }
 
@@ -27,17 +24,17 @@ export function convertIotaUnit(value: number, fromUnit: IotaUnit, toUnit: IotaU
 export function formatIotaUnitPrecision(
     valueRaw: number,
     unit: IotaUnit,
-    includeUnits: boolean = true,
-    grouped: boolean = false,
-    overrideDecimalPlaces?: number
+    options: IFormatIotaUnitOptions = DEFAULT_FORMAT_IOTA_UNIT_OPTIONS
 ): string {
+    const { includeUnits, grouped, overrideDecimalPlaces } = options
+
     // At the moment we have no symbol for IOTA so we always put the currency code
     // at the end, in the future when we have a symbol this can be updated to position
     // it correctly to the left when necessary
     const currencyPosition = getCurrencyPosition()
 
     if (!valueRaw) {
-        return includeUnits ? (currencyPosition === 'left' ? `0 ${unit}` : `0 ${unit}`) : '0'
+        return includeUnits ? `0 ${unit}` : '0'
     }
 
     const converted = convertIotaUnit(valueRaw, IotaUnit._, unit)
@@ -58,33 +55,24 @@ export function formatIotaUnitPrecision(
 }
 
 export function formatIotaUnitBestMatch(
-    value: number,
-    includeUnits: boolean = true,
-    overrideDecimalPlaces?: number
+    valueRaw: number,
+    options: IFormatIotaUnitOptions = DEFAULT_FORMAT_IOTA_UNIT_OPTIONS
 ): string {
-    return formatIotaUnitPrecision(value, getIotaUnit(value), includeUnits, false, overrideDecimalPlaces)
+    return formatIotaUnitPrecision(valueRaw, getIotaUnit(valueRaw), options)
 }
 
 export function getIotaUnit(value: number): IotaUnit {
-    let bestUnits: IotaUnit = IotaUnit._
-
     if (!value || value === 0) {
         return IotaUnit.M
     }
 
     const checkLength = Math.abs(value).toString().length
 
-    if (checkLength > IOTA_UNIT_MAP.P.decimalPlaces) {
-        bestUnits = IotaUnit.P
-    } else if (checkLength > IOTA_UNIT_MAP.T.decimalPlaces) {
-        bestUnits = IotaUnit.T
-    } else if (checkLength > IOTA_UNIT_MAP.G.decimalPlaces) {
-        bestUnits = IotaUnit.G
-    } else if (checkLength > IOTA_UNIT_MAP.M.decimalPlaces) {
-        bestUnits = IotaUnit.M
-    } else if (checkLength > IOTA_UNIT_MAP.k.decimalPlaces) {
-        bestUnits = IotaUnit.K
+    for (const unit of [IotaUnit.P, IotaUnit.T, IotaUnit.G, IotaUnit.M, IotaUnit.K]) {
+        if (checkLength > IOTA_UNIT_MAP[unit].decimalPlaces) {
+            return unit
+        }
     }
 
-    return bestUnits
+    return IotaUnit._
 }

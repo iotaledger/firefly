@@ -21,6 +21,8 @@
         [RestoreProfileType.Ledger]: false,
     }
 
+    $: isDisabled = Object.values(isBusy).some((busy) => busy)
+
     const networkId = $onboardingProfile?.network?.id
 
     async function onProfileTypeClick(restoreProfileType: RestoreProfileType): Promise<void> {
@@ -63,7 +65,7 @@
             icon="language"
             busy={isBusy[RestoreProfileType.Mnemonic]}
             hidden={features?.onboarding?.[networkId]?.restoreProfile?.recoveryPhrase?.hidden}
-            disabled={!features?.onboarding?.[networkId]?.restoreProfile?.recoveryPhrase?.enabled}
+            disabled={!features?.onboarding?.[networkId]?.restoreProfile?.recoveryPhrase?.enabled || isDisabled}
             onClick={() => onProfileTypeClick(RestoreProfileType.Mnemonic)}
         />
         <OnboardingButton
@@ -72,7 +74,7 @@
             icon="file"
             busy={isBusy[RestoreProfileType.Stronghold]}
             hidden={features?.onboarding?.[networkId]?.restoreProfile?.strongholdBackup?.hidden}
-            disabled={!features?.onboarding?.[networkId]?.restoreProfile?.strongholdBackup?.enabled}
+            disabled={!features?.onboarding?.[networkId]?.restoreProfile?.strongholdBackup?.enabled || isDisabled}
             onClick={() => onProfileTypeClick(RestoreProfileType.Stronghold)}
         />
         <OnboardingButton
@@ -81,7 +83,7 @@
             icon="chip"
             busy={isBusy[RestoreProfileType.Ledger]}
             hidden={features?.onboarding?.[networkId]?.restoreProfile?.ledgerBackup?.hidden}
-            disabled={!features?.onboarding?.[networkId]?.restoreProfile?.ledgerBackup?.enabled}
+            disabled={!features?.onboarding?.[networkId]?.restoreProfile?.ledgerBackup?.enabled || isDisabled}
             onClick={() => onProfileTypeClick(RestoreProfileType.Ledger)}
         />
     </div>
