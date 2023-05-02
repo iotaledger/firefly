@@ -6,7 +6,7 @@
     import { ADDRESS_TYPE_ALIAS } from '@core/wallet'
     import { Button, HTMLButtonType, Input } from '@ui'
 
-    const localeKey = 'views.dashboard.drawers.networkConfig.addChain'
+    const localeKey = 'views.dashboard.drawers.networkConfig.chain'
 
     const isBusy = false
     let nameError = ''
@@ -116,6 +116,6 @@
         disabled={submitDisabled || isBusy}
         {isBusy}
     >
-        {localize(`${localeKey}.title`)}
+        {localize('actions.addChain')}
     </Button>
 </add-iscp-chain>

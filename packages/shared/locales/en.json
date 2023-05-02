@@ -491,7 +491,9 @@
             "drawers": {
                 "networkConfig": {
                     "addChain": {
-                        "title": "Add chain",
+                        "title": "Add chain"
+                    },
+                    "chain": {
                         "chainId": "Chain ID",
                         "aliasAddress": "Alias Address",
                         "iscpEndpoint": "ISCP Endpoint",
@@ -1353,7 +1355,8 @@
         "changeNode": "Change node",
         "stopVoting": "Stop voting",
         "revote": "Revote",
-        "skipAndKeep": "Skip and keep old password"
+        "skipAndKeep": "Skip and keep old password",
+        "addChain": "Add chain"
     },
     "general": {
         "recipient": "Recipient",
