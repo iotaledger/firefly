@@ -1,7 +1,7 @@
 import { NetworkId } from '@core/network/enums'
 import { DestinationNetwork } from '../enums'
 
-export const NETWORK_ADDRESS: Readonly<{ [key in NetworkId]?: { [key in DestinationNetwork]?: string } }> = {
+export const DEFAULT_CHAINS: Readonly<{ [key in NetworkId]?: { [key in DestinationNetwork]?: string } }> = {
     [NetworkId.Shimmer]: {
         [DestinationNetwork.Shimmer]: '-',
         // [DestinationNetwork.ShimmerEvm]: 'TO_DO',

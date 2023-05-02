@@ -1,11 +1,11 @@
 <script lang="ts">
     import { Modal, SelectorInput, IOption } from 'shared/components'
     import { activeProfile, getNetworkHrp } from '@core/profile'
-    import { NETWORK_ADDRESS, DestinationNetwork } from '@core/layer-2'
+    import { DEFAULT_CHAINS, DestinationNetwork } from '@core/layer-2'
     import { validateBech32Address } from '@core/utils'
 
     const readonlyAttribute = $activeProfile?.isDeveloperProfile ? {} : { readonly: true }
-    const networkAddresses = NETWORK_ADDRESS[$activeProfile?.network?.id]
+    const networkAddresses = DEFAULT_CHAINS[$activeProfile?.network?.id]
 
     const LAYER_1_NETWORK_OPTION = {
         key: DestinationNetwork.Shimmer,
