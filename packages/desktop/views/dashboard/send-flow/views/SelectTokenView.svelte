@@ -71,16 +71,18 @@
         >
             <Icon slot="left" icon={IconEnum.Search} classes="text-gray-500 dark:text-white mr-2" />
         </TextInput>
-        <div class="asset-list w-full flex flex-col -mr-1 pr-1.5 gap-2">
-            {#each assetList as asset}
-                <AssetTile
-                    {asset}
-                    onClick={() => (selectedAssetId = asset.id)}
-                    classes="border-2 border-solid {selectedAssetId === asset.id
-                        ? 'border-blue-500 dark:border-gray-500'
-                        : 'border-transparent'}"
-                />
-            {/each}
+        <div class="overflow-hidden -mr-3.5">
+            <div class="asset-list w-full flex flex-col -mr-1 pr-1.5 gap-2">
+                {#each assetList as asset}
+                    <AssetTile
+                        {asset}
+                        onClick={() => (selectedAssetId = asset.id)}
+                        classes="border-2 border-solid {selectedAssetId === asset.id
+                            ? 'border-blue-500 dark:border-gray-500'
+                            : 'border-transparent'}"
+                    />
+                {/each}
+            </div>
         </div>
     </select-token-buttons>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
