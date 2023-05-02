@@ -5,7 +5,7 @@ import { NewTransactionType } from '@core/wallet/stores'
 export type NewTransactionDetails = NewNftTransactionDetails | NewTokenTransactionDetails
 
 type NewBaseTransactionDetails = {
-    recipient: Subject
+    recipient?: Subject
     tag?: string
     metadata?: string
     expirationDate?: Date

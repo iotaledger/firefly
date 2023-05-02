@@ -1,9 +1,38 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { Button, FontWeight, Text, TextType } from 'shared/components'
+    import {
+        IAsset,
+        NewTransactionType,
+        getAssetById,
+        newTransactionDetails,
+        setNewTransactionDetails,
+    } from '@core/wallet'
+    import { AssetAmountInput, Button, FontWeight, Text, TextType } from 'shared/components'
+    import { get } from 'svelte/store'
     import { sendFlowRouter } from '../send-flow-router'
 
+    const transactionDetails = get(newTransactionDetails)
+    let assetAmountInput: AssetAmountInput
+    let asset: IAsset
+    let rawAmount: string
+    let unit: string
+    let disableAssetSelection: boolean
+
+    if (transactionDetails.type === NewTransactionType.TokenTransfer) {
+        asset = getAssetById(transactionDetails.assetId)
+        rawAmount = transactionDetails.rawAmount
+        unit = transactionDetails.unit
+        disableAssetSelection = transactionDetails.disableAssetSelection
+    }
+
     function onContinueClick(): void {
+        setNewTransactionDetails({
+            type: NewTransactionType.TokenTransfer,
+            assetId: asset.id,
+            rawAmount,
+            unit,
+            disableAssetSelection,
+        })
         $sendFlowRouter.next()
     }
 
@@ -16,7 +45,9 @@
     <input-token-amount-title>
         <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">Input Token Amount Title</Text>
     </input-token-amount-title>
-    <input-token-amount-content> Input Token Amount Content </input-token-amount-content>
+    <input-token-amount-content>
+        <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:unit {disableAssetSelection} />
+    </input-token-amount-content>
     <input-token-amount-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" outline onClick={onBackClick}>
             {localize('actions.back')}
