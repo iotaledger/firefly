@@ -3,6 +3,7 @@
 import { HEXADECIMAL_PREFIX, MILLISECONDS_PER_SECOND } from './constants'
 import { isValidDate } from './date'
 import { Base64 } from './encode'
+import { clamp } from './math'
 
 /**
  * Returns a UNIX timestamp from a given Date object.
@@ -51,7 +52,7 @@ export function convertBytesToHexString(bytes: number[], withHexPrefix = true): 
  * @param opacity: [0,100], default = 100
  */
 export function convertHexToRgba(hexCode: string, opacity: number = 100): string {
-    const clampedOpacity = Math.min(100, Math.max(0, opacity))
+    const clampedOpacity = clamp(opacity, 0, 100)
 
     if (!hexCode) {
         return `rgba(0,0,0,${clampedOpacity / 100})`
