@@ -4,14 +4,13 @@ import { get } from 'svelte/store'
 import { restoreBackupByCopyingFile, validateStrongholdCoinType } from '../helpers'
 import { onboardingProfile, updateOnboardingProfile } from '../stores'
 import { mobile } from '@core/app'
-import { network } from '@core/network/stores'
 
 export async function restoreBackupFromStrongholdFile(strongholdPassword: string): Promise<void> {
-    const { id, importFilePath, clientOptions } = get(onboardingProfile)
+    const { id, importFilePath, clientOptions, network } = get(onboardingProfile)
     try {
         await restoreBackup(importFilePath, strongholdPassword)
         if (mobile) {
-            await validateStrongholdCoinType(profileManager, get(network)?.id)
+            await validateStrongholdCoinType(profileManager, network?.id)
             updateOnboardingProfile({ lastStrongholdBackupTime: new Date() })
         }
     } catch (err) {

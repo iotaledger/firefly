@@ -5,6 +5,7 @@
     import { openPopup, PopupId } from '@auxiliary/popup'
     import { OnboardingButton } from '@ui'
     import { SendFlowRouter, sendFlowRouter } from '@views/dashboard/send-flow'
+    import features from '@features/features'
 
     function onSendClick(): void {
         resetNewTokenTransactionDetails()
@@ -12,7 +13,7 @@
         resetShowInternalVerificationPopup()
         sendFlowRouter.set(new SendFlowRouter(undefined))
         openPopup({
-            id: PopupId.SendFlow,
+            id: features.wallet.newSendFlow.enabled ? PopupId.SendFlow : PopupId.SendForm,
             overflow: true,
         })
     }
