@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { onMount } from 'svelte'
     import { closePopup } from '@auxiliary/popup/actions'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { handleError } from '@core/error/handlers'
@@ -48,6 +49,8 @@
     } from '@ui'
     import { get } from 'svelte/store'
     import { sendFlowRouter } from '../send-flow-router'
+
+    export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
     let {
         recipient,
@@ -180,6 +183,14 @@
     function onBackClick(): void {
         $sendFlowRouter.previous()
     }
+
+    onMount(async () => {
+        try {
+            await _onMount()
+        } catch (err) {
+            handleError(err)
+        }
+    })
 </script>
 
 <transaction-summary-view class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
@@ -227,7 +238,7 @@
         <Button classes="w-full" outline onClick={onBackClick}>
             {localize('actions.back')}
         </Button>
-        <Button classes="w-full" onClick={onConfirmClick}>
+        <Button classes="w-full" onClick={onConfirmClick} disabled={isTransferring} isBusy={isTransferring}>
             {localize('actions.confirm')}
         </Button>
     </transaction-summary-buttons>
