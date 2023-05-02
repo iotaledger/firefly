@@ -55,7 +55,7 @@
                         }
                     }
                 },
-                "setupCustomNetworkConnection": {
+                "setupCustomNetwork": {
                     "title": "Mit einem privaten Netzwerk verbinden",
                     "body": "Fülle das Formular mit den Nodeinformationen aus und verbinde dich mit einem privaten Netzwerk."
                 }

@@ -43,7 +43,7 @@
                         "body": "Support for custom networks and/or nodes"
                     }
                 },
-                "setupCustomNetworkConnection": {
+                "setupCustomNetwork": {
                     "title": "Connect to a custom network or node",
                     "body": "Fill the form with the node information and connect to a custom network or node."
                 }

@@ -55,7 +55,7 @@
                         }
                     }
                 },
-                "setupCustomNetworkConnection": {
+                "setupCustomNetwork": {
                     "title": "Poveži se s privatnom mrežom",
                     "body": "Ispuni obrazac podacima o nodeu i poveži se s privatnom mrežom."
                 }

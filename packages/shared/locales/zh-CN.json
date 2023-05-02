@@ -55,7 +55,7 @@
                         }
                     }
                 },
-                "setupCustomNetworkConnection": {
+                "setupCustomNetwork": {
                     "title": "连接到私有网络",
                     "body": "在表单中填写节点信息，并连接到一个私有网络。"
                 }
