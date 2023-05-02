@@ -3,6 +3,7 @@
 
 {
     "compilerOptions": {
+        "strictNullChecks": true,
         "types": ["jest"]
     },
     "include": [
