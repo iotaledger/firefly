@@ -1,0 +1,10 @@
+// https://www.typescriptlang.org/tsconfig#strict
+{
+    "extends": "./tsconfig",
+    "compilerOptions": {
+        "strict": false
+    },
+    "files": [
+        // add files here and change strict to true
+    ]
+}
