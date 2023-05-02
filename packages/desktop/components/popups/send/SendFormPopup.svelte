@@ -166,15 +166,7 @@
         {#if hasSpendableNfts && !disableAssetSelection}
             <Tabs bind:activeTab {tabs} />
         {/if}
-        {#if activeTab === SendForm.SendToken}
-            <AssetAmountInput
-                bind:this={assetAmountInput}
-                bind:asset
-                bind:rawAmount
-                bind:unit
-                {disableAssetSelection}
-            />
-        {:else}
+        {#if activeTab === SendForm.SendNft}
             <NftInput bind:this={nftInput} bind:nftId readonly={disableAssetSelection} />
         {/if}
         <NetworkInput bind:this={networkInput} bind:networkAddress showLayer2={features?.network?.layer2?.enabled} />
