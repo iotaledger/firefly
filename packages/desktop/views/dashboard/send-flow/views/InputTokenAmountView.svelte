@@ -6,6 +6,7 @@
         getAssetById,
         newTransactionDetails,
         setNewTransactionDetails,
+        resetNewTransactionDetails,
     } from '@core/wallet'
     import { AssetAmountInput, Button, FontWeight, Text, TextType } from 'shared/components'
     import { get } from 'svelte/store'
@@ -37,6 +38,7 @@
     }
 
     function onBackClick(): void {
+        resetNewTransactionDetails()
         $sendFlowRouter.previous()
     }
 </script>
