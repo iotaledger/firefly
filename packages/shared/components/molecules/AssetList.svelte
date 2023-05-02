@@ -8,8 +8,8 @@
     import { openPopup, PopupId } from '@auxiliary/popup'
 
     export let assets: IAccountAssets
-    export let hideFilter: boolean
-    export let hideHeader: boolean
+    export let hideFilter: boolean = false
+    export let hideHeader: boolean = false
 
     let assetList: IAsset[]
     $: $assetFilter, assets, setFilteredAssetList(), scrollToTop()
