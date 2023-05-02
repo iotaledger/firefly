@@ -9,16 +9,10 @@ import {
 } from '@core/router'
 import { onboardingRouter } from '@views/onboarding'
 import { get } from 'svelte/store'
-import { sendRouter } from '@desktop/routers'
 
 export function resetRouters(): void {
-    resetPopupRouters()
     resetSubrouters()
     resetBaseRouters()
-}
-
-export function resetPopupRouters(): void {
-    get(sendRouter).reset()
 }
 
 function resetSubrouters(): void {

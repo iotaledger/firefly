@@ -55,7 +55,6 @@
     import VoteForProposal from './VoteForProposalPopup.svelte'
     import VotingPowerToZeroPopup from './VotingPowerToZeroPopup.svelte'
     import WalletFinderPopup from './WalletFinderPopup.svelte'
-    import { resetPopupRouters } from '../../lib/routers'
 
     export let id: PopupId
     export let props: any
@@ -126,7 +125,6 @@
         [PopupId.RemoveNode]: RemoveNode,
         [PopupId.RemoveProposal]: RemoveProposalPopup,
         [PopupId.Revote]: RevotePopup,
-        [PopupId.SelectAsset]: SelectAssetPopup,
         [PopupId.SendConfirmation]: SendConfirmationPopup,
         [PopupId.SendFlow]: SendFlowPopup,
         [PopupId.SendForm]: SendFormPopup,
@@ -153,7 +151,6 @@
             if ('function' === typeof props?.onCancelled) {
                 props?.onCancelled()
             }
-            resetPopupRouters()
             closePopup()
         }
     }

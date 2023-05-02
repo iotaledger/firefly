@@ -1,5 +1,6 @@
 <script lang="ts">
     import { get } from 'svelte/store'
+    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
     import { isLayer1Destination } from '@core/layer-2'
     import { ownedNfts } from '@core/nfts'
@@ -26,7 +27,6 @@
         TextType,
     } from 'shared/components'
     import features from '@features/features'
-    import { sendRouter } from '@desktop/routers'
 
     enum SendForm {
         SendToken = 'general.sendToken',
@@ -145,16 +145,19 @@
         })
     }
 
-    function onBackClick(): void {
-        $sendRouter.previous()
-    }
-
     async function onContinueClick(): Promise<void> {
         const valid = await validate()
         if (valid) {
             setTransactionDetails()
-            $sendRouter.next()
+            openPopup({
+                id: PopupId.SendConfirmation,
+                overflow: true,
+            })
         }
+    }
+
+    function onCancelClick(): void {
+        closePopup()
     }
 </script>
 
@@ -166,7 +169,15 @@
         {#if hasSpendableNfts && !disableAssetSelection}
             <Tabs bind:activeTab {tabs} />
         {/if}
-        {#if activeTab === SendForm.SendNft}
+        {#if activeTab === SendForm.SendToken}
+            <AssetAmountInput
+                bind:this={assetAmountInput}
+                bind:asset
+                bind:rawAmount
+                bind:unit
+                {disableAssetSelection}
+            />
+        {:else}
             <NftInput bind:this={nftInput} bind:nftId readonly={disableAssetSelection} />
         {/if}
         <NetworkInput bind:this={networkInput} bind:networkAddress showLayer2={features?.network?.layer2?.enabled} />
@@ -189,11 +200,11 @@
         </optional-inputs>
     </send-form-inputs>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" outline onClick={onBackClick}>
-            {localize('actions.back')}
+        <Button classes="w-full" outline onClick={onCancelClick}>
+            {localize('actions.cancel')}
         </Button>
         <Button classes="w-full" onClick={onContinueClick}>
-            {localize('actions.continue')}
+            {localize('actions.next')}
         </Button>
     </popup-buttons>
 </send-form-popup>
