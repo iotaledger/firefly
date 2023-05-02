@@ -1,6 +1,5 @@
 <script lang="ts">
     import { get } from 'svelte/store'
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
     import { isLayer1Destination } from '@core/layer-2'
     import { ownedNfts } from '@core/nfts'
@@ -27,6 +26,7 @@
         TextType,
     } from 'shared/components'
     import features from '@features/features'
+    import { sendRouter } from '@desktop/routers'
 
     enum SendForm {
         SendToken = 'general.sendToken',
@@ -145,19 +145,16 @@
         })
     }
 
+    function onBackClick(): void {
+        $sendRouter.previous()
+    }
+
     async function onContinueClick(): Promise<void> {
         const valid = await validate()
         if (valid) {
             setTransactionDetails()
-            openPopup({
-                id: PopupId.SendConfirmation,
-                overflow: true,
-            })
+            $sendRouter.next()
         }
-    }
-
-    function onCancelClick(): void {
-        closePopup()
     }
 </script>
 
@@ -200,11 +197,11 @@
         </optional-inputs>
     </send-form-inputs>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" outline onClick={onCancelClick}>
-            {localize('actions.cancel')}
+        <Button classes="w-full" outline onClick={onBackClick}>
+            {localize('actions.back')}
         </Button>
         <Button classes="w-full" onClick={onContinueClick}>
-            {localize('actions.next')}
+            {localize('actions.continue')}
         </Button>
     </popup-buttons>
 </send-form-popup>

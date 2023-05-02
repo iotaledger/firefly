@@ -12,6 +12,7 @@ import {
 } from '@core/router/routers'
 import { loginRouter, LoginRouter } from '@core/router/subrouters'
 import { OnboardingRouter, onboardingRouter } from '@views/onboarding'
+import { SendRouter, sendRouter } from '@desktop/routers'
 
 export function initialiseRouters(): void {
     /**
@@ -21,6 +22,7 @@ export function initialiseRouters(): void {
      */
     initialiseBaseRouters()
     initialiseSubrouters()
+    initialisePopupRouters()
 }
 
 export function initialiseOnboardingRouters(): void {
@@ -42,4 +44,8 @@ function initialiseBaseOnboardingRouters(): void {
 
 function initialiseSubrouters(): void {
     loginRouter.set(new LoginRouter())
+}
+
+function initialisePopupRouters(): void {
+    sendRouter.set(new SendRouter())
 }

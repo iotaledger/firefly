@@ -31,7 +31,7 @@
     import { DEFAULT_TRANSACTION_OPTIONS } from '@core/wallet/constants'
     import { getOutputOptions, validateSendConfirmation, getAddressFromSubject } from '@core/wallet/utils'
     import { Output } from '@core/wallet/types'
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { closePopup } from '@auxiliary/popup'
     import { ledgerPreparedOutput } from '@core/ledger'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import { handleError } from '@core/error/handlers/handleError'
@@ -43,6 +43,7 @@
         TARGET_CONTRACTS,
         TRANSFER_ALLOWANCE,
     } from '@core/layer-2'
+    import { sendRouter } from '../../../lib/routers'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
@@ -176,14 +177,11 @@
     }
 
     function onBackClick(): void {
-        closePopup()
-        openPopup({
-            id: PopupId.SendForm,
-            overflow: true,
-        })
+        $sendRouter.previous()
     }
 
     function onCancelClick(): void {
+        $sendRouter.reset()
         closePopup()
     }
 
