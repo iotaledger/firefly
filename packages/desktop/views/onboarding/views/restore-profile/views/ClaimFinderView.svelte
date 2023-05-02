@@ -38,6 +38,7 @@
 
     $: shimmerClaimingAccounts = $onboardingProfile?.shimmerClaimingAccounts ?? []
 
+    let isSettingUp = false
     let isSearchingForRewards = false
     let hasSearchedForRewardsBefore = false
 
@@ -48,9 +49,9 @@
     )
 
     $: shouldSearchForRewardsButtonBeEnabled =
-        !isSearchingForRewards && !isClaimingRewards && !hasUserClaimedRewards(shimmerClaimingAccounts)
+        !isSettingUp && !isSearchingForRewards && !isClaimingRewards && !hasUserClaimedRewards(shimmerClaimingAccounts)
     $: shouldClaimRewardsButtonBeEnabled =
-        canUserClaimRewards(shimmerClaimingAccounts) && !isSearchingForRewards && !isClaimingRewards
+        canUserClaimRewards(shimmerClaimingAccounts) && !isSettingUp && !isSearchingForRewards && !isClaimingRewards
     $: shouldShowContinueButton =
         hasUserClaimedRewards(shimmerClaimingAccounts) ||
         (hasSearchedForRewardsBefore && canUserRecoverFromShimmerClaiming(shimmerClaimingAccounts))
@@ -126,10 +127,10 @@
     }
 
     async function setupShimmerClaiming(): Promise<void> {
-        isSearchingForRewards = true
         initialiseAccountRecoveryConfigurationForShimmerClaiming()
         if (!$onboardingProfile?.shimmerClaimingAccounts || $onboardingProfile?.shimmerClaimingAccounts?.length < 1) {
             try {
+                isSettingUp = true
                 if ($onboardingProfile?.restoreProfileType === RestoreProfileType.Stronghold) {
                     const shimmerClaimingProfileDirectory = await getShimmerClaimingProfileManagerStorageDirectory()
                     await copyStrongholdFileToProfileDirectory(
@@ -158,12 +159,13 @@
 
                 onSearchForRewardsClick()
             } catch (err) {
-                isSearchingForRewards = false
                 if ($isOnboardingLedgerProfile) {
                     handleLedgerError(err?.error ?? err)
                 } else {
                     throw new FindShimmerRewardsError(err)
                 }
+            } finally {
+                isSettingUp = false
             }
         }
     }
@@ -200,7 +202,7 @@
             disabled={!shouldSearchForRewardsButtonBeEnabled}
             outline
             onClick={onSearchForRewardsClick}
-            isBusy={isSearchingForRewards}
+            isBusy={isSettingUp || isSearchingForRewards}
             busyMessage={localize('actions.searching')}
         >
             {localize(`actions.${hasSearchedForRewardsBefore ? 'searchAgain' : 'searchForRewards'}`)}

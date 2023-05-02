@@ -19,6 +19,8 @@
         [CreateProfileType.Ledger]: false,
     }
 
+    $: isDisabled = Object.values(isBusy).some((busy) => busy)
+
     const networkId = $onboardingProfile?.network?.id
 
     async function onProfileTypeClick(createProfileType: CreateProfileType): Promise<void> {
@@ -57,7 +59,7 @@
             icon="file"
             busy={isBusy[CreateProfileType.Mnemonic]}
             hidden={features?.onboarding?.[networkId]?.newProfile?.softwareProfile?.hidden}
-            disabled={!features?.onboarding?.[networkId]?.newProfile?.softwareProfile?.enabled}
+            disabled={!features?.onboarding?.[networkId]?.newProfile?.softwareProfile?.enabled || isDisabled}
             onClick={() => onProfileTypeClick(CreateProfileType.Mnemonic)}
         />
         <OnboardingButton
@@ -66,7 +68,7 @@
             icon="chip"
             busy={isBusy[CreateProfileType.Ledger]}
             hidden={features?.onboarding?.[networkId]?.newProfile?.ledgerProfile?.hidden}
-            disabled={!features?.onboarding?.[networkId]?.newProfile?.ledgerProfile?.enabled}
+            disabled={!features?.onboarding?.[networkId]?.newProfile?.ledgerProfile?.enabled || isDisabled}
             onClick={() => onProfileTypeClick(CreateProfileType.Ledger)}
         />
     </div>
