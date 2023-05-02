@@ -12,7 +12,6 @@
         RouterManagerExtensionName,
     } from '@core/router'
     import {
-        AppContext,
         appSettings,
         appStage,
         AppStage,
@@ -27,7 +26,6 @@
     } from '@core/app'
     import { showAppNotification } from '@auxiliary/notification'
     import { closePopup, openPopup, PopupId, popupState } from '@auxiliary/popup'
-    import { initialiseOnboardingFlow } from '@contexts/onboarding'
     import { getLocalisedMenuItems } from './lib/helpers'
     import { ToastContainer, Transition } from '@ui'
     import { TitleBar, Popup } from '@components'
@@ -44,7 +42,7 @@
     import { downloadNextNftInQueue, nftDownloadQueue } from '@core/nfts'
     import { closeDrawer } from '@desktop/auxilary/drawer'
     import features from '@features/features'
-    import { onboardingRoute, OnboardingRoute, OnboardingRouterView } from '@views/onboarding'
+    import { OnboardingRouterView } from '@views/onboarding'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -70,13 +68,6 @@
             Platform.updateMenu('strings', getLocalisedMenuItems($_ as Locale))
         }
     }
-
-    $: Platform.updateMenu(
-        'canCreateNewProfile',
-        $appRoute === AppRoute.Login ||
-            ($appRoute === AppRoute.Onboarding &&
-                ($onboardingRoute === OnboardingRoute.Welcome || $onboardingRoute === OnboardingRoute.NetworkSetup))
-    )
 
     $: if (document.dir !== $localeDirection) {
         document.dir = $localeDirection
@@ -154,14 +145,6 @@
         Platform.onEvent('menu-diagnostics', () => {
             closeDrawer()
             openPopup({ id: PopupId.Diagnostics })
-        })
-        Platform.onEvent('menu-create-developer-profile', async () => {
-            await initialiseOnboardingFlow({ isDeveloperProfile: true })
-            $routerManager.goToAppContext(AppContext.Onboarding)
-        })
-        Platform.onEvent('menu-create-normal-profile', async () => {
-            await initialiseOnboardingFlow({ isDeveloperProfile: false })
-            $routerManager.goToAppContext(AppContext.Onboarding)
         })
 
         Platform.onEvent('deep-link-request', showDeepLinkNotification)
