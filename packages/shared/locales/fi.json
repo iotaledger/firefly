@@ -55,7 +55,7 @@
                         }
                     }
                 },
-                "setupCustomNetworkConnection": {
+                "setupCustomNetwork": {
                     "title": "Yhdistä yksityiseen verkkoon",
                     "body": "Täytä lomake solmun tiedoilla ja yhdistä yksityiseen verkkoon."
                 }

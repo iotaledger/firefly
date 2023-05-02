@@ -55,7 +55,7 @@
                         }
                     }
                 },
-                "setupCustomNetworkConnection": {
+                "setupCustomNetwork": {
                     "title": "Anslut till ett privat nätverk",
                     "body": "Fyll i formuläret med nodinformationen och anslut till ett privat nätverk."
                 }

@@ -55,7 +55,7 @@
                         }
                     }
                 },
-                "setupCustomNetworkConnection": {
+                "setupCustomNetwork": {
                     "title": "連線到私人網路",
                     "body": "在下列表單填入節點資訊以連接至私人網路。"
                 }

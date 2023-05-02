@@ -1,12 +1,11 @@
-import { get } from 'svelte/store'
-
-import { getSecretManagerFromProfileType, initialiseProfileManager } from '@core/profile-manager'
-import { generateRandomId } from '@core/utils'
-
-import { getShimmerClaimingProfileManagerStorageDirectory } from '../helpers'
-import { shimmerClaimingProfileManager, onboardingProfile } from '../stores'
 import { COIN_TYPE } from '@core/network/constants'
 import { NetworkId } from '@core/network/enums'
+import { getSecretManagerFromProfileType, initialiseProfileManager } from '@core/profile-manager'
+import { generateRandomId } from '@core/utils'
+import { get } from 'svelte/store'
+import { RestoreProfileType } from '../enums'
+import { getShimmerClaimingProfileManagerStorageDirectory } from '../helpers'
+import { onboardingProfile, shimmerClaimingProfileManager } from '../stores'
 
 export async function createShimmerClaimingProfileManager(): Promise<void> {
     const $onboardingProfile = get(onboardingProfile)
@@ -26,5 +25,10 @@ export async function createShimmerClaimingProfileManager(): Promise<void> {
         secretManager,
         generateRandomId()
     )
+
+    if ($onboardingProfile?.restoreProfileType !== RestoreProfileType.Ledger) {
+        await manager.setStrongholdPassword($onboardingProfile?.strongholdPassword)
+    }
+
     shimmerClaimingProfileManager.set(manager)
 }

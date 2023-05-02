@@ -1,4 +1,4 @@
-import { formatHexString } from '@core/utils/format'
+import { formatHexString, getMonthYear } from '@core/utils/format'
 
 describe('File: format.ts', () => {
     describe('Function: formatHexString', () => {
@@ -23,6 +23,22 @@ describe('File: format.ts', () => {
             expect(formatHexString('0x1', false, false)).toEqual('1')
             expect(formatHexString('0x1a2b3c', true, true)).toEqual('0x1A2B3C')
             expect(formatHexString('0x1A2B3C', false, true)).toEqual('0x1a2b3c')
+        })
+    })
+    describe('Function: getMonthYear', () => {
+        it('should return the month and year', () => {
+            expect(getMonthYear(new Date(2020, 0, 1))).toEqual('Jan 2020')
+            expect(getMonthYear(new Date(2020, 1, 1))).toEqual('Feb 2020')
+            expect(getMonthYear(new Date(2020, 2, 1))).toEqual('Mar 2020')
+            expect(getMonthYear(new Date(2020, 3, 1))).toEqual('Apr 2020')
+            expect(getMonthYear(new Date(2020, 4, 1))).toEqual('May 2020')
+            expect(getMonthYear(new Date(2020, 5, 1))).toEqual('Jun 2020')
+            expect(getMonthYear(new Date(2020, 6, 1))).toEqual('Jul 2020')
+            expect(getMonthYear(new Date(2020, 7, 1))).toEqual('Aug 2020')
+            expect(getMonthYear(new Date(2020, 8, 1))).toEqual('Sep 2020')
+            expect(getMonthYear(new Date(2020, 9, 1))).toEqual('Oct 2020')
+            expect(getMonthYear(new Date(2020, 10, 1))).toEqual('Nov 2020')
+            expect(getMonthYear(new Date(2020, 11, 1))).toEqual('Dec 2020')
         })
     })
 })
