@@ -4,21 +4,11 @@
     "compilerOptions": {
         "strict": true
     },
-    "files": [
-        "./lib/core/utils/constants/bech32-address-length.constant.ts",
-        "./lib/core/utils/constants/date-format.constant.ts",
-        "./lib/core/utils/constants/default-application-json-request-options.constant.ts",
-        "./lib/core/utils/constants/default-exchange-rates.constant.ts",
-        "./lib/core/utils/constants/hex.constants.ts",
-        "./lib/core/utils/constants/index.ts",
-        "./lib/core/utils/constants/iota-unit-map.constant.ts",
-        "./lib/core/utils/constants/max-bytes.constant.ts",
-        "./lib/core/utils/constants/max-number-of-iotas.constant.ts",
-        "./lib/core/utils/constants/pin-length.constant.ts",
-        "./lib/core/utils/constants/time.constants.ts",
-        "./lib/core/utils/enums/exchange-rate.enum.ts",
-        "./lib/core/utils/enums/iota-unit.enum.ts",
-        "./lib/core/utils/types/exchange-rates.type.ts",
-        "./lib/core/utils/types/iota-unit-map.type.ts"
+    // folders included below pass the strict check
+    "include": [
+        "./lib/core/utils/constants",
+        "./lib/core/utils/enums",
+        "./lib/core/utils/types",
+        "./lib/core/utils/stores"
     ]
 }
