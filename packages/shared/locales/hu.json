@@ -4,7 +4,7 @@
             "appSetup": {
                 "welcome": {
                     "title": "Küldje, fogadja és kezelje {network} tokenjeit",
-                    "body": "A Firefly a(z) {network} hivatalos pénztárca szoftvere."
+                    "body": "A Firefly a(z) {network} hivatalos tárcaszoftvere."
                 },
                 "legal": {
                     "title": "Adatvédelmi irányelvek és Felhasználási feltételek",
@@ -27,43 +27,31 @@
                     "title": "Válasszon hálózatot",
                     "body": "Állítsa be a hálózatot a profiljához.",
                     "iota": {
-                        "mainnet": {
-                            "title": "Éles hálózat",
-                            "body": "IOTA éles hálózat"
-                        },
-                        "devnet": {
-                            "title": "Fejlesztői hálózat",
-                            "body": "Fejlesztői IOTA hálózat"
-                        },
-                        "private-net": {
-                            "title": "Privát hálózat",
-                            "body": "Egyéni hálózatok támogatása aktív TIP-ekkel"
-                        }
+                        "title": "IOTA",
+                        "body": "IOTA éles hálózat"
                     },
                     "shimmer": {
-                        "mainnet": {
-                            "title": "Shimmer",
-                            "body": "Átmeneti hálózat az IOTA számára"
-                        },
-                        "devnet": {
-                            "title": "Teszt hálózat",
-                            "body": "Béta hálózat a Shimmer számára"
-                        },
-                        "private-net": {
-                            "title": "Privát hálózat",
-                            "body": "Egyéni hálózatok támogatása vázlat TIP-ekkel"
-                        }
+                        "title": "Shimmer",
+                        "body": "Átmeneti hálózat az IOTA számára"
+                    },
+                    "testnet": {
+                        "title": "Teszt hálózat",
+                        "body": "Publikus béta hálózat a Shimmer számára"
+                    },
+                    "custom": {
+                        "title": "Egyéni hálózat",
+                        "body": "Támogatás egyéni hálózatok és/vagy csomópontok számára"
                     }
                 },
                 "setupCustomNetwork": {
-                    "title": "Csatlakozás privát hálózathoz",
-                    "body": "Töltse ki az űrlapot a csomópontok adataival, és csatlakozzon egy privát hálózathoz."
+                    "title": "Csatlakozás egyéni hálózathoz vagy csomóponthoz",
+                    "body": "Töltse ki az űrlapot a csomópontok adataival, és csatlakozzon egy egyéni hálózathoz vagy csomóponthoz."
                 }
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Állítson be {network, select, IOTA {egy} Shimmer {egy} other {egy}} {network}-profilt",
-                    "body": "Válassza ki a {network} profil beállításának módját."
+                    "title": "Állítson be {network, select, IOTA {egy} Shimmer {egy} Testnet {egy} other {egy}} {network} profilt",
+                    "body": "Válassza ki a(z) {network} profil beállításának megfelelő módját."
                 },
                 "setupNew": {
                     "title": "Profil létrehozása",
@@ -175,7 +163,8 @@
                 "success": {
                     "title": "Shimmer jóváírva",
                     "body": "Sikeresen igényelte a Shimmer jutalmát.",
-                    "totalRewards": "Összes jutalom"
+                    "totalRewards": "Összes jutalom",
+                    "successfullyFound": "{amount} sikeresen megtalálva"
                 }
             },
             "congratulations": {
@@ -199,7 +188,7 @@
         },
         "ledgerInstallationGuide": {
             "title": "Feltelepítette a(z) {network} appot a Ledger-eszközére?",
-            "body1": "Mielőtt tovább lépne, először a Ledger Live segítségével telepítenie kell a {network} alkalmazást.",
+            "body1": "Mielőtt tovább lépne, először a Ledger Live segítségével telepítenie kell a(z) {network} alkalmazást.",
             "body2": "Győződjön meg, hogy a Ledger firmware a legfrissebb verzióval rendelkezik. Minden előzetesen telepített alkalmazást a legújabb verzióra kell frissíteni.",
             "action": "Igen, telepítettem a(z) {network} appot"
         },
@@ -426,17 +415,13 @@
                 "title": "Névjegy",
                 "description": ""
             },
-            "createDeveloperProfile": {
-                "title": "Fejlesztői profil létrehozása",
-                "description": ""
-            },
-            "createNormalProfile": {
-                "title": "Normál profil létrehozása",
-                "description": ""
-            },
             "reportAnIssue": {
                 "title": "Probléma jelentése",
                 "description": "Jelentsen be egy hibát a fejlesztőknek. Ellenőrizze előbb, hogy a hibát más bejelentette-e már korábban"
+            },
+            "developerToggle": {
+                "title": "Fejlesztői mód",
+                "description": "További funkciók kísérleti stádiumban történő eléréséhez kapcsolja be a fejlesztői üzemmódot"
             }
         },
         "login": {
@@ -501,8 +486,36 @@
             },
             "drawers": {
                 "networkConfig": {
+                    "addChain": {
+                        "title": "Lánc hozzáadása"
+                    },
+                    "chain": {
+                        "chainId": "Lánc AZ",
+                        "aliasAddress": "Álnév címe",
+                        "iscpEndpoint": "ISCP végpont",
+                        "explorerEndpoint": "Explorer végpont (opcionális)",
+                        "errors": {
+                            "cannotBeEmpty": "A név nem lehet üres",
+                            "nameTooLong": "A név túl hosszú",
+                            "aliasAddressWrongFormat": "Hex vagy Bech32 formátumban kell megadni",
+                            "aliasAddressAlreadyInUse": "Az álnévhez tartozó cím már használatban van",
+                            "invalidUrl": "Érvénytelen URL"
+                        }
+                    },
+                    "chainDepositAddress": {
+                        "title": "Lánc letéti címe"
+                    },
+                    "chainInformation": {
+                        "title": "Láncadatok"
+                    },
                     "connectedChains": {
                         "title": "Csatlakoztatott láncok"
+                    },
+                    "editChain": {
+                        "title": "Lánc szerkesztése"
+                    },
+                    "removeChain": {
+                        "title": "Lánc eltávolítása"
                     }
                 }
             }
@@ -910,7 +923,7 @@
             "title": "Hardver tárca csatlakoztatása",
             "notConnected": "A folytatáshoz csatlakoztassa hardver tárcáját.",
             "locked": "A folytatáshoz nyissa ki hardver tárcáját.",
-            "appNotOpen": "A folytatáshoz nyissa meg a(z) Shimmer applikációt a hardver eszközén.",
+            "appNotOpen": "A folytatáshoz nyissa meg a Shimmer appot a Ledger-eszközén.",
             "correctAppOpen": "Hardver tárca csatlakoztatva, kérjük folytassa."
         },
         "ledgerConfirmation": {
@@ -1183,18 +1196,22 @@
         "importSeed": "Meglévő seed importálása",
         "restoreWallet": {
             "iota": "Tárca átköltöztetése vagy helyreállítása",
-            "shimmer": "Shimmer-profil helyreállítása"
+            "shimmer": "Shimmer-profil helyreállítása",
+            "testnet": "Teszt hálózati profil helyreállítása",
+            "custom": "Egyéni hálózati profil helyreállítása"
         },
         "restoreWalletDescription": {
             "iota": "Költöztetés a Chrysalis-hálózatra vagy egy meglévő tárca helyreállítása",
-            "shimmer": "Egy meglévő Shimmer-profil helyreállítása"
+            "shimmer": "Egy meglévő Shimmer-profil helyreállítása",
+            "testnet": "Meglévő teszt hálózati profil helyreállítása",
+            "custom": "Meglévő egyéni hálózati profil helyreállítása"
         },
         "refreshNftMedia": {
             "title": "NFT-média frissítése",
             "description": "Szeretné törölni és újra letölteni a jelen fiókhoz tartozó összes NFT-médiát?"
         },
         "createWallet": "Hozzon létre egy új {network}-profilt",
-        "createWalletDescription": "Hozzon létre egy új profilt, ami {network, select, iota {a Chrysalis-} shimmer {a Shimmer-} other {egy ismertelen }}protokollon fut!",
+        "createWalletDescription": "Hozzon létre egy új profilt {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {teszt hálózat} custom {egyéni hálózat} other {ismeretlen}} protokollon",
         "claimShimmer": "Shimmer jutalom igénylése",
         "claimShimmerDescription": "IOTA profil importálása és Shimmer jutalom igénylése",
         "createAlias": "Create alias",
@@ -1306,7 +1323,6 @@
         "searchForRewards": "Jutalmak keresése",
         "claimRewards": "Jutalmak igénylése",
         "rerunClaimProcess": "Igénylési folyamat újbóli lefuttatása",
-        "finishProfileSetupWithProtocol": "Fejezze be {network}-profil beállítását",
         "addPublicNote": "Nyilvános megjegyzés hozzáadása",
         "backup": "Biztonsági mentés",
         "mint": "Kibocsátás",
@@ -1334,7 +1350,8 @@
         "changeNode": "Csomópontváltás",
         "stopVoting": "Stop voting",
         "revote": "Revote",
-        "skipAndKeep": "Kihagyás és a reégi jelszó használata"
+        "skipAndKeep": "Kihagyás és a reégi jelszó használata",
+        "addChain": "Lánc hozzáadása"
     },
     "general": {
         "recipient": "Címzett",
@@ -1600,7 +1617,9 @@
         "statistics": "Statistics",
         "username": "Username",
         "jwt": "JSON web token",
-        "internalTransaction": "Internal transaction"
+        "internalTransaction": "Internal transaction",
+        "coinType": "Érme típusa",
+        "custom": "Egyéni"
     },
     "filters": {
         "title": "Szűrők",
@@ -1912,7 +1931,8 @@
             "pluginNotAvailable": "A “{nodePlugin}” kiegészítést a jelenlegi csomópont nem támogatja.",
             "unabledToConnect": "Nem sikerült kapcsolódni a csomóponthoz",
             "differentNetwork": "A csomópont egy eltérő hálózaton található",
-            "duplicateNodes": "Ugyanaz a csomópont nem adható hozzá még egyszer"
+            "duplicateNodes": "Ugyanaz a csomópont nem adható hozzá még egyszer",
+            "noCoinType": "Érme típusa nincs meghatározva"
         },
         "network": {
             "mismatch": "A csomópont hálózati azonosítója \"{networkId}\", amely nem egyezik a jelenleg használt hálózattal.",
@@ -1927,6 +1947,7 @@
             "invalid": "A biztonsági mentés fájl formátuma ismeretlen.",
             "destination": "A biztonsági mentés elérési útvonala érvénytelen.",
             "mnemonic": "Érvénytelen jelszóemlékeztető.",
+            "migrationRequired": "Stronghold migration is required.",
             "seedTooShort": "A seed-nek 81 karakter hosszúnak kell lennie, de a megadott seed csak {length, plural, one {#} other {#}} karakter hosszú",
             "seedCharacters": "A seed csak A-Z vagy 9 karaktereket tartalmazhat",
             "phraseWordCount": "24 helyett csak {length, plural, one {#} other {#}} helyreállító kódszót adott meg.",
@@ -2273,6 +2294,12 @@
                 "Confirmed": "alias created",
                 "Failed": "Failed to create alias"
             }
+        },
+        "networkHealth": {
+            "down": "Le",
+            "degraded": "Csökkent",
+            "operational": "Működő",
+            "disconnected": "Kapcsolat bontva"
         },
         "locked": "lezárva",
         "smartContract": "smart contract"

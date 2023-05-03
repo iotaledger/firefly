@@ -27,42 +27,30 @@
                     "title": "Choose network",
                     "body": "Set the network for your profile.",
                     "iota": {
-                        "mainnet": {
-                            "title": "Mainnet",
-                            "body": "IOTA Mainnet"
-                        },
-                        "devnet": {
-                            "title": "Devnet",
-                            "body": "Developer network for IOTA"
-                        },
-                        "private-net": {
-                            "title": "Private net",
-                            "body": "Support for custom networks with active TIPs"
-                        }
+                        "title": "IOTA",
+                        "body": "IOTA Mainnet"
                     },
                     "shimmer": {
-                        "mainnet": {
-                            "title": "Shimmer",
-                            "body": "Staging network for IOTA"
-                        },
-                        "devnet": {
-                            "title": "Testnet",
-                            "body": "Public beta network for Shimmer"
-                        },
-                        "private-net": {
-                            "title": "Private net",
-                            "body": "Support for custom networks with draft TIPs"
-                        }
+                        "title": "Shimmer",
+                        "body": "Staging network for IOTA"
+                    },
+                    "testnet": {
+                        "title": "Testnet",
+                        "body": "Public beta network for Shimmer"
+                    },
+                    "custom": {
+                        "title": "Custom network",
+                        "body": "Support for custom networks and/or nodes"
                     }
                 },
                 "setupCustomNetwork": {
-                    "title": "Connect to a private network",
-                    "body": "Fill the form with the node information and connect to a private network."
+                    "title": "Connect to a custom network or node",
+                    "body": "Fill the form with the node information and connect to a custom network or node."
                 }
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Set up {network, select, IOTA {an} Shimmer {a} other {an}} {network} profile",
+                    "title": "Set up {network, select, IOTA {an} Shimmer {a} Testnet {a} other {a}} {network} profile",
                     "body": "Select the appropriate method to set up your {network} profile."
                 },
                 "setupNew": {
@@ -175,7 +163,8 @@
                 "success": {
                     "title": "Shimmer claimed",
                     "body": "You have successfully claimed your Shimmer tokens.",
-                    "totalRewards": "Total rewards"
+                    "totalRewards": "Total rewards",
+                    "successfullyFound": "Successfully found {amount}"
                 }
             },
             "congratulations": {
@@ -198,10 +187,10 @@
             "videoGuide": "Ledger 마이그레이션 비디오 가이드"
         },
         "ledgerInstallationGuide": {
-            "title": "Ledger 기기에 {network} 앱을 설치하셨습니까?",
+            "title": "Have you installed the {network} app on your Ledger device?",
             "body1": "Before you proceed, you must use Ledger Live to find and install the {network} app.",
             "body2": "Ledger 펌웨어가 최신인지 반드시 확인하세요. 이전에 설치했던 모든 앱들을 전부 최신 버전으로 업데이트 해야합니다.",
-            "action": "네, 이미 {network} 앱을 설치했습니다"
+            "action": "Yes, I've installed the {network} app"
         },
         "importFromLedger": {
             "title": "여러분의 Ledger를 복원하거나 마이그레이션하세요.",
@@ -426,17 +415,13 @@
                 "title": "관련 정보",
                 "description": ""
             },
-            "createDeveloperProfile": {
-                "title": "Create Developer Profile",
-                "description": ""
-            },
-            "createNormalProfile": {
-                "title": "Create Normal Profile",
-                "description": ""
-            },
             "reportAnIssue": {
                 "title": "오류 보고하기",
                 "description": "개발진에게 오류를 보고합니다. 보고하기 전에 이미 보고된 오류인지 다시 한번 확인해 주세요"
+            },
+            "developerToggle": {
+                "title": "Developer Mode",
+                "description": "Switch developer mode on to enable more features in experimental state"
             }
         },
         "login": {
@@ -501,8 +486,36 @@
             },
             "drawers": {
                 "networkConfig": {
+                    "addChain": {
+                        "title": "Add chain"
+                    },
+                    "chain": {
+                        "chainId": "Chain ID",
+                        "aliasAddress": "Alias Address",
+                        "iscpEndpoint": "ISCP Endpoint",
+                        "explorerEndpoint": "Explorer Endpoint (optional)",
+                        "errors": {
+                            "cannotBeEmpty": "Name cannot be empty",
+                            "nameTooLong": "Name is too long",
+                            "aliasAddressWrongFormat": "Must be in either hex or Bech32 format",
+                            "aliasAddressAlreadyInUse": "Alias address already in use",
+                            "invalidUrl": "Invalid URL"
+                        }
+                    },
+                    "chainDepositAddress": {
+                        "title": "Chain deposit address"
+                    },
+                    "chainInformation": {
+                        "title": "Chain information"
+                    },
                     "connectedChains": {
                         "title": "Connected chains"
+                    },
+                    "editChain": {
+                        "title": "Edit chain"
+                    },
+                    "removeChain": {
+                        "title": "Remove chain"
                     }
                 }
             }
@@ -1183,18 +1196,22 @@
         "importSeed": "기존 시드 불러오기",
         "restoreWallet": {
             "iota": "Migrate or restore a wallet",
-            "shimmer": "Restore Shimmer profile"
+            "shimmer": "Restore Shimmer profile",
+            "testnet": "Restore Testnet profile",
+            "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
             "iota": "Migrate to Chrysalis or restore an existing wallet",
-            "shimmer": "Restore an existing Shimmer profile"
+            "shimmer": "Restore an existing Shimmer profile",
+            "testnet": "Restore an existing Testnet profile",
+            "custom": "Restore an existing Custom Network profile"
         },
         "refreshNftMedia": {
             "title": "Refresh NFT media",
             "description": "Do you want to delete and re-download all NFT media for this account?"
         },
         "createWallet": "Create a new {network} profile",
-        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
+        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown}}",
         "claimShimmer": "Claim Shimmer staking rewards",
         "claimShimmerDescription": "Import IOTA profile and claim staking rewards",
         "createAlias": "Create alias",
@@ -1306,7 +1323,6 @@
         "searchForRewards": "Search for rewards",
         "claimRewards": "Claim rewards",
         "rerunClaimProcess": "Rerun claim process",
-        "finishProfileSetupWithProtocol": "Finish {network} profile setup",
         "addPublicNote": "Add public note",
         "backup": "Backup",
         "mint": "Mint",
@@ -1334,7 +1350,8 @@
         "changeNode": "Change node",
         "stopVoting": "Stop voting",
         "revote": "Revote",
-        "skipAndKeep": "Skip and keep old password"
+        "skipAndKeep": "Skip and keep old password",
+        "addChain": "Add chain"
     },
     "general": {
         "recipient": "Recipient",
@@ -1408,7 +1425,7 @@
         "and": "and",
         "receiveFunds": "Receive funds",
         "address": "주소",
-        "myAddress": "내 주소",
+        "myAddress": "My address",
         "myNetworkAddress": "My {networkName} address",
         "shareAddress": "주소 공유하기",
         "yourAddress": "내 주소",
@@ -1600,7 +1617,9 @@
         "statistics": "Statistics",
         "username": "Username",
         "jwt": "JSON web token",
-        "internalTransaction": "Internal transaction"
+        "internalTransaction": "Internal transaction",
+        "coinType": "Coin type",
+        "custom": "Custom"
     },
     "filters": {
         "title": "Filters",
@@ -1912,7 +1931,8 @@
             "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node.",
             "unabledToConnect": "Unable to connect to the node",
             "differentNetwork": "The node is located on a different network",
-            "duplicateNodes": "Unable to add duplicate node"
+            "duplicateNodes": "Unable to add duplicate node",
+            "noCoinType": "No coin type specified"
         },
         "network": {
             "mismatch": "노드의 네트워크 ID는 \"{networkId}\"이며, 현재 네트워크에 맞지 않습니다.",
@@ -1927,6 +1947,7 @@
             "invalid": "백업 파일이 인식되지 않았습니다.",
             "destination": "백업 장소가 유효하지 않습니다.",
             "mnemonic": "니모닉이 유효하지 않습니다.",
+            "migrationRequired": "Stronghold migration is required.",
             "seedTooShort": "시드의 길이는 81자여야 합니다. 현재 길이는 {length, plural, other {#자}}입니다.",
             "seedCharacters": "시드에는 A부터 Z까지의 알파벳과 숫자 9만 포함되어야 합니다.",
             "phraseWordCount": "복원 문구는 단어 24개로 이루어지며, 현재 단어 {length, plural, other {#}}개를 입력하였습니다.",
@@ -2273,6 +2294,12 @@
                 "Confirmed": "alias created",
                 "Failed": "Failed to create alias"
             }
+        },
+        "networkHealth": {
+            "down": "Down",
+            "degraded": "Degraded",
+            "operational": "Operational",
+            "disconnected": "Disconnected"
         },
         "locked": "locked",
         "smartContract": "smart contract"

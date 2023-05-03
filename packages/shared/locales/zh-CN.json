@@ -3,8 +3,8 @@
         "onboarding": {
             "appSetup": {
                 "welcome": {
-                    "title": "发送、接收和管理您的 {network} 代币",
-                    "body": "Firefly 是 {network} 的官方钱包软件。"
+                    "title": "Send, Receive & Manage your {network} tokens",
+                    "body": "Firefly is the official wallet software for {network}."
                 },
                 "legal": {
                     "title": "隐私政策和服务条款",
@@ -27,43 +27,31 @@
                     "title": "选择网络",
                     "body": "为您的个人资料设置网络。",
                     "iota": {
-                        "mainnet": {
-                            "title": "主网",
-                            "body": "IOTA 主网"
-                        },
-                        "devnet": {
-                            "title": "Devnet",
-                            "body": "IOTA开发者网络"
-                        },
-                        "private-net": {
-                            "title": "私有网络",
-                            "body": "支持自定义的带有活动TIPS的网络"
-                        }
+                        "title": "IOTA",
+                        "body": "IOTA Mainnet"
                     },
                     "shimmer": {
-                        "mainnet": {
-                            "title": "Shimmer",
-                            "body": "IOTA 先行网络"
-                        },
-                        "devnet": {
-                            "title": "测试网络",
-                            "body": "Shimmer 的Beta版公共测试网络"
-                        },
-                        "private-net": {
-                            "title": "私有网络",
-                            "body": "支持使用 TIPS 草案的自定义网络"
-                        }
+                        "title": "Shimmer",
+                        "body": "Staging network for IOTA"
+                    },
+                    "testnet": {
+                        "title": "Testnet",
+                        "body": "Public beta network for Shimmer"
+                    },
+                    "custom": {
+                        "title": "Custom network",
+                        "body": "Support for custom networks and/or nodes"
                     }
                 },
                 "setupCustomNetwork": {
-                    "title": "连接到私有网络",
-                    "body": "在表单中填写节点信息，并连接到一个私有网络。"
+                    "title": "Connect to a custom network or node",
+                    "body": "Fill the form with the node information and connect to a custom network or node."
                 }
             },
             "profileSetup": {
                 "setup": {
-                    "title": "设置 {network, select, IOTA {一个} Shimmer {一个} other {一个}} {network} 档案",
-                    "body": "请选择适当的方法来设置你的 {network} 配置文件。"
+                    "title": "Set up {network, select, IOTA {an} Shimmer {a} Testnet {a} other {a}} {network} profile",
+                    "body": "Select the appropriate method to set up your {network} profile."
                 },
                 "setupNew": {
                     "title": "创建个人资料",
@@ -78,7 +66,7 @@
                     }
                 },
                 "setupRecovered": {
-                    "title": "恢复 {network} 档案",
+                    "title": "Recover {network} profile",
                     "body": "如果您有一个现有的助记符或 Stronghold 备份文件，您可以在此处导入。",
                     "importMnemonic": "使用恢复密语",
                     "importMnemonicDescription": "输入您的 24 个单词组成的助记词",
@@ -92,7 +80,7 @@
                     "body": "导入您的 IOTA个人资料并领取您的 Shimmer 质押奖励。"
                 },
                 "enterName": {
-                    "title": "创建新的 {network} 配置",
+                    "title": "Create your {network} profile",
                     "profileName": "配置名称",
                     "body1": "您可以创建多个用户配置文件来管理您的钱包和改善隐私。",
                     "body2": {
@@ -175,7 +163,8 @@
                 "success": {
                     "title": "已认领 Shimmer",
                     "body": "您已成功认领了您的 Shimmer 代币。",
-                    "totalRewards": "奖励总额"
+                    "totalRewards": "奖励总额",
+                    "successfullyFound": "Successfully found {amount}"
                 }
             },
             "congratulations": {
@@ -198,10 +187,10 @@
             "videoGuide": "Ledger 迁移视频指南"
         },
         "ledgerInstallationGuide": {
-            "title": "您是否在您的Ledger设备上安装了 {network} 应用？",
-            "body1": "在继续之前，您必须使用 Ledger Live来查找并安装 {network} 应用程序。",
+            "title": "Have you installed the {network} app on your Ledger device?",
+            "body1": "Before you proceed, you must use Ledger Live to find and install the {network} app.",
             "body2": "请确保您的Ledger固件是最新的。任何预安装的应用都应更新到他们的最新版本。",
-            "action": "是的，我已经安装了 {network} 应用程序"
+            "action": "Yes, I've installed the {network} app"
         },
         "importFromLedger": {
             "title": "还原或迁移您的Ledger",
@@ -426,17 +415,13 @@
                 "title": "关于",
                 "description": ""
             },
-            "createDeveloperProfile": {
-                "title": "创建开发者配置文件",
-                "description": ""
-            },
-            "createNormalProfile": {
-                "title": "创建普通的配置文件",
-                "description": ""
-            },
             "reportAnIssue": {
                 "title": "反馈问题",
                 "description": "向开发者反馈错误。请检查以确保该问题尚未被反馈过"
+            },
+            "developerToggle": {
+                "title": "Developer Mode",
+                "description": "Switch developer mode on to enable more features in experimental state"
             }
         },
         "login": {
@@ -501,8 +486,36 @@
             },
             "drawers": {
                 "networkConfig": {
+                    "addChain": {
+                        "title": "Add chain"
+                    },
+                    "chain": {
+                        "chainId": "Chain ID",
+                        "aliasAddress": "Alias Address",
+                        "iscpEndpoint": "ISCP Endpoint",
+                        "explorerEndpoint": "Explorer Endpoint (optional)",
+                        "errors": {
+                            "cannotBeEmpty": "Name cannot be empty",
+                            "nameTooLong": "Name is too long",
+                            "aliasAddressWrongFormat": "Must be in either hex or Bech32 format",
+                            "aliasAddressAlreadyInUse": "Alias address already in use",
+                            "invalidUrl": "Invalid URL"
+                        }
+                    },
+                    "chainDepositAddress": {
+                        "title": "Chain deposit address"
+                    },
+                    "chainInformation": {
+                        "title": "Chain information"
+                    },
                     "connectedChains": {
                         "title": "Connected chains"
+                    },
+                    "editChain": {
+                        "title": "Edit chain"
+                    },
+                    "removeChain": {
+                        "title": "Remove chain"
                     }
                 }
             }
@@ -910,7 +923,7 @@
             "title": "连接您的Ledger",
             "notConnected": "连接您的Ledger设备以继续。",
             "locked": "解锁您的Ledger设备以继续。",
-            "appNotOpen": "打开您Ledger设备上的 Shimmer 应用以继续。",
+            "appNotOpen": "Open the Shimmer app on your Ledger device to continue.",
             "correctAppOpen": "Ledger连接成功，请继续。"
         },
         "ledgerConfirmation": {
@@ -1183,18 +1196,22 @@
         "importSeed": "导入已有的私钥种子",
         "restoreWallet": {
             "iota": "迁移或恢复钱包",
-            "shimmer": "恢复 Shimmer 配置文件"
+            "shimmer": "恢复 Shimmer 配置文件",
+            "testnet": "Restore Testnet profile",
+            "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
             "iota": "迁移到 Chrysalis 或恢复一个现有钱包",
-            "shimmer": "恢复一个Shimmer 配置文件"
+            "shimmer": "恢复一个Shimmer 配置文件",
+            "testnet": "Restore an existing Testnet profile",
+            "custom": "Restore an existing Custom Network profile"
         },
         "refreshNftMedia": {
             "title": "Refresh NFT media",
             "description": "Do you want to delete and re-download all NFT media for this account?"
         },
-        "createWallet": "创建新的 {network} 配置文件",
-        "createWalletDescription": "创建一个运行在 {network, select, iota {Chrysalis} shimmer {Shimmer} other {其他未知}} 的新配置文件",
+        "createWallet": "Create a new {network} profile",
+        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown}}",
         "claimShimmer": "认领您的 Shimmer 质押奖励",
         "claimShimmerDescription": "导入您的 IOTA个人资料并领取质押奖励。",
         "createAlias": "创建别名",
@@ -1306,7 +1323,6 @@
         "searchForRewards": "搜索奖励",
         "claimRewards": "认领奖励",
         "rerunClaimProcess": "再次运行认领流程",
-        "finishProfileSetupWithProtocol": "完成 {network} 的配置文件设置",
         "addPublicNote": "添加公开注释",
         "backup": "备份",
         "mint": "锻造",
@@ -1334,7 +1350,8 @@
         "changeNode": "Change node",
         "stopVoting": "停止投票",
         "revote": "重新投票",
-        "skipAndKeep": "Skip and keep old password"
+        "skipAndKeep": "Skip and keep old password",
+        "addChain": "Add chain"
     },
     "general": {
         "recipient": "接收人",
@@ -1408,7 +1425,7 @@
         "and": "和",
         "receiveFunds": "接收资金",
         "address": "地址",
-        "myAddress": "我的地址",
+        "myAddress": "My address",
         "myNetworkAddress": "我的 {networkName} 地址",
         "shareAddress": "分享地址",
         "yourAddress": "您的地址",
@@ -1600,7 +1617,9 @@
         "statistics": "统计",
         "username": "用户名",
         "jwt": "JSON web 代币",
-        "internalTransaction": "内部交易"
+        "internalTransaction": "内部交易",
+        "coinType": "Coin type",
+        "custom": "Custom"
     },
     "filters": {
         "title": "过滤",
@@ -1912,7 +1931,8 @@
             "pluginNotAvailable": "\"{nodePlugin}\"插件在当前节点上不可用。",
             "unabledToConnect": "无法连接到节点",
             "differentNetwork": "节点位于不同的网络",
-            "duplicateNodes": "无法添加重复节点"
+            "duplicateNodes": "无法添加重复节点",
+            "noCoinType": "No coin type specified"
         },
         "network": {
             "mismatch": "此节点的网络ID是 \"{networkId}\"，与当前网络不匹配。",
@@ -1927,6 +1947,7 @@
             "invalid": "备份文件无法识别。",
             "destination": "备份路径无效。",
             "mnemonic": "助记符无效。",
+            "migrationRequired": "Stronghold migration is required.",
             "seedTooShort": "私钥种子的长度应该是81个字符，而它 {length, plural, one {只有 1} other {是 #}} 个。",
             "seedCharacters": "私钥种子只能包含大写字符 A-Z 或数字 9",
             "phraseWordCount": "您的恢复密语中应该有24个单词，目前 {length, plural, one {只有 1}other {是 #}} 个单词。",
@@ -2273,6 +2294,12 @@
                 "Confirmed": "别名已创建",
                 "Failed": "创建别名失败"
             }
+        },
+        "networkHealth": {
+            "down": "Down",
+            "degraded": "Degraded",
+            "operational": "Operational",
+            "disconnected": "Disconnected"
         },
         "locked": "已锁定",
         "smartContract": "智能合约"
