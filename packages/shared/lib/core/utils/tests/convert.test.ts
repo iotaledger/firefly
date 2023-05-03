@@ -14,8 +14,8 @@ describe('File: convert.ts', () => {
             expect(convertDateToUnixTimestamp(TEST_DATE)).toEqual(TEST_UNIX_TIMESTAMP)
         })
         it('should handle invalid date parameters', () => {
-            expect(() => convertDateToUnixTimestamp('' as Date)).toThrowError()
-            expect(() => convertDateToUnixTimestamp(undefined)).toThrowError()
+            expect(convertDateToUnixTimestamp('' as Date)).toEqual(undefined)
+            expect(convertDateToUnixTimestamp(undefined)).toEqual(undefined)
         })
     })
 
@@ -26,7 +26,7 @@ describe('File: convert.ts', () => {
             expect(convertUnixTimestampToDate(TEST_UNIX_TIMESTAMP)).toEqual(TEST_DATE)
         })
         it('should handle invalid timestamp parameters', () => {
-            expect(() => convertUnixTimestampToDate(undefined)).toThrowError()
+            expect(convertUnixTimestampToDate(undefined)).toEqual(undefined)
         })
     })
 
