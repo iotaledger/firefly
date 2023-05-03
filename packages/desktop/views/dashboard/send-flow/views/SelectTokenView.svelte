@@ -2,7 +2,7 @@
     import { closePopup } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
     import { Button, FontWeight, Text, TextType } from 'shared/components'
-    import { sendFlowRouter } from '../send-flow-router'
+    import { sendFlowRouter } from '../send-flow.router'
 
     function onContinueClick(): void {
         $sendFlowRouter.next()

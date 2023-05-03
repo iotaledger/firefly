@@ -10,7 +10,7 @@
     } from '@core/wallet'
     import { AssetAmountInput, Button, FontWeight, Text, TextType } from 'shared/components'
     import { get } from 'svelte/store'
-    import { sendFlowRouter } from '../send-flow-router'
+    import { sendFlowRouter } from '../send-flow.router'
 
     const transactionDetails = get(newTransactionDetails)
     let assetAmountInput: AssetAmountInput

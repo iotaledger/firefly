@@ -48,7 +48,7 @@
         Toggle,
     } from '@ui'
     import { get } from 'svelte/store'
-    import { sendFlowRouter } from '../send-flow-router'
+    import { sendFlowRouter } from '../send-flow.router'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
