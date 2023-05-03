@@ -17,7 +17,7 @@ export class StardustNetwork implements INetwork {
 
     constructor(metadata: NetworkMetadata, chainConfigurations: ChainConfiguration[]) {
         this._metadata = metadata
-        this._chains = this.constructChains(chainConfigurations)
+        this._chains = this.constructChains(chainConfigurations ?? [])
     }
 
     private constructChains(chainConfigurations: ChainConfiguration[]): IChain[] {
