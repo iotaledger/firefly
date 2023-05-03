@@ -8,6 +8,10 @@ import { version } from './package.json'
 import features from './features/features'
 import { Configuration as WebpackConfiguration } from 'webpack'
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server'
+import assert from 'assert'
+import dotenv from 'dotenv'
+
+dotenv.config() // used to read env vars from an .env file
 
 type Mode = 'none' | 'development' | 'production'
 interface Configuration extends WebpackConfiguration {
@@ -35,6 +39,10 @@ const fallback: { [index: string]: string | false | string[] } = {
     path: false,
     fs: false,
     crypto: false,
+    // These are required for the Amplitude SDK
+    https: require.resolve('https-browserify'),
+    url: require.resolve('url/'),
+    http: require.resolve('stream-http'),
 }
 
 const resolve = {
@@ -46,6 +54,7 @@ const resolve = {
         '@core': path.resolve(__dirname, '../shared/lib/core'),
         '@features': path.resolve(__dirname, './features'),
         '@lib': path.resolve(__dirname, '../shared/lib'),
+        '@desktop': path.resolve(__dirname, './lib'),
         '@ui': path.resolve(__dirname, '../shared/components/'),
         '@views': path.resolve(__dirname, './views/'),
     },
@@ -139,6 +148,7 @@ const mainPlugins = [
         APP_ID: JSON.stringify(appId),
         'process.env.STAGE': JSON.stringify(stage),
         'process.env.APP_PROTOCOL': JSON.stringify(appProtocol),
+        'process.env.AMPLITUDE_API_KEY': JSON.stringify(process.env.AMPLITUDE_API_KEY),
     }),
 ]
 
@@ -150,13 +160,14 @@ const rendererPlugins = [
                 // we ignore the fonts since the `asset/resource` handles them
                 filter: prod ? (asset) => !asset.includes('fonts') : undefined,
                 to({ context, absoluteFilename }) {
+                    assert(typeof absoluteFilename === 'string')
                     return path.relative(context, absoluteFilename).replace(/..[\\/]shared[\\/]/g, '')
                 },
             },
             {
                 from: '../shared/locales/*',
                 to() {
-                    return 'locales/[name].[ext]'
+                    return 'locales/[name][ext]'
                 },
             },
         ],

@@ -1,20 +1,32 @@
 import { IPersistedProfile } from '@core/profile'
-
-import { ProfileProtectionType, ProfileRecoveryType, ProfileSetupType } from '../enums'
+import { CreateProfileType, OnboardingType, ProfileProtectionType, RestoreProfileType } from '../enums'
 import { ImportFile, Mnemonic } from '../types'
-
 import { IShimmerClaimingAccount } from './shimmer-claiming-account.interface'
 
 export interface IOnboardingProfile extends IPersistedProfile {
-    setupType: ProfileSetupType
-    recoveryType?: ProfileRecoveryType
-    protectionType?: ProfileProtectionType
+    // Onboarding flow indicators
+    onboardingType?: OnboardingType
+    createProfileType?: CreateProfileType
+    restoreProfileType?: RestoreProfileType
+
+    // Stronghold setup data
     importFile?: ImportFile
     importFilePath?: string
+
+    // Mnemonic setup data
     mnemonic?: Mnemonic
-    strongholdPassword?: string
-    mustVisitProfileName?: boolean
+    hasVerifiedMnemonic?: boolean
     hasStoredMnemonic?: boolean
-    hasInitialisedProfileManager?: boolean
+
+    // Encryption password
+    strongholdPassword?: string
+
+    // Shimmer claiming data
     shimmerClaimingAccounts?: IShimmerClaimingAccount[]
+
+    hasInitialisedProfileManager?: boolean
+
+    // Mobile specific after refactor
+    protectionType?: ProfileProtectionType
+    mustVisitProfileName?: boolean
 }

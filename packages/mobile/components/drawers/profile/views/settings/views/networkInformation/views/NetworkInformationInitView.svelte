@@ -1,24 +1,21 @@
 <script lang="ts">
     import { NodeListTable } from '@components'
     import { Button, HR, Text, TextType } from '@ui'
-
     import { localize } from '@core/i18n'
     import {
         addOfficialNodesToClientOptions,
         INode,
         NETWORK_HEALTH_COLORS,
-        NETWORK_STATUS_DESCRIPTION,
         NetworkHealth,
         networkStatus,
-        NetworkType,
+        NetworkId,
         nodeInfo,
     } from '@core/network'
     import { activeProfile } from '@core/profile'
-
     import { NetworkInformationSettingsAction } from '@/contexts/settings'
     import { networkInformationSettingsRouter } from '@/routers'
 
-    const { networkType } = $activeProfile
+    const networkId = $activeProfile?.network?.id
 
     function onAddNodeClick(): void {
         $networkInformationSettingsRouter.next({ action: NetworkInformationSettingsAction.AddNode })
@@ -41,12 +38,12 @@
             <div>
                 <Text type={TextType.p} classes="inline" secondary>{localize('views.dashboard.network.status')}:</Text>
                 <div>
-                    <p class="text-13 text-{NETWORK_HEALTH_COLORS[$networkStatus.health || 0]}-500">
-                        {localize(
-                            `views.dashboard.network.${
-                                $networkStatus.description || NETWORK_STATUS_DESCRIPTION[NetworkHealth.Disconnected]
-                            }`
-                        )}
+                    <p
+                        class="text-13 text-{NETWORK_HEALTH_COLORS[
+                            $networkStatus.health ?? NetworkHealth.Disconnected
+                        ]}-500"
+                    >
+                        {localize(`views.dashboard.network.${$networkStatus.health ?? NetworkHealth.Disconnected}`)}
                     </p>
                 </div>
             </div>
@@ -59,7 +56,7 @@
         </div>
     </div>
     <div class="flex flex-col space-y-4 w-full">
-        {#if networkType !== NetworkType.PrivateNet}
+        {#if networkId !== NetworkId.Custom}
             <Button outline classes="w-full" onClick={addOfficialNodesToClientOptions}>
                 {localize('actions.addOfficialNodes')}
             </Button>

@@ -3,8 +3,8 @@
         "onboarding": {
             "appSetup": {
                 "welcome": {
-                    "title": "Send, Receive & Manage your {protocol} tokens",
-                    "body": "Firefly is the official wallet software for {protocol}."
+                    "title": "Send, Receive & Manage your {network} tokens",
+                    "body": "Firefly is the official wallet software for {network}."
                 },
                 "legal": {
                     "title": "Privacy Policy & Terms of Service",
@@ -55,15 +55,15 @@
                         }
                     }
                 },
-                "setupPrivateNetworkConnection": {
+                "setupCustomNetwork": {
                     "title": "Connect to a private network",
                     "body": "Fill the form with the node information and connect to a private network."
                 }
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Configurez {protocol, select, IOTA {un} Shimmer {un} other {un}} le profil {protocol}",
-                    "body": "Select the appropriate method to set up your {protocol} profile."
+                    "title": "Configurez {network, select, IOTA {un} Shimmer {un} other {un}} le profil {network}",
+                    "body": "Select the appropriate method to set up your {network} profile."
                 },
                 "setupNew": {
                     "title": "Create a profile",
@@ -78,7 +78,7 @@
                     }
                 },
                 "setupRecovered": {
-                    "title": "Recover {protocol} profile",
+                    "title": "Recover {network} profile",
                     "body": "If you have an existing mnemonic or Stronghold backup file, you can import it here.",
                     "importMnemonic": "Use recovery phrase",
                     "importMnemonicDescription": "Enter your 24-word mnemonic phrase",
@@ -92,7 +92,7 @@
                     "body": "Import your IOTA profile and claim your Shimmer staking rewards."
                 },
                 "enterName": {
-                    "title": "Create your {protocol} profile",
+                    "title": "Create your {network} profile",
                     "profileName": "Profile name",
                     "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
                     "body2": {
@@ -198,10 +198,10 @@
             "videoGuide": "Guide vidéo de migration du Ledger"
         },
         "ledgerInstallationGuide": {
-            "title": "Have you installed the {protocol} app on your Ledger device?",
-            "body1": "Before you proceed, you must use Ledger Live to find and install the {protocol} app.",
+            "title": "Have you installed the {network} app on your Ledger device?",
+            "body1": "Before you proceed, you must use Ledger Live to find and install the {network} app.",
             "body2": "Assurez-vous que votre firmware Ledger est à jour. Toutes les applications pré-installées doivent être mises à jour avec leurs dernières versions.",
-            "action": "Yes, I've installed the {protocol} app"
+            "action": "Yes, I've installed the {network} app"
         },
         "importFromLedger": {
             "title": "Restaurer ou faire migrer votre Ledger",
@@ -322,6 +322,10 @@
             "maxMediaSize": {
                 "title": "Maximum media size",
                 "description": "NFT media with sizes greater than this limit will not be downloaded and a placeholder representing the media type will be displayed instead"
+            },
+            "maxMediaDownloadTime": {
+                "title": "Temps de téléchargement maximum",
+                "description": "Les médias NFT qui prennent plus de temps que cette limite à télécharger seront annulés et un espace réservé représentant le type de média sera affiché à la place"
             },
             "refreshNftMedia": {
                 "title": "Rafraîchir les NFT",
@@ -493,6 +497,13 @@
                     "title": "Nouvelle mise à jour disponible",
                     "updateVersion": "Firefly v{version}",
                     "button": "Mettre à jour"
+                }
+            },
+            "drawers": {
+                "networkConfig": {
+                    "connectedChains": {
+                        "title": "Chaînes connectées"
+                    }
                 }
             }
         },
@@ -899,7 +910,7 @@
             "title": "Connect your Ledger",
             "notConnected": "Connect your Ledger device to continue.",
             "locked": "Unlock your Ledger device to continue.",
-            "appNotOpen": "Open the {protocol} app on your Ledger device to continue.",
+            "appNotOpen": "Open the Shimmer app on your Ledger device to continue.",
             "correctAppOpen": "Ledger successfully connected, please continue."
         },
         "ledgerConfirmation": {
@@ -1182,8 +1193,8 @@
             "title": "Rafraîchir les NFT",
             "description": "Voulez-vous supprimer et télécharger à nouveau tous les NFT pour ce compte ?"
         },
-        "createWallet": "Créer un nouveau profil pour {protocol}",
-        "createWalletDescription": "Créez un nouveau profil sur {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
+        "createWallet": "Créer un nouveau profil pour {network}",
+        "createWalletDescription": "Créez un nouveau profil sur {network, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
         "claimShimmer": "Réclamer les récompenses Shimmer de votre placement",
         "claimShimmerDescription": "Import IOTA profile and claim staking rewards",
         "createAlias": "Create alias",
@@ -1295,7 +1306,7 @@
         "searchForRewards": "Search for rewards",
         "claimRewards": "Réclamer mes récompenses",
         "rerunClaimProcess": "Relancer le processus de revendication",
-        "finishProfileSetupWithProtocol": "Terminer la configuration du profil {protocol}",
+        "finishProfileSetupWithProtocol": "Terminer la configuration du profil {network}",
         "addPublicNote": "Ajouter une note publique",
         "backup": "Sauvegarder",
         "mint": "Mint",

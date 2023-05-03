@@ -7,6 +7,7 @@ import { IPlatformEventMap } from './platform-event-map.interface'
 
 export interface IPlatform {
     getStrongholdBackupDestination(defaultPath: string): Promise<string | null>
+    saveStrongholdBackup({ allowAccess }: { allowAccess: boolean }): Promise<void>
     exportTransactionHistory(defaultPath: string, contents: string): Promise<string | null>
     getUserDataPath(): Promise<string>
     getDiagnostics(): Promise<{ label: string; value: string }[]>
@@ -49,6 +50,7 @@ export interface IPlatform {
     removeListenersForEvent<K extends keyof IPlatformEventMap>(eventName: K): void
 
     isFeatureFlagEnabled(keyPath: string): boolean
+    trackEvent(eventName: string, eventProperties?: Record<string, unknown>): void
 
     getLanguageCode(): Promise<string>
 }

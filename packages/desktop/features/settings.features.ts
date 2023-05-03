@@ -55,6 +55,9 @@ const settingsFeatures: ISettingsFeatures = {
         maxMediaSize: {
             enabled: true,
         },
+        maxMediaDownloadTime: {
+            enabled: true,
+        },
         refreshNftMedia: {
             enabled: true,
         },
@@ -77,6 +80,9 @@ const settingsFeatures: ISettingsFeatures = {
             enabled: true,
         },
         hiddenAccounts: {
+            enabled: true,
+        },
+        developerToggle: {
             enabled: true,
         },
     },

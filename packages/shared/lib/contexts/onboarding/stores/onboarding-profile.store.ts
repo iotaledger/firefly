@@ -3,6 +3,7 @@ import { derived, get, Readable, writable } from 'svelte/store'
 import { isLedgerProfile } from '@core/profile'
 
 import { IOnboardingProfile, IShimmerClaimingAccount } from '../interfaces'
+import { IBaseToken } from '@core/wallet/interfaces'
 
 export const onboardingProfile = writable<Partial<IOnboardingProfile>>(null)
 
@@ -15,17 +16,21 @@ export function updateOnboardingProfile(payload: Partial<IOnboardingProfile>): v
 }
 
 export function updateShimmerClaimingAccount(shimmerClaimingAccount: IShimmerClaimingAccount): void {
-    const _onboardingProfile = get(onboardingProfile)
+    let shimmerClaimingAccounts = get(onboardingProfile)?.shimmerClaimingAccounts ?? []
     const claimingAccountIndex = shimmerClaimingAccount?.getMetadata()?.index
-    const isNewShimmerClaimingAccount = !_onboardingProfile?.shimmerClaimingAccounts?.some(
+    const isNewShimmerClaimingAccount = !shimmerClaimingAccounts.some(
         (_shimmerClaimingAccount) => _shimmerClaimingAccount?.getMetadata()?.index === claimingAccountIndex
     )
-    const shimmerClaimingAccounts = isNewShimmerClaimingAccount
-        ? [..._onboardingProfile?.shimmerClaimingAccounts, shimmerClaimingAccount]
-        : _onboardingProfile?.shimmerClaimingAccounts?.map((_shimmerClaimingAccount) =>
+    shimmerClaimingAccounts = isNewShimmerClaimingAccount
+        ? [...shimmerClaimingAccounts, shimmerClaimingAccount]
+        : shimmerClaimingAccounts?.map((_shimmerClaimingAccount) =>
               _shimmerClaimingAccount?.getMetadata()?.index === claimingAccountIndex
                   ? shimmerClaimingAccount
                   : _shimmerClaimingAccount
           )
     updateOnboardingProfile({ shimmerClaimingAccounts })
+}
+
+export function getOnboardingBaseToken(): IBaseToken {
+    return get(onboardingProfile)?.network?.baseToken
 }

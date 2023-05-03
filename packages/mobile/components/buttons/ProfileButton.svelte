@@ -1,26 +1,25 @@
 <script lang="ts">
+    import { FontWeight, Icon, NetworkIcon, Text, TextType } from '@ui'
+
     import { appSettings } from '@core/app'
-    import { Icon, NetworkIcon, Text, FontWeight, TextType } from '@ui'
+    import { IPersistedProfile } from '@core/profile'
     import { getInitials as _getInitials } from '@core/utils'
-    import { NetworkProtocol, NetworkType } from '@core/network'
 
-    export let name = ''
-    export let id = ''
-    export let networkType: NetworkType
-    export let networkProtocol: NetworkProtocol
+    import { Icon as IconEnum } from '@lib/auxiliary/icon'
+
+    export let profile: IPersistedProfile
     export let disabled = false
-
-    export let onClick: undefined | ((id: string) => void) = undefined
-
-    function onProfileClick(): void {
-        onClick && onClick(id)
-    }
+    export let onClick: undefined | ((profileId: string) => void) = undefined
 
     $: darkModeEnabled = $appSettings.darkMode
 
+    function onProfileClick(): void {
+        onClick && onClick(profile?.id)
+    }
+
     // @TODO: move to shared lib
-    function getInitials() {
-        const initials = _getInitials(name, 1)
+    function getInitials(): string {
+        const initials = _getInitials(profile.name, 1)
         if (initials.length === 1) {
             return initials
         } else {
@@ -43,7 +42,7 @@
                 <Text type={TextType.h5} classes="text-white">{getInitials()}</Text>
             </div>
             <div class="absolute right-0 bottom-0">
-                <NetworkIcon {networkType} {networkProtocol} height={14} width={14} />
+                <NetworkIcon networkId={profile?.network?.id} height={14} width={14} />
             </div>
         </div>
         <Text
@@ -54,20 +53,19 @@
             fontWeight={FontWeight.semibold}
             lineHeight="5"
             classes="px-4 my-auto flex-grow text-left truncate"
-            >{name}
+        >
+            {profile?.name}
         </Text>
         <div class="w-4 items-center my-auto">
-            <Icon icon="chevron-right" classes="text-gray-500 dark:text-white" />
+            <Icon icon={IconEnum.ChevronRight} classes="text-gray-500 dark:text-white" />
         </div>
     </div>
 </button>
 
 <style type="text/scss">
     button {
-        @apply border;
-        @apply border-solid;
-        @apply border-gray-300;
         @apply bg-transparent;
+        @apply border border-solid border-gray-300;
 
         &:disabled {
             :global(svg) {
@@ -80,10 +78,8 @@
         &.darkmode {
             @apply border-gray-700;
             &:disabled {
-                @apply bg-gray-700;
-                @apply bg-opacity-10;
-                @apply border-gray-700;
-                @apply border-opacity-10;
+                @apply bg-gray-700 bg-opacity-10;
+                @apply border-gray-700 border-opacity-10;
             }
         }
     }

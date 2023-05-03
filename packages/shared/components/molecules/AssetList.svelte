@@ -19,7 +19,7 @@
         if (assets?.baseCoin) {
             list.push(assets.baseCoin)
         }
-        list.push(...assets?.nativeTokens)
+        list.push(...(assets?.nativeTokens ?? []))
         return list.filter((_nativeToken) => isVisibleAsset(_nativeToken))
     }
 

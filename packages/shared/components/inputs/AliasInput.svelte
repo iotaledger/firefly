@@ -2,10 +2,10 @@
     import { Modal, SelectorInput, IOption } from 'shared/components'
     import { selectedAccount } from '@core/account/stores'
     import { localize } from '@core/i18n'
-    import { networkHrp } from '@core/network/stores'
     import { validateBech32Address } from '@core/utils/crypto'
     import { ADDRESS_TYPE_ALIAS } from '@core/wallet/constants'
     import { convertHexAddressToBech32 } from '@core/wallet/utils'
+    import { getNetworkHrp } from '@core/profile/actions'
 
     export let alias: string = ''
     export let error: string = ''
@@ -32,7 +32,7 @@
                 throw new Error(localize('error.aliasMinting.aliasNotInPossession'))
             }
 
-            validateBech32Address($networkHrp, alias, ADDRESS_TYPE_ALIAS)
+            validateBech32Address(getNetworkHrp(), alias, ADDRESS_TYPE_ALIAS)
         } catch (err) {
             error = err?.message ?? err
             return Promise.reject(error)

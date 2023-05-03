@@ -3,8 +3,8 @@
         "onboarding": {
             "appSetup": {
                 "welcome": {
-                    "title": "傳送、接受、管理您的 {protocol} 代幣",
-                    "body": "Firefly 是 {protocol} 的官方錢包軟體"
+                    "title": "傳送、接受、管理您的 {network} 代幣",
+                    "body": "Firefly 是 {network} 的官方錢包軟體"
                 },
                 "legal": {
                     "title": "隱私政策和服務條款",
@@ -55,15 +55,15 @@
                         }
                     }
                 },
-                "setupPrivateNetworkConnection": {
+                "setupCustomNetwork": {
                     "title": "連線到私人網路",
                     "body": "在下列表單填入節點資訊以連接至私人網路。"
                 }
             },
             "profileSetup": {
                 "setup": {
-                    "title": "建立{protocol, select, IOTA {一個} Shimmer {一個} other {一個}} {protocol} 設定檔。",
-                    "body": "選擇適合的方式設定您的{protocol} 檔案。"
+                    "title": "建立{network, select, IOTA {一個} Shimmer {一個} other {一個}} {network} 設定檔。",
+                    "body": "選擇適合的方式設定您的{network} 檔案。"
                 },
                 "setupNew": {
                     "title": "建立個人設定檔",
@@ -78,7 +78,7 @@
                     }
                 },
                 "setupRecovered": {
-                    "title": "還原 {protocol} 設定檔",
+                    "title": "還原 {network} 設定檔",
                     "body": "如果您有現成的助記詞或 Stronghold 備份檔，可以在此匯入。",
                     "importMnemonic": "使用助記詞",
                     "importMnemonicDescription": "輸入您的24字助記詞",
@@ -92,7 +92,7 @@
                     "body": "匯入您的IOTA檔案及領取Shimmer質押獎勵。"
                 },
                 "enterName": {
-                    "title": "建立您的 {protocol} 設定檔",
+                    "title": "建立您的 {network} 設定檔",
                     "profileName": "設定檔名稱",
                     "body1": "您可以創建多個使用者檔案來管理錢包和加強隱私。",
                     "body2": {
@@ -198,10 +198,10 @@
             "videoGuide": "Ledger 遷移影片教學"
         },
         "ledgerInstallationGuide": {
-            "title": "您是否在 Ledger 設備上安裝了 {protocol} 應用程序？",
-            "body1": "在繼續之前，您必須使用 Ledger Live 查找並安裝 {protocol} 應用程序。",
+            "title": "您是否在 Ledger 設備上安裝了 {network} 應用程序？",
+            "body1": "在繼續之前，您必須使用 Ledger Live 查找並安裝 {network} 應用程序。",
             "body2": "請確認您的Ledger韌體是最新版本。所有已安裝的軟體都必須更新至最新版本。",
-            "action": "是的，我已經安裝了 {protocol} app"
+            "action": "是的，我已經安裝了 {network} app"
         },
         "importFromLedger": {
             "title": "還原或遷移您的Ledger",
@@ -322,6 +322,10 @@
             "maxMediaSize": {
                 "title": "最大媒體大小",
                 "description": "超出此大小限制的 NFT 媒體將不會被下載，而由該媒體類型的佔位符號代替呈現。"
+            },
+            "maxMediaDownloadTime": {
+                "title": "Maximum download time",
+                "description": "NFT media which take longer than this limit to download will be canceled and a placeholder representing the media type will be displayed instead"
             },
             "refreshNftMedia": {
                 "title": "Refresh NFT media",
@@ -493,6 +497,13 @@
                     "title": "有可用的更新",
                     "updateVersion": "Firefly v{version}",
                     "button": "更新"
+                }
+            },
+            "drawers": {
+                "networkConfig": {
+                    "connectedChains": {
+                        "title": "Connected chains"
+                    }
                 }
             }
         },
@@ -899,7 +910,7 @@
             "title": "連接你的 Ledger",
             "notConnected": "連接你的 Ledger 裝置以繼續",
             "locked": "解鎖你的 Ledger 裝置以繼續",
-            "appNotOpen": "在你的 Ledger 裝置上開啟 {protocol} app 以繼續。",
+            "appNotOpen": "在你的 Ledger 裝置上開啟 Shimmer app 以繼續。",
             "correctAppOpen": "Ledger 已成功的連接，請繼續。"
         },
         "ledgerConfirmation": {
@@ -1182,8 +1193,8 @@
             "title": "Refresh NFT media",
             "description": "Do you want to delete and re-download all NFT media for this account?"
         },
-        "createWallet": "建立一個新的 {protocol} 檔案",
-        "createWalletDescription": "創建一個在 {protocol, select,iota {Chrysalis} shimmer {Shimmer} other {Unknown}} 上運行的新設定檔",
+        "createWallet": "建立一個新的 {network} 檔案",
+        "createWalletDescription": "創建一個在 {network, select,iota {Chrysalis} shimmer {Shimmer} other {Unknown}} 上運行的新設定檔",
         "claimShimmer": "領取Shimmer質押獎勵",
         "claimShimmerDescription": "導入 IOTA 資料並索取質押獎勵",
         "createAlias": "建立別名",
@@ -1295,7 +1306,7 @@
         "searchForRewards": "搜索獎勵",
         "claimRewards": "領取報酬",
         "rerunClaimProcess": "重新執行領取程序",
-        "finishProfileSetupWithProtocol": "完成 {protocol} 檔案的設定",
+        "finishProfileSetupWithProtocol": "完成 {network} 檔案的設定",
         "addPublicNote": "增加公共節點",
         "backup": "備份",
         "mint": "鑄造代幣",

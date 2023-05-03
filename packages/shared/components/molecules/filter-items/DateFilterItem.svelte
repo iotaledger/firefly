@@ -1,18 +1,18 @@
 <script lang="ts">
     import { DateInputButton, Dropdown, Icon, Text, NumberInput } from 'shared/components'
     import { localize } from '@core/i18n'
-    import type { IDropdownChoice } from '@core/utils'
+    import type { IDropdownItem } from '@core/utils'
     import { DateFilterUnit } from '@core/utils/interfaces/filter'
     import { DateFilterOption, DateUnit } from '@core/utils/enums/filters'
 
     export let filterUnit: DateFilterUnit
 
-    const choices: IDropdownChoice[] = filterUnit.choices.map((choice) => ({
+    const choices: IDropdownItem<DateFilterOption>[] = filterUnit.choices.map((choice) => ({
         label: localize(`${filterUnit.localeKey}.${choice}`),
         value: choice,
     }))
 
-    const unitChoices: IDropdownChoice[] = Object.keys(DateUnit).map((val) => ({
+    const unitChoices: IDropdownItem<string>[] = Object.keys(DateUnit).map((val) => ({
         label: localize(`${filterUnit.localeKey}.${val}`),
         value: val,
     }))
@@ -21,7 +21,7 @@
     $: selectedDateUnit =
         filterUnit.subunit.type === 'unit' ? localize(`${filterUnit.localeKey}.${filterUnit.subunit.unit}`) : ''
 
-    function onSelect(item): void {
+    function onSelect(item: IDropdownItem<DateFilterOption>): void {
         filterUnit.selected = item.value
 
         switch (filterUnit.selected) {
@@ -51,9 +51,9 @@
         }
     }
 
-    function onUnitSelect(item): void {
+    function onUnitSelect(item: IDropdownItem<string>): void {
         if (filterUnit.subunit.type === 'unit') {
-            filterUnit.subunit.unit = item.value
+            filterUnit.subunit.unit = <DateUnit>item.value
         }
     }
 </script>
@@ -66,9 +66,12 @@
             <Icon height="24" width="20" icon="arrow-right" />
         {/if}
         {#if filterUnit.subunit.type === 'range'}
-            <DateInputButton bind:value={filterUnit.subunit.start} />
-            <Text>{localize('general.and')}</Text>
-            <DateInputButton bind:value={filterUnit.subunit.end} />
+            <!-- negative right margin prevents dates from wrapping to a second row unless length is MM.DD.YYYY -->
+            <div class="flex items-center flex-wrap gap-2 -mr-1">
+                <DateInputButton bind:value={filterUnit.subunit.start} />
+                <Text>{localize('general.and')}</Text>
+                <DateInputButton bind:value={filterUnit.subunit.end} />
+            </div>
         {:else if filterUnit.subunit.type === 'single'}
             <DateInputButton bind:value={filterUnit.subunit.value} />
         {:else if filterUnit.subunit.type === 'unit'}

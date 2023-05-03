@@ -82,6 +82,7 @@ const ElectronApi = {
                 return result.filePath
             })
     },
+    saveStrongholdBackup: ({ allowAccess }) => null,
     async exportTransactionHistory(defaultPath, contents) {
         return ipcRenderer
             .invoke('show-save-dialog', {
@@ -326,6 +327,9 @@ const ElectronApi = {
                     console.error(err)
                 }
             })
+    },
+    trackEvent(eventName, eventProperties) {
+        return ipcRenderer.invoke('track-event', eventName, eventProperties)
     },
 
     isFeatureFlagEnabled(keyPath) {

@@ -24,6 +24,7 @@ interface ISecuritySettingsFeatures extends IFeatureFlag {
 
 interface ICollectiblesSettingsFeatures extends IFeatureFlag {
     maxMediaSize: IFeatureFlag
+    maxMediaDownloadTime: IFeatureFlag
     refreshNftMedia: IFeatureFlag
 }
 
@@ -36,6 +37,7 @@ interface INetworkSettingsFeatures extends IFeatureFlag {
 interface IAdvancedSettingsFeatures extends IFeatureFlag {
     walletFinder: IFeatureFlag
     hiddenAccounts: IFeatureFlag
+    developerToggle: IFeatureFlag
 }
 
 interface IHelpAndInfoSettingsFeatures extends IFeatureFlag {

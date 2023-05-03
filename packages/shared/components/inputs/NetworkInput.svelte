@@ -1,19 +1,16 @@
 <script lang="ts">
     import { Modal, SelectorInput, IOption } from 'shared/components'
-    import { activeProfile } from '@core/profile'
+    import { activeProfile, getNetworkHrp } from '@core/profile'
     import { NETWORK_ADDRESS, DestinationNetwork } from '@core/layer-2'
     import { validateBech32Address } from '@core/utils'
-    import { networkHrp } from '@core/network'
 
     const readonlyAttribute = $activeProfile?.isDeveloperProfile ? {} : { readonly: true }
-    const networkAddresses = NETWORK_ADDRESS[$activeProfile.networkType]
+    const networkAddresses = NETWORK_ADDRESS[$activeProfile?.network?.id]
 
     const LAYER_1_NETWORK_OPTION = {
         key: DestinationNetwork.Shimmer,
         value: networkAddresses[DestinationNetwork.Shimmer],
     }
-
-    const addressPrefix = $networkHrp
 
     export let networkAddress: string = LAYER_1_NETWORK_OPTION.value
     export let showLayer2: boolean = false
@@ -45,7 +42,7 @@
     export function validate(): Promise<void> {
         try {
             if (networkAddress !== networkAddresses[DestinationNetwork.Shimmer]) {
-                validateBech32Address(addressPrefix, networkAddress)
+                validateBech32Address(getNetworkHrp(), networkAddress)
             }
             return Promise.resolve()
         } catch (err) {

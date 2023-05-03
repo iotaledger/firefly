@@ -1,11 +1,9 @@
-import { get } from 'svelte/store'
-
 import { IAccount } from '@core/account'
-import { localize } from '@core/i18n'
-import { profileManager, createAccount, getAccounts } from '@core/profile-manager'
+import { handleLedgerError } from '@core/ledger'
+import { createAccount, getAccounts, profileManager } from '@core/profile-manager'
 import { sortAccountsByIndex, zip } from '@core/utils'
-
-import { ProfileRecoveryType } from '../enums'
+import { get } from 'svelte/store'
+import { RestoreProfileType } from '../enums'
 import { CannotInitialiseShimmerClaimingAccountError, MissingShimmerClaimingProfileManagerError } from '../errors'
 import { prepareShimmerClaimingAccount } from '../helpers'
 import {
@@ -14,7 +12,6 @@ import {
     shimmerClaimingProfileManager,
     updateOnboardingProfile,
 } from '../stores'
-import { handleLedgerError } from '@core/ledger'
 
 export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
     if (!get(shimmerClaimingProfileManager)) {
@@ -22,25 +19,21 @@ export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
     }
 
     try {
-        const alias = `${localize('general.account')} 1`
-        const profileRecoveryType = get(onboardingProfile)?.recoveryType
-        if (
-            profileRecoveryType === ProfileRecoveryType.Mnemonic ||
-            profileRecoveryType === ProfileRecoveryType.Ledger
-        ) {
+        const restoreProfileType = get(onboardingProfile)?.restoreProfileType
+        if (restoreProfileType === RestoreProfileType.Mnemonic || restoreProfileType === RestoreProfileType.Ledger) {
             /**
              * NOTE: We can safely assume that mnemonic- and Ledger-based recoveries
              * will NOT have any accounts, so we create one.
              */
             const shimmerClaimingAccount = await prepareShimmerClaimingAccount(
-                await createAccount({ alias }, shimmerClaimingProfileManager),
-                await createAccount({ alias }, profileManager)
+                await createAccount({}, shimmerClaimingProfileManager),
+                await createAccount({}, profileManager)
             )
             updateOnboardingProfile({ shimmerClaimingAccounts: [shimmerClaimingAccount] })
-        } else if (profileRecoveryType === ProfileRecoveryType.Stronghold) {
+        } else if (restoreProfileType === RestoreProfileType.Stronghold) {
             const accounts = await getAccounts(shimmerClaimingProfileManager)
             if (accounts?.length === 0) {
-                const account = await createAccount({ alias }, shimmerClaimingProfileManager)
+                const account = await createAccount({}, shimmerClaimingProfileManager)
                 accounts.push(account)
             }
             accounts.sort(sortAccountsByIndex)
@@ -48,7 +41,7 @@ export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
             const twinAccounts = (
                 await Promise.all(
                     accounts.map((boundAccount) =>
-                        createAccount({ alias: boundAccount?.getMetadata()?.alias ?? alias }, profileManager)
+                        createAccount({ alias: boundAccount?.getMetadata()?.alias }, profileManager)
                     )
                 )
             ).sort(sortAccountsByIndex)
@@ -63,6 +56,7 @@ export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
             updateOnboardingProfile({ shimmerClaimingAccounts })
         }
     } catch (err) {
+        console.error(err)
         if (get(isOnboardingLedgerProfile)) {
             handleLedgerError(err?.error ?? err)
         }

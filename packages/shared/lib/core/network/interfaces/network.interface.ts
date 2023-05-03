@@ -1,18 +1,14 @@
-import { ITokenMetadata } from '@core/wallet'
-import { NetworkProtocol, NetworkType } from '../enums'
-import { IRentStructure } from './rent-structure'
+import { ChainConfiguration, NetworkMetadata } from '../types'
+import { IChain } from './chain.interface'
+import { INetworkStatus } from './network-status.interface'
 
-/**
- * Holds relevant data
- * necessary for interacting within the context
- * of a particular network.
- */
 export interface INetwork {
-    id: string
-    name: string
-    protocol: NetworkProtocol
-    type: NetworkType
-    bech32Hrp?: string
-    baseToken?: ITokenMetadata
-    rentStructure?: IRentStructure
+    getMetadata(): NetworkMetadata
+    getStatus(): INetworkStatus
+
+    getChain(chainId: number): IChain
+    getChains(): IChain[]
+    addChain(chainConfiguration: ChainConfiguration): IChain
+    editChain(chainId: number, payload: Partial<ChainConfiguration>): Promise<void>
+    removeChain(chainId: number): void
 }

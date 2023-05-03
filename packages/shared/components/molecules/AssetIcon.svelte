@@ -1,7 +1,9 @@
 <script lang="ts">
-    import { COIN_TYPE, NetworkProtocol } from '@core/network'
-    import { getAssetInitials, IPersistedAsset, NotVerifiedStatus, ANIMATED_TOKEN_IDS } from '@core/wallet'
+    import { NETWORK_ICON_SVG } from '@auxiliary/icon'
+    import { getIconColorFromString } from '@core/account'
+    import { COIN_TYPE, NetworkId } from '@core/network'
     import { isBright } from '@core/utils'
+    import { ANIMATED_TOKEN_IDS, IPersistedAsset, NotVerifiedStatus, getAssetInitials } from '@core/wallet'
     import { Animation, Icon, VerificationBadge } from 'shared/components'
 
     export let asset: IPersistedAsset
@@ -16,18 +18,25 @@
     let assetIconWrapperWidth: number
 
     $: isAnimation = asset?.id in ANIMATED_TOKEN_IDS
-    $: {
-        icon = ''
-        assetIconBackgroundColor = asset?.metadata?.primaryColor
-        assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
-        if (
-            asset?.id === String(COIN_TYPE[NetworkProtocol.IOTA]) ||
-            asset?.id === String(COIN_TYPE[NetworkProtocol.Shimmer])
-        ) {
-            icon = asset?.metadata?.name?.toLocaleLowerCase()
-        } else {
+    $: switch (asset?.id) {
+        case String(COIN_TYPE[NetworkId.Iota]):
+            assetInitials = ''
+            assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
+            assetIconBackgroundColor = '#6E82A4'
+            icon = NETWORK_ICON_SVG[NetworkId.Iota]
+            break
+        case String(COIN_TYPE[NetworkId.Shimmer]):
+        case String(COIN_TYPE[NetworkId.Testnet]):
+            assetInitials = ''
+            assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
+            assetIconBackgroundColor = '#25DFCA'
+            icon = NETWORK_ICON_SVG[NetworkId.Shimmer]
+            break
+        default:
             assetInitials = getAssetInitials(asset)
-        }
+            assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
+            assetIconBackgroundColor = getIconColorFromString(asset?.metadata?.name)
+            icon = ''
     }
 
     $: shouldShowBadge = showVerifiedBadgeOnly

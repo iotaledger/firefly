@@ -14,9 +14,11 @@
             "@core/*": ["../shared/lib/core/*"],
             "@features/*": ["./features/*"],
             "@lib/*": ["../shared/lib/*"],
+            "@desktop/*": ["./lib/*"],
             "@ui": ["../shared/components"],
             "@ui/*": ["../shared/components/*"],
-            "@views": ["./views"]
+            "@views": ["./views"],
+            "@views/*": ["./views/*"]
         },
         "types": ["node"]
     },

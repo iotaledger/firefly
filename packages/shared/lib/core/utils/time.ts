@@ -2,13 +2,14 @@ import { localize } from '@core/i18n'
 
 import { HOURS_PER_DAY, MILLISECONDS_PER_SECOND, MINUTES_PER_HOUR, SECONDS_PER_MINUTE } from './constants'
 import { Duration } from './types'
+import { isValidDate } from './'
 
 /**
  * Returns true if a given expiration date/time is valid or
  * has not yet expired.
  */
 export function isValidExpirationDateTime(expirationDateTime: Date): boolean {
-    if (expirationDateTime) {
+    if (isValidDate(expirationDateTime)) {
         const nowDateTime = new Date(Date.now())
         return expirationDateTime.getTime() > nowDateTime.getTime()
     } else {

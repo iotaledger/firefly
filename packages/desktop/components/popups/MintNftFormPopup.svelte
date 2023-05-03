@@ -5,7 +5,6 @@
     import { BaseError } from '@core/error/classes'
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
-    import { networkHrp } from '@core/network/stores'
     import { MimeType } from '@core/nfts/types'
     import { isValidUri } from '@core/utils/validation'
     import { validateBech32Address } from '@core/utils/crypto'
@@ -15,6 +14,7 @@
     import { fetchWithTimeout } from '@core/nfts/utils/fetchWithTimeout'
     import { composeUrlFromNftUri } from '@core/nfts'
     import { HttpHeader } from '@core/utils'
+    import { getNetworkHrp } from '@core/profile'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -166,10 +166,10 @@
         }
 
         try {
-            Object.keys(royalties).forEach((key) => validateBech32Address($networkHrp, key))
+            Object.keys(royalties).forEach((key) => validateBech32Address(getNetworkHrp(), key))
         } catch (err) {
             optionalInputs.royalties.error = localize('popups.mintNftForm.errors.invalidAddress', {
-                values: { networkHrp: $networkHrp },
+                values: { networkHrp: getNetworkHrp() },
             })
             return
         }

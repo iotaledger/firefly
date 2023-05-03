@@ -8,7 +8,7 @@ import { AppContext } from '@core/app/enums'
 import { handleError } from '@core/error/handlers'
 import { pollLedgerNanoStatus } from '@core/ledger/actions'
 import { pollMarketPrices } from '@core/market/actions'
-import { getAndUpdateNodeInfo, pollNetworkStatus } from '@core/network/actions'
+import { pollChainStatuses, pollNetworkStatus } from '@core/network/actions'
 import { initialiseProfileManager } from '@core/profile-manager/actions'
 import { loadNftsForActiveProfile } from '@core/nfts'
 import {
@@ -41,12 +41,12 @@ import {
     resetLoginProgress,
     setTimeStrongholdLastUnlocked,
     updateActiveProfile,
-    updateProfile,
 } from '../../stores'
 import { isLedgerProfile } from '../../utils'
 import { loadAccounts } from './loadAccounts'
 import { logout } from './logout'
 import { subscribeToWalletApiEventsForActiveProfile } from './subscribeToWalletApiEventsForActiveProfile'
+import { checkAndUpdateActiveProfileNetwork } from './checkAndUpdateActiveProfileNetwork'
 
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const loginRouter = get(routerManager).getRouterForAppContext(AppContext.Login)
@@ -68,8 +68,9 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
 
             // Step 2: get node info to check we have a synced node
             incrementLoginProgress()
-            await getAndUpdateNodeInfo(true)
+            await checkAndUpdateActiveProfileNetwork()
             void pollNetworkStatus()
+            void pollChainStatuses()
 
             // Step 3: load and build all the profile data
             incrementLoginProgress()
@@ -104,7 +105,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 _activeProfile.forceAssetRefresh,
                 _activeProfile.forceAssetRefresh
             )
-            updateProfile(_activeProfile.id, { forceAssetRefresh: false })
+            updateActiveProfile({ forceAssetRefresh: false })
             await loadNftsForActiveProfile()
 
             // Step 6: generate and store activities for all accounts

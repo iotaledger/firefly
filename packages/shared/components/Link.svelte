@@ -15,7 +15,7 @@
     class="text-12 leading-140 cursor-pointer text-blue-500 {icon && 'flex flex-row items-center'} {classes}"
     data-label="link"
     {href}
-    on:click={onClick}
+    on:click|stopPropagation={onClick}
     class:secondary
     class:disabled
     class:ghost

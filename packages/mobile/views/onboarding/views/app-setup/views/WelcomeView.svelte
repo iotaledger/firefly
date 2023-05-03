@@ -4,6 +4,7 @@
     import { OnboardingLayout } from '@components'
     import { Button, Checkbox, Link, Text, TextType } from '@ui'
 
+    import { initialiseOnboardingFlow, onboardingProfile, shouldBeDeveloperProfile } from '@contexts/onboarding'
     import {
         hasCompletedAppSetup,
         lastAcceptedPrivacyPolicy,
@@ -12,18 +13,11 @@
         TERMS_OF_SERVICE_VERSION,
     } from '@core/app'
     import { localize } from '@core/i18n'
-    import { formatProtocolName, NetworkProtocol, NetworkType } from '@core/network'
-
-    import {
-        initialiseOnboardingProfile,
-        onboardingProfile,
-        shouldBeDeveloperProfile,
-        updateOnboardingProfile,
-    } from '@contexts/onboarding'
-    import features from '@features/features'
+    import { getNetworkNameFromNetworkId, NetworkId } from '@core/network'
 
     import { DrawerId, openDrawer } from '@/auxiliary/drawer'
     import { appSetupRouter } from '@/routers'
+    import features from '@features/features'
 
     let termsAccepted = false
 
@@ -35,13 +29,11 @@
     }
 
     onMount(async () => {
-        await initialiseOnboardingProfile(
-            $onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile(),
-            NetworkProtocol.Shimmer
-        )
-        if (!shouldBeDeveloperProfile()) {
-            updateOnboardingProfile({ networkType: NetworkType.Mainnet })
-        }
+        const isDeveloperProfile = $onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile()
+        await initialiseOnboardingFlow({
+            isDeveloperProfile,
+            ...(!isDeveloperProfile && { networkId: NetworkId.Shimmer }),
+        })
     })
 
     function onShowLegalClick(): void {
@@ -55,9 +47,9 @@
             <Text type={TextType.h3}>
                 {localize('views.onboarding.appSetup.welcome.title', {
                     values: {
-                        protocol: features?.onboarding?.iota?.enabled
-                            ? formatProtocolName(NetworkProtocol.IOTA)
-                            : formatProtocolName(NetworkProtocol.Shimmer),
+                        network: features?.onboarding?.iota?.enabled
+                            ? getNetworkNameFromNetworkId(NetworkId.Iota)
+                            : getNetworkNameFromNetworkId(NetworkId.Shimmer),
                     },
                 })}
             </Text>

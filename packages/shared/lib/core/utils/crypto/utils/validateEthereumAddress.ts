@@ -1,14 +1,10 @@
-import { get } from 'svelte/store'
-
 import { Keccak } from 'sha3'
-
-import { networkHrp } from '@core/network/stores'
-
 import { KECCAK_HASH_SIZE } from '../constants'
 import { validateBech32Address } from './validateBech32Address'
 import { Layer1RecipientError } from '@core/layer-2/errors'
 import { InvalidAddressError } from '@auxiliary/deep-link'
 import { localize } from '@core/i18n'
+import { getNetworkHrp } from '@core/profile'
 
 export function validateEthereumAddress(address: string): void {
     throwIfBech32Address(address)
@@ -43,7 +39,7 @@ function validateEthereumAddressChecksum(address: string): void {
 
 function throwIfBech32Address(address: string): void {
     try {
-        validateBech32Address(get(networkHrp), address)
+        validateBech32Address(getNetworkHrp(), address)
         throw new Layer1RecipientError()
     } catch (err) {
         if (err.message === localize('error.layer2.layer1Recipient')) {

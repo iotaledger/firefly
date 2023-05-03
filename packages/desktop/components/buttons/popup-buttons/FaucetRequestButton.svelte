@@ -14,7 +14,7 @@
     }
 </script>
 
-{#if FAUCET_URLS?.[$activeProfile?.networkProtocol]?.[$activeProfile?.networkType]}
+{#if FAUCET_URLS?.[$activeProfile?.network?.id]}
     <OnboardingButton
         primaryText={localize('actions.faucetRequest', {
             values: { token: $nodeInfo?.baseToken?.name },

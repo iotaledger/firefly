@@ -3,18 +3,16 @@
     import { selectedAccountIndex } from '@core/account/stores'
     import { getAccountColorById } from '@core/account/utils'
     import { localize } from '@core/i18n'
-    import { networkHrp } from '@core/network/stores'
     import { visibleActiveAccounts } from '@core/profile/stores'
     import { validateBech32Address, validateEthereumAddress } from '@core/utils/crypto'
     import { Subject } from '@core/wallet/types'
     import { getSubjectFromAddress } from '@core/wallet/utils'
     import { Layer1RecipientError } from '@core/layer-2/errors'
+    import { getNetworkHrp } from '@core/profile'
 
     export let recipient: Subject
     export let disabled = false
     export let isLayer2 = false
-
-    const addressPrefix = $networkHrp
 
     let inputElement: HTMLInputElement = undefined
     let modal: Modal = undefined
@@ -39,7 +37,7 @@
                 if (isLayer2) {
                     validateEthereumAddress(recipient?.address)
                 } else {
-                    validateBech32Address(addressPrefix, recipient?.address)
+                    validateBech32Address(getNetworkHrp(), recipient?.address)
                 }
             } else if (recipient?.type === 'account') {
                 if (isLayer2) {

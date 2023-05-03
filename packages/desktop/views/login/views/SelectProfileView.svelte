@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { Icon, Logo, Profile } from 'shared/components'
+    import { PopupId, openPopup } from '@auxiliary/popup'
+    import { initialiseOnboardingProfile, onboardingProfile, shouldBeDeveloperProfile } from '@contexts/onboarding'
     import {
         AppContext,
         isStrongholdUpdated,
@@ -8,27 +9,21 @@
         needsToAcceptLatestTermsOfService,
     } from '@core/app'
     import { localize } from '@core/i18n'
-    import { NetworkProtocol, NetworkType } from '@core/network'
-    import { loadPersistedProfileIntoActiveProfile, profiles, ProfileType } from '@core/profile'
-    import { loginRouter, OnboardingRoute, onboardingRouter, routerManager } from '@core/router'
-    import { initialiseOnboardingFlow, shouldBeDeveloperProfile } from '@contexts/onboarding'
-    import { openPopup, PopupId } from '@auxiliary/popup'
+    import { ProfileType, loadPersistedProfileIntoActiveProfile, profiles, removeProfileFolder } from '@core/profile'
+    import { destroyProfileManager } from '@core/profile-manager/actions'
+    import { loginRouter, routerManager } from '@core/router'
     import features from '@features/features'
+    import { Icon, Logo, Profile } from '@ui'
+    import { onMount } from 'svelte'
 
-    function onContinueClick(id: string): void {
-        loadPersistedProfileIntoActiveProfile(id)
+    function onContinueClick(profileId: string): void {
+        loadPersistedProfileIntoActiveProfile(profileId)
         $loginRouter.next()
     }
 
     async function onAddProfileClick(): Promise<void> {
-        const isDeveloperProfile = shouldBeDeveloperProfile()
-        await initialiseOnboardingFlow({
-            isDeveloperProfile,
-            networkProtocol: NetworkProtocol.Shimmer,
-            ...(!isDeveloperProfile && { networkType: NetworkType.Mainnet }),
-        })
+        await initialiseOnboardingProfile(shouldBeDeveloperProfile())
         $routerManager.goToAppContext(AppContext.Onboarding)
-        $onboardingRouter.goTo(isDeveloperProfile ? OnboardingRoute.NetworkSetup : OnboardingRoute.ProfileSetup)
     }
 
     $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTermsOfService()) {
@@ -38,6 +33,17 @@
             preventClose: true,
         })
     }
+
+    onMount(async () => {
+        // Clean up if user has navigated back to this view from onboarding
+        if ($onboardingProfile) {
+            if ($onboardingProfile.hasInitialisedProfileManager) {
+                await destroyProfileManager()
+                await removeProfileFolder($onboardingProfile.id)
+            }
+            $onboardingProfile = undefined
+        }
+    })
 </script>
 
 <section class="flex flex-col justify-center items-center h-full bg-white dark:bg-gray-900 px-40 pt-48 pb-20">
@@ -49,14 +55,9 @@
         {#each $profiles as profile}
             <div class="mx-7 mb-8">
                 <Profile
+                    {profile}
                     bgColor="blue"
                     onClick={onContinueClick}
-                    name={profile.name}
-                    id={profile.id}
-                    isDeveloper={profile.isDeveloperProfile}
-                    networkType={profile?.networkType ?? NetworkType.Devnet}
-                    networkProtocol={profile?.networkProtocol ?? NetworkProtocol.IOTA}
-                    isLedgerProfile={profile?.type === ProfileType.Ledger}
                     updateRequired={profile?.type === ProfileType.Software &&
                         !isStrongholdUpdated(profile) &&
                         features.onboarding.strongholdVersionCheck.enabled}
