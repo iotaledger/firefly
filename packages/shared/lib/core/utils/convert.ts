@@ -12,7 +12,7 @@ export function convertDateToUnixTimestamp(date: Date): number {
     if (isValidDate(date)) {
         return Math.round(date.getTime() / MILLISECONDS_PER_SECOND)
     } else {
-        throw new Error('"date" must be a valid Date object')
+        return undefined
     }
 }
 
@@ -23,7 +23,7 @@ export function convertUnixTimestampToDate(timestamp: number): Date {
     if (typeof timestamp === 'number') {
         return new Date(timestamp * MILLISECONDS_PER_SECOND)
     } else {
-        throw new Error('"timestamp" must be a number')
+        return undefined
     }
 }
 
