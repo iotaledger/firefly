@@ -22,6 +22,6 @@
     </Transition>
 {:else if $restoreFromStrongholdRoute === RestoreFromStrongholdRoute.UpdateStronghold}
     <Transition>
-        <UpdateStrongholdRouterView />
+        <UpdateStrongholdRouterView isRecovery />
     </Transition>
 {/if}
