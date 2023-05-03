@@ -8,20 +8,17 @@
     import { openPopup, PopupId } from '@auxiliary/popup'
 
     export let assets: IAccountAssets
-    export let hideFilter: boolean = false
-    export let hideHeader: boolean = false
 
     let assetList: IAsset[]
     $: $assetFilter, assets, setFilteredAssetList(), scrollToTop()
     $: isEmptyBecauseOfFilter = (assets.baseCoin || assets.nativeTokens?.length > 0) && assetList.length === 0
 
     function setFilteredAssetList(): void {
-        const list = (assets?.nativeTokens ?? []).filter((nativeToken) => isVisibleAsset(nativeToken))
-        if (assets?.baseCoin) {
-            list.unshift(assets.baseCoin)
+        if (!assets) {
+            assetList = []
+        } else {
+            assetList = [assets.baseCoin, ...assets.nativeTokens].filter(isVisibleAsset)
         }
-
-        assetList = list
     }
 
     function scrollToTop() {
@@ -44,14 +41,10 @@
 
 {#if assets}
     <div class="asset-list h-full p-6 flex flex-auto flex-col flex-grow flex-shrink-0">
-        {#if !hideHeader}
-            <div class="w-full flex flex-row justify-between items-center mb-4">
-                <Text classes="text-left" type={TextType.h5}>{localize('general.assets')}</Text>
-                {#if !hideFilter}
-                    <Filter filterStore={assetFilter} />
-                {/if}
-            </div>
-        {/if}
+        <div class="w-full flex flex-row justify-between items-center mb-4">
+            <Text classes="text-left" type={TextType.h5}>{localize('general.assets')}</Text>
+            <Filter filterStore={assetFilter} />
+        </div>
         <div class="flex-auto h-full pb-10">
             {#if assetList.length > 0}
                 <VirtualList items={assetList} let:item>
