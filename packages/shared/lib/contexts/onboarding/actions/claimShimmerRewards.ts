@@ -1,6 +1,5 @@
 import { get } from 'svelte/store'
 
-import { COIN_TYPE, NetworkProtocol } from '@core/network'
 import {
     DEFAULT_TRANSACTION_OPTIONS,
     getOutputOptions,
@@ -71,7 +70,7 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
             address: recipientAddress,
         },
         type: NewTransactionType.TokenTransfer,
-        assetId: COIN_TYPE[NetworkProtocol.Shimmer].toString(),
+        assetId: String(get(onboardingProfile)?.network?.coinType),
         rawAmount: rawAmount.toString(),
         unit: '',
     }

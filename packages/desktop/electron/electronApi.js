@@ -331,6 +331,9 @@ const ElectronApi = {
                 }
             })
     },
+    trackEvent(eventName, eventProperties) {
+        return ipcRenderer.invoke('track-event', eventName, eventProperties)
+    },
 
     isFeatureFlagEnabled(keyPath) {
         return keyPath?.split('.').reduce((prev, cur) => prev && prev[cur], features)?.enabled ?? false

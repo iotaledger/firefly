@@ -3,8 +3,8 @@
         "onboarding": {
             "appSetup": {
                 "welcome": {
-                    "title": "发送、接收和管理您的 {protocol} 代币",
-                    "body": "Firefly 是 {protocol} 的官方钱包软件。"
+                    "title": "发送、接收和管理您的 {network} 代币",
+                    "body": "Firefly 是 {network} 的官方钱包软件。"
                 },
                 "legal": {
                     "title": "隐私政策和服务条款",
@@ -55,15 +55,15 @@
                         }
                     }
                 },
-                "setupCustomNetworkConnection": {
+                "setupCustomNetwork": {
                     "title": "连接到私有网络",
                     "body": "在表单中填写节点信息，并连接到一个私有网络。"
                 }
             },
             "profileSetup": {
                 "setup": {
-                    "title": "设置 {protocol, select, IOTA {一个} Shimmer {一个} other {一个}} {protocol} 档案",
-                    "body": "请选择适当的方法来设置你的 {protocol} 配置文件。"
+                    "title": "设置 {network, select, IOTA {一个} Shimmer {一个} other {一个}} {network} 档案",
+                    "body": "请选择适当的方法来设置你的 {network} 配置文件。"
                 },
                 "setupNew": {
                     "title": "创建个人资料",
@@ -78,7 +78,7 @@
                     }
                 },
                 "setupRecovered": {
-                    "title": "恢复 {protocol} 档案",
+                    "title": "恢复 {network} 档案",
                     "body": "如果您有一个现有的助记符或 Stronghold 备份文件，您可以在此处导入。",
                     "importMnemonic": "使用恢复密语",
                     "importMnemonicDescription": "输入您的 24 个单词组成的助记词",
@@ -92,7 +92,7 @@
                     "body": "导入您的 IOTA个人资料并领取您的 Shimmer 质押奖励。"
                 },
                 "enterName": {
-                    "title": "创建新的 {protocol} 配置",
+                    "title": "创建新的 {network} 配置",
                     "profileName": "配置名称",
                     "body1": "您可以创建多个用户配置文件来管理您的钱包和改善隐私。",
                     "body2": {
@@ -198,10 +198,10 @@
             "videoGuide": "Ledger 迁移视频指南"
         },
         "ledgerInstallationGuide": {
-            "title": "您是否在您的Ledger设备上安装了 {protocol} 应用？",
-            "body1": "在继续之前，您必须使用 Ledger Live来查找并安装 {protocol} 应用程序。",
+            "title": "您是否在您的Ledger设备上安装了 {network} 应用？",
+            "body1": "在继续之前，您必须使用 Ledger Live来查找并安装 {network} 应用程序。",
             "body2": "请确保您的Ledger固件是最新的。任何预安装的应用都应更新到他们的最新版本。",
-            "action": "是的，我已经安装了 {protocol} 应用程序"
+            "action": "是的，我已经安装了 {network} 应用程序"
         },
         "importFromLedger": {
             "title": "还原或迁移您的Ledger",
@@ -910,7 +910,7 @@
             "title": "连接您的Ledger",
             "notConnected": "连接您的Ledger设备以继续。",
             "locked": "解锁您的Ledger设备以继续。",
-            "appNotOpen": "打开您Ledger设备上的 {protocol} 应用以继续。",
+            "appNotOpen": "打开您Ledger设备上的 Shimmer 应用以继续。",
             "correctAppOpen": "Ledger连接成功，请继续。"
         },
         "ledgerConfirmation": {
@@ -1193,8 +1193,8 @@
             "title": "Refresh NFT media",
             "description": "Do you want to delete and re-download all NFT media for this account?"
         },
-        "createWallet": "创建新的 {protocol} 配置文件",
-        "createWalletDescription": "创建一个运行在 {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {其他未知}} 的新配置文件",
+        "createWallet": "创建新的 {network} 配置文件",
+        "createWalletDescription": "创建一个运行在 {network, select, iota {Chrysalis} shimmer {Shimmer} other {其他未知}} 的新配置文件",
         "claimShimmer": "认领您的 Shimmer 质押奖励",
         "claimShimmerDescription": "导入您的 IOTA个人资料并领取质押奖励。",
         "createAlias": "创建别名",
@@ -1306,7 +1306,7 @@
         "searchForRewards": "搜索奖励",
         "claimRewards": "认领奖励",
         "rerunClaimProcess": "再次运行认领流程",
-        "finishProfileSetupWithProtocol": "完成 {protocol} 的配置文件设置",
+        "finishProfileSetupWithProtocol": "完成 {network} 的配置文件设置",
         "addPublicNote": "添加公开注释",
         "backup": "备份",
         "mint": "锻造",

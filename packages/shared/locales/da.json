@@ -3,8 +3,8 @@
         "onboarding": {
             "appSetup": {
                 "welcome": {
-                    "title": "Send, Modtag og Håndtér {protocol}-tokener",
-                    "body": "Firefly er den officielle wallet til {protocol}."
+                    "title": "Send, Modtag og Håndtér {network}-tokener",
+                    "body": "Firefly er den officielle wallet til {network}."
                 },
                 "legal": {
                     "title": "Fortrolighedspolitik og Tjenestevilkår",
@@ -55,15 +55,15 @@
                         }
                     }
                 },
-                "setupCustomNetworkConnection": {
+                "setupCustomNetwork": {
                     "title": "Opret forbindelse til et privat netværk",
                     "body": "Udfyld formularen med node-oplysningerne og opret forbindelse til et privat netværk."
                 }
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Opsæt {protocol, select, IOTA {en} Shimmer {en} other {en}} {protocol}-profil",
-                    "body": "Vælg den passende metode til opsætning af {protocol}-profilen."
+                    "title": "Opsæt {network, select, IOTA {en} Shimmer {en} other {en}} {network}-profil",
+                    "body": "Vælg den passende metode til opsætning af {network}-profilen."
                 },
                 "setupNew": {
                     "title": "Opret en profil",
@@ -78,7 +78,7 @@
                     }
                 },
                 "setupRecovered": {
-                    "title": "Recover {protocol} profile",
+                    "title": "Recover {network} profile",
                     "body": "Haves en eksisterende mnemonic- eller Stronghold-sikkerhedskopifil, kan den importeres hér.",
                     "importMnemonic": "Benyt gendannelsessætning",
                     "importMnemonicDescription": "Angiv den 24-ords mnemonic-sætning",
@@ -92,7 +92,7 @@
                     "body": "Importér IOTA-profilen og gør krav på Shimmer-staking belønninger."
                 },
                 "enterName": {
-                    "title": "Opret {protocol}-profilen",
+                    "title": "Opret {network}-profilen",
                     "profileName": "Profilnavn",
                     "body1": "Der kan oprettes flere brugerprofiler for at organisere wallets samt øge fortroligheden.",
                     "body2": {
@@ -198,10 +198,10 @@
             "videoGuide": "Ledger migreringsvideoguide"
         },
         "ledgerInstallationGuide": {
-            "title": "Er {protocol}-appen installeret på Ledger-enheden?",
-            "body1": "Før der fortsættes, så brug Ledger Live til at finde og installere {protocol}-appen.",
+            "title": "Er {network}-appen installeret på Ledger-enheden?",
+            "body1": "Før der fortsættes, så brug Ledger Live til at finde og installere {network}-appen.",
             "body2": "Sørg for, at Ledger-firmwaren er opdateret. Alle præinstallerede apps bør opdateres til seneste versioner.",
-            "action": "Ja, {protocol}-appen er installeret"
+            "action": "Ja, {network}-appen er installeret"
         },
         "importFromLedger": {
             "title": "Gendan eller migrér din Ledger",
@@ -910,7 +910,7 @@
             "title": "Tilslut Ledger-enheden",
             "notConnected": "Tilslut Ledger-enheden for at fortsætte.",
             "locked": "Oplås Ledger-enheden for at fortsætte.",
-            "appNotOpen": "Åbn {protocol}-appen på Ledger-enheden for at fortsætte.",
+            "appNotOpen": "Åbn Shimmer-appen på Ledger-enheden for at fortsætte.",
             "correctAppOpen": "Ledger-enheden er tilsluttet, fortsæt."
         },
         "ledgerConfirmation": {
@@ -1193,8 +1193,8 @@
             "title": "Opdatér NFT-medier",
             "description": "Slet og gendownload alle NFT-medier for denne konto?"
         },
-        "createWallet": "Create a new {protocol} profile",
-        "createWalletDescription": "Opret en ny profil, der kører på {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Ukendt}}",
+        "createWallet": "Create a new {network} profile",
+        "createWalletDescription": "Opret en ny profil, der kører på {network, select, iota {Chrysalis} shimmer {Shimmer} other {Ukendt}}",
         "claimShimmer": "Claim Shimmer staking rewards",
         "claimShimmerDescription": "Importér IOTA-profilen og indløs staking-belønninger",
         "createAlias": "Create alias",
@@ -1306,7 +1306,7 @@
         "searchForRewards": "Søg efter belønninger",
         "claimRewards": "Claim rewards",
         "rerunClaimProcess": "Rerun claim process",
-        "finishProfileSetupWithProtocol": "Finish {protocol} profile setup",
+        "finishProfileSetupWithProtocol": "Finish {network} profile setup",
         "addPublicNote": "Add public note",
         "backup": "Backup",
         "mint": "Mint",

@@ -3,7 +3,7 @@
     import { OnboardingLayout } from '@components'
     import { Button, Input, Text, TextType } from '@ui'
     import { localize } from '@core/i18n'
-    import { formatProtocolName } from '@core/network'
+    import { getNetworkNameFromNetworkId } from '@core/network'
     import { profiles, validateProfileName } from '@core/profile'
     import { profileRecoveryRouter, profileSetupRouter } from '@/routers'
     import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
@@ -11,14 +11,14 @@
     let error = ''
     let profileName = $onboardingProfile?.name ?? ''
     const title = localize('views.onboarding.profileSetup.enterName.title', {
-        values: { protocol: formatProtocolName($onboardingProfile?.network?.id) },
+        values: { network: getNetworkNameFromNetworkId($onboardingProfile?.network?.id) },
     })
 
     $: isProfileNameValid = profileName && profileName.trim()
     $: profileName, (error = '') // Error clears when profileName changes
 
     function onBackClick(): void {
-        if ($onboardingProfile?.recoveryType) {
+        if ($onboardingProfile?.restoreProfileType) {
             $profileRecoveryRouter.resetRecovery()
         } else {
             $profileSetupRouter.previous()

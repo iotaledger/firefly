@@ -3,8 +3,8 @@
         "onboarding": {
             "appSetup": {
                 "welcome": {
-                    "title": "Wysyłaj, odbieraj i zarządzaj swoimi tokenami {protocol}",
-                    "body": "Firefly jest oficjalnym portfelem {protocol}."
+                    "title": "Wysyłaj, odbieraj i zarządzaj swoimi tokenami {network}",
+                    "body": "Firefly jest oficjalnym portfelem {network}."
                 },
                 "legal": {
                     "title": "Polityka prywatności i Warunki świadczenia usług",
@@ -55,15 +55,15 @@
                         }
                     }
                 },
-                "setupCustomNetworkConnection": {
+                "setupCustomNetwork": {
                     "title": "Połącz się z siecią prywatną",
                     "body": "Wypełnij formularz informacjami o serwerze i połącz się z prywatną siecią."
                 }
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Skonfiguruj {protocol, select, IOTA {profil} Shimmer {profil} other {profil}} {protocol}",
-                    "body": "Wybierz odpowiednią metodę, aby skonfigurować swój profil {protocol}."
+                    "title": "Skonfiguruj {network, select, IOTA {profil} Shimmer {profil} other {profil}} {network}",
+                    "body": "Wybierz odpowiednią metodę, aby skonfigurować swój profil {network}."
                 },
                 "setupNew": {
                     "title": "Utwórz profil",
@@ -78,7 +78,7 @@
                     }
                 },
                 "setupRecovered": {
-                    "title": "Odzyskaj profil {protocol}",
+                    "title": "Odzyskaj profil {network}",
                     "body": "Jeśli posiadasz wyrazy ratunkowe lub kopię zapasową Stronghold, możesz zaimportować je tutaj.",
                     "importMnemonic": "Użyj wyrazów ratunkowych",
                     "importMnemonicDescription": "Wprowadź swoje 24 wyrazy ratunkowe",
@@ -92,7 +92,7 @@
                     "body": "Importuj swój profil IOTA i odbierz nagrody Shimmer za staking."
                 },
                 "enterName": {
-                    "title": "Utwórz swój profil {protocol}",
+                    "title": "Utwórz swój profil {network}",
                     "profileName": "Nazwa profilu",
                     "body1": "Możesz tworzyć wiele profili użytkownika w celu organizacji swoich portfeli i zwiększenia prywatności.",
                     "body2": {
@@ -198,10 +198,10 @@
             "videoGuide": "Migracja z użyciem portfela Ledger - poradnik wideo"
         },
         "ledgerInstallationGuide": {
-            "title": "Czy zainstalowałeś aplikację {protocol} na swoim urządzeniu Ledger?",
-            "body1": "Zanim przejdziesz dalej, musisz użyć aplikacji Ledger Live aby wyszukać i zainstalować aplikację {protocol}.",
+            "title": "Czy zainstalowałeś aplikację {network} na swoim urządzeniu Ledger?",
+            "body1": "Zanim przejdziesz dalej, musisz użyć aplikacji Ledger Live aby wyszukać i zainstalować aplikację {network}.",
             "body2": "Upewnij się, że oprogramowanie Ledger jest aktualne. Wszystkie zainstalowane aplikacje powinny być zaktualizowane do najnowszych wersji.",
-            "action": "Tak, zainstalowałem aplikację {protocol}"
+            "action": "Tak, zainstalowałem aplikację {network}"
         },
         "importFromLedger": {
             "title": "Przywróć lub migruj swoje urządzenie Ledger",
@@ -910,7 +910,7 @@
             "title": "Podłącz swój Ledger",
             "notConnected": "Podłącz swoje urządzenie Ledger, aby kontynuować.",
             "locked": "Odblokuj swoje urządzenie Ledger, aby kontynuować.",
-            "appNotOpen": "Otwórz aplikację {protocol} na urządzeniu Ledger, aby kontynuować.",
+            "appNotOpen": "Otwórz aplikację Shimmer na urządzeniu Ledger, aby kontynuować.",
             "correctAppOpen": "Ledger pomyślnie podłączony, proszę kontynuować."
         },
         "ledgerConfirmation": {
@@ -1193,8 +1193,8 @@
             "title": "Odśwież media NFT",
             "description": "Czy chcesz usunąć i ponownie pobrać wszystkie media NFT dla tego konta?"
         },
-        "createWallet": "Utwórz nowy profil {protocol}",
-        "createWalletDescription": "Stwórz nowy profil działający w sieci {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Nieznanej}}",
+        "createWallet": "Utwórz nowy profil {network}",
+        "createWalletDescription": "Stwórz nowy profil działający w sieci {network, select, iota {Chrysalis} shimmer {Shimmer} other {Nieznanej}}",
         "claimShimmer": "Odbierz nagrody Shimmer ze stakingu",
         "claimShimmerDescription": "Importuj profil IOTA i odbierz nagrody ze stakingu",
         "createAlias": "Utwórz alias",
@@ -1306,7 +1306,7 @@
         "searchForRewards": "Szukaj nagród",
         "claimRewards": "Odbierz nagrody",
         "rerunClaimProcess": "Powtórz proces odbioru",
-        "finishProfileSetupWithProtocol": "Zakończ konfigurację profilu {protocol}",
+        "finishProfileSetupWithProtocol": "Zakończ konfigurację profilu {network}",
         "addPublicNote": "Dodaj notatkę publiczną",
         "backup": "Kopia zapasowa",
         "mint": "Mintuj",

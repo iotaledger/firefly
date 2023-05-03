@@ -3,8 +3,8 @@
         "onboarding": {
             "appSetup": {
                 "welcome": {
-                    "title": "Sende, empfange und verwalte deine {protocol} Token",
-                    "body": "Firefly ist die offizielle Wallet-Software für {protocol}."
+                    "title": "Sende, empfange und verwalte deine {network} Token",
+                    "body": "Firefly ist die offizielle Wallet-Software für {network}."
                 },
                 "legal": {
                     "title": "Datenschutzerklärung & Nutzungsbedingungen",
@@ -55,15 +55,15 @@
                         }
                     }
                 },
-                "setupCustomNetworkConnection": {
+                "setupCustomNetwork": {
                     "title": "Mit einem privaten Netzwerk verbinden",
                     "body": "Fülle das Formular mit den Nodeinformationen aus und verbinde dich mit einem privaten Netzwerk."
                 }
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Richte {protocol, select, IOTA {ein} Shimmer {ein} other {ein}} {protocol} Profil",
-                    "body": "Wähle die geeignete Methode um dein {protocol} Profil einzurichten."
+                    "title": "Richte {network, select, IOTA {ein} Shimmer {ein} other {ein}} {network} Profil",
+                    "body": "Wähle die geeignete Methode um dein {network} Profil einzurichten."
                 },
                 "setupNew": {
                     "title": "Profil erstellen",
@@ -78,7 +78,7 @@
                     }
                 },
                 "setupRecovered": {
-                    "title": "{protocol} Profil wiederherstellen",
+                    "title": "{network} Profil wiederherstellen",
                     "body": "Wenn du eine Wiederherstellungsphrase oder ein Stronghold-Backup hast, kannst du diese(s) hier importieren.",
                     "importMnemonic": "Wiederherstellungsphrase benutzen",
                     "importMnemonicDescription": "Gib deine 24-Wörter Wiederherstellungsphrase ein",
@@ -92,7 +92,7 @@
                     "body": "Importiere dein IOTA-Profil und beanspruche deine Shimmer Staking-Rewards."
                 },
                 "enterName": {
-                    "title": "Erstelle dein {protocol} Profil",
+                    "title": "Erstelle dein {network} Profil",
                     "profileName": "Profilname",
                     "body1": "Du kannst mehrere Benutzerprofile erstellen, um deine Wallets zu organisieren und deine Privatsphäre zu verbessern.",
                     "body2": {
@@ -198,10 +198,10 @@
             "videoGuide": "Video-Leitfaden zur Ledger-Migration"
         },
         "ledgerInstallationGuide": {
-            "title": "Haben du die {protocol} App auf deinem Ledger Gerät installiert?",
-            "body1": "Bevor du fortfährst, musst du Ledger Live verwenden, um die {protocol} App zu finden und zu installieren.",
+            "title": "Haben du die {network} App auf deinem Ledger Gerät installiert?",
+            "body1": "Bevor du fortfährst, musst du Ledger Live verwenden, um die {network} App zu finden und zu installieren.",
             "body2": "Stelle sicher, dass deine Ledger-Firmware aktuell ist. Alle vorinstallierten Apps sollten auf ihre neuesten Versionen aktualisiert werden.",
-            "action": "Ja, ich habe die {protocol} App installiert"
+            "action": "Ja, ich habe die {network} App installiert"
         },
         "importFromLedger": {
             "title": "Ledger wiederherstellen oder migrieren",
@@ -910,7 +910,7 @@
             "title": "Verbinde deinen Ledger",
             "notConnected": "Verbinde dein Ledger-Gerät, um fortzufahren.",
             "locked": "Entsperre dein Ledger-Gerät, um fortzufahren.",
-            "appNotOpen": "Öffne die {protocol} App auf deinem Ledger-Gerät, um fortzufahren.",
+            "appNotOpen": "Öffne die Shimmer App auf deinem Ledger-Gerät, um fortzufahren.",
             "correctAppOpen": "Ledger erfolgreich verbunden, bitte fortfahren."
         },
         "ledgerConfirmation": {
@@ -1193,8 +1193,8 @@
             "title": "NFT Medien aktualisieren",
             "description": "Möchtest Du alle NFT Medien für dieses Konto löschen und erneut herunterladen?"
         },
-        "createWallet": "Ein neues {protocol} Profil erstellen",
-        "createWalletDescription": "Erstelle ein neues Profil auf {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Unbekannt}}",
+        "createWallet": "Ein neues {network} Profil erstellen",
+        "createWalletDescription": "Erstelle ein neues Profil auf {network, select, iota {Chrysalis} shimmer {Shimmer} other {Unbekannt}}",
         "claimShimmer": "Shimmer Staking-Rewards beanspruchen",
         "claimShimmerDescription": "Importiere dein IOTA-Profil und beanspruche deine Shimmer Staking-Rewards",
         "createAlias": "Alias erstellen",

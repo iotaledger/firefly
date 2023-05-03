@@ -11,7 +11,7 @@ export async function resetOnboardingProfileWithProfileManager(): Promise<void> 
         await resetOnboardingProfile()
         updateOnboardingProfile({
             type: null,
-            recoveryType: null,
+            restoreProfileType: null,
             hasInitialisedProfileManager: false,
             shimmerClaimingAccounts: [],
         })

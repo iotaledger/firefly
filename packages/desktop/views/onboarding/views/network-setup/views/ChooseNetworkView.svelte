@@ -3,18 +3,18 @@
     import { OnboardingLayout } from '@components'
     import {
         initialiseOnboardingProfile,
-        onboardingProfile,
         shouldBeDeveloperProfile,
         updateOnboardingProfile,
+        onboardingProfile,
     } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { NETWORK, NetworkId, getDefaultClientOptions } from '@core/network'
+    import { NetworkId, getDefaultClientOptions, getDefaultPersistedNetwork } from '@core/network'
     import { profiles } from '@core/profile'
-    import { networkSetupRouter } from '@core/router'
     import features from '@features/features'
     import { Animation, OnboardingButton, Text, TextType } from '@ui'
     import { onMount } from 'svelte'
+    import { networkSetupRouter } from '../network-setup-router'
 
     let networkIcon: { [key in NetworkId]: string }
     $: networkIcon = {
@@ -39,7 +39,7 @@
 
     function onNetworkSelectionClick(networkId: NetworkId): void {
         if (networkId !== NetworkId.Custom) {
-            const network = NETWORK?.[networkId]
+            const network = getDefaultPersistedNetwork(networkId)
             const clientOptions = getDefaultClientOptions(networkId)
             updateOnboardingProfile({ network, clientOptions })
         }
@@ -51,10 +51,12 @@
     }
 
     onMount(async () => {
+        // Clean up if user has navigated back to this view
+        updateOnboardingProfile({ network: undefined, clientOptions: undefined })
+        // If coming from this view with no profiles, initialise a new profile
         if (!$onboardingProfile?.id) {
-            await initialiseOnboardingProfile($onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile())
+            await initialiseOnboardingProfile(shouldBeDeveloperProfile())
         }
-        updateOnboardingProfile({ network: undefined })
     })
 </script>
 

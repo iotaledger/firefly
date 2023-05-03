@@ -1,3 +1,5 @@
-export * from './views'
+export { default as OnboardingRouterView } from './OnboardingRouterView.svelte'
 
-export { default as OnboardingRouter } from './OnboardingRouter.svelte'
+export * from './views'
+export * from './onboarding-route.enum'
+export * from './onboarding-router'

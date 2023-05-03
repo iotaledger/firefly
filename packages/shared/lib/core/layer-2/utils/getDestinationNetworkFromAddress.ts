@@ -7,7 +7,7 @@ export function getDestinationNetworkFromAddress(networkAddress: string): string
     if (!networkAddress) {
         return DestinationNetwork.Shimmer
     }
-    const foundDestinationNetwork = Object.entries(NETWORK_ADDRESS[get(activeProfile)?.networkType]).find(
+    const foundDestinationNetwork = Object.entries(NETWORK_ADDRESS[get(activeProfile)?.network?.id]).find(
         (networkAddressEntry) => networkAddressEntry[1] === networkAddress
     )?.[0]
 

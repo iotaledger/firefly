@@ -50,7 +50,7 @@ export function generateActivitiesFromBasicOutputs(
                 },
                 getNftId(nftInput.nftId, wrappedInput.outputId)
             )
-            const nft = buildNftFromNftOutput(nftInput, wrappedInput.outputId, false)
+            const nft = buildNftFromNftOutput(wrappedInput, account.depositAddress, false)
             addOrUpdateNftInAllAccountNfts(account.index, nft)
 
             burnedNftInputs.splice(burnedNftInputIndex, 1)

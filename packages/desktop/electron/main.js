@@ -3,14 +3,16 @@ import { initAutoUpdate } from './lib/appUpdater'
 import { initNftDownloadHandlers } from './lib/nftDownloadHandlers'
 import { shouldReportError } from './lib/errorHandling'
 import { getEthereumInfo } from './lib/ledger'
+import { initialiseAnalytics } from './lib/analytics'
+import { getMachineId } from './lib/machineId'
+import { getDiagnostics } from './lib/diagnostics'
 const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = require('electron')
 const path = require('path')
-const os = require('os')
 const fs = require('fs')
-const { execSync } = require('child_process')
-const { machineIdSync } = require('node-machine-id')
 const Keychain = require('./lib/keychain')
 const { initMenu, contextMenu } = require('./lib/menu')
+
+initialiseAnalytics()
 
 const canSendCrashReports = () => {
     let sendCrashReports = loadJsonConfig('settings.json')?.sendCrashReports
@@ -54,21 +56,6 @@ if (
  * Expose Garbage Collector flag for manual trigger after seed usage
  */
 app.commandLine.appendSwitch('js-flags', '--expose-gc')
-
-let machineId = null
-function getMachineId() {
-    // Will only be null the first time
-    // If this fails, it will probably fail again, so set it to an empty string
-    if (machineId === null) {
-        try {
-            machineId = machineIdSync()
-        } catch (err) {
-            machineId = ''
-            console.error(err)
-        }
-    }
-    return machineId
-}
 
 let lastError = {}
 
@@ -401,10 +388,20 @@ ipcMain.handle('get-path', (_e, path) => {
 })
 ipcMain.handle('get-version-details', (_e) => versionDetails)
 
+function ensureDirectoryExistence(filePath) {
+    const dirname = path.dirname(filePath)
+    if (fs.existsSync(dirname)) {
+        return true
+    }
+    ensureDirectoryExistence(dirname)
+    fs.mkdirSync(dirname)
+}
+
 ipcMain.handle('copy-file', (_e, sourceFilePath, destinationFilePath) => {
     const src = path.resolve(sourceFilePath)
     const srcFileBuffer = fs.readFileSync(src)
     const dest = path.resolve(destinationFilePath)
+    ensureDirectoryExistence(dest)
     fs.writeFileSync(dest, srcFileBuffer)
 })
 
@@ -422,60 +419,6 @@ ipcMain.handle('check-if-file-exists', (_e, filePath) => {
 
     return fs.existsSync(`${directory}/__storage__/${filePath}`)
 })
-
-// Diagnostics
-const getDiagnostics = () => {
-    const osXNameMap = new Map([
-        // Source: https://en.wikipedia.org/wiki/Darwin_(operating_system)#Release_history
-        [21, ['Monterey', '12']],
-        [20, ['Big Sur', '11']],
-        [19, ['Catalina', '10.15']],
-        [18, ['Mojave', '10.14']],
-        [17, ['High Sierra', '10.13']],
-        [16, ['Sierra', '10.12']],
-        [15, ['El Capitan', '10.11']],
-        [14, ['Yosemite', '10.10']],
-        [13, ['Mavericks', '10.9']],
-        [12, ['Mountain Lion', '10.8']],
-        [11, ['Lion', '10.7']],
-        [10, ['Snow Leopard', '10.6']],
-        [9, ['Leopard', '10.5']],
-        [8, ['Tiger', '10.4']],
-        [7, ['Panther', '10.3']],
-        [6, ['Jaguar', '10.2']],
-        [5, ['Puma', '10.1']],
-    ])
-
-    let platform = os.platform()
-    let platformVersion = os.release()
-
-    if (platform === 'darwin') {
-        platform = 'macOS'
-
-        try {
-            platformVersion = execSync('sw_vers -productVersion').toString().trim()
-        } catch (_err) {
-            // Fall back to Darwin version map
-            const verSplit = platformVersion.split('.')
-            const num = Number.parseInt(verSplit[0], 10)
-            if (!Number.isNaN(num)) {
-                const [_, version] = osXNameMap.get(num)
-                if (version) {
-                    platformVersion = version
-                }
-            }
-        }
-    }
-
-    return [
-        { label: 'popups.diagnostics.platform', value: platform },
-        { label: 'popups.diagnostics.platformVersion', value: platformVersion },
-        { label: 'popups.diagnostics.platformArchitecture', value: os.arch() },
-        { label: 'popups.diagnostics.cpuCount', value: os.cpus().length },
-        { label: 'popups.diagnostics.totalMem', value: `${(os.totalmem() / 1048576).toFixed(1)} MB` },
-        { label: 'popups.diagnostics.freeMem', value: `${(os.freemem() / 1048576).toFixed(1)} MB` },
-    ]
-}
 
 ipcMain.handle('diagnostics', (_e) => getDiagnostics())
 

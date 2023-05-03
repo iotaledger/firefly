@@ -3,8 +3,8 @@
         "onboarding": {
             "appSetup": {
                 "welcome": {
-                    "title": "Отправлять, получать и управлять своими {protocol} токенами",
-                    "body": "Firefly - это официальное программное обеспечение кошелька для {protocol}."
+                    "title": "Отправлять, получать и управлять своими {network} токенами",
+                    "body": "Firefly - это официальное программное обеспечение кошелька для {network}."
                 },
                 "legal": {
                     "title": "Политика конфиденциальности и Условия предоставления услуг",
@@ -55,15 +55,15 @@
                         }
                     }
                 },
-                "setupCustomNetworkConnection": {
+                "setupCustomNetwork": {
                     "title": "Подключение к личной сети",
                     "body": "Заполните форму информацией об узле и подключитесь к личной сети."
                 }
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Установить {protocol, select, IOTA {an} Shimmer {a} other {an}} {protocol} профиль",
-                    "body": "Выберите соответствующий метод для настройки профиля {protocol}."
+                    "title": "Установить {network, select, IOTA {an} Shimmer {a} other {an}} {network} профиль",
+                    "body": "Выберите соответствующий метод для настройки профиля {network}."
                 },
                 "setupNew": {
                     "title": "Создать профиль",
@@ -78,7 +78,7 @@
                     }
                 },
                 "setupRecovered": {
-                    "title": "Восстановить профиль {protocol}",
+                    "title": "Восстановить профиль {network}",
                     "body": "Если у вас уже есть мнемоника или резервный файл Stronghold, вы можете импортировать его сюда.",
                     "importMnemonic": "Использовать фразу восстановления",
                     "importMnemonicDescription": "Введите вашу мнемоническую фразу в 24 слова",
@@ -92,7 +92,7 @@
                     "body": "Импортируйте свой профиль IOTA и получите вознаграждение за ставку в Shimmer."
                 },
                 "enterName": {
-                    "title": "Создайте свой профиль {protocol}",
+                    "title": "Создайте свой профиль {network}",
                     "profileName": "Имя профиля",
                     "body1": "Вы можете создать несколько профилей пользователей, чтобы организовать свои кошельки и повысить уровень секретности.",
                     "body2": {
@@ -198,10 +198,10 @@
             "videoGuide": "Видеогид по миграции Ledger"
         },
         "ledgerInstallationGuide": {
-            "title": "Установили ли вы приложение {protocol} на своем устройстве Ledger?",
-            "body1": "Прежде чем продолжить, необходимо с помощью Ledger Live найти и установить приложение {protocol}.",
+            "title": "Установили ли вы приложение {network} на своем устройстве Ledger?",
+            "body1": "Прежде чем продолжить, необходимо с помощью Ledger Live найти и установить приложение {network}.",
             "body2": "Убедитесь, что прошивка Ledger актуальна. Любые предварительно установленные приложения должны быть обновлены до их последних версий.",
-            "action": "Да, я установил приложение {protocol}"
+            "action": "Да, я установил приложение {network}"
         },
         "importFromLedger": {
             "title": "Восстановить или мигрировать ваш Ledger",
@@ -910,7 +910,7 @@
             "title": "Подключите ваш Ledger",
             "notConnected": "Подключите ваше устройство Ledger, чтобы продолжить.",
             "locked": "Разблокируйте ваше устройство Ledger, чтобы продолжить.",
-            "appNotOpen": "Откройте приложение {protocol} на вашем устройстве Ledger, чтобы продолжить.",
+            "appNotOpen": "Откройте приложение Shimmer на вашем устройстве Ledger, чтобы продолжить.",
             "correctAppOpen": "Ledger успешно подключен, пожалуйста, продолжайте."
         },
         "ledgerConfirmation": {
@@ -1193,8 +1193,8 @@
             "title": "Refresh NFT media",
             "description": "Do you want to delete and re-download all NFT media for this account?"
         },
-        "createWallet": "Создать новый профиль {protocol}",
-        "createWalletDescription": "Создайте новый профиль, работающий на {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
+        "createWallet": "Создать новый профиль {network}",
+        "createWalletDescription": "Создайте новый профиль, работающий на {network, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
         "claimShimmer": "Запросить вознаграждение за ставки в Shimmer",
         "claimShimmerDescription": "Перенести профиль IOTA и востребовать вознаграждение по ставке",
         "createAlias": "Создать псевдоним",
@@ -1306,7 +1306,7 @@
         "searchForRewards": "Искать вознаграждения",
         "claimRewards": "Запросить вознаграждения",
         "rerunClaimProcess": "Перезапустить процесс запроса",
-        "finishProfileSetupWithProtocol": "Завершить настройку профиля {protocol}",
+        "finishProfileSetupWithProtocol": "Завершить настройку профиля {network}",
         "addPublicNote": "Добавить публичную заметку",
         "backup": "Резервное копирование",
         "mint": "Чеканить",

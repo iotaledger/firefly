@@ -8,12 +8,12 @@
         initialiseOnboardingProfile,
         initialiseProfileManagerFromOnboardingProfile,
         onboardingProfile,
-        ProfileSetupType,
+        OnboardingType,
         shouldBeDeveloperProfile,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
-    import { formatProtocolName, getDefaultClientOptions } from '@core/network'
+    import { getNetworkNameFromNetworkId, getDefaultClientOptions } from '@core/network'
     import { ProfileType } from '@core/profile'
     import { destroyProfileManager } from '@core/profile-manager'
 
@@ -22,12 +22,12 @@
 
     const networkId = $onboardingProfile?.network?.id
     const title = localize('views.onboarding.profileSetup.setup.title', {
-        values: { protocol: formatProtocolName(networkId) },
+        values: { network: getNetworkNameFromNetworkId(networkId) },
     })
 
-    async function onProfileSetupSelectionClick(setupType: ProfileSetupType): Promise<void> {
+    async function onProfileSetupSelectionClick(onboardingType: OnboardingType): Promise<void> {
         // We dont support Ledger profiles on mobile yet, so we hardcode the type to Software
-        updateOnboardingProfile({ setupType, type: ProfileType.Software })
+        updateOnboardingProfile({ onboardingType, type: ProfileType.Software })
         await initialiseProfileManagerFromOnboardingProfile()
         $profileSetupRouter.next()
     }
@@ -49,7 +49,7 @@
         }
         updateOnboardingProfile({
             mustVisitProfileName: true,
-            setupType: null,
+            onboardingType: null,
             hasInitialisedProfileManager: false,
             type: null,
         })
@@ -65,12 +65,12 @@
             iconWidth="24"
             hidden={features?.onboarding?.[networkId]?.claimRewards?.hidden}
             disabled={!features?.onboarding?.[networkId]?.claimRewards?.enabled}
-            onClick={() => onProfileSetupSelectionClick(ProfileSetupType.Claimed)}
+            onClick={() => onProfileSetupSelectionClick(OnboardingType.Claim)}
         />
         <OnboardingButton
             primaryText={localize('actions.createWallet', {
                 values: {
-                    protocol: formatProtocolName(networkId),
+                    protocol: getNetworkNameFromNetworkId(networkId),
                 },
             })}
             icon="plus"
@@ -78,14 +78,14 @@
             iconWidth="11"
             hidden={features?.onboarding?.[networkId]?.newProfile?.hidden}
             disabled={!features?.onboarding?.[networkId]?.newProfile?.enabled}
-            onClick={() => onProfileSetupSelectionClick(ProfileSetupType.New)}
+            onClick={() => onProfileSetupSelectionClick(OnboardingType.Create)}
         />
         <OnboardingButton
             primaryText={localize(`actions.restoreWallet.${networkId}`)}
             icon="transfer"
             hidden={features?.onboarding?.[networkId]?.restoreProfile?.hidden}
             disabled={!features?.onboarding?.[networkId]?.restoreProfile?.enabled}
-            onClick={() => onProfileSetupSelectionClick(ProfileSetupType.Recovered)}
+            onClick={() => onProfileSetupSelectionClick(OnboardingType.Restore)}
         />
     </div>
 </OnboardingLayout>

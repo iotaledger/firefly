@@ -1,5 +1,5 @@
 export * from './checkForAppUpdate'
-export * from './isStrongholdUpdated'
+export * from './isLatestStrongholdVersion'
 export * from './installAppUpdate'
 export * from './needsToAcceptLatestPrivacyPolicy'
 export * from './needsToAcceptLatestTermsOfService'

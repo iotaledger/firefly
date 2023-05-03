@@ -9,11 +9,11 @@
     import { popupState } from '@auxiliary/popup/stores'
 
     const { hasLoadedAccounts } = $activeProfile
+    const isWindows = $platform === PlatformOption.Windows
 
     let isMaximized = false
 
     $: isDashboardVisible = $appRoute === AppRoute.Dashboard && $hasLoadedAccounts && $popupState.id !== 'busy'
-    $: isWindows = $platform === PlatformOption.Windows
     $: dark = $appSettings.darkMode
 
     async function onResize(): Promise<void> {
@@ -36,7 +36,7 @@
 <nav
     class:dark
     class:with-borders={isDashboardVisible}
-    class="flex flex-row justify-between fixed z-50 top-0 left-0 right-0 w-full h-9 transition-none bg-transparent"
+    class="flex flex-row justify-between fixed z-50 top-0 left-0 right-0 w-full h-12 transition-none bg-transparent"
 >
     {#if isWindows}
         <!-- We need to add this element to allow fix the windows resize area issue due to -webkit-app-region: drag -->
@@ -93,6 +93,6 @@
     }
 
     slot-container.top-placement {
-        @apply top-9;
+        @apply top-12;
     }
 </style>

@@ -2,17 +2,6 @@ import { formatDate } from '@core/i18n'
 
 import { HEXADECIMAL_PREFIX, HEXADECIMAL_REGEXP } from './constants'
 
-export function capitalizeString(str: string): string {
-    if (!str) return str
-    else return str[0].toUpperCase() + str.substr(1).toLowerCase()
-}
-
-export function delineateNumber(str: string, delineator: ',' | '.' | '' = ','): string {
-    if (!str) return ''
-
-    return str.toString().replace(/\B(?=(\d{3})+(?!\d))/g, delineator)
-}
-
 export function formatHexString(
     hex: string,
     shouldBeUppercase: boolean = true,

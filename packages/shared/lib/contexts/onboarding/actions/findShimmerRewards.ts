@@ -1,17 +1,20 @@
-import { get } from 'svelte/store'
-
-import { IAccount } from '@core/account'
-import { BASE_TOKEN, NetworkProtocol } from '@core/network'
-import { AccountRecoveryProfileConfiguration, UnableToFindProfileTypeError } from '@core/profile'
-import { zip } from '@core/utils'
-import { TokenStandard, formatTokenAmountBestMatch } from '@core/wallet'
 import { showAppNotification } from '@auxiliary/notification'
-
-import { SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS, SHIMMER_CLAIMING_ACCOUNT_RECOVERY_CONFIGURATION } from '../constants'
-import { getSortedRenamedBoundAccounts, prepareShimmerClaimingAccount } from '../helpers'
-import { onboardingProfile, shimmerClaimingProfileManager, updateShimmerClaimingAccount } from '../stores'
-import { sumTotalUnclaimedRewards } from '../utils'
+import { IAccount } from '@core/account'
+import { localize } from '@core/i18n'
+import { AccountRecoveryProfileConfiguration, UnableToFindProfileTypeError } from '@core/profile'
 import { RecoverAccountsPayload, recoverAccounts } from '@core/profile-manager'
+import { zip } from '@core/utils'
+import { formatTokenAmountBestMatch } from '@core/wallet/utils'
+import { get } from 'svelte/store'
+import { SHIMMER_CLAIMING_ACCOUNT_RECOVERY_CONFIGURATION, SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS } from '../constants'
+import { getSortedRenamedBoundAccounts, prepareShimmerClaimingAccount } from '../helpers'
+import {
+    getOnboardingBaseToken,
+    onboardingProfile,
+    shimmerClaimingProfileManager,
+    updateShimmerClaimingAccount,
+} from '../stores'
+import { sumTotalUnclaimedRewards } from '../utils'
 
 const DEPTH_SEARCH_ACCOUNT_START_INDEX = 0
 const INITIAL_SEARCH_ADDRESS_START_INDEX = 0
@@ -60,7 +63,6 @@ export async function findShimmerRewards(): Promise<void> {
     if (hasOnlyDoneDepthSearch()) {
         await breadthSearchAndRecoverAccounts()
     }
-
     updateRewardsFinderParameters()
 }
 
@@ -144,13 +146,12 @@ export function setTotalUnclaimedShimmerRewards(_totalUnclaimedShimmerRewards: n
 
 function showRewardsFoundNotification(updatedTotalUnclaimedShimmerRewards: number): void {
     const foundRewardsAmount = updatedTotalUnclaimedShimmerRewards - totalUnclaimedShimmerRewards
-    const foundRewardsAmountFormatted = formatTokenAmountBestMatch(foundRewardsAmount, {
-        standard: TokenStandard.BaseToken,
-        ...BASE_TOKEN[NetworkProtocol.Shimmer],
-    })
+    const foundRewardsAmountFormatted = formatTokenAmountBestMatch(foundRewardsAmount, getOnboardingBaseToken())
     showAppNotification({
         type: 'success',
         alert: true,
-        message: `Successfully found ${foundRewardsAmountFormatted}`,
+        message: localize('views.onboarding.shimmerClaiming.success.successfullyFound', {
+            values: { amount: foundRewardsAmountFormatted },
+        }),
     })
 }

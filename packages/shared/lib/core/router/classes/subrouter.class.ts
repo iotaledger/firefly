@@ -13,10 +13,10 @@ export abstract class Subrouter<R> extends Router<R> {
     }
 
     previous(): void {
-        if (this.history.length === 0) {
-            this.parentRouter.previous()
-        } else {
+        if (this.history.length > 0) {
             super.previous()
+        } else {
+            this.parentRouter.previous()
         }
     }
 

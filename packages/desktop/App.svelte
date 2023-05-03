@@ -1,21 +1,17 @@
 <script lang="ts">
     import { onDestroy, onMount } from 'svelte'
     import { _, isLocaleLoaded, Locale, localeDirection, setupI18n } from '@core/i18n'
-    import { activeProfile, checkAndMigrateProfiles, cleanupEmptyProfiles } from '@core/profile'
+    import { activeProfile, checkAndMigrateProfiles, cleanupEmptyProfiles, saveActiveProfile } from '@core/profile'
     import {
         AppRoute,
         appRoute,
         DashboardRoute,
         dashboardRouter,
         initialiseRouterManager,
-        OnboardingRoute,
-        onboardingRoute,
-        onboardingRouter,
         routerManager,
         RouterManagerExtensionName,
     } from '@core/router'
     import {
-        AppContext,
         appSettings,
         appStage,
         AppStage,
@@ -30,12 +26,10 @@
     } from '@core/app'
     import { showAppNotification } from '@auxiliary/notification'
     import { closePopup, openPopup, PopupId, popupState } from '@auxiliary/popup'
-    import { initialiseOnboardingFlow } from '@contexts/onboarding'
-    import { NetworkId } from '@core/network'
     import { getLocalisedMenuItems } from './lib/helpers'
     import { ToastContainer, Transition } from '@ui'
     import { TitleBar, Popup } from '@components'
-    import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from '@views'
+    import { Dashboard, LoginRouter, Settings, Splash } from '@views'
     import {
         getAppRouter,
         getRouterForAppContext,
@@ -47,14 +41,19 @@
     } from '@desktop/routers'
     import { downloadNextNftInQueue, nftDownloadQueue } from '@core/nfts'
     import { closeDrawer } from '@desktop/auxilary/drawer'
+    import features from '@features/features'
+    import { OnboardingRouterView } from '@views/onboarding'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
     const { loggedIn, hasLoadedAccounts } = $activeProfile
+    const isWindows = $platform === PlatformOption.Windows
 
     $: if ($activeProfile && !$loggedIn) {
         closePopup(true)
     }
+
+    $: $activeProfile, saveActiveProfile()
 
     async function handleCrashReporting(sendCrashReports: boolean): Promise<void> {
         await Platform.updateAppSettings({ sendCrashReports })
@@ -72,21 +71,11 @@
         }
     }
 
-    $: Platform.updateMenu(
-        'canCreateNewProfile',
-        $appRoute === AppRoute.Login ||
-            ($appRoute === AppRoute.Onboarding &&
-                $onboardingRoute !== OnboardingRoute.AppSetup &&
-                $onboardingRoute !== OnboardingRoute.ShimmerClaiming &&
-                $onboardingRoute !== OnboardingRoute.Congratulations)
-    )
-
     $: if (document.dir !== $localeDirection) {
         document.dir = $localeDirection
     }
 
     $: isDashboardVisible = $appRoute === AppRoute.Dashboard && $hasLoadedAccounts && $popupState.id !== 'busy'
-    $: isWindows = $platform === PlatformOption.Windows
 
     $: $nftDownloadQueue, downloadNextNftInQueue()
 
@@ -96,6 +85,7 @@
     void setupI18n({ fallbackLocale: 'en', initialLocale: $appSettings.language })
 
     onMount(async () => {
+        features.analytics.appStart.enabled && Platform.trackEvent('app-start')
         await cleanupEmptyProfiles()
         checkAndMigrateProfiles()
 
@@ -158,21 +148,6 @@
             closeDrawer()
             openPopup({ id: PopupId.Diagnostics })
         })
-        Platform.onEvent('menu-create-developer-profile', async () => {
-            await initialiseOnboardingFlow({
-                isDeveloperProfile: true,
-            })
-            $routerManager.goToAppContext(AppContext.Onboarding)
-            $onboardingRouter.goTo(OnboardingRoute.NetworkSetup)
-        })
-        Platform.onEvent('menu-create-normal-profile', async () => {
-            await initialiseOnboardingFlow({
-                isDeveloperProfile: false,
-                networkId: NetworkId.Shimmer,
-            })
-            $routerManager.goToAppContext(AppContext.Onboarding)
-            $onboardingRouter.goTo(OnboardingRoute.ProfileSetup)
-        })
 
         Platform.onEvent('deep-link-request', showDeepLinkNotification)
 
@@ -223,7 +198,7 @@
             {:else if $appRoute === AppRoute.Login}
                 <LoginRouter />
             {:else if $appRoute === AppRoute.Onboarding}
-                <OnboardingRouter />
+                <OnboardingRouterView />
             {/if}
             {#if settings}
                 <Settings handleClose={() => (settings = false)} />
@@ -303,6 +278,6 @@
         -webkit-user-drag: none;
     }
     app-body.top-placement {
-        @apply top-9;
+        @apply top-12;
     }
 </style>

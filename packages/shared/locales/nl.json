@@ -3,8 +3,8 @@
         "onboarding": {
             "appSetup": {
                 "welcome": {
-                    "title": "Verstuur, Ontvang & Beheer uw {protocol} tokens",
-                    "body": "Firefly is de officiële wallet software voor {protocol}."
+                    "title": "Verstuur, Ontvang & Beheer uw {network} tokens",
+                    "body": "Firefly is de officiële wallet software voor {network}."
                 },
                 "legal": {
                     "title": "Privacy Beleid & Algemene Voorwaarden",
@@ -55,15 +55,15 @@
                         }
                     }
                 },
-                "setupCustomNetworkConnection": {
+                "setupCustomNetwork": {
                     "title": "Connect to a private network",
                     "body": "Fill the form with the node information and connect to a private network."
                 }
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Set up {protocol, select, IOTA {an} Shimmer {a} other {an}} {protocol} profile",
-                    "body": "Selecteer de juiste methode om uw {protocol}-profiel in te stellen."
+                    "title": "Set up {network, select, IOTA {an} Shimmer {a} other {an}} {network} profile",
+                    "body": "Selecteer de juiste methode om uw {network}-profiel in te stellen."
                 },
                 "setupNew": {
                     "title": "Create a profile",
@@ -78,7 +78,7 @@
                     }
                 },
                 "setupRecovered": {
-                    "title": "Recover {protocol} profile",
+                    "title": "Recover {network} profile",
                     "body": "If you have an existing mnemonic or Stronghold backup file, you can import it here.",
                     "importMnemonic": "Use recovery phrase",
                     "importMnemonicDescription": "Enter your 24-word mnemonic phrase",
@@ -92,7 +92,7 @@
                     "body": "Import your IOTA profile and claim your Shimmer staking rewards."
                 },
                 "enterName": {
-                    "title": "Create your {protocol} profile",
+                    "title": "Create your {network} profile",
                     "profileName": "Profile name",
                     "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
                     "body2": {
@@ -198,10 +198,10 @@
             "videoGuide": "Ledger migratie instructie video"
         },
         "ledgerInstallationGuide": {
-            "title": "Hebt u de {protocol} app geïnstalleerd op uw Ledger apparaat?",
-            "body1": "Before you proceed, you must use Ledger Live to find and install the {protocol} app.",
+            "title": "Hebt u de {network} app geïnstalleerd op uw Ledger apparaat?",
+            "body1": "Before you proceed, you must use Ledger Live to find and install the {network} app.",
             "body2": "Zorg ervoor dat uw Ledger firmware up-to-date is. Alle vooraf geïnstalleerde apps moeten worden bijgewerkt naar de nieuwste versies.",
-            "action": "Ja, ik heb de {protocol} app geïnstalleerd"
+            "action": "Ja, ik heb de {network} app geïnstalleerd"
         },
         "importFromLedger": {
             "title": "Herstel of Migreer uw Ledger",
@@ -910,7 +910,7 @@
             "title": "Connect your Ledger",
             "notConnected": "Connect your Ledger device to continue.",
             "locked": "Unlock your Ledger device to continue.",
-            "appNotOpen": "Open the {protocol} app on your Ledger device to continue.",
+            "appNotOpen": "Open the Shimmer app on your Ledger device to continue.",
             "correctAppOpen": "Ledger successfully connected, please continue."
         },
         "ledgerConfirmation": {
@@ -1193,8 +1193,8 @@
             "title": "Refresh NFT media",
             "description": "Do you want to delete and re-download all NFT media for this account?"
         },
-        "createWallet": "Maak een nieuw {protocol} profiel aan",
-        "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
+        "createWallet": "Maak een nieuw {network} profiel aan",
+        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
         "claimShimmer": "Claim Shimmer staking beloningen",
         "claimShimmerDescription": "Importeer IOTA profiel en claim staking beloning",
         "createAlias": "Create alias",
@@ -1306,7 +1306,7 @@
         "searchForRewards": "Search for rewards",
         "claimRewards": "Claim beloningen",
         "rerunClaimProcess": "Opnieuw uitvoeren claim proces",
-        "finishProfileSetupWithProtocol": "Voltooi {protocol} profiel instellen",
+        "finishProfileSetupWithProtocol": "Voltooi {network} profiel instellen",
         "addPublicNote": "Openbare notitie toevoegen",
         "backup": "Backup",
         "mint": "Mint",
