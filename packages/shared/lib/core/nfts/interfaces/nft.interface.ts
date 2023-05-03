@@ -13,6 +13,7 @@ export interface INft {
     latestOutputId: string
     composedUrl: string
     downloadUrl: string
+    storageDeposit: number
     filePath: string
     downloadMetadata: NftDownloadMetadata
 }
