@@ -32,6 +32,7 @@ export const SETTINGS_ICON_SVG = {
     [SecuritySettingsRoute.ChangePincode]: Icon.Lock,
     [AdvancedSettingsRoute.WalletFinder]: Icon.Reset,
     [AdvancedSettingsRoute.HiddenAccounts]: Icon.View,
+    [AdvancedSettingsRoute.DeveloperToggle]: Icon.Dev,
     [HelpAndInfoRoute.Diagnostics]: Icon.Tools,
     [HelpAndInfoRoute.ErrorLog]: Icon.Warning,
     [HelpAndInfoRoute.Documentation]: Icon.Doc,

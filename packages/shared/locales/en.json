@@ -415,17 +415,13 @@
                 "title": "About",
                 "description": ""
             },
-            "createDeveloperProfile": {
-                "title": "Create Developer Profile",
-                "description": ""
-            },
-            "createNormalProfile": {
-                "title": "Create Normal Profile",
-                "description": ""
-            },
             "reportAnIssue": {
                 "title": "Report an issue",
                 "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
+            },
+            "developerToggle": {
+                "title": "Developer Mode",
+                "description": "Switch developer mode on to enable more features in experimental state"
             }
         },
         "login": {
