@@ -22,7 +22,7 @@
     } from '@contexts/onboarding'
     import {
         copyStrongholdFileToProfileDirectory,
-        getShimmerClaimingProfileManagerStorageDirectory,
+        getTemporaryProfileManagerStorageDirectory,
     } from '@contexts/onboarding/helpers'
     import { localize } from '@core/i18n'
     import {
@@ -132,7 +132,7 @@
             try {
                 isSettingUp = true
                 if ($onboardingProfile?.restoreProfileType === RestoreProfileType.Stronghold) {
-                    const shimmerClaimingProfileDirectory = await getShimmerClaimingProfileManagerStorageDirectory()
+                    const shimmerClaimingProfileDirectory = await getTemporaryProfileManagerStorageDirectory()
                     await copyStrongholdFileToProfileDirectory(
                         shimmerClaimingProfileDirectory,
                         $onboardingProfile?.importFilePath

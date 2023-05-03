@@ -3,7 +3,7 @@
     import { PopupId, openPopup, popupState } from '@auxiliary/popup'
     import {
         Platform,
-        isStrongholdUpdated,
+        isLatestStrongholdVersion,
         needsToAcceptLatestPrivacyPolicy,
         needsToAcceptLatestTermsOfService,
     } from '@core/app'
@@ -41,7 +41,7 @@
     }
     $: updateRequired =
         $activeProfile?.type === ProfileType.Software &&
-        !isStrongholdUpdated($activeProfile) &&
+        !isLatestStrongholdVersion($activeProfile?.strongholdVersion) &&
         features.onboarding.strongholdVersionCheck.enabled
     $: hasReachedMaxAttempts = attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS
     $: {
@@ -94,7 +94,9 @@
             isBusy = true
             const isVerified = await Platform.PincodeManager.verify($activeProfile?.id, pinCode)
             if (isVerified) {
-                void login({ avoidNextRoute: updateRequired })
+                if (!updateRequired) {
+                    void login()
+                }
                 $loginRouter.next()
             } else {
                 shake = true
