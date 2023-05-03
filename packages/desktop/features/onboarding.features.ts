@@ -161,7 +161,7 @@ const onboardingFeatures: OnboardingFeatures = {
     testnet: onboardingFeaturesForTestnet,
     custom: onboardingFeaturesForCustom,
     strongholdVersionCheck: {
-        enabled: true,
+        enabled: false,
     },
 }
 
