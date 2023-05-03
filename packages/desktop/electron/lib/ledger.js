@@ -1,12 +1,13 @@
-const TransportNodeHid = require('@ledgerhq/hw-transport-node-hid').default
-const AppEth = require('@ledgerhq/hw-app-eth').default
-const { listen } = require('@ledgerhq/logs');
+// const TransportNodeHid = require('@ledgerhq/hw-transport-node-hid').default
+// const AppEth = require('@ledgerhq/hw-app-eth').default
+// const { listen } = require('@ledgerhq/logs');
 
 // This a very basic example
 // Ideally you should not run this code in main thread
 // but run it in a dedicated node.js process
 export function getEthereumInfo(verify) {
-    process.stderr.write('getEthereumInfo\n')
+    /* eslint-disable no-console */
+    console.log('VERIFY: ', verify)
     // return TransportNodeHid.open('')
     // .then(transport => {
     //     listen(log => console.log(log))

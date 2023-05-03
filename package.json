@@ -34,7 +34,9 @@
         "lint:fix": "eslint . --cache --fix",
         "pre-commit": "yarn format-check && yarn lint",
         "prepare": "husky install",
-        "postinstall": "patch-package",
+        "postinstall": "yarn postinstall:patch && yarn postinstall:usb",
+        "postinstall:patch": "patch-package",
+        "postinstall:usb": "npm rebuild usb --build-from-source",
         "test": "yarn test:shared",
         "test:shared": "cd packages/shared && yarn test"
     },
