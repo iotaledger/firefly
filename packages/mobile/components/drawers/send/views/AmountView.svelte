@@ -59,7 +59,7 @@
                 ? formatTokenAmountDefault(Number(storedRawAmount), asset?.metadata, unit, false)
                 : ''
         }
-        amountInputElement.focus()
+        amountInputElement?.focus()
     })
 
     function validate(allowZeroOrNull = false): void {
@@ -93,7 +93,7 @@
 
     function toggleUnit(newUnit: string): void {
         unit = newUnit
-        amountInputElement.focus()
+        amountInputElement?.focus()
     }
 
     function onClickAvailableBalance(): void {
@@ -129,7 +129,7 @@
             <div class="flex flex-row items-center space-x-2">
                 <amount-wrapper
                     style:--max-width={`${Math.max(amount?.length, 1) * 14}px`}
-                    on:click={() => amountInputElement.focus()}
+                    on:click={() => amountInputElement?.focus()}
                 >
                     <AmountInput
                         bind:inputElement={amountInputElement}
