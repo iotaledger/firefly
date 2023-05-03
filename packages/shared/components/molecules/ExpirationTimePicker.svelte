@@ -15,12 +15,12 @@
 
     $: selected = initialSelected
 
-    export function setNull(bool: boolean = true): void {
+    export function setNull(bool: boolean): void {
         if (bool) {
             storedValue = value
             value = null
         } else {
-            value = storedValue
+            value = storedValue ?? value
         }
     }
 </script>

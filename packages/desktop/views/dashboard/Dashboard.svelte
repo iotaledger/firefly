@@ -8,7 +8,6 @@
         isActiveLedgerProfile,
         logout,
         reflectLockedStronghold,
-        saveActiveProfile,
     } from '@core/profile'
     import { appRouter, dashboardRoute } from '@core/router'
     import { Idle } from 'shared/components'
@@ -49,7 +48,6 @@
     let fundsSoonNotificationId
     let developerProfileNotificationId
 
-    $: $activeProfile, saveActiveProfile()
     $: $hasStrongholdLocked && reflectLockedStronghold()
     $: $nftDownloadQueue, downloadNextNftInQueue()
     $: $downloadingNftId && interruptNftDownloadAfterTimeout(get(selectedAccountIndex))

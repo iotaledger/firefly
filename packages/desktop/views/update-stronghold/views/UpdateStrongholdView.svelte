@@ -1,24 +1,34 @@
 <script lang="ts">
-    import { onMount } from 'svelte'
     import { OnboardingLayout } from '@components'
+    import { migrateStrongholdFromOnboardingProfile } from '@contexts/onboarding/actions'
+    import { localize } from '@core/i18n'
+    import { migrateStrongholdFromActiveProfile } from '@core/profile/actions/active-profile'
+    import { isValidJson } from '@core/utils'
     import { Animation, Button, PasswordInput, Text } from '@ui'
     import { HTMLButtonType, TextType } from '@ui/enums'
-    import { localize } from '@core/i18n'
-    import { unlockStronghold } from '@core/profile'
-    import { updateStrongholdRouter } from '@core/router'
-    import { onboardingProfile } from '@contexts/onboarding'
+    import { updateStrongholdRouter } from '../update-stronghold-router'
 
     export let password: string = ''
     export let isRecovery: boolean = false
 
     let passwordError: string = ''
+    let isBusy = false
 
     async function onSubmit(): Promise<void> {
         try {
-            await unlockStronghold(password)
+            isBusy = true
+            if (isRecovery) {
+                await migrateStrongholdFromOnboardingProfile(password)
+            } else {
+                await migrateStrongholdFromActiveProfile(password)
+            }
+            isBusy = false
             $updateStrongholdRouter.next()
         } catch (err) {
-            passwordError = localize(err.message) ?? err.message
+            isBusy = false
+            const message = err?.message ?? ''
+            const parsedError = isValidJson(message) ? JSON.parse(message) : ''
+            passwordError = parsedError?.payload?.error.replaceAll('`', '') ?? localize(message)
             return
         }
     }
@@ -26,12 +36,6 @@
     function onBackClick(): void {
         $updateStrongholdRouter.previous()
     }
-
-    onMount(() => {
-        if (isRecovery) {
-            password = $onboardingProfile.strongholdPassword
-        }
-    })
 </script>
 
 <OnboardingLayout {onBackClick}>
@@ -45,9 +49,7 @@
             {localize(`views.updateStronghold.update.${isRecovery ? 'recoveryBody' : 'loginBody'}`)}
         </Text>
         <form on:submit|preventDefault={onSubmit} id="update-stronghold-form">
-            {#if !isRecovery}
-                <PasswordInput bind:value={password} bind:error={passwordError} autofocus showRevealToggle />
-            {/if}
+            <PasswordInput bind:value={password} bind:error={passwordError} autofocus showRevealToggle />
         </form>
     </div>
     <div slot="leftpane__action">
@@ -55,7 +57,8 @@
             type={HTMLButtonType.Submit}
             form="update-stronghold-form"
             classes="w-full"
-            disabled={!password || !!passwordError}
+            disabled={isBusy || !password || !!passwordError}
+            {isBusy}
         >
             {localize('actions.updateAndContinue')}
         </Button>
