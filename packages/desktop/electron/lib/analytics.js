@@ -14,6 +14,9 @@ export async function initialiseAnalytics() {
         // Register event handlers
         ipcMain.handle('track-event', (_e, event, properties) => handleTrackEvent(event, properties))
     } else {
+        if (features.analytics.enabled && !process.env.AMPLITUDE_API_KEY) {
+            console.warn('Analytics is enabled but no API key is set')
+        }
         ipcMain.handle('track-event', () => {})
     }
 }
