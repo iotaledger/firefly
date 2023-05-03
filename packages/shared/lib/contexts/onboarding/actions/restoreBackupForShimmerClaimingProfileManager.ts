@@ -3,7 +3,7 @@ import { profileManager } from '@core/profile-manager'
 import { getStorageDirectoryOfProfile } from '@core/profile/utils'
 import { get } from 'svelte/store'
 import {
-    getShimmerClaimingProfileManagerStorageDirectory,
+    getTemporaryProfileManagerStorageDirectory,
     restoreBackupByCopyingFile,
     validateStrongholdCoinType,
 } from '../helpers'
@@ -12,8 +12,7 @@ import { onboardingProfile, shimmerClaimingProfileManager } from '../stores'
 export async function restoreBackupForShimmerClaimingProfileManager(strongholdPassword: string): Promise<void> {
     try {
         const { id, importFilePath, clientOptions } = get(onboardingProfile)
-
-        const tempProfileDirectory = await getShimmerClaimingProfileManagerStorageDirectory()
+        const tempProfileDirectory = await getTemporaryProfileManagerStorageDirectory()
         await restoreBackupByCopyingFile(
             importFilePath,
             tempProfileDirectory,

@@ -1,6 +1,9 @@
+import { get } from 'svelte/store'
+
 import { COIN_TYPE, getDefaultPersistedNetwork, NetworkId } from '@core/network'
 import { INode } from '@core/network/interfaces'
-import { get } from 'svelte/store'
+import { StrongholdVersion } from '@core/stronghold/enums'
+
 import {
     DEFAULT_PERSISTED_PROFILE_OBJECT,
     DEFAULT_STRONGHOLD_PASSWORD_TIMEOUT_IN_MINUTES,
@@ -51,6 +54,7 @@ const persistedProfileMigrationsMap: Record<number, (existingProfile: unknown) =
     8: persistedProfileMigrationToV9,
     9: persistedProfileMigrationToV10,
     10: persistedProfileMigrationToV11,
+    11: persistedProfileMigrationToV12,
 }
 
 function persistedProfileMigrationToV4(existingProfile: unknown): void {
@@ -225,4 +229,9 @@ function persistedProfileMigrationToV11(
     saveProfile(newProfile as IPersistedProfile)
 }
 
-// TODO: Rename accountMetadata to accountPersistedData
+function persistedProfileMigrationToV12(existingProfile: IPersistedProfile): void {
+    existingProfile.strongholdVersion = StrongholdVersion.V2
+    saveProfile(existingProfile)
+}
+
+// TODO: Rename accountMetadata to accountPersistedData in next migration

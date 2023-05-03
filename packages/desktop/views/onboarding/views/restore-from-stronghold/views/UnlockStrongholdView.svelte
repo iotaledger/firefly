@@ -5,7 +5,6 @@
     import { mobile } from '@core/app'
     import { CLIENT_ERROR_REGEXES, ClientError } from '@core/error'
     import { localize } from '@core/i18n'
-    import { STRONGHOLD_VERSION } from '@core/stronghold/constants'
     import { Animation, Button, PasswordInput, Text } from '@ui'
     import { onMount } from 'svelte'
     import { restoreFromStrongholdRouter } from '../restore-from-stronghold-router'
@@ -21,14 +20,10 @@
             busy = true
             try {
                 await restoreBackupFromStrongholdFile(strongholdPassword)
-                updateOnboardingProfile({ strongholdPassword, strongholdVersion: STRONGHOLD_VERSION })
+                updateOnboardingProfile({ strongholdPassword })
                 $restoreFromStrongholdRouter.next()
             } catch (err) {
-                // TODO: update this condition when we have a better way to detect the stronghold version
-                if (err === 'OLD_STRONGHOLD_VERSION') {
-                    updateOnboardingProfile({ strongholdPassword, strongholdVersion: undefined })
-                    $restoreFromStrongholdRouter.next()
-                } else if (CLIENT_ERROR_REGEXES[ClientError.InvalidStrongholdPassword].test(err?.error)) {
+                if (CLIENT_ERROR_REGEXES[ClientError.InvalidStrongholdPassword].test(err?.error)) {
                     error = localize('error.password.incorrect')
                 } else {
                     console.error(err)
