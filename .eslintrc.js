@@ -49,10 +49,6 @@ const eslintRulesOnlyTypescript = {
     'no-undef': 'off' // Typescript handles undefined variables better than eslint
 }
 
-const eslintRulesTemporary = {
-    'strict-null-checks/all': 'warn',   // Temporary rule until we can set strictNullChecks to true in tsconfig.json
-}
-
 const typescriptEslintRules = {
     '@typescript-eslint/array-type': 'error',
     '@typescript-eslint/await-thenable': 'error',
@@ -93,7 +89,6 @@ const typescriptEslintRules = {
 const linterRules = {
     ...eslintRules,
     ...eslintRulesOnlyTypescript,
-    ...eslintRulesTemporary,
     ...typescriptEslintRules,
 }
 
@@ -129,7 +124,7 @@ module.exports = {
                 project: './tsconfig.lint.json',
                 tsconfigRootDir: './',
             },
-            plugins: ['@typescript-eslint', "strict-null-checks", 'svelte3'],
+            plugins: ['@typescript-eslint', 'svelte3'],
             rules: linterRules,
             settings: svelteSettings,
         },
