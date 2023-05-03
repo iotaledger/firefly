@@ -1,7 +1,7 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
     import { Button, FontWeight, Text, TextType, NetworkInput, RecipientInput } from '@ui'
-    import { sendFlowRouter } from '../send-flow-router'
+    import { sendFlowRouter } from '../send-flow.router'
     import { isLayer1Destination } from '@core/layer-2'
     import { newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'
     import { selectedAccount } from '@core/account/stores'

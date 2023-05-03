@@ -10,10 +10,10 @@
         NewTransactionType,
         setNewTransactionDetails,
     } from '@core/wallet'
-    import { sendFlowRouter } from '../send-flow-router'
     import { closePopup } from '@auxiliary/popup'
     import { get } from 'svelte/store'
     import { Icon as IconEnum } from '@auxiliary/icon'
+    import { sendFlowRouter } from '../send-flow.router'
 
     const transactionDetails = get(newTransactionDetails)
 
