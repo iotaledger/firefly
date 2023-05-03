@@ -8,7 +8,6 @@
     } from 'shared/components'
     import { localize } from '@core/i18n'
     import {
-        formatTokenAmountDefault,
         TransactionActivity,
         getAssetFromPersistedAssets,
         ActivityAsyncStatus,
@@ -21,18 +20,14 @@
     export let unit: string = undefined
 
     $: asset = getAssetFromPersistedAssets(activity.assetId)
-    $: amount = formatTokenAmountDefault(
-        Number(activity.rawAmount),
-        asset?.metadata,
-        getUnitFromTokenMetadata(asset?.metadata)
-    )
+    $: amount = activity?.rawAmount
     $: isTimelocked = activity.asyncData?.timelockDate > $time
     $: subject = getSubjectFromActivity(activity)
 </script>
 
 <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-3">
     {#if amount}
-        <AmountBox {amount} {asset} />
+        <AmountBox {amount} {asset} unit={unit ?? getUnitFromTokenMetadata(asset?.metadata)} />
     {/if}
     <transaction-status class="flex flex-row w-full space-x-2 justify-center">
         {#if activity.inclusionState && activity.direction}
