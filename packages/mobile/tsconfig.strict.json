@@ -6,5 +6,6 @@
     },
     "files": [
         // add files here and change strict to true
+        // save this step until after /shared has been converted to strict
     ]
 }

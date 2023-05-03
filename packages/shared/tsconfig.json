@@ -1,20 +1,24 @@
+// https://www.typescriptlang.org/tsconfig#strict
 {
-    "extends": "@tsconfig/svelte/tsconfig.json",
+    "extends": "./tsconfig.base.json",
     "compilerOptions": {
-        "baseUrl": "./",
-        "importsNotUsedAsValues": "remove",
-        "lib": ["DOM", "ESNext"],
-        "moduleResolution": "node",
-        "outDir": "out",
-        "paths": {
-            "@auxiliary/*": ["./lib/auxiliary/*"],
-            "@contexts/*": ["./lib/contexts/*"],
-            "@core/*": ["./lib/core/*"],
-            "@features/*": ["./lib/features/*"],
-            "@lib/*": ["./lib/*"]
-        },
-        "types": ["node"]
+        "strict": true
     },
-    "include": ["./lib"],
-    "exclude": ["**/node_modules", "**/tests"]
+    "files": [
+        "./lib/core/utils/constants/bech32-address-length.constant.ts",
+        "./lib/core/utils/constants/date-format.constant.ts",
+        "./lib/core/utils/constants/default-application-json-request-options.constant.ts",
+        "./lib/core/utils/constants/default-exchange-rates.constant.ts",
+        "./lib/core/utils/constants/hex.constants.ts",
+        "./lib/core/utils/constants/index.ts",
+        "./lib/core/utils/constants/iota-unit-map.constant.ts",
+        "./lib/core/utils/constants/max-bytes.constant.ts",
+        "./lib/core/utils/constants/max-number-of-iotas.constant.ts",
+        "./lib/core/utils/constants/pin-length.constant.ts",
+        "./lib/core/utils/constants/time.constants.ts",
+        "./lib/core/utils/enums/exchange-rate.enum.ts",
+        "./lib/core/utils/enums/iota-unit.enum.ts",
+        "./lib/core/utils/types/exchange-rates.type.ts",
+        "./lib/core/utils/types/iota-unit-map.type.ts"
+    ]
 }
