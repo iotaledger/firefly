@@ -139,7 +139,6 @@ const rendererRules = [
 
 const mainPlugins = [
     new DefinePlugin({
-        PLATFORM: JSON.stringify(process.platform),
         PLATFORM_LINUX: JSON.stringify(process.platform === 'linux'),
         SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),
         SENTRY_MAIN_PROCESS: JSON.stringify(true),
