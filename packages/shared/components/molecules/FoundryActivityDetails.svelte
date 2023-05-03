@@ -1,16 +1,12 @@
 <script lang="ts">
     import { AmountBox, SubjectBox, TransactionActivityStatusPill } from 'shared/components'
-    import { formatTokenAmountDefault, getAssetFromPersistedAssets, getUnitFromTokenMetadata } from '@core/wallet'
+    import { getAssetFromPersistedAssets } from '@core/wallet'
     import { FoundryActivity } from '@core/wallet'
 
     export let activity: FoundryActivity
 
     $: asset = getAssetFromPersistedAssets(activity.assetId)
-    $: amount = formatTokenAmountDefault(
-        Number(activity.rawAmount),
-        asset?.metadata,
-        getUnitFromTokenMetadata(asset?.metadata)
-    )
+    $: amount = activity.rawAmount
 </script>
 
 <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-3">
