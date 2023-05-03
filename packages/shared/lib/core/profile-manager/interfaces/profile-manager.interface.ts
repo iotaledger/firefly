@@ -1,10 +1,10 @@
 import type {
-    SyncOptions,
     ClientOptions,
     EventType,
     GenerateAddressOptions,
     LedgerNanoStatus,
     NodeInfoWrapper,
+    SyncOptions,
     WalletEvent,
 } from '@iota/wallet'
 

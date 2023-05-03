@@ -4,7 +4,7 @@ import { getSecretManagerFromProfileType, initialiseProfileManager } from '@core
 import { generateRandomId } from '@core/utils'
 import { get } from 'svelte/store'
 import { RestoreProfileType } from '../enums'
-import { getShimmerClaimingProfileManagerStorageDirectory } from '../helpers'
+import { getTemporaryProfileManagerStorageDirectory } from '../helpers'
 import { onboardingProfile, shimmerClaimingProfileManager } from '../stores'
 
 export async function createShimmerClaimingProfileManager(): Promise<void> {
@@ -13,7 +13,7 @@ export async function createShimmerClaimingProfileManager(): Promise<void> {
         return
     }
 
-    const storagePath = await getShimmerClaimingProfileManagerStorageDirectory()
+    const storagePath = await getTemporaryProfileManagerStorageDirectory()
     const coinType = COIN_TYPE[NetworkId.Iota]
     const clientOptions = $onboardingProfile?.clientOptions
     const secretManager = getSecretManagerFromProfileType($onboardingProfile?.type, storagePath)
