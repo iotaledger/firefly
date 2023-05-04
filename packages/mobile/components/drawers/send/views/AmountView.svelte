@@ -23,7 +23,7 @@
     import { sendRouter } from '@/routers'
 
     // need to store the newTransactionDetails to avoid errors
-    let transactionDetails = get(newTransactionDetails)
+    const transactionDetails = get(newTransactionDetails)
 
     let amount: string
     let rawAmount: string
@@ -141,6 +141,7 @@
                         clearPadding
                         clearBorder
                         inputType="number"
+                        inputmode="numeric"
                     />
                 </amount-wrapper>
                 <p class="font-600 text-gray-800 dark:text-white text-24 leading-140">{unit}</p>
