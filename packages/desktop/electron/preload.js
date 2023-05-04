@@ -51,17 +51,6 @@ try {
         })
     }
 
-    try {
-        WalletApi.migrateStrongholdSnapshotV2ToV3(
-            '/home/maxwellmattryan/dev/iota/backups/old-01.stronghold',
-            'raise-pencil-stone',
-            '/home/maxwellmattryan/dev/iota/backups/MIGRATED.stronghold',
-            'raise-pencil-stone'
-        )
-    } catch (err) {
-        console.error(err)
-    }
-
     contextBridge.exposeInMainWorld('__WALLET__', WalletApi)
     contextBridge.exposeInMainWorld('__ELECTRON__', ElectronApi)
 } catch (error) {

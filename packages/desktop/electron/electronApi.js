@@ -69,6 +69,12 @@ const ElectronApi = {
     loadJsonFile(filepath) {
         return ipcRenderer.invoke('load-json-file', filepath).then((jsonFile) => jsonFile)
     },
+    copyFile(source, destination) {
+        return ipcRenderer.invoke('copy-file', source, destination)
+    },
+    deleteFile(source) {
+        return ipcRenderer.invoke('delete-file', source)
+    },
     PincodeManager: PincodeManager,
     DeepLinkManager: DeepLinkManager,
     NotificationManager: NotificationManager,

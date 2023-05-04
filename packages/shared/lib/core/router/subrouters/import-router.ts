@@ -119,18 +119,9 @@ export class ImportRouter extends Subrouter<ImportRoute> {
                 break
             }
             case ImportRoute.UpdateStronghold:
-                // const userDataPath = await Platform.getUserDataPath()
-                // console.log('USER: ', userDataPath)
-                // const profilesStoragePath = userDataPath
-                // const migrationDestinationPath = (await Platform.listProfileFolders(profilesStoragePath)).find((path) => { console.log('PATH: ', path) })
-                // console.log('MIGRATION: ', migrationDestinationPath)
-                // const _strongholdPassword = get(strongholdPassword)
-                // WALLET.migrateStrongholdSnapshotV2ToV3(this.importFilePath, _strongholdPassword, migrationDestinationPath, _strongholdPassword)
-
-                // await asyncRestoreBackup(this.importFilePath, get(strongholdPassword))
-                // strongholdPassword.set(undefined)
-                // get(newProfile).lastStrongholdBackupTime = new Date()
-                // get(appRouter).next({ importType: get(this.importType) })
+                strongholdPassword.set(undefined)
+                get(newProfile).lastStrongholdBackupTime = new Date()
+                get(appRouter).next({ importType: get(this.importType) })
                 return
             case ImportRoute.LedgerImport: {
                 const { importType } = params
