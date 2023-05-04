@@ -69,7 +69,22 @@ export class ImportRouter extends Subrouter<ImportRoute> {
 
                 this.importFile = file
                 this.importFilePath = filePath
-                nextRoute = ImportRoute.BackupPassword
+
+                if (get(this.importType) === ImportType.SeedVault) {
+                    nextRoute = ImportRoute.BackupPassword
+                    break
+                }
+
+                try {
+                    await asyncRestoreBackup(this.importFilePath, '')
+                } catch (err) {
+                    if (err?.error === 'error.backup.migrationRequired') {
+                        get(appRouter).next({ importType: get(this.importType), strongholdUpdateRequired: true })
+                    } else {
+                        nextRoute = ImportRoute.BackupPassword
+                    }
+                }
+
                 break
             }
             case ImportRoute.BackupPassword: {
@@ -89,14 +104,6 @@ export class ImportRouter extends Subrouter<ImportRoute> {
                         strongholdPassword.set(password)
                         await asyncRestoreBackup(this.importFilePath, password)
                         get(newProfile).lastStrongholdBackupTime = new Date()
-                    }
-
-                    // TODO: add logic here to detect if the stronghold is on the latest version or not
-                    const strongholdUpdateRequired = false
-                    if (strongholdUpdateRequired) {
-                        get(appRouter).next({ importType: get(this.importType), strongholdUpdateRequired })
-                    } else {
-                        nextRoute = ImportRoute.Success
                     }
                 } finally {
                     this.isGettingMigrationData.set(false)
