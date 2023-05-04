@@ -4,7 +4,7 @@
     "compilerOptions": {
         "strict": true
     },
-    // folders included below pass the strict check
+    // files included below pass the strict check
     "files": [
         "./lib/core/utils/constants/bech32-address-length.constant.ts",
         "./lib/core/utils/constants/date-format.constant.ts",
