@@ -6,8 +6,8 @@ export interface INetwork {
     getMetadata(): NetworkMetadata
     getStatus(): INetworkStatus
 
-    getChain(chainId: number): IChain
-    getChains(): IChain[]
+    getChain(chainId: number): IChain | undefined
+    getChains(): (IChain | undefined)[]
     addChain(chainConfiguration: ChainConfiguration): IChain
     editChain(chainId: number, payload: Partial<ChainConfiguration>): Promise<void>
     removeChain(chainId: number): void

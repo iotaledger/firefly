@@ -13,14 +13,14 @@ import { IscpChain } from './iscp-chain.class'
 
 export class StardustNetwork implements INetwork {
     private readonly _metadata: NetworkMetadata
-    private readonly _chains: IChain[]
+    private readonly _chains: (IChain | undefined)[]
 
     constructor(metadata: NetworkMetadata, chainConfigurations: ChainConfiguration[]) {
         this._metadata = metadata
         this._chains = this.constructChains(chainConfigurations ?? [])
     }
 
-    private constructChains(chainConfigurations: ChainConfiguration[]): IChain[] {
+    private constructChains(chainConfigurations: ChainConfiguration[]): (IChain | undefined)[] {
         return chainConfigurations.map((chainConfiguration) => {
             switch (chainConfiguration.type) {
                 case ChainType.Iscp:
@@ -41,11 +41,11 @@ export class StardustNetwork implements INetwork {
         return get(networkStatus) ?? {}
     }
 
-    getChain(chainId: number): IChain {
-        return this._chains.find((chain) => chain.getConfiguration().chainId === chainId)
+    getChain(chainId: number): IChain | undefined {
+        return this._chains.find((chain) => chain?.getConfiguration().chainId === chainId)
     }
 
-    getChains(): IChain[] {
+    getChains(): (IChain | undefined)[] {
         return this._chains
     }
 
