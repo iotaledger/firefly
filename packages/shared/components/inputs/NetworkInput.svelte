@@ -8,6 +8,7 @@
     export let layer2ChainAddress: string | undefined = undefined
     export let showLayer2: boolean = false
 
+    const readonlyAttribute = $activeProfile?.isDeveloperProfile ? {} : { readonly: true }
     const layer1Network = {
         key: $activeProfile?.network.name,
         value: undefined,
@@ -22,8 +23,6 @@
     let selected: IOption = networkOptions?.find((option) => option.value === layer2ChainAddress) ?? layer1Network
 
     $: layer2ChainAddress = selected?.value
-
-    const readonlyAttribute = $activeProfile?.isDeveloperProfile ? {} : { readonly: true }
 
     function getNetworkOptions(showLayer2: boolean): IOption[] {
         let layer2Networks: IOption[] = []
