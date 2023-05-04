@@ -1,5 +1,6 @@
 const { ipcRenderer, contextBridge } = require('electron')
 const ElectronApi = require('./electronApi')
+const WalletApi = require('firefly-actor-system-nodejs-bindings')
 
 const SEND_CRASH_REPORTS = window.process.argv.includes('--send-crash-reports=true')
 let captureException = (..._) => {}
@@ -48,6 +49,17 @@ try {
                 },
             ],
         })
+    }
+
+    try {
+        WalletApi.migrateStrongholdSnapshotV2ToV3(
+            '/home/maxwellmattryan/dev/iota/backups/old-01.stronghold',
+            'raise-pencil-stone',
+            '/home/maxwellmattryan/dev/iota/backups/MIGRATED.stronghold',
+            'raise-pencil-stone'
+        )
+    } catch (err) {
+        console.error(err)
     }
 
     contextBridge.exposeInMainWorld('__WALLET__', WalletApi)

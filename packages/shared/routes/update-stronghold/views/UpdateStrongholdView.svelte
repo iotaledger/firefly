@@ -3,9 +3,10 @@
     import { localize } from '@core/i18n'
     import { updateStrongholdRouter } from '@core/router'
     import { Router } from '@core/router/router'
-    import { activeProfileId } from '@lib/profile'
-    import { destroyActor } from '@lib/wallet'
+    import { activeProfile, activeProfileId, newProfile } from '@lib/profile'
+    import { api, destroyActor } from '@lib/wallet'
     import { strongholdPassword } from '@lib/app'
+    import { WALLET, WalletApi } from '../../../lib/shell/walletApi'
 
     export let parentRouter: Router<unknown>
     export let isRecovery: boolean
@@ -22,9 +23,19 @@
         parentRouter.previous()
     }
 
-    function onContinueClick(): void {
+    function updateStrongholdForRecovery(): void {
+        // NOTE: New/active profile Stronghold version is already 2
+
+        console.log('NEW PROFILE: ', $newProfile)
+        console.log('ACTIVE PROFILES: ', $activeProfile)
+
+        // WALLET.migrateStrongholdSnapshotV2ToV3()
+    }
+
+    async function onContinueClick(): Promise<void> {
         if (isRecovery) {
-            $updateStrongholdRouter.next()
+            // updateStrongholdForRecovery()
+            await $updateStrongholdRouter.next({ isRecovery })
         } else {
             // TODO: Remove later once real logic is hooked in
             if (password === 'test') {
@@ -56,7 +67,7 @@
                     showRevealToggle
                     autofocus
                     disabled={busy}
-                    submitHandler={onContinueClick}
+                    submitHandler={() => void onContinueClick()}
                 />
             {/if}
         </div>

@@ -19,6 +19,7 @@ import { deepCopy } from './helpers'
 import { didInitialiseMigrationListeners } from './migration'
 import { buildClientOptions, getDefaultClientOptions } from './network'
 import { showAppNotification } from './notifications'
+import { STRONGHOLD_VERSION } from './stronghold'
 // PARTICIPATION
 import { haveStakingResultsCached } from './participation'
 import { Platform } from './platform'
@@ -49,8 +50,6 @@ export const DUST_THRESHOLD: number = 1_000_000
 export const STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS = 0
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
-
-export const STRONGHOLD_VERSION = 2
 
 interface ActorState {
     [id: string]: IActorHandler

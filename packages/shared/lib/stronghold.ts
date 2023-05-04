@@ -8,6 +8,8 @@ import { showAppNotification } from './notifications'
 import { localize } from '@core/i18n'
 import { isLedgerProfile } from './profile'
 
+export const STRONGHOLD_VERSION = 3
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 export const checkStronghold = (callback: any): void => {
