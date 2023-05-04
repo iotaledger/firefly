@@ -3,14 +3,13 @@ import { get, writable } from 'svelte/store'
 import { mnemonic, strongholdPassword } from '@lib/app'
 import { getMigrationData } from '@lib/migration'
 import { Platform } from '@lib/platform'
-import { newProfile } from '@lib/profile'
 import { ImportType } from '@lib/typings/profile'
+import { importFilePath } from '@lib/stronghold'
 import { asyncRestoreBackup } from '@lib/wallet'
 
 import { appRouter } from '../app-router'
 import { ImportRoute } from '../enums'
 import { Subrouter } from './subrouter'
-import { importFilePath } from '../stores'
 import { FireflyEvent } from '../types'
 import { UpdateStrongholdRouter, updateStrongholdRouter } from './update-stronghold-router'
 import { getErrorMessage } from '@lib/shell/walletErrors'
@@ -79,7 +78,7 @@ export class ImportRouter extends Subrouter<ImportRoute> {
                     await asyncRestoreBackup(this.importFilePath, '')
                     nextRoute = ImportRoute.BackupPassword
                 } catch (err) {
-                    if (err?.error?.match(getErrorMessage(ErrorType.IncorrectVersion))) {
+                    if (err?.error?.match(getErrorMessage(ErrorType.OutdatedStrongholdVersion))) {
                         nextRoute = ImportRoute.UpdateStronghold
                         updateStrongholdRouter.set(new UpdateStrongholdRouter(this))
                     } else {

@@ -1,4 +1,4 @@
-import { get } from 'svelte/store'
+import { get, writable } from 'svelte/store'
 
 import { openPopup } from './popup'
 import { api, asyncRestoreBackup, destroyActor, getProfileDataPath, initialise } from './wallet'
@@ -8,7 +8,6 @@ import { showAppNotification } from './notifications'
 import { localize } from '@core/i18n'
 import { isLedgerProfile, newProfile } from './profile'
 import { Platform } from '@lib/platform'
-import { importFilePath } from '@core/router/stores'
 import { strongholdPassword } from '@lib/app'
 import { WALLET } from '@lib/shell/walletApi'
 import { initAppSettings } from '@lib/appSettings'
@@ -18,6 +17,8 @@ export const STRONGHOLD_VERSION = 3
 export const STRONGHOLD_VERSION_ERROR = 'snapshot::ReadError: UnsupportedVersion { expected: [3, 0], found: [2, 0] }'
 
 export const STRONGHOLD_DECRYPTION_ERROR = 'Failed to decrypt snapshot: incorrect password or corrupt data'
+
+export const importFilePath = writable<string>(null)
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */

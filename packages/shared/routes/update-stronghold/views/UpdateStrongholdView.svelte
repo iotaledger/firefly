@@ -67,7 +67,7 @@
             />
         </div>
         <div slot="leftpane__action">
-            <Button classes="w-full" onClick={onContinueClick}>
+            <Button classes="w-full" disabled={busy} onClick={onContinueClick}>
                 {#if busy}
                     <Spinner {busy} message={localize('actions.updating')} classes="justify-center" />
                 {:else}

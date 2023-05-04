@@ -1,6 +1,5 @@
 const { ipcRenderer, contextBridge } = require('electron')
 const ElectronApi = require('./electronApi')
-const WalletApi = require('firefly-actor-system-nodejs-bindings')
 
 const SEND_CRASH_REPORTS = window.process.argv.includes('--send-crash-reports=true')
 let captureException = (..._) => {}

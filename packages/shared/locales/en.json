@@ -1409,7 +1409,10 @@
             "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
         },
         "invalidDate": "INVALID DATE",
-        "invalidTime": "INVALID TIME"
+        "invalidTime": "INVALID TIME",
+        "stronghold": {
+            "outdated": "Your Stronghold version is outdated."
+        }
     },
     "warning": {
         "node": {

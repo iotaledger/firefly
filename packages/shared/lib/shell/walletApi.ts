@@ -253,7 +253,7 @@ const handleError = (
             return 'error.backup.invalid'
         }
         if (error.includes(STRONGHOLD_VERSION_ERROR)) {
-            return 'error.stronghold.incorrectVersion'
+            return getErrorMessage(ErrorType.OutdatedStrongholdVersion)
         }
         if (error.includes('try another password')) {
             return 'error.password.incorrect'

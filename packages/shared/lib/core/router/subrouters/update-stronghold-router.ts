@@ -36,7 +36,7 @@ export class UpdateStrongholdRouter extends Subrouter<UpdateStrongholdRoute> {
                         return
                     }
                 } else {
-                    // TODO: Logic for login migrations
+                    // TODO: https://github.com/iotaledger/firefly/issues/6731
                     nextRoute = UpdateStrongholdRoute.ChangePassword
                     break
                 }
