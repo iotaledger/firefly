@@ -9,6 +9,7 @@
         newTransactionDetails,
         NewTransactionType,
         setNewTransactionDetails,
+        TokenStandard,
     } from '@core/wallet'
     import { closePopup } from '@auxiliary/popup'
     import { get } from 'svelte/store'
@@ -30,11 +31,23 @@
         if (!assets) {
             assetList = []
         } else {
-            assetList = [assets.baseCoin, ...assets.nativeTokens].filter(
-                (asset) =>
-                    asset?.metadata?.name && asset.metadata.name.toLowerCase().includes(searchValue.toLowerCase())
-            )
+            assetList = [assets.baseCoin, ...assets.nativeTokens].filter(isVisibleAsset)
         }
+        if (!assetList.some((asset) => asset.id === selectedAssetId)) {
+            selectedAssetId = undefined
+        }
+    }
+
+    function isVisibleAsset(asset: IAsset): boolean {
+        const _searchValue = searchValue.toLowerCase()
+        const name = asset?.metadata?.name
+        const ticker =
+            asset?.metadata?.standard === TokenStandard.BaseToken ? asset?.metadata.unit : asset?.metadata.symbol
+
+        return (
+            (name && name.toLowerCase().includes(_searchValue)) ||
+            (ticker && ticker.toLowerCase().includes(_searchValue))
+        )
     }
 
     function onCancelClick(): void {
