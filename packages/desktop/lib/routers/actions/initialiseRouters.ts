@@ -7,33 +7,11 @@ import {
     dashboardRouter,
     GovernanceRouter,
     governanceRouter,
-    OnboardingRouter,
-    onboardingRouter,
     SettingsRouter,
     settingsRouter,
 } from '@core/router/routers'
-import {
-    AppSetupRouter,
-    appSetupRouter,
-    LedgerSetupRouter,
-    ledgerSetupRouter,
-    loginRouter,
-    LoginRouter,
-    NetworkSetupRouter,
-    networkSetupRouter,
-    ProfileBackupRouter,
-    profileBackupRouter,
-    ProfileRecoveryRouter,
-    profileRecoveryRouter,
-    ProfileSetupRouter,
-    profileSetupRouter,
-    ShimmerClaimingRouter,
-    shimmerClaimingRouter,
-    StorageProtectionSetupRouter,
-    storageProtectionSetupRouter,
-    StrongholdSetupRouter,
-    strongholdSetupRouter,
-} from '@core/router/subrouters'
+import { loginRouter, LoginRouter } from '@core/router/subrouters'
+import { OnboardingRouter, onboardingRouter } from '@views/onboarding'
 
 export function initialiseRouters(): void {
     /**
@@ -47,7 +25,6 @@ export function initialiseRouters(): void {
 
 export function initialiseOnboardingRouters(): void {
     initialiseBaseOnboardingRouters()
-    initialiseOnboardingSubrouters()
 }
 
 function initialiseBaseRouters(): void {
@@ -65,17 +42,4 @@ function initialiseBaseOnboardingRouters(): void {
 
 function initialiseSubrouters(): void {
     loginRouter.set(new LoginRouter())
-    initialiseOnboardingSubrouters()
-}
-
-function initialiseOnboardingSubrouters(): void {
-    appSetupRouter.set(new AppSetupRouter())
-    ledgerSetupRouter.set(new LedgerSetupRouter())
-    networkSetupRouter.set(new NetworkSetupRouter())
-    strongholdSetupRouter.set(new StrongholdSetupRouter())
-    profileBackupRouter.set(new ProfileBackupRouter())
-    profileRecoveryRouter.set(new ProfileRecoveryRouter())
-    profileSetupRouter.set(new ProfileSetupRouter())
-    storageProtectionSetupRouter.set(new StorageProtectionSetupRouter())
-    shimmerClaimingRouter.set(new ShimmerClaimingRouter())
 }

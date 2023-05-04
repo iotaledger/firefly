@@ -7,33 +7,6 @@ const analyticsFeatures: IAnalyticsFeatures = {
     },
     onboardingRoute: {
         enabled: true,
-        appSetupRoute: {
-            enabled: true,
-        },
-        networkSetupRoute: {
-            enabled: true,
-        },
-        profileSetupRoute: {
-            enabled: true,
-        },
-        ledgerSetupRoute: {
-            enabled: true,
-        },
-        strongholdSetupRoute: {
-            enabled: true,
-        },
-        storageProtectionSetupRoute: {
-            enabled: true,
-        },
-        profileBackupRoute: {
-            enabled: true,
-        },
-        profileRecoveryRoute: {
-            enabled: true,
-        },
-        shimmerClaimingRoute: {
-            enabled: true,
-        },
     },
     loginRoute: {
         enabled: true,

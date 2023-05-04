@@ -1,6 +1,6 @@
 import { get, writable } from 'svelte/store'
 
-import { onboardingProfile, ProfileRecoveryType } from '@contexts/onboarding'
+import { onboardingProfile, RestoreProfileType } from '@contexts/onboarding'
 import { Subrouter } from '@core/router'
 
 import { ProfileRecoveryRoute } from '../../enums'
@@ -34,8 +34,8 @@ export class ProfileRecoveryRouter extends Subrouter<ProfileRecoveryRoute> {
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
             case ProfileRecoveryRoute.ImportMnemonicPhrase: {
-                const _profileRecoveryType = get(onboardingProfile)?.recoveryType
-                if (_profileRecoveryType === ProfileRecoveryType.Mnemonic) {
+                const restoreProfileType = get(onboardingProfile)?.restoreProfileType
+                if (restoreProfileType === RestoreProfileType.Mnemonic) {
                     nextRoute = ProfileRecoveryRoute.Success
                 }
                 break
@@ -58,10 +58,10 @@ export class ProfileRecoveryRouter extends Subrouter<ProfileRecoveryRoute> {
 }
 
 function getInitialRoute(): ProfileRecoveryRoute {
-    switch (get(onboardingProfile)?.recoveryType) {
-        case ProfileRecoveryType.Mnemonic:
+    switch (get(onboardingProfile)?.restoreProfileType) {
+        case RestoreProfileType.Mnemonic:
             return ProfileRecoveryRoute.ImportMnemonicPhrase
-        case ProfileRecoveryType.Stronghold:
+        case RestoreProfileType.Stronghold:
             return ProfileRecoveryRoute.ImportStrongholdBackup
     }
 }

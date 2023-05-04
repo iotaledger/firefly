@@ -3,7 +3,7 @@ import { get } from 'svelte/store'
 import { destroyProfileManager } from '@core/profile-manager'
 import { Platform } from '@core/app'
 
-import { getShimmerClaimingProfileManagerStorageDirectory } from '../helpers'
+import { getTemporaryProfileManagerStorageDirectory } from '../helpers'
 import { shimmerClaimingProfileManager } from '../stores'
 
 export async function destroyShimmerClaimingProfileManager(): Promise<void> {
@@ -12,6 +12,6 @@ export async function destroyShimmerClaimingProfileManager(): Promise<void> {
         return
     }
     await destroyProfileManager(shimmerClaimingProfileManager)
-    const profilePath = await getShimmerClaimingProfileManagerStorageDirectory()
+    const profilePath = await getTemporaryProfileManagerStorageDirectory()
     await Platform.removeProfileFolder(profilePath)
 }

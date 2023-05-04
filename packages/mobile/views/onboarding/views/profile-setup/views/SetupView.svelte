@@ -8,7 +8,7 @@
         initialiseOnboardingProfile,
         initialiseProfileManagerFromOnboardingProfile,
         onboardingProfile,
-        ProfileSetupType,
+        OnboardingType,
         shouldBeDeveloperProfile,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
@@ -25,9 +25,9 @@
         values: { network: getNetworkNameFromNetworkId(networkId) },
     })
 
-    async function onProfileSetupSelectionClick(setupType: ProfileSetupType): Promise<void> {
+    async function onProfileSetupSelectionClick(onboardingType: OnboardingType): Promise<void> {
         // We dont support Ledger profiles on mobile yet, so we hardcode the type to Software
-        updateOnboardingProfile({ setupType, type: ProfileType.Software })
+        updateOnboardingProfile({ onboardingType, type: ProfileType.Software })
         await initialiseProfileManagerFromOnboardingProfile()
         $profileSetupRouter.next()
     }
@@ -49,7 +49,7 @@
         }
         updateOnboardingProfile({
             mustVisitProfileName: true,
-            setupType: null,
+            onboardingType: null,
             hasInitialisedProfileManager: false,
             type: null,
         })
@@ -65,7 +65,7 @@
             iconWidth="24"
             hidden={features?.onboarding?.[networkId]?.claimRewards?.hidden}
             disabled={!features?.onboarding?.[networkId]?.claimRewards?.enabled}
-            onClick={() => onProfileSetupSelectionClick(ProfileSetupType.Claimed)}
+            onClick={() => onProfileSetupSelectionClick(OnboardingType.Claim)}
         />
         <OnboardingButton
             primaryText={localize('actions.createWallet', {
@@ -78,14 +78,14 @@
             iconWidth="11"
             hidden={features?.onboarding?.[networkId]?.newProfile?.hidden}
             disabled={!features?.onboarding?.[networkId]?.newProfile?.enabled}
-            onClick={() => onProfileSetupSelectionClick(ProfileSetupType.New)}
+            onClick={() => onProfileSetupSelectionClick(OnboardingType.Create)}
         />
         <OnboardingButton
             primaryText={localize(`actions.restoreWallet.${networkId}`)}
             icon="transfer"
             hidden={features?.onboarding?.[networkId]?.restoreProfile?.hidden}
             disabled={!features?.onboarding?.[networkId]?.restoreProfile?.enabled}
-            onClick={() => onProfileSetupSelectionClick(ProfileSetupType.Recovered)}
+            onClick={() => onProfileSetupSelectionClick(OnboardingType.Restore)}
         />
     </div>
 </OnboardingLayout>

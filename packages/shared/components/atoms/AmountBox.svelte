@@ -1,33 +1,34 @@
 <script lang="ts">
     import { AssetIcon, Text, FontWeight, TextType, Tooltip } from 'shared/components'
     import { getNthOccurrenceIndex } from '@core/utils'
-    import { IPersistedAsset, getUnitFromTokenMetadata } from '@core/wallet'
+    import { IPersistedAsset, formatTokenAmountDefault } from '@core/wallet'
     import { getDecimalSeparator, getGroupSeparator } from '@core/i18n'
 
     export let asset: IPersistedAsset
-    export let amount: string = ''
+    export let amount: number
+    export let unit: string = undefined
 
     const MAX_LENGTH_PER_LINE = 15
 
-    let displayedAmount: string[] = [amount]
+    const formattedAmount = formatTokenAmountDefault(amount, asset?.metadata, unit)
+    let displayedAmount: string[] = [formattedAmount]
     let tokenAmountElement: HTMLElement = null
     let isTooltipVisible = false
 
-    $: hasDecimal = amount.includes(getDecimalSeparator())
-    $: amountWithoutDecimals = amount.split(getDecimalSeparator())[0]
-    $: unit = getUnitFromTokenMetadata(asset?.metadata)
+    $: hasDecimal = formattedAmount.includes(getDecimalSeparator())
+    $: amountWithoutDecimals = formattedAmount.split(getDecimalSeparator())[0]
 
     $: {
-        if (amount.length > MAX_LENGTH_PER_LINE) {
-            displayedAmount = breakAmountIntoLines(amount)
+        if (formattedAmount.length > MAX_LENGTH_PER_LINE) {
+            displayedAmount = breakAmountIntoLines(formattedAmount)
         } else {
-            displayedAmount = [amount]
+            displayedAmount = [formattedAmount]
         }
     }
 
     function showTooltip(): void {
-        const hasMoreThanTwoDecimalNumbers = hasDecimal && amount.split(getDecimalSeparator())[1].length > 2
-        if (amount.length > MAX_LENGTH_PER_LINE && hasDecimal && hasMoreThanTwoDecimalNumbers) {
+        const hasMoreThanTwoDecimalNumbers = hasDecimal && formattedAmount.split(getDecimalSeparator())[1].length > 2
+        if (formattedAmount.length > MAX_LENGTH_PER_LINE && hasDecimal && hasMoreThanTwoDecimalNumbers) {
             isTooltipVisible = true
         }
     }

@@ -1,23 +1,13 @@
-import { get } from 'svelte/store'
 import {
     appRouter,
-    appSetupRouter,
     collectiblesRouter,
     dashboardRouter,
     governanceRouter,
-    ledgerSetupRouter,
     loginRouter,
-    networkSetupRouter,
-    onboardingRouter,
-    profileBackupRouter,
-    profileRecoveryRouter,
-    profileSetupRouter,
     settingsRouter,
-    shimmerClaimingRouter,
-    storageProtectionSetupRouter,
-    strongholdSetupRouter,
-    updateStrongholdRouter,
 } from '@core/router'
+import { onboardingRouter } from '@views/onboarding'
+import { get } from 'svelte/store'
 
 export function resetRouters(): void {
     resetSubrouters()
@@ -25,17 +15,7 @@ export function resetRouters(): void {
 }
 
 function resetSubrouters(): void {
-    get(appSetupRouter).reset()
     get(loginRouter).reset()
-    get(ledgerSetupRouter).reset()
-    get(networkSetupRouter).reset()
-    get(strongholdSetupRouter).reset()
-    get(profileBackupRouter).reset()
-    get(profileRecoveryRouter).reset()
-    get(profileSetupRouter).reset()
-    get(storageProtectionSetupRouter).reset()
-    get(shimmerClaimingRouter).reset()
-    get(updateStrongholdRouter)?.reset() // Is potentially null because we only initialize it in the respective parent router (login/recovery)
 }
 
 function resetBaseRouters(): void {

@@ -8,10 +8,10 @@
     import {
         DEFAULT_STRONGHOLD_PASSWORD,
         onboardingProfile,
-        ProfileSetupType,
         updateOnboardingProfile,
         verifyAndStoreMnemonic,
         shimmerClaimingProfileManager,
+        OnboardingType,
     } from '@contexts/onboarding'
 
     const title = localize('views.onboarding.profileRecovery.importMnemonicPhrase.title')
@@ -19,7 +19,7 @@
     let input = ''
 
     async function onContinueClick(): Promise<void> {
-        const isClaimedProfileSetupType = $onboardingProfile?.setupType === ProfileSetupType.Claimed
+        const isClaimedProfileSetupType = $onboardingProfile?.onboardingType === OnboardingType.Claim
         const mnemonic = input.split(' ')
         updateOnboardingProfile({ mnemonic })
         await setStrongholdPassword(DEFAULT_STRONGHOLD_PASSWORD)
@@ -50,7 +50,7 @@
             {localize('views.onboarding.profileRecovery.importMnemonicPhrase.enter')}
         </Text>
         <form on:submit|preventDefault={onContinueClick} id="text-import-form">
-            <ImportTextfield type={$onboardingProfile?.recoveryType} bind:value={input} minHeight={120} />
+            <ImportTextfield type={$onboardingProfile?.restoreProfileType} bind:value={input} minHeight={120} />
         </form>
     </div>
     <div slot="footer" class="flex flex-row flex-wrap justify-between items-center space-x-4">

@@ -8,7 +8,7 @@
     import { onboardingRouter } from '@/routers'
     import {
         onboardingProfile,
-        ProfileSetupType,
+        OnboardingType,
         shimmerClaimingProfileManager,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
@@ -49,7 +49,7 @@
             try {
                 busy = true
 
-                const isClaimedProfileSetupType = $onboardingProfile?.setupType === ProfileSetupType.Claimed
+                const isClaimedProfileSetupType = $onboardingProfile?.onboardingType === OnboardingType.Claim
                 const mustChangePassword =
                     $onboardingProfile?.strongholdPassword &&
                     $onboardingProfile?.strongholdPassword !== strongholdPassword

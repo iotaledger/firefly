@@ -18,7 +18,7 @@
     $: profileName, (error = '') // Error clears when profileName changes
 
     function onBackClick(): void {
-        if ($onboardingProfile?.recoveryType) {
+        if ($onboardingProfile?.restoreProfileType) {
             $profileRecoveryRouter.resetRecovery()
         } else {
             $profileSetupRouter.previous()
