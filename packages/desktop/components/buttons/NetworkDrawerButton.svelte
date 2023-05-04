@@ -29,7 +29,7 @@
     <NetworkIcon height={12} width={12} networkId={$activeProfile.network.id} outlined={false} />
     <Text fontWeight={FontWeight.semibold} color="gray-800" darkColor="white">{$activeProfile.network.name}</Text>
     {#if displayWarning}
-        <Icon icon={IconEnum.WarningFilled} classes="text-yellow-800" height={16} width={16} />
+        <Icon icon={IconEnum.WarningFilled} classes="text-red-500" height={16} width={16} />
     {/if}
 </button>
 
