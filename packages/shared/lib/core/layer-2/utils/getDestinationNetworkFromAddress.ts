@@ -1,12 +1,13 @@
+import { isIscpChain } from '@core/network'
 import { getActiveProfile } from '@core/profile/stores'
-import { DestinationNetwork } from '../enums'
 
-export function getDestinationNetworkFromAddress(networkAddress: string): string {
+export function getDestinationNetworkFromAddress(networkAddress: string | undefined): string {
+    const { network } = getActiveProfile() ?? {}
     if (!networkAddress) {
-        return DestinationNetwork.Shimmer
+        return network?.name
     }
 
-    const chainConfigurations = getActiveProfile()?.network?.chainConfigurations
+    const chainConfigurations = network?.chainConfigurations.filter(isIscpChain)
     const foundDestinationNetwork = chainConfigurations.find((chain) => chain?.aliasAddress === networkAddress)
     return foundDestinationNetwork?.name ?? networkAddress
 }
