@@ -1,48 +1,50 @@
 <script lang="ts">
     import { Modal, SelectorInput, IOption } from 'shared/components'
     import { activeProfile, getNetworkHrp } from '@core/profile'
-    import { DEFAULT_CHAINS, DestinationNetwork } from '@core/layer-2'
     import { validateBech32Address } from '@core/utils'
+    import { isIscpChain } from '@core/network'
+    import type { ChainConfiguration } from '@core/network'
 
-    const readonlyAttribute = $activeProfile?.isDeveloperProfile ? {} : { readonly: true }
-    const networkAddresses = DEFAULT_CHAINS[$activeProfile?.network?.id]
-
-    const LAYER_1_NETWORK_OPTION = {
-        key: DestinationNetwork.Shimmer,
-        value: networkAddresses[DestinationNetwork.Shimmer],
-    }
-
-    export let networkAddress: string = LAYER_1_NETWORK_OPTION.value
+    export let layer2ChainAddress: string | undefined = undefined
     export let showLayer2: boolean = false
 
-    $: networkOptions = showLayer2 ? getLayer2NetworkOptions() : [LAYER_1_NETWORK_OPTION]
-
-    let selected: IOption =
-        getLayer2NetworkOptions().find((option) => option.value === networkAddress) ?? LAYER_1_NETWORK_OPTION
-    $: if (!showLayer2) {
-        selected = LAYER_1_NETWORK_OPTION
+    const layer1Network = {
+        key: $activeProfile?.network.name,
+        value: undefined,
     }
 
-    let inputElement: HTMLInputElement = undefined
-    let modal: Modal = undefined
-
+    let inputElement: HTMLInputElement
+    let modal: Modal
     let error: string
 
-    $: networkAddress = selected?.value
+    $: networkOptions = getNetworkOptions(showLayer2)
 
-    function getLayer2NetworkOptions(): IOption[] {
-        return Object.values(DestinationNetwork)
-            .filter((_network) => !!networkAddresses[_network])
-            .map((_network) => ({
-                key: _network,
-                value: networkAddresses[_network],
-            }))
+    let selected: IOption = networkOptions?.find((option) => option.value === layer2ChainAddress) ?? layer1Network
+
+    $: layer2ChainAddress = selected?.value
+
+    const readonlyAttribute = $activeProfile?.isDeveloperProfile ? {} : { readonly: true }
+
+    function getNetworkOptions(showLayer2: boolean): IOption[] {
+        let layer2Networks: IOption[] = []
+        if (showLayer2) {
+            layer2Networks =
+                $activeProfile.network?.chainConfigurations?.map((chain) => ({
+                    key: chain.name,
+                    value: getNetworkValue(chain),
+                })) ?? []
+        }
+        return [layer1Network, ...layer2Networks]
+    }
+
+    function getNetworkValue(chainConfiguration: ChainConfiguration): string | undefined {
+        return isIscpChain(chainConfiguration) ? chainConfiguration?.aliasAddress : undefined
     }
 
     export function validate(): Promise<void> {
         try {
-            if (networkAddress !== networkAddresses[DestinationNetwork.Shimmer]) {
-                validateBech32Address(getNetworkHrp(), networkAddress)
+            if (layer2ChainAddress !== undefined) {
+                validateBech32Address(getNetworkHrp(), layer2ChainAddress)
             }
             return Promise.resolve()
         } catch (err) {

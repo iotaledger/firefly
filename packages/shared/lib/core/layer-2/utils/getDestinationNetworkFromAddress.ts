@@ -1,6 +1,4 @@
-import { get } from 'svelte/store'
-import { activeProfile } from '@core/profile'
-import { DEFAULT_CHAINS } from '../constants'
+import { getActiveProfile } from '@core/profile/stores'
 import { DestinationNetwork } from '../enums'
 
 export function getDestinationNetworkFromAddress(networkAddress: string): string {
@@ -8,10 +6,7 @@ export function getDestinationNetworkFromAddress(networkAddress: string): string
         return DestinationNetwork.Shimmer
     }
 
-    const networkId = get(activeProfile)?.network?.id
-    const foundDestinationNetwork = Object.entries(DEFAULT_CHAINS[networkId]).find(
-        (defaultChain) => defaultChain[1] === networkAddress
-    )?.[0]
-
-    return foundDestinationNetwork ?? networkAddress
+    const chainConfigurations = getActiveProfile()?.network?.chainConfigurations
+    const foundDestinationNetwork = chainConfigurations.find((chain) => chain?.aliasAddress === networkAddress)
+    return foundDestinationNetwork?.name ?? networkAddress
 }
