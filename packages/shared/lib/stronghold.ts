@@ -67,6 +67,7 @@ export async function migrateStrongholdForRecovery(): Promise<void> {
         migrationFilePath,
         _strongholdPassword
     )
+    get(newProfile).strongholdVersion = STRONGHOLD_VERSION
 
     const profileStoragePath = await getProfileDataPath(newProfileId)
     const { sendCrashReports } = get(initAppSettings) ?? { sendCrashReports: false }

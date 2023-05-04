@@ -120,7 +120,6 @@ export class ImportRouter extends Subrouter<ImportRoute> {
             }
             case ImportRoute.UpdateStronghold:
                 strongholdPassword.set(undefined)
-                get(newProfile).lastStrongholdBackupTime = new Date()
                 get(appRouter).next({ importType: get(this.importType) })
                 return
             case ImportRoute.LedgerImport: {
