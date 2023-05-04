@@ -32,6 +32,7 @@ const errorMessages: {
     InvalidTransactionId: 'error.global.generic',
     // Stronghold
     StrongholdError: 'error.global.generic',
+    IncorrectVersion: 'error.stronghold.incorrectVersion',
     // Database
     StorageDoesntExist: 'error.global.generic',
     Storage: 'error.global.generic',

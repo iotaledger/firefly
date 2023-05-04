@@ -15,6 +15,8 @@ import { initAppSettings } from '@lib/appSettings'
 
 export const STRONGHOLD_VERSION = 3
 
+export const STRONGHOLD_VERSION_ERROR = 'snapshot::ReadError: UnsupportedVersion { expected: [3, 0], found: [2, 0] }'
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 export const checkStronghold = (callback: any): void => {

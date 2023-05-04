@@ -11,7 +11,7 @@
     export let parentRouter: Router<unknown>
     export let isRecovery: boolean
 
-    const busy = false
+    let busy = false
     let password: string = ''
     let error: string = ''
 
@@ -23,16 +23,9 @@
         parentRouter.previous()
     }
 
-    function updateStrongholdForRecovery(): void {
-        // NOTE: New/active profile Stronghold version is already 2
-
-        console.log('NEW PROFILE: ', $newProfile)
-        console.log('ACTIVE PROFILES: ', $activeProfile)
-
-        // WALLET.migrateStrongholdSnapshotV2ToV3()
-    }
-
     async function onContinueClick(): Promise<void> {
+        busy = true
+
         if (isRecovery) {
             // updateStrongholdForRecovery()
             await $updateStrongholdRouter.next({ isRecovery })
@@ -40,11 +33,13 @@
             // TODO: Remove later once real logic is hooked in
             if (password === 'test') {
                 strongholdPassword.set(password)
-                $updateStrongholdRouter.next()
+                await $updateStrongholdRouter.next()
             } else {
                 error = 'Must use "test" password'
             }
         }
+
+        busy = false
     }
 </script>
 
@@ -58,18 +53,16 @@
                 {localize('views.login.updateStronghold.body')}
                 {localize(`views.login.updateStronghold.${isRecovery ? 'continue' : 'providePassword'}`)}
             </Text>
-            {#if !isRecovery}
-                <Password
-                    classes="mb-6"
-                    {error}
-                    bind:value={password}
-                    locale={localize}
-                    showRevealToggle
-                    autofocus
-                    disabled={busy}
-                    submitHandler={() => void onContinueClick()}
-                />
-            {/if}
+            <Password
+                classes="mb-6"
+                {error}
+                bind:value={password}
+                locale={localize}
+                showRevealToggle
+                autofocus
+                disabled={busy}
+                submitHandler={() => void onContinueClick()}
+            />
         </div>
         <div slot="leftpane__action">
             <Button classes="w-full" onClick={onContinueClick}>

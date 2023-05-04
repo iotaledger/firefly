@@ -13,6 +13,8 @@ import { Subrouter } from './subrouter'
 import { importFilePath } from '../stores'
 import { FireflyEvent } from '../types'
 import { UpdateStrongholdRouter, updateStrongholdRouter } from './update-stronghold-router'
+import { getErrorMessage } from '@lib/shell/walletErrors'
+import { ErrorType } from '@lib/typings/events'
 
 export const importRoute = writable<ImportRoute>(null)
 
@@ -72,7 +74,20 @@ export class ImportRouter extends Subrouter<ImportRoute> {
                 this.importFile = file
                 this.importFilePath = filePath
                 importFilePath.set(filePath)
-                nextRoute = ImportRoute.BackupPassword
+
+                try {
+                    await asyncRestoreBackup(this.importFilePath, '')
+                    nextRoute = ImportRoute.BackupPassword
+                } catch (err) {
+                    console.error(err)
+                    if (err?.error?.match(getErrorMessage(ErrorType.IncorrectVersion))) {
+                        nextRoute = ImportRoute.UpdateStronghold
+                        updateStrongholdRouter.set(new UpdateStrongholdRouter(this))
+                    } else {
+                        nextRoute = ImportRoute.BackupPassword
+                    }
+                }
+
                 break
             }
             case ImportRoute.BackupPassword: {
@@ -91,27 +106,8 @@ export class ImportRouter extends Subrouter<ImportRoute> {
 
                         nextRoute = ImportRoute.Success
                     } else {
-                        /* eslint-disable no-constant-condition */
-
-                        // fn -> detectStrongholdMigration
-                        let isStrongholdMigrationRequired = false
-                        try {
-                            await asyncRestoreBackup(this.importFilePath, password)
-                            strongholdPassword.set(undefined)
-                            get(newProfile).lastStrongholdBackupTime = new Date()
-                        } catch (err) {
-                            // TODO: Match against error
-                            console.error(err)
-                            isStrongholdMigrationRequired = true
-                        }
-
-                        if (isStrongholdMigrationRequired) {
-                            nextRoute = ImportRoute.UpdateStronghold
-                            updateStrongholdRouter.set(new UpdateStrongholdRouter(this))
-                        } else {
-                            await asyncRestoreBackup(this.importFilePath, password)
-                            nextRoute = ImportRoute.Success
-                        }
+                        await asyncRestoreBackup(this.importFilePath, password)
+                        nextRoute = ImportRoute.Success
                     }
                 } finally {
                     this.isGettingMigrationData.set(false)
