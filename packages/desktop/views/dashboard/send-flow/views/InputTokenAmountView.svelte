@@ -15,6 +15,7 @@
     let assetAmountInput: AssetAmountInput
     let asset: IAsset
     let rawAmount: string
+    let amount: string
     let unit: string
     let disableAssetSelection: boolean
 
@@ -45,13 +46,20 @@
         <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">Input Token Amount Title</Text>
     </input-token-amount-title>
     <input-token-amount-content>
-        <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:unit {disableAssetSelection} />
+        <AssetAmountInput
+            bind:this={assetAmountInput}
+            bind:asset
+            bind:rawAmount
+            bind:amount
+            bind:unit
+            {disableAssetSelection}
+        />
     </input-token-amount-content>
     <input-token-amount-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" outline onClick={onBackClick}>
             {localize('actions.back')}
         </Button>
-        <Button classes="w-full" onClick={onContinueClick}>
+        <Button classes="w-full" onClick={onContinueClick} disabled={!amount}>
             {localize('actions.continue')}
         </Button>
     </input-token-amount-buttons>

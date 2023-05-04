@@ -1,12 +1,13 @@
 import { syncBalance } from '@core/account/actions/syncBalance'
-import {
-    addOrUpdateNftInAllAccountNfts,
-    buildNftFromNftOutput,
-    getSpendableStatusFromUnspentNftOutput,
-    addNftsToDownloadQueue,
-} from '@core/nfts'
+import { addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput, addNftsToDownloadQueue } from '@core/nfts'
 import { activeAccounts } from '@core/profile/stores'
-import { ActivityType, addPersistedAsset, generateActivities, getOrRequestAssetFromPersistedAssets } from '@core/wallet'
+import {
+    ActivityType,
+    IWrappedOutput,
+    addPersistedAsset,
+    generateActivities,
+    getOrRequestAssetFromPersistedAssets,
+} from '@core/wallet'
 import { OUTPUT_TYPE_ALIAS, OUTPUT_TYPE_NFT } from '@core/wallet/constants'
 import {
     addActivitiesToAccountActivitiesInAllAccountActivities,
@@ -14,7 +15,6 @@ import {
 } from '@core/wallet/stores/all-account-activities.store'
 import { getBech32AddressFromAddressTypes } from '@core/wallet/utils/getBech32AddressFromAddressTypes'
 import { preprocessGroupedOutputs } from '@core/wallet/utils/outputs/preprocessGroupedOutputs'
-import { INftOutput } from '@iota/types'
 import { get } from 'svelte/store'
 import { WalletApiEvent } from '../../enums'
 import { INewOutputEventPayload } from '../../interfaces'
@@ -56,11 +56,7 @@ export async function handleNewOutputEventInternal(
     }
 
     if (isNftOutput) {
-        const { isSpendable, timeLockTime } = getSpendableStatusFromUnspentNftOutput(
-            account?.depositAddress,
-            output.output as INftOutput
-        )
-        const nft = buildNftFromNftOutput(output.output as INftOutput, output.outputId, isSpendable, timeLockTime)
+        const nft = buildNftFromNftOutput(output as IWrappedOutput, account.depositAddress)
         addOrUpdateNftInAllAccountNfts(account.index, nft)
         void addNftsToDownloadQueue(accountIndex, [nft])
     }

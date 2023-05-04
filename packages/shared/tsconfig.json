@@ -1,20 +1,14 @@
+// https://www.typescriptlang.org/tsconfig#strict
 {
-    "extends": "@tsconfig/svelte/tsconfig.json",
+    "extends": "./tsconfig.base.json",
     "compilerOptions": {
-        "baseUrl": "./",
-        "importsNotUsedAsValues": "remove",
-        "lib": ["DOM", "ESNext"],
-        "moduleResolution": "node",
-        "outDir": "out",
-        "paths": {
-            "@auxiliary/*": ["./lib/auxiliary/*"],
-            "@contexts/*": ["./lib/contexts/*"],
-            "@core/*": ["./lib/core/*"],
-            "@features/*": ["./lib/features/*"],
-            "@lib/*": ["./lib/*"]
-        },
-        "types": ["node"]
+        "strict": true
     },
-    "include": ["./lib"],
-    "exclude": ["**/node_modules", "**/tests"]
+    // folders included below pass the strict check
+    "include": [
+        "./lib/core/utils/constants",
+        "./lib/core/utils/enums",
+        "./lib/core/utils/types",
+        "./lib/core/utils/stores"
+    ]
 }

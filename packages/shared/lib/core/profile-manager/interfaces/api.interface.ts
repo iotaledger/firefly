@@ -12,4 +12,10 @@ export interface IApi {
     getAccount(profileManagerId: string, index: number): Promise<IAccount>
     getAccounts(profileManagerId: string): Promise<IAccount[]>
     recoverAccounts(profileManagerId: string, payload: RecoverAccountsPayload): Promise<IAccount[]>
+    migrateStrongholdSnapshotV2ToV3(
+        currentPath: string,
+        currentPassword: string,
+        newPath: string,
+        newPassword: string
+    ): Promise<void>
 }

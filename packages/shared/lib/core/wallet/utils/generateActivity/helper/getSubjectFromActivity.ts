@@ -12,7 +12,7 @@ export function getSubjectFromActivity(activity: Activity): Subject {
                 address: activity.parsedLayer2Metadata?.ethereumAddress,
             }),
         }
-    } else if (activity.subject.type === 'address') {
+    } else if (activity.subject?.type === 'address') {
         const network = getLayer2NetworkFromAddress(activity.subject.address)
         return { ...activity.subject, address: network ?? activity.subject.address }
     } else {

@@ -1,8 +1,8 @@
 <script lang="ts">
     import { AmountBox, ActivityInclusionStatusPill, Text, FontWeight } from 'shared/components'
-    import { formatTokenAmountDefault, getAssetFromPersistedAssets, getUnitFromTokenMetadata } from '@core/wallet'
+    import { getAssetFromPersistedAssets } from '@core/wallet'
     import { GovernanceActivity } from '@core/wallet'
-    import { getCoinType, getBaseToken } from '@core/profile'
+    import { getCoinType } from '@core/profile'
     import { getVotingEvent } from '@contexts/governance/actions'
     import { truncateString } from '@core/utils'
 
@@ -10,15 +10,9 @@
 
     const asset = getAssetFromPersistedAssets(getCoinType())
 
-    $: amount = activity.votingPowerDifference
-        ? formatTokenAmountDefault(
-              Number(activity.votingPowerDifference),
-              getBaseToken(),
-              getUnitFromTokenMetadata(asset?.metadata)
-          )
-        : ''
+    $: amount = activity.votingPowerDifference ?? 0
     $: localizationKey = 'governance.' + activity.governanceAction
-    $: activity.participation?.eventId, setProposalName()
+    $: activity.participation?.eventId, void setProposalName()
 
     let proposalName: string
     async function setProposalName(): Promise<void> {

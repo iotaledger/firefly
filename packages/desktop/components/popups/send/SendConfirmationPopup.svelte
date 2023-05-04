@@ -55,6 +55,7 @@
         disableChangeExpiration,
         disableToggleGift,
         layer2Parameters,
+        unit,
     } = get(newTransactionDetails)
 
     let storageDeposit = 0
@@ -202,7 +203,7 @@
     >
     <div class="w-full flex-col space-y-2">
         {#if transactionDetails.type === NewTransactionType.TokenTransfer}
-            <BasicActivityDetails {activity} />
+            <BasicActivityDetails {activity} {unit} />
         {:else if transactionDetails.type === NewTransactionType.NftTransfer}
             <NftActivityDetails {activity} />
         {/if}
