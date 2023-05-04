@@ -514,7 +514,7 @@ ipcMain.on('notification-activated', (ev, contextData) => {
     windows.main.webContents.send('notification-activated', contextData)
 })
 
-ipcMain.on('request-ethereum-info', (_e) => getEthereumInfo(false))
+ipcMain.handle('request-ethereum-info', (_e) => getEthereumInfo(false))
 
 /**
  * Create about window
