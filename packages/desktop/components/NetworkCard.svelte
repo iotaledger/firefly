@@ -18,8 +18,8 @@
 
     import { Icon as IconEnum } from '@auxiliary/icon'
 
-    export let network: INetwork
-    export let chain: IChain
+    export let network: INetwork = undefined
+    export let chain: IChain = undefined
     export let onCardClick: UiEventFunction
     export let onQrCodeIconClick: UiEventFunction
 
