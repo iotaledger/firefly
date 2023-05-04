@@ -17,6 +17,8 @@ export const STRONGHOLD_VERSION = 3
 
 export const STRONGHOLD_VERSION_ERROR = 'snapshot::ReadError: UnsupportedVersion { expected: [3, 0], found: [2, 0] }'
 
+export const STRONGHOLD_DECRYPTION_ERROR = 'Failed to decrypt snapshot: incorrect password or corrupt data'
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 export const checkStronghold = (callback: any): void => {

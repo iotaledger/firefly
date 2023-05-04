@@ -1,12 +1,11 @@
 <script lang="ts">
-    import { Animation, Button, OnboardingLayout, Password, Text } from 'shared/components'
+    import { Animation, Button, OnboardingLayout, Password, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { updateStrongholdRouter } from '@core/router'
     import { Router } from '@core/router/router'
-    import { activeProfile, activeProfileId, newProfile } from '@lib/profile'
-    import { api, destroyActor } from '@lib/wallet'
+    import { activeProfileId } from '@lib/profile'
+    import { destroyActor } from '@lib/wallet'
     import { strongholdPassword } from '@lib/app'
-    import { WALLET, WalletApi } from '../../../lib/shell/walletApi'
 
     export let parentRouter: Router<unknown>
     export let isRecovery: boolean
@@ -27,8 +26,11 @@
         busy = true
 
         if (isRecovery) {
-            // updateStrongholdForRecovery()
+            $strongholdPassword = password
             await $updateStrongholdRouter.next({ isRecovery })
+            if (!$strongholdPassword) {
+                error = localize('error.password.incorrect')
+            }
         } else {
             // TODO: Remove later once real logic is hooked in
             if (password === 'test') {
@@ -66,7 +68,11 @@
         </div>
         <div slot="leftpane__action">
             <Button classes="w-full" onClick={onContinueClick}>
-                {localize('actions.continue')}
+                {#if busy}
+                    <Spinner {busy} message={localize('actions.updating')} classes="justify-center" />
+                {:else}
+                    {localize('actions.continue')}
+                {/if}
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-orange dark:bg-gray-900">

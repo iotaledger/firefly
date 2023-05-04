@@ -1073,7 +1073,8 @@
         "changePassword": "Change password",
         "skipAndKeepPassword": "Skip and keep old password",
         "skipWalletBackup": "Skip wallet backup",
-        "saveStrongholdBackupLocally": "Save Stronghold backup locally"
+        "saveStrongholdBackupLocally": "Save Stronghold backup locally",
+        "updating": "Updating"
     },
     "general": {
         "password": "Password",

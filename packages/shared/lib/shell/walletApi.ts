@@ -186,7 +186,6 @@ WALLET.onMessage((message: MessageResponse) => {
         const { onSuccess, onError } = callbacksStore[id]
 
         if (message.type === ResponseTypes.Error) {
-            console.log('MESSAGE: ', message)
             onError(handleError(message.payload.type, message.payload.error, message.action))
         } else if (message.type === ResponseTypes.Panic) {
             onError(handleError(ErrorType.Panic, message.payload))

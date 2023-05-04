@@ -79,7 +79,6 @@ export class ImportRouter extends Subrouter<ImportRoute> {
                     await asyncRestoreBackup(this.importFilePath, '')
                     nextRoute = ImportRoute.BackupPassword
                 } catch (err) {
-                    console.error(err)
                     if (err?.error?.match(getErrorMessage(ErrorType.IncorrectVersion))) {
                         nextRoute = ImportRoute.UpdateStronghold
                         updateStrongholdRouter.set(new UpdateStrongholdRouter(this))

@@ -1,7 +1,7 @@
 import { get, writable } from 'svelte/store'
 
 import { strongholdPassword } from '@lib/app'
-import { migrateStrongholdForRecovery } from '@lib/stronghold'
+import { migrateStrongholdForRecovery, STRONGHOLD_DECRYPTION_ERROR } from '@lib/stronghold'
 
 import { UpdateStrongholdRoute } from '../enums'
 import { Subrouter } from '../subrouters/subrouter'
@@ -30,7 +30,9 @@ export class UpdateStrongholdRouter extends Subrouter<UpdateStrongholdRoute> {
                         nextRoute = UpdateStrongholdRoute.ChangePassword
                         break
                     } catch (err) {
-                        console.error(err)
+                        if (err?.message?.match(STRONGHOLD_DECRYPTION_ERROR)) {
+                            strongholdPassword.set(undefined)
+                        }
                         return
                     }
                 } else {
