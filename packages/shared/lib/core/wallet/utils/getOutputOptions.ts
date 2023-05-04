@@ -52,7 +52,7 @@ function getAmountFromTransactionDetails(transactionDetails: NewTransactionDetai
         if (nativeTokenId) {
             rawAmount = transactionDetails?.surplus ?? '0'
         } else {
-            rawAmount = BigInt(transactionDetails.rawAmount).toString()
+            rawAmount = BigInt(transactionDetails?.rawAmount ?? 0).toString()
         }
     } else if (transactionDetails.type === NewTransactionType.NftTransfer) {
         rawAmount = transactionDetails?.surplus ?? '0'
@@ -72,7 +72,7 @@ function getAssetFromTransactionDetails(transactionDetails: NewTransactionDetail
         const nativeTokenId = asset?.id === get(selectedAccountAssets)?.baseCoin?.id ? undefined : asset?.id
 
         if (nativeTokenId) {
-            const bigAmount = BigInt(transactionDetails.rawAmount)
+            const bigAmount = BigInt(transactionDetails?.rawAmount)
             assets = {
                 nativeTokens: [
                     {

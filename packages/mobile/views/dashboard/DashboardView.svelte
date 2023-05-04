@@ -27,6 +27,8 @@
 
     $: darkModeEnabled = $appSettings.darkMode
 
+    $: isTransferring = $selectedAccount.isTransferring
+
     function onReceiveClick(): void {
         openDrawer(DrawerId.Receive)
     }
@@ -50,7 +52,13 @@
             {#if features?.dashboard?.send?.enabled || features?.dashboard?.receive?.enabled}
                 <div class="flex flex-row items-center justify-center w-full space-x-3 mt-8">
                     {#if features?.dashboard?.send?.enabled}
-                        <Button classes="w-full h-10" onClick={handleSendClick}>
+                        <Button
+                            classes="w-full h-10"
+                            onClick={handleSendClick}
+                            disabled={isTransferring}
+                            isBusy={isTransferring}
+                            busyMessage={localize('general.transferring')}
+                        >
                             {localize('actions.send')}
                         </Button>
                     {/if}

@@ -24,6 +24,8 @@
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
 
     import { sendRoute, SendRoute, sendRouter } from '@/routers'
+    import { drawers } from '@/auxiliary/drawer/stores'
+    import { DrawerId } from '@/auxiliary/drawer/enums'
 
     $: ({ expirationDate, giftStorageDeposit, surplus } = $newTransactionDetails)
 
@@ -57,7 +59,9 @@
                 ledgerPreparedOutput.set(preparedOutput)
             }
             await sendOutput(preparedOutput)
-            $sendRouter.next()
+            if ($drawers.some((drawer) => drawer.id === DrawerId.Send)) {
+                $sendRouter.next()
+            }
         } catch (err) {
             handleError(err)
             throw new Error(err)

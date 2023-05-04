@@ -19,7 +19,7 @@
     export let activity: TransactionActivity
 
     $: asset = getAssetFromPersistedAssets(activity.assetId)
-    $: amount = formatTokenAmountDefault(Number(activity.rawAmount), asset?.metadata, asset?.metadata?.unit)
+    $: amount = formatTokenAmountDefault(Number(activity?.rawAmount ?? 0), asset?.metadata, asset?.metadata?.unit)
     $: isTimelocked = activity.asyncData?.timelockDate > $time
     $: subject = getSubjectFromActivity(activity)
 </script>
