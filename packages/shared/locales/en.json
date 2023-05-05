@@ -472,7 +472,8 @@
             },
             "saveBackup": {
                 "title": "Stronghold updated",
-                "body": "It's all good now - you're running the latest Stronghold version.",
+                "loginBody": "It's all good now - you're running the latest Stronghold version.",
+                "recoveryBody": "You can now continue setting up your wallet.",
                 "hint": "We highly recommend to delete all previous Stronghold backup files and save a new one."
             }
         },
