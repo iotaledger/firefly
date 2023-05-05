@@ -966,6 +966,7 @@
         "dismiss": "Dismiss",
         "proceedAnyway": "Proceed anyway",
         "save": "Save",
+        "saving": "Saving",
         "importSeed": "Import an existing seed",
         "restoreWallet": "Migrate or restore a wallet",
         "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",

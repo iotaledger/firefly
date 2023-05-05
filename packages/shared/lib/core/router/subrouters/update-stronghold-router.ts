@@ -44,6 +44,7 @@ export class UpdateStrongholdRouter extends Subrouter<UpdateStrongholdRoute> {
                 nextRoute = UpdateStrongholdRoute.SaveBackup
                 break
             case UpdateStrongholdRoute.SaveBackup:
+                strongholdPassword.set(null)
                 return
         }
         this.setNext(nextRoute)
