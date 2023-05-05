@@ -13,6 +13,7 @@
     const { importType, isGettingMigrationData } = getContext<ImportRouter>('importRouter')
 
     let password = ''
+    $: password, (error = '')
 
     const dispatch = createEventDispatcher()
 

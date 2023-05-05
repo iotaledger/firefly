@@ -20,7 +20,7 @@
     }
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick}>
+<OnboardingLayout allowBack={false}>
     <div slot="title">
         <Text type="h2">{locale('views.importFromFile.title')}</Text>
     </div>
