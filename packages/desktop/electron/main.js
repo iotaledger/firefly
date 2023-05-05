@@ -428,11 +428,9 @@ ipcMain.handle('get-version-details', (_e) => versionDetails)
 
 function ensureDirectoryExistence(filePath) {
     const dirname = path.dirname(filePath)
-    if (fs.existsSync(dirname)) {
-        return true
+    if (!fs.existsSync(dirname)) {
+        fs.mkdirSync(dirname, { recursive: true })
     }
-    ensureDirectoryExistence(dirname)
-    fs.mkdirSync(dirname)
 }
 
 ipcMain.handle('copy-file', (_e, source, destination) => {
