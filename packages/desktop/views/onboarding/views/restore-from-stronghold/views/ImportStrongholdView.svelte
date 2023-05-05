@@ -1,6 +1,6 @@
 <script lang="ts">
     import { OnboardingLayout } from '@components'
-    import { ImportFile, updateOnboardingProfile, validateBackupFile } from '@contexts/onboarding'
+    import { ImportFile, updateOnboardingProfile, validateBackupFile, onboardingProfile } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { CLIENT_ERROR_REGEXES } from '@core/error/constants'
     import { ClientError } from '@core/error/enums'
@@ -82,7 +82,7 @@
 
     async function shouldMigrate(): Promise<boolean> {
         try {
-            await restoreBackup(importFilePath, '')
+            await restoreBackup(importFilePath, '', $onboardingProfile.network.protocol.bech32Hrp)
         } catch (err) {
             const isMigrationRequired = CLIENT_ERROR_REGEXES[ClientError.MigrationRequired].test(err?.error)
             return isMigrationRequired

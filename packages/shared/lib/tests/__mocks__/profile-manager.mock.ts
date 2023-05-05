@@ -171,7 +171,12 @@ export class ProfileManagerMock implements IProfileManager {
         throw new Error('Method not implemented.')
     }
 
-    restoreBackup(source: string, password: string, ignoreIfCoinTypeMismatch?: boolean): Promise<void> {
+    restoreBackup(
+        source: string,
+        password: string,
+        ignoreIfCoinTypeMismatch?: boolean,
+        ignoreIfBech32Mismatch?: strin
+    ): Promise<void> {
         return Promise.resolve()
     }
 

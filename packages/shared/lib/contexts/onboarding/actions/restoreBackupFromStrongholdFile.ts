@@ -8,7 +8,7 @@ import { mobile } from '@core/app'
 export async function restoreBackupFromStrongholdFile(strongholdPassword: string): Promise<void> {
     const { id, importFilePath, clientOptions, network } = get(onboardingProfile)
     try {
-        await restoreBackup(importFilePath, strongholdPassword)
+        await restoreBackup(importFilePath, strongholdPassword, network.protocol.bech32Hrp)
         if (mobile) {
             await validateStrongholdCoinType(profileManager, network?.id)
             updateOnboardingProfile({ lastStrongholdBackupTime: new Date() })
