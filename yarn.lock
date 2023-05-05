@@ -391,10 +391,10 @@
   dependencies:
     tslib "^2.1.0"
 
-"@capacitor/device@1.1.2":
-  version "1.1.2"
-  resolved "https://registry.npmjs.org/@capacitor/device/-/device-1.1.2.tgz"
-  integrity sha512-1i6yvuSC7Ys7fs4JsUtfwG/00d2FF2TvWpbYs7YbkXhp1vOTL510gwjc5S6FTyhh8M9sAaUU5tKB68XwlSK/GA==
+"@capacitor/device@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@capacitor/device/-/device-5.0.0.tgz#5d0dfea6a1d8f2c5d96685d17fe1fe3e5f311b93"
+  integrity sha512-fenkWc4x9XLWJivH+oXPrZUa5WfEQNfm66hzbmYiRbFFe4B55pgF0xz0w5D2DMr0YlrA9qqrn9IqC96P1xhFAQ==
 
 "@capacitor/ios@3.4.1":
   version "3.4.1"
