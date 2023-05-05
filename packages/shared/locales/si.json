@@ -27,42 +27,30 @@
                     "title": "Choose network",
                     "body": "Set the network for your profile.",
                     "iota": {
-                        "mainnet": {
-                            "title": "Mainnet",
-                            "body": "IOTA Mainnet"
-                        },
-                        "devnet": {
-                            "title": "Devnet",
-                            "body": "Developer network for IOTA"
-                        },
-                        "private-net": {
-                            "title": "Private net",
-                            "body": "Support for custom networks with active TIPs"
-                        }
+                        "title": "IOTA",
+                        "body": "IOTA Mainnet"
                     },
                     "shimmer": {
-                        "mainnet": {
-                            "title": "Shimmer",
-                            "body": "Staging network for IOTA"
-                        },
-                        "devnet": {
-                            "title": "Testnet",
-                            "body": "Public beta network for Shimmer"
-                        },
-                        "private-net": {
-                            "title": "Private net",
-                            "body": "Support for custom networks with draft TIPs"
-                        }
+                        "title": "Shimmer",
+                        "body": "Staging network for IOTA"
+                    },
+                    "testnet": {
+                        "title": "Testnet",
+                        "body": "Public beta network for Shimmer"
+                    },
+                    "custom": {
+                        "title": "Custom network",
+                        "body": "Support for custom networks and/or nodes"
                     }
                 },
                 "setupCustomNetwork": {
-                    "title": "Connect to a private network",
-                    "body": "Fill the form with the node information and connect to a private network."
+                    "title": "Connect to a custom network or node",
+                    "body": "Fill the form with the node information and connect to a custom network or node."
                 }
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Set up {network, select, IOTA {an} Shimmer {a} other {an}} {network} profile",
+                    "title": "Set up {network, select, IOTA {an} Shimmer {a} Testnet {a} other {a}} {network} profile",
                     "body": "Select the appropriate method to set up your {network} profile."
                 },
                 "setupNew": {
@@ -175,7 +163,8 @@
                 "success": {
                     "title": "Shimmer claimed",
                     "body": "You have successfully claimed your Shimmer tokens.",
-                    "totalRewards": "Total rewards"
+                    "totalRewards": "Total rewards",
+                    "successfullyFound": "Successfully found {amount}"
                 }
             },
             "congratulations": {
@@ -426,17 +415,13 @@
                 "title": "ගැන",
                 "description": ""
             },
-            "createDeveloperProfile": {
-                "title": "Create Developer Profile",
-                "description": ""
-            },
-            "createNormalProfile": {
-                "title": "Create Normal Profile",
-                "description": ""
-            },
             "reportAnIssue": {
                 "title": "ගැටලුවක් වාර්තා කරන්න",
                 "description": "සංවර්ධකයින්ට දෝෂයක් වාර්තා කරන්න. එය දැනටමත් වාර්තා කර නොමැති බව තහවුරු කර ගැනීමට පරීක්ෂා කරන්න"
+            },
+            "developerToggle": {
+                "title": "Developer Mode",
+                "description": "Switch developer mode on to enable more features in experimental state"
             }
         },
         "login": {
@@ -501,8 +486,36 @@
             },
             "drawers": {
                 "networkConfig": {
+                    "addChain": {
+                        "title": "Add chain"
+                    },
+                    "chain": {
+                        "chainId": "Chain ID",
+                        "aliasAddress": "Alias Address",
+                        "iscpEndpoint": "ISCP Endpoint",
+                        "explorerEndpoint": "Explorer Endpoint (optional)",
+                        "errors": {
+                            "cannotBeEmpty": "Name cannot be empty",
+                            "nameTooLong": "Name is too long",
+                            "aliasAddressWrongFormat": "Must be in either hex or Bech32 format",
+                            "aliasAddressAlreadyInUse": "Alias address already in use",
+                            "invalidUrl": "Invalid URL"
+                        }
+                    },
+                    "chainDepositAddress": {
+                        "title": "Chain deposit address"
+                    },
+                    "chainInformation": {
+                        "title": "Chain information"
+                    },
                     "connectedChains": {
                         "title": "Connected chains"
+                    },
+                    "editChain": {
+                        "title": "Edit chain"
+                    },
+                    "removeChain": {
+                        "title": "Remove chain"
                     }
                 }
             }
@@ -1183,18 +1196,22 @@
         "importSeed": "පවතින බීජයක් ආනයනය කරන්න",
         "restoreWallet": {
             "iota": "Migrate or restore a wallet",
-            "shimmer": "Restore Shimmer profile"
+            "shimmer": "Restore Shimmer profile",
+            "testnet": "Restore Testnet profile",
+            "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
             "iota": "Migrate to Chrysalis or restore an existing wallet",
-            "shimmer": "Restore an existing Shimmer profile"
+            "shimmer": "Restore an existing Shimmer profile",
+            "testnet": "Restore an existing Testnet profile",
+            "custom": "Restore an existing Custom Network profile"
         },
         "refreshNftMedia": {
             "title": "Refresh NFT media",
             "description": "Do you want to delete and re-download all NFT media for this account?"
         },
         "createWallet": "Create a new {network} profile",
-        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
+        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown}}",
         "claimShimmer": "Claim Shimmer staking rewards",
         "claimShimmerDescription": "Import IOTA profile and claim staking rewards",
         "createAlias": "Create alias",
@@ -1306,7 +1323,6 @@
         "searchForRewards": "Search for rewards",
         "claimRewards": "Claim rewards",
         "rerunClaimProcess": "Rerun claim process",
-        "finishProfileSetupWithProtocol": "Finish {network} profile setup",
         "addPublicNote": "Add public note",
         "backup": "Backup",
         "mint": "Mint",
@@ -1334,7 +1350,8 @@
         "changeNode": "Change node",
         "stopVoting": "Stop voting",
         "revote": "Revote",
-        "skipAndKeep": "Skip and keep old password"
+        "skipAndKeep": "Skip and keep old password",
+        "addChain": "Add chain"
     },
     "general": {
         "recipient": "Recipient",
@@ -1408,7 +1425,7 @@
         "and": "and",
         "receiveFunds": "Receive funds",
         "address": "ලිපිනය",
-        "myAddress": "මගේ ලිපිනය",
+        "myAddress": "My address",
         "myNetworkAddress": "My {networkName} address",
         "shareAddress": "ලිපිනයක් බෙදා ගන්න",
         "yourAddress": "ඔබේ ලිපිනය",
@@ -1600,7 +1617,9 @@
         "statistics": "Statistics",
         "username": "Username",
         "jwt": "JSON web token",
-        "internalTransaction": "Internal transaction"
+        "internalTransaction": "Internal transaction",
+        "coinType": "Coin type",
+        "custom": "Custom"
     },
     "filters": {
         "title": "Filters",
@@ -1912,7 +1931,8 @@
             "pluginNotAvailable": "\"{nodePlugin}\" ප්ලගිනය වත්මන් නෝඩයේ නොමැත.",
             "unabledToConnect": "Unable to connect to the node",
             "differentNetwork": "The node is located on a different network",
-            "duplicateNodes": "Unable to add duplicate node"
+            "duplicateNodes": "Unable to add duplicate node",
+            "noCoinType": "No coin type specified"
         },
         "network": {
             "mismatch": "මෙම නෝඩය සඳහා ජාල හැඳුනුම \"{networkId}\" වේ, එය වත්මන් ජාලයට නොගැලපේ.",
@@ -1927,6 +1947,7 @@
             "invalid": "උපස්ථ ගොනුව හඳුනාගෙන නොමැත.",
             "destination": "උපස්ථ ගමනාන්තය වලංගු නැත.",
             "mnemonic": "සිහිවටනය වලංගු නැත.",
+            "migrationRequired": "Stronghold migration is required.",
             "seedTooShort": "බීජය අක්ෂර 81 ක් දිග විය යුතුය, එය {length, plural, one {# වේ} other {# වේ}}",
             "seedCharacters": "බීජයේ AZ හෝ 9 අක්ෂර පමණක් අඩංගු විය යුතුය",
             "phraseWordCount": "ඔබගේ ප්‍රතිසාධන වාක්‍ය ඛණ්ඩයේ වචන 24ක් තිබිය යුතුය, දැනට එහි {length, plural, one {# වේ} other {# වේ}}.",
@@ -2273,6 +2294,12 @@
                 "Confirmed": "alias created",
                 "Failed": "Failed to create alias"
             }
+        },
+        "networkHealth": {
+            "down": "Down",
+            "degraded": "Degraded",
+            "operational": "Operational",
+            "disconnected": "Disconnected"
         },
         "locked": "locked",
         "smartContract": "smart contract"

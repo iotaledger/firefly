@@ -85,8 +85,8 @@ describe('File: api.test.ts', () => {
         it('should call restoreBackup', async () => {
             spy = jest.spyOn(profileManagerMock, 'restoreBackup')
             const importFilePath = './backup.stronghold'
-            await restoreBackup(importFilePath, password)
-            expect(spy).toBeCalledWith(importFilePath, password, true)
+            await restoreBackup(importFilePath, password, 'rms')
+            expect(spy).toBeCalledWith(importFilePath, password, true, 'rms')
             expect(spy).toBeCalledTimes(1)
             spy.mockRestore()
         })
