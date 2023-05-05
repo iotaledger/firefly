@@ -46,7 +46,7 @@
 </script>
 
 <update-stronghold-view>
-    <OnboardingLayout {onBackClick}>
+    <OnboardingLayout allowBack={false}>
         <div slot="title">
             <Text type="h2" classes="mb-5">{localize('views.login.updateStronghold.title')}</Text>
         </div>

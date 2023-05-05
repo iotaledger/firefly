@@ -54,7 +54,7 @@
     </Transition>
 {:else if $importRoute === ImportRoute.FileImport}
     <Transition>
-        <FileImport on:next={next} on:previous={previous} {locale} />
+        <FileImport on:next={next} on:previous={previous} {locale} {busy} />
     </Transition>
 {:else if $importRoute === ImportRoute.LedgerImport}
     <Transition>

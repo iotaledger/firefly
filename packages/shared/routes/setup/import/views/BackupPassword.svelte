@@ -59,13 +59,11 @@
             disabled={password.length === 0 || busy || $isGettingMigrationData}
             onClick={() => handleContinue()}
         >
-            {#if $isGettingMigrationData}
-                <Spinner
-                    busy={$isGettingMigrationData}
-                    message={locale('views.migrate.restoringWallet')}
-                    classes="justify-center"
-                />
-            {:else}{locale('actions.continue')}{/if}
+            {#if busy || $isGettingMigrationData}
+                <Spinner busy message={locale('views.migrate.restoringWallet')} classes="justify-center" />
+            {:else}
+                {locale('actions.continue')}
+            {/if}
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-orange dark:bg-gray-900'}">
