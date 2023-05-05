@@ -1,13 +1,11 @@
 <script lang="ts">
-    import { selectedAccountIndex } from '@core/account'
-    import { getNftByIdFromAllAccountNfts } from '@core/nfts'
-    import { NftMedia, MediaPlaceholder } from 'shared/components'
+    import { INft } from '@core/nfts'
+    import { MediaPlaceholder, NftMedia } from 'shared/components'
 
-    export let nftId: string
+    export let nft: INft
     export let size: 'small' | 'medium' | 'large' = 'medium'
     export let type = undefined
 
-    $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, nftId)
     $: nftType = nft?.parsedMetadata?.type
     $: parentType = nftType?.split('/')?.[0]
 
@@ -24,7 +22,7 @@
     "
 >
     {#if parentType === 'image'}
-        <NftMedia {nftId} bind:isLoaded classes="min-w-full min-h-full object-cover">
+        <NftMedia {nft} bind:isLoaded classes="min-w-full min-h-full object-cover">
             <div
                 slot="placeholder"
                 class="

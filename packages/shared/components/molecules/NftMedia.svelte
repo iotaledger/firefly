@@ -1,11 +1,9 @@
 <script lang="ts">
+    import { INft, nftDownloadQueue } from '@core/nfts'
+    import { MediaDisplay } from '@ui'
     import MediaPlaceholder from './MediaPlaceholder.svelte'
-    import { MediaDisplay } from 'shared/components'
 
-    import { selectedAccountIndex } from '@core/account'
-    import { getNftByIdFromAllAccountNfts, INft, nftDownloadQueue, ownedNfts } from '@core/nfts'
-
-    export let nftId: string
+    export let nft: INft
     export let autoplay: boolean = false
     export let controls: boolean = false
     export let loop: boolean = false
@@ -15,9 +13,7 @@
     const bgColor = 'gray-200'
     const darkBgColor = 'gray-700'
 
-    let nft: INft
-    $: $ownedNfts, (nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, nftId))
-    $: isDownloading = $nftDownloadQueue.some((queueItem) => queueItem.nft.id === nftId)
+    $: isDownloading = $nftDownloadQueue.some((queueItem) => queueItem.nft.id === nft.id)
 </script>
 
 {#if !nft?.composedUrl || !nft.downloadMetadata?.isLoaded}
