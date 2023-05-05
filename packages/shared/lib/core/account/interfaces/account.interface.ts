@@ -4,7 +4,6 @@ import type {
     AccountMetadata,
     SyncOptions,
     Address,
-    AddressGenerationOptions,
     AddressNativeTokens,
     AddressNftId,
     AddressWithAmount,
@@ -33,6 +32,7 @@ import type {
     TransactionOptions,
     ParticipationEventRegistrationOptions,
     ParticipationEventMap,
+    GenerateAddressOptions,
 } from '@iota/wallet'
 
 export interface IAccount {
@@ -63,8 +63,8 @@ export interface IAccount {
     deregisterParticipationEvent(eventId: string): Promise<void>
     destroyAlias(aliasId: string, transactionOptions?: TransactionOptions): Promise<Transaction>
     destroyFoundry(foundryId: string, transactionOptions?: TransactionOptions): Promise<Transaction>
-    generateAddress(options?: AddressGenerationOptions): Promise<Address>
-    generateAddresses(amount: number, options?: AddressGenerationOptions): Promise<Address[]>
+    generateAddress(options?: GenerateAddressOptions): Promise<Address>
+    generateAddresses(amount: number, options?: GenerateAddressOptions): Promise<Address[]>
     getBalance(): Promise<AccountBalance>
     getFoundryOutput(tokenId: string): Promise<IFoundryOutput>
     getMetadata(): AccountMetadata
@@ -113,6 +113,7 @@ export interface IAccount {
     sendNft(addressesAndNftIds: AddressNftId[], transactionOptions?: TransactionOptions): Promise<Transaction>
     sendOutputs(outputs: OutputTypes[], transactionOptions?: TransactionOptions): Promise<Transaction>
     setAlias(alias: string): Promise<void>
+    setDefaultSyncOptions(options: SyncOptions): Promise<void>
     signTransactionEssence(preparedTransactionData: PreparedTransactionData): Promise<SignedTransactionEssence>
     stopParticipating(eventId: string): Promise<Transaction>
     submitAndStoreTransaction(signedTransactionData: SignedTransactionEssence): Promise<Transaction>

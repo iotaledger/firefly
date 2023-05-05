@@ -3,7 +3,7 @@
     import { initialiseOnboardingProfile, onboardingProfile, shouldBeDeveloperProfile } from '@contexts/onboarding'
     import {
         AppContext,
-        isStrongholdUpdated,
+        isLatestStrongholdVersion,
         mobile,
         needsToAcceptLatestPrivacyPolicy,
         needsToAcceptLatestTermsOfService,
@@ -14,6 +14,7 @@
     import { loginRouter, routerManager } from '@core/router'
     import features from '@features/features'
     import { Icon, Logo, Profile } from '@ui'
+    import { OnboardingRouter, onboardingRouter } from '@views/onboarding'
     import { onMount } from 'svelte'
 
     function onContinueClick(profileId: string): void {
@@ -22,6 +23,7 @@
     }
 
     async function onAddProfileClick(): Promise<void> {
+        onboardingRouter.set(new OnboardingRouter())
         await initialiseOnboardingProfile(shouldBeDeveloperProfile())
         $routerManager.goToAppContext(AppContext.Onboarding)
     }
@@ -59,7 +61,7 @@
                     bgColor="blue"
                     onClick={onContinueClick}
                     updateRequired={profile?.type === ProfileType.Software &&
-                        !isStrongholdUpdated(profile) &&
+                        !isLatestStrongholdVersion(profile?.strongholdVersion) &&
                         features.onboarding.strongholdVersionCheck.enabled}
                     classes="cursor-pointer"
                 />

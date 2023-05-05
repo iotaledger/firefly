@@ -6,7 +6,6 @@ import { onboardingProfile } from '../stores'
 export function createNewProfileFromOnboardingProfile(): void {
     const _onboardingProfile = get(onboardingProfile)
     const newProfile = convertOnboardingProfileToPersistedProfile(_onboardingProfile)
-    onboardingProfile.set(undefined)
     addNewProfile(newProfile)
     loadPersistedProfileIntoActiveProfile(_onboardingProfile?.id)
 }

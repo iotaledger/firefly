@@ -1,9 +1,14 @@
 <script lang="ts">
-    import { Animation, Button, Dropzone, Text } from '@ui'
     import { OnboardingLayout } from '@components'
+    import { ImportFile, updateOnboardingProfile, validateBackupFile, onboardingProfile } from '@contexts/onboarding'
     import { mobile } from '@core/app'
+    import { CLIENT_ERROR_REGEXES } from '@core/error/constants'
+    import { ClientError } from '@core/error/enums'
     import { localize } from '@core/i18n'
-    import { ImportFile, updateOnboardingProfile, validateBackupFile } from '@contexts/onboarding'
+    import { restoreBackup } from '@core/profile-manager/api'
+    import { STRONGHOLD_VERSION } from '@core/stronghold/constants'
+    import { StrongholdVersion } from '@core/stronghold/enums'
+    import { Animation, Button, Dropzone, Text } from '@ui'
     import { onMount } from 'svelte'
     import { restoreFromStrongholdRouter } from '../../restore-from-stronghold/restore-from-stronghold-router'
 
@@ -18,9 +23,15 @@
     let importFilePath = ''
     let dropping = false
 
-    function onContinueClick(): void {
+    async function onContinueClick(): Promise<void> {
         validateBackupFile(importFileName)
-        updateOnboardingProfile({ importFile, importFilePath })
+        const _shouldMigrate = await shouldMigrate()
+        updateOnboardingProfile({
+            importFile,
+            importFilePath,
+            // TODO: we don't have a way to know the stronghold version of the backup file yet
+            strongholdVersion: _shouldMigrate ? StrongholdVersion.V2 : STRONGHOLD_VERSION,
+        })
         $restoreFromStrongholdRouter.next()
     }
 
@@ -62,11 +73,20 @@
         reader.onload = (e): void => {
             setFile(e.target.result, fileWithPath)
             if ($mobile) {
-                onContinueClick()
+                void onContinueClick()
             }
         }
 
         reader.readAsArrayBuffer(fileWithPath)
+    }
+
+    async function shouldMigrate(): Promise<boolean> {
+        try {
+            await restoreBackup(importFilePath, '', $onboardingProfile.network.protocol.bech32Hrp)
+        } catch (err) {
+            const isMigrationRequired = CLIENT_ERROR_REGEXES[ClientError.MigrationRequired].test(err?.error)
+            return isMigrationRequired
+        }
     }
 
     onMount(() => {

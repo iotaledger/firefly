@@ -3,8 +3,8 @@
         "onboarding": {
             "appSetup": {
                 "welcome": {
-                    "title": "Šaljite, primajte i upravljajte svojim {network} tokenima",
-                    "body": "Firefly je službeni {network} novčanik."
+                    "title": "Send, Receive & Manage your {network} tokens",
+                    "body": "Firefly is the official wallet software for {network}."
                 },
                 "legal": {
                     "title": "Politika privatnosti i Uvjeti korištenja",
@@ -27,43 +27,31 @@
                     "title": "Odaberi mrežu",
                     "body": "Postavi mrežu za svoj profil.",
                     "iota": {
-                        "mainnet": {
-                            "title": "Mainnet",
-                            "body": "IOTA Mainnet"
-                        },
-                        "devnet": {
-                            "title": "Devnet",
-                            "body": "Developerska IOTA mreža"
-                        },
-                        "private-net": {
-                            "title": "Privatna mreža",
-                            "body": "Podrška za prilagođene mreže (aktivni TIPS)"
-                        }
+                        "title": "IOTA",
+                        "body": "IOTA Mainnet"
                     },
                     "shimmer": {
-                        "mainnet": {
-                            "title": "Shimmer",
-                            "body": "Testna mreža za IOTA Mainnet"
-                        },
-                        "devnet": {
-                            "title": "Testna mreža",
-                            "body": "Javna beta mreža za Shimmer"
-                        },
-                        "private-net": {
-                            "title": "Privatna mreža",
-                            "body": "Podrška za prilagođene mreže (draft TIPS)"
-                        }
+                        "title": "Shimmer",
+                        "body": "Staging network for IOTA"
+                    },
+                    "testnet": {
+                        "title": "Testnet",
+                        "body": "Public beta network for Shimmer"
+                    },
+                    "custom": {
+                        "title": "Custom network",
+                        "body": "Support for custom networks and/or nodes"
                     }
                 },
                 "setupCustomNetwork": {
-                    "title": "Poveži se s privatnom mrežom",
-                    "body": "Ispuni obrazac podacima o nodeu i poveži se s privatnom mrežom."
+                    "title": "Connect to a custom network or node",
+                    "body": "Fill the form with the node information and connect to a custom network or node."
                 }
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Set up {network, select, IOTA {an} Shimmer {a} other {an}} {network} profile",
-                    "body": "Odaberite odgovarajuću metodu koju ćete koristiti za postavljanje {network} profila."
+                    "title": "Set up {network, select, IOTA {an} Shimmer {a} Testnet {a} other {a}} {network} profile",
+                    "body": "Select the appropriate method to set up your {network} profile."
                 },
                 "setupNew": {
                     "title": "Stvori novi profil",
@@ -78,7 +66,7 @@
                     }
                 },
                 "setupRecovered": {
-                    "title": "Oporavi {network} profil",
+                    "title": "Recover {network} profile",
                     "body": "Ako imate mnemoničku frazu za oporavak ili Stronghold pričuvnu kopiju, možete ih uvesti ovdje.",
                     "importMnemonic": "Koristi frazu za oporavak",
                     "importMnemonicDescription": "Unesi svoju mnemoničku frazu od 24 riječi",
@@ -92,7 +80,7 @@
                     "body": "Uvezi svoj IOTA profil i preuzmi svoje Shimmer staking nagrade."
                 },
                 "enterName": {
-                    "title": "Stvori svoj {network} profil",
+                    "title": "Create your {network} profile",
                     "profileName": "Ime profila",
                     "body1": "Možete stvoriti više korisničkih profila kako biste organizirali svoje novčanike i poboljšali privatnost.",
                     "body2": {
@@ -175,7 +163,8 @@
                 "success": {
                     "title": "Shimmer preuzet",
                     "body": "Uspješno ste preuzeli vaše Shimmer tokene.",
-                    "totalRewards": "Ukupne nagrade"
+                    "totalRewards": "Ukupne nagrade",
+                    "successfullyFound": "Successfully found {amount}"
                 }
             },
             "congratulations": {
@@ -198,10 +187,10 @@
             "videoGuide": "Video upute za Ledger migraciju"
         },
         "ledgerInstallationGuide": {
-            "title": "Jeste li instalirali {network} aplikaciju na svoj Ledger uređaj?",
-            "body1": "Prije nego što nastavite, morate koristiti Ledger Live za pronalaženje i instaliranje {network} aplikacije.",
+            "title": "Have you installed the {network} app on your Ledger device?",
+            "body1": "Before you proceed, you must use Ledger Live to find and install the {network} app.",
             "body2": "Uvjeri se da je tvoj Ledger na najnovijoj verziji firmwarea. Sve predinstalirane aplikacije trebaju biti na najnovijim verzijama.",
-            "action": "Da, instalirao sam {network} aplikaciju"
+            "action": "Yes, I've installed the {network} app"
         },
         "importFromLedger": {
             "title": "Oporavi ili migriraj svoj Ledger",
@@ -426,17 +415,13 @@
                 "title": "O aplikaciji",
                 "description": ""
             },
-            "createDeveloperProfile": {
-                "title": "Stvori Developer profil",
-                "description": ""
-            },
-            "createNormalProfile": {
-                "title": "Stvori normalni profil",
-                "description": ""
-            },
             "reportAnIssue": {
                 "title": "Prijavi problem",
                 "description": "Prijavite bug developerima. Prvo provjerite je li ista greška već prijavljena"
+            },
+            "developerToggle": {
+                "title": "Developer Mode",
+                "description": "Switch developer mode on to enable more features in experimental state"
             }
         },
         "login": {
@@ -501,8 +486,36 @@
             },
             "drawers": {
                 "networkConfig": {
+                    "addChain": {
+                        "title": "Add chain"
+                    },
+                    "chain": {
+                        "chainId": "Chain ID",
+                        "aliasAddress": "Alias Address",
+                        "iscpEndpoint": "ISCP Endpoint",
+                        "explorerEndpoint": "Explorer Endpoint (optional)",
+                        "errors": {
+                            "cannotBeEmpty": "Name cannot be empty",
+                            "nameTooLong": "Name is too long",
+                            "aliasAddressWrongFormat": "Must be in either hex or Bech32 format",
+                            "aliasAddressAlreadyInUse": "Alias address already in use",
+                            "invalidUrl": "Invalid URL"
+                        }
+                    },
+                    "chainDepositAddress": {
+                        "title": "Chain deposit address"
+                    },
+                    "chainInformation": {
+                        "title": "Chain information"
+                    },
                     "connectedChains": {
                         "title": "Connected chains"
+                    },
+                    "editChain": {
+                        "title": "Edit chain"
+                    },
+                    "removeChain": {
+                        "title": "Remove chain"
                     }
                 }
             }
@@ -910,7 +923,7 @@
             "title": "Spoji svoj Ledger",
             "notConnected": "Spoji svoj Ledger uređaj za nastavak.",
             "locked": "Otključaj svoj Ledger uređaj za nastavak.",
-            "appNotOpen": "Otvori Shimmer aplikaciju na svom Ledger uređaju za nastavak.",
+            "appNotOpen": "Open the Shimmer app on your Ledger device to continue.",
             "correctAppOpen": "Ledger uspješno spojen, molimo nastavite."
         },
         "ledgerConfirmation": {
@@ -1183,18 +1196,22 @@
         "importSeed": "Uvezite postojeći Seed",
         "restoreWallet": {
             "iota": "Migriraj ili obnovi novčanik",
-            "shimmer": "Obnovi Shimmer profil"
+            "shimmer": "Obnovi Shimmer profil",
+            "testnet": "Restore Testnet profile",
+            "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
             "iota": "Migriraj na Chrysalis mrežu ili oporavi postojeći novčanik",
-            "shimmer": "Oporavi postojeći Shimmer profil"
+            "shimmer": "Oporavi postojeći Shimmer profil",
+            "testnet": "Restore an existing Testnet profile",
+            "custom": "Restore an existing Custom Network profile"
         },
         "refreshNftMedia": {
             "title": "Refresh NFT media",
             "description": "Do you want to delete and re-download all NFT media for this account?"
         },
-        "createWallet": "Stvori novi {network} profil",
-        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
+        "createWallet": "Create a new {network} profile",
+        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown}}",
         "claimShimmer": "Preuzmi Shimmer staking nagrade",
         "claimShimmerDescription": "Uvezi IOTA profil i preuzmi Shimmer staking nagrade",
         "createAlias": "Create alias",
@@ -1306,7 +1323,6 @@
         "searchForRewards": "Potraži nagrade",
         "claimRewards": "Preuzmi nagrade",
         "rerunClaimProcess": "Ponovno pokreni postupak preuzimanja",
-        "finishProfileSetupWithProtocol": "Dovrši postavljanje {network} profila",
         "addPublicNote": "Dodaj javnu bilješku",
         "backup": "Stvori sigurnosnu kopiju",
         "mint": "Mintaj",
@@ -1334,7 +1350,8 @@
         "changeNode": "Change node",
         "stopVoting": "Stop voting",
         "revote": "Revote",
-        "skipAndKeep": "Skip and keep old password"
+        "skipAndKeep": "Skip and keep old password",
+        "addChain": "Add chain"
     },
     "general": {
         "recipient": "Primatelj",
@@ -1408,7 +1425,7 @@
         "and": "i",
         "receiveFunds": "Primi sredstva",
         "address": "Adresa",
-        "myAddress": "Moja adresa",
+        "myAddress": "My address",
         "myNetworkAddress": "Moja {networkName} adresa",
         "shareAddress": "Podijelite adresu",
         "yourAddress": "Vaša adresa",
@@ -1600,7 +1617,9 @@
         "statistics": "Statistics",
         "username": "Username",
         "jwt": "JSON web token",
-        "internalTransaction": "Internal transaction"
+        "internalTransaction": "Internal transaction",
+        "coinType": "Coin type",
+        "custom": "Custom"
     },
     "filters": {
         "title": "Filteri",
@@ -1912,7 +1931,8 @@
             "pluginNotAvailable": "\"{nodePlugin}\" plugin nije dostupan na trenutnom nodeu.",
             "unabledToConnect": "Neuspješno povezivanje s nodeom",
             "differentNetwork": "Node se nalazi na drugoj mreži",
-            "duplicateNodes": "Nije bilo moguće dodati duplicirani node"
+            "duplicateNodes": "Nije bilo moguće dodati duplicirani node",
+            "noCoinType": "No coin type specified"
         },
         "network": {
             "mismatch": "Mrežni ID ovog nodea je \"{networkId}\", što se ne podudara s trenutnom mrežom.",
@@ -1927,6 +1947,7 @@
             "invalid": "Sigurnosna kopija nije prepoznata.",
             "destination": "Destinacija za sigurnosnu kopiju je nevažeća.",
             "mnemonic": "Fraza za oporavak nije ispravna.",
+            "migrationRequired": "Stronghold migration is required.",
             "seedTooShort": "Seed mora imati 81 znak, trenutno ih ima {length, plural, one {#} other {#}}",
             "seedCharacters": "Seed može sadržavati samo slova od A do Z i broj 9",
             "phraseWordCount": "Vaša fraza za oporavak mora se sastojati od 24 riječi. Trenutno ih ima {length, plural, one {samo #} other {samo #}}.",
@@ -2273,6 +2294,12 @@
                 "Confirmed": "alias created",
                 "Failed": "Failed to create alias"
             }
+        },
+        "networkHealth": {
+            "down": "Down",
+            "degraded": "Degraded",
+            "operational": "Operational",
+            "disconnected": "Disconnected"
         },
         "locked": "zaključano",
         "smartContract": "smart contract"

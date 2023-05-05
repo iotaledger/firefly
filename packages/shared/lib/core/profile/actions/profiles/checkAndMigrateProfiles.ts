@@ -1,5 +1,7 @@
 import { COIN_TYPE, getDefaultPersistedNetwork, NetworkId } from '@core/network'
-import { INode } from '@core/network/interfaces'
+import { INode, IPersistedNetwork } from '@core/network/interfaces'
+import { DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_SECONDS, DEFAULT_MAX_NFT_SIZE_IN_MEGABYTES } from '@core/nfts'
+import { StrongholdVersion } from '@core/stronghold/enums'
 import { get } from 'svelte/store'
 import {
     DEFAULT_PERSISTED_PROFILE_OBJECT,
@@ -8,8 +10,6 @@ import {
 } from '../../constants'
 import { IPersistedProfile } from '../../interfaces'
 import { currentProfileVersion, profiles, saveProfile } from '../../stores'
-import { DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_SECONDS, DEFAULT_MAX_NFT_SIZE_IN_MEGABYTES } from '@core/nfts'
-import { TokenStandard } from '@core/wallet'
 
 /**
  * Migrates profile data in need of being modified to accommodate changes
@@ -51,6 +51,7 @@ const persistedProfileMigrationsMap: Record<number, (existingProfile: unknown) =
     8: persistedProfileMigrationToV9,
     9: persistedProfileMigrationToV10,
     10: persistedProfileMigrationToV11,
+    11: persistedProfileMigrationToV12,
 }
 
 function persistedProfileMigrationToV4(existingProfile: unknown): void {
@@ -184,15 +185,16 @@ function persistedProfileMigrationToV11(
     existingProfile: IPersistedProfile & { networkType: 'mainnet' | 'devnet' | 'private-net' }
 ): void {
     if (!existingProfile?.network) {
+        let network: IPersistedNetwork
         const networkId = getNetworkIdFromOldNetworkType(existingProfile?.networkType)
         if (networkId === NetworkId.Shimmer || networkId === NetworkId.Testnet) {
-            const network = getDefaultPersistedNetwork(networkId)
-            existingProfile.network = structuredClone(network)
+            network = getDefaultPersistedNetwork(networkId)
+        } else {
+            network.id = NetworkId.Custom
         }
+        network.coinType = COIN_TYPE[NetworkId.Shimmer]
+        existingProfile.network = structuredClone(network)
     }
-
-    existingProfile.network.coinType = COIN_TYPE[NetworkId.Shimmer]
-    existingProfile.network.baseToken = { ...existingProfile.network.baseToken, standard: TokenStandard.BaseToken }
 
     existingProfile.settings = {
         ...existingProfile.settings,
@@ -225,4 +227,9 @@ function persistedProfileMigrationToV11(
     saveProfile(newProfile as IPersistedProfile)
 }
 
-// TODO: Rename accountMetadata to accountPersistedData
+function persistedProfileMigrationToV12(existingProfile: IPersistedProfile): void {
+    existingProfile.strongholdVersion = StrongholdVersion.V2
+    saveProfile(existingProfile)
+}
+
+// TODO: Rename accountMetadata to accountPersistedData in next migration

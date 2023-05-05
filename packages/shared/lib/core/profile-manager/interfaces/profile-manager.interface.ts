@@ -1,10 +1,10 @@
 import type {
-    SyncOptions,
     ClientOptions,
     EventType,
     GenerateAddressOptions,
     LedgerNanoStatus,
     NodeInfoWrapper,
+    SyncOptions,
     WalletEvent,
 } from '@iota/wallet'
 
@@ -39,7 +39,12 @@ export interface IProfileManager {
     listen(eventTypes: EventType[], callback: WalletApiEventHandler): Promise<void>
     clearListeners(eventTypes: EventType[]): Promise<void>
     removeLatestAccount(): Promise<void>
-    restoreBackup(source: string, password: string, ignoreIfCoinTypeMismatch?: boolean): Promise<void>
+    restoreBackup(
+        source: string,
+        password: string,
+        ignoreIfCoinTypeMismatch: boolean,
+        ignoreIfBech32Mismatch: string
+    ): Promise<void>
     setClientOptions(options: ClientOptions): Promise<void>
     setStrongholdPassword(password: string): Promise<void>
     setStrongholdPasswordClearInterval(intervalInMilliseconds?: number): Promise<void>
