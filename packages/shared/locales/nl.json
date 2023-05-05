@@ -3,8 +3,8 @@
         "onboarding": {
             "appSetup": {
                 "welcome": {
-                    "title": "Verstuur, Ontvang & Beheer uw {network} tokens",
-                    "body": "Firefly is de officiële wallet software voor {network}."
+                    "title": "Send, Receive & Manage your {network} tokens",
+                    "body": "Firefly is the official wallet software for {network}."
                 },
                 "legal": {
                     "title": "Privacy Beleid & Algemene Voorwaarden",
@@ -27,43 +27,31 @@
                     "title": "Kies netwerk",
                     "body": "Stel het netwerk voor uw profiel in.",
                     "iota": {
-                        "mainnet": {
-                            "title": "Hoofdnet",
-                            "body": "IOTA Mainnet"
-                        },
-                        "devnet": {
-                            "title": "Devnet",
-                            "body": "Developer network for IOTA"
-                        },
-                        "private-net": {
-                            "title": "Private net",
-                            "body": "Support for custom networks with active TIPs"
-                        }
+                        "title": "IOTA",
+                        "body": "IOTA Mainnet"
                     },
                     "shimmer": {
-                        "mainnet": {
-                            "title": "Shimmer",
-                            "body": "Staging network for IOTA"
-                        },
-                        "devnet": {
-                            "title": "Testnet",
-                            "body": "Public beta network for Shimmer"
-                        },
-                        "private-net": {
-                            "title": "Private net",
-                            "body": "Support for custom networks with draft TIPs"
-                        }
+                        "title": "Shimmer",
+                        "body": "Staging network for IOTA"
+                    },
+                    "testnet": {
+                        "title": "Testnet",
+                        "body": "Public beta network for Shimmer"
+                    },
+                    "custom": {
+                        "title": "Custom network",
+                        "body": "Support for custom networks and/or nodes"
                     }
                 },
                 "setupCustomNetwork": {
-                    "title": "Connect to a private network",
-                    "body": "Fill the form with the node information and connect to a private network."
+                    "title": "Connect to a custom network or node",
+                    "body": "Fill the form with the node information and connect to a custom network or node."
                 }
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Set up {network, select, IOTA {an} Shimmer {a} other {an}} {network} profile",
-                    "body": "Selecteer de juiste methode om uw {network}-profiel in te stellen."
+                    "title": "Set up {network, select, IOTA {an} Shimmer {a} Testnet {a} other {a}} {network} profile",
+                    "body": "Select the appropriate method to set up your {network} profile."
                 },
                 "setupNew": {
                     "title": "Create a profile",
@@ -175,7 +163,8 @@
                 "success": {
                     "title": "Schimmer opgeëist",
                     "body": "Je hebt met succes je Shimmer tokens geclaimd.",
-                    "totalRewards": "Total rewards"
+                    "totalRewards": "Total rewards",
+                    "successfullyFound": "Successfully found {amount}"
                 }
             },
             "congratulations": {
@@ -198,10 +187,10 @@
             "videoGuide": "Ledger migratie instructie video"
         },
         "ledgerInstallationGuide": {
-            "title": "Hebt u de {network} app geïnstalleerd op uw Ledger apparaat?",
+            "title": "Have you installed the {network} app on your Ledger device?",
             "body1": "Before you proceed, you must use Ledger Live to find and install the {network} app.",
             "body2": "Zorg ervoor dat uw Ledger firmware up-to-date is. Alle vooraf geïnstalleerde apps moeten worden bijgewerkt naar de nieuwste versies.",
-            "action": "Ja, ik heb de {network} app geïnstalleerd"
+            "action": "Yes, I've installed the {network} app"
         },
         "importFromLedger": {
             "title": "Herstel of Migreer uw Ledger",
@@ -426,17 +415,13 @@
                 "title": "Over",
                 "description": ""
             },
-            "createDeveloperProfile": {
-                "title": "Ontwikkelaarsprofiel aanmaken",
-                "description": ""
-            },
-            "createNormalProfile": {
-                "title": "Maak Normaal Profiel aan",
-                "description": ""
-            },
             "reportAnIssue": {
                 "title": "Meld een probleem",
                 "description": "Meld een probleem aan de ontwikkelaars. Controleer eerst of deze niet al eerder gemeld is"
+            },
+            "developerToggle": {
+                "title": "Developer Mode",
+                "description": "Switch developer mode on to enable more features in experimental state"
             }
         },
         "login": {
@@ -501,8 +486,36 @@
             },
             "drawers": {
                 "networkConfig": {
+                    "addChain": {
+                        "title": "Add chain"
+                    },
+                    "chain": {
+                        "chainId": "Chain ID",
+                        "aliasAddress": "Alias Address",
+                        "iscpEndpoint": "ISCP Endpoint",
+                        "explorerEndpoint": "Explorer Endpoint (optional)",
+                        "errors": {
+                            "cannotBeEmpty": "Name cannot be empty",
+                            "nameTooLong": "Name is too long",
+                            "aliasAddressWrongFormat": "Must be in either hex or Bech32 format",
+                            "aliasAddressAlreadyInUse": "Alias address already in use",
+                            "invalidUrl": "Invalid URL"
+                        }
+                    },
+                    "chainDepositAddress": {
+                        "title": "Chain deposit address"
+                    },
+                    "chainInformation": {
+                        "title": "Chain information"
+                    },
                     "connectedChains": {
                         "title": "Connected chains"
+                    },
+                    "editChain": {
+                        "title": "Edit chain"
+                    },
+                    "removeChain": {
+                        "title": "Remove chain"
                     }
                 }
             }
@@ -1183,18 +1196,22 @@
         "importSeed": "Importeer een bestaande seed",
         "restoreWallet": {
             "iota": "Migreer of herstel een portemonnee",
-            "shimmer": "Herstel Shimmer profiel"
+            "shimmer": "Herstel Shimmer profiel",
+            "testnet": "Restore Testnet profile",
+            "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
             "iota": "Migreren naar Chrysalis of een bestaande portemonnee herstellen",
-            "shimmer": "Een bestaand Shimmer profiel herstellen"
+            "shimmer": "Een bestaand Shimmer profiel herstellen",
+            "testnet": "Restore an existing Testnet profile",
+            "custom": "Restore an existing Custom Network profile"
         },
         "refreshNftMedia": {
             "title": "Refresh NFT media",
             "description": "Do you want to delete and re-download all NFT media for this account?"
         },
-        "createWallet": "Maak een nieuw {network} profiel aan",
-        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
+        "createWallet": "Create a new {network} profile",
+        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown}}",
         "claimShimmer": "Claim Shimmer staking beloningen",
         "claimShimmerDescription": "Importeer IOTA profiel en claim staking beloning",
         "createAlias": "Create alias",
@@ -1306,7 +1323,6 @@
         "searchForRewards": "Search for rewards",
         "claimRewards": "Claim beloningen",
         "rerunClaimProcess": "Opnieuw uitvoeren claim proces",
-        "finishProfileSetupWithProtocol": "Voltooi {network} profiel instellen",
         "addPublicNote": "Openbare notitie toevoegen",
         "backup": "Backup",
         "mint": "Mint",
@@ -1334,7 +1350,8 @@
         "changeNode": "Change node",
         "stopVoting": "Stop voting",
         "revote": "Revote",
-        "skipAndKeep": "Skip and keep old password"
+        "skipAndKeep": "Skip and keep old password",
+        "addChain": "Add chain"
     },
     "general": {
         "recipient": "Ontvanger",
@@ -1408,7 +1425,7 @@
         "and": "and",
         "receiveFunds": "Fondsen ontvangen",
         "address": "Adres",
-        "myAddress": "Mijn Adres",
+        "myAddress": "My address",
         "myNetworkAddress": "Mijn {networkName} adres",
         "shareAddress": "Een adres delen",
         "yourAddress": "Jouw adres",
@@ -1600,7 +1617,9 @@
         "statistics": "Statistics",
         "username": "Username",
         "jwt": "JSON web token",
-        "internalTransaction": "Internal transaction"
+        "internalTransaction": "Internal transaction",
+        "coinType": "Coin type",
+        "custom": "Custom"
     },
     "filters": {
         "title": "Filters",
@@ -1912,7 +1931,8 @@
             "pluginNotAvailable": "De \"{nodePlugin}\" plugin is niet beschikbaar op de huidige node.",
             "unabledToConnect": "Unable to connect to the node",
             "differentNetwork": "The node is located on a different network",
-            "duplicateNodes": "Unable to add duplicate node"
+            "duplicateNodes": "Unable to add duplicate node",
+            "noCoinType": "No coin type specified"
         },
         "network": {
             "mismatch": "De netwerk-ID voor deze node is \"{networkId}\", welke niet overeenkomt met het huidige netwerk.",
@@ -1927,6 +1947,7 @@
             "invalid": "Het back-up bestand is niet herkend.",
             "destination": "De back-up bestemming was niet geldig.",
             "mnemonic": "Het mnemonic is niet geldig.",
+            "migrationRequired": "Stronghold migration is required.",
             "seedTooShort": "De seed moet 81 tekens lang zijn, het {length, plural, one {is er nu 1} other {zijn er nu #}}",
             "seedCharacters": "De seed mag alleen de tekens A-Z of 9 bevatten",
             "phraseWordCount": "Er zouden 24 woorden in uw herstelzin moeten zitten, op dit moment {length, plural, one {is er slechts 1} other {zijn er slechts #}}.",
@@ -2273,6 +2294,12 @@
                 "Confirmed": "alias created",
                 "Failed": "Failed to create alias"
             }
+        },
+        "networkHealth": {
+            "down": "Down",
+            "degraded": "Degraded",
+            "operational": "Operational",
+            "disconnected": "Disconnected"
         },
         "locked": "locked",
         "smartContract": "smart contract"

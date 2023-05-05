@@ -27,42 +27,30 @@
                     "title": "Vælg netværk",
                     "body": "Angiv protokollen til profilen.",
                     "iota": {
-                        "mainnet": {
-                            "title": "Mainnet",
-                            "body": "IOTA Mainnet"
-                        },
-                        "devnet": {
-                            "title": "Devnet",
-                            "body": "IOTA-udviklernetværk"
-                        },
-                        "private-net": {
-                            "title": "Privat netværk",
-                            "body": "Understøttelse af tilpassede netværk med aktive TIP'er"
-                        }
+                        "title": "IOTA",
+                        "body": "IOTA Mainnet"
                     },
                     "shimmer": {
-                        "mainnet": {
-                            "title": "Shimmer",
-                            "body": "Staging-netværk til IOTA"
-                        },
-                        "devnet": {
-                            "title": "Testnet",
-                            "body": "Offentligt betanetværk til Shimmer"
-                        },
-                        "private-net": {
-                            "title": "Privat netværk",
-                            "body": "Understøttelse af tilpassede netværk med TIP-udkast"
-                        }
+                        "title": "Shimmer",
+                        "body": "Staging network for IOTA"
+                    },
+                    "testnet": {
+                        "title": "Testnet",
+                        "body": "Public beta network for Shimmer"
+                    },
+                    "custom": {
+                        "title": "Custom network",
+                        "body": "Support for custom networks and/or nodes"
                     }
                 },
                 "setupCustomNetwork": {
-                    "title": "Opret forbindelse til et privat netværk",
-                    "body": "Udfyld formularen med node-oplysningerne og opret forbindelse til et privat netværk."
+                    "title": "Connect to a custom network or node",
+                    "body": "Fill the form with the node information and connect to a custom network or node."
                 }
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Opsæt {network, select, IOTA {en} Shimmer {en} other {en}} {network}-profil",
+                    "title": "Opsæt {network, select, IOTA {en} Shimmer {et} Testnet {et} other {en}} {network}-profil",
                     "body": "Vælg den passende metode til opsætning af {network}-profilen."
                 },
                 "setupNew": {
@@ -78,7 +66,7 @@
                     }
                 },
                 "setupRecovered": {
-                    "title": "Recover {network} profile",
+                    "title": "Gendan {network}-profil",
                     "body": "Haves en eksisterende mnemonic- eller Stronghold-sikkerhedskopifil, kan den importeres hér.",
                     "importMnemonic": "Benyt gendannelsessætning",
                     "importMnemonicDescription": "Angiv den 24-ords mnemonic-sætning",
@@ -175,7 +163,8 @@
                 "success": {
                     "title": "Shimmer indløst",
                     "body": "Shimmer-tokenerne er nu indløst.",
-                    "totalRewards": "Belønninger i alt"
+                    "totalRewards": "Belønninger i alt",
+                    "successfullyFound": "Lykkedes at finde {amount}"
                 }
             },
             "congratulations": {
@@ -426,17 +415,13 @@
                 "title": "Om",
                 "description": ""
             },
-            "createDeveloperProfile": {
-                "title": "Create Developer Profile",
-                "description": ""
-            },
-            "createNormalProfile": {
-                "title": "Create Normal Profile",
-                "description": ""
-            },
             "reportAnIssue": {
                 "title": "Rapporter et problem",
                 "description": "Rapporter en fejl til udviklerne. Tjek igennem for at sikre, at den ikke allerede er blevet rapporteret"
+            },
+            "developerToggle": {
+                "title": "Developer Mode",
+                "description": "Switch developer mode on to enable more features in experimental state"
             }
         },
         "login": {
@@ -501,8 +486,36 @@
             },
             "drawers": {
                 "networkConfig": {
+                    "addChain": {
+                        "title": "Tilføj kæde"
+                    },
+                    "chain": {
+                        "chainId": "Kæde-ID",
+                        "aliasAddress": "Aliasadresse",
+                        "iscpEndpoint": "ISCP-slutpunkt",
+                        "explorerEndpoint": "Explorerslutpunkt (valgfrit)",
+                        "errors": {
+                            "cannotBeEmpty": "Navn er obligatorisk",
+                            "nameTooLong": "Navn for langt",
+                            "aliasAddressWrongFormat": "Skal være enten i hex- eller Bech32-format",
+                            "aliasAddressAlreadyInUse": "Aliasadresse findes allerede",
+                            "invalidUrl": "Ugyldig URL"
+                        }
+                    },
+                    "chainDepositAddress": {
+                        "title": "Kædeindbetalingsadresse"
+                    },
+                    "chainInformation": {
+                        "title": "Kædeinformation"
+                    },
                     "connectedChains": {
                         "title": "Forbundne kæder"
+                    },
+                    "editChain": {
+                        "title": "Redigér kæde"
+                    },
+                    "removeChain": {
+                        "title": "Fjern kæde"
                     }
                 }
             }
@@ -1183,18 +1196,22 @@
         "importSeed": "Importer et eksisterende seed",
         "restoreWallet": {
             "iota": "Migrate or restore a wallet",
-            "shimmer": "Restore Shimmer profile"
+            "shimmer": "Restore Shimmer profile",
+            "testnet": "Restore Testnet profile",
+            "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
             "iota": "Migrate to Chrysalis or restore an existing wallet",
-            "shimmer": "Restore an existing Shimmer profile"
+            "shimmer": "Restore an existing Shimmer profile",
+            "testnet": "Restore an existing Testnet profile",
+            "custom": "Restore an existing Custom Network profile"
         },
         "refreshNftMedia": {
             "title": "Opdatér NFT-medier",
             "description": "Slet og gendownload alle NFT-medier for denne konto?"
         },
-        "createWallet": "Create a new {network} profile",
-        "createWalletDescription": "Opret en ny profil, der kører på {network, select, iota {Chrysalis} shimmer {Shimmer} other {Ukendt}}",
+        "createWallet": "Opret en ny {network}-profil",
+        "createWalletDescription": "Opret en ny profil, der kører på {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Tilpasset netværk} other {Unknown}}",
         "claimShimmer": "Claim Shimmer staking rewards",
         "claimShimmerDescription": "Importér IOTA-profilen og indløs staking-belønninger",
         "createAlias": "Create alias",
@@ -1306,7 +1323,6 @@
         "searchForRewards": "Søg efter belønninger",
         "claimRewards": "Claim rewards",
         "rerunClaimProcess": "Rerun claim process",
-        "finishProfileSetupWithProtocol": "Finish {network} profile setup",
         "addPublicNote": "Add public note",
         "backup": "Backup",
         "mint": "Mint",
@@ -1334,7 +1350,8 @@
         "changeNode": "Skift node",
         "stopVoting": "Stop voting",
         "revote": "Stem igen",
-        "skipAndKeep": "Overspring og behold gammel adgangskode"
+        "skipAndKeep": "Overspring og behold gammel adgangskode",
+        "addChain": "Tilføj kæde"
     },
     "general": {
         "recipient": "Recipient",
@@ -1408,7 +1425,7 @@
         "and": "og",
         "receiveFunds": "Receive funds",
         "address": "Address",
-        "myAddress": "Min Adresse",
+        "myAddress": "Min adresse",
         "myNetworkAddress": "My {networkName} address",
         "shareAddress": "Del en adresse",
         "yourAddress": "Din adresse",
@@ -1600,7 +1617,9 @@
         "statistics": "Statistics",
         "username": "Username",
         "jwt": "JSON web token",
-        "internalTransaction": "Intern transaktion"
+        "internalTransaction": "Intern transaktion",
+        "coinType": "Mønttyper",
+        "custom": "Tilpasset"
     },
     "filters": {
         "title": "Filtre",
@@ -1912,7 +1931,8 @@
             "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node.",
             "unabledToConnect": "Unable to connect to the node",
             "differentNetwork": "The node is located on a different network",
-            "duplicateNodes": "Unable to add duplicate node"
+            "duplicateNodes": "Unable to add duplicate node",
+            "noCoinType": "Ingen mønttype angivet"
         },
         "network": {
             "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
@@ -1927,6 +1947,7 @@
             "invalid": "Sikkerhedskopifilen blev ikke genkendt.",
             "destination": "Backup-destinationen var ikke gyldig.",
             "mnemonic": "Gendannelsesordene var ikke gyldige.",
+            "migrationRequired": "Stronghold migration is required.",
             "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "Seedet må kun indeholder tegn A-Z eller 9",
             "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
@@ -2273,6 +2294,12 @@
                 "Confirmed": "alias created",
                 "Failed": "Failed to create alias"
             }
+        },
+        "networkHealth": {
+            "down": "Ned",
+            "degraded": "Forringet",
+            "operational": "I drift",
+            "disconnected": "Afbrudt"
         },
         "locked": "låst",
         "smartContract": "smart contract"
