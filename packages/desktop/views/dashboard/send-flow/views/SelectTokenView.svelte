@@ -88,9 +88,7 @@
                 <AssetTile
                     {asset}
                     onClick={() => (selectedAssetId = asset.id)}
-                    classes="border-2 border-solid {selectedAssetId === asset.id
-                        ? 'border-blue-500 dark:border-gray-500'
-                        : 'border-transparent'}"
+                    selected={selectedAssetId === asset.id}
                 />
             {/each}
         </div>

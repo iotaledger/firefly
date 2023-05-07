@@ -1,6 +1,6 @@
 <script lang="ts">
     import { formatTokenAmountBestMatch, IAsset } from '@core/wallet'
-    import { AssetIcon, ClickableTile, Text, FontWeight, TextType } from 'shared/components'
+    import { AssetIcon, ClickableTile, Text, FontWeight, TextType } from '@ui'
     import { truncateString } from '@core/utils'
     import { formatCurrency } from '@core/i18n/utils'
     import { getMarketAmountFromAssetValue } from '@core/market/utils/getMarketAmountFromAssetValue'
@@ -9,12 +9,18 @@
     export let asset: IAsset
     export let onClick: () => unknown
     export let squashed = false
+    export let selected = false
+    export let classes = ''
 
     $: marketPrice = getMarketPriceForAsset(asset)
     $: marketBalance = getMarketAmountFromAssetValue(asset?.balance?.total, asset)
 </script>
 
-<ClickableTile {onClick} {...$$restProps}>
+<ClickableTile
+    {onClick}
+    {...$$restProps}
+    classes="border-2 border-solid {selected ? 'border-blue-500 dark:border-gray-500' : 'border-transparent'} {classes}"
+>
     <div class="w-full flex flex-row justify-between items-center">
         <div class="flex flex-row items-center text-left space-x-4">
             <AssetIcon small={squashed} {asset} />
