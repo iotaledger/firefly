@@ -7,6 +7,7 @@ import { UpdateStrongholdRoute } from '../enums'
 import { Subrouter } from '../subrouters/subrouter'
 import { FireflyEvent } from '../types'
 import { Router } from '../router'
+import { showAppNotification } from '@lib/notifications'
 
 export const updateStrongholdRoute = writable<UpdateStrongholdRoute>(null)
 export const updateStrongholdRouter = writable<UpdateStrongholdRouter>(null)
@@ -30,9 +31,13 @@ export class UpdateStrongholdRouter extends Subrouter<UpdateStrongholdRoute> {
                     nextRoute = UpdateStrongholdRoute.ChangePassword
                     break
                 } catch (err) {
-                    console.error(err)
                     if (err?.message?.match(STRONGHOLD_DECRYPTION_ERROR)) {
                         strongholdPassword.set(undefined)
+                    } else {
+                        showAppNotification({
+                            type: 'error',
+                            message: err?.message ?? err?.error ?? err,
+                        })
                     }
                     return
                 }
