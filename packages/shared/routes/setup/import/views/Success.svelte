@@ -14,10 +14,6 @@
     function handleContinueClick(): void {
         dispatch('next')
     }
-
-    function handleBackClick(): void {
-        dispatch('previous')
-    }
 </script>
 
 <OnboardingLayout allowBack={false}>

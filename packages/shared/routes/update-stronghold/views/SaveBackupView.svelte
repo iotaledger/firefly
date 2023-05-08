@@ -10,7 +10,6 @@
 
     export let parentRouter: Router<unknown>
     export let isRecovery: boolean
-    export let hasChangedPassword: boolean
 
     let busy = false
 
@@ -52,7 +51,7 @@
             />
         </div>
         <div slot="leftpane__action">
-            <Button classes="w-full" secondary disabled={busy || hasChangedPassword} onClick={onSkipBackupClick}>
+            <Button classes="w-full" secondary disabled={busy} onClick={onSkipBackupClick}>
                 {localize('actions.skipWalletBackup')}
             </Button>
             <Button classes="w-full mt-6" disabled={busy} onClick={onSaveBackupClick}>
