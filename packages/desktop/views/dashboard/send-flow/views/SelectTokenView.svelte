@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { AssetTile, FontWeight, Icon, TextInput } from '@ui'
+    import { AssetTile, IconInput } from '@ui'
     import { localize } from '@core/i18n'
     import { marketCoinPrices } from '@core/market'
     import {
@@ -74,14 +74,8 @@
     leftButton={{ text: localize('actions.cancel'), onClick: onCancelClick }}
     rightButton={{ text: localize('actions.continue'), onClick: onContinueClick, disabled: !selectedAssetId }}
 >
-    <TextInput
-        bind:value={searchValue}
-        placeholder={localize('general.search')}
-        fontWeight={FontWeight.medium}
-        color="gray-500"
-    >
-        <Icon slot="left" icon={IconEnum.Search} classes="text-gray-500 dark:text-white mr-2" />
-    </TextInput>
+    <IconInput bind:value={searchValue} icon={IconEnum.Search} placeholder={localize('general.search')} />
+
     <div class="-mr-3">
         <div class="asset-list w-full flex flex-col -mr-1 pr-1.5 gap-2">
             {#each assetList as asset}
