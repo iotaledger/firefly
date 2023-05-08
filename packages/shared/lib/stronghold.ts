@@ -11,6 +11,7 @@ import { Platform } from '@lib/platform'
 import { strongholdPassword } from '@lib/app'
 import { WALLET } from '@lib/shell/walletApi'
 import { initAppSettings } from '@lib/appSettings'
+import { Profile, ProfileType } from '@lib/typings/profile'
 
 export const STRONGHOLD_VERSION = 3
 
@@ -56,6 +57,12 @@ export const checkStronghold = (callback: any): void => {
             })
         },
     })
+}
+
+export function isStrongholdOutdated(profile: Profile): boolean {
+    const isSoftwareProfile = profile?.type === ProfileType.Software
+    const mustUpdateStronghold = (profile?.strongholdVersion ?? -1) < STRONGHOLD_VERSION
+    return isSoftwareProfile && mustUpdateStronghold
 }
 
 export async function migrateStrongholdForLogin(): Promise<void> {

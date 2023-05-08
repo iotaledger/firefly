@@ -30,6 +30,7 @@ export class UpdateStrongholdRouter extends Subrouter<UpdateStrongholdRoute> {
                     nextRoute = UpdateStrongholdRoute.ChangePassword
                     break
                 } catch (err) {
+                    console.error(err)
                     if (err?.message?.match(STRONGHOLD_DECRYPTION_ERROR)) {
                         strongholdPassword.set(undefined)
                     }

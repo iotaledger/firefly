@@ -5,9 +5,9 @@
     import { openPopup, popupState } from 'shared/lib/popup'
     import { profiles, setActiveProfile } from 'shared/lib/profile'
     import { ProfileType } from 'shared/lib/typings/profile'
+    import { isStrongholdOutdated } from '@lib/stronghold'
     import { localize } from '@core/i18n'
     import { isAwareOfCrashReporting } from '@lib/appSettings'
-    import { isStrongholdOutdated } from '@lib/wallet'
 
     const dispatch = createEventDispatcher()
 

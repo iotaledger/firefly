@@ -14,7 +14,7 @@
     on:mouseenter={toggleTooltip}
     on:mouseleave={toggleTooltip}
 >
-    <WarningBadge />
+    <WarningBadge width="32" height="32" />
 </stronghold-warning-badge>
 
 {#if showStrongholdTooltip}

@@ -1,13 +1,13 @@
 import { get, writable } from 'svelte/store'
 
 import { activeProfile, migrateProfile } from '@lib/profile'
+import { isStrongholdOutdated } from '@lib/stronghold'
 
 import { appRouter } from '../app-router'
 import { LoginRoute } from '../enums'
 import { Subrouter } from './subrouter'
 import { FireflyEvent } from '../types'
 import { UpdateStrongholdRouter, updateStrongholdRouter } from './update-stronghold-router'
-import { isStrongholdOutdated } from '@lib/wallet'
 
 export const loginRoute = writable<LoginRoute>(null)
 
