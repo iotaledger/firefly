@@ -6,6 +6,9 @@
     },
     // files included below pass the strict check
     "files": [
+        "./lib/core/network/constants/seconds-per-milestone.constant.ts",
+        "./lib/core/network/constants/seconds-per-milestone.constant.ts",
+        "./lib/core/network/constants/seconds-per-milestone.constant.ts",
         "./lib/core/utils/constants/bech32-address-length.constant.ts",
         "./lib/core/utils/constants/date-format.constant.ts",
         "./lib/core/utils/constants/default-application-json-request-options.constant.ts",
@@ -19,7 +22,11 @@
         "./lib/core/utils/constants/time.constants.ts",
         "./lib/core/utils/enums/exchange-rate.enum.ts",
         "./lib/core/utils/enums/iota-unit.enum.ts",
+        "./lib/core/utils/enums/past-time-unit.enum.ts",
+        "./lib/core/utils/interfaces/date-difference.interface.ts",
         "./lib/core/utils/types/exchange-rates.type.ts",
-        "./lib/core/utils/types/iota-unit-map.type.ts"
+        "./lib/core/utils/types/iota-unit-map.type.ts",
+        "./lib/core/utils/date.ts",
+        "./lib/core/utils/ui.ts"
     ]
 }
