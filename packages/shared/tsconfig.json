@@ -4,10 +4,10 @@
     "compilerOptions": {
         "strict": true
     },
-    // files included below pass the strict check
+    // files included below should pass the strict check
+    // check by switching "files" to "include" and running `yarn check-strict:shared` in the root directory
+    // but rename back to "files" after checking so that the compiler keeps strictly linting all shared files
     "files": [
-        "./lib/core/network/constants/seconds-per-milestone.constant.ts",
-        "./lib/core/network/constants/seconds-per-milestone.constant.ts",
         "./lib/core/network/constants/seconds-per-milestone.constant.ts",
         "./lib/core/utils/constants/bech32-address-length.constant.ts",
         "./lib/core/utils/constants/date-format.constant.ts",
