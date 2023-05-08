@@ -41,7 +41,7 @@ const onboardingFeaturesForIota: IOnboardingFeaturesForNetwork = {
 }
 
 const onboardingFeaturesForShimmer: IOnboardingFeaturesForNetwork = {
-    enabled: true,
+    enabled: false,
     newProfile: {
         enabled: true,
         softwareProfile: {
