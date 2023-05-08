@@ -25,20 +25,10 @@
     async function onContinueClick(): Promise<void> {
         busy = true
 
-        if (isRecovery) {
-            $strongholdPassword = password
-            await $updateStrongholdRouter.next({ isRecovery })
-            if (!$strongholdPassword) {
-                error = localize('error.password.incorrect')
-            }
-        } else {
-            // TODO: Remove later once real logic is hooked in
-            if (password === 'test') {
-                strongholdPassword.set(password)
-                await $updateStrongholdRouter.next()
-            } else {
-                error = 'Must use "test" password'
-            }
+        $strongholdPassword = password
+        await $updateStrongholdRouter.next({ isRecovery })
+        if (!$strongholdPassword) {
+            error = localize('error.password.incorrect')
         }
 
         busy = false
@@ -67,7 +57,7 @@
             />
         </div>
         <div slot="leftpane__action">
-            <Button classes="w-full" disabled={busy} onClick={onContinueClick}>
+            <Button classes="w-full" disabled={busy || !password} onClick={onContinueClick}>
                 {#if busy}
                     <Spinner {busy} message={localize('actions.updating')} classes="justify-center" />
                 {:else}

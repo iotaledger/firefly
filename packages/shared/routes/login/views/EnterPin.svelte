@@ -169,7 +169,7 @@
         <div class="w-96 flex flex-col flex-wrap items-center mb-20">
             <Profile
                 name={$activeProfile?.name}
-                showStrongholdWarning={isStrongholdOutdated($activeProfile)}
+                showStrongholdWarning={() => isStrongholdOutdated($activeProfile)}
                 bgColor="blue"
             />
             {#if isStrongholdOutdated($activeProfile)}
