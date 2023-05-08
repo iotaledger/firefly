@@ -3,8 +3,8 @@ import { get, writable } from 'svelte/store'
 import { mnemonic, strongholdPassword } from '@lib/app'
 import { getMigrationData } from '@lib/migration'
 import { Platform } from '@lib/platform'
-import { newProfile } from '@lib/profile'
 import { ImportType } from '@lib/typings/profile'
+import { importFilePath } from '@lib/stronghold'
 import { asyncRestoreBackup } from '@lib/wallet'
 
 import { appRouter } from '../app-router'
@@ -12,6 +12,8 @@ import { ImportRoute } from '../enums'
 import { Subrouter } from './subrouter'
 import { FireflyEvent } from '../types'
 import { UpdateStrongholdRouter, updateStrongholdRouter } from './update-stronghold-router'
+import { getErrorMessage } from '@lib/shell/walletErrors'
+import { ErrorType } from '@lib/typings/events'
 
 export const importRoute = writable<ImportRoute>(null)
 
@@ -70,7 +72,20 @@ export class ImportRouter extends Subrouter<ImportRoute> {
 
                 this.importFile = file
                 this.importFilePath = filePath
-                nextRoute = ImportRoute.BackupPassword
+                importFilePath.set(filePath)
+
+                try {
+                    await asyncRestoreBackup(this.importFilePath, '')
+                    nextRoute = ImportRoute.BackupPassword
+                } catch (err) {
+                    if (err?.error?.match(getErrorMessage(ErrorType.OutdatedStrongholdVersion))) {
+                        nextRoute = ImportRoute.UpdateStronghold
+                        updateStrongholdRouter.set(new UpdateStrongholdRouter(this))
+                    } else {
+                        nextRoute = ImportRoute.BackupPassword
+                    }
+                }
+
                 break
             }
             case ImportRoute.BackupPassword: {
@@ -89,16 +104,8 @@ export class ImportRouter extends Subrouter<ImportRoute> {
 
                         nextRoute = ImportRoute.Success
                     } else {
-                        /* eslint-disable no-constant-condition */
-                        if (true) {
-                            nextRoute = ImportRoute.UpdateStronghold
-                            updateStrongholdRouter.set(new UpdateStrongholdRouter(this))
-                        } else {
-                            await asyncRestoreBackup(this.importFilePath, password)
-                            strongholdPassword.set(undefined)
-                            get(newProfile).lastStrongholdBackupTime = new Date()
-                            nextRoute = ImportRoute.Success
-                        }
+                        await asyncRestoreBackup(this.importFilePath, password)
+                        nextRoute = ImportRoute.Success
                     }
                 } finally {
                     this.isGettingMigrationData.set(false)
@@ -106,10 +113,7 @@ export class ImportRouter extends Subrouter<ImportRoute> {
                 break
             }
             case ImportRoute.UpdateStronghold:
-                // TODO: https://github.com/iotaledger/firefly/issues/6141
-                await asyncRestoreBackup(this.importFilePath, get(strongholdPassword))
                 strongholdPassword.set(undefined)
-                get(newProfile).lastStrongholdBackupTime = new Date()
                 get(appRouter).next({ importType: get(this.importType) })
                 return
             case ImportRoute.LedgerImport: {

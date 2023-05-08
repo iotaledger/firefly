@@ -995,6 +995,7 @@
         "chooseFile": "Choose a File",
         "dropHere": "Drop your file here",
         "syncAll": "Sync all",
+        "importing": "Importing",
         "export": "Export",
         "exporting": "Exporting",
         "exportNewStronghold": "Export a new Stronghold",
@@ -1073,7 +1074,8 @@
         "changePassword": "Change password",
         "skipAndKeepPassword": "Skip and keep old password",
         "skipWalletBackup": "Skip wallet backup",
-        "saveStrongholdBackupLocally": "Save Stronghold backup locally"
+        "saveStrongholdBackupLocally": "Save Stronghold backup locally",
+        "updating": "Updating"
     },
     "general": {
         "password": "Password",
@@ -1408,7 +1410,10 @@
             "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
         },
         "invalidDate": "INVALID DATE",
-        "invalidTime": "INVALID TIME"
+        "invalidTime": "INVALID TIME",
+        "stronghold": {
+            "outdated": "Your Stronghold version is outdated."
+        }
     },
     "warning": {
         "node": {

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Animation, Button, OnboardingLayout, Password, Text } from 'shared/components'
+    import { Animation, Button, OnboardingLayout, Password, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { updateStrongholdRouter } from '@core/router'
     import { Router } from '@core/router/router'
@@ -10,7 +10,7 @@
     export let parentRouter: Router<unknown>
     export let isRecovery: boolean
 
-    const busy = false
+    let busy = false
     let password: string = ''
     let error: string = ''
 
@@ -22,23 +22,31 @@
         parentRouter.previous()
     }
 
-    function onContinueClick(): void {
+    async function onContinueClick(): Promise<void> {
+        busy = true
+
         if (isRecovery) {
-            $updateStrongholdRouter.next()
+            $strongholdPassword = password
+            await $updateStrongholdRouter.next({ isRecovery })
+            if (!$strongholdPassword) {
+                error = localize('error.password.incorrect')
+            }
         } else {
             // TODO: Remove later once real logic is hooked in
             if (password === 'test') {
                 strongholdPassword.set(password)
-                $updateStrongholdRouter.next()
+                await $updateStrongholdRouter.next()
             } else {
                 error = 'Must use "test" password'
             }
         }
+
+        busy = false
     }
 </script>
 
 <update-stronghold-view>
-    <OnboardingLayout {onBackClick}>
+    <OnboardingLayout allowBack={false}>
         <div slot="title">
             <Text type="h2" classes="mb-5">{localize('views.login.updateStronghold.title')}</Text>
         </div>
@@ -47,22 +55,24 @@
                 {localize('views.login.updateStronghold.body')}
                 {localize(`views.login.updateStronghold.${isRecovery ? 'continue' : 'providePassword'}`)}
             </Text>
-            {#if !isRecovery}
-                <Password
-                    classes="mb-6"
-                    {error}
-                    bind:value={password}
-                    locale={localize}
-                    showRevealToggle
-                    autofocus
-                    disabled={busy}
-                    submitHandler={onContinueClick}
-                />
-            {/if}
+            <Password
+                classes="mb-6"
+                {error}
+                bind:value={password}
+                locale={localize}
+                showRevealToggle
+                autofocus
+                disabled={busy}
+                submitHandler={() => void onContinueClick()}
+            />
         </div>
         <div slot="leftpane__action">
-            <Button classes="w-full" onClick={onContinueClick}>
-                {localize('actions.continue')}
+            <Button classes="w-full" disabled={busy} onClick={onContinueClick}>
+                {#if busy}
+                    <Spinner {busy} message={localize('actions.updating')} classes="justify-center" />
+                {:else}
+                    {localize('actions.continue')}
+                {/if}
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-orange dark:bg-gray-900">

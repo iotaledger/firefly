@@ -3,13 +3,13 @@ import { _ } from 'svelte-i18n'
 import { getTrimmedLength, persistent, validateFilenameChars } from 'shared/lib/helpers'
 import { ledgerSimulator } from 'shared/lib/ledger'
 import { generateRandomId, migrateObjects } from 'shared/lib/utils'
+import { STRONGHOLD_VERSION } from 'shared/lib/stronghold'
 import {
     asyncDeleteStorage,
     destroyActor,
     getProfileDataPath,
     getWalletDataPath,
     selectedAccountIdStore,
-    STRONGHOLD_VERSION,
 } from 'shared/lib/wallet'
 import { Platform } from './platform'
 import { AccountColor } from './typings/color'

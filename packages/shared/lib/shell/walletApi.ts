@@ -17,6 +17,7 @@ import { Platform } from 'shared/lib/platform'
 import { NodePlugin } from '../typings/node'
 import { IWalletApi } from 'shared/lib/typings/walletApi'
 import { IWalletActor } from '../typings/walletActor'
+import { STRONGHOLD_VERSION_ERROR } from '@lib/stronghold'
 
 export const WALLET: IWalletActor = window['__WALLET__']
 
@@ -250,6 +251,9 @@ const handleError = (
     const _getError = () => {
         if (error.includes('Snapshot is too short to be valid') || error.includes('is this really a snapshot file?')) {
             return 'error.backup.invalid'
+        }
+        if (error.includes(STRONGHOLD_VERSION_ERROR)) {
+            return getErrorMessage(ErrorType.OutdatedStrongholdVersion)
         }
         if (error.includes('try another password')) {
             return 'error.password.incorrect'

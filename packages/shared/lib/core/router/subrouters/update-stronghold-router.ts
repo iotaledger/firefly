@@ -1,6 +1,7 @@
 import { get, writable } from 'svelte/store'
 
 import { strongholdPassword } from '@lib/app'
+import { migrateStrongholdForRecovery, STRONGHOLD_DECRYPTION_ERROR } from '@lib/stronghold'
 
 import { UpdateStrongholdRoute } from '../enums'
 import { Subrouter } from '../subrouters/subrouter'
@@ -18,13 +19,27 @@ export class UpdateStrongholdRouter extends Subrouter<UpdateStrongholdRoute> {
         this._parentRouter = parentRouter
     }
 
-    next(_?: FireflyEvent): void {
+    async next(event?: FireflyEvent): Promise<void> {
         let nextRoute: UpdateStrongholdRoute
         const currentRoute = get(updateStrongholdRoute)
         switch (currentRoute) {
             case UpdateStrongholdRoute.UpdateStronghold:
-                nextRoute = UpdateStrongholdRoute.ChangePassword
-                break
+                if (event?.isRecovery) {
+                    try {
+                        await migrateStrongholdForRecovery()
+                        nextRoute = UpdateStrongholdRoute.ChangePassword
+                        break
+                    } catch (err) {
+                        if (err?.message?.match(STRONGHOLD_DECRYPTION_ERROR)) {
+                            strongholdPassword.set(undefined)
+                        }
+                        return
+                    }
+                } else {
+                    // TODO: https://github.com/iotaledger/firefly/issues/6731
+                    nextRoute = UpdateStrongholdRoute.ChangePassword
+                    break
+                }
             case UpdateStrongholdRoute.ChangePassword:
                 nextRoute = UpdateStrongholdRoute.SaveBackup
                 break
