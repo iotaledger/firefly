@@ -1,45 +1,44 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-
 import { isRecentDate, isValidDate } from './date'
 
-export function debounce(callback: () => void, wait = 500): (...args: unknown[]) => void {
-    let _timeout
-    return (...args) => {
-        /* eslint-disable @typescript-eslint/no-this-alias */
-        const context = this
-        clearTimeout(_timeout)
-        _timeout = setTimeout(() => callback.apply(context, args), wait)
+import type { Action } from 'svelte/action'
+
+/**
+ * Debounce function to limit the rate at which a function can fire;
+ * prevents repeated calls to callback until wait timeout finishes
+ * @param callback The function to be debounced
+ * @param wait The time in milliseconds to wait before calling the function
+ * source: https://amitd.co/code/typescript/debounce
+ */
+export function debounce<T extends (...args: any[]) => ReturnType<T>>(
+    callback: T,
+    wait = 500
+): (...args: Parameters<T>) => void {
+    let timer: ReturnType<typeof setTimeout>
+    return (...args: Parameters<T>) => {
+        clearTimeout(timer)
+        timer = setTimeout(() => callback(...args), wait)
     }
 }
 
 /**
  * Dispatch event on click outside of node
  * source: https://svelte.dev/repl/0ace7a508bd843b798ae599940a91783?version=3.16.7
+ * source: https://github.com/vnphanquang/svelte-put/tree/main/packages/actions/clickoutside
  */
-export function clickOutside(node: any, options?: { includeScroll }): { destroy } {
-    const onClick: (event: MouseEvent) => void = (event) => {
-        if (node && !node.contains(event.target) && !event.defaultPrevented) {
-            node.dispatchEvent(new CustomEvent('clickOutside', node))
+export const clickOutside: Action = function (node) {
+    const onClick: (event: Event) => void = (event) => {
+        if (node && !node.contains(event.target as Node) && !event.defaultPrevented) {
+            node.dispatchEvent(new CustomEvent('clickOutside', { detail: event }))
         }
     }
 
-    const handleScroll: () => void = () => {
-        node.dispatchEvent(new CustomEvent('clickOutside', node))
-    }
-
-    document.addEventListener('mousedown', onClick, true)
-
-    if (options?.includeScroll) {
-        document.addEventListener('scroll', handleScroll, true)
-    }
+    document.addEventListener('click', onClick, true)
 
     return {
         destroy(): void {
             document.removeEventListener('click', onClick, true)
-            if (options?.includeScroll) {
-                document.removeEventListener('scroll', handleScroll, true)
-            }
         },
     }
 }
@@ -59,9 +58,8 @@ export function isBright(color: string): boolean {
             const yiq = (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000
             return yiq >= 186
         }
-    } else {
-        return false
     }
+    return false
 }
 
 /**
@@ -76,7 +74,10 @@ export function getBackupWarningColor(lastBackupDate: Date | null): string {
     if (!isValidDate(lastBackupDate)) {
         return 'red'
     }
-    const { lessThanAMonth, lessThanThreeMonths } = isRecentDate(lastBackupDate)
+    const { lessThanAMonth, lessThanThreeMonths } = isRecentDate(lastBackupDate) ?? {
+        lessThanAMonth: false,
+        lessThanThreeMonths: false,
+    }
 
     return lessThanAMonth ? 'blue' : lessThanThreeMonths ? 'yellow' : 'orange'
 }
@@ -108,7 +109,7 @@ export function slidable(node: HTMLElement, use: boolean = true): { destroy: () 
         node.addEventListener('touchend', handleTouchend, { capture: true, passive: true })
     }
 
-    function handleTouchmove(event: TouchEvent) {
+    function handleTouchmove(event: TouchEvent): void {
         positionQueue.x.push(event.touches[0].pageX)
         positionQueue.y.push(event.touches[0].pageY)
         timeQueue.push(window.performance.now())
@@ -136,7 +137,7 @@ export function slidable(node: HTMLElement, use: boolean = true): { destroy: () 
         }
     }
 
-    function handleTouchend() {
+    function handleTouchend(): void {
         node.dispatchEvent(new CustomEvent('slideEnd'))
 
         const elapsed = window.performance.now()
@@ -153,7 +154,7 @@ export function slidable(node: HTMLElement, use: boolean = true): { destroy: () 
     }
 
     return {
-        destroy() {
+        destroy(): void {
             node.removeEventListener('touchstart', handleTouchstart, { capture: true })
         },
     }
@@ -165,8 +166,6 @@ export function slidable(node: HTMLElement, use: boolean = true): { destroy: () 
  */
 export function hex2rgb(hex: string): string {
     hex = hex.length >= 7 ? hex : '#FFFFFF'
-    return hex
-        ?.match(/\w\w/g)
-        ?.map((x) => parseInt(x, 16))
-        ?.join(',')
+    const regexMatch = hex.match(/\w\w/g) ?? ['FF', 'FF', 'FF']
+    return regexMatch.map((x) => parseInt(x, 16)).join(',')
 }
