@@ -1,11 +1,11 @@
 <script lang="ts">
     import zxcvbn from 'zxcvbn'
-    import { Animation, Button, OnboardingLayout, Password, Text, TextHint } from 'shared/components'
+    import { Animation, Button, OnboardingLayout, Password, Spinner, Text, TextHint } from 'shared/components'
     import { localize } from '@core/i18n'
     import { updateStrongholdRouter } from '@core/router'
     import { showAppNotification } from '@lib/notifications'
     import passwordInfo from '@lib/password'
-    import { MAX_PASSWORD_LENGTH } from '@lib/wallet'
+    import { asyncChangeStrongholdPassword, MAX_PASSWORD_LENGTH } from '@lib/wallet'
     import { strongholdPassword } from '@lib/app'
 
     let password = ''
@@ -17,15 +17,11 @@
     $: passwordStrength = zxcvbn(password)
     $: password, confirmPassword, ((error = ''), (errorConfirm = ''))
 
-    function onBackClick(): void {
-        $updateStrongholdRouter.previous()
-    }
-
     function onSkipAndKeepPasswordClick(): void {
         $updateStrongholdRouter.next()
     }
 
-    function onChangePasswordClick(): void {
+    async function onChangePasswordClick(): Promise<void> {
         error = ''
         errorConfirm = ''
 
@@ -43,10 +39,12 @@
             error = localize(errKey)
         } else if (password !== confirmPassword) {
             errorConfirm = localize('error.password.doNotMatch')
+        } else if (password === $strongholdPassword) {
+            errorConfirm = localize('error.password.notNew')
         } else {
             try {
                 busy = true
-                // TODO: https://github.com/iotaledger/firefly/issues/6141
+                await asyncChangeStrongholdPassword($strongholdPassword, password)
                 strongholdPassword.set(password)
                 $updateStrongholdRouter.next()
             } catch (err) {
@@ -62,7 +60,7 @@
 </script>
 
 <change-password-view>
-    <OnboardingLayout {onBackClick}>
+    <OnboardingLayout allowBack={false}>
         <div slot="title">
             <Text type="h2" classes="mb-5">{localize('views.login.changePassword.title')}</Text>
         </div>
@@ -97,11 +95,15 @@
             />
         </div>
         <div slot="leftpane__action">
-            <Button classes="w-full" secondary onClick={onSkipAndKeepPasswordClick}>
+            <Button classes="w-full" secondary disabled={busy} onClick={onSkipAndKeepPasswordClick}>
                 {localize('actions.skipAndKeepPassword')}
             </Button>
-            <Button classes="w-full mt-6" onClick={onChangePasswordClick}>
-                {localize('actions.changePassword')}
+            <Button classes="w-full mt-6" disabled={busy || !password} onClick={onChangePasswordClick}>
+                {#if busy}
+                    <Spinner busy message={localize('actions.changingPassword')} classes="justify-center" />
+                {:else}
+                    {localize('actions.changePassword')}
+                {/if}
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-orange dark:bg-gray-900">

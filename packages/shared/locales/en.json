@@ -1072,6 +1072,7 @@
         "okIUnderstand": "OK, I understand",
         "readMore": "Read more",
         "changePassword": "Change password",
+        "changingPassword": "Changing password",
         "skipAndKeepPassword": "Skip and keep old password",
         "skipWalletBackup": "Skip wallet backup",
         "saveStrongholdBackupLocally": "Save Stronghold backup locally",
@@ -1306,7 +1307,8 @@
             "similar": "This is similar to a common password.",
             "word": "A single word is easy to guess.",
             "incorrect": "Your password is incorrect.",
-            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}.",
+            "notNew": "You must use a new password."
         },
         "pincode": {
             "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
