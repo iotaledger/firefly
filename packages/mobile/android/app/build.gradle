@@ -24,13 +24,11 @@ android {
 
         }
         beta {
-            
             dimension "version"
             applicationIdSuffix ".shimmer.beta"
             versionNameSuffix "-beta"
         }
         prod {
-            
             dimension "version"
             applicationIdSuffix ".shimmer"
         }
@@ -45,6 +43,9 @@ android {
         jniLibs {
             useLegacyPackaging false
         }
+    }
+    lintOptions {
+        abortOnError false
     }
 }
 

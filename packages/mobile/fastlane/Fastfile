@@ -1,0 +1,30 @@
+# Fastfile
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Build IPA"
+  lane :build do
+    Dir.chdir("../ios/App") do
+      gym(
+        scheme: "App",
+        export_method: "app-store",
+        workspace: "../ios/App/App.xcworkspace",
+      )
+    end
+  end
+end
+
+platform :android do
+  desc "Build AAB"
+  lane :build do
+    Dir.chdir("../android") do
+      gradle(
+        task: 'bundle',
+        flavor: ENV['STAGE'],
+        build_type: 'Release',
+        project_dir: 'android/'
+      )
+    end
+  end
+end

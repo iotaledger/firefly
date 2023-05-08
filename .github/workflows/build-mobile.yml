@@ -1,0 +1,114 @@
+name: Build Mobile
+
+on:
+  workflow_dispatch:
+    inputs:
+      os:
+        description: 'Operating System (iOS or Android)'
+        required: true
+        type: choice
+        options:
+        - ios
+        - android
+      stage:
+        description: 'Stage (alpha, beta, or prod)'
+        required: true
+        type: choice
+        options:
+        - alpha
+        - beta
+        - prod
+
+jobs:
+  build:
+    runs-on: ${{ (github.event.inputs.os == 'ios') && 'macos-13' || 'ubuntu-22.04' }}
+    env:
+      VERSION: ${{ needs.setup.outputs.version }}
+      STAGE: ${{ needs.setup.outputs.stage || github.event.inputs.stage }}
+      NODE_ENV: development
+      PLATFORM: mobile
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          profile: minimal
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2.2'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18
+
+      - name: Setup JDK 11
+        if: github.event.inputs.os == 'android'
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Install gem bundler
+        working-directory: packages/mobile
+        run: |
+          gem install bundler:2.4.12
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+
+      - name: Install OS dependencies
+        run: |
+          if [ "${{ runner.os }}" = "macOS" ]; then
+            brew install imagemagick
+          elif [ "${{ runner.os }}" = "Linux" ]; then
+            sudo apt-get update
+            sudo apt-get install -y android-sdk imagemagick
+          fi
+
+      - name: Install Node dependencies in root
+        run: yarn --network-timeout 1000000
+
+      - name: Install Node dependencies in mobile
+        working-directory: packages/mobile
+        run: yarn --network-timeout 1000000
+
+      - name: Generate assets
+        working-directory: packages/mobile
+        run: bash capacitor/assets/assetgen.sh ${STAGE}.png
+
+      - name: Webpack build and Capacitor sync
+        working-directory: packages/mobile
+        run: |
+          yarn run webpack --progress --stats
+          yarn run cap sync ${{ github.event.inputs.os }}
+        env:
+          NODE_ENV: production
+
+      - name: Build IPA
+        if: github.event.inputs.os == 'ios'
+        working-directory: packages/mobile
+        run: bundle exec fastlane ios build
+
+      - name: Build AAB
+        if: github.event.inputs.os == 'android'
+        working-directory: packages/mobile
+        run: bundle exec fastlane android build
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: firefly-mobile-${{ github.event.inputs.os }}-${{ github.event.inputs.stage }}
+          path: |
+            packages/mobile/ios/App/App.xcarchive/Products/Applications/*.ipa
+            packages/mobile/android/app/build/outputs/bundle/*/*.aab
