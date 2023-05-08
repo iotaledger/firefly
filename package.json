@@ -29,6 +29,7 @@
         "check-types": "yarn check-types:shared && yarn check-types:desktop",
         "check-types:desktop": "cd packages/desktop && tsc --pretty --noEmit",
         "check-types:shared": "cd packages/shared && tsc --project tsconfig.base.json --pretty --noEmit",
+        "check-svelte": "svelte-check",
         "docs:start": "cd docs/ && retype watch",
         "format": "yarn format:write",
         "format:check": "prettier -c \"**/*.{ts,js,json,scss,css,svelte}\"",
