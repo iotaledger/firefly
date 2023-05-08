@@ -8,7 +8,7 @@
         IAsset,
         newTransactionDetails,
         NewTransactionType,
-        setNewTransactionDetails,
+        updateNewTransactionDetails,
         TokenStandard,
     } from '@core/wallet'
     import { closePopup } from '@auxiliary/popup'
@@ -19,7 +19,7 @@
 
     const transactionDetails = get(newTransactionDetails)
 
-    let selectedAssetId: string =
+    let selectedAssetId: string | undefined =
         transactionDetails?.type === NewTransactionType.TokenTransfer ? transactionDetails.assetId : undefined
     let assetList: IAsset[]
     let searchValue: string = ''
@@ -57,12 +57,9 @@
     }
 
     function onContinueClick(): void {
-        setNewTransactionDetails({
+        updateNewTransactionDetails({
             type: NewTransactionType.TokenTransfer,
             assetId: selectedAssetId,
-            rawAmount: undefined,
-            unit: undefined,
-            disableAssetSelection: undefined,
         })
 
         $sendFlowRouter.next()
