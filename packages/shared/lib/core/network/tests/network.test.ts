@@ -23,7 +23,7 @@ describe('File: network.ts', () => {
         [NetworkId.Iota]: [
             'https://chrysalis-nodes.iota.org',
             'https://chrysalis-nodes.iota.cafe',
-            'https://mainnet-node.tanglebay.com',
+            'https://iota-node.tanglebay.com',
         ],
         [NetworkId.Shimmer]: ['https://api.shimmer.network'],
         [NetworkId.Testnet]: ['https://api.testnet.shimmer.network'],
