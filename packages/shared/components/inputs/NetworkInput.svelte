@@ -5,7 +5,7 @@
     import { isIscpChain } from '@core/network'
     import type { ChainConfiguration } from '@core/network'
 
-    export let layer2ChainAddress: string | undefined = undefined
+    export let iscpChainAddress: string | undefined = undefined
     export let showLayer2: boolean = false
 
     const readonlyAttribute = $activeProfile?.isDeveloperProfile ? {} : { readonly: true }
@@ -20,9 +20,9 @@
 
     $: networkOptions = getNetworkOptions(showLayer2)
 
-    let selected: IOption = networkOptions?.find((option) => option.value === layer2ChainAddress) ?? layer1Network
+    let selected: IOption = networkOptions?.find((option) => option.value === iscpChainAddress) ?? layer1Network
 
-    $: layer2ChainAddress = selected?.value
+    $: iscpChainAddress = selected?.value
 
     function getNetworkOptions(showLayer2: boolean): IOption[] {
         let layer2Networks: IOption[] = []
@@ -42,8 +42,8 @@
 
     export function validate(): Promise<void> {
         try {
-            if (layer2ChainAddress !== undefined) {
-                validateBech32Address(getNetworkHrp(), layer2ChainAddress)
+            if (iscpChainAddress !== undefined) {
+                validateBech32Address(getNetworkHrp(), iscpChainAddress)
             }
             return Promise.resolve()
         } catch (err) {

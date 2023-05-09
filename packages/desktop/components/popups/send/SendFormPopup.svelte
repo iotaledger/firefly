@@ -47,7 +47,7 @@
     let metadataInput: OptionalInput
     let tagInput: OptionalInput
 
-    let layer2ChainAddress = layer2Parameters?.networkAddress
+    let iscpChainAddress = layer2Parameters?.networkAddress
 
     let nftId: string
     let rawAmount: string
@@ -67,12 +67,12 @@
         transactionDetails.type === NewTransactionType.TokenTransfer ? SendForm.SendToken : SendForm.SendNft
 
     $: hasSpendableNfts = $ownedNfts.some((nft) => nft.isSpendable)
-    $: isLayer2 = !!layer2ChainAddress
+    $: isLayer2 = !!iscpChainAddress
     $: isSendTokenTab = activeTab === SendForm.SendToken
 
     function setTransactionDetails(): void {
         layer2Parameters = isLayer2
-            ? { networkAddress: layer2ChainAddress, senderAddress: $selectedAccount.depositAddress }
+            ? { networkAddress: iscpChainAddress, senderAddress: $selectedAccount.depositAddress }
             : null
 
         if (isSendTokenTab) {
@@ -181,11 +181,7 @@
         {:else}
             <NftInput bind:this={nftInput} bind:nftId readonly={disableAssetSelection} />
         {/if}
-        <NetworkInput
-            bind:this={networkInput}
-            bind:layer2ChainAddress
-            showLayer2={features?.network?.layer2?.enabled}
-        />
+        <NetworkInput bind:this={networkInput} bind:iscpChainAddress showLayer2={features?.network?.layer2?.enabled} />
         <RecipientInput bind:this={recipientInput} bind:recipient {isLayer2} />
         <optional-inputs class="flex flex-row flex-wrap gap-4">
             <OptionalInput
