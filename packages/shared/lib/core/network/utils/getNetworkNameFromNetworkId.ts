@@ -8,5 +8,7 @@ export function getNetworkNameFromNetworkId(networkId: NetworkId): string {
             return 'Shimmer'
         case NetworkId.Testnet:
             return 'Testnet'
+        default:
+            return 'Unknown Network'
     }
 }

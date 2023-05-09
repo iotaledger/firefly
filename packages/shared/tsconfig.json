@@ -7,6 +7,17 @@
     // files included below should have no ts-errors
     "files": [
         "./lib/core/network/constants/seconds-per-milestone.constant.ts",
+        "./lib/core/network/utils/buildChainFromNetwork.ts",
+        "./lib/core/network/utils/buildPersistedNetworkFromNodeInfoResponse.ts",
+        "./lib/core/network/utils/checkNetworkId.ts",
+        "./lib/core/network/utils/checkNodeUrlValidity.ts",
+        "./lib/core/network/utils/doesNodeHavePlugin.ts",
+        "./lib/core/network/utils/getDefaultClientOptions.ts",
+        "./lib/core/network/utils/getDefaultPersistedNetwork.ts",
+        "./lib/core/network/utils/getNetworkIdFromNetworkName.ts",
+        "./lib/core/network/utils/getOfficialExplorerUrl.ts",
+        "./lib/core/network/utils/getOfficialNodes.ts",
+        "./lib/core/network/utils/isOfficialNetwork.ts",
         "./lib/core/utils/constants/bech32-address-length.constant.ts",
         "./lib/core/utils/constants/date-format.constant.ts",
         "./lib/core/utils/constants/default-application-json-request-options.constant.ts",
@@ -23,6 +34,8 @@
         "./lib/core/utils/enums/past-time-unit.enum.ts",
         "./lib/core/utils/interfaces/date-difference.interface.ts",
         "./lib/core/utils/types/exchange-rates.type.ts",
-        "./lib/core/utils/types/iota-unit-map.type.ts"
+        "./lib/core/utils/types/iota-unit-map.type.ts",
+        "./lib/core/utils/date.ts",
+        "./lib/core/utils/ui.ts"
     ]
 }
