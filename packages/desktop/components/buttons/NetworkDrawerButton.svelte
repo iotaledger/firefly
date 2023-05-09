@@ -5,9 +5,9 @@
     import { DrawerId, closeDrawer, drawerState, openDrawer } from '@desktop/auxilary/drawer'
     import { FontWeight, Icon, NetworkIcon, Text } from '@ui'
 
-    $: isAnyChainDisconnected = Object.values($chainStatuses ?? [])
-        ?.map(({ health }) => health)
-        ?.some((status) => status === NetworkHealth.Disconnected)
+    $: isAnyChainDisconnected = Object.values($chainStatuses ?? [])?.some(
+        ({ health }) => health === NetworkHealth.Disconnected
+    )
     $: displayWarning =
         isAnyChainDisconnected ||
         $networkStatus?.health === NetworkHealth.Degraded ||
