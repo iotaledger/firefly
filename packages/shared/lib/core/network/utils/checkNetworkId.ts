@@ -1,6 +1,6 @@
 export function checkNetworkId(
     id: string | undefined,
-    clientOptionsNetworkId: string,
+    clientOptionsNetworkId: string | undefined,
     isDeveloperProfile: boolean
 ): { locale: string; values?: { [key: string]: string | number } } | undefined {
     if (!id) {

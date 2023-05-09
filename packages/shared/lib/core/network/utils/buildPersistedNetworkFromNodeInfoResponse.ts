@@ -10,10 +10,11 @@ export function buildPersistedNetworkFromNodeInfoResponse(
 ): IPersistedNetwork {
     const networkName = nodeInfoResponse?.nodeInfo?.protocol?.networkName
     const networkId = getNetworkIdFromNetworkName(networkName)
+    const name = networkId === NetworkId.Custom ? networkName : DEFAULT_NETWORK_METADATA?.[networkId]?.name
     const _coinType = coinType ?? COIN_TYPE[networkId] ?? 1
     return {
         id: networkId,
-        name: networkId === NetworkId.Custom ? networkName : DEFAULT_NETWORK_METADATA?.[networkId]?.name,
+        name: name ?? 'Unknown Network',
         coinType: _coinType,
         protocol: nodeInfoResponse?.nodeInfo?.protocol,
         baseToken: { standard: TokenStandard.BaseToken, ...nodeInfoResponse?.nodeInfo?.baseToken },

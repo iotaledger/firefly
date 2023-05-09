@@ -1,6 +1,6 @@
 import { NetworkId } from '../enums'
 
-export function getNetworkNameFromNetworkId(networkId: NetworkId): string {
+export function getNetworkNameFromNetworkId(networkId: NetworkId): string | undefined {
     switch (networkId) {
         case NetworkId.Iota:
             return 'IOTA'
