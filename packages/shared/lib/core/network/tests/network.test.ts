@@ -1,7 +1,6 @@
-import { DEFAULT_NETWORK_METADATA } from '../constants'
 import { NetworkId } from '../enums'
-import { IAuth, IClientOptions, INode } from '../interfaces'
-import { checkNodeUrlValidity, cleanAuth, getDefaultClientOptions, getOfficialNodes, isOfficialNetwork } from '../utils'
+import { IClientOptions, INode } from '../interfaces'
+import { checkNodeUrlValidity, getDefaultClientOptions, getOfficialNodes, isOfficialNetwork } from '../utils'
 
 describe('File: network.ts', () => {
     function _buildNode(url: string | undefined): INode | undefined {
@@ -15,47 +14,26 @@ describe('File: network.ts', () => {
         }
     }
 
-    function _buildNodes(networkId: NetworkId) {
-        return EXPECTED_NODE_URLS?.[networkId]?.map((url) => _buildNode(url)) ?? []
+    function _buildNodes(networkId: NetworkId): INode[] {
+        const nodes = EXPECTED_NODE_URLS?.[networkId]?.map((url) => _buildNode(url))
+        return nodes?.filter((node) => node !== undefined) as INode[]
     }
 
     const EXPECTED_NODE_URLS: Readonly<{ [key in NetworkId]?: string[] }> = {
         [NetworkId.Iota]: [
             'https://chrysalis-nodes.iota.org',
             'https://chrysalis-nodes.iota.cafe',
-            'https://mainnet-node.tanglebay.com',
+            'https://iota-node.tanglebay.com',
         ],
         [NetworkId.Shimmer]: ['https://api.shimmer.network'],
         [NetworkId.Testnet]: ['https://api.testnet.shimmer.network'],
     }
 
-    const EXPECTED_CLIENT_OPTIONS: Readonly<{ [key in NetworkId]?: IClientOptions }> = {
-        [NetworkId.Iota]: {
-            network: DEFAULT_NETWORK_METADATA[NetworkId.Iota]?.id,
-            nodes: _buildNodes(NetworkId.Iota) as INode[],
-            localPow: true,
-        },
-        [NetworkId.Shimmer]: {
-            network: DEFAULT_NETWORK_METADATA[NetworkId.Shimmer]?.id,
-            nodes: _buildNodes(NetworkId.Shimmer) as INode[],
-            localPow: true,
-        },
-    }
-
-    const EXPECTED_NODES: Readonly<{ [key in NetworkId]: (INode | undefined)[] }> = {
+    const EXPECTED_NODES: Readonly<{ [key in NetworkId]: INode[] }> = {
         [NetworkId.Iota]: _buildNodes(NetworkId.Iota),
         [NetworkId.Shimmer]: _buildNodes(NetworkId.Shimmer),
         [NetworkId.Testnet]: _buildNodes(NetworkId.Testnet),
         [NetworkId.Custom]: _buildNodes(NetworkId.Custom),
-    }
-
-    const EMPTY_NODE_AUTH = { basicAuthNamePwd: ['', ''] }
-    const FAKE_NODE_AUTH = <IAuth>{
-        basicAuthNamePwd: ['theUser', 'mY-rEaLlY-sEcUrE-pAsSwOrD'],
-    }
-    const FAKE_NODE_AUTH_JWT = <IAuth>{
-        jwt: 'SOME JWT',
-        basicAuthNamePwd: ['theUser', 'mY-rEaLlY-sEcUrE-pAsSwOrD'],
     }
 
     describe('Function: getClientOptions', () => {
@@ -82,7 +60,7 @@ describe('File: network.ts', () => {
             })
         })
         it('should return no official nodes given an invalid network type', () => {
-            expect(getOfficialNodes(undefined)).toEqual([])
+            expect(getOfficialNodes('undefined' as NetworkId)).toEqual([])
         })
     })
 
@@ -97,21 +75,7 @@ describe('File: network.ts', () => {
             })
         })
         it('should return false given an invalid network type', () => {
-            expect(isOfficialNetwork(undefined)).toBe(false)
-        })
-    })
-
-    describe('Function: cleanAuth', () => {
-        it('should return an empty basic auth configuration given nothing', () => {
-            expect(cleanAuth(<IAuth>{})).toEqual(EMPTY_NODE_AUTH)
-            expect(cleanAuth(undefined)).toEqual(EMPTY_NODE_AUTH)
-        })
-        it('should return a basic auth configuration if given that', () => {
-            expect(cleanAuth(FAKE_NODE_AUTH)).toEqual(FAKE_NODE_AUTH)
-        })
-        it('should return the entire auth configuration if the JWT exists', () => {
-            expect(cleanAuth(<IAuth>{ jwt: 'SOME JWT' })).toEqual(<IAuth>{ jwt: 'SOME JWT' })
-            expect(cleanAuth(FAKE_NODE_AUTH_JWT)).toEqual(FAKE_NODE_AUTH_JWT)
+            expect(isOfficialNetwork('undefined' as NetworkId)).toBe(false)
         })
     })
 
@@ -122,12 +86,12 @@ describe('File: network.ts', () => {
             Duplicate = 'error.node.duplicate',
         }
 
-        const _check = (url: string, allowInsecure: boolean = false): string | undefined =>
-            checkNodeUrlValidity(EXPECTED_NODES?.[NetworkId.Iota], url, allowInsecure)
+        const _check = (url: string | undefined, allowInsecure: boolean = false): string | undefined =>
+            checkNodeUrlValidity(EXPECTED_NODES?.[NetworkId.Iota], url ?? '', allowInsecure)
 
         it('should return undefined for valid node URLs', () => {
             expect(_check('https://mainnet.tanglebay.com')).toBeUndefined()
-            expect(_check(EXPECTED_NODE_URLS?.[NetworkId.Shimmer][0])).toBeUndefined()
+            expect(_check(EXPECTED_NODE_URLS?.[NetworkId.Shimmer]?.[0] ?? '')).toBeUndefined()
         })
         it('should catch generally invalid URLs', () => {
             expect(_check('htps://mainnet.tanglebay.com')).toEqual(UrlError.Invalid)
@@ -136,10 +100,10 @@ describe('File: network.ts', () => {
             expect(_check('https://mainnet.tanglebay.com')).toBeUndefined()
         })
         it('should catch duplicate node URLs', () => {
-            expect(_check(EXPECTED_NODE_URLS[NetworkId.Iota][0])).toEqual(UrlError.Duplicate)
-            expect(_check(EXPECTED_NODE_URLS[NetworkId.Iota][1])).toEqual(UrlError.Duplicate)
+            expect(_check(EXPECTED_NODE_URLS?.[NetworkId.Iota]?.[0])).toEqual(UrlError.Duplicate)
+            expect(_check(EXPECTED_NODE_URLS?.[NetworkId.Iota]?.[1])).toEqual(UrlError.Duplicate)
 
-            expect(_check(EXPECTED_NODE_URLS[NetworkId.Shimmer][0])).toBeUndefined()
+            expect(_check(EXPECTED_NODE_URLS[NetworkId.Shimmer]?.[0])).toBeUndefined()
         })
         it('may or may NOT catch insecure URLs', () => {
             expect(_check('http://mainnet.tanglebay.com')).toEqual(UrlError.Insecure)
