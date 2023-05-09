@@ -21,10 +21,10 @@
 
     export let node: INode = structuredClone(EMPTY_NODE)
     export let networkId: NetworkId
-    export let coinType: string
+    export let coinType: string | undefined
     export let isBusy = false
     export let formError = ''
-    export let currentClientOptions: IClientOptions = undefined
+    export let currentClientOptions: IClientOptions | undefined = undefined
     export let isDeveloperProfile: boolean = false
     export let onSubmit: () => void = () => {}
     export let showNetworkFields: boolean = false
@@ -73,7 +73,7 @@
         networkId = selected.value
     }
 
-    export async function validate(options: NodeValidationOptions): Promise<INode> {
+    export async function validate(options: NodeValidationOptions): Promise<void> {
         if (networkId === NetworkId.Custom && !coinType) {
             formError = localize('error.node.noCoinType')
             return Promise.reject({ type: 'validationError', error: formError })
@@ -85,7 +85,7 @@
             return Promise.reject({ type: 'validationError', error: formError })
         }
 
-        let nodeInfoResponse: INodeInfoResponse
+        let nodeInfoResponse: INodeInfoResponse | null = null
         if (options.checkNodeInfo) {
             try {
                 nodeInfoResponse = await getNodeInfo(node.url)
@@ -97,7 +97,7 @@
 
         if (options.checkSameNetwork) {
             const isInSameNetwork =
-                get(nodeInfo).protocol.networkName === nodeInfoResponse.nodeInfo.protocol.networkName
+                get(nodeInfo).protocol.networkName === nodeInfoResponse?.nodeInfo.protocol.networkName
             if (!isInSameNetwork) {
                 formError = localize('error.node.differentNetwork')
                 return Promise.reject({ type: 'validationError', error: formError })
@@ -105,7 +105,7 @@
         }
 
         if (options.uniqueCheck) {
-            if (get(activeProfile)?.clientOptions?.nodes.some((_node) => _node.url === node.url)) {
+            if (get(activeProfile)?.clientOptions?.nodes?.some((_node) => _node.url === node.url)) {
                 formError = localize('error.node.duplicateNodes')
                 return Promise.reject({ type: 'validationError', error: formError })
             }

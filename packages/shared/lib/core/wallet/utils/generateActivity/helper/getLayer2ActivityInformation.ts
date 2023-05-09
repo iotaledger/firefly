@@ -1,19 +1,14 @@
-import {
-    Layer2Metadata,
-    parseLayer2Metadata,
-    getDestinationNetworkFromAddress,
-    DestinationNetwork,
-} from '@core/layer-2'
+import { Layer2Metadata, parseLayer2Metadata, getDestinationNetworkFromAddress } from '@core/layer-2'
 import { SenderInfo } from '../../../types'
 
 export function getLayer2ActivityInformation(
     metadata: string,
     sendingInfo: SenderInfo
 ): {
-    parsedLayer2Metadata: Layer2Metadata
+    parsedLayer2Metadata: Layer2Metadata | null
     destinationNetwork: string
 } {
-    let parsedLayer2Metadata: Layer2Metadata
+    let parsedLayer2Metadata: Layer2Metadata | null
     let destinationNetwork: string
     try {
         parsedLayer2Metadata = parseLayer2Metadata(metadata)
@@ -22,7 +17,7 @@ export function getLayer2ActivityInformation(
         )
     } catch (_err) {
         parsedLayer2Metadata = null
-        destinationNetwork = DestinationNetwork.Shimmer
+        destinationNetwork = getDestinationNetworkFromAddress(undefined)
     }
     return {
         parsedLayer2Metadata,
