@@ -6,7 +6,7 @@ import { GAS_BUDGET } from '@core/layer-2/constants'
 import { getOutputOptions } from '../utils'
 import { ReturnStrategy, TokenStandard, VerifiedStatus } from '../enums'
 import { IAsset, IPersistedAsset } from '../interfaces'
-import { NewTransactionType } from '../stores'
+import { NewTransactionType, getAssetById } from '../stores'
 import { NewTransactionDetails } from '../types'
 
 const PERSISTED_ASSET_SHIMMER: IPersistedAsset = {
@@ -40,7 +40,7 @@ const surplus = '50000'
 
 const baseTransaction: NewTransactionDetails = {
     type: NewTransactionType.TokenTransfer,
-    assetId: CoinType[CoinType.Shimmer],
+    asset: PERSISTED_ASSET_SHIMMER,
     recipient: {
         type: 'address',
         address: recipientAddress,
@@ -110,7 +110,7 @@ describe('File: getOutputOptions.ts', () => {
         newTransactionDetails = {
             ...baseTransaction,
             expirationDate,
-            assetId: nativeTokenAsset.id,
+            asset: nativeTokenAsset,
         }
         const output = getOutputOptions(newTransactionDetails)
 
@@ -158,7 +158,7 @@ describe('File: getOutputOptions.ts', () => {
         newTransactionDetails = {
             ...baseTransaction,
             expirationDate,
-            assetId: nativeTokenAsset.id,
+            asset: nativeTokenAsset,
             layer2Parameters,
         }
         const output = getOutputOptions(newTransactionDetails)
@@ -237,7 +237,7 @@ describe('File: getOutputOptions.ts', () => {
         newTransactionDetails = {
             ...baseTransaction,
             expirationDate,
-            assetId: nativeTokenAsset.id,
+            asset: nativeTokenAsset,
             surplus,
         }
         const output = getOutputOptions(newTransactionDetails)
