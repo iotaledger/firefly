@@ -34,7 +34,7 @@ describe('File: ui.ts', () => {
         })
     })
     describe('Function: clickOutside', () => {
-        it.todo('needs a UI testing library to test')
+        // it.todo('needs a UI testing library to test')
     })
     describe('Function: isBright', () => {
         it('should return true if color is bright', () => {
@@ -62,7 +62,7 @@ describe('File: ui.ts', () => {
         })
     })
     describe('Function: slidable', () => {
-        it.todo('needs a UI testing library to test')
+        // it.todo('needs a UI testing library to test')
     })
     describe('Function: hex2rgb', () => {
         it('should convert hex to rgb', () => {
