@@ -1,4 +1,5 @@
 import { isRecentDate, isValidDate } from './date'
+import type { UiEventFunction } from './types'
 
 import type { Action } from 'svelte/action'
 
@@ -9,12 +10,9 @@ import type { Action } from 'svelte/action'
  * @param wait The time in milliseconds to wait before calling the function
  * source: https://amitd.co/code/typescript/debounce
  */
-export function debounce<T extends (...args: unknown[]) => ReturnType<T>>(
-    callback: T,
-    wait = 500
-): (...args: Parameters<T>) => void {
+export function debounce<T extends UiEventFunction>(callback: T, wait = 500): UiEventFunction {
     let timer: ReturnType<typeof setTimeout>
-    return (...args: Parameters<T>) => {
+    return (...args: unknown[]) => {
         clearTimeout(timer)
         timer = setTimeout(() => callback(...args), wait)
     }
