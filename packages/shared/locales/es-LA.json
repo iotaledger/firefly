@@ -27,42 +27,30 @@
                     "title": "Choose network",
                     "body": "Set the network for your profile.",
                     "iota": {
-                        "mainnet": {
-                            "title": "Mainnet",
-                            "body": "IOTA Mainnet"
-                        },
-                        "devnet": {
-                            "title": "Devnet",
-                            "body": "Developer network for IOTA"
-                        },
-                        "private-net": {
-                            "title": "Private net",
-                            "body": "Support for custom networks with active TIPs"
-                        }
+                        "title": "IOTA",
+                        "body": "IOTA Mainnet"
                     },
                     "shimmer": {
-                        "mainnet": {
-                            "title": "Shimmer",
-                            "body": "Staging network for IOTA"
-                        },
-                        "devnet": {
-                            "title": "Testnet",
-                            "body": "Public beta network for Shimmer"
-                        },
-                        "private-net": {
-                            "title": "Private net",
-                            "body": "Support for custom networks with draft TIPs"
-                        }
+                        "title": "Shimmer",
+                        "body": "Staging network for IOTA"
+                    },
+                    "testnet": {
+                        "title": "Testnet",
+                        "body": "Public beta network for Shimmer"
+                    },
+                    "custom": {
+                        "title": "Custom network",
+                        "body": "Support for custom networks and/or nodes"
                     }
                 },
                 "setupCustomNetwork": {
-                    "title": "Connect to a private network",
-                    "body": "Fill the form with the node information and connect to a private network."
+                    "title": "Connect to a custom network or node",
+                    "body": "Fill the form with the node information and connect to a custom network or node."
                 }
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Set up {network, select, IOTA {an} Shimmer {a} other {an}} {network} profile",
+                    "title": "Set up {network, select, IOTA {an} Shimmer {a} Testnet {a} other {a}} {network} profile",
                     "body": "Select the appropriate method to set up your {network} profile."
                 },
                 "setupNew": {
@@ -175,7 +163,8 @@
                 "success": {
                     "title": "Shimmer claimed",
                     "body": "You have successfully claimed your Shimmer tokens.",
-                    "totalRewards": "Total rewards"
+                    "totalRewards": "Total rewards",
+                    "successfullyFound": "Successfully found {amount}"
                 }
             },
             "congratulations": {
@@ -426,17 +415,13 @@
                 "title": "Acerca de",
                 "description": ""
             },
-            "createDeveloperProfile": {
-                "title": "Crear perfil de desarrollador",
-                "description": ""
-            },
-            "createNormalProfile": {
-                "title": "Crear perfil normal",
-                "description": ""
-            },
             "reportAnIssue": {
                 "title": "Informar de un problema",
                 "description": "Informa de un error a los desarrolladores. Comprueba que no haya sido reportado previamente"
+            },
+            "developerToggle": {
+                "title": "Developer Mode",
+                "description": "Switch developer mode on to enable more features in experimental state"
             }
         },
         "login": {
@@ -501,8 +486,36 @@
             },
             "drawers": {
                 "networkConfig": {
+                    "addChain": {
+                        "title": "Add chain"
+                    },
+                    "chain": {
+                        "chainId": "Chain ID",
+                        "aliasAddress": "Alias Address",
+                        "iscpEndpoint": "ISCP Endpoint",
+                        "explorerEndpoint": "Explorer Endpoint (optional)",
+                        "errors": {
+                            "cannotBeEmpty": "Name cannot be empty",
+                            "nameTooLong": "Name is too long",
+                            "aliasAddressWrongFormat": "Must be in either hex or Bech32 format",
+                            "aliasAddressAlreadyInUse": "Alias address already in use",
+                            "invalidUrl": "Invalid URL"
+                        }
+                    },
+                    "chainDepositAddress": {
+                        "title": "Chain deposit address"
+                    },
+                    "chainInformation": {
+                        "title": "Chain information"
+                    },
                     "connectedChains": {
                         "title": "Connected chains"
+                    },
+                    "editChain": {
+                        "title": "Edit chain"
+                    },
+                    "removeChain": {
+                        "title": "Remove chain"
                     }
                 }
             }
@@ -1183,18 +1196,22 @@
         "importSeed": "Importar una semilla existente",
         "restoreWallet": {
             "iota": "Migrar o restaurar una billetera",
-            "shimmer": "Restaurar perfil de Shimmer"
+            "shimmer": "Restaurar perfil de Shimmer",
+            "testnet": "Restore Testnet profile",
+            "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
             "iota": "Migrar a Chrysalis o restaurar una billetera existente",
-            "shimmer": "Restaurar un perfil de Shimmer existente"
+            "shimmer": "Restaurar un perfil de Shimmer existente",
+            "testnet": "Restore an existing Testnet profile",
+            "custom": "Restore an existing Custom Network profile"
         },
         "refreshNftMedia": {
             "title": "Refresh NFT media",
             "description": "Do you want to delete and re-download all NFT media for this account?"
         },
-        "createWallet": "Crear un nuevo perfil de {network}",
-        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
+        "createWallet": "Create a new {network} profile",
+        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown}}",
         "claimShimmer": "Reclamar recompensas de staking de Shimmer",
         "claimShimmerDescription": "Import IOTA profile and claim staking rewards",
         "createAlias": "Create alias",
@@ -1306,7 +1323,6 @@
         "searchForRewards": "Search for rewards",
         "claimRewards": "Reclamar recompensas",
         "rerunClaimProcess": "Reejecutar proceso de reclamación",
-        "finishProfileSetupWithProtocol": "Finalizar la configuración del perfil de {network}",
         "addPublicNote": "Añadir nota pública",
         "backup": "Respaldo",
         "mint": "Mint",
@@ -1334,7 +1350,8 @@
         "changeNode": "Change node",
         "stopVoting": "Stop voting",
         "revote": "Revote",
-        "skipAndKeep": "Skip and keep old password"
+        "skipAndKeep": "Skip and keep old password",
+        "addChain": "Add chain"
     },
     "general": {
         "recipient": "Destinatario",
@@ -1408,7 +1425,7 @@
         "and": "and",
         "receiveFunds": "Recibir fondos",
         "address": "Dirección",
-        "myAddress": "Mi dirección",
+        "myAddress": "My address",
         "myNetworkAddress": "Mi dirección {networkName}",
         "shareAddress": "Compartir dirección",
         "yourAddress": "Su dirección",
@@ -1600,7 +1617,9 @@
         "statistics": "Statistics",
         "username": "Username",
         "jwt": "JSON web token",
-        "internalTransaction": "Internal transaction"
+        "internalTransaction": "Internal transaction",
+        "coinType": "Coin type",
+        "custom": "Custom"
     },
     "filters": {
         "title": "Filters",
@@ -1912,7 +1931,8 @@
             "pluginNotAvailable": "El complemento \"{nodePlugin}\" no está disponible en el nodo actual.",
             "unabledToConnect": "No se puede conectar al nodo",
             "differentNetwork": "El nodo se encuentra en una red diferente",
-            "duplicateNodes": "No se puede agregar un nodo duplicado"
+            "duplicateNodes": "No se puede agregar un nodo duplicado",
+            "noCoinType": "No coin type specified"
         },
         "network": {
             "mismatch": "El ID de red para este nodo es \"{networkId}\", el cual no coincide con la red actual.",
@@ -1927,6 +1947,7 @@
             "invalid": "El archivo de copia de seguridad no fue reconocido.",
             "destination": "El destino de la copia de seguridad no era válido.",
             "mnemonic": "El mnemotécnico no es válido.",
+            "migrationRequired": "Stronghold migration is required.",
             "seedTooShort": "La semilla debe tener 81 caracteres, ahora tiene {length, plural, one {# carácter} other {# caracteres}}",
             "seedCharacters": "La semilla sólo debe contener caracteres A-Z ó 9",
             "phraseWordCount": "Debe haber 24 palabras en tu frase de recuperación, ahora mismo tiene {length, plural, one {#} other {#}}.",
@@ -2273,6 +2294,12 @@
                 "Confirmed": "alias created",
                 "Failed": "Failed to create alias"
             }
+        },
+        "networkHealth": {
+            "down": "Down",
+            "degraded": "Degraded",
+            "operational": "Operational",
+            "disconnected": "Disconnected"
         },
         "locked": "locked",
         "smartContract": "smart contract"

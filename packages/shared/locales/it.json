@@ -3,8 +3,8 @@
         "onboarding": {
             "appSetup": {
                 "welcome": {
-                    "title": "Invia, Ricevi e Gestisci i tuoi token {network}",
-                    "body": "Firefly è il portafoglio ufficiale per {network}."
+                    "title": "Send, Receive & Manage your {network} tokens",
+                    "body": "Firefly is the official wallet software for {network}."
                 },
                 "legal": {
                     "title": "Politica sulla Privacy e Termini di Servizio",
@@ -27,43 +27,31 @@
                     "title": "Scegli la rete",
                     "body": "Imposta la rete per il tuo profilo.",
                     "iota": {
-                        "mainnet": {
-                            "title": "Rete Principale",
-                            "body": "Rete Principale di IOTA"
-                        },
-                        "devnet": {
-                            "title": "Devnet",
-                            "body": "Rete di sviluppo per IOTA"
-                        },
-                        "private-net": {
-                            "title": "Rete privata",
-                            "body": "Supporto per le reti personalizzate con TIP attivi"
-                        }
+                        "title": "IOTA",
+                        "body": "IOTA Mainnet"
                     },
                     "shimmer": {
-                        "mainnet": {
-                            "title": "Shimmer",
-                            "body": "Rete di prova per IOTA"
-                        },
-                        "devnet": {
-                            "title": "Rete di prova",
-                            "body": "Rete beta pubblica per Shimmer"
-                        },
-                        "private-net": {
-                            "title": "Rete privata",
-                            "body": "Supporto per le reti personalizzate con bozze di TIP"
-                        }
+                        "title": "Shimmer",
+                        "body": "Staging network for IOTA"
+                    },
+                    "testnet": {
+                        "title": "Testnet",
+                        "body": "Public beta network for Shimmer"
+                    },
+                    "custom": {
+                        "title": "Custom network",
+                        "body": "Support for custom networks and/or nodes"
                     }
                 },
                 "setupCustomNetwork": {
-                    "title": "Connetti a una rete privata",
-                    "body": "Compila il modulo con le informazioni del nodo e connettiti a una rete privata."
+                    "title": "Connect to a custom network or node",
+                    "body": "Fill the form with the node information and connect to a custom network or node."
                 }
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Configura {network, select, IOTA {un profilo di} Shimmer {un profilo di} other {un profilo di}} {network}",
-                    "body": "Seleziona il metodo appropriato per impostare il tuo profilo {network}."
+                    "title": "Set up {network, select, IOTA {an} Shimmer {a} Testnet {a} other {a}} {network} profile",
+                    "body": "Select the appropriate method to set up your {network} profile."
                 },
                 "setupNew": {
                     "title": "Crea un profilo",
@@ -78,7 +66,7 @@
                     }
                 },
                 "setupRecovered": {
-                    "title": "Recupera il profilo di {network}",
+                    "title": "Recover {network} profile",
                     "body": "Se hai un file di backup mnemonico o Stronghold esistente, puoi importarlo qui.",
                     "importMnemonic": "Usa la frase di recupero",
                     "importMnemonicDescription": "Inserisci la tua frase mnemonica di 24 parole",
@@ -92,7 +80,7 @@
                     "body": "Importa il tuo profilo di IOTA e rivendica le ricompense di staking del tuo Shimmer."
                 },
                 "enterName": {
-                    "title": "Crea il tuo profilo di {network}",
+                    "title": "Create your {network} profile",
                     "profileName": "Nome del profilo",
                     "body1": "Puoi creare più profili utente per organizzare i tuoi portafogli e migliorare la privacy.",
                     "body2": {
@@ -175,7 +163,8 @@
                 "success": {
                     "title": "Shimmer richiesti",
                     "body": "Hai richiesto con successo i tuoi gettoni Shimmer.",
-                    "totalRewards": "Ricompense totali"
+                    "totalRewards": "Ricompense totali",
+                    "successfullyFound": "Successfully found {amount}"
                 }
             },
             "congratulations": {
@@ -198,10 +187,10 @@
             "videoGuide": "Video guida di migrazione di Ledger"
         },
         "ledgerInstallationGuide": {
-            "title": "Hai installato l'app {network} sul tuo dispositivo Ledger?",
-            "body1": "Prima di procedere, devi usare Ledger Live per trovare e installare l'app di {network}.",
+            "title": "Have you installed the {network} app on your Ledger device?",
+            "body1": "Before you proceed, you must use Ledger Live to find and install the {network} app.",
             "body2": "Assicurati che il tuo firmware Ledger sia aggiornato. Tutte le app preinstallate dovrebbero essere aggiornate alle loro ultime versioni.",
-            "action": "Sì, ho installato l'app {network}"
+            "action": "Yes, I've installed the {network} app"
         },
         "importFromLedger": {
             "title": "Ripristina o Migra il tuo Ledger",
@@ -426,17 +415,13 @@
                 "title": "Informazioni",
                 "description": ""
             },
-            "createDeveloperProfile": {
-                "title": "Crea Profilo Sviluppatore",
-                "description": ""
-            },
-            "createNormalProfile": {
-                "title": "Crea Profilo Normale",
-                "description": ""
-            },
             "reportAnIssue": {
                 "title": "Segnala un problema",
                 "description": "Segnala un bug agli sviluppatori. Controlla per assicurarti che non sia già stato segnalato"
+            },
+            "developerToggle": {
+                "title": "Developer Mode",
+                "description": "Switch developer mode on to enable more features in experimental state"
             }
         },
         "login": {
@@ -501,8 +486,36 @@
             },
             "drawers": {
                 "networkConfig": {
+                    "addChain": {
+                        "title": "Aggiungi una chain"
+                    },
+                    "chain": {
+                        "chainId": "Chain ID",
+                        "aliasAddress": "Alias Address",
+                        "iscpEndpoint": "ISCP Endpoint",
+                        "explorerEndpoint": "Explorer Endpoint (optional)",
+                        "errors": {
+                            "cannotBeEmpty": "Name cannot be empty",
+                            "nameTooLong": "Name is too long",
+                            "aliasAddressWrongFormat": "Must be in either hex or Bech32 format",
+                            "aliasAddressAlreadyInUse": "Alias address already in use",
+                            "invalidUrl": "Invalid URL"
+                        }
+                    },
+                    "chainDepositAddress": {
+                        "title": "Indirizzo di deposito della chain"
+                    },
+                    "chainInformation": {
+                        "title": "Informazioni sulla chain"
+                    },
                     "connectedChains": {
                         "title": "Connected chains"
+                    },
+                    "editChain": {
+                        "title": "Modifica chain"
+                    },
+                    "removeChain": {
+                        "title": "Rimuovi chain"
                     }
                 }
             }
@@ -910,7 +923,7 @@
             "title": "Collega il tuo Ledger",
             "notConnected": "Collega il tuo dispositivo Ledger per continuare.",
             "locked": "Sblocca il tuo dispositivo Ledger per continuare.",
-            "appNotOpen": "Apri l'app Shimmer sul tuo dispositivo Ledger per continuare.",
+            "appNotOpen": "Open the Shimmer app on your Ledger device to continue.",
             "correctAppOpen": "Ledger collegato con successo, per favore continua."
         },
         "ledgerConfirmation": {
@@ -1183,18 +1196,22 @@
         "importSeed": "Importa un seed esistente",
         "restoreWallet": {
             "iota": "Migra o ripristina un wallet",
-            "shimmer": "Ripristina profilo Shimmer"
+            "shimmer": "Ripristina profilo Shimmer",
+            "testnet": "Restore Testnet profile",
+            "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
             "iota": "Migrare a Chrysalis o ripristinare un portafoglio esistente",
-            "shimmer": "Ripristina un profilo Shimmer esistente"
+            "shimmer": "Ripristina un profilo Shimmer esistente",
+            "testnet": "Restore an existing Testnet profile",
+            "custom": "Restore an existing Custom Network profile"
         },
         "refreshNftMedia": {
             "title": "Refresh NFT media",
             "description": "Do you want to delete and re-download all NFT media for this account?"
         },
-        "createWallet": "Crea un nuovo profilo {network}",
-        "createWalletDescription": "Crea un nuovo profilo su {network, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
+        "createWallet": "Create a new {network} profile",
+        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown}}",
         "claimShimmer": "Rivendica ricompense di staking Shimmer",
         "claimShimmerDescription": "Importa il tuo profilo di IOTA e richiedi le ricompense di staking del tuo Shimmer",
         "createAlias": "Crea alias",
@@ -1306,7 +1323,6 @@
         "searchForRewards": "Cerca le ricompense",
         "claimRewards": "Richiedi ricompense",
         "rerunClaimProcess": "Ripeti il processo di ricichiesta",
-        "finishProfileSetupWithProtocol": "Termina la configurazione del profilo {network}",
         "addPublicNote": "Aggiungi nota pubblica",
         "backup": "Backup",
         "mint": "Conia",
@@ -1334,7 +1350,8 @@
         "changeNode": "Change node",
         "stopVoting": "Interrompi la votazione",
         "revote": "Revote",
-        "skipAndKeep": "Skip and keep old password"
+        "skipAndKeep": "Skip and keep old password",
+        "addChain": "Add chain"
     },
     "general": {
         "recipient": "Destinatario",
@@ -1408,7 +1425,7 @@
         "and": "e",
         "receiveFunds": "Ricevi fondi",
         "address": "Indirizzo",
-        "myAddress": "Il mio Indirizzo",
+        "myAddress": "My address",
         "myNetworkAddress": "Il mio indirizzo {networkName}",
         "shareAddress": "Condividi un indirizzo",
         "yourAddress": "Il tuo indirizzo",
@@ -1600,7 +1617,9 @@
         "statistics": "Statistiche",
         "username": "Username",
         "jwt": "JSON web token",
-        "internalTransaction": "Transazione interna"
+        "internalTransaction": "Transazione interna",
+        "coinType": "Coin type",
+        "custom": "Custom"
     },
     "filters": {
         "title": "Filtri",
@@ -1912,7 +1931,8 @@
             "pluginNotAvailable": "Il plugin \"{nodePlugin}\" non è disponibile sul nodo corrente.",
             "unabledToConnect": "Impossibile collegarsi al nodo",
             "differentNetwork": "Il nodo si trova su una rete diversa",
-            "duplicateNodes": "Impossibile aggiungere il nodo duplicato"
+            "duplicateNodes": "Impossibile aggiungere il nodo duplicato",
+            "noCoinType": "No coin type specified"
         },
         "network": {
             "mismatch": "L'ID di rete per questo nodo è \"{networkId}\", e non corrisponde alla rete corrente.",
@@ -1927,6 +1947,7 @@
             "invalid": "Il file di backup non è stato riconosciuto.",
             "destination": "La destinazione del backup non è valida.",
             "mnemonic": "La mnemonica non è valida.",
+            "migrationRequired": "Stronghold migration is required.",
             "seedTooShort": "Il seme dovrebbe essere lungo 81 caratteri, è {length, plural, one {è 1} other {è #}}",
             "seedCharacters": "Il seme deve contenere solo caratteri A-Z o 9",
             "phraseWordCount": "Ci dovrebbero essere 24 parole nella tua frase di recupero, attualmente ci sono {length, plural, one {è 1} other {sono #}}.",
@@ -2273,6 +2294,12 @@
                 "Confirmed": "alias creato",
                 "Failed": "Impossibile creare l'alias"
             }
+        },
+        "networkHealth": {
+            "down": "Down",
+            "degraded": "Degraded",
+            "operational": "Operational",
+            "disconnected": "Disconnected"
         },
         "locked": "bloccato",
         "smartContract": "smart Contract"

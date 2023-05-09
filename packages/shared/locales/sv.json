@@ -3,8 +3,8 @@
         "onboarding": {
             "appSetup": {
                 "welcome": {
-                    "title": "Skicka, ta emot och hantera dina {network} tokens",
-                    "body": "Firefly är den officiella plånboken för {network}."
+                    "title": "Send, Receive & Manage your {network} tokens",
+                    "body": "Firefly is the official wallet software for {network}."
                 },
                 "legal": {
                     "title": "Integritetspolicy och användarvillkor",
@@ -27,43 +27,31 @@
                     "title": "Välj nätverk",
                     "body": "Ställ in nätverket för din profil.",
                     "iota": {
-                        "mainnet": {
-                            "title": "Mainnet",
-                            "body": "IOTA Mainnet"
-                        },
-                        "devnet": {
-                            "title": "Devnet",
-                            "body": "Utvecklarnätverk för IOTA"
-                        },
-                        "private-net": {
-                            "title": "Privat nät",
-                            "body": "Stöd för anpassade nätverk med aktiva TIPs"
-                        }
+                        "title": "IOTA",
+                        "body": "IOTA Mainnet"
                     },
                     "shimmer": {
-                        "mainnet": {
-                            "title": "Shimmer",
-                            "body": "Förestående nätverket för IOTA"
-                        },
-                        "devnet": {
-                            "title": "Testnet",
-                            "body": "Publikt beta-nätverk för Shimmer"
-                        },
-                        "private-net": {
-                            "title": "Privat nät",
-                            "body": "Stöd för anpassade nätverk med utkast till TIPs"
-                        }
+                        "title": "Shimmer",
+                        "body": "Staging network for IOTA"
+                    },
+                    "testnet": {
+                        "title": "Testnet",
+                        "body": "Public beta network for Shimmer"
+                    },
+                    "custom": {
+                        "title": "Custom network",
+                        "body": "Support for custom networks and/or nodes"
                     }
                 },
                 "setupCustomNetwork": {
-                    "title": "Anslut till ett privat nätverk",
-                    "body": "Fyll i formuläret med nodinformationen och anslut till ett privat nätverk."
+                    "title": "Connect to a custom network or node",
+                    "body": "Fill the form with the node information and connect to a custom network or node."
                 }
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Set up {network, select, IOTA {an} Shimmer {a} other {an}} {network} profile",
-                    "body": "Välj lämplig metod för att konfigurera din {network} -profil."
+                    "title": "Set up {network, select, IOTA {an} Shimmer {a} Testnet {a} other {a}} {network} profile",
+                    "body": "Select the appropriate method to set up your {network} profile."
                 },
                 "setupNew": {
                     "title": "Skapa en profil",
@@ -78,7 +66,7 @@
                     }
                 },
                 "setupRecovered": {
-                    "title": "Återställ {network} -profil",
+                    "title": "Recover {network} profile",
                     "body": "Om du har en befintlig återställningsfras eller Stronghold backupfil, kan du importera den här.",
                     "importMnemonic": "Använd återställningsfras",
                     "importMnemonicDescription": "Skriv din 24 ord långa återställningsfras",
@@ -92,7 +80,7 @@
                     "body": "Importera din IOTA-profil och hämta dina Shimmer staking-belöningar."
                 },
                 "enterName": {
-                    "title": "Skapa din {network} profil",
+                    "title": "Create your {network} profile",
                     "profileName": "Profilnamn",
                     "body1": "Du kan skapa flera användarprofiler för att organisera dina plånböcker och förbättra sekretessen.",
                     "body2": {
@@ -175,7 +163,8 @@
                 "success": {
                     "title": "Shimmer hämtade",
                     "body": "Du har framgångsrikt hämtat dina Shimmer tokens.",
-                    "totalRewards": "Totalt antal belöningar"
+                    "totalRewards": "Totalt antal belöningar",
+                    "successfullyFound": "Successfully found {amount}"
                 }
             },
             "congratulations": {
@@ -198,10 +187,10 @@
             "videoGuide": "Video guide för Ledger migrering"
         },
         "ledgerInstallationGuide": {
-            "title": "Har du installerat {network} appen på din Ledger-enhet?",
-            "body1": "Innan du fortsätter måste du använda Ledger Live för att hitta och installera {network} appen.",
+            "title": "Have you installed the {network} app on your Ledger device?",
+            "body1": "Before you proceed, you must use Ledger Live to find and install the {network} app.",
             "body2": "Se till att din firmware från Ledger är uppdaterad. Alla förinstallerade appar bör uppdateras till sina senaste versioner.",
-            "action": "Ja, jag har installerat {network} appen"
+            "action": "Yes, I've installed the {network} app"
         },
         "importFromLedger": {
             "title": "Återställ eller migrera din Ledger",
@@ -426,17 +415,13 @@
                 "title": "Om",
                 "description": ""
             },
-            "createDeveloperProfile": {
-                "title": "Skapa utvecklarprofil",
-                "description": ""
-            },
-            "createNormalProfile": {
-                "title": "Skapa normal profil",
-                "description": ""
-            },
             "reportAnIssue": {
                 "title": "Rapportera ett fel",
                 "description": "Rapportera ett fel till utvecklarna. Kolla igenom för att se till att det inte redan har rapporterats"
+            },
+            "developerToggle": {
+                "title": "Developer Mode",
+                "description": "Switch developer mode on to enable more features in experimental state"
             }
         },
         "login": {
@@ -501,8 +486,36 @@
             },
             "drawers": {
                 "networkConfig": {
+                    "addChain": {
+                        "title": "Add chain"
+                    },
+                    "chain": {
+                        "chainId": "Chain ID",
+                        "aliasAddress": "Alias Address",
+                        "iscpEndpoint": "ISCP Endpoint",
+                        "explorerEndpoint": "Explorer Endpoint (optional)",
+                        "errors": {
+                            "cannotBeEmpty": "Name cannot be empty",
+                            "nameTooLong": "Name is too long",
+                            "aliasAddressWrongFormat": "Must be in either hex or Bech32 format",
+                            "aliasAddressAlreadyInUse": "Alias address already in use",
+                            "invalidUrl": "Invalid URL"
+                        }
+                    },
+                    "chainDepositAddress": {
+                        "title": "Chain deposit address"
+                    },
+                    "chainInformation": {
+                        "title": "Chain information"
+                    },
                     "connectedChains": {
                         "title": "Connected chains"
+                    },
+                    "editChain": {
+                        "title": "Edit chain"
+                    },
+                    "removeChain": {
+                        "title": "Remove chain"
                     }
                 }
             }
@@ -910,7 +923,7 @@
             "title": "Anslut din Ledger",
             "notConnected": "Anslut din Ledger-enhet för att fortsätta.",
             "locked": "Lås upp din Ledger-enhet för att fortsätta.",
-            "appNotOpen": "Öppna Shimmer appen på din Ledger-enhet för att fortsätta.",
+            "appNotOpen": "Open the Shimmer app on your Ledger device to continue.",
             "correctAppOpen": "Ledger har anslutits framgångsrikt, vänligen fortsätt."
         },
         "ledgerConfirmation": {
@@ -1183,18 +1196,22 @@
         "importSeed": "Importera en befintlig seed",
         "restoreWallet": {
             "iota": "Migrera eller återställ en plånbok",
-            "shimmer": "Återställ Shimmer-profil"
+            "shimmer": "Återställ Shimmer-profil",
+            "testnet": "Restore Testnet profile",
+            "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
             "iota": "Migrera till Chrysalis eller återställ en befintlig plånbok",
-            "shimmer": "Återställ en befintlig Shimmer-profil"
+            "shimmer": "Återställ en befintlig Shimmer-profil",
+            "testnet": "Restore an existing Testnet profile",
+            "custom": "Restore an existing Custom Network profile"
         },
         "refreshNftMedia": {
             "title": "Refresh NFT media",
             "description": "Do you want to delete and re-download all NFT media for this account?"
         },
-        "createWallet": "Skapa en ny {network}-profil",
-        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
+        "createWallet": "Create a new {network} profile",
+        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown}}",
         "claimShimmer": "Hämta Shimmer staking-belöningar",
         "claimShimmerDescription": "Importera IOTA-profil och hämta dina Shimmer staking-belöningar",
         "createAlias": "Skapa alias",
@@ -1306,7 +1323,6 @@
         "searchForRewards": "Sök efter belöningar",
         "claimRewards": "Hämta belöningar",
         "rerunClaimProcess": "Kör anspråks-processen igen",
-        "finishProfileSetupWithProtocol": "Slutför {network} profilskapande",
         "addPublicNote": "Lägg till offentlig anteckning",
         "backup": "Säkerhetskopiera",
         "mint": "Minta",
@@ -1334,7 +1350,8 @@
         "changeNode": "Change node",
         "stopVoting": "Sluta rösta",
         "revote": "Revote",
-        "skipAndKeep": "Skip and keep old password"
+        "skipAndKeep": "Skip and keep old password",
+        "addChain": "Add chain"
     },
     "general": {
         "recipient": "Mottagare",
@@ -1408,7 +1425,7 @@
         "and": "och",
         "receiveFunds": "Ta emot tillgångar",
         "address": "Adress",
-        "myAddress": "Min adress",
+        "myAddress": "My address",
         "myNetworkAddress": "Min {networkName} adress",
         "shareAddress": "Dela en adress",
         "yourAddress": "Din adress",
@@ -1600,7 +1617,9 @@
         "statistics": "Statistik",
         "username": "Användarnamn",
         "jwt": "JSON webb-token",
-        "internalTransaction": "Internal transaction"
+        "internalTransaction": "Internal transaction",
+        "coinType": "Coin type",
+        "custom": "Custom"
     },
     "filters": {
         "title": "Filter",
@@ -1912,7 +1931,8 @@
             "pluginNotAvailable": "Pluginet \"{nodePlugin}\" är inte tillgänglig på den aktuella noden.",
             "unabledToConnect": "Kan inte ansluta till noden",
             "differentNetwork": "Noden ligger på ett annat nätverk",
-            "duplicateNodes": "Kunde inte lägga till dubblettnod"
+            "duplicateNodes": "Kunde inte lägga till dubblettnod",
+            "noCoinType": "No coin type specified"
         },
         "network": {
             "mismatch": "Nätverks-ID för denna nod är \"{networkId}\", som inte matchar det nuvarande nätverket.",
@@ -1927,6 +1947,7 @@
             "invalid": "Säkerhetskopian kändes inte igen.",
             "destination": "Härkomsten för säkerhetskopian var inte giltig.",
             "mnemonic": "Mnemonin är inte giltig.",
+            "migrationRequired": "Stronghold migration is required.",
             "seedTooShort": "Din seed ska vara 81 tecken lång, den {length, plural, one {är #} other {är #}}",
             "seedCharacters": "Din seed ska innehålla tecknen A-Z eller 9",
             "phraseWordCount": "Det ska finnas 24 ord i din återställningsfras, just nu är det {length, plural, one {är #} other {är #}}.",
@@ -2273,6 +2294,12 @@
                 "Confirmed": "alias skapat",
                 "Failed": "Misslyckades med att skapa alias"
             }
+        },
+        "networkHealth": {
+            "down": "Down",
+            "degraded": "Degraded",
+            "operational": "Operational",
+            "disconnected": "Disconnected"
         },
         "locked": "låst",
         "smartContract": "smartkontrakt"

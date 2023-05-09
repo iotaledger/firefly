@@ -13,8 +13,9 @@ export function completeOnboardingProcess(): void {
     }
 
     const onboardingType = get(onboardingProfile)?.onboardingType
-
-    const shouldRecoverAccounts = onboardingType === OnboardingType.Restore
     const shouldCreateAccount = onboardingType === OnboardingType.Create
-    void login({ isFromOnboardingFlow: true, shouldRecoverAccounts, shouldCreateAccount })
+    const shouldRecoverAccounts = onboardingType === OnboardingType.Restore || onboardingType === OnboardingType.Claim
+    void login({ isFromOnboardingFlow: true, shouldCreateAccount, shouldRecoverAccounts })
+
+    onboardingProfile.set(undefined)
 }

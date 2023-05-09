@@ -3,8 +3,8 @@
         "onboarding": {
             "appSetup": {
                 "welcome": {
-                    "title": "Lähetä, vastaanota ja hallitse {network}-tokeneitasi",
-                    "body": "Firefly on virallinen lompakkosovellus {network}:lle."
+                    "title": "Send, Receive & Manage your {network} tokens",
+                    "body": "Firefly is the official wallet software for {network}."
                 },
                 "legal": {
                     "title": "Tietosuojakäytäntö ja käyttöehdot",
@@ -27,43 +27,31 @@
                     "title": "Valitse verkko",
                     "body": "Aseta profiilisi verkko.",
                     "iota": {
-                        "mainnet": {
-                            "title": "Mainnet",
-                            "body": "IOTA Mainnet"
-                        },
-                        "devnet": {
-                            "title": "Devnet",
-                            "body": "IOTA:n kehittäjäverkko"
-                        },
-                        "private-net": {
-                            "title": "Yksityinen verkko",
-                            "body": "Tuki mukautetuille verkoille, joissa on aktiiviset TIP:t"
-                        }
+                        "title": "IOTA",
+                        "body": "IOTA Mainnet"
                     },
                     "shimmer": {
-                        "mainnet": {
-                            "title": "Shimmer",
-                            "body": "IOTA:n valmisteluverkko"
-                        },
-                        "devnet": {
-                            "title": "Testnet",
-                            "body": "Julkinen beta-verkko Shimmerille"
-                        },
-                        "private-net": {
-                            "title": "Yksityinen verkko",
-                            "body": "Tuki mukautetuille verkoille, joissa on TIP-luonnoksia"
-                        }
+                        "title": "Shimmer",
+                        "body": "Staging network for IOTA"
+                    },
+                    "testnet": {
+                        "title": "Testnet",
+                        "body": "Public beta network for Shimmer"
+                    },
+                    "custom": {
+                        "title": "Custom network",
+                        "body": "Support for custom networks and/or nodes"
                     }
                 },
                 "setupCustomNetwork": {
-                    "title": "Yhdistä yksityiseen verkkoon",
-                    "body": "Täytä lomake solmun tiedoilla ja yhdistä yksityiseen verkkoon."
+                    "title": "Connect to a custom network or node",
+                    "body": "Fill the form with the node information and connect to a custom network or node."
                 }
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Set up {network, select, IOTA {an} Shimmer {a} other {an}} {network} profile",
-                    "body": "Valitse sopiva tapa määrittää {network}-profiilisi."
+                    "title": "Set up {network, select, IOTA {an} Shimmer {a} Testnet {a} other {a}} {network} profile",
+                    "body": "Select the appropriate method to set up your {network} profile."
                 },
                 "setupNew": {
                     "title": "Luo profiili",
@@ -78,7 +66,7 @@
                     }
                 },
                 "setupRecovered": {
-                    "title": "Palauta {network}-profiili",
+                    "title": "Recover {network} profile",
                     "body": "Jos sinulla on olemassaoleva palautuslauseke tai Stronghold-varmuuskopiotiedosto, voit tuoda sen tässä.",
                     "importMnemonic": "Käytä palautuslauseketta",
                     "importMnemonicDescription": "Syötä 24 sanan palautuslausekkeesi",
@@ -92,7 +80,7 @@
                     "body": "Tuo IOTA-profiilisi ja lunasta Shimmer-stakingpalkkiosi."
                 },
                 "enterName": {
-                    "title": "Luo {network}-profiilisi",
+                    "title": "Create your {network} profile",
                     "profileName": "Profiilin nimi",
                     "body1": "Voit luoda useita käyttäjäprofiileja lompakkojesi järjestämiseksi ja yksityisyyden parantamiseksi.",
                     "body2": {
@@ -175,7 +163,8 @@
                 "success": {
                     "title": "Shimmer lunastettu",
                     "body": "Olet onnistuneesti lunastanut Shimmer-tokenisi.",
-                    "totalRewards": "Palkkiot yhteensä"
+                    "totalRewards": "Palkkiot yhteensä",
+                    "successfullyFound": "Successfully found {amount}"
                 }
             },
             "congratulations": {
@@ -198,10 +187,10 @@
             "videoGuide": "Ledger-migraation opasvideo"
         },
         "ledgerInstallationGuide": {
-            "title": "Oletko asentanut {network}-sovelluksen Ledger-laitteeseesi?",
-            "body1": "Ennen kuin jatkat, sinun on käytettävä Ledger Liveä löytääksesi ja asentaaksesi {network} -sovelluksen.",
+            "title": "Have you installed the {network} app on your Ledger device?",
+            "body1": "Before you proceed, you must use Ledger Live to find and install the {network} app.",
             "body2": "Varmista, että Ledger-laitteesi laiteohjelmisto on ajan tasalla. Kaikki valmiiksi asennetut sovellukset tulee päivittää uusimpiin versioihin.",
-            "action": "Kyllä, olen asentanut {network}-sovelluksen"
+            "action": "Yes, I've installed the {network} app"
         },
         "importFromLedger": {
             "title": "Palauta tai siirrä Ledger-laitteesi",
@@ -426,17 +415,13 @@
                 "title": "Lisätietoja",
                 "description": ""
             },
-            "createDeveloperProfile": {
-                "title": "Luo kehittäjäprofiili",
-                "description": ""
-            },
-            "createNormalProfile": {
-                "title": "Luo tavallinen profiili",
-                "description": ""
-            },
             "reportAnIssue": {
                 "title": "Ilmoita ongelmasta",
                 "description": "Ilmoista virheestä kehittäjille. Tarkista, ettei sitä ole jo raportoitu"
+            },
+            "developerToggle": {
+                "title": "Developer Mode",
+                "description": "Switch developer mode on to enable more features in experimental state"
             }
         },
         "login": {
@@ -501,8 +486,36 @@
             },
             "drawers": {
                 "networkConfig": {
+                    "addChain": {
+                        "title": "Add chain"
+                    },
+                    "chain": {
+                        "chainId": "Chain ID",
+                        "aliasAddress": "Alias Address",
+                        "iscpEndpoint": "ISCP Endpoint",
+                        "explorerEndpoint": "Explorer Endpoint (optional)",
+                        "errors": {
+                            "cannotBeEmpty": "Name cannot be empty",
+                            "nameTooLong": "Name is too long",
+                            "aliasAddressWrongFormat": "Must be in either hex or Bech32 format",
+                            "aliasAddressAlreadyInUse": "Alias address already in use",
+                            "invalidUrl": "Invalid URL"
+                        }
+                    },
+                    "chainDepositAddress": {
+                        "title": "Chain deposit address"
+                    },
+                    "chainInformation": {
+                        "title": "Chain information"
+                    },
                     "connectedChains": {
                         "title": "Connected chains"
+                    },
+                    "editChain": {
+                        "title": "Edit chain"
+                    },
+                    "removeChain": {
+                        "title": "Remove chain"
                     }
                 }
             }
@@ -910,7 +923,7 @@
             "title": "Yhdistä Ledger-laitteesi",
             "notConnected": "Yhdistä Ledger-laitteesi jatkaaksesi.",
             "locked": "Avaa Ledger-laitteesi jatkaaksesi.",
-            "appNotOpen": "Avaa Shimmer-sovellus Ledger-laitteellasi jatkaaksesi.",
+            "appNotOpen": "Open the Shimmer app on your Ledger device to continue.",
             "correctAppOpen": "Ledger yhdistetty onnistuneesti, ole hyvä ja jatka."
         },
         "ledgerConfirmation": {
@@ -1183,18 +1196,22 @@
         "importSeed": "Tuo olemassaoleva seed-merkkijono",
         "restoreWallet": {
             "iota": "Siirrä tai palauta lompakko",
-            "shimmer": "Palauta Shimmer-profiili"
+            "shimmer": "Palauta Shimmer-profiili",
+            "testnet": "Restore Testnet profile",
+            "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
             "iota": "Siirry Chrysalis-verkkoon tai palauta olemassaoleva lompakko",
-            "shimmer": "Palauta olemassaoleva Shimmer-profiili"
+            "shimmer": "Palauta olemassaoleva Shimmer-profiili",
+            "testnet": "Restore an existing Testnet profile",
+            "custom": "Restore an existing Custom Network profile"
         },
         "refreshNftMedia": {
             "title": "Refresh NFT media",
             "description": "Do you want to delete and re-download all NFT media for this account?"
         },
-        "createWallet": "Luo uusi {network}-profiili",
-        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} other {Unknown}}",
+        "createWallet": "Create a new {network} profile",
+        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown}}",
         "claimShimmer": "Lunasta Shimmer-palkkiosi stakingista",
         "claimShimmerDescription": "Tuo IOTA-profiili ja lunasta staking-palkkiot",
         "createAlias": "Create alias",
@@ -1306,7 +1323,6 @@
         "searchForRewards": "Etsi palkkioita",
         "claimRewards": "Lunasta palkkiot",
         "rerunClaimProcess": "Suorita lunastusprosessi uudelleen",
-        "finishProfileSetupWithProtocol": "Viimeistele {network}-profiilin määritys",
         "addPublicNote": "Lisää julkinen merkintä",
         "backup": "Varmuuskopioi",
         "mint": "Lyö",
@@ -1334,7 +1350,8 @@
         "changeNode": "Change node",
         "stopVoting": "Stop voting",
         "revote": "Revote",
-        "skipAndKeep": "Skip and keep old password"
+        "skipAndKeep": "Skip and keep old password",
+        "addChain": "Add chain"
     },
     "general": {
         "recipient": "Vastaanottaja",
@@ -1408,7 +1425,7 @@
         "and": "ja",
         "receiveFunds": "Vastaanota varoja",
         "address": "Osoite",
-        "myAddress": "Osoitteeni",
+        "myAddress": "My address",
         "myNetworkAddress": "Minun {networkName}-osoite",
         "shareAddress": "Jaa osoite",
         "yourAddress": "Osoitteesi",
@@ -1600,7 +1617,9 @@
         "statistics": "Statistics",
         "username": "Username",
         "jwt": "JSON web token",
-        "internalTransaction": "Internal transaction"
+        "internalTransaction": "Internal transaction",
+        "coinType": "Coin type",
+        "custom": "Custom"
     },
     "filters": {
         "title": "Suodattimet",
@@ -1912,7 +1931,8 @@
             "pluginNotAvailable": "\"{nodePlugin}\" liitännäinen ei ole saatavilla nykyisellä solmulla.",
             "unabledToConnect": "Solmuun ei voi yhdistää",
             "differentNetwork": "Solmu sijaitsee eri verkossa",
-            "duplicateNodes": "Ei voida lisätä duplikaattisolmua"
+            "duplicateNodes": "Ei voida lisätä duplikaattisolmua",
+            "noCoinType": "No coin type specified"
         },
         "network": {
             "mismatch": "Tämän solmun verkkotunnus on \"{networkId}\", joka ei vastaa nykyistä verkkoa.",
@@ -1927,6 +1947,7 @@
             "invalid": "Varmuuskopiotiedostoa ei tunnistettu.",
             "destination": "Varmuuskopioinnin kohde ei kelpaa.",
             "mnemonic": "Muistisääntö ei kelpaa.",
+            "migrationRequired": "Stronghold migration is required.",
             "seedTooShort": "Seed-merkkijonon pitäisi olla 81 merkkiä pitkä, se {length, plural, one {on #} other {on #}}",
             "seedCharacters": "Seed-merkkijonon tulisi sisältää vain merkkejä A-Z tai 9",
             "phraseWordCount": "Palautuslausekkeessasi pitäisi olla 24 sanaa, tällä hetkellä siinä {length, plural, one {on #} other {on #}}.",
@@ -2273,6 +2294,12 @@
                 "Confirmed": "alias created",
                 "Failed": "Failed to create alias"
             }
+        },
+        "networkHealth": {
+            "down": "Down",
+            "degraded": "Degraded",
+            "operational": "Operational",
+            "disconnected": "Disconnected"
         },
         "locked": "lukittu",
         "smartContract": "smart contract"

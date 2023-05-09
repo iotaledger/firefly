@@ -27,42 +27,30 @@
                     "title": "Wybierz sieć",
                     "body": "Ustaw sieć dla swojego profilu.",
                     "iota": {
-                        "mainnet": {
-                            "title": "Mainnet",
-                            "body": "IOTA Mainnet"
-                        },
-                        "devnet": {
-                            "title": "Devnet",
-                            "body": "Sieć deweloperska IOTA"
-                        },
-                        "private-net": {
-                            "title": "Sieć prywatna",
-                            "body": "Wsparcie dla niestandardowych sieci (active TIPs)"
-                        }
+                        "title": "IOTA",
+                        "body": "IOTA Mainnet"
                     },
                     "shimmer": {
-                        "mainnet": {
-                            "title": "Shimmer",
-                            "body": "Sieć etapowa dla IOTA"
-                        },
-                        "devnet": {
-                            "title": "Testnet",
-                            "body": "Publiczna sieć beta dla Shimmer"
-                        },
-                        "private-net": {
-                            "title": "Sieć prywatna",
-                            "body": "Wsparcie dla niestandardowych sieci (draft TIPs)"
-                        }
+                        "title": "Shimmer",
+                        "body": "Sieć etapowa dla IOTA"
+                    },
+                    "testnet": {
+                        "title": "Testnet",
+                        "body": "Publiczna sieć beta dla Shimmer"
+                    },
+                    "custom": {
+                        "title": "Sieć niestandardowa",
+                        "body": "Wsparcie dla niestandardowych sieci i/lub serwerów"
                     }
                 },
                 "setupCustomNetwork": {
-                    "title": "Połącz się z siecią prywatną",
-                    "body": "Wypełnij formularz informacjami o serwerze i połącz się z prywatną siecią."
+                    "title": "Połącz się z niestandardową siecią lub serwerem",
+                    "body": "Wypełnij formularz informacjami o serwerze i połącz się z niestandardową siecią lub serwerem."
                 }
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Skonfiguruj {network, select, IOTA {profil} Shimmer {profil} other {profil}} {network}",
+                    "title": "Skonfiguruj {network, select, IOTA {profil} Shimmer {profil} Testnet {profil} other {profil}} {network}",
                     "body": "Wybierz odpowiednią metodę, aby skonfigurować swój profil {network}."
                 },
                 "setupNew": {
@@ -175,7 +163,8 @@
                 "success": {
                     "title": "Odebrano Shimmer",
                     "body": "Udało Ci się odebrać Twoje tokeny Shimmer.",
-                    "totalRewards": "Całkowita ilość nagród"
+                    "totalRewards": "Całkowita ilość nagród",
+                    "successfullyFound": "Pomyślnie znaleziono {amount}"
                 }
             },
             "congratulations": {
@@ -426,17 +415,13 @@
                 "title": "O aplikacji",
                 "description": ""
             },
-            "createDeveloperProfile": {
-                "title": "Utwórz profil dewelopera",
-                "description": ""
-            },
-            "createNormalProfile": {
-                "title": "Utwórz normalny profil",
-                "description": ""
-            },
             "reportAnIssue": {
                 "title": "Zgłoś problem",
                 "description": "Zgłoś błąd deweloperom. Upewnij się, że problem nie został już wcześniej zgłoszony"
+            },
+            "developerToggle": {
+                "title": "Tryb deweloperski",
+                "description": "Włącz tryb deweloperski, aby aktywować więcej eksperymentalnych funkcji"
             }
         },
         "login": {
@@ -501,8 +486,36 @@
             },
             "drawers": {
                 "networkConfig": {
+                    "addChain": {
+                        "title": "Dodaj łańcuch"
+                    },
+                    "chain": {
+                        "chainId": "Identyfikator łańcucha",
+                        "aliasAddress": "Adres aliasu",
+                        "iscpEndpoint": "ISCP Endpoint",
+                        "explorerEndpoint": "Explorer Endpoint (opcjonalnie)",
+                        "errors": {
+                            "cannotBeEmpty": "Nazwa nie może być pusta",
+                            "nameTooLong": "Nazwa jest za długa",
+                            "aliasAddressWrongFormat": "Musi być w formacie hex lub Bech32",
+                            "aliasAddressAlreadyInUse": "Adres aliasu jest już używany",
+                            "invalidUrl": "Nieprawidłowy URL"
+                        }
+                    },
+                    "chainDepositAddress": {
+                        "title": "Adres depozytu łańcucha"
+                    },
+                    "chainInformation": {
+                        "title": "Informacje o łańcuchu"
+                    },
                     "connectedChains": {
-                        "title": "Połączone sieci"
+                        "title": "Połączone łańcuchy"
+                    },
+                    "editChain": {
+                        "title": "Edytuj łańcuch"
+                    },
+                    "removeChain": {
+                        "title": "Usuń łańcuch"
                     }
                 }
             }
@@ -710,10 +723,10 @@
                 "title": "Zarządzanie",
                 "subtitle": "Zarezerwowane na siłę głosu"
             },
-            "minimizeStorageDepositButton": "Pomniejsz depozyt magazynowy"
+            "minimizeStorageDepositButton": "Zmniejsz depozyt magazynowy"
         },
         "minimizeStorageDeposit": {
-            "title": "Pomniejsz depozyt magazynowy",
+            "title": "Zmniejsz depozyt magazynowy",
             "description": "Skonsoliduj wyjścia, aby zminimalizować wymagany depozyt i zwiększyć dostępne saldo.",
             "confirmButton": "Skonsoliduj"
         },
@@ -1183,18 +1196,22 @@
         "importSeed": "Importuj istniejący klucz seed",
         "restoreWallet": {
             "iota": "Migruj lub przywróć portfel",
-            "shimmer": "Przywróć profil Shimmer"
+            "shimmer": "Przywróć profil Shimmer",
+            "testnet": "Przywróć profil Testnet",
+            "custom": "Przywróć profil niestandardowej sieci"
         },
         "restoreWalletDescription": {
             "iota": "Migracja do sieci Chrysalis lub przywrócenie istniejącego portfela",
-            "shimmer": "Przywróć istniejący profil Shimmer"
+            "shimmer": "Przywróć istniejący profil Shimmer",
+            "testnet": "Przywróć istniejący profil Testnet",
+            "custom": "Przywróć istniejący profil niestandardowej sieci"
         },
         "refreshNftMedia": {
             "title": "Odśwież media NFT",
             "description": "Czy chcesz usunąć i ponownie pobrać wszystkie media NFT dla tego konta?"
         },
         "createWallet": "Utwórz nowy profil {network}",
-        "createWalletDescription": "Stwórz nowy profil działający w sieci {network, select, iota {Chrysalis} shimmer {Shimmer} other {Nieznanej}}",
+        "createWalletDescription": "Stwórz nowy profil działający w sieci {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {niestandardowej} other {nieznanej}}",
         "claimShimmer": "Odbierz nagrody Shimmer ze stakingu",
         "claimShimmerDescription": "Importuj profil IOTA i odbierz nagrody ze stakingu",
         "createAlias": "Utwórz alias",
@@ -1306,7 +1323,6 @@
         "searchForRewards": "Szukaj nagród",
         "claimRewards": "Odbierz nagrody",
         "rerunClaimProcess": "Powtórz proces odbioru",
-        "finishProfileSetupWithProtocol": "Zakończ konfigurację profilu {network}",
         "addPublicNote": "Dodaj notatkę publiczną",
         "backup": "Kopia zapasowa",
         "mint": "Mintuj",
@@ -1334,7 +1350,8 @@
         "changeNode": "Zmień serwer",
         "stopVoting": "Zatrzymaj głosowanie",
         "revote": "Odnów głosy",
-        "skipAndKeep": "Pomiń i zachowaj stare hasło"
+        "skipAndKeep": "Pomiń i zachowaj stare hasło",
+        "addChain": "Dodaj łańcuch"
     },
     "general": {
         "recipient": "Odbiorca",
@@ -1577,7 +1594,7 @@
         "token": "Token",
         "nft": "NFT",
         "type": "Typ",
-        "immutableIssuer": "Stały wydawca",
+        "immutableIssuer": "Niezmienny wydawca",
         "smartContract": "Smart kontrakt",
         "targetContract": "Kontrakt docelowy",
         "contractFunction": "Funkcja kontraktu",
@@ -1600,7 +1617,9 @@
         "statistics": "Statystyki",
         "username": "Nazwa użytkownika",
         "jwt": "Token internetowy JSON",
-        "internalTransaction": "Transakcja wewnętrzna"
+        "internalTransaction": "Transakcja wewnętrzna",
+        "coinType": "Typ tokenu",
+        "custom": "Niestandardowe"
     },
     "filters": {
         "title": "Filtry",
@@ -1912,7 +1931,8 @@
             "pluginNotAvailable": "Wtyczka \"{nodePlugin}\" nie jest dostępna na bieżącym serwerze.",
             "unabledToConnect": "Nie można połączyć się z serwerem",
             "differentNetwork": "Serwer jest zlokalizowany w innej sieci",
-            "duplicateNodes": "Nie można dodać duplikatu serwera"
+            "duplicateNodes": "Nie można dodać duplikatu serwera",
+            "noCoinType": "Nie określono typu tokenu"
         },
         "network": {
             "mismatch": "ID sieci dla tego węzła to \"{networkId}\", które nie pasuje do bieżącej sieci.",
@@ -1927,6 +1947,7 @@
             "invalid": "Plik kopii zapasowej nie został rozpoznany.",
             "destination": "Miejsce docelowe kopii zapasowej nie jest prawidłowe.",
             "mnemonic": "Błąd w wyrazach ratunkowych.",
+            "migrationRequired": "Stronghold migration is required.",
             "seedTooShort": "Seed powinien składać się z 81 znaków, ten ma {length, plural, one {# znak} few {# znaki} many {# znaków} other {# znaków}}",
             "seedCharacters": "Seed może składać się tylko z liter A-Z oraz cyfr 9",
             "phraseWordCount": "Wyrazy ratunkowe powinny zawierać 24 słowa. Aktualnie jest {length, plural, one {ich #} few {ich #} many {ich #} other {ich #}}.",
@@ -2273,6 +2294,12 @@
                 "Confirmed": "alias utworzony",
                 "Failed": "Nie udało się utworzyć aliasu"
             }
+        },
+        "networkHealth": {
+            "down": "Nie działa",
+            "degraded": "Występują problemy",
+            "operational": "Działa",
+            "disconnected": "Rozłączono"
         },
         "locked": "zablokowano",
         "smartContract": "smart kontrakt"
