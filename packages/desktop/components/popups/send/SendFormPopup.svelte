@@ -6,7 +6,6 @@
     import { ownedNfts } from '@core/nfts'
     import { getByteLengthOfString, MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
     import {
-        getAssetById,
         IAsset,
         isReservedTagKeyword,
         newTransactionDetails,
@@ -57,7 +56,7 @@
 
     if (transactionDetails.type === NewTransactionType.TokenTransfer) {
         rawAmount = transactionDetails.rawAmount
-        asset = getAssetById(transactionDetails.assetId)
+        asset = transactionDetails.asset
         unit = transactionDetails.unit
     } else {
         nftId = transactionDetails.nftId
@@ -78,7 +77,7 @@
             setNewTransactionDetails({
                 type: NewTransactionType.TokenTransfer,
                 recipient,
-                assetId: asset.id,
+                asset,
                 rawAmount,
                 unit,
                 tag,

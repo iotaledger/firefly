@@ -1,6 +1,6 @@
 export enum SendFlowRoute {
+    InputTokenAmount = 'InputTokenAmount',
     SelectToken = 'selectToken',
-    InputTokenAmount = 'inputTokenAmount',
     InputDestination = 'inputDestination',
     TransactionSummary = 'transactionSummary',
 }

@@ -2,6 +2,8 @@
     import { NumberInput, FontWeight } from 'shared/components'
 
     export let inputElement: HTMLInputElement = undefined
+    export let fontSize = 24
+    export let fontWeight = FontWeight.semibold
     export let disabled = false
     export let hasFocus = false
     export let amount: string = ''
@@ -13,8 +15,8 @@
     bind:hasFocus
     {disabled}
     placeholder="0"
-    fontSize="24"
+    {fontSize}
     alignment="right"
-    fontWeigth={FontWeight.semibold}
+    {fontWeight}
     {...$$restProps}
 />

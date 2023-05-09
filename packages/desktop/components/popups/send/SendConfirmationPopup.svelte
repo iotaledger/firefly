@@ -55,7 +55,6 @@
         disableChangeExpiration,
         disableToggleGift,
         layer2Parameters,
-        unit,
     } = get(newTransactionDetails)
 
     let storageDeposit = 0
@@ -72,7 +71,7 @@
     $: expirationTimePicker?.setNull(giftStorageDeposit)
     $: hideGiftToggle =
         (transactionDetails.type === NewTransactionType.TokenTransfer &&
-            transactionDetails.assetId === $selectedAccountAssets?.baseCoin?.id) ||
+            transactionDetails.asset.id === $selectedAccountAssets?.baseCoin?.id) ||
         (disableToggleGift && !giftStorageDeposit) ||
         !!layer2Parameters
     $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
@@ -203,7 +202,7 @@
     >
     <div class="w-full flex-col space-y-2">
         {#if transactionDetails.type === NewTransactionType.TokenTransfer}
-            <BasicActivityDetails {activity} {unit} />
+            <BasicActivityDetails {activity} />
         {:else if transactionDetails.type === NewTransactionType.NftTransfer}
             <NftActivityDetails {activity} />
         {/if}
