@@ -8,9 +8,10 @@
         newTransactionDetails,
         updateNewTransactionDetails,
     } from '@core/wallet'
-    import { TokenAmountInput, TokenAmountTile, Button, FontWeight, Text, TextType } from '@ui'
+    import { TokenAmountInput, TokenAmountTile } from '@ui'
     import { get } from 'svelte/store'
     import { sendFlowRouter } from '../send-flow.router'
+    import SendFlowTemplate from './SendFlowTemplate.svelte'
 
     const transactionDetails = get(newTransactionDetails)
     let assetAmountInput: TokenAmountInput
@@ -61,24 +62,13 @@
     }
 </script>
 
-<input-token-amount-view class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
-    <input-token-amount-title>
-        <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left"
-            >{localize('popups.transaction.selectAmount', {
-                values: { tokenName: asset.metadata.name },
-            })}</Text
-        >
-    </input-token-amount-title>
-    <input-token-amount-content class="w-full flex flex-col items-center gap-6">
-        <TokenAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:inputtedAmount={amount} {unit} />
-        <TokenAmountTile {asset} onMaxClick={setToMax} />
-    </input-token-amount-content>
-    <input-token-amount-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" outline onClick={onBackClick}>
-            {localize('actions.back')}
-        </Button>
-        <Button classes="w-full" onClick={onContinueClick} disabled={!amount}>
-            {localize('actions.continue')}
-        </Button>
-    </input-token-amount-buttons>
-</input-token-amount-view>
+<SendFlowTemplate
+    title={localize('popups.transaction.selectAmount', {
+        values: { tokenName: asset.metadata.name },
+    })}
+    leftButton={{ text: localize('actions.back'), onClick: onBackClick }}
+    rightButton={{ text: localize('actions.continue'), onClick: onContinueClick, disabled: !amount }}
+>
+    <TokenAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:inputtedAmount={amount} {unit} />
+    <TokenAmountTile {asset} onMaxClick={setToMax} />
+</SendFlowTemplate>
