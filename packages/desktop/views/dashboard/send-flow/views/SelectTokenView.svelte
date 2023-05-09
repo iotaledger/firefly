@@ -75,11 +75,7 @@
     <div class="-mr-3">
         <div class="asset-list w-full flex flex-col -mr-1 pr-1.5 gap-2">
             {#each assetList as asset}
-                <AssetTile
-                    {asset}
-                    onClick={() => (selectedAsset.id = asset.id)}
-                    selected={selectedAsset.id === asset.id}
-                />
+                <AssetTile {asset} onClick={() => (selectedAsset = asset)} selected={selectedAsset?.id === asset.id} />
             {/each}
         </div>
     </div>

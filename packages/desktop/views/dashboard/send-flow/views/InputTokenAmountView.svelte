@@ -4,6 +4,7 @@
         IAsset,
         NewTransactionType,
         formatTokenAmountDefault,
+        getUnitFromTokenMetadata,
         newTransactionDetails,
         updateNewTransactionDetails,
     } from '@core/wallet'
@@ -17,16 +18,11 @@
     let rawAmount: string
     let amount: string
     let unit: string
-    let recipient: string
 
     if (transactionDetails.type === NewTransactionType.TokenTransfer) {
         asset = transactionDetails.asset
         rawAmount = transactionDetails.rawAmount
-        unit = transactionDetails.unit
-        recipient =
-            transactionDetails.recipient.type === 'account'
-                ? transactionDetails.recipient.account.name
-                : transactionDetails.recipient.address
+        unit = transactionDetails.unit || getUnitFromTokenMetadata(asset?.metadata)
     }
 
     $: availableBalance = asset?.balance?.available
@@ -69,12 +65,12 @@
     <input-token-amount-title>
         <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left"
             >{localize('popups.transaction.selectAmount', {
-                values: { tokenName: asset.metadata.name, recipient },
+                values: { tokenName: asset.metadata.name },
             })}</Text
         >
     </input-token-amount-title>
     <input-token-amount-content class="w-full flex flex-col items-center gap-6">
-        <TokenAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:amount {unit} />
+        <TokenAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:inputtedAmount={amount} {unit} />
         <TokenAmountTile {asset} onMaxClick={setToMax} />
     </input-token-amount-content>
     <input-token-amount-buttons class="flex flex-row flex-nowrap w-full space-x-4">
