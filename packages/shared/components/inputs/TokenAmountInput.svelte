@@ -1,16 +1,10 @@
 <script lang="ts">
-    import { formatCurrency, localize, parseCurrency } from '@core/i18n'
+    import { formatCurrency } from '@core/i18n'
     import { getMaxDecimalsFromTokenMetadata } from '@core/token/utils'
-    import {
-        IAsset,
-        TokenStandard,
-        convertToRawAmount,
-        formatTokenAmountDefault,
-        visibleSelectedAccountAssets,
-    } from '@core/wallet'
-    import Big from 'big.js'
+    import { IAsset, convertToRawAmount, formatTokenAmountDefault, visibleSelectedAccountAssets } from '@core/wallet'
     import { AmountInput, FontWeight, InputContainer, Text } from '@ui'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
+    import { validateTokenAmount } from '@core/wallet/utils/validateTokenAmount'
 
     export let disabled = false
     export let asset: IAsset | undefined = $visibleSelectedAccountAssets?.baseCoin
@@ -26,44 +20,22 @@
 
     $: inputtedAmount, (error = '')
     $: allowedDecimals = asset?.metadata && unit ? getMaxDecimalsFromTokenMetadata(asset.metadata, unit) : 0
-    $: availableBalance = asset?.balance?.available ?? 0
     $: bigAmount = inputtedAmount && asset?.metadata ? convertToRawAmount(inputtedAmount, asset.metadata, unit) : 0
     $: marketAmount = asset ? getMarketAmountFromAssetValue(bigAmount, asset) : undefined
     $: rawAmount = bigAmount.toString()
 
-    export function validate(allowZeroOrNull = false): Promise<void> {
-        if (inputtedAmount === undefined || asset?.metadata === undefined) {
+    export async function validate(allowZeroOrNull = false): Promise<void> {
+        if (inputtedAmount === undefined || asset === undefined || unit === undefined) {
             return Promise.reject()
         }
-        const amountAsFloat = parseCurrency(inputtedAmount)
-        const isAmountZeroOrNull = !Number(amountAsFloat)
-        const requiresRawAmount =
-            (asset.metadata.standard === TokenStandard.BaseToken && unit === asset.metadata.subunit) ||
-            asset.metadata.decimals === 0
-        const bigAmount = convertToRawAmount(inputtedAmount, asset.metadata, unit)
-
-        // Zero value transactions can still contain metadata/tags
-        error = ''
-        if (allowZeroOrNull && isAmountZeroOrNull) {
-            rawAmount = Big(0).toString()
+        try {
+            rawAmount = await validateTokenAmount(inputtedAmount, asset, unit, allowZeroOrNull)
             return Promise.resolve()
-        } else if (isAmountZeroOrNull) {
-            error = localize('error.send.amountInvalidFormat')
-        } else if (requiresRawAmount && Number.parseInt(inputtedAmount, 10).toString() !== inputtedAmount) {
-            error = localize('error.send.amountNoFloat')
-        } else if (bigAmount.gt(Big(availableBalance))) {
-            error = localize('error.send.amountTooHigh')
-        } else if (bigAmount.lte(Big(0))) {
-            error = localize('error.send.amountZero')
-        } else if (!bigAmount.mod(1).eq(Big(0))) {
-            error = localize('error.send.amountSmallerThanSubunit')
+        } catch (err) {
+            error = err as string
+            console.error(error)
+            return Promise.reject()
         }
-
-        if (error) {
-            return Promise.reject(error)
-        }
-        rawAmount = bigAmount.toString()
-        return Promise.resolve()
     }
 </script>
 

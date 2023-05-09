@@ -41,7 +41,6 @@
             await assetAmountInput?.validate()
             return true
         } catch (err) {
-            console.error('Error: ', err)
             return false
         }
     }
