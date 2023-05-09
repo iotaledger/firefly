@@ -5,8 +5,7 @@
         NewTransactionType,
         getAssetById,
         newTransactionDetails,
-        setNewTransactionDetails,
-        resetNewTransactionDetails,
+        updateNewTransactionDetails,
     } from '@core/wallet'
     import { AssetAmountInput, Button, FontWeight, Text, TextType } from 'shared/components'
     import { get } from 'svelte/store'
@@ -28,9 +27,8 @@
     }
 
     function onContinueClick(): void {
-        setNewTransactionDetails({
+        updateNewTransactionDetails({
             type: NewTransactionType.TokenTransfer,
-            assetId: asset.id,
             rawAmount,
             unit,
             disableAssetSelection,
@@ -39,7 +37,6 @@
     }
 
     function onBackClick(): void {
-        resetNewTransactionDetails()
         $sendFlowRouter.previous()
     }
 </script>

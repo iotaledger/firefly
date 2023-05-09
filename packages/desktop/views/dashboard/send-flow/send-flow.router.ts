@@ -7,7 +7,7 @@ export const sendFlowRouter = writable<SendFlowRouter>(undefined)
 
 export class SendFlowRouter extends Subrouter<SendFlowRoute> {
     constructor(parentRouter: Router<unknown>) {
-        super(SendFlowRoute.InputTokenAmount, sendFlowRoute, parentRouter)
+        super(SendFlowRoute.SelectToken, sendFlowRoute, parentRouter)
     }
 
     next(): void {
