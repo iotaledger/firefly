@@ -1,4 +1,4 @@
-import { isStringTrue, getByteLengthOfString } from '@core/utils'
+import { isStringTrue, getByteLengthOfString, stripTrailingSlash } from '@core/utils'
 
 describe('File: string.ts', () => {
     describe('Function: isStringTrue', () => {
@@ -21,6 +21,22 @@ describe('File: string.ts', () => {
         })
         it('should return 0 if string is empty', () => {
             expect(getByteLengthOfString('')).toBe(0)
+        })
+    })
+
+    describe('Function: stripTrailingSlash', () => {
+        it('should remove trailing slash if trailing slashes exist', () => {
+            expect(stripTrailingSlash('test/')).toBe('test')
+        })
+        it('should remove multiple trailing slashes if trailing slashes exist', () => {
+            expect(stripTrailingSlash('test//')).toBe('test')
+        })
+        it('should not remove slashes if they are at the beginning or at the end of the word', () => {
+            expect(stripTrailingSlash('te/st//')).toBe('te/st')
+            expect(stripTrailingSlash('/test//')).toBe('/test')
+        })
+        it('should do nothing if no trailing slashes exist', () => {
+            expect(stripTrailingSlash('test')).toBe('test')
         })
     })
 })
