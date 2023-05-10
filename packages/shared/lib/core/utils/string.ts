@@ -63,7 +63,7 @@ export function getInitials(name: string | undefined, maxChars?: number): string
         .split(' ')
         .filter((n) => n)
         .map((n) => n.match(/./gu)) // match characters for emoji compatibility
-        .filter((n): n is RegExpMatchArray => !n)
+        .filter((n): n is RegExpMatchArray => n !== null)
         .map((n) => n[0])
 
     if (maxChars !== undefined) {
