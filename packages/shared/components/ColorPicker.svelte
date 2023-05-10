@@ -3,7 +3,7 @@
     import { AccountColors } from '@core/account'
     import { appSettings } from '@core/app/stores'
     import { localize } from '@core/i18n'
-    import { clickOutside, isBright, hex2rgb } from '@core/utils'
+    import { clickOutside, isBright, convertHexToRgba } from '@core/utils'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let title = localize('views.picker.color.title')
@@ -74,8 +74,10 @@
 </script>
 
 <color-picker
-    style:--account-color={inputValue ? hex2rgb(active) : ''}
-    style:--custom-color={hex2rgb(inputValue)}
+    style:--account-color={inputValue ? convertHexToRgba(active) : ''}
+    style:--account-color-ring={inputValue ? convertHexToRgba(active, 30) : ''}
+    style:--custom-color={convertHexToRgba(inputValue)}
+    style:--custom-color-ring={convertHexToRgba(inputValue, 30)}
     class="block {classes}"
 >
     {#if title}
@@ -151,14 +153,12 @@
     }
 
     .active {
-        background-color: rgb(var(--account-color));
-        --tw-ring-color: rgba(var(--account-color), var(--tw-ring-opacity));
-        --tw-ring-opacity: 0.3;
+        background-color: var(--account-color);
+        --tw-ring-color: var(--account-color-ring);
     }
 
     .custom-color {
-        background-color: rgb(var(--custom-color));
-        --tw-ring-color: rgba(var(--custom-color), var(--tw-ring-opacity));
-        --tw-ring-opacity: 0.3;
+        background-color: var(--custom-color);
+        --tw-ring-color: var(--custom-color-ring);
     }
 </style>
