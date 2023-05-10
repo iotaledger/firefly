@@ -1,4 +1,4 @@
-import { isStringTrue, getByteLengthOfString, stripTrailingSlash } from '@core/utils'
+import { isStringTrue, getByteLengthOfString, stripTrailingSlash, stripSpaces } from '@core/utils'
 
 describe('File: string.ts', () => {
     describe('Function: isStringTrue', () => {
@@ -37,6 +37,15 @@ describe('File: string.ts', () => {
         })
         it('should do nothing if no trailing slashes exist', () => {
             expect(stripTrailingSlash('test')).toBe('test')
+        })
+    })
+
+    describe('Function: stripSpaces', () => {
+        it('should remove all spaces if spaces exist', () => {
+            expect(stripSpaces(' te  st ')).toBe('test')
+        })
+        it('should do nothing if no spaces exist', () => {
+            expect(stripSpaces('test')).toBe('test')
         })
     })
 })
