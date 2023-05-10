@@ -1,7 +1,17 @@
 <script lang="ts">
-    import { FontWeight, Text, NetworkIcon } from '@ui'
-    import { DrawerId, closeDrawer, drawerState, openDrawer } from '@desktop/auxilary/drawer'
+    import { Icon as IconEnum } from '@auxiliary/icon'
+    import { NetworkHealth, chainStatuses, networkStatus } from '@core/network'
     import { activeProfile } from '@core/profile/stores'
+    import { DrawerId, closeDrawer, drawerState, openDrawer } from '@desktop/auxilary/drawer'
+    import { FontWeight, Icon, NetworkIcon, Text } from '@ui'
+
+    $: isAnyChainDisconnected = Object.values($chainStatuses ?? [])?.some(
+        ({ health }) => health === NetworkHealth.Disconnected
+    )
+    $: displayWarning =
+        isAnyChainDisconnected ||
+        $networkStatus?.health === NetworkHealth.Degraded ||
+        $networkStatus?.health === NetworkHealth.Disconnected
 
     function onNetworkClick(): void {
         if ($drawerState.active) {
@@ -18,6 +28,9 @@
 >
     <NetworkIcon height={12} width={12} networkId={$activeProfile.network.id} outlined={false} />
     <Text fontWeight={FontWeight.semibold} color="gray-800" darkColor="white">{$activeProfile.network.name}</Text>
+    {#if displayWarning}
+        <Icon icon={IconEnum.WarningFilled} classes="text-red-500" height={16} width={16} />
+    {/if}
 </button>
 
 <style type="text/scss">
