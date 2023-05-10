@@ -1,7 +1,7 @@
 import { Writable, writable } from 'svelte/store'
 import { IChain } from '../interfaces'
 
-export const selectedChain: Writable<IChain> = writable(undefined)
+export const selectedChain: Writable<IChain | undefined> = writable(undefined)
 
 export function setSelectedChain(chain: IChain): void {
     selectedChain.set(chain)

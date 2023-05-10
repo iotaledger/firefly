@@ -4,6 +4,8 @@ import { IPersistedNetwork } from '../interfaces'
 
 export function getDefaultPersistedNetwork(networkId: NetworkId): IPersistedNetwork {
     const network = DEFAULT_NETWORK_METADATA?.[networkId]
+    const configuration = DEFAULT_CHAIN_CONFIGURATIONS?.[networkId]
+    const chainConfigurations = configuration ? [configuration] : []
     if (network) {
         return {
             ...network,
@@ -12,7 +14,7 @@ export function getDefaultPersistedNetwork(networkId: NetworkId): IPersistedNetw
              * it is possible that that profile's chains will be overwritten
              * with this statement.
              */
-            chainConfigurations: [DEFAULT_CHAIN_CONFIGURATIONS[networkId]],
+            chainConfigurations,
         }
     } else {
         throw new Error(`Unable to find network: ${networkId}`)
