@@ -89,4 +89,27 @@ public class WalletPlugin: CAPPlugin {
         Wallet.iota_listen(actorId, id, event)
         call.resolve()
     }
+
+    @objc func migrateStrongholdSnapshotV2ToV3(_ call: CAPPluginCall) {
+        guard let currentPath = call.getString("currentPath") else {
+            return call.reject("currentPath is required")
+        }
+        guard let currentPassword = call.getString("currentPassword") else {
+            return call.reject("currentPassword is required")
+        }
+        let new_path = call.getString("new_path") ?? ""
+        let new_password = call.getString("new_password") ?? ""
+
+        do {
+            Wallet.iotaMigrateStrongholdSnapshotV2ToV3(
+                currentPath,
+                currentPassword,
+                new_path,
+                new_password
+            )
+            call.resolve()
+        } catch {
+            call.reject("failed to migrate stronghold")
+        }
+    }
 }
