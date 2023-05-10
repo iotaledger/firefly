@@ -1,29 +1,32 @@
 const TransportNodeHid = require('@ledgerhq/hw-transport-node-hid').default
 const AppEth = require('@ledgerhq/hw-app-eth').default
-const { listen } = require('@ledgerhq/logs');
+const { listen } = require('@ledgerhq/logs')
 
-// This a very basic example
-// Ideally you should not run this code in main thread
-// but run it in a dedicated node.js process
-export function getEthereumInfo(verify) {
-    /* eslint-disable no-console */
-    console.log('VERIFY: ', verify)
-    return TransportNodeHid.open('')
-    .then(transport => {
-        listen(log => console.log(log))
-        const appEth = new AppEth(transport);
-        return appEth.getAddress('44\'/60\'/0\'/0/0').then(r =>
-            transport
-                .close()
-                .catch(e => {})
-                .then(() => r)
-            );
-    })
-    .catch(e => {
-        console.warn(e);
+process.parentPort.on('message', async (message) => {
+    process.parentPort.postMessage({ message })
+
+    switch (message.data) {
+        case 'get-evm-address': {
+            const data = await getEthereumAddress(message)
+            process.parentPort.postMessage({ data })
+            break
+        }
+        default:
+            break
+    }
+})
+
+async function getEthereumAddress(verify) {
+    try {
+        const transport = await TransportNodeHid.open('')
+        listen((log) => process.parentPort.postMessage({ data: log }))
+        const appEth = new AppEth(transport)
+        const address = await appEth.getAddress('44\'/60\'/0\'/0/0')
+        await transport.close()
+        return address
+    } catch (err) {
+        console.warn(err)
         // try again until success!
-        return new Promise(s => setTimeout(s, 1000)).then(() =>
-            getEthereumInfo(verify)
-        );
-    });
+        return new Promise((s) => setTimeout(s, 1000)).then(() => getEthereumAddress(verify))
+    }
 }

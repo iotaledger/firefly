@@ -1,14 +1,9 @@
 diff --git a/node_modules/node-hid/nodehid.js b/node_modules/node-hid/nodehid.js
-index 4b645da..6f0d1c4 100644
+index 4b645da..92c0a88 100644
 --- a/node_modules/node-hid/nodehid.js
 +++ b/node_modules/node-hid/nodehid.js
-@@ -13,16 +13,17 @@ function setDriverType(type) {
- var binding = null;
- function loadBinding() {
-     if( !binding ) {
--        if( os.platform() === 'linux' ) {
-+        // Optimized by webpack
-+        if( PLATFORM_LINUX ) {
+@@ -16,13 +16,13 @@ function loadBinding() {
+         if( os.platform() === 'linux' ) {
              // Linux defaults to hidraw
              if( !driverType || driverType === 'hidraw' ) {
 -                binding = require('bindings')('HID_hidraw.node');
