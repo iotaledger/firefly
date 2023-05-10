@@ -1,4 +1,11 @@
-import { isStringTrue, getByteLengthOfString, stripTrailingSlash, stripSpaces, truncateString } from '@core/utils'
+import {
+    isStringTrue,
+    getByteLengthOfString,
+    stripTrailingSlash,
+    stripSpaces,
+    truncateString,
+    getInitials,
+} from '@core/utils'
 
 describe('File: string.ts', () => {
     describe('Function: isStringTrue', () => {
@@ -70,6 +77,53 @@ describe('File: string.ts', () => {
         })
         it('should do nothing if the added dots would make the resulting string longer', () => {
             expect(truncateString('Lorem ipsum', 4, 6)).toBe('Lorem ipsum')
+        })
+    })
+
+    describe('getInitials', () => {
+        test('should return initials without character limit', () => {
+            const result = getInitials('John Doe', 0)
+            expect(result).toBe('')
+        })
+
+        test('should return initials with character limit', () => {
+            const result = getInitials('John Doe', 1)
+            expect(result).toBe('J')
+        })
+
+        test('should return initials with emojis', () => {
+            const result = getInitials('🌟 John 👨‍💻 Doe', 2)
+            expect(result).toBe('🌟J')
+        })
+
+        test('should ignore extra spaces', () => {
+            const result = getInitials('   John    Doe   ', 2)
+            expect(result).toBe('JD')
+        })
+
+        test('should return empty string for empty name', () => {
+            const result = getInitials('', 2)
+            expect(result).toBe('')
+        })
+
+        test('should return empty string for undefined name', () => {
+            const result = getInitials(undefined, 2)
+            expect(result).toBe('')
+        })
+
+        test('should return empty string for name with only spaces', () => {
+            const result = getInitials('      ', 2)
+            expect(result).toBe('')
+        })
+
+        test('should return empty string with negative character limit', () => {
+            const result = getInitials('John Doe', -1)
+            expect(result).toBe('')
+        })
+
+        test('should return all initials if max char succeeds amount of words', () => {
+            const result = getInitials('John Doe', 10)
+            expect(result).toBe('JD')
         })
     })
 })

@@ -53,8 +53,8 @@ export function truncateString(
 /**
  * Extract initials from string
  */
-export function getInitials(name: string | undefined, maxChars: number): string {
-    if (!name || !name.trim()) {
+export function getInitials(name: string | undefined, maxChars?: number): string {
+    if (!name || !name.trim() || (maxChars && maxChars < 0)) {
         return ''
     }
 
@@ -66,7 +66,7 @@ export function getInitials(name: string | undefined, maxChars: number): string 
         .filter((n) => n)
         .map((n) => n[0])
 
-    if (maxChars) {
+    if (maxChars !== undefined) {
         initialsArray = initialsArray.slice(0, maxChars)
     }
 
