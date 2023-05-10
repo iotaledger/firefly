@@ -5,6 +5,7 @@ import {
     stripSpaces,
     truncateString,
     getInitials,
+    getTrimmedLength,
 } from '@core/utils'
 
 describe('File: string.ts', () => {
@@ -124,6 +125,33 @@ describe('File: string.ts', () => {
         test('should return all initials if max char succeeds amount of words', () => {
             const result = getInitials('John Doe', 10)
             expect(result).toBe('JD')
+        })
+    })
+
+    describe('getTrimmedLength', () => {
+        test('should return length of trimmed string', () => {
+            const result = getTrimmedLength('   John Doe   ')
+            expect(result).toBe(8)
+        })
+
+        test('should return 0 for an empty string', () => {
+            const result = getTrimmedLength('')
+            expect(result).toBe(0)
+        })
+
+        test('should return 0 for undefined input', () => {
+            const result = getTrimmedLength(undefined)
+            expect(result).toBe(0)
+        })
+
+        test('should return length of trimmed string with emojis', () => {
+            const result = getTrimmedLength('🌟 John 👨‍💻 Doe')
+            expect(result).toBe(14)
+        })
+
+        test('should return length of trimmed string with multiple spaces', () => {
+            const result = getTrimmedLength('  John  Doe  ')
+            expect(result).toBe(8)
         })
     })
 })
