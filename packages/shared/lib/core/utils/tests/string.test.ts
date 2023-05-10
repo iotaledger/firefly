@@ -6,6 +6,7 @@ import {
     truncateString,
     getInitials,
     getTrimmedLength,
+    getNthOccurrenceIndex,
 } from '@core/utils'
 
 describe('File: string.ts', () => {
@@ -151,7 +152,49 @@ describe('File: string.ts', () => {
 
         test('should return length of trimmed string with multiple spaces', () => {
             const result = getTrimmedLength('  John  Doe  ')
-            expect(result).toBe(8)
+            expect(result).toBe(9)
+        })
+    })
+
+    describe('getNthOccurrenceIndex', () => {
+        test('should return the index of the first occurrence', () => {
+            const result = getNthOccurrenceIndex('Hello World', 'o', 1)
+            expect(result).toBe(4)
+        })
+
+        test('should return the index of the second occurrence', () => {
+            const result = getNthOccurrenceIndex('Hello World', 'o', 2)
+            expect(result).toBe(7)
+        })
+
+        test('should return -1 when the occurrence is not found', () => {
+            const result = getNthOccurrenceIndex('Hello World', 'x', 1)
+            expect(result).toBe(-1)
+        })
+
+        test('should return 0 when the string and character are empty', () => {
+            const result = getNthOccurrenceIndex('', '', 1)
+            expect(result).toBe(0)
+        })
+
+        test('should return -1 when the occurrence is zero', () => {
+            const result = getNthOccurrenceIndex('Hello World', 'o', 0)
+            expect(result).toBe(-1)
+        })
+
+        test('should return -1 when the occurrence is negative', () => {
+            const result = getNthOccurrenceIndex('Hello World', 'o', -1)
+            expect(result).toBe(-1)
+        })
+
+        test('should return the index of the third occurrence in a long string', () => {
+            const result = getNthOccurrenceIndex('Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'i', 3)
+            expect(result).toBe(42)
+        })
+
+        test('should return the index of the first occurrence of an emoji', () => {
+            const result = getNthOccurrenceIndex('Hello World 😃', '😃', 1)
+            expect(result).toBe(12)
         })
     })
 })
