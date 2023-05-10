@@ -1,4 +1,4 @@
-import { isStringTrue } from '@core/utils'
+import { isStringTrue, getByteLengthOfString } from '@core/utils'
 
 describe('File: string.ts', () => {
     describe('Function: isStringTrue', () => {
@@ -9,6 +9,18 @@ describe('File: string.ts', () => {
             expect(isStringTrue('truee')).toBeFalsy()
             expect(isStringTrue('false')).toBeFalsy()
             expect(isStringTrue('')).toBeFalsy()
+        })
+    })
+
+    describe('Function: getByteLengthOfString', () => {
+        it('should correctly calculate amount of bytes for different strings', () => {
+            expect(getByteLengthOfString('Hello World')).toBe(11)
+            expect(getByteLengthOfString('Hello World!')).toBe(12)
+            expect(getByteLengthOfString('Hello Wörld!')).toBe(13)
+            expect(getByteLengthOfString('Hello Wòrld!')).toBe(13)
+        })
+        it('should return 0 if string is empty', () => {
+            expect(getByteLengthOfString('')).toBe(0)
         })
     })
 })
