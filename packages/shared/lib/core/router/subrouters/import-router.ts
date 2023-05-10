@@ -70,7 +70,7 @@ export class ImportRouter extends Subrouter<ImportRoute> {
                 this.importFile = file
                 this.importFilePath = filePath
 
-                if (get(this.importType) === ImportType.SeedVault) {
+                if (get(this.importType) !== ImportType.Stronghold) {
                     nextRoute = ImportRoute.BackupPassword
                     break
                 }
