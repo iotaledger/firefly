@@ -3,13 +3,13 @@
     import { getIconColorFromString } from '@core/account'
     import { COIN_TYPE, NetworkId } from '@core/network'
     import { isBright } from '@core/utils'
-    import { ANIMATED_TOKEN_IDS, IPersistedAsset, NotVerifiedStatus, getAssetInitials } from '@core/wallet'
-    import { Animation, Icon, VerificationBadge } from 'shared/components'
+    import { ANIMATED_TOKEN_IDS, getAssetInitials, IPersistedAsset, TokenStandard } from '@core/wallet'
+    import { Animation, Icon, NetworkIconBadge } from 'shared/components'
+    import { activeProfile } from '../../lib/core/profile'
 
     export let asset: IPersistedAsset
     export let large = false
     export let small = false
-    export let showVerifiedBadgeOnly = false
 
     let icon: string
     let assetIconColor: string
@@ -39,9 +39,7 @@
             icon = ''
     }
 
-    $: shouldShowBadge = showVerifiedBadgeOnly
-        ? asset?.verification?.verified
-        : asset?.verification?.status !== NotVerifiedStatus.Skipped
+    $: shouldShowBadge = asset?.metadata.standard !== TokenStandard.BaseToken
 </script>
 
 <div
@@ -81,13 +79,8 @@
         {/if}
     </div>
     {#if shouldShowBadge}
-        <span
-            class="
-                absolute flex justify-center items-center
-                {small ? '-bottom-1 -right-1' : '-bottom-0.5 -right-0.5'}
-            "
-        >
-            <VerificationBadge status={asset?.verification?.status} {large} />
+        <span class="absolute flex justify-center items-center bottom-0 right-0">
+            <NetworkIconBadge width="10" height="10" network={$activeProfile.network} />
         </span>
     {/if}
 </div>
