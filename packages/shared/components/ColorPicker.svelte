@@ -66,7 +66,7 @@
     }
 
     function getAccountColorsNames(): string[] {
-        return Object.keys(AccountColors).reduce(
+        return Object.keys(AccountColors).reduce<string[]>(
             (acc, val) => (/[#]/.test(val) ? acc : [...acc, val.toLowerCase()]),
             []
         )
