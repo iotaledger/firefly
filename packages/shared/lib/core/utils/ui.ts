@@ -155,13 +155,3 @@ export function slidable(node: HTMLElement, use: boolean = true): { destroy: () 
         },
     }
 }
-
-/**
- * Function that converts HEX color to RGB
- * @param hex HEX color in the format of '#FFFFFF'
- */
-export function hex2rgb(hex: string): string {
-    hex = hex.length >= 7 ? hex : '#FFFFFF'
-    const regexMatch = hex.match(/\w\w/g) ?? ['FF', 'FF', 'FF']
-    return regexMatch.map((x) => parseInt(x, 16)).join(',')
-}

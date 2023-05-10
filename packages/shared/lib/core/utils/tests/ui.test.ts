@@ -1,4 +1,4 @@
-import { debounce, getBackupWarningColor, hex2rgb, isBright } from '../ui'
+import { debounce, getBackupWarningColor, isBright } from '../ui'
 import { DAYS_PER_WEEK, MILLISECONDS_PER_DAY } from '../constants'
 
 describe('File: ui.ts', () => {
@@ -63,19 +63,5 @@ describe('File: ui.ts', () => {
     })
     describe('Function: slidable', () => {
         // it.todo('needs a UI testing library to test')
-    })
-    describe('Function: hex2rgb', () => {
-        it('should convert hex to rgb', () => {
-            expect(hex2rgb('#000000')).toEqual('0,0,0')
-        })
-        it('should return RGB values for white if input string has length less than 7', () => {
-            expect(hex2rgb('')).toEqual('255,255,255')
-        })
-        it('should return RGB values of initial 7 chars if input string has length greater than 7', () => {
-            expect(hex2rgb('#0F0F0F9')).toEqual('15,15,15')
-        })
-        it('should(return the RGB value for white if the 7 character hex string does not match the regex', () => {
-            expect(hex2rgb('#******')).toEqual('255,255,255')
-        })
     })
 })
