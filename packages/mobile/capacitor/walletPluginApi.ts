@@ -124,6 +124,24 @@ export function init(
     }
 }
 
+export async function migrateStrongholdSnapshotV2ToV3(
+    currentPath: string,
+    currentPassword: string,
+    newPath: string,
+    newPassword: string
+): Promise<void> {
+    try {
+        await WalletPlugin.migrateStrongholdSnapshotV2ToV3({
+            currentPath,
+            currentPassword,
+            newPath,
+            newPassword,
+        })
+    } catch (err) {
+        throw new Error(err)
+    }
+}
+
 type Api = { (__ids: CommunicationIds): Promise<string> }
 export const api = {
     setAlias:
