@@ -23,8 +23,7 @@ export function getNetworkStatusFromNodeInfo(nodeInfo: INodeInfo): INetworkStatu
             health = NetworkHealth.Degraded
         }
     } else {
-        // Ask what NetworkHealth response to return if we get no timestamp
-        health = NetworkHealth.Degraded
+        health = NetworkHealth.Operational
     }
 
     return {
