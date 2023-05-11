@@ -9,14 +9,14 @@
         NewTransactionType,
         Subject,
         formatTokenAmountBestMatch,
-        getAssetFromPersistedAssets,
         newTransactionDetails,
         updateNewTransactionDetails,
     } from '@core/wallet'
     import features from '@features/features'
-    import { Button, FontWeight, INetworkRecipientSelectorOption, NetworkRecipientSelector, Text, TextType } from '@ui'
+    import { INetworkRecipientSelectorOption, NetworkRecipientSelector } from '@ui'
     import { onMount } from 'svelte'
     import { sendFlowRouter } from '../send-flow.router'
+    import SendFlowTemplate from './SendFlowTemplate.svelte'
 
     let layer2Parameters: ILayer2Parameters
     let recipient: Subject = $newTransactionDetails?.recipient
@@ -24,15 +24,11 @@
     let selectorOptions: INetworkRecipientSelectorOption[] = []
     let selectedOption: INetworkRecipientSelectorOption = undefined
 
-    const rawAmount =
-        $newTransactionDetails?.type === NewTransactionType.TokenTransfer
-            ? Number($newTransactionDetails?.rawAmount)
-            : undefined
     const formattedAmount =
         $newTransactionDetails?.type === NewTransactionType.TokenTransfer
             ? formatTokenAmountBestMatch(
-                  Number(rawAmount),
-                  getAssetFromPersistedAssets($newTransactionDetails?.assetId)?.metadata
+                  Number($newTransactionDetails?.rawAmount),
+                  $newTransactionDetails.asset?.metadata
               )
             : undefined
 
@@ -113,30 +109,20 @@
     }
 </script>
 
-<select-recipient-view class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
-    <select-recipient-title>
-        <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
-            {localize('popups.transaction.selectRecipient', {
-                values: { amount: formattedAmount },
-            })}
-        </Text>
-    </select-recipient-title>
-    <select-recipient-content>
-        <NetworkRecipientSelector bind:options={selectorOptions} bind:selected={selectedOption} />
-    </select-recipient-content>
-    <select-recipient-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" outline onClick={onBackClick}>
-            {localize('actions.back')}
-        </Button>
-        <Button
-            classes="w-full"
-            onClick={onContinueClick}
-            disabled={!networkAddress ||
-                !recipient ||
-                (recipient?.type === 'address' && !recipient?.address) ||
-                (recipient?.type === 'account' && !recipient?.account)}
-        >
-            {localize('actions.continue')}
-        </Button>
-    </select-recipient-buttons>
-</select-recipient-view>
+<SendFlowTemplate
+    title={localize('popups.transaction.selectRecipient', {
+        values: { amount: formattedAmount },
+    })}
+    leftButton={{ text: localize('actions.back'), onClick: onBackClick }}
+    rightButton={{
+        text: localize('actions.continue'),
+        onClick: onContinueClick,
+        disabled:
+            !networkAddress ||
+            !recipient ||
+            (recipient?.type === 'address' && !recipient?.address) ||
+            (recipient?.type === 'account' && !recipient?.account),
+    }}
+>
+    <NetworkRecipientSelector bind:options={selectorOptions} bind:selected={selectedOption} />
+</SendFlowTemplate>
