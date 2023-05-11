@@ -2,7 +2,6 @@
     import { localize } from '@core/i18n'
     import { Button, FontWeight, Text, TextType, NetworkInput, RecipientInput } from '@ui'
     import { sendFlowRouter } from '../send-flow.router'
-    import { isLayer1Destination } from '@core/layer-2'
     import { newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'
     import { selectedAccount } from '@core/account/stores'
     import features from '@features/features'
@@ -13,7 +12,7 @@
     let { type, recipient, layer2Parameters } = get(newTransactionDetails)
     let networkAddress = layer2Parameters?.networkAddress
 
-    $: isLayer2 = !isLayer1Destination(networkAddress)
+    $: isLayer2 = !!networkAddress
 
     function onContinueClick(): void {
         layer2Parameters = isLayer2 ? { networkAddress, senderAddress: $selectedAccount.depositAddress } : null
