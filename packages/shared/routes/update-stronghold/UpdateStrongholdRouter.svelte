@@ -6,8 +6,6 @@
 
     export let parentRouter: Router<unknown>
     export let isRecovery: boolean
-
-    let hasChangedPassword = false
 </script>
 
 {#if $updateStrongholdRoute === UpdateStrongholdRoute.UpdateStronghold}
@@ -16,10 +14,10 @@
     </Transition>
 {:else if $updateStrongholdRoute === UpdateStrongholdRoute.ChangePassword}
     <Transition>
-        <ChangePasswordView bind:hasChangedPassword />
+        <ChangePasswordView />
     </Transition>
 {:else if $updateStrongholdRoute === UpdateStrongholdRoute.SaveBackup}
     <Transition>
-        <SaveBackupView bind:hasChangedPassword {parentRouter} {isRecovery} />
+        <SaveBackupView {parentRouter} {isRecovery} />
     </Transition>
 {/if}

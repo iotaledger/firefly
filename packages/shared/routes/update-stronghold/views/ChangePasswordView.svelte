@@ -8,8 +8,6 @@
     import { asyncChangeStrongholdPassword, MAX_PASSWORD_LENGTH } from '@lib/wallet'
     import { strongholdPassword } from '@lib/app'
 
-    export let hasChangedPassword: boolean
-
     let password = ''
     let error = ''
     let confirmPassword = ''
@@ -48,7 +46,6 @@
                 busy = true
                 await asyncChangeStrongholdPassword($strongholdPassword, password)
                 strongholdPassword.set(password)
-                hasChangedPassword = true
                 await $updateStrongholdRouter.next()
             } catch (err) {
                 showAppNotification({
