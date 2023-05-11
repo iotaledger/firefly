@@ -1,6 +1,7 @@
 <script lang="ts">
     import Big from 'big.js'
     import { onMount } from 'svelte'
+    import { get } from 'svelte/store'
 
     import { localize, parseCurrency } from '@core/i18n'
     import { IOTA_UNIT_MAP } from '@core/utils'
@@ -20,6 +21,9 @@
     import { getAssetById } from '@core/wallet'
     import { TokenUnitSwapper, TokenWithMax } from '@components'
     import { sendRouter } from '@/routers'
+
+    // need to store the newTransactionDetails to avoid errors
+    const transactionDetails = get(newTransactionDetails)
 
     let amount: string
     let rawAmount: string
@@ -46,16 +50,16 @@
     $: marketAmount = getMarketAmountFromAssetValue(bigAmount, asset)
 
     onMount(() => {
-        if ($newTransactionDetails?.type === NewTransactionType.TokenTransfer) {
-            const storedRawAmount = $newTransactionDetails?.rawAmount
-            asset = getAssetById($newTransactionDetails.assetId)
+        if (transactionDetails?.type === NewTransactionType.TokenTransfer) {
+            const storedRawAmount = transactionDetails?.rawAmount
+            asset = getAssetById(transactionDetails.assetId)
             tokenMetadata = asset?.metadata
-            unit = $newTransactionDetails.unit ?? tokenMetadata?.unit
+            unit = transactionDetails.unit ?? tokenMetadata?.unit
             amount = storedRawAmount
                 ? formatTokenAmountDefault(Number(storedRawAmount), asset?.metadata, unit, false)
                 : ''
         }
-        amountInputElement.focus()
+        amountInputElement?.focus()
     })
 
     function validate(allowZeroOrNull = false): void {
@@ -89,7 +93,7 @@
 
     function toggleUnit(newUnit: string): void {
         unit = newUnit
-        amountInputElement.focus()
+        amountInputElement?.focus()
     }
 
     function onClickAvailableBalance(): void {
@@ -111,7 +115,7 @@
 
     function onContinueClick(): void {
         updateNewTransactionDetails({
-            type: $newTransactionDetails.type,
+            type: transactionDetails.type,
             rawAmount,
             unit,
         })
@@ -125,7 +129,7 @@
             <div class="flex flex-row items-center space-x-2">
                 <amount-wrapper
                     style:--max-width={`${Math.max(amount?.length, 1) * 14}px`}
-                    on:click={() => amountInputElement.focus()}
+                    on:click={() => amountInputElement?.focus()}
                 >
                     <AmountInput
                         bind:inputElement={amountInputElement}
@@ -137,6 +141,7 @@
                         clearPadding
                         clearBorder
                         inputType="number"
+                        inputmode="numeric"
                     />
                 </amount-wrapper>
                 <p class="font-600 text-gray-800 dark:text-white text-24 leading-140">{unit}</p>
@@ -148,7 +153,7 @@
         <Text color="gray-600" darkColor="gray-500" fontSize="xs">{formatCurrency(marketAmount) ?? ''}</Text>
     </div>
     <div class="flex flex-col space-y-8 w-full">
-        {#if $newTransactionDetails?.type === NewTransactionType.TokenTransfer}
+        {#if transactionDetails?.type === NewTransactionType.TokenTransfer}
             <HR overrideColor classes="border-gray-200 dark:border-gray-700" />
             <TokenWithMax {asset} onMaxClick={onClickAvailableBalance} />
         {/if}

@@ -2,7 +2,6 @@
     import { Button, ButtonVariant, Error, HTMLButtonType, PasswordInput, Text, TextType } from '@ui'
 
     import { selectedAccount } from '@core/account'
-    import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
     import { isSoftwareProfile } from '@core/profile'
     import { setStrongholdPassword } from '@core/profile-manager'
@@ -29,8 +28,7 @@
             await deleteAccount($selectedAccount?.index)
             closeDrawer(DrawerId.DeleteAccount)
         } catch (err) {
-            error = err.error
-            handleError(err)
+            error = err.message ?? err.error
         }
     }
 </script>

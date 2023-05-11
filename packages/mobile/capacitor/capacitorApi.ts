@@ -28,21 +28,42 @@ const CapacitorApi: Partial<IPlatform> = {
         activeProfileId = id
     },
 
-    // TODO: https://github.com/iotaledger/firefly/issues/5577
-    // TODO: https://github.com/iotaledger/firefly/issues/5578
-    renameProfileFolder: () => {
-        throw new Error('Function not implemented.')
+    renameProfileFolder: async (oldPath, newPath) => {
+        try {
+            await SecureFilesystemAccess.renameProfileFolder({
+                oldName: oldPath,
+                newName: newPath,
+            })
+        } catch (err) {
+            console.error(err)
+        }
     },
 
-    // TODO: https://github.com/iotaledger/firefly/issues/5577
-    // TODO: https://github.com/iotaledger/firefly/issues/5578
-    removeProfileFolder: () => {
-        throw new Error('Function not implemented.')
+    removeProfileFolder: async (profilePath) => {
+        try {
+            await SecureFilesystemAccess.removeProfileFolder({
+                folder: profilePath,
+            })
+        } catch (err) {
+            console.error(err)
+        }
     },
 
-    // TODO: https://github.com/iotaledger/firefly/issues/5577
-    // TODO: https://github.com/iotaledger/firefly/issues/5578
-    listProfileFolders: () => new Promise<string[]>(() => {}),
+    listProfileFolders: async (profileStoragePath) => {
+        // Check that the profile path matches the user data path
+        // so that we don't try and remove things outside our scope
+        if (profileStoragePath.startsWith('/DATA')) {
+            try {
+                const { files } = await SecureFilesystemAccess.listProfileFolders({
+                    folder: profileStoragePath,
+                })
+                return files
+            } catch (err) {
+                console.error(err)
+                return []
+            }
+        }
+    },
 
     PincodeManager: PincodeManager,
 
@@ -80,14 +101,10 @@ const CapacitorApi: Partial<IPlatform> = {
         return
     },
 
-    // TODO: https://github.com/iotaledger/firefly/issues/5577
-    // TODO: https://github.com/iotaledger/firefly/issues/5578
-    exportTransactionHistory: () => {
-        throw new Error('Function not implemented.')
-    },
-
     // Gets directory for app's configuration files
     // (On mobile is handled by the Capacitor wallet plugin)
+    // We don't need the full path since the Filesystem Capacitor plugin
+    // use it on each platform to compose the path.
     getUserDataPath: (): Promise<string> => new Promise<string>((resolve) => resolve('/DATA')),
 
     // Gets diagnostics information for the system

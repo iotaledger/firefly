@@ -20,6 +20,7 @@
     import { ActivityAction } from '@core/wallet/enums'
 
     import { DrawerId, openDrawer } from '@/auxiliary/drawer'
+    import { drawers } from '@/auxiliary/drawer/stores'
     import { sendRouter } from '@/routers'
 
     export let sendTransaction: () => Promise<void>
@@ -77,7 +78,9 @@
         const isUnlocked = await isStrongholdUnlocked()
         const _onConfirm = async (): Promise<void> => {
             await asyncSendTransaction()
-            $sendRouter.next()
+            if ($drawers.some((drawer) => drawer.id === DrawerId.Send)) {
+                $sendRouter.next()
+            }
         }
         if (isUnlocked) {
             _onConfirm()
