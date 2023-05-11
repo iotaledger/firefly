@@ -4,7 +4,7 @@
     import { COIN_TYPE, NetworkId } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { isBright } from '@core/utils'
-    import { ANIMATED_TOKEN_IDS, getAssetInitials, IPersistedAsset, TokenStandard } from '@core/wallet'
+    import { ANIMATED_TOKEN_IDS, getAssetInitials, IPersistedAsset } from '@core/wallet'
     import { Animation, Icon, NetworkIconBadge } from 'shared/components'
 
     export let asset: IPersistedAsset
@@ -38,8 +38,6 @@
             assetIconBackgroundColor = getIconColorFromString(asset?.metadata?.name)
             icon = ''
     }
-
-    $: shouldShowBadge = asset?.metadata.standard !== TokenStandard.BaseToken
 </script>
 
 <div
@@ -78,11 +76,9 @@
             </p>
         {/if}
     </div>
-    {#if shouldShowBadge}
-        <span class="absolute flex justify-center items-center bottom-0 right-0">
-            <NetworkIconBadge width="10" height="10" network={$activeProfile.network} />
-        </span>
-    {/if}
+    <span class="absolute flex justify-center items-center bottom-0 right-0">
+        <NetworkIconBadge width="10" height="10" network={$activeProfile.network} />
+    </span>
 </div>
 
 <style type="text/scss">
