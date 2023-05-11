@@ -282,6 +282,9 @@ const handleError = (
         if (error.includes('forbidden')) {
             return 'error.node.forbidden'
         }
+        if (error.includes('migration required')) {
+            return 'error.backup.migrationRequired'
+        }
 
         if (hasStatusCode403) {
             return 'error.node.pluginNotFound'
