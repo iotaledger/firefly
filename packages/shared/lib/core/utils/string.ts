@@ -6,21 +6,6 @@ export function getByteLengthOfString(str: string): number {
     return new Blob([str]).size
 }
 
-export function chunkString(str: string, size: number = 0): string[] {
-    if (str) {
-        const numChunks = Math.ceil(str.length / size)
-        const chunks = new Array(numChunks)
-
-        for (let i = 0, o = 0; i < numChunks; ++i, o += size) {
-            chunks[i] = str.substr(o, size)
-        }
-
-        return chunks
-    } else {
-        return []
-    }
-}
-
 /**
  * Strip trailing slashes from the text
  * @param str The text to strip the values from
@@ -68,8 +53,8 @@ export function truncateString(
 /**
  * Extract initials from string
  */
-export function getInitials(name: string | undefined, maxChars: number): string {
-    if (!name || !name.trim()) {
+export function getInitials(name: string | undefined, maxChars?: number): string {
+    if (!name || !name.trim() || (maxChars && maxChars < 0)) {
         return ''
     }
 
@@ -78,10 +63,10 @@ export function getInitials(name: string | undefined, maxChars: number): string 
         .split(' ')
         .filter((n) => n)
         .map((n) => n.match(/./gu)) // match characters for emoji compatibility
-        .filter((n) => n)
+        .filter((n): n is RegExpMatchArray => n !== null)
         .map((n) => n[0])
 
-    if (maxChars) {
+    if (maxChars !== undefined) {
         initialsArray = initialsArray.slice(0, maxChars)
     }
 
