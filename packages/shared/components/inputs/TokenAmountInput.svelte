@@ -6,7 +6,6 @@
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
     import { validateTokenAmount } from '@core/wallet/utils/validateTokenAmount'
 
-    export let disabled = false
     export let asset: IAsset | undefined = $visibleSelectedAccountAssets?.baseCoin
     export let rawAmount: string | undefined = undefined
     export let unit: string | undefined = undefined
@@ -54,7 +53,6 @@
                         clearBackground
                         clearPadding
                         clearBorder
-                        {disabled}
                     />
                 </amount-wrapper>
             </div>
