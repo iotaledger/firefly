@@ -1,13 +1,11 @@
 <script lang="ts">
     import { selectedAccount } from '@core/account/stores'
     import { localize } from '@core/i18n'
-    import type { ILayer2Parameters } from '@core/layer-2'
     import { NETWORK_ADDRESS, isLayer1Destination } from '@core/layer-2'
     import { ChainType, IIscpChainConfiguration, network } from '@core/network'
     import { activeProfile } from '@core/profile'
     import {
         NewTransactionType,
-        Subject,
         formatTokenAmountBestMatch,
         newTransactionDetails,
         updateNewTransactionDetails,
@@ -18,11 +16,9 @@
     import { sendFlowRouter } from '../send-flow.router'
     import SendFlowTemplate from './SendFlowTemplate.svelte'
 
-    let layer2Parameters: ILayer2Parameters
-    let recipient: Subject = $newTransactionDetails?.recipient
     let networkAddress = $newTransactionDetails?.layer2Parameters?.networkAddress
     let selectorOptions: INetworkRecipientSelectorOption[] = []
-    let selectedOption: INetworkRecipientSelectorOption = undefined
+    let selectedIndex = -1
 
     const formattedAmount =
         $newTransactionDetails?.type === NewTransactionType.TokenTransfer
@@ -32,65 +28,58 @@
               )
             : undefined
 
+    $: selectedOption = selectorOptions[selectedIndex]
     $: isLayer2 = !isLayer1Destination(networkAddress)
     $: networkAddress = selectedOption?.networkAddress ?? $newTransactionDetails?.layer2Parameters?.networkAddress
     $: recipient = selectedOption?.recipient ?? $newTransactionDetails?.recipient
 
     onMount(() => {
         buildNetworkRecipientOptions()
-        if (recipient) {
-            const _selectedOption = networkAddress
-                ? selectorOptions?.find((option) => option.networkAddress === networkAddress)
-                : selectorOptions[0]
-            if (_selectedOption) {
-                selectedOption = _selectedOption
-                selectorOptions = selectorOptions.map((option) => {
-                    if (option.id === selectedOption?.id) {
-                        return {
-                            ...option,
-                            recipient,
-                        }
-                    }
-                    return option
-                })
-            }
-        }
     })
 
     function buildNetworkRecipientOptions(): void {
         // L1 networks, hardcoded Shimmer
         const activeProfileNetworkAddresses = NETWORK_ADDRESS[$activeProfile?.network?.id]
-        const name = $network.getMetadata().name
-        const networkAddress = activeProfileNetworkAddresses?.Shimmer
-        selectorOptions.push({
-            id: 0,
-            name,
-            networkAddress,
+        const mainNetworkOption = {
+            name: $network.getMetadata().name,
+            networkAddress: activeProfileNetworkAddresses?.Shimmer,
             recipient: undefined,
-        })
+        }
+
         // L2 networks, ISCP only for now
         const iscpNetworkChains = features?.network?.layer2?.enabled
             ? $network.getChains()?.filter((chain) => chain?.getConfiguration()?.type === ChainType.Iscp)
             : []
-        iscpNetworkChains.forEach((chain, index) => {
+        const iscpNetworkChainsOptions = iscpNetworkChains.map((chain) => {
             const chainConfiguration = chain.getConfiguration() as IIscpChainConfiguration
-            const name = chainConfiguration.name
-            const networkAddress = chainConfiguration?.aliasAddress
-            selectorOptions.push({
-                id: index + 1,
-                name,
-                networkAddress,
+            return {
+                name: chainConfiguration.name,
+                networkAddress: chainConfiguration?.aliasAddress,
                 recipient: undefined,
-            })
+            }
         })
-        // needed for reactivity
-        selectorOptions = selectorOptions
+
+        selectorOptions = [mainNetworkOption, ...iscpNetworkChainsOptions]
+        selectedIndex =
+            networkAddress && selectorOptions.length
+                ? selectorOptions.findIndex((option) => option.networkAddress === networkAddress)
+                : 0
+
+        const recipient = $newTransactionDetails?.recipient
+        if (recipient) {
+            selectorOptions = selectorOptions.map((option, index) => index === selectedIndex
+                    ? {
+                          ...option,
+                          recipient,
+                      }
+                    : option)
+        }
     }
 
     function onContinueClick(): void {
-        networkAddress = selectedOption?.networkAddress
-        recipient = selectedOption?.recipient
-        layer2Parameters = isLayer2 ? { networkAddress, senderAddress: $selectedAccount.depositAddress } : null
+        const layer2Parameters = isLayer2
+            ? { networkAddress: selectedOption?.networkAddress, senderAddress: $selectedAccount.depositAddress }
+            : null
         updateNewTransactionDetails({
             type: $newTransactionDetails?.type,
             recipient,
@@ -120,9 +109,9 @@
         disabled:
             !networkAddress ||
             !recipient ||
-            (recipient?.type === 'address' && !recipient?.address) ||
-            (recipient?.type === 'account' && !recipient?.account),
+            (recipient.type === 'address' && !recipient.address) ||
+            (recipient.type === 'account' && !recipient.account),
     }}
 >
-    <NetworkRecipientSelector bind:options={selectorOptions} bind:selected={selectedOption} />
+    <NetworkRecipientSelector bind:options={selectorOptions} bind:selectedIndex />
 </SendFlowTemplate>

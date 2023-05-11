@@ -3,23 +3,22 @@
     import { INetworkRecipientSelectorOption } from '../interfaces'
 
     export let options: INetworkRecipientSelectorOption[]
-    export let selected: INetworkRecipientSelectorOption | undefined = undefined
+    export let selectedIndex = -1
 
-    function onItemClick(item: INetworkRecipientSelectorOption) {
-        selected = item
+    function onItemClick(index: number) {
+        selectedIndex = index
     }
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 {#if options?.length}
     <network-recipient-selector class="w-full flex flex-col space-y-4">
-        {#each options as item}
-            {@const itemSelected = item?.id === selected?.id}
+        {#each options as item, index}
             <NetworkRecipientItem
                 bind:item
-                selected={itemSelected}
-                onChange={() => onItemClick(item)}
-                onClick={() => onItemClick(item)}
+                selected={index === selectedIndex}
+                onChange={() => onItemClick(index)}
+                onClick={() => onItemClick(index)}
             />
         {/each}
     </network-recipient-selector>
