@@ -3,7 +3,7 @@
     import features from '@features/features'
     import { SendFlowRoute } from './send-flow-route.enum'
     import { sendFlowRoute } from './send-flow.router'
-    import { InputDestinationView, InputTokenAmountView, SelectTokenView, TransactionSummaryView } from './views'
+    import { InputTokenAmountView, SelectRecipientView, SelectTokenView, TransactionSummaryView } from './views'
 
     export let onTransactionSummaryMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -15,10 +15,10 @@
 <send-flow-router>
     {#if $sendFlowRoute === SendFlowRoute.SelectToken}
         <SelectTokenView />
-    {:else if $sendFlowRoute === SendFlowRoute.InputDestination}
-        <InputDestinationView />
     {:else if $sendFlowRoute === SendFlowRoute.InputTokenAmount}
         <InputTokenAmountView />
+    {:else if $sendFlowRoute === SendFlowRoute.SelectRecipient}
+        <SelectRecipientView />
     {:else if $sendFlowRoute === SendFlowRoute.TransactionSummary}
         <TransactionSummaryView _onMount={onTransactionSummaryMount} />
     {/if}

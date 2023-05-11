@@ -19,9 +19,9 @@ export class SendFlowRouter extends Subrouter<SendFlowRoute> {
                 nextRoute = SendFlowRoute.InputTokenAmount
                 break
             case SendFlowRoute.InputTokenAmount:
-                nextRoute = SendFlowRoute.InputDestination
+                nextRoute = SendFlowRoute.SelectRecipient
                 break
-            case SendFlowRoute.InputDestination:
+            case SendFlowRoute.SelectRecipient:
                 nextRoute = SendFlowRoute.TransactionSummary
                 break
             case SendFlowRoute.TransactionSummary:
