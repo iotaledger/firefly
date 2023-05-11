@@ -41,6 +41,9 @@ describe('File: ui.ts', () => {
             expect(isBright('#FFFFFF')).toEqual(true)
             expect(isBright('255,255,255')).toEqual(true)
         })
+        it('should return the same boolean for identical 3 and 6 value HEX colors', () => {
+            expect(isBright('#CCC')).toEqual(isBright('#CCCCCC'))
+        })
         it('should return false if color is not bright', () => {
             expect(isBright('#000000')).toEqual(false)
             expect(isBright('0,0,0')).toEqual(false)
