@@ -1,9 +1,7 @@
 <script lang="ts">
     import { selectedAccount } from '@core/account/stores'
     import { localize } from '@core/i18n'
-    import { NETWORK_ADDRESS, isLayer1Destination } from '@core/layer-2'
     import { ChainType, IIscpChainConfiguration, network } from '@core/network'
-    import { activeProfile } from '@core/profile'
     import {
         NewTransactionType,
         formatTokenAmountBestMatch,
@@ -29,7 +27,8 @@
             : undefined
 
     $: selectedOption = selectorOptions[selectedIndex]
-    $: isLayer2 = !isLayer1Destination(networkAddress)
+    $: isLayer2 = !!networkAddress
+
     $: networkAddress = selectedOption?.networkAddress ?? $newTransactionDetails?.layer2Parameters?.networkAddress
     $: recipient = selectedOption?.recipient ?? $newTransactionDetails?.recipient
 
@@ -39,10 +38,9 @@
 
     function buildNetworkRecipientOptions(): void {
         // L1 networks, hardcoded Shimmer
-        const activeProfileNetworkAddresses = NETWORK_ADDRESS[$activeProfile?.network?.id]
         const mainNetworkOption = {
             name: $network.getMetadata().name,
-            networkAddress: activeProfileNetworkAddresses?.Shimmer,
+            networkAddress: '',
             recipient: undefined,
         }
 
@@ -67,12 +65,14 @@
 
         const recipient = $newTransactionDetails?.recipient
         if (recipient) {
-            selectorOptions = selectorOptions.map((option, index) => index === selectedIndex
+            selectorOptions = selectorOptions.map((option, index) =>
+                index === selectedIndex
                     ? {
                           ...option,
                           recipient,
                       }
-                    : option)
+                    : option
+            )
         }
     }
 
@@ -107,7 +107,7 @@
         text: localize('actions.continue'),
         onClick: onContinueClick,
         disabled:
-            !networkAddress ||
+            networkAddress === undefined ||
             !recipient ||
             (recipient.type === 'address' && !recipient.address) ||
             (recipient.type === 'account' && !recipient.account),

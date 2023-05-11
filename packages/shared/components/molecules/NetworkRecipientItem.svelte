@@ -1,6 +1,5 @@
 <script lang="ts">
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { isLayer1Destination } from '@core/layer-2'
     import { NetworkId } from '@core/network'
     import { FontWeight, Icon, NetworkIcon, RecipientInput, Text, TextType } from '@ui'
     import { INetworkRecipientSelectorOption } from '../interfaces'
@@ -12,7 +11,7 @@
 
     let recipientInputElement: HTMLInputElement
 
-    $: isLayer2 = !isLayer1Destination(item?.networkAddress)
+    $: isLayer2 = !!item?.networkAddress
     $: onChange && selected && onChange(item)
 
     function onItemClick(): void {
