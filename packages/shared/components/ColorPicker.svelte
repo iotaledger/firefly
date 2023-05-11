@@ -14,37 +14,46 @@
     const accountColors = Object.values(AccountColors).filter((c) => /[#]/.test(c as string))
     const activeAccountColorIndex = accountColors.findIndex((_, i) => accountColors[i] === active)
 
-    let activeElement = activeAccountColorIndex >= 0 ? activeAccountColorIndex : accountColors.length
-    let inputValue: string = activeAccountColorIndex >= 0 ? '#FFFFFF' : active
-    let inputColor = ''
+    let indexOfActiveElement = activeAccountColorIndex >= 0 ? activeAccountColorIndex : accountColors.length
+    let cachedColor = '#000000'
+    let inputValue: string = activeAccountColorIndex >= 0 ? cachedColor : active
+    let iconColor = ''
     let isTooltipVisible = false
     let isCustomHover = false
     let tooltipAnchor: HTMLElement
 
     $: inputValue = `#${/[0-9|a-f|A-F]+/.exec(inputValue) || ''}`
-    $: customActiveFilled = activeElement === accountColors.length && inputValue.length >= 7
+    $: isSelectedCustomElement = indexOfActiveElement === accountColors.length
     $: dark = $appSettings.darkMode
 
-    $: if (activeElement >= accountColors.length) {
-        active = inputValue.length >= 7 ? inputValue : '#FFFFFF'
-    } else {
-        active = accountColors?.[activeElement]?.toString()
+    $: if (indexOfActiveElement === accountColors.length) {
+        active === cachedColor
     }
 
-    $: if (inputValue.length >= 7) {
-        inputColor = isBright(inputValue) ? 'gray-800' : 'white'
+    $: if (indexOfActiveElement === accountColors.length) {
+        active = inputValue.length === 7 || inputValue.length === 4 ? inputValue : cachedColor
     } else {
-        inputColor = 'gray-800'
+        active = accountColors?.[indexOfActiveElement]?.toString()
+    }
+
+    $: if (inputValue.length) {
+        iconColor = isBright(cachedColor) ? 'gray-800' : 'white'
+    } else {
+        iconColor = 'gray-800'
+    }
+
+    $: if (inputValue.length === 4 || inputValue.length === 7) {
+        cachedColor = inputValue
     }
 
     function onKeyPress(event: KeyboardEvent, index: number): void {
         if (event.key === 'Enter') {
-            activeElement = index
+            indexOfActiveElement = index
         }
     }
 
     function onColorClick(index: number): void {
-        activeElement = index
+        indexOfActiveElement = index
     }
 
     function toggleCustomHover(): void {
@@ -56,12 +65,13 @@
         if (event.type === 'click' || isEnterKeyPressed) {
             isTooltipVisible = !isTooltipVisible
         }
+        inputValue = cachedColor
     }
 
     function activeCustomColor(event: KeyboardEvent | MouseEvent): void {
         const isEnterKeyPressed = event.type === 'keypress' && (event as KeyboardEvent).key === 'Enter'
         if (event.type === 'click' || isEnterKeyPressed) {
-            activeElement = accountColors.length
+            indexOfActiveElement = accountColors.length
         }
     }
 
@@ -74,10 +84,8 @@
 </script>
 
 <color-picker
-    style:--account-color={inputValue ? convertHexToRgba(active) : ''}
-    style:--account-color-ring={inputValue ? convertHexToRgba(active, 30) : ''}
-    style:--custom-color={convertHexToRgba(inputValue)}
-    style:--custom-color-ring={convertHexToRgba(inputValue, 30)}
+    style:--custom-color={convertHexToRgba(cachedColor)}
+    style:--custom-color-ring={convertHexToRgba(cachedColor, 30)}
     class="block {classes}"
 >
     {#if title}
@@ -94,9 +102,9 @@
                 aria-label={color}
                 class="w-12 h-12 rounded-lg ring-opacity-30 hover:ring-opacity-40 cursor-pointer flex justify-center items-center
                 bg-{color}-500 hover:bg-{color}-600 focus:bg-{color}-600 ring-{color}-500"
-                class:ring-4={activeElement === i}
+                class:ring-4={indexOfActiveElement === i}
             >
-                {#if activeElement === i}
+                {#if indexOfActiveElement === i}
                     <Icon icon={IconEnum.Checkmark} classes="text-white" />
                 {/if}
             </li>
@@ -113,10 +121,10 @@
                 tabindex="0"
                 class="w-12 h-12 rounded-lg ring-opacity-30 hover:ring-opacity-40 cursor-pointer flex justify-center items-center
                 custom-color hover:bg-gray-50 focus:bg-white ring-white"
-                class:active={customActiveFilled}
-                class:ring-4={customActiveFilled}
+                class:active={isSelectedCustomElement}
+                class:ring-4={isSelectedCustomElement}
             >
-                <Icon icon={IconEnum.Edit} classes={isCustomHover ? 'text-gray-800' : `text-${inputColor}`} />
+                <Icon icon={IconEnum.Edit} classes={`text-${iconColor}`} />
             </li>
         {/if}
     </ul>
@@ -131,8 +139,6 @@
                     placeholder="#"
                     pattern="[A-F0-9]{10}"
                     maxlength="7"
-                    class:ring-4={customActiveFilled}
-                    class:active={customActiveFilled}
                     class:dark
                 />
             </Tooltip>
@@ -150,11 +156,6 @@
         &.dark {
             @apply text-white bg-gray-800 border-gray-700 hover:border-gray-700;
         }
-    }
-
-    .active {
-        background-color: var(--account-color);
-        --tw-ring-color: var(--account-color-ring);
     }
 
     .custom-color {
