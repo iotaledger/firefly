@@ -19,8 +19,8 @@
 
     const transactionDetails = get(newTransactionDetails)
 
-    let selectedAssetId: string | undefined =
-        transactionDetails?.type === NewTransactionType.TokenTransfer ? transactionDetails.assetId : undefined
+    let selectedAsset: IAsset =
+        transactionDetails?.type === NewTransactionType.TokenTransfer ? transactionDetails.asset : undefined
     let assetList: IAsset[]
     let searchValue: string = ''
 
@@ -34,8 +34,8 @@
         } else {
             assetList = [assets.baseCoin, ...assets.nativeTokens].filter(isVisibleAsset)
         }
-        if (!assetList.some((asset) => asset.id === selectedAssetId)) {
-            selectedAssetId = undefined
+        if (!assetList.some((asset) => asset.id === selectedAsset?.id)) {
+            selectedAsset = undefined
         }
     }
 
@@ -59,7 +59,7 @@
     function onContinueClick(): void {
         updateNewTransactionDetails({
             type: NewTransactionType.TokenTransfer,
-            assetId: selectedAssetId,
+            asset: selectedAsset,
         })
 
         $sendFlowRouter.next()
@@ -69,18 +69,13 @@
 <SendFlowTemplate
     title={localize('popups.transaction.selectToken')}
     leftButton={{ text: localize('actions.cancel'), onClick: onCancelClick }}
-    rightButton={{ text: localize('actions.continue'), onClick: onContinueClick, disabled: !selectedAssetId }}
+    rightButton={{ text: localize('actions.continue'), onClick: onContinueClick, disabled: !selectedAsset }}
 >
     <IconInput bind:value={searchValue} icon={IconEnum.Search} placeholder={localize('general.search')} />
-
     <div class="-mr-3">
         <div class="asset-list w-full flex flex-col -mr-1 pr-1.5 gap-2">
             {#each assetList as asset}
-                <AssetTile
-                    {asset}
-                    onClick={() => (selectedAssetId = asset.id)}
-                    selected={selectedAssetId === asset.id}
-                />
+                <AssetTile {asset} onClick={() => (selectedAsset = asset)} selected={selectedAsset?.id === asset.id} />
             {/each}
         </div>
     </div>

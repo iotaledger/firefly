@@ -6,14 +6,14 @@ export enum NewTransactionType {
     NftTransfer = 'NftTransfer',
 }
 
-export const newTransactionDetails: Writable<NewTransactionDetails> = writable(undefined)
+export const newTransactionDetails: Writable<NewTransactionDetails | undefined> = writable(undefined)
 
 export function resetNewTokenTransactionDetails(): void {
     newTransactionDetails.set({
         type: NewTransactionType.TokenTransfer,
         recipient: undefined,
         rawAmount: undefined,
-        assetId: undefined,
+        asset: undefined,
         unit: undefined,
     })
 }

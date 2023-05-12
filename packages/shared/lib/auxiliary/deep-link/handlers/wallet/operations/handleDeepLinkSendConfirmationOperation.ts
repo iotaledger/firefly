@@ -77,12 +77,12 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): NewTrans
     }
 
     const metadata = searchParams.get(SendOperationParameter.Metadata)
-    if (getByteLengthOfString(metadata) > 8192) {
+    if (metadata && getByteLengthOfString(metadata) > 8192) {
         throw new MetadataLengthError()
     }
 
     const tag = searchParams.get(SendOperationParameter.Tag)
-    if (getByteLengthOfString(tag) > 64) {
+    if (tag && getByteLengthOfString(tag) > 64) {
         throw new TagLengthError()
     }
 
@@ -93,7 +93,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): NewTrans
 
     return {
         type: NewTransactionType.TokenTransfer,
-        assetId: asset.id,
+        ...(asset && { asset }),
         ...(recipient && { recipient }),
         ...(rawAmount && { rawAmount }),
         ...(unit && { unit }),
