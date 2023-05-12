@@ -59,7 +59,7 @@
 </script>
 
 <SendFlowTemplate
-    title={localize('popups.transaction.selectAmount', {})}
+    title={localize('popups.transaction.selectAmount', { values: { tokenName: asset.metadata.name } })}
     leftButton={{ text: localize('actions.back'), onClick: onBackClick }}
     rightButton={{ text: localize('actions.continue'), onClick: onContinueClick, disabled: !amount }}
 >
