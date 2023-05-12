@@ -14,6 +14,7 @@
     import { loginRouter, routerManager } from '@core/router'
     import features from '@features/features'
     import { Icon, Logo, Profile } from '@ui'
+    import { OnboardingRouter, onboardingRouter } from '@views/onboarding'
     import { onMount } from 'svelte'
 
     function onContinueClick(profileId: string): void {
@@ -22,6 +23,7 @@
     }
 
     async function onAddProfileClick(): Promise<void> {
+        onboardingRouter.set(new OnboardingRouter())
         await initialiseOnboardingProfile(shouldBeDeveloperProfile())
         $routerManager.goToAppContext(AppContext.Onboarding)
     }

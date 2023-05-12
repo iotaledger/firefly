@@ -13,6 +13,7 @@ export function getAccountAssetsForSelectedAccount(marketCoinPrices: MarketCoinP
     const account = get(selectedAccount)
     const networkId = get(activeProfile)?.network?.id
 
+    const shouldCalculateFiatPrice = networkId === NetworkId.Shimmer || networkId === NetworkId.Testnet
     const persistedBaseCoin = getAssetFromPersistedAssets(getCoinType())
     const baseCoin: IAsset = {
         ...persistedBaseCoin,
@@ -20,7 +21,7 @@ export function getAccountAssetsForSelectedAccount(marketCoinPrices: MarketCoinP
             total: Number(account?.balances?.baseCoin?.total),
             available: Number(account?.balances?.baseCoin?.available),
         },
-        ...(networkId === NetworkId.Shimmer && { marketPrices: marketCoinPrices?.shimmer }),
+        ...(shouldCalculateFiatPrice && { marketPrices: marketCoinPrices?.shimmer }),
     }
 
     const nativeTokens: IAsset[] = []

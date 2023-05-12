@@ -7,6 +7,7 @@ const fs = require('fs')
 const downloadItems = {}
 
 export function initNftDownloadHandlers() {
+    ipcMain.removeHandler('nft-download')
     ipcMain.handle('nft-download', async (event, url, destination, nftId, accountIndex) => {
         const userPath = app.getPath('userData')
         const directory = app.isPackaged ? userPath : __dirname
@@ -29,6 +30,7 @@ export function initNftDownloadHandlers() {
         })
     })
 
+    ipcMain.removeHandler('cancel-nft-download')
     ipcMain.handle('cancel-nft-download', async (event, nftId) => {
         const downloadItem = downloadItems[nftId]
         downloadItem?.cancel()
