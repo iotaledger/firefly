@@ -33,7 +33,7 @@
         resetNftDownloadQueue,
         selectedAccountNfts,
     } from '@core/nfts'
-    import { selectedAccountIndex, updateSelectedAccount } from '@core/account'
+    import { selectedAccountIndex } from '@core/account'
     import { get } from 'svelte/store'
     import features from '@features/features'
 
@@ -56,7 +56,7 @@
     $: if (features.analytics.dashboardRoute.enabled && $dashboardRoute)
         Platform.trackEvent('dashboard-route', { route: $dashboardRoute })
 
-    function addSelectedAccountNftsToDownloadQueue(accountIndex: number) {
+    function addSelectedAccountNftsToDownloadQueue(accountIndex: number): void {
         resetNftDownloadQueue()
         void addNftsToDownloadQueue(accountIndex, $selectedAccountNfts)
     }
@@ -70,11 +70,6 @@
     onMount(() => {
         Platform.onEvent('menu-logout', () => {
             logout()
-        })
-
-        Platform.requestEthereumInfo()
-        Platform.onEvent('evm-address', (evmAddress: string) => {
-            updateSelectedAccount({ evmAddress })
         })
 
         Platform.onEvent('deep-link-params', (data: string) => {

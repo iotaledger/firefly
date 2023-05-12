@@ -17,6 +17,7 @@
     } from '@core/network'
 
     import { Icon as IconEnum } from '@auxiliary/icon'
+    import { requestEvmAddress } from '@core/layer-2/actions'
 
     export let network: INetwork
     export let chain: IChain
@@ -43,6 +44,7 @@
     }
 
     onMount(() => {
+        requestEvmAddress()
         setNetworkCardData()
     })
 </script>

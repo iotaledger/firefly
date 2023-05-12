@@ -2,11 +2,13 @@ const TransportNodeHid = require('@ledgerhq/hw-transport-node-hid').default
 const AppEth = require('@ledgerhq/hw-app-eth').default
 const { listen } = require('@ledgerhq/logs')
 
+const ETH_BIP32_PATH = '44\'/60\'/0\'/0/0'
+
 process.parentPort.on('message', async (message) => {
     process.parentPort.postMessage({ message })
 
     switch (message.data) {
-        case 'get-evm-address': {
+        case 'request-evm-address': {
             const data = await getEthereumAddress(message)
             process.parentPort.postMessage({ data })
             break
@@ -21,11 +23,10 @@ async function getEthereumAddress(verify) {
         const transport = await TransportNodeHid.open('')
         listen((log) => process.parentPort.postMessage({ data: log }))
         const appEth = new AppEth(transport)
-        const address = await appEth.getAddress('44\'/60\'/0\'/0/0')
+        const address = await appEth.getAddress(ETH_BIP32_PATH)
         await transport.close()
         return address
     } catch (err) {
-        console.warn(err)
         // try again until success!
         return new Promise((s) => setTimeout(s, 1000)).then(() => getEthereumAddress(verify))
     }

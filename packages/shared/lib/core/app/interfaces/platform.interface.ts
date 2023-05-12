@@ -6,7 +6,7 @@ import { IAppVersionDetails } from './app-version-details.interface'
 import { IPlatformEventMap } from './platform-event-map.interface'
 
 export interface IPlatform {
-    requestEthereumInfo(): Promise<{ publicKey: string; address: string; chainCode?: string }>
+    requestEvmAddress(): void
     getStrongholdBackupDestination(defaultPath: string): Promise<string | null>
     saveStrongholdBackup({ allowAccess }: { allowAccess: boolean }): Promise<void>
     exportTransactionHistory(defaultPath: string, contents: string): Promise<string | null>
