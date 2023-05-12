@@ -26,47 +26,43 @@
     }
 </script>
 
-{#if $nodeInfo}
-    <network-configuration-init-view class="flex flex-col justify-between space-y-4 h-full">
-        <div class="flex flex-col space-y-4">
-            <div class="flex flex-row justify-between space-x-2">
+<network-configuration-init-view class="flex flex-col justify-between space-y-4 h-full">
+    <div class="flex flex-col space-y-4">
+        <div class="flex flex-row justify-between space-x-2">
+            <div>
+                <Text type={TextType.p} classes="inline" secondary>
+                    {localize('views.settings.networkInformation.connectedTo')}:
+                </Text>
+                <Text type={TextType.p} highlighted>{$nodeInfo?.protocol?.networkName}</Text>
+            </div>
+            <div>
+                <Text type={TextType.p} classes="inline" secondary>{localize('views.dashboard.network.status')}:</Text>
                 <div>
-                    <Text type={TextType.p} classes="inline" secondary>
-                        {localize('views.settings.networkInformation.connectedTo')}:
-                    </Text>
-                    <Text type={TextType.p} highlighted>{$nodeInfo.protocol.networkName}</Text>
-                </div>
-                <div>
-                    <Text type={TextType.p} classes="inline" secondary
-                        >{localize('views.dashboard.network.status')}:</Text
+                    <p
+                        class="text-13 text-{NETWORK_HEALTH_COLORS[
+                            $networkStatus.health ?? NetworkHealth.Disconnected
+                        ]}-500"
                     >
-                    <div>
-                        <p
-                            class="text-13 text-{NETWORK_HEALTH_COLORS[
-                                $networkStatus.health ?? NetworkHealth.Disconnected
-                            ]}-500"
-                        >
-                            {localize(`views.dashboard.network.${$networkStatus.health ?? NetworkHealth.Disconnected}`)}
-                        </p>
-                    </div>
+                        {localize(`views.dashboard.network.${$networkStatus.health ?? NetworkHealth.Disconnected}`)}
+                    </p>
                 </div>
             </div>
-            <HR />
-            <div class="flex flex-col space-y-4 w-full">
-                <Text type={TextType.h5}>{localize('views.settings.configureNodeList.title')}</Text>
-                <Text type={TextType.p} secondary>{localize('views.settings.configureNodeList.description')}</Text>
-                <NodeListTable {onNodeClick} />
-            </div>
         </div>
+        <HR />
         <div class="flex flex-col space-y-4 w-full">
-            {#if networkId !== NetworkId.Custom}
-                <Button outline classes="w-full" onClick={addOfficialNodesToClientOptions}>
-                    {localize('actions.addOfficialNodes')}
-                </Button>
-            {/if}
-            <Button inlineStyle="min-width: 156px;" classes="w-full" onClick={onAddNodeClick}>
-                {localize('actions.addNode')}
-            </Button>
+            <Text type={TextType.h5}>{localize('views.settings.configureNodeList.title')}</Text>
+            <Text type={TextType.p} secondary>{localize('views.settings.configureNodeList.description')}</Text>
+            <NodeListTable {onNodeClick} />
         </div>
-    </network-configuration-init-view>
-{/if}
+    </div>
+    <div class="flex flex-col space-y-4 w-full">
+        {#if networkId !== NetworkId.Custom}
+            <Button outline classes="w-full" onClick={addOfficialNodesToClientOptions}>
+                {localize('actions.addOfficialNodes')}
+            </Button>
+        {/if}
+        <Button inlineStyle="min-width: 156px;" classes="w-full" onClick={onAddNodeClick}>
+            {localize('actions.addNode')}
+        </Button>
+    </div>
+</network-configuration-init-view>

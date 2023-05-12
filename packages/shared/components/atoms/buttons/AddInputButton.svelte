@@ -5,8 +5,8 @@
     export let text: string
     export let open = false
     export let onClick: () => void
-    export let onMouseEnter: () => void
-    export let onMouseLeave: () => void
+    export let onMouseEnter: () => void = () => {}
+    export let onMouseLeave: () => void = () => {}
 </script>
 
 {#if !open}

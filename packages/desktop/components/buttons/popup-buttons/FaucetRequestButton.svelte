@@ -14,13 +14,13 @@
     }
 </script>
 
-{#if FAUCET_URLS?.[$activeProfile?.network?.id] && $nodeInfo}
+{#if FAUCET_URLS?.[$activeProfile?.network?.id]}
     <OnboardingButton
         primaryText={localize('actions.faucetRequest', {
-            values: { token: $nodeInfo.baseToken.name },
+            values: { token: $nodeInfo?.baseToken?.name },
         })}
         secondaryText={localize('general.faucetRequestDescription', {
-            values: { network: $nodeInfo.protocol.networkName },
+            values: { network: $nodeInfo?.protocol?.networkName },
         })}
         onClick={onGetTokensClick}
     />

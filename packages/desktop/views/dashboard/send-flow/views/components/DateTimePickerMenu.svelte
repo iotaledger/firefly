@@ -5,7 +5,7 @@
     import { fade } from 'svelte/transition'
 
     export let value: Date
-    export let selected: ExpirationTime = TimePeriod.None
+    export let selected: TimePeriod = TimePeriod.None
     export let anchor: HTMLElement = undefined
 
     export function tryOpen(): void {
@@ -32,7 +32,8 @@
     const dateIn1Week = new Date(DATE_NOW)
     dateIn1Week.setDate(dateIn1Week.getDate() + 7)
 
-    $: {
+    setDate()
+    function setDate(): void {
         switch (selected) {
             case TimePeriod.OneHour:
                 value = dateIn1Hour
@@ -61,11 +62,13 @@
         modal?.close()
         previouslySelected = selected
         selected = _selected
+        setDate()
     }
 
     function onCancelExpirationTimeClick(): void {
         if (!customDate) {
             selected = previouslySelected
+            setDate()
         }
         canShowDateTimePicker = false
     }

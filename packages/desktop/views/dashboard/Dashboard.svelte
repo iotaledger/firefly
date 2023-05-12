@@ -78,12 +78,12 @@
 
         Platform.DeepLinkManager.checkDeepLinkRequestExists()
 
-        if ($activeProfile?.isDeveloperProfile && !developerProfileNotificationId && $nodeInfo) {
+        if ($activeProfile?.isDeveloperProfile && !developerProfileNotificationId) {
             // Show developer profile warning
             developerProfileNotificationId = showAppNotification({
                 type: 'warning',
                 message: localize('indicators.developerProfileIndicator.warningText', {
-                    values: { networkName: $nodeInfo.protocol.networkName },
+                    values: { networkName: $nodeInfo?.protocol?.networkName },
                 }),
             })
         }

@@ -11,19 +11,15 @@ import { INodeInfo } from '@iota/types'
  * @returns {INetworkStatus}
  */
 export function getNetworkStatusFromNodeInfo(nodeInfo: INodeInfo): INetworkStatus {
-    let health = NetworkHealth.Down
-    const timestamp = nodeInfo.status.latestMilestone.timestamp
-    if (timestamp) {
-        const timeSinceLastMsInMinutes =
-            (Date.now() - timestamp * MILLISECONDS_PER_SECOND) / (MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE)
+    const timeSinceLastMsInMinutes =
+        (Date.now() - nodeInfo.status.latestMilestone.timestamp * MILLISECONDS_PER_SECOND) /
+        (MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE)
 
-        if (timeSinceLastMsInMinutes < 2) {
-            health = NetworkHealth.Operational
-        } else if (timeSinceLastMsInMinutes < 5) {
-            health = NetworkHealth.Degraded
-        }
-    } else {
+    let health = NetworkHealth.Down
+    if (timeSinceLastMsInMinutes < 2) {
         health = NetworkHealth.Operational
+    } else if (timeSinceLastMsInMinutes < 5) {
+        health = NetworkHealth.Degraded
     }
 
     return {
