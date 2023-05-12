@@ -37,7 +37,7 @@
         } else if (chain) {
             const configuration = chain.getConfiguration() as IIscpChainConfiguration
             name = configuration.name
-            address = configuration.aliasAddress
+            address = $selectedAccount.evmAddress
             status = chain.getStatus().health
         }
     }

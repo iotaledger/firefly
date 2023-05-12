@@ -33,7 +33,7 @@
         resetNftDownloadQueue,
         selectedAccountNfts,
     } from '@core/nfts'
-    import { selectedAccountIndex } from '@core/account'
+    import { selectedAccountIndex, updateSelectedAccount } from '@core/account'
     import { get } from 'svelte/store'
     import features from '@features/features'
 
@@ -72,8 +72,10 @@
             logout()
         })
 
-        /* eslint-disable no-console */
-        Platform.requestEthereumInfo().then((result) => console.log(result))
+        Platform.requestEthereumInfo()
+        Platform.onEvent('evm-address', (evmAddress: string) => {
+            updateSelectedAccount({ evmAddress })
+        })
 
         Platform.onEvent('deep-link-params', (data: string) => {
             handleDeepLinkRequest(data)
