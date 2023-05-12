@@ -6,7 +6,7 @@ import { GAS_BUDGET } from '@core/layer-2/constants'
 import { getOutputOptions } from '../utils'
 import { ReturnStrategy, TokenStandard, VerifiedStatus } from '../enums'
 import { IAsset, IPersistedAsset } from '../interfaces'
-import { NewTransactionType } from '../stores'
+import { NewTransactionType, getAssetById } from '../stores'
 import { NewTransactionDetails } from '../types'
 
 const PERSISTED_ASSET_SHIMMER: IPersistedAsset = {
@@ -40,7 +40,7 @@ const surplus = '50000'
 
 const baseTransaction: NewTransactionDetails = {
     type: NewTransactionType.TokenTransfer,
-    assetId: CoinType[CoinType.Shimmer],
+    asset: PERSISTED_ASSET_SHIMMER,
     recipient: {
         type: 'address',
         address: recipientAddress,
@@ -110,7 +110,7 @@ describe('File: getOutputOptions.ts', () => {
         newTransactionDetails = {
             ...baseTransaction,
             expirationDate,
-            assetId: nativeTokenAsset.id,
+            asset: nativeTokenAsset,
         }
         const output = getOutputOptions(newTransactionDetails)
 
@@ -158,7 +158,7 @@ describe('File: getOutputOptions.ts', () => {
         newTransactionDetails = {
             ...baseTransaction,
             expirationDate,
-            assetId: nativeTokenAsset.id,
+            asset: nativeTokenAsset,
             layer2Parameters,
         }
         const output = getOutputOptions(newTransactionDetails)
@@ -176,7 +176,7 @@ describe('File: getOutputOptions.ts', () => {
             },
             features: {
                 metadata:
-                    '0x00000000025e4b3ca1e3f42320a1070000000000010000000100611f00000003010000070c000c30680e00000090000f0ea000060009000d3000000000000000ca9a3b00000000020000000000',
+                    '0x00000000025e4b3ca1e3f42320a1070000000000010000000100611f00000003010000070c000c30680e00000090000f0ea000060009000d3000000000000000000000000000004800010008cd4dcad7ccc383111942671ee8cdc487ddd250398331ca2692b8b1a81551a1c3010000000000ca9a3b000000000000000000000000000000000000000000000000000000000000',
                 sender: senderAddress,
             },
             unlocks: { expirationUnixTime: 1680163475 },
@@ -237,7 +237,7 @@ describe('File: getOutputOptions.ts', () => {
         newTransactionDetails = {
             ...baseTransaction,
             expirationDate,
-            assetId: nativeTokenAsset.id,
+            asset: nativeTokenAsset,
             surplus,
         }
         const output = getOutputOptions(newTransactionDetails)

@@ -4,11 +4,11 @@ import { appSettings } from '@core/app'
 import { activeProfile } from '@core/profile'
 
 export function formatCurrency(
-    value: number,
+    value: number | undefined,
     currency: string | undefined = undefined,
     grouped: boolean = false
 ): string {
-    if (Number.isNaN(value)) {
+    if (value === undefined || Number.isNaN(value)) {
         return ''
     }
 

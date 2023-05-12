@@ -32,10 +32,11 @@ export function clearPersistedAssetForActiveProfile(): void {
 }
 
 export function updatePersistedAsset(partialPersistedAsset: Partial<IPersistedAsset>): void {
-    if (partialPersistedAsset?.id) {
+    const asssetId = partialPersistedAsset?.id
+    if (asssetId) {
         persistedAssets.update((state) => {
-            state[get(activeProfile).id][partialPersistedAsset.id] = {
-                ...state[get(activeProfile).id][partialPersistedAsset.id],
+            state[get(activeProfile).id][asssetId] = {
+                ...state[get(activeProfile).id][asssetId],
                 ...partialPersistedAsset,
             }
             return state
