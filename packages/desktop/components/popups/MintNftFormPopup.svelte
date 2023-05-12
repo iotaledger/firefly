@@ -30,7 +30,7 @@
         issuerName,
         description,
         attributes,
-    } = $mintNftDetails
+    } = $mintNftDetails || {}
 
     interface IOptionalInputs {
         [key: string]: {
