@@ -185,6 +185,22 @@ const handleNavigation = (e, url) => {
     }
 }
 
+const ledgerProcess = utilityProcess.fork(paths.ledger)
+
+ledgerProcess.on('spawn', () => {
+    ledgerProcess.on('message', (message) => {
+        if (message.data?.address) {
+            windows.main.webContents.send('evm-address', message.data.address)
+        } else {
+            process.stdout.write(`Ledger Process: ${message}\n`)
+        }
+    })
+})
+
+ipcMain.on('request-evm-address', (_e) => {
+    ledgerProcess.postMessage('request-evm-address')
+})
+
 /**
  * Create main window
  * @returns {BrowserWindow} Main window
@@ -269,6 +285,7 @@ function createWindow() {
     })
 
     windows.main.on('closed', () => {
+        ledgerProcess.kill()
         windows.main = null
     })
 
@@ -513,23 +530,6 @@ ipcMain.on('clear-deep-link-request', () => {
 ipcMain.on('notification-activated', (ev, contextData) => {
     windows.main.focus()
     windows.main.webContents.send('notification-activated', contextData)
-})
-
-// ledgerProcess <-----> process.parentPort
-const ledgerProcess = utilityProcess.fork(paths.ledger)
-
-ledgerProcess.on('spawn', () => {
-    ledgerProcess.on('message', (message) => {
-        if (message.address) {
-            windows.main.webContents.send('evm-address', message.address.address)
-        } else {
-            process.stdout.write(`Ledger Process: ${message}\n`)
-        }
-    })
-})
-
-ipcMain.handle('request-ethereum-info', (_e) => {
-    ledgerProcess.postMessage('get-evm-address')
 })
 
 /**
