@@ -4,7 +4,7 @@ import { IAccount } from './account.interface'
 
 export interface IAccountState extends IAccount, IAccountMetadata {
     depositAddress: string
-    evmAddress: string
+    evmAddress: string | undefined
     balances: AccountBalance
     isTransferring: boolean
     hasVotingPowerTransactionInProgress: boolean

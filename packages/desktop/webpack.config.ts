@@ -254,7 +254,7 @@ const webpackConfig: Configuration[] = [
             'build/lib/ledger.js': ['./electron/lib/ledger.js'],
         },
         externals: {
-            '@ledgerhq/hw-transport-node-hid': 'commonjs @ledgerhq/hw-transport-node-hid'
+            '@ledgerhq/hw-transport-node-hid': 'commonjs @ledgerhq/hw-transport-node-hid',
         },
         resolve,
         output,

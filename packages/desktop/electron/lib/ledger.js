@@ -10,7 +10,9 @@ const TransportNodeHid = require('@ledgerhq/hw-transport-node-hid').default
 const AppEth = require('@ledgerhq/hw-app-eth').default
 const { listen } = require('@ledgerhq/logs')
 
-const ETH_BIP32_PATH = '44\'/60\'/0\'/0/0'
+// TODO: replace ethereum coinType with network coinTypes
+// eslint-disable-next-line quotes
+const ETH_BIP32_PATH = "44'/60'/0'/0/0"
 
 process.parentPort.on('message', async (message) => {
     process.parentPort.postMessage({ message })
