@@ -15,10 +15,10 @@
 <send-flow-router>
     {#if $sendFlowRoute === SendFlowRoute.SelectToken}
         <SelectTokenView />
-    {:else if $sendFlowRoute === SendFlowRoute.InputDestination}
-        <InputDestinationView />
     {:else if $sendFlowRoute === SendFlowRoute.InputTokenAmount}
         <InputTokenAmountView />
+    {:else if $sendFlowRoute === SendFlowRoute.InputDestination}
+        <InputDestinationView />
     {:else if $sendFlowRoute === SendFlowRoute.TransactionSummary}
         <TransactionSummaryView _onMount={onTransactionSummaryMount} />
     {/if}
