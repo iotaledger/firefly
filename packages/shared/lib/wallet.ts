@@ -19,7 +19,6 @@ import { deepCopy } from './helpers'
 import { didInitialiseMigrationListeners } from './migration'
 import { buildClientOptions, getDefaultClientOptions } from './network'
 import { showAppNotification } from './notifications'
-import { STRONGHOLD_VERSION } from './stronghold'
 // PARTICIPATION
 import { haveStakingResultsCached } from './participation'
 import { Platform } from './platform'
@@ -33,7 +32,7 @@ import { HistoryDataProps, PriceData } from './typings/market'
 import { Message } from './typings/message'
 import { RecoveryPhrase } from './typings/mnemonic'
 import { NodeAuth, NodeInfo } from './typings/node'
-import { Profile, ProfileType } from './typings/profile'
+import { ProfileType } from './typings/profile'
 import { SetupType } from './typings/setup'
 import { AccountMessage, BalanceHistory, BalanceOverview, WalletAccount, WalletState } from './typings/wallet'
 import { IWalletApi } from './typings/walletApi'
@@ -1545,10 +1544,4 @@ export const handleTransactionEventData = (eventData: TransferProgressEventData)
     } else {
         return txData
     }
-}
-
-export function isStrongholdOutdated(profile: Profile): boolean {
-    const isSoftwareProfile = profile?.type === ProfileType.Software
-    const mustUpdateStronghold = (profile?.strongholdVersion ?? -1) < STRONGHOLD_VERSION
-    return isSoftwareProfile && mustUpdateStronghold
 }

@@ -46,7 +46,7 @@
                 busy = true
                 await asyncChangeStrongholdPassword($strongholdPassword, password)
                 strongholdPassword.set(password)
-                $updateStrongholdRouter.next()
+                await $updateStrongholdRouter.next()
             } catch (err) {
                 showAppNotification({
                     type: 'error',

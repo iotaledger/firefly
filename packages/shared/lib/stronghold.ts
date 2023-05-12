@@ -6,11 +6,12 @@ import { Event } from './typings/events'
 import { StrongholdStatus } from './typings/wallet'
 import { showAppNotification } from './notifications'
 import { localize } from '@core/i18n'
-import { isLedgerProfile, newProfile } from './profile'
+import { activeProfile, isLedgerProfile, newProfile, updateProfile } from './profile'
 import { Platform } from '@lib/platform'
 import { strongholdPassword } from '@lib/app'
 import { WALLET } from '@lib/shell/walletApi'
 import { initAppSettings } from '@lib/appSettings'
+import { Profile, ProfileType } from '@lib/typings/profile'
 
 export const STRONGHOLD_VERSION = 3
 
@@ -58,11 +59,37 @@ export const checkStronghold = (callback: any): void => {
     })
 }
 
+export function isStrongholdOutdated(profile: Profile): boolean {
+    const isSoftwareProfile = profile?.type === ProfileType.Software
+    const mustUpdateStronghold = (profile?.strongholdVersion ?? -1) < STRONGHOLD_VERSION
+    return isSoftwareProfile && mustUpdateStronghold
+}
+
+export async function migrateStrongholdForLogin(): Promise<void> {
+    const activeProfileId = get(activeProfile)?.id
+    destroyActor(activeProfileId)
+
+    const migrationFilePath = await getStrongholdMigrationFilePath(activeProfileId, false)
+    const _strongholdPassword = get(strongholdPassword)
+    WALLET.migrateStrongholdSnapshotV2ToV3(
+        migrationFilePath,
+        _strongholdPassword,
+        migrationFilePath,
+        _strongholdPassword
+    )
+    updateProfile('strongholdVersion', STRONGHOLD_VERSION)
+
+    const profileStoragePath = await getProfileDataPath(activeProfileId)
+    const { sendCrashReports } = get(initAppSettings) ?? { sendCrashReports: false }
+    const machineId = await Platform.getMachineId()
+    initialise(activeProfileId, profileStoragePath, sendCrashReports, machineId)
+}
+
 export async function migrateStrongholdForRecovery(): Promise<void> {
     const newProfileId = get(newProfile)?.id
     destroyActor(newProfileId)
 
-    const migrationFilePath = await getStrongholdMigrationFilePath(newProfileId)
+    const migrationFilePath = await getStrongholdMigrationFilePath(newProfileId, true)
     await Platform.copyFile(get(importFilePath), migrationFilePath)
 
     const _strongholdPassword = get(strongholdPassword)
@@ -72,7 +99,7 @@ export async function migrateStrongholdForRecovery(): Promise<void> {
         migrationFilePath,
         _strongholdPassword
     )
-    get(newProfile).strongholdVersion = STRONGHOLD_VERSION
+    updateProfile('strongholdVersion', STRONGHOLD_VERSION)
 
     const profileStoragePath = await getProfileDataPath(newProfileId)
     const { sendCrashReports } = get(initAppSettings) ?? { sendCrashReports: false }
@@ -83,7 +110,7 @@ export async function migrateStrongholdForRecovery(): Promise<void> {
     await Platform.deleteFile(migrationFilePath)
 }
 
-export async function getStrongholdMigrationFilePath(profileId: string): Promise<string> {
+export async function getStrongholdMigrationFilePath(profileId: string, isRecovery: boolean): Promise<string> {
     const profileStoragePath = await getProfileDataPath(profileId)
-    return `${profileStoragePath}/db/wallet.stronghold`
+    return `${profileStoragePath}/${isRecovery ? 'db/' : ''}wallet.stronghold`
 }

@@ -6,8 +6,9 @@
     import { Platform } from 'shared/lib/platform'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, clearActiveProfile } from 'shared/lib/profile'
+    import { isStrongholdOutdated } from '@lib/stronghold'
     import { validatePinFormat } from 'shared/lib/utils'
-    import { api, getProfileDataPath, initialise, isStrongholdOutdated } from 'shared/lib/wallet'
+    import { api, getProfileDataPath, initialise } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { Locale } from '@core/i18n'
     import { get } from 'svelte/store'
@@ -169,7 +170,7 @@
         <div class="w-96 flex flex-col flex-wrap items-center mb-20">
             <Profile
                 name={$activeProfile?.name}
-                showStrongholdWarning={isStrongholdOutdated($activeProfile)}
+                isStrongholdOutdated={isStrongholdOutdated($activeProfile)}
                 bgColor="blue"
             />
             {#if isStrongholdOutdated($activeProfile)}

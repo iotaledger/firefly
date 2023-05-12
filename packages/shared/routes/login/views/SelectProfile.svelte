@@ -5,9 +5,9 @@
     import { openPopup, popupState } from 'shared/lib/popup'
     import { profiles, setActiveProfile } from 'shared/lib/profile'
     import { ProfileType } from 'shared/lib/typings/profile'
+    import { isStrongholdOutdated } from '@lib/stronghold'
     import { localize } from '@core/i18n'
     import { isAwareOfCrashReporting } from '@lib/appSettings'
-    import { isStrongholdOutdated } from '@lib/wallet'
 
     const dispatch = createEventDispatcher()
 
@@ -57,7 +57,7 @@
                     isDeveloper={profile.isDeveloperProfile}
                     isLedgerProfile={profile?.type === ProfileType.Ledger ||
                         profile?.type === ProfileType.LedgerSimulator}
-                    showStrongholdWarning={isStrongholdOutdated(profile)}
+                    isStrongholdOutdated={isStrongholdOutdated(profile)}
                     classes="cursor-pointer"
                 />
             </div>

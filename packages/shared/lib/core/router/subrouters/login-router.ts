@@ -1,7 +1,7 @@
 import { get, writable } from 'svelte/store'
 
 import { activeProfile, migrateProfile } from '@lib/profile'
-import { isStrongholdOutdated } from '@lib/wallet'
+import { isStrongholdOutdated } from '@lib/stronghold'
 
 import { appRouter } from '../app-router'
 import { LoginRoute } from '../enums'
@@ -29,9 +29,7 @@ export class LoginRouter extends Subrouter<LoginRoute> {
                 break
             }
             case LoginRoute.EnterPin:
-                // TODO: https://github.com/iotaledger/firefly/issues/6141
-                /* eslint-disable no-constant-condition */
-                if (false) {
+                if (isStrongholdOutdated(get(activeProfile))) {
                     nextRoute = LoginRoute.UpdateStronghold
                     updateStrongholdRouter.set(new UpdateStrongholdRouter(this))
                 } else {

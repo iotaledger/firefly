@@ -62,7 +62,7 @@
     </Transition>
 {:else if $importRoute === ImportRoute.BackupPassword}
     <Transition>
-        <BackupPassword on:next={next} on:previous={previous} {error} {locale} {busy} />
+        <BackupPassword on:next={next} on:previous={previous} bind:error {locale} {busy} />
     </Transition>
 {:else if $importRoute === ImportRoute.UpdateStronghold}
     <Transition>

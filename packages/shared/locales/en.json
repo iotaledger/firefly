@@ -472,7 +472,8 @@
             },
             "saveBackup": {
                 "title": "Stronghold updated",
-                "body": "It's all good now - you're running the latest Stronghold version.",
+                "loginBody": "It's all good now - you're running the latest Stronghold version.",
+                "recoveryBody": "You can now continue setting up your wallet.",
                 "hint": "We highly recommend to delete all previous Stronghold backup files and save a new one."
             }
         },
@@ -966,6 +967,7 @@
         "dismiss": "Dismiss",
         "proceedAnyway": "Proceed anyway",
         "save": "Save",
+        "saving": "Saving",
         "importSeed": "Import an existing seed",
         "restoreWallet": "Migrate or restore a wallet",
         "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
