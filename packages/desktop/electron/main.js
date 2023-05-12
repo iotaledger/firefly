@@ -186,22 +186,6 @@ const handleNavigation = (e, url) => {
     }
 }
 
-const ledgerProcess = utilityProcess.fork(paths.ledger)
-
-ledgerProcess.on('spawn', () => {
-    ledgerProcess.on('message', (message) => {
-        if (message.data?.address) {
-            windows.main.webContents.send('evm-address', message.data.address)
-        } else {
-            process.stdout.write(`Ledger Process: ${message}\n`)
-        }
-    })
-})
-
-ipcMain.on('request-evm-address', (_e) => {
-    ledgerProcess.postMessage('request-evm-address')
-})
-
 /**
  * Create main window
  * @returns {BrowserWindow} Main window
@@ -322,6 +306,22 @@ function createWindow() {
 }
 
 app.whenReady().then(createWindow)
+
+const ledgerProcess = utilityProcess.fork(paths.ledger)
+
+ledgerProcess.on('spawn', () => {
+    ledgerProcess.on('message', (message) => {
+        if (message.data?.address) {
+            windows.main.webContents.send('evm-address', message.data.address)
+        } else {
+            process.stdout.write(`Unhandled Ledger Message: ${message}\n`)
+        }
+    })
+})
+
+ipcMain.handle('generate-evm-address', (_e, coinType, accountIndex, verify) => {
+    ledgerProcess.postMessage({ method: 'generate-evm-address', parameters: [coinType, accountIndex, verify] })
+})
 
 /**
  * Gets BrowserWindow instance

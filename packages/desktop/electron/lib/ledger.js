@@ -12,14 +12,11 @@ const { listen } = require('@ledgerhq/logs')
 
 // TODO: replace ethereum coinType with network coinTypes
 // eslint-disable-next-line quotes
-const ETH_BIP32_PATH = "44'/60'/0'/0/0"
 
 process.parentPort.on('message', async (message) => {
-    process.parentPort.postMessage({ message })
-
-    switch (message.data) {
-        case 'request-evm-address': {
-            const data = await getEthereumAddress(message)
+    switch (message.data.method) {
+        case 'generate-evm-address': {
+            const data = await getEthereumAddress(...message.data.parameters)
             process.parentPort.postMessage({ data })
             break
         }
@@ -28,16 +25,34 @@ process.parentPort.on('message', async (message) => {
     }
 })
 
-async function getEthereumAddress(verify) {
+async function getEthereumAddress(coinType, accountIndex, verify) {
     try {
         const transport = await TransportNodeHid.open('')
-        listen((log) => process.parentPort.postMessage({ data: log }))
+        listen((log) => {
+            process.parentPort.postMessage({ data: log })
+        })
         const appEth = new AppEth(transport)
-        const address = await appEth.getAddress(ETH_BIP32_PATH)
+        const address = await appEth.getAddress(buildBip32Path(coinType, accountIndex))
         await transport.close()
         return address
     } catch (err) {
-        // try again until success!
-        return new Promise((s) => setTimeout(s, 1000)).then(() => getEthereumAddress(verify))
+        return retryGetEthereumAddress(verify, 15)
     }
+}
+
+function buildBip32Path(coinType, accountIndex) {
+    return `44'/${coinType}'/${accountIndex}'/0/0`
+}
+
+let retriesCounter = 0
+
+export function retryGetEthereumAddress(verify, numberOfRetries) {
+    return new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
+        if (retriesCounter === numberOfRetries) {
+            retriesCounter = 0
+        } else {
+            retriesCounter++
+            void getEthereumAddress(verify)
+        }
+    })
 }
