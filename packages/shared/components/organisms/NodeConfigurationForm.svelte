@@ -10,7 +10,6 @@
     import { IDropdownItem, cleanUrl } from '@core/utils'
     import features from '@features/features'
     import { Dropdown, Error, NumberInput, PasswordInput, TextInput } from 'shared/components'
-    import { get } from 'svelte/store'
 
     interface NodeValidationOptions {
         checkNodeInfo: boolean
@@ -95,9 +94,9 @@
             }
         }
 
+        const networkName = nodeInfoResponse?.nodeInfo?.protocol.networkName
         if (options.checkSameNetwork) {
-            const isInSameNetwork =
-                get(nodeInfo).protocol.networkName === nodeInfoResponse?.nodeInfo.protocol.networkName
+            const isInSameNetwork = !!$nodeInfo && $nodeInfo.protocol.networkName === networkName
             if (!isInSameNetwork) {
                 formError = localize('error.node.differentNetwork')
                 return Promise.reject({ type: 'validationError', error: formError })
@@ -105,18 +104,14 @@
         }
 
         if (options.uniqueCheck) {
-            if (get(activeProfile)?.clientOptions?.nodes?.some((_node) => _node.url === node.url)) {
+            if ($activeProfile?.clientOptions?.nodes?.some((_node) => _node.url === node.url)) {
                 formError = localize('error.node.duplicateNodes')
                 return Promise.reject({ type: 'validationError', error: formError })
             }
         }
 
         if (options.validateClientOptions && currentClientOptions) {
-            const errorNetworkId = checkNetworkId(
-                nodeInfoResponse?.nodeInfo?.protocol?.networkName,
-                currentClientOptions.network,
-                isDeveloperProfile
-            )
+            const errorNetworkId = checkNetworkId(networkName, currentClientOptions.network, isDeveloperProfile)
             if (errorNetworkId) {
                 formError = localize(errorNetworkId?.locale, errorNetworkId?.values) ?? ''
                 return Promise.reject({ type: 'validationError', error: formError })
