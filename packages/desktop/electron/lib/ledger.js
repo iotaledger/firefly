@@ -1,3 +1,11 @@
+/**
+ * The utility process for ledger runs in a Node.js environment,
+ * meaning it has the ability to require modules and use all of Node.js APIs.
+ * This approach doesn't block the main process when interacting with the ledger device.
+ *
+ * https://www.electronjs.org/docs/latest/tutorial/process-model#the-utility-process
+ */
+
 const TransportNodeHid = require('@ledgerhq/hw-transport-node-hid').default
 const AppEth = require('@ledgerhq/hw-app-eth').default
 const { listen } = require('@ledgerhq/logs')

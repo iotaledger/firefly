@@ -1,3 +1,4 @@
+// Modules to control application life and create native browser window
 import features from '@features/features'
 import { initAutoUpdate } from './lib/appUpdater'
 import { initNftDownloadHandlers } from './lib/nftDownloadHandlers'
