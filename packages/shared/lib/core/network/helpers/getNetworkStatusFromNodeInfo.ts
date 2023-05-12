@@ -16,6 +16,7 @@ export function getNetworkStatusFromNodeInfo(nodeInfo: INodeInfo): INetworkStatu
     if (timestamp) {
         const timeSinceLastMsInMinutes =
             (Date.now() - timestamp * MILLISECONDS_PER_SECOND) / (MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE)
+
         if (timeSinceLastMsInMinutes < 2) {
             health = NetworkHealth.Operational
         } else if (timeSinceLastMsInMinutes < 5) {
@@ -24,6 +25,7 @@ export function getNetworkStatusFromNodeInfo(nodeInfo: INodeInfo): INetworkStatu
     } else {
         health = NetworkHealth.Operational
     }
+
     return {
         messagesPerSecond: nodeInfo.metrics.blocksPerSecond,
         referencedRate: nodeInfo.metrics.referencedRate,

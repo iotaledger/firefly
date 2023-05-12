@@ -34,7 +34,7 @@
                     <Text type={TextType.p} classes="inline" secondary>
                         {localize('views.settings.networkInformation.connectedTo')}:
                     </Text>
-                    <Text type={TextType.p} highlighted>{$nodeInfo?.protocol?.networkName}</Text>
+                    <Text type={TextType.p} highlighted>{$nodeInfo.protocol.networkName}</Text>
                 </div>
                 <div>
                     <Text type={TextType.p} classes="inline" secondary

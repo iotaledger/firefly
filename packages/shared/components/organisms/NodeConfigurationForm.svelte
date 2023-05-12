@@ -85,6 +85,7 @@
         }
 
         let nodeInfoResponse: INodeInfoResponse | null = null
+
         if (options.checkNodeInfo) {
             try {
                 nodeInfoResponse = await getNodeInfo(node.url)
@@ -95,6 +96,7 @@
         }
 
         const networkName = nodeInfoResponse?.nodeInfo?.protocol.networkName
+
         if (options.checkSameNetwork) {
             const isInSameNetwork = !!$nodeInfo && $nodeInfo.protocol.networkName === networkName
             if (!isInSameNetwork) {
