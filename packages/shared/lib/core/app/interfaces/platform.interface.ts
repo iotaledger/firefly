@@ -6,7 +6,6 @@ import { IAppVersionDetails } from './app-version-details.interface'
 import { IPlatformEventMap } from './platform-event-map.interface'
 
 export interface IPlatform {
-    generateEvmAddress(coinType: number, accountIndex: number, verify?: boolean): Promise<void>
     getStrongholdBackupDestination(defaultPath: string): Promise<string | null>
     saveStrongholdBackup({ allowAccess }: { allowAccess: boolean }): Promise<void>
     exportTransactionHistory(defaultPath: string, contents: string): Promise<string | null>

@@ -11,9 +11,6 @@ let activeProfileId = null
 const eventListeners = {}
 
 const ElectronApi = {
-    generateEvmAddress(coinType, accountIndex, verify) {
-        return ipcRenderer.invoke('generate-evm-address', coinType, accountIndex, verify ?? false)
-    },
     updateAppSettings(settings) {
         return ipcRenderer.invoke('update-app-settings', settings)
     },

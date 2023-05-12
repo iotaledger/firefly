@@ -43,7 +43,7 @@
     import { closeDrawer } from '@desktop/auxilary/drawer'
     import features from '@features/features'
     import { OnboardingRouterView } from '@views/onboarding'
-    import { registerLayer2EventHandlers } from 'shared/lib/core/layer-2/actions/registerLayer2EventHandlers'
+    import { registerLayer2EventHandlers } from '@core/layer-2'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 

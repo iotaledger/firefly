@@ -34,7 +34,7 @@
     function setNetworkCardData(): void {
         if (network) {
             name = network.getMetadata().name
-            address = $selectedAccount.depositAddress
+            address = $selectedAccount.depositAddress ?? ADDRESS_PLACEHOLDER
             status = $networkStatus.health
         } else if (chain) {
             const configuration = chain.getConfiguration() as IIscpChainConfiguration

@@ -10,9 +10,6 @@ const TransportNodeHid = require('@ledgerhq/hw-transport-node-hid').default
 const AppEth = require('@ledgerhq/hw-app-eth').default
 const { listen } = require('@ledgerhq/logs')
 
-// TODO: replace ethereum coinType with network coinTypes
-// eslint-disable-next-line quotes
-
 process.parentPort.on('message', async (message) => {
     switch (message.data.method) {
         case 'generate-evm-address': {
@@ -36,7 +33,7 @@ async function getEthereumAddress(coinType, accountIndex, verify) {
         await transport.close()
         return address
     } catch (err) {
-        return retryGetEthereumAddress(verify, 15)
+        return retryFunction(getEthereumAddress, [coinType, accountIndex, verify], 15)
     }
 }
 
@@ -46,13 +43,13 @@ function buildBip32Path(coinType, accountIndex) {
 
 let retriesCounter = 0
 
-export function retryGetEthereumAddress(verify, numberOfRetries) {
+function retryFunction(func, parameters, numberOfRetries) {
     return new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
         if (retriesCounter === numberOfRetries) {
             retriesCounter = 0
         } else {
             retriesCounter++
-            void getEthereumAddress(verify)
+            void func(...parameters)
         }
     })
 }

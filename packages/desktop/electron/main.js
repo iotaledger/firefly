@@ -314,7 +314,9 @@ ledgerProcess.on('spawn', () => {
         if (message.data?.address) {
             windows.main.webContents.send('evm-address', message.data.address)
         } else {
-            process.stdout.write(`Unhandled Ledger Message: ${message}\n`)
+            // TODO: https://github.com/iotaledger/firefly/issues/6799
+            /* eslint-disable-next-line no-console */
+            console.log('Unhandled Ledger Message: ', message)
         }
     })
 })
