@@ -23,7 +23,7 @@
     let storageDeposit: number = 0
     let totalStorageDeposit: number = 0
     const { standard, type, uri, name, collectionName, royalties, issuerName, description, attributes, quantity } =
-        $mintNftDetails
+        $mintNftDetails || {}
 
     $: irc27Metadata = {
         standard,
