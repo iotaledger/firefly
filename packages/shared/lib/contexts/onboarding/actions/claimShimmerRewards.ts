@@ -72,7 +72,7 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
             address: recipientAddress,
         },
         type: NewTransactionType.TokenTransfer,
-        asset: asset,
+        asset,
         rawAmount: rawAmount.toString(),
         unit: '',
     }

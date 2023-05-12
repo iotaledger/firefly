@@ -36,35 +36,30 @@
         }
     }
 
-    async function validate(): Promise<boolean> {
+    async function onContinueClick(): Promise<void> {
         try {
             await assetAmountInput?.validate()
-            return true
-        } catch (err) {
-            return false
-        }
-    }
-
-    async function onContinueClick(): Promise<void> {
-        const isValid = await validate()
-        if (isValid) {
             updateNewTransactionDetails({
                 type: NewTransactionType.TokenTransfer,
                 rawAmount,
             })
             $sendFlowRouter.next()
+        } catch (err) {
+            console.error(err)
         }
     }
 
     function onBackClick(): void {
+        updateNewTransactionDetails({
+            type: NewTransactionType.TokenTransfer,
+            rawAmount: undefined,
+        })
         $sendFlowRouter.previous()
     }
 </script>
 
 <SendFlowTemplate
-    title={localize('popups.transaction.selectAmount', {
-        values: { tokenName: asset.metadata.name },
-    })}
+    title={localize('popups.transaction.selectAmount', {})}
     leftButton={{ text: localize('actions.back'), onClick: onBackClick }}
     rightButton={{ text: localize('actions.continue'), onClick: onContinueClick, disabled: !amount }}
 >
