@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { NETWORK_ICON_SVG } from '@auxiliary/icon'
+    import { Icon as IconEnum, NETWORK_ICON_SVG } from '@auxiliary/icon'
     import { getIconColorFromString } from '@core/account'
     import { COIN_TYPE, NetworkId } from '@core/network'
     import { activeProfile } from '@core/profile'
@@ -11,7 +11,7 @@
     export let large = false
     export let small = false
 
-    let icon: string
+    let icon: IconEnum | null
     let assetIconColor: string
     let assetIconBackgroundColor: string
     let assetInitials: string
@@ -36,7 +36,7 @@
             assetInitials = getAssetInitials(asset)
             assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
             assetIconBackgroundColor = getIconColorFromString(asset?.metadata?.name)
-            icon = ''
+            icon = null
     }
 </script>
 
@@ -77,7 +77,7 @@
         {/if}
     </div>
     <span class="absolute flex justify-center items-center bottom-0 right-0">
-        <NetworkIconBadge width="10" height="10" network={$activeProfile.network} />
+        <NetworkIconBadge width={10} height={10} network={$activeProfile.network} />
     </span>
 </div>
 
