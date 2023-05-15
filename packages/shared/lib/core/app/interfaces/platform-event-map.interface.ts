@@ -20,4 +20,5 @@ export interface IPlatformEventMap {
     'nft-download-done': INFTDownloadState
     'nft-download-interrupted': INFTDownloadState
     'evm-address': string
+    'ledger-error': Error
 }
