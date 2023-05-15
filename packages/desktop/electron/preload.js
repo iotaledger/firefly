@@ -1,5 +1,14 @@
+/**
+ * The preload script runs before. It has access to web APIs
+ * as well as Electron's renderer process modules and some
+ * polyfilled Node.js functions.
+ *
+ * https://www.electronjs.org/docs/latest/tutorial/sandbox
+ */
+
 const { ipcRenderer, contextBridge } = require('electron')
 const ElectronApi = require('./electronApi')
+const LedgerApi = require('./ledgerApi')
 const WalletApi = require('@iota/wallet')
 const fs = require('fs')
 
@@ -130,6 +139,7 @@ try {
         },
     })
     contextBridge.exposeInMainWorld('__ELECTRON__', ElectronApi)
+    contextBridge.exposeInMainWorld('__LEDGER__', LedgerApi)
 } catch (err) {
     ipcRenderer.invoke('handle-error', '[Preload Context] Error', err)
 }
