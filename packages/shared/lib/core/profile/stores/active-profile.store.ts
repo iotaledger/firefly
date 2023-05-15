@@ -7,6 +7,10 @@ import type { IProfile, IProfileSettings } from '../interfaces'
 
 export const activeProfile = writable<IProfile>(<IProfile>INITIAL_ACTIVE_PROFILE)
 
+export function getActiveProfile(): IProfile {
+    return get(activeProfile)
+}
+
 export function updateActiveProfile(payload: Partial<IProfile>): void {
     activeProfile?.update((state) => ({ ...state, ...payload }))
 }

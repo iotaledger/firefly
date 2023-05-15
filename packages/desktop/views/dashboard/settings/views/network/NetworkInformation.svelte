@@ -8,19 +8,21 @@
     $: health = $networkStatus.health ?? NetworkHealth.Disconnected
 </script>
 
-<SettingsSection setting={NetworkSettingsRoute.NetworkInformation}>
-    <div class="flex flex-row justify-between">
-        <div class="flex flex-col space-y-1">
-            <Text secondary>
-                {localize('views.settings.networkInformation.connectedTo')}:
-            </Text>
-            <Text highlighted>{$nodeInfo?.protocol?.networkName}</Text>
+{#if $nodeInfo}
+    <SettingsSection setting={NetworkSettingsRoute.NetworkInformation}>
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-col space-y-1">
+                <Text secondary>
+                    {localize('views.settings.networkInformation.connectedTo')}:
+                </Text>
+                <Text highlighted>{$nodeInfo.protocol.networkName}</Text>
+            </div>
+            <div class="flex flex-col space-y-1">
+                <Text secondary>{localize('views.dashboard.network.status')}:</Text>
+                <Text color="{NETWORK_HEALTH_COLORS[health]}-500">
+                    {localize(`views.dashboard.network.${health}`)}
+                </Text>
+            </div>
         </div>
-        <div class="flex flex-col space-y-1">
-            <Text secondary>{localize('views.dashboard.network.status')}:</Text>
-            <Text color="{NETWORK_HEALTH_COLORS[health]}-500">
-                {localize(`views.dashboard.network.${health}`)}
-            </Text>
-        </div>
-    </div>
-</SettingsSection>
+    </SettingsSection>
+{/if}

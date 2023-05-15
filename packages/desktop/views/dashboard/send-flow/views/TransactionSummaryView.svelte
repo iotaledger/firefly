@@ -76,7 +76,7 @@
     $: expirationTimePicker?.setNull(giftStorageDeposit)
     $: hideGiftToggle =
         (transactionDetails.type === NewTransactionType.TokenTransfer &&
-            transactionDetails.assetId === $selectedAccountAssets?.baseCoin?.id) ||
+            transactionDetails.asset.id === $selectedAccountAssets?.baseCoin?.id) ||
         (disableToggleGift && !giftStorageDeposit) ||
         !!layer2Parameters
     $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
