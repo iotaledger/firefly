@@ -4,9 +4,9 @@
     import { HR, Modal, MenuItem, ExpirationDateTimePicker } from 'shared/components'
     import { fade } from 'svelte/transition'
 
-    export let value: Date
-    export let selected: ExpirationTime = TimePeriod.None
-    export let anchor: HTMLElement = undefined
+    export let value: Date | null
+    export let selected: TimePeriod = TimePeriod.None
+    export let anchor: HTMLElement | undefined = undefined
 
     export function tryOpen(): void {
         if (!canShowDateTimePicker) {
@@ -19,7 +19,7 @@
     const DATE_NOW = Date.now()
 
     let previouslySelected: TimePeriod = selected
-    let customDate: Date
+    let customDate: Date | null
     let canShowDateTimePicker = false
     let modal: Modal
 
@@ -56,7 +56,7 @@
         if (_selected === TimePeriod.Custom) {
             canShowDateTimePicker = !canShowDateTimePicker
         } else {
-            customDate = undefined
+            customDate = null
         }
         modal?.close()
         previouslySelected = selected

@@ -50,6 +50,10 @@
     }
 
     function onBackClick(): void {
+        updateNewTransactionDetails({
+            type: NewTransactionType.TokenTransfer,
+            rawAmount: undefined,
+        })
         $sendFlowRouter.previous()
     }
 </script>

@@ -31,13 +31,13 @@
     let visibleSurplus = 0
     let preparedOutput: Output
     let outputOptions: OutputOptions
-    let initialExpirationDate: TimePeriod = getInitialExpirationDate()
+    let initialExpirationDate = getInitialExpirationDate()
 
     $: transactionDetails = get(newTransactionDetails)
     $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
 
     onMount(() => {
-        if (transactionDetails.type === NewTransactionType.TokenTransfer && transactionDetails?.assetId) {
+        if (transactionDetails.type === NewTransactionType.TokenTransfer && transactionDetails.asset) {
             $sendRouter.next()
         }
     })
@@ -105,7 +105,7 @@
         void prepareTransactionOutput()
     }
 
-    function getInitialExpirationDate(): ExpirationTime {
+    function getInitialExpirationDate(): TimePeriod {
         if (expirationDate) {
             return TimePeriod.Custom
         } else if (storageDeposit && !giftStorageDeposit) {
