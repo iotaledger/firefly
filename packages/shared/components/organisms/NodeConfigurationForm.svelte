@@ -94,7 +94,6 @@
                 return Promise.reject({ type: 'validationError', error: formError })
             }
         }
-
         const networkName = nodeInfoResponse?.nodeInfo?.protocol.networkName
 
         if (options.checkSameNetwork) {
