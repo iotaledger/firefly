@@ -2,14 +2,13 @@ import { get } from 'svelte/store'
 
 import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
 import { Ledger } from '@core/ledger/classes'
-// import { activeProfile } from '@core/profile'
-//
-// import { ETHEREUM_COIN_TYPE } from '../constants'
+import { activeProfile } from '@core/profile'
+import { COIN_TYPE } from '@core/network/constants'
 
 export async function loadEvmAddressForSelectedAccount(): Promise<void> {
     try {
         if (!get(selectedAccount)?.evmAddress) {
-            const coinType = 60 // get(activeProfile)?.isDeveloperProfile ? 0 : ETHEREUM_COIN_TYPE
+            const coinType = COIN_TYPE[get(activeProfile)?.network?.id] ?? 1
             const accountIndex = get(selectedAccountIndex)
             await Ledger.generateEvmAddress(coinType, accountIndex, false)
         }
