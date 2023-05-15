@@ -4,6 +4,8 @@
     import { Position } from 'shared/components/enums'
 
     export let network: IPersistedNetwork
+    export let width: number
+    export let height: number
 
     let tooltipAnchor: HTMLElement
     let isTooltipVisible = false
@@ -23,7 +25,7 @@
         on:wheel={() => showTooltip(false)}
         class="block absolute -right-1 -bottom-1"
     >
-        <NetworkIcon networkId={network.id} />
+        <NetworkIcon {width} {height} networkId={network.id} />
     </network-icon-badge>
     {#if isTooltipVisible}
         <Tooltip anchor={tooltipAnchor} size="small" position={Position.Right} offset={6}>
