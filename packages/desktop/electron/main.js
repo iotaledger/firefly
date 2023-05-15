@@ -1,3 +1,4 @@
+// Modules to control application life and create native browser window
 import features from '@features/features'
 import { initAutoUpdate } from './lib/appUpdater'
 import { initNftDownloadHandlers } from './lib/nftDownloadHandlers'
@@ -5,7 +6,7 @@ import { shouldReportError } from './lib/errorHandling'
 import { initialiseAnalytics } from './lib/analytics'
 import { getMachineId } from './lib/machineId'
 import { getDiagnostics } from './lib/diagnostics'
-const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = require('electron')
+const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session, utilityProcess } = require('electron')
 const path = require('path')
 const fs = require('fs')
 const Keychain = require('./lib/keychain')
@@ -22,7 +23,6 @@ const canSendCrashReports = () => {
 
     return sendCrashReports
 }
-
 const CAN_LOAD_SENTRY = app.isPackaged
 const SEND_CRASH_REPORTS = CAN_LOAD_SENTRY && canSendCrashReports()
 
@@ -153,6 +153,7 @@ if (app.isPackaged) {
     paths.aboutHtml = path.join(app.getAppPath(), '/public/about.html')
     paths.errorPreload = path.join(app.getAppPath(), '/public/build/lib/errorPreload.js')
     paths.errorHtml = path.join(app.getAppPath(), '/public/error.html')
+    paths.ledger = path.join(app.getAppPath(), '/public/build/lib/ledger.js')
 } else {
     // __dirname is desktop/public/build
     paths.preload = path.join(__dirname, 'preload.js')
@@ -161,6 +162,7 @@ if (app.isPackaged) {
     paths.aboutHtml = path.join(__dirname, '../about.html')
     paths.errorPreload = path.join(__dirname, 'lib/errorPreload.js')
     paths.errorHtml = path.join(__dirname, '../error.html')
+    paths.ledger = path.join(__dirname, 'lib/ledger.js')
 }
 
 /**
@@ -268,6 +270,7 @@ function createWindow() {
     })
 
     windows.main.on('closed', () => {
+        ledgerProcess.kill()
         windows.main = null
     })
 
@@ -303,6 +306,24 @@ function createWindow() {
 }
 
 app.whenReady().then(createWindow)
+
+const ledgerProcess = utilityProcess.fork(paths.ledger)
+
+ledgerProcess.on('spawn', () => {
+    ledgerProcess.on('message', (message) => {
+        if (message.data?.address) {
+            windows.main.webContents.send('evm-address', message.data.address)
+        } else {
+            // TODO: https://github.com/iotaledger/firefly/issues/6799
+            /* eslint-disable-next-line no-console */
+            console.log('Unhandled Ledger Message: ', message)
+        }
+    })
+})
+
+ipcMain.on('generate-evm-address', (_e, coinType, accountIndex, verify) => {
+    ledgerProcess.postMessage({ method: 'generate-evm-address', parameters: [coinType, accountIndex, verify] })
+})
 
 /**
  * Gets BrowserWindow instance

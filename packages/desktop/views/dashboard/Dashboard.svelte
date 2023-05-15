@@ -56,7 +56,7 @@
     $: if (features.analytics.dashboardRoute.enabled && $dashboardRoute)
         Platform.trackEvent('dashboard-route', { route: $dashboardRoute })
 
-    function addSelectedAccountNftsToDownloadQueue(accountIndex: number) {
+    function addSelectedAccountNftsToDownloadQueue(accountIndex: number): void {
         resetNftDownloadQueue()
         void addNftsToDownloadQueue(accountIndex, $selectedAccountNfts)
     }
@@ -78,12 +78,12 @@
 
         Platform.DeepLinkManager.checkDeepLinkRequestExists()
 
-        if ($activeProfile?.isDeveloperProfile && !developerProfileNotificationId) {
+        if ($activeProfile?.isDeveloperProfile && !developerProfileNotificationId && $nodeInfo) {
             // Show developer profile warning
             developerProfileNotificationId = showAppNotification({
                 type: 'warning',
                 message: localize('indicators.developerProfileIndicator.warningText', {
-                    values: { networkName: $nodeInfo?.protocol?.networkName },
+                    values: { networkName: $nodeInfo.protocol.networkName },
                 }),
             })
         }
