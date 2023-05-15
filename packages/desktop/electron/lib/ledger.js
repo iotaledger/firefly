@@ -13,7 +13,7 @@ const { listen } = require('@ledgerhq/logs')
 process.parentPort.on('message', async (message) => {
     switch (message.data.method) {
         case 'generate-evm-address': {
-            const data = await getEthereumAddress(...message.data.parameters)
+            const data = await getEvmAddress(...message.data.parameters)
             process.parentPort.postMessage({ data })
             break
         }
@@ -22,7 +22,7 @@ process.parentPort.on('message', async (message) => {
     }
 })
 
-async function getEthereumAddress(coinType, accountIndex, verify) {
+async function getEvmAddress(coinType, accountIndex, verify) {
     try {
         const transport = await TransportNodeHid.open('')
         listen((log) => {
@@ -33,7 +33,7 @@ async function getEthereumAddress(coinType, accountIndex, verify) {
         await transport.close()
         return address
     } catch (err) {
-        return retryFunction(getEthereumAddress, [coinType, accountIndex, verify], 15)
+        return retryFunction(getEvmAddress, [coinType, accountIndex, verify], 15)
     }
 }
 
