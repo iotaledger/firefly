@@ -11,6 +11,10 @@ export const selectedAccount: Readable<IAccountState | undefined> = derived(
     }
 )
 
+export function getSelectedAccount(): IAccountState | undefined {
+    return get(selectedAccount)
+}
+
 export function updateSelectedAccount(payload: Partial<IAccountState>): void {
     updateActiveAccount(get(selectedAccountIndex), payload)
 }
