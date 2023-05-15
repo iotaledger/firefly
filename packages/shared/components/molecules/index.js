@@ -11,6 +11,8 @@ export { default as FoundryActivityDetails } from './FoundryActivityDetails.svel
 export { default as GovernanceActivityDetails } from './GovernanceActivityDetails.svelte'
 export { default as MarkdownBlock } from './MarkdownBlock.svelte'
 export { default as MediaPlaceholder } from './MediaPlaceholder.svelte'
+export { default as NetworkRecipientItem } from './NetworkRecipientItem.svelte'
+export { default as NetworkRecipientSelector } from './NetworkRecipientSelector.svelte'
 export { default as NftActivityDetails } from './NftActivityDetails.svelte'
 export { default as NftGallery } from './NftGallery.svelte'
 export { default as NftGalleryItem } from './NftGalleryItem.svelte'

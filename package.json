@@ -16,6 +16,7 @@
         "eslint-plugin-svelte3": "^3.4.1",
         "husky": "^7.0.0",
         "lint-staged": "^12.3.3",
+        "node-hid": "^2.1.2",
         "patch-package": "^6.4.7",
         "prettier": "^2.3.2",
         "prettier-plugin-svelte": "^2.7.0",
@@ -38,7 +39,9 @@
         "lint:fix": "eslint . --cache --fix",
         "pre-commit": "yarn format-check && yarn lint",
         "prepare": "husky install",
-        "postinstall": "patch-package",
+        "postinstall": "yarn postinstall:patch && yarn postinstall:usb",
+        "postinstall:patch": "patch-package",
+        "postinstall:usb": "npm rebuild usb --build-from-source",
         "test": "yarn test:shared",
         "test:shared": "cd packages/shared && yarn test"
     },

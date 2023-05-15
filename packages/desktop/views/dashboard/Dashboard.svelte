@@ -58,7 +58,7 @@
     $: if (features.analytics.dashboardRoute.enabled && $dashboardRoute)
         Platform.trackEvent('dashboard-route', { route: $dashboardRoute })
 
-    function addSelectedAccountNftsToDownloadQueue(accountIndex: number) {
+    function addSelectedAccountNftsToDownloadQueue(accountIndex: number): void {
         resetNftDownloadQueue()
         void addNftsToDownloadQueue(accountIndex, $selectedAccountNfts)
     }

@@ -5,7 +5,6 @@ import { EMPTY_BUFFER_BYTE_LENGTH, EMPTY_BUFFER } from '../constants'
 import { Allowance } from '../enums'
 import {
     NewTransactionType,
-    getPersistedAsset,
     TokenStandard,
     NewTokenTransactionDetails,
     IPersistedAsset,
@@ -18,7 +17,7 @@ export function encodeAssetAllowance(transactionDetails: NewTransactionDetails):
     allowance.writeUInt8('encodedAllowance', Allowance.Set)
 
     if (transactionDetails.type === NewTransactionType.TokenTransfer) {
-        const asset = getPersistedAsset(transactionDetails.assetId)
+        const asset = transactionDetails.asset
         if (asset.standard === TokenStandard.BaseToken) {
             encodeBaseTokenTransfer(allowance, transactionDetails.rawAmount)
         } else {
