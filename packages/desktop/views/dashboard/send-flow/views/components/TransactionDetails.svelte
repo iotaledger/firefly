@@ -1,10 +1,11 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
     import { TimePeriod } from '@core/utils'
-    import { Text, TooltipIcon } from '@ui'
+    import { NetworkIcon, Text, TooltipIcon } from '@ui'
     import DateTimePickerButton from './DateTimePickerButton.svelte'
     import { formatTokenAmountPrecise } from '@core/wallet'
     import { getBaseToken } from '@core/profile'
+    import { NetworkId } from '@core/network'
 
     export let destinationNetwork: string
     export let storageDeposit: number
@@ -21,7 +22,11 @@
     {#if destinationNetwork}
         <section class="key-value-box border-gray-200 dark:border-gray-700">
             <Text>{localize('general.destinationNetwork')}</Text>
-            <Text>{destinationNetwork}</Text>
+            <div class="flex flex-row gap-2">
+                <!-- TODO: Add correct icon for L2 -->
+                <NetworkIcon networkId={NetworkId.Testnet} height={16} width={16} />
+                <Text color="gray-600">{destinationNetwork}</Text>
+            </div>
         </section>
     {/if}
     {#if storageDeposit}
