@@ -321,7 +321,7 @@ ledgerProcess.on('spawn', () => {
     })
 })
 
-ipcMain.handle('generate-evm-address', (_e, coinType, accountIndex, verify) => {
+ipcMain.on('generate-evm-address', (_e, coinType, accountIndex, verify) => {
     ledgerProcess.postMessage({ method: 'generate-evm-address', parameters: [coinType, accountIndex, verify] })
 })
 
