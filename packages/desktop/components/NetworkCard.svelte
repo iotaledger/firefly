@@ -23,21 +23,23 @@
     export let onCardClick: UiEventFunction
     export let onQrCodeIconClick: UiEventFunction
 
+    const ADDRESS_PLACEHOLDER = '---'
+
     let name = ''
     let address = ''
     let status: NetworkHealth
 
-    $: $networkStatus, $chainStatuses, setNetworkCardData()
+    $: $networkStatus, $chainStatuses, $selectedAccount, setNetworkCardData()
 
     function setNetworkCardData(): void {
         if (network) {
             name = network.getMetadata().name
-            address = $selectedAccount.depositAddress
+            address = $selectedAccount.depositAddress ?? ADDRESS_PLACEHOLDER
             status = $networkStatus.health
         } else if (chain) {
             const configuration = chain.getConfiguration() as IIscpChainConfiguration
             name = configuration.name
-            address = configuration.aliasAddress
+            address = $selectedAccount.evmAddress ?? ADDRESS_PLACEHOLDER
             status = chain.getStatus().health
         }
     }

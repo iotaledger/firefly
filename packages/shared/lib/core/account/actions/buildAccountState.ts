@@ -23,8 +23,8 @@ export async function buildAccountState(account: IAccount, metadata: IAccountMet
         potentiallyLockedOutputs: {},
         aliases: [],
     }
-    let depositAddress: string
-    let votingPower: string
+    let depositAddress = ''
+    let votingPower = ''
     try {
         balances = await account.getBalance()
         depositAddress = await getDepositAddress(account)
@@ -37,6 +37,7 @@ export async function buildAccountState(account: IAccount, metadata: IAccountMet
         ...account,
         ...metadata,
         depositAddress,
+        evmAddress: undefined,
         balances,
         hasVotingPowerTransactionInProgress: false,
         hasVotingTransactionInProgress: false,
