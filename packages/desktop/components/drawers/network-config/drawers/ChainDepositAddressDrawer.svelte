@@ -13,10 +13,10 @@
 
     let addressBoxElement: AddressBox
 
-    const isL2CHain = !!$selectedChain
+    const isL2Chain = !!$selectedChain
     let depositAddress = ''
     $: {
-        if (isL2CHain) {
+        if (isL2Chain) {
             const configuration = $selectedChain.getConfiguration() as IIscpChainConfiguration
             depositAddress = configuration.aliasAddress
         } else {
@@ -29,7 +29,12 @@
     }
 </script>
 
-<DrawerTemplate title={localize('views.dashboard.drawers.networkConfig.chainDepositAddress.title')} {drawerRouter}>
+<DrawerTemplate
+    title={localize(
+        `views.dashboard.drawers.networkConfig.chainDepositAddress.${isL2Chain ? 'title' : 'networkTitle'}`
+    )}
+    {drawerRouter}
+>
     {#key depositAddress}
         <div class="w-full h-full flex items-center justify-center">
             <button
