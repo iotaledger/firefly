@@ -61,7 +61,7 @@
     style={inlineStyle}
     class={`${size} ${variant} ${classes}`}
     class:dark
-    class:outline
+    class:outlined={outline}
     class:is-busy={isBusy}
     on:click|stopPropagation={debounce(onClick, 100)}
     bind:this={buttonElement}
@@ -125,7 +125,7 @@
         @apply px-8;
         @apply py-4;
 
-        &.outline {
+        &.outlined {
             padding-top: calc(1rem - 1px);
             padding-bottom: calc(1rem - 1px);
         }
@@ -135,7 +135,7 @@
         @apply px-8;
         @apply py-3;
 
-        &.outline {
+        &.outlined {
             padding-top: calc(0.75rem - 1px);
             padding-bottom: calc(0.75rem - 1px);
         }
@@ -146,7 +146,7 @@
         @apply py-2;
         @apply text-13;
 
-        &.outline {
+        &.outlined {
             padding-top: calc(0.5rem - 1px);
             padding-bottom: calc(0.5rem - 1px);
         }
@@ -172,7 +172,7 @@
             @apply ring-opacity-20;
         }
 
-        &.outline {
+        &.outlined {
             @apply bg-white;
             @apply text-#{$color}-500;
             @apply border;
@@ -216,7 +216,7 @@
         @include button-variant('red');
     }
 
-    .dark.outline.primary {
+    .dark.outlined.primary {
         @apply bg-gray-700;
         @apply bg-opacity-20;
         @apply border-gray-600;
