@@ -12,11 +12,11 @@ name = "node_neon"
 crate-type = ["cdylib"]
 
 [build-dependencies]
-neon-build = "0.10.1"
+neon-build = "0.5.0"
 
 [dependencies]
 futures = { version = "0.3.17", default-features = false }
-neon = "0.10.1"
+neon = "0.5.0"
 serde_json = { version = "1.0.68", default-features = false }
 tokio = { version = "1.28.0", default-features = false }
 once_cell = { version = "1.8.0", default-features = false }
