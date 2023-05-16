@@ -3,7 +3,7 @@
     import features from '@features/features'
     import { SendFlowRoute } from './send-flow-route.enum'
     import { sendFlowRoute } from './send-flow.router'
-    import { SelectRecipientView, InputTokenAmountView, SelectTokenView, TransactionSummaryView } from './views'
+    import { InputTokenAmountView, SelectRecipientView, SelectTokenView, TransactionSummaryView } from './views'
 
     export let onTransactionSummaryMount: (..._: any[]) => Promise<void> = async () => {}
 

@@ -8,7 +8,7 @@ import { getAddressFromSubject } from '@core/wallet/utils'
 import { ReturnStrategy } from '../enums'
 
 export function getOutputOptions(transactionDetails: NewTransactionDetails): OutputOptions {
-    const { recipient, expirationDate, giftStorageDeposit, layer2Parameters } = transactionDetails ?? {}
+    const { recipient, expirationDate, timelockDate, giftStorageDeposit, layer2Parameters } = transactionDetails ?? {}
 
     const recipientAddress = layer2Parameters ? layer2Parameters.networkAddress : getAddressFromSubject(recipient)
 
@@ -24,6 +24,7 @@ export function getOutputOptions(transactionDetails: NewTransactionDetails): Out
         : Converter.utf8ToHex(transactionDetails?.metadata)
 
     const expirationUnixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
+    const timelockUnixTime = timelockDate ? convertDateToUnixTimestamp(timelockDate) : undefined
 
     return <OutputOptions>{
         recipientAddress,
@@ -36,6 +37,7 @@ export function getOutputOptions(transactionDetails: NewTransactionDetails): Out
         },
         unlocks: {
             ...(expirationUnixTime && { expirationUnixTime }),
+            ...(timelockUnixTime && { timelockUnixTime }),
         },
         storageDeposit: {
             returnStrategy: giftStorageDeposit ? ReturnStrategy.Gift : ReturnStrategy.Return,
