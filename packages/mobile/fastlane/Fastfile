@@ -6,10 +6,31 @@ platform :ios do
   desc "Build IPA"
   lane :build do
     Dir.chdir("../ios/App") do
+      match(
+        type: "appstore",
+        readonly: true,
+        team_id: ENV["TEAM_ID"],
+        app_identifier: ENV["BUNDLE_ID"],
+      )
       gym(
         scheme: "App",
-        export_method: "app-store",
         workspace: "../ios/App/App.xcworkspace",
+        export_options: {
+          method: "app-store",
+          provisioningProfiles: {
+            ENV["BUNDLE_ID"] => "YourProvisioningProfileName"
+          }
+        }
+      )
+      app_store_connect_api_key(
+        key_id: ENV["APP_STORE_CONNECT_KEY_ID"],
+        issuer_id: ENV["APP_STORE_CONNECT_ISSUER_ID"],
+        key_filepath: ENV["APP_STORE_CONNECT_KEY_FILEPATH"],
+        duration: 1200, # optional
+        in_house: false, # optional but may be necessary if using match/sigh
+      )
+      pilot(
+        skip_waiting_for_build_processing: true,
       )
     end
   end
