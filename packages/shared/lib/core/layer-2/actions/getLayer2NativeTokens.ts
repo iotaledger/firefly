@@ -9,6 +9,7 @@ import { ILayer2NativeToken } from '../interfaces'
 // TODO: remove this hardcoded address and use the account's EVM address instead
 const HARDCODED_EVM_ADDRESS = 'WRITE_YOUR_EVM_ADDRESS_HERE'
 
+// TODO: missing set native tokens, which converts the function to getAndSetLayer2NativeTokens
 export function getLayer2NativeTokens(): ILayer2NativeToken[] {
     const chains = get(network)?.getChains()
     const accountsCoreContract = getSmartContractHexName('accounts')
