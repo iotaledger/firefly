@@ -509,6 +509,9 @@
                     "chainInformation": {
                         "title": "Chain information"
                     },
+                    "confirmLedgerEvmAddress": {
+                        "title": "Confirm EVM address"
+                    },
                     "connectedChains": {
                         "title": "Connected chains"
                     },
@@ -1624,7 +1627,8 @@
         "jwt": "JSON web token",
         "internalTransaction": "Internal transaction",
         "coinType":"Coin type",
-        "custom": "Custom"
+        "custom": "Custom",
+        "evmAddress": "EVM address"
     },
     "filters":{
         "title": "Filters",
