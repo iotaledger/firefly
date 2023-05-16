@@ -1,3 +1,5 @@
+import { AbiType, StateMutabilityType } from '../types'
+
 export const ISC_SANDBOX_ABI = [
     {
         inputs: [
@@ -28,8 +30,8 @@ export const ISC_SANDBOX_ABI = [
         ],
         name: 'allow',
         outputs: [],
-        stateMutability: 'nonpayable',
-        type: 'function',
+        stateMutability: 'nonpayable' as StateMutabilityType,
+        type: 'function' as AbiType,
     },
     {
         inputs: [
@@ -94,8 +96,8 @@ export const ISC_SANDBOX_ABI = [
                 type: 'tuple',
             },
         ],
-        stateMutability: 'nonpayable',
-        type: 'function',
+        stateMutability: 'nonpayable' as StateMutabilityType,
+        type: 'function' as AbiType,
     },
     {
         inputs: [
@@ -137,29 +139,29 @@ export const ISC_SANDBOX_ABI = [
                 type: 'tuple',
             },
         ],
-        stateMutability: 'view',
-        type: 'function',
+        stateMutability: 'view' as StateMutabilityType,
+        type: 'function' as AbiType,
     },
     {
         inputs: [{ internalType: 'uint32', name: 'foundrySN', type: 'uint32' }],
         name: 'erc20NativeTokensAddress',
         outputs: [{ internalType: 'address', name: '', type: 'address' }],
-        stateMutability: 'view',
-        type: 'function',
+        stateMutability: 'view' as StateMutabilityType,
+        type: 'function' as AbiType,
     },
     {
         inputs: [{ internalType: 'address', name: 'addr', type: 'address' }],
         name: 'erc20NativeTokensFoundrySerialNumber',
         outputs: [{ internalType: 'uint32', name: '', type: 'uint32' }],
-        stateMutability: 'view',
-        type: 'function',
+        stateMutability: 'view' as StateMutabilityType,
+        type: 'function' as AbiType,
     },
     {
         inputs: [{ internalType: 'NFTID', name: 'collectionID', type: 'bytes32' }],
         name: 'erc721NFTCollectionAddress',
         outputs: [{ internalType: 'address', name: '', type: 'address' }],
-        stateMutability: 'view',
-        type: 'function',
+        stateMutability: 'view' as StateMutabilityType,
+        type: 'function' as AbiType,
     },
     {
         inputs: [
@@ -192,8 +194,8 @@ export const ISC_SANDBOX_ABI = [
                 type: 'tuple',
             },
         ],
-        stateMutability: 'view',
-        type: 'function',
+        stateMutability: 'view' as StateMutabilityType,
+        type: 'function' as AbiType,
     },
     {
         inputs: [{ internalType: 'address', name: 'addr', type: 'address' }],
@@ -223,8 +225,8 @@ export const ISC_SANDBOX_ABI = [
                 type: 'tuple',
             },
         ],
-        stateMutability: 'view',
-        type: 'function',
+        stateMutability: 'view' as StateMutabilityType,
+        type: 'function' as AbiType,
     },
     {
         inputs: [{ internalType: 'address', name: 'target', type: 'address' }],
@@ -254,8 +256,8 @@ export const ISC_SANDBOX_ABI = [
                 type: 'tuple',
             },
         ],
-        stateMutability: 'view',
-        type: 'function',
+        stateMutability: 'view' as StateMutabilityType,
+        type: 'function' as AbiType,
     },
     {
         inputs: [],
@@ -273,15 +275,15 @@ export const ISC_SANDBOX_ABI = [
                 type: 'tuple',
             },
         ],
-        stateMutability: 'view',
-        type: 'function',
+        stateMutability: 'view' as StateMutabilityType,
+        type: 'function' as AbiType,
     },
     {
         inputs: [],
         name: 'getChainID',
         outputs: [{ internalType: 'ISCChainID', name: '', type: 'bytes32' }],
-        stateMutability: 'view',
-        type: 'function',
+        stateMutability: 'view' as StateMutabilityType,
+        type: 'function' as AbiType,
     },
     {
         inputs: [],
@@ -294,15 +296,15 @@ export const ISC_SANDBOX_ABI = [
                 type: 'tuple',
             },
         ],
-        stateMutability: 'view',
-        type: 'function',
+        stateMutability: 'view' as StateMutabilityType,
+        type: 'function' as AbiType,
     },
     {
         inputs: [],
         name: 'getEntropy',
         outputs: [{ internalType: 'bytes32', name: '', type: 'bytes32' }],
-        stateMutability: 'nonpayable',
-        type: 'function',
+        stateMutability: 'nonpayable' as StateMutabilityType,
+        type: 'function' as AbiType,
     },
     {
         inputs: [{ internalType: 'NFTID', name: 'id', type: 'bytes32' }],
@@ -349,8 +351,8 @@ export const ISC_SANDBOX_ABI = [
                 type: 'tuple',
             },
         ],
-        stateMutability: 'view',
-        type: 'function',
+        stateMutability: 'view' as StateMutabilityType,
+        type: 'function' as AbiType,
     },
     {
         inputs: [{ internalType: 'NFTID', name: 'id', type: 'bytes32' }],
@@ -378,8 +380,8 @@ export const ISC_SANDBOX_ABI = [
                 type: 'tuple',
             },
         ],
-        stateMutability: 'view',
-        type: 'function',
+        stateMutability: 'view' as StateMutabilityType,
+        type: 'function' as AbiType,
     },
     {
         inputs: [{ internalType: 'uint32', name: 'foundrySN', type: 'uint32' }],
@@ -392,8 +394,8 @@ export const ISC_SANDBOX_ABI = [
                 type: 'tuple',
             },
         ],
-        stateMutability: 'view',
-        type: 'function',
+        stateMutability: 'view' as StateMutabilityType,
+        type: 'function' as AbiType,
     },
     {
         inputs: [{ internalType: 'uint32', name: 'foundrySN', type: 'uint32' }],
@@ -410,8 +412,8 @@ export const ISC_SANDBOX_ABI = [
                 type: 'tuple',
             },
         ],
-        stateMutability: 'view',
-        type: 'function',
+        stateMutability: 'view' as StateMutabilityType,
+        type: 'function' as AbiType,
     },
     {
         inputs: [],
@@ -424,8 +426,8 @@ export const ISC_SANDBOX_ABI = [
                 type: 'tuple',
             },
         ],
-        stateMutability: 'nonpayable',
-        type: 'function',
+        stateMutability: 'nonpayable' as StateMutabilityType,
+        type: 'function' as AbiType,
     },
     {
         inputs: [],
@@ -438,15 +440,15 @@ export const ISC_SANDBOX_ABI = [
                 type: 'tuple',
             },
         ],
-        stateMutability: 'nonpayable',
-        type: 'function',
+        stateMutability: 'nonpayable' as StateMutabilityType,
+        type: 'function' as AbiType,
     },
     {
         inputs: [],
         name: 'getTimestampUnixSeconds',
         outputs: [{ internalType: 'int64', name: '', type: 'int64' }],
-        stateMutability: 'view',
-        type: 'function',
+        stateMutability: 'view' as StateMutabilityType,
+        type: 'function' as AbiType,
     },
     {
         inputs: [
@@ -554,8 +556,8 @@ export const ISC_SANDBOX_ABI = [
         ],
         name: 'send',
         outputs: [],
-        stateMutability: 'nonpayable',
-        type: 'function',
+        stateMutability: 'nonpayable' as StateMutabilityType,
+        type: 'function' as AbiType,
     },
     {
         inputs: [
@@ -586,14 +588,14 @@ export const ISC_SANDBOX_ABI = [
         ],
         name: 'takeAllowedFunds',
         outputs: [],
-        stateMutability: 'nonpayable',
-        type: 'function',
+        stateMutability: 'nonpayable' as StateMutabilityType,
+        type: 'function' as AbiType,
     },
     {
         inputs: [{ internalType: 'string', name: 's', type: 'string' }],
         name: 'triggerEvent',
         outputs: [],
-        stateMutability: 'nonpayable',
-        type: 'function',
+        stateMutability: 'nonpayable' as StateMutabilityType,
+        type: 'function' as AbiType,
     },
 ]

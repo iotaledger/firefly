@@ -37,7 +37,7 @@
     import { get } from 'svelte/store'
     import features from '@features/features'
 
-    import { getAssetsOfChain } from '@core/network'
+    import { getLayer2NativeTokens } from '@core/layer-2'
 
     const tabs = {
         wallet: Wallet,
@@ -90,7 +90,7 @@
             })
         }
 
-        void getAssetsOfChain()
+        void getLayer2NativeTokens()
     })
 
     onDestroy(() => {
