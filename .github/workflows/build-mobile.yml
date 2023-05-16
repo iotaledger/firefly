@@ -104,6 +104,11 @@ jobs:
         if: github.event.inputs.os == 'android'
         working-directory: packages/mobile
         run: bundle exec fastlane android build
+        env:
+          KEYSTORE: ${{ secrets.ANDROID_KEYSTORE }}
+          KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
