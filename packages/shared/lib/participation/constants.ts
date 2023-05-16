@@ -5,7 +5,7 @@ import { Participation, StakingAirdrop } from './types'
 /**
  * The starting date of the next staking period.
  */
-export const ASSEMBLY_EVENT_START_DATE = new Date('11 February, 2023')
+export const ASSEMBLY_EVENT_START_DATE = new Date('February 11, 2023')
 
 /**
  * The staking event ID for Assembly.
@@ -50,6 +50,8 @@ export const STAKING_AIRDROP_TOKENS: { [key in StakingAirdrop]: string } = {
  */
 export const PARTICIPATION_POLL_DURATION = 10 * MILLISECONDS_PER_SECOND
 
+export const ASSEMBLY_STAKING_BLOG_POST_URL = 'https://blog.iota.org/iota-staking-for-assembly-round-6/'
+
 export const REMOTE_STAKING_RESULT_URL: string =
     'https://raw.githubusercontent.com/iotaledger/participation-events/master/results/staking/'
 
@@ -69,6 +71,7 @@ export const ASSEMBLY_STAKING_RESULT_FILES: string[] = [
     'assembly_02.json',
     'assembly_03.json',
     'assembly_04.json',
+    'assembly_05.json',
 ]
 
 /**
@@ -79,13 +82,13 @@ export const SHIMMER_STAKING_RESULT_FILES: string[] = ['shimmer.json']
 /**
  * The number of the last completed Assembly staking period.
  */
-export const LAST_ASSEMBLY_STAKING_PERIOD = 4
+export const LAST_ASSEMBLY_STAKING_PERIOD = 5
 
 /**
  * The number of the current Assembly staking period.
  * Set to 0 if no current event
  */
-export const CURRENT_ASSEMBLY_STAKING_PERIOD = 5
+export const CURRENT_ASSEMBLY_STAKING_PERIOD = 6
 
 /**
  * The number of the last completed Shimmer staking period.
