@@ -6,6 +6,7 @@
         AddChainDrawer,
         ChainDepositAddressDrawer,
         ChainInformationDrawer,
+        ConfirmLedgerEvmAddressDrawer,
         ConnectedChainsDrawer,
         EditChainDrawer,
         RemoveChainDrawer,
@@ -38,6 +39,8 @@
     <RemoveChainDrawer />
 {:else if $networkConfigRoute === NetworkConfigRoute.ChainDepositAddress}
     <ChainDepositAddressDrawer />
+{:else if $networkConfigRoute === NetworkConfigRoute.ConfirmLedgerEvmAddress}
+    <ConfirmLedgerEvmAddressDrawer />
 {:else if $networkConfigRoute === NetworkConfigRoute.AddChain}
     <AddChainDrawer />
 {/if}

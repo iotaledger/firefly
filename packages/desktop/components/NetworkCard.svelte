@@ -21,6 +21,7 @@
     export let network: INetwork = undefined
     export let chain: IChain = undefined
     export let onCardClick: UiEventFunction
+    export let onGenerateAddressClick: UiEventFunction
     export let onQrCodeIconClick: UiEventFunction
 
     const ADDRESS_PLACEHOLDER = '---'
@@ -30,6 +31,8 @@
     let status: NetworkHealth
 
     $: $networkStatus, $chainStatuses, $selectedAccount, setNetworkCardData()
+
+    $: showGenerateAddress = !address || address === ADDRESS_PLACEHOLDER
 
     function setNetworkCardData(): void {
         if (network) {
@@ -67,9 +70,17 @@
                 <Text type={TextType.p} fontWeight={FontWeight.medium} color="gray-600">
                     {localize('general.myAddress')}
                 </Text>
-                <Text type={TextType.pre} fontSize="16" fontWeight={FontWeight.medium}>
-                    {truncateString(address, 8, 8)}
-                </Text>
+                {#if showGenerateAddress}
+                    <button on:click|stopPropagation={onGenerateAddressClick}>
+                        <Text type={TextType.p} fontWeight={FontWeight.medium} color="blue-500">
+                            {localize('actions.generateAddress')}
+                        </Text>
+                    </button>
+                {:else}
+                    <Text type={TextType.pre} fontSize="16" fontWeight={FontWeight.medium}>
+                        {truncateString(address, 8, 8)}
+                    </Text>
+                {/if}
             </div>
             <button on:click|stopPropagation={onQrCodeIconClick}>
                 <Icon icon={IconEnum.Qr} classes="text-gray-500" />

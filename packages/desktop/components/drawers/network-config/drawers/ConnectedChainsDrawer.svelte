@@ -21,6 +21,13 @@
         $networkConfigRouter.goTo(NetworkConfigRoute.ChainInformation)
     }
 
+    function onGenerateAddressClick(chain: IChain): void {
+        if (chain) {
+            setSelectedChain(chain)
+        }
+        $networkConfigRouter.goTo(NetworkConfigRoute.ConfirmLedgerEvmAddress)
+    }
+
     function onQrCodeIconClick(chain?: IChain): void {
         if (chain) {
             setSelectedChain(chain)
@@ -49,6 +56,7 @@
                 <NetworkCard
                     {chain}
                     onCardClick={() => onL2NetworkCardClick(chain)}
+                    onGenerateAddressClick={() => onGenerateAddressClick(chain)}
                     onQrCodeIconClick={() => onQrCodeIconClick(chain)}
                 />
             {/each}
