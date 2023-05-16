@@ -8,7 +8,7 @@ const networkFeatures: INetworkFeatures = {
     config: {
         enabled: true,
         addChain: {
-            enabled: true,
+            enabled: false,
         },
     },
 }
