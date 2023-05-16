@@ -4,6 +4,8 @@
     import { Router } from '@core/router'
     import { closeDrawer, DrawerDirection, DrawerId, drawerState } from '@desktop/auxilary/drawer'
     import { DrawerRoute } from '@desktop/routers'
+    import { Icon as IconEnum } from '@auxiliary/icon'
+    import { Icon } from '@ui'
 
     export let onClose: () => unknown = () => {}
 
@@ -62,13 +64,24 @@
         <panel
             in:fly|local={{ ...direction, duration: DRAWER_ANIMATION_DURATION_MS }}
             out:fly|local={{ ...direction, duration: DRAWER_ANIMATION_DURATION_MS }}
-            class="flex flex-col bg-gray-50 dark:bg-gray-800 {position} {isVertical ? 'vertical' : 'horizontal'}"
+            class="relative flex flex-col bg-gray-50 dark:bg-gray-800 {position} {isVertical
+                ? 'vertical'
+                : 'horizontal'}"
         >
             <div class="flex-grow">
                 {#if $drawerState.id === DrawerId.NetworkConfig}
                     <NetworkConfigDrawerRouter bind:drawerRoute bind:drawerRouter />
                 {/if}
             </div>
+
+            {#if !$drawerState.hideClose}
+                <button on:click={onCloseClick} class="absolute top-7 right-7 focus:text-blue-500">
+                    <Icon
+                        icon={IconEnum.Close}
+                        classes="text-gray-500 dark:text-white hover:text-gray-600 dark:hover:text-gray-100"
+                    />
+                </button>
+            {/if}
         </panel>
     </drawer>
 {/if}
