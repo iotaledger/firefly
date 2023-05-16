@@ -170,8 +170,9 @@
         bind:timelockDate
         bind:selectedExpirationPeriod
         bind:selectedTimelockPeriod
-        {destinationNetwork}
+        bind:giftStorageDeposit
         {storageDeposit}
+        {destinationNetwork}
         {disableChangeExpiration}
         disableChangeTimelock={disableChangeExpiration}
         disableAll={isTransferring}

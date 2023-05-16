@@ -2,13 +2,13 @@
     import { localize } from '@core/i18n'
     import { TimePeriod } from '@core/utils'
     import { NetworkIcon, Text, TooltipIcon } from '@ui'
-    import DateTimePickerButton from './DateTimePickerButton.svelte'
-    import { formatTokenAmountPrecise } from '@core/wallet'
-    import { getBaseToken } from '@core/profile'
     import { NetworkId } from '@core/network'
+    import DateTimePickerButton from './DateTimePickerButton.svelte'
+    import StorageDepositButton from './StorageDepositButton.svelte'
 
     export let destinationNetwork: string
     export let storageDeposit: number
+    export let giftStorageDeposit: boolean
     export let expirationDate: Date
     export let selectedExpirationPeriod: TimePeriod
     export let selectedTimelockPeriod: TimePeriod
@@ -32,7 +32,7 @@
     {#if storageDeposit}
         <section class="key-value-box border-gray-200 dark:border-gray-700">
             <div class="flex flex-row">
-                <Text>{localize('general.storageDeposit')}</Text>
+                <Text>{localize(giftStorageDeposit ? 'general.giftedStorageDeposit' : 'general.storageDeposit')}</Text>
                 <TooltipIcon
                     title={localize('general.storageDeposit')}
                     text={localize('tooltips.transactionDetails.outgoing.storageDeposit')}
@@ -41,7 +41,7 @@
                     classes="ml-1"
                 />
             </div>
-            <Text>{formatTokenAmountPrecise(storageDeposit, getBaseToken())}</Text>
+            <StorageDepositButton bind:giftStorageDeposit {storageDeposit} />
         </section>
     {/if}
     {#if selectedExpirationPeriod}
