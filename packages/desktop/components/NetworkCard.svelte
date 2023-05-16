@@ -17,6 +17,7 @@
     } from '@core/network'
 
     import { Icon as IconEnum } from '@auxiliary/icon'
+    import { isActiveLedgerProfile } from 'shared/lib/core/profile'
 
     export let network: INetwork = undefined
     export let chain: IChain = undefined
@@ -32,17 +33,15 @@
 
     $: $networkStatus, $chainStatuses, $selectedAccount, setNetworkCardData()
 
-    $: showGenerateAddress = !address || address === ADDRESS_PLACEHOLDER
-
     function setNetworkCardData(): void {
         if (network) {
             name = network.getMetadata().name
-            address = $selectedAccount.depositAddress ?? ADDRESS_PLACEHOLDER
+            address = $selectedAccount.depositAddress
             status = $networkStatus.health
         } else if (chain) {
             const configuration = chain.getConfiguration() as IIscpChainConfiguration
             name = configuration.name
-            address = $selectedAccount.evmAddress ?? ADDRESS_PLACEHOLDER
+            address = $selectedAccount.evmAddress
             status = chain.getStatus().health
         }
     }
@@ -70,7 +69,11 @@
                 <Text type={TextType.p} fontWeight={FontWeight.medium} color="gray-600">
                     {localize('general.myAddress')}
                 </Text>
-                {#if showGenerateAddress}
+                {#if address}
+                    <Text type={TextType.pre} fontSize="16" fontWeight={FontWeight.medium}>
+                        {truncateString(address, 8, 8)}
+                    </Text>
+                {:else if $isActiveLedgerProfile}
                     <button on:click|stopPropagation={onGenerateAddressClick}>
                         <Text type={TextType.p} fontWeight={FontWeight.medium} color="blue-500">
                             {localize('actions.generateAddress')}
@@ -78,7 +81,7 @@
                     </button>
                 {:else}
                     <Text type={TextType.pre} fontSize="16" fontWeight={FontWeight.medium}>
-                        {truncateString(address, 8, 8)}
+                        {ADDRESS_PLACEHOLDER}
                     </Text>
                 {/if}
             </div>
