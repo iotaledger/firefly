@@ -33,11 +33,11 @@
 {:else if $networkConfigRoute === NetworkConfigRoute.ChainInformation}
     <ChainInformationDrawer {drawerRouter} />
 {:else if $networkConfigRoute === NetworkConfigRoute.EditChain}
-    <EditChainDrawer />
+    <EditChainDrawer {drawerRouter} />
 {:else if $networkConfigRoute === NetworkConfigRoute.RemoveChain}
-    <RemoveChainDrawer />
+    <RemoveChainDrawer {drawerRouter} />
 {:else if $networkConfigRoute === NetworkConfigRoute.ChainDepositAddress}
     <ChainDepositAddressDrawer {drawerRouter} />
 {:else if $networkConfigRoute === NetworkConfigRoute.AddChain}
-    <AddChainDrawer />
+    <AddChainDrawer {drawerRouter} />
 {/if}
