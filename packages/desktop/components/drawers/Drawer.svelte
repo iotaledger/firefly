@@ -1,7 +1,6 @@
 <script lang="ts">
     import { fade, fly } from 'svelte/transition'
     import { NetworkConfigDrawerRouter } from '@components'
-    import DrawerHeader from './DrawerHeader.svelte'
     import { Router } from '@core/router'
     import { closeDrawer, DrawerDirection, DrawerId, drawerState } from '@desktop/auxilary/drawer'
     import { DrawerRoute } from '@desktop/routers'
@@ -65,7 +64,6 @@
             out:fly|local={{ ...direction, duration: DRAWER_ANIMATION_DURATION_MS }}
             class="flex flex-col bg-gray-50 dark:bg-gray-800 {position} {isVertical ? 'vertical' : 'horizontal'}"
         >
-            <DrawerHeader {drawerRoute} {drawerRouter} onClose={onCloseClick} />
             <div class="flex-grow">
                 {#if $drawerState.id === DrawerId.NetworkConfig}
                     <NetworkConfigDrawerRouter bind:drawerRoute bind:drawerRouter />
