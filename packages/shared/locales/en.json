@@ -1038,7 +1038,6 @@
         "transactionDetails": {
             "title": "Transaction details",
             "giftedStorageDeposit": {
-                "label": "Gifted storage deposit",
                 "tooltipTitle": "Gift storage deposit",
                 "tooltipDescription": "Amount kept by the recipient"
             }
