@@ -12,29 +12,33 @@ const MOBILE_CONTENT_ROUTES = ['../mobile/**/*.svelte']
 module.exports = {
     content: [...SHARED_CONTENT_ROUTES, ...(IS_DESKOP ? DESKTOP_CONTENT_ROUTES : MOBILE_CONTENT_ROUTES)],
     safelist: [
-        // `from-${color}` (gradients)
-        /^from-/,
-        // `to-${color}` (gradients)
-        /^to-/,
-        // `bg-${color}`
-        /^bg-/,
-        /^hover:bg-/,
-        /^dark:bg-/,
-        /^border-/,
-        /^hover:border-/,
-        /^dark:border-/,
-        /^dark:hover:border-/,
-        // `text-${color}`
-        /^text-/,
-        /^hover:text-/,
-        /^dark:text-/,
-        /^font-/,
-        /^hover:font-/,
-        /^dark:font-/,
-        /^grid-cols-/,
-        /^rounded-/,
-        // `p-${size}`
-        /^p-/,
+        {
+            pattern: /^from-/,
+        },
+        {
+            pattern: /^to-/,
+        },
+        {
+            pattern: /^bg-/,
+        },
+        {
+            pattern: /^border-/,
+        },
+        {
+            pattern: /^text-/,
+        },
+        {
+            pattern: /^font-/,
+        },
+        {
+            pattern: /^grid-cols-/,
+        },
+        {
+            pattern: /^rounded-/,
+        },
+        {
+            pattern: /^p-/,
+        },
         'scheme-dark',
         'fill-current',
         'stroke-current',
