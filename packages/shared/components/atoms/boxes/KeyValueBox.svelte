@@ -28,7 +28,7 @@
     })
 </script>
 
-<div class={shrink ? 'flex-shrink-0' : 'w-full'}>
+<div class={shrink ? 'shrink-0' : 'w-full'}>
     <CopyableBox
         value={copyValue ? copyValue : valueText}
         {isCopyable}

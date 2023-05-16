@@ -223,7 +223,7 @@
                 {/if}
             </div>
         </Pane>
-        <Pane classes="p-6 h-fit flex-shrink-0">
+        <Pane classes="p-6 h-fit shrink-0">
             <Text smaller classes="mb-5">
                 {localize('views.governance.details.yourVote.title')}
             </Text>
@@ -243,7 +243,7 @@
                 </li>
             </ul>
         </Pane>
-        <ProposalInformationPane classes="flex-shrink-0" />
+        <ProposalInformationPane classes="shrink-0" />
     </div>
     <Pane classes="w-3/5 h-full p-6 pr-3 flex flex-col justify-between">
         <proposal-questions

@@ -84,7 +84,7 @@
     }
 </script>
 
-<activity-list-container class="asset-list h-full flex flex-auto flex-col flex-grow flex-shrink-0">
+<activity-list-container class="asset-list h-full flex flex-auto flex-col flex-grow shrink-0">
     <activity-list-header class="flex flex-row space-x-4 justify-between items-center mb-4">
         <search-input-container class="block flex-1">
             <SearchInput bind:value={searchValue} />

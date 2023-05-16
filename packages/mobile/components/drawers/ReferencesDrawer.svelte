@@ -38,7 +38,7 @@
     }
 </script>
 
-<references-drawer class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
+<references-drawer class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">
     <div class="flex flex-row flex-1 justify-center relative">
         <div class="w-full flex-col space-y-2">
             <TextInput

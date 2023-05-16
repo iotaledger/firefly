@@ -67,7 +67,7 @@
     bind:this={buttonElement}
 >
     {#if isBusy}
-        <div class="relative flex justify-center items-center h-4 w-4 flex-shrink-0" class:mr-3={busyMessage}>
+        <div class="relative flex justify-center items-center h-4 w-4 shrink-0" class:mr-3={busyMessage}>
             <Spinner busy classes="absolute items-center justify-center" />
         </div>
         {busyMessage}

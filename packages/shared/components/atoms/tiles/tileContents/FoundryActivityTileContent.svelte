@@ -19,7 +19,7 @@
     $: formattedAsset = {
         text: amount,
         color: 'blue-700',
-        classes: 'flex-shrink-0',
+        classes: 'shrink-0',
     }
 </script>
 

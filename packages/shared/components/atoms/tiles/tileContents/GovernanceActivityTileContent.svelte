@@ -21,7 +21,7 @@
     $: formattedAsset = {
         text: amount,
         color: activity.governanceAction === GovernanceAction.DecreaseVotingPower ? '' : 'blue-700',
-        classes: 'flex-shrink-0',
+        classes: 'shrink-0',
     }
 </script>
 

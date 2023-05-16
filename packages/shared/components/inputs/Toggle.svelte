@@ -18,7 +18,7 @@
     class:active
     disabled
     class="
-        relative block w-10 flex-shrink-0 h-6 rounded-full border-solid border border-transparent dark:border-gray-700
+        relative block w-10 shrink-0 h-6 rounded-full border-solid border border-transparent dark:border-gray-700
         {disabled ? 'opacity-40' : 'cursor-pointer'}
         {active ? `bg-${color}-500` : 'bg-gray-200 dark:bg-gray-900'} 
         {classes}"

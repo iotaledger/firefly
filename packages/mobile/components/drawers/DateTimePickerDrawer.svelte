@@ -26,7 +26,7 @@
     }
 </script>
 
-<datetime-picker-drawer class="w-full h-full space-y-6 flex flex-auto flex-col items-center flex-shrink-0">
+<datetime-picker-drawer class="w-full h-full space-y-6 flex flex-auto flex-col items-center shrink-0">
     <SveltyPicker
         pickerOnly
         autoclose

@@ -34,7 +34,7 @@
             <svg
                 bind:this={svg}
                 data-label="icon"
-                class="flex-shrink-0 {classes}"
+                class="shrink-0 {classes}"
                 width={width || selected.width || '100%'}
                 height={height || selected.height || '100%'}
                 viewBox="{viewBox.x} {viewBox.y} {viewBox.width} {viewBox.height}"
@@ -78,7 +78,7 @@
         <svg
             bind:this={svg}
             data-label="icon"
-            class="flex-shrink-0 {classes}"
+            class="shrink-0 {classes}"
             width={width || selected.width || '100%'}
             height={height || selected.height || '100%'}
             viewBox="{viewBox.x} {viewBox.y} {viewBox.width} {viewBox.height}"

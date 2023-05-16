@@ -38,7 +38,7 @@
 <delete-account-drawer>
     <form
         on:submit|preventDefault={onDeleteAccountSubmit}
-        class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0"
+        class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0"
     >
         <div class="space-y-4">
             <Text type={TextType.p} secondary classes="mb-5">{localize('popups.deleteAccount.body')}</Text>
