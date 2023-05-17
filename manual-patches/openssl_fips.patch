@@ -1,0 +1,13 @@
+diff --git a/gyp/pylib/gyp/input.py b/gyp/pylib/gyp/input.py
+index d9699a0..e51ee7b 100644
+--- a/gyp/pylib/gyp/input.py
++++ b/gyp/pylib/gyp/input.py
+@@ -1183,7 +1183,7 @@ def EvalSingleCondition(cond_expr, true_dict, false_dict, phase, variables, buil
+         else:
+             ast_code = compile(cond_expr_expanded, "<string>", "eval")
+             cached_conditions_asts[cond_expr_expanded] = ast_code
+-        env = {"__builtins__": {}, "v": StrictVersion}
++        env = {"__builtins__": {"openssl_fips": ""}, "v": StrictVersion}
+         if eval(ast_code, env, variables):
+             return true_dict
+         return false_dict

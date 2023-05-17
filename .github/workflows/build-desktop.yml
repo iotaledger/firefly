@@ -83,13 +83,14 @@ jobs:
               run: echo "LIBCLANG_PATH=$((gcm clang).source -replace "clang.exe")" >> $env:GITHUB_ENV
               if: matrix.os == 'windows-latest'
 
-            - name: Update node-gyp to 9.3.1 (Windows)
+            - name: Update node-gyp to 9.3.1 and apply patch (Windows)
               # The node-gyp bundled with Node 14.x does not support VS 2022
               # https://github.com/nodejs/node-gyp/blob/main/docs/Updating-npm-bundled-node-gyp.md#windows
               run: |
                 cd (Get-Item $((gcm node).Path)).DirectoryName
                 cd node_modules\npm\node_modules\npm-lifecycle
                 npm install node-gyp@9.3.1
+                
 
             - name: Set deployment target (macOS)
               run: echo "MACOSX_DEPLOYMENT_TARGET=10.12" >> $GITHUB_ENV
