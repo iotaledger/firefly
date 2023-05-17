@@ -1,29 +1,40 @@
 <script lang="ts">
-    import { onMount } from 'svelte'
+    import { onDestroy, onMount } from 'svelte'
     import { Animation, Button, CopyableBox, FontWeight, Pane, Text, TextType } from '@ui'
-    import { selectedAccount } from '@core/account'
+    import { selectedAccount, updateSelectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { loadEvmAddressForSelectedAccount } from '@core/layer-2'
     import { NetworkConfigRoute, networkConfigRouter } from '@desktop/routers'
 
-    onMount(() => void onMountHelper())
-
     $: address = $selectedAccount?.evmAddress
+
+    let continued = false
+
+    function onContinueClick(): void {
+        continued = true
+        $networkConfigRouter.reset()
+        $networkConfigRouter.goTo(NetworkConfigRoute.ConnectedChains)
+    }
 
     async function onMountHelper(): Promise<void> {
         await loadEvmAddressForSelectedAccount()
     }
 
-    function onContinueClick(): void {
-        $networkConfigRouter.reset()
-        $networkConfigRouter.goTo(NetworkConfigRoute.ConnectedChains)
-    }
+    onMount(() => void onMountHelper())
+
+    onDestroy(() => {
+        if (!continued) {
+            updateSelectedAccount({ evmAddress: null })
+        }
+    })
 </script>
 
-<div class="flex flex-col justify-between w-full h-full">
+<confirm-ledger-evm-address-drawer class="flex flex-col justify-between w-full h-full">
     <div class="flex flex-col self-center">
         <Animation animation="ledger-prompt-confirmed-desktop" />
-        <Text type={TextType.h4}>We have generated your EVM address</Text>
+        <Text type={TextType.h4}
+            >{localize('views.dashboard.drawers.networkConfig.confirmLedgerEvmAddress.header')}</Text
+        >
         <Pane classes="mt-6">
             <CopyableBox value={address ?? '---'} classes="bg-transparent w-full">
                 <div class="w-full text-left">
@@ -37,5 +48,5 @@
             </CopyableBox>
         </Pane>
     </div>
-    <Button outline disabled={!address} onClick={onContinueClick}>Continue</Button>
-</div>
+    <Button outline disabled={!address} onClick={onContinueClick}>{localize('actions.continue')}</Button>
+</confirm-ledger-evm-address-drawer>

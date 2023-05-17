@@ -9,6 +9,12 @@
     import { onMount } from 'svelte'
     import { closeDrawer } from '@desktop/auxilary/drawer'
     import { routerManager, SettingsRoute, settingsRouter } from '@core/router'
+    import {
+        determineLedgerConnectionState,
+        LedgerAppName,
+        LedgerConnectionState,
+        ledgerNanoStatus,
+    } from '@core/ledger'
 
     function onL1NetworkCardClick(): void {
         closeDrawer()
@@ -25,7 +31,14 @@
         if (chain) {
             setSelectedChain(chain)
         }
-        $networkConfigRouter.goTo(NetworkConfigRoute.ConfirmLedgerEvmAddress)
+        if (
+            determineLedgerConnectionState($ledgerNanoStatus, LedgerAppName.Ethereum) ===
+            LedgerConnectionState.CorrectAppOpen
+        ) {
+            $networkConfigRouter.goTo(NetworkConfigRoute.ConfirmLedgerEvmAddress)
+        } else {
+            $networkConfigRouter.goTo(NetworkConfigRoute.ConnectLedgerDevice)
+        }
     }
 
     function onQrCodeIconClick(chain?: IChain): void {
