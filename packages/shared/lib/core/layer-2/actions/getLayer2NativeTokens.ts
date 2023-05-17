@@ -10,20 +10,21 @@ import { ILayer2NativeToken } from '../interfaces'
 const HARDCODED_EVM_ADDRESS = 'WRITE_YOUR_EVM_ADDRESS_HERE'
 
 // TODO: missing set native tokens, which converts the function to getAndSetLayer2NativeTokens
-export function getLayer2NativeTokens(): ILayer2NativeToken[] {
+export async function getLayer2NativeTokens(): Promise<ILayer2NativeToken[]> {
     const chains = get(network)?.getChains()
     const accountsCoreContract = getSmartContractHexName('accounts')
     const getBalanceFunc = getSmartContractHexName('balance')
     const agentID = evmAddressToAgentID(HARDCODED_EVM_ADDRESS)
     const parameters = getAgentBalanceParameters(agentID)
-    const nativeTokens: ILayer2NativeToken[] = []
-    const nativeTokensPromises = chains.map(chain => {
+    const nativeTokensPromises = chains?.map(async (chain) => {
         try {
             const provider = chain.getProvider()
             const contract = new provider.eth.Contract(ISC_SANDBOX_ABI, ISC_CONTRACT)
             const nativeTokenResult = await contract.methods
                 .callView(accountsCoreContract, getBalanceFunc, parameters)
                 .call()
+
+            const nativeTokens: ILayer2NativeToken[] = []
 
             for (const item of nativeTokenResult.items) {
                 const id = item.key
@@ -38,13 +39,14 @@ export function getLayer2NativeTokens(): ILayer2NativeToken[] {
                     id: id,
                 }
 
-                return Promise.resolve(nativeToken)
+                nativeTokens.push(nativeToken)
             }
+
+            return nativeTokens
         } catch (e) {
-            return Promise.reject()
+            return []
         }
     })
-    
     const nativeTokens = await Promise.all(nativeTokensPromises)
-    return nativeTokens
+    return nativeTokens?.flat()
 }
