@@ -23,7 +23,7 @@
 <profile-container class="flex items-center justify-center w-24">
     <div class="flex flex-col justify-between items-center w-full">
         <button type="button" on:click={onProfileClick} class="relative cursor-pointer mb-3">
-            <ProfilePicture {profile} size={18} />
+            <ProfilePicture {profile} size="large" />
             {#if !updateRequired}
                 <NetworkIconBadge network={profile?.network} />
             {:else}

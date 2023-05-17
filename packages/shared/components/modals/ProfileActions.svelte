@@ -86,7 +86,7 @@
 >
     <profile-modal-content class="flex flex-col" in:fade={{ duration: 100 }}>
         <div class="flex flex-row flex-nowrap items-center space-x-3 p-3">
-            <ProfilePicture profile={$activeProfile} size={8} />
+            <ProfilePicture profile={$activeProfile} size="small" />
             <div class="flex flex-row items-center space-x-2">
                 <Text>{profileName}</Text>
                 {#if $activeProfile?.isDeveloperProfile}

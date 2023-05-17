@@ -115,7 +115,7 @@
                 class="w-10 h-10 relative flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
                 on:click={profileModal?.open}
             >
-                <ProfilePicture profile={$activeProfile} size={10} />
+                <ProfilePicture profile={$activeProfile} size="medium" />
                 {#if !$shouldOpenProfileModal && (!isBackupSafe || !$appVersionDetails.upToDate)}
                     <NotificationBadge />
                 {/if}
