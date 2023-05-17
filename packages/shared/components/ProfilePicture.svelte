@@ -38,7 +38,8 @@
         }
     }
 
-    $: backgroundColor = backgroundColor || getIconColorFromString(profile?.name)
+    $: backgroundColor =
+        backgroundColor || getIconColorFromString(profile?.name, { shades: ['500'], coloursToExclude: ['gray'] })
 </script>
 
 <profile-picture
