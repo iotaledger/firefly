@@ -2,7 +2,7 @@ import { get, writable } from 'svelte/store'
 
 import { cleanupSignup, login, mobile, strongholdPassword, walletPin } from '@lib/app'
 import { activeProfile, profiles, setProfileType } from '@lib/profile'
-import { isStrongholdUpdated } from '@lib/stronghold'
+import { isStrongholdOutdated } from '@lib/stronghold'
 import { ImportType, ProfileType } from '@lib/typings/profile'
 import { SetupType } from '@lib/typings/setup'
 import { walletSetupType } from '@lib/wallet'
@@ -50,7 +50,7 @@ export class AppRouter extends Router<AppRoute> {
                     const strongholdUpdateRequired =
                         get(activeProfile) &&
                         get(activeProfile).type === ProfileType.Software &&
-                        !isStrongholdUpdated(get(activeProfile))
+                        isStrongholdOutdated(get(activeProfile))
                     if (strongholdUpdateRequired) {
                         nextRoute = AppRoute.UpdateStronghold
                     } else {
@@ -61,6 +61,7 @@ export class AppRouter extends Router<AppRoute> {
                 break
             }
             case AppRoute.UpdateStronghold:
+                strongholdPassword.set(undefined)
                 // if we come from onboarding
                 if (get(walletSetupType) === SetupType.Stronghold) {
                     nextRoute = AppRoute.Protect

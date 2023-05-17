@@ -16,4 +16,5 @@ export type FireflyEvent = {
     skip?: boolean
     skippedMining?: boolean
     strongholdUpdateRequired?: boolean
+    isRecovery?: boolean
 }

@@ -8,7 +8,7 @@
         needsToAcceptLatestPrivacyPolicy,
         needsToAcceptLatestTos,
     } from '@lib/app'
-    import { isStrongholdUpdated } from '@lib/stronghold'
+    import { isStrongholdOutdated } from '@lib/stronghold'
     import { Icon, Pin, Profile, Text, TextHint } from 'shared/components'
     import { initAppSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
@@ -68,7 +68,7 @@
             pinRef.focus()
         }
     }
-    $: strongholdUpdateRequired = $isSoftwareProfile && !isStrongholdUpdated($activeProfile)
+    $: strongholdUpdateRequired = $isSoftwareProfile && isStrongholdOutdated($activeProfile)
 
     let buttonText = setButtonText(timeRemainingBeforeNextAttempt)
 
