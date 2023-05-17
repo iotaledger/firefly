@@ -13,7 +13,7 @@
     export let modal: Modal = undefined
     export let nft: INft
 
-    $: url = composeUrl(nft?.parsedMetadata?.uri)
+    $: url = nft?.parsedMetadata?.uri && composeUrl(nft.parsedMetadata.uri)
     $: isLocked = nft.timelockTime > $time.getTime()
     $: isCurrentPfp = $activeProfile.pfp?.id === nft.id
 
@@ -44,7 +44,7 @@
         })
     }
 
-    function composeUrl(targetUrl: string): string {
+    function composeUrl(targetUrl: string): string | undefined {
         if (!targetUrl) {
             return undefined
         }
@@ -69,7 +69,9 @@
     }
 
     function onOpenMediaClick(): void {
-        openUrlInBrowser(url)
+        if (url) {
+            openUrlInBrowser(url)
+        }
     }
 </script>
 
