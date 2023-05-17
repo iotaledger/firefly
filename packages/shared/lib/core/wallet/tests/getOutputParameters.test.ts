@@ -3,7 +3,7 @@ import { CoinType } from '@iota/wallet/out/types'
 import { activeProfileId } from '@core/profile/stores/active-profile-id.store'
 import { GAS_BUDGET } from '@core/layer-2/constants'
 
-import { getOutputOptions } from '../utils'
+import { getOutputParameters } from '../utils'
 import { ReturnStrategy, TokenStandard, VerifiedStatus } from '../enums'
 import { IAsset, IPersistedAsset } from '../interfaces'
 import { NewTransactionType } from '../stores'
@@ -63,21 +63,21 @@ jest.mock('../actions/getAccountAssetsForSelectedAccount', () => ({
     }),
 }))
 
-describe('File: getOutputOptions.ts', () => {
+describe('File: getOutputParameters.ts', () => {
     let newTransactionDetails: NewTransactionDetails
 
     beforeAll(() => {
-        // TODO: refactor getOutputOptions to not rely on this store
+        // TODO: refactor getOutputParameters to not rely on this store
         activeProfileId.set('id')
     })
 
-    it('should return output options for base token with metadata and tag', () => {
+    it('should return output parameters for base token with metadata and tag', () => {
         newTransactionDetails = {
             ...baseTransaction,
             metadata,
             tag,
         }
-        const output = getOutputOptions(newTransactionDetails)
+        const output = getOutputParameters(newTransactionDetails)
 
         const expectedOutput = {
             recipientAddress,
@@ -89,12 +89,12 @@ describe('File: getOutputOptions.ts', () => {
         expect(output).toStrictEqual(expectedOutput)
     })
 
-    it('should return output options for base token with expiration date', () => {
+    it('should return output parameters for base token with expiration date', () => {
         newTransactionDetails = {
             ...baseTransaction,
             expirationDate,
         }
-        const output = getOutputOptions(newTransactionDetails)
+        const output = getOutputParameters(newTransactionDetails)
 
         const expectedOutput = {
             recipientAddress,
@@ -106,13 +106,13 @@ describe('File: getOutputOptions.ts', () => {
         expect(output).toStrictEqual(expectedOutput)
     })
 
-    it('should return output options for native token without surplus', () => {
+    it('should return output parameters for native token without surplus', () => {
         newTransactionDetails = {
             ...baseTransaction,
             expirationDate,
             assetId: nativeTokenAsset.id,
         }
-        const output = getOutputOptions(newTransactionDetails)
+        const output = getOutputParameters(newTransactionDetails)
 
         const expectedOutput = {
             recipientAddress,
@@ -132,13 +132,13 @@ describe('File: getOutputOptions.ts', () => {
         expect(output).toStrictEqual(expectedOutput)
     })
 
-    it('should return output options for base token to layer 2', () => {
+    it('should return output parameters for base token to layer 2', () => {
         newTransactionDetails = {
             ...baseTransaction,
             expirationDate,
             layer2Parameters,
         }
-        const output = getOutputOptions(newTransactionDetails)
+        const output = getOutputParameters(newTransactionDetails)
 
         const expectedOutput = {
             recipientAddress: layer2Parameters.networkAddress,
@@ -154,14 +154,14 @@ describe('File: getOutputOptions.ts', () => {
         expect(output).toStrictEqual(expectedOutput)
     })
 
-    it('should return output options for native token to layer 2', () => {
+    it('should return output parameters for native token to layer 2', () => {
         newTransactionDetails = {
             ...baseTransaction,
             expirationDate,
             assetId: nativeTokenAsset.id,
             layer2Parameters,
         }
-        const output = getOutputOptions(newTransactionDetails)
+        const output = getOutputParameters(newTransactionDetails)
 
         const expectedOutput = {
             recipientAddress: layer2Parameters.networkAddress,
@@ -185,14 +185,14 @@ describe('File: getOutputOptions.ts', () => {
         expect(output).toStrictEqual(expectedOutput)
     })
 
-    it('should return output options for nft to layer 2', () => {
+    it('should return output parameters for nft to layer 2', () => {
         newTransactionDetails = {
             type: NewTransactionType.NftTransfer,
             recipient: baseTransaction.recipient,
             nftId,
             layer2Parameters,
         }
-        const output = getOutputOptions(newTransactionDetails)
+        const output = getOutputParameters(newTransactionDetails)
 
         const expectedOutput = {
             recipientAddress: layer2Parameters.networkAddress,
@@ -211,14 +211,14 @@ describe('File: getOutputOptions.ts', () => {
         expect(output).toStrictEqual(expectedOutput)
     })
 
-    it('should return output options for nft transfer', () => {
+    it('should return output parameters for nft transfer', () => {
         newTransactionDetails = {
             type: NewTransactionType.NftTransfer,
             recipient: baseTransaction.recipient,
             nftId,
             expirationDate,
         }
-        const output = getOutputOptions(newTransactionDetails)
+        const output = getOutputParameters(newTransactionDetails)
 
         const expectedOutput = {
             recipientAddress,
@@ -233,14 +233,14 @@ describe('File: getOutputOptions.ts', () => {
         expect(output).toStrictEqual(expectedOutput)
     })
 
-    it('should return output options for native token with surplus', () => {
+    it('should return output parameters for native token with surplus', () => {
         newTransactionDetails = {
             ...baseTransaction,
             expirationDate,
             assetId: nativeTokenAsset.id,
             surplus,
         }
-        const output = getOutputOptions(newTransactionDetails)
+        const output = getOutputParameters(newTransactionDetails)
 
         const expectedOutput = {
             recipientAddress,
@@ -260,13 +260,13 @@ describe('File: getOutputOptions.ts', () => {
         expect(output).toStrictEqual(expectedOutput)
     })
 
-    it('should return output options for base token with surplus', () => {
+    it('should return output parameters for base token with surplus', () => {
         newTransactionDetails = {
             ...baseTransaction,
             expirationDate,
             surplus,
         }
-        const output = getOutputOptions(newTransactionDetails)
+        const output = getOutputParameters(newTransactionDetails)
 
         const expectedOutput = {
             recipientAddress,
@@ -278,14 +278,14 @@ describe('File: getOutputOptions.ts', () => {
         expect(output).toStrictEqual(expectedOutput)
     })
 
-    it('should return output options for transfer with gifted storage deposit', () => {
+    it('should return output parameters for transfer with gifted storage deposit', () => {
         newTransactionDetails = {
             ...baseTransaction,
             expirationDate,
             surplus,
             giftStorageDeposit: true,
         }
-        const output = getOutputOptions(newTransactionDetails)
+        const output = getOutputParameters(newTransactionDetails)
 
         const expectedOutput = {
             recipientAddress,
