@@ -1,4 +1,4 @@
-export enum ExpirationTime {
+export enum TimePeriod {
     None,
     OneHour,
     OneDay,
