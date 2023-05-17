@@ -92,6 +92,7 @@ jobs:
                 cd node_modules\npm\node_modules\npm-lifecycle
                 npm install node-gyp@9.3.1
                 cd node_modules\node-gyp
+                pwd
                 git apply ${{ github.workspace }}\manual-patches\openssl_fips.patch
               if: matrix.os == 'windows-latest'
 
