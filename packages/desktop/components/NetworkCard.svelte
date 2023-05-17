@@ -15,9 +15,8 @@
         NetworkId,
         networkStatus,
     } from '@core/network'
-
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { isActiveLedgerProfile } from 'shared/lib/core/profile'
+    import { isActiveLedgerProfile } from '@core/profile'
 
     export let network: INetwork = undefined
     export let chain: IChain = undefined
