@@ -15,6 +15,7 @@
     export let timelockDate: Date
     export let disableChangeExpiration: boolean
     export let disableChangeTimelock: boolean
+    export let disableGiftStorageDeposit: boolean
     export let disableAll: boolean
 </script>
 
@@ -41,7 +42,7 @@
                     classes="ml-1"
                 />
             </div>
-            <StorageDepositButton bind:giftStorageDeposit {storageDeposit} />
+            <StorageDepositButton bind:giftStorageDeposit {storageDeposit} disabled={disableGiftStorageDeposit} />
         </section>
     {/if}
     {#if selectedExpirationPeriod}

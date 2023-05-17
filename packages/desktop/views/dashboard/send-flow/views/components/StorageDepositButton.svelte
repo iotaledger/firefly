@@ -21,7 +21,7 @@
     <button
         class="flex items-center justify-center {disabled ? 'cursor-default' : 'cursor-pointer'}"
         {disabled}
-        on:click={() => modal?.open()}
+        on:click={modal?.open}
     >
         <div class="flex flex-row hover:text-blue-600 items-center">
             <Text

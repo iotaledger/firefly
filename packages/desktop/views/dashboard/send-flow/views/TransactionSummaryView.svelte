@@ -34,6 +34,7 @@
         layer2Parameters,
         tag,
         metadata,
+        disableToggleGift,
     } = get(newTransactionDetails)
 
     const destinationNetwork = getDestinationNetworkFromAddress(layer2Parameters?.networkAddress)
@@ -175,6 +176,7 @@
         {destinationNetwork}
         {disableChangeExpiration}
         disableChangeTimelock={disableChangeExpiration}
+        disableGiftStorageDeposit={disableToggleGift}
         disableAll={isTransferring}
     />
 
