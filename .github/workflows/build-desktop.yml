@@ -60,7 +60,7 @@ jobs:
               with:
                   node-version: 14.x
 
-            - name: Set up Python 2.x
+            - name: Set up Python 2.x (macOS)
               uses: actions/setup-python@v2
               if: matrix.os == 'macos-11'
               with:
@@ -93,6 +93,7 @@ jobs:
                 npm install node-gyp@9.3.1
                 cd node_modules\node-gyp
                 git apply ${{ github.workspace }}\manual-patches\openssl_fips.patch
+              if: matrix.os == 'windows-latest'
 
             - name: Apply neon-sys patch (Windows)
               run: |
@@ -100,6 +101,7 @@ jobs:
                 cp ${{ github.workspace }}\manual-patches\neon_temp_buf.patch .
                 cargo patch
               working-directory: packages/backend/bindings/node/native
+              if: matrix.os == 'windows-latest'
 
             - name: Set deployment target (macOS)
               run: echo "MACOSX_DEPLOYMENT_TARGET=10.12" >> $GITHUB_ENV
