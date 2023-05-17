@@ -93,7 +93,6 @@ jobs:
                 cd node_modules\npm\node_modules\npm-lifecycle
                 npm install node-gyp@9.3.1
                 cd node_modules\node-gyp
-                pwd
                 git apply --ignore-space-change --ignore-whitespace ${{ github.workspace }}\manual-patches\openssl_fips.patch
               if: matrix.os == 'windows-latest'
 
@@ -101,11 +100,7 @@ jobs:
               run: |
                 cargo install cargo-patch
                 cp ${{ github.workspace }}\manual-patches\neon_temp_buf.patch .
-                echo "[package.metadata.patch.neon-sys]" >> Cargo.toml
-                echo "version = "0.10.1"" >> Cargo.toml
-                echo "patches = [{ path = "neon_temp_buf.patch", source = "GithubPrDiff" }]" >> Cargo.toml
-                echo "[patch.crates-io]" >> Cargo.toml
-                echo "neon-sys = { path = './target/patch/neon-sys-0.10.1' }" >> Cargo.toml
+                git apply --ignore-space-change --ignore-whitespace ${{ github.workspace }}\manual-patches\windows_cargo_toml.patch
                 cat Cargo.toml
                 cargo patch
               working-directory: packages/backend/bindings/node/native
