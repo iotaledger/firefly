@@ -13,7 +13,8 @@
     import { destroyProfileManager } from '@core/profile-manager/actions'
     import { loginRouter, routerManager } from '@core/router'
     import features from '@features/features'
-    import { Icon, Logo, Profile } from '@ui'
+    import { Icon, Logo, Profile, Text, TextType } from '@ui'
+    import { Icon as IconEnum } from '@auxiliary/icon'
     import { OnboardingRouter, onboardingRouter } from '@views/onboarding'
     import { onMount } from 'svelte'
 
@@ -58,23 +59,22 @@
             <div class="mx-7 mb-8">
                 <Profile
                     {profile}
-                    bgColor="blue"
                     onClick={onContinueClick}
                     updateRequired={profile?.type === ProfileType.Software &&
                         !isLatestStrongholdVersion(profile?.strongholdVersion) &&
                         features.onboarding.strongholdVersionCheck.enabled}
-                    classes="cursor-pointer"
                 />
             </div>
         {/each}
-        <div class="mx-7 mb-8">
-            <Profile
-                onClick={onAddProfileClick}
+        <div class="flex flex-col mx-7 mb-8 justify-between items-center space-y-3">
+            <button
+                on:click={onAddProfileClick}
                 name={localize('general.addProfile')}
-                classes="border-solid border-2 border-gray-400 cursor-pointer"
+                class="w-18 h-18 border-solid border-2 border-gray-400 cursor-pointer rounded-full flex justify-center items-center"
             >
-                <Icon height="15" width="15" icon="plus" classes="text-blue-500" />
-            </Profile>
+                <Icon height="15" width="15" icon={IconEnum.Plus} classes="text-blue-500" />
+            </button>
+            <Text type={TextType.h5} classes="text-center">{'LOCALE HERE'}</Text>
         </div>
     </div>
 </section>
