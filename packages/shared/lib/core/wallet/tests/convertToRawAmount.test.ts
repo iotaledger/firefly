@@ -37,8 +37,8 @@ const INVALID_TOKEN_METADATA: TokenMetadata = {
 }
 
 describe('File: convertToRawAmount.ts', () => {
-    it('should return undefined if amount is empty', () => {
-        expect(convertToRawAmount('', INVALID_TOKEN_METADATA)).toStrictEqual(-1)
+    it('should return 0 if amount is empty', () => {
+        expect(convertToRawAmount('', INVALID_TOKEN_METADATA)).toStrictEqual(Big(0))
     })
 
     describe('given the tokenMetadata standard is BaseToken', () => {
@@ -73,10 +73,10 @@ describe('File: convertToRawAmount.ts', () => {
                 expect(convertToRawAmount('1', DEFAULT_BASE_TOKEN[NetworkId.Shimmer], 'glow')).toStrictEqual(Big('1'))
             })
             it('should return undefined if a unit is not provided', () => {
-                expect(convertToRawAmount('1', DEFAULT_BASE_TOKEN[NetworkId.Shimmer])).toStrictEqual(-1)
+                expect(convertToRawAmount('1', DEFAULT_BASE_TOKEN[NetworkId.Shimmer])).toStrictEqual(Big(-1))
             })
             it('should return undefined if provided unit does not match the tokenMetadata unit or subunit', () => {
-                expect(convertToRawAmount('1', DEFAULT_BASE_TOKEN[NetworkId.Shimmer], 'test')).toStrictEqual(-1)
+                expect(convertToRawAmount('1', DEFAULT_BASE_TOKEN[NetworkId.Shimmer], 'test')).toStrictEqual(Big(-1))
             })
         })
     })
