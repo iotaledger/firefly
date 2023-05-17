@@ -65,7 +65,9 @@
 </script>
 
 <SendFlowTemplate
-    title={localize('popups.transaction.selectAmount', { values: { tokenName: asset.metadata.name } })}
+    title={localize('popups.transaction.selectAmount', {
+        values: { tokenName: asset.metadata.name },
+    })}
     leftButton={{ text: localize(disableAssetSelection ? 'actions.cancel' : 'actions.back'), onClick: onBackClick }}
     rightButton={{ text: localize('actions.continue'), onClick: onContinueClick, disabled: !amount }}
 >
