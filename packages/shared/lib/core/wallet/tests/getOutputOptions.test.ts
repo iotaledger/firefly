@@ -18,6 +18,7 @@ const PERSISTED_ASSET_SHIMMER: IPersistedAsset = {
 const tag = 'tag'
 const metadata = 'metadata'
 const expirationDate = new Date('2023-03-30T08:04:34.932Z')
+const timelockDate = new Date('2023-03-15T08:04:34.932Z')
 const recipientAddress = 'rms1qqqp07ychhkc3u68ueug0zqq9g0wtfgeatynr6ksm9jwud30rvlkyqnhpl5'
 const senderAddress = 'rms1abcp07ychhkc3u68ueug0zqq9g0wtfgeatynr6ksm9jwud30rvlkyqnhdef'
 const amount = '1000000000'
@@ -101,6 +102,41 @@ describe('File: getOutputOptions.ts', () => {
             amount,
             features: {},
             unlocks: { expirationUnixTime: 1680163475 },
+            storageDeposit: { returnStrategy: ReturnStrategy.Return },
+        }
+        expect(output).toStrictEqual(expectedOutput)
+    })
+
+    it('should return output options for base token with timelock date', () => {
+        newTransactionDetails = {
+            ...baseTransaction,
+            timelockDate,
+        }
+        const output = getOutputOptions(newTransactionDetails)
+
+        const expectedOutput = {
+            recipientAddress,
+            amount,
+            features: {},
+            unlocks: { timelockUnixTime: 1678867475 },
+            storageDeposit: { returnStrategy: ReturnStrategy.Return },
+        }
+        expect(output).toStrictEqual(expectedOutput)
+    })
+
+    it('should return output options for base token with timelock and expiration date', () => {
+        newTransactionDetails = {
+            ...baseTransaction,
+            expirationDate,
+            timelockDate,
+        }
+        const output = getOutputOptions(newTransactionDetails)
+
+        const expectedOutput = {
+            recipientAddress,
+            amount,
+            features: {},
+            unlocks: { expirationUnixTime: 1680163475, timelockUnixTime: 1678867475 },
             storageDeposit: { returnStrategy: ReturnStrategy.Return },
         }
         expect(output).toStrictEqual(expectedOutput)
