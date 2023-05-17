@@ -22,6 +22,15 @@ tokio = { version = "1.28.0", default-features = false }
 once_cell = { version = "1.8.0", default-features = false }
 firefly-actor-system = { path = "../../.." }
 
+[package.metadata.patch.neon-sys]
+version = "0.10.1"
+patches = [
+    { path = "neon_temp_buf.patch", source = "GithubPrDiff" },
+]
+
+[patch.crates-io]
+neon-sys = { path = './target/patch/neon-sys-0.10.1' }
+
 [profile.release]
 # Build with debug symbols included
 debug = true
