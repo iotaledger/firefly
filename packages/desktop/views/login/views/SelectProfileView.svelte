@@ -13,7 +13,7 @@
     import { destroyProfileManager } from '@core/profile-manager/actions'
     import { loginRouter, routerManager } from '@core/router'
     import features from '@features/features'
-    import { Icon, Logo, Profile, Text, TextType } from '@ui'
+    import { Icon, Logo, Profile } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { OnboardingRouter, onboardingRouter } from '@views/onboarding'
     import { onMount } from 'svelte'
@@ -74,7 +74,6 @@
             >
                 <Icon height="15" width="15" icon={IconEnum.Plus} classes="text-blue-500" />
             </button>
-            <Text type={TextType.h5} classes="text-center">{'LOCALE HERE'}</Text>
         </div>
     </div>
 </section>
