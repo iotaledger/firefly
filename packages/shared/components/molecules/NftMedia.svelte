@@ -13,16 +13,19 @@
     export let loop: boolean = false
     export let muted: boolean = false
     export let classes: string = ''
+    export let useCaching: boolean = true
 
     const bgColor = 'gray-200'
     const darkBgColor = 'gray-700'
 
+    let hasMounted: boolean = false
     let basePath: string
 
     $: isDownloading = $nftDownloadQueue.some((queueItem) => queueItem.nft.id === nft.id)
-    $: src = features?.collectibles?.useCaching?.enabled
-        ? `${basePath}/${nft.filePath}/${NFT_MEDIA_FILE_NAME}`
-        : nft.downloadUrl
+    $: src =
+        features?.collectibles?.useCaching?.enabled && useCaching
+            ? `${basePath}/${nft.filePath}/${NFT_MEDIA_FILE_NAME}`
+            : nft.downloadUrl
 
     onMount(async () => {
         if (process.env.NODE_ENV === 'development') {
@@ -30,14 +33,11 @@
         } else {
             basePath = await getStorageDirectoryOfProfiles()
         }
+        hasMounted = true
     })
 </script>
 
-{#if !nft?.composedUrl || !nft.downloadMetadata?.isLoaded}
-    <slot name="placeholder">
-        <MediaPlaceholder type={nft?.parsedMetadata?.type} {bgColor} {darkBgColor} {isDownloading} />
-    </slot>
-{:else}
+{#if hasMounted && nft && nft.composedUrl && nft.parsedMetadata && (!useCaching || nft.downloadMetadata?.isLoaded)}
     <MediaDisplay
         {src}
         expectedType={nft.parsedMetadata.type}
@@ -49,4 +49,8 @@
         {classes}
         alt={`Media display for ${nft.name}`}
     />
+{:else}
+    <slot name="placeholder">
+        <MediaPlaceholder type={nft?.parsedMetadata?.type} {bgColor} {darkBgColor} {isDownloading} />
+    </slot>
 {/if}
