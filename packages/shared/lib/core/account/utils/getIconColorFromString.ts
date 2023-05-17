@@ -3,8 +3,8 @@ import resolveConfig from 'tailwindcss/resolveConfig'
 
 const configColors = resolveConfig(tailwindConfig).theme.colors as Record<string, Record<string, string>>
 
-type Colours = 'gray' | 'red' | 'yellow' | 'green' | 'blue' | 'indigo' | 'purple' | 'pink'
-type Shades = '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900'
+type Colours = 'blue' | 'lightblue' | 'purple' | 'turquoise' | 'green' | 'yellow' | 'orange' | 'red' | 'pink' | 'gray'
+type Shades = '50' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900' | '1000'
 
 interface IColourOptions {
     colours?: Colours[]
@@ -14,8 +14,8 @@ interface IColourOptions {
 }
 
 const DEFAULT_COLOUR_OPTIONS: IColourOptions = {
-    colours: ['gray', 'red', 'yellow', 'green', 'blue', 'indigo', 'purple', 'pink'],
-    shades: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+    colours: ['blue', 'lightblue', 'purple', 'turquoise', 'green', 'yellow', 'orange', 'red', 'pink', 'gray'],
+    shades: ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900', '1000'],
 }
 
 export function getIconColorFromString(
@@ -31,7 +31,9 @@ export function getIconColorFromString(
     const hexColours: string[] = []
     filteredColours?.forEach((colour) => {
         filteredShades?.forEach((shade) => {
-            hexColours.push(configColors?.[colour]?.[shade])
+            if (configColors?.[colour]?.[shade]) {
+                hexColours.push(configColors?.[colour]?.[shade])
+            }
         })
     })
 
