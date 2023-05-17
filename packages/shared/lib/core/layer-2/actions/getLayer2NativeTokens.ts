@@ -17,7 +17,7 @@ export function getLayer2NativeTokens(): ILayer2NativeToken[] {
     const agentID = evmAddressToAgentID(HARDCODED_EVM_ADDRESS)
     const parameters = getAgentBalanceParameters(agentID)
     const nativeTokens: ILayer2NativeToken[] = []
-    chains?.forEach(async (chain) => {
+    const nativeTokensPromises = chains.map(chain => {
         try {
             const provider = chain.getProvider()
             const contract = new provider.eth.Contract(ISC_SANDBOX_ABI, ISC_CONTRACT)
@@ -38,11 +38,13 @@ export function getLayer2NativeTokens(): ILayer2NativeToken[] {
                     id: id,
                 }
 
-                nativeTokens.push(nativeToken)
+                return Promise.resolve(nativeToken)
             }
         } catch (e) {
-            console.error(e)
+            return Promise.reject()
         }
     })
+    
+    const nativeTokens = await Promise.all(nativeTokensPromises)
     return nativeTokens
 }
