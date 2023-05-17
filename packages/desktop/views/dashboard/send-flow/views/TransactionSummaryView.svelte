@@ -28,11 +28,11 @@
     import { Output } from '@core/wallet/types'
     import {
         getAddressFromSubject,
-        getOutputOptions,
+        getOutputParameters,
         getStorageDepositFromOutput,
         validateSendConfirmation,
     } from '@core/wallet/utils'
-    import type { OutputOptions } from '@iota/wallet'
+    import type { OutputParams } from '@iota/wallet'
     import {
         ActivityInformation,
         BasicActivityDetails,
@@ -65,7 +65,7 @@
     let storageDeposit = 0
     let visibleSurplus = 0
     let preparedOutput: Output
-    let outputOptions: OutputOptions
+    let outputParams: OutputParams
     let expirationTimePicker: ExpirationTimePicker
 
     let initialExpirationDate: ExpirationTime = getInitialExpirationDate()
@@ -122,8 +122,8 @@
     async function prepareTransactionOutput(): Promise<void> {
         const transactionDetails = get(newTransactionDetails)
 
-        outputOptions = getOutputOptions(transactionDetails)
-        preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
+        outputParams = getOutputParameters(transactionDetails)
+        preparedOutput = await prepareOutput($selectedAccount.index, outputParams, DEFAULT_TRANSACTION_OPTIONS)
 
         setStorageDeposit(preparedOutput, Number(surplus))
 
@@ -169,7 +169,7 @@
 
     async function onConfirmClick(): Promise<void> {
         try {
-            validateSendConfirmation(outputOptions, preparedOutput)
+            validateSendConfirmation(outputParams, preparedOutput)
 
             if ($isActiveLedgerProfile) {
                 ledgerPreparedOutput.set(preparedOutput)
