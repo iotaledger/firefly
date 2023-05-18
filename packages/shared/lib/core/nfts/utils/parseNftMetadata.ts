@@ -6,7 +6,7 @@ import { IIrc27Attribute, IIrc27Metadata, ISoonaverseAttribute, ISoonaverseAttri
 import { MimeType } from '../types'
 import { getNetworkHrp } from '@core/profile'
 
-export function parseNftMetadata(metadata: string): IIrc27Metadata {
+export function parseNftMetadata(metadata: string): IIrc27Metadata | undefined {
     try {
         const convertedData = Converter.hexToUtf8(metadata)
         const parsedData = metadata ? JSON.parse(convertedData) : {}
@@ -56,7 +56,7 @@ function validateRequiredFieldsForIrc27(data: IIrc27Metadata): void {
     }
 }
 
-function getValidIrc27Attributes(attributes: unknown): IIrc27Attribute[] {
+function getValidIrc27Attributes(attributes: unknown): IIrc27Attribute[] | undefined {
     if (!Array.isArray(attributes)) {
         return undefined
     }
@@ -90,7 +90,7 @@ function getValidIrc27Attributes(attributes: unknown): IIrc27Attribute[] {
     return attributes as IIrc27Attribute[]
 }
 
-function getValidSoonaverseAttributes(attributes: unknown): ISoonaverseAttributes {
+function getValidSoonaverseAttributes(attributes: unknown): ISoonaverseAttributes | undefined {
     return isISoonaverseAttributes(attributes)
         ? {
               ...(attributes?.props && { props: attributes?.props }),
@@ -99,8 +99,9 @@ function getValidSoonaverseAttributes(attributes: unknown): ISoonaverseAttribute
         : undefined
 }
 
-function getValidRoyalties(royalties: unknown): Record<string, number> {
+function getValidRoyalties(royalties: unknown): Record<string, number> | undefined {
     try {
+        if (!royalties) throw Error()
         Object.keys(royalties).forEach((key) => validateBech32Address(getNetworkHrp(), key))
     } catch (err) {
         return undefined
@@ -122,10 +123,11 @@ function getValidRoyalties(royalties: unknown): Record<string, number> {
 function isISoonaverseAttribute(object: unknown): object is ISoonaverseAttribute {
     return (
         typeof object === 'object' &&
+        object !== null &&
         'label' in object &&
-        typeof (object as { label }).label === 'string' &&
+        typeof object.label === 'string' &&
         'value' in object &&
-        (typeof (object as { value }).value === 'string' || typeof (object as { value }).value === 'number')
+        (typeof object.value === 'string' || typeof object.value === 'number')
     )
 }
 
