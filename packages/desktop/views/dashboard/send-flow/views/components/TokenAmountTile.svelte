@@ -7,26 +7,29 @@
 
     export let asset: IAsset
     export let amount: string
+    export let showAssetInfo: boolean = true
 
     $: marketAmount = asset ? getMarketAmountFromAssetValue(Number(amount), asset) : undefined
     $: marketPrice = getMarketPriceForAsset(asset)
 </script>
 
-{#if asset?.metadata && asset?.balance}
+{#if asset?.metadata}
     <Tile>
         <div class="w-full flex flex-row justify-between items-center">
             <div class="flex flex-row items-center text-left space-x-4">
                 <AssetIcon {asset} />
-                <div class="flex flex-col">
-                    <Text fontWeight={FontWeight.semibold}>
-                        {asset.metadata.name
-                            ? truncateString(asset.metadata.name, 13, 0)
-                            : truncateString(asset.id, 6, 7)}
-                    </Text>
-                    <Text fontWeight={FontWeight.semibold} darkColor="gray-600">
-                        {formatCurrency(marketPrice) || '--'}
-                    </Text>
-                </div>
+                {#if showAssetInfo}
+                    <div class="flex flex-col">
+                        <Text fontWeight={FontWeight.semibold}>
+                            {asset.metadata.name
+                                ? truncateString(asset.metadata.name, 13, 0)
+                                : truncateString(asset.id, 6, 7)}
+                        </Text>
+                        <Text fontWeight={FontWeight.semibold} darkColor="gray-600">
+                            {formatCurrency(marketPrice) || '--'}
+                        </Text>
+                    </div>
+                {/if}
             </div>
             <div class="flex flex-col text-right">
                 <Text fontWeight={FontWeight.semibold}>
