@@ -42,7 +42,11 @@
                     classes="ml-1"
                 />
             </div>
-            <StorageDepositButton bind:giftStorageDeposit {storageDeposit} disabled={disableGiftStorageDeposit} />
+            <StorageDepositButton
+                bind:giftStorageDeposit
+                {storageDeposit}
+                disabled={disableGiftStorageDeposit || disableAll}
+            />
         </section>
     {/if}
     {#if selectedExpirationPeriod}
