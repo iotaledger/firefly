@@ -4,13 +4,12 @@ import { TOKEN_ID_BYTE_LENGTH } from '@core/token'
 import { Converter } from '@iota/util.js'
 import { get } from 'svelte/store'
 import { ISC_MAGIC_CONTRACT_ADDRESS } from '../constants'
-import { ILayer2NativeToken } from '../interfaces'
 
 // TODO: remove this hardcoded address and use the account's EVM address instead
 const HARDCODED_EVM_ADDRESS = 'WRITE_YOUR_EVM_ADDRESS_HERE'
 
 // TODO: missing set native tokens, which converts the function to getAndSetLayer2NativeTokens
-export async function getLayer2NativeTokens(): Promise<ILayer2NativeToken[]> {
+export async function getLayer2NativeTokens(): Promise<{ amount: bigint; id: string }[]> {
     const chains = get(network)?.getChains()
     const accountsCoreContract = getSmartContractHexName('accounts')
     const getBalanceFunc = getSmartContractHexName('balance')
@@ -24,7 +23,7 @@ export async function getLayer2NativeTokens(): Promise<ILayer2NativeToken[]> {
                 .callView(accountsCoreContract, getBalanceFunc, parameters)
                 .call()
 
-            const nativeTokens: ILayer2NativeToken[] = []
+            const nativeTokens = []
 
             for (const item of nativeTokenResult.items) {
                 const id = item.key
