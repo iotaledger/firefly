@@ -3,7 +3,7 @@ import { network } from '@core/network'
 import { TOKEN_ID_BYTE_LENGTH } from '@core/token'
 import { Converter } from '@iota/util.js'
 import { get } from 'svelte/store'
-import { ISC_CONTRACT } from '../constants'
+import { ISC_MAGIC_CONTRACT_ADDRESS } from '../constants'
 import { ILayer2NativeToken } from '../interfaces'
 
 // TODO: remove this hardcoded address and use the account's EVM address instead
@@ -19,7 +19,7 @@ export async function getLayer2NativeTokens(): Promise<ILayer2NativeToken[]> {
     const nativeTokensPromises = chains?.map(async (chain) => {
         try {
             const provider = chain.getProvider()
-            const contract = new provider.eth.Contract(ISC_SANDBOX_ABI, ISC_CONTRACT)
+            const contract = new provider.eth.Contract(ISC_SANDBOX_ABI, ISC_MAGIC_CONTRACT_ADDRESS)
             const nativeTokenResult = await contract.methods
                 .callView(accountsCoreContract, getBalanceFunc, parameters)
                 .call()

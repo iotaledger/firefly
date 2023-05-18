@@ -1,4 +1,4 @@
-import { AbiType, StateMutabilityType } from '../types'
+import { AbiType, StateMutabilityType } from '../enums'
 
 export const ISC_SANDBOX_ABI = [
     {
@@ -30,8 +30,8 @@ export const ISC_SANDBOX_ABI = [
         ],
         name: 'allow',
         outputs: [],
-        stateMutability: 'nonpayable' as StateMutabilityType,
-        type: 'function' as AbiType,
+        stateMutability: StateMutabilityType.NonPayable,
+        type: AbiType.Function,
     },
     {
         inputs: [
@@ -96,8 +96,8 @@ export const ISC_SANDBOX_ABI = [
                 type: 'tuple',
             },
         ],
-        stateMutability: 'nonpayable' as StateMutabilityType,
-        type: 'function' as AbiType,
+        stateMutability: StateMutabilityType.NonPayable,
+        type: AbiType.Function,
     },
     {
         inputs: [
@@ -139,29 +139,29 @@ export const ISC_SANDBOX_ABI = [
                 type: 'tuple',
             },
         ],
-        stateMutability: 'view' as StateMutabilityType,
-        type: 'function' as AbiType,
+        stateMutability: StateMutabilityType.View,
+        type: AbiType.Function,
     },
     {
         inputs: [{ internalType: 'uint32', name: 'foundrySN', type: 'uint32' }],
         name: 'erc20NativeTokensAddress',
         outputs: [{ internalType: 'address', name: '', type: 'address' }],
-        stateMutability: 'view' as StateMutabilityType,
-        type: 'function' as AbiType,
+        stateMutability: StateMutabilityType.View,
+        type: AbiType.Function,
     },
     {
         inputs: [{ internalType: 'address', name: 'addr', type: 'address' }],
         name: 'erc20NativeTokensFoundrySerialNumber',
         outputs: [{ internalType: 'uint32', name: '', type: 'uint32' }],
-        stateMutability: 'view' as StateMutabilityType,
-        type: 'function' as AbiType,
+        stateMutability: StateMutabilityType.View,
+        type: AbiType.Function,
     },
     {
         inputs: [{ internalType: 'NFTID', name: 'collectionID', type: 'bytes32' }],
         name: 'erc721NFTCollectionAddress',
         outputs: [{ internalType: 'address', name: '', type: 'address' }],
-        stateMutability: 'view' as StateMutabilityType,
-        type: 'function' as AbiType,
+        stateMutability: StateMutabilityType.View,
+        type: AbiType.Function,
     },
     {
         inputs: [
@@ -194,8 +194,8 @@ export const ISC_SANDBOX_ABI = [
                 type: 'tuple',
             },
         ],
-        stateMutability: 'view' as StateMutabilityType,
-        type: 'function' as AbiType,
+        stateMutability: StateMutabilityType.View,
+        type: AbiType.Function,
     },
     {
         inputs: [{ internalType: 'address', name: 'addr', type: 'address' }],
@@ -225,8 +225,8 @@ export const ISC_SANDBOX_ABI = [
                 type: 'tuple',
             },
         ],
-        stateMutability: 'view' as StateMutabilityType,
-        type: 'function' as AbiType,
+        stateMutability: StateMutabilityType.View,
+        type: AbiType.Function,
     },
     {
         inputs: [{ internalType: 'address', name: 'target', type: 'address' }],
@@ -256,8 +256,8 @@ export const ISC_SANDBOX_ABI = [
                 type: 'tuple',
             },
         ],
-        stateMutability: 'view' as StateMutabilityType,
-        type: 'function' as AbiType,
+        stateMutability: StateMutabilityType.View,
+        type: AbiType.Function,
     },
     {
         inputs: [],
@@ -275,15 +275,15 @@ export const ISC_SANDBOX_ABI = [
                 type: 'tuple',
             },
         ],
-        stateMutability: 'view' as StateMutabilityType,
-        type: 'function' as AbiType,
+        stateMutability: StateMutabilityType.View,
+        type: AbiType.Function,
     },
     {
         inputs: [],
         name: 'getChainID',
         outputs: [{ internalType: 'ISCChainID', name: '', type: 'bytes32' }],
-        stateMutability: 'view' as StateMutabilityType,
-        type: 'function' as AbiType,
+        stateMutability: StateMutabilityType.View,
+        type: AbiType.Function,
     },
     {
         inputs: [],
@@ -296,15 +296,15 @@ export const ISC_SANDBOX_ABI = [
                 type: 'tuple',
             },
         ],
-        stateMutability: 'view' as StateMutabilityType,
-        type: 'function' as AbiType,
+        stateMutability: StateMutabilityType.View,
+        type: AbiType.Function,
     },
     {
         inputs: [],
         name: 'getEntropy',
         outputs: [{ internalType: 'bytes32', name: '', type: 'bytes32' }],
-        stateMutability: 'nonpayable' as StateMutabilityType,
-        type: 'function' as AbiType,
+        stateMutability: StateMutabilityType.NonPayable,
+        type: AbiType.Function,
     },
     {
         inputs: [{ internalType: 'NFTID', name: 'id', type: 'bytes32' }],
@@ -351,8 +351,8 @@ export const ISC_SANDBOX_ABI = [
                 type: 'tuple',
             },
         ],
-        stateMutability: 'view' as StateMutabilityType,
-        type: 'function' as AbiType,
+        stateMutability: StateMutabilityType.View,
+        type: AbiType.Function,
     },
     {
         inputs: [{ internalType: 'NFTID', name: 'id', type: 'bytes32' }],
@@ -380,8 +380,8 @@ export const ISC_SANDBOX_ABI = [
                 type: 'tuple',
             },
         ],
-        stateMutability: 'view' as StateMutabilityType,
-        type: 'function' as AbiType,
+        stateMutability: StateMutabilityType.View,
+        type: AbiType.Function,
     },
     {
         inputs: [{ internalType: 'uint32', name: 'foundrySN', type: 'uint32' }],
@@ -394,8 +394,8 @@ export const ISC_SANDBOX_ABI = [
                 type: 'tuple',
             },
         ],
-        stateMutability: 'view' as StateMutabilityType,
-        type: 'function' as AbiType,
+        stateMutability: StateMutabilityType.View,
+        type: AbiType.Function,
     },
     {
         inputs: [{ internalType: 'uint32', name: 'foundrySN', type: 'uint32' }],
@@ -412,8 +412,8 @@ export const ISC_SANDBOX_ABI = [
                 type: 'tuple',
             },
         ],
-        stateMutability: 'view' as StateMutabilityType,
-        type: 'function' as AbiType,
+        stateMutability: StateMutabilityType.View,
+        type: AbiType.Function,
     },
     {
         inputs: [],
@@ -426,8 +426,8 @@ export const ISC_SANDBOX_ABI = [
                 type: 'tuple',
             },
         ],
-        stateMutability: 'nonpayable' as StateMutabilityType,
-        type: 'function' as AbiType,
+        stateMutability: StateMutabilityType.NonPayable,
+        type: AbiType.Function,
     },
     {
         inputs: [],
@@ -440,15 +440,15 @@ export const ISC_SANDBOX_ABI = [
                 type: 'tuple',
             },
         ],
-        stateMutability: 'nonpayable' as StateMutabilityType,
-        type: 'function' as AbiType,
+        stateMutability: StateMutabilityType.NonPayable,
+        type: AbiType.Function,
     },
     {
         inputs: [],
         name: 'getTimestampUnixSeconds',
         outputs: [{ internalType: 'int64', name: '', type: 'int64' }],
-        stateMutability: 'view' as StateMutabilityType,
-        type: 'function' as AbiType,
+        stateMutability: StateMutabilityType.View,
+        type: AbiType.Function,
     },
     {
         inputs: [
@@ -556,8 +556,8 @@ export const ISC_SANDBOX_ABI = [
         ],
         name: 'send',
         outputs: [],
-        stateMutability: 'nonpayable' as StateMutabilityType,
-        type: 'function' as AbiType,
+        stateMutability: StateMutabilityType.NonPayable,
+        type: AbiType.Function,
     },
     {
         inputs: [
@@ -588,14 +588,14 @@ export const ISC_SANDBOX_ABI = [
         ],
         name: 'takeAllowedFunds',
         outputs: [],
-        stateMutability: 'nonpayable' as StateMutabilityType,
-        type: 'function' as AbiType,
+        stateMutability: StateMutabilityType.NonPayable,
+        type: AbiType.Function,
     },
     {
         inputs: [{ internalType: 'string', name: 's', type: 'string' }],
         name: 'triggerEvent',
         outputs: [],
-        stateMutability: 'nonpayable' as StateMutabilityType,
-        type: 'function' as AbiType,
+        stateMutability: StateMutabilityType.NonPayable,
+        type: AbiType.Function,
     },
 ]
