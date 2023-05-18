@@ -4,9 +4,9 @@ export interface IMintTokenDetails {
     circulatingSupply: number
     decimals: number
     symbol: string
-    description: string
-    url: string
-    logoUrl: string
+    description?: string
+    url?: string
+    logoUrl?: string
     aliasId: string
 }
 

@@ -136,7 +136,7 @@
     </Text>
 
     <div class="space-y-2 max-h-100 scrollable-y flex-1">
-        {#if Object.entries(detailsList).length > 0}
+        {#if detailsList && Object.entries(detailsList).length > 0}
             <details-list class="flex flex-col space-y-2">
                 {#each Object.entries(detailsList) as [key, value]}
                     <KeyValueBox

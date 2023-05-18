@@ -19,11 +19,11 @@
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
-    const DEFAULT: Partial<IMintTokenDetails> = {
+    const DEFAULT = {
         name: undefined,
         totalSupply: undefined,
         circulatingSupply: undefined,
-        decimals: undefined,
+        decimals: 0,
         symbol: undefined,
         description: undefined,
         url: undefined,
@@ -31,7 +31,6 @@
         aliasId: undefined,
     }
 
-    const mintNativeTokenFormDetails: IMintTokenDetails | Partial<IMintTokenDetails> = $mintTokenDetails ?? DEFAULT
     let {
         name: tokenName,
         totalSupply,
@@ -42,7 +41,7 @@
         url,
         logoUrl,
         aliasId,
-    } = mintNativeTokenFormDetails
+    } = $mintTokenDetails ?? DEFAULT
 
     let nameError: string = ''
     $: tokenName, (nameError = '')
@@ -65,8 +64,19 @@
 
     async function onContinueClick(): Promise<void> {
         const valid = await validate()
-        if (valid && isEverythingDefined(mintNativeTokenFormDetails)) {
-            setMintTokenDetails(mintNativeTokenFormDetails)
+        const tokenDetailsForm = {
+            name: tokenName,
+            totalSupply,
+            circulatingSupply,
+            decimals,
+            symbol,
+            description,
+            url,
+            logoUrl,
+            aliasId,
+        }
+        if (valid && isEverythingDefined(tokenDetailsForm)) {
+            setMintTokenDetails(tokenDetailsForm)
             openPopup({
                 id: PopupId.MintNativeTokenConfirmation,
                 overflow: true,
@@ -81,9 +91,6 @@
             form.circulatingSupply !== undefined &&
             form.decimals !== undefined &&
             form.symbol !== undefined &&
-            form.description !== undefined &&
-            form.url !== undefined &&
-            form.logoUrl !== undefined &&
             form.aliasId !== undefined
         )
     }
