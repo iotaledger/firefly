@@ -46,8 +46,8 @@
     let metadataInput: OptionalInput
     let tagInput: OptionalInput
 
-    let selectedExpirationPeriod: TimePeriod
-    let selectedTimelockPeriod: TimePeriod
+    let selectedExpirationPeriod: TimePeriod | undefined = expirationDate ? TimePeriod.Custom : undefined
+    let selectedTimelockPeriod: TimePeriod | undefined = timelockDate ? TimePeriod.Custom : undefined
 
     $: transactionDetails = get(newTransactionDetails)
     $: recipient =
