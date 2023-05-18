@@ -1,5 +1,5 @@
-export * from './getSelectedAccountL2Tokens'
 export * from './getSelectedAccountLayer2NativeTokens'
+export * from './getSelectedAccountLayer2Tokens'
 export * from './loadEvmAddressForSelectedAccount'
 export * from './pollLayer2NativeAssets'
 export * from './registerLayer2EventHandlers'
