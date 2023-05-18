@@ -590,7 +590,8 @@
                 "attributes": "Attributes",
                 "menu": {
                     "download": "Download",
-                    "setAvatar": "Set NFT as profile avatar",
+                    "setPfp": "Set NFT profile pic",
+                    "unsetPfp": "Unset NFT profile pic",
                     "view": "View media in browser",
                     "burn": "Burn NFT"
                 }
@@ -1036,7 +1037,11 @@
             "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
         },
         "transactionDetails": {
-            "title": "Transaction details"
+            "title": "Transaction details",
+            "giftedStorageDeposit": {
+                "tooltipTitle": "Gift storage deposit",
+                "tooltipDescription": "Amount kept by the recipient"
+            }
         },
         "sendForm": {
             "title": "Send funds"

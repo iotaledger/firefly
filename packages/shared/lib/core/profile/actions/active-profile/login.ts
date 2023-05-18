@@ -48,6 +48,7 @@ import { loadAccounts } from './loadAccounts'
 import { logout } from './logout'
 import { subscribeToWalletApiEventsForActiveProfile } from './subscribeToWalletApiEventsForActiveProfile'
 import { checkAndUpdateActiveProfileNetwork } from './checkAndUpdateActiveProfileNetwork'
+import { checkAndRemoveProfilePicture } from './checkAndRemoveProfilePicture'
 
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const loginRouter = get(routerManager).getRouterForAppContext(AppContext.Login)
@@ -108,6 +109,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             )
             updateActiveProfile({ forceAssetRefresh: false })
             await loadNftsForActiveProfile()
+            checkAndRemoveProfilePicture()
 
             // Step 6: generate and store activities for all accounts
             incrementLoginProgress()
