@@ -6,7 +6,6 @@ import { Converter } from '@iota/util.js'
 import { get } from 'svelte/store'
 import { ISC_MAGIC_CONTRACT_ADDRESS } from '../constants'
 
-// TODO: missing set native tokens, which converts the function to getAndSetLayer2NativeTokens
 export async function getSelectedAccountWrappedNativeTokens(): Promise<{ amount: bigint; id: string }[] | undefined> {
     const selectedAccountEvmAddress = get(selectedAccount)?.evmAddress
     if (selectedAccountEvmAddress?.length) {
