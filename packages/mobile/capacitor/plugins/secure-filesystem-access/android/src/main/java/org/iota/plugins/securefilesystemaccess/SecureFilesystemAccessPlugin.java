@@ -336,9 +336,9 @@ public class SecureFilesystemAccessPlugin extends Plugin {
             File sourceFile = new File(getContext().getFilesDir(), source);
             File destinationFile = new File(getContext().getFilesDir(), destination);
             
-//            if (!destinationFile.exists()) {
-//                destinationFile.createNewFile();
-//            }
+           if (!destinationFile.exists()) {
+               destinationFile.createNewFile();
+           }
 
             FileChannel src = new FileInputStream(sourceFile).getChannel();
             FileChannel dst = new FileOutputStream(destinationFile).getChannel();
