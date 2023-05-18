@@ -1037,7 +1037,11 @@
             "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
         },
         "transactionDetails": {
-            "title": "Transaction details"
+            "title": "Transaction details",
+            "giftedStorageDeposit": {
+                "tooltipTitle": "Gift storage deposit",
+                "tooltipDescription": "Amount kept by the recipient"
+            }
         },
         "sendForm": {
             "title": "Send funds"
