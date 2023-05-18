@@ -1,3 +1,4 @@
+export * from './getSelectedAccountL2Tokens'
 export * from './getSelectedAccountLayer2NativeTokens'
 export * from './loadEvmAddressForSelectedAccount'
 export * from './pollLayer2NativeAssets'
