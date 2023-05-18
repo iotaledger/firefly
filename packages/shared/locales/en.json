@@ -590,7 +590,8 @@
                 "attributes": "Attributes",
                 "menu": {
                     "download": "Download",
-                    "setAvatar": "Set NFT as profile avatar",
+                    "setPfp": "Set NFT profile pic",
+                    "unsetPfp": "Unset NFT profile pic",
                     "view": "View media in browser",
                     "burn": "Burn NFT"
                 }
