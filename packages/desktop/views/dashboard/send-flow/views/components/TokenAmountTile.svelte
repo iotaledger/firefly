@@ -14,8 +14,8 @@
 </script>
 
 {#if asset?.metadata}
-    <Tile>
-        <div class="w-full flex flex-row justify-between items-center">
+    <Tile fullWidth={showAssetInfo}>
+        <div class="w-full flex flex-row justify-between items-center gap-4">
             <div class="flex flex-row items-center text-left space-x-4">
                 <AssetIcon {asset} />
                 {#if showAssetInfo}
@@ -32,10 +32,10 @@
                 {/if}
             </div>
             <div class="flex flex-col text-right">
-                <Text fontWeight={FontWeight.semibold}>
+                <Text fontWeight={FontWeight.semibold} classes="whitespace-nowrap">
                     {formatTokenAmountBestMatch(Number(amount), asset.metadata)}
                 </Text>
-                <Text fontWeight={FontWeight.semibold} darkColor="gray-600">
+                <Text fontWeight={FontWeight.semibold} darkColor="gray-600" classes="whitespace-nowrap">
                     {formatCurrency(marketAmount) || '--'}
                 </Text>
             </div>

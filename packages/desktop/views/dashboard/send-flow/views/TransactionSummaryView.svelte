@@ -169,17 +169,13 @@
 >
     <div class="flex flex-row gap-2 justify-between">
         {#if transactionDetails.type === NewTransactionType.TokenTransfer}
-            <TokenAmountTile
-                asset={transactionDetails.asset}
-                amount={transactionDetails.rawAmount}
-                showAssetInfo={!visibleSurplus}
-            />
+            <TokenAmountTile asset={transactionDetails.asset} amount={transactionDetails.rawAmount} />
         {/if}
         {#if visibleSurplus}
             <TokenAmountTile
                 asset={$selectedAccountAssets.baseCoin}
                 amount={String(visibleSurplus)}
-                showAssetInfo={!visibleSurplus}
+                showAssetInfo={false}
             />
         {/if}
     </div>
