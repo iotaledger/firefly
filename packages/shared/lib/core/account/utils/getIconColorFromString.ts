@@ -3,40 +3,47 @@ import resolveConfig from 'tailwindcss/resolveConfig'
 
 const configColors = resolveConfig(tailwindConfig).theme.colors as Record<string, Record<string, string>>
 
-type Colours = 'blue' | 'lightblue' | 'purple' | 'turquoise' | 'green' | 'yellow' | 'orange' | 'red' | 'pink' | 'gray'
+type Colors = 'blue' | 'lightblue' | 'purple' | 'turquoise' | 'green' | 'yellow' | 'orange' | 'red' | 'pink' | 'gray'
 type Shades = '50' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900' | '1000'
 
 interface IColourOptions {
-    colours?: Colours[]
+    colors?: Colors[]
     shades?: Shades[]
-    coloursToExclude?: Colours[]
+    colorsToExclude?: Colors[]
     shadesToExclude?: Shades[]
 }
 
-const DEFAULT_COLOUR_OPTIONS: IColourOptions = {
-    colours: ['blue', 'lightblue', 'purple', 'turquoise', 'green', 'yellow', 'orange', 'red', 'pink', 'gray'],
-    shades: ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900', '1000'],
-}
+const DEFAULT_COLORS: Colors[] = [
+    'blue',
+    'lightblue',
+    'purple',
+    'turquoise',
+    'green',
+    'yellow',
+    'orange',
+    'red',
+    'pink',
+    'gray',
+]
 
-export function getIconColorFromString(
-    string: string = '',
-    colourOptions: IColourOptions = DEFAULT_COLOUR_OPTIONS
-): string {
-    const colours = colourOptions.colours ?? DEFAULT_COLOUR_OPTIONS.colours
-    const shades = colourOptions.shades ?? DEFAULT_COLOUR_OPTIONS.shades
+const DEFAULT_SHADES: Shades[] = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900', '1000']
 
-    const filteredColours = colours?.filter((colour) => !colourOptions.coloursToExclude?.includes(colour))
-    const filteredShades = shades?.filter((shade) => !colourOptions.shadesToExclude?.includes(shade))
+export function getIconColorFromString(string: string = '', colourOptions?: IColourOptions): string {
+    const colors: Colors[] = colourOptions?.colors ?? DEFAULT_COLORS
+    const shades: Shades[] = colourOptions?.shades ?? DEFAULT_SHADES
 
-    const hexColours: string[] = []
-    filteredColours?.forEach((colour) => {
-        filteredShades?.forEach((shade) => {
+    const filteredColors = colors.filter((colour) => !colourOptions?.colorsToExclude?.includes(colour))
+    const filteredShades = shades.filter((shade) => !colourOptions?.shadesToExclude?.includes(shade))
+
+    const hexColors: string[] = []
+    filteredColors.forEach((colour) => {
+        filteredShades.forEach((shade) => {
             if (configColors?.[colour]?.[shade]) {
-                hexColours.push(configColors?.[colour]?.[shade])
+                hexColors.push(configColors[colour][shade])
             }
         })
     })
 
     const hash = Array.from(string).reduce((arr, next) => arr + next.charCodeAt(0), 0)
-    return hexColours[hash % hexColours.length]?.toString()
+    return hexColors[hash % hexColors.length]?.toString()
 }
