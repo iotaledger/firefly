@@ -8,79 +8,97 @@
         buildFoundryOutputData,
         formatTokenAmountPrecise,
         IIrc30Metadata,
+        IMintTokenDetails,
     } from '@core/wallet'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { Button, KeyValueBox, Text, FontWeight } from 'shared/components'
     import { onMount } from 'svelte'
     import { selectedAccount } from '@core/account'
     import { handleError } from '@core/error/handlers/handleError'
+    import Error from '@ui/Error.svelte'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
-    const {
-        name: tokenName,
-        totalSupply,
-        circulatingSupply,
-        decimals,
-        symbol,
-        description,
-        url,
-        logoUrl,
-        aliasId,
-    } = $mintTokenDetails
-
     let storageDeposit = '0'
 
-    let metadata: IIrc30Metadata
-    $: metadata = {
-        standard: TokenStandard.Irc30,
-        name: tokenName,
-        symbol,
-        decimals: Number(decimals),
-        ...(description && { description }),
-        ...(url && { url }),
-        ...(logoUrl && { logoUrl }),
-    }
-    $: isTransferring = $selectedAccount.isTransferring
+    let metadata: IIrc30Metadata | undefined
+    $: metadata = getMetadata($mintTokenDetails)
+    $: isTransferring = $selectedAccount?.isTransferring
 
     async function prepareFoundryOutput(): Promise<void> {
-        const outputData = buildFoundryOutputData(Number(totalSupply), Number(circulatingSupply), metadata, aliasId)
-        const preparedOutput = await $selectedAccount.buildFoundryOutput(outputData)
-        storageDeposit = formatTokenAmountPrecise(Number(preparedOutput.amount) ?? 0, getBaseToken())
+        if ($mintTokenDetails && $selectedAccount && metadata) {
+            const { totalSupply, circulatingSupply, aliasId } = $mintTokenDetails
+            const outputData = buildFoundryOutputData(Number(totalSupply), Number(circulatingSupply), metadata, aliasId)
+            const preparedOutput = await $selectedAccount.buildFoundryOutput(outputData)
+            storageDeposit = formatTokenAmountPrecise(Number(preparedOutput.amount) ?? 0, getBaseToken())
+        }
     }
 
-    let detailsList: { [key: string]: { data: string; tooltipText?: string; isCopyable?: boolean } }
-    $: detailsList = {
-        ...(aliasId && {
-            alias: { data: aliasId, isCopyable: true },
-        }),
-        ...(storageDeposit && {
-            storageDeposit: { data: storageDeposit },
-        }),
-        ...(tokenName && {
-            tokenName: { data: tokenName },
-        }),
-        ...(totalSupply && {
-            totalSupply: { data: String(totalSupply) },
-        }),
-        ...(decimals && {
-            decimals: { data: String(decimals) },
-        }),
-        ...(symbol && {
-            symbol: { data: symbol },
-        }),
-        ...(url && {
-            url: { data: url },
-        }),
-        ...(logoUrl && {
-            logoUrl: { data: logoUrl },
-        }),
+    let detailsList: { [key: string]: { data: string; tooltipText?: string; isCopyable?: boolean } } | undefined
+    $: detailsList = getDetailsList($mintTokenDetails)
+
+    function getDetailsList(
+        details: IMintTokenDetails | undefined
+    ): { [key: string]: { data: string; tooltipText?: string; isCopyable?: boolean } } | undefined {
+        if (details) {
+            const { name: tokenName, symbol, aliasId, url, logoUrl, decimals, totalSupply } = details
+            return {
+                ...(aliasId && {
+                    alias: { data: aliasId, isCopyable: true },
+                }),
+                ...(storageDeposit && {
+                    storageDeposit: { data: storageDeposit },
+                }),
+                ...(tokenName && {
+                    tokenName: { data: tokenName },
+                }),
+                ...(totalSupply && {
+                    totalSupply: { data: String(totalSupply) },
+                }),
+                ...(decimals && {
+                    decimals: { data: String(decimals) },
+                }),
+                ...(symbol && {
+                    symbol: { data: symbol },
+                }),
+                ...(url && {
+                    url: { data: url },
+                }),
+                ...(logoUrl && {
+                    logoUrl: { data: logoUrl },
+                }),
+            }
+        }
+    }
+
+    function getMetadata(details: IMintTokenDetails | undefined): IIrc30Metadata | undefined {
+        if (details) {
+            const { name: tokenName, symbol, description, url, logoUrl, decimals } = details
+
+            return {
+                standard: TokenStandard.Irc30,
+                name: tokenName,
+                symbol,
+                decimals: Number(decimals),
+                ...(description && { description }),
+                ...(url && { url }),
+                ...(logoUrl && { logoUrl }),
+            }
+        }
     }
 
     async function mintAction(): Promise<void> {
         try {
-            await mintNativeToken(Number(totalSupply), Number(circulatingSupply), metadata)
-            closePopup()
+            if ($mintTokenDetails && metadata) {
+                await mintNativeToken(
+                    Number($mintTokenDetails.totalSupply),
+                    Number($mintTokenDetails.circulatingSupply),
+                    metadata
+                )
+                closePopup()
+            } else {
+                throw new Error('This shouldn\'t be reachable')
+            }
         } catch (err) {
             handleError(err)
         }
