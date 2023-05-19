@@ -311,8 +311,8 @@ const ledgerProcess = utilityProcess.fork(paths.ledger)
 
 ledgerProcess.on('spawn', () => {
     ledgerProcess.on('message', (message) => {
-        if (message.data?.address) {
-            windows.main.webContents.send('evm-address', message.data.address)
+        if (message.data?.evmAddress) {
+            windows.main.webContents.send('evm-address', message.data)
         } else {
             // TODO: https://github.com/iotaledger/firefly/issues/6799
             /* eslint-disable-next-line no-console */
