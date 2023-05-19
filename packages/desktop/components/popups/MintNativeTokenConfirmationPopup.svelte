@@ -97,7 +97,7 @@
                 )
                 closePopup()
             } else {
-                throw new Error('This shouldn\'t be reachable')
+                throw new Error("This shouldn't be reachable")
             }
         } catch (err) {
             handleError(err)
