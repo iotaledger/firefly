@@ -2084,6 +2084,10 @@
                 "short": "Unable to add proposal",
                 "long": "Unable to find proposal {proposalId} on the specified node"
             }
+        },
+        "erc20TokenAddress": {
+            "invalidFormat": "Must be hexadecimal format",
+            "invalidLength": "Length is invalid"
         }
     },
     "warning": {

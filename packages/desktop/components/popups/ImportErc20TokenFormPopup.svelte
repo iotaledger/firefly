@@ -2,21 +2,16 @@
     import { Button, ChainInput, Error, FontWeight, Text, TextInput, TextType } from '@ui'
     import { localize } from '@core/i18n'
     import { closePopup } from '@auxiliary/popup'
+    import { HEXADECIMAL_PREFIX, HEXADECIMAL_REGEXP } from 'shared/lib/core/utils'
+    import { ERC20_TOKEN_ADDRESS_LENGTH } from 'shared/lib/core/layer-2'
 
-    let error
+    const error = ''
 
-    let tokenAddress
-    let tokenAddressError
+    let chainId: number
 
-    function validate(): boolean {
-        validateTokenAddress()
-
-        return true
-    }
-
-    function validateTokenAddress(): void {
-        tokenAddressError = ''
-    }
+    let tokenAddress: string
+    let tokenAddressError = ''
+    $: tokenAddress, (tokenAddressError = '')
 
     function onCancelClick(): void {
         closePopup()
@@ -24,7 +19,30 @@
 
     function onImportClick(): void {
         if (validate()) {
-            // ...
+            console.log(`${tokenAddress} @ ${chainId}`)
+        } else {
+            console.log('INVALID!')
+        }
+    }
+
+    function validate(): boolean {
+        validateTokenAddress()
+
+        return !tokenAddressError
+    }
+
+    function validateTokenAddress(): void {
+        const hasHexPrefix = tokenAddress?.startsWith(HEXADECIMAL_PREFIX)
+        const isValidHex = HEXADECIMAL_REGEXP.test(tokenAddress)
+        if (!hasHexPrefix || !isValidHex) {
+            tokenAddressError = localize('error.erc20TokenAddress.invalidFormat')
+            return
+        }
+
+        const addressLength = tokenAddress?.substring(2)?.length
+        if (addressLength !== ERC20_TOKEN_ADDRESS_LENGTH) {
+            tokenAddressError = localize('error.erc20TokenAddress.invalidLength')
+            return
         }
     }
 </script>
@@ -35,7 +53,7 @@
     </Text>
 
     <div class="space-y-4 max-h-100 scrollable-y flex-1">
-        <ChainInput />
+        <ChainInput bind:chainId />
         <TextInput
             bind:value={tokenAddress}
             label={localize('popups.importErc20Token.property.tokenAddress')}
@@ -48,7 +66,7 @@
     </div>
 
     <div class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button outline classes="w-full" onClick={onCancelClick}>
+        <Button outline classes="w-full" disabled={!chainId || !tokenAddress} onClick={onCancelClick}>
             {localize('actions.cancel')}
         </Button>
         <Button classes="w-full" onClick={onImportClick}>
