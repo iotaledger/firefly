@@ -1,25 +1,29 @@
 import Big from 'big.js'
 
 import { parseCurrency } from '@core/i18n'
-import { IOTA_UNIT_MAP } from '@core/utils'
+import { IOTA_UNIT_MAP, IotaUnit } from '@core/utils'
 
 import { TokenMetadata } from '../types'
 import { MAX_SUPPORTED_DECIMALS } from '../constants/max-supported-decimals.constants'
 import { TokenStandard } from '../enums'
 
-export function convertToRawAmount(amount: string, tokenMetadata: TokenMetadata, unit?: string): Big {
+export function convertToRawAmount(amount: string, tokenMetadata: TokenMetadata, unit?: string): Big | undefined {
     if (amount) {
         const parsedAmount = parseCurrency(amount)
         return convertToRawAmountFromMetadata(parsedAmount, tokenMetadata, unit)
     } else {
-        return -1
+        return undefined
     }
 }
 
-function convertToRawAmountFromMetadata(amount: number, tokenMetadata: TokenMetadata, selectedUnit: string): Big {
+function convertToRawAmountFromMetadata(
+    amount: number,
+    tokenMetadata: TokenMetadata,
+    selectedUnit?: string
+): Big | undefined {
     if (tokenMetadata?.standard === TokenStandard.BaseToken) {
         if (tokenMetadata.useMetricPrefix) {
-            const decimals = IOTA_UNIT_MAP?.[selectedUnit?.substring(0, 1)]?.decimalPlaces ?? 0
+            const decimals = IOTA_UNIT_MAP?.[selectedUnit?.substring(0, 1) as IotaUnit]?.decimalPlaces ?? 0
             return convertAmountToMatchUnit(amount, decimals)
         } else {
             if (selectedUnit === tokenMetadata.unit) {
@@ -28,7 +32,7 @@ function convertToRawAmountFromMetadata(amount: number, tokenMetadata: TokenMeta
             } else if (selectedUnit === tokenMetadata.subunit) {
                 return Big(amount)
             } else {
-                return -1
+                return undefined
             }
         }
     } else if (tokenMetadata?.standard === TokenStandard.Irc30) {
