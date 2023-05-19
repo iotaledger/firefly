@@ -1,5 +1,5 @@
 import { get } from 'svelte/store'
-import { OutputOptions, Assets } from '@iota/wallet/out/types'
+import { OutputParams, Assets } from '@iota/wallet/out/types'
 import { convertDateToUnixTimestamp, Converter } from '@core/utils'
 import { NewTransactionType, selectedAccountAssets } from '../stores'
 import { addGasBudget, getLayer2MetadataForTransfer } from '@core/layer-2/utils'
@@ -7,7 +7,7 @@ import { NewTransactionDetails } from '@core/wallet/types'
 import { getAddressFromSubject } from '@core/wallet/utils'
 import { ReturnStrategy } from '../enums'
 
-export function getOutputOptions(transactionDetails: NewTransactionDetails): OutputOptions {
+export function getOutputParameters(transactionDetails: NewTransactionDetails): OutputParams {
     const { recipient, expirationDate, timelockDate, giftStorageDeposit, layer2Parameters } = transactionDetails ?? {}
 
     const recipientAddress = layer2Parameters ? layer2Parameters.networkAddress : getAddressFromSubject(recipient)
@@ -26,7 +26,7 @@ export function getOutputOptions(transactionDetails: NewTransactionDetails): Out
     const expirationUnixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
     const timelockUnixTime = timelockDate ? convertDateToUnixTimestamp(timelockDate) : undefined
 
-    return <OutputOptions>{
+    return <OutputParams>{
         recipientAddress,
         amount,
         ...(assets && { assets }),
