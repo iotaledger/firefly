@@ -10,7 +10,7 @@ export async function loadEvmAddressForSelectedAccount(): Promise<void> {
             return
         }
         const { evmAddresses, index } = account
-        const chains = get(network).getChains()
+        const chains = get(network)?.getChains() ?? []
         const coinTypes = new Set(chains.map((chain) => chain.getConfiguration().coinType))
 
         for (const coinType of coinTypes) {
