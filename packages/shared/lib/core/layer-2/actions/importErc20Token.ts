@@ -20,8 +20,7 @@ export async function importErc20Token(tokenAddress: string, chainId: number): P
         // TODO: Extract into separate function later
         // TODO: Get for all accounts
         const coinType = chain?.getConfiguration().coinType
-        const selectedAccountAddress =
-            get(selectedAccount)?.evmAddresses[coinType] ?? '0xA88107749C850Df5A4BbbD2197889dF90103dd06'
+        const selectedAccountAddress = get(selectedAccount)?.evmAddresses[coinType]
         const rawBalance = await contract.methods.balanceOf(selectedAccountAddress).call()
         console.log('RAW BALANCE: ', rawBalance)
         const adjustedBalance = rawBalance / Math.pow(10, decimals)

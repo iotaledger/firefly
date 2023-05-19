@@ -3,8 +3,8 @@
     import { localize } from '@core/i18n'
     import { ERC20_TOKEN_ADDRESS_LENGTH, importErc20Token } from '@core/layer-2'
     import { HEXADECIMAL_PREFIX, HEXADECIMAL_REGEXP } from '@core/utils'
+    import { showAppNotification } from '@auxiliary/notification'
     import { closePopup } from '@auxiliary/popup'
-    import { showAppNotification } from 'shared/lib/auxiliary/notification'
 
     let busy = false
 
