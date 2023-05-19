@@ -11,11 +11,10 @@
         IMintTokenDetails,
     } from '@core/wallet'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-    import { Button, KeyValueBox, Text, FontWeight } from 'shared/components'
+    import { Button, KeyValueBox, Text, FontWeight, TextType } from 'shared/components'
     import { onMount } from 'svelte'
     import { selectedAccount } from '@core/account'
     import { handleError } from '@core/error/handlers/handleError'
-    import Error from '@ui/Error.svelte'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -97,7 +96,7 @@
                 )
                 closePopup()
             } else {
-                throw new Error("This shouldn't be reachable")
+                throw new Error('This shouldn\'t be reachable')
             }
         } catch (err) {
             handleError(err)
@@ -131,7 +130,7 @@
 </script>
 
 <div class="space-y-6">
-    <Text type="h4" fontSize="18" lineHeight="6" fontWeight={FontWeight.semibold}>
+    <Text type={TextType.h4} fontSize="18" lineHeight="6" fontWeight={FontWeight.semibold}>
         {localize('popups.nativeToken.confirmationTitle')}
     </Text>
 
