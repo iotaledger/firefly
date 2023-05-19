@@ -31,7 +31,6 @@
                     message: localize('popups.importErc20Token.success'),
                 })
             } catch (err) {
-                console.error(err)
                 showAppNotification({
                     type: 'error',
                     alert: true,
