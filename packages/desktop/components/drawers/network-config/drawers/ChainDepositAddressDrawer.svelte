@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { IIscpChainConfiguration, selectedChain } from '@core/network'
+    import { IIscpChainConfiguration, isIscpChain, selectedChain } from '@core/network'
     import { appSettings } from '@core/app'
     import { QR, AddressBox, FontWeight } from '@ui'
     import { Text } from '@ui'
@@ -12,7 +12,7 @@
     $: {
         if ($selectedChain) {
             const configuration = $selectedChain.getConfiguration() as IIscpChainConfiguration
-            depositAddress = configuration.aliasAddress
+            depositAddress = isIscpChain(configuration) ? $selectedAccount.evmAddress : undefined
         } else {
             depositAddress = $selectedAccount.depositAddress
         }
