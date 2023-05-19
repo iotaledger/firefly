@@ -13,7 +13,7 @@ export async function getSelectedAccountLayer2Tokens(): Promise<unknown[]> {
 }
 
 export async function getNativeLayer2TokensForSelectedAccount(): Promise<unknown[]> {
-    const address = '0xA88107749C850Df5A4BbbD2197889dF90103dd06' // get(selectedAccount)?.evmAddress
+    const address = get(selectedAccount)?.evmAddress
     if (address) {
         try {
             const chains = get(network)?.getChains()
