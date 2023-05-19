@@ -11,6 +11,7 @@ import { appRouter } from '../app-router'
 import { ImportRoute } from '../enums'
 import { Subrouter } from './subrouter'
 import { FireflyEvent } from '../types'
+import { importFilePath } from '@lib/stronghold'
 
 export const importRoute = writable<ImportRoute>(null)
 
@@ -69,6 +70,7 @@ export class ImportRouter extends Subrouter<ImportRoute> {
 
                 this.importFile = file
                 this.importFilePath = filePath
+                importFilePath.set(filePath)
 
                 if (get(this.importType) !== ImportType.Stronghold) {
                     nextRoute = ImportRoute.BackupPassword
@@ -77,6 +79,7 @@ export class ImportRouter extends Subrouter<ImportRoute> {
 
                 try {
                     await asyncRestoreBackup(this.importFilePath, '')
+                    nextRoute = ImportRoute.BackupPassword
                 } catch (err) {
                     if (err?.error === 'error.backup.migrationRequired') {
                         get(appRouter).next({ importType: get(this.importType), strongholdUpdateRequired: true })
