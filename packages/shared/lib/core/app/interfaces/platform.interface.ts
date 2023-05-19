@@ -53,4 +53,7 @@ export interface IPlatform {
     trackEvent(eventName: string, eventProperties?: Record<string, unknown>): void
 
     getLanguageCode(): Promise<string>
+
+    startLedgerProcess(): Promise<void>
+    killLedgerProcess(): Promise<void>
 }

@@ -6,6 +6,7 @@ import { shouldReportError } from './lib/errorHandling'
 import { initialiseAnalytics } from './lib/analytics'
 import { getMachineId } from './lib/machineId'
 import { getDiagnostics } from './lib/diagnostics'
+
 const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session, utilityProcess } = require('electron')
 const path = require('path')
 const fs = require('fs')
@@ -307,22 +308,29 @@ function createWindow() {
 
 app.whenReady().then(createWindow)
 
-const ledgerProcess = utilityProcess.fork(paths.ledger)
+let ledgerProcess
+ipcMain.handle('start-ledger-process', () => {
+    ledgerProcess = utilityProcess.fork(paths.ledger)
 
-ledgerProcess.on('spawn', () => {
-    ledgerProcess.on('message', (message) => {
-        if (message.data?.address) {
-            windows.main.webContents.send('evm-address', message.data.address)
-        } else {
-            // TODO: https://github.com/iotaledger/firefly/issues/6799
-            /* eslint-disable-next-line no-console */
-            console.log('Unhandled Ledger Message: ', message)
-        }
+    ledgerProcess.on('spawn', () => {
+        ledgerProcess.on('message', (message) => {
+            if (message.data?.address) {
+                windows.main.webContents.send('evm-address', message.data.address)
+            } else {
+                // TODO: https://github.com/iotaledger/firefly/issues/6799
+                /* eslint-disable-next-line no-console */
+                console.log('Unhandled Ledger Message: ', message)
+            }
+        })
     })
 })
 
+ipcMain.handle('kill-ledger-process', () => {
+    ledgerProcess.kill()
+})
+
 ipcMain.on('generate-evm-address', (_e, coinType, accountIndex, verify) => {
-    ledgerProcess.postMessage({ method: 'generate-evm-address', parameters: [coinType, accountIndex, verify] })
+    ledgerProcess?.postMessage({ method: 'generate-evm-address', parameters: [coinType, accountIndex, verify] })
 })
 
 /**

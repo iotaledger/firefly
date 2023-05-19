@@ -335,6 +335,12 @@ const ElectronApi = {
     isFeatureFlagEnabled(keyPath) {
         return keyPath?.split('.').reduce((prev, cur) => prev && prev[cur], features)?.enabled ?? false
     },
+    startLedgerProcess() {
+        return ipcRenderer.invoke('start-ledger-process')
+    },
+    killLedgerProcess() {
+        return ipcRenderer.invoke('kill-ledger-process')
+    },
 }
 
 module.exports = ElectronApi
