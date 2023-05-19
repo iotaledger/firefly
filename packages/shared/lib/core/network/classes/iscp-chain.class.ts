@@ -45,6 +45,10 @@ export class IscpChain implements IChain {
         return get(chainStatuses)?.[this._configuration.chainId] ?? { health: NetworkHealth.Disconnected }
     }
 
+    getProvider(): Web3Provider {
+        return this._provider
+    }
+
     getMetadata(): Promise<ChainMetadata> {
         if (this._metadata) {
             return Promise.resolve(this._metadata)

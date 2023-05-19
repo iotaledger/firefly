@@ -34,6 +34,7 @@
         layer2Parameters,
         tag,
         metadata,
+        disableToggleGift,
     } = get(newTransactionDetails)
 
     const destinationNetwork = getDestinationNetworkFromAddress(layer2Parameters?.networkAddress)
@@ -45,8 +46,8 @@
     let metadataInput: OptionalInput
     let tagInput: OptionalInput
 
-    let selectedExpirationPeriod: TimePeriod
-    let selectedTimelockPeriod: TimePeriod
+    let selectedExpirationPeriod: TimePeriod | undefined = expirationDate ? TimePeriod.Custom : undefined
+    let selectedTimelockPeriod: TimePeriod | undefined = timelockDate ? TimePeriod.Custom : undefined
 
     $: transactionDetails = get(newTransactionDetails)
     $: recipient =
@@ -170,10 +171,12 @@
         bind:timelockDate
         bind:selectedExpirationPeriod
         bind:selectedTimelockPeriod
-        {destinationNetwork}
+        bind:giftStorageDeposit
         {storageDeposit}
+        {destinationNetwork}
         {disableChangeExpiration}
         disableChangeTimelock={disableChangeExpiration}
+        disableGiftStorageDeposit={disableToggleGift}
         disableAll={isTransferring}
     />
 

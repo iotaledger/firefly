@@ -35,7 +35,10 @@
         default:
             assetInitials = getAssetInitials(asset)
             assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
-            assetIconBackgroundColor = getIconColorFromString(asset?.metadata?.name)
+            assetIconBackgroundColor = getIconColorFromString(asset?.metadata?.name, {
+                shades: ['500', '600', '700', '800'],
+                colorsToExclude: ['gray'],
+            })
             icon = null
     }
 </script>

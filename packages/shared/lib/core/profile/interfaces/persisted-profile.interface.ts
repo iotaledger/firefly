@@ -1,7 +1,7 @@
 import { IAccountMetadata } from '@core/account'
 import { IClientOptions, IPersistedNetwork } from '@core/network'
+import { INft } from '@core/nfts'
 import { StrongholdVersion } from '@core/stronghold/enums'
-
 import { ProfileType } from '../enums'
 import { IProfileSettings } from './profile-settings.interface'
 
@@ -19,4 +19,5 @@ export interface IPersistedProfile {
     clientOptions: IClientOptions
     forceAssetRefresh: boolean
     strongholdVersion: StrongholdVersion
+    pfp?: INft
 }
