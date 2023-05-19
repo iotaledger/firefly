@@ -17,10 +17,7 @@ export async function getSelectedAccountWrappedNativeTokens(): Promise<{ amount:
                 wrappedNativeTokens.push(...nativeTokens)
             }
         }
-
-        return []
     }
-
     return wrappedNativeTokens
 }
 

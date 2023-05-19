@@ -1,0 +1,57 @@
+<script lang="ts">
+    import { Button, Error, FontWeight, Text, TextInput, TextType } from '@ui'
+    import { localize } from '@core/i18n'
+    import { closePopup } from 'shared/lib/auxiliary/popup'
+
+    let error
+
+    let tokenAddress
+    let tokenAddressError
+
+    function validate(): boolean {
+        validateTokenAddress()
+
+        return true
+    }
+
+    function validateTokenAddress(): void {
+        tokenAddressError = ''
+    }
+
+    function onCancelClick(): void {
+        closePopup()
+    }
+
+    function onImportClick(): void {
+        if (validate()) {
+            // ...
+        }
+    }
+</script>
+
+<import-erc20-token-popup class="space-y-6">
+    <Text type={TextType.h4} fontSize="18" lineHeight="6" fontWeight={FontWeight.semibold}>
+        {localize('popups.importErc20Token.title')}
+    </Text>
+
+    <div class="space-y-4 max-h-100 scrollable-y flex-1">
+        <TextInput
+            bind:value={tokenAddress}
+            label={localize('popups.importErc20Token.property.tokenAddress')}
+            placeholder={localize('popups.importErc20Token.property.tokenAddress')}
+            error={tokenAddressError}
+        />
+        {#if error}
+            <Error error={error?.message} />
+        {/if}
+    </div>
+
+    <div class="flex flex-row flex-nowrap w-full space-x-4">
+        <Button outline classes="w-full" onClick={onCancelClick}>
+            {localize('actions.cancel')}
+        </Button>
+        <Button classes="w-full" onClick={onImportClick}>
+            {localize('actions.import')}
+        </Button>
+    </div>
+</import-erc20-token-popup>
