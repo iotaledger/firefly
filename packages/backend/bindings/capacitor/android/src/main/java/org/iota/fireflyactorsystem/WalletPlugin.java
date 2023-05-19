@@ -113,4 +113,21 @@ public class WalletPlugin extends Plugin {
             }
         }
     }
+
+    @PluginMethod()
+    public void migrateStrongholdSnapshotV2ToV3(final PluginCall call) {
+        try {
+            if (!call.getData().has("currentPath")) {
+                call.reject("currentPath is required");
+            }
+            if (!call.getData().has("currentPassword")) {
+                call.reject("currentPassword is required");
+            }
+
+            Actor.iotaMigrateStrongholdSnapshotV2ToV3(call.getString("currentPath"), call.getString("currentPassword"), call.getString("newPath"),  call.getString("newPassword"));
+            call.resolve();
+        } catch (Exception ex) {
+            call.reject(ex.getMessage() + Arrays.toString(ex.getStackTrace()));
+        }
+    }
 }
