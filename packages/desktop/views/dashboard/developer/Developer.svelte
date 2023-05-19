@@ -35,7 +35,7 @@
                     {#if features.developerTools.mintNft.enabled}
                         <MintNftButton />
                     {/if}
-                    {#if true}
+                    {#if features.developerTools.importErc20Token.enabled}
                         <ImportErc20TokenButton />
                     {/if}
                 </Pane>
