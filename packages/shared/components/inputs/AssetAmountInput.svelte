@@ -37,7 +37,7 @@
     $: bigAmount = convertToRawAmount(amount, asset?.metadata, unit)
     $: marketAmount = getMarketAmountFromAssetValue(bigAmount, asset)
     $: max = parseCurrency(formatTokenAmountDefault(availableBalance, asset?.metadata, unit, false))
-    $: rawAmount = bigAmount.toString()
+    $: rawAmount = bigAmount?.toString()
 
     function onClickAvailableBalance(): void {
         const isRawAmount = asset?.metadata?.decimals && getUnitFromTokenMetadata(asset?.metadata)
