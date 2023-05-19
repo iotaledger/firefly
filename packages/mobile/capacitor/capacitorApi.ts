@@ -55,6 +55,27 @@ export const CapacitorApi: IPlatform = {
 
     listProfileFolders: (profileStoragePath) => new Promise<string[]>((resolve, reject) => {}),
 
+    copyFile: async (source, destination) => {
+        try {
+            await SecureFilesystemAccess.copyFile({
+                source,
+                destination,
+            })
+        } catch (err) {
+            console.error(err)
+        }
+    },
+
+    deleteFile: async (source) => {
+        try {
+            await SecureFilesystemAccess.deleteFile({
+                source,
+            })
+        } catch (err) {
+            console.error(err)
+        }
+    },
+
     loadJsonFile: async (filepath) => {
         try {
             const response = await fetch(filepath)
