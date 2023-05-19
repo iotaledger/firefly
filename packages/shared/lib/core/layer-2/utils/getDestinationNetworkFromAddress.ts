@@ -1,15 +1,13 @@
-import { get } from 'svelte/store'
-import { activeProfile } from '@core/profile'
-import { NETWORK_ADDRESS } from '../constants'
-import { DestinationNetwork } from '../enums'
+import { isIscpChain } from '@core/network'
+import { getActiveProfile } from '@core/profile/stores'
 
-export function getDestinationNetworkFromAddress(networkAddress: string): string {
+export function getDestinationNetworkFromAddress(networkAddress: string | undefined): string {
+    const { network } = getActiveProfile() ?? {}
     if (!networkAddress) {
-        return DestinationNetwork.Shimmer
+        return network?.name
     }
-    const foundDestinationNetwork = Object.entries(NETWORK_ADDRESS[get(activeProfile)?.network?.id]).find(
-        (networkAddressEntry) => networkAddressEntry[1] === networkAddress
-    )?.[0]
 
-    return foundDestinationNetwork ?? networkAddress
+    const chainConfigurations = network?.chainConfigurations.filter(isIscpChain)
+    const foundDestinationNetwork = chainConfigurations.find((chain) => chain?.aliasAddress === networkAddress)
+    return foundDestinationNetwork?.name ?? networkAddress
 }

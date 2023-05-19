@@ -19,6 +19,7 @@ import { get } from 'svelte/store'
 import { WalletApiEvent } from '../../enums'
 import { INewOutputEventPayload } from '../../interfaces'
 import { validateWalletApiEvent } from '../../utils'
+import { checkAndRemoveProfilePicture } from '@core/profile/actions'
 
 export function handleNewOutputEvent(error: Error, rawEvent: string): void {
     const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletApiEvent.NewOutput)
@@ -32,6 +33,8 @@ export async function handleNewOutputEventInternal(
 ): Promise<void> {
     const account = get(activeAccounts)?.find((account) => account.index === accountIndex)
     const output = payload?.output
+
+    if (!account || !output) return
 
     const address = getBech32AddressFromAddressTypes(output?.address)
     const isNewAliasOutput =
@@ -59,5 +62,7 @@ export async function handleNewOutputEventInternal(
         const nft = buildNftFromNftOutput(output as IWrappedOutput, account.depositAddress)
         addOrUpdateNftInAllAccountNfts(account.index, nft)
         void addNftsToDownloadQueue(accountIndex, [nft])
+
+        checkAndRemoveProfilePicture()
     }
 }

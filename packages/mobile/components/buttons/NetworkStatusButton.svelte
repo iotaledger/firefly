@@ -9,11 +9,13 @@
     $: healthColor = `${NETWORK_HEALTH_COLORS[$networkStatus.health ?? NetworkHealth.Down]}-500`
 </script>
 
-<ProfileActionButton
-    primaryText={$nodeInfo?.protocol?.networkName}
-    secondaryText={localize(`views.dashboard.network.${$networkStatus.health ?? NetworkHealth.Disconnected}`)}
-    icon={IconTypes.Network}
-    iconColor={healthColor}
-    color={healthColor}
-    {onClick}
-/>
+{#if $nodeInfo}
+    <ProfileActionButton
+        primaryText={$nodeInfo.protocol.networkName}
+        secondaryText={localize(`views.dashboard.network.${$networkStatus.health ?? NetworkHealth.Disconnected}`)}
+        icon={IconTypes.Network}
+        iconColor={healthColor}
+        color={healthColor}
+        {onClick}
+    />
+{/if}

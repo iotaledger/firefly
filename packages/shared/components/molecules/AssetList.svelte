@@ -10,17 +10,15 @@
     export let assets: IAccountAssets
 
     let assetList: IAsset[]
-    $: $assetFilter, assets, (assetList = getFilteredAssetList()), scrollToTop()
+    $: $assetFilter, assets, setFilteredAssetList(), scrollToTop()
     $: isEmptyBecauseOfFilter = (assets.baseCoin || assets.nativeTokens?.length > 0) && assetList.length === 0
 
-    function getFilteredAssetList(): IAsset[] {
-        const list = []
-
-        if (assets?.baseCoin) {
-            list.push(assets.baseCoin)
+    function setFilteredAssetList(): void {
+        if (!assets) {
+            assetList = []
+        } else {
+            assetList = [assets.baseCoin, ...assets.nativeTokens].filter(isVisibleAsset)
         }
-        list.push(...(assets?.nativeTokens ?? []))
-        return list.filter((_nativeToken) => isVisibleAsset(_nativeToken))
     }
 
     function scrollToTop() {

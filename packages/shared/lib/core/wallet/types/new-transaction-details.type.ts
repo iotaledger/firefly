@@ -1,5 +1,5 @@
 import type { ILayer2Parameters } from '@core/layer-2'
-import type { Subject } from '@core/wallet'
+import type { IAsset, Subject } from '@core/wallet'
 import { NewTransactionType } from '@core/wallet/stores'
 
 export type NewTransactionDetails = NewNftTransactionDetails | NewTokenTransactionDetails
@@ -9,6 +9,7 @@ type NewBaseTransactionDetails = {
     tag?: string
     metadata?: string
     expirationDate?: Date
+    timelockDate?: Date
     surplus?: string
     giftStorageDeposit?: boolean
     layer2Parameters?: ILayer2Parameters
@@ -21,7 +22,7 @@ type NewBaseTransactionDetails = {
 export type NewTokenTransactionDetails = NewBaseTransactionDetails & {
     type: NewTransactionType.TokenTransfer
     rawAmount: string
-    assetId: string
+    asset: IAsset
     unit: string
 }
 

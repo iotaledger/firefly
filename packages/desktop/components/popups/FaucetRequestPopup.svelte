@@ -28,24 +28,26 @@
     }
 </script>
 
-<faucet-request-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
-    <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
-        {localize('popups.faucetRequest.title')}
-    </Text>
-    <div class="w-full flex-col space-y-2">
-        <Text type={TextType.p} classes="text-left">
-            {localize('popups.faucetRequest.body', {
-                values: { token: $nodeInfo?.baseToken?.name, network: $nodeInfo?.protocol?.networkName },
-            })}
+{#if $nodeInfo}
+    <faucet-request-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
+        <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
+            {localize('popups.faucetRequest.title')}
         </Text>
-        {#if error}
-            <Error {error} />
-        {/if}
-    </div>
-    <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" outline onClick={onBackClick} disabled={isBusy}>{localize('actions.back')}</Button>
-        <Button classes="w-full" onClick={onConfirmClick} disabled={isBusy} {isBusy}>
-            {localize('actions.confirm')}
-        </Button>
-    </popup-buttons>
-</faucet-request-popup>
+        <div class="w-full flex-col space-y-2">
+            <Text type={TextType.p} classes="text-left">
+                {localize('popups.faucetRequest.body', {
+                    values: { token: $nodeInfo.baseToken.name, network: $nodeInfo.protocol.networkName },
+                })}
+            </Text>
+            {#if error}
+                <Error {error} />
+            {/if}
+        </div>
+        <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
+            <Button classes="w-full" outline onClick={onBackClick} disabled={isBusy}>{localize('actions.back')}</Button>
+            <Button classes="w-full" onClick={onConfirmClick} disabled={isBusy} {isBusy}>
+                {localize('actions.confirm')}
+            </Button>
+        </popup-buttons>
+    </faucet-request-popup>
+{/if}

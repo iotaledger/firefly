@@ -6,6 +6,7 @@
     import { formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
     import { FontWeight, Text } from 'shared/components'
     import { AccountLabel } from 'shared/components/atoms'
+    import { loadEvmAddressForSelectedAccount } from '@core/layer-2'
 
     export let account: IAccountState
     export let onClick: () => unknown
@@ -15,6 +16,7 @@
 
     function onAccountClick(accountIndex: number): void {
         setSelectedAccount(accountIndex)
+        void loadEvmAddressForSelectedAccount()
         onClick && onClick()
     }
 </script>

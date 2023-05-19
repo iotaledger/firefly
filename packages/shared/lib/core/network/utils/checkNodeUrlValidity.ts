@@ -10,7 +10,11 @@ import { INode } from '../interfaces'
  * @param {boolean} allowInsecure allows for connecting via plain HTTP
  * @returns {string | undefined}
  */
-export function checkNodeUrlValidity(nodesList: INode[], newUrl: string, allowInsecure: boolean): string {
+export function checkNodeUrlValidity(
+    nodesList: INode[] | undefined,
+    newUrl: string,
+    allowInsecure: boolean
+): string | undefined {
     if (!isValidUrl(newUrl)) {
         return 'error.node.invalid'
     }
