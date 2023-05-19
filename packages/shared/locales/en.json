@@ -1110,7 +1110,7 @@
                 "chainId": "Chain ID",
                 "tokenAddress": "Token address"
             },
-            "success": "Imported ERC20 token",
+            "success": "Imported {tokenSymbol} token",
             "error": "Unable to import ERC20 token"
         },
         "noAlias": {

@@ -1,6 +1,7 @@
 import { AbiType, StateMutabilityType } from '../enums'
+import { Abi } from '../types'
 
-export const ERC20_ABI = [
+export const ERC20_ABI: Abi = [
     {
         constant: true,
         inputs: [],

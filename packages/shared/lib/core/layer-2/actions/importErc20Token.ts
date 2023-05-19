@@ -5,14 +5,12 @@ import { get } from 'svelte/store'
 import { selectedAccount } from '@core/account/stores'
 import { network } from '@core/network/stores'
 
-import { ERC20_ABI } from '../abis'
+import { ContractType } from '../enums'
 
-export async function importErc20Token(tokenAddress: string, chainId: number): Promise<void> {
+export async function importErc20Token(tokenAddress: string, chainId: number): Promise<unknown> {
     const chain = get(network)?.getChain(chainId)
-    const provider = chain?.getProvider()
-    if (provider) {
-        const contract = new provider.eth.Contract(ERC20_ABI, tokenAddress)
-
+    const contract = chain?.getContract(ContractType.Erc20, tokenAddress)
+    if (contract) {
         // TODO: Extract into separate function later
         const name = await contract.methods.name().call()
         const symbol = await contract.methods.symbol().call()
@@ -29,5 +27,7 @@ export async function importErc20Token(tokenAddress: string, chainId: number): P
         const adjustedBalance = rawBalance / Math.pow(10, decimals)
         const formattedBalance = `${adjustedBalance} ${symbol}`
         console.log('FORMATTED BALANCE: ', formattedBalance)
+
+        return { name, symbol, decimals }
     }
 }

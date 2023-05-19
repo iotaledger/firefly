@@ -1,12 +1,11 @@
 <script lang="ts">
-    import { Button, ChainInput, Error, FontWeight, Spinner, Text, TextInput, TextType } from '@ui'
+    import { Button, ChainInput, FontWeight, Spinner, Text, TextInput, TextType } from '@ui'
     import { localize } from '@core/i18n'
     import { ERC20_TOKEN_ADDRESS_LENGTH, importErc20Token } from '@core/layer-2'
     import { HEXADECIMAL_PREFIX, HEXADECIMAL_REGEXP } from '@core/utils'
     import { closePopup } from '@auxiliary/popup'
     import { showAppNotification } from 'shared/lib/auxiliary/notification'
 
-    const error = ''
     let busy = false
 
     let chainId: number
@@ -24,11 +23,11 @@
 
         if (validate()) {
             try {
-                await importErc20Token(tokenAddress, chainId)
+                const tokenInfo = await importErc20Token(tokenAddress, chainId)
                 showAppNotification({
                     type: 'success',
                     alert: true,
-                    message: localize('popups.importErc20Token.success'),
+                    message: localize('popups.importErc20Token.success', { values: { tokenSymbol: tokenInfo.symbol } }),
                 })
             } catch (err) {
                 showAppNotification({
