@@ -1109,7 +1109,9 @@
             "property": {
                 "chainId": "Chain ID",
                 "tokenAddress": "Token address"
-            }
+            },
+            "success": "Imported ERC20 token",
+            "error": "Unable to import ERC20 token"
         },
         "noAlias": {
             "title": "Unable to mint",
@@ -2085,9 +2087,9 @@
                 "long": "Unable to find proposal {proposalId} on the specified node"
             }
         },
-        "erc20TokenAddress": {
-            "invalidFormat": "Must be hexadecimal format",
-            "invalidLength": "Length is invalid"
+        "erc20Token": {
+            "invalidAddressFormat": "Must be hexadecimal format",
+            "invalidAddressLength": "Length is invalid"
         }
     },
     "warning": {
