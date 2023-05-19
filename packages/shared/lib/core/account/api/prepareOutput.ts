@@ -4,8 +4,8 @@ import { OutputParams, TransactionOptions } from '@iota/wallet'
 
 export async function prepareOutput(
     accountIndex: number,
-    options: OutputParams,
+    params: OutputParams,
     transactionOptions?: TransactionOptions
 ): Promise<Output> {
-    return (await getAccount(accountIndex))?.prepareOutput(options, transactionOptions) as Promise<Output>
+    return (await getAccount(accountIndex))?.prepareOutput(params, transactionOptions) as Promise<Output>
 }
