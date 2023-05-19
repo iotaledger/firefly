@@ -8,7 +8,8 @@ export async function loadEvmAddressForSelectedAccount(): Promise<void> {
         const { evmAddress, index } = getSelectedAccount() ?? {}
         if (!evmAddress) {
             const coinType = COIN_TYPE[getActiveProfile()?.network?.id] ?? 1
-            await Ledger.generateEvmAddress(coinType, index ?? 0, false)
+            const accountIndex = index ?? 0
+            await Ledger.generateEvmAddress(coinType, accountIndex, true)
         }
     } catch (err) {
         console.error(err)
