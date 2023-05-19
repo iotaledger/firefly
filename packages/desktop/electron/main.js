@@ -6,7 +6,6 @@ import { shouldReportError } from './lib/errorHandling'
 import { initialiseAnalytics } from './lib/analytics'
 import { getMachineId } from './lib/machineId'
 import { getDiagnostics } from './lib/diagnostics'
-
 const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session, utilityProcess } = require('electron')
 const path = require('path')
 const fs = require('fs')
