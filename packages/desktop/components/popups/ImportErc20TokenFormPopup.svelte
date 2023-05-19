@@ -77,16 +77,13 @@
             placeholder={localize('popups.importErc20Token.property.tokenAddress')}
             error={tokenAddressError}
         />
-        {#if error}
-            <Error error={error?.message} />
-        {/if}
     </div>
 
     <div class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button outline classes="w-full" disabled={busy || !chainId || !tokenAddress} onClick={onCancelClick}>
+        <Button outline classes="w-full" disabled={busy} onClick={onCancelClick}>
             {localize('actions.cancel')}
         </Button>
-        <Button classes="w-full" disabled={busy} onClick={onImportClick}>
+        <Button classes="w-full" disabled={busy || !chainId || !tokenAddress} onClick={onImportClick}>
             {#if busy}
                 <Spinner busy message={localize('actions.importing')} />
             {:else}
