@@ -29,9 +29,9 @@ async function getEvmAddress(coinType, accountIndex, verify) {
             process.parentPort.postMessage({ data: log })
         })
         const appEth = new AppEth(transport)
-        const address = await appEth.getAddress(buildBip32Path(coinType, accountIndex))
+        const data = await appEth.getAddress(buildBip32Path(coinType, accountIndex))
         await transport.close()
-        return { evmAddress: address.address, coinType, accountIndex }
+        return { evmAddress: data.address, coinType, accountIndex }
     } catch (err) {
         return retryFunction(getEvmAddress, [coinType, accountIndex, verify], 15)
     }
