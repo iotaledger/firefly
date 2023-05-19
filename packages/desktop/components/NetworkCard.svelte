@@ -40,7 +40,7 @@
         } else if (chain) {
             const configuration = chain.getConfiguration() as IIscpChainConfiguration
             name = configuration.name
-            address = $selectedAccount.evmAddress
+            address = $selectedAccount.evmAddresses[configuration.coinType] ?? ADDRESS_PLACEHOLDER
             status = chain.getStatus().health
         }
     }

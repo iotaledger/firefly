@@ -33,9 +33,9 @@ async function getEvmAddress(coinType, accountIndex, verify) {
         process.parentPort.postMessage({ data: log })
     })
     const appEth = new AppEth(transport)
-    const address = await appEth.getAddress(buildBip32Path(coinType, accountIndex))
+    const data = await appEth.getAddress(buildBip32Path(coinType, accountIndex))
     await transport.close()
-    return address
+    return { evmAddress: data.address, coinType, accountIndex }
 }
 
 function buildBip32Path(coinType, accountIndex) {

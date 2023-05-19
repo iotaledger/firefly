@@ -315,8 +315,8 @@ ledgerProcess.on('spawn', () => {
         if (error) {
             windows.main.webContents.send('ledger-error', error)
         } else {
-            if (data?.address) {
-                windows.main.webContents.send('evm-address', message.data.address)
+            if (data?.evmAddress) {
+                windows.main.webContents.send('evm-address', data)
             } else {
                 /* eslint-disable-next-line no-console */
                 console.log('Unhandled Ledger Message: ', message)

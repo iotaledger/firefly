@@ -37,6 +37,10 @@
     })
 
     function buildNetworkRecipientOptions(): void {
+        if (!$network) {
+            return
+        }
+
         // L1 networks, hardcoded Shimmer
         const mainNetworkOption = {
             name: $network.getMetadata().name,
@@ -46,7 +50,7 @@
 
         // L2 networks, ISCP only for now
         const iscpNetworkChains = features?.network?.layer2?.enabled
-            ? $network.getChains()?.filter((chain) => chain?.getConfiguration()?.type === ChainType.Iscp)
+            ? $network.getChains().filter((chain) => chain.getConfiguration()?.type === ChainType.Iscp)
             : []
         const iscpNetworkChainsOptions = iscpNetworkChains.map((chain) => {
             const chainConfiguration = chain.getConfiguration() as IIscpChainConfiguration

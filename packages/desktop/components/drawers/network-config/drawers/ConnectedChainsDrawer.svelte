@@ -65,7 +65,7 @@
                 onCardClick={onL1NetworkCardClick}
                 onQrCodeIconClick={() => onQrCodeIconClick()}
             />
-            {#each $network.getChains() as chain}
+            {#each $network?.getChains() ?? [] as chain}
                 <NetworkCard
                     {chain}
                     onCardClick={() => onL2NetworkCardClick(chain)}
