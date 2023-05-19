@@ -17,6 +17,7 @@ import { Platform } from 'shared/lib/platform'
 import { NodePlugin } from '../typings/node'
 import { IWalletApi } from 'shared/lib/typings/walletApi'
 import { IWalletActor } from '../typings/walletActor'
+import { STRONGHOLD_VERSION_ERROR } from '@lib/stronghold'
 
 export const WALLET: IWalletActor = window['__WALLET__']
 
@@ -282,7 +283,7 @@ const handleError = (
         if (error.includes('forbidden')) {
             return 'error.node.forbidden'
         }
-        if (error.includes('migration required')) {
+        if (error.includes(STRONGHOLD_VERSION_ERROR)) {
             return 'error.backup.migrationRequired'
         }
 

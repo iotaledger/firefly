@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { backButtonStore } from '@core/router'
     import { isAwareOfCrashReporting } from '@lib/appSettings'
-    import { isStrongholdUpdated } from '@lib/stronghold'
+    import { isStrongholdOutdated } from '@lib/stronghold'
     import { Icon, Logo, Profile } from 'shared/components'
     import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos } from 'shared/lib/app'
     import { openPopup, popupState } from 'shared/lib/popup'
@@ -66,7 +66,7 @@
                     isLedgerProfile={profile?.type === ProfileType.Ledger ||
                         profile?.type === ProfileType.LedgerSimulator}
                     classes="cursor-pointer"
-                    strongholdUpdateRequired={profile?.type === ProfileType.Software && !isStrongholdUpdated(profile)}
+                    strongholdUpdateRequired={profile?.type === ProfileType.Software && isStrongholdOutdated(profile)}
                 />
             </div>
         {/each}
