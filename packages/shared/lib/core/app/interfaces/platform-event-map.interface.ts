@@ -1,4 +1,4 @@
-import { IAppUpdateDownloadProgress, IAppVersionDetails, IEvmAddress, INFTDownloadState } from '.'
+import { IAppUpdateDownloadProgress, IAppVersionDetails, IEvmAddressEvent, INFTDownloadState } from '.'
 
 export interface IPlatformEventMap {
     'menu-logout': void
@@ -17,5 +17,5 @@ export interface IPlatformEventMap {
     'notification-activated': unknown
     'nft-download-done': INFTDownloadState
     'nft-download-interrupted': INFTDownloadState
-    'evm-address': IEvmAddress
+    'evm-address': IEvmAddressEvent
 }
