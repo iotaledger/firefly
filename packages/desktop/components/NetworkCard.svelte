@@ -74,7 +74,7 @@
                     </Text>
                 {:else if $isActiveLedgerProfile}
                     <button on:click|stopPropagation={onGenerateAddressClick}>
-                        <Text type={TextType.p} fontWeight={FontWeight.medium} color="blue-500">
+                        <Text type={TextType.p} fontWeight={FontWeight.medium} highlighted>
                             {localize('actions.generateAddress')}
                         </Text>
                     </button>
