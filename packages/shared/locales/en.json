@@ -1652,6 +1652,7 @@
         "coinType":"Coin type",
         "custom": "Custom",
         "evmAddress": "EVM address",
+        "chain": "Chain",
         "importErc20Token": "Import ERC20 token",
         "importErc20TokenDescription": "Import an ERC20 token from an EVM chain"
     },

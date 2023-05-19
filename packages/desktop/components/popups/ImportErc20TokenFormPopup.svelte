@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { Button, Error, FontWeight, Text, TextInput, TextType } from '@ui'
+    import { Button, ChainInput, Error, FontWeight, Text, TextInput, TextType } from '@ui'
     import { localize } from '@core/i18n'
-    import { closePopup } from 'shared/lib/auxiliary/popup'
+    import { closePopup } from '@auxiliary/popup'
 
     let error
 
@@ -35,6 +35,7 @@
     </Text>
 
     <div class="space-y-4 max-h-100 scrollable-y flex-1">
+        <ChainInput />
         <TextInput
             bind:value={tokenAddress}
             label={localize('popups.importErc20Token.property.tokenAddress')}
