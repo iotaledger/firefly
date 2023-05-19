@@ -6,7 +6,7 @@ import { GAS_BUDGET } from '@core/layer-2/constants'
 import { getOutputParameters } from '../utils'
 import { ReturnStrategy, TokenStandard, VerifiedStatus } from '../enums'
 import { IAsset, IPersistedAsset } from '../interfaces'
-import { NewTransactionType } from '../stores'
+import { NewTransactionType, getAssetById } from '../stores'
 import { NewTransactionDetails } from '../types'
 
 const PERSISTED_ASSET_SHIMMER: IPersistedAsset = {
@@ -18,6 +18,7 @@ const PERSISTED_ASSET_SHIMMER: IPersistedAsset = {
 const tag = 'tag'
 const metadata = 'metadata'
 const expirationDate = new Date('2023-03-30T08:04:34.932Z')
+const timelockDate = new Date('2023-03-15T08:04:34.932Z')
 const recipientAddress = 'rms1qqqp07ychhkc3u68ueug0zqq9g0wtfgeatynr6ksm9jwud30rvlkyqnhpl5'
 const senderAddress = 'rms1abcp07ychhkc3u68ueug0zqq9g0wtfgeatynr6ksm9jwud30rvlkyqnhdef'
 const amount = '1000000000'
@@ -40,7 +41,7 @@ const surplus = '50000'
 
 const baseTransaction: NewTransactionDetails = {
     type: NewTransactionType.TokenTransfer,
-    assetId: CoinType[CoinType.Shimmer],
+    asset: PERSISTED_ASSET_SHIMMER,
     recipient: {
         type: 'address',
         address: recipientAddress,
@@ -106,11 +107,46 @@ describe('File: getOutputParameters.ts', () => {
         expect(output).toStrictEqual(expectedOutput)
     })
 
+    it('should return output parameters for base token with timelock date', () => {
+        newTransactionDetails = {
+            ...baseTransaction,
+            timelockDate,
+        }
+        const output = getOutputParameters(newTransactionDetails)
+
+        const expectedOutput = {
+            recipientAddress,
+            amount,
+            features: {},
+            unlocks: { timelockUnixTime: 1678867475 },
+            storageDeposit: { returnStrategy: ReturnStrategy.Return },
+        }
+        expect(output).toStrictEqual(expectedOutput)
+    })
+
+    it('should return output parameters for base token with timelock and expiration date', () => {
+        newTransactionDetails = {
+            ...baseTransaction,
+            expirationDate,
+            timelockDate,
+        }
+        const output = getOutputParameters(newTransactionDetails)
+
+        const expectedOutput = {
+            recipientAddress,
+            amount,
+            features: {},
+            unlocks: { expirationUnixTime: 1680163475, timelockUnixTime: 1678867475 },
+            storageDeposit: { returnStrategy: ReturnStrategy.Return },
+        }
+        expect(output).toStrictEqual(expectedOutput)
+    })
+
     it('should return output parameters for native token without surplus', () => {
         newTransactionDetails = {
             ...baseTransaction,
             expirationDate,
-            assetId: nativeTokenAsset.id,
+            asset: nativeTokenAsset,
         }
         const output = getOutputParameters(newTransactionDetails)
 
@@ -158,7 +194,7 @@ describe('File: getOutputParameters.ts', () => {
         newTransactionDetails = {
             ...baseTransaction,
             expirationDate,
-            assetId: nativeTokenAsset.id,
+            asset: nativeTokenAsset,
             layer2Parameters,
         }
         const output = getOutputParameters(newTransactionDetails)
@@ -176,7 +212,7 @@ describe('File: getOutputParameters.ts', () => {
             },
             features: {
                 metadata:
-                    '0x00000000025e4b3ca1e3f42320a1070000000000010000000100611f00000003010000070c000c30680e00000090000f0ea000060009000d3000000000000000ca9a3b00000000020000000000',
+                    '0x00000000025e4b3ca1e3f42320a1070000000000010000000100611f00000003010000070c000c30680e00000090000f0ea000060009000d3000000000000000000000000000004800010008cd4dcad7ccc383111942671ee8cdc487ddd250398331ca2692b8b1a81551a1c3010000000000ca9a3b000000000000000000000000000000000000000000000000000000000000',
                 sender: senderAddress,
             },
             unlocks: { expirationUnixTime: 1680163475 },
@@ -237,7 +273,7 @@ describe('File: getOutputParameters.ts', () => {
         newTransactionDetails = {
             ...baseTransaction,
             expirationDate,
-            assetId: nativeTokenAsset.id,
+            asset: nativeTokenAsset,
             surplus,
         }
         const output = getOutputParameters(newTransactionDetails)

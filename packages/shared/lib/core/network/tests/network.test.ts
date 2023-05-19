@@ -14,8 +14,9 @@ describe('File: network.ts', () => {
         }
     }
 
-    function _buildNodes(networkId: NetworkId) {
-        return EXPECTED_NODE_URLS?.[networkId]?.map((url) => _buildNode(url)) ?? []
+    function _buildNodes(networkId: NetworkId): INode[] {
+        const nodes = EXPECTED_NODE_URLS?.[networkId]?.map((url) => _buildNode(url))
+        return nodes?.filter((node) => node !== undefined) as INode[]
     }
 
     const EXPECTED_NODE_URLS: Readonly<{ [key in NetworkId]?: string[] }> = {
@@ -85,12 +86,12 @@ describe('File: network.ts', () => {
             Duplicate = 'error.node.duplicate',
         }
 
-        const _check = (url: string, allowInsecure: boolean = false): string | undefined =>
-            checkNodeUrlValidity(EXPECTED_NODES?.[NetworkId.Iota], url, allowInsecure)
+        const _check = (url: string | undefined, allowInsecure: boolean = false): string | undefined =>
+            checkNodeUrlValidity(EXPECTED_NODES?.[NetworkId.Iota], url ?? '', allowInsecure)
 
         it('should return undefined for valid node URLs', () => {
             expect(_check('https://mainnet.tanglebay.com')).toBeUndefined()
-            expect(_check(EXPECTED_NODE_URLS?.[NetworkId.Shimmer][0])).toBeUndefined()
+            expect(_check(EXPECTED_NODE_URLS?.[NetworkId.Shimmer]?.[0] ?? '')).toBeUndefined()
         })
         it('should catch generally invalid URLs', () => {
             expect(_check('htps://mainnet.tanglebay.com')).toEqual(UrlError.Invalid)
@@ -99,10 +100,10 @@ describe('File: network.ts', () => {
             expect(_check('https://mainnet.tanglebay.com')).toBeUndefined()
         })
         it('should catch duplicate node URLs', () => {
-            expect(_check(EXPECTED_NODE_URLS[NetworkId.Iota][0])).toEqual(UrlError.Duplicate)
-            expect(_check(EXPECTED_NODE_URLS[NetworkId.Iota][1])).toEqual(UrlError.Duplicate)
+            expect(_check(EXPECTED_NODE_URLS?.[NetworkId.Iota]?.[0])).toEqual(UrlError.Duplicate)
+            expect(_check(EXPECTED_NODE_URLS?.[NetworkId.Iota]?.[1])).toEqual(UrlError.Duplicate)
 
-            expect(_check(EXPECTED_NODE_URLS[NetworkId.Shimmer][0])).toBeUndefined()
+            expect(_check(EXPECTED_NODE_URLS[NetworkId.Shimmer]?.[0])).toBeUndefined()
         })
         it('may or may NOT catch insecure URLs', () => {
             expect(_check('http://mainnet.tanglebay.com')).toEqual(UrlError.Insecure)

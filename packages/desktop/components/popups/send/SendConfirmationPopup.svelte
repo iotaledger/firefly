@@ -19,7 +19,7 @@
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
-    import { ExpirationTime } from '@core/utils'
+    import { TimePeriod } from '@core/utils'
     import { ActivityDirection, ActivityType, InclusionState, ActivityAction } from '@core/wallet/enums'
     import {
         selectedAccountAssets,
@@ -55,7 +55,6 @@
         disableChangeExpiration,
         disableToggleGift,
         layer2Parameters,
-        unit,
     } = get(newTransactionDetails)
 
     let storageDeposit = 0
@@ -64,7 +63,7 @@
     let outputParams: OutputParams
     let expirationTimePicker: ExpirationTimePicker
 
-    let initialExpirationDate: ExpirationTime = getInitialExpirationDate()
+    let initialExpirationDate: TimePeriod = getInitialExpirationDate()
     let activeTab: Tab
 
     $: transactionDetails = get(newTransactionDetails)
@@ -72,7 +71,7 @@
     $: expirationTimePicker?.setNull(giftStorageDeposit)
     $: hideGiftToggle =
         (transactionDetails.type === NewTransactionType.TokenTransfer &&
-            transactionDetails.assetId === $selectedAccountAssets?.baseCoin?.id) ||
+            transactionDetails.asset.id === $selectedAccountAssets?.baseCoin?.id) ||
         (disableToggleGift && !giftStorageDeposit) ||
         !!layer2Parameters
     $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
@@ -105,13 +104,13 @@
         void prepareTransactionOutput()
     }
 
-    function getInitialExpirationDate(): ExpirationTime {
+    function getInitialExpirationDate(): TimePeriod {
         if (expirationDate) {
-            return ExpirationTime.Custom
+            return TimePeriod.Custom
         } else if (storageDeposit && !giftStorageDeposit) {
-            return ExpirationTime.OneDay
+            return TimePeriod.OneDay
         } else {
-            return ExpirationTime.None
+            return TimePeriod.None
         }
     }
 
@@ -203,7 +202,7 @@
     >
     <div class="w-full flex-col space-y-2">
         {#if transactionDetails.type === NewTransactionType.TokenTransfer}
-            <BasicActivityDetails {activity} {unit} />
+            <BasicActivityDetails {activity} />
         {:else if transactionDetails.type === NewTransactionType.NftTransfer}
             <NftActivityDetails {activity} />
         {/if}
