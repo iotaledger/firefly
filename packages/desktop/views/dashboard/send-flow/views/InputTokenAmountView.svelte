@@ -3,67 +3,74 @@
     import {
         IAsset,
         NewTransactionType,
-        getAssetById,
+        formatTokenAmountDefault,
+        getUnitFromTokenMetadata,
         newTransactionDetails,
-        setNewTransactionDetails,
-        resetNewTransactionDetails,
+        updateNewTransactionDetails,
     } from '@core/wallet'
-    import { AssetAmountInput, Button, FontWeight, Text, TextType } from 'shared/components'
+    import { TokenAmountInput, TokenAmountTile } from '@ui'
     import { get } from 'svelte/store'
     import { sendFlowRouter } from '../send-flow.router'
+    import SendFlowTemplate from './SendFlowTemplate.svelte'
+    import { closePopup } from '@auxiliary/popup'
 
     const transactionDetails = get(newTransactionDetails)
-    let assetAmountInput: AssetAmountInput
+    let assetAmountInput: TokenAmountInput
     let asset: IAsset
     let rawAmount: string
     let amount: string
     let unit: string
-    let disableAssetSelection: boolean
+    const disableAssetSelection = transactionDetails.disableAssetSelection
 
     if (transactionDetails.type === NewTransactionType.TokenTransfer) {
-        asset = getAssetById(transactionDetails.assetId)
+        asset = transactionDetails.asset
         rawAmount = transactionDetails.rawAmount
-        unit = transactionDetails.unit
-        disableAssetSelection = transactionDetails.disableAssetSelection
+        unit = transactionDetails.unit || getUnitFromTokenMetadata(asset?.metadata)
     }
 
-    function onContinueClick(): void {
-        setNewTransactionDetails({
-            type: NewTransactionType.TokenTransfer,
-            assetId: asset.id,
-            rawAmount,
-            unit,
-            disableAssetSelection,
-        })
-        $sendFlowRouter.next()
+    $: availableBalance = asset?.balance?.available
+
+    function setToMax(): void {
+        if (asset?.metadata?.decimals) {
+            amount = formatTokenAmountDefault(availableBalance, asset?.metadata, unit, false)
+        } else {
+            amount = availableBalance.toString() ?? '0'
+        }
+    }
+
+    async function onContinueClick(): Promise<void> {
+        try {
+            await assetAmountInput?.validate()
+            updateNewTransactionDetails({
+                type: NewTransactionType.TokenTransfer,
+                rawAmount,
+            })
+            $sendFlowRouter.next()
+        } catch (err) {
+            console.error(err)
+        }
     }
 
     function onBackClick(): void {
-        resetNewTransactionDetails()
-        $sendFlowRouter.previous()
+        updateNewTransactionDetails({
+            type: NewTransactionType.TokenTransfer,
+            rawAmount: undefined,
+        })
+        if (disableAssetSelection) {
+            closePopup()
+        } else {
+            $sendFlowRouter.previous()
+        }
     }
 </script>
 
-<input-token-amount-view class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
-    <input-token-amount-title>
-        <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">Input Token Amount Title</Text>
-    </input-token-amount-title>
-    <input-token-amount-content>
-        <AssetAmountInput
-            bind:this={assetAmountInput}
-            bind:asset
-            bind:rawAmount
-            bind:amount
-            bind:unit
-            {disableAssetSelection}
-        />
-    </input-token-amount-content>
-    <input-token-amount-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" outline onClick={onBackClick}>
-            {localize('actions.back')}
-        </Button>
-        <Button classes="w-full" onClick={onContinueClick} disabled={!amount}>
-            {localize('actions.continue')}
-        </Button>
-    </input-token-amount-buttons>
-</input-token-amount-view>
+<SendFlowTemplate
+    title={localize('popups.transaction.selectAmount', {
+        values: { tokenName: asset.metadata.name },
+    })}
+    leftButton={{ text: localize(disableAssetSelection ? 'actions.cancel' : 'actions.back'), onClick: onBackClick }}
+    rightButton={{ text: localize('actions.continue'), onClick: onContinueClick, disabled: !amount }}
+>
+    <TokenAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:inputtedAmount={amount} {unit} />
+    <TokenAmountTile {asset} onMaxClick={setToMax} />
+</SendFlowTemplate>

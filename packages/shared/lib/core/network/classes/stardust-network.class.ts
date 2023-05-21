@@ -21,7 +21,7 @@ export class StardustNetwork implements INetwork {
     }
 
     private constructChains(chainConfigurations: ChainConfiguration[]): IChain[] {
-        return chainConfigurations.map((chainConfiguration) => {
+        const chains = chainConfigurations.map((chainConfiguration) => {
             switch (chainConfiguration.type) {
                 case ChainType.Iscp:
                     return new IscpChain(chainConfiguration)
@@ -31,6 +31,7 @@ export class StardustNetwork implements INetwork {
                     return undefined
             }
         })
+        return chains.filter((chain) => chain !== undefined) as IChain[]
     }
 
     getMetadata(): NetworkMetadata {
@@ -41,8 +42,8 @@ export class StardustNetwork implements INetwork {
         return get(networkStatus) ?? {}
     }
 
-    getChain(chainId: number): IChain {
-        return this._chains.find((chain) => chain.getConfiguration().chainId === chainId)
+    getChain(chainId: number): IChain | undefined {
+        return this._chains.find((chain) => chain?.getConfiguration().chainId === chainId)
     }
 
     getChains(): IChain[] {

@@ -57,7 +57,7 @@ export async function checkIfNftShouldBeDownloaded(
         addPersistedNftData(nft.id, { error: { message: err?.message } })
     }
 
-    return { shouldDownload: false, downloadMetadata }
+    return { shouldDownload: false, downloadUrl: nft.composedUrl, downloadMetadata }
 }
 
 function validateFile(nft: INft, contentType: string, contentLength: string): Partial<NftDownloadMetadata> {

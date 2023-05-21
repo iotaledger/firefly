@@ -25,6 +25,7 @@ export * from './isSubjectInternal'
 export * from './parseGovernanceMetadata'
 export * from './processAndAddToActivities'
 export * from './validateIrc30Metadata'
+export * from './validateTokenAmount'
 
 // Folders
 export * from './generateActivity'

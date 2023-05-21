@@ -36,6 +36,7 @@
     import { selectedAccountIndex } from '@core/account'
     import { get } from 'svelte/store'
     import features from '@features/features'
+    import { pollLayer2NativeAssets, clearLayer2NativeAssetsPoll } from '@core/layer-2'
 
     const tabs = {
         wallet: Wallet,
@@ -56,7 +57,7 @@
     $: if (features.analytics.dashboardRoute.enabled && $dashboardRoute)
         Platform.trackEvent('dashboard-route', { route: $dashboardRoute })
 
-    function addSelectedAccountNftsToDownloadQueue(accountIndex: number) {
+    function addSelectedAccountNftsToDownloadQueue(accountIndex: number): void {
         resetNftDownloadQueue()
         void addNftsToDownloadQueue(accountIndex, $selectedAccountNfts)
     }
@@ -78,15 +79,17 @@
 
         Platform.DeepLinkManager.checkDeepLinkRequestExists()
 
-        if ($activeProfile?.isDeveloperProfile && !developerProfileNotificationId) {
+        if ($activeProfile?.isDeveloperProfile && !developerProfileNotificationId && $nodeInfo) {
             // Show developer profile warning
             developerProfileNotificationId = showAppNotification({
                 type: 'warning',
                 message: localize('indicators.developerProfileIndicator.warningText', {
-                    values: { networkName: $nodeInfo?.protocol?.networkName },
+                    values: { networkName: $nodeInfo.protocol.networkName },
                 }),
             })
         }
+
+        void pollLayer2NativeAssets()
     })
 
     onDestroy(() => {
@@ -102,6 +105,7 @@
         if ($isActiveLedgerProfile) {
             stopPollingLedgerNanoStatus()
         }
+        clearLayer2NativeAssetsPoll()
     })
 </script>
 

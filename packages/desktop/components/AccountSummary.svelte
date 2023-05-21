@@ -7,7 +7,7 @@
     import { nodeInfo } from '@core/network'
     import { selectedAccountAssets } from '@core/wallet'
 
-    $: fomattedNetworkName = $nodeInfo?.protocol?.networkName
+    $: fomattedNetworkName = $nodeInfo?.protocol.networkName
         .split(' ')
         .map((word) => word[0].toUpperCase() + word.substring(1))
         .join(' ')

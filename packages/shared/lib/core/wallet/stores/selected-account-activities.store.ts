@@ -38,7 +38,7 @@ export const queriedActivities: Readable<Activity[]> = derived(
                 _activity.type === ActivityType.Basic || _activity.type === ActivityType.Foundry
                     ? getAssetFromPersistedAssets(_activity.assetId)
                     : undefined
-            const hasValidAsset = asset && isValidIrc30(asset?.metadata)
+            const hasValidAsset = asset?.metadata && isValidIrc30(asset.metadata)
             return !_activity.isHidden && hasValidAsset
         })
 
@@ -66,7 +66,11 @@ function getFieldsToSearchFromActivity(activity: Activity): string[] {
 
     if ((activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry) && activity.assetId) {
         fieldsToSearch.push(activity.assetId)
-        fieldsToSearch.push(getAssetFromPersistedAssets(activity.assetId)?.metadata?.name)
+
+        const assetName = getAssetFromPersistedAssets(activity.assetId)?.metadata?.name
+        if (assetName) {
+            fieldsToSearch.push(assetName)
+        }
     }
 
     if ((activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry) && activity.rawAmount) {
