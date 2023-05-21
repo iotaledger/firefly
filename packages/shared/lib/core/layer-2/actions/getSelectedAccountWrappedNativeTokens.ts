@@ -6,52 +6,66 @@ import { Converter } from '@iota/util.js'
 import { get } from 'svelte/store'
 import { ISC_MAGIC_CONTRACT_ADDRESS } from '../constants'
 
-export async function getSelectedAccountWrappedNativeTokens(): Promise<{ amount: bigint; id: string }[] | undefined> {
-    const selectedAccountEvmAddress = get(selectedAccount)?.evmAddress
-    if (selectedAccountEvmAddress?.length) {
-        try {
-            // TODO: validate evmAddress with validateEthereumAddress when the app errors are removed from it
-            const chains = get(network)?.getChains()
-            const accountsCoreContract = getSmartContractHexName('accounts')
-            const getBalanceFunc = getSmartContractHexName('balance')
-            const agentID = evmAddressToAgentID(selectedAccountEvmAddress)
-            const parameters = getAgentBalanceParameters(agentID)
-            const nativeTokensPromises = chains?.map(async (chain) => {
-                try {
-                    const provider = chain.getProvider()
-                    const contract = new provider.eth.Contract(ISC_SANDBOX_ABI, ISC_MAGIC_CONTRACT_ADDRESS)
-                    const nativeTokenResult = await contract.methods
-                        .callView(accountsCoreContract, getBalanceFunc, parameters)
-                        .call()
+export async function getSelectedAccountWrappedNativeTokens(): Promise<{ amount: bigint; id: string }[]> {
+    const selectedAccountEvmAddresses = get(selectedAccount)?.evmAddresses
+    const evmAddresses = selectedAccountEvmAddresses ? Object.values(selectedAccountEvmAddresses) : []
+    const wrappedNativeTokens = []
+    for (const evmAddress of evmAddresses) {
+        if (evmAddress) {
+            const nativeTokens = await getSelectedAccountWrappedNativeTokensForAddress(evmAddress)
+            if (nativeTokens) {
+                wrappedNativeTokens.push(...nativeTokens)
+            }
+        }
+    }
+    return wrappedNativeTokens
+}
 
-                    const nativeTokens = []
+async function getSelectedAccountWrappedNativeTokensForAddress(
+    selectedAccountEvmAddress: string
+): Promise<{ amount: bigint; id: string }[] | undefined> {
+    try {
+        // TODO: validate evmAddress with validateEthereumAddress when the app errors are removed from it
+        const chains = get(network)?.getChains()
+        const accountsCoreContract = getSmartContractHexName('accounts')
+        const getBalanceFunc = getSmartContractHexName('balance')
+        const agentID = evmAddressToAgentID(selectedAccountEvmAddress)
+        const parameters = getAgentBalanceParameters(agentID)
+        const nativeTokensPromises = chains?.map(async (chain) => {
+            try {
+                const provider = chain.getProvider()
+                const contract = new provider.eth.Contract(ISC_SANDBOX_ABI, ISC_MAGIC_CONTRACT_ADDRESS)
+                const nativeTokenResult = await contract.methods
+                    .callView(accountsCoreContract, getBalanceFunc, parameters)
+                    .call()
 
-                    for (const item of nativeTokenResult.items) {
-                        const id = item.key
-                        const idBytes = Converter.hexToBytes(id)
+                const nativeTokens = []
 
-                        if (idBytes.length !== TOKEN_ID_BYTE_LENGTH) {
-                            continue
-                        }
+                for (const item of nativeTokenResult.items) {
+                    const id = item.key
+                    const idBytes = Converter.hexToBytes(id)
 
-                        const nativeToken = {
-                            amount: BigInt(item.value),
-                            id: id,
-                        }
-
-                        nativeTokens.push(nativeToken)
+                    if (idBytes.length !== TOKEN_ID_BYTE_LENGTH) {
+                        continue
                     }
 
-                    return nativeTokens
-                } catch (e) {
-                    return []
+                    const nativeToken = {
+                        amount: BigInt(item.value),
+                        id: id,
+                    }
+
+                    nativeTokens.push(nativeToken)
                 }
-            })
-            const nativeTokens = await Promise.all(nativeTokensPromises)
-            return nativeTokens?.flat()
-        } catch (err) {
-            const error = err?.message ?? err
-            console.error(error)
-        }
+
+                return nativeTokens
+            } catch (e) {
+                return []
+            }
+        })
+        const nativeTokens = await Promise.all(nativeTokensPromises)
+        return nativeTokens?.flat()
+    } catch (err) {
+        const error = err?.message ?? err
+        console.error(error)
     }
 }

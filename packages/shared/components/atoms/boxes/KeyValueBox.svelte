@@ -18,6 +18,7 @@
     export let isPreText: boolean = false
     export let maxHeight: number = undefined
     export let isLoading: boolean = false
+    export let outline: boolean = false
 
     let isVertical: boolean = false
     let valueContainer: HTMLElement
@@ -38,7 +39,9 @@
         {backgroundColor}
         {darkBackgroundColor}
         clearBoxPadding
-        classes="w-full overflow-hidden {padding} {classes} {isLoading ? 'animate-pulse' : ''}"
+        classes="w-full overflow-hidden {padding} {classes} {isLoading ? 'animate-pulse' : ''} {outline
+            ? 'border-2 border-gray-100'
+            : ''}"
     >
         <div
             class="
@@ -71,7 +74,7 @@
                     bind:clientWidth={valueContainerWidth}
                     class="
                         {isVertical ? 'break-words' : 'truncate'}
-                        {isPreText ? 'whitespace-pre-wrap' : ''}    
+                        {isPreText ? 'whitespace-pre-wrap' : ''}
                     "
                 >
                     <Text
