@@ -41,13 +41,16 @@ export function getActiveProfilePersistedAccountData(accountIndex: number): IAcc
 
 export function updateAccountPersistedDataOnActiveProfile(
     accountIndex: number,
-    persistedData: Partial<IAccountPersistedData>
+    partialAccountPersistedData: Partial<IAccountPersistedData>
 ): void {
     activeProfile?.update((state) => {
         if (!state?.accountPersistedData) {
             state.accountPersistedData = {}
         }
-        state.accountPersistedData[accountIndex] = { ...state?.accountPersistedData?.[accountIndex], ...persistedData }
+        state.accountPersistedData[accountIndex] = {
+            ...state?.accountPersistedData?.[accountIndex],
+            ...partialAccountPersistedData,
+        }
         return state
     })
 }

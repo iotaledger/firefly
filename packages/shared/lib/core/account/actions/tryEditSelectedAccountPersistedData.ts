@@ -1,5 +1,5 @@
 import { localize } from '@core/i18n'
-import { isActiveLedgerProfile, updateActiveAccountMetadata } from '@core/profile'
+import { isActiveLedgerProfile, updateActiveAccountPersistedData } from '@core/profile'
 import { displayNotificationForLedgerProfile } from '@core/ledger'
 import { showAppNotification } from '@auxiliary/notification'
 import { get } from 'svelte/store'
@@ -7,13 +7,16 @@ import { IAccountPersistedData } from '../interfaces'
 import { selectedAccount, updateSelectedAccount } from '../stores'
 
 export async function tryEditSelectedAccountPersistedData(
-    persistedData: Partial<IAccountPersistedData>
+    partialAccountPersistedData: Partial<IAccountPersistedData>
 ): Promise<void> {
     try {
         // TODO: Replace Promise.resolve() with update metadata in wallet.rs when api is exposed
         await Promise.resolve()
-        updateActiveAccountMetadata(get(selectedAccount)?.index, persistedData)
-        updateSelectedAccount(persistedData)
+        const _selectedAccount = get(selectedAccount)
+        if (_selectedAccount) {
+            updateActiveAccountPersistedData(_selectedAccount.index, partialAccountPersistedData)
+        }
+        updateSelectedAccount(partialAccountPersistedData)
     } catch (err) {
         if (err) {
             console.error(err?.error || err)
