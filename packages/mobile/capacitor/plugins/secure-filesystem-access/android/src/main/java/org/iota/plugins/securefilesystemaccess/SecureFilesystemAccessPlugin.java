@@ -9,7 +9,6 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.FileUtils;
 import android.os.ParcelFileDescriptor;
-import android.provider.DocumentsContract;
 import android.util.Log;
 
 import androidx.activity.result.ActivityResult;
@@ -31,6 +30,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Objects;
 
 import static android.os.Environment.DIRECTORY_DOWNLOADS;
@@ -329,38 +329,12 @@ public class SecureFilesystemAccessPlugin extends Plugin {
             call.reject("source and destination is required");
             return;
         }
-//        ContentResolver resolver = getContext().getContentResolver();
         try {
             String source = Objects.requireNonNull(call.getString("source"));
             String destination = Objects.requireNonNull(call.getString("destination"));
-            File sourceFile = new File(getContext().getFilesDir(), source);
+            File sourceFile = new File(source);
             File destinationFile = new File(getContext().getFilesDir(), destination);
-            
-           if (!destinationFile.exists()) {
-               destinationFile.createNewFile();
-           }
-
-            FileChannel src = new FileInputStream(sourceFile).getChannel();
-            FileChannel dst = new FileOutputStream(destinationFile).getChannel();
-            dst.transferFrom(src, 0, src.size());
-            // api 29 only
-//            String source = Objects.requireNonNull(call.getString("source"));
-//            String destination = Objects.requireNonNull(call.getString("destination"));
-//            File sourceFile = new File(getContext().getFilesDir(), source);
-//            File destinationFile = new File(getContext().getFilesDir(), destination);
-//
-//            ParcelFileDescriptor sourceFD = resolver.openFileDescriptor(
-//                    Uri.fromFile(sourceFile), "r", null);
-//            FileOutputStream input = new FileOutputStream(sourceFD.getFileDescriptor());
-//
-//            ParcelFileDescriptor targetFD = resolver.openFileDescriptor(
-//                    Uri.fromFile(destinationFile), "w", null);
-//            FileOutputStream output = new FileOutputStream(targetFD.getFileDescriptor());
-//
-//            FileUtils.copy(sourceFD.getFileDescriptor(), targetFD.getFileDescriptor());
-//            input.close();
-//            output.close();
-
+            Files.copy(sourceFile.toPath(), destinationFile.toPath());
             call.resolve();
         } catch (Exception e) {
             call.reject(Objects.requireNonNull(e.getCause()).toString());
