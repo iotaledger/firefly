@@ -19,7 +19,7 @@ export function dateIsAfterOtherDate(first: Date, second: Date): boolean {
 /**
  * Get if a date is considered "recent". Less than 1 month is considered recent.
  */
-export function isRecentDate(date: Date): { lessThanAMonth: boolean; lessThanThreeMonths: boolean } {
+export function isRecentDate(date: Date): { lessThanAMonth: boolean; lessThanThreeMonths: boolean } | null {
     if (!isValidDate(date)) {
         return null
     }
@@ -41,18 +41,17 @@ export function isRecentDate(date: Date): { lessThanAMonth: boolean; lessThanThr
 }
 
 // https://stackoverflow.com/questions/643782/how-to-check-whether-an-object-is-a-date
-export function isValidDate(date: Date): boolean {
+export function isValidDate(date: unknown): date is Date {
     return !!date && date instanceof Date && !isNaN(date.getTime())
 }
 
 /**
  * Get difference between two dates in weeks
  */
-export function diffDates(firstDate: Date, secondDate: Date): IDateDifference {
+export function diffDates(firstDate: Date | null, secondDate: Date): IDateDifference | null {
     if (!isValidDate(firstDate) || !isValidDate(secondDate)) {
         return null
     }
-
     const timeDifference = Math.abs(secondDate.getTime() - firstDate.getTime())
     const daysDifference = Math.floor(timeDifference / MILLISECONDS_PER_DAY)
     const weeksDifference = Math.floor(daysDifference / DAYS_PER_WEEK)

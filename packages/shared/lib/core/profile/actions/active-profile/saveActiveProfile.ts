@@ -20,6 +20,7 @@ export function saveActiveProfile(): void {
             ...(_activeProfile?.hasVisitedDashboard && { hasVisitedDashboard: _activeProfile?.hasVisitedDashboard }),
             ...(_activeProfile?.lastUsedAccountIndex && { lastUsedAccountIndex: _activeProfile?.lastUsedAccountIndex }),
             ...(_activeProfile?.accountMetadata && { accountMetadata: _activeProfile?.accountMetadata }),
+            ...(_activeProfile?.pfp && { pfp: _activeProfile?.pfp }),
         }
         saveProfile(profileToPersist)
     }

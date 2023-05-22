@@ -43,16 +43,17 @@
     import { closeDrawer } from '@desktop/auxilary/drawer'
     import features from '@features/features'
     import { OnboardingRouterView } from '@views/onboarding'
+    import { registerLayer2EventHandlers } from '@core/layer-2'
+    import { registerLedgerDeviceEventHandlers } from '@core/ledger'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
     const { loggedIn, hasLoadedAccounts } = $activeProfile
-    const isWindows = $platform === PlatformOption.Windows
 
     $: if ($activeProfile && !$loggedIn) {
         closePopup(true)
     }
-
+    $: isWindows = $platform === PlatformOption.Windows
     $: $activeProfile, saveActiveProfile()
 
     async function handleCrashReporting(sendCrashReports: boolean): Promise<void> {
@@ -150,6 +151,9 @@
         })
 
         Platform.onEvent('deep-link-request', showDeepLinkNotification)
+
+        registerLedgerDeviceEventHandlers()
+        registerLayer2EventHandlers()
 
         const platform = await Platform.getOS()
         setPlatform(platform)

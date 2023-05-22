@@ -2,11 +2,12 @@ import { get } from 'svelte/store'
 
 import {
     DEFAULT_TRANSACTION_OPTIONS,
-    getOutputOptions,
+    getOutputParameters,
     resetNewTokenTransactionDetails,
     setNewTransactionDetails,
     NewTransactionType,
     NewTokenTransactionDetails,
+    getAssetById,
 } from '@core/wallet'
 import { logAndNotifyError } from '@core/error/actions'
 
@@ -63,6 +64,7 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
 ): Promise<void> {
     const recipientAddress = await getDepositAddress(shimmerClaimingAccount?.twinAccount)
     const rawAmount = shimmerClaimingAccount?.unclaimedRewards
+    const asset = getAssetById(String(get(onboardingProfile)?.network?.coinType))
 
     const newTransactionDetails: NewTokenTransactionDetails = {
         recipient: {
@@ -70,14 +72,14 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
             address: recipientAddress,
         },
         type: NewTransactionType.TokenTransfer,
-        assetId: String(get(onboardingProfile)?.network?.coinType),
+        asset,
         rawAmount: rawAmount.toString(),
         unit: '',
     }
     setNewTransactionDetails(newTransactionDetails)
 
-    const outputOptions = getOutputOptions(newTransactionDetails)
-    const preparedOutput = await shimmerClaimingAccount?.prepareOutput(outputOptions, DEFAULT_TRANSACTION_OPTIONS)
+    const outputParams = getOutputParameters(newTransactionDetails)
+    const preparedOutput = await shimmerClaimingAccount?.prepareOutput(outputParams, DEFAULT_TRANSACTION_OPTIONS)
 
     const claimingTransaction = await shimmerClaimingAccount?.sendOutputs([preparedOutput])
     resetNewTokenTransactionDetails()

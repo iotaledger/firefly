@@ -22,10 +22,9 @@
     import features from '@features/features'
     import { closeDrawer } from '@desktop/auxilary/drawer'
 
-    const isWindows = $platform === PlatformOption.Windows
-
     let isBackButtonVisible = false
 
+    $: isWindows = $platform === PlatformOption.Windows
     $: {
         if ($settingsRoute || $collectiblesRoute || $governanceRoute) {
             isBackButtonVisible = isCorrectRoute()

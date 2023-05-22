@@ -3,10 +3,10 @@ import { CoinType } from '@iota/wallet/out/types'
 import { activeProfileId } from '@core/profile/stores/active-profile-id.store'
 import { GAS_BUDGET } from '@core/layer-2/constants'
 
-import { getOutputOptions } from '../utils'
+import { getOutputParameters } from '../utils'
 import { ReturnStrategy, TokenStandard, VerifiedStatus } from '../enums'
 import { IAsset, IPersistedAsset } from '../interfaces'
-import { NewTransactionType } from '../stores'
+import { NewTransactionType, getAssetById } from '../stores'
 import { NewTransactionDetails } from '../types'
 
 const PERSISTED_ASSET_SHIMMER: IPersistedAsset = {
@@ -18,6 +18,7 @@ const PERSISTED_ASSET_SHIMMER: IPersistedAsset = {
 const tag = 'tag'
 const metadata = 'metadata'
 const expirationDate = new Date('2023-03-30T08:04:34.932Z')
+const timelockDate = new Date('2023-03-15T08:04:34.932Z')
 const recipientAddress = 'rms1qqqp07ychhkc3u68ueug0zqq9g0wtfgeatynr6ksm9jwud30rvlkyqnhpl5'
 const senderAddress = 'rms1abcp07ychhkc3u68ueug0zqq9g0wtfgeatynr6ksm9jwud30rvlkyqnhdef'
 const amount = '1000000000'
@@ -40,7 +41,7 @@ const surplus = '50000'
 
 const baseTransaction: NewTransactionDetails = {
     type: NewTransactionType.TokenTransfer,
-    assetId: CoinType[CoinType.Shimmer],
+    asset: PERSISTED_ASSET_SHIMMER,
     recipient: {
         type: 'address',
         address: recipientAddress,
@@ -63,21 +64,21 @@ jest.mock('../actions/getAccountAssetsForSelectedAccount', () => ({
     }),
 }))
 
-describe('File: getOutputOptions.ts', () => {
+describe('File: getOutputParameters.ts', () => {
     let newTransactionDetails: NewTransactionDetails
 
     beforeAll(() => {
-        // TODO: refactor getOutputOptions to not rely on this store
+        // TODO: refactor getOutputParameters to not rely on this store
         activeProfileId.set('id')
     })
 
-    it('should return output options for base token with metadata and tag', () => {
+    it('should return output parameters for base token with metadata and tag', () => {
         newTransactionDetails = {
             ...baseTransaction,
             metadata,
             tag,
         }
-        const output = getOutputOptions(newTransactionDetails)
+        const output = getOutputParameters(newTransactionDetails)
 
         const expectedOutput = {
             recipientAddress,
@@ -89,12 +90,12 @@ describe('File: getOutputOptions.ts', () => {
         expect(output).toStrictEqual(expectedOutput)
     })
 
-    it('should return output options for base token with expiration date', () => {
+    it('should return output parameters for base token with expiration date', () => {
         newTransactionDetails = {
             ...baseTransaction,
             expirationDate,
         }
-        const output = getOutputOptions(newTransactionDetails)
+        const output = getOutputParameters(newTransactionDetails)
 
         const expectedOutput = {
             recipientAddress,
@@ -106,13 +107,48 @@ describe('File: getOutputOptions.ts', () => {
         expect(output).toStrictEqual(expectedOutput)
     })
 
-    it('should return output options for native token without surplus', () => {
+    it('should return output parameters for base token with timelock date', () => {
+        newTransactionDetails = {
+            ...baseTransaction,
+            timelockDate,
+        }
+        const output = getOutputParameters(newTransactionDetails)
+
+        const expectedOutput = {
+            recipientAddress,
+            amount,
+            features: {},
+            unlocks: { timelockUnixTime: 1678867475 },
+            storageDeposit: { returnStrategy: ReturnStrategy.Return },
+        }
+        expect(output).toStrictEqual(expectedOutput)
+    })
+
+    it('should return output parameters for base token with timelock and expiration date', () => {
         newTransactionDetails = {
             ...baseTransaction,
             expirationDate,
-            assetId: nativeTokenAsset.id,
+            timelockDate,
         }
-        const output = getOutputOptions(newTransactionDetails)
+        const output = getOutputParameters(newTransactionDetails)
+
+        const expectedOutput = {
+            recipientAddress,
+            amount,
+            features: {},
+            unlocks: { expirationUnixTime: 1680163475, timelockUnixTime: 1678867475 },
+            storageDeposit: { returnStrategy: ReturnStrategy.Return },
+        }
+        expect(output).toStrictEqual(expectedOutput)
+    })
+
+    it('should return output parameters for native token without surplus', () => {
+        newTransactionDetails = {
+            ...baseTransaction,
+            expirationDate,
+            asset: nativeTokenAsset,
+        }
+        const output = getOutputParameters(newTransactionDetails)
 
         const expectedOutput = {
             recipientAddress,
@@ -132,13 +168,13 @@ describe('File: getOutputOptions.ts', () => {
         expect(output).toStrictEqual(expectedOutput)
     })
 
-    it('should return output options for base token to layer 2', () => {
+    it('should return output parameters for base token to layer 2', () => {
         newTransactionDetails = {
             ...baseTransaction,
             expirationDate,
             layer2Parameters,
         }
-        const output = getOutputOptions(newTransactionDetails)
+        const output = getOutputParameters(newTransactionDetails)
 
         const expectedOutput = {
             recipientAddress: layer2Parameters.networkAddress,
@@ -154,14 +190,14 @@ describe('File: getOutputOptions.ts', () => {
         expect(output).toStrictEqual(expectedOutput)
     })
 
-    it('should return output options for native token to layer 2', () => {
+    it('should return output parameters for native token to layer 2', () => {
         newTransactionDetails = {
             ...baseTransaction,
             expirationDate,
-            assetId: nativeTokenAsset.id,
+            asset: nativeTokenAsset,
             layer2Parameters,
         }
-        const output = getOutputOptions(newTransactionDetails)
+        const output = getOutputParameters(newTransactionDetails)
 
         const expectedOutput = {
             recipientAddress: layer2Parameters.networkAddress,
@@ -176,7 +212,7 @@ describe('File: getOutputOptions.ts', () => {
             },
             features: {
                 metadata:
-                    '0x00000000025e4b3ca1e3f42320a1070000000000010000000100611f00000003010000070c000c30680e00000090000f0ea000060009000d3000000000000000ca9a3b00000000020000000000',
+                    '0x00000000025e4b3ca1e3f42320a1070000000000010000000100611f00000003010000070c000c30680e00000090000f0ea000060009000d3000000000000000000000000000004800010008cd4dcad7ccc383111942671ee8cdc487ddd250398331ca2692b8b1a81551a1c3010000000000ca9a3b000000000000000000000000000000000000000000000000000000000000',
                 sender: senderAddress,
             },
             unlocks: { expirationUnixTime: 1680163475 },
@@ -185,14 +221,14 @@ describe('File: getOutputOptions.ts', () => {
         expect(output).toStrictEqual(expectedOutput)
     })
 
-    it('should return output options for nft to layer 2', () => {
+    it('should return output parameters for nft to layer 2', () => {
         newTransactionDetails = {
             type: NewTransactionType.NftTransfer,
             recipient: baseTransaction.recipient,
             nftId,
             layer2Parameters,
         }
-        const output = getOutputOptions(newTransactionDetails)
+        const output = getOutputParameters(newTransactionDetails)
 
         const expectedOutput = {
             recipientAddress: layer2Parameters.networkAddress,
@@ -211,14 +247,14 @@ describe('File: getOutputOptions.ts', () => {
         expect(output).toStrictEqual(expectedOutput)
     })
 
-    it('should return output options for nft transfer', () => {
+    it('should return output parameters for nft transfer', () => {
         newTransactionDetails = {
             type: NewTransactionType.NftTransfer,
             recipient: baseTransaction.recipient,
             nftId,
             expirationDate,
         }
-        const output = getOutputOptions(newTransactionDetails)
+        const output = getOutputParameters(newTransactionDetails)
 
         const expectedOutput = {
             recipientAddress,
@@ -233,14 +269,14 @@ describe('File: getOutputOptions.ts', () => {
         expect(output).toStrictEqual(expectedOutput)
     })
 
-    it('should return output options for native token with surplus', () => {
+    it('should return output parameters for native token with surplus', () => {
         newTransactionDetails = {
             ...baseTransaction,
             expirationDate,
-            assetId: nativeTokenAsset.id,
+            asset: nativeTokenAsset,
             surplus,
         }
-        const output = getOutputOptions(newTransactionDetails)
+        const output = getOutputParameters(newTransactionDetails)
 
         const expectedOutput = {
             recipientAddress,
@@ -260,13 +296,13 @@ describe('File: getOutputOptions.ts', () => {
         expect(output).toStrictEqual(expectedOutput)
     })
 
-    it('should return output options for base token with surplus', () => {
+    it('should return output parameters for base token with surplus', () => {
         newTransactionDetails = {
             ...baseTransaction,
             expirationDate,
             surplus,
         }
-        const output = getOutputOptions(newTransactionDetails)
+        const output = getOutputParameters(newTransactionDetails)
 
         const expectedOutput = {
             recipientAddress,
@@ -278,14 +314,14 @@ describe('File: getOutputOptions.ts', () => {
         expect(output).toStrictEqual(expectedOutput)
     })
 
-    it('should return output options for transfer with gifted storage deposit', () => {
+    it('should return output parameters for transfer with gifted storage deposit', () => {
         newTransactionDetails = {
             ...baseTransaction,
             expirationDate,
             surplus,
             giftStorageDeposit: true,
         }
-        const output = getOutputOptions(newTransactionDetails)
+        const output = getOutputParameters(newTransactionDetails)
 
         const expectedOutput = {
             recipientAddress,

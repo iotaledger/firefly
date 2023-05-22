@@ -1,7 +1,7 @@
 {
     "name": "desktop",
     "productName": "Firefly Shimmer",
-    "version": "2.1.1-beta-2",
+    "version": "2.1.3",
     "description": "Official wallet application of Shimmer",
     "main": "public/build/main.js",
     "repository": "git@github.com:iotaledger/firefly.git",
@@ -29,6 +29,9 @@
     },
     "dependencies": {
         "@amplitude/analytics-node": "^1.1.3",
+        "@ledgerhq/hw-app-eth": "^6.32.2",
+        "@ledgerhq/hw-transport-node-hid": "^6.27.13",
+        "@ledgerhq/logs": "^6.10.1",
         "@sentry/electron": "^2.5.4",
         "@types/webpack-dev-server": "^4.7.2",
         "dotenv": "^16.0.3",

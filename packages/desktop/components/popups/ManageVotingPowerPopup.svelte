@@ -34,7 +34,7 @@
             confirmDisabled = true
             return
         }
-        const convertedSliderAmount = convertToRawAmount(amount, asset?.metadata).toString()
+        const convertedSliderAmount = convertToRawAmount(amount, asset?.metadata)?.toString()
         confirmDisabled = convertedSliderAmount === $selectedAccount?.votingPower || hasTransactionInProgress
     }
 

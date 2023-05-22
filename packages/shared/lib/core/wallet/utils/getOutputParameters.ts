@@ -1,14 +1,14 @@
 import { get } from 'svelte/store'
-import { OutputOptions, Assets } from '@iota/wallet/out/types'
+import { OutputParams, Assets } from '@iota/wallet/out/types'
 import { convertDateToUnixTimestamp, Converter } from '@core/utils'
-import { getAssetById, NewTransactionType, selectedAccountAssets } from '../stores'
+import { NewTransactionType, selectedAccountAssets } from '../stores'
 import { addGasBudget, getLayer2MetadataForTransfer } from '@core/layer-2/utils'
 import { NewTransactionDetails } from '@core/wallet/types'
 import { getAddressFromSubject } from '@core/wallet/utils'
 import { ReturnStrategy } from '../enums'
 
-export function getOutputOptions(transactionDetails: NewTransactionDetails): OutputOptions {
-    const { recipient, expirationDate, giftStorageDeposit, layer2Parameters } = transactionDetails ?? {}
+export function getOutputParameters(transactionDetails: NewTransactionDetails): OutputParams {
+    const { recipient, expirationDate, timelockDate, giftStorageDeposit, layer2Parameters } = transactionDetails ?? {}
 
     const recipientAddress = layer2Parameters ? layer2Parameters.networkAddress : getAddressFromSubject(recipient)
 
@@ -17,15 +17,16 @@ export function getOutputOptions(transactionDetails: NewTransactionDetails): Out
 
     const assets = getAssetFromTransactionDetails(transactionDetails)
 
-    const tag = Converter.utf8ToHex(transactionDetails?.tag)
+    const tag = transactionDetails?.tag ? Converter.utf8ToHex(transactionDetails?.tag) : undefined
 
     const metadata = layer2Parameters
         ? getLayer2MetadataForTransfer(transactionDetails)
         : Converter.utf8ToHex(transactionDetails?.metadata)
 
     const expirationUnixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
+    const timelockUnixTime = timelockDate ? convertDateToUnixTimestamp(timelockDate) : undefined
 
-    return <OutputOptions>{
+    return <OutputParams>{
         recipientAddress,
         amount,
         ...(assets && { assets }),
@@ -36,6 +37,7 @@ export function getOutputOptions(transactionDetails: NewTransactionDetails): Out
         },
         unlocks: {
             ...(expirationUnixTime && { expirationUnixTime }),
+            ...(timelockUnixTime && { timelockUnixTime }),
         },
         storageDeposit: {
             returnStrategy: giftStorageDeposit ? ReturnStrategy.Gift : ReturnStrategy.Return,
@@ -46,7 +48,7 @@ export function getOutputOptions(transactionDetails: NewTransactionDetails): Out
 function getAmountFromTransactionDetails(transactionDetails: NewTransactionDetails): string {
     let rawAmount: string
     if (transactionDetails.type === NewTransactionType.TokenTransfer) {
-        const asset = getAssetById(transactionDetails.assetId)
+        const asset = transactionDetails.asset
         const nativeTokenId = asset?.id === get(selectedAccountAssets)?.baseCoin?.id ? undefined : asset?.id
 
         if (nativeTokenId) {
@@ -62,14 +64,14 @@ function getAmountFromTransactionDetails(transactionDetails: NewTransactionDetai
     return rawAmount
 }
 
-function getAssetFromTransactionDetails(transactionDetails: NewTransactionDetails): Assets {
-    let assets: Assets
+function getAssetFromTransactionDetails(transactionDetails: NewTransactionDetails): Assets | undefined {
+    let assets: Assets | undefined
 
     if (transactionDetails.type === NewTransactionType.NftTransfer) {
         assets = { nftId: transactionDetails.nftId }
     } else if (transactionDetails.type === NewTransactionType.TokenTransfer) {
-        const asset = getAssetById(transactionDetails.assetId)
-        const nativeTokenId = asset?.id === get(selectedAccountAssets)?.baseCoin?.id ? undefined : asset?.id
+        const assetId = transactionDetails.asset?.id
+        const nativeTokenId = assetId === get(selectedAccountAssets)?.baseCoin?.id ? undefined : assetId
 
         if (nativeTokenId) {
             const bigAmount = BigInt(transactionDetails.rawAmount)

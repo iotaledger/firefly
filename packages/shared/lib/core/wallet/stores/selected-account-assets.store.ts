@@ -29,7 +29,7 @@ export const visibleSelectedAccountAssets: Readable<IAccountAssets> = derived(
     })
 )
 
-export function getAssetById(assetId: string): IAsset {
+export function getAssetById(assetId: string): IAsset | undefined {
     const { baseCoin, nativeTokens } = get(selectedAccountAssets)
     if (assetId === baseCoin?.id) {
         return baseCoin

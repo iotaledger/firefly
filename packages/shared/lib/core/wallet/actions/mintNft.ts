@@ -3,7 +3,7 @@ import { selectedAccount, updateSelectedAccount } from '@core/account'
 import { localize } from '@core/i18n'
 import { addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput, IIrc27Metadata } from '@core/nfts'
 import { Converter } from '@core/utils'
-import { NftOptions } from '@iota/wallet'
+import { MintNftParams } from '@iota/wallet'
 import { get } from 'svelte/store'
 import { DEFAULT_TRANSACTION_OPTIONS, OUTPUT_TYPE_NFT } from '../constants'
 import { ActivityAction } from '../enums'
@@ -17,15 +17,14 @@ export async function mintNft(metadata: IIrc27Metadata, quantity: number): Promi
         const account = get(selectedAccount)
         updateSelectedAccount({ isTransferring: true })
 
-        // Set NFT options
-        const nftOptions: NftOptions = {
+        const mintNftParams: MintNftParams = {
             issuer: account.depositAddress,
             immutableMetadata: Converter.utf8ToHex(JSON.stringify(metadata)),
         }
-        const allNfts: NftOptions[] = Array(quantity).fill(nftOptions)
+        const allNftParams: MintNftParams[] = Array(quantity).fill(mintNftParams)
 
         // Mint NFT
-        const mintNftTransaction = await account.mintNfts(allNfts, DEFAULT_TRANSACTION_OPTIONS)
+        const mintNftTransaction = await account.mintNfts(allNftParams, DEFAULT_TRANSACTION_OPTIONS)
         resetMintNftDetails()
         showAppNotification({
             type: 'success',
