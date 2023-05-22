@@ -123,8 +123,17 @@ public class WalletPlugin extends Plugin {
             if (!call.getData().has("currentPassword")) {
                 call.reject("currentPassword is required");
             }
-
-            Actor.iotaMigrateStrongholdSnapshotV2ToV3(call.getString("currentPath"), call.getString("currentPassword"), call.getString("newPath"),  call.getString("newPassword"));
+            String currentPath = getContext().getFilesDir() + call.getString("currentPath");
+            String currentPassword = Objects.requireNonNull(call.getString("currentPassword"));
+            String newPath = getContext().getFilesDir() + call.getString("newPath");
+            String newPassword = call.getString("newPassword");
+            Log.e("PATHS", currentPath);
+            File file = new File(currentPath);
+            if (!file.isFile()) {
+                call.reject("currentPath file does not exist");
+            }
+            
+            Actor.iotaMigrateStrongholdSnapshotV2ToV3(currentPath, currentPassword, newPath, newPassword);
             call.resolve();
         } catch (Exception ex) {
             call.reject(ex.getMessage() + Arrays.toString(ex.getStackTrace()));
