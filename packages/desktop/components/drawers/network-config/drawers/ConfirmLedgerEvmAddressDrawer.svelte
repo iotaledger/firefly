@@ -1,16 +1,19 @@
 <script lang="ts">
-    import { onDestroy, onMount } from 'svelte'
-    import { Animation, Button, CopyableBox, FontWeight, Pane, Text, TextType } from '@ui'
-    import { selectedAccount, updateSelectedAccount } from '@core/account'
+    import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { loadEvmAddressForSelectedAccount } from '@core/layer-2'
-    import { DrawerRoute, NetworkConfigRoute, networkConfigRouter } from '@desktop/routers'
-    import DrawerTemplate from './DrawerTemplate.svelte'
+    import { selectedChain } from '@core/network'
+    import { updateActiveAccountPersistedData } from '@core/profile'
     import { Router } from '@core/router'
+    import { DrawerRoute, NetworkConfigRoute, networkConfigRouter } from '@desktop/routers'
+    import { Animation, Button, CopyableBox, FontWeight, Pane, Text, TextType } from '@ui'
+    import { onDestroy, onMount } from 'svelte'
+    import DrawerTemplate from './DrawerTemplate.svelte'
 
     export let drawerRouter: Router<DrawerRoute>
 
-    $: address = $selectedAccount?.evmAddress
+    let coinType
+    $: address = $selectedAccount?.evmAddresses?.[coinType]
 
     let continued = false
 
@@ -20,15 +23,18 @@
         $networkConfigRouter.goTo(NetworkConfigRoute.ConnectedChains)
     }
 
-    async function onMountHelper(): Promise<void> {
-        await loadEvmAddressForSelectedAccount()
-    }
-
-    onMount(() => void onMountHelper())
+    onMount(() => {
+        coinType = $selectedChain?.getConfiguration()?.coinType
+        if (coinType !== undefined) {
+            void loadEvmAddressForSelectedAccount(coinType)
+        }
+    })
 
     onDestroy(() => {
         if (!continued) {
-            updateSelectedAccount({ evmAddress: null })
+            const evmAddresses = $selectedAccount?.evmAddresses ?? {}
+            delete evmAddresses[coinType]
+            updateActiveAccountPersistedData($selectedAccount?.index, { evmAddresses })
         }
     })
 </script>
