@@ -1,6 +1,7 @@
 import { activeAccounts, updateActiveAccount } from '@core/profile'
 import { get } from 'svelte/store'
 import { Platform } from '@core/app/classes'
+import { addPersistedEvmAddress } from '@core/account/stores'
 
 export function registerLayer2EventHandlers(): void {
     Platform.onEvent('evm-address', ({ evmAddress, coinType, accountIndex }) => {
@@ -11,5 +12,6 @@ export function registerLayer2EventHandlers(): void {
         evmAddresses[coinType] = evmAddress
 
         updateActiveAccount(accountIndex, { evmAddresses })
+        addPersistedEvmAddress(evmAddresses, accountIndex)
     })
 }
