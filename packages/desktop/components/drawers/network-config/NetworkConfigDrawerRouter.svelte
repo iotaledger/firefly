@@ -1,12 +1,14 @@
 <script lang="ts">
     import { onDestroy, onMount } from 'svelte'
     import { Router } from '@core/router'
-    import { NetworkConfigRoute, NetworkConfigRouter, networkConfigRoute, networkConfigRouter } from '@desktop/routers'
+    import { NetworkConfigRoute, networkConfigRoute, NetworkConfigRouter, networkConfigRouter } from '@desktop/routers'
     import {
         AddChainDrawer,
         ChainDepositAddressDrawer,
         ChainInformationDrawer,
+        ConfirmLedgerEvmAddressDrawer,
         ConnectedChainsDrawer,
+        ConnectLedgerDeviceDrawer,
         EditChainDrawer,
         RemoveChainDrawer,
     } from './drawers'
@@ -38,6 +40,10 @@
     <RemoveChainDrawer />
 {:else if $networkConfigRoute === NetworkConfigRoute.ChainDepositAddress}
     <ChainDepositAddressDrawer />
+{:else if $networkConfigRoute === NetworkConfigRoute.ConnectLedgerDevice}
+    <ConnectLedgerDeviceDrawer />
+{:else if $networkConfigRoute === NetworkConfigRoute.ConfirmLedgerEvmAddress}
+    <ConfirmLedgerEvmAddressDrawer />
 {:else if $networkConfigRoute === NetworkConfigRoute.AddChain}
     <AddChainDrawer />
 {/if}
