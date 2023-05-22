@@ -363,4 +363,11 @@ public class SecureFilesystemAccessPlugin extends Plugin {
         
     }
 
+    @PluginMethod
+    public void getUserDataPath(PluginCall call) {
+        JSObject response = new JSObject();
+        response.put("path", getContext().getFilesDir().toString());
+        call.resolve(response);
+    }
+
 }
