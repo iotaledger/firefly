@@ -80,7 +80,7 @@
                 fontSize="18"
                 lineHeight="6"
                 fontWeight={FontWeight.semibold}
-                classes="overflow-hidden whitespace-nowrap overflow-ellipsis"
+                classes="overflow-hidden whitespace-nowrap text-ellipsis"
             >
                 {asset.verification?.status === NotVerifiedStatus.New
                     ? localize('popups.tokenInformation.newTokenTitle')

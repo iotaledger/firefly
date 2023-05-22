@@ -40,7 +40,7 @@
                 on:click={() => onViewNodeInfoClick(node)}
             >
                 <div class="flex flex-row items-center space-x-4 overflow-hidden">
-                    <Text classes={'self-start overflow-hidden whitespace-nowrap overflow-ellipsis'}>
+                    <Text classes={'self-start overflow-hidden whitespace-nowrap text-ellipsis'}>
                         {node.url}
                     </Text>
                     {#if isPrimary(node)}
