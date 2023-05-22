@@ -510,8 +510,21 @@
                     "chainInformation": {
                         "title": "Chain information"
                     },
+                    "confirmLedgerEvmAddress": {
+                        "title": "Confirm EVM address",
+                        "header": "We have generated your EVM address"
+                    },
                     "connectedChains": {
                         "title": "Connected chains"
+                    },
+                    "connectLedgerDevice": {
+                        "title": "Connect Ledger Device",
+                        "header": "Open the Ethereum app",
+                        "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed before following these steps.",
+                        "requirements": {
+                            "connect": "Connect and unlock your Ledger",
+                            "openApp": "Open the Ethereum app on your Ledger"
+                        }
                     },
                     "editChain": {
                         "title": "Edit chain"
@@ -1631,7 +1644,8 @@
         "jwt": "JSON web token",
         "internalTransaction": "Internal transaction",
         "coinType":"Coin type",
-        "custom": "Custom"
+        "custom": "Custom",
+        "evmAddress": "EVM address"
     },
     "filters":{
         "title": "Filters",

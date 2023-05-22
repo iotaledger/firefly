@@ -11,7 +11,12 @@
     import { TimePeriod } from '@core/utils/enums'
     import { sendOutput } from '@core/wallet/actions'
     import { DEFAULT_TRANSACTION_OPTIONS } from '@core/wallet/constants'
-    import { NewTransactionType, newTransactionDetails, updateNewTransactionDetails } from '@core/wallet/stores'
+    import {
+        NewTransactionType,
+        newTransactionDetails,
+        selectedAccountAssets,
+        updateNewTransactionDetails,
+    } from '@core/wallet/stores'
     import { Output } from '@core/wallet/types'
     import { getOutputParameters, getStorageDepositFromOutput, validateSendConfirmation } from '@core/wallet/utils'
     import type { OutputParams } from '@iota/wallet'
@@ -162,9 +167,18 @@
         isBusy: isTransferring,
     }}
 >
-    {#if transactionDetails.type === NewTransactionType.TokenTransfer}
-        <TokenAmountTile asset={transactionDetails.asset} amount={transactionDetails.rawAmount} />
-    {/if}
+    <div class="flex flex-row gap-2 justify-between">
+        {#if transactionDetails.type === NewTransactionType.TokenTransfer}
+            <TokenAmountTile asset={transactionDetails.asset} amount={transactionDetails.rawAmount} />
+        {/if}
+        {#if visibleSurplus}
+            <TokenAmountTile
+                asset={$selectedAccountAssets.baseCoin}
+                amount={String(visibleSurplus)}
+                showAssetInfo={false}
+            />
+        {/if}
+    </div>
 
     <TransactionDetails
         bind:expirationDate

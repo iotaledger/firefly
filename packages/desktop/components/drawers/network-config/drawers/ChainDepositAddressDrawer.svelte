@@ -18,7 +18,7 @@
     $: {
         if (isL2Chain) {
             const configuration = $selectedChain.getConfiguration() as IIscpChainConfiguration
-            depositAddress = configuration.aliasAddress
+            depositAddress = $selectedAccount.evmAddresses[configuration.coinType]
         } else {
             depositAddress = $selectedAccount.depositAddress
         }

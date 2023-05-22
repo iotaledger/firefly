@@ -10,6 +10,12 @@
     import { closeDrawer } from '@desktop/auxilary/drawer'
     import { Router, routerManager, SettingsRoute, settingsRouter } from '@core/router'
     import DrawerTemplate from './DrawerTemplate.svelte'
+    import {
+        determineLedgerConnectionState,
+        LedgerAppName,
+        LedgerConnectionState,
+        ledgerNanoStatus,
+    } from '@core/ledger'
 
     export let drawerRouter: Router<DrawerRoute>
 
@@ -22,6 +28,20 @@
     function onL2NetworkCardClick(chain: IChain): void {
         setSelectedChain(chain)
         $networkConfigRouter.goTo(NetworkConfigRoute.ChainInformation)
+    }
+
+    function onGenerateAddressClick(chain: IChain): void {
+        if (chain) {
+            setSelectedChain(chain)
+        }
+        if (
+            determineLedgerConnectionState($ledgerNanoStatus, LedgerAppName.Ethereum) ===
+            LedgerConnectionState.CorrectAppOpen
+        ) {
+            $networkConfigRouter.goTo(NetworkConfigRoute.ConfirmLedgerEvmAddress)
+        } else {
+            $networkConfigRouter.goTo(NetworkConfigRoute.ConnectLedgerDevice)
+        }
     }
 
     function onQrCodeIconClick(chain?: IChain): void {
@@ -49,10 +69,11 @@
                     onCardClick={onL1NetworkCardClick}
                     onQrCodeIconClick={() => onQrCodeIconClick()}
                 />
-                {#each $network.getChains() as chain}
+                {#each $network?.getChains() ?? [] as chain}
                     <NetworkCard
                         {chain}
                         onCardClick={() => onL2NetworkCardClick(chain)}
+                        onGenerateAddressClick={() => onGenerateAddressClick(chain)}
                         onQrCodeIconClick={() => onQrCodeIconClick(chain)}
                     />
                 {/each}
