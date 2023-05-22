@@ -313,12 +313,16 @@ ipcMain.handle('start-ledger-process', () => {
 
     ledgerProcess.on('spawn', () => {
         ledgerProcess.on('message', (message) => {
-            if (message.data?.address) {
-                windows.main.webContents.send('evm-address', message.data.address)
+            const { error, data } = message
+            if (error) {
+                windows.main.webContents.send('ledger-error', error)
             } else {
-                // TODO: https://github.com/iotaledger/firefly/issues/6799
-                /* eslint-disable-next-line no-console */
-                console.log('Unhandled Ledger Message: ', message)
+                if (data?.evmAddress) {
+                    windows.main.webContents.send('evm-address', data)
+                } else {
+                    /* eslint-disable-next-line no-console */
+                    console.log('Unhandled Ledger Message: ', message)
+                }
             }
         })
     })

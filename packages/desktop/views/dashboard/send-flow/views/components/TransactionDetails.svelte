@@ -25,7 +25,7 @@
             <Text>{localize('general.destinationNetwork')}</Text>
             <div class="flex flex-row gap-2">
                 <!-- TODO: Add correct icon for L2 -->
-                <NetworkIcon networkId={NetworkId.Testnet} height={16} width={16} />
+                <NetworkIcon networkId={NetworkId.Testnet} height={16} width={16} outlined={false} />
                 <Text color="gray-600">{destinationNetwork}</Text>
             </div>
         </section>
