@@ -333,7 +333,7 @@ public class SecureFilesystemAccessPlugin extends Plugin {
             String source = Objects.requireNonNull(call.getString("source"));
             String destination = Objects.requireNonNull(call.getString("destination"));
             File sourceFile = new File(source);
-            File destinationFile = new File(getContext().getFilesDir(), destination);
+            File destinationFile = new File(destination);
             Files.copy(sourceFile.toPath(), destinationFile.toPath());
             call.resolve();
         } catch (Exception e) {
@@ -349,7 +349,7 @@ public class SecureFilesystemAccessPlugin extends Plugin {
         }
         try {
             String source = Objects.requireNonNull(call.getString("source"));
-            File fileName = new File(getContext().getFilesDir(), source);
+            File fileName = new File(source);
             if (fileName.exists()) {
                 boolean isDeleted = fileName.delete();
                 if (!isDeleted) {
