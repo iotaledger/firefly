@@ -1,12 +1,11 @@
+import { IEvmAddresses } from '@core/network/interfaces'
 import { AccountBalance } from '@iota/wallet'
 import { IAccountMetadata } from './account-metadata.interface'
 import { IAccount } from './account.interface'
 
 export interface IAccountState extends IAccount, IAccountMetadata {
     depositAddress: string
-    evmAddresses: {
-        [coinType: number]: string | undefined
-    }
+    evmAddresses: IEvmAddresses
     balances: AccountBalance
     isTransferring: boolean
     hasVotingPowerTransactionInProgress: boolean
