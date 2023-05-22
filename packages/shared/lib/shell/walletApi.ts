@@ -252,6 +252,9 @@ const handleError = (
         if (error.includes('Snapshot is too short to be valid') || error.includes('is this really a snapshot file?')) {
             return 'error.backup.invalid'
         }
+        if (error.includes(STRONGHOLD_VERSION_ERROR)) {
+            return 'error.backup.migrationRequired'
+        }
         if (error.includes('try another password')) {
             return 'error.password.incorrect'
         }
@@ -282,9 +285,6 @@ const handleError = (
         }
         if (error.includes('forbidden')) {
             return 'error.node.forbidden'
-        }
-        if (error.includes(STRONGHOLD_VERSION_ERROR)) {
-            return 'error.backup.migrationRequired'
         }
 
         if (hasStatusCode403) {
