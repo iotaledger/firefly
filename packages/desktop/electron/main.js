@@ -317,7 +317,8 @@ ledgerProcess.on('spawn', () => {
         } else {
             if (data?.evmAddress) {
                 windows.main.webContents.send('evm-address', data)
-            } if (data?.signature) {
+            }
+            if (data?.signedTransaction) {
                 windows.main.webContents.send('evm-signature', data)
             } else {
                 /* eslint-disable-next-line no-console */

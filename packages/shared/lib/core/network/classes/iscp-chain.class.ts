@@ -49,9 +49,8 @@ export class IscpChain implements IChain {
         return get(chainStatuses)?.[this._configuration.chainId] ?? { health: NetworkHealth.Disconnected }
     }
 
-    getContract(type: ContractType, address: string): Contract {
-        const abi = getAbiForContractType(type)
-        return new this._provider.eth.Contract(abi, address)
+    getProvider(): Web3Provider {
+        return this._provider
     }
 
     getMetadata(): Promise<ChainMetadata> {
@@ -74,6 +73,11 @@ export class IscpChain implements IChain {
         const chainMetadataUrl = `${iscpEndpoint}/v1/chains/${aliasAddress}`
         const response = await fetch(chainMetadataUrl)
         return (await response.json()) as IIscpChainMetadata
+    }
+
+    getContract(type: ContractType, address: string): Contract {
+        const abi = getAbiForContractType(type)
+        return new this._provider.eth.Contract(abi, address)
     }
 
     async getLatestBlock(): Promise<IBlock> {

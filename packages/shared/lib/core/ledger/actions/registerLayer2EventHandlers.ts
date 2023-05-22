@@ -1,6 +1,7 @@
 import { activeAccounts, updateActiveAccount } from '@core/profile'
 import { get } from 'svelte/store'
 import { Platform } from '@core/app/classes'
+import { ledgerEvmSignature } from '@core/ledger'
 
 export function registerLayer2EventHandlers(): void {
     Platform.onEvent('evm-address', ({ evmAddress, coinType, accountIndex }) => {
@@ -14,7 +15,6 @@ export function registerLayer2EventHandlers(): void {
     })
 
     Platform.onEvent('evm-signature', (signature) => {
-        // console.log('EVM Signature: ', signature)
-        // TODO: Handle EVM signature
+        ledgerEvmSignature.set(signature)
     })
 }
