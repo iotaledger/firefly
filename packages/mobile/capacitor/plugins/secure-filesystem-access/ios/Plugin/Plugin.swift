@@ -143,7 +143,7 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
         guard let destination = call.getString("destination") else {
             return call.reject("destination is required")
         }
-        try? FileManager.default.copyItem(at: source, to: getAppPath(folder: destination))
+        try? FileManager.default.copyItem(at: source, to: destination)
         call.resolve()
     }
 
@@ -151,8 +151,7 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
         guard let source = call.getString("source") else {
             return call.reject("source is required")
         }
-        let srcUrl = getAppPath(folder: source)
-        try? FileManager.default.deleteItem(at: srcUrl)
+        try? FileManager.default.deleteItem(at: source)
         call.resolve()
     }
 
