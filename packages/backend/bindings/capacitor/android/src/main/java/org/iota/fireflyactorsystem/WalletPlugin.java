@@ -1,11 +1,17 @@
 package org.iota.fireflyactorsystem;
 
+import android.util.Log;
+
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
+
+import java.io.File;
 import java.util.Arrays;
+import java.util.Objects;
+
 import org.iota.wallet.Actor;
 import org.iota.wallet.ActorCallback;
 import org.iota.wallet.EventType;
@@ -119,9 +125,11 @@ public class WalletPlugin extends Plugin {
         try {
             if (!call.getData().has("currentPath")) {
                 call.reject("currentPath is required");
+                return;
             }
             if (!call.getData().has("currentPassword")) {
                 call.reject("currentPassword is required");
+                return;
             }
             String currentPath = getContext().getFilesDir() + call.getString("currentPath");
             String currentPassword = Objects.requireNonNull(call.getString("currentPassword"));
@@ -131,8 +139,9 @@ public class WalletPlugin extends Plugin {
             File file = new File(currentPath);
             if (!file.isFile()) {
                 call.reject("currentPath file does not exist");
+                return;
             }
-            
+
             Actor.iotaMigrateStrongholdSnapshotV2ToV3(currentPath, currentPassword, newPath, newPassword);
             call.resolve();
         } catch (Exception ex) {
