@@ -336,10 +336,10 @@ const ElectronApi = {
         return keyPath?.split('.').reduce((prev, cur) => prev && prev[cur], features)?.enabled ?? false
     },
     startLedgerProcess() {
-        return ipcRenderer.invoke('start-ledger-process')
+        return ipcRenderer.send('start-ledger-process')
     },
     killLedgerProcess() {
-        return ipcRenderer.invoke('kill-ledger-process')
+        return ipcRenderer.send('kill-ledger-process')
     },
 }
 

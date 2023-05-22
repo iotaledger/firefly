@@ -308,7 +308,7 @@ function createWindow() {
 app.whenReady().then(createWindow)
 
 let ledgerProcess
-ipcMain.handle('start-ledger-process', () => {
+ipcMain.on('start-ledger-process', () => {
     ledgerProcess = utilityProcess.fork(paths.ledger)
 
     ledgerProcess.on('spawn', () => {
@@ -328,7 +328,7 @@ ipcMain.handle('start-ledger-process', () => {
     })
 })
 
-ipcMain.handle('kill-ledger-process', () => {
+ipcMain.on('kill-ledger-process', () => {
     ledgerProcess.kill()
 })
 
