@@ -43,8 +43,7 @@
     import { closeDrawer } from '@desktop/auxilary/drawer'
     import features from '@features/features'
     import { OnboardingRouterView } from '@views/onboarding'
-    import { registerLayer2EventHandlers } from '@core/layer-2'
-    import { registerLedgerDeviceEventHandlers } from '@core/ledger'
+    import { registerLedgerDeviceEventHandlers, registerLayer2EventHandlers } from '@core/ledger'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 

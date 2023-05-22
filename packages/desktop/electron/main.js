@@ -317,6 +317,8 @@ ledgerProcess.on('spawn', () => {
         } else {
             if (data?.evmAddress) {
                 windows.main.webContents.send('evm-address', data)
+            } if (data?.signature) {
+                windows.main.webContents.send('evm-signature', data)
             } else {
                 /* eslint-disable-next-line no-console */
                 console.log('Unhandled Ledger Message: ', message)
@@ -327,6 +329,10 @@ ledgerProcess.on('spawn', () => {
 
 ipcMain.on('generate-evm-address', (_e, coinType, accountIndex, verify) => {
     ledgerProcess.postMessage({ method: 'generate-evm-address', parameters: [coinType, accountIndex, verify] })
+})
+
+ipcMain.on('sign-evm-transaction', (_e, data, coinType, accountIndex) => {
+    ledgerProcess.postMessage({ method: 'sign-evm-transaction', parameters: [data, coinType, accountIndex] })
 })
 
 /**

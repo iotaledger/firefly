@@ -18,6 +18,10 @@ process.parentPort.on('message', async (message) => {
                 data = await getEvmAddress(...message.data.parameters)
                 break
             }
+            case 'sign-evm-transaction': {
+                data = await signTransactionData(...message.data.parameters)
+                break
+            }
             default:
                 break
         }
@@ -40,4 +44,15 @@ async function getEvmAddress(coinType, accountIndex, verify) {
 
 function buildBip32Path(coinType, accountIndex) {
     return `44'/${coinType}'/${accountIndex}'/0/0`
+}
+
+async function signTransactionData(data, coinType, accountIndex) {
+    const transport = await TransportNodeHid.open('')
+    listen((log) => {
+        process.parentPort.postMessage({ data: log })
+    })
+    const appEth = new AppEth(transport)
+    const signature = await appEth.signTransaction(buildBip32Path(coinType, accountIndex), data)
+    await transport.close()
+    return signature
 }
