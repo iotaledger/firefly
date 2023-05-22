@@ -35,8 +35,8 @@ export function addAccountPersistedDataToActiveProfile(
     })
 }
 
-export function getActiveProfilePersistedAccountData(accountIndex: number): IAccountPersistedData {
-    return get(activeProfile)?.accountPersistedData?.[accountIndex] ?? {}
+export function getActiveProfilePersistedAccountData(accountIndex: number): IAccountPersistedData | undefined {
+    return get(activeProfile)?.accountPersistedData?.[accountIndex]
 }
 
 export function updateAccountPersistedDataOnActiveProfile(

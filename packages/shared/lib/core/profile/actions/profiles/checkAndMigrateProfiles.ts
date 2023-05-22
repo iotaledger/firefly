@@ -1,3 +1,4 @@
+import { IAccountPersistedData } from '@core/account/interfaces'
 import { COIN_TYPE, getDefaultPersistedNetwork, NetworkId } from '@core/network'
 import { INode, IPersistedNetwork } from '@core/network/interfaces'
 import { DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_SECONDS, DEFAULT_MAX_NFT_SIZE_IN_MEGABYTES } from '@core/nfts'
@@ -52,6 +53,7 @@ const persistedProfileMigrationsMap: Record<number, (existingProfile: unknown) =
     9: persistedProfileMigrationToV10,
     10: persistedProfileMigrationToV11,
     11: persistedProfileMigrationToV12,
+    12: persistedProfileMigrationToV13,
 }
 
 function persistedProfileMigrationToV4(existingProfile: unknown): void {
@@ -230,4 +232,39 @@ function persistedProfileMigrationToV11(
 function persistedProfileMigrationToV12(existingProfile: IPersistedProfile): void {
     existingProfile.strongholdVersion = StrongholdVersion.V2
     saveProfile(existingProfile)
+}
+
+function persistedProfileMigrationToV13(
+    existingProfile: IPersistedProfile & { accountMetadata: (IAccountPersistedData & { index: number })[] }
+): void {
+    const newProfile = {}
+    const keysToKeep = [
+        'id',
+        'name',
+        'type',
+        'lastStrongholdBackupTime',
+        'settings',
+        'accountPersistedData',
+        'isDeveloperProfile',
+        'hasVisitedDashboard',
+        'lastUsedAccountIndex',
+        'clientOptions',
+        'forceAssetRefresh',
+        'strongholdVersion',
+        'network',
+    ]
+    const accountPersistedData = {}
+    if (existingProfile?.accountMetadata?.length) {
+        existingProfile.accountMetadata.forEach((metadata) => {
+            const { index, ...rest } = metadata
+            accountPersistedData[index] = rest
+        })
+    }
+    existingProfile.accountPersistedData = accountPersistedData
+    keysToKeep.forEach((key) => {
+        const existingValue = existingProfile?.[key]
+        newProfile[key] = existingValue
+    })
+
+    saveProfile(newProfile as IPersistedProfile)
 }
