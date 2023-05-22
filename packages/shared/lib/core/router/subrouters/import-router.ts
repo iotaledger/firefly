@@ -81,7 +81,11 @@ export class ImportRouter extends Subrouter<ImportRoute> {
                 } catch (err) {
                     if (err?.error === 'error.backup.migrationRequired') {
                         importFilePath.set(filePath)
-                        get(appRouter).next({ importType: get(this.importType), strongholdUpdateRequired: true })
+                        get(appRouter).next({
+                            importType: get(this.importType),
+                            strongholdUpdateRequired: true,
+                            isRecovery: true,
+                        })
                     } else {
                         nextRoute = ImportRoute.BackupPassword
                     }
