@@ -1,4 +1,4 @@
-import { openPopup, PopupId, popupState } from '@auxiliary/popup'
+import { openPopup, PopupId, popupState } from '../../../../../desktop/lib/auxiliary/popup'
 import { get } from 'svelte/store'
 import { LedgerConnectionState } from '../interfaces'
 import { ledgerConnectionState } from '../stores'

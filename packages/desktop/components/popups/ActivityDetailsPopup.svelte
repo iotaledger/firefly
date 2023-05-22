@@ -26,7 +26,7 @@
     import { activeProfile, checkActiveProfileAuth } from '@core/profile'
     import { setClipboard } from '@core/utils'
     import { truncateString } from '@core/utils'
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@desktop/auxiliary/popup'
     import { onMount } from 'svelte'
     import { ExplorerEndpoint } from '@core/network'
 

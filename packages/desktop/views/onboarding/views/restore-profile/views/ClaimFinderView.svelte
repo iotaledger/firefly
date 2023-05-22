@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { closePopup } from '@auxiliary/popup'
+    import { closePopup } from '@desktop/auxiliary/popup'
     import { OnboardingLayout } from '@components'
     import {
         ClaimShimmerRewardsError,

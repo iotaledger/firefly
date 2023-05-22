@@ -5,12 +5,11 @@
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
     import { showAppNotification } from '@auxiliary/notification/actions'
-    import { closePopup, openPopup } from '@auxiliary/popup/actions'
+    import { closePopup, openPopup, PopupId } from '@desktop/auxiliary/popup'
     import { truncateString } from '@core/utils/string'
     import { registeredProposalsForSelectedAccount, registerProposalsForAccounts } from '@contexts/governance'
     import { activeAccounts, updateActiveAccountMetadata } from '@core/profile'
     import { selectedAccount } from '@core/account'
-    import { PopupId } from '@auxiliary/popup'
 
     export let initialEventId: string
     export let initialNodeUrl: string

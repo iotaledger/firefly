@@ -3,7 +3,7 @@
     import { AccountSwitcherModal } from '@components'
     import { selectedAccount } from '@core/account/stores'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { closeDrawer } from '@desktop/auxilary/drawer'
+    import { closeDrawer } from '@desktop/auxiliary/drawer'
 
     let modal: Modal
     let isModalOpened: boolean = false

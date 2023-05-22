@@ -12,8 +12,7 @@
     import { isVotingForSelectedProposal } from '@contexts/governance/utils'
 
     import { Icon } from '@auxiliary/icon'
-    import { openPopup } from '@auxiliary/popup/actions'
-    import { PopupId } from '@auxiliary/popup'
+    import { openPopup, PopupId } from '@desktop/auxiliary/popup'
 
     import features from '@features/features'
 

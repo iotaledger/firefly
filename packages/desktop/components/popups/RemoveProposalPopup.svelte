@@ -11,7 +11,7 @@
     } from '@contexts/governance/stores'
     import { localize } from '@core/i18n'
     import { governanceRouter } from '@core/router'
-    import { closePopup } from '@auxiliary/popup'
+    import { closePopup } from '@desktop/auxiliary/popup'
     import { showAppNotification } from '@auxiliary/notification'
     import { selectedAccount } from '@core/account/stores'
     import { updateActiveAccountMetadata } from '@core/profile'

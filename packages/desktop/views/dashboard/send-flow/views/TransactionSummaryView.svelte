@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { closePopup } from '@auxiliary/popup/actions'
+    import { closePopup } from '@desktop/auxiliary/popup'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'

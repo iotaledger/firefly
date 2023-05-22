@@ -7,7 +7,7 @@
     import { localize } from '@core/i18n'
     import networkFeatures from '@features/network.features'
     import { onMount } from 'svelte'
-    import { closeDrawer } from '@desktop/auxilary/drawer'
+    import { closeDrawer } from '@desktop/auxiliary/drawer'
     import { routerManager, SettingsRoute, settingsRouter } from '@core/router'
     import {
         determineLedgerConnectionState,

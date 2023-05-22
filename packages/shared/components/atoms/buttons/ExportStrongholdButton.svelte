@@ -2,7 +2,7 @@
     import { exportStronghold } from '@contexts/settings'
     import { localize } from '@core/i18n'
     import { showAppNotification } from '@auxiliary/notification'
-    import { openPopup, PopupId } from '@auxiliary/popup'
+    import { openPopup, PopupId } from '../../../../desktop/lib/auxiliary/popup'
     import { Button, ButtonSize } from 'shared/components'
 
     export let isBusy = false

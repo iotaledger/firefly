@@ -6,7 +6,7 @@
     import { activeProfile } from '@core/profile/stores'
     import { appRoute, AppRoute } from '@core/router'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { popupState } from '@auxiliary/popup/stores'
+    import { popupState } from '@desktop/auxiliary/popup'
 
     const { hasLoadedAccounts } = $activeProfile
 

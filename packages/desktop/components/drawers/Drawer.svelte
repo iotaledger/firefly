@@ -3,7 +3,7 @@
     import { NetworkConfigDrawerRouter } from '@components'
     import DrawerHeader from './DrawerHeader.svelte'
     import { Router } from '@core/router'
-    import { closeDrawer, DrawerDirection, DrawerId, drawerState } from '@desktop/auxilary/drawer'
+    import { closeDrawer, DrawerDirection, DrawerId, drawerState } from '@desktop/auxiliary/drawer'
     import { DrawerRoute } from '@desktop/routers'
 
     export let onClose: () => unknown = () => {}

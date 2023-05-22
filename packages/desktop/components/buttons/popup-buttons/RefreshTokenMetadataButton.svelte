@@ -5,7 +5,7 @@
     import { refreshAccountAssetsForActiveProfile } from '@core/wallet'
 
     import { showAppNotification } from '@auxiliary/notification'
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@desktop/auxiliary/popup'
 
     function refreshTokenMetadata(): void {
         refreshAccountAssetsForActiveProfile(true)

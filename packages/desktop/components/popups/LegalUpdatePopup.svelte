@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Button, Checkbox, Text, Link } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { closePopup } from '@auxiliary/popup'
+    import { closePopup } from '@desktop/auxiliary/popup'
     import {
         lastAcceptedTermsOfService,
         lastAcceptedPrivacyPolicy,

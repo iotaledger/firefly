@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { PopupId, openPopup } from '@auxiliary/popup'
+    import { PopupId, openPopup } from '@desktop/auxiliary/popup'
     import { initialiseOnboardingProfile, onboardingProfile, shouldBeDeveloperProfile } from '@contexts/onboarding'
     import {
         AppContext,

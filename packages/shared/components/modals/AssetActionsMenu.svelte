@@ -11,7 +11,7 @@
         VerifiedStatus,
     } from '@core/wallet'
     import { Icon } from '@lib/auxiliary/icon'
-    import { openPopup, PopupId, updatePopupProps } from '@auxiliary/popup'
+    import { openPopup, PopupId, updatePopupProps } from '../../../desktop/lib/auxiliary/popup'
     import { MenuItem, Modal } from 'shared/components'
     import features from '@features/features'
 

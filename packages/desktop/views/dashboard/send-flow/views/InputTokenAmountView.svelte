@@ -12,7 +12,7 @@
     import { get } from 'svelte/store'
     import { sendFlowRouter } from '../send-flow.router'
     import SendFlowTemplate from './SendFlowTemplate.svelte'
-    import { closePopup } from '@auxiliary/popup'
+    import { closePopup } from '@desktop/auxiliary/popup'
 
     const transactionDetails = get(newTransactionDetails)
     let assetAmountInput: TokenAmountInput

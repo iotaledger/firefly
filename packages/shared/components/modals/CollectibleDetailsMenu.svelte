@@ -6,8 +6,7 @@
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { CollectiblesRoute, collectiblesRouter } from '@core/router'
     import { burnNft } from '@core/wallet'
-    import { PopupId } from '@auxiliary/popup'
-    import { closePopup, openPopup } from '@auxiliary/popup/actions'
+    import { closePopup, openPopup, PopupId } from '../../../desktop/lib/auxiliary/popup'
     import { activeProfile, updateActiveProfile } from '@core/profile/stores'
 
     export let modal: Modal = undefined

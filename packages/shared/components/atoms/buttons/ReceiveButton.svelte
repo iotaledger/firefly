@@ -1,6 +1,6 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { openPopup, PopupId } from '@auxiliary/popup'
+    import { openPopup, PopupId } from '../../../../desktop/lib/auxiliary/popup'
 
     export let text: string = localize('actions.receive')
     export let title: string = localize('general.receiveFunds')

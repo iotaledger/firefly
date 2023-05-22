@@ -1,4 +1,4 @@
-import { PopupId, openPopup } from '@auxiliary/popup'
+import { PopupId, openPopup } from '../../../../../../../desktop/lib/auxiliary/popup'
 import { getByteLengthOfString, isStringTrue, isValidBech32AddressAndPrefix, validateAssetId } from '@core/utils'
 import {
     NewTransactionDetails,

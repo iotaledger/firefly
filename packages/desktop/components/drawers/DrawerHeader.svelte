@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { Router } from '@core/router'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { drawerState } from '@desktop/auxilary/drawer'
+    import { drawerState } from '@desktop/auxiliary/drawer'
     import { DrawerRoute } from '@desktop/routers'
 
     export let drawerRoute: DrawerRoute

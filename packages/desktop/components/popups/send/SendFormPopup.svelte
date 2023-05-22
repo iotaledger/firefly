@@ -1,6 +1,6 @@
 <script lang="ts">
     import { get } from 'svelte/store'
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@desktop/auxiliary/popup'
     import { localize } from '@core/i18n'
     import { ownedNfts } from '@core/nfts'
     import { getByteLengthOfString, MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
