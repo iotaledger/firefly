@@ -1,7 +1,7 @@
 import { get, writable } from 'svelte/store'
 
-import { IEvmAddresses } from '@core/network/interfaces'
 import type { IAccountPersistedData } from '@core/account/interfaces'
+import { IEvmAddresses } from '@core/network/interfaces'
 
 import { INITIAL_ACTIVE_PROFILE } from '../constants'
 import type { IProfile, IProfileSettings } from '../interfaces'
@@ -58,18 +58,20 @@ export function updateAccountPersistedDataOnActiveProfile(
 
 export function addEvmAddressToActiveProfileAccount(cointype: number, evmAddress: string, accountIndex: number): void {
     activeProfile?.update((state) => {
-        if (!state.evmAddresses) {
-            state.evmAddresses = {}
-        }
-        if (!state.evmAddresses[accountIndex]) {
-            state.evmAddresses[accountIndex] = {}
-        }
-        state.evmAddresses[accountIndex][cointype] = evmAddress
+        const accountPersistedData = state.accountPersistedData ?? {}
+        const accountPersistedDataForAccountIndex = accountPersistedData[accountIndex] ?? {}
+        const evmAddresses = accountPersistedDataForAccountIndex.evmAddresses ?? {}
+
+        evmAddresses[cointype] = evmAddress
+        accountPersistedDataForAccountIndex.evmAddresses = evmAddresses
+        accountPersistedData[accountIndex] = accountPersistedDataForAccountIndex
+
+        state.accountPersistedData = accountPersistedData
         return state
     })
 }
 
-export function getEvmAddressesByIndex(index: number): IEvmAddresses {
-    const { evmAddresses } = get(activeProfile)
-    return evmAddresses?.[index] ?? {}
+export function getActiveProfileEvmAddressesByAccountIndex(accountIndex: number): IEvmAddresses {
+    const accountPersistedData = getActiveProfilePersistedAccountData(accountIndex)
+    return accountPersistedData?.evmAddresses ?? {}
 }

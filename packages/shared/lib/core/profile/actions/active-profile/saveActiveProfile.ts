@@ -17,7 +17,6 @@ export function saveActiveProfile(): void {
             clientOptions: _activeProfile.clientOptions,
             forceAssetRefresh: _activeProfile.forceAssetRefresh,
             strongholdVersion: _activeProfile.strongholdVersion,
-            evmAddresses: _activeProfile.evmAddresses,
             ...(_activeProfile.hasVisitedDashboard && { hasVisitedDashboard: _activeProfile.hasVisitedDashboard }),
             ...(_activeProfile.lastUsedAccountIndex && { lastUsedAccountIndex: _activeProfile.lastUsedAccountIndex }),
             ...(_activeProfile.accountPersistedData && { accountPersistedData: _activeProfile.accountPersistedData }),

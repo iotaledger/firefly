@@ -23,5 +23,4 @@ export const DEFAULT_PERSISTED_PROFILE_OBJECT: IPersistedProfile = {
     forceAssetRefresh: false,
     strongholdVersion: undefined,
     clientOptions: {},
-    evmAddresses: {},
 }

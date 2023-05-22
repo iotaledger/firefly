@@ -1,4 +1,5 @@
-import type { ParticipationEventId } from '@iota/wallet'
+import { IEvmAddresses } from '@core/network/interfaces'
+import { ParticipationEventId } from '@iota/wallet/types'
 
 export interface IAccountPersistedData {
     name: string
@@ -6,4 +7,5 @@ export interface IAccountPersistedData {
     hidden: boolean
     shouldRevote: boolean
     removedProposalIds?: ParticipationEventId[]
+    evmAddresses: IEvmAddresses
 }
