@@ -345,10 +345,10 @@
   resolved "https://registry.npmjs.org/@capacitor-community/privacy-screen/-/privacy-screen-2.1.1.tgz"
   integrity sha512-KhUyMNOSHPXKpDF4HBU4T8mfLnbq6owMCZHt6Q2SAHn2zT7Zsl9Nkv6paFrgUD+WUD+iHERqsFJNbpmWzkdBtg==
 
-"@capacitor/android@3.4.1":
-  version "3.4.1"
-  resolved "https://registry.npmjs.org/@capacitor/android/-/android-3.4.1.tgz"
-  integrity sha512-4qQGEdZTW8W01PTOzSScmx9NBDcsi1GRl32tyYnpQrjdH2f7hI9OX2MLbNkirtOwKNCDeinQfEqqn0hVCkgHag==
+"@capacitor/android@5.0.3":
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/@capacitor/android/-/android-5.0.3.tgz#954f968c3d0b6d104ae9639fc5aad04acc0a8369"
+  integrity sha512-jPN6JJUbN2cCrAjP+0Q4gIwIxleFVChZWh+/gsbDDfSpogdpZNwZnriUNxSRTZayL58tUzLHuxpJxY6hsddDrA==
 
 "@capacitor/app@^1.1.1":
   version "1.1.1"
