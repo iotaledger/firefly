@@ -143,9 +143,7 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
         guard let destination = call.getString("destination") else {
             return call.reject("destination is required")
         }
-        let srcUrl = getAppPath(folder: source)
-        let dstUrl = getAppPath(folder: destination)
-        try? FileManager.default.copyItem(at: srcUrl, to: dstUrl)
+        try? FileManager.default.copyItem(at: source, to: getAppPath(folder: destination))
         call.resolve()
     }
 
