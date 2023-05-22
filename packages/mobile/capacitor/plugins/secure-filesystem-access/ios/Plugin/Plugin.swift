@@ -155,4 +155,8 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
         try? FileManager.default.deleteItem(at: srcUrl)
         call.resolve()
     }
+
+    @objc func getUserDataPath(_ call: CAPPluginCall) {
+        call.resolve([ "path":  getAppPath(folder: "")])
+    }
 }
