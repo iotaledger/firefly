@@ -7,7 +7,7 @@ import { IAccount, IAccountPersistedData, IAccountState } from '../interfaces'
 export async function buildAccountState(
     accountIndex: number,
     account: IAccount,
-    persistedData: IAccountPersistedData
+    accountPersistedData: IAccountPersistedData
 ): Promise<IAccountState> {
     let balances: AccountBalance = {
         baseCoin: {
@@ -40,7 +40,7 @@ export async function buildAccountState(
     return {
         index: accountIndex,
         ...account,
-        ...persistedData,
+        ...accountPersistedData,
         depositAddress,
         evmAddresses: {},
         balances,

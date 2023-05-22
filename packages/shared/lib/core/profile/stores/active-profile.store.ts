@@ -24,13 +24,13 @@ export function updateActiveProfileSettings(payload: Partial<IProfileSettings>):
 
 export function addAccountPersistedDataToActiveProfile(
     accountIndex: number,
-    persistedData: IAccountPersistedData
+    accountPersistedData: IAccountPersistedData
 ): void {
     activeProfile?.update((state) => {
         if (!state?.accountPersistedData) {
             state.accountPersistedData = {}
         }
-        state.accountPersistedData[accountIndex] = persistedData
+        state.accountPersistedData[accountIndex] = accountPersistedData
         return state
     })
 }

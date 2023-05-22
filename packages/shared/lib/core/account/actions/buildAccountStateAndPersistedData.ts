@@ -9,12 +9,12 @@ export async function buildAccountStateAndPersistedData(
     color?: string
 ): Promise<[number, IAccountState, IAccountPersistedData]> {
     const { index } = account.getMetadata()
-    const persistedData: IAccountPersistedData = {
+    const accountPersistedData: IAccountPersistedData = {
         name: name || `${localize('general.account')} ${index + 1}`,
         color: color || getRandomAccountColor(),
         hidden: false,
         shouldRevote: false,
     }
-    const accountState = await buildAccountState(index, account, persistedData)
-    return [index, accountState, persistedData]
+    const accountState = await buildAccountState(index, account, accountPersistedData)
+    return [index, accountState, accountPersistedData]
 }

@@ -16,9 +16,13 @@ export async function createNewAccount(name?: string, color?: string): Promise<I
 
     await account.sync(DEFAULT_SYNC_OPTIONS)
 
-    const [accountIndex, newAccount, persistedData] = await buildAccountStateAndPersistedData(account, name, color)
+    const [accountIndex, newAccount, accountPersistedData] = await buildAccountStateAndPersistedData(
+        account,
+        name,
+        color
+    )
     addAccountToActiveAccounts(newAccount)
-    addAccountPersistedDataToActiveProfile(accountIndex, persistedData)
+    addAccountPersistedDataToActiveProfile(accountIndex, accountPersistedData)
     addEmptyAccountActivitiesToAllAccountActivities(accountIndex)
 
     return newAccount
