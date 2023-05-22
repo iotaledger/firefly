@@ -1,4 +1,4 @@
-import { IAccountMetadata } from '@core/account'
+import { IAccountPersistedData } from '@core/account'
 import { IClientOptions, IPersistedNetwork } from '@core/network'
 import { IEvmAddresses } from '@core/network/interfaces'
 import { INft } from '@core/nfts'
@@ -13,7 +13,9 @@ export interface IPersistedProfile {
     network: IPersistedNetwork
     lastStrongholdBackupTime: Date
     settings: IProfileSettings
-    accountMetadata: IAccountMetadata[]
+    accountPersistedData: {
+        [accountId: string]: IAccountPersistedData
+    }
     isDeveloperProfile: boolean
     hasVisitedDashboard?: boolean
     lastUsedAccountIndex?: number

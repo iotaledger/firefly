@@ -1,7 +1,8 @@
 import { get, writable } from 'svelte/store'
 
-import type { IAccountMetadata } from '@core/account/interfaces'
 import { IEvmAddresses } from '@core/network/interfaces'
+import type { IAccountPersistedData } from '@core/account/interfaces'
+
 import { INITIAL_ACTIVE_PROFILE } from '../constants'
 import type { IProfile, IProfileSettings } from '../interfaces'
 
@@ -22,25 +23,37 @@ export function updateActiveProfileSettings(payload: Partial<IProfileSettings>):
     }))
 }
 
-export function addAccountMetadataToActiveProfile(metadata: IAccountMetadata): void {
-    activeProfile?.update((state) => ({
-        ...state,
-        accountMetadata: [...(state?.accountMetadata ?? []), metadata],
-    }))
+export function addAccountPersistedDataToActiveProfile(
+    accountIndex: number,
+    accountPersistedData: IAccountPersistedData
+): void {
+    activeProfile?.update((state) => {
+        if (!state?.accountPersistedData) {
+            state.accountPersistedData = {}
+        }
+        state.accountPersistedData[accountIndex] = accountPersistedData
+        return state
+    })
 }
 
-export function getAccountMetadataByIndex(index: number): IAccountMetadata | undefined {
-    const { accountMetadata } = get(activeProfile)
-    return accountMetadata.find((metadata) => metadata.index === index)
+export function getActiveProfilePersistedAccountData(accountIndex: number): IAccountPersistedData | undefined {
+    return get(activeProfile)?.accountPersistedData?.[accountIndex]
 }
 
-export function updateAccountMetadataOnActiveProfile(index: number, metadata: Partial<IAccountMetadata>): void {
-    activeProfile?.update((state) => ({
-        ...state,
-        accountMetadata: state?.accountMetadata.map((existingValue) =>
-            existingValue.index === index ? { ...existingValue, ...metadata } : existingValue
-        ),
-    }))
+export function updateAccountPersistedDataOnActiveProfile(
+    accountIndex: number,
+    partialAccountPersistedData: Partial<IAccountPersistedData>
+): void {
+    activeProfile?.update((state) => {
+        if (!state?.accountPersistedData) {
+            state.accountPersistedData = {}
+        }
+        state.accountPersistedData[accountIndex] = {
+            ...state?.accountPersistedData?.[accountIndex],
+            ...partialAccountPersistedData,
+        }
+        return state
+    })
 }
 
 export function addEvmAddressToActiveProfileAccount(cointype: number, evmAddress: string, accountIndex: number): void {
