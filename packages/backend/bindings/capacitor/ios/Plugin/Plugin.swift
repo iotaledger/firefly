@@ -15,9 +15,7 @@ public class WalletPlugin: CAPPlugin {
                 return call.reject("actorId and storagePath are required")
             }
             let fm = FileManager.default
-            let documents = fm.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
-            let path = documents.appendingPathComponent(storagePath, isDirectory: true).path
-            if !fm.fileExists(atPath: path) {
+            if !fm.fileExists(atPath: storagePath) {
                 try fm.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
             }
             // Exclude folder from auto-backup
