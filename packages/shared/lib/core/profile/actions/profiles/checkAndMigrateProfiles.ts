@@ -218,11 +218,15 @@ function persistedProfileMigrationToV11(
         'forceAssetRefresh',
         'strongholdVersion',
         'network',
+        'evmAddresses',
     ]
     keysToKeep.forEach((key) => {
         const existingValue = existingProfile?.[key]
         newProfile[key] = existingValue
     })
+    if (!existingProfile.evmAddresses) {
+        newProfile['evmAddresses'] = {}
+    }
 
     saveProfile(newProfile as IPersistedProfile)
 }
