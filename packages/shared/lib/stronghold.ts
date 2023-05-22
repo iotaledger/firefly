@@ -1,4 +1,4 @@
-import { get } from 'svelte/store'
+import { get, writable } from 'svelte/store'
 
 import { openPopup } from './popup'
 import { api, asyncRestoreBackup, destroyActor, getProfileDataPath, initialise } from './wallet'
@@ -19,6 +19,7 @@ export const STRONGHOLD_VERSION_ERROR = 'snapshot::ReadError: UnsupportedVersion
 
 export const STRONGHOLD_DECRYPTION_ERROR = 'Failed to decrypt snapshot: incorrect password or corrupt data'
 
+export const importFilePath = writable<string>(null)
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 export const checkStronghold = (callback: any): void => {
