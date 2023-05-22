@@ -197,12 +197,11 @@ export const CapacitorApi: IPlatform = {
 
     /**
      * Gets directory for app's configuration files
-     *
-     * @method getUserDataPath
-     *
-     * @returns {Promise}
      */
-    getUserDataPath: () => new Promise<string>((resolve, reject) => resolve('')),
+    getUserDataPath: async () => {
+        const { path } = await SecureFilesystemAccess.getUserDataPath()
+        return path
+    },
 
     /**
      * Gets diagnostics information for the system
