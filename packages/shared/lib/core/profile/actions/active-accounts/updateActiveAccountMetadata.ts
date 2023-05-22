@@ -1,10 +1,13 @@
-import { IAccountMetadata, selectedAccountIndex, updateSelectedAccount } from '@core/account'
-import { updateAccountMetadataOnActiveProfile } from '@core/profile'
+import { IAccountPersistedData, selectedAccountIndex, updateSelectedAccount } from '@core/account'
+import { updateAccountPersistedDataOnActiveProfile } from '@core/profile'
 import { get } from 'svelte/store'
 
-export function updateActiveAccountMetadata(index: number, partialAccountMetadata: Partial<IAccountMetadata>): void {
-    if (get(selectedAccountIndex) === index) {
+export function updateActiveAccountMetadata(
+    acccountIndex: number,
+    partialAccountMetadata: Partial<IAccountPersistedData>
+): void {
+    if (get(selectedAccountIndex) === acccountIndex) {
         updateSelectedAccount(partialAccountMetadata)
     }
-    updateAccountMetadataOnActiveProfile(index, partialAccountMetadata)
+    updateAccountPersistedDataOnActiveProfile(acccountIndex, partialAccountMetadata)
 }

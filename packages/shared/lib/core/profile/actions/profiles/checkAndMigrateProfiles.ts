@@ -231,5 +231,3 @@ function persistedProfileMigrationToV12(existingProfile: IPersistedProfile): voi
     existingProfile.strongholdVersion = StrongholdVersion.V2
     saveProfile(existingProfile)
 }
-
-// TODO: Rename accountMetadata to accountPersistedData in next migration

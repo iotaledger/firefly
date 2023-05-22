@@ -3,15 +3,17 @@ import { isActiveLedgerProfile, updateActiveAccountMetadata } from '@core/profil
 import { displayNotificationForLedgerProfile } from '@core/ledger'
 import { showAppNotification } from '@auxiliary/notification'
 import { get } from 'svelte/store'
-import { IAccountMetadata } from '../interfaces'
+import { IAccountPersistedData } from '../interfaces'
 import { selectedAccount, updateSelectedAccount } from '../stores'
 
-export async function tryEditSelectedAccountMetadata(metadata: Partial<IAccountMetadata>): Promise<void> {
+export async function tryEditSelectedAccountPersistedData(
+    persistedData: Partial<IAccountPersistedData>
+): Promise<void> {
     try {
         // TODO: Replace Promise.resolve() with update metadata in wallet.rs when api is exposed
         await Promise.resolve()
-        updateActiveAccountMetadata(get(selectedAccount)?.index, metadata)
-        updateSelectedAccount(metadata)
+        updateActiveAccountMetadata(get(selectedAccount)?.index, persistedData)
+        updateSelectedAccount(persistedData)
     } catch (err) {
         if (err) {
             console.error(err?.error || err)
