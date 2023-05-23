@@ -1,19 +1,20 @@
-import { addAccountMetadataToActiveProfile, getAccountMetadataByIndex } from '@core/profile'
+import { addAccountPersistedDataToActiveProfile, getActiveProfilePersistedAccountData } from '@core/profile'
 import { DEFAULT_SYNC_OPTIONS } from '../constants'
 import { IAccount, IAccountState } from '../interfaces'
 import { buildAccountState } from './buildAccountState'
-import { buildAccountStateAndMetadata } from './buildAccountStateAndMetadata'
+import { buildAccountStateAndPersistedData } from './buildAccountStateAndPersistedData'
 
 export async function loadAccount(account: IAccount): Promise<IAccountState> {
     // Temporary sync on load until we enable background sync and event listeners
+    const accountIndex = account.getMetadata().index
     await account.sync(DEFAULT_SYNC_OPTIONS)
-    const metadata = getAccountMetadataByIndex(account.getMetadata().index)
+    const accountPersistedData = getActiveProfilePersistedAccountData(accountIndex)
     let accountState: IAccountState
-    if (metadata) {
-        accountState = await buildAccountState(account, metadata)
+    if (accountPersistedData) {
+        accountState = await buildAccountState(accountIndex, account, accountPersistedData)
     } else {
-        const [newAccountState, metadata] = await buildAccountStateAndMetadata(account)
-        addAccountMetadataToActiveProfile(metadata)
+        const [accountIndex, newAccountState, accountPersistedData] = await buildAccountStateAndPersistedData(account)
+        addAccountPersistedDataToActiveProfile(accountIndex, accountPersistedData)
         accountState = newAccountState
     }
     return accountState

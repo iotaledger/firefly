@@ -20,7 +20,7 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { popupState } from '@auxiliary/popup'
     import features from '@features/features'
-    import { closeDrawer } from '@desktop/auxilary/drawer'
+    import { closeDrawer } from '@desktop/auxiliary/drawer'
 
     let isBackButtonVisible = false
 
