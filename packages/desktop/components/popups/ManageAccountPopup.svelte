@@ -1,7 +1,8 @@
 <script lang="ts">
     import { closePopup } from '@auxiliary/popup'
-    import { selectedAccount, updateSelectedAccountPersistedData, validateAccountName } from '@core/account'
+    import { selectedAccount, validateAccountName } from '@core/account'
     import { localize } from '@core/i18n'
+    import { updateActiveAccountPersistedData } from '@core/profile/actions'
     import { getTrimmedLength } from '@core/utils'
     import { Button, ColorPicker, Input, Text, TextType } from '@ui'
 
@@ -38,7 +39,7 @@
     function saveAccountPersistedData(): void {
         try {
             if (trimmedAccountAlias || color) {
-                updateSelectedAccountPersistedData($selectedAccount?.index, { name: trimmedAccountAlias, color })
+                updateActiveAccountPersistedData($selectedAccount?.index, { name: trimmedAccountAlias, color })
                 closePopup()
             }
         } finally {

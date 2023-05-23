@@ -8,10 +8,10 @@
         selectedProposal,
         selectedProposalId,
     } from '@contexts/governance/stores'
-    import { updateSelectedAccountPersistedData } from '@core/account'
     import { selectedAccount } from '@core/account/stores'
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
+    import { updateActiveAccountPersistedData } from '@core/profile/actions'
     import { governanceRouter } from '@core/router'
     import { Button, Text, TextHint, TextType } from 'shared/components'
     import { ButtonVariant } from 'shared/components/enums'
@@ -23,7 +23,7 @@
     async function onConfirmClick(): Promise<void> {
         try {
             await $selectedAccount.deregisterParticipationEvent($selectedProposalId)
-            updateSelectedAccountPersistedData($selectedAccount.index, {
+            updateActiveAccountPersistedData($selectedAccount.index, {
                 removedProposalIds: [...($selectedAccount.removedProposalIds ?? []), $selectedProposalId],
             })
             $governanceRouter.previous()

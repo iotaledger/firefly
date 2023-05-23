@@ -2,8 +2,9 @@ import { PopupId } from '@auxiliary/popup'
 import { closePopup, openPopup } from '@auxiliary/popup/actions'
 import { updateParticipationOverview } from '@contexts/governance/stores'
 import { isAccountVoting } from '@contexts/governance/utils/isAccountVoting'
-import { syncVotingPower, updateSelectedAccountPersistedData } from '@core/account'
+import { syncVotingPower } from '@core/account'
 import { updateNftInAllAccountNfts } from '@core/nfts'
+import { updateActiveAccountPersistedData } from '@core/profile/actions'
 import { activeAccounts, updateActiveAccount } from '@core/profile/stores'
 import { ActivityAction, ActivityDirection, ActivityType, GovernanceActivity, InclusionState } from '@core/wallet'
 import { updateClaimingTransactionInclusion } from '@core/wallet/actions/activities/updateClaimingTransactionInclusion'
@@ -66,12 +67,12 @@ function handleGovernanceTransactionInclusionEvent(
         if (account.hasVotingPowerTransactionInProgress) {
             updateActiveAccount(accountIndex, { hasVotingPowerTransactionInProgress: false })
             if (isAccountVoting(accountIndex) && activity.votingPower !== 0) {
-                updateSelectedAccountPersistedData(accountIndex, { shouldRevote: true })
+                updateActiveAccountPersistedData(accountIndex, { shouldRevote: true })
                 openPopup({ id: PopupId.Revote })
             }
         } else {
             updateActiveAccount(accountIndex, { hasVotingTransactionInProgress: false })
-            updateSelectedAccountPersistedData(accountIndex, { shouldRevote: false })
+            updateActiveAccountPersistedData(accountIndex, { shouldRevote: false })
         }
         void updateParticipationOverview(accountIndex)
     }
