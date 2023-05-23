@@ -1,6 +1,6 @@
+import { Platform } from '@core/app/classes'
 import { activeAccounts, updateActiveAccount } from '@core/profile'
 import { get } from 'svelte/store'
-import { Platform } from '@core/app/classes'
 
 export function registerLayer2EventHandlers(): void {
     Platform.onEvent('evm-address', ({ evmAddress, coinType, accountIndex }) => {

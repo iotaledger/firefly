@@ -5,9 +5,6 @@ import { IAccount } from './account.interface'
 export interface IAccountState extends IAccount, IPersistedAccountData {
     index: number
     depositAddress: string
-    evmAddresses: {
-        [coinType: number]: string | undefined
-    }
     balances: AccountBalance
     isTransferring: boolean
     hasVotingPowerTransactionInProgress: boolean

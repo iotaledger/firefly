@@ -1,7 +1,5 @@
 <script lang="ts">
-    import { Button, Text, TextType, TextHint } from 'shared/components'
-    import { ButtonVariant } from 'shared/components/enums'
-    import { handleError } from '@core/error/handlers'
+    import { showAppNotification } from '@auxiliary/notification'
     import { ProposalStatus } from '@contexts/governance/enums'
     import {
         clearSelectedParticipationEventStatus,
@@ -9,12 +7,14 @@
         selectedProposal,
         selectedProposalId,
     } from '@contexts/governance/stores'
-    import { localize } from '@core/i18n'
-    import { governanceRouter } from '@core/router'
     import { closePopup } from '@desktop/auxiliary/popup'
-    import { showAppNotification } from '@auxiliary/notification'
     import { selectedAccount } from '@core/account/stores'
-    import { updateActiveAccountMetadata } from '@core/profile'
+    import { handleError } from '@core/error/handlers'
+    import { localize } from '@core/i18n'
+    import { updateActiveAccountPersistedData } from '@core/profile/actions'
+    import { governanceRouter } from '@core/router'
+    import { Button, Text, TextHint, TextType } from 'shared/components'
+    import { ButtonVariant } from 'shared/components/enums'
 
     function onCancelClick(): void {
         closePopup()
@@ -23,7 +23,7 @@
     async function onConfirmClick(): Promise<void> {
         try {
             await $selectedAccount.deregisterParticipationEvent($selectedProposalId)
-            updateActiveAccountMetadata($selectedAccount.index, {
+            updateActiveAccountPersistedData($selectedAccount.index, {
                 removedProposalIds: [...($selectedAccount.removedProposalIds ?? []), $selectedProposalId],
             })
             $governanceRouter.previous()
