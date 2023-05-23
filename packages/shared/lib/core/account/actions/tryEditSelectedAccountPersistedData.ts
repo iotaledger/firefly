@@ -15,8 +15,8 @@ export async function tryEditSelectedAccountPersistedData(
         const _selectedAccount = get(selectedAccount)
         if (_selectedAccount) {
             updateActiveAccountPersistedData(_selectedAccount.index, partialAccountPersistedData)
+            updateSelectedAccount(partialAccountPersistedData)
         }
-        updateSelectedAccount(partialAccountPersistedData)
     } catch (err) {
         if (err) {
             console.error(err?.error || err)
