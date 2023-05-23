@@ -1,1 +1,2 @@
-export * from './isc-sandbox-abi'
+export * from './erc20.abi'
+export * from './isc-sandbox.abi'

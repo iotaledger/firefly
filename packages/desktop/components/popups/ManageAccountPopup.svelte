@@ -1,9 +1,10 @@
 <script lang="ts">
-    import { Button, ColorPicker, Input, Text, TextType } from '@ui'
-    import { selectedAccount, tryEditSelectedAccountMetadata, validateAccountName } from '@core/account'
-    import { localize } from '@core/i18n'
-    import { getTrimmedLength } from '@core/utils'
     import { closePopup } from '@auxiliary/popup'
+    import { selectedAccount, validateAccountName } from '@core/account'
+    import { localize } from '@core/i18n'
+    import { updateActiveAccountPersistedData } from '@core/profile/actions'
+    import { getTrimmedLength } from '@core/utils'
+    import { Button, ColorPicker, Input, Text, TextType } from '@ui'
 
     export let error = ''
 
@@ -27,7 +28,7 @@
             }
 
             isBusy = true
-            await saveAccountMetadata()
+            saveAccountPersistedData()
         }
     }
 
@@ -35,10 +36,10 @@
         closePopup()
     }
 
-    async function saveAccountMetadata(): Promise<void> {
+    function saveAccountPersistedData(): void {
         try {
             if (trimmedAccountAlias || color) {
-                await tryEditSelectedAccountMetadata({ name: trimmedAccountAlias, color })
+                updateActiveAccountPersistedData($selectedAccount?.index, { name: trimmedAccountAlias, color })
                 closePopup()
             }
         } finally {
