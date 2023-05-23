@@ -1,8 +1,9 @@
 <script lang="ts">
-    import { selectedAccount, updateSelectedAccountPersistedData } from '@core/account'
+    import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { loadEvmAddressForSelectedAccount } from '@core/layer-2'
     import { selectedChain } from '@core/network'
+    import { updateActiveAccountPersistedData } from '@core/profile/actions'
     import { Router } from '@core/router'
     import { DrawerRoute, NetworkConfigRoute, networkConfigRouter } from '@desktop/routers'
     import { Animation, Button, CopyableBox, FontWeight, Pane, Text, TextType } from '@ui'
@@ -33,7 +34,7 @@
         if (!continued) {
             const evmAddresses = $selectedAccount?.evmAddresses ?? {}
             delete evmAddresses[coinType]
-            updateSelectedAccountPersistedData($selectedAccount?.index, { evmAddresses })
+            updateActiveAccountPersistedData($selectedAccount?.index, { evmAddresses })
         }
     })
 </script>
