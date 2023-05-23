@@ -1,6 +1,6 @@
 import { get, writable } from 'svelte/store'
 
-import type { IAccountMetadata } from '@core/account/interfaces'
+import type { IPersistedAccountData } from '@core/account/interfaces'
 
 import { INITIAL_ACTIVE_PROFILE } from '../constants'
 import type { IProfile, IProfileSettings } from '../interfaces'
@@ -22,23 +22,35 @@ export function updateActiveProfileSettings(payload: Partial<IProfileSettings>):
     }))
 }
 
-export function addAccountMetadataToActiveProfile(metadata: IAccountMetadata): void {
-    activeProfile?.update((state) => ({
-        ...state,
-        accountMetadata: [...(state?.accountMetadata ?? []), metadata],
-    }))
+export function addAccountPersistedDataToActiveProfile(
+    accountIndex: number,
+    accountPersistedData: IPersistedAccountData
+): void {
+    activeProfile?.update((state) => {
+        if (!state?.accountPersistedData) {
+            state.accountPersistedData = {}
+        }
+        state.accountPersistedData[accountIndex] = accountPersistedData
+        return state
+    })
 }
 
-export function getAccountMetadataByIndex(index: number): IAccountMetadata {
-    const { accountMetadata } = get(activeProfile)
-    return accountMetadata.find((metadata) => metadata.index === index)
+export function getActiveProfilePersistedAccountData(accountIndex: number): IPersistedAccountData | undefined {
+    return get(activeProfile)?.accountPersistedData?.[accountIndex]
 }
 
-export function updateAccountMetadataOnActiveProfile(index: number, metadata: Partial<IAccountMetadata>): void {
-    activeProfile?.update((state) => ({
-        ...state,
-        accountMetadata: state?.accountMetadata.map((existingValue) =>
-            existingValue.index === index ? { ...existingValue, ...metadata } : existingValue
-        ),
-    }))
+export function updateAccountPersistedDataOnActiveProfile(
+    accountIndex: number,
+    partialAccountPersistedData: Partial<IPersistedAccountData>
+): void {
+    activeProfile?.update((state) => {
+        if (!state?.accountPersistedData) {
+            state.accountPersistedData = {}
+        }
+        state.accountPersistedData[accountIndex] = {
+            ...state?.accountPersistedData?.[accountIndex],
+            ...partialAccountPersistedData,
+        }
+        return state
+    })
 }
