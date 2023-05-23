@@ -1,5 +1,5 @@
 import { selectedAccount } from '@core/account'
-import { evmAddressToAgentID, getAgentBalanceParameters, getSmartContractHexName, ISC_SANDBOX_ABI } from '@core/layer-2'
+import { ContractType, evmAddressToAgentID, getAgentBalanceParameters, getSmartContractHexName } from '@core/layer-2'
 import { network } from '@core/network'
 import { TOKEN_ID_BYTE_LENGTH } from '@core/token'
 import { Converter } from '@iota/util.js'
@@ -33,8 +33,7 @@ async function getSelectedAccountWrappedNativeTokensForAddress(
         const parameters = getAgentBalanceParameters(agentID)
         const nativeTokensPromises = chains?.map(async (chain) => {
             try {
-                const provider = chain.getProvider()
-                const contract = new provider.eth.Contract(ISC_SANDBOX_ABI, ISC_MAGIC_CONTRACT_ADDRESS)
+                const contract = chain.getContract(ContractType.IscMagic, ISC_MAGIC_CONTRACT_ADDRESS)
                 const nativeTokenResult = await contract.methods
                     .callView(accountsCoreContract, getBalanceFunc, parameters)
                     .call()

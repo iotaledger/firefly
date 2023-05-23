@@ -31,19 +31,19 @@
 </script>
 
 {#if $networkConfigRoute === NetworkConfigRoute.ConnectedChains}
-    <ConnectedChainsDrawer />
+    <ConnectedChainsDrawer {drawerRouter} />
 {:else if $networkConfigRoute === NetworkConfigRoute.ChainInformation}
-    <ChainInformationDrawer />
+    <ChainInformationDrawer {drawerRouter} />
 {:else if $networkConfigRoute === NetworkConfigRoute.EditChain}
-    <EditChainDrawer />
+    <EditChainDrawer {drawerRouter} />
 {:else if $networkConfigRoute === NetworkConfigRoute.RemoveChain}
-    <RemoveChainDrawer />
+    <RemoveChainDrawer {drawerRouter} />
 {:else if $networkConfigRoute === NetworkConfigRoute.ChainDepositAddress}
-    <ChainDepositAddressDrawer />
+    <ChainDepositAddressDrawer {drawerRouter} />
 {:else if $networkConfigRoute === NetworkConfigRoute.ConnectLedgerDevice}
-    <ConnectLedgerDeviceDrawer />
+    <ConnectLedgerDeviceDrawer {drawerRouter} />
 {:else if $networkConfigRoute === NetworkConfigRoute.ConfirmLedgerEvmAddress}
-    <ConfirmLedgerEvmAddressDrawer />
+    <ConfirmLedgerEvmAddressDrawer {drawerRouter} />
 {:else if $networkConfigRoute === NetworkConfigRoute.AddChain}
-    <AddChainDrawer />
+    <AddChainDrawer {drawerRouter} />
 {/if}

@@ -2,9 +2,13 @@ import { AccountBalance } from '@iota/wallet'
 
 import { getDepositAddress } from '@core/account/utils'
 
-import { IAccount, IAccountMetadata, IAccountState } from '../interfaces'
+import { IAccount, IAccountState, IPersistedAccountData } from '../interfaces'
 
-export async function buildAccountState(account: IAccount, metadata: IAccountMetadata): Promise<IAccountState> {
+export async function buildAccountState(
+    accountIndex: number,
+    account: IAccount,
+    accountPersistedData: IPersistedAccountData
+): Promise<IAccountState> {
     let balances: AccountBalance = {
         baseCoin: {
             total: '0',
@@ -34,8 +38,9 @@ export async function buildAccountState(account: IAccount, metadata: IAccountMet
     }
 
     return {
+        index: accountIndex,
         ...account,
-        ...metadata,
+        ...accountPersistedData,
         depositAddress,
         evmAddresses: {},
         balances,

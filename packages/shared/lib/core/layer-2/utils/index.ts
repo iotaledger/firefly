@@ -1,5 +1,6 @@
 export * from './addGasBudget'
 export * from './evmAddressToAgentID'
+export * from './getAbiForContractType'
 export * from './getAgentBalanceParameters'
 export * from './getDestinationNetworkFromAddress'
 export * from './getLayer2MetadataForTransfer'
