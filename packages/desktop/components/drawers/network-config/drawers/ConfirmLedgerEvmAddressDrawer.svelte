@@ -43,18 +43,18 @@
         <div class="flex flex-col self-center">
             <Animation animation="ledger-prompt-confirmed-desktop" />
             {#if address}
-                <Text type={TextType.h4}
-                    >{localize('views.dashboard.drawers.networkConfig.confirmLedgerEvmAddress.header')}</Text
-                >
+                <Text type={TextType.h4}>
+                    {localize('views.dashboard.drawers.networkConfig.confirmLedgerEvmAddress.header')}
+                </Text>
                 <Pane classes="mt-6">
-                    <CopyableBox value={address ?? '---'} classes="bg-transparent w-full">
+                    <CopyableBox value={address} classes="bg-transparent w-full">
                         <div class="w-full text-left">
-                            <Text fontWeight={FontWeight.medium} fontSize="13" color="gray-600"
-                                >{localize('general.evmAddress')}</Text
-                            >
+                            <Text fontWeight={FontWeight.medium} fontSize="13" color="gray-600">
+                                {localize('general.evmAddress')}
+                            </Text>
                             <Text type={TextType.pre} fontWeight={FontWeight.medium} fontSize="15" classes="break-words"
-                                >{address ?? '---'}</Text
-                            >
+                                >{address}
+                            </Text>
                         </div>
                     </CopyableBox>
                 </Pane>
