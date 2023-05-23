@@ -3,8 +3,7 @@ name: Desktop Build Test
 on:
   schedule:
     # 12:00AM Sunday
-    # - cron: '0 0 * * SUN'
-    - cron: '27 01 * * MON'
+    - cron: '0 0 * * SUN'
 
 jobs:
   setup:
