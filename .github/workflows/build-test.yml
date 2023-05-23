@@ -4,7 +4,7 @@ on:
   schedule:
     # 12:00AM Sunday
     # - cron: '0 0 * * SUN'
-    - cron: '30 01 * * MON'
+    - cron: '27 01 * * MON'
 
 jobs:
   setup:
