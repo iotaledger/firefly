@@ -307,26 +307,33 @@ function createWindow() {
 
 app.whenReady().then(createWindow)
 
-const ledgerProcess = utilityProcess.fork(paths.ledger)
+let ledgerProcess
+ipcMain.on('start-ledger-process', () => {
+    ledgerProcess = utilityProcess.fork(paths.ledger)
 
-ledgerProcess.on('spawn', () => {
-    ledgerProcess.on('message', (message) => {
-        const { error, data } = message
-        if (error) {
-            windows.main.webContents.send('ledger-error', error)
-        } else {
-            if (data?.evmAddress) {
-                windows.main.webContents.send('evm-address', data)
+    ledgerProcess.on('spawn', () => {
+        ledgerProcess.on('message', (message) => {
+            const { error, data } = message
+            if (error) {
+                windows.main.webContents.send('ledger-error', error)
             } else {
-                /* eslint-disable-next-line no-console */
-                console.log('Unhandled Ledger Message: ', message)
+                if (data?.evmAddress) {
+                    windows.main.webContents.send('evm-address', data)
+                } else {
+                    /* eslint-disable-next-line no-console */
+                    console.log('Unhandled Ledger Message: ', message)
+                }
             }
-        }
+        })
     })
 })
 
+ipcMain.on('kill-ledger-process', () => {
+    ledgerProcess.kill()
+})
+
 ipcMain.on('generate-evm-address', (_e, coinType, accountIndex, verify) => {
-    ledgerProcess.postMessage({ method: 'generate-evm-address', parameters: [coinType, accountIndex, verify] })
+    ledgerProcess?.postMessage({ method: 'generate-evm-address', parameters: [coinType, accountIndex, verify] })
 })
 
 /**
