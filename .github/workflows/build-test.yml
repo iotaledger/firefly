@@ -2,8 +2,8 @@ name: Desktop Build Test
 
 on:
   schedule:
-    # 12:00AM Sunday
-    - cron: '0 0 * * SUN'
+    # 12:00AM (UTC) Sunday TODO
+    - cron: '30 14 * * TUE'
 
 jobs:
   setup:
