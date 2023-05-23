@@ -1,16 +1,16 @@
 <script lang="ts">
-    import type { Auth } from '@iota/wallet'
-    import { Button, NodeInput, TextInput, Text, TextType, Checkbox } from 'shared/components'
-    import { HTMLButtonType } from 'shared/components/enums'
+    import { showAppNotification } from '@auxiliary/notification/actions'
+    import { PopupId } from '@auxiliary/popup'
+    import { closePopup, openPopup } from '@auxiliary/popup/actions'
+    import { registerProposalsForAccounts, registeredProposalsForSelectedAccount } from '@contexts/governance'
+    import { selectedAccount } from '@core/account'
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
-    import { showAppNotification } from '@auxiliary/notification/actions'
-    import { closePopup, openPopup } from '@auxiliary/popup/actions'
+    import { activeAccounts, updateActiveAccountPersistedData } from '@core/profile'
     import { truncateString } from '@core/utils/string'
-    import { registeredProposalsForSelectedAccount, registerProposalsForAccounts } from '@contexts/governance'
-    import { activeAccounts } from '@core/profile'
-    import { selectedAccount, updateSelectedAccountPersistedData } from '@core/account'
-    import { PopupId } from '@auxiliary/popup'
+    import type { Auth } from '@iota/wallet'
+    import { Button, Checkbox, NodeInput, Text, TextInput, TextType } from 'shared/components'
+    import { HTMLButtonType } from 'shared/components/enums'
 
     export let initialEventId: string
     export let initialNodeUrl: string
@@ -40,7 +40,7 @@
                 nodeInput?.validate(),
             ])
             await registerParticipationWrapper()
-            updateSelectedAccountPersistedData($selectedAccount.index, {
+            updateActiveAccountPersistedData($selectedAccount.index, {
                 removedProposalIds: $selectedAccount.removedProposalIds?.filter((id) => id !== inputtedEventId),
             })
             isBusy = false

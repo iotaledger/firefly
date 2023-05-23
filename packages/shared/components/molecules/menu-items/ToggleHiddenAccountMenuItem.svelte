@@ -1,7 +1,8 @@
 <script lang="ts">
-    import { selectedAccount, setNextSelectedAccount, updateSelectedAccountPersistedData } from '@core/account'
+    import { selectedAccount, setNextSelectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { activeProfile, nonHiddenActiveAccounts } from '@core/profile'
+    import { updateActiveAccountPersistedData } from '@core/profile/actions'
     import { Icon } from '@lib/auxiliary/icon'
     import { MenuItem } from '@ui'
 
@@ -9,7 +10,7 @@
 
     function onShowAccountClick(): void {
         if ($selectedAccount) {
-            updateSelectedAccountPersistedData($selectedAccount.index, { hidden: false })
+            updateActiveAccountPersistedData($selectedAccount.index, { hidden: false })
             onClick && onClick()
         }
     }
@@ -17,7 +18,7 @@
     function onHideAccountClick(): void {
         if ($nonHiddenActiveAccounts.length > 1) {
             if ($selectedAccount) {
-                updateSelectedAccountPersistedData($selectedAccount.index, { hidden: true })
+                updateActiveAccountPersistedData($selectedAccount.index, { hidden: true })
                 if (!$activeProfile.showHiddenAccounts) {
                     setNextSelectedAccount()
                 }
