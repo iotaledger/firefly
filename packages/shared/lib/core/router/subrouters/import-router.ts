@@ -84,7 +84,6 @@ export class ImportRouter extends Subrouter<ImportRoute> {
                         get(appRouter).next({
                             importType: get(this.importType),
                             strongholdUpdateRequired: true,
-                            isRecovery: true,
                         })
                     } else {
                         nextRoute = ImportRoute.BackupPassword
