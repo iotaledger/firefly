@@ -59,14 +59,22 @@ export function updateAccountPersistedDataOnActiveProfile(
 export function addEvmAddressToActiveProfileAccount(cointype: number, evmAddress: string, accountIndex: number): void {
     activeProfile?.update((state) => {
         const accountPersistedData = state.accountPersistedData ?? {}
-        const accountPersistedDataForAccountIndex = accountPersistedData[accountIndex] ?? {}
+        if (!accountPersistedData) {
+            return state
+        }
+
+        const accountPersistedDataForAccountIndex = accountPersistedData[accountIndex]
+        if (!accountPersistedDataForAccountIndex) {
+            return state
+        }
+
         const evmAddresses = accountPersistedDataForAccountIndex.evmAddresses ?? {}
 
         evmAddresses[cointype] = evmAddress
         accountPersistedDataForAccountIndex.evmAddresses = evmAddresses
         accountPersistedData[accountIndex] = accountPersistedDataForAccountIndex
-
         state.accountPersistedData = accountPersistedData
+
         return state
     })
 }
