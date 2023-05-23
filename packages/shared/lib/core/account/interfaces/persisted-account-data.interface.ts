@@ -1,6 +1,6 @@
 import type { ParticipationEventId } from '@iota/wallet'
 
-export interface IAccountPersistedData {
+export interface IPersistedAccountData {
     name: string
     color: string
     hidden: boolean

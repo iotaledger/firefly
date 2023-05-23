@@ -29,10 +29,12 @@
     }
 </script>
 
-<MenuItem
-    icon={$selectedAccount?.hidden ? Icon.View : Icon.Hide}
-    title={localize($selectedAccount?.hidden ? 'actions.showAccount' : 'actions.hideAccount')}
-    onClick={() => ($selectedAccount?.hidden ? onShowAccountClick() : onHideAccountClick())}
-    disabled={!$selectedAccount?.hidden && $nonHiddenActiveAccounts.length <= 1}
-    {...$$restProps}
-/>
+{#if $selectedAccount}
+    <MenuItem
+        icon={$selectedAccount.hidden ? Icon.View : Icon.Hide}
+        title={localize($selectedAccount.hidden ? 'actions.showAccount' : 'actions.hideAccount')}
+        onClick={() => ($selectedAccount.hidden ? onShowAccountClick() : onHideAccountClick())}
+        disabled={!$selectedAccount.hidden && $nonHiddenActiveAccounts.length <= 1}
+        {...$$restProps}
+    />
+{/if}
