@@ -8,6 +8,7 @@
 
     export let locale: Locale
     export let currentPassword: string = undefined
+    export let next: (...args) => Promise<void>
 
     $: bodyText = currentPassword
         ? localize('views.updateStronghold.update.body1')
@@ -31,10 +32,10 @@
         tabFormWithEnterKey(e, document, 'update-stronghold-form')
     }
 
-    function handleContinueClick() {
+    async function handleContinueClick() {
         busy = true
         $strongholdPassword = currentPassword ?? password
-        dispatch('next')
+        await next()
         busy = false
     }
     function handleBackClick() {

@@ -19,7 +19,7 @@
         updateStrongholdRouter = new UpdateStrongholdRouter()
     })
 
-    const next = (event: CustomEvent<any>): void => {
+    const next = async (event: CustomEvent<any>): Promise<void> => {
         const eventDetail = event?.detail
         if (eventDetail?.password) {
             if ($updateStrongholdRoute === UpdateStrongholdRoute.ChangePassword) {
@@ -28,14 +28,14 @@
             currentPassword = eventDetail?.password
         }
         allowBackButton.set(false)
-        updateStrongholdRouter.next({ isRecovery })
+        await updateStrongholdRouter.next({ isRecovery })
     }
     const previous = (): void => updateStrongholdRouter.previous()
 </script>
 
 {#if $updateStrongholdRoute === UpdateStrongholdRoute.Update}
     <Transition>
-        <Update {currentPassword} on:next={next} on:previous={previous} {locale} />
+        <Update {currentPassword} {next} on:previous={previous} {locale} />
     </Transition>
 {:else if $updateStrongholdRoute === UpdateStrongholdRoute.ChangePassword}
     <Transition>
