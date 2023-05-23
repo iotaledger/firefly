@@ -14,7 +14,6 @@ export async function buildAccountStateAndPersistedData(
         color: color || getRandomAccountColor(),
         hidden: false,
         shouldRevote: false,
-        evmAddresses: {},
     }
     const accountState = await buildAccountState(index, account, persistedAccountData)
     return [index, accountState, persistedAccountData]
