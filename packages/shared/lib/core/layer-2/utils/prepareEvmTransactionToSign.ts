@@ -6,7 +6,7 @@ import { Ledger } from '@core/ledger/classes'
 import { EvmTransactionOptions } from '../types'
 // import { prepareErc20EvmTransactionData } from './prepareErc20EvmTransactionData'
 
-export async function prepareEvmTransactionToSign(options: EvmTransactionOptions): Promise<void> {
+export function prepareEvmTransactionToSign(options: EvmTransactionOptions): void {
     const coinType = 60
     const accountIndex = get(selectedAccountIndex)
     // const transactionData = await prepareErc20EvmTransactionData(options)
@@ -19,5 +19,5 @@ export async function prepareEvmTransactionToSign(options: EvmTransactionOptions
         value: '0x0',
         data: '0xa9059cbb0000000000000000000000001bf171563b2642bb6e93081a7a1f2e6b16a54c930000000000000000000000000000000000000000000000000de0b6b3a7640000',
     }
-    await Ledger.signEvmTransaction(fakeTransactionData, coinType, accountIndex)
+    Ledger.signEvmTransaction(fakeTransactionData, coinType, accountIndex)
 }

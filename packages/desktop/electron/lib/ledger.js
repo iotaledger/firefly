@@ -10,13 +10,17 @@ const TransportNodeHid = require('@ledgerhq/hw-transport-node-hid').default
 const AppEth = require('@ledgerhq/hw-app-eth').default
 const { listen } = require('@ledgerhq/logs')
 
-const { Chain, Common } = require('@ethereumjs/common')
-const { Transaction, TxData } = require('@ethereumjs/tx')
+const { Common } = require('@ethereumjs/common')
 const { RLP } = require('@ethereumjs/rlp')
+const { Transaction } = require('@ethereumjs/tx')
 const { bufArrToArr } = require('@ethereumjs/util')
+
+let transport
 
 process.parentPort.on('message', async (message) => {
     try {
+        await openTransport()
+
         let data
         switch (message.data.method) {
             case 'generate-evm-address': {
@@ -30,21 +34,34 @@ process.parentPort.on('message', async (message) => {
             default:
                 break
         }
+
+        await closeTransport()
+
         process.parentPort.postMessage({ data })
     } catch (error) {
         process.parentPort.postMessage({ error })
     }
 })
 
+async function openTransport() {
+    if (!transport) {
+        transport = await TransportNodeHid.open('')
+        listen((log) => {
+            process.parentPort.postMessage({ data: log })
+        })
+    }
+}
+
+async function closeTransport() {
+    if (transport) {
+        await transport.close()
+        transport = undefined
+    }
+}
+
 async function getEvmAddress(coinType, accountIndex, verify) {
-    const transport = await TransportNodeHid.open('')
-    listen((log) => {
-        process.parentPort.postMessage({ data: log })
-    })
     const appEth = new AppEth(transport)
     const data = await appEth.getAddress(buildBip32Path(coinType, accountIndex))
-
-    await transport.close()
 
     return { evmAddress: data.address, coinType, accountIndex }
 }
@@ -54,10 +71,6 @@ function buildBip32Path(coinType, accountIndex) {
 }
 
 async function signTransactionData(data, coinType, accountIndex) {
-    const transport = await TransportNodeHid.open('')
-    listen((log) => {
-        process.parentPort.postMessage({ data: log })
-    })
     const appEth = new AppEth(transport)
 
     const common = new Common({ chain: 11155111 })
@@ -80,8 +93,6 @@ async function signTransactionData(data, coinType, accountIndex) {
     )
     const serializedSignedTransaction = Buffer.from(RLP.encode(bufArrToArr(signedTransactionObject.raw())))
     const serializedSignedTransactionString = '0x' + serializedSignedTransaction.toString('hex')
-
-    // await transport.close()
 
     return { signedTransaction: serializedSignedTransactionString }
 }

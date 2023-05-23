@@ -8,9 +8,9 @@
     "devDependencies": {
         "@babel/eslint-parser": "^7.15.0",
         "@iota/types": "^1.0.0-beta.9",
-        "@types/node": "^18.15.11",
         "@typescript-eslint/eslint-plugin": "^5.58.0",
         "@typescript-eslint/parser": "^5.57.1",
+        "@types/node": "^18.15.11",
         "eslint": "^8.37.0",
         "eslint-plugin-security": "^1.4.0",
         "eslint-plugin-svelte3": "^3.4.1",
@@ -59,11 +59,5 @@
     "lint-staged": {
         "*.{ts,js,svelte}": "eslint --cache --fix",
         "*.{ts,js,json,scss,css,svelte}": "prettier --write"
-    },
-    "dependencies": {
-        "@ethereumjs/common": "^3.1.2",
-        "@ethereumjs/rlp": "^4.0.1",
-        "@ethereumjs/tx": "^4.1.2",
-        "@ethereumjs/util": "^8.0.6"
     }
 }

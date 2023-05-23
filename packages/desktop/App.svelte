@@ -43,7 +43,7 @@
     import { closeDrawer } from '@desktop/auxilary/drawer'
     import features from '@features/features'
     import { OnboardingRouterView } from '@views/onboarding'
-    import { registerLedgerDeviceEventHandlers, registerLayer2EventHandlers } from '@core/ledger'
+    import { registerLedgerDeviceEventHandlers } from '@core/ledger'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -152,7 +152,6 @@
         Platform.onEvent('deep-link-request', showDeepLinkNotification)
 
         registerLedgerDeviceEventHandlers()
-        registerLayer2EventHandlers()
 
         const platform = await Platform.getOS()
         setPlatform(platform)
