@@ -42,23 +42,20 @@
     }
 
     function validate(): boolean {
-        validateTokenAddress()
-
+        tokenAddressError = validateTokenAddress()
         return !tokenAddressError
     }
 
-    function validateTokenAddress(): void {
+    function validateTokenAddress(): string {
         const hasHexPrefix = tokenAddress?.startsWith(HEXADECIMAL_PREFIX)
         const isValidHex = HEXADECIMAL_REGEXP.test(tokenAddress)
         if (!hasHexPrefix || !isValidHex) {
-            tokenAddressError = localize('error.erc20Token.invalidAddressFormat')
-            return
+            return localize('error.erc20Token.invalidAddressFormat')
         }
 
         const addressLength = tokenAddress?.substring(2)?.length
         if (addressLength !== ERC20_TOKEN_ADDRESS_LENGTH) {
-            tokenAddressError = localize('error.erc20Token.invalidAddressLength')
-            return
+            return localize('error.erc20Token.invalidAddressLength')
         }
     }
 </script>
