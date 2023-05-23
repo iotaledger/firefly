@@ -2,7 +2,7 @@ import { IPersistedAccountData, selectedAccountIndex, updateSelectedAccount } fr
 import { updateAccountPersistedDataOnActiveProfile } from '@core/profile'
 import { get } from 'svelte/store'
 
-export function updateActiveAccountPersistedData(
+export function updateSelectedAccountPersistedData(
     acccountIndex: number,
     partialAccountPersistedData: Partial<IPersistedAccountData>
 ): void {

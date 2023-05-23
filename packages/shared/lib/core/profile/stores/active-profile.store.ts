@@ -56,7 +56,7 @@ export function updateAccountPersistedDataOnActiveProfile(
     })
 }
 
-export function getActiveProfileEvmAddressesByAccountIndex(accountIndex: number): IEvmAddresses {
+export function getActiveProfilePersistedEvmAddressesByAccountIndex(accountIndex: number): IEvmAddresses {
     const accountPersistedData = getActiveProfilePersistedAccountData(accountIndex)
     return accountPersistedData?.evmAddresses ?? {}
 }
