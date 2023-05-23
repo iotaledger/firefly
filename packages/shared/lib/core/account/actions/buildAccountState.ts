@@ -6,7 +6,6 @@ import { getActiveProfilePersistedEvmAddressesByAccountIndex } from '@core/profi
 import { IAccount, IAccountState, IPersistedAccountData } from '../interfaces'
 
 export async function buildAccountState(
-    accountIndex: number,
     account: IAccount,
     accountPersistedData: IPersistedAccountData
 ): Promise<IAccountState> {
@@ -28,6 +27,7 @@ export async function buildAccountState(
         potentiallyLockedOutputs: {},
         aliases: [],
     }
+    const accountIndex = account.getMetadata().index
     const evmAddresses = getActiveProfilePersistedEvmAddressesByAccountIndex(accountIndex)
     let depositAddress = ''
     let votingPower = ''

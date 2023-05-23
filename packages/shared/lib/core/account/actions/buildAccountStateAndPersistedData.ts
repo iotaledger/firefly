@@ -7,7 +7,7 @@ export async function buildAccountStateAndPersistedData(
     account: IAccount,
     name?: string,
     color?: string
-): Promise<[number, IAccountState, IPersistedAccountData]> {
+): Promise<[IAccountState, IPersistedAccountData]> {
     const { index } = account.getMetadata()
     const persistedAccountData: IPersistedAccountData = {
         name: name || `${localize('general.account')} ${index + 1}`,
@@ -16,6 +16,6 @@ export async function buildAccountStateAndPersistedData(
         shouldRevote: false,
         evmAddresses: {},
     }
-    const accountState = await buildAccountState(index, account, persistedAccountData)
-    return [index, accountState, persistedAccountData]
+    const accountState = await buildAccountState(account, persistedAccountData)
+    return [accountState, persistedAccountData]
 }
