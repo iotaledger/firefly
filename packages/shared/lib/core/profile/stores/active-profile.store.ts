@@ -1,6 +1,6 @@
 import { get, writable } from 'svelte/store'
 
-import type { IAccountPersistedData } from '@core/account/interfaces'
+import type { IPersistedAccountData } from '@core/account/interfaces'
 import { IEvmAddresses } from '@core/network/interfaces'
 
 import { INITIAL_ACTIVE_PROFILE } from '../constants'
@@ -25,7 +25,7 @@ export function updateActiveProfileSettings(payload: Partial<IProfileSettings>):
 
 export function addAccountPersistedDataToActiveProfile(
     accountIndex: number,
-    accountPersistedData: IAccountPersistedData
+    accountPersistedData: IPersistedAccountData
 ): void {
     activeProfile?.update((state) => {
         if (!state?.accountPersistedData) {
@@ -36,13 +36,13 @@ export function addAccountPersistedDataToActiveProfile(
     })
 }
 
-export function getActiveProfilePersistedAccountData(accountIndex: number): IAccountPersistedData | undefined {
+export function getActiveProfilePersistedAccountData(accountIndex: number): IPersistedAccountData | undefined {
     return get(activeProfile)?.accountPersistedData?.[accountIndex]
 }
 
 export function updateAccountPersistedDataOnActiveProfile(
     accountIndex: number,
-    partialAccountPersistedData: Partial<IAccountPersistedData>
+    partialAccountPersistedData: Partial<IPersistedAccountData>
 ): void {
     activeProfile?.update((state) => {
         if (!state?.accountPersistedData) {

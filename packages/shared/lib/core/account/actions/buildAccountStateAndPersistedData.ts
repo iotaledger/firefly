@@ -1,20 +1,20 @@
-import { getRandomAccountColor } from '../utils'
-import { IAccount, IAccountPersistedData, IAccountState } from '../interfaces'
-import { buildAccountState } from './buildAccountState'
 import { localize } from '@core/i18n'
+import { IAccount, IAccountState, IPersistedAccountData } from '../interfaces'
+import { getRandomAccountColor } from '../utils'
+import { buildAccountState } from './buildAccountState'
 
 export async function buildAccountStateAndPersistedData(
     account: IAccount,
     name?: string,
     color?: string
-): Promise<[number, IAccountState, IAccountPersistedData]> {
+): Promise<[number, IAccountState, IPersistedAccountData]> {
     const { index } = account.getMetadata()
-    const accountPersistedData: IAccountPersistedData = {
+    const persistedAccountData: IPersistedAccountData = {
         name: name || `${localize('general.account')} ${index + 1}`,
         color: color || getRandomAccountColor(),
         hidden: false,
         shouldRevote: false,
     }
-    const accountState = await buildAccountState(index, account, accountPersistedData)
-    return [index, accountState, accountPersistedData]
+    const accountState = await buildAccountState(index, account, persistedAccountData)
+    return [index, accountState, persistedAccountData]
 }

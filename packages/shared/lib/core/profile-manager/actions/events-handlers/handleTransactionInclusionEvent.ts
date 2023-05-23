@@ -61,7 +61,10 @@ function handleGovernanceTransactionInclusionEvent(
         closePopup(true)
 
         const account = get(activeAccounts)?.find((_account) => _account.index === accountIndex)
-        if (account?.hasVotingPowerTransactionInProgress) {
+        if (!account) {
+            return
+        }
+        if (account.hasVotingPowerTransactionInProgress) {
             updateActiveAccount(accountIndex, { hasVotingPowerTransactionInProgress: false })
             if (isAccountVoting(accountIndex) && activity.votingPower !== 0) {
                 updateActiveAccountPersistedData(accountIndex, { shouldRevote: true })

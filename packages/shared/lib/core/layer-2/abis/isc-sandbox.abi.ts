@@ -1,6 +1,7 @@
 import { AbiType, StateMutabilityType } from '../enums'
+import { Abi } from '../types'
 
-export const ISC_SANDBOX_ABI = [
+export const ISC_SANDBOX_ABI: Abi = [
     {
         inputs: [
             { internalType: 'address', name: 'target', type: 'address' },

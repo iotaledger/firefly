@@ -1,7 +1,7 @@
 import { IEvmAddresses } from '@core/network/interfaces'
 import { ParticipationEventId } from '@iota/wallet/types'
 
-export interface IAccountPersistedData {
+export interface IPersistedAccountData {
     name: string
     color: string
     hidden: boolean
