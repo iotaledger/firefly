@@ -1,4 +1,4 @@
-import { IAccountPersistedData } from '@core/account/interfaces'
+import { IPersistedAccountData } from '@core/account/interfaces'
 import { COIN_TYPE, getDefaultPersistedNetwork, NetworkId } from '@core/network'
 import { INode, IPersistedNetwork } from '@core/network/interfaces'
 import { DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_SECONDS, DEFAULT_MAX_NFT_SIZE_IN_MEGABYTES } from '@core/nfts'
@@ -235,7 +235,7 @@ function persistedProfileMigrationToV12(existingProfile: IPersistedProfile): voi
 }
 
 function persistedProfileMigrationToV13(
-    existingProfile: IPersistedProfile & { accountMetadata: (IAccountPersistedData & { index: number })[] }
+    existingProfile: IPersistedProfile & { accountMetadata: (IPersistedAccountData & { index: number })[] }
 ): void {
     const newProfile = {}
     const keysToKeep = [

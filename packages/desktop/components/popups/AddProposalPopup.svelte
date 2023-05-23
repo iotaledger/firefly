@@ -8,8 +8,8 @@
     import { closePopup, openPopup } from '@auxiliary/popup/actions'
     import { truncateString } from '@core/utils/string'
     import { registeredProposalsForSelectedAccount, registerProposalsForAccounts } from '@contexts/governance'
-    import { activeAccounts, updateActiveAccountMetadata } from '@core/profile'
-    import { selectedAccount } from '@core/account'
+    import { activeAccounts } from '@core/profile'
+    import { selectedAccount, updateSelectedAccountPersistedData } from '@core/account'
     import { PopupId } from '@auxiliary/popup'
 
     export let initialEventId: string
@@ -40,7 +40,7 @@
                 nodeInput?.validate(),
             ])
             await registerParticipationWrapper()
-            updateActiveAccountMetadata($selectedAccount.index, {
+            updateSelectedAccountPersistedData($selectedAccount.index, {
                 removedProposalIds: $selectedAccount.removedProposalIds?.filter((id) => id !== inputtedEventId),
             })
             isBusy = false

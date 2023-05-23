@@ -1,4 +1,4 @@
-import { IAccountPersistedData } from '@core/account'
+import { IPersistedAccountData } from '@core/account'
 import { IClientOptions, IPersistedNetwork } from '@core/network'
 import { INft } from '@core/nfts'
 import { StrongholdVersion } from '@core/stronghold/enums'
@@ -13,7 +13,7 @@ export interface IPersistedProfile {
     lastStrongholdBackupTime: Date
     settings: IProfileSettings
     accountPersistedData: {
-        [accountId: string]: IAccountPersistedData
+        [accountId: string]: IPersistedAccountData
     }
     isDeveloperProfile: boolean
     hasVisitedDashboard?: boolean

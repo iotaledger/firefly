@@ -1,5 +1,5 @@
 import { Platform } from '@core/app/classes'
-import { activeAccounts, addEvmAddressToActiveProfileAccount, updateActiveAccount } from '@core/profile'
+import { activeAccounts, updateActiveAccount } from '@core/profile'
 import { get } from 'svelte/store'
 
 export function registerLayer2EventHandlers(): void {
@@ -11,6 +11,5 @@ export function registerLayer2EventHandlers(): void {
         evmAddresses[coinType] = evmAddress
 
         updateActiveAccount(accountIndex, { evmAddresses })
-        addEvmAddressToActiveProfileAccount(coinType, evmAddress, accountIndex)
     })
 }

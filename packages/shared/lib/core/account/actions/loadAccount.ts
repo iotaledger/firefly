@@ -11,9 +11,9 @@ export async function loadAccount(account: IAccount): Promise<IAccountState> {
     const accountPersistedData = getActiveProfilePersistedAccountData(accountIndex)
     let accountState: IAccountState
     if (accountPersistedData) {
-        accountState = await buildAccountState(accountIndex, account, accountPersistedData)
+        accountState = await buildAccountState(account, accountPersistedData)
     } else {
-        const [accountIndex, newAccountState, accountPersistedData] = await buildAccountStateAndPersistedData(account)
+        const [newAccountState, accountPersistedData] = await buildAccountStateAndPersistedData(account)
         addAccountPersistedDataToActiveProfile(accountIndex, accountPersistedData)
         accountState = newAccountState
     }
