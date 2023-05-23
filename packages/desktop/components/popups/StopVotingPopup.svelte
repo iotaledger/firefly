@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Button, Text, TextType, TextHint } from 'shared/components'
     import { ButtonVariant } from 'shared/components/enums'
-    import { closePopup } from '@auxiliary/popup/actions'
+    import { closePopup } from '@desktop/auxiliary/popup'
     import { stopVotingForProposal } from '@contexts/governance/actions'
     import { selectedProposal } from '@contexts/governance/stores'
     import { localize } from '@core/i18n'

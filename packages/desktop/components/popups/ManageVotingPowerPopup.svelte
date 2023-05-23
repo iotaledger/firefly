@@ -7,11 +7,9 @@
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { convertToRawAmount, visibleSelectedAccountAssets } from '@core/wallet'
-    import { closePopup, openPopup } from '@auxiliary/popup/actions'
-    import { popupState } from '@auxiliary/popup/stores'
+    import { closePopup, openPopup, PopupId, popupState } from '@desktop/auxiliary/popup'
     import { onMount } from 'svelte'
     import { isAccountVoting } from '@contexts/governance/utils'
-    import { PopupId } from '@auxiliary/popup'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let newVotingPower: string = undefined

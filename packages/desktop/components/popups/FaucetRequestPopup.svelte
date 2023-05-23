@@ -2,7 +2,7 @@
     import { requestTokensFromFaucet } from '@contexts/developer'
     import { localize } from '@core/i18n'
     import { nodeInfo } from '@core/network'
-    import { closePopup } from '@auxiliary/popup'
+    import { closePopup } from '@desktop/auxiliary/popup'
     import { Button, Error, Text, FontWeight, TextType } from 'shared/components'
     import { handleError } from '@core/error/handlers/handleError'
 

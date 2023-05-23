@@ -18,7 +18,7 @@
         settingsRouter,
     } from '@core/router'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { popupState } from '@auxiliary/popup'
+    import { popupState } from '@desktop/auxiliary/popup'
     import features from '@features/features'
     import { closeDrawer } from '@desktop/auxiliary/drawer'
 

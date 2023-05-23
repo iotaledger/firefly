@@ -11,7 +11,7 @@
         updateNewTransactionDetails,
         TokenStandard,
     } from '@core/wallet'
-    import { closePopup } from '@auxiliary/popup'
+    import { closePopup } from '@desktop/auxiliary/popup'
     import { get } from 'svelte/store'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { sendFlowRouter } from '../send-flow.router'

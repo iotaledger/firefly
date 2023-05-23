@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { closePopup } from '@auxiliary/popup'
+    import { closePopup } from '@desktop/auxiliary/popup'
     import { selectedAccount, validateAccountName } from '@core/account'
     import { localize } from '@core/i18n'
     import { updateActiveAccountPersistedData } from '@core/profile/actions'
