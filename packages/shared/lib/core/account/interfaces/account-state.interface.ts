@@ -1,8 +1,9 @@
 import { AccountBalance } from '@iota/wallet'
-import { IAccountMetadata } from './account-metadata.interface'
+import { IPersistedAccountData } from './persisted-account-data.interface'
 import { IAccount } from './account.interface'
 
-export interface IAccountState extends IAccount, IAccountMetadata {
+export interface IAccountState extends IAccount, IPersistedAccountData {
+    index: number
     depositAddress: string
     evmAddresses: {
         [coinType: number]: string | undefined
