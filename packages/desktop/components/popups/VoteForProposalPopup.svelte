@@ -37,7 +37,7 @@
 <form
     id="vote-proposal"
     on:submit|preventDefault={onSubmit}
-    class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0"
+    class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0"
 >
     <Text type={TextType.h4} fontWeight={FontWeight.semibold} classes="text-left">
         {localize('popups.voteForProposal.title')}

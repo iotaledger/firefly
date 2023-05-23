@@ -29,7 +29,7 @@
 </script>
 
 {#if $nodeInfo}
-    <faucet-request-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
+    <faucet-request-popup class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">
         <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
             {localize('popups.faucetRequest.title')}
         </Text>

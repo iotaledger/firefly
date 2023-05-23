@@ -5,36 +5,40 @@ const selectorParser = require('postcss-selector-parser')
 const pxToRem = (px, base = 16) => `${px / base}rem`
 
 const IS_DESKOP = process.env.PLATFORM === 'desktop'
-const SHARED_PURGE_ROUTES = ['../shared/**/*.svelte', '../shared/**/*.scss']
-const DESKTOP_PURGE_ROUTES = ['../desktop/**/*.svelte']
-const MOBILE_PURGE_ROUTES = ['../mobile/**/*.svelte']
+const SHARED_CONTENT_ROUTES = ['../shared/**/*.svelte', '../shared/**/*.scss']
+const DESKTOP_CONTENT_ROUTES = ['../desktop/**/*.svelte']
+const MOBILE_CONTENT_ROUTES = ['../mobile/**/*.svelte']
 
 module.exports = {
-    content: [...SHARED_PURGE_ROUTES, ...(IS_DESKOP ? DESKTOP_PURGE_ROUTES : MOBILE_PURGE_ROUTES)],
+    content: [...SHARED_CONTENT_ROUTES, ...(IS_DESKOP ? DESKTOP_CONTENT_ROUTES : MOBILE_CONTENT_ROUTES)],
     safelist: [
-        // `from-${color}` (gradients)
-        /^from-/,
-        // `to-${color}` (gradients)
-        /^to-/,
-        // `bg-${color}`
-        /^bg-/,
-        /^hover:bg-/,
-        /^dark:bg-/,
-        /^border-/,
-        /^hover:border-/,
-        /^dark:border-/,
-        /^dark:hover:border-/,
-        // `text-${color}`
-        /^text-/,
-        /^hover:text-/,
-        /^dark:text-/,
-        /^font-/,
-        /^hover:font-/,
-        /^dark:font-/,
-        /^grid-cols-/,
-        /^rounded-/,
-        // `p-${size}`
-        /^p-/,
+        {
+            pattern: /^from-/,
+        },
+        {
+            pattern: /^to-/,
+        },
+        {
+            pattern: /^bg-/,
+        },
+        {
+            pattern: /^border-/,
+        },
+        {
+            pattern: /^text-/,
+        },
+        {
+            pattern: /^font-/,
+        },
+        {
+            pattern: /^grid-cols-/,
+        },
+        {
+            pattern: /^rounded-/,
+        },
+        {
+            pattern: /^p-/,
+        },
         'scheme-dark',
         'fill-current',
         'stroke-current',
@@ -308,69 +312,4 @@ module.exports = {
             inter: ['Inter'],
         },
     },
-    plugins: [
-        // Add individual border colors
-        // Source: https://github.com/tailwindlabs/tailwindcss/issues/559#issuecomment-639118372
-        plugin(({ addUtilities, theme, config }) => {
-            const themeColors = theme('colors')
-            const individualBorderColors = Object.keys(themeColors).map((colorName) => {
-                if (typeof themeColors[colorName] === 'string') {
-                    return {
-                        [`.border-b-${colorName}`]: {
-                            borderBottomColor: themeColors[colorName],
-                        },
-                        [`.border-t-${colorName}`]: {
-                            borderTopColor: themeColors[colorName],
-                        },
-                        [`.border-l-${colorName}`]: {
-                            borderLeftColor: themeColors[colorName],
-                        },
-                        [`.border-r-${colorName}`]: {
-                            borderRightColor: themeColors[colorName],
-                        },
-                    }
-                } else if (typeof themeColors[colorName] === 'object') {
-                    return Object.keys(themeColors[colorName]).map((colorTint) => ({
-                        [`.border-b-${colorName}-${colorTint}`]: {
-                            borderBottomColor: themeColors[colorName][colorTint],
-                        },
-                        [`.border-t-${colorName}-${colorTint}`]: {
-                            borderTopColor: themeColors[colorName][colorTint],
-                        },
-                        [`.border-l-${colorName}-${colorTint}`]: {
-                            borderLeftColor: themeColors[colorName][colorTint],
-                        },
-                        [`.border-r-${colorName}-${colorTint}`]: {
-                            borderRightColor: themeColors[colorName][colorTint],
-                        },
-                    }))
-                }
-            })
-            addUtilities(individualBorderColors)
-        }),
-        // Add darkmode
-        // Source: https://dev.to/smartmointy/tailwind-css-dark-mode-switch-with-javascript-2kl9
-        plugin(({ addVariant, prefix }) => {
-            addVariant('dark', ({ modifySelectors, separator }) => {
-                modifySelectors(({ selector }) =>
-                    selectorParser((selectors) => {
-                        selectors.walkClasses((sel) => {
-                            sel.value = `dark${separator}${sel.value}`
-                            sel.parent.insertBefore(sel, selectorParser().astSync(prefix('.scheme-dark ')))
-                        })
-                    }).processSync(selector)
-                )
-            })
-        }),
-        plugin(({ addVariant, e }) => {
-            addVariant('dark-hover', ({ modifySelectors, separator }) => {
-                modifySelectors(({ className }) => `.scheme-dark .${e(`dark:hover${separator}${className}`)}:hover`)
-            })
-        }),
-        plugin(({ addVariant, e }) => {
-            addVariant('dark-focus', ({ modifySelectors, separator }) => {
-                modifySelectors(({ className }) => `.scheme-dark .${e(`dark:focus${separator}${className}`)}:focus`)
-            })
-        }),
-    ],
 }

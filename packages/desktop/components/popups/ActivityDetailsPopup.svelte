@@ -95,7 +95,7 @@
     })
 </script>
 
-<activity-details-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
+<activity-details-popup class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">
     <div class="flex flex-col">
         <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
             {localize('popups.transactionDetails.title')}
@@ -116,7 +116,7 @@
             </button>
         {/if}
     </div>
-    <activity-details class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
+    <activity-details class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">
         {#if activity.type === ActivityType.Basic}
             <BasicActivityDetails {activity} />
         {:else if activity.type === ActivityType.Foundry}

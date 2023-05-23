@@ -35,7 +35,7 @@
     }
 </script>
 
-<nft-transaction-details class="w-full space-y-6 flex flex-auto flex-col flex-shrink-0">
+<nft-transaction-details class="w-full space-y-6 flex flex-auto flex-col shrink-0">
     <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-3 overflow-hidden">
         <button
             on:click|preventDefault={onClick}
