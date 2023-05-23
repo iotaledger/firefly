@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { loadEvmAddressForSelectedAccount } from '@core/layer-2'
     import { selectedChain } from '@core/network'
-    import { updateActiveAccountPersistedData } from '@core/profile'
+    import { updateSelectedAccountPersistedData } from '@core/account'
     import { Router } from '@core/router'
     import { DrawerRoute, NetworkConfigRoute, networkConfigRouter } from '@desktop/routers'
     import { Animation, Button, CopyableBox, FontWeight, Pane, Text, TextType } from '@ui'
@@ -34,7 +34,7 @@
         if (!continued) {
             const evmAddresses = $selectedAccount?.evmAddresses ?? {}
             delete evmAddresses[coinType]
-            updateActiveAccountPersistedData($selectedAccount?.index, { evmAddresses })
+            updateSelectedAccountPersistedData($selectedAccount?.index, { evmAddresses })
         }
     })
 </script>
