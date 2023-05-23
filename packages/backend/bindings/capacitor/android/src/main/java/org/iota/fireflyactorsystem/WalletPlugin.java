@@ -131,9 +131,9 @@ public class WalletPlugin extends Plugin {
                 call.reject("currentPassword is required");
                 return;
             }
-            String currentPath = getContext().getFilesDir() + call.getString("currentPath");
+            String currentPath = call.getString("currentPath");
             String currentPassword = Objects.requireNonNull(call.getString("currentPassword"));
-            String newPath = getContext().getFilesDir() + call.getString("newPath");
+            String newPath = call.getString("newPath");
             String newPassword = call.getString("newPassword");
             Log.e("PATHS", currentPath);
             File file = new File(currentPath);
