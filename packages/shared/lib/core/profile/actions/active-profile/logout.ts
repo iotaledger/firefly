@@ -19,6 +19,7 @@ import { IProfileManager } from '@core/profile-manager/interfaces'
 import { profileManager } from '@core/profile-manager/stores'
 import { routerManager } from '@core/router/stores'
 import { clearFilters } from '@core/utils/clearFilters'
+import { Platform } from '@core/app'
 
 /**
  * Logout from active profile
@@ -27,6 +28,7 @@ export function logout(clearActiveProfile = true, _lockStronghold = true): void 
     if (get(isSoftwareProfile)) {
         _lockStronghold && lockStronghold()
     } else if (isLedgerProfile(get(activeProfile).type)) {
+        Platform.killLedgerProcess()
         get(isPollingLedgerDeviceStatus) && stopPollingLedgerNanoStatus()
     }
 

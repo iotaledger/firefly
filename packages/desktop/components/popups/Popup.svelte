@@ -28,6 +28,7 @@
     import EnableLedgerBlindSigningPopup from './EnableLedgerBlindSigningPopup.svelte'
     import ErrorLogPopup from './ErrorLogPopup.svelte'
     import FaucetRequestPopup from './FaucetRequestPopup.svelte'
+    import ImportErc20TokenFormPopup from './ImportErc20TokenFormPopup.svelte'
     import LedgerAppGuidePopup from './LedgerAppGuidePopup.svelte'
     import LedgerConnectionGuidePopup from './LedgerConnectionGuidePopup.svelte'
     import LegalUpdatePopup from './LegalUpdatePopup.svelte'
@@ -110,6 +111,7 @@
         [PopupId.EnableLedgerBlindSigning]: EnableLedgerBlindSigningPopup,
         [PopupId.ErrorLog]: ErrorLogPopup,
         [PopupId.FaucetRequest]: FaucetRequestPopup,
+        [PopupId.ImportErc20Token]: ImportErc20TokenFormPopup,
         [PopupId.LedgerAppGuide]: LedgerAppGuidePopup,
         [PopupId.LedgerConnection]: LedgerConnectionGuidePopup,
         [PopupId.LegalUpdate]: LegalUpdatePopup,
