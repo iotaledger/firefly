@@ -1,4 +1,4 @@
-import { debounce, getBackupWarningColor, hex2rgb, isBright } from '../ui'
+import { debounce, getBackupWarningColor, isBright } from '../ui'
 import { DAYS_PER_WEEK, MILLISECONDS_PER_DAY } from '../constants'
 
 describe('File: ui.ts', () => {
@@ -41,6 +41,9 @@ describe('File: ui.ts', () => {
             expect(isBright('#FFFFFF')).toEqual(true)
             expect(isBright('255,255,255')).toEqual(true)
         })
+        it('should return the same boolean for identical 3 and 6 value HEX colors', () => {
+            expect(isBright('#CCC')).toEqual(isBright('#CCCCCC'))
+        })
         it('should return false if color is not bright', () => {
             expect(isBright('#000000')).toEqual(false)
             expect(isBright('0,0,0')).toEqual(false)
@@ -63,19 +66,5 @@ describe('File: ui.ts', () => {
     })
     describe('Function: slidable', () => {
         // it.todo('needs a UI testing library to test')
-    })
-    describe('Function: hex2rgb', () => {
-        it('should convert hex to rgb', () => {
-            expect(hex2rgb('#000000')).toEqual('0,0,0')
-        })
-        it('should return RGB values for white if input string has length less than 7', () => {
-            expect(hex2rgb('')).toEqual('255,255,255')
-        })
-        it('should return RGB values of initial 7 chars if input string has length greater than 7', () => {
-            expect(hex2rgb('#0F0F0F9')).toEqual('15,15,15')
-        })
-        it('should(return the RGB value for white if the 7 character hex string does not match the regex', () => {
-            expect(hex2rgb('#******')).toEqual('255,255,255')
-        })
     })
 })

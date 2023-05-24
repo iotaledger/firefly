@@ -2,7 +2,7 @@
     import { Button } from '@ui'
 
     import { localize } from '@core/i18n'
-    import { ExpirationTime } from '@core/utils'
+    import { TimePeriod } from '@core/utils'
     import { newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'
 
     import { closeDrawer, DrawerId } from '@/auxiliary/drawer'
@@ -18,22 +18,22 @@
     const dateIn1Week = new Date(DATE_NOW)
     dateIn1Week.setDate(dateIn1Week.getDate() + 7)
 
-    function onChooseExpirationTimeClick(_expiration: ExpirationTime): void {
+    function onChooseExpirationTimeClick(_expiration: TimePeriod): void {
         let expirationDate: Date
         switch (_expiration) {
-            case ExpirationTime.OneHour:
+            case TimePeriod.OneHour:
                 expirationDate = dateIn1Hour
                 break
-            case ExpirationTime.OneDay:
+            case TimePeriod.OneDay:
                 expirationDate = dateIn1Day
                 break
-            case ExpirationTime.OneWeek:
+            case TimePeriod.OneWeek:
                 expirationDate = dateIn1Week
                 break
-            case ExpirationTime.None:
+            case TimePeriod.None:
                 expirationDate = null
                 break
-            case ExpirationTime.Custom:
+            case TimePeriod.Custom:
             default:
                 break
         }
@@ -43,16 +43,16 @@
 </script>
 
 <div class="w-full flex flex-col space-y-2">
-    <Button outline onClick={() => onChooseExpirationTimeClick(ExpirationTime.None)} classes="w-full">
+    <Button outline onClick={() => onChooseExpirationTimeClick(TimePeriod.None)} classes="w-full">
         {localize('menus.expirationTimePicker.none')}
     </Button>
-    <Button outline onClick={() => onChooseExpirationTimeClick(ExpirationTime.OneHour)} classes="w-full">
+    <Button outline onClick={() => onChooseExpirationTimeClick(TimePeriod.OneHour)} classes="w-full">
         {localize('menus.expirationTimePicker.1hour')}
     </Button>
-    <Button outline onClick={() => onChooseExpirationTimeClick(ExpirationTime.OneDay)} classes="w-full">
+    <Button outline onClick={() => onChooseExpirationTimeClick(TimePeriod.OneDay)} classes="w-full">
         {localize('menus.expirationTimePicker.1day')}
     </Button>
-    <Button outline onClick={() => onChooseExpirationTimeClick(ExpirationTime.OneWeek)} classes="w-full">
+    <Button outline onClick={() => onChooseExpirationTimeClick(TimePeriod.OneWeek)} classes="w-full">
         {localize('menus.expirationTimePicker.1week')}
     </Button>
 </div>

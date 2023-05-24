@@ -12,6 +12,7 @@
     import { get } from 'svelte/store'
     import { sendFlowRouter } from '../send-flow.router'
     import SendFlowTemplate from './SendFlowTemplate.svelte'
+    import { closePopup } from '@auxiliary/popup'
 
     const transactionDetails = get(newTransactionDetails)
     let assetAmountInput: TokenAmountInput
@@ -19,6 +20,7 @@
     let rawAmount: string
     let amount: string
     let unit: string
+    const disableAssetSelection = transactionDetails.disableAssetSelection
 
     if (transactionDetails.type === NewTransactionType.TokenTransfer) {
         asset = transactionDetails.asset
@@ -54,13 +56,19 @@
             type: NewTransactionType.TokenTransfer,
             rawAmount: undefined,
         })
-        $sendFlowRouter.previous()
+        if (disableAssetSelection) {
+            closePopup()
+        } else {
+            $sendFlowRouter.previous()
+        }
     }
 </script>
 
 <SendFlowTemplate
-    title={localize('popups.transaction.selectAmount', { values: { tokenName: asset.metadata.name } })}
-    leftButton={{ text: localize('actions.back'), onClick: onBackClick }}
+    title={localize('popups.transaction.selectAmount', {
+        values: { tokenName: asset.metadata.name },
+    })}
+    leftButton={{ text: localize(disableAssetSelection ? 'actions.cancel' : 'actions.back'), onClick: onBackClick }}
     rightButton={{ text: localize('actions.continue'), onClick: onContinueClick, disabled: !amount }}
 >
     <TokenAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:inputtedAmount={amount} {unit} />

@@ -4,9 +4,9 @@
     import { HR, Modal, MenuItem, ExpirationDateTimePicker } from 'shared/components'
     import { fade } from 'svelte/transition'
 
-    export let value: Date | null
+    export let value: Date
     export let selected: TimePeriod = TimePeriod.None
-    export let anchor: HTMLElement | undefined = undefined
+    export let anchor: HTMLElement = undefined
 
     export function tryOpen(): void {
         if (!canShowDateTimePicker) {
@@ -19,7 +19,7 @@
     const DATE_NOW = Date.now()
 
     let previouslySelected: TimePeriod = selected
-    let customDate: Date | null
+    let customDate: Date
     let canShowDateTimePicker = false
     let modal: Modal
 
@@ -32,7 +32,8 @@
     const dateIn1Week = new Date(DATE_NOW)
     dateIn1Week.setDate(dateIn1Week.getDate() + 7)
 
-    $: {
+    setDate()
+    function setDate(): void {
         switch (selected) {
             case TimePeriod.OneHour:
                 value = dateIn1Hour
@@ -56,16 +57,18 @@
         if (_selected === TimePeriod.Custom) {
             canShowDateTimePicker = !canShowDateTimePicker
         } else {
-            customDate = null
+            customDate = undefined
         }
         modal?.close()
         previouslySelected = selected
         selected = _selected
+        setDate()
     }
 
     function onCancelExpirationTimeClick(): void {
         if (!customDate) {
             selected = previouslySelected
+            setDate()
         }
         canShowDateTimePicker = false
     }

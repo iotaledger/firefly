@@ -10,7 +10,7 @@
     import { handleError } from '@core/error/handlers/handleError'
     import { ledgerPreparedOutput } from '@core/ledger'
     import { isActiveLedgerProfile } from '@core/profile'
-    import { ExpirationTime } from '@core/utils'
+    import { TimePeriod } from '@core/utils'
     import {
         DEFAULT_TRANSACTION_OPTIONS,
         getOutputOptions,
@@ -31,13 +31,13 @@
     let visibleSurplus = 0
     let preparedOutput: Output
     let outputOptions: OutputOptions
-    let initialExpirationDate: ExpirationTime = getInitialExpirationDate()
+    let initialExpirationDate = getInitialExpirationDate()
 
     $: transactionDetails = get(newTransactionDetails)
     $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
 
     onMount(() => {
-        if (transactionDetails.type === NewTransactionType.TokenTransfer && transactionDetails?.assetId) {
+        if (transactionDetails.type === NewTransactionType.TokenTransfer && transactionDetails.asset) {
             $sendRouter.next()
         }
     })
@@ -105,13 +105,13 @@
         void prepareTransactionOutput()
     }
 
-    function getInitialExpirationDate(): ExpirationTime {
+    function getInitialExpirationDate(): TimePeriod {
         if (expirationDate) {
-            return ExpirationTime.Custom
+            return TimePeriod.Custom
         } else if (storageDeposit && !giftStorageDeposit) {
-            return ExpirationTime.OneDay
+            return TimePeriod.OneDay
         } else {
-            return ExpirationTime.None
+            return TimePeriod.None
         }
     }
 </script>

@@ -1,17 +1,17 @@
 <script lang="ts">
-    import { NETWORK_ICON_SVG } from '@auxiliary/icon'
+    import { Icon as IconEnum, NETWORK_ICON_SVG } from '@auxiliary/icon'
     import { getIconColorFromString } from '@core/account'
     import { COIN_TYPE, NetworkId } from '@core/network'
+    import { activeProfile } from '@core/profile'
     import { isBright } from '@core/utils'
-    import { ANIMATED_TOKEN_IDS, IPersistedAsset, NotVerifiedStatus, getAssetInitials } from '@core/wallet'
-    import { Animation, Icon, VerificationBadge } from 'shared/components'
+    import { ANIMATED_TOKEN_IDS, getAssetInitials, IPersistedAsset } from '@core/wallet'
+    import { Animation, Icon, NetworkIconBadge } from 'shared/components'
 
     export let asset: IPersistedAsset
     export let large = false
     export let small = false
-    export let showVerifiedBadgeOnly = false
 
-    let icon: string
+    let icon: IconEnum | null
     let assetIconColor: string
     let assetIconBackgroundColor: string
     let assetInitials: string
@@ -36,12 +36,8 @@
             assetInitials = getAssetInitials(asset)
             assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
             assetIconBackgroundColor = getIconColorFromString(asset?.metadata?.name)
-            icon = ''
+            icon = null
     }
-
-    $: shouldShowBadge = showVerifiedBadgeOnly
-        ? asset?.verification?.verified
-        : asset?.verification?.status !== NotVerifiedStatus.Skipped
 </script>
 
 <div
@@ -80,16 +76,9 @@
             </p>
         {/if}
     </div>
-    {#if shouldShowBadge}
-        <span
-            class="
-                absolute flex justify-center items-center
-                {small ? '-bottom-1 -right-1' : '-bottom-0.5 -right-0.5'}
-            "
-        >
-            <VerificationBadge status={asset?.verification?.status} {large} />
-        </span>
-    {/if}
+    <span class="absolute flex justify-center items-center bottom-0 right-0">
+        <NetworkIconBadge width={10} height={10} network={$activeProfile.network} />
+    </span>
 </div>
 
 <style type="text/scss">

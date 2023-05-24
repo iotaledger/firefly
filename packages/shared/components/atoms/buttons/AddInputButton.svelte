@@ -1,12 +1,13 @@
 <script lang="ts">
     import { Icon, Text } from 'shared/components'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
-    export let buttonElement: HTMLButtonElement = undefined
+    export let buttonElement: HTMLButtonElement | undefined = undefined
     export let text: string
     export let open = false
     export let onClick: () => void
-    export let onMouseEnter: () => void
-    export let onMouseLeave: () => void
+    export let onMouseEnter: () => void = () => {}
+    export let onMouseLeave: () => void = () => {}
 </script>
 
 {#if !open}
@@ -18,7 +19,7 @@
         on:mouseleave={onMouseLeave}
     >
         <div class="flex flex-row items-center space-x-2">
-            <Icon icon="plus" height="10" width="10" classes="text-gray-600" />
+            <Icon icon={IconEnum.Plus} height="10" width="10" classes="text-gray-600" />
             <Text fontSize="12" color="gray-600">{text}</Text>
         </div>
     </button>

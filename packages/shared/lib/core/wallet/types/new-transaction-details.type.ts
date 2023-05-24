@@ -9,6 +9,7 @@ type NewBaseTransactionDetails = {
     tag?: string
     metadata?: string
     expirationDate?: Date
+    timelockDate?: Date
     surplus?: string
     giftStorageDeposit?: boolean
     layer2Parameters?: ILayer2Parameters

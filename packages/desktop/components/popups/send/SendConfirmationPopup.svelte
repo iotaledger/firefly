@@ -19,7 +19,7 @@
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
-    import { ExpirationTime } from '@core/utils'
+    import { TimePeriod } from '@core/utils'
     import { ActivityDirection, ActivityType, InclusionState, ActivityAction } from '@core/wallet/enums'
     import {
         selectedAccountAssets,
@@ -63,7 +63,7 @@
     let outputOptions: OutputOptions
     let expirationTimePicker: ExpirationTimePicker
 
-    let initialExpirationDate: ExpirationTime = getInitialExpirationDate()
+    let initialExpirationDate: TimePeriod = getInitialExpirationDate()
     let activeTab: Tab
 
     $: transactionDetails = get(newTransactionDetails)
@@ -104,13 +104,13 @@
         void prepareTransactionOutput()
     }
 
-    function getInitialExpirationDate(): ExpirationTime {
+    function getInitialExpirationDate(): TimePeriod {
         if (expirationDate) {
-            return ExpirationTime.Custom
+            return TimePeriod.Custom
         } else if (storageDeposit && !giftStorageDeposit) {
-            return ExpirationTime.OneDay
+            return TimePeriod.OneDay
         } else {
-            return ExpirationTime.None
+            return TimePeriod.None
         }
     }
 

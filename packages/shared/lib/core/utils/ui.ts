@@ -46,8 +46,11 @@ export const clickOutside: Action = function (node) {
  */
 export function isBright(color: string): boolean {
     if (color) {
+        if (color.includes('#') && color.length === 4) {
+            color = `#${color[1]}${color[1]}${color[2]}${color[2]}${color[3]}${color[3]}`
+        }
         const rgb =
-            color.includes('#') && color.length >= 7
+            color.includes('#') && color.length === 7
                 ? color.match(/\w\w/g)?.map((x) => parseInt(x, 16))
                 : color.match(/[0-9]+/g)?.map((c) => parseInt(c, 10))
         if (rgb) {
@@ -154,14 +157,4 @@ export function slidable(node: HTMLElement, use: boolean = true): { destroy: () 
             node.removeEventListener('touchstart', handleTouchstart, { capture: true })
         },
     }
-}
-
-/**
- * Function that converts HEX color to RGB
- * @param hex HEX color in the format of '#FFFFFF'
- */
-export function hex2rgb(hex: string): string {
-    hex = hex.length >= 7 ? hex : '#FFFFFF'
-    const regexMatch = hex.match(/\w\w/g) ?? ['FF', 'FF', 'FF']
-    return regexMatch.map((x) => parseInt(x, 16)).join(',')
 }

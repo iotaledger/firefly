@@ -1,19 +1,17 @@
 <script lang="ts">
-    import { Text, ExpirationTimePickerMenu, Icon } from 'shared/components'
+    import { Text, Icon } from 'shared/components'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { formatDate, localize } from '@core/i18n'
     import { TimePeriod } from '@core/utils'
+    import DateTimePickerMenu from './DateTimePickerMenu.svelte'
 
     export let value: Date = undefined
-    export let initialSelected: TimePeriod = TimePeriod.None
+    export let selected: TimePeriod = TimePeriod.None
     export let disabled: boolean = false
 
-    let menu: ExpirationTimePickerMenu
+    let menu: DateTimePickerMenu
     let anchor: HTMLElement = undefined
-    let selected: TimePeriod
     let storedValue: Date
-
-    $: selected = initialSelected
 
     export function setNull(bool: boolean): void {
         if (bool) {
@@ -31,7 +29,7 @@
     on:click={menu?.tryOpen}
     bind:this={anchor}
 >
-    <div class="flex flex-row hover:text-blue-600">
+    <div class="flex flex-row hover:text-blue-600 items-center">
         <Text
             highlighted={!disabled}
             color="gray-600"
@@ -41,8 +39,8 @@
             {value ? formatDate(value, { dateStyle: 'long', timeStyle: 'medium' }) : localize('general.none')}
         </Text>
         {#if !disabled}
-            <Icon icon={IconEnum.ChevronDown} width="10" classes="text-blue-500 ml-1" />
+            <Icon icon={IconEnum.ChevronDown} width="10" height="13" classes="text-blue-500 ml-1" />
         {/if}
     </div>
 </button>
-<ExpirationTimePickerMenu bind:this={menu} bind:value bind:selected bind:anchor />
+<DateTimePickerMenu bind:this={menu} bind:value bind:selected bind:anchor />

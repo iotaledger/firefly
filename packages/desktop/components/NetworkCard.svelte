@@ -49,7 +49,7 @@
     })
 </script>
 
-<ClickableTile classes="bg-white border border-solid border-gray-200" onClick={onCardClick}>
+<ClickableTile classes="bg-white border border-solid border-gray-200 dark:border-transparent" onClick={onCardClick}>
     <div class="w-full flex flex-col gap-5">
         <div class="flex flex-row justify-between items-center">
             <div class="flex flex-row gap-2 items-center">
