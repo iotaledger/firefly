@@ -18,7 +18,7 @@
     import type { OutputParams } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
+    import { activeProfile, checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
     import { TimePeriod } from '@core/utils'
     import { ActivityDirection, ActivityType, InclusionState, ActivityAction } from '@core/wallet/enums'
     import {
@@ -43,7 +43,6 @@
         TARGET_CONTRACTS,
         TRANSFER_ALLOWANCE,
     } from '@core/layer-2'
-    import { NetworkId } from '@core/network'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
@@ -70,10 +69,9 @@
     $: transactionDetails = get(newTransactionDetails)
     $: isInternal = recipient.type === 'account'
     $: expirationTimePicker?.setNull(giftStorageDeposit)
-    // TODO: replace Testnet with the profile network
     $: hideGiftToggle =
         (transactionDetails.type === NewTransactionType.TokenTransfer &&
-            transactionDetails.asset.id === $selectedAccountAssets?.[NetworkId.Testnet]?.baseCoin?.id) ||
+            transactionDetails.asset.id === $selectedAccountAssets?.[$activeProfile?.network.id]?.baseCoin?.id) ||
         (disableToggleGift && !giftStorageDeposit) ||
         !!layer2Parameters
     $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()

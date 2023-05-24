@@ -9,11 +9,11 @@ import {
 } from '@core/wallet'
 import { openPopup, PopupId } from '../../../../../../../desktop/lib/auxiliary/popup'
 import { get } from 'svelte/store'
-import { NetworkId } from '@core/network/enums'
 
 import { SendOperationParameter } from '../../../enums'
 import { UnknownAssetError } from '../../../errors'
 import { getRawAmountFromSearchParam } from '../../../utils'
+import { activeProfile } from '@core/profile'
 
 export function handleDeepLinkSendFormOperation(searchParams: URLSearchParams): void {
     const transactionDetails = parseSendFormOperation(searchParams)
@@ -39,9 +39,9 @@ export function handleDeepLinkSendFormOperation(searchParams: URLSearchParams): 
 function parseSendFormOperation(searchParams: URLSearchParams): NewTransactionDetails {
     const assetId = searchParams.get(SendOperationParameter.AssetId)
 
-    // TODO: replace Testnet with the selected asset network/chain
-    const baseAsset = get(selectedAccountAssets)[NetworkId.Testnet].baseCoin
-    const asset = assetId ? getAssetById(assetId, NetworkId.Testnet) : baseAsset
+    const networkId = get(activeProfile)?.network?.id
+    const baseAsset = get(selectedAccountAssets)[networkId].baseCoin
+    const asset = assetId ? getAssetById(assetId, networkId) : baseAsset
     if (!asset) {
         throw new UnknownAssetError()
     }

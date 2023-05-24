@@ -10,7 +10,7 @@
     import { closePopup, openPopup, PopupId, popupState } from '@desktop/auxiliary/popup'
     import { onMount } from 'svelte'
     import { isAccountVoting } from '@contexts/governance/utils'
-    import { NetworkId } from '@core/network'
+    import { activeProfile } from '@core/profile'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let newVotingPower: string = undefined
@@ -20,8 +20,7 @@
     let rawAmount = newVotingPower ?? $selectedAccount?.votingPower
     let confirmDisabled = false
 
-    // TODO: replace Testnet with the profile network
-    $: asset = $visibleSelectedAccountAssets[NetworkId.Testnet].baseCoin
+    $: asset = $visibleSelectedAccountAssets[$activeProfile?.network.id].baseCoin
     $: votingPower = parseInt($selectedAccount?.votingPower, 10)
     $: hasTransactionInProgress =
         $selectedAccount?.hasVotingPowerTransactionInProgress ||

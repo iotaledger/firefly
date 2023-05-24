@@ -4,12 +4,11 @@
     import type { IDropdownItem } from '@core/utils'
     import { AssetFilterUnit } from '@core/utils/interfaces/filter'
     import { visibleSelectedAccountAssets } from '@core/wallet'
-    import { NetworkId } from '@core/network'
+    import { activeProfile } from '@core/profile'
 
     export let filterUnit: AssetFilterUnit
 
-    // TODO: replace Testnet with profile network
-    const { baseCoin, nativeTokens } = $visibleSelectedAccountAssets?.[NetworkId.Testnet] ?? {}
+    const { baseCoin, nativeTokens } = $visibleSelectedAccountAssets?.[$activeProfile?.network?.id] ?? {}
 
     const choices: IDropdownItem<string>[] = [baseCoin, ...nativeTokens].map((choice) => ({
         label: choice.metadata.name,

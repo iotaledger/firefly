@@ -6,7 +6,7 @@
     import { getDestinationNetworkFromAddress } from '@core/layer-2/utils'
     import { ledgerPreparedOutput } from '@core/ledger/stores'
     import { checkActiveProfileAuth } from '@core/profile/actions'
-    import { isActiveLedgerProfile } from '@core/profile/stores'
+    import { activeProfile, isActiveLedgerProfile } from '@core/profile/stores'
     import { truncateString } from '@core/utils'
     import { TimePeriod } from '@core/utils/enums'
     import { sendOutput } from '@core/wallet/actions'
@@ -27,7 +27,6 @@
     import SendFlowTemplate from './SendFlowTemplate.svelte'
     import TokenAmountTile from './components/TokenAmountTile.svelte'
     import TransactionDetails from './components/TransactionDetails.svelte'
-    import { NetworkId } from '@core/network'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -173,9 +172,8 @@
             <TokenAmountTile asset={transactionDetails.asset} amount={transactionDetails.rawAmount} />
         {/if}
         {#if visibleSurplus}
-            <!-- TODO: replace Testnet with the profile network -->
             <TokenAmountTile
-                asset={$selectedAccountAssets?.[NetworkId.Testnet]?.baseCoin}
+                asset={$selectedAccountAssets?.[$activeProfile?.network?.id]?.baseCoin}
                 amount={String(visibleSurplus)}
                 showAssetInfo={false}
             />

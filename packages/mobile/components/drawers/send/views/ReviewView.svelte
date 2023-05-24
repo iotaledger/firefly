@@ -21,7 +21,7 @@
 
     import { DrawerId, openDrawer } from '@/auxiliary/drawer'
     import { sendRouter } from '@/routers'
-    import { NetworkId } from '@core/network'
+    import { activeProfile } from '@core/profile'
 
     export let sendTransaction: () => Promise<void>
     export let storageDeposit: number
@@ -43,10 +43,9 @@
 
     $: isInternal = recipient?.type === 'account'
     $: isTransferring = $selectedAccount.isTransferring
-    // TODO: replace Testnet with the profile network
     $: hideGiftToggle =
         (transactionDetails.type === NewTransactionType.TokenTransfer &&
-            transactionDetails.asset.id === $selectedAccountAssets[NetworkId.Testnet]?.baseCoin?.id) ||
+            transactionDetails.asset.id === $selectedAccountAssets[$activeProfile?.network?.id]?.baseCoin?.id) ||
         (disableToggleGift && !giftStorageDeposit) ||
         layer2Parameters !== undefined
 

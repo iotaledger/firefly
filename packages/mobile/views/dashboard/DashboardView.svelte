@@ -18,7 +18,6 @@
     import { DrawerId, openDrawer } from '@/auxiliary/drawer'
     import { activeDashboardTab, DASHBOARD_TAB_COMPONENT } from '@/contexts/dashboard'
     import features from '@features/features'
-    import { NetworkId } from '@core/network'
 
     $: activeDashboardTabComponent = DASHBOARD_TAB_COMPONENT[$activeDashboardTab]
 
@@ -42,9 +41,8 @@
         <div class="px-5 pt-4 pb-6">
             <TopBar />
             <div class="flex justify-center w-full mt-5">
-                <!-- TODO: replace Testnet with profile network -->
                 <TogglableAssetBalanceLabel
-                    asset={$selectedAccountAssets?.[NetworkId.Testnet]?.baseCoin}
+                    asset={$selectedAccountAssets?.[$activeProfile?.network?.id]?.baseCoin}
                     amount={$selectedAccount.balances?.baseCoin?.available}
                     tokenMetadata={getBaseToken()}
                 />

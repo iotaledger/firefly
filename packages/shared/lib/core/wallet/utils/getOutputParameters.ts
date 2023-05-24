@@ -6,7 +6,7 @@ import { addGasBudget, getLayer2MetadataForTransfer } from '@core/layer-2/utils'
 import { NewTransactionDetails } from '@core/wallet/types'
 import { getAddressFromSubject } from '@core/wallet/utils'
 import { ReturnStrategy } from '../enums'
-import { NetworkId } from '@core/network'
+import { activeProfile } from '@core/profile'
 
 export function getOutputParameters(transactionDetails: NewTransactionDetails): OutputParams {
     const { recipient, expirationDate, timelockDate, giftStorageDeposit, layer2Parameters } = transactionDetails ?? {}
@@ -50,9 +50,11 @@ function getAmountFromTransactionDetails(transactionDetails: NewTransactionDetai
     let rawAmount: string
     if (transactionDetails.type === NewTransactionType.TokenTransfer) {
         const asset = transactionDetails.asset
-        // TODO: replace Testnet with the selected asset network/chain
+
         const nativeTokenId =
-            asset?.id === get(selectedAccountAssets)?.[NetworkId.Testnet]?.baseCoin?.id ? undefined : asset?.id
+            asset?.id === get(selectedAccountAssets)?.[get(activeProfile)?.network?.id]?.baseCoin?.id
+                ? undefined
+                : asset?.id
 
         if (nativeTokenId) {
             rawAmount = transactionDetails?.surplus ?? '0'
@@ -74,9 +76,11 @@ function getAssetFromTransactionDetails(transactionDetails: NewTransactionDetail
         assets = { nftId: transactionDetails.nftId }
     } else if (transactionDetails.type === NewTransactionType.TokenTransfer) {
         const assetId = transactionDetails.asset?.id
-        // TODO: replace Testnet with the selected asset network/chain
+
         const nativeTokenId =
-            assetId === get(selectedAccountAssets)?.[NetworkId.Testnet]?.baseCoin?.id ? undefined : assetId
+            assetId === get(selectedAccountAssets)?.[get(activeProfile)?.network?.id]?.baseCoin?.id
+                ? undefined
+                : assetId
 
         if (nativeTokenId) {
             const bigAmount = BigInt(transactionDetails.rawAmount)

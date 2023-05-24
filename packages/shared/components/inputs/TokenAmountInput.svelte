@@ -5,10 +5,9 @@
     import { AmountInput, FontWeight, InputContainer, Text } from '@ui'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
     import { validateTokenAmount } from '@core/wallet/utils/validateTokenAmount'
-    import { NetworkId } from '@core/network'
+    import { activeProfile } from '@core/profile'
 
-    // TODO: replace Testnet with profile network
-    export let asset: IAsset | undefined = $visibleSelectedAccountAssets?.[NetworkId.Testnet]?.baseCoin
+    export let asset: IAsset | undefined = $visibleSelectedAccountAssets?.[$activeProfile?.network?.id]?.baseCoin
     export let rawAmount: string | undefined = undefined
     export let unit: string | undefined = undefined
     export let inputtedAmount: string | undefined =

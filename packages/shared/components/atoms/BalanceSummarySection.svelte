@@ -4,7 +4,7 @@
     import { formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
     import { BalanceSummaryRow, Icon } from 'shared/components'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { NetworkId } from '@core/network'
+    import { activeProfile } from '@core/profile'
 
     export let titleKey: string
     export let subtitleKey: string = ''
@@ -15,8 +15,7 @@
     let expanded = false
 
     $: hasChildren = !!Object.keys(subBreakdown ?? {}).length
-    // TODO: replace Testnet with profile network
-    $: ({ baseCoin } = $selectedAccountAssets?.[NetworkId.Testnet] ?? {})
+    $: ({ baseCoin } = $selectedAccountAssets?.[$activeProfile?.network?.id] ?? {})
 
     function getAmount(amount: number): string {
         return formatTokenAmountBestMatch(amount, baseCoin.metadata)
