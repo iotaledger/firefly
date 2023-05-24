@@ -156,6 +156,8 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
     }
 
     @objc func getUserDataPath(_ call: CAPPluginCall) {
-        call.resolve([ "path":  getAppPath(folder: "")])
+        let fm = FileManager.default
+        let documents = fm.urls(for: .documentDirectory, in: .userDomainMask).first!
+        call.resolve([ "path":  documents.path])
     }
 }
