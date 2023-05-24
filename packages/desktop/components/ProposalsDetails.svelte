@@ -21,7 +21,7 @@
         getNumberOfVotingProposals,
     } from '@contexts/governance/utils'
 
-    import { openPopup, PopupId } from '@auxiliary/popup'
+    import { openPopup, PopupId } from '@desktop/auxiliary/popup'
 
     let details = <IProposalsDetails>{
         totalProposals: null,

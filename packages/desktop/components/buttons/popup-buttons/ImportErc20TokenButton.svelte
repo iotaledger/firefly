@@ -1,7 +1,7 @@
 <script lang="ts">
     import { OnboardingButton } from '@ui'
     import { localize } from '@core/i18n'
-    import { openPopup, PopupId } from 'shared/lib/auxiliary/popup'
+    import { openPopup, PopupId } from '@desktop/auxiliary/popup'
 
     function onImportErc20TokenClick(): void {
         openPopup({

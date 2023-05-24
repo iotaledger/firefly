@@ -76,7 +76,7 @@
         })
     }
     function onSendClick(): void {
-        updateNewTransactionDetails({ type: NewTransactionType.TokenTransfer, assetId: asset.id })
+        updateNewTransactionDetails({ type: NewTransactionType.TokenTransfer, asset })
         _closeDrawer()
         openDrawer(DrawerId.Send, { fullScreen: true })
     }
