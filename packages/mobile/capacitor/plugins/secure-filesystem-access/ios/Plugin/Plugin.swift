@@ -151,7 +151,7 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
         guard let source = call.getString("source") else {
             return call.reject("source is required")
         }
-        try? FileManager.default.deleteItem(atPath: source)
+        try? FileManager.default.removeItem(atPath: source)
         call.resolve()
     }
 
