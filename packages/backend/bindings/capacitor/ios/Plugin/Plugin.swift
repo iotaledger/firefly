@@ -16,10 +16,10 @@ public class WalletPlugin: CAPPlugin {
             }
             let fm = FileManager.default
             if !fm.fileExists(atPath: storagePath) {
-                try fm.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+                try fm.createDirectory(atPath: storagePath, withIntermediateDirectories: true, attributes: nil)
             }
             // Exclude folder from auto-backup
-            var urlPath = URL(fileURLWithPath: path, isDirectory: true)
+            var urlPath = URL(fileURLWithPath: storagePath, isDirectory: true)
             var values = URLResourceValues()
             values.isExcludedFromBackup = true
             try urlPath.setResourceValues(values)
@@ -34,7 +34,7 @@ public class WalletPlugin: CAPPlugin {
                 let data: String = String(cString: result!)
                 self.notifyListeners("walletEvent", data: ["walletResponse": data])
             }
-            Wallet.iota_initialize(callback, actorId.cString(using: .utf8), path.cString(using: .utf8))
+            Wallet.iota_initialize(callback, actorId.cString(using: .utf8), storagePath.cString(using: .utf8))
             call.resolve()
             isInitialized = true
         } catch {
