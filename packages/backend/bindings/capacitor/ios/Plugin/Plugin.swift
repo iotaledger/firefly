@@ -100,16 +100,12 @@ public class WalletPlugin: CAPPlugin {
         let new_path = call.getString("new_path") ?? ""
         let new_password = call.getString("new_password") ?? ""
 
-        do {
-            Wallet.iota_migrate_stronghold_snapshot_v2_to_v3(
-                currentPath,
-                currentPassword,
-                new_path,
-                new_password
-            )
-            call.resolve()
-        } catch {
-            call.reject("failed to migrate stronghold")
-        }
+        Wallet.iota_migrate_stronghold_snapshot_v2_to_v3(
+            currentPath,
+            currentPassword,
+            new_path,
+            new_password
+        )
+        call.resolve()
     }
 }
