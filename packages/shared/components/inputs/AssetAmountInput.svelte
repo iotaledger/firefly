@@ -14,12 +14,14 @@
     import Big from 'big.js'
     import { AmountInput, AssetDropdown, InputContainer, SliderInput, Text, TooltipIcon } from 'shared/components'
     import UnitInput from './UnitInput.svelte'
+    import { NetworkId } from '@core/network'
 
     export let inputElement: HTMLInputElement = undefined
     export let disabled = false
     export let isFocused = false
     export let votingPower: number = 0
-    export let asset: IAsset = $visibleSelectedAccountAssets?.baseCoin
+    // TODO: replace Testnet with profile network
+    export let asset: IAsset = $visibleSelectedAccountAssets?.[NetworkId.Testnet]?.baseCoin
     export let rawAmount: string = undefined
     export let unit: string = undefined
     export let containsSlider: boolean = false

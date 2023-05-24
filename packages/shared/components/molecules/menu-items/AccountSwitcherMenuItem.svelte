@@ -2,6 +2,7 @@
     import { IAccountState, selectedAccount, setSelectedAccount } from '@core/account'
     import { formatCurrency } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
+    import { NetworkId } from '@core/network'
     import { getBaseToken } from '@core/profile'
     import { formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
     import { FontWeight, Text } from 'shared/components'
@@ -11,7 +12,8 @@
     export let onClick: () => unknown
     export let id: string = ''
 
-    $: ({ baseCoin } = $selectedAccountAssets)
+    // TODO: replace Testnet with the profile network
+    $: ({ baseCoin } = $selectedAccountAssets[NetworkId.Testnet])
 
     function onAccountClick(accountIndex: number): void {
         setSelectedAccount(accountIndex)

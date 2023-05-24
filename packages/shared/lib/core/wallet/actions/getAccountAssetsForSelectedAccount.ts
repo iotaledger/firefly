@@ -1,15 +1,31 @@
 import { selectedAccount } from '@core/account'
 import { MarketCoinPrices } from '@core/market'
 import { NetworkId } from '@core/network'
+import { network } from '@core/network/stores'
 import { activeProfile, getCoinType } from '@core/profile'
 import { isValidIrc30 } from '@core/token'
 import { get } from 'svelte/store'
 import { IAsset } from '../interfaces'
-import { IAccountAssets } from '../interfaces/account-assets.interface'
+import { AccountAssets, IAccountAssetsPerNetwork } from '../interfaces/account-assets.interface'
 import { getAssetFromPersistedAssets } from '../utils'
 import { sortAssets } from '../utils/sortAssets'
 
-export function getAccountAssetsForSelectedAccount(marketCoinPrices: MarketCoinPrices): IAccountAssets {
+export function getAccountAssetsForSelectedAccount(marketCoinPrices: MarketCoinPrices): AccountAssets {
+    const accountAssets = {} as AccountAssets
+
+    accountAssets[NetworkId.Testnet] = getAccountAssetForNetwork(marketCoinPrices)
+    const chains = get(network)?.getChains() ?? []
+
+    for (const chain of chains) {
+        const chainId = chain.getConfiguration().chainId
+        const chainAssets = getAccountAssetForChain()
+        accountAssets[chainId] = chainAssets
+    }
+
+    return accountAssets
+}
+
+function getAccountAssetForNetwork(marketCoinPrices: MarketCoinPrices): IAccountAssetsPerNetwork {
     const account = get(selectedAccount)
     const networkId = get(activeProfile)?.network?.id
 
@@ -28,7 +44,7 @@ export function getAccountAssetsForSelectedAccount(marketCoinPrices: MarketCoinP
     const tokens = account?.balances?.nativeTokens ?? []
     for (const token of tokens) {
         const persistedAsset = getAssetFromPersistedAssets(token.tokenId)
-        if (persistedAsset && isValidIrc30(persistedAsset?.metadata)) {
+        if (persistedAsset && persistedAsset?.metadata && isValidIrc30(persistedAsset.metadata)) {
             nativeTokens.push({
                 ...persistedAsset,
                 balance: {
@@ -42,5 +58,12 @@ export function getAccountAssetsForSelectedAccount(marketCoinPrices: MarketCoinP
     return {
         baseCoin,
         nativeTokens: sortAssets(nativeTokens),
+    }
+}
+
+function getAccountAssetForChain(): IAccountAssetsPerNetwork {
+    return {
+        baseCoin: undefined,
+        nativeTokens: [],
     }
 }

@@ -9,11 +9,13 @@
     import { formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
     import { AccountSwitcherMenuItem, FontWeight, HR, Icon, Modal, Text, TextType } from '@ui'
     import { tick } from 'svelte'
+    import { NetworkId } from '@core/network'
 
     export let modal: Modal = undefined
 
     $: totalBalance = sumBalanceForAccounts($visibleActiveAccounts)
-    $: ({ baseCoin } = $selectedAccountAssets)
+    // TODO: replace Testnet with the profile network
+    $: ({ baseCoin } = $selectedAccountAssets[NetworkId.Testnet])
 
     async function scrollToSelectedAccount(): Promise<void> {
         await tick()

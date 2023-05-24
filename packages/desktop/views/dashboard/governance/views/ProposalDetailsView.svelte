@@ -35,8 +35,10 @@
         isVotingForSelectedProposal,
     } from '@contexts/governance/utils'
     import { openPopup, PopupId } from '@desktop/auxiliary/popup'
+    import { NetworkId } from '@core/network'
 
-    const { metadata } = $visibleSelectedAccountAssets?.baseCoin ?? {}
+    // TODO: replace Testnet with the profile network
+    const { metadata } = $visibleSelectedAccountAssets?.[NetworkId.Testnet]?.baseCoin ?? {}
 
     let selectedAnswerValues: number[] = []
     let votedAnswerValues: number[] = []

@@ -2,13 +2,16 @@
     import { IAsset, visibleSelectedAccountAssets } from '@core/wallet'
     import { AssetTile, Icon, Text, AssetIcon, FontWeight } from 'shared/components'
     import { clickOutside } from '@core/utils'
+    import { NetworkId } from '@core/network'
 
-    export let asset = $visibleSelectedAccountAssets?.baseCoin
+    // TODO: replace Testnet with profile network
+    export let asset = $visibleSelectedAccountAssets?.[NetworkId.Testnet]?.baseCoin
     export let readonly: boolean = false
 
     let isDropdownOpen = false
 
-    $: isReadonly = readonly || $visibleSelectedAccountAssets?.nativeTokens.length === 0
+    // TODO: replace Testnet with profile network
+    $: isReadonly = readonly || $visibleSelectedAccountAssets?.[NetworkId.Testnet]?.nativeTokens.length === 0
 
     function onDropdownClick(): void {
         if (!isReadonly) {

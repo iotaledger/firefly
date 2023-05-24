@@ -4,7 +4,7 @@
     import { TextType } from '@ui/enums'
 
     import { localize } from '@core/i18n'
-    import { nodeInfo } from '@core/network'
+    import { NetworkId, nodeInfo } from '@core/network'
     import { selectedAccountAssets } from '@core/wallet'
 
     $: fomattedNetworkName = $nodeInfo?.protocol.networkName
@@ -12,7 +12,8 @@
         .map((word) => word[0].toUpperCase() + word.substring(1))
         .join(' ')
 
-    $: ({ baseCoin } = $selectedAccountAssets)
+    // TODO: replace Testnet with the profile network
+    $: ({ baseCoin } = $selectedAccountAssets[NetworkId.Testnet])
 </script>
 
 <account-summary class="block relative p-6 space-y-4">

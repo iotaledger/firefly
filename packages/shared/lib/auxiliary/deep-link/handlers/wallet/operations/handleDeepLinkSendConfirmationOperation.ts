@@ -22,6 +22,7 @@ import {
 } from '../../../errors'
 import { getRawAmountFromSearchParam } from '../../../utils'
 import { getNetworkHrp } from '@core/profile'
+import { NetworkId } from '@core/network/enums'
 
 export function handleDeepLinkSendConfirmationOperation(searchParams: URLSearchParams): void {
     const transactionDetails = parseSendConfirmationOperation(searchParams)
@@ -61,8 +62,9 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): NewTrans
 
     const assetId = searchParams.get(SendOperationParameter.AssetId)
     assetId && validateAssetId(assetId)
-    const baseAsset = get(selectedAccountAssets).baseCoin
-    const asset = assetId ? getAssetById(assetId) : baseAsset
+    // TODO: replace Testnet with the selected asset network/chain
+    const baseAsset = get(selectedAccountAssets)[NetworkId.Testnet].baseCoin
+    const asset = assetId ? getAssetById(assetId, NetworkId.Testnet) : baseAsset
     if (!asset) {
         throw new UnknownAssetError()
     }
