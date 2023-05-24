@@ -101,7 +101,7 @@ public class WalletPlugin: CAPPlugin {
         let new_password = call.getString("new_password") ?? ""
 
         do {
-            Wallet.iotaMigrateStrongholdSnapshotV2ToV3(
+            Wallet.iota_migrate_stronghold_snapshot_v2_to_v3(
                 currentPath,
                 currentPassword,
                 new_path,
