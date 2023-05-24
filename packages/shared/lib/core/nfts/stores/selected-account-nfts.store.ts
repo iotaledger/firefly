@@ -9,8 +9,8 @@ import { time } from '@core/app/stores/time.store'
 export const selectedAccountNfts: Readable<INft[]> = derived(
     [selectedAccount, allAccountNfts],
     ([$selectedAccount, $allAccountNfts]) => {
-        if (selectedAccount) {
-            return $allAccountNfts[$selectedAccount?.index] ?? []
+        if ($selectedAccount) {
+            return $allAccountNfts[$selectedAccount.index] ?? []
         } else {
             return []
         }

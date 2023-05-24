@@ -2,19 +2,20 @@
     import { localize } from '@core/i18n'
     import { TimePeriod } from '@core/utils'
     import { NetworkIcon, Text, TooltipIcon } from '@ui'
-    import DateTimePickerButton from './DateTimePickerButton.svelte'
-    import { formatTokenAmountPrecise } from '@core/wallet'
-    import { getBaseToken } from '@core/profile'
     import { NetworkId } from '@core/network'
+    import DateTimePickerButton from './DateTimePickerButton.svelte'
+    import StorageDepositButton from './StorageDepositButton.svelte'
 
     export let destinationNetwork: string
     export let storageDeposit: number
+    export let giftStorageDeposit: boolean
     export let expirationDate: Date
     export let selectedExpirationPeriod: TimePeriod
     export let selectedTimelockPeriod: TimePeriod
     export let timelockDate: Date
     export let disableChangeExpiration: boolean
     export let disableChangeTimelock: boolean
+    export let disableGiftStorageDeposit: boolean
     export let disableAll: boolean
 </script>
 
@@ -24,7 +25,7 @@
             <Text>{localize('general.destinationNetwork')}</Text>
             <div class="flex flex-row gap-2">
                 <!-- TODO: Add correct icon for L2 -->
-                <NetworkIcon networkId={NetworkId.Testnet} height={16} width={16} />
+                <NetworkIcon networkId={NetworkId.Testnet} height={16} width={16} outlined={false} />
                 <Text color="gray-600">{destinationNetwork}</Text>
             </div>
         </section>
@@ -32,7 +33,7 @@
     {#if storageDeposit}
         <section class="key-value-box border-gray-200 dark:border-gray-700">
             <div class="flex flex-row">
-                <Text>{localize('general.storageDeposit')}</Text>
+                <Text>{localize(giftStorageDeposit ? 'general.giftedStorageDeposit' : 'general.storageDeposit')}</Text>
                 <TooltipIcon
                     title={localize('general.storageDeposit')}
                     text={localize('tooltips.transactionDetails.outgoing.storageDeposit')}
@@ -41,7 +42,11 @@
                     classes="ml-1"
                 />
             </div>
-            <Text>{formatTokenAmountPrecise(storageDeposit, getBaseToken())}</Text>
+            <StorageDepositButton
+                bind:giftStorageDeposit
+                {storageDeposit}
+                disabled={disableGiftStorageDeposit || disableAll}
+            />
         </section>
     {/if}
     {#if selectedExpirationPeriod}

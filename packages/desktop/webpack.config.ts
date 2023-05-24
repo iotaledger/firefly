@@ -270,9 +270,6 @@ const webpackConfig: Configuration[] = [
         },
     },
     {
-        externals: {
-            argon2: 'commonjs argon2',
-        },
         target: 'electron-renderer',
         entry: {
             'build/preload': ['./electron/preload.js'],

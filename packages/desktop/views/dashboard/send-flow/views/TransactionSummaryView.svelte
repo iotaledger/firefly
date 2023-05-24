@@ -1,6 +1,5 @@
 <script lang="ts">
-    import { onMount } from 'svelte'
-    import { closePopup } from '@auxiliary/popup/actions'
+    import { closePopup } from '@desktop/auxiliary/popup'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
@@ -8,20 +7,26 @@
     import { ledgerPreparedOutput } from '@core/ledger/stores'
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { isActiveLedgerProfile } from '@core/profile/stores'
+    import { truncateString } from '@core/utils'
     import { TimePeriod } from '@core/utils/enums'
     import { sendOutput } from '@core/wallet/actions'
     import { DEFAULT_TRANSACTION_OPTIONS } from '@core/wallet/constants'
-    import { NewTransactionType, newTransactionDetails, updateNewTransactionDetails } from '@core/wallet/stores'
+    import {
+        NewTransactionType,
+        newTransactionDetails,
+        selectedAccountAssets,
+        updateNewTransactionDetails,
+    } from '@core/wallet/stores'
     import { Output } from '@core/wallet/types'
-    import { getOutputOptions, getStorageDepositFromOutput, validateSendConfirmation } from '@core/wallet/utils'
-    import type { OutputOptions } from '@iota/wallet'
+    import { getOutputParameters, getStorageDepositFromOutput, validateSendConfirmation } from '@core/wallet/utils'
+    import type { OutputParams } from '@iota/wallet'
     import { AddInputButton, ExpirationTimePicker, OptionalInput } from '@ui'
+    import { onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { sendFlowRouter } from '../send-flow.router'
     import SendFlowTemplate from './SendFlowTemplate.svelte'
     import TokenAmountTile from './components/TokenAmountTile.svelte'
     import TransactionDetails from './components/TransactionDetails.svelte'
-    import { truncateString } from '@core/utils'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -34,19 +39,20 @@
         layer2Parameters,
         tag,
         metadata,
+        disableToggleGift,
     } = get(newTransactionDetails)
 
     const destinationNetwork = getDestinationNetworkFromAddress(layer2Parameters?.networkAddress)
     let storageDeposit = 0
     let visibleSurplus = 0
     let preparedOutput: Output
-    let outputOptions: OutputOptions
+    let outputParams: OutputParams
     let expirationTimePicker: ExpirationTimePicker
     let metadataInput: OptionalInput
     let tagInput: OptionalInput
 
-    let selectedExpirationPeriod: TimePeriod
-    let selectedTimelockPeriod: TimePeriod
+    let selectedExpirationPeriod: TimePeriod | undefined = expirationDate ? TimePeriod.Custom : undefined
+    let selectedTimelockPeriod: TimePeriod | undefined = timelockDate ? TimePeriod.Custom : undefined
 
     $: transactionDetails = get(newTransactionDetails)
     $: recipient =
@@ -87,8 +93,8 @@
     async function prepareTransactionOutput(): Promise<void> {
         const transactionDetails = get(newTransactionDetails)
 
-        outputOptions = getOutputOptions(transactionDetails)
-        preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
+        outputParams = getOutputParameters(transactionDetails)
+        preparedOutput = await prepareOutput($selectedAccount.index, outputParams, DEFAULT_TRANSACTION_OPTIONS)
 
         setStorageDeposit(preparedOutput, Number(surplus))
     }
@@ -126,7 +132,7 @@
 
     async function onConfirmClick(): Promise<void> {
         try {
-            validateSendConfirmation(outputOptions, preparedOutput)
+            validateSendConfirmation(outputParams, preparedOutput)
 
             if ($isActiveLedgerProfile) {
                 ledgerPreparedOutput.set(preparedOutput)
@@ -161,19 +167,30 @@
         isBusy: isTransferring,
     }}
 >
-    {#if transactionDetails.type === NewTransactionType.TokenTransfer}
-        <TokenAmountTile asset={transactionDetails.asset} amount={transactionDetails.rawAmount} />
-    {/if}
+    <div class="flex flex-row gap-2 justify-between">
+        {#if transactionDetails.type === NewTransactionType.TokenTransfer}
+            <TokenAmountTile asset={transactionDetails.asset} amount={transactionDetails.rawAmount} />
+        {/if}
+        {#if visibleSurplus}
+            <TokenAmountTile
+                asset={$selectedAccountAssets.baseCoin}
+                amount={String(visibleSurplus)}
+                showAssetInfo={false}
+            />
+        {/if}
+    </div>
 
     <TransactionDetails
         bind:expirationDate
         bind:timelockDate
         bind:selectedExpirationPeriod
         bind:selectedTimelockPeriod
-        {destinationNetwork}
+        bind:giftStorageDeposit
         {storageDeposit}
+        {destinationNetwork}
         {disableChangeExpiration}
         disableChangeTimelock={disableChangeExpiration}
+        disableGiftStorageDeposit={disableToggleGift}
         disableAll={isTransferring}
     />
 

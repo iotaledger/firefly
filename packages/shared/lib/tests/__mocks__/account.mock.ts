@@ -3,21 +3,19 @@ import {
     AccountBalance,
     AccountMetadata,
     Address,
-    AddressNativeTokens,
-    AddressNftId,
-    AddressWithAmount,
-    AddressWithMicroAmount,
-    AliasOutputOptions,
+    SendNativeTokensParams,
+    SendNftParams,
+    SendAmountParams,
+    AliasOutputParams,
     BuildAliasOutputData,
     BuildBasicOutputData,
     BuildFoundryOutputData,
     BuildNftOutputData,
     FilterOptions,
-    IncreaseNativeTokenSupplyOptions,
     MintTokenTransaction,
     Node,
     OutputData,
-    OutputOptions,
+    OutputParams,
     OutputsToClaim,
     ParticipationEventRegistrationOptions,
     ParticipationEventStatus,
@@ -82,10 +80,7 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    createAliasOutput(
-        aliasOutputOptions?: AliasOutputOptions,
-        transactionOptions?: TransactionOptions
-    ): Promise<Transaction> {
+    createAliasOutput(params?: AliasOutputParams, transactionOptions?: TransactionOptions): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
 
@@ -191,7 +186,6 @@ export class AccountMock implements IAccount {
     increaseNativeTokenSupply(
         tokenId: string,
         mintAmount: string,
-        increaseNativeTokenSupplyOptions?: IncreaseNativeTokenSupplyOptions,
         transactionOptions?: TransactionOptions
     ): Promise<MintTokenTransaction> {
         throw new Error('Method not implemented.')
@@ -213,10 +207,7 @@ export class AccountMock implements IAccount {
         return Promise.resolve([])
     }
 
-    prepareSendAmount(
-        addressWithAmount: AddressWithAmount[],
-        options?: TransactionOptions
-    ): Promise<PreparedTransactionData> {
+    prepareSendAmount(params: SendAmountParams[], options?: TransactionOptions): Promise<PreparedTransactionData> {
         throw new Error('Method not implemented.')
     }
 
@@ -232,15 +223,15 @@ export class AccountMock implements IAccount {
         return Promise.resolve([MOCK_ADDRESS])
     }
 
-    mintNativeToken(nativeTokenOptions, transferOptions): Promise<MintTokenTransaction> {
+    mintNativeToken(params, transferOptions): Promise<MintTokenTransaction> {
         throw new Error('Method not implemented.')
     }
 
-    mintNfts(nftOptions, transferOptions): Promise<Transaction> {
+    mintNfts(params, transferOptions): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
 
-    prepareOutput(options: OutputOptions, transactionOptions?: TransactionOptions): Promise<OutputTypes> {
+    prepareOutput(options: OutputParams, transactionOptions?: TransactionOptions): Promise<OutputTypes> {
         throw new Error('Method not implemented.')
     }
 
@@ -266,21 +257,15 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    sendAmount(
-        addressesWithAmount: AddressWithAmount[],
-        transactionOptions?: TransactionOptions
-    ): Promise<Transaction> {
+    sendAmount(params: SendAmountParams[], transactionOptions?: TransactionOptions): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
 
-    sendNativeTokens(
-        addressesNativeTokens: AddressNativeTokens[],
-        transactionOptions?: TransactionOptions
-    ): Promise<Transaction> {
+    sendNativeTokens(params: SendNativeTokensParams[], transactionOptions?: TransactionOptions): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
 
-    sendNft(addressesAndNftIds: AddressNftId[], transactionOptions?: TransactionOptions): Promise<Transaction> {
+    sendNft(params: SendNftParams[], transactionOptions?: TransactionOptions): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
 

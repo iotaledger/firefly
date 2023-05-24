@@ -11,45 +11,33 @@ const AppEth = require('@ledgerhq/hw-app-eth').default
 const { listen } = require('@ledgerhq/logs')
 
 process.parentPort.on('message', async (message) => {
-    switch (message.data.method) {
-        case 'generate-evm-address': {
-            const data = await getEvmAddress(...message.data.parameters)
-            process.parentPort.postMessage({ data })
-            break
+    try {
+        let data
+        switch (message.data.method) {
+            case 'generate-evm-address': {
+                data = await getEvmAddress(...message.data.parameters)
+                break
+            }
+            default:
+                break
         }
-        default:
-            break
+        process.parentPort.postMessage({ data })
+    } catch (error) {
+        process.parentPort.postMessage({ error })
     }
 })
 
 async function getEvmAddress(coinType, accountIndex, verify) {
-    try {
-        const transport = await TransportNodeHid.open('')
-        listen((log) => {
-            process.parentPort.postMessage({ data: log })
-        })
-        const appEth = new AppEth(transport)
-        const address = await appEth.getAddress(buildBip32Path(coinType, accountIndex))
-        await transport.close()
-        return address
-    } catch (err) {
-        return retryFunction(getEvmAddress, [coinType, accountIndex, verify], 15)
-    }
+    const transport = await TransportNodeHid.open('')
+    listen((log) => {
+        process.parentPort.postMessage({ data: log })
+    })
+    const appEth = new AppEth(transport)
+    const data = await appEth.getAddress(buildBip32Path(coinType, accountIndex))
+    await transport.close()
+    return { evmAddress: data.address, coinType, accountIndex }
 }
 
 function buildBip32Path(coinType, accountIndex) {
     return `44'/${coinType}'/${accountIndex}'/0/0`
-}
-
-let retriesCounter = 0
-
-function retryFunction(func, parameters, numberOfRetries) {
-    return new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
-        if (retriesCounter === numberOfRetries) {
-            retriesCounter = 0
-        } else {
-            retriesCounter++
-            void func(...parameters)
-        }
-    })
 }

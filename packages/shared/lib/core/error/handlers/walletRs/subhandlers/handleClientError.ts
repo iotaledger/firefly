@@ -3,8 +3,9 @@ import { ClientError, WalletRsError } from '../../../enums'
 import { IError } from '../../../interfaces'
 import { logAndNotifyError } from '../../../actions'
 import { handleGenericError } from '../../handleGenericError'
+import { LedgerError, handleLedgerError } from '@core/ledger'
 
-export function handleClientError(error: IError): void {
+export function handleClientError(error: IError, resetConfirmationPropsOnDenial = true): void {
     const errorMessage = error?.error
     let errorKey
     if (errorMessage) {
@@ -18,6 +19,9 @@ export function handleClientError(error: IError): void {
             case CLIENT_ERROR_REGEXES[ClientError.InsufficientAmount].test(errorMessage):
                 errorKey = ClientError.InsufficientAmount
                 break
+            case Object.values(LedgerError).some((ledgerError) => errorMessage.includes(ledgerError)):
+                handleLedgerError(error, resetConfirmationPropsOnDenial)
+                return
         }
         if (errorKey) {
             const errorObject = WALLET_RS_ERROR_PARAMETERS?.[WalletRsError.Client]?.[errorKey]

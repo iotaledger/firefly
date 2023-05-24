@@ -2,7 +2,7 @@ import { get } from 'svelte/store'
 
 import {
     DEFAULT_TRANSACTION_OPTIONS,
-    getOutputOptions,
+    getOutputParameters,
     resetNewTokenTransactionDetails,
     setNewTransactionDetails,
     NewTransactionType,
@@ -78,8 +78,8 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
     }
     setNewTransactionDetails(newTransactionDetails)
 
-    const outputOptions = getOutputOptions(newTransactionDetails)
-    const preparedOutput = await shimmerClaimingAccount?.prepareOutput(outputOptions, DEFAULT_TRANSACTION_OPTIONS)
+    const outputParams = getOutputParameters(newTransactionDetails)
+    const preparedOutput = await shimmerClaimingAccount?.prepareOutput(outputParams, DEFAULT_TRANSACTION_OPTIONS)
 
     const claimingTransaction = await shimmerClaimingAccount?.sendOutputs([preparedOutput])
     resetNewTokenTransactionDetails()

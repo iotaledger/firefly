@@ -1,8 +1,10 @@
 export enum NetworkConfigRoute {
-    ConnectedChains = 'connectedChains',
-    ChainInformation = 'chainInformation',
     AddChain = 'addChain',
+    ChainDepositAddress = 'chainDepositAddress',
+    ChainInformation = 'chainInformation',
+    ConfirmLedgerEvmAddress = 'confirmLedgerEvmAddress',
+    ConnectedChains = 'connectedChains',
+    ConnectLedgerDevice = 'connectLedgerDevice',
     EditChain = 'editChain',
     RemoveChain = 'removeChain',
-    ChainDepositAddress = 'chainDepositAddress',
 }

@@ -5,7 +5,6 @@
     import { isValidPin, PIN_LENGTH } from '@core/utils'
 
     const dispatch = createEventDispatcher()
-    const isAndroid = $platform === PlatformOption.Android
 
     export let value: string
     export let error: string = ''
@@ -24,6 +23,7 @@
         }
     }
     $: value.length === PIN_LENGTH && dispatch('filled')
+    $: isAndroid = $platform === PlatformOption.Android
 
     let root: HTMLElement
     const inputElements: HTMLElement[] = []

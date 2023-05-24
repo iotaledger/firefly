@@ -1,5 +1,12 @@
 <script lang="ts">
-    import { fade } from 'svelte/transition'
+    import { PopupId, closePopup, openPopup, popupState } from '../../../desktop/lib/auxiliary/popup'
+    import { appVersionDetails } from '@core/app'
+    import { localize } from '@core/i18n'
+    import { LedgerConnectionState, ledgerConnectionState } from '@core/ledger'
+    import { activeProfile, isActiveLedgerProfile, isSoftwareProfile, lockStronghold, logout } from '@core/profile'
+    import { routerManager } from '@core/router'
+    import { checkOrUnlockStronghold } from '@core/stronghold'
+    import { diffDates, getBackupWarningColor, isRecentDate } from '@core/utils'
     import {
         Button,
         ButtonSize,
@@ -7,22 +14,15 @@
         HR,
         Icon,
         Modal,
+        ProfilePicture,
         Text,
         TextType,
         Toggle,
-    } from 'shared/components'
-    import { localize } from '@core/i18n'
-    import { LedgerConnectionState, ledgerConnectionState } from '@core/ledger'
-    import { closePopup, openPopup, PopupId, popupState } from '@auxiliary/popup'
-    import { routerManager } from '@core/router'
-    import { diffDates, getBackupWarningColor, getInitials, isRecentDate } from '@core/utils'
-    import { appVersionDetails } from '@core/app'
-    import { activeProfile, isActiveLedgerProfile, isSoftwareProfile, lockStronghold, logout } from '@core/profile'
-    import { checkOrUnlockStronghold } from '@core/stronghold'
+    } from '@ui'
+    import { fade } from 'svelte/transition'
 
     export let modal: Modal = undefined
 
-    const profileColor = 'blue' // TODO: each profile has a different color
     const isUpToDate = $appVersionDetails.upToDate
 
     const { isStrongholdLocked, shouldOpenProfileModal } = $activeProfile
@@ -30,7 +30,6 @@
     let ledgerConnectionText = ''
 
     $: profileName = $activeProfile?.name
-    $: profileInitial = getInitials(profileName, 1)
     $: lastStrongholdBackupTime = $activeProfile?.lastStrongholdBackupTime
     $: lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
     $: lastBackupDateFormatted = diffDates(lastBackupDate, new Date())
@@ -87,9 +86,7 @@
 >
     <profile-modal-content class="flex flex-col" in:fade={{ duration: 100 }}>
         <div class="flex flex-row flex-nowrap items-center space-x-3 p-3">
-            <div class="w-8 h-8 flex items-center justify-center flex-shrink-0 rounded-full bg-{profileColor}-500">
-                <span class="text-12 leading-100 text-center text-white uppercase">{profileInitial}</span>
-            </div>
+            <ProfilePicture profile={$activeProfile} size="small" />
             <div class="flex flex-row items-center space-x-2">
                 <Text>{profileName}</Text>
                 {#if $activeProfile?.isDeveloperProfile}

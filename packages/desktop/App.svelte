@@ -25,7 +25,7 @@
         setPlatform,
     } from '@core/app'
     import { showAppNotification } from '@auxiliary/notification'
-    import { closePopup, openPopup, PopupId, popupState } from '@auxiliary/popup'
+    import { closePopup, openPopup, PopupId, popupState } from '@desktop/auxiliary/popup'
     import { getLocalisedMenuItems } from './lib/helpers'
     import { ToastContainer, Transition } from '@ui'
     import { TitleBar, Popup } from '@components'
@@ -40,20 +40,20 @@
         openSettings,
     } from '@desktop/routers'
     import { downloadNextNftInQueue, nftDownloadQueue } from '@core/nfts'
-    import { closeDrawer } from '@desktop/auxilary/drawer'
+    import { closeDrawer } from '@desktop/auxiliary/drawer'
     import features from '@features/features'
     import { OnboardingRouterView } from '@views/onboarding'
     import { registerLayer2EventHandlers } from '@core/layer-2'
+    import { registerLedgerDeviceEventHandlers } from '@core/ledger'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
     const { loggedIn, hasLoadedAccounts } = $activeProfile
-    const isWindows = $platform === PlatformOption.Windows
 
     $: if ($activeProfile && !$loggedIn) {
         closePopup(true)
     }
-
+    $: isWindows = $platform === PlatformOption.Windows
     $: $activeProfile, saveActiveProfile()
 
     async function handleCrashReporting(sendCrashReports: boolean): Promise<void> {
@@ -152,6 +152,7 @@
 
         Platform.onEvent('deep-link-request', showDeepLinkNotification)
 
+        registerLedgerDeviceEventHandlers()
         registerLayer2EventHandlers()
 
         const platform = await Platform.getOS()

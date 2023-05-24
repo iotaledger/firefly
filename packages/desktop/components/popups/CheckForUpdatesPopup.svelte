@@ -12,7 +12,7 @@
         openUrlInBrowser,
     } from '@core/app'
     import { formatDate, localize } from '@core/i18n'
-    import { closePopup } from '@auxiliary/popup'
+    import { closePopup } from '@desktop/auxiliary/popup'
     import features from '@features/features'
 
     let hasAutoUpdate = false

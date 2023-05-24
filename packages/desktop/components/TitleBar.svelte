@@ -6,15 +6,15 @@
     import { activeProfile } from '@core/profile/stores'
     import { appRoute, AppRoute } from '@core/router'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { popupState } from '@auxiliary/popup/stores'
+    import { popupState } from '@desktop/auxiliary/popup'
 
     const { hasLoadedAccounts } = $activeProfile
-    const isWindows = $platform === PlatformOption.Windows
 
     let isMaximized = false
 
     $: isDashboardVisible = $appRoute === AppRoute.Dashboard && $hasLoadedAccounts && $popupState.id !== 'busy'
     $: dark = $appSettings.darkMode
+    $: isWindows = $platform === PlatformOption.Windows
 
     async function onResize(): Promise<void> {
         isMaximized = await Platform.isMaximized()
