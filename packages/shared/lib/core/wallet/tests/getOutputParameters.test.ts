@@ -1,4 +1,5 @@
 import { CoinType } from '@iota/wallet/out/types'
+import { NetworkId } from '@core/network'
 
 import { activeProfileId } from '@core/profile/stores/active-profile-id.store'
 import { GAS_BUDGET } from '@core/layer-2/constants'
@@ -6,7 +7,7 @@ import { GAS_BUDGET } from '@core/layer-2/constants'
 import { getOutputParameters } from '../utils'
 import { ReturnStrategy, TokenStandard, VerifiedStatus } from '../enums'
 import { IAsset, IPersistedAsset } from '../interfaces'
-import { NewTransactionType, getAssetById } from '../stores'
+import { NewTransactionType } from '../stores'
 import { NewTransactionDetails } from '../types'
 
 const PERSISTED_ASSET_SHIMMER: IPersistedAsset = {
@@ -58,8 +59,10 @@ jest.mock('../stores/persisted-assets.store', () => ({
 jest.mock('../actions/getAccountAssetsForSelectedAccount', () => ({
     getAccountAssetsForSelectedAccount: jest.fn((_) => {
         return {
-            baseCoin: PERSISTED_ASSET_SHIMMER,
-            nativeTokens: [nativeTokenAsset],
+            [NetworkId.Testnet]: {
+                baseCoin: PERSISTED_ASSET_SHIMMER,
+                nativeTokens: [nativeTokenAsset],
+            },
         }
     }),
 }))

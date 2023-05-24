@@ -13,7 +13,7 @@ import { get } from 'svelte/store'
 import { SendOperationParameter } from '../../../enums'
 import { UnknownAssetError } from '../../../errors'
 import { getRawAmountFromSearchParam } from '../../../utils'
-import { activeProfile } from '@core/profile'
+import { activeProfile } from '@core/profile/stores'
 
 export function handleDeepLinkSendFormOperation(searchParams: URLSearchParams): void {
     const transactionDetails = parseSendFormOperation(searchParams)

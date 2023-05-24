@@ -2,7 +2,8 @@ import { selectedAccount } from '@core/account'
 import { MarketCoinPrices } from '@core/market'
 import { NetworkId } from '@core/network'
 import { network } from '@core/network/stores'
-import { activeProfile, getCoinType } from '@core/profile'
+import { getCoinType } from '@core/profile'
+import { activeProfile } from '@core/profile/stores'
 import { isValidIrc30 } from '@core/token'
 import { get } from 'svelte/store'
 import { IAsset } from '../interfaces'
@@ -13,7 +14,7 @@ import { sortAssets } from '../utils/sortAssets'
 export function getAccountAssetsForSelectedAccount(marketCoinPrices: MarketCoinPrices): AccountAssets {
     const accountAssets = {} as AccountAssets
 
-    accountAssets[NetworkId.Testnet] = getAccountAssetForNetwork(marketCoinPrices)
+    accountAssets[get(activeProfile)?.network?.id] = getAccountAssetForNetwork(marketCoinPrices)
     const chains = get(network)?.getChains() ?? []
 
     for (const chain of chains) {

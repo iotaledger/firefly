@@ -6,7 +6,7 @@ import { addGasBudget, getLayer2MetadataForTransfer } from '@core/layer-2/utils'
 import { NewTransactionDetails } from '@core/wallet/types'
 import { getAddressFromSubject } from '@core/wallet/utils'
 import { ReturnStrategy } from '../enums'
-import { activeProfile } from '@core/profile'
+import { activeProfile } from '@core/profile/stores'
 
 export function getOutputParameters(transactionDetails: NewTransactionDetails): OutputParams {
     const { recipient, expirationDate, timelockDate, giftStorageDeposit, layer2Parameters } = transactionDetails ?? {}
