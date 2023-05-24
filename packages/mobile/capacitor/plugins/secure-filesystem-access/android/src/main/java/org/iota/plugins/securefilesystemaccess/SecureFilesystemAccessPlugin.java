@@ -353,7 +353,7 @@ public class SecureFilesystemAccessPlugin extends Plugin {
             if (fileName.exists()) {
                 boolean isDeleted = fileName.delete();
                 if (!isDeleted) {
-                    call.reject("Can't delete Stronghold file");
+                    call.reject("Can't delete file");
                 }
             }
             call.resolve();
