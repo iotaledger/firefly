@@ -15,7 +15,7 @@ export class IscpChain implements IChain {
     private readonly _provider: Web3Provider
     private readonly _configuration: IIscpChainConfiguration
 
-    private _metadata: IIscpChainMetadata
+    private _metadata: IIscpChainMetadata | undefined
 
     constructor(payload: IIscpChainConfiguration) {
         try {
@@ -30,6 +30,7 @@ export class IscpChain implements IChain {
             this._configuration = payload
         } catch (err) {
             console.error(err)
+            throw new Error('Failed to construct ISCP Chain!')
         }
     }
 
