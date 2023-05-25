@@ -3,7 +3,8 @@ import { ClientError, WalletRsError } from '../../../enums'
 import { IError } from '../../../interfaces'
 import { logAndNotifyError } from '../../../actions'
 import { handleGenericError } from '../../handleGenericError'
-import { LedgerError, handleLedgerError } from '@core/ledger'
+import { handleLedgerError } from '@core/ledger/utils'
+import { LedgerError } from '@core/ledger/enums'
 
 export function handleClientError(error: IError, resetConfirmationPropsOnDenial = true): void {
     const errorMessage = error?.error

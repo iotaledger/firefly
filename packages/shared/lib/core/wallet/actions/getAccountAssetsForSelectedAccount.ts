@@ -1,4 +1,4 @@
-import { selectedAccount } from '@core/account'
+import { selectedAccount } from '@core/account/stores'
 import { MarketCoinPrices } from '@core/market'
 import { NetworkId } from '@core/network'
 import { activeProfile, getCoinType } from '@core/profile'
