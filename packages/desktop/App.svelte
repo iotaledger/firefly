@@ -62,9 +62,11 @@
 
     $: void handleCrashReporting($appSettings.sendCrashReports)
 
+    $: $appSettings.darkMode ? document.body.classList.add('dark') : document.body.classList.remove('dark')
+
     $: $appSettings.darkMode
-        ? document.body.classList.add('scheme-dark')
-        : document.body.classList.remove('scheme-dark')
+        ? document.getElementsByTagName('html')?.[0].classList.add('dark')
+        : document.getElementsByTagName('html')?.[0].classList.remove('dark')
 
     $: {
         if ($isLocaleLoaded) {
@@ -180,7 +182,7 @@
         class="block fixed left-0 right-0 bottom-0 z-50 top-0"
         class:top-placement={isWindows || isDashboardVisible}
     >
-        <div class="scheme-dark" />
+        <div class="dark" />
         {#if !$isLocaleLoaded || splash}
             <Splash />
         {:else}
@@ -258,7 +260,7 @@
             overflow-y: overlay;
         }
 
-        &.scheme-dark {
+        &.dark {
             @apply bg-gray-900;
             :global(::-webkit-scrollbar-thumb) {
                 @apply border-gray-900;

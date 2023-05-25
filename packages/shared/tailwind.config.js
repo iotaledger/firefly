@@ -10,6 +10,7 @@ const DESKTOP_CONTENT_ROUTES = ['../desktop/**/*.svelte']
 const MOBILE_CONTENT_ROUTES = ['../mobile/**/*.svelte']
 
 module.exports = {
+    darkMode: ['class', '[data-mode="dark"]'],
     content: [...SHARED_CONTENT_ROUTES, ...(IS_DESKOP ? DESKTOP_CONTENT_ROUTES : MOBILE_CONTENT_ROUTES)],
     safelist: [
         {
@@ -39,9 +40,7 @@ module.exports = {
         {
             pattern: /^p-/,
         },
-        'scheme-dark',
-        'fill-current',
-        'stroke-current',
+        'dark',
     ],
     theme: {
         colors: {
