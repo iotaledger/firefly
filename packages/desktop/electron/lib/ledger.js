@@ -10,7 +10,7 @@ const TransportNodeHid = require('@ledgerhq/hw-transport-node-hid').default
 const AppEth = require('@ledgerhq/hw-app-eth').default
 const { listen } = require('@ledgerhq/logs')
 
-const { Common } = require('@ethereumjs/common')
+const { Chain, Common } = require('@ethereumjs/common')
 const { RLP } = require('@ethereumjs/rlp')
 const { Transaction } = require('@ethereumjs/tx')
 const { bufArrToArr } = require('@ethereumjs/util')
@@ -72,14 +72,16 @@ function buildBip32Path(coinType, accountIndex) {
 
 async function signTransactionData(data, coinType, accountIndex) {
     const appEth = new AppEth(transport)
+    const common = new Common({ chain: Chain.Sepolia })
 
-    const common = new Common({ chain: 11155111 })
     const unsignedTransactionObject = Transaction.fromTxData(data, { common })
     const unsignedTransaction = unsignedTransactionObject.getMessageToSign(false)
+
     const serializedUnsignedTransaction = Buffer.from(RLP.encode(bufArrToArr(unsignedTransaction)))
     const signature = await appEth.signTransaction(
         buildBip32Path(coinType, accountIndex),
-        serializedUnsignedTransaction
+        serializedUnsignedTransaction,
+        null
     )
 
     const signedTransactionObject = Transaction.fromTxData(
