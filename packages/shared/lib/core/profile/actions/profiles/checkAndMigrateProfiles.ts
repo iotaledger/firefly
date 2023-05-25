@@ -254,12 +254,10 @@ function persistedProfileMigrationToV13(
         'network',
     ]
     const accountPersistedData = {}
-    if (existingProfile?.accountMetadata?.length) {
-        existingProfile.accountMetadata.forEach((metadata) => {
-            const { index, ...rest } = metadata
-            accountPersistedData[index] = rest
-        })
-    }
+    existingProfile.accountMetadata?.forEach((metadata) => {
+        const { index, ...rest } = metadata
+        accountPersistedData[index] = { evmAddresses: {}, ...rest }
+    })
     existingProfile.accountPersistedData = accountPersistedData
     keysToKeep.forEach((key) => {
         const existingValue = existingProfile?.[key]

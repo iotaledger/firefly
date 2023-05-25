@@ -1,3 +1,3 @@
-import { PopupId } from '@auxiliary/popup'
+import { PopupId } from '../enums'
 
 export type PopupComponentMap = { [key in PopupId]: unknown }

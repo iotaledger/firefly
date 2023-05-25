@@ -1,11 +1,11 @@
 import { AccountBalance } from '@iota/wallet'
 
 import { getDepositAddress } from '@core/account/utils'
+import { getActiveProfilePersistedEvmAddressesByAccountIndex } from '@core/profile/stores'
 
 import { IAccount, IAccountState, IPersistedAccountData } from '../interfaces'
 
 export async function buildAccountState(
-    accountIndex: number,
     account: IAccount,
     accountPersistedData: IPersistedAccountData
 ): Promise<IAccountState> {
@@ -27,6 +27,8 @@ export async function buildAccountState(
         potentiallyLockedOutputs: {},
         aliases: [],
     }
+    const accountIndex = account.getMetadata().index
+    const evmAddresses = getActiveProfilePersistedEvmAddressesByAccountIndex(accountIndex)
     let depositAddress = ''
     let votingPower = ''
     try {
@@ -42,7 +44,7 @@ export async function buildAccountState(
         ...account,
         ...accountPersistedData,
         depositAddress,
-        evmAddresses: {},
+        evmAddresses,
         balances,
         hasVotingPowerTransactionInProgress: false,
         hasVotingTransactionInProgress: false,

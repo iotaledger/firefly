@@ -1,7 +1,8 @@
 <script lang="ts">
     import { selectedAccount, setNextSelectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { activeProfile, nonHiddenActiveAccounts, updateActiveAccountPersistedData } from '@core/profile'
+    import { activeProfile, nonHiddenActiveAccounts } from '@core/profile'
+    import { updateActiveAccountPersistedData } from '@core/profile/actions'
     import { Icon } from '@lib/auxiliary/icon'
     import { MenuItem } from '@ui'
 

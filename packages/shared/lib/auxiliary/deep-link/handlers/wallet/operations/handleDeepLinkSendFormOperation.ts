@@ -7,7 +7,7 @@ import {
     NewTransactionType,
     getUnitFromTokenMetadata,
 } from '@core/wallet'
-import { openPopup, PopupId } from '@auxiliary/popup'
+import { openPopup, PopupId } from '../../../../../../../desktop/lib/auxiliary/popup'
 import { get } from 'svelte/store'
 
 import { SendOperationParameter } from '../../../enums'

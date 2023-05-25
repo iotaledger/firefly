@@ -1,5 +1,4 @@
-import { PopupId } from '@auxiliary/popup'
-import { closePopup, openPopup } from '@auxiliary/popup/actions'
+import { closePopup, openPopup, PopupId } from '../../../../../../desktop/lib/auxiliary/popup'
 import { updateParticipationOverview } from '@contexts/governance/stores'
 import { isAccountVoting } from '@contexts/governance/utils/isAccountVoting'
 import { syncVotingPower } from '@core/account'
