@@ -52,9 +52,7 @@ const baseTransaction: NewTransactionDetails = {
 
 jest.mock('../stores/persisted-assets.store', () => ({
     getPersistedAsset: jest.fn(() => PERSISTED_ASSET_SHIMMER),
-    getAssetById: jest.fn((id, networkId) =>
-        id === PERSISTED_ASSET_SHIMMER.id ? PERSISTED_ASSET_SHIMMER : nativeTokenAsset
-    ),
+    getAssetById: jest.fn((id) => (id === PERSISTED_ASSET_SHIMMER.id ? PERSISTED_ASSET_SHIMMER : nativeTokenAsset)),
 }))
 
 jest.mock('../actions/getAccountAssetsForSelectedAccount', () => ({

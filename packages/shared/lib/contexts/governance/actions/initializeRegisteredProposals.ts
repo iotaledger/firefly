@@ -1,8 +1,7 @@
 import { get } from 'svelte/store'
 
-import { selectedAccount } from '@core/account/stores'
-import { IAccountState } from '@core/account/interfaces'
-import { activeAccounts } from '@core/profile/stores'
+import { IAccountState, selectedAccount } from '@core/account'
+import { activeAccounts } from '@core/profile'
 
 import { IRegisteredProposals } from '../interfaces'
 import { registeredProposals } from '../stores'

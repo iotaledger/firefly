@@ -1,6 +1,5 @@
 import { syncBalance } from '@core/account/actions/syncBalance'
-import { addOrUpdateNftInAllAccountNfts, addNftsToDownloadQueue } from '@core/nfts/actions'
-import { buildNftFromNftOutput } from '@core/nfts/utils'
+import { addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput, addNftsToDownloadQueue } from '@core/nfts'
 import { activeAccounts } from '@core/profile/stores'
 import {
     ActivityType,

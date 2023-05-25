@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 import type { TrackedParticipationOverview } from '@iota/wallet'
-import { selectedAccountIndex } from '@core/account/stores'
+import { selectedAccountIndex } from '@core/account'
 import { getParticipationsForProposal } from './getParticipationsForProposal'
 
 export function isVotingForProposal(proposalId: string, accountIndex = get(selectedAccountIndex)): boolean {
