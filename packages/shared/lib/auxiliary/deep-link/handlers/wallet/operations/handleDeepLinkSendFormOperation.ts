@@ -13,7 +13,7 @@ import { get } from 'svelte/store'
 import { SendOperationParameter } from '../../../enums'
 import { UnknownAssetError } from '../../../errors'
 import { getRawAmountFromSearchParam } from '../../../utils'
-import { activeProfile } from '@core/profile/stores'
+import { getActiveNetworkId } from '@core/network/utils/getNetworkId'
 
 export function handleDeepLinkSendFormOperation(searchParams: URLSearchParams): void {
     const transactionDetails = parseSendFormOperation(searchParams)
@@ -39,15 +39,15 @@ export function handleDeepLinkSendFormOperation(searchParams: URLSearchParams): 
 function parseSendFormOperation(searchParams: URLSearchParams): NewTransactionDetails {
     const assetId = searchParams.get(SendOperationParameter.AssetId)
 
-    const networkId = get(activeProfile)?.network?.id
-    const baseAsset = get(selectedAccountAssets)[networkId].baseCoin
-    const asset = assetId ? getAssetById(assetId, networkId) : baseAsset
+    const networkId = getActiveNetworkId()
+    const baseAsset = networkId ? get(selectedAccountAssets)[networkId].baseCoin : undefined
+    const asset = assetId && networkId ? getAssetById(assetId, networkId) : baseAsset
     if (!asset) {
         throw new UnknownAssetError()
     }
 
     const address = searchParams.get(SendOperationParameter.Address)
-    const unit = searchParams.get(SendOperationParameter.Unit) ?? getUnitFromTokenMetadata(asset?.metadata)
+    const unit = searchParams.get(SendOperationParameter.Unit) ?? getUnitFromTokenMetadata(asset.metadata)
     const rawAmount = getRawAmountFromSearchParam(searchParams)
     const metadata = searchParams.get(SendOperationParameter.Metadata)
     const tag = searchParams.get(SendOperationParameter.Tag)

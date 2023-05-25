@@ -1,7 +1,6 @@
-import { CoinType } from '@iota/wallet/out/types'
+import { activeProfileId } from '@core/profile/stores/active-profile-id.store'
 import { NetworkId } from '@core/network/enums'
 
-import { activeProfileId } from '@core/profile/stores/active-profile-id.store'
 import { GAS_BUDGET } from '@core/layer-2/constants'
 
 import { getOutputParameters } from '../utils'
@@ -11,7 +10,7 @@ import { NewTransactionType } from '../stores'
 import { NewTransactionDetails } from '../types'
 
 const PERSISTED_ASSET_SHIMMER: IPersistedAsset = {
-    id: CoinType[CoinType.Shimmer],
+    id: '1',
     standard: TokenStandard.BaseToken,
     hidden: false,
     verification: { verified: true, status: VerifiedStatus.Official },
@@ -67,6 +66,10 @@ jest.mock('../actions/getAccountAssetsForSelectedAccount', () => ({
             },
         }
     }),
+}))
+
+jest.mock('../../profile/actions/active-profile/getCoinType', () => ({
+    getCoinType: jest.fn((_) => '1'),
 }))
 
 describe('File: getOutputParameters.ts', () => {

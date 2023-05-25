@@ -1,12 +1,11 @@
-import { get } from 'svelte/store'
 import { OutputParams, Assets } from '@iota/wallet/out/types'
 import { convertDateToUnixTimestamp, Converter } from '@core/utils'
-import { NewTransactionType, selectedAccountAssets } from '../stores'
+import { NewTransactionType } from '../stores'
 import { addGasBudget, getLayer2MetadataForTransfer } from '@core/layer-2/utils'
 import { NewTransactionDetails } from '@core/wallet/types'
 import { getAddressFromSubject } from '@core/wallet/utils'
 import { ReturnStrategy } from '../enums'
-import { activeProfile } from '@core/profile/stores'
+import { getCoinType } from '@core/profile'
 
 export function getOutputParameters(transactionDetails: NewTransactionDetails): OutputParams {
     const { recipient, expirationDate, timelockDate, giftStorageDeposit, layer2Parameters } = transactionDetails ?? {}
@@ -51,10 +50,7 @@ function getAmountFromTransactionDetails(transactionDetails: NewTransactionDetai
     if (transactionDetails.type === NewTransactionType.TokenTransfer) {
         const asset = transactionDetails.asset
 
-        const nativeTokenId =
-            asset?.id === get(selectedAccountAssets)?.[get(activeProfile)?.network?.id]?.baseCoin?.id
-                ? undefined
-                : asset?.id
+        const nativeTokenId = asset?.id === getCoinType() ? undefined : asset?.id
 
         if (nativeTokenId) {
             rawAmount = transactionDetails?.surplus ?? '0'
@@ -77,10 +73,7 @@ function getAssetFromTransactionDetails(transactionDetails: NewTransactionDetail
     } else if (transactionDetails.type === NewTransactionType.TokenTransfer) {
         const assetId = transactionDetails.asset?.id
 
-        const nativeTokenId =
-            assetId === get(selectedAccountAssets)?.[get(activeProfile)?.network?.id]?.baseCoin?.id
-                ? undefined
-                : assetId
+        const nativeTokenId = assetId === getCoinType() ? undefined : assetId
 
         if (nativeTokenId) {
             const bigAmount = BigInt(transactionDetails.rawAmount)
