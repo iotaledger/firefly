@@ -4,6 +4,7 @@ import { IDeepLinkManager, INotificationManager, IPincodeManager } from './manag
 import { IAppSettings } from './app-settings.interface'
 import { IAppVersionDetails } from './app-version-details.interface'
 import { IPlatformEventMap } from './platform-event-map.interface'
+import { AppTheme } from '../enums'
 
 export interface IPlatform {
     getStrongholdBackupDestination(defaultPath: string): Promise<string | null>
@@ -53,4 +54,5 @@ export interface IPlatform {
     trackEvent(eventName: string, eventProperties?: Record<string, unknown>): void
 
     getLanguageCode(): Promise<string>
+    updateTheme(theme: AppTheme): void
 }

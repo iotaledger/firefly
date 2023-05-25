@@ -6,7 +6,17 @@ import { shouldReportError } from './lib/errorHandling'
 import { initialiseAnalytics } from './lib/analytics'
 import { getMachineId } from './lib/machineId'
 import { getDiagnostics } from './lib/diagnostics'
-const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session, utilityProcess } = require('electron')
+const {
+    app,
+    dialog,
+    ipcMain,
+    protocol,
+    shell,
+    BrowserWindow,
+    session,
+    utilityProcess,
+    nativeTheme,
+} = require('electron')
 const path = require('path')
 const fs = require('fs')
 const Keychain = require('./lib/keychain')
@@ -457,6 +467,7 @@ ipcMain.handle('get-machine-id', (_e) => getMachineId())
 
 // Settings
 ipcMain.handle('update-app-settings', (_e, settings) => updateSettings(settings))
+ipcMain.handle('update-theme', (_e, theme) => (nativeTheme.themeSource = theme))
 
 /**
  * Define deep link state
