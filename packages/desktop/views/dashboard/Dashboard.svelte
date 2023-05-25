@@ -11,7 +11,7 @@
     } from '@core/profile'
     import { appRouter, dashboardRoute } from '@core/router'
     import { Idle } from 'shared/components'
-    import { ledgerEvmSignature, stopPollingLedgerNanoStatus } from '@core/ledger'
+    import { stopPollingLedgerNanoStatus } from '@core/ledger'
     import { removeDisplayNotification, showAppNotification } from '@auxiliary/notification'
     import { Platform } from '@core/app'
     import { Developer } from './developer'
@@ -36,7 +36,7 @@
     import { selectedAccountIndex } from '@core/account'
     import { get } from 'svelte/store'
     import features from '@features/features'
-    import { pollLayer2NativeAssets, clearLayer2NativeAssetsPoll, prepareEvmTransactionToSign } from '@core/layer-2'
+    import { pollLayer2NativeAssets, clearLayer2NativeAssetsPoll } from '@core/layer-2'
 
     const tabs = {
         wallet: Wallet,
@@ -68,18 +68,7 @@
         }
     }
 
-    /* eslint-disable no-console */
-    $: console.log('EVM SIGNATURE: ', $ledgerEvmSignature)
-
     onMount(() => {
-        prepareEvmTransactionToSign({
-            chainId: 1071,
-            originAddress: '',
-            recipientAddress: '',
-            tokenAddress: '',
-            transferAmount: 0,
-        })
-
         Platform.onEvent('menu-logout', () => {
             logout()
         })
