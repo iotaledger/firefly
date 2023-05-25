@@ -1,6 +1,6 @@
 import { handleGenericError } from '../handlers'
 import { handleClientError, handleInsufficientFundsError } from '../handlers/walletRs/subhandlers'
-// import { handleLedgerError } from '@core/ledger/utils/handleLedgerError'
+// import { handleLedgerError } from '../../ledger/utils/handleLedgerError'
 import { logAndNotifyError } from '../actions'
 import { WALLET_RS_ERROR_PARAMETERS } from '../constants'
 import { ClientError, WalletRsError } from '../enums'
@@ -14,13 +14,6 @@ jest.mock('../handlers/walletRs/subhandlers/handleInsufficientFundsError', () =>
 
 describe('Module: subhandlers', () => {
     describe('Function: handleClientError', () => {
-        const baseError = {
-            logToConsole: true,
-            saveToErrorLog: true,
-            showNotification: true,
-            type: 'Generic',
-        }
-
         beforeEach(() => {
             jest.clearAllMocks()
         })
@@ -76,54 +69,21 @@ describe('Module: subhandlers', () => {
         //     handleClientError(error);
 
         //     expect(handleLedgerError).toHaveBeenCalledWith(error, true);
-        //     expect(handleInsufficientFundsError).toHaveBeenCalledWith({type: ClientError.InsufficientAmount})
+        //     expect(handleGenericError).toHaveBeenCalledTimes(0)
         // });
 
-        //       it('should call handleGenericError for unknown error cases', () => {
-        //         const handleGenericErrorMock = jest.spyOn(global, 'handleGenericError');
+        it('should call handleGenericError for unknown error cases', () => {
+            const error = { error: 'arbitrary error' }
+            const expectedError = {
+                logToConsole: true,
+                saveToErrorLog: true,
+                showNotification: true,
+                type: 'Generic',
+            }
+            handleClientError(error, true)
 
-        //         handleClientError(error, true);
-
-        //         expect(handleGenericErrorMock).toHaveBeenCalledWith(error);
-        //       });
-
-        //       it('should call handleGenericError if errorMessage is falsy', () => {
-        //         const handleGenericErrorMock = jest.spyOn(global, 'handleGenericError');
-
-        //         handleClientError({});
-
-        //         expect(handleGenericErrorMock).toHaveBeenCalledWith({});
-        //       });
-        //     });
-
-        //     describe('replaceErrorKeyAndHandle', () => {
-        //       it('should call logAndNotifyError if errorObject and error.error are truthy', () => {
-        //         const logAndNotifyErrorMock = jest.spyOn(global, 'logAndNotifyError');
-
-        //         const error = {
-        //           error: 'Your error message',
-        //           type: 'Your error type'
-        //         };
-
-        //         const errorKey = 'NoSyncedNode';
-
-        //         replaceErrorKeyAndHandle(error, errorKey);
-
-        //         expect(logAndNotifyErrorMock).toHaveBeenCalledWith({
-        //           ...WALLET_RS_ERROR_PARAMETERS[WalletRsError.Client][errorKey],
-        //           message: error.error,
-        //           type: error.type
-        //         });
-        //       });
-
-        //       it('should call handleGenericError if either errorObject or error.error is falsy', () => {
-        //         const handleGenericErrorMock = jest.spyOn(global, 'handleGenericError');
-
-        //         const error = {
-        //           error: 'Your error message',
-        //           type: 'Your error type'
-        //         };
-
-        //         const errorKey = 'NoSyncedNode';
+            expect(handleGenericError).toHaveBeenCalledWith(error)
+            expect(handleGenericError).toHaveBeenCalledTimes(1)
+        })
     })
 })
