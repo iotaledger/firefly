@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Button, Text } from 'shared/components'
-    import { closePopup } from '@auxiliary/popup'
+    import { closeOverlay } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
 
     export let node
@@ -11,7 +11,7 @@
         if (onSuccess) {
             onSuccess(node)
         }
-        closePopup()
+        closeOverlay()
     }
 </script>
 
@@ -20,6 +20,6 @@
     <Text>{localize(`popups.node.remove${removeAll ? 'All' : ''}Confirmation`)}</Text>
 </div>
 <div class="flex flex-row justify-between space-x-4 w-full md:px-8">
-    <Button outline classes="w-1/2" onClick={closePopup}>{localize('actions.no')}</Button>
+    <Button outline classes="w-1/2" onClick={closeOverlay}>{localize('actions.no')}</Button>
     <Button classes="w-1/2" onClick={onRemoveCustomNodeClick}>{localize('actions.yes')}</Button>
 </div>

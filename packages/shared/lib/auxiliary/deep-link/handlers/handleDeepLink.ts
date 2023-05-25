@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 
-import { closePopup, openPopup } from '@auxiliary/popup/actions'
+import { closeOverlay, openOverlay } from '@overlay/actions'
 import { visibleActiveAccounts } from '@core/profile/stores'
 import { dashboardRouter } from '@core/router/routers'
 import { DashboardRoute } from '@core/router/enums'
@@ -12,7 +12,7 @@ import { isDeepLinkRequestActive } from '../stores'
 import { handleDeepLinkGovernanceContext } from './governance/handleDeepLinkGovernanceContext'
 import { handleDeepLinkWalletContext } from './wallet/handleDeepLinkWalletContext'
 import { handleError } from '@core/error/handlers'
-import { PopupId } from '@auxiliary/popup'
+import { PopupId } from '@overlay'
 
 /**
  * Parses an IOTA deep link, i.e. a URL that begins with the app protocol i.e "firefly://".
@@ -34,12 +34,12 @@ export function handleDeepLink(input: string): void {
         }
 
         if (get(visibleActiveAccounts).length > 1) {
-            openPopup({
+            openOverlay({
                 id: PopupId.AccountSwitcher,
                 overflow: true,
                 props: {
                     onConfirm: () => {
-                        closePopup()
+                        closeOverlay()
                         handleDeepLinkForHostname(url)
                     },
                 },

@@ -3,7 +3,7 @@
     import { selectedAccount, tryEditSelectedAccountMetadata, validateAccountName } from '@core/account'
     import { localize } from '@core/i18n'
     import { getTrimmedLength } from '@core/utils'
-    import { closePopup } from '@auxiliary/popup'
+    import { closeOverlay } from '@auxiliary/popup'
 
     export let error = ''
 
@@ -32,14 +32,14 @@
     }
 
     function onCancelClick(): void {
-        closePopup()
+        closeOverlay()
     }
 
     async function saveAccountMetadata(): Promise<void> {
         try {
             if (trimmedAccountAlias || color) {
                 await tryEditSelectedAccountMetadata({ name: trimmedAccountAlias, color })
-                closePopup()
+                closeOverlay()
             }
         } finally {
             isBusy = false

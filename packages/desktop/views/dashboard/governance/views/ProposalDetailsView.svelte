@@ -35,7 +35,7 @@
         isVotingForSelectedProposal,
     } from '@contexts/governance/utils'
     import { PopupId } from '@auxiliary/popup'
-    import { openPopup } from '@auxiliary/popup/actions'
+    import { openOverlay } from '@auxiliary/popup/actions'
 
     const { metadata } = $visibleSelectedAccountAssets?.baseCoin ?? {}
 
@@ -150,7 +150,7 @@
 
     function onStopVotingClick(): void {
         lastAction = 'stopVote'
-        openPopup({
+        openOverlay({
             id: PopupId.StopVoting,
         })
     }
@@ -160,7 +160,7 @@
         const chosenAnswerValues = selectedAnswerValues.map((answerValue) =>
             answerValue === undefined ? ABSTAIN_VOTE_VALUE : answerValue
         )
-        openPopup({
+        openOverlay({
             id: PopupId.VoteForProposal,
             props: { selectedAnswerValues: chosenAnswerValues },
         })

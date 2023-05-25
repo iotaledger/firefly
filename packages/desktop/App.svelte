@@ -29,7 +29,7 @@
         setPlatform,
     } from '@core/app'
     import { showAppNotification } from '@auxiliary/notification'
-    import { closePopup, openPopup, PopupId, popupState } from '@auxiliary/popup'
+    import { closeOverlay, openOverlay, PopupId, popupState } from '@auxiliary/popup'
     import { initialiseOnboardingFlow } from '@contexts/onboarding'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { getLocalisedMenuItems } from './lib/helpers'
@@ -53,7 +53,7 @@
     const { loggedIn, hasLoadedAccounts } = $activeProfile
 
     $: if ($activeProfile && !$loggedIn) {
-        closePopup(true)
+        closeOverlay(true)
     }
 
     async function handleCrashReporting(sendCrashReports: boolean): Promise<void> {
@@ -125,7 +125,7 @@
         if (process.env.NODE_ENV !== 'development') {
             await setAppVersionDetails()
             if ($appVersionDetails.upToDate === false) {
-                openPopup({ id: PopupId.CheckForUpdates })
+                openOverlay({ id: PopupId.CheckForUpdates })
             }
         }
 
@@ -134,7 +134,7 @@
         })
         Platform.onEvent('menu-navigate-settings', () => {
             if ($loggedIn) {
-                closePopup()
+                closeOverlay()
                 closeDrawer()
                 $routerManager.openSettings()
             } else {
@@ -143,7 +143,7 @@
         })
         Platform.onEvent('menu-check-for-update', () => {
             closeDrawer()
-            openPopup({
+            openOverlay({
                 id: PopupId.CheckForUpdates,
                 props: {
                     currentVersion: $appVersionDetails.currentVersion,
@@ -152,11 +152,11 @@
         })
         Platform.onEvent('menu-error-log', () => {
             closeDrawer()
-            openPopup({ id: PopupId.ErrorLog })
+            openOverlay({ id: PopupId.ErrorLog })
         })
         Platform.onEvent('menu-diagnostics', () => {
             closeDrawer()
-            openPopup({ id: PopupId.Diagnostics })
+            openOverlay({ id: PopupId.Diagnostics })
         })
         Platform.onEvent('menu-create-developer-profile', async () => {
             await initialiseOnboardingFlow({

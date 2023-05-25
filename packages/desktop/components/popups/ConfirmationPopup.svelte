@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Button, Text, TextHint, FontWeight, TextType, ButtonVariant } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { closePopup } from '@auxiliary/popup'
+    import { closeOverlay } from '@auxiliary/popup'
     import { handleError } from '@core/error/handlers'
     import { onMount } from 'svelte'
     import { selectedAccount } from '@core/account'
@@ -22,7 +22,7 @@
         if (onConfirm) {
             onConfirm()
         } else {
-            closePopup()
+            closeOverlay()
         }
     }
 
@@ -30,7 +30,7 @@
         if (onCancel) {
             onCancel()
         } else {
-            closePopup()
+            closeOverlay()
         }
     }
 

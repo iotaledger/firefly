@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte'
     import { Button, Error, FontWeight, OptionalInput, Text, TextInput, TextType, TooltipIcon } from 'shared/components'
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { closeOverlay, openOverlay, PopupId } from '@auxiliary/popup'
     import { BaseError } from '@core/error/classes'
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
@@ -81,7 +81,7 @@
     const error: BaseError = null
 
     function onCancelClick(): void {
-        closePopup()
+        closeOverlay()
     }
 
     async function onContinueClick(): Promise<void> {
@@ -89,7 +89,7 @@
         const valid = await validate()
         if (valid) {
             setMintNftDetails(convertInputsToMetadataType())
-            openPopup({
+            openOverlay({
                 id: PopupId.MintNftConfirmation,
                 overflow: true,
             })

@@ -1,5 +1,5 @@
-import { PopupId } from '@auxiliary/popup'
-import { openPopup } from '@auxiliary/popup/actions'
+import { PopupId } from '@overlay'
+import { openOverlay } from '@overlay/actions'
 import { addError } from '@core/error/stores'
 import { localize } from '@core/i18n'
 
@@ -39,7 +39,7 @@ export function handleDeepLinkWalletContext(url: URL): void {
             }
         }
     } catch (err) {
-        openPopup({
+        openOverlay({
             id: PopupId.DeepLinkError,
             props: { error: err, url },
         })

@@ -6,7 +6,7 @@ const DeepLinkManager = require('./lib/deepLinkManager')
 const NotificationManager = require('./lib/notificationManager')
 const { menuState } = require('./lib/menuState')
 const features = require('../features/features').default
-const { openPopup, closePopup } = require('../../shared/lib/auxiliary/popup')
+const { openOverlay, closeOverlay } = require('../../shared/lib/auxiliary/popup')
 
 let activeProfileId = null
 const eventListeners = {}
@@ -335,10 +335,10 @@ const ElectronApi = {
     },
 
     openOverlayUi(args) {
-        openPopup(args)
+        openOverlay(args)
     },
     closeOverlayUi() {
-        closePopup()
+        closeOverlay()
     },
 }
 

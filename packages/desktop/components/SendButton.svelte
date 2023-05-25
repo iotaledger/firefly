@@ -2,14 +2,14 @@
     import { localize } from '@core/i18n'
     import { resetLedgerPreparedOutput, resetShowInternalVerificationPopup } from '@core/ledger'
     import { resetNewTokenTransactionDetails } from '@core/wallet'
-    import { openPopup, PopupId } from '@auxiliary/popup'
+    import { openOverlay, PopupId } from '@auxiliary/popup'
     import { OnboardingButton } from '@ui'
 
     function onSendClick(): void {
         resetNewTokenTransactionDetails()
         resetLedgerPreparedOutput()
         resetShowInternalVerificationPopup()
-        openPopup({
+        openOverlay({
             id: PopupId.SendForm,
             overflow: true,
         })

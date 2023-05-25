@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { PopupId, openPopup } from '@auxiliary/popup'
+    import { PopupId, openOverlay } from '@auxiliary/popup'
     import { initialiseOnboardingFlow, shouldBeDeveloperProfile } from '@contexts/onboarding'
     import {
         AppContext,
@@ -31,7 +31,7 @@
     }
 
     $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTermsOfService()) {
-        openPopup({
+        openOverlay({
             id: PopupId.LegalUpdate,
             hideClose: true,
             preventClose: true,

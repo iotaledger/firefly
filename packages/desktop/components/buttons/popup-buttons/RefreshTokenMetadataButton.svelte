@@ -5,7 +5,7 @@
     import { refreshAccountAssetsForActiveProfile } from '@core/wallet'
 
     import { showAppNotification } from '@auxiliary/notification'
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { closeOverlay, openOverlay, PopupId } from '@auxiliary/popup'
 
     function refreshTokenMetadata(): void {
         refreshAccountAssetsForActiveProfile(true)
@@ -14,11 +14,11 @@
             message: localize('notifications.refreshTokenMetadata.success'),
             alert: true,
         })
-        closePopup()
+        closeOverlay()
     }
 
     function onRefreshTokenMetadataClick(): void {
-        openPopup({
+        openOverlay({
             id: PopupId.Confirmation,
             props: {
                 title: localize('actions.refreshTokenMetadata'),

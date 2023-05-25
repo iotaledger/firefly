@@ -3,7 +3,7 @@ import { selectedAccountIndex } from '@core/account'
 import { ledgerNanoStatus } from '@core/ledger'
 import { isActiveLedgerProfile } from '@core/profile'
 import { isOnboardingLedgerProfile } from '@contexts/onboarding'
-import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+import { closeOverlay, openOverlay, PopupId } from '@overlay'
 import { deconstructLedgerVerificationProps } from '@core/ledger/helpers'
 
 import { WalletApiEvent } from '../../enums'
@@ -24,19 +24,19 @@ export function handleTransactionProgressEventInternal(
 ): void {
     if (get(isActiveLedgerProfile)) {
         if (get(selectedAccountIndex) === accountIndex) {
-            openPopupIfVerificationNeeded(payload)
+            openOverlayIfVerificationNeeded(payload)
         }
     } else if (get(isOnboardingLedgerProfile)) {
-        openPopupIfVerificationNeeded(payload)
+        openOverlayIfVerificationNeeded(payload)
     } else {
         console.warn('Transaction progress handler unimplemented: ', payload)
     }
 }
 
-function openPopupIfVerificationNeeded(payload: TransactionProgressEventPayload): void {
+function openOverlayIfVerificationNeeded(payload: TransactionProgressEventPayload): void {
     if (payload) {
         if (isPreparedTransaction(payload)) {
-            openPopup({
+            openOverlay({
                 id: PopupId.VerifyLedgerTransaction,
                 hideClose: true,
                 preventClose: true,
@@ -46,7 +46,7 @@ function openPopupIfVerificationNeeded(payload: TransactionProgressEventPayload)
             })
         } else if (isPreparedTransactionEssenceHash(payload)) {
             if (get(ledgerNanoStatus)?.blindSigningEnabled) {
-                openPopup({
+                openOverlay({
                     id: PopupId.VerifyLedgerTransaction,
                     hideClose: true,
                     preventClose: true,
@@ -55,14 +55,14 @@ function openPopupIfVerificationNeeded(payload: TransactionProgressEventPayload)
                     },
                 })
             } else {
-                openPopup({
+                openOverlay({
                     id: PopupId.EnableLedgerBlindSigning,
                     hideClose: true,
                     preventClose: true,
                 })
             }
         } else if (payload === 'PerformingPow') {
-            closePopup(true)
+            closeOverlay(true)
         }
     } else {
         throw new MissingTransactionProgressEventPayloadError()

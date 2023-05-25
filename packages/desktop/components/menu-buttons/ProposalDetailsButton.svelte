@@ -12,7 +12,7 @@
     import { isVotingForSelectedProposal } from '@contexts/governance/utils'
 
     import { Icon } from '@auxiliary/icon'
-    import { openPopup } from '@auxiliary/popup/actions'
+    import { openOverlay } from '@auxiliary/popup/actions'
     import { PopupId } from '@auxiliary/popup'
 
     import features from '@features/features'
@@ -58,7 +58,7 @@
     }
 
     function onChangeNodeClick(): void {
-        openPopup({
+        openOverlay({
             id: PopupId.AddProposal,
             props: {
                 initialEventId: proposal.id,
@@ -70,7 +70,7 @@
     }
 
     function onRemoveProposalClick(): void {
-        openPopup({
+        openOverlay({
             id: PopupId.RemoveProposal,
         })
         modal.close()

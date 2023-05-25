@@ -1,7 +1,7 @@
 <script lang="ts">
     import { LedgerAnimation, Button, Link, Text } from 'shared/components'
     import { openUrlInBrowser } from '@core/app'
-    import { closePopup } from '@auxiliary/popup'
+    import { closeOverlay } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
 
     let stepIndex = 0
@@ -17,7 +17,7 @@
     }
 
     function onCloseClick(): void {
-        closePopup()
+        closeOverlay()
     }
 </script>
 

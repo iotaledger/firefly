@@ -11,13 +11,13 @@
     } from '@contexts/governance/stores'
     import { localize } from '@core/i18n'
     import { governanceRouter } from '@core/router'
-    import { closePopup } from '@auxiliary/popup'
+    import { closeOverlay } from '@auxiliary/popup'
     import { showAppNotification } from '@auxiliary/notification'
     import { selectedAccount } from '@core/account/stores'
     import { updateActiveAccountMetadata } from '@core/profile'
 
     function onCancelClick(): void {
-        closePopup()
+        closeOverlay()
     }
 
     async function onConfirmClick(): Promise<void> {
@@ -28,7 +28,7 @@
             })
             $governanceRouter.previous()
             clearEvent()
-            closePopup()
+            closeOverlay()
             showAppNotification({
                 type: 'success',
                 message: localize('views.governance.proposals.successRemove'),

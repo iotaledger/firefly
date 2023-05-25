@@ -50,6 +50,7 @@ const resolve = {
         '@desktop': path.resolve(__dirname, './lib'),
         '@ui': path.resolve(__dirname, '../shared/components/'),
         '@views': path.resolve(__dirname, './views/'),
+        '@overlay': path.resolve(__dirname, '../shared/lib/auxiliary/popup'),
     },
     conditionNames: ['svelte', 'module', 'import', 'require', 'node', 'default'],
     extensions: ['.mjs', '.js', '.ts', '.svelte'],

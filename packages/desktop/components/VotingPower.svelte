@@ -5,7 +5,7 @@
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { formatTokenAmountBestMatch, visibleSelectedAccountAssets } from '@core/wallet'
-    import { openPopup, PopupId } from '@auxiliary/popup'
+    import { openOverlay, PopupId } from '@auxiliary/popup'
 
     const asset = $visibleSelectedAccountAssets?.baseCoin
 
@@ -19,7 +19,7 @@
         $selectedAccount?.isTransferring
 
     function onManageVotingPowerClick(): void {
-        openPopup({
+        openOverlay({
             id: PopupId.ManageVotingPower,
         })
     }

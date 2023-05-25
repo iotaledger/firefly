@@ -1,7 +1,7 @@
 <script lang="ts">
     import { HR, MenuItem, Modal } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { closePopup, openPopup } from '@auxiliary/popup/actions'
+    import { closeOverlay, openOverlay } from '@overlay/actions'
     import {
         removeNodeFromClientOptions,
         toggleDisabledNodeInClientOptions,
@@ -10,7 +10,7 @@
     import { IClientOptions, INode } from '@core/network/interfaces'
     import { getOfficialNodes } from '@core/network/utils'
     import { activeProfile } from '@core/profile/stores'
-    import { PopupId } from '@auxiliary/popup'
+    import { PopupId } from '@overlay'
 
     export let node: INode
     export let clientOptions: IClientOptions
@@ -23,13 +23,13 @@
     $: isPrimary = clientOptions?.primaryNode?.url === node.url
 
     function onEditNodeDetailsClick(): void {
-        openPopup({
+        openOverlay({
             id: PopupId.AddNode,
             props: {
                 node,
                 isEditingNode: true,
                 onSuccess: () => {
-                    closePopup()
+                    closeOverlay()
                 },
             },
         })
@@ -38,7 +38,7 @@
 
     async function onTogglePrimaryNodeClick(): Promise<void> {
         if (isPrimary) {
-            openPopup({
+            openOverlay({
                 id: PopupId.Confirmation,
                 props: {
                     title: localize('popups.unsetAsPrimaryNode.title'),
@@ -47,7 +47,7 @@
                     confirmText: localize('actions.clear'),
                     onConfirm: () => {
                         void togglePrimaryNodeInClientOptions(node)
-                        closePopup()
+                        closeOverlay()
                     },
                 },
             })
@@ -58,7 +58,7 @@
     }
 
     function onRemoveNodeClick(): void {
-        openPopup({
+        openOverlay({
             id: PopupId.Confirmation,
             props: {
                 title: localize('popups.node.titleRemove'),
@@ -67,7 +67,7 @@
                 confirmText: localize('actions.removeNode'),
                 onConfirm: () => {
                     void removeNodeFromClientOptions(node)
-                    closePopup()
+                    closeOverlay()
                 },
             },
         })
@@ -78,7 +78,7 @@
         if (node.disabled) {
             void toggleDisabledNodeInClientOptions(node)
         } else {
-            openPopup({
+            openOverlay({
                 id: PopupId.Confirmation,
                 props: {
                     title: localize('popups.excludeNode.title'),
@@ -87,7 +87,7 @@
                     confirmText: localize('views.settings.configureNodeList.excludeNode'),
                     onConfirm: () => {
                         void toggleDisabledNodeInClientOptions(node)
-                        closePopup()
+                        closeOverlay()
                     },
                 },
             })

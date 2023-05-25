@@ -3,7 +3,7 @@
     import { isSoftwareProfile } from '@core/profile'
     import { localize } from '@core/i18n'
     import { setStrongholdPassword } from '@core/profile-manager'
-    import { closePopup } from '@auxiliary/popup'
+    import { closeOverlay } from '@auxiliary/popup'
     import { deleteProfile } from '@contexts/settings'
 
     let isBusy = false
@@ -43,7 +43,7 @@
     {/if}
 </div>
 <div class="flex flex-row justify-between space-x-4 w-full">
-    <Button outline classes="w-1/2" onClick={closePopup} disabled={isBusy}>{localize('actions.no')}</Button>
+    <Button outline classes="w-1/2" onClick={closeOverlay} disabled={isBusy}>{localize('actions.no')}</Button>
     <Button
         disabled={(!password && $isSoftwareProfile) || isBusy}
         classes="w-1/2"

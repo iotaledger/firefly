@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 import { getLedgerNanoStatus } from '@lib/core/profile-manager/api'
-import { closePopup, popupState } from '@auxiliary/popup'
+import { closeOverlay, popupState } from '@overlay'
 import { ledgerNanoStatus, updateLedgerNanoStatus } from '../stores'
 
 export async function getLedgerDeviceStatus(
@@ -16,7 +16,7 @@ export async function getLedgerDeviceStatus(
             const isLedgerNotConnectedPopupOpened = get(popupState).active && get(popupState).id === 'connectLedger'
 
             if (isLedgerNotConnectedPopupOpened) {
-                closePopup()
+                closeOverlay()
             }
 
             onConnected()

@@ -1,4 +1,4 @@
-import { PopupId, openPopup } from '@auxiliary/popup'
+import { PopupId, openOverlay } from '@overlay'
 import { getByteLengthOfString, isStringTrue, isValidBech32AddressAndPrefix, validateAssetId } from '@core/utils'
 import {
     NewTransactionDetails,
@@ -28,7 +28,7 @@ export function handleDeepLinkSendConfirmationOperation(searchParams: URLSearchP
 
     if (transactionDetails) {
         setNewTransactionDetails(transactionDetails)
-        openPopup({
+        openOverlay({
             id: PopupId.SendConfirmation,
             overflow: true,
             props: {

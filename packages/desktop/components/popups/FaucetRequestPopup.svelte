@@ -2,7 +2,7 @@
     import { requestTokensFromFaucet } from '@contexts/developer'
     import { localize } from '@core/i18n'
     import { nodeInfo } from '@core/network'
-    import { closePopup } from '@auxiliary/popup'
+    import { closeOverlay } from '@auxiliary/popup'
     import { Button, Error, Text, FontWeight, TextType } from 'shared/components'
     import { handleError } from '@core/error/handlers/handleError'
 
@@ -14,7 +14,7 @@
         try {
             isBusy = true
             await requestTokensFromFaucet()
-            closePopup()
+            closeOverlay()
         } catch (err) {
             error = err.error
             handleError(err)
@@ -24,7 +24,7 @@
     }
 
     function onBackClick(): void {
-        closePopup()
+        closeOverlay()
     }
 </script>
 

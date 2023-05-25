@@ -3,7 +3,7 @@
     import type { Auth } from '@iota/wallet'
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
-    import { closePopup } from '@auxiliary/popup/actions'
+    import { closeOverlay } from '@auxiliary/popup/actions'
 
     export let onSubmit: (auth: Auth) => unknown = () => {}
 
@@ -47,7 +47,7 @@
         />
     </div>
     <div class="flex w-full space-x-4 mt-6">
-        <Button outline classes="w-full" onClick={closePopup}>{localize('actions.cancel')}</Button>
+        <Button outline classes="w-full" onClick={closeOverlay}>{localize('actions.cancel')}</Button>
         <Button {disabled} {isBusy} type={HTMLButtonType.Submit} classes="w-full">
             {localize('actions.confirm')}
         </Button>

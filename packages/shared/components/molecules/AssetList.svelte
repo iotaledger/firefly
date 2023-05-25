@@ -5,7 +5,7 @@
     import { localize } from '@core/i18n'
     import { assetFilter, IAccountAssets, IAsset } from '@core/wallet'
     import { isVisibleAsset } from '@core/wallet/utils/isVisibleAsset'
-    import { openPopup, PopupId } from '@auxiliary/popup'
+    import { openOverlay, PopupId } from '@overlay'
 
     export let assets: IAccountAssets
 
@@ -31,7 +31,7 @@
     }
 
     function onAssetTileClick(asset: IAsset): void {
-        openPopup({
+        openOverlay({
             id: PopupId.TokenInformation,
             overflow: true,
             props: {

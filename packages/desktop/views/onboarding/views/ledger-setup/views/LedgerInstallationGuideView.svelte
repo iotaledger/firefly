@@ -2,7 +2,7 @@
     import { LedgerAnimation, Button, Icon, Link, Text } from '@ui'
     import { OnboardingLayout } from '@components'
     import { localize } from '@core/i18n'
-    import { openPopup, PopupId } from '@auxiliary/popup'
+    import { openOverlay, PopupId } from '@auxiliary/popup'
     import { LedgerAppName } from '@core/ledger'
     import { ledgerSetupRouter } from '@core/router/subrouters'
 
@@ -15,7 +15,7 @@
     }
 
     function onPopupOpenClick(): void {
-        openPopup({
+        openOverlay({
             id: PopupId.LedgerAppGuide,
         })
     }

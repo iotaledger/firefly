@@ -8,7 +8,7 @@
 
     import { Icon } from '@auxiliary/icon/enums'
     import { PopupId } from '@auxiliary/popup'
-    import { openPopup } from '@auxiliary/popup/actions'
+    import { openOverlay } from '@auxiliary/popup/actions'
 
     export let modal: Modal = undefined
 
@@ -16,17 +16,17 @@
         $selectedAccount?.index === $activeAccounts?.length - 1 && $visibleActiveAccounts?.length > 1
 
     function onCustomiseAccountClick(): void {
-        openPopup({ id: PopupId.ManageAccount })
+        openOverlay({ id: PopupId.ManageAccount })
         modal?.close()
     }
 
     function onViewBalanceClick(): void {
-        openPopup({ id: PopupId.BalanceBreakdown })
+        openOverlay({ id: PopupId.BalanceBreakdown })
         modal?.close()
     }
 
     function onDeleteAccountClick(): void {
-        openPopup({
+        openOverlay({
             id: PopupId.DeleteAccount,
             props: {
                 account: selectedAccount,

@@ -9,7 +9,7 @@
         formatTokenAmountPrecise,
         IIrc30Metadata,
     } from '@core/wallet'
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { closeOverlay, openOverlay, PopupId } from '@auxiliary/popup'
     import { Button, KeyValueBox, Text, FontWeight } from 'shared/components'
     import { onMount } from 'svelte'
     import { selectedAccount } from '@core/account'
@@ -80,15 +80,15 @@
     async function mintAction(): Promise<void> {
         try {
             await mintNativeToken(Number(totalSupply), Number(circulatingSupply), metadata)
-            closePopup()
+            closeOverlay()
         } catch (err) {
             handleError(err)
         }
     }
 
     function onBackClick(): void {
-        closePopup()
-        openPopup({
+        closeOverlay()
+        openOverlay({
             id: PopupId.MintNativeTokenForm,
             overflow: true,
         })

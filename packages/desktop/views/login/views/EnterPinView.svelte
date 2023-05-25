@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { PopupId, openPopup, popupState } from '@auxiliary/popup'
+    import { PopupId, openOverlay, popupState } from '@auxiliary/popup'
     import {
         Platform,
         isStrongholdUpdated,
@@ -33,7 +33,7 @@
     let shakeTimeout: ReturnType<typeof setTimeout> = null
 
     $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTermsOfService()) {
-        openPopup({
+        openOverlay({
             id: PopupId.LegalUpdate,
             hideClose: true,
             preventClose: true,

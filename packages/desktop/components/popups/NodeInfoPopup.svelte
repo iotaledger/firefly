@@ -3,7 +3,7 @@
     import { Button, Checkbox, CopyableBox, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { INode, INodeInfo } from '@core/network'
-    import { closePopup } from '@auxiliary/popup'
+    import { closeOverlay } from '@auxiliary/popup'
     import { showAppNotification } from '@auxiliary/notification'
     import { resolveObjectPath, setClipboard } from '@core/utils'
     import { getNodeInfo } from '@core/profile-manager'
@@ -99,7 +99,7 @@
                 nodeInfo = nodeInfoResponse.nodeInfo
             })
             .catch((err) => {
-                closePopup()
+                closeOverlay()
                 showAppNotification({
                     type: 'error',
                     message: localize(err?.error),

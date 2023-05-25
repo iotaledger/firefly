@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Button, Text, TextType, TextHint } from 'shared/components'
     import { ButtonVariant } from 'shared/components/enums'
-    import { closePopup } from '@auxiliary/popup/actions'
+    import { closeOverlay } from '@auxiliary/popup/actions'
     import { stopVotingForProposal } from '@contexts/governance/actions'
     import { selectedProposal } from '@contexts/governance/stores'
     import { localize } from '@core/i18n'
@@ -12,13 +12,13 @@
         $selectedAccount?.hasVotingPowerTransactionInProgress || $selectedAccount?.hasVotingTransactionInProgress
 
     function onCancelClick(): void {
-        closePopup()
+        closeOverlay()
     }
 
     async function onStopVotingClick(): Promise<void> {
         await checkActiveProfileAuth(async () => {
             await stopVotingForProposal($selectedProposal?.id)
-            closePopup()
+            closeOverlay()
         })
     }
 </script>

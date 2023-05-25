@@ -3,11 +3,11 @@
 
     import { localize } from '@core/i18n'
     import { resetMintNftDetails } from '@core/wallet'
-    import { openPopup, PopupId } from '@auxiliary/popup'
+    import { openOverlay, PopupId } from '@auxiliary/popup'
 
     function onMintNftClick(): void {
         resetMintNftDetails()
-        openPopup({
+        openOverlay({
             id: PopupId.MintNftForm,
         })
     }

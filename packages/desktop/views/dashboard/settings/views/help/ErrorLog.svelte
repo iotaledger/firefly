@@ -1,10 +1,10 @@
 <script lang="ts">
     import { Button, Text, ButtonSize } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { openPopup, PopupId } from '@auxiliary/popup'
+    import { openOverlay, PopupId } from '@auxiliary/popup'
 
     function onErrorLogClick(): void {
-        openPopup({ id: PopupId.ErrorLog })
+        openOverlay({ id: PopupId.ErrorLog })
     }
 </script>
 

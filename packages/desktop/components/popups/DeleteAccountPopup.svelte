@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Button, PasswordInput, Text, Error, ButtonVariant, HTMLButtonType, TextHint, TextType } from '@ui'
-    import { closePopup } from '@auxiliary/popup'
+    import { closeOverlay } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
     import { setStrongholdPassword } from '@core/profile-manager'
     import { isSoftwareProfile } from '@core/profile'
@@ -26,7 +26,7 @@
                 await setStrongholdPassword(password)
             }
             await deleteAccount($selectedAccount?.index)
-            closePopup()
+            closeOverlay()
         } catch (err) {
             error = err.error
             handleError(err)
@@ -34,7 +34,7 @@
     }
 
     function onCancelClick(): void {
-        closePopup()
+        closeOverlay()
     }
 </script>
 

@@ -13,7 +13,7 @@
     } from 'shared/components'
     import { localize } from '@core/i18n'
     import { LedgerConnectionState, ledgerConnectionState } from '@core/ledger'
-    import { closePopup, openPopup, PopupId, popupState } from '@auxiliary/popup'
+    import { closeOverlay, openOverlay, PopupId, popupState } from '@overlay'
     import { routerManager } from '@core/router'
     import { diffDates, getBackupWarningColor, getInitials, isRecentDate } from '@core/utils'
     import { appVersionDetails } from '@core/app'
@@ -44,7 +44,7 @@
     }
 
     function onSettingsClick(): void {
-        closePopup()
+        closeOverlay()
         $routerManager.openSettings()
         modal?.close()
     }
@@ -67,14 +67,14 @@
 
     function onBackupClick(): void {
         modal?.close()
-        openPopup({
+        openOverlay({
             id: PopupId.BackupStronghold,
         })
     }
 
     function onVersionUpdateCheckClick(): void {
         modal?.close()
-        openPopup({ id: PopupId.CheckForUpdates })
+        openOverlay({ id: PopupId.CheckForUpdates })
     }
 </script>
 

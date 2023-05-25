@@ -1,12 +1,12 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
     import { Button, Logo, Text, ExportStrongholdButton, TextType } from 'shared/components'
-    import { closePopup } from '@auxiliary/popup'
+    import { closeOverlay } from '@auxiliary/popup'
 
     const busy = false
 
     function onCancelClick(): void {
-        closePopup()
+        closeOverlay()
     }
 </script>
 

@@ -1,4 +1,4 @@
-import { openPopup, PopupId, popupState } from '@auxiliary/popup'
+import { openOverlay, PopupId, popupState } from '@overlay'
 import { get } from 'svelte/store'
 import { LedgerConnectionState } from '../interfaces'
 import { ledgerConnectionState } from '../stores'
@@ -6,12 +6,12 @@ import { handleError } from '@core/error/handlers/handleError'
 
 export function checkOrConnectLedger(
     callback: () => Promise<unknown> = async (): Promise<void> => {},
-    reopenPopup?: boolean
+    reopenOverlay?: boolean
 ): Promise<unknown> {
     const previousPopup = get(popupState)
     function _callback(): Promise<unknown> {
-        if (reopenPopup) {
-            openPopup({ ...previousPopup, props: { ...previousPopup.props, _onMount: callback } })
+        if (reopenOverlay) {
+            openOverlay({ ...previousPopup, props: { ...previousPopup.props, _onMount: callback } })
         } else {
             return callback()
         }
@@ -21,7 +21,7 @@ export function checkOrConnectLedger(
         if (ledgerConnected) {
             return callback()
         } else {
-            openPopup({
+            openOverlay({
                 id: PopupId.ConnectLedger,
                 hideClose: true,
                 props: {

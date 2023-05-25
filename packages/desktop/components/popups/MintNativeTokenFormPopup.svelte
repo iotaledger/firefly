@@ -2,7 +2,7 @@
     import { BaseError } from '@core/error'
     import { localize } from '@core/i18n'
     import { setMintTokenDetails, mintTokenDetails } from '@core/wallet'
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { closeOverlay, openOverlay, PopupId } from '@auxiliary/popup'
     import {
         Button,
         Error,
@@ -47,7 +47,7 @@
     let aliasInput: AliasInput
 
     function onCancelClick(): void {
-        closePopup()
+        closeOverlay()
     }
 
     async function onContinueClick(): Promise<void> {
@@ -64,7 +64,7 @@
                 logoUrl,
                 aliasId,
             })
-            openPopup({
+            openOverlay({
                 id: PopupId.MintNativeTokenConfirmation,
                 overflow: true,
             })

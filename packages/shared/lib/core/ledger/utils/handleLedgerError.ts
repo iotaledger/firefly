@@ -5,7 +5,7 @@ import { resetNewTokenTransactionDetails, resetMintTokenDetails, resetMintNftDet
 import { IError } from '@core/error/interfaces'
 import { handleGenericError } from '@core/error/handlers'
 import { showAppNotification } from '@auxiliary/notification'
-import { closePopup, openPopup, PopupId, popupState } from '@auxiliary/popup'
+import { closeOverlay, openOverlay, PopupId, popupState } from '@overlay'
 
 import { LEDGER_ERROR_LOCALES } from '../constants'
 import { LedgerError } from '../enums'
@@ -29,7 +29,7 @@ export function handleLedgerError(error: IError, resetConfirmationPropsOnDenial 
             resetMintNftDetails()
         }
 
-        closePopup(true)
+        closeOverlay(true)
 
         /**
          * NOTE: Because the device has a warning prompt about blind signing when trying it
@@ -38,7 +38,7 @@ export function handleLedgerError(error: IError, resetConfirmationPropsOnDenial 
          */
         const hadToEnableBlindSinging = popupType === 'enableLedgerBlindSigning' && wasDeniedByUser
         if (hadToEnableBlindSinging) {
-            openPopup({
+            openOverlay({
                 id: PopupId.EnableLedgerBlindSigning,
             })
         } else {

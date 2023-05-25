@@ -3,10 +3,10 @@
 
     import { localize } from '@core/i18n'
 
-    import { openPopup, PopupId } from '@auxiliary/popup'
+    import { openOverlay, PopupId } from '@auxiliary/popup'
 
     function onClick(): void {
-        openPopup({
+        openOverlay({
             id: PopupId.TestDeepLinkForm,
         })
     }

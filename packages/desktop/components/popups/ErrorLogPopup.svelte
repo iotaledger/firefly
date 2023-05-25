@@ -2,12 +2,12 @@
     import { Button, Text } from 'shared/components'
     import { errorLog } from '@core/error'
     import { localize } from '@core/i18n'
-    import { closePopup } from '@auxiliary/popup'
+    import { closeOverlay } from '@auxiliary/popup'
     import { setClipboard } from '@core/utils'
 
     function onClearClick(): void {
         errorLog.set([])
-        closePopup()
+        closeOverlay()
     }
 
     function onCopyClick(): void {

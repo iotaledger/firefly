@@ -5,18 +5,18 @@
     import { localize } from '@core/i18n'
     import { resetMintTokenDetails } from '@core/wallet'
 
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { closeOverlay, openOverlay, PopupId } from '@auxiliary/popup'
 
     $: hasAliases = $selectedAccount.balances?.aliases.length > 0
 
     function onMintNativeTokenClick(): void {
         resetMintTokenDetails()
         if (hasAliases) {
-            openPopup({
+            openOverlay({
                 id: PopupId.MintNativeTokenForm,
             })
         } else {
-            openPopup({
+            openOverlay({
                 id: PopupId.Confirmation,
                 props: {
                     title: localize('popups.noAlias.title'),
@@ -24,8 +24,8 @@
                     warning: true,
                     confirmText: localize('actions.createAlias'),
                     onConfirm: () => {
-                        closePopup()
-                        openPopup({
+                        closeOverlay()
+                        openOverlay({
                             id: PopupId.AliasConfirmation,
                         })
                     },

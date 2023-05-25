@@ -6,7 +6,7 @@
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile'
     import { getTrimmedLength } from '@core/utils'
-    import { closePopup, updatePopupProps } from '@auxiliary/popup'
+    import { closeOverlay, updatePopupProps } from '@auxiliary/popup'
 
     export let accountAlias = ''
     export let error: string
@@ -37,14 +37,14 @@
 
     function onCancelClick(): void {
         isBusy = false
-        closePopup()
+        closeOverlay()
     }
 
     async function _create(): Promise<void> {
         if (trimmedAccountAlias && color) {
             try {
                 await tryCreateAdditionalAccount(trimmedAccountAlias, color.toString())
-                closePopup()
+                closeOverlay()
             } catch (err) {
                 isBusy = false
             }

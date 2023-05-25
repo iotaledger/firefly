@@ -5,7 +5,7 @@
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
     import { showAppNotification } from '@auxiliary/notification/actions'
-    import { closePopup, openPopup } from '@auxiliary/popup/actions'
+    import { closeOverlay, openOverlay } from '@auxiliary/popup/actions'
     import { truncateString } from '@core/utils/string'
     import { registeredProposalsForSelectedAccount, registerProposalsForAccounts } from '@contexts/governance'
     import { activeAccounts, updateActiveAccountMetadata } from '@core/profile'
@@ -29,7 +29,7 @@
     $: eventId = inputtedEventId?.trim()
 
     function onCancelClick(): void {
-        closePopup()
+        closeOverlay()
     }
 
     async function onSubmit(): Promise<void> {
@@ -72,7 +72,7 @@
     }
 
     function openNodeAuthRequiredPopup(): void {
-        openPopup({
+        openOverlay({
             id: PopupId.NodeAuthRequired,
             props: { onSubmit: registerParticipationWrapper },
         })
@@ -90,7 +90,7 @@
             message: generateSuccessMessage(),
             alert: true,
         })
-        closePopup()
+        closeOverlay()
     }
 
     function generateSuccessMessage(): string {

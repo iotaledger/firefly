@@ -1,7 +1,7 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
     import { Text, Button, TextHint, FontWeight } from 'shared/components'
-    import { closePopup } from '@auxiliary/popup'
+    import { closeOverlay } from '@auxiliary/popup'
 
     export let error: Error
 </script>
@@ -15,6 +15,6 @@
         <TextHint danger text={error.message} />
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-1/2" secondary onClick={closePopup}>{localize('actions.close')}</Button>
+        <Button classes="w-1/2" secondary onClick={closeOverlay}>{localize('actions.close')}</Button>
     </popup-buttons>
 </deep-link-error-popup>

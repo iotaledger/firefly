@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { closeOverlay, openOverlay, PopupId } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
     import { addOfficialNodesToClientOptions as onAddOfficialNodesClick, NetworkType } from '@core/network'
     import { activeProfile } from '@core/profile'
@@ -12,11 +12,11 @@
     const { networkType } = $activeProfile
 
     function onAddNodeClick(): void {
-        openPopup({
+        openOverlay({
             id: PopupId.AddNode,
             props: {
                 onSuccess: () => {
-                    closePopup()
+                    closeOverlay()
                     setTimeout(() => {
                         /**
                          * NOTE: This automatically scrolls the user to the bottom of the

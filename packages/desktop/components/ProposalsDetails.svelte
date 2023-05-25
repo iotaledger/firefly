@@ -21,7 +21,7 @@
         getNumberOfVotingProposals,
     } from '@contexts/governance/utils'
 
-    import { openPopup, PopupId } from '@auxiliary/popup'
+    import { openOverlay, PopupId } from '@auxiliary/popup'
 
     let details = <IProposalsDetails>{
         totalProposals: null,
@@ -52,7 +52,7 @@
     }
 
     function onAddProposalClick(): void {
-        openPopup({
+        openOverlay({
             id: PopupId.AddProposal,
             overflow: true,
         })

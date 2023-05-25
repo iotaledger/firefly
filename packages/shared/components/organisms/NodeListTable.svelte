@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { getOfficialNodes, INode, isOfficialNetwork } from '@core/network'
     import { activeProfile } from '@core/profile'
-    import { openPopup, PopupId } from '@auxiliary/popup'
+    import { openOverlay, PopupId } from '@overlay'
     import { Text, NodeActionsButton, Pill } from 'shared/components'
 
     export let nodesContainer: HTMLElement = undefined
@@ -14,7 +14,7 @@
     }
 
     function onViewNodeInfoClick(node: INode): void {
-        openPopup({
+        openOverlay({
             id: PopupId.NodeInfo,
             props: {
                 node,

@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { INode, addNodeToClientOptions, editNodeInClientOptions, EMPTY_NODE } from '@core/network'
     import { showAppNotification } from '@auxiliary/notification'
-    import { closePopup } from '@auxiliary/popup'
+    import { closeOverlay } from '@auxiliary/popup'
     import { Platform } from '@core/app'
     import { activeAccounts, activeProfile } from '@core/profile'
     import { deepCopy } from '@core/utils'
@@ -61,7 +61,7 @@
         isDeveloperProfile={$activeProfile.isDeveloperProfile}
     />
     <div class="flex flex-row justify-between space-x-4 w-full">
-        <Button outline classes="w-1/2" onClick={closePopup} disabled={isBusy}>
+        <Button outline classes="w-1/2" onClick={closeOverlay} disabled={isBusy}>
             {localize('actions.cancel')}
         </Button>
         <Button

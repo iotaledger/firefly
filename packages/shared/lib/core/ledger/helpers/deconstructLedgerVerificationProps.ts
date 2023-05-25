@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 
-import { PopupProps } from '@auxiliary/popup'
+import { PopupProps } from '@overlay'
 import { formatTokenAmountDefault, getPersistedAsset, newTransactionDetails, NewTransactionType } from '@core/wallet'
 
 export function deconstructLedgerVerificationProps(): PopupProps {

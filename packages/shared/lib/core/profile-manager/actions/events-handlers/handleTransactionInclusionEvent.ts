@@ -11,8 +11,8 @@ import {
 import { WalletApiEvent } from '../../enums'
 import { ITransactionInclusionEventPayload } from '../../interfaces'
 import { validateWalletApiEvent } from '../../utils'
-import { closePopup, openPopup } from '@auxiliary/popup/actions'
-import { PopupId } from '@auxiliary/popup'
+import { closeOverlay, openOverlay } from '@overlay/actions'
+import { PopupId } from '@overlay'
 import { activeAccounts, updateActiveAccount } from '@core/profile/stores'
 import { updateActiveAccountMetadata } from '@core/profile/actions'
 import { isAccountVoting } from '@contexts/governance/utils/isAccountVoting'
@@ -58,14 +58,14 @@ function handleGovernanceTransactionInclusionEvent(
         // we should think about making this consistent in the future
         updateActiveAccount(accountIndex, { isTransferring: false })
         // TODO: move this
-        closePopup(true)
+        closeOverlay(true)
 
         const account = get(activeAccounts)?.find((_account) => _account.index === accountIndex)
         if (account.hasVotingPowerTransactionInProgress) {
             updateActiveAccount(accountIndex, { hasVotingPowerTransactionInProgress: false })
             if (isAccountVoting(accountIndex) && activity.votingPower !== 0) {
                 updateActiveAccountMetadata(accountIndex, { shouldRevote: true })
-                openPopup({ id: PopupId.Revote })
+                openOverlay({ id: PopupId.Revote })
             }
         } else {
             updateActiveAccount(accountIndex, { hasVotingTransactionInProgress: false })

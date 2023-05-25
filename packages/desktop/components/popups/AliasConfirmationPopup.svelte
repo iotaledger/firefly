@@ -11,7 +11,7 @@
         UNLOCK_CONDITION_STATE_CONTROLLER_ADDRESS,
         processAndAddToActivities,
     } from '@core/wallet'
-    import { closePopup } from '@auxiliary/popup'
+    import { closeOverlay } from '@auxiliary/popup'
     import { onMount } from 'svelte'
     import { handleError } from '@core/error/handlers/handleError'
 
@@ -56,7 +56,7 @@
             updateSelectedAccount({ isTransferring: true })
             const transaction = await $selectedAccount.createAliasOutput()
             await processAndAddToActivities(transaction, $selectedAccount)
-            closePopup()
+            closeOverlay()
         } catch (err) {
             handleError(err)
         } finally {
@@ -69,7 +69,7 @@
     }
 
     function onCancelClick(): void {
-        closePopup()
+        closeOverlay()
     }
 
     onMount(async () => {

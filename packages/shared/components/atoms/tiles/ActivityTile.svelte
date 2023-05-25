@@ -9,7 +9,7 @@
         NotVerifiedStatus,
         ActivityAsyncStatus,
     } from '@core/wallet'
-    import { openPopup, PopupId } from '@auxiliary/popup'
+    import { openOverlay, PopupId } from '@overlay'
     import {
         ClickableTile,
         TransactionActivityTileContent,
@@ -36,7 +36,7 @@
 
     function onTransactionClick(): void {
         if (asset?.verification?.status === NotVerifiedStatus.New) {
-            openPopup({
+            openOverlay({
                 id: PopupId.TokenInformation,
                 overflow: true,
                 props: {
@@ -45,7 +45,7 @@
                 },
             })
         } else {
-            openPopup({
+            openOverlay({
                 id: PopupId.ActivityDetails,
                 props: { activityId: activity.id },
             })

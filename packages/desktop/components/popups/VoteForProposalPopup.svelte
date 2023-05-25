@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Button, Text, FontWeight, TextHint, TextType, KeyValueBox } from 'shared/components'
     import { HTMLButtonType } from 'shared/components/enums'
-    import { closePopup, openPopup } from '@auxiliary/popup/actions'
+    import { closeOverlay, openOverlay } from '@auxiliary/popup/actions'
     import { selectedAccount } from '@core/account/stores'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth, getBaseToken } from '@core/profile/actions'
@@ -26,10 +26,10 @@
         if (hasVotingPower) {
             await checkActiveProfileAuth(async () => {
                 await vote($selectedProposal?.id, selectedAnswerValues)
-                closePopup()
+                closeOverlay()
             })
         } else {
-            openPopup({ id: PopupId.ManageVotingPower })
+            openOverlay({ id: PopupId.ManageVotingPower })
         }
     }
 </script>
@@ -63,7 +63,7 @@
         {/if}
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" disabled={hasGovernanceTransactionInProgress} outline onClick={closePopup}
+        <Button classes="w-full" disabled={hasGovernanceTransactionInProgress} outline onClick={closeOverlay}
             >{localize('actions.cancel')}</Button
         >
         <Button

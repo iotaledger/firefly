@@ -1,12 +1,12 @@
 import { showAppNotification } from '@auxiliary/notification/actions'
-import { closePopup, openPopup } from '@auxiliary/popup/actions'
+import { closeOverlay, openOverlay } from '@overlay/actions'
 import { isValidUrl } from '@core/utils/validation'
 import { isProposalAlreadyAddedForSelectedAccount, isValidProposalId } from '@contexts/governance/utils'
 import { AddProposalOperationParameter } from '../../../enums'
 import { registeredProposalsForSelectedAccount, selectedProposalId } from '@contexts/governance/stores'
 import { GovernanceRoute, governanceRouter } from '@core/router'
 import { get } from 'svelte/store'
-import { PopupId } from '@auxiliary/popup'
+import { PopupId } from '@overlay'
 
 /**
  * NOTE: If we throw an error as normal, it will be handled and displayed in the "failed link"
@@ -29,7 +29,7 @@ export function handleDeepLinkAddProposalOperation(searchParams: URLSearchParams
                 alert: true,
                 message: 'This proposal has already been added',
             })
-            closePopup()
+            closeOverlay()
             return
         }
     }
@@ -39,7 +39,7 @@ export function handleDeepLinkAddProposalOperation(searchParams: URLSearchParams
         throw new Error('Invalid node URL')
     }
 
-    openPopup({
+    openOverlay({
         id: PopupId.AddProposal,
         props: { eventId, nodeUrl },
     })

@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { openPopup, PopupId } from '@auxiliary/popup'
+    import { openOverlay, PopupId } from '@auxiliary/popup'
     import { sumBalanceForAccounts } from '@core/account'
     import { selectedAccount } from '@core/account/stores'
     import { formatCurrency, localize } from '@core/i18n'
@@ -23,7 +23,7 @@
 
     function onCreateAccountClick(): void {
         modal?.close()
-        openPopup({ id: PopupId.CreateAccount })
+        openOverlay({ id: PopupId.CreateAccount })
     }
 </script>
 

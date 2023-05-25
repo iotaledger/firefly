@@ -22,7 +22,7 @@
     import { localize } from '@core/i18n'
     import { showInternalVerificationPopup } from '@core/ledger'
     import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { closeOverlay, openOverlay, PopupId } from '@overlay'
 
     export let activity: Activity
 
@@ -35,7 +35,7 @@
     $: hasExpirationTime = !!activity.asyncData?.expirationDate
 
     function onRejectClick(): void {
-        openPopup({
+        openOverlay({
             id: PopupId.Confirmation,
             props: {
                 title: localize('actions.confirmRejection.title'),
@@ -45,7 +45,7 @@
                 confirmText: localize('actions.reject'),
                 onConfirm: () => {
                     rejectActivity(activity.id)
-                    closePopup()
+                    closeOverlay()
                 },
             },
         })

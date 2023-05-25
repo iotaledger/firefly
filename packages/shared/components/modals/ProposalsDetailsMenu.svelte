@@ -1,13 +1,13 @@
 <script lang="typescript">
     import { Icon } from '@auxiliary/icon'
-    import { openPopup, PopupId } from '@auxiliary/popup'
+    import { openOverlay, PopupId } from '@overlay'
     import { localize } from '@core/i18n'
     import { Modal, MenuItem } from 'shared/components'
 
     export let modal: Modal = undefined
 
     function onRevoteClick(): void {
-        openPopup({
+        openOverlay({
             id: PopupId.Revote,
         })
         modal.close()

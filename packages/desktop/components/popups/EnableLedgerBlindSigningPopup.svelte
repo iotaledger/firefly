@@ -8,14 +8,14 @@
         ledgerPreparedOutput,
         resetLedgerPreparedOutput,
     } from '@core/ledger'
-    import { closePopup } from '@auxiliary/popup'
+    import { closeOverlay } from '@auxiliary/popup'
     import { sendOutput } from '@core/wallet'
     import { handleError } from '@core/error/handlers'
 
     const STEPS = [1, 2, 3, 4]
 
     $: if ($ledgerNanoStatus.blindSigningEnabled) {
-        closePopup()
+        closeOverlay()
         checkOrConnectLedger(async () => {
             try {
                 if ($ledgerPreparedOutput) {

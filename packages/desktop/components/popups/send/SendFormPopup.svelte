@@ -1,6 +1,6 @@
 <script lang="ts">
     import { get } from 'svelte/store'
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { closeOverlay, openOverlay, PopupId } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
     import { isLayer1Destination } from '@core/layer-2'
     import { ownedNfts } from '@core/nfts'
@@ -149,7 +149,7 @@
         const valid = await validate()
         if (valid) {
             setTransactionDetails()
-            openPopup({
+            openOverlay({
                 id: PopupId.SendConfirmation,
                 overflow: true,
             })
@@ -157,7 +157,7 @@
     }
 
     function onCancelClick(): void {
-        closePopup()
+        closeOverlay()
     }
 </script>
 

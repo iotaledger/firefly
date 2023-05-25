@@ -5,10 +5,10 @@
     import { FAUCET_URLS, nodeInfo } from '@core/network'
     import { activeProfile } from '@core/profile'
 
-    import { openPopup, PopupId } from '@auxiliary/popup'
+    import { openOverlay, PopupId } from '@auxiliary/popup'
 
     function onGetTokensClick(): void {
-        openPopup({
+        openOverlay({
             id: PopupId.FaucetRequest,
         })
     }

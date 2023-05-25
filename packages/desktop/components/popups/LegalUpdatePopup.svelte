@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Button, Checkbox, Text, Link } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { closePopup } from '@auxiliary/popup'
+    import { closeOverlay } from '@auxiliary/popup'
     import {
         lastAcceptedTermsOfService,
         lastAcceptedPrivacyPolicy,
@@ -34,7 +34,7 @@
             lastAcceptedPrivacyPolicy.set(PRIVACY_POLICY_VERSION)
         }
 
-        closePopup(true)
+        closeOverlay(true)
     }
 
     function getTitleText(): string {

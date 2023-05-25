@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Button, Text, TextHint, FontWeight, TextType, ButtonVariant, KeyValueBox } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { closeOverlay, openOverlay, PopupId } from '@auxiliary/popup'
     import { burnAsset, formatTokenAmountBestMatch, IAsset } from '@core/wallet'
     import { checkActiveProfileAuth } from '@core/profile'
     import { handleError } from '@core/error/handlers'
@@ -15,7 +15,7 @@
     $: formattedAmount = formatTokenAmountBestMatch(Number(rawAmount), asset?.metadata)
 
     function onBackClick(): void {
-        openPopup({
+        openOverlay({
             id: PopupId.BurnNativeTokens,
             props: { asset, rawAmount },
         })
@@ -26,7 +26,7 @@
             await checkActiveProfileAuth(
                 async () => {
                     await burnAsset(asset.id, rawAmount)
-                    closePopup()
+                    closeOverlay()
                 },
                 { stronghold: true }
             )

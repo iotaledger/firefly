@@ -2,7 +2,7 @@
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
     import { Icon } from '@ui'
-    import { closePopup } from '@auxiliary/popup/actions'
+    import { closeOverlay } from '@auxiliary/popup/actions'
     import { PopupId } from '@auxiliary/popup/enums'
     import { PopupComponentMap } from '@auxiliary/popup/types'
     import { Icon as IconEnum } from '@auxiliary/icon/enums'
@@ -149,7 +149,7 @@
             if ('function' === typeof props?.onCancelled) {
                 props?.onCancelled()
             }
-            closePopup()
+            closeOverlay()
         }
     }
 

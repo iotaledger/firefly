@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Button, PasswordInput, Text, HTMLButtonType } from 'shared/components'
-    import { closePopup } from '@auxiliary/popup'
+    import { closeOverlay } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
     import { unlockStronghold } from '@core/profile'
 
@@ -16,7 +16,7 @@
     async function onSubmit(): Promise<void> {
         try {
             const response = await unlockStronghold(password)
-            closePopup()
+            closeOverlay()
             onSuccess(returnPassword ? password : response)
         } catch (err) {
             console.error(err)
@@ -25,7 +25,7 @@
     }
 
     function onCancelClick(): void {
-        closePopup()
+        closeOverlay()
         if ('function' === typeof onCancelled) {
             onCancelled()
         }

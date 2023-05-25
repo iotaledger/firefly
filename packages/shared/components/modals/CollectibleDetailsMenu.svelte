@@ -6,8 +6,8 @@
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { CollectiblesRoute, collectiblesRouter } from '@core/router'
     import { burnNft } from '@core/wallet'
-    import { PopupId } from '@auxiliary/popup'
-    import { closePopup, openPopup } from '@auxiliary/popup/actions'
+    import { PopupId } from '@overlay'
+    import { closeOverlay, openOverlay } from '@overlay/actions'
 
     export let modal: Modal = undefined
     export let nft: INft
@@ -16,7 +16,7 @@
     $: isLocked = nft.timelockTime > $time.getTime()
 
     function openBurnNft(): void {
-        openPopup({
+        openOverlay({
             id: PopupId.Confirmation,
             props: {
                 title: localize('actions.confirmNftBurn.title', {
@@ -33,7 +33,7 @@
                         async () => {
                             await burnNft(nft.id)
                             $collectiblesRouter.goTo(CollectiblesRoute.Gallery)
-                            closePopup()
+                            closeOverlay()
                         },
                         { stronghold: true }
                     )

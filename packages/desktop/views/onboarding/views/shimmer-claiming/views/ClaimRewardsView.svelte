@@ -27,7 +27,7 @@
         subscribeToWalletApiEventsForShimmerClaiming,
         initialiseAccountRecoveryConfigurationForShimmerClaiming,
     } from '@contexts/onboarding'
-    import { closePopup } from '@auxiliary/popup'
+    import { closeOverlay } from '@auxiliary/popup'
 
     $: shimmerClaimingAccounts = $onboardingProfile?.shimmerClaimingAccounts ?? []
 
@@ -98,7 +98,7 @@
             }
         } finally {
             if ($isOnboardingLedgerProfile) {
-                closePopup(true)
+                closeOverlay(true)
                 pollLedgerNanoStatus()
             }
             hasTriedClaimingRewards = true

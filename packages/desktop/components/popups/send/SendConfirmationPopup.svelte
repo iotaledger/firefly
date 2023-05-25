@@ -31,7 +31,7 @@
     import { DEFAULT_TRANSACTION_OPTIONS } from '@core/wallet/constants'
     import { getOutputOptions, validateSendConfirmation, getAddressFromSubject } from '@core/wallet/utils'
     import { Output } from '@core/wallet/types'
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { closeOverlay, openOverlay, PopupId } from '@auxiliary/popup'
     import { ledgerPreparedOutput } from '@core/ledger'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import { handleError } from '@core/error/handlers/handleError'
@@ -155,7 +155,7 @@
 
     async function sendOutputAndClosePopup(): Promise<void> {
         await sendOutput(preparedOutput)
-        closePopup()
+        closeOverlay()
     }
 
     function toggleGiftStorageDeposit(): void {
@@ -176,15 +176,15 @@
     }
 
     function onBackClick(): void {
-        closePopup()
-        openPopup({
+        closeOverlay()
+        openOverlay({
             id: PopupId.SendForm,
             overflow: true,
         })
     }
 
     function onCancelClick(): void {
-        closePopup()
+        closeOverlay()
     }
 
     onMount(async () => {

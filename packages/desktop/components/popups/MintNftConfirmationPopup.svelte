@@ -6,7 +6,7 @@
     import { buildNftOutputData, formatTokenAmountPrecise, mintNft, mintNftDetails } from '@core/wallet'
     import { getBaseToken, checkActiveProfileAuth } from '@core/profile'
     import { handleError } from '@core/error/handlers/handleError'
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { closeOverlay, openOverlay, PopupId } from '@auxiliary/popup'
     import { CURRENT_IRC27_VERSION } from '@core/nfts'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
@@ -59,15 +59,15 @@
     async function mintAction(): Promise<void> {
         try {
             await mintNft(irc27Metadata, Number(quantity))
-            closePopup()
+            closeOverlay()
         } catch (err) {
             handleError(err)
         }
     }
 
     function onBackClick(): void {
-        closePopup()
-        openPopup({
+        closeOverlay()
+        openOverlay({
             id: PopupId.MintNftForm,
             overflow: true,
         })

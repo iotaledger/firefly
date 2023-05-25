@@ -7,7 +7,7 @@
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { convertToRawAmount, visibleSelectedAccountAssets } from '@core/wallet'
-    import { closePopup, openPopup } from '@auxiliary/popup/actions'
+    import { closeOverlay, openOverlay } from '@auxiliary/popup/actions'
     import { popupState } from '@auxiliary/popup/stores'
     import { onMount } from 'svelte'
     import { isAccountVoting } from '@contexts/governance/utils'
@@ -39,7 +39,7 @@
     }
 
     function onCancelClick(): void {
-        closePopup()
+        closeOverlay()
     }
 
     async function onSubmit(): Promise<void> {
@@ -47,7 +47,7 @@
             await assetAmountInput?.validate(true)
 
             if (amount === '0' && isAccountVoting($selectedAccount.index)) {
-                openPopup({ id: PopupId.VotingPowerToZero })
+                openOverlay({ id: PopupId.VotingPowerToZero })
                 return
             }
 

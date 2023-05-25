@@ -25,7 +25,7 @@
     import { checkActiveProfileAuth } from '@core/profile'
     import { setClipboard } from '@core/utils'
     import { truncateString } from '@core/utils'
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { closeOverlay, openOverlay, PopupId } from '@auxiliary/popup'
     import { onMount } from 'svelte'
 
     export let activityId: string
@@ -52,7 +52,7 @@
 
     async function claim(): Promise<void> {
         await claimActivity(activity)
-        openPopup({
+        openOverlay({
             id: PopupId.ActivityDetails,
             props: { activityId },
         })
@@ -63,7 +63,7 @@
     }
 
     function onRejectClick(): void {
-        openPopup({
+        openOverlay({
             id: PopupId.Confirmation,
             props: {
                 title: localize('actions.confirmRejection.title'),
@@ -74,10 +74,10 @@
                 warning: true,
                 onConfirm: () => {
                     rejectActivity(activityId)
-                    closePopup()
+                    closeOverlay()
                 },
                 onCancel: () =>
-                    openPopup({
+                    openOverlay({
                         id: PopupId.ActivityDetails,
                         props: { activityId },
                     }),

@@ -12,14 +12,14 @@
         openUrlInBrowser,
     } from '@core/app'
     import { formatDate, localize } from '@core/i18n'
-    import { closePopup } from '@auxiliary/popup'
+    import { closeOverlay } from '@auxiliary/popup'
     import features from '@features/features'
 
     let hasAutoUpdate = false
 
     function onDownloadClick(): void {
         downloadAppUpdate()
-        closePopup()
+        closeOverlay()
     }
 
     function onVisitDownloadsClick(): void {
@@ -27,7 +27,7 @@
     }
 
     function onCloseClick(): void {
-        closePopup()
+        closeOverlay()
     }
 
     onMount(() => {

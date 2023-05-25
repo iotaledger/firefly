@@ -17,7 +17,9 @@
             "@desktop/*": ["./lib/*"],
             "@ui": ["../shared/components"],
             "@ui/*": ["../shared/components/*"],
-            "@views": ["./views"]
+            "@views": ["./views"],
+            "@overlay": ["../shared/lib/auxiliary/popup"],
+            "@overlay/*": ["../shared/lib/auxiliary/popup/*"]
         },
         "types": ["node"]
     },

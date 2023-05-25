@@ -6,7 +6,7 @@
     import { setVotingPower } from '@contexts/governance/actions'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile/actions'
-    import { closePopup, openPopup } from '@auxiliary/popup/actions'
+    import { closeOverlay, openOverlay } from '@auxiliary/popup/actions'
     import { popupState } from '@auxiliary/popup/stores'
     import { PopupId } from '@auxiliary/popup'
 
@@ -16,7 +16,7 @@
         $selectedAccount?.hasVotingPowerTransactionInProgress || $selectedAccount?.hasVotingTransactionInProgress
 
     function onCancelClick(): void {
-        closePopup()
+        closeOverlay()
     }
 
     async function onSubmit(): Promise<void> {
@@ -25,7 +25,7 @@
             $popupState.props = { newVotingPower: ZERO_VOTING_POWER }
 
             await checkActiveProfileAuth(async () => {
-                openPopup({
+                openOverlay({
                     id: PopupId.ManageVotingPower,
                     props: { newVotingPower: ZERO_VOTING_POWER },
                 })

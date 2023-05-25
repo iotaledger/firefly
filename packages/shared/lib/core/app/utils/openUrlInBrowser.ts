@@ -1,4 +1,4 @@
-import { PopupId } from '@auxiliary/popup'
+import { PopupId } from '@overlay'
 import { localize } from '@core/i18n'
 import { Platform } from '../classes/platform.class'
 import { externalAllowedLinks } from '../constants'

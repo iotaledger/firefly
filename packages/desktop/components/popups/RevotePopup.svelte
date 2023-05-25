@@ -2,7 +2,7 @@
     import { Button, Text, TextHint, HTMLButtonType, TextType } from 'shared/components'
     import { selectedAccount } from '@core/account/stores'
     import { localize } from '@core/i18n'
-    import { closePopup } from '@auxiliary/popup/actions'
+    import { closeOverlay } from '@auxiliary/popup/actions'
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { vote } from '@contexts/governance/actions'
 
@@ -12,7 +12,7 @@
     async function onSubmit(): Promise<void> {
         await checkActiveProfileAuth(async () => {
             await vote()
-            closePopup(true)
+            closeOverlay(true)
         })
     }
 </script>

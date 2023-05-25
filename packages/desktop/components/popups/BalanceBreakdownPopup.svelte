@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { closeOverlay, openOverlay, PopupId } from '@auxiliary/popup'
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile'
@@ -119,7 +119,7 @@
     }
 
     function onConsolidationClick(): void {
-        openPopup({
+        openOverlay({
             id: PopupId.Confirmation,
             props: {
                 title: localize('popups.minimizeStorageDeposit.title'),
@@ -130,7 +130,7 @@
                     await checkActiveProfileAuth(
                         async () => {
                             await consolidateOutputs()
-                            closePopup()
+                            closeOverlay()
                         },
                         { stronghold: true }
                     )

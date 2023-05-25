@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { closePopup } from '@auxiliary/popup'
+    import { closeOverlay } from '@overlay'
     import { selectedAccountIndex } from '@core/account/stores'
     import { time } from '@core/app'
     import { localize } from '@core/i18n'
@@ -27,7 +27,7 @@
     $: subject = getSubjectFromActivity(activity)
 
     async function onClick(): Promise<void> {
-        closePopup()
+        closeOverlay()
         $selectedNftId = activity.nftId
         $dashboardRouter.goTo(DashboardRoute.Collectibles)
         await tick()

@@ -2,18 +2,18 @@
     import { handleDeepLink } from '@auxiliary/deep-link'
 
     import { localize } from '@core/i18n'
-    import { closePopup } from '@auxiliary/popup'
+    import { closeOverlay } from '@auxiliary/popup'
     import { Button, Text, TextInput, FontWeight, TextType } from 'shared/components'
 
     const PREFIX = process.env.APP_PROTOCOL + '://'
     let url: string = PREFIX
 
     function onCancelClick(): void {
-        closePopup()
+        closeOverlay()
     }
 
     function onTestClick(): void {
-        closePopup()
+        closeOverlay()
         handleDeepLink(url)
     }
 </script>

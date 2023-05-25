@@ -6,7 +6,7 @@
     import { activeProfile } from '@core/profile'
     import { isFunction } from '@core/utils'
     import { Button, LedgerAnimation, Text, TextHint, FontWeight, TextType } from 'shared/components'
-    import { closePopup } from '@auxiliary/popup'
+    import { closeOverlay } from '@auxiliary/popup'
 
     export let onCancel: () => void
     export let onContinue: () => void
@@ -35,19 +35,19 @@
 
     function onCancelClick(): void {
         if (isFunction(onCancel)) {
-            closePopup()
+            closeOverlay()
             onCancel()
         } else {
-            closePopup()
+            closeOverlay()
         }
     }
 
     function onContinueClick(): void {
         if (isFunction(onContinue)) {
-            closePopup()
+            closeOverlay()
             onContinue()
         } else {
-            closePopup()
+            closeOverlay()
         }
     }
 </script>

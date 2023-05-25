@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Button, Text, TextHint, FontWeight, TextType, AssetAmountInput } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { closeOverlay, openOverlay, PopupId } from '@auxiliary/popup'
     import { IAsset } from '@core/wallet'
 
     export let asset: IAsset
@@ -12,7 +12,7 @@
     async function onContinueClick(): Promise<void> {
         try {
             await assetAmountInput.validate()
-            openPopup({
+            openOverlay({
                 id: PopupId.BurnNativeTokensConfirmation,
                 props: { asset, rawAmount },
             })
@@ -35,7 +35,7 @@
         <TextHint warning text={localize('actions.confirmTokenBurn.hint')} />
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" outline onClick={closePopup}>{localize('actions.cancel')}</Button>
+        <Button classes="w-full" outline onClick={closeOverlay}>{localize('actions.cancel')}</Button>
         <Button classes="w-full" onClick={onContinueClick}>{localize('actions.continue')}</Button>
     </popup-buttons>
 </div>

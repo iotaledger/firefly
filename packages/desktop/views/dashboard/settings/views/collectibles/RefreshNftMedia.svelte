@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Button, Text, ButtonSize, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { closeOverlay, openOverlay, PopupId } from '@auxiliary/popup'
     import {
         addNftsToDownloadQueue,
         selectedAccountNfts,
@@ -14,14 +14,14 @@
     let isLoading = false
 
     function onRefreshClick(): void {
-        openPopup({
+        openOverlay({
             id: PopupId.Confirmation,
             props: {
                 title: localize('actions.refreshNftMedia.title'),
                 description: localize('actions.refreshNftMedia.description'),
                 onConfirm: () => {
                     refreshNftMedia()
-                    closePopup()
+                    closeOverlay()
                 },
             },
         })

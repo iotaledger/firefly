@@ -1,6 +1,6 @@
 <script lang="ts">
     import { PopupId } from '@auxiliary/popup'
-    import { openPopup } from '@auxiliary/popup/actions'
+    import { openOverlay } from '@auxiliary/popup/actions'
     import { selectedAccount, selectedAccountIndex } from '@core/account/stores'
     import { time } from '@core/app'
     import { openUrlInBrowser } from '@core/app/utils'
@@ -145,7 +145,7 @@
             recipient: undefined,
             disableAssetSelection: true,
         })
-        openPopup({
+        openOverlay({
             id: PopupId.SendForm,
             overflow: true,
         })

@@ -12,7 +12,7 @@
         NewTransactionType,
         getUnitFromTokenMetadata,
     } from '@core/wallet'
-    import { openPopup, PopupId, updatePopupProps } from '@auxiliary/popup'
+    import { openOverlay, PopupId, updatePopupProps } from '@auxiliary/popup'
     import { AssetIcon, Button, Text, TextHint, AssetActionsButton, KeyValueBox, FontWeight } from 'shared/components'
 
     export let asset: IAsset
@@ -21,7 +21,7 @@
     function onSkipClick(): void {
         unverifyAsset(asset.id, NotVerifiedStatus.Skipped)
         if (activityId) {
-            openPopup({
+            openOverlay({
                 id: PopupId.ActivityDetails,
                 props: { activityId },
             })
@@ -35,7 +35,7 @@
     function onVerifyClick(): void {
         verifyAsset(asset.id, VerifiedStatus.SelfVerified)
         if (activityId) {
-            openPopup({
+            openOverlay({
                 id: PopupId.ActivityDetails,
                 props: { activityId },
             })
@@ -53,7 +53,7 @@
             assetId: asset.id,
             disableAssetSelection: true,
         })
-        openPopup({
+        openOverlay({
             id: PopupId.SendForm,
             overflow: true,
         })
