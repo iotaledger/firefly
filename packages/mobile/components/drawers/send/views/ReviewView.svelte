@@ -8,7 +8,7 @@
     import { localize } from '@core/i18n'
     import { getDestinationNetworkFromAddress } from '@core/layer-2'
     import { isStrongholdUnlocked } from '@core/profile-manager'
-    import { ExpirationTime } from '@core/utils'
+    import { TimePeriod } from '@core/utils'
     import {
         ActivityDirection,
         ActivityType,
@@ -24,7 +24,7 @@
 
     export let sendTransaction: () => Promise<void>
     export let storageDeposit: number
-    export let initialExpirationDate: ExpirationTime
+    export let initialExpirationDate: TimePeriod
     export let expirationDate: Date
     export let visibleSurplus: number = 0
 

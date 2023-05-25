@@ -1,7 +1,7 @@
 import { derived, Readable } from 'svelte/store'
 import { dictionary } from 'svelte-i18n'
 
-import { appSettings } from '@core/app/stores'
+import { appSettings } from '@core/app'
 
 /**
  * The store indicating if the localization dictionary
