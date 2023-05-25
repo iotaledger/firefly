@@ -1,5 +1,6 @@
-import { selectedAccount } from '@core/account'
-import { ContractType, evmAddressToAgentID, getAgentBalanceParameters, getSmartContractHexName } from '@core/layer-2'
+import { selectedAccount } from '@core/account/stores'
+import { evmAddressToAgentID, getAgentBalanceParameters, getSmartContractHexName } from '@core/layer-2/utils'
+import { ContractType } from '@core/layer-2/enums'
 import { network } from '@core/network'
 import { TOKEN_ID_BYTE_LENGTH } from '@core/token'
 import { Converter } from '@iota/util.js'

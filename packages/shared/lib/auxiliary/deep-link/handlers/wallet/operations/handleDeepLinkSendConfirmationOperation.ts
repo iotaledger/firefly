@@ -21,7 +21,8 @@ import {
     UnknownAssetError,
 } from '../../../errors'
 import { getRawAmountFromSearchParam } from '../../../utils'
-import { activeProfile, getNetworkHrp } from '@core/profile'
+import { getNetworkHrp } from '@core/profile/actions'
+import { activeProfile } from '@core/profile/stores'
 
 export function handleDeepLinkSendConfirmationOperation(searchParams: URLSearchParams): void {
     const transactionDetails = parseSendConfirmationOperation(searchParams)

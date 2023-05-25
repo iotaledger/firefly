@@ -5,7 +5,7 @@ import { get } from 'svelte/store'
 import { IAccountState } from '@core/account/interfaces'
 
 import { addProposalsFromParticipationEventMap } from './addProposalsFromParticipationEventMap'
-import { selectedAccount } from '@core/account'
+import { selectedAccount } from '@core/account/stores'
 
 export async function registerParticipationEvents(
     registrationOptions: ParticipationEventRegistrationOptions,

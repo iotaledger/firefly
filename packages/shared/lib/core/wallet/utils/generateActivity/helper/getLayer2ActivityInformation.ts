@@ -1,4 +1,5 @@
-import { Layer2Metadata, parseLayer2Metadata, getDestinationNetworkFromAddress } from '@core/layer-2'
+import { Layer2Metadata } from '@core/layer-2/types'
+import { parseLayer2Metadata, getDestinationNetworkFromAddress } from '@core/layer-2/utils'
 import { SenderInfo } from '../../../types'
 
 export function getLayer2ActivityInformation(

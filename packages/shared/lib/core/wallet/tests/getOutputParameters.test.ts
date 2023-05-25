@@ -1,5 +1,5 @@
 import { CoinType } from '@iota/wallet/out/types'
-import { NetworkId } from '@core/network'
+import { NetworkId } from '@core/network/enums'
 
 import { activeProfileId } from '@core/profile/stores/active-profile-id.store'
 import { GAS_BUDGET } from '@core/layer-2/constants'
@@ -53,7 +53,9 @@ const baseTransaction: NewTransactionDetails = {
 
 jest.mock('../stores/persisted-assets.store', () => ({
     getPersistedAsset: jest.fn(() => PERSISTED_ASSET_SHIMMER),
-    getAssetById: jest.fn((id) => (id === PERSISTED_ASSET_SHIMMER.id ? PERSISTED_ASSET_SHIMMER : nativeTokenAsset)),
+    getAssetById: jest.fn((id, networkId) =>
+        id === PERSISTED_ASSET_SHIMMER.id ? PERSISTED_ASSET_SHIMMER : nativeTokenAsset
+    ),
 }))
 
 jest.mock('../actions/getAccountAssetsForSelectedAccount', () => ({
