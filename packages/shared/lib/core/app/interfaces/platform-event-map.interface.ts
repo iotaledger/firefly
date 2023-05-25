@@ -1,4 +1,4 @@
-import { IAppUpdateDownloadProgress, IAppVersionDetails, IEvmAddress, IEvmSignature, INFTDownloadState } from '.'
+import { IAppUpdateDownloadProgress, IAppVersionDetails, IEvmAddress, INFTDownloadState } from '.'
 
 export interface IPlatformEventMap {
     'menu-logout': void
@@ -18,6 +18,6 @@ export interface IPlatformEventMap {
     'nft-download-done': INFTDownloadState
     'nft-download-interrupted': INFTDownloadState
     'evm-address': IEvmAddress
-    'evm-signature': IEvmSignature
+    'evm-signature': string
     'ledger-error': Error
 }
