@@ -28,6 +28,7 @@ async function getSelectedAccountWrappedNativeTokensForAddress(
     try {
         // TODO: validate evmAddress with validateEthereumAddress when the app errors are removed from it
         const chains = get(network)?.getChains()
+        console.log('chains', chains)
         const accountsCoreContract = getSmartContractHexName('accounts')
         const getBalanceFunc = getSmartContractHexName('balance')
         const agentID = evmAddressToAgentID(selectedAccountEvmAddress)
