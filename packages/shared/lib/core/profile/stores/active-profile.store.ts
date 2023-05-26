@@ -60,3 +60,10 @@ export function getActiveProfilePersistedEvmAddressesByAccountIndex(accountIndex
     const accountPersistedData = getActiveProfilePersistedAccountData(accountIndex)
     return accountPersistedData?.evmAddresses ?? {}
 }
+
+export function getActiveProfilePersistedTrackedTokensByAccountIndex(accountIndex: number): {
+    [chainId: number]: string
+} {
+    const accountPersistedData = getActiveProfilePersistedAccountData(accountIndex)
+    return accountPersistedData?.trackedTokens ?? {}
+}

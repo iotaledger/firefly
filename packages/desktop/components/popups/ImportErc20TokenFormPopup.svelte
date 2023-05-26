@@ -1,10 +1,12 @@
 <script lang="ts">
-    import { Button, ChainInput, FontWeight, Spinner, Text, TextInput, TextType } from '@ui'
+    import { showAppNotification } from '@auxiliary/notification'
+    import { selectedAccount, selectedAccountIndex } from '@core/account'
     import { localize } from '@core/i18n'
     import { ERC20_TOKEN_ADDRESS_LENGTH, importErc20Token } from '@core/layer-2'
+    import { updateActiveAccount } from '@core/profile'
     import { HEXADECIMAL_PREFIX, HEXADECIMAL_REGEXP } from '@core/utils'
-    import { showAppNotification } from '@auxiliary/notification'
     import { closePopup } from '@desktop/auxiliary/popup'
+    import { Button, ChainInput, FontWeight, Spinner, Text, TextInput, TextType } from '@ui'
 
     let busy = false
 
@@ -23,13 +25,23 @@
 
         if (validate()) {
             try {
-                const tokenInfo = await importErc20Token(tokenAddress, chainId)
-                showAppNotification({
-                    type: 'success',
-                    alert: true,
-                    message: localize('popups.importErc20Token.success', { values: { tokenSymbol: tokenInfo.symbol } }),
-                })
+                const erc20Token = await importErc20Token(tokenAddress, chainId)
+                if (erc20Token) {
+                    const trackedTokens = $selectedAccount.trackedTokens ?? {}
+                    if (!trackedTokens[chainId]?.includes(erc20Token.metadata.address)) {
+                        trackedTokens[chainId].push(erc20Token.metadata.address)
+                        updateActiveAccount($selectedAccountIndex, { trackedTokens })
+                    }
+                    showAppNotification({
+                        type: 'success',
+                        alert: true,
+                        message: localize('popups.importErc20Token.success', {
+                            values: { tokenSymbol: erc20Token.metadata.symbol },
+                        }),
+                    })
+                }
             } catch (err) {
+                console.error(err)
                 showAppNotification({
                     type: 'error',
                     alert: true,

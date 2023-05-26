@@ -6,8 +6,9 @@ import { selectedAccount } from '@core/account/stores'
 import { network } from '@core/network/stores'
 
 import { ContractType } from '../enums'
+import { IAsset, TokenStandard, NotVerifiedStatus } from '@core/wallet'
 
-export async function importErc20Token(tokenAddress: string, chainId: number): Promise<unknown> {
+export async function importErc20Token(tokenAddress: string, chainId: number): Promise<IAsset | undefined> {
     const chain = get(network)?.getChain(chainId)
     const contract = chain?.getContract(ContractType.Erc20, tokenAddress)
     if (contract) {
@@ -15,18 +16,33 @@ export async function importErc20Token(tokenAddress: string, chainId: number): P
         const name = await contract.methods.name().call()
         const symbol = await contract.methods.symbol().call()
         const decimals = await contract.methods.decimals().call()
-        console.log('METADATA: ', name, symbol, decimals)
-
         // TODO: Extract into separate function later
         // TODO: Get for all accounts
         const coinType = chain?.getConfiguration().coinType
-        const selectedAccountAddress = get(selectedAccount)?.evmAddresses[coinType]
-        const rawBalance = await contract.methods.balanceOf(selectedAccountAddress).call()
-        console.log('RAW BALANCE: ', rawBalance)
-        const adjustedBalance = rawBalance / Math.pow(10, decimals)
-        const formattedBalance = `${adjustedBalance} ${symbol}`
-        console.log('FORMATTED BALANCE: ', formattedBalance)
+        if (coinType) {
+            const selectedAccountAddress = get(selectedAccount)?.evmAddresses[coinType]
+            const rawBalance = await contract.methods.balanceOf(selectedAccountAddress).call()
 
-        return { name, symbol, decimals }
+            const token: IAsset = {
+                id: tokenAddress,
+                standard: TokenStandard.Erc20,
+                metadata: {
+                    standard: TokenStandard.Erc20,
+                    name,
+                    symbol,
+                    decimals,
+                },
+                balance: {
+                    total: rawBalance,
+                },
+                verification: {
+                    verified: false,
+                    status: NotVerifiedStatus.New,
+                },
+                hidden: false,
+            }
+
+            return token
+        }
     }
 }

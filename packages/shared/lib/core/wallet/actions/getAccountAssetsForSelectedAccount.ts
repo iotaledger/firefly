@@ -24,7 +24,7 @@ export function getAccountAssetsForSelectedAccount(marketCoinPrices: MarketCoinP
 
     for (const chain of chains) {
         const chainId = chain.getConfiguration().chainId
-        const chainAssets = getAccountAssetForChain()
+        const chainAssets = getAccountAssetsForChain(chainId)
         accountAssets[chainId] = chainAssets
     }
 
@@ -66,7 +66,9 @@ function getAccountAssetForNetwork(marketCoinPrices: MarketCoinPrices, networkId
     }
 }
 
-function getAccountAssetForChain(): IAccountAssetsPerNetwork {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getAccountAssetsForChain(chainId: number): IAccountAssetsPerNetwork {
+    // TODO: Implement
     return {
         baseCoin: undefined,
         nativeTokens: [],
