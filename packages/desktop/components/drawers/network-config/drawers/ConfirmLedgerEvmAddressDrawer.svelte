@@ -12,7 +12,7 @@
 
     export let drawerRouter: Router<DrawerRoute>
 
-    let coinType
+    let coinType: number | undefined
     $: address = $selectedAccount?.evmAddresses?.[coinType]
 
     let continued = false
