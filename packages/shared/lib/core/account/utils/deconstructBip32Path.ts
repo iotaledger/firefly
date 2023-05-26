@@ -7,7 +7,6 @@ export function deconstructBip32Path(path: string): {
     addressIndex: number
 } {
     const pathArray = path.split('/')
-
     if (pathArray.length !== BIP_32_LEVELS) {
         throw new Error('Invalid BIP-32 path length')
     }
