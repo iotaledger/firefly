@@ -113,4 +113,3 @@ export async function getStrongholdMigrationFilePath(profileId: string, isRecove
     const profileStoragePath = await getProfileDataPath(profileId)
     return `${profileStoragePath}/${isRecovery ? 'db/' : ''}wallet.stronghold`
 }
-
