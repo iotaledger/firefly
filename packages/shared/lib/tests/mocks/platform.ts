@@ -56,6 +56,12 @@ const Platform: IPlatform = {
     listProfileFolders(profileStoragePath: string): Promise<string[]> {
         return Promise.resolve([])
     },
+    copyFile(source: string, destination: string): Promise<void> {
+        return Promise.resolve(undefined)
+    },
+    deleteFile(source: string): Promise<void> {
+        return Promise.resolve(undefined)
+    },
     maximize(): Promise<boolean> {
         return Promise.resolve(false)
     },
