@@ -1,6 +1,6 @@
 import { localize } from '@core/i18n'
 import { IAccount, IAccountState, IPersistedAccountData } from '../interfaces'
-import { getRandomAccountColor } from '../utils'
+import { getDepositAddress, getRandomAccountColor } from '../utils'
 import { buildAccountState } from './buildAccountState'
 
 export async function buildAccountStateAndPersistedData(
@@ -15,6 +15,7 @@ export async function buildAccountStateAndPersistedData(
         hidden: false,
         shouldRevote: false,
         evmAddresses: {},
+        depositAddress: await getDepositAddress(account),
     }
     const accountState = await buildAccountState(account, persistedAccountData)
     return [accountState, persistedAccountData]
