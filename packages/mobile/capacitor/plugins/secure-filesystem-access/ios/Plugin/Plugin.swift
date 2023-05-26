@@ -135,4 +135,24 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
         
         call.resolve()
     }
+
+    @objc func copyFile(_ call: CAPPluginCall) {
+        guard let source = call.getString("source") else {
+            return call.reject("source is required")
+        }
+        guard let destination = call.getString("destination") else {
+            return call.reject("destination is required")
+        }
+        try? FileManager.default.copyItem(atPath: source, toPath: destination)
+        call.resolve()
+    }
+
+    @objc func deleteFile(_ call: CAPPluginCall) {
+        guard let source = call.getString("source") else {
+            return call.reject("source is required")
+        }
+        let srcUrl = getAppPath(folder: source)
+        try? FileManager.default.removeItem(atPath: srcUrl)
+        call.resolve()
+    }
 }
