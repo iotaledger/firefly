@@ -12,7 +12,8 @@ export function deconstructBip32Path(path: string): {
     }
 
     const _path = pathArray.map((p) => {
-        const sanitizedPath = p.replace('\'', '')
+        // eslint-disable-next-line quotes
+        const sanitizedPath = p.replace("'", '')
         return Number(sanitizedPath)
     })
 
