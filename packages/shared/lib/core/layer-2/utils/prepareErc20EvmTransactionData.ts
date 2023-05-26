@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 
-import { network } from '@core/network'
+import { ChainId, network } from '@core/network'
 
 import { ERC20_ABI } from '../abis'
 import { GAS_MULTIPLIER } from '../constants'
@@ -11,7 +11,7 @@ export async function prepareErc20EvmTransactionData(
 ): Promise<IEvmTransactionData> {
     const { tokenAddress, originAddress, recipientAddress, transferAmount } = options
 
-    const provider = get(network)?.getChain(1071)?.getProvider()
+    const provider = get(network)?.getChain(ChainId.ShimmerEVM)?.getProvider()
     if (provider) {
         const erc20Contract = new provider.eth.Contract(ERC20_ABI, tokenAddress)
 
