@@ -10,7 +10,6 @@ const TransportNodeHid = require('@ledgerhq/hw-transport-node-hid').default
 const AppEth = require('@ledgerhq/hw-app-eth').default
 const { listen } = require('@ledgerhq/logs')
 
-const { Chain, Common } = require('@ethereumjs/common')
 const { RLP } = require('@ethereumjs/rlp')
 const { Transaction } = require('@ethereumjs/tx')
 const { bufArrToArr } = require('@ethereumjs/util')
@@ -59,40 +58,30 @@ async function closeTransport() {
     }
 }
 
-async function getEvmAddress(coinType, accountIndex, verify) {
+async function getEvmAddress(bip32Path, verify) {
     const appEth = new AppEth(transport)
-    const data = await appEth.getAddress(buildBip32Path(coinType, accountIndex))
+    const data = await appEth.getAddress(bip32Path)
 
-    return { evmAddress: data.address, coinType, accountIndex }
+    return { evmAddress: data.address, bip32Path }
 }
 
-function buildBip32Path(coinType, accountIndex) {
-    return `44'/${coinType}'/${accountIndex}'/0/0`
-}
+async function signTransactionData(data, chain, bip32Path) {
+    process.parentPort.postMessage({ data: 'Inside sign Ledger', chain, bip32Path })
 
-async function signTransactionData(data, coinType, accountIndex) {
     const appEth = new AppEth(transport)
-    const common = new Common({ chain: Chain.Sepolia })
 
-    const unsignedTransactionObject = Transaction.fromTxData(data, { common })
+    const unsignedTransactionObject = Transaction.fromTxData(data)
     const unsignedTransaction = unsignedTransactionObject.getMessageToSign(false)
 
     const serializedUnsignedTransaction = Buffer.from(RLP.encode(bufArrToArr(unsignedTransaction)))
-    const signature = await appEth.signTransaction(
-        buildBip32Path(coinType, accountIndex),
-        serializedUnsignedTransaction,
-        null
-    )
+    const signature = await appEth.signTransaction(bip32Path, serializedUnsignedTransaction, null)
 
-    const signedTransactionObject = Transaction.fromTxData(
-        {
-            ...data,
-            v: '0x' + signature.v,
-            r: '0x' + signature.r,
-            s: '0x' + signature.s,
-        },
-        { common }
-    )
+    const signedTransactionObject = Transaction.fromTxData({
+        ...data,
+        v: '0x' + signature.v,
+        r: '0x' + signature.r,
+        s: '0x' + signature.s,
+    })
     const serializedSignedTransaction = Buffer.from(RLP.encode(bufArrToArr(signedTransactionObject.raw())))
     const serializedSignedTransactionString = '0x' + serializedSignedTransaction.toString('hex')
 

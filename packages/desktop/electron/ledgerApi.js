@@ -1,11 +1,11 @@
 const { ipcRenderer } = require('electron')
 
 const LedgerApi = {
-    generateEvmAddress(coinType, accountIndex, verify) {
-        return ipcRenderer.send('generate-evm-address', coinType, accountIndex, verify ?? false)
+    generateEvmAddress(bip32Path, verify) {
+        return ipcRenderer.send('generate-evm-address', bip32Path, verify ?? false)
     },
-    signEvmTransaction(data, coinType, accountIndex) {
-        return ipcRenderer.send('sign-evm-transaction', data, coinType, accountIndex)
+    signEvmTransaction(data, chainId, bip32Path) {
+        return ipcRenderer.send('sign-evm-transaction', data, chainId, bip32Path)
     },
 }
 

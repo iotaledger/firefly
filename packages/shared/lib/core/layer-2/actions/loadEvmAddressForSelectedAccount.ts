@@ -1,9 +1,10 @@
 import { getSelectedAccount } from '@core/account/stores'
+import { buildBip32Path } from '@core/account/utils'
 import { Ledger } from '@core/ledger/classes'
 import { network } from '@core/network'
 import { get } from 'svelte/store'
 
-export async function loadEvmAddressForSelectedAccount(): Promise<void> {
+export function loadEvmAddressForSelectedAccount(): void {
     try {
         const account = getSelectedAccount()
         if (!account) {
@@ -15,7 +16,8 @@ export async function loadEvmAddressForSelectedAccount(): Promise<void> {
 
         for (const coinType of coinTypes) {
             if (!evmAddresses[coinType]) {
-                await Ledger.generateEvmAddress(coinType, index, false)
+                const bip32Path = buildBip32Path(coinType, index)
+                Ledger.generateEvmAddress(bip32Path, false)
             }
         }
     } catch (err) {

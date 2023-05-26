@@ -334,12 +334,12 @@ ipcMain.on('kill-ledger-process', () => {
     ledgerProcess.kill()
 })
 
-ipcMain.on('generate-evm-address', (_e, coinType, accountIndex, verify) => {
-    ledgerProcess?.postMessage({ method: 'generate-evm-address', parameters: [coinType, accountIndex, verify] })
+ipcMain.on('generate-evm-address', (_e, bip32Path, verify) => {
+    ledgerProcess?.postMessage({ method: 'generate-evm-address', parameters: [bip32Path, verify] })
 })
 
-ipcMain.on('sign-evm-transaction', (_e, data, coinType, accountIndex) => {
-    ledgerProcess.postMessage({ method: 'sign-evm-transaction', parameters: [data, coinType, accountIndex] })
+ipcMain.on('sign-evm-transaction', (_e, data, chainId, bip32Path) => {
+    ledgerProcess.postMessage({ method: 'sign-evm-transaction', parameters: [data, chainId, bip32Path] })
 })
 
 /**
