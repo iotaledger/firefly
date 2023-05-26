@@ -5,6 +5,7 @@
     import { strongholdPassword } from 'shared/lib/app'
     import { onMount } from 'svelte'
     import { ChangePassword, Success, Update } from './views'
+    import { walletSetupType } from '@lib/wallet'
 
     export let locale: Locale
 
@@ -12,11 +13,13 @@
     let currentPassword: string = $strongholdPassword
     let passwordUpdated: boolean = false
 
+    $: isRecovery = !!walletSetupType
+
     onMount(() => {
         updateStrongholdRouter = new UpdateStrongholdRouter()
     })
 
-    const next = (event: CustomEvent<any>): void => {
+    const next = async (event: CustomEvent<any>): Promise<void> => {
         const eventDetail = event?.detail
         if (eventDetail?.password) {
             if ($updateStrongholdRoute === UpdateStrongholdRoute.ChangePassword) {
@@ -25,14 +28,14 @@
             currentPassword = eventDetail?.password
         }
         allowBackButton.set(false)
-        updateStrongholdRouter.next()
+        await updateStrongholdRouter.next({ isRecovery })
     }
     const previous = (): void => updateStrongholdRouter.previous()
 </script>
 
 {#if $updateStrongholdRoute === UpdateStrongholdRoute.Update}
     <Transition>
-        <Update {currentPassword} on:next={next} on:previous={previous} {locale} />
+        <Update {currentPassword} {next} on:previous={previous} {locale} />
     </Transition>
 {:else if $updateStrongholdRoute === UpdateStrongholdRoute.ChangePassword}
     <Transition>

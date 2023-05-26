@@ -6,6 +6,7 @@ import { Platform } from '@lib/platform'
 import { newProfile } from '@lib/profile'
 import { ImportType } from '@lib/typings/profile'
 import { asyncRestoreBackup } from '@lib/wallet'
+import { importFilePath } from '@lib/stronghold'
 
 import { appRouter } from '../app-router'
 import { ImportRoute } from '../enums'
@@ -79,7 +80,11 @@ export class ImportRouter extends Subrouter<ImportRoute> {
                     await asyncRestoreBackup(this.importFilePath, '')
                 } catch (err) {
                     if (err?.error === 'error.backup.migrationRequired') {
-                        get(appRouter).next({ importType: get(this.importType), strongholdUpdateRequired: true })
+                        importFilePath.set(filePath)
+                        get(appRouter).next({
+                            importType: get(this.importType),
+                            strongholdUpdateRequired: true,
+                        })
                     } else {
                         nextRoute = ImportRoute.BackupPassword
                     }
