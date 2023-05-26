@@ -8,4 +8,5 @@ export interface IPersistedAccountData {
     shouldRevote: boolean
     removedProposalIds?: ParticipationEventId[]
     evmAddresses: IEvmAddresses
+    depositAddress: string
 }
