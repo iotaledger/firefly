@@ -1,5 +1,4 @@
 export interface IEvmAddress {
-    coinType: number
     evmAddress: string
-    accountIndex: number
+    bip32Path: string
 }
