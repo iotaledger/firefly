@@ -10,7 +10,6 @@ const TransportNodeHid = require('@ledgerhq/hw-transport-node-hid').default
 const AppEth = require('@ledgerhq/hw-app-eth').default
 const { listen } = require('@ledgerhq/logs')
 
-const { Common } = require('@ethereumjs/common')
 const { RLP } = require('@ethereumjs/rlp')
 const { Transaction } = require('@ethereumjs/tx')
 const { bufArrToArr } = require('@ethereumjs/util')
