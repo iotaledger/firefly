@@ -55,6 +55,27 @@ export const CapacitorApi: IPlatform = {
 
     listProfileFolders: (profileStoragePath) => new Promise<string[]>((resolve, reject) => {}),
 
+    copyFile: async (source, destination) => {
+        try {
+            await SecureFilesystemAccess.copyFile({
+                source,
+                destination,
+            })
+        } catch (err) {
+            console.error(err)
+        }
+    },
+
+    deleteFile: async (source) => {
+        try {
+            await SecureFilesystemAccess.deleteFile({
+                source,
+            })
+        } catch (err) {
+            console.error(err)
+        }
+    },
+
     loadJsonFile: async (filepath) => {
         try {
             const response = await fetch(filepath)
@@ -176,12 +197,11 @@ export const CapacitorApi: IPlatform = {
 
     /**
      * Gets directory for app's configuration files
-     *
-     * @method getUserDataPath
-     *
-     * @returns {Promise}
      */
-    getUserDataPath: () => new Promise<string>((resolve, reject) => resolve('')),
+    getUserDataPath: async () => {
+        const { path } = await SecureFilesystemAccess.getUserDataPath()
+        return path
+    },
 
     /**
      * Gets diagnostics information for the system

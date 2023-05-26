@@ -42,7 +42,6 @@ public class WalletPlugin extends Plugin {
         String actorId = call.getString("actorId");
         String storagePath = call.getString("storagePath");
         assert actorId != null && storagePath != null;
-        String dbPath = getContext().getFilesDir() + storagePath;
 
         try {
             final ActorCallback callback = response -> {
@@ -52,7 +51,7 @@ public class WalletPlugin extends Plugin {
             };
 
             call.setKeepAlive(true);
-            Actor.iotaInitialize(callback, actorId, dbPath);
+            Actor.iotaInitialize(callback, actorId, storagePath);
             isInitialized = true;
         } catch (Exception e) {
             e.printStackTrace();

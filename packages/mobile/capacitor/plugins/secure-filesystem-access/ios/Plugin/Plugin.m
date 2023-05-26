@@ -9,4 +9,7 @@ CAP_PLUGIN(SecureFilesystemAccess, "SecureFilesystemAccess",
     CAP_PLUGIN_METHOD(renameProfileFolder, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(listProfileFolders, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(saveTextFile, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(copyFile, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(deleteFile, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(getUserDataPath, CAPPluginReturnPromise);
 )
