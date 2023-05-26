@@ -333,7 +333,7 @@ public class SecureFilesystemAccessPlugin extends Plugin {
             String source = Objects.requireNonNull(call.getString("source"));
             String destination = Objects.requireNonNull(call.getString("destination"));
             File sourceFile = new File(source);
-            File destinationFile = new File(getContext().getFilesDir(), destination);
+            File destinationFile = new File(destination);
             Files.copy(sourceFile.toPath(), destinationFile.toPath());
             call.resolve();
         } catch (Exception e) {
@@ -349,7 +349,7 @@ public class SecureFilesystemAccessPlugin extends Plugin {
         }
         try {
             String source = Objects.requireNonNull(call.getString("source"));
-            File fileName = new File(getContext().getFilesDir(), source);
+            File fileName = new File(source);
             if (fileName.exists()) {
                 boolean isDeleted = fileName.delete();
                 if (!isDeleted) {
@@ -361,6 +361,13 @@ public class SecureFilesystemAccessPlugin extends Plugin {
             call.reject(Objects.requireNonNull(e.getCause()).toString());
         }
         
+    }
+
+    @PluginMethod
+    public void getUserDataPath(PluginCall call) {
+        JSObject response = new JSObject();
+        response.put("path", getContext().getFilesDir().toString());
+        call.resolve(response);
     }
 
 }

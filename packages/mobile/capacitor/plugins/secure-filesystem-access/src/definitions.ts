@@ -14,4 +14,5 @@ export interface SecureFilesystemAccessTypes {
     saveTextFile(options: { textContent: string; fileName: string }): Promise<void>
     copyFile(options: { source: string; destination: string }): Promise<void>
     deleteFile(options: { source: string }): Promise<void>
+    getUserDataPath(): Promise<{ path: string }>
 }

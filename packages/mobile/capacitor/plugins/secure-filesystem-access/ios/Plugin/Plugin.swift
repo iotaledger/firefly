@@ -151,8 +151,13 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
         guard let source = call.getString("source") else {
             return call.reject("source is required")
         }
-        let srcUrl = getAppPath(folder: source)
-        try? FileManager.default.removeItem(atPath: srcUrl)
+        try? FileManager.default.removeItem(atPath: source)
         call.resolve()
+    }
+
+    @objc func getUserDataPath(_ call: CAPPluginCall) {
+        let fm = FileManager.default
+        let documents = fm.urls(for: .documentDirectory, in: .userDomainMask).first!
+        call.resolve([ "path":  documents.path])
     }
 }
