@@ -3,11 +3,12 @@
     import { tabFormWithEnterKey } from '@lib/keyboard'
     import { Animation, Button, OnboardingLayout, Password, Text } from 'shared/components'
     import { getKeyboardTransitionSpeed, isKeyboardOpened, keyboardHeight, mobile } from 'shared/lib/app'
-    import { api } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
+    import { strongholdPassword } from '@lib/app'
 
     export let locale: Locale
     export let currentPassword: string = undefined
+    export let next: (...args) => Promise<void>
 
     $: bodyText = currentPassword
         ? localize('views.updateStronghold.update.body1')
@@ -31,19 +32,11 @@
         tabFormWithEnterKey(e, document, 'update-stronghold-form')
     }
 
-    function handleContinueClick() {
+    async function handleContinueClick() {
         busy = true
-        const _password = currentPassword ?? password
-        api.setStrongholdPassword(_password, {
-            onSuccess() {
-                // TODO: add logic to migrate stronghold
-                dispatch('next', { password: _password })
-            },
-            onError(err) {
-                error = locale(err.error)
-                busy = false
-            },
-        })
+        $strongholdPassword = currentPassword ?? password
+        await next()
+        busy = false
     }
     function handleBackClick() {
         dispatch('previous')
