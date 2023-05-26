@@ -10,6 +10,7 @@ const TransportNodeHid = require('@ledgerhq/hw-transport-node-hid').default
 const AppEth = require('@ledgerhq/hw-app-eth').default
 const { listen } = require('@ledgerhq/logs')
 
+const { Common } = require('@ethereumjs/common')
 const { RLP } = require('@ethereumjs/rlp')
 const { Transaction } = require('@ethereumjs/tx')
 const { bufArrToArr } = require('@ethereumjs/util')
@@ -65,9 +66,7 @@ async function getEvmAddress(bip32Path, verify) {
     return { evmAddress: data.address, bip32Path }
 }
 
-async function signTransactionData(data, chain, bip32Path) {
-    process.parentPort.postMessage({ data: 'Inside sign Ledger', chain, bip32Path })
-
+async function signTransactionData(data, bip32Path) {
     const appEth = new AppEth(transport)
 
     const unsignedTransactionObject = Transaction.fromTxData(data)

@@ -338,8 +338,8 @@ ipcMain.on('generate-evm-address', (_e, bip32Path, verify) => {
     ledgerProcess?.postMessage({ method: 'generate-evm-address', parameters: [bip32Path, verify] })
 })
 
-ipcMain.on('sign-evm-transaction', (_e, data, chainId, bip32Path) => {
-    ledgerProcess.postMessage({ method: 'sign-evm-transaction', parameters: [data, chainId, bip32Path] })
+ipcMain.on('sign-evm-transaction', (_e, data, bip32Path) => {
+    ledgerProcess.postMessage({ method: 'sign-evm-transaction', parameters: [data, bip32Path] })
 })
 
 /**
