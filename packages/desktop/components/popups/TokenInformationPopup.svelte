@@ -64,7 +64,7 @@
             asset: asset,
             disableAssetSelection: true,
         })
-        sendFlowRouter.set(new SendFlowRouter(undefined, SendFlowRoute.InputTokenAmount))
+        sendFlowRouter.set(new SendFlowRouter(undefined, SendFlowRoute.SelectRecipient))
         openPopup({
             id: features.wallet.newSendFlow.enabled ? PopupId.SendFlow : PopupId.SendForm,
             overflow: true,
