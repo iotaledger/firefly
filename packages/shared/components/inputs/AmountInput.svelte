@@ -8,7 +8,9 @@
     export let hasFocus = false
     export let amount: string = ''
 
-    $: {
+    $: amount, addLeadingZeroToDecimalSeparator()
+
+    function addLeadingZeroToDecimalSeparator(): void {
         if (amount?.[0] === '.' || amount?.[0] === ',') {
             amount = '0' + amount
         }

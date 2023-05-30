@@ -16,11 +16,11 @@
             ? formatTokenAmountDefault(Number(rawAmount), asset.metadata, unit, false)
             : undefined
 
-    let amountInputElement: HTMLInputElement
-    let error: string
-    let inputLength: number = 0
-    let fontSize: number = 64
-    let maxLength: number = 0
+    let amountInputElement: HTMLInputElement | undefined
+    let error: string | undefined
+    let inputLength = 0
+    let fontSize = 64
+    let maxLength = 0
 
     $: inputtedAmount,
         (error = ''),
