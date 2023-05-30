@@ -7,6 +7,12 @@
     export let disabled = false
     export let hasFocus = false
     export let amount: string = ''
+
+    $: {
+        if (amount?.[0] === '.' || amount?.[0] === ',') {
+            amount = '0' + amount
+        }
+    }
 </script>
 
 <NumberInput
