@@ -21,7 +21,7 @@ export class BaseError extends Error {
         }
 
         if (params?.saveToErrorLog) {
-            const logMessage = String(params.originalError) ?? message
+            const logMessage = String(params?.originalError) ?? message
             addError({ ...params, message: logMessage, type: 'BaseError', time: Date.now() })
         }
 
