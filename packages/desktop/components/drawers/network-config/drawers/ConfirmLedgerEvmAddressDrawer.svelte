@@ -20,8 +20,8 @@
         $networkConfigRouter.goTo(NetworkConfigRoute.ConnectedChains)
     }
 
-    async function onMountHelper(): Promise<void> {
-        await loadEvmAddressForSelectedAccount()
+    function onMountHelper(): void {
+        loadEvmAddressForSelectedAccount()
     }
 
     onMount(() => void onMountHelper())

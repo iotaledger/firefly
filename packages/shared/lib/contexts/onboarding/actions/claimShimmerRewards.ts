@@ -21,6 +21,7 @@ import {
 } from '../stores'
 import { handleLedgerError } from '@core/ledger/utils'
 import { getDepositAddress } from '@core/account/utils'
+import { getActiveNetworkId } from '@core/network/utils/getNetworkId'
 
 export async function claimShimmerRewards(): Promise<void> {
     const shimmerClaimingAccounts = get(onboardingProfile)?.shimmerClaimingAccounts
@@ -64,7 +65,13 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
 ): Promise<void> {
     const recipientAddress = await getDepositAddress(shimmerClaimingAccount?.twinAccount)
     const rawAmount = shimmerClaimingAccount?.unclaimedRewards
-    const asset = getAssetById(String(get(onboardingProfile)?.network?.coinType))
+
+    const networkId = getActiveNetworkId()
+    const coinType = String(get(onboardingProfile)?.network?.coinType)
+    const asset = networkId && coinType ? getAssetById(coinType, networkId) : undefined
+    if (!asset) {
+        return
+    }
 
     const newTransactionDetails: NewTokenTransactionDetails = {
         recipient: {
