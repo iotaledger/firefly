@@ -11,7 +11,7 @@
         "@typescript-eslint/eslint-plugin": "^5.58.0",
         "@typescript-eslint/parser": "^5.57.1",
         "@types/node": "^18.15.11",
-        "eslint": "^8.37.0",
+        "eslint": "^8.41.0",
         "eslint-plugin-security": "^1.4.0",
         "eslint-plugin-svelte3": "^3.4.1",
         "husky": "^7.0.0",
