@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { formatCurrency } from '@core/i18n'
+    import { formatCurrency, getDecimalSeparator } from '@core/i18n'
     import { getMaxDecimalsFromTokenMetadata } from '@core/token/utils'
     import { IAsset, convertToRawAmount, formatTokenAmountDefault, visibleSelectedAccountAssets } from '@core/wallet'
     import { AmountInput, FontWeight, InputContainer, Text } from '@ui'
@@ -41,12 +41,22 @@
 
     function getMaxAmountOfDigits(): number {
         const baseCoin = getBaseToken()
-        const decimalPlacesAmount = inputtedAmount?.includes('.') ? inputtedAmount.split('.')[1].length || 1 : 0
+        const decimalSeparator = getDecimalSeparator()
+
+        const decimalPlacesAmount = inputtedAmount?.includes(decimalSeparator)
+            ? inputtedAmount.split(decimalSeparator)[1].length || 1
+            : 0
         const allowedDecimalAmount = Math.min(decimalPlacesAmount, baseCoin.decimals)
 
-        const integerLengthOfBalance = formatTokenAmountDefault(availableBalance, baseCoin).split('.')?.[0]?.length ?? 0
+        const integerLengthOfBalance =
+            formatTokenAmountDefault(availableBalance, baseCoin).split(decimalSeparator)?.[0]?.length ?? 0
 
-        return allowedDecimalAmount + integerLengthOfBalance + (baseCoin.decimals ? 1 : 0)
+        return (
+            allowedDecimalAmount +
+            integerLengthOfBalance +
+            (baseCoin.decimals ? 1 : 0) +
+            (inputtedAmount?.includes(decimalSeparator) ? 1 : 0)
+        )
     }
 
     function getFontSizeForInputLength(): number {
