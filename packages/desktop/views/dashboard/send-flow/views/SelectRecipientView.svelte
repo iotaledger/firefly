@@ -2,28 +2,22 @@
     import { selectedAccount } from '@core/account/stores'
     import { localize } from '@core/i18n'
     import { ChainType, IIscpChainConfiguration, network } from '@core/network'
-    import {
-        NewTransactionType,
-        formatTokenAmountBestMatch,
-        newTransactionDetails,
-        updateNewTransactionDetails,
-    } from '@core/wallet'
+    import { NewTransactionType, newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'
     import features from '@features/features'
     import { INetworkRecipientSelectorOption, NetworkRecipientSelector } from '@ui'
     import { onMount } from 'svelte'
     import { sendFlowRouter } from '../send-flow.router'
     import SendFlowTemplate from './SendFlowTemplate.svelte'
+    import { closePopup } from '@desktop/auxiliary/popup'
 
     let networkAddress = $newTransactionDetails?.layer2Parameters?.networkAddress
     let selectorOptions: INetworkRecipientSelectorOption[] = []
     let selectedIndex = -1
 
-    const formattedAmount =
+    const disableAssetSelection = $newTransactionDetails.disableAssetSelection
+    const assetName =
         $newTransactionDetails?.type === NewTransactionType.TokenTransfer
-            ? formatTokenAmountBestMatch(
-                  Number($newTransactionDetails?.rawAmount),
-                  $newTransactionDetails.asset?.metadata
-              )
+            ? $newTransactionDetails.asset?.metadata.name
             : undefined
 
     $: selectedOption = selectorOptions[selectedIndex]
@@ -98,15 +92,19 @@
             recipient: undefined,
             layer2Parameters: undefined,
         })
-        $sendFlowRouter.previous()
+        if (disableAssetSelection) {
+            closePopup()
+        } else {
+            $sendFlowRouter.previous()
+        }
     }
 </script>
 
 <SendFlowTemplate
     title={localize('popups.transaction.selectRecipient', {
-        values: { amount: formattedAmount },
+        values: { assetName },
     })}
-    leftButton={{ text: localize('actions.back'), onClick: onBackClick }}
+    leftButton={{ text: localize(disableAssetSelection ? 'actions.cancel' : 'actions.back'), onClick: onBackClick }}
     rightButton={{
         text: localize('actions.continue'),
         onClick: onContinueClick,
