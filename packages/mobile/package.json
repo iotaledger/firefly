@@ -16,7 +16,7 @@
     "devDependencies": {
         "@capacitor/android": "3.4.1",
         "@capacitor/cli": "^3.4.1",
-        "@capacitor/core": "3.4.1",
+        "@capacitor/core": "3.9.0",
         "@capacitor/ios": "3.4.1",
         "copy-webpack-plugin": "^11.0.0",
         "@types/webpack": "^5.28.1",
