@@ -4,7 +4,7 @@
     import { marketCoinPrices } from '@core/market'
     import {
         getAccountAssetsForSelectedAccount,
-        IAccountAssets,
+        AccountAssets,
         IAsset,
         newTransactionDetails,
         NewTransactionType,
@@ -24,16 +24,25 @@
     let assetList: IAsset[]
     let searchValue: string = ''
 
-    let assets: IAccountAssets
+    let assets: AccountAssets
     $: assets = getAccountAssetsForSelectedAccount($marketCoinPrices)
     $: assets, searchValue, setFilteredAssetList()
 
-    function setFilteredAssetList(): void {
-        if (!assets) {
-            assetList = []
-        } else {
-            assetList = [assets.baseCoin, ...assets.nativeTokens].filter(isVisibleAsset)
+    function getAssetList(): IAsset[] {
+        const list = []
+        for (const assetsPernetwork of Object.values(assets)) {
+            if (assetsPernetwork?.baseCoin) {
+                list.push(assetsPernetwork.baseCoin)
+            }
+            list.push(...(assetsPernetwork?.nativeTokens ?? []))
         }
+        return list
+    }
+
+    function setFilteredAssetList(): void {
+        const list = getAssetList()
+
+        assetList = list.filter(isVisibleAsset)
         if (!assetList.some((asset) => asset.id === selectedAsset?.id)) {
             selectedAsset = undefined
         }

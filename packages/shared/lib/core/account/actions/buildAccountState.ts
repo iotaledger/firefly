@@ -4,6 +4,7 @@ import { getDepositAddress } from '@core/account/utils'
 import {
     getActiveProfilePersistedEvmAddressesByAccountIndex,
     getActiveProfilePersistedTrackedTokensByAccountIndex,
+    updateAccountPersistedDataOnActiveProfile,
 } from '@core/profile/stores'
 
 import { IAccount, IAccountState, IPersistedAccountData } from '../interfaces'
@@ -33,12 +34,16 @@ export async function buildAccountState(
     const accountIndex = account.getMetadata().index
     const evmAddresses = getActiveProfilePersistedEvmAddressesByAccountIndex(accountIndex)
     const trackedTokens = getActiveProfilePersistedTrackedTokensByAccountIndex(accountIndex)
-    let depositAddress = ''
+    let depositAddress = accountPersistedData.depositAddress
     let votingPower = ''
     try {
         balances = await account.getBalance()
-        depositAddress = await getDepositAddress(account)
         votingPower = balances.baseCoin.votingPower
+
+        if (!depositAddress) {
+            depositAddress = await getDepositAddress(account)
+            updateAccountPersistedDataOnActiveProfile(accountIndex, { depositAddress })
+        }
     } catch (err) {
         console.error(err)
     }
