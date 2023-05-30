@@ -71,6 +71,13 @@
     leftButton={{ text: localize(disableAssetSelection ? 'actions.cancel' : 'actions.back'), onClick: onBackClick }}
     rightButton={{ text: localize('actions.continue'), onClick: onContinueClick, disabled: !amount }}
 >
-    <TokenAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:inputtedAmount={amount} {unit} />
+    <TokenAmountInput
+        bind:this={assetAmountInput}
+        bind:asset
+        bind:rawAmount
+        bind:inputtedAmount={amount}
+        {unit}
+        {availableBalance}
+    />
     <TokenAmountTile {asset} onMaxClick={setToMax} />
 </SendFlowTemplate>

@@ -5,6 +5,7 @@
     import { AmountInput, FontWeight, InputContainer, Text } from '@ui'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
     import { validateTokenAmount } from '@core/wallet/utils/validateTokenAmount'
+    import { getBaseToken } from '@core/profile'
 
     export let asset: IAsset | undefined = $visibleSelectedAccountAssets?.baseCoin
     export let rawAmount: string | undefined = undefined
@@ -19,18 +20,33 @@
     let error: string
     let inputLength: number = 0
     let fontSize: number = 64
+    let maxLength: number = 0
 
-    $: inputtedAmount, (error = ''), (inputLength = getInputLength()), (fontSize = getFontSizeForInputLength())
+    $: inputtedAmount,
+        (error = ''),
+        (inputLength = getInputLength()),
+        (fontSize = getFontSizeForInputLength()),
+        (maxLength = getMaxAmountOfDigits())
     $: allowedDecimals = asset?.metadata && unit ? getMaxDecimalsFromTokenMetadata(asset.metadata, unit) : 0
     $: bigAmount = inputtedAmount && asset?.metadata ? convertToRawAmount(inputtedAmount, asset.metadata, unit) : 0
     $: marketAmount = asset ? getMarketAmountFromAssetValue(bigAmount, asset) : undefined
     $: rawAmount = bigAmount.toString()
 
     function getInputLength(): number {
-        const length = Math.max((inputtedAmount ?? '0').length, 1)
+        const length = inputtedAmount?.length || 1
         const isDecimal = inputtedAmount?.includes('.') || inputtedAmount?.includes(',')
 
         return length - (isDecimal ? 0.5 : 0)
+    }
+
+    function getMaxAmountOfDigits(): number {
+        const baseCoin = getBaseToken()
+        const decimalPlacesAmount = inputtedAmount?.includes('.') ? inputtedAmount.split('.')[1].length || 1 : 0
+        const allowedDecimalAmount = Math.min(decimalPlacesAmount, baseCoin.decimals)
+
+        const integerLengthOfBalance = formatTokenAmountDefault(availableBalance, baseCoin).split('.')?.[0]?.length ?? 0
+
+        return allowedDecimalAmount + integerLengthOfBalance + (baseCoin.decimals ? 1 : 0)
     }
 
     function getFontSizeForInputLength(): number {
@@ -68,7 +84,7 @@
                         bind:inputElement={amountInputElement}
                         bind:amount={inputtedAmount}
                         maxDecimals={allowedDecimals}
-                        maxlength={20}
+                        maxlength={maxLength}
                         isInteger={allowedDecimals === 0}
                         {fontSize}
                         clearBackground
