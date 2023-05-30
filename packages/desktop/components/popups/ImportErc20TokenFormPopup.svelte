@@ -7,6 +7,7 @@
     import { HEXADECIMAL_PREFIX, HEXADECIMAL_REGEXP } from '@core/utils'
     import { closePopup } from '@desktop/auxiliary/popup'
     import { Button, ChainInput, FontWeight, Spinner, Text, TextInput, TextType } from '@ui'
+    import { updateActiveAccountPersistedData } from '@core/profile/actions'
 
     let busy = false
 
@@ -27,10 +28,13 @@
             try {
                 const erc20Token = await importErc20Token(tokenAddress, chainId)
                 if (erc20Token) {
-                    const trackedTokens = $selectedAccount.trackedTokens ?? {}
-                    if (!trackedTokens[chainId]?.includes(erc20Token.metadata.address)) {
-                        trackedTokens[chainId].push(erc20Token.metadata.address)
+                    let trackedTokens = $selectedAccount.trackedTokens ?? {}
+                    const chainIdTrackedTokens = trackedTokens[chainId] ?? []
+                    if (!chainIdTrackedTokens.includes(tokenAddress)) {
+                        chainIdTrackedTokens.push(tokenAddress)
+                        trackedTokens = { ...trackedTokens, [chainId]: chainIdTrackedTokens }
                         updateActiveAccount($selectedAccountIndex, { trackedTokens })
+                        updateActiveAccountPersistedData($selectedAccountIndex, { trackedTokens })
                     }
                     showAppNotification({
                         type: 'success',

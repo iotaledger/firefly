@@ -10,6 +10,7 @@ import { AccountAssets, IAccountAssetsPerNetwork } from '../interfaces/account-a
 import { getAssetFromPersistedAssets } from '../utils'
 import { sortAssets } from '../utils/sortAssets'
 import { getActiveNetworkId } from '@core/network/utils/getNetworkId'
+import { importErc20Token } from '@core/layer-2'
 
 export function getAccountAssetsForSelectedAccount(marketCoinPrices: MarketCoinPrices): AccountAssets {
     const accountAssets = {} as AccountAssets
@@ -24,7 +25,13 @@ export function getAccountAssetsForSelectedAccount(marketCoinPrices: MarketCoinP
 
     for (const chain of chains) {
         const chainId = chain.getConfiguration().chainId
-        const chainAssets = getAccountAssetsForChain(chainId)
+        let chainAssets: IAccountAssetsPerNetwork = {
+            baseCoin: undefined,
+            nativeTokens: [],
+        }
+        void getAccountAssetsForChain(chainId).then((chainAssetsForChain) => {
+            chainAssets = chainAssetsForChain
+        })
         accountAssets[chainId] = chainAssets
     }
 
@@ -66,11 +73,17 @@ function getAccountAssetForNetwork(marketCoinPrices: MarketCoinPrices, networkId
     }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getAccountAssetsForChain(chainId: number): IAccountAssetsPerNetwork {
-    // TODO: Implement
-    return {
+async function getAccountAssetsForChain(chainId: number): Promise<IAccountAssetsPerNetwork> {
+    const accountAssetsForChain: IAccountAssetsPerNetwork = {
         baseCoin: undefined,
         nativeTokens: [],
     }
+    const trackedTokens = get(selectedAccount)?.trackedTokens?.[chainId] ?? []
+    for (const tokenAddress of trackedTokens) {
+        const erc20token = await importErc20Token(tokenAddress, chainId)
+        if (erc20token) {
+            accountAssetsForChain.nativeTokens.push(erc20token)
+        }
+    }
+    return accountAssetsForChain
 }

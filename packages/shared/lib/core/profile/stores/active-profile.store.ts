@@ -62,7 +62,7 @@ export function getActiveProfilePersistedEvmAddressesByAccountIndex(accountIndex
 }
 
 export function getActiveProfilePersistedTrackedTokensByAccountIndex(accountIndex: number): {
-    [chainId: number]: string
+    [chainId: number]: string[] | undefined
 } {
     const accountPersistedData = getActiveProfilePersistedAccountData(accountIndex)
     return accountPersistedData?.trackedTokens ?? {}
