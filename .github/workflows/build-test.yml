@@ -3,13 +3,12 @@ name: Desktop Build Test
 on:
   schedule:
     # 12:00AM (UTC) Sunday TODO
-    - cron: '55 14 * * TUE'
+    - cron: '25 16 * * THU'
 
 jobs:
   build:
     runs-on: ${{ matrix.os }}
     if: ${{ always() }}
-    needs: [ setup ]
     strategy:
       matrix:
         os: [ ubuntu-20.04, macos-11, windows-2019 ]
