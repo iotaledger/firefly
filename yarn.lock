@@ -4258,10 +4258,10 @@ electron-updater@5.3.0:
     semver "^7.3.5"
     typed-emitter "^2.1.0"
 
-electron@22.3.5:
-  version "22.3.5"
-  resolved "https://registry.npmjs.org/electron/-/electron-22.3.5.tgz"
-  integrity sha512-CTdnoTbO3sDiMv47TX3ZO640Ca57v1qpiqGChFF8oZbtfHuQjTPPaE4hsoynf22wwnBiyJNL41DpB/pfp9USnA==
+electron@22.3.11:
+  version "22.3.11"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-22.3.11.tgz#db68c3f820eab9868ccf65bd4604c2805c4c93b9"
+  integrity sha512-4PW1rJRUckJUCxTXRJkzJ7qlGTZ8Qfwoke5aFlaGccmn/zViuE9iSCg9zqIx00rzsbF9R5j8j9V4tAqyqjjJRA==
   dependencies:
     "@electron/get" "^2.0.0"
     "@types/node" "^16.11.26"
