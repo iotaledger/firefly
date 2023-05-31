@@ -1,19 +1,18 @@
 import { selectedAccount } from '@core/account'
 import { MarketCoinPrices } from '@core/market'
 import { NetworkId } from '@core/network'
-import { network } from '@core/network/stores'
+import { getActiveNetworkId } from '@core/network/utils/getNetworkId'
 import { getCoinType } from '@core/profile'
 import { isValidIrc30 } from '@core/token'
+import { selectedAccountLayer2Assets } from '@core/wallet'
 import { get } from 'svelte/store'
 import { IAsset } from '../interfaces'
 import { AccountAssets, IAccountAssetsPerNetwork } from '../interfaces/account-assets.interface'
 import { getAssetFromPersistedAssets } from '../utils'
 import { sortAssets } from '../utils/sortAssets'
-import { getActiveNetworkId } from '@core/network/utils/getNetworkId'
-import { importErc20Token } from '@core/layer-2'
 
 export function getAccountAssetsForSelectedAccount(marketCoinPrices: MarketCoinPrices): AccountAssets {
-    const accountAssets = {} as AccountAssets
+    let accountAssets = {} as AccountAssets
 
     const networkId = getActiveNetworkId()
     if (!networkId) {
@@ -21,19 +20,7 @@ export function getAccountAssetsForSelectedAccount(marketCoinPrices: MarketCoinP
     }
 
     accountAssets[networkId] = getAccountAssetForNetwork(marketCoinPrices, networkId)
-    const chains = get(network)?.getChains() ?? []
-
-    for (const chain of chains) {
-        const chainId = chain.getConfiguration().chainId
-        let chainAssets: IAccountAssetsPerNetwork = {
-            baseCoin: undefined,
-            nativeTokens: [],
-        }
-        void getAccountAssetsForChain(chainId).then((chainAssetsForChain) => {
-            chainAssets = chainAssetsForChain
-        })
-        accountAssets[chainId] = chainAssets
-    }
+    accountAssets = { ...accountAssets, ...get(selectedAccountLayer2Assets) }
 
     return accountAssets
 }
@@ -71,19 +58,4 @@ function getAccountAssetForNetwork(marketCoinPrices: MarketCoinPrices, networkId
         baseCoin,
         nativeTokens: sortAssets(nativeTokens),
     }
-}
-
-async function getAccountAssetsForChain(chainId: number): Promise<IAccountAssetsPerNetwork> {
-    const accountAssetsForChain: IAccountAssetsPerNetwork = {
-        baseCoin: undefined,
-        nativeTokens: [],
-    }
-    const trackedTokens = get(selectedAccount)?.trackedTokens?.[chainId] ?? []
-    for (const tokenAddress of trackedTokens) {
-        const erc20token = await importErc20Token(tokenAddress, chainId)
-        if (erc20token) {
-            accountAssetsForChain.nativeTokens.push(erc20token)
-        }
-    }
-    return accountAssetsForChain
 }

@@ -36,7 +36,12 @@
     import { selectedAccountIndex } from '@core/account'
     import { get } from 'svelte/store'
     import features from '@features/features'
-    import { pollLayer2NativeAssets, clearLayer2NativeAssetsPoll } from '@core/layer-2'
+    import {
+        pollErc20Tokens,
+        pollLayer2NativeAssets,
+        clearLayer2NativeAssetsPoll,
+        clearErc20TokensPoll,
+    } from '@core/layer-2'
 
     const tabs = {
         wallet: Wallet,
@@ -90,6 +95,7 @@
         }
 
         void pollLayer2NativeAssets()
+        void pollErc20Tokens()
     })
 
     onDestroy(() => {
@@ -106,6 +112,7 @@
             stopPollingLedgerNanoStatus()
         }
         clearLayer2NativeAssetsPoll()
+        clearErc20TokensPoll()
     })
 </script>
 
