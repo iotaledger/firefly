@@ -1,1 +1,1 @@
-export * from './l2-balances.store'
+export * from './layer2-balances.store'

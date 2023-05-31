@@ -9,36 +9,41 @@ import { Converter } from '@core/utils/convert'
 import { TOKEN_ID_BYTE_LENGTH } from '@core/token/constants'
 import { setL2BalancesForAccountForChain } from '../stores'
 
-export async function fetchSelectedAccountLayer2Balance(): Promise<void> {
-    const { evmAddresses, index } = get(selectedAccount) ?? {}
-    const chains = get(network)?.getChains() ?? []
-    const nativeTokensPromises = chains.map(async (chain) => {
-        const { coinType, chainId } = chain.getConfiguration()
-        const evmAddress = evmAddresses?.[coinType]
-        if (evmAddress && index !== undefined) {
-            const balances = await getSelectedAccountLayer2BalanceForAddress(evmAddress, chain)
-            if (balances) {
-                const l2Balance: { [tokenId: string]: number } = {}
+// TODO
+// rename L2 to Layer2
 
-                for (const { balance, tokenId } of balances) {
-                    const idBytes = Converter.hexToBytes(tokenId)
-                    if (idBytes.length === TOKEN_ID_BYTE_LENGTH) {
-                        const asset = await getOrRequestAssetFromPersistedAssets(tokenId)
-                        addPersistedAsset(asset)
-                    }
-                    l2Balance[tokenId] = balance
-                }
-                setL2BalancesForAccountForChain(index, chainId, l2Balance)
-            } else {
-                return Promise.resolve([])
-            }
-        }
-    })
-    try {
-        await Promise.all(nativeTokensPromises)
-    } catch (error) {
-        return Promise.reject()
+export function fetchSelectedAccountLayer2Balance(): void {
+    const account = get(selectedAccount)
+    if (!account) {
+        return
     }
+
+    const { evmAddresses, index } = account
+    const chains = get(network)?.getChains() ?? []
+    chains.forEach(async (chain) => {
+        const { coinType, chainId } = chain.getConfiguration()
+        const evmAddress = evmAddresses?.[coinType] // ?? '0xA88107749C850Df5A4BbbD2197889dF90103dd06'
+        if (!evmAddress) {
+            return
+        }
+
+        const balances = await getSelectedAccountLayer2BalanceForAddress(evmAddress, chain)
+        if (!balances) {
+            return Promise.resolve([])
+        }
+
+        const layer2Balance: { [tokenId: string]: number } = {}
+
+        for (const { balance, tokenId } of balances) {
+            const isNativeToken = Converter.hexToBytes(tokenId).length === TOKEN_ID_BYTE_LENGTH
+            if (isNativeToken) {
+                const asset = await getOrRequestAssetFromPersistedAssets(tokenId)
+                addPersistedAsset(asset)
+            }
+            layer2Balance[tokenId] = balance
+        }
+        setL2BalancesForAccountForChain(index, chainId, layer2Balance)
+    })
 }
 
 async function getSelectedAccountLayer2BalanceForAddress(
@@ -53,21 +58,14 @@ async function getSelectedAccountLayer2BalanceForAddress(
         const parameters = getAgentBalanceParameters(agentID)
         try {
             const contract = chain.getContract(ContractType.IscMagic, ISC_MAGIC_CONTRACT_ADDRESS)
-            const nativeTokenResult = await contract.methods
+            const nativeTokenResult = (await contract.methods
                 .callView(accountsCoreContract, getBalanceFunc, parameters)
-                .call()
+                .call()) as { items: { key: string; value: number }[] }
 
-            const nativeTokens = []
-
-            for (const item of nativeTokenResult.items) {
-                const id = item.key
-                const nativeToken = {
-                    balance: Number(item.value),
-                    tokenId: id,
-                }
-
-                nativeTokens.push(nativeToken)
-            }
+            const nativeTokens = nativeTokenResult.items.map((item) => ({
+                tokenId: item.key,
+                balance: Number(item.value),
+            }))
 
             return nativeTokens
         } catch (e) {

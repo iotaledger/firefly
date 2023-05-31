@@ -5,9 +5,9 @@ let pollInterval: number
 
 export function pollLayer2NativeAssets(): void {
     clearLayer2NativeAssetsPoll()
-    void fetchSelectedAccountLayer2Balance()
+    fetchSelectedAccountLayer2Balance()
     pollInterval = window.setInterval(() => {
-        void fetchSelectedAccountLayer2Balance()
+        fetchSelectedAccountLayer2Balance()
     }, LAYER2_NATIVE_ASSETS_POLL_INTERVAL)
 }
 

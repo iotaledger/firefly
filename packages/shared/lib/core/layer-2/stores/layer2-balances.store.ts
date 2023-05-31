@@ -1,5 +1,6 @@
 import { get, writable } from 'svelte/store'
 
+// TODO: extract
 interface IL2Balances {
     [accountIndex: number]: IL2AccountBalance | undefined
 }
@@ -10,10 +11,10 @@ interface IL2AccountBalance {
     }
 }
 
-export const l2Balances = writable<IL2Balances | undefined>(undefined)
+export const layer2Balances = writable<IL2Balances | undefined>(undefined)
 
 export function getL2BalancesForAccount(accountIndex: number): IL2AccountBalance | undefined {
-    return get(l2Balances)?.[accountIndex]
+    return get(layer2Balances)?.[accountIndex]
 }
 
 export function setL2BalancesForAccountForChain(
@@ -21,7 +22,7 @@ export function setL2BalancesForAccountForChain(
     chainId: number,
     chainBalance: { [tokenId: string]: number }
 ): void {
-    l2Balances.update((balance) => {
+    layer2Balances.update((balance) => {
         if (!balance) {
             balance = {}
         }
