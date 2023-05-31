@@ -78,6 +78,7 @@ function getAccountAssetForChain(chainId: number): IAccountAssetsPerNetwork | un
     let baseCoin: IAsset | undefined
     const nativeTokens: IAsset[] = []
     const tokens = Object.entries(balanceForChainId) ?? []
+
     for (const [tokenId, balance] of tokens) {
         const _balance = {
             total: balance,
@@ -88,16 +89,16 @@ function getAccountAssetForChain(chainId: number): IAccountAssetsPerNetwork | un
             const persistedBaseCoin = getAssetFromPersistedAssets(getCoinType()) // we use the L1 coin type for now because we assume that the basecoin for L2 is SMR
             baseCoin = {
                 ...persistedBaseCoin,
-                standard: 'Layer 2 Basecoin',
                 balance: _balance,
+                chainId,
             }
         } else {
             const persistedAsset = getAssetFromPersistedAssets(tokenId)
             if (persistedAsset && persistedAsset?.metadata && isValidIrc30(persistedAsset.metadata)) {
                 nativeTokens.push({
                     ...persistedAsset,
-                    standard: 'Layer 2 Native Token',
                     balance: _balance,
+                    chainId,
                 })
             }
         }
