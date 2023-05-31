@@ -1,7 +1,7 @@
 import { getSelectedAccount } from '@core/account/stores'
 import { MarketCoinPrices } from '@core/market'
-import { NetworkId, getNetwork } from '@core/network'
 import { getActiveNetworkId } from '@core/network/utils/getNetworkId'
+import { ChainId, NetworkId, getNetwork } from '@core/network'
 import { getCoinType } from '@core/profile'
 import { isValidIrc30 } from '@core/token'
 import { IAsset } from '../interfaces'
@@ -40,6 +40,7 @@ function getAccountAssetForNetwork(marketCoinPrices: MarketCoinPrices, networkId
     const persistedBaseCoin = getAssetFromPersistedAssets(getCoinType())
     const baseCoin: IAsset = {
         ...persistedBaseCoin,
+        chainId: ChainId.Layer1,
         balance: {
             total: Number(account?.balances?.baseCoin?.total),
             available: Number(account?.balances?.baseCoin?.available),
@@ -54,6 +55,7 @@ function getAccountAssetForNetwork(marketCoinPrices: MarketCoinPrices, networkId
         if (persistedAsset && persistedAsset?.metadata && isValidIrc30(persistedAsset.metadata)) {
             nativeTokens.push({
                 ...persistedAsset,
+                chainId: ChainId.Layer1,
                 balance: {
                     total: Number(token.total),
                     available: Number(token.available),
@@ -79,6 +81,7 @@ function getAccountAssetForChain(chainId: number): IAccountAssetsPerNetwork | un
     let baseCoin: IAsset | undefined
     const nativeTokens: IAsset[] = []
     const tokens = Object.entries(balanceForChainId) ?? []
+
     for (const [tokenId, balance] of tokens) {
         const _balance = {
             total: balance,
@@ -89,23 +92,24 @@ function getAccountAssetForChain(chainId: number): IAccountAssetsPerNetwork | un
             const persistedBaseCoin = getAssetFromPersistedAssets(getCoinType()) // we use the L1 coin type for now because we assume that the basecoin for L2 is SMR
             baseCoin = {
                 ...persistedBaseCoin,
-                standard: 'Layer 2 Basecoin',
                 balance: _balance,
+                chainId,
+                standard: 'Layer 2 Base Token',
             }
         } else {
             const persistedAsset = getAssetFromPersistedAssets(tokenId)
-            if (persistedAsset) {
-                if (persistedAsset && persistedAsset?.metadata && isValidIrc30(persistedAsset.metadata)) {
-                    nativeTokens.push({
-                        ...persistedAsset,
-                        standard: 'Layer 2 Native Token',
-                        balance: _balance,
-                    })
-                }
+            if (persistedAsset && persistedAsset?.metadata && isValidIrc30(persistedAsset.metadata)) {
+                nativeTokens.push({
+                    ...persistedAsset,
+                    balance: _balance,
+                    chainId,
+                    standard: 'Layer 2 Native Token',
+                })
             } else {
                 // TEMPORARY DUMMY CODE TO FAKE AN ERC20 TOKEN
                 const fakeErc20PersistedToken: IAsset = {
                     id: tokenId,
+                    chainId,
                     standard: TokenStandard.Erc20,
                     metadata: {
                         standard: TokenStandard.Erc20,
