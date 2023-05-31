@@ -19,8 +19,8 @@ import {
     persistShimmerClaimingTransaction,
     updateShimmerClaimingAccount,
 } from '../stores'
-import { handleLedgerError } from '@core/ledger'
-import { getDepositAddress } from '@core/account'
+import { handleLedgerError } from '@core/ledger/utils'
+import { getDepositAddress } from '@core/account/utils'
 import { getActiveNetworkId } from '@core/network/utils/getNetworkId'
 
 export async function claimShimmerRewards(): Promise<void> {

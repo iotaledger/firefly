@@ -85,7 +85,7 @@
 <token-information class="flex flex-col justify-between h-full space-y-10">
     <token-content class="flex flex-col space-y-8">
         <div class="space-y-3 flex flex-col items-center justify-center">
-            <AssetIcon {asset} large showVerifiedBadgeOnly />
+            <AssetIcon {asset} large />
             <Text type={TextType.h2} fontWeight={FontWeight.bold}>
                 {getUnitFromTokenMetadata(asset?.metadata)}
             </Text>
