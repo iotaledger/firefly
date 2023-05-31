@@ -1,25 +1,24 @@
-import { selectedAccount } from '@core/account'
 import { ContractType, evmAddressToAgentID, getAgentBalanceParameters, getSmartContractHexName } from '@core/layer-2'
-import { IChain, network } from '@core/network'
-import { get } from 'svelte/store'
+import { IChain, getNetwork } from '@core/network'
 import { ISC_MAGIC_CONTRACT_ADDRESS } from '../constants'
 import { getOrRequestAssetFromPersistedAssets } from '@core/wallet/actions'
 import { addPersistedAsset } from '@core/wallet/stores'
 import { Converter } from '@core/utils/convert'
 import { TOKEN_ID_BYTE_LENGTH } from '@core/token/constants'
 import { setL2BalancesForAccountForChain } from '../stores'
+import { getSelectedAccount } from '@core/account/stores'
 
 // TODO
 // rename L2 to Layer2
 
 export function fetchSelectedAccountLayer2Balance(): void {
-    const account = get(selectedAccount)
+    const account = getSelectedAccount()
     if (!account) {
         return
     }
 
     const { evmAddresses, index } = account
-    const chains = get(network)?.getChains() ?? []
+    const chains = getNetwork()?.getChains() ?? []
     chains.forEach(async (chain) => {
         const { coinType, chainId } = chain.getConfiguration()
         const evmAddress = evmAddresses?.[coinType] // ?? '0xA88107749C850Df5A4BbbD2197889dF90103dd06'

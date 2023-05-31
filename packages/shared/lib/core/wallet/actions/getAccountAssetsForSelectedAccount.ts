@@ -1,10 +1,8 @@
-import { selectedAccount } from '@core/account/stores'
+import { getSelectedAccount } from '@core/account/stores'
 import { MarketCoinPrices } from '@core/market'
-import { NetworkId } from '@core/network'
-import { network } from '@core/network/stores'
+import { NetworkId, getNetwork } from '@core/network'
 import { getCoinType } from '@core/profile'
 import { isValidIrc30 } from '@core/token'
-import { get } from 'svelte/store'
 import { IAsset } from '../interfaces'
 import { AccountAssets, IAccountAssetsPerNetwork } from '../interfaces/account-assets.interface'
 import { getAssetFromPersistedAssets } from '../utils'
@@ -21,7 +19,7 @@ export function getAccountAssetsForSelectedAccount(marketCoinPrices: MarketCoinP
     }
 
     accountAssets[networkId] = getAccountAssetForNetwork(marketCoinPrices, networkId)
-    const chains = get(network)?.getChains() ?? []
+    const chains = getNetwork()?.getChains() ?? []
 
     for (const chain of chains) {
         const chainId = chain.getConfiguration().chainId
@@ -35,7 +33,7 @@ export function getAccountAssetsForSelectedAccount(marketCoinPrices: MarketCoinP
 }
 
 function getAccountAssetForNetwork(marketCoinPrices: MarketCoinPrices, networkId: NetworkId): IAccountAssetsPerNetwork {
-    const account = get(selectedAccount)
+    const account = getSelectedAccount()
 
     const shouldCalculateFiatPrice = networkId === NetworkId.Shimmer || networkId === NetworkId.Testnet
     const persistedBaseCoin = getAssetFromPersistedAssets(getCoinType())
@@ -70,7 +68,7 @@ function getAccountAssetForNetwork(marketCoinPrices: MarketCoinPrices, networkId
 }
 
 function getAccountAssetForChain(chainId: number): IAccountAssetsPerNetwork | undefined {
-    const index = get(selectedAccount)?.index
+    const index = getSelectedAccount()?.index
     const balanceForChainId = index !== undefined ? getL2BalancesForAccount(index)?.[chainId] : undefined
 
     if (!balanceForChainId) {
