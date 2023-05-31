@@ -10,6 +10,7 @@
 
     import { closePopup } from '@desktop/auxiliary/popup'
     import { showAppNotification } from '@auxiliary/notification'
+    import { IErc20Metadata } from '@core/wallet'
 
     let busy = false
 
@@ -30,19 +31,12 @@
             try {
                 const erc20Token = await importErc20Token(tokenAddress, chainId)
                 if (erc20Token) {
-                    let trackedTokens = $selectedAccount.trackedTokens ?? {}
-                    const chainIdTrackedTokens = trackedTokens[chainId] ?? []
-                    if (!chainIdTrackedTokens.includes(tokenAddress)) {
-                        chainIdTrackedTokens.push(tokenAddress)
-                        trackedTokens = { ...trackedTokens, [chainId]: chainIdTrackedTokens }
-                        updateActiveAccount($selectedAccountIndex, { trackedTokens })
-                        updateActiveAccountPersistedData($selectedAccountIndex, { trackedTokens })
-                    }
+                    updateActiveAccountTrackedTokens()
                     showAppNotification({
                         type: 'success',
                         alert: true,
                         message: localize('popups.importErc20Token.success', {
-                            values: { tokenSymbol: erc20Token.metadata.symbol },
+                            values: { tokenSymbol: (erc20Token.metadata as IErc20Metadata).symbol },
                         }),
                     })
                 }
@@ -62,6 +56,17 @@
     function validate(): boolean {
         tokenAddressError = validateTokenAddress()
         return !tokenAddressError
+    }
+
+    function updateActiveAccountTrackedTokens(): void {
+        let trackedTokens = $selectedAccount.trackedTokens ?? {}
+        const chainIdTrackedTokens = trackedTokens[chainId] ?? []
+        if (!chainIdTrackedTokens.includes(tokenAddress)) {
+            chainIdTrackedTokens.push(tokenAddress)
+            trackedTokens = { ...trackedTokens, [chainId]: chainIdTrackedTokens }
+            updateActiveAccount($selectedAccountIndex, { trackedTokens })
+            updateActiveAccountPersistedData($selectedAccountIndex, { trackedTokens })
+        }
     }
 
     function validateTokenAddress(): string {
