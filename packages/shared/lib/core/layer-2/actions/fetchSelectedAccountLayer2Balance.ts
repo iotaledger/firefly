@@ -5,11 +5,8 @@ import { getOrRequestAssetFromPersistedAssets } from '@core/wallet/actions'
 import { addPersistedAsset } from '@core/wallet/stores'
 import { Converter } from '@core/utils/convert'
 import { TOKEN_ID_BYTE_LENGTH } from '@core/token/constants'
-import { setL2BalancesForAccountForChain } from '../stores'
+import { setLayer2AccountBalanceForChain } from '../stores'
 import { getSelectedAccount } from '@core/account/stores'
-
-// TODO
-// rename L2 to Layer2
 
 export function fetchSelectedAccountLayer2Balance(): void {
     const account = getSelectedAccount()
@@ -41,7 +38,7 @@ export function fetchSelectedAccountLayer2Balance(): void {
             }
             layer2Balance[tokenId] = balance
         }
-        setL2BalancesForAccountForChain(index, chainId, layer2Balance)
+        setLayer2AccountBalanceForChain(index, chainId, layer2Balance)
     })
 }
 

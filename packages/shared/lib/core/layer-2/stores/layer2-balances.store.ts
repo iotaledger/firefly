@@ -1,23 +1,13 @@
+import { ILayer2AccountBalance, ILayer2ProfileBalances } from '../interfaces'
 import { get, writable } from 'svelte/store'
 
-// TODO: extract
-interface IL2Balances {
-    [accountIndex: number]: IL2AccountBalance | undefined
-}
+export const layer2Balances = writable<ILayer2ProfileBalances | undefined>(undefined)
 
-interface IL2AccountBalance {
-    [chainId: number]: {
-        [tokenId: string]: number
-    }
-}
-
-export const layer2Balances = writable<IL2Balances | undefined>(undefined)
-
-export function getL2BalancesForAccount(accountIndex: number): IL2AccountBalance | undefined {
+export function getLayer2AccountBalance(accountIndex: number): ILayer2AccountBalance | undefined {
     return get(layer2Balances)?.[accountIndex]
 }
 
-export function setL2BalancesForAccountForChain(
+export function setLayer2AccountBalanceForChain(
     accountIndex: number,
     chainId: number,
     chainBalance: { [tokenId: string]: number }

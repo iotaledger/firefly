@@ -8,7 +8,7 @@ import { AccountAssets, IAccountAssetsPerNetwork } from '../interfaces/account-a
 import { getAssetFromPersistedAssets } from '../utils'
 import { sortAssets } from '../utils/sortAssets'
 import { getActiveNetworkId } from '@core/network/utils/getNetworkId'
-import { getL2BalancesForAccount } from '@core/layer-2/stores'
+import { getLayer2AccountBalance } from '@core/layer-2/stores'
 
 export function getAccountAssetsForSelectedAccount(marketCoinPrices: MarketCoinPrices): AccountAssets {
     const accountAssets = {} as AccountAssets
@@ -69,7 +69,7 @@ function getAccountAssetForNetwork(marketCoinPrices: MarketCoinPrices, networkId
 
 function getAccountAssetForChain(chainId: number): IAccountAssetsPerNetwork | undefined {
     const index = getSelectedAccount()?.index
-    const balanceForChainId = index !== undefined ? getL2BalancesForAccount(index)?.[chainId] : undefined
+    const balanceForChainId = index !== undefined ? getLayer2AccountBalance(index)?.[chainId] : undefined
 
     if (!balanceForChainId) {
         return undefined
