@@ -7,16 +7,14 @@ import { network } from '@core/network/stores'
 
 import { ContractType } from '../enums'
 import { IAsset, TokenStandard, NotVerifiedStatus } from '@core/wallet'
+import { getContractTokenMetadata } from '../utils'
 
 export async function importErc20Token(tokenAddress: string, chainId: number): Promise<IAsset | undefined> {
     const chain = get(network)?.getChain(chainId)
     const contract = chain?.getContract(ContractType.Erc20, tokenAddress)
     if (contract) {
         // TODO: Extract into separate function later
-        const name = await contract.methods.name().call()
-        const symbol = await contract.methods.symbol().call()
-        const decimals = await contract.methods.decimals().call()
-        // TODO: Extract into separate function later
+        const contractTokenMetadata = await getContractTokenMetadata(contract)
         // TODO: Get for all accounts
         const coinType = chain?.getConfiguration().coinType
         if (coinType) {
@@ -28,9 +26,7 @@ export async function importErc20Token(tokenAddress: string, chainId: number): P
                 standard: TokenStandard.Erc20,
                 metadata: {
                     standard: TokenStandard.Erc20,
-                    name,
-                    symbol,
-                    decimals,
+                    ...contractTokenMetadata,
                 },
                 balance: {
                     total: rawBalance,
