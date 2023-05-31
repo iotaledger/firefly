@@ -30,11 +30,11 @@
 
     function getAssetList(): IAsset[] {
         const list = []
-        for (const assetsPernetwork of Object.values(assets)) {
-            if (assetsPernetwork?.baseCoin) {
-                list.push(assetsPernetwork.baseCoin)
+        for (const assetsPerNetwork of Object.values(assets)) {
+            if (assetsPerNetwork?.baseCoin) {
+                list.push(assetsPerNetwork.baseCoin)
             }
-            list.push(...(assetsPernetwork?.nativeTokens ?? []))
+            list.push(...(assetsPerNetwork?.nativeTokens ?? []))
         }
         return list
     }
@@ -84,7 +84,11 @@
     <div class="-mr-3">
         <div class="asset-list w-full flex flex-col -mr-1 pr-1.5 gap-2">
             {#each assetList as asset}
-                <AssetTile {asset} onClick={() => (selectedAsset = asset)} selected={selectedAsset?.id === asset.id} />
+                <AssetTile
+                    {asset}
+                    onClick={() => (selectedAsset = asset)}
+                    selected={selectedAsset?.id === asset.id && selectedAsset?.chainId === asset?.chainId}
+                />
             {/each}
         </div>
     </div>

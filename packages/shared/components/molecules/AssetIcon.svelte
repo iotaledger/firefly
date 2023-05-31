@@ -4,10 +4,10 @@
     import { COIN_TYPE, NetworkId } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { isBright } from '@core/utils'
-    import { ANIMATED_TOKEN_IDS, getAssetInitials, IPersistedAsset } from '@core/wallet'
+    import { ANIMATED_TOKEN_IDS, getAssetInitials, IAsset } from '@core/wallet'
     import { Animation, Icon, NetworkIconBadge, VerificationBadge } from 'shared/components'
 
-    export let asset: IPersistedAsset
+    export let asset: IAsset
     export let large = false
     export let small = false
 
