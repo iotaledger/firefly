@@ -7,6 +7,8 @@ import { Converter } from '@core/utils/convert'
 import { TOKEN_ID_BYTE_LENGTH } from '@core/token/constants'
 import { setLayer2AccountBalanceForChain } from '../stores'
 import { getSelectedAccount } from '@core/account/stores'
+import { get } from 'svelte/store'
+import { selectedAccount } from '@core/account/stores'
 
 export function fetchSelectedAccountLayer2Balance(): void {
     const account = getSelectedAccount()
@@ -46,6 +48,18 @@ async function getSelectedAccountLayer2BalanceForAddress(
     selectedAccountEvmAddress: string,
     chain: IChain
 ): Promise<{ balance: number; tokenId: string }[] | undefined> {
+    const layer2BaseAndIrc30Balances = await getSelectedAccountLayer2NativeTokenBalancesForAddress(
+        selectedAccountEvmAddress,
+        chain
+    )
+    const erc20Balances = await getSelectedAccountLayer2Erc20BalancesForAddress(selectedAccountEvmAddress, chain)
+    return [...(layer2BaseAndIrc30Balances ?? []), ...(erc20Balances ?? [])]
+}
+
+async function getSelectedAccountLayer2NativeTokenBalancesForAddress(
+    selectedAccountEvmAddress: string,
+    chain: IChain
+): Promise<{ balance: number; tokenId: string }[] | undefined> {
     try {
         // TODO: validate evmAddress with validateEthereumAddress when the app errors are removed from it
         const accountsCoreContract = getSmartContractHexName('accounts')
@@ -67,6 +81,32 @@ async function getSelectedAccountLayer2BalanceForAddress(
         } catch (e) {
             return []
         }
+    } catch (err) {
+        const error = err?.message ?? err
+        console.error(error)
+    }
+}
+
+async function getSelectedAccountLayer2Erc20BalancesForAddress(
+    selectedAccountEvmAddress: string,
+    chain: IChain
+): Promise<{ balance: number; tokenId: string }[] | undefined> {
+    try {
+        const chainId = chain.getConfiguration().chainId
+        const trackedTokens = get(selectedAccount)?.trackedTokens?.[chainId] ?? []
+        const erc20TokenBalances = []
+        for (const erc20Address of trackedTokens) {
+            const contract = chain?.getContract(ContractType.Erc20, erc20Address)
+            if (contract) {
+                const coinType = chain?.getConfiguration().coinType
+                if (coinType) {
+                    const selectedAccountAddress = selectedAccountEvmAddress[coinType]
+                    const rawBalance = await contract.methods.balanceOf(selectedAccountAddress).call()
+                    erc20TokenBalances.push({ balance: rawBalance, tokenId: erc20Address })
+                }
+            }
+        }
+        return erc20TokenBalances
     } catch (err) {
         const error = err?.message ?? err
         console.error(error)

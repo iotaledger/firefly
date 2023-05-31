@@ -8,26 +8,11 @@ import { DEFAULT_ASSET_FILTER } from '../constants'
 import { AssetFilter, IAsset } from '../interfaces'
 import { AccountAssets } from '../interfaces/account-assets.interface'
 import { persistedAssets } from './persisted-assets.store'
-import { selectedAccountIndex } from '@core/account/stores'
 
 export const assetFilter: Writable<AssetFilter> = writable(DEFAULT_ASSET_FILTER)
 
-export const accountsLayer2Assets: Writable<{ [accountId: string]: AccountAssets }> = writable({})
-export const selectedAccountLayer2Assets: Readable<AccountAssets> = derived(
-    [selectedAccountIndex, accountsLayer2Assets],
-    ([$selectedAccount, $accountsLayer2Assets]) => $accountsLayer2Assets[$selectedAccount]
-)
-
 export const selectedAccountAssets: Readable<AccountAssets> = derived(
-    [
-        activeProfileId,
-        marketCoinPrices,
-        selectedAccount,
-        persistedAssets,
-        assetFilter,
-        layer2Balances,
-        selectedAccountLayer2Assets,
-    ],
+    [activeProfileId, marketCoinPrices, selectedAccount, persistedAssets, assetFilter, layer2Balances],
     ([$activeProfileId, $marketCoinPrices]) => {
         if ($activeProfileId) {
             return getAccountAssetsForSelectedAccount($marketCoinPrices)

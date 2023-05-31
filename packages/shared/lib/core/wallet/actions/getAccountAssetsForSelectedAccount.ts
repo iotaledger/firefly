@@ -4,16 +4,15 @@ import { NetworkId, getNetwork } from '@core/network'
 import { getActiveNetworkId } from '@core/network/utils/getNetworkId'
 import { getCoinType } from '@core/profile'
 import { isValidIrc30 } from '@core/token'
-import { selectedAccountLayer2Assets } from '@core/wallet'
-import { get } from 'svelte/store'
 import { IAsset } from '../interfaces'
+import { TokenStandard, NotVerifiedStatus } from '../enums'
 import { AccountAssets, IAccountAssetsPerNetwork } from '../interfaces/account-assets.interface'
 import { getAssetFromPersistedAssets } from '../utils'
 import { sortAssets } from '../utils/sortAssets'
 import { getLayer2AccountBalance } from '@core/layer-2/stores'
 
 export function getAccountAssetsForSelectedAccount(marketCoinPrices: MarketCoinPrices): AccountAssets {
-    let accountAssets = {} as AccountAssets
+    const accountAssets = {} as AccountAssets
 
     const networkId = getActiveNetworkId()
     if (!networkId) {
@@ -21,7 +20,6 @@ export function getAccountAssetsForSelectedAccount(marketCoinPrices: MarketCoinP
     }
 
     accountAssets[networkId] = getAccountAssetForNetwork(marketCoinPrices, networkId)
-    accountAssets = { ...accountAssets, ...get(selectedAccountLayer2Assets) }
     const chains = getNetwork()?.getChains() ?? []
 
     for (const chain of chains) {
@@ -96,12 +94,33 @@ function getAccountAssetForChain(chainId: number): IAccountAssetsPerNetwork | un
             }
         } else {
             const persistedAsset = getAssetFromPersistedAssets(tokenId)
-            if (persistedAsset && persistedAsset?.metadata && isValidIrc30(persistedAsset.metadata)) {
-                nativeTokens.push({
-                    ...persistedAsset,
-                    standard: 'Layer 2 Native Token',
+            if (persistedAsset) {
+                if (persistedAsset && persistedAsset?.metadata && isValidIrc30(persistedAsset.metadata)) {
+                    nativeTokens.push({
+                        ...persistedAsset,
+                        standard: 'Layer 2 Native Token',
+                        balance: _balance,
+                    })
+                }
+            } else {
+                // TEMPORARY DUMMY CODE TO FAKE AN ERC20 TOKEN
+                const fakeErc20PersistedToken: IAsset = {
+                    id: tokenId,
+                    standard: TokenStandard.Erc20,
+                    metadata: {
+                        standard: TokenStandard.Erc20,
+                        name: 'fUSDC',
+                        symbol: 'fUSDC',
+                        decimals: 6,
+                    },
+                    verification: {
+                        status: NotVerifiedStatus.New,
+                        verified: false,
+                    },
                     balance: _balance,
-                })
+                    hidden: false,
+                }
+                nativeTokens.push(fakeErc20PersistedToken)
             }
         }
     }

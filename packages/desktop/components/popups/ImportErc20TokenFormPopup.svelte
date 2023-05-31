@@ -1,16 +1,13 @@
 <script lang="ts">
     import { Button, ChainInput, FontWeight, Spinner, Text, TextInput, TextType } from '@ui'
 
-    import { selectedAccount, selectedAccountIndex } from '@core/account'
     import { localize } from '@core/i18n'
-    import { ERC20_TOKEN_ADDRESS_LENGTH, importErc20Token } from '@core/layer-2'
-    import { updateActiveAccount } from '@core/profile'
-    import { updateActiveAccountPersistedData } from '@core/profile/actions'
+    import { ERC20_TOKEN_ADDRESS_LENGTH, getErc20TokenSymbol } from '@core/layer-2'
     import { HEXADECIMAL_PREFIX, HEXADECIMAL_REGEXP } from '@core/utils'
 
     import { closePopup } from '@desktop/auxiliary/popup'
     import { showAppNotification } from '@auxiliary/notification'
-    import { IErc20Metadata } from '@core/wallet'
+    import { updateActiveAccountTrackedTokens } from '@core/wallet'
 
     let busy = false
 
@@ -29,14 +26,14 @@
 
         if (validate()) {
             try {
-                const erc20Token = await importErc20Token(tokenAddress, chainId)
-                if (erc20Token) {
-                    updateActiveAccountTrackedTokens()
+                const erc20TokenSymbol = await getErc20TokenSymbol(tokenAddress, chainId)
+                if (erc20TokenSymbol) {
+                    updateActiveAccountTrackedTokens(tokenAddress, chainId)
                     showAppNotification({
                         type: 'success',
                         alert: true,
                         message: localize('popups.importErc20Token.success', {
-                            values: { tokenSymbol: (erc20Token.metadata as IErc20Metadata).symbol },
+                            values: { tokenSymbol: erc20TokenSymbol },
                         }),
                     })
                 }
@@ -56,17 +53,6 @@
     function validate(): boolean {
         tokenAddressError = validateTokenAddress()
         return !tokenAddressError
-    }
-
-    function updateActiveAccountTrackedTokens(): void {
-        let trackedTokens = $selectedAccount.trackedTokens ?? {}
-        const chainIdTrackedTokens = trackedTokens[chainId] ?? []
-        if (!chainIdTrackedTokens.includes(tokenAddress)) {
-            chainIdTrackedTokens.push(tokenAddress)
-            trackedTokens = { ...trackedTokens, [chainId]: chainIdTrackedTokens }
-            updateActiveAccount($selectedAccountIndex, { trackedTokens })
-            updateActiveAccountPersistedData($selectedAccountIndex, { trackedTokens })
-        }
     }
 
     function validateTokenAddress(): string {
