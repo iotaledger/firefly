@@ -1,3 +1,4 @@
+export * from './getAndUpdateSelectedAccountLayer2Tokens'
 export * from './getSelectedAccountLayer2Tokens'
 export * from './getSelectedAccountWrappedNativeTokens'
 export * from './importErc20Token'
