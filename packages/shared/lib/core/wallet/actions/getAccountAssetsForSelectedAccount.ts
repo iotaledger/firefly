@@ -10,6 +10,7 @@ import { AccountAssets, IAccountAssetsPerNetwork } from '../interfaces/account-a
 import { getAssetFromPersistedAssets } from '../utils'
 import { sortAssets } from '../utils/sortAssets'
 import { getActiveNetworkId } from '@core/network/utils/getNetworkId'
+import { getL2BalancesForAccount } from '@core/layer-2/stores'
 
 export function getAccountAssetsForSelectedAccount(marketCoinPrices: MarketCoinPrices): AccountAssets {
     const accountAssets = {} as AccountAssets
@@ -24,8 +25,10 @@ export function getAccountAssetsForSelectedAccount(marketCoinPrices: MarketCoinP
 
     for (const chain of chains) {
         const chainId = chain.getConfiguration().chainId
-        const chainAssets = getAccountAssetForChain()
-        accountAssets[chainId] = chainAssets
+        const chainAssets = getAccountAssetForChain(chainId)
+        if (chainAssets) {
+            accountAssets[chainId] = chainAssets
+        }
     }
 
     return accountAssets
@@ -66,9 +69,44 @@ function getAccountAssetForNetwork(marketCoinPrices: MarketCoinPrices, networkId
     }
 }
 
-function getAccountAssetForChain(): IAccountAssetsPerNetwork {
+function getAccountAssetForChain(chainId: number): IAccountAssetsPerNetwork | undefined {
+    const index = get(selectedAccount)?.index
+    const balanceForChainId = index !== undefined ? getL2BalancesForAccount(index)?.[chainId] : undefined
+
+    if (!balanceForChainId) {
+        return undefined
+    }
+
+    let baseCoin: IAsset | undefined
+    const nativeTokens: IAsset[] = []
+    const tokens = Object.entries(balanceForChainId) ?? {}
+    for (const [tokenId, balance] of tokens) {
+        const _balance = {
+            total: balance,
+            available: balance,
+        }
+
+        if (tokenId === '0x') {
+            const persistedBaseCoin = getAssetFromPersistedAssets(getCoinType()) // we use the L1 coin type for now because we assume that the basecoin for L2 is SMR
+            baseCoin = {
+                ...persistedBaseCoin,
+                standard: 'Layer 2 Basecoin',
+                balance: _balance,
+            }
+        } else {
+            const persistedAsset = getAssetFromPersistedAssets(tokenId)
+            if (persistedAsset && persistedAsset?.metadata && isValidIrc30(persistedAsset.metadata)) {
+                nativeTokens.push({
+                    ...persistedAsset,
+                    standard: 'Layer 2 Native Token',
+                    balance: _balance,
+                })
+            }
+        }
+    }
+
     return {
-        baseCoin: undefined,
-        nativeTokens: [],
+        baseCoin,
+        nativeTokens: sortAssets(nativeTokens),
     }
 }

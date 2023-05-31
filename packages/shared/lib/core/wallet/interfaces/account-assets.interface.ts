@@ -9,3 +9,7 @@ export interface IAccountAssetsPerNetwork {
     baseCoin: IAsset | undefined
     nativeTokens: IAsset[]
 }
+
+export interface L2Balance {
+    [tokenid: string]: string
+}

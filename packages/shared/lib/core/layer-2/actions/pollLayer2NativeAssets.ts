@@ -1,13 +1,13 @@
 import { LAYER2_NATIVE_ASSETS_POLL_INTERVAL } from '../constants'
-import { getSelectedAccountLayer2Tokens } from './'
+import { fetchSelectedAccountLayer2Balance } from './'
 
 let pollInterval: number
 
 export function pollLayer2NativeAssets(): void {
     clearLayer2NativeAssetsPoll()
-    void getSelectedAccountLayer2Tokens()
+    void fetchSelectedAccountLayer2Balance()
     pollInterval = window.setInterval(() => {
-        void getSelectedAccountLayer2Tokens()
+        void fetchSelectedAccountLayer2Balance()
     }, LAYER2_NATIVE_ASSETS_POLL_INTERVAL)
 }
 
