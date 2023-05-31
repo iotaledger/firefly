@@ -105,6 +105,6 @@ function getAccountAssetForChain(chainId: number): IAccountAssetsPerNetwork | un
 
     return {
         baseCoin,
-        nativeTokens: sortAssets(nativeTokens), // TODO: check
+        nativeTokens: sortAssets(nativeTokens),
     }
 }

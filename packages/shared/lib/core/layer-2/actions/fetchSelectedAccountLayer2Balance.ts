@@ -18,14 +18,14 @@ export function fetchSelectedAccountLayer2Balance(): void {
     const chains = getNetwork()?.getChains() ?? []
     chains.forEach(async (chain) => {
         const { coinType, chainId } = chain.getConfiguration()
-        const evmAddress = evmAddresses?.[coinType] // ?? '0xA88107749C850Df5A4BbbD2197889dF90103dd06'
+        const evmAddress = evmAddresses?.[coinType]
         if (!evmAddress) {
             return
         }
 
         const balances = await getSelectedAccountLayer2BalanceForAddress(evmAddress, chain)
         if (!balances) {
-            return Promise.resolve([])
+            return
         }
 
         const layer2Balance: { [tokenId: string]: number } = {}
