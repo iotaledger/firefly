@@ -1,13 +1,15 @@
 <script lang="ts">
-    import { showAppNotification } from '@auxiliary/notification'
+    import { Button, ChainInput, FontWeight, Spinner, Text, TextInput, TextType } from '@ui'
+
     import { selectedAccount, selectedAccountIndex } from '@core/account'
     import { localize } from '@core/i18n'
     import { ERC20_TOKEN_ADDRESS_LENGTH, importErc20Token } from '@core/layer-2'
     import { updateActiveAccount } from '@core/profile'
-    import { HEXADECIMAL_PREFIX, HEXADECIMAL_REGEXP } from '@core/utils'
-    import { closePopup } from '@desktop/auxiliary/popup'
-    import { Button, ChainInput, FontWeight, Spinner, Text, TextInput, TextType } from '@ui'
     import { updateActiveAccountPersistedData } from '@core/profile/actions'
+    import { HEXADECIMAL_PREFIX, HEXADECIMAL_REGEXP } from '@core/utils'
+
+    import { closePopup } from '@desktop/auxiliary/popup'
+    import { showAppNotification } from '@auxiliary/notification'
 
     let busy = false
 
