@@ -100,8 +100,7 @@ async function getSelectedAccountLayer2Erc20BalancesForAddress(
             if (contract) {
                 const coinType = chain?.getConfiguration().coinType
                 if (coinType) {
-                    const selectedAccountAddress = selectedAccountEvmAddress[coinType]
-                    const rawBalance = await contract.methods.balanceOf(selectedAccountAddress).call()
+                    const rawBalance = await contract.methods.balanceOf(selectedAccountEvmAddress).call()
                     erc20TokenBalances.push({ balance: rawBalance, tokenId: erc20Address })
                 }
             }
