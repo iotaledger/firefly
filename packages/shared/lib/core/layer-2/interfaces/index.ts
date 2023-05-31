@@ -1,4 +1,3 @@
-export * from './contract-token-metadata.interface'
 export * from './erc20-evm-transaction-options.interface'
 export * from './evm-transaction-data.interface'
 export * from './layer2-asset-allowance.interface'
