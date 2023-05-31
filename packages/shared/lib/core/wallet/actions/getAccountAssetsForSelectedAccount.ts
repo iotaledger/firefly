@@ -77,7 +77,7 @@ function getAccountAssetForChain(chainId: number): IAccountAssetsPerNetwork | un
 
     let baseCoin: IAsset | undefined
     const nativeTokens: IAsset[] = []
-    const tokens = Object.entries(balanceForChainId) ?? {}
+    const tokens = Object.entries(balanceForChainId) ?? []
     for (const [tokenId, balance] of tokens) {
         const _balance = {
             total: balance,
