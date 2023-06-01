@@ -2,13 +2,19 @@
     import { selectedAccount } from '@core/account/stores'
     import { localize } from '@core/i18n'
     import { ChainType, IIscpChainConfiguration, network } from '@core/network'
-    import { NewTransactionType, newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'
+    import {
+        NewTokenTransactionDetails,
+        NewTransactionType,
+        newTransactionDetails,
+        updateNewTransactionDetails,
+    } from '@core/wallet'
+    import { canTransferAssetToLayer1 } from '@core/wallet/utils'
+    import { closePopup } from '@desktop/auxiliary/popup'
     import features from '@features/features'
     import { INetworkRecipientSelectorOption, NetworkRecipientSelector } from '@ui'
     import { onMount } from 'svelte'
     import { sendFlowRouter } from '../send-flow.router'
     import SendFlowTemplate from './SendFlowTemplate.svelte'
-    import { closePopup } from '@desktop/auxiliary/popup'
 
     let networkAddress = $newTransactionDetails?.layer2Parameters?.networkAddress
     let selectorOptions: INetworkRecipientSelectorOption[] = []
@@ -36,7 +42,7 @@
         }
 
         // L1 networks, hardcoded Shimmer
-        const mainNetworkOption = {
+        const layer1NetworkOption = {
             name: $network.getMetadata().name,
             networkAddress: '',
             recipient: undefined,
@@ -54,8 +60,11 @@
                 recipient: undefined,
             }
         })
-
-        selectorOptions = [mainNetworkOption, ...iscpNetworkChainsOptions]
+        if (canTransferAssetToLayer1(($newTransactionDetails as NewTokenTransactionDetails).asset)) {
+            selectorOptions = [layer1NetworkOption, ...iscpNetworkChainsOptions]
+        } else {
+            selectorOptions = iscpNetworkChainsOptions
+        }
         selectedIndex =
             networkAddress && selectorOptions.length
                 ? selectorOptions.findIndex((option) => option.networkAddress === networkAddress)
