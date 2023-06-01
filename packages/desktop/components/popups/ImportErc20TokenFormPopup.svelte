@@ -2,7 +2,8 @@
     import { Button, ChainInput, FontWeight, Spinner, Text, TextInput, TextType } from '@ui'
 
     import { localize } from '@core/i18n'
-    import { ERC20_TOKEN_ADDRESS_LENGTH, getErc20TokenSymbol } from '@core/layer-2'
+    import { ERC20_TOKEN_ADDRESS_LENGTH } from '@core/layer-2'
+    import { getErc20TokenMetadata } from '@core/layer-2/utils'
     import { HEXADECIMAL_PREFIX, HEXADECIMAL_REGEXP } from '@core/utils'
 
     import { closePopup } from '@desktop/auxiliary/popup'
@@ -26,14 +27,14 @@
 
         if (validate()) {
             try {
-                const erc20TokenSymbol = await getErc20TokenSymbol(tokenAddress, chainId)
-                if (erc20TokenSymbol) {
+                const erc20TokenMetadata = await getErc20TokenMetadata(tokenAddress, chainId)
+                if (erc20TokenMetadata) {
                     updateActiveAccountTrackedTokens(tokenAddress, chainId)
                     showAppNotification({
                         type: 'success',
                         alert: true,
                         message: localize('popups.importErc20Token.success', {
-                            values: { tokenSymbol: erc20TokenSymbol },
+                            values: { tokenSymbol: erc20TokenMetadata.symbol },
                         }),
                     })
                 }
