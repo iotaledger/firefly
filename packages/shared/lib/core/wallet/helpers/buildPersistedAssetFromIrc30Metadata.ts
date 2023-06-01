@@ -7,7 +7,7 @@ export function buildPersistedAssetFromIrc30Metadata(
     metadata: IIrc30Metadata | IErc20Metadata,
     verification: AssetVerification = { verified: false, status: NotVerifiedStatus.New }
 ): IPersistedAsset {
-    let asset = {
+    return {
         id: tokenId,
         standard: metadata.standard,
         metadata: {
@@ -15,18 +15,13 @@ export function buildPersistedAssetFromIrc30Metadata(
             name: metadata.name,
             symbol: metadata.symbol,
             decimals: metadata.decimals,
+            ...(metadata.standard === TokenStandard.Irc30 &&
+                metadata?.description && { description: metadata?.description }),
+            ...(metadata.standard === TokenStandard.Irc30 && metadata?.url && { url: metadata?.url }),
+            ...(metadata.standard === TokenStandard.Irc30 && metadata?.logoUrl && { logoUrl: metadata?.logoUrl }),
+            ...(metadata.standard === TokenStandard.Irc30 && metadata?.logo && { logo: metadata?.logo }),
         },
         hidden: false,
         verification,
     }
-    if (metadata.standard === TokenStandard.Irc30) {
-        asset = {
-            ...asset,
-            ...(metadata?.description && { description: metadata?.description }),
-            ...(metadata?.url && { url: metadata?.url }),
-            ...(metadata?.logoUrl && { logoUrl: metadata?.logoUrl }),
-            ...(metadata?.logo && { logo: metadata?.logo }),
-        }
-    }
-    return asset
 }
