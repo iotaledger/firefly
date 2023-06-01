@@ -5,6 +5,7 @@ import { ChainId, NetworkId, getNetwork } from '@core/network'
 import { getCoinType } from '@core/profile'
 import { isValidIrc30 } from '@core/token'
 import { IAsset } from '../interfaces'
+import { TokenStandard, NotVerifiedStatus } from '../enums'
 import { AccountAssets, IAccountAssetsPerNetwork } from '../interfaces/account-assets.interface'
 import { getAssetFromPersistedAssets } from '../utils'
 import { sortAssets } from '../utils/sortAssets'
@@ -102,6 +103,26 @@ function getAccountAssetForChain(chainId: number): IAccountAssetsPerNetwork | un
                     balance: _balance,
                     chainId,
                 })
+            } else {
+                // TEMPORARY DUMMY CODE TO FAKE AN ERC20 TOKEN
+                const fakeErc20PersistedToken: IAsset = {
+                    id: tokenId,
+                    chainId,
+                    standard: TokenStandard.Erc20,
+                    metadata: {
+                        standard: TokenStandard.Erc20,
+                        name: 'fUSDC',
+                        symbol: 'fUSDC',
+                        decimals: 6,
+                    },
+                    verification: {
+                        status: NotVerifiedStatus.New,
+                        verified: false,
+                    },
+                    balance: _balance,
+                    hidden: false,
+                }
+                nativeTokens.push(fakeErc20PersistedToken)
             }
         }
     }
