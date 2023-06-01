@@ -31,7 +31,8 @@ export function fetchSelectedAccountLayer2Balance(): void {
         const layer2Balance: { [tokenId: string]: number } = {}
 
         for (const { balance, tokenId } of balances) {
-            const isNativeToken = Converter.hexToBytes(tokenId).length === TOKEN_ID_BYTE_LENGTH
+            const isNativeToken = Converter.hexToBytes(tokenId.substring(2)).length === TOKEN_ID_BYTE_LENGTH
+
             if (isNativeToken) {
                 const asset = await getOrRequestAssetFromPersistedAssets(tokenId)
                 addPersistedAsset(asset)
