@@ -26,7 +26,7 @@
     onMount(() => {
         coinType = $selectedChain?.getConfiguration()?.coinType
         if (coinType !== undefined) {
-            void loadEvmAddressForSelectedAccount(coinType)
+            loadEvmAddressForSelectedAccount(coinType)
         }
     })
 

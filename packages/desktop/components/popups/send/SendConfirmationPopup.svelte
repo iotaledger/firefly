@@ -18,7 +18,7 @@
     import type { OutputParams } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
+    import { activeProfile, checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
     import { TimePeriod } from '@core/utils'
     import { ActivityDirection, ActivityType, InclusionState, ActivityAction } from '@core/wallet/enums'
     import {
@@ -71,7 +71,7 @@
     $: expirationTimePicker?.setNull(giftStorageDeposit)
     $: hideGiftToggle =
         (transactionDetails.type === NewTransactionType.TokenTransfer &&
-            transactionDetails.asset.id === $selectedAccountAssets?.baseCoin?.id) ||
+            transactionDetails.asset.id === $selectedAccountAssets?.[$activeProfile?.network.id]?.baseCoin?.id) ||
         (disableToggleGift && !giftStorageDeposit) ||
         !!layer2Parameters
     $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()

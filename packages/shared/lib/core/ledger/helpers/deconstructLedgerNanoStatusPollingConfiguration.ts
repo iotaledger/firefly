@@ -1,4 +1,4 @@
-import { profileManager as _profileManager } from '@core/profile-manager'
+import { profileManager as _profileManager } from '@core/profile-manager/stores'
 
 import { DEFAULT_LEDGER_NANO_STATUS_POLL_INTERVAL } from '../constants'
 import { ILedgerNanoStatusPollingConfiguration } from '../interfaces'

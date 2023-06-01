@@ -1,4 +1,4 @@
-import { Readable, derived } from 'svelte/store'
+import { Readable, derived, get } from 'svelte/store'
 
 import { activeProfile } from '@core/profile/stores'
 
@@ -12,3 +12,7 @@ export const network: Readable<INetwork | undefined> = derived([activeProfile], 
         return undefined
     }
 })
+
+export function getNetwork(): INetwork | undefined {
+    return get(network)
+}
