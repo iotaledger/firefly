@@ -36,7 +36,7 @@
     import { selectedAccountIndex } from '@core/account'
     import { get } from 'svelte/store'
     import features from '@features/features'
-    import { pollLayer2NativeAssets, clearLayer2NativeAssetsPoll } from '@core/layer-2'
+    import { pollLayer2Tokens, clearLayer2TokensPoll } from '@core/layer-2'
 
     const tabs = {
         wallet: Wallet,
@@ -89,7 +89,7 @@
             })
         }
 
-        void pollLayer2NativeAssets()
+        void pollLayer2Tokens()
     })
 
     onDestroy(() => {
@@ -105,7 +105,7 @@
         if ($isActiveLedgerProfile) {
             stopPollingLedgerNanoStatus()
         }
-        clearLayer2NativeAssetsPoll()
+        clearLayer2TokensPoll()
     })
 </script>
 
