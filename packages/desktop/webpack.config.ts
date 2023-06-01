@@ -39,6 +39,7 @@ const fallback: { [index: string]: string | false | string[] } = {
     path: false,
     fs: false,
     crypto: false,
+    zlib: false,
     // These are required for the Amplitude SDK
     https: require.resolve('https-browserify'),
     url: require.resolve('url/'),
