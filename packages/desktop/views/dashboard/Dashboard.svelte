@@ -11,7 +11,7 @@
     } from '@core/profile'
     import { appRouter, dashboardRoute } from '@core/router'
     import { Idle } from 'shared/components'
-    import { stopPollingLedgerNanoStatus } from '@core/ledger'
+    import { isMatchingActiveProfile, ledgerNanoStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
     import { removeDisplayNotification, showAppNotification } from '@auxiliary/notification'
     import { Platform } from '@core/app'
     import { Developer } from './developer'
@@ -66,6 +66,15 @@
         if ($activeProfile?.hasLoadedAccounts) {
             handleDeepLink(data)
         }
+    }
+
+    // TEST CODE
+    $: $ledgerNanoStatus, void testLedgerMatchingProfile()
+
+    // TEST CODE
+    async function testLedgerMatchingProfile(): Promise<void> {
+        /* eslint-disable no-console */
+        console.log('IS MATCHING: ', await isMatchingActiveProfile())
     }
 
     onMount(() => {

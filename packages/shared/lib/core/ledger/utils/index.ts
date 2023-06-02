@@ -1,5 +1,7 @@
 export * from './determineLedgerConnectionState'
 export * from './formatAddressForLedger'
 export * from './handleLedgerError'
+export * from './isLedgerAppOpen'
 export * from './isLedgerError'
+export * from './isMatchingActiveProfile'
 export * from './openLedgerNotConnectedPopup'

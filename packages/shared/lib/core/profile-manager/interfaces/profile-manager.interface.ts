@@ -23,7 +23,6 @@ export interface IProfileManager {
     emitTestEvent(event: WalletEvent): Promise<void>
     generateAddress(
         accountIndex: number,
-        internal: boolean,
         addressIndex: number,
         options?: GenerateAddressOptions,
         bech32Hrp?: string
