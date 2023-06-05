@@ -2,7 +2,7 @@ import { NotVerifiedStatus, TokenStandard } from '../enums'
 import { IErc20Metadata, IIrc30Metadata, IPersistedAsset } from '../interfaces'
 import { AssetVerification } from '../types'
 
-export function buildPersistedAssetFromIrc30Metadata(
+export function buildPersistedAssetFromMetadata(
     tokenId: string,
     metadata: IIrc30Metadata | IErc20Metadata,
     verification: AssetVerification = { verified: false, status: NotVerifiedStatus.New }
