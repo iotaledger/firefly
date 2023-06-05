@@ -16,7 +16,7 @@ export function registerLedgerDeviceEventHandlers(): void {
             return
         }
 
-        const evmAddresses = get(activeAccounts)?.[accountIndex]?.evmAddresses
+        const evmAddresses = get(activeAccounts)?.[accountIndex]?.evmAddresses ?? {}
         evmAddresses[coinType] = evmAddress
 
         updateActiveAccount(accountIndex, { evmAddresses })
