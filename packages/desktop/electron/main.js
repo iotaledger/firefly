@@ -270,7 +270,7 @@ function createWindow() {
     })
 
     windows.main.on('closed', () => {
-        ledgerProcess.kill()
+        ledgerProcess?.kill()
         windows.main = null
     })
 
@@ -331,7 +331,7 @@ ipcMain.on('start-ledger-process', () => {
 })
 
 ipcMain.on('kill-ledger-process', () => {
-    ledgerProcess.kill()
+    ledgerProcess?.kill()
 })
 
 ipcMain.on('generate-evm-address', (_e, bip32Path, verify) => {
@@ -339,7 +339,7 @@ ipcMain.on('generate-evm-address', (_e, bip32Path, verify) => {
 })
 
 ipcMain.on('sign-evm-transaction', (_e, data, bip32Path) => {
-    ledgerProcess.postMessage({ method: 'sign-evm-transaction', parameters: [data, bip32Path] })
+    ledgerProcess?.postMessage({ method: 'sign-evm-transaction', parameters: [data, bip32Path] })
 })
 
 /**
