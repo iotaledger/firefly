@@ -1,5 +1,4 @@
 export * from './activityOutputContainsValue'
-export * from './canTransferAssetToLayer1'
 export * from './getDirectionFromTransaction'
 export * from './getNonRemainderBasicOutputsFromTransaction'
 export * from './getSenderAddressFromInputs'

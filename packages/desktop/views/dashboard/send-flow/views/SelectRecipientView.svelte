@@ -1,16 +1,15 @@
 <script lang="ts">
     import { selectedAccount } from '@core/account/stores'
     import { localize } from '@core/i18n'
-    import { ChainType, IIscpChainConfiguration, network } from '@core/network'
+    import { network } from '@core/network'
     import {
         NewTokenTransactionDetails,
         NewTransactionType,
         newTransactionDetails,
         updateNewTransactionDetails,
     } from '@core/wallet'
-    import { canTransferAssetToLayer1 } from '@core/wallet/utils'
+    import { getCompatibleAssetTransferNetworks } from '@core/wallet/utils'
     import { closePopup } from '@desktop/auxiliary/popup'
-    import features from '@features/features'
     import { INetworkRecipientSelectorOption, NetworkRecipientSelector } from '@ui'
     import { onMount } from 'svelte'
     import { sendFlowRouter } from '../send-flow.router'
@@ -41,30 +40,8 @@
             return
         }
 
-        // L1 networks, hardcoded Shimmer
-        const layer1NetworkOption = {
-            name: $network.getMetadata().name,
-            networkAddress: '',
-            recipient: undefined,
-        }
-
-        // L2 networks, ISCP only for now
-        const iscpNetworkChains = features?.network?.layer2?.enabled
-            ? $network.getChains().filter((chain) => chain.getConfiguration()?.type === ChainType.Iscp)
-            : []
-        const iscpNetworkChainsOptions = iscpNetworkChains.map((chain) => {
-            const chainConfiguration = chain.getConfiguration() as IIscpChainConfiguration
-            return {
-                name: chainConfiguration.name,
-                networkAddress: chainConfiguration?.aliasAddress,
-                recipient: undefined,
-            }
-        })
-        if (canTransferAssetToLayer1(($newTransactionDetails as NewTokenTransactionDetails).asset)) {
-            selectorOptions = [layer1NetworkOption, ...iscpNetworkChainsOptions]
-        } else {
-            selectorOptions = iscpNetworkChainsOptions
-        }
+        const asset = ($newTransactionDetails as NewTokenTransactionDetails).asset
+        selectorOptions = getCompatibleAssetTransferNetworks(asset)
         selectedIndex =
             networkAddress && selectorOptions.length
                 ? selectorOptions.findIndex((option) => option.networkAddress === networkAddress)
