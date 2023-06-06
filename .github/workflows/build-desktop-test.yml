@@ -1,4 +1,4 @@
-name: Desktop Build Test
+name: Build Desktop Test (v2)
 
 on:
   schedule:
