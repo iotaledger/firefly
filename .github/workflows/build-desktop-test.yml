@@ -1,6 +1,9 @@
 name: Build Desktop Test (v1)
 
 on:
+  pull_request:
+    branches:
+      - 'main'
   schedule:
     # 12:00AM (UTC) Sunday
     - cron: '25 19 * * TUE'
