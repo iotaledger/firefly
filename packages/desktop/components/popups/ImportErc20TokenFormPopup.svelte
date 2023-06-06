@@ -37,6 +37,7 @@
                             values: { tokenSymbol: erc20TokenMetadata.symbol },
                         }),
                     })
+                    closePopup()
                 }
             } catch (err) {
                 console.error(err)
