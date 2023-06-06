@@ -14,8 +14,8 @@ jobs:
         os: [ ubuntu-20.04, macos-11, windows-2019 ]
       fail-fast: true
     env:
-      VERSION: "2.1.3-test"
-      STAGE: "prod"
+      VERSION: '2.1.3-test'
+      STAGE: 'prod'
 
     steps:
       - uses: actions/checkout@v2
