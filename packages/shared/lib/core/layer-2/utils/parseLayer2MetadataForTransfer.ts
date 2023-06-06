@@ -25,7 +25,7 @@ export function parseLayer2MetadataForTransfer(metadata: Uint8Array): ILayer2Tra
         contractFunction: CONTRACT_FUNCTIONS[contractFunction] ?? Converter.decimalToHex(contractFunction),
         gasBudget: gasBudget.toString(),
         ethereumAddress,
-        baseTokenAmount: allowance?.baseTokenAmount,
+        baseTokens: allowance?.baseTokens,
         nativeTokens: allowance?.nativeTokens,
         nfts: allowance?.nfts,
     }
@@ -55,7 +55,7 @@ function parseAssetAllowance(readStream: ReadStream): ILayer2AssetAllowance {
     const allowance = readStream.readUInt8('allowance')
 
     if (allowance === Allowance.Set) {
-        const baseTokenAmount = readStream.readUInt64('baseTokenAmount').toString()
+        const baseTokens = readStream.readUInt64('baseTokens').toString()
         readStream.readUInt16('tokenBufferBytesLength')
         const tokenAmount = readStream.readUInt16('tokenAmount')
         const nativeTokens: NativeTokenAmount[] = []
@@ -74,7 +74,7 @@ function parseAssetAllowance(readStream: ReadStream): ILayer2AssetAllowance {
         }
 
         return {
-            baseTokenAmount,
+            baseTokens,
             nativeTokens,
             nfts,
         }
