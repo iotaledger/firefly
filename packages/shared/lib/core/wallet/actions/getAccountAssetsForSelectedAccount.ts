@@ -3,7 +3,7 @@ import { MarketCoinPrices } from '@core/market'
 import { getActiveNetworkId } from '@core/network/utils/getNetworkId'
 import { ChainId, NetworkId, getNetwork } from '@core/network'
 import { getCoinType } from '@core/profile'
-import { isValidIrc30, isValidToken } from '@core/token'
+import { isValidIrc30Token, isValidToken } from '@core/token'
 import { IAsset } from '../interfaces'
 import { AccountAssets, IAccountAssetsPerNetwork } from '../interfaces/account-assets.interface'
 import { getAssetFromPersistedAssets } from '../utils'
@@ -51,7 +51,7 @@ function getAccountAssetForNetwork(marketCoinPrices: MarketCoinPrices, networkId
     const tokens = account?.balances?.nativeTokens ?? []
     for (const token of tokens) {
         const persistedAsset = getAssetFromPersistedAssets(token.tokenId)
-        if (persistedAsset && persistedAsset?.metadata && isValidIrc30(persistedAsset.metadata)) {
+        if (persistedAsset && persistedAsset?.metadata && isValidIrc30Token(persistedAsset.metadata)) {
             nativeTokens.push({
                 ...persistedAsset,
                 chainId: ChainId.Layer1,
