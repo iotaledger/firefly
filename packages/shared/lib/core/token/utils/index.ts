@@ -1,4 +1,4 @@
 export * from './getMaxDecimalsFromTokenMetadata'
-export * from './isValidErc20'
-export * from './isValidIrc30'
+export * from './isValidErc20Token'
+export * from './isValidIrc30Token'
 export * from './isValidToken'
