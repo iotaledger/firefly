@@ -10,11 +10,18 @@ const TransportNodeHid = require('@ledgerhq/hw-transport-node-hid').default
 const AppEth = require('@ledgerhq/hw-app-eth').default
 const { listen } = require('@ledgerhq/logs')
 
+const { Common } = require('@ethereumjs/common')
 const { RLP } = require('@ethereumjs/rlp')
 const { Transaction } = require('@ethereumjs/tx')
 const { bufArrToArr } = require('@ethereumjs/util')
 
 let transport
+
+const TX_OPTIONS = {
+    common: Common.custom({
+        chainId: 1071,
+    }),
+}
 
 process.parentPort.on('message', async (message) => {
     try {
@@ -68,18 +75,22 @@ async function getEvmAddress(bip32Path, verify) {
 async function signTransactionData(data, bip32Path) {
     const appEth = new AppEth(transport)
 
-    const unsignedTransactionObject = Transaction.fromTxData(data)
-    const unsignedTransaction = unsignedTransactionObject.getMessageToSign(false)
-
+    const transactionData = Transaction.fromTxData(data, TX_OPTIONS)
+    const unsignedTransaction = transactionData.getMessageToSign(false)
     const serializedUnsignedTransaction = Buffer.from(RLP.encode(bufArrToArr(unsignedTransaction)))
+
     const signature = await appEth.signTransaction(bip32Path, serializedUnsignedTransaction, null)
 
-    const signedTransactionObject = Transaction.fromTxData({
-        ...data,
-        v: '0x' + signature.v,
-        r: '0x' + signature.r,
-        s: '0x' + signature.s,
-    })
+    const signedTransactionObject = Transaction.fromTxData(
+        {
+            ...data,
+            v: '0x' + signature.v,
+            r: '0x' + signature.r,
+            s: '0x' + signature.s,
+        },
+        TX_OPTIONS
+    )
+
     const serializedSignedTransaction = Buffer.from(RLP.encode(bufArrToArr(signedTransactionObject.raw())))
     const serializedSignedTransactionString = '0x' + serializedSignedTransaction.toString('hex')
 
