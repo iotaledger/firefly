@@ -56,3 +56,11 @@ export type AssetFilterUnit = {
     localeKey: string
     selected: string
 }
+
+export type NetworkFilterUnit = {
+    type: 'network'
+    active: boolean
+    labelKey?: string
+    localeKey: string
+    selected: string
+}
