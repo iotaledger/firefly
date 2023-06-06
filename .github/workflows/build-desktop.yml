@@ -1,4 +1,4 @@
-name: Build Firefly Desktop
+name: Build Desktop (v1)
 
 on:
   push:
