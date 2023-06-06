@@ -15,8 +15,8 @@ export const DEFAULT_ASSET_FILTER: AssetFilter = {
     network: {
         active: false,
         type: 'network',
-        localeKey: 'filters.asset',
-        selected: '',
+        localeKey: 'filters.network',
+        selected: -1,
     },
     showHidden: {
         active: false,
