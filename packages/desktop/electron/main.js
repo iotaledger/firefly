@@ -320,7 +320,7 @@ ipcMain.on('start-ledger-process', () => {
                     windows.main.webContents.send('evm-address', data)
                 }
                 if (data?.signedTransaction) {
-                    windows.main.webContents.send('evm-signature', data)
+                    windows.main.webContents.send('evm-signed-transaction', data)
                 } else {
                     /* eslint-disable-next-line no-console */
                     console.log('Unhandled Ledger Message: ', message)
