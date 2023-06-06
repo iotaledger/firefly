@@ -2,7 +2,6 @@ import { Platform } from '@core/app/classes'
 import { addError } from '@core/error'
 import { get } from 'svelte/store'
 import { activeAccounts, updateActiveAccount, updateActiveAccountPersistedData } from '@core/profile'
-import { ledgerEvmSignature } from '@core/ledger'
 import { deconstructBip32Path } from '@core/account'
 import { getNetwork } from '@core/network'
 
@@ -25,8 +24,9 @@ export function registerLedgerDeviceEventHandlers(): void {
     })
 
     Platform.onEvent('evm-signed-transaction', ({ signedTransaction }) => {
-        ledgerEvmSignature.set(signedTransaction)
         const provider = getNetwork()?.getChain(1071)?.getProvider()
-        void provider?.eth.sendSignedTransaction(signedTransaction)
+        if (provider) {
+            void provider?.eth.sendSignedTransaction(signedTransaction)
+        }
     })
 }
