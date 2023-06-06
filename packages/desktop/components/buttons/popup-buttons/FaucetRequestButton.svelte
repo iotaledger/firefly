@@ -5,7 +5,7 @@
     import { FAUCET_URLS, nodeInfo } from '@core/network'
     import { activeProfile } from '@core/profile'
 
-    import { openPopup, PopupId } from '@auxiliary/popup'
+    import { openPopup, PopupId } from '@desktop/auxiliary/popup'
 
     function onGetTokensClick(): void {
         openPopup({

@@ -18,7 +18,7 @@ export const DEFAULT_PERSISTED_PROFILE_OBJECT: IPersistedProfile = {
         maxMediaDownloadTimeInSeconds: DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_SECONDS,
         hideNetworkStatistics: true,
     },
-    accountMetadata: [],
+    accountPersistedData: {},
     isDeveloperProfile: false,
     forceAssetRefresh: false,
     strongholdVersion: undefined,

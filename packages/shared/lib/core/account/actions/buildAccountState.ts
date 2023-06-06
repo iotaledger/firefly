@@ -1,10 +1,18 @@
 import { AccountBalance } from '@iota/wallet'
 
 import { getDepositAddress } from '@core/account/utils'
+import {
+    getActiveProfilePersistedEvmAddressesByAccountIndex,
+    getActiveProfilePersistedTrackedTokensByAccountIndex,
+    updateAccountPersistedDataOnActiveProfile,
+} from '@core/profile/stores'
 
-import { IAccount, IAccountMetadata, IAccountState } from '../interfaces'
+import { IAccount, IAccountState, IPersistedAccountData } from '../interfaces'
 
-export async function buildAccountState(account: IAccount, metadata: IAccountMetadata): Promise<IAccountState> {
+export async function buildAccountState(
+    account: IAccount,
+    accountPersistedData: IPersistedAccountData
+): Promise<IAccountState> {
     let balances: AccountBalance = {
         baseCoin: {
             total: '0',
@@ -23,25 +31,34 @@ export async function buildAccountState(account: IAccount, metadata: IAccountMet
         potentiallyLockedOutputs: {},
         aliases: [],
     }
-    let depositAddress = ''
+    const accountIndex = account.getMetadata().index
+    const evmAddresses = getActiveProfilePersistedEvmAddressesByAccountIndex(accountIndex)
+    const trackedTokens = getActiveProfilePersistedTrackedTokensByAccountIndex(accountIndex)
+    let depositAddress = accountPersistedData.depositAddress
     let votingPower = ''
     try {
         balances = await account.getBalance()
-        depositAddress = await getDepositAddress(account)
         votingPower = balances.baseCoin.votingPower
+
+        if (!depositAddress) {
+            depositAddress = await getDepositAddress(account)
+            updateAccountPersistedDataOnActiveProfile(accountIndex, { depositAddress })
+        }
     } catch (err) {
         console.error(err)
     }
 
     return {
+        index: accountIndex,
         ...account,
-        ...metadata,
+        ...accountPersistedData,
         depositAddress,
-        evmAddresses: {},
+        evmAddresses,
         balances,
         hasVotingPowerTransactionInProgress: false,
         hasVotingTransactionInProgress: false,
         isTransferring: false,
         votingPower,
+        trackedTokens,
     }
 }

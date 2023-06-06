@@ -34,5 +34,5 @@
 </script>
 
 <ActivityTileContent {action} {subject} {formattedAsset}>
-    <AssetIcon slot="icon" {asset} showVerifiedBadgeOnly />
+    <AssetIcon slot="icon" {asset} />
 </ActivityTileContent>

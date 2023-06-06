@@ -16,20 +16,22 @@
     }
 </script>
 
-<drawer-header class="flex flex-row items-center mb-6 gap-2">
-    {#if showBackButton}
-        <button on:click={onBackClick} class=" focus:text-blue-500">
-            <Icon
-                icon={IconEnum.ArrowLeft}
-                classes="text-gray-500 dark:text-white hover:text-gray-600 dark:hover:text-gray-100"
-            />
-        </button>
-    {/if}
+<drawer-template class="flex flex-col h-full space-y-6">
+    <drawer-header class="flex flex-row items-center gap-2">
+        {#if showBackButton}
+            <button on:click={onBackClick} class=" focus:text-blue-500">
+                <Icon
+                    icon={IconEnum.ArrowLeft}
+                    classes="text-gray-500 dark:text-white hover:text-gray-600 dark:hover:text-gray-100"
+                />
+            </button>
+        {/if}
 
-    <Text type={TextType.h4} classes="text-center">
-        {title}
-    </Text>
-</drawer-header>
-<drawer-body>
-    <slot />
-</drawer-body>
+        <Text type={TextType.h4} classes="text-center">
+            {title}
+        </Text>
+    </drawer-header>
+    <drawer-body class="flex-grow">
+        <slot />
+    </drawer-body>
+</drawer-template>

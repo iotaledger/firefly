@@ -8,7 +8,7 @@
         ledgerPreparedOutput,
         resetLedgerPreparedOutput,
     } from '@core/ledger'
-    import { closePopup } from '@auxiliary/popup'
+    import { closePopup } from '@desktop/auxiliary/popup'
     import { sendOutput } from '@core/wallet'
     import { handleError } from '@core/error/handlers'
 

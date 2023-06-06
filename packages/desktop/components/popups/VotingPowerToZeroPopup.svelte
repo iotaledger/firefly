@@ -6,9 +6,7 @@
     import { setVotingPower } from '@contexts/governance/actions'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile/actions'
-    import { closePopup, openPopup } from '@auxiliary/popup/actions'
-    import { popupState } from '@auxiliary/popup/stores'
-    import { PopupId } from '@auxiliary/popup'
+    import { closePopup, openPopup, PopupId, popupState } from '@desktop/auxiliary/popup'
 
     const ZERO_VOTING_POWER = '0'
 

@@ -16,12 +16,12 @@ export class SendFlowRouter extends Subrouter<SendFlowRoute> {
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
             case SendFlowRoute.SelectToken:
-                nextRoute = SendFlowRoute.InputTokenAmount
-                break
-            case SendFlowRoute.InputTokenAmount:
                 nextRoute = SendFlowRoute.SelectRecipient
                 break
             case SendFlowRoute.SelectRecipient:
+                nextRoute = SendFlowRoute.InputTokenAmount
+                break
+            case SendFlowRoute.InputTokenAmount:
                 nextRoute = SendFlowRoute.TransactionSummary
                 break
             case SendFlowRoute.TransactionSummary:

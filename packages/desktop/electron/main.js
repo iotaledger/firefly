@@ -317,26 +317,39 @@ function createWindow() {
 
 app.whenReady().then(createWindow)
 
-const ledgerProcess = utilityProcess.fork(paths.ledger)
-
-ledgerProcess.on('spawn', () => {
-    ledgerProcess.on('message', (message) => {
-        const { error, data } = message
-        if (error) {
-            windows.main.webContents.send('ledger-error', error)
-        } else {
-            if (data?.evmAddress) {
-                windows.main.webContents.send('evm-address', data)
+let ledgerProcess
+ipcMain.on('start-ledger-process', () => {
+    ledgerProcess = utilityProcess.fork(paths.ledger)
+    ledgerProcess.on('spawn', () => {
+        ledgerProcess.on('message', (message) => {
+            const { error, data } = message
+            if (error) {
+                windows.main.webContents.send('ledger-error', error)
             } else {
-                /* eslint-disable-next-line no-console */
-                console.log('Unhandled Ledger Message: ', message)
+                if (data?.evmAddress) {
+                    windows.main.webContents.send('evm-address', data)
+                }
+                if (data?.signedTransaction) {
+                    windows.main.webContents.send('evm-signature', data)
+                } else {
+                    /* eslint-disable-next-line no-console */
+                    console.log('Unhandled Ledger Message: ', message)
+                }
             }
-        }
+        })
     })
 })
 
-ipcMain.on('generate-evm-address', (_e, coinType, accountIndex, verify) => {
-    ledgerProcess.postMessage({ method: 'generate-evm-address', parameters: [coinType, accountIndex, verify] })
+ipcMain.on('kill-ledger-process', () => {
+    ledgerProcess.kill()
+})
+
+ipcMain.on('generate-evm-address', (_e, bip32Path, verify) => {
+    ledgerProcess?.postMessage({ method: 'generate-evm-address', parameters: [bip32Path, verify] })
+})
+
+ipcMain.on('sign-evm-transaction', (_e, data, bip32Path) => {
+    ledgerProcess.postMessage({ method: 'sign-evm-transaction', parameters: [data, bip32Path] })
 })
 
 /**

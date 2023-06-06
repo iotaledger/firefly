@@ -34,10 +34,10 @@
         isProposalVotable,
         isVotingForSelectedProposal,
     } from '@contexts/governance/utils'
-    import { PopupId } from '@auxiliary/popup'
-    import { openPopup } from '@auxiliary/popup/actions'
+    import { openPopup, PopupId } from '@desktop/auxiliary/popup'
+    import { activeProfile } from '@core/profile'
 
-    const { metadata } = $visibleSelectedAccountAssets?.baseCoin ?? {}
+    const { metadata } = $visibleSelectedAccountAssets?.[$activeProfile?.network?.id]?.baseCoin ?? {}
 
     let selectedAnswerValues: number[] = []
     let votedAnswerValues: number[] = []

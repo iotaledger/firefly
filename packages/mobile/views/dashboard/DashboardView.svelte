@@ -42,7 +42,7 @@
             <TopBar />
             <div class="flex justify-center w-full mt-5">
                 <TogglableAssetBalanceLabel
-                    asset={$selectedAccountAssets?.baseCoin}
+                    asset={$selectedAccountAssets?.[$activeProfile?.network?.id]?.baseCoin}
                     amount={$selectedAccount.balances?.baseCoin?.available}
                     tokenMetadata={getBaseToken()}
                 />

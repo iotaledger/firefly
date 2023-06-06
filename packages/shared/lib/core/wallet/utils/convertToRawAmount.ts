@@ -35,7 +35,7 @@ function convertToRawAmountFromMetadata(
                 return undefined
             }
         }
-    } else if (tokenMetadata?.standard === TokenStandard.Irc30) {
+    } else if (tokenMetadata?.standard === TokenStandard.Irc30 || tokenMetadata?.standard === TokenStandard.Erc20) {
         const decimals = Math.min(tokenMetadata.decimals, MAX_SUPPORTED_DECIMALS)
         return convertAmountToMatchUnit(amount, decimals)
     } else {

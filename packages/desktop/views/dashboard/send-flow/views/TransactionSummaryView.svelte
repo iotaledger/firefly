@@ -1,12 +1,12 @@
 <script lang="ts">
-    import { closePopup } from '@auxiliary/popup/actions'
+    import { closePopup } from '@desktop/auxiliary/popup'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
     import { getDestinationNetworkFromAddress } from '@core/layer-2/utils'
     import { ledgerPreparedOutput } from '@core/ledger/stores'
     import { checkActiveProfileAuth } from '@core/profile/actions'
-    import { isActiveLedgerProfile } from '@core/profile/stores'
+    import { activeProfile, isActiveLedgerProfile } from '@core/profile/stores'
     import { truncateString } from '@core/utils'
     import { TimePeriod } from '@core/utils/enums'
     import { sendOutput } from '@core/wallet/actions'
@@ -173,7 +173,7 @@
         {/if}
         {#if visibleSurplus}
             <TokenAmountTile
-                asset={$selectedAccountAssets.baseCoin}
+                asset={$selectedAccountAssets?.[$activeProfile?.network?.id]?.baseCoin}
                 amount={String(visibleSurplus)}
                 showAssetInfo={false}
             />

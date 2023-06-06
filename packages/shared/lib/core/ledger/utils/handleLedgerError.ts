@@ -1,11 +1,11 @@
 import { get } from 'svelte/store'
 
-import { localize } from '@core/i18n'
-import { resetNewTokenTransactionDetails, resetMintTokenDetails, resetMintNftDetails } from '@core/wallet'
+import { localize } from '@core/i18n/i18n'
+import { resetNewTokenTransactionDetails, resetMintTokenDetails, resetMintNftDetails } from '@core/wallet/stores'
 import { IError } from '@core/error/interfaces'
 import { handleGenericError } from '@core/error/handlers'
 import { showAppNotification } from '@auxiliary/notification'
-import { closePopup, openPopup, PopupId, popupState } from '@auxiliary/popup'
+import { closePopup, openPopup, PopupId, popupState } from '../../../../../desktop/lib/auxiliary/popup'
 
 import { LEDGER_ERROR_LOCALES } from '../constants'
 import { LedgerError } from '../enums'

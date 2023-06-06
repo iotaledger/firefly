@@ -7,11 +7,10 @@
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { convertToRawAmount, visibleSelectedAccountAssets } from '@core/wallet'
-    import { closePopup, openPopup } from '@auxiliary/popup/actions'
-    import { popupState } from '@auxiliary/popup/stores'
+    import { closePopup, openPopup, PopupId, popupState } from '@desktop/auxiliary/popup'
     import { onMount } from 'svelte'
     import { isAccountVoting } from '@contexts/governance/utils'
-    import { PopupId } from '@auxiliary/popup'
+    import { activeProfile } from '@core/profile'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let newVotingPower: string = undefined
@@ -21,7 +20,7 @@
     let rawAmount = newVotingPower ?? $selectedAccount?.votingPower
     let confirmDisabled = false
 
-    $: asset = $visibleSelectedAccountAssets?.baseCoin
+    $: asset = $visibleSelectedAccountAssets[$activeProfile?.network.id].baseCoin
     $: votingPower = parseInt($selectedAccount?.votingPower, 10)
     $: hasTransactionInProgress =
         $selectedAccount?.hasVotingPowerTransactionInProgress ||

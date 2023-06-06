@@ -2,7 +2,7 @@
     import { fade, fly } from 'svelte/transition'
     import { NetworkConfigDrawerRouter } from '@components'
     import { Router } from '@core/router'
-    import { closeDrawer, DrawerDirection, DrawerId, drawerState } from '@desktop/auxilary/drawer'
+    import { closeDrawer, DrawerDirection, DrawerId, drawerState } from '@desktop/auxiliary/drawer'
     import { DrawerRoute } from '@desktop/routers'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { Icon } from '@ui'
@@ -68,7 +68,7 @@
                 ? 'vertical'
                 : 'horizontal'}"
         >
-            <div class="flex-grow">
+            <div class="flex flex-col h-full">
                 {#if $drawerState.id === DrawerId.NetworkConfig}
                     <NetworkConfigDrawerRouter bind:drawerRoute bind:drawerRouter />
                 {/if}
