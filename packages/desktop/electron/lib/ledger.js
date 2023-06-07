@@ -17,6 +17,7 @@ const { bufArrToArr } = require('@ethereumjs/util')
 
 let transport
 
+// TODO: Remove in https://github.com/iotaledger/firefly/issues/6960
 const TX_OPTIONS = {
     common: Common.custom({
         chainId: 1071,
