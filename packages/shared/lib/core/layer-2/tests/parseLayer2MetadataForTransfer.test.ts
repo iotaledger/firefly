@@ -34,7 +34,7 @@ describe('Function: parseLayer2MetadataForTransfer.ts', () => {
             nativeTokens: [
                 {
                     amount: '50',
-                    tokenId: '0x08fcccc313acc182fc2c647dc98864062b163a8ee254231d7f029dc6be3a2de52e0100000000',
+                    ID: ['0x08fcccc313acc182fc2c647dc98864062b163a8ee254231d7f029dc6be3a2de52e0100000000'],
                 },
             ],
             nfts: [],
