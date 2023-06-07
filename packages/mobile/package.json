@@ -33,7 +33,7 @@
         "webpack-dev-server": "^4.11.1"
     },
     "dependencies": {
-        "@capacitor-community/barcode-scanner": "^2.0.1",
+        "@capacitor-community/barcode-scanner": "^4.0.1",
         "@capacitor-community/privacy-screen": "^2.1.1",
         "@capacitor/app": "^1.1.1",
         "@capacitor/device": "1.1.2",
