@@ -1,9 +1,9 @@
+import { get } from 'svelte/store'
 import { Platform } from '@core/app/classes'
 import { addError } from '@core/error'
-import { get } from 'svelte/store'
 import { activeAccounts, updateActiveAccount, updateActiveAccountPersistedData } from '@core/profile'
 import { deconstructBip32Path } from '@core/account'
-import { getNetwork } from '@core/network'
+import { ChainId, getNetwork } from '@core/network'
 
 export function registerLedgerDeviceEventHandlers(): void {
     Platform.onEvent('ledger-error', (error) => {
@@ -24,7 +24,7 @@ export function registerLedgerDeviceEventHandlers(): void {
     })
 
     Platform.onEvent('evm-signed-transaction', ({ signedTransaction }) => {
-        const provider = getNetwork()?.getChain(1071)?.getProvider()
+        const provider = getNetwork()?.getChain(ChainId.ShimmerEVM)?.getProvider()
         if (provider) {
             void provider?.eth.sendSignedTransaction(signedTransaction)
         }
