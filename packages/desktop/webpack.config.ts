@@ -39,13 +39,13 @@ const fallback: { [index: string]: string | false | string[] } = {
     path: false,
     fs: false,
     crypto: false,
-    // These are required for the Ethereum libraries
+    // The Ethereum libraries require zlib and the buffer polyfill
     zlib: false,
     buffer: require.resolve('buffer'),
-    // These are required for the Amplitude SDK
+    // The Amplitude SDK requires http, https and url polyfills
+    http: require.resolve('stream-http'),
     https: require.resolve('https-browserify'),
     url: require.resolve('url/'),
-    http: require.resolve('stream-http'),
 }
 
 const resolve = {
