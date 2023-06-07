@@ -38,6 +38,5 @@
 <Illustration illustration="{airdrop}-info-bg" classes="relative w-full rounded-2xl mb-7" />
 <div class="flex flex-col flex-wrap space-y-3">
     <Text type="p">{localize(`popups.${airdrop}-info.body1`)}</Text>
-    <Text type="p">{localize(`popups.${airdrop}-info.body2`)}</Text>
     <Link onClick={handleLearnMoreClick} classes="text-14">{localize('actions.visitWebsite')}</Link>
 </div>
