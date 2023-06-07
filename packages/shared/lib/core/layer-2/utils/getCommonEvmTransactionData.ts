@@ -1,5 +1,5 @@
 import Web3 from 'web3'
-import { ISC_MAGIC_CONTRACT_ADDRESS } from '@core/layer-2/constants'
+import { GAS_MULTIPLIER, ISC_MAGIC_CONTRACT_ADDRESS } from '@core/layer-2/constants'
 import { EvmTransactionData } from '@core/layer-2'
 
 export async function getCommonTransactionData(
@@ -13,7 +13,7 @@ export async function getCommonTransactionData(
     const gasPrice = '0x' + _gasPrice
 
     const estimatedGas = await provider.eth.estimateGas({ from: originAddress, to: ISC_MAGIC_CONTRACT_ADDRESS, data })
-    const gasLimit = provider.utils.toHex(2 * estimatedGas) // Double to ensure we have enough gas
+    const gasLimit = provider.utils.toHex(GAS_MULTIPLIER * estimatedGas) // Double to ensure we have enough gas
 
     const to = ISC_MAGIC_CONTRACT_ADDRESS
     const value = provider.utils.toHex(0)
