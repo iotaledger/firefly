@@ -1,4 +1,4 @@
-name: Build Desktop
+name: Build Desktop (v2)
 
 on:
     workflow_dispatch:
