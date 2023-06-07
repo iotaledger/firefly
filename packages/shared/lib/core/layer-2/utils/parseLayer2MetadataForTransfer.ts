@@ -63,7 +63,7 @@ function parseAssetAllowance(readStream: ReadStream): ILayer2AssetAllowance {
         for (let token = 0; token < tokenAmount; token++) {
             const tokenId = Converter.bytesToHex(readStream.readBytes('tokenId', TOKEN_ID_BYTE_LENGTH))
             const amount = readStream.readUInt256('tokenAmount').toString()
-            nativeTokens.push({ tokenId, amount })
+            nativeTokens.push({ ID: [tokenId], amount })
         }
 
         const nftAmount = readStream.readUInt16('nftAmount')
@@ -79,6 +79,6 @@ function parseAssetAllowance(readStream: ReadStream): ILayer2AssetAllowance {
             nfts,
         }
     } else {
-        return
+        throw new Error('Smart contract call data does not set the asset allowance!')
     }
 }
