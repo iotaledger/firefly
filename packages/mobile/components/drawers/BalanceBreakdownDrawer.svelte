@@ -142,7 +142,7 @@
     }
 </script>
 
-<div class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
+<div class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">
     <div class="flex flex-col space-y-8">
         {#each Object.keys(breakdown) as breakdownKey}
             <BalanceSummarySection

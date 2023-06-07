@@ -12,7 +12,7 @@
 
 <div
     class="
-        flex overflow-hidden flex-shrink-0 rounded-md items-center justify-center
+        flex overflow-hidden shrink-0 rounded-md items-center justify-center
         {nft?.downloadMetadata?.isLoaded ? '' : 'bg-gray-500'}
         {size === 'small' && 'w-6 h-6'}
         {size === 'medium' && 'w-8 h-8'}
