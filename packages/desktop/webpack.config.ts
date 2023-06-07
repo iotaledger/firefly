@@ -184,7 +184,7 @@ const rendererPlugins = [
         PRELOAD_SCRIPT: JSON.stringify(false),
         'process.env.APP_PROTOCOL': JSON.stringify(appProtocol),
     }),
-    // These are required for the ethereumjs libraries
+    // The ethereumjs libraries require the NormalModuleReplacementPlugin & the ProvidePlugin
     new NormalModuleReplacementPlugin(/node:/, (resource) => {
         resource.request = resource.request.replace(/^node:/, '')
     }),
