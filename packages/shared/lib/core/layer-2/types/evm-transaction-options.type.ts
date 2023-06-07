@@ -1,3 +1,3 @@
-import { IErc20EvmTransactionOptions } from '../interfaces'
+import { TxOptions } from '@ethereumjs/tx'
 
-export type EvmTransactionOptions = IErc20EvmTransactionOptions
+export type EvmTransactionOptions = TxOptions

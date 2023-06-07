@@ -1,8 +1,12 @@
 import Web3 from 'web3'
-import { TxData } from '@ethereumjs/tx'
 import { ISC_MAGIC_CONTRACT_ADDRESS } from '@core/layer-2/constants'
+import { EvmTransactionData } from '@core/layer-2'
 
-export async function getCommonTransactionData(provider: Web3, originAddress: string, data: string): Promise<TxData> {
+export async function getCommonTransactionData(
+    provider: Web3,
+    originAddress: string,
+    data: string
+): Promise<EvmTransactionData> {
     const nonce = provider.utils.toHex(await provider.eth.getTransactionCount(originAddress))
 
     const _gasPrice = await provider.eth.getGasPrice()

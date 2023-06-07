@@ -1,6 +1,6 @@
-import type { TxData } from '@ethereumjs/tx'
+import type { EvmTransactionData } from '@core/layer-2'
 
 export interface ILedger {
     generateEvmAddress(bip32Path: string, verify?: boolean): void
-    signEvmTransaction(data: TxData, bip32Path: string): void
+    signEvmTransaction(data: EvmTransactionData, bip32Path: string): void
 }
