@@ -41,7 +41,7 @@
                     darkColor="white"
                     fontWeight={FontWeight.semibold}
                     fontSize="15"
-                    classes="overflow-hidden whitespace-nowrap overflow-ellipsis"
+                    classes="overflow-hidden whitespace-nowrap text-ellipsis"
                 >
                     {asset?.metadata?.name ?? asset?.id}
                 </Text>

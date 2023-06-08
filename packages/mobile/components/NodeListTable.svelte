@@ -32,21 +32,21 @@
                 on:click={() => onNodeClick(node)}
             >
                 <div class="flex flex-row items-center space-x-4 overflow-hidden">
-                    <Text classes={'self-start overflow-hidden whitespace-nowrap overflow-ellipsis'}>
+                    <Text classes={'self-start overflow-hidden whitespace-nowrap text-ellipsis'}>
                         {node.url}
                     </Text>
                     {#if isPrimary(node)}
                         <Pill
                             data={localize('views.settings.configureNodeList.primaryNode').toLowerCase()}
                             textColor="blue-500"
-                            classes="flex-shrink-0"
+                            classes="shrink-0"
                         />
                     {/if}
                     {#if node?.disabled}
                         <Pill
                             data={localize('general.excluded').toLowerCase()}
                             textColor="red-500"
-                            classes="flex-shrink-0"
+                            classes="shrink-0"
                         />
                     {/if}
                 </div>
