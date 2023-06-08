@@ -1,6 +1,6 @@
-import { AccountBalance } from '@iota/wallet'
+import { Balance } from '@iota/wallet'
 
-export const MOCK_ACCOUNT_BALANCE: AccountBalance = {
+export const MOCK_ACCOUNT_BALANCE: Balance = {
     baseCoin: {
         total: '10000',
         available: '9000',

@@ -1,6 +1,6 @@
 import type { IAliasOutput, IBasicOutput, IFoundryOutput, INftOutput, OutputTypes } from '@iota/types'
 import {
-    AccountBalance,
+    Balance,
     AccountMetadata,
     Address,
     SendNativeTokensParams,
@@ -26,6 +26,9 @@ import {
     SignedTransactionEssence,
     Transaction,
     TransactionOptions,
+    EvmSignature,
+    GenerateAddressOptions,
+    SyncOptions,
 } from '@iota/wallet'
 
 import { IAccount } from '../../core/account'
@@ -35,7 +38,6 @@ import { MOCK_ADDRESS } from './address.mock'
 
 export class AccountMock implements IAccount {
     constructor() {}
-
     addresses(): Promise<[]> {
         return Promise.resolve([])
     }
@@ -108,7 +110,11 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    getBalance(): Promise<AccountBalance> {
+    generateEvmAddresses(generateAddressesOptions: GenerateAddressOptions): Promise<string[]> {
+        throw new Error('Method not implemented.')
+    }
+
+    getBalance(): Promise<Balance> {
         return Promise.resolve(MOCK_ACCOUNT_BALANCE)
     }
 
@@ -219,7 +225,7 @@ export class AccountMock implements IAccount {
         return Promise.resolve(MOCK_ADDRESS)
     }
 
-    generateAddresses(): Promise<Address[]> {
+    generateEd25519Addresses(): Promise<Address[]> {
         return Promise.resolve([MOCK_ADDRESS])
     }
 
@@ -257,6 +263,10 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
+    setDefaultSyncOptions(options: SyncOptions): Promise<void> {
+        throw new Error('Method not implemented.')
+    }
+
     sendAmount(params: SendAmountParams[], transactionOptions?: TransactionOptions): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
@@ -277,6 +287,10 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
+    signEvm(message: string, chain: number[]): Promise<EvmSignature> {
+        throw new Error('Method not implemented.')
+    }
+
     signTransactionEssence(preparedTransactionData: PreparedTransactionData): Promise<SignedTransactionEssence> {
         throw new Error('Method not implemented.')
     }
@@ -289,7 +303,7 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    sync(options?): Promise<AccountBalance> {
+    sync(options?): Promise<Balance> {
         throw new Error('Method not implemented.')
     }
 
