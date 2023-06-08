@@ -221,7 +221,7 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    generateAddress(): Promise<Address> {
+    generateEd25519Address(): Promise<Address> {
         return Promise.resolve(MOCK_ADDRESS)
     }
 

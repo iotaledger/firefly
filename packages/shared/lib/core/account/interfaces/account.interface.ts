@@ -68,7 +68,7 @@ export interface IAccount {
     deregisterParticipationEvent(eventId: string): Promise<void>
     destroyAlias(aliasId: string, transactionOptions?: TransactionOptions): Promise<Transaction>
     destroyFoundry(foundryId: string, transactionOptions?: TransactionOptions): Promise<Transaction>
-    generateAddress(options?: GenerateAddressOptions): Promise<Address>
+    generateEd25519Address(options?: GenerateAddressOptions): Promise<Address>
     generateEd25519Addresses(amount: number, options?: GenerateAddressOptions): Promise<Address[]>
     generateEvmAddresses(generateAddressesOptions: GenerateAddressOptions): Promise<string[]>
     getBalance(): Promise<Balance>
