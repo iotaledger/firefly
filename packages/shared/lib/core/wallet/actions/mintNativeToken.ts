@@ -6,7 +6,7 @@ import { Converter } from '@core/utils'
 import { MintNativeTokenParams } from '@iota/wallet'
 import { DEFAULT_TRANSACTION_OPTIONS } from '../constants'
 import { VerifiedStatus } from '../enums'
-import { buildPersistedAssetFromIrc30Metadata } from '../helpers'
+import { buildPersistedAssetFromMetadata } from '../helpers'
 import { IIrc30Metadata, IPersistedAsset } from '../interfaces'
 import { resetMintTokenDetails } from '../stores'
 import { addPersistedAsset } from '../stores/persisted-assets.store'
@@ -28,7 +28,7 @@ export async function mintNativeToken(
         }
 
         const mintTokenTransaction = await account.mintNativeToken(params, DEFAULT_TRANSACTION_OPTIONS)
-        const persistedAsset: IPersistedAsset = buildPersistedAssetFromIrc30Metadata(
+        const persistedAsset: IPersistedAsset = buildPersistedAssetFromMetadata(
             mintTokenTransaction.tokenId,
             metadata,
             { verified: true, status: VerifiedStatus.SelfVerified }
