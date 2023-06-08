@@ -38,6 +38,7 @@ import { MOCK_ADDRESS } from './address.mock'
 
 export class AccountMock implements IAccount {
     constructor() {}
+
     addresses(): Promise<[]> {
         return Promise.resolve([])
     }
@@ -116,6 +117,10 @@ export class AccountMock implements IAccount {
 
     getBalance(): Promise<Balance> {
         return Promise.resolve(MOCK_ACCOUNT_BALANCE)
+    }
+
+    getIncomingTransaction(transactionId: string): Promise<Transaction> {
+        throw new Error('Method not implemented.')
     }
 
     getFoundryOutput(tokenId: string): Promise<IFoundryOutput> {

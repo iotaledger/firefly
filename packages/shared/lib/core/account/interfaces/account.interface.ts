@@ -64,6 +64,7 @@ export interface IAccount {
     generateEvmAddresses(generateAddressesOptions: GenerateAddressOptions): Promise<string[]>
     getBalance(): Promise<Balance>
     getFoundryOutput(tokenId: string): Promise<IFoundryOutput>
+    getIncomingTransaction(transactionId: string): Promise<Transaction>
     getMetadata(): AccountMetadata
     getOutput(outputId: string): Promise<OutputData>
     getOutputsWithAdditionalUnlockConditions(outputs: OutputsToClaim): Promise<string[]>
