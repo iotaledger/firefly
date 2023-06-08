@@ -5,7 +5,7 @@ import { validateIrc30Metadata } from './validateIrc30Metadata'
 import { getMetadataFromFoundryOutput } from './getMetadataFromFoundryOutput'
 import { activeAccounts } from '@core/profile'
 
-export async function getIrc30MetadataFromFoundryOutput(tokenId: string): Promise<IIrc30Metadata> {
+export async function getIrc30MetadataFromFoundryOutput(tokenId: string): Promise<IIrc30Metadata | undefined> {
     try {
         const foundry = await get(activeAccounts)?.[0]?.getFoundryOutput(tokenId)
         const data = getMetadataFromFoundryOutput(foundry)

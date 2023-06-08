@@ -50,7 +50,7 @@
 </script>
 
 {#if assets}
-    <div class="asset-list h-full p-6 flex flex-auto flex-col flex-grow flex-shrink-0">
+    <div class="asset-list h-full p-6 flex flex-auto flex-col flex-grow shrink-0">
         <div class="w-full flex flex-row justify-between items-center mb-4">
             <Text classes="text-left" type={TextType.h5}>{localize('general.assets')}</Text>
             <Filter filterStore={assetFilter} />
