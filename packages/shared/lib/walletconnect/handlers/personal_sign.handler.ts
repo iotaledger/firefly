@@ -1,9 +1,18 @@
 import { Converter } from '@iota/util.js'
 import { openPopup, PopupId } from '../../../../desktop/lib/auxiliary/popup'
+import { JsonRpcResponse } from '@walletconnect/jsonrpc-types'
 
-export function handlePersonalSign(id: number, params: any, responseCallback: (response: any) => void): void {
+export function handlePersonalSign(
+    id: number,
+    params: unknown,
+    responseCallback: (response: JsonRpcResponse) => void
+): void {
+    if (typeof params !== 'string') {
+        responseCallback({ id, error: { code: 5000, message: 'Error' }, jsonrpc: '2.0' })
+        return
+    }
+
     const message = Converter.hexToUtf8(params)
-
     // sign the message
     // const signedMessage = await wallet.signMessage(message)
 
@@ -17,6 +26,6 @@ export function handlePersonalSign(id: number, params: any, responseCallback: (r
             description: 'Do you wanna sign the following message: ' + message,
             onConfirm: () => responseCallback(response),
             onCancel: () => responseCallback({ id, error: { code: 5000, message: 'User rejected' }, jsonrpc: '2.0' }),
-        }
+        },
     })
 }

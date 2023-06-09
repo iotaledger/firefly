@@ -1,4 +1,6 @@
-export async function pairWithWalletConnect(web3wallet: any, uri: string): Promise<void> {
+import { Web3Wallet } from '@walletconnect/web3wallet/dist/types/client'
+
+export async function pairWithWalletConnect(web3wallet: Web3Wallet, uri: string): Promise<void> {
     try {
         const topic = uri.split('@')[0]
 

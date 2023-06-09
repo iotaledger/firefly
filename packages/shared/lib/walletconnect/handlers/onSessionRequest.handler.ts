@@ -1,37 +1,41 @@
+import { Web3Wallet } from '@walletconnect/web3wallet/dist/types/client'
 import { handleEthSendTransaction } from './eth_sendTransaction.handler'
 import { handleEthSign } from './eth_sign.handler'
 import { handleEthSignTransaction } from './eth_signTransaction.handler'
 import { handleEthSignTypedData } from './eth_signTypedData.handler'
 import { handlePersonalSign } from './personal_sign.handler'
+import { JsonRpcResponse } from '@walletconnect/jsonrpc-types'
+import { Web3WalletTypes } from '@walletconnect/web3wallet'
 
-export function onSessionRequest(web3wallet: any, event: any): void {
+export function onSessionRequest(web3wallet: Web3Wallet, event: Web3WalletTypes.SessionRequest): void {
     const { topic, params, id } = event
-    const { request, chainId } = params
+    const { request } = params
+    // const chainId = params.chainId
     const method = request.method
     const requestParams = request.params[0]
-    const address = request.params[1]
+    // const address = request.params[1]
 
-    function returnResponse(response: any): void {
-        web3wallet.respondSessionRequest({ topic, response })
+    function returnResponse(response: JsonRpcResponse): void {
+        void web3wallet.respondSessionRequest({ topic, response })
     }
 
     switch (method) {
         case 'eth_sendTransaction':
             handleEthSendTransaction()
-            break;
+            break
         case 'eth_signTransaction':
             handleEthSignTransaction()
-            break;
+            break
         case 'eth_sign':
             handleEthSign()
-            break;
+            break
         case 'personal_sign':
             handlePersonalSign(id, requestParams, returnResponse)
-            break;
+            break
         case 'eth_signTypedData':
             handleEthSignTypedData()
-            break;
+            break
         default:
-            break;
+            break
     }
 }
