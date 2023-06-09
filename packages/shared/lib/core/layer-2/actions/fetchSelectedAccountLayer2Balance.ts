@@ -34,10 +34,12 @@ export function fetchSelectedAccountLayer2Balance(): void {
 
         for (const { balance, tokenId } of balances) {
             const isNativeToken = Converter.hexToBytes(tokenId.substring(2)).length === TOKEN_ID_BYTE_LENGTH
-
-            if (isNativeToken) {
-                const asset = await getOrRequestAssetFromPersistedAssets(tokenId)
-                addPersistedAsset(asset)
+            const isErc20TrackedToken = get(selectedAccount)?.trackedTokens?.[chainId]?.includes(tokenId)
+            if (isNativeToken || isErc20TrackedToken) {
+                const asset = await getOrRequestAssetFromPersistedAssets(tokenId, chainId)
+                if (asset) {
+                    addPersistedAsset(asset)
+                }
             }
             layer2Balance[tokenId] = balance
         }

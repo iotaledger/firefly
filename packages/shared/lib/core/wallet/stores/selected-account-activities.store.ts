@@ -1,5 +1,5 @@
 import { derived, Readable, writable, Writable } from 'svelte/store'
-import { isValidIrc30 } from '@core/token'
+import { isValidIrc30Token } from '@core/token'
 
 import { selectedAccount } from '../../account/stores/selected-account.store'
 import { Activity } from '../types/activity.type'
@@ -38,7 +38,7 @@ export const queriedActivities: Readable<Activity[]> = derived(
                 _activity.type === ActivityType.Basic || _activity.type === ActivityType.Foundry
                     ? getAssetFromPersistedAssets(_activity.assetId)
                     : undefined
-            const hasValidAsset = asset?.metadata && isValidIrc30(asset.metadata)
+            const hasValidAsset = asset?.metadata && isValidIrc30Token(asset.metadata)
             return !_activity.isHidden && hasValidAsset
         })
 
