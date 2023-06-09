@@ -215,6 +215,10 @@ export class Converter {
      * @returns The array.
      */
     public static hexToBytes(hex: string, reverse?: boolean): Uint8Array {
+        if (hex.startsWith('0x')) {
+            hex = hex.substring(2)
+        }
+
         const sizeof = hex?.length >> 1
         const length = sizeof << 1
         const array = new Uint8Array(sizeof)
