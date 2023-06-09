@@ -12,8 +12,6 @@ export function onSessionRequest(web3wallet: Web3Wallet, event: Web3WalletTypes.
     const { request } = params
     // const chainId = params.chainId
     const method = request.method
-    const requestParams = request.params[0]
-    // const address = request.params[1]
 
     function returnResponse(response: JsonRpcResponse): void {
         void web3wallet.respondSessionRequest({ topic, response })
@@ -21,7 +19,7 @@ export function onSessionRequest(web3wallet: Web3Wallet, event: Web3WalletTypes.
 
     switch (method) {
         case 'eth_sendTransaction':
-            handleEthSendTransaction()
+            handleEthSendTransaction(id, request.params, returnResponse)
             break
         case 'eth_signTransaction':
             handleEthSignTransaction()
@@ -30,7 +28,7 @@ export function onSessionRequest(web3wallet: Web3Wallet, event: Web3WalletTypes.
             handleEthSign()
             break
         case 'personal_sign':
-            handlePersonalSign(id, requestParams, returnResponse)
+            handlePersonalSign(id, request.params, returnResponse)
             break
         case 'eth_signTypedData':
             handleEthSignTypedData()

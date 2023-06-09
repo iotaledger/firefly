@@ -7,12 +7,20 @@ export function handlePersonalSign(
     params: unknown,
     responseCallback: (response: JsonRpcResponse) => void
 ): void {
-    if (typeof params !== 'string') {
+    if (!params || !Array.isArray(params)) {
         responseCallback({ id, error: { code: 5000, message: 'Error' }, jsonrpc: '2.0' })
         return
     }
 
-    const message = Converter.hexToUtf8(params)
+    const hexMessage = params[0]
+    // const address = params[1]
+
+    if (typeof hexMessage !== 'string') {
+        responseCallback({ id, error: { code: 5000, message: 'Error' }, jsonrpc: '2.0' })
+        return
+    }
+
+    const message = Converter.hexToUtf8(hexMessage)
     // sign the message
     // const signedMessage = await wallet.signMessage(message)
 
