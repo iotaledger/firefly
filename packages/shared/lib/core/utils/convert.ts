@@ -259,7 +259,7 @@ export class Converter {
      */
     public static hexToUtf8(hex: string): string {
         const bytes = Converter.hexToBytes(hex)
-        return Converter.bytesToUtf8(bytes)?.slice(1)
+        return Converter.bytesToUtf8(bytes)
     }
 
     public static decimalToHex(number: number, prefix = true): string {
