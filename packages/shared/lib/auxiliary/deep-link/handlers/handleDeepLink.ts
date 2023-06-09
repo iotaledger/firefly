@@ -5,13 +5,14 @@ import { visibleActiveAccounts } from '@core/profile/stores'
 import { dashboardRouter } from '@core/router/routers'
 import { DashboardRoute } from '@core/router/enums'
 
-import { initializeWalletConnect, resetDeepLink } from '../actions'
+import { resetDeepLink } from '../actions'
 import { DeepLinkContext } from '../enums'
 import { isDeepLinkRequestActive } from '../stores'
 
 import { handleDeepLinkGovernanceContext } from './governance/handleDeepLinkGovernanceContext'
 import { handleDeepLinkWalletContext } from './wallet/handleDeepLinkWalletContext'
 import { handleError } from '@core/error/handlers'
+import { initializeWalletConnect } from '@lib/walletconnect'
 
 /**
  * Parses an IOTA deep link, i.e. a URL that begins with the app protocol i.e "firefly://".
