@@ -27,6 +27,7 @@
     import ErrorLogPopup from './ErrorLogPopup.svelte'
     import FaucetRequestPopup from './FaucetRequestPopup.svelte'
     import ImportErc20TokenFormPopup from './ImportErc20TokenFormPopup.svelte'
+    import InitWalletConnectPopup from './InitWalletConnectPopup.svelte'
     import LedgerAppGuidePopup from './LedgerAppGuidePopup.svelte'
     import LedgerConnectionGuidePopup from './LedgerConnectionGuidePopup.svelte'
     import LegalUpdatePopup from './LegalUpdatePopup.svelte'
@@ -110,6 +111,7 @@
         [PopupId.ErrorLog]: ErrorLogPopup,
         [PopupId.FaucetRequest]: FaucetRequestPopup,
         [PopupId.ImportErc20Token]: ImportErc20TokenFormPopup,
+        [PopupId.InitWalletConnect]: InitWalletConnectPopup,
         [PopupId.LedgerAppGuide]: LedgerAppGuidePopup,
         [PopupId.LedgerConnection]: LedgerConnectionGuidePopup,
         [PopupId.LegalUpdate]: LegalUpdatePopup,
