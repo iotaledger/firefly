@@ -3,4 +3,5 @@ export enum NetworkId {
     Shimmer = 'shimmer',
     Testnet = 'testnet',
     Custom = 'custom',
+    Ethereum = 'ethereum',
 }
