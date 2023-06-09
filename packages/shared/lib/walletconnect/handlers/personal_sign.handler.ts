@@ -1,5 +1,5 @@
 import { Converter } from '@iota/util.js'
-import { openPopup, PopupId } from '../../../../desktop/lib/auxiliary/popup'
+import { closePopup, openPopup, PopupId } from '../../../../desktop/lib/auxiliary/popup'
 import { JsonRpcResponse } from '@walletconnect/jsonrpc-types'
 
 export function handlePersonalSign(
@@ -32,8 +32,14 @@ export function handlePersonalSign(
         props: {
             title: 'Personal Sign',
             description: 'Do you wanna sign the following message: ' + message,
-            onConfirm: () => responseCallback(response),
-            onCancel: () => responseCallback({ id, error: { code: 5000, message: 'User rejected' }, jsonrpc: '2.0' }),
+            onConfirm: () => {
+                responseCallback(response)
+                closePopup()
+            },
+            onCancel: () => {
+                responseCallback({ id, error: { code: 5000, message: 'User rejected' }, jsonrpc: '2.0' })
+                closePopup()
+            },
         },
     })
 }

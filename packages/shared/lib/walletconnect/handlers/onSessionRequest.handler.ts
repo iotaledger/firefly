@@ -1,4 +1,3 @@
-import { Web3Wallet } from '@walletconnect/web3wallet/dist/types/client'
 import { handleEthSendTransaction } from './eth_sendTransaction.handler'
 import { handleEthSign } from './eth_sign.handler'
 import { handleEthSignTransaction } from './eth_signTransaction.handler'
@@ -6,15 +5,17 @@ import { handleEthSignTypedData } from './eth_signTypedData.handler'
 import { handlePersonalSign } from './personal_sign.handler'
 import { JsonRpcResponse } from '@walletconnect/jsonrpc-types'
 import { Web3WalletTypes } from '@walletconnect/web3wallet'
+import { get } from 'svelte/store'
+import { walletClient } from '../stores'
 
-export function onSessionRequest(web3wallet: Web3Wallet, event: Web3WalletTypes.SessionRequest): void {
+export function onSessionRequest(event: Web3WalletTypes.SessionRequest): void {
     const { topic, params, id } = event
     const { request } = params
     // const chainId = params.chainId
     const method = request.method
 
     function returnResponse(response: JsonRpcResponse): void {
-        void web3wallet.respondSessionRequest({ topic, response })
+        void get(walletClient)?.respondSessionRequest({ topic, response })
     }
 
     switch (method) {

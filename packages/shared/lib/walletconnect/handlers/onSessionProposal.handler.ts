@@ -2,9 +2,10 @@ import { Web3WalletTypes } from '@walletconnect/web3wallet'
 import { SUPPORTED_EVENTS, SUPPORTED_METHODS } from '../constants'
 import { getAllEvmAddresses } from '../utils'
 import { buildApprovedNamespaces } from '@walletconnect/utils'
-import { Web3Wallet } from '@walletconnect/web3wallet/dist/types/client'
+import { get } from 'svelte/store'
+import { walletClient } from '../stores'
 
-export function onSessionProposal(web3wallet: Web3Wallet, sessionProposal: Web3WalletTypes.SessionProposal): void {
+export function onSessionProposal(sessionProposal: Web3WalletTypes.SessionProposal): void {
     const { id, params } = sessionProposal
 
     const chains = ['eip155:1']
@@ -22,5 +23,5 @@ export function onSessionProposal(web3wallet: Web3Wallet, sessionProposal: Web3W
         },
     })
 
-    web3wallet.approveSession({ id, namespaces: approvedNamespaces })
+    get(walletClient)?.approveSession({ id, namespaces: approvedNamespaces })
 }

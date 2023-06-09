@@ -48,6 +48,7 @@ import { logout } from './logout'
 import { subscribeToWalletApiEventsForActiveProfile } from './subscribeToWalletApiEventsForActiveProfile'
 import { checkAndUpdateActiveProfileNetwork } from './checkAndUpdateActiveProfileNetwork'
 import { checkAndRemoveProfilePicture } from './checkAndRemoveProfilePicture'
+import { initializeWalletConnect } from '@lib/walletconnect'
 
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const loginRouter = get(routerManager).getRouterForAppContext(AppContext.Login)
@@ -155,6 +156,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 void registerProposalsFromNodes(get(activeAccounts))
             }
             void cleanupOnboarding()
+            void initializeWalletConnect()
         } else {
             throw Error('No active profile error')
         }

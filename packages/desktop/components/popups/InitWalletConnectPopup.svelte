@@ -1,7 +1,7 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
     import { closePopup } from '@desktop/auxiliary/popup'
-    import { initializeWalletConnect } from '@lib/walletconnect'
+    import { pairWithNewApp } from '@lib/walletconnect/utils'
     import { Button, Text, TextInput, FontWeight, TextType } from 'shared/components'
 
     let wcUri: string
@@ -11,7 +11,7 @@
     }
 
     function onConnectClick(): void {
-        initializeWalletConnect(wcUri)
+        pairWithNewApp(wcUri)
         closePopup()
     }
 </script>
