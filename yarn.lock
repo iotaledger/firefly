@@ -401,10 +401,10 @@
   resolved "https://registry.npmjs.org/@capacitor/device/-/device-1.1.2.tgz"
   integrity sha512-1i6yvuSC7Ys7fs4JsUtfwG/00d2FF2TvWpbYs7YbkXhp1vOTL510gwjc5S6FTyhh8M9sAaUU5tKB68XwlSK/GA==
 
-"@capacitor/ios@3.4.1":
-  version "3.4.1"
-  resolved "https://registry.npmjs.org/@capacitor/ios/-/ios-3.4.1.tgz"
-  integrity sha512-ycFCyKI8DsgedVg7PW5MpCVgqFuD0PMHQGVfC5ichXc2C/jAATX32EVdEMCB0N3guKoH2k6T3Efwg59+Fcdx2w==
+"@capacitor/ios@5.0.4":
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/@capacitor/ios/-/ios-5.0.4.tgz#337a5a917b75a5b5d257bb0b08b6f1d7bb396241"
+  integrity sha512-JVyggBTbHR1OWqxTRysgGKhZHDuM0AQwCIbylvEpza5X0zmaltbQxVC83abcwOKsgNJnrcuv+HUgV+LXg8Dk4Q==
 
 "@capacitor/keyboard@^1.2.3":
   version "1.2.3"
@@ -7617,9 +7617,9 @@ nice-try@^1.0.4:
   integrity sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
 
 node-abi@^3.0.0, node-abi@^3.3.0, node-abi@^3.8.0:
-  version "3.43.0"
-  resolved "https://registry.yarnpkg.com/node-abi/-/node-abi-3.43.0.tgz#468dc09af3c262ef2fb3a0d2ff34cf8fba61952a"
-  integrity sha512-QB0MMv+tn9Ur2DtJrc8y09n0n6sw88CyDniWSX2cHW10goQXYPK9ZpFJOktDS4ron501edPX6h9i7Pg+RnH5nQ==
+  version "3.44.0"
+  resolved "https://registry.yarnpkg.com/node-abi/-/node-abi-3.44.0.tgz#4a3f066636454eb3ceed15a3842199ff97adff3b"
+  integrity sha512-MYjZTiAETGG28/7fBH1RjuY7vzDwYC5q5U4whCgM4jNEQcC0gAvN339LxXukmL2T2tGpzYTfp+LZ5RN7E5DwEg==
   dependencies:
     semver "^7.3.5"
 
