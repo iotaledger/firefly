@@ -14,7 +14,7 @@
         "force-install-pods": "cd ios/App && rm -rf ~/Library/Caches/CocoaPods Pods ~/Library/Developer/Xcode/DerivedData && pod deintegrate && pod install"
     },
     "devDependencies": {
-        "@capacitor/android": "3.4.1",
+        "@capacitor/android": "5.0.5",
         "@capacitor/cli": "^3.4.1",
         "@capacitor/core": "3.4.1",
         "@capacitor/ios": "3.4.1",
