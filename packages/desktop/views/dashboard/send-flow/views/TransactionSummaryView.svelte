@@ -3,7 +3,7 @@
     import { prepareOutput, selectedAccount } from '@core/account'
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
-    import { getDestinationNetworkFromAddress } from '@core/layer-2/utils'
+    import { getDestinationNetworkFromAddress, signIscpTransferTransactionData } from '@core/layer-2/utils'
     import { ledgerPreparedOutput } from '@core/ledger/stores'
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { activeProfile, isActiveLedgerProfile } from '@core/profile/stores'
@@ -17,7 +17,7 @@
         selectedAccountAssets,
         updateNewTransactionDetails,
     } from '@core/wallet/stores'
-    import { Output } from '@core/wallet/types'
+    import { type NewTokenTransactionDetails, Output } from '@core/wallet/types'
     import { getOutputParameters, getStorageDepositFromOutput, validateSendConfirmation } from '@core/wallet/utils'
     import type { OutputParams } from '@iota/wallet'
     import { AddInputButton, ExpirationTimePicker, OptionalInput } from '@ui'
@@ -27,6 +27,7 @@
     import SendFlowTemplate from './SendFlowTemplate.svelte'
     import TokenAmountTile from './components/TokenAmountTile.svelte'
     import TransactionDetails from './components/TransactionDetails.svelte'
+    import { network } from '@core/network'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -54,7 +55,7 @@
     let selectedExpirationPeriod: TimePeriod | undefined = expirationDate ? TimePeriod.Custom : undefined
     let selectedTimelockPeriod: TimePeriod | undefined = timelockDate ? TimePeriod.Custom : undefined
 
-    $: transactionDetails = get(newTransactionDetails)
+    $: transactionDetails = <NewTokenTransactionDetails>get(newTransactionDetails) 
     $: recipient =
         transactionDetails.recipient.type === 'account'
             ? transactionDetails.recipient.account.name
@@ -130,14 +131,40 @@
         closePopup()
     }
 
+    async function sendFromLayer1(): Promise<void> {
+        validateSendConfirmation(outputParams, preparedOutput)
+
+        if ($isActiveLedgerProfile) {
+            ledgerPreparedOutput.set(preparedOutput)
+        }
+        await checkActiveProfileAuth(sendOutputAndClosePopup, { stronghold: true, ledger: false })
+    }
+
+    async function sendFromLayer2(): Promise<void> {
+        const asset = transactionDetails.asset
+        const chain = asset?.chainId ? $network.getChain(asset.chainId) : undefined
+        if (!chain) {
+            return
+        }
+
+        const recipient = transactionDetails.recipient.type === 'address' ? transactionDetails.recipient.address : undefined
+        const amount = transactionDetails.rawAmount
+
+        // TODO: For ERC 20 Tokens we need to invoke its specific smartcontract
+        await signIscpTransferTransactionData(recipient, asset, amount)
+    }
+
     async function onConfirmClick(): Promise<void> {
         try {
-            validateSendConfirmation(outputParams, preparedOutput)
-
-            if ($isActiveLedgerProfile) {
-                ledgerPreparedOutput.set(preparedOutput)
+            const asset = transactionDetails.asset
+            if (asset) {
+                const isAssetFromLayer1 = !asset.chainId
+                if (isAssetFromLayer1) {
+                    await sendFromLayer1()  
+                } else {
+                    await sendFromLayer2()
+                }
             }
-            await checkActiveProfileAuth(sendOutputAndClosePopup, { stronghold: true, ledger: false })
         } catch (err) {
             handleError(err)
         }
