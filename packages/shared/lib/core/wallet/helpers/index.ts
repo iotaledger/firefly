@@ -1,1 +1,1 @@
-export * from './buildPersistedAssetFromIrc30Metadata'
+export * from './buildPersistedAssetFromMetadata'

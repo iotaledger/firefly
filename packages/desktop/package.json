@@ -37,6 +37,7 @@
         "@ledgerhq/logs": "^6.10.1",
         "@sentry/electron": "^2.5.4",
         "@types/webpack-dev-server": "^4.7.2",
+        "buffer": "^6.0.3",
         "dotenv": "^16.0.3",
         "electron-dl": "^3.5.0",
         "electron-log": "^4.3.1",

@@ -1,6 +1,4 @@
-import { ILayer2TransferAllowanceMetadata } from '../interfaces'
-
-type Layer2Metadata = Omit<ILayer2TransferAllowanceMetadata, 'baseTokenAmount' | 'nativeTokens'>
+import { Layer2Metadata } from '../types'
 
 export function parseLayer2Metadata(metadata: string): Layer2Metadata {
     const parsedData = JSON.parse(metadata)
