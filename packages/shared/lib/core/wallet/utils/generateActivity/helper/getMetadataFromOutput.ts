@@ -13,7 +13,7 @@ export function getMetadataFromOutput(output: Output): string {
     }
     if (data) {
         const isVotingOutput = isParticipationOutput(output)
-        const metadataBytes = Converter.hexToBytes(data.substring(2))
+        const metadataBytes = Converter.hexToBytes(data)
         const startValue = Number(data.substring(0, 10))
 
         // For smart contract calls the first 32 bits of the metadata

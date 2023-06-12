@@ -7,7 +7,7 @@ export function parseGovernanceMetadata(metadata: string): IParticipation[] {
         return []
     }
 
-    const readStream = new ReadStream(Converter.hexToBytes(metadata.substring(2)))
+    const readStream = new ReadStream(Converter.hexToBytes(metadata))
 
     const participations: IParticipation[] = []
     const amountParticipations = readStream.readUInt8('amountParticipations')

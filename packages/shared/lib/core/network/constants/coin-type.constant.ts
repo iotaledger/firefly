@@ -1,8 +1,9 @@
-import { ChainId, NetworkId } from '../enums'
+import { NetworkId } from '../enums'
 
-export const COIN_TYPE: Readonly<{ [key in NetworkId & ChainId]?: number }> = {
+export const COIN_TYPE: Readonly<{ [key in NetworkId]: number }> = {
     [NetworkId.Iota]: 4218,
     [NetworkId.Shimmer]: 4219,
+    [NetworkId.Ethereum]: 60,
     [NetworkId.Testnet]: 1,
-    [ChainId.ShimmerEVM]: 60,
+    [NetworkId.Custom]: 1,
 }

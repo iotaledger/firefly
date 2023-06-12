@@ -47,7 +47,7 @@
             on:click={() => onNavigationItemClick(item.tab)}
         >
             <Icon width={24} height={24} icon={item.icon} />
-            <span class="overflow-hidden overflow-ellipsis w-full">{item.label}</span>
+            <span class="overflow-hidden text-ellipsis w-full">{item.label}</span>
         </div>
     {/each}
 </tab-navigator>
