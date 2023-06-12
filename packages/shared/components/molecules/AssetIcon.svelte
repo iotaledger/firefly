@@ -4,7 +4,7 @@
     import { COIN_TYPE, NetworkId } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { isBright } from '@core/utils'
-    import { ANIMATED_TOKEN_IDS, getAssetInitials, IAsset } from '@core/wallet'
+    import { ANIMATED_TOKEN_IDS, getAssetInitials, IAsset, TokenStandard } from '@core/wallet'
     import { Animation, Icon, NetworkIconBadge, VerificationBadge } from 'shared/components'
 
     export let asset: IAsset
@@ -16,6 +16,7 @@
     let assetIconBackgroundColor: string
     let assetInitials: string
     let assetIconWrapperWidth: number
+    let assetLogoUrl: string
 
     $: isAnimation = asset.id in ANIMATED_TOKEN_IDS
     $: switch (asset.id) {
@@ -39,6 +40,7 @@
                 shades: ['500', '600', '700', '800'],
                 colorsToExclude: ['gray'],
             })
+            assetLogoUrl = asset?.metadata?.standard === TokenStandard.Irc30 ? asset?.metadata?.logoUrl ?? '' : ''
             icon = null
     }
 </script>
@@ -68,6 +70,8 @@
             />
         {:else if icon}
             <Icon {icon} width="80%" height="80%" classes="text-{assetIconColor ?? 'blue-500'} text-center" />
+        {:else if assetLogoUrl}
+            <img src={assetLogoUrl} alt="" class="w-full h-full" />
         {:else}
             <p
                 style={`font-size: ${Math.floor(
