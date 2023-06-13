@@ -82,7 +82,9 @@
     <AccountSwitcher />
 
     <div class="right-button flex justify-end gap-2">
-        <Button onClick={onConnectClick} size={ButtonSize.Small}>Connect</Button>
+        {#if features?.wallet?.walletConnect?.enabled}
+            <Button onClick={onConnectClick} size={ButtonSize.Small}>Connect</Button>
+        {/if}
         {#if features?.network?.config?.enabled}
             <NetworkDrawerButton />
         {/if}
