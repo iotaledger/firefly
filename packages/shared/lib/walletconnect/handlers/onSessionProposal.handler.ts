@@ -23,5 +23,5 @@ export function onSessionProposal(sessionProposal: Web3WalletTypes.SessionPropos
         },
     })
 
-    get(walletClient)?.approveSession({ id, namespaces: approvedNamespaces })
+    void get(walletClient)?.approveSession({ id, namespaces: approvedNamespaces })
 }

@@ -184,8 +184,6 @@ const rendererPlugins = [
         PRELOAD_SCRIPT: JSON.stringify(false),
         'process.env.APP_PROTOCOL': JSON.stringify(appProtocol),
         'process.env.WALLETCONNECT_PROJECT_ID': JSON.stringify(process.env.WALLETCONNECT_PROJECT_ID),
-
-
     }),
     // The ethereumjs libraries require the NormalModuleReplacementPlugin & the ProvidePlugin
     new NormalModuleReplacementPlugin(/node:/, (resource) => {
