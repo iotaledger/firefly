@@ -52,7 +52,7 @@ describe('File: network.ts', () => {
     describe('Function: getOfficialNodes', () => {
         it('should return the correct official nodes given a valid network type', () => {
             Object.values(NetworkId).forEach((networkId) => {
-                if ([NetworkId.Iota, NetworkId.Shimmer, NetworkId.Testnet].includes(networkId)) {
+                if (networkId !== NetworkId.Custom) {
                     expect(getOfficialNodes(networkId)).toEqual(
                         EXPECTED_NODE_URLS?.[networkId]?.map((url) => _buildNode(url))
                     )
