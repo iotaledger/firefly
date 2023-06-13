@@ -85,7 +85,7 @@
     </div>
     <span class="absolute flex justify-center items-center bottom-0 right-0">
         {#if asset.verification.verified === true}
-            <NetworkIconBadge width={10} height={10} network={$activeProfile.network} />
+            <NetworkIconBadge width={10} height={10} network={$activeProfile.network} chainId={asset.chainId} />
         {:else}
             <VerificationBadge status={asset.verification?.status} width={14} height={14} />
         {/if}
