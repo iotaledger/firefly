@@ -2,7 +2,7 @@ import { get } from 'svelte/store'
 import { Platform } from '@core/app/classes'
 import { addError } from '@core/error'
 import { activeAccounts, updateActiveAccount, updateActiveAccountPersistedData } from '@core/profile'
-import { deconstructBip32Path } from '@core/account'
+import { deconstructBip32Path, updateSelectedAccount } from '@core/account'
 import { ChainId, getNetwork } from '@core/network'
 import { closePopup } from '../../../../../desktop/lib/auxiliary/popup'
 
@@ -28,6 +28,7 @@ export function registerLedgerDeviceEventHandlers(): void {
         const provider = getNetwork()?.getChain(ChainId.ShimmerEVM)?.getProvider()
         if (provider) {
             void provider?.eth.sendSignedTransaction(signedTransaction)
+            updateSelectedAccount({ isTransferring: false })
             closePopup()
         }
     })

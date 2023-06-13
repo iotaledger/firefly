@@ -1,6 +1,6 @@
 <script lang="ts">
     import { closePopup } from '@desktop/auxiliary/popup'
-    import { prepareOutput, selectedAccount } from '@core/account'
+    import { prepareOutput, selectedAccount, updateSelectedAccount } from '@core/account'
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
     import { getDestinationNetworkFromAddress, signIscpTransferTransactionData } from '@core/layer-2/utils'
@@ -17,7 +17,7 @@
         selectedAccountAssets,
         updateNewTransactionDetails,
     } from '@core/wallet/stores'
-    import { type NewTokenTransactionDetails, Output } from '@core/wallet/types'
+    import { NewTokenTransactionDetails, Output } from '@core/wallet/types'
     import { getOutputParameters, getStorageDepositFromOutput, validateSendConfirmation } from '@core/wallet/utils'
     import type { OutputParams } from '@iota/wallet'
     import { AddInputButton, ExpirationTimePicker, OptionalInput } from '@ui'
@@ -55,7 +55,7 @@
     let selectedExpirationPeriod: TimePeriod | undefined = expirationDate ? TimePeriod.Custom : undefined
     let selectedTimelockPeriod: TimePeriod | undefined = timelockDate ? TimePeriod.Custom : undefined
 
-    $: transactionDetails = <NewTokenTransactionDetails>get(newTransactionDetails) 
+    $: transactionDetails = <NewTokenTransactionDetails>get(newTransactionDetails)
     $: recipient =
         transactionDetails.recipient.type === 'account'
             ? transactionDetails.recipient.account.name
@@ -151,6 +151,7 @@
         const amount = transactionDetails.rawAmount
 
         // TODO: For ERC 20 Tokens we need to invoke its specific smartcontract
+        updateSelectedAccount({ isTransferring: true })
         await signIscpTransferTransactionData(recipient, asset, amount)
     }
 
