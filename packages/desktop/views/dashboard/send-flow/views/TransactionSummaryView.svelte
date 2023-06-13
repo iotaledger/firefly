@@ -1,15 +1,12 @@
 <script lang="ts">
     import { closePopup } from '@desktop/auxiliary/popup'
-    import { prepareOutput, selectedAccount, updateSelectedAccount } from '@core/account'
+    import { prepareOutput, selectedAccount } from '@core/account'
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
-    import { getDestinationNetworkFromAddress, signIscpTransferTransactionData } from '@core/layer-2/utils'
-    import { ledgerPreparedOutput } from '@core/ledger/stores'
-    import { checkActiveProfileAuth } from '@core/profile/actions'
-    import { activeProfile, isActiveLedgerProfile } from '@core/profile/stores'
+    import { getDestinationNetworkFromAddress } from '@core/layer-2/utils'
+    import { activeProfile } from '@core/profile/stores'
     import { truncateString } from '@core/utils'
     import { TimePeriod } from '@core/utils/enums'
-    import { sendOutput } from '@core/wallet/actions'
     import { DEFAULT_TRANSACTION_OPTIONS } from '@core/wallet/constants'
     import {
         NewTransactionType,
@@ -18,8 +15,7 @@
         updateNewTransactionDetails,
     } from '@core/wallet/stores'
     import { Output } from '@core/wallet/types'
-    import { getOutputParameters, getStorageDepositFromOutput, validateSendConfirmation } from '@core/wallet/utils'
-    import type { OutputParams } from '@iota/wallet'
+    import { createTransaction, getOutputParameters, getStorageDepositFromOutput } from '@core/wallet/utils'
     import { AddInputButton, ExpirationTimePicker, OptionalInput } from '@ui'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
@@ -27,7 +23,6 @@
     import SendFlowTemplate from './SendFlowTemplate.svelte'
     import TokenAmountTile from './components/TokenAmountTile.svelte'
     import TransactionDetails from './components/TransactionDetails.svelte'
-    import { network } from '@core/network'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -47,7 +42,6 @@
     let storageDeposit = 0
     let visibleSurplus = 0
     let preparedOutput: Output
-    let outputParams: OutputParams
     let expirationTimePicker: ExpirationTimePicker
     let metadataInput: OptionalInput
     let tagInput: OptionalInput
@@ -56,6 +50,7 @@
     let selectedTimelockPeriod: TimePeriod | undefined = timelockDate ? TimePeriod.Custom : undefined
 
     $: transactionDetails = get(newTransactionDetails)
+    $: asset = transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.asset : undefined
     $: recipient =
         transactionDetails.recipient.type === 'account'
             ? transactionDetails.recipient.account.name
@@ -92,9 +87,7 @@
     }
 
     async function prepareTransactionOutput(): Promise<void> {
-        const transactionDetails = get(newTransactionDetails)
-
-        outputParams = getOutputParameters(transactionDetails)
+        const outputParams = getOutputParameters(transactionDetails)
         preparedOutput = await prepareOutput($selectedAccount.index, outputParams, DEFAULT_TRANSACTION_OPTIONS)
 
         setStorageDeposit(preparedOutput, Number(surplus))
@@ -126,53 +119,12 @@
         }
     }
 
-    async function sendOutputAndClosePopup(): Promise<void> {
-        await sendOutput(preparedOutput)
-        closePopup()
-    }
-
-    async function sendFromLayer1(): Promise<void> {
-        validateSendConfirmation(outputParams, preparedOutput)
-
-        if ($isActiveLedgerProfile) {
-            ledgerPreparedOutput.set(preparedOutput)
-        }
-        await checkActiveProfileAuth(sendOutputAndClosePopup, { stronghold: true, ledger: false })
-    }
-
-    async function sendFromLayer2(): Promise<void> {
-        if (transactionDetails.type !== NewTransactionType.TokenTransfer) {
-            return
-        }
-        const asset = transactionDetails.asset
-        const chain = asset?.chainId ? $network.getChain(asset.chainId) : undefined
-        if (!chain) {
-            return
-        }
-
-        const recipient =
-            transactionDetails.recipient.type === 'address' ? transactionDetails.recipient.address : undefined
-        const amount = transactionDetails.rawAmount
-
-        // TODO: For ERC 20 Tokens we need to invoke its specific smartcontract
-        updateSelectedAccount({ isTransferring: true })
-        await signIscpTransferTransactionData(recipient, asset, amount)
-    }
-
     async function onConfirmClick(): Promise<void> {
         if (transactionDetails.type !== NewTransactionType.TokenTransfer) {
             return
         }
         try {
-            const asset = transactionDetails.asset
-            if (asset) {
-                const isAssetFromLayer1 = !asset.chainId
-                if (isAssetFromLayer1) {
-                    await sendFromLayer1()
-                } else {
-                    await sendFromLayer2()
-                }
-            }
+            await createTransaction(transactionDetails, $selectedAccount.index, () => closePopup())
         } catch (err) {
             handleError(err)
         }
@@ -204,7 +156,7 @@
 >
     <div class="flex flex-row gap-2 justify-between">
         {#if transactionDetails.type === NewTransactionType.TokenTransfer}
-            <TokenAmountTile asset={transactionDetails.asset} amount={transactionDetails.rawAmount} />
+            <TokenAmountTile {asset} amount={transactionDetails.rawAmount} />
         {/if}
         {#if visibleSurplus}
             <TokenAmountTile
