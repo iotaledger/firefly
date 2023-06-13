@@ -65,9 +65,7 @@ const incomingExpiredTimelockedCondition: UnlockConditionTypes[] = [
 
 jest.mock('../../wallet/utils/convertHexAddressToBech32.ts', () => ({
     convertHexAddressToBech32: jest.fn((addressType: number, hexAddress: string) => {
-        return hexAddress
-            ? Bech32Helper.toBech32(addressType, Converter.hexToBytes(hexAddress.substring(2)), 'rms')
-            : undefined
+        return hexAddress ? Bech32Helper.toBech32(addressType, Converter.hexToBytes(hexAddress), 'rms') : undefined
     }),
 }))
 

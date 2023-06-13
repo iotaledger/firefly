@@ -2,7 +2,13 @@ import { DateFilterOption, NumberFilterOption, OrderOption } from '@core/utils/e
 import { DateFilterInput } from './date-filter-input.interface'
 import { NumberFilterInput } from './number-filter-input.interface'
 
-export type FilterUnit = SelectionFilterUnit | NumberFilterUnit | AssetFilterUnit | DateFilterUnit | OrderFilterUnit
+export type FilterUnit =
+    | SelectionFilterUnit
+    | NumberFilterUnit
+    | AssetFilterUnit
+    | DateFilterUnit
+    | OrderFilterUnit
+    | NetworkFilterUnit
 
 export type BooleanFilterUnit = {
     type: 'boolean'
@@ -55,4 +61,12 @@ export type AssetFilterUnit = {
     labelKey?: string
     localeKey: string
     selected: string
+}
+
+export type NetworkFilterUnit = {
+    type: 'network'
+    active: boolean
+    labelKey?: string
+    localeKey: string
+    selected: number
 }
