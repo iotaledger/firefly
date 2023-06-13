@@ -17,7 +17,7 @@
         selectedAccountAssets,
         updateNewTransactionDetails,
     } from '@core/wallet/stores'
-    import { NewTokenTransactionDetails, Output } from '@core/wallet/types'
+    import { Output } from '@core/wallet/types'
     import { getOutputParameters, getStorageDepositFromOutput, validateSendConfirmation } from '@core/wallet/utils'
     import type { OutputParams } from '@iota/wallet'
     import { AddInputButton, ExpirationTimePicker, OptionalInput } from '@ui'
@@ -55,7 +55,7 @@
     let selectedExpirationPeriod: TimePeriod | undefined = expirationDate ? TimePeriod.Custom : undefined
     let selectedTimelockPeriod: TimePeriod | undefined = timelockDate ? TimePeriod.Custom : undefined
 
-    $: transactionDetails = <NewTokenTransactionDetails>get(newTransactionDetails)
+    $: transactionDetails = get(newTransactionDetails)
     $: recipient =
         transactionDetails.recipient.type === 'account'
             ? transactionDetails.recipient.account.name
@@ -141,13 +141,17 @@
     }
 
     async function sendFromLayer2(): Promise<void> {
+        if (transactionDetails.type !== NewTransactionType.TokenTransfer) {
+            return
+        }
         const asset = transactionDetails.asset
         const chain = asset?.chainId ? $network.getChain(asset.chainId) : undefined
         if (!chain) {
             return
         }
 
-        const recipient = transactionDetails.recipient.type === 'address' ? transactionDetails.recipient.address : undefined
+        const recipient =
+            transactionDetails.recipient.type === 'address' ? transactionDetails.recipient.address : undefined
         const amount = transactionDetails.rawAmount
 
         // TODO: For ERC 20 Tokens we need to invoke its specific smartcontract
@@ -156,12 +160,15 @@
     }
 
     async function onConfirmClick(): Promise<void> {
+        if (transactionDetails.type !== NewTransactionType.TokenTransfer) {
+            return
+        }
         try {
             const asset = transactionDetails.asset
             if (asset) {
                 const isAssetFromLayer1 = !asset.chainId
                 if (isAssetFromLayer1) {
-                    await sendFromLayer1()  
+                    await sendFromLayer1()
                 } else {
                     await sendFromLayer2()
                 }
