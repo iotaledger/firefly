@@ -17,7 +17,7 @@
         "husky": "^7.0.0",
         "lint-staged": "^12.3.3",
         "node-hid": "^2.1.2",
-        "patch-package": "^6.4.7",
+        "patch-package": "^7.0.0",
         "prettier": "^2.3.2",
         "prettier-plugin-svelte": "^2.7.0",
         "retypeapp": "^2.3.0"
