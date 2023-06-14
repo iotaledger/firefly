@@ -1,12 +1,11 @@
-import { network } from '@core/network'
+import { getNetwork } from '@core/network'
 import { IAsset } from '../../interfaces'
 import { NewTokenTransactionDetails } from '../../types'
-import { get } from 'svelte/store'
 import { getOutputParameters } from '../getOutputParameters'
 import { prepareOutput, updateSelectedAccount } from '@core/account'
 import { DEFAULT_TRANSACTION_OPTIONS } from '../../constants'
 import { validateSendConfirmation } from '.'
-import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
+import { checkActiveProfileAuth, getIsActiveLedgerProfile } from '@core/profile'
 import { signIscpTransferTransactionData } from '@core/layer-2'
 import { ledgerPreparedOutput } from '@core/ledger'
 import { sendOutput } from '../../actions'
@@ -39,7 +38,7 @@ async function sendFromLayer1(
 
     validateSendConfirmation(preparedOutput)
 
-    if (get(isActiveLedgerProfile)) {
+    if (getIsActiveLedgerProfile()) {
         ledgerPreparedOutput.set(preparedOutput)
     }
 
@@ -53,7 +52,7 @@ async function sendFromLayer1(
 }
 
 async function sendFromLayer2(transactionDetails: NewTokenTransactionDetails, asset: IAsset): Promise<void> {
-    const chain = asset.chainId ? get(network)?.getChain(asset.chainId) : undefined
+    const chain = asset.chainId ? getNetwork()?.getChain(asset.chainId) : undefined
     if (!chain || transactionDetails.recipient?.type !== 'address') {
         return
     }
