@@ -6,7 +6,7 @@ export class InvalidAddressError extends BaseError {
         const message = localize('error.send.invalidAddress')
         super({
             message,
-            showNotification: true,
+            showNotification: false,
             saveToErrorLog: false,
             logToConsole: true,
         })

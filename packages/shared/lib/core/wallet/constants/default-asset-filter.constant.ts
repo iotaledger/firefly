@@ -12,6 +12,12 @@ export const DEFAULT_ASSET_FILTER: AssetFilter = {
             .map((status) => String(status))
             .concat(Object.values(VerifiedStatus).map((status) => String(status))),
     },
+    network: {
+        active: false,
+        type: 'network',
+        localeKey: 'filters.network',
+        selected: -1,
+    },
     showHidden: {
         active: false,
         type: 'selection',

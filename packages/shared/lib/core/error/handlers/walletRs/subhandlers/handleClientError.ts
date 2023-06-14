@@ -1,38 +1,44 @@
+import { handleLedgerError } from '@core/ledger/utils'
+import { LedgerError } from '@core/ledger/enums'
+
 import { WALLET_RS_ERROR_PARAMETERS, CLIENT_ERROR_REGEXES } from '../../../constants'
 import { ClientError, WalletRsError } from '../../../enums'
 import { IError } from '../../../interfaces'
 import { logAndNotifyError } from '../../../actions'
 import { handleGenericError } from '../../handleGenericError'
-import { LedgerError, handleLedgerError } from '@core/ledger'
+import { handleInsufficientFundsError } from './handleInsufficientFundsError'
 
 export function handleClientError(error: IError, resetConfirmationPropsOnDenial = true): void {
     const errorMessage = error?.error
-    let errorKey
     if (errorMessage) {
         switch (true) {
             case CLIENT_ERROR_REGEXES[ClientError.NoSyncedNode].test(errorMessage):
-                errorKey = ClientError.NoSyncedNode
-                break
+                replaceErrorKeyAndHandle(error, ClientError.NoSyncedNode)
+                return
             case CLIENT_ERROR_REGEXES[ClientError.TimeNotSynced].test(errorMessage):
-                errorKey = ClientError.TimeNotSynced
-                break
+                replaceErrorKeyAndHandle(error, ClientError.TimeNotSynced)
+                return
             case CLIENT_ERROR_REGEXES[ClientError.InsufficientAmount].test(errorMessage):
-                errorKey = ClientError.InsufficientAmount
-                break
+                handleInsufficientFundsError({ type: ClientError.InsufficientAmount })
+                return
             case Object.values(LedgerError).some((ledgerError) => errorMessage.includes(ledgerError)):
                 handleLedgerError(error, resetConfirmationPropsOnDenial)
                 return
-        }
-        if (errorKey) {
-            const errorObject = WALLET_RS_ERROR_PARAMETERS?.[WalletRsError.Client]?.[errorKey]
-            if (errorObject) {
-                logAndNotifyError({ ...errorObject, message: errorMessage, type: error.type })
-            } else {
+            default:
                 handleGenericError(error)
-            }
-        } else {
-            handleGenericError(error)
+                return
         }
+    } else {
+        handleGenericError(error)
+    }
+}
+
+function replaceErrorKeyAndHandle(error: IError, errorKey: ClientError): void {
+    const errorObject = WALLET_RS_ERROR_PARAMETERS?.[WalletRsError.Client]?.[errorKey]
+
+    // Condition error.error is always satisfied, since this is checked on l.11
+    if (errorObject && error.error) {
+        logAndNotifyError({ ...errorObject, message: error.error, type: error.type })
     } else {
         handleGenericError(error)
     }

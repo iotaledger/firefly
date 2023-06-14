@@ -1,5 +1,5 @@
 import { IAccount } from '@core/account'
-import { handleLedgerError } from '@core/ledger'
+import { handleLedgerError } from '@core/ledger/utils'
 import { createAccount, getAccounts, profileManager } from '@core/profile-manager'
 import { sortAccountsByIndex, zip } from '@core/utils'
 import { get } from 'svelte/store'

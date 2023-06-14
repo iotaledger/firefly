@@ -21,7 +21,8 @@ import {
     UnknownAssetError,
 } from '../../../errors'
 import { getRawAmountFromSearchParam } from '../../../utils'
-import { getNetworkHrp } from '@core/profile'
+import { getNetworkHrp } from '@core/profile/actions'
+import { getActiveNetworkId } from '@core/network/utils/getNetworkId'
 
 export function handleDeepLinkSendConfirmationOperation(searchParams: URLSearchParams): void {
     const transactionDetails = parseSendConfirmationOperation(searchParams)
@@ -61,8 +62,10 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): NewTrans
 
     const assetId = searchParams.get(SendOperationParameter.AssetId)
     assetId && validateAssetId(assetId)
-    const baseAsset = get(selectedAccountAssets).baseCoin
-    const asset = assetId ? getAssetById(assetId) : baseAsset
+
+    const networkId = getActiveNetworkId()
+    const baseAsset = networkId ? get(selectedAccountAssets)[networkId].baseCoin : undefined
+    const asset = assetId && networkId ? getAssetById(assetId, networkId) : baseAsset
     if (!asset) {
         throw new UnknownAssetError()
     }

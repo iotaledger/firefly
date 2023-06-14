@@ -169,6 +169,8 @@ const CapacitorApi: Partial<IPlatform> = {
         const { value } = await Device.getLanguageCode()
         return value
     },
+
+    updateTheme: () => new Promise<void>(() => {}),
 }
 
 window['__CAPACITOR__'] = CapacitorApi

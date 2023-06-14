@@ -20,7 +20,7 @@
     }
 </script>
 
-<account-switcher-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
+<account-switcher-popup class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">
     <Text type="h3" fontWeight={FontWeight.semibold} classes="text-left">
         {localize('popups.deeplinkAccountSwitch.title')}
     </Text>

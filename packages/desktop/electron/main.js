@@ -6,7 +6,17 @@ import { shouldReportError } from './lib/errorHandling'
 import { initialiseAnalytics } from './lib/analytics'
 import { getMachineId } from './lib/machineId'
 import { getDiagnostics } from './lib/diagnostics'
-const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session, utilityProcess } = require('electron')
+const {
+    app,
+    dialog,
+    ipcMain,
+    protocol,
+    shell,
+    BrowserWindow,
+    session,
+    utilityProcess,
+    nativeTheme,
+} = require('electron')
 const path = require('path')
 const fs = require('fs')
 const Keychain = require('./lib/keychain')
@@ -270,7 +280,7 @@ function createWindow() {
     })
 
     windows.main.on('closed', () => {
-        ledgerProcess.kill()
+        ledgerProcess?.kill()
         windows.main = null
     })
 
@@ -320,7 +330,7 @@ ipcMain.on('start-ledger-process', () => {
                     windows.main.webContents.send('evm-address', data)
                 }
                 if (data?.signedTransaction) {
-                    windows.main.webContents.send('evm-signature', data)
+                    windows.main.webContents.send('evm-signed-transaction', data)
                 } else {
                     /* eslint-disable-next-line no-console */
                     console.log('Unhandled Ledger Message: ', message)
@@ -331,7 +341,7 @@ ipcMain.on('start-ledger-process', () => {
 })
 
 ipcMain.on('kill-ledger-process', () => {
-    ledgerProcess.kill()
+    ledgerProcess?.kill()
 })
 
 ipcMain.on('generate-evm-address', (_e, bip32Path, verify) => {
@@ -339,7 +349,7 @@ ipcMain.on('generate-evm-address', (_e, bip32Path, verify) => {
 })
 
 ipcMain.on('sign-evm-transaction', (_e, data, bip32Path) => {
-    ledgerProcess.postMessage({ method: 'sign-evm-transaction', parameters: [data, bip32Path] })
+    ledgerProcess?.postMessage({ method: 'sign-evm-transaction', parameters: [data, bip32Path] })
 })
 
 /**
@@ -470,6 +480,7 @@ ipcMain.handle('get-machine-id', (_e) => getMachineId())
 
 // Settings
 ipcMain.handle('update-app-settings', (_e, settings) => updateSettings(settings))
+ipcMain.handle('update-theme', (_e, theme) => (nativeTheme.themeSource = theme))
 
 /**
  * Define deep link state

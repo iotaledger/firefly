@@ -1,5 +1,3 @@
-export * from './getSelectedAccountLayer2Tokens'
-export * from './getSelectedAccountWrappedNativeTokens'
-export * from './importErc20Token'
+export * from './fetchSelectedAccountLayer2Balance'
 export * from './loadEvmAddressForSelectedAccount'
-export * from './pollLayer2NativeAssets'
+export * from './pollLayer2Tokens'

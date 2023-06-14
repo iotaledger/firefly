@@ -10,6 +10,7 @@
     import { closePopup, openPopup, PopupId, popupState } from '@desktop/auxiliary/popup'
     import { onMount } from 'svelte'
     import { isAccountVoting } from '@contexts/governance/utils'
+    import { activeProfile } from '@core/profile'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let newVotingPower: string = undefined
@@ -19,7 +20,7 @@
     let rawAmount = newVotingPower ?? $selectedAccount?.votingPower
     let confirmDisabled = false
 
-    $: asset = $visibleSelectedAccountAssets?.baseCoin
+    $: asset = $visibleSelectedAccountAssets[$activeProfile?.network.id].baseCoin
     $: votingPower = parseInt($selectedAccount?.votingPower, 10)
     $: hasTransactionInProgress =
         $selectedAccount?.hasVotingPowerTransactionInProgress ||

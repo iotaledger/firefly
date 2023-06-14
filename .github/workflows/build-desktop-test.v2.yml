@@ -1,9 +1,9 @@
-name: Desktop Build Test
+name: Build Desktop Test (v2)
 
 on:
   schedule:
-    # 12:00AM (UTC) Sunday TODO
-    - cron: '25 16 * * THU'
+    # 12:00AM (UTC) Sunday
+    - cron: '0 0 * * SUN'
 
 jobs:
   build:
@@ -14,8 +14,8 @@ jobs:
         os: [ ubuntu-20.04, macos-11, windows-2019 ]
       fail-fast: true
     env:
-      VERSION: "2.1.3-test"
-      STAGE: "prod"
+      VERSION: '2.1.3-test'
+      STAGE: 'prod'
 
     steps:
       - uses: actions/checkout@v2

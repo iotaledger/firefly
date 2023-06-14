@@ -4,7 +4,7 @@
     import { marketCoinPrices } from '@core/market'
     import {
         getAccountAssetsForSelectedAccount,
-        IAccountAssets,
+        AccountAssets,
         IAsset,
         newTransactionDetails,
         NewTransactionType,
@@ -24,16 +24,25 @@
     let assetList: IAsset[]
     let searchValue: string = ''
 
-    let assets: IAccountAssets
+    let assets: AccountAssets
     $: assets = getAccountAssetsForSelectedAccount($marketCoinPrices)
     $: assets, searchValue, setFilteredAssetList()
 
-    function setFilteredAssetList(): void {
-        if (!assets) {
-            assetList = []
-        } else {
-            assetList = [assets.baseCoin, ...assets.nativeTokens].filter(isVisibleAsset)
+    function getAssetList(): IAsset[] {
+        const list = []
+        for (const assetsPerNetwork of Object.values(assets)) {
+            if (assetsPerNetwork?.baseCoin) {
+                list.push(assetsPerNetwork.baseCoin)
+            }
+            list.push(...(assetsPerNetwork?.nativeTokens ?? []))
         }
+        return list
+    }
+
+    function setFilteredAssetList(): void {
+        const list = getAssetList()
+
+        assetList = list.filter(isVisibleAsset)
         if (!assetList.some((asset) => asset.id === selectedAsset?.id)) {
             selectedAsset = undefined
         }
@@ -75,7 +84,11 @@
     <div class="-mr-3">
         <div class="asset-list w-full flex flex-col -mr-1 pr-1.5 gap-2">
             {#each assetList as asset}
-                <AssetTile {asset} onClick={() => (selectedAsset = asset)} selected={selectedAsset?.id === asset.id} />
+                <AssetTile
+                    {asset}
+                    onClick={() => (selectedAsset = asset)}
+                    selected={selectedAsset?.id === asset.id && selectedAsset?.chainId === asset?.chainId}
+                />
             {/each}
         </div>
     </div>

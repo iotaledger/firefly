@@ -1,4 +1,4 @@
-import { isParticipationOutput } from '@contexts/governance'
+import { isParticipationOutput } from '@contexts/governance/utils'
 import { GovernanceAction } from '@core/wallet/enums'
 import { IParticipation, IWrappedOutput } from '@core/wallet/interfaces'
 import { Output } from '@core/wallet/types'
