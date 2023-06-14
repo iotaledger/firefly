@@ -61,10 +61,6 @@
 
     $: void handleCrashReporting($appSettings.sendCrashReports)
 
-    $: $appSettings.darkMode
-        ? document.body.classList.add('scheme-dark')
-        : document.body.classList.remove('scheme-dark')
-
     $: {
         if ($isLocaleLoaded) {
             Platform.updateMenu('strings', getLocalisedMenuItems($_ as Locale))
@@ -78,6 +74,8 @@
     $: isDashboardVisible = $appRoute === AppRoute.Dashboard && $hasLoadedAccounts && $popupState.id !== 'busy'
 
     $: $nftDownloadQueue, downloadNextNftInQueue()
+
+    $: Platform.updateTheme($appSettings.theme)
 
     let splash = true
     let settings = false
@@ -178,7 +176,6 @@
         class="block fixed left-0 right-0 bottom-0 z-50 top-0"
         class:top-placement={isWindows || isDashboardVisible}
     >
-        <div class="scheme-dark" />
         {#if !$isLocaleLoaded || splash}
             <Splash />
         {:else}
@@ -217,7 +214,7 @@
     @import '../shared/style/style.scss';
     html,
     body {
-        @apply bg-white;
+        @apply bg-white dark:bg-gray-900;
         @apply select-none;
         -webkit-user-drag: none;
 
@@ -256,11 +253,8 @@
             overflow-y: overlay;
         }
 
-        &.scheme-dark {
-            @apply bg-gray-900;
-            :global(::-webkit-scrollbar-thumb) {
-                @apply border-gray-900;
-            }
+        :global(::-webkit-scrollbar-thumb) {
+            @apply dark:border-gray-900;
         }
 
         .multiwrap-line2 {

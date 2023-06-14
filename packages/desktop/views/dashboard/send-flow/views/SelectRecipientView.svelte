@@ -1,14 +1,21 @@
 <script lang="ts">
     import { selectedAccount } from '@core/account/stores'
     import { localize } from '@core/i18n'
-    import { ChainType, IIscpChainConfiguration, network } from '@core/network'
-    import { NewTransactionType, newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'
+    import { ChainType, IChain, IIscpChainConfiguration, network } from '@core/network'
+    import {
+        IAsset,
+        NewTokenTransactionDetails,
+        NewTransactionType,
+        TokenStandard,
+        newTransactionDetails,
+        updateNewTransactionDetails,
+    } from '@core/wallet'
+    import { closePopup } from '@desktop/auxiliary/popup'
     import features from '@features/features'
     import { INetworkRecipientSelectorOption, NetworkRecipientSelector } from '@ui'
     import { onMount } from 'svelte'
     import { sendFlowRouter } from '../send-flow.router'
     import SendFlowTemplate from './SendFlowTemplate.svelte'
-    import { closePopup } from '@desktop/auxiliary/popup'
 
     let networkAddress = $newTransactionDetails?.layer2Parameters?.networkAddress
     let selectorOptions: INetworkRecipientSelectorOption[] = []
@@ -35,27 +42,8 @@
             return
         }
 
-        // L1 networks, hardcoded Shimmer
-        const mainNetworkOption = {
-            name: $network.getMetadata().name,
-            networkAddress: '',
-            recipient: undefined,
-        }
-
-        // L2 networks, ISCP only for now
-        const iscpNetworkChains = features?.network?.layer2?.enabled
-            ? $network.getChains().filter((chain) => chain.getConfiguration()?.type === ChainType.Iscp)
-            : []
-        const iscpNetworkChainsOptions = iscpNetworkChains.map((chain) => {
-            const chainConfiguration = chain.getConfiguration() as IIscpChainConfiguration
-            return {
-                name: chainConfiguration.name,
-                networkAddress: chainConfiguration?.aliasAddress,
-                recipient: undefined,
-            }
-        })
-
-        selectorOptions = [mainNetworkOption, ...iscpNetworkChainsOptions]
+        const asset = ($newTransactionDetails as NewTokenTransactionDetails).asset
+        selectorOptions = getCompatibleAssetTransferNetworks(asset)
         selectedIndex =
             networkAddress && selectorOptions.length
                 ? selectorOptions.findIndex((option) => option.networkAddress === networkAddress)
@@ -96,6 +84,50 @@
             closePopup()
         } else {
             $sendFlowRouter.previous()
+        }
+    }
+
+    function getCompatibleAssetTransferNetworks(asset: IAsset): INetworkRecipientSelectorOption[] {
+        if (!$network) {
+            return []
+        }
+
+        // L1 network
+        const layer1Network = {
+            name: $network.getMetadata().name,
+            networkAddress: '',
+        }
+        // L2 chains, ISCP only for now
+        const iscpChains = features?.network?.layer2?.enabled
+            ? $network.getChains().filter((chain) => chain.getConfiguration().type === ChainType.Iscp)
+            : []
+        const chainMatchingAssetChainId = iscpChains.find((chain) => chain.getConfiguration().chainId === asset.chainId)
+
+        let compatibleNetworks: INetworkRecipientSelectorOption[] = []
+        switch (asset.standard) {
+            case TokenStandard.Irc27:
+            case TokenStandard.Irc30:
+            case TokenStandard.BaseToken:
+                if (!asset.chainId) {
+                    compatibleNetworks = [layer1Network, ...iscpChains.map(getSelectorOptionFromChain)]
+                } else if (chainMatchingAssetChainId) {
+                    compatibleNetworks = [getSelectorOptionFromChain(chainMatchingAssetChainId), layer1Network]
+                }
+                break
+            case TokenStandard.Erc20:
+                if (chainMatchingAssetChainId) {
+                    compatibleNetworks = [getSelectorOptionFromChain(chainMatchingAssetChainId)]
+                }
+                break
+        }
+        return compatibleNetworks
+    }
+
+    function getSelectorOptionFromChain(chain: IChain): INetworkRecipientSelectorOption {
+        const chainConfig = chain.getConfiguration() as IIscpChainConfiguration
+        return {
+            name: chainConfig.name,
+            networkAddress: chainConfig.aliasAddress,
         }
     }
 </script>

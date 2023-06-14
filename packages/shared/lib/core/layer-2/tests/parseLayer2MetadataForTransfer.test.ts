@@ -12,7 +12,7 @@ describe('Function: parseLayer2MetadataForTransfer.ts', () => {
             contractFunction: 'transferAllowanceTo',
             gasBudget: '500000',
             ethereumAddress: '0x807d707f59f1345e1063dbb64f2495d1491283a0',
-            baseTokenAmount: '1000000',
+            baseTokens: '1000000',
             nativeTokens: [],
             nfts: [],
         }
@@ -30,11 +30,11 @@ describe('Function: parseLayer2MetadataForTransfer.ts', () => {
             contractFunction: 'transferAllowanceTo',
             gasBudget: '18446744073709551615',
             ethereumAddress: '0x8cc8112290f8c350a60e1afdb8379c686e2a5bb3',
-            baseTokenAmount: '0',
+            baseTokens: '0',
             nativeTokens: [
                 {
                     amount: '50',
-                    tokenId: '0x08fcccc313acc182fc2c647dc98864062b163a8ee254231d7f029dc6be3a2de52e0100000000',
+                    ID: ['0x08fcccc313acc182fc2c647dc98864062b163a8ee254231d7f029dc6be3a2de52e0100000000'],
                 },
             ],
             nfts: [],
@@ -53,7 +53,7 @@ describe('Function: parseLayer2MetadataForTransfer.ts', () => {
             contractFunction: 'transferAllowanceTo',
             gasBudget: '500000',
             ethereumAddress: '0xcbcd6d8659ed1998a452335ae53904dc0af1c99b',
-            baseTokenAmount: '0',
+            baseTokens: '0',
             nativeTokens: [],
             nfts: ['0x66b71141974aa368c9152a24d631494b46172ba05dd998eef553e7fa1218b704'],
         }

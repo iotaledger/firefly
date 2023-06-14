@@ -56,10 +56,6 @@ const rendererRules = [
         loader: 'esbuild-loader',
     },
     {
-        test: /\.json$/,
-        loader: 'json-loader',
-    },
-    {
         test: /\.svelte$/,
         use: {
             loader: 'svelte-loader',

@@ -1,6 +1,6 @@
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import CopyPlugin from 'copy-webpack-plugin'
-import { DefinePlugin } from 'webpack'
+import { DefinePlugin, NormalModuleReplacementPlugin, ProvidePlugin } from 'webpack'
 import path from 'path'
 import sveltePreprocess from 'svelte-preprocess'
 import SentryWebpackPlugin from '@sentry/webpack-plugin'
@@ -39,10 +39,13 @@ const fallback: { [index: string]: string | false | string[] } = {
     path: false,
     fs: false,
     crypto: false,
-    // These are required for the Amplitude SDK
+    // The Ethereum libraries require zlib and the buffer polyfill
+    zlib: false,
+    buffer: require.resolve('buffer'),
+    // The Amplitude SDK requires http, https and url polyfills
+    http: require.resolve('stream-http'),
     https: require.resolve('https-browserify'),
     url: require.resolve('url/'),
-    http: require.resolve('stream-http'),
 }
 
 const resolve = {
@@ -93,10 +96,6 @@ const rendererRules = [
     {
         test: /\.ts$/,
         loader: 'esbuild-loader',
-    },
-    {
-        test: /\.json$/,
-        loader: 'json-loader',
     },
     {
         test: /\.svelte$/,
@@ -184,6 +183,13 @@ const rendererPlugins = [
         SENTRY_ENVIRONMENT: JSON.stringify(stage),
         PRELOAD_SCRIPT: JSON.stringify(false),
         'process.env.APP_PROTOCOL': JSON.stringify(appProtocol),
+    }),
+    // The ethereumjs libraries require the NormalModuleReplacementPlugin & the ProvidePlugin
+    new NormalModuleReplacementPlugin(/node:/, (resource) => {
+        resource.request = resource.request.replace(/^node:/, '')
+    }),
+    new ProvidePlugin({
+        Buffer: ['buffer', 'Buffer'],
     }),
 ]
 
