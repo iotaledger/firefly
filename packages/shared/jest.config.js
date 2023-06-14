@@ -18,7 +18,7 @@ const config = {
     testEnvironment: 'jsdom',
     testPathIgnorePatterns: ['./node_modules/'],
     transform: {
-        '^.+\\.ts$': [
+        '^.+\\.(t|j)s$': [
             '@swc/jest',
             {
                 jsc: {
@@ -27,6 +27,7 @@ const config = {
             },
         ],
     },
+    transformIgnorePatterns: ['./node_modules/@walletconnect'],
     verbose: true,
 }
 

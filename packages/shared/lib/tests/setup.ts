@@ -6,6 +6,9 @@
 import './__mocks__/api.mock'
 import './__mocks__/match-media.mock'
 import './__mocks__/platform.mock'
+import { TextEncoder, TextDecoder } from 'util'
+
+Object.assign(global, { TextDecoder, TextEncoder })
 
 beforeAll(async () => {})
 afterAll(async () => {})
