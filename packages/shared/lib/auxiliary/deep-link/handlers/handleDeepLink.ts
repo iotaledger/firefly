@@ -12,7 +12,7 @@ import { isDeepLinkRequestActive } from '../stores'
 import { handleDeepLinkGovernanceContext } from './governance/handleDeepLinkGovernanceContext'
 import { handleDeepLinkWalletContext } from './wallet/handleDeepLinkWalletContext'
 import { handleError } from '@core/error/handlers'
-import { initializeWalletConnect } from '@lib/walletconnect'
+import { pairWithNewApp } from '@lib/walletconnect/utils'
 
 /**
  * Parses an IOTA deep link, i.e. a URL that begins with the app protocol i.e "firefly://".
@@ -77,7 +77,7 @@ function handleConnect(url: URL): void {
     if (wcConnectUri) {
         openPopup({
             id: PopupId.Confirmation,
-            props: { title: wcConnectUri, onConfirm: () => initializeWalletConnect(wcConnectUri) },
+            props: { title: wcConnectUri, onConfirm: () => pairWithNewApp(wcConnectUri) },
         })
     }
 }
