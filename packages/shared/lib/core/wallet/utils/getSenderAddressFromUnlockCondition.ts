@@ -1,4 +1,4 @@
-import { IExpirationUnlockCondition, IStorageDepositReturnUnlockCondition } from '@iota/types'
+import type { IExpirationUnlockCondition, IStorageDepositReturnUnlockCondition } from '@iota/types'
 import {
     ADDRESS_TYPE_ED25519,
     UNLOCK_CONDITION_EXPIRATION,

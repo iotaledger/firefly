@@ -1,4 +1,4 @@
-import { IFeatureFlag } from '@lib/features/interfaces'
+import type { IFeatureFlag } from '@lib/features/interfaces'
 
 export interface IElectronFeatures {
     developerTools: IFeatureFlag

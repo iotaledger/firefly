@@ -1,4 +1,4 @@
-import { ICollectiblesFeatures } from '@lib/features/interfaces'
+import type { ICollectiblesFeatures } from '@lib/features/interfaces'
 
 const collectiblesFeatures: ICollectiblesFeatures = {
     enabled: true,

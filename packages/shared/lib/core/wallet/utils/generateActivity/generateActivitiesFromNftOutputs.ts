@@ -1,6 +1,6 @@
-import { IAccountState } from '@core/account'
+import type { IAccountState } from '@core/account'
 import { ActivityAction, EMPTY_HEX_ID, IProcessedTransaction, OUTPUT_TYPE_NFT } from '@core/wallet'
-import { Activity } from '@core/wallet/types'
+import type { Activity } from '@core/wallet/types'
 import type { INftOutput } from '@iota/types'
 import { generateSingleNftActivity } from './generateSingleNftActivity'
 

@@ -1,4 +1,4 @@
-import { FeatureTypes, UnlockConditionTypes } from '@iota/types'
+import type { FeatureTypes, UnlockConditionTypes } from '@iota/types'
 import { IWrappedOutput } from '../../wallet/interfaces'
 import { buildNftFromNftOutput } from '../utils/buildNftFromNftOutput'
 import { Converter } from '../../utils/convert'

@@ -1,4 +1,4 @@
-import { IElectronFeatures } from './interfaces'
+import type { IElectronFeatures } from './interfaces'
 
 const electronFeatures: IElectronFeatures = {
     developerTools: {

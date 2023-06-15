@@ -1,5 +1,5 @@
-import { Output } from '@core/wallet/types'
-import { IStorageDepositReturnUnlockCondition } from '@iota/types'
+import type { Output } from '@core/wallet/types'
+import type { IStorageDepositReturnUnlockCondition } from '@iota/types'
 import { OUTPUT_TYPE_NFT, UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN } from '../../../constants'
 
 export function getStorageDepositFromOutput(

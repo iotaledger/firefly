@@ -1,10 +1,10 @@
-import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
-import { Transaction } from '@iota/wallet'
+import type { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
+import type { Transaction } from '@iota/wallet'
 import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransactionIdAndIndex'
 import { OUTPUT_TYPE_TREASURY } from '@core/wallet/constants'
 import { getDirectionFromTransaction } from '../transactions'
-import { IAccountState } from '@core/account'
-import { OutputTypes } from '@iota/types'
+import type { IAccountState } from '@core/account'
+import type { OutputTypes } from '@iota/types'
 
 export async function preprocessTransaction(
     transaction: Transaction,

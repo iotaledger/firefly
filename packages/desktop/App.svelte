@@ -71,7 +71,7 @@
         document.dir = $localeDirection
     }
 
-    $: isDashboardVisible = $appRoute === AppRoute.Dashboard && $hasLoadedAccounts && $popupState.id !== 'busy'
+    $: isDashboardVisible = $appRoute === AppRoute.Dashboard && $hasLoadedAccounts
 
     $: $nftDownloadQueue, downloadNextNftInQueue()
 

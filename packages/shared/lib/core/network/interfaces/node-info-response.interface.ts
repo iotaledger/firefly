@@ -1,4 +1,4 @@
-import { INodeInfo } from '@iota/types'
+import type { INodeInfo } from '@iota/types'
 
 export interface INodeInfoResponse {
     nodeInfo: INodeInfo

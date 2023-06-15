@@ -6,8 +6,8 @@ import sveltePreprocess from 'svelte-preprocess'
 import SentryWebpackPlugin from '@sentry/webpack-plugin'
 import { version } from './package.json'
 import features from './features/features'
-import { Configuration as WebpackConfiguration } from 'webpack'
-import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server'
+import type { Configuration as WebpackConfiguration } from 'webpack'
+import type { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server'
 import assert from 'assert'
 import dotenv from 'dotenv'
 
@@ -39,6 +39,8 @@ const fallback: { [index: string]: string | false | string[] } = {
     path: false,
     fs: false,
     crypto: false,
+    assert: false,
+    stream: false,
     // The Ethereum libraries require zlib and the buffer polyfill
     zlib: false,
     buffer: require.resolve('buffer'),

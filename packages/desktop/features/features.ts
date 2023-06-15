@@ -7,7 +7,7 @@ import onboardingFeatures from './onboarding.features'
 import settingsFeatures from './settings.features'
 import walletFeatures from './wallet.features'
 import analyticsFeatures from './analytics.features'
-import { IDesktopFeatures } from './interfaces'
+import type { IDesktopFeatures } from './interfaces'
 
 const features: IDesktopFeatures = {
     collectibles: collectiblesFeatures,

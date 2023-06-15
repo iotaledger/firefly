@@ -1,4 +1,4 @@
-import { IAnalyticsFeatures } from './interfaces/analytics-features.interface'
+import type { IAnalyticsFeatures } from './interfaces/analytics-features.interface'
 
 const analyticsFeatures: IAnalyticsFeatures = {
     enabled: true,

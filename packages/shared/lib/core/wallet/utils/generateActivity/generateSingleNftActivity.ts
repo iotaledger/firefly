@@ -1,7 +1,7 @@
-import { IAccountState } from '@core/account'
+import type { IAccountState } from '@core/account'
 import { ActivityType } from '@core/wallet/enums'
-import { IActivityGenerationParameters } from '@core/wallet/interfaces'
-import { NftActivity } from '@core/wallet/types'
+import type { IActivityGenerationParameters } from '@core/wallet/interfaces'
+import type { NftActivity } from '@core/wallet/types'
 import type { INftOutput } from '@iota/types'
 import { getNftId } from '../outputs/getNftId'
 import {

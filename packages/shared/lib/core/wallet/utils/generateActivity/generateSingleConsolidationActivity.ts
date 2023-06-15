@@ -1,7 +1,7 @@
-import { IAccountState } from '@core/account'
-import { IActivityGenerationParameters, IWrappedOutput } from '@core/wallet/interfaces'
-import { ConsolidationActivity } from '@core/wallet/types'
-import { IBasicOutput } from '@iota/types'
+import type { IAccountState } from '@core/account'
+import type { IActivityGenerationParameters, IWrappedOutput } from '@core/wallet/interfaces'
+import type { ConsolidationActivity } from '@core/wallet/types'
+import type { IBasicOutput } from '@iota/types'
 import { ActivityType } from '../../enums'
 import { activityOutputContainsValue } from '..'
 import {

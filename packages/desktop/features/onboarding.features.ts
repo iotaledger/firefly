@@ -1,5 +1,5 @@
-import { IOnboardingFeaturesForNetwork } from '@lib/features/interfaces'
-import { OnboardingFeatures } from '@lib/features/types'
+import type { IOnboardingFeaturesForNetwork } from '@lib/features/interfaces'
+import type { OnboardingFeatures } from '@lib/features/types'
 
 const onboardingFeaturesForIota: IOnboardingFeaturesForNetwork = {
     enabled: false,

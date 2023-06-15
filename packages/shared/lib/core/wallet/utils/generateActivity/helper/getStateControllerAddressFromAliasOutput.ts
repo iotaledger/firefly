@@ -1,5 +1,5 @@
 import { UNLOCK_CONDITION_STATE_CONTROLLER_ADDRESS } from '@core/wallet/constants'
-import { IStateControllerAddressUnlockCondition, IAliasOutput } from '@iota/types'
+import type { IStateControllerAddressUnlockCondition, IAliasOutput } from '@iota/types'
 import { getBech32AddressFromAddressTypes } from '../../getBech32AddressFromAddressTypes'
 
 export function getStateControllerAddressFromAliasOutput(output: IAliasOutput): string {

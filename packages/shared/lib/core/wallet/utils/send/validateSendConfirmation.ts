@@ -2,9 +2,9 @@ import { getSelectedAccount } from '@core/account'
 import { InsufficientFundsForStorageDepositError, InvalidExpirationDateTimeError } from '@contexts/wallet'
 import { convertUnixTimestampToDate, isValidExpirationDateTime } from '@core/utils'
 import { getStorageDepositFromOutput } from '../generateActivity/helper'
-import { Output } from '@core/wallet/types'
+import type { Output } from '@core/wallet/types'
 import { OUTPUT_TYPE_NFT, UNLOCK_CONDITION_EXPIRATION } from '@core/wallet/constants'
-import { IExpirationUnlockCondition } from '@iota/types'
+import type { IExpirationUnlockCondition } from '@iota/types'
 
 export function validateSendConfirmation(output: Output): void {
     const parseNumber: (value: string) => number = (value: string) => parseInt(value, 10) ?? 0

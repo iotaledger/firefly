@@ -1,5 +1,5 @@
-import { AddressTypes } from '@iota/types'
-import { NftDownloadMetadata, IIrc27Metadata } from '../interfaces'
+import type { AddressTypes } from '@iota/types'
+import type { NftDownloadMetadata, IIrc27Metadata } from '../interfaces'
 
 export interface INft {
     id: string

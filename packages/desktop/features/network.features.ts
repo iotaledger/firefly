@@ -1,4 +1,4 @@
-import { INetworkFeatures } from '@lib/features/interfaces'
+import type { INetworkFeatures } from '@lib/features/interfaces'
 
 const networkFeatures: INetworkFeatures = {
     enabled: true,

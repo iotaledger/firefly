@@ -1,6 +1,6 @@
-import { ActivityDirection, InclusionState } from '@core/wallet/enums'
-import { IUTXOInput } from '@iota/types'
-import { IWrappedOutput } from './wrapped-output.interface'
+import type { ActivityDirection, InclusionState } from '@core/wallet/enums'
+import type { IUTXOInput } from '@iota/types'
+import type { IWrappedOutput } from './wrapped-output.interface'
 
 export interface IProcessedTransaction {
     outputs: IWrappedOutput[]

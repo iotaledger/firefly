@@ -1,5 +1,5 @@
 import { OUTPUT_TYPE_FOUNDRY } from '@core/wallet/constants'
-import { Output } from '@core/wallet/types'
+import type { Output } from '@core/wallet/types'
 import type { INativeToken } from '@iota/types'
 import { buildFoundryId } from './getFoundryId'
 

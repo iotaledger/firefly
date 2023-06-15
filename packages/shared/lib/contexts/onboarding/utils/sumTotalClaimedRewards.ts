@@ -1,8 +1,8 @@
-import { OutputTypes } from '@iota/types'
+import type { OutputTypes } from '@iota/types'
 
 import { tryNumberOrZero } from '@core/utils'
 
-import { IShimmerClaimingAccount } from '../interfaces'
+import type { IShimmerClaimingAccount } from '../interfaces'
 
 export function sumTotalClaimedRewards(shimmerClaimingAccounts: IShimmerClaimingAccount[]): number {
     return shimmerClaimingAccounts?.reduce(

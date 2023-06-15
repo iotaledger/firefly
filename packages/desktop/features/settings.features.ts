@@ -1,4 +1,4 @@
-import { ISettingsFeatures } from '@lib/features/interfaces'
+import type { ISettingsFeatures } from '@lib/features/interfaces'
 
 const settingsFeatures: ISettingsFeatures = {
     enabled: true,

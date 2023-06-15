@@ -1,4 +1,4 @@
-import { IWalletFeatures } from '@lib/features/interfaces'
+import type { IWalletFeatures } from '@lib/features/interfaces'
 
 const walletFeatures: IWalletFeatures = {
     enabled: true,

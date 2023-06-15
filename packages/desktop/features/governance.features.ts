@@ -1,4 +1,4 @@
-import { IGovernanceFeatures } from '@lib/features/interfaces'
+import type { IGovernanceFeatures } from '@lib/features/interfaces'
 
 const governanceFeatures: IGovernanceFeatures = {
     enabled: true,

@@ -5,11 +5,11 @@ import {
     getMetadataFromNftOutput,
     getNftId,
 } from '@core/wallet/utils'
-import { IWrappedOutput } from '@core/wallet/interfaces'
+import type { IWrappedOutput } from '@core/wallet/interfaces'
 import type { INftOutput } from '@iota/types'
 import { get } from 'svelte/store'
 import { DEFAULT_NFT_NAME } from '../constants'
-import { INft } from '../interfaces'
+import type { INft } from '../interfaces'
 import { parseNftMetadata } from './parseNftMetadata'
 import { composeUrlFromNftUri } from './composeUrlFromNftUri'
 import { getSpendableStatusFromUnspentNftOutput } from './getSpendableStatusFromUnspentNftOutput'

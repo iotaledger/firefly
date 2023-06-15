@@ -1,4 +1,4 @@
-import { IDeveloperFeatures } from '@lib/features/interfaces'
+import type { IDeveloperFeatures } from '@lib/features/interfaces'
 
 const developerToolsFeatures: IDeveloperFeatures = {
     enabled: true,

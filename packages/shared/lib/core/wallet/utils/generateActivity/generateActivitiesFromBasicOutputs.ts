@@ -1,4 +1,4 @@
-import { IAccountState } from '@core/account'
+import type { IAccountState } from '@core/account'
 import { addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput } from '@core/nfts'
 import {
     ActivityAction,
@@ -10,8 +10,8 @@ import {
     OUTPUT_TYPE_BASIC,
     OUTPUT_TYPE_NFT,
 } from '@core/wallet'
-import { Activity } from '@core/wallet/types'
-import { INftOutput } from '@iota/types'
+import type { Activity } from '@core/wallet/types'
+import type { INftOutput } from '@iota/types'
 import { generateSingleBasicActivity } from './generateSingleBasicActivity'
 import { generateSingleConsolidationActivity } from './generateSingleConsolidationActivity'
 import { generateSingleNftActivity } from './generateSingleNftActivity'

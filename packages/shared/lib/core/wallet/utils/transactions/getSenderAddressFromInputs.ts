@@ -1,6 +1,6 @@
-import { IWrappedOutput } from '@core/wallet/interfaces'
+import type { IWrappedOutput } from '@core/wallet/interfaces'
 import { ADDRESS_TYPE_ALIAS } from '@core/wallet/constants'
-import { IAddressUnlockCondition, IAliasOutput, IExpirationUnlockCondition } from '@iota/types'
+import type { IAddressUnlockCondition, IAliasOutput, IExpirationUnlockCondition } from '@iota/types'
 import { UNLOCK_CONDITION_ADDRESS, UNLOCK_CONDITION_EXPIRATION } from '../../constants'
 import { getBech32AddressFromAddressTypes } from '../getBech32AddressFromAddressTypes'
 
