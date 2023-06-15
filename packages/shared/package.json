@@ -34,7 +34,7 @@
         "@iota/types": "2.0.0-rc.2",
         "@swc/core": "^1.3.44",
         "@swc/jest": "^0.2.24",
-        "@tsconfig/svelte": "^1.0.10",
+        "@tsconfig/svelte": "^4.0.1",
         "@types/big.js": "^6.1.6",
         "@types/jest": "^29.5.0",
         "autoprefixer": "^10.4.14",
