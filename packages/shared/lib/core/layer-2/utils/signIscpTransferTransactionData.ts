@@ -1,4 +1,4 @@
-import { ETH_COIN_TYPE, getNetwork } from '@core/network'
+import { getNetwork } from '@core/network'
 import { ContractType } from '@core/layer-2/enums'
 import { IAsset } from '@core/wallet'
 import { Ledger } from '@core/ledger'
@@ -20,10 +20,13 @@ export async function signIscpTransferTransactionData(
 ): Promise<void> {
     try {
         const chain = getNetwork()?.getChain(asset.chainId)
-        const provider = chain?.getProvider()
-        const evmAddress = getSelectedAccount()?.evmAddresses?.[ETH_COIN_TYPE]
+        if (!chain) {
+            return
+        }
+        const provider = chain.getProvider()
+        const evmAddress = getSelectedAccount()?.evmAddresses?.[chain.getConfiguration().coinType]
 
-        if (chain && evmAddress && provider) {
+        if (evmAddress && provider) {
             const accountsCoreContract = getSmartContractHexName('accounts')
             const transferAllowanceTo = getSmartContractHexName('transferAllowanceTo')
 
