@@ -1,27 +1,27 @@
 import { OutputParams, Assets } from '@iota/wallet/out/types'
 import { convertDateToUnixTimestamp, Converter } from '@core/utils'
 import { NewTransactionType } from '../stores'
-import { addGasBudget, getLayer2MetadataForTransfer } from '@core/layer-2/utils'
+import { getEstimatedGasForTransferFromTransactionDetails, getLayer2MetadataForTransfer } from '@core/layer-2/utils'
 import { NewTransactionDetails } from '@core/wallet/types'
 import { getAddressFromSubject } from '@core/wallet/utils'
 import { ReturnStrategy } from '../enums'
 import { getCoinType } from '@core/profile'
 
-export function getOutputParameters(transactionDetails: NewTransactionDetails): OutputParams {
+export async function getOutputParameters(transactionDetails: NewTransactionDetails): Promise<OutputParams> {
     const { recipient, expirationDate, timelockDate, giftStorageDeposit, layer2Parameters } = transactionDetails ?? {}
 
     const recipientAddress = layer2Parameters ? layer2Parameters.networkAddress : getAddressFromSubject(recipient)
 
+    const estimatedGas = await getEstimatedGasForTransferFromTransactionDetails(transactionDetails)
+
     let amount = getAmountFromTransactionDetails(transactionDetails)
-    amount = layer2Parameters ? addGasBudget(amount) : amount
+    amount = layer2Parameters ? (estimatedGas + parseInt(amount, 10)).toString() : amount
 
     const assets = getAssetFromTransactionDetails(transactionDetails)
 
     const tag = transactionDetails?.tag ? Converter.utf8ToHex(transactionDetails?.tag) : undefined
 
-    const metadata = layer2Parameters
-        ? getLayer2MetadataForTransfer(transactionDetails)
-        : Converter.utf8ToHex(transactionDetails?.metadata)
+    const metadata = await getMetadata(transactionDetails)
 
     const expirationUnixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
     const timelockUnixTime = timelockDate ? convertDateToUnixTimestamp(timelockDate) : undefined
@@ -95,4 +95,12 @@ function getAssetFromTransactionDetails(transactionDetails: NewTransactionDetail
     }
 
     return assets
+}
+
+function getMetadata(transactionDetails: NewTransactionDetails): Promise<string> {
+    if (transactionDetails.layer2Parameters) {
+        return getLayer2MetadataForTransfer(transactionDetails)
+    } else {
+        return Promise.resolve(Converter.utf8ToHex(transactionDetails?.metadata))
+    }
 }
