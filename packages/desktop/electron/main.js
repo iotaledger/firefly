@@ -326,14 +326,17 @@ ipcMain.on('start-ledger-process', () => {
             if (error) {
                 windows.main.webContents.send('ledger-error', error)
             } else {
-                if (data?.evmAddress) {
-                    windows.main.webContents.send('evm-address', data)
-                }
-                if (data?.signedTransaction) {
-                    windows.main.webContents.send('evm-signed-transaction', data)
-                } else {
-                    /* eslint-disable-next-line no-console */
-                    console.log('Unhandled Ledger Message: ', message)
+                switch (data?.method) {
+                    case 'generate-evm-address':
+                        windows.main.webContents.send('evm-address', data)
+                        break
+                    case 'sign-evm-transaction':
+                        windows.main.webContents.send('evm-signed-transaction', data)
+                        break
+                    default:
+                        /* eslint-disable-next-line no-console */
+                        console.log('Unhandled Ledger Message: ', message)
+                        break
                 }
             }
         })
