@@ -23,6 +23,7 @@
     import SendFlowTemplate from './SendFlowTemplate.svelte'
     import TokenAmountTile from './components/TokenAmountTile.svelte'
     import TransactionDetails from './components/TransactionDetails.svelte'
+    import { network } from '@core/network'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
