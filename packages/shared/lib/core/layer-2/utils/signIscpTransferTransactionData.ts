@@ -18,18 +18,19 @@ export async function signIscpTransferTransactionData(
     asset: IAsset,
     amount: string
 ): Promise<string | undefined> {
-    const chain = getNetwork()?.getChain(asset.chainId)
+    let chain = getNetwork()?.getChain(asset.chainId)
+    chain = undefined
     if (!chain) {
-        return
+        return Promise.reject('No chain configured.')
     }
     const provider = chain.getProvider()
     const evmAddress = getSelectedAccount()?.evmAddresses?.[chain.getConfiguration().coinType]
 
     if (!evmAddress) {
-        throw new Error('No EVM address.')
+        return Promise.reject('No EVM address.')
     }
     if (!provider) {
-        throw new Error('Unable to find web3 provider.')
+        return Promise.reject('Unable to find web3 provider.')
     }
 
     const accountsCoreContract = getSmartContractHexName('accounts')

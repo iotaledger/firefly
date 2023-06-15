@@ -2,6 +2,7 @@ import { Ledger } from '@core/ledger'
 import { EvmTransactionData } from '../types'
 import { Platform } from '@core/app'
 import { MILLISECONDS_PER_SECOND, sleep } from '@core/utils'
+import { localize } from '@core/i18n'
 
 export async function signTransactionWithLedger(transaction: EvmTransactionData, bip32Path: string): Promise<string> {
     await Ledger.signEvmTransaction(transaction, bip32Path)
@@ -27,10 +28,11 @@ export async function signTransactionWithLedger(transaction: EvmTransactionData,
             if (signedTransaction) {
                 return Promise.resolve(signedTransaction)
             } else {
-                return Promise.reject('Rejected')
+                return Promise.reject('Signing was rejected by the Ledger device')
             }
         }
         await sleep(pollingInterval)
     }
-    return Promise.reject('Timeout')
+    const aaa = localize('error.ledger.timeout')
+    return Promise.reject(aaa)
 }
