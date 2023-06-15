@@ -44,7 +44,7 @@ process.parentPort.on('message', async (message) => {
 
         await closeTransport()
 
-        process.parentPort.postMessage({ data })
+        process.parentPort.postMessage({ data: { ...data, method: message.data.method } })
     } catch (error) {
         process.parentPort.postMessage({ error })
     }
@@ -80,20 +80,23 @@ async function signTransactionData(data, bip32Path) {
     const unsignedTransaction = transactionData.getMessageToSign(false)
     const serializedUnsignedTransaction = Buffer.from(RLP.encode(bufArrToArr(unsignedTransaction)))
 
-    const signature = await appEth.signTransaction(bip32Path, serializedUnsignedTransaction, null)
+    try {
+        const signature = await appEth.signTransaction(bip32Path, serializedUnsignedTransaction, null)
+        const signedTransactionObject = Transaction.fromTxData(
+            {
+                ...data,
+                v: '0x' + signature.v,
+                r: '0x' + signature.r,
+                s: '0x' + signature.s,
+            },
+            TX_OPTIONS
+        )
 
-    const signedTransactionObject = Transaction.fromTxData(
-        {
-            ...data,
-            v: '0x' + signature.v,
-            r: '0x' + signature.r,
-            s: '0x' + signature.s,
-        },
-        TX_OPTIONS
-    )
+        const serializedSignedTransaction = Buffer.from(RLP.encode(bufArrToArr(signedTransactionObject.raw())))
+        const serializedSignedTransactionString = '0x' + serializedSignedTransaction.toString('hex')
 
-    const serializedSignedTransaction = Buffer.from(RLP.encode(bufArrToArr(signedTransactionObject.raw())))
-    const serializedSignedTransactionString = '0x' + serializedSignedTransaction.toString('hex')
-
-    return { signedTransaction: serializedSignedTransactionString }
+        return { signedTransaction: serializedSignedTransactionString }
+    } catch (error) {
+        return { signedTransaction: undefined }
+    }
 }

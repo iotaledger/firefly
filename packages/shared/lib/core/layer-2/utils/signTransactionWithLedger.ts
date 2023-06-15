@@ -20,7 +20,11 @@ export async function signTransactionWithLedger(transaction: EvmTransactionData,
 
     for (let count = 0; count < 11111; count++) {
         if (!isSigning) {
-            return Promise.resolve(signedTransaction)
+            if (signedTransaction) {
+                return Promise.resolve(signedTransaction)
+            } else {
+                return Promise.reject('Rejected')
+            }
         }
         await sleep(100)
     }
