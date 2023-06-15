@@ -18,28 +18,28 @@
     let assetIconWrapperWidth: number
     let assetLogoUrl: string
 
-    $: isAnimation = asset.id in ANIMATED_TOKEN_IDS
-    $: switch (asset.id) {
+    $: isAnimation = asset?.id in ANIMATED_TOKEN_IDS
+    switch (asset?.id) {
         case String(COIN_TYPE[NetworkId.Iota]):
             assetInitials = ''
-            assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
             assetIconBackgroundColor = '#6E82A4'
+            assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
             icon = NETWORK_ICON_SVG[NetworkId.Iota]
             break
         case String(COIN_TYPE[NetworkId.Shimmer]):
         case String(COIN_TYPE[NetworkId.Testnet]):
             assetInitials = ''
-            assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
             assetIconBackgroundColor = '#25DFCA'
+            assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
             icon = NETWORK_ICON_SVG[NetworkId.Shimmer]
             break
         default:
             assetInitials = getAssetInitials(asset)
-            assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
             assetIconBackgroundColor = getIconColorFromString(asset?.metadata?.name, {
                 shades: ['500', '600', '700', '800'],
                 colorsToExclude: ['gray'],
             })
+            assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
             assetLogoUrl = asset?.metadata?.standard === TokenStandard.Irc30 ? asset?.metadata?.logoUrl ?? '' : ''
             icon = null
     }
@@ -71,7 +71,7 @@
         {:else if icon}
             <Icon {icon} width="80%" height="80%" classes="text-{assetIconColor ?? 'blue-500'} text-center" />
         {:else if assetLogoUrl}
-            <img src={assetLogoUrl} alt="" class="w-full h-full" />
+            <img src={assetLogoUrl} on:error={() => (assetLogoUrl = '')} alt="" class="w-full h-full" />
         {:else}
             <p
                 style={`font-size: ${Math.floor(
@@ -84,10 +84,10 @@
         {/if}
     </div>
     <span class="absolute flex justify-center items-center bottom-0 right-0">
-        {#if asset.verification.verified === true}
-            <NetworkIconBadge width={10} height={10} network={$activeProfile.network} chainId={asset.chainId} />
+        {#if asset?.verification?.verified === true}
+            <NetworkIconBadge width={10} height={10} network={$activeProfile.network} chainId={asset?.chainId} />
         {:else}
-            <VerificationBadge status={asset.verification?.status} width={14} height={14} />
+            <VerificationBadge status={asset?.verification?.status} width={14} height={14} />
         {/if}
     </span>
 </div>
