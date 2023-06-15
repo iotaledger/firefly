@@ -1,1 +1,1 @@
-export const GAS_MULTIPLIER = 2
+export const GAS_MULTIPLIER = 2n

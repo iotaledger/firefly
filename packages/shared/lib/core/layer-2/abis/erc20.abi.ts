@@ -222,4 +222,4 @@ export const ERC20_ABI: Abi = [
         name: 'Transfer',
         type: AbiType.Event,
     },
-]
+] as const

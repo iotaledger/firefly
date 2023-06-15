@@ -1,5 +1,5 @@
 import { ContractType } from '@core/layer-2/enums'
-import { Contract } from '@core/layer-2/types'
+import { Contract, ContractAbi } from 'web3'
 
 import { ChainConfiguration, ChainMetadata, Web3Provider } from '../types'
 import { IBlock } from './block.interface'
@@ -11,7 +11,7 @@ export interface IChain {
     getProvider(): Web3Provider
 
     getMetadata(): Promise<ChainMetadata>
-    getContract(type: ContractType, address: string): Contract
+    getContract<T extends ContractAbi>(type: ContractType, address: string): Contract<T>
 
     getLatestBlock(): Promise<IBlock>
 }

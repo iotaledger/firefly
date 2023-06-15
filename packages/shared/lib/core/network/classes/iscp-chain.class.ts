@@ -1,10 +1,9 @@
 import { get } from 'svelte/store'
 
-import Web3 from 'web3'
+import Web3, { Contract, ContractAbi } from 'web3'
 
 import { ContractType } from '@core/layer-2/enums'
 import { getAbiForContractType } from '@core/layer-2/utils'
-import { Contract } from '@core/layer-2/types'
 
 import { NetworkHealth } from '../enums'
 import { IBlock, IChain, IChainStatus, IIscpChainConfiguration, IIscpChainMetadata } from '../interfaces'
@@ -50,7 +49,7 @@ export class IscpChain implements IChain {
         return get(chainStatuses)?.[this._configuration.chainId] ?? { health: NetworkHealth.Disconnected }
     }
 
-    getContract(type: ContractType, address: string): Contract {
+    getContract<T extends ContractAbi>(type: ContractType, address: string): Contract<T> {
         const abi = getAbiForContractType(type)
         return new this._provider.eth.Contract(abi, address)
     }

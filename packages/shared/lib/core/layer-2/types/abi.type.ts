@@ -1,3 +1,3 @@
-import { AbiItem } from 'web3-utils'
+import { ContractAbi } from 'web3-types'
 
-export type Abi = AbiItem[]
+export type Abi = ContractAbi
