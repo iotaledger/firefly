@@ -24,6 +24,7 @@ const senderAddress = 'rms1abcp07ychhkc3u68ueug0zqq9g0wtfgeatynr6ksm9jwud30rvlky
 const amount = '1000000000'
 const nativeTokenAsset: IAsset = {
     id: '0x08cd4dcad7ccc383111942671ee8cdc487ddd250398331ca2692b8b1a81551a1c30100000000',
+    chainId: 60,
     standard: 'erc20',
     balance: {
         total: Number(amount),
@@ -68,6 +69,10 @@ jest.mock('../actions/getAccountAssetsForSelectedAccount', () => ({
 
 jest.mock('../../profile/actions/active-profile/getCoinType', () => ({
     getCoinType: jest.fn((_) => '1'),
+}))
+
+jest.mock('../../layer-2/utils/getEstimatedGasForTransferFromTransactionDetails', () => ({
+    getEstimatedGasForTransferFromTransactionDetails: jest.fn(() => GAS_BUDGET.toJSNumber()),
 }))
 
 describe('File: getOutputParameters.ts', () => {
