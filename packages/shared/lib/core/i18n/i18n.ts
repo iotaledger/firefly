@@ -1,6 +1,5 @@
-import { get } from 'svelte/store'
+import { Writable, get } from 'svelte/store'
 import { addMessages, dictionary, getLocaleFromNavigator, init, _, getDateFormatter } from 'svelte-i18n'
-import { LocaleDictionary } from 'svelte-i18n/types/runtime/types'
 
 import { appSettings } from '@core/app/stores'
 
@@ -10,6 +9,8 @@ import { LocaleOptions } from './types'
 /*
  * Code following https://phrase.com/blog/posts/a-step-by-step-guide-to-svelte-localization-with-svelte-i18n-v3/
  */
+
+type LocaleDictionary = (typeof dictionary extends Writable<infer U> ? U : never)[string]
 
 function verifySupportedLocale(locale: string): string {
     return locale in SUPPORTED_LOCALES ? locale : DEFAULT_LOCALE_OPTIONS.fallbackLocale
@@ -44,7 +45,7 @@ export async function setupI18n(options: LocaleOptions = { fallbackLocale: 'en',
     // Attempt to auto-detect user's locale if not explicitly given
     const locale = verifySupportedLocale(options.initialLocale || reduceLocale(getLocaleFromNavigator() || 'en'))
 
-    init({ ...DEFAULT_LOCALE_OPTIONS, initialLocale: locale } as LocaleOptions)
+    init({ ...DEFAULT_LOCALE_OPTIONS, initialLocale: locale } as Parameters<typeof init>[0])
 
     if (!hasLoadedLocale(locale)) {
         await loadLocaleMessages(locale)
