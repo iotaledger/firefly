@@ -15,7 +15,6 @@
         ActivityInformation,
     } from 'shared/components'
     import { Tab } from 'shared/components/enums'
-    import type { OutputParams } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { activeProfile, checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
@@ -60,7 +59,6 @@
     let storageDeposit = 0
     let visibleSurplus = 0
     let preparedOutput: Output
-    let outputParams: OutputParams
     let expirationTimePicker: ExpirationTimePicker
 
     let initialExpirationDate: TimePeriod = getInitialExpirationDate()
@@ -117,7 +115,7 @@
     async function prepareTransactionOutput(): Promise<void> {
         const transactionDetails = get(newTransactionDetails)
 
-        outputParams = getOutputParameters(transactionDetails)
+        const outputParams = getOutputParameters(transactionDetails)
         preparedOutput = await prepareOutput($selectedAccount.index, outputParams, DEFAULT_TRANSACTION_OPTIONS)
 
         setStorageDeposit(preparedOutput, Number(surplus))
@@ -164,7 +162,7 @@
 
     async function onConfirmClick(): Promise<void> {
         try {
-            validateSendConfirmation(outputParams, preparedOutput)
+            validateSendConfirmation(preparedOutput)
 
             if ($isActiveLedgerProfile) {
                 ledgerPreparedOutput.set(preparedOutput)
