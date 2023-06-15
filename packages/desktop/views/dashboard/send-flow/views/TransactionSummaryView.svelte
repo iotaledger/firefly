@@ -1,6 +1,6 @@
 <script lang="ts">
     import { closePopup } from '@desktop/auxiliary/popup'
-    import { prepareOutput, selectedAccount, updateSelectedAccount } from '@core/account'
+    import { prepareOutput, selectedAccount } from '@core/account'
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
     import { getDestinationNetworkFromAddress } from '@core/layer-2/utils'
@@ -23,7 +23,6 @@
     import SendFlowTemplate from './SendFlowTemplate.svelte'
     import TokenAmountTile from './components/TokenAmountTile.svelte'
     import TransactionDetails from './components/TransactionDetails.svelte'
-    import { network } from '@core/network'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
