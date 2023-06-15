@@ -24,7 +24,7 @@ export async function createTransaction(
     if (isAssetFromLayer1) {
         await sendFromLayer1(transactionDetails, accountIndex, callback)
     } else {
-        await sendFromLayer2(transactionDetails, asset)
+        await sendFromLayer2(transactionDetails, asset, callback)
     }
 }
 
@@ -51,9 +51,15 @@ async function sendFromLayer1(
     )
 }
 
-async function sendFromLayer2(transactionDetails: NewTokenTransactionDetails, asset: IAsset): Promise<void> {
+async function sendFromLayer2(
+    transactionDetails: NewTokenTransactionDetails,
+    asset: IAsset,
+    callback: () => void
+): Promise<void> {
     const chain = asset.chainId ? getNetwork()?.getChain(asset.chainId) : undefined
-    if (!chain || transactionDetails.recipient?.type !== 'address') {
+    const provider = chain?.getProvider()
+
+    if (!chain || !provider || transactionDetails.recipient?.type !== 'address') {
         return
     }
 
@@ -62,5 +68,11 @@ async function sendFromLayer2(transactionDetails: NewTokenTransactionDetails, as
 
     // TODO: For ERC 20 Tokens we need to invoke its specific smartcontract
     updateSelectedAccount({ isTransferring: true })
-    await signIscpTransferTransactionData(recipient, asset, amount)
+    const signature = await signIscpTransferTransactionData(recipient, asset, amount)
+
+    if (signature) {
+        await provider?.eth.sendSignedTransaction(signature)
+        updateSelectedAccount({ isTransferring: false })
+        callback()
+    }
 }

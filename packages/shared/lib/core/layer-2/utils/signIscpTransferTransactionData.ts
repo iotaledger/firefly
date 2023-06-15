@@ -1,7 +1,6 @@
 import { getNetwork } from '@core/network'
 import { ContractType } from '@core/layer-2/enums'
 import { IAsset } from '@core/wallet'
-import { Ledger } from '@core/ledger'
 import { buildBip32Path, getSelectedAccount } from '@core/account'
 
 import { ISC_MAGIC_CONTRACT_ADDRESS } from '../constants'
@@ -11,13 +10,14 @@ import {
     getCommonTransactionData,
     getLayer2Allowance,
     getSmartContractHexName,
+    signTransactionWithLedger,
 } from '.'
 
 export async function signIscpTransferTransactionData(
     recipientAddress: string,
     asset: IAsset,
     amount: string
-): Promise<void> {
+): Promise<string | undefined> {
     try {
         const chain = getNetwork()?.getChain(asset.chainId)
         if (!chain) {
@@ -44,7 +44,7 @@ export async function signIscpTransferTransactionData(
             transaction.data = data
 
             const bip32 = buildBip32Path(60, 0)
-            Ledger.signEvmTransaction(transaction, bip32)
+            return await signTransactionWithLedger(transaction, bip32)
         } else {
             throw new Error('Unable to find web3 provider.')
         }
