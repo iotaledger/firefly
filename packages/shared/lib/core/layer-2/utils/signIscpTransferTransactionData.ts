@@ -18,8 +18,7 @@ export async function signIscpTransferTransactionData(
     asset: IAsset,
     amount: string
 ): Promise<string | undefined> {
-    let chain = getNetwork()?.getChain(asset.chainId)
-    chain = undefined
+    const chain = getNetwork()?.getChain(asset.chainId)
     if (!chain) {
         return Promise.reject('No chain configured.')
     }

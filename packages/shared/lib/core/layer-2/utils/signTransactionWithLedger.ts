@@ -33,6 +33,5 @@ export async function signTransactionWithLedger(transaction: EvmTransactionData,
         }
         await sleep(pollingInterval)
     }
-    const aaa = localize('error.ledger.timeout')
-    return Promise.reject(aaa)
+    return Promise.reject(localize('error.ledger.timeout'))
 }
