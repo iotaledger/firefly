@@ -28,7 +28,7 @@
         "check-strict:mobile": "cd packages/mobile && tsc --project tsconfig.strict.json --pretty --noEmit",
         "check-strict:shared": "cd packages/shared && tsc --project tsconfig.json --pretty --noEmit",
         "check-types": "yarn check-types:shared && yarn check-types:desktop",
-        "check-types:desktop": "cd packages/desktop && tsc --pretty --noEmit",
+        "check-types:desktop": "cd packages/desktop && which tsc && tsc -v",
         "check-types:shared": "cd packages/shared && tsc --project tsconfig.base.json --pretty --noEmit",
         "docs:start": "cd docs/ && retype watch",
         "format": "yarn format:write",

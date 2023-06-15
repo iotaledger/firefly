@@ -5,6 +5,7 @@
         "baseUrl": ".",
         "isolatedModules": false,
         "resolveJsonModule": true,
+        "verbatimModuleSyntax": false,
         "importsNotUsedAsValues": "remove",
         "lib": ["DOM", "ESNext"],
         "paths": {
