@@ -6,7 +6,7 @@
         "isolatedModules": false,
         "resolveJsonModule": true,
         "importsNotUsedAsValues": "remove",
-        "lib": ["DOM", "ESNext"],
+        "lib": ["DOM", "ES2022"],
         "paths": {
             "@auxiliary/*": ["../shared/lib/auxiliary/*"],
             "@contexts/*": ["../shared/lib/contexts/*"],

@@ -4,7 +4,7 @@
         "baseUrl": "./",
         "importsNotUsedAsValues": "remove",
         "isolatedModules": true,
-        "lib": ["DOM", "ESNext"],
+        "lib": ["DOM", "ES2022"],
         "paths": {
             "@auxiliary/*": ["./lib/auxiliary/*"],
             "@contexts/*": ["./lib/contexts/*"],

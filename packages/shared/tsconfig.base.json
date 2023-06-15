@@ -3,7 +3,8 @@
     "compilerOptions": {
         "baseUrl": "./",
         "importsNotUsedAsValues": "remove",
-        "lib": ["DOM", "ESNext"],
+        "lib": ["DOM", "ES2022"],
+        "target": "ES2022",
         "moduleResolution": "node",
         "outDir": "out",
         "paths": {
