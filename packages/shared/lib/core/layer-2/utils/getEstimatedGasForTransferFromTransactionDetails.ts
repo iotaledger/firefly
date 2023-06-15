@@ -1,5 +1,6 @@
 import { NewTransactionDetails, NewTransactionType, getAddressFromSubject } from '@core/wallet'
 import { getIscpTransferMethod } from './getIscpTransferMethod'
+import { GAS_BUDGET } from '../constants'
 
 export function getEstimatedGasForTransferFromTransactionDetails(
     transactionDetails: NewTransactionDetails
@@ -9,8 +10,10 @@ export function getEstimatedGasForTransferFromTransactionDetails(
     const asset = transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.asset : undefined
 
     if (asset) {
-        return getIscpTransferMethod(address, asset, rawAmount)?.estimateGas() ?? Promise.resolve(0)
+        return (
+            getIscpTransferMethod(address, asset, rawAmount)?.estimateGas() ?? Promise.resolve(GAS_BUDGET.toJSNumber())
+        )
     } else {
-        return Promise.resolve(0)
+        return Promise.resolve(GAS_BUDGET.toJSNumber())
     }
 }
