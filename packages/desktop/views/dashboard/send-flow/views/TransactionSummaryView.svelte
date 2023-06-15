@@ -1,6 +1,6 @@
 <script lang="ts">
     import { closePopup } from '@desktop/auxiliary/popup'
-    import { prepareOutput, selectedAccount } from '@core/account'
+    import { prepareOutput, selectedAccount, updateSelectedAccount } from '@core/account'
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
     import { getDestinationNetworkFromAddress } from '@core/layer-2/utils'
