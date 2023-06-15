@@ -25,26 +25,29 @@ export async function signIscpTransferTransactionData(
     const provider = chain.getProvider()
     const evmAddress = getSelectedAccount()?.evmAddresses?.[chain.getConfiguration().coinType]
 
-    if (evmAddress && provider) {
-        const accountsCoreContract = getSmartContractHexName('accounts')
-        const transferAllowanceTo = getSmartContractHexName('transferAllowanceTo')
-
-        const agentId = evmAddressToAgentID(recipientAddress)
-        const parameters = getAgentBalanceParameters(agentId)
-        const allowance = getLayer2Allowance(asset, amount)
-
-        const contract = chain.getContract(ContractType.IscMagic, ISC_MAGIC_CONTRACT_ADDRESS)
-        const data = await contract.methods
-            .call(accountsCoreContract, transferAllowanceTo, parameters, allowance)
-            .encodeABI()
-
-        const transaction = await getCommonTransactionData(provider, evmAddress, data)
-        // Sets smart contract call data for transferAllowanceTos
-        transaction.data = data
-
-        const bip32 = buildBip32Path(60, 0)
-        return signTransactionWithLedger(transaction, bip32)
-    } else {
+    if (!evmAddress) {
+        throw new Error('No EVM address.')
+    }
+    if (!provider) {
         throw new Error('Unable to find web3 provider.')
     }
+
+    const accountsCoreContract = getSmartContractHexName('accounts')
+    const transferAllowanceTo = getSmartContractHexName('transferAllowanceTo')
+
+    const agentId = evmAddressToAgentID(recipientAddress)
+    const parameters = getAgentBalanceParameters(agentId)
+    const allowance = getLayer2Allowance(asset, amount)
+
+    const contract = chain.getContract(ContractType.IscMagic, ISC_MAGIC_CONTRACT_ADDRESS)
+    const data = await contract.methods
+        .call(accountsCoreContract, transferAllowanceTo, parameters, allowance)
+        .encodeABI()
+
+    const transaction = await getCommonTransactionData(provider, evmAddress, data)
+    // Sets smart contract call data for transferAllowanceTos
+    transaction.data = data
+
+    const bip32 = buildBip32Path(60, 0)
+    return signTransactionWithLedger(transaction, bip32)
 }

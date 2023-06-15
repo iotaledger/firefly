@@ -1,7 +1,7 @@
 import { Ledger } from '@core/ledger'
 import { EvmTransactionData } from '../types'
 import { Platform } from '@core/app'
-import { sleep } from '@core/utils'
+import { MILLISECONDS_PER_SECOND, sleep } from '@core/utils'
 
 export async function signTransactionWithLedger(transaction: EvmTransactionData, bip32Path: string): Promise<string> {
     await Ledger.signEvmTransaction(transaction, bip32Path)
@@ -18,7 +18,11 @@ export async function signTransactionWithLedger(transaction: EvmTransactionData,
         signingFinished(signedTransaction)
     })
 
-    for (let count = 0; count < 11111; count++) {
+    const pollingInterval = 100
+    const timeoutInSeconds = 10
+    const loopIterations = (timeoutInSeconds * MILLISECONDS_PER_SECOND) / pollingInterval
+
+    for (let count = 0; count < loopIterations; count++) {
         if (!isSigning) {
             if (signedTransaction) {
                 return Promise.resolve(signedTransaction)
@@ -26,7 +30,7 @@ export async function signTransactionWithLedger(transaction: EvmTransactionData,
                 return Promise.reject('Rejected')
             }
         }
-        await sleep(100)
+        await sleep(pollingInterval)
     }
     return Promise.reject('Timeout')
 }
