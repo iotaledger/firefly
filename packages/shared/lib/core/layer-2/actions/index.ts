@@ -1,2 +1,3 @@
+export * from './fetchSelectedAccountLayer2Balance'
 export * from './loadEvmAddressForSelectedAccount'
-export * from './registerLayer2EventHandlers'
+export * from './pollLayer2Tokens'

@@ -2,6 +2,10 @@ import { get } from 'svelte/store'
 
 import Web3 from 'web3'
 
+import { ContractType } from '@core/layer-2/enums'
+import { getAbiForContractType } from '@core/layer-2/utils'
+import { Contract } from '@core/layer-2/types'
+
 import { NetworkHealth } from '../enums'
 import { IBlock, IChain, IChainStatus, IIscpChainConfiguration, IIscpChainMetadata } from '../interfaces'
 import { chainStatuses } from '../stores'
@@ -11,7 +15,7 @@ export class IscpChain implements IChain {
     private readonly _provider: Web3Provider
     private readonly _configuration: IIscpChainConfiguration
 
-    private _metadata: IIscpChainMetadata
+    private _metadata: IIscpChainMetadata | undefined
 
     constructor(payload: IIscpChainConfiguration) {
         try {
@@ -26,6 +30,7 @@ export class IscpChain implements IChain {
             this._configuration = payload
         } catch (err) {
             console.error(err)
+            throw new Error('Failed to construct ISCP Chain!')
         }
     }
 
@@ -45,6 +50,11 @@ export class IscpChain implements IChain {
         return get(chainStatuses)?.[this._configuration.chainId] ?? { health: NetworkHealth.Disconnected }
     }
 
+    getContract(type: ContractType, address: string): Contract {
+        const abi = getAbiForContractType(type)
+        return new this._provider.eth.Contract(abi, address)
+    }
+
     getMetadata(): Promise<ChainMetadata> {
         if (this._metadata) {
             return Promise.resolve(this._metadata)
@@ -52,6 +62,10 @@ export class IscpChain implements IChain {
             this._metadata = <IIscpChainMetadata>{} // await this.fetchChainMetadata()
             return Promise.resolve(this._metadata)
         }
+    }
+
+    getProvider(): Web3Provider {
+        return this._provider
     }
 
     /**

@@ -1,30 +1,23 @@
 <script lang="ts">
+    import { MimeType, ParentMimeType } from '@core/nfts'
     import { onMount } from 'svelte'
 
-    import { MimeType, NFT_MEDIA_FILE_NAME, ParentMimeType } from '@core/nfts'
-    import { getStorageDirectoryOfProfiles } from '@core/profile/utils'
-    import { DEV_STORAGE_DIRECTORY } from '@core/profile'
-    import features from '@features/features'
-
     export let Media: HTMLImageElement | HTMLVideoElement = undefined
-    export let filePath: string
-    export let url: string
-    export let isLoaded: boolean
+    export let src: string
     export let expectedType: MimeType
-    export let classes: string = ''
     export let alt: string = ''
     export let autoplay: boolean = false
     export let controls: boolean = false
     export let muted: boolean = false
     export let loop: boolean = false
+    export let classes: string = ''
+    export let isLoaded: boolean
 
-    const type: string = convertMimeTypeToHtmlTag(expectedType)
+    const htmlTag: string = convertMimeTypeToHtmlTag(expectedType)
 
     let isMounted = false
-    let basePath: string
 
     $: isLoaded && muteVideo()
-    $: src = features?.collectibles?.useCaching?.enabled ? `${basePath}/${filePath}/${NFT_MEDIA_FILE_NAME}` : url
 
     function muteVideo() {
         if (muted && Media instanceof HTMLVideoElement) {
@@ -56,20 +49,15 @@
         }
     }
 
-    onMount(async () => {
-        if (process.env.NODE_ENV === 'development') {
-            basePath = DEV_STORAGE_DIRECTORY
-        } else {
-            basePath = await getStorageDirectoryOfProfiles()
-        }
+    onMount(() => {
         isMounted = true
     })
 </script>
 
 {#if isMounted}
-    {#key isLoaded && basePath}
+    {#key isLoaded && src}
         <svelte:element
-            this={type}
+            this={htmlTag}
             bind:this={Media}
             {src}
             {alt}

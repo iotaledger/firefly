@@ -1,19 +1,20 @@
 <script lang="ts">
-    import { MenuItem, Modal } from 'shared/components'
+    import { MenuItem, Modal } from '@ui'
     import { openUrlInBrowser, time } from '@core/app'
     import { localize } from '@core/i18n'
     import { INft, rewriteIpfsUri } from '@core/nfts'
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { CollectiblesRoute, collectiblesRouter } from '@core/router'
     import { burnNft } from '@core/wallet'
-    import { PopupId } from '@auxiliary/popup'
-    import { closePopup, openPopup } from '@auxiliary/popup/actions'
+    import { closePopup, openPopup, PopupId } from '../../../desktop/lib/auxiliary/popup'
+    import { activeProfile, updateActiveProfile } from '@core/profile/stores'
 
     export let modal: Modal = undefined
     export let nft: INft
 
-    $: url = composeUrl(nft?.parsedMetadata?.uri)
+    $: url = nft?.parsedMetadata?.uri && composeUrl(nft.parsedMetadata.uri)
     $: isLocked = nft.timelockTime > $time.getTime()
+    $: isCurrentPfp = $activeProfile.pfp?.id === nft.id
 
     function openBurnNft(): void {
         openPopup({
@@ -42,7 +43,7 @@
         })
     }
 
-    function composeUrl(targetUrl: string): string {
+    function composeUrl(targetUrl: string): string | undefined {
         if (!targetUrl) {
             return undefined
         }
@@ -60,15 +61,27 @@
         }
     }
 
+    function onSetPfpClick(): void {
+        updateActiveProfile({
+            pfp: isCurrentPfp ? undefined : nft,
+        })
+    }
+
     function onOpenMediaClick(): void {
-        openUrlInBrowser(url)
+        if (url) {
+            openUrlInBrowser(url)
+        }
     }
 </script>
 
 <Modal bind:this={modal} position={{ top: '100px', right: '60px' }}>
     <div class="flex flex-col">
         <MenuItem icon="receive" title={localize('views.collectibles.details.menu.download')} disabled={true} />
-        <MenuItem icon="profile" title={localize('views.collectibles.details.menu.setAvatar')} disabled={true} />
+        <MenuItem
+            icon="profile"
+            title={localize(`views.collectibles.details.menu.${isCurrentPfp ? 'unsetPfp' : 'setPfp'}`)}
+            onClick={onSetPfpClick}
+        />
         <MenuItem
             icon="export"
             title={localize('views.collectibles.details.menu.view')}

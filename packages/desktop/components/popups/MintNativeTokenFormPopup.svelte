@@ -1,8 +1,8 @@
 <script lang="ts">
     import { BaseError } from '@core/error'
     import { localize } from '@core/i18n'
-    import { setMintTokenDetails, mintTokenDetails } from '@core/wallet'
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { setMintTokenDetails, mintTokenDetails, IMintTokenDetails } from '@core/wallet'
+    import { closePopup, openPopup, PopupId } from '@desktop/auxiliary/popup'
     import {
         Button,
         Error,
@@ -19,6 +19,18 @@
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
+    const DEFAULT = {
+        name: undefined,
+        totalSupply: undefined,
+        circulatingSupply: undefined,
+        decimals: 0,
+        symbol: undefined,
+        description: undefined,
+        url: undefined,
+        logoUrl: undefined,
+        aliasId: undefined,
+    }
+
     let {
         name: tokenName,
         totalSupply,
@@ -29,7 +41,7 @@
         url,
         logoUrl,
         aliasId,
-    } = $mintTokenDetails
+    } = $mintTokenDetails ?? DEFAULT
 
     let nameError: string = ''
     $: tokenName, (nameError = '')
@@ -52,23 +64,35 @@
 
     async function onContinueClick(): Promise<void> {
         const valid = await validate()
-        if (valid) {
-            setMintTokenDetails({
-                name: tokenName,
-                totalSupply,
-                circulatingSupply,
-                decimals,
-                symbol,
-                description,
-                url,
-                logoUrl,
-                aliasId,
-            })
+        const tokenDetailsForm = {
+            name: tokenName,
+            totalSupply,
+            circulatingSupply,
+            decimals,
+            symbol,
+            description,
+            url,
+            logoUrl,
+            aliasId,
+        }
+        if (valid && isEverythingDefined(tokenDetailsForm)) {
+            setMintTokenDetails(tokenDetailsForm)
             openPopup({
                 id: PopupId.MintNativeTokenConfirmation,
                 overflow: true,
             })
         }
+    }
+
+    function isEverythingDefined(form: IMintTokenDetails | Partial<IMintTokenDetails>): form is IMintTokenDetails {
+        return (
+            form.name !== undefined &&
+            form.totalSupply !== undefined &&
+            form.circulatingSupply !== undefined &&
+            form.decimals !== undefined &&
+            form.symbol !== undefined &&
+            form.aliasId !== undefined
+        )
     }
 
     async function validate(): Promise<boolean> {
@@ -98,7 +122,7 @@
     }
 
     function isTotalSupplyValid(): Promise<void> {
-        if (totalSupply.toString().length < 1) {
+        if (totalSupply === undefined || totalSupply.toString().length < 1) {
             totalSupplyError = 'Total supply is required'
             return Promise.reject(totalSupplyError)
         } else if (Number(totalSupply) < 1) {
@@ -110,7 +134,7 @@
     }
 
     function isCirculatingSupplyValid(): Promise<void> {
-        if (circulatingSupply.toString().length < 1) {
+        if (circulatingSupply === undefined || circulatingSupply.toString().length < 1) {
             circulatingSupplyError = 'Circulating supply is required'
             return Promise.reject(circulatingSupplyError)
         } else if (Number(circulatingSupply) < 1) {
@@ -126,7 +150,7 @@
 
     function isDecimalsValid(): Promise<void> {
         return new Promise((resolve, reject) => {
-            if (decimals.toString().length < 1) {
+            if (decimals === undefined || decimals.toString().length < 1) {
                 reject('Decimals is required')
             } else if (Number(decimals) < 0) {
                 reject('Decimals must be greater than or equal to 0')

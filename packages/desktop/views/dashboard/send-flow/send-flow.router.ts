@@ -6,8 +6,8 @@ export const sendFlowRoute = writable<SendFlowRoute>(undefined)
 export const sendFlowRouter = writable<SendFlowRouter>(undefined)
 
 export class SendFlowRouter extends Subrouter<SendFlowRoute> {
-    constructor(parentRouter: Router<unknown>) {
-        super(SendFlowRoute.SelectToken, sendFlowRoute, parentRouter)
+    constructor(parentRouter: Router<unknown>, initialRoute: SendFlowRoute = SendFlowRoute.SelectToken) {
+        super(initialRoute, sendFlowRoute, parentRouter)
     }
 
     next(): void {
@@ -16,12 +16,12 @@ export class SendFlowRouter extends Subrouter<SendFlowRoute> {
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
             case SendFlowRoute.SelectToken:
-                nextRoute = SendFlowRoute.InputTokenAmount
-                break
-            case SendFlowRoute.InputTokenAmount:
                 nextRoute = SendFlowRoute.SelectRecipient
                 break
             case SendFlowRoute.SelectRecipient:
+                nextRoute = SendFlowRoute.InputTokenAmount
+                break
+            case SendFlowRoute.InputTokenAmount:
                 nextRoute = SendFlowRoute.TransactionSummary
                 break
             case SendFlowRoute.TransactionSummary:

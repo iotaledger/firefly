@@ -59,10 +59,19 @@
 </script>
 
 <SendFlowTemplate
-    title={localize('popups.transaction.selectAmount', { values: { tokenName: asset.metadata.name } })}
+    title={localize('popups.transaction.selectAmount', {
+        values: { tokenName: asset.metadata.name },
+    })}
     leftButton={{ text: localize('actions.back'), onClick: onBackClick }}
     rightButton={{ text: localize('actions.continue'), onClick: onContinueClick, disabled: !amount }}
 >
-    <TokenAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:inputtedAmount={amount} {unit} />
+    <TokenAmountInput
+        bind:this={assetAmountInput}
+        bind:asset
+        bind:rawAmount
+        bind:inputtedAmount={amount}
+        {unit}
+        {availableBalance}
+    />
     <TokenAmountTile {asset} onMaxClick={setToMax} />
 </SendFlowTemplate>

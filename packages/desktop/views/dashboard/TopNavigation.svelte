@@ -18,14 +18,13 @@
         settingsRouter,
     } from '@core/router'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { popupState } from '@auxiliary/popup'
+    import { popupState } from '@desktop/auxiliary/popup'
     import features from '@features/features'
-    import { closeDrawer } from '@desktop/auxilary/drawer'
-
-    const isWindows = $platform === PlatformOption.Windows
+    import { closeDrawer } from '@desktop/auxiliary/drawer'
 
     let isBackButtonVisible = false
 
+    $: isWindows = $platform === PlatformOption.Windows
     $: {
         if ($settingsRoute || $collectiblesRoute || $governanceRoute) {
             isBackButtonVisible = isCorrectRoute()
@@ -85,7 +84,7 @@
 
 <style type="text/scss">
     top-navigation {
-        @apply fixed flex flex-row justify-between items-center z-10 top-0 left-18 h-12 px-8 py-1;
+        @apply absolute flex flex-row justify-between items-center z-10 -top-12 left-18 h-12 px-8 py-1;
         width: calc(100% - 4.5rem);
 
         &.disabled {

@@ -1,16 +1,16 @@
 <script lang="ts">
-    import lottie from 'lottie-web'
+    import lottie, { AnimationItem, AnimationSegment } from 'lottie-web'
     import { appSettings } from '@core/app'
     import { onDestroy } from 'svelte'
 
-    export let animation = undefined
+    export let animation: string | undefined = undefined
     export let classes = ''
     export let loop = true
     export let autoplay = true
-    export let segments = undefined
+    export let segments: AnimationSegment | AnimationSegment[] | undefined = undefined
     export let renderer: 'svg' | 'canvas' | 'html' = 'svg'
 
-    const animations = {
+    const animations: { [key: string]: { lightmode: string; darkmode: string } } = {
         'welcome-desktop': {
             lightmode: 'welcome-desktop.json',
             darkmode: 'welcome-desktop-darkmode.json',
@@ -170,11 +170,11 @@
         },
     }
 
-    let container
-    let lottieAnimation
+    let container: HTMLElement
+    let lottieAnimation: AnimationItem
 
     $: darkModeEnabled = $appSettings.darkMode
-    $: selected = animations[animation]?.[darkModeEnabled ? 'darkmode' : 'lightmode']
+    $: selected = animation ? animations[animation]?.[darkModeEnabled ? 'darkmode' : 'lightmode'] : null
 
     $: if (selected && container) {
         const options = {

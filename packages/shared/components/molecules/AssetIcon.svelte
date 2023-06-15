@@ -1,24 +1,24 @@
 <script lang="ts">
-    import { NETWORK_ICON_SVG } from '@auxiliary/icon'
+    import { Icon as IconEnum, NETWORK_ICON_SVG } from '@auxiliary/icon'
     import { getIconColorFromString } from '@core/account'
     import { COIN_TYPE, NetworkId } from '@core/network'
+    import { activeProfile } from '@core/profile'
     import { isBright } from '@core/utils'
-    import { ANIMATED_TOKEN_IDS, IPersistedAsset, NotVerifiedStatus, getAssetInitials } from '@core/wallet'
-    import { Animation, Icon, VerificationBadge } from 'shared/components'
+    import { ANIMATED_TOKEN_IDS, getAssetInitials, IAsset } from '@core/wallet'
+    import { Animation, Icon, NetworkIconBadge, VerificationBadge } from 'shared/components'
 
-    export let asset: IPersistedAsset
+    export let asset: IAsset
     export let large = false
     export let small = false
-    export let showVerifiedBadgeOnly = false
 
-    let icon: string
+    let icon: IconEnum | null
     let assetIconColor: string
     let assetIconBackgroundColor: string
     let assetInitials: string
     let assetIconWrapperWidth: number
 
-    $: isAnimation = asset?.id in ANIMATED_TOKEN_IDS
-    $: switch (asset?.id) {
+    $: isAnimation = asset.id in ANIMATED_TOKEN_IDS
+    $: switch (asset.id) {
         case String(COIN_TYPE[NetworkId.Iota]):
             assetInitials = ''
             assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
@@ -35,13 +35,12 @@
         default:
             assetInitials = getAssetInitials(asset)
             assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
-            assetIconBackgroundColor = getIconColorFromString(asset?.metadata?.name)
-            icon = ''
+            assetIconBackgroundColor = getIconColorFromString(asset?.metadata?.name, {
+                shades: ['500', '600', '700', '800'],
+                colorsToExclude: ['gray'],
+            })
+            icon = null
     }
-
-    $: shouldShowBadge = showVerifiedBadgeOnly
-        ? asset?.verification?.verified
-        : asset?.verification?.status !== NotVerifiedStatus.Skipped
 </script>
 
 <div
@@ -63,7 +62,7 @@
         {#if isAnimation}
             <Animation
                 classes={large ? 'w-12 h-12' : small ? 'w-6 h-6' : 'w-8 h-8'}
-                animation={ANIMATED_TOKEN_IDS[asset?.id]}
+                animation={ANIMATED_TOKEN_IDS[asset.id]}
                 loop={true}
                 renderer="canvas"
             />
@@ -80,16 +79,13 @@
             </p>
         {/if}
     </div>
-    {#if shouldShowBadge}
-        <span
-            class="
-                absolute flex justify-center items-center
-                {small ? '-bottom-1 -right-1' : '-bottom-0.5 -right-0.5'}
-            "
-        >
-            <VerificationBadge status={asset?.verification?.status} {large} />
-        </span>
-    {/if}
+    <span class="absolute flex justify-center items-center bottom-0 right-0">
+        {#if asset.verification.verified === true}
+            <NetworkIconBadge width={10} height={10} network={$activeProfile.network} chainId={asset.chainId} />
+        {:else}
+            <VerificationBadge status={asset.verification?.status} width={14} height={14} />
+        {/if}
+    </span>
 </div>
 
 <style type="text/scss">

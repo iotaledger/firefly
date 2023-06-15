@@ -4,30 +4,24 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let status: VerifiedStatus | NotVerifiedStatus
-    export let large = false
+    export let width: number
+    export let height: number
 </script>
 
-{#if status === NotVerifiedStatus.New}
-    <Icon
-        width={large ? 20 : 14}
-        height={large ? 20 : 14}
-        icon={IconEnum.VerificationStatusNew}
-        classes="text-gray-600"
-        secondaryColor="white"
-    />
-{:else if status === VerifiedStatus.SelfVerified}
-    <Icon
-        width={large ? 20 : 14}
-        height={large ? 20 : 14}
-        icon={IconEnum.VerificationStatusSelf}
-        secondaryColor="white"
-    />
-{:else if status === VerifiedStatus.Official}
-    <Icon
-        width={large ? 20 : 14}
-        height={large ? 20 : 14}
-        icon={IconEnum.VerificationStatusOfficial}
-        classes="text-verification-blue"
-        secondaryColor="white"
-    />
-{/if}
+<verification-status-badge
+    class="absolute -right-1 -bottom-1 flex items-center justify-center rounded-full ring-2 ring-white dark:ring-gray-900"
+>
+    {#if status === NotVerifiedStatus.New || status === NotVerifiedStatus.Skipped}
+        <Icon {width} {height} icon={IconEnum.VerificationStatusNew} classes="text-gray-600" secondaryColor="white" />
+    {:else if status === VerifiedStatus.SelfVerified}
+        <Icon {width} {height} icon={IconEnum.VerificationStatusSelf} secondaryColor="white" />
+    {:else if status === VerifiedStatus.Official}
+        <Icon
+            {width}
+            {height}
+            icon={IconEnum.VerificationStatusOfficial}
+            classes="text-verification-blue"
+            secondaryColor="white"
+        />
+    {/if}
+</verification-status-badge>

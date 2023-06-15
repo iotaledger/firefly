@@ -51,7 +51,7 @@
 </Tooltip>
 
 <style type="text/scss">
-    :global(body.scheme-dark) {
+    :global(body.dark) {
         :global(.datetime-picker-colors) {
             --sdt-color: theme('colors.white');
             --sdt-btn-bg-hover: theme('colors.gray.800');

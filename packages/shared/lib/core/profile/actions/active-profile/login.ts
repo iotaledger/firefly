@@ -6,7 +6,6 @@ import { IAccount } from '@core/account/interfaces'
 import { Platform } from '@core/app/classes'
 import { AppContext } from '@core/app/enums'
 import { handleError } from '@core/error/handlers'
-import { loadEvmAddressForSelectedAccount } from '@core/layer-2/actions'
 import { pollLedgerNanoStatus } from '@core/ledger/actions'
 import { pollMarketPrices } from '@core/market/actions'
 import { pollChainStatuses, pollNetworkStatus } from '@core/network/actions'
@@ -48,6 +47,7 @@ import { loadAccounts } from './loadAccounts'
 import { logout } from './logout'
 import { subscribeToWalletApiEventsForActiveProfile } from './subscribeToWalletApiEventsForActiveProfile'
 import { checkAndUpdateActiveProfileNetwork } from './checkAndUpdateActiveProfileNetwork'
+import { checkAndRemoveProfilePicture } from './checkAndRemoveProfilePicture'
 
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const loginRouter = get(routerManager).getRouterForAppContext(AppContext.Login)
@@ -108,6 +108,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             )
             updateActiveProfile({ forceAssetRefresh: false })
             await loadNftsForActiveProfile()
+            checkAndRemoveProfilePicture()
 
             // Step 6: generate and store activities for all accounts
             incrementLoginProgress()
@@ -125,6 +126,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                     setTimeStrongholdLastUnlocked()
                 }
             } else {
+                Platform.startLedgerProcess()
                 incrementLoginProgress(2)
             }
 
@@ -147,7 +149,6 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 resetLoginProgress()
             }, 500)
 
-            void loadEvmAddressForSelectedAccount()
             void pollMarketPrices()
             if (Platform.isFeatureFlagEnabled('governance')) {
                 void initializeRegisteredProposals()

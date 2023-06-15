@@ -1,6 +1,5 @@
 <script lang="ts">
-    import { PopupId } from '@auxiliary/popup'
-    import { openPopup } from '@auxiliary/popup/actions'
+    import { openPopup, PopupId } from '@desktop/auxiliary/popup'
     import { selectedAccountIndex } from '@core/account/stores'
     import { time } from '@core/app'
     import { openUrlInBrowser } from '@core/app/utils'
@@ -148,7 +147,7 @@
     <div class="flex w-full h-full items-center justify-center">
         <div class="relative w-full h-full flex rounded-2xl overflow-hidden">
             <NftMedia
-                nftId={id}
+                {nft}
                 classes="rounded-2xl overflow-hidden flex-1 w-auto h-auto max-w-full max-h-full object-contain absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
                 autoplay
                 controls

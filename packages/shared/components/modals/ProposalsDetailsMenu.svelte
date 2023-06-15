@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Icon } from '@auxiliary/icon'
-    import { openPopup, PopupId } from '@auxiliary/popup'
+    import { openPopup, PopupId } from '../../../desktop/lib/auxiliary/popup'
     import { localize } from '@core/i18n'
     import { Modal, MenuItem } from 'shared/components'
 

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Button, Text, FontWeight, TextHint, TextType, KeyValueBox } from 'shared/components'
     import { HTMLButtonType } from 'shared/components/enums'
-    import { closePopup, openPopup } from '@auxiliary/popup/actions'
+    import { closePopup, openPopup, PopupId } from '@desktop/auxiliary/popup'
     import { selectedAccount } from '@core/account/stores'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth, getBaseToken } from '@core/profile/actions'
@@ -9,7 +9,6 @@
     import { vote } from '@contexts/governance/actions'
     import { ABSTAIN_VOTE_VALUE } from '@contexts/governance/constants'
     import { selectedProposal } from '@contexts/governance/stores'
-    import { PopupId } from '@auxiliary/popup'
 
     export let selectedAnswerValues: number[]
 
@@ -37,7 +36,7 @@
 <form
     id="vote-proposal"
     on:submit|preventDefault={onSubmit}
-    class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0"
+    class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0"
 >
     <Text type={TextType.h4} fontWeight={FontWeight.semibold} classes="text-left">
         {localize('popups.voteForProposal.title')}

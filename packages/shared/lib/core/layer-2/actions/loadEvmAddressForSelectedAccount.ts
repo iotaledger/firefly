@@ -1,14 +1,17 @@
 import { getSelectedAccount } from '@core/account/stores'
+import { buildBip32Path } from '@core/account/utils'
 import { Ledger } from '@core/ledger/classes'
-import { getActiveProfile } from '@core/profile'
-import { COIN_TYPE } from '@core/network/constants'
 
-export async function loadEvmAddressForSelectedAccount(): Promise<void> {
+export function loadEvmAddressForSelectedAccount(coinType: number): void {
     try {
-        const { evmAddress, index } = getSelectedAccount() ?? {}
-        if (!evmAddress) {
-            const coinType = COIN_TYPE[getActiveProfile()?.network?.id] ?? 1
-            await Ledger.generateEvmAddress(coinType, index ?? 0, false)
+        const account = getSelectedAccount()
+        if (!account) {
+            return
+        }
+        const { evmAddresses, index } = account
+        if (!evmAddresses[coinType]) {
+            const bip32Path = buildBip32Path(coinType, index)
+            Ledger.generateEvmAddress(bip32Path, false)
         }
     } catch (err) {
         console.error(err)

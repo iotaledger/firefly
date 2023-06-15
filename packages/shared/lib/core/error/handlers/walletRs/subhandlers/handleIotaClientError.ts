@@ -6,7 +6,7 @@ import { handleGenericError } from '../../handleGenericError'
 
 export function handleIotaClientError(error: IError): void {
     const errorMessage = error?.error
-    let errorKey
+    let errorKey: IotaClientError | undefined
     if (errorMessage) {
         if (CLIENT_ERROR_REGEXES[IotaClientError.NoInputs].test(errorMessage)) {
             errorKey = IotaClientError.NoInputs
@@ -14,7 +14,7 @@ export function handleIotaClientError(error: IError): void {
             errorKey = IotaClientError.NotEnoughBalance
         }
 
-        const errorObject = WALLET_RS_ERROR_PARAMETERS[WalletRsError.IotaClientError][errorKey]
+        const errorObject = errorKey ? WALLET_RS_ERROR_PARAMETERS[WalletRsError.IotaClientError]?.[errorKey] : undefined
         if (errorObject) {
             logAndNotifyError({ ...errorObject, message: errorMessage, type: error.type })
             return

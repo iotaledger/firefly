@@ -100,6 +100,7 @@ export enum Icon {
     Settings = 'settings',
     Shield = 'shield',
     Shimmer = 'shimmer',
+    ShimmerEvm = 'shimmer-evm',
     SmallChevronDown = 'small-chevron-down',
     SmallChevronLeft = 'small-chevron-left',
     SmallChevronRight = 'small-chevron-right',

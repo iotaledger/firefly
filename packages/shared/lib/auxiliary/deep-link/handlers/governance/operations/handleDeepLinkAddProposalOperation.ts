@@ -1,12 +1,11 @@
 import { showAppNotification } from '@auxiliary/notification/actions'
-import { closePopup, openPopup } from '@auxiliary/popup/actions'
+import { closePopup, openPopup, PopupId } from '../../../../../../../desktop/lib/auxiliary/popup'
 import { isValidUrl } from '@core/utils/validation'
 import { isProposalAlreadyAddedForSelectedAccount, isValidProposalId } from '@contexts/governance/utils'
 import { AddProposalOperationParameter } from '../../../enums'
 import { registeredProposalsForSelectedAccount, selectedProposalId } from '@contexts/governance/stores'
 import { GovernanceRoute, governanceRouter } from '@core/router'
 import { get } from 'svelte/store'
-import { PopupId } from '@auxiliary/popup'
 
 /**
  * NOTE: If we throw an error as normal, it will be handled and displayed in the "failed link"

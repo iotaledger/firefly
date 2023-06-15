@@ -1,6 +1,4 @@
-import { IAppUpdateDownloadProgress } from './app-update-download-progress.interface'
-import { IAppVersionDetails } from './app-version-details.interface'
-import { INFTDownloadState } from './nft-download-state.interface'
+import { IAppUpdateDownloadProgress, IAppVersionDetails, IEvmAddress, INFTDownloadState, ISignedTransaction } from '.'
 
 export interface IPlatformEventMap {
     'menu-logout': void
@@ -19,5 +17,7 @@ export interface IPlatformEventMap {
     'notification-activated': unknown
     'nft-download-done': INFTDownloadState
     'nft-download-interrupted': INFTDownloadState
-    'evm-address': string
+    'evm-address': IEvmAddress
+    'evm-signed-transaction': ISignedTransaction
+    'ledger-error': Error
 }

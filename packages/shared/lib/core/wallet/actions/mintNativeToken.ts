@@ -3,10 +3,10 @@ import { showAppNotification } from '@auxiliary/notification'
 import { selectedAccount, updateSelectedAccount } from '@core/account'
 import { localize } from '@core/i18n'
 import { Converter } from '@core/utils'
-import { NativeTokenOptions } from '@iota/wallet'
+import { MintNativeTokenParams } from '@iota/wallet'
 import { DEFAULT_TRANSACTION_OPTIONS } from '../constants'
 import { VerifiedStatus } from '../enums'
-import { buildPersistedAssetFromIrc30Metadata } from '../helpers'
+import { buildPersistedAssetFromMetadata } from '../helpers'
 import { IIrc30Metadata, IPersistedAsset } from '../interfaces'
 import { resetMintTokenDetails } from '../stores'
 import { addPersistedAsset } from '../stores/persisted-assets.store'
@@ -21,14 +21,14 @@ export async function mintNativeToken(
         updateSelectedAccount({ isTransferring: true })
         const account = get(selectedAccount)
 
-        const nativeTokenOptions: NativeTokenOptions = {
+        const params: MintNativeTokenParams = {
             maximumSupply: Converter.decimalToHex(maximumSupply),
             circulatingSupply: Converter.decimalToHex(circulatingSupply),
             foundryMetadata: Converter.utf8ToHex(JSON.stringify(metadata)),
         }
 
-        const mintTokenTransaction = await account.mintNativeToken(nativeTokenOptions, DEFAULT_TRANSACTION_OPTIONS)
-        const persistedAsset: IPersistedAsset = buildPersistedAssetFromIrc30Metadata(
+        const mintTokenTransaction = await account.mintNativeToken(params, DEFAULT_TRANSACTION_OPTIONS)
+        const persistedAsset: IPersistedAsset = buildPersistedAssetFromMetadata(
             mintTokenTransaction.tokenId,
             metadata,
             { verified: true, status: VerifiedStatus.SelfVerified }

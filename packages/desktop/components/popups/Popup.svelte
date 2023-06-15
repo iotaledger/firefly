@@ -2,9 +2,7 @@
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
     import { Icon } from '@ui'
-    import { closePopup } from '@auxiliary/popup/actions'
-    import { PopupId } from '@auxiliary/popup/enums'
-    import { PopupComponentMap } from '@auxiliary/popup/types'
+    import { closePopup, PopupComponentMap, PopupId } from '@desktop/auxiliary/popup'
     import { Icon as IconEnum } from '@auxiliary/icon/enums'
     import { PlatformOption, platform } from '@core/app'
     import { clickOutside } from '@core/utils/ui'
@@ -28,6 +26,7 @@
     import EnableLedgerBlindSigningPopup from './EnableLedgerBlindSigningPopup.svelte'
     import ErrorLogPopup from './ErrorLogPopup.svelte'
     import FaucetRequestPopup from './FaucetRequestPopup.svelte'
+    import ImportErc20TokenFormPopup from './ImportErc20TokenFormPopup.svelte'
     import LedgerAppGuidePopup from './LedgerAppGuidePopup.svelte'
     import LedgerConnectionGuidePopup from './LedgerConnectionGuidePopup.svelte'
     import LegalUpdatePopup from './LegalUpdatePopup.svelte'
@@ -110,6 +109,7 @@
         [PopupId.EnableLedgerBlindSigning]: EnableLedgerBlindSigningPopup,
         [PopupId.ErrorLog]: ErrorLogPopup,
         [PopupId.FaucetRequest]: FaucetRequestPopup,
+        [PopupId.ImportErc20Token]: ImportErc20TokenFormPopup,
         [PopupId.LedgerAppGuide]: LedgerAppGuidePopup,
         [PopupId.LedgerConnection]: LedgerConnectionGuidePopup,
         [PopupId.LegalUpdate]: LegalUpdatePopup,

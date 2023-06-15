@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Button, Text, TextHint, FontWeight, TextType, ButtonVariant } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { closePopup } from '@auxiliary/popup'
+    import { closePopup } from '@desktop/auxiliary/popup'
     import { handleError } from '@core/error/handlers'
     import { onMount } from 'svelte'
     import { selectedAccount } from '@core/account'
@@ -43,7 +43,7 @@
     })
 </script>
 
-<div class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
+<div class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">
     <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
         {title}
     </Text>

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
     import { Text, Button, AccountInput, FontWeight } from 'shared/components'
-    import { closePopup } from '@auxiliary/popup'
+    import { closePopup } from '@desktop/auxiliary/popup'
     import { IAccountState, setSelectedAccount } from '@core/account'
 
     export let onCancel: () => void
@@ -20,7 +20,7 @@
     }
 </script>
 
-<account-switcher-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
+<account-switcher-popup class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">
     <Text type="h3" fontWeight={FontWeight.semibold} classes="text-left">
         {localize('popups.deeplinkAccountSwitch.title')}
     </Text>

@@ -331,9 +331,17 @@ const ElectronApi = {
     trackEvent(eventName, eventProperties) {
         return ipcRenderer.invoke('track-event', eventName, eventProperties)
     },
-
     isFeatureFlagEnabled(keyPath) {
         return keyPath?.split('.').reduce((prev, cur) => prev && prev[cur], features)?.enabled ?? false
+    },
+    updateTheme(theme) {
+        return ipcRenderer.invoke('update-theme', theme)
+    },
+    startLedgerProcess() {
+        return ipcRenderer.send('start-ledger-process')
+    },
+    killLedgerProcess() {
+        return ipcRenderer.send('kill-ledger-process')
     },
 }
 

@@ -1,24 +1,13 @@
 <script lang="ts">
-    import { onMount } from 'svelte'
-    import { closePopup } from '@auxiliary/popup/actions'
+    import { closePopup } from '@desktop/auxiliary/popup'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
-    import {
-        ACCOUNTS_CONTRACT,
-        CONTRACT_FUNCTIONS,
-        GAS_BUDGET,
-        TARGET_CONTRACTS,
-        TRANSFER_ALLOWANCE,
-    } from '@core/layer-2/constants'
     import { getDestinationNetworkFromAddress } from '@core/layer-2/utils'
-    import { ledgerPreparedOutput } from '@core/ledger/stores'
-    import { checkActiveProfileAuth } from '@core/profile/actions'
-    import { isActiveLedgerProfile } from '@core/profile/stores'
-    import { ExpirationTime } from '@core/utils/enums'
-    import { sendOutput } from '@core/wallet/actions'
+    import { activeProfile } from '@core/profile/stores'
+    import { truncateString } from '@core/utils'
+    import { TimePeriod } from '@core/utils/enums'
     import { DEFAULT_TRANSACTION_OPTIONS } from '@core/wallet/constants'
-    import { ActivityAction, ActivityDirection, ActivityType, InclusionState } from '@core/wallet/enums'
     import {
         NewTransactionType,
         newTransactionDetails,
@@ -26,110 +15,84 @@
         updateNewTransactionDetails,
     } from '@core/wallet/stores'
     import { Output } from '@core/wallet/types'
-    import {
-        getAddressFromSubject,
-        getOutputOptions,
-        getStorageDepositFromOutput,
-        validateSendConfirmation,
-    } from '@core/wallet/utils'
-    import type { OutputOptions } from '@iota/wallet'
-    import {
-        ActivityInformation,
-        BasicActivityDetails,
-        Button,
-        ExpirationTimePicker,
-        FontWeight,
-        KeyValueBox,
-        NftActivityDetails,
-        Tab,
-        Text,
-        TextHint,
-        TextType,
-        Toggle,
-    } from '@ui'
+    import { createTransaction, getOutputParameters, getStorageDepositFromOutput } from '@core/wallet/utils'
+    import { AddInputButton, ExpirationTimePicker, OptionalInput } from '@ui'
+    import { onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { sendFlowRouter } from '../send-flow.router'
+    import SendFlowTemplate from './SendFlowTemplate.svelte'
+    import TokenAmountTile from './components/TokenAmountTile.svelte'
+    import TransactionDetails from './components/TransactionDetails.svelte'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
     let {
-        recipient,
         expirationDate,
+        timelockDate,
+        disableChangeExpiration,
         giftStorageDeposit,
         surplus,
-        disableChangeExpiration,
-        disableToggleGift,
         layer2Parameters,
+        tag,
+        metadata,
+        disableToggleGift,
     } = get(newTransactionDetails)
 
+    const destinationNetwork = getDestinationNetworkFromAddress(layer2Parameters?.networkAddress)
     let storageDeposit = 0
     let visibleSurplus = 0
     let preparedOutput: Output
-    let outputOptions: OutputOptions
     let expirationTimePicker: ExpirationTimePicker
+    let metadataInput: OptionalInput
+    let tagInput: OptionalInput
 
-    let initialExpirationDate: ExpirationTime = getInitialExpirationDate()
-    let activeTab: Tab
+    let selectedExpirationPeriod: TimePeriod | undefined = expirationDate ? TimePeriod.Custom : undefined
+    let selectedTimelockPeriod: TimePeriod | undefined = timelockDate ? TimePeriod.Custom : undefined
 
     $: transactionDetails = get(newTransactionDetails)
-    $: isInternal = recipient.type === 'account'
+    $: asset = transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.asset : undefined
+    $: recipient =
+        transactionDetails.recipient.type === 'account'
+            ? transactionDetails.recipient.account.name
+            : truncateString(transactionDetails.recipient?.address, 6, 6)
     $: expirationTimePicker?.setNull(giftStorageDeposit)
-    $: hideGiftToggle =
-        (transactionDetails.type === NewTransactionType.TokenTransfer &&
-            transactionDetails.asset.id === $selectedAccountAssets?.baseCoin?.id) ||
-        (disableToggleGift && !giftStorageDeposit) ||
-        !!layer2Parameters
-    $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
-    $: isTransferring = $selectedAccount.isTransferring
-
-    $: activity = {
-        ...transactionDetails,
-        storageDeposit,
-        subject: recipient,
-        isInternal,
-        giftedStorageDeposit: 0,
-        surplus: visibleSurplus,
-        type: ActivityType.Basic,
-        direction: ActivityDirection.Outgoing,
-        inclusionState: InclusionState.Pending,
-        action: ActivityAction.Send,
-        destinationNetwork: getDestinationNetworkFromAddress(layer2Parameters?.networkAddress),
-        ...(layer2Parameters?.networkAddress && {
-            parsedLayer2Metadata: {
-                ethereumAddress: getAddressFromSubject(recipient),
-                targetContract: TARGET_CONTRACTS[ACCOUNTS_CONTRACT],
-                contractFunction: CONTRACT_FUNCTIONS[TRANSFER_ALLOWANCE],
-                gasBudget: GAS_BUDGET,
-            },
-        }),
-    }
+    $: expirationDate, timelockDate, giftStorageDeposit, refreshSendConfirmationState()
+    $: isTransferring = !!$selectedAccount.isTransferring
+    $: isLayer2 = !!layer2Parameters?.networkAddress
 
     function refreshSendConfirmationState(): void {
-        updateNewTransactionDetails({ type: transactionDetails.type, expirationDate, giftStorageDeposit, surplus })
+        updateNewTransactionDetails({
+            type: transactionDetails.type,
+            expirationDate,
+            timelockDate,
+            giftStorageDeposit,
+            surplus,
+        })
         void prepareTransactionOutput()
     }
 
-    function getInitialExpirationDate(): ExpirationTime {
+    function getInitialExpirationDate(): TimePeriod {
         if (expirationDate) {
-            return ExpirationTime.Custom
+            return TimePeriod.Custom
         } else if (storageDeposit && !giftStorageDeposit) {
-            return ExpirationTime.OneDay
+            return TimePeriod.OneDay
         } else {
-            return ExpirationTime.None
+            return TimePeriod.None
         }
+    }
+
+    async function calculateInitialOutput() {
+        await prepareTransactionOutput()
+        selectedExpirationPeriod = getInitialExpirationDate()
     }
 
     async function prepareTransactionOutput(): Promise<void> {
         const transactionDetails = get(newTransactionDetails)
 
-        outputOptions = getOutputOptions(transactionDetails)
-        preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
+        const outputParams = getOutputParameters(transactionDetails)
+        preparedOutput = await prepareOutput($selectedAccount.index, outputParams, DEFAULT_TRANSACTION_OPTIONS)
 
         setStorageDeposit(preparedOutput, Number(surplus))
-
-        if (!initialExpirationDate) {
-            initialExpirationDate = getInitialExpirationDate()
-        }
     }
 
     function setStorageDeposit(preparedOutput: Output, surplus?: number): void {
@@ -158,23 +121,12 @@
         }
     }
 
-    async function sendOutputAndClosePopup(): Promise<void> {
-        await sendOutput(preparedOutput)
-        closePopup()
-    }
-
-    function toggleGiftStorageDeposit(): void {
-        giftStorageDeposit = !giftStorageDeposit
-    }
-
     async function onConfirmClick(): Promise<void> {
+        if (transactionDetails.type !== NewTransactionType.TokenTransfer) {
+            return
+        }
         try {
-            validateSendConfirmation(outputOptions, preparedOutput)
-
-            if ($isActiveLedgerProfile) {
-                ledgerPreparedOutput.set(preparedOutput)
-            }
-            await checkActiveProfileAuth(sendOutputAndClosePopup, { stronghold: true, ledger: false })
+            await createTransaction(transactionDetails, $selectedAccount.index, () => closePopup())
         } catch (err) {
             handleError(err)
         }
@@ -186,6 +138,7 @@
 
     onMount(async () => {
         try {
+            await calculateInitialOutput()
             await _onMount()
         } catch (err) {
             handleError(err)
@@ -193,53 +146,67 @@
     })
 </script>
 
-<transaction-summary-view class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
-    <transaction-summary-title>
-        <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">Transaction Summary Title</Text>
-    </transaction-summary-title>
-    <transaction-summary-content class="w-full flex-col space-y-2">
+<SendFlowTemplate
+    title={localize('popups.transaction.transactionSummary', { values: { recipient } })}
+    leftButton={{ text: localize('actions.back'), onClick: onBackClick }}
+    rightButton={{
+        text: localize('actions.confirm'),
+        onClick: onConfirmClick,
+        disabled: isTransferring,
+        isBusy: isTransferring,
+    }}
+>
+    <div class="flex flex-row gap-2 justify-between">
         {#if transactionDetails.type === NewTransactionType.TokenTransfer}
-            <BasicActivityDetails {activity} />
-        {:else if transactionDetails.type === NewTransactionType.NftTransfer}
-            <NftActivityDetails {activity} />
+            <TokenAmountTile {asset} amount={transactionDetails.rawAmount} />
         {/if}
-        <div class="pt-4">
-            <ActivityInformation {activity} bind:activeTab />
-        </div>
-        {#if activeTab === Tab.Transaction}
-            {#if !hideGiftToggle}
-                <KeyValueBox keyText={localize('general.giftStorageDeposit')}>
-                    <Toggle
-                        slot="value"
-                        color="green"
-                        disabled={disableToggleGift}
-                        active={giftStorageDeposit}
-                        onClick={toggleGiftStorageDeposit}
-                    />
-                </KeyValueBox>
-            {/if}
-            {#if initialExpirationDate !== undefined}
-                <KeyValueBox keyText={localize('general.expirationTime')}>
-                    <ExpirationTimePicker
-                        slot="value"
-                        bind:this={expirationTimePicker}
-                        bind:value={expirationDate}
-                        initialSelected={initialExpirationDate}
-                        disabled={disableChangeExpiration || isTransferring}
-                    />
-                </KeyValueBox>
-            {/if}
+        {#if visibleSurplus}
+            <TokenAmountTile
+                asset={$selectedAccountAssets?.[$activeProfile?.network?.id]?.baseCoin}
+                amount={String(visibleSurplus)}
+                showAssetInfo={false}
+            />
         {/if}
-    </transaction-summary-content>
-    {#if surplus}
-        <TextHint warning text={localize('popups.transaction.surplusIncluded')} />
-    {/if}
-    <transaction-summary-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" outline onClick={onBackClick}>
-            {localize('actions.back')}
-        </Button>
-        <Button classes="w-full" onClick={onConfirmClick} disabled={isTransferring} isBusy={isTransferring}>
-            {localize('actions.confirm')}
-        </Button>
-    </transaction-summary-buttons>
-</transaction-summary-view>
+    </div>
+
+    <TransactionDetails
+        bind:expirationDate
+        bind:timelockDate
+        bind:selectedExpirationPeriod
+        bind:selectedTimelockPeriod
+        bind:giftStorageDeposit
+        {storageDeposit}
+        {destinationNetwork}
+        {disableChangeExpiration}
+        disableChangeTimelock={disableChangeExpiration}
+        disableGiftStorageDeposit={disableToggleGift}
+        disableAll={isTransferring}
+    />
+
+    <optional-inputs class="flex flex-row flex-wrap gap-4">
+        <AddInputButton
+            open={!!selectedExpirationPeriod}
+            text={localize('general.expirationTime')}
+            onClick={() => (selectedExpirationPeriod = TimePeriod.OneDay)}
+        />
+        <AddInputButton
+            open={!!selectedTimelockPeriod}
+            text={localize('general.timelockDate')}
+            onClick={() => (selectedTimelockPeriod = TimePeriod.OneDay)}
+        />
+        <OptionalInput
+            bind:this={tagInput}
+            bind:value={tag}
+            label={localize('general.tag')}
+            description={localize('tooltips.optionalInput')}
+        />
+        {#if !isLayer2}
+            <OptionalInput
+                bind:this={metadataInput}
+                bind:value={metadata}
+                label={localize('general.metadata')}
+                description={localize('tooltips.optionalInput')}
+            />
+        {/if}
+    </optional-inputs>
+</SendFlowTemplate>
