@@ -12,7 +12,7 @@ const walletFeatures: IWalletFeatures = {
         },
     },
     newSendFlow: {
-        enabled: true,
+        enabled: false,
     },
     assets: {
         enabled: true,
