@@ -5,10 +5,10 @@ import { MILLISECONDS_PER_SECOND, sleep } from '@core/utils'
 import { localize } from '@core/i18n'
 
 export async function signTransactionWithLedger(transaction: EvmTransactionData, bip32Path: string): Promise<string> {
-    await Ledger.signEvmTransaction(transaction, bip32Path)
+    Ledger.signEvmTransaction(transaction, bip32Path)
 
     let isSigning = true
-    let signedTransaction: string = ''
+    let signedTransaction = ''
 
     function signingFinished(_signedTransaction: string): void {
         isSigning = false
