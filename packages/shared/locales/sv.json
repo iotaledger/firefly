@@ -503,13 +503,27 @@
                         }
                     },
                     "chainDepositAddress": {
-                        "title": "Chain deposit address"
+                        "title": "Chain deposit address",
+                        "networkTitle": "Network deposit address"
                     },
                     "chainInformation": {
                         "title": "Chain information"
                     },
+                    "confirmLedgerEvmAddress": {
+                        "title": "Confirm EVM address",
+                        "header": "We have generated your EVM address"
+                    },
                     "connectedChains": {
                         "title": "Connected chains"
+                    },
+                    "connectLedgerDevice": {
+                        "title": "Connect Ledger Device",
+                        "header": "Open the Ethereum app",
+                        "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed before following these steps.",
+                        "requirements": {
+                            "connect": "Connect and unlock your Ledger",
+                            "openApp": "Open the Ethereum app on your Ledger"
+                        }
                     },
                     "editChain": {
                         "title": "Edit chain"
@@ -589,7 +603,8 @@
                 "attributes": "Attribut",
                 "menu": {
                     "download": "Ladda ner",
-                    "setAvatar": "Ange NFT som profilavatar",
+                    "setPfp": "Set NFT profile pic",
+                    "unsetPfp": "Unset NFT profile pic",
                     "view": "Visa media i webbläsaren",
                     "burn": "Bränn NFT"
                 }
@@ -890,6 +905,10 @@
         "transaction": {
             "title": "Skicka tillgång",
             "body": "Du håller på att skicka {amount} till",
+            "selectToken": "Select a token",
+            "selectAmount": "Send {tokenName}",
+            "selectRecipient": "Send {assetName} to",
+            "transactionSummary": "Transaction to {recipient}",
             "surplusIncluded": "Denna transaktion innehåller ett överskott. Dubbelkolla att detta är det belopp du vill skicka.",
             "sendingFromStakedAccount": "Du skickar en överföring från en plånbok som för närvarande används för staking. Detta kan innebära att dina tokens slutar stakas. Fortsätt att skicka överföringen om du vill, men du kan behöva staka dina återstående tokens på nytt.",
             "sendingFromStakedAccountBelowMinReward": "Du skickar en överföring från en plånbok som ännu inte nått den lägsta belöningsnivån. Detta kan innebära att dina tokens slutar vara markerade som \"staked\" och du därmed förlorar dina stakingbelöningar på denna plånbok."
@@ -1031,7 +1050,11 @@
             "hint": "Kan du inte hitta en plånbok? Använd balanssökaren i inställningarna för att upptäcka tidigare använda plånböcker."
         },
         "transactionDetails": {
-            "title": "Transaktionsdetaljer"
+            "title": "Transaktionsdetaljer",
+            "giftedStorageDeposit": {
+                "tooltipTitle": "Gift storage deposit",
+                "tooltipDescription": "Amount kept by the recipient"
+            }
         },
         "sendForm": {
             "title": "Skicka tillgångar"
@@ -1080,6 +1103,15 @@
                 "alias": "Alias",
                 "assetId": "Tillgångs-ID"
             }
+        },
+        "importErc20Token": {
+            "title": "Import ERC20 token",
+            "property": {
+                "chainId": "Chain ID",
+                "tokenAddress": "Token address"
+            },
+            "success": "Imported {tokenSymbol} token",
+            "error": "Unable to import ERC20 token"
         },
         "noAlias": {
             "title": "Det går inte att minta",
@@ -1270,6 +1302,7 @@
         "hide": "Dölj",
         "hideOthers": "Dölj övriga",
         "showAll": "Visa alla",
+        "useMax": "Use Max",
         "quit": "Avsluta",
         "edit": "Redigera",
         "undo": "Ångra",
@@ -1619,7 +1652,11 @@
         "jwt": "JSON webb-token",
         "internalTransaction": "Internal transaction",
         "coinType": "Coin type",
-        "custom": "Custom"
+        "custom": "Custom",
+        "evmAddress": "EVM address",
+        "chain": "Chain",
+        "importErc20Token": "Import ERC20 token",
+        "importErc20TokenDescription": "Import an ERC20 token from an EVM chain"
     },
     "filters": {
         "title": "Filter",
@@ -1720,6 +1757,9 @@
             "label": "Order",
             "name": "Name",
             "phase": "Phase"
+        },
+        "network": {
+            "label": "Network"
         }
     },
     "dates": {
@@ -1894,7 +1934,8 @@
             "invalidAssetId": "The asset id is not valid.",
             "unknownAsset": "Tillgången är inte känd för detta konto.",
             "insufficientFunds": "Denna plånbok har inte tillräckligt med tillgångar.",
-            "insufficientFundsStorageDeposit": "Otillräcktligt med tillgångar för att täcka lagringsdepositionen",
+            "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit.",
+            "ongoingTransaction": "If you have ongoing transactions, please wait for their confirmation.",
             "cannotClaimTwice": "Utdatan har redan blivit anspråkstagen",
             "noToAccount": "Du har inte valt en plånbok att skicka tillgångarna till.",
             "sendingDust": "Du kan inte skicka mindre än 1 Mi.",
@@ -2049,6 +2090,10 @@
                 "short": "Unable to add proposal",
                 "long": "Unable to find proposal {proposalId} on the specified node"
             }
+        },
+        "erc20Token": {
+            "invalidAddressFormat": "Must be hexadecimal format",
+            "invalidAddressLength": "Length is invalid"
         }
     },
     "warning": {

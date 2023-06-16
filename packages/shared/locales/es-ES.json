@@ -503,13 +503,27 @@
                         }
                     },
                     "chainDepositAddress": {
-                        "title": "Chain deposit address"
+                        "title": "Chain deposit address",
+                        "networkTitle": "Network deposit address"
                     },
                     "chainInformation": {
                         "title": "Chain information"
                     },
+                    "confirmLedgerEvmAddress": {
+                        "title": "Confirmar dirección EVM",
+                        "header": "Hemos generado tu dirección EVM"
+                    },
                     "connectedChains": {
                         "title": "Connected chains"
+                    },
+                    "connectLedgerDevice": {
+                        "title": "Conecte el dispositivo Ledger",
+                        "header": "Abrir la aplicación Ethereum",
+                        "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed before following these steps.",
+                        "requirements": {
+                            "connect": "Connect and unlock your Ledger",
+                            "openApp": "Open the Ethereum app on your Ledger"
+                        }
                     },
                     "editChain": {
                         "title": "Edit chain"
@@ -589,7 +603,8 @@
                 "attributes": "Atributos",
                 "menu": {
                     "download": "Descargar",
-                    "setAvatar": "Establecer NFT como avatar de perfil",
+                    "setPfp": "Establecer imagen de perfil NFT",
+                    "unsetPfp": "Quitar imagen de perfil NFT",
                     "view": "Ver en el navegador",
                     "burn": "Quemar NFT"
                 }
@@ -890,6 +905,10 @@
         "transaction": {
             "title": "Enviar activo",
             "body": "Estás a punto de enviar {amount} a",
+            "selectToken": "Selecciona un token",
+            "selectAmount": "Enviar {tokenName}",
+            "selectRecipient": "Enviar {assetName} a",
+            "transactionSummary": "Transaction to {recipient}",
             "surplusIncluded": "Esta transacción contiene una cantidad excedente.  Verifique que esta sea la cantidad que desea enviar.",
             "sendingFromStakedAccount": "Estás enviando una transferencia desde una cartera que está haciendo Staking. Esto puede desvincular tus tokens. Puedes enviar la transferencia sin problemas, pero puede que necesites reiniciar el Staking de los tokens restantes después.",
             "sendingFromStakedAccountBelowMinReward": "Estas realizando una transferencia desde una cartera que no ha alcanzado la recompenza minima de staking. Esto podria remover el stake de estas monedas y podrias perder las recompenzas en esta cartera."
@@ -1031,7 +1050,11 @@
             "hint": "¿No encuentras una cartera? Usa el buscador de saldo en la configuración para descubrir las carteras usadas anteriormente."
         },
         "transactionDetails": {
-            "title": "Detalles de la transacción"
+            "title": "Detalles de la transacción",
+            "giftedStorageDeposit": {
+                "tooltipTitle": "Gift storage deposit",
+                "tooltipDescription": "Amount kept by the recipient"
+            }
         },
         "sendForm": {
             "title": "Enviar fondos"
@@ -1080,6 +1103,15 @@
                 "alias": "Alias",
                 "assetId": "ID del activo"
             }
+        },
+        "importErc20Token": {
+            "title": "Import ERC20 token",
+            "property": {
+                "chainId": "Chain ID",
+                "tokenAddress": "Token address"
+            },
+            "success": "Imported {tokenSymbol} token",
+            "error": "Unable to import ERC20 token"
         },
         "noAlias": {
             "title": "No se pudo acuñar",
@@ -1270,6 +1302,7 @@
         "hide": "Ocultar",
         "hideOthers": "Ocultar Otros",
         "showAll": "Mostrar Todo",
+        "useMax": "Usar máx",
         "quit": "Salir",
         "edit": "Editar",
         "undo": "Deshacer",
@@ -1619,7 +1652,11 @@
         "jwt": "Token web JSON",
         "internalTransaction": "Transacción interna",
         "coinType": "Coin type",
-        "custom": "Custom"
+        "custom": "Custom",
+        "evmAddress": "EVM address",
+        "chain": "Chain",
+        "importErc20Token": "Import ERC20 token",
+        "importErc20TokenDescription": "Import an ERC20 token from an EVM chain"
     },
     "filters": {
         "title": "Filtros",
@@ -1720,6 +1757,9 @@
             "label": "Solicitar",
             "name": "Nombre",
             "phase": "Fase"
+        },
+        "network": {
+            "label": "Red"
         }
     },
     "dates": {
@@ -1894,7 +1934,8 @@
             "invalidAssetId": "El id del activo no es válido.",
             "unknownAsset": "El activo no es conocido por esta cuenta.",
             "insufficientFunds": "Esta cartera tiene fondos insuficientes.",
-            "insufficientFundsStorageDeposit": "Fondos insuficientes para cubrir el depósito de almacenamiento",
+            "insufficientFundsStorageDeposit": "Fondos insuficientes para cubrir el depósito de almacenamiento.",
+            "ongoingTransaction": "Si tiene transacciones en curso, por favor espere su confirmación.",
             "cannotClaimTwice": "La salida ya ha sido reclamada",
             "noToAccount": "No has seleccionado una cartera a la que enviar los fondos.",
             "sendingDust": "No puedes enviar menos de 1 Mi.",
@@ -1947,7 +1988,7 @@
             "invalid": "El archivo de copia de seguridad no fue reconocido.",
             "destination": "El destino de la copia de seguridad no era válido.",
             "mnemonic": "El mnemotécnico no es válido.",
-            "migrationRequired": "Stronghold migration is required.",
+            "migrationRequired": "Se requiere migrar Stronghold.",
             "seedTooShort": "La semilla debe tener 81 caracteres, ahora tiene {length, plural, one {# carácter} other {# caracteres}}",
             "seedCharacters": "La semilla debe contener sólo caracteres A-Z ó 9",
             "phraseWordCount": "Debe haber 24 palabras en tu frase de recuperación, ahora mismo tiene {length, plural, one {1} other {#}}.",
@@ -2049,6 +2090,10 @@
                 "short": "No se pudo añadir la propuesta",
                 "long": "No se pudo encontrar la propuesta {proposalId} en el nodo especificado"
             }
+        },
+        "erc20Token": {
+            "invalidAddressFormat": "Must be hexadecimal format",
+            "invalidAddressLength": "Length is invalid"
         }
     },
     "warning": {
