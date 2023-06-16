@@ -68,7 +68,7 @@
                 ? 'vertical'
                 : 'horizontal'}"
         >
-            <div class="flex-grow">
+            <div class="flex flex-col h-full">
                 {#if $drawerState.id === DrawerId.NetworkConfig}
                     <NetworkConfigDrawerRouter bind:drawerRoute bind:drawerRouter />
                 {/if}

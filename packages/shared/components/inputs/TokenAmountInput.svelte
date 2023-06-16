@@ -5,9 +5,10 @@
     import { AmountInput, FontWeight, InputContainer, Text } from '@ui'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
     import { validateTokenAmount } from '@core/wallet/utils/validateTokenAmount'
+    import { activeProfile } from '@core/profile'
     import { getBaseToken } from '@core/profile'
 
-    export let asset: IAsset | undefined = $visibleSelectedAccountAssets?.baseCoin
+    export let asset: IAsset | undefined = $visibleSelectedAccountAssets?.[$activeProfile?.network?.id]?.baseCoin
     export let rawAmount: string | undefined = undefined
     export let unit: string | undefined = undefined
     export let availableBalance: number

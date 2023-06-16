@@ -1,8 +1,7 @@
+import { get } from 'svelte/store'
 import { Platform } from '@core/app/classes'
 import { addError } from '@core/error'
-import { get } from 'svelte/store'
-import { activeAccounts, updateActiveAccount } from '@core/profile'
-import { ledgerEvmSignature } from '@core/ledger'
+import { activeAccounts, updateActiveAccount, updateActiveAccountPersistedData } from '@core/profile'
 import { deconstructBip32Path } from '@core/account'
 
 export function registerLedgerDeviceEventHandlers(): void {
@@ -16,13 +15,10 @@ export function registerLedgerDeviceEventHandlers(): void {
             return
         }
 
-        const evmAddresses = get(activeAccounts)?.[accountIndex]?.evmAddresses
+        const evmAddresses = get(activeAccounts)?.[accountIndex]?.evmAddresses ?? {}
         evmAddresses[coinType] = evmAddress
 
         updateActiveAccount(accountIndex, { evmAddresses })
-    })
-
-    Platform.onEvent('evm-signature', (signature) => {
-        ledgerEvmSignature.set(signature)
+        updateActiveAccountPersistedData(accountIndex, { evmAddresses })
     })
 }

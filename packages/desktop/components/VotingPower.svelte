@@ -6,8 +6,9 @@
     import { localize } from '@core/i18n'
     import { formatTokenAmountBestMatch, visibleSelectedAccountAssets } from '@core/wallet'
     import { openPopup, PopupId } from '@desktop/auxiliary/popup'
+    import { activeProfile } from '@core/profile'
 
-    const asset = $visibleSelectedAccountAssets?.baseCoin
+    const asset = $visibleSelectedAccountAssets?.[$activeProfile?.network.id]?.baseCoin
 
     $: votingPower = parseInt($selectedAccount?.votingPower, 10)
     $: maxVotingPower = parseInt($selectedAccount?.balances?.baseCoin?.available) + votingPower

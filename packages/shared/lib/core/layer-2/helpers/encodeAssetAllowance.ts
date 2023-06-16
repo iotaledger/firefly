@@ -46,7 +46,7 @@ function encodeNativeTokenTransfer(
     const tokenBuffer = new WriteStream()
 
     tokenBuffer.writeUInt16('amountOfTokens', 1)
-    const tokenIdBytes = Converter.hexToBytes(asset.id.substring(2))
+    const tokenIdBytes = Converter.hexToBytes(asset.id)
     tokenBuffer.writeBytes('tokenId', tokenIdBytes.length, tokenIdBytes)
     tokenBuffer.writeUInt256('amount', BigInteger(rawAmount))
     const tokenBufferBytes = tokenBuffer.finalBytes()
@@ -60,6 +60,6 @@ function encodeNftTransfer(buffer: WriteStream, transactionDetails: NewNftTransa
     encodeBaseTokenTransfer(buffer, '0')
 
     buffer.writeUInt16('NftAmount', 1)
-    const nftIdBytes = Converter.hexToBytes(transactionDetails.nftId.substring(2))
+    const nftIdBytes = Converter.hexToBytes(transactionDetails.nftId)
     buffer.writeBytes('NftId', nftIdBytes.length, nftIdBytes)
 }

@@ -18,7 +18,6 @@
 
     import { formatCurrency } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
-    import { getAssetById } from '@core/wallet'
     import { TokenUnitSwapper, TokenWithMax } from '@components'
     import { sendRouter } from '@/routers'
     import { getMaxDecimalsFromTokenMetadata } from '@core/token/utils'
@@ -40,7 +39,7 @@
     onMount(() => {
         if ($newTransactionDetails?.type === NewTransactionType.TokenTransfer) {
             const storedRawAmount = $newTransactionDetails?.rawAmount
-            asset = getAssetById($newTransactionDetails.assetId)
+            asset = $newTransactionDetails.asset
             tokenMetadata = asset?.metadata
             unit = $newTransactionDetails.unit ?? getUnitFromTokenMetadata(asset?.metadata)
             amount = storedRawAmount

@@ -15,10 +15,9 @@
         ActivityInformation,
     } from 'shared/components'
     import { Tab } from 'shared/components/enums'
-    import type { OutputParams } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
+    import { activeProfile, checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
     import { TimePeriod } from '@core/utils'
     import { ActivityDirection, ActivityType, InclusionState, ActivityAction } from '@core/wallet/enums'
     import {
@@ -60,7 +59,6 @@
     let storageDeposit = 0
     let visibleSurplus = 0
     let preparedOutput: Output
-    let outputParams: OutputParams
     let expirationTimePicker: ExpirationTimePicker
 
     let initialExpirationDate: TimePeriod = getInitialExpirationDate()
@@ -71,7 +69,7 @@
     $: expirationTimePicker?.setNull(giftStorageDeposit)
     $: hideGiftToggle =
         (transactionDetails.type === NewTransactionType.TokenTransfer &&
-            transactionDetails.asset.id === $selectedAccountAssets?.baseCoin?.id) ||
+            transactionDetails.asset.id === $selectedAccountAssets?.[$activeProfile?.network.id]?.baseCoin?.id) ||
         (disableToggleGift && !giftStorageDeposit) ||
         !!layer2Parameters
     $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
@@ -117,7 +115,7 @@
     async function prepareTransactionOutput(): Promise<void> {
         const transactionDetails = get(newTransactionDetails)
 
-        outputParams = getOutputParameters(transactionDetails)
+        const outputParams = getOutputParameters(transactionDetails)
         preparedOutput = await prepareOutput($selectedAccount.index, outputParams, DEFAULT_TRANSACTION_OPTIONS)
 
         setStorageDeposit(preparedOutput, Number(surplus))
@@ -164,7 +162,7 @@
 
     async function onConfirmClick(): Promise<void> {
         try {
-            validateSendConfirmation(outputParams, preparedOutput)
+            validateSendConfirmation(preparedOutput)
 
             if ($isActiveLedgerProfile) {
                 ledgerPreparedOutput.set(preparedOutput)
@@ -196,7 +194,7 @@
     })
 </script>
 
-<send-confirmation-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
+<send-confirmation-popup class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">
     <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left"
         >{localize('popups.transaction.title')}</Text
     >

@@ -61,7 +61,7 @@
             </animation-wrapper>
         {/if}
         <div class="flex overflow-hidden {animation ? 'h-auto' : 'flex-auto'}" bind:clientHeight={contentElementHeight}>
-            <slot name="content" class="flex-shrink-0 h-auto" />
+            <slot name="content" class="shrink-0 h-auto" />
         </div>
     </div>
     <footer style={$isKeyboardOpen && `margin-bottom: ${$keyboardHeight}px`} bind:clientHeight={footerElementHeight}>

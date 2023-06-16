@@ -4,12 +4,9 @@
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
     import { getDestinationNetworkFromAddress } from '@core/layer-2/utils'
-    import { ledgerPreparedOutput } from '@core/ledger/stores'
-    import { checkActiveProfileAuth } from '@core/profile/actions'
-    import { isActiveLedgerProfile } from '@core/profile/stores'
+    import { activeProfile } from '@core/profile/stores'
     import { truncateString } from '@core/utils'
     import { TimePeriod } from '@core/utils/enums'
-    import { sendOutput } from '@core/wallet/actions'
     import { DEFAULT_TRANSACTION_OPTIONS } from '@core/wallet/constants'
     import {
         NewTransactionType,
@@ -18,8 +15,7 @@
         updateNewTransactionDetails,
     } from '@core/wallet/stores'
     import { Output } from '@core/wallet/types'
-    import { getOutputParameters, getStorageDepositFromOutput, validateSendConfirmation } from '@core/wallet/utils'
-    import type { OutputParams } from '@iota/wallet'
+    import { createTransaction, getOutputParameters, getStorageDepositFromOutput } from '@core/wallet/utils'
     import { AddInputButton, ExpirationTimePicker, OptionalInput } from '@ui'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
@@ -46,7 +42,6 @@
     let storageDeposit = 0
     let visibleSurplus = 0
     let preparedOutput: Output
-    let outputParams: OutputParams
     let expirationTimePicker: ExpirationTimePicker
     let metadataInput: OptionalInput
     let tagInput: OptionalInput
@@ -55,6 +50,7 @@
     let selectedTimelockPeriod: TimePeriod | undefined = timelockDate ? TimePeriod.Custom : undefined
 
     $: transactionDetails = get(newTransactionDetails)
+    $: asset = transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.asset : undefined
     $: recipient =
         transactionDetails.recipient.type === 'account'
             ? transactionDetails.recipient.account.name
@@ -93,7 +89,7 @@
     async function prepareTransactionOutput(): Promise<void> {
         const transactionDetails = get(newTransactionDetails)
 
-        outputParams = getOutputParameters(transactionDetails)
+        const outputParams = getOutputParameters(transactionDetails)
         preparedOutput = await prepareOutput($selectedAccount.index, outputParams, DEFAULT_TRANSACTION_OPTIONS)
 
         setStorageDeposit(preparedOutput, Number(surplus))
@@ -125,19 +121,12 @@
         }
     }
 
-    async function sendOutputAndClosePopup(): Promise<void> {
-        await sendOutput(preparedOutput)
-        closePopup()
-    }
-
     async function onConfirmClick(): Promise<void> {
+        if (transactionDetails.type !== NewTransactionType.TokenTransfer) {
+            return
+        }
         try {
-            validateSendConfirmation(outputParams, preparedOutput)
-
-            if ($isActiveLedgerProfile) {
-                ledgerPreparedOutput.set(preparedOutput)
-            }
-            await checkActiveProfileAuth(sendOutputAndClosePopup, { stronghold: true, ledger: false })
+            await createTransaction(transactionDetails, $selectedAccount.index, () => closePopup())
         } catch (err) {
             handleError(err)
         }
@@ -169,11 +158,11 @@
 >
     <div class="flex flex-row gap-2 justify-between">
         {#if transactionDetails.type === NewTransactionType.TokenTransfer}
-            <TokenAmountTile asset={transactionDetails.asset} amount={transactionDetails.rawAmount} />
+            <TokenAmountTile {asset} amount={transactionDetails.rawAmount} />
         {/if}
         {#if visibleSurplus}
             <TokenAmountTile
-                asset={$selectedAccountAssets.baseCoin}
+                asset={$selectedAccountAssets?.[$activeProfile?.network?.id]?.baseCoin}
                 amount={String(visibleSurplus)}
                 showAssetInfo={false}
             />

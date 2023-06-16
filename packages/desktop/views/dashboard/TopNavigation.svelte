@@ -84,7 +84,7 @@
 
 <style type="text/scss">
     top-navigation {
-        @apply fixed flex flex-row justify-between items-center z-10 top-0 left-18 h-12 px-8 py-1;
+        @apply absolute flex flex-row justify-between items-center z-10 -top-12 left-18 h-12 px-8 py-1;
         width: calc(100% - 4.5rem);
 
         &.disabled {

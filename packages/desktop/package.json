@@ -37,6 +37,7 @@
         "@ledgerhq/logs": "^6.10.1",
         "@sentry/electron": "^2.5.4",
         "@types/webpack-dev-server": "^4.7.2",
+        "buffer": "^6.0.3",
         "dotenv": "^16.0.3",
         "electron-dl": "^3.5.0",
         "electron-log": "^4.3.1",
@@ -54,7 +55,7 @@
         "copy-webpack-plugin": "^11.0.0",
         "cross-env": "^7.0.2",
         "css-loader": "^6.7.3",
-        "electron": "22.3.5",
+        "electron": "22.3.12",
         "electron-builder": "^24.0.0",
         "electron-notarize": "^1.0.0",
         "esbuild-loader": "^3.0.0",
@@ -66,7 +67,7 @@
         "ts-node": "^10.9.1",
         "typescript": "^5.0.3",
         "webpack": "^5.82.0",
-        "webpack-cli": "^4.10.0",
+        "webpack-cli": "^5.1.4",
         "webpack-dev-server": "^4.0.0"
     }
 }

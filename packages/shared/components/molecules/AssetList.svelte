@@ -3,22 +3,32 @@
     import { AssetTile, Text, TextType } from 'shared/components'
     import { Filter } from '../../../desktop/components' // TODO: refactor to match dependency platform
     import { localize } from '@core/i18n'
-    import { assetFilter, IAccountAssets, IAsset } from '@core/wallet'
+    import { assetFilter, AccountAssets, IAsset } from '@core/wallet'
     import { isVisibleAsset } from '@core/wallet/utils/isVisibleAsset'
     import { openPopup, PopupId } from '../../../desktop/lib/auxiliary/popup'
 
-    export let assets: IAccountAssets
+    export let assets: AccountAssets
 
-    let assetList: IAsset[]
-    $: $assetFilter, assets, setFilteredAssetList(), scrollToTop()
-    $: isEmptyBecauseOfFilter = (assets.baseCoin || assets.nativeTokens?.length > 0) && assetList.length === 0
+    let filteredAssetList: IAsset[]
+    $: $assetFilter, assets, (filteredAssetList = getFilteredAssetList()), scrollToTop()
 
-    function setFilteredAssetList(): void {
-        if (!assets) {
-            assetList = []
-        } else {
-            assetList = [assets.baseCoin, ...assets.nativeTokens].filter(isVisibleAsset)
+    let isEmptyBecauseOfFilter: boolean = false
+    $: assets, (isEmptyBecauseOfFilter = getAssetList().length > 0 && filteredAssetList.length === 0)
+
+    function getFilteredAssetList(): IAsset[] {
+        const list = getAssetList()
+        return list.filter((_nativeToken) => isVisibleAsset(_nativeToken))
+    }
+
+    function getAssetList(): IAsset[] {
+        const list = []
+        for (const assetsPernetwork of Object.values(assets)) {
+            if (assetsPernetwork?.baseCoin) {
+                list.push(assetsPernetwork.baseCoin)
+            }
+            list.push(...(assetsPernetwork?.nativeTokens ?? []))
         }
+        return list
     }
 
     function scrollToTop() {
@@ -40,14 +50,14 @@
 </script>
 
 {#if assets}
-    <div class="asset-list h-full p-6 flex flex-auto flex-col flex-grow flex-shrink-0">
+    <div class="asset-list h-full p-6 flex flex-auto flex-col flex-grow shrink-0">
         <div class="w-full flex flex-row justify-between items-center mb-4">
             <Text classes="text-left" type={TextType.h5}>{localize('general.assets')}</Text>
             <Filter filterStore={assetFilter} />
         </div>
         <div class="flex-auto h-full pb-10">
-            {#if assetList.length > 0}
-                <VirtualList items={assetList} let:item>
+            {#if filteredAssetList.length > 0}
+                <VirtualList items={filteredAssetList} let:item>
                     <AssetTile classes="mb-2" onClick={() => onAssetTileClick(item)} asset={item} />
                 </VirtualList>
             {:else}
