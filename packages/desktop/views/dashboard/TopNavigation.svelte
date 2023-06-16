@@ -101,17 +101,16 @@
             -webkit-app-region: none;
         }
 
-        .left-button,
         .right-button {
+            width: 10rem;
+        }
+
+        .left-button {
             width: 10rem;
 
             &.large {
                 width: 19rem;
             }
-        }
-
-        .windows-buttons {
-            width: 30rem;
         }
     }
 </style>
