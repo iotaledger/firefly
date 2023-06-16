@@ -503,13 +503,27 @@
                         }
                     },
                     "chainDepositAddress": {
-                        "title": "Indirizzo di deposito della chain"
+                        "title": "Indirizzo di deposito della chain",
+                        "networkTitle": "Network deposit address"
                     },
                     "chainInformation": {
                         "title": "Informazioni sulla chain"
                     },
+                    "confirmLedgerEvmAddress": {
+                        "title": "Conferma indirizzo EVM",
+                        "header": "Abbiamo generato il tuo indirizzo EVM"
+                    },
                     "connectedChains": {
                         "title": "Connected chains"
+                    },
+                    "connectLedgerDevice": {
+                        "title": "Collega Dispositivo Ledger",
+                        "header": "Apri l'app Ethereum",
+                        "body": "Per trovare il tuo dispositivo Ledger da Firefly, assicurati che l'applicazione Ledger Live ufficiale sia chiusa prima di seguire questi passaggi.",
+                        "requirements": {
+                            "connect": "Collega e sblocca il tuo Ledger",
+                            "openApp": "Apri l'app Ethereum sul tuo Ledger"
+                        }
                     },
                     "editChain": {
                         "title": "Modifica chain"
@@ -589,7 +603,8 @@
                 "attributes": "Attributi",
                 "menu": {
                     "download": "Download",
-                    "setAvatar": "Imposta questo NFT come avatar del profilo",
+                    "setPfp": "Set NFT profile pic",
+                    "unsetPfp": "Unset NFT profile pic",
                     "view": "Visualizza il media nel browser",
                     "burn": "Brucia NFT"
                 }
@@ -890,6 +905,10 @@
         "transaction": {
             "title": "Invia asset",
             "body": "Stai per inviare {amount} a",
+            "selectToken": "Select a token",
+            "selectAmount": "Send {tokenName}",
+            "selectRecipient": "Invia {assetName} a",
+            "transactionSummary": "Transaction to {recipient}",
             "surplusIncluded": "Questa transazione contiene un importo in eccesso. Si prega di controllare due volte questo è l'importo che si desidera inviare.",
             "sendingFromStakedAccount": "Stai inviando un trasferimento da un wallet che si trova attualmente in staking. Questo potrebbe annullare lo staking dei token. L'invio della transazione è possible, ma è necessario rimettere in stake i token rimanenti.",
             "sendingFromStakedAccountBelowMinReward": "Stai inviando un trasferimento da un portafoglio che non ha ancora raggiunto la ricompensa di staking minima. Questo potrebbe dismettere i tuoi token e potresti perdere le tue ricompense di staking su questo portafoglio."
@@ -1031,7 +1050,11 @@
             "hint": "Impossibile trovare un portafoglio? Utilizzare il Rilevatore del sado nelle impostazioni per scoprire i wallet precedentemente utilizzati."
         },
         "transactionDetails": {
-            "title": "Dettagli della transazione"
+            "title": "Dettagli della transazione",
+            "giftedStorageDeposit": {
+                "tooltipTitle": "Gift storage deposit",
+                "tooltipDescription": "Amount kept by the recipient"
+            }
         },
         "sendForm": {
             "title": "Invia fondi"
@@ -1080,6 +1103,15 @@
                 "alias": "Alias",
                 "assetId": "Asset Id"
             }
+        },
+        "importErc20Token": {
+            "title": "Importa token ERC20",
+            "property": {
+                "chainId": "Chain ID",
+                "tokenAddress": "Indirizzo del token"
+            },
+            "success": "Token {tokenSymbol} importato",
+            "error": "Impossibile importare il token ERC20"
         },
         "noAlias": {
             "title": "Impossibile coniare",
@@ -1270,6 +1302,7 @@
         "hide": "Nascondi",
         "hideOthers": "Nascondi altri",
         "showAll": "Mostra tutto",
+        "useMax": "Use Max",
         "quit": "Esci",
         "edit": "Modifica",
         "undo": "Annulla",
@@ -1619,7 +1652,11 @@
         "jwt": "JSON web token",
         "internalTransaction": "Transazione interna",
         "coinType": "Coin type",
-        "custom": "Custom"
+        "custom": "Custom",
+        "evmAddress": "Indirizzo EVM",
+        "chain": "Chain",
+        "importErc20Token": "Importa token ERC20",
+        "importErc20TokenDescription": "Importa un token ERC20 da una blockchain EVM"
     },
     "filters": {
         "title": "Filtri",
@@ -1720,6 +1757,9 @@
             "label": "Ordine",
             "name": "Nome",
             "phase": "Fase"
+        },
+        "network": {
+            "label": "Network"
         }
     },
     "dates": {
@@ -1894,7 +1934,8 @@
             "invalidAssetId": "L'id dell'asset non è valido.",
             "unknownAsset": "L'asset non è noto a questo conto.",
             "insufficientFunds": "Questo wallet non ha fondi sufficienti.",
-            "insufficientFundsStorageDeposit": "Fondi insufficienti per coprire lo torage deposit",
+            "insufficientFundsStorageDeposit": "Fondi insufficienti per coprire lo torage deposit.",
+            "ongoingTransaction": "Se hai transazioni in corso, attendi la loro conferma.",
             "cannotClaimTwice": "L'output è già stato reclamato",
             "noToAccount": "Non hai selezionato un wallet a cui inviare i fondi.",
             "sendingDust": "Non puoi inviare meno di 1 Mi.",
@@ -2049,6 +2090,10 @@
                 "short": "Impossibile aggiungere la proposta",
                 "long": "Impossibile trovare la proposta {proposalId} sul nodo specificato"
             }
+        },
+        "erc20Token": {
+            "invalidAddressFormat": "Deve essere formato esadecimale",
+            "invalidAddressLength": "Lunghezza non valida"
         }
     },
     "warning": {
