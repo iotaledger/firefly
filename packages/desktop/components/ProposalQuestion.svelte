@@ -53,7 +53,7 @@
     cursor-pointer dark:border-transparent dark:bg-gray-850"
     class:animate-pulse={isLoading}
 >
-    <div on:click={() => onQuestionClick(questionIndex)} class="flex justify-between items-center">
+    <button on:click={() => onQuestionClick(questionIndex)} class="flex justify-between items-center">
         <div class="flex flex-col min-w-0">
             {#if questionIndex !== undefined}
                 <Text smaller fontWeight={FontWeight.bold} overrideColor classes="mb-1 text-blue-500">
@@ -80,7 +80,7 @@
             </div>
         </div>
         <Icon icon={IconEnum.ChevronDown} classes="text-gray-500 transform {isOpened ? 'rotate-180' : 'rotate-0'}" />
-    </div>
+    </button>
     <proposal-answers class:mt-4={showMargin} class="flex flex-col gap-2">
         {#each answers as answer, answerIndex}
             <ProposalAnswer

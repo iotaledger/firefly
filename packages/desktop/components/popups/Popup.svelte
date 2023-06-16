@@ -200,7 +200,7 @@
                         : 'bg-gray-800 bg-opacity-70 dark:bg-black dark:bg-opacity-50'
                 }`}
 >
-    <div tabindex="0" on:focus={onFocusFirst} />
+    <button type="button" tabindex="0" on:focus={onFocusFirst} />
     <popup-content
         use:clickOutside
         on:clickOutside={tryClosePopup}
@@ -219,7 +219,7 @@
         {/if}
         <svelte:component this={POPUP_MAP[id]} {...props} />
     </popup-content>
-    <div tabindex="0" on:focus={onFocusLast} />
+    <button type="button" tabindex="0" on:focus={onFocusLast} />
 </popup>
 
 <style type="text/scss">
