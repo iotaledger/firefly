@@ -3,8 +3,8 @@
         "onboarding": {
             "appSetup": {
                 "welcome": {
-                    "title": "Send, Receive & Manage your {network} tokens",
-                    "body": "Firefly is the official wallet software for {network}."
+                    "title": "Отправляйте, получайте и управляйте вашими {network} токенами",
+                    "body": "Firefly - это официальное приложение кошелька для {network}."
                 },
                 "legal": {
                     "title": "Политика конфиденциальности и Условия предоставления услуг",
@@ -28,30 +28,30 @@
                     "body": "Установить сеть для вашего профиля.",
                     "iota": {
                         "title": "IOTA",
-                        "body": "IOTA Mainnet"
+                        "body": "Основная сеть IOTA"
                     },
                     "shimmer": {
                         "title": "Shimmer",
-                        "body": "Staging network for IOTA"
+                        "body": "Промежуточная сеть для IOTA"
                     },
                     "testnet": {
-                        "title": "Testnet",
-                        "body": "Public beta network for Shimmer"
+                        "title": "Тестовая сеть",
+                        "body": "Публичная бета-сеть для Shimmer"
                     },
                     "custom": {
-                        "title": "Custom network",
-                        "body": "Support for custom networks and/or nodes"
+                        "title": "Настраиваемая сеть",
+                        "body": "Поддержка настраиваемых сетей и/или узлов"
                     }
                 },
                 "setupCustomNetwork": {
-                    "title": "Connect to a custom network or node",
-                    "body": "Fill the form with the node information and connect to a custom network or node."
+                    "title": "Подключение к настраиваемой сети или узлу",
+                    "body": "Заполните форму информацией об узле и подключитесь к настраиваемой сети или узлу."
                 }
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Set up {network, select, IOTA {an} Shimmer {a} Testnet {a} other {a}} {network} profile",
-                    "body": "Select the appropriate method to set up your {network} profile."
+                    "title": "Установить {network, select, IOTA {an} Shimmer {a} Testnet {a} other {a}} {network} профиль",
+                    "body": "Выберите соответствующий метод для настройки профиля {network}."
                 },
                 "setupNew": {
                     "title": "Создать профиль",
@@ -66,7 +66,7 @@
                     }
                 },
                 "setupRecovered": {
-                    "title": "Recover {network} profile",
+                    "title": "Восстановить профиль {network}",
                     "body": "Если у вас уже есть мнемоника или резервный файл Stronghold, вы можете импортировать его сюда.",
                     "importMnemonic": "Использовать фразу восстановления",
                     "importMnemonicDescription": "Введите вашу мнемоническую фразу в 24 слова",
@@ -80,7 +80,7 @@
                     "body": "Импортируйте свой профиль IOTA и получите вознаграждение за ставку в Shimmer."
                 },
                 "enterName": {
-                    "title": "Create your {network} profile",
+                    "title": "Создайте свой профиль {network}",
                     "profileName": "Имя профиля",
                     "body1": "Вы можете создать несколько профилей пользователей, чтобы организовать свои кошельки и повысить уровень секретности.",
                     "body2": {
@@ -164,7 +164,7 @@
                     "title": "Shimmer востребован",
                     "body": "Вы успешно востребовали свои токены Shimmer.",
                     "totalRewards": "Итоговое вознаграждение",
-                    "successfullyFound": "Successfully found {amount}"
+                    "successfullyFound": "Успешно найдено {amount}"
                 }
             },
             "congratulations": {
@@ -187,10 +187,10 @@
             "videoGuide": "Видеогид по миграции Ledger"
         },
         "ledgerInstallationGuide": {
-            "title": "Have you installed the {network} app on your Ledger device?",
-            "body1": "Before you proceed, you must use Ledger Live to find and install the {network} app.",
+            "title": "Установили ли вы приложение {network} на своем устройстве Ledger?",
+            "body1": "Прежде чем продолжить, необходимо с помощью Ledger Live найти и установить приложение {network}.",
             "body2": "Убедитесь, что прошивка Ledger актуальна. Любые предварительно установленные приложения должны быть обновлены до их последних версий.",
-            "action": "Yes, I've installed the {network} app"
+            "action": "Да, я установил приложение {network}"
         },
         "importFromLedger": {
             "title": "Восстановить или мигрировать ваш Ledger",
@@ -254,10 +254,10 @@
                 "description": "Измени имя профиля или установи аватар"
             },
             "network": {
-                "title": "Network"
+                "title": "Сеть"
             },
             "collectibles": {
-                "title": "Collectibles"
+                "title": "Коллекции"
             },
             "security": {
                 "title": "Настройки Безопасности",
@@ -301,24 +301,24 @@
                 "description": "Экспорт в файл Stronghold - полная зашифрованная резервная копия ваших кошельков и последней истории транзакций"
             },
             "appLock": {
-                "title": "Automatic logout",
+                "title": "Автоматический выход",
                 "description": "Время бездействия до блокировки кошелька и выхода из системы"
             },
             "strongholdPasswordTimeout": {
-                "title": "Stronghold Timeout",
-                "description": "Length of time before your Stronghold password is required again"
+                "title": "Время ожидания Stronghold",
+                "description": "Продолжительность времени до повторного запроса пароля Stronghold"
             },
             "maxMediaSize": {
                 "title": "Максимальный размер медиафайла",
                 "description": "Медиафайлы NFT с размерами, превышающими этот предел, не будут загружены, и вместо них будет отображено место, представляющее тип медиафайла"
             },
             "maxMediaDownloadTime": {
-                "title": "Maximum download time",
-                "description": "NFT media which take longer than this limit to download will be canceled and a placeholder representing the media type will be displayed instead"
+                "title": "Максимальная скорость загрузки",
+                "description": "Медиафайлы NFT, загрузка которых длится дольше указанного предела, будут отменены, а вместо них будет отображено место, представляющее тип медиафайла"
             },
             "refreshNftMedia": {
-                "title": "Refresh NFT media",
-                "description": "NFT media cached for this account will be deleted and then downloaded again"
+                "title": "Обновить медиафайлы NFT",
+                "description": "Медиафайлы NFT, кэшированные для этой учетной записи, будут удалены, а затем загружены снова"
             },
             "changePassword": {
                 "title": "Изменить пароль",
@@ -354,8 +354,8 @@
                 "description": "Автоматически заполнять данные транзакций в Firefly при нажатии на глубокую ссылку, начинающуюся с {appProtocol}://"
             },
             "networkInformation": {
-                "title": "Network information",
-                "connectedTo": "Connected to"
+                "title": "Информация о сети",
+                "connectedTo": "Подключено к"
             },
             "configureNodeList": {
                 "title": "Настройка узла",
@@ -373,8 +373,8 @@
                 "noNodesAuto": "Нет узлов, вместо них будет использоваться автоматический выбор"
             },
             "localProofOfWork": {
-                "title": "Proof of work",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "title": "Подтверждение работы",
+                "description": "Выполните подтверждение работы локально на своем устройстве или передайте на обслуживание узлу"
             },
             "errorLog": {
                 "title": "Журнал ошибок",
@@ -420,14 +420,14 @@
                 "description": "Сообщи об ошибке разработчикам. Убедись что об этом еще не сообщили"
             },
             "developerToggle": {
-                "title": "Developer Mode",
-                "description": "Switch developer mode on to enable more features in experimental state"
+                "title": "Режим Разработчика",
+                "description": "Включите режим разработчика, чтобы задействовать больше функций в экспериментальном режиме"
             }
         },
         "login": {
             "pleaseWait": "Пожалуйста подождите {time, plural, one {# секунду} other {# секунд}}",
             "incorrectAttempts": "{attempts, plural, one {# неправильная попытка} other {# неправильные попытки}}",
-            "hintStronghold": "Your Stronghold's version is out of date. Please log in to update your Stronghold."
+            "hintStronghold": "Версия вашего Stronghold устарела. Пожалуйста, войдите в систему, чтобы обновить свой Stronghold."
         },
         "loadProfile": {
             "loginSteps": {
@@ -487,29 +487,43 @@
             "drawers": {
                 "networkConfig": {
                     "addChain": {
-                        "title": "Add chain"
+                        "title": "Добавить цепочку"
                     },
                     "chain": {
-                        "chainId": "Chain ID",
-                        "aliasAddress": "Alias Address",
-                        "iscpEndpoint": "ISCP Endpoint",
-                        "explorerEndpoint": "Explorer Endpoint (optional)",
+                        "chainId": "ID цепочки",
+                        "aliasAddress": "Псевдоним адреса",
+                        "iscpEndpoint": "ISCP Конечная точка",
+                        "explorerEndpoint": "Конечная точка проводника (необязательно)",
                         "errors": {
-                            "cannotBeEmpty": "Name cannot be empty",
-                            "nameTooLong": "Name is too long",
-                            "aliasAddressWrongFormat": "Must be in either hex or Bech32 format",
-                            "aliasAddressAlreadyInUse": "Alias address already in use",
-                            "invalidUrl": "Invalid URL"
+                            "cannotBeEmpty": "Имя не должно быть пустым",
+                            "nameTooLong": "Имя слишком длинное",
+                            "aliasAddressWrongFormat": "Должен быть в формате hex или Bech32",
+                            "aliasAddressAlreadyInUse": "Псевдоним адреса уже используется",
+                            "invalidUrl": "Неверный URL"
                         }
                     },
                     "chainDepositAddress": {
-                        "title": "Chain deposit address"
+                        "title": "Адрес вклада цепочки",
+                        "networkTitle": "Network deposit address"
                     },
                     "chainInformation": {
-                        "title": "Chain information"
+                        "title": "Информация о цепочке"
+                    },
+                    "confirmLedgerEvmAddress": {
+                        "title": "Подтвердите адрес EVM",
+                        "header": "Мы создали ваш адрес EVM"
                     },
                     "connectedChains": {
                         "title": "Connected chains"
+                    },
+                    "connectLedgerDevice": {
+                        "title": "Connect Ledger Device",
+                        "header": "Open the Ethereum app",
+                        "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed before following these steps.",
+                        "requirements": {
+                            "connect": "Connect and unlock your Ledger",
+                            "openApp": "Open the Ethereum app on your Ledger"
+                        }
                     },
                     "editChain": {
                         "title": "Edit chain"
@@ -589,7 +603,8 @@
                 "attributes": "Характеристики",
                 "menu": {
                     "download": "Скачать",
-                    "setAvatar": "Установить NFT как аватар профиля",
+                    "setPfp": "Set NFT profile pic",
+                    "unsetPfp": "Unset NFT profile pic",
                     "view": "Просмотр медиафайлов в браузере",
                     "burn": "Сжечь NFT"
                 }
@@ -743,14 +758,14 @@
         },
         "appUpdate": {
             "title": "Check for updates",
-            "installedVersion": "Installed version",
-            "newVerion": "New version",
-            "stage": "Stage",
-            "prod": "Production",
-            "alpha": "Alpha",
-            "beta": "Beta",
-            "releasedAt": "Released at",
-            "updateAvailable": "Update is available",
+            "installedVersion": "Установленная версия",
+            "newVerion": "Новая версия",
+            "stage": "Стадия",
+            "prod": "Производство",
+            "alpha": "Альфа",
+            "beta": "Бета",
+            "releasedAt": "Выпущено",
+            "updateAvailable": "Обновление доступно",
             "updatesDisabled": "There are updates available, but in-app upgrade is disabled for your operating system.",
             "latestInstalled": "You are running the latest and safest version"
         },
@@ -890,6 +905,10 @@
         "transaction": {
             "title": "Отправить актив",
             "body": "Вы собираетесь отправить {amount}",
+            "selectToken": "Select a token",
+            "selectAmount": "Send {tokenName}",
+            "selectRecipient": "Send {assetName} to",
+            "transactionSummary": "Transaction to {recipient}",
             "surplusIncluded": "Эта транзакция содержит избыточную сумму. Пожалуйста, проверьте, что это именно та сумма, которую вы хотите отправить.",
             "sendingFromStakedAccount": "Вы отправляете перевод с кошелька, который в настоящее время задействован в ставке. Это может привести к тому, что ваши токены не будут зачислены. Не стесняйтесь отправлять перевод, но вам может потребоваться повторный залог оставшихся токенов.",
             "sendingFromStakedAccountBelowMinReward": "Вы отправляете перевод с кошелька, который еще не достиг минимального вознаграждения за ставку. Это может разблокировать ваши токены, и вы можете потерять вознаграждение за ставку на этом кошельке."
@@ -1031,7 +1050,11 @@
             "hint": "Не можете найти кошелек? Воспользуйтесь функцией поиска баланса в настройках, чтобы обнаружить ранее использовавшиеся кошельки."
         },
         "transactionDetails": {
-            "title": "Детали транзакции"
+            "title": "Детали транзакции",
+            "giftedStorageDeposit": {
+                "tooltipTitle": "Gift storage deposit",
+                "tooltipDescription": "Amount kept by the recipient"
+            }
         },
         "sendForm": {
             "title": "Отправить средства"
@@ -1080,6 +1103,15 @@
                 "alias": "Псевдоним",
                 "assetId": "Id Актива"
             }
+        },
+        "importErc20Token": {
+            "title": "Import ERC20 token",
+            "property": {
+                "chainId": "Chain ID",
+                "tokenAddress": "Token address"
+            },
+            "success": "Imported {tokenSymbol} token",
+            "error": "Unable to import ERC20 token"
         },
         "noAlias": {
             "title": "Невозможно чеканить",
@@ -1270,6 +1302,7 @@
         "hide": "Скрыть",
         "hideOthers": "Скрыть остальные",
         "showAll": "Показать всё",
+        "useMax": "Use Max",
         "quit": "Выйти",
         "edit": "Редактировать",
         "undo": "Отменить",
@@ -1619,7 +1652,11 @@
         "jwt": "JSON веб-токен",
         "internalTransaction": "Внутренняя транзакция",
         "coinType": "Coin type",
-        "custom": "Custom"
+        "custom": "Custom",
+        "evmAddress": "EVM address",
+        "chain": "Chain",
+        "importErc20Token": "Import ERC20 token",
+        "importErc20TokenDescription": "Import an ERC20 token from an EVM chain"
     },
     "filters": {
         "title": "Фильтры",
@@ -1720,6 +1757,9 @@
             "label": "Порядок",
             "name": "Имя",
             "phase": "Фаза"
+        },
+        "network": {
+            "label": "Network"
         }
     },
     "dates": {
@@ -1894,7 +1934,8 @@
             "invalidAssetId": "The asset id is not valid.",
             "unknownAsset": "Актив не известен для данного счета.",
             "insufficientFunds": "На этом кошельке недостаточно средств.",
-            "insufficientFundsStorageDeposit": "Недостаточно средств для покрытия депозита для хранения",
+            "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit.",
+            "ongoingTransaction": "If you have ongoing transactions, please wait for their confirmation.",
             "cannotClaimTwice": "Выход уже востребован",
             "noToAccount": "Вы не выбрали кошелек для отправки средств.",
             "sendingDust": "Вы не можете отправить менее 1 Mi.",
@@ -2049,6 +2090,10 @@
                 "short": "Невозможно добавить предложение",
                 "long": "Unable to find proposal {proposalId} on the specified node"
             }
+        },
+        "erc20Token": {
+            "invalidAddressFormat": "Must be hexadecimal format",
+            "invalidAddressLength": "Length is invalid"
         }
     },
     "warning": {
