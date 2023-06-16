@@ -503,13 +503,27 @@
                         }
                     },
                     "chainDepositAddress": {
-                        "title": "Chain deposit address"
+                        "title": "Chain deposit address",
+                        "networkTitle": "Network deposit address"
                     },
                     "chainInformation": {
                         "title": "Chain information"
                     },
+                    "confirmLedgerEvmAddress": {
+                        "title": "Confirm EVM address",
+                        "header": "We have generated your EVM address"
+                    },
                     "connectedChains": {
                         "title": "Connected chains"
+                    },
+                    "connectLedgerDevice": {
+                        "title": "Connect Ledger Device",
+                        "header": "Open the Ethereum app",
+                        "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed before following these steps.",
+                        "requirements": {
+                            "connect": "Connect and unlock your Ledger",
+                            "openApp": "Open the Ethereum app on your Ledger"
+                        }
                     },
                     "editChain": {
                         "title": "Edit chain"
@@ -589,7 +603,8 @@
                 "attributes": "属性",
                 "menu": {
                     "download": "下载",
-                    "setAvatar": "设置 NFT 为配置文件头像",
+                    "setPfp": "Set NFT profile pic",
+                    "unsetPfp": "Unset NFT profile pic",
                     "view": "在浏览器中查看",
                     "burn": "烧毁 NFT"
                 }
@@ -890,6 +905,10 @@
         "transaction": {
             "title": "发送资产",
             "body": "您将要发送 {amount} 到",
+            "selectToken": "Select a token",
+            "selectAmount": "Send {tokenName}",
+            "selectRecipient": "Send {assetName} to",
+            "transactionSummary": "Transaction to {recipient}",
             "surplusIncluded": "此交易包含一个剩余的金额。请仔细检查这是你要发送的金额。",
             "sendingFromStakedAccount": "您正在从目前正在质押的钱包中发送转账。这可能会取消质押您的令牌。 您可以随时发送传输，但您可能需要稍后重新质押您剩余的代币。",
             "sendingFromStakedAccountBelowMinReward": "你正在从一个尚未达到最低质押奖励的钱包发送转账。这可能会解除你在这个钱包的代币质押而失去你的抵押奖励。"
@@ -1031,7 +1050,11 @@
             "hint": "找不到钱包？使用设置中的余额查找器来找回以前使用过的钱包。"
         },
         "transactionDetails": {
-            "title": "交易详情"
+            "title": "交易详情",
+            "giftedStorageDeposit": {
+                "tooltipTitle": "Gift storage deposit",
+                "tooltipDescription": "Amount kept by the recipient"
+            }
         },
         "sendForm": {
             "title": "发送资金"
@@ -1080,6 +1103,15 @@
                 "alias": "别名",
                 "assetId": "资产 Id"
             }
+        },
+        "importErc20Token": {
+            "title": "Import ERC20 token",
+            "property": {
+                "chainId": "Chain ID",
+                "tokenAddress": "Token address"
+            },
+            "success": "Imported {tokenSymbol} token",
+            "error": "Unable to import ERC20 token"
         },
         "noAlias": {
             "title": "不能锻造",
@@ -1270,6 +1302,7 @@
         "hide": "隐藏",
         "hideOthers": "隐藏其它",
         "showAll": "显示全部",
+        "useMax": "Use Max",
         "quit": "退出",
         "edit": "编辑",
         "undo": "撤销",
@@ -1619,7 +1652,11 @@
         "jwt": "JSON web 代币",
         "internalTransaction": "内部交易",
         "coinType": "Coin type",
-        "custom": "Custom"
+        "custom": "Custom",
+        "evmAddress": "EVM address",
+        "chain": "Chain",
+        "importErc20Token": "Import ERC20 token",
+        "importErc20TokenDescription": "Import an ERC20 token from an EVM chain"
     },
     "filters": {
         "title": "过滤",
@@ -1720,6 +1757,9 @@
             "label": "订单",
             "name": "名称",
             "phase": "阶段"
+        },
+        "network": {
+            "label": "Network"
         }
     },
     "dates": {
@@ -1894,7 +1934,8 @@
             "invalidAssetId": "The asset id is not valid.",
             "unknownAsset": "该资产在这个账户中未知。",
             "insufficientFunds": "该账户资金不足。",
-            "insufficientFundsStorageDeposit": "没有足够的资金来支付存储押金",
+            "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit.",
+            "ongoingTransaction": "If you have ongoing transactions, please wait for their confirmation.",
             "cannotClaimTwice": "输出已被认领。",
             "noToAccount": "您尚未选择一个收款账户来发送资金。",
             "sendingDust": "您的发送不能小于 1 Mi。",
@@ -2049,6 +2090,10 @@
                 "short": "无法添加提案",
                 "long": "Unable to find proposal {proposalId} on the specified node"
             }
+        },
+        "erc20Token": {
+            "invalidAddressFormat": "Must be hexadecimal format",
+            "invalidAddressLength": "Length is invalid"
         }
     },
     "warning": {

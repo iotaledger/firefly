@@ -503,13 +503,27 @@
                         }
                     },
                     "chainDepositAddress": {
-                        "title": "Adres depozytu łańcucha"
+                        "title": "Adres depozytu łańcucha",
+                        "networkTitle": "Adres depozytowy sieci"
                     },
                     "chainInformation": {
                         "title": "Informacje o łańcuchu"
                     },
+                    "confirmLedgerEvmAddress": {
+                        "title": "Potwierdź adres EVM",
+                        "header": "Wygenerowaliśmy Twój adres EVM"
+                    },
                     "connectedChains": {
                         "title": "Połączone łańcuchy"
+                    },
+                    "connectLedgerDevice": {
+                        "title": "Podłącz urządzenie Ledger",
+                        "header": "Otwórz aplikację Ethereum",
+                        "body": "Aby Twoje urządzenie Ledger zostało znalezione przez Firefly, upewnij się, że oficjalna aplikacja Ledger Live jest zamknięta.",
+                        "requirements": {
+                            "connect": "Podłącz i odblokuj swoje urządzenie Ledger",
+                            "openApp": "Otwórz aplikację Ethereum na swoim urządzeniu Ledger"
+                        }
                     },
                     "editChain": {
                         "title": "Edytuj łańcuch"
@@ -589,7 +603,8 @@
                 "attributes": "Atrybuty",
                 "menu": {
                     "download": "Pobierz",
-                    "setAvatar": "Ustaw NFT jako obraz profilowy",
+                    "setPfp": "Ustaw NFT jako obrazek profilowy",
+                    "unsetPfp": "Usuń NFT z obrazka profilowego",
                     "view": "Zobacz w przeglądarce",
                     "burn": "Spal NFT"
                 }
@@ -890,6 +905,10 @@
         "transaction": {
             "title": "Wyślij aktywa",
             "body": "Zamierzasz wysłać {amount} do",
+            "selectToken": "Wybierz token",
+            "selectAmount": "Wyślij {tokenName}",
+            "selectRecipient": "Wyślij {assetName} do",
+            "transactionSummary": "Transakcja do {recipient}",
             "surplusIncluded": "Ta transakcja zawiera nadwyżkę środków. Proszę sprawdzić, czy na pewno jest to kwota, którą chcesz wysłać.",
             "sendingFromStakedAccount": "Wysyłasz przelew z portfela, który jest obecnie stakowany. Może to spowodować wycofanie Twoich tokenów ze stakingu. Możesz dokonać transferu, ale może zajść potrzeba ponownego stakingu pozostałych środków.",
             "sendingFromStakedAccountBelowMinReward": "Wysyłasz przelew z portfela, który nie osiągnął jeszcze minimalnej wysokości nagrody za stakowanie. Ta operacja może odstakować Twoje tokeny i możesz stracić nagrody za staking na tym portfelu."
@@ -1031,7 +1050,11 @@
             "hint": "Nie możesz znaleźć portfela? Skorzystaj z wyszukiwarki środków w ustawieniach, aby odkryć poprzednio używane portfele."
         },
         "transactionDetails": {
-            "title": "Szczegóły transakcji"
+            "title": "Szczegóły transakcji",
+            "giftedStorageDeposit": {
+                "tooltipTitle": "Podaruj depozyt magazynowy",
+                "tooltipDescription": "Środki darowane odbiorcy"
+            }
         },
         "sendForm": {
             "title": "Wyślij środki"
@@ -1080,6 +1103,15 @@
                 "alias": "Alias",
                 "assetId": "ID aktywa"
             }
+        },
+        "importErc20Token": {
+            "title": "Importuj token ERC20",
+            "property": {
+                "chainId": "Identyfikator łańcucha",
+                "tokenAddress": "Adres tokena"
+            },
+            "success": "Importowano token {tokenSymbol}",
+            "error": "Nie można zaimportować tokena ERC20"
         },
         "noAlias": {
             "title": "Mintowanie nieudane",
@@ -1270,6 +1302,7 @@
         "hide": "Ukryj",
         "hideOthers": "Ukryj pozostałe",
         "showAll": "Pokaż wszystkie",
+        "useMax": "Użyj maks.",
         "quit": "Zamknij",
         "edit": "Edytuj",
         "undo": "Cofnij",
@@ -1618,8 +1651,12 @@
         "username": "Nazwa użytkownika",
         "jwt": "Token internetowy JSON",
         "internalTransaction": "Transakcja wewnętrzna",
-        "coinType": "Typ tokenu",
-        "custom": "Niestandardowe"
+        "coinType": "Typ tokena",
+        "custom": "Niestandardowe",
+        "evmAddress": "Adres EVM",
+        "chain": "Łańcuch",
+        "importErc20Token": "Importuj token ERC20",
+        "importErc20TokenDescription": "Importuj token ERC20 z łańcucha EVM"
     },
     "filters": {
         "title": "Filtry",
@@ -1720,6 +1757,9 @@
             "label": "Sortowanie",
             "name": "Nazwa",
             "phase": "Etap"
+        },
+        "network": {
+            "label": "Sieć"
         }
     },
     "dates": {
@@ -1894,7 +1934,8 @@
             "invalidAssetId": "Identyfikator assetu jest nieprawidłowy.",
             "unknownAsset": "Ten asset nie jest znany na tym koncie.",
             "insufficientFunds": "Brak wystarczających środków na tym portfelu.",
-            "insufficientFundsStorageDeposit": "Niewystarczające środki na pokrycie depozytu magazynowego",
+            "insufficientFundsStorageDeposit": "Niewystarczające środki na pokrycie depozytu magazynowego.",
+            "ongoingTransaction": "Jeśli posiadasz trwające transakcje, zaczekaj na ich potwierdzenie.",
             "cannotClaimTwice": "Ta nagroda została już odebrana",
             "noToAccount": "Nie wybrano portfela docelowego na który chcesz wysłać środki.",
             "sendingDust": "Nie możesz wysłać mniej niż 1 Mi.",
@@ -1932,7 +1973,7 @@
             "unabledToConnect": "Nie można połączyć się z serwerem",
             "differentNetwork": "Serwer jest zlokalizowany w innej sieci",
             "duplicateNodes": "Nie można dodać duplikatu serwera",
-            "noCoinType": "Nie określono typu tokenu"
+            "noCoinType": "Nie określono typu tokena"
         },
         "network": {
             "mismatch": "ID sieci dla tego węzła to \"{networkId}\", które nie pasuje do bieżącej sieci.",
@@ -1947,7 +1988,7 @@
             "invalid": "Plik kopii zapasowej nie został rozpoznany.",
             "destination": "Miejsce docelowe kopii zapasowej nie jest prawidłowe.",
             "mnemonic": "Błąd w wyrazach ratunkowych.",
-            "migrationRequired": "Stronghold migration is required.",
+            "migrationRequired": "Wymagana jest migracja Stronghold.",
             "seedTooShort": "Seed powinien składać się z 81 znaków, ten ma {length, plural, one {# znak} few {# znaki} many {# znaków} other {# znaków}}",
             "seedCharacters": "Seed może składać się tylko z liter A-Z oraz cyfr 9",
             "phraseWordCount": "Wyrazy ratunkowe powinny zawierać 24 słowa. Aktualnie jest {length, plural, one {ich #} few {ich #} many {ich #} other {ich #}}.",
@@ -2049,6 +2090,10 @@
                 "short": "Nie można dodać propozycji",
                 "long": "Nie można znaleźć propozycji {proposalId} na wybranym serwerze"
             }
+        },
+        "erc20Token": {
+            "invalidAddressFormat": "Wymagany format szesnastkowy",
+            "invalidAddressLength": "Długość jest nieprawidłowa"
         }
     },
     "warning": {
