@@ -9,7 +9,6 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.FileUtils;
 import android.os.ParcelFileDescriptor;
-import android.provider.DocumentsContract;
 import android.util.Log;
 
 import androidx.activity.result.ActivityResult;
@@ -31,6 +30,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Objects;
 
 import static android.os.Environment.DIRECTORY_DOWNLOADS;
@@ -322,6 +322,52 @@ public class SecureFilesystemAccessPlugin extends Plugin {
         call.resolve(response);
     }
 
+    @PluginMethod
+    public void copyFile(PluginCall call) {
+        if (!call.getData().has("source")
+                || !call.getData().has("destination")) {
+            call.reject("source and destination is required");
+            return;
+        }
+        try {
+            String source = Objects.requireNonNull(call.getString("source"));
+            String destination = Objects.requireNonNull(call.getString("destination"));
+            File sourceFile = new File(source);
+            File destinationFile = new File(destination);
+            Files.copy(sourceFile.toPath(), destinationFile.toPath());
+            call.resolve();
+        } catch (Exception e) {
+            call.reject(Objects.requireNonNull(e.getCause()).toString());
+        }
+    }
 
+    @PluginMethod
+    public void deleteFile(PluginCall call) {
+        if (!call.getData().has("source")) {
+            call.reject("source is required");
+            return;
+        }
+        try {
+            String source = Objects.requireNonNull(call.getString("source"));
+            File fileName = new File(source);
+            if (fileName.exists()) {
+                boolean isDeleted = fileName.delete();
+                if (!isDeleted) {
+                    call.reject("Can't delete file");
+                }
+            }
+            call.resolve();
+        } catch (Exception e) {
+            call.reject(Objects.requireNonNull(e.getCause()).toString());
+        }
+        
+    }
+
+    @PluginMethod
+    public void getUserDataPath(PluginCall call) {
+        JSObject response = new JSObject();
+        response.put("path", getContext().getFilesDir().toString());
+        call.resolve(response);
+    }
 
 }

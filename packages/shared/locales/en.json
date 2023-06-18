@@ -460,7 +460,8 @@
         },
         "login": {
             "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
-            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}",
+            "updateStrongholdWarning": "Your Stronghold is out of date. Log in to update Stronghold."
         },
         "dashboard": {
             "network": {
@@ -647,6 +648,21 @@
             },
             "votes": "votes",
             "manageVote": "Manage vote"
+        },
+        "updateStronghold": {
+            "update": {
+                "title": "Update Stronghold",
+                "body1": "Your Stronghold's version is out of date.",
+                "body2": "Provide your password to update Stronghold."
+            },
+            "changePassword": {
+                "hint": "We recommend to update your Stronghold password"
+            },
+            "success": {
+                "title": "Stronghold updated",
+                "body": "It's all good now - you're running the latest Stronghold version.",
+                "hint": "We highly recommend to delete all previous Stronghold backup files and save a new one"
+            }
         }
     },
     "popups": {
@@ -1303,7 +1319,8 @@
             "similar": "This is similar to a common password.",
             "word": "A single word is easy to guess.",
             "incorrect": "Your password is incorrect.",
-            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}.",
+            "sameAsOld": "Your new password must be different from your old password."
         },
         "pincode": {
             "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
@@ -1372,7 +1389,8 @@
             "seedCharacters": "The seed should only contain characters A-Z or 9",
             "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase",
-            "phraseCaseWord": "The word \"{word}\" should be lower case"
+            "phraseCaseWord": "The word \"{word}\" should be lower case",
+            "migrationRequired": "Stronghold migration is required."
         },
         "ledger": {
             "appNotOpen": "You must open the IOTA app on your Ledger device.",

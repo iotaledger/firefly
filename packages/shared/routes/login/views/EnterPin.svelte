@@ -1,24 +1,25 @@
 <script lang="typescript">
-    import { Icon, Pin, Profile, Text } from 'shared/components'
+    import { Locale, localize } from '@core/i18n'
+    import {
+        getKeyboardTransitionSpeed,
+        isKeyboardOpened,
+        keyboardHeight,
+        mobile,
+        needsToAcceptLatestPrivacyPolicy,
+        needsToAcceptLatestTos,
+    } from '@lib/app'
+    import { isStrongholdOutdated } from '@lib/stronghold'
+    import { Icon, Pin, Profile, Text, TextHint } from 'shared/components'
     import { initAppSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { Platform } from 'shared/lib/platform'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { activeProfile, clearActiveProfile } from 'shared/lib/profile'
+    import { activeProfile, clearActiveProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
-    import { api, getProfileDataPath, initialise, destroyActor } from 'shared/lib/wallet'
+    import { api, destroyActor, getProfileDataPath, initialise } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy } from 'svelte'
-    import { Locale } from '@core/i18n'
     import { get } from 'svelte/store'
-    import {
-        mobile,
-        isKeyboardOpened,
-        keyboardHeight,
-        needsToAcceptLatestPrivacyPolicy,
-        needsToAcceptLatestTos,
-        getKeyboardTransitionSpeed,
-    } from '@lib/app'
 
     export let locale: Locale
 
@@ -67,6 +68,7 @@
             pinRef.focus()
         }
     }
+    $: strongholdUpdateRequired = $isSoftwareProfile && isStrongholdOutdated($activeProfile)
 
     let buttonText = setButtonText(timeRemainingBeforeNextAttempt)
 
@@ -183,7 +185,15 @@
                 : 0}px; ; transition: padding {getKeyboardTransitionSpeed($isKeyboardOpened) +
                 'ms'} var(--transition-scroll)"
         >
-            <Profile name={$activeProfile?.name} bgColor="blue" />
+            <Profile name={$activeProfile?.name} bgColor="blue" {strongholdUpdateRequired} />
+            {#if strongholdUpdateRequired}
+                <TextHint
+                    hint={localize('views.login.updateStrongholdWarning')}
+                    icon="exclamation"
+                    classes="mt-8 p-4 w-full rounded-2xl bg-yellow-50 dark:bg-opacity-10"
+                    iconClasses="text-yellow-700"
+                />
+            {/if}
             <Pin
                 bind:this={pinRef}
                 bind:value={pinCode}

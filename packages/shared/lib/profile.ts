@@ -20,6 +20,7 @@ import { NetworkConfig, NetworkType } from './typings/network'
 import { Profile, ProfileAccount, ProfileType, UserSettings } from './typings/profile'
 import { ValuesOf } from './typings/utils'
 import { WalletAccount } from './typings/wallet'
+import { STRONGHOLD_VERSION } from './stronghold'
 
 const MAX_PROFILE_NAME_LENGTH = 20
 
@@ -102,6 +103,7 @@ const buildProfile = (profileName: string, isDeveloperProfile: boolean): Profile
     ledgerMigrationCount: 0,
     accounts: [],
     hasFinishedSingleAccountGuide: true,
+    strongholdVersion: STRONGHOLD_VERSION,
 })
 
 /**

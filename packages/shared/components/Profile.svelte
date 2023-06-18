@@ -1,7 +1,7 @@
 <script lang="typescript">
-    import { Chip, Icon, Text } from 'shared/components'
-    import { getInitials as _getInitials } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
+    import { Chip, Icon, Text, WarningBadge } from 'shared/components'
+    import { getInitials as _getInitials } from 'shared/lib/helpers'
 
     export let classes = undefined
 
@@ -10,6 +10,7 @@
     export let isDeveloper = false
     export let isLedgerProfile = false
     export let bgColor: string
+    export let strongholdUpdateRequired: boolean = false
 
     export let onClick: undefined | ((id: string) => void) = undefined
 
@@ -34,7 +35,7 @@
     <div class="flex flex-col justify-between items-center space-y-3 w-full">
         <div
             on:click={() => handleOnClick()}
-            class="h-20 w-20 {bgColor
+            class="relative h-20 w-20 {bgColor
                 ? `bg-${bgColor}-500`
                 : ''} rounded-full font-bold text-center flex items-center justify-center {classes}"
         >
@@ -42,6 +43,9 @@
                 <slot />
             {:else}
                 <Text type="h3" classes="text-white">{getInitials()}</Text>
+            {/if}
+            {#if strongholdUpdateRequired}
+                <WarningBadge />
             {/if}
         </div>
         <div class="flex flex-row items-baseline justify-center space-x-1.5 w-full">

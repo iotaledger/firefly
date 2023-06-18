@@ -15,4 +15,6 @@ export type FireflyEvent = {
     shouldAddProfile?: boolean
     skip?: boolean
     skippedMining?: boolean
+    strongholdUpdateRequired?: boolean
+    isRecovery?: boolean
 }

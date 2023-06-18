@@ -33,6 +33,8 @@ export interface IPlatform {
     removeProfileFolder(profilePath: string): Promise<void>
     renameProfileFolder(oldPath: string, newPath: string): Promise<void>
     listProfileFolders(profileStoragePath: string): Promise<string[]>
+    copyFile(source: string, destination: string): Promise<void>
+    deleteFile(source: string): Promise<void>
     updateMenu(attribute: string, value: unknown): void
     popupMenu(): void
     maximize(): Promise<boolean>

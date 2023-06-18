@@ -1,13 +1,14 @@
 <script lang="typescript">
-    import { createEventDispatcher, onMount } from 'svelte'
+    import { localize } from '@core/i18n'
+    import { backButtonStore } from '@core/router'
+    import { isAwareOfCrashReporting } from '@lib/appSettings'
+    import { isStrongholdOutdated } from '@lib/stronghold'
     import { Icon, Logo, Profile } from 'shared/components'
     import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos } from 'shared/lib/app'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { profiles, setActiveProfile } from 'shared/lib/profile'
     import { ProfileType } from 'shared/lib/typings/profile'
-    import { localize } from '@core/i18n'
-    import { backButtonStore } from '@core/router'
-    import { isAwareOfCrashReporting } from '@lib/appSettings'
+    import { createEventDispatcher } from 'svelte'
 
     const dispatch = createEventDispatcher()
 
@@ -65,6 +66,7 @@
                     isLedgerProfile={profile?.type === ProfileType.Ledger ||
                         profile?.type === ProfileType.LedgerSimulator}
                     classes="cursor-pointer"
+                    strongholdUpdateRequired={profile?.type === ProfileType.Software && isStrongholdOutdated(profile)}
                 />
             </div>
         {/each}

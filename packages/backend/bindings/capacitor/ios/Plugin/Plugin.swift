@@ -15,13 +15,11 @@ public class WalletPlugin: CAPPlugin {
                 return call.reject("actorId and storagePath are required")
             }
             let fm = FileManager.default
-            let documents = fm.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
-            let path = documents.appendingPathComponent(storagePath, isDirectory: true).path
-            if !fm.fileExists(atPath: path) {
-                try fm.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+            if !fm.fileExists(atPath: storagePath) {
+                try fm.createDirectory(atPath: storagePath, withIntermediateDirectories: true, attributes: nil)
             }
             // Exclude folder from auto-backup
-            var urlPath = URL(fileURLWithPath: path, isDirectory: true)
+            var urlPath = URL(fileURLWithPath: storagePath, isDirectory: true)
             var values = URLResourceValues()
             values.isExcludedFromBackup = true
             try urlPath.setResourceValues(values)
@@ -36,7 +34,7 @@ public class WalletPlugin: CAPPlugin {
                 let data: String = String(cString: result!)
                 self.notifyListeners("walletEvent", data: ["walletResponse": data])
             }
-            Wallet.iota_initialize(callback, actorId.cString(using: .utf8), path.cString(using: .utf8))
+            Wallet.iota_initialize(callback, actorId.cString(using: .utf8), storagePath.cString(using: .utf8))
             call.resolve()
             isInitialized = true
         } catch {
@@ -87,6 +85,25 @@ public class WalletPlugin: CAPPlugin {
             return call.reject("event is required")
         }
         Wallet.iota_listen(actorId, id, event)
+        call.resolve()
+    }
+
+    @objc func migrateStrongholdSnapshotV2ToV3(_ call: CAPPluginCall) {
+        guard let currentPath = call.getString("currentPath") else {
+            return call.reject("currentPath is required")
+        }
+        guard let currentPassword = call.getString("currentPassword") else {
+            return call.reject("currentPassword is required")
+        }
+        let new_path = call.getString("new_path") ?? ""
+        let new_password = call.getString("new_password") ?? ""
+
+        Wallet.iota_migrate_stronghold_snapshot_v2_to_v3(
+            currentPath,
+            currentPassword,
+            new_path,
+            new_password
+        )
         call.resolve()
     }
 }

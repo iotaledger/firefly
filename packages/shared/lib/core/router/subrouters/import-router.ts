@@ -1,11 +1,12 @@
 import { get, writable } from 'svelte/store'
 
-import { mnemonic } from '@lib/app'
+import { mnemonic, strongholdPassword } from '@lib/app'
 import { getMigrationData } from '@lib/migration'
 import { Platform } from '@lib/platform'
 import { newProfile } from '@lib/profile'
 import { ImportType } from '@lib/typings/profile'
 import { asyncRestoreBackup } from '@lib/wallet'
+import { importFilePath } from '@lib/stronghold'
 
 import { appRouter } from '../app-router'
 import { ImportRoute } from '../enums'
@@ -69,7 +70,26 @@ export class ImportRouter extends Subrouter<ImportRoute> {
 
                 this.importFile = file
                 this.importFilePath = filePath
-                nextRoute = ImportRoute.BackupPassword
+
+                if (get(this.importType) !== ImportType.Stronghold) {
+                    nextRoute = ImportRoute.BackupPassword
+                    break
+                }
+
+                try {
+                    await asyncRestoreBackup(this.importFilePath, '')
+                } catch (err) {
+                    if (err?.error === 'error.backup.migrationRequired') {
+                        importFilePath.set(filePath)
+                        get(appRouter).next({
+                            importType: get(this.importType),
+                            strongholdUpdateRequired: true,
+                        })
+                    } else {
+                        nextRoute = ImportRoute.BackupPassword
+                    }
+                }
+
                 break
             }
             case ImportRoute.BackupPassword: {
@@ -86,11 +106,10 @@ export class ImportRouter extends Subrouter<ImportRoute> {
                             await getMigrationData(legacySeed)
                         }
                     } else {
+                        strongholdPassword.set(password)
                         await asyncRestoreBackup(this.importFilePath, password)
                         get(newProfile).lastStrongholdBackupTime = new Date()
                     }
-
-                    nextRoute = ImportRoute.Success
                 } finally {
                     this.isGettingMigrationData.set(false)
                 }

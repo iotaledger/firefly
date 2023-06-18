@@ -4,7 +4,7 @@ on:
   pull_request:
   push:
     branches:
-      - 'develop'
+      - 'main-mobile'
 
 jobs:
   rust:
@@ -24,7 +24,7 @@ jobs:
         run: cargo +nightly fmt -- --check
         working-directory: packages/backend
 
-  js:
+  format:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -39,6 +39,19 @@ jobs:
 
       - name: Format
         run: yarn format-check
+
+  lint:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+
+      - name: Install Dependencies
+        run: yarn --ignore-scripts
 
       - name: Lint
         run: yarn lint

@@ -31,6 +31,7 @@
         Protect,
         Secure,
         Setup,
+        UpdateStronghold,
         Welcome,
     } from 'shared/routes'
     import { Stage } from 'shared/lib/typings/stage'
@@ -203,6 +204,9 @@
         </Route>
         <Route route={AppRoute.Login}>
             <Login locale={$_} {goto} />
+        </Route>
+        <Route route={AppRoute.UpdateStronghold}>
+            <UpdateStronghold locale={$_} {goto} />
         </Route>
         <ToastContainer />
     </div>

@@ -275,7 +275,7 @@
     const setRawAmount = (amountAsFloat: number): number => {
         const isFiat = isFiatCurrency(unit)
         const amountAsIota = isFiat
-            ? convertFromFiat(amountAsFloat, $currencies[CurrencyTypes.USD], $exchangeRates[unit])
+            ? convertFromFiat(amountAsFloat, $currencies?.[CurrencyTypes.USD], $exchangeRates[unit])
             : changeUnits(amountAsFloat, unit, Unit.i)
         /**
          * NOTE: Sometimes max values from fiat calculations
@@ -404,7 +404,7 @@
             ? formatNumber(
                   convertToFiat(
                       $selectedAccountStore.rawIotaBalance,
-                      $currencies[CurrencyTypes.USD],
+                      $currencies?.[CurrencyTypes.USD],
                       $exchangeRates[unit]
                   )
               )

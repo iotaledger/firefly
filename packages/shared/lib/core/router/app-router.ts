@@ -1,7 +1,8 @@
 import { get, writable } from 'svelte/store'
 
 import { cleanupSignup, login, mobile, strongholdPassword, walletPin } from '@lib/app'
-import { setProfileType, activeProfile, profiles } from '@lib/profile'
+import { activeProfile, profiles, setProfileType } from '@lib/profile'
+import { isStrongholdOutdated } from '@lib/stronghold'
 import { ImportType, ProfileType } from '@lib/typings/profile'
 import { SetupType } from '@lib/typings/setup'
 import { walletSetupType } from '@lib/wallet'
@@ -42,14 +43,33 @@ export class AppRouter extends Router<AppRoute> {
 
         switch (currentRoute) {
             case AppRoute.Login: {
+                walletSetupType.set(null)
                 if (params.shouldAddProfile) {
                     nextRoute = AppRoute.Profile
+                } else {
+                    const strongholdUpdateRequired =
+                        get(activeProfile) &&
+                        get(activeProfile).type === ProfileType.Software &&
+                        isStrongholdOutdated(get(activeProfile))
+                    if (strongholdUpdateRequired) {
+                        nextRoute = AppRoute.UpdateStronghold
+                    } else {
+                        login()
+                        nextRoute = AppRoute.Dashboard
+                    }
+                }
+                break
+            }
+            case AppRoute.UpdateStronghold:
+                strongholdPassword.set(undefined)
+                // if we come from onboarding
+                if (get(walletSetupType) === SetupType.Stronghold) {
+                    nextRoute = AppRoute.Protect
                 } else {
                     login()
                     nextRoute = AppRoute.Dashboard
                 }
                 break
-            }
             case AppRoute.Dashboard: {
                 if (params.reset) {
                     nextRoute = AppRoute.Login
@@ -135,14 +155,18 @@ export class AppRouter extends Router<AppRoute> {
                 }
                 break
             case AppRoute.Import: {
-                const { importType } = params
+                const { importType, strongholdUpdateRequired } = params
                 walletSetupType.set(importType as unknown as SetupType)
                 nextRoute = AppRoute.Congratulations
                 if (importType === ImportType.Mnemonic) {
                     nextRoute = AppRoute.Secure
-                } else if (
-                    [ImportType.Stronghold, ImportType.TrinityLedger, ImportType.FireflyLedger].includes(importType)
-                ) {
+                } else if (importType === ImportType.Stronghold) {
+                    if (strongholdUpdateRequired) {
+                        nextRoute = AppRoute.UpdateStronghold
+                    } else {
+                        nextRoute = AppRoute.Password
+                    }
+                } else if ([ImportType.TrinityLedger, ImportType.FireflyLedger].includes(importType)) {
                     nextRoute = AppRoute.Protect
                 } else if (importType === ImportType.Seed || importType === ImportType.SeedVault) {
                     nextRoute = AppRoute.Balance
