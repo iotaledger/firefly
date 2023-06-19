@@ -4,6 +4,8 @@
     import { createEventDispatcher } from 'svelte'
     import { Tooltip, Button, ButtonSize } from 'shared/components'
     import { localize } from '@core/i18n'
+    import sveltyPickerTranslations from 'svelty-picker/i18n'
+    import { appSettings } from '@core/app'
 
     export let value: Date = undefined
     export let startDate: Date = null
@@ -13,6 +15,7 @@
     const sveltyPickerStartDate = convertDateToSveltyPickerFormat(startDate)
 
     let sveltyPickerDate = convertDateToSveltyPickerFormat(value) ?? sveltyPickerStartDate
+    const translations = getSveltyPickerTranslations()
     let tooltip: Tooltip
 
     function convertDateToSveltyPickerFormat(date: Date): string {
@@ -27,6 +30,10 @@
         value = new Date(sveltyPickerDate)
         dispatch('confirm')
     }
+
+    function getSveltyPickerTranslations(): Record<string, unknown> {
+        return sveltyPickerTranslations[$appSettings.language] ?? sveltyPickerTranslations.en
+    }
 </script>
 
 <Tooltip {...$$restProps} classes="flex justify-center items-center flex-col" bind:this={tooltip}>
@@ -37,6 +44,7 @@
         clearBtn={false}
         todayBtn={false}
         startDate={sveltyPickerStartDate}
+        i18n={translations}
         format="yyyy-mm-dd hh:ii"
         theme="datetime-picker-colors"
         bind:value={sveltyPickerDate}
