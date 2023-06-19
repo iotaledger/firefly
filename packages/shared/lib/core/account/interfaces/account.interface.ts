@@ -1,14 +1,15 @@
 import type { HexEncodedAmount, IAliasOutput, IBasicOutput, IFoundryOutput, INftOutput, OutputTypes } from '@iota/types'
 import type {
-    Balance,
     AccountMetadata,
     Address,
     AddressWithUnspentOutputs,
     AliasOutputParams,
+    Balance,
     BuildAliasOutputData,
     BuildBasicOutputData,
     BuildFoundryOutputData,
     BuildNftOutputData,
+    Ed25519Signature,
     FilterOptions,
     GenerateAddressOptions,
     MintNativeTokenParams,
@@ -25,6 +26,7 @@ import type {
     ParticipationEventWithNodes,
     ParticipationOverview,
     PreparedTransactionData,
+    Secp256k1EcdsaSignature,
     SendAmountParams,
     SendNativeTokensParams,
     SendNftParams,
@@ -67,7 +69,7 @@ export interface IAccount {
     getIncomingTransaction(transactionId: string): Promise<Transaction>
     getMetadata(): AccountMetadata
     getOutput(outputId: string): Promise<OutputData>
-    getOutputsWithAdditionalUnlockConditions(outputs: OutputsToClaim): Promise<string[]>
+    claimableOutputs(outputs: OutputsToClaim): Promise<string[]>
     getParticipationEvent(eventId: string): Promise<ParticipationEventWithNodes>
     getParticipationEventIds(node: Node, eventType?: ParticipationEventType): Promise<string[]>
     getParticipationEvents(): Promise<{ [eventId: string]: ParticipationEventWithNodes }>
@@ -105,6 +107,7 @@ export interface IAccount {
     sendOutputs(outputs: OutputTypes[], transactionOptions?: TransactionOptions): Promise<Transaction>
     setAlias(alias: string): Promise<void>
     setDefaultSyncOptions(options: SyncOptions): Promise<void>
+    signSecp256k1Ecdsa(message: HexEncodedString, chain: number[]): Promise<Secp256k1EcdsaSignature>
     signTransactionEssence(preparedTransactionData: PreparedTransactionData): Promise<SignedTransactionEssence>
     stopParticipating(eventId: string): Promise<Transaction>
     submitAndStoreTransaction(signedTransactionData: SignedTransactionEssence): Promise<Transaction>
@@ -112,4 +115,6 @@ export interface IAccount {
     transactions(): Promise<Transaction[]>
     unspentOutputs(filterOptions?: FilterOptions): Promise<OutputData[]>
     vote(eventId?: string, answers?: number[]): Promise<Transaction>
+    verifyEd25519Signature(signature: Ed25519Signature, message: HexEncodedString): Promise<boolean>
+    verifySecp256k1EcdsaSignature(signature: Secp256k1EcdsaSignature, message: HexEncodedString): Promise<boolean>
 }

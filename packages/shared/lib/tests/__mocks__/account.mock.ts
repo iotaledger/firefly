@@ -26,9 +26,10 @@ import {
     SignedTransactionEssence,
     Transaction,
     TransactionOptions,
-    EvmSignature,
+    Secp256k1EcdsaSignature,
     GenerateAddressOptions,
     SyncOptions,
+    Ed25519Signature,
 } from '@iota/wallet'
 
 import { IAccount } from '../../core/account'
@@ -166,7 +167,7 @@ export class AccountMock implements IAccount {
         // })
     }
 
-    getOutputsWithAdditionalUnlockConditions(outputs: OutputsToClaim): Promise<string[]> {
+    claimableOutputs(outputs: OutputsToClaim): Promise<string[]> {
         return Promise.resolve([''])
     }
 
@@ -292,7 +293,7 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    signEvm(message: string, chain: number[]): Promise<EvmSignature> {
+    signSecp256k1Ecdsa(message: string, chain: number[]): Promise<Secp256k1EcdsaSignature> {
         throw new Error('Method not implemented.')
     }
 
@@ -318,6 +319,14 @@ export class AccountMock implements IAccount {
 
     unspentOutputs(filterOptions?: FilterOptions): Promise<[]> {
         return Promise.resolve([])
+    }
+
+    verifyEd25519Signature(signature: Ed25519Signature, message: string): Promise<boolean> {
+        throw new Error('Method not implemented.')
+    }
+
+    verifySecp256k1EcdsaSignature(signature: Secp256k1EcdsaSignature, message: string): Promise<boolean> {
+        throw new Error('Method not implemented.')
     }
 
     vote(eventId?: string, answers?: number[]): Promise<Transaction> {
