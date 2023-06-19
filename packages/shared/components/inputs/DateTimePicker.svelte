@@ -32,7 +32,41 @@
     }
 
     function getSveltyPickerTranslations(): Record<string, unknown> {
-        return sveltyPickerTranslations[$appSettings.language] ?? sveltyPickerTranslations.en
+        return sveltyPickerTranslations[getSveltyPickerLanguage($appSettings.language)] ?? sveltyPickerTranslations.en
+    }
+
+    function getSveltyPickerLanguage(settingsLanguage: string): string {
+        switch (settingsLanguage) {
+            case 'cs':
+                return 'cz'
+            case 'de':
+                return 'de'
+            case 'en':
+                return 'en'
+            case 'es':
+            case 'es-ES':
+            case 'es-LA':
+                return 'es'
+            case 'fr':
+                return 'fr'
+            case 'hu':
+                return 'hu'
+            case 'id':
+                return 'id'
+            case 'ja':
+                return 'jp'
+            case 'ko':
+                return 'ko'
+            case 'nl':
+                return 'nl'
+            case 'pt-BR':
+            case 'pt-PT':
+                return 'pt_BR'
+            case 'sk':
+                return 'sk'
+            default:
+                return 'en'
+        }
     }
 </script>
 
