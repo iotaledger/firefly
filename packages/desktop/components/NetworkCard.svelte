@@ -40,7 +40,7 @@
         } else if (chain) {
             const configuration = chain.getConfiguration() as IIscpChainConfiguration
             name = configuration.name
-            address = $selectedAccount.evmAddress
+            address = $selectedAccount.evmAddresses[configuration.coinType]
             status = chain.getStatus().health
         }
     }
@@ -84,9 +84,11 @@
                     </Text>
                 {/if}
             </div>
-            <button on:click|stopPropagation={onQrCodeIconClick}>
-                <Icon icon={IconEnum.Qr} classes="text-gray-500" />
-            </button>
+            {#if address}
+                <button on:click|stopPropagation={onQrCodeIconClick}>
+                    <Icon icon={IconEnum.Qr} classes="text-gray-500" />
+                </button>
+            {/if}
         </div>
     </div>
 </ClickableTile>

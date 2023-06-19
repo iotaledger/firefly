@@ -6,7 +6,7 @@
     import { buildNftOutputData, formatTokenAmountPrecise, mintNft, mintNftDetails } from '@core/wallet'
     import { getBaseToken, checkActiveProfileAuth } from '@core/profile'
     import { handleError } from '@core/error/handlers/handleError'
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@desktop/auxiliary/popup'
     import { CURRENT_IRC27_VERSION } from '@core/nfts'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
@@ -98,7 +98,7 @@
     <div class="space-y-2 max-h-100 scrollable-y flex-1">
         <nft-details class="flex flex-col justify-center items-center space-y-4">
             <NftImageOrIconBox size="large" {type} />
-            <activity-details class="w-full h-full space-y-2 flex flex-auto flex-col flex-shrink-0">
+            <activity-details class="w-full h-full space-y-2 flex flex-auto flex-col shrink-0">
                 <Tabs bind:activeTab {tabs} />
                 {#if activeTab === Tab.Transaction}
                     {#if quantity > 1}

@@ -6,7 +6,17 @@ import { shouldReportError } from './lib/errorHandling'
 import { initialiseAnalytics } from './lib/analytics'
 import { getMachineId } from './lib/machineId'
 import { getDiagnostics } from './lib/diagnostics'
-const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session, utilityProcess } = require('electron')
+const {
+    app,
+    dialog,
+    ipcMain,
+    protocol,
+    shell,
+    BrowserWindow,
+    session,
+    utilityProcess,
+    nativeTheme,
+} = require('electron')
 const path = require('path')
 const fs = require('fs')
 const Keychain = require('./lib/keychain')
@@ -270,7 +280,7 @@ function createWindow() {
     })
 
     windows.main.on('closed', () => {
-        ledgerProcess.kill()
+        ledgerProcess?.kill()
         windows.main = null
     })
 
@@ -307,26 +317,42 @@ function createWindow() {
 
 app.whenReady().then(createWindow)
 
-const ledgerProcess = utilityProcess.fork(paths.ledger)
-
-ledgerProcess.on('spawn', () => {
-    ledgerProcess.on('message', (message) => {
-        const { error, data } = message
-        if (error) {
-            windows.main.webContents.send('ledger-error', error)
-        } else {
-            if (data?.address) {
-                windows.main.webContents.send('evm-address', message.data.address)
+let ledgerProcess
+ipcMain.on('start-ledger-process', () => {
+    ledgerProcess = utilityProcess.fork(paths.ledger)
+    ledgerProcess.on('spawn', () => {
+        ledgerProcess.on('message', (message) => {
+            const { error, data } = message
+            if (error) {
+                windows.main.webContents.send('ledger-error', error)
             } else {
-                /* eslint-disable-next-line no-console */
-                console.log('Unhandled Ledger Message: ', message)
+                switch (data?.method) {
+                    case 'generate-evm-address':
+                        windows.main.webContents.send('evm-address', data)
+                        break
+                    case 'sign-evm-transaction':
+                        windows.main.webContents.send('evm-signed-transaction', data)
+                        break
+                    default:
+                        /* eslint-disable-next-line no-console */
+                        console.log('Unhandled Ledger Message: ', message)
+                        break
+                }
             }
-        }
+        })
     })
 })
 
-ipcMain.on('generate-evm-address', (_e, coinType, accountIndex, verify) => {
-    ledgerProcess.postMessage({ method: 'generate-evm-address', parameters: [coinType, accountIndex, verify] })
+ipcMain.on('kill-ledger-process', () => {
+    ledgerProcess?.kill()
+})
+
+ipcMain.on('generate-evm-address', (_e, bip32Path, verify) => {
+    ledgerProcess?.postMessage({ method: 'generate-evm-address', parameters: [bip32Path, verify] })
+})
+
+ipcMain.on('sign-evm-transaction', (_e, data, bip32Path) => {
+    ledgerProcess?.postMessage({ method: 'sign-evm-transaction', parameters: [data, bip32Path] })
 })
 
 /**
@@ -457,6 +483,7 @@ ipcMain.handle('get-machine-id', (_e) => getMachineId())
 
 // Settings
 ipcMain.handle('update-app-settings', (_e, settings) => updateSettings(settings))
+ipcMain.handle('update-theme', (_e, theme) => (nativeTheme.themeSource = theme))
 
 /**
  * Define deep link state

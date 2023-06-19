@@ -7,12 +7,13 @@ import {
     NewTransactionType,
     getUnitFromTokenMetadata,
 } from '@core/wallet'
-import { openPopup, PopupId } from '@auxiliary/popup'
+import { openPopup, PopupId } from '../../../../../../../desktop/lib/auxiliary/popup'
 import { get } from 'svelte/store'
 
 import { SendOperationParameter } from '../../../enums'
 import { UnknownAssetError } from '../../../errors'
 import { getRawAmountFromSearchParam } from '../../../utils'
+import { getActiveNetworkId } from '@core/network/utils/getNetworkId'
 
 export function handleDeepLinkSendFormOperation(searchParams: URLSearchParams): void {
     const transactionDetails = parseSendFormOperation(searchParams)
@@ -37,13 +38,16 @@ export function handleDeepLinkSendFormOperation(searchParams: URLSearchParams): 
  */
 function parseSendFormOperation(searchParams: URLSearchParams): NewTransactionDetails {
     const assetId = searchParams.get(SendOperationParameter.AssetId)
-    const asset = assetId ? getAssetById(assetId) : get(selectedAccountAssets).baseCoin
+
+    const networkId = getActiveNetworkId()
+    const baseAsset = networkId ? get(selectedAccountAssets)[networkId].baseCoin : undefined
+    const asset = assetId && networkId ? getAssetById(assetId, networkId) : baseAsset
     if (!asset) {
         throw new UnknownAssetError()
     }
 
     const address = searchParams.get(SendOperationParameter.Address)
-    const unit = searchParams.get(SendOperationParameter.Unit) ?? getUnitFromTokenMetadata(asset?.metadata)
+    const unit = searchParams.get(SendOperationParameter.Unit) ?? getUnitFromTokenMetadata(asset.metadata)
     const rawAmount = getRawAmountFromSearchParam(searchParams)
     const metadata = searchParams.get(SendOperationParameter.Metadata)
     const tag = searchParams.get(SendOperationParameter.Tag)

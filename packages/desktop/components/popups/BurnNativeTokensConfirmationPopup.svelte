@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Button, Text, TextHint, FontWeight, TextType, ButtonVariant, KeyValueBox } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@desktop/auxiliary/popup'
     import { burnAsset, formatTokenAmountBestMatch, IAsset } from '@core/wallet'
     import { checkActiveProfileAuth } from '@core/profile'
     import { handleError } from '@core/error/handlers'
@@ -44,7 +44,7 @@
     })
 </script>
 
-<div class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
+<div class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">
     <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
         {localize('actions.confirmTokenBurn.title', {
             values: {

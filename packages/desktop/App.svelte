@@ -25,7 +25,7 @@
         setPlatform,
     } from '@core/app'
     import { showAppNotification } from '@auxiliary/notification'
-    import { closePopup, openPopup, PopupId, popupState } from '@auxiliary/popup'
+    import { closePopup, openPopup, PopupId, popupState } from '@desktop/auxiliary/popup'
     import { getLocalisedMenuItems } from './lib/helpers'
     import { ToastContainer, Transition } from '@ui'
     import { TitleBar, Popup } from '@components'
@@ -40,10 +40,9 @@
         openSettings,
     } from '@desktop/routers'
     import { downloadNextNftInQueue, nftDownloadQueue } from '@core/nfts'
-    import { closeDrawer } from '@desktop/auxilary/drawer'
+    import { closeDrawer } from '@desktop/auxiliary/drawer'
     import features from '@features/features'
     import { OnboardingRouterView } from '@views/onboarding'
-    import { registerLayer2EventHandlers } from '@core/layer-2'
     import { registerLedgerDeviceEventHandlers } from '@core/ledger'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
@@ -62,10 +61,6 @@
 
     $: void handleCrashReporting($appSettings.sendCrashReports)
 
-    $: $appSettings.darkMode
-        ? document.body.classList.add('scheme-dark')
-        : document.body.classList.remove('scheme-dark')
-
     $: {
         if ($isLocaleLoaded) {
             Platform.updateMenu('strings', getLocalisedMenuItems($_ as Locale))
@@ -79,6 +74,8 @@
     $: isDashboardVisible = $appRoute === AppRoute.Dashboard && $hasLoadedAccounts && $popupState.id !== 'busy'
 
     $: $nftDownloadQueue, downloadNextNftInQueue()
+
+    $: Platform.updateTheme($appSettings.theme)
 
     let splash = true
     let settings = false
@@ -153,7 +150,6 @@
         Platform.onEvent('deep-link-request', showDeepLinkNotification)
 
         registerLedgerDeviceEventHandlers()
-        registerLayer2EventHandlers()
 
         const platform = await Platform.getOS()
         setPlatform(platform)
@@ -180,7 +176,6 @@
         class="block fixed left-0 right-0 bottom-0 z-50 top-0"
         class:top-placement={isWindows || isDashboardVisible}
     >
-        <div class="scheme-dark" />
         {#if !$isLocaleLoaded || splash}
             <Splash />
         {:else}
@@ -219,7 +214,7 @@
     @import '../shared/style/style.scss';
     html,
     body {
-        @apply bg-white;
+        @apply bg-white dark:bg-gray-900;
         @apply select-none;
         -webkit-user-drag: none;
 
@@ -258,11 +253,8 @@
             overflow-y: overlay;
         }
 
-        &.scheme-dark {
-            @apply bg-gray-900;
-            :global(::-webkit-scrollbar-thumb) {
-                @apply border-gray-900;
-            }
+        :global(::-webkit-scrollbar-thumb) {
+            @apply dark:border-gray-900;
         }
 
         .multiwrap-line2 {

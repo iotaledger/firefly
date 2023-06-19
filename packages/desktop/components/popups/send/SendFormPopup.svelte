@@ -1,6 +1,6 @@
 <script lang="ts">
     import { get } from 'svelte/store'
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@desktop/auxiliary/popup'
     import { localize } from '@core/i18n'
     import { ownedNfts } from '@core/nfts'
     import { getByteLengthOfString, MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
@@ -161,7 +161,7 @@
     }
 </script>
 
-<send-form-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
+<send-form-popup class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">
     <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
         {localize('popups.transaction.title')}
     </Text>

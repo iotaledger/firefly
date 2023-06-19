@@ -2,13 +2,14 @@
     import { IAsset, visibleSelectedAccountAssets } from '@core/wallet'
     import { AssetTile, Icon, Text, AssetIcon, FontWeight } from 'shared/components'
     import { clickOutside } from '@core/utils'
+    import { activeProfile } from '@core/profile'
 
-    export let asset = $visibleSelectedAccountAssets?.baseCoin
+    export let asset = $visibleSelectedAccountAssets?.[$activeProfile?.network?.id]?.baseCoin
     export let readonly: boolean = false
 
     let isDropdownOpen = false
 
-    $: isReadonly = readonly || $visibleSelectedAccountAssets?.nativeTokens.length === 0
+    $: isReadonly = readonly || $visibleSelectedAccountAssets?.[$activeProfile?.network?.id]?.nativeTokens.length === 0
 
     function onDropdownClick(): void {
         if (!isReadonly) {
@@ -40,7 +41,7 @@
                     darkColor="white"
                     fontWeight={FontWeight.semibold}
                     fontSize="15"
-                    classes="overflow-hidden whitespace-nowrap overflow-ellipsis"
+                    classes="overflow-hidden whitespace-nowrap text-ellipsis"
                 >
                     {asset?.metadata?.name ?? asset?.id}
                 </Text>

@@ -503,13 +503,27 @@
                         }
                     },
                     "chainDepositAddress": {
-                        "title": "Adresse de dépôt de la chaîne"
+                        "title": "Adresse de dépôt de la chaîne",
+                        "networkTitle": "Adresse de dépôt réseau"
                     },
                     "chainInformation": {
                         "title": "Informations sur la chaîne"
                     },
+                    "confirmLedgerEvmAddress": {
+                        "title": "Confirmer l'adresse EVM",
+                        "header": "Nous avons généré votre adresse EVM"
+                    },
                     "connectedChains": {
                         "title": "Chaînes connectées"
+                    },
+                    "connectLedgerDevice": {
+                        "title": "Connecter l'appareil Ledger",
+                        "header": "Ouvrir l'application Ethereum",
+                        "body": "Pour que votre Ledger soit trouvé par Firefly, assurez-vous que l'application officielle de Ledger Live est fermée avant de suivre ces étapes.",
+                        "requirements": {
+                            "connect": "Connectez et déverrouillez votre appareil Ledger",
+                            "openApp": "Ouvrez l'application Ethereum sur votre Ledger"
+                        }
                     },
                     "editChain": {
                         "title": "Modifier la chaîne"
@@ -589,7 +603,8 @@
                 "attributes": "Attributes",
                 "menu": {
                     "download": "Download",
-                    "setAvatar": "Set NFT as profile avatar",
+                    "setPfp": "Définir une photo de profil NFT",
+                    "unsetPfp": "Retirer la photo de profil NFT",
                     "view": "View media in browser",
                     "burn": "Burn NFT"
                 }
@@ -890,6 +905,10 @@
         "transaction": {
             "title": "Send asset",
             "body": "Vous êtes sur le point d'envoyer {amount} à",
+            "selectToken": "Sélectionnez un jeton",
+            "selectAmount": "Envoyer {tokenName}",
+            "selectRecipient": "Envoyer {assetName} à",
+            "transactionSummary": "Transaction vers {recipient}",
             "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
             "sendingFromStakedAccount": "Vous effectuez un transfert depuis un portefeuille où des fonds sont placés. Cela peut entrainer l'annulation du Staking. Vous pouvez effectuer le transfert mais il est possible que vous deviez recommencer l'opération de Staking sur les jetons restant dans votre portefeuille.",
             "sendingFromStakedAccountBelowMinReward": "Vous envoyez un transfert depuis un portefeuille qui n'a pas encore atteint les récompenses de staking minimales. Cela peut libérer vos jetons et vous pouvez perdre vos récompenses de staking sur ce portefeuille."
@@ -1031,7 +1050,11 @@
             "hint": "Vous ne trouvez pas de portefeuille ? Utilisez le moteur de recherche de solde dans les paramètres pour découvrir les portefeuilles précédemment utilisés."
         },
         "transactionDetails": {
-            "title": "Détails de l'opération"
+            "title": "Détails de l'opération",
+            "giftedStorageDeposit": {
+                "tooltipTitle": "Caution de stockage offerte",
+                "tooltipDescription": "Montant conservé par le destinataire"
+            }
         },
         "sendForm": {
             "title": "Envoyer des fonds"
@@ -1080,6 +1103,15 @@
                 "alias": "Alias",
                 "assetId": "Asset Id"
             }
+        },
+        "importErc20Token": {
+            "title": "Importer un jeton ERC20",
+            "property": {
+                "chainId": "ID de la chaîne",
+                "tokenAddress": "Adresse du jeton"
+            },
+            "success": "Jeton {tokenSymbol} importé",
+            "error": "Impossible d'importer le jeton ERC20"
         },
         "noAlias": {
             "title": "Unable to mint",
@@ -1270,6 +1302,7 @@
         "hide": "Masquer",
         "hideOthers": "Masquer les autres",
         "showAll": "Montrer Tout",
+        "useMax": "Utiliser le Max",
         "quit": "Quitter",
         "edit": "Modifier",
         "undo": "Annuler",
@@ -1619,7 +1652,11 @@
         "jwt": "JSON web token",
         "internalTransaction": "Transaction interne",
         "coinType": "Type de token",
-        "custom": "Personnalisé"
+        "custom": "Personnalisé",
+        "evmAddress": "Adresse EVM",
+        "chain": "Chaîne",
+        "importErc20Token": "Importer un jeton ERC20",
+        "importErc20TokenDescription": "Importer un jeton ERC20 depuis une chaîne EVM"
     },
     "filters": {
         "title": "Filters",
@@ -1720,6 +1757,9 @@
             "label": "Commandes",
             "name": "Nom",
             "phase": "Etape"
+        },
+        "network": {
+            "label": "Réseau"
         }
     },
     "dates": {
@@ -1894,7 +1934,8 @@
             "invalidAssetId": "L'identifiant de la ressource n'est pas valide.",
             "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "Ce portefeuille a des fonds insuffisants.",
-            "insufficientFundsStorageDeposit": "Fonds insuffisants pour couvrir la caution de stockage",
+            "insufficientFundsStorageDeposit": "Fonds insuffisants pour couvrir le dépôt de stockage.",
+            "ongoingTransaction": "Si vous avez des transactions en cours, veuillez attendre leur confirmation.",
             "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "Vous n'avez pas sélectionné de portefeuille vers lequel envoyer les fonds.",
             "sendingDust": "Vous ne pouvez pas envoyer moins de 1 Mi.",
@@ -1947,7 +1988,7 @@
             "invalid": "Le fichier de sauvegarde n'a pas été reconnu.",
             "destination": "La destination de la sauvegarde n'était pas valide.",
             "mnemonic": "Le mnémonique n'est pas valide.",
-            "migrationRequired": "Stronghold migration is required.",
+            "migrationRequired": "La migration vers Stronghold est requise.",
             "seedTooShort": "Le seed devrait avoir 81 caractères, le nb. de caractères entrés {length, plural, one {est #} other {est #}}",
             "seedCharacters": "La seed (graine) ne doit contenir que des caractères A-Z ou le chiffre 9",
             "phraseWordCount": "Il devrait y avoir 24 mots dans votre phrase de récupération; actuellement, leur nombre {length, plural, one {est #} other {est #}}.",
@@ -2049,6 +2090,10 @@
                 "short": "Unable to add proposal",
                 "long": "Impossible de trouver la proposition {proposalId} sur le noeud spécifié"
             }
+        },
+        "erc20Token": {
+            "invalidAddressFormat": "Doit être au format hexadécimal",
+            "invalidAddressLength": "La longueur est invalide"
         }
     },
     "warning": {

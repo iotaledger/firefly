@@ -503,13 +503,27 @@
                         }
                     },
                     "chainDepositAddress": {
-                        "title": "Chain deposit address"
+                        "title": "Chain deposit address",
+                        "networkTitle": "Network deposit address"
                     },
                     "chainInformation": {
                         "title": "Chain information"
                     },
+                    "confirmLedgerEvmAddress": {
+                        "title": "Confirm EVM address",
+                        "header": "We have generated your EVM address"
+                    },
                     "connectedChains": {
                         "title": "Connected chains"
+                    },
+                    "connectLedgerDevice": {
+                        "title": "Connect Ledger Device",
+                        "header": "Open the Ethereum app",
+                        "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed before following these steps.",
+                        "requirements": {
+                            "connect": "Connect and unlock your Ledger",
+                            "openApp": "Open the Ethereum app on your Ledger"
+                        }
                     },
                     "editChain": {
                         "title": "Edit chain"
@@ -589,7 +603,8 @@
                 "attributes": "Attributes",
                 "menu": {
                     "download": "Download",
-                    "setAvatar": "Set NFT as profile avatar",
+                    "setPfp": "Set NFT profile pic",
+                    "unsetPfp": "Unset NFT profile pic",
                     "view": "View media in browser",
                     "burn": "Burn NFT"
                 }
@@ -890,6 +905,10 @@
         "transaction": {
             "title": "Send asset",
             "body": "Olet lähettämässä {amount} osoitteeseen",
+            "selectToken": "Select a token",
+            "selectAmount": "Send {tokenName}",
+            "selectRecipient": "Send {assetName} to",
+            "transactionSummary": "Transaction to {recipient}",
             "surplusIncluded": "Tämä transaktio sisältää ylijäämän. Ole hyvä ja tarkista, että haluat lähettää tämän summan.",
             "sendingFromStakedAccount": "Olet lähettämässä siirtoa lompakosta, jota käytetään parhaillaan stakingiin. Tämä saattaa lopettaa stakingin tokeneiltasi. Voit lähettää siirron vapaasti, mutta sinun on ehkä aloitettava staking uudelleen jäljelle jääville tokeneille siirron jälkeen.",
             "sendingFromStakedAccountBelowMinReward": "Olet lähettämässä siirtoa lompakosta, joka ei ole vielä saavuttanut staking-palkkioiden vähimmäismäärää. Tämä voi lopettaa staken tokeneillesi ja voit menettää staking-palkkiosi tästä lompakosta."
@@ -1031,7 +1050,11 @@
             "hint": "Etkö löydä lompakkoa? Käytä saldon etsijää asetuksista löytääksesi aiemmin käytetyt lompakot."
         },
         "transactionDetails": {
-            "title": "Transaktion tiedot"
+            "title": "Transaktion tiedot",
+            "giftedStorageDeposit": {
+                "tooltipTitle": "Gift storage deposit",
+                "tooltipDescription": "Amount kept by the recipient"
+            }
         },
         "sendForm": {
             "title": "Lähetä varoja"
@@ -1080,6 +1103,15 @@
                 "alias": "Alias",
                 "assetId": "Asset Id"
             }
+        },
+        "importErc20Token": {
+            "title": "Import ERC20 token",
+            "property": {
+                "chainId": "Chain ID",
+                "tokenAddress": "Token address"
+            },
+            "success": "Imported {tokenSymbol} token",
+            "error": "Unable to import ERC20 token"
         },
         "noAlias": {
             "title": "Unable to mint",
@@ -1270,6 +1302,7 @@
         "hide": "Piilota",
         "hideOthers": "Piilota Muut",
         "showAll": "Näytä kaikki",
+        "useMax": "Use Max",
         "quit": "Lopeta",
         "edit": "Muokkaa",
         "undo": "Kumoa",
@@ -1619,7 +1652,11 @@
         "jwt": "JSON web token",
         "internalTransaction": "Internal transaction",
         "coinType": "Coin type",
-        "custom": "Custom"
+        "custom": "Custom",
+        "evmAddress": "EVM address",
+        "chain": "Chain",
+        "importErc20Token": "Import ERC20 token",
+        "importErc20TokenDescription": "Import an ERC20 token from an EVM chain"
     },
     "filters": {
         "title": "Suodattimet",
@@ -1720,6 +1757,9 @@
             "label": "Order",
             "name": "Name",
             "phase": "Phase"
+        },
+        "network": {
+            "label": "Network"
         }
     },
     "dates": {
@@ -1894,7 +1934,8 @@
             "invalidAssetId": "The asset id is not valid.",
             "unknownAsset": "Tämä nimike ei ole tämän tilin tiedossa.",
             "insufficientFunds": "Tässä lompakossa ei ole riittävästi varoja.",
-            "insufficientFundsStorageDeposit": "Riittämättömät varat tallennusvakuuden kattamiseen",
+            "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit.",
+            "ongoingTransaction": "If you have ongoing transactions, please wait for their confirmation.",
             "cannotClaimTwice": "Tuloste on jo lunastettu",
             "noToAccount": "Et ole valinnut lompakkoa, johon varat lähetetään.",
             "sendingDust": "Et voi lähettää alle 1 Mi.",
@@ -2049,6 +2090,10 @@
                 "short": "Unable to add proposal",
                 "long": "Unable to find proposal {proposalId} on the specified node"
             }
+        },
+        "erc20Token": {
+            "invalidAddressFormat": "Must be hexadecimal format",
+            "invalidAddressLength": "Length is invalid"
         }
     },
     "warning": {

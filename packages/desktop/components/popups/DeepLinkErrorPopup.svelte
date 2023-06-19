@@ -1,12 +1,12 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
     import { Text, Button, TextHint, FontWeight } from 'shared/components'
-    import { closePopup } from '@auxiliary/popup'
+    import { closePopup } from '@desktop/auxiliary/popup'
 
     export let error: Error
 </script>
 
-<deep-link-error-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
+<deep-link-error-popup class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">
     <Text type="h3" fontWeight={FontWeight.semibold} classes="text-left">
         {localize('popups.deeplinkError.title')}
     </Text>

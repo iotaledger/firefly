@@ -94,6 +94,7 @@ const Platform: IPlatform = {
     getLanguageCode(): Promise<string> {
         return Promise.resolve('')
     },
+    updateTheme(): void {},
 }
 
 window['__CAPACITOR__'] = Platform

@@ -503,13 +503,27 @@
                         }
                     },
                     "chainDepositAddress": {
-                        "title": "Chain deposit address"
+                        "title": "Chain deposit address",
+                        "networkTitle": "Network deposit address"
                     },
                     "chainInformation": {
                         "title": "Chain information"
                     },
+                    "confirmLedgerEvmAddress": {
+                        "title": "Confirm EVM address",
+                        "header": "We have generated your EVM address"
+                    },
                     "connectedChains": {
                         "title": "Connected chains"
+                    },
+                    "connectLedgerDevice": {
+                        "title": "Connect Ledger Device",
+                        "header": "Open the Ethereum app",
+                        "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed before following these steps.",
+                        "requirements": {
+                            "connect": "Connect and unlock your Ledger",
+                            "openApp": "Open the Ethereum app on your Ledger"
+                        }
                     },
                     "editChain": {
                         "title": "Edit chain"
@@ -589,7 +603,8 @@
                 "attributes": "Attributes",
                 "menu": {
                     "download": "Download",
-                    "setAvatar": "Set NFT as profile avatar",
+                    "setPfp": "Set NFT profile pic",
+                    "unsetPfp": "Unset NFT profile pic",
                     "view": "View media in browser",
                     "burn": "Burn NFT"
                 }
@@ -890,6 +905,10 @@
         "transaction": {
             "title": "Send asset",
             "body": "Estás a punto de enviar {amount} a",
+            "selectToken": "Select a token",
+            "selectAmount": "Send {tokenName}",
+            "selectRecipient": "Send {assetName} to",
+            "transactionSummary": "Transaction to {recipient}",
             "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
             "sendingFromStakedAccount": "Estás enviando una transferencia desde una cartera que está haciendo Staking. Esto puede desvincular tus tokens. Puedes enviar la transferencia sin problemas, pero puede que necesites reiniciar el Staking de los tokens restantes después.",
             "sendingFromStakedAccountBelowMinReward": "Estás enviando una transferencia desde una cartera que aún no ha alcanzado las recompensas mínimas. Esto puede liberar tus fichas y puedes perder tus recompensas en esta cartera."
@@ -1031,7 +1050,11 @@
             "hint": "¿No encuentras una billetera? Usa el buscador de saldo en la configuración para descubrir las carteras usadas anteriormente."
         },
         "transactionDetails": {
-            "title": "Detalles de la transacción"
+            "title": "Detalles de la transacción",
+            "giftedStorageDeposit": {
+                "tooltipTitle": "Gift storage deposit",
+                "tooltipDescription": "Amount kept by the recipient"
+            }
         },
         "sendForm": {
             "title": "Enviar fondos"
@@ -1080,6 +1103,15 @@
                 "alias": "Alias",
                 "assetId": "Asset Id"
             }
+        },
+        "importErc20Token": {
+            "title": "Import ERC20 token",
+            "property": {
+                "chainId": "Chain ID",
+                "tokenAddress": "Token address"
+            },
+            "success": "Imported {tokenSymbol} token",
+            "error": "Unable to import ERC20 token"
         },
         "noAlias": {
             "title": "Unable to mint",
@@ -1270,6 +1302,7 @@
         "hide": "Ocultar",
         "hideOthers": "Ocultar otros",
         "showAll": "Mostrar todo",
+        "useMax": "Use Max",
         "quit": "Salir",
         "edit": "Editar",
         "undo": "Deshacer",
@@ -1619,7 +1652,11 @@
         "jwt": "JSON web token",
         "internalTransaction": "Internal transaction",
         "coinType": "Coin type",
-        "custom": "Custom"
+        "custom": "Custom",
+        "evmAddress": "EVM address",
+        "chain": "Chain",
+        "importErc20Token": "Import ERC20 token",
+        "importErc20TokenDescription": "Import an ERC20 token from an EVM chain"
     },
     "filters": {
         "title": "Filters",
@@ -1720,6 +1757,9 @@
             "label": "Order",
             "name": "Name",
             "phase": "Phase"
+        },
+        "network": {
+            "label": "Network"
         }
     },
     "dates": {
@@ -1894,7 +1934,8 @@
             "invalidAssetId": "The asset id is not valid.",
             "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "Esta billetera tiene fondos insuficientes.",
-            "insufficientFundsStorageDeposit": "Fondos insuficientes para cubrir el depósito de almacenamiento",
+            "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit.",
+            "ongoingTransaction": "If you have ongoing transactions, please wait for their confirmation.",
             "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "No has seleccionado una billetera a la que enviar los fondos.",
             "sendingDust": "No puedes enviar menos de 1 Mi.",
@@ -2049,6 +2090,10 @@
                 "short": "Unable to add proposal",
                 "long": "Unable to find proposal {proposalId} on the specified node"
             }
+        },
+        "erc20Token": {
+            "invalidAddressFormat": "Must be hexadecimal format",
+            "invalidAddressLength": "Length is invalid"
         }
     },
     "warning": {

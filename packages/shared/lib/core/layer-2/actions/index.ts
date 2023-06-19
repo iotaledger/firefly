@@ -1,5 +1,3 @@
-export * from './getSelectedAccountLayer2Tokens'
-export * from './getSelectedAccountWrappedNativeTokens'
+export * from './fetchSelectedAccountLayer2Balance'
 export * from './loadEvmAddressForSelectedAccount'
-export * from './pollLayer2NativeAssets'
-export * from './registerLayer2EventHandlers'
+export * from './pollLayer2Tokens'

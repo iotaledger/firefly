@@ -24,7 +24,15 @@ export function sortAssets(assets: IAsset[]): IAsset[] {
 }
 
 function sortByName(asset1: IAsset, asset2: IAsset, asc: boolean): number {
-    return asset1?.metadata?.name.toLowerCase() > asset2?.metadata?.name.toLowerCase() ? (asc ? 1 : -1) : asc ? -1 : 1
+    const name1 = asset1?.metadata?.name
+    const name2 = asset2?.metadata?.name
+    if (!name1) {
+        return asc ? 1 : -1
+    } else if (!name2) {
+        return asc ? -1 : 1
+    }
+
+    return name1.toLowerCase() > name2.toLowerCase() ? (asc ? 1 : -1) : asc ? -1 : 1
 }
 
 function sortByAmount(asset1: IAsset, asset2: IAsset, asc: boolean): number {

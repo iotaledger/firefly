@@ -504,7 +504,8 @@
 
                     },
                     "chainDepositAddress": {
-                        "title": "Chain deposit address"
+                        "title": "Chain deposit address",
+                        "networkTitle": "Network deposit address"
                     },
                     "chainInformation": {
                         "title": "Chain information"
@@ -907,7 +908,7 @@
             "body": "You’re about to send {amount} to",
             "selectToken": "Select a token",
             "selectAmount": "Send {tokenName}",
-            "selectRecipient": "Send {amount} to",
+            "selectRecipient": "Send {assetName} to",
             "transactionSummary": "Transaction to {recipient}",
             "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
             "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
@@ -1103,6 +1104,15 @@
                 "alias": "Alias",
                 "assetId": "Asset Id"
             }
+        },
+        "importErc20Token": {
+            "title": "Import ERC20 token",
+            "property": {
+                "chainId": "Chain ID",
+                "tokenAddress": "Token address"
+            },
+            "success": "Imported {tokenSymbol} token",
+            "error": "Unable to import ERC20 token"
         },
         "noAlias": {
             "title": "Unable to mint",
@@ -1644,7 +1654,10 @@
         "internalTransaction": "Internal transaction",
         "coinType":"Coin type",
         "custom": "Custom",
-        "evmAddress": "EVM address"
+        "evmAddress": "EVM address",
+        "chain": "Chain",
+        "importErc20Token": "Import ERC20 token",
+        "importErc20TokenDescription": "Import an ERC20 token from an EVM chain"
     },
     "filters":{
         "title": "Filters",
@@ -1745,6 +1758,9 @@
             "label": "Order",
             "name": "Name",
             "phase": "Phase"
+        },
+        "network": {
+            "label": "Network"
         }
     },
     "dates": {
@@ -1919,7 +1935,8 @@
             "invalidAssetId": "The asset id is not valid.",
             "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "This wallet has insufficient funds.",
-            "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
+            "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit.",
+            "ongoingTransaction": "If you have ongoing transactions, please wait for their confirmation.",
             "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "You have not selected a wallet to send the funds to.",
             "sendingDust": "You cannot send less than 1 Mi.",
@@ -2074,6 +2091,10 @@
                 "short": "Unable to add proposal",
                 "long": "Unable to find proposal {proposalId} on the specified node"
             }
+        },
+        "erc20Token": {
+            "invalidAddressFormat": "Must be hexadecimal format",
+            "invalidAddressLength": "Length is invalid"
         }
     },
     "warning": {

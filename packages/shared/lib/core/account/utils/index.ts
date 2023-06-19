@@ -1,3 +1,5 @@
+export * from './buildBip32Path'
+export * from './deconstructBip32Path'
 export * from './getAccountColorById'
 export * from './getBoundAccount'
 export * from './getDepositAddress'

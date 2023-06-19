@@ -503,13 +503,27 @@
                         }
                     },
                     "chainDepositAddress": {
-                        "title": "Chain deposit address"
+                        "title": "Chain deposit address",
+                        "networkTitle": "Network deposit address"
                     },
                     "chainInformation": {
                         "title": "Chain information"
                     },
+                    "confirmLedgerEvmAddress": {
+                        "title": "Confirm EVM address",
+                        "header": "We have generated your EVM address"
+                    },
                     "connectedChains": {
                         "title": "Connected chains"
+                    },
+                    "connectLedgerDevice": {
+                        "title": "Connect Ledger Device",
+                        "header": "Open the Ethereum app",
+                        "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed before following these steps.",
+                        "requirements": {
+                            "connect": "Connect and unlock your Ledger",
+                            "openApp": "Open the Ethereum app on your Ledger"
+                        }
                     },
                     "editChain": {
                         "title": "Edit chain"
@@ -589,7 +603,8 @@
                 "attributes": "Attributes",
                 "menu": {
                     "download": "Download",
-                    "setAvatar": "Set NFT as profile avatar",
+                    "setPfp": "Set NFT profile pic",
+                    "unsetPfp": "Unset NFT profile pic",
                     "view": "View media in browser",
                     "burn": "Burn NFT"
                 }
@@ -890,6 +905,10 @@
         "transaction": {
             "title": "Send asset",
             "body": "ඔබ වෙත {amount} යැවීමට ආසන්නයි",
+            "selectToken": "Select a token",
+            "selectAmount": "Send {tokenName}",
+            "selectRecipient": "Send {assetName} to",
+            "transactionSummary": "Transaction to {recipient}",
             "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
             "sendingFromStakedAccount": "ඔබ දැනට පරදුවට තබා ඇති මුදල් පසුම්බියකින් මාරු කිරීමක් යවයි. මෙය ඔබගේ ටෝකන අහිමි විය හැක. මාරුව යැවීමට නිදහස් වන්න, නමුත් ඔබට පසුව ඔබේ ඉතිරි ටෝකන නැවත ලබා ගැනීමට අවශ්‍ය විය හැක.",
             "sendingFromStakedAccountBelowMinReward": "ඔබ තවමත් අවම ස්ටේකින් ත්‍යාග වෙත ළඟා වී නැති මුදල් පසුම්බියකින් මාරුවක් යවයි. මෙය ඔබේ ටෝකන ඉවත් කළ හැකි අතර ඔබට මෙම මුදල් පසුම්බිය මත ඇති ඔබේ ත්‍යාග අහිමි විය හැක."
@@ -1031,7 +1050,11 @@
             "hint": "මුදල් පසුම්බියක් සොයාගත නොහැකිද? කලින් භාවිතා කළ පසුම්බි සොයා ගැනීමට සැකසීම් තුළ ශේෂ සොයන්නා භාවිතා කරන්න."
         },
         "transactionDetails": {
-            "title": "Transaction details"
+            "title": "Transaction details",
+            "giftedStorageDeposit": {
+                "tooltipTitle": "Gift storage deposit",
+                "tooltipDescription": "Amount kept by the recipient"
+            }
         },
         "sendForm": {
             "title": "Send funds"
@@ -1080,6 +1103,15 @@
                 "alias": "Alias",
                 "assetId": "Asset Id"
             }
+        },
+        "importErc20Token": {
+            "title": "Import ERC20 token",
+            "property": {
+                "chainId": "Chain ID",
+                "tokenAddress": "Token address"
+            },
+            "success": "Imported {tokenSymbol} token",
+            "error": "Unable to import ERC20 token"
         },
         "noAlias": {
             "title": "Unable to mint",
@@ -1270,6 +1302,7 @@
         "hide": "සඟවන්න",
         "hideOthers": "අන් අය සඟවන්න",
         "showAll": "සියල්ල පෙන්වන්න",
+        "useMax": "Use Max",
         "quit": "ඉවත්",
         "edit": "සංස්කරණය කරන්න",
         "undo": "අහෝසි කරන්න",
@@ -1619,7 +1652,11 @@
         "jwt": "JSON web token",
         "internalTransaction": "Internal transaction",
         "coinType": "Coin type",
-        "custom": "Custom"
+        "custom": "Custom",
+        "evmAddress": "EVM address",
+        "chain": "Chain",
+        "importErc20Token": "Import ERC20 token",
+        "importErc20TokenDescription": "Import an ERC20 token from an EVM chain"
     },
     "filters": {
         "title": "Filters",
@@ -1720,6 +1757,9 @@
             "label": "Order",
             "name": "Name",
             "phase": "Phase"
+        },
+        "network": {
+            "label": "Network"
         }
     },
     "dates": {
@@ -1894,7 +1934,8 @@
             "invalidAssetId": "The asset id is not valid.",
             "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "මෙම මුදල් පසුම්බියට ප්‍රමාණවත් අරමුදල් නොමැත.",
-            "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
+            "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit.",
+            "ongoingTransaction": "If you have ongoing transactions, please wait for their confirmation.",
             "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "ඔබ අරමුදල් යැවීමට පසුම්බියක් තෝරාගෙන නැත.",
             "sendingDust": "ඔබට 1 Mi ට වඩා අඩුවෙන් යැවිය නොහැක.",
@@ -2049,6 +2090,10 @@
                 "short": "Unable to add proposal",
                 "long": "Unable to find proposal {proposalId} on the specified node"
             }
+        },
+        "erc20Token": {
+            "invalidAddressFormat": "Must be hexadecimal format",
+            "invalidAddressLength": "Length is invalid"
         }
     },
     "warning": {

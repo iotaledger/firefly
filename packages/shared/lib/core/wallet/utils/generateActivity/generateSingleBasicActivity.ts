@@ -1,4 +1,4 @@
-import { isShimmerClaimingTransaction } from '@contexts/onboarding'
+import { isShimmerClaimingTransaction } from '@contexts/onboarding/stores'
 import { IAccountState } from '@core/account'
 import { activeProfileId, getCoinType } from '@core/profile'
 import { IActivityGenerationParameters } from '@core/wallet/interfaces'

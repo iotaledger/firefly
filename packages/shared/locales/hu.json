@@ -503,13 +503,27 @@
                         }
                     },
                     "chainDepositAddress": {
-                        "title": "Lánc letéti címe"
+                        "title": "Lánc letéti címe",
+                        "networkTitle": "Hálózati letéti cím"
                     },
                     "chainInformation": {
                         "title": "Láncadatok"
                     },
+                    "confirmLedgerEvmAddress": {
+                        "title": "Erősítse meg az EVM-címét",
+                        "header": "Létrehoztuk az EVM-címét"
+                    },
                     "connectedChains": {
                         "title": "Csatlakoztatott láncok"
+                    },
+                    "connectLedgerDevice": {
+                        "title": "Csatlakoztassa Ledger-eszközét",
+                        "header": "Nyissa meg az Ethereum appot",
+                        "body": "Ahhoz, hogy Ledger-eszközét a Firefly megtalálja, kérjük, győződjön meg arról, hogy a hivatalos Ledger Live alkalmazás be van-e zárva, mielőtt a következő lépéseket megtenné.",
+                        "requirements": {
+                            "connect": "Csatlakoztassa és oldja fel a Ledger-eszközét",
+                            "openApp": "Nyissa meg az Ethereum appot a Ledger-eszközén"
+                        }
                     },
                     "editChain": {
                         "title": "Lánc szerkesztése"
@@ -589,7 +603,8 @@
                 "attributes": "Tulajdonságok",
                 "menu": {
                     "download": "Letöltés",
-                    "setAvatar": "NFT beállítása profilképként",
+                    "setPfp": "NFT-profilkép beállítása",
+                    "unsetPfp": "NFT-profilkép törlése",
                     "view": "Média megtekintése böngészőben",
                     "burn": "NFT elégetése"
                 }
@@ -890,6 +905,10 @@
         "transaction": {
             "title": "Pénzügyi eszköz küldése",
             "body": "{amount} küldése",
+            "selectToken": "Válasszon ki egy tokent",
+            "selectAmount": "{tokenName} küldése",
+            "selectRecipient": "{assetName} küldése a következő részére:",
+            "transactionSummary": "Tranzakció {recipient} részére",
             "surplusIncluded": "Ez a tranzakció többlet összeget tartalmaz. Kérjük ellenőrizze, hogy valóban ezt az összeget szeretné elküldeni.",
             "sendingFromStakedAccount": "Olyan tárcából kíván küldeni, amely jelenleg letétbe van helyezve. Ez azzal járhat, hogy a továbbiakban tokenjei nem lesznek letétbe helyezve. A tranzakciót nyugodtan végrehajthatja, de a fennmaradó összeget valószínűleg újra letétbe kell majd helyeznie.",
             "sendingFromStakedAccountBelowMinReward": "Egy olyan tárcából készül küldeni, amely nem érte még el a jóváírható jutalom minimális értékét. Ha mégis kiveszi a letétbe helyezett tokeneket, lehetséges, hogy ezzel a tárcával egyáltalán nem fog kapni jutalmat."
@@ -1031,7 +1050,11 @@
             "hint": "Nem találja tárcáját? Használja az Egyenlegkeresőt a beállítások között a korábban használt tárcák megtalálásához."
         },
         "transactionDetails": {
-            "title": "Tranzakció részletei"
+            "title": "Tranzakció részletei",
+            "giftedStorageDeposit": {
+                "tooltipTitle": "Ajándék letéti díja",
+                "tooltipDescription": "Címzett által megtartott összeg"
+            }
         },
         "sendForm": {
             "title": "Pénzeszközök küldése"
@@ -1080,6 +1103,15 @@
                 "alias": "Alias",
                 "assetId": "Asset Id"
             }
+        },
+        "importErc20Token": {
+            "title": "ERC20 token importálása",
+            "property": {
+                "chainId": "Lánc AZ",
+                "tokenAddress": "Token címe"
+            },
+            "success": "Importált {tokenSymbol} token",
+            "error": "ERC20 token importálása nem lehetséges"
         },
         "noAlias": {
             "title": "Unable to mint",
@@ -1270,6 +1302,7 @@
         "hide": "Elrejt",
         "hideOthers": "Többi elrejtése",
         "showAll": "Összes megjelenítése",
+        "useMax": "Max. felhasználása",
         "quit": "Kilépés",
         "edit": "Szerkesztés",
         "undo": "Visszavonás",
@@ -1619,7 +1652,11 @@
         "jwt": "JSON web token",
         "internalTransaction": "Internal transaction",
         "coinType": "Érme típusa",
-        "custom": "Egyéni"
+        "custom": "Egyéni",
+        "evmAddress": "EVM-cím",
+        "chain": "Lánc",
+        "importErc20Token": "ERC20 token importálása",
+        "importErc20TokenDescription": "ERC20 token importálása egy EVM-láncról"
     },
     "filters": {
         "title": "Szűrők",
@@ -1720,6 +1757,9 @@
             "label": "Sorrend",
             "name": "Név",
             "phase": "Szakasz"
+        },
+        "network": {
+            "label": "Hálózat"
         }
     },
     "dates": {
@@ -1894,7 +1934,8 @@
             "invalidAssetId": "A pénzeszköz azonosítója érvénytelen.",
             "unknownAsset": "A token ezen a számlán nem ismert.",
             "insufficientFunds": "Nincs elég összeg a tárcájában a tranzakció végrehajtásához.",
-            "insufficientFundsStorageDeposit": "Nincs elegendő egyenlege a letéti díj fedezetéhez",
+            "insufficientFundsStorageDeposit": "Nincs elegendő egyenlege a letéti díj fedezetéhez.",
+            "ongoingTransaction": "Ha folyamatban lévő tranzakciói vannak, kérjük, várja meg azok véglegesítését.",
             "cannotClaimTwice": "A jutalmat már korábban igényelte",
             "noToAccount": "Nem választotta ki melyik tárcájába szeretne küldeni.",
             "sendingDust": "1 Mi-nél kevesebbet nem lehet elküldeni.",
@@ -1947,7 +1988,7 @@
             "invalid": "A biztonsági mentés fájl formátuma ismeretlen.",
             "destination": "A biztonsági mentés elérési útvonala érvénytelen.",
             "mnemonic": "Érvénytelen jelszóemlékeztető.",
-            "migrationRequired": "Stronghold migration is required.",
+            "migrationRequired": "Stronghold-átköltöztetés szükséges.",
             "seedTooShort": "A seed-nek 81 karakter hosszúnak kell lennie, de a megadott seed csak {length, plural, one {#} other {#}} karakter hosszú",
             "seedCharacters": "A seed csak A-Z vagy 9 karaktereket tartalmazhat",
             "phraseWordCount": "24 helyett csak {length, plural, one {#} other {#}} helyreállító kódszót adott meg.",
@@ -2049,6 +2090,10 @@
                 "short": "Unable to add proposal",
                 "long": "Nem sikerült megtalálni a(z) {proposalId} azonosítójú indítványt a megadott csomóponton"
             }
+        },
+        "erc20Token": {
+            "invalidAddressFormat": "Hexadecimális formátumúnak kell lennie",
+            "invalidAddressLength": "Érvénytelen hossz"
         }
     },
     "warning": {

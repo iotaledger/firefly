@@ -25,16 +25,6 @@ updates:
     milestone: 5
       
   - package-ecosystem: "npm"
-    directory: "/packages/mobile"
-    schedule:
-      interval: "weekly"
-    labels:
-      - "v2"
-      - "scope:dependencies"
-      - "platform:mobile"
-    milestone: 5
-
-  - package-ecosystem: "npm"
     directory: "/packages/shared"
     schedule:
       interval: "weekly"

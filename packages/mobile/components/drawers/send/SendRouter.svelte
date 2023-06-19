@@ -1,6 +1,4 @@
 <script lang="ts">
-    import type { OutputParams } from '@iota/wallet'
-
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -30,7 +28,6 @@
     let storageDeposit = 0
     let visibleSurplus = 0
     let preparedOutput: Output
-    let outputParams: OutputParams
     let initialExpirationDate = getInitialExpirationDate()
 
     $: transactionDetails = get(newTransactionDetails)
@@ -45,7 +42,7 @@
     async function sendTransaction(): Promise<void> {
         try {
             await prepareTransactionOutput()
-            validateSendConfirmation(outputParams, preparedOutput)
+            validateSendConfirmation(preparedOutput)
 
             updateNewTransactionDetails({
                 type: $newTransactionDetails.type,
@@ -65,11 +62,10 @@
     }
 
     async function prepareTransactionOutput(): Promise<void> {
-        const transactionDetails = get(newTransactionDetails)
         if (!transactionDetails.recipient) {
             return
         }
-        outputParams = getOutputParameters(transactionDetails)
+        const outputParams = getOutputParameters(transactionDetails)
         preparedOutput = await prepareOutput($selectedAccount.index, outputParams, DEFAULT_TRANSACTION_OPTIONS)
         setStorageDeposit(preparedOutput, Number(surplus))
         if (!initialExpirationDate) {

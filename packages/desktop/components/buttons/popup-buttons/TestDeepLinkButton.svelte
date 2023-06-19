@@ -3,7 +3,7 @@
 
     import { localize } from '@core/i18n'
 
-    import { openPopup, PopupId } from '@auxiliary/popup'
+    import { openPopup, PopupId } from '@desktop/auxiliary/popup'
 
     function onClick(): void {
         openPopup({

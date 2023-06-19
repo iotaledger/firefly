@@ -1,16 +1,16 @@
-import { CoinType } from '@iota/wallet/out/types'
-
 import { activeProfileId } from '@core/profile/stores/active-profile-id.store'
+import { NetworkId } from '@core/network/enums'
+
 import { GAS_BUDGET } from '@core/layer-2/constants'
 
 import { getOutputParameters } from '../utils'
 import { ReturnStrategy, TokenStandard, VerifiedStatus } from '../enums'
 import { IAsset, IPersistedAsset } from '../interfaces'
-import { NewTransactionType, getAssetById } from '../stores'
+import { NewTransactionType } from '../stores'
 import { NewTransactionDetails } from '../types'
 
 const PERSISTED_ASSET_SHIMMER: IPersistedAsset = {
-    id: CoinType[CoinType.Shimmer],
+    id: '1',
     standard: TokenStandard.BaseToken,
     hidden: false,
     verification: { verified: true, status: VerifiedStatus.Official },
@@ -58,10 +58,16 @@ jest.mock('../stores/persisted-assets.store', () => ({
 jest.mock('../actions/getAccountAssetsForSelectedAccount', () => ({
     getAccountAssetsForSelectedAccount: jest.fn((_) => {
         return {
-            baseCoin: PERSISTED_ASSET_SHIMMER,
-            nativeTokens: [nativeTokenAsset],
+            [NetworkId.Testnet]: {
+                baseCoin: PERSISTED_ASSET_SHIMMER,
+                nativeTokens: [nativeTokenAsset],
+            },
         }
     }),
+}))
+
+jest.mock('../../profile/actions/active-profile/getCoinType', () => ({
+    getCoinType: jest.fn((_) => '1'),
 }))
 
 describe('File: getOutputParameters.ts', () => {
@@ -181,7 +187,7 @@ describe('File: getOutputParameters.ts', () => {
             amount: (Number(GAS_BUDGET) + Number(amount)).toString(),
             features: {
                 metadata:
-                    '0x00000000025e4b3ca1e3f42320a1070000000000010000000100611f00000003010000070c000c30680e00000090000f0ea000060009000d3000000000000000ca9a3b00000000020000000000',
+                    '0x00000000025e4b3ca1e3f42320a107000000000001000000010061200000000300010000070c000c30680e00000090000f0ea000060009000d3000000000000000ca9a3b00000000020000000000',
                 sender: senderAddress,
             },
             unlocks: { expirationUnixTime: 1680163475 },
@@ -212,7 +218,7 @@ describe('File: getOutputParameters.ts', () => {
             },
             features: {
                 metadata:
-                    '0x00000000025e4b3ca1e3f42320a1070000000000010000000100611f00000003010000070c000c30680e00000090000f0ea000060009000d3000000000000000000000000000004800010008cd4dcad7ccc383111942671ee8cdc487ddd250398331ca2692b8b1a81551a1c3010000000000ca9a3b000000000000000000000000000000000000000000000000000000000000',
+                    '0x00000000025e4b3ca1e3f42320a107000000000001000000010061200000000300010000070c000c30680e00000090000f0ea000060009000d3000000000000000000000000000004800010008cd4dcad7ccc383111942671ee8cdc487ddd250398331ca2692b8b1a81551a1c3010000000000ca9a3b000000000000000000000000000000000000000000000000000000000000',
                 sender: senderAddress,
             },
             unlocks: { expirationUnixTime: 1680163475 },
@@ -238,7 +244,7 @@ describe('File: getOutputParameters.ts', () => {
             },
             features: {
                 metadata:
-                    '0x00000000025e4b3ca1e3f42320a1070000000000010000000100611f00000003010000070c000c30680e00000090000f0ea000060009000d300000000000000000000000000000020000000100cd9430ff870a22f81f92428e5c06975fa3ec1a993331aa3db9fb2298e931ade1',
+                    '0x00000000025e4b3ca1e3f42320a107000000000001000000010061200000000300010000070c000c30680e00000090000f0ea000060009000d300000000000000000000000000000020000000100cd9430ff870a22f81f92428e5c06975fa3ec1a993331aa3db9fb2298e931ade1',
                 sender: senderAddress,
             },
             unlocks: {},
