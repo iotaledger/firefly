@@ -43,7 +43,6 @@
                 return 'de'
             case 'en':
                 return 'en'
-            case 'es':
             case 'es-ES':
             case 'es-LA':
                 return 'es'
