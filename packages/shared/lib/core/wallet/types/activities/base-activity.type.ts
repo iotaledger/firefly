@@ -17,7 +17,7 @@ export type BaseActivity = {
     storageDeposit: number
     giftedStorageDeposit: number
     surplus?: number
-    subject: Subject
+    subject: Subject | undefined
     metadata?: string
     tag?: string
     asyncData: AsyncData
