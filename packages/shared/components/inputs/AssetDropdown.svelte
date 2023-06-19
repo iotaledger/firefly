@@ -8,8 +8,21 @@
     export let readonly: boolean = false
 
     let isDropdownOpen = false
+    let assetList: IAsset[] = []
 
     $: isReadonly = readonly || $visibleSelectedAccountAssets?.[$activeProfile?.network?.id]?.nativeTokens.length === 0
+    $: $visibleSelectedAccountAssets, (assetList = getAssetList())
+
+    function getAssetList(): IAsset[] {
+        const list = []
+        for (const assetsPernetwork of Object.values($visibleSelectedAccountAssets)) {
+            if (assetsPernetwork?.baseCoin) {
+                list.push(assetsPernetwork.baseCoin)
+            }
+            list.push(...(assetsPernetwork?.nativeTokens ?? []))
+        }
+        return list
+    }
 
     function onDropdownClick(): void {
         if (!isReadonly) {
@@ -57,18 +70,11 @@
                 class="dropdown bg-white dark:bg-gray-800 absolute flex flex-col top-12 -left-5 -right-5 border border-solid border-blue-500 rounded-xl z-10 p-4 max-h-96"
             >
                 <ul class="overflow-y-auto h-full -mr-2 pr-2">
-                    <li>
-                        <AssetTile
-                            onClick={() => onAssetClick($visibleSelectedAccountAssets?.baseCoin)}
-                            asset={$visibleSelectedAccountAssets?.baseCoin}
-                            classes="bg-white hover:bg-gray-50 dark:bg-transparent"
-                        />
-                    </li>
-                    {#each $visibleSelectedAccountAssets?.nativeTokens as nativeToken}
+                    {#each assetList as asset}
                         <li>
                             <AssetTile
-                                onClick={() => onAssetClick(nativeToken)}
-                                asset={nativeToken}
+                                onClick={() => onAssetClick(asset)}
+                                {asset}
                                 classes="bg-white hover:bg-gray-50 dark:bg-transparent"
                             />
                         </li>
