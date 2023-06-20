@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Icon as IconEnum, NETWORK_ICON_SVG } from '@auxiliary/icon'
     import { getIconColorFromString } from '@core/account'
-    import { COIN_TYPE, NetworkId } from '@core/network'
+    import { COIN_TYPE, NetworkId, network } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { isBright } from '@core/utils'
     import { ANIMATED_TOKEN_IDS, getAssetInitials, IPersistedAsset, TokenStandard } from '@core/wallet'
@@ -18,7 +18,9 @@
     let assetInitials: string
     let assetIconWrapperWidth: number
     let assetLogoUrl: string
+    let chainName: string | undefined
 
+    $: $network, chainId, (chainName = getTooltipText())
     $: isAnimation = asset.id in ANIMATED_TOKEN_IDS
     switch (asset.id) {
         case String(COIN_TYPE[NetworkId.Iota]):
@@ -43,6 +45,16 @@
             assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
             assetLogoUrl = asset.metadata?.standard === TokenStandard.Irc30 ? asset.metadata?.logoUrl ?? '' : ''
             icon = null
+    }
+
+    function getTooltipText(): string | undefined {
+        const networkName = $network?.getMetadata().name
+        if (chainId) {
+            const chain = $network?.getChain(chainId)
+            return chain?.getConfiguration().name ?? networkName
+        } else {
+            return networkName
+        }
     }
 </script>
 
@@ -91,7 +103,7 @@
                 height={10}
                 networkId={$activeProfile.network.id}
                 {chainId}
-                tooltipText={$activeProfile?.network?.name}
+                tooltipText={chainName}
             />
         {:else}
             <VerificationBadge status={asset.verification?.status} width={14} height={14} />
