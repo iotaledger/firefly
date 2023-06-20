@@ -97,23 +97,20 @@ Open Safari, go to the "Develop" menu, and choose the attached iPhone emulator.
 
 Open a Chromium-based browser and navigate to `chrome://inspect` to see the attached emulator / phone. Click on "Inspect" to get the developer tools window of the emulator webview.
 
-## Production
+## Production release
 
-Build the mobile app:
+Build the mobile app for Android:
 
 ```bash
 # in packages/mobile
-yarn build
+yarn build:prod:android
 ```
 
-Package the mobile app:
+Build the mobile app for iOS:
 
 ```bash
-# iOS
-yarn ios
-
-# Android
-yarn android
+# in packages/mobile
+yarn build:prod:ios
 ```
 
-Finally, run the build in either Xcode or Android Studio.
+Finally, build in either Xcode or Android Studio to get the *.ipa / *.aab / *.apk files.
