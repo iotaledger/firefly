@@ -17,7 +17,7 @@
     import { getSubjectFromActivity } from '@core/wallet/utils/generateActivity/helper'
 
     export let activity: TransactionActivity
-    export let unit: string = undefined
+    export let unit: string | undefined = undefined
 
     $: asset = getAssetFromPersistedAssets(activity.assetId)
     $: amount = activity?.rawAmount

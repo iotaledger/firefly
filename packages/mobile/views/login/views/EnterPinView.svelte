@@ -120,7 +120,7 @@
     </header>
     <div class="flex w-full justify-center items-center mt-16">
         <div class="flex flex-col items-center w-96">
-            <Profile profile={$activeProfile} bgColor="blue" />
+            <Profile profile={$activeProfile} />
             <div class="flex w-full items-center mt-12">
                 <PinInput
                     bind:this={pinRef}

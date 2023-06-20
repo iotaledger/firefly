@@ -17,7 +17,7 @@
     <Tile fullWidth={showAssetInfo}>
         <div class="w-full flex flex-row justify-between items-center gap-4">
             <div class="flex flex-row items-center text-left space-x-4">
-                <AssetIcon {asset} />
+                <AssetIcon {asset} chainId={asset.chainId} />
                 {#if showAssetInfo}
                     <div class="flex flex-col">
                         <Text fontWeight={FontWeight.semibold}>

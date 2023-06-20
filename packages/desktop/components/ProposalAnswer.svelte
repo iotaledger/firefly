@@ -48,7 +48,9 @@
     }
 </script>
 
-<proposal-answer
+<button
+    type="button"
+    class="proposal-answer"
     class:dark
     class:disabled
     class:hidden={isSelected || isWinner ? false : hidden}
@@ -103,10 +105,10 @@
             />
         {/if}
     </div>
-</proposal-answer>
+</button>
 
 <style lang="scss">
-    proposal-answer {
+    .proposal-answer {
         @apply rounded-md border border-solid border-gray-200;
         @apply relative hidden items-center justify-between p-3 overflow-hidden;
         > * {

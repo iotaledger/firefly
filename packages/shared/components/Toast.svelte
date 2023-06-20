@@ -75,7 +75,7 @@
                 </span>
             {/if}
         </div>
-        {#if toast.actions.length > 0}
+        {#if toast.actions && toast.actions.length > 0}
             <div class="flex flex-col" style="min-width:90px">
                 {#each toast.actions as action, actionIndex}
                     <button
