@@ -11,7 +11,7 @@
         "build:prod": "STAGE=prod NODE_ENV=production PLATFORM=mobile webpack && yarn assets:prod",
         "build:beta:android": "yarn build:beta && NODE_ENV=production yarn android:update",
         "build:beta:ios": "yarn build:beta && NODE_ENV=production yarn ios:update",
-        "build:prod:android": "yarn build:prod && NODE_ENV=production yarn android:update",
+        "build:prod:android": "yarn build:prod && yarn assets:prod && yarn rename:appid:android || echo 'Folder already reneamed.' && NODE_ENV=production yarn android:update",
         "build:prod:ios": "yarn build:prod && NODE_ENV=production yarn ios:update",
         "ios": "cap copy ios && cap open ios",
         "ios:update": "cap sync ios && cap open ios",
