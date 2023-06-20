@@ -4,10 +4,11 @@
     import { COIN_TYPE, NetworkId } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { isBright } from '@core/utils'
-    import { ANIMATED_TOKEN_IDS, getAssetInitials, IAsset, TokenStandard } from '@core/wallet'
+    import { ANIMATED_TOKEN_IDS, getAssetInitials, IPersistedAsset, TokenStandard } from '@core/wallet'
     import { Animation, Icon, NetworkIconBadge, VerificationBadge } from 'shared/components'
 
-    export let asset: IAsset
+    export let asset: IPersistedAsset
+    export let chainId: number | undefined
     export let large = false
     export let small = false
 
@@ -18,8 +19,8 @@
     let assetIconWrapperWidth: number
     let assetLogoUrl: string
 
-    $: isAnimation = asset?.id in ANIMATED_TOKEN_IDS
-    switch (asset?.id) {
+    $: isAnimation = asset.id in ANIMATED_TOKEN_IDS
+    switch (asset.id) {
         case String(COIN_TYPE[NetworkId.Iota]):
             assetInitials = ''
             assetIconBackgroundColor = '#6E82A4'
@@ -35,12 +36,12 @@
             break
         default:
             assetInitials = getAssetInitials(asset)
-            assetIconBackgroundColor = getIconColorFromString(asset?.metadata?.name, {
+            assetIconBackgroundColor = getIconColorFromString(asset.metadata?.name, {
                 shades: ['500', '600', '700', '800'],
                 colorsToExclude: ['gray'],
             })
             assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
-            assetLogoUrl = asset?.metadata?.standard === TokenStandard.Irc30 ? asset?.metadata?.logoUrl ?? '' : ''
+            assetLogoUrl = asset.metadata?.standard === TokenStandard.Irc30 ? asset.metadata?.logoUrl ?? '' : ''
             icon = null
     }
 </script>
@@ -85,9 +86,9 @@
     </div>
     <span class="absolute flex justify-center items-center bottom-0 right-0">
         {#if asset.verification.verified === true}
-            <NetworkIconBadge width={10} height={10} networkId={$activeProfile.network.id} chainId={asset.chainId} />
+            <NetworkIconBadge width={10} height={10} networkId={$activeProfile.network.id} {chainId} />
         {:else}
-            <VerificationBadge status={asset?.verification?.status} width={14} height={14} />
+            <VerificationBadge status={asset.verification?.status} width={14} height={14} />
         {/if}
     </span>
 </div>
