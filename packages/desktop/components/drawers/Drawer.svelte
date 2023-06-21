@@ -1,8 +1,7 @@
 <script lang="ts">
     import { fade, fly } from 'svelte/transition'
-    import { NetworkConfigDrawerRouter } from '@components'
     import { Router } from '@core/router'
-    import { closeDrawer, DrawerDirection, DrawerId, drawerState } from '@desktop/auxiliary/drawer'
+    import { closeDrawer, DrawerDirection, drawerState } from '@desktop/auxiliary/drawer'
     import { DrawerRoute } from '@desktop/routers'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { Icon } from '@ui'
@@ -11,8 +10,10 @@
 
     const DRAWER_ANIMATION_DURATION_MS = 200
 
+    /* eslint-disable @typescript-eslint/no-unused-vars */
     let drawerRoute: DrawerRoute
     let drawerRouter: Router<DrawerRoute>
+    /* eslint-enable @typescript-eslint/no-unused-vars */
 
     let direction: { x: number; y: number }
     let position: string
@@ -69,9 +70,7 @@
                 : 'horizontal'}"
         >
             <div class="flex flex-col h-full">
-                {#if $drawerState.id === DrawerId.NetworkConfig}
-                    <NetworkConfigDrawerRouter bind:drawerRoute bind:drawerRouter />
-                {/if}
+                <!-- here would go the different drawers -->
             </div>
 
             {#if !$drawerState.hideClose}

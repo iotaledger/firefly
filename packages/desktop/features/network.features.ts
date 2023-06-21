@@ -5,12 +5,6 @@ const networkFeatures: INetworkFeatures = {
     layer2: {
         enabled: true,
     },
-    config: {
-        enabled: true,
-        addChain: {
-            enabled: false,
-        },
-    },
 }
 
 export default networkFeatures

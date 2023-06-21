@@ -1,4 +1,3 @@
-export * from './chain-statuses-poll-interval.constant'
 export * from './coin-type.constant'
 export * from './default-base-token.constant'
 export * from './default-chain-configurations.constant'
