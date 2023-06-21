@@ -97,10 +97,10 @@ function getAssetFromTransactionDetails(transactionDetails: NewTransactionDetail
     return assets
 }
 
-async function getMetadata(transactionDetails: NewTransactionDetails): Promise<string> {
+function getMetadata(transactionDetails: NewTransactionDetails): Promise<string> {
     if (transactionDetails.layer2Parameters) {
-        return await getLayer2MetadataForTransfer(transactionDetails)
+        return getLayer2MetadataForTransfer(transactionDetails)
     } else {
-        return Converter.utf8ToHex(transactionDetails?.metadata)
+        return Promise.resolve(Converter.utf8ToHex(transactionDetails?.metadata))
     }
 }
