@@ -42,12 +42,13 @@
 
 {#if asset}
     <div class="flex flex-col" use:clickOutside on:clickOutside={onOutsideClick}>
-        <div
+        <button
+            type="button"
             class="flex flex-row items-center p-2 space-x-2 text-left bg-gray-100 dark:bg-gray-700 rounded-md cursor-default"
             class:cursor-pointer={!isReadonly}
             on:click={onDropdownClick}
         >
-            <AssetIcon small {asset} />
+            <AssetIcon small {asset} chainId={asset.chainId} />
             <div class="w-full relative" style="max-width: 75px;">
                 <Text
                     color="gray-600"
@@ -64,7 +65,7 @@
                     <Icon height="18" width="18" icon="chevron-down" classes="text-gray-600 dark:text-gray-500" />
                 </div>
             {/if}
-        </div>
+        </button>
         {#if isDropdownOpen && !isReadonly}
             <div
                 class="dropdown bg-white dark:bg-gray-800 absolute flex flex-col top-12 -left-5 -right-5 border border-solid border-blue-500 rounded-xl z-10 p-4 max-h-96"

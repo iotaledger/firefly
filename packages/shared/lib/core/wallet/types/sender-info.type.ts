@@ -1,6 +1,6 @@
 import { Subject } from './subject.type'
 
 export type SenderInfo = {
-    subject: Subject
+    subject: Subject | undefined
     isInternal: boolean
 }

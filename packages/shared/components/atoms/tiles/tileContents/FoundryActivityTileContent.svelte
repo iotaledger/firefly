@@ -25,6 +25,7 @@
 
 {#if asset}
     <ActivityTileContent {action} subject={localize('general.internalTransaction')} {formattedAsset}>
-        <AssetIcon slot="icon" {asset} />
+        <!-- Once the activity contains the chainId, add that here -->
+        <AssetIcon slot="icon" {asset} chainId={undefined} />
     </ActivityTileContent>
 {/if}

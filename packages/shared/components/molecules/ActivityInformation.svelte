@@ -17,7 +17,6 @@
     import { selectedAccountIndex } from '@core/account'
 
     export let activity: Activity
-    export let networkAddress: string = null
     export let activeTab: Tab = Tab.Transaction
 
     let hasMetadata = false
@@ -69,7 +68,7 @@
         {:else if activity?.type === ActivityType.Consolidation}
             <ConsolidationActivityInformation {activity} />
         {:else}
-            <GenericActivityInformation {activity} {networkAddress} />
+            <GenericActivityInformation {activity} />
         {/if}
     {:else if activeTab === Tab.Alias && activity?.type === ActivityType.Alias}
         <AliasActivityInformation {activity} />

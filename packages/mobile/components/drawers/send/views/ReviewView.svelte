@@ -103,9 +103,9 @@
 <div class="w-full overflow-y-auto flex flex-col flex-auto h-1 justify-between">
     <div class="flex flex-row flex-1 justify-center relative">
         <div class="w-full flex-col space-y-6 pt-10">
-            <BasicActivityDetails {activity} networkAddress={layer2Parameters?.networkAddress} />
+            <BasicActivityDetails {activity} />
             <div class="flex flex-col space-y-2">
-                <ActivityInformation {activity} networkAddress={layer2Parameters?.networkAddress} />
+                <ActivityInformation {activity} />
                 {#if !hideGiftToggle}
                     <KeyValueBox keyText={localize('general.giftStorageDeposit')}>
                         <Toggle

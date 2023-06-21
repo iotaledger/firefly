@@ -4,7 +4,7 @@
     import { ChainId, NetworkId } from '@core/network'
 
     export let networkId: NetworkId
-    export let chainId: ChainId
+    export let chainId: ChainId | undefined = undefined
     export let height = 22
     export let width = 22
     export let outlined = true
