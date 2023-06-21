@@ -86,8 +86,4 @@
         @apply bg-gray-200 border-b border-gray-300 border-solid;
         @apply dark:bg-gray-1000 dark:border-gray-1000;
     }
-
-    slot-container.top-placement {
-        @apply top-12;
-    }
 </style>

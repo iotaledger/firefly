@@ -132,7 +132,8 @@
     class:disabled
     style={navWidth}
 >
-    <div
+    <button
+        type="button"
         class="
             selection relative flex items-center w-full whitespace-nowrap cursor-pointer bg-white dark:bg-gray-800
             {dropdown
@@ -156,7 +157,7 @@
         {#if label}
             <floating-label class:floating-active={value && label}>{label}</floating-label>
         {/if}
-    </div>
+    </button>
     <nav
         class:active={dropdown}
         class="absolute w-full overflow-hidden pointer-events-none opacity-0 z-10 text-left

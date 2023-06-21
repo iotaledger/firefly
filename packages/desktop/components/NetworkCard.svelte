@@ -21,7 +21,7 @@
     export let network: INetwork = undefined
     export let chain: IChain = undefined
     export let onCardClick: UiEventFunction
-    export let onGenerateAddressClick: UiEventFunction
+    export let onGenerateAddressClick: UiEventFunction | undefined = undefined
     export let onQrCodeIconClick: UiEventFunction
 
     const ADDRESS_PLACEHOLDER = '---'
@@ -72,7 +72,7 @@
                     <Text type={TextType.pre} fontSize="16" fontWeight={FontWeight.medium}>
                         {truncateString(address, 8, 8)}
                     </Text>
-                {:else if $isActiveLedgerProfile}
+                {:else if $isActiveLedgerProfile && onGenerateAddressClick}
                     <button on:click|stopPropagation={onGenerateAddressClick}>
                         <Text type={TextType.p} fontWeight={FontWeight.medium} highlighted>
                             {localize('actions.generateAddress')}

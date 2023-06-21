@@ -30,7 +30,7 @@
         >
             <ProfilePicture {profile} size="large" />
             {#if !updateRequired}
-                <NetworkIconBadge network={profile?.network} />
+                <NetworkIconBadge networkId={profile?.network?.id} tooltipText={profile?.network?.name} />
             {:else}
                 <StrongholdBadge />
             {/if}
