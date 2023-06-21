@@ -1,4 +1,3 @@
-import { ITrackedTokens } from '@core/network/interfaces'
 import { ParticipationEventId } from '@iota/wallet/types'
 
 export interface IPersistedAccountData {
@@ -8,5 +7,4 @@ export interface IPersistedAccountData {
     shouldRevote: boolean
     removedProposalIds?: ParticipationEventId[]
     depositAddress: string
-    trackedTokens: ITrackedTokens
 }

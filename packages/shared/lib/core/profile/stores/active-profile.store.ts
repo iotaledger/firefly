@@ -1,7 +1,6 @@
 import { get, writable } from 'svelte/store'
 
 import type { IPersistedAccountData } from '@core/account/interfaces'
-import { ITrackedTokens } from '@core/network/interfaces'
 
 import { INITIAL_ACTIVE_PROFILE } from '../constants'
 import type { IProfile, IProfileSettings } from '../interfaces'
@@ -54,9 +53,4 @@ export function updateAccountPersistedDataOnActiveProfile(
         }
         return state
     })
-}
-
-export function getActiveProfilePersistedTrackedTokensByAccountIndex(accountIndex: number): ITrackedTokens {
-    const accountPersistedData = getActiveProfilePersistedAccountData(accountIndex)
-    return accountPersistedData?.trackedTokens ?? {}
 }
