@@ -65,7 +65,7 @@
         if (!transactionDetails.recipient) {
             return
         }
-        const outputParams = getOutputParameters(transactionDetails)
+        const outputParams = await getOutputParameters(transactionDetails)
         preparedOutput = await prepareOutput($selectedAccount.index, outputParams, DEFAULT_TRANSACTION_OPTIONS)
         setStorageDeposit(preparedOutput, Number(surplus))
         if (!initialExpirationDate) {

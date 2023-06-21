@@ -85,7 +85,7 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
     }
     setNewTransactionDetails(newTransactionDetails)
 
-    const outputParams = getOutputParameters(newTransactionDetails)
+    const outputParams = await getOutputParameters(newTransactionDetails)
     const preparedOutput = await shimmerClaimingAccount?.prepareOutput(outputParams, DEFAULT_TRANSACTION_OPTIONS)
 
     const claimingTransaction = await shimmerClaimingAccount?.sendOutputs([preparedOutput])

@@ -34,7 +34,7 @@ async function sendFromLayer1(
     accountIndex: number,
     callback: () => void
 ): Promise<void> {
-    const outputParams = getOutputParameters(transactionDetails)
+    const outputParams = await getOutputParameters(transactionDetails)
     const preparedOutput = await prepareOutput(accountIndex, outputParams, DEFAULT_TRANSACTION_OPTIONS)
 
     validateSendConfirmation(preparedOutput)
