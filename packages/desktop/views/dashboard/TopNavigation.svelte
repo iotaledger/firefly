@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Icon, Text } from '@ui'
-    import { AccountSwitcher, NetworkDrawerButton } from '@components'
+    import { AccountSwitcher } from '@components'
     import { PlatformOption } from '@core/app'
     import { platform } from '@core/app/stores'
     import { localize } from '@core/i18n'
@@ -19,7 +19,6 @@
     } from '@core/router'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { popupState } from '@desktop/auxiliary/popup'
-    import features from '@features/features'
     import { closeDrawer } from '@desktop/auxiliary/drawer'
 
     let isBackButtonVisible = false
@@ -63,54 +62,29 @@
     }
 </script>
 
-<top-navigation class:disabled={isWindows && isPopupVisible} class:is-windows={isWindows}>
-    <div class="left-button" class:large={isWindows}>
-        {#if isBackButtonVisible}
-            <button type="button" on:click={onBackClick}>
-                <Icon width="18" icon={IconEnum.ArrowLeft} classes="text-gray-800 dark:text-gray-500" />
-                <Text overrideColor classes="text-gray-800 dark:text-gray-500">{localize('actions.back')}</Text>
-            </button>
-        {/if}
-    </div>
-
+<top-navigation class:disabled={isWindows && isPopupVisible}>
+    {#if isBackButtonVisible}
+        <button type="button" on:click={onBackClick}>
+            <Icon width="18" icon={IconEnum.ArrowLeft} classes="text-gray-800 dark:text-gray-500" />
+            <Text overrideColor classes="text-gray-800 dark:text-gray-500">{localize('actions.back')}</Text>
+        </button>
+    {/if}
     <AccountSwitcher />
-
-    <div class="right-button flex justify-end">
-        {#if features?.network?.config?.enabled}
-            <NetworkDrawerButton />
-        {/if}
-    </div>
 </top-navigation>
 
 <style type="text/scss">
     top-navigation {
-        @apply absolute flex flex-row justify-between items-center z-10 -top-12 left-18 h-12 px-8 py-1;
-        width: calc(100% - 4.5rem);
+        @apply absolute flex flex-row justify-center items-center z-10 -top-12 left-20 px-8 py-1;
+        @apply py-2 w-full;
+        width: calc(100% - 14rem);
 
         &.disabled {
             @apply opacity-50 pointer-events-none;
         }
 
-        &.is-windows {
-            @apply pr-0;
-            width: calc(100% - 15rem);
-        }
-
         button {
-            @apply flex items-center gap-2;
+            @apply absolute flex items-center left-2 gap-2 cursor-pointer;
             -webkit-app-region: none;
-        }
-
-        .right-button {
-            width: 10rem;
-        }
-
-        .left-button {
-            width: 10rem;
-
-            &.large {
-                width: 19rem;
-            }
         }
     }
 </style>
