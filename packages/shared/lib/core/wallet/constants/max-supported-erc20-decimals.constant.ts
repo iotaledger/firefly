@@ -1,1 +1,0 @@
-export const MAX_SUPPORTED_ERC20_DECIMALS = 18

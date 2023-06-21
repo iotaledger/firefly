@@ -1,1 +1,0 @@
-export const LAYER2_TOKENS_POLL_INTERVAL = 10000

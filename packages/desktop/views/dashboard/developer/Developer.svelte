@@ -2,7 +2,6 @@
     import {
         CreateAliasButton,
         FaucetRequestButton,
-        ImportErc20TokenButton,
         MintNativeTokenButton,
         MintNftButton,
         RefreshTokenMetadataButton,
@@ -34,9 +33,6 @@
                     {/if}
                     {#if features.developerTools.mintNft.enabled}
                         <MintNftButton />
-                    {/if}
-                    {#if features.developerTools.importErc20Token.enabled}
-                        <ImportErc20TokenButton />
                     {/if}
                 </Pane>
                 <Pane classes="flex flex-col p-6 space-y-6">

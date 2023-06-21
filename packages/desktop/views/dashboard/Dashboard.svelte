@@ -22,7 +22,6 @@
     import { Governance } from './governance'
     import Sidebar from './Sidebar.svelte'
     import TopNavigation from './TopNavigation.svelte'
-    import { Drawer } from '@components'
 
     import {
         addNftsToDownloadQueue,
@@ -36,7 +35,6 @@
     import { selectedAccountIndex } from '@core/account'
     import { get } from 'svelte/store'
     import features from '@features/features'
-    import { pollLayer2Tokens, clearLayer2TokensPoll } from '@core/layer-2'
 
     const tabs = {
         wallet: Wallet,
@@ -88,8 +86,6 @@
                 }),
             })
         }
-
-        void pollLayer2Tokens()
     })
 
     onDestroy(() => {
@@ -105,7 +101,6 @@
         if ($isActiveLedgerProfile) {
             stopPollingLedgerNanoStatus()
         }
-        clearLayer2TokensPoll()
     })
 </script>
 
@@ -117,7 +112,6 @@
         <!-- Dashboard Pane -->
         <div class="flex flex-col h-full dashboard-w">
             <svelte:component this={tabs[$dashboardRoute]} on:next={$appRouter.next} />
-            <Drawer />
         </div>
     </div>
 </div>

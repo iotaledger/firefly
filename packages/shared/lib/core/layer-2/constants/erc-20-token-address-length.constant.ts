@@ -1,1 +1,0 @@
-export const ERC20_TOKEN_ADDRESS_LENGTH = 40

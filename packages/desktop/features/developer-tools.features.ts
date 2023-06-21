@@ -20,9 +20,6 @@ const developerToolsFeatures: IDeveloperFeatures = {
     deeplink: {
         enabled: true,
     },
-    importErc20Token: {
-        enabled: true,
-    },
 }
 
 export default developerToolsFeatures
