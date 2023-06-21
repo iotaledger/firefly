@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { IIscpChainConfiguration, selectedChain } from '@core/network'
+    import { selectedChain } from '@core/network'
     import { appSettings } from '@core/app'
     import { QR, AddressBox, FontWeight } from '@ui'
     import { Text } from '@ui'
@@ -17,8 +17,7 @@
     let depositAddress = ''
     $: {
         if (isL2Chain) {
-            const configuration = $selectedChain.getConfiguration() as IIscpChainConfiguration
-            depositAddress = $selectedAccount.evmAddresses[configuration.coinType]
+            depositAddress = '-'
         } else {
             depositAddress = $selectedAccount.depositAddress
         }

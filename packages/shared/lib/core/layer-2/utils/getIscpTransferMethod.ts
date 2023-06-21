@@ -1,10 +1,9 @@
-import { ETH_COIN_TYPE, getNetwork } from '@core/network'
 import { ContractType } from '@core/layer-2/enums'
+import { getNetwork } from '@core/network'
 import { IAsset } from '@core/wallet'
-import { getSelectedAccount } from '@core/account'
 
-import { ISC_MAGIC_CONTRACT_ADDRESS } from '../constants'
 import { evmAddressToAgentID, getAgentBalanceParameters, getLayer2Allowance, getSmartContractHexName } from '.'
+import { ISC_MAGIC_CONTRACT_ADDRESS } from '../constants'
 
 import { ContractSendMethod } from 'web3-eth-contract'
 
@@ -16,7 +15,7 @@ export function getIscpTransferMethod(
     try {
         const chain = getNetwork()?.getChain(asset.chainId)
         const provider = chain?.getProvider()
-        const evmAddress = getSelectedAccount()?.evmAddresses?.[ETH_COIN_TYPE]
+        const evmAddress = null
 
         if (chain && evmAddress && provider) {
             const accountsCoreContract = getSmartContractHexName('accounts')

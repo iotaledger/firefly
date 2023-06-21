@@ -2,7 +2,6 @@ import { AccountBalance } from '@iota/wallet'
 
 import { getDepositAddress } from '@core/account/utils'
 import {
-    getActiveProfilePersistedEvmAddressesByAccountIndex,
     getActiveProfilePersistedTrackedTokensByAccountIndex,
     updateAccountPersistedDataOnActiveProfile,
 } from '@core/profile/stores'
@@ -32,7 +31,6 @@ export async function buildAccountState(
         aliases: [],
     }
     const accountIndex = account.getMetadata().index
-    const evmAddresses = getActiveProfilePersistedEvmAddressesByAccountIndex(accountIndex)
     const trackedTokens = getActiveProfilePersistedTrackedTokensByAccountIndex(accountIndex)
     let depositAddress = accountPersistedData.depositAddress
     let votingPower = ''
@@ -53,7 +51,6 @@ export async function buildAccountState(
         ...account,
         ...accountPersistedData,
         depositAddress,
-        evmAddresses,
         balances,
         hasVotingPowerTransactionInProgress: false,
         hasVotingTransactionInProgress: false,
