@@ -29,7 +29,7 @@
     import { sendOutput } from '@core/wallet/actions'
     import { DEFAULT_TRANSACTION_OPTIONS } from '@core/wallet/constants'
     import { getOutputParameters, validateSendConfirmation, getAddressFromSubject } from '@core/wallet/utils'
-    import { Output } from '@core/wallet/types'
+    import { Activity, Output } from '@core/wallet/types'
     import { closePopup, openPopup, PopupId } from '@desktop/auxiliary/popup'
     import { ledgerPreparedOutput } from '@core/ledger'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
@@ -75,11 +75,20 @@
     $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
     $: isTransferring = $selectedAccount.isTransferring
 
+    let activity: Activity | undefined = undefined
     $: activity = {
         ...transactionDetails,
+        assetId: transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.asset.id : undefined,
         storageDeposit,
         subject: recipient,
         isInternal,
+        id: undefined,
+        outputId: undefined,
+        transactionId: undefined,
+        time: undefined,
+        containsValue: true,
+        isAssetHidden: false,
+        asyncData: undefined,
         giftedStorageDeposit: 0,
         surplus: visibleSurplus,
         type: ActivityType.Basic,
@@ -92,7 +101,7 @@
                 ethereumAddress: getAddressFromSubject(recipient),
                 targetContract: TARGET_CONTRACTS[ACCOUNTS_CONTRACT],
                 contractFunction: CONTRACT_FUNCTIONS[TRANSFER_ALLOWANCE],
-                gasBudget: GAS_BUDGET,
+                gasBudget: String(GAS_BUDGET),
             },
         }),
     }
@@ -115,7 +124,7 @@
     async function prepareTransactionOutput(): Promise<void> {
         const transactionDetails = get(newTransactionDetails)
 
-        const outputParams = getOutputParameters(transactionDetails)
+        const outputParams = await getOutputParameters(transactionDetails)
         preparedOutput = await prepareOutput($selectedAccount.index, outputParams, DEFAULT_TRANSACTION_OPTIONS)
 
         setStorageDeposit(preparedOutput, Number(surplus))

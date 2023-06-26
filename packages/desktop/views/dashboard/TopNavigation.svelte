@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Icon, Text } from '@ui'
-    import { AccountSwitcher, NetworkDrawerButton } from '@components'
+    import { AccountSwitcher } from '@components'
     import { PlatformOption } from '@core/app'
     import { platform } from '@core/app/stores'
     import { localize } from '@core/i18n'
@@ -19,7 +19,6 @@
     } from '@core/router'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { popupState } from '@desktop/auxiliary/popup'
-    import features from '@features/features'
     import { closeDrawer } from '@desktop/auxiliary/drawer'
 
     let isBackButtonVisible = false
@@ -75,11 +74,7 @@
 
     <AccountSwitcher />
 
-    <div class="right-button flex justify-end">
-        {#if features?.network?.config?.enabled}
-            <NetworkDrawerButton />
-        {/if}
-    </div>
+    <div class="right-button flex justify-end" />
 </top-navigation>
 
 <style type="text/scss">
@@ -101,17 +96,16 @@
             -webkit-app-region: none;
         }
 
-        .left-button,
         .right-button {
+            width: 10rem;
+        }
+
+        .left-button {
             width: 10rem;
 
             &.large {
                 width: 19rem;
             }
-        }
-
-        .windows-buttons {
-            width: 30rem;
         }
     }
 </style>

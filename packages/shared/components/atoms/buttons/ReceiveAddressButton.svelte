@@ -14,7 +14,8 @@
     }
 </script>
 
-<div
+<button
+    type="button"
     class="flex flex-col px-4 py-4 space-y-2 rounded-xl cursor-pointer"
     class:darkmode={darkModeEnabled}
     on:click={onReceiveClick}
@@ -31,10 +32,10 @@
             isCopyable
         />
     </inner-box>
-</div>
+</button>
 
 <style type="text/scss">
-    div {
+    button {
         @apply border;
         @apply border-solid;
         @apply border-gray-300;

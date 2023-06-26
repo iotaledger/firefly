@@ -3,7 +3,6 @@
     import { Link } from '@ui'
 
     export let href = ''
-    export let title = undefined
 
     function onLinkClick(): void {
         openUrlInBrowser(href)

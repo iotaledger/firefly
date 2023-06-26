@@ -139,7 +139,8 @@
     class:hasBorder={showBorderWhenClosed || dropdown}
     style={navWidth}
 >
-    <div
+    <button
+        type="button"
         class="selection relative flex flex-row space-x-0 pl-1 pb-1.5 items-end w-full whitespace-nowrap
     bg-white dark:bg-gray-800
             {hasFocus ? '-mr-1 pr-1' : 'pr-0'}
@@ -165,7 +166,7 @@
                 classes="text-gray-500 dark:text-white fill-current"
             />
         {/if}
-    </div>
+    </button>
     {#if error}
         <Error {error} />
     {/if}

@@ -23,8 +23,6 @@
         FontWeight,
         TextType,
     } from 'shared/components'
-    import features from '@features/features'
-    import { SendFlowRoute, SendFlowRouter, sendFlowRouter } from '@views/dashboard/send-flow'
 
     export let asset: IAsset
     export let activityId: string = undefined
@@ -64,9 +62,8 @@
             asset: asset,
             disableAssetSelection: true,
         })
-        sendFlowRouter.set(new SendFlowRouter(undefined, SendFlowRoute.SelectRecipient))
         openPopup({
-            id: features.wallet.newSendFlow.enabled ? PopupId.SendFlow : PopupId.SendForm,
+            id: PopupId.SendForm,
             overflow: true,
         })
     }
@@ -92,7 +89,7 @@
         </div>
 
         <div class="space-y-3 flex flex-col items-center justify-center">
-            <AssetIcon {asset} large />
+            <AssetIcon {asset} chainId={asset.chainId} large />
             <Text type={TextType.h2} fontWeight={FontWeight.bold}>
                 {getUnitFromTokenMetadata(asset.metadata)}
             </Text>
