@@ -10,15 +10,14 @@
         NotVerifiedStatus,
         VerifiedStatus,
         NewTransactionType,
-        getUnitFromTokenMetadata,
     } from '@core/wallet'
     import { openPopup, PopupId, updatePopupProps } from '@desktop/auxiliary/popup'
     import {
-        AssetIcon,
         Button,
         Text,
         TextHint,
         AssetActionsButton,
+        AssetTile,
         KeyValueBox,
         FontWeight,
         TextType,
@@ -89,10 +88,7 @@
         </div>
 
         <div class="space-y-3 flex flex-col items-center justify-center">
-            <AssetIcon {asset} chainId={asset.chainId} large />
-            <Text type={TextType.h2} fontWeight={FontWeight.bold}>
-                {getUnitFromTokenMetadata(asset.metadata)}
-            </Text>
+            <AssetTile classes="mb-2 pointer-events-none" onClick={() => {}} {asset} />
         </div>
 
         <div class="space-y-4 flex flex-col items-center justify-center">
