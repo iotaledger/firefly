@@ -14,7 +14,6 @@ export async function buildAccountStateAndPersistedData(
         color: color || getRandomAccountColor(),
         hidden: false,
         shouldRevote: false,
-        evmAddresses: {},
         depositAddress: await getDepositAddress(account),
         trackedTokens: {},
     }
