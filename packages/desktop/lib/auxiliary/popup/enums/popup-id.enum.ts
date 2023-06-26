@@ -18,7 +18,6 @@ export enum PopupId {
     EnableLedgerBlindSigning = 'enableLedgerBlindSigning',
     ErrorLog = 'errorLog',
     FaucetRequest = 'faucetRequest',
-    ImportErc20Token = 'importErc20Token',
     LedgerAppGuide = 'ledgerAppGuide',
     LedgerConnection = 'ledgerConnection',
     LegalUpdate = 'legalUpdate',

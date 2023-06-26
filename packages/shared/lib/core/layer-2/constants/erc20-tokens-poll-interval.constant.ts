@@ -1,1 +1,0 @@
-export const ERC20_TOKENS_POLL_INTERVAL = 10000
