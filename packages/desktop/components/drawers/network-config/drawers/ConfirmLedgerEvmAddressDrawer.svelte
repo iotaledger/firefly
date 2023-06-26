@@ -1,7 +1,6 @@
 <script lang="ts">
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { loadEvmAddressForSelectedAccount } from '@core/layer-2'
     import { selectedChain } from '@core/network'
     import { updateActiveAccountPersistedData } from '@core/profile/actions'
     import { Router } from '@core/router'
@@ -25,9 +24,6 @@
 
     onMount(() => {
         coinType = $selectedChain?.getConfiguration()?.coinType
-        if (coinType !== undefined) {
-            loadEvmAddressForSelectedAccount(coinType)
-        }
     })
 
     onDestroy(() => {
