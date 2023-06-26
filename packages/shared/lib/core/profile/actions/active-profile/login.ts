@@ -8,7 +8,7 @@ import { AppContext } from '@core/app/enums'
 import { handleError } from '@core/error/handlers'
 import { pollLedgerNanoStatus } from '@core/ledger/actions'
 import { pollMarketPrices } from '@core/market/actions'
-import { pollChainStatuses, pollNetworkStatus } from '@core/network/actions'
+import { pollNetworkStatus } from '@core/network/actions'
 import { initialiseProfileManager } from '@core/profile-manager/actions'
 import { loadNftsForActiveProfile } from '@core/nfts'
 import {
@@ -71,7 +71,6 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             incrementLoginProgress()
             await checkAndUpdateActiveProfileNetwork()
             void pollNetworkStatus()
-            void pollChainStatuses()
 
             // Step 3: load and build all the profile data
             incrementLoginProgress()
