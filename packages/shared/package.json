@@ -22,7 +22,6 @@
         "svelte-i18n": "3.6.0",
         "svelte-markdown": "0.2.3",
         "svelty-picker": "^3.5.0",
-        "web3": "^1.10.0",
         "zxcvbn": "^4.4.2"
     },
     "scripts": {
