@@ -13,12 +13,6 @@ const analyticsFeatures: IAnalyticsFeatures = {
     },
     dashboardRoute: {
         enabled: true,
-        wallet: {
-            enabled: true,
-            sendFlow: {
-                enabled: true,
-            },
-        },
     },
 }
 
