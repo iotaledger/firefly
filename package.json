@@ -18,7 +18,7 @@
         "lint-staged": "^12.3.3",
         "patch-package": "^7.0.0",
         "prettier": "^2.3.2",
-        "prettier-plugin-svelte": "^2.7.0",
+        "prettier-plugin-svelte": "^2.10.1",
         "retypeapp": "^2.3.0"
     },
     "scripts": {
