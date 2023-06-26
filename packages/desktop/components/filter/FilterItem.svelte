@@ -8,7 +8,6 @@
         SelectionFilterItem,
         AssetFilterItem,
         OrderFilterItem,
-        NetworkFilterItem,
     } from '@ui'
     import { localize } from '@core/i18n'
     import { FilterUnit } from '@core/utils/interfaces/filter'
@@ -60,8 +59,6 @@
                 <OrderFilterItem bind:filterUnit />
             {:else if filterUnit.type === 'asset'}
                 <AssetFilterItem bind:filterUnit />
-            {:else if filterUnit.type === 'network'}
-                <NetworkFilterItem bind:filterUnit />
             {/if}
         </filter-item-type>
     {/if}
