@@ -23,6 +23,7 @@ type NewBaseTransactionDetails = {
 export type NewTokenTransactionDetails = NewBaseTransactionDetails & {
     type: NewTransactionType.TokenTransfer
     rawAmount: string
+    asset: IAsset
     unit: string
 }
 
