@@ -22,7 +22,7 @@
 
     $: $network, chainId, (chainName = getTooltipText())
     $: isAnimation = asset.id in ANIMATED_TOKEN_IDS
-    switch (asset.id) {
+    $: switch (asset.id) {
         case String(COIN_TYPE[NetworkId.Iota]):
             assetInitials = ''
             assetIconBackgroundColor = '#6E82A4'
