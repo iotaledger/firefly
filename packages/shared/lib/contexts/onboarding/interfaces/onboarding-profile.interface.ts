@@ -12,6 +12,7 @@ export interface IOnboardingProfile extends IPersistedProfile {
     // Stronghold setup data
     importFile?: ImportFile
     importFilePath?: string
+    timeStrongholdLastUnlocked?: Date
 
     // Mnemonic setup data
     mnemonic?: Mnemonic

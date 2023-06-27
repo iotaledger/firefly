@@ -1,11 +1,13 @@
 <script lang="ts">
     import { OnboardingLayout } from '@components'
-    import { initialisePincodeManager } from '@contexts/onboarding'
+    import { RestoreProfileType, initialisePincodeManager, onboardingProfile } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { isValidPin } from '@core/utils'
+    import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE, isValidPin } from '@core/utils'
     import { Animation, Button, HTMLButtonType, PinInput, Text } from '@ui'
     import { completeOnboardingRouter } from '../complete-onboarding-router'
+    import { handleError } from '@core/error/handlers'
+    import { DEFAULT_STRONGHOLD_PASSWORD_TIMEOUT_IN_MINUTES } from '@core/profile'
 
     export let busy = false
 
@@ -29,6 +31,17 @@
     }
 
     async function handleSetPin(): Promise<void> {
+        if ($onboardingProfile.restoreProfileType === RestoreProfileType.Stronghold) {
+            const MILLISECONDS_TO_EXPIRE_STRONGHOLD_PASSWORD =
+                DEFAULT_STRONGHOLD_PASSWORD_TIMEOUT_IN_MINUTES * SECONDS_PER_MINUTE * MILLISECONDS_PER_SECOND
+            const isStrongholdPasswordExpired =
+                new Date().getTime() - $onboardingProfile?.timeStrongholdLastUnlocked?.getTime() >
+                MILLISECONDS_TO_EXPIRE_STRONGHOLD_PASSWORD
+            if (isStrongholdPasswordExpired) {
+                handleError({ message: localize('views.settings.strongholdPasswordTimeout.description') })
+                return
+            }
+        }
         busy = true
         await initialisePincodeManager(setPinInput)
         busy = false
