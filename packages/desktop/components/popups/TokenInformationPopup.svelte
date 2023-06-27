@@ -87,7 +87,7 @@
             {/if}
         </div>
 
-        <AssetTile classes="mb-2 pointer-events-none" onClick={() => {}} {asset} />
+        <AssetTile classes="pointer-events-none" onClick={() => {}} {asset} />
 
         <div class="space-y-4 flex flex-col items-center justify-center">
             {#if !asset.verification?.verified}
