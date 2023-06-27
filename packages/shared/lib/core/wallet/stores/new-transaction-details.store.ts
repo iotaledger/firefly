@@ -1,3 +1,4 @@
+import { getBaseToken } from '@core/profile'
 import { writable, Writable } from 'svelte/store'
 import type { NewTransactionDetails } from '../types'
 
@@ -13,8 +14,7 @@ export function resetNewTokenTransactionDetails(): void {
         type: NewTransactionType.TokenTransfer,
         recipient: undefined,
         rawAmount: undefined,
-        asset: undefined,
-        unit: undefined,
+        tokenMetadata: getBaseToken(),
     })
 }
 

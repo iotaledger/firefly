@@ -5,7 +5,7 @@
     import { ownedNfts } from '@core/nfts'
     import { getByteLengthOfString, MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
     import {
-        IAsset,
+        getUnitFromTokenMetadata,
         isReservedTagKeyword,
         newTransactionDetails,
         NewTransactionType,
@@ -38,7 +38,8 @@
     }
 
     const transactionDetails = get(newTransactionDetails)
-    let { metadata, recipient, tag, layer2Parameters, disableAssetSelection } = transactionDetails
+    let { metadata, recipient, tag, layer2Parameters } = transactionDetails
+    const { disableAssetSelection } = transactionDetails
 
     let assetAmountInput: AssetAmountInput
     let nftInput: NftInput
@@ -51,12 +52,10 @@
 
     let nftId: string
     let rawAmount: string
-    let asset: IAsset
     let unit: string
 
     if (transactionDetails.type === NewTransactionType.TokenTransfer) {
         rawAmount = transactionDetails.rawAmount
-        asset = transactionDetails.asset
         unit = transactionDetails.unit
     } else {
         nftId = transactionDetails.nftId
@@ -69,7 +68,7 @@
     $: hasSpendableNfts = $ownedNfts.some((nft) => nft.isSpendable)
     $: isLayer2 = !!iscpChainAddress
     $: isSendTokenTab = activeTab === SendForm.SendToken
-    $: isBaseToken = getBaseToken().unit === unit
+    $: isBaseToken = getBaseToken().unit === getUnitFromTokenMetadata(transactionDetails.tokenMetadata)
     // Only allow L1 -> L2 transactions in developer profiles when transfering other than base tokens
     // Context: https://github.com/iotaledger/firefly/issues/7041
     $: showLayer2 = features?.network?.layer2?.enabled && ($activeProfile.isDeveloperProfile || isBaseToken)
@@ -83,7 +82,6 @@
             setNewTransactionDetails({
                 type: NewTransactionType.TokenTransfer,
                 recipient,
-                asset,
                 rawAmount,
                 unit,
                 tag,
@@ -175,13 +173,7 @@
             <Tabs bind:activeTab {tabs} />
         {/if}
         {#if activeTab === SendForm.SendToken}
-            <AssetAmountInput
-                bind:this={assetAmountInput}
-                bind:asset
-                bind:rawAmount
-                bind:unit
-                {disableAssetSelection}
-            />
+            <AssetAmountInput bind:this={assetAmountInput} bind:rawAmount bind:unit {disableAssetSelection} />
         {:else}
             <NftInput bind:this={nftInput} bind:nftId readonly={disableAssetSelection} />
         {/if}

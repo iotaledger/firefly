@@ -99,7 +99,7 @@
         updateNewTransactionDetails({
             type: $newTransactionDetails.type,
             rawAmount,
-            unit,
+            tokenMetadata: asset.metadata,
         })
         $sendRouter.next()
     }
