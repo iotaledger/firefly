@@ -1,5 +1,5 @@
 import type { ILayer2Parameters } from '@core/layer-2'
-import type { Subject, TokenMetadata } from '@core/wallet'
+import type { IAsset, Subject, TokenMetadata } from '@core/wallet'
 import { NewTransactionType } from '@core/wallet/stores'
 
 export type NewTransactionDetails = NewNftTransactionDetails | NewTokenTransactionDetails
