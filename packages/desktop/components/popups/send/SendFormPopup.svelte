@@ -70,7 +70,7 @@
     $: isLayer2 = !!iscpChainAddress
     $: isSendTokenTab = activeTab === SendForm.SendToken
     $: isBaseToken = getBaseToken().unit === unit
-    // Only allow L1 -> L2 transactions in developer profiles
+    // Only allow L1 -> L2 transactions in developer profiles when transfering other than base tokens
     // Context: https://github.com/iotaledger/firefly/issues/7041
     $: showLayer2 = features?.network?.layer2?.enabled && ($activeProfile.isDeveloperProfile || isBaseToken)
 
