@@ -8,10 +8,6 @@
     export let iscpChainAddress: string | undefined = undefined
     export let showLayer2: boolean = false
 
-    // Only allow L1 -> L2 transactions in developer profiles
-    // Context: https://github.com/iotaledger/firefly/issues/7041
-    showLayer2 = showLayer2 && $activeProfile.isDeveloperProfile
-
     const readonlyAttribute = $activeProfile?.isDeveloperProfile ? {} : { readonly: true }
     const layer1Network = {
         key: $activeProfile?.network.name,

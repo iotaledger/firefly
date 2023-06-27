@@ -25,6 +25,7 @@
         TextType,
     } from 'shared/components'
     import features from '@features/features'
+    import { activeProfile, getBaseToken } from '@core/profile'
 
     enum SendForm {
         SendToken = 'general.sendToken',
@@ -68,6 +69,10 @@
     $: hasSpendableNfts = $ownedNfts.some((nft) => nft.isSpendable)
     $: isLayer2 = !!iscpChainAddress
     $: isSendTokenTab = activeTab === SendForm.SendToken
+    $: isBaseToken = getBaseToken().unit === unit
+    // Only allow L1 -> L2 transactions in developer profiles
+    // Context: https://github.com/iotaledger/firefly/issues/7041
+    $: showLayer2 = features?.network?.layer2?.enabled && ($activeProfile.isDeveloperProfile || isBaseToken)
 
     function setTransactionDetails(): void {
         layer2Parameters = isLayer2
@@ -180,7 +185,7 @@
         {:else}
             <NftInput bind:this={nftInput} bind:nftId readonly={disableAssetSelection} />
         {/if}
-        <NetworkInput bind:this={networkInput} bind:iscpChainAddress showLayer2={features?.network?.layer2?.enabled} />
+        <NetworkInput bind:this={networkInput} bind:iscpChainAddress {showLayer2} />
         <RecipientInput bind:this={recipientInput} bind:recipient {isLayer2} />
         <optional-inputs class="flex flex-row flex-wrap gap-4">
             <OptionalInput
