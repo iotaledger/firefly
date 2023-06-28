@@ -1,6 +1,6 @@
-import { ChainConfiguration } from '../types'
-import { IIscpChainConfiguration } from '../interfaces'
+import { IIscpChainMetadata } from '../interfaces'
+import { ChainMetadata } from '../types'
 
-export function isIscpChain(configuration: ChainConfiguration): configuration is IIscpChainConfiguration {
-    return (configuration as IIscpChainConfiguration) !== undefined
+export function isIscpChain(configuration: ChainMetadata): configuration is IIscpChainMetadata {
+    return (configuration as IIscpChainMetadata) !== undefined
 }

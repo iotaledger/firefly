@@ -1,6 +1,6 @@
-import { IEvmChainConfiguration } from '../interfaces'
-import { ChainConfiguration } from '../types'
+import { IEvmChainMetadata } from '../interfaces'
+import { ChainMetadata } from '../types'
 
-export function isEvmChain(configuration: ChainConfiguration): configuration is IEvmChainConfiguration {
-    return (configuration as IEvmChainConfiguration) !== undefined
+export function isEvmChain(configuration: ChainMetadata): configuration is IEvmChainMetadata {
+    return (configuration as IEvmChainMetadata) !== undefined
 }

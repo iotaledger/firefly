@@ -7,7 +7,7 @@ export function getDestinationNetworkFromAddress(networkAddress: string | undefi
         return network?.name
     }
 
-    const chainConfigurations = network?.chainConfigurations.filter(isIscpChain)
+    const chainConfigurations = network?.chains.filter(isIscpChain)
     const foundDestinationNetwork = chainConfigurations.find((chain) => chain?.aliasAddress === networkAddress)
     return foundDestinationNetwork?.name ?? networkAddress
 }
