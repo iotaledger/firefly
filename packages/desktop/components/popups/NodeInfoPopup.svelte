@@ -74,8 +74,20 @@
     ): { localeKey: string; nodeInfoValue: unknown } {
         const nodeInfoTabObject = NODE_INFO_TAB_MAP[_nodeInfoTab]
         const localeKey = nodeInfoTabObject[key].localeKey
-        const nodeInfoValue =
-            key !== 'url' ? resolveObjectPath(nodeInfo, nodeInfoTabObject[key]?.nodeInfoPath, null) : node?.url
+        let nodeInfoValue = ''
+        if (key === 'url') {
+            nodeInfoValue = node.url
+        } else {
+            nodeInfoValue = resolveObjectPath(nodeInfo, nodeInfoTabObject[key]?.nodeInfoPath, null)
+            if (localeKey === 'metrics.referencedRate') {
+                const referencedRate = Number(nodeInfoValue)
+                if (referencedRate >= 0) {
+                    nodeInfoValue = `${formatNumber(Math.min(referencedRate, 100), 1, 1)}%`
+                } else {
+                    nodeInfoValue = ''
+                }
+            }
+        }
 
         return {
             localeKey,
@@ -106,10 +118,6 @@
                 })
             })
     })
-
-    function formatMetricWithOneDecimal(metric): string {
-        return formatNumber(Number(metric), 1, 1)
-    }
 </script>
 
 <div class="mb-5">
@@ -138,13 +146,7 @@
                     <Text type="p" fontSize="sm" fontWeight="font-600" secondary
                         >{localize(`${NODE_INFO_LOCALE_BASE_PATH}.${localeKey}`)}</Text
                     >
-                    {#if localeKey === 'metrics.referencedRate' || localeKey === 'metrics.referencedBlocksPerSecond' || localeKey === 'metrics.blocksPerSecond'}
-                        <Text type="p" fontSize="sm" secondary>
-                            {formatMetricWithOneDecimal(nodeInfoValue)}{localeKey === 'metrics.referencedRate'
-                                ? '%'
-                                : ''}
-                        </Text>
-                    {:else if typeof nodeInfoValue === 'boolean'}
+                    {#if typeof nodeInfoValue === 'boolean'}
                         <Checkbox disabled checked={nodeInfoValue} />
                     {:else if Array.isArray(nodeInfoValue)}
                         <div class="text-right w-5/6">
