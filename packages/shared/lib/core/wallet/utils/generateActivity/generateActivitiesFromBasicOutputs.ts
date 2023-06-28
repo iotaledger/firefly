@@ -16,10 +16,10 @@ import { generateSingleBasicActivity } from './generateSingleBasicActivity'
 import { generateSingleConsolidationActivity } from './generateSingleConsolidationActivity'
 import { generateSingleNftActivity } from './generateSingleNftActivity'
 
-export function generateActivitiesFromBasicOutputs(
+export async function generateActivitiesFromBasicOutputs(
     processedTransaction: IProcessedTransaction,
     account: IAccountState
-): Activity[] {
+): Promise<Activity[]> {
     const activities = []
 
     const basicOutputs = getNonRemainderBasicOutputsFromTransaction(
@@ -55,7 +55,7 @@ export function generateActivitiesFromBasicOutputs(
 
             burnedNftInputs.splice(burnedNftInputIndex, 1)
         } else if (isSelfTransaction && burnedNativeToken) {
-            activity = generateSingleBasicActivity(
+            activity = await generateSingleBasicActivity(
                 account,
                 {
                     action: ActivityAction.Burn,
@@ -72,7 +72,7 @@ export function generateActivitiesFromBasicOutputs(
                 wrappedOutput: basicOutput,
             })
         } else {
-            activity = generateSingleBasicActivity(account, {
+            activity = await generateSingleBasicActivity(account, {
                 action: ActivityAction.Send,
                 processedTransaction,
                 wrappedOutput: basicOutput,

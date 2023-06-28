@@ -17,12 +17,12 @@ import {
     getTagFromOutput,
 } from './helper'
 
-export function generateSingleBasicActivity(
+export async function generateSingleBasicActivity(
     account: IAccountState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters,
     fallbackAssetId?: string,
     fallbackAmount?: number
-): TransactionActivity {
+): Promise<TransactionActivity> {
     const { transactionId, direction, claimingData, time, inclusionState } = processedTransaction
 
     const isHidden = false
@@ -50,6 +50,17 @@ export function generateSingleBasicActivity(
     giftedStorageDeposit = action === ActivityAction.Burn ? 0 : giftedStorageDeposit
     giftedStorageDeposit = gasBudget === 0 ? giftedStorageDeposit : 0
 
+    let surplus: number | undefined = undefined
+    try {
+        const minimumRequiredStorageDeposit = await account.minimumRequiredStorageDeposit(output)
+        // console.log("Account", account.name)
+        // console.log("Outputid, Storage and gifted",outputId, storageDeposit, giftedStorageDeposit)
+        // console.log("output.amout, minimumRequiredStorageDeposit", output.amount, minimumRequiredStorageDeposit)
+        surplus = Number(output.amount) - Number(minimumRequiredStorageDeposit)
+    } catch (err) {
+        console.error(err)
+    }
+
     const baseTokenAmount = getAmountFromOutput(output) - storageDeposit - gasBudget
 
     const nativeToken = getNativeTokenFromOutput(output)
@@ -76,6 +87,7 @@ export function generateSingleBasicActivity(
         outputId,
         storageDeposit,
         giftedStorageDeposit,
+        surplus,
         rawAmount,
         isShimmerClaiming,
         publicNote,
