@@ -79,10 +79,17 @@
             nodeInfoValue = node.url
         } else {
             nodeInfoValue = resolveObjectPath(nodeInfo, nodeInfoTabObject[key]?.nodeInfoPath, null)
-            if (localeKey === 'metrics.referencedRate') {
+            if (key === 'referencedRate') {
                 const referencedRate = Number(nodeInfoValue)
                 if (referencedRate >= 0) {
                     nodeInfoValue = `${formatNumber(Math.min(referencedRate, 100), 1, 1)}%`
+                } else {
+                    nodeInfoValue = ''
+                }
+            } else if (key === 'blocksPerSecond' || key === 'referencedBlocksPerSecond') {
+                const infoValue = Number(nodeInfoValue)
+                if (infoValue >= 0) {
+                    nodeInfoValue = formatNumber(infoValue, 1, 1)
                 } else {
                     nodeInfoValue = ''
                 }
