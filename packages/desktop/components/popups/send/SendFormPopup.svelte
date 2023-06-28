@@ -68,7 +68,6 @@
     let activeTab: SendForm =
         transactionDetails.type === NewTransactionType.TokenTransfer ? SendForm.SendToken : SendForm.SendNft
 
-    $: asset, nftId, networkInput?.reset()
     $: hasSpendableNfts = $ownedNfts.some((nft) => nft.isSpendable)
     $: isLayer2 = !!iscpChainAddress
     $: isSendTokenTab = activeTab === SendForm.SendToken
@@ -78,6 +77,7 @@
         asset?.metadata?.standard === TokenStandard.BaseToken
     // Only allow L1 -> L2 transactions in developer profiles when transfering other than base tokens
     $: showLayer2 = features?.network?.layer2?.enabled && ($activeProfile.isDeveloperProfile || isBaseToken)
+    $: asset, nftId, !showLayer2 && networkInput?.reset()
 
     function setTransactionDetails(): void {
         layer2Parameters = isLayer2
