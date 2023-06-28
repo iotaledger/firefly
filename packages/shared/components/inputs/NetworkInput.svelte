@@ -13,6 +13,7 @@
         value: undefined,
     }
 
+    let selectorInput: SelectorInput
     let inputElement: HTMLInputElement
     let modal: Modal
     let error: string
@@ -22,6 +23,11 @@
     let selected: IOption = networkOptions?.find((option) => option.value === iscpChainAddress) ?? layer1Network
 
     $: iscpChainAddress = selected?.value
+
+    export function reset(): void {
+        selected = networkOptions[0]
+        selectorInput?.resetValue(selected);
+    }
 
     function getNetworkOptions(showLayer2: boolean): IOption[] {
         let layer2Networks: IOption[] = []
@@ -54,6 +60,7 @@
 
 <SelectorInput
     labelLocale="general.destinationNetwork"
+    bind:this={selectorInput}
     bind:selected
     bind:inputElement
     bind:modal
