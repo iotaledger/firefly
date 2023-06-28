@@ -20,7 +20,7 @@
             busy = true
             try {
                 await restoreBackupFromStrongholdFile(strongholdPassword)
-                updateOnboardingProfile({ strongholdPassword, timeStrongholdLastUnlocked: new Date() })
+                updateOnboardingProfile({ strongholdPassword })
                 $restoreFromStrongholdRouter.next()
             } catch (err) {
                 if (CLIENT_ERROR_REGEXES[ClientError.InvalidStrongholdPassword].test(err?.error)) {

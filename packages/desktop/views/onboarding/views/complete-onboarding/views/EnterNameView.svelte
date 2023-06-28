@@ -1,14 +1,12 @@
 <script lang="ts">
     import { OnboardingLayout } from '@components'
-    import { RestoreProfileType, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
+    import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { getNetworkNameFromNetworkId } from '@core/network'
-    import { profiles, validateProfileName, DEFAULT_STRONGHOLD_PASSWORD_TIMEOUT_IN_MINUTES } from '@core/profile'
+    import { profiles, validateProfileName } from '@core/profile'
     import { Animation, Button, Input, Text } from '@ui'
     import { completeOnboardingRouter } from '../complete-onboarding-router'
-    import { handleError } from '@core/error/handlers'
-    import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from '@core/utils'
 
     let error = ''
     let profileName = $onboardingProfile?.name ?? ''
@@ -18,17 +16,6 @@
 
     function onContinueClick(): void {
         try {
-            if ($onboardingProfile.restoreProfileType === RestoreProfileType.Stronghold) {
-                const MILLISECONDS_TO_EXPIRE_STRONGHOLD_PASSWORD =
-                    DEFAULT_STRONGHOLD_PASSWORD_TIMEOUT_IN_MINUTES * SECONDS_PER_MINUTE * MILLISECONDS_PER_SECOND
-                const isStrongholdPasswordExpired =
-                    new Date().getTime() - $onboardingProfile?.timeStrongholdLastUnlocked?.getTime() >
-                    MILLISECONDS_TO_EXPIRE_STRONGHOLD_PASSWORD
-                if (isStrongholdPasswordExpired) {
-                    handleError({ message: localize('views.settings.strongholdPasswordTimeout.description') })
-                    throw new Error()
-                }
-            }
             validateProfileName(profileName)
             updateOnboardingProfile({ name: profileName })
             $completeOnboardingRouter.next()
