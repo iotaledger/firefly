@@ -13,12 +13,6 @@
     import { Animation, Button, Icon, Text, TextHint } from '@ui'
     import { onboardingRouter } from '@views/onboarding/onboarding-router'
 
-    async function unlockStronghold(): Promise<void> {
-        if ($onboardingProfile?.restoreProfileType === RestoreProfileType.Stronghold) {
-            await setStrongholdPassword($onboardingProfile.strongholdPassword)
-        }
-    }
-
     function onContinueClick(): void {
         if ($isOnboardingLedgerProfile) {
             checkOrConnectLedger(_continue)
@@ -28,7 +22,10 @@
     }
 
     async function _continue(): Promise<void> {
-        await unlockStronghold()
+        // Note: needed to cover the cases where the user has waited so long that the stronghold is locked
+        if ($onboardingProfile?.restoreProfileType === RestoreProfileType.Stronghold) {
+            await setStrongholdPassword($onboardingProfile.strongholdPassword)
+        }
         completeOnboardingProcess()
         $onboardingRouter.next()
         return Promise.resolve()
