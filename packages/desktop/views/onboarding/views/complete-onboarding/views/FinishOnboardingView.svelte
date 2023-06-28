@@ -1,11 +1,26 @@
 <script lang="ts">
     import { OnboardingLayout } from '@components'
-    import { completeOnboardingProcess, isOnboardingLedgerProfile } from '@contexts/onboarding'
+    import {
+        RestoreProfileType,
+        completeOnboardingProcess,
+        isOnboardingLedgerProfile,
+        onboardingProfile,
+    } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { checkOrConnectLedger } from '@core/ledger'
+    import { isStrongholdUnlocked, setStrongholdPassword } from '@core/profile-manager'
     import { Animation, Button, Icon, Text, TextHint } from '@ui'
     import { onboardingRouter } from '@views/onboarding/onboarding-router'
+
+    async function verifyAndRestoreStronghold(): Promise<void> {
+        if ($onboardingProfile?.restoreProfileType === RestoreProfileType.Stronghold) {
+            const _isStrongholdUnlocked = await isStrongholdUnlocked()
+            if (!_isStrongholdUnlocked) {
+                await setStrongholdPassword($onboardingProfile.strongholdPassword)
+            }
+        }
+    }
 
     function onContinueClick(): void {
         if ($isOnboardingLedgerProfile) {
@@ -15,7 +30,8 @@
         }
     }
 
-    function _continue(): Promise<void> {
+    async function _continue(): Promise<void> {
+        await verifyAndRestoreStronghold()
         completeOnboardingProcess()
         $onboardingRouter.next()
         return Promise.resolve()

@@ -7,21 +7,9 @@
     import EnterNameView from './views/EnterNameView.svelte'
     import EnterPinView from './views/EnterPinView.svelte'
     import FinishOnboardingView from './views/FinishOnboardingView.svelte'
-    import { isStrongholdUnlocked } from '@core/profile-manager'
-    import { RestoreProfileType, onboardingProfile, restoreBackupFromStrongholdFile } from '@contexts/onboarding'
 
     $: if (features.analytics.onboardingRoute.enabled && $completeOnboardingRoute) {
         Platform.trackEvent('complete-onboarding-route', { route: $completeOnboardingRoute })
-    }
-    $: verifyAndRestoreStronghold(), $completeOnboardingRoute
-
-    async function verifyAndRestoreStronghold() {
-        if ($onboardingProfile?.restoreProfileType === RestoreProfileType.Stronghold) {
-            const _isStrongholdUnlocked = await isStrongholdUnlocked()
-            if (!_isStrongholdUnlocked) {
-                await restoreBackupFromStrongholdFile($onboardingProfile.strongholdPassword)
-            }
-        }
     }
 </script>
 
