@@ -9,16 +9,13 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { checkOrConnectLedger } from '@core/ledger'
-    import { isStrongholdUnlocked, setStrongholdPassword } from '@core/profile-manager'
+    import { setStrongholdPassword } from '@core/profile-manager'
     import { Animation, Button, Icon, Text, TextHint } from '@ui'
     import { onboardingRouter } from '@views/onboarding/onboarding-router'
 
-    async function verifyAndRestoreStronghold(): Promise<void> {
+    async function unlockStronghold(): Promise<void> {
         if ($onboardingProfile?.restoreProfileType === RestoreProfileType.Stronghold) {
-            const _isStrongholdUnlocked = await isStrongholdUnlocked()
-            if (!_isStrongholdUnlocked) {
-                await setStrongholdPassword($onboardingProfile.strongholdPassword)
-            }
+            await setStrongholdPassword($onboardingProfile.strongholdPassword)
         }
     }
 
@@ -31,7 +28,7 @@
     }
 
     async function _continue(): Promise<void> {
-        await verifyAndRestoreStronghold()
+        await unlockStronghold()
         completeOnboardingProcess()
         $onboardingRouter.next()
         return Promise.resolve()
