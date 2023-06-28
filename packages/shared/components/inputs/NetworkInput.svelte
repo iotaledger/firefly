@@ -26,7 +26,7 @@
 
     export function reset(): void {
         selected = networkOptions[0]
-        selectorInput?.resetValue(selected);
+        selectorInput?.resetValue(selected)
     }
 
     function getNetworkOptions(showLayer2: boolean): IOption[] {

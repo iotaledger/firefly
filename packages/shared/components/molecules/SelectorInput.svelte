@@ -54,7 +54,7 @@
     }
 
     export function resetValue(newSelected?: IOption): void {
-        if(newSelected) selected = newSelected
+        if (newSelected) selected = newSelected
         value = selected?.key ?? selected?.value
     }
 </script>
