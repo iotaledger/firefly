@@ -1,24 +1,20 @@
 <script lang="ts">
-    import { Modal, NotificationBadge, ProfileActionsModal, Icon } from '@ui'
-    import { SidebarTab } from '@components'
-
-    import { appVersionDetails } from '@core/app/stores'
-    import { getInitials, isRecentDate } from '@core/utils'
-    import { activeProfile } from '@core/profile/stores'
-    import { collectiblesRouter, DashboardRoute, dashboardRouter, governanceRouter, settingsRouter } from '@core/router'
-    import { localize } from '@core/i18n'
-
     import { Icon as IconEnum, NETWORK_ICON_SVG } from '@auxiliary/icon'
+    import { SidebarTab } from '@components'
+    import { appVersionDetails } from '@core/app/stores'
+    import { localize } from '@core/i18n'
+    import { activeProfile } from '@core/profile/stores'
+    import { DashboardRoute, collectiblesRouter, dashboardRouter, governanceRouter, settingsRouter } from '@core/router'
+    import { isRecentDate } from '@core/utils'
     import { ISidebarTab } from '@desktop/routers'
     import features from '@features/features'
+    import { Icon, Modal, NotificationBadge, ProfileActionsModal, ProfilePicture } from '@ui'
 
     let profileModal: Modal
 
     const profileColor = 'blue' // TODO: each profile has a different color
 
     const { shouldOpenProfileModal } = $activeProfile
-
-    $: profileInitial = getInitials($activeProfile?.name, 1)
 
     $: lastStrongholdBackupTime = $activeProfile?.lastStrongholdBackupTime
     $: lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
@@ -119,7 +115,7 @@
                 class="w-10 h-10 relative flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
                 on:click={profileModal?.open}
             >
-                <span class="text-12 text-center text-white uppercase">{profileInitial}</span>
+                <ProfilePicture profile={$activeProfile} size="medium" />
                 {#if !$shouldOpenProfileModal && (!isBackupSafe || !$appVersionDetails.upToDate)}
                     <NotificationBadge />
                 {/if}

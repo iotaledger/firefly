@@ -11,7 +11,7 @@ import { handleWalletRsError } from './walletRs'
 export function handleError(err: IError, resetConfirmationPropsOnDenial = true): void {
     const _activeProfile = get(activeProfile)
     if (Object.values(WalletRsError).includes(err?.type as WalletRsError)) {
-        handleWalletRsError(err)
+        handleWalletRsError(err, resetConfirmationPropsOnDenial)
     } else if (_activeProfile.type === ProfileType.Ledger) {
         handleLedgerError(err, resetConfirmationPropsOnDenial)
     } else {

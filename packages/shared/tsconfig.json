@@ -18,6 +18,7 @@
         "./lib/core/network/utils/getOfficialExplorerUrl.ts",
         "./lib/core/network/utils/getOfficialNodes.ts",
         "./lib/core/network/utils/isOfficialNetwork.ts",
+        "./lib/core/nfts/utils/parseNftMetadata.ts",
         "./lib/core/utils/constants/bech32-address-length.constant.ts",
         "./lib/core/utils/constants/date-format.constant.ts",
         "./lib/core/utils/constants/default-application-json-request-options.constant.ts",

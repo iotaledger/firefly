@@ -2,9 +2,7 @@
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
     import { Icon } from '@ui'
-    import { closePopup } from '@auxiliary/popup/actions'
-    import { PopupId } from '@auxiliary/popup/enums'
-    import { PopupComponentMap } from '@auxiliary/popup/types'
+    import { closePopup, PopupComponentMap, PopupId } from '@desktop/auxiliary/popup'
     import { Icon as IconEnum } from '@auxiliary/icon/enums'
     import { PlatformOption, platform } from '@core/app'
     import { clickOutside } from '@core/utils/ui'
@@ -44,7 +42,6 @@
     import RemoveProposalPopup from './RemoveProposalPopup.svelte'
     import RevotePopup from './RevotePopup.svelte'
     import { SendConfirmationPopup, SendFormPopup } from './send'
-    import SendFlowPopup from './SendFlowPopup.svelte'
     import StopVotingPopup from './StopVotingPopup.svelte'
     import BalanceBreakdownPopup from './BalanceBreakdownPopup.svelte'
     import TestDeepLinkFormPopup from './TestDeepLinkFormPopup.svelte'
@@ -126,7 +123,6 @@
         [PopupId.RemoveProposal]: RemoveProposalPopup,
         [PopupId.Revote]: RevotePopup,
         [PopupId.SendConfirmation]: SendConfirmationPopup,
-        [PopupId.SendFlow]: SendFlowPopup,
         [PopupId.SendForm]: SendFormPopup,
         [PopupId.StopVoting]: StopVotingPopup,
         [PopupId.BalanceBreakdown]: BalanceBreakdownPopup,
@@ -200,7 +196,7 @@
                         : 'bg-gray-800 bg-opacity-70 dark:bg-black dark:bg-opacity-50'
                 }`}
 >
-    <div tabindex="0" on:focus={onFocusFirst} />
+    <button type="button" tabindex="0" on:focus={onFocusFirst} />
     <popup-content
         use:clickOutside
         on:clickOutside={tryClosePopup}
@@ -219,7 +215,7 @@
         {/if}
         <svelte:component this={POPUP_MAP[id]} {...props} />
     </popup-content>
-    <div tabindex="0" on:focus={onFocusLast} />
+    <button type="button" tabindex="0" on:focus={onFocusLast} />
 </popup>
 
 <style type="text/scss">

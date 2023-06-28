@@ -15,11 +15,10 @@
         ActivityInformation,
     } from 'shared/components'
     import { Tab } from 'shared/components/enums'
-    import type { OutputOptions } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
-    import { ExpirationTime } from '@core/utils'
+    import { activeProfile, checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
+    import { TimePeriod } from '@core/utils'
     import { ActivityDirection, ActivityType, InclusionState, ActivityAction } from '@core/wallet/enums'
     import {
         selectedAccountAssets,
@@ -29,9 +28,9 @@
     } from '@core/wallet/stores'
     import { sendOutput } from '@core/wallet/actions'
     import { DEFAULT_TRANSACTION_OPTIONS } from '@core/wallet/constants'
-    import { getOutputOptions, validateSendConfirmation, getAddressFromSubject } from '@core/wallet/utils'
-    import { Output } from '@core/wallet/types'
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { getOutputParameters, validateSendConfirmation, getAddressFromSubject } from '@core/wallet/utils'
+    import { Activity, Output } from '@core/wallet/types'
+    import { closePopup, openPopup, PopupId } from '@desktop/auxiliary/popup'
     import { ledgerPreparedOutput } from '@core/ledger'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import { handleError } from '@core/error/handlers/handleError'
@@ -60,10 +59,9 @@
     let storageDeposit = 0
     let visibleSurplus = 0
     let preparedOutput: Output
-    let outputOptions: OutputOptions
     let expirationTimePicker: ExpirationTimePicker
 
-    let initialExpirationDate: ExpirationTime = getInitialExpirationDate()
+    let initialExpirationDate: TimePeriod = getInitialExpirationDate()
     let activeTab: Tab
 
     $: transactionDetails = get(newTransactionDetails)
@@ -71,17 +69,26 @@
     $: expirationTimePicker?.setNull(giftStorageDeposit)
     $: hideGiftToggle =
         (transactionDetails.type === NewTransactionType.TokenTransfer &&
-            transactionDetails.asset.id === $selectedAccountAssets?.baseCoin?.id) ||
+            transactionDetails.asset.id === $selectedAccountAssets?.[$activeProfile?.network.id]?.baseCoin?.id) ||
         (disableToggleGift && !giftStorageDeposit) ||
         !!layer2Parameters
     $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
     $: isTransferring = $selectedAccount.isTransferring
 
+    let activity: Activity | undefined = undefined
     $: activity = {
         ...transactionDetails,
+        assetId: transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.asset.id : undefined,
         storageDeposit,
         subject: recipient,
         isInternal,
+        id: undefined,
+        outputId: undefined,
+        transactionId: undefined,
+        time: undefined,
+        containsValue: true,
+        isAssetHidden: false,
+        asyncData: undefined,
         giftedStorageDeposit: 0,
         surplus: visibleSurplus,
         type: ActivityType.Basic,
@@ -94,7 +101,7 @@
                 ethereumAddress: getAddressFromSubject(recipient),
                 targetContract: TARGET_CONTRACTS[ACCOUNTS_CONTRACT],
                 contractFunction: CONTRACT_FUNCTIONS[TRANSFER_ALLOWANCE],
-                gasBudget: GAS_BUDGET,
+                gasBudget: String(GAS_BUDGET),
             },
         }),
     }
@@ -104,21 +111,21 @@
         void prepareTransactionOutput()
     }
 
-    function getInitialExpirationDate(): ExpirationTime {
+    function getInitialExpirationDate(): TimePeriod {
         if (expirationDate) {
-            return ExpirationTime.Custom
+            return TimePeriod.Custom
         } else if (storageDeposit && !giftStorageDeposit) {
-            return ExpirationTime.OneDay
+            return TimePeriod.OneDay
         } else {
-            return ExpirationTime.None
+            return TimePeriod.None
         }
     }
 
     async function prepareTransactionOutput(): Promise<void> {
         const transactionDetails = get(newTransactionDetails)
 
-        outputOptions = getOutputOptions(transactionDetails)
-        preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
+        const outputParams = await getOutputParameters(transactionDetails)
+        preparedOutput = await prepareOutput($selectedAccount.index, outputParams, DEFAULT_TRANSACTION_OPTIONS)
 
         setStorageDeposit(preparedOutput, Number(surplus))
 
@@ -164,7 +171,7 @@
 
     async function onConfirmClick(): Promise<void> {
         try {
-            validateSendConfirmation(outputOptions, preparedOutput)
+            validateSendConfirmation(preparedOutput)
 
             if ($isActiveLedgerProfile) {
                 ledgerPreparedOutput.set(preparedOutput)
@@ -196,7 +203,7 @@
     })
 </script>
 
-<send-confirmation-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
+<send-confirmation-popup class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">
     <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left"
         >{localize('popups.transaction.title')}</Text
     >

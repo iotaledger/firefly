@@ -5,19 +5,22 @@
     import { AssetTile, Text } from '@ui'
 
     import { localize } from '@core/i18n'
-    import { IAccountAssets, IAsset } from '@core/wallet'
+    import { AccountAssets, IAsset } from '@core/wallet'
     import { assetFilter } from '@core/wallet/stores'
     import { isVisibleAsset } from '@core/wallet/utils/isVisibleAsset'
 
     import { FilterType } from '@/contexts/wallet'
 
-    export let assets: IAccountAssets
+    export let assets: AccountAssets
     export let onAssetTileClick: (asset: IAsset) => unknown = () => {}
 
     let searchValue = ''
-    let assetList: IAsset[]
-    $: $assetFilter, assets, (assetList = getFilteredAssetList()), scrollToTop()
-    $: isEmptyBecauseOfFilter = (assets.baseCoin || assets.nativeTokens?.length > 0) && assetList.length === 0
+
+    let filteredAssetList: IAsset[]
+    $: $assetFilter, assets, (filteredAssetList = getFilteredAssetList()), scrollToTop()
+
+    let isEmptyBecauseOfFilter: boolean = false
+    $: assets, (isEmptyBecauseOfFilter = getAssetList().length > 0 && filteredAssetList.length === 0)
 
     function scrollToTop(): void {
         const listElement = document.querySelector('.asset-list')?.querySelector('svelte-virtual-list-viewport')
@@ -26,19 +29,25 @@
         }
     }
 
-    $: assets, searchValue, (assetList = getFilteredAssetList())
+    $: assets, searchValue, (filteredAssetList = getFilteredAssetList())
 
     function getFilteredAssetList(): IAsset[] {
-        const list = []
-
-        if (assets?.baseCoin) {
-            list.push(assets.baseCoin)
-        }
-        list.push(...(assets?.nativeTokens ?? []))
+        const list = getAssetList()
         return searchAssets(
             list.filter((_nativeToken) => isVisibleAsset(_nativeToken)),
             searchValue
         )
+    }
+
+    function getAssetList(): IAsset[] {
+        const list = []
+        for (const assetsPernetwork of Object.values(assets)) {
+            if (assetsPernetwork?.baseCoin) {
+                list.push(assetsPernetwork.baseCoin)
+            }
+            list.push(...(assetsPernetwork?.nativeTokens ?? []))
+        }
+        return list
     }
 
     function searchAssets(assets: IAsset[], searchValue: string): IAsset[] {
@@ -62,15 +71,15 @@
 </script>
 
 {#if assets}
-    <asset-list-container class="asset-list h-full flex flex-auto flex-col flex-grow flex-shrink-0">
+    <asset-list-container class="asset-list h-full flex flex-auto flex-col flex-grow shrink-0">
         <asset-list-header class="flex flex-row space-x-4 justify-between items-center sticky mb-4">
             <search-input-container class="block flex-1">
                 <SearchInput bind:value={searchValue} />
             </search-input-container>
             <Filter filterStoreValue={$assetFilter} filterType={FilterType.Token} />
         </asset-list-header>
-        {#if assetList.length > 0}
-            <VirtualList items={assetList} let:item>
+        {#if filteredAssetList.length > 0}
+            <VirtualList items={filteredAssetList} let:item>
                 <AssetTile classes="mb-2" onClick={() => onAssetTileClick(item)} asset={item} />
             </VirtualList>
         {:else}

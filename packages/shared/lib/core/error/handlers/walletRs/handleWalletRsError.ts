@@ -8,11 +8,11 @@ import {
     handleNoOutputsToConsolidateError,
 } from './subhandlers'
 
-export function handleWalletRsError(error: IError): void {
+export function handleWalletRsError(error: IError, resetConfirmationPropsOnDenial = true): void {
     if (error?.type) {
         switch (error.type) {
             case WalletRsError.Client.valueOf():
-                handleClientError(error)
+                handleClientError(error, resetConfirmationPropsOnDenial)
                 break
             case WalletRsError.InsufficientFunds.valueOf():
                 handleInsufficientFundsError(error)

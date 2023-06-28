@@ -54,7 +54,7 @@
     <div class="{classes} flex flex-row items-center bg-{style?.backgroundColor} rounded-lg px-6 py-4">
         <div
             style={'width:40px;height:40px'}
-            class="flex flex-shrink-0 justify-center items-center bg-{style?.iconBackgroundColor} rounded-lg text-{style?.iconColor}"
+            class="flex shrink-0 justify-center items-center bg-{style?.iconBackgroundColor} rounded-lg text-{style?.iconColor}"
         >
             {#if style?.logo}
                 <Logo logo={style?.logo} overrideStage="prod" />
@@ -75,7 +75,7 @@
                 </span>
             {/if}
         </div>
-        {#if toast.actions.length > 0}
+        {#if toast.actions && toast.actions.length > 0}
             <div class="flex flex-col" style="min-width:90px">
                 {#each toast.actions as action, actionIndex}
                     <button

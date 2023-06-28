@@ -1,17 +1,19 @@
 <script lang="ts">
     import { fade, fly } from 'svelte/transition'
-    import { NetworkConfigDrawerRouter } from '@components'
-    import DrawerHeader from './DrawerHeader.svelte'
     import { Router } from '@core/router'
-    import { closeDrawer, DrawerDirection, DrawerId, drawerState } from '@desktop/auxilary/drawer'
+    import { closeDrawer, DrawerDirection, drawerState } from '@desktop/auxiliary/drawer'
     import { DrawerRoute } from '@desktop/routers'
+    import { Icon as IconEnum } from '@auxiliary/icon'
+    import { Icon } from '@ui'
 
     export let onClose: () => unknown = () => {}
 
     const DRAWER_ANIMATION_DURATION_MS = 200
 
+    /* eslint-disable @typescript-eslint/no-unused-vars */
     let drawerRoute: DrawerRoute
     let drawerRouter: Router<DrawerRoute>
+    /* eslint-enable @typescript-eslint/no-unused-vars */
 
     let direction: { x: number; y: number }
     let position: string
@@ -63,14 +65,22 @@
         <panel
             in:fly|local={{ ...direction, duration: DRAWER_ANIMATION_DURATION_MS }}
             out:fly|local={{ ...direction, duration: DRAWER_ANIMATION_DURATION_MS }}
-            class="flex flex-col bg-gray-50 dark:bg-gray-800 {position} {isVertical ? 'vertical' : 'horizontal'}"
+            class="relative flex flex-col bg-gray-50 dark:bg-gray-800 {position} {isVertical
+                ? 'vertical'
+                : 'horizontal'}"
         >
-            <DrawerHeader {drawerRoute} {drawerRouter} onClose={onCloseClick} />
-            <div class="flex-grow">
-                {#if $drawerState.id === DrawerId.NetworkConfig}
-                    <NetworkConfigDrawerRouter bind:drawerRoute bind:drawerRouter />
-                {/if}
+            <div class="flex flex-col h-full">
+                <!-- here would go the different drawers -->
             </div>
+
+            {#if !$drawerState.hideClose}
+                <button on:click={onCloseClick} class="absolute top-7 right-7 focus:text-blue-500">
+                    <Icon
+                        icon={IconEnum.Close}
+                        classes="text-gray-500 dark:text-white hover:text-gray-600 dark:hover:text-gray-100"
+                    />
+                </button>
+            {/if}
         </panel>
     </drawer>
 {/if}

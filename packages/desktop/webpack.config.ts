@@ -39,10 +39,10 @@ const fallback: { [index: string]: string | false | string[] } = {
     path: false,
     fs: false,
     crypto: false,
-    // These are required for the Amplitude SDK
+    // The Amplitude SDK requires http, https and url polyfills
+    http: require.resolve('stream-http'),
     https: require.resolve('https-browserify'),
     url: require.resolve('url/'),
-    http: require.resolve('stream-http'),
 }
 
 const resolve = {
@@ -93,10 +93,6 @@ const rendererRules = [
     {
         test: /\.ts$/,
         loader: 'esbuild-loader',
-    },
-    {
-        test: /\.json$/,
-        loader: 'json-loader',
     },
     {
         test: /\.svelte$/,
@@ -251,10 +247,6 @@ const webpackConfig: Configuration[] = [
         target: 'electron-main',
         entry: {
             'build/main': ['./electron/main.js'],
-            'build/lib/ledger.js': ['./electron/lib/ledger.js'],
-        },
-        externals: {
-            '@ledgerhq/hw-transport-node-hid': 'commonjs @ledgerhq/hw-transport-node-hid',
         },
         resolve,
         output,
@@ -270,9 +262,6 @@ const webpackConfig: Configuration[] = [
         },
     },
     {
-        externals: {
-            argon2: 'commonjs argon2',
-        },
         target: 'electron-renderer',
         entry: {
             'build/preload': ['./electron/preload.js'],

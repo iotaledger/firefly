@@ -29,7 +29,7 @@ describe('File: network.ts', () => {
         [NetworkId.Testnet]: ['https://api.testnet.shimmer.network'],
     }
 
-    const EXPECTED_NODES: Readonly<{ [key in NetworkId]: INode[] }> = {
+    const EXPECTED_NODES: Readonly<{ [key in NetworkId]: (INode | undefined)[] }> = {
         [NetworkId.Iota]: _buildNodes(NetworkId.Iota),
         [NetworkId.Shimmer]: _buildNodes(NetworkId.Shimmer),
         [NetworkId.Testnet]: _buildNodes(NetworkId.Testnet),

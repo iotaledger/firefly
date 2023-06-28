@@ -10,11 +10,11 @@
     $: availableBalance = asset?.balance?.available ?? 0
 </script>
 
-{#if asset?.metadata && asset?.balance}
+{#if asset && asset.metadata && asset.balance}
     <Tile>
         <div class="w-full flex flex-row justify-between items-center">
             <div class="flex flex-row items-center text-left space-x-4">
-                <AssetIcon {asset} />
+                <AssetIcon {asset} chainId={asset.chainId} />
                 <div class="flex flex-col">
                     <Text type={TextType.p} fontWeight={FontWeight.semibold}>
                         {asset.metadata.name

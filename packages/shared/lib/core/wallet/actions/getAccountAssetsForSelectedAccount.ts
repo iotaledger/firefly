@@ -1,22 +1,34 @@
-import { selectedAccount } from '@core/account'
+import { getSelectedAccount } from '@core/account/stores'
 import { MarketCoinPrices } from '@core/market'
-import { NetworkId } from '@core/network'
-import { activeProfile, getCoinType } from '@core/profile'
-import { isValidIrc30 } from '@core/token'
-import { get } from 'svelte/store'
+import { ChainId, NetworkId } from '@core/network'
+import { getActiveNetworkId } from '@core/network/utils/getNetworkId'
+import { getCoinType } from '@core/profile'
+import { isValidIrc30Token } from '@core/token'
 import { IAsset } from '../interfaces'
-import { IAccountAssets } from '../interfaces/account-assets.interface'
+import { AccountAssets, IAccountAssetsPerNetwork } from '../interfaces/account-assets.interface'
 import { getAssetFromPersistedAssets } from '../utils'
 import { sortAssets } from '../utils/sortAssets'
 
-export function getAccountAssetsForSelectedAccount(marketCoinPrices: MarketCoinPrices): IAccountAssets {
-    const account = get(selectedAccount)
-    const networkId = get(activeProfile)?.network?.id
+export function getAccountAssetsForSelectedAccount(marketCoinPrices: MarketCoinPrices): AccountAssets {
+    const accountAssets = {} as AccountAssets
+
+    const networkId = getActiveNetworkId()
+    if (!networkId) {
+        return {}
+    }
+
+    accountAssets[networkId] = getAccountAssetForNetwork(marketCoinPrices, networkId)
+    return accountAssets
+}
+
+function getAccountAssetForNetwork(marketCoinPrices: MarketCoinPrices, networkId: NetworkId): IAccountAssetsPerNetwork {
+    const account = getSelectedAccount()
 
     const shouldCalculateFiatPrice = networkId === NetworkId.Shimmer || networkId === NetworkId.Testnet
     const persistedBaseCoin = getAssetFromPersistedAssets(getCoinType())
     const baseCoin: IAsset = {
         ...persistedBaseCoin,
+        chainId: ChainId.Layer1,
         balance: {
             total: Number(account?.balances?.baseCoin?.total),
             available: Number(account?.balances?.baseCoin?.available),
@@ -28,9 +40,10 @@ export function getAccountAssetsForSelectedAccount(marketCoinPrices: MarketCoinP
     const tokens = account?.balances?.nativeTokens ?? []
     for (const token of tokens) {
         const persistedAsset = getAssetFromPersistedAssets(token.tokenId)
-        if (persistedAsset && isValidIrc30(persistedAsset?.metadata)) {
+        if (persistedAsset && persistedAsset?.metadata && isValidIrc30Token(persistedAsset.metadata)) {
             nativeTokens.push({
                 ...persistedAsset,
+                chainId: ChainId.Layer1,
                 balance: {
                     total: Number(token.total),
                     available: Number(token.available),

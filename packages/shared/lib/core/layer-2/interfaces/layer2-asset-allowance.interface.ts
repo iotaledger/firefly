@@ -1,7 +1,7 @@
 import { NativeTokenAmount } from '@core/token'
 
 export interface ILayer2AssetAllowance {
-    baseTokenAmount: string
+    baseTokens: string
     nativeTokens: NativeTokenAmount[]
     nfts: string[]
 }

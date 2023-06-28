@@ -3,7 +3,7 @@
     import { AccountColors } from '@core/account'
     import { appSettings } from '@core/app/stores'
     import { localize } from '@core/i18n'
-    import { clickOutside, isBright, hex2rgb } from '@core/utils'
+    import { clickOutside, isBright, convertHexToRgba } from '@core/utils'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let title = localize('views.picker.color.title')
@@ -14,37 +14,46 @@
     const accountColors = Object.values(AccountColors).filter((c) => /[#]/.test(c as string))
     const activeAccountColorIndex = accountColors.findIndex((_, i) => accountColors[i] === active)
 
-    let activeElement = activeAccountColorIndex >= 0 ? activeAccountColorIndex : accountColors.length
-    let inputValue: string = activeAccountColorIndex >= 0 ? '#FFFFFF' : active
-    let inputColor = ''
+    let indexOfActiveElement = activeAccountColorIndex >= 0 ? activeAccountColorIndex : accountColors.length
+    let cachedColor = '#000000'
+    let inputValue: string = activeAccountColorIndex >= 0 ? cachedColor : active
+    let iconColor = ''
     let isTooltipVisible = false
     let isCustomHover = false
     let tooltipAnchor: HTMLElement
 
     $: inputValue = `#${/[0-9|a-f|A-F]+/.exec(inputValue) || ''}`
-    $: customActiveFilled = activeElement === accountColors.length && inputValue.length >= 7
+    $: isSelectedCustomElement = indexOfActiveElement === accountColors.length
     $: dark = $appSettings.darkMode
 
-    $: if (activeElement >= accountColors.length) {
-        active = inputValue.length >= 7 ? inputValue : '#FFFFFF'
-    } else {
-        active = accountColors?.[activeElement]?.toString()
+    $: if (indexOfActiveElement === accountColors.length) {
+        active === cachedColor
     }
 
-    $: if (inputValue.length >= 7) {
-        inputColor = isBright(inputValue) ? 'gray-800' : 'white'
+    $: if (indexOfActiveElement === accountColors.length) {
+        active = inputValue.length === 7 || inputValue.length === 4 ? inputValue : cachedColor
     } else {
-        inputColor = 'gray-800'
+        active = accountColors?.[indexOfActiveElement]?.toString()
+    }
+
+    $: if (inputValue.length) {
+        iconColor = isBright(cachedColor) ? 'gray-800' : 'white'
+    } else {
+        iconColor = 'gray-800'
+    }
+
+    $: if (inputValue.length === 4 || inputValue.length === 7) {
+        cachedColor = inputValue
     }
 
     function onKeyPress(event: KeyboardEvent, index: number): void {
         if (event.key === 'Enter') {
-            activeElement = index
+            indexOfActiveElement = index
         }
     }
 
     function onColorClick(index: number): void {
-        activeElement = index
+        indexOfActiveElement = index
     }
 
     function toggleCustomHover(): void {
@@ -56,17 +65,18 @@
         if (event.type === 'click' || isEnterKeyPressed) {
             isTooltipVisible = !isTooltipVisible
         }
+        inputValue = cachedColor
     }
 
     function activeCustomColor(event: KeyboardEvent | MouseEvent): void {
         const isEnterKeyPressed = event.type === 'keypress' && (event as KeyboardEvent).key === 'Enter'
         if (event.type === 'click' || isEnterKeyPressed) {
-            activeElement = accountColors.length
+            indexOfActiveElement = accountColors.length
         }
     }
 
     function getAccountColorsNames(): string[] {
-        return Object.keys(AccountColors).reduce(
+        return Object.keys(AccountColors).reduce<string[]>(
             (acc, val) => (/[#]/.test(val) ? acc : [...acc, val.toLowerCase()]),
             []
         )
@@ -74,8 +84,8 @@
 </script>
 
 <color-picker
-    style:--account-color={inputValue ? hex2rgb(active) : ''}
-    style:--custom-color={hex2rgb(inputValue)}
+    style:--custom-color={convertHexToRgba(cachedColor)}
+    style:--custom-color-ring={convertHexToRgba(cachedColor, 30)}
     class="block {classes}"
 >
     {#if title}
@@ -85,22 +95,22 @@
     {/if}
     <ul class="flex flex-row flex-wrap gap-3.5">
         {#each getAccountColorsNames() as color, i}
-            <li
+            <button
                 on:click={() => onColorClick(i)}
                 on:keypress={(event) => onKeyPress(event, i)}
                 tabindex="0"
                 aria-label={color}
                 class="w-12 h-12 rounded-lg ring-opacity-30 hover:ring-opacity-40 cursor-pointer flex justify-center items-center
                 bg-{color}-500 hover:bg-{color}-600 focus:bg-{color}-600 ring-{color}-500"
-                class:ring-4={activeElement === i}
+                class:ring-4={indexOfActiveElement === i}
             >
-                {#if activeElement === i}
+                {#if indexOfActiveElement === i}
                     <Icon icon={IconEnum.Checkmark} classes="text-white" />
                 {/if}
-            </li>
+            </button>
         {/each}
         {#if isCustomColorEnabled}
-            <li
+            <button
                 bind:this={tooltipAnchor}
                 on:click={toggleTooltip}
                 on:click={activeCustomColor}
@@ -111,11 +121,11 @@
                 tabindex="0"
                 class="w-12 h-12 rounded-lg ring-opacity-30 hover:ring-opacity-40 cursor-pointer flex justify-center items-center
                 custom-color hover:bg-gray-50 focus:bg-white ring-white"
-                class:active={customActiveFilled}
-                class:ring-4={customActiveFilled}
+                class:active={isSelectedCustomElement}
+                class:ring-4={isSelectedCustomElement}
             >
-                <Icon icon={IconEnum.Edit} classes={isCustomHover ? 'text-gray-800' : `text-${inputColor}`} />
-            </li>
+                <Icon icon={IconEnum.Edit} classes={`text-${iconColor}`} />
+            </button>
         {/if}
     </ul>
     {#if isTooltipVisible}
@@ -129,8 +139,6 @@
                     placeholder="#"
                     pattern="[A-F0-9]{10}"
                     maxlength="7"
-                    class:ring-4={customActiveFilled}
-                    class:active={customActiveFilled}
                     class:dark
                 />
             </Tooltip>
@@ -150,15 +158,8 @@
         }
     }
 
-    .active {
-        background-color: rgb(var(--account-color));
-        --tw-ring-color: rgba(var(--account-color), var(--tw-ring-opacity));
-        --tw-ring-opacity: 0.3;
-    }
-
     .custom-color {
-        background-color: rgb(var(--custom-color));
-        --tw-ring-color: rgba(var(--custom-color), var(--tw-ring-opacity));
-        --tw-ring-opacity: 0.3;
+        background-color: var(--custom-color);
+        --tw-ring-color: var(--custom-color-ring);
     }
 </style>

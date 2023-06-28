@@ -1,4 +1,5 @@
+// The WASP Node expects the following NativeTokenAmount object.
 export type NativeTokenAmount = {
-    tokenId: string
+    ID: string[]
     amount: string
 }

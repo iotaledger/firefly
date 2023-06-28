@@ -9,7 +9,7 @@ import {
 import { stopPollingLedgerNanoStatus } from '@core/ledger/actions'
 import { isPollingLedgerDeviceStatus } from '@core/ledger/stores'
 import { clearMarketPricesPoll } from '@core/market/actions'
-import { clearChainStatusesPoll, clearNetworkPoll } from '@core/network/actions'
+import { clearNetworkPoll } from '@core/network/actions'
 import { stopDownloadingNftMediaFromQueue } from '@core/nfts/actions'
 import { lockStronghold, resetActiveProfile } from '@core/profile/actions'
 import { activeAccounts, activeProfile, isSoftwareProfile, isDestroyingManager } from '@core/profile/stores'
@@ -19,6 +19,7 @@ import { IProfileManager } from '@core/profile-manager/interfaces'
 import { profileManager } from '@core/profile-manager/stores'
 import { routerManager } from '@core/router/stores'
 import { clearFilters } from '@core/utils/clearFilters'
+import { Platform } from '@core/app'
 
 /**
  * Logout from active profile
@@ -27,11 +28,11 @@ export function logout(clearActiveProfile = true, _lockStronghold = true): void 
     if (get(isSoftwareProfile)) {
         _lockStronghold && lockStronghold()
     } else if (isLedgerProfile(get(activeProfile).type)) {
+        Platform.killLedgerProcess()
         get(isPollingLedgerDeviceStatus) && stopPollingLedgerNanoStatus()
     }
 
     clearNetworkPoll()
-    clearChainStatusesPoll()
     clearMarketPricesPoll()
 
     const _activeProfile = get(activeProfile)

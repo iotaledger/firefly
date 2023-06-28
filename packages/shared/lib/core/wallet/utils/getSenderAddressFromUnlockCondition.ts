@@ -8,7 +8,7 @@ import { getBech32AddressFromAddressTypes } from './getBech32AddressFromAddressT
 
 export function getSenderAddressFromUnlockCondition(
     unlockCondition: IStorageDepositReturnUnlockCondition | IExpirationUnlockCondition
-): string {
+): string | undefined {
     if (
         (unlockCondition?.type === UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN ||
             unlockCondition?.type === UNLOCK_CONDITION_EXPIRATION) &&

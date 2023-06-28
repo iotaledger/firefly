@@ -8,7 +8,7 @@
     import { localize } from '@core/i18n'
     import { getDestinationNetworkFromAddress } from '@core/layer-2'
     import { isStrongholdUnlocked } from '@core/profile-manager'
-    import { ExpirationTime } from '@core/utils'
+    import { TimePeriod } from '@core/utils'
     import {
         ActivityDirection,
         ActivityType,
@@ -21,10 +21,11 @@
 
     import { DrawerId, openDrawer } from '@/auxiliary/drawer'
     import { sendRouter } from '@/routers'
+    import { activeProfile } from '@core/profile'
 
     export let sendTransaction: () => Promise<void>
     export let storageDeposit: number
-    export let initialExpirationDate: ExpirationTime
+    export let initialExpirationDate: TimePeriod
     export let expirationDate: Date
     export let visibleSurplus: number = 0
 
@@ -44,7 +45,7 @@
     $: isTransferring = $selectedAccount.isTransferring
     $: hideGiftToggle =
         (transactionDetails.type === NewTransactionType.TokenTransfer &&
-            transactionDetails.assetId === $selectedAccountAssets?.baseCoin?.id) ||
+            transactionDetails.asset.id === $selectedAccountAssets[$activeProfile?.network?.id]?.baseCoin?.id) ||
         (disableToggleGift && !giftStorageDeposit) ||
         layer2Parameters !== undefined
 
@@ -102,9 +103,9 @@
 <div class="w-full overflow-y-auto flex flex-col flex-auto h-1 justify-between">
     <div class="flex flex-row flex-1 justify-center relative">
         <div class="w-full flex-col space-y-6 pt-10">
-            <BasicActivityDetails {activity} networkAddress={layer2Parameters?.networkAddress} />
+            <BasicActivityDetails {activity} />
             <div class="flex flex-col space-y-2">
-                <ActivityInformation {activity} networkAddress={layer2Parameters?.networkAddress} />
+                <ActivityInformation {activity} />
                 {#if !hideGiftToggle}
                     <KeyValueBox keyText={localize('general.giftStorageDeposit')}>
                         <Toggle

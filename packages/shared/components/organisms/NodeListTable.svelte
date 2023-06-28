@@ -5,7 +5,7 @@
     import { getOfficialNodes, INode, isOfficialNetwork } from '@core/network'
     import { activeProfile } from '@core/profile'
 
-    import { openPopup, PopupId } from '@auxiliary/popup'
+    import { openPopup, PopupId } from '../../../desktop/lib/auxiliary/popup'
 
     export let nodesContainer: HTMLElement = undefined
 
@@ -40,7 +40,7 @@
                 on:click={() => onViewNodeInfoClick(node)}
             >
                 <div class="flex flex-row items-center space-x-4 overflow-hidden">
-                    <Text classes={'self-start overflow-hidden whitespace-nowrap overflow-ellipsis'}>
+                    <Text classes={'self-start overflow-hidden whitespace-nowrap text-ellipsis'}>
                         {node.url}
                     </Text>
                     {#if isPrimary(node)}

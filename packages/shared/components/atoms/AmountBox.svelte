@@ -6,11 +6,11 @@
 
     export let asset: IPersistedAsset
     export let amount: number
-    export let unit: string = undefined
+    export let unit: string | undefined = undefined
 
     const MAX_LENGTH_PER_LINE = 15
 
-    const formattedAmount = formatTokenAmountDefault(amount, asset?.metadata, unit)
+    const formattedAmount = asset?.metadata ? formatTokenAmountDefault(amount, asset.metadata, unit) : ''
     let displayedAmount: string[] = [formattedAmount]
     let tokenAmountElement: HTMLElement = null
     let isTooltipVisible = false
@@ -97,22 +97,24 @@
     }
 </script>
 
-<amount class="flex flex-col items-center">
-    <token-amount
-        bind:this={tokenAmountElement}
-        class="flex flex-row space-x-3"
-        on:mouseenter={showTooltip}
-        on:mouseleave={hideTooltip}
-    >
-        <AssetIcon {asset} />
-        <Text type={TextType.h1} fontWeight={FontWeight.semibold} classes="whitespace-pre">
-            {displayedAmount.join('\n')}
-            {#if unit}
-                <Text type={TextType.h4} classes="inline" fontWeight={FontWeight.medium}>{unit}</Text>
+{#if asset}
+    <amount class="flex flex-col items-center">
+        <token-amount
+            bind:this={tokenAmountElement}
+            class="flex flex-row space-x-3"
+            on:mouseenter={showTooltip}
+            on:mouseleave={hideTooltip}
+        >
+            <AssetIcon {asset} chainId={asset.chainId} />
+            <Text type={TextType.h1} fontWeight={FontWeight.semibold} classes="whitespace-pre">
+                {displayedAmount.join('\n')}
+                {#if unit}
+                    <Text type={TextType.h4} classes="inline" fontWeight={FontWeight.medium}>{unit}</Text>
+                {/if}
+            </Text>
+            {#if isTooltipVisible}
+                <Tooltip anchor={tokenAmountElement}><Text classes="break-all">{amount} {unit}</Text></Tooltip>
             {/if}
-        </Text>
-        {#if isTooltipVisible}
-            <Tooltip anchor={tokenAmountElement}><Text classes="break-all">{amount} {unit}</Text></Tooltip>
-        {/if}
-    </token-amount>
-</amount>
+        </token-amount>
+    </amount>
+{/if}

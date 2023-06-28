@@ -93,7 +93,7 @@
             <DateInputButton value={filterUnit.subunit.value} onConfirm={updateSubunitValue} />
         {:else if filterUnit.subunit.type === 'unit'}
             <NumberInput bind:value={filterUnit.subunit.amount} placeholder="" />
-            <date-filter-subunit-options class="flex flex-col overflow-y-auto flex-shrink-0">
+            <date-filter-subunit-options class="flex flex-col overflow-y-auto shrink-0">
                 {#each unitChoices as choice}
                     <Radio value={choice.value} bind:group={filterUnit.subunit.unit} label={choice.label} />
                 {/each}

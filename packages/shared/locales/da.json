@@ -44,8 +44,8 @@
                     }
                 },
                 "setupCustomNetwork": {
-                    "title": "Connect to a custom network or node",
-                    "body": "Fill the form with the node information and connect to a custom network or node."
+                    "title": "Opret forbindelse til et tilpasset netværk eller node",
+                    "body": "Udfyld formularen med node-oplysningerne og opret forbindelse til et tilpasset netværk eller node."
                 }
             },
             "profileSetup": {
@@ -420,8 +420,8 @@
                 "description": "Rapporter en fejl til udviklerne. Tjek igennem for at sikre, at den ikke allerede er blevet rapporteret"
             },
             "developerToggle": {
-                "title": "Developer Mode",
-                "description": "Switch developer mode on to enable more features in experimental state"
+                "title": "Udviklertilstand",
+                "description": "Slå Udviklertilstand til for at aktivere flere funktioner i eksperimentel tilstand"
             }
         },
         "login": {
@@ -503,13 +503,27 @@
                         }
                     },
                     "chainDepositAddress": {
-                        "title": "Kædeindbetalingsadresse"
+                        "title": "Kædeindbetalingsadresse",
+                        "networkTitle": "Netværksindbetalingsadresse"
                     },
                     "chainInformation": {
                         "title": "Kædeinformation"
                     },
+                    "confirmLedgerEvmAddress": {
+                        "title": "Bekræft EVM-adresse",
+                        "header": "Vi har genereret din EVM-adresse"
+                    },
                     "connectedChains": {
                         "title": "Forbundne kæder"
+                    },
+                    "connectLedgerDevice": {
+                        "title": "Tilslut Ledger-enheden",
+                        "header": "Åbn Ethereum-appen",
+                        "body": "For at Firefly kan finde Ledger-enheden, så sørg for, at den officielle Ledger Live-applikation er lukket, før disse trin følges.",
+                        "requirements": {
+                            "connect": "Tilslut og oplås Ledger-enheden",
+                            "openApp": "Åbn Ethereum-appen på Ledger-enheden"
+                        }
                     },
                     "editChain": {
                         "title": "Redigér kæde"
@@ -589,7 +603,8 @@
                 "attributes": "Attributter",
                 "menu": {
                     "download": "Download",
-                    "setAvatar": "Angiv NFT som profilavatar",
+                    "setPfp": "Angiv NFT-profilbillede",
+                    "unsetPfp": "Fjern NFT-profilbillede",
                     "view": "Vis medier i browser",
                     "burn": "Brænd NFT"
                 }
@@ -890,6 +905,10 @@
         "transaction": {
             "title": "Send asset",
             "body": "Du er ved at sende {amount} til",
+            "selectToken": "Vælg et token",
+            "selectAmount": "Send {tokenName}",
+            "selectRecipient": "Send {assetName} til",
+            "transactionSummary": "Transaktion til {recipient}",
             "surplusIncluded": "Denne transaktion indeholder et overskudsbeløb. Dobbelttjek, at dette er dét beløb, der ønskes sendt.",
             "sendingFromStakedAccount": "Der sendes en overførsel fra en wallet, der pt. stakes. Dette kan fjerne staking af tokener. Man er velkommen til at sende overførslen, men det kan være nødvendigt efterfølgende at gen-stake sine resterende tokener.",
             "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
@@ -1031,7 +1050,11 @@
             "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
         },
         "transactionDetails": {
-            "title": "Transaction details"
+            "title": "Transaction details",
+            "giftedStorageDeposit": {
+                "tooltipTitle": "Gavelagerdeponering",
+                "tooltipDescription": "Beløb holdt af modtageren"
+            }
         },
         "sendForm": {
             "title": "Send funds"
@@ -1080,6 +1103,15 @@
                 "alias": "Alias",
                 "assetId": "Asset Id"
             }
+        },
+        "importErc20Token": {
+            "title": "Importér ERC20-token",
+            "property": {
+                "chainId": "Kæde-ID",
+                "tokenAddress": "Tokenadresse"
+            },
+            "success": "Importeret {tokenSymbol}-token",
+            "error": "Kan ikke importere ERC20-token"
         },
         "noAlias": {
             "title": "Unable to mint",
@@ -1270,6 +1302,7 @@
         "hide": "Skjul",
         "hideOthers": "Skjul øvrige",
         "showAll": "Vis alle",
+        "useMax": "Brug maks.",
         "quit": "Afslut",
         "edit": "Rediger",
         "undo": "Fortryd",
@@ -1619,7 +1652,11 @@
         "jwt": "JSON web token",
         "internalTransaction": "Intern transaktion",
         "coinType": "Mønttyper",
-        "custom": "Tilpasset"
+        "custom": "Tilpasset",
+        "evmAddress": "EVM-adresse",
+        "chain": "Kæde",
+        "importErc20Token": "Importér ERC20-token",
+        "importErc20TokenDescription": "Importér et ERC20-token fra en EVM-kæde"
     },
     "filters": {
         "title": "Filtre",
@@ -1720,6 +1757,9 @@
             "label": "Sortering",
             "name": "Navn",
             "phase": "Fase"
+        },
+        "network": {
+            "label": "Netværk"
         }
     },
     "dates": {
@@ -1894,7 +1934,8 @@
             "invalidAssetId": "Aktivet er ugyldigt.",
             "unknownAsset": "Aktivet kendes ikke af denne konto.",
             "insufficientFunds": "Denne wallet har ikke tilstrækkelige midler.",
-            "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
+            "insufficientFundsStorageDeposit": "Utilstrækkelige midler til at dække lagerindbetalingen.",
+            "ongoingTransaction": "Der er igangværende transaktioner, afvent deres bekræftelser.",
             "cannotClaimTwice": "Output er allerede indløst",
             "noToAccount": "Du har ikke valgt en wallet at sende midlerne til.",
             "sendingDust": "Du kan ikke sende mindre end 1 Mi.",
@@ -1947,7 +1988,7 @@
             "invalid": "Sikkerhedskopifilen blev ikke genkendt.",
             "destination": "Backup-destinationen var ikke gyldig.",
             "mnemonic": "Gendannelsesordene var ikke gyldige.",
-            "migrationRequired": "Stronghold migration is required.",
+            "migrationRequired": "Stronghold-migrering nødvendig.",
             "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "Seedet må kun indeholder tegn A-Z eller 9",
             "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
@@ -2049,6 +2090,10 @@
                 "short": "Forslag kan ikke tilføjes",
                 "long": "Forslaget {proposalId} ikke fundet på den angivne node"
             }
+        },
+        "erc20Token": {
+            "invalidAddressFormat": "Formatet skal være hexadecimalt",
+            "invalidAddressLength": "Ugyldig længde"
         }
     },
     "warning": {

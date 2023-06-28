@@ -1,14 +1,14 @@
-import { get } from 'svelte/store'
 import type { ParticipationEventWithNodes, VotingEventPayload } from '@iota/wallet/out/types'
 import { OFFICIAL_NODE_URLS } from '@core/network/constants'
-import { activeProfile } from '@core/profile/stores'
 import { IProposalMetadata } from '../interfaces'
 import { ProposalStatus, ProposalType } from '../enums'
+import { getActiveNetworkId } from '@core/network/utils/getNetworkId'
 
 export function createProposalFromEvent(event: ParticipationEventWithNodes): IProposalMetadata {
     const { data, id } = event
 
-    const officialNodeUrls = OFFICIAL_NODE_URLS[get(activeProfile)?.network?.id] ?? []
+    const networkId = getActiveNetworkId()
+    const officialNodeUrls = networkId ? OFFICIAL_NODE_URLS[networkId] ?? [] : []
     const nodeUrl = event.nodes[0].url
     const isOfficialNetwork = officialNodeUrls.includes(nodeUrl)
 

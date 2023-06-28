@@ -2,7 +2,7 @@
     import { requestTokensFromFaucet } from '@contexts/developer'
     import { localize } from '@core/i18n'
     import { nodeInfo } from '@core/network'
-    import { closePopup } from '@auxiliary/popup'
+    import { closePopup } from '@desktop/auxiliary/popup'
     import { Button, Error, Text, FontWeight, TextType } from 'shared/components'
     import { handleError } from '@core/error/handlers/handleError'
 
@@ -29,7 +29,7 @@
 </script>
 
 {#if $nodeInfo}
-    <faucet-request-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
+    <faucet-request-popup class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">
         <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
             {localize('popups.faucetRequest.title')}
         </Text>

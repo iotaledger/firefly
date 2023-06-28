@@ -76,82 +76,84 @@
         })
     }
     function onSendClick(): void {
-        updateNewTransactionDetails({ type: NewTransactionType.TokenTransfer, assetId: asset.id })
+        updateNewTransactionDetails({ type: NewTransactionType.TokenTransfer, asset })
         _closeDrawer()
         openDrawer(DrawerId.Send, { fullScreen: true })
     }
 </script>
 
-<token-information class="flex flex-col justify-between h-full space-y-10">
-    <token-content class="flex flex-col space-y-8">
-        <div class="space-y-3 flex flex-col items-center justify-center">
-            <AssetIcon {asset} large showVerifiedBadgeOnly />
-            <Text type={TextType.h2} fontWeight={FontWeight.bold}>
-                {getUnitFromTokenMetadata(asset?.metadata)}
-            </Text>
-        </div>
-
-        <div class="space-y-4 flex flex-col items-center justify-center">
-            {#if !asset?.verification?.verified}
-                <TextHint warning text={localize('popups.tokenInformation.verificationWarning')} />
-            {/if}
-            <div class="w-full flex flex-col space-y-2">
-                <KeyValueBox
-                    keyText={localize('popups.tokenInformation.tokenMetadata.standard')}
-                    valueText={asset?.standard}
-                />
-                <KeyValueBox
-                    keyText={localize('popups.tokenInformation.tokenMetadata.name')}
-                    valueText={asset?.metadata?.name}
-                />
-                <KeyValueBox
-                    keyText={localize('popups.tokenInformation.tokenMetadata.tokenId')}
-                    valueText={asset?.id}
-                    isCopyable={asset?.standard === TokenStandard.Irc30}
-                    copyValue={asset?.id}
-                />
-                {#if asset?.metadata?.url}
-                    <KeyValueBox
-                        keyText={localize('popups.tokenInformation.tokenMetadata.url')}
-                        valueText={asset?.metadata?.url}
-                        isCopyable
-                    />
-                {/if}
+{#if asset}
+    <token-information class="flex flex-col justify-between h-full space-y-10">
+        <token-content class="flex flex-col space-y-8">
+            <div class="space-y-3 flex flex-col items-center justify-center">
+                <AssetIcon {asset} chainId={asset.chainId} large />
+                <Text type={TextType.h2} fontWeight={FontWeight.bold}>
+                    {getUnitFromTokenMetadata(asset.metadata)}
+                </Text>
             </div>
-        </div>
-    </token-content>
-    {#if features.dashboard.tokens.actions.enabled}
-        <token-actions class="space-y-4">
-            {#if asset?.verification?.status === NotVerifiedStatus.New}
-                <Button classes="w-full" onClick={onVerifyClick}>
-                    {localize('popups.tokenInformation.buttons.verifyToken')}
-                </Button>
-                <Button outline classes="w-full" onClick={onSkipClick}>
-                    {localize('actions.skip')}
-                </Button>
-            {:else}
-                {#if asset?.verification?.status === VerifiedStatus.SelfVerified}
-                    <Button outline classes="w-full" onClick={onUnverifyClick}>
-                        {localize('actions.unverifyToken')}
+
+            <div class="space-y-4 flex flex-col items-center justify-center">
+                {#if !asset.verification?.verified}
+                    <TextHint warning text={localize('popups.tokenInformation.verificationWarning')} />
+                {/if}
+                <div class="w-full flex flex-col space-y-2">
+                    <KeyValueBox
+                        keyText={localize('popups.tokenInformation.tokenMetadata.standard')}
+                        valueText={asset.standard}
+                    />
+                    <KeyValueBox
+                        keyText={localize('popups.tokenInformation.tokenMetadata.name')}
+                        valueText={asset.metadata?.name}
+                    />
+                    <KeyValueBox
+                        keyText={localize('popups.tokenInformation.tokenMetadata.tokenId')}
+                        valueText={asset.id}
+                        isCopyable={asset.standard === TokenStandard.Irc30}
+                        copyValue={asset.id}
+                    />
+                    {#if asset.metadata?.standard === TokenStandard.Irc30 && asset.metadata.url}
+                        <KeyValueBox
+                            keyText={localize('popups.tokenInformation.tokenMetadata.url')}
+                            valueText={asset.metadata.url}
+                            isCopyable
+                        />
+                    {/if}
+                </div>
+            </div>
+        </token-content>
+        {#if features.dashboard.tokens.actions.enabled}
+            <token-actions class="space-y-4">
+                {#if asset.verification?.status === NotVerifiedStatus.New}
+                    <Button classes="w-full" onClick={onVerifyClick}>
+                        {localize('popups.tokenInformation.buttons.verifyToken')}
+                    </Button>
+                    <Button outline classes="w-full" onClick={onSkipClick}>
+                        {localize('actions.skip')}
                     </Button>
                 {:else}
-                    <Button outline classes="w-full" onClick={onVerifyClick}>
-                        {localize('actions.verifyToken')}
+                    {#if asset.verification?.status === VerifiedStatus.SelfVerified}
+                        <Button outline classes="w-full" onClick={onUnverifyClick}>
+                            {localize('actions.unverifyToken')}
+                        </Button>
+                    {:else}
+                        <Button outline classes="w-full" onClick={onVerifyClick}>
+                            {localize('actions.verifyToken')}
+                        </Button>
+                    {/if}
+                    {#if asset.hidden}
+                        <Button outline classes="w-full" onClick={onUnhideClick}>
+                            {localize('actions.unhideToken')}
+                        </Button>
+                    {:else}
+                        <Button outline classes="w-full" onClick={onHideClick}>
+                            {localize('actions.hideToken')}
+                        </Button>
+                    {/if}
+                    <Button classes="w-full" onClick={onSendClick}>
+                        {localize('actions.send')}
                     </Button>
                 {/if}
-                {#if asset?.hidden}
-                    <Button outline classes="w-full" onClick={onUnhideClick}>
-                        {localize('actions.unhideToken')}
-                    </Button>
-                {:else}
-                    <Button outline classes="w-full" onClick={onHideClick}>
-                        {localize('actions.hideToken')}
-                    </Button>
-                {/if}
-                <Button classes="w-full" onClick={onSendClick}>
-                    {localize('actions.send')}
-                </Button>
-            {/if}
-        </token-actions>
-    {/if}
-</token-information>
+            </token-actions>
+        {/if}
+    </token-information>
+{/if}

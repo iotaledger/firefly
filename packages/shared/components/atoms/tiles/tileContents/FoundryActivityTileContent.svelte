@@ -12,17 +12,20 @@
 
     export let activity: FoundryActivity
 
-    let asset: IPersistedAsset
+    let asset: IPersistedAsset | undefined
     $: $selectedAccountAssets, (asset = getAssetFromPersistedAssets(activity.assetId))
     $: action = localize(getActivityTileTitle(activity))
     $: amount = getFormattedAmountFromActivity(activity)
     $: formattedAsset = {
         text: amount,
         color: 'blue-700',
-        classes: 'flex-shrink-0',
+        classes: 'shrink-0',
     }
 </script>
 
-<ActivityTileContent {action} subject={localize('general.internalTransaction')} {formattedAsset}>
-    <AssetIcon slot="icon" {asset} showVerifiedBadgeOnly />
-</ActivityTileContent>
+{#if asset}
+    <ActivityTileContent {action} subject={localize('general.internalTransaction')} {formattedAsset}>
+        <!-- Once the activity contains the chainId, add that here -->
+        <AssetIcon slot="icon" {asset} chainId={undefined} />
+    </ActivityTileContent>
+{/if}

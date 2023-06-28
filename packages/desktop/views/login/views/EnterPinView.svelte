@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { PopupId, openPopup, popupState } from '@auxiliary/popup'
+    import { PopupId, openPopup, popupState } from '@desktop/auxiliary/popup'
     import {
         Platform,
         isLatestStrongholdVersion,
@@ -122,12 +122,7 @@
     <div class="flex w-full h-full justify-center items-center">
         <div class="w-96 flex flex-col flex-wrap items-center mb-20">
             <div class="flex flex-col gap-8 w-full items-center">
-                <Profile
-                    profile={$activeProfile}
-                    isLedgerProfile={$activeProfile?.type === ProfileType.Ledger}
-                    {updateRequired}
-                    bgColor="blue"
-                />
+                <Profile profile={$activeProfile} {updateRequired} />
                 {#if updateRequired}
                     <TextHint warning text={localize('views.login.hintStronghold')} />
                 {/if}

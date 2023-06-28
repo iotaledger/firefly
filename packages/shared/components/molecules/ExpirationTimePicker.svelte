@@ -2,15 +2,15 @@
     import { Text, ExpirationTimePickerMenu, Icon } from 'shared/components'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { formatDate, localize } from '@core/i18n'
-    import { ExpirationTime } from '@core/utils'
+    import { TimePeriod } from '@core/utils'
 
     export let value: Date = undefined
-    export let initialSelected: ExpirationTime = ExpirationTime.None
+    export let initialSelected: TimePeriod = TimePeriod.None
     export let disabled: boolean = false
 
     let menu: ExpirationTimePickerMenu
     let anchor: HTMLElement = undefined
-    let selected: ExpirationTime
+    let selected: TimePeriod
     let storedValue: Date
 
     $: selected = initialSelected

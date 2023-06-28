@@ -1,12 +1,12 @@
 <script lang="ts">
     import { formatDate, localize } from '@core/i18n'
-    import { ExpirationTime } from '@core/utils'
+    import { TimePeriod } from '@core/utils'
     import { HR, Modal, MenuItem, ExpirationDateTimePicker } from 'shared/components'
     import { fade } from 'svelte/transition'
 
-    export let value: Date
-    export let selected: ExpirationTime = ExpirationTime.None
-    export let anchor: HTMLElement = undefined
+    export let value: Date | null
+    export let selected: TimePeriod = TimePeriod.None
+    export let anchor: HTMLElement | undefined = undefined
 
     export function tryOpen(): void {
         if (!canShowDateTimePicker) {
@@ -18,8 +18,8 @@
 
     const DATE_NOW = Date.now()
 
-    let previouslySelected: ExpirationTime = selected
-    let customDate: Date
+    let previouslySelected: TimePeriod = selected
+    let customDate: Date | null
     let canShowDateTimePicker = false
     let modal: Modal
 
@@ -34,29 +34,29 @@
 
     $: {
         switch (selected) {
-            case ExpirationTime.OneHour:
+            case TimePeriod.OneHour:
                 value = dateIn1Hour
                 break
-            case ExpirationTime.OneDay:
+            case TimePeriod.OneDay:
                 value = dateIn1Day
                 break
-            case ExpirationTime.OneWeek:
+            case TimePeriod.OneWeek:
                 value = dateIn1Week
                 break
-            case ExpirationTime.None:
+            case TimePeriod.None:
                 value = null
                 break
-            case ExpirationTime.Custom:
+            case TimePeriod.Custom:
             default:
                 break
         }
     }
 
-    function onChooseExpirationTimeClick(_selected: ExpirationTime): void {
-        if (_selected === ExpirationTime.Custom) {
+    function onChooseExpirationTimeClick(_selected: TimePeriod): void {
+        if (_selected === TimePeriod.Custom) {
             canShowDateTimePicker = !canShowDateTimePicker
         } else {
-            customDate = undefined
+            customDate = null
         }
         modal?.close()
         previouslySelected = selected
@@ -81,8 +81,8 @@
         <MenuItem
             icon="calendar"
             title={localize('menus.expirationTimePicker.none')}
-            onClick={() => onChooseExpirationTimeClick(ExpirationTime.None)}
-            selected={selected === ExpirationTime.None}
+            onClick={() => onChooseExpirationTimeClick(TimePeriod.None)}
+            selected={selected === TimePeriod.None}
         />
         <HR />
         <MenuItem
@@ -92,8 +92,8 @@
                 dateStyle: 'medium',
                 timeStyle: 'medium',
             })}
-            onClick={() => onChooseExpirationTimeClick(ExpirationTime.OneHour)}
-            selected={selected === ExpirationTime.OneHour}
+            onClick={() => onChooseExpirationTimeClick(TimePeriod.OneHour)}
+            selected={selected === TimePeriod.OneHour}
         />
         <MenuItem
             icon="calendar"
@@ -102,8 +102,8 @@
                 dateStyle: 'medium',
                 timeStyle: 'medium',
             })}
-            onClick={() => onChooseExpirationTimeClick(ExpirationTime.OneDay)}
-            selected={selected === ExpirationTime.OneDay}
+            onClick={() => onChooseExpirationTimeClick(TimePeriod.OneDay)}
+            selected={selected === TimePeriod.OneDay}
         />
         <MenuItem
             icon="calendar"
@@ -112,8 +112,8 @@
                 dateStyle: 'medium',
                 timeStyle: 'medium',
             })}
-            onClick={() => onChooseExpirationTimeClick(ExpirationTime.OneWeek)}
-            selected={selected === ExpirationTime.OneWeek}
+            onClick={() => onChooseExpirationTimeClick(TimePeriod.OneWeek)}
+            selected={selected === TimePeriod.OneWeek}
         />
         <HR />
         <MenuItem
@@ -122,8 +122,8 @@
             subtitle={customDate
                 ? formatDate(customDate, { dateStyle: 'medium', timeStyle: 'medium' })
                 : localize('menus.expirationTimePicker.customDate.subtitle')}
-            onClick={() => onChooseExpirationTimeClick(ExpirationTime.Custom)}
-            selected={selected === ExpirationTime.Custom}
+            onClick={() => onChooseExpirationTimeClick(TimePeriod.Custom)}
+            selected={selected === TimePeriod.Custom}
         />
     </expiration-time-picker-modal>
 </Modal>

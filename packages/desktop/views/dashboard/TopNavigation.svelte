@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Icon, Text } from '@ui'
-    import { AccountSwitcher, NetworkDrawerButton } from '@components'
+    import { AccountSwitcher } from '@components'
     import { PlatformOption } from '@core/app'
     import { platform } from '@core/app/stores'
     import { localize } from '@core/i18n'
@@ -18,14 +18,12 @@
         settingsRouter,
     } from '@core/router'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { popupState } from '@auxiliary/popup'
-    import features from '@features/features'
-    import { closeDrawer } from '@desktop/auxilary/drawer'
-
-    const isWindows = $platform === PlatformOption.Windows
+    import { popupState } from '@desktop/auxiliary/popup'
+    import { closeDrawer } from '@desktop/auxiliary/drawer'
 
     let isBackButtonVisible = false
 
+    $: isWindows = $platform === PlatformOption.Windows
     $: {
         if ($settingsRoute || $collectiblesRoute || $governanceRoute) {
             isBackButtonVisible = isCorrectRoute()
@@ -76,16 +74,12 @@
 
     <AccountSwitcher />
 
-    <div class="right-button flex justify-end">
-        {#if features?.network?.config?.enabled}
-            <NetworkDrawerButton />
-        {/if}
-    </div>
+    <div class="right-button flex justify-end" />
 </top-navigation>
 
 <style type="text/scss">
     top-navigation {
-        @apply fixed flex flex-row justify-between items-center z-10 top-0 left-18 h-12 px-8 py-1;
+        @apply absolute flex flex-row justify-between items-center z-10 -top-12 left-18 h-12 px-8 py-1;
         width: calc(100% - 4.5rem);
 
         &.disabled {
@@ -102,17 +96,16 @@
             -webkit-app-region: none;
         }
 
-        .left-button,
         .right-button {
+            width: 10rem;
+        }
+
+        .left-button {
             width: 10rem;
 
             &.large {
                 width: 19rem;
             }
-        }
-
-        .windows-buttons {
-            width: 30rem;
         }
     }
 </style>

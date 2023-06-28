@@ -29,10 +29,13 @@
     $: formattedAsset = {
         text: amount,
         color: isIncoming || activity.direction === ActivityDirection.SelfTransaction ? 'blue-700' : '',
-        classes: 'flex-shrink-0',
+        classes: 'shrink-0',
     }
 </script>
 
-<ActivityTileContent {action} {subject} {formattedAsset}>
-    <AssetIcon slot="icon" {asset} showVerifiedBadgeOnly />
-</ActivityTileContent>
+{#if asset}
+    <ActivityTileContent {action} {subject} {formattedAsset}>
+        <!-- Once the activity contains the chainId, add that here -->
+        <AssetIcon slot="icon" {asset} chainId={undefined} />
+    </ActivityTileContent>
+{/if}

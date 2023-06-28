@@ -2,37 +2,36 @@ import type { HexEncodedAmount, IAliasOutput, IBasicOutput, IFoundryOutput, INft
 import type {
     AccountBalance,
     AccountMetadata,
-    SyncOptions,
     Address,
-    AddressNativeTokens,
-    AddressNftId,
-    AddressWithAmount,
     AddressWithUnspentOutputs,
-    AliasOutputOptions,
+    AliasOutputParams,
     BuildAliasOutputData,
     BuildBasicOutputData,
     BuildFoundryOutputData,
     BuildNftOutputData,
     FilterOptions,
-    IncreaseNativeTokenSupplyOptions,
+    GenerateAddressOptions,
+    MintNativeTokenParams,
+    MintNftParams,
     MintTokenTransaction,
-    NativeTokenOptions,
-    NftOptions,
     Node,
     OutputData,
-    OutputOptions,
+    OutputParams,
     OutputsToClaim,
-    ParticipationEventWithNodes,
+    ParticipationEventMap,
+    ParticipationEventRegistrationOptions,
     ParticipationEventStatus,
     ParticipationEventType,
+    ParticipationEventWithNodes,
     ParticipationOverview,
     PreparedTransactionData,
+    SendAmountParams,
+    SendNativeTokensParams,
+    SendNftParams,
     SignedTransactionEssence,
+    SyncOptions,
     Transaction,
     TransactionOptions,
-    ParticipationEventRegistrationOptions,
-    ParticipationEventMap,
-    GenerateAddressOptions,
 } from '@iota/wallet'
 
 export interface IAccount {
@@ -50,10 +49,7 @@ export interface IAccount {
     burnNft(nftId: string, transactionOptions?: TransactionOptions): Promise<Transaction>
     claimOutputs(outputIds: string[]): Promise<Transaction>
     consolidateOutputs(force: boolean, outputConsolidationThreshold?: number): Promise<Transaction>
-    createAliasOutput(
-        aliasOutputOptions?: AliasOutputOptions,
-        transactionOptions?: TransactionOptions
-    ): Promise<Transaction>
+    createAliasOutput(params?: AliasOutputParams, transactionOptions?: TransactionOptions): Promise<Transaction>
     decreaseNativeTokenSupply(
         tokenId: string,
         meltAmount: HexEncodedAmount,
@@ -80,23 +76,19 @@ export interface IAccount {
     increaseNativeTokenSupply(
         tokenId: string,
         mintAmount: HexEncodedAmount,
-        increaseNativeTokenSupplyOptions?: IncreaseNativeTokenSupplyOptions,
         transactionOptions?: TransactionOptions
     ): Promise<MintTokenTransaction>
     increaseVotingPower(amount: string): Promise<Transaction>
     minimumRequiredStorageDeposit(outputs: OutputTypes[]): Promise<string>
     mintNativeToken(
-        nativeTokenOptions: NativeTokenOptions,
+        params: MintNativeTokenParams,
         transactionOptions?: TransactionOptions
     ): Promise<MintTokenTransaction>
-    mintNfts(nftsOptions: NftOptions[], transactionOptions?: TransactionOptions): Promise<Transaction>
+    mintNfts(params: MintNftParams[], transactionOptions?: TransactionOptions): Promise<Transaction>
     outputs(filterOptions?: FilterOptions): Promise<OutputData[]>
-    prepareOutput(options: OutputOptions, transactionOptions?: TransactionOptions): Promise<OutputTypes>
+    prepareOutput(params: OutputParams, transactionOptions?: TransactionOptions): Promise<OutputTypes>
     pendingTransactions(): Promise<Transaction[]>
-    prepareSendAmount(
-        addressWithAmount: AddressWithAmount[],
-        options?: TransactionOptions
-    ): Promise<PreparedTransactionData>
+    prepareSendAmount(params: SendAmountParams[], options?: TransactionOptions): Promise<PreparedTransactionData>
     prepareTransaction(outputs: OutputTypes[], options?: TransactionOptions): Promise<PreparedTransactionData>
     registerParticipationEvents(options: ParticipationEventRegistrationOptions): Promise<ParticipationEventMap>
     retryTransactionUntilIncluded(
@@ -105,12 +97,9 @@ export interface IAccount {
         maxAttempts?: number
     ): Promise<PreparedTransactionData>
     requestFundsFromFaucet(url: string, address: string): Promise<string>
-    sendAmount(addressesWithAmount: AddressWithAmount[], transactionOptions?: TransactionOptions): Promise<Transaction>
-    sendNativeTokens(
-        addressesNativeTokens: AddressNativeTokens[],
-        transactionOptions?: TransactionOptions
-    ): Promise<Transaction>
-    sendNft(addressesAndNftIds: AddressNftId[], transactionOptions?: TransactionOptions): Promise<Transaction>
+    sendAmount(params: SendAmountParams[], transactionOptions?: TransactionOptions): Promise<Transaction>
+    sendNativeTokens(params: SendNativeTokensParams[], transactionOptions?: TransactionOptions): Promise<Transaction>
+    sendNft(params: SendNftParams[], transactionOptions?: TransactionOptions): Promise<Transaction>
     sendOutputs(outputs: OutputTypes[], transactionOptions?: TransactionOptions): Promise<Transaction>
     setAlias(alias: string): Promise<void>
     setDefaultSyncOptions(options: SyncOptions): Promise<void>

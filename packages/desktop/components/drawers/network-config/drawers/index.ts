@@ -1,6 +1,0 @@
-export { default as AddChainDrawer } from './AddChainDrawer.svelte'
-export { default as ChainDepositAddressDrawer } from './ChainDepositAddressDrawer.svelte'
-export { default as ChainInformationDrawer } from './ChainInformationDrawer.svelte'
-export { default as ConnectedChainsDrawer } from './ConnectedChainsDrawer.svelte'
-export { default as EditChainDrawer } from './EditChainDrawer.svelte'
-export { default as RemoveChainDrawer } from './RemoveChainDrawer.svelte'

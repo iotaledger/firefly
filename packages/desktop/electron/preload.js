@@ -8,7 +8,6 @@
 
 const { ipcRenderer, contextBridge } = require('electron')
 const ElectronApi = require('./electronApi')
-const LedgerApi = require('./ledgerApi')
 const WalletApi = require('@iota/wallet')
 const fs = require('fs')
 
@@ -139,7 +138,6 @@ try {
         },
     })
     contextBridge.exposeInMainWorld('__ELECTRON__', ElectronApi)
-    contextBridge.exposeInMainWorld('__LEDGER__', LedgerApi)
 } catch (err) {
     ipcRenderer.invoke('handle-error', '[Preload Context] Error', err)
 }

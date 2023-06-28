@@ -2,19 +2,18 @@
     import { onDestroy, onMount } from 'svelte'
     import { Icon } from '@ui'
     import { Platform, PlatformOption } from '@core/app'
-    import { appSettings, platform } from '@core/app/stores'
+    import { platform } from '@core/app/stores'
     import { activeProfile } from '@core/profile/stores'
     import { appRoute, AppRoute } from '@core/router'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { popupState } from '@auxiliary/popup/stores'
+    import { popupState } from '@desktop/auxiliary/popup'
 
     const { hasLoadedAccounts } = $activeProfile
-    const isWindows = $platform === PlatformOption.Windows
 
     let isMaximized = false
 
     $: isDashboardVisible = $appRoute === AppRoute.Dashboard && $hasLoadedAccounts && $popupState.id !== 'busy'
-    $: dark = $appSettings.darkMode
+    $: isWindows = $platform === PlatformOption.Windows
 
     async function onResize(): Promise<void> {
         isMaximized = await Platform.isMaximized()
@@ -34,7 +33,6 @@
 </script>
 
 <nav
-    class:dark
     class:with-borders={isDashboardVisible}
     class="flex flex-row justify-between fixed z-50 top-0 left-0 right-0 w-full h-12 transition-none bg-transparent"
 >
@@ -86,13 +84,6 @@
 
     nav.with-borders {
         @apply bg-gray-200 border-b border-gray-300 border-solid;
-
-        &.dark {
-            @apply bg-gray-1000 border-gray-1000;
-        }
-    }
-
-    slot-container.top-placement {
-        @apply top-12;
+        @apply dark:bg-gray-1000 dark:border-gray-1000;
     }
 </style>
