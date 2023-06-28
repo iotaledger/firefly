@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { Icon as IconEnum } from '@auxiliary/icon'
     import { OnboardingLayout } from '@components'
     import {
         RestoreProfileType,
@@ -11,6 +12,7 @@
     import { checkOrConnectLedger } from '@core/ledger'
     import { setStrongholdPassword } from '@core/profile-manager'
     import { Animation, Button, Icon, Text, TextHint } from '@ui'
+    import { TextType } from '@ui/enums'
     import { onboardingRouter } from '@views/onboarding/onboarding-router'
 
     function onContinueClick(): void {
@@ -36,12 +38,14 @@
     <div slot="leftpane__content" class="flex flex-col space-y-6">
         <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-10 pb-6">
             <div class="bg-green-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
-                <Icon icon="success-check" classes="text-white" />
+                <Icon icon={IconEnum.SuccessCheck} classes="text-white" />
             </div>
-            <Text type="h2" classes="mb-5 text-center">{localize('views.onboarding.congratulations.title')}</Text>
-            <Text type="p" secondary classes="mb-2 text-center"
-                >{localize('views.onboarding.congratulations.body')}</Text
-            >
+            <Text type={TextType.h2} classes="mb-5 text-center">
+                {localize('views.onboarding.congratulations.title')}
+            </Text>
+            <Text type={TextType.p} secondary classes="mb-2 text-center">
+                {localize('views.onboarding.congratulations.body')}
+            </Text>
         </div>
         {#if $isOnboardingLedgerProfile}
             <TextHint warning text={localize('views.onboarding.congratulations.ledgerHint')} />
