@@ -159,13 +159,8 @@
         disabled={busy}
         submitHandler={isPasswordValid}
     />
-    <Checkbox
-        classes="mb-5"
-        label={localize('actions.exportNewStronghold')}
-        bind:checked={exportStrongholdChecked}
-        disabled={busy}
-    />
-    <div class="flex flex-row items-center">
+    <Checkbox label={localize('actions.exportNewStronghold')} bind:checked={exportStrongholdChecked} disabled={busy} />
+    <div class="flex flex-row items-center mt-5">
         <Button
             size={ButtonSize.Medium}
             disabled={!currentPassword || !newPassword || !confirmedPassword || busy}
