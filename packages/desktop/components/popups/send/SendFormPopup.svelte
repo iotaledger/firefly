@@ -5,7 +5,6 @@
     import { ownedNfts } from '@core/nfts'
     import { getByteLengthOfString, MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
     import {
-        getUnitFromTokenMetadata,
         IAsset,
         isReservedTagKeyword,
         newTransactionDetails,
@@ -27,7 +26,7 @@
         TextType,
     } from 'shared/components'
     import features from '@features/features'
-    import { activeProfile, getBaseToken } from '@core/profile'
+    import { activeProfile } from '@core/profile'
 
     enum SendForm {
         SendToken = 'general.sendToken',
@@ -76,7 +75,6 @@
         transactionDetails.type === NewTransactionType.TokenTransfer &&
         transactionDetails?.asset?.metadata?.standard === TokenStandard.BaseToken
     // Only allow L1 -> L2 transactions in developer profiles when transfering other than base tokens
-    // Context: https://github.com/iotaledger/firefly/issues/7041
     $: showLayer2 = features?.network?.layer2?.enabled && ($activeProfile.isDeveloperProfile || isBaseToken)
 
     function setTransactionDetails(): void {
@@ -88,6 +86,7 @@
             setNewTransactionDetails({
                 type: NewTransactionType.TokenTransfer,
                 recipient,
+                asset,
                 rawAmount,
                 unit,
                 tag,
@@ -179,7 +178,13 @@
             <Tabs bind:activeTab {tabs} />
         {/if}
         {#if activeTab === SendForm.SendToken}
-            <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:unit {disableAssetSelection} />
+            <AssetAmountInput
+                bind:this={assetAmountInput}
+                bind:asset
+                bind:rawAmount
+                bind:unit
+                {disableAssetSelection}
+            />
         {:else}
             <NftInput bind:this={nftInput} bind:nftId readonly={disableAssetSelection} />
         {/if}
