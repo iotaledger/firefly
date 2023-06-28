@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte'
     import { Button, Checkbox, CopyableBox, Spinner, Text } from 'shared/components'
-    import { localize } from '@core/i18n'
+    import { formatNumber, localize } from '@core/i18n'
     import { INode, INodeInfo } from '@core/network'
     import { closePopup } from '@desktop/auxiliary/popup'
     import { showAppNotification } from '@auxiliary/notification'
@@ -106,6 +106,10 @@
                 })
             })
     })
+
+    function formatMetricWithOneDecimal(metric): string {
+        return formatNumber(Number(metric), 1, 1)
+    }
 </script>
 
 <div class="mb-5">
@@ -134,7 +138,13 @@
                     <Text type="p" fontSize="sm" fontWeight="font-600" secondary
                         >{localize(`${NODE_INFO_LOCALE_BASE_PATH}.${localeKey}`)}</Text
                     >
-                    {#if typeof nodeInfoValue === 'boolean'}
+                    {#if localeKey === 'metrics.referencedRate' || localeKey === 'metrics.referencedBlocksPerSecond' || localeKey === 'metrics.blocksPerSecond'}
+                        <Text type="p" fontSize="sm" secondary>
+                            {formatMetricWithOneDecimal(nodeInfoValue)}{localeKey === 'metrics.referencedRate'
+                                ? '%'
+                                : ''}
+                        </Text>
+                    {:else if typeof nodeInfoValue === 'boolean'}
                         <Checkbox disabled checked={nodeInfoValue} />
                     {:else if Array.isArray(nodeInfoValue)}
                         <div class="text-right w-5/6">
