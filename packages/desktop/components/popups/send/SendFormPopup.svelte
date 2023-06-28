@@ -73,6 +73,7 @@
     $: isLayer2 = !!iscpChainAddress
     $: isSendTokenTab = activeTab === SendForm.SendToken
     $: isBaseToken =
+        activeTab === SendForm.SendToken &&
         transactionDetails.type === NewTransactionType.TokenTransfer &&
         asset?.metadata?.standard === TokenStandard.BaseToken
     // Only allow L1 -> L2 transactions in developer profiles when transfering other than base tokens
