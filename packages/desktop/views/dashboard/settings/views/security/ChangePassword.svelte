@@ -129,45 +129,48 @@
 
 <form id="form-change-password" on:submit|preventDefault={changePassword}>
     <Text type={TextType.h4} classes="mb-3">{localize('views.settings.changePassword.title')}</Text>
-    <Text type={TextType.p} secondary classes="mb-5">{localize('views.settings.changePassword.description')}</Text>
-    <PasswordInput
-        error={localize(currentPasswordError)}
-        classes="mb-5"
-        bind:value={currentPassword}
-        showRevealToggle
-        placeholder={localize('general.currentPassword')}
-        disabled={busy}
-        submitHandler={isPasswordValid}
-    />
-    <PasswordInput
-        error={newPasswordError}
-        classes="mb-4"
-        bind:value={newPassword}
-        showRevealToggle
-        strengthLevels={4}
-        showStrengthLevel
-        strength={passwordStrength.score}
-        placeholder={localize('general.newPassword')}
-        disabled={busy}
-        submitHandler={isPasswordValid}
-    />
-    <PasswordInput
-        classes="mb-5"
-        bind:value={confirmedPassword}
-        showRevealToggle
-        placeholder={localize('general.confirmNewPassword')}
-        disabled={busy}
-        submitHandler={isPasswordValid}
-    />
-    <Checkbox label={localize('actions.exportNewStronghold')} bind:checked={exportStrongholdChecked} disabled={busy} />
-    <div class="flex flex-row items-center mt-5">
-        <Button
-            size={ButtonSize.Medium}
-            disabled={!currentPassword || !newPassword || !confirmedPassword || busy}
-            type={HTMLButtonType.Submit}
-        >
-            {localize('views.settings.changePassword.title')}
-        </Button>
-        <Spinner {busy} message={localize(changeMessageLocale)} classes="ml-2" />
+    <div class="flex flex-col w-full space-y-5">
+        <Text type={TextType.p} secondary>{localize('views.settings.changePassword.description')}</Text>
+        <PasswordInput
+            error={localize(currentPasswordError)}
+            bind:value={currentPassword}
+            showRevealToggle
+            placeholder={localize('general.currentPassword')}
+            disabled={busy}
+            submitHandler={isPasswordValid}
+        />
+        <PasswordInput
+            error={newPasswordError}
+            bind:value={newPassword}
+            showRevealToggle
+            strengthLevels={4}
+            showStrengthLevel
+            strength={passwordStrength.score}
+            placeholder={localize('general.newPassword')}
+            disabled={busy}
+            submitHandler={isPasswordValid}
+        />
+        <PasswordInput
+            bind:value={confirmedPassword}
+            showRevealToggle
+            placeholder={localize('general.confirmNewPassword')}
+            disabled={busy}
+            submitHandler={isPasswordValid}
+        />
+        <Checkbox
+            label={localize('actions.exportNewStronghold')}
+            bind:checked={exportStrongholdChecked}
+            disabled={busy}
+        />
+        <div class="flex flex-row items-center">
+            <Button
+                size={ButtonSize.Medium}
+                disabled={!currentPassword || !newPassword || !confirmedPassword || busy}
+                type={HTMLButtonType.Submit}
+            >
+                {localize('views.settings.changePassword.title')}
+            </Button>
+            <Spinner {busy} message={localize(changeMessageLocale)} classes="ml-2" />
+        </div>
     </div>
 </form>
