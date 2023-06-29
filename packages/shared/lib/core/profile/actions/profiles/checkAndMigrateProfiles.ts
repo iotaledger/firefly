@@ -32,7 +32,7 @@ function migrateEachVersion(): void {
     }
 }
 
-function migratePersistedProfile(migrationVersion): void {
+function migratePersistedProfile(migrationVersion: number): void {
     const _profiles = get(profiles)
     for (const profile of _profiles) {
         persistedProfileMigrationsMap?.[migrationVersion]?.(profile)

@@ -3,7 +3,7 @@
     import { activeProfile, getNetworkHrp } from '@core/profile'
     import { validateBech32Address } from '@core/utils'
     import { isIscpChain } from '@core/network'
-    import type { ChainConfiguration } from '@core/network'
+    import type { ChainMetadata } from '@core/network'
 
     export let iscpChainAddress: string | undefined = undefined
     export let showLayer2: boolean = false
@@ -33,7 +33,7 @@
         let layer2Networks: IOption[] = []
         if (showLayer2) {
             layer2Networks =
-                $activeProfile.network?.chainConfigurations?.map((chain) => ({
+                $activeProfile.network?.chains?.map((chain) => ({
                     key: chain.name,
                     value: getNetworkValue(chain),
                 })) ?? []
@@ -41,8 +41,8 @@
         return [layer1Network, ...layer2Networks]
     }
 
-    function getNetworkValue(chainConfiguration: ChainConfiguration): string | undefined {
-        return isIscpChain(chainConfiguration) ? chainConfiguration?.aliasAddress : undefined
+    function getNetworkValue(chainMetadata: ChainMetadata): string | undefined {
+        return isIscpChain(chainMetadata) ? chainMetadata?.aliasAddress : undefined
     }
 
     export function validate(): Promise<void> {
