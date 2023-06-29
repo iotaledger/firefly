@@ -41,7 +41,7 @@ export async function generateActivitiesFromBasicOutputs(
         if (isSelfTransaction && burnedNftInputIndex >= 0) {
             const wrappedInput = burnedNftInputs[burnedNftInputIndex]
             const nftInput = wrappedInput.output as INftOutput
-            activity = generateSingleNftActivity(
+            activity = await generateSingleNftActivity(
                 account,
                 {
                     action: ActivityAction.Burn,

@@ -1,5 +1,6 @@
 import { isShimmerClaimingTransaction } from '@contexts/onboarding/stores'
 import { IAccountState } from '@core/account'
+import { handleError } from '@core/error/handlers'
 import { activeProfileId, getCoinType } from '@core/profile'
 import { IActivityGenerationParameters } from '@core/wallet/interfaces'
 import { TransactionActivity } from '@core/wallet/types'
@@ -50,21 +51,23 @@ export async function generateSingleBasicActivity(
     giftedStorageDeposit = action === ActivityAction.Burn ? 0 : giftedStorageDeposit
     giftedStorageDeposit = gasBudget === 0 ? giftedStorageDeposit : 0
 
-    let surplus: number | undefined = undefined
-    try {
-        const minimumRequiredStorageDeposit = await account.minimumRequiredStorageDeposit(output)
-        // console.log("Account", account.name)
-        // console.log("Outputid, Storage and gifted",outputId, storageDeposit, giftedStorageDeposit)
-        // console.log("output.amout, minimumRequiredStorageDeposit", output.amount, minimumRequiredStorageDeposit)
-        surplus = Number(output.amount) - Number(minimumRequiredStorageDeposit)
-    } catch (err) {
-        console.error(err)
-    }
-
     const baseTokenAmount = getAmountFromOutput(output) - storageDeposit - gasBudget
 
     const nativeToken = getNativeTokenFromOutput(output)
     const assetId = fallbackAssetId ?? nativeToken?.id ?? getCoinType()
+
+    let surplus: number | undefined = undefined
+    if (nativeToken) {
+        try {
+            const minimumRequiredStorageDeposit = await account.minimumRequiredStorageDeposit(output)
+            surplus = Number(output.amount) - Number(minimumRequiredStorageDeposit)
+            if (surplus && !storageDeposit) {
+                giftedStorageDeposit = Number(minimumRequiredStorageDeposit)
+            }
+        } catch (err) {
+            handleError(err)
+        }
+    }
 
     let rawAmount: number
     if (fallbackAmount === undefined) {

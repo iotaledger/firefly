@@ -46,7 +46,7 @@ async function generateActivitiesFromProcessedTransactionsWithInputs(
 
     const containsNftActivity = outputs.some((output) => output.output.type === OUTPUT_TYPE_NFT)
     if (containsNftActivity) {
-        const nftActivities = generateActivitiesFromNftOutputs(processedTransaction, account)
+        const nftActivities = await generateActivitiesFromNftOutputs(processedTransaction, account)
         activities.push(...nftActivities)
     }
 
@@ -82,29 +82,34 @@ async function generateActivitiesFromProcessedTransactionsWithInputs(
  * If we cannot get the detailed inputs for a transaction, we would need to blind guess what the user did with the transaction.
  * Therefore we set the action to `Unknown`
  */
-function generateActivitiesFromProcessedTransactionsWithoutInputs(
+async function generateActivitiesFromProcessedTransactionsWithoutInputs(
     processedTransaction: IProcessedTransaction,
     account: IAccountState
-): Activity[] {
+): Promise<Activity[]> {
     const nonRemainderOutputs = processedTransaction.outputs.filter((wrappedOutput) => !wrappedOutput.remainder)
-    return nonRemainderOutputs.map((wrappedOutput) => {
-        const params = {
-            type: getActivityTypeFromOutput(wrappedOutput),
-            action: ActivityAction.Unknown,
-            processedTransaction,
-            wrappedOutput,
-        }
-        switch (params.type) {
-            case ActivityType.Basic:
-                return generateSingleBasicActivity(account, params)
-            case ActivityType.Governance:
-                return generateSingleGovernanceActivity(account, params)
-            case ActivityType.Foundry:
-                return generateSingleFoundryActivity(account, params)
-            case ActivityType.Alias:
-                return generateSingleAliasActivity(account, params)
-            case ActivityType.Nft:
-                return generateSingleNftActivity(account, params)
-        }
-    })
+    const activities = await Promise.all(
+        nonRemainderOutputs.map(async (wrappedOutput) => {
+            const params = {
+                type: getActivityTypeFromOutput(wrappedOutput),
+                action: ActivityAction.Unknown,
+                processedTransaction,
+                wrappedOutput,
+            }
+            switch (params.type) {
+                case ActivityType.Basic:
+                    return generateSingleBasicActivity(account, params)
+                case ActivityType.Governance:
+                    return generateSingleGovernanceActivity(account, params)
+                case ActivityType.Foundry:
+                    return generateSingleFoundryActivity(account, params)
+                case ActivityType.Alias:
+                    return generateSingleAliasActivity(account, params)
+                case ActivityType.Nft:
+                    return generateSingleNftActivity(account, params)
+                default:
+                    throw new Error(`Unknown activity type: ${params.type}`)
+            }
+        })
+    )
+    return activities
 }

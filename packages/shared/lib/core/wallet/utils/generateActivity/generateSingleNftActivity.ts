@@ -1,5 +1,6 @@
 import { IAccountState } from '@core/account'
-import { ActivityType } from '@core/wallet/enums'
+import { handleError } from '@core/error/handlers'
+import { ActivityAction, ActivityType } from '@core/wallet/enums'
 import { IActivityGenerationParameters } from '@core/wallet/interfaces'
 import { NftActivity } from '@core/wallet/types'
 import type { INftOutput } from '@iota/types'
@@ -9,14 +10,15 @@ import {
     getLayer2ActivityInformation,
     getMetadataFromOutput,
     getSendingInformation,
+    getStorageDepositFromOutput,
     getTagFromOutput,
 } from './helper'
 
-export function generateSingleNftActivity(
+export async function generateSingleNftActivity(
     account: IAccountState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters,
     nftIdFromInput?: string
-): NftActivity {
+): Promise<NftActivity> {
     const { claimingData, time, inclusionState, transactionId, direction } = processedTransaction
     const outputId = wrappedOutput.outputId
     const output = wrappedOutput.output as INftOutput
@@ -27,15 +29,29 @@ export function generateSingleNftActivity(
     const containsValue = true
 
     const nftId = nftIdFromInput ? nftIdFromInput : getNftId(output.nftId, outputId)
-    const giftedStorageDeposit = 0
     const metadata = getMetadataFromOutput(output)
     const tag = getTagFromOutput(output)
 
     const sendingInfo = getSendingInformation(processedTransaction, output, account)
     const { subject, isInternal } = sendingInfo
 
-    const layer2ActivityInformation = getLayer2ActivityInformation(metadata, sendingInfo)
-    const storageDeposit = Number(output.amount) - Number(layer2ActivityInformation?.parsedLayer2Metadata?.gasBudget)
+    const { parsedLayer2Metadata, destinationNetwork } = getLayer2ActivityInformation(metadata, sendingInfo)
+    const gasBudget = Number(parsedLayer2Metadata?.gasBudget ?? '0')
+
+    let { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output)
+    giftedStorageDeposit = action === ActivityAction.Burn ? 0 : giftedStorageDeposit
+    giftedStorageDeposit = gasBudget === 0 ? giftedStorageDeposit : 0
+
+    let surplus: number | undefined = undefined
+    try {
+        const minimumRequiredStorageDeposit = await account.minimumRequiredStorageDeposit(output)
+        surplus = Number(output.amount) - Number(minimumRequiredStorageDeposit)
+        if (surplus && !storageDeposit) {
+            giftedStorageDeposit = Number(minimumRequiredStorageDeposit)
+        }
+    } catch (err) {
+        handleError(err)
+    }
 
     const asyncData = getAsyncDataFromOutput(output, outputId, claimingData, account)
 
@@ -49,6 +65,7 @@ export function generateSingleNftActivity(
         isHidden,
         action,
         giftedStorageDeposit,
+        surplus,
         isAssetHidden,
         containsValue,
         inclusionState,
@@ -59,6 +76,7 @@ export function generateSingleNftActivity(
         subject,
         isInternal,
         direction,
-        ...layer2ActivityInformation,
+        destinationNetwork,
+        parsedLayer2Metadata,
     }
 }
