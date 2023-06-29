@@ -143,7 +143,7 @@
         tabindex="0"
         bind:this={divContainer}
     >
-        <div class="w-full text-12 leading-140 text-gray-800 dark:text-white">
+        <div class="flex w-full text-12 leading-140 text-gray-800 dark:text-white">
             <Text {...textProps} color="{placeholderColor}," darkColor={placeholderColor} classes="overflow-hidden">
                 {search || selectedItem?.label || value || placeholder || ''}
             </Text>
@@ -155,7 +155,7 @@
             classes="absolute text-gray-500 fill-current"
         />
         {#if label}
-            <floating-label class:floating-active={value && label}>{label}</floating-label>
+            <floating-label class:floating-active={value && label} class="text-start">{label}</floating-label>
         {/if}
     </button>
     <nav

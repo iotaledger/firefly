@@ -10,15 +10,14 @@
         NotVerifiedStatus,
         VerifiedStatus,
         NewTransactionType,
-        getUnitFromTokenMetadata,
     } from '@core/wallet'
     import { openPopup, PopupId, updatePopupProps } from '@desktop/auxiliary/popup'
     import {
-        AssetIcon,
         Button,
         Text,
         TextHint,
         AssetActionsButton,
+        AssetTile,
         KeyValueBox,
         FontWeight,
         TextType,
@@ -88,12 +87,7 @@
             {/if}
         </div>
 
-        <div class="space-y-3 flex flex-col items-center justify-center">
-            <AssetIcon {asset} chainId={asset.chainId} large />
-            <Text type={TextType.h2} fontWeight={FontWeight.bold}>
-                {getUnitFromTokenMetadata(asset.metadata)}
-            </Text>
-        </div>
+        <AssetTile classes="pointer-events-none" onClick={() => {}} {asset} />
 
         <div class="space-y-4 flex flex-col items-center justify-center">
             {#if !asset.verification?.verified}
