@@ -16,6 +16,7 @@ const {
     session,
     utilityProcess,
     nativeTheme,
+    powerMonitor,
 } = require('electron')
 const path = require('path')
 const fs = require('fs')
@@ -354,6 +355,11 @@ app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
         app.quit()
     }
+})
+
+powerMonitor.on('lock-screen', () => {
+    // MacOS and Windows
+    windows.main.webContents.send('lock-screen')
 })
 
 app.once('ready', () => {
