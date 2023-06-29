@@ -10,6 +10,7 @@
         newTransactionDetails,
         NewTransactionType,
         setNewTransactionDetails,
+        TokenStandard,
     } from '@core/wallet'
     import { selectedAccount } from '@core/account/stores'
     import {
@@ -25,6 +26,7 @@
         TextType,
     } from 'shared/components'
     import features from '@features/features'
+    import { activeProfile } from '@core/profile'
 
     enum SendForm {
         SendToken = 'general.sendToken',
@@ -37,7 +39,8 @@
     }
 
     const transactionDetails = get(newTransactionDetails)
-    let { metadata, recipient, tag, layer2Parameters, disableAssetSelection } = transactionDetails
+    let { metadata, recipient, tag, layer2Parameters } = transactionDetails
+    const { disableAssetSelection } = transactionDetails
 
     let assetAmountInput: AssetAmountInput
     let nftInput: NftInput
@@ -68,6 +71,13 @@
     $: hasSpendableNfts = $ownedNfts.some((nft) => nft.isSpendable)
     $: isLayer2 = !!iscpChainAddress
     $: isSendTokenTab = activeTab === SendForm.SendToken
+    $: isBaseToken =
+        activeTab === SendForm.SendToken &&
+        transactionDetails.type === NewTransactionType.TokenTransfer &&
+        asset?.metadata?.standard === TokenStandard.BaseToken
+    // Only allow L1 -> L2 transactions in developer profiles when transfering other than base tokens
+    $: showLayer2 = features?.network?.layer2?.enabled && ($activeProfile.isDeveloperProfile || isBaseToken)
+    $: asset, nftId, !showLayer2 && networkInput?.reset()
 
     function setTransactionDetails(): void {
         layer2Parameters = isLayer2
@@ -180,7 +190,7 @@
         {:else}
             <NftInput bind:this={nftInput} bind:nftId readonly={disableAssetSelection} />
         {/if}
-        <NetworkInput bind:this={networkInput} bind:iscpChainAddress showLayer2={features?.network?.layer2?.enabled} />
+        <NetworkInput bind:this={networkInput} bind:iscpChainAddress {showLayer2} />
         <RecipientInput bind:this={recipientInput} bind:recipient {isLayer2} />
         <optional-inputs class="flex flex-row flex-wrap gap-4">
             <OptionalInput
