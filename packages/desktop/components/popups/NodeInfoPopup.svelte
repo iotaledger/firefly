@@ -79,17 +79,14 @@
             nodeInfoValue = node.url
         } else {
             nodeInfoValue = resolveObjectPath(nodeInfo, nodeInfoTabObject[key]?.nodeInfoPath, null)
-            if (key === 'referencedRate') {
-                const referencedRate = Number(nodeInfoValue)
-                if (referencedRate >= 0) {
-                    nodeInfoValue = `${formatNumber(Math.min(referencedRate, 100), 1, 1)}%`
-                } else {
-                    nodeInfoValue = ''
-                }
-            } else if (key === 'blocksPerSecond' || key === 'referencedBlocksPerSecond') {
-                const infoValue = Number(nodeInfoValue)
-                if (infoValue >= 0) {
-                    nodeInfoValue = formatNumber(infoValue, 1, 1)
+            if (key === 'referencedRate' || key === 'blocksPerSecond' || key === 'referencedBlocksPerSecond') {
+                const numberValue = Number(nodeInfoValue)
+                if (numberValue >= 0) {
+                    if (key === 'referencedRate') {
+                        nodeInfoValue = `${formatNumber(Math.min(numberValue, 100), 1, 1)}%`
+                    } else {
+                        nodeInfoValue = formatNumber(numberValue, 1, 1)
+                    }
                 } else {
                     nodeInfoValue = ''
                 }
