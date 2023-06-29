@@ -12,10 +12,3 @@ export interface IIscpChainMetadata extends IBaseChainMetadata {
     aliasAddress: string
     iscpEndpoint: string
 }
-
-export interface IEvmChainMetadata extends IBaseChainMetadata {
-    type: ChainType.Evm
-    symbol: string
-    ticker: string
-    rpcEndpoint: string
-}
