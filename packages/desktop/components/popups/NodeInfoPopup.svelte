@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte'
     import { Button, Checkbox, CopyableBox, Spinner, Text } from 'shared/components'
-    import { localize } from '@core/i18n'
+    import { formatNumber, localize } from '@core/i18n'
     import { INode, INodeInfo } from '@core/network'
     import { closePopup } from '@desktop/auxiliary/popup'
     import { showAppNotification } from '@auxiliary/notification'
@@ -74,8 +74,24 @@
     ): { localeKey: string; nodeInfoValue: unknown } {
         const nodeInfoTabObject = NODE_INFO_TAB_MAP[_nodeInfoTab]
         const localeKey = nodeInfoTabObject[key].localeKey
-        const nodeInfoValue =
-            key !== 'url' ? resolveObjectPath(nodeInfo, nodeInfoTabObject[key]?.nodeInfoPath, null) : node?.url
+        let nodeInfoValue = ''
+        if (key === 'url') {
+            nodeInfoValue = node.url
+        } else {
+            nodeInfoValue = resolveObjectPath(nodeInfo, nodeInfoTabObject[key]?.nodeInfoPath, null)
+            if (key === 'referencedRate' || key === 'blocksPerSecond' || key === 'referencedBlocksPerSecond') {
+                const numberValue = Number(nodeInfoValue)
+                if (numberValue >= 0) {
+                    if (key === 'referencedRate') {
+                        nodeInfoValue = `${formatNumber(Math.min(numberValue, 100), 1, 1)}%`
+                    } else {
+                        nodeInfoValue = formatNumber(numberValue, 1, 1)
+                    }
+                } else {
+                    nodeInfoValue = ''
+                }
+            }
+        }
 
         return {
             localeKey,
