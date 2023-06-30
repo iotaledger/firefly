@@ -1,4 +1,3 @@
-import { isIscpChain } from '@core/network'
 import { getActiveProfile } from '@core/profile/stores'
 
 export function getDestinationNetworkFromAddress(networkAddress: string | undefined): string {
@@ -7,7 +6,6 @@ export function getDestinationNetworkFromAddress(networkAddress: string | undefi
         return network?.name
     }
 
-    const chains = network?.chains.filter(isIscpChain)
-    const foundDestinationNetwork = chains.find((chain) => chain?.aliasAddress === networkAddress)
+    const foundDestinationNetwork = network?.chains?.find((chain) => chain?.aliasAddress === networkAddress)
     return foundDestinationNetwork?.name ?? networkAddress
 }
