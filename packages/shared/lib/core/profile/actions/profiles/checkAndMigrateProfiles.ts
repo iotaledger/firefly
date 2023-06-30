@@ -54,6 +54,7 @@ const persistedProfileMigrationsMap: Record<number, (existingProfile: unknown) =
     10: persistedProfileMigrationToV11,
     11: persistedProfileMigrationToV12,
     12: persistedProfileMigrationToV13,
+    13: persistedProfileMigrationToV14,
 }
 
 function persistedProfileMigrationToV4(existingProfile: unknown): void {
@@ -265,4 +266,22 @@ function persistedProfileMigrationToV13(
     })
 
     saveProfile(newProfile as IPersistedProfile)
+}
+
+function persistedProfileMigrationToV14(existingProfile: IPersistedProfile): void {
+    if (existingProfile.network) {
+        interface IOldPersistedNetwork {
+            chainConfigurations: unknown
+        }
+
+        const oldNetwork = existingProfile.network as unknown as IOldPersistedNetwork
+        delete oldNetwork.chainConfigurations
+
+        const newNetwork = oldNetwork as unknown as IPersistedNetwork
+        newNetwork.chains = []
+
+        existingProfile.network = newNetwork
+
+        saveProfile(existingProfile)
+    }
 }
