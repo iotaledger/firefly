@@ -1,5 +1,6 @@
 export { default as Alert } from './Alert.svelte'
 export { default as Animation } from './Animation.svelte'
+export { default as Badge } from './Badge.svelte'
 export { default as Button } from './Button.svelte'
 export { default as ButtonRadio } from './ButtonRadio.svelte'
 export { default as ColorPicker } from './ColorPicker.svelte'

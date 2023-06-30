@@ -1,13 +1,9 @@
 <script lang="ts">
-    import { NetworkId } from '@core/network'
-    import { FontWeight, NetworkIcon, Text, Tooltip } from 'shared/components'
+    import { FontWeight, Text, Tooltip } from 'shared/components'
     import { Position } from 'shared/components/enums'
 
-    export let networkId: NetworkId
-    export let chainId: number | undefined = undefined
     export let tooltipText: string = ''
-    export let width: number | undefined = undefined
-    export let height: number | undefined = undefined
+    export let withTooltip: boolean = true
 
     let tooltipAnchor: HTMLElement
     let isTooltipVisible = false
@@ -15,18 +11,26 @@
     function showTooltip(show: boolean): void {
         isTooltipVisible = show
     }
+
+    function handleMouseEnter(): void {
+        showTooltip(true)
+    }
+
+    function handleMouseLeave(): void {
+        showTooltip(false)
+    }
 </script>
 
-<network-icon-badge
+<badge
     bind:this={tooltipAnchor}
-    on:mouseenter={() => showTooltip(true)}
-    on:mouseleave={() => showTooltip(false)}
-    on:wheel={() => showTooltip(false)}
+    on:mouseenter={handleMouseEnter}
+    on:mouseleave={handleMouseLeave}
     class="block absolute -right-1 -bottom-1"
 >
-    <NetworkIcon {width} {height} {networkId} {chainId} />
-</network-icon-badge>
-{#if isTooltipVisible && tooltipText}
+    <slot name="icon" />
+</badge>
+
+{#if isTooltipVisible && tooltipText && withTooltip}
     <Tooltip anchor={tooltipAnchor} size="small" position={Position.Right} offset={6}>
         <Text fontWeight={FontWeight.semibold} color="gray-600" darkColor="gray-400" smaller>
             {tooltipText}

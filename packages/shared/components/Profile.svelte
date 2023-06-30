@@ -2,9 +2,10 @@
     import { Icon as IconEnum } from '@auxiliary/icon/enums'
     import { IPersistedProfile, ProfileType } from '@core/profile'
     import {
+        Badge,
         DeveloperIndicatorPill,
         Icon,
-        NetworkIconBadge,
+        NetworkIcon,
         ProfilePicture,
         StrongholdBadge,
         Text,
@@ -30,7 +31,9 @@
         >
             <ProfilePicture {profile} size="large" />
             {#if !updateRequired}
-                <NetworkIconBadge networkId={profile?.network?.id} tooltipText={profile?.network?.name} />
+                <Badge tooltipText={profile?.network?.name}>
+                    <NetworkIcon slot="icon" networkId={profile?.network?.id} />
+                </Badge>
             {:else}
                 <StrongholdBadge />
             {/if}
