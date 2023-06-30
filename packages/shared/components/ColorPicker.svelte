@@ -95,7 +95,7 @@
     {/if}
     <ul class="flex flex-row flex-wrap gap-3.5">
         {#each getAccountColorsNames() as color, i}
-            <li
+            <button
                 on:click={() => onColorClick(i)}
                 on:keypress={(event) => onKeyPress(event, i)}
                 tabindex="0"
@@ -107,10 +107,10 @@
                 {#if indexOfActiveElement === i}
                     <Icon icon={IconEnum.Checkmark} classes="text-white" />
                 {/if}
-            </li>
+            </button>
         {/each}
         {#if isCustomColorEnabled}
-            <li
+            <button
                 bind:this={tooltipAnchor}
                 on:click={toggleTooltip}
                 on:click={activeCustomColor}
@@ -125,7 +125,7 @@
                 class:ring-4={isSelectedCustomElement}
             >
                 <Icon icon={IconEnum.Edit} classes={`text-${iconColor}`} />
-            </li>
+            </button>
         {/if}
     </ul>
     {#if isTooltipVisible}

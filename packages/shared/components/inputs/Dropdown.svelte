@@ -132,7 +132,8 @@
     class:disabled
     style={navWidth}
 >
-    <div
+    <button
+        type="button"
         class="
             selection relative flex items-center w-full whitespace-nowrap cursor-pointer bg-white dark:bg-gray-800
             {dropdown
@@ -142,7 +143,7 @@
         tabindex="0"
         bind:this={divContainer}
     >
-        <div class="w-full text-12 leading-140 text-gray-800 dark:text-white">
+        <div class="flex w-full text-12 leading-140 text-gray-800 dark:text-white">
             <Text {...textProps} color="{placeholderColor}," darkColor={placeholderColor} classes="overflow-hidden">
                 {search || selectedItem?.label || value || placeholder || ''}
             </Text>
@@ -154,9 +155,9 @@
             classes="absolute text-gray-500 fill-current"
         />
         {#if label}
-            <floating-label class:floating-active={value && label}>{label}</floating-label>
+            <floating-label class:floating-active={value && label} class="text-start">{label}</floating-label>
         {/if}
-    </div>
+    </button>
     <nav
         class:active={dropdown}
         class="absolute w-full overflow-hidden pointer-events-none opacity-0 z-10 text-left

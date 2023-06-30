@@ -1,6 +1,6 @@
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import CopyPlugin from 'copy-webpack-plugin'
-import { DefinePlugin, NormalModuleReplacementPlugin, ProvidePlugin } from 'webpack'
+import { DefinePlugin } from 'webpack'
 import path from 'path'
 import sveltePreprocess from 'svelte-preprocess'
 import SentryWebpackPlugin from '@sentry/webpack-plugin'
@@ -39,9 +39,6 @@ const fallback: { [index: string]: string | false | string[] } = {
     path: false,
     fs: false,
     crypto: false,
-    // The Ethereum libraries require zlib and the buffer polyfill
-    zlib: false,
-    buffer: require.resolve('buffer'),
     // The Amplitude SDK requires http, https and url polyfills
     http: require.resolve('stream-http'),
     https: require.resolve('https-browserify'),
@@ -184,13 +181,6 @@ const rendererPlugins = [
         PRELOAD_SCRIPT: JSON.stringify(false),
         'process.env.APP_PROTOCOL': JSON.stringify(appProtocol),
     }),
-    // The ethereumjs libraries require the NormalModuleReplacementPlugin & the ProvidePlugin
-    new NormalModuleReplacementPlugin(/node:/, (resource) => {
-        resource.request = resource.request.replace(/^node:/, '')
-    }),
-    new ProvidePlugin({
-        Buffer: ['buffer', 'Buffer'],
-    }),
 ]
 
 const preloadPlugins = [
@@ -257,10 +247,6 @@ const webpackConfig: Configuration[] = [
         target: 'electron-main',
         entry: {
             'build/main': ['./electron/main.js'],
-            'build/lib/ledger.js': ['./electron/lib/ledger.js'],
-        },
-        externals: {
-            '@ledgerhq/hw-transport-node-hid': 'commonjs @ledgerhq/hw-transport-node-hid',
         },
         resolve,
         output,

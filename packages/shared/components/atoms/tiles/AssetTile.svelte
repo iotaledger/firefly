@@ -6,50 +6,55 @@
     import { getMarketAmountFromAssetValue } from '@core/market/utils/getMarketAmountFromAssetValue'
     import { getMarketPriceForAsset } from '@core/market/utils'
 
-    export let asset: IAsset
+    export let asset: IAsset | undefined
     export let onClick: () => unknown
     export let squashed = false
     export let selected = false
     export let classes = ''
 
-    $: marketPrice = getMarketPriceForAsset(asset)
-    $: marketBalance = getMarketAmountFromAssetValue(asset?.balance?.total, asset)
+    $: marketPrice = asset ? getMarketPriceForAsset(asset) : undefined
+    $: marketBalance = asset ? getMarketAmountFromAssetValue(asset.balance?.total, asset) : undefined
 </script>
 
-<ClickableTile
-    {onClick}
-    {...$$restProps}
-    classes="border-2 border-solid {selected ? 'border-blue-500 dark:border-gray-500' : 'border-transparent'} {classes}"
->
-    <div class="w-full flex flex-row justify-between items-center">
-        <div class="flex flex-row items-center text-left space-x-4">
-            <AssetIcon small={squashed} {asset} />
-            <div class="flex flex-col">
+{#if asset}
+    <ClickableTile
+        {onClick}
+        {...$$restProps}
+        classes="border-2 border-solid {selected
+            ? 'border-blue-500 dark:border-gray-500'
+            : 'border-transparent'} {classes}"
+    >
+        <div class="w-full flex flex-row justify-between items-center">
+            <div class="flex flex-row items-center text-left space-x-4">
+                <AssetIcon small={squashed} {asset} chainId={asset.chainId} />
+                <div class="flex flex-col">
+                    <Text type={TextType.p} fontWeight={FontWeight.semibold}>
+                        {asset.metadata?.name
+                            ? truncateString(asset.metadata?.name, 13, 0)
+                            : truncateString(asset.id, 6, 7)}
+                    </Text>
+                    {#if !squashed}
+                        <div class="flex flex-row justify-between items-center text-left">
+                            <Text type={TextType.p} secondary smaller
+                                >{marketPrice ? formatCurrency(marketPrice) : ''}</Text
+                            >
+                            <slot name="subLabel" />
+                        </div>
+                    {/if}
+                </div>
+            </div>
+            <div class="flex flex-col text-right">
                 <Text type={TextType.p} fontWeight={FontWeight.semibold}>
-                    {asset?.metadata?.name
-                        ? truncateString(asset?.metadata?.name, 13, 0)
-                        : truncateString(asset?.id, 6, 7)}
+                    {asset.metadata ? formatTokenAmountBestMatch(asset.balance.total, asset.metadata) : '-'}
                 </Text>
                 {#if !squashed}
-                    <div class="flex flex-row justify-between items-center text-left">
-                        <Text type={TextType.p} secondary smaller>{marketPrice ? formatCurrency(marketPrice) : ''}</Text
-                        >
-                        <slot name="subLabel" />
+                    <div class="flex flex-row justify-between items-center text-right">
+                        <Text type={TextType.p} secondary smaller classes="flex-grow">
+                            {marketBalance ? `≈ ${formatCurrency(marketBalance)}` : ''}
+                        </Text>
                     </div>
                 {/if}
             </div>
         </div>
-        <div class="flex flex-col text-right">
-            <Text type={TextType.p} fontWeight={FontWeight.semibold}>
-                {formatTokenAmountBestMatch(asset?.balance.total, asset?.metadata)}
-            </Text>
-            {#if !squashed}
-                <div class="flex flex-row justify-between items-center text-right">
-                    <Text type={TextType.p} secondary smaller classes="flex-grow">
-                        {marketBalance ? `≈ ${formatCurrency(marketBalance)}` : ''}
-                    </Text>
-                </div>
-            {/if}
-        </div>
-    </div>
-</ClickableTile>
+    </ClickableTile>
+{/if}

@@ -134,9 +134,10 @@
     {#if label}
         <Text type="p" secondary classes="mb-1">{label}</Text>
     {/if}
-    <pin-input
+    <button
+        type="button"
         style="--pin-input-size: {PIN_LENGTH}"
-        class={`flex items-center justify-between w-full relative z-0 rounded-xl border border-solid
+        class={`pin-input flex items-center justify-between w-full relative z-0 rounded-xl border border-solid
             bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700
             ${smaller ? 'h-14 pl-6 pr-4' : 'h-20 pl-12 pr-8'}`}
         class:disabled
@@ -190,14 +191,14 @@
         <button type="button" on:click={handleBackspace} {disabled} tabindex="-1">
             <Icon icon="backspace" classes={smaller ? 'text-blue-500' : 'text-gray-500'} />
         </button>
-    </pin-input>
+    </button>
     {#if error}
         <Error {error} />
     {/if}
 </div>
 
 <style type="text/scss">
-    pin-input {
+    .pin-input {
         @apply cursor-pointer;
         @apply select-none;
 

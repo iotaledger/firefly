@@ -53,7 +53,8 @@
         setFilteredOptions()
     }
 
-    function resetValue(): void {
+    export function resetValue(newSelected?: IOption): void {
+        if (newSelected) selected = newSelected
         value = selected?.key ?? selected?.value
     }
 </script>
@@ -108,7 +109,7 @@
                             </Text>
                         </div>
                         {#if option.value && option.key}
-                            <Text type={TextType.pre} fontSize="sm" color="gray-600" classes="flex-1">
+                            <Text type={TextType.pre} fontSize="sm" color="gray-600" classes="flex-1 text-end">
                                 {truncateString(option.value, 9, 9)}
                             </Text>
                         {/if}

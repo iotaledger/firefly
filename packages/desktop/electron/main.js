@@ -163,7 +163,6 @@ if (app.isPackaged) {
     paths.aboutHtml = path.join(app.getAppPath(), '/public/about.html')
     paths.errorPreload = path.join(app.getAppPath(), '/public/build/lib/errorPreload.js')
     paths.errorHtml = path.join(app.getAppPath(), '/public/error.html')
-    paths.ledger = path.join(app.getAppPath(), '/public/build/lib/ledger.js')
 } else {
     // __dirname is desktop/public/build
     paths.preload = path.join(__dirname, 'preload.js')
@@ -172,7 +171,6 @@ if (app.isPackaged) {
     paths.aboutHtml = path.join(__dirname, '../about.html')
     paths.errorPreload = path.join(__dirname, 'lib/errorPreload.js')
     paths.errorHtml = path.join(__dirname, '../error.html')
-    paths.ledger = path.join(__dirname, 'lib/ledger.js')
 }
 
 /**
@@ -280,7 +278,6 @@ function createWindow() {
     })
 
     windows.main.on('closed', () => {
-        ledgerProcess?.kill()
         windows.main = null
     })
 
@@ -316,41 +313,6 @@ function createWindow() {
 }
 
 app.whenReady().then(createWindow)
-
-let ledgerProcess
-ipcMain.on('start-ledger-process', () => {
-    ledgerProcess = utilityProcess.fork(paths.ledger)
-    ledgerProcess.on('spawn', () => {
-        ledgerProcess.on('message', (message) => {
-            const { error, data } = message
-            if (error) {
-                windows.main.webContents.send('ledger-error', error)
-            } else {
-                if (data?.evmAddress) {
-                    windows.main.webContents.send('evm-address', data)
-                }
-                if (data?.signedTransaction) {
-                    windows.main.webContents.send('evm-signed-transaction', data)
-                } else {
-                    /* eslint-disable-next-line no-console */
-                    console.log('Unhandled Ledger Message: ', message)
-                }
-            }
-        })
-    })
-})
-
-ipcMain.on('kill-ledger-process', () => {
-    ledgerProcess?.kill()
-})
-
-ipcMain.on('generate-evm-address', (_e, bip32Path, verify) => {
-    ledgerProcess?.postMessage({ method: 'generate-evm-address', parameters: [bip32Path, verify] })
-})
-
-ipcMain.on('sign-evm-transaction', (_e, data, bip32Path) => {
-    ledgerProcess?.postMessage({ method: 'sign-evm-transaction', parameters: [data, bip32Path] })
-})
 
 /**
  * Gets BrowserWindow instance

@@ -76,7 +76,12 @@
 
 <Modal bind:this={modal} position={{ top: '100px', right: '60px' }}>
     <div class="flex flex-col">
-        <MenuItem icon="receive" title={localize('views.collectibles.details.menu.download')} disabled={true} />
+        <MenuItem
+            icon="receive"
+            title={localize('views.collectibles.details.menu.download')}
+            disabled={true}
+            onClick={() => {}}
+        />
         <MenuItem
             icon="profile"
             title={localize(`views.collectibles.details.menu.${isCurrentPfp ? 'unsetPfp' : 'setPfp'}`)}

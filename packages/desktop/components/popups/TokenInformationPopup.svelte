@@ -10,21 +10,18 @@
         NotVerifiedStatus,
         VerifiedStatus,
         NewTransactionType,
-        getUnitFromTokenMetadata,
     } from '@core/wallet'
     import { openPopup, PopupId, updatePopupProps } from '@desktop/auxiliary/popup'
     import {
-        AssetIcon,
         Button,
         Text,
         TextHint,
         AssetActionsButton,
+        AssetTile,
         KeyValueBox,
         FontWeight,
         TextType,
     } from 'shared/components'
-    import features from '@features/features'
-    import { SendFlowRoute, SendFlowRouter, sendFlowRouter } from '@views/dashboard/send-flow'
 
     export let asset: IAsset
     export let activityId: string = undefined
@@ -64,9 +61,8 @@
             asset: asset,
             disableAssetSelection: true,
         })
-        sendFlowRouter.set(new SendFlowRouter(undefined, SendFlowRoute.SelectRecipient))
         openPopup({
-            id: features.wallet.newSendFlow.enabled ? PopupId.SendFlow : PopupId.SendForm,
+            id: PopupId.SendForm,
             overflow: true,
         })
     }
@@ -91,12 +87,7 @@
             {/if}
         </div>
 
-        <div class="space-y-3 flex flex-col items-center justify-center">
-            <AssetIcon {asset} large />
-            <Text type={TextType.h2} fontWeight={FontWeight.bold}>
-                {getUnitFromTokenMetadata(asset.metadata)}
-            </Text>
-        </div>
+        <AssetTile classes="pointer-events-none" onClick={() => {}} {asset} />
 
         <div class="space-y-4 flex flex-col items-center justify-center">
             {#if !asset.verification?.verified}

@@ -12,9 +12,6 @@ export function isVisibleAsset(asset: IAsset): boolean {
     if (!isVisibleWithActiveVerificationStatusFilter(asset, filter)) {
         return false
     }
-    if (!isVisibleWithNetworkFilter(asset, filter)) {
-        return false
-    }
     return true
 }
 
@@ -31,14 +28,6 @@ function isVisibleWithActiveVerificationStatusFilter(asset: IAsset, filter: Asse
         filter.verificationStatus.selected &&
         asset.verification?.status !== filter.verificationStatus.selected
     ) {
-        return false
-    }
-    return true
-}
-
-function isVisibleWithNetworkFilter(asset: IAsset, filter: AssetFilter): boolean {
-    const assetChainId = asset.chainId
-    if (filter.network.active && filter.network.selected >= 0 && assetChainId !== filter.network.selected) {
         return false
     }
     return true

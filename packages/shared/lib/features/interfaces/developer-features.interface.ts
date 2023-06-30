@@ -7,5 +7,4 @@ export interface IDeveloperFeatures extends IFeatureFlag {
     alias: IFeatureFlag
     refreshTokens: IFeatureFlag
     deeplink: IFeatureFlag
-    importErc20Token: IFeatureFlag
 }

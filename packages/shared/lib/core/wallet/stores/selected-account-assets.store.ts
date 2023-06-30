@@ -1,5 +1,4 @@
 import { selectedAccount } from '@core/account/stores/selected-account.store'
-import { layer2Balances } from '@core/layer-2/stores'
 import { marketCoinPrices } from '@core/market'
 import { activeProfileId } from '@core/profile'
 import { derived, get, Readable, writable, Writable } from 'svelte/store'
@@ -12,7 +11,7 @@ import { persistedAssets } from './persisted-assets.store'
 export const assetFilter: Writable<AssetFilter> = writable(DEFAULT_ASSET_FILTER)
 
 export const selectedAccountAssets: Readable<AccountAssets> = derived(
-    [activeProfileId, marketCoinPrices, selectedAccount, persistedAssets, assetFilter, layer2Balances],
+    [activeProfileId, marketCoinPrices, selectedAccount, persistedAssets, assetFilter],
     ([$activeProfileId, $marketCoinPrices]) => {
         if ($activeProfileId) {
             return getAccountAssetsForSelectedAccount($marketCoinPrices)

@@ -26,7 +26,6 @@
     import EnableLedgerBlindSigningPopup from './EnableLedgerBlindSigningPopup.svelte'
     import ErrorLogPopup from './ErrorLogPopup.svelte'
     import FaucetRequestPopup from './FaucetRequestPopup.svelte'
-    import ImportErc20TokenFormPopup from './ImportErc20TokenFormPopup.svelte'
     import LedgerAppGuidePopup from './LedgerAppGuidePopup.svelte'
     import LedgerConnectionGuidePopup from './LedgerConnectionGuidePopup.svelte'
     import LegalUpdatePopup from './LegalUpdatePopup.svelte'
@@ -43,7 +42,6 @@
     import RemoveProposalPopup from './RemoveProposalPopup.svelte'
     import RevotePopup from './RevotePopup.svelte'
     import { SendConfirmationPopup, SendFormPopup } from './send'
-    import SendFlowPopup from './SendFlowPopup.svelte'
     import StopVotingPopup from './StopVotingPopup.svelte'
     import BalanceBreakdownPopup from './BalanceBreakdownPopup.svelte'
     import TestDeepLinkFormPopup from './TestDeepLinkFormPopup.svelte'
@@ -109,7 +107,6 @@
         [PopupId.EnableLedgerBlindSigning]: EnableLedgerBlindSigningPopup,
         [PopupId.ErrorLog]: ErrorLogPopup,
         [PopupId.FaucetRequest]: FaucetRequestPopup,
-        [PopupId.ImportErc20Token]: ImportErc20TokenFormPopup,
         [PopupId.LedgerAppGuide]: LedgerAppGuidePopup,
         [PopupId.LedgerConnection]: LedgerConnectionGuidePopup,
         [PopupId.LegalUpdate]: LegalUpdatePopup,
@@ -126,7 +123,6 @@
         [PopupId.RemoveProposal]: RemoveProposalPopup,
         [PopupId.Revote]: RevotePopup,
         [PopupId.SendConfirmation]: SendConfirmationPopup,
-        [PopupId.SendFlow]: SendFlowPopup,
         [PopupId.SendForm]: SendFormPopup,
         [PopupId.StopVoting]: StopVotingPopup,
         [PopupId.BalanceBreakdown]: BalanceBreakdownPopup,
@@ -200,7 +196,7 @@
                         : 'bg-gray-800 bg-opacity-70 dark:bg-black dark:bg-opacity-50'
                 }`}
 >
-    <div tabindex="0" on:focus={onFocusFirst} />
+    <button type="button" tabindex="0" on:focus={onFocusFirst} />
     <popup-content
         use:clickOutside
         on:clickOutside={tryClosePopup}
@@ -219,7 +215,7 @@
         {/if}
         <svelte:component this={POPUP_MAP[id]} {...props} />
     </popup-content>
-    <div tabindex="0" on:focus={onFocusLast} />
+    <button type="button" tabindex="0" on:focus={onFocusLast} />
 </popup>
 
 <style type="text/scss">
