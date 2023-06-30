@@ -4,6 +4,11 @@ icon: paintbrush
 
 # Components
 
+- Component-related TypeScript code (`enums`, `interfaces`, `types`, etc.) **MUST** live in the component file itself
+- Component names should be appended with the corresponding type of component, i.e. a “view” component should be named `SomeComponentView`(the filename should also match)
+- Props `classes` have to disappear. If we need to style a component, we can wrap up and apply the classes to the wrapper
+- Platform conditionals should be avoided at all times, and variations should be used instead.
+
 ## Organization
 
 The organization of a Svelte component **must** start with the script, followed by the markup and the style.
@@ -94,13 +99,213 @@ The same code can be written without using Svelte language features. The followi
 
 ## Styling
 
-### Tailwind
+- `style` attribute should only be used for variables `style:--opacity={elementX / screenWidth}`
+    - Good
+        ```jsx
 
-_TODO_
+        <footer
+            style:--keyboard-height={$isKeyboardOpen ? ($keyboardHeight + 'px') : 0}
+        >
+            <slot name="footer" />
+        </footer>
+        
+        <style type="text/scss">
+            footer {
+                margin-bottom: var(--keyboard-height);
+            }
+        </style>
+        ```
+        
+    - Bad
+    
+        ```jsx
+        <footer style={$isKeyboardOpen && `margin-bottom: ${$keyboardHeight}px`}>
+            <slot name="footer" />
+        </footer>
+        ```
+        
+    
+- component with multiple variants: the preferred approach is a combination of classes and the style tag, vs creating a string composed of classes generated in TS
+    - Preferred: CSS approach
+    
+      ```jsx
+      <script lang="ts">
+        export let roundedCorners: boolean = false
+      <script lang="ts">
+      
+      <div class:rounded-corners={roundedCorners}>Box</div>
+      
+      <style type="text/scss">
+          div {
+            &.rounded-corners {
+                  @apply rounded-sm;
+              }
+          }
+      </style>
+      ```
+    
+    - Other: TS approach
+    
+      ```jsx
+      <script lang="ts">
+        export let roundedCorners: boolean = false
+      
+        let classes: string = ''
+        $: $$props, setClasses()
+        
+        function setClasses() {
+          if (roundedCorners) {
+            classes = 'rounded-sm'
+          } else {
+            classes = ''
+          }
+        }
+      <script lang="ts">
+      
+      <div class={classes}>Box</div>
+      ```
+    
+- If a component needs a style that is not inside the tailwind scope, the custom style should be added in the style CSS section
+    - Good
+    
+      ```jsx
+      <div>Box</div>
+      <style type="text/scss">
+        div {
+          min-width: 35px;
+        }
+      </style>
+      ```
+    
+    - Bad
+    
+      ```jsx
+      <div style="min-width: 35px;">Box</div>
+      ```
+    
+- Max nested children = 1
+    - Good
+        
+        ```jsx
+        <button {disabled}>
+            <span class:pink>Button</span>
+        </button>
+        <style type="text/scss">
+            button {
+                @apply bg-blue-50;
+                &:disabled {
+                    @apply bg-opacity-50;
+                }
+            }
+            span {
+                &.pink {
+                    @apply text-pink-50;
+                }
+            }
+        </style>
+        ```
+        
+    - Bad
+        
+        ```jsx
+        <button {disabled}>
+            <span class:pink>Button</span>
+        </button>
+        <style type="text/scss">
+            button {
+                @apply bg-blue-50;
+                &:disabled {
+                    @apply bg-opacity-50;
+                }
+                span {
+                    &.pink {
+                        @apply text-pink-50;
+                    }
+                }
+            }
+        </style>
+        ```
+        
+- The preferred way to add styles to a DOM element that does not have variants, is by adding tailwind classes in the `class` attribute
+    - Good
+        
+        ```jsx
+        <div class="bg-blue-500">Box</div>
+        ```
+        
+    - Bad
+        
+        ```jsx
+        <div>Box</div>
+        <style type="text/scss">
+            button {
+                @apply bg-blue-50;
+        		}
+        </style>
+        ```
+        
+- The preferred way to add styled to a DOM element that does have variants, is by adding tailwind classes in the `style` section
+    - Good
+        
+        ```jsx
+        <div class:ghost>Box</div>
+        <style type="text/scss">
+            button {
+                @apply bg-blue-50;
+                &.ghost {
+                    @apply bg-gray-50;
+                }
+            }
+        </style>
+        ```
+        
+    - Bad
+        
+        ```jsx
+        <div class={ghost ? 'bg-gray-50' : 'bg-blue-50'}>Box</div>
+        ```
+        
+- The same DOM element should not contain a combination of tailwind classes (in the `class` attribute) & CSS (in the `style` section), unless the required styling does not exist in tailwind
+- Custom HTML tags are preferred
+    - Good
+        
+        ```jsx
+        <text-hint class="block text-blue-500">This is a hint</text-hint>
+        ```
+        
+    - Bad
+        
+        ```jsx
+        <div class="text-blue-500">This is a hint</div>
+        ```
+        
+- When writing tailwind classes, string concatenation should be avoided because the tailwind purging process skips string concatenations
+    - Good
+        
+        ```jsx
+        <script lang="ts">
+            export let primary: boolean = false
 
-### `style` Tag
+            let backgroundClass: string = getBackgroundClass()
 
-_TODO_
+            function getBackgroundClass(): string {
+                if (primary) {
+                    return 'bg-blue-500'
+                } else {
+                    return 'bg-pink-500'
+                }
+            }
+        </script>
+
+        <div class={backgroundClass}>Box</div>
+
+        ```
+        
+    - Bad
+        
+        ```jsx
+        <div class="bg-{color}-500">Box</div>
+        ```
 
 ### Prettier
 
