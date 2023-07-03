@@ -35,7 +35,7 @@
         $collectiblesRouter.goTo(CollectiblesRoute.Details)
     }
 
-    function getTooltipText(key: 'error' | 'warning'): string {
+    function getTooltipText(key: 'error' | 'warning'): string | undefined {
         const { type, message } = nft?.downloadMetadata?.[key] ?? {}
         return type === 'generic' ? message : localize(`error.nft.${type}.short`)
     }
