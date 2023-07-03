@@ -1,9 +1,10 @@
 <script lang="ts">
     import { ProposalStatusTimelineTooltip } from '@components'
-    import { OutdatedNodeTooltip, ProposalStatusPill, ResultsNotAvailableTooltip } from '@ui'
-    import { Position } from '@ui/enums'
+    import { OutdatedNodeTooltip, ProposalStatusPill, Text, Tooltip } from '@ui'
+    import { FontWeight, Position } from '@ui/enums'
 
     import { IProposal } from '@contexts/governance/interfaces'
+    import { localize } from '@core/i18n'
     import { ProposalError } from '@lib/contexts/governance'
 
     export let proposal: IProposal
@@ -15,9 +16,17 @@
     function showTooltip(show: boolean): void {
         isTooltipVisible = show
     }
+
+    function handleMouseEnter(): void {
+        showTooltip(true)
+    }
+
+    function handleMouseLeave(): void {
+        showTooltip(false)
+    }
 </script>
 
-<div bind:this={anchor} on:mouseenter={() => showTooltip(true)} on:mouseleave={() => showTooltip(false)}>
+<div bind:this={anchor} on:mouseenter={handleMouseEnter} on:mouseleave={handleMouseLeave}>
     <ProposalStatusPill {proposal} />
 </div>
 {#if isTooltipVisible}
@@ -25,7 +34,16 @@
         {#if proposal?.error === ProposalError.NodeOutdated}
             <OutdatedNodeTooltip bind:anchor {position} />
         {:else if proposal?.error === ProposalError.ResultsNotAvailable}
-            <ResultsNotAvailableTooltip bind:anchor {position} />
+            <Tooltip {anchor} {position}>
+                <div class="flex flex-col text-left">
+                    <Text fontWeight={FontWeight.semibold} fontSize="16" classes="mb-2">
+                        {localize('tooltips.governance.resultsNotAvailable.title')}
+                    </Text>
+                    <Text fontWeight={FontWeight.normal}>
+                        {localize('tooltips.governance.resultsNotAvailable.body')}
+                    </Text>
+                </div>
+            </Tooltip>
         {/if}
     {:else}
         <ProposalStatusTimelineTooltip
