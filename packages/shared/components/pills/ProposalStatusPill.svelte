@@ -10,11 +10,11 @@
     $: status = proposal?.status
     $: error = proposal?.error
 
-    const STATUS_COLORS: Record<ProposalStatus, string> = {
-        [ProposalStatus.Upcoming]: 'purple-200',
-        [ProposalStatus.Commencing]: 'blue-200',
-        [ProposalStatus.Holding]: 'green-300',
-        [ProposalStatus.Ended]: 'gray-200',
+    const STATUS_COLORS: { [key: string]: string } = {
+        [ProposalStatus.Upcoming]: 'bg-purple-200',
+        [ProposalStatus.Commencing]: 'bg-blue-200',
+        [ProposalStatus.Holding]: 'bg-green-300',
+        [ProposalStatus.Ended]: 'bg-gray-200',
     }
 </script>
 
@@ -22,9 +22,9 @@
     data={localize(`pills.governance.proposalStatus.${error ? error : status}`)}
     textColor={error ? 'red-700' : 'grey-800'}
     darkTextColor={error ? 'red-700' : 'grey-800'}
-    backgroundColor={error ? 'red-200' : STATUS_COLORS[status]}
-    darkBackgroundColor={error ? 'red-200' : STATUS_COLORS[status]}
-    classes="rounded-full px-2 py-1 flex items-center {status ? '' : 'invisible'}"
+    backgroundColor={error ? 'bg-red-200' : STATUS_COLORS[status]}
+    invisible={!status}
+    rounded="rounded-full"
 >
     {#if error}
         <Icon icon={error ? _Icon.StatusError : undefined} classes="text-red-700" />

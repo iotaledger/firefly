@@ -7,7 +7,8 @@
     data={localize('general.dev')}
     textColor="gray-600"
     darkTextColor="white"
-    backgroundColor="gray-100"
-    darkBackgroundColor="gray-700"
-    classes="uppercase dark:bg-opacity-20 rounded-full px-3"
+    backgroundColor="bg-gray-100 dark:bg-opacity-20"
+    padding="px-3 py-1"
+    uppercase
+    rounded="rounded-full"
 />

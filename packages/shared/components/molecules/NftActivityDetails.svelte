@@ -61,7 +61,7 @@
                 <ActivityAsyncStatusPill asyncStatus={activity?.asyncData?.asyncStatus} />
             {/if}
             {#if isTimelocked}
-                <Pill backgroundColor="gray-200" darkBackgroundColor="gray-200">
+                <Pill backgroundColor="bg-gray-200">
                     {localize('pills.locked')}
                 </Pill>
             {/if}
