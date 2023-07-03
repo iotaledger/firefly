@@ -3,7 +3,6 @@ export * from './boxes'
 export * from './buttons'
 export * from './iconButtons'
 export * from './labels'
-export * from './pills'
 export * from './tiles'
 
 export { default as AmountBox } from './AmountBox.svelte'
