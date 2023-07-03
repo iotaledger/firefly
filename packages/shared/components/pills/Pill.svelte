@@ -9,15 +9,13 @@
     export let invisible: boolean = false
     export let backgroundColor: string | undefined = undefined
     export let rounded: string = 'rounded-2xl'
-    export let padding: string = 'px-2.5 py-1'
 </script>
 
 <pill-wrapper
     class:shrink-0={shrink}
     class:uppercase
     class:invisible
-    class="flex items-center {backgroundColor ? backgroundColor : ''} {rounded} {padding}"
-    class:rounded-full={rounded}
+    class="flex items-center {backgroundColor ?? ''} {rounded} px-2.5 py-1"
 >
     <Text
         type={TextType.p}

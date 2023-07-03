@@ -8,7 +8,6 @@
     textColor="gray-600"
     darkTextColor="white"
     backgroundColor="bg-gray-100 dark:bg-opacity-20"
-    padding="px-3 py-1"
     uppercase
     rounded="rounded-full"
 />
