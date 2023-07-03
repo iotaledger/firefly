@@ -2,7 +2,6 @@
     import { Modal, SelectorInput, IOption } from 'shared/components'
     import { activeProfile, getNetworkHrp } from '@core/profile'
     import { validateBech32Address } from '@core/utils'
-    import { isIscpChain } from '@core/network'
     import type { ChainMetadata } from '@core/network'
 
     export let iscpChainAddress: string | undefined = undefined
@@ -42,7 +41,7 @@
     }
 
     function getNetworkValue(chainMetadata: ChainMetadata): string | undefined {
-        return isIscpChain(chainMetadata) ? chainMetadata?.aliasAddress : undefined
+        return chainMetadata?.aliasAddress ?? undefined
     }
 
     export function validate(): Promise<void> {
