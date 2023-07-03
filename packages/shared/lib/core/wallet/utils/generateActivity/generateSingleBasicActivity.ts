@@ -1,6 +1,5 @@
 import { isShimmerClaimingTransaction } from '@contexts/onboarding/stores'
 import { IAccountState } from '@core/account'
-import { handleError } from '@core/error/handlers'
 import { activeProfileId, getCoinType } from '@core/profile'
 import { IActivityGenerationParameters } from '@core/wallet/interfaces'
 import { TransactionActivity } from '@core/wallet/types'
@@ -28,7 +27,7 @@ export async function generateSingleBasicActivity(
 
     const isHidden = false
     const isAssetHidden = false
-    const containsValue = activityOutputContainsValue(wrappedOutput)
+    const containsValue = await activityOutputContainsValue(account, wrappedOutput)
 
     const outputId = wrappedOutput.outputId
     const id = outputId || transactionId
@@ -42,12 +41,12 @@ export async function generateSingleBasicActivity(
     const publicNote = ''
 
     const sendingInfo = getSendingInformation(processedTransaction, output, account)
-    const asyncData = getAsyncDataFromOutput(output, outputId, claimingData, account)
+    const asyncData = await getAsyncDataFromOutput(output, outputId, claimingData, account)
 
     const { parsedLayer2Metadata, destinationNetwork } = getLayer2ActivityInformation(metadata, sendingInfo)
     const gasBudget = Number(parsedLayer2Metadata?.gasBudget ?? '0')
 
-    let { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output)
+    let { storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(account, output)
     giftedStorageDeposit = action === ActivityAction.Burn ? 0 : giftedStorageDeposit
     giftedStorageDeposit = gasBudget === 0 ? giftedStorageDeposit : 0
 
@@ -58,15 +57,7 @@ export async function generateSingleBasicActivity(
 
     let surplus: number | undefined = undefined
     if (nativeToken) {
-        try {
-            const minimumRequiredStorageDeposit = await account.minimumRequiredStorageDeposit(output)
-            surplus = Number(output.amount) - Number(minimumRequiredStorageDeposit)
-            if (surplus && !storageDeposit) {
-                giftedStorageDeposit = Number(minimumRequiredStorageDeposit)
-            }
-        } catch (err) {
-            handleError(err)
-        }
+        surplus = Number(output.amount) - (giftedStorageDeposit ?? storageDeposit)
     }
 
     let rawAmount: number

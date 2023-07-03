@@ -66,7 +66,7 @@ export async function generateActivitiesFromBasicOutputs(
                 burnedNativeToken.amount
             )
         } else if (isSelfTransaction && isConsolidation(basicOutput, processedTransaction)) {
-            activity = generateSingleConsolidationActivity(account, {
+            activity = await generateSingleConsolidationActivity(account, {
                 action: ActivityAction.Send,
                 processedTransaction,
                 wrappedOutput: basicOutput,

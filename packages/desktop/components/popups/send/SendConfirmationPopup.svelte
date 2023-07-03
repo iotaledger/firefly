@@ -57,7 +57,6 @@
     } = get(newTransactionDetails)
 
     let storageDeposit = 0
-    let visibleSurplus = 0
     let preparedOutput: Output
     let expirationTimePicker: ExpirationTimePicker
 
@@ -90,7 +89,7 @@
         isAssetHidden: false,
         asyncData: undefined,
         giftedStorageDeposit: 0,
-        surplus: visibleSurplus,
+        surplus: Number(surplus) ?? 0,
         type: ActivityType.Basic,
         direction: ActivityDirection.Outgoing,
         inclusionState: InclusionState.Pending,
@@ -127,36 +126,12 @@
         const outputParams = await getOutputParameters(transactionDetails)
         preparedOutput = await prepareOutput($selectedAccount.index, outputParams, DEFAULT_TRANSACTION_OPTIONS)
 
-        setStorageDeposit(preparedOutput, Number(surplus))
+        const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
+            await getStorageDepositFromOutput($selectedAccount, preparedOutput)
+        storageDeposit = _storageDeposit > 0 ? _storageDeposit : _giftedStorageDeposit
 
         if (!initialExpirationDate) {
             initialExpirationDate = getInitialExpirationDate()
-        }
-    }
-
-    function setStorageDeposit(preparedOutput: Output, surplus?: number): void {
-        const rawAmount =
-            transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.rawAmount : '0'
-
-        const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
-            getStorageDepositFromOutput(preparedOutput, rawAmount)
-
-        if (surplus > _storageDeposit) {
-            visibleSurplus = Number(surplus)
-        }
-
-        if (giftStorageDeposit) {
-            // Only giftedStorageDeposit needs adjusting, since that is derived
-            // from the amount property instead of the unlock condition
-            if (!surplus) {
-                storageDeposit = _giftedStorageDeposit
-            } else if (surplus >= _giftedStorageDeposit) {
-                storageDeposit = 0
-            } else {
-                storageDeposit = _giftedStorageDeposit - surplus
-            }
-        } else {
-            storageDeposit = _storageDeposit
         }
     }
 
@@ -171,7 +146,7 @@
 
     async function onConfirmClick(): Promise<void> {
         try {
-            validateSendConfirmation(preparedOutput)
+            await validateSendConfirmation($selectedAccount, preparedOutput)
 
             if ($isActiveLedgerProfile) {
                 ledgerPreparedOutput.set(preparedOutput)

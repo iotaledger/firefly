@@ -38,7 +38,7 @@ export async function generateSingleNftActivity(
     const { parsedLayer2Metadata, destinationNetwork } = getLayer2ActivityInformation(metadata, sendingInfo)
     const gasBudget = Number(parsedLayer2Metadata?.gasBudget ?? '0')
 
-    let { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output)
+    let { storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(account, output)
     giftedStorageDeposit = action === ActivityAction.Burn ? 0 : giftedStorageDeposit
     giftedStorageDeposit = gasBudget === 0 ? giftedStorageDeposit : 0
 
@@ -53,7 +53,7 @@ export async function generateSingleNftActivity(
         handleError(err)
     }
 
-    const asyncData = getAsyncDataFromOutput(output, outputId, claimingData, account)
+    const asyncData = await getAsyncDataFromOutput(output, outputId, claimingData, account)
 
     return {
         type: ActivityType.Nft,

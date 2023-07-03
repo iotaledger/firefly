@@ -40,7 +40,7 @@ async function generateActivitiesFromProcessedTransactionsWithInputs(
 
     const containsFoundryActivity = outputs.some((output) => output.output.type === OUTPUT_TYPE_FOUNDRY)
     if (containsFoundryActivity) {
-        const foundryActivities = generateActivitiesFromFoundryOutputs(processedTransaction, account)
+        const foundryActivities = await generateActivitiesFromFoundryOutputs(processedTransaction, account)
         activities.push(...foundryActivities)
     }
 
