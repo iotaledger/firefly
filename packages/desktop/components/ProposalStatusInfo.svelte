@@ -1,7 +1,7 @@
 <script lang="ts">
     import { ProposalStatusTimelineTooltip } from '@components'
-    import { OutdatedNodeTooltip, ProposalStatusPill, Text, Tooltip } from '@ui'
-    import { FontWeight, Position } from '@ui/enums'
+    import { InformationTooltip, ProposalStatusPill } from '@ui'
+    import { Position } from '@ui/enums'
 
     import { IProposal } from '@contexts/governance/interfaces'
     import { localize } from '@core/i18n'
@@ -24,6 +24,24 @@
     function handleMouseLeave(): void {
         showTooltip(false)
     }
+
+    function getProposalErrorText(proposal: IProposal): { title: string; body: string } {
+        let title: string = ''
+        let body: string = ''
+
+        switch (proposal?.error) {
+            case ProposalError.NodeOutdated:
+                title = localize('tooltips.governance.outdatedNode.title')
+                body = localize('tooltips.governance.outdatedNode.body')
+                break
+            case ProposalError.ResultsNotAvailable:
+                title = localize('tooltips.governance.resultsNotAvailable.title')
+                body = localize('tooltips.governance.resultsNotAvailable.body')
+                break
+        }
+
+        return { title, body }
+    }
 </script>
 
 <div bind:this={anchor} on:mouseenter={handleMouseEnter} on:mouseleave={handleMouseLeave}>
@@ -31,19 +49,9 @@
 </div>
 {#if isTooltipVisible}
     {#if proposal?.error}
-        {#if proposal?.error === ProposalError.NodeOutdated}
-            <OutdatedNodeTooltip bind:anchor {position} />
-        {:else if proposal?.error === ProposalError.ResultsNotAvailable}
-            <Tooltip {anchor} {position}>
-                <div class="flex flex-col text-left">
-                    <Text fontWeight={FontWeight.semibold} fontSize="16" classes="mb-2">
-                        {localize('tooltips.governance.resultsNotAvailable.title')}
-                    </Text>
-                    <Text fontWeight={FontWeight.normal}>
-                        {localize('tooltips.governance.resultsNotAvailable.body')}
-                    </Text>
-                </div>
-            </Tooltip>
+        {@const { title, body } = getProposalErrorText(proposal)}
+        {#if title && body}
+            <InformationTooltip {anchor} {position} {title} {body} />
         {/if}
     {:else}
         <ProposalStatusTimelineTooltip
