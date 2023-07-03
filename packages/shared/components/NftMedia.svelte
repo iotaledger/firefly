@@ -11,7 +11,6 @@
     export let controls: boolean = false
     export let loop: boolean = false
     export let muted: boolean = false
-    export let classes: string = ''
     export let useCaching: boolean = true
 
     const bgColor: string = 'gray-200'
@@ -37,17 +36,18 @@
 </script>
 
 {#if hasMounted && nft && nft.composedUrl && nft.parsedMetadata && (!useCaching || nft.downloadMetadata?.isLoaded)}
-    <MediaDisplay
-        {src}
-        expectedType={nft.parsedMetadata.type}
-        isLoaded={nft.downloadMetadata.isLoaded}
-        {autoplay}
-        {controls}
-        {loop}
-        {muted}
-        {classes}
-        alt={`Media display for ${nft.name}`}
-    />
+    <figure class="bg-gray-200 dark:bg-gray-700 min-w-full h-full object-cover">
+        <MediaDisplay
+            {src}
+            expectedType={nft.parsedMetadata.type}
+            isLoaded={nft.downloadMetadata.isLoaded}
+            {autoplay}
+            {controls}
+            {loop}
+            {muted}
+            alt={`Media display for ${nft.name}`}
+        />
+    </figure>
 {:else}
     <slot name="placeholder">
         <MediaPlaceholder type={nft?.parsedMetadata?.type} {bgColor} {darkBgColor} {isDownloading} />

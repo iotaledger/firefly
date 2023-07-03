@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Text, FontWeight, NftMedia, TooltipIcon, Position } from 'shared/components'
+    import { Text, FontWeight, NftMedia, TooltipIcon, Position, TooltipType } from 'shared/components'
 
     import { time } from '@core/app'
     import { localize } from '@core/i18n'
@@ -20,13 +20,13 @@
         tooltipIconProps = {
             icon: Icon.ErrorFilled,
             iconClasses: 'fill-current text-red-700',
-            text: getTooltipText('error'),
+            text: getTooltipText(TooltipType.Error),
         }
     } else if (nft.downloadMetadata.warning) {
         tooltipIconProps = {
             icon: Icon.ExclamationFilled,
             iconClasses: 'fill-current text-yellow-700',
-            text: getTooltipText('warning'),
+            text: getTooltipText(TooltipType.Warning),
         }
     }
 
@@ -35,20 +35,16 @@
         $collectiblesRouter.goTo(CollectiblesRoute.Details)
     }
 
-    function getTooltipText(key: 'error' | 'warning'): string | undefined {
+    function getTooltipText(key: TooltipType): string | undefined {
         const { type, message } = nft?.downloadMetadata?.[key] ?? {}
         return type === 'generic' ? message : localize(`error.nft.${type}.short`)
     }
 </script>
 
 <button type="button" on:click={onClick} class="flex flex-col items-center justify-center">
-    <div class="w-full rounded-2xl overflow-hidden flex flex-col shadow-elevation-1">
-        <div
-            class="w-full flex relative"
-            bind:clientWidth={nftWrapperClientWidth}
-            style="height: {nftWrapperClientWidth}px; "
-        >
-            <NftMedia {nft} classes="bg-gray-200 dark:bg-gray-700 min-w-full min-h-full object-cover" loop muted />
+    <div class="w-full rounded-2xl overflow-hidden flex flex-col shadow-elevation-1 h-full">
+        <div class="w-full flex relative h-full" bind:clientWidth={nftWrapperClientWidth}>
+            <NftMedia {nft} loop muted />
             {#if nft.downloadMetadata.error || nft.downloadMetadata.warning}
                 <div class="absolute right-3 top-3">
                     <TooltipIcon

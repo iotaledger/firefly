@@ -15,7 +15,6 @@ export { default as NetworkRecipientItem } from './NetworkRecipientItem.svelte'
 export { default as NetworkRecipientSelector } from './NetworkRecipientSelector.svelte'
 export { default as NftActivityDetails } from './NftActivityDetails.svelte'
 export { default as NftImageOrIconBox } from './NftImageOrIconBox.svelte'
-
 export { default as SelectorInput } from './SelectorInput.svelte'
 export { default as ShimmerClaimingAccountList } from './ShimmerClaimingAccountList.svelte'
 
