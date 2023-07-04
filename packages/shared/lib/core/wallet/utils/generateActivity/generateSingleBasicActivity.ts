@@ -57,7 +57,8 @@ export async function generateSingleBasicActivity(
 
     let surplus: number | undefined = undefined
     if (nativeToken) {
-        surplus = Number(output.amount) - (giftedStorageDeposit ?? storageDeposit)
+        const storageDepositToDeduct = (storageDeposit > 0 ? storageDeposit : giftedStorageDeposit) ?? 0
+        surplus = Number(output.amount) - storageDepositToDeduct
     }
 
     let rawAmount: number

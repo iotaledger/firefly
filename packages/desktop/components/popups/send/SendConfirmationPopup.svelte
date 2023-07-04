@@ -52,8 +52,10 @@
     } = get(newTransactionDetails)
 
     let storageDeposit = 0
+    let minimumStorageDeposit = 0
     let preparedOutput: Output
     let expirationTimePicker: ExpirationTimePicker
+    let visibleSurplus: number | undefined = undefined
 
     let initialExpirationDate: TimePeriod = getInitialExpirationDate()
     let activeTab: Tab
@@ -83,7 +85,7 @@
         isAssetHidden: false,
         asyncData: undefined,
         giftedStorageDeposit: 0,
-        surplus: Number(surplus) ?? 0,
+        surplus: visibleSurplus,
         type: ActivityType.Basic,
         direction: ActivityDirection.Outgoing,
         inclusionState: InclusionState.Pending,
@@ -121,6 +123,17 @@
 
         await updateStorageDeposit()
 
+        // Note: we need to adjust the surplus
+        // so we make sure that the surplus is always added on top of the minimum storage deposit
+        if (Number(surplus) > 0) {
+            if (minimumStorageDeposit >= Number(surplus)) {
+                visibleSurplus = surplus = undefined
+            } else {
+                visibleSurplus = Number(surplus) - minimumStorageDeposit
+            }
+        }
+        // end of warning
+
         if (!initialExpirationDate) {
             initialExpirationDate = getInitialExpirationDate()
         }
@@ -129,7 +142,7 @@
     async function updateStorageDeposit(): Promise<void> {
         const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
             await getStorageDepositFromOutput($selectedAccount, preparedOutput)
-        storageDeposit = _storageDeposit > 0 ? _storageDeposit : _giftedStorageDeposit
+        storageDeposit = minimumStorageDeposit = _storageDeposit > 0 ? _storageDeposit : _giftedStorageDeposit
         if (isBaseTokenTransfer) {
             const rawAmount = Number((transactionDetails as NewTokenTransactionDetails).rawAmount)
             if (rawAmount >= storageDeposit) {
