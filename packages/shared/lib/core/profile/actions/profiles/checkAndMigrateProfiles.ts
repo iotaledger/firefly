@@ -279,13 +279,11 @@ function persistedProfileMigrationToV13(
         delete oldNetwork.chainConfigurations
 
         const newNetwork = oldNetwork as unknown as IPersistedNetwork
-        const networkDefaultChainConfig = DEFAULT_CHAIN_CONFIGURATIONS[existingProfile.network.id]
+        const maybeDefaultChainConfig = DEFAULT_CHAIN_CONFIGURATIONS[existingProfile.network.id]
 
-        const defaultChainConfig: IIscpChainMetadata[] =
-            networkDefaultChainConfig !== undefined ? [networkDefaultChainConfig] : []
+        const defaultChainConfig: IIscpChainMetadata[] = maybeDefaultChainConfig ? [maybeDefaultChainConfig] : []
 
         newNetwork.chains = defaultChainConfig
-
         existingProfile.network = newNetwork
     }
 
