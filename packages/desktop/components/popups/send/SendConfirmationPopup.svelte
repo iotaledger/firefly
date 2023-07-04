@@ -17,19 +17,14 @@
     import { Tab } from 'shared/components/enums'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { activeProfile, checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
+    import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
     import { TimePeriod } from '@core/utils'
-    import { ActivityDirection, ActivityType, InclusionState, ActivityAction } from '@core/wallet/enums'
-    import {
-        selectedAccountAssets,
-        newTransactionDetails,
-        updateNewTransactionDetails,
-        NewTransactionType,
-    } from '@core/wallet/stores'
+    import { ActivityDirection, ActivityType, InclusionState, ActivityAction, TokenStandard } from '@core/wallet/enums'
+    import { newTransactionDetails, updateNewTransactionDetails, NewTransactionType } from '@core/wallet/stores'
     import { sendOutput } from '@core/wallet/actions'
     import { DEFAULT_TRANSACTION_OPTIONS } from '@core/wallet/constants'
     import { getOutputParameters, validateSendConfirmation, getAddressFromSubject } from '@core/wallet/utils'
-    import { Activity, Output } from '@core/wallet/types'
+    import { Activity, NewTokenTransactionDetails, Output } from '@core/wallet/types'
     import { closePopup, openPopup, PopupId } from '@desktop/auxiliary/popup'
     import { ledgerPreparedOutput } from '@core/ledger'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
@@ -66,11 +61,10 @@
     $: transactionDetails = get(newTransactionDetails)
     $: isInternal = recipient.type === 'account'
     $: expirationTimePicker?.setNull(giftStorageDeposit)
-    $: hideGiftToggle =
-        (transactionDetails.type === NewTransactionType.TokenTransfer &&
-            transactionDetails.asset.id === $selectedAccountAssets?.[$activeProfile?.network.id]?.baseCoin?.id) ||
-        (disableToggleGift && !giftStorageDeposit) ||
-        !!layer2Parameters
+    $: isBaseTokenTransfer =
+        transactionDetails.type === NewTransactionType.TokenTransfer &&
+        transactionDetails.asset?.metadata?.standard === TokenStandard.BaseToken
+    $: hideGiftToggle = isBaseTokenTransfer || !!layer2Parameters || (disableToggleGift && !giftStorageDeposit)
     $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
     $: isTransferring = $selectedAccount.isTransferring
 
@@ -122,16 +116,25 @@
 
     async function prepareTransactionOutput(): Promise<void> {
         const transactionDetails = get(newTransactionDetails)
-
         const outputParams = await getOutputParameters(transactionDetails)
         preparedOutput = await prepareOutput($selectedAccount.index, outputParams, DEFAULT_TRANSACTION_OPTIONS)
 
-        const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
-            await getStorageDepositFromOutput($selectedAccount, preparedOutput)
-        storageDeposit = _storageDeposit > 0 ? _storageDeposit : _giftedStorageDeposit
+        await updateStorageDeposit()
 
         if (!initialExpirationDate) {
             initialExpirationDate = getInitialExpirationDate()
+        }
+    }
+
+    async function updateStorageDeposit(): Promise<void> {
+        const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
+            await getStorageDepositFromOutput($selectedAccount, preparedOutput)
+        storageDeposit = _storageDeposit > 0 ? _storageDeposit : _giftedStorageDeposit
+        if (isBaseTokenTransfer) {
+            const rawAmount = Number((transactionDetails as NewTokenTransactionDetails).rawAmount)
+            if (rawAmount >= storageDeposit) {
+                storageDeposit = 0
+            }
         }
     }
 

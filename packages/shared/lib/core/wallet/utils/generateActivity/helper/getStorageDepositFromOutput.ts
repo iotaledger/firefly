@@ -27,8 +27,7 @@ export async function getStorageDepositFromOutput(
             minimumRequiredStorageDepositNumber > 0 ? minimumRequiredStorageDepositNumber : 0
         return {
             storageDeposit: 0,
-            giftedStorageDeposit: (minimumRequiredStorageDepositNumber =
-                minimumRequiredStorageDepositNumber > 0 ? minimumRequiredStorageDepositNumber : 0),
+            giftedStorageDeposit: minimumRequiredStorageDepositNumber,
         }
     }
 }
