@@ -67,6 +67,13 @@ export async function generateSingleBasicActivity(
         rawAmount = fallbackAmount
     }
 
+    // Note: we update the displayed storage deposit so it matches what was displayed in the send confirmation flow
+    // set the storage deposit to zero if the amount is greater than the storage deposit
+    // to improve the UX so the user doesnt think they need to pay the storage deposit
+    if (!nativeToken && !storageDeposit && rawAmount >= giftedStorageDeposit) {
+        storageDeposit = giftedStorageDeposit = 0
+    }
+
     return {
         type: ActivityType.Basic,
         isHidden,
