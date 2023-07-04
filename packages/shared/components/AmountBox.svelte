@@ -8,12 +8,12 @@
     export let amount: number
     export let unit: string | undefined = undefined
 
-    const MAX_LENGTH_PER_LINE = 15
+    const MAX_LENGTH_PER_LINE: number = 15
 
-    const formattedAmount = asset?.metadata ? formatTokenAmountDefault(amount, asset.metadata, unit) : ''
+    const formattedAmount: string = asset?.metadata ? formatTokenAmountDefault(amount, asset.metadata, unit) : ''
     let displayedAmount: string[] = [formattedAmount]
-    let tokenAmountElement: HTMLElement = null
-    let isTooltipVisible = false
+    let tokenAmountElement: HTMLElement | null = null
+    let isTooltipVisible: boolean = false
 
     $: hasDecimal = formattedAmount.includes(getDecimalSeparator())
     $: amountWithoutDecimals = formattedAmount.split(getDecimalSeparator())[0]
@@ -48,7 +48,6 @@
     function trimDecimals(amount: string): string {
         if (hasDecimal) {
             const TWO_DECIMALS_WITH_SEPARATOR_LENGTH = 3
-
             const decimalSeparatorIndex = amount.indexOf(getDecimalSeparator())
             const decimalsLength =
                 amountWithoutDecimals.length >= MAX_LENGTH_PER_LINE - TWO_DECIMALS_WITH_SEPARATOR_LENGTH
@@ -68,7 +67,6 @@
 
         if (amountWithoutDecimals.includes(getGroupSeparator()) && thousandGroups.length > 3) {
             const lines: number = Math.ceil((amountWithoutDecimals.length + decimals.length) / MAX_LENGTH_PER_LINE)
-
             const brokenThousands: string[] = [amountWithoutDecimals]
             for (let index = 0; index < lines - 1; index++) {
                 let thousandsToBeIncluded: number =
@@ -113,7 +111,9 @@
                 {/if}
             </Text>
             {#if isTooltipVisible}
-                <Tooltip anchor={tokenAmountElement}><Text classes="break-all">{amount} {unit}</Text></Tooltip>
+                <Tooltip anchor={tokenAmountElement}>
+                    <Text classes="break-all">{amount} {unit}</Text>
+                </Tooltip>
             {/if}
         </token-amount>
     </amount>

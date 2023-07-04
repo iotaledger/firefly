@@ -7,4 +7,5 @@ export interface IPersistedAsset {
     metadata?: TokenMetadata
     hidden: boolean
     verification: AssetVerification
+    chainId?: number
 }
