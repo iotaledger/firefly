@@ -1,5 +1,5 @@
-import { ChainConfiguration, NetworkMetadata } from '../types'
+import { ChainMetadata, NetworkMetadata } from '../types'
 
 export interface IPersistedNetwork extends NetworkMetadata {
-    chainConfigurations: ChainConfiguration[]
+    chains: ChainMetadata[]
 }

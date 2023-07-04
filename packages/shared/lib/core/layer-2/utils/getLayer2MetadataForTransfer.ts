@@ -13,7 +13,7 @@ export async function getLayer2MetadataForTransfer(transactionDetails: NewTransa
     const address = getAddressFromSubject(transactionDetails.recipient)
     const encodedAddress = encodeAddress(address.toLowerCase())
 
-    const estimatedGas = await getEstimatedGasForTransferFromTransactionDetails(transactionDetails)
+    const estimatedGas = await getEstimatedGasForTransferFromTransactionDetails()
 
     metadataStream.writeUInt32('senderContract', EXTERNALLY_OWNED_ACCOUNT)
     metadataStream.writeUInt32('targetContract', ACCOUNTS_CONTRACT)
