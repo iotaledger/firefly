@@ -32,7 +32,6 @@
         @apply h-6;
         @apply rounded-full;
         @apply border border-solid border-transparent dark:border-gray-700;
-        @apply cursor-pointer;
         @apply bg-gray-200 dark:bg-gray-900;
 
         &[disabled] {
