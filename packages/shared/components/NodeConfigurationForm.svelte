@@ -9,20 +9,20 @@
     import { getNodeInfo } from '@core/profile-manager'
     import { IDropdownItem, cleanUrl } from '@core/utils'
     import features from '@features/features'
-    import { Dropdown, Error, NumberInput, PasswordInput, TextInput } from 'shared/components'
-
-    interface NodeValidationOptions {
-        checkNodeInfo: boolean
-        checkSameNetwork: boolean
-        uniqueCheck: boolean
-        validateClientOptions: boolean
-    }
+    import {
+        Dropdown,
+        Error,
+        type NodeValidationOptions,
+        NumberInput,
+        PasswordInput,
+        TextInput,
+    } from 'shared/components'
 
     export let node: INode = structuredClone(EMPTY_NODE)
-    export let networkId: NetworkId
-    export let coinType: string | undefined
-    export let isBusy = false
-    export let formError = ''
+    export let networkId: NetworkId | undefined = undefined
+    export let coinType: string | undefined = undefined
+    export let isBusy: boolean = false
+    export let formError: string | undefined = undefined
     export let currentClientOptions: IClientOptions | undefined = undefined
     export let isDeveloperProfile: boolean = false
     export let onSubmit: () => void = () => {}
@@ -48,7 +48,7 @@
     ].filter((item) => features.onboarding?.[item.value]?.enabled)
 
     let [username, password] = node.auth?.basicAuthNamePwd ?? ['', '']
-    let jwt = node.auth?.jwt
+    let jwt = node?.auth?.jwt ?? ''
 
     $: networkId, (coinType = undefined)
     $: networkId, coinType, node.url, (formError = '')
@@ -122,7 +122,7 @@
 </script>
 
 <form id="node-configuration-form" class="w-full h-full flex-col space-y-3" on:submit|preventDefault={onSubmit}>
-    {#if showNetworkFields}
+    {#if showNetworkFields && networkId}
         <Dropdown
             label={localize('general.network')}
             placeholder={localize('general.network')}
@@ -131,7 +131,7 @@
             disabled={isBusy}
             onSelect={onNetworkIdChanges}
         />
-        {#if networkId === NetworkId.Custom}
+        {#if networkId === NetworkId.Custom && coinType}
             <NumberInput
                 bind:value={coinType}
                 placeholder={localize('general.coinType')}
