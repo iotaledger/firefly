@@ -62,7 +62,7 @@ async function generateActivitiesFromProcessedTransactionsWithInputs(
         ? processedTransaction?.outputs[0]
         : outputs.find((output) => isParticipationOutput(output.output))
     if (governanceOutput) {
-        const governanceActivity = generateSingleGovernanceActivity(account, {
+        const governanceActivity = await generateSingleGovernanceActivity(account, {
             processedTransaction,
             wrappedOutput: governanceOutput,
             action: null,
