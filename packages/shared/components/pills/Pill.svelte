@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Text, FontWeight, TextType } from 'shared/components'
+    import { Text, FontWeight, TextType, PillBorderRadius } from 'shared/components'
 
     export let data: string | undefined = undefined
     export let textColor: string = 'gray-800'
@@ -8,14 +8,14 @@
     export let uppercase: boolean = false
     export let invisible: boolean = false
     export let backgroundColor: string | undefined = undefined
-    export let rounded: string = 'rounded-2xl'
+    export let borderRadius: PillBorderRadius = PillBorderRadius['2xl']
 </script>
 
 <pill-wrapper
     class:shrink-0={shrink}
     class:uppercase
     class:invisible
-    class="flex items-center {backgroundColor ?? ''} {rounded} px-2.5 py-1"
+    class="flex items-center {backgroundColor ?? ''} rounded-{borderRadius} px-2.5 py-1"
 >
     <Text
         type={TextType.p}

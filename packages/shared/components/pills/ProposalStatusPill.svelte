@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Icon, Pill } from 'shared/components'
+    import { Icon, Pill, PillBorderRadius } from 'shared/components'
     import { Icon as _Icon } from '@auxiliary/icon'
     import { localize } from '@core/i18n'
     import { ProposalStatus } from '@contexts/governance/enums'
@@ -24,7 +24,7 @@
     darkTextColor={error ? 'red-700' : 'grey-800'}
     backgroundColor={error ? 'bg-red-200' : STATUS_COLORS[status]}
     invisible={!status}
-    rounded="rounded-full"
+    borderRadius={PillBorderRadius.Full}
 >
     {#if error}
         <Icon icon={error ? _Icon.StatusError : undefined} classes="text-red-700" />
