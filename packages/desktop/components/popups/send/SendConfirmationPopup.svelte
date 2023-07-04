@@ -42,6 +42,7 @@
         TARGET_CONTRACTS,
         TRANSFER_ALLOWANCE,
     } from '@core/layer-2'
+    import { ToggleColor } from '@ui/inputs/Toggle.svelte'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
@@ -221,7 +222,7 @@
                 <KeyValueBox keyText={localize('general.giftStorageDeposit')}>
                     <Toggle
                         slot="value"
-                        color="green"
+                        color={ToggleColor.Green}
                         disabled={disableToggleGift}
                         active={giftStorageDeposit}
                         onClick={toggleGiftStorageDeposit}
