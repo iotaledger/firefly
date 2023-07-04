@@ -9,8 +9,8 @@
 </script>
 
 <Tooltip {anchor} {position}>
-    <div class="flex flex-col text-left">
-        <Text fontWeight={FontWeight.semibold} fontSize="16" classes="mb-2">
+    <div class="flex flex-col text-left space-y-2">
+        <Text fontWeight={FontWeight.semibold} fontSize="16">
             {title}
         </Text>
         <Text fontWeight={FontWeight.normal}>
