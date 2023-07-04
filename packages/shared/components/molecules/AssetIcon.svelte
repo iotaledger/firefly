@@ -21,7 +21,7 @@
     let chainName: string | undefined
 
     $: network = $activeProfile.network
-    $: chainId, (chainName = getTooltipText())
+    $: network, chainId, (chainName = getTooltipText())
     $: isAnimation = asset.id in ANIMATED_TOKEN_IDS
     $: asset, updateAssetIcon()
 
