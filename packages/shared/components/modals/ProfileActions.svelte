@@ -166,7 +166,7 @@
                         </Text>
                     </div>
                 </div>
-                <Toggle active={$isStrongholdLocked} onClick={onStrongholdToggleClick} classes="cursor-pointer" />
+                <Toggle active={$isStrongholdLocked} onClick={onStrongholdToggleClick} />
             </div>
             <HR />
         {:else}

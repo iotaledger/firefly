@@ -1,10 +1,16 @@
-<script lang="ts">
-    export let active = false
-    export let classes = ''
-    export let color = 'blue'
-    export let disabled = false
+<script lang="ts" context="module">
+    export enum ToggleColor {
+        Green = 'green',
+        Blue = 'blue',
+    }
+</script>
 
-    export let onClick: () => void
+<script lang="ts">
+    export let active: boolean = false
+    export let color: ToggleColor = ToggleColor.Blue
+    export let disabled: boolean = false
+
+    export let onClick: (() => unknown) | undefined = undefined
 
     function onToggleClick(): void {
         if (!disabled && onClick) {
@@ -13,29 +19,45 @@
     }
 </script>
 
-<button
-    on:click={onToggleClick}
-    class:active
-    {disabled}
-    type="button"
-    class="
-        toggle relative block w-10 shrink-0 h-6 rounded-full border-solid border border-transparent dark:border-gray-700
-        {disabled ? 'opacity-40' : 'cursor-pointer'}
-        {active ? `bg-${color}-500` : 'bg-gray-200 dark:bg-gray-900'} 
-        {classes}"
->
-    <knob class="absolute top-1/2 transform -translate-y-1/2 left-1 h-4 w-4 rounded-full bg-white dark:bg-gray-800" />
+<button on:click={onToggleClick} {disabled} type="button" class:active class={active ? `toggle-${color}` : null}>
+    <knob />
 </button>
 
-<style type="text/scss">
-    .toggle {
-        knob {
-            transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+<style lang="scss">
+    button {
+        @apply relative;
+        @apply block;
+        @apply w-10;
+        @apply shrink-0;
+        @apply h-6;
+        @apply rounded-full;
+        @apply border border-solid border-transparent dark:border-gray-700;
+        @apply bg-gray-200 dark:bg-gray-900;
+
+        &[disabled] {
+            @apply opacity-40;
         }
+
         &.active {
-            knob {
-                left: 20px;
+            &.toggle-green {
+                @apply bg-green-500;
             }
+            &.toggle-blue {
+                @apply bg-blue-500;
+            }
+            knob {
+                @apply left-5;
+            }
+        }
+
+        knob {
+            @apply absolute;
+            @apply rounded-full;
+            @apply h-4 w-4;
+            @apply top-1/2 left-1;
+            @apply transform -translate-y-1/2;
+            @apply bg-white dark:bg-gray-800;
+            transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
         }
     }
 </style>
