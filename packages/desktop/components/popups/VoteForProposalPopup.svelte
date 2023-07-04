@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Button, Text, FontWeight, TextHint, TextType, KeyValueBox } from 'shared/components'
     import { HTMLButtonType } from 'shared/components/enums'
-    import { closePopup, openPopup, PopupId } from '@desktop/auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { selectedAccount } from '@core/account/stores'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth, getBaseToken } from '@core/profile/actions'

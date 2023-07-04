@@ -30,7 +30,7 @@
     import { DEFAULT_TRANSACTION_OPTIONS } from '@core/wallet/constants'
     import { getOutputParameters, validateSendConfirmation, getAddressFromSubject } from '@core/wallet/utils'
     import { Activity, Output } from '@core/wallet/types'
-    import { closePopup, openPopup, PopupId } from '@desktop/auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { ledgerPreparedOutput } from '@core/ledger'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import { handleError } from '@core/error/handlers/handleError'
