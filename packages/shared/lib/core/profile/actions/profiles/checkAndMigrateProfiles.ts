@@ -1,5 +1,11 @@
 import { IPersistedAccountData } from '@core/account/interfaces'
-import { COIN_TYPE, getDefaultPersistedNetwork, NetworkId } from '@core/network'
+import {
+    COIN_TYPE,
+    DEFAULT_CHAIN_CONFIGURATIONS,
+    getDefaultPersistedNetwork,
+    IIscpChainMetadata,
+    NetworkId,
+} from '@core/network'
 import { INode, IPersistedNetwork } from '@core/network/interfaces'
 import { DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_SECONDS, DEFAULT_MAX_NFT_SIZE_IN_MEGABYTES } from '@core/nfts'
 import { StrongholdVersion } from '@core/stronghold/enums'
@@ -32,7 +38,7 @@ function migrateEachVersion(): void {
     }
 }
 
-function migratePersistedProfile(migrationVersion): void {
+function migratePersistedProfile(migrationVersion: number): void {
     const _profiles = get(profiles)
     for (const profile of _profiles) {
         persistedProfileMigrationsMap?.[migrationVersion]?.(profile)
@@ -263,6 +269,23 @@ function persistedProfileMigrationToV13(
         const existingValue = existingProfile?.[key]
         newProfile[key] = existingValue
     })
+
+    if (existingProfile.network) {
+        interface IOldPersistedNetwork {
+            chainConfigurations: unknown
+        }
+
+        const oldNetwork = existingProfile.network as unknown as IOldPersistedNetwork
+        delete oldNetwork.chainConfigurations
+
+        const newNetwork = oldNetwork as unknown as IPersistedNetwork
+        const maybeDefaultChainConfig = DEFAULT_CHAIN_CONFIGURATIONS[existingProfile.network.id]
+
+        const defaultChainConfig: IIscpChainMetadata[] = maybeDefaultChainConfig ? [maybeDefaultChainConfig] : []
+
+        newNetwork.chains = defaultChainConfig
+        existingProfile.network = newNetwork
+    }
 
     saveProfile(newProfile as IPersistedProfile)
 }
