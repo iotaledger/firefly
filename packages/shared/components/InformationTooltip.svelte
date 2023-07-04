@@ -1,14 +1,12 @@
 <script lang="ts">
     import { Text, Tooltip } from 'shared/components'
-    import { Position, TextType } from './enums'
+    import { TextType } from './enums'
 
-    export let anchor: HTMLElement
-    export let position: Position = Position.Right
     export let title: string = ''
     export let body: string = ''
 </script>
 
-<Tooltip {anchor} {position} {...$$restProps}>
+<Tooltip {...$$restProps}>
     <div class="flex flex-col text-left space-y-2">
         {#if title}
             <Text type={TextType.h4}>

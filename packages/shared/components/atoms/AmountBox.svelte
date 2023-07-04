@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { AssetIcon, Text, FontWeight, TextType, InformationTooltip, Position } from 'shared/components'
+    import { AssetIcon, Text, FontWeight, TextType, InformationTooltip } from 'shared/components'
     import { getNthOccurrenceIndex } from '@core/utils'
     import { IPersistedAsset, formatTokenAmountDefault } from '@core/wallet'
     import { getDecimalSeparator, getGroupSeparator } from '@core/i18n'
@@ -113,7 +113,7 @@
                 {/if}
             </Text>
             {#if isTooltipVisible}
-                <InformationTooltip anchor={tokenAmountElement} position={Position.Top} body="{amount} {unit}" />
+                <InformationTooltip anchor={tokenAmountElement} body="{amount} {unit}" />
             {/if}
         </token-amount>
     </amount>

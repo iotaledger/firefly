@@ -1,7 +1,7 @@
 <script lang="ts">
     import { setClipboard } from '@core/utils'
     import Box from './Box.svelte'
-    import { InformationTooltip, Position } from 'shared/components'
+    import { InformationTooltip } from 'shared/components'
     import { localize } from '@core/i18n'
     import { onDestroy } from 'svelte'
 
@@ -47,7 +47,6 @@
     <InformationTooltip
         anchor={tooltipAnchor}
         offset={clearPadding ? offset ?? 25 : offset ?? 15}
-        position={Position.Top}
         size="small"
         backgroundColor="green-600"
         borderColor="green-600"
