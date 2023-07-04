@@ -54,6 +54,7 @@
     let storageDeposit = 0
     let preparedOutput: Output
     let expirationTimePicker: ExpirationTimePicker
+    let minimumStorageDeposit: number = 0
 
     let initialExpirationDate: TimePeriod = getInitialExpirationDate()
     let activeTab: Tab
@@ -118,8 +119,18 @@
         const transactionDetails = get(newTransactionDetails)
         const outputParams = await getOutputParameters(transactionDetails)
         preparedOutput = await prepareOutput($selectedAccount.index, outputParams, DEFAULT_TRANSACTION_OPTIONS)
-
         await updateStorageDeposit()
+
+        // Warning: we are modifying the prepared output here
+        // so we make sure that the surplus is always added on top of the minimum storage deposit
+        if (Number(transactionDetails.surplus) > 0) {
+            if (Number(preparedOutput.amount) === Number(transactionDetails.surplus)) {
+                preparedOutput.amount = String(Number(preparedOutput.amount) + minimumStorageDeposit)
+            } else if (Number(preparedOutput.amount) === minimumStorageDeposit) {
+                preparedOutput.amount = String(Number(preparedOutput.amount) + Number(transactionDetails.surplus))
+            }
+        }
+        // end of warning
 
         if (!initialExpirationDate) {
             initialExpirationDate = getInitialExpirationDate()
@@ -129,10 +140,12 @@
     async function updateStorageDeposit(): Promise<void> {
         const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
             await getStorageDepositFromOutput($selectedAccount, preparedOutput)
-        storageDeposit = _storageDeposit > 0 ? _storageDeposit : _giftedStorageDeposit
+        storageDeposit = minimumStorageDeposit = _storageDeposit > 0 ? _storageDeposit : _giftedStorageDeposit
         if (isBaseTokenTransfer) {
             const rawAmount = Number((transactionDetails as NewTokenTransactionDetails).rawAmount)
             if (rawAmount >= storageDeposit) {
+                // we set the storage deposit to zero if the amount is greater than the storage deposit
+                // to improve the UX so the user doesnt think they need to pay the storage deposit
                 storageDeposit = 0
             }
         }
