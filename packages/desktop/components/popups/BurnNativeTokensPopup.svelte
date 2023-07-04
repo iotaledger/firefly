@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Button, Text, TextHint, FontWeight, TextType, AssetAmountInput } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { closePopup, openPopup, PopupId } from '@desktop/auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { IAsset } from '@core/wallet'
 
     export let asset: IAsset
