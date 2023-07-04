@@ -1,11 +1,9 @@
 import { getActiveProfile } from '@core/profile/stores'
-import { ChainType, IIscpChainConfiguration } from '@core/network'
+import { ChainType, IIscpChainMetadata } from '@core/network'
 
 export function getLayer2NetworkFromAddress(address: string): string | undefined {
-    const chainConfigurations = getActiveProfile()?.network?.chainConfigurations
-    const iscpNetworks = chainConfigurations?.filter(
-        (chain) => chain.type === ChainType.Iscp
-    ) as IIscpChainConfiguration[]
+    const chains = getActiveProfile()?.network?.chains
+    const iscpNetworks = chains?.filter((chain) => chain.type === ChainType.Iscp) as IIscpChainMetadata[]
     const network = iscpNetworks?.find((chain) => chain.aliasAddress === address)
     return network?.name
 }

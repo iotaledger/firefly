@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
-    import { ClosableInput, AddInputButton, Tooltip, Text, FontWeight, TextType } from 'shared/components'
+    import { ClosableInput, AddInputButton, FontWeight, InformationTooltip } from 'shared/components'
     import { Position } from 'shared/components/enums'
 
     export let label: string = ''
@@ -72,18 +72,7 @@
         />
         {#if isTooltipVisible}
             <tooltip-container transition:fade={{ duration: 100 }}>
-                <Tooltip anchor={buttonElement} position={Position.Right}>
-                    <Text
-                        bigger
-                        type={TextType.h5}
-                        fontWeight={FontWeight.medium}
-                        classes="text-left mb-2"
-                        color="gray-900"
-                    >
-                        {label}
-                    </Text>
-                    <Text smaller classes="text-left" color="gray-700" lineHeight="leading-140">{description}</Text>
-                </Tooltip>
+                <InformationTooltip anchor={buttonElement} position={Position.Right} title={label} body={description} />
             </tooltip-container>
         {/if}
     {/if}
