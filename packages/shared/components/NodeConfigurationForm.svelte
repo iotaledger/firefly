@@ -1,6 +1,6 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { NetworkId } from '@core/network'
+    import { IAuth, NetworkId } from '@core/network'
     import { EMPTY_NODE } from '@core/network/constants'
     import { IClientOptions, INode, INodeInfoResponse } from '@core/network/interfaces'
     import { nodeInfo } from '@core/network/stores'
@@ -9,14 +9,13 @@
     import { getNodeInfo } from '@core/profile-manager'
     import { IDropdownItem, cleanUrl } from '@core/utils'
     import features from '@features/features'
-    import {
-        Dropdown,
-        Error,
-        type NodeValidationOptions,
-        NumberInput,
-        PasswordInput,
-        TextInput,
-    } from 'shared/components'
+    import { Dropdown, Error, NumberInput, PasswordInput, TextInput } from 'shared/components'
+    interface INodeValidationOptions {
+        checkNodeInfo: boolean
+        checkSameNetwork: boolean
+        uniqueCheck: boolean
+        validateClientOptions: boolean
+    }
 
     export let node: INode = structuredClone(EMPTY_NODE)
     export let networkId: NetworkId | undefined = undefined
@@ -54,14 +53,20 @@
     $: networkId, coinType, node.url, (formError = '')
     $: node = {
         url: node.url,
-        auth: {
-            ...([username, password].every((val) => val !== '') && {
-                basicAuthNamePwd: [username, password],
-            }),
-            ...(jwt !== '' && {
-                jwt,
-            }),
-        },
+        auth: getAuth(),
+    }
+    function getAuth(): IAuth {
+        const auth: IAuth = {}
+        const isBasicAuth = (): boolean => [username, password].every((value) => value !== '')
+
+        if (isBasicAuth()) {
+            auth.basicAuthNamePwd = [username, password]
+        }
+
+        if (jwt !== '') {
+            auth.jwt = jwt
+        }
+        return auth
     }
 
     function cleanNodeUrl(): void {
@@ -72,7 +77,7 @@
         networkId = selected.value
     }
 
-    export async function validate(options: NodeValidationOptions): Promise<void> {
+    export async function validate(options: INodeValidationOptions): Promise<void> {
         if (networkId === NetworkId.Custom && !coinType) {
             formError = localize('error.node.noCoinType')
             return Promise.reject({ type: 'validationError', error: formError })
