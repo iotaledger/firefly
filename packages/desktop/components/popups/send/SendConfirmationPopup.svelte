@@ -130,9 +130,12 @@
                 visibleSurplus = surplus = undefined
             } else {
                 visibleSurplus = Number(surplus) - minimumStorageDeposit
+                // Note: we have to hide it because currently, in the sdk,
+                // the storage deposit return strategy is only looked at
+                // if the provided amount is < the minimum required storage deposit
+                hideGiftToggle = true
             }
         }
-        // end of warning
 
         if (!initialExpirationDate) {
             initialExpirationDate = getInitialExpirationDate()
