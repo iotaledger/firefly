@@ -2,7 +2,7 @@
     import { Button, Text, TextHint, HTMLButtonType, TextType } from 'shared/components'
     import { selectedAccount } from '@core/account/stores'
     import { localize } from '@core/i18n'
-    import { closePopup } from '@desktop/auxiliary/popup'
+    import { closePopup } from '@auxiliary/popup'
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { vote } from '@contexts/governance/actions'
 
