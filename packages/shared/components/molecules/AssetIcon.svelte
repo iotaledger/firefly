@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Icon as IconEnum, NETWORK_ICON_SVG } from '@auxiliary/icon'
     import { getIconColorFromString } from '@core/account'
-    import { COIN_TYPE, NetworkId } from '@core/network'
+    import { COIN_TYPE, IPersistedNetwork, NetworkId } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { isBright } from '@core/utils'
     import { ANIMATED_TOKEN_IDS, getAssetInitials, IPersistedAsset, TokenStandard } from '@core/wallet'
@@ -17,10 +17,9 @@
     let assetInitials: string
     let assetIconWrapperWidth: number
     let assetLogoUrl: string
-    let chainName: string | undefined
+    let network: IPersistedNetwork
 
     $: network = $activeProfile.network
-    $: network, (chainName = getTooltipText())
     $: isAnimation = asset.id in ANIMATED_TOKEN_IDS
     $: asset, updateAssetIcon()
 
@@ -49,12 +48,6 @@
                 assetLogoUrl = asset.metadata?.standard === TokenStandard.Irc30 ? asset.metadata?.logoUrl ?? '' : ''
                 icon = null
         }
-    }
-
-    function getTooltipText(): string | undefined {
-        const networkName = network?.name
-
-        return networkName
     }
 </script>
 
