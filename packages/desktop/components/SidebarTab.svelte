@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Icon, Text, Tooltip, PingingBadge } from '@ui'
+    import { Icon, PingingBadge, Position, InformationTooltip } from '@ui'
     import { dashboardRoute } from '@core/router'
     import { ISidebarTab } from '@desktop/routers'
 
@@ -34,8 +34,7 @@
         />
     {/if}
 </button>
+
 {#if showTooltip}
-    <Tooltip anchor={tooltipAnchor} position="right" size="small">
-        <Text type="p">{tab?.label}</Text>
-    </Tooltip>
+    <InformationTooltip anchor={tooltipAnchor} position={Position.Right} size="small" body={tab?.label} />
 {/if}

@@ -3,7 +3,7 @@
     import type { Auth } from '@iota/wallet'
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
-    import { closePopup } from '@desktop/auxiliary/popup'
+    import { closePopup } from '@auxiliary/popup'
 
     export let onSubmit: (auth: Auth) => unknown = () => {}
 
