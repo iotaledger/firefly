@@ -1,4 +1,4 @@
 export enum PillBorderRadius {
-    Full = 'full',
-    '2xl' = '2xl',
+    Full = 'rounded-full',
+    '2xl' = 'rounded-2xl',
 }

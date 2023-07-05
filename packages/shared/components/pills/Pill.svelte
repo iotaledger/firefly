@@ -15,7 +15,7 @@
     class:shrink-0={shrink}
     class:uppercase
     class:invisible
-    class="flex items-center {backgroundColor ?? ''} rounded-{borderRadius} px-2.5 py-1"
+    class="flex items-center {backgroundColor ?? ''} {borderRadius} px-2.5 py-1"
 >
     <Text
         type={TextType.p}
