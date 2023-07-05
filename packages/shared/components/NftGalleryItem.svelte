@@ -11,7 +11,6 @@
 
     export let nft: INft
 
-    let nftWrapperClientWidth: number
     let tooltipIconProps: { icon?: Icon; iconClasses?: string; text?: string } = {}
 
     $: isLocked = nft.timelockTime > $time.getTime()
@@ -43,7 +42,7 @@
 
 <button type="button" on:click={onClick} class="flex flex-col items-center justify-center">
     <div class="w-full rounded-2xl overflow-hidden flex flex-col shadow-elevation-1 h-full">
-        <div class="w-full flex relative h-full" bind:clientWidth={nftWrapperClientWidth}>
+        <div class="w-full flex relative h-full">
             <NftMedia {nft} loop muted />
             {#if nft.downloadMetadata.error || nft.downloadMetadata.warning}
                 <div class="absolute right-3 top-3">

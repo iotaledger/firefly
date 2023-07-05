@@ -59,7 +59,7 @@
             this={htmlTag}
             bind:this={Media}
             {...$$props}
-            class="h-full w-full"
+            class="h-full w-full object-cover"
             on:mouseenter={startPlaying}
             on:mouseleave={stopPlaying}
         >
