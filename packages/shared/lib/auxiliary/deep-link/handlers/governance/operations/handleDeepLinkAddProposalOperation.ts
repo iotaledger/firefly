@@ -1,5 +1,5 @@
 import { showAppNotification } from '@auxiliary/notification/actions'
-import { closePopup, openPopup, PopupId } from '../../../../../../../desktop/lib/auxiliary/popup'
+import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
 import { isValidUrl } from '@core/utils/validation'
 import { isProposalAlreadyAddedForSelectedAccount, isValidProposalId } from '@contexts/governance/utils'
 import { AddProposalOperationParameter } from '../../../enums'

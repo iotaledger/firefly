@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 
-import { closePopup, openPopup, PopupId } from '../../../../../desktop/lib/auxiliary/popup'
+import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
 import { visibleActiveAccounts } from '@core/profile/stores'
 import { dashboardRouter } from '@core/router/routers'
 import { DashboardRoute } from '@core/router/enums'

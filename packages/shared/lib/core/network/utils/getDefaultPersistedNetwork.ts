@@ -14,7 +14,7 @@ export function getDefaultPersistedNetwork(networkId: NetworkId): IPersistedNetw
              * it is possible that that profile's chains will be overwritten
              * with this statement.
              */
-            chainConfigurations,
+            chains: [...chainConfigurations],
         }
     } else {
         throw new Error(`Unable to find network: ${networkId}`)

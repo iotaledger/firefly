@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { PopupId, openPopup, popupState } from '@desktop/auxiliary/popup'
+    import { PopupId, openPopup, popupState } from '@auxiliary/popup'
     import {
         Platform,
         isLatestStrongholdVersion,
