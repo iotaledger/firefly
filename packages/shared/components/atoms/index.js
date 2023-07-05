@@ -6,7 +6,6 @@ export * from './labels'
 export * from './pills'
 export * from './tiles'
 
-export { default as AmountBox } from './AmountBox.svelte'
 export { default as ColoredCircle } from './ColoredCircle.svelte'
 export { default as Icon } from './Icon.svelte'
 export { default as LedgerAnimation } from './LedgerAnimation.svelte'
