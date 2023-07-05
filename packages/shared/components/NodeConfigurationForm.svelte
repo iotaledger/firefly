@@ -51,15 +51,18 @@
 
     $: networkId, (coinType = undefined)
     $: networkId, coinType, node.url, (formError = '')
-    $: node = {
-        url: node.url,
-        auth: getAuth(),
-    }
+    $: jwt,
+        username,
+        password,
+        (node = {
+            url: node.url,
+            auth: getAuth(),
+        })
+
     function getAuth(): IAuth {
         const auth: IAuth = {}
-        const isBasicAuth = (): boolean => [username, password].every((value) => value !== '')
 
-        if (isBasicAuth()) {
+        if ([username, password].every((value) => value !== '')) {
             auth.basicAuthNamePwd = [username, password]
         }
 
