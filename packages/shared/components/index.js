@@ -26,6 +26,7 @@ export { default as Tooltip } from './Tooltip.svelte'
 export { default as Transition } from './Transition.svelte'
 export { default as NodeConfigurationForm } from './NodeConfigurationForm.svelte'
 export { default as NodeListTable } from './NodeListTable.svelte'
+export { default as AmountBox } from './AmountBox.svelte'
 
 export * from './atoms'
 export * from './enums'
