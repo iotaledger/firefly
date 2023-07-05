@@ -8,7 +8,6 @@
     import { Animation, Icon, VerificationBadge } from 'shared/components'
 
     export let asset: IPersistedAsset
-    export let chainId: number | undefined
     export let large = false
     export let small = false
 
@@ -21,7 +20,7 @@
     let chainName: string | undefined
 
     $: network = $activeProfile.network
-    $: network, chainId, (chainName = getTooltipText())
+    $: network, (chainName = getTooltipText())
     $: isAnimation = asset.id in ANIMATED_TOKEN_IDS
     $: asset, updateAssetIcon()
 
@@ -54,12 +53,8 @@
 
     function getTooltipText(): string | undefined {
         const networkName = network?.name
-        if (chainId) {
-            const chain = network?.chains.find((c) => c.chainId === chainId)
-            return chain?.name ?? networkName
-        } else {
-            return networkName
-        }
+
+        return networkName
     }
 </script>
 
