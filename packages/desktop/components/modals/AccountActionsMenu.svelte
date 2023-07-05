@@ -7,7 +7,7 @@
     import { deleteAccount } from '@core/profile-manager/actions'
 
     import { Icon } from '@auxiliary/icon/enums'
-    import { openPopup, PopupId } from '@desktop/auxiliary/popup'
+    import { openPopup, PopupId } from '@auxiliary/popup'
 
     export let modal: Modal = undefined
 

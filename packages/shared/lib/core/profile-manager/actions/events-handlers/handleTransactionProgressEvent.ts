@@ -3,7 +3,7 @@ import { selectedAccountIndex } from '@core/account'
 import { ledgerNanoStatus } from '@core/ledger'
 import { isActiveLedgerProfile } from '@core/profile'
 import { isOnboardingLedgerProfile } from '@contexts/onboarding'
-import { closePopup, openPopup, PopupId } from '../../../../../../desktop/lib/auxiliary/popup'
+import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
 import { deconstructLedgerVerificationProps } from '@core/ledger/helpers'
 
 import { WalletApiEvent } from '../../enums'

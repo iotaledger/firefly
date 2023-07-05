@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Button, PasswordInput, Text, HTMLButtonType } from 'shared/components'
-    import { closePopup } from '@desktop/auxiliary/popup'
+    import { closePopup } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
     import { unlockStronghold } from '@core/profile'
 

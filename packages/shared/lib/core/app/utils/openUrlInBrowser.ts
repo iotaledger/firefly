@@ -1,4 +1,4 @@
-import { closePopup, openPopup, PopupId } from '../../../../../desktop/lib/auxiliary/popup'
+import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
 import { localize } from '@core/i18n'
 import { Platform } from '../classes/platform.class'
 import { externalAllowedLinks } from '../constants'
