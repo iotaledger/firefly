@@ -34,7 +34,7 @@
         isProposalVotable,
         isVotingForSelectedProposal,
     } from '@contexts/governance/utils'
-    import { openPopup, PopupId } from '@desktop/auxiliary/popup'
+    import { openPopup, PopupId } from '@auxiliary/popup'
     import { activeProfile } from '@core/profile'
 
     const { metadata } = $visibleSelectedAccountAssets?.[$activeProfile?.network?.id]?.baseCoin ?? {}

@@ -21,7 +21,7 @@
         TimelockActivityTileFooter,
         TransactionActivityTileContent,
     } from 'shared/components'
-    import { PopupId, openPopup } from '../../../../desktop/lib/auxiliary/popup'
+    import { PopupId, openPopup } from '@auxiliary/popup'
 
     export let activity: Activity
 

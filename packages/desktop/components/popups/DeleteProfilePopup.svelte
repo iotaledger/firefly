@@ -3,7 +3,7 @@
     import { isSoftwareProfile } from '@core/profile'
     import { localize } from '@core/i18n'
     import { setStrongholdPassword } from '@core/profile-manager'
-    import { closePopup } from '@desktop/auxiliary/popup'
+    import { closePopup } from '@auxiliary/popup'
     import { deleteProfile } from '@contexts/settings'
 
     let isBusy = false

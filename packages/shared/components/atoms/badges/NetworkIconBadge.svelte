@@ -1,6 +1,6 @@
 <script lang="ts">
     import { NetworkId } from '@core/network'
-    import { FontWeight, NetworkIcon, Text, Tooltip } from 'shared/components'
+    import { NetworkIcon, InformationTooltip } from 'shared/components'
     import { Position } from 'shared/components/enums'
 
     export let networkId: NetworkId
@@ -26,9 +26,5 @@
     <NetworkIcon {width} {height} {networkId} />
 </network-icon-badge>
 {#if isTooltipVisible && tooltipText}
-    <Tooltip anchor={tooltipAnchor} size="small" position={Position.Right} offset={6}>
-        <Text fontWeight={FontWeight.semibold} color="gray-600" darkColor="gray-400" smaller>
-            {tooltipText}
-        </Text>
-    </Tooltip>
+    <InformationTooltip anchor={tooltipAnchor} size="small" position={Position.Right} offset={6} body={tooltipText} />
 {/if}
