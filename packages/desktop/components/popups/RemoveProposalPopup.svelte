@@ -7,7 +7,7 @@
         selectedProposal,
         selectedProposalId,
     } from '@contexts/governance/stores'
-    import { closePopup } from '@desktop/auxiliary/popup'
+    import { closePopup } from '@auxiliary/popup'
     import { selectedAccount } from '@core/account/stores'
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'

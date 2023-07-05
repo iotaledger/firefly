@@ -12,7 +12,7 @@ export async function getOutputParameters(transactionDetails: NewTransactionDeta
 
     const recipientAddress = layer2Parameters ? layer2Parameters.networkAddress : getAddressFromSubject(recipient)
 
-    const estimatedGas = await getEstimatedGasForTransferFromTransactionDetails(transactionDetails)
+    const estimatedGas = await getEstimatedGasForTransferFromTransactionDetails()
 
     let amount = getAmountFromTransactionDetails(transactionDetails)
     amount = layer2Parameters ? (estimatedGas + parseInt(amount, 10)).toString() : amount

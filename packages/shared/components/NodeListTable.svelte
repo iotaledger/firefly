@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { getOfficialNodes, INode, isOfficialNetwork } from '@core/network'
     import { activeProfile } from '@core/profile'
-    import { openPopup, PopupId } from '../../desktop/lib/auxiliary/popup'
+    import { PopupId, openPopup } from '@auxiliary/popup'
 
     export let nodesContainer: HTMLElement | undefined = undefined
 

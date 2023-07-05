@@ -10,7 +10,7 @@
     import { IClientOptions, INode } from '@core/network/interfaces'
     import { getOfficialNodes } from '@core/network/utils'
     import { activeProfile } from '@core/profile/stores'
-    import { closePopup, openPopup, PopupId } from '../../../desktop/lib/auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
 
     export let node: INode
     export let clientOptions: IClientOptions

@@ -10,8 +10,13 @@
 
     import { localize } from '@core/i18n'
     import { FilterUnit } from '@core/utils/interfaces/filter'
+    import { ToggleColor } from '@ui/inputs/Toggle.svelte'
 
     export let filterUnit: FilterUnit
+
+    function handleToggleClick(): void {
+        filterUnit.active = !filterUnit.active
+    }
 </script>
 
 <filter-item class="block px-5 -mx-5 border-t border-solid border-gray-200 dark:border-gray-800">
@@ -19,11 +24,7 @@
         <Text fontWeight={FontWeight.medium} fontSize="15"
             >{localize(filterUnit.labelKey ?? filterUnit.localeKey + '.label')}</Text
         >
-        <Toggle
-            onClick={() => (filterUnit.active = !filterUnit.active)}
-            bind:active={filterUnit.active}
-            color="green"
-        />
+        <Toggle onClick={handleToggleClick} bind:active={filterUnit.active} color={ToggleColor.Green} />
     </filter-item-toggle>
     {#if filterUnit.active}
         <filter-item-type

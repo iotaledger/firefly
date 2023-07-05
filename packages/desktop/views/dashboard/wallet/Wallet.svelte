@@ -1,10 +1,8 @@
 <script lang="ts">
     import { AssetList, Pane, ReceiveAddressButton } from '@ui'
     import { AccountSummary, AccountActivity, SendButton } from '@components'
-
     import { selectedAccountAssets } from '@core/wallet'
     import { selectedAccount } from '@core/account/stores'
-
     import features from '@features/features'
 </script>
 
