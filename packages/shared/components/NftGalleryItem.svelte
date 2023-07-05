@@ -41,8 +41,8 @@
 </script>
 
 <button type="button" on:click={onClick} class="flex flex-col items-center justify-center">
-    <div class="w-full rounded-2xl overflow-hidden flex flex-col shadow-elevation-1 h-full">
-        <div class="w-full flex relative h-full">
+    <div class="w-full rounded-2xl overflow-hidden flex flex-col shadow-elevation-1">
+        <nft-media-wrapper>
             <NftMedia {nft} loop muted />
             {#if nft.downloadMetadata.error || nft.downloadMetadata.warning}
                 <div class="absolute right-3 top-3">
@@ -56,7 +56,7 @@
                     />
                 </div>
             {/if}
-        </div>
+        </nft-media-wrapper>
         <div class="w-full flex flex-row align-center justify-between p-3.5 bg-white dark:bg-gray-800">
             <Text fontWeight={FontWeight.semibold} fontSize="12" classes="text-left truncate">{nft.name}</Text>
             {#if isLocked}
@@ -71,3 +71,12 @@
         </div>
     </div>
 </button>
+
+<style lang="scss">
+    nft-media-wrapper {
+        @apply w-full;
+        @apply flex;
+        @apply relative;
+        aspect-ratio: 1 / 1;
+    }
+</style>
