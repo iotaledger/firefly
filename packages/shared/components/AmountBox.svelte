@@ -8,12 +8,12 @@
     export let amount: number
     export let unit: string | undefined = undefined
 
-    const MAX_LENGTH_PER_LINE: number = 15
+    const MAX_LENGTH_PER_LINE = 15
 
-    const formattedAmount: string = asset?.metadata ? formatTokenAmountDefault(amount, asset.metadata, unit) : ''
+    const formattedAmount = asset?.metadata ? formatTokenAmountDefault(amount, asset.metadata, unit) : ''
     let displayedAmount: string[] = [formattedAmount]
     let tokenAmountElement: HTMLElement | null = null
-    let isTooltipVisible: boolean = false
+    let isTooltipVisible = false
 
     $: hasDecimal = formattedAmount.includes(getDecimalSeparator())
     $: amountWithoutDecimals = formattedAmount.split(getDecimalSeparator())[0]
