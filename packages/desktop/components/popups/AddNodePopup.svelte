@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { INode, addNodeToClientOptions, editNodeInClientOptions, EMPTY_NODE } from '@core/network'
     import { showAppNotification } from '@auxiliary/notification'
-    import { closePopup } from '@desktop/auxiliary/popup'
+    import { closePopup } from '@auxiliary/popup'
     import { Platform } from '@core/app'
     import { activeAccounts, activeProfile } from '@core/profile'
     import { registerProposalsForAccounts } from '@contexts/governance'

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { closePopup } from '../../../desktop/lib/auxiliary/popup'
+    import { closePopup } from '@auxiliary/popup'
     import { selectedAccountIndex } from '@core/account/stores'
     import { time } from '@core/app'
     import { localize } from '@core/i18n'

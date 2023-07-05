@@ -2,7 +2,7 @@
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
     import { Icon } from '@ui'
-    import { closePopup, PopupComponentMap, PopupId } from '@desktop/auxiliary/popup'
+    import { closePopup, PopupComponentMap, PopupId } from '@auxiliary/popup'
     import { Icon as IconEnum } from '@auxiliary/icon/enums'
     import { PlatformOption, platform } from '@core/app'
     import { clickOutside } from '@core/utils/ui'

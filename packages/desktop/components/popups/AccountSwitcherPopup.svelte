@@ -1,7 +1,7 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
     import { Text, Button, AccountInput, FontWeight } from 'shared/components'
-    import { closePopup } from '@desktop/auxiliary/popup'
+    import { closePopup } from '@auxiliary/popup'
     import { IAccountState, setSelectedAccount } from '@core/account'
 
     export let onCancel: () => void
