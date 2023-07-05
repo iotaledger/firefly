@@ -25,7 +25,7 @@
 </script>
 
 <div class="flex flex-row justify-between flex-grow">
-    <div class={title ? 'flex flex-col space-y-0.5' : ''}>
+    <div class={title ? 'flex flex-col space-y-0.5' : null}>
         <Text {...PRIMARY_TEXT_CONFIG}>{title}</Text>
         {#if subtitle}
             <Text {...SECONDARY_TEXT_CONFIG}>{subtitle}</Text>
