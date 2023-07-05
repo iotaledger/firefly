@@ -1,13 +1,15 @@
 <script lang="ts">
     export let color: string
-    export let size: number = 3
+    export let size: number = 12
 </script>
 
-<colored-circle class="self-center rounded-full w-{size} h-{size}" style:--color={color} />
+<colored-circle class="self-center rounded-full" style:--size="{size}px" style:--color={color} />
 
-<style type="text/scss">
+<style lang="scss">
     colored-circle {
         background-color: var(--color);
         color: var(--color);
+        width: var(--size);
+        height: var(--size);
     }
 </style>
