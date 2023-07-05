@@ -1,7 +1,7 @@
 <script lang="ts">
     import { formatCurrency, localize } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
-    import { IAsset, TokenMetadata, formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
+    import { formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
     import { BalanceSummaryRow, Icon } from 'shared/components'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { activeProfile } from '@core/profile'
@@ -18,11 +18,11 @@
     $: ({ baseCoin } = $selectedAccountAssets?.[$activeProfile?.network?.id] ?? {})
 
     function getAmount(amount: number): string {
-        return formatTokenAmountBestMatch(amount, baseCoin?.metadata as TokenMetadata)
+        return baseCoin?.metadata ? formatTokenAmountBestMatch(amount, baseCoin?.metadata) : ''
     }
 
     function getCurrencyAmount(amount: number): string {
-        return formatCurrency(getMarketAmountFromAssetValue(amount, baseCoin as IAsset))
+        return baseCoin ? formatCurrency(getMarketAmountFromAssetValue(amount, baseCoin)) : ''
     }
 
     function toggleExpandedView(): void {
