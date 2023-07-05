@@ -10,7 +10,7 @@
         IIrc30Metadata,
         IMintTokenDetails,
     } from '@core/wallet'
-    import { closePopup, openPopup, PopupId } from '@desktop/auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { Button, KeyValueBox, Text, FontWeight, TextType } from 'shared/components'
     import { onMount } from 'svelte'
     import { selectedAccount } from '@core/account'

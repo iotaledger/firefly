@@ -1,4 +1,4 @@
-import { openPopup, PopupId } from '../../../../../../desktop/lib/auxiliary/popup'
+import { openPopup, PopupId } from '@auxiliary/popup'
 import { addError } from '@core/error/stores'
 import { localize } from '@core/i18n'
 

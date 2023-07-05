@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { PopupId, openPopup } from '@desktop/auxiliary/popup'
+    import { PopupId, openPopup } from '@auxiliary/popup'
     import { OnboardingLayout } from '@components'
     import { localize } from '@core/i18n'
     import { LedgerConnectionState, ledgerConnectionState } from '@core/ledger'
