@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { closePopup, openPopup, PopupId } from '@desktop/auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
     import { addOfficialNodesToClientOptions as onAddOfficialNodesClick, NetworkId } from '@core/network'
     import { activeProfile } from '@core/profile'

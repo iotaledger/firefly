@@ -30,7 +30,7 @@
     import { DEFAULT_TRANSACTION_OPTIONS } from '@core/wallet/constants'
     import { getOutputParameters, validateSendConfirmation, getAddressFromSubject } from '@core/wallet/utils'
     import { Activity, Output } from '@core/wallet/types'
-    import { closePopup, openPopup, PopupId } from '@desktop/auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { ledgerPreparedOutput } from '@core/ledger'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import { handleError } from '@core/error/handlers/handleError'
@@ -42,6 +42,7 @@
         TARGET_CONTRACTS,
         TRANSFER_ALLOWANCE,
     } from '@core/layer-2'
+    import { ToggleColor } from '@ui/inputs/Toggle.svelte'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
@@ -221,7 +222,7 @@
                 <KeyValueBox keyText={localize('general.giftStorageDeposit')}>
                     <Toggle
                         slot="value"
-                        color="green"
+                        color={ToggleColor.Green}
                         disabled={disableToggleGift}
                         active={giftStorageDeposit}
                         onClick={toggleGiftStorageDeposit}
