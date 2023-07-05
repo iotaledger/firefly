@@ -5,7 +5,7 @@
     import { localize } from '@core/i18n'
     import { resetMintTokenDetails } from '@core/wallet'
 
-    import { closePopup, openPopup, PopupId } from '@desktop/auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
 
     $: hasAliases = $selectedAccount.balances?.aliases.length > 0
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { openPopup, PopupId } from '@desktop/auxiliary/popup'
+    import { openPopup, PopupId } from '@auxiliary/popup'
     import { selectedAccountIndex } from '@core/account/stores'
     import { time } from '@core/app'
     import { openUrlInBrowser } from '@core/app/utils'

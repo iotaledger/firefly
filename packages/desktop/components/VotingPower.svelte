@@ -5,7 +5,7 @@
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { formatTokenAmountBestMatch, visibleSelectedAccountAssets } from '@core/wallet'
-    import { openPopup, PopupId } from '@desktop/auxiliary/popup'
+    import { openPopup, PopupId } from '@auxiliary/popup'
     import { activeProfile } from '@core/profile'
 
     const asset = $visibleSelectedAccountAssets?.[$activeProfile?.network.id]?.baseCoin

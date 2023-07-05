@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { closePopup, openPopup, PopupId } from '@desktop/auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile'
