@@ -6,7 +6,6 @@ export * from './labels'
 export * from './pills'
 export * from './tiles'
 
-export { default as AmountBox } from './AmountBox.svelte'
 export { default as BalanceSummaryRow } from './BalanceSummaryRow.svelte'
 export { default as BalanceSummarySection } from './BalanceSummarySection.svelte'
 export { default as Icon } from './Icon.svelte'
