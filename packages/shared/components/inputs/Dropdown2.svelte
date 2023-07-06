@@ -2,6 +2,7 @@
     import { onMount } from 'svelte'
     import { Icon, Text, Error } from 'shared/components'
     import { IDropdownItem, clickOutside, isNumberLetterOrPunctuation } from '@core/utils'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let value: string
     export let label: string = ''
@@ -160,7 +161,7 @@
         </div>
         {#if items.length > 1}
             <Icon
-                icon={'small-chevron-down'}
+                icon={IconEnum.SmallChevronDown}
                 width={16}
                 height={16}
                 classes="text-gray-500 dark:text-white fill-current"

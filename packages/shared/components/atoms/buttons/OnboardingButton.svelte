@@ -1,10 +1,11 @@
 <script lang="ts">
     import { appSettings } from '@core/app'
     import { Icon, Spinner, Text, FontWeight, TextType } from 'shared/components'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let primaryText: string = ''
     export let secondaryText: string = ''
-    export let icon: string = ''
+    export let icon: IconEnum | undefined = undefined
     export let iconColor: string = 'blue-500'
     export let iconHeight: string = undefined
     export let iconWidth: string = undefined
@@ -70,7 +71,7 @@
                 {#if busy}
                     <Spinner busy width="20" height="20" color="gray-500" darkColor="gray-500" />
                 {:else}
-                    <Icon icon={secondaryIcon} classes="text-{secondaryIconColor}" />
+                    <Icon icon={IconEnum.ChevronRight} classes="text-{secondaryIconColor}" />
                 {/if}
             </div>
         {/if}
