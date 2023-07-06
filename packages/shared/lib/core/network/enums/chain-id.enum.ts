@@ -1,4 +1,4 @@
 export enum ChainId {
     Layer1 = 0,
-    ShimmerEVM = 1071,
+    ShimmerEVM = 1072,
 }
