@@ -4,6 +4,7 @@ import { AppContext } from '@core/app/enums'
 import { activeProfile, logout, profiles, removeProfile, removeProfileFolder } from '@core/profile'
 import { routerManager } from '@core/router/stores'
 import { removePersistedShimmerClaimingTransactions } from '@contexts/onboarding/stores'
+import { destroyProfileManager } from '@core/profile-manager'
 
 /**
  * It removes the active profile from the app's list of profiles, removes the profile's directory from
@@ -41,6 +42,7 @@ export async function deleteProfile(): Promise<void> {
          * routed to the welcome screen.
          */
         if (get(profiles).length === 0) {
+            await destroyProfileManager()
             get(routerManager).goToAppContext(AppContext.Onboarding)
         }
     } catch (err) {
