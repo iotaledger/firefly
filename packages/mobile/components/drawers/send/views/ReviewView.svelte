@@ -22,6 +22,7 @@
     import { DrawerId, openDrawer } from '@/auxiliary/drawer'
     import { sendRouter } from '@/routers'
     import { activeProfile } from '@core/profile'
+    import { ToggleColor } from '@ui/inputs/Toggle.svelte'
 
     export let sendTransaction: () => Promise<void>
     export let storageDeposit: number
@@ -110,7 +111,7 @@
                     <KeyValueBox keyText={localize('general.giftStorageDeposit')}>
                         <Toggle
                             slot="value"
-                            color="green"
+                            color={ToggleColor.Green}
                             disabled={$newTransactionDetails.disableToggleGift}
                             active={$newTransactionDetails.giftStorageDeposit}
                             onClick={toggleGiftStorageDeposit}

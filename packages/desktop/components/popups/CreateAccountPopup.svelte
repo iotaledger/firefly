@@ -6,7 +6,7 @@
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile'
     import { getTrimmedLength } from '@core/utils'
-    import { closePopup, updatePopupProps } from '@desktop/auxiliary/popup'
+    import { closePopup, updatePopupProps } from '@auxiliary/popup'
 
     export let accountAlias = ''
     export let error: string

@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Button, Text } from 'shared/components'
-    import { closePopup } from '@desktop/auxiliary/popup'
+    import { closePopup } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
 
     export let node

@@ -11,7 +11,7 @@
         UNLOCK_CONDITION_STATE_CONTROLLER_ADDRESS,
         processAndAddToActivities,
     } from '@core/wallet'
-    import { closePopup } from '@desktop/auxiliary/popup'
+    import { closePopup } from '@auxiliary/popup'
     import { onMount } from 'svelte'
     import { handleError } from '@core/error/handlers/handleError'
 

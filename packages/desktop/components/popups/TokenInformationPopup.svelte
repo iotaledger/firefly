@@ -11,7 +11,7 @@
         VerifiedStatus,
         NewTransactionType,
     } from '@core/wallet'
-    import { openPopup, PopupId, updatePopupProps } from '@desktop/auxiliary/popup'
+    import { openPopup, PopupId, updatePopupProps } from '@auxiliary/popup'
     import {
         Button,
         Text,
