@@ -3,7 +3,7 @@
 
     import { localize } from '@core/i18n'
     import { resetMintNftDetails } from '@core/wallet'
-    import { openPopup, PopupId } from '@desktop/auxiliary/popup'
+    import { openPopup, PopupId } from '@auxiliary/popup'
 
     function onMintNftClick(): void {
         resetMintNftDetails()

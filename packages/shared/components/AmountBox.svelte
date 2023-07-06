@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { AssetIcon, Text, FontWeight, TextType, Tooltip } from 'shared/components'
+    import { AssetIcon, Text, FontWeight, TextType, InformationTooltip } from 'shared/components'
     import { getNthOccurrenceIndex } from '@core/utils'
     import { IPersistedAsset, formatTokenAmountDefault } from '@core/wallet'
     import { getDecimalSeparator, getGroupSeparator } from '@core/i18n'
@@ -12,7 +12,7 @@
 
     const formattedAmount = asset?.metadata ? formatTokenAmountDefault(amount, asset.metadata, unit) : ''
     let displayedAmount: string[] = [formattedAmount]
-    let tokenAmountElement: HTMLElement = null
+    let tokenAmountElement: HTMLElement | null = null
     let isTooltipVisible = false
 
     $: hasDecimal = formattedAmount.includes(getDecimalSeparator())
@@ -48,7 +48,6 @@
     function trimDecimals(amount: string): string {
         if (hasDecimal) {
             const TWO_DECIMALS_WITH_SEPARATOR_LENGTH = 3
-
             const decimalSeparatorIndex = amount.indexOf(getDecimalSeparator())
             const decimalsLength =
                 amountWithoutDecimals.length >= MAX_LENGTH_PER_LINE - TWO_DECIMALS_WITH_SEPARATOR_LENGTH
@@ -68,7 +67,6 @@
 
         if (amountWithoutDecimals.includes(getGroupSeparator()) && thousandGroups.length > 3) {
             const lines: number = Math.ceil((amountWithoutDecimals.length + decimals.length) / MAX_LENGTH_PER_LINE)
-
             const brokenThousands: string[] = [amountWithoutDecimals]
             for (let index = 0; index < lines - 1; index++) {
                 let thousandsToBeIncluded: number =
@@ -113,7 +111,7 @@
                 {/if}
             </Text>
             {#if isTooltipVisible}
-                <Tooltip anchor={tokenAmountElement}><Text classes="break-all">{amount} {unit}</Text></Tooltip>
+                <InformationTooltip anchor={tokenAmountElement} body="{amount} {unit}" />
             {/if}
         </token-amount>
     </amount>

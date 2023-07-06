@@ -1,35 +1,35 @@
 <script lang="ts">
-    import {
-        InclusionState,
-        selectedAccountAssets,
-        getAssetFromPersistedAssets,
-        IPersistedAsset,
-        Activity,
-        ActivityType,
-        NotVerifiedStatus,
-        ActivityAsyncStatus,
-    } from '@core/wallet'
-    import { openPopup, PopupId } from '../../../../desktop/lib/auxiliary/popup'
-    import {
-        ClickableTile,
-        TransactionActivityTileContent,
-        FoundryActivityTileContent,
-        ConsolidationActivityTileContent,
-        AliasActivityTileContent,
-        TimelockActivityTileFooter,
-        AsyncActivityTileFooter,
-        NftActivityTileContent,
-        GovernanceActivityTileContent,
-    } from 'shared/components'
     import { time } from '@core/app'
+    import {
+        Activity,
+        ActivityAsyncStatus,
+        ActivityType,
+        IAsset,
+        InclusionState,
+        NotVerifiedStatus,
+        getTokenFromSelectedAccount,
+        selectedAccountAssets,
+    } from '@core/wallet'
+    import {
+        AliasActivityTileContent,
+        AsyncActivityTileFooter,
+        ClickableTile,
+        ConsolidationActivityTileContent,
+        FoundryActivityTileContent,
+        GovernanceActivityTileContent,
+        NftActivityTileContent,
+        TimelockActivityTileFooter,
+        TransactionActivityTileContent,
+    } from 'shared/components'
+    import { PopupId, openPopup } from '@auxiliary/popup'
 
     export let activity: Activity
 
-    let asset: IPersistedAsset
+    let asset: IAsset | undefined
     $: $selectedAccountAssets,
         (asset =
             activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry
-                ? getAssetFromPersistedAssets(activity.assetId)
+                ? getTokenFromSelectedAccount(activity.assetId)
                 : undefined)
     $: isTimelocked = activity?.asyncData?.timelockDate > $time
     $: shouldShowAsyncFooter = activity.asyncData && activity.asyncData.asyncStatus !== ActivityAsyncStatus.Claimed

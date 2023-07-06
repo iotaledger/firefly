@@ -45,7 +45,7 @@
             </div>
             <div class="flex flex-col text-right">
                 <Text type={TextType.p} fontWeight={FontWeight.semibold}>
-                    {asset.metadata ? formatTokenAmountBestMatch(asset.balance.total, asset.metadata) : '-'}
+                    {asset.metadata ? formatTokenAmountBestMatch(asset.balance?.total, asset.metadata) : '-'}
                 </Text>
                 {#if !squashed}
                     <div class="flex flex-row justify-between items-center text-right">
