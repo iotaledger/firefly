@@ -64,7 +64,7 @@
     />
 </div>
 
-<style global type="text/scss">
+<style global lang="scss">
     div {
         height: fit-content;
     }

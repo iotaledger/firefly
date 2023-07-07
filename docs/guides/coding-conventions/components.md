@@ -109,7 +109,7 @@ The same code can be written without using Svelte language features. The followi
             <slot name="footer" />
         </footer>
         
-        <style type="text/scss">
+        <style lang="scss">
             footer {
                 margin-bottom: var(--keyboard-height);
             }
@@ -135,7 +135,7 @@ The same code can be written without using Svelte language features. The followi
       
       <div class:rounded-corners={roundedCorners}>Box</div>
       
-      <style type="text/scss">
+      <style lang="scss">
           div {
             &.rounded-corners {
                   @apply rounded-sm;
@@ -170,7 +170,7 @@ The same code can be written without using Svelte language features. The followi
     
       ```jsx
       <div>Box</div>
-      <style type="text/scss">
+      <style lang="scss">
         div {
           min-width: 35px;
         }
@@ -190,7 +190,7 @@ The same code can be written without using Svelte language features. The followi
         <button {disabled}>
             <span class:pink>Button</span>
         </button>
-        <style type="text/scss">
+        <style lang="scss">
             button {
                 @apply bg-blue-50;
                 &:disabled {
@@ -211,7 +211,7 @@ The same code can be written without using Svelte language features. The followi
         <button {disabled}>
             <span class:pink>Button</span>
         </button>
-        <style type="text/scss">
+        <style lang="scss">
             button {
                 @apply bg-blue-50;
                 &:disabled {
@@ -237,7 +237,7 @@ The same code can be written without using Svelte language features. The followi
         
         ```jsx
         <div>Box</div>
-        <style type="text/scss">
+        <style lang="scss">
             button {
                 @apply bg-blue-50;
         		}
@@ -249,7 +249,7 @@ The same code can be written without using Svelte language features. The followi
         
         ```jsx
         <div class:ghost>Box</div>
-        <style type="text/scss">
+        <style lang="scss">
             button {
                 @apply bg-blue-50;
                 &.ghost {

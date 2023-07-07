@@ -17,19 +17,14 @@
     import { Tab } from 'shared/components/enums'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { activeProfile, checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
+    import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
     import { TimePeriod } from '@core/utils'
-    import { ActivityDirection, ActivityType, InclusionState, ActivityAction } from '@core/wallet/enums'
-    import {
-        selectedAccountAssets,
-        newTransactionDetails,
-        updateNewTransactionDetails,
-        NewTransactionType,
-    } from '@core/wallet/stores'
+    import { ActivityDirection, ActivityType, InclusionState, ActivityAction, TokenStandard } from '@core/wallet/enums'
+    import { newTransactionDetails, updateNewTransactionDetails, NewTransactionType } from '@core/wallet/stores'
     import { sendOutput } from '@core/wallet/actions'
     import { DEFAULT_TRANSACTION_OPTIONS } from '@core/wallet/constants'
     import { getOutputParameters, validateSendConfirmation, getAddressFromSubject } from '@core/wallet/utils'
-    import { Activity, Output } from '@core/wallet/types'
+    import { Activity, NewTokenTransactionDetails, Output } from '@core/wallet/types'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { ledgerPreparedOutput } from '@core/ledger'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
@@ -58,9 +53,10 @@
     } = get(newTransactionDetails)
 
     let storageDeposit = 0
-    let visibleSurplus = 0
+    let minimumStorageDeposit = 0
     let preparedOutput: Output
     let expirationTimePicker: ExpirationTimePicker
+    let visibleSurplus: number | undefined = undefined
 
     let initialExpirationDate: TimePeriod = getInitialExpirationDate()
     let activeTab: Tab
@@ -68,11 +64,10 @@
     $: transactionDetails = get(newTransactionDetails)
     $: isInternal = recipient.type === 'account'
     $: expirationTimePicker?.setNull(giftStorageDeposit)
-    $: hideGiftToggle =
-        (transactionDetails.type === NewTransactionType.TokenTransfer &&
-            transactionDetails.asset.id === $selectedAccountAssets?.[$activeProfile?.network.id]?.baseCoin?.id) ||
-        (disableToggleGift && !giftStorageDeposit) ||
-        !!layer2Parameters
+    $: isBaseTokenTransfer =
+        transactionDetails.type === NewTransactionType.TokenTransfer &&
+        transactionDetails.asset?.metadata?.standard === TokenStandard.BaseToken
+    $: hideGiftToggle = isBaseTokenTransfer || !!layer2Parameters || (disableToggleGift && !giftStorageDeposit)
     $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
     $: isTransferring = $selectedAccount.isTransferring
 
@@ -124,40 +119,39 @@
 
     async function prepareTransactionOutput(): Promise<void> {
         const transactionDetails = get(newTransactionDetails)
-
         const outputParams = await getOutputParameters(transactionDetails)
         preparedOutput = await prepareOutput($selectedAccount.index, outputParams, DEFAULT_TRANSACTION_OPTIONS)
 
-        setStorageDeposit(preparedOutput, Number(surplus))
+        await updateStorageDeposit()
+
+        // Note: we need to adjust the surplus
+        // so we make sure that the surplus is always added on top of the minimum storage deposit
+        if (Number(surplus) > 0) {
+            if (minimumStorageDeposit >= Number(surplus)) {
+                visibleSurplus = surplus = undefined
+            } else {
+                visibleSurplus = Number(surplus) - minimumStorageDeposit
+                // Note: we have to hide it because currently, in the sdk,
+                // the storage deposit return strategy is only looked at
+                // if the provided amount is < the minimum required storage deposit
+                hideGiftToggle = true
+            }
+        }
 
         if (!initialExpirationDate && !isTransferring) {
             initialExpirationDate = getInitialExpirationDate()
         }
     }
 
-    function setStorageDeposit(preparedOutput: Output, surplus?: number): void {
-        const rawAmount =
-            transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.rawAmount : '0'
-
+    async function updateStorageDeposit(): Promise<void> {
         const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
-            getStorageDepositFromOutput(preparedOutput, rawAmount)
-
-        if (surplus > _storageDeposit) {
-            visibleSurplus = Number(surplus)
-        }
-
-        if (giftStorageDeposit) {
-            // Only giftedStorageDeposit needs adjusting, since that is derived
-            // from the amount property instead of the unlock condition
-            if (!surplus) {
-                storageDeposit = _giftedStorageDeposit
-            } else if (surplus >= _giftedStorageDeposit) {
+            await getStorageDepositFromOutput($selectedAccount, preparedOutput)
+        storageDeposit = minimumStorageDeposit = _storageDeposit > 0 ? _storageDeposit : _giftedStorageDeposit
+        if (isBaseTokenTransfer) {
+            const rawAmount = Number((transactionDetails as NewTokenTransactionDetails).rawAmount)
+            if (rawAmount >= storageDeposit) {
                 storageDeposit = 0
-            } else {
-                storageDeposit = _giftedStorageDeposit - surplus
             }
-        } else {
-            storageDeposit = _storageDeposit
         }
     }
 
@@ -172,7 +166,7 @@
 
     async function onConfirmClick(): Promise<void> {
         try {
-            validateSendConfirmation(preparedOutput)
+            await validateSendConfirmation($selectedAccount, preparedOutput)
 
             if ($isActiveLedgerProfile) {
                 ledgerPreparedOutput.set(preparedOutput)

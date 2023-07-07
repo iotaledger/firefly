@@ -218,7 +218,7 @@
     <button type="button" tabindex="0" on:focus={onFocusLast} />
 </popup>
 
-<style type="text/scss">
+<style lang="scss">
     popup {
         popup-content {
             width: 100%;
