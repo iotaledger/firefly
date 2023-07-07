@@ -73,7 +73,7 @@
     </dashboard-view>
 {/if}
 
-<style type="text/scss">
+<style lang="scss">
     dashboard-view {
         @apply flex flex-col w-screen;
         @apply bg-white;

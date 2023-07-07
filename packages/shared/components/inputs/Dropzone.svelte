@@ -61,7 +61,7 @@
     </content>
 </dropzone>
 
-<style type="text/scss">
+<style lang="scss">
     dropzone {
         height: 290px;
         content {

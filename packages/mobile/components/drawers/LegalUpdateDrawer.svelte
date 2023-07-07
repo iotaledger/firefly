@@ -102,7 +102,7 @@
     <Button classes="w-full" onClick={onConfirmClick} disabled={!checked}>{localize('actions.confirm')}</Button>
 </legal-update-drawer>
 
-<style type="text/scss">
+<style lang="scss">
     ul {
         display: block;
         list-style-type: disc;
