@@ -130,7 +130,7 @@
 
         setStorageDeposit(preparedOutput, Number(surplus))
 
-        if (!initialExpirationDate) {
+        if (!initialExpirationDate && !isTransferring) {
             initialExpirationDate = getInitialExpirationDate()
         }
     }
