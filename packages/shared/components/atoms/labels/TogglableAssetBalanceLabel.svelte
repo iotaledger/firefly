@@ -37,7 +37,7 @@
     </button>
 {/if}
 
-<style type="text/scss">
+<style lang="scss">
     button {
         &:disabled {
             cursor: default;

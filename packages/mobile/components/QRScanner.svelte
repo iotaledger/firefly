@@ -19,7 +19,7 @@
     </div>
 {/if}
 
-<style global type="text/scss">
+<style global lang="scss">
     .barcode-scanner--area--container {
         @apply w-2/3;
     }

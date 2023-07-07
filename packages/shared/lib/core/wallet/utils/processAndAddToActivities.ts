@@ -10,6 +10,6 @@ import { generateActivities, preprocessTransaction } from '.'
 // clears the the selectedAccount store at this point.
 export async function processAndAddToActivities(transaction: Transaction, account: IAccountState): Promise<void> {
     const preprocessedTransaction = await preprocessTransaction(transaction, account)
-    const activities = generateActivities(preprocessedTransaction, account)
+    const activities = await generateActivities(preprocessedTransaction, account)
     addActivitiesToAccountActivitiesInAllAccountActivities(account.index, activities)
 }

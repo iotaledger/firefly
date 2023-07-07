@@ -48,7 +48,7 @@
     </div>
 {/if}
 
-<style type="text/scss">
+<style lang="scss">
     .log {
         max-height: 50vh;
         @screen md {

@@ -5,7 +5,7 @@
 
 <div class="circle self-center rounded-full w-{size} h-{size}" style="--color: {color};" />
 
-<style type="text/scss">
+<style lang="scss">
     .circle {
         background-color: var(--color);
     }
