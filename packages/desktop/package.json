@@ -34,7 +34,7 @@
         "dotenv": "^16.0.3",
         "electron-dl": "^3.5.0",
         "electron-log": "^4.3.1",
-        "electron-updater": "5.3.0",
+        "electron-updater": "6.1.1",
         "https-browserify": "^1.0.0",
         "keytar": "^7.9.0",
         "node-machine-id": "^1.1.12",
