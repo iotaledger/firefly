@@ -7,6 +7,7 @@
     import { Animation, Button, PasswordInput, Text } from '@ui'
     import { HTMLButtonType, TextType } from '@ui/enums'
     import { updateStrongholdRouter } from '../update-stronghold-router'
+    import { AnimationEnum } from '@auxiliary/animation'
 
     export let password: string = ''
     export let isRecovery: boolean = false
@@ -64,6 +65,6 @@
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-        <Animation classes="setup-anim-aspect-ratio" animation="import-from-file-password-desktop" />
+        <Animation classes="setup-anim-aspect-ratio" animation={AnimationEnum.ImportFromFilePasswordDesktop} />
     </div>
 </OnboardingLayout>

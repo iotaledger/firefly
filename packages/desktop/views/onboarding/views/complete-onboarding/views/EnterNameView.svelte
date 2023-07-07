@@ -7,6 +7,7 @@
     import { profiles, validateProfileName } from '@core/profile'
     import { Animation, Button, Input, Text } from '@ui'
     import { completeOnboardingRouter } from '../complete-onboarding-router'
+    import { AnimationEnum } from '@auxiliary/animation'
 
     let error = ''
     let profileName = $onboardingProfile?.name ?? ''
@@ -56,6 +57,6 @@
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-green dark:bg-gray-900'}">
-        <Animation classes="setup-anim-aspect-ratio" animation="profile-desktop" />
+        <Animation classes="setup-anim-aspect-ratio" animation={AnimationEnum.ProfileDesktop} />
     </div>
 </OnboardingLayout>

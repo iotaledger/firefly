@@ -11,6 +11,7 @@
     import { Animation, Button, Dropzone, Text } from '@ui'
     import { onMount } from 'svelte'
     import { restoreFromStrongholdRouter } from '../../restore-from-stronghold/restore-from-stronghold-router'
+    import { AnimationEnum } from '@auxiliary/animation'
 
     interface FileWithPath extends File {
         path?: string
@@ -130,6 +131,6 @@
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-blue dark:bg-gray-900'}">
-        <Animation classes="setup-anim-aspect-ratio" animation="import-from-file-desktop" />
+        <Animation classes="setup-anim-aspect-ratio" animation={AnimationEnum.ImportFromFileDesktop} />
     </div>
 </OnboardingLayout>

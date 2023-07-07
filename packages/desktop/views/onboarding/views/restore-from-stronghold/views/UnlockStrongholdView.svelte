@@ -8,6 +8,7 @@
     import { Animation, Button, PasswordInput, Text } from '@ui'
     import { onMount } from 'svelte'
     import { restoreFromStrongholdRouter } from '../restore-from-stronghold-router'
+    import { AnimationEnum } from '@auxiliary/animation'
 
     export let error = ''
     export let busy = false
@@ -87,6 +88,6 @@
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-orange dark:bg-gray-900'}">
-        <Animation classes="setup-anim-aspect-ratio" animation="import-from-file-password-desktop" />
+        <Animation classes="setup-anim-aspect-ratio" animation={AnimationEnum.ImportFromFilePasswordDesktop} />
     </div>
 </OnboardingLayout>

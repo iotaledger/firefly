@@ -6,6 +6,7 @@
     import { isValidPin } from '@core/utils'
     import { Animation, Button, HTMLButtonType, PinInput, Text } from '@ui'
     import { completeOnboardingRouter } from '../complete-onboarding-router'
+    import { AnimationEnum } from '@auxiliary/animation'
 
     export let busy = false
 
@@ -105,6 +106,6 @@
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-pink dark:bg-gray-900'}">
-        <Animation classes="setup-anim-aspect-ratio" animation="pin-desktop" />
+        <Animation classes="setup-anim-aspect-ratio" animation={AnimationEnum.PinDesktop} />
     </div>
 </OnboardingLayout>

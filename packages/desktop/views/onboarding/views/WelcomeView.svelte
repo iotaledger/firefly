@@ -15,6 +15,7 @@
     import { onboardingRouter } from '../onboarding-router'
     import { initialiseOnboardingProfile } from '@contexts/onboarding/actions'
     import { shouldBeDeveloperProfile } from '@contexts/onboarding/utils'
+    import { AnimationEnum } from '@auxiliary/animation'
 
     let termsAccepted: boolean = false
 
@@ -60,6 +61,6 @@
         >
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center">
-        <Animation classes="setup-anim-aspect-ratio" animation="welcome-desktop" />
+        <Animation classes="setup-anim-aspect-ratio" animation={AnimationEnum.WelcomeDeskop} />
     </div>
 </OnboardingLayout>

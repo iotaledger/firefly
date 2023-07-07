@@ -14,6 +14,7 @@
     import { onMount } from 'svelte'
     import { restoreProfileRouter } from '../restore-profile-router'
     import { destroyProfileManager } from '@core/profile-manager/actions'
+    import { AnimationEnum } from '@auxiliary/animation'
 
     let isBusy = {
         [RestoreProfileType.Mnemonic]: false,
@@ -88,6 +89,6 @@
         />
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-purple dark:bg-gray-900">
-        <Animation classes="setup-anim-aspect-ratio" animation="import-desktop" />
+        <Animation classes="setup-anim-aspect-ratio" animation={AnimationEnum.ImportDesktop} />
     </div>
 </OnboardingLayout>
