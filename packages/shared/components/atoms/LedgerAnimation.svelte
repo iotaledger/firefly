@@ -1,8 +1,9 @@
 <script lang="ts">
+    import { IAnimation } from '@auxiliary/animation'
     import { Animation, Illustration } from 'shared/components'
 
-    export let animation: string = undefined
-    export let illustration: string = undefined
+    export let animation: IAnimation | undefined = undefined
+    export let illustration: string | undefined = undefined
     export let classes: string = ''
     export let bgClasses: string = ''
 </script>

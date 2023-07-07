@@ -2,6 +2,7 @@
     import lottie, { AnimationItem, AnimationSegment } from 'lottie-web'
     import { appSettings } from '@core/app'
     import { onDestroy } from 'svelte'
+    import { Animation as AnimationEnum, IAnimation } from '@auxiliary/animation'
 
     export let animation: string | undefined = undefined
     export let classes = ''
@@ -10,161 +11,160 @@
     export let segments: AnimationSegment | AnimationSegment[] | undefined = undefined
     export let renderer: 'svg' | 'canvas' | 'html' = 'svg'
 
-    const animations: { [key: string]: { lightmode: string; darkmode: string } } = {
-        'welcome-desktop': {
+    const animations: IAnimation = {
+        [AnimationEnum.WelcomeDeskop]: {
             lightmode: 'welcome-desktop.json',
             darkmode: 'welcome-desktop-darkmode.json',
         },
-        'appearance-desktop': {
+        [AnimationEnum.AppearanceDesktop]: {
             lightmode: 'appearance-desktop.json',
             darkmode: 'appearance-desktop-darkmode.json',
         },
-        'onboarding-protocol-desktop': {
+        [AnimationEnum.OnboardingProtocolDesktop]: {
             lightmode: 'onboarding-desktop.json',
             darkmode: 'onboarding-desktop-darkmode.json',
         },
-        'onboarding-network-desktop': {
+        [AnimationEnum.OnboardingNetworkDesktop]: {
             lightmode: 'onboarding-desktop.json',
             darkmode: 'onboarding-desktop-darkmode.json',
         },
-        'onboarding-custom-network-desktop': {
+        [AnimationEnum.OnboardingCustomNetworkDesktop]: {
             lightmode: 'onboarding-desktop.json',
             darkmode: 'onboarding-desktop-darkmode.json',
         },
-        'profile-desktop': {
+        [AnimationEnum.ProfileDesktop]: {
             lightmode: 'setup-desktop.json',
             darkmode: 'setup-desktop-darkmode.json',
         },
-        'setup-desktop': {
+        [AnimationEnum.SetupDesktop]: {
             lightmode: 'setup-desktop.json',
             darkmode: 'setup-desktop-darkmode.json',
         },
-        'secure-desktop': {
+        [AnimationEnum.SecureDesktop]: {
             lightmode: 'secure-desktop.json',
             darkmode: 'secure-desktop-darkmode.json',
         },
-        'password-desktop': {
+        [AnimationEnum.PasswordDesktop]: {
             lightmode: 'password-desktop.json',
             darkmode: 'password-desktop-darkmode.json',
         },
-        'protect-desktop': {
+        [AnimationEnum.ProtectDesktop]: {
             lightmode: 'protect-desktop.json',
             darkmode: 'protect-desktop-darkmode.json',
         },
-        'pin-desktop': {
+        [AnimationEnum.PinDesktop]: {
             lightmode: 'pin-desktop.json',
             darkmode: 'pin-desktop-darkmode.json',
         },
-        'repeat-pin-desktop': {
+        [AnimationEnum.RepeatPinDesktop]: {
             lightmode: 'repeat-pin-desktop.json',
             darkmode: 'repeat-pin-desktop-darkmode.json',
         },
-        'backup-desktop': {
+        [AnimationEnum.BackupDesktop]: {
             lightmode: 'backup-desktop.json',
             darkmode: 'backup-desktop-darkmode.json',
         },
-        'backup-recovery-phrase-desktop': {
+        [AnimationEnum.BackupRecoveryPhraseDesktop]: {
             lightmode: 'backup-recovery-phrase-desktop.json',
             darkmode: 'backup-recovery-phrase-desktop-darkmode.json',
         },
-        'import-desktop': {
+        [AnimationEnum.ImportDesktop]: {
             lightmode: 'import-desktop.json',
             darkmode: 'import-desktop-darkmode.json',
         },
-        'import-from-text-desktop': {
+        [AnimationEnum.ImportFromTextDesktop]: {
             lightmode: 'import-from-text-desktop.json',
             darkmode: 'import-from-text-desktop-darkmode.json',
         },
-        'import-from-file-desktop': {
+        [AnimationEnum.ImportFromFileDesktop]: {
             lightmode: 'import-from-file-desktop.json',
             darkmode: 'import-from-file-desktop-darkmode.json',
         },
-        'import-from-file-password-desktop': {
+        [AnimationEnum.ImportFromFilePasswordDesktop]: {
             lightmode: 'import-from-file-password-desktop.json',
             darkmode: 'import-from-file-password-desktop-darkmode.json',
         },
-        'success-desktop': {
+        [AnimationEnum.SuccessDesktop]: {
             lightmode: 'success-desktop.json',
             darkmode: 'success-desktop-darkmode.json',
         },
-        'congratulations-desktop': {
+        [AnimationEnum.CongratulationsDesktop]: {
             lightmode: 'congratulations-desktop.json',
             darkmode: 'congratulations-desktop-darkmode.json',
         },
-        'migrate-desktop': {
+        [AnimationEnum.MigrateDesktop]: {
             lightmode: 'migrate-desktop.json',
             darkmode: 'migrate-desktop-darkmode.json',
         },
-        'balance-desktop': {
+        [AnimationEnum.BalanceDesktop]: {
             lightmode: 'balance-desktop.json',
             darkmode: 'balance-desktop-darkmode.json',
         },
-        'splashscreen-desktop': {
+        [AnimationEnum.SplashscreenDesktop]: {
             lightmode: 'splashscreen-desktop.json',
             darkmode: 'splashscreen-desktop-darkmode.json',
         },
-        'loading-desktop': {
+        [AnimationEnum.LoadingDesktop]: {
             lightmode: 'loading-desktop.json',
             darkmode: 'loading-desktop.json',
         },
-        'ledger-bg-desktop': {
+        [AnimationEnum.LedgerBgDesktop]: {
             lightmode: 'ledger/ledger-bg-desktop.json',
             darkmode: 'ledger/ledger-bg-desktop-darkmode.json',
         },
-        'ledger-prompt-confirmed-desktop': {
+        [AnimationEnum.LedgerPromptConfirmedDesktop]: {
             lightmode: 'ledger/ledger-prompt-confirmed-desktop.json',
             darkmode: 'ledger/ledger-prompt-confirmed-desktop.json',
         },
-        'ledger-confirm-prompt-desktop': {
+        [AnimationEnum.LedgerConfirmPromptDesktop]: {
             lightmode: 'ledger/ledger-confirm-prompt-desktop.json',
             darkmode: 'ledger/ledger-confirm-prompt-desktop.json',
         },
-        'ledger-connected-desktop': {
+        [AnimationEnum.LedgerConnectedDesktop]: {
             lightmode: 'ledger/ledger-connected-desktop.json',
             darkmode: 'ledger/ledger-connected-desktop.json',
         },
-        'ledger-disconnected-desktop': {
+        [AnimationEnum.LedgerDisconnectedDesktop]: {
             lightmode: 'ledger/ledger-disconnected-desktop.json',
             darkmode: 'ledger/ledger-disconnected-desktop.json',
         },
-        'ledger-app-closed-desktop': {
+        [AnimationEnum.LedgerAppClosedDesktop]: {
             lightmode: 'ledger/ledger-app-closed-desktop.json',
             darkmode: 'ledger/ledger-app-closed-desktop.json',
         },
-        // Staking
-        'staking-prestaking': {
+        [AnimationEnum.StakingPrestaking]: {
             lightmode: 'staking/prestaking.json',
             darkmode: 'staking/prestaking.json',
         },
-        'staking-staking-neither': {
+        [AnimationEnum.StakingStakingNeither]: {
             lightmode: 'staking/staking-neither.json',
             darkmode: 'staking/staking-neither.json',
         },
-        'staking-staking-both': {
+        [AnimationEnum.StakingStakingBoth]: {
             lightmode: 'staking/staking-both.json',
             darkmode: 'staking/staking-both.json',
         },
-        'staking-staking-assembly-with-shimmer-rewards': {
+        [AnimationEnum.StakingStakingAssemblyWithShimmerRewards]: {
             lightmode: 'staking/staking-assembly-with-shimmer-rewards.json',
             darkmode: 'staking/staking-assembly-with-shimmer-rewards.json',
         },
-        'staking-staking-assembly-without-shimmer-rewards': {
+        [AnimationEnum.StakingStakingAssemblyWithoutShimmerRewards]: {
             lightmode: 'staking/staking-assembly-without-shimmer-rewards.json',
             darkmode: 'staking/staking-assembly-without-shimmer-rewards.json',
         },
-        'staking-staking-shimmer-with-assembly-rewards': {
+        [AnimationEnum.StakingStakingShimmerWithAssemblyRewards]: {
             lightmode: 'staking/staking-shimmer-with-assembly-rewards.json',
             darkmode: 'staking/staking-shimmer-with-assembly-rewards.json',
         },
-        'staking-staking-shimmer-without-assembly-rewards': {
+        [AnimationEnum.StakingStakingShimmerWithoutAssemblyRewards]: {
             lightmode: 'staking/staking-shimmer-without-assembly-rewards.json',
             darkmode: 'staking/staking-shimmer-without-assembly-rewards.json',
         },
-        'staking-ended': {
+        [AnimationEnum.StakingEnded]: {
             lightmode: 'staking/ended.json',
             darkmode: 'staking/ended.json',
         },
-        'special-token': {
+        [AnimationEnum.SpecialToken]: {
             lightmode: 'special-token.json',
             darkmode: 'special-token.json',
         },
