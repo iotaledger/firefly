@@ -20,7 +20,7 @@
     </Text>
 </div>
 
-<style type="text/scss">
+<style lang="scss">
     .progress {
         transition: width 0.25s;
     }

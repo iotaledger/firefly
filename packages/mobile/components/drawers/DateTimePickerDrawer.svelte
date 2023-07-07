@@ -41,7 +41,7 @@
     <Button onClick={onConfirmClick} classes="w-full">{localize('actions.confirm')}</Button>
 </datetime-picker-drawer>
 
-<style type="text/scss">
+<style lang="scss">
     :global(body.scheme-dark) {
         :global(.datetime-picker-colors) {
             --sdt-color: theme('colors.white');

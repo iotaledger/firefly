@@ -91,7 +91,7 @@
     <Button classes="w-full" onClick={onConfirmClick} disabled={!checked}>{localize('actions.confirm')}</Button>
 </div>
 
-<style type="text/scss">
+<style lang="scss">
     ul {
         display: block;
         list-style-type: disc;
