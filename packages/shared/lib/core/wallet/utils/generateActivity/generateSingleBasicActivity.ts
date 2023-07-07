@@ -17,17 +17,17 @@ import {
     getTagFromOutput,
 } from './helper'
 
-export function generateSingleBasicActivity(
+export async function generateSingleBasicActivity(
     account: IAccountState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters,
     fallbackAssetId?: string,
     fallbackAmount?: number
-): TransactionActivity {
+): Promise<TransactionActivity> {
     const { transactionId, direction, claimingData, time, inclusionState } = processedTransaction
 
     const isHidden = false
     const isAssetHidden = false
-    const containsValue = activityOutputContainsValue(wrappedOutput)
+    const containsValue = await activityOutputContainsValue(account, wrappedOutput)
 
     const outputId = wrappedOutput.outputId
     const id = outputId || transactionId
@@ -41,12 +41,12 @@ export function generateSingleBasicActivity(
     const publicNote = ''
 
     const sendingInfo = getSendingInformation(processedTransaction, output, account)
-    const asyncData = getAsyncDataFromOutput(output, outputId, claimingData, account)
+    const asyncData = await getAsyncDataFromOutput(output, outputId, claimingData, account)
 
     const { parsedLayer2Metadata, destinationNetwork } = getLayer2ActivityInformation(metadata, sendingInfo)
     const gasBudget = Number(parsedLayer2Metadata?.gasBudget ?? '0')
 
-    let { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output)
+    let { storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(account, output)
     giftedStorageDeposit = action === ActivityAction.Burn ? 0 : giftedStorageDeposit
     giftedStorageDeposit = gasBudget === 0 ? giftedStorageDeposit : 0
 
@@ -55,11 +55,24 @@ export function generateSingleBasicActivity(
     const nativeToken = getNativeTokenFromOutput(output)
     const assetId = fallbackAssetId ?? nativeToken?.id ?? getCoinType()
 
+    let surplus: number | undefined = undefined
+    if (nativeToken) {
+        const storageDepositToDeduct = (storageDeposit > 0 ? storageDeposit : giftedStorageDeposit) ?? 0
+        surplus = Number(output.amount) - storageDepositToDeduct
+    }
+
     let rawAmount: number
     if (fallbackAmount === undefined) {
         rawAmount = nativeToken ? Number(nativeToken?.amount) : baseTokenAmount
     } else {
         rawAmount = fallbackAmount
+    }
+
+    // Note: we update the displayed storage deposit so it matches what was displayed in the send confirmation flow
+    // set the storage deposit to zero if the amount is greater than the storage deposit
+    // to improve the UX so the user doesnt think they need to pay the storage deposit
+    if (!nativeToken && !storageDeposit && rawAmount >= giftedStorageDeposit) {
+        storageDeposit = giftedStorageDeposit = 0
     }
 
     return {
@@ -76,6 +89,7 @@ export function generateSingleBasicActivity(
         outputId,
         storageDeposit,
         giftedStorageDeposit,
+        surplus,
         rawAmount,
         isShimmerClaiming,
         publicNote,
