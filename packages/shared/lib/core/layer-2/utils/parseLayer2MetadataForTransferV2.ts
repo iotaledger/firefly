@@ -51,7 +51,7 @@ function parseSmartContractParameters(readStream: ReadSpecialStream): Record<str
 function parseAssetAllowance(readStream: ReadSpecialStream): ILayer2AssetAllowance {
     const allowance = readStream.readUInt8('encodedAllowance')
     const result: ILayer2AssetAllowance = {
-        baseTokens: '',
+        baseTokens: '0',
         nativeTokens: [],
         nfts: [],
     }
