@@ -103,7 +103,7 @@
             on:mouseenter={showTooltip}
             on:mouseleave={hideTooltip}
         >
-            <AssetIcon {asset} chainId={asset.chainId} />
+            <AssetIcon {asset} />
             <Text type={TextType.h1} fontWeight={FontWeight.semibold} classes="whitespace-pre">
                 {displayedAmount.join('\n')}
                 {#if unit}
