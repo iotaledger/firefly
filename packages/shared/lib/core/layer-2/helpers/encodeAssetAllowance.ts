@@ -1,65 +1,57 @@
+import { Converter } from '@iota/util.js'
 import BigInteger from 'big-integer'
-import { WriteStream, Converter } from '@iota/util.js'
 
-import { EMPTY_BUFFER_BYTE_LENGTH, EMPTY_BUFFER } from '../constants'
-import { Allowance } from '../enums'
 import {
-    NewTransactionType,
-    TokenStandard,
-    NewTokenTransactionDetails,
     IPersistedAsset,
     NewNftTransactionDetails,
+    NewTokenTransactionDetails,
     NewTransactionDetails,
+    NewTransactionType,
+    TokenStandard,
 } from '@core/wallet'
+import { SpecialStream } from '../classes'
+import { Allowance } from '../enums'
+import { specialNativeTokenAmountEncoding } from '../utils'
 
 export function encodeAssetAllowance(transactionDetails: NewTransactionDetails): Uint8Array {
-    const allowance = new WriteStream()
-    allowance.writeUInt8('encodedAllowance', Allowance.Set)
-
+    const allowance = new SpecialStream()
     if (transactionDetails.type === NewTransactionType.TokenTransfer) {
         const asset = transactionDetails.asset
-        if (asset.standard === TokenStandard.BaseToken) {
+        if (asset?.standard === TokenStandard.BaseToken) {
+            allowance.writeUInt8('encodedAllowance', Allowance.HasBaseTokens)
             encodeBaseTokenTransfer(allowance, transactionDetails.rawAmount)
-        } else {
+        } else if (asset) {
+            allowance.writeUInt8('encodedAllowance', Allowance.HasNativeTokens)
             encodeNativeTokenTransfer(allowance, asset, transactionDetails)
         }
-        allowance.writeUInt16('noNfts', EMPTY_BUFFER)
     } else if (transactionDetails.type === NewTransactionType.NftTransfer) {
+        allowance.writeUInt8('encodedAllowance', Allowance.hasNFTs)
         encodeNftTransfer(allowance, transactionDetails)
     }
-
     return allowance.finalBytes()
 }
 
-function encodeBaseTokenTransfer(buffer: WriteStream, rawAmount: string): void {
-    buffer.writeUInt64('iotaAmount', BigInteger(rawAmount))
-    buffer.writeUInt16('noTokens', EMPTY_BUFFER_BYTE_LENGTH)
-    buffer.writeUInt16('emptyTokenBuffer', EMPTY_BUFFER)
+function encodeBaseTokenTransfer(buffer: SpecialStream, rawAmount: string): void {
+    buffer.writeUInt64SpecialEncoding('baseTokenAmount', BigInteger(rawAmount))
 }
 
 function encodeNativeTokenTransfer(
-    buffer: WriteStream,
+    buffer: SpecialStream,
     asset: IPersistedAsset,
     transactionDetails: NewTokenTransactionDetails
 ): void {
-    const { surplus, rawAmount } = transactionDetails
-    const tokenBuffer = new WriteStream()
-
-    tokenBuffer.writeUInt16('amountOfTokens', 1)
+    const { rawAmount } = transactionDetails
+    buffer.writeUInt32SpecialEncoding('amountOfDifferentTokens', 1)
     const tokenIdBytes = Converter.hexToBytes(asset.id)
-    tokenBuffer.writeBytes('tokenId', tokenIdBytes.length, tokenIdBytes)
-    tokenBuffer.writeUInt256('amount', BigInteger(rawAmount))
-    const tokenBufferBytes = tokenBuffer.finalBytes()
+    buffer.writeBytes('tokenId', tokenIdBytes.length, tokenIdBytes)
 
-    buffer.writeUInt64('iotaAmount', BigInteger(surplus ?? '0'))
-    buffer.writeUInt16('tokensLength', tokenBufferBytes.length)
-    buffer.writeBytes('tokenBuffer', tokenBufferBytes.length, tokenBufferBytes)
+    const encodedAmount = specialNativeTokenAmountEncoding(BigInt(rawAmount))
+    buffer.writeUInt32SpecialEncoding('length', encodedAmount.length)
+    buffer.writeBytes('nativeTokenAmount', encodedAmount.length, encodedAmount)
 }
 
-function encodeNftTransfer(buffer: WriteStream, transactionDetails: NewNftTransactionDetails): void {
-    encodeBaseTokenTransfer(buffer, '0')
-
-    buffer.writeUInt16('NftAmount', 1)
+function encodeNftTransfer(buffer: SpecialStream, transactionDetails: NewNftTransactionDetails): void {
+    buffer.writeUInt32SpecialEncoding('nftAmount', 1)
     const nftIdBytes = Converter.hexToBytes(transactionDetails.nftId)
-    buffer.writeBytes('NftId', nftIdBytes.length, nftIdBytes)
+    buffer.writeBytes('nftId', nftIdBytes.length, nftIdBytes)
 }

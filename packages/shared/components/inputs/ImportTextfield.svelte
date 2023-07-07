@@ -122,7 +122,7 @@
     </div>
 </div>
 
-<style type="text/scss">
+<style lang="scss">
     textarea {
         min-height: var(--min-height);
 

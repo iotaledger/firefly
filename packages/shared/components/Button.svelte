@@ -86,7 +86,7 @@
     {/if}
 </button>
 
-<style type="text/scss">
+<style lang="scss">
     button {
         @apply flex;
         @apply flex-row;

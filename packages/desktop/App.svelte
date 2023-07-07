@@ -25,7 +25,7 @@
         setPlatform,
     } from '@core/app'
     import { showAppNotification } from '@auxiliary/notification'
-    import { closePopup, openPopup, PopupId, popupState } from '@desktop/auxiliary/popup'
+    import { closePopup, openPopup, PopupId, popupState } from '@auxiliary/popup'
     import { getLocalisedMenuItems } from './lib/helpers'
     import { ToastContainer, Transition } from '@ui'
     import { TitleBar, Popup } from '@components'
@@ -204,7 +204,7 @@
     </app-body>
 </app-container>
 
-<style global type="text/scss">
+<style global lang="scss">
     @tailwind base;
     @tailwind components;
     @tailwind utilities;

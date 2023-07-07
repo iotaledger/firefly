@@ -52,12 +52,12 @@
             </span>
         </div>
         <div class="col-end-12 h-full flex justify-center items-center justify-items-center">
-            <Toggle active={$isStrongholdLocked} onClick={() => {}} />
+            <Toggle active={$isStrongholdLocked} />
         </div>
     </div>
 </button>
 
-<style type="text/scss">
+<style lang="scss">
     button {
         &:disabled {
             @apply pointer-events-none;

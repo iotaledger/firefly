@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { closePopup, openPopup, PopupId } from '@desktop/auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile'
@@ -65,7 +65,7 @@
                         containsUnlockCondition(output.unlockConditions, UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN)
                     ) {
                         type = PendingFundsType.StorageDepositReturn
-                        amount = getStorageDepositFromOutput(output).storageDeposit
+                        amount = (await getStorageDepositFromOutput($selectedAccount, output))?.storageDeposit
                     } else if (containsUnlockCondition(output.unlockConditions, UNLOCK_CONDITION_TIMELOCK)) {
                         type = PendingFundsType.Timelock
                         amount = Number(output.amount)

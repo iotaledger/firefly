@@ -2,7 +2,7 @@
     import { Button, Text } from 'shared/components'
     import { errorLog } from '@core/error'
     import { localize } from '@core/i18n'
-    import { closePopup } from '@desktop/auxiliary/popup'
+    import { closePopup } from '@auxiliary/popup'
     import { setClipboard } from '@core/utils'
 
     function onClearClick(): void {
@@ -48,7 +48,7 @@
     </div>
 {/if}
 
-<style type="text/scss">
+<style lang="scss">
     .log {
         max-height: 50vh;
         @screen md {

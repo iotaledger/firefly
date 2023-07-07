@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Button, Checkbox, Text, Link } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { closePopup } from '@desktop/auxiliary/popup'
+    import { closePopup } from '@auxiliary/popup'
     import {
         lastAcceptedTermsOfService,
         lastAcceptedPrivacyPolicy,
@@ -91,7 +91,7 @@
     <Button classes="w-full" onClick={onConfirmClick} disabled={!checked}>{localize('actions.confirm')}</Button>
 </div>
 
-<style type="text/scss">
+<style lang="scss">
     ul {
         display: block;
         list-style-type: disc;

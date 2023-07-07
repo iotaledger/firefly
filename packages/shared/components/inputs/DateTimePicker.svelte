@@ -91,7 +91,7 @@
     </div>
 </Tooltip>
 
-<style type="text/scss">
+<style lang="scss">
     @media (prefers-color-scheme: dark) {
         :global(.datetime-picker-colors) {
             --sdt-color: theme('colors.white');

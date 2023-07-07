@@ -1,6 +1,6 @@
 <script lang="ts">
     import { showAppNotification } from '@auxiliary/notification/actions'
-    import { closePopup, openPopup, PopupId } from '@desktop/auxiliary/popup'
+    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { registerProposalsForAccounts, registeredProposalsForSelectedAccount } from '@contexts/governance'
     import { selectedAccount } from '@core/account'
     import { handleError } from '@core/error/handlers/handleError'

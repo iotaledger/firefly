@@ -18,7 +18,7 @@
         settingsRouter,
     } from '@core/router'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { popupState } from '@desktop/auxiliary/popup'
+    import { popupState } from '@auxiliary/popup'
     import { closeDrawer } from '@desktop/auxiliary/drawer'
 
     let isBackButtonVisible = false
@@ -77,7 +77,7 @@
     <div class="right-button flex justify-end" />
 </top-navigation>
 
-<style type="text/scss">
+<style lang="scss">
     top-navigation {
         @apply absolute flex flex-row justify-between items-center z-10 -top-12 left-18 h-12 px-8 py-1;
         width: calc(100% - 4.5rem);
