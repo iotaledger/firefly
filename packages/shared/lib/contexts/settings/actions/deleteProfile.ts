@@ -4,7 +4,6 @@ import { AppContext } from '@core/app/enums'
 import { activeProfile, logout, profiles, removeProfile, removeProfileFolder } from '@core/profile'
 import { routerManager } from '@core/router/stores'
 import { removePersistedShimmerClaimingTransactions } from '@contexts/onboarding/stores'
-import { destroyProfileManager } from '@core/profile-manager'
 
 /**
  * It removes the active profile from the app's list of profiles, removes the profile's directory from
@@ -22,7 +21,7 @@ export async function deleteProfile(): Promise<void> {
          * CAUTION: Logout must occur before the profile is removed
          * from the Svelte store list of profiles.
          */
-        logout(true, true)
+        await logout(true, true)
 
         /**
          * CAUTION: The profile and its data must be removed from the
@@ -42,7 +41,6 @@ export async function deleteProfile(): Promise<void> {
          * routed to the welcome screen.
          */
         if (get(profiles).length === 0) {
-            await destroyProfileManager()
             get(routerManager).goToAppContext(AppContext.Onboarding)
         }
     } catch (err) {
