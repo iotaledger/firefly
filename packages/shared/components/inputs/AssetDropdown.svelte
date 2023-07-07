@@ -49,7 +49,7 @@
             class:cursor-pointer={!isReadonly}
             on:click={onDropdownClick}
         >
-            <AssetIcon small {asset} chainId={asset.chainId} />
+            <AssetIcon small {asset} />
             <div class="w-full relative" style="max-width: 75px;">
                 <Text
                     color="gray-600"
