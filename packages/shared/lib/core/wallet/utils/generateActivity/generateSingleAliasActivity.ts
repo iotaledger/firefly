@@ -16,17 +16,17 @@ import {
     getTagFromOutput,
 } from './helper'
 
-export function generateSingleAliasActivity(
+export async function generateSingleAliasActivity(
     account: IAccountState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
-): AliasActivity {
+): Promise<AliasActivity> {
     const { transactionId, claimingData, direction, time, inclusionState } = processedTransaction
 
     const output = wrappedOutput.output as IAliasOutput
     const outputId = wrappedOutput.outputId
     const id = outputId || transactionId
 
-    const { storageDeposit: _storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output)
+    const { storageDeposit: _storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(account, output)
     const storageDeposit = getAmountFromOutput(output) + _storageDeposit
     const governorAddress = getGovernorAddressFromAliasOutput(output)
     const stateControllerAddress = getStateControllerAddressFromAliasOutput(output)
@@ -38,7 +38,7 @@ export function generateSingleAliasActivity(
 
     const metadata = getMetadataFromOutput(output)
     const tag = getTagFromOutput(output)
-    const asyncData = getAsyncDataFromOutput(output, outputId, claimingData, account)
+    const asyncData = await getAsyncDataFromOutput(output, outputId, claimingData, account)
     const sendingInfo = getSendingInformation(processedTransaction, output, account)
 
     return {
