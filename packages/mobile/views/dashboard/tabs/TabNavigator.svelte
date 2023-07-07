@@ -52,7 +52,7 @@
     {/each}
 </tab-navigator>
 
-<style type="text/scss">
+<style lang="scss">
     tab-navigator {
         box-shadow: 0px 4px 4px rgb(0 0 0 / 25%), 0px 2px 12px rgb(0 25 66 / 16%);
         clip-path: inset(-150px 0px 0px 0px); // needed to prevent the shadow from showing at the bottom

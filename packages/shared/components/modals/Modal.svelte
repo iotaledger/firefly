@@ -56,7 +56,7 @@
     </modal-content>
 {/if}
 
-<style type="text/scss">
+<style lang="scss">
     modal-content {
         position: var(--modal-position);
         top: var(--modal-position-top);

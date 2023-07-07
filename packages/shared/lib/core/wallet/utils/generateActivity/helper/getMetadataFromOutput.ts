@@ -7,7 +7,7 @@ import type { Output } from '@core/wallet/types'
 
 import { FEATURE_TYPE_METADATA } from '../../../constants'
 
-export function getMetadataFromOutput(output: Output): string {
+export function getMetadataFromOutput(output: Output): string | undefined {
     const { data } = <IMetadataFeature>output?.features?.find((feature) => feature.type === FEATURE_TYPE_METADATA) ?? {
         data: undefined,
     }
