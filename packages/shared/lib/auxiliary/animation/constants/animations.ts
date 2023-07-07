@@ -15,12 +15,12 @@ export const ANIMATIONS: IAnimation = {
         darkmode: 'onboarding-desktop-darkmode.json',
     },
     [AnimationEnum.OnboardingNetworkDesktop]: {
-        lightmode: 'onboarding-network-desktop.json',
-        darkmode: 'onboarding-network-desktop-darkmode.json',
+        lightmode: 'onboarding-desktop.json',
+        darkmode: 'onboarding-desktop-darkmode.json',
     },
     [AnimationEnum.OnboardingCustomNetworkDesktop]: {
-        lightmode: 'onboarding-custom-network-desktop.json',
-        darkmode: 'onboarding-custom-network-desktop-darkmode.json',
+        lightmode: 'onboarding-desktop.json',
+        darkmode: 'onboarding-desktop-darkmode.json',
     },
     [AnimationEnum.ProfileDesktop]: {
         lightmode: 'setup-desktop.json',
