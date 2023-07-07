@@ -13,15 +13,15 @@ import {
 } from './helper'
 import { OUTPUT_TYPE_BASIC } from '@core/wallet/constants'
 
-export function generateSingleConsolidationActivity(
+export async function generateSingleConsolidationActivity(
     account: IAccountState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
-): ConsolidationActivity {
+): Promise<ConsolidationActivity> {
     const { transactionId, direction, claimingData, time, inclusionState, wrappedInputs } = processedTransaction
 
     const isHidden = false
     const isAssetHidden = false
-    const containsValue = activityOutputContainsValue(wrappedOutput)
+    const containsValue = await activityOutputContainsValue(account, wrappedOutput)
 
     const outputId = wrappedOutput.outputId
     const id = outputId || transactionId
@@ -34,9 +34,9 @@ export function generateSingleConsolidationActivity(
     const metadata = getMetadataFromOutput(output)
 
     const sendingInfo = getSendingInformation(processedTransaction, output, account)
-    const asyncData = getAsyncDataFromOutput(output, outputId, claimingData, account)
+    const asyncData = await getAsyncDataFromOutput(output, outputId, claimingData, account)
 
-    const { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output)
+    const { storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(account, output)
     return {
         type: ActivityType.Consolidation,
         isHidden,

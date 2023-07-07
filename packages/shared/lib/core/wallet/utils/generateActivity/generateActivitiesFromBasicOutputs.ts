@@ -16,10 +16,10 @@ import { generateSingleBasicActivity } from './generateSingleBasicActivity'
 import { generateSingleConsolidationActivity } from './generateSingleConsolidationActivity'
 import { generateSingleNftActivity } from './generateSingleNftActivity'
 
-export function generateActivitiesFromBasicOutputs(
+export async function generateActivitiesFromBasicOutputs(
     processedTransaction: IProcessedTransaction,
     account: IAccountState
-): Activity[] {
+): Promise<Activity[]> {
     const activities = []
 
     const basicOutputs = getNonRemainderBasicOutputsFromTransaction(
@@ -41,7 +41,7 @@ export function generateActivitiesFromBasicOutputs(
         if (isSelfTransaction && burnedNftInputIndex >= 0) {
             const wrappedInput = burnedNftInputs[burnedNftInputIndex]
             const nftInput = wrappedInput.output as INftOutput
-            activity = generateSingleNftActivity(
+            activity = await generateSingleNftActivity(
                 account,
                 {
                     action: ActivityAction.Burn,
@@ -55,7 +55,7 @@ export function generateActivitiesFromBasicOutputs(
 
             burnedNftInputs.splice(burnedNftInputIndex, 1)
         } else if (isSelfTransaction && burnedNativeToken) {
-            activity = generateSingleBasicActivity(
+            activity = await generateSingleBasicActivity(
                 account,
                 {
                     action: ActivityAction.Burn,
@@ -66,13 +66,13 @@ export function generateActivitiesFromBasicOutputs(
                 burnedNativeToken.amount
             )
         } else if (isSelfTransaction && isConsolidation(basicOutput, processedTransaction)) {
-            activity = generateSingleConsolidationActivity(account, {
+            activity = await generateSingleConsolidationActivity(account, {
                 action: ActivityAction.Send,
                 processedTransaction,
                 wrappedOutput: basicOutput,
             })
         } else {
-            activity = generateSingleBasicActivity(account, {
+            activity = await generateSingleBasicActivity(account, {
                 action: ActivityAction.Send,
                 processedTransaction,
                 wrappedOutput: basicOutput,
