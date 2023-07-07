@@ -2,14 +2,14 @@
     import lottie, { AnimationItem, AnimationSegment } from 'lottie-web'
     import { appSettings } from '@core/app'
     import { onDestroy } from 'svelte'
-    import { Animation as AnimationEnum, IAnimation } from '@auxiliary/animation'
+    import { Animation as AnimationEnum, AnimationRenderer, IAnimation } from '@auxiliary/animation'
 
     export let animation: string | undefined = undefined
     export let classes = ''
-    export let loop = true
-    export let autoplay = true
+    export let loop: boolean = true
+    export let autoplay: boolean = true
     export let segments: AnimationSegment | AnimationSegment[] | undefined = undefined
-    export let renderer: 'svg' | 'canvas' | 'html' = 'svg'
+    export let renderer: AnimationRenderer = AnimationRenderer.Svg
 
     const animations: IAnimation = {
         [AnimationEnum.WelcomeDeskop]: {
