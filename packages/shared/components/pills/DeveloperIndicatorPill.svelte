@@ -1,7 +1,6 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { PillBorderRadius } from 'components/enums'
-    import { Pill } from 'shared/components'
+    import { Pill, PillBorderRadius } from 'shared/components'
 </script>
 
 <Pill
