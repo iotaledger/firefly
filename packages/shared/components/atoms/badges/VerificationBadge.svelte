@@ -8,9 +8,7 @@
     export let height: number
 </script>
 
-<verification-status-badge
-    class="absolute -right-1 -bottom-1 flex items-center justify-center rounded-full ring-2 ring-white dark:ring-gray-900"
->
+<verification-status-badge class="absolute -right-1 -bottom-1 flex items-center justify-center rounded-full">
     {#if status === NotVerifiedStatus.New || status === NotVerifiedStatus.Skipped}
         <Icon {width} {height} icon={IconEnum.VerificationStatusNew} classes="text-gray-600" secondaryColor="white" />
     {:else if status === VerifiedStatus.SelfVerified}
