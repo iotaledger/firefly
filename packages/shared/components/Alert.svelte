@@ -9,6 +9,7 @@
     export let classes: string = ''
     export let showDismiss: boolean = false
     export let id: string = ''
+
     interface ToastStyle {
         backgroundColor: string
         iconColor: string

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { ICON_SVG_MAP, Icon } from '@lib/auxiliary/icon'
+    import { FillPriority, ICON_SVG_MAP, Icon } from '@lib/auxiliary/icon'
 
     export let icon: Icon
     export let width: number | string | undefined = undefined
@@ -8,11 +8,6 @@
     export let primaryColor: string | undefined = undefined
     export let secondaryColor: string | undefined = undefined
     export let removeWhitespace: boolean = false
-
-    enum FillPriority {
-        Primary = 'primary',
-        Secondary = 'secondary',
-    }
 
     let svg: SVGSVGElement
     let viewBox = { x: 0, y: 0, width: 0, height: 0 }

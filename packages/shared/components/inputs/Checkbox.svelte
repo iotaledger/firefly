@@ -11,6 +11,14 @@
     export let keepSameColor = false
     export let onClick: (..._: any[]) => void = () => {}
     $: isSecondaryColor = !keepSameColor && (!checked || disabled)
+
+    let iconType: IconEnum
+
+    $: if (round) {
+        iconType = checked ? IconEnum.CheckboxRound : IconEnum.CheckboxUncheckedRound
+    } else {
+        iconType = checked ? IconEnum.Checkbox : IconEnum.CheckboxUnchecked
+    }
 </script>
 
 <div class="flex flex-row space-x-4 items-center text-left">
@@ -25,13 +33,7 @@
         }}
     >
         <Icon
-            icon={checked
-                ? round
-                    ? IconEnum.CheckboxRound
-                    : IconEnum.Checkbox
-                : round
-                ? IconEnum.CheckboxUncheckedRound
-                : IconEnum.CheckboxUnchecked}
+            icon={iconType}
             width={small ? '16px' : undefined}
             height={small ? '16px' : undefined}
             classes={`${checked ? 'active' : ''}`}

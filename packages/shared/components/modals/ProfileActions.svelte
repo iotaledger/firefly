@@ -18,7 +18,7 @@
         Text,
         TextType,
         Toggle,
-        IconBox,
+        BoxedIcon,
     } from '@ui'
     import { fade } from 'svelte/transition'
     import { Icon as IconEnum } from '@auxiliary/icon'
@@ -104,9 +104,7 @@
             <div class="items-center p-3">
                 <div class="flex items-center justify-between bg-blue-50 dark:bg-gray-800 p-3 rounded-lg">
                     <div class="flex flex-row items-center space-x-3">
-                        <IconBox>
-                            <Icon icon={IconEnum.Warning} classes="text-blue-500" />
-                        </IconBox>
+                        <BoxedIcon icon={IconEnum.Warning} classes="text-blue-500" />
                         <div>
                             <Text type={TextType.p}>{localize('views.dashboard.profileModal.version.title')}</Text>
                             <Text type={TextType.p} overrideColor classes="text-gray-500 -mt-0.5">
@@ -130,9 +128,7 @@
                         class="flex items-center justify-between bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 p-3 rounded-lg"
                     >
                         <div class="flex flex-row items-center space-x-3">
-                            <IconBox>
-                                <Icon icon={IconEnum.Warning} classes="text-{backupWarningColor}-500" />
-                            </IconBox>
+                            <BoxedIcon icon={IconEnum.Warning} classes="text-{backupWarningColor}-500" />
                             <div>
                                 <Text type={TextType.p}>{localize('views.dashboard.profileModal.backup.title')}</Text>
                                 <Text type={TextType.p} overrideColor classes="text-gray-500 -mt-0.5">
@@ -157,9 +153,11 @@
             {/if}
             <div class="flex justify-between items-center p-3">
                 <div class="flex flex-row items-center space-x-3">
-                    <IconBox boxClasses="bg-blue-100 dark:bg-gray-800">
-                        <Icon icon={$isStrongholdLocked ? IconEnum.Lock : IconEnum.Unlock} classes="text-blue-500" />
-                    </IconBox>
+                    <BoxedIcon
+                        icon={$isStrongholdLocked ? IconEnum.Lock : IconEnum.Unlock}
+                        classes="text-blue-500"
+                        boxClasses="bg-blue-100 dark:bg-gray-800"
+                    />
                     <div>
                         <Text type={TextType.p}>{localize('views.dashboard.profileModal.stronghold.title')}</Text>
                         <Text type={TextType.p} overrideColor classes="text-gray-500 -mt-0.5">
@@ -175,18 +173,15 @@
         {:else}
             <div class="flex justify-between items-center p-3">
                 <div class="flex flex-row items-center space-x-3">
-                    <IconBox
+                    <BoxedIcon
                         boxClasses={$ledgerConnectionState === LedgerConnectionState.CorrectAppOpen
                             ? 'bg-blue-100 dark:bg-gray-800'
                             : 'bg-gray-100 dark:bg-gray-800'}
-                    >
-                        <Icon
-                            icon={IconEnum.Chip}
-                            classes={$ledgerConnectionState === LedgerConnectionState.CorrectAppOpen
-                                ? 'text-blue-500'
-                                : 'text-gray-500 dark:text-white'}
-                        />
-                    </IconBox>
+                        icon={IconEnum.Chip}
+                        classes={$ledgerConnectionState === LedgerConnectionState.CorrectAppOpen
+                            ? 'text-blue-500'
+                            : 'text-gray-500 dark:text-white'}
+                    />
                     <div>
                         <Text type={TextType.p}>{localize('views.dashboard.profileModal.hardware.title')}</Text>
                         <Text type={TextType.p} overrideColor classes="text-gray-500 -mt-0.5"
