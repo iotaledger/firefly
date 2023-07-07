@@ -1,6 +1,5 @@
 <script lang="ts">
-    import { Box } from 'shared/components'
-    import { Error } from 'shared/components/'
+    import { Box, Error } from '@ui'
     import { clickOutside } from '@core/utils'
 
     export let inputElement: HTMLInputElement = undefined
