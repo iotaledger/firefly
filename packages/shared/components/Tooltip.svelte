@@ -82,7 +82,7 @@
     </triangle>
 </tooltip>
 
-<style type="text/scss">
+<style lang="scss">
     tooltip {
         max-width: 300px;
         triangle,

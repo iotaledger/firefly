@@ -47,7 +47,7 @@
     <slot />
 </swiper>
 
-<style type="text/scss">
+<style lang="scss">
     swiper {
         display: block;
         will-change: transform;

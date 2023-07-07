@@ -13,7 +13,8 @@
             "@features/*": ["./lib/features/*"],
             "@lib/*": ["./lib/*"]
         },
-        "types": ["node"]
+        "types": ["node"],
+        "verbatimModuleSyntax": false
     },
     "include": ["./lib"],
     "exclude": ["**/node_modules", "**/tests"]

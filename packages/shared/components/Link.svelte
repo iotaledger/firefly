@@ -26,7 +26,7 @@
     <slot />
 </a>
 
-<style type="text/scss">
+<style lang="scss">
     a:hover {
         text-decoration: underline;
     }
