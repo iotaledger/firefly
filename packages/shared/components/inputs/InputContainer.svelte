@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Box } from 'shared/components/atoms'
+    import { Box } from 'shared/components'
     import { Error } from 'shared/components/'
     import { clickOutside } from '@core/utils'
 
