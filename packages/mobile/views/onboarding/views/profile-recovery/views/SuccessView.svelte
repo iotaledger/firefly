@@ -38,7 +38,7 @@
     </div>
 </OnboardingLayout>
 
-<style type="text/scss">
+<style lang="scss">
     .check-glow {
         box-shadow: 0px 4px 8px rgba(97, 232, 132, 0.3); // shadow-color only available in tailwind v3 and theme color is not accepted by the rgba sass function
     }

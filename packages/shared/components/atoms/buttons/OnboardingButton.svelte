@@ -78,7 +78,7 @@
     </div>
 </button>
 
-<style type="text/scss">
+<style lang="scss">
     button {
         min-width: 200px;
         @apply border;

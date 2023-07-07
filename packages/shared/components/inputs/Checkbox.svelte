@@ -44,7 +44,7 @@
     {/if}
 </div>
 
-<style type="text/scss">
+<style lang="scss">
     button {
         @apply border-gray-500;
         :global(svg:not(.active) path) {

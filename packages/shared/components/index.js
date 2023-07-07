@@ -26,6 +26,7 @@ export { default as Tooltip } from './Tooltip.svelte'
 export { default as Transition } from './Transition.svelte'
 export { default as Icon } from './Icon.svelte'
 export { default as IconBox } from './IconBox.svelte'
+export { default as AmountBox } from './AmountBox.svelte'
 
 export * from './atoms'
 export * from './enums'

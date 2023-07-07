@@ -4,7 +4,6 @@ import { NativeTokenAmount, TOKEN_ID_BYTE_LENGTH } from '@core/token'
 import { NFT_ID_BYTE_LENGTH } from '@core/nfts/constants'
 import { ILayer2AssetAllowance, ILayer2TransferAllowanceMetadata } from '../interfaces'
 import { CONTRACT_FUNCTIONS, TARGET_CONTRACTS } from '../constants'
-import { Allowance } from '../enums'
 
 export function parseLayer2MetadataForTransfer(metadata: Uint8Array): ILayer2TransferAllowanceMetadata {
     const readStream = new ReadStream(metadata)
@@ -54,7 +53,7 @@ function parseSmartContractParameters(readStream: ReadStream): Record<string, st
 function parseAssetAllowance(readStream: ReadStream): ILayer2AssetAllowance {
     const allowance = readStream.readUInt8('allowance')
 
-    if (allowance === Allowance.Set) {
+    if (allowance) {
         const baseTokens = readStream.readUInt64('baseTokens').toString()
         readStream.readUInt16('tokenBufferBytesLength')
         const tokenAmount = readStream.readUInt16('tokenAmount')

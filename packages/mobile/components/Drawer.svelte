@@ -125,7 +125,7 @@
     </panel>
 </drawer>
 
-<style type="text/scss">
+<style lang="scss">
     panel {
         @apply fixed w-full max-h-full;
         @apply flex flex-col flex-auto overflow-hidden;

@@ -198,7 +198,7 @@
     {/if}
 </div>
 
-<style type="text/scss">
+<style lang="scss">
     .pin-input {
         @apply cursor-pointer;
         @apply select-none;
