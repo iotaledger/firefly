@@ -1,9 +1,10 @@
 <script lang="ts">
     import { AnimationEnum } from '@auxiliary/animation'
+    import { IllustrationEnum } from '@auxiliary/illustration'
     import { Animation, Illustration } from 'shared/components'
 
     export let animation: AnimationEnum | undefined = undefined
-    export let illustration: string | undefined = undefined
+    export let illustration: IllustrationEnum | undefined = undefined
     export let classes: string = ''
     export let bgClasses: string = ''
 </script>

@@ -4,8 +4,8 @@
     import { onDestroy } from 'svelte'
     import { AnimationRenderer, AnimationEnum, ANIMATIONS } from '@auxiliary/animation'
 
-    export let animation: AnimationEnum | undefined = undefined
-    export let classes = ''
+    export let animation: AnimationEnum | undefined | string = undefined
+    export let classes: string = ''
     export let loop: boolean = true
     export let autoplay: boolean = true
     export let segments: AnimationSegment | AnimationSegment[] | undefined = undefined
