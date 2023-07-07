@@ -184,7 +184,7 @@
     {/if}
 </div>
 
-<style type="text/scss">
+<style lang="scss">
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
         -webkit-appearance: none;

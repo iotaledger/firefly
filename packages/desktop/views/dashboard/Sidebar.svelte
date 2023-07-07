@@ -125,7 +125,7 @@
     <ProfileActionsModal bind:modal={profileModal} />
 </aside>
 
-<style type="text/scss">
+<style lang="scss">
     :global(body.platform-win32) aside {
         @apply -top-0;
         @apply pt-10;
