@@ -76,7 +76,7 @@
     </div>
 </div>
 
-<style type="text/scss">
+<style lang="scss">
     div {
         &:disabled {
             @apply pointer-events-none;

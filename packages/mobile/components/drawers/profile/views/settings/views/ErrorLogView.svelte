@@ -50,7 +50,7 @@
     {/if}
 </error-log-view>
 
-<style type="text/scss">
+<style lang="scss">
     .log {
         max-height: calc(100vh - 200px);
     }

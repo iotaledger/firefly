@@ -18,4 +18,5 @@ export interface IPlatformEventMap {
     'nft-download-done': INFTDownloadState
     'nft-download-interrupted': INFTDownloadState
     'ledger-error': Error
+    'lock-screen': void
 }

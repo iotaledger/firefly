@@ -136,7 +136,7 @@
 <DrawerManager />
 <ToastContainer swipe fadeDuration={100} classes="fixed top-0 p-5 z-10 w-full" showDismiss />
 
-<style global type="text/scss">
+<style global lang="scss">
     @tailwind base;
     @tailwind components;
     @tailwind utilities;
