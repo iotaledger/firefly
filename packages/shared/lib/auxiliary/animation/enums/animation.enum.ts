@@ -1,4 +1,4 @@
-export enum Animation {
+export enum AnimationEnum {
     WelcomeDeskop = 'welcome-desktop',
     AppearanceDesktop = 'appearance-desktop',
     OnboardingProtocolDesktop = 'onboarding-protocol-desktop',
