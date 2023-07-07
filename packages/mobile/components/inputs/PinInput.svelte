@@ -158,7 +158,7 @@
     {/if}
 </div>
 
-<style type="text/scss">
+<style lang="scss">
     pin-input {
         &:not(.disabled):focus-within,
         &:not(.disabled):hover {

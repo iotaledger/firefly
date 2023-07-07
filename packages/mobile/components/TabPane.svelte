@@ -12,7 +12,7 @@
     <slot />
 </tab-pane>
 
-<style type="text/scss">
+<style lang="scss">
     tab-pane {
         box-shadow: 0px 0px 110px rgba(26, 101, 161, 0.15);
         clip-path: inset(-300px 0px 0px 0px); // needed to prevent the shadow from showing at the bottom

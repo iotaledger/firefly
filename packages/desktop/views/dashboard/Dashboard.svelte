@@ -118,7 +118,7 @@
     </div>
 </div>
 
-<style type="text/scss">
+<style lang="scss">
     :global(:not(body.platform-win32)) .dashboard-wrapper {
         margin-top: calc(env(safe-area-inset-top) / 2);
     }
