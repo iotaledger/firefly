@@ -14,10 +14,10 @@ import {
     getTagFromOutput,
 } from './helper'
 
-export function generateSingleFoundryActivity(
+export async function generateSingleFoundryActivity(
     account: IAccountState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
-): FoundryActivity {
+): Promise<FoundryActivity> {
     const { transactionId, claimingData, time, direction, inclusionState } = processedTransaction
 
     const output = wrappedOutput.output as IFoundryOutput
@@ -45,7 +45,7 @@ export function generateSingleFoundryActivity(
     const tag = getTagFromOutput(output)
 
     const sendingInfo = getSendingInformation(processedTransaction, output, account)
-    const asyncData = getAsyncDataFromOutput(output, outputId, claimingData, account)
+    const asyncData = await getAsyncDataFromOutput(output, outputId, claimingData, account)
 
     return {
         type: ActivityType.Foundry,
