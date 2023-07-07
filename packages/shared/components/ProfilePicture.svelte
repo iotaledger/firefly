@@ -58,7 +58,7 @@
     {/if}
 </profile-picture>
 
-<style type="text/scss">
+<style lang="scss">
     .icon-bg {
         background-color: var(--icon-bg-color);
     }

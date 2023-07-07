@@ -23,7 +23,7 @@
     {label}
 </label>
 
-<style type="text/scss">
+<style lang="scss">
     label {
         position: relative;
         :global(svg path) {
