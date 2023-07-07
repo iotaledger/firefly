@@ -185,7 +185,7 @@
     </nav>
 </dropdown-input>
 
-<style type="text/scss">
+<style lang="scss">
     dropdown-input {
         @apply block;
         .selection {

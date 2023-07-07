@@ -1,4 +1,5 @@
 export enum Allowance {
-    Set = 0,
-    NotSet = 255,
+    HasBaseTokens = 128,
+    HasNativeTokens = 64,
+    hasNFTs = 32,
 }

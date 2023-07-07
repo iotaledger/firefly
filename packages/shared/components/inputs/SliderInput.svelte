@@ -178,7 +178,7 @@
     </range-wrapper>
 </slider-input>
 
-<style type="text/scss">
+<style lang="scss">
     :global(.mouse-over-shield) {
         @apply fixed;
         @apply top-0;

@@ -34,7 +34,7 @@
     </inner-box>
 </button>
 
-<style type="text/scss">
+<style lang="scss">
     button {
         @apply border;
         @apply border-solid;

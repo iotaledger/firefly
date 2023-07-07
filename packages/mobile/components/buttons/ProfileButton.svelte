@@ -62,7 +62,7 @@
     </div>
 </button>
 
-<style type="text/scss">
+<style lang="scss">
     button {
         @apply bg-transparent;
         @apply border border-solid border-gray-300;
