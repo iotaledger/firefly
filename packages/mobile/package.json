@@ -39,7 +39,7 @@
         "@capacitor/device": "1.1.2",
         "@capacitor/keyboard": "^1.2.3",
         "@capacitor/splash-screen": "^1.2.2",
-        "@capacitor/status-bar": "^1.0.8",
+        "@capacitor/status-bar": "^5.0.5",
         "capacitor-secure-filesystem-access": "./packages/mobile/capacitor/plugins/secure-filesystem-access/",
         "capacitor-secure-storage-plugin": "^0.6.2"
     }

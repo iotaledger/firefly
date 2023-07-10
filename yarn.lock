@@ -421,10 +421,10 @@
   resolved "https://registry.yarnpkg.com/@capacitor/splash-screen/-/splash-screen-1.2.2.tgz#fabd52ffbb922c38e2b3ef605332f29c830bd508"
   integrity sha512-iGh9gc0rdS3R+Wr+bD/+tJl3qbmJZ5xVQAP5UsD6U6Y3ydCBo9KpA8DEqxaBZVsCDaLt67009hK5nxKBwjRn7Q==
 
-"@capacitor/status-bar@^1.0.8":
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/@capacitor/status-bar/-/status-bar-1.0.8.tgz#a783561fb5815b30f3e75dd95c87e00aaff5450b"
-  integrity sha512-lhxa70K6vg0QjdddbT9RqFLfQ9a0Fk1OVE54MhUH30DWymv4h2LrC+mJgH6JS46WQbR2UCHRymfmVCq1PS2Qiw==
+"@capacitor/status-bar@^5.0.5":
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/@capacitor/status-bar/-/status-bar-5.0.5.tgz#9354f956806037cd8b38076b43894693d033525c"
+  integrity sha512-8ykkIbndeAaATrAYcr4CLSplTeR6CU15h8trXV3DgLXlFQAC6E/WJnoMy1QL61n5rHh725nixqwCTepcgGx/rw==
 
 "@cspotcode/source-map-support@^0.8.0":
   version "0.8.1"
@@ -1540,11 +1540,6 @@
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-1.0.4.tgz#0b92dcc0cc1c81f6f306a381f28e31b1a56536e9"
   integrity sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==
-
-"@tsconfig/svelte@^1.0.10":
-  version "1.0.13"
-  resolved "https://registry.yarnpkg.com/@tsconfig/svelte/-/svelte-1.0.13.tgz#2fa34376627192c0d643ce54964915e2bd3a58e4"
-  integrity sha512-5lYJP45Xllo4yE/RUBccBT32eBlRDbqN8r1/MIvQbKxW3aFqaYPCNgm8D5V20X4ShHcwvYWNlKg3liDh1MlBoA==
 
 "@tsconfig/svelte@^4.0.1":
   version "4.0.1"
