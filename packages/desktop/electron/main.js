@@ -358,7 +358,7 @@ app.on('window-all-closed', () => {
 })
 
 powerMonitor.on('suspend', () => {
-    // MacOS and Windows
+    // MacOS, Windows and Linux
     windows.main.webContents.send('lock-screen')
 })
 
