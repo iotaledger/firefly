@@ -1,44 +1,52 @@
 <script lang="ts">
     import { Icon, Text, Spinner, Position, InformationTooltip } from 'shared/components'
+    import { Icon as IconEnum } from '@auxiliary/icon'
+    import { MenuItemVariant } from './enums'
 
-    export let icon: string = ''
-    export let iconProps: Record<string, unknown> = undefined
+    export let icon: IconEnum | undefined = undefined
+    export let iconProps: Record<string, unknown> | undefined = undefined
     export let title: string
-    export let subtitle = ''
-    export let onClick: () => any
-    export let selected = false
-    export let disabled = false
-    export let isLoading = false
-    export let enableTooltipVisible = false
-    export let tooltip: string = undefined
+    export let subtitle: string = ''
+    export let onClick: () => void
+    export let selected: boolean = false
+    export let disabled: boolean = false
+    export let isLoading: boolean = false
+    export let enableTooltipVisible: boolean = false
+    export let tooltip: string | undefined = undefined
+    export let variant: MenuItemVariant = MenuItemVariant.Info
 
-    export let variant: 'success' | 'error' | 'warning' | 'info' = 'info'
+    enum Color {
+        Blue = 'blue',
+        Green = 'green',
+        Yellow = 'yellow',
+        Red = 'red',
+    }
 
     let showTooltip = false
     let menuItem: HTMLElement
-    let color = 'blue'
+    let color = Color.Blue
 
     $: isDisabled = disabled || isLoading
-
     $: variant, setColor()
+
     function setColor(): void {
         switch (variant) {
-            case 'info':
-                color = 'blue'
+            case MenuItemVariant.Info:
+                color = Color.Blue
                 break
-            case 'success':
-                color = 'green'
+            case MenuItemVariant.Success:
+                color = Color.Green
                 break
-            case 'warning':
-                color = 'yellow'
+            case MenuItemVariant.Warning:
+                color = Color.Yellow
                 break
-            case 'error':
-                color = 'red'
+            case MenuItemVariant.Error:
+                color = Color.Red
                 break
         }
     }
 
-    function onMenuItemClick(): () => void {
+    function onMenuItemClick(): void {
         if (!disabled && onClick) {
             return onClick()
         }
