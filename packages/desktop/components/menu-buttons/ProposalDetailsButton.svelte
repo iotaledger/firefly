@@ -88,16 +88,11 @@
 
 <div class="max-h-7 max-w-9 flex-none flex-initial overflow-visible relative">
     <MeatballMenuButton onClick={modal?.toggle} />
-    <div class="fixed overflow-visible translate-x-9">
-        <Modal bind:this={modal} position={{ right: '0' }} classes="mt-1.5">
-            <div class="flex flex-col">
-                {#each buttons as button}
-                    <MenuItem {...button} />
-                {/each}
-            </div>
-        </Modal>
-    </div>
 </div>
-
-<style lang="scss">
-</style>
+<Modal bind:this={modal} position={{ right: '24px', top: '54px' }} classes="mt-1.5">
+    <div class="flex flex-col">
+        {#each buttons as button}
+            <MenuItem {...button} />
+        {/each}
+    </div>
+</Modal>
