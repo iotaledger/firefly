@@ -146,14 +146,9 @@
 <collectibles-details-view class="flex flex-row w-full h-full space-x-4">
     <div class="flex w-full h-full items-center justify-center">
         <div class="relative w-full h-full flex rounded-2xl overflow-hidden">
-            <NftMedia
-                {nft}
-                classes="rounded-2xl overflow-hidden flex-1 w-auto h-auto max-w-full max-h-full object-contain absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                autoplay
-                controls
-                loop
-                muted
-            />
+            <div class="rounded-2xl overflow-hidden flex-1 w-full h-full object-contain">
+                <NftMedia {nft} autoplay controls loop muted />
+            </div>
             <div class="absolute right-6 bottom-6 w-auto">
                 {#if alertText}
                     <Alert type={downloadMetadata?.error ? 'error' : 'warning'} message={alertText} />
