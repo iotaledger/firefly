@@ -3,8 +3,8 @@
         "onboarding": {
             "appSetup": {
                 "welcome": {
-                    "title": "Send, Receive & Manage your {network} tokens",
-                    "body": "Firefly is the official wallet software for {network}."
+                    "title": "發送、接收與管理您的 {network} 代幣",
+                    "body": "Firefly 是 {network} 的官方錢包軟體"
                 },
                 "legal": {
                     "title": "隱私政策和服務條款",
@@ -28,30 +28,30 @@
                     "body": "設定您的個人檔案之網路.",
                     "iota": {
                         "title": "IOTA",
-                        "body": "IOTA Mainnet"
+                        "body": "IOTA 主網"
                     },
                     "shimmer": {
                         "title": "Shimmer",
-                        "body": "Staging network for IOTA"
+                        "body": "IOTA 的測試網路"
                     },
                     "testnet": {
-                        "title": "Testnet",
-                        "body": "Public beta network for Shimmer"
+                        "title": "測試網",
+                        "body": "Shimmer 的公開 beta 版網路"
                     },
                     "custom": {
-                        "title": "Custom network",
-                        "body": "Support for custom networks and/or nodes"
+                        "title": "自訂網路",
+                        "body": "對自訂網路或節點的支援"
                     }
                 },
                 "setupCustomNetwork": {
-                    "title": "Connect to a custom network or node",
-                    "body": "Fill the form with the node information and connect to a custom network or node."
+                    "title": "連接至自訂網路或節點",
+                    "body": "在表單中填入節點資訊以連接至自訂網路或節點。"
                 }
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Set up {network, select, IOTA {an} Shimmer {a} Testnet {a} other {a}} {network} profile",
-                    "body": "Select the appropriate method to set up your {network} profile."
+                    "title": "建立{network, select, IOTA {一個} Shimmer {一個} Testnet {一個} other {一個}} {network} 設定檔。",
+                    "body": "選擇適合的方式設定您的 {network} 設定檔。"
                 },
                 "setupNew": {
                     "title": "建立個人設定檔",
@@ -66,7 +66,7 @@
                     }
                 },
                 "setupRecovered": {
-                    "title": "Recover {network} profile",
+                    "title": "還原 {network} 設定檔",
                     "body": "如果您有現成的助記詞或 Stronghold 備份檔，可以在此匯入。",
                     "importMnemonic": "使用助記詞",
                     "importMnemonicDescription": "輸入您的24字助記詞",
@@ -80,7 +80,7 @@
                     "body": "匯入您的IOTA檔案及領取Shimmer質押獎勵。"
                 },
                 "enterName": {
-                    "title": "Create your {network} profile",
+                    "title": "建立您的 {network} 設定檔",
                     "profileName": "設定檔名稱",
                     "body1": "您可以創建多個使用者檔案來管理錢包和加強隱私。",
                     "body2": {
@@ -164,7 +164,7 @@
                     "title": "已領取Shimmer",
                     "body": "您已成果領取Shimmer代幣。",
                     "totalRewards": "獎勵總額",
-                    "successfullyFound": "Successfully found {amount}"
+                    "successfullyFound": "成功找到 {amount}"
                 }
             },
             "congratulations": {
@@ -187,10 +187,10 @@
             "videoGuide": "Ledger 遷移影片教學"
         },
         "ledgerInstallationGuide": {
-            "title": "Have you installed the {network} app on your Ledger device?",
-            "body1": "Before you proceed, you must use Ledger Live to find and install the {network} app.",
+            "title": "您是否在 Ledger 設備上安裝了 {network} 應用程式？",
+            "body1": "在繼續之前，您必須使用 Ledger Live 尋找並安裝 {network} 應用程式。",
             "body2": "請確認您的Ledger韌體是最新版本。所有已安裝的軟體都必須更新至最新版本。",
-            "action": "Yes, I've installed the {network} app"
+            "action": "是的，我已安裝 {network} 應用程式。"
         },
         "importFromLedger": {
             "title": "還原或遷移您的Ledger",
@@ -305,20 +305,20 @@
                 "description": "錢包鎖定並登出前的閒置時間"
             },
             "strongholdPasswordTimeout": {
-                "title": "Stronghold Timeout",
-                "description": "Length of time before your Stronghold password is required again"
+                "title": "Stronghold 逾時",
+                "description": "下次要求您輸入 Stronghold 密碼前的時間長度"
             },
             "maxMediaSize": {
                 "title": "最大媒體大小",
                 "description": "超出此大小限制的 NFT 媒體將不會被下載，而由該媒體類型的佔位符號代替呈現。"
             },
             "maxMediaDownloadTime": {
-                "title": "Maximum download time",
-                "description": "NFT media which take longer than this limit to download will be canceled and a placeholder representing the media type will be displayed instead"
+                "title": "最大下載時間",
+                "description": "超出此下載時限的 NFT 媒體將不會被下載，而由該媒體類型的佔位符號代替呈現。"
             },
             "refreshNftMedia": {
-                "title": "Refresh NFT media",
-                "description": "NFT media cached for this account will be deleted and then downloaded again"
+                "title": "重新整理 NFT 媒體",
+                "description": "已儲存於此帳戶快取的 NFT 媒體將被刪除並重新下載"
             },
             "changePassword": {
                 "title": "修改密碼",
@@ -354,7 +354,7 @@
                 "description": "當點擊以 {appProtocol}:// 為開頭的連結時，自動填入交易資訊"
             },
             "networkInformation": {
-                "title": "Network information",
+                "title": "網路資訊",
                 "connectedTo": "已連接至"
             },
             "configureNodeList": {
@@ -374,7 +374,7 @@
             },
             "localProofOfWork": {
                 "title": "工作量證明",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "description": "將工作量證明在您的設備完成或外包給節點"
             },
             "errorLog": {
                 "title": "錯誤日誌",
@@ -420,8 +420,8 @@
                 "description": "向開發人員回報錯誤。請檢查並確認此問題尚未被回報。"
             },
             "developerToggle": {
-                "title": "Developer Mode",
-                "description": "Switch developer mode on to enable more features in experimental state"
+                "title": "開發者模式",
+                "description": "切換到開發者模式來啟用更多實驗中的功能"
             }
         },
         "login": {
@@ -487,49 +487,49 @@
             "drawers": {
                 "networkConfig": {
                     "addChain": {
-                        "title": "Add chain"
+                        "title": "新增鏈"
                     },
                     "chain": {
-                        "chainId": "Chain ID",
-                        "aliasAddress": "Alias Address",
-                        "iscpEndpoint": "ISCP Endpoint",
-                        "explorerEndpoint": "Explorer Endpoint (optional)",
+                        "chainId": "鏈 ID",
+                        "aliasAddress": "別名位址",
+                        "iscpEndpoint": "ISCP 端點",
+                        "explorerEndpoint": "瀏覽器端點 (選擇性)",
                         "errors": {
-                            "cannotBeEmpty": "Name cannot be empty",
-                            "nameTooLong": "Name is too long",
-                            "aliasAddressWrongFormat": "Must be in either hex or Bech32 format",
-                            "aliasAddressAlreadyInUse": "Alias address already in use",
-                            "invalidUrl": "Invalid URL"
+                            "cannotBeEmpty": "名稱不能空白",
+                            "nameTooLong": "名稱過長",
+                            "aliasAddressWrongFormat": "必須是 hex 或 Bech32 格式",
+                            "aliasAddressAlreadyInUse": "別名位址已被使用",
+                            "invalidUrl": "無效的 URL"
                         }
                     },
                     "chainDepositAddress": {
-                        "title": "Chain deposit address",
-                        "networkTitle": "Network deposit address"
+                        "title": "鏈上存款位址",
+                        "networkTitle": "網路存款位址"
                     },
                     "chainInformation": {
-                        "title": "Chain information"
+                        "title": "鏈資訊"
                     },
                     "confirmLedgerEvmAddress": {
-                        "title": "Confirm EVM address",
-                        "header": "We have generated your EVM address"
+                        "title": "確認 EVM 位址",
+                        "header": "我們已生成您的 EVM 位址"
                     },
                     "connectedChains": {
-                        "title": "Connected chains"
+                        "title": "已連接的鏈"
                     },
                     "connectLedgerDevice": {
-                        "title": "Connect Ledger Device",
-                        "header": "Open the Ethereum app",
-                        "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed before following these steps.",
+                        "title": "連接到 Ledger 裝置",
+                        "header": "開啟 Ethereum 應用程式",
+                        "body": "為了使 Firefly 能找到您的 Ledger 裝置，請先確定官方 Ledger Live 應用程式已關閉，再進行下列步驟。",
                         "requirements": {
-                            "connect": "Connect and unlock your Ledger",
-                            "openApp": "Open the Ethereum app on your Ledger"
+                            "connect": "連接並解鎖你的 Ledger",
+                            "openApp": "在你的 Ledger 上開啟 Ethereum 應用程式"
                         }
                     },
                     "editChain": {
-                        "title": "Edit chain"
+                        "title": "編輯鏈"
                     },
                     "removeChain": {
-                        "title": "Remove chain"
+                        "title": "刪除鏈"
                     }
                 }
             }
@@ -603,8 +603,8 @@
                 "attributes": "屬性",
                 "menu": {
                     "download": "下載",
-                    "setPfp": "Set NFT profile pic",
-                    "unsetPfp": "Unset NFT profile pic",
+                    "setPfp": "設定 NFT 大頭照",
+                    "unsetPfp": "取消 NFT 大頭照",
                     "view": "在瀏覽器中檢視媒體",
                     "burn": "燒毀 NFT"
                 }
@@ -784,7 +784,7 @@
         "deleteAccount": {
             "title": "刪除 {name}?",
             "body": "您確定要刪除此錢包嗎？",
-            "hint": "Note: once deleted, you can restore this wallet by using the \"Wallet Finder\" in the settings.",
+            "hint": "註：一旦刪除，您可以用設定中的「尋找錢包」來恢復此錢包。",
             "typePassword": "輸入您的錢包密碼進行確認。",
             "hideAccount": "刪除錢包",
             "errorTitle": "無法刪除 {name}",
@@ -793,7 +793,7 @@
         "externalUrl": {
             "title": "以瀏覽器開啟網址",
             "body": "您確定要在瀏覽器中開啟 \"{url}\" 嗎？",
-            "hint": "This URL is unknown to Firefly. Please double check the URL before opening it.",
+            "hint": "Firefly 不認得此 URL，開啟前請再次檢查。",
             "action": "開啟網址",
             "invalidProtocol": "無法用無效的協定開啟網址"
         },
@@ -905,10 +905,10 @@
         "transaction": {
             "title": "發送資產",
             "body": "您即將發送 {amount} 到",
-            "selectToken": "Select a token",
-            "selectAmount": "Send {tokenName}",
-            "selectRecipient": "Send {assetName} to",
-            "transactionSummary": "Transaction to {recipient}",
+            "selectToken": "選擇一種代幣",
+            "selectAmount": "發送 {tokenName}",
+            "selectRecipient": "發送 {assetName} 到",
+            "transactionSummary": "對 {recipient} 的交易",
             "surplusIncluded": "該交易包含盈餘金額。請仔細檢查這是您要發送的金額。",
             "sendingFromStakedAccount": "您正在從質押中的錢包發送交易。這將解除您的代幣質押。交易可繼續進行，但交易後您將需要重新質押剩餘的代幣。",
             "sendingFromStakedAccountBelowMinReward": "您正從未達質押門檻的錢包傳送交易。這將解除錢包內的代幣質押，並將使您錯失質押獎勵。"
@@ -942,7 +942,7 @@
             "title": "連接你的 Ledger",
             "notConnected": "連接你的 Ledger 裝置以繼續",
             "locked": "解鎖你的 Ledger 裝置以繼續",
-            "appNotOpen": "Open the Shimmer app on your Ledger device to continue.",
+            "appNotOpen": "在你的 Ledger 裝置上開啟 Shimmer 應用程式以繼續。",
             "correctAppOpen": "Ledger 已成功的連接，請繼續。"
         },
         "ledgerConfirmation": {
@@ -1052,8 +1052,8 @@
         "transactionDetails": {
             "title": "交易明細",
             "giftedStorageDeposit": {
-                "tooltipTitle": "Gift storage deposit",
-                "tooltipDescription": "Amount kept by the recipient"
+                "tooltipTitle": "贈送存儲空間費用",
+                "tooltipDescription": "接收者保留的數量"
             }
         },
         "sendForm": {
@@ -1105,13 +1105,13 @@
             }
         },
         "importErc20Token": {
-            "title": "Import ERC20 token",
+            "title": "匯入 ERC20 代幣",
             "property": {
-                "chainId": "Chain ID",
-                "tokenAddress": "Token address"
+                "chainId": "鏈 ID",
+                "tokenAddress": "代幣位址"
             },
-            "success": "Imported {tokenSymbol} token",
-            "error": "Unable to import ERC20 token"
+            "success": "匯入的 {tokenSymbol} 代幣",
+            "error": "無法匯入 ERC20 代幣"
         },
         "noAlias": {
             "title": "無法鑄造",
@@ -1120,17 +1120,17 @@
         "mintNftForm": {
             "title": "鑄造簡易 NFT",
             "errors": {
-                "invalidMimetype": "Invalid MimeType, check if the file type is supported",
+                "invalidMimetype": "無效的 MimeType，請檢察是否是支援的檔案類型。",
                 "quantityTooSmall": "數量必須大於 0",
                 "quantityTooLarge": "數量必須小於 64",
                 "emptyName": "名稱為必填欄位",
                 "invalidURI": "網址無效，請提供有效的網址",
-                "notReachable": "URI not reachable, unable to check NFT type",
+                "notReachable": "無法連到 URI，無法查看 NFT 類型。",
                 "royaltiesMustBeObject": "版稅必須是一個物件",
                 "royaltiesMustBeJSON": "版稅必須是有效的 JSON",
-                "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
-                "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",
-                "invalidRoyaltyValueSum": "Invalid value, the sum of all royalties must be less than or equal to 1'",
+                "invalidAddress": "位址無效，必須是版稅會送到的有效 {networkHrp} 位置。",
+                "invalidRoyaltyValue": "數值無效，它必須是代表所需百分比的小數數字，例如 0.05",
+                "invalidRoyaltyValueSum": "數值無效，所有版稅的總和必須小於或等於 1。",
                 "attributesMustBeJSON": "屬性必須是有效的 JSON",
                 "attributesMustBeArrayOfObjects": "屬性必須是一系列的物件",
                 "attributesInvalidKeys": "Invalid key, attributes must have the keys \"trait_type\" and \"value\"",
@@ -1166,12 +1166,12 @@
         "revote": {
             "title": "為提案重新投票",
             "body": "Changing your voting power temporarily stops your votes for all proposals from being counted. Simply click \"Revote\" to resume voting.",
-            "hint": "Firefly remembers all of the proposals and answer options you previously voted for."
+            "hint": "Firefly 記得所有的提案和您先前投票支持的回答選項。"
         },
         "removeProposal": {
             "title": "移除提案",
             "body": "確定要刪除這個提案？",
-            "hint": "Please note that removing a proposal during the counting period will stop your votes but won't impact any votes that have already been counted."
+            "hint": "請注意，在計票期間移除提案會停止你的投票，但不會影響任何已計票的選票。"
         },
         "stopVoting": {
             "title": "停止投票",
@@ -1180,7 +1180,7 @@
         },
         "nodeAuthRequired": {
             "title": "需要驗證",
-            "body": "This node requires additional authentication. Please fill in the appropriate information."
+            "body": "此節點需要額外的認證。請填寫正確的資訊。"
         }
     },
     "charts": {
@@ -1216,12 +1216,12 @@
         },
         "confirmTokenBurn": {
             "title": "燒毀 {assetName}",
-            "hint": "Please note that burning a token may free storage deposit attached to it and is not reversible"
+            "hint": "請注意，燒毀代幣時會釋放它的存儲空間費用。此動作無法復原。"
         },
         "confirmNftBurn": {
             "title": "燒毀 {nftName}",
             "description": "確定要燒毀這個 NFT 嗎？",
-            "hint": "Please note that burning an NFT frees the storage deposit attached to it and is not reversible."
+            "hint": "請注意，燒毀 NFT 時會釋放它的存儲空間費用。此動作無法復原。"
         },
         "proceedAnyway": "不論如何，就是執行",
         "save": "儲存",
@@ -1229,21 +1229,21 @@
         "restoreWallet": {
             "iota": "遷移或復原錢包",
             "shimmer": "復原Shimmer設定檔",
-            "testnet": "Restore Testnet profile",
-            "custom": "Restore Custom Network profile"
+            "testnet": "恢復測試網設定檔",
+            "custom": "恢復自訂網路設定檔"
         },
         "restoreWalletDescription": {
             "iota": "遷移至Chrysalis或恢復一個既存錢包",
             "shimmer": "復原既有的Shimmer檔",
-            "testnet": "Restore an existing Testnet profile",
-            "custom": "Restore an existing Custom Network profile"
+            "testnet": "恢復既有的測試網設定檔",
+            "custom": "恢復既有的自訂網路設定檔"
         },
         "refreshNftMedia": {
-            "title": "Refresh NFT media",
-            "description": "Do you want to delete and re-download all NFT media for this account?"
+            "title": "重新整理 NFT 媒體",
+            "description": "您想要為此帳戶刪除並重新下載全部的 NFT 媒體嗎？"
         },
-        "createWallet": "Create a new {network} profile",
-        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown}}",
+        "createWallet": "建立一個新的 {network} 設定檔",
+        "createWalletDescription": "創建一個在 {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown}} 上運行的新設定檔",
         "claimShimmer": "領取Shimmer質押獎勵",
         "claimShimmerDescription": "導入 IOTA 資料並索取質押獎勵",
         "createAlias": "建立別名",
@@ -1302,7 +1302,7 @@
         "hide": "隱藏",
         "hideOthers": "隱藏其他",
         "showAll": "全部顯示",
-        "useMax": "Use Max",
+        "useMax": "使用最大",
         "quit": "退出",
         "edit": "編輯",
         "undo": "復原",
@@ -1384,7 +1384,7 @@
         "stopVoting": "停止投票",
         "revote": "重新投票",
         "skipAndKeep": "跳過並保留舊密碼",
-        "addChain": "Add chain"
+        "addChain": "新增鏈"
     },
     "general": {
         "recipient": "接收方",
@@ -1458,7 +1458,7 @@
         "and": "和",
         "receiveFunds": "接收資金",
         "address": "地址",
-        "myAddress": "My address",
+        "myAddress": "我的位址",
         "myNetworkAddress": "我的{networkName} 地址",
         "shareAddress": "分享地址",
         "yourAddress": "您的地址",
@@ -1651,12 +1651,12 @@
         "username": "使用者名稱",
         "jwt": "JSON 網路代幣",
         "internalTransaction": "內部交易",
-        "coinType": "Coin type",
-        "custom": "Custom",
-        "evmAddress": "EVM address",
-        "chain": "Chain",
-        "importErc20Token": "Import ERC20 token",
-        "importErc20TokenDescription": "Import an ERC20 token from an EVM chain"
+        "coinType": "代幣類型",
+        "custom": "自訂",
+        "evmAddress": "EVM 位址",
+        "chain": "鏈",
+        "importErc20Token": "匯入 ERC20 代幣",
+        "importErc20TokenDescription": "從 EVM 鏈匯入 ERC20 代幣"
     },
     "filters": {
         "title": "篩選",
@@ -1759,7 +1759,7 @@
             "phase": "階段"
         },
         "network": {
-            "label": "Network"
+            "label": "網路"
         }
     },
     "dates": {
@@ -1804,7 +1804,7 @@
             "invalidFormat": "您所追蹤的 深度連結 無效",
             "invalidAmount": "深度連結中的填寫的數量不是一個整數: {amount}",
             "invalidSurplus": "深度連結中的填寫的數量不是一個數字: {surplus}",
-            "surplusNotSupported": "The surplus is only supported for native tokens",
+            "surplusNotSupported": "此盈餘僅支援原生代幣",
             "governance": {
                 "unrecognizedOperation": "無法辨識的治理操作: {operation}"
             },
@@ -1934,8 +1934,8 @@
             "invalidAssetId": "此資產 ID 無效。",
             "unknownAsset": "此帳號不清楚該資產",
             "insufficientFunds": "這個錢包資金不足。",
-            "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit.",
-            "ongoingTransaction": "If you have ongoing transactions, please wait for their confirmation.",
+            "insufficientFundsStorageDeposit": "資金不足以負擔存儲空間費用。",
+            "ongoingTransaction": "如果您有正在進行中的交易，請先等它們完成確認。",
             "cannotClaimTwice": "輸出已被認領",
             "noToAccount": "您尚未選擇匯款的目標錢包。",
             "sendingDust": "您無法發送少於1 Mi。",
@@ -1951,14 +1951,14 @@
             "nftRequired": "NFT 為必填",
             "nftNotInHex": "NFT 位址必須是 HEX 格式",
             "nftNotInPossession": "未擁有此 NFT",
-            "reservedTagKeyword": "Unable to use reserved tag keyword"
+            "reservedTagKeyword": "無法使用保留的標籤關鍵字"
         },
         "layer2": {
-            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account."
+            "layer1Recipient": "第二層上的交易無法發送到第一層的帳戶。"
         },
         "node": {
             "invalid": "請輸入有效的 URL。",
-            "dns": "Unable to find DNS resolution for node",
+            "dns": "無法找到此節點的 DNS 解析。",
             "timedOut": "連線逾時。",
             "refused": "此連線被拒絕。",
             "handshake": "無法與節點進行連線交握。",
@@ -1973,7 +1973,7 @@
             "unabledToConnect": "無法連接至節點",
             "differentNetwork": "此節點位於其他網路",
             "duplicateNodes": "無法添加重複的節點",
-            "noCoinType": "No coin type specified"
+            "noCoinType": "尚未指定代幣類型"
         },
         "network": {
             "mismatch": "此節點的Network ID為: \"{networkId}\"`，與當前網路不相符。",
@@ -1988,7 +1988,7 @@
             "invalid": "無法識別備份文件。",
             "destination": "備份目的地無效。",
             "mnemonic": "助記詞無效。",
-            "migrationRequired": "Stronghold migration is required.",
+            "migrationRequired": "必須遷移 Stronghold。",
             "seedTooShort": "種子碼 (Seed) 長度必須為 81 個字元，目前長度{length, plural, one {是 #} other {是 #}}。",
             "seedCharacters": "種子 (Seed) 應僅包含字符 A-Z 或 9",
             "phraseWordCount": "您的助記詞應該要有 24 個單字，目前有{length, plural, one { # } other { # }}個單字。",
@@ -2050,7 +2050,7 @@
         "nft": {
             "unsupportedUrl": {
                 "short": "不支援的網址",
-                "long": "Url schema not supported"
+                "long": "不支援的 UrL 架構"
             },
             "unsupportedFileType": {
                 "short": "不支援的媒體類型",
@@ -2058,7 +2058,7 @@
             },
             "notMatchingFileTypes": {
                 "short": "載入被阻擋了",
-                "long": "NFT file type does not match the expected media type"
+                "long": "NFT 檔案類型和預期的媒體類型不匹配"
             },
             "notReachable": {
                 "short": "無法連接",
@@ -2066,34 +2066,34 @@
             },
             "tooLargeFile": {
                 "short": "檔案過大",
-                "long": "Loading NFT blocked because the file is too large"
+                "long": "因為檔案太大，NFT 載入被阻擋。"
             },
             "downloadTooLong": {
-                "short": "File took too long to download",
-                "long": "Loading NFT blocked because the file took too long to download"
+                "short": "下載檔案的時間過長",
+                "long": "因為檔案下載太久，NFT 載入被阻擋。"
             },
             "corsError": {
                 "short": "載入被阻擋了",
-                "long": "Loading NFT blocked by CORS policy"
+                "long": "載入 NFT 時遭到 CORS 政策阻擋。"
             },
             "unsafeToLoad": {
                 "short": "載入不安全",
-                "long": "An error occurred while checking if the NFT was safe to load"
+                "long": "檢查 NFT 是否能安全載入時發生錯誤"
             },
             "loadingError": {
                 "short": "無法載入",
-                "long": "An error occurred while loading the NFT"
+                "long": "載入 NFT 時發生錯誤"
             }
         },
         "governance": {
             "unableToAddProposal": {
                 "short": "無法新增提案",
-                "long": "Unable to find proposal {proposalId} on the specified node"
+                "long": "在指定的節點上找不到 {proposalId} 提案"
             }
         },
         "erc20Token": {
-            "invalidAddressFormat": "Must be hexadecimal format",
-            "invalidAddressLength": "Length is invalid"
+            "invalidAddressFormat": "必須是十六進制格式",
+            "invalidAddressLength": "長度無效"
         }
     },
     "warning": {
@@ -2136,12 +2136,12 @@
         "optionalInput": "此可選數據將在資源管理器上公開，每個人都可以查看。",
         "transactionDetails": {
             "minting": {
-                "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
-                "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
-                "expirationTime": "Claim these funds before the expiration time or they will be returned to the sender.",
-                "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
-                "metadata": "An optional data field for storing data persistently on the Tangle.",
-                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
+                "storageDeposit": "將您的交易存儲在 Tangle 上所需的可退還代幣押金。",
+                "giftedStorageDeposit": "此交易的存儲押金已贈送給您。您無需退還押金。",
+                "expirationTime": "在到期之前領取這些資金，否則它們將被退還給發送人。",
+                "timelockDate": "發送人對這些資金設置了時間鎖。等時間鎖到期，您就能使用它們。",
+                "metadata": "用於在 Tangle 上持久存儲數據的可選數據字段。",
+                "tag": "一個簡短的可選數據字段。標記交易群組可以使它們更易於搜索。"
             },
             "incoming": {
                 "storageDeposit": "將您的交易存儲在 Tangle 上所需的可退還代幣押金。",
@@ -2162,12 +2162,12 @@
                 "gasBudget": "Gas budget is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "nftMetadata": {
-                "standard": "The NFT standard e.g. IRC27.",
+                "standard": "NFT 標準，例如 IRC27。",
                 "type": "The MimeType of the NFT. e.g. image/png.",
                 "collectionId": "UTXO string of the collection NFT that minted this NFT",
                 "royalties": "An object containing key-value pairs of addresses that map to payout percentages",
                 "issuerName": "創作者名稱",
-                "attributes": "An array of traits and values that define attributes of the NFT"
+                "attributes": "定義此 NFT 屬性的一系列特徵和數值"
             }
         },
         "mintNativeToken": {
@@ -2178,7 +2178,7 @@
         },
         "mintNftForm": {
             "collectionId": "Optional parameter: UTXO string of the collection NFT that minted this NFT",
-            "collectionName": "Optional parameter: The collection's name",
+            "collectionName": "選擇性參數：此收藏品的名稱",
             "royalties": "Optional parameter: An object containing key-value pairs of addresses that map to payout percentages",
             "issuerName": "選擇性參數：創作者名稱",
             "description": "選擇性參數：關於此 NFT 的描述",
@@ -2341,10 +2341,10 @@
             }
         },
         "networkHealth": {
-            "down": "Down",
-            "degraded": "Degraded",
-            "operational": "Operational",
-            "disconnected": "Disconnected"
+            "down": "向下",
+            "degraded": "已降級",
+            "operational": "運作中",
+            "disconnected": "已中斷"
         },
         "locked": "已鎖定",
         "smartContract": "智能合約"
