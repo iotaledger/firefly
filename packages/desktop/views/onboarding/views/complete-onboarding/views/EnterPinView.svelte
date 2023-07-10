@@ -106,6 +106,6 @@
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-pink dark:bg-gray-900'}">
-        <Animation classes="setup-anim-aspect-ratio" animation={AnimationEnum.PinDesktop} />
+        <Animation animation={AnimationEnum.PinDesktop} />
     </div>
 </OnboardingLayout>

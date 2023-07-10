@@ -61,6 +61,6 @@
         >
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center">
-        <Animation classes="setup-anim-aspect-ratio" animation={AnimationEnum.WelcomeDeskop} />
+        <Animation animation={AnimationEnum.WelcomeDeskop} />
     </div>
 </OnboardingLayout>

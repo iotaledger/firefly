@@ -88,6 +88,6 @@
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-orange dark:bg-gray-900'}">
-        <Animation classes="setup-anim-aspect-ratio" animation={AnimationEnum.ImportFromFilePasswordDesktop} />
+        <Animation animation={AnimationEnum.ImportFromFilePasswordDesktop} />
     </div>
 </OnboardingLayout>

@@ -57,6 +57,6 @@
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-green dark:bg-gray-900'}">
-        <Animation classes="setup-anim-aspect-ratio" animation={AnimationEnum.ProfileDesktop} />
+        <Animation animation={AnimationEnum.ProfileDesktop} />
     </div>
 </OnboardingLayout>

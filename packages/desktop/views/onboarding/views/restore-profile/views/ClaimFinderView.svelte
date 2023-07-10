@@ -225,6 +225,6 @@
         {/if}
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {true && 'bg-pastel-yellow dark:bg-gray-900'}">
-        <Animation classes="setup-anim-aspect-ratio" animation={AnimationEnum.ImportDesktop} />
+        <Animation animation={AnimationEnum.ImportDesktop} />
     </div>
 </OnboardingLayout>

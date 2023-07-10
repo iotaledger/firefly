@@ -5,7 +5,7 @@
     export let illustration: IllustrationEnum | undefined = undefined
     export let width: string | undefined = undefined
     export let height: string | undefined = undefined
-    export let classes: string = ''
+    export let zIndex: number | string = 'auto'
 
     $: darkModeEnabled = $appSettings.darkMode
 
@@ -15,15 +15,17 @@
 {#if selected}
     <img
         data-label="illustration"
-        class={classes}
         width={width || '100%'}
         height={height || '100%'}
+        style={`z-index: ${zIndex}`}
         src={`assets/illustrations/${selected}`}
         alt=""
     />
 {:else}
     <div
-        class={`${classes}`}
-        style={`width: ${width ? width + 'px' : '100%'}; height: ${height ? height + 'px' : '100%'};`}
+        style={`width: ${width ? width + 'px' : '100%'}; 
+        height: ${height ? height + 'px' : '100%'};
+        z-index: ${zIndex}
+        `}
     />
 {/if}

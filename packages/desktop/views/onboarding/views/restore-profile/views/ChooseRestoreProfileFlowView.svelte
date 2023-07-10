@@ -89,6 +89,6 @@
         />
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-purple dark:bg-gray-900">
-        <Animation classes="setup-anim-aspect-ratio" animation={AnimationEnum.ImportDesktop} />
+        <Animation animation={AnimationEnum.ImportDesktop} />
     </div>
 </OnboardingLayout>

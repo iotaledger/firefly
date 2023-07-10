@@ -14,6 +14,6 @@
     {#if animation}
         <Animation {animation} classes="z-0" />
     {:else if illustration}
-        <Illustration {illustration} classes="z-0" />
+        <Illustration {illustration} zIndex={0} />
     {/if}
 </ledger-animation>
