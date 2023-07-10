@@ -4,9 +4,16 @@
     import { NetworkId } from '@core/network'
 
     export let networkId: NetworkId
-    export let height = 22
-    export let width = 22
-    export let outlined = true
+    export let height: number = 22
+    export let width: number = 22
+    export let outlined: boolean = true
+
+    enum Color {
+        Black = 'black',
+        White = 'white',
+        ShimmerHighlight = 'shimmer-highlight',
+        Gray400 = 'gray-400',
+    }
 
     let backgroundColor: string
     let iconColor: string
@@ -14,28 +21,38 @@
     $: {
         switch (networkId) {
             case NetworkId.Iota:
-                backgroundColor = 'black'
-                iconColor = 'white'
+                backgroundColor = Color.Black
+                iconColor = Color.White
                 break
             case NetworkId.Shimmer:
-                backgroundColor = 'shimmer-highlight'
-                iconColor = 'black'
+                backgroundColor = Color.ShimmerHighlight
+                iconColor = Color.Black
                 break
             case NetworkId.Testnet:
-                backgroundColor = 'gray-400'
-                iconColor = 'black'
+                backgroundColor = Color.Gray400
+                iconColor = Color.Black
                 break
             default:
                 backgroundColor = ''
                 iconColor = ''
         }
     }
+
+    function getBackgroundClasses(color: string): string {
+        return color ? `bg-${color}` : ''
+    }
 </script>
 
-<network-icon
-    class="flex items-center justify-center p-0.5 rounded-full bg-{backgroundColor} {outlined
-        ? 'ring-2 ring-white dark:ring-gray-900'
-        : ''}"
->
+<network-icon class={`${outlined ? 'outlined' : ''} ${getBackgroundClasses(backgroundColor)}`}>
     <Icon {height} {width} icon={NETWORK_ICON_SVG[networkId]} classes="text-{iconColor}" />
 </network-icon>
+
+<style lang="scss">
+    network-icon {
+        @apply flex items-center justify-center p-0.5 rounded-full;
+
+        &.outlined {
+            @apply ring-2 ring-white dark:ring-gray-900;
+        }
+    }
+</style>
