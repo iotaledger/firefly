@@ -22,7 +22,6 @@
     import { Governance } from './governance'
     import Sidebar from './Sidebar.svelte'
     import TopNavigation from './TopNavigation.svelte'
-    import { Drawer } from '@components'
 
     import {
         addNftsToDownloadQueue,
@@ -117,7 +116,6 @@
         <!-- Dashboard Pane -->
         <div class="flex flex-col h-full dashboard-w">
             <svelte:component this={tabs[$dashboardRoute]} on:next={$appRouter.next} />
-            <Drawer />
         </div>
     </div>
 </div>
