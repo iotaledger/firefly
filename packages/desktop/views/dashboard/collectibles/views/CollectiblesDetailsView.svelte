@@ -144,9 +144,9 @@
 </script>
 
 <collectibles-details-view class="flex flex-row w-full h-full space-x-4">
-    <div class="flex w-full h-full items-center justify-center">
-        <div class="relative w-full h-full flex rounded-2xl overflow-hidden">
-            <div class="rounded-2xl overflow-hidden flex-1 w-full h-full object-contain">
+    <div class="flex w-full h-auto items-center justify-center overflow-hidden">
+        <div class="relative h-auto flex rounded-2xl overflow-hidden">
+            <div class="rounded-2xl overflow-hidden flex-1 object-contain h-auto">
                 <NftMedia {nft} autoplay controls loop muted />
             </div>
             <div class="absolute right-6 bottom-6 w-auto">

@@ -36,18 +36,16 @@
 </script>
 
 {#if hasMounted && nft && nft.composedUrl && nft.parsedMetadata && (!useCaching || nft.downloadMetadata?.isLoaded)}
-    <figure class="bg-gray-200 dark:bg-gray-700 min-w-full h-full object-cover">
-        <MediaDisplay
-            {src}
-            expectedType={nft.parsedMetadata.type}
-            isLoaded={nft.downloadMetadata.isLoaded}
-            {autoplay}
-            {controls}
-            {loop}
-            {muted}
-            alt={`Media display for ${nft.name}`}
-        />
-    </figure>
+    <MediaDisplay
+        {src}
+        expectedType={nft.parsedMetadata.type}
+        isLoaded={nft.downloadMetadata.isLoaded}
+        {autoplay}
+        {controls}
+        {loop}
+        {muted}
+        alt={`Media display for ${nft.name}`}
+    />
 {:else}
     <slot name="placeholder">
         <MediaPlaceholder type={nft?.parsedMetadata?.type} {bgColor} {darkBgColor} {isDownloading} />
