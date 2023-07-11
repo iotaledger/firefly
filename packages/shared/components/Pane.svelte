@@ -2,13 +2,13 @@
     import { Height, Overflow } from './enums'
 
     export let overflow: Overflow = Overflow.Hidden
-    export let height: number | Height = Height.Auto
+    export let height: Height = Height.Auto
 
     function getOverflowClass(overflow: Overflow): string {
         return `overflow-${overflow}`
     }
 
-    function getHeightClass(height: number | Height): string {
+    function getHeightClass(height: Height): string {
         return `h-${height}`
     }
 </script>
