@@ -21,33 +21,37 @@
     >
         {#key $selectedAccount?.index}
             <div class="flex columns-3 gap-4 min-h-0 min-w-0 max-w-7xl">
-                <Pane classes="flex flex-col p-6 space-y-6">
-                    <Text type={TextType.h5} classes="text-left">
-                        {localize('general.assets')}
-                    </Text>
-                    {#if features.developerTools.alias.enabled}
-                        <CreateAliasButton />
-                    {/if}
-                    {#if features.developerTools.mintNativeTokens.enabled}
-                        <MintNativeTokenButton />
-                    {/if}
-                    {#if features.developerTools.mintNft.enabled}
-                        <MintNftButton />
-                    {/if}
+                <Pane>
+                    <div class="flex flex-col space-y-6">
+                        <Text type={TextType.h5} classes="text-left">
+                            {localize('general.assets')}
+                        </Text>
+                        {#if features.developerTools.alias.enabled}
+                            <CreateAliasButton />
+                        {/if}
+                        {#if features.developerTools.mintNativeTokens.enabled}
+                            <MintNativeTokenButton />
+                        {/if}
+                        {#if features.developerTools.mintNft.enabled}
+                            <MintNftButton />
+                        {/if}
+                    </div>
                 </Pane>
-                <Pane classes="flex flex-col p-6 space-y-6">
-                    <Text type={TextType.h5} classes="text-left">
-                        {localize('general.developerTools')}
-                    </Text>
-                    {#if features.developerTools.faucet.enabled}
-                        <FaucetRequestButton />
-                    {/if}
-                    {#if features.developerTools.deeplink.enabled}
-                        <TestDeepLinkButton />
-                    {/if}
-                    {#if features.developerTools.refreshTokens.enabled}
-                        <RefreshTokenMetadataButton />
-                    {/if}
+                <Pane>
+                    <div class="flex flex-col space-y-6">
+                        <Text type={TextType.h5} classes="text-left">
+                            {localize('general.developerTools')}
+                        </Text>
+                        {#if features.developerTools.faucet.enabled}
+                            <FaucetRequestButton />
+                        {/if}
+                        {#if features.developerTools.deeplink.enabled}
+                            <TestDeepLinkButton />
+                        {/if}
+                        {#if features.developerTools.refreshTokens.enabled}
+                            <RefreshTokenMetadataButton />
+                        {/if}
+                    </div>
                 </Pane>
             </div>
         {/key}

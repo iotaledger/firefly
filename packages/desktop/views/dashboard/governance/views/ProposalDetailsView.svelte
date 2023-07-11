@@ -3,7 +3,7 @@
 
     import { onMount, onDestroy } from 'svelte'
 
-    import { Button, KeyValueBox, MarkdownBlock, Pane, ProposalStatusPill, Text, TextHint, TextType } from '@ui'
+    import { Button, Height, KeyValueBox, MarkdownBlock, Pane, ProposalStatusPill, Text, TextHint, TextType } from '@ui'
     import { ProposalDetailsButton, ProposalInformationPane, ProposalQuestion } from '@components'
 
     import { selectedAccount } from '@core/account/stores'
@@ -211,88 +211,98 @@
 
 <proposal-details class="w-full h-full flex flex-nowrap p-8 relative flex-1 space-x-4 bg-gray-50 dark:bg-gray-900">
     <div class="w-2/5 flex flex-col space-y-4">
-        <Pane classes="p-6 flex flex-col h-fit overflow-hidden">
-            <header-container class="flex justify-between items-center mb-4">
-                <ProposalStatusPill proposal={$selectedProposal} />
-                <ProposalDetailsButton proposal={$selectedProposal} />
-            </header-container>
-            <div class="flex flex-1 flex-col space-y-4 justify-between scrollable-y">
-                <Text type={TextType.h2}>{$selectedProposal?.title}</Text>
-                {#if $selectedProposal?.additionalInfo}
-                    <MarkdownBlock text={$selectedProposal?.additionalInfo} />
+        <Pane height={Height.Fit}>
+            <div class="flex flex-col">
+                <header-container class="flex justify-between items-center mb-4">
+                    <ProposalStatusPill proposal={$selectedProposal} />
+                    <ProposalDetailsButton proposal={$selectedProposal} />
+                </header-container>
+                <div class="flex flex-1 flex-col space-y-4 justify-between scrollable-y">
+                    <Text type={TextType.h2}>{$selectedProposal?.title}</Text>
+                    {#if $selectedProposal?.additionalInfo}
+                        <MarkdownBlock text={$selectedProposal?.additionalInfo} />
+                    {/if}
+                </div>
+            </div>
+        </Pane>
+        <Pane height={Height.Fit}>
+            <div class="shrink-0">
+                <Text smaller classes="mb-5">
+                    {localize('views.governance.details.yourVote.title')}
+                </Text>
+                <ul class="space-y-2">
+                    <li>
+                        <KeyValueBox
+                            keyText={localize('views.governance.details.yourVote.total')}
+                            valueText={formatTokenAmountBestMatch(totalVotes, metadata)}
+                            isLoading={!overviewLoaded}
+                        />
+                    </li>
+                    <li>
+                        <KeyValueBox
+                            keyText={localize('views.governance.details.yourVote.power')}
+                            valueText={formatTokenAmountBestMatch(parseInt($selectedAccount?.votingPower), metadata)}
+                        />
+                    </li>
+                </ul>
+            </div>
+        </Pane>
+        <div class="shrink-0">
+            <ProposalInformationPane />
+        </div>
+    </div>
+    <div class="w-3/5">
+        <Pane height={Height.Full}>
+            <div class="flex flex-col justify-between">
+                <proposal-questions
+                    class="relative flex flex-1 flex-col space-y-5 overflow-y-scroll"
+                    bind:this={proposalQuestions}
+                >
+                    {#if questions}
+                        {#each questions as question, questionIndex}
+                            <ProposalQuestion
+                                {question}
+                                {questionIndex}
+                                isOpened={openedQuestionIndex === questionIndex}
+                                isLoading={!overviewLoaded || !statusLoaded}
+                                selectedAnswerValue={selectedAnswerValues[questionIndex]}
+                                votedAnswerValue={votedAnswerValues[questionIndex]}
+                                answerStatuses={$selectedParticipationEventStatus?.questions[questionIndex]?.answers}
+                                {onQuestionClick}
+                                {onAnswerClick}
+                            />
+                        {/each}
+                    {/if}
+                </proposal-questions>
+                {#if $selectedProposal?.status === ProposalStatus.Upcoming}
+                    <TextHint info text={textHintString} />
+                {:else if [ProposalStatus.Commencing, ProposalStatus.Holding].includes($selectedProposal?.status)}
+                    {@const isLoaded = questions && overviewLoaded && statusLoaded}
+                    {@const isStoppingVote = lastAction === 'stopVote' && hasGovernanceTransactionInProgress}
+                    {@const isStopVotingDisabled = !isLoaded || !isVotingForProposal || isUpdatingVotedAnswerValues}
+                    {@const isVoting = lastAction === 'vote' && hasGovernanceTransactionInProgress}
+                    {@const isVotingDisabled =
+                        !isLoaded ||
+                        !isProposalVotable($selectedProposal?.status) ||
+                        hasSelectedNoAnswers(selectedAnswerValues) ||
+                        isUpdatingVotedAnswerValues ||
+                        areSelectedAndVotedAnswersEqual}
+                    <buttons-container class="flex w-full space-x-4 mt-6">
+                        <Button
+                            outline
+                            classes="w-full"
+                            onClick={onStopVotingClick}
+                            disabled={isStopVotingDisabled}
+                            isBusy={isStoppingVote}
+                        >
+                            {localize('actions.stopVoting')}
+                        </Button>
+                        <Button classes="w-full" onClick={onVoteClick} disabled={isVotingDisabled} isBusy={isVoting}>
+                            {localize('actions.vote')}
+                        </Button>
+                    </buttons-container>
                 {/if}
             </div>
         </Pane>
-        <Pane classes="p-6 h-fit shrink-0">
-            <Text smaller classes="mb-5">
-                {localize('views.governance.details.yourVote.title')}
-            </Text>
-            <ul class="space-y-2">
-                <li>
-                    <KeyValueBox
-                        keyText={localize('views.governance.details.yourVote.total')}
-                        valueText={formatTokenAmountBestMatch(totalVotes, metadata)}
-                        isLoading={!overviewLoaded}
-                    />
-                </li>
-                <li>
-                    <KeyValueBox
-                        keyText={localize('views.governance.details.yourVote.power')}
-                        valueText={formatTokenAmountBestMatch(parseInt($selectedAccount?.votingPower), metadata)}
-                    />
-                </li>
-            </ul>
-        </Pane>
-        <ProposalInformationPane classes="shrink-0" />
     </div>
-    <Pane classes="w-3/5 h-full p-6 pr-3 flex flex-col justify-between">
-        <proposal-questions
-            class="relative flex flex-1 flex-col space-y-5 overflow-y-scroll pr-3"
-            bind:this={proposalQuestions}
-        >
-            {#if questions}
-                {#each questions as question, questionIndex}
-                    <ProposalQuestion
-                        {question}
-                        {questionIndex}
-                        isOpened={openedQuestionIndex === questionIndex}
-                        isLoading={!overviewLoaded || !statusLoaded}
-                        selectedAnswerValue={selectedAnswerValues[questionIndex]}
-                        votedAnswerValue={votedAnswerValues[questionIndex]}
-                        answerStatuses={$selectedParticipationEventStatus?.questions[questionIndex]?.answers}
-                        {onQuestionClick}
-                        {onAnswerClick}
-                    />
-                {/each}
-            {/if}
-        </proposal-questions>
-        {#if $selectedProposal?.status === ProposalStatus.Upcoming}
-            <TextHint info text={textHintString} />
-        {:else if [ProposalStatus.Commencing, ProposalStatus.Holding].includes($selectedProposal?.status)}
-            {@const isLoaded = questions && overviewLoaded && statusLoaded}
-            {@const isStoppingVote = lastAction === 'stopVote' && hasGovernanceTransactionInProgress}
-            {@const isStopVotingDisabled = !isLoaded || !isVotingForProposal || isUpdatingVotedAnswerValues}
-            {@const isVoting = lastAction === 'vote' && hasGovernanceTransactionInProgress}
-            {@const isVotingDisabled =
-                !isLoaded ||
-                !isProposalVotable($selectedProposal?.status) ||
-                hasSelectedNoAnswers(selectedAnswerValues) ||
-                isUpdatingVotedAnswerValues ||
-                areSelectedAndVotedAnswersEqual}
-            <buttons-container class="flex w-full space-x-4 mt-6">
-                <Button
-                    outline
-                    classes="w-full"
-                    onClick={onStopVotingClick}
-                    disabled={isStopVotingDisabled}
-                    isBusy={isStoppingVote}
-                >
-                    {localize('actions.stopVoting')}
-                </Button>
-                <Button classes="w-full" onClick={onVoteClick} disabled={isVotingDisabled} isBusy={isVoting}>
-                    {localize('actions.vote')}
-                </Button>
-            </buttons-container>
-        {/if}
-    </Pane>
 </proposal-details>
