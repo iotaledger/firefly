@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { HR, MenuItem, Modal } from '@ui'
+    import { MenuItem, Modal } from '@ui'
 
     import { localize } from '@core/i18n'
     import {
@@ -110,7 +110,7 @@
         title={localize(`views.settings.configureNodeList.${node.disabled ? 'include' : 'exclude'}Node`)}
         onClick={onToggleDisabledNodeClick}
     />
-    <HR />
+    <hr />
     <MenuItem
         disabled={!allowDisableOrRemove}
         title={localize('views.settings.configureNodeList.removeNode')}
