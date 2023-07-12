@@ -47,7 +47,7 @@
         </div>
     </div>
     <div slot="leftpane__action">
-        <Link icon="info" onClick={onPopupOpenClick} classes="mb-10 justify-center"
+        <Link icon={IconEnum.Info} onClick={onPopupOpenClick} classes="mb-10 justify-center"
             >{localize('popups.ledgerAppGuide.title', { values: { legacy: LedgerAppName.Shimmer } })}</Link
         >
         <Button classes="w-full" onClick={onContinueClick}

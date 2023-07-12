@@ -14,6 +14,7 @@
     import { onMount } from 'svelte'
     import { restoreProfileRouter } from '../restore-profile-router'
     import { destroyProfileManager } from '@core/profile-manager/actions'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     let isBusy = {
         [RestoreProfileType.Mnemonic]: false,
@@ -62,7 +63,7 @@
         <OnboardingButton
             primaryText={localize('views.onboarding.profileSetup.setupRecovered.importMnemonic')}
             secondaryText={localize('views.onboarding.profileSetup.setupRecovered.importMnemonicDescription')}
-            icon="language"
+            icon={IconEnum.Language}
             busy={isBusy[RestoreProfileType.Mnemonic]}
             hidden={features?.onboarding?.[networkId]?.restoreProfile?.recoveryPhrase?.hidden}
             disabled={!features?.onboarding?.[networkId]?.restoreProfile?.recoveryPhrase?.enabled || isDisabled}
@@ -71,7 +72,7 @@
         <OnboardingButton
             primaryText={localize('views.onboarding.profileSetup.setupRecovered.importFile')}
             secondaryText={localize('views.onboarding.profileSetup.setupRecovered.importFileDescription')}
-            icon="file"
+            icon={IconEnum.File}
             busy={isBusy[RestoreProfileType.Stronghold]}
             hidden={features?.onboarding?.[networkId]?.restoreProfile?.strongholdBackup?.hidden}
             disabled={!features?.onboarding?.[networkId]?.restoreProfile?.strongholdBackup?.enabled || isDisabled}
@@ -80,7 +81,7 @@
         <OnboardingButton
             primaryText={localize('views.onboarding.profileSetup.setupRecovered.importLedger')}
             secondaryText={localize('views.onboarding.profileSetup.setupRecovered.importLedgerDescription')}
-            icon="chip"
+            icon={IconEnum.Chip}
             busy={isBusy[RestoreProfileType.Ledger]}
             hidden={features?.onboarding?.[networkId]?.restoreProfile?.ledgerBackup?.hidden}
             disabled={!features?.onboarding?.[networkId]?.restoreProfile?.ledgerBackup?.enabled || isDisabled}

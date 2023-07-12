@@ -75,7 +75,7 @@
         </div>
     </div>
     <div slot="leftpane__action">
-        <Link icon="info" onClick={handleGuidePopup} classes="mb-10 justify-center">
+        <Link icon={IconEnum.Info} onClick={handleGuidePopup} classes="mb-10 justify-center">
             {localize('popups.ledgerConnectionGuide.title')}
         </Link>
         <Button

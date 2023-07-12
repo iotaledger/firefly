@@ -9,6 +9,7 @@
     import { Animation, OnboardingButton, Text } from '@ui'
     import { onMount } from 'svelte'
     import { onboardingRouter } from '../onboarding-router'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     const networkId = $onboardingProfile?.network?.id
 
@@ -58,7 +59,7 @@
                       values: { network: networkId },
                   })
                 : ''}
-            icon="plus"
+            icon={IconEnum.Plus}
             iconHeight="11"
             iconWidth="11"
             hidden={features?.onboarding?.[networkId]?.newProfile?.hidden}
@@ -68,7 +69,7 @@
         <OnboardingButton
             primaryText={localize(`actions.restoreWallet.${networkId}`)}
             secondaryText={!$mobile ? localize(`actions.restoreWalletDescription.${networkId}`) : ''}
-            icon="transfer"
+            icon={IconEnum.Transfer}
             hidden={features?.onboarding?.[networkId]?.restoreProfile?.hidden}
             disabled={!features?.onboarding?.[networkId]?.restoreProfile?.enabled}
             onClick={() => onProfileSetupSelectionClick(OnboardingType.Restore)}
@@ -76,7 +77,7 @@
         <OnboardingButton
             primaryText={localize('actions.claimShimmer')}
             secondaryText={!$mobile ? localize('actions.claimShimmerDescription') : ''}
-            icon="tokens"
+            icon={IconEnum.Tokens}
             iconHeight="24"
             iconWidth="24"
             hidden={features?.onboarding?.[networkId]?.claimRewards?.hidden}

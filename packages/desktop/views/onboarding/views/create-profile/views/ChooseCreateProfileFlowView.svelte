@@ -13,6 +13,7 @@
     import { onMount } from 'svelte'
     import { createProfileRouter } from '../create-profile-router'
     import { destroyProfileManager } from '@core/profile-manager/actions'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     let isBusy = {
         [CreateProfileType.Mnemonic]: false,
@@ -56,7 +57,7 @@
         <OnboardingButton
             primaryText={localize('views.onboarding.profileSetup.setupNew.softwareAccount.title')}
             secondaryText={localize('views.onboarding.profileSetup.setupNew.softwareAccount.description')}
-            icon="file"
+            icon={IconEnum.File}
             busy={isBusy[CreateProfileType.Mnemonic]}
             hidden={features?.onboarding?.[networkId]?.newProfile?.softwareProfile?.hidden}
             disabled={!features?.onboarding?.[networkId]?.newProfile?.softwareProfile?.enabled || isDisabled}
@@ -65,7 +66,7 @@
         <OnboardingButton
             primaryText={localize('views.onboarding.profileSetup.setupNew.ledgerAccount.title')}
             secondaryText={localize('views.onboarding.profileSetup.setupNew.ledgerAccount.description')}
-            icon="chip"
+            icon={IconEnum.Chip}
             busy={isBusy[CreateProfileType.Ledger]}
             hidden={features?.onboarding?.[networkId]?.newProfile?.ledgerProfile?.hidden}
             disabled={!features?.onboarding?.[networkId]?.newProfile?.ledgerProfile?.enabled || isDisabled}

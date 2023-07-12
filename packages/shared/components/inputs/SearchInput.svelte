@@ -36,5 +36,5 @@
         </button>
     </TextInput>
 {:else}
-    <TogglableButton icon="search" bind:active={searchActive} />
+    <TogglableButton icon={IconEnum.Search} bind:active={searchActive} />
 {/if}
