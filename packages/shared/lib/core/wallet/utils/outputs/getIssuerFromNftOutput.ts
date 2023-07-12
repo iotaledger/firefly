@@ -1,7 +1,8 @@
-import { FEATURE_TYPE_ISSUER } from '@core/wallet/constants'
-import type { AddressTypes, IIssuerFeature, INftOutput } from '@iota/types'
+import { Address, FeatureType, IssuerFeature, NftOutput } from '@iota/wallet'
 
-export function getIssuerFromNftOutput(output: INftOutput): AddressTypes {
-    const metadata = output.immutableFeatures?.find((feature) => feature.type === FEATURE_TYPE_ISSUER) as IIssuerFeature
-    return metadata?.address
+export function getIssuerFromNftOutput(output: NftOutput): Address {
+    const metadata = output
+        .getImmutableFeatures()
+        ?.find((feature) => feature.getType() === FeatureType.Issuer) as IssuerFeature
+    return metadata?.getIssuer()
 }

@@ -1,3 +1,4 @@
+// TODO-sdk this should be gone (switch to iota/sdk etc...)
 export const UNLOCK_CONDITION_ADDRESS = 0
 export const UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN = 1
 export const UNLOCK_CONDITION_TIMELOCK = 2

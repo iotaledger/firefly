@@ -3,7 +3,6 @@ import { handleError } from '@core/error/handlers'
 import { ActivityAction, ActivityType } from '@core/wallet/enums'
 import { IActivityGenerationParameters } from '@core/wallet/interfaces'
 import { NftActivity } from '@core/wallet/types'
-import type { INftOutput } from '@iota/types'
 import { getNftId } from '../outputs/getNftId'
 import {
     getAsyncDataFromOutput,
@@ -13,6 +12,7 @@ import {
     getStorageDepositFromOutput,
     getTagFromOutput,
 } from './helper'
+import { NftOutput } from '@iota/wallet'
 
 export async function generateSingleNftActivity(
     account: IAccountState,
@@ -21,14 +21,14 @@ export async function generateSingleNftActivity(
 ): Promise<NftActivity> {
     const { claimingData, time, inclusionState, transactionId, direction } = processedTransaction
     const outputId = wrappedOutput.outputId
-    const output = wrappedOutput.output as INftOutput
+    const output = wrappedOutput.output as NftOutput
     const id = outputId || transactionId
 
     const isHidden = false
     const isAssetHidden = false
     const containsValue = true
 
-    const nftId = nftIdFromInput ? nftIdFromInput : getNftId(output.nftId, outputId)
+    const nftId = nftIdFromInput ? nftIdFromInput : getNftId(output.getNftId(), outputId)
     const metadata = getMetadataFromOutput(output)
     const tag = getTagFromOutput(output)
 

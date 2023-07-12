@@ -1,10 +1,10 @@
 import { isParticipationOutput } from '@contexts/governance/utils'
 import { GovernanceAction } from '@core/wallet/enums'
 import { IParticipation, IWrappedOutput } from '@core/wallet/interfaces'
-import { Output } from '@core/wallet/types'
 import { parseGovernanceMetadata } from '../../parseGovernanceMetadata'
 import { getAmountFromOutput } from './getAmountFromOutput'
 import { getMetadataFromOutput } from './getMetadataFromOutput'
+import { Output } from '@iota/wallet'
 
 interface IGovernanceInfo {
     governanceAction: GovernanceAction

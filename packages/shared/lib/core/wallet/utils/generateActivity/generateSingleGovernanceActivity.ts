@@ -1,7 +1,6 @@
 import { IAccountState } from '@core/account'
 import { IActivityGenerationParameters } from '@core/wallet/interfaces'
 import { GovernanceActivity } from '@core/wallet/types'
-import type { IBasicOutput } from '@iota/types'
 import { ActivityType } from '../../enums'
 import { activityOutputContainsValue } from '..'
 import {
@@ -12,6 +11,7 @@ import {
     getStorageDepositFromOutput,
     getTagFromOutput,
 } from './helper'
+import { BasicOutput } from '@iota/wallet'
 
 export async function generateSingleGovernanceActivity(
     account: IAccountState,
@@ -26,7 +26,7 @@ export async function generateSingleGovernanceActivity(
     const outputId = wrappedOutput.outputId
     const id = outputId || transactionId
 
-    const output = wrappedOutput.output as IBasicOutput
+    const output = wrappedOutput.output as BasicOutput
 
     const tag = getTagFromOutput(output)
     const metadata = getMetadataFromOutput(output)

@@ -1,10 +1,14 @@
-import type { ITagFeature } from '@iota/types'
-
-import { FEATURE_TYPE_TAG, Output } from '@core/wallet'
-
 import { PARTICIPATE_TAG_HEX } from '../constants'
+import { CommonOutput, FeatureType, Output, OutputType, TagFeature } from '@iota/wallet'
 
 export function isParticipationOutput(output: Output): boolean {
-    const outputFeature = <ITagFeature>output?.features?.find((feature) => feature.type === FEATURE_TYPE_TAG)
-    return outputFeature?.tag === PARTICIPATE_TAG_HEX
+    if (output.getType() === OutputType.Treasury) {
+        return false
+    }
+
+    const commonOutput = output as CommonOutput
+    const outputFeature = <TagFeature>(
+        commonOutput?.getFeatures()?.find((feature) => feature.getType() === FeatureType.Tag)
+    )
+    return outputFeature?.getTag() === PARTICIPATE_TAG_HEX
 }

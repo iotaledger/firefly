@@ -1,9 +1,9 @@
 import { IAccountState } from '@core/account/interfaces'
 import { ActivityType } from '@core/wallet/enums'
-import { IBasicOutput } from '@iota/types'
 import { getNativeTokenFromOutput, isOutputAsync } from '..'
 import { IWrappedOutput } from '../../interfaces'
 import { getActivityTypeFromOutput, getAmountFromOutput, getStorageDepositFromOutput } from '../generateActivity/helper'
+import { BasicOutput } from '@iota/wallet'
 
 export async function activityOutputContainsValue(
     account: IAccountState,
@@ -12,7 +12,7 @@ export async function activityOutputContainsValue(
     const type = getActivityTypeFromOutput(wrappedOutput)
     const typesToCheck = [ActivityType.Basic]
     if (typesToCheck.includes(type)) {
-        const output = wrappedOutput.output as IBasicOutput
+        const output = wrappedOutput.output as BasicOutput
 
         const isAsync = isOutputAsync(output)
         const nativeToken = getNativeTokenFromOutput(output)

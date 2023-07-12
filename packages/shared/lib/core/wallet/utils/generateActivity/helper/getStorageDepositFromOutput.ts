@@ -1,7 +1,6 @@
 import { IAccountState } from '@core/account/interfaces'
 import { Output } from '@core/wallet/types'
-import { IStorageDepositReturnUnlockCondition } from '@iota/types'
-import { UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN } from '../../../constants'
+import { StorageDepositReturnUnlockCondition, UnlockConditionType } from '@iota/wallet'
 
 export async function getStorageDepositFromOutput(
     account: IAccountState,
@@ -13,13 +12,13 @@ export async function getStorageDepositFromOutput(
     if (!(account?.index >= 0)) {
         return { storageDeposit: 0, giftedStorageDeposit: 0 }
     }
-    const storageDepositReturnUnlockCondition = <IStorageDepositReturnUnlockCondition>(
-        output?.unlockConditions?.find(
-            (unlockCondition) => unlockCondition?.type === UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN
-        )
+    const storageDepositReturnUnlockCondition = <StorageDepositReturnUnlockCondition>(
+        output
+            ?.getUnlockConditions()
+            ?.find((unlockCondition) => unlockCondition?.getType() === UnlockConditionType.StorageDepositReturn)
     )
     if (storageDepositReturnUnlockCondition) {
-        return { storageDeposit: Number(storageDepositReturnUnlockCondition.amount), giftedStorageDeposit: 0 }
+        return { storageDeposit: Number(storageDepositReturnUnlockCondition.getAmount()), giftedStorageDeposit: 0 }
     } else {
         const minimumRequiredStorageDeposit = await account.minimumRequiredStorageDeposit(output)
         let minimumRequiredStorageDepositNumber = Number(minimumRequiredStorageDeposit)

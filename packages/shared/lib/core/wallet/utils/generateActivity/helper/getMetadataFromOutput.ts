@@ -1,16 +1,20 @@
 import type { IMetadataFeature } from '@iota/types'
 import { isParticipationOutput } from '@contexts/governance/utils'
 import { EXTERNALLY_OWNED_ACCOUNT } from '@core/layer-2/constants'
-import { containsControlCharacters, Converter } from '@core/utils'
-import type { Output } from '@core/wallet/types'
-
-import { FEATURE_TYPE_METADATA } from '../../../constants'
 import { parseLayer2MetadataForTransfer } from '@core/layer-2/utils'
+import { containsControlCharacters, Converter } from '@core/utils'
+import { CommonOutput, FeatureType, MetadataFeature, Output, OutputType } from '@iota/wallet'
 
 export function getMetadataFromOutput(output: Output): string | undefined {
-    const { data } = <IMetadataFeature>output?.features?.find((feature) => feature.type === FEATURE_TYPE_METADATA) ?? {
-        data: undefined,
+    if (output.getType() === OutputType.Treasury) {
+        return undefined
     }
+
+    const commonOutput = output as CommonOutput
+    const feature = commonOutput?.getFeatures()?.find((feature) => feature.getType() === FeatureType.Metadata)
+    const metadataFeature = feature as MetadataFeature
+    const data = metadataFeature.getData() ?? undefined
+
     if (data) {
         const isVotingOutput = isParticipationOutput(output)
         const metadataBytes = Converter.hexToBytes(data)

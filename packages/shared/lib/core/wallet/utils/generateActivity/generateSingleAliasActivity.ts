@@ -3,7 +3,6 @@ import { ADDRESS_TYPE_ALIAS, EMPTY_HEX_ID } from '@core/wallet/constants'
 import { ActivityType } from '@core/wallet/enums'
 import { IActivityGenerationParameters } from '@core/wallet/interfaces'
 import { AliasActivity } from '@core/wallet/types'
-import { IAliasOutput } from '@iota/types'
 import { convertHexAddressToBech32, hashOutputId } from '..'
 import {
     getAmountFromOutput,
@@ -15,6 +14,7 @@ import {
     getStorageDepositFromOutput,
     getTagFromOutput,
 } from './helper'
+import { AliasOutput } from '@iota/wallet'
 
 export async function generateSingleAliasActivity(
     account: IAccountState,
@@ -22,7 +22,7 @@ export async function generateSingleAliasActivity(
 ): Promise<AliasActivity> {
     const { transactionId, claimingData, direction, time, inclusionState } = processedTransaction
 
-    const output = wrappedOutput.output as IAliasOutput
+    const output = wrappedOutput.output as AliasOutput
     const outputId = wrappedOutput.outputId
     const id = outputId || transactionId
 
@@ -65,8 +65,8 @@ export async function generateSingleAliasActivity(
     }
 }
 
-function getAliasId(output: IAliasOutput, outputId: string): string {
-    const isNewAlias = output.aliasId === EMPTY_HEX_ID
-    const aliasId = isNewAlias ? hashOutputId(outputId) : output.aliasId
+function getAliasId(output: AliasOutput, outputId: string): string {
+    const isNewAlias = output.getAliasId() === EMPTY_HEX_ID
+    const aliasId = isNewAlias ? hashOutputId(outputId) : output.getAliasId()
     return convertHexAddressToBech32(ADDRESS_TYPE_ALIAS, aliasId)
 }

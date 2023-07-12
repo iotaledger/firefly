@@ -1,22 +1,20 @@
-import { ADDRESS_TYPE_ALIAS } from '@core/wallet/constants'
-import type { IFoundryOutput } from '@iota/types'
-import { HexHelper, WriteStream } from '@iota/util.js'
+import {
+    AddressType,
+    AliasAddress,
+    FoundryOutput,
+    ImmutableAliasAddressUnlockCondition,
+    UnlockConditionType,
+    Utils,
+} from '@iota/wallet'
 
-export function buildFoundryId(foundry: IFoundryOutput): string {
-    const immutableAliasUnlockCondition = foundry.unlockConditions[0]
+export function buildFoundryId(foundry: FoundryOutput): string {
+    const unlockCondition = foundry.getUnlockConditions()[0]
+    // TODO-sdk Make this clearer without inline casts
     const aliasId =
-        immutableAliasUnlockCondition.type === 6 && immutableAliasUnlockCondition.address.type === ADDRESS_TYPE_ALIAS
-            ? immutableAliasUnlockCondition.address.aliasId
+        unlockCondition.getType() === UnlockConditionType.ImmutableAliasAddress &&
+        (unlockCondition as ImmutableAliasAddressUnlockCondition).getAddress().getType() === AddressType.Alias
+            ? ((unlockCondition as ImmutableAliasAddressUnlockCondition).getAddress() as AliasAddress).getAliasId()
             : ''
-    const typeWS = new WriteStream()
-    typeWS.writeUInt8('alias address type', ADDRESS_TYPE_ALIAS)
-    const aliasAddress = HexHelper.addPrefix(`${typeWS.finalHex()}${HexHelper.stripPrefix(aliasId)}`)
-    const serialNumberWS = new WriteStream()
-    serialNumberWS.writeUInt32('serialNumber', foundry.serialNumber)
-    const serialNumberHex = serialNumberWS.finalHex()
-    const tokenSchemeTypeWS = new WriteStream()
-    tokenSchemeTypeWS.writeUInt8('tokenSchemeType', foundry.tokenScheme.type)
-    const tokenSchemeTypeHex = tokenSchemeTypeWS.finalHex()
 
-    return `${aliasAddress}${serialNumberHex}${tokenSchemeTypeHex}`
+    return Utils.computeFoundryId(aliasId, foundry.getSerialNumber(), foundry.getTokenScheme().getType())
 }

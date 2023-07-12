@@ -1,9 +1,8 @@
-import { FEATURE_TYPE_METADATA } from '@core/wallet/constants'
-import type { IMetadataFeature, INftOutput } from '@iota/types'
+import { FeatureType, MetadataFeature, NftOutput } from '@iota/wallet'
 
-export function getMetadataFromNftOutput(output: INftOutput): string {
-    const metadata = output.immutableFeatures?.find(
-        (feature) => feature.type === FEATURE_TYPE_METADATA
-    ) as IMetadataFeature
-    return metadata?.data
+export function getMetadataFromNftOutput(output: NftOutput): string {
+    const metadata = output
+        .getImmutableFeatures()
+        ?.find((feature) => feature.getType() === FeatureType.Metadata) as MetadataFeature
+    return metadata?.getData()
 }
