@@ -2,7 +2,7 @@
     import { Icon, Text, Spinner, Position, InformationTooltip } from 'shared/components'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
-    export let icon: string = ''
+    export let icon: IconEnum | undefined = undefined
     export let iconProps: Record<string, unknown> = undefined
     export let title: string
     export let subtitle = ''
