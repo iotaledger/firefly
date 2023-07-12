@@ -16,7 +16,7 @@
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
 
     import { closeDrawer, DrawerId, openDrawer } from '@/auxiliary/drawer'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
+    import { TextHintVariant } from 'shared/components/enums'
 
     interface Breakdown {
         amount: number

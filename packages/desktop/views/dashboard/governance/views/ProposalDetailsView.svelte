@@ -36,7 +36,7 @@
     } from '@contexts/governance/utils'
     import { openPopup, PopupId } from '@auxiliary/popup'
     import { activeProfile } from '@core/profile'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
+    import { TextHintVariant } from 'shared/components/enums'
 
     const { metadata } = $visibleSelectedAccountAssets?.[$activeProfile?.network?.id]?.baseCoin ?? {}
 

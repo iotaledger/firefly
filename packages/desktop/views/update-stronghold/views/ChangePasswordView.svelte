@@ -15,7 +15,7 @@
     import { onMount } from 'svelte'
     import zxcvbn from 'zxcvbn'
     import { updateStrongholdRouter } from '../update-stronghold-router'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
+    import { TextHintVariant } from 'shared/components/enums'
 
     export let oldPassword: string
     export let newPassword: string

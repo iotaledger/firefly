@@ -8,7 +8,7 @@
     import { login } from '@core/profile/actions'
     import { Animation, Button, Icon, Text, TextHint, TextType } from '@ui'
     import { updateStrongholdRouter } from '../update-stronghold-router'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
+    import { TextHintVariant } from 'shared/components/enums'
 
     export let busy = false
     export let changedPassword: boolean

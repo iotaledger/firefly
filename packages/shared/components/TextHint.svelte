@@ -1,16 +1,5 @@
-<script context="module" lang="ts">
-    export enum TextHintVariant {
-        Primary = 'primary',
-        Secondary = 'secondary',
-        Success = 'success',
-        Danger = 'danger',
-        Warning = 'warning',
-        Info = 'info',
-    }
-</script>
-
 <script lang="ts">
-    import { Icon, Text } from 'shared/components'
+    import { Icon, Text, TextHintVariant } from 'shared/components'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
 
     export let variant: TextHintVariant

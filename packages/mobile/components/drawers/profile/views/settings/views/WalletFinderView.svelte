@@ -28,7 +28,7 @@
     import { showAppNotification } from '@auxiliary/notification'
 
     import { DrawerId, openDrawer } from '@/auxiliary/drawer'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
+    import { TextHintVariant } from 'shared/components/enums'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let searchForBalancesOnLoad = false

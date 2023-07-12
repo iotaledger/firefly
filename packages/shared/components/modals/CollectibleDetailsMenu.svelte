@@ -8,7 +8,7 @@
     import { burnNft } from '@core/wallet'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { activeProfile, updateActiveProfile } from '@core/profile/stores'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
+    import { TextHintVariant } from 'shared/components/enums'
 
     export let modal: Modal = undefined
     export let nft: INft

@@ -6,7 +6,7 @@
     import { resetMintTokenDetails } from '@core/wallet'
 
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
+    import { TextHintVariant } from 'shared/components/enums'
 
     $: hasAliases = $selectedAccount.balances?.aliases.length > 0
 

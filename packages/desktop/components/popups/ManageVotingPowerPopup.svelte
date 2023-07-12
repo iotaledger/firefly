@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Button, Text, TextHint, AssetAmountInput } from 'shared/components'
-    import { HTMLButtonType, TextType } from 'shared/components/enums'
+    import { HTMLButtonType, TextType, TextHintVariant } from 'shared/components/enums'
     import { selectedAccount } from '@core/account/stores'
     import { handleError } from '@core/error/handlers'
     import { setVotingPower } from '@contexts/governance/actions'
@@ -11,7 +11,6 @@
     import { onMount } from 'svelte'
     import { isAccountVoting } from '@contexts/governance/utils'
     import { activeProfile } from '@core/profile'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let newVotingPower: string = undefined

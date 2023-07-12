@@ -1,13 +1,12 @@
 <script lang="ts">
     import { Button, Text, TextType, TextHint } from 'shared/components'
-    import { ButtonVariant } from 'shared/components/enums'
+    import { ButtonVariant, TextHintVariant } from 'shared/components/enums'
     import { closePopup } from '@auxiliary/popup'
     import { stopVotingForProposal } from '@contexts/governance/actions'
     import { selectedProposal } from '@contexts/governance/stores'
     import { localize } from '@core/i18n'
     import { selectedAccount } from '@core/account/stores'
     import { checkActiveProfileAuth } from '@core/profile/actions'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
 
     $: hasGovernanceTransactionInProgress =
         $selectedAccount?.hasVotingPowerTransactionInProgress || $selectedAccount?.hasVotingTransactionInProgress

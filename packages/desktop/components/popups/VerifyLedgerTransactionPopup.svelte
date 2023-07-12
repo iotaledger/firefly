@@ -4,7 +4,7 @@
     import { formatHexString } from '@core/utils'
     import { onDestroy } from 'svelte'
     import { showInternalVerificationPopup, resetShowInternalVerificationPopup } from '@core/ledger'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
+    import { TextHintVariant } from 'shared/components/enums'
 
     export let toAddress: string
     export let toAmount: string

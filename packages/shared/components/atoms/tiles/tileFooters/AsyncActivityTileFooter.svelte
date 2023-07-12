@@ -18,12 +18,11 @@
     } from 'shared/components'
     import { time } from '@core/app'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
-    import { Position } from 'shared/components/enums'
+    import { Position, TextHintVariant } from 'shared/components/enums'
     import { localize } from '@core/i18n'
     import { showInternalVerificationPopup } from '@core/ledger'
     import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
 
     export let activity: Activity
 

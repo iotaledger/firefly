@@ -23,7 +23,7 @@
     import { sendRouter } from '@/routers'
     import { activeProfile } from '@core/profile'
     import { ToggleColor } from '@ui/inputs/Toggle.svelte'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
+    import { TextHintVariant } from 'shared/components/enums'
 
     export let sendTransaction: () => Promise<void>
     export let storageDeposit: number

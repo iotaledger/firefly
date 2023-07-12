@@ -24,7 +24,7 @@
     } from '@core/wallet'
     import { loadNftsForActiveProfile } from '@core/nfts'
     import { DEFAULT_SYNC_OPTIONS } from '@core/account/constants'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
+    import { TextHintVariant } from 'shared/components/enums'
     import { Icon } from '@auxiliary/icon'
 
     export let searchForBalancesOnLoad = false

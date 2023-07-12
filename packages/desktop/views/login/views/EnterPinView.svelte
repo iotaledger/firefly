@@ -13,7 +13,7 @@
     import { isValidPin } from '@core/utils'
     import features from '@features/features'
     import { Icon, PinInput, Profile, Text, TextHint } from '@ui'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
+    import { TextHintVariant } from 'shared/components/enums'
     import { onDestroy } from 'svelte'
 
     let attempts: number = 0

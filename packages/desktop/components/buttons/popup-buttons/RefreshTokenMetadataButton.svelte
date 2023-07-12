@@ -6,7 +6,7 @@
 
     import { showAppNotification } from '@auxiliary/notification'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
+    import { TextHintVariant } from 'shared/components/enums'
 
     function refreshTokenMetadata(): void {
         refreshAccountAssetsForActiveProfile(true)

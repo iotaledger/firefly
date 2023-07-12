@@ -6,7 +6,7 @@
     import { isSoftwareProfile } from '@core/profile'
     import { selectedAccount } from '@core/account'
     import { handleError } from '@core/error/handlers/handleError'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
+    import { TextHintVariant } from 'shared/components/enums'
 
     export let deleteAccount: (index: number) => Promise<void> = async () => {}
 

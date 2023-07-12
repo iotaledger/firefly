@@ -4,7 +4,7 @@
     import { isFunction } from '@core/utils'
     import { Button, LedgerAnimation, Text, TextHint, FontWeight, TextType } from 'shared/components'
     import { closePopup } from '@auxiliary/popup'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
+    import { TextHintVariant } from 'shared/components/enums'
 
     export let onCancel: () => void
     export let onContinue: () => void

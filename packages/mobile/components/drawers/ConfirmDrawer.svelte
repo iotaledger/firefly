@@ -2,7 +2,7 @@
     import { Button, ButtonVariant, Text, TextHint } from '@ui'
 
     import { localize } from '@core/i18n'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
+    import { TextHintVariant } from 'shared/components/enums'
 
     export let description: string = ''
     export let hint: string = ''

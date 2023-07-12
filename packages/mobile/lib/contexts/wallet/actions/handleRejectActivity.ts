@@ -1,7 +1,7 @@
 import { localize } from '@core/i18n'
 import { rejectActivity } from '@core/wallet'
 import { closeDrawer, DrawerId, openDrawer } from '../../../auxiliary/drawer'
-import { TextHintVariant } from '@ui/TextHint.svelte'
+import { TextHintVariant } from 'shared/components/enums'
 
 export function handleRejectActivity(activityId: string): void {
     const _onConfirm = (): void => {

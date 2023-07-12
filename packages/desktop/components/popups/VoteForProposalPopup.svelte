@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Button, Text, FontWeight, TextHint, TextType, KeyValueBox } from 'shared/components'
-    import { HTMLButtonType } from 'shared/components/enums'
+    import { HTMLButtonType, TextHintVariant } from 'shared/components/enums'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { selectedAccount } from '@core/account/stores'
     import { localize } from '@core/i18n'
@@ -9,7 +9,6 @@
     import { vote } from '@contexts/governance/actions'
     import { ABSTAIN_VOTE_VALUE } from '@contexts/governance/constants'
     import { selectedProposal } from '@contexts/governance/stores'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
 
     export let selectedAnswerValues: number[]
 

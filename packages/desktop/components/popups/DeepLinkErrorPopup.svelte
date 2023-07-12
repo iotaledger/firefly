@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { Text, Button, TextHint, FontWeight } from 'shared/components'
     import { closePopup } from '@auxiliary/popup'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
+    import { TextHintVariant } from 'shared/components/enums'
 
     export let error: Error
 </script>

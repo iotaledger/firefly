@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { IAsset } from '@core/wallet'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
+    import { TextHintVariant } from 'shared/components/enums'
 
     export let asset: IAsset
     export let rawAmount: string = '0'

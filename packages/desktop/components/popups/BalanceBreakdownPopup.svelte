@@ -12,7 +12,7 @@
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import type { UnlockConditionTypes } from '@iota/types'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
+    import { TextHintVariant } from 'shared/components/enums'
     import { BalanceSummarySection, Button, FontWeight, Text, TextType } from 'shared/components'
 
     interface BalanceBreakdown {

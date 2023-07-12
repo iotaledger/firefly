@@ -11,7 +11,7 @@
     import { getOfficialNodes } from '@core/network/utils'
     import { activeProfile } from '@core/profile/stores'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
+    import { TextHintVariant } from 'shared/components/enums'
 
     export let node: INode
     export let clientOptions: IClientOptions

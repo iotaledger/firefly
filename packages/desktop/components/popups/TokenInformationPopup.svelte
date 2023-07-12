@@ -22,7 +22,7 @@
         FontWeight,
         TextType,
     } from 'shared/components'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
+    import { TextHintVariant } from 'shared/components/enums'
 
     export let asset: IAsset
     export let activityId: string = undefined

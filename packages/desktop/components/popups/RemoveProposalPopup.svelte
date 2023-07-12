@@ -14,8 +14,7 @@
     import { updateActiveAccountPersistedData } from '@core/profile/actions'
     import { governanceRouter } from '@core/router'
     import { Button, Text, TextHint, TextType } from 'shared/components'
-    import { ButtonVariant } from 'shared/components/enums'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
+    import { ButtonVariant, TextHintVariant } from 'shared/components/enums'
 
     function onCancelClick(): void {
         closePopup()

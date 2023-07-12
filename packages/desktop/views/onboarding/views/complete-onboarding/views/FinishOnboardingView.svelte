@@ -12,7 +12,7 @@
     import { checkOrConnectLedger } from '@core/ledger'
     import { setStrongholdPassword } from '@core/profile-manager'
     import { Animation, Button, Icon, Text, TextHint } from '@ui'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
+    import { TextHintVariant } from 'shared/components/enums'
     import { TextType } from '@ui/enums'
     import { onboardingRouter } from '@views/onboarding/onboarding-router'
 

@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { openPopup, PopupId } from '@auxiliary/popup'
     import { deleteProfile } from '@contexts/settings'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
+    import { TextHintVariant } from 'shared/components/enums'
 
     function onDeleteClick(): void {
         openPopup({

@@ -14,7 +14,7 @@
         BasicActivityDetails,
         ActivityInformation,
     } from 'shared/components'
-    import { Tab } from 'shared/components/enums'
+    import { Tab, TextHintVariant } from 'shared/components/enums'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
@@ -38,7 +38,6 @@
         TRANSFER_ALLOWANCE,
     } from '@core/layer-2'
     import { ToggleColor } from '@ui/inputs/Toggle.svelte'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false

@@ -14,7 +14,7 @@
     import { formatDate, localize } from '@core/i18n'
     import { closePopup } from '@auxiliary/popup'
     import features from '@features/features'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
+    import { TextHintVariant } from 'shared/components/enums'
 
     let hasAutoUpdate = false
 

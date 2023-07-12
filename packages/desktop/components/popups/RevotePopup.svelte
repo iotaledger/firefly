@@ -5,7 +5,7 @@
     import { closePopup } from '@auxiliary/popup'
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { vote } from '@contexts/governance/actions'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
+    import { TextHintVariant } from 'shared/components/enums'
 
     $: hasGovernanceTransactionInProgress =
         $selectedAccount?.hasVotingPowerTransactionInProgress || $selectedAccount?.hasVotingTransactionInProgress

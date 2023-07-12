@@ -1,13 +1,12 @@
 <script lang="ts">
     import { Button, Text, TextHint } from 'shared/components'
-    import { HTMLButtonType, TextType } from 'shared/components/enums'
+    import { HTMLButtonType, TextHintVariant, TextType } from 'shared/components/enums'
     import { selectedAccount } from '@core/account/stores'
     import { handleError } from '@core/error/handlers'
     import { setVotingPower } from '@contexts/governance/actions'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { closePopup, openPopup, PopupId, popupState } from '@auxiliary/popup'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
 
     const ZERO_VOTING_POWER = '0'
 

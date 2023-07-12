@@ -29,7 +29,7 @@
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { onMount } from 'svelte'
     import { ExplorerEndpoint } from '@core/network'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
+    import { TextHintVariant } from 'shared/components/enums'
 
     export let activityId: string
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}

@@ -5,7 +5,7 @@
     import { handleError } from '@core/error/handlers'
     import { onMount } from 'svelte'
     import { selectedAccount } from '@core/account'
-    import { TextHintVariant } from '@ui/TextHint.svelte'
+    import { TextHintVariant } from 'shared/components/enums'
 
     export let title: string
     export let description: string = ''
