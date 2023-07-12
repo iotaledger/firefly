@@ -97,8 +97,12 @@ function isVisibleWithActiveAssetFilter(activity: Activity, filter: ActivityFilt
 }
 
 function isVisibleWithActiveAmountFilter(activity: Activity, filter: ActivityFilter): boolean {
-    if (filter.amount.active && (activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry)) {
+    if (filter.amount.active) {
+        if (activity.type !== ActivityType.Basic && activity.type !== ActivityType.Foundry) return false
         const asset = getAssetFromPersistedAssets(activity.assetId)
+        if (!asset?.metadata) {
+            return false
+        }
         const activityAmount = Big(activity.rawAmount)
 
         if (
@@ -106,7 +110,10 @@ function isVisibleWithActiveAmountFilter(activity: Activity, filter: ActivityFil
             filter.amount.subunit.type === 'single' &&
             filter.amount.subunit.amount
         ) {
-            const amount = convertToRawAmount(String(filter.amount.subunit.amount), asset?.metadata)
+            const amount = convertToRawAmount(String(filter.amount.subunit.amount), asset?.metadata, 'SMR')
+            if (!amount) {
+                return false
+            }
             const isEqual = activityAmount.eq(amount)
             if (!isEqual) {
                 return false
@@ -118,8 +125,11 @@ function isVisibleWithActiveAmountFilter(activity: Activity, filter: ActivityFil
             filter.amount.subunit.start &&
             filter.amount.subunit.end
         ) {
-            const startAmount = convertToRawAmount(String(filter.amount.subunit.start), asset?.metadata)
-            const endAmount = convertToRawAmount(String(filter.amount.subunit.end), asset?.metadata)
+            const startAmount = convertToRawAmount(String(filter.amount.subunit.start), asset?.metadata, 'SMR')
+            const endAmount = convertToRawAmount(String(filter.amount.subunit.end), asset?.metadata, 'SMR')
+            if (!endAmount || !startAmount) {
+                return false
+            }
             const isInRange = activityAmount.lte(endAmount) && activityAmount.gte(startAmount)
             if (!isInRange) {
                 return false
@@ -130,7 +140,10 @@ function isVisibleWithActiveAmountFilter(activity: Activity, filter: ActivityFil
             filter.amount.subunit.type === 'single' &&
             filter.amount.subunit.amount
         ) {
-            const amount = convertToRawAmount(String(filter.amount.subunit.amount), asset?.metadata)
+            const amount = convertToRawAmount(String(filter.amount.subunit.amount), asset?.metadata, 'SMR')
+            if (!amount) {
+                return false
+            }
             const isGreater = activityAmount.gte(amount)
             if (!isGreater) {
                 return false
@@ -141,7 +154,10 @@ function isVisibleWithActiveAmountFilter(activity: Activity, filter: ActivityFil
             filter.amount.subunit.type === 'single' &&
             filter.amount.subunit.amount
         ) {
-            const amount = convertToRawAmount(String(filter.amount.subunit.amount), asset?.metadata)
+            const amount = convertToRawAmount(String(filter.amount.subunit.amount), asset?.metadata, 'SMR')
+            if (!amount) {
+                return false
+            }
             const isLess = activityAmount.lte(amount)
             if (!isLess) {
                 return false
