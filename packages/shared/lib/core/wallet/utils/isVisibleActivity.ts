@@ -238,30 +238,31 @@ function isVisibleWithActiveStatusFilter(activity: Activity, filter: ActivityFil
     if (filter.status.active && filter.status.selected) {
         if (
             filter.status.selected === StatusFilterOption.Confirmed &&
-            activity.inclusionState !== InclusionState.Confirmed
+            activity.inclusionState === InclusionState.Confirmed
         ) {
-            return false
+            return true
         }
         if (
             filter.status.selected === StatusFilterOption.Pending &&
-            activity.inclusionState !== InclusionState.Pending
+            activity.inclusionState === InclusionState.Pending
         ) {
-            return false
+            return true
         }
         if (
             filter.status.selected === StatusFilterOption.Claimed &&
-            activity.type === ActivityType.Basic &&
-            activity.asyncData?.asyncStatus !== ActivityAsyncStatus.Claimed
+            (activity.type === ActivityType.Basic || activity.type === ActivityType.Nft) &&
+            activity.asyncData?.asyncStatus === ActivityAsyncStatus.Claimed
         ) {
-            return false
+            return true
         }
         if (
             filter.status.selected === StatusFilterOption.Unclaimed &&
-            activity.type === ActivityType.Basic &&
-            (!activity.asyncData?.asyncStatus || activity.asyncData?.asyncStatus === ActivityAsyncStatus.Claimed)
+            (activity.type === ActivityType.Basic || activity.type === ActivityType.Nft) &&
+            activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
         ) {
-            return false
+            return true
         }
+        return false
     }
     return true
 }
