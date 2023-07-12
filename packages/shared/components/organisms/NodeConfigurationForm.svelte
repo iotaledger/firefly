@@ -167,5 +167,7 @@
         label={localize('popups.node.optionalJwt')}
         disabled={isBusy}
     />
-    <Error error={formError} />
+    {#if formError}
+        <Error error={formError} />
+    {/if}
 </form>
