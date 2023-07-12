@@ -39,11 +39,11 @@ export async function mintNft(metadata: IIrc27Metadata, quantity: number): Promi
         for (const output of outputs) {
             if (output.output.type === OUTPUT_TYPE_NFT) {
                 // For each minted NFT, generate a new activity
-                const activity: NftActivity = generateSingleNftActivity(account, {
+                const activity: NftActivity = (await generateSingleNftActivity(account, {
                     action: ActivityAction.Mint,
                     processedTransaction,
                     wrappedOutput: output,
-                }) as NftActivity
+                })) as NftActivity
                 addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)
 
                 // Store NFT metadata for each minted NFT

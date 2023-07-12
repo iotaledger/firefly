@@ -79,7 +79,7 @@ export interface IAccount {
         transactionOptions?: TransactionOptions
     ): Promise<MintTokenTransaction>
     increaseVotingPower(amount: string): Promise<Transaction>
-    minimumRequiredStorageDeposit(outputs: OutputTypes[]): Promise<string>
+    minimumRequiredStorageDeposit(output: OutputTypes): Promise<string>
     mintNativeToken(
         params: MintNativeTokenParams,
         transactionOptions?: TransactionOptions
