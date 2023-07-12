@@ -1,7 +1,7 @@
 import type { IMetadataFeature } from '@iota/types'
 import { isParticipationOutput } from '@contexts/governance/utils'
 import { EXTERNALLY_OWNED_ACCOUNT } from '@core/layer-2/constants'
-import { parseLayer2MetadataForTransfer, parseLayer2MetadataForTransferV2 } from '@core/layer-2/utils'
+import { parseLayer2MetadataForTransferV1, parseLayer2MetadataForTransferV2 } from '@core/layer-2/utils'
 import { containsControlCharacters, Converter } from '@core/utils'
 import type { Output } from '@core/wallet/types'
 
@@ -23,11 +23,11 @@ export function getMetadataFromOutput(output: Output): string | undefined {
         const isLayer2Output = startValue === EXTERNALLY_OWNED_ACCOUNT && !isVotingOutput
         if (isLayer2Output) {
             try {
-                const layer2Data = parseLayer2MetadataForTransfer(metadataBytes)
+                const layer2Data = parseLayer2MetadataForTransferV2(metadataBytes)
                 return JSON.stringify(layer2Data)
             } catch (err) {
                 try {
-                    const layer2Data = parseLayer2MetadataForTransferV2(metadataBytes)
+                    const layer2Data = parseLayer2MetadataForTransferV1(metadataBytes)
                     return JSON.stringify(layer2Data)
                 } catch (error) {
                     console.error(err)
