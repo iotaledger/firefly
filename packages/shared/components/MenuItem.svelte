@@ -27,23 +27,13 @@
     let color = Color.Blue
 
     $: isDisabled = disabled || isLoading
-    $: variant, setColor()
+    $: color = colorMap[variant]
 
-    function setColor(): void {
-        switch (variant) {
-            case MenuItemVariant.Info:
-                color = Color.Blue
-                break
-            case MenuItemVariant.Success:
-                color = Color.Green
-                break
-            case MenuItemVariant.Warning:
-                color = Color.Yellow
-                break
-            case MenuItemVariant.Error:
-                color = Color.Red
-                break
-        }
+    const colorMap: Record<MenuItemVariant, Color> = {
+        [MenuItemVariant.Info]: Color.Blue,
+        [MenuItemVariant.Success]: Color.Green,
+        [MenuItemVariant.Warning]: Color.Yellow,
+        [MenuItemVariant.Error]: Color.Red,
     }
 
     function onMenuItemClick(): void {
@@ -84,7 +74,6 @@
         {/if}
         <div class="flex flex-col text-left">
             <Text
-                type="p"
                 color={isDisabled ? 'gray-400' : 'gray-800'}
                 darkColor={isDisabled ? 'gray-700' : 'white'}
                 classes={isDisabled ? '' : `group-hover:text-${color}-500`}
@@ -92,11 +81,7 @@
                 {title}
             </Text>
             {#if subtitle}
-                <Text
-                    type="p"
-                    color={isDisabled ? 'gray-400' : 'gray-600'}
-                    darkColor={isDisabled ? 'gray-700' : 'gray-500'}
-                >
+                <Text color={isDisabled ? 'gray-400' : 'gray-600'} darkColor={isDisabled ? 'gray-700' : 'gray-500'}>
                     {subtitle}
                 </Text>
             {/if}
