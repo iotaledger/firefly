@@ -1,6 +1,6 @@
 import { IAccountState } from '@core/account'
 import { ActivityAction, EMPTY_HEX_ID, IProcessedTransaction, OUTPUT_TYPE_ALIAS } from '@core/wallet'
-import { Activity } from '@core/wallet/types'
+import { Activity, type AliasActivity } from '@core/wallet/types'
 import type { IAliasOutput } from '@iota/types'
 import { generateSingleAliasActivity } from './generateSingleAliasActivity'
 
@@ -9,7 +9,7 @@ export async function generateActivitiesFromAliasOutputs(
     account: IAccountState
 ): Promise<Activity[]> {
     const outputs = processedTransaction.outputs
-    const activities = []
+    const activities: AliasActivity[] = []
 
     const aliasOutputs = outputs.filter((output) => output.output.type === OUTPUT_TYPE_ALIAS)
     for (const aliasOutput of aliasOutputs) {
