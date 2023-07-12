@@ -4,6 +4,7 @@ export const MOCK_ACCOUNT_BALANCE: Balance = {
     baseCoin: {
         total: '10000',
         available: '9000',
+        votingPower: '0',
     },
     aliases: [],
     foundries: [],

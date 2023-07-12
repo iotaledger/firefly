@@ -1,13 +1,4 @@
 import type {
-    HexEncodedAmount,
-    HexEncodedString,
-    IAliasOutput,
-    IBasicOutput,
-    IFoundryOutput,
-    INftOutput,
-    OutputTypes,
-} from '@iota/types'
-import type {
     AccountMetadata,
     Address,
     AddressWithUnspentOutputs,
@@ -23,7 +14,9 @@ import type {
     Ed25519Signature,
     FilterOptions,
     GenerateAddressOptions,
+    CreateNativeTokenParams,
     MintNftParams,
+    MintTokenTransaction,
     Node,
     OutputData,
     OutputParams,
