@@ -51,6 +51,7 @@
     import LegalUpdate from './LegalUpdate.svelte'
     import SingleAccountGuide from './SingleAccountGuide.svelte'
     import NodeConfigOptions from './NodeConfigOptions.svelte'
+    import MobileDeprecation from './MobileDeprecation.svelte'
     import { mobile } from 'shared/lib/app'
     import { Platform } from 'shared/lib/platform'
 
@@ -83,6 +84,7 @@
         case 'video':
         case 'ledgerAppGuide':
         case 'ledgerConnectionGuide':
+        case 'mobileDeprecation':
             size = PopupSize.Large
             break
         case 'stakingManager':
@@ -142,6 +144,7 @@
         success: Success,
         singleAccountGuide: SingleAccountGuide,
         nodeConfigOptions: NodeConfigOptions,
+        mobileDeprecation: MobileDeprecation,
     }
 
     const onKey = (e) => {

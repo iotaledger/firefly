@@ -170,3 +170,5 @@ export const isAndroid = writable<boolean>(false)
 
 export const getKeyboardTransitionSpeed = (isKeyboardOpened: boolean): number =>
     isKeyboardOpened ? (get(isAndroid) ? 200 : 400) : 250 // ms
+
+export const deprecationMessageDisplayed = writable<boolean>(false)

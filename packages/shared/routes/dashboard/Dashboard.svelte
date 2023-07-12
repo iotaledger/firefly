@@ -21,7 +21,7 @@
     } from '@lib/participation/constants'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from '@lib/profile'
     import { Idle, Sidebar, MainMenu } from 'shared/components'
-    import { loggedIn, logout, mobile, sendParams } from 'shared/lib/app'
+    import { loggedIn, logout, mobile, sendParams, deprecationMessageDisplayed } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
@@ -389,9 +389,9 @@
         pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
     }
 
-    $: showSingleAccountGuide = !$activeProfile?.hasFinishedSingleAccountGuide
-    $: if (!busy && $accountsLoaded && showSingleAccountGuide) {
-        openPopup({ type: 'singleAccountGuide', hideClose: true, overflow: true })
+    $: if (!busy && $accountsLoaded && !$deprecationMessageDisplayed) {
+        openPopup({ type: 'mobileDeprecation' })
+        $deprecationMessageDisplayed = true
     }
 </script>
 
