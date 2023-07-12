@@ -8,42 +8,26 @@
     export let width: number = 22
     export let outlined: boolean = true
 
-    enum Color {
-        Black = 'black',
-        White = 'white',
-        ShimmerHighlight = 'shimmer-highlight',
-        Gray400 = 'gray-400',
-    }
+    $: backgroundColor = classesMap[networkId]?.backgroundColor ?? ''
+    $: iconColor = classesMap[networkId]?.iconColor ?? ''
 
-    let backgroundColor: string
-    let iconColor: string
-
-    $: {
-        switch (networkId) {
-            case NetworkId.Iota:
-                backgroundColor = Color.Black
-                iconColor = Color.White
-                break
-            case NetworkId.Shimmer:
-                backgroundColor = Color.ShimmerHighlight
-                iconColor = Color.Black
-                break
-            case NetworkId.Testnet:
-                backgroundColor = Color.Gray400
-                iconColor = Color.Black
-                break
-            default:
-                backgroundColor = ''
-                iconColor = ''
-        }
-    }
-
-    function getBackgroundClasses(color: string): string {
-        return color ? `bg-${color}` : ''
+    const classesMap: { [key in NetworkId]?: Record<string, string> } = {
+        [NetworkId.Iota]: {
+            backgroundColor: 'bg-black',
+            iconColor: 'text-white',
+        },
+        [NetworkId.Shimmer]: {
+            backgroundColor: 'bg-shimmer-highlight',
+            iconColor: 'text-black',
+        },
+        [NetworkId.Testnet]: {
+            backgroundColor: 'bg-gray-400',
+            iconColor: 'text-black',
+        },
     }
 </script>
 
-<network-icon class={`${outlined ? 'outlined' : ''} ${getBackgroundClasses(backgroundColor)}`}>
+<network-icon class={backgroundColor ? backgroundColor : null} class:outlined>
     <Icon {height} {width} icon={NETWORK_ICON_SVG[networkId]} classes="text-{iconColor}" />
 </network-icon>
 
