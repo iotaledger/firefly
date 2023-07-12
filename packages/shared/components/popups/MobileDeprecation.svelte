@@ -9,7 +9,7 @@
         <Icon icon="warning" classes="text-orange-500" />
         <Text type="h4" classes="text-center capitalize">{localize('popups.mobileDeprecation.title')}</Text>
     </div>
-    <Text fontSize="text-16" type="p">{localize('popups.mobileDeprecation.body')}</Text>
+    <Text type="p">{localize('popups.mobileDeprecation.body')}</Text>
     <Button classes="w-full" onClick={closePopup}>{localize('actions.okIUnderstand')}</Button>
 </mobile-deprecation-popup>
 
