@@ -1,4 +1,4 @@
-import { ClientOptions, CoinType, SecretManager } from '@iota/wallet'
+import { IClientOptions, CoinType, SecretManager } from '@iota/wallet'
 
 import { generateRandomId } from '@core/utils'
 
@@ -8,7 +8,7 @@ import { IProfileManager } from '../interfaces'
 export async function initialiseProfileManager(
     storagePath: string,
     coinType: CoinType,
-    clientOptions?: ClientOptions,
+    clientOptions?: IClientOptions,
     secretManager?: SecretManager,
     id?: string
 ): Promise<IProfileManager> {
@@ -16,9 +16,13 @@ export async function initialiseProfileManager(
 
     const profileManager = await api.createAccountManager(id, {
         storagePath,
-        ...(clientOptions && (clientOptions?.nodes?.length > 0 || clientOptions?.primaryNode) && { clientOptions }),
+        // TODO-sdk is this the right fix for the line ?
+        // ...(clientOptions && (clientOptions?.nodes?.length > 0 || clientOptions?.primaryNode) && { clientOptions }),
+        ...clientOptions,
         coinType,
-        ...(secretManager && { secretManager }),
+        // TODO-sdk is this the right fix for the line ?
+        // ...(secretManager && { secretManager }),
+        ...secretManager,
     })
     return profileManager
 }
