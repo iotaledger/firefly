@@ -3,7 +3,7 @@ import { localize } from '@core/i18n'
 import { Platform } from '../classes/platform.class'
 import { externalAllowedLinks } from '../constants'
 import { showAppNotification } from '@auxiliary/notification'
-import { TextHintVariant } from '@ui/TextHint.svelte'
+import { TextHintVariant } from 'shared/components/TextHint.svelte'
 
 export function openUrlInBrowser(targetUrl: string): void {
     // If no protocol is specified, assume https
