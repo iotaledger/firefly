@@ -5,7 +5,7 @@ import { NFT_ID_BYTE_LENGTH } from '@core/nfts/constants'
 import { ILayer2AssetAllowance, ILayer2TransferAllowanceMetadata } from '../interfaces'
 import { CONTRACT_FUNCTIONS, TARGET_CONTRACTS } from '../constants'
 
-export function parseLayer2MetadataForTransfer(metadata: Uint8Array): ILayer2TransferAllowanceMetadata {
+export function parseLayer2MetadataForTransferV1(metadata: Uint8Array): ILayer2TransferAllowanceMetadata {
     const readStream = new ReadStream(metadata)
 
     const senderContract = readStream.readUInt32('senderContract')
