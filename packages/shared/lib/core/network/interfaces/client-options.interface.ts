@@ -1,8 +1,8 @@
-import { ClientOptions } from '@iota/wallet'
+import { IClientOptions } from '@iota/wallet'
 
 import { INode } from './node.interface'
 
-export interface IClientOptions extends Omit<ClientOptions, 'nodes' | 'primaryNode'> {
+export interface ClientOptions extends Omit<IClientOptions, 'nodes' | 'primaryNode'> {
     primaryNode?: INode
     nodes?: INode[]
     localPow?: boolean
