@@ -1,5 +1,5 @@
 export enum Height {
-    Full = 'full',
-    Fit = 'fit',
-    Auto = 'auto',
+    Full = 'h-full',
+    Fit = 'h-fit',
+    Auto = 'h-auto',
 }

@@ -1,6 +1,6 @@
 export enum Overflow {
-    Hidden = 'hidden',
-    Visible = 'visible',
-    Scroll = 'scroll',
-    Auto = 'auto',
+    Hidden = 'overflow-hidden',
+    Visible = 'overflow-visible',
+    Scroll = 'overflow-scroll',
+    Auto = 'overflow-auto',
 }
