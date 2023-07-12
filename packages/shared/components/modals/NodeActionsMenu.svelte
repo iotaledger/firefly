@@ -11,6 +11,7 @@
     import { getOfficialNodes } from '@core/network/utils'
     import { activeProfile } from '@core/profile/stores'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { TextHintVariant } from '@ui/TextHint.svelte'
 
     export let node: INode
     export let clientOptions: IClientOptions
@@ -41,7 +42,7 @@
                 props: {
                     title: localize('popups.unsetAsPrimaryNode.title'),
                     description: localize('popups.unsetAsPrimaryNode.body', { values: { url: node.url } }),
-                    danger: true,
+                    variant: TextHintVariant.Danger,
                     confirmText: localize('actions.clear'),
                     onConfirm: () => {
                         void togglePrimaryNodeInClientOptions(node)
@@ -61,7 +62,7 @@
             props: {
                 title: localize('popups.node.titleRemove'),
                 description: localize('popups.node.removeConfirmation'),
-                danger: true,
+                variant: TextHintVariant.Danger,
                 confirmText: localize('actions.removeNode'),
                 onConfirm: () => {
                     void removeNodeFromClientOptions(node)
@@ -81,7 +82,7 @@
                 props: {
                     title: localize('popups.excludeNode.title'),
                     description: localize('popups.excludeNode.body', { values: { url: node?.url } }),
-                    danger: true,
+                    variant: TextHintVariant.Danger,
                     confirmText: localize('views.settings.configureNodeList.excludeNode'),
                     onConfirm: () => {
                         void toggleDisabledNodeInClientOptions(node)

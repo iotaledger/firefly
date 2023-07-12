@@ -12,6 +12,7 @@
     import { checkOrConnectLedger } from '@core/ledger'
     import { setStrongholdPassword } from '@core/profile-manager'
     import { Animation, Button, Icon, Text, TextHint } from '@ui'
+    import { TextHintVariant } from '@ui/TextHint.svelte'
     import { TextType } from '@ui/enums'
     import { onboardingRouter } from '@views/onboarding/onboarding-router'
 
@@ -48,7 +49,10 @@
             </Text>
         </div>
         {#if $isOnboardingLedgerProfile}
-            <TextHint warning text={localize('views.onboarding.congratulations.ledgerHint')} />
+            <TextHint
+                variant={TextHintVariant.Warning}
+                text={localize('views.onboarding.congratulations.ledgerHint')}
+            />
         {/if}
     </div>
     <div slot="leftpane__action">

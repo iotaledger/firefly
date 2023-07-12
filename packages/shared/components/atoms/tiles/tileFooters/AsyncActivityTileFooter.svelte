@@ -23,6 +23,7 @@
     import { showInternalVerificationPopup } from '@core/ledger'
     import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { TextHintVariant } from '@ui/TextHint.svelte'
 
     export let activity: Activity
 
@@ -41,7 +42,7 @@
                 title: localize('actions.confirmRejection.title'),
                 description: localize('actions.confirmRejection.description'),
                 hint: localize('actions.confirmRejection.node'),
-                warning: true,
+                variant: TextHintVariant.Warning,
                 confirmText: localize('actions.reject'),
                 onConfirm: () => {
                     rejectActivity(activity.id)

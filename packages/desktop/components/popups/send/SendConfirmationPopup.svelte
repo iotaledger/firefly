@@ -38,6 +38,7 @@
         TRANSFER_ALLOWANCE,
     } from '@core/layer-2'
     import { ToggleColor } from '@ui/inputs/Toggle.svelte'
+    import { TextHintVariant } from '@ui/TextHint.svelte'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
@@ -237,7 +238,7 @@
         {/if}
     </div>
     {#if surplus}
-        <TextHint warning text={localize('popups.transaction.surplusIncluded')} />
+        <TextHint variant={TextHintVariant.Warning} text={localize('popups.transaction.surplusIncluded')} />
     {/if}
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         {#if disableBack}

@@ -1,63 +1,96 @@
+<script context="module" lang="ts">
+    export enum TextHintVariant {
+        Primary = 'primary',
+        Secondary = 'secondary',
+        Success = 'success',
+        Danger = 'danger',
+        Warning = 'warning',
+        Info = 'info',
+    }
+</script>
+
 <script lang="ts">
     import { Icon, Text } from 'shared/components'
+    import { Icon as IconEnum } from '@lib/auxiliary/icon'
 
-    export let primary = false
-    export let secondary = false
-    export let success = false
-    export let danger = false
-    export let warning = false
-    export let info = false
-    export let classes: string = ''
-    export let icon: 'info' | 'exclamation' | undefined = undefined
-    export let iconClasses: string = ''
-    export let iconSize: string = ''
+    export let variant: TextHintVariant
+    export let icon: IconEnum | undefined = undefined
     export let text: string = ''
-    export let textClasses: string = ''
-    export let textColor = 'gray-700'
-    export let textDarkColor = 'gray-400'
+    export let widthFull: boolean = false
 
-    let _classes: string
-    let _icon: string
-    let _iconClasses: string
+    $: iconClasses = DEFAULT_VALUES[variant].iconClasses
+    $: icon ||= DEFAULT_VALUES[variant].icon
 
-    function setClasses(): void {
-        if (primary) {
-            _classes = 'bg-gray-50 dark:bg-gray-800'
-        } else if (secondary) {
-            _classes = 'bg-gray-50 dark:bg-gray-800'
-        } else if (success) {
-            _classes = 'bg-green-50 dark:bg-green-500'
-            _icon = 'checkmark-filled'
-            _iconClasses = 'text-green-700 dark:text-green-700'
-        } else if (danger) {
-            _classes = 'bg-red-50 dark:bg-red-500'
-            _icon = 'error-filled'
-            _iconClasses = 'text-red-500 dark:text-red-500'
-        } else if (warning) {
-            _classes = 'bg-yellow-50 dark:bg-yellow-500'
-            _icon = 'exclamation-filled'
-            _iconClasses = 'text-yellow-700 dark:text-yellow-700'
-        } else if (info) {
-            _classes = 'bg-blue-50 dark:bg-blue-500'
-            _icon = 'info-filled'
-            _iconClasses = 'text-blue-600 dark:text-blue-600'
+    const DEFAULT_VALUES: {
+        [Variant in TextHintVariant]: {
+            icon: IconEnum | undefined
+            iconClasses: string | undefined
         }
+    } = {
+        [TextHintVariant.Primary]: {
+            icon: undefined,
+            iconClasses: undefined,
+        },
+        [TextHintVariant.Secondary]: {
+            icon: undefined,
+            iconClasses: undefined,
+        },
+        [TextHintVariant.Success]: {
+            icon: IconEnum.CheckmarkFilled,
+            iconClasses: 'text-green-700 dark:text-green-700',
+        },
+        [TextHintVariant.Danger]: {
+            icon: IconEnum.ErrorFilled,
+            iconClasses: 'text-red-500 dark:text-red-500',
+        },
+        [TextHintVariant.Warning]: {
+            icon: IconEnum.ExclamationFilled,
+            iconClasses: 'text-yellow-700 dark:text-yellow-700',
+        },
+        [TextHintVariant.Info]: {
+            icon: IconEnum.InfoFilled,
+            iconClasses: 'text-blue-600 dark:text-blue-600',
+        },
     }
-
-    $: $$props, setClasses()
 </script>
 
 {#if text}
-    <div class="flex flex-row items-center p-4 rounded-lg dark:bg-opacity-10 {_classes} {classes}">
-        <Icon
-            icon={icon ?? _icon}
-            height={iconSize}
-            width={iconSize}
-            primaryColor="white"
-            classes="mr-3 fill-current {_iconClasses} {iconClasses}"
-        />
-        <Text fontSize="14" lineHeight="5" color={textColor} darkColor={textDarkColor} classes={textClasses}>
+    <hint class="hint {variant}" class:w-full={widthFull}>
+        {#if icon}
+            <Icon {icon} primaryColor="white" classes="mr-3 fill-current {iconClasses}" />
+        {/if}
+        <Text fontSize="14" lineHeight="5">
             {text}
         </Text>
-    </div>
+    </hint>
 {/if}
+
+<style lang="scss">
+    hint {
+        @apply flex flex-row;
+        @apply items-center;
+        @apply p-4;
+        @apply rounded-lg;
+        &.primary {
+            @apply bg-gray-50 dark:bg-gray-800;
+        }
+        &.secondary {
+            @apply bg-gray-50 dark:bg-gray-800;
+        }
+        &.success {
+            @apply bg-green-50 dark:bg-green-500;
+        }
+        &.danger {
+            @apply bg-red-50 dark:bg-red-500;
+        }
+        &.warning {
+            @apply bg-yellow-50 dark:bg-yellow-500;
+        }
+        &.info {
+            @apply bg-blue-50 dark:bg-blue-500;
+        }
+        &.hint {
+            @apply dark:bg-opacity-10;
+        }
+    }
+</style>

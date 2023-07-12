@@ -7,6 +7,7 @@
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { closePopup, openPopup, PopupId, popupState } from '@auxiliary/popup'
+    import { TextHintVariant } from '@ui/TextHint.svelte'
 
     const ZERO_VOTING_POWER = '0'
 
@@ -37,7 +38,7 @@
 
 <form class="space-y-4" on:submit|preventDefault={onSubmit}>
     <Text type={TextType.h4} classes="mb-3">{localize('popups.manageVotingPower.title')}</Text>
-    <TextHint warning text={localize('popups.manageVotingPower.amountZero')} />
+    <TextHint variant={TextHintVariant.Warning} text={localize('popups.manageVotingPower.amountZero')} />
     <div class="flex flex-row flex-nowrap w-full space-x-4">
         <Button outline classes="w-full" onClick={onCancelClick}>
             {localize('actions.cancel')}

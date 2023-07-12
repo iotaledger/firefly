@@ -2,13 +2,11 @@
     import { Button, ButtonVariant, Text, TextHint } from '@ui'
 
     import { localize } from '@core/i18n'
+    import { TextHintVariant } from '@ui/TextHint.svelte'
 
     export let description: string = ''
     export let hint: string = ''
-    export let info: boolean = false
-    export let success: boolean = false
-    export let warning: boolean = false
-    export let danger: boolean = false
+    export let variant: TextHintVariant | undefined = undefined
     export let confirmText: string = localize('actions.confirm')
     export let onConfirm: () => void = undefined
 </script>
@@ -19,13 +17,15 @@
             <Text fontSize="14" classes="text-left">{description}</Text>
         {/if}
         {#if hint}
-            <TextHint {info} {success} {warning} {danger} text={hint} />
+            <TextHint {variant} text={hint} />
         {/if}
     </div>
 
     <Button
         classes="w-full"
-        variant={warning || danger ? ButtonVariant.Warning : ButtonVariant.Primary}
+        variant={variant === TextHintVariant.Warning || variant === TextHintVariant.Danger
+            ? ButtonVariant.Warning
+            : ButtonVariant.Primary}
         onClick={onConfirm}
     >
         {confirmText}

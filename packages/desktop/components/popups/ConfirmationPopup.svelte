@@ -5,14 +5,12 @@
     import { handleError } from '@core/error/handlers'
     import { onMount } from 'svelte'
     import { selectedAccount } from '@core/account'
+    import { TextHintVariant } from '@ui/TextHint.svelte'
 
     export let title: string
     export let description: string = ''
     export let hint: string = ''
-    export let info: boolean = false
-    export let success: boolean = false
-    export let warning: boolean = false
-    export let danger: boolean = false
+    export let variant: TextHintVariant | undefined = undefined
     export let confirmText: string = localize('actions.confirm')
     export let onConfirm: () => void = undefined
     export let onCancel: () => void = undefined
@@ -52,14 +50,16 @@
             <Text fontSize="14" classes="text-left break-words">{description}</Text>
         {/if}
         {#if hint}
-            <TextHint {info} {success} {warning} {danger} text={hint} />
+            <TextHint {variant} text={hint} />
         {/if}
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" outline onClick={onCancelClick}>{localize('actions.cancel')}</Button>
         <Button
             classes="w-full"
-            variant={warning || danger ? ButtonVariant.Warning : ButtonVariant.Primary}
+            variant={variant === TextHintVariant.Warning || variant === TextHintVariant.Danger
+                ? ButtonVariant.Warning
+                : ButtonVariant.Primary}
             disabled={$selectedAccount.isTransferring}
             isBusy={$selectedAccount.isTransferring}
             onClick={onConfirmClick}

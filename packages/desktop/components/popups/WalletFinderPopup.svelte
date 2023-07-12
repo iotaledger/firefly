@@ -24,6 +24,8 @@
     } from '@core/wallet'
     import { loadNftsForActiveProfile } from '@core/nfts'
     import { DEFAULT_SYNC_OPTIONS } from '@core/account/constants'
+    import { TextHintVariant } from '@ui/TextHint.svelte'
+    import { Icon } from '@auxiliary/icon'
 
     export let searchForBalancesOnLoad = false
 
@@ -139,7 +141,11 @@
     </div>
 
     {#if hasUsedWalletFinder}
-        <TextHint info icon="exclamation" text={localize('popups.walletFinder.searchAgainHint')} />
+        <TextHint
+            variant={TextHintVariant.Info}
+            icon={Icon.Exclamation}
+            text={localize('popups.walletFinder.searchAgainHint')}
+        />
     {/if}
 </div>
 

@@ -6,6 +6,7 @@
 
     import { showAppNotification } from '@auxiliary/notification'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { TextHintVariant } from '@ui/TextHint.svelte'
 
     function refreshTokenMetadata(): void {
         refreshAccountAssetsForActiveProfile(true)
@@ -23,7 +24,7 @@
             props: {
                 title: localize('actions.refreshTokenMetadata'),
                 hint: localize('general.refreshTokenMetadataHint'),
-                warning: true,
+                variant: TextHintVariant.Warning,
                 confirmText: localize('actions.reset'),
                 onConfirm: refreshTokenMetadata,
             },

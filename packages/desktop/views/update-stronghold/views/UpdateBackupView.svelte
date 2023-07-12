@@ -8,6 +8,7 @@
     import { login } from '@core/profile/actions'
     import { Animation, Button, Icon, Text, TextHint, TextType } from '@ui'
     import { updateStrongholdRouter } from '../update-stronghold-router'
+    import { TextHintVariant } from '@ui/TextHint.svelte'
 
     export let busy = false
     export let changedPassword: boolean
@@ -78,7 +79,7 @@
                 {localize(`views.updateStronghold.updateBackup.${isRecovery ? 'recoveryBody' : 'loginBody'}`)}
             </Text>
         </div>
-        <TextHint warning text={localize('views.updateStronghold.updateBackup.hint')} />
+        <TextHint variant={TextHintVariant.Warning} text={localize('views.updateStronghold.updateBackup.hint')} />
     </div>
     <div slot="leftpane__action">
         <Button

@@ -19,6 +19,7 @@
 
     import { closeDrawer, DrawerId, openDrawer, updateDrawerProps } from '@/auxiliary/drawer'
     import features from '@features/features'
+    import { TextHintVariant } from '@ui/TextHint.svelte'
 
     export let asset: IAsset
     export let activityId: string = undefined
@@ -94,7 +95,10 @@
 
             <div class="space-y-4 flex flex-col items-center justify-center">
                 {#if !asset.verification?.verified}
-                    <TextHint warning text={localize('popups.tokenInformation.verificationWarning')} />
+                    <TextHint
+                        variant={TextHintVariant.Warning}
+                        text={localize('popups.tokenInformation.verificationWarning')}
+                    />
                 {/if}
                 <div class="w-full flex flex-col space-y-2">
                     <KeyValueBox

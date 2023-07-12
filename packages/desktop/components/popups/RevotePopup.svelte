@@ -5,6 +5,7 @@
     import { closePopup } from '@auxiliary/popup'
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { vote } from '@contexts/governance/actions'
+    import { TextHintVariant } from '@ui/TextHint.svelte'
 
     $: hasGovernanceTransactionInProgress =
         $selectedAccount?.hasVotingPowerTransactionInProgress || $selectedAccount?.hasVotingTransactionInProgress
@@ -20,7 +21,7 @@
 <form id="manage-voting-power" class="space-y-5" on:submit|preventDefault={onSubmit}>
     <Text type={TextType.h4} classes="mb-3">{localize('popups.revote.title')}</Text>
     <Text type={TextType.p}>{localize('popups.revote.body')}</Text>
-    <TextHint info text={localize('popups.revote.hint')} />
+    <TextHint variant={TextHintVariant.Info} text={localize('popups.revote.hint')} />
     <Button
         type={HTMLButtonType.Submit}
         disabled={hasGovernanceTransactionInProgress}

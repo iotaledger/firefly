@@ -11,6 +11,7 @@
     import { onMount } from 'svelte'
     import { isAccountVoting } from '@contexts/governance/utils'
     import { activeProfile } from '@core/profile'
+    import { TextHintVariant } from '@ui/TextHint.svelte'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let newVotingPower: string = undefined
@@ -87,7 +88,7 @@
             disabled={hasTransactionInProgress}
             {votingPower}
         />
-        <TextHint info text={localize('popups.manageVotingPower.hint')} />
+        <TextHint variant={TextHintVariant.Info} text={localize('popups.manageVotingPower.hint')} />
     </div>
     <div class="flex flex-row flex-nowrap w-full space-x-4">
         <Button outline disabled={hasTransactionInProgress} classes="w-full" onClick={onCancelClick}>

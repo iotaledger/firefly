@@ -3,6 +3,7 @@
     import { localize } from '@core/i18n'
     import { openPopup, PopupId } from '@auxiliary/popup'
     import { deleteProfile } from '@contexts/settings'
+    import { TextHintVariant } from '@ui/TextHint.svelte'
 
     function onDeleteClick(): void {
         openPopup({
@@ -10,7 +11,7 @@
             props: {
                 title: localize('popups.deleteProfile.title'),
                 hint: localize('popups.deleteProfile.confirmation'),
-                warning: true,
+                variant: TextHintVariant.Warning,
                 confirmText: localize('actions.delete'),
                 onConfirm: deleteProfile,
             },

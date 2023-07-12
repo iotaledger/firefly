@@ -13,6 +13,7 @@
     import { isValidPin } from '@core/utils'
     import features from '@features/features'
     import { Icon, PinInput, Profile, Text, TextHint } from '@ui'
+    import { TextHintVariant } from '@ui/TextHint.svelte'
     import { onDestroy } from 'svelte'
 
     let attempts: number = 0
@@ -124,7 +125,7 @@
             <div class="flex flex-col gap-8 w-full items-center">
                 <Profile profile={$activeProfile} {updateRequired} />
                 {#if updateRequired}
-                    <TextHint warning text={localize('views.login.hintStronghold')} />
+                    <TextHint variant={TextHintVariant.Warning} text={localize('views.login.hintStronghold')} />
                 {/if}
                 <div class="flex w-full items-center">
                     <div class="relative h-6">

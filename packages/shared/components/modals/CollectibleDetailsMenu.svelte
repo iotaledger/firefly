@@ -8,6 +8,7 @@
     import { burnNft } from '@core/wallet'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { activeProfile, updateActiveProfile } from '@core/profile/stores'
+    import { TextHintVariant } from '@ui/TextHint.svelte'
 
     export let modal: Modal = undefined
     export let nft: INft
@@ -27,7 +28,7 @@
                 }),
                 description: localize('actions.confirmNftBurn.description'),
                 hint: localize('actions.confirmNftBurn.hint'),
-                warning: true,
+                variant: TextHintVariant.Warning,
                 confirmText: localize('actions.burn'),
                 onConfirm: async () => {
                     await checkActiveProfileAuth(

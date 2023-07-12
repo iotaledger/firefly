@@ -4,6 +4,7 @@
     import { isFunction } from '@core/utils'
     import { Button, LedgerAnimation, Text, TextHint, FontWeight, TextType } from 'shared/components'
     import { closePopup } from '@auxiliary/popup'
+    import { TextHintVariant } from '@ui/TextHint.svelte'
 
     export let onCancel: () => void
     export let onContinue: () => void
@@ -53,13 +54,13 @@
     </Text>
     <LedgerAnimation {animation} />
     {#if isNotConnected}
-        <TextHint danger text={localize('popups.ledgerNotConnected.notConnected')} />
+        <TextHint variant={TextHintVariant.Danger} text={localize('popups.ledgerNotConnected.notConnected')} />
     {:else if isLocked}
-        <TextHint warning text={localize('popups.ledgerNotConnected.locked')} />
+        <TextHint variant={TextHintVariant.Warning} text={localize('popups.ledgerNotConnected.locked')} />
     {:else if isAppNotOpen}
-        <TextHint info text={localize('popups.ledgerNotConnected.appNotOpen')} />
+        <TextHint variant={TextHintVariant.Info} text={localize('popups.ledgerNotConnected.appNotOpen')} />
     {:else if isCorrectAppOpen}
-        <TextHint success text={localize('popups.ledgerNotConnected.correctAppOpen')} />
+        <TextHint variant={TextHintVariant.Success} text={localize('popups.ledgerNotConnected.correctAppOpen')} />
     {/if}
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" outline onClick={onCancelClick}>

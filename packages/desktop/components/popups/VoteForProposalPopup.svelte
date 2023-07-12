@@ -9,6 +9,7 @@
     import { vote } from '@contexts/governance/actions'
     import { ABSTAIN_VOTE_VALUE } from '@contexts/governance/constants'
     import { selectedProposal } from '@contexts/governance/stores'
+    import { TextHintVariant } from '@ui/TextHint.svelte'
 
     export let selectedAnswerValues: number[]
 
@@ -51,10 +52,10 @@
     <div class="space-y-4">
         <KeyValueBox keyText={localize('popups.voteForProposal.key')} valueText={formattedVotingPower} />
         {#if !hasVotingPower}
-            <TextHint danger text={localize('popups.voteForProposal.noVotingPower')} />
+            <TextHint variant={TextHintVariant.Danger} text={localize('popups.voteForProposal.noVotingPower')} />
         {:else if numberOfAbstainedQuestions > 0}
             <TextHint
-                warning
+                variant={TextHintVariant.Warning}
                 text={localize('popups.voteForProposal.hasAbstained', {
                     values: { numberOfQuestions: numberOfAbstainedQuestions },
                 })}

@@ -16,6 +16,7 @@
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
 
     import { closeDrawer, DrawerId, openDrawer } from '@/auxiliary/drawer'
+    import { TextHintVariant } from '@ui/TextHint.svelte'
 
     interface Breakdown {
         amount: number
@@ -136,7 +137,7 @@
             title: localize('popups.minimizeStorageDeposit.title'),
             description: localize('popups.minimizeStorageDeposit.description'),
             hint: localize('popups.minimizeStorageDeposit.confirmButton'),
-            info: true,
+            variant: TextHintVariant.Info,
             onConfirm: _onConfirm,
         })
     }

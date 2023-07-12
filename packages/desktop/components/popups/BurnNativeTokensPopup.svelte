@@ -3,6 +3,7 @@
     import { localize } from '@core/i18n'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { IAsset } from '@core/wallet'
+    import { TextHintVariant } from '@ui/TextHint.svelte'
 
     export let asset: IAsset
     export let rawAmount: string = '0'
@@ -32,7 +33,7 @@
     </Text>
     <div class="space-y-4">
         <AssetAmountInput bind:this={assetAmountInput} bind:rawAmount {asset} containsSlider disableAssetSelection />
-        <TextHint warning text={localize('actions.confirmTokenBurn.hint')} />
+        <TextHint variant={TextHintVariant.Warning} text={localize('actions.confirmTokenBurn.hint')} />
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" outline onClick={closePopup}>{localize('actions.cancel')}</Button>
