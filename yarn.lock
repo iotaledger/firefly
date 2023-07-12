@@ -888,7 +888,7 @@
   resolved "https://registry.yarnpkg.com/@iota/types/-/types-2.0.0-rc.2.tgz#a4b8e5c3423a2afd322fc05ebfaa6b27587d9a96"
   integrity sha512-huL+171zMQgGYV4/zhHLFcE8heTLRJhtlqLEJaM1Q+klb2KxNqFX0EySU8pxZ/nslh0Dem3QQ+Jmwv1FdBmpFQ==
 
-"@iota/types@^1.0.0-beta.15", "@iota/types@^1.0.0-beta.9":
+"@iota/types@^1.0.0-beta.9":
   version "1.0.0-beta.15"
   resolved "https://registry.yarnpkg.com/@iota/types/-/types-1.0.0-beta.15.tgz#1a1f5722ef176a45d03e92f4cb5bd9a4ea74ec27"
   integrity sha512-67DrzDO5bl2c7RIMpOdtjdOa27Bv1EmX/BHPTQD8c3RtPPAzJpSIpuI8JsIDl3U6Qe4zdLX3kRv9zGBXcr0fZA==
@@ -915,14 +915,16 @@
   dependencies:
     big-integer "^1.6.51"
 
-"@iota/wallet@2.0.3-rc.42":
-  version "2.0.3-rc.42"
-  resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.3-rc.42.tgz#62373ba2dca09a9d6a0358ae2580e89f88d1f353"
-  integrity sha512-w3M0B/KLDYyYP0C72rHgc1KQ+WN21RDdFldapVbGDgtWyDuQN/XiXC90hPDvr8G8++V9d2nQ0gnxfSvpfsgOPQ==
+"@iota/wallet@npm:@iota/sdk@1.0.0-rc.2":
+  version "1.0.0-rc.2"
+  resolved "https://registry.yarnpkg.com/@iota/sdk/-/sdk-1.0.0-rc.2.tgz#e776b5c9f54c211403399f32f6b456976e0251b6"
+  integrity sha512-xu4zMjPQFITX5ewoixuYBcn551C/G0DvBn0gl/K7UJMMUK5GfXp6BpwmhR1AcW7py654mgGzL4JX1xfORAtrTg==
   dependencies:
-    "@iota/types" "^1.0.0-beta.15"
+    "@types/node" "^18.15.12"
     cargo-cp-artifact "^0.1.6"
+    class-transformer "^0.5.1"
     prebuild-install "^7.1.1"
+    reflect-metadata "^0.1.13"
     typescript "^4.9.4"
 
 "@isaacs/cliui@^8.0.2":
@@ -1800,7 +1802,7 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-16.18.38.tgz#1dcdb6c54d02b323f621213745f2e44af30c73e6"
   integrity sha512-6sfo1qTulpVbkxECP+AVrHV9OoJqhzCsfTNp5NIG+enM4HyM3HvZCO798WShIXBN0+QtDIcutJCjsVYnQP5rIQ==
 
-"@types/node@^18.15.11":
+"@types/node@^18.15.11", "@types/node@^18.15.12":
   version "18.16.19"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-18.16.19.tgz#cb03fca8910fdeb7595b755126a8a78144714eea"
   integrity sha512-IXl7o+R9iti9eBW4Wg2hx1xQDig183jj7YLn8F7udNceyfkbn1ZxmzZXuak20gR40D7pIkIY1kYGx5VIGbaHKA==
@@ -2943,6 +2945,11 @@ cjs-module-lexer@^1.0.0:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/cjs-module-lexer/-/cjs-module-lexer-1.2.3.tgz#6c370ab19f8a3394e318fe682686ec0ac684d107"
   integrity sha512-0TNiGstbQmCFwt4akjjBg5pLRTSyj/PkWQ1ZoO2zntmg9yLqSRxwEa4iCfQLGjqhiqBfOJa7W/E8wfGrTDmlZQ==
+
+class-transformer@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/class-transformer/-/class-transformer-0.5.1.tgz#24147d5dffd2a6cea930a3250a677addf96ab336"
+  integrity sha512-SQa1Ws6hUbfC98vKGxZH3KFY0Y1lm5Zm0SY8XX9zbK7FJCyVEac3ATW0RIpwzW+oOfmHE5PMPufDG9hCfoEOMw==
 
 clean-stack@^2.0.0:
   version "2.2.0"
@@ -7317,6 +7324,11 @@ rechoir@^0.8.0:
   integrity sha512-/vxpCXddiX8NGfGO/mTafwjq4aFa/71pvamip0++IQk3zG8cbCj0fifNPrjjF1XMXUne91jL9OoxmdykoEtifQ==
   dependencies:
     resolve "^1.20.0"
+
+reflect-metadata@^0.1.13:
+  version "0.1.13"
+  resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.13.tgz#67ae3ca57c972a2aa1642b10fe363fe32d49dc08"
+  integrity sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==
 
 regexp-tree@~0.1.1:
   version "0.1.27"
