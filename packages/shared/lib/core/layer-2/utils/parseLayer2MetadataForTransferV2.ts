@@ -4,11 +4,13 @@ import { CONTRACT_FUNCTIONS, TARGET_CONTRACTS } from '../constants'
 import { Allowance } from '../enums'
 import { ReadSpecialStream } from '../classes'
 
+// Function to parse data from the current metadata, using the new encoding where the shimmer chainId is 1072
 export function parseLayer2MetadataForTransferV2(metadata: Uint8Array): ILayer2TransferAllowanceMetadata {
     const readStream = new ReadSpecialStream(metadata)
     const senderContract = readStream.readUInt32('senderContract')
     const targetContract = readStream.readUInt32('targetContract')
     const contractFunction = readStream.readUInt32('contractFunction')
+    // TODO: This is a temporary fix since now the gas is always 500000, when it varies, the length of the gas will change
     const gasBudget = readStream.readUIntNSpecialEncoding('gasBudget', 3)
 
     const smartContractParameters = parseSmartContractParameters(readStream)
@@ -58,6 +60,7 @@ function parseAssetAllowance(readStream: ReadSpecialStream): ILayer2AssetAllowan
 
     switch (allowance) {
         case Allowance.HasBaseTokens: {
+            // TODO: This is a temporary fix since now the base token is sent alone in the transfer (without native token and/or nfts)
             const baseTokenLength = readStream.length() - readStream.getReadIndex()
             result.baseTokens = readStream.readUIntNSpecialEncoding('baseTokenAmount', baseTokenLength).toString()
             break
@@ -75,8 +78,8 @@ function parseAssetAllowance(readStream: ReadSpecialStream): ILayer2AssetAllowan
 
         case Allowance.hasNFTs: {
             readStream.readUInt16SpecialEncoding('nftAmount')
-            const nftIdLength = readStream.length() - readStream.getReadIndex()
-            const nftIdBytes = readStream.readBytes('nftId', nftIdLength)
+            const NFT_ID_LENGTH = 32
+            const nftIdBytes = readStream.readBytes('nftId', NFT_ID_LENGTH)
             const nftId = Converter.bytesToHex(nftIdBytes)
             result.nfts.push(nftId)
             break

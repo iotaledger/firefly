@@ -5,6 +5,7 @@ import { NFT_ID_BYTE_LENGTH } from '@core/nfts/constants'
 import { ILayer2AssetAllowance, ILayer2TransferAllowanceMetadata } from '../interfaces'
 import { CONTRACT_FUNCTIONS, TARGET_CONTRACTS } from '../constants'
 
+// DEPRECATED: Function to parse data from the original metadata when the shimmer chainId was 1071
 export function parseLayer2MetadataForTransferV1(metadata: Uint8Array): ILayer2TransferAllowanceMetadata {
     const readStream = new ReadStream(metadata)
 
