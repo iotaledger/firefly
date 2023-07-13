@@ -35,7 +35,7 @@
         class="w-full flex flex-row flex-grow justify-between space-x-2"
         class:cursor-pointer={hasChildren}
         on:click={toggleExpandedView}
-        on:keydown={toggleExpandedView}
+        on:keydown={() => {}}
     >
         {#if hasChildren}
             <Icon
