@@ -6,6 +6,7 @@
     import { localize } from '@core/i18n'
 
     import { registeredProposalsForSelectedAccount } from '@contexts/governance/stores'
+    import { IllustrationEnum } from '@auxiliary/illustration'
 </script>
 
 <governance-dashboard class="w-full h-full flex flex-nowrap p-8 relative flex-1 space-x-6 bg-gray-50 dark:bg-gray-900">
@@ -23,7 +24,7 @@
             <Proposals />
         {:else}
             <div class="w-full h-full flex flex-col items-center justify-center">
-                <Illustration illustration="empty-collectibles" width="134" height="134" />
+                <Illustration illustration={IllustrationEnum.EmptyCollectibles} width="134" height="134" />
                 <Text fontSize="text-14" fontWeight={FontWeight.semibold} color="gray-500" classes="mt-8"
                     >{localize('views.governance.proposals.emptyTitle')}</Text
                 >
