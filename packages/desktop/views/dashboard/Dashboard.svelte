@@ -76,7 +76,10 @@
             handleDeepLinkRequest(data)
         })
 
-        Platform.onEvent('lock-screen', () => {
+        Platform.onEvent('power-monitor-lock-screen', () => {
+            logout()
+        })
+        Platform.onEvent('power-monitor-suspend', () => {
             logout()
         })
 
