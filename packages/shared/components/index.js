@@ -25,6 +25,8 @@ export { default as ToastContainer } from './ToastContainer.svelte'
 export { default as Tooltip } from './Tooltip.svelte'
 export { default as Transition } from './Transition.svelte'
 export { default as ColoredCircle } from './ColoredCircle.svelte'
+export { default as Icon } from './Icon.svelte'
+export { default as BoxedIcon } from './BoxedIcon.svelte'
 export { default as AmountBox } from './AmountBox.svelte'
 export { default as LedgerAnimation } from './LedgerAnimation.svelte'
 
