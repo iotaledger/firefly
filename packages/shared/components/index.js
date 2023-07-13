@@ -25,6 +25,8 @@ export { default as ToastContainer } from './ToastContainer.svelte'
 export { default as Tooltip } from './Tooltip.svelte'
 export { default as Transition } from './Transition.svelte'
 export { default as AmountBox } from './AmountBox.svelte'
+export { default as AssetIcon } from './AssetIcon.svelte'
+export { default as AssetList } from './AssetList.svelte'
 
 export * from './atoms'
 export * from './enums'

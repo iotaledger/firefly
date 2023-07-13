@@ -1,7 +1,7 @@
 <script lang="ts">
     import VirtualList from '@sveltejs/svelte-virtual-list'
     import { AssetTile, Text, TextType } from 'shared/components'
-    import { Filter } from '../../../desktop/components'
+    import { Filter } from '../../desktop/components'
     import { localize } from '@core/i18n'
     import { assetFilter, AccountAssets, IAsset } from '@core/wallet'
     import { isVisibleAsset } from '@core/wallet/utils/isVisibleAsset'
