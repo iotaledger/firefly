@@ -1,11 +1,11 @@
 import type { IMetadataFeature } from '@iota/types'
 import { isParticipationOutput } from '@contexts/governance/utils'
 import { EXTERNALLY_OWNED_ACCOUNT } from '@core/layer-2/constants'
-import { parseLayer2MetadataForTransfer } from '@core/layer-2/utils'
 import { containsControlCharacters, Converter } from '@core/utils'
 import type { Output } from '@core/wallet/types'
 
 import { FEATURE_TYPE_METADATA } from '../../../constants'
+import { parseLayer2MetadataForTransfer } from '@core/layer-2/utils'
 
 export function getMetadataFromOutput(output: Output): string | undefined {
     const { data } = <IMetadataFeature>output?.features?.find((feature) => feature.type === FEATURE_TYPE_METADATA) ?? {
