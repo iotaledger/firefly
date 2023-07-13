@@ -1,6 +1,5 @@
 <script lang="ts">
     import { appSettings, appStage } from '@core/app'
-    import { get } from 'svelte/store'
     import { Logo as LogoEnum, LogoOverrideStage } from './enums'
 
     export let logo: LogoEnum
@@ -32,7 +31,7 @@
     }
 
     $: darkModeEnabled = $appSettings.darkMode
-    $: selected = logos[logo]?.[overrideStage ?? get(appStage)]
+    $: selected = logos[logo]?.[overrideStage ?? $appStage]
     $: logoSrc = darkModeEnabled ? `assets/logos/darkmode/${selected}` : `assets/logos/lightmode/${selected}`
 </script>
 
