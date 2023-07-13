@@ -5,7 +5,7 @@
     import { ActivityDirection } from '@core/wallet/enums'
     import { getActivityTileTitle, getSubjectLocaleFromActivity } from '@core/wallet/utils'
     import { NftActivity } from '@core/wallet/types'
-    import { ActivityTileContent, NftImageOrIconBox } from 'shared/components'
+    import { ActivityTileContent, NftImageOrIconBox, NftSize } from 'shared/components'
 
     export let activity: NftActivity
 
@@ -26,5 +26,5 @@
 </script>
 
 <ActivityTileContent {action} {subject} {formattedAsset}>
-    <NftImageOrIconBox slot="icon" {nft} size="medium" />
+    <NftImageOrIconBox slot="icon" {nft} size={NftSize.Medium} />
 </ActivityTileContent>

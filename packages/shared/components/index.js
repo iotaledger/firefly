@@ -25,6 +25,8 @@ export { default as ToastContainer } from './ToastContainer.svelte'
 export { default as Tooltip } from './Tooltip.svelte'
 export { default as Transition } from './Transition.svelte'
 export { default as AmountBox } from './AmountBox.svelte'
+export { default as NftActivityDetails } from './NftActivityDetails.svelte'
+export { default as NftImageOrIconBox } from './NftImageOrIconBox.svelte'
 
 export * from './atoms'
 export * from './enums'
