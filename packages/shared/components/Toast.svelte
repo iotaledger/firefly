@@ -1,11 +1,8 @@
 <script lang="ts">
-    import { Alert, Icon } from 'shared/components'
-
+    import { Alert, Icon, Logo } from 'shared/components'
     import { localize } from '@core/i18n'
-
     import { removeDisplayNotification } from '@auxiliary/notification/stores'
-
-    import Logo from './Logo.svelte'
+    import { Logo as LogoEnum, LogoOverrideStage } from './enums'
     import { INotificationData } from '@auxiliary/notification'
 
     export let toast: INotificationData
@@ -16,7 +13,7 @@
         info: {
             backgroundColor: 'blue-500',
             iconBackgroundColor: 'white',
-            logo: 'logo-firefly',
+            logo: LogoEnum.LogoFirefly,
             messageColor: 'white',
             subMessageColor: 'blue-300',
             buttonSecondary: 'white',
@@ -57,7 +54,7 @@
             class="flex shrink-0 justify-center items-center bg-{style?.iconBackgroundColor} rounded-lg text-{style?.iconColor}"
         >
             {#if style?.logo}
-                <Logo logo={style?.logo} overrideStage="prod" />
+                <Logo logo={style?.logo} overrideStage={LogoOverrideStage.Prod} />
             {:else}
                 <Icon icon={style?.icon} />
             {/if}
