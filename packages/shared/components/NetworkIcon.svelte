@@ -8,7 +8,7 @@
     export let width: number = 22
     export let outlined: boolean = true
 
-    $: backgroundColor = classesMap[networkId]?.backgroundColor ?? ''
+    $: backgroundColor = classesMap[networkId]?.backgroundColor ?? null
     $: iconColor = classesMap[networkId]?.iconColor ?? ''
 
     const classesMap: { [key in NetworkId]?: Record<string, string> } = {
@@ -27,7 +27,7 @@
     }
 </script>
 
-<network-icon class={backgroundColor ? backgroundColor : null} class:outlined>
+<network-icon class={backgroundColor} class:outlined>
     <Icon {height} {width} icon={NETWORK_ICON_SVG[networkId]} classes="text-{iconColor}" />
 </network-icon>
 
