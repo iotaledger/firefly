@@ -1,7 +1,7 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
     import { loginProgress, LOGIN_STEPS } from '@core/profile'
-    import { Animation, Text, ProgressBar } from 'shared/components'
+    import { Animation, ProgressBar } from 'shared/components'
 
     let percent = 0
     let statusMessage = ''
@@ -26,5 +26,4 @@
     <progress-wrapper class="max-w-md w-full">
         <ProgressBar {percent} message={statusMessage} />
     </progress-wrapper>
-    <Text classes="pt-8">{statusMessage}</Text>
 </div>
