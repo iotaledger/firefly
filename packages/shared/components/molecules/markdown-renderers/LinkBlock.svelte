@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { openUrlInBrowser } from '@core/app/utils'
     import { Link } from '@ui'
 
@@ -9,4 +9,6 @@
     }
 </script>
 
-<Link classes="break-all" onClick={onLinkClick}><slot /></Link>
+<span class="break-all">
+    <Link on:click={onLinkClick}><slot /></Link>
+</span>

@@ -81,19 +81,19 @@
         <Text type={TextType.p} secondary>{bodyText}</Text>
         {#if needsToAcceptTermsOfService && needsToAcceptPrivacyPolicy}
             <ul>
-                <li><Link onClick={handleViewTosClick}>{localize('popups.legalUpdate.tosTitle')}</Link></li>
+                <li><Link on:click={handleViewTosClick}>{localize('popups.legalUpdate.tosTitle')}</Link></li>
                 <li>
-                    <Link onClick={handleViewPrivPolicyClick}>{localize('popups.legalUpdate.privPolicyTitle')}</Link>
+                    <Link on:click={handleViewPrivPolicyClick}>{localize('popups.legalUpdate.privPolicyTitle')}</Link>
                 </li>
             </ul>
         {:else if needsToAcceptTermsOfService}
             <ul>
-                <li><Link onClick={handleViewTosClick}>{localize('popups.legalUpdate.tosTitle')}</Link></li>
+                <li><Link on:click={handleViewTosClick}>{localize('popups.legalUpdate.tosTitle')}</Link></li>
             </ul>
         {:else if needsToAcceptPrivacyPolicy}
             <ul>
                 <li>
-                    <Link onClick={handleViewPrivPolicyClick}>{localize('popups.legalUpdate.privPolicyTitle')}</Link>
+                    <Link on:click={handleViewPrivPolicyClick}>{localize('popups.legalUpdate.privPolicyTitle')}</Link>
                 </li>
             </ul>
         {/if}

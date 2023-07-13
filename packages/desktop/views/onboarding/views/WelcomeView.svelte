@@ -50,8 +50,8 @@
     <div slot="leftpane__action" class="flex flex-col space-y-8">
         <Checkbox bind:checked={termsAccepted}>
             <Text slot="label" type={TextType.p} secondary>
-                I've read and I accept the <Link onClick={onTermsOfServiceClick}>Terms of Service</Link> and <Link
-                    onClick={onPrivacyPolicyClick}>Privacy Policy</Link
+                I've read and I accept the <Link on:click={onTermsOfServiceClick}>Terms of Service</Link> and <Link
+                    on:click={onPrivacyPolicyClick}>Privacy Policy</Link
                 >
             </Text>
         </Checkbox>

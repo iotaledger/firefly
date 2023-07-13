@@ -5,6 +5,7 @@
     import { LedgerConnectionState, ledgerConnectionState } from '@core/ledger'
     import { Subrouter } from '@core/router'
     import { Button, Icon, LedgerAnimation, Link, Text } from '@ui'
+    import { Icon as IconEnum } from '@lib/auxiliary/icon'
 
     export let router: Subrouter<unknown>
 
@@ -74,9 +75,11 @@
         </div>
     </div>
     <div slot="leftpane__action">
-        <Link icon="info" onClick={handleGuidePopup} classes="mb-10 justify-center">
-            {localize('popups.ledgerConnectionGuide.title')}
-        </Link>
+        <span class="flex justify-center mb-10">
+            <Link icon={IconEnum.Info} on:click={handleGuidePopup}>
+                {localize('popups.ledgerConnectionGuide.title')}
+            </Link>
+        </span>
         <Button
             classes="w-full flex flex-row justify-center items-center"
             disabled={!isCorrectAppOpen || isBusy}

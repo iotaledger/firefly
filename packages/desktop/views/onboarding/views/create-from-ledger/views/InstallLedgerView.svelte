@@ -6,6 +6,7 @@
     import { Button, Icon, LedgerAnimation, Link, Text } from '@ui'
     import { onMount } from 'svelte'
     import { createFromLedgerRouter } from '../create-from-ledger-router'
+    import { Icon as IconEnum } from '@lib/auxiliary/icon'
 
     function onContinueClick(): void {
         $createFromLedgerRouter.next()
@@ -46,9 +47,11 @@
         </div>
     </div>
     <div slot="leftpane__action">
-        <Link icon="info" onClick={onPopupOpenClick} classes="mb-10 justify-center"
-            >{localize('popups.ledgerAppGuide.title', { values: { legacy: LedgerAppName.Shimmer } })}</Link
-        >
+        <span class="flex justify-center mb-10">
+            <Link icon={IconEnum.Info} on:click={onPopupOpenClick}
+                >{localize('popups.ledgerAppGuide.title', { values: { legacy: LedgerAppName.Shimmer } })}</Link
+            >
+        </span>
         <Button classes="w-full" onClick={onContinueClick}
             >{localize('views.ledgerInstallationGuide.action', { values: { network: LedgerAppName.Shimmer } })}</Button
         >

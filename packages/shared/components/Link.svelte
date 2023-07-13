@@ -1,33 +1,32 @@
 <script lang="ts">
     import { Icon } from 'shared/components'
+    import { Icon as IconEnum } from 'shared/lib/auxiliary/icon/enums'
 
-    export let href = undefined
-    export let secondary = false
-    export let disabled = false
-    export let ghost = false
-    export let classes = ''
-    export let icon = undefined
-
-    export let onClick = (): void | string => ''
+    export let href: string | null = null
+    export let disabled: boolean = false
+    export let icon: IconEnum | undefined = undefined
 </script>
 
-<a
-    class="text-12 leading-140 cursor-pointer text-blue-500 {icon && 'flex flex-row items-center'} {classes}"
-    data-label="link"
-    {href}
-    on:click|stopPropagation={onClick}
-    class:secondary
-    class:disabled
-    class:ghost
->
+<a data-label="link" on:click|stopPropagation {href} class:with-icon={icon} class:disabled>
     {#if icon}
-        <Icon {icon} width={20} height={20} classes="text-blue-500 mr-1" />
+        <Icon {icon} width={20} height={20} classes="text-blue-500 mr-1 inline" />
     {/if}
     <slot />
 </a>
 
 <style lang="scss">
-    a:hover {
-        text-decoration: underline;
+    a {
+        @apply text-12 leading-140;
+        @apply cursor-pointer;
+        @apply text-blue-500;
+
+        &:hover {
+            @apply underline;
+        }
+
+        &.with-icon {
+            @apply flex flex-row;
+            @apply items-center;
+        }
     }
 </style>
