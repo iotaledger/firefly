@@ -1,3 +1,4 @@
+import { FillPriority } from '../enums'
 import { ISvg } from '../interfaces'
 
 export const CHECKMARK_FILLED_SVG: ISvg = {
@@ -11,7 +12,7 @@ export const CHECKMARK_FILLED_SVG: ISvg = {
         },
         {
             d: 'M16.227 8.86611C16.6062 9.26763 16.5881 9.90054 16.1866 10.2798L10.4801 15.447L7.79289 12.7598C7.40237 12.3693 7.40237 11.7362 7.79289 11.3456C8.18342 10.9551 8.81658 10.9551 9.20711 11.3456L10.5199 12.6584L14.8134 8.82572C15.2149 8.44651 15.8478 8.4646 16.227 8.86611Z',
-            fillPriority: 'primary',
+            fillPriority: FillPriority.Primary,
         },
     ],
 }
