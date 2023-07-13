@@ -15,6 +15,7 @@
     import { restoreProfileRouter } from '../restore-profile-router'
     import { destroyProfileManager } from '@core/profile-manager/actions'
     import { Icon as IconEnum } from '@auxiliary/icon'
+    import { AnimationEnum } from '@auxiliary/animation'
 
     let isBusy = {
         [RestoreProfileType.Mnemonic]: false,
@@ -89,6 +90,6 @@
         />
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-purple dark:bg-gray-900">
-        <Animation classes="setup-anim-aspect-ratio" animation="import-desktop" />
+        <Animation animation={AnimationEnum.ImportDesktop} />
     </div>
 </OnboardingLayout>

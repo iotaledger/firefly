@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { AnimationEnum } from '@auxiliary/animation'
     import { PopupId, openPopup } from '@auxiliary/popup'
     import { OnboardingLayout } from '@components'
     import { localize } from '@core/i18n'
@@ -17,17 +18,17 @@
     $: isCorrectAppOpen = $ledgerConnectionState === LedgerConnectionState.CorrectAppOpen
     $: $ledgerConnectionState, setAnimation()
 
-    let animation: string
+    let animation: AnimationEnum | undefined = undefined
     function setAnimation(): void {
         if (isNotConnected) {
-            animation = 'ledger-disconnected-desktop'
+            animation = AnimationEnum.LedgerDisconnectedDesktop
         } else if (isLocked) {
             // TODO: Get animation for locked ledger
             animation = undefined
         } else if (isAppNotOpen) {
-            animation = 'ledger-app-closed-desktop'
+            animation = AnimationEnum.LedgerAppClosedDesktop
         } else if (isCorrectAppOpen) {
-            animation = 'ledger-connected-desktop'
+            animation = AnimationEnum.LedgerConnectedDesktop
         }
     }
 

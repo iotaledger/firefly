@@ -35,6 +35,7 @@
     import { Animation, Button, ShimmerClaimingAccountList, Text } from '@ui'
     import { onDestroy, onMount } from 'svelte'
     import { restoreProfileRouter } from '../restore-profile-router'
+    import { AnimationEnum } from '@auxiliary/animation'
 
     $: shimmerClaimingAccounts = $onboardingProfile?.shimmerClaimingAccounts ?? []
 
@@ -224,6 +225,6 @@
         {/if}
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {true && 'bg-pastel-yellow dark:bg-gray-900'}">
-        <Animation classes="setup-anim-aspect-ratio" animation="import-desktop" />
+        <Animation animation={AnimationEnum.ImportDesktop} />
     </div>
 </OnboardingLayout>
