@@ -6,6 +6,7 @@
     import { Button, Icon, LedgerAnimation, Link, Text } from '@ui'
     import { onMount } from 'svelte'
     import { createFromLedgerRouter } from '../create-from-ledger-router'
+    import { IllustrationEnum } from '@auxiliary/illustration'
 
     function onContinueClick(): void {
         $createFromLedgerRouter.next()
@@ -53,5 +54,5 @@
             >{localize('views.ledgerInstallationGuide.action', { values: { network: LedgerAppName.Shimmer } })}</Button
         >
     </div>
-    <LedgerAnimation slot="rightpane" illustration="ledger-install-new-app-desktop" />
+    <LedgerAnimation slot="rightpane" illustration={IllustrationEnum.LedgerInstallNewAppDesktop} />
 </OnboardingLayout>
