@@ -46,7 +46,7 @@ function encodeNativeTokenTransfer(
     buffer.writeBytes('tokenId', tokenIdBytes.length, tokenIdBytes)
 
     const encodedAmount = specialNativeTokenAmountEncoding(BigInt(rawAmount))
-    buffer.writeUInt32SpecialEncoding('length', encodedAmount.length)
+    buffer.writeUInt32SpecialEncoding('nativeTokenAmountLength', encodedAmount.length)
     buffer.writeBytes('nativeTokenAmount', encodedAmount.length, encodedAmount)
 }
 
