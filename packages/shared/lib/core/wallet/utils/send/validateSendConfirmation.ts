@@ -5,12 +5,13 @@ import { getStorageDepositFromOutput } from '../generateActivity/helper'
 import { Output } from '@core/wallet/types'
 import { OUTPUT_TYPE_NFT, UNLOCK_CONDITION_EXPIRATION } from '@core/wallet/constants'
 import { IExpirationUnlockCondition } from '@iota/types'
+import { IAccountState } from '@core/account/interfaces'
 
-export function validateSendConfirmation(output: Output): void {
+export async function validateSendConfirmation(account: IAccountState, output: Output): Promise<void> {
     const parseNumber: (value: string) => number = (value: string) => parseInt(value, 10) ?? 0
     const amount = parseNumber(output?.amount)
     const balance = parseNumber(getSelectedAccount()?.balances?.baseCoin.available ?? '0')
-    const { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output)
+    const { storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(account, output)
 
     const expirationUnlockCondition = output.unlockConditions.find(
         (c) => c.type === UNLOCK_CONDITION_EXPIRATION

@@ -1,14 +1,14 @@
 <script lang="ts">
+    import { AnimationRenderer } from '@auxiliary/animation'
     import { Icon as IconEnum, NETWORK_ICON_SVG } from '@auxiliary/icon'
     import { getIconColorFromString } from '@core/account'
-    import { COIN_TYPE, NetworkId } from '@core/network'
+    import { COIN_TYPE, IPersistedNetwork, NetworkId } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { isBright } from '@core/utils'
     import { ANIMATED_TOKEN_IDS, getAssetInitials, IPersistedAsset, TokenStandard } from '@core/wallet'
-    import { Animation, Icon, NetworkIconBadge, VerificationBadge } from 'shared/components'
+    import { Animation, Icon, VerificationBadge } from 'shared/components'
 
     export let asset: IPersistedAsset
-    export let chainId: number | undefined
     export let large = false
     export let small = false
 
@@ -18,10 +18,9 @@
     let assetInitials: string
     let assetIconWrapperWidth: number
     let assetLogoUrl: string
-    let chainName: string | undefined
+    let network: IPersistedNetwork
 
     $: network = $activeProfile.network
-    $: network, chainId, (chainName = getTooltipText())
     $: isAnimation = asset.id in ANIMATED_TOKEN_IDS
     $: asset, updateAssetIcon()
 
@@ -51,16 +50,6 @@
                 icon = null
         }
     }
-
-    function getTooltipText(): string | undefined {
-        const networkName = network?.name
-        if (chainId) {
-            const chain = network?.chains.find((c) => c.chainId === chainId)
-            return chain?.name ?? networkName
-        } else {
-            return networkName
-        }
-    }
 </script>
 
 <div
@@ -84,7 +73,7 @@
                 classes={large ? 'w-12 h-12' : small ? 'w-6 h-6' : 'w-8 h-8'}
                 animation={ANIMATED_TOKEN_IDS[asset.id]}
                 loop={true}
-                renderer="canvas"
+                renderer={AnimationRenderer.Canvas}
             />
         {:else if icon}
             <Icon {icon} width="80%" height="80%" classes="text-{assetIconColor ?? 'blue-500'} text-center" />
@@ -102,17 +91,7 @@
         {/if}
     </div>
     <span class="absolute flex justify-center items-center bottom-0 right-0">
-        {#if asset.verification.verified === true}
-            <NetworkIconBadge
-                width={10}
-                height={10}
-                networkId={$activeProfile.network.id}
-                {chainId}
-                tooltipText={chainName}
-            />
-        {:else}
-            <VerificationBadge status={asset.verification?.status} width={14} height={14} />
-        {/if}
+        <VerificationBadge status={asset.verification?.status} width={14} height={14} />
     </span>
 </div>
 
