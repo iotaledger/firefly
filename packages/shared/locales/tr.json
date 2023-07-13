@@ -934,6 +934,10 @@
             "title": "Firefly'ı kullanma şekliniz değişti",
             "body": "Her sekmenin içeriği artık tek bir cüzdan durumunda. Başlık çubuğundaki değiştiriciyi kullanarak seçilen cüzdanı istediğiniz yerden değiştirebilirsiniz.",
             "hint": "Cüzdanı bulamıyor musunuz? Daha önce kullanılmış cüzdanları bulmak için ayarlardaki bakiye bulma aracını kullanın."
+        },
+        "mobileDeprecation": {
+            "title": "Deprecation announcement",
+            "body": "This version of Firefly is deprecated. The IOTA Foundation focuses on enabling core protocol functions through its desktop wallet. To maintain your tokens, we recommend either using Firefly for desktop or a 3rd-party wallet, by importing a Stronghold backup or 24-words backup."
         }
     },
     "charts": {
