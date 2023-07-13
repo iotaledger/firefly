@@ -6,6 +6,7 @@
     import { Animation, Button, HTMLButtonType, ImportTextfield, Text } from '@ui'
     import { onMount } from 'svelte'
     import { restoreFromMnemonicRouter } from '../restore-from-mnemonic-router'
+    import { AnimationEnum } from '@auxiliary/animation'
 
     let input = ''
 
@@ -44,6 +45,6 @@
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-blue dark:bg-gray-900'}">
-        <Animation classes="setup-anim-aspect-ratio" animation="import-from-text-desktop" />
+        <Animation animation={AnimationEnum.ImportFromTextDesktop} />
     </div>
 </OnboardingLayout>

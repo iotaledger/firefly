@@ -3,6 +3,7 @@
     import { createEventDispatcher, onMount } from 'svelte'
     import { mobile, PlatformOption, platform } from '@core/app'
     import { isValidPin, PIN_LENGTH } from '@core/utils'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     const dispatch = createEventDispatcher()
 
@@ -189,7 +190,7 @@
             </div>
         </div>
         <button type="button" on:click={handleBackspace} {disabled} tabindex="-1">
-            <Icon icon="backspace" classes={smaller ? 'text-blue-500' : 'text-gray-500'} />
+            <Icon icon={IconEnum.Backspace} classes={smaller ? 'text-blue-500' : 'text-gray-500'} />
         </button>
     </button>
     {#if error}
