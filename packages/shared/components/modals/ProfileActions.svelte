@@ -49,7 +49,7 @@
     }
 
     function onLogoutClick(): void {
-        logout()
+        void logout()
     }
 
     function onStrongholdToggleClick(): void {
