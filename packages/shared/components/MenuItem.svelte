@@ -45,18 +45,23 @@
     function toggleTooltip(show: boolean): void {
         showTooltip = enableTooltipVisible && show
     }
+
+    function handleMouseEnter(): void {
+        toggleTooltip(true)
+    }
+
+    function handleMouseLeave(): void {
+        toggleTooltip(false)
+    }
 </script>
 
 <button
     bind:this={menuItem}
     on:click|stopPropagation={onMenuItemClick}
-    on:mouseenter={() => toggleTooltip(true)}
-    on:mouseleave={() => toggleTooltip(false)}
-    class="group w-full flex flex-row justify-between items-center p-3
-        {isDisabled
-        ? 'bg-gray-100 dark:bg-gray-850 cursor-default'
-        : `hover:bg-${color}-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20`}
-    "
+    on:mouseenter={handleMouseEnter}
+    on:mouseleave={handleMouseLeave}
+    class:disabled={isDisabled}
+    class="group w-full flex flex-row justify-between items-center p-3 hover:bg-{color}-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20"
 >
     <div class="flex flex-row space-x-3 items-center">
         {#if isLoading}
@@ -95,3 +100,13 @@
 {#if showTooltip}
     <InformationTooltip anchor={menuItem} position={Position.Right} body={tooltip} />
 {/if}
+
+<style lang="scss">
+    button {
+        &.disabled {
+            @apply bg-gray-100;
+            @apply dark:bg-gray-850;
+            @apply cursor-default;
+        }
+    }
+</style>
