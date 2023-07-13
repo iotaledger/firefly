@@ -14,16 +14,20 @@
     export let warning: boolean = false
     export let danger: boolean = false
     export let confirmText: string = localize('actions.confirm')
-    export let onConfirm: () => void = undefined
+    export let onConfirm: () => Promise<void> = undefined
     export let onCancel: () => void = undefined
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
-    function onConfirmClick(): void {
+    let isBusy = false
+
+    async function onConfirmClick(): Promise<void> {
+        isBusy = true
         if (onConfirm) {
-            onConfirm()
+            await onConfirm()
         } else {
             closePopup()
         }
+        isBusy = false
     }
 
     function onCancelClick(): void {
@@ -60,8 +64,8 @@
         <Button
             classes="w-full"
             variant={warning || danger ? ButtonVariant.Warning : ButtonVariant.Primary}
-            disabled={$selectedAccount.isTransferring}
-            isBusy={$selectedAccount.isTransferring}
+            disabled={$selectedAccount.isTransferring || isBusy}
+            isBusy={$selectedAccount.isTransferring || isBusy}
             onClick={onConfirmClick}
         >
             {confirmText}
