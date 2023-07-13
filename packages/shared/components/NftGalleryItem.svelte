@@ -46,7 +46,7 @@
         <nft-media-wrapper>
             <figure
                 class="bg-gray-200 dark:bg-gray-700 min-w-full h-full object-cover"
-                style="height: {nftWrapperClientWidth}px;"
+                style:--height="{nftWrapperClientWidth}px"
                 bind:clientWidth={nftWrapperClientWidth}
             >
                 <NftMedia {nft} loop muted />
@@ -85,5 +85,9 @@
         @apply flex;
         @apply relative;
         aspect-ratio: 1 / 1;
+
+        figure {
+            height: var(--height);
+        }
     }
 </style>
