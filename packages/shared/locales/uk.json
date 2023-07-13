@@ -1018,12 +1018,12 @@
         "shimmer-info": {
             "title": "Про Shimmer",
             "body1": "Вітаємо, ви отримали токени SMR як винагороду за ставку. Shimmer — це заохочувана мережа для тестування основних оновлень IOTA.",
-            "body2": "Ми прагнемо запустити Shimmer у 2022 році. Ваші токени стануть доступними для передачі після запуску мережі."
+            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
         },
         "assembly-info": {
             "title": "Про Assembly",
             "body1": "Вітаємо, ви отримали токени ASMB як винагороду за ставку. Assembly — це багатоланцюгова мережа для розгортання масштабованих смарт-контрактів на IOTA.",
-            "body2": "Ми прагнемо запустити Assembly у 2022 році. Ваші токени стануть доступними для передачі після запуску мережі."
+            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
         },
         "confirmDeveloperProfile": {
             "title": "You are creating a developer profile",

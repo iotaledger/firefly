@@ -205,7 +205,7 @@
             "body": "Firefly가 Ledger 장치를 발견하려면, 공식 Ledger Live 애플리케이션이 반드시 종료된 상태여야 합니다.",
             "connect": "Connect your Ledger device",
             "unlock": "Unlock your Ledger with its pin",
-            "openApp": "Ledger에서 새로운 Shimmer 앱을 여세요.",
+            "openApp": "Open the Shimmer app on your Ledger",
             "tips": "Ledger 연결이 잘 되지 않을 때 참고할 도움말"
         },
         "restoreFromFireflyLedger": {
@@ -464,11 +464,11 @@
                 "hardware": {
                     "title": "하드웨어 장치",
                     "statuses": {
-                        "appNotOpen": "Ledger의 잠금이 풀렸으나 앱이 열리지 않았습니다",
-                        "correctAppOpen": "Ledger 잠금이 풀렸으며 앱이 열렸습니다 ",
-                        "locked": "Ledger가 안전하게 잠겼습니다",
+                        "appNotOpen": "Ledger unlocked but app not open",
+                        "correctAppOpen": "Ledger unlocked and app open ",
+                        "locked": "Ledger securely locked",
                         "mnemonicMismatch": "잘못된 Ledger 또는 Mnemonic",
-                        "notConnected": "Ledger에 연결되지 않았습니다",
+                        "notConnected": "Ledger not connected",
                         "otherConnected": "앱 열림"
                     }
                 },
@@ -949,12 +949,12 @@
             "confirm": "진행하기 위해서 Ledger 장치에 표시된 안내를 확인하세요."
         },
         "ledgerAppGuide": {
-            "title": "{legacy} 앱 설치 가이드",
+            "title": "Guide to installing the {legacy} app",
             "steps": {
                 "0": "Ledger Live 앱을 설치하고 여세요.",
                 "1": "Ledger가 연결되어 있는지 확인하세요.",
-                "2": "{legacy} 앱을 검색하세요. Ledger Live 개발자 모드를 활성화해야 할 수도 있습니다.",
-                "3": "{legacy} 앱 설치",
+                "2": "Search for the {legacy} app. You may need to enable Ledger Live developer mode.",
+                "3": "Install the {legacy} app",
                 "4": "Firfly로 돌아가기 전에 Ledger Live를 종료하는 것이 중요하다는 것을 기억하세요."
             }
         },
@@ -1018,12 +1018,12 @@
         "shimmer-info": {
             "title": "Shimmer에 대하여",
             "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
-            "body2": "Shimmer의 출발은 2022년을 목표로 하고 있습니다. 여러분의 토큰은 네트워크가 열리면 즉시 전송할 수 있게됩니다."
+            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
         },
         "assembly-info": {
             "title": "Assemby에 대하여",
             "body1": "축하합니다. ASMB 토큰을 staking 보상으로 획득하셨습니다. Assembly는 다중체인 네트워크로 IOTA에서 확장성 있는 스마트 컨트랙트를 배포할 수 있습니다.",
-            "body2": "Assembly의 출발은 2022년을 목표로 하고 있습니다. 여러분의 토큰은 네트워크가 열리면 즉시 전송할 수 있게됩니다."
+            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
         },
         "confirmDeveloperProfile": {
             "title": "개발자 프로필을 생성하고 있습니다",
@@ -1207,7 +1207,7 @@
         "dismiss": "무시하기",
         "claim": "Claim",
         "claiming": "Claiming",
-        "claimingRewards": "보상 요청 중",
+        "claimingRewards": "Claiming rewards",
         "reject": "Reject",
         "confirmRejection": {
             "title": "Reject transaction",
@@ -1369,10 +1369,10 @@
         "burnToken": "Burn token",
         "faucetRequest": "Get {token} tokens",
         "refreshTokenMetadata": "Refresh token metadata",
-        "test": "테스트",
-        "testDeepLink": "딥 링크 테스트",
-        "initialize": "초기화",
-        "initializing": "초기화 중",
+        "test": "Test",
+        "testDeepLink": "Test deep link",
+        "initialize": "Initialize",
+        "initializing": "Initializing",
         "delete": "Delete",
         "remove": "Remove",
         "addReference": "Add reference",
@@ -1424,8 +1424,8 @@
         "transferringNft": "Transferring NFT",
         "mintedNft": "Minted NFT",
         "mintingNft": "Minting NFT",
-        "shimmerClaimed": "받음",
-        "shimmerClaiming": "받는 중",
+        "shimmerClaimed": "Claimed",
+        "shimmerClaiming": "Claiming",
         "shimmerGenesis": "Shimmer Genesis",
         "minted": "Minted",
         "minting": "Minting",
@@ -1617,7 +1617,7 @@
         "developerTools": "Developer tools",
         "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
         "url": "URL",
-        "hash": "해시",
+        "hash": "Hash",
         "creating": "Creating",
         "updating": "Updating",
         "enterAddress": "Enter address",
@@ -2229,7 +2229,7 @@
         "wallet": "Wallet",
         "collectibles": "Collectibles",
         "governance": "Governance",
-        "developer": "개발자",
+        "developer": "Developer",
         "tokens": "토큰",
         "activity": "활동"
     },

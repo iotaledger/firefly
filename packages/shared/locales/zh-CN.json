@@ -7,25 +7,25 @@
                     "body": "Firefly is the official wallet software for {network}."
                 },
                 "legal": {
-                    "title": "隐私政策和服务条款",
-                    "body": "请查看隐私政策和服务条款。",
-                    "checkbox": "我已通读并接受隐私政策和服务条款"
+                    "title": "Privacy Policy & Terms of Service",
+                    "body": "Please review the Privacy Policy and Terms of Service.",
+                    "checkbox": "I've read and I accept the Privacy Policy and Terms of Service"
                 },
                 "languageAndAppearance": {
-                    "title": "语言和外观",
-                    "body": "选择您的语言和主题."
+                    "title": "Language & appearance",
+                    "body": "Choose your language and theme."
                 }
             },
             "networkSetup": {
                 "chooseProtocol": {
-                    "title": "选择协议",
-                    "body": "为您的个人资料设置协议.",
-                    "iota": "默认 IOTA 网络",
-                    "shimmer": "实验性 IOTA 先行网络"
+                    "title": "Choose protocol",
+                    "body": "Set the protocol for your profile.",
+                    "iota": "Default IOTA network",
+                    "shimmer": "Experimental IOTA staging network"
                 },
                 "chooseNetwork": {
-                    "title": "选择网络",
-                    "body": "为您的个人资料设置网络。",
+                    "title": "Choose network",
+                    "body": "Set the network for your profile.",
                     "iota": {
                         "title": "IOTA",
                         "body": "IOTA Mainnet"
@@ -54,128 +54,128 @@
                     "body": "Select the appropriate method to set up your {network} profile."
                 },
                 "setupNew": {
-                    "title": "创建个人资料",
-                    "body": "您可以选择一个通用的软件钱包，或者如果您有一个Ledger设备，您可以设置一个硬件钱包。",
+                    "title": "Create a profile",
+                    "body": "You can choose a regular software wallet, or if you have a Ledger device, you can set up a hardware wallet.",
                     "softwareAccount": {
-                        "title": "创建一个软件钱包档案",
-                        "description": "提供一个 Stronghold 文件和恢复短语"
+                        "title": "Create a software profile",
+                        "description": "Provides a Stronghold file and recovery phrase"
                     },
                     "ledgerAccount": {
-                        "title": "创建一个硬件钱包档案",
-                        "description": "需要Ledger Nano S 或 Nano X"
+                        "title": "Create a hardware profile",
+                        "description": "Ledger Nano S or Nano X required"
                     }
                 },
                 "setupRecovered": {
                     "title": "Recover {network} profile",
-                    "body": "如果您有一个现有的助记符或 Stronghold 备份文件，您可以在此处导入。",
-                    "importMnemonic": "使用恢复密语",
-                    "importMnemonicDescription": "输入您的 24 个单词组成的助记词",
-                    "importFile": "使用 Stronghold 备份文件",
-                    "importFileDescription": "导入您的 Stronghold 备份文件",
-                    "importLedger": "使用Ledger硬件钱包",
-                    "importLedgerDescription": "从您的 Ledger Nano S 或 X 设备恢复"
+                    "body": "If you have an existing mnemonic or Stronghold backup file, you can import it here.",
+                    "importMnemonic": "Use recovery phrase",
+                    "importMnemonicDescription": "Enter your 24-word mnemonic phrase",
+                    "importFile": "Use Stronghold backup",
+                    "importFileDescription": "Import your Stronghold backup file",
+                    "importLedger": "Use Ledger device",
+                    "importLedgerDescription": "Restore from your Ledger Nano S or X device"
                 },
                 "setupClaimed": {
-                    "title": "认领您的 Shimmer 质押奖励",
-                    "body": "导入您的 IOTA个人资料并领取您的 Shimmer 质押奖励。"
+                    "title": "Claim Shimmer staking rewards",
+                    "body": "Import your IOTA profile and claim your Shimmer staking rewards."
                 },
                 "enterName": {
                     "title": "Create your {network} profile",
-                    "profileName": "配置名称",
-                    "body1": "您可以创建多个用户配置文件来管理您的钱包和改善隐私。",
+                    "profileName": "Profile name",
+                    "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
                     "body2": {
-                        "first": "现在，让我们从您的第一个配置文件的名称开始。",
-                        "nonFirst": "现在，让我们从您的配置名称开始。"
+                        "first": "For now, let's start with your first profile name.",
+                        "nonFirst": "For now, let's start with your profile name."
                     },
-                    "addMore": "您可以稍后添加更多的配置文件。"
+                    "addMore": "You can add more profiles later."
                 }
             },
             "strongholdSetup": {
                 "setupStrongholdPassword": {
-                    "title": "创建密码",
-                    "body1": "您需要一个强健的密码来保护您的资金。譬如使用一种单词的组合，并避免常见的短语，名称或日期。",
-                    "body2": "建议您在Recovery Kit中抄写下您的密码。"
+                    "title": "Create a password",
+                    "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
+                    "body2": "It is recommended that you write down your password in your Recovery Kit."
                 }
             },
             "storageProtectionSetup": {
                 "setupPinProtection": {
-                    "title": "设置 PIN 码",
-                    "body1": "请在下方输入 6 位数字作为 PIN 码。您在登录钱包时会被要求输入您设置的 PIN 码。",
-                    "body2": "仅限数字"
+                    "title": "Set up PIN code",
+                    "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
+                    "body2": "Use numbers only"
                 }
             },
             "profileBackup": {
                 "backupMnemonic": {
-                    "title": "保存您的恢复短语",
-                    "body1": "您现在将看到您的钱包恢复助记词。请将它们抄写在您的Recovery Kit中。",
-                    "body2": "请勿与任何人分享您的钱包恢复助记词。因为这些助记词会让别人从任何地方查看并转移走您的代币。",
-                    "body3": "如果您丢失了恢复密语，您很可能会丢失您的资金。"
+                    "title": "Back up your recovery phrase",
+                    "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
+                    "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
+                    "body3": "If you lose your recovery phrase, you may lose your funds."
                 },
                 "viewMnemonic": {
-                    "title": "恢复助记词",
-                    "body1": "在您的Recovery Kit中，按显示的准确顺序填写单词。",
-                    "body2": "秘密保管并安全存储",
-                    "body3": "一个书面备份非常重要。计算机常常会出错，文件可能损坏。",
-                    "revealRecoveryPhrase": "显示恢复密语",
-                    "hideRecoveryPhrase": "隐藏恢复密语"
+                    "title": "Recovery phrase",
+                    "body1": "In your Recovery Kit, write down the words in the exact order shown.",
+                    "body2": "Keep this private and safely stored.",
+                    "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
+                    "revealRecoveryPhrase": "Reveal recovery phrase",
+                    "hideRecoveryPhrase": "Hide recovery phrase"
                 },
                 "verifyMnemonic": {
-                    "title": "验证恢复密语",
-                    "body": "让我们检查您是否正确地写下了短语。请按编号顺序选择每个单词。 提示：您可以点击键盘中单词旁边的数字来选择它。",
-                    "word": "单词",
-                    "verified": "恢复密语已验证",
-                    "verifiedBody": "请记住将它秘密保管和安全存储。"
+                    "title": "Verify recovery phrase",
+                    "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order. Tip: You can press the number next to the word in your keyboard to select it.",
+                    "word": "Word",
+                    "verified": "Recovery phrase verified",
+                    "verifiedBody": "Remember to keep it private and safely stored."
                 },
                 "backupStronghold": {
-                    "title": "备份到 Stronghold 文件",
-                    "body1": "输入您的密码以创建您的配置文件的 Stronghold 备份。您的密码用于加密备份文件。",
-                    "body2": "数字备份的重要原因：",
-                    "reason1": "不需要输入您的恢复密语就能轻松恢复您的钱包",
-                    "reason2": "在其他设备上导入您的钱包",
-                    "reason3": "恢复您的全部交易记录"
+                    "title": "Back up to a Stronghold file",
+                    "body1": "Enter your password to create a Stronghold backup of your profile. Your password is used to encrypt the backup file.",
+                    "body2": "Reasons why digital backups are important:",
+                    "reason1": "Easily recover your wallets without typing in your recovery phrase",
+                    "reason2": "Import your wallets on other devices",
+                    "reason3": "Recover your full transaction history"
                 }
             },
             "profileRecovery": {
                 "importMnemonicPhrase": {
-                    "title": "输入您的恢复短语",
-                    "body": "一个恢复短语有24个字，全部为小写，中间有空格。这用于恢复现有的 Firefly 配置文件。",
-                    "enter": "输入您的恢复短语",
-                    "phraseDetected": "检测到24个单词恢复密语"
+                    "title": "Enter your recovery phrase",
+                    "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly profiles.",
+                    "enter": "Enter your secret recovery phrase",
+                    "phraseDetected": "24 word recovery phrase detected"
                 },
                 "importStrongholdBackup": {
-                    "title": "导入您的 Stronghold 备份文件",
-                    "body": "导入 StrongHold 备份文件以恢复您的配置。"
+                    "title": "Import your Stronghold backup",
+                    "body": "Import a Stronghold backup file to restore your profile."
                 },
                 "backupPassword": {
-                    "body1": "请输入您的备份密码",
-                    "body2": "这是您首次创建备份时设置的密码。"
+                    "body1": "Please enter your backup password.",
+                    "body2": "This is the password you set when you first created your backup."
                 },
                 "success": {
-                    "title": "您已成功恢复您的备份。",
-                    "body": "您现在可以设置新的配置文件。"
+                    "title": "You have successfully recovered your backup",
+                    "body": "You can now set up your new profile."
                 }
             },
             "shimmerClaiming": {
                 "claimRewards": {
-                    "title": "您的 Shimmer 质押奖励",
-                    "body": "检查你的 Shimmer 质押奖励是否正确。你可能需要多次搜索才能找到你的全部余额。"
+                    "title": "Your Shimmer staking rewards",
+                    "body": "Check that your Shimmer staking rewards are correct. You may need to search multiple times to find your full balance."
                 },
                 "success": {
-                    "title": "已认领 Shimmer",
-                    "body": "您已成功认领了您的 Shimmer 代币。",
-                    "totalRewards": "奖励总额",
+                    "title": "Shimmer claimed",
+                    "body": "You have successfully claimed your Shimmer tokens.",
+                    "totalRewards": "Total rewards",
                     "successfullyFound": "Successfully found {amount}"
                 }
             },
             "congratulations": {
-                "title": "配置文件设置快要完成...",
-                "fundsMigrated": "资金已迁移",
-                "body": "一旦仪表板成功加载，你的新配置文件就会准备就绪。",
-                "ledgerHint": "在仪表盘加载完成之前，请不要断开您的Ledger设备。",
-                "softwareMigratedBody": "您已成功地将您的资金迁移到新的网络",
-                "fireflyLedgerBody": "您的 Ledger 配置文件已成功恢复，您现在可以继续。",
-                "trinityLedgerBody": "您已成功地将 Ledger 迁移到新的网络。",
-                "exportMigration": "导出迁移日志并完成设置"
+                "title": "Profile setup almost complete...",
+                "fundsMigrated": "Funds migrated",
+                "body": "Your new profile will be ready once the dashboard has successfully loaded.",
+                "ledgerHint": "Do not disconnect your Ledger device until the dashboard has finished loading.",
+                "softwareMigratedBody": "You have successfully migrated your funds to the new network",
+                "fireflyLedgerBody": "Your Ledger profile was successfully recovered and you can now continue.",
+                "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
+                "exportMigration": "Export migration log and finish setup"
             }
         },
         "setupLedger": {
@@ -203,9 +203,9 @@
         "connectLedger": {
             "title": "将您的账单连接到Fifly",
             "body": "为了让Firefly找到的您的Ledger设备，请确保官方的Ledger Live应用程序已关闭。",
-            "connect": "连接您的 Ledger 设备",
-            "unlock": "用密码解锁你的 Ledger",
-            "openApp": "在您的Ledger上打开 Shimmer 应用",
+            "connect": "Connect your Ledger device",
+            "unlock": "Unlock your Ledger with its pin",
+            "openApp": "Open the Shimmer app on your Ledger",
             "tips": "Ledger无法连接时的处理技巧"
         },
         "restoreFromFireflyLedger": {
@@ -246,8 +246,8 @@
         "settings": {
             "settings": "设置",
             "general": {
-                "title": "常规",
-                "description": "配置您的应用外观和其他常规设置"
+                "title": "General",
+                "description": "Configure your app's appearance and other general settings"
             },
             "profile": {
                 "title": "个人档案",
@@ -264,8 +264,8 @@
                 "description": "更改您的密码并调整安全相关的设置"
             },
             "advanced": {
-                "title": "高级",
-                "description": "技术用户的工具和手动设置"
+                "title": "Advanced",
+                "description": "Tools and manual settings for technical users"
             },
             "helpAndInfo": {
                 "title": "帮助和信息",
@@ -309,8 +309,8 @@
                 "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
-                "title": "最大文件大小",
-                "description": "尺寸大于此限制的NFT 媒体将不会下载，代表媒体类型的占位符将会被显示。"
+                "title": "Maximum media size",
+                "description": "NFT media with sizes greater than this limit will not be downloaded and a placeholder representing the media type will be displayed instead"
             },
             "maxMediaDownloadTime": {
                 "title": "Maximum download time",
@@ -338,8 +338,8 @@
                 "success": "您更改了您的配置文件名称"
             },
             "walletFinder": {
-                "title": "钱包查找器",
-                "description": "对您以前使用过的钱包进行扩展搜索"
+                "title": "Wallet finder",
+                "description": "Perform an extended search of your previously used wallets"
             },
             "hiddenAccounts": {
                 "title": "隐藏钱包列表",
@@ -350,8 +350,8 @@
                 "description": "删除您的整个账户信息、钱包和交易历史。请确保您有一个备份"
             },
             "deepLinks": {
-                "title": "深链接",
-                "description": "当点击开始于 {appProtocol}:// 的深链接时自动填充交易数据"
+                "title": "Deep links",
+                "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
             "networkInformation": {
                 "title": "Network information",
@@ -365,8 +365,8 @@
                 "includeNode": "包含此节点",
                 "editDetails": "编辑详情",
                 "viewInfo": "查看信息",
-                "setAsPrimary": "设为主节点",
-                "unsetAsPrimary": "清除主节点",
+                "setAsPrimary": "Set primary node",
+                "unsetAsPrimary": "Clear primary node",
                 "removeNode": "移除节点",
                 "includeOfficialNodeList": "包含官方节点列表",
                 "noNodes": "没有节点，无法连接到网络",
@@ -431,30 +431,30 @@
         },
         "loadProfile": {
             "loginSteps": {
-                "buildProfileManager": "初始化配置文件管理器",
-                "updateNodeInfo": "检查节点健康状况",
-                "recoverAccounts": "正在生成帐户",
-                "loadAccounts": "正在同步账户",
-                "loadAssets": "正在加载本地资源",
-                "loadActivities": "正在构建事务日志",
-                "setStrongholdStatus": "正在加固 Stronghold",
-                "startBackgroundSync": "开始后台同步",
-                "loggingIn": "加载仪表盘"
+                "buildProfileManager": "Initialising profile manager",
+                "updateNodeInfo": "Checking node health",
+                "recoverAccounts": "Generating accounts",
+                "loadAccounts": "Syncing accounts",
+                "loadAssets": "Loading native assets",
+                "loadActivities": "Building activity history",
+                "setStrongholdStatus": "Securing stronghold",
+                "startBackgroundSync": "Starting background sync",
+                "loggingIn": "Loading dashboard"
             }
         },
         "dashboard": {
             "network": {
-                "operational": "网络运行",
-                "degraded": "网络已降级",
-                "down": "网络中断",
-                "disconnected": "从节点断开连接",
+                "operational": "Network operational",
+                "degraded": "Network degraded",
+                "down": "Network down",
+                "disconnected": "Disconnected from node",
                 "status": "状态",
                 "messagesPerSecond": "每秒信息数",
                 "referencedRate": "确认率"
             },
             "profileModal": {
-                "allSettings": "所有设置",
-                "profileApplication": "档案、应用、安全",
+                "allSettings": "All settings",
+                "profileApplication": "Profile, application, security",
                 "logout": "退出账号",
                 "stronghold": {
                     "title": "配置文件锁定",
@@ -464,11 +464,11 @@
                 "hardware": {
                     "title": "硬件设备",
                     "statuses": {
-                        "appNotOpen": "Ledger已解锁，但应用程序未打开",
-                        "correctAppOpen": "Ledger 已解锁，应用程序已打开 ",
-                        "locked": "Ledger 已安全锁定",
+                        "appNotOpen": "Ledger unlocked but app not open",
+                        "correctAppOpen": "Ledger unlocked and app open ",
+                        "locked": "Ledger securely locked",
                         "mnemonicMismatch": "错误的Ledger设备或助记词",
-                        "notConnected": "Ledger 未连接",
+                        "notConnected": "Ledger not connected",
                         "otherConnected": "应用打开"
                     }
                 },
@@ -573,7 +573,7 @@
                 "totalWalletRewards": "钱包累计奖励",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly是一个无需许可的、高度可扩展的多链网络，用于构建和部署可组合的智能合约。Assembly是web3的未来。 "
+                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -593,68 +593,68 @@
         },
         "collectibles": {
             "gallery": {
-                "title": "合集",
-                "emptyTitle": "暂无合集",
-                "noResults": "没有结果",
-                "emptyDescription": "现在存入或接收你的第一个合集！"
+                "title": "Collectibles",
+                "emptyTitle": "No collectibles",
+                "noResults": "No results",
+                "emptyDescription": "Deposit or Receive your first collectible now!"
             },
             "details": {
-                "storageDepositDescription": "一个可退还的押金，用于将你的NFT易存储在Tangle上。",
-                "attributes": "属性",
+                "storageDepositDescription": "A refundable deposit required to store your NFT on the Tangle.",
+                "attributes": "Attributes",
                 "menu": {
-                    "download": "下载",
+                    "download": "Download",
                     "setPfp": "Set NFT profile pic",
                     "unsetPfp": "Unset NFT profile pic",
-                    "view": "在浏览器中查看",
-                    "burn": "烧毁 NFT"
+                    "view": "View media in browser",
+                    "burn": "Burn NFT"
                 }
             }
         },
         "governance": {
             "votingPower": {
-                "title": "投票权重",
-                "maximal": "最大投票权重: {value}",
-                "manage": "管理投票权重"
+                "title": "Voting power",
+                "maximal": "Maximal voting power: {value}",
+                "manage": "Manage voting power"
             },
             "proposalsDetails": {
-                "title": "详情",
-                "totalProposals": "所有提案",
-                "activeProposals": "现行提案",
-                "votingProposals": "您正在投票的提案",
-                "votedProposals": "您投票的所有提案"
+                "title": "Details",
+                "totalProposals": "Total proposals",
+                "activeProposals": "Active proposals",
+                "votingProposals": "Proposals you are voting on",
+                "votedProposals": "Total proposals you voted on"
             },
             "proposals": {
-                "title": "提案",
-                "voted": "已投票",
+                "title": "Proposals",
+                "voted": "Voted",
                 "successEdit": "Proposal successfully edited",
                 "successAdd": "{numberOfProposals, select, one {Proposal} other {Proposals}} successfully added",
                 "successAddAll": "{numberOfProposals, select, one {Proposal} other {Proposals}} successfully added to all accounts",
-                "successRemove": "提案成功移除",
-                "emptyTitle": "暂无提案"
+                "successRemove": "Proposal successfully removed",
+                "emptyTitle": "No proposals"
             },
             "statusTimeline": {
-                "upcoming": "通知",
-                "commencing": "投票开放",
-                "holding": "计数开始",
-                "ended": "计数停止"
+                "upcoming": "Announcement",
+                "commencing": "Voting open",
+                "holding": "Counting starts",
+                "ended": "Counting stops"
             },
             "details": {
                 "yourVote": {
-                    "title": "您的投票",
-                    "total": "已计总票数",
-                    "power": "投票权重"
+                    "title": "Your vote",
+                    "total": "Total votes counted",
+                    "power": "Voting power"
                 },
                 "proposalInformation": {
-                    "title": "提案信息",
-                    "votingOpens": "投票开始于",
-                    "countingStarts": "计数开始于",
-                    "countingEnds": "计数结束于",
-                    "countingEnded": "计数结束于",
+                    "title": "Proposal information",
+                    "votingOpens": "Voting opens on",
+                    "countingStarts": "Counting starts on",
+                    "countingEnds": "Counting ends on",
+                    "countingEnded": "Counting ended on",
                     "eventId": "Event ID",
-                    "nodeUrl": "节点 URL"
+                    "nodeUrl": "Node URL"
                 },
-                "fetching": "正在获取提案数据",
-                "hintVote": "您不能对处于宣布阶段的提案进行投票，投票将在 {time} 进行。"
+                "fetching": "Fetching proposal data",
+                "hintVote": "You can not vote on a proposal that is in the announcement phase, voting will open in {time}."
             }
         },
         "updateStronghold": {
@@ -677,12 +677,12 @@
     },
     "popups": {
         "enableLedgerBlindSigning": {
-            "title": "启用 Blind 签名",
-            "info": "为了确认此交易，您需要在您的ledger设备上启用 Blind 签名。",
-            "step_1": "连接并解锁您的 Ledger 设备",
-            "step_2": "打开 Shimmer 应用程序",
-            "step_3": "按右键导航到设置。然后按两个按钮进行验证。您的Ledger设备显示Blind签名。",
-            "step_4": "按两个按钮以启用交易盲签。设备显示已启用。您已完成。"
+            "title": "Enable Blind Signing",
+            "info": "In order to confirm this transaction you need to enable Blind Signing on your ledger device.",
+            "step_1": "Connect and unlock your Ledger Device",
+            "step_2": "Open Shimmer Application",
+            "step_3": "Press the right button to navigate to Settings. Then press both buttons to validate. Your Ledger device displays Blind Signing.",
+            "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
         },
         "balanceBreakdown": {
             "title": "Balance breakdown",
@@ -741,16 +741,16 @@
             "minimizeStorageDepositButton": "Minimize storage deposit"
         },
         "minimizeStorageDeposit": {
-            "title": "最小化存储押金",
-            "description": "合并输出以尽量减少您所需的存储押金并增加您可用的余额。",
-            "confirmButton": "合并"
+            "title": "Minimize storage deposit",
+            "description": "Consolidate outputs to minimize your required storage deposit and increase your available balance.",
+            "confirmButton": "Consolidate"
         },
         "alias": {
-            "title": "确认别名创建"
+            "title": "Confirm alias creation"
         },
         "password": {
             "title": "需要输入密码",
-            "subtitle": "请输入您的密码来解锁您的钱包",
+            "subtitle": "Please provide your password to unlock your wallets",
             "backup": "请输入您的密码以导出备份"
         },
         "qr": {
@@ -770,16 +770,16 @@
             "latestInstalled": "You are running the latest and safest version"
         },
         "backupStronghold": {
-            "title": "备份 Stronghold 文件",
-            "body": "定期备份你的钱包很重要，这样可以确保你有一个钱包和交易记录的副本。如果你失去了你的备份和恢复短语，你将失去对资金的访问权限。"
+            "title": "Backup your stronghold file",
+            "body": "It is important to back up your wallet regularly to ensure you have a copy of your wallets and transaction history. If you lose your backup and recovery phrase you will lose access to your funds."
         },
         "deeplinkAccountSwitch": {
-            "title": "选择钱包",
-            "body": "您刚刚激活了一个深链接。请选择您想要继续的钱包。"
+            "title": "Select a wallet",
+            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
         },
         "deeplinkError": {
-            "title": "失败的链接",
-            "body": "此链接失败或无效。请重试或再次检查链接的来源。"
+            "title": "Failed link",
+            "body": "This link failed or is invalid. Please try again or double check the source of the link."
         },
         "deleteAccount": {
             "title": "删除{name}?",
@@ -791,11 +791,11 @@
             "errorBody1": "您不能删除这个钱包，您必须至少有一个钱包"
         },
         "externalUrl": {
-            "title": "在浏览器中打开",
-            "body": "您确定要在浏览器中打开 \"{url}\" 吗？",
-            "hint": "此 URL 在Firefly未知。请在打开前重新检查URL。",
-            "action": "打开 URL",
-            "invalidProtocol": "无法打开含有无效协议的 URL"
+            "title": "Open URL in Browser",
+            "body": "Are you sure you want to open \"{url}\" in the browser?",
+            "hint": "This URL is unknown to Firefly. Please double check the URL before opening it.",
+            "action": "Open URL",
+            "invalidProtocol": "Cannot open URL with invalid protocol"
         },
         "hideAccount": {
             "title": "是否隐藏 {name}？",
@@ -814,12 +814,12 @@
             "external": "充值地址"
         },
         "excludeNode": {
-            "title": "排除节点",
-            "body": "您确定要将 {url} 排除在可用节点池之外吗？"
+            "title": "Exclude node",
+            "body": "Are you sure you want to exclude {url} from the available node pool?"
         },
         "unsetAsPrimaryNode": {
-            "title": "清除主节点",
-            "body": "您确定要清除 {url} 作为主节点吗？"
+            "title": "Clear primary node",
+            "body": "Are you sure you want to clear {url} as the primary node?"
         },
         "node": {
             "titleAdd": "添加节点",
@@ -827,7 +827,7 @@
             "titleRemove": "删除节点",
             "titleRemoveAll": "删除所有节点",
             "titleDetails": "节点详细信息",
-            "titleInfo": "节点信息",
+            "titleInfo": "Node information",
             "addingNode": "添加节点",
             "updatingNode": "更新节点",
             "loadingNodeInfo": "加载节点信息",
@@ -839,39 +839,39 @@
             "removeConfirmation": "您确定要删除此节点吗？",
             "info": {
                 "general": {
-                    "tab": "常规",
-                    "name": "名称",
+                    "tab": "General",
+                    "name": "Name",
                     "url": "URL",
-                    "version": "版本",
-                    "latestMilestone": "最新里程碑",
-                    "confirmedMilestone": "已确认里程碑",
-                    "pruningIndex": "裁剪索引",
-                    "features": "特性"
+                    "version": "Version",
+                    "latestMilestone": "Latest milestone",
+                    "confirmedMilestone": "Confirmed milestone",
+                    "pruningIndex": "Pruning index",
+                    "features": "Features"
                 },
                 "metrics": {
-                    "tab": "指标",
-                    "blocksPerSecond": "每秒块数",
-                    "referencedBlocksPerSecond": "每秒被引用块数",
-                    "referencedRate": "引用率",
-                    "latestMilestone": "最新里程碑",
-                    "confirmedMilestone": "已确认里程碑"
+                    "tab": "Metrics",
+                    "blocksPerSecond": "Blocks per second",
+                    "referencedBlocksPerSecond": "Referenced blocks per second",
+                    "referencedRate": "Referenced rate",
+                    "latestMilestone": "Latest milestone",
+                    "confirmedMilestone": "Confirmed milestone"
                 },
                 "protocol": {
-                    "tab": "协议",
-                    "network": "网络",
+                    "tab": "Protocol",
+                    "network": "Network",
                     "bech32Hrp": "Bech32 HRP",
-                    "tokenSupply": "代币供应",
-                    "version": "版本",
-                    "minPowScore": "PoW 最低分"
+                    "tokenSupply": "Token supply",
+                    "version": "Version",
+                    "minPowScore": "Min PoW Score"
                 },
                 "baseToken": {
-                    "tab": "基本代币",
-                    "token": "代币",
-                    "tickerSymbol": "缩写符号",
-                    "unit": "单位",
-                    "subunit": "子单位",
-                    "decimals": "小数位数",
-                    "useMetricPrefix": "使用指标前缀"
+                    "tab": "Base token",
+                    "token": "Token",
+                    "tickerSymbol": "Ticker",
+                    "unit": "Unit",
+                    "subunit": "Sub-unit",
+                    "decimals": "Decimals",
+                    "useMetricPrefix": "Use metric prefix"
                 }
             }
         },
@@ -903,23 +903,23 @@
             "userPath": "用户路径"
         },
         "transaction": {
-            "title": "发送资产",
+            "title": "Send asset",
             "body": "您将要发送 {amount} 到",
             "selectToken": "Select a token",
             "selectAmount": "Send {tokenName}",
             "selectRecipient": "Send {assetName} to",
             "transactionSummary": "Transaction to {recipient}",
-            "surplusIncluded": "此交易包含一个剩余的金额。请仔细检查这是你要发送的金额。",
+            "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
             "sendingFromStakedAccount": "您正在从目前正在质押的钱包中发送转账。这可能会取消质押您的令牌。 您可以随时发送传输，但您可能需要稍后重新质押您剩余的代币。",
             "sendingFromStakedAccountBelowMinReward": "你正在从一个尚未达到最低质押奖励的钱包发送转账。这可能会解除你在这个钱包的代币质押而失去你的抵押奖励。"
         },
         "walletFinder": {
-            "title": "钱包查找器",
-            "body": "对地址进行更详尽的搜索，以找到丢失的余额和钱包。",
-            "accountsSearched": "已搜索钱包",
-            "accountsFound": "找到钱包",
-            "totalWalletBalance": "总余额",
-            "searchAgainHint": "你的余额或钱包数量不正确吗？再次搜索，直到显示你的全部余额。"
+            "title": "Wallet finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances and wallets.",
+            "accountsSearched": "Wallets searched",
+            "accountsFound": "Wallets found",
+            "totalWalletBalance": "Total balance",
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown."
         },
         "riskFunds": {
             "title": "警告：迁移过程面临风险的资金",
@@ -939,22 +939,22 @@
             "bodyFirefly": "在完成之前Firefly将被暂停使用。完成之后您仍然可以进行代币迁移。"
         },
         "ledgerNotConnected": {
-            "title": "连接您的Ledger",
-            "notConnected": "连接您的Ledger设备以继续。",
-            "locked": "解锁您的Ledger设备以继续。",
+            "title": "Connect your Ledger",
+            "notConnected": "Connect your Ledger device to continue.",
+            "locked": "Unlock your Ledger device to continue.",
             "appNotOpen": "Open the Shimmer app on your Ledger device to continue.",
-            "correctAppOpen": "Ledger连接成功，请继续。"
+            "correctAppOpen": "Ledger successfully connected, please continue."
         },
         "ledgerConfirmation": {
             "confirm": "若要继续，请确认Ledger设备上的弹出窗口"
         },
         "ledgerAppGuide": {
-            "title": "{legacy} 应用安装指南",
+            "title": "Guide to installing the {legacy} app",
             "steps": {
                 "0": "安装并打开 Ledger Live 应用程序",
                 "1": "请确保您的Ledger设备已连接",
-                "2": "搜索 {legacy} 应用。您可能需要启用 Ledger Live 开发者模式。",
-                "3": "安装 {legacy} 应用程序",
+                "2": "Search for the {legacy} app. You may need to enable Ledger Live developer mode.",
+                "3": "Install the {legacy} app",
                 "4": "请记住，在返回Fifly之前关闭Ledger Live是非常重要的"
             }
         },
@@ -971,13 +971,13 @@
             }
         },
         "verifyLedgerTransaction": {
-            "title": "验证交易",
-            "info": "将你的 ledger 设备上显示的交易信息与以下信息进行比较并确认。"
+            "title": "Verify transaction",
+            "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
         },
         "verifyInternalLedgerTransaction": {
-            "title": "验证内部交易",
-            "info": "请在ledger上确认您的内部交易。",
-            "hint": "当发送内部交易时，所有资产都将留在你的钱包中。"
+            "title": "Verify internal transaction",
+            "info": "Please confirm the internal transaction on your ledger.",
+            "hint": "All assets will remain on your wallet when sending an internal transaction."
         },
         "ledgerAddress": {
             "title": "确认接收地址",
@@ -1000,7 +1000,7 @@
             "totalFundsStaked": "总质押资金",
             "stakedSuccessfully": "您的资金已经为 {account} 进行质押。",
             "unstakedSuccessfully": "您已经为 {account} 的资金取消了质押。",
-            "singleAccountHint": "寻找您的钱包？Firefly 已经改版。请在顶部菜单栏中切换您的钱包。"
+            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
         },
         "stakingConfirmation": {
             "title": "确认参与",
@@ -1018,12 +1018,12 @@
         "shimmer-info": {
             "title": "关于 Shimmer",
             "body1": "恭喜您已经获得SMR代币作为质押奖励。Shimmer 是一个激励性的阶段性网络，用于测试IOTA上的重大升级。",
-            "body2": "我们的目标是在2022年启动Shimmer。一旦网络启动，您的代币将可进行传输。"
+            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
         },
         "assembly-info": {
             "title": "关于Assembly",
             "body1": "恭喜您获得的 ASMB 代币作为质押奖励。Assembly 是一个在IOTA上部署的可缩放的智能合约的多链网络。",
-            "body2": "我们的目标是在2022年启动Assembly。一旦网络启动，您的代币将可进行传输。"
+            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
         },
         "confirmDeveloperProfile": {
             "title": "您正在创建一个开发者配置",
@@ -1050,58 +1050,58 @@
             "hint": "找不到钱包？使用设置中的余额查找器来找回以前使用过的钱包。"
         },
         "transactionDetails": {
-            "title": "交易详情",
+            "title": "Transaction details",
             "giftedStorageDeposit": {
                 "tooltipTitle": "Gift storage deposit",
                 "tooltipDescription": "Amount kept by the recipient"
             }
         },
         "sendForm": {
-            "title": "发送资金"
+            "title": "Send funds"
         },
         "tokenInformation": {
-            "newTokenTitle": "新的代币",
-            "verificationWarning": "此代币未验证。请将代币的元数据与相应团队的官方网站进行比较。请只验证被您信任的代币。",
+            "newTokenTitle": "New token",
+            "verificationWarning": "This token is unverified. Compare the token metadata against the relevant team’s official website. Only verify tokens that you trust.",
             "tokenMetadata": {
-                "standard": "标准",
-                "name": "名称",
-                "tokenId": "代币 ID",
-                "url": "网址"
+                "standard": "Standard",
+                "name": "Name",
+                "tokenId": "Token ID",
+                "url": "URL"
             },
             "buttons": {
-                "verifyToken": "我验证此代币"
+                "verifyToken": "I verify this token"
             }
         },
         "sendNft": {
-            "formTitle": "发送 NFT",
-            "confirmationTitle": "确认发送 NFT",
+            "formTitle": "Send NFT",
+            "confirmationTitle": "Confirm sending NFT",
             "property": {
                 "nft": "NFT"
             }
         },
         "nativeToken": {
-            "formTitle": "铸造原生代币",
-            "confirmationTitle": "铸造原生代币",
+            "formTitle": "Mint native tokens",
+            "confirmationTitle": "Mint native tokens",
             "property": {
-                "totalSupply": "总供应量",
-                "maximumSupply": "最大供应量",
-                "mintedTokens": "铸造代币",
-                "meltedTokens": "熔化代币",
-                "circulatingSupply": "流通供应量",
-                "aliasAddress": "别名控制器地址",
-                "standard": "标准",
-                "tokenName": "名称",
-                "unit": "单位",
-                "subunit": "子单位",
-                "storageDeposit": "存储押金",
-                "description": "描述",
-                "symbol": "符号",
-                "decimals": "小数位数",
+                "totalSupply": "Total supply",
+                "maximumSupply": "Maximum supply",
+                "mintedTokens": "Minted tokens",
+                "meltedTokens": "Melted tokens",
+                "circulatingSupply": "Circulating supply",
+                "aliasAddress": "Alias controller address",
+                "standard": "Standard",
+                "tokenName": "Name",
+                "unit": "Unit",
+                "subunit": "Subunit",
+                "storageDeposit": "Storage Deposit",
+                "description": "Description",
+                "symbol": "Symbol",
+                "decimals": "Decimals",
                 "url": "URL",
                 "logoUrl": "Logo URL",
                 "logo": "Logo",
-                "alias": "别名",
-                "assetId": "资产 Id"
+                "alias": "Alias",
+                "assetId": "Asset Id"
             }
         },
         "importErc20Token": {
@@ -1114,11 +1114,11 @@
             "error": "Unable to import ERC20 token"
         },
         "noAlias": {
-            "title": "不能锻造",
-            "description": "您必须拥有别名输出才能锻造原生代币。若要继续，请先创建别名。"
+            "title": "Unable to mint",
+            "description": "You must own an alias output to mint native tokens. To continue, please create an alias first"
         },
         "mintNftForm": {
-            "title": "锻造简单NFT",
+            "title": "Mint simple NFT",
             "errors": {
                 "invalidMimetype": "Invalid MimeType, check if the file type is supported",
                 "quantityTooSmall": "Quantity needs to be greater than 0",
@@ -1138,49 +1138,49 @@
             }
         },
         "faucetRequest": {
-            "title": "Faucet 请求",
-            "body": "您确定要从 {network} faucet中请求 {token} 代币吗？"
+            "title": "Faucet request",
+            "body": "Are you sure you want to request {token} tokens from the {network} faucet?"
         },
         "manageVotingPower": {
-            "title": "管理投票权重",
-            "body": "定义你对提案进行表决的投票权重。",
-            "hint": "你分配给投票的所有资金都被锁定。为了使它们再次被花费，你需要减少你的投票权。这将影响到所有有投票权的提案。",
-            "amountZero": "请注意，将您的投票权设置为零将停止您对目前正在投票的所有提案的投票。"
+            "title": "Manage voting power",
+            "body": "Define your voting power to vote on proposals.",
+            "hint": "All funds that you allocate to voting are locked. In order to make them spendable again, you need to decrease your voting power. This affects all proposals with an active vote.",
+            "amountZero": "Please be aware that setting your voting power to zero will stop all your votes for all proposals you are currently voting on."
         },
         "addProposal": {
-            "title": "增加提案",
-            "body": "请提供以下信息以添加提案。",
-            "addToAllAccounts": "将提案添加到所有账户"
+            "title": "Add proposal",
+            "body": "Please provide the information listed below to add a proposal.",
+            "addToAllAccounts": "Add the proposal to all accounts"
         },
         "editProposal": {
             "title": "Edit proposal",
             "body": "Please provide the new url for the node that contains this proposal."
         },
         "voteForProposal": {
-            "title": "对提案投票",
-            "body": "您即将投票给 {proposal} 提案。",
-            "key": "您的投票权",
-            "hasAbstained": "你正在弃权回答 {numberOfQuestions, plural, one {# 问题} other {# 问题}}.",
-            "noVotingPower": "您没有任何投票权。请从治理仪表板中增加您的投票权。"
+            "title": "Vote for proposal",
+            "body": "You're about to vote for {proposal} proposal.",
+            "key": "Your voting power",
+            "hasAbstained": "You are abstaining from answering {numberOfQuestions, plural, one {# question} other {# questions}}.",
+            "noVotingPower": "You do not have any voting power. Please increase your voting power from the Governance dashboard."
         },
         "revote": {
-            "title": "对提案重新表决",
-            "body": "更改您的投票权暂时停止您对所有建议的投票。只需点击“重新投票”即可继续投票。",
-            "hint": "Firefly 会记录你之前投票的所有提案和答案选项。"
+            "title": "Revote on proposals",
+            "body": "Changing your voting power temporarily stops your votes for all proposals from being counted. Simply click \"Revote\" to resume voting.",
+            "hint": "Firefly remembers all of the proposals and answer options you previously voted for."
         },
         "removeProposal": {
-            "title": "移除提案",
-            "body": "你确定要删除这个提案吗？",
-            "hint": "请注意，在计票期间删除提案将停止你的投票，但不会影响任何已经计算的投票。"
+            "title": "Remove proposal",
+            "body": "Are you sure you want to remove this proposal?",
+            "hint": "Please note that removing a proposal during the counting period will stop your votes but won't impact any votes that have already been counted."
         },
         "stopVoting": {
-            "title": "停止投票",
-            "body": "你将要为 {proposalName} 提案停止投票。",
-            "hint": "请注意，在计票期间停止投票不会影响任何已经计算过的投票。"
+            "title": "Stop voting",
+            "body": "You're about to stop voting for the {proposalName} proposal.",
+            "hint": "Please note that stopping voting during the counting period won't impact any votes that have already been counted."
         },
         "nodeAuthRequired": {
-            "title": "需要验证",
-            "body": "此节点需要额外的验证。请填写适当的信息。"
+            "title": "Authentication required",
+            "body": "This node requires additional authentication. Please fill in the appropriate information."
         }
     },
     "charts": {
@@ -1197,7 +1197,7 @@
         "timeframe1Month": "1个月"
     },
     "actions": {
-        "apply": "应用",
+        "apply": "Apply",
         "continue": "继续",
         "back": "返回",
         "previous": "上一步",
@@ -1205,36 +1205,36 @@
         "cancel": "取消",
         "close": "关闭",
         "dismiss": "取消",
-        "claim": "认领",
-        "claiming": "认领中...",
-        "claimingRewards": "认领奖励",
-        "reject": "忽略",
+        "claim": "Claim",
+        "claiming": "Claiming",
+        "claimingRewards": "Claiming rewards",
+        "reject": "Reject",
         "confirmRejection": {
-            "title": "忽略交易",
-            "description": "确定要忽略这项交易吗？",
-            "node": "请注意，忽略一项交易只是将其从你的活动流水中隐藏起来。"
+            "title": "Reject transaction",
+            "description": "Are you sure you want to reject this transaction?",
+            "node": "Please note that rejecting a transaction only hides it from your Activity feed"
         },
         "confirmTokenBurn": {
-            "title": "燃烧 {assetName}",
-            "hint": "请注意烧毁代币可能会释放它附带的存储押金，并且不可逆转。"
+            "title": "Burn {assetName}",
+            "hint": "Please note that burning a token may free storage deposit attached to it and is not reversible"
         },
         "confirmNftBurn": {
-            "title": "燃烧 {nftName}",
-            "description": "您确定要烧毁此 NFT 吗？",
-            "hint": "请注意烧毁NFT可能会释放它附带的存储押金，并且不可逆转。"
+            "title": "Burn {nftName}",
+            "description": "Are you sure you want to burn this NFT?",
+            "hint": "Please note that burning an NFT frees the storage deposit attached to it and is not reversible."
         },
         "proceedAnyway": "仍要继续",
         "save": "保存",
         "importSeed": "导入已有的私钥种子",
         "restoreWallet": {
-            "iota": "迁移或恢复钱包",
-            "shimmer": "恢复 Shimmer 配置文件",
+            "iota": "Migrate or restore a wallet",
+            "shimmer": "Restore Shimmer profile",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
-            "iota": "迁移到 Chrysalis 或恢复一个现有钱包",
-            "shimmer": "恢复一个Shimmer 配置文件",
+            "iota": "Migrate to Chrysalis or restore an existing wallet",
+            "shimmer": "Restore an existing Shimmer profile",
             "testnet": "Restore an existing Testnet profile",
             "custom": "Restore an existing Custom Network profile"
         },
@@ -1244,17 +1244,17 @@
         },
         "createWallet": "Create a new {network} profile",
         "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown}}",
-        "claimShimmer": "认领您的 Shimmer 质押奖励",
-        "claimShimmerDescription": "导入您的 IOTA个人资料并领取质押奖励。",
-        "createAlias": "创建别名",
-        "createAliasDescription": "创建别名Output",
+        "claimShimmer": "Claim Shimmer staking rewards",
+        "claimShimmerDescription": "Import IOTA profile and claim staking rewards",
+        "createAlias": "Create alias",
+        "createAliasDescription": "Create alias output",
         "savePassword": "保存密码",
         "useBiometric": "使用生物特征安全机制",
-        "setupPinCode": "设置 PIN 码",
-        "setPin": "设置 PIN 码",
-        "setPinCode": "设置 PIN 码",
-        "confirmPin": "确认 PIN 码",
-        "confirmPinCode": "确认 PIN 码",
+        "setupPinCode": "Setup PIN code",
+        "setPin": "Set PIN",
+        "setPinCode": "Set PIN code",
+        "confirmPin": "Confirm PIN",
+        "confirmPinCode": "Confirm PIN code",
         "enterYourPin": "输入你的密码",
         "saveBackupFile": "保存备份文件",
         "iveWrittenRecoveryPhrase": "我已经写下我的恢复短语",
@@ -1274,12 +1274,12 @@
         "chooseFile": "选择一个文件",
         "dropHere": "将您的文件拖放至此处",
         "syncAll": "全部同步",
-        "import": "导入",
-        "importing": "正在导入",
+        "import": "Import",
+        "importing": "Importing",
         "export": "导出",
         "exporting": "导出中",
         "exportNewStronghold": "导出一个新的Stronghold",
-        "enableDeepLinks": "启用深链接",
+        "enableDeepLinks": "Enable deep links",
         "enableDeveloperMode": "打开开发者模式",
         "enableSystemNotifications": "启用系统通知",
         "exportTransactionHistory": "导出交易历史记录",
@@ -1295,8 +1295,8 @@
         "deleteAccount": "删除钱包",
         "max": "最大",
         "addNode": "添加节点",
-        "addingNode": "添加节点",
-        "addOfficialNodes": "添加官方节点",
+        "addingNode": "Adding node",
+        "addOfficialNodes": "Add official nodes",
         "updateNode": "更新节点",
         "removeNode": "删除节点",
         "hide": "隐藏",
@@ -1309,7 +1309,7 @@
         "redo": "重做",
         "cut": "剪切",
         "copy": "复制",
-        "copyAllInformation": "复制所有信息",
+        "copyAllInformation": "Copy all information",
         "paste": "粘贴",
         "selectAll": "全选",
         "addAccount": "添加钱包",
@@ -1333,10 +1333,10 @@
         "showHiddenAccounts": "显示隐藏钱包",
         "confirm": "确认",
         "hideNetworkStatistics": "隐藏网络统计信息",
-        "findWallets": "查找钱包",
-        "useBalanceFinder": "使用余额查找器",
-        "search": "搜索",
-        "searching": "正在搜索...",
+        "findWallets": "Find wallets",
+        "useBalanceFinder": "Use balance finder",
+        "search": "Search",
+        "searching": "Searching",
         "searchAgain": "重新搜索",
         "closeFirefly": "关闭Firefly",
         "generateAddress": "生成地址",
@@ -1353,41 +1353,41 @@
         "done": "已完成",
         "okIUnderstand": "好的，我知道了。",
         "readMore": "了解更多",
-        "searchForRewards": "搜索奖励",
-        "claimRewards": "认领奖励",
-        "rerunClaimProcess": "再次运行认领流程",
-        "addPublicNote": "添加公开注释",
-        "backup": "备份",
-        "mint": "锻造",
-        "mintNativeToken": "铸造原生代币",
-        "mintNft": "铸造NFT",
-        "verifyToken": "验证代币",
-        "unverifyToken": "取消验证代币",
-        "hideToken": "隐藏代币",
-        "unhideToken": "显示代币",
-        "burn": "燃烧",
-        "burnToken": "燃烧代币",
-        "faucetRequest": "获得 {token} 代币",
-        "refreshTokenMetadata": "刷新代币元数据",
-        "test": "测试",
-        "testDeepLink": "测试深链接",
-        "initialize": "初始化",
-        "initializing": "正在初始化",
-        "delete": "删除",
-        "remove": "移除",
-        "addReference": "添加引用",
-        "depositNft": "存入NFT",
-        "vote": "投票",
-        "addProposal": "增加提案",
-        "removeProposal": "移除提案",
+        "searchForRewards": "Search for rewards",
+        "claimRewards": "Claim rewards",
+        "rerunClaimProcess": "Rerun claim process",
+        "addPublicNote": "Add public note",
+        "backup": "Backup",
+        "mint": "Mint",
+        "mintNativeToken": "Mint native token",
+        "mintNft": "Mint NFT",
+        "verifyToken": "Verify token",
+        "unverifyToken": "Unverify token",
+        "hideToken": "Hide token",
+        "unhideToken": "Unhide token",
+        "burn": "Burn",
+        "burnToken": "Burn token",
+        "faucetRequest": "Get {token} tokens",
+        "refreshTokenMetadata": "Refresh token metadata",
+        "test": "Test",
+        "testDeepLink": "Test deep link",
+        "initialize": "Initialize",
+        "initializing": "Initializing",
+        "delete": "Delete",
+        "remove": "Remove",
+        "addReference": "Add reference",
+        "depositNft": "Deposit NFTs",
+        "vote": "Vote",
+        "addProposal": "Add proposal",
+        "removeProposal": "Remove proposal",
         "changeNode": "Change node",
-        "stopVoting": "停止投票",
-        "revote": "重新投票",
+        "stopVoting": "Stop voting",
+        "revote": "Revote",
         "skipAndKeep": "Skip and keep old password",
         "addChain": "Add chain"
     },
     "general": {
-        "recipient": "接收人",
+        "recipient": "Recipient",
         "password": "密码",
         "confirmPassword": "确认密码",
         "currentPassword": "当前使用的密码",
@@ -1400,50 +1400,50 @@
         "sending": "发送",
         "received": "已收到",
         "receiving": "接收",
-        "newVotingPower": "新的投票权重",
-        "votingPower": "投票权重",
-        "increased": "投票权已增加",
-        "increasing": "增加投票权",
-        "decreased": "投票权重降低",
-        "decreasing": "降低投票权重",
+        "newVotingPower": "New voting power",
+        "votingPower": "Voting power",
+        "increased": "Voting power increased",
+        "increasing": "Increasing voting power",
+        "decreased": "Voting power decreased",
+        "decreasing": "Decreasing voting power",
         "voted": "已投票",
         "voting": "投票中",
-        "changedVote": "变更投票",
-        "changingVote": "投票变更中...",
-        "revoted": "已重新投票",
-        "revoting": "重新投票",
+        "changedVote": "Changed vote",
+        "changingVote": "Changing vote",
+        "revoted": "Revoted",
+        "revoting": "Revoting",
         "unvoted": "已取消投票",
         "unvoting": "取消投票中...",
-        "sentNft": "NFT 已发送",
-        "sendingNft": "发送 NFT",
-        "receivedNft": "NFT 已接收",
-        "receivingNft": "接收 NFT",
-        "transfer": "转帐",
-        "transferring": "转账中",
-        "transferNft": "传输NFT",
-        "transferringNft": "NFT 传输中",
-        "mintedNft": "铸造NFT",
-        "mintingNft": "正在锻造NFT",
-        "shimmerClaimed": "已认领",
-        "shimmerClaiming": "认领中...",
-        "shimmerGenesis": "Shimmer 创世块",
-        "minted": "已锻造",
-        "minting": "锻造中",
-        "burned": "烧毁的",
-        "burning": "燃烧中",
-        "consolidated": "合并的Output",
-        "consolidating": "合并中Output",
-        "aliasCreated": "别名已创建",
-        "creatingAlias": "创建别名",
+        "sentNft": "NFT sent",
+        "sendingNft": "Sending NFT",
+        "receivedNft": "NFT received",
+        "receivingNft": "Receiving NFT",
+        "transfer": "Transfer",
+        "transferring": "Transferring",
+        "transferNft": "Transfer NFT",
+        "transferringNft": "Transferring NFT",
+        "mintedNft": "Minted NFT",
+        "mintingNft": "Minting NFT",
+        "shimmerClaimed": "Claimed",
+        "shimmerClaiming": "Claiming",
+        "shimmerGenesis": "Shimmer Genesis",
+        "minted": "Minted",
+        "minting": "Minting",
+        "burned": "Burned",
+        "burning": "Burning",
+        "consolidated": "Outputs consolidated",
+        "consolidating": "Consolidating outputs",
+        "aliasCreated": "Alias created",
+        "creatingAlias": "Creating Alias",
         "sendPayment": "发送资金",
         "moveFunds": "内部转账",
         "sendTo": "发送到",
-        "sendAssets": "发送资产",
-        "sendAssetToAddress": "将资产发送到地址",
+        "sendAssets": "Send assets",
+        "sendAssetToAddress": "Send asset to an address",
         "sendToAddress": "发送至地址",
-        "sendToken": "发送代币",
-        "sendNft": "发送 NFT",
-        "sendNftToAddress": "发送 NFT 到地址",
+        "sendToken": "Send token",
+        "sendNft": "Send NFT",
+        "sendNftToAddress": "Send NFT to an address",
         "scanQrOrPaste": "扫描二维码或粘贴地址",
         "moveFundsBetweenAccounts": "钱包间资金互转",
         "manageAccount": "管理钱包",
@@ -1455,19 +1455,19 @@
         "reference": "使用指南",
         "from": "从",
         "to": "到",
-        "and": "和",
-        "receiveFunds": "接收资金",
+        "and": "and",
+        "receiveFunds": "Receive funds",
         "address": "地址",
         "myAddress": "My address",
-        "myNetworkAddress": "我的 {networkName} 地址",
+        "myNetworkAddress": "My {networkName} address",
         "shareAddress": "分享地址",
         "yourAddress": "您的地址",
         "newRemainder": "新的余额",
         "remainder": "剩余资金",
         "generateNewAddress": "生成新地址",
-        "copyToClipboard": "复制到剪贴板",
+        "copyToClipboard": "Copy to clipboard",
         "copyAddress": "复制地址",
-        "viewOnExplorer": "在区块浏览器中查看",
+        "viewOnExplorer": "View on Explorer",
         "import": "导入",
         "stronghold": "Stronghold",
         "language": "语言",
@@ -1476,8 +1476,8 @@
         "darkTheme": "暗色",
         "systemTheme": "系统",
         "balance": "余额",
-        "balanceWithValue": "余额：{balance}",
-        "balanceWithNetwork": "{network} 余额",
+        "balanceWithValue": "Balance: {balance}",
+        "balanceWithNetwork": "{network} Balance",
         "all": "全部",
         "incoming": "收到",
         "outgoing": "转出",
@@ -1492,11 +1492,11 @@
         "accountName": "钱包名称",
         "latestTransactions": "最新交易",
         "transactions": "交易",
-        "activity": "活动",
+        "activity": "Activity",
         "security": "安全设置",
         "accountAddress": "钱包地址",
         "network": "网络",
-        "destinationNetwork": "目标网络",
+        "destinationNetwork": "Destination network",
         "nodes": "节点",
         "wallet": "钱包",
         "help": "帮助",
@@ -1513,11 +1513,11 @@
         "loadingAccounts": "加载中，请稍候...",
         "addProfile": "添加个人档案",
         "noRecentHistory": "没有最近的历史记录",
-        "noFilteredActivity": "未找到匹配的活动。",
-        "noAssets": "没有资产",
-        "noFilteredAsset": "没有匹配的资产",
-        "thisMonth": "本月",
-        "search": "搜索",
+        "noFilteredActivity": "No matching activities",
+        "noAssets": "No assets",
+        "noFilteredAsset": "No matching assets",
+        "thisMonth": "This month",
+        "search": "Search",
         "firstSync": "同步历史记录，可能需要一段时间...",
         "transferSyncing": "正在同步钱包",
         "transferSelectingInputs": "选择输入",
@@ -1554,12 +1554,12 @@
         "creatingProfile": "正在创建帐户，请稍候...",
         "fundMigration": "资金迁移",
         "accountRemoved": "此钱包被隐藏。请取消隐藏以执行转账。",
-        "fromAddress": "来自 {account}",
-        "toAddress": "发到 {account}",
-        "stakedFor": "已为 {account} 质押",
-        "unstakedFor": "已为 {account} 解除质押",
-        "votedFor": "为 {account} 已投票",
-        "unvotedFor": "为 {account} 已取消投票",
+        "fromAddress": "from {account}",
+        "toAddress": "to {account}",
+        "stakedFor": "Staked for {account}",
+        "unstakedFor": "Unstaked for {account}",
+        "votedFor": "Voted for {account}",
+        "unvotedFor": "Unvoted for {account}",
         "stakingTransaction": "质押交易",
         "unstakingTransaction": "取消质押交易",
         "legacyNetwork": "旧的网络",
@@ -1567,7 +1567,7 @@
         "version": "版本 {version}",
         "yourWallets": "您的钱包",
         "unknown": "未知",
-        "unknownAddress": "未知地址",
+        "unknownAddress": "Unknown address",
         "none": "无",
         "staked": "已质押",
         "unstaked": "解除质押",
@@ -1577,80 +1577,80 @@
         "stakedFunds": "已质押资金",
         "unstakedFunds": "未质押的资金",
         "accountColor": "钱包颜色",
-        "transactionTime": "交易时间",
-        "surplus": "剩余",
-        "storageDeposit": "存储押金",
-        "giftedStorageDeposit": "赠与的存储押金",
+        "transactionTime": "Transaction time",
+        "surplus": "Surplus",
+        "storageDeposit": "Storage deposit",
+        "giftedStorageDeposit": "Gifted storage deposit",
         "storageDepositPerNft": "Storage deposit per NFT",
         "totalStorageDeposit": "Total storage deposit",
-        "expirationTime": "过期时间",
-        "timelockDate": "时间锁",
-        "claimedTime": "认领于",
-        "nftAddress": "NFT 地址",
+        "expirationTime": "Expiration time",
+        "timelockDate": "Timelock",
+        "claimedTime": "Claimed at",
+        "nftAddress": "NFT Address",
         "nftId": "NFT ID",
-        "nftMetadata": "NFT 元数据",
-        "aliasId": "別名 ID",
-        "governorAddress": "治理者地址",
-        "stateControllerAddress": "状态控制器地址",
-        "copiedToClipboard": "复制到剪贴板",
+        "nftMetadata": "NFT Metadata",
+        "aliasId": "Alias ID",
+        "governorAddress": "Governor Address",
+        "stateControllerAddress": "State Controller Address",
+        "copiedToClipboard": "Copied to clipboard",
         "total": "总计: {balance}",
-        "availableBalanceWithValue": "可用余额: {balance}",
-        "availableBalance": "可用余额",
-        "availableBalanceTooltip": "资产的总余额减去任何需要支付存储押金的资金（即锁定在待处理的交易中的资金，为原生资产保留的资金，或为NFT保留的资金）。",
-        "amountClaimed": "{amount} 已认领",
-        "metadata": "元数据",
-        "amountConsolidatedInputs": "合并的Output",
-        "name": "名称",
-        "tag": "标签",
-        "nodeList": "节点列表",
-        "claimedIn": "已认领于",
-        "claimingIn": "认领中...",
-        "assets": "资产",
-        "nativeTokens": "原生代币",
-        "mintNativeTokenDescription": "按照 IRC30 标准锻造原生代币",
-        "mintNftDescription": "按照IRC27标准Mint NFT",
-        "faucetRequestDescription": "从 {network} 水龙头中申请免费代币",
-        "refreshTokenMetadataDescription": "重置并刷新所有代币元数据",
-        "refreshTokenMetadataHint": "这将重置您所有的代币元数据，包括验证状态并取消隐藏任何隐藏的资产。",
-        "giftStorageDeposit": "赠送存储押金",
-        "excluded": "排除",
-        "developerTools": "开发工具",
-        "testDeepLinkDescription": "模拟一个发送Firefly的深链接请求",
+        "availableBalanceWithValue": "Available balance: {balance}",
+        "availableBalance": "Available balance",
+        "availableBalanceTooltip": "An asset's total balance minus any funds that are required to cover the storage deposit (i.e. funds that are locked in pending transactions, reserved for Native Tokens, or reserved for NFTs).",
+        "amountClaimed": "{amount} claimed",
+        "metadata": "Metadata",
+        "amountConsolidatedInputs": "Consolidated outputs",
+        "name": "Name",
+        "tag": "Tag",
+        "nodeList": "Node list",
+        "claimedIn": "Claimed in",
+        "claimingIn": "Claiming in",
+        "assets": "Assets",
+        "nativeTokens": "Native tokens",
+        "mintNativeTokenDescription": "Mint native token following IRC30 standard",
+        "mintNftDescription": "Mint NFT following IRC27 standard",
+        "faucetRequestDescription": "Request tokens from the {network} faucet",
+        "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
+        "refreshTokenMetadataHint": "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
+        "giftStorageDeposit": "Gift storage deposit",
+        "excluded": "Excluded",
+        "developerTools": "Developer tools",
+        "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
         "url": "URL",
         "hash": "Hash",
-        "creating": "正在创建",
-        "updating": "正在更新",
-        "enterAddress": "输入地址",
-        "transaction": "交易记录",
-        "alias": "别名",
-        "foundry": "铸造厂",
-        "token": "代币",
+        "creating": "Creating",
+        "updating": "Updating",
+        "enterAddress": "Enter address",
+        "transaction": "Transaction",
+        "alias": "Alias",
+        "foundry": "Foundry",
+        "token": "Token",
         "nft": "NFT",
-        "type": "类型",
-        "immutableIssuer": "不可变发行者",
-        "smartContract": "智能合约",
-        "targetContract": "目标合约",
-        "contractFunction": "合约功能",
-        "gasBudget": "Gas预算",
-        "standard": "标准",
+        "type": "Type",
+        "immutableIssuer": "Immutable Issuer",
+        "smartContract": "Smart Contract",
+        "targetContract": "Target contract",
+        "contractFunction": "Contract function",
+        "gasBudget": "Gas budget",
+        "standard": "Standard",
         "uri": "URI",
-        "issuer": "发行者",
-        "issuerAddress": "发行者地址",
-        "issuerName": "发行者名称",
+        "issuer": "Issuer",
+        "issuerAddress": "Issuer Address",
+        "issuerName": "Issuer Name",
         "quantity": "Quantity",
-        "collection": "收藏",
-        "collectionId": "收藏 ID",
-        "collectionName": "收藏名称",
-        "royalties": "版税",
-        "description": "描述",
-        "attributes": "属性",
-        "details": "详情",
-        "availableAmount": "{amount} 可用",
-        "properties": "属性",
-        "statistics": "统计",
-        "username": "用户名",
-        "jwt": "JSON web 代币",
-        "internalTransaction": "内部交易",
+        "collection": "Collection",
+        "collectionId": "Collection ID",
+        "collectionName": "Collection Name",
+        "royalties": "Royalties",
+        "description": "Description",
+        "attributes": "Attributes",
+        "details": "Details",
+        "availableAmount": "{amount} available",
+        "properties": "Properties",
+        "statistics": "Statistics",
+        "username": "Username",
+        "jwt": "JSON web token",
+        "internalTransaction": "Internal transaction",
         "coinType": "Coin type",
         "custom": "Custom",
         "evmAddress": "EVM address",
@@ -1659,104 +1659,104 @@
         "importErc20TokenDescription": "Import an ERC20 token from an EVM chain"
     },
     "filters": {
-        "title": "过滤",
+        "title": "Filters",
         "showHidden": {
-            "label": "显示已隐藏",
-            "yes": "是",
-            "no": "否"
+            "label": "Show hidden",
+            "yes": "Yes",
+            "no": "No"
         },
         "showRejected": {
-            "label": "显示已拒绝",
-            "yes": "是",
-            "no": "否"
+            "label": "Show rejected",
+            "yes": "Yes",
+            "no": "No"
         },
         "showValueless": {
-            "label": "显示无价值",
-            "yes": "是",
-            "no": "否"
+            "label": "Show valueless",
+            "yes": "Yes",
+            "no": "No"
         },
         "ascDesc": {
-            "Asc": "升序",
-            "Desc": "降序"
+            "Asc": "Ascending",
+            "Desc": "Descending"
         },
         "assetOrder": {
-            "label": "排序",
-            "Name": "名称",
-            "Amount": "金额"
+            "label": "Order",
+            "Name": "Name",
+            "Amount": "Amount"
         },
         "internalExternal": {
-            "label": "内部/外部",
-            "internal": "内部",
-            "external": "外部"
+            "label": "Internal / External",
+            "internal": "Internal",
+            "external": "External"
         },
         "verificationStatus": {
-            "label": "验证状态",
-            "new": "新的",
-            "skipped": "已跳过验证",
-            "selfVerified": "自验证",
-            "official": "官方"
+            "label": "Verification status",
+            "new": "New",
+            "skipped": "Skipped verification",
+            "selfVerified": "Self-verified",
+            "official": "Official"
         },
         "asset": {
-            "label": "资产"
+            "label": "Assets"
         },
         "amount": {
-            "label": "金额",
-            "equal": "等于",
-            "range": "介于",
-            "greater": "大于",
-            "less": "小于"
+            "label": "Amount",
+            "equal": "is equal to",
+            "range": "is between",
+            "greater": "is greater than",
+            "less": "is less than"
         },
         "date": {
-            "label": "日期",
-            "equals": "等于",
-            "last": "位于最后",
-            "range": "介于",
-            "after": "晚于",
-            "afterOrEquals": "迟于（含）",
-            "before": "先于",
-            "Days": "天",
-            "Months": "月",
-            "Years": "年"
+            "label": "Date",
+            "equals": "is equal to",
+            "last": "in the last",
+            "range": "is between",
+            "after": "is after",
+            "afterOrEquals": "is on or after",
+            "before": "is before",
+            "Days": "days",
+            "Months": "months",
+            "Years": "years"
         },
         "status": {
-            "label": "状态",
-            "confirmed": "已确认",
-            "pending": "待处理",
-            "claimed": "已认领",
-            "unclaimed": "未认领"
+            "label": "Status",
+            "confirmed": "confirmed",
+            "pending": "pending",
+            "claimed": "claimed",
+            "unclaimed": "unclaimed"
         },
         "type": {
-            "label": "类型",
-            "basic": "基本",
+            "label": "Type",
+            "basic": "Basic",
             "nft": "NFT",
-            "alias": "别名",
-            "foundry": "铸造厂",
-            "governance": "治理",
-            "consolidation": "合并"
+            "alias": "Alias",
+            "foundry": "Foundry",
+            "governance": "Governance",
+            "consolidation": "Consolidation"
         },
         "direction": {
-            "label": "方向",
-            "incoming": "传入",
-            "outgoing": "转出",
-            "selfTransaction": "自我交易"
+            "label": "Direction",
+            "incoming": "Incoming",
+            "outgoing": "Outgoing",
+            "selfTransaction": "Self transaction"
         },
         "proposalType": {
-            "label": "类型",
-            "official": "官方",
-            "custom": "自定义"
+            "label": "Type",
+            "official": "Official",
+            "custom": "Custom"
         },
         "phase": {
-            "label": "阶段"
+            "label": "Phase"
         },
         "participated": {
-            "label": "我参与的",
-            "yes": "是",
-            "no": "否"
+            "label": "Participated",
+            "yes": "Yes",
+            "no": "No"
         },
         "proposalOrder": {
-            "label": "订单",
-            "name": "名称",
-            "phase": "阶段"
+            "label": "Order",
+            "name": "Name",
+            "phase": "Phase"
         },
         "network": {
             "label": "Network"
@@ -1799,68 +1799,68 @@
             "error": "无法导出 {accountAlias} 的交易历史记录"
         },
         "deepLinkingRequest": {
-            "receivedWhileLoggedOut": "请登录以启动深链接",
-            "notEnabled": "深链接没有被激活。",
-            "invalidFormat": "您使用的深链接无效",
-            "invalidAmount": "深链接中的金额不是整数 {amount}",
-            "invalidSurplus": "深链接中的余额不是数字 {surplus}",
+            "receivedWhileLoggedOut": "Please login to initiate the deep link",
+            "notEnabled": "Deep links are not enabled",
+            "invalidFormat": "The deep link you followed is invalid",
+            "invalidAmount": "The amount in deep link is not an integer number {amount}",
+            "invalidSurplus": "The surplus in deep link is not a number {surplus}",
             "surplusNotSupported": "The surplus is only supported for native tokens",
             "governance": {
-                "unrecognizedOperation": "无法识别的治理操作: {operation}"
+                "unrecognizedOperation": "Unrecognized Governance operation: {operation}"
             },
             "wallet": {
                 "send": {
-                    "success": "从深链接添加的付款详细信息"
+                    "success": "Payment details added from deep link"
                 },
-                "unrecognizedOperation": "无法识别的钱包操作: {operation}"
+                "unrecognizedOperation": "Unrecognized wallet operation: {operation}"
             }
         },
         "syncing": "请稍候，直到同步完成后才能变更钱包。",
         "transferring": "请稍候，直到所有交易完成后才能变更钱包。",
-        "participating": "请稍候，直到所有质押/投票的交易完成后才能变更钱包。",
+        "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
         "claimed": {
-            "success": "已认领的交易",
-            "error": "认领失败的交易"
+            "success": "Transaction claimed",
+            "error": "Claiming transaction failed"
         },
         "hideActivity": {
-            "success": "活动已隐藏",
-            "error": "隐藏活动失败"
+            "success": "Activity was hidden",
+            "error": "Failed to hide activity"
         },
         "faucetRequest": {
-            "success": "发送到水龙头的代币申请"
+            "success": "Request for tokens sent to the faucet"
         },
         "mintNativeToken": {
-            "success": "已发送的原生代币锻造交易"
+            "success": "Native token minting transaction sent"
         },
         "burnNativeToken": {
-            "success": "已发送的原生代币烧毁交易"
+            "success": "Native token burning transaction sent"
         },
         "mintNft": {
-            "success": "已发送的NFT锻造交易"
+            "success": "NFT minting transaction sent"
         },
         "burnNft": {
-            "success": "已发送的NFT燃烧交易"
+            "success": "NFT burning transaction sent"
         },
         "refreshTokenMetadata": {
-            "success": "所有代币元数据已被重置和刷新。"
+            "success": "All token metadata has been reset and refreshed"
         },
         "restoreFromStrongholdBackup": {
-            "wrongProtocol": "协议与在 Stronghold 备份中发现的代币类型不匹配",
-            "wrongProtocolForClaiming": "您必须使用基于 IOTA的 Stronghold 备份来认领 Shimmer 奖励。"
+            "wrongProtocol": "Protocol doesn't match coin type found in Stronghold backup",
+            "wrongProtocolForClaiming": "You must use an IOTA-based Stronghold backup to claim Shimmer rewards"
         },
         "findShimmerRewards": {
-            "success": "成功发现 Shimmer 奖励",
-            "error": "查找奖励时出现错误"
+            "success": "Successfully found Shimmer rewards",
+            "error": "An error occurred while searching for rewards"
         },
         "claimShimmerRewards": {
-            "success": "为 {accountAlias} 领取 Shimmer 奖励",
-            "error": "认领奖励时出现错误，请重试。"
+            "success": "Shimmer rewards claimed for {accountAlias}",
+            "error": "An error occurred while claiming. Try again."
         },
         "vote": {
             "success": "Votes successfully cast"
         },
         "stopVoting": {
-            "success": "投票成功停止"
+            "success": "Voting successfully stopped"
         }
     },
     "error": {
@@ -1870,8 +1870,8 @@
             "delete": {
                 "nonEmptyAccounts": "您必须先转移所有余额才能删除您的账户。"
             },
-            "type": "无法确定配置文件类型",
-            "setupType": "无法确定配置文件设置类型"
+            "type": "Unable to determine the profile type",
+            "setupType": "Unable to determine the profile setup type"
         },
         "password": {
             "doNotMatch": "密码不匹配。",
@@ -1895,13 +1895,13 @@
             "length": "您的 PIN 必须是 {length, plural, one {1 个数字} other {# 个数字}}。",
             "match": "PIN 码不匹配",
             "incorrect": "您当前的 PIN 码不正确。",
-            "invalid": "无效 PIN 码。"
+            "invalid": "Invalid PIN code."
         },
         "address": {
-            "wrongAddressType": "错误的地址类型"
+            "wrongAddressType": "Wrong address type"
         },
         "account": {
-            "addressNotFound": "在您的帐户中找不到地址。",
+            "addressNotFound": "The address cannot be found in your account.",
             "length": "您的钱包名称不能超过 {length, plural, one {1 个字符} other {# 字符}}。",
             "emptyName": "配置文件名称必须包含至少 1 个字符。",
             "notEmpty": "您必须在删除此帐户之前转移您的余额。",
@@ -1913,66 +1913,66 @@
             "index": "您的帐户索引必须是0-2,147,483,647之间的数字。",
             "page": "您的帐户页码必须是0-2,147,483,647之间的数字。",
             "syncing": "钱包同步时出错。",
-            "cannotRemove": "无法删除钱包",
-            "withBalance": "您必须先转移所有余额才能删除您的账户。",
-            "notLast": "您只能删除最后一个钱包。",
-            "notFound": "无法找到帐户",
-            "cannotGetBoundAccount": "无法获取绑定账户"
+            "cannotRemove": "Unable to remove wallet.",
+            "withBalance": "You must transfer all balances before you can delete this wallet.",
+            "notLast": "You can only delete your last wallet.",
+            "notFound": "Unable to find account",
+            "cannotGetBoundAccount": "Unable to get bound account"
         },
         "send": {
             "addressLength": "地址的长度应该是 {length, plural,one {1 个字符} other {# 个字符}}。",
             "amountTooHigh": "这大于您可用的余额。",
-            "amountNoFloat": "在选择最小的单位时不能使用小数位数",
+            "amountNoFloat": "Cannot use decimal places with the smallest unit selected",
             "amountInvalidFormat": "金额似乎是一个无效的数字。",
-            "amountSmallerThanSubunit": "金额必须大于最小的子单位。",
-            "tagTooLong": "标签的长度不能超过64个字节。",
-            "metadataTooLong": "元数据的长度不能超过8192个字节。",
+            "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
+            "tagTooLong": "The tag cannot be longer than 64 bytes.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "金额必须大于零。",
             "wrongAddressPrefix": "地址以前缀 {prefix} 开始。",
             "wrongAddressFormat": "地址格式不正确。",
             "invalidAddress": "地址无效的",
             "invalidAssetId": "The asset id is not valid.",
-            "unknownAsset": "该资产在这个账户中未知。",
+            "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "该账户资金不足。",
             "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit.",
             "ongoingTransaction": "If you have ongoing transactions, please wait for their confirmation.",
-            "cannotClaimTwice": "输出已被认领。",
+            "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "您尚未选择一个收款账户来发送资金。",
             "sendingDust": "您的发送不能小于 1 Mi。",
             "leavingDust": "您的地址余额不能少于1Mi。",
             "cancelled": "您的交易已被取消。",
             "transaction": "发送交易错误。请再次尝试。",
-            "invalidExpirationDateTime": "选择的过期日期/时间无效。",
-            "noInputs": "找不到Input。",
-            "notEnoughBalance": "余额不足",
-            "missingTransactionId": "事务 ID缺失。",
-            "missingTransactionProgressEventPayload": "交易进度事件的有效载荷缺失。",
-            "recipientRequired": "收件人是必需的",
-            "nftRequired": "NFT 是必填项",
-            "nftNotInHex": "NFT 地址必须是十六进制格式",
-            "nftNotInPossession": "NFT 不存在",
-            "reservedTagKeyword": "无法使用保留标签关键字"
+            "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",
+            "noInputs": "No inputs found.",
+            "notEnoughBalance": "Not enough balance.",
+            "missingTransactionId": "The transaction ID is missing",
+            "missingTransactionProgressEventPayload": "The transaction progress event payload is missing",
+            "recipientRequired": "Recipient is required",
+            "nftRequired": "NFT is required",
+            "nftNotInHex": "NFT address has to be in HEX format",
+            "nftNotInPossession": "NFT not in possession",
+            "reservedTagKeyword": "Unable to use reserved tag keyword"
         },
         "layer2": {
-            "layer1Recipient": "L2事务不能发送到L1帐户。"
+            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account."
         },
         "node": {
             "invalid": "请输入有效的URL",
-            "dns": "找不到节点的DNS解析。",
+            "dns": "Unable to find DNS resolution for node",
             "timedOut": "连接超时",
             "refused": "连接被拒绝",
             "handshake": "无法完成节点握手。",
             "invalidCertificate": "无法与无效证书连接。",
             "https": "需要HTTPS。目前不支持通过 HTTP 进行不安全的连接。",
             "duplicate": "此节点已被添加。",
-            "noSyncedNode": "没有可用的同步节点。",
-            "timeNotSynced": "设备时间不正确，无法同步节点。",
+            "noSyncedNode": "No synced node is available.",
+            "timeNotSynced": "Device time is incorrect, unable to sync node.",
             "answer": "无法从所有节点获得响应。",
             "forbidden": "此节点连接被禁止。",
             "pluginNotAvailable": "\"{nodePlugin}\"插件在当前节点上不可用。",
-            "unabledToConnect": "无法连接到节点",
-            "differentNetwork": "节点位于不同的网络",
-            "duplicateNodes": "无法添加重复节点",
+            "unabledToConnect": "Unable to connect to the node",
+            "differentNetwork": "The node is located on a different network",
+            "duplicateNodes": "Unable to add duplicate node",
             "noCoinType": "No coin type specified"
         },
         "network": {
@@ -1994,8 +1994,8 @@
             "phraseWordCount": "您的恢复密语中应该有24个单词，目前 {length, plural, one {只有 1}other {是 #}} 个单词。",
             "phraseUnrecognizedWord": "恢复短语中无法识别的单词“{word}”",
             "phraseCaseWord": "单词 \"{word}\" 应为小写",
-            "unableToCopyFile": "无法复制 Stronghold 备份文件",
-            "unableToRestoreForProfileManager": "无法还原配置文件管理器的 Stronghold 备份"
+            "unableToCopyFile": "Unable to copy Stronghold backup file",
+            "unableToRestoreForProfileManager": "Unable to restore Stronghold backup for profile manager"
         },
         "ledger": {
             "appNotOpen": "您必须在您的Ledger设备上打开 IOTA应用程序。",
@@ -2003,7 +2003,7 @@
             "legacyConnected": "Ledger设备上打开的应用程序不正确。",
             "locked": "请输入 PIN 码来解锁您的Ledger设备。",
             "mnemonicMismatch": "您连接了错误的Ledger设备或助记符已更改。",
-            "notConnected": "没有检测到Ledger设备。",
+            "notConnected": "No Ledger device detected.",
             "notFound": "未找到Ledger设备",
             "otherConnected": "Ledger设备上打开的应用程序不正确。",
             "generateAddress": "地址生成出错。",
@@ -2029,65 +2029,65 @@
         "invalidDate": "无效日期",
         "invalidTime": "无效时间",
         "shimmerClaiming": {
-            "missingProfileManager": "找不到 Shimmer 认领账户管理器",
-            "cannotInitialiseAccount": "无法初始化 Shimmer 认领账户",
-            "missingAccount": "找不到 Shimmer 认领账户"
+            "missingProfileManager": "Unable to find Shimmer claiming profile manager",
+            "cannotInitialiseAccount": "Unable to initialize Shimmer claiming account",
+            "missingAccount": "Unable to find Shimmer claiming account"
         },
         "walletApiEvent": {
-            "invalidAccountIndex": "{eventName} 事件的帐户索引无效",
-            "invalidPayload": "{eventName} 事件的有效负载无效"
+            "invalidAccountIndex": "Invalid account index for {eventName} event",
+            "invalidPayload": "Invalid payload for {eventName} event"
         },
         "aliasMinting": {
-            "aliasRequired": "别名是必需的",
-            "aliasNotInPossession": "别名不存在"
+            "aliasRequired": "Alias is required",
+            "aliasNotInPossession": "Alias not in possession"
         },
-        "noOutputsToConsolidate": "没有足够的Output来合并",
+        "noOutputsToConsolidate": "Not enough outputs to consolidate",
         "eventId": {
-            "doesNotStartWith0x": "事件 ID 应该以 '0x' 开始",
-            "insufficientLength": "事件ID应该是66个字符长",
-            "alreadyRegistered": "事件ID已注册"
+            "doesNotStartWith0x": "Event ID should start with '0x'",
+            "insufficientLength": "Event ID should be 66 characters long",
+            "alreadyRegistered": "Event ID already registered"
         },
         "nft": {
             "unsupportedUrl": {
-                "short": "不支持 Url",
-                "long": "不支持Url模式"
+                "short": "Url not supported",
+                "long": "Url schema not supported"
             },
             "unsupportedFileType": {
-                "short": "不支持的媒体类型",
-                "long": "不支持此媒体类型。"
+                "short": "Unsupported media type",
+                "long": "The media type is not currently supported"
             },
             "notMatchingFileTypes": {
-                "short": "加载已阻止的",
-                "long": "NFT 文件类型与预期媒体类型不匹配"
+                "short": "Loading blocked",
+                "long": "NFT file type does not match the expected media type"
             },
             "notReachable": {
                 "short": "Not reachable",
                 "long": "NFT file is not reachable"
             },
             "tooLargeFile": {
-                "short": "文件过大",
-                "long": "由于文件太大，无法加载 NFT"
+                "short": "File is too large",
+                "long": "Loading NFT blocked because the file is too large"
             },
             "downloadTooLong": {
                 "short": "File took too long to download",
                 "long": "Loading NFT blocked because the file took too long to download"
             },
             "corsError": {
-                "short": "加载受阻",
-                "long": "NFT加载被CORS 策略阻止"
+                "short": "Loading blocked",
+                "long": "Loading NFT blocked by CORS policy"
             },
             "unsafeToLoad": {
-                "short": "不安全加载",
-                "long": "检查 NFT 是否安全加载时出错"
+                "short": "Unsafe to load",
+                "long": "An error occurred while checking if the NFT was safe to load"
             },
             "loadingError": {
-                "short": "无法加载",
-                "long": "加载 NFT 时出错"
+                "short": "Unable to load",
+                "long": "An error occurred while loading the NFT"
             }
         },
         "governance": {
             "unableToAddProposal": {
-                "short": "无法添加提案",
+                "short": "Unable to add proposal",
                 "long": "Unable to find proposal {proposalId} on the specified node"
             }
         },
@@ -2098,7 +2098,7 @@
     },
     "warning": {
         "transaction": {
-            "invalidExpirationDateTime": "所选过期日期无效。"
+            "invalidExpirationDateTime": "The chosen expiration date is invalid."
         },
         "node": {
             "http": "通过 HTTP 使用节点使得流量未加密，可能造成安全风险。"
@@ -2133,61 +2133,61 @@
             "bodyDidNotReachMin": "您没有质押足够的IOTA来达到 {airdrop} 的最低奖励 ({airdropRewardMin})。",
             "bodyMinBalanceAirdrop": "这个钱包的 IOTA 代币不足以达到 {airdrop} 的最小空投奖励。"
         },
-        "optionalInput": "这些可选数据将在explorer 上公开，并可由所有人查看。",
+        "optionalInput": "This optional data will be public on the explorer and viewable by everyone.",
         "transactionDetails": {
             "minting": {
-                "storageDeposit": "一个可退还的代币押金，用于将你的交易存储在Tangle上。",
-                "giftedStorageDeposit": "此项交易的存储押金是赠送给你的。你不需要退还押金。",
-                "expirationTime": "请在到期前认领这些资金，否则它们将被退回给发件人。",
-                "timelockDate": "发送者在这些资金上设置了一个时间锁。您将能够在到期后使用它们。",
-                "metadata": "一个可选的数据字段，用于在Tangle上持久性地存储数据。",
-                "tag": "一个简短的可选数据字段。对各组交易分别进行标记可以使它们更容易被搜索到。"
+                "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
+                "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
+                "expirationTime": "Claim these funds before the expiration time or they will be returned to the sender.",
+                "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
+                "metadata": "An optional data field for storing data persistently on the Tangle.",
+                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
             },
             "incoming": {
-                "storageDeposit": "一个可退还的代币押金，用于将你的交易存储在Tangle上。",
-                "giftedStorageDeposit": "此项交易的存储押金是赠送给你的。你不需要退还押金。",
-                "expirationTime": "请在到期前认领这些资金，否则它们将被退回给发件人。",
-                "timelockDate": "发送者在这些资金上设置了一个时间锁。您将能够在到期后使用它们。",
-                "metadata": "一个可选的数据字段，用于在Tangle上持久性地存储数据。",
-                "tag": "一个简短的可选数据字段。对交易组进行标记可以使它们更容易被搜索到。",
-                "gasBudget": "为了在Shimmer EVM上进行交易或执行智能合约功能，需要有Gas预算。"
+                "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
+                "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
+                "expirationTime": "Claim these funds before the expiration time or they will be returned to the sender.",
+                "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
+                "metadata": "An optional data field for storing data persistently on the Tangle.",
+                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for.",
+                "gasBudget": "Gas budget is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "outgoing": {
-                "storageDeposit": "存储押金是在Tangle上储存你的交易所需的可退还押金。",
-                "giftedStorageDeposit": "收款人无需退还存储押金。",
-                "expirationTime": "如果接收人没有及时认领，你的代币将被退回给你。",
-                "timelockDate": "您为这笔交易添加了一个时间锁。收件人将无法花费这些资金，直到时间锁到期。",
-                "metadata": "一个可选的数据字段，用于在Tangle上持久性地存储数据。",
-                "tag": "一个简短的可选数据字段。对各组交易分别进行标记可以使它们更容易被搜索到。",
-                "gasBudget": "为了在Shimmer EVM上进行交易或执行智能合约功能，需要有Gas预算。"
+                "storageDeposit": "A storage deposit is a refundable deposit needed to store your transaction on the Tangle.",
+                "giftedStorageDeposit": "The recipient does not need to refund the deposit.",
+                "expirationTime": "If the recipient does not claim in time your tokens will be returned to you.",
+                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funds until the timelock expires.",
+                "metadata": "An optional data field for storing data persistently on the Tangle.",
+                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for.",
+                "gasBudget": "Gas budget is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "nftMetadata": {
-                "standard": "NFT 标准，例如 IRC27。",
-                "type": "NFT的MimeType，例如：image/png。",
-                "collectionId": "创建此 NFT 的收藏 NFT 的 UTXO 字符串",
-                "royalties": "一个包含键值对的地址的对象，映射到支付率上",
-                "issuerName": "创建者名称",
-                "attributes": "定义NFT 属性的特性和值数组"
+                "standard": "The NFT standard e.g. IRC27.",
+                "type": "The MimeType of the NFT. e.g. image/png.",
+                "collectionId": "UTXO string of the collection NFT that minted this NFT",
+                "royalties": "An object containing key-value pairs of addresses that map to payout percentages",
+                "issuerName": "The name of the creator",
+                "attributes": "An array of traits and values that define attributes of the NFT"
             }
         },
         "mintNativeToken": {
-            "decimals": "IRC30 可选参数：代币使用的小数点数(将代币金额除以10^小数，以获得其用户代表权)。",
-            "description": "IRC30的可选参数：代币的人性化描述。",
-            "url": "IRC30 可选参数：指向有关该代币的更多资源的URL，如网站或社交媒体页面。",
-            "logoUrl": "IRC30 可选参数：指向代币Logo的图像资源的URL。"
+            "decimals": "IRC30 optional parameter: Number of decimals the token uses (divide the token amount by 10^decimals to get its user representation).",
+            "description": "IRC30 optional parameter: The human-readable description of the token.",
+            "url": "IRC30 optional parameter: URL pointing to more resources about the token like a website or social media page.",
+            "logoUrl": "IRC30 optional parameter: URL pointing to an image resource of the token logo."
         },
         "mintNftForm": {
-            "collectionId": "可选参数：创建此 NFT 的收藏 NFT 的 UTXO 字符串",
-            "collectionName": "可选参数：收藏的名称",
-            "royalties": "可选参数：包含要支付百分比的地址的键值对的对象",
-            "issuerName": "可选参数：创建者名称",
-            "description": "可选参数：NFT 的描述",
-            "attributes": "可选参数：定义NFT属性的特性和值数组",
-            "uri": "要使用自定义媒体创建一个 URI，请先通过存储服务上传您的文件到IPFS (例如，https://nft.storage/)",
+            "collectionId": "Optional parameter: UTXO string of the collection NFT that minted this NFT",
+            "collectionName": "Optional parameter: The collection's name",
+            "royalties": "Optional parameter: An object containing key-value pairs of addresses that map to payout percentages",
+            "issuerName": "Optional parameter: The name of the creator",
+            "description": "Optional parameter: A description of the NFT",
+            "attributes": "Optional parameter: An array of traits and values that define attributes of the NFT",
+            "uri": "To create a URI using custom media, first upload your file to IPFS via a storage service (e.g. https://nft.storage/)",
             "quantity": "Optional parameter: The quantity of copies minted with this metadata."
         },
         "governance": {
-            "removeProposalWarning": "你必须在删除该提案之前停止对它进行表决。",
+            "removeProposalWarning": "You must stop voting for this proposal before removing it.",
             "outdatedNode": {
                 "title": "Outdated node URL",
                 "body": "The node URL for this proposal is outdated. Please update it to access the latest voting results."
@@ -2216,7 +2216,7 @@
             "warningText": "您目前正在使用一个开发者配置并已连接到 {networkName}"
         },
         "networkIndicator": {
-            "warningText": "网络性能降低。消息确认可能需要比平常更长一些。"
+            "warningText": "Network performance degraded. Message confirmation may take a bit longer than usual."
         }
     },
     "permissions": {
@@ -2227,102 +2227,102 @@
     },
     "tabs": {
         "wallet": "钱包",
-        "collectibles": "合集",
+        "collectibles": "Collectibles",
         "governance": "治理",
-        "developer": "开发者",
+        "developer": "Developer",
         "tokens": "代币",
         "activity": "活动"
     },
     "pills": {
         "stake": {
-            "Pending": "质押给",
-            "Confirmed": "已质押给",
-            "Conflicting": "质押失败"
+            "Pending": "staking for",
+            "Confirmed": "staked for",
+            "Conflicting": "failed to stake"
         },
         "external": {
             "incoming": {
-                "Pending": "正在接收来自",
-                "Confirmed": "收到来自",
-                "Conflicting": "接收失败"
+                "Pending": "receiving from",
+                "Confirmed": "received from",
+                "Conflicting": "failed to receive"
             },
             "outgoing": {
-                "Pending": "正在发送给",
-                "Confirmed": "已发送至",
-                "Conflicting": "发送失败"
+                "Pending": "sending to",
+                "Confirmed": "sent to",
+                "Conflicting": "failed to send"
             }
         },
         "internal": {
             "incoming": {
-                "Pending": "正在接收来自",
-                "Confirmed": "接收到来自",
-                "Conflicting": "传送失败"
+                "Pending": "transferring from",
+                "Confirmed": "transferred from",
+                "Conflicting": "failed to transfer"
             },
             "outgoing": {
-                "Pending": "正在发送给",
-                "Confirmed": "已发送给",
-                "Conflicting": "传送失败"
+                "Pending": "transferring to",
+                "Confirmed": "transferred to",
+                "Conflicting": "failed to transfer"
             },
             "selfTransaction": {
-                "Pending": "正在发送给",
-                "Confirmed": "已发送给",
-                "Conflicting": "传送失败"
+                "Pending": "transferring to",
+                "Confirmed": "transferred to",
+                "Conflicting": "failed to transfer"
             }
         },
         "mint": {
-            "Pending": "锻造中",
-            "Confirmed": "已锻造",
-            "Conflicting": "锻造失败"
+            "Pending": "minting",
+            "Confirmed": "minted",
+            "Conflicting": "failed to mint"
         },
         "burn": {
-            "Pending": "燃烧中",
-            "Confirmed": "烧毁的",
-            "Conflicting": "燃烧失败"
+            "Pending": "burning",
+            "Confirmed": "burned",
+            "Conflicting": "failed to burn"
         },
         "consolidation": {
-            "Pending": "合并中Output",
-            "Confirmed": "合并的Output",
-            "Conflicting": "合并Output失败"
+            "Pending": "Consolidating outputs",
+            "Confirmed": "Outputs consolidated",
+            "Conflicting": "failed to consolidate outputs"
         },
         "migrate": {
-            "Pending": "迁移到",
-            "Confirmed": "已迁移",
-            "Conflicting": "迁移失败"
+            "Pending": "migrating for",
+            "Confirmed": "migrated for",
+            "Conflicting": "failed to migrate"
         },
         "asyncStatus": {
-            "unclaimed": "未认领",
-            "claimed": "已认领",
-            "expired": "已过期"
+            "unclaimed": "unclaimed",
+            "claimed": "claimed",
+            "expired": "expired"
         },
         "governance": {
             "increaseVotingPower": {
-                "Pending": "增加投票权",
-                "Confirmed": "增加投票权",
-                "Conflicting": "增加投票权失败"
+                "Pending": "increasing voting power",
+                "Confirmed": "increased voting power",
+                "Conflicting": "failed to increased voting power"
             },
             "decreaseVotingPower": {
-                "Pending": "降低投票权",
-                "Confirmed": "降低投票权重",
-                "Conflicting": "降低投票权重失败"
+                "Pending": "decreasing voting power",
+                "Confirmed": "decreased voting power",
+                "Conflicting": "failed to decreased voting power"
             },
             "startVoting": {
-                "Pending": "投票给",
-                "Confirmed": "已投票给",
-                "Conflicting": "无法成功投票给"
+                "Pending": "voting for",
+                "Confirmed": "voted for",
+                "Conflicting": "failed to vote for"
             },
             "stopVoting": {
-                "Pending": "停止投票给",
-                "Confirmed": "已停止投票给",
-                "Conflicting": "无法停止投票给"
+                "Pending": "stopping voting for",
+                "Confirmed": "stopped voting for",
+                "Conflicting": "failed to stopped voting for"
             },
             "changedVote": {
-                "Pending": "变更投票给",
-                "Confirmed": "已变更投票给",
-                "Conflicting": "无法变更投票给"
+                "Pending": "changing vote for",
+                "Confirmed": "changed vote for",
+                "Conflicting": "failed to change vote for"
             },
             "revote": {
-                "Pending": "重新投票",
-                "Confirmed": "重新投票",
-                "Conflicting": "无法重新投票"
+                "Pending": "revoting",
+                "Confirmed": "revote",
+                "Conflicting": "failed to revote"
             },
             "proposalStatus": {
                 "upcoming": "Announcement",
@@ -2335,9 +2335,9 @@
         },
         "alias": {
             "creation": {
-                "Pending": "创建别名",
-                "Confirmed": "别名已创建",
-                "Failed": "创建别名失败"
+                "Pending": "creating alias",
+                "Confirmed": "alias created",
+                "Failed": "Failed to create alias"
             }
         },
         "networkHealth": {
@@ -2346,18 +2346,18 @@
             "operational": "Operational",
             "disconnected": "Disconnected"
         },
-        "locked": "已锁定",
-        "smartContract": "智能合约"
+        "locked": "locked",
+        "smartContract": "smart contract"
     },
     "menus": {
         "expirationTimePicker": {
-            "none": "无过期时间",
-            "1hour": "1 小时内",
-            "1day": "1 天内",
-            "1week": "1 周内",
+            "none": "No expiration time",
+            "1hour": "In 1 hour",
+            "1day": "In 1 day",
+            "1week": "In 1 week",
             "customDate": {
-                "title": "自定义时间",
-                "subtitle": "设置自定义过期时间"
+                "title": "Custom date",
+                "subtitle": "Set custom expiry date"
             }
         }
     }

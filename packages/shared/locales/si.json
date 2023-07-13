@@ -1018,12 +1018,12 @@
         "shimmer-info": {
             "title": "ෂිමර් ගැන",
             "body1": "ත්‍යාගයක් ලෙස ඔබ SMR ටෝකන උපයා ගැනීමට සුබ පැතුම්. ෂිමර් යනු IOTA හි ප්‍රධාන වැඩිදියුණු කිරීම් පරීක්ෂා කිරීමට දිරිගන්වන ලද වේදිකා ජාලයකි.",
-            "body2": "අපි 2022 දී Shimmer දියත් කිරීමට ඉලක්ක කරමු. ජාලය දියත් කළ පසු ඔබේ ටෝකන මාරු කිරීමට හැකි වනු ඇත."
+            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
         },
         "assembly-info": {
             "title": "එකලස් කිරීම ගැන",
             "body1": "ත්‍යාගයක් ලෙස ඔබ ASMB ටෝකන උපයා ගැනීමට සුබ පැතුම්. එකලස් කිරීම යනු IOTA මත පරිමාණය කළ හැකි ස්මාර්ට් කොන්ත්‍රාත්තු යෙදවීම සඳහා බහු-දාම ජාලයකි.",
-            "body2": "අපි 2022 දී එකලස් කිරීම දියත් කිරීමට ඉලක්ක කරමු. ජාලය දියත් වූ පසු ඔබේ ටෝකන මාරු කිරීමට හැකි වනු ඇත."
+            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
         },
         "confirmDeveloperProfile": {
             "title": "ඔබ සංවර්ධක පැතිකඩක් සාදමින් සිටී",

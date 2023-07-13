@@ -7,25 +7,25 @@
                     "body": "Firefly is the official wallet software for {network}."
                 },
                 "legal": {
-                    "title": "Privacy Beleid & Algemene Voorwaarden",
-                    "body": "Lees a.u.b. het Privacybeleid en de Algemene Voorwaarden.",
-                    "checkbox": "Ik heb het Privacy Beleid en de Algemene Voorwaarden gelezen en ga hier mee akkoord"
+                    "title": "Privacy Policy & Terms of Service",
+                    "body": "Please review the Privacy Policy and Terms of Service.",
+                    "checkbox": "I've read and I accept the Privacy Policy and Terms of Service"
                 },
                 "languageAndAppearance": {
-                    "title": "Taal & weergave",
-                    "body": "Kies uw taal en thema."
+                    "title": "Language & appearance",
+                    "body": "Choose your language and theme."
                 }
             },
             "networkSetup": {
                 "chooseProtocol": {
-                    "title": "Kies protocol",
-                    "body": "Stel het protocol voor uw profiel in.",
-                    "iota": "Standaard IOTA netwerk",
-                    "shimmer": "Experimenteel IOTA staging netwerk"
+                    "title": "Choose protocol",
+                    "body": "Set the protocol for your profile.",
+                    "iota": "Default IOTA network",
+                    "shimmer": "Experimental IOTA staging network"
                 },
                 "chooseNetwork": {
-                    "title": "Kies netwerk",
-                    "body": "Stel het netwerk voor uw profiel in.",
+                    "title": "Choose network",
+                    "body": "Set the network for your profile.",
                     "iota": {
                         "title": "IOTA",
                         "body": "IOTA Mainnet"
@@ -138,7 +138,7 @@
             "profileRecovery": {
                 "importMnemonicPhrase": {
                     "title": "Enter your recovery phrase",
-                    "body": "Een herstel zin is 24 woorden lang en bevat alleen kleine letters met spaties ertussen. De herstel zin wordt gebruikt om bestaande Firefly profielen te herstellen.",
+                    "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly profiles.",
                     "enter": "Enter your secret recovery phrase",
                     "phraseDetected": "24 word recovery phrase detected"
                 },
@@ -158,19 +158,19 @@
             "shimmerClaiming": {
                 "claimRewards": {
                     "title": "Your Shimmer staking rewards",
-                    "body": "Controleer of je Shimmer staking beloning juist is. Je moet mogelijk meerdere keren zoeken om je volledige saldo te vinden."
+                    "body": "Check that your Shimmer staking rewards are correct. You may need to search multiple times to find your full balance."
                 },
                 "success": {
-                    "title": "Schimmer opgeëist",
-                    "body": "Je hebt met succes je Shimmer tokens geclaimd.",
+                    "title": "Shimmer claimed",
+                    "body": "You have successfully claimed your Shimmer tokens.",
                     "totalRewards": "Total rewards",
                     "successfullyFound": "Successfully found {amount}"
                 }
             },
             "congratulations": {
-                "title": "Instellen van profiel bijna voltooid...",
+                "title": "Profile setup almost complete...",
                 "fundsMigrated": "Funds migrated",
-                "body": "Je nieuwe profiel zal klaar zijn zodra het dashboard met succes geladen is.",
+                "body": "Your new profile will be ready once the dashboard has successfully loaded.",
                 "ledgerHint": "Do not disconnect your Ledger device until the dashboard has finished loading.",
                 "softwareMigratedBody": "You have successfully migrated your funds to the new network",
                 "fireflyLedgerBody": "Your Ledger profile was successfully recovered and you can now continue.",
@@ -246,8 +246,8 @@
         "settings": {
             "settings": "Instellingen",
             "general": {
-                "title": "Algemeen",
-                "description": "Het uiterlijk van uw app en andere algemene instellingen configureren"
+                "title": "General",
+                "description": "Configure your app's appearance and other general settings"
             },
             "profile": {
                 "title": "Profiel",
@@ -264,8 +264,8 @@
                 "description": "Wijzig uw wachtwoord en pas de beveiligingsinstellingen aan"
             },
             "advanced": {
-                "title": "Geavanceerd",
-                "description": "Hulpmiddelen en handmatige instellingen voor technische gebruikers"
+                "title": "Advanced",
+                "description": "Tools and manual settings for technical users"
             },
             "helpAndInfo": {
                 "title": "Hulp en Informatie",
@@ -338,8 +338,8 @@
                 "success": "Je hebt je profielnaam gewijzigd"
             },
             "walletFinder": {
-                "title": "Portemonnee zoeker",
-                "description": "Voer een uitgebreide zoekopdracht uit van uw eerder gebruikte portemonnees"
+                "title": "Wallet finder",
+                "description": "Perform an extended search of your previously used wallets"
             },
             "hiddenAccounts": {
                 "title": "Verborgen portemonnees",
@@ -350,8 +350,8 @@
                 "description": "Verwijdert uw hele profiel, portemonnees en transactiegeschiedenis. Zorg ervoor dat u een back-up hebt"
             },
             "deepLinks": {
-                "title": "Diepe links",
-                "description": "Automatisch transactiegegevens invullen in Firefly bij het klikken op een diepe link beginnend met {appProtocol}://"
+                "title": "Deep links",
+                "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
             "networkInformation": {
                 "title": "Network information",
@@ -444,16 +444,16 @@
         },
         "dashboard": {
             "network": {
-                "operational": "Netwerk Operationeel",
-                "degraded": "Netwerk gedegradeerd",
-                "down": "Netwerk Inactief",
-                "disconnected": "Verbinding met node verbroken",
+                "operational": "Network operational",
+                "degraded": "Network degraded",
+                "down": "Network down",
+                "disconnected": "Disconnected from node",
                 "status": "Status",
                 "messagesPerSecond": "Berichten per seconde",
                 "referencedRate": "Bevestigings percentage"
             },
             "profileModal": {
-                "allSettings": "Alle instellingen",
+                "allSettings": "All settings",
                 "profileApplication": "Profile, application, security",
                 "logout": "Uitloggen",
                 "stronghold": {
@@ -573,7 +573,7 @@
                 "totalWalletRewards": "Totale portemonnee beloningen",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly is een vrij toegankelijk, zeer schaalbaar multi-chain netwerk voor het bouwen en uitrollen van configureerbare smart contracts. Assembly is de toekomst van web3. "
+                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -750,7 +750,7 @@
         },
         "password": {
             "title": "Wachtwoord vereist",
-            "subtitle": "Geef je wachtwoord op om je portemonnees te ontgrendelen",
+            "subtitle": "Please provide your password to unlock your wallets",
             "backup": "Voer uw wachtwoord in om een back-up te exporteren"
         },
         "qr": {
@@ -770,8 +770,8 @@
             "latestInstalled": "You are running the latest and safest version"
         },
         "backupStronghold": {
-            "title": "Back-up uw stronghold bestand",
-            "body": "Het is belangrijk om regelmatig een back-up van uw portemonnee te maken om ervoor te zorgen dat u een kopie hebt van uw portemonnees en de transactiegeschiedenis. Als u uw back-up- en herstelzin kwijtraakt, verliest u toegang tot uw fondsen."
+            "title": "Backup your stronghold file",
+            "body": "It is important to back up your wallet regularly to ensure you have a copy of your wallets and transaction history. If you lose your backup and recovery phrase you will lose access to your funds."
         },
         "deeplinkAccountSwitch": {
             "title": "Select a wallet",
@@ -827,7 +827,7 @@
             "titleRemove": "Verwijder node",
             "titleRemoveAll": "Alle nodes verwijderen",
             "titleDetails": "Node details",
-            "titleInfo": "Node informatie",
+            "titleInfo": "Node information",
             "addingNode": "Toevoegen node",
             "updatingNode": "Node bijwerken",
             "loadingNodeInfo": "Laden van node info",
@@ -839,39 +839,39 @@
             "removeConfirmation": "Weet u zeker dat u deze node wilt verwijderen?",
             "info": {
                 "general": {
-                    "tab": "Algemeen",
-                    "name": "Naam",
+                    "tab": "General",
+                    "name": "Name",
                     "url": "URL",
-                    "version": "Versie",
-                    "latestMilestone": "Laatste mijlpaal",
-                    "confirmedMilestone": "Bevestigde mijlpaal",
-                    "pruningIndex": "Index opschonen",
-                    "features": "Functies"
+                    "version": "Version",
+                    "latestMilestone": "Latest milestone",
+                    "confirmedMilestone": "Confirmed milestone",
+                    "pruningIndex": "Pruning index",
+                    "features": "Features"
                 },
                 "metrics": {
-                    "tab": "Statistieken",
-                    "blocksPerSecond": "Blokken per seconde",
-                    "referencedBlocksPerSecond": "Gerefereerde blokken per seconde",
-                    "referencedRate": "Snelheid refereren",
-                    "latestMilestone": "Laatste mijlpaal",
-                    "confirmedMilestone": "Bevestigde mijlpaal"
+                    "tab": "Metrics",
+                    "blocksPerSecond": "Blocks per second",
+                    "referencedBlocksPerSecond": "Referenced blocks per second",
+                    "referencedRate": "Referenced rate",
+                    "latestMilestone": "Latest milestone",
+                    "confirmedMilestone": "Confirmed milestone"
                 },
                 "protocol": {
                     "tab": "Protocol",
-                    "network": "Netwerk",
+                    "network": "Network",
                     "bech32Hrp": "Bech32 HRP",
-                    "tokenSupply": "Token voorraad",
+                    "tokenSupply": "Token supply",
                     "version": "Version",
                     "minPowScore": "Min PoW Score"
                 },
                 "baseToken": {
-                    "tab": "Basis token",
+                    "tab": "Base token",
                     "token": "Token",
                     "tickerSymbol": "Ticker",
-                    "unit": "Eenheid",
-                    "subunit": "Sub-eenheid",
-                    "decimals": "Decimalen",
-                    "useMetricPrefix": "Metrische voorvoegsel gebruiken"
+                    "unit": "Unit",
+                    "subunit": "Sub-unit",
+                    "decimals": "Decimals",
+                    "useMetricPrefix": "Use metric prefix"
                 }
             }
         },
@@ -909,16 +909,16 @@
             "selectAmount": "Send {tokenName}",
             "selectRecipient": "Send {assetName} to",
             "transactionSummary": "Transaction to {recipient}",
-            "surplusIncluded": "Deze transactie bevat een overschot. Controleer of dit het bedrag is dat u wilt versturen.",
+            "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
             "sendingFromStakedAccount": "U wilt een transactie versturen vanuit een portemonnee die huidig gestaked word. Dit zou uw staking kunnen stopzetten. Voelt u vrij om uw transfer te voltooien, maar u moet daarna wellicht uw resterende tokens opnieuw laten staken.",
             "sendingFromStakedAccountBelowMinReward": "Je verstuurt een transactie vanuit een portemonnee die de minimum staking beloningen nog niet heeft bereikt. Dit kan er voor zorgen dat je tokens niet langer gestaket worden en je je staking beloningen op deze portemonnee verliest."
         },
         "walletFinder": {
-            "title": "Portemonnee zoeker",
-            "body": "Voer een meer uitvoerigere zoekopdracht uit van adressen om ontbrekende saldi en portemonnees te vinden.",
-            "accountsSearched": "Portemonnees doorzocht",
-            "accountsFound": "Portemonnees gevonden",
-            "totalWalletBalance": "Totaalsaldo",
+            "title": "Wallet finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances and wallets.",
+            "accountsSearched": "Wallets searched",
+            "accountsFound": "Wallets found",
+            "totalWalletBalance": "Total balance",
             "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown."
         },
         "riskFunds": {
@@ -949,12 +949,12 @@
             "confirm": "Om door te gaan, bevestig de prompt die wordt weergegeven op uw Ledger apparaat"
         },
         "ledgerAppGuide": {
-            "title": "Handleiding voor het installeren van de {legacy} app",
+            "title": "Guide to installing the {legacy} app",
             "steps": {
                 "0": "Installeer en open de Ledger Live applicatie",
                 "1": "Zorg ervoor dat uw Ledger is verbonden",
-                "2": "Zoek naar de {legacy} app. Mogelijk moet de Ledger Live developer mode geactiveerd worden.",
-                "3": "Installeer de {legacy} app",
+                "2": "Search for the {legacy} app. You may need to enable Ledger Live developer mode.",
+                "3": "Install the {legacy} app",
                 "4": "Vergeet niet dat het belangrijk is om Ledger Live te sluiten voordat u terugkeert naar Firefly"
             }
         },
@@ -1018,12 +1018,12 @@
         "shimmer-info": {
             "title": "Over Shimmer",
             "body1": "Gefeliciteerd, u heeft SMR tokens verdiend als stake beloning. Shimmer is hét geincentiveerde ontwikkelnetwerk voor het testen van belangrijke ontwikkelingen van IOTA.",
-            "body2": "We streven naar een launch van Shimmer in 2022. Uw tokens zullen beschikbaar zijn zodra het netwerk gelanceerd is."
+            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
         },
         "assembly-info": {
             "title": "Over Assembly",
             "body1": "Gefeliciteerd, u heeft ASMB tokens verdiend als stake beloning. Assembly is een multi-chain netwerk voor het inzetten van schaalbare smart contracts op IOTA.",
-            "body2": "We streven naar een launch van Assembly in 2022. Uw tokens zullen beschikbaar zijn zodra het netwerk gelanceerd is."
+            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
         },
         "confirmDeveloperProfile": {
             "title": "Je maakt een ontwikkelaarsprofiel aan",
@@ -1057,7 +1057,7 @@
             }
         },
         "sendForm": {
-            "title": "Verstuur fondsen"
+            "title": "Send funds"
         },
         "tokenInformation": {
             "newTokenTitle": "New token",
@@ -1206,13 +1206,13 @@
         "close": "Sluiten",
         "dismiss": "Sluiten",
         "claim": "Claim",
-        "claiming": "Claimen",
+        "claiming": "Claiming",
         "claimingRewards": "Claiming rewards",
-        "reject": "Afwijzen",
+        "reject": "Reject",
         "confirmRejection": {
-            "title": "Transactie afwijzen",
-            "description": "Weet u zeker dat u deze transactie wilt afwijzen?",
-            "node": "Let op dat het afwijzen van een transactie deze alleen verbergt in uw activiteitenfeed"
+            "title": "Reject transaction",
+            "description": "Are you sure you want to reject this transaction?",
+            "node": "Please note that rejecting a transaction only hides it from your Activity feed"
         },
         "confirmTokenBurn": {
             "title": "Burn {assetName}",
@@ -1227,14 +1227,14 @@
         "save": "Opslaan",
         "importSeed": "Importeer een bestaande seed",
         "restoreWallet": {
-            "iota": "Migreer of herstel een portemonnee",
-            "shimmer": "Herstel Shimmer profiel",
+            "iota": "Migrate or restore a wallet",
+            "shimmer": "Restore Shimmer profile",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
-            "iota": "Migreren naar Chrysalis of een bestaande portemonnee herstellen",
-            "shimmer": "Een bestaand Shimmer profiel herstellen",
+            "iota": "Migrate to Chrysalis or restore an existing wallet",
+            "shimmer": "Restore an existing Shimmer profile",
             "testnet": "Restore an existing Testnet profile",
             "custom": "Restore an existing Custom Network profile"
         },
@@ -1244,17 +1244,17 @@
         },
         "createWallet": "Create a new {network} profile",
         "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown}}",
-        "claimShimmer": "Claim Shimmer staking beloningen",
-        "claimShimmerDescription": "Importeer IOTA profiel en claim staking beloning",
+        "claimShimmer": "Claim Shimmer staking rewards",
+        "claimShimmerDescription": "Import IOTA profile and claim staking rewards",
         "createAlias": "Create alias",
         "createAliasDescription": "Create alias output",
         "savePassword": "Wachtwoord opslaan",
         "useBiometric": "Biometrische beveiliging gebruiken",
-        "setupPinCode": "Pincode instellen",
-        "setPin": "Pincode instellen",
-        "setPinCode": "Pincode instellen",
-        "confirmPin": "Pincode bevestigen",
-        "confirmPinCode": "Pincode bevestigen",
+        "setupPinCode": "Setup PIN code",
+        "setPin": "Set PIN",
+        "setPinCode": "Set PIN code",
+        "confirmPin": "Confirm PIN",
+        "confirmPinCode": "Confirm PIN code",
         "enterYourPin": "Voer uw pincode in",
         "saveBackupFile": "Bewaar back-upbestand",
         "iveWrittenRecoveryPhrase": "Ik heb mijn herstelzin opgeschreven",
@@ -1309,7 +1309,7 @@
         "redo": "Opnieuw",
         "cut": "Knippen",
         "copy": "Kopiëren",
-        "copyAllInformation": "Kopieer alle informatie",
+        "copyAllInformation": "Copy all information",
         "paste": "Plakken",
         "selectAll": "Selecteer Alles",
         "addAccount": "Portemonnee Toevoegen",
@@ -1333,10 +1333,10 @@
         "showHiddenAccounts": "Toon verborgen portemonnees",
         "confirm": "Bevestig",
         "hideNetworkStatistics": "Netwerkstatistieken verbergen",
-        "findWallets": "Portefeuilles zoeken",
-        "useBalanceFinder": "Saldo zoeker gebruiken",
-        "search": "Zoek",
-        "searching": "Zoeken",
+        "findWallets": "Find wallets",
+        "useBalanceFinder": "Use balance finder",
+        "search": "Search",
+        "searching": "Searching",
         "searchAgain": "Opnieuw zoeken",
         "closeFirefly": "Sluit Firefly",
         "generateAddress": "Genereer adres",
@@ -1354,9 +1354,9 @@
         "okIUnderstand": "OK, ik begrijp het",
         "readMore": "Lees meer",
         "searchForRewards": "Search for rewards",
-        "claimRewards": "Claim beloningen",
-        "rerunClaimProcess": "Opnieuw uitvoeren claim proces",
-        "addPublicNote": "Openbare notitie toevoegen",
+        "claimRewards": "Claim rewards",
+        "rerunClaimProcess": "Rerun claim process",
+        "addPublicNote": "Add public note",
         "backup": "Backup",
         "mint": "Mint",
         "mintNativeToken": "Mint native token",
@@ -1387,7 +1387,7 @@
         "addChain": "Add chain"
     },
     "general": {
-        "recipient": "Ontvanger",
+        "recipient": "Recipient",
         "password": "Wachtwoord",
         "confirmPassword": "Bevestig wachtwoord",
         "currentPassword": "Huidig wachtwoord",
@@ -1418,8 +1418,8 @@
         "sendingNft": "Sending NFT",
         "receivedNft": "NFT received",
         "receivingNft": "Receiving NFT",
-        "transfer": "Overdracht",
-        "transferring": "Overzetten",
+        "transfer": "Transfer",
+        "transferring": "Transferring",
         "transferNft": "Transfer NFT",
         "transferringNft": "Transferring NFT",
         "mintedNft": "Minted NFT",
@@ -1429,8 +1429,8 @@
         "shimmerGenesis": "Shimmer Genesis",
         "minted": "Minted",
         "minting": "Minting",
-        "burned": "Opgebrand",
-        "burning": "Opbranden",
+        "burned": "Burned",
+        "burning": "Burning",
         "consolidated": "Outputs consolidated",
         "consolidating": "Consolidating outputs",
         "aliasCreated": "Alias created",
@@ -1456,18 +1456,18 @@
         "from": "Van",
         "to": "Naar",
         "and": "and",
-        "receiveFunds": "Fondsen ontvangen",
+        "receiveFunds": "Receive funds",
         "address": "Adres",
         "myAddress": "My address",
-        "myNetworkAddress": "Mijn {networkName} adres",
+        "myNetworkAddress": "My {networkName} address",
         "shareAddress": "Een adres delen",
         "yourAddress": "Jouw adres",
         "newRemainder": "Nieuw Resterend",
         "remainder": "Resterend",
         "generateNewAddress": "Genereer nieuw adres",
-        "copyToClipboard": "Kopieer naar klembord",
+        "copyToClipboard": "Copy to clipboard",
         "copyAddress": "Adres kopiëren",
-        "viewOnExplorer": "Weergeven in Verkenner",
+        "viewOnExplorer": "View on Explorer",
         "import": "Importeer",
         "stronghold": "Stronghold",
         "language": "Taal",
@@ -1492,7 +1492,7 @@
         "accountName": "Naam portemonnee",
         "latestTransactions": "Meest recente transacties",
         "transactions": "Transacties",
-        "activity": "Activiteit",
+        "activity": "Activity",
         "security": "Beveiliging",
         "accountAddress": "Portemonnee adres",
         "network": "Netwerk",
@@ -1516,8 +1516,8 @@
         "noFilteredActivity": "No matching activities",
         "noAssets": "No assets",
         "noFilteredAsset": "No matching assets",
-        "thisMonth": "Deze maand",
-        "search": "Zoeken",
+        "thisMonth": "This month",
+        "search": "Search",
         "firstSync": "Geschiedenis synchroniseren, dit kan even duren...",
         "transferSyncing": "Portemonnee synchroniseren",
         "transferSelectingInputs": "Invoer selecteren",
@@ -1554,12 +1554,12 @@
         "creatingProfile": "Profiel aanmaken, even geduld alstublieft...",
         "fundMigration": "Saldo migratie",
         "accountRemoved": "Deze portemonnee is verborgen. Maak het zichtbaar om de overdracht uit te voeren.",
-        "fromAddress": "van {account}",
-        "toAddress": "naar {account}",
-        "stakedFor": "Staked voor {account}",
-        "unstakedFor": "Niet gestaket voor {account}",
-        "votedFor": "Gestemd op {account}",
-        "unvotedFor": "Niet gestemd voor {account}",
+        "fromAddress": "from {account}",
+        "toAddress": "to {account}",
+        "stakedFor": "Staked for {account}",
+        "unstakedFor": "Unstaked for {account}",
+        "votedFor": "Voted for {account}",
+        "unvotedFor": "Unvoted for {account}",
         "stakingTransaction": "Staking transactie",
         "unstakingTransaction": "Unstaking transactie",
         "legacyNetwork": "Verouderd netwerk",
@@ -1567,7 +1567,7 @@
         "version": "Versie {version}",
         "yourWallets": "Jouw wallets",
         "unknown": "Onbekend",
-        "unknownAddress": "Onbekend adres",
+        "unknownAddress": "Unknown address",
         "none": "Geen",
         "staked": "Gestaket",
         "unstaked": "Niet gestaket",
@@ -1577,9 +1577,9 @@
         "stakedFunds": "Gestakete saldo",
         "unstakedFunds": "Niet ingezet saldo",
         "accountColor": "Kleur portemonnee",
-        "transactionTime": "Transactie tijd",
-        "surplus": "Overschot",
-        "storageDeposit": "Opslag borg",
+        "transactionTime": "Transaction time",
+        "surplus": "Surplus",
+        "storageDeposit": "Storage deposit",
         "giftedStorageDeposit": "Gifted storage deposit",
         "storageDepositPerNft": "Storage deposit per NFT",
         "totalStorageDeposit": "Total storage deposit",
@@ -1723,7 +1723,7 @@
             "confirmed": "confirmed",
             "pending": "pending",
             "claimed": "claimed",
-            "unclaimed": "niet-opgeëist"
+            "unclaimed": "unclaimed"
         },
         "type": {
             "label": "Type",
@@ -1803,7 +1803,7 @@
             "notEnabled": "Deep links are not enabled",
             "invalidFormat": "The deep link you followed is invalid",
             "invalidAmount": "The amount in deep link is not an integer number {amount}",
-            "invalidSurplus": "Het overschot in de diepe link is geen nummer {surplus}",
+            "invalidSurplus": "The surplus in deep link is not a number {surplus}",
             "surplusNotSupported": "The surplus is only supported for native tokens",
             "governance": {
                 "unrecognizedOperation": "Unrecognized Governance operation: {operation}"
@@ -1823,8 +1823,8 @@
             "error": "Claiming transaction failed"
         },
         "hideActivity": {
-            "success": "Activiteit is verborgen",
-            "error": "Verbergen van activiteit mislukt"
+            "success": "Activity was hidden",
+            "error": "Failed to hide activity"
         },
         "faucetRequest": {
             "success": "Request for tokens sent to the faucet"
@@ -1853,11 +1853,11 @@
             "error": "An error occurred while searching for rewards"
         },
         "claimShimmerRewards": {
-            "success": "Schimmer beloning opgeëist voor {accountAlias}",
-            "error": "Er is een fout opgetreden tijdens het claimen. Probeer het opnieuw."
+            "success": "Shimmer rewards claimed for {accountAlias}",
+            "error": "An error occurred while claiming. Try again."
         },
         "vote": {
-            "success": "Stem succesvol verzonden"
+            "success": "Votes successfully cast"
         },
         "stopVoting": {
             "success": "Voting successfully stopped"
@@ -1895,7 +1895,7 @@
             "length": "Je pincode moet {length, plural, one {# cijfer} other {# cijfers}} lang zijn.",
             "match": "Pincodes komen niet overeen.",
             "incorrect": "Uw huidige pincode is onjuist.",
-            "invalid": "Ongeldige PIN-code."
+            "invalid": "Invalid PIN code."
         },
         "address": {
             "wrongAddressType": "Wrong address type"
@@ -1913,16 +1913,16 @@
             "index": "Uw rekeningindex moet een nummer zijn tussen 0 en 2,147.483.647.",
             "page": "Uw accountpagina moet een nummer zijn tussen 0 en 2,147.483.647.",
             "syncing": "Er is een fout opgetreden bij het synchroniseren van uw portemonnees.",
-            "cannotRemove": "Kan portemonnee niet verwijderen.",
-            "withBalance": "U moet uw saldo overmaken voordat u deze portemonnee kunt verwijderen.",
-            "notLast": "U kunt alleen uw laatste portemonnee verwijderen.",
+            "cannotRemove": "Unable to remove wallet.",
+            "withBalance": "You must transfer all balances before you can delete this wallet.",
+            "notLast": "You can only delete your last wallet.",
             "notFound": "Unable to find account",
             "cannotGetBoundAccount": "Unable to get bound account"
         },
         "send": {
             "addressLength": "Adressen moeten {length, plural, one {1 teken} other {# tekens}} lang zijn.",
             "amountTooHigh": "Dit is hoger dan uw beschikbare saldo.",
-            "amountNoFloat": "Kan geen decimaal teken gebruiken voor de kleinste geselecteerde eenheid",
+            "amountNoFloat": "Cannot use decimal places with the smallest unit selected",
             "amountInvalidFormat": "De opgegeven waarde lijkt een ongeldige waarde te zijn.",
             "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
             "tagTooLong": "The tag cannot be longer than 64 bytes.",
@@ -1951,7 +1951,7 @@
             "nftRequired": "NFT is required",
             "nftNotInHex": "NFT address has to be in HEX format",
             "nftNotInPossession": "NFT not in possession",
-            "reservedTagKeyword": "Gereserveerd tag trefwoord kan niet worden gebruikt"
+            "reservedTagKeyword": "Unable to use reserved tag keyword"
         },
         "layer2": {
             "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account."
@@ -2098,7 +2098,7 @@
     },
     "warning": {
         "transaction": {
-            "invalidExpirationDateTime": "De gekozen vervaldatum is ongeldig."
+            "invalidExpirationDateTime": "The chosen expiration date is invalid."
         },
         "node": {
             "http": "Het gebruik van nodes over HTTP laat verkeer onversleuteld en kan een veiligheidsrisico opleveren."
@@ -2133,7 +2133,7 @@
             "bodyDidNotReachMin": "Je hebt niet genoeg IOTA gestaket om de minimumbeloning te halen voor {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "Deze wallet heeft niet genoeg IOTA tokens om de minimumbeloning te behalen voor airdrop {airdrop}."
         },
-        "optionalInput": "Deze optionele gegevens zullen openbaar zijn op de verkenner en zichtbaar zijn voor iedereen.",
+        "optionalInput": "This optional data will be public on the explorer and viewable by everyone.",
         "transactionDetails": {
             "minting": {
                 "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
@@ -2144,21 +2144,21 @@
                 "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
             },
             "incoming": {
-                "storageDeposit": "Een terugvorderbare-storting is nodig om uw transactie op de Tangle op te slaan.",
-                "giftedStorageDeposit": "De opslag-storting voor deze transactie is aan u cadeau gedaan. U hoeft de storting niet terug te betalen.",
+                "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
+                "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
                 "expirationTime": "Claim these funds before the expiration time or they will be returned to the sender.",
-                "timelockDate": "De afzender stelt een tijdslot in voor deze fondsen. U kunt deze besteden zodra het tijdslot verloopt.",
-                "metadata": "Een optioneel gegevensveld voor het blijvend opslaan van gegevens op de Tangle.",
-                "tag": "Een kort optioneel gegevensveld. Door groepen transacties te taggen zouden deze makkelijker vindbaar kunnen worden.",
+                "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
+                "metadata": "An optional data field for storing data persistently on the Tangle.",
+                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for.",
                 "gasBudget": "Gas budget is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "outgoing": {
-                "storageDeposit": "Een opslag-storting is een terugvorderbare storting die nodig is om uw transactie op de Tangle op te slaan.",
-                "giftedStorageDeposit": "De ontvanger hoeft de storting niet terug te betalen.",
-                "expirationTime": "Als de ontvanger niet op tijd claimt dan worden je tokens aan jou teruggestuurd.",
-                "timelockDate": "U heeft een tijdslot toegevoegd aan deze transactie. De ontvanger zal deze gelden niet kunnen uitgeven totdat het tijdslot verloopt.",
-                "metadata": "Een optioneel gegevensveld voor het blijvend opslaan van gegevens op de Tangle.",
-                "tag": "Een kort optioneel gegevensveld. Door groepen transacties te taggen zouden deze makkelijker vindbaar kunnen worden.",
+                "storageDeposit": "A storage deposit is a refundable deposit needed to store your transaction on the Tangle.",
+                "giftedStorageDeposit": "The recipient does not need to refund the deposit.",
+                "expirationTime": "If the recipient does not claim in time your tokens will be returned to you.",
+                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funds until the timelock expires.",
+                "metadata": "An optional data field for storing data persistently on the Tangle.",
+                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for.",
                 "gasBudget": "Gas budget is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "nftMetadata": {
@@ -2274,9 +2274,9 @@
             "Conflicting": "failed to mint"
         },
         "burn": {
-            "Pending": "opbranden",
-            "Confirmed": "opbranden",
-            "Conflicting": "opbranden mislukt"
+            "Pending": "burning",
+            "Confirmed": "burned",
+            "Conflicting": "failed to burn"
         },
         "consolidation": {
             "Pending": "Consolidating outputs",
@@ -2289,9 +2289,9 @@
             "Conflicting": "failed to migrate"
         },
         "asyncStatus": {
-            "unclaimed": "niet geclaimed",
-            "claimed": "geclaimed",
-            "expired": "verlopen"
+            "unclaimed": "unclaimed",
+            "claimed": "claimed",
+            "expired": "expired"
         },
         "governance": {
             "increaseVotingPower": {
@@ -2351,13 +2351,13 @@
     },
     "menus": {
         "expirationTimePicker": {
-            "none": "Geen vervaltijd",
-            "1hour": "Over 1 uur",
-            "1day": "Over 1 dag",
-            "1week": "Over 1 week",
+            "none": "No expiration time",
+            "1hour": "In 1 hour",
+            "1day": "In 1 day",
+            "1week": "In 1 week",
             "customDate": {
-                "title": "Aangepaste datum",
-                "subtitle": "Aangepaste vervaldatum instellen"
+                "title": "Custom date",
+                "subtitle": "Set custom expiry date"
             }
         }
     }

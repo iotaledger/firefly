@@ -247,7 +247,7 @@
             "settings": "Ajustes",
             "general": {
                 "title": "General",
-                "description": "Configura la apariencia de la app y otros ajustes generales"
+                "description": "Configure your app's appearance and other general settings"
             },
             "profile": {
                 "title": "Perfil",
@@ -264,8 +264,8 @@
                 "description": "Cambie su contraseña y ajuste la configuración de seguridad"
             },
             "advanced": {
-                "title": "Avanzado",
-                "description": "Herramientas y ajustes manuales para usuarios técnicos"
+                "title": "Advanced",
+                "description": "Tools and manual settings for technical users"
             },
             "helpAndInfo": {
                 "title": "Ayuda e Información",
@@ -338,8 +338,8 @@
                 "success": "Has cambiado tu nombre de perfil"
             },
             "walletFinder": {
-                "title": "Buscador de billetera",
-                "description": "Realizar una búsqueda extendida de sus billeteras previamente usadas"
+                "title": "Wallet finder",
+                "description": "Perform an extended search of your previously used wallets"
             },
             "hiddenAccounts": {
                 "title": "Billeteras ocultas",
@@ -350,8 +350,8 @@
                 "description": "Elimina por completo su perfil, billeteras e historial de transacciones. Asegúrate de que tienes una copia de seguridad"
             },
             "deepLinks": {
-                "title": "Enlaces profundos",
-                "description": "Rellenar automáticamente los datos de transacción en Firefly al hacer clic en un enlace profundo que comienza con {appProtocol}://"
+                "title": "Deep links",
+                "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
             "networkInformation": {
                 "title": "Network information",
@@ -444,16 +444,16 @@
         },
         "dashboard": {
             "network": {
-                "operational": "Red operativa",
-                "degraded": "Red degradada",
-                "down": "Red caída",
-                "disconnected": "Desconectado del nodo",
+                "operational": "Network operational",
+                "degraded": "Network degraded",
+                "down": "Network down",
+                "disconnected": "Disconnected from node",
                 "status": "Estado",
                 "messagesPerSecond": "Mensajes por segundo",
                 "referencedRate": "Tasa referenciada"
             },
             "profileModal": {
-                "allSettings": "Todos los ajustes",
+                "allSettings": "All settings",
                 "profileApplication": "Profile, application, security",
                 "logout": "Cerrar sesión",
                 "stronghold": {
@@ -573,7 +573,7 @@
                 "totalWalletRewards": "Recompensas totales de la bileltera",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly es una red multicadena altamente escalable que no requiere de permiso para construir y desplegar contratos inteligentes. Assembly es el futuro de la web3. "
+                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -750,7 +750,7 @@
         },
         "password": {
             "title": "Contraseña requerida",
-            "subtitle": "Por favor proporcione su contraseña para desbloquear sus billeteras",
+            "subtitle": "Please provide your password to unlock your wallets",
             "backup": "Por favor, introduce tu contraseña para exportar una copia de seguridad"
         },
         "qr": {
@@ -770,8 +770,8 @@
             "latestInstalled": "You are running the latest and safest version"
         },
         "backupStronghold": {
-            "title": "Copia de seguridad de su archivo Stronghold",
-            "body": "Es importante hacer una copia de seguridad de su billetera regularmente para asegurarse de que tiene una copia de tus billeteras e historial de transacciones. Si pierde su copia de seguridad y su frase de recuperación perderá el acceso a sus fondos."
+            "title": "Backup your stronghold file",
+            "body": "It is important to back up your wallet regularly to ensure you have a copy of your wallets and transaction history. If you lose your backup and recovery phrase you will lose access to your funds."
         },
         "deeplinkAccountSwitch": {
             "title": "Select a wallet",
@@ -827,7 +827,7 @@
             "titleRemove": "Eliminar un nodo",
             "titleRemoveAll": "Eliminar todos los nodos",
             "titleDetails": "Detalles del nodo",
-            "titleInfo": "Información del nodo",
+            "titleInfo": "Node information",
             "addingNode": "Añadiendo nodo",
             "updatingNode": "Actualizando nodo",
             "loadingNodeInfo": "Cargando información del nodo",
@@ -840,38 +840,38 @@
             "info": {
                 "general": {
                     "tab": "General",
-                    "name": "Nombre",
+                    "name": "Name",
                     "url": "URL",
-                    "version": "Versión",
-                    "latestMilestone": "Último hito",
-                    "confirmedMilestone": "Hito confirmado",
-                    "pruningIndex": "Limpiando índice",
-                    "features": "Características"
+                    "version": "Version",
+                    "latestMilestone": "Latest milestone",
+                    "confirmedMilestone": "Confirmed milestone",
+                    "pruningIndex": "Pruning index",
+                    "features": "Features"
                 },
                 "metrics": {
-                    "tab": "Métricas",
-                    "blocksPerSecond": "Bloques por segundo",
-                    "referencedBlocksPerSecond": "Bloques referenciados por segundo",
-                    "referencedRate": "Tasa referenciada",
-                    "latestMilestone": "Último hito",
-                    "confirmedMilestone": "Hito confirmado"
+                    "tab": "Metrics",
+                    "blocksPerSecond": "Blocks per second",
+                    "referencedBlocksPerSecond": "Referenced blocks per second",
+                    "referencedRate": "Referenced rate",
+                    "latestMilestone": "Latest milestone",
+                    "confirmedMilestone": "Confirmed milestone"
                 },
                 "protocol": {
-                    "tab": "Protocolo",
-                    "network": "Red",
+                    "tab": "Protocol",
+                    "network": "Network",
                     "bech32Hrp": "Bech32 HRP",
-                    "tokenSupply": "Suministro del token",
+                    "tokenSupply": "Token supply",
                     "version": "Version",
                     "minPowScore": "Min PoW Score"
                 },
                 "baseToken": {
-                    "tab": "Token base",
+                    "tab": "Base token",
                     "token": "Token",
                     "tickerSymbol": "Ticker",
-                    "unit": "Unidad",
-                    "subunit": "Sub-unidad",
-                    "decimals": "Decimales",
-                    "useMetricPrefix": "Usar prefijo métrico"
+                    "unit": "Unit",
+                    "subunit": "Sub-unit",
+                    "decimals": "Decimals",
+                    "useMetricPrefix": "Use metric prefix"
                 }
             }
         },
@@ -914,12 +914,12 @@
             "sendingFromStakedAccountBelowMinReward": "Estás enviando una transferencia desde una cartera que aún no ha alcanzado las recompensas mínimas. Esto puede liberar tus fichas y puedes perder tus recompensas en esta cartera."
         },
         "walletFinder": {
-            "title": "Buscador de billetera",
-            "body": "Realizar una búsqueda más exhaustiva de direcciones para encontrar saldos y billeteras que faltan.",
-            "accountsSearched": "Billeteras buscadas",
-            "accountsFound": "Billeteras encontradas",
-            "totalWalletBalance": "Balance total",
-            "searchAgainHint": "¿Su saldo o número de billeteras es incorrecto? Busque de nuevo hasta que se muestre su saldo completo."
+            "title": "Wallet finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances and wallets.",
+            "accountsSearched": "Wallets searched",
+            "accountsFound": "Wallets found",
+            "totalWalletBalance": "Total balance",
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown."
         },
         "riskFunds": {
             "title": "Advertencia: fondos en riesgo durante la migración",
@@ -1000,7 +1000,7 @@
             "totalFundsStaked": "Total de fondos en Staking",
             "stakedSuccessfully": "Tus fondos se han Stakeado para {account}.",
             "unstakedSuccessfully": "Tus fondos han sido quitados de Staking para {account}.",
-            "singleAccountHint": "¿Buscas tus bilelteras? Firefly ha cambiado. Conmute entre las billeteras desde la barra de menú superior."
+            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
         },
         "stakingConfirmation": {
             "title": "Confirmar participación",
@@ -1018,12 +1018,12 @@
         "shimmer-info": {
             "title": "Sobre Shimmer",
             "body1": "Felicitaciones, has ganado tokens SMR como recompensa a tu staking. Shimmer es una red incentivada de staking para probar actualizaciones importantes en IOTA.",
-            "body2": "Nuestro objetivo es lanzar Shimmer en 2022. Tus tokens estarán disponibles para su transferencia una vez que se lance la red."
+            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
         },
         "assembly-info": {
             "title": "Sobre Assembly",
             "body1": "Felicitaciones, has ganado tokens ASMB como recompensa por tu staking. Assembly es una red multi-cadena para desplegar contratos inteligentes escalables en IOTA.",
-            "body2": "Está previsto lanzar Assembly en 2022. Tus tokens estarán disponibles para transferir cuando se lance la red."
+            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
         },
         "confirmDeveloperProfile": {
             "title": "Estás creando un perfil de desarrollador",
@@ -1050,14 +1050,14 @@
             "hint": "¿No encuentras una billetera? Usa el buscador de saldo en la configuración para descubrir las carteras usadas anteriormente."
         },
         "transactionDetails": {
-            "title": "Detalles de la transacción",
+            "title": "Transaction details",
             "giftedStorageDeposit": {
                 "tooltipTitle": "Gift storage deposit",
                 "tooltipDescription": "Amount kept by the recipient"
             }
         },
         "sendForm": {
-            "title": "Enviar fondos"
+            "title": "Send funds"
         },
         "tokenInformation": {
             "newTokenTitle": "New token",
@@ -1205,14 +1205,14 @@
         "cancel": "Cancelar",
         "close": "Cerrar",
         "dismiss": "Descartar",
-        "claim": "Reclamar",
-        "claiming": "Reclamando",
+        "claim": "Claim",
+        "claiming": "Claiming",
         "claimingRewards": "Claiming rewards",
-        "reject": "Rechazar",
+        "reject": "Reject",
         "confirmRejection": {
-            "title": "Rechazar transacción",
-            "description": "¿Estás seguro de rechazar esta transacción?",
-            "node": "Tenga en cuenta que rechazar una transacción solo la oculta de su fuente de actividad"
+            "title": "Reject transaction",
+            "description": "Are you sure you want to reject this transaction?",
+            "node": "Please note that rejecting a transaction only hides it from your Activity feed"
         },
         "confirmTokenBurn": {
             "title": "Burn {assetName}",
@@ -1227,14 +1227,14 @@
         "save": "Guardar",
         "importSeed": "Importar una semilla existente",
         "restoreWallet": {
-            "iota": "Migrar o restaurar una billetera",
-            "shimmer": "Restaurar perfil de Shimmer",
+            "iota": "Migrate or restore a wallet",
+            "shimmer": "Restore Shimmer profile",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
-            "iota": "Migrar a Chrysalis o restaurar una billetera existente",
-            "shimmer": "Restaurar un perfil de Shimmer existente",
+            "iota": "Migrate to Chrysalis or restore an existing wallet",
+            "shimmer": "Restore an existing Shimmer profile",
             "testnet": "Restore an existing Testnet profile",
             "custom": "Restore an existing Custom Network profile"
         },
@@ -1244,17 +1244,17 @@
         },
         "createWallet": "Create a new {network} profile",
         "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown}}",
-        "claimShimmer": "Reclamar recompensas de staking de Shimmer",
+        "claimShimmer": "Claim Shimmer staking rewards",
         "claimShimmerDescription": "Import IOTA profile and claim staking rewards",
         "createAlias": "Create alias",
         "createAliasDescription": "Create alias output",
         "savePassword": "Guardar contraseña",
         "useBiometric": "Usar seguridad biométrica",
-        "setupPinCode": "Configurar código PIN",
-        "setPin": "Establecer PIN",
-        "setPinCode": "Establecer código PIN",
-        "confirmPin": "Confirmar PIN",
-        "confirmPinCode": "Confirmar código PIN",
+        "setupPinCode": "Setup PIN code",
+        "setPin": "Set PIN",
+        "setPinCode": "Set PIN code",
+        "confirmPin": "Confirm PIN",
+        "confirmPinCode": "Confirm PIN code",
         "enterYourPin": "Introduce tu código PIN",
         "saveBackupFile": "Guardar copia de seguridad",
         "iveWrittenRecoveryPhrase": "He escrito mi frase de recuperación",
@@ -1309,7 +1309,7 @@
         "redo": "Rehacer",
         "cut": "Cortar",
         "copy": "Copiar",
-        "copyAllInformation": "Copiar toda la información",
+        "copyAllInformation": "Copy all information",
         "paste": "Pegar",
         "selectAll": "Seleccionar todo",
         "addAccount": "Añadir Billetera",
@@ -1333,10 +1333,10 @@
         "showHiddenAccounts": "Mostrar billeteras ocultas",
         "confirm": "Confirmar",
         "hideNetworkStatistics": "Ocultar estadísticas de red",
-        "findWallets": "Encontrar billeteras",
-        "useBalanceFinder": "Usar buscador de saldo",
-        "search": "Buscar",
-        "searching": "Buscando",
+        "findWallets": "Find wallets",
+        "useBalanceFinder": "Use balance finder",
+        "search": "Search",
+        "searching": "Searching",
         "searchAgain": "Buscar de nuevo",
         "closeFirefly": "Cerrar Firefly",
         "generateAddress": "Generar dirección",
@@ -1354,10 +1354,10 @@
         "okIUnderstand": "Ok, lo entiendo",
         "readMore": "Leer más",
         "searchForRewards": "Search for rewards",
-        "claimRewards": "Reclamar recompensas",
-        "rerunClaimProcess": "Reejecutar proceso de reclamación",
-        "addPublicNote": "Añadir nota pública",
-        "backup": "Respaldo",
+        "claimRewards": "Claim rewards",
+        "rerunClaimProcess": "Rerun claim process",
+        "addPublicNote": "Add public note",
+        "backup": "Backup",
         "mint": "Mint",
         "mintNativeToken": "Mint native token",
         "mintNft": "Mint NFT",
@@ -1387,7 +1387,7 @@
         "addChain": "Add chain"
     },
     "general": {
-        "recipient": "Destinatario",
+        "recipient": "Recipient",
         "password": "Contraseña",
         "confirmPassword": "Confirmar la contraseña",
         "currentPassword": "Contraseña actual",
@@ -1418,8 +1418,8 @@
         "sendingNft": "Sending NFT",
         "receivedNft": "NFT received",
         "receivingNft": "Receiving NFT",
-        "transfer": "Transferir",
-        "transferring": "Transfiriendo",
+        "transfer": "Transfer",
+        "transferring": "Transferring",
         "transferNft": "Transfer NFT",
         "transferringNft": "Transferring NFT",
         "mintedNft": "Minted NFT",
@@ -1456,18 +1456,18 @@
         "from": "De",
         "to": "Para",
         "and": "and",
-        "receiveFunds": "Recibir fondos",
+        "receiveFunds": "Receive funds",
         "address": "Dirección",
         "myAddress": "My address",
-        "myNetworkAddress": "Mi dirección {networkName}",
+        "myNetworkAddress": "My {networkName} address",
         "shareAddress": "Compartir dirección",
         "yourAddress": "Su dirección",
         "newRemainder": "Nuevo recordatorio",
         "remainder": "Recordatorio",
         "generateNewAddress": "Generar nueva dirección",
-        "copyToClipboard": "Copiar al portapapeles",
+        "copyToClipboard": "Copy to clipboard",
         "copyAddress": "Copiar dirección",
-        "viewOnExplorer": "Ver en el Explorador",
+        "viewOnExplorer": "View on Explorer",
         "import": "Importar",
         "stronghold": "Stronghold",
         "language": "Idioma",
@@ -1492,7 +1492,7 @@
         "accountName": "Nombre de billetera",
         "latestTransactions": "Últimas transacciones",
         "transactions": "Transacciones",
-        "activity": "Actividad",
+        "activity": "Activity",
         "security": "Seguridad",
         "accountAddress": "Dirección de Billetera",
         "network": "Red",
@@ -1516,8 +1516,8 @@
         "noFilteredActivity": "No matching activities",
         "noAssets": "No assets",
         "noFilteredAsset": "No matching assets",
-        "thisMonth": "Este mes",
-        "search": "Buscar",
+        "thisMonth": "This month",
+        "search": "Search",
         "firstSync": "Sincronizando historial, puede tardar un rato...",
         "transferSyncing": "Sincronizando billetera",
         "transferSelectingInputs": "Seleccionando entradas",
@@ -1554,12 +1554,12 @@
         "creatingProfile": "Creando perfil, por favor espere...",
         "fundMigration": "Migración de fondos",
         "accountRemoved": "Esta billetera está oculta. Descúbrela para realizar transferencias.",
-        "fromAddress": "de {account}",
-        "toAddress": "a {account}",
-        "stakedFor": "Stakeado para {account}",
-        "unstakedFor": "Quitado Staking para {account}",
-        "votedFor": "Votado por {account}",
-        "unvotedFor": "Voto quitado para {account}",
+        "fromAddress": "from {account}",
+        "toAddress": "to {account}",
+        "stakedFor": "Staked for {account}",
+        "unstakedFor": "Unstaked for {account}",
+        "votedFor": "Voted for {account}",
+        "unvotedFor": "Unvoted for {account}",
         "stakingTransaction": "Transacción de Staking",
         "unstakingTransaction": "Quitar transacción del Staking",
         "legacyNetwork": "Red heredada",
@@ -1567,7 +1567,7 @@
         "version": "Versión {version}",
         "yourWallets": "Tus carteras",
         "unknown": "Desconocido",
-        "unknownAddress": "Dirección desconocida",
+        "unknownAddress": "Unknown address",
         "none": "Ninguno",
         "staked": "En Stake",
         "unstaked": "No Stakeado",
@@ -1577,35 +1577,35 @@
         "stakedFunds": "Fondos en staking",
         "unstakedFunds": "Fondos sin Stake",
         "accountColor": "Color de la billetera",
-        "transactionTime": "Tiempo de transacción",
+        "transactionTime": "Transaction time",
         "surplus": "Surplus",
-        "storageDeposit": "Depósito de almacenamiento",
+        "storageDeposit": "Storage deposit",
         "giftedStorageDeposit": "Gifted storage deposit",
         "storageDepositPerNft": "Storage deposit per NFT",
         "totalStorageDeposit": "Total storage deposit",
-        "expirationTime": "Tiempo de expiración",
+        "expirationTime": "Expiration time",
         "timelockDate": "Timelock",
-        "claimedTime": "Reclamado ( Claimed at )",
+        "claimedTime": "Claimed at",
         "nftAddress": "NFT Address",
         "nftId": "NFT ID",
         "nftMetadata": "NFT Metadata",
         "aliasId": "Alias ID",
         "governorAddress": "Governor Address",
         "stateControllerAddress": "State Controller Address",
-        "copiedToClipboard": "Copiado al portapapeles",
+        "copiedToClipboard": "Copied to clipboard",
         "total": "Total: {balance}",
         "availableBalanceWithValue": "Available balance: {balance}",
         "availableBalance": "Available balance",
         "availableBalanceTooltip": "An asset's total balance minus any funds that are required to cover the storage deposit (i.e. funds that are locked in pending transactions, reserved for Native Tokens, or reserved for NFTs).",
-        "amountClaimed": "{amount} reclamado",
+        "amountClaimed": "{amount} claimed",
         "metadata": "Metadata",
         "amountConsolidatedInputs": "Consolidated outputs",
         "name": "Name",
-        "tag": "Etiqueta",
-        "nodeList": "Lista de nodos",
+        "tag": "Tag",
+        "nodeList": "Node list",
         "claimedIn": "Claimed in",
         "claimingIn": "Claiming in",
-        "assets": "Activos",
+        "assets": "Assets",
         "nativeTokens": "Native tokens",
         "mintNativeTokenDescription": "Mint native token following IRC30 standard",
         "mintNftDescription": "Mint NFT following IRC27 standard",
@@ -1799,9 +1799,9 @@
             "error": "No se ha podido exportar el historial de transacciones de {accountAlias}"
         },
         "deepLinkingRequest": {
-            "receivedWhileLoggedOut": "Inicie sesión para iniciar el enlace profundo",
-            "notEnabled": "Los enlaces profundos no están habilitados",
-            "invalidFormat": "El enlace profundo que has seguido no es válido",
+            "receivedWhileLoggedOut": "Please login to initiate the deep link",
+            "notEnabled": "Deep links are not enabled",
+            "invalidFormat": "The deep link you followed is invalid",
             "invalidAmount": "The amount in deep link is not an integer number {amount}",
             "invalidSurplus": "The surplus in deep link is not a number {surplus}",
             "surplusNotSupported": "The surplus is only supported for native tokens",
@@ -1810,21 +1810,21 @@
             },
             "wallet": {
                 "send": {
-                    "success": "Detalles de pago agregados desde un enlace profundo"
+                    "success": "Payment details added from deep link"
                 },
                 "unrecognizedOperation": "Unrecognized wallet operation: {operation}"
             }
         },
         "syncing": "Por favor, espere hasta que la sincronización termine para cambiar entre billeteras.",
         "transferring": "Por favor, espere hasta que todas las transacciones se completen para cambiar entre billeteras.",
-        "participating": "Por favor, espere hasta que todas las transacciones de staking/votación se completen para cambiar las carteras.",
+        "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
         "claimed": {
-            "success": "Transacción reclamada",
-            "error": "Fallo al reclamar transacción"
+            "success": "Transaction claimed",
+            "error": "Claiming transaction failed"
         },
         "hideActivity": {
             "success": "Activity was hidden",
-            "error": "Error al ocultar la actividad"
+            "error": "Failed to hide activity"
         },
         "faucetRequest": {
             "success": "Request for tokens sent to the faucet"
@@ -1895,7 +1895,7 @@
             "length": "Tu PIN debe tener {length, plural, one {# dígito} other {# dígitos}} de longitud.",
             "match": "Los PIN no coinciden.",
             "incorrect": "El PIN actual es incorrecto.",
-            "invalid": "Código PIN inválido."
+            "invalid": "Invalid PIN code."
         },
         "address": {
             "wrongAddressType": "Wrong address type"
@@ -1913,9 +1913,9 @@
             "index": "El índice de tu cuenta debe ser un número entre 0 y 2,147,483,647.",
             "page": "La página de tu cuenta debe ser un número entre 0 y 2,147,483,647.",
             "syncing": "Hubo un error al sincronizar sus billeteras.",
-            "cannotRemove": "No se puede eliminar la billetera.",
-            "withBalance": "Debes transferir todos los fondos antes de eliminar esta billetera.",
-            "notLast": "Sólo puede eliminar su última billetera.",
+            "cannotRemove": "Unable to remove wallet.",
+            "withBalance": "You must transfer all balances before you can delete this wallet.",
+            "notLast": "You can only delete your last wallet.",
             "notFound": "Unable to find account",
             "cannotGetBoundAccount": "Unable to get bound account"
         },
@@ -1924,7 +1924,7 @@
             "amountTooHigh": "Esto es mayor que su saldo disponible.",
             "amountNoFloat": "Cannot use decimal places with the smallest unit selected",
             "amountInvalidFormat": "La cantidad parece ser un número no válido.",
-            "amountSmallerThanSubunit": "La cantidad debe ser mayor que la subunidad más pequeña.",
+            "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
             "tagTooLong": "The tag cannot be longer than 64 bytes.",
             "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "La cantidad debe ser mayor que 0.",
@@ -1942,7 +1942,7 @@
             "leavingDust": "No puede dejar menos de 1 Mi en su dirección.",
             "cancelled": "La transacción fue cancelada.",
             "transaction": "Hubo un error al enviar su transacción. Por favor, inténtelo de nuevo.",
-            "invalidExpirationDateTime": "La fecha/hora de vencimiento elegida no es válida.",
+            "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",
             "noInputs": "No inputs found.",
             "notEnoughBalance": "Not enough balance.",
             "missingTransactionId": "The transaction ID is missing",
@@ -1970,9 +1970,9 @@
             "answer": "No se pudo obtener una respuesta de todos los nodos.",
             "forbidden": "Esta conexión de nodo está prohibida.",
             "pluginNotAvailable": "El complemento \"{nodePlugin}\" no está disponible en el nodo actual.",
-            "unabledToConnect": "No se puede conectar al nodo",
-            "differentNetwork": "El nodo se encuentra en una red diferente",
-            "duplicateNodes": "No se puede agregar un nodo duplicado",
+            "unabledToConnect": "Unable to connect to the node",
+            "differentNetwork": "The node is located on a different network",
+            "duplicateNodes": "Unable to add duplicate node",
             "noCoinType": "No coin type specified"
         },
         "network": {
@@ -2216,7 +2216,7 @@
             "warningText": "Estás usando un perfil de desarrollador y estás conectado a {networkName}"
         },
         "networkIndicator": {
-            "warningText": "Rendimiento de la red degradado. La confirmación del mensaje puede tardar un poco más de lo habitual."
+            "warningText": "Network performance degraded. Message confirmation may take a bit longer than usual."
         }
     },
     "permissions": {
@@ -2235,9 +2235,9 @@
     },
     "pills": {
         "stake": {
-            "Pending": "staking para",
-            "Confirmed": "staked por",
-            "Conflicting": "Stake fallido"
+            "Pending": "staking for",
+            "Confirmed": "staked for",
+            "Conflicting": "failed to stake"
         },
         "external": {
             "incoming": {
@@ -2284,14 +2284,14 @@
             "Conflicting": "failed to consolidate outputs"
         },
         "migrate": {
-            "Pending": "migrando para",
-            "Confirmed": "migrado por",
-            "Conflicting": "error al migrar"
+            "Pending": "migrating for",
+            "Confirmed": "migrated for",
+            "Conflicting": "failed to migrate"
         },
         "asyncStatus": {
-            "unclaimed": "no reclamado",
-            "claimed": "reclamado",
-            "expired": "expirado"
+            "unclaimed": "unclaimed",
+            "claimed": "claimed",
+            "expired": "expired"
         },
         "governance": {
             "increaseVotingPower": {
@@ -2351,13 +2351,13 @@
     },
     "menus": {
         "expirationTimePicker": {
-            "none": "Sin tiempo de expiración",
-            "1hour": "En 1 hora",
-            "1day": "En 1 día",
-            "1week": "En 1 semana",
+            "none": "No expiration time",
+            "1hour": "In 1 hour",
+            "1day": "In 1 day",
+            "1week": "In 1 week",
             "customDate": {
-                "title": "Fecha personalizada",
-                "subtitle": "Establecer fecha de expiración personalizada"
+                "title": "Custom date",
+                "subtitle": "Set custom expiry date"
             }
         }
     }

@@ -7,25 +7,25 @@
                     "body": "Firefly is the official wallet software for {network}."
                 },
                 "legal": {
-                    "title": "Política de Privacitat i Condicions de Servei",
-                    "body": "Consulteu la Política de Privacitat i les Condicions del Servei.",
-                    "checkbox": "He llegit i accepto les condicions d'ús i la política de privacitat."
+                    "title": "Privacy Policy & Terms of Service",
+                    "body": "Please review the Privacy Policy and Terms of Service.",
+                    "checkbox": "I've read and I accept the Privacy Policy and Terms of Service"
                 },
                 "languageAndAppearance": {
-                    "title": "Llenguatge i aparença",
-                    "body": "Trieu l'idioma i el tema de la cartera."
+                    "title": "Language & appearance",
+                    "body": "Choose your language and theme."
                 }
             },
             "networkSetup": {
                 "chooseProtocol": {
-                    "title": "Elegir protocol",
-                    "body": "Establir el protocol del teu perfil.",
-                    "iota": "Red IOTA per defecte",
-                    "shimmer": "Red experimental d'etapes IOTA"
+                    "title": "Choose protocol",
+                    "body": "Set the protocol for your profile.",
+                    "iota": "Default IOTA network",
+                    "shimmer": "Experimental IOTA staging network"
                 },
                 "chooseNetwork": {
-                    "title": "Elegir xarxa",
-                    "body": "Establir el protocol del teu perfil.",
+                    "title": "Choose network",
+                    "body": "Set the network for your profile.",
                     "iota": {
                         "title": "IOTA",
                         "body": "IOTA Mainnet"
@@ -309,8 +309,8 @@
                 "description": "Length of time before your Stronghold password is required again"
             },
             "maxMediaSize": {
-                "title": "Mida màxima del contingut multimèdia",
-                "description": "Els mitjans NFT amb mides superiors a aquest límit no es baixaran i es mostrarà un marcador de posició que representa el tipus de suport"
+                "title": "Maximum media size",
+                "description": "NFT media with sizes greater than this limit will not be downloaded and a placeholder representing the media type will be displayed instead"
             },
             "maxMediaDownloadTime": {
                 "title": "Maximum download time",
@@ -454,7 +454,7 @@
             },
             "profileModal": {
                 "allSettings": "All settings",
-                "profileApplication": "Perfil, aplicació, seguretat",
+                "profileApplication": "Profile, application, security",
                 "logout": "Tancar sessió",
                 "stronghold": {
                     "title": "Bloqueig de perfil",
@@ -593,64 +593,64 @@
         },
         "collectibles": {
             "gallery": {
-                "title": "col·leccionable",
-                "emptyTitle": "No col·leccionable",
-                "noResults": "No hi ha resultats",
-                "emptyDescription": "Depositar o rebre el teu primer col·leccionable ara mateix"
+                "title": "Collectibles",
+                "emptyTitle": "No collectibles",
+                "noResults": "No results",
+                "emptyDescription": "Deposit or Receive your first collectible now!"
             },
             "details": {
-                "storageDepositDescription": "Es requereix un dipòsit reemborsable per emmagatzemar el vostre NFT al Tangle.",
-                "attributes": "Atributs",
+                "storageDepositDescription": "A refundable deposit required to store your NFT on the Tangle.",
+                "attributes": "Attributes",
                 "menu": {
-                    "download": "Descarregar",
+                    "download": "Download",
                     "setPfp": "Set NFT profile pic",
                     "unsetPfp": "Unset NFT profile pic",
                     "view": "View media in browser",
-                    "burn": "Cremar NFT"
+                    "burn": "Burn NFT"
                 }
             }
         },
         "governance": {
             "votingPower": {
-                "title": "Poder de vot",
-                "maximal": "Maxim poder de vot",
-                "manage": "Gestionar el poder de vot"
+                "title": "Voting power",
+                "maximal": "Maximal voting power: {value}",
+                "manage": "Manage voting power"
             },
             "proposalsDetails": {
-                "title": "Detalls",
+                "title": "Details",
                 "totalProposals": "Total proposals",
-                "activeProposals": "Propostes actives",
-                "votingProposals": "Propostes que esteu votant",
-                "votedProposals": "Total de propostes que heu votat"
+                "activeProposals": "Active proposals",
+                "votingProposals": "Proposals you are voting on",
+                "votedProposals": "Total proposals you voted on"
             },
             "proposals": {
-                "title": "Propostes",
-                "voted": "Votat",
+                "title": "Proposals",
+                "voted": "Voted",
                 "successEdit": "Proposal successfully edited",
                 "successAdd": "{numberOfProposals, select, one {Proposal} other {Proposals}} successfully added",
                 "successAddAll": "{numberOfProposals, select, one {Proposal} other {Proposals}} successfully added to all accounts",
-                "successRemove": "La proposta s'ha eliminat correctament",
+                "successRemove": "Proposal successfully removed",
                 "emptyTitle": "No proposals"
             },
             "statusTimeline": {
-                "upcoming": "Anunci",
-                "commencing": "Votació oberta",
-                "holding": "Comença el recompte",
-                "ended": "Acaba el recompte"
+                "upcoming": "Announcement",
+                "commencing": "Voting open",
+                "holding": "Counting starts",
+                "ended": "Counting stops"
             },
             "details": {
                 "yourVote": {
-                    "title": "El seu vot",
-                    "total": "Total vots emesos",
-                    "power": "Poder de vot"
+                    "title": "Your vote",
+                    "total": "Total votes counted",
+                    "power": "Voting power"
                 },
                 "proposalInformation": {
-                    "title": "Descripció de la proposta",
-                    "votingOpens": "Votació oberta",
-                    "countingStarts": "Comença el recompte",
-                    "countingEnds": "El compte acaba",
-                    "countingEnded": "El compte acaba",
-                    "eventId": "Identificador d'esdeveniment",
+                    "title": "Proposal information",
+                    "votingOpens": "Voting opens on",
+                    "countingStarts": "Counting starts on",
+                    "countingEnds": "Counting ends on",
+                    "countingEnded": "Counting ended on",
+                    "eventId": "Event ID",
                     "nodeUrl": "Node URL"
                 },
                 "fetching": "Fetching proposal data",
@@ -1018,12 +1018,12 @@
         "shimmer-info": {
             "title": "Sobre Shimmer",
             "body1": "Enhorabona, heu guanyat fitxes SMR com a recompensa de l'stake. Shimmer és una xarxa de posada en escena incentivada per provar actualitzacions importants a IOTA.",
-            "body2": "El nostre objectiu és llançar Shimmer el 2022. Les vostres fitxes estaran disponibles per transferir-los un cop s'iniciï la xarxa."
+            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
         },
         "assembly-info": {
             "title": "Sobre Assembly",
             "body1": "Enhorabona, heu guanyat fitxes ASMB com a recompensa d'stake. Assembly és una xarxa multicadena per desplegar contractes intel·ligents escalables a IOTA.",
-            "body2": "El nostre objectiu és llançar Assembly el 2022. Les vostres fitxes estaran disponibles per transferir-los un cop s'iniciï la xarxa."
+            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
         },
         "confirmDeveloperProfile": {
             "title": "Esteu creant un perfil de desenvolupador",
@@ -1754,9 +1754,9 @@
             "no": "No"
         },
         "proposalOrder": {
-            "label": "Ordre",
-            "name": "Nom",
-            "phase": "Fase"
+            "label": "Order",
+            "name": "Name",
+            "phase": "Phase"
         },
         "network": {
             "label": "Network"
@@ -1951,7 +1951,7 @@
             "nftRequired": "NFT is required",
             "nftNotInHex": "NFT address has to be in HEX format",
             "nftNotInPossession": "NFT not in possession",
-            "reservedTagKeyword": "No es pot fer servir una paraula clau d'etiqueta reservada"
+            "reservedTagKeyword": "Unable to use reserved tag keyword"
         },
         "layer2": {
             "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account."
@@ -2241,37 +2241,37 @@
         },
         "external": {
             "incoming": {
-                "Pending": "rebent des de",
-                "Confirmed": "rebut des de",
-                "Conflicting": "error en rebre"
+                "Pending": "receiving from",
+                "Confirmed": "received from",
+                "Conflicting": "failed to receive"
             },
             "outgoing": {
-                "Pending": "enviant a",
-                "Confirmed": "enviat a",
-                "Conflicting": "error en enviar"
+                "Pending": "sending to",
+                "Confirmed": "sent to",
+                "Conflicting": "failed to send"
             }
         },
         "internal": {
             "incoming": {
-                "Pending": "transferint des de",
-                "Confirmed": "transferit des de",
-                "Conflicting": "error en transferir"
+                "Pending": "transferring from",
+                "Confirmed": "transferred from",
+                "Conflicting": "failed to transfer"
             },
             "outgoing": {
-                "Pending": "transferint a",
-                "Confirmed": "transferit a",
-                "Conflicting": "error en transferir"
+                "Pending": "transferring to",
+                "Confirmed": "transferred to",
+                "Conflicting": "failed to transfer"
             },
             "selfTransaction": {
-                "Pending": "transferint a",
-                "Confirmed": "transferit a",
-                "Conflicting": "error en transferir"
+                "Pending": "transferring to",
+                "Confirmed": "transferred to",
+                "Conflicting": "failed to transfer"
             }
         },
         "mint": {
-            "Pending": "encunyant",
-            "Confirmed": "encunyar",
-            "Conflicting": "error en encunyar"
+            "Pending": "minting",
+            "Confirmed": "minted",
+            "Conflicting": "failed to mint"
         },
         "burn": {
             "Pending": "burning",
@@ -2335,9 +2335,9 @@
         },
         "alias": {
             "creation": {
-                "Pending": "creant àlies",
-                "Confirmed": "àlies creat",
-                "Failed": "Ha fallat la creació de l'àlies"
+                "Pending": "creating alias",
+                "Confirmed": "alias created",
+                "Failed": "Failed to create alias"
             }
         },
         "networkHealth": {
@@ -2347,7 +2347,7 @@
             "disconnected": "Disconnected"
         },
         "locked": "locked",
-        "smartContract": "contracte intel·ligent"
+        "smartContract": "smart contract"
     },
     "menus": {
         "expirationTimePicker": {
