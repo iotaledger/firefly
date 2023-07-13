@@ -934,6 +934,10 @@
             "title": "La façon dont vous utilisez Firefly a changé",
             "body": "Le contenu de chaque onglet est maintenant dans le contexte d'un seul portefeuille. Vous pouvez changer le portefeuille sélectionné à partir de n'importe quel endroit en utilisant le commutateur dans la barre de titre.",
             "hint": "Vous ne trouvez pas de portefeuille ? Utilisez le moteur de recherche de solde dans les paramètres pour découvrir les portefeuilles précédemment utilisés."
+        },
+        "mobileDeprecation": {
+            "title": "Annonce de dépréciation",
+            "body": "Cette version de Firefly est obsolète. La Fondation IOTA se concentre sur l'activation des fonctions de protocole cœur à travers Firefly. Pour maintenir vos jetons, nous vous recommandons d'utiliser Firefly desktop en important une sauvegarde Stronghold ou une sauvegarde de 24 mots."
         }
     },
     "charts": {

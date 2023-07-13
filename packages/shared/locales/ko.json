@@ -163,7 +163,7 @@
         "importFromFile": {
             "title": "백업 파일로부터 지갑 복원",
             "body": "지갑을 복구하는 데 사용할 백업 파일을 불러옵니다. Stronghold (.stronghold) 또는 Trinity 지갑의 SeedVault (.kdbx) 파일을 선택해 주세요.",
-            "bodyMobile": "Upload a file to restore existing wallet funds. Only Firefly Stronghold backup is supported on mobile. For Trinity SeedVault backup, please use the  desktop wallet."
+            "bodyMobile": "파일을 업로드하여 존재하는 자금을 복원하세요. 모바일 환경에서는 오직 Firefly Stronghold 백업만 지원합니다. Trinity SeedVault 백업의 경우 데스크탑 환경의 지갑을 사용해주세요."
         },
         "importFromLedger": {
             "title": "여러분의 Ledger를 복원하거나 마이그레이션하세요.",
@@ -934,6 +934,10 @@
             "title": "The way you use Firefly has changed",
             "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
             "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
+        },
+        "mobileDeprecation": {
+            "title": "Deprecation announcement",
+            "body": "This version of Firefly is deprecated. The IOTA Foundation focuses on enabling core protocol functions through its desktop wallet. To maintain your tokens, we recommend either using Firefly for desktop or a 3rd-party wallet, by importing a Stronghold backup or 24-words backup."
         }
     },
     "charts": {

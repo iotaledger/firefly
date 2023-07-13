@@ -934,6 +934,10 @@
             "title": "A Firefly használata megváltozott",
             "body": "Az egyes tabok tartalma mostantól egyetlen tárcára vonatkozik. A tárcák között bármikor válthat a felső menüsorban.",
             "hint": "Nem találja tárcáját? Használja az Egyenlegkeresőt a beállítások között a korábban használt tárcák megtalálásához."
+        },
+        "mobileDeprecation": {
+            "title": "Deprecation announcement",
+            "body": "This version of Firefly is deprecated. The IOTA Foundation focuses on enabling core protocol functions through its desktop wallet. To maintain your tokens, we recommend either using Firefly for desktop or a 3rd-party wallet, by importing a Stronghold backup or 24-words backup."
         }
     },
     "charts": {

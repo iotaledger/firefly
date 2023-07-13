@@ -934,6 +934,10 @@
             "title": "Il modo in cui utilizzi Firefly è cambiato",
             "body": "Il contenuto di ogni scheda è ora nel contesto di un singolo wallet. È possibile cambiare il wallet selezionato da qualsiasi luogo utilizzando lo switcher nella barra del titolo.",
             "hint": "Impossibile trovare un portafoglio? Utilizzare il Rilevatore del sado nelle impostazioni per scoprire i wallet precedentemente utilizzati."
+        },
+        "mobileDeprecation": {
+            "title": "Deprecation announcement",
+            "body": "This version of Firefly is deprecated. The IOTA Foundation focuses on enabling core protocol functions through its desktop wallet. To maintain your tokens, we recommend either using Firefly for desktop or a 3rd-party wallet, by importing a Stronghold backup or 24-words backup."
         }
     },
     "charts": {

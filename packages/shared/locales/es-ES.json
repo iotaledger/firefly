@@ -934,6 +934,10 @@
             "title": "La forma en que usas Firefly ha cambiado",
             "body": "El contenido de cada pestaña se encuentra ahora en el contexto de una única cartera. Puede cambiar la cartera seleccionada desde cualquier lugar usando el conmutador en la barra de título.",
             "hint": "¿No encuentras una cartera? Usa el buscador de saldo en la configuración para descubrir las carteras usadas anteriormente."
+        },
+        "mobileDeprecation": {
+            "title": "Anuncio de obsolescencia",
+            "body": "Esta versión de Firefly está obsoleta. La fundación IOTA se centra en habilitar las funciones esenciales del protocolo a través de su billetera de escritorio. Para conservar tus tokens, recomendamos utilizar Firefly para escritorio o una billetera de terceros, importando un backup de Stronghold o un backup de 24 palabras."
         }
     },
     "charts": {

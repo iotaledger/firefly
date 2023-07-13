@@ -934,6 +934,10 @@
             "title": "То, как вы используете Firefly, изменилось",
             "body": "Содержимое каждой вкладки теперь находится в контексте одного кошелька. Вы можете изменить выбранный кошелек из любого места с помощью переключателя в панели заголовка.",
             "hint": "Не можете найти кошелек? Воспользуйтесь функцией поиска баланса в настройках, чтобы обнаружить ранее использовавшиеся кошельки."
+        },
+        "mobileDeprecation": {
+            "title": "Deprecation announcement",
+            "body": "This version of Firefly is deprecated. The IOTA Foundation focuses on enabling core protocol functions through its desktop wallet. To maintain your tokens, we recommend either using Firefly for desktop or a 3rd-party wallet, by importing a Stronghold backup or 24-words backup."
         }
     },
     "charts": {

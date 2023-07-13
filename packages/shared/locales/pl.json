@@ -934,6 +934,10 @@
             "title": "Zmieniono sposób korzystania z Firefly",
             "body": "Zawartość każdej karty jest teraz wyświetlana w kontekście pojedynczego portfela. Wybrany portfel można zmienić z dowolnego miejsca za pomocą przełącznika na pasku tytułu.",
             "hint": "Nie możesz znaleźć portfela? Skorzystaj z wyszukiwarki środków w ustawieniach, aby odkryć poprzednio używane portfele."
+        },
+        "mobileDeprecation": {
+            "title": "Powiadomienie o wycofaniu",
+            "body": "Prace nad wersją mobilną Firefly zostały zaniechane. Fundacja IOTA skupia się głównie nad rozwojem Firefly w wersji na komputery osobiste. Aby zachować swoje tokeny z wersji mobilnej, zalecamy eksport swojej kopii Stronghold lub 24 wyrazów ratunkowych do Firefly Desktop bądź innego portfela firmy trzeciej."
         }
     },
     "charts": {

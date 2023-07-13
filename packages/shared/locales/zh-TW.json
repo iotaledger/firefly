@@ -900,7 +900,7 @@
         "shimmer-info": {
             "title": "關於 Shimmer",
             "body1": "恭喜您已賺取質押獎勵的 SMR 代幣。Shimmer 是個先行激勵網路，用來預先測試 IOTA 主網的重要升級。",
-            "body2": "The Shimmer network has now launched, you can claim your tokens using the Firefly Shimmer app."
+            "body2": "Shimmer 網路現在已啟動，您可以使用 Firefly Shimmer 軟體來領取您的代幣。"
         },
         "assembly-info": {
             "title": "關於 Assembly",
@@ -934,6 +934,10 @@
             "title": "您使用Firefly的方式已變更。",
             "body": "每個頁面的內容是歸屬於當前所選擇的錢包. 你可以隨時使用標題欄中的切換功能變更所選擇的錢包.",
             "hint": "無法找到錢包？使用設定裡的餘額查詢，搜尋之前使用的錢包。"
+        },
+        "mobileDeprecation": {
+            "title": "Deprecation announcement",
+            "body": "This version of Firefly is deprecated. The IOTA Foundation focuses on enabling core protocol functions through its desktop wallet. To maintain your tokens, we recommend either using Firefly for desktop or a 3rd-party wallet, by importing a Stronghold backup or 24-words backup."
         }
     },
     "charts": {

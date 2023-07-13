@@ -11,7 +11,7 @@
             "checkboxMobile": "I've read and I accept the"
         },
         "crashReporting": {
-            "title": "Crash Reporting",
+            "title": "Relatório de falhas",
             "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs.",
             "checkbox": "Send crash reports to the IOTA Foundation"
         },
@@ -28,7 +28,7 @@
                 "nonFirst": "Por agora, vamos começar com o nome do seu primeiro perfil."
             },
             "addMore": "Você pode adicionar mais perfis mais tarde.",
-            "advancedOptions": "Advanced options",
+            "advancedOptions": "Opções Avançadas",
             "developer": {
                 "label": "Perfil do Desenvolvedor",
                 "info": "Connect to the devnet or a private network"
@@ -339,11 +339,11 @@
                 "description": "Displays the status of the node you are currently connected to"
             },
             "exportStronghold": {
-                "title": "Export backup",
+                "title": "Exportar cópia de segurança",
                 "description": "Exportar arquivo Stronghold - um backup completo encriptado da sua carteira e do histórico recente de transações"
             },
             "appLock": {
-                "title": "Automatic lock",
+                "title": "Bloqueio Automático",
                 "description": "Tempo de inatividade antes do bloqueio das suas carteiras e encerra a sessão"
             },
             "changePassword": {
@@ -361,7 +361,7 @@
             "changeProfileName": {
                 "title": "Change profile name",
                 "description": "Change your Firefly profile name",
-                "success": "You changed your profile name"
+                "success": "Alterou o nome do seu perfil"
             },
             "balanceFinder": {
                 "title": "Localizador de saldo",
@@ -934,6 +934,10 @@
             "title": "The way you use Firefly has changed",
             "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
             "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
+        },
+        "mobileDeprecation": {
+            "title": "Deprecation announcement",
+            "body": "This version of Firefly is deprecated. The IOTA Foundation focuses on enabling core protocol functions through its desktop wallet. To maintain your tokens, we recommend either using Firefly for desktop or a 3rd-party wallet, by importing a Stronghold backup or 24-words backup."
         }
     },
     "charts": {

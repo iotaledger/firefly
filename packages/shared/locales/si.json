@@ -934,6 +934,10 @@
             "title": "ඔබ Firefly භාවිතා කරන ආකාරය වෙනස් වී ඇත",
             "body": "එක් එක් පටිත්තෙහි අන්තර්ගතය දැන් තනි මුදල් පසුම්බියක සන්දර්භය තුළ ඇත. මාතෘකා තීරුවේ ඇති ස්විචය භාවිතයෙන් ඔබට ඕනෑම තැනක සිට තෝරාගත් මුදල් පසුම්බිය වෙනස් කළ හැකිය.",
             "hint": "මුදල් පසුම්බියක් සොයාගත නොහැකිද? කලින් භාවිතා කළ පසුම්බි සොයා ගැනීමට සැකසීම් තුළ ශේෂ සොයන්නා භාවිතා කරන්න."
+        },
+        "mobileDeprecation": {
+            "title": "Deprecation announcement",
+            "body": "This version of Firefly is deprecated. The IOTA Foundation focuses on enabling core protocol functions through its desktop wallet. To maintain your tokens, we recommend either using Firefly for desktop or a 3rd-party wallet, by importing a Stronghold backup or 24-words backup."
         }
     },
     "charts": {
