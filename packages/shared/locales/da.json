@@ -533,18 +533,18 @@
                 "bodies": {
                     "upcoming": "Stake {token}-tokener for automatisk at modtage belønninger hvert 10. sekunder, når staking starter d. {date}.",
                     "commencing": "Stake {token}-tokener for automatisk at modtage belønninger hvert 10. sekunder, når staking starter d. {date}.",
-                    "holdingAndStaking": "You automatically receive rewards every 10 seconds.",
-                    "holdingAndNotStaking": "Stake your {token} tokens to receive rewards every 10 seconds.",
-                    "endedAndDidStake": "{token} rewards will be distributed to your wallet once the network launches.",
-                    "endedAndDidNotStake": "You did not participate in this airdrop.",
-                    "endedAndDidNotReachMinRewards": "You did not stake enough {token} tokens to reach the minimum airdrop rewards.",
-                    "inactive": "Open network configuration in the advanced settings and make sure the current node has the \"Participation\" feature by clicking \"View info\"."
+                    "holdingAndStaking": "Du modtager automatisk belønninger hvert 10. sekund.",
+                    "holdingAndNotStaking": "Send dine {token} tokens for at modtage belønninger hvert 10. sekund.",
+                    "endedAndDidStake": "{token} belønninger vil blive distribueret til din tegnebog, når netværket lanceres.",
+                    "endedAndDidNotStake": "Du deltog ikke i denne airdrop.",
+                    "endedAndDidNotReachMinRewards": "Du sendte ikke nok {token} tokens til at nå det minimale antal airdrop belønninger.",
+                    "inactive": "Åbn netværkskonfiguration i de avancerede indstillinger og sørg for at den valgte node har funktionen \"Deltagelse\" ved at klikke på \"Vis info\"."
                 }
             },
             "airdrops": {
-                "holding": "Remaining",
-                "commencing": "Until staking begins",
-                "currentStakingPeriod": "Current staking period",
+                "holding": "Tilbage",
+                "commencing": "Indtil staking begynder",
+                "currentStakingPeriod": "Igangværende stakingperiode",
                 "totalWalletRewards": "Total wallet rewards",
                 "assembly": {
                     "name": "Assembly",
@@ -568,12 +568,12 @@
         },
         "governance": {
             "votingPower": {
-                "title": "My voting weight",
+                "title": "Din stemmevægt",
                 "info": {
-                    "title": "Your voting weight",
-                    "equality": "1000 IOTA = 1 VOTE",
-                    "description1": "Your voting weight is derived from your wallet balance. When a voting proposal is in the Counting phase, active votes are counted and accumulated every 10s.",
-                    "description2": "1 Ki of voting weight (1000 IOTA tokens) yields 1 vote every 10s. This means you must continue voting for the full duration of the Counting phase in order to achieve your full voting weight."
+                    "title": "Din stemmevægt",
+                    "equality": "1000 IOTA = 1 STEMME",
+                    "description1": "Stemmevægten er afledt af din tegnebogssaldo. Når et afstemningsforslag er i optællingsfasen, tælles aktive stemmer og akkumuleres hver 10.",
+                    "description2": "1 Ki stemmevægt (1000 IOTA-tokener) giver 1 stemme for hver 10. Det betyder, at man skal fortsætte med at stemme gennem hele optællingsfasens varighed for at opnå fuld stemmevægt."
                 }
             },
             "info": {
@@ -934,6 +934,10 @@
             "title": "The way you use Firefly has changed",
             "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
             "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
+        },
+        "mobileDeprecation": {
+            "title": "Udfasningsannoncering",
+            "body": "Denne version af Firefly er udfaset. IOTA Foundation fokuserer på at aktivere kerneprotokolfunktioner gennem sin computerwallet. For at vedligeholde sine tokens, anbefales man enten at bruge Firefly til computer eller en tredjeparts wallet, ved at importere en Stronghold- eller 24-ordssikkerhedskopi."
         }
     },
     "charts": {

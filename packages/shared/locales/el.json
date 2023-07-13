@@ -934,6 +934,10 @@
             "title": "Ο τρόπος που χρησιμοποιείτε το Firefly έχει αλλάξει",
             "body": "Το περιεχόμενο κάθε καρτέλας είναι τώρα στο πλαίσιο ενός μόνο πορτοφολιού. Μπορείτε να αλλάξετε το επιλεγμένο πορτοφόλι από οπουδήποτε χρησιμοποιώντας την εναλλαγή στη γραμμή τίτλου.",
             "hint": "Αδυναμία εύρεσης πορτοφολιού? Χρησιμοποιήστε τον ανιχνευτή υπολοίπου στις ρυθμίσεις για να ανακαλύψετε τα προηγούμενα πορτοφόλια."
+        },
+        "mobileDeprecation": {
+            "title": "Deprecation announcement",
+            "body": "This version of Firefly is deprecated. The IOTA Foundation focuses on enabling core protocol functions through its desktop wallet. To maintain your tokens, we recommend either using Firefly for desktop or a 3rd-party wallet, by importing a Stronghold backup or 24-words backup."
         }
     },
     "charts": {

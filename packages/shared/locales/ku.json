@@ -8,10 +8,10 @@
             "title": "Polîtîkayên Veşartinê û Mercên Bikaranînê",
             "body": "Ji kerema xwe polîtîqaya taybetîtiyê û Mercên Karûbar binirxînin.",
             "checkbox": "Min Polîtîkayên Veşartinê û Mercên Bikaranînê xwendin û dipêjirînim.",
-            "checkboxMobile": "I've read and I accept the"
+            "checkboxMobile": "Min xwend û dipêjieînim"
         },
         "crashReporting": {
-            "title": "Crash Reporting",
+            "title": "Raporên hilweşînê",
             "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs.",
             "checkbox": "Send crash reports to the IOTA Foundation"
         },
@@ -28,7 +28,7 @@
                 "nonFirst": "Ji bo niha, em bi navê profîla xweya yekem dest pê bikin."
             },
             "addMore": "Hûn dikarin paşê profîlên din zêde bikin.",
-            "advancedOptions": "Advanced options",
+            "advancedOptions": "Vebijarkên pêşketî",
             "developer": {
                 "label": "Profîla Pêşvebir",
                 "info": "Connect to the devnet or a private network"
@@ -934,6 +934,10 @@
             "title": "The way you use Firefly has changed",
             "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
             "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
+        },
+        "mobileDeprecation": {
+            "title": "Deprecation announcement",
+            "body": "This version of Firefly is deprecated. The IOTA Foundation focuses on enabling core protocol functions through its desktop wallet. To maintain your tokens, we recommend either using Firefly for desktop or a 3rd-party wallet, by importing a Stronghold backup or 24-words backup."
         }
     },
     "charts": {

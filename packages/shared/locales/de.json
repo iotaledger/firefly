@@ -934,6 +934,10 @@
             "title": "DIe Bedienung von Firefly hat sich verändert",
             "body": "Der Inhalt jedes Tabs spiegelt eine einzelne Wallet wieder. Du kannst die angezeigte Wallet von überall durch Nutzung der Funktion in der Menüleiste wechseln.",
             "hint": "Du kannst keine Wallet finden? Benutze die Guthabensuche in den Einstellungen, um ehemals genutzte Wallets aufzufinden."
+        },
+        "mobileDeprecation": {
+            "title": "Wichtige Ankündigung",
+            "body": "Diese Version von Firefly ist veraltet. Die IOTA Foundation konzentriert sich zukünftig darauf, Kernprotokollfunktionen drüber die Desktop-Wallet zu ermöglichen. Um deine Token zu verwalten, empfehlen wir dir entweder Firefly für Desktop oder eine Wallet von Drittanbietern zu verwenden, indem du dort ein Stronghold-Backup oder ein Backup deiner 24-Wörter importierst."
         }
     },
     "charts": {

@@ -252,7 +252,7 @@
             "title": "Waarschuwing",
             "body1": "Je hebt tokens op een of meer uitgegeven adressen.",
             "body2": "Wij raden je aan een geautomatiseerd proces te starten om te helpen deze tokens veilig te stellen en over te zetten.",
-            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
+            "body3": "Het is niet mogelijk om te garanderen dat je geld veilig wordt gemigreerd op mobiel. We raden je aan om de Firefly desktop app te gebruiken om te migreren.",
             "learn": "Leer meer over uitgegeven adressen"
         },
         "secureSpentAddresses": {
@@ -934,6 +934,10 @@
             "title": "De manier waarop je Firefly gebruikt is veranderd",
             "body": "De inhoud van elk tabblad is nu in de context van een enkele portemonnee. U kunt de geselecteerde portemonnee overal wijzigen door de wisselaar in de titelbalk te gebruiken.",
             "hint": "Kan je geen portemonnee vinden? Gebruik de balanszoeker in de instellingen om eerder gebruikte portemonnees te ontdekken."
+        },
+        "mobileDeprecation": {
+            "title": "Verlies van ondersteuning aankondiging",
+            "body": "Deze versie van Firefly wordt niet meer ondersteund. De IOTA Foundation richt zich op het inschakelen van core protocol functies via haar desktop wallet. Om je tokens te onderhouden raden we je aan om Firefly voor desktop of een portemonnee van derden te gebruiken, door een Stronghold backup of een back-up van 24 woorden te importeren."
         }
     },
     "charts": {

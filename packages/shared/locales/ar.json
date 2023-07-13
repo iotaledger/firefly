@@ -125,9 +125,9 @@
             "body": "لقد قمت بعمل نسخة إحتياطية لمحفظتك الى الملف المُحصَّن."
         },
         "congratulations": {
-            "title": "Profile setup complete!",
+            "title": "اكتمل إعداد الملف الشخصي!",
             "fundsMigrated": "تم ترحيل الأموال",
-            "body": "Your new profile is ready to use.",
+            "body": "ملف التعريف الجديد الخاص بك جاهز للاستخدام.",
             "softwareMigratedBody": "مبروك, لقد قمت بنقل أرصدتك الى الشبكة الجديدة بنجاح",
             "fireflyLedgerBody": "مبروك, لقد تم استرداد حساب لِدْجرْ الخاص بك بنجاح, يمكنك المتابعة الآن.",
             "trinityLedgerBody": "مبروك, لقد قمت بنقل أرصدتك من جهاز لِدْجرْ الخاص بك الى الشبكة الجديدة.",
@@ -163,7 +163,7 @@
         "importFromFile": {
             "title": "استعادة محفظتك باستخدام ملف النسخ الاحتياطي",
             "body": "لاسترداد محفظتك قم باستيراد نسخة احتياطية من الملف المُحصَّن ذو الاحقة (.....) أو من مخزن الرموز السرية لمحفظة تْرَنِتْي ذو الاحقة (.....).",
-            "bodyMobile": "Upload a file to restore existing wallet funds. Only Firefly Stronghold backup is supported on mobile. For Trinity SeedVault backup, please use the  desktop wallet."
+            "bodyMobile": "تحميل ملف لاستعادة أموال المحفظة الموجودة. فقط النسخ الاحتياطي لـ Firefly Stronghold مدعوم على الجوال. للنسخ الاحتياطي لـ Trinity SeedVaul، يرجى استخدام محفظة سطح المكتب."
         },
         "importFromLedger": {
             "title": "إستعادة محتويات جهاز لِدْجرْ الخاص بك",
@@ -192,7 +192,7 @@
             "readMore": "ما يمكن توقعه من عملية نقل الارصدة"
         },
         "generateNewLedgerAddress": {
-            "title": "Generate new address",
+            "title": "إنشاء عنوان جديد",
             "body": "يجب عليك أن تنشأ حساب جديد لنقل الارصدة من العملات الرقمية باستخدام محفظة فايَرْفلاَي. انقر على الزر أدناه للمتابعة.",
             "confirmTitle": "أكد حسابك الجديد",
             "confirmBody": "للأمان، يرجى مقارنة الحساب الذي تم إنشاؤه على جهاز لِدْجرْ الخاص بك مع الحساب المعروض أدناه. إذا كان متطابق ، اضغط كلا الزرين على جهاز لِدْجرْ بذات الوقت, كما هو موضح.",
@@ -252,7 +252,7 @@
             "title": "تحذير",
             "body1": "لديك أموال منفقة على عنوان واحد أو أكثر.",
             "body2": "ننصحك بتشغيل عملية آلية للمساعدة في تأمين وتحويل هذه الأموال بأمان.",
-            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
+            "body3": "لا يمكن ضمان نقل أموالك بشكل آمن على الجوال. نوصي باستخدام تطبيق سطح المكتب Firefly لنقلها.",
             "learn": "تعرف على العناوين المنفقة"
         },
         "secureSpentAddresses": {
@@ -405,7 +405,7 @@
                 "editDetails": "تعديل التفاصيل",
                 "viewInfo": "عرض المعلومات",
                 "setAsPrimary": "تعيين كعقدة أساسية",
-                "removeNode": "Remove node",
+                "removeNode": "إزالة العقدة",
                 "includeOfficialNodeList": "تضمين قائمة الوسطاء البرمجيين الرسمية",
                 "noNodes": "نأسف لذلك, لا يمكن الاتصال بالشبكة حاليا لعدم توفر وسطاء برمجيون",
                 "noNodesAuto": "لا يوجد وسطاء برمجيون, سيتم استخدام خاصية الاختيار الآلي للوسطاء بدلا من اليدوي"
@@ -464,18 +464,18 @@
         },
         "dashboard": {
             "network": {
-                "networkOperational": "Network operational",
-                "networkDegraded": "Network degraded",
-                "networkDown": "Network disconnected",
-                "networkUnreachable": "Network unreachable",
+                "networkOperational": "الشبكة العملية",
+                "networkDegraded": "الشبكة المتدهورة",
+                "networkDown": "الشبكة غير متصلة",
+                "networkUnreachable": "لا يمكن الوصول إلى الشبكة",
                 "status": "الحالة",
                 "messagesPerSecond": "عدد الرسائل في الثانية",
                 "referencedRate": "المعدل المشار إليه"
             },
             "profileModal": {
                 "allSettings": {
-                    "title": "All settings",
-                    "description": "Profile, application, security"
+                    "title": "جميع الإعدادات",
+                    "description": "الملف الشخصي، التطبيق، الأمان"
                 },
                 "logout": "تسجيل الخروج",
                 "stronghold": {
@@ -484,19 +484,19 @@
                     "unlocked": "Stronghold مفتوح"
                 },
                 "hardware": {
-                    "title": "Hardware Device",
+                    "title": "الجهاز",
                     "statuses": {
-                        "appNotOpen": "IOTA app not open",
-                        "connected": "Connected",
-                        "legacyConnected": "Legacy app open",
-                        "locked": "Locked",
-                        "mnemonicMismatch": "Wrong Ledger or mnemonic",
-                        "notDetected": "Not detected",
-                        "otherConnected": "App open"
+                        "appNotOpen": "تطبيق IOTA غير مفتوح",
+                        "connected": "متصل",
+                        "legacyConnected": "فتح التطبيق القديم",
+                        "locked": "مقفل",
+                        "mnemonicMismatch": "Ledger أو mnemonic خاطئ",
+                        "notDetected": "لم يتم الكشف",
+                        "otherConnected": "التطبيق مفتوح"
                     }
                 },
                 "backup": {
-                    "title": "Backup your wallets",
+                    "title": "النسخ الاحتياطي لمحفظتك",
                     "lastBackup": "You last backed up {date}",
                     "notBackedUp": "Not backed up",
                     "button": "Backup"
@@ -934,6 +934,10 @@
             "title": "The way you use Firefly has changed",
             "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
             "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
+        },
+        "mobileDeprecation": {
+            "title": "Deprecation announcement",
+            "body": "This version of Firefly is deprecated. The IOTA Foundation focuses on enabling core protocol functions through its desktop wallet. To maintain your tokens, we recommend either using Firefly for desktop or a 3rd-party wallet, by importing a Stronghold backup or 24-words backup."
         }
     },
     "charts": {
