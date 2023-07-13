@@ -1,4 +1,3 @@
-export { default as MediaDisplay } from './MediaDisplay.svelte'
 export { default as MenuItem } from './MenuItem.svelte'
 export { default as NetworkIcon } from './NetworkIcon.svelte'
 export { default as Pane } from './Pane.svelte'

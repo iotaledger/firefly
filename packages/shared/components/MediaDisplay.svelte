@@ -2,7 +2,7 @@
     import { MimeType, ParentMimeType } from '@core/nfts'
     import { onMount } from 'svelte'
 
-    export let Media: HTMLImageElement | HTMLVideoElement = undefined
+    export let Media: HTMLImageElement | HTMLVideoElement | undefined = undefined
     export let src: string
     export let expectedType: MimeType
     export let alt: string = ''
@@ -10,10 +10,9 @@
     export let controls: boolean = false
     export let muted: boolean = false
     export let loop: boolean = false
-    export let classes: string = ''
     export let isLoaded: boolean
 
-    const htmlTag: string = convertMimeTypeToHtmlTag(expectedType)
+    const htmlTag: string | undefined = convertMimeTypeToHtmlTag(expectedType)
 
     let isMounted = false
 
@@ -37,7 +36,7 @@
         }
     }
 
-    function convertMimeTypeToHtmlTag(mimeType: MimeType): string {
+    function convertMimeTypeToHtmlTag(mimeType: MimeType): string | undefined {
         const parentMimeType = mimeType?.split('/', 1)?.[0]
         switch (parentMimeType) {
             case ParentMimeType.Image:
@@ -59,16 +58,23 @@
         <svelte:element
             this={htmlTag}
             bind:this={Media}
-            {src}
-            {alt}
-            autoplay={autoplay ? true : undefined}
-            controls={controls ? true : undefined}
-            loop={loop ? true : undefined}
-            muted
-            class={classes}
-            preload="metadata"
+            {...$$props}
+            class="h-full w-full object-cover"
             on:mouseenter={startPlaying}
             on:mouseleave={stopPlaying}
-        />
+        >
+            {#if htmlTag === ParentMimeType.Image}
+                <img {src} {alt} />
+            {:else if htmlTag === ParentMimeType.Video}
+                <video
+                    {src}
+                    autoplay={autoplay ? true : undefined}
+                    controls={controls ? true : undefined}
+                    loop={loop ? true : undefined}
+                    muted
+                    preload="metadata"
+                />
+            {/if}
+        </svelte:element>
     {/key}
 {/if}
