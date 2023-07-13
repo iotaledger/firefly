@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Icon, Pill } from 'shared/components'
-    import { Icon as _Icon } from '@auxiliary/icon'
+    import { Icon as IconEnum } from '@auxiliary/icon'
     import { localize } from '@core/i18n'
     import { ProposalStatus } from '@contexts/governance/enums'
     import { IProposal } from '@contexts/governance/interfaces'
@@ -27,6 +27,6 @@
     classes="rounded-full px-2 py-1 flex items-center {status ? '' : 'invisible'}"
 >
     {#if error}
-        <Icon icon={error ? _Icon.StatusError : undefined} classes="text-red-700" />
+        <Icon icon={IconEnum.StatusError} classes="text-red-700" />
     {/if}
 </Pill>

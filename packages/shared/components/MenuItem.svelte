@@ -93,7 +93,7 @@
         </div>
     </div>
     {#if selected}
-        <Icon icon="checkmark" classes="ml-2 text-blue-500" />
+        <Icon icon={IconEnum.Checkmark} classes="ml-2 text-blue-500" />
     {/if}
 </button>
 
