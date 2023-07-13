@@ -1,17 +1,10 @@
 <script lang="ts">
-    import type { UnlockConditionTypes } from '@iota/types'
-
+    import { UnlockConditionType, UnlockCondition, OutputType, CommonOutput } from '@iota/wallet'
     import { BalanceSummarySection, Button } from '@ui'
 
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { isStrongholdUnlocked } from '@core/profile-manager'
-    import {
-        OUTPUT_TYPE_TREASURY,
-        UNLOCK_CONDITION_EXPIRATION,
-        UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN,
-        UNLOCK_CONDITION_TIMELOCK,
-    } from '@core/wallet'
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
 
@@ -60,18 +53,25 @@
 
                 let type: string
                 let amount: number
-                if (output.type !== OUTPUT_TYPE_TREASURY) {
-                    if (containsUnlockCondition(output.unlockConditions, UNLOCK_CONDITION_EXPIRATION)) {
+                if (output.getType() !== OutputType.Treasury) {
+                    const commonOutput = output as CommonOutput
+                    if (containsUnlockCondition(commonOutput.getUnlockConditions(), UnlockConditionType.Expiration)) {
                         type = PendingFundsType.Unclaimed
-                        amount = Number(output.amount)
+                        amount = Number(commonOutput.getAmount())
                     } else if (
-                        containsUnlockCondition(output.unlockConditions, UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN)
+                        containsUnlockCondition(
+                            commonOutput.getUnlockConditions(),
+                            UnlockConditionType.StorageDepositReturn
+                        )
                     ) {
                         type = PendingFundsType.StorageDepositReturn
-                        amount = getStorageDepositFromOutput(output).storageDeposit
-                    } else if (containsUnlockCondition(output.unlockConditions, UNLOCK_CONDITION_TIMELOCK)) {
+                        // TODO-sdk the signature of this function has changed recently. Find a way to fix
+                        amount = getStorageDepositFromOutput(commonOutput).storageDeposit
+                    } else if (
+                        containsUnlockCondition(commonOutput.getUnlockConditions(), UnlockConditionType.Timelock)
+                    ) {
                         type = PendingFundsType.Timelock
-                        amount = Number(output.amount)
+                        amount = Number(output.getAmount())
                     }
                 }
 
@@ -117,8 +117,8 @@
         return { amount: totalStorageDeposit, subBreakdown }
     }
 
-    function containsUnlockCondition(unlockConditions: UnlockConditionTypes[], unlockConditionId: number) {
-        return unlockConditions.some((unlockCondition) => unlockCondition.type === unlockConditionId)
+    function containsUnlockCondition(unlockConditions: UnlockCondition[], unlockConditionId: number): boolean {
+        return unlockConditions.some((unlockCondition) => unlockCondition.getType() === unlockConditionId)
     }
 
     function onConsolidationClick(): void {

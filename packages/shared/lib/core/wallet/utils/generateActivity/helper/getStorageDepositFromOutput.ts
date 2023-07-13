@@ -1,10 +1,9 @@
 import { IAccountState } from '@core/account/interfaces'
-import { Output } from '@core/wallet/types'
-import { StorageDepositReturnUnlockCondition, UnlockConditionType } from '@iota/wallet'
+import { CommonOutput, StorageDepositReturnUnlockCondition, UnlockConditionType } from '@iota/wallet'
 
 export async function getStorageDepositFromOutput(
     account: IAccountState,
-    output: Output
+    output: CommonOutput
 ): Promise<{
     storageDeposit: number
     giftedStorageDeposit: number

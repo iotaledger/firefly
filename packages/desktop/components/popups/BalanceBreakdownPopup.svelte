@@ -3,15 +3,9 @@
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile'
-    import {
-        OUTPUT_TYPE_TREASURY,
-        UNLOCK_CONDITION_EXPIRATION,
-        UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN,
-        UNLOCK_CONDITION_TIMELOCK,
-    } from '@core/wallet'
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
-    import type { UnlockConditionTypes } from '@iota/types'
+    import { UnlockCondition, UnlockConditionType, OutputType, CommonOutput } from '@iota/wallet'
     import { BalanceSummarySection, Button, FontWeight, Text, TextType } from 'shared/components'
 
     interface BalanceBreakdown {
@@ -57,18 +51,24 @@
 
                 let type: string
                 let amount: number
-                if (output.type !== OUTPUT_TYPE_TREASURY) {
-                    if (containsUnlockCondition(output.unlockConditions, UNLOCK_CONDITION_EXPIRATION)) {
+                if (output.getType() !== OutputType.Treasury) {
+                    const commonOutput = output as CommonOutput
+                    if (containsUnlockCondition(commonOutput.getUnlockConditions(), UnlockConditionType.Expiration)) {
                         type = PendingFundsType.Unclaimed
-                        amount = Number(output.amount)
+                        amount = Number(output.getAmount())
                     } else if (
-                        containsUnlockCondition(output.unlockConditions, UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN)
+                        containsUnlockCondition(
+                            commonOutput.getUnlockConditions(),
+                            UnlockConditionType.StorageDepositReturn
+                        )
                     ) {
                         type = PendingFundsType.StorageDepositReturn
                         amount = (await getStorageDepositFromOutput($selectedAccount, output))?.storageDeposit
-                    } else if (containsUnlockCondition(output.unlockConditions, UNLOCK_CONDITION_TIMELOCK)) {
+                    } else if (
+                        containsUnlockCondition(commonOutput.getUnlockConditions(), UnlockConditionType.Timelock)
+                    ) {
                         type = PendingFundsType.Timelock
-                        amount = Number(output.amount)
+                        amount = Number(output.getAmount())
                     }
                 }
 
@@ -114,8 +114,8 @@
         return { amount: totalStorageDeposit, subBreakdown }
     }
 
-    function containsUnlockCondition(unlockConditions: UnlockConditionTypes[], unlockConditionId: number) {
-        return unlockConditions.some((unlockCondition) => unlockCondition.type === unlockConditionId)
+    function containsUnlockCondition(unlockConditions: UnlockCondition[], unlockConditionId: number): boolean {
+        return unlockConditions.some((unlockCondition) => unlockCondition.getType() === unlockConditionId)
     }
 
     function onConsolidationClick(): void {

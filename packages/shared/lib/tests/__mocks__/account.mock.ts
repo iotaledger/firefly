@@ -1,4 +1,3 @@
-import type { IAliasOutput, IBasicOutput, IFoundryOutput, INftOutput, OutputTypes } from '@iota/types'
 import {
     Balance,
     AccountMetadata,
@@ -31,6 +30,11 @@ import {
     GenerateAddressOptions,
     SyncOptions,
     Ed25519Signature,
+  AliasOutput,
+    BasicOutput,
+    FoundryOutput,
+    NftOutput,
+    Output,
 } from '@iota/wallet'
 
 import { IAccount } from '../../core/account'
@@ -49,19 +53,19 @@ export class AccountMock implements IAccount {
         return Promise.resolve([])
     }
 
-    buildAliasOutput(data: BuildAliasOutputData): Promise<IAliasOutput> {
+    buildAliasOutput(data: BuildAliasOutputData): Promise<AliasOutput> {
         throw new Error('Method not implemented.')
     }
 
-    buildBasicOutput(data: BuildBasicOutputData): Promise<IBasicOutput> {
+    buildBasicOutput(data: BuildBasicOutputData): Promise<BasicOutput> {
         throw new Error('Method not implemented.')
     }
 
-    buildFoundryOutput(data: BuildFoundryOutputData): Promise<IFoundryOutput> {
+    buildFoundryOutput(data: BuildFoundryOutputData): Promise<FoundryOutput> {
         throw new Error('Method not implemented.')
     }
 
-    buildNftOutput(data: BuildNftOutputData): Promise<INftOutput> {
+    buildNftOutput(data: BuildNftOutputData): Promise<NftOutput> {
         throw new Error('Method not implemented.')
     }
 
@@ -125,7 +129,7 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    getFoundryOutput(tokenId: string): Promise<IFoundryOutput> {
+    getFoundryOutput(tokenId: string): Promise<FoundryOutput> {
         throw new Error('Method not implemented.')
     }
 
@@ -208,7 +212,7 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    minimumRequiredStorageDeposit(output: OutputTypes): Promise<string> {
+    minimumRequiredStorageDeposit(output: Output): Promise<string> {
         throw new Error('Method not implemented.')
     }
 
@@ -224,7 +228,7 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    prepareTransaction(outputs: OutputTypes[], options?: TransactionOptions): Promise<PreparedTransactionData> {
+    prepareTransaction(outputs: Output[], options?: TransactionOptions): Promise<PreparedTransactionData> {
         throw new Error('Method not implemented.')
     }
 
@@ -244,7 +248,7 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    prepareOutput(options: OutputParams, transactionOptions?: TransactionOptions): Promise<OutputTypes> {
+    prepareOutput(options: OutputParams, transactionOptions?: TransactionOptions): Promise<Output> {
         throw new Error('Method not implemented.')
     }
 
@@ -286,7 +290,7 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    sendOutputs(outputs: OutputTypes[], transactionOptions?: TransactionOptions): Promise<Transaction> {
+    sendOutputs(outputs: Output[], transactionOptions?: TransactionOptions): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
 

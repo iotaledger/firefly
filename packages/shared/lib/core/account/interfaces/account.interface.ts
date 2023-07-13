@@ -36,15 +36,21 @@ import type {
     SyncOptions,
     Transaction,
     TransactionOptions,
+    AliasOutput,
+    BasicOutput,
+    FoundryOutput,
+    NftOutput,
+    HexEncodedAmount,
+    Output,
 } from '@iota/wallet'
 
 export interface IAccount {
     addresses(): Promise<Address[]>
     addressesWithUnspentOutputs(): Promise<AddressWithUnspentOutputs[]>
-    buildAliasOutput(data: BuildAliasOutputData): Promise<IAliasOutput>
-    buildBasicOutput(data: BuildBasicOutputData): Promise<IBasicOutput>
-    buildFoundryOutput(data: BuildFoundryOutputData): Promise<IFoundryOutput>
-    buildNftOutput(data: BuildNftOutputData): Promise<INftOutput>
+    buildAliasOutput(data: BuildAliasOutputData): Promise<AliasOutput>
+    buildBasicOutput(data: BuildBasicOutputData): Promise<BasicOutput>
+    buildFoundryOutput(data: BuildFoundryOutputData): Promise<FoundryOutput>
+    buildNftOutput(data: BuildNftOutputData): Promise<NftOutput>
     burnNativeToken(
         tokenId: string,
         burnAmount: HexEncodedAmount,
