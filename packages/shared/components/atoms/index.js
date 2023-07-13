@@ -1,11 +1,3 @@
-export * from './badges'
-export * from './boxes'
-export * from './buttons'
-export * from './iconButtons'
-export * from './labels'
-export * from './pills'
-export * from './tiles'
-
 export { default as MediaDisplay } from './MediaDisplay.svelte'
 export { default as MenuItem } from './MenuItem.svelte'
 export { default as NetworkIcon } from './NetworkIcon.svelte'
