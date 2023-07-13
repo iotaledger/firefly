@@ -6,7 +6,6 @@ export * from './labels'
 export * from './pills'
 export * from './tiles'
 
-export { default as ColoredCircle } from './ColoredCircle.svelte'
 export { default as MediaDisplay } from './MediaDisplay.svelte'
 export { default as MenuItem } from './MenuItem.svelte'
 export { default as NetworkIcon } from './NetworkIcon.svelte'
