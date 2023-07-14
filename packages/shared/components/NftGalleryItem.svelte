@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Text, FontWeight, NftMedia, TooltipIcon, Position } from 'shared/components'
+    import { Text, FontWeight, NftMedia, TooltipIcon, Position, TooltipType } from 'shared/components'
 
     import { time } from '@core/app'
     import { localize } from '@core/i18n'
@@ -11,8 +11,8 @@
 
     export let nft: INft
 
-    let nftWrapperClientWidth: number
     let tooltipIconProps: { icon?: Icon; iconClasses?: string; text?: string } = {}
+    let nftWrapperClientWidth: number
 
     $: isLocked = nft.timelockTime > $time.getTime()
 
@@ -20,13 +20,13 @@
         tooltipIconProps = {
             icon: Icon.ErrorFilled,
             iconClasses: 'fill-current text-red-700',
-            text: getTooltipText('error'),
+            text: getTooltipText(TooltipType.Error),
         }
     } else if (nft.downloadMetadata.warning) {
         tooltipIconProps = {
             icon: Icon.ExclamationFilled,
             iconClasses: 'fill-current text-yellow-700',
-            text: getTooltipText('warning'),
+            text: getTooltipText(TooltipType.Warning),
         }
     }
 
@@ -35,7 +35,7 @@
         $collectiblesRouter.goTo(CollectiblesRoute.Details)
     }
 
-    function getTooltipText(key: 'error' | 'warning'): string {
+    function getTooltipText(key: TooltipType): string | undefined {
         const { type, message } = nft?.downloadMetadata?.[key] ?? {}
         return type === 'generic' ? message : localize(`error.nft.${type}.short`)
     }
@@ -43,12 +43,14 @@
 
 <button type="button" on:click={onClick} class="flex flex-col items-center justify-center">
     <div class="w-full rounded-2xl overflow-hidden flex flex-col shadow-elevation-1">
-        <div
-            class="w-full flex relative"
-            bind:clientWidth={nftWrapperClientWidth}
-            style="height: {nftWrapperClientWidth}px; "
-        >
-            <NftMedia {nft} classes="bg-gray-200 dark:bg-gray-700 min-w-full min-h-full object-cover" loop muted />
+        <nft-media-wrapper>
+            <figure
+                class="bg-gray-200 dark:bg-gray-700 min-w-full h-full object-cover"
+                style:--height="{nftWrapperClientWidth}px"
+                bind:clientWidth={nftWrapperClientWidth}
+            >
+                <NftMedia {nft} loop muted />
+            </figure>
             {#if nft.downloadMetadata.error || nft.downloadMetadata.warning}
                 <div class="absolute right-3 top-3">
                     <TooltipIcon
@@ -61,7 +63,7 @@
                     />
                 </div>
             {/if}
-        </div>
+        </nft-media-wrapper>
         <div class="w-full flex flex-row align-center justify-between p-3.5 bg-white dark:bg-gray-800">
             <Text fontWeight={FontWeight.semibold} fontSize="12" classes="text-left truncate">{nft.name}</Text>
             {#if isLocked}
@@ -76,3 +78,16 @@
         </div>
     </div>
 </button>
+
+<style lang="scss">
+    nft-media-wrapper {
+        @apply w-full;
+        @apply flex;
+        @apply relative;
+        aspect-ratio: 1 / 1;
+
+        figure {
+            height: var(--height);
+        }
+    }
+</style>
