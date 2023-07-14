@@ -51,7 +51,7 @@
             valueText={localize(`popups.appUpdate.${get(appStage)}`)}
         />
         {#if $appVersionDetails.upToDate}
-            <TextHint variant={TextHintVariant.Success} text={localize('popups.appUpdate.latestInstalled')} widthFull />
+            <TextHint variant={TextHintVariant.Success} text={localize('popups.appUpdate.latestInstalled')} />
         {:else}
             <KeyValueBox keyText={localize('popups.appUpdate.newVerion')} valueText={$appVersionDetails.newVersion} />
             <KeyValueBox
@@ -64,7 +64,6 @@
             <TextHint
                 variant={TextHintVariant.Info}
                 text={localize(`popups.appUpdate.${hasAutoUpdate ? 'updateAvailable' : 'updatesDisabled'}`)}
-                widthFull
             />
         {/if}
     </div>

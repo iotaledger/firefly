@@ -5,7 +5,6 @@
     export let variant: TextHintVariant
     export let icon: IconEnum | undefined = undefined
     export let text: string = ''
-    export let widthFull: boolean = false
 
     $: iconClasses = DEFAULT_VALUES[variant].iconClasses
     $: icon ||= DEFAULT_VALUES[variant].icon
@@ -44,7 +43,7 @@
 </script>
 
 {#if text}
-    <text-hint class="{variant} dark-bg-opacity" class:w-full={widthFull}>
+    <text-hint class="{variant} dark-bg-opacity">
         {#if icon}
             <Icon {icon} primaryColor="white" classes="mr-3 fill-current {iconClasses}" />
         {/if}
