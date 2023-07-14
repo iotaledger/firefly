@@ -28,7 +28,7 @@
 </script>
 
 <network-icon class={backgroundColor} class:outlined>
-    <Icon {height} {width} icon={NETWORK_ICON_SVG[networkId]} classes="text-{iconColor}" />
+    <Icon {height} {width} icon={NETWORK_ICON_SVG[networkId]} classes={iconColor} />
 </network-icon>
 
 <style lang="scss">
