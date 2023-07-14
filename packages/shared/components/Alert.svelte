@@ -13,25 +13,25 @@
         info: {
             backgroundColor: 'bg-blue-100',
             iconColor: 'text-blue-700',
-            icon: 'info-filled',
+            icon: IconEnum.InfoFilled,
             messageColor: 'text-blue-700',
         },
         success: {
             backgroundColor: 'bg-green-100',
             iconColor: 'text-green-800',
-            icon: 'checkmark-filled',
+            icon: IconEnum.CheckmarkFilled,
             messageColor: 'text-green-800',
         },
         warning: {
             backgroundColor: 'bg-yellow-100',
             iconColor: 'text-yellow-800',
-            icon: 'exclamation-filled',
+            icon: IconEnum.ExclamationFilled,
             messageColor: 'text-yellow-800',
         },
         error: {
             backgroundColor: 'bg-red-100',
             iconColor: 'text-red-700',
-            icon: 'error-filled',
+            icon: IconEnum.ErrorFilled,
             messageColor: 'text-red-700',
         },
     }
