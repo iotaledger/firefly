@@ -1,6 +1,6 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { NetworkId } from '@core/network'
+    import { IAuth, NetworkId } from '@core/network'
     import { EMPTY_NODE } from '@core/network/constants'
     import { IClientOptions, INode, INodeInfoResponse } from '@core/network/interfaces'
     import { nodeInfo } from '@core/network/stores'
@@ -10,8 +10,7 @@
     import { IDropdownItem, cleanUrl } from '@core/utils'
     import features from '@features/features'
     import { Dropdown, Error, NumberInput, PasswordInput, TextInput } from 'shared/components'
-
-    interface NodeValidationOptions {
+    interface INodeValidationOptions {
         checkNodeInfo: boolean
         checkSameNetwork: boolean
         uniqueCheck: boolean
@@ -19,10 +18,10 @@
     }
 
     export let node: INode = structuredClone(EMPTY_NODE)
-    export let networkId: NetworkId
-    export let coinType: string | undefined
-    export let isBusy = false
-    export let formError = ''
+    export let networkId: NetworkId | undefined = undefined
+    export let coinType: string | undefined = undefined
+    export let isBusy: boolean = false
+    export let formError: string | undefined = undefined
     export let currentClientOptions: IClientOptions | undefined = undefined
     export let isDeveloperProfile: boolean = false
     export let onSubmit: () => void = () => {}
@@ -48,20 +47,29 @@
     ].filter((item) => features.onboarding?.[item.value]?.enabled)
 
     let [username, password] = node.auth?.basicAuthNamePwd ?? ['', '']
-    let jwt = node.auth?.jwt
+    let jwt = node?.auth?.jwt ?? ''
 
     $: networkId, (coinType = undefined)
     $: networkId, coinType, node.url, (formError = '')
-    $: node = {
-        url: node.url,
-        auth: {
-            ...([username, password].every((val) => val !== '') && {
-                basicAuthNamePwd: [username, password],
-            }),
-            ...(jwt !== '' && {
-                jwt,
-            }),
-        },
+    $: jwt,
+        username,
+        password,
+        (node = {
+            url: node.url,
+            auth: getAuth(),
+        })
+
+    function getAuth(): IAuth {
+        const auth: IAuth = {}
+
+        if ([username, password].every((value) => value !== '')) {
+            auth.basicAuthNamePwd = [username, password]
+        }
+
+        if (jwt !== '') {
+            auth.jwt = jwt
+        }
+        return auth
     }
 
     function cleanNodeUrl(): void {
@@ -72,7 +80,7 @@
         networkId = selected.value
     }
 
-    export async function validate(options: NodeValidationOptions): Promise<void> {
+    export async function validate(options: INodeValidationOptions): Promise<void> {
         if (networkId === NetworkId.Custom && !coinType) {
             formError = localize('error.node.noCoinType')
             return Promise.reject({ type: 'validationError', error: formError })
@@ -122,7 +130,7 @@
 </script>
 
 <form id="node-configuration-form" class="w-full h-full flex-col space-y-3" on:submit|preventDefault={onSubmit}>
-    {#if showNetworkFields}
+    {#if showNetworkFields && networkId}
         <Dropdown
             label={localize('general.network')}
             placeholder={localize('general.network')}
@@ -131,7 +139,7 @@
             disabled={isBusy}
             onSelect={onNetworkIdChanges}
         />
-        {#if networkId === NetworkId.Custom}
+        {#if networkId === NetworkId.Custom && coinType}
             <NumberInput
                 bind:value={coinType}
                 placeholder={localize('general.coinType')}

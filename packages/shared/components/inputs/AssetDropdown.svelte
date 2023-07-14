@@ -3,6 +3,7 @@
     import { AssetTile, Icon, Text, AssetIcon, FontWeight } from 'shared/components'
     import { clickOutside } from '@core/utils'
     import { activeProfile } from '@core/profile'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let asset = $visibleSelectedAccountAssets?.[$activeProfile?.network?.id]?.baseCoin
     export let readonly: boolean = false
@@ -62,7 +63,12 @@
             </div>
             {#if !isReadonly}
                 <div class="transform rotate-0">
-                    <Icon height="18" width="18" icon="chevron-down" classes="text-gray-600 dark:text-gray-500" />
+                    <Icon
+                        height="18"
+                        width="18"
+                        icon={IconEnum.ChevronDown}
+                        classes="text-gray-600 dark:text-gray-500"
+                    />
                 </div>
             {/if}
         </button>

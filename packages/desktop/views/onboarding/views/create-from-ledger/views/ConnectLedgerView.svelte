@@ -1,10 +1,12 @@
 <script lang="ts">
+    import { AnimationEnum } from '@auxiliary/animation'
     import { PopupId, openPopup } from '@auxiliary/popup'
     import { OnboardingLayout } from '@components'
     import { localize } from '@core/i18n'
     import { LedgerConnectionState, ledgerConnectionState } from '@core/ledger'
     import { Subrouter } from '@core/router'
     import { Button, Icon, LedgerAnimation, Link, Text } from '@ui'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let router: Subrouter<unknown>
 
@@ -16,17 +18,17 @@
     $: isCorrectAppOpen = $ledgerConnectionState === LedgerConnectionState.CorrectAppOpen
     $: $ledgerConnectionState, setAnimation()
 
-    let animation: string
+    let animation: AnimationEnum | undefined = undefined
     function setAnimation(): void {
         if (isNotConnected) {
-            animation = 'ledger-disconnected-desktop'
+            animation = AnimationEnum.LedgerDisconnectedDesktop
         } else if (isLocked) {
             // TODO: Get animation for locked ledger
             animation = undefined
         } else if (isAppNotOpen) {
-            animation = 'ledger-app-closed-desktop'
+            animation = AnimationEnum.LedgerAppClosedDesktop
         } else if (isCorrectAppOpen) {
-            animation = 'ledger-connected-desktop'
+            animation = AnimationEnum.LedgerConnectedDesktop
         }
     }
 
@@ -52,21 +54,21 @@
         <div class="flex flex-col flex-nowrap space-y-2">
             <div class="flex flex-row items-center space-x-2">
                 <Icon
-                    icon={`status-${isNotConnected ? 'error' : 'success'}`}
+                    icon={isNotConnected ? IconEnum.StatusError : IconEnum.StatusSuccess}
                     classes={`text-white bg-${isNotConnected ? 'red' : 'green'}-600 rounded-full`}
                 />
                 <Text type="p" secondary>{localize('views.connectLedger.connect')}</Text>
             </div>
             <div class="flex flex-row items-center space-x-2">
                 <Icon
-                    icon={`status-${isLocked ? 'error' : 'success'}`}
+                    icon={isLocked ? IconEnum.StatusError : IconEnum.StatusSuccess}
                     classes={`text-white bg-${isLocked ? 'red' : 'green'}-600 rounded-full`}
                 />
                 <Text type="p" secondary>{localize('views.connectLedger.unlock')}</Text>
             </div>
             <div class="flex flex-row items-center space-x-2">
                 <Icon
-                    icon={`status-${isAppNotOpen ? 'error' : 'success'}`}
+                    icon={isAppNotOpen ? IconEnum.StatusError : IconEnum.StatusSuccess}
                     classes={`text-white bg-${isAppNotOpen ? 'red' : 'green'}-600 rounded-full`}
                 />
                 <Text type="p" secondary>{localize('views.connectLedger.openApp')}</Text>
@@ -74,7 +76,7 @@
         </div>
     </div>
     <div slot="leftpane__action">
-        <Link icon="info" onClick={handleGuidePopup} classes="mb-10 justify-center">
+        <Link icon={IconEnum.Info} onClick={handleGuidePopup} classes="mb-10 justify-center">
             {localize('popups.ledgerConnectionGuide.title')}
         </Link>
         <Button
