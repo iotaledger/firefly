@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { AnimationEnum } from '@auxiliary/animation'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { OnboardingLayout } from '@components'
     import {
@@ -61,6 +62,6 @@
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-yellow dark:bg-gray-900'}">
-        <Animation classes="setup-anim-aspect-ratio" animation="congratulations-desktop" />
+        <Animation animation={AnimationEnum.CongratulationsDesktop} />
     </div>
 </OnboardingLayout>

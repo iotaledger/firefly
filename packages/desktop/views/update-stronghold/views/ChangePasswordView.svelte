@@ -16,6 +16,7 @@
     import zxcvbn from 'zxcvbn'
     import { updateStrongholdRouter } from '../update-stronghold-router'
     import { TextHintVariant } from 'shared/components/enums'
+    import { AnimationEnum } from '@auxiliary/animation'
 
     export let oldPassword: string
     export let newPassword: string
@@ -165,6 +166,6 @@
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-        <Animation classes="setup-anim-aspect-ratio" animation="password-desktop" />
+        <Animation animation={AnimationEnum.PasswordDesktop} />
     </div>
 </OnboardingLayout>

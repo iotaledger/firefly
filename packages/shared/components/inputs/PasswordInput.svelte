@@ -1,32 +1,32 @@
 <script lang="ts">
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { localize } from '@core/i18n'
-    import { Icon, Text, TextInput } from 'shared/components'
+    import { Icon, InputType, Text, TextInput } from 'shared/components'
 
-    export let value = ''
-    export let classes = ''
-    export let strength = 0
+    export let value: string
+    export let classes: string | undefined = undefined
+    export let strength: number = 0
     export let showStrengthLevel = false
     export let showRevealToggle = false
     export let strengthLevels = 4
-    export let label: string = undefined
-    export let placeholder = undefined
-    export let maxlength = undefined
-    export let error = null
-    export let integer = false
-    export let autofocus = false
-    export let submitHandler = undefined
-    export let disabled = false
+    export let label: string | undefined = undefined
+    export let placeholder: string | undefined = undefined
+    export let maxlength: number | undefined = undefined
+    export let error: string | undefined = undefined
+    export let integer: boolean = false
+    export let autofocus: boolean = false
+    export let submitHandler: () => void = () => {}
+    export let disabled: boolean = false
 
-    let revealed = false
-    let type = 'password'
+    let revealed: boolean = false
+    let type: InputType = InputType.Password
 
     function revealToggle(): void {
-        type = type === 'password' ? 'text' : 'password'
+        type = type === InputType.Password ? InputType.Text : InputType.Password
         revealed = !revealed
     }
 
-    const STRENGTH_COLORS = ['gray-300', 'orange-500', 'yellow-600', 'yellow-300', 'green-700']
+    const STRENGTH_COLORS: string[] = ['gray-300', 'orange-500', 'yellow-600', 'yellow-300', 'green-700']
 </script>
 
 <div class={classes} class:disabled>
