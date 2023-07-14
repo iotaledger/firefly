@@ -44,18 +44,18 @@
 </script>
 
 {#if text}
-    <hint class="hint {variant}" class:w-full={widthFull}>
+    <text-hint class="text-hint {variant}" class:w-full={widthFull}>
         {#if icon}
             <Icon {icon} primaryColor="white" classes="mr-3 fill-current {iconClasses}" />
         {/if}
         <Text fontSize="14" lineHeight="5">
             {text}
         </Text>
-    </hint>
+    </text-hint>
 {/if}
 
 <style lang="scss">
-    hint {
+    text-hint {
         @apply flex flex-row;
         @apply items-center;
         @apply p-4;
@@ -78,7 +78,7 @@
         &.info {
             @apply bg-blue-50 dark:bg-blue-500;
         }
-        &.hint {
+        &.text-hint {
             @apply dark:bg-opacity-10;
         }
     }
