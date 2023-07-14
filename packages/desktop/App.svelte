@@ -27,7 +27,7 @@
     import { showAppNotification } from '@auxiliary/notification'
     import { closePopup, openPopup, PopupId, popupState } from '@auxiliary/popup'
     import { getLocalisedMenuItems } from './lib/helpers'
-    import { ToastContainer, Transition } from '@ui'
+    import { NotificationManager, Transition } from '@ui'
     import { TitleBar, Popup } from '@components'
     import { Dashboard, LoginRouter, Settings, Splash } from '@views'
     import {
@@ -199,7 +199,7 @@
             {#if settings}
                 <Settings handleClose={() => (settings = false)} />
             {/if}
-            <ToastContainer classes="absolute right-5 bottom-5 w-100" />
+            <NotificationManager />
         {/if}
     </app-body>
 </app-container>
