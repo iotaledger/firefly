@@ -44,7 +44,7 @@
 </script>
 
 {#if text}
-    <text-hint class="text-hint {variant}" class:w-full={widthFull}>
+    <text-hint class="{variant} dark-bg-opacity" class:w-full={widthFull}>
         {#if icon}
             <Icon {icon} primaryColor="white" classes="mr-3 fill-current {iconClasses}" />
         {/if}
@@ -78,7 +78,7 @@
         &.info {
             @apply bg-blue-50 dark:bg-blue-500;
         }
-        &.text-hint {
+        &.dark-bg-opacity {
             @apply dark:bg-opacity-10;
         }
     }
