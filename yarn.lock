@@ -883,16 +883,6 @@
     "@types/warning" "^3.0.0"
     warning "^4.0.3"
 
-"@iota/types@2.0.0-rc.2":
-  version "2.0.0-rc.2"
-  resolved "https://registry.yarnpkg.com/@iota/types/-/types-2.0.0-rc.2.tgz#a4b8e5c3423a2afd322fc05ebfaa6b27587d9a96"
-  integrity sha512-huL+171zMQgGYV4/zhHLFcE8heTLRJhtlqLEJaM1Q+klb2KxNqFX0EySU8pxZ/nslh0Dem3QQ+Jmwv1FdBmpFQ==
-
-"@iota/types@^1.0.0-beta.9":
-  version "1.0.0-beta.15"
-  resolved "https://registry.yarnpkg.com/@iota/types/-/types-1.0.0-beta.15.tgz#1a1f5722ef176a45d03e92f4cb5bd9a4ea74ec27"
-  integrity sha512-67DrzDO5bl2c7RIMpOdtjdOa27Bv1EmX/BHPTQD8c3RtPPAzJpSIpuI8JsIDl3U6Qe4zdLX3kRv9zGBXcr0fZA==
-
 "@iota/unit-converter@^1.0.0-beta.30":
   version "1.0.0-beta.30"
   resolved "https://registry.yarnpkg.com/@iota/unit-converter/-/unit-converter-1.0.0-beta.30.tgz#a29b80e46ae935c69175f68121faec81adcea90e"
