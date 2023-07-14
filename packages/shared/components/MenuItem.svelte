@@ -66,7 +66,7 @@
     <div class="flex flex-row space-x-3 items-center">
         {#if isLoading}
             <Spinner busy width={24} height={24} />
-        {:else}
+        {:else if icon}
             <Icon
                 {icon}
                 height={24}
