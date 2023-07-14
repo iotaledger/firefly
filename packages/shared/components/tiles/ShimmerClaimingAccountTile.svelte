@@ -4,6 +4,7 @@
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
     import { IShimmerClaimingAccount, ShimmerClaimingAccountState } from '@contexts/onboarding'
     import { IBaseToken } from '@core/wallet/interfaces'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let shimmerClaimingAccount: IShimmerClaimingAccount
     export let baseToken: IBaseToken
@@ -19,7 +20,7 @@
     <Tile isGhost classes="rounded-xl">
         <div class="w-full flex flex-row justify-between items-center space-x-4">
             <div class="flex flex-row items-center text-left space-x-2">
-                <Icon icon="wallet" width={28} height={28} classes="text-blue-500" />
+                <Icon icon={IconEnum.Wallet} width={28} height={28} classes="text-blue-500" />
                 <Text type={TextType.p} fontWeight={FontWeight.medium}>
                     {shimmerClaimingAccount?.getMetadata()?.alias}
                 </Text>
@@ -36,7 +37,7 @@
                                 <Icon
                                     width="16"
                                     height="16"
-                                    icon="status-error"
+                                    icon={IconEnum.StatusError}
                                     classes="text-white bg-red-500 rounded-full"
                                 />
                             {/if}
@@ -50,7 +51,7 @@
                             <Icon
                                 width="16"
                                 height="16"
-                                icon="success-check"
+                                icon={IconEnum.SuccessCheck}
                                 classes="text-white bg-green-600 rounded-full"
                             />
                             <Text type={TextType.p} fontWeight={FontWeight.semibold} secondary classes="flex-grow">

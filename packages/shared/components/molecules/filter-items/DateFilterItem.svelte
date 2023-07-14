@@ -4,6 +4,7 @@
     import type { IDropdownItem } from '@core/utils'
     import { DateFilterUnit } from '@core/utils/interfaces/filter'
     import { DateFilterOption, DateUnit } from '@core/utils/enums/filters'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let filterUnit: DateFilterUnit
 
@@ -63,7 +64,7 @@
 {#if filterUnit.selected}
     <div class="flex flex-row items-center space-x-2 mt-2">
         {#if filterUnit.selected !== DateFilterOption.Range}
-            <Icon height="24" width="20" icon="arrow-right" />
+            <Icon height="24" width="20" icon={IconEnum.ArrowRight} />
         {/if}
         {#if filterUnit.subunit.type === 'range'}
             <!-- negative right margin prevents dates from wrapping to a second row unless length is MM.DD.YYYY -->
