@@ -6,11 +6,7 @@
 
     import { localize } from '@core/i18n'
 
-    import {
-        generateMnemonicForOnboardingProfile,
-        onboardingProfile,
-        updateOnboardingProfile,
-    } from '@contexts/onboarding'
+    import { generateMnemonicForOnboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
 
     import { profileBackupRouter } from '@/routers'
 
@@ -47,9 +43,7 @@
         <Text type={TextType.p} secondary overrideColor color="gray-800" fontSize="15" classes="font-bold mb-4">
             {localize('views.onboarding.profileBackup.viewMnemonic.body2')}
         </Text>
-        {#if $onboardingProfile?.mnemonic}
-            <RecoveryPhrase recoveryPhrase={$onboardingProfile?.mnemonic} blurred={isHidden} boxed />
-        {/if}
+        <RecoveryPhrase blurred={isHidden} boxed />
     </content-container>
     <footer-container slot="footer" class="block">
         {#if !hasRevealedRecoveryPhrase}

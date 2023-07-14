@@ -69,7 +69,7 @@
                 </Text>
             </div>
         {/if}
-        <RecoveryPhrase recoveryPhrase={$onboardingProfile?.mnemonic} {verifyRecoveryPhrase} boxed />
+        <RecoveryPhrase {verifyRecoveryPhrase} boxed />
     </content-container>
     <footer-container slot="footer" class="block">
         {#if !isVerified}

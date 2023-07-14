@@ -69,7 +69,7 @@
     </leftpane-action>
     <rightpane-container slot="rightpane" class="w-full h-full flex flex-col items-center justify-center p-4">
         {#if $onboardingProfile?.mnemonic}
-            <RecoveryPhrase recoveryPhrase={$onboardingProfile?.mnemonic} blurred={isHidden} />
+            <RecoveryPhrase blurred={isHidden} />
             {#if !hasRevealedRecoveryPhrase}
                 {#if isHidden}
                     <Button onClick={onMnemonicVisibilityClick} classes="absolute">
