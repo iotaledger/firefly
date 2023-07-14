@@ -1,20 +1,23 @@
-import { IExpirationUnlockCondition, IStorageDepositReturnUnlockCondition } from '@iota/types'
 import {
-    ADDRESS_TYPE_ED25519,
-    UNLOCK_CONDITION_EXPIRATION,
-    UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN,
-} from '../constants'
+    AddressType,
+    Ed25519Address,
+    ExpirationUnlockCondition,
+    StorageDepositReturnUnlockCondition,
+    UnlockConditionType,
+} from '@iota/wallet'
 import { getBech32AddressFromAddressTypes } from './getBech32AddressFromAddressTypes'
 
 export function getSenderAddressFromUnlockCondition(
-    unlockCondition: IStorageDepositReturnUnlockCondition | IExpirationUnlockCondition
+    unlockCondition: StorageDepositReturnUnlockCondition | ExpirationUnlockCondition
 ): string | undefined {
     if (
-        (unlockCondition?.type === UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN ||
-            unlockCondition?.type === UNLOCK_CONDITION_EXPIRATION) &&
-        unlockCondition?.returnAddress?.type === ADDRESS_TYPE_ED25519
+        (unlockCondition?.getType() === UnlockConditionType.StorageDepositReturn ||
+            unlockCondition?.getType() === UnlockConditionType.Expiration) &&
+        unlockCondition?.getReturnAddress()?.getType() === AddressType.Ed25519
     ) {
-        return getBech32AddressFromAddressTypes(unlockCondition?.returnAddress)
+        return getBech32AddressFromAddressTypes(
+            new Ed25519Address((unlockCondition.getReturnAddress() as Ed25519Address).getPubKeyHash())
+        )
     } else {
         return undefined
     }
