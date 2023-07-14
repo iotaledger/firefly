@@ -1,5 +1,6 @@
 <script lang="ts">
     import { Icon, Text } from 'shared/components'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let primary = false
     export let secondary = false
@@ -8,7 +9,7 @@
     export let warning = false
     export let info = false
     export let classes: string = ''
-    export let icon: 'info' | 'exclamation' | undefined = undefined
+    export let icon: IconEnum.Info | IconEnum.Exclamation | undefined = undefined
     export let iconClasses: string = ''
     export let iconSize: string = ''
     export let text: string = ''
@@ -17,7 +18,7 @@
     export let textDarkColor = 'gray-400'
 
     let _classes: string
-    let _icon: string
+    let _icon: IconEnum
     let _iconClasses: string
 
     function setClasses(): void {
@@ -27,19 +28,19 @@
             _classes = 'bg-gray-50 dark:bg-gray-800'
         } else if (success) {
             _classes = 'bg-green-50 dark:bg-green-500'
-            _icon = 'checkmark-filled'
+            _icon = IconEnum.CheckmarkFilled
             _iconClasses = 'text-green-700 dark:text-green-700'
         } else if (danger) {
             _classes = 'bg-red-50 dark:bg-red-500'
-            _icon = 'error-filled'
+            _icon = IconEnum.ErrorFilled
             _iconClasses = 'text-red-500 dark:text-red-500'
         } else if (warning) {
             _classes = 'bg-yellow-50 dark:bg-yellow-500'
-            _icon = 'exclamation-filled'
+            _icon = IconEnum.ExclamationFilled
             _iconClasses = 'text-yellow-700 dark:text-yellow-700'
         } else if (info) {
             _classes = 'bg-blue-50 dark:bg-blue-500'
-            _icon = 'info-filled'
+            _icon = IconEnum.InfoFilled
             _iconClasses = 'text-blue-600 dark:text-blue-600'
         }
     }

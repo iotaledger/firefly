@@ -43,7 +43,7 @@
 </script>
 
 <profile-picture
-    class="rounded-full font-bold text-center flex items-center justify-center
+    class="rounded-full font-bold text-center flex items-center justify-center overflow-hidden
         h-{height} w-{width}
         {backgroundColor ? 'icon-bg' : 'bg-blue-500'}
     "
