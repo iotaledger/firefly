@@ -8,6 +8,7 @@
     import { burnNft } from '@core/wallet'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { activeProfile, updateActiveProfile } from '@core/profile/stores'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let modal: Modal = undefined
     export let nft: INft
@@ -77,24 +78,24 @@
 <Modal bind:this={modal} position={{ top: '100px', right: '60px' }}>
     <div class="flex flex-col">
         <MenuItem
-            icon="receive"
+            icon={IconEnum.Receive}
             title={localize('views.collectibles.details.menu.download')}
             disabled={true}
             onClick={() => {}}
         />
         <MenuItem
-            icon="profile"
+            icon={IconEnum.Profile}
             title={localize(`views.collectibles.details.menu.${isCurrentPfp ? 'unsetPfp' : 'setPfp'}`)}
             onClick={onSetPfpClick}
         />
         <MenuItem
-            icon="export"
+            icon={IconEnum.Export}
             title={localize('views.collectibles.details.menu.view')}
             onClick={onOpenMediaClick}
             disabled={!url}
         />
         <MenuItem
-            icon="delete"
+            icon={IconEnum.Delete}
             title={localize('views.collectibles.details.menu.burn')}
             onClick={openBurnNft}
             disabled={isLocked}
