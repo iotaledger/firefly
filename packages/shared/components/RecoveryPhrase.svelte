@@ -1,16 +1,17 @@
 <script lang="ts">
     import { appSettings } from '@core/app'
-    import { onboardingProfile } from '@contexts/onboarding'
 
-    export let verifyRecoveryPhrase: string[] | undefined = undefined
+    export let recoveryPhrase: string[] = []
+    export let verifyRecoveryPhrase: string[] = undefined
+
     export let blurred: boolean = false
+    export let disabled: boolean = false
     export let boxed: boolean = false
 
     $: dark = $appSettings.darkMode
 </script>
 
-{#if $onboardingProfile?.mnemonic}
-    {@const recoveryPhrase = $onboardingProfile?.mnemonic}
+{#if recoveryPhrase}
     <recovery-phrase data-label="recovery-phrase" class:blurred class:boxed>
         {#each recoveryPhrase as word, i}
             {@const errored =
@@ -20,7 +21,15 @@
                 verifyRecoveryPhrase.length === i &&
                 verifyRecoveryPhrase[i - 1] === recoveryPhrase[i - 1]}
             {@const unmatched = verifyRecoveryPhrase && !verifyRecoveryPhrase[i]}
-            <recovery-word id="recovery-word-{i}" class:boxed class:dark class:errored class:selected class:unmatched>
+            <recovery-word
+                id="recovery-word-{i}"
+                class:boxed
+                class:dark
+                class:disabled
+                class:errored
+                class:selected
+                class:unmatched
+            >
                 <span class="text-gray-500 mr-2">{`${i + 1}. `}</span>
                 <span class="text-gray-700 dark:text-white">{blurred || errored || unmatched ? '*****' : word}</span>
             </recovery-word>
@@ -48,6 +57,10 @@
 
     recovery-word {
         @apply flex flex-row items-center;
+
+        &.disabled {
+            @apply pointer-events-none;
+        }
     }
 
     recovery-word:not(.boxed) {
