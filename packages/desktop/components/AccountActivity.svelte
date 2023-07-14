@@ -13,6 +13,7 @@
     import features from '@features/features'
     import { debounce, getMonthYear } from '@core/utils'
     import VirtualList from '@sveltejs/svelte-virtual-list'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     let searchActive = false
     let inputElement: HTMLInputElement
@@ -67,7 +68,7 @@
             <Text type="h5">{localize('general.activity')}</Text>
             <div class="flex flex-row space-x-2">
                 {#if features?.wallet?.activityHistory?.search?.enabled}
-                    <TogglableButton icon="search" bind:active={searchActive} />
+                    <TogglableButton icon={IconEnum.Search} bind:active={searchActive} />
                     <Filter filterStore={activityFilter} />
                 {/if}
             </div>
