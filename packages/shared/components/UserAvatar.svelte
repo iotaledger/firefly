@@ -31,7 +31,7 @@
 </script>
 
 <user-avatar
-    class="rounded-full font-bold text-center flex items-center justify-center icon-bg {size}"
+    class="rounded-full font-bold text-center flex items-center justify-center icon-bg overflow-hidden {size}"
     style:--icon-bg-color={backgroundColor}
 >
     {#if profile?.pfp}

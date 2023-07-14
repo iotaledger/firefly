@@ -358,13 +358,13 @@ app.on('window-all-closed', () => {
 })
 
 powerMonitor.on('suspend', () => {
-    // MacOS and Windows
-    windows.main.webContents.send('lock-screen')
+    // MacOS, Windows and Linux
+    windows.main.webContents.send('power-monitor-suspend')
 })
 
 powerMonitor.on('lock-screen', () => {
     // MacOS and Windows
-    windows.main.webContents.send('lock-screen')
+    windows.main.webContents.send('power-monitor-lock-screen')
 })
 
 app.once('ready', () => {
