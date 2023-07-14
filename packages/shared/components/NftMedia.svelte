@@ -3,20 +3,18 @@
     import { DEV_STORAGE_DIRECTORY } from '@core/profile/constants'
     import { getStorageDirectoryOfProfiles } from '@core/profile/utils'
     import features from '@features/features'
-    import { MediaDisplay } from '@ui'
+    import { MediaDisplay, MediaPlaceholder } from '@ui'
     import { onMount } from 'svelte'
-    import MediaPlaceholder from './MediaPlaceholder.svelte'
 
     export let nft: INft
     export let autoplay: boolean = false
     export let controls: boolean = false
     export let loop: boolean = false
     export let muted: boolean = false
-    export let classes: string = ''
     export let useCaching: boolean = true
 
-    const bgColor = 'gray-200'
-    const darkBgColor = 'gray-700'
+    const bgColor: string = 'gray-200'
+    const darkBgColor: string = 'gray-700'
 
     let hasMounted: boolean = false
     let basePath: string
@@ -46,7 +44,6 @@
         {controls}
         {loop}
         {muted}
-        {classes}
         alt={`Media display for ${nft.name}`}
     />
 {:else}
