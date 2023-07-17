@@ -5,7 +5,7 @@
 
     export let text: string
 
-    const renderers: Record<string, SvelteComponent | null> = {
+    const renderers: Record<string, typeof SvelteComponent | null> = {
         heading: ParagraphBlock,
         paragraph: ParagraphBlock,
         image: ParagraphBlock,
