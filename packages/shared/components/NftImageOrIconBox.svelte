@@ -4,7 +4,7 @@
     import { MediaPlaceholder, NftMedia } from 'shared/components'
     import { ParentMimeType } from '@core/nfts'
 
-    export let nft: INft
+    export let nft: INft | null = null
     export let size: NftSize = NftSize.Medium
     export let useCaching: boolean = true
 
@@ -18,14 +18,23 @@
     class:medium={size === NftSize.Medium}
     class:large={size === NftSize.Large}
 >
-    {#if parentType === ParentMimeType.Image}
+    {#if parentType === ParentMimeType.Image && nft}
         <NftMedia {nft} {useCaching}>
-            <placeholder-wrapper slot="placeholder">
+            <placeholder-wrapper
+                slot="placeholder"
+                class:small={size === NftSize.Small}
+                class:medium={size === NftSize.Medium}
+                class:large={size === NftSize.Large}
+            >
                 <MediaPlaceholder type={nftType} iconOnly />
             </placeholder-wrapper>
         </NftMedia>
     {:else}
-        <placeholder-wrapper>
+        <placeholder-wrapper
+            class:small={size === NftSize.Small}
+            class:medium={size === NftSize.Medium}
+            class:large={size === NftSize.Large}
+        >
             <MediaPlaceholder type={nftType} iconOnly />
         </placeholder-wrapper>
     {/if}
