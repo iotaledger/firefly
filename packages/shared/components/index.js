@@ -1,7 +1,6 @@
 export { default as Alert } from './Alert.svelte'
 export { default as Animation } from './Animation.svelte'
 export { default as Button } from './Button.svelte'
-export { default as ButtonRadio } from './ButtonRadio.svelte'
 export { default as ColorPicker } from './ColorPicker.svelte'
 export { default as InformationTooltip } from './InformationTooltip.svelte'
 export { default as Error } from './Error.svelte'
