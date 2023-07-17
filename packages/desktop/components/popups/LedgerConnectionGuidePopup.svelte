@@ -3,13 +3,14 @@
     import { openUrlInBrowser } from '@core/app'
     import { closePopup } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
+    import { IllustrationEnum } from '@auxiliary/illustration'
 
     let stepIndex = 0
     const stepAnimations = [
-        'ledger-background-live-desktop',
-        'ledger-pin-desktop',
-        'ledger-open-app-desktop',
-        'ledger-support',
+        IllustrationEnum.LedgerBackgroundLiveDesktop,
+        IllustrationEnum.LedgerPinDesktop,
+        IllustrationEnum.LedgerOpenAppDesktop,
+        IllustrationEnum.LedgerSupport,
     ]
 
     function changeIndex(increment: number): void {
