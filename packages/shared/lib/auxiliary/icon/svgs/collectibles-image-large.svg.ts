@@ -1,3 +1,4 @@
+import { FillPriority } from '../enums'
 import { ISvg } from '../interfaces'
 
 export const COLLECTIBLES_IMAGE_LARGE_SVG: ISvg = {
@@ -6,11 +7,11 @@ export const COLLECTIBLES_IMAGE_LARGE_SVG: ISvg = {
     path: [
         {
             d: 'M17.4098 11.5082C17.4098 8.52042 14.9877 6.09836 11.9999 6.09836C9.01215 6.09836 6.59009 8.52042 6.59009 11.5082C6.59009 14.496 9.01215 16.918 11.9999 16.918C14.9877 16.918 17.4098 14.496 17.4098 11.5082Z',
-            fillPriority: 'secondary',
+            fillPriority: FillPriority.Secondary,
         },
         {
             d: 'M6.59027 11.5993L9.16254 10.3388C9.54789 10.1499 10.0053 10.1851 10.3573 10.4307L13.4899 12.6162C13.8182 12.8453 14.2404 12.8923 14.6111 12.741L17.4099 11.5993C17.5 14.5 14.8059 17 12.0002 17C9.16254 17 6.50001 14.5 6.59027 11.5993Z',
-            fillPriority: 'primary',
+            fillPriority: FillPriority.Primary,
             opacity: 0.98,
         },
         {

@@ -1,12 +1,12 @@
 <script lang="ts">
     import Input from './Input.svelte'
-    import { FontWeight, TextPropTypes, TextType } from 'shared/components'
+    import { FontWeight, InputType, TextPropTypes, TextType } from 'shared/components'
 
     export let value: string = ''
-    export let inputElement: HTMLInputElement = undefined
+    export let inputElement: HTMLInputElement | undefined = undefined
     export let hasFocus: boolean = false
     export let error: string = ''
-    export let inputType: 'text' | 'number' | 'password' = 'text'
+    export let inputType: InputType = InputType.Text
     export let alignment: 'left' | 'right' | 'center' | 'justify' = 'left'
 
     // Text Props

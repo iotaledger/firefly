@@ -2,6 +2,7 @@
     import { Animation } from 'shared/components'
     import { appSettings, shouldBeDarkMode, mobile } from '@core/app'
     import { onMount } from 'svelte'
+    import { AnimationEnum, AnimationRenderer } from '@auxiliary/animation'
 
     /**
      * NOTE: This reactive dependency ensures that darkMode is set to the
@@ -17,6 +18,11 @@
 
 <div class="w-full h-full flex justify-center items-center bg-white dark:bg-gray-900">
     <div class={$mobile ? 'w-full px-4' : 'w-1/3'}>
-        <Animation classes="w-full h-auto" animation="splashscreen-desktop" loop={false} renderer="canvas" />
+        <Animation
+            classes="w-full h-auto"
+            animation={AnimationEnum.SplashscreenDesktop}
+            loop={false}
+            renderer={AnimationRenderer.Canvas}
+        />
     </div>
 </div>
