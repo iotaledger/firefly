@@ -4,19 +4,19 @@
     import { fade } from 'svelte/transition'
     import { truncateString } from '@core/utils'
 
+    export let labelLocale: string
+    export let options: IOption[]
     export let error: string = ''
+    export let inputElement: HTMLInputElement | undefined = undefined
+    export let modal: Modal | undefined = undefined
     export let disabled: boolean = false
-    export let labelLocale: string = ''
-    export let modal: Modal = undefined
-    export let inputElement: HTMLInputElement = undefined
-    export let options: IOption[] = []
-    export let selected: IOption = undefined
-    export let maxHeight: string = 'max-h-64'
+    export let selected: IOption | undefined = undefined
+    export let pickerHeight: string = 'max-h-64'
     // HTML checks whether this value is absent to determine whether the field is readonly
     // If the attribute is set to false, HTML interprets it as a readonly field.
-    export let readonly: boolean = null
+    export let readonly: boolean | null = null
 
-    let value: string = selected?.key ?? selected?.value
+    let value: string = selected?.key ?? selected?.value ?? ''
     let previousValue: string = value
     let hasFocus: boolean
 
@@ -28,9 +28,8 @@
     }
 
     $: options, resetValue()
-    $: hasFocus && (error = '')
-
     $: if (hasFocus) {
+        error = ''
         setTimeout(() => modal?.open(), 100)
     }
 
@@ -48,14 +47,18 @@
     function onClick(option: IOption): void {
         modal?.close()
         selected = option
-        value = option?.key ?? option.value
+        value = option?.key ?? option?.value ?? ''
         previousValue = value
         setFilteredOptions()
     }
 
     export function resetValue(newSelected?: IOption): void {
         if (newSelected) selected = newSelected
-        value = selected?.key ?? selected?.value
+        value = selected?.key ?? selected?.value ?? ''
+    }
+
+    function blurInputElement(): void {
+        inputElement?.blur()
     }
 </script>
 
@@ -82,13 +85,11 @@
     </TextInput>
 
     {#if filteredOptions.length > 0 && !readonly}
-        <Modal
-            bind:this={modal}
-            position={{ left: '0', top: '100%' }}
-            classes="w-full p-4"
-            on:close={() => inputElement.blur()}
-        >
-            <picker-modal class="{maxHeight} flex flex-col space-y-1 scrollable-y" in:fade={{ duration: 100 }}>
+        <Modal bind:this={modal} position={{ top: '100%', left: '0' }} classes="w-full p-4" on:close={blurInputElement}>
+            <picker-modal
+                class="flex flex-col space-y-1 scrollable-y {pickerHeight} max-h-64"
+                in:fade={{ duration: 100 }}
+            >
                 {#each filteredOptions as option, index}
                     <button
                         on:click={() => onClick(option)}
