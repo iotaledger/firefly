@@ -138,7 +138,7 @@
             }
         }
 
-        if (!initialExpirationDate && !isTransferring) {
+        if (transactionDetails.expirationDate === undefined) {
             initialExpirationDate = getInitialExpirationDate()
         }
     }
