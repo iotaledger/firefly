@@ -2,6 +2,7 @@
     import { Icon, Text, FontWeight, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
     import { removeDisplayNotification } from '@auxiliary/notification/stores'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let type: string
     export let message: string
@@ -9,29 +10,36 @@
     export let showDismiss: boolean = false
     export let id: string = ''
 
-    const TOAST_STYLE = {
+    interface ToastStyle {
+        backgroundColor: string
+        iconColor: string
+        icon: IconEnum
+        messageColor: string
+    }
+
+    const TOAST_STYLE: Record<string, ToastStyle> = {
         info: {
             backgroundColor: 'blue-100',
             iconColor: 'blue-700',
-            icon: 'info-filled',
+            icon: IconEnum.InfoFilled,
             messageColor: 'blue-700',
         },
         success: {
             backgroundColor: 'green-100',
             iconColor: 'green-800',
-            icon: 'checkmark-filled',
+            icon: IconEnum.CheckmarkFilled,
             messageColor: 'green-800',
         },
         warning: {
             backgroundColor: 'yellow-100',
             iconColor: 'yellow-800',
-            icon: 'exclamation-filled',
+            icon: IconEnum.ExclamationFilled,
             messageColor: 'yellow-800',
         },
         error: {
             backgroundColor: 'red-100',
             iconColor: 'red-700',
-            icon: 'error-filled',
+            icon: IconEnum.ErrorFilled,
             messageColor: 'red-700',
         },
     }

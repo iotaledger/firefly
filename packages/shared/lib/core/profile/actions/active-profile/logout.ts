@@ -24,7 +24,7 @@ import { Platform } from '@core/app'
 /**
  * Logout from active profile
  */
-export function logout(clearActiveProfile = true, _lockStronghold = true): void {
+export async function logout(clearActiveProfile = true, _lockStronghold = true): Promise<void> {
     if (get(isSoftwareProfile)) {
         _lockStronghold && lockStronghold()
     } else if (isLedgerProfile(get(activeProfile).type)) {
@@ -38,7 +38,7 @@ export function logout(clearActiveProfile = true, _lockStronghold = true): void 
     const _activeProfile = get(activeProfile)
     if (_activeProfile) {
         const manager = get(profileManager)
-        void destroyWalletRsObjects(manager)
+        await destroyWalletRsObjects(manager)
     }
 
     cleanupProfileState(clearActiveProfile)
