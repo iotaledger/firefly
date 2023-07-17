@@ -1,3 +1,4 @@
+import { FillPriority } from '../enums'
 import { ISvg } from '../interfaces'
 
 export const NOT_VERIFIED_SVG: ISvg = {
@@ -5,7 +6,7 @@ export const NOT_VERIFIED_SVG: ISvg = {
     height: 14,
     path: [
         {
-            fillPriority: 'secondary',
+            fillPriority: FillPriority.Secondary,
             d: 'M 7, 7 m -3, 0 a 3,3 0 1,0 6,0 a 3,3 0 1,0 -7,0',
             fillRule: 'evenodd',
             clipRule: 'evenodd',

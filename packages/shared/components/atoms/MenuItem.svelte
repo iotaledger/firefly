@@ -1,7 +1,8 @@
 <script lang="ts">
     import { Icon, Text, Spinner, Position, InformationTooltip } from 'shared/components'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
-    export let icon: string = ''
+    export let icon: IconEnum | undefined = undefined
     export let iconProps: Record<string, unknown> = undefined
     export let title: string
     export let subtitle = ''
@@ -95,7 +96,7 @@
         </div>
     </div>
     {#if selected}
-        <Icon icon="checkmark" classes="ml-2 text-blue-500" />
+        <Icon icon={IconEnum.Checkmark} classes="ml-2 text-blue-500" />
     {/if}
 </button>
 

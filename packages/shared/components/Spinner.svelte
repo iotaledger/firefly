@@ -1,5 +1,6 @@
 <script lang="ts">
     import { Icon, Text } from 'shared/components'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let busy = false
     export let message = ''
@@ -14,7 +15,7 @@
     <spinner-container class={`flex flex-row items-center ${classes}`}>
         {#if busy}
             <Icon
-                icon="refresh"
+                icon={IconEnum.Refresh}
                 {width}
                 {height}
                 classes={`animate-spin-reverse text-${color} dark:text-${darkColor}`}
