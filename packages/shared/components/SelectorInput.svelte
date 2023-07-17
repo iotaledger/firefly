@@ -86,10 +86,7 @@
 
     {#if filteredOptions.length > 0 && !readonly}
         <Modal bind:this={modal} position={{ top: '100%', left: '0' }} classes="w-full p-4" on:close={blurInputElement}>
-            <picker-modal
-                class="flex flex-col space-y-1 scrollable-y {pickerHeight} max-h-64"
-                in:fade={{ duration: 100 }}
-            >
+            <picker-modal class="flex flex-col space-y-1 scrollable-y {pickerHeight}" in:fade={{ duration: 100 }}>
                 {#each filteredOptions as option, index}
                     <button
                         on:click={() => onClick(option)}
