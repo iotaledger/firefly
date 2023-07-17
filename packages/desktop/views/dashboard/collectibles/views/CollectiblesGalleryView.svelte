@@ -1,8 +1,18 @@
 <script lang="ts">
     import { IllustrationEnum } from '@auxiliary/illustration'
+    import { openPopup, PopupId } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
     import { nftSearchTerm, queriedNfts, ownedNfts } from '@core/nfts'
-    import { FontWeight, Illustration, Text, ReceiveButton, SearchInput, NftGalleryItem } from 'shared/components'
+    import { FontWeight, Illustration, Text, SearchInput, NftGalleryItem, Button, ButtonSize } from 'shared/components'
+
+    function handleReceiveFundsPopup(): void {
+        openPopup({
+            id: PopupId.ReceiveAddress,
+            props: {
+                title: localize('general.receiveFunds'),
+            },
+        })
+    }
 </script>
 
 <div class="flex flex-col w-full h-full space-y-4">
@@ -48,7 +58,9 @@
                         >{localize('views.collectibles.gallery.emptyDescription')}</Text
                     >
                 </div>
-                <ReceiveButton text={localize('actions.depositNft')} title={localize('actions.depositNft')} />
+                <Button size={ButtonSize.Large} onClick={handleReceiveFundsPopup}>
+                    {localize('actions.depositNft')}
+                </Button>
             </div>
         </div>
     {/if}
