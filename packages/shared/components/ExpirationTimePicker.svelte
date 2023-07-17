@@ -4,7 +4,7 @@
     import { formatDate, localize } from '@core/i18n'
     import { TimePeriod } from '@core/utils'
 
-    export let value: Date | undefined | null = undefined
+    export let value: Date | null = null
     export let initialSelected: TimePeriod = TimePeriod.None
     export let disabled: boolean = false
 
@@ -45,8 +45,5 @@
 <style lang="scss">
     button {
         @apply flex items-center justify-center;
-        &:disabled {
-            @apply cursor-default;
-        }
     }
 </style>
