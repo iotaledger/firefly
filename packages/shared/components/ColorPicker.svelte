@@ -17,7 +17,6 @@
     let inputValue: string = activeAccountColorIndex >= 0 ? cachedColor : active
     let iconColor = ''
     let isTooltipVisible = false
-    let isCustomHover = false
     let tooltipAnchor: HTMLElement
 
     $: inputValue = `#${/[0-9|a-f|A-F]+/.exec(inputValue) || ''}`
@@ -56,10 +55,6 @@
         if (index !== accountColors.length) {
             isTooltipVisible = false
         }
-    }
-
-    function toggleCustomHover(): void {
-        isCustomHover = !isCustomHover
     }
 
     function toggleTooltip(event: KeyboardEvent | MouseEvent): void {
@@ -118,8 +113,6 @@
                 on:click={activeCustomColor}
                 on:keypress={toggleTooltip}
                 on:keypress={activeCustomColor}
-                on:mouseenter={toggleCustomHover}
-                on:mouseleave={toggleCustomHover}
                 tabindex="0"
                 class="custom-color w-12 h-12 rounded-lg cursor-pointer flex justify-center items-center hover:bg-gray-50 focus:bg-white"
                 class:ring-4={isSelectedCustomElement}
