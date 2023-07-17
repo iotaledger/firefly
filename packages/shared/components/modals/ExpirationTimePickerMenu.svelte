@@ -3,6 +3,7 @@
     import { TimePeriod } from '@core/utils'
     import { HR, Modal, MenuItem, ExpirationDateTimePicker } from 'shared/components'
     import { fade } from 'svelte/transition'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let value: Date | null
     export let selected: TimePeriod = TimePeriod.None
@@ -79,14 +80,14 @@
 <Modal bind:this={modal} position={{ bottom: '120px', left: '400px' }} size="medium">
     <expiration-time-picker-modal class="flex flex-col space-y-0 whitespace-nowrap" in:fade={{ duration: 100 }}>
         <MenuItem
-            icon="calendar"
+            icon={IconEnum.Calendar}
             title={localize('menus.expirationTimePicker.none')}
             onClick={() => onChooseExpirationTimeClick(TimePeriod.None)}
             selected={selected === TimePeriod.None}
         />
         <HR />
         <MenuItem
-            icon="calendar"
+            icon={IconEnum.Calendar}
             title={localize('menus.expirationTimePicker.1hour')}
             subtitle={formatDate(dateIn1Hour, {
                 dateStyle: 'medium',
@@ -96,7 +97,7 @@
             selected={selected === TimePeriod.OneHour}
         />
         <MenuItem
-            icon="calendar"
+            icon={IconEnum.Calendar}
             title={localize('menus.expirationTimePicker.1day')}
             subtitle={formatDate(dateIn1Day, {
                 dateStyle: 'medium',
@@ -106,7 +107,7 @@
             selected={selected === TimePeriod.OneDay}
         />
         <MenuItem
-            icon="calendar"
+            icon={IconEnum.Calendar}
             title={localize('menus.expirationTimePicker.1week')}
             subtitle={formatDate(dateIn1Week, {
                 dateStyle: 'medium',
@@ -117,7 +118,7 @@
         />
         <HR />
         <MenuItem
-            icon="calendar"
+            icon={IconEnum.Calendar}
             title={localize('menus.expirationTimePicker.customDate.title')}
             subtitle={customDate
                 ? formatDate(customDate, { dateStyle: 'medium', timeStyle: 'medium' })
