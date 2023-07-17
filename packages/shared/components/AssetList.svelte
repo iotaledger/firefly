@@ -31,7 +31,7 @@
         return list
     }
 
-    function scrollToTop() {
+    function scrollToTop(): void {
         const listElement = document.querySelector('.asset-list')?.querySelector('svelte-virtual-list-viewport')
         if (listElement) {
             listElement.scroll(0, 0)
@@ -50,7 +50,7 @@
 </script>
 
 {#if assets}
-    <div class="asset-list h-full p-6 flex flex-auto flex-col flex-grow shrink-0 overflow-y-scroll">
+    <div class="asset-list h-full p-6 flex flex-auto flex-col flex-grow shrink-0">
         <div class="w-full flex flex-row justify-between items-center mb-4">
             <Text classes="text-left" type={TextType.h5}>{localize('general.assets')}</Text>
             <Filter filterStore={assetFilter} />
@@ -70,3 +70,15 @@
         </div>
     </div>
 {/if}
+
+<style lang="scss">
+    .asset-list :global(svelte-virtual-list-viewport) {
+        margin-right: -1rem !important;
+        flex: auto;
+        overflow-y: scroll;
+        padding-right: 1.5rem !important;
+    }
+    .asset-list :global(svelte-virtual-list-contents) {
+        margin-right: -1rem !important;
+    }
+</style>

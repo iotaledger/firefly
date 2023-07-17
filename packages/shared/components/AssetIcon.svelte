@@ -5,11 +5,10 @@
     import { COIN_TYPE, NetworkId } from '@core/network'
     import { isBright } from '@core/utils'
     import { ANIMATED_TOKEN_IDS, getAssetInitials, IPersistedAsset, TokenStandard } from '@core/wallet'
-    import { Animation, Icon, VerificationBadge } from 'shared/components'
+    import { Animation, AssetIconSize, Icon, VerificationBadge } from 'shared/components'
 
     export let asset: IPersistedAsset
-    export let large: boolean = false
-    export let small: boolean = false
+    export let size: AssetIconSize = AssetIconSize.Medium
 
     let icon: IconEnum | null
     let assetIconColor: string = 'text-blue-500'
@@ -45,20 +44,28 @@
                 icon = null
         }
     }
+
+    function handleOnError(): void {
+        assetLogoUrl = ''
+    }
 </script>
 
-<asset-icon-wrapper class:large class:small>
+<asset-icon-wrapper class:large={AssetIconSize.Large === size} class:small={AssetIconSize.Small === size}>
     <asset-icon
         class:isAnimation
-        class:large
-        class:small
+        class:large={AssetIconSize.Large === size}
+        class:small={AssetIconSize.Small === size}
         class:icon-bg={assetIconBackgroundColor}
         style={assetIconBackgroundColor ? `--icon-bg-color: ${assetIconBackgroundColor}` : ''}
         bind:clientWidth={assetIconWrapperWidth}
     >
         {#if isAnimation}
             <Animation
-                classes={large ? 'w-12 h-12' : small ? 'w-6 h-6' : 'w-8 h-8'}
+                classes={AssetIconSize.Large === size
+                    ? 'w-12 h-12'
+                    : AssetIconSize.Small === size
+                    ? 'w-6 h-6'
+                    : 'w-8 h-8'}
                 animation={ANIMATED_TOKEN_IDS[asset.id]}
                 loop={true}
                 renderer={AnimationRenderer.Canvas}
@@ -66,11 +73,11 @@
         {:else if icon}
             <Icon {icon} width="80%" height="80%" classes="{assetIconColor} text-center" />
         {:else if assetLogoUrl}
-            <img src={assetLogoUrl} on:error={() => (assetLogoUrl = '')} alt={assetLogoUrl} class="w-full h-full" />
+            <img src={assetLogoUrl} on:error={handleOnError} alt={assetLogoUrl} class="w-full h-full" />
         {:else}
             <p
                 style:--font-size={Math.floor(
-                    Math.min(large ? 20 : 12, assetIconWrapperWidth / assetInitials?.length)
+                    Math.min(AssetIconSize.Large === size ? 20 : 12, assetIconWrapperWidth / assetInitials?.length)
                 ) + 'px'}
                 class=" {assetIconColor}"
             >
