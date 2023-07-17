@@ -19,18 +19,17 @@
 
     $: isAnimation = asset.id in ANIMATED_TOKEN_IDS
     $: asset, updateAssetIcon()
+    $: assetIconColor = isBright(assetIconBackgroundColor) ? 'text-gray-800' : 'text-white'
 
     function updateAssetIcon(): void {
         switch (asset.id) {
             case String(COIN_TYPE[NetworkId.Iota]):
                 assetIconBackgroundColor = '#6E82A4'
-                assetIconColor = isBright(assetIconBackgroundColor) ? 'text-gray-800' : 'text-white'
                 icon = NETWORK_ICON_SVG[NetworkId.Iota]
                 break
             case String(COIN_TYPE[NetworkId.Shimmer]):
             case String(COIN_TYPE[NetworkId.Testnet]):
                 assetIconBackgroundColor = '#25DFCA'
-                assetIconColor = isBright(assetIconBackgroundColor) ? 'text-gray-800' : 'text-white'
                 icon = NETWORK_ICON_SVG[NetworkId.Shimmer]
                 break
             default:
@@ -39,7 +38,6 @@
                     shades: ['500', '600', '700', '800'],
                     colorsToExclude: ['gray'],
                 })
-                assetIconColor = isBright(assetIconBackgroundColor) ? 'text-gray-800' : 'text-white'
                 assetLogoUrl = asset.metadata?.standard === TokenStandard.Irc30 ? asset.metadata?.logoUrl ?? '' : ''
                 icon = null
         }
@@ -79,7 +77,7 @@
                 style:--font-size={Math.floor(
                     Math.min(AssetIconSize.Large === size ? 20 : 12, assetIconWrapperWidth / assetInitials?.length)
                 ) + 'px'}
-                class=" {assetIconColor}"
+                class={assetIconColor}
             >
                 {assetInitials?.toUpperCase() ?? '-'}
             </p>
