@@ -19,7 +19,7 @@
     class:large={size === NftSize.Large}
 >
     {#if parentType === ParentMimeType.Image}
-        <NftMedia {nft} classes="min-w-full min-h-full object-cover" {useCaching}>
+        <NftMedia {nft} {useCaching}>
             <placeholder-wrapper slot="placeholder">
                 <MediaPlaceholder type={nftType} iconOnly />
             </placeholder-wrapper>
