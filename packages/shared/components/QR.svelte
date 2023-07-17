@@ -14,7 +14,7 @@
             background: '#ffffff00',
             foreground: color,
             level: 'L',
-            size: 200, // if this value is changed, the image gets some weird padding. Therefore we need to do the sizing with css
+            size: 135,
             value: data,
         })
 
@@ -26,4 +26,4 @@
     }
 </script>
 
-<img src={QRImage} alt={data} width="135" height="135" />
+<img src={QRImage} alt={data} />
