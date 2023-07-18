@@ -1,4 +1,4 @@
-export { default as AssetActionsMenu } from './AssetActionsMenu.svelte'
+export { default as AssetActionsModal } from './AssetActionsModal.svelte'
 export { default as CollectibleDetailsMenu } from './CollectibleDetailsMenu.svelte'
 export { default as ExpirationTimePickerMenu } from './ExpirationTimePickerMenu.svelte'
 export { default as Modal } from './Modal.svelte'

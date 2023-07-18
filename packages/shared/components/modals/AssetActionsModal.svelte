@@ -15,7 +15,7 @@
     import { MenuItem, Modal } from 'shared/components'
     import features from '@features/features'
 
-    export let modal: Modal = undefined
+    export let modal: Modal
     export let asset: IAsset
 
     function handleUnverify(): void {
@@ -23,7 +23,7 @@
         updatePopupProps({
             asset: { ...asset, verification: { verified: false, status: NotVerifiedStatus.Skipped } },
         })
-        modal.close()
+        modal?.close()
     }
 
     function handleVerify(): void {
@@ -31,7 +31,7 @@
         updatePopupProps({
             asset: { ...asset, verification: { verified: true, status: VerifiedStatus.SelfVerified } },
         })
-        modal.close()
+        modal?.close()
     }
 
     function handleUnhide(): void {
@@ -40,7 +40,7 @@
         updatePopupProps({
             asset: { ...asset, hidden: false },
         })
-        modal.close()
+        modal?.close()
     }
 
     function handleHide(): void {
@@ -49,11 +49,11 @@
         updatePopupProps({
             asset: { ...asset, hidden: true },
         })
-        modal.close()
+        modal?.close()
     }
 
     function handleBurnToken(): void {
-        modal.close()
+        modal?.close()
         openPopup({ id: PopupId.BurnNativeTokens, props: { asset } })
     }
 </script>
