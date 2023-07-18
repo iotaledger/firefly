@@ -36,6 +36,7 @@ export { default as Icon } from './Icon.svelte'
 export { default as BoxedIcon } from './BoxedIcon.svelte'
 export { default as AmountBox } from './AmountBox.svelte'
 export { default as Pane } from './Pane.svelte'
+export { default as MenuItem } from './MenuItem.svelte'
 export { default as LedgerAnimation } from './LedgerAnimation.svelte'
 
 export * from './atoms'
