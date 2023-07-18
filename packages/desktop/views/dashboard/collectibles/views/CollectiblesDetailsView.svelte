@@ -30,7 +30,7 @@
     import {
         Alert,
         Button,
-        CollectibleDetailsMenu,
+        CollectibleActionsModal,
         KeyValueBox,
         MeatballMenuButton,
         Modal,
@@ -160,7 +160,7 @@
         <nft-title class="flex justify-between items-center">
             <Text type={TextType.h3} fontWeight={FontWeight.semibold}>{name}</Text>
             <MeatballMenuButton onClick={modal?.toggle} />
-            <CollectibleDetailsMenu bind:modal {nft} />
+            <CollectibleActionsModal bind:modal {nft} />
         </nft-title>
         {#if description}
             <nft-description>
