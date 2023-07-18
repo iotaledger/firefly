@@ -20,9 +20,9 @@ import type {
     Ed25519Signature,
     FilterOptions,
     GenerateAddressOptions,
-    MintNativeTokenParams,
+    CreateNativeTokenParams,
     MintNftParams,
-    MintTokenTransaction,
+    CreateNativeTokenTransaction,
     Node,
     OutputData,
     OutputParams,
@@ -35,7 +35,7 @@ import type {
     ParticipationOverview,
     PreparedTransactionData,
     Secp256k1EcdsaSignature,
-    SendAmountParams,
+    SendParams,
     SendNativeTokensParams,
     SendNftParams,
     SignedTransactionEssence,
@@ -89,18 +89,18 @@ export interface IAccount {
         tokenId: string,
         mintAmount: HexEncodedAmount,
         transactionOptions?: TransactionOptions
-    ): Promise<MintTokenTransaction>
+    ): Promise<CreateNativeTokenTransaction>
     increaseVotingPower(amount: string): Promise<Transaction>
     minimumRequiredStorageDeposit(outputs: OutputTypes[]): Promise<string>
     mintNativeToken(
-        params: MintNativeTokenParams,
+        params: CreateNativeTokenParams,
         transactionOptions?: TransactionOptions
-    ): Promise<MintTokenTransaction>
+    ): Promise<CreateNativeTokenTransaction>
     mintNfts(params: MintNftParams[], transactionOptions?: TransactionOptions): Promise<Transaction>
     outputs(filterOptions?: FilterOptions): Promise<OutputData[]>
     prepareOutput(params: OutputParams, transactionOptions?: TransactionOptions): Promise<OutputTypes>
     pendingTransactions(): Promise<Transaction[]>
-    prepareSendAmount(params: SendAmountParams[], options?: TransactionOptions): Promise<PreparedTransactionData>
+    prepareSendAmount(params: SendParams[], options?: TransactionOptions): Promise<PreparedTransactionData>
     prepareTransaction(outputs: OutputTypes[], options?: TransactionOptions): Promise<PreparedTransactionData>
     registerParticipationEvents(options: ParticipationEventRegistrationOptions): Promise<ParticipationEventMap>
     retryTransactionUntilIncluded(
@@ -109,7 +109,7 @@ export interface IAccount {
         maxAttempts?: number
     ): Promise<PreparedTransactionData>
     requestFundsFromFaucet(url: string, address: string): Promise<string>
-    sendAmount(params: SendAmountParams[], transactionOptions?: TransactionOptions): Promise<Transaction>
+    sendAmount(params: SendParams[], transactionOptions?: TransactionOptions): Promise<Transaction>
     sendNativeTokens(params: SendNativeTokensParams[], transactionOptions?: TransactionOptions): Promise<Transaction>
     sendNft(params: SendNftParams[], transactionOptions?: TransactionOptions): Promise<Transaction>
     sendOutputs(outputs: OutputTypes[], transactionOptions?: TransactionOptions): Promise<Transaction>
