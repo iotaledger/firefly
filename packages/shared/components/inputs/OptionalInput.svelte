@@ -1,8 +1,9 @@
 <script lang="ts">
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
-    import { ClosableInput, AddInputButton, FontWeight, InformationTooltip } from 'shared/components'
+    import { ClosableInput, FontWeight, InformationTooltip, Icon, Text } from 'shared/components'
     import { Position } from 'shared/components/enums'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let label: string = ''
     export let description: string = ''
@@ -62,14 +63,19 @@
         {...$$restProps}
     />
     {#if !isOpen}
-        <AddInputButton
-            bind:buttonElement
-            bind:open={isOpen}
-            text={label}
-            onClick={open}
-            {onMouseEnter}
-            {onMouseLeave}
-        />
+        <button
+            bind:this={buttonElement}
+            class="py-1.5 px-3 w-max bg-gray-100 hover:bg-gray-200 focus:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-900 dark:focus:bg-gray-900 text-gray-600 dark:text-gray-500 rounded-md"
+            on:click={open}
+            on:mouseenter={onMouseEnter}
+            on:mouseleave={onMouseLeave}
+        >
+            <div class="flex flex-row items-center space-x-2">
+                <Icon icon={IconEnum.Plus} height="10" width="10" classes="text-gray-600" />
+                <Text fontSize="12" color="gray-600">{label}</Text>
+            </div>
+        </button>
+
         {#if isTooltipVisible}
             <tooltip-container transition:fade={{ duration: 100 }}>
                 <InformationTooltip anchor={buttonElement} position={Position.Right} title={label} body={description} />
