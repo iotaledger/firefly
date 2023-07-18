@@ -3,13 +3,12 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let href: string | null = null
-    export let disabled: boolean = false
     export let icon: IconEnum | undefined = undefined
 </script>
 
-<a data-label="link" on:click|stopPropagation {href} class:with-icon={icon} class:disabled>
+<a data-label="link" on:click|stopPropagation {href} class:with-icon={icon}>
     {#if icon}
-        <Icon {icon} width={20} height={20} classes="text-blue-500 mr-1 inline" />
+        <Icon {icon} width={20} height={20} classes="mr-1 inline" />
     {/if}
     <slot />
 </a>
