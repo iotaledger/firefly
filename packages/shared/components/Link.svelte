@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Icon } from 'shared/components'
-    import { Icon as IconEnum } from 'shared/lib/auxiliary/icon/enums'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let href: string | null = null
     export let disabled: boolean = false
