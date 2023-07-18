@@ -8205,10 +8205,10 @@ svelte-hmr@^0.14.2:
   resolved "https://registry.yarnpkg.com/svelte-hmr/-/svelte-hmr-0.14.12.tgz#a127aec02f1896500b10148b2d4d21ddde39973f"
   integrity sha512-4QSW/VvXuqVcFZ+RhxiR8/newmwOCTlbYIezvkeN6302YFRE8cXy0naamHcjz8Y9Ce3ITTZtrHrIL0AGfyo61w==
 
-svelte-i18n@3.6.0:
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/svelte-i18n/-/svelte-i18n-3.6.0.tgz#0f345d066662dd8f46efefc0e867fb05b71c9dbd"
-  integrity sha512-qvvcMqHVCXJ5pHoQR5uGzWAW5vS3qB9mBq+W6veLZ6jkrzZGOziR+wyOUJsc59BupMh+Ae30qjOndFrRU6v5jA==
+svelte-i18n@3.7.0:
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/svelte-i18n/-/svelte-i18n-3.7.0.tgz#020409366a196545f9b97185e0a9ef43f4866680"
+  integrity sha512-kfdJsYsyOE9tFEVtjPXvrUaufXQnbFAI6LsX9vaQP+xm8A5Wao2qQ6pRZmIUCAvXvYQt7aXQ7hK9+NP9AlxehA==
   dependencies:
     cli-color "^2.0.3"
     deepmerge "^4.2.2"
