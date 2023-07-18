@@ -76,7 +76,7 @@ export interface IAccount {
     getParticipationEventStatus(eventId: string): Promise<ParticipationEventStatus>
     getParticipationOverview(eventIds?: string[]): Promise<ParticipationOverview>
     getTransaction(transactionId: string): Promise<Transaction>
-    incomingTransactions(): Promise<[string, Transaction][]>
+    incomingTransactions(): Promise<Transaction[]>
     increaseNativeTokenSupply(
         tokenId: string,
         mintAmount: HexEncodedAmount,

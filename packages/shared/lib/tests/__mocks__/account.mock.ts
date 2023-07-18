@@ -191,7 +191,7 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    incomingTransactions(): Promise<[string, Transaction][]> {
+    incomingTransactions(): Promise<Transaction[]> {
         throw new Error('Method not implemented.')
     }
 
