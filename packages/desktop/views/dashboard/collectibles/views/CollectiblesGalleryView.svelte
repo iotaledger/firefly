@@ -9,7 +9,7 @@
         openPopup({
             id: PopupId.ReceiveAddress,
             props: {
-                title: localize('general.receiveFunds'),
+                title: localize('actions.depositNft'),
             },
         })
     }
