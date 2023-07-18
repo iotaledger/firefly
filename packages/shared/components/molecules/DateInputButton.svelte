@@ -2,6 +2,7 @@
     import { formatDate } from '@core/i18n'
     import { Text, DateTimePicker, Icon } from 'shared/components'
     import { appSettings } from '@core/app'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let value: string = undefined
 
@@ -30,7 +31,7 @@
     on:click={onShowDateTimePickerClick}
     class="flex flex-row justify-between border border-solid border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-gray-500 dark:hover:border-gray-700 text-center rounded-xl px-2 py-1"
 >
-    <Icon width="20" height="20" classes="text-gray-500" icon="calendar" />
+    <Icon width="20" height="20" classes="text-gray-500" icon={IconEnum.Calendar} />
     <Text>{formattedDate}</Text>
 </button>
 {#if canShowDateTimePicker}

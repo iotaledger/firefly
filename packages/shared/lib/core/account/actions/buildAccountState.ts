@@ -1,7 +1,6 @@
 import { AccountBalance } from '@iota/wallet'
 
 import { getDepositAddress } from '@core/account/utils'
-import { updateAccountPersistedDataOnActiveProfile } from '@core/profile/stores'
 
 import { IAccount, IAccountState, IPersistedAccountData } from '../interfaces'
 
@@ -28,16 +27,12 @@ export async function buildAccountState(
         aliases: [],
     }
     const accountIndex = account.getMetadata().index
-    let depositAddress = accountPersistedData.depositAddress
+    let depositAddress = ''
     let votingPower = ''
     try {
         balances = await account.getBalance()
+        depositAddress = await getDepositAddress(account)
         votingPower = balances.baseCoin.votingPower
-
-        if (!depositAddress) {
-            depositAddress = await getDepositAddress(account)
-            updateAccountPersistedDataOnActiveProfile(accountIndex, { depositAddress })
-        }
     } catch (err) {
         console.error(err)
     }
