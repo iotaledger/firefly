@@ -7,13 +7,13 @@
 </script>
 
 {#if subject.type === 'account'}
-    <Box row clearBackground clearPadding classes="justify-center">
+    <Box row centered>
         <AccountLabel account={subject.account} />
     </Box>
 {:else if subject.type === 'address'}
     <AddressBox clearBackground clearPadding isCopyable address={subject.address} />
 {:else}
-    <Box row clearBackground clearPadding classes="justify-center">
+    <Box row centered>
         <Text type={TextType.pre} fontSize="base" fontWeight={FontWeight.medium}>
             {localize('general.unknownAddress')}
         </Text>

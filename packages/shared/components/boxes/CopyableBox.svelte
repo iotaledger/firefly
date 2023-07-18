@@ -8,9 +8,7 @@
     export let value = ''
     export let isCopyable = true
     export let clearPadding = false
-    export let clearBoxPadding = false
     export let offset: number = undefined
-    export let classes = ''
 
     let tooltipAnchor: HTMLElement
     let showTooltip = false
@@ -38,7 +36,7 @@
         on:click={onClick}
         class="{clearPadding ? '' : 'w-full'} {isCopyable ? 'cursor-pointer' : 'cursor-default'}"
     >
-        <Box clearPadding={clearBoxPadding} {...$$restProps} {classes}>
+        <Box {...$$restProps}>
             <slot />
         </Box>
     </button>

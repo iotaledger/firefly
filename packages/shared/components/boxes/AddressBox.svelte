@@ -13,7 +13,7 @@
 </script>
 
 {#if address}
-    <CopyableBox bind:this={copyableBoxElement} col {isCopyable} value={address} clearBoxPadding {...$$restProps}>
+    <CopyableBox bind:this={copyableBoxElement} col {isCopyable} value={address} {...$$restProps}>
         {#if address.length > 20}
             <Text type="pre" {fontSize} fontWeight={FontWeight.medium}>
                 {address.slice(0, address.length / 2)}
