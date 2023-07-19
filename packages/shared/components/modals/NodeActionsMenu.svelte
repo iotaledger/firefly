@@ -11,6 +11,7 @@
     import { getOfficialNodes } from '@core/network/utils'
     import { activeProfile } from '@core/profile/stores'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { MenuItemVariant } from '../enums'
 
     export let node: INode
     export let clientOptions: IClientOptions
@@ -115,6 +116,6 @@
         disabled={!allowDisableOrRemove}
         title={localize('views.settings.configureNodeList.removeNode')}
         onClick={onRemoveNodeClick}
-        variant="error"
+        variant={MenuItemVariant.Error}
     />
 </Modal>
