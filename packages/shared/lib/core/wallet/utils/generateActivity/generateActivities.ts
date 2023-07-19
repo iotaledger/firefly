@@ -53,7 +53,7 @@ async function generateActivitiesFromProcessedTransactionsWithInputs(
     const containsAliasActivity =
         outputs.some((output) => output.output.type === OUTPUT_TYPE_ALIAS) && !containsFoundryActivity
     if (containsAliasActivity) {
-        const aliasActivities = generateActivitiesFromAliasOutputs(processedTransaction, account)
+        const aliasActivities = await generateActivitiesFromAliasOutputs(processedTransaction, account)
         activities.push(...aliasActivities)
     }
 

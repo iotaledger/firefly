@@ -3,14 +3,15 @@
     import { closePopup } from '@auxiliary/popup'
     import { LedgerAppName } from '@core/ledger'
     import { localize } from '@core/i18n'
+    import { IllustrationEnum } from '@auxiliary/illustration'
 
     let stepIndex = 0
     const stepAnimations = [
-        'ledger-live-updated-desktop',
-        'ledger-connected-2-desktop',
-        'ledger-search-apps-desktop',
-        'ledger-install-apps-desktop',
-        'ledger-close-live-desktop',
+        IllustrationEnum.LedgerLiveUpdatedDesktop,
+        IllustrationEnum.LedgerConnected2Desktop,
+        IllustrationEnum.LedgerSearchAppsDesktop,
+        IllustrationEnum.LedgerInstallAppsDesktop,
+        IllustrationEnum.LedgerCloseLiveDesktop,
     ]
 
     function changeIndex(increment: number): void {
