@@ -8,6 +8,7 @@
     import { login } from '@core/profile/actions'
     import { Animation, Button, Icon, Text, TextHint, TextType } from '@ui'
     import { updateStrongholdRouter } from '../update-stronghold-router'
+    import { AnimationEnum } from '@auxiliary/animation'
 
     export let busy = false
     export let changedPassword: boolean
@@ -102,6 +103,6 @@
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-        <Animation classes="setup-anim-aspect-ratio" animation="backup-recovery-phrase-desktop" />
+        <Animation animation={AnimationEnum.BackupRecoveryPhraseDesktop} />
     </div>
 </OnboardingLayout>

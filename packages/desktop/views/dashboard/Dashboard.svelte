@@ -69,7 +69,7 @@
 
     onMount(() => {
         Platform.onEvent('menu-logout', () => {
-            logout()
+            void logout()
         })
 
         Platform.onEvent('deep-link-params', (data: string) => {
