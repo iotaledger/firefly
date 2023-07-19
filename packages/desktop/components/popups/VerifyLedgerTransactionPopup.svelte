@@ -4,6 +4,7 @@
     import { formatHexString } from '@core/utils'
     import { onDestroy } from 'svelte'
     import { showInternalVerificationPopup, resetShowInternalVerificationPopup } from '@core/ledger'
+    import { AnimationEnum } from '@auxiliary/animation'
 
     export let toAddress: string
     export let toAmount: string
@@ -24,7 +25,7 @@
 <Text type="p" classes="mb-4" secondary>{localize(`${locale}.info`)}</Text>
 
 <div class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">
-    <LedgerAnimation animation="ledger-confirm-prompt-desktop" />
+    <LedgerAnimation animation={AnimationEnum.LedgerConfirmPromptDesktop} />
 </div>
 <div class="flex flex-col space-y-2">
     {#if hasSendConfirmationProps}

@@ -19,6 +19,7 @@
     import { Animation, Button, HTMLButtonType, NodeConfigurationForm, Text, TextType } from '@ui'
     import { onMount } from 'svelte'
     import { networkSetupRouter } from '../network-setup-router'
+    import { AnimationEnum } from '@auxiliary/animation'
 
     let nodeConfigurationForm: NodeConfigurationForm
     let networkId: NetworkId = features?.onboarding?.iota?.enabled
@@ -120,6 +121,6 @@
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-yellow dark:bg-gray-900'}">
-        <Animation classes="setup-anim-aspect-ratio" animation="onboarding-custom-network-desktop" />
+        <Animation animation={AnimationEnum.OnboardingCustomNetworkDesktop} />
     </div>
 </OnboardingLayout>
