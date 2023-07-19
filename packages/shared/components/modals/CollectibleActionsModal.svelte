@@ -102,7 +102,7 @@
 </script>
 
 <Modal bind:this={modal} position={{ top: '100px', right: '60px' }}>
-    {#each MENU_ITEMS as { icon, title, disabled, onClick }}
-        <MenuItem {icon} {title} {disabled} {onClick} />
+    {#each MENU_ITEMS as item }
+        <MenuItem {...item} />
     {/each}
 </Modal>
