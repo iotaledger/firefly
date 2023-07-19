@@ -1,5 +1,7 @@
 import { TransactionProgressEventPayload } from '../types'
+import { TransactionProgressType } from '@iota/wallet'
 
 export function isPreparedTransactionEssenceHash(payload: TransactionProgressEventPayload): boolean {
-    return typeof payload !== 'string' && 'PreparedTransactionEssenceHash' in payload
+    const type = payload.getProgressType()
+    return type === TransactionProgressType.PreparedTransactionEssenceHash
 }

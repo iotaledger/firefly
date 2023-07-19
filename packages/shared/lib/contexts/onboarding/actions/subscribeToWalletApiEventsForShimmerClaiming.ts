@@ -1,11 +1,7 @@
 import { get } from 'svelte/store'
+import { WalletEventType } from '@iota/wallet'
 
-import {
-    handleTransactionProgressEvent,
-    subscribeToWalletApiEvents,
-    WalletApiEvent,
-    WalletApiEventMap,
-} from '@core/profile-manager'
+import { handleTransactionProgressEvent, subscribeToWalletApiEvents, WalletApiEventMap } from '@core/profile-manager'
 
 import { shimmerClaimingProfileManager } from '../stores'
 
@@ -14,8 +10,8 @@ import { handleTransactionInclusionEventForShimmerClaiming } from './handleTrans
 export function subscribeToWalletApiEventsForShimmerClaiming(): void {
     const profileManager = get(shimmerClaimingProfileManager)
     const eventMap: WalletApiEventMap = {
-        [WalletApiEvent.TransactionInclusion]: handleTransactionInclusionEventForShimmerClaiming,
-        [WalletApiEvent.TransactionProgress]: handleTransactionProgressEvent,
+        [WalletEventType.TransactionInclusion]: handleTransactionInclusionEventForShimmerClaiming,
+        [WalletEventType.TransactionProgress]: handleTransactionProgressEvent,
     }
 
     subscribeToWalletApiEvents({
