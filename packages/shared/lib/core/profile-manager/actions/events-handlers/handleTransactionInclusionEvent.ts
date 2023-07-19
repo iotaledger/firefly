@@ -8,26 +8,28 @@ import {
     getActivityByTransactionId,
     updateActivityByTransactionId,
 } from '@core/wallet/stores/all-account-activities.store'
-import { WalletApiEvent } from '../../enums'
-import { ITransactionInclusionEventPayload } from '../../interfaces'
 import { validateWalletApiEvent } from '../../utils'
 import { closePopup, openPopup } from '@auxiliary/popup/actions'
 import { PopupId } from '@auxiliary/popup'
 import { activeAccounts, updateActiveAccount } from '@core/profile/stores'
 import { updateActiveAccountMetadata } from '@core/profile/actions'
 import { isAccountVoting } from '@contexts/governance/utils/isAccountVoting'
+import { Event, TransactionInclusionWalletEvent, WalletEventType } from '@iota/wallet'
 
-export function handleTransactionInclusionEvent(error: Error, rawEvent: string): void {
-    const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletApiEvent.TransactionInclusion)
-    /* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
-    handleTransactionInclusionEventInternal(accountIndex, payload as ITransactionInclusionEventPayload)
+export function handleTransactionInclusionEvent(error: Error, rawEvent: Event): void {
+    const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletEventType.TransactionInclusion)
+    const type = payload.getType()
+    if (type === WalletEventType.TransactionInclusion) {
+        handleTransactionInclusionEventInternal(accountIndex, payload as TransactionInclusionWalletEvent)
+    }
 }
 
 export function handleTransactionInclusionEventInternal(
     accountIndex: number,
-    payload: ITransactionInclusionEventPayload
+    payload: TransactionInclusionWalletEvent
 ): void {
-    const { inclusionState, transactionId } = payload
+    const inclusionState = payload.getInclusionState()
+    const transactionId = payload.getTransactionId()
     updateActivityByTransactionId(accountIndex, transactionId, { inclusionState })
 
     const activity = getActivityByTransactionId(accountIndex, transactionId)
