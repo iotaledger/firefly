@@ -88,7 +88,7 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    decreaseNativeTokenSupply(
+    meltNativeToken(
         tokenId: string,
         meltAmount: string,
         transactionOptions?: TransactionOptions
@@ -195,7 +195,7 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    increaseNativeTokenSupply(
+    mintNativeToken(
         tokenId: string,
         mintAmount: string,
         transactionOptions?: TransactionOptions
@@ -219,7 +219,7 @@ export class AccountMock implements IAccount {
         return Promise.resolve([])
     }
 
-    prepareSendAmount(params: SendParams[], options?: TransactionOptions): Promise<PreparedTransactionData> {
+    prepareSend(params: SendParams[], options?: TransactionOptions): Promise<PreparedTransactionData> {
         throw new Error('Method not implemented.')
     }
 

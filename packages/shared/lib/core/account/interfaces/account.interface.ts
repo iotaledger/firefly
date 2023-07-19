@@ -60,7 +60,7 @@ export interface IAccount {
     claimOutputs(outputIds: string[]): Promise<Transaction>
     consolidateOutputs(force: boolean, outputConsolidationThreshold?: number): Promise<Transaction>
     createAliasOutput(params?: AliasOutputParams, transactionOptions?: TransactionOptions): Promise<Transaction>
-    decreaseNativeTokenSupply(
+    meltNativeToken(
         tokenId: string,
         meltAmount: HexEncodedAmount,
         transactionOptions?: TransactionOptions
@@ -85,14 +85,14 @@ export interface IAccount {
     getParticipationOverview(eventIds?: string[]): Promise<ParticipationOverview>
     getTransaction(transactionId: string): Promise<Transaction>
     incomingTransactions(): Promise<Transaction[]>
-    increaseNativeTokenSupply(
+    mintNativeToken(
         tokenId: string,
         mintAmount: HexEncodedAmount,
         transactionOptions?: TransactionOptions
     ): Promise<CreateNativeTokenTransaction>
     increaseVotingPower(amount: string): Promise<Transaction>
     minimumRequiredStorageDeposit(outputs: OutputTypes[]): Promise<string>
-    mintNativeToken(
+    createNativeToken(
         params: CreateNativeTokenParams,
         transactionOptions?: TransactionOptions
     ): Promise<CreateNativeTokenTransaction>
@@ -100,7 +100,7 @@ export interface IAccount {
     outputs(filterOptions?: FilterOptions): Promise<OutputData[]>
     prepareOutput(params: OutputParams, transactionOptions?: TransactionOptions): Promise<OutputTypes>
     pendingTransactions(): Promise<Transaction[]>
-    prepareSendAmount(params: SendParams[], options?: TransactionOptions): Promise<PreparedTransactionData>
+    prepareSend(params: SendParams[], options?: TransactionOptions): Promise<PreparedTransactionData>
     prepareTransaction(outputs: OutputTypes[], options?: TransactionOptions): Promise<PreparedTransactionData>
     registerParticipationEvents(options: ParticipationEventRegistrationOptions): Promise<ParticipationEventMap>
     retryTransactionUntilIncluded(

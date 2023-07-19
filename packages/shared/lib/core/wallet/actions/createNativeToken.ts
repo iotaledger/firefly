@@ -12,7 +12,7 @@ import { resetMintTokenDetails } from '../stores'
 import { addPersistedAsset } from '../stores/persisted-assets.store'
 import { processAndAddToActivities } from '../utils'
 
-export async function mintNativeToken(
+export async function createNativeToken(
     maximumSupply: number,
     circulatingSupply: number,
     metadata: IIrc30Metadata
@@ -27,7 +27,7 @@ export async function mintNativeToken(
             foundryMetadata: Converter.utf8ToHex(JSON.stringify(metadata)),
         }
 
-        const createNativeTokenTransaction = await account.mintNativeToken(params, DEFAULT_TRANSACTION_OPTIONS)
+        const createNativeTokenTransaction = await account.createNativeToken(params, DEFAULT_TRANSACTION_OPTIONS)
         const persistedAsset: IPersistedAsset = buildPersistedAssetFromIrc30Metadata(
             createNativeTokenTransaction.tokenId,
             metadata,
