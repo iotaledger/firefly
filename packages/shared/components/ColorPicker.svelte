@@ -119,8 +119,7 @@
                 on:mouseenter={toggleCustomHover}
                 on:mouseleave={toggleCustomHover}
                 tabindex="0"
-                class="w-12 h-12 rounded-lg ring-opacity-30 hover:ring-opacity-40 cursor-pointer flex justify-center items-center
-                custom-color hover:bg-gray-50 focus:bg-white ring-white"
+                class="custom-color"
                 class:active={isSelectedCustomElement}
                 class:ring-4={isSelectedCustomElement}
             >
@@ -159,6 +158,13 @@
     }
 
     .custom-color {
+        @apply w-12 h-12;
+        @apply flex;
+        @apply justify-center items-center;
+        @apply rounded-lg;
+        @apply hover:bg-gray-50 focus:bg-white;
+        @apply ring-white;
+        @apply ring-opacity-30 hover:ring-opacity-40;
         background-color: var(--custom-color);
         --tw-ring-color: var(--custom-color-ring);
     }
