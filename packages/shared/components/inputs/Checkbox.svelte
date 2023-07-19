@@ -1,5 +1,6 @@
 <script lang="ts">
     import { Icon, Text, TextType } from '@ui'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let label = undefined
     export let checked = false
@@ -9,8 +10,15 @@
     export let small = false
     export let keepSameColor = false
     export let onClick: (..._: any[]) => void = () => {}
-
     $: isSecondaryColor = !keepSameColor && (!checked || disabled)
+
+    let iconType: IconEnum
+
+    $: if (round) {
+        iconType = checked ? IconEnum.CheckboxRound : IconEnum.CheckboxUncheckedRound
+    } else {
+        iconType = checked ? IconEnum.Checkbox : IconEnum.CheckboxUnchecked
+    }
 </script>
 
 <div class="flex flex-row space-x-4 items-center text-left">
@@ -25,7 +33,7 @@
         }}
     >
         <Icon
-            icon={checked ? `checkbox${round ? '-round' : ''}` : `checkbox-unchecked${round ? '-round' : ''}`}
+            icon={iconType}
             width={small ? '16px' : undefined}
             height={small ? '16px' : undefined}
             classes={`${checked ? 'active' : ''}`}

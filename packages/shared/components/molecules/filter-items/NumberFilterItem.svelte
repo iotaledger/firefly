@@ -4,6 +4,7 @@
     import type { IDropdownItem } from '@core/utils'
     import { NumberFilterUnit } from '@core/utils/interfaces/filter'
     import { NumberFilterOption } from '@core/utils/enums/filters'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let filterUnit: NumberFilterUnit
 
@@ -41,7 +42,7 @@
 
 {#if filterUnit.selected}
     <div class="flex flex-row items-center space-x-2 mt-2">
-        <Icon height="24" width="20" icon="arrow-right" />
+        <Icon height="24" width="20" icon={IconEnum.ArrowRight} />
         {#if filterUnit.subunit.type === 'range'}
             <NumberInput bind:value={filterUnit.subunit.start} autofocus placeholder="" />
             <Text>{localize('general.and')}</Text>
