@@ -27,15 +27,15 @@ export async function mintNativeToken(
             foundryMetadata: Converter.utf8ToHex(JSON.stringify(metadata)),
         }
 
-        const CreateNativeTokenTransaction = await account.mintNativeToken(params, DEFAULT_TRANSACTION_OPTIONS)
+        const createNativeTokenTransaction = await account.mintNativeToken(params, DEFAULT_TRANSACTION_OPTIONS)
         const persistedAsset: IPersistedAsset = buildPersistedAssetFromMetadata(
-            CreateNativeTokenTransaction.tokenId,
+            createNativeTokenTransaction.tokenId,
             metadata,
             { verified: true, status: VerifiedStatus.SelfVerified }
         )
         addPersistedAsset(persistedAsset)
 
-        await processAndAddToActivities(CreateNativeTokenTransaction.transaction, account)
+        await processAndAddToActivities(createNativeTokenTransaction.transaction, account)
 
         showAppNotification({
             type: 'success',
