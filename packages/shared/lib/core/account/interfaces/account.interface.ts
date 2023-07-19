@@ -9,7 +9,6 @@ import type {
     BuildBasicOutputData,
     BuildFoundryOutputData,
     BuildNftOutputData,
-    Ed25519Signature,
     FilterOptions,
     GenerateAddressOptions,
     CreateNativeTokenParams,
@@ -26,7 +25,6 @@ import type {
     ParticipationEventWithNodes,
     ParticipationOverview,
     PreparedTransactionData,
-    Secp256k1EcdsaSignature,
     SendParams,
     SendNativeTokensParams,
     SendNftParams,
@@ -52,7 +50,7 @@ export interface IAccount {
     claimOutputs(outputIds: string[]): Promise<Transaction>
     consolidateOutputs(force: boolean, outputConsolidationThreshold?: number): Promise<Transaction>
     createAliasOutput(params?: AliasOutputParams, transactionOptions?: TransactionOptions): Promise<Transaction>
-    decreaseNativeTokenSupply(
+    meltNativeToken(
         tokenId: string,
         meltAmount: HexEncodedAmount,
         transactionOptions?: TransactionOptions
@@ -77,14 +75,14 @@ export interface IAccount {
     getParticipationOverview(eventIds?: string[]): Promise<ParticipationOverview>
     getTransaction(transactionId: string): Promise<Transaction>
     incomingTransactions(): Promise<Transaction[]>
-    increaseNativeTokenSupply(
+    mintNativeToken(
         tokenId: string,
         mintAmount: HexEncodedAmount,
         transactionOptions?: TransactionOptions
     ): Promise<CreateNativeTokenTransaction>
     increaseVotingPower(amount: string): Promise<Transaction>
     minimumRequiredStorageDeposit(output: OutputTypes): Promise<string>
-    mintNativeToken(
+    createNativeToken(
         params: CreateNativeTokenParams,
         transactionOptions?: TransactionOptions
     ): Promise<CreateNativeTokenTransaction>
@@ -92,7 +90,7 @@ export interface IAccount {
     outputs(filterOptions?: FilterOptions): Promise<OutputData[]>
     prepareOutput(params: OutputParams, transactionOptions?: TransactionOptions): Promise<OutputTypes>
     pendingTransactions(): Promise<Transaction[]>
-    prepareSendAmount(params: SendParams[], options?: TransactionOptions): Promise<PreparedTransactionData>
+    prepareSend(params: SendParams[], options?: TransactionOptions): Promise<PreparedTransactionData>
     prepareTransaction(outputs: OutputTypes[], options?: TransactionOptions): Promise<PreparedTransactionData>
     registerParticipationEvents(options: ParticipationEventRegistrationOptions): Promise<ParticipationEventMap>
     retryTransactionUntilIncluded(
@@ -107,7 +105,6 @@ export interface IAccount {
     sendOutputs(outputs: OutputTypes[], transactionOptions?: TransactionOptions): Promise<Transaction>
     setAlias(alias: string): Promise<void>
     setDefaultSyncOptions(options: SyncOptions): Promise<void>
-    signSecp256k1Ecdsa(message: HexEncodedString, chain: number[]): Promise<Secp256k1EcdsaSignature>
     signTransactionEssence(preparedTransactionData: PreparedTransactionData): Promise<SignedTransactionEssence>
     stopParticipating(eventId: string): Promise<Transaction>
     submitAndStoreTransaction(signedTransactionData: SignedTransactionEssence): Promise<Transaction>
@@ -115,6 +112,4 @@ export interface IAccount {
     transactions(): Promise<Transaction[]>
     unspentOutputs(filterOptions?: FilterOptions): Promise<OutputData[]>
     vote(eventId?: string, answers?: number[]): Promise<Transaction>
-    verifyEd25519Signature(signature: Ed25519Signature, message: HexEncodedString): Promise<boolean>
-    verifySecp256k1EcdsaSignature(signature: Secp256k1EcdsaSignature, message: HexEncodedString): Promise<boolean>
 }
