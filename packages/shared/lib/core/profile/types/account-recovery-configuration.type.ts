@@ -8,5 +8,5 @@ export type AccountRecoveryProfileConfiguration = {
 }
 
 export type AccountRecoveryConfiguration = {
-    [key in ProfileType]?: AccountRecoveryProfileConfiguration
+    [key in ProfileType]: AccountRecoveryProfileConfiguration
 }
