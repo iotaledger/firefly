@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { AnimationRenderer } from '@auxiliary/animation'
     import { Icon as IconEnum, NETWORK_ICON_SVG } from '@auxiliary/icon'
     import { getIconColorFromString } from '@core/account'
     import { COIN_TYPE, IPersistedNetwork, NetworkId } from '@core/network'
@@ -72,7 +73,7 @@
                 classes={large ? 'w-12 h-12' : small ? 'w-6 h-6' : 'w-8 h-8'}
                 animation={ANIMATED_TOKEN_IDS[asset.id]}
                 loop={true}
-                renderer="canvas"
+                renderer={AnimationRenderer.Canvas}
             />
         {:else if icon}
             <Icon {icon} width="80%" height="80%" classes="text-{assetIconColor ?? 'blue-500'} text-center" />

@@ -1,5 +1,6 @@
 <script lang="ts">
     import { NumberInput, TextInput, Icon } from 'shared/components'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let value = ''
     export let open = false
@@ -37,7 +38,7 @@
         >
             <button slot="right-full-h" on:click={onCloseClick}>
                 <Icon
-                    icon="close"
+                    icon={IconEnum.Close}
                     classes="text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300"
                 />
             </button>
@@ -56,7 +57,7 @@
         >
             <button slot="right-full-h" on:click={onCloseClick}>
                 <Icon
-                    icon="close"
+                    icon={IconEnum.Close}
                     classes="text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300"
                 />
             </button>

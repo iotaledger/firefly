@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { MenuItem, Modal, ToggleHiddenAccountMenuItem } from '@ui'
+    import { MenuItem, MenuItemVariant, Modal, ToggleHiddenAccountMenuItem } from '@ui'
 
     import { selectedAccount } from '@core/account/stores'
     import { localize } from '@core/i18n'
@@ -47,7 +47,7 @@
                 icon={Icon.Delete}
                 title={localize('actions.deleteAccount')}
                 onClick={onDeleteAccountClick}
-                variant="error"
+                variant={MenuItemVariant.Error}
             />
         {/if}
     </account-actions-menu>
