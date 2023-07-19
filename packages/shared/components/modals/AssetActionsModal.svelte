@@ -15,7 +15,7 @@
     import { MenuItem, Modal } from 'shared/components'
     import features from '@features/features'
 
-    export let modal: Modal
+    export let modal: Modal | undefined
     export let asset: IAsset
 
     function handleUnverify(): void {
