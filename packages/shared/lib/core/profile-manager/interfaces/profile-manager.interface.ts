@@ -1,12 +1,12 @@
 import type {
     ClientOptions,
-    WalletEventType,
     GenerateAddressOptions,
     LedgerNanoStatus,
     NodeInfoWrapper,
     SyncOptions,
     WalletEvent,
 } from '@iota/wallet'
+import { WalletEventType } from '@iota/wallet/out/types'
 
 import { IAccount } from '@core/account/interfaces'
 import { IAuth } from '@core/network/interfaces'
