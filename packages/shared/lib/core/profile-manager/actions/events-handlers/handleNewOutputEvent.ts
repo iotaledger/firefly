@@ -1,5 +1,9 @@
+import { Event, NewOutputWalletEvent } from '@iota/wallet'
+import { WalletEventType } from '@iota/wallet/out/types'
+
 import { syncBalance } from '@core/account/actions/syncBalance'
-import { addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput, addNftsToDownloadQueue } from '@core/nfts'
+import { addNftsToDownloadQueue, addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput } from '@core/nfts'
+import { checkAndRemoveProfilePicture } from '@core/profile/actions'
 import { activeAccounts } from '@core/profile/stores'
 import {
     ActivityType,
@@ -17,12 +21,10 @@ import { getBech32AddressFromAddressTypes } from '@core/wallet/utils/getBech32Ad
 import { preprocessGroupedOutputs } from '@core/wallet/utils/outputs/preprocessGroupedOutputs'
 import { get } from 'svelte/store'
 import { validateWalletApiEvent } from '../../utils'
-import { checkAndRemoveProfilePicture } from '@core/profile/actions'
-import { Event, NewOutputWalletEvent, WalletEventType } from '@iota/wallet'
 
 export function handleNewOutputEvent(error: Error, rawEvent: Event): void {
     const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletEventType.NewOutput)
-    const type = payload.getType()
+    const type = payload.type
     if (type === WalletEventType.NewOutput) {
         void handleNewOutputEventInternal(accountIndex, payload as NewOutputWalletEvent)
     }
@@ -30,7 +32,7 @@ export function handleNewOutputEvent(error: Error, rawEvent: Event): void {
 
 export async function handleNewOutputEventInternal(accountIndex: number, payload: NewOutputWalletEvent): Promise<void> {
     const account = get(activeAccounts)?.find((account) => account.index === accountIndex)
-    const output = payload.getOutput()
+    const output = payload.output
 
     if (!account || !output) return
 
@@ -44,7 +46,7 @@ export async function handleNewOutputEventInternal(accountIndex: number, payload
     if ((account?.depositAddress === address && !output?.remainder) || isNewAliasOutput) {
         await syncBalance(account.index)
 
-        const processedOutput = preprocessGroupedOutputs([output], payload?.getTransactionInputs() ?? [], account)
+        const processedOutput = preprocessGroupedOutputs([output], payload?.transactionInputs ?? [], account)
 
         const activities = await generateActivities(processedOutput, account)
         for (const activity of activities) {

@@ -1,4 +1,6 @@
-import { Event, SpentOutputWalletEvent, WalletEventType } from '@iota/wallet'
+import { Event, SpentOutputWalletEvent } from '@iota/wallet'
+import { WalletEventType } from '@iota/wallet/out/types'
+
 import { syncBalance } from '@core/account/actions/syncBalance'
 import { getNftByIdFromAllAccountNfts, updateNftInAllAccountNfts } from '@core/nfts'
 import { activeAccounts } from '@core/profile/stores'
@@ -9,7 +11,7 @@ import { validateWalletApiEvent } from '../../utils'
 
 export async function handleSpentOutputEvent(error: Error, rawEvent: Event): Promise<void> {
     const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletEventType.SpentOutput)
-    const type = payload.getType()
+    const type = payload.type
     if (type === WalletEventType.SpentOutput) {
         await handleSpentOutputEventInternal(accountIndex, payload as SpentOutputWalletEvent)
     }
@@ -20,7 +22,7 @@ export async function handleSpentOutputEventInternal(
     payload: SpentOutputWalletEvent
 ): Promise<void> {
     const account = get(activeAccounts)?.find((account) => account.index === accountIndex)
-    const output = payload.getOutput()
+    const output = payload.output
     await syncBalance(accountIndex)
     const outputId = output?.outputId
     const activity = get(allAccountActivities)?.[accountIndex]?.find((_activity) => _activity.outputId === outputId)

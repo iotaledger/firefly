@@ -5,11 +5,11 @@ import type {
     CreateAccountPayload,
     SyncOptions,
     ClientOptions,
-    WalletEventType,
     WalletEvent,
     LedgerNanoStatus,
     GenerateAddressOptions,
 } from '@iota/wallet'
+import { WalletEventType } from '@iota/wallet/out/types'
 
 import { IAccount } from '@core/account'
 import { IAuth, INodeInfoResponse } from '@core/network'
