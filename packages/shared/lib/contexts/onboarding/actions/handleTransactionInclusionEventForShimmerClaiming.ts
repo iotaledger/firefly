@@ -1,5 +1,7 @@
-import { Event, TransactionInclusionWalletEvent, WalletEventType } from '@iota/wallet'
 import { get } from 'svelte/store'
+
+import { Event, TransactionInclusionWalletEvent } from '@iota/wallet'
+import { WalletEventType } from '@iota/wallet/out/types'
 
 import { localize } from '@core/i18n'
 import { validateWalletApiEvent } from '@core/profile-manager'
@@ -13,7 +15,7 @@ import { onboardingProfile, shimmerClaimingTransactions, updateShimmerClaimingAc
 
 export function handleTransactionInclusionEventForShimmerClaiming(error: Error, rawEvent: Event): void {
     const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletEventType.TransactionInclusion)
-    const type = payload.getType()
+    const type = payload.type
     if (type === WalletEventType.TransactionInclusion) {
         handleTransactionInclusionEventForShimmerClaimingInternal(
             accountIndex,
@@ -28,8 +30,7 @@ export function handleTransactionInclusionEventForShimmerClaimingInternal(
 ): void {
     const _shimmerClaimingTransactions = get(shimmerClaimingTransactions)
     const profileId = get(onboardingProfile)?.id
-    const inclusionState = payload.getInclusionState()
-    const transactionId = payload.getTransactionId()
+    const { transactionId, inclusionState } = payload
     const shimmerClaimingAccount = get(onboardingProfile)?.shimmerClaimingAccounts?.find(
         (_shimmerClaimingAccount) => _shimmerClaimingAccount?.getMetadata()?.index === accountIndex
     )
