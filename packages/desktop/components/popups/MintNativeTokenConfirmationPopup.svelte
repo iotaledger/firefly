@@ -44,7 +44,12 @@
     $: isTransferring = $selectedAccount.isTransferring
 
     async function prepareFoundryOutput(): Promise<void> {
-        const outputData = buildFoundryOutputData(Number(totalSupply), Number(circulatingSupply), metadata, aliasId)
+        const outputData = await buildFoundryOutputData(
+            Number(totalSupply),
+            Number(circulatingSupply),
+            metadata,
+            aliasId
+        )
         const preparedOutput = await $selectedAccount.buildFoundryOutput(outputData)
         storageDeposit = formatTokenAmountPrecise(Number(preparedOutput.amount) ?? 0, getBaseToken())
     }
