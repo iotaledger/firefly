@@ -100,7 +100,6 @@
                     metadata
                 )
                 closePopup()
-                closePopup()
             } else {
                 throw new Error()
             }
