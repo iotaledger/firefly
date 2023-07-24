@@ -19,7 +19,7 @@
         "patch-package": "^7.0.0",
         "prettier": "^2.3.2",
         "prettier-plugin-svelte": "^2.7.0",
-        "retypeapp": "^2.3.0",
+        "retypeapp": "^3.1.0",
         "typescript": "^5.0.3"
     },
     "scripts": {
