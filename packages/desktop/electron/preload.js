@@ -134,7 +134,16 @@ try {
             return accounts
         },
         async migrateStrongholdSnapshotV2ToV3(currentPath, newPath, currentPassword, newPassword) {
-            return WalletApi.migrateStrongholdSnapshotV2ToV3(currentPath, newPath, currentPassword, newPassword)
+            const salt = 'wallet.rs'
+            const rounds = 100
+            return WalletApi.migrateStrongholdSnapshotV2ToV3(
+                currentPath,
+                newPath,
+                salt,
+                rounds,
+                currentPassword,
+                newPassword
+            )
         },
     })
     contextBridge.exposeInMainWorld('__ELECTRON__', ElectronApi)
