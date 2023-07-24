@@ -1,45 +1,42 @@
 <script lang="ts">
     import { Icon, Text, Spinner, Position, InformationTooltip } from 'shared/components'
     import { Icon as IconEnum } from '@auxiliary/icon'
+    import { MenuItemVariant } from './enums'
 
     export let icon: IconEnum | undefined = undefined
-    export let iconProps: Record<string, unknown> = undefined
+    export let iconProps: Record<string, unknown> | undefined = undefined
     export let title: string
-    export let subtitle = ''
-    export let onClick: () => any
-    export let selected = false
-    export let disabled = false
-    export let isLoading = false
-    export let enableTooltipVisible = false
-    export let tooltip: string = undefined
+    export let subtitle: string = ''
+    export let onClick: () => void
+    export let selected: boolean = false
+    export let disabled: boolean = false
+    export let isLoading: boolean = false
+    export let enableTooltipVisible: boolean = false
+    export let tooltip: string | undefined = undefined
+    export let variant: MenuItemVariant = MenuItemVariant.Info
 
-    export let variant: 'success' | 'error' | 'warning' | 'info' = 'info'
+    enum Color {
+        Blue = 'blue',
+        Green = 'green',
+        Yellow = 'yellow',
+        Red = 'red',
+    }
 
     let showTooltip = false
     let menuItem: HTMLElement
-    let color = 'blue'
+    let color = Color.Blue
 
     $: isDisabled = disabled || isLoading
+    $: color = colorMap[variant]
 
-    $: variant, setColor()
-    function setColor(): void {
-        switch (variant) {
-            case 'info':
-                color = 'blue'
-                break
-            case 'success':
-                color = 'green'
-                break
-            case 'warning':
-                color = 'yellow'
-                break
-            case 'error':
-                color = 'red'
-                break
-        }
+    const colorMap: Record<MenuItemVariant, Color> = {
+        [MenuItemVariant.Info]: Color.Blue,
+        [MenuItemVariant.Success]: Color.Green,
+        [MenuItemVariant.Warning]: Color.Yellow,
+        [MenuItemVariant.Error]: Color.Red,
     }
 
-    function onMenuItemClick(): () => void {
+    function onMenuItemClick(): void {
         if (!disabled && onClick) {
             return onClick()
         }
@@ -48,23 +45,28 @@
     function toggleTooltip(show: boolean): void {
         showTooltip = enableTooltipVisible && show
     }
+
+    function handleMouseEnter(): void {
+        toggleTooltip(true)
+    }
+
+    function handleMouseLeave(): void {
+        toggleTooltip(false)
+    }
 </script>
 
 <button
     bind:this={menuItem}
     on:click|stopPropagation={onMenuItemClick}
-    on:mouseenter={() => toggleTooltip(true)}
-    on:mouseleave={() => toggleTooltip(false)}
-    class="group w-full flex flex-row justify-between items-center p-3
-        {isDisabled
-        ? 'bg-gray-100 dark:bg-gray-850 cursor-default'
-        : `hover:bg-${color}-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20`}
-    "
+    on:mouseenter={handleMouseEnter}
+    on:mouseleave={handleMouseLeave}
+    class:disabled={isDisabled}
+    class="group w-full flex flex-row justify-between items-center p-3 hover:bg-{color}-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20"
 >
     <div class="flex flex-row space-x-3 items-center">
         {#if isLoading}
             <Spinner busy width={24} height={24} />
-        {:else}
+        {:else if icon}
             <Icon
                 {icon}
                 height={24}
@@ -77,7 +79,6 @@
         {/if}
         <div class="flex flex-col text-left">
             <Text
-                type="p"
                 color={isDisabled ? 'gray-400' : 'gray-800'}
                 darkColor={isDisabled ? 'gray-700' : 'white'}
                 classes={isDisabled ? '' : `group-hover:text-${color}-500`}
@@ -85,11 +86,7 @@
                 {title}
             </Text>
             {#if subtitle}
-                <Text
-                    type="p"
-                    color={isDisabled ? 'gray-400' : 'gray-600'}
-                    darkColor={isDisabled ? 'gray-700' : 'gray-500'}
-                >
+                <Text color={isDisabled ? 'gray-400' : 'gray-600'} darkColor={isDisabled ? 'gray-700' : 'gray-500'}>
                     {subtitle}
                 </Text>
             {/if}
@@ -103,3 +100,13 @@
 {#if showTooltip}
     <InformationTooltip anchor={menuItem} position={Position.Right} body={tooltip} />
 {/if}
+
+<style lang="scss">
+    button {
+        &.disabled {
+            @apply bg-gray-100;
+            @apply dark:bg-gray-850;
+            @apply cursor-default;
+        }
+    }
+</style>
