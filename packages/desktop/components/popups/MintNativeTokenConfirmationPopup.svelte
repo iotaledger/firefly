@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { getBaseToken, checkActiveProfileAuth } from '@core/profile'
     import {
-        mintNativeToken,
+        createNativeToken,
         mintTokenDetails,
         TokenStandard,
         buildFoundryOutputData,
@@ -79,7 +79,7 @@
 
     async function mintAction(): Promise<void> {
         try {
-            await mintNativeToken(Number(totalSupply), Number(circulatingSupply), metadata)
+            await createNativeToken(Number(totalSupply), Number(circulatingSupply), metadata)
             closePopup()
         } catch (err) {
             handleError(err)
