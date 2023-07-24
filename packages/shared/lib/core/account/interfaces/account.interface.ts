@@ -1,4 +1,12 @@
-import type { HexEncodedAmount, IAliasOutput, IBasicOutput, IFoundryOutput, INftOutput, OutputTypes } from '@iota/types'
+import type {
+    HexEncodedAmount,
+    HexEncodedString,
+    IAliasOutput,
+    IBasicOutput,
+    IFoundryOutput,
+    INftOutput,
+    OutputTypes,
+} from '@iota/types'
 import type {
     AccountMetadata,
     Address,
@@ -9,11 +17,12 @@ import type {
     BuildBasicOutputData,
     BuildFoundryOutputData,
     BuildNftOutputData,
+    CreateNativeTokenParams,
+    CreateNativeTokenTransaction,
+    Ed25519Signature,
     FilterOptions,
     GenerateAddressOptions,
-    CreateNativeTokenParams,
     MintNftParams,
-    CreateNativeTokenTransaction,
     Node,
     OutputData,
     OutputParams,
@@ -25,9 +34,10 @@ import type {
     ParticipationEventWithNodes,
     ParticipationOverview,
     PreparedTransactionData,
-    SendParams,
+    Secp256k1EcdsaSignature,
     SendNativeTokensParams,
     SendNftParams,
+    SendParams,
     SignedTransactionEssence,
     SyncOptions,
     Transaction,
@@ -105,6 +115,7 @@ export interface IAccount {
     sendOutputs(outputs: OutputTypes[], transactionOptions?: TransactionOptions): Promise<Transaction>
     setAlias(alias: string): Promise<void>
     setDefaultSyncOptions(options: SyncOptions): Promise<void>
+    signSecp256k1Ecdsa(message: HexEncodedString, chain: number[]): Promise<Secp256k1EcdsaSignature>
     signTransactionEssence(preparedTransactionData: PreparedTransactionData): Promise<SignedTransactionEssence>
     stopParticipating(eventId: string): Promise<Transaction>
     submitAndStoreTransaction(signedTransactionData: SignedTransactionEssence): Promise<Transaction>
@@ -112,4 +123,6 @@ export interface IAccount {
     transactions(): Promise<Transaction[]>
     unspentOutputs(filterOptions?: FilterOptions): Promise<OutputData[]>
     vote(eventId?: string, answers?: number[]): Promise<Transaction>
+    verifyEd25519Signature(signature: Ed25519Signature, message: HexEncodedString): Promise<boolean>
+    verifySecp256k1EcdsaSignature(signature: Secp256k1EcdsaSignature, message: HexEncodedString): Promise<boolean>
 }
