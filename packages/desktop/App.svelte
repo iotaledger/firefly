@@ -165,6 +165,10 @@
             })
         }
     }
+
+    function handleSettingClose(): void {
+        settings = false
+    }
 </script>
 
 <app-container class="block w-full h-full">
@@ -197,7 +201,7 @@
                 <OnboardingRouterView />
             {/if}
             {#if settings}
-                <Settings handleClose={() => (settings = false)} />
+                <Settings handleClose={handleSettingClose} />
             {/if}
             <NotificationManager />
         {/if}
