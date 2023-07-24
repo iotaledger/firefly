@@ -40,6 +40,7 @@ export { default as SubjectBox } from './SubjectBox.svelte'
 export { default as NetworkIcon } from './NetworkIcon.svelte'
 export { default as MenuItem } from './MenuItem.svelte'
 export { default as LedgerAnimation } from './LedgerAnimation.svelte'
+export { default as NodeListRow } from './NodeListRow.svelte'
 
 export * from './atoms'
 export * from './enums'
