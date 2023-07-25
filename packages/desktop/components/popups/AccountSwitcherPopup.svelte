@@ -2,13 +2,15 @@
     import { localize } from '@core/i18n'
     import { Text, Button, FontWeight, TextType, AccountSelector } from 'shared/components'
     import { closePopup } from '@auxiliary/popup'
-    import { selectedAccount, setSelectedAccount } from '@core/account'
+    import { IAccountState, setSelectedAccount } from '@core/account'
 
     export let onCancel: () => void
     export let onConfirm: () => void
 
+    let account: IAccountState
+
     function onConfirmClick(): void {
-        setSelectedAccount($selectedAccount.index)
+        setSelectedAccount(account.index)
         onConfirm && onConfirm()
     }
 
@@ -24,7 +26,7 @@
     </Text>
     <div class="flex flex-col space-y-4">
         <Text fontSize="15" color="gray-700" classes="text-left">{localize('popups.deeplinkAccountSwitch.body')}</Text>
-        <AccountSelector />
+        <AccountSelector bind:account />
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" outline onClick={onCancelClick}>{localize('actions.cancel')}</Button>

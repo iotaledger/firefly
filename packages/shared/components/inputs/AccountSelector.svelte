@@ -6,9 +6,9 @@
     import { formatTokenAmountBestMatch } from '@core/wallet'
 
     export let hideSelectedAccount: boolean = false
+    export let account: IAccountState | undefined = $selectedAccount
 
     let modal: Modal | undefined
-    let account = $selectedAccount
 
     $: accounts = $visibleActiveAccounts?.filter(
         (account) => account.index !== $selectedAccount?.index || !hideSelectedAccount
