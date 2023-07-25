@@ -18,7 +18,7 @@
     }
 
     export let node: INode = structuredClone(EMPTY_NODE)
-    export let networkId: NetworkId | undefined
+    export let networkId: NetworkId | undefined = undefined
     export let coinType: string = ''
     export let isBusy: boolean = false
     export let formError: string | undefined = undefined
@@ -49,7 +49,7 @@
     let [username, password] = node.auth?.basicAuthNamePwd ?? ['', '']
     let jwt = node?.auth?.jwt ?? ''
 
-    $: networkId, (coinType = undefined)
+    $: networkId, (coinType = '')
     $: networkId, coinType, node.url, (formError = '')
     $: jwt,
         username,
