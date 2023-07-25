@@ -2,7 +2,7 @@
     import { Alert, Icon, Logo } from 'shared/components'
     import { localize } from '@core/i18n'
     import { removeDisplayNotification } from '@auxiliary/notification/stores'
-    import { Logo as LogoEnum, LogoOverrideStage } from './enums'
+    import { Logo as LogoEnum } from './enums'
     import { INotificationData } from '@auxiliary/notification'
 
     export let toast: INotificationData
@@ -13,7 +13,7 @@
         info: {
             backgroundColor: 'blue-500',
             iconBackgroundColor: 'white',
-            logo: LogoEnum.LogoFirefly,
+            logo: LogoEnum.Firefly,
             messageColor: 'white',
             subMessageColor: 'blue-300',
             buttonSecondary: 'white',
@@ -54,7 +54,7 @@
             class="flex shrink-0 justify-center items-center bg-{style?.iconBackgroundColor} rounded-lg text-{style?.iconColor}"
         >
             {#if style?.logo}
-                <Logo logo={style?.logo} overrideStage={LogoOverrideStage.Prod} />
+                <Logo logo={style?.logo} />
             {:else}
                 <Icon icon={style?.icon} />
             {/if}
