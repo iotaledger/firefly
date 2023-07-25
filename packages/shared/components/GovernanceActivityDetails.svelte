@@ -9,19 +9,19 @@
     export let activity: GovernanceActivity
 
     const asset = getAssetFromPersistedAssets(getCoinType())
+    let proposalName: string
 
     $: amount = activity.votingPowerDifference ?? 0
     $: localizationKey = 'governance.' + activity.governanceAction
     $: activity.participation?.eventId, void setProposalName()
 
-    let proposalName: string
     async function setProposalName(): Promise<void> {
         try {
             if (activity?.participation?.eventId) {
                 proposalName = (await getVotingEvent(activity.participation.eventId)).data.name
             }
         } catch (err) {
-            proposalName = truncateString(activity.participation.eventId, 6, 6)
+            proposalName = truncateString(activity?.participation?.eventId, 6, 6)
         }
     }
 </script>
