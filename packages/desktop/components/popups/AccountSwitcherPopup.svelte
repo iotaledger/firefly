@@ -1,28 +1,20 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { Text, Button, FontWeight, TextType } from 'shared/components'
+    import { Text, Button, FontWeight, TextType, AccountSelector } from 'shared/components'
     import { closePopup } from '@auxiliary/popup'
-    import { selectedAccount, IAccountState, setSelectedAccount } from '@core/account'
-    import { Modal, RecipientAccountSelector, AccountLabel } from 'shared/components'
+    import { selectedAccount, setSelectedAccount } from '@core/account'
 
     export let onCancel: () => void
     export let onConfirm: () => void
 
-    let account: IAccountState | undefined = $selectedAccount
-    let modal: Modal
-
     function onConfirmClick(): void {
-        setSelectedAccount(account.index)
+        setSelectedAccount($selectedAccount.index)
         onConfirm && onConfirm()
     }
 
     function onCancelClick(): void {
         closePopup()
         onCancel && onCancel()
-    }
-
-    function openModal(): void {
-        modal?.open()
     }
 </script>
 
@@ -32,12 +24,7 @@
     </Text>
     <div class="flex flex-col space-y-4">
         <Text fontSize="15" color="gray-700" classes="text-left">{localize('popups.deeplinkAccountSwitch.body')}</Text>
-        <account-input class="w-full h-full relative">
-            <button on:click={openModal}>
-                <AccountLabel {account} />
-            </button>
-            <RecipientAccountSelector bind:modal bind:selected={account} showBalance includeSelectedAccount />
-        </account-input>
+        <AccountSelector />
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" outline onClick={onCancelClick}>{localize('actions.cancel')}</Button>
