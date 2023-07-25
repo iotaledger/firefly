@@ -8,7 +8,7 @@
     export let isBusy: boolean = false
     export let message: string = ''
     export let showNotification: boolean = false
-    export let overrideTitle: string = ''
+    export let title: string = ''
 
     function handleExportStrongholdResponse(cancelled: boolean, error: string | undefined): void {
         setTimeout(
@@ -63,5 +63,5 @@
     disabled={isBusy}
     {...$$restProps}
 >
-    {overrideTitle || localize('actions.export')}
+    {title || localize('actions.export')}
 </Button>

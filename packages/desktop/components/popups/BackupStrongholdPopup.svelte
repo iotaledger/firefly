@@ -28,6 +28,6 @@
         <Button outline classes="w-1/2" onClick={onCancelClick} disabled={busy}>
             {localize('actions.cancel')}
         </Button>
-        <ExportStrongholdButton showNotification overrideTitle={localize('actions.backup')} classes="w-1/2" />
+        <ExportStrongholdButton showNotification title={localize('actions.backup')} classes="w-1/2" />
     </div>
 </div>
