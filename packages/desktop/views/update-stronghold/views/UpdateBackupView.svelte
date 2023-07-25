@@ -2,7 +2,6 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { showAppNotification } from '@auxiliary/notification'
     import { OnboardingLayout } from '@components'
-    import { updateOnboardingProfile } from '@contexts/onboarding/stores'
     import { exportStronghold } from '@contexts/settings/actions'
     import { localize } from '@core/i18n'
     import { login } from '@core/profile/actions'
@@ -18,14 +17,7 @@
     const skipBackup = false
 
     function onAdvanceView(): void {
-        if (isRecovery) {
-            updateOnboardingProfile({
-                mnemonic: null,
-                strongholdPassword: null,
-                importFile: null,
-                importFilePath: null,
-            })
-        } else {
+        if (!isRecovery) {
             void login()
         }
 
