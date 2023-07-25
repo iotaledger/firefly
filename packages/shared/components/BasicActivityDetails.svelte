@@ -27,7 +27,11 @@
 
 <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-3">
     {#if amount}
-        <AmountBox {amount} {asset} unit={unit ?? getUnitFromTokenMetadata(asset?.metadata)} />
+        <AmountBox
+            {amount}
+            {asset}
+            unit={unit ?? (asset?.metadata ? getUnitFromTokenMetadata(asset?.metadata) : undefined)}
+        />
     {/if}
     <transaction-status class="flex flex-row w-full space-x-2 justify-center">
         {#if activity.inclusionState && activity.direction}

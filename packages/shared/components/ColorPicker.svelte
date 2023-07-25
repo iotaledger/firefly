@@ -1,15 +1,13 @@
 <script lang="ts">
     import { Text, Icon, Tooltip, TextType, Position } from 'shared/components'
     import { AccountColors } from '@core/account'
-    import { appSettings } from '@core/app/stores'
     import { localize } from '@core/i18n'
     import { clickOutside, isBright, convertHexToRgba } from '@core/utils'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
-    export let title = localize('views.picker.color.title')
-    export let active = ''
-    export let classes = ''
-    export let isCustomColorEnabled = false
+    export let title: string = localize('views.picker.color.title')
+    export let active: string = ''
+    export let isCustomColorEnabled: boolean = false
 
     const accountColors = Object.values(AccountColors).filter((c) => /[#]/.test(c as string))
     const activeAccountColorIndex = accountColors.findIndex((_, i) => accountColors[i] === active)
@@ -19,31 +17,31 @@
     let inputValue: string = activeAccountColorIndex >= 0 ? cachedColor : active
     let iconColor = ''
     let isTooltipVisible = false
-    let isCustomHover = false
     let tooltipAnchor: HTMLElement
 
     $: inputValue = `#${/[0-9|a-f|A-F]+/.exec(inputValue) || ''}`
     $: isSelectedCustomElement = indexOfActiveElement === accountColors.length
-    $: dark = $appSettings.darkMode
 
-    $: if (indexOfActiveElement === accountColors.length) {
-        active === cachedColor
-    }
+    $: {
+        if (indexOfActiveElement === accountColors.length) {
+            active === cachedColor
+        }
 
-    $: if (indexOfActiveElement === accountColors.length) {
-        active = inputValue.length === 7 || inputValue.length === 4 ? inputValue : cachedColor
-    } else {
-        active = accountColors?.[indexOfActiveElement]?.toString()
-    }
+        if (indexOfActiveElement === accountColors.length) {
+            active = inputValue.length === 7 || inputValue.length === 4 ? inputValue : cachedColor
+        } else {
+            active = accountColors?.[indexOfActiveElement]?.toString()
+        }
 
-    $: if (inputValue.length) {
-        iconColor = isBright(cachedColor) ? 'gray-800' : 'white'
-    } else {
-        iconColor = 'gray-800'
-    }
+        if (inputValue.length) {
+            iconColor = isBright(cachedColor) ? 'text-gray-800' : 'text-white'
+        } else {
+            iconColor = 'text-gray-800'
+        }
 
-    $: if (inputValue.length === 4 || inputValue.length === 7) {
-        cachedColor = inputValue
+        if (inputValue.length === 4 || inputValue.length === 7) {
+            cachedColor = inputValue
+        }
     }
 
     function onKeyPress(event: KeyboardEvent, index: number): void {
@@ -54,10 +52,9 @@
 
     function onColorClick(index: number): void {
         indexOfActiveElement = index
-    }
-
-    function toggleCustomHover(): void {
-        isCustomHover = !isCustomHover
+        if (index !== accountColors.length) {
+            isTooltipVisible = false
+        }
     }
 
     function toggleTooltip(event: KeyboardEvent | MouseEvent): void {
@@ -75,18 +72,19 @@
         }
     }
 
-    function getAccountColorsNames(): string[] {
-        return Object.keys(AccountColors).reduce<string[]>(
-            (acc, val) => (/[#]/.test(val) ? acc : [...acc, val.toLowerCase()]),
-            []
-        )
+    function getAccountColors(): string[] {
+        return Object.keys(AccountColors)
+            .filter((key) => key.startsWith('#'))
+            .map((key) => {
+                const color = AccountColors[key as keyof typeof AccountColors].toString().toLowerCase()
+                return `bg-${color}-500 hover:bg-${color}-600`
+            })
     }
 </script>
 
 <color-picker
     style:--custom-color={convertHexToRgba(cachedColor)}
     style:--custom-color-ring={convertHexToRgba(cachedColor, 30)}
-    class="block {classes}"
 >
     {#if title}
         <title-container class="flex flex-row mb-4">
@@ -94,14 +92,13 @@
         </title-container>
     {/if}
     <ul class="flex flex-row flex-wrap gap-3.5">
-        {#each getAccountColorsNames() as color, i}
+        {#each getAccountColors() as color, i}
             <button
                 on:click={() => onColorClick(i)}
                 on:keypress={(event) => onKeyPress(event, i)}
                 tabindex="0"
                 aria-label={color}
-                class="w-12 h-12 rounded-lg ring-opacity-30 hover:ring-opacity-40 cursor-pointer flex justify-center items-center
-                bg-{color}-500 hover:bg-{color}-600 focus:bg-{color}-600 ring-{color}-500"
+                class="w-12 h-12 rounded-lg cursor-pointer flex justify-center items-center {color}"
                 class:ring-4={indexOfActiveElement === i}
             >
                 {#if indexOfActiveElement === i}
@@ -116,15 +113,11 @@
                 on:click={activeCustomColor}
                 on:keypress={toggleTooltip}
                 on:keypress={activeCustomColor}
-                on:mouseenter={toggleCustomHover}
-                on:mouseleave={toggleCustomHover}
                 tabindex="0"
-                class="w-12 h-12 rounded-lg ring-opacity-30 hover:ring-opacity-40 cursor-pointer flex justify-center items-center
-                custom-color hover:bg-gray-50 focus:bg-white ring-white"
-                class:active={isSelectedCustomElement}
+                class="custom-color w-12 h-12 rounded-lg cursor-pointer flex justify-center items-center hover:bg-gray-50 focus:bg-white"
                 class:ring-4={isSelectedCustomElement}
             >
-                <Icon icon={IconEnum.Edit} classes={`text-${iconColor}`} />
+                <Icon icon={IconEnum.Edit} classes={iconColor} />
             </button>
         {/if}
     </ul>
@@ -139,7 +132,6 @@
                     placeholder="#"
                     pattern="[A-F0-9]{10}"
                     maxlength="7"
-                    class:dark
                 />
             </Tooltip>
         </tooltip-container>
@@ -152,10 +144,7 @@
         @apply uppercase text-16 leading-140 text-gray-800 text-center;
         @apply border border-solid border-gray-300 hover:border-gray-500;
         @apply bg-transparent;
-
-        &.dark {
-            @apply text-white bg-gray-800 border-gray-700 hover:border-gray-700;
-        }
+        @apply dark:text-white dark:bg-gray-800 dark:border-gray-700 dark:hover:border-gray-700;
     }
 
     .custom-color {
