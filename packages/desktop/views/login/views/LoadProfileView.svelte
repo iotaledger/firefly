@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { AnimationEnum, AnimationRenderer } from '@auxiliary/animation'
     import { localize } from '@core/i18n'
     import { loginProgress, LOGIN_STEPS } from '@core/profile'
     import { Animation, ProgressBar } from 'shared/components'
@@ -22,7 +23,12 @@
 </script>
 
 <div class="flex flex-col justify-center align-center items-center w-full h-full">
-    <Animation classes="h-64 w-64" animation="loading-desktop" loop={true} renderer="canvas" />
+    <Animation
+        classes="h-64 w-64"
+        animation={AnimationEnum.LoadingDesktop}
+        loop={true}
+        renderer={AnimationRenderer.Canvas}
+    />
     <progress-wrapper class="max-w-md w-full">
         <ProgressBar {percent} message={statusMessage} />
     </progress-wrapper>
