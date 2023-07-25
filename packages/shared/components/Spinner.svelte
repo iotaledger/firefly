@@ -10,6 +10,6 @@
 <spinner-container class="flex flex-row items-center justify-center">
     <Icon icon={IconEnum.Refresh} width={size} height={size} classes="animate-spin-reverse {color}" />
     {#if message}
-        <Text type="p" classes="ml-2" secondary>{message}</Text>
+        <Text classes="ml-2" secondary>{message}</Text>
     {/if}
 </spinner-container>
