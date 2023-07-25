@@ -21,7 +21,7 @@
     export let networkId: NetworkId | undefined = undefined
     export let coinType: string | undefined = undefined
     export let isBusy: boolean = false
-    export let formError: string | undefined = undefined
+    export let formError: string | null = null
     export let currentClientOptions: IClientOptions | undefined = undefined
     export let isDeveloperProfile: boolean = false
     export let onSubmit: () => void = () => {}
@@ -175,7 +175,5 @@
         label={localize('popups.node.optionalJwt')}
         disabled={isBusy}
     />
-    {#if formError}
-        <Error error={formError} />
-    {/if}
+    <Error error={formError} />
 </form>
