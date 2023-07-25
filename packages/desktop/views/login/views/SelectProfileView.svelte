@@ -52,7 +52,7 @@
 
 <section class="flex flex-col justify-center items-center h-full bg-white dark:bg-gray-900 px-40 pt-48 pb-20">
     <logo-wrapper class="absolute top-20">
-        <Logo width="64px" logo={LogoEnum.LogoFirefly} />
+        <Logo width="64px" logo={LogoEnum.Firefly} />
     </logo-wrapper>
     <div
         class="profiles-wrapper h-auto items-start justify-center w-full {!$mobile &&

@@ -1,29 +1,28 @@
 <script lang="ts">
     import { appSettings, appStage } from '@core/app'
-    import { Logo as LogoEnum, LogoOverrideStage } from './enums'
+    import { Logo as LogoEnum } from './enums'
 
     export let logo: LogoEnum
     export let width: string = '100%'
     export let height: string = '100%'
-    export let overrideStage: undefined | LogoOverrideStage = undefined
 
     const logos = {
-        [LogoEnum.LogoFireflyFull]: {
+        [LogoEnum.FireflyFull]: {
             alpha: 'firefly_logo_full.svg',
             beta: 'firefly_logo_full.svg',
             prod: 'firefly_logo_full.svg',
         },
-        [LogoEnum.LogoFirefly]: {
+        [LogoEnum.Firefly]: {
             alpha: 'alpha_firefly_logo.svg',
             beta: 'beta_firefly_logo.svg',
             prod: 'prod_firefly_logo.svg',
         },
-        [LogoEnum.LogoStronghold]: {
+        [LogoEnum.Stronghold]: {
             alpha: 'stronghold.svg',
             beta: 'stronghold.svg',
             prod: 'stronghold.svg',
         },
-        [LogoEnum.LogoChrysalisGem]: {
+        [LogoEnum.ChrysalisGem]: {
             alpha: 'chrysalis_gem.svg',
             beta: 'chrysalis_gem.svg',
             prod: 'chrysalis_gem.svg',
@@ -31,7 +30,7 @@
     }
 
     $: darkModeEnabled = $appSettings.darkMode
-    $: selected = logos[logo]?.[overrideStage ?? $appStage]
+    $: selected = logos[logo]?.[$appStage]
     $: logoSrc = darkModeEnabled ? `assets/logos/darkmode/${selected}` : `assets/logos/lightmode/${selected}`
 </script>
 

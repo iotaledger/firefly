@@ -1,6 +1,6 @@
 export enum Logo {
-    LogoFireflyFull = 'logo-firefly-full',
-    LogoFirefly = 'logo-firefly',
-    LogoStronghold = 'logo-stronghold',
-    LogoChrysalisGem = 'logo-chrysalis-gem',
+    FireflyFull = 'logo-firefly-full',
+    Firefly = 'logo-firefly',
+    Stronghold = 'logo-stronghold',
+    ChrysalisGem = 'logo-chrysalis-gem',
 }
