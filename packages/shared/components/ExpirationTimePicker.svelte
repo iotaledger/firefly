@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Text, Icon, Modal, MenuItem, HR, DateTimePicker } from 'shared/components'
+    import { Text, Icon, Modal, MenuItem, DateTimePicker } from 'shared/components'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { formatDate, localize } from '@core/i18n'
     import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE, TimePeriod, isValidExpirationDateTime } from '@core/utils'
@@ -91,10 +91,11 @@
         [TimePeriod.None]: null,
     }
 
-    const MENU_ITEMS: { timePeriod: TimePeriod; title: string }[] = [
+    const MENU_ITEMS: { timePeriod: TimePeriod; title: string; separator?: boolean }[] = [
         {
             title: localize('menus.expirationTimePicker.none'),
             timePeriod: TimePeriod.None,
+            separator: true,
         },
         {
             title: localize('menus.expirationTimePicker.1hour'),
@@ -107,6 +108,7 @@
         {
             title: localize('menus.expirationTimePicker.1week'),
             timePeriod: TimePeriod.OneWeek,
+            separator: true,
         },
         {
             title: localize('menus.expirationTimePicker.customDate.title'),
@@ -133,7 +135,7 @@
 
 <Modal bind:this={expirationTimePickerModal} position={{ bottom: '120px', left: '400px' }} size="medium">
     <expiration-time-picker-modal class="flex flex-col space-y-0 whitespace-nowrap" in:fade={{ duration: 100 }}>
-        {#each MENU_ITEMS as { title, timePeriod }, index}
+        {#each MENU_ITEMS as { title, timePeriod, separator }}
             <MenuItem
                 icon={IconEnum.Calendar}
                 {title}
@@ -141,8 +143,8 @@
                 onClick={() => onChooseExpirationTimeClick(timePeriod)}
                 selected={selectedTimePeriod === timePeriod}
             />
-            {#if index === MENU_ITEMS.length - 1 || index === 0}
-                <HR />
+            {#if separator}
+                <hr />
             {/if}
         {/each}
     </expiration-time-picker-modal>
