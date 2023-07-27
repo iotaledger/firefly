@@ -11,7 +11,6 @@
         Button,
         ButtonSize,
         DeveloperIndicatorPill,
-        HR,
         Icon,
         Modal,
         ProfilePicture,
@@ -114,9 +113,7 @@
                 <Icon icon={IconEnum.Ledger} classes="text-gray-900 dark:text-gray-100 w-4 h-4" />
             {/if}
         </div>
-
-        <HR />
-
+        <hr />
         {#if !isUpToDate}
             <div class="items-center p-3">
                 <div class="flex items-center justify-between bg-blue-50 dark:bg-gray-800 p-3 rounded-lg">
@@ -136,7 +133,7 @@
                     </Button>
                 </div>
             </div>
-            <HR />
+            <hr />
         {/if}
 
         {#if $isSoftwareProfile}
@@ -167,7 +164,7 @@
                         </Button>
                     </div>
                 </div>
-                <HR />
+                <hr />
             {/if}
             <div class="flex justify-between items-center p-3">
                 <div class="flex flex-row items-center space-x-3">
@@ -187,7 +184,7 @@
                 </div>
                 <Toggle active={$isStrongholdLocked} onClick={onStrongholdToggleClick} />
             </div>
-            <HR />
+            <hr />
         {:else}
             <div class="flex justify-between items-center p-3">
                 <div class="flex flex-row items-center space-x-3">
@@ -208,7 +205,7 @@
                     </div>
                 </div>
             </div>
-            <HR />
+            <hr />
         {/if}
 
         {#each ACTION_BUTTONS as { onClick, icon, label }}
