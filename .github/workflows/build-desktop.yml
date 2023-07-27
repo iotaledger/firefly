@@ -1,347 +1,370 @@
 name: Build Desktop (v1)
 
 on:
-  push:
-    tags:
-      - desktop-*
-  workflow_dispatch:
-    inputs:
-      debugElectronBuilder:
-        description: "Verbose electron-builder output"
-        required: true
-        default: "false"
-      stage:
-        description: "Stage (alpha, beta, or prod)"
-        required: true
-        default: "prod"
+    push:
+        tags:
+            - desktop-*
+    workflow_dispatch:
+        inputs:
+            debugElectronBuilder:
+                description: 'Verbose electron-builder output'
+                required: true
+                default: 'false'
+            stage:
+                description: 'Stage (alpha, beta, or prod)'
+                required: true
+                default: 'prod'
 
 jobs:
-  setup:
-    runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/desktop')
-    outputs:
-      version: ${{ steps.set_outputs.outputs.version }}
-      release_name: ${{ steps.set_outputs.outputs.release_name }}
-      stage: ${{ steps.set_outputs.outputs.stage }}
+    setup:
+        runs-on: ubuntu-latest
+        if: startsWith(github.ref, 'refs/tags/desktop')
+        outputs:
+            version: ${{ steps.set_outputs.outputs.version }}
+            release_name: ${{ steps.set_outputs.outputs.release_name }}
+            stage: ${{ steps.set_outputs.outputs.stage }}
 
-    steps:
-    - id: set_outputs
-      name: Set outputs for version, release name, and stage
-      run: |
-        VERSION=${GITHUB_REF#refs/*/desktop-}
-        RELEASE_NAME=$(echo $VERSION | perl -0777 -pe 's/^([0-9]\d*\.[0-9]\d*\.[0-9]\d*)(?:-([a-z]*)-(\d*))?$/$1 \u$2 $3/')
-        STAGE=$(echo $VERSION | perl -0777 -pe 's/^([0-9]\d*\.[0-9]\d*\.[0-9]\d*)(?:-([a-z]*)-(\d*))?$/$2/')
+        steps:
+            - id: set_outputs
+              name: Set outputs for version, release name, and stage
+              run: |
+                  VERSION=${GITHUB_REF#refs/*/desktop-}
+                  RELEASE_NAME=$(echo $VERSION | perl -0777 -pe 's/^([0-9]\d*\.[0-9]\d*\.[0-9]\d*)(?:-([a-z]*)-(\d*))?$/$1 \u$2 $3/')
+                  STAGE=$(echo $VERSION | perl -0777 -pe 's/^([0-9]\d*\.[0-9]\d*\.[0-9]\d*)(?:-([a-z]*)-(\d*))?$/$2/')
 
-        if [ -z "$STAGE" ]; then
-          STAGE="prod"
-        fi
+                  if [ -z "$STAGE" ]; then
+                    STAGE="prod"
+                  fi
 
-        echo "::set-output name=version::$VERSION"
-        echo "::set-output name=release_name::$RELEASE_NAME"
-        echo "::set-output name=stage::$STAGE"
+                  echo "::set-output name=version::$VERSION"
+                  echo "::set-output name=release_name::$RELEASE_NAME"
+                  echo "::set-output name=stage::$STAGE"
 
+    build:
+        runs-on: ${{ matrix.os }}
+        if: ${{ always() }}
+        needs: [setup]
+        strategy:
+            matrix:
+                os: [ubuntu-20.04, macos-11, windows-latest]
+            fail-fast: false
+        env:
+            VERSION: ${{ needs.setup.outputs.version }}
+            STAGE: ${{ needs.setup.outputs.stage || github.event.inputs.stage }}
 
-  build:
-    runs-on: ${{ matrix.os }}
-    if: ${{ always() }}
-    needs: [setup]
-    strategy:
-      matrix:
-        os: [ubuntu-18.04, macos-11, windows-2019]
-      fail-fast: false
-    env:
-      VERSION: ${{ needs.setup.outputs.version }}
-      STAGE: ${{ needs.setup.outputs.stage || github.event.inputs.stage }}
+        steps:
+            - uses: actions/checkout@v2
 
-    steps:
-    - uses: actions/checkout@v2
+            - name: Set up Node.js
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 14.x
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: 14.x
+            - name: Set up Python 2.x (macOS)
+              uses: actions/setup-python@v2
+              if: matrix.os == 'macos-11'
+              with:
+                  python-version: '2.x'
 
-    - name: Set up Python 2.x
-      uses: actions/setup-python@v2
-      with:
-        python-version: '2.x'
+            - name: Install Rust toolchain
+              uses: actions-rs/toolchain@v1
+              with:
+                toolchain: "1.67.0"
+                profile: minimal
+                override: true
 
-    - name: Install Rust toolchain
-      uses: actions-rs/toolchain@v1
-      with:
-        toolchain: stable
-        profile: minimal
+            - name: Install LLVM and Clang (Windows) # required for bindgen to work, see https://github.com/rust-lang/rust-bindgen/issues/1797
+              uses: KyleMayes/install-llvm-action@32c4866ebb71e0949e8833eb49beeebed48532bd
+              if: matrix.os == 'windows-latest'
+              with:
+                  version: '11.0'
+                  directory: ${{ runner.temp }}/llvm
 
-    - name: Install LLVM and Clang (Windows) # required for bindgen to work, see https://github.com/rust-lang/rust-bindgen/issues/1797
-      uses: KyleMayes/install-llvm-action@32c4866ebb71e0949e8833eb49beeebed48532bd
-      if: matrix.os == 'windows-2019'
-      with:
-        version: "11.0"
-        directory: ${{ runner.temp }}/llvm
+            - name: Set LIBCLANG_PATH (Windows)
+              run: echo "LIBCLANG_PATH=$((gcm clang).source -replace "clang.exe")" >> $env:GITHUB_ENV
+              if: matrix.os == 'windows-latest'
 
-    - name: Set LIBCLANG_PATH (Windows)
-      run: echo "LIBCLANG_PATH=$((gcm clang).source -replace "clang.exe")" >> $env:GITHUB_ENV
-      if: matrix.os == 'windows-2019'
+            - name: Update node-gyp to 9.3.1 and apply patch (Windows)
+              # The node-gyp bundled with Node 14.x does not support VS 2022
+              # https://github.com/nodejs/node-gyp/blob/main/docs/Updating-npm-bundled-node-gyp.md#windows
+              # We also need to patch this issue https://github.com/nodejs/node-gyp/issues/2673#issuecomment-1239619438
+              run: |
+                cd (Get-Item $((gcm node).Path)).DirectoryName
+                cd node_modules\npm\node_modules\npm-lifecycle
+                npm install node-gyp@9.3.1
+                cd node_modules\node-gyp
+                git apply --ignore-space-change --ignore-whitespace ${{ github.workspace }}\manual-patches\openssl_fips.patch
+              if: matrix.os == 'windows-latest'
 
-    - name: Set deployment target (macOS)
-      run: echo "MACOSX_DEPLOYMENT_TARGET=10.12" >> $GITHUB_ENV
-      if: matrix.os == 'macos-11'
+            - name: Apply neon-sys patch (Windows)
+              run: |
+                cargo install cargo-patch
+                cp ${{ github.workspace }}\manual-patches\neon_temp_buf.patch .
+                git apply --ignore-space-change --ignore-whitespace ${{ github.workspace }}\manual-patches\windows_cargo_toml.patch
+                cat Cargo.toml
+                cargo patch
+              working-directory: packages/backend/bindings/node/native
+              if: matrix.os == 'windows-latest'
 
-    - name: Install required packages (Linux)
-      run: |
-        sudo apt update
-        sudo apt install -y gcc-multilib g++-multilib build-essential libssl-dev rpm libsecret-1-dev \
-          software-properties-common apt-transport-https libudev-dev libusb-1.0-0-dev \
-          llvm-dev libclang-dev clang
-      if: matrix.os == 'ubuntu-18.04'
+            - name: Set deployment target (macOS)
+              run: echo "MACOSX_DEPLOYMENT_TARGET=10.12" >> $GITHUB_ENV
+              if: matrix.os == 'macos-11'
 
-    - name: Enable verbose output for electron-builder (macOS/Linux)
-      run: echo "DEBUG=electron-builder" >> $GITHUB_ENV
-      if: matrix.os != 'windows-2019' && github.event.inputs.debugElectronBuilder && github.event.inputs.debugElectronBuilder == 'true'
+            - name: Install required packages (Linux)
+              run: |
+                  sudo apt update
+                  sudo apt install -y gcc-multilib g++-multilib build-essential libssl-dev rpm libsecret-1-dev \
+                    software-properties-common apt-transport-https libudev-dev libusb-1.0-0-dev \
+                    llvm-dev libclang-dev clang
+              if: matrix.os == 'ubuntu-20.04'
 
-    - name: Enable verbose output for electron-builder (Windows)
-      run: echo "DEBUG=electron-builder" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-      if: matrix.os == 'windows-2019' && github.event.inputs.debugElectronBuilder && github.event.inputs.debugElectronBuilder == 'true'
+            - name: Enable verbose output for electron-builder (macOS/Linux)
+              run: echo "DEBUG=electron-builder" >> $GITHUB_ENV
+              if: matrix.os != 'windows-latest' && github.event.inputs.debugElectronBuilder && github.event.inputs.debugElectronBuilder == 'true'
 
-    - name: Install dependencies
-      # Increase network timeout threshold to reduce build failures on Windows
-      run: yarn --network-timeout 1000000
+            - name: Enable verbose output for electron-builder (Windows)
+              run: echo "DEBUG=electron-builder" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+              if: matrix.os == 'windows-latest' && github.event.inputs.debugElectronBuilder && github.event.inputs.debugElectronBuilder == 'true'
 
-    - name: Rebuild backend actor system with Sentry DSN and environment
-      run: yarn build:binding
-      working-directory: packages/backend/bindings/node
-      env:
-        SENTRY_DSN: ${{ secrets.SENTRY_DSN_PROD_BACKEND }}
-        SENTRY_ENVIRONMENT: ${{ env.STAGE }}
+            - name: Install dependencies
+              # Increase network timeout threshold to reduce build failures on Windows
+              run: yarn --network-timeout 1000000
 
-    - name: Install Sentry CLI
-      # Yarn has issues putting binaries in the PATH on Windows
-      run: npm i -g @sentry/cli
-      if: ${{ startsWith(github.ref, 'refs/tags/desktop') && matrix.os != 'macos-11' }}
+            - name: Rebuild backend actor system with Sentry DSN and environment
+              run: yarn build:binding
+              working-directory: packages/backend/bindings/node
+              env:
+                  SENTRY_DSN: ${{ secrets.SENTRY_DSN_PROD_BACKEND }}
+                  SENTRY_ENVIRONMENT: ${{ env.STAGE }}
+                  NODE_GYP_FORCE_PYTHON: '2.7.18'
 
-#    - name: Strip backend debug info and upload to Sentry (Linux)
-#      run: |
-#        cp index.node index.node.dbg
-#        strip -S index.node
-#        objcopy --add-gnu-debuglink=index.node.dbg index.node
-#        sentry-cli difutil check index.node.dbg
-#        sentry-cli upload-dif -o "iota-foundation-h4" -p "firefly-backend" --include-sources index.node.dbg
-#        sentry-cli upload-dif -o "iota-foundation-h4" -p "firefly-desktop" --include-sources index.node.dbg
-#      working-directory: packages/backend/bindings/node
-#      env:
-#        SENTRY_LOG_LEVEL: 'debug'
-#        SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-#      if: ${{ startsWith(github.ref, 'refs/tags/desktop') && matrix.os == 'ubuntu-18.04' }}
+            - name: Install Sentry CLI
+              # Yarn has issues putting binaries in the PATH on Windows
+              run: npm i -g @sentry/cli
+              if: ${{ startsWith(github.ref, 'refs/tags/desktop') && matrix.os != 'macos-11' }}
 
-    - name: Upload backend debug info to Sentry (Windows)
-      run: |
-        sentry-cli difutil check node_neon.pdb
-        sentry-cli upload-dif -o "iota-foundation-h4" -p "firefly-backend" --include-sources node_neon.pdb 
-        sentry-cli upload-dif -o "iota-foundation-h4" -p "firefly-desktop" --include-sources node_neon.pdb
-      working-directory: packages/backend/bindings/node/native/target/x86_64-pc-windows-msvc/release
-      env:
-        SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-      if: ${{ startsWith(github.ref, 'refs/tags/desktop') && matrix.os == 'windows-2019' }}
+            #    - name: Strip backend debug info and upload to Sentry (Linux)
+            #      run: |
+            #        cp index.node index.node.dbg
+            #        strip -S index.node
+            #        objcopy --add-gnu-debuglink=index.node.dbg index.node
+            #        sentry-cli difutil check index.node.dbg
+            #        sentry-cli upload-dif -o "iota-foundation-h4" -p "firefly-backend" --include-sources index.node.dbg
+            #        sentry-cli upload-dif -o "iota-foundation-h4" -p "firefly-desktop" --include-sources index.node.dbg
+            #      working-directory: packages/backend/bindings/node
+            #      env:
+            #        SENTRY_LOG_LEVEL: 'debug'
+            #        SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+            #      if: ${{ startsWith(github.ref, 'refs/tags/desktop') && matrix.os == 'ubuntu-20.04' }}
 
-    - name: Set productName
-      run: node scripts/fix-productName.js
-      working-directory: packages/desktop
+            - name: Upload backend debug info to Sentry (Windows)
+              run: |
+                  sentry-cli difutil check node_neon.pdb
+                  sentry-cli upload-dif -o "iota-foundation-h4" -p "firefly-backend" --include-sources node_neon.pdb 
+                  sentry-cli upload-dif -o "iota-foundation-h4" -p "firefly-desktop" --include-sources node_neon.pdb
+              working-directory: packages/backend/bindings/node/native/target/x86_64-pc-windows-msvc/release
+              env:
+                  SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+              if: ${{ startsWith(github.ref, 'refs/tags/desktop') && matrix.os == 'windows-latest' }}
 
-    - name: Bundle desktop JS
-      run: yarn build:${STAGE}
-      working-directory: packages/desktop
-      shell: bash
-      env:
-        HARDCODE_NODE_ENV: true
-        SENTRY: ${{ startsWith(github.ref, 'refs/tags/desktop') }}
-        SENTRY_DSN: ${{ secrets.SENTRY_DSN_PROD_DESKTOP }}
-        SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+            - name: Set productName
+              run: node scripts/fix-productName.js
+              working-directory: packages/desktop
 
-    - name: Build Electron app (macOS)
-      run: yarn compile:${STAGE}:mac
-      env:
-        CSC_LINK: ${{ secrets.MAC_CERT_BASE64 }}
-        CSC_KEY_PASSWORD: ${{ secrets.MAC_CERT_PASSWORD }}
-        FIREFLY_APPLE_ID: ${{ secrets.APPLE_ID }}
-        FIREFLY_APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
-      working-directory: packages/desktop
-      if: matrix.os == 'macos-11'
+            - name: Bundle desktop JS
+              run: yarn build:${STAGE}
+              working-directory: packages/desktop
+              shell: bash
+              env:
+                  HARDCODE_NODE_ENV: true
+                  SENTRY: ${{ startsWith(github.ref, 'refs/tags/desktop') }}
+                  SENTRY_DSN: ${{ secrets.SENTRY_DSN_PROD_DESKTOP }}
+                  SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
-    - name: Build Electron app (Windows)
-      run: yarn compile:${env:STAGE}:win
-      env:
-        CSC_LINK: ${{ secrets.WIN_CERT_BASE64 }}
-        CSC_KEY_PASSWORD: ${{ secrets.WIN_CERT_PASSWORD }}
-      working-directory: packages/desktop
-      if: matrix.os == 'windows-2019'
+            - name: Build Electron app (macOS)
+              run: yarn compile:${STAGE}:mac
+              env:
+                  CSC_LINK: ${{ secrets.MAC_CERT_BASE64 }}
+                  CSC_KEY_PASSWORD: ${{ secrets.MAC_CERT_PASSWORD }}
+                  FIREFLY_APPLE_ID: ${{ secrets.APPLE_ID }}
+                  FIREFLY_APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
+              working-directory: packages/desktop
+              if: matrix.os == 'macos-11'
 
-    - name: Build Electron app (Linux)
-      run: yarn compile:${STAGE}:linux
-      working-directory: packages/desktop
-      if: matrix.os == 'ubuntu-18.04'
+            - name: Build Electron app (Windows)
+              run: yarn compile:${env:STAGE}:win
+              env:
+                  CSC_LINK: ${{ secrets.WIN_CERT_BASE64 }}
+                  CSC_KEY_PASSWORD: ${{ secrets.WIN_CERT_PASSWORD }}
+              working-directory: packages/desktop
+              if: matrix.os == 'windows-latest'
 
-    - name: Import GPG key (Linux)
-      run: |
-        echo "$GPG_PRIVATE_KEY" | base64 -d > /tmp/private.key && \
-        echo "$GPG_PASSPHRASE" | gpg --batch --yes --passphrase-fd 0 --import /tmp/private.key
-      env:
-        GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-        GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-      if: matrix.os == 'ubuntu-18.04'
+            - name: Build Electron app (Linux)
+              run: yarn compile:${STAGE}:linux
+              working-directory: packages/desktop
+              if: matrix.os == 'ubuntu-20.04'
 
-    - name: Sign AppImage (Linux)
-      run: echo $GPG_PASSPHRASE | gpg --pinentry-mode loopback --batch --passphrase-fd 0 --armor --detach-sign --default-key contact@iota.org firefly-desktop*.AppImage
-      working-directory: packages/desktop/out
-      env:
-        GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-      if: matrix.os == 'ubuntu-18.04'
+            - name: Import GPG key (Linux)
+              run: |
+                  echo "$GPG_PRIVATE_KEY" | base64 -d > /tmp/private.key && \
+                  echo "$GPG_PASSPHRASE" | gpg --batch --yes --passphrase-fd 0 --import /tmp/private.key
+              env:
+                  GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+                  GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+              if: matrix.os == 'ubuntu-20.04'
 
-    - name: Compute checksums (Linux)
-      run: for i in `ls | grep 'firefly-desktop*'` ; do sha256sum $i | awk {'print $1'} > $i.sha256 ; done
-      working-directory: packages/desktop/out
-      if: matrix.os == 'ubuntu-18.04'
+            - name: Sign AppImage (Linux)
+              run: echo $GPG_PASSPHRASE | gpg --pinentry-mode loopback --batch --passphrase-fd 0 --armor --detach-sign --default-key contact@iota.org firefly-desktop*.AppImage
+              working-directory: packages/desktop/out
+              env:
+                  GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+              if: matrix.os == 'ubuntu-20.04'
 
-    - name: Compute checksums (macOS)
-      run: for i in `ls | grep 'firefly-desktop*'` ; do shasum -a 256 $i | awk {'print $1'} > $i.sha256 ; done
-      working-directory: packages/desktop/out
-      if: matrix.os == 'macos-11'
+            - name: Compute checksums (Linux)
+              run: for i in `ls | grep 'firefly-desktop*'` ; do sha256sum $i | awk {'print $1'} > $i.sha256 ; done
+              working-directory: packages/desktop/out
+              if: matrix.os == 'ubuntu-20.04'
 
-    - name: Compute checksums (Windows)
-      run: Get-ChildItem "." -Filter firefly-desktop* | Foreach-Object { $(Get-FileHash -Path $_.FullName -Algorithm SHA256).Hash | Set-Content ($_.FullName + '.sha256') }
-      working-directory: packages/desktop/out
-      if: matrix.os == 'windows-2019'
+            - name: Compute checksums (macOS)
+              run: for i in `ls | grep 'firefly-desktop*'` ; do shasum -a 256 $i | awk {'print $1'} > $i.sha256 ; done
+              working-directory: packages/desktop/out
+              if: matrix.os == 'macos-11'
 
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: firefly-desktop-${{ matrix.os }}
-        path: |
-          packages/desktop/out/firefly-desktop*
-          packages/desktop/out/latest*
-  
+            - name: Compute checksums (Windows)
+              run: Get-ChildItem "." -Filter firefly-desktop* | Foreach-Object { $(Get-FileHash -Path $_.FullName -Algorithm SHA256).Hash | Set-Content ($_.FullName + '.sha256') }
+              working-directory: packages/desktop/out
+              if: matrix.os == 'windows-latest'
 
-  release:
-    runs-on: ubuntu-latest
-    needs: [setup, build]
-    if: startsWith(github.ref, 'refs/tags/desktop')
-    env:
-      VERSION: ${{ needs.setup.outputs.version }}
-      RELEASE_NAME: ${{ needs.setup.outputs.release_name }}
-      STAGE: ${{ needs.setup.outputs.stage }}
+            - name: Upload artifacts
+              uses: actions/upload-artifact@v2
+              with:
+                  name: firefly-desktop-${{ matrix.os }}
+                  path: |
+                      packages/desktop/out/firefly-desktop*
+                      packages/desktop/out/latest*
 
-    steps:
-    - run: echo ${{ github.ref }}
+    release:
+        runs-on: ubuntu-latest
+        needs: [setup, build]
+        if: startsWith(github.ref, 'refs/tags/desktop')
+        env:
+            VERSION: ${{ needs.setup.outputs.version }}
+            RELEASE_NAME: ${{ needs.setup.outputs.release_name }}
+            STAGE: ${{ needs.setup.outputs.stage }}
 
-    - name: Checkout code
-      uses: actions/checkout@v2
+        steps:
+            - run: echo ${{ github.ref }}
 
-    - name: Downloading artifacts
-      uses: actions/download-artifact@v2
-      with:
-        name: firefly-desktop-windows-2019
-        path: assets
+            - name: Checkout code
+              uses: actions/checkout@v2
 
-    - name: Downloading artifacts
-      uses: actions/download-artifact@v2
-      with:
-        name: firefly-desktop-macos-11
-        path: assets
+            - name: Downloading artifacts
+              uses: actions/download-artifact@v2
+              with:
+                  name: firefly-desktop-windows-latest
+                  path: assets
 
-    - name: Downloading artifacts
-      uses: actions/download-artifact@v2
-      with:
-        name: firefly-desktop-ubuntu-18.04
-        path: assets
+            - name: Downloading artifacts
+              uses: actions/download-artifact@v2
+              with:
+                  name: firefly-desktop-macos-11
+                  path: assets
 
-    - name: Preparing release body
-      run: |
-        sed -i 's/\r$//' ../../assets/*.sha256 && sed -i '/^$/d' ../../assets/*.sha256 && sed -i -e 's/\(.*\)/\L\1/' ../../assets/*.sha256
-        WIN_SHA256=$(cat ../../assets/firefly-desktop-${{ env.VERSION }}.exe.sha256)
-        LIN_SHA256=$(cat ../../assets/firefly-desktop-${{ env.VERSION }}.AppImage.sha256)
-        MAC_SHA256=$(cat ../../assets/firefly-desktop-${{ env.VERSION }}.dmg.sha256)
-        echo $WIN_SHA256 $LIN_SHA256 $MAC_SHA256
-        touch CHANGELOG.md
-        echo '### Changelog' >> CHANGELOG.md
-        echo '------' >> CHANGELOG.md
-        echo '### File Hashes' >> CHANGELOG.md
-        echo '[How to verify the authenticity of your Firefly Desktop download](https://wiki.iota.org/introduction/how_tos/verify_firefly_download)' >> CHANGELOG.md
-        echo '| File | Platform | SHA256 Hash |' >> CHANGELOG.md
-        echo '| --- | --- | --- |' >> CHANGELOG.md
-        echo '| firefly-desktop-${{ env.VERSION }}.exe | Windows |' $WIN_SHA256 '|' >> CHANGELOG.md
-        echo '| firefly-desktop-${{ env.VERSION }}.AppImage | Linux |' $LIN_SHA256 '|' >> CHANGELOG.md
-        echo '| firefly-desktop-${{ env.VERSION }}.dmg | MacOS | ' $MAC_SHA256 '|' >> CHANGELOG.md
-        cat CHANGELOG.md
-      working-directory: packages/desktop
+            - name: Downloading artifacts
+              uses: actions/download-artifact@v2
+              with:
+                  name: firefly-desktop-ubuntu-20.04
+                  path: assets
 
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1.1.2
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: Firefly Desktop ${{ env.RELEASE_NAME }}
-        body_path: packages/desktop/CHANGELOG.md
-        draft: true
-        prerelease: ${{ env.STAGE != 'prod' }}
+            - name: Preparing release body
+              run: |
+                  sed -i 's/\r$//' ../../assets/*.sha256 && sed -i '/^$/d' ../../assets/*.sha256 && sed -i -e 's/\(.*\)/\L\1/' ../../assets/*.sha256
+                  WIN_SHA256=$(cat ../../assets/firefly-desktop-${{ env.VERSION }}.exe.sha256)
+                  LIN_SHA256=$(cat ../../assets/firefly-desktop-${{ env.VERSION }}.AppImage.sha256)
+                  MAC_SHA256=$(cat ../../assets/firefly-desktop-${{ env.VERSION }}.dmg.sha256)
+                  echo $WIN_SHA256 $LIN_SHA256 $MAC_SHA256
+                  touch CHANGELOG.md
+                  echo '### Changelog' >> CHANGELOG.md
+                  echo '------' >> CHANGELOG.md
+                  echo '### File Hashes' >> CHANGELOG.md
+                  echo '[How to verify the authenticity of your Firefly Desktop download](https://wiki.iota.org/chrysalis-docs/firefly/verify_download)' >> CHANGELOG.md
+                  echo '| File | Platform | SHA256 Hash |' >> CHANGELOG.md
+                  echo '| --- | --- | --- |' >> CHANGELOG.md
+                  echo '| firefly-desktop-${{ env.VERSION }}.exe | Windows |' $WIN_SHA256 '|' >> CHANGELOG.md
+                  echo '| firefly-desktop-${{ env.VERSION }}.AppImage | Linux |' $LIN_SHA256 '|' >> CHANGELOG.md
+                  echo '| firefly-desktop-${{ env.VERSION }}.dmg | MacOS | ' $MAC_SHA256 '|' >> CHANGELOG.md
+                  cat CHANGELOG.md
+              working-directory: packages/desktop
 
-    - name: Upload macOS binary asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: assets/firefly-desktop-${{ env.VERSION }}.dmg
-        asset_name: firefly-desktop-${{ env.VERSION }}.dmg
-        asset_content_type: application/octet-stream
+            - name: Create Release
+              id: create_release
+              uses: actions/create-release@v1.1.2
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  tag_name: ${{ github.ref }}
+                  release_name: Firefly Desktop ${{ env.RELEASE_NAME }}
+                  body_path: packages/desktop/CHANGELOG.md
+                  draft: true
+                  prerelease: ${{ env.STAGE != 'prod' }}
 
-    - name: Upload Windows binary asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: assets/firefly-desktop-${{ env.VERSION }}.exe
-        asset_name: firefly-desktop-${{ env.VERSION }}.exe
-        asset_content_type: application/octet-stream
+            - name: Upload macOS binary asset
+              uses: actions/upload-release-asset@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  upload_url: ${{ steps.create_release.outputs.upload_url }}
+                  asset_path: assets/firefly-desktop-${{ env.VERSION }}.dmg
+                  asset_name: firefly-desktop-${{ env.VERSION }}.dmg
+                  asset_content_type: application/octet-stream
 
-    - name: Upload Linux binary asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: assets/firefly-desktop-${{ env.VERSION }}.AppImage
-        asset_name: firefly-desktop-${{ env.VERSION }}.AppImage
-        asset_content_type: application/octet-stream
+            - name: Upload Windows binary asset
+              uses: actions/upload-release-asset@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  upload_url: ${{ steps.create_release.outputs.upload_url }}
+                  asset_path: assets/firefly-desktop-${{ env.VERSION }}.exe
+                  asset_name: firefly-desktop-${{ env.VERSION }}.exe
+                  asset_content_type: application/octet-stream
 
-    - name: Upload Linux code signature asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: assets/firefly-desktop-${{ env.VERSION }}.AppImage.asc
-        asset_name: firefly-desktop-${{ env.VERSION }}.AppImage.asc
-        asset_content_type: application/pgp-signature
+            - name: Upload Linux binary asset
+              uses: actions/upload-release-asset@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  upload_url: ${{ steps.create_release.outputs.upload_url }}
+                  asset_path: assets/firefly-desktop-${{ env.VERSION }}.AppImage
+                  asset_name: firefly-desktop-${{ env.VERSION }}.AppImage
+                  asset_content_type: application/octet-stream
 
-    - name: Listing artifacts
-      run: ls -al assets
+            - name: Upload Linux code signature asset
+              uses: actions/upload-release-asset@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  upload_url: ${{ steps.create_release.outputs.upload_url }}
+                  asset_path: assets/firefly-desktop-${{ env.VERSION }}.AppImage.asc
+                  asset_name: firefly-desktop-${{ env.VERSION }}.AppImage.asc
+                  asset_content_type: application/pgp-signature
 
-    - name: Upload to S3
-      if: env.STAGE == 'prod'
-      run: |
-        aws s3 cp assets/ s3://iotaledger-files/4a1ddea1-10c1-4f1d-83f0-e14903931a46/releases/ --recursive --include "*" --exclude "*.sha256" --exclude "*.blockmap" --exclude "*.asc" --acl public-read
-        aws s3 cp assets/ s3://iotaledger-files/firefly/releases/ --recursive --include "*" --exclude "*.sha256" --exclude "*.blockmap" --exclude "*.asc" --acl public-read
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_DEFAULT_REGION: eu-central-1
+            - name: Listing artifacts
+              run: ls -al assets
 
-    - name: Invalidate CloudFront cache for auto-update files
-      if: env.STAGE == 'prod'
-      run: aws cloudfront create-invalidation --distribution-id E32G4HRED4PO65 --paths "/latest*"
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_DEFAULT_REGION: eu-central-1
+            - name: Upload to S3
+              if: env.STAGE == 'prod'
+              run: |
+                  aws s3 cp assets/ s3://iotaledger-files/4a1ddea1-10c1-4f1d-83f0-e14903931a46/releases/ --recursive --include "*" --exclude "*.sha256" --exclude "*.blockmap" --exclude "*.asc" --acl public-read
+                  aws s3 cp assets/ s3://iotaledger-files/firefly/releases/ --recursive --include "*" --exclude "*.sha256" --exclude "*.blockmap" --exclude "*.asc" --acl public-read
+              env:
+                  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  AWS_DEFAULT_REGION: eu-central-1
+
+            - name: Invalidate CloudFront cache for auto-update files
+              if: env.STAGE == 'prod'
+              run: aws cloudfront create-invalidation --distribution-id E32G4HRED4PO65 --paths "/latest*"
+              env:
+                  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  AWS_DEFAULT_REGION: eu-central-1

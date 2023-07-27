@@ -6,7 +6,7 @@ edition = "2018"
 exclude = ["/bindings", "/api-wrapper"]
 
 [dependencies]
-tokio = { version = "1.12.0", default-features = false }
+tokio = { version = "1.28.0", default-features = false }
 once_cell = { version = "1.8.0", default-features = false }
 
 iota-wallet = { git = "https://github.com/iotaledger/wallet.rs", branch = "firefly-desktop", default-features = false, features = ["stronghold", "ledger-nano", "ledger-nano-simulator", "participation"] }
