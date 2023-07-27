@@ -1,8 +1,4 @@
-<script lang="ts">
-    import { HR } from 'shared/components'
-</script>
-
-<HR />
+<hr />
 <async-activity-actions class="flex w-full justify-between space-x-4">
     <left-container class="flex flex-row justify-center items-center space-x-2">
         <slot name="left" />
