@@ -3,7 +3,7 @@
     import { EMPTY_NODE, INode } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { Pill } from './pills'
-    import { Text, Modal, MeatballMenuButton, MenuItem, HR } from 'shared/components'
+    import { Text, Modal, MeatballMenuButton, MenuItem } from 'shared/components'
     import { localize } from '@core/i18n'
     import {
         removeNodeFromClientOptions,
@@ -156,7 +156,7 @@
             {#each MENU_ITEMS as { separator, ...item }}
                 <MenuItem {...item} />
                 {#if separator}
-                    <HR />
+                    <hr />
                 {/if}
             {/each}
         </Modal>
