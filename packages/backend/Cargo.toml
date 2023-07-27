@@ -9,8 +9,7 @@ exclude = ["/bindings", "/api-wrapper"]
 tokio = { version = "1.12.0", default-features = false }
 once_cell = { version = "1.8.0", default-features = false }
 
-# iota-wallet = { git = "https://github.com/iotaledger/wallet.rs", rev = "669395ab70400153d94433508ae3367b0c870218", default-features = false, features = ["stronghold", "ledger-nano", "ledger-nano-simulator", "participation"] }
-iota-wallet = { git = "ssh://git@github.com/thibault-martinez/wallet.rs-private", branch = "stronghold-fix-base-669395", default-features = false, features = ["stronghold", "ledger-nano", "ledger-nano-simulator", "participation"] }
+iota-wallet = { git = "https://github.com/iotaledger/wallet.rs", branch = "firefly-desktop", default-features = false, features = ["stronghold", "ledger-nano", "ledger-nano-simulator", "participation"] }
 serde = { version = "1.0.130", default-features = false, features = ["derive"] }
 serde_json = { version = "1.0.68", default-features = false }
 riker = "0.4.2"
