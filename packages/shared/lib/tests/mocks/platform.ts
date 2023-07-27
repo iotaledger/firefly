@@ -97,6 +97,12 @@ const Platform: IPlatform = {
     loadJsonFile(filepath: string): Promise<unknown> {
         return Promise.resolve({ filepath })
     },
+    copyFile(source: string, destination: string): Promise<void> {
+        return Promise.resolve(undefined)
+    },
+    deleteFile(source: string): Promise<void> {
+        return Promise.resolve(undefined)
+    },
 }
 
 window['__CAPACITOR__'] = Platform

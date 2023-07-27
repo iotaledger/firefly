@@ -458,7 +458,24 @@
         },
         "login": {
             "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
-            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}",
+            "outdatedStronghold": "Your Stronghold's version is outdated. Please login to update it.",
+            "updateStronghold": {
+                "title": "Update Stronghold",
+                "body": "Your Stronghold’s version is out of date.",
+                "providePassword": "Please provide your password to update Stronghold.",
+                "continue": "Please continue to update Stronghold."
+            },
+            "changePassword": {
+                "title": "Change password",
+                "hint": "We recommend to update your password."
+            },
+            "saveBackup": {
+                "title": "Stronghold updated",
+                "loginBody": "It's all good now - you're running the latest Stronghold version.",
+                "recoveryBody": "You can now continue setting up your wallet.",
+                "hint": "We highly recommend to delete all previous Stronghold backup files and save a new one."
+            }
         },
         "dashboard": {
             "network": {
@@ -950,6 +967,7 @@
         "dismiss": "Dismiss",
         "proceedAnyway": "Proceed anyway",
         "save": "Save",
+        "saving": "Saving",
         "importSeed": "Import an existing seed",
         "restoreWallet": "Migrate or restore a wallet",
         "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
@@ -979,6 +997,7 @@
         "chooseFile": "Choose a File",
         "dropHere": "Drop your file here",
         "syncAll": "Sync all",
+        "importing": "Importing",
         "export": "Export",
         "exporting": "Exporting",
         "exportNewStronghold": "Export a new Stronghold",
@@ -1053,7 +1072,13 @@
         "mergeVotes": "Merge vote",
         "stopVotes": "Stop voting",
         "okIUnderstand": "OK, I understand",
-        "readMore": "Read more"
+        "readMore": "Read more",
+        "changePassword": "Change password",
+        "changingPassword": "Changing password",
+        "skipAndKeepPassword": "Skip and keep old password",
+        "skipWalletBackup": "Skip wallet backup",
+        "saveStrongholdBackupLocally": "Save Stronghold backup locally",
+        "updating": "Updating"
     },
     "general": {
         "password": "Password",
@@ -1284,7 +1309,8 @@
             "similar": "This is similar to a common password.",
             "word": "A single word is easy to guess.",
             "incorrect": "Your password is incorrect.",
-            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}.",
+            "notNew": "You must use a new password."
         },
         "pincode": {
             "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
@@ -1388,7 +1414,10 @@
             "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
         },
         "invalidDate": "INVALID DATE",
-        "invalidTime": "INVALID TIME"
+        "invalidTime": "INVALID TIME",
+        "stronghold": {
+            "outdated": "Your Stronghold version is outdated."
+        }
     },
     "warning": {
         "node": {

@@ -1164,7 +1164,7 @@ export const confirmedBundles = derived(get(migration).bundles, (_bundles) =>
 )
 
 const CHRYSALIS_VARIABLES_ENDPOINT =
-    'https://raw.githubusercontent.com/iotaledger/firefly/develop/packages/shared/lib/chrysalis.json'
+    'https://raw.githubusercontent.com/iotaledger/firefly/main/packages/shared/lib/chrysalis.json'
 const DEFAULT_CHRYSALIS_VARIABLES_ENDPOINT_TIMEOUT = 5000
 const DEFAULT_CHRYSALIS_VARIABLES_POLL_INTERVAL = 60000 // 1 minute
 

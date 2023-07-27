@@ -22,6 +22,7 @@ export interface Profile {
      * Time for most recent stronghold back up
      */
     lastStrongholdBackupTime: Date | null
+    strongholdVersion: number
     /**
      * User settings
      */

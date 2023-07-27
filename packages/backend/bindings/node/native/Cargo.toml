@@ -15,6 +15,7 @@ crate-type = ["cdylib"]
 neon-build = "0.10.1"
 
 [dependencies]
+iota-wallet = { git = "ssh://git@github.com/thibault-martinez/wallet.rs-private", branch = "stronghold-fix-base-669395", default-features = false, features = ["stronghold", "ledger-nano", "ledger-nano-simulator", "participation"] }
 futures = { version = "0.3.17", default-features = false }
 neon = "0.10.1"
 serde_json = { version = "1.0.68", default-features = false }

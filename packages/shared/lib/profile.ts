@@ -3,6 +3,7 @@ import { _ } from 'svelte-i18n'
 import { getTrimmedLength, persistent, validateFilenameChars } from 'shared/lib/helpers'
 import { ledgerSimulator } from 'shared/lib/ledger'
 import { generateRandomId, migrateObjects } from 'shared/lib/utils'
+import { STRONGHOLD_VERSION } from 'shared/lib/stronghold'
 import {
     asyncDeleteStorage,
     destroyActor,
@@ -93,6 +94,7 @@ const buildProfile = (profileName: string, isDeveloperProfile: boolean): Profile
     name: profileName,
     type: null,
     lastStrongholdBackupTime: null,
+    strongholdVersion: STRONGHOLD_VERSION,
     isDeveloperProfile,
     settings: {
         currency: AvailableExchangeRates.USD,

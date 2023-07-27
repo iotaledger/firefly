@@ -791,7 +791,7 @@ export const updateBalanceOverview = (balance: number, incoming: number, outgoin
             balance: formatUnitBestMatch(balance, true, 3),
             balanceRaw: balance,
             balanceFiat: formatCurrency(
-                convertToFiat(balance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[activeCurrency])
+                convertToFiat(balance, get(currencies)?.[CurrencyTypes.USD], get(exchangeRates)?.[activeCurrency])
             ),
         })
     )
@@ -1148,7 +1148,7 @@ export const formatAccountWithMetadata = (account: Account, meta: AccountMetadat
         signerType,
         balance: formatUnitBestMatch(balance, true, 3),
         balanceEquiv: formatCurrency(
-            convertToFiat(balance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[activeCurrency])
+            convertToFiat(balance, get(currencies)?.[CurrencyTypes.USD], get(exchangeRates)?.[activeCurrency])
         ),
     })
 }

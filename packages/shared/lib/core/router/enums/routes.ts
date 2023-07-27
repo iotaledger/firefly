@@ -112,15 +112,16 @@ export enum HelpAndInfo {
 }
 
 export enum ExternalRoute {
-    Documentation = 'https://wiki.iota.org/learn/wallets/firefly/general',
+    Documentation = 'https://wiki.iota.org/use/wallets/firefly/general',
     Discord = 'https://discord.iota.org',
-    FAQ = 'https://wiki.iota.org/learn/wallets/firefly/faq-and-troubleshooting',
+    FAQ = 'https://wiki.iota.org/use/wallets/firefly/faq-and-troubleshooting',
     IssueReport = 'https://github.com/iotaledger/firefly/issues/new/choose',
 }
 
 export enum LoginRoute {
     Init = 'init',
     EnterPin = 'enterPin',
+    UpdateStronghold = 'updateStronghold',
 }
 
 export enum BackupRoute {
@@ -136,6 +137,7 @@ export enum ImportRoute {
     FileImport = 'fileImport',
     LedgerImport = 'ledgerImport',
     BackupPassword = 'backupPassword',
+    UpdateStronghold = 'updateStronghold',
     Success = 'Success',
 }
 

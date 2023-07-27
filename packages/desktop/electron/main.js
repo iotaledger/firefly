@@ -426,6 +426,27 @@ ipcMain.handle('get-path', (_e, path) => {
 })
 ipcMain.handle('get-version-details', (_e) => versionDetails)
 
+function ensureDirectoryExistence(filePath) {
+    const dirname = path.dirname(filePath)
+    if (!fs.existsSync(dirname)) {
+        fs.mkdirSync(dirname, { recursive: true })
+    }
+}
+
+ipcMain.handle('copy-file', (_e, source, destination) => {
+    const src = path.resolve(source)
+    const srcFileBuffer = fs.readFileSync(src)
+    const dest = path.resolve(destination)
+    ensureDirectoryExistence(dest)
+    fs.writeFileSync(dest, srcFileBuffer)
+})
+
+ipcMain.handle('delete-file', (_e, source) => {
+    if (fs.existsSync(source)) {
+        fs.rmSync(source, { force: true })
+    }
+})
+
 // Diagnostics
 const getDiagnostics = () => {
     const osXNameMap = new Map([

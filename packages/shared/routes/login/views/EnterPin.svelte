@@ -1,11 +1,12 @@
 <script lang="typescript">
-    import { Icon, Pin, Profile, Text } from 'shared/components'
+    import { Icon, Pin, Profile, Text, TextHint } from 'shared/components'
     import { initAppSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { Platform } from 'shared/lib/platform'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, clearActiveProfile } from 'shared/lib/profile'
+    import { isStrongholdOutdated } from '@lib/stronghold'
     import { validatePinFormat } from 'shared/lib/utils'
     import { api, getProfileDataPath, initialise } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy } from 'svelte'
@@ -167,11 +168,24 @@
     </button>
     <div class="pt-40 pb-16 flex w-full h-full flex-col items-center justify-between">
         <div class="w-96 flex flex-col flex-wrap items-center mb-20">
-            <Profile name={$activeProfile?.name} bgColor="blue" />
+            <Profile
+                name={$activeProfile?.name}
+                isStrongholdOutdated={isStrongholdOutdated($activeProfile)}
+                bgColor="blue"
+            />
+            {#if isStrongholdOutdated($activeProfile)}
+                <TextHint
+                    hint={locale('views.login.outdatedStronghold')}
+                    hintClasses="text-gray-700 dark:text-gray-400"
+                    icon="exclamation"
+                    classes="mt-8 p-4 w-full rounded-2xl bg-yellow-50 dark:bg-opacity-10"
+                    iconClasses="text-yellow-700"
+                />
+            {/if}
             <Pin
                 bind:this={pinRef}
                 bind:value={pinCode}
-                classes="mt-10 {shake && 'animate-shake'}"
+                classes="mt-6 {shake && 'animate-shake'}"
                 on:submit={onSubmit}
                 disabled={hasReachedMaxAttempts || isBusy}
                 autofocus

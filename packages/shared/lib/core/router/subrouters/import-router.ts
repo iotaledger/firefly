@@ -1,16 +1,19 @@
 import { get, writable } from 'svelte/store'
 
-import { mnemonic } from '@lib/app'
+import { mnemonic, strongholdPassword } from '@lib/app'
 import { getMigrationData } from '@lib/migration'
 import { Platform } from '@lib/platform'
-import { newProfile } from '@lib/profile'
 import { ImportType } from '@lib/typings/profile'
+import { importFilePath } from '@lib/stronghold'
 import { asyncRestoreBackup } from '@lib/wallet'
 
 import { appRouter } from '../app-router'
 import { ImportRoute } from '../enums'
 import { Subrouter } from './subrouter'
 import { FireflyEvent } from '../types'
+import { UpdateStrongholdRouter, updateStrongholdRouter } from './update-stronghold-router'
+import { getErrorMessage } from '@lib/shell/walletErrors'
+import { ErrorType } from '@lib/typings/events'
 
 export const importRoute = writable<ImportRoute>(null)
 
@@ -69,7 +72,20 @@ export class ImportRouter extends Subrouter<ImportRoute> {
 
                 this.importFile = file
                 this.importFilePath = filePath
-                nextRoute = ImportRoute.BackupPassword
+                importFilePath.set(filePath)
+
+                try {
+                    await asyncRestoreBackup(this.importFilePath, '')
+                    nextRoute = ImportRoute.BackupPassword
+                } catch (err) {
+                    if (err?.error?.match(getErrorMessage(ErrorType.OutdatedStrongholdVersion))) {
+                        nextRoute = ImportRoute.UpdateStronghold
+                        updateStrongholdRouter.set(new UpdateStrongholdRouter(this))
+                    } else {
+                        nextRoute = ImportRoute.BackupPassword
+                    }
+                }
+
                 break
             }
             case ImportRoute.BackupPassword: {
@@ -85,17 +101,21 @@ export class ImportRouter extends Subrouter<ImportRoute> {
                         if (legacySeed) {
                             await getMigrationData(legacySeed)
                         }
+
+                        nextRoute = ImportRoute.Success
                     } else {
                         await asyncRestoreBackup(this.importFilePath, password)
-                        get(newProfile).lastStrongholdBackupTime = new Date()
+                        nextRoute = ImportRoute.Success
                     }
-
-                    nextRoute = ImportRoute.Success
                 } finally {
                     this.isGettingMigrationData.set(false)
                 }
                 break
             }
+            case ImportRoute.UpdateStronghold:
+                strongholdPassword.set(undefined)
+                get(appRouter).next({ importType: get(this.importType) })
+                return
             case ImportRoute.LedgerImport: {
                 const { importType } = params
                 this.importType.set(importType)
@@ -104,7 +124,7 @@ export class ImportRouter extends Subrouter<ImportRoute> {
             }
             case ImportRoute.Success:
                 get(appRouter).next({ importType: get(this.importType) })
-                break
+                return
         }
         this.setNext(nextRoute)
     }

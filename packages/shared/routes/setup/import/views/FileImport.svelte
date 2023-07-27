@@ -1,11 +1,12 @@
 <script lang="typescript">
-    import { Animation, Button, Dropzone, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, Button, Dropzone, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { createEventDispatcher } from 'svelte'
     import { Platform } from 'shared/lib/platform'
     import { Locale } from '@core/i18n'
 
     export let locale: Locale
+    export let busy = false
 
     let file
     let fileName: string | null
@@ -86,8 +87,12 @@
         />
     </div>
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-        <Button classes="flex-1" disabled={!fileName} onClick={handleContinueClick}>
-            {locale('actions.continue')}
+        <Button classes="flex-1" disabled={!fileName || busy} onClick={handleContinueClick}>
+            {#if busy}
+                <Spinner busy message={locale('actions.importing')} classes="justify-center" />
+            {:else}
+                {locale('actions.continue')}
+            {/if}
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-blue dark:bg-gray-900'}">

@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, Password, Spinner, Text } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
+    import { mobile, strongholdPassword } from 'shared/lib/app'
     import { Locale } from '@core/i18n'
     import { createEventDispatcher, getContext } from 'svelte'
     import { ImportRouter } from '@core/router'
@@ -13,11 +13,13 @@
     const { importType, isGettingMigrationData } = getContext<ImportRouter>('importRouter')
 
     let password = ''
+    $: password, (error = '')
 
     const dispatch = createEventDispatcher()
 
     function handleContinue(): void {
         if (password) {
+            strongholdPassword.set(password)
             dispatch('next', { password })
         }
     }
@@ -58,13 +60,11 @@
             disabled={password.length === 0 || busy || $isGettingMigrationData}
             onClick={() => handleContinue()}
         >
-            {#if $isGettingMigrationData}
-                <Spinner
-                    busy={$isGettingMigrationData}
-                    message={locale('views.migrate.restoringWallet')}
-                    classes="justify-center"
-                />
-            {:else}{locale('actions.continue')}{/if}
+            {#if busy || $isGettingMigrationData}
+                <Spinner busy message={locale('views.migrate.restoringWallet')} classes="justify-center" />
+            {:else}
+                {locale('actions.continue')}
+            {/if}
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-orange dark:bg-gray-900'}">

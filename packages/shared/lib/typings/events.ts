@@ -55,6 +55,7 @@ export enum ErrorType {
 
     // Stronghold
     StrongholdError = 'StrongholdError',
+    OutdatedStrongholdVersion = 'OutdatedStrongholdVersion',
 
     // Database
     StorageDoesntExist = 'StorageDoesntExist',

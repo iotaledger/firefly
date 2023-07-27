@@ -1,10 +1,11 @@
 <script lang="typescript">
-    import { createEventDispatcher, onMount } from 'svelte'
+    import { createEventDispatcher } from 'svelte'
     import { Icon, Logo, Profile } from 'shared/components'
     import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos } from 'shared/lib/app'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { profiles, setActiveProfile } from 'shared/lib/profile'
     import { ProfileType } from 'shared/lib/typings/profile'
+    import { isStrongholdOutdated } from '@lib/stronghold'
     import { localize } from '@core/i18n'
     import { isAwareOfCrashReporting } from '@lib/appSettings'
 
@@ -56,6 +57,7 @@
                     isDeveloper={profile.isDeveloperProfile}
                     isLedgerProfile={profile?.type === ProfileType.Ledger ||
                         profile?.type === ProfileType.LedgerSimulator}
+                    isStrongholdOutdated={isStrongholdOutdated(profile)}
                     classes="cursor-pointer"
                 />
             </div>

@@ -279,8 +279,8 @@ function getCurrentBalanceDataPoint({
     const balance = convertToSelectedCurrency
         ? convertToFiat(
               currentBalance,
-              get(currencies)[CurrencyTypes.USD],
-              get(exchangeRates)[get(activeProfile)?.settings.chartSelectors.currency]
+              get(currencies)?.[CurrencyTypes.USD],
+              get(exchangeRates)?.[get(activeProfile)?.settings.chartSelectors.currency]
           )
         : currentBalance
     return {

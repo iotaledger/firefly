@@ -40,6 +40,8 @@ export interface IPlatform {
     openUrl(url: string): void
     hookErrorLogger(logger: (error: Error) => void): void
     loadJsonFile(filepath: string): Promise<unknown>
+    copyFile(source: string, destination: string): Promise<void>
+    deleteFile(source: string): Promise<void>
 
     NotificationManager: INotificationManager | undefined
     DeepLinkManager: IDeepLinkManager | undefined
