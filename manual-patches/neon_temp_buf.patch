@@ -1,0 +1,13 @@
+diff --git a/native/src/neon.cc b/native/src/neon.cc
+index 7b2981b..164d3cc 100644
+--- a/native/src/neon.cc
++++ b/native/src/neon.cc
+@@ -227,7 +227,7 @@ extern "C" size_t Neon_ArrayBuffer_Data(v8::Isolate *isolate, void **base_out, v
+   // the contents.
+   //
+   // https://github.com/electron/electron/issues/29893
+-  #if _MSC_VER && NODE_MODULE_VERSION >= 89
++  #if _MSC_VER && NODE_MODULE_VERSION >= 87
+     v8::Local<v8::Object> local;
+     node::Buffer::New(isolate, buffer, 0, buffer->ByteLength()).ToLocal(&local);
+     return Neon_Buffer_Data(isolate, base_out, local);
