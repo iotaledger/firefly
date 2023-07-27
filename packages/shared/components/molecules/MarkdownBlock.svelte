@@ -1,8 +1,6 @@
 <script lang="ts">
     import SvelteMarkdown from 'svelte-markdown'
-    import LinkBlock from './markdown-renderers/LinkBlock.svelte'
-    import ParagraphBlock from './markdown-renderers/ParagraphBlock.svelte'
-
+    import { ParagraphBlock, LinkBlock } from 'shared/components'
     export let text: string
 
     const renderers = {
