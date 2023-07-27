@@ -134,7 +134,16 @@ export function migrateStrongholdSnapshotV2ToV3(
     newPath: string,
     newPassword: string
 ): void {
-    addon.migrateStrongholdSnapshotV2ToV3(currentPath, currentPassword, newPath, newPassword)
+    const snapshotSaltV2 = 'wallet.rs'
+    const snapshotRoundsV2 = 100
+    addon.migrateStrongholdSnapshotV2ToV3(
+        currentPath,
+        currentPassword,
+        snapshotSaltV2,
+        snapshotRoundsV2,
+        newPath,
+        newPassword
+    )
 }
 
 export const api = {

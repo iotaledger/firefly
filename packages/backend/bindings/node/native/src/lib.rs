@@ -175,20 +175,20 @@ pub fn init_logger(mut cx: FunctionContext) -> JsResult<JsUndefined> {
 }
 
 pub fn migrate_stronghold_snapshot_v2_to_v3(mut cx: FunctionContext) -> JsResult<JsUndefined> {
-    let current_path = cx.argument::<JsString>(0)?.value(&mut cx);
-    let current_password = cx.argument::<JsString>(1)?.value(&mut cx);
-    let salt = cx.argument::<JsString>(2)?.value(&mut cx);
-    let rounds = cx.argument::<JsNumber>(3)?.value(&mut cx);
+    let current_path = cx.argument::<JsString>(0)?.value();
+    let current_password = cx.argument::<JsString>(1)?.value();
+    let salt = cx.argument::<JsString>(2)?.value();
+    let rounds = cx.argument::<JsNumber>(3)?.value();
     let new_path = cx
         .argument_opt(4)
         .map(|opt| opt.downcast_or_throw::<JsString, _>(&mut cx))
         .transpose()?
-        .map(|opt| opt.value(&mut cx));
+        .map(|opt| opt.value());
     let new_password = cx
         .argument_opt(5)
         .map(|opt| opt.downcast_or_throw::<JsString, _>(&mut cx))
         .transpose()?
-        .map(|opt| opt.value(&mut cx));
+        .map(|opt| opt.value());
 
     AccountManager::migrate_stronghold_snapshot_v2_to_v3(
         &current_path,
