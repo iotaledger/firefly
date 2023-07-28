@@ -20,21 +20,19 @@
     "
 >
     {#if parentType === 'image'}
-        <div class="min-w-full min-h-full object-cover">
-            <NftMedia {nft} {useCaching}>
-                <div
-                    slot="placeholder"
-                    class="
+        <NftMedia {nft} {useCaching}>
+            <div
+                slot="placeholder"
+                class="
                     w-full h-full
                     {size === 'small' && 'p-1'}
                     {size === 'medium' && 'p-2'}
                     {size === 'large' && 'p-2'}
                 "
-                >
-                    <MediaPlaceholder type={nftType} iconOnly />
-                </div>
-            </NftMedia>
-        </div>
+            >
+                <MediaPlaceholder type={nftType} iconOnly />
+            </div>
+        </NftMedia>
     {:else}
         <div
             class="
