@@ -18,10 +18,6 @@
         value: val,
     }))
 
-    $: selectedDateFilterOption = localize(`${filterUnit.localeKey}.${filterUnit.selected}`)
-    $: selectedDateUnit =
-        filterUnit.subunit.type === 'unit' ? localize(`${filterUnit.localeKey}.${filterUnit.subunit.unit}`) : ''
-
     function onSelect(item: IDropdownItem<DateFilterOption>): void {
         filterUnit.selected = item.value
 
@@ -59,7 +55,7 @@
     }
 </script>
 
-<Dropdown value={selectedDateFilterOption} items={choices} {onSelect} small />
+<Dropdown value={filterUnit.selected} items={choices} {onSelect} small />
 
 {#if filterUnit.selected}
     <div class="flex flex-row items-center space-x-2 mt-2">
@@ -77,7 +73,7 @@
             <DateInputButton bind:value={filterUnit.subunit.value} />
         {:else if filterUnit.subunit.type === 'unit'}
             <NumberInput bind:value={filterUnit.subunit.amount} placeholder="" />
-            <Dropdown value={selectedDateUnit} items={unitChoices} onSelect={onUnitSelect} small />
+            <Dropdown value={filterUnit.subunit.unit} items={unitChoices} onSelect={onUnitSelect} small />
         {/if}
     </div>
 {/if}
