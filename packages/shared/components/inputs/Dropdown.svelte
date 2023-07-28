@@ -5,7 +5,7 @@
 
     type T = $$Generic
 
-    export let value: T
+    export let value: T | undefined
     export let label: string = ''
     export let placeholder: string = ''
     export let disabled = false
@@ -22,14 +22,14 @@
         fontWeight: FontWeight.normal,
     }
 
-    let dropdown = false
+    let dropdown: boolean = false
+    let isFocused: boolean = false
     let divContainer: HTMLElement
-    let navContainer
+    let navContainer: HTMLElement
+    let search: string = ''
     let navWidth: string
-    let search = ''
-    let selectedItem: IDropdownItem<T>
-    let focusedItem: HTMLElement
-    let isFocused = false
+    let focusedItem: HTMLElement | null
+    let selectedItem: IDropdownItem<T> | undefined
 
     $: placeholderColor = value ? '' : 'gray-500'
     $: items = sortItems ? items.sort((a, b) => (a.label > b.label ? 1 : -1)) : items
@@ -52,15 +52,15 @@
             const elementLabel = items.find((item) => item.value === value)?.label || ''
             let elem = document.getElementById(elementLabel)
             if (!elem) {
-                elem = navContainer.firstChild
+                elem = navContainer.firstChild as HTMLElement
             }
             if (elem) {
-                navContainer.scrollTop = elem.offsetTop
+                navContainer.scrollTop = elem?.offsetTop
                 elem.focus()
             }
         } else {
             divContainer.focus()
-            focusedItem = undefined
+            focusedItem = null
             search = ''
         }
     }
@@ -86,16 +86,17 @@
                 event.preventDefault()
             } else if (event.key === 'ArrowDown') {
                 if (focusedItem) {
-                    const children = [...navContainer.children]
+                    const children = Array.from(navContainer.children) as HTMLElement[]
                     const idx = children.indexOf(focusedItem)
                     if (idx < children.length - 1) {
-                        children[idx + 1].focus()
+                        const element = children[idx + 1]
+                        element.focus()
                         event.preventDefault()
                     }
                 }
             } else if (event.key === 'ArrowUp') {
                 if (focusedItem) {
-                    const children = [...navContainer.children]
+                    const children = Array.from(navContainer.children) as HTMLElement[]
                     const idx = children.indexOf(focusedItem)
                     if (idx > 0) {
                         children[idx - 1].focus()
@@ -103,7 +104,7 @@
                     }
                 }
             } else if (isNumberLetterOrPunctuation(event.key)) {
-                const children = [...navContainer.children]
+                const children = Array.from(navContainer.children) as HTMLElement[]
                 const itemsValues = items.map((item) => item.label.toLowerCase())
                 search += event.key
                 const idx = itemsValues.findIndex((item) => item.includes(search.toLowerCase()))
@@ -116,14 +117,16 @@
             }
         }
     }
+
+    function handleDropdownClick(event: MouseEvent): void {
+        event.stopPropagation()
+        toggleDropDown()
+    }
 </script>
 
 <dropdown-input
     class="relative hasBorder w-full"
-    on:click={(e) => {
-        e.stopPropagation()
-        toggleDropDown()
-    }}
+    on:click={handleDropdownClick}
     use:clickOutside
     on:clickOutside={onClickOutside}
     on:keydown={onKey}
