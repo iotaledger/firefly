@@ -63,12 +63,12 @@
     })
 </script>
 
-<create-account-popup class="flex flex-col h-full justify-between">
+<create-account-popup class="flex flex-col h-full justify-between space-y-4">
     <div>
         <title-container class="flex flex-row mb-6">
             <Text type={TextType.h5}>{localize('general.addAWallet')}</Text>
         </title-container>
-        <create-account-popup-inputs class="w-full flex flex-col justify-between">
+        <create-account-popup-inputs class="w-full flex flex-col justify-between space-y-4">
             <Input
                 {error}
                 bind:value={accountAlias}
@@ -76,14 +76,8 @@
                 autofocus
                 submitHandler={onCreateClick}
                 disabled={isBusy}
-                classes="mb-4"
             />
-            <ColorPicker
-                title={localize('general.accountColor')}
-                bind:active={color}
-                classes="mb-4"
-                isCustomColorEnabled
-            />
+            <ColorPicker title={localize('general.accountColor')} bind:active={color} isCustomColorEnabled />
         </create-account-popup-inputs>
     </div>
     <create-account-popup-actions class="flex flex-row justify-between px-2">

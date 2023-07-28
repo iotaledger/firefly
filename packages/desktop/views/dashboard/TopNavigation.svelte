@@ -13,9 +13,6 @@
         governanceRoute,
         GovernanceRoute,
         governanceRouter,
-        settingsRoute,
-        SettingsRoute,
-        settingsRouter,
     } from '@core/router'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { popupState } from '@auxiliary/popup'
@@ -25,7 +22,7 @@
 
     $: isWindows = $platform === PlatformOption.Windows
     $: {
-        if ($settingsRoute || $collectiblesRoute || $governanceRoute) {
+        if ($collectiblesRoute || $governanceRoute) {
             isBackButtonVisible = isCorrectRoute()
         }
     }
@@ -33,8 +30,6 @@
 
     function isCorrectRoute(): boolean {
         switch ($dashboardRoute) {
-            case DashboardRoute.Settings:
-                return $settingsRoute !== SettingsRoute.Init
             case DashboardRoute.Collectibles:
                 return $collectiblesRoute !== CollectiblesRoute.Gallery
             case DashboardRoute.Governance:
@@ -47,9 +42,6 @@
     function onBackClick(): void {
         closeDrawer()
         switch ($dashboardRoute) {
-            case DashboardRoute.Settings:
-                $settingsRouter.previous()
-                break
             case DashboardRoute.Collectibles:
                 $collectiblesRouter.previous()
                 break
