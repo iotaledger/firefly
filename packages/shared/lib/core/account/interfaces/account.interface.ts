@@ -19,6 +19,7 @@ import type {
     BuildNftOutputData,
     CreateNativeTokenParams,
     CreateNativeTokenTransaction,
+    ConsolidationParams,
     Ed25519Signature,
     FilterOptions,
     GenerateAddressOptions,
@@ -58,7 +59,7 @@ export interface IAccount {
     ): Promise<Transaction>
     burnNft(nftId: string, transactionOptions?: TransactionOptions): Promise<Transaction>
     claimOutputs(outputIds: string[]): Promise<Transaction>
-    consolidateOutputs(force: boolean, outputConsolidationThreshold?: number): Promise<Transaction>
+    consolidateOutputs(params: ConsolidationParams): Promise<Transaction>
     createAliasOutput(params?: AliasOutputParams, transactionOptions?: TransactionOptions): Promise<Transaction>
     meltNativeToken(
         tokenId: string,

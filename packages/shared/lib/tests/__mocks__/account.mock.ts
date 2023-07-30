@@ -11,6 +11,7 @@ import {
     BuildBasicOutputData,
     BuildFoundryOutputData,
     BuildNftOutputData,
+    ConsolidationParams,
     FilterOptions,
     CreateNativeTokenTransaction,
     Node,
@@ -76,7 +77,7 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    consolidateOutputs(force: boolean, outputConsolidationThreshold?: number): Promise<Transaction> {
+    consolidateOutputs(params: ConsolidationParams): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
 
