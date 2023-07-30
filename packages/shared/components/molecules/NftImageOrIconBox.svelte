@@ -20,7 +20,7 @@
     "
 >
     {#if parentType === 'image'}
-        <NftMedia {nft} classes="min-w-full min-h-full object-cover" {useCaching}>
+        <NftMedia {nft} {useCaching}>
             <div
                 slot="placeholder"
                 class="

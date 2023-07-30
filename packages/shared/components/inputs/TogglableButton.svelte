@@ -1,7 +1,8 @@
 <script lang="ts">
     import { Icon } from 'shared/components'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
-    export let icon: string
+    export let icon: IconEnum
     export let active: boolean = false
     export let onClick: () => void = () => {}
     export let classes: string = ''

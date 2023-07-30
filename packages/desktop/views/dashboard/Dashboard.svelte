@@ -68,14 +68,17 @@
 
     onMount(() => {
         Platform.onEvent('menu-logout', () => {
-            logout()
+            void logout()
         })
 
         Platform.onEvent('deep-link-params', (data: string) => {
             handleDeepLinkRequest(data)
         })
 
-        Platform.onEvent('lock-screen', () => {
+        Platform.onEvent('power-monitor-lock-screen', () => {
+            logout()
+        })
+        Platform.onEvent('power-monitor-suspend', () => {
             logout()
         })
 

@@ -2,12 +2,12 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { showAppNotification } from '@auxiliary/notification'
     import { OnboardingLayout } from '@components'
-    import { updateOnboardingProfile } from '@contexts/onboarding/stores'
     import { exportStronghold } from '@contexts/settings/actions'
     import { localize } from '@core/i18n'
     import { login } from '@core/profile/actions'
     import { Animation, Button, Icon, Text, TextHint, TextType } from '@ui'
     import { updateStrongholdRouter } from '../update-stronghold-router'
+    import { AnimationEnum } from '@auxiliary/animation'
 
     export let busy = false
     export let changedPassword: boolean
@@ -17,14 +17,7 @@
     const skipBackup = false
 
     function onAdvanceView(): void {
-        if (isRecovery) {
-            updateOnboardingProfile({
-                mnemonic: null,
-                strongholdPassword: null,
-                importFile: null,
-                importFilePath: null,
-            })
-        } else {
+        if (!isRecovery) {
             void login()
         }
 
@@ -102,6 +95,6 @@
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-        <Animation classes="setup-anim-aspect-ratio" animation="backup-recovery-phrase-desktop" />
+        <Animation animation={AnimationEnum.BackupRecoveryPhraseDesktop} />
     </div>
 </OnboardingLayout>

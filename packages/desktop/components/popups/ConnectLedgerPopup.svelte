@@ -4,6 +4,7 @@
     import { isFunction } from '@core/utils'
     import { Button, LedgerAnimation, Text, TextHint, FontWeight, TextType } from 'shared/components'
     import { closePopup } from '@auxiliary/popup'
+    import { AnimationEnum } from '@auxiliary/animation'
 
     export let onCancel: () => void
     export let onContinue: () => void
@@ -13,18 +14,18 @@
     $: isAppNotOpen = $ledgerConnectionState === LedgerConnectionState.AppNotOpen
     $: isCorrectAppOpen = $ledgerConnectionState === LedgerConnectionState.CorrectAppOpen
 
-    let animation: string
+    let animation: AnimationEnum | undefined = undefined
     $: $ledgerConnectionState, setAnimation()
     function setAnimation(): void {
         if (isNotConnected) {
-            animation = 'ledger-disconnected-desktop'
+            animation = AnimationEnum.LedgerDisconnectedDesktop
         } else if (isLocked) {
             // TODO: get animation for locked state
             animation = undefined
         } else if (isAppNotOpen) {
-            animation = 'ledger-app-closed-desktop'
+            animation = AnimationEnum.LedgerAppClosedDesktop
         } else if (isCorrectAppOpen) {
-            animation = 'ledger-connected-desktop'
+            animation = AnimationEnum.LedgerConnectedDesktop
         }
     }
 
