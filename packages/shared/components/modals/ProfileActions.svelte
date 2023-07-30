@@ -11,15 +11,16 @@
         Button,
         ButtonSize,
         DeveloperIndicatorPill,
-        HR,
         Icon,
         Modal,
         ProfilePicture,
         Text,
         TextType,
         Toggle,
+        BoxedIcon,
     } from '@ui'
     import { fade } from 'svelte/transition'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let modal: Modal = undefined
 
@@ -49,7 +50,7 @@
     }
 
     function onLogoutClick(): void {
-        logout()
+        void logout()
     }
 
     function onStrongholdToggleClick(): void {
@@ -94,15 +95,15 @@
                 {/if}
             </div>
             {#if $isActiveLedgerProfile}
-                <Icon icon="ledger" classes="text-gray-900 dark:text-gray-100 w-4 h-4" />
+                <Icon icon={IconEnum.Ledger} classes="text-gray-900 dark:text-gray-100 w-4 h-4" />
             {/if}
         </div>
-        <HR />
+        <hr />
         {#if !isUpToDate}
             <div class="items-center p-3">
                 <div class="flex items-center justify-between bg-blue-50 dark:bg-gray-800 p-3 rounded-lg">
                     <div class="flex flex-row items-center space-x-3">
-                        <Icon icon="warning" boxed classes="text-blue-500" />
+                        <BoxedIcon icon={IconEnum.Warning} classes="text-blue-500" />
                         <div>
                             <Text type={TextType.p}>{localize('views.dashboard.profileModal.version.title')}</Text>
                             <Text type={TextType.p} overrideColor classes="text-gray-500 -mt-0.5">
@@ -117,7 +118,7 @@
                     </Button>
                 </div>
             </div>
-            <HR />
+            <hr />
         {/if}
         {#if $isSoftwareProfile}
             {#if !isBackupSafe}
@@ -126,7 +127,7 @@
                         class="flex items-center justify-between bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 p-3 rounded-lg"
                     >
                         <div class="flex flex-row items-center space-x-3">
-                            <Icon icon="warning" boxed classes="text-{backupWarningColor}-500" />
+                            <BoxedIcon icon={IconEnum.Warning} classes="text-{backupWarningColor}-500" />
                             <div>
                                 <Text type={TextType.p}>{localize('views.dashboard.profileModal.backup.title')}</Text>
                                 <Text type={TextType.p} overrideColor classes="text-gray-500 -mt-0.5">
@@ -147,13 +148,12 @@
                         </Button>
                     </div>
                 </div>
-                <HR />
+                <hr />
             {/if}
             <div class="flex justify-between items-center p-3">
                 <div class="flex flex-row items-center space-x-3">
-                    <Icon
-                        icon={$isStrongholdLocked ? 'lock' : 'unlock'}
-                        boxed
+                    <BoxedIcon
+                        icon={$isStrongholdLocked ? IconEnum.Lock : IconEnum.Unlock}
                         classes="text-blue-500"
                         boxClasses="bg-blue-100 dark:bg-gray-800"
                     />
@@ -168,19 +168,18 @@
                 </div>
                 <Toggle active={$isStrongholdLocked} onClick={onStrongholdToggleClick} />
             </div>
-            <HR />
+            <hr />
         {:else}
             <div class="flex justify-between items-center p-3">
                 <div class="flex flex-row items-center space-x-3">
-                    <Icon
-                        icon="chip"
-                        boxed
-                        classes={$ledgerConnectionState === LedgerConnectionState.CorrectAppOpen
-                            ? 'text-blue-500'
-                            : 'text-gray-500 dark:text-white'}
+                    <BoxedIcon
                         boxClasses={$ledgerConnectionState === LedgerConnectionState.CorrectAppOpen
                             ? 'bg-blue-100 dark:bg-gray-800'
                             : 'bg-gray-100 dark:bg-gray-800'}
+                        icon={IconEnum.Chip}
+                        classes={$ledgerConnectionState === LedgerConnectionState.CorrectAppOpen
+                            ? 'text-blue-500'
+                            : 'text-gray-500 dark:text-white'}
                     />
                     <div>
                         <Text type={TextType.p}>{localize('views.dashboard.profileModal.hardware.title')}</Text>
@@ -190,13 +189,13 @@
                     </div>
                 </div>
             </div>
-            <HR />
+            <hr />
         {/if}
         <button
             on:click={() => onSettingsClick()}
             class="group flex flex-row space-x-3 justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full"
         >
-            <Icon icon="settings" classes="text-gray-500 group-hover:text-blue-500" />
+            <Icon icon={IconEnum.Settings} classes="text-gray-500 group-hover:text-blue-500" />
             <Text smaller classes="group-hover:text-blue-500">
                 {localize('views.dashboard.profileModal.allSettings')}
             </Text>
@@ -205,7 +204,7 @@
             on:click={() => onLogoutClick()}
             class="group flex flex-row space-x-3 justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full"
         >
-            <Icon icon="logout" classes="text-gray-500 group-hover:text-blue-500" />
+            <Icon icon={IconEnum.Logout} classes="text-gray-500 group-hover:text-blue-500" />
             <Text smaller classes="group-hover:text-blue-500">{localize('views.dashboard.profileModal.logout')}</Text>
         </button>
     </profile-modal-content>

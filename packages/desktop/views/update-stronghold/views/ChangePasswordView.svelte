@@ -15,6 +15,8 @@
     import { onMount } from 'svelte'
     import zxcvbn from 'zxcvbn'
     import { updateStrongholdRouter } from '../update-stronghold-router'
+    import { AnimationEnum } from '@auxiliary/animation'
+    import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
 
     export let oldPassword: string
     export let newPassword: string
@@ -64,6 +66,9 @@
             try {
                 isSubmitBusy = true
                 await changeStrongholdPassword(oldPassword, newPassword)
+                if ($onboardingProfile) {
+                    updateOnboardingProfile({ strongholdPassword: newPassword })
+                }
                 showAppNotification({
                     alert: true,
                     type: 'success',
@@ -164,6 +169,6 @@
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-        <Animation classes="setup-anim-aspect-ratio" animation="password-desktop" />
+        <Animation animation={AnimationEnum.PasswordDesktop} />
     </div>
 </OnboardingLayout>
