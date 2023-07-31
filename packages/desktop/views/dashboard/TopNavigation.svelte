@@ -16,7 +16,6 @@
     } from '@core/router'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { popupState } from '@auxiliary/popup'
-    import { closeDrawer } from '@desktop/auxiliary/drawer'
 
     let isBackButtonVisible = false
 
@@ -40,7 +39,6 @@
     }
 
     function onBackClick(): void {
-        closeDrawer()
         switch ($dashboardRoute) {
             case DashboardRoute.Collectibles:
                 $collectiblesRouter.previous()
