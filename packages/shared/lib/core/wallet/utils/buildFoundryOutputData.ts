@@ -1,6 +1,6 @@
 import {
     ImmutableAliasAddressUnlockCondition,
-    type BuildFoundryOutputData,
+    type FoundryOutputBuilderParams,
     type UnlockCondition,
     AliasAddress,
     SimpleTokenScheme,
@@ -8,7 +8,6 @@ import {
     Feature,
 } from '@iota/wallet'
 import { Converter } from '@core/utils'
-import { ADDRESS_TYPE_ALIAS, FEATURE_TYPE_METADATA, UNLOCK_CONDITION_IMMUTABLE_ALIAS } from '../constants'
 import { IIrc30Metadata } from '../interfaces'
 import { convertBech32ToHexAddress } from './convertBech32ToHexAddress'
 import { getSerialNumberFromAliasOutput } from './outputs/getSerialNumberFromAliasOutput'
@@ -18,18 +17,14 @@ export async function buildFoundryOutputData(
     circulatingSupply: number,
     metadata: IIrc30Metadata,
     aliasId: string
-): Promise<BuildFoundryOutputData> {
+): Promise<FoundryOutputBuilderParams> {
     const immutableAliasUnlockCondition = new ImmutableAliasAddressUnlockCondition(
         new AliasAddress(convertBech32ToHexAddress(aliasId))
     )
 
     const unlockConditions: UnlockCondition[] = [immutableAliasUnlockCondition]
 
-    const tokenScheme = new SimpleTokenScheme(
-        Converter.decimalToHex(circulatingSupply),
-        Converter.decimalToHex(0),
-        Converter.decimalToHex(totalSupply)
-    )
+    const tokenScheme = new SimpleTokenScheme(BigInt(circulatingSupply), BigInt(0), BigInt(totalSupply))
 
     const metadataFeature = new MetadataFeature(Converter.utf8ToHex(JSON.stringify(metadata)))
 

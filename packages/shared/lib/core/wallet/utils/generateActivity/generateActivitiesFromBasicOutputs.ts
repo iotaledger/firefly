@@ -12,7 +12,7 @@ import { Activity } from '@core/wallet/types'
 import { generateSingleBasicActivity } from './generateSingleBasicActivity'
 import { generateSingleConsolidationActivity } from './generateSingleConsolidationActivity'
 import { generateSingleNftActivity } from './generateSingleNftActivity'
-import { NftOutput, OutputType } from '@iota/wallet'
+import { CommonOutput, NftOutput, OutputType } from '@iota/wallet'
 
 export async function generateActivitiesFromBasicOutputs(
     processedTransaction: IProcessedTransaction,
@@ -131,11 +131,14 @@ function getBurnedNativeTokens(
 function getAllNativeTokensFromOutputs(outputs: IWrappedOutput[]): { [key: string]: number } {
     const nativeTokens: { [key: string]: number } = {}
     for (const output of outputs) {
-        for (const nativeToken of output.output.getNativeTokens() ?? []) {
-            if (!nativeTokens[nativeToken.id]) {
-                nativeTokens[nativeToken.id] = 0
+        if (output.output.type !== OutputType.Treasury) {
+            const commonOutput = output.output as CommonOutput
+            for (const nativeToken of commonOutput.getNativeTokens() ?? []) {
+                if (!nativeTokens[nativeToken.id]) {
+                    nativeTokens[nativeToken.id] = 0
+                }
+                nativeTokens[nativeToken.id] += Number(nativeToken.amount)
             }
-            nativeTokens[nativeToken.id] += Number(nativeToken.amount)
         }
     }
     return nativeTokens

@@ -1,4 +1,3 @@
-import type { IMetadataFeature } from '@iota/types'
 import { isParticipationOutput } from '@contexts/governance/utils'
 import { EXTERNALLY_OWNED_ACCOUNT } from '@core/layer-2/constants'
 import { parseLayer2MetadataForTransfer } from '@core/layer-2/utils'

@@ -1,5 +1,5 @@
 import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
-import { Output, OutputType, RegularTransactionEssence, Transaction, UTXOInput, Utils } from '@iota/wallet'
+import { Output, RegularTransactionEssence, Transaction, UTXOInput, Utils } from '@iota/wallet'
 import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransactionIdAndIndex'
 import { getDirectionFromTransaction } from '../transactions'
 import { IAccountState } from '@core/account'
@@ -18,7 +18,7 @@ export async function preprocessTransaction(
     const utxoInputs = regularTransactionEssence.inputs.map((i) => i as UTXOInput)
     const inputIds = utxoInputs.map((input) => {
         const transactionId = input.transactionId
-        const transactionOutputIndex = input.transactionInputIndex
+        const transactionOutputIndex = input.transactionOutputIndex
         return Utils.computeOutputId(transactionId, transactionOutputIndex)
     })
 
@@ -52,7 +52,7 @@ function convertTransactionOutputTypeToWrappedOutput(
     const outputId = getOutputIdFromTransactionIdAndIndex(transactionId, index)
     return {
         outputId,
-        output: outputType.getType() !== OutputType.Treasury ? outputType : undefined,
+        output: outputType,
         remainder: false,
     }
 }

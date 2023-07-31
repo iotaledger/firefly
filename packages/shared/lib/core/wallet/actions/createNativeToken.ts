@@ -22,8 +22,8 @@ export async function createNativeToken(
         const account = get(selectedAccount)
 
         const params: CreateNativeTokenParams = {
-            maximumSupply: Converter.decimalToHex(maximumSupply),
-            circulatingSupply: Converter.decimalToHex(circulatingSupply),
+            maximumSupply: BigInt(maximumSupply),
+            circulatingSupply: BigInt(circulatingSupply),
             foundryMetadata: Converter.utf8ToHex(JSON.stringify(metadata)),
         }
 
