@@ -1055,15 +1055,6 @@
                 "assetId": "Asset Id"
             }
         },
-        "importErc20Token": {
-            "title": "Import ERC20 token",
-            "property": {
-                "chainId": "Chain ID",
-                "tokenAddress": "Token address"
-            },
-            "success": "Imported {tokenSymbol} token",
-            "error": "Unable to import ERC20 token"
-        },
         "noAlias": {
             "title": "Unable to mint",
             "description": "You must own an alias output to mint native tokens. To continue, please create an alias first"
@@ -1603,11 +1594,7 @@
         "jwt": "JSON web token",
         "internalTransaction": "Internal transaction",
         "coinType":"Coin type",
-        "custom": "Custom",
-        "evmAddress": "EVM address",
-        "chain": "Chain",
-        "importErc20Token": "Import ERC20 token",
-        "importErc20TokenDescription": "Import an ERC20 token from an EVM chain"
+        "custom": "Custom"
     },
     "filters":{
         "title": "Filters",
@@ -1708,9 +1695,6 @@
             "label": "Order",
             "name": "Name",
             "phase": "Phase"
-        },
-        "network": {
-            "label": "Network"
         }
     },
     "dates": {
@@ -2041,10 +2025,6 @@
                 "short": "Unable to add proposal",
                 "long": "Unable to find proposal {proposalId} on the specified node"
             }
-        },
-        "erc20Token": {
-            "invalidAddressFormat": "Must be hexadecimal format",
-            "invalidAddressLength": "Length is invalid"
         }
     },
     "warning": {
