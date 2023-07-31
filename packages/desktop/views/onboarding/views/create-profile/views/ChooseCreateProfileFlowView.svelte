@@ -27,8 +27,10 @@
 
     async function onProfileTypeClick(createProfileType: CreateProfileType): Promise<void> {
         isBusy = { ...isBusy, [createProfileType]: true }
-        const type = createProfileType === CreateProfileType.Ledger ? ProfileType.Ledger : ProfileType.Software
-        updateOnboardingProfile({ createProfileType, type })
+        const isLedgerProfile = createProfileType === CreateProfileType.Ledger
+        const type = isLedgerProfile ? ProfileType.Ledger : ProfileType.Software
+        const strongholdVersion = isLedgerProfile ? undefined : $onboardingProfile.strongholdVersion
+        updateOnboardingProfile({ createProfileType, type, strongholdVersion })
         await initialiseProfileManagerFromOnboardingProfile()
         $createProfileRouter.next()
     }
