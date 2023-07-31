@@ -29,7 +29,7 @@
     },
     "dependencies": {
         "@amplitude/analytics-node": "^1.1.3",
-        "@sentry/electron": "^2.5.4",
+        "@sentry/electron": "^4.8.0",
         "@types/webpack-dev-server": "^4.7.2",
         "dotenv": "^16.0.3",
         "electron-dl": "^3.5.0",
