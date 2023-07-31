@@ -18,7 +18,7 @@
         "patch-package": "^7.0.0",
         "prettier": "^2.3.2",
         "prettier-plugin-svelte": "^2.7.0",
-        "retypeapp": "^2.3.0",
+        "retypeapp": "^3.1.0",
         "typescript": "^5.0.3"
     },
     "scripts": {
@@ -29,7 +29,7 @@
         "check-types": "yarn check-types:shared && yarn check-types:desktop",
         "check-types:desktop": "cd packages/desktop && tsc --pretty --noEmit",
         "check-types:shared": "cd packages/shared && tsc --project tsconfig.base.json --pretty --noEmit",
-        "docs:start": "cd docs/ && retype watch",
+        "docs:start": "cd docs/ && retype start",
         "format": "yarn format:write",
         "format:check": "prettier -c \"**/*.{ts,js,json,scss,css,svelte}\"",
         "format:write": "prettier -w \"**/*.{ts,js,json,scss,css,svelte}\"",
