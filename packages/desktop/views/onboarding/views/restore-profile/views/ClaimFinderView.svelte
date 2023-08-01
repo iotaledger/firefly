@@ -32,7 +32,7 @@
         stopPollingLedgerNanoStatus,
     } from '@core/ledger'
     import { unsubscribeFromWalletApiEvents } from '@core/profile-manager'
-    import { Animation, Button, ShimmerClaimingAccountList, Text } from '@ui'
+    import { Animation, Button, ShimmerClaimingAccountTile, Text } from '@ui'
     import { onDestroy, onMount } from 'svelte'
     import { restoreProfileRouter } from '../restore-profile-router'
     import { AnimationEnum } from '@auxiliary/animation'
@@ -195,7 +195,16 @@
         <Text type="p" secondary classes="mb-5">
             {localize('views.onboarding.shimmerClaiming.claimRewards.body')}
         </Text>
-        <ShimmerClaimingAccountList {shimmerClaimingAccounts} baseToken={$onboardingProfile?.network?.baseToken} />
+        {#if shimmerClaimingAccounts && shimmerClaimingAccounts?.length > 0}
+            <div class="flex-auto overflow-y-auto h-1 space-y-3 w-full scrollable-y">
+                {#each shimmerClaimingAccounts as shimmerClaimingAccount}
+                    <ShimmerClaimingAccountTile
+                        {shimmerClaimingAccount}
+                        baseToken={$onboardingProfile?.network?.baseToken}
+                    />
+                {/each}
+            </div>
+        {/if}
     </div>
     <div slot="leftpane__action">
         <Button
