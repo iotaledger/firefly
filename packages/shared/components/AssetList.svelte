@@ -1,7 +1,7 @@
 <script lang="ts">
     import VirtualList from '@sveltejs/svelte-virtual-list'
     import { AssetTile, Text, TextType } from 'shared/components'
-    import { Filter } from '../../../desktop/components' // TODO: refactor to match dependency platform
+    import { Filter } from '../../desktop/components'
     import { localize } from '@core/i18n'
     import { assetFilter, AccountAssets, IAsset } from '@core/wallet'
     import { isVisibleAsset } from '@core/wallet/utils/isVisibleAsset'
@@ -10,9 +10,9 @@
     export let assets: AccountAssets
 
     let filteredAssetList: IAsset[]
-    $: $assetFilter, assets, (filteredAssetList = getFilteredAssetList()), scrollToTop()
-
     let isEmptyBecauseOfFilter: boolean = false
+
+    $: $assetFilter, assets, (filteredAssetList = getFilteredAssetList()), scrollToTop()
     $: assets, (isEmptyBecauseOfFilter = getAssetList().length > 0 && filteredAssetList.length === 0)
 
     function getFilteredAssetList(): IAsset[] {
@@ -31,7 +31,7 @@
         return list
     }
 
-    function scrollToTop() {
+    function scrollToTop(): void {
         const listElement = document.querySelector('.asset-list')?.querySelector('svelte-virtual-list-viewport')
         if (listElement) {
             listElement.scroll(0, 0)

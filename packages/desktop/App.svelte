@@ -40,7 +40,6 @@
         openSettings,
     } from '@desktop/routers'
     import { downloadNextNftInQueue, nftDownloadQueue } from '@core/nfts'
-    import { closeDrawer } from '@desktop/auxiliary/drawer'
     import features from '@features/features'
     import { OnboardingRouterView } from '@views/onboarding'
 
@@ -122,14 +121,12 @@
         Platform.onEvent('menu-navigate-settings', () => {
             if ($loggedIn) {
                 closePopup()
-                closeDrawer()
                 $routerManager.openSettings()
             } else {
                 settings = true
             }
         })
         Platform.onEvent('menu-check-for-update', () => {
-            closeDrawer()
             openPopup({
                 id: PopupId.CheckForUpdates,
                 props: {
@@ -138,11 +135,9 @@
             })
         })
         Platform.onEvent('menu-error-log', () => {
-            closeDrawer()
             openPopup({ id: PopupId.ErrorLog })
         })
         Platform.onEvent('menu-diagnostics', () => {
-            closeDrawer()
             openPopup({ id: PopupId.Diagnostics })
         })
 
