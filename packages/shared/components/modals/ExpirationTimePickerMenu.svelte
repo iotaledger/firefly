@@ -1,7 +1,7 @@
 <script lang="ts">
     import { formatDate, localize } from '@core/i18n'
     import { TimePeriod } from '@core/utils'
-    import { HR, Modal, MenuItem, ExpirationDateTimePicker } from 'shared/components'
+    import { Modal, MenuItem, ExpirationDateTimePicker } from 'shared/components'
     import { fade } from 'svelte/transition'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
@@ -85,7 +85,7 @@
             onClick={() => onChooseExpirationTimeClick(TimePeriod.None)}
             selected={selected === TimePeriod.None}
         />
-        <HR />
+        <hr />
         <MenuItem
             icon={IconEnum.Calendar}
             title={localize('menus.expirationTimePicker.1hour')}
@@ -116,7 +116,7 @@
             onClick={() => onChooseExpirationTimeClick(TimePeriod.OneWeek)}
             selected={selected === TimePeriod.OneWeek}
         />
-        <HR />
+        <hr />
         <MenuItem
             icon={IconEnum.Calendar}
             title={localize('menus.expirationTimePicker.customDate.title')}

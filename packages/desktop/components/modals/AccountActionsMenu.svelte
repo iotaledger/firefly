@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { HR, MenuItem, Modal, ToggleHiddenAccountMenuItem } from '@ui'
+    import { MenuItem, MenuItemVariant, Modal, ToggleHiddenAccountMenuItem } from '@ui'
 
     import { selectedAccount } from '@core/account/stores'
     import { localize } from '@core/i18n'
@@ -41,13 +41,13 @@
         <MenuItem icon={Icon.Doc} title={localize('actions.viewBalanceBreakdown')} onClick={onViewBalanceClick} />
         <MenuItem icon={Icon.Customize} title={localize('actions.customizeAcount')} onClick={onCustomiseAccountClick} />
         <ToggleHiddenAccountMenuItem onClick={modal?.close} />
-        <HR />
+        <hr />
         {#if showDeleteAccount}
             <MenuItem
                 icon={Icon.Delete}
                 title={localize('actions.deleteAccount')}
                 onClick={onDeleteAccountClick}
-                variant="error"
+                variant={MenuItemVariant.Error}
             />
         {/if}
     </account-actions-menu>
