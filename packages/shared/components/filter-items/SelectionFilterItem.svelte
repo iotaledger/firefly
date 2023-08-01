@@ -11,11 +11,9 @@
         value: choice,
     }))
 
-    $: value = localize(`${filterUnit.localeKey}.${filterUnit.selected}`)
-
     function onSelect(item: IDropdownItem<string>): void {
         filterUnit.selected = item.value
     }
 </script>
 
-<Dropdown {value} items={choices} {onSelect} small />
+<Dropdown value={filterUnit.selected} items={choices} {onSelect} small />

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Modal, SelectorInput, IOption, NftImageOrIconBox } from 'shared/components'
+    import { Modal, SelectorInput, IOption, NftImageOrIconBox, NftSize } from 'shared/components'
     import { ownedNfts } from '@core/nfts'
     import { getNftByIdFromAllAccountNfts } from '@core/nfts'
     import { selectedAccountIndex } from '@core/account'
@@ -52,5 +52,8 @@
     options={nftOptions}
     let:option
 >
-    <NftImageOrIconBox nftId={option.value} size="small" />
+    <NftImageOrIconBox
+        nft={getNftByIdFromAllAccountNfts($selectedAccountIndex, String(option?.value))}
+        size={NftSize.Small}
+    />
 </SelectorInput>
