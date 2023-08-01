@@ -27,7 +27,7 @@
     import { showAppNotification } from '@auxiliary/notification'
     import { closePopup, openPopup, PopupId, popupState } from '@auxiliary/popup'
     import { getLocalisedMenuItems } from './lib/helpers'
-    import { ToastContainer, Transition } from '@ui'
+    import { NotificationManager, Transition } from '@ui'
     import { TitleBar, Popup } from '@components'
     import { Dashboard, LoginRouter, Settings, Splash } from '@views'
     import {
@@ -40,7 +40,6 @@
         openSettings,
     } from '@desktop/routers'
     import { downloadNextNftInQueue, nftDownloadQueue } from '@core/nfts'
-    import { closeDrawer } from '@desktop/auxiliary/drawer'
     import features from '@features/features'
     import { OnboardingRouterView } from '@views/onboarding'
 
@@ -122,14 +121,12 @@
         Platform.onEvent('menu-navigate-settings', () => {
             if ($loggedIn) {
                 closePopup()
-                closeDrawer()
                 $routerManager.openSettings()
             } else {
                 settings = true
             }
         })
         Platform.onEvent('menu-check-for-update', () => {
-            closeDrawer()
             openPopup({
                 id: PopupId.CheckForUpdates,
                 props: {
@@ -138,11 +135,9 @@
             })
         })
         Platform.onEvent('menu-error-log', () => {
-            closeDrawer()
             openPopup({ id: PopupId.ErrorLog })
         })
         Platform.onEvent('menu-diagnostics', () => {
-            closeDrawer()
             openPopup({ id: PopupId.Diagnostics })
         })
 
@@ -164,6 +159,10 @@
                 message: $_('notifications.deepLinkingRequest.receivedWhileLoggedOut'),
             })
         }
+    }
+
+    function onCloseSettingsClick(): void {
+        settings = false
     }
 </script>
 
@@ -197,9 +196,9 @@
                 <OnboardingRouterView />
             {/if}
             {#if settings}
-                <Settings handleClose={() => (settings = false)} />
+                <Settings handleClose={onCloseSettingsClick} />
             {/if}
-            <ToastContainer classes="absolute right-5 bottom-5 w-100" />
+            <NotificationManager />
         {/if}
     </app-body>
 </app-container>

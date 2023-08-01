@@ -17,6 +17,7 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { OnboardingRouter, onboardingRouter } from '@views/onboarding'
     import { onMount } from 'svelte'
+    import { Logo as LogoEnum } from 'shared/components/enums'
 
     function onContinueClick(profileId: string): void {
         loadPersistedProfileIntoActiveProfile(profileId)
@@ -50,7 +51,9 @@
 </script>
 
 <section class="flex flex-col justify-center items-center h-full bg-white dark:bg-gray-900 px-40 pt-48 pb-20">
-    <Logo width="64px" logo="logo-firefly" classes="absolute top-20" />
+    <logo-wrapper class="absolute top-20">
+        <Logo width="64px" logo={LogoEnum.Firefly} />
+    </logo-wrapper>
     <div
         class="profiles-wrapper h-auto items-start justify-center w-full {!$mobile &&
             'overlay-scrollbar'} flex flex-row flex-wrap"

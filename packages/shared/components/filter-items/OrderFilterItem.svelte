@@ -17,9 +17,6 @@
         value: choice,
     }))
 
-    $: value = localize(`${filterUnit.localeKey}.${filterUnit.selected}`)
-    $: ascDescvalue = localize(`filters.ascDesc.${filterUnit.ascDesc}`)
-
     function onSelect(item: IDropdownItem<string>): void {
         filterUnit.selected = item.value
     }
@@ -30,6 +27,6 @@
 </script>
 
 <div class="flex flex-row justify-between space-x-2">
-    <Dropdown {value} items={choices} {onSelect} small />
-    <Dropdown value={ascDescvalue} items={ascDescChoices} onSelect={onSelectAscDesc} small />
+    <Dropdown value={filterUnit.selected} items={choices} {onSelect} small />
+    <Dropdown value={filterUnit.ascDesc} items={ascDescChoices} onSelect={onSelectAscDesc} small />
 </div>

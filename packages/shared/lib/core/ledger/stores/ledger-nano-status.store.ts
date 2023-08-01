@@ -1,14 +1,16 @@
 import { LedgerNanoStatus } from '@iota/wallet'
 import { writable } from 'svelte/store'
 
-export const ledgerNanoStatus = writable<LedgerNanoStatus>({
-    app: null,
+const DEFAULT_LEDGER_STATUS: LedgerNanoStatus = {
+    app: undefined,
     blindSigningEnabled: false,
-    bufferSize: null,
+    bufferSize: undefined,
     connected: false,
-    device: null,
+    device: undefined,
     locked: false,
-})
+}
+
+export const ledgerNanoStatus = writable<LedgerNanoStatus>(DEFAULT_LEDGER_STATUS)
 
 export function updateLedgerNanoStatus(payload: Partial<LedgerNanoStatus>): void {
     return ledgerNanoStatus.update((state) => {
@@ -21,12 +23,5 @@ export function updateLedgerNanoStatus(payload: Partial<LedgerNanoStatus>): void
 }
 
 export function resetLedgerNanoStatus(): void {
-    ledgerNanoStatus.set({
-        app: null,
-        blindSigningEnabled: false,
-        bufferSize: null,
-        connected: false,
-        device: null,
-        locked: false,
-    })
+    ledgerNanoStatus.set(DEFAULT_LEDGER_STATUS)
 }

@@ -13,8 +13,6 @@
         value: choice,
     }))
 
-    $: value = localize(`${filterUnit.localeKey}.${filterUnit.selected}`)
-
     function onSelect(item: IDropdownItem<NumberFilterOption>): void {
         filterUnit.selected = item.value
 
@@ -38,7 +36,7 @@
     }
 </script>
 
-<Dropdown {value} items={choices} {onSelect} small />
+<Dropdown value={filterUnit.selected} items={choices} {onSelect} small />
 
 {#if filterUnit.selected}
     <div class="flex flex-row items-center space-x-2 mt-2">
