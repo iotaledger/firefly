@@ -1,9 +1,10 @@
 <script lang="ts">
     import SvelteMarkdown from 'svelte-markdown'
+    import { SvelteComponent } from 'svelte'
     import { ParagraphBlock, LinkBlock } from 'shared/components'
     export let text: string
 
-    const renderers = {
+    const renderers: Record<string, typeof SvelteComponent | null> = {
         heading: ParagraphBlock,
         paragraph: ParagraphBlock,
         image: ParagraphBlock,
@@ -28,12 +29,12 @@
     }
 </script>
 
-<div class="markdown">
+<markdown-wrapper>
     <SvelteMarkdown source={text} {renderers} />
-</div>
+</markdown-wrapper>
 
 <style lang="scss">
-    .markdown {
+    markdown-wrapper {
         :global(p) {
             @apply text-gray-600;
         }
