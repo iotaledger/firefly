@@ -9,4 +9,6 @@
     }
 </script>
 
-<Link classes="break-all" onClick={onLinkClick}><slot /></Link>
+<span class="break-all">
+    <Link on:click={onLinkClick}><slot /></Link>
+</span>

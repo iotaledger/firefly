@@ -57,7 +57,7 @@
     </div>
     <div slot="footer" class="space-y-8">
         <div class="flex flex-col space-y-4">
-            <Link onClick={onShowLegalClick}>
+            <Link on:click={onShowLegalClick}>
                 {localize('views.onboarding.appSetup.legal.title')}
             </Link>
             <div class="flex flex-row items-center space-x-3">
