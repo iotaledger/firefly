@@ -39,7 +39,7 @@
 
     function getTitleText(): string {
         if (tos && privacyPolicy) {
-            return 'views.legal.title'
+            return 'popups.legalUpdate.tosAndPrivPolicyBody'
         } else if (tos) {
             return 'popups.legalUpdate.tosTitle'
         } else if (privacyPolicy) {
