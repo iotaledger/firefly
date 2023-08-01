@@ -52,6 +52,16 @@
                   },
               ]
             : []),
+        ...(features?.vesting?.enabled
+            ? [
+                  {
+                      icon: IconEnum.Calendar,
+                      label: localize('tabs.vesting'),
+                      route: DashboardRoute.Vesting,
+                      onClick: openVesting,
+                  },
+              ]
+            : []),
         ...(features?.developerTools?.enabled && $activeProfile?.isDeveloperProfile
             ? [
                   {
@@ -83,6 +93,10 @@
         $dashboardRouter.goTo(DashboardRoute.Developer)
     }
 
+    function openVesting(): void {
+        resetAllRouters()
+        $dashboardRouter.goTo(DashboardRoute.Vesting)
+    }
     function resetAllRouters(): void {
         $dashboardRouter.reset()
         $collectiblesRouter.reset()

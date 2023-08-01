@@ -2162,7 +2162,8 @@
         "governance": "Governance",
         "developer": "Developer",
         "tokens": "Tokens",
-        "activity": "Activity"
+        "activity": "Activity",
+        "vesting": "Vesting"
     },
     "pills": {
         "stake": {
