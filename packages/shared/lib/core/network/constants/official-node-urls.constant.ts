@@ -6,6 +6,7 @@ export const OFFICIAL_NODE_URLS: Readonly<{ [key in NetworkId]?: string[] }> = {
         'https://chrysalis-nodes.iota.cafe',
         'https://iota-node.tanglebay.com',
     ],
+    [NetworkId.IotaTestnet]: ['https://api.iota-alphanet.iotaledger.net'],
     [NetworkId.Shimmer]: ['https://api.shimmer.network'],
     [NetworkId.Testnet]: ['https://api.testnet.shimmer.network'],
 }
