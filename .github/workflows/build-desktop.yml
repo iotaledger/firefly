@@ -89,6 +89,10 @@ jobs:
               run: echo "LIBCLANG_PATH=$((gcm clang).source -replace "clang.exe")" >> $env:GITHUB_ENV
               if: matrix.os == 'windows-latest'
 
+            - name: Set deployment target (macOS)
+              run: echo "MACOSX_DEPLOYMENT_TARGET=10.13" >> $GITHUB_ENV
+              if: matrix.os == 'macos-13'
+
             - name: Update node-gyp to 9.3.1 and apply patch (Windows)
               # The node-gyp bundled with Node 14.x does not support VS 2022
               # https://github.com/nodejs/node-gyp/blob/main/docs/Updating-npm-bundled-node-gyp.md#windows
@@ -111,9 +115,16 @@ jobs:
               working-directory: packages/backend/bindings/node/native
               if: matrix.os == 'windows-latest'
 
-            - name: Set deployment target (macOS)
-              run: echo "MACOSX_DEPLOYMENT_TARGET=10.13" >> $GITHUB_ENV
-              if: matrix.os == 'macos-13'
+            # This step is required to support macOS 10.13
+            - name: Apply librocksdb-sys patch (macOS)
+              run: |
+                cargo install cargo-patch
+                cp ${{ github.workspace }}/manual-patches/rocksdb_faligned_allocation.patch .
+                git apply --ignore-space-change --ignore-whitespace ${{ github.workspace }}/manual-patches/macos_cargo_toml.patch
+                cat Cargo.toml
+                cargo patch
+              working-directory: packages/backend/bindings/node/native
+              if: ${{ startsWith(matrix.os, 'macos') }}
 
             - name: Install required packages (Linux)
               run: |

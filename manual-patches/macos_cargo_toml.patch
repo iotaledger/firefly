@@ -1,0 +1,17 @@
+diff --git a/packages/backend/bindings/node/native/Cargo.toml b/packages/backend/bindings/node/native/Cargo.toml
+index 1fd63b42c..9e8f1fc71 100644
+--- a/packages/backend/bindings/node/native/Cargo.toml
++++ b/packages/backend/bindings/node/native/Cargo.toml
+@@ -26,3 +26,12 @@ firefly-actor-system = { path = "../../.." }
+ [profile.release]
+ # Build with debug symbols included
+ debug = true
++
++[package.metadata.patch.librocksdb-sys]
++version = "0.11.0+8.3.2"
++patches = [
++    { path = "rocksdb_faligned_allocation.patch", source = "GithubPrDiff" },
++]
++
++[patch.crates-io]
++librocksdb-sys = { path = "./target/patch/librocksdb-sys-0.11.0+8.3.2"}
