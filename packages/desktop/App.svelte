@@ -161,7 +161,7 @@
         }
     }
 
-    function handleSettingClose(): void {
+    function onCloseSettingsClick(): void {
         settings = false
     }
 </script>
@@ -196,7 +196,7 @@
                 <OnboardingRouterView />
             {/if}
             {#if settings}
-                <Settings handleClose={handleSettingClose} />
+                <Settings handleClose={onCloseSettingsClick} />
             {/if}
             <NotificationManager />
         {/if}
