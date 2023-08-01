@@ -9,7 +9,7 @@ import { IAccount } from '@core/account'
 const profileManagers = {}
 
 const api: IApi = {
-    async createAccountManager(id: string, _: WalletOptions): Promise<ProfileManagerMock> {
+    async createWallet(id: string, _: WalletOptions): Promise<ProfileManagerMock> {
         const manager = new ProfileManagerMock(id)
 
         profileManagers[id] = manager
@@ -21,7 +21,7 @@ const api: IApi = {
             resolve(new AccountMock())
         })
     },
-    deleteAccountManager(id: string) {
+    deleteWallet(id: string) {
         if (id && id in profileManagers) {
             delete profileManagers[id]
         }

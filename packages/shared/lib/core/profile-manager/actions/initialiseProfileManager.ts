@@ -15,7 +15,7 @@ export async function initialiseProfileManager(
 ): Promise<IProfileManager> {
     id = id ?? generateRandomId()
 
-    const profileManager = await api.createAccountManager(id, {
+    const profileManager = await api.createWallet(id, {
         storagePath,
         // TODO-sdk is this the right fix for the line ?
         // ...(clientOptions && (clientOptions?.nodes?.length > 0 || clientOptions?.primaryNode) && { clientOptions }),

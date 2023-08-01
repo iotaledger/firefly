@@ -6,10 +6,9 @@ import { IProfileManager } from './profile-manager.interface'
 import { RecoverAccountsPayload } from './recover-account-payload.interface'
 
 export interface IApi {
-    // TODO-sdk: These should be renamed to createWallet etc... to match naming in sdk
-    createAccountManager(id: string, options: WalletOptions): Promise<IProfileManager>
+    createWallet(id: string, options: WalletOptions): Promise<IProfileManager>
     createAccount(managerId: string, payload: CreateAccountPayload): Promise<IAccount>
-    deleteAccountManager(id: string): void
+    deleteWallet(id: string): void
     getAccount(profileManagerId: string, index: number): Promise<IAccount>
     getAccounts(profileManagerId: string): Promise<IAccount[]>
     recoverAccounts(profileManagerId: string, payload: RecoverAccountsPayload): Promise<IAccount[]>

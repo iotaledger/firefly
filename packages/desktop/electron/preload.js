@@ -97,11 +97,11 @@ try {
     // This workaround exposes the classes through factory methods
     // The factory method also copies all the prototype methods to the object so that it gets passed through the bridge
     contextBridge.exposeInMainWorld('__WALLET__API__', {
-        createAccountManager(id, options) {
-            const manager = new WalletApi.AccountManager(options)
+        createWallet(id, options) {
+            const manager = new WalletApi.Wallet(options)
             manager.id = id
             profileManagers[id] = manager
-            bindMethodsAcrossContextBridge(WalletApi.AccountManager.prototype, manager)
+            bindMethodsAcrossContextBridge(WalletApi.Wallet.prototype, manager)
             return manager
         },
         async createAccount(managerId, payload) {
@@ -110,7 +110,7 @@ try {
             bindMethodsAcrossContextBridge(WalletApi.Account.prototype, account)
             return account
         },
-        deleteAccountManager(id) {
+        deleteWallet(id) {
             if (id && id in profileManagers) {
                 delete profileManagers[id]
             }
