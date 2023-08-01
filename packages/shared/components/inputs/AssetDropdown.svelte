@@ -1,6 +1,6 @@
 <script lang="ts">
     import { IAsset, visibleSelectedAccountAssets } from '@core/wallet'
-    import { AssetTile, Icon, Text, AssetIcon, FontWeight } from 'shared/components'
+    import { AssetTile, Icon, Text, AssetIcon, FontWeight, AssetIconSize } from 'shared/components'
     import { clickOutside } from '@core/utils'
     import { activeProfile } from '@core/profile'
     import { Icon as IconEnum } from '@auxiliary/icon'
@@ -49,7 +49,7 @@
             class:cursor-pointer={!isReadonly}
             on:click={onDropdownClick}
         >
-            <AssetIcon small {asset} />
+            <AssetIcon size={AssetIconSize.Small} {asset} />
             <div class="w-full relative" style="max-width: 75px;">
                 <Text
                     color="gray-600"
