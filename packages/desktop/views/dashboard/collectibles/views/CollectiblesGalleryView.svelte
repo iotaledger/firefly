@@ -5,7 +5,7 @@
     import { nftSearchTerm, queriedNfts, ownedNfts } from '@core/nfts'
     import { FontWeight, Illustration, Text, SearchInput, NftGalleryItem, Button, ButtonSize } from 'shared/components'
 
-    function handleReceiveFundsPopup(): void {
+    function onDepositNftClick(): void {
         openPopup({
             id: PopupId.ReceiveAddress,
             props: {
@@ -58,7 +58,7 @@
                         >{localize('views.collectibles.gallery.emptyDescription')}</Text
                     >
                 </div>
-                <Button size={ButtonSize.Large} onClick={handleReceiveFundsPopup}>
+                <Button size={ButtonSize.Large} onClick={onDepositNftClick}>
                     {localize('actions.depositNft')}
                 </Button>
             </div>
