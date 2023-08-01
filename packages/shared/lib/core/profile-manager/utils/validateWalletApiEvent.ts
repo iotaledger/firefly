@@ -1,28 +1,29 @@
 import { localize } from '@core/i18n'
 
-import { WalletApiEvent } from '../enums'
+import { Event } from '@iota/wallet'
+import { WalletEventType } from '@iota/wallet/out/types'
+
 import { WalletApiEventError, WalletApiEventValidationError } from '../errors'
 import { IWalletApiEventPayloadWrapper } from '../interfaces'
 
 export function validateWalletApiEvent(
     error: Error,
-    rawEvent: string,
-    apiEvent: WalletApiEvent
+    rawEvent: Event,
+    apiEvent: WalletEventType
 ): IWalletApiEventPayloadWrapper {
     if (error) {
         throw new WalletApiEventError(error)
     } else {
         /* eslint-disable-next-line prefer-const */
-        let { accountIndex, event } = JSON.parse(rawEvent)
+        const { accountIndex, event } = rawEvent
 
-        accountIndex = Number(accountIndex)
         if (Number.isNaN(accountIndex)) {
             throw new WalletApiEventValidationError(
                 localize('error.walletApiEvent.invalidAccountIndex', { values: { eventName: apiEvent } })
             )
         }
 
-        const payload = event[apiEvent]
+        const payload = event.type === apiEvent ? event : undefined
         if (!payload) {
             throw new WalletApiEventValidationError(
                 localize('error.walletApiEvent.invalidPayload', { values: { eventName: apiEvent } })
