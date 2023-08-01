@@ -1,5 +1,3 @@
-export { default as AssetIcon } from './AssetIcon.svelte'
-export { default as AssetList } from './AssetList.svelte'
 export { default as ConditionsOfUse } from './ConditionsOfUse.svelte'
 export { default as DateInputButton } from './DateInputButton.svelte'
 export { default as ExpirationTimePicker } from './ExpirationTimePicker.svelte'
