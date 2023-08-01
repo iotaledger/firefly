@@ -112,7 +112,7 @@ jobs:
               if: matrix.os == 'windows-latest'
 
             - name: Set deployment target (macOS)
-              run: echo "MACOSX_DEPLOYMENT_TARGET=10.12" >> $GITHUB_ENV
+              run: echo "MACOSX_DEPLOYMENT_TARGET=10.13" >> $GITHUB_ENV
               if: matrix.os == 'macos-13'
 
             - name: Install required packages (Linux)
