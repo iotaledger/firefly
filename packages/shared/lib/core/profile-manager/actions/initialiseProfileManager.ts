@@ -1,4 +1,4 @@
-import { IClientOptions, SecretManager } from '@iota/wallet/out/types'
+import { IClientOptions, SecretManagerType } from '@iota/wallet/out/types'
 import { CoinType } from '@iota/wallet/out/types'
 
 import { generateRandomId } from '@core/utils'
@@ -10,20 +10,16 @@ export async function initialiseProfileManager(
     storagePath: string,
     coinType: CoinType,
     clientOptions?: IClientOptions,
-    secretManager?: SecretManager,
+    secretManager?: SecretManagerType,
     id?: string
 ): Promise<IProfileManager> {
     id = id ?? generateRandomId()
 
     const profileManager = await api.createWallet(id, {
         storagePath,
-        // TODO-sdk is this the right fix for the line ?
-        // ...(clientOptions && (clientOptions?.nodes?.length > 0 || clientOptions?.primaryNode) && { clientOptions }),
-        ...clientOptions,
+        clientOptions,
         coinType,
-        // TODO-sdk is this the right fix for the line ?
-        // ...(secretManager && { secretManager }),
-        ...secretManager,
+        secretManager,
     })
     return profileManager
 }
