@@ -1,19 +1,14 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-
-    import { Modal, MenuItem, MeatballMenuButton } from '@ui'
-
+    import { Modal, MenuItem, MeatballMenuButton, MenuItemVariant } from '@ui'
     import { selectedAccount } from '@core/account/stores'
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
-
     import { IProposal } from '@contexts/governance'
     import { participationOverviewForSelectedAccount } from '@contexts/governance/stores'
     import { isVotingForSelectedProposal } from '@contexts/governance/utils'
-
     import { Icon } from '@auxiliary/icon'
     import { openPopup, PopupId } from '@auxiliary/popup'
-
     import features from '@features/features'
 
     export let proposal: IProposal
@@ -36,7 +31,7 @@
             icon: Icon.Delete,
             title: isBusy ? localize('views.governance.details.fetching') : localize('actions.removeProposal'),
             onClick: onRemoveProposalClick,
-            variant: 'error',
+            variant: MenuItemVariant.Error,
             isLoading: isBusy,
             disabled: getDisabled(proposal, isVotingForProposal),
             enableTooltipVisible: isVotingForProposal !== undefined,

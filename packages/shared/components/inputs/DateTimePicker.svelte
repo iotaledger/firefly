@@ -94,8 +94,9 @@
 <style lang="scss">
     @media (prefers-color-scheme: dark) {
         :global(.datetime-picker-colors) {
+            --sdt-primary: theme('colors.blue.500');
             --sdt-color: theme('colors.white');
-            --sdt-btn-bg-hover: theme('colors.gray.800');
+            --sdt-bg-today: var(--sdt-primary);
             --sdt-btn-bg-hover: theme('colors.gray.800');
             --sdt-btn-header-bg-hover: theme('colors.gray.800');
             --sdt-clock-bg: theme('colors.gray.800');
