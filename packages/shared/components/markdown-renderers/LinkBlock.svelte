@@ -2,7 +2,7 @@
     import { openUrlInBrowser } from '@core/app/utils'
     import { Link } from '@ui'
 
-    export let href = ''
+    export let href: string = ''
 
     function onLinkClick(): void {
         openUrlInBrowser(href)
