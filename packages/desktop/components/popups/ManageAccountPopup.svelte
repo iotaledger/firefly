@@ -48,12 +48,12 @@
     }
 </script>
 
-<manage-account-popup class="flex flex-col h-full justify-between">
+<manage-account-popup class="flex flex-col h-full justify-between space-y-4">
     <div>
         <title-container class="flex flex-row mb-6">
             <Text type={TextType.h5}>{localize('general.manageAccount')}</Text>
         </title-container>
-        <manage-account-popup-inputs class="w-full flex flex-col justify-between">
+        <manage-account-popup-inputs class="w-full flex flex-col justify-between space-y-4">
             <Input
                 {error}
                 bind:value={accountAlias}
@@ -61,14 +61,8 @@
                 autofocus
                 submitHandler={onSaveClick}
                 disabled={isBusy}
-                classes="mb-4"
             />
-            <ColorPicker
-                title={localize('general.accountColor')}
-                bind:active={color}
-                classes="mb-4"
-                isCustomColorEnabled
-            />
+            <ColorPicker title={localize('general.accountColor')} bind:active={color} isCustomColorEnabled />
         </manage-account-popup-inputs>
     </div>
     <manage-account-popup-actions class="flex flex-row justify-between mt-2 px-2">
