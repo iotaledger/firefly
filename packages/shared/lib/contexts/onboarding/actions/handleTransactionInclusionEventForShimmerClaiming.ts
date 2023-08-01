@@ -1,7 +1,10 @@
 import { get } from 'svelte/store'
 
+import { Event, TransactionInclusionWalletEvent } from '@iota/wallet'
+import { WalletEventType } from '@iota/wallet/out/types'
+
 import { localize } from '@core/i18n'
-import { ITransactionInclusionEventPayload, validateWalletApiEvent, WalletApiEvent } from '@core/profile-manager'
+import { validateWalletApiEvent } from '@core/profile-manager'
 import { InclusionState, MissingTransactionIdError } from '@core/wallet'
 import { showAppNotification } from '@auxiliary/notification'
 
@@ -10,18 +13,20 @@ import { MissingShimmerClaimingAccountError } from '../errors'
 import { IShimmerClaimingAccount } from '../interfaces'
 import { onboardingProfile, shimmerClaimingTransactions, updateShimmerClaimingAccount } from '../stores'
 
-export function handleTransactionInclusionEventForShimmerClaiming(error: Error, rawEvent: string): void {
-    const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletApiEvent.TransactionInclusion)
-    /* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
-    handleTransactionInclusionEventForShimmerClaimingInternal(
-        accountIndex,
-        payload as ITransactionInclusionEventPayload
-    )
+export function handleTransactionInclusionEventForShimmerClaiming(error: Error, rawEvent: Event): void {
+    const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletEventType.TransactionInclusion)
+    const type = payload.type
+    if (type === WalletEventType.TransactionInclusion) {
+        handleTransactionInclusionEventForShimmerClaimingInternal(
+            accountIndex,
+            payload as TransactionInclusionWalletEvent
+        )
+    }
 }
 
 export function handleTransactionInclusionEventForShimmerClaimingInternal(
     accountIndex: number,
-    payload: ITransactionInclusionEventPayload
+    payload: TransactionInclusionWalletEvent
 ): void {
     const _shimmerClaimingTransactions = get(shimmerClaimingTransactions)
     const profileId = get(onboardingProfile)?.id

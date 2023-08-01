@@ -17,6 +17,7 @@
     import { updateStrongholdRouter } from '../update-stronghold-router'
     import { TextHintVariant } from 'shared/components/enums'
     import { AnimationEnum } from '@auxiliary/animation'
+    import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
 
     export let oldPassword: string
     export let newPassword: string
@@ -66,6 +67,9 @@
             try {
                 isSubmitBusy = true
                 await changeStrongholdPassword(oldPassword, newPassword)
+                if ($onboardingProfile) {
+                    updateOnboardingProfile({ strongholdPassword: newPassword })
+                }
                 showAppNotification({
                     alert: true,
                     type: 'success',
