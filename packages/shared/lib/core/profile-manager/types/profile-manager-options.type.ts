@@ -1,5 +1,5 @@
 import { ClientOptions } from '@core/network/interfaces'
-import { WalletOptions } from '@iota/wallet'
+import { WalletOptions } from '@iota/wallet/out/types'
 
 export type ProfileManagerOptions = Omit<WalletOptions, 'clientOptions'> & {
     clientOptions: ClientOptions

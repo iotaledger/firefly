@@ -1,4 +1,4 @@
-import type { SyncOptions } from '@iota/wallet'
+import type { SyncOptions } from '@iota/wallet/out/types'
 
 export const DEFAULT_SYNC_OPTIONS: SyncOptions = {
     account: {

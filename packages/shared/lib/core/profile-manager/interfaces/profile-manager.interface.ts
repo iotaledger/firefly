@@ -5,7 +5,7 @@ import type {
     INodeInfoWrapper,
     SyncOptions,
     WalletEvent,
-} from '@iota/wallet'
+} from '@iota/wallet/out/types'
 import { WalletEventType } from '@iota/wallet/out/types'
 
 import { IAccount } from '@core/account/interfaces'

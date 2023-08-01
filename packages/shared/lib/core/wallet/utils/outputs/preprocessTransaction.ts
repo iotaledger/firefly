@@ -1,5 +1,5 @@
 import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
-import { Output, RegularTransactionEssence, Transaction, UTXOInput, Utils } from '@iota/wallet'
+import { Output, RegularTransactionEssence, Transaction, UTXOInput, Utils } from '@iota/wallet/out/types'
 import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransactionIdAndIndex'
 import { getDirectionFromTransaction } from '../transactions'
 import { IAccountState } from '@core/account'

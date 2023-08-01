@@ -15,7 +15,7 @@ import {
     getStorageDepositFromOutput,
     getTagFromOutput,
 } from './helper'
-import { BasicOutput } from '@iota/wallet'
+import { BasicOutput } from '@iota/wallet/out/types'
 
 export async function generateSingleBasicActivity(
     account: IAccountState,

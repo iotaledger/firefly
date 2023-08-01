@@ -1,4 +1,4 @@
-import type { ParticipationEventStatus, Question } from '@iota/wallet'
+import type { ParticipationEventStatus, Question } from '@iota/wallet/out/types'
 import { IOrganization, ProposalError } from '..'
 import { ProposalStatus, ProposalType } from '../enums'
 

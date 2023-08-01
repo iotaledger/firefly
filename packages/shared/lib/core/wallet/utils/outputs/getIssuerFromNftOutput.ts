@@ -1,4 +1,4 @@
-import { Address, FeatureType, IssuerFeature, NftOutput } from '@iota/wallet'
+import { Address, FeatureType, IssuerFeature, NftOutput } from '@iota/wallet/out/types'
 
 export function getIssuerFromNftOutput(output: NftOutput): Address {
     const metadata = output

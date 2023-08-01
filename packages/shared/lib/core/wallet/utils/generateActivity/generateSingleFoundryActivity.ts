@@ -18,7 +18,7 @@ import {
     ImmutableAliasAddressUnlockCondition,
     SimpleTokenScheme,
     UnlockConditionType,
-} from '@iota/wallet'
+} from '@iota/wallet/out/types'
 
 export async function generateSingleFoundryActivity(
     account: IAccountState,

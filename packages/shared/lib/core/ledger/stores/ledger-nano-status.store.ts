@@ -1,4 +1,4 @@
-import { LedgerNanoStatus } from '@iota/wallet'
+import { LedgerNanoStatus } from '@iota/wallet/out/types'
 import { writable } from 'svelte/store'
 
 const DEFAULT_LEDGER_STATUS: LedgerNanoStatus = {

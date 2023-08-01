@@ -3,7 +3,7 @@ import { ActivityType } from '@core/wallet/enums'
 import { getNativeTokenFromOutput, isOutputAsync } from '..'
 import { IWrappedOutput } from '../../interfaces'
 import { getActivityTypeFromOutput, getAmountFromOutput, getStorageDepositFromOutput } from '../generateActivity/helper'
-import { BasicOutput } from '@iota/wallet'
+import { BasicOutput } from '@iota/wallet/out/types'
 
 export async function activityOutputContainsValue(
     account: IAccountState,

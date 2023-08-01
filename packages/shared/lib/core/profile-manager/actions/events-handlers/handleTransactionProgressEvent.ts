@@ -1,5 +1,5 @@
 import { get } from 'svelte/store'
-import { Event, TransactionProgressWalletEvent, PreparedTransactionEssenceHashProgress } from '@iota/wallet'
+import { Event, TransactionProgressWalletEvent, PreparedTransactionEssenceHashProgress } from '@iota/wallet/out/types'
 import { WalletEventType, TransactionProgressType } from '@iota/wallet/out/types'
 
 import { selectedAccountIndex } from '@core/account'

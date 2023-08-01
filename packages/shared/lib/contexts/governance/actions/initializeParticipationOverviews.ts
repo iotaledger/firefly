@@ -1,5 +1,5 @@
 import { activeAccounts } from '@core/profile'
-import { ParticipationOverview } from '@iota/wallet'
+import { ParticipationOverview } from '@iota/wallet/out/types'
 import { get } from 'svelte/store'
 import { DEFAULT_PARTICIPATION_OVERVIEW } from '../constants'
 import { allParticipationOverviews } from '../stores'

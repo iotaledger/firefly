@@ -1,4 +1,4 @@
-import { WalletOptions, CreateAccountPayload } from '@iota/wallet'
+import { WalletOptions, CreateAccountPayload } from '@iota/wallet/out/types'
 
 import { IAccount } from '@core/account'
 

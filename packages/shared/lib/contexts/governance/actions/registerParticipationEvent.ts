@@ -3,7 +3,7 @@ import type {
     ParticipationEventWithNodes,
     ParticipationEventId,
     ParticipationEventRegistrationOptions,
-} from '@iota/wallet'
+} from '@iota/wallet/out/types'
 import { IAccountState } from '@core/account'
 import { addOrUpdateProposalToRegisteredProposals } from '../stores'
 import { createProposalFromEvent } from '@contexts/governance'

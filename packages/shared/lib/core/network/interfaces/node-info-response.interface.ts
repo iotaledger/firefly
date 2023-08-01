@@ -1,4 +1,4 @@
-import { INodeInfo } from '@iota/wallet'
+import { INodeInfo } from '@iota/wallet/out/types'
 
 export interface INodeInfoResponse {
     nodeInfo: INodeInfo

@@ -1,4 +1,4 @@
-import { Event, SpentOutputWalletEvent } from '@iota/wallet'
+import { Event, SpentOutputWalletEvent } from '@iota/wallet/out/types'
 import { WalletEventType } from '@iota/wallet/out/types'
 
 import { syncBalance } from '@core/account/actions/syncBalance'

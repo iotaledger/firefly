@@ -4,7 +4,7 @@ import { IParticipation, IWrappedOutput } from '@core/wallet/interfaces'
 import { parseGovernanceMetadata } from '../../parseGovernanceMetadata'
 import { getAmountFromOutput } from './getAmountFromOutput'
 import { getMetadataFromOutput } from './getMetadataFromOutput'
-import { Output } from '@iota/wallet'
+import { Output } from '@iota/wallet/out/types'
 
 interface IGovernanceInfo {
     governanceAction: GovernanceAction

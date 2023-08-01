@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Button, HTMLButtonType, Text, TextInput, TextType } from 'shared/components'
-    import type { Auth } from '@iota/wallet'
+    import type { Auth } from '@iota/wallet/out/types'
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
     import { closePopup } from '@auxiliary/popup'

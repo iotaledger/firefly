@@ -12,7 +12,7 @@ import {
     getStorageDepositFromOutput,
     getTagFromOutput,
 } from './helper'
-import { NftOutput } from '@iota/wallet'
+import { NftOutput } from '@iota/wallet/out/types'
 
 export async function generateSingleNftActivity(
     account: IAccountState,

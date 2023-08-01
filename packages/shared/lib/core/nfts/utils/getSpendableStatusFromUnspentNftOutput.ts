@@ -1,7 +1,7 @@
 import { UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN } from '@core/wallet/constants'
 import { getExpirationUnixTimeFromOutput, getRecipientAddressFromOutput, isOutputAsync } from '@core/wallet/utils'
 import { getTimelockDateFromOutput } from '@core/wallet/utils/generateActivity/helper'
-import { NftOutput } from '@iota/wallet'
+import { NftOutput } from '@iota/wallet/out/types'
 
 export function getSpendableStatusFromUnspentNftOutput(
     accountAddress: string,

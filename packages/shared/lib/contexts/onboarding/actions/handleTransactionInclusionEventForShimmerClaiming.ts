@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 
-import { Event, TransactionInclusionWalletEvent } from '@iota/wallet'
+import { Event, TransactionInclusionWalletEvent } from '@iota/wallet/out/types'
 import { WalletEventType } from '@iota/wallet/out/types'
 
 import { localize } from '@core/i18n'

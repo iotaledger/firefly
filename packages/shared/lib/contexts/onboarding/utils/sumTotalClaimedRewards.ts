@@ -1,7 +1,7 @@
 import { tryNumberOrZero } from '@core/utils'
 
 import { IShimmerClaimingAccount } from '../interfaces'
-import { Output, RegularTransactionEssence } from '@iota/wallet'
+import { Output, RegularTransactionEssence } from '@iota/wallet/out/types'
 
 export function sumTotalClaimedRewards(shimmerClaimingAccounts: IShimmerClaimingAccount[]): number {
     return shimmerClaimingAccounts?.reduce(

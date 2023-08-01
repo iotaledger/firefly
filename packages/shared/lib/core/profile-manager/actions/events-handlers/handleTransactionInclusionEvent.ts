@@ -1,5 +1,5 @@
 import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-import { Event, TransactionInclusionWalletEvent } from '@iota/wallet'
+import { Event, TransactionInclusionWalletEvent } from '@iota/wallet/out/types'
 import { WalletEventType } from '@iota/wallet/out/types'
 
 import { updateParticipationOverview } from '@contexts/governance/stores'

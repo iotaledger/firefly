@@ -9,7 +9,7 @@ import type {
     LedgerNanoStatus,
     GenerateAddressOptions,
     INode,
-} from '@iota/wallet'
+} from '@iota/wallet/out/types'
 import { WalletEventType } from '@iota/wallet/out/types'
 
 import { IAccount } from '@core/account'

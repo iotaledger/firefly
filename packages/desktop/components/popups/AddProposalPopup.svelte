@@ -7,7 +7,7 @@
     import { localize } from '@core/i18n'
     import { activeAccounts, updateActiveAccountPersistedData } from '@core/profile'
     import { truncateString } from '@core/utils/string'
-    import type { Auth } from '@iota/wallet'
+    import type { Auth } from '@iota/wallet/out/types'
     import { Button, Checkbox, NodeInput, Text, TextInput, TextType } from 'shared/components'
     import { HTMLButtonType } from 'shared/components/enums'
 

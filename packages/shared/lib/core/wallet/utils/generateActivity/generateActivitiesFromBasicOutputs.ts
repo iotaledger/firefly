@@ -12,7 +12,7 @@ import { Activity } from '@core/wallet/types'
 import { generateSingleBasicActivity } from './generateSingleBasicActivity'
 import { generateSingleConsolidationActivity } from './generateSingleConsolidationActivity'
 import { generateSingleNftActivity } from './generateSingleNftActivity'
-import { CommonOutput, NftOutput, OutputType } from '@iota/wallet'
+import { CommonOutput, NftOutput, OutputType } from '@iota/wallet/out/types'
 
 export async function generateActivitiesFromBasicOutputs(
     processedTransaction: IProcessedTransaction,

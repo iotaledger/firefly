@@ -1,4 +1,4 @@
-import type { BasicOutput, OutputData } from '@iota/wallet'
+import type { BasicOutput, OutputData } from '@iota/wallet/out/types'
 import { OutputType } from '@iota/wallet/out/types'
 
 export function filterBasicOutput(outputData: OutputData): boolean {

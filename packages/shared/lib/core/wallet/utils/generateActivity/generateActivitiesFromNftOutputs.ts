@@ -2,7 +2,7 @@ import { IAccountState } from '@core/account'
 import { ActivityAction, EMPTY_HEX_ID, IProcessedTransaction } from '@core/wallet'
 import { Activity } from '@core/wallet'
 import { generateSingleNftActivity } from './generateSingleNftActivity'
-import { NftOutput, OutputType } from '@iota/wallet'
+import { NftOutput, OutputType } from '@iota/wallet/out/types'
 
 export async function generateActivitiesFromNftOutputs(
     processedTransaction: IProcessedTransaction,

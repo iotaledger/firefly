@@ -40,7 +40,7 @@ import type {
     FoundryOutputBuilderParams,
     NftOutputBuilderParams,
     INode,
-} from '@iota/wallet'
+} from '@iota/wallet/out/types'
 
 import { ParticipationEventType } from '@iota/wallet/out/types'
 

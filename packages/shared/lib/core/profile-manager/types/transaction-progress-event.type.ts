@@ -6,7 +6,7 @@ import {
     SigningTransactionProgress,
     PerformingPowProgress,
     BroadcastingProgress,
-} from '@iota/wallet'
+} from '@iota/wallet/out/types'
 
 export type TransactionProgressEventPayload =
     | SelectingInputsProgress

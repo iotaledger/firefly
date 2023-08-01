@@ -13,7 +13,7 @@ import { parseNftMetadata } from './parseNftMetadata'
 import { composeUrlFromNftUri } from './composeUrlFromNftUri'
 import { getSpendableStatusFromUnspentNftOutput } from './getSpendableStatusFromUnspentNftOutput'
 import { ADDRESS_TYPE_NFT } from '@core/wallet/constants'
-import { NftOutput } from '@iota/wallet'
+import { NftOutput } from '@iota/wallet/out/types'
 
 export function buildNftFromNftOutput(
     wrappedOutput: IWrappedOutput,

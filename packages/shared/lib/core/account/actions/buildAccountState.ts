@@ -1,4 +1,4 @@
-import { Balance } from '@iota/wallet'
+import { Balance } from '@iota/wallet/out/types'
 
 import { getDepositAddress } from '@core/account/utils'
 
