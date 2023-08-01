@@ -47,5 +47,5 @@ export async function buildAccountState(
         hasVotingTransactionInProgress: false,
         isTransferring: false,
         votingPower,
-    }
+    } as IAccountState
 }

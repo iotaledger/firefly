@@ -1,5 +1,5 @@
 import { Balance } from '@iota/wallet'
-import { IAccount } from './account.interface'
+import { AddressWithOutputs, IAccount } from './'
 import { IPersistedAccountData } from './persisted-account-data.interface'
 
 export interface IAccountState extends IAccount, IPersistedAccountData {
@@ -10,4 +10,5 @@ export interface IAccountState extends IAccount, IPersistedAccountData {
     hasVotingPowerTransactionInProgress: boolean
     hasVotingTransactionInProgress: boolean
     votingPower: string
+    addressesWithOutputs: AddressWithOutputs[]
 }
