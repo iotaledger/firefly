@@ -24,6 +24,7 @@
         MeatballMenuButton,
         Modal,
     } from 'shared/components'
+    import { TextHintVariant } from 'shared/components/enums'
 
     export let asset: IAsset
     export let activityId: string = undefined
@@ -98,7 +99,10 @@
 
         <div class="space-y-4 flex flex-col items-center justify-center">
             {#if !asset.verification?.verified}
-                <TextHint warning text={localize('popups.tokenInformation.verificationWarning')} />
+                <TextHint
+                    variant={TextHintVariant.Warning}
+                    text={localize('popups.tokenInformation.verificationWarning')}
+                />
             {/if}
             <div class="w-full flex flex-col space-y-2">
                 <KeyValueBox
