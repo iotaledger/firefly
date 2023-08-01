@@ -4,19 +4,19 @@
     import { formatDate, localize } from '@core/i18n'
     import { TimePeriod } from '@core/utils'
 
-    export let value: Date = undefined
+    export let value: Date | null = null
     export let initialSelected: TimePeriod = TimePeriod.None
     export let disabled: boolean = false
 
     let menu: ExpirationTimePickerMenu
-    let anchor: HTMLElement = undefined
+    let anchor: HTMLElement | undefined = undefined
     let selected: TimePeriod
     let storedValue: Date
 
     $: selected = initialSelected
 
     export function setNull(bool: boolean): void {
-        if (bool) {
+        if (bool && value) {
             storedValue = value
             value = null
         } else {
@@ -25,12 +25,7 @@
     }
 </script>
 
-<button
-    class="flex items-center justify-center {disabled ? 'cursor-default' : 'cursor-pointer'}"
-    {disabled}
-    on:click={menu?.tryOpen}
-    bind:this={anchor}
->
+<button {disabled} on:click={menu?.tryOpen} bind:this={anchor}>
     <div class="flex flex-row hover:text-blue-600">
         <Text
             highlighted={!disabled}
@@ -46,3 +41,9 @@
     </div>
 </button>
 <ExpirationTimePickerMenu bind:this={menu} bind:value bind:selected bind:anchor />
+
+<style lang="scss">
+    button {
+        @apply flex items-center justify-center;
+    }
+</style>
