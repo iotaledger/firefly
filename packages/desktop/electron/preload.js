@@ -97,6 +97,18 @@ try {
     // This workaround exposes the classes through factory methods
     // The factory method also copies all the prototype methods to the object so that it gets passed through the bridge
     contextBridge.exposeInMainWorld('__WALLET__API__', {
+        async getNodeInfo(managerId, url, auth) {
+            const manager = profileManagers[managerId]
+            const client = await manager.getClient()
+
+            return client.getNodeInfo(url, auth)
+        },
+        generateMnemonic() {
+            return WalletApi.Utils.generateMnemonic()
+        },
+        verifyMnemonic(mnemonic) {
+            return WalletApi.Utils.verifyMnemonic(mnemonic)
+        },
         createWallet(id, options) {
             const manager = new WalletApi.Wallet(options)
             manager.id = id
