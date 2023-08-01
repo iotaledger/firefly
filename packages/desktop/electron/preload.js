@@ -100,8 +100,14 @@ try {
         async getNodeInfo(managerId, url, auth) {
             const manager = profileManagers[managerId]
             const client = await manager.getClient()
+            const nodeUrl = url ?? (await client.getNode()).url
 
-            return client.getNodeInfo(url, auth)
+            const nodeInfo = await client.getNodeInfo(nodeUrl, auth)
+
+            return {
+                url: nodeUrl,
+                nodeInfo,
+            }
         },
         generateMnemonic() {
             return WalletApi.Utils.generateMnemonic()
