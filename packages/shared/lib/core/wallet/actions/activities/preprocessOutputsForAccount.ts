@@ -48,12 +48,12 @@ function getTransactionsMapFromList(transactions: Transaction[]): { [transaction
     return transactionMap
 }
 
-function getMapFromList(transactions: [string, Transaction][]): {
+function getMapFromList(transactions: Transaction[]): {
     [transactionId: string]: Transaction
 } {
     const transactionMap = {}
-    for (const [transactionId, payload] of transactions) {
-        transactionMap[transactionId] = payload
+    for (const transaction of transactions) {
+        transactionMap[transaction.transactionId] = transaction
     }
     return transactionMap
 }

@@ -1,26 +1,28 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-
-    import { Button, KeyValueBox, Text, ProposalsDetailsButton } from '@ui'
-    import { ButtonSize, FontWeight } from '@ui/enums'
-
+    import {
+        Button,
+        KeyValueBox,
+        Text,
+        Modal,
+        MeatballMenuButton,
+        ProposalsDetailsMenu,
+        ButtonSize,
+        FontWeight,
+    } from '@ui'
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { activeProfileId } from '@core/profile'
-
-    import { IProposalsDetails } from '@contexts/governance/interfaces'
-    import {
-        participationOverviewForSelectedAccount,
-        registeredProposalsForSelectedAccount,
-        updateParticipationOverview,
-    } from '@contexts/governance/stores'
     import {
         getNumberOfActiveProposals,
         getNumberOfTotalProposals,
         getNumberOfVotedProposals,
         getNumberOfVotingProposals,
-    } from '@contexts/governance/utils'
-
+        participationOverviewForSelectedAccount,
+        registeredProposalsForSelectedAccount,
+        updateParticipationOverview,
+        IProposalsDetails,
+    } from '@contexts/governance'
     import { openPopup, PopupId } from '@auxiliary/popup'
 
     let details = <IProposalsDetails>{
@@ -29,6 +31,7 @@
         votingProposals: null,
         votedProposals: null,
     }
+    let modal: Modal
 
     $: isOverviewLoaded = !!$participationOverviewForSelectedAccount
     $: $registeredProposalsForSelectedAccount, $participationOverviewForSelectedAccount, updateProposalsDetails()
@@ -66,7 +69,11 @@
         <Text fontSize="14" fontWeight={FontWeight.semibold}>
             {localize('views.governance.proposalsDetails.title')}
         </Text>
-        <ProposalsDetailsButton />
+
+        <div class="max-h-7 max-w-9 flex-none overflow-visible relative">
+            <MeatballMenuButton onClick={modal?.toggle} />
+            <ProposalsDetailsMenu bind:modal position={{ right: '0' }} classes="mt-1.5" />
+        </div>
     </header-container>
     <ul class="space-y-2">
         {#each Object.keys(details) as detailKey}

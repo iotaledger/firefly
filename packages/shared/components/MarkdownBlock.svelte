@@ -2,7 +2,6 @@
     import SvelteMarkdown from 'svelte-markdown'
     import { SvelteComponent } from 'svelte'
     import { ParagraphBlock, LinkBlock } from 'shared/components'
-
     export let text: string
 
     const renderers: Record<string, typeof SvelteComponent | null> = {
