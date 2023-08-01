@@ -65,6 +65,12 @@ jobs:
               with:
                 python-version: '3.10'
 
+            - name: Select Xcode
+              uses: maxim-lobanov/setup-xcode@v1
+              if: matrix.os == 'macos-13'
+              with:
+                xcode-version: 'latest-stable'
+
             - name: Install Rust toolchain
               uses: actions-rs/toolchain@v1
               with:
