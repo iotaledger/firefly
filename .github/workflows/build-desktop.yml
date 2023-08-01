@@ -135,7 +135,6 @@ jobs:
               env:
                   SENTRY_DSN: ${{ secrets.SENTRY_DSN_PROD_BACKEND }}
                   SENTRY_ENVIRONMENT: ${{ env.STAGE }}
-                  NODE_GYP_FORCE_PYTHON: '2.7.18'
 
             - name: Install Sentry CLI
               # Yarn has issues putting binaries in the PATH on Windows
