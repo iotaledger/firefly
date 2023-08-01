@@ -6,5 +6,4 @@ export interface IPersistedAccountData {
     hidden: boolean
     shouldRevote: boolean
     removedProposalIds?: ParticipationEventId[]
-    depositAddress: string
 }
