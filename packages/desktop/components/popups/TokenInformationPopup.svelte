@@ -20,7 +20,7 @@
         KeyValueBox,
         FontWeight,
         TextType,
-        AssetActionsMenu,
+        AssetActionsModal,
         MeatballMenuButton,
         Modal,
     } from 'shared/components'
@@ -89,7 +89,7 @@
             {#if asset.standard === TokenStandard.Irc30}
                 <div class="max-h-7 max-w-9 overflow-visible relative">
                     <MeatballMenuButton onClick={modal?.toggle} />
-                    <AssetActionsMenu bind:modal {asset} position={{ right: '0' }} classes="mt-1.5" />
+                    <AssetActionsModal bind:modal {asset} position={{ right: '0' }} classes="mt-1.5" />
                 </div>
             {/if}
         </div>
