@@ -15,6 +15,7 @@
     import { destroyProfileManager } from '@core/profile-manager/actions'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { AnimationEnum } from '@auxiliary/animation'
+    import { STRONGHOLD_VERSION } from '@core/stronghold'
 
     let isBusy = {
         [CreateProfileType.Mnemonic]: false,
@@ -29,8 +30,8 @@
         isBusy = { ...isBusy, [createProfileType]: true }
         const isLedgerProfile = createProfileType === CreateProfileType.Ledger
         const type = isLedgerProfile ? ProfileType.Ledger : ProfileType.Software
-        const strongholdVersion = isLedgerProfile ? undefined : $onboardingProfile.strongholdVersion
-        updateOnboardingProfile({ createProfileType, type, strongholdVersion })
+        const strongholdVersion = isLedgerProfile ? undefined : STRONGHOLD_VERSION
+        updateOnboardingProfile({ createProfileType, type, ...(strongholdVersion && { strongholdVersion }) })
         await initialiseProfileManagerFromOnboardingProfile()
         $createProfileRouter.next()
     }

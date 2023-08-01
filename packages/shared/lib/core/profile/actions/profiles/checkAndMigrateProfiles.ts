@@ -295,7 +295,7 @@ function persistedProfileMigrationToV13(
 function persistedProfileMigrationToV14(existingProfile: IPersistedProfile): void {
     const isLedgerProfile = existingProfile?.type === ProfileType.Ledger
     if (isLedgerProfile) {
-        existingProfile.strongholdVersion = undefined
+        delete existingProfile.strongholdVersion
         saveProfile(existingProfile)
     }
 }
