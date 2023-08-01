@@ -6,14 +6,14 @@ import {
     SendNftParams,
     SendParams,
     AliasOutputParams,
-    BuildAliasOutputData,
-    BuildBasicOutputData,
-    BuildFoundryOutputData,
-    BuildNftOutputData,
+    AliasOutputBuilderParams,
+    BasicOutputBuilderParams,
+    FoundryOutputBuilderParams,
+    NftOutputBuilderParams,
     ConsolidationParams,
     FilterOptions,
     CreateNativeTokenTransaction,
-    Node,
+    INode,
     OutputData,
     OutputParams,
     OutputsToClaim,
@@ -30,12 +30,12 @@ import {
     GenerateAddressOptions,
     SyncOptions,
     Ed25519Signature,
-  AliasOutput,
+    AliasOutput,
     BasicOutput,
     FoundryOutput,
     NftOutput,
     Output,
-} from '@iota/wallet'
+} from '@iota/wallet/out/types'
 
 import { IAccount } from '../../core/account'
 
@@ -53,19 +53,19 @@ export class AccountMock implements IAccount {
         return Promise.resolve([])
     }
 
-    buildAliasOutput(data: BuildAliasOutputData): Promise<AliasOutput> {
+    buildAliasOutput(data: AliasOutputBuilderParams): Promise<AliasOutput> {
         throw new Error('Method not implemented.')
     }
 
-    buildBasicOutput(data: BuildBasicOutputData): Promise<BasicOutput> {
+    buildBasicOutput(data: BasicOutputBuilderParams): Promise<BasicOutput> {
         throw new Error('Method not implemented.')
     }
 
-    buildFoundryOutput(data: BuildFoundryOutputData): Promise<FoundryOutput> {
+    buildFoundryOutput(data: FoundryOutputBuilderParams): Promise<FoundryOutput> {
         throw new Error('Method not implemented.')
     }
 
-    buildNftOutput(data: BuildNftOutputData): Promise<NftOutput> {
+    buildNftOutput(data: NftOutputBuilderParams): Promise<NftOutput> {
         throw new Error('Method not implemented.')
     }
 
@@ -180,7 +180,7 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    getParticipationEventIds(node: Node, eventType?: ParticipationEventType): Promise<string[]> {
+    getParticipationEventIds(node: INode, eventType?: ParticipationEventType): Promise<string[]> {
         throw new Error('Method not implemented.')
     }
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { UnlockConditionType, UnlockCondition, OutputType, CommonOutput } from '@iota/wallet'
+    import { UnlockConditionType, UnlockCondition, OutputType, CommonOutput } from '@iota/wallet/out/types'
     import { BalanceSummarySection, Button } from '@ui'
 
     import { selectedAccount } from '@core/account'

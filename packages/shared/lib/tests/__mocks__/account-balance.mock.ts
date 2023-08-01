@@ -2,8 +2,8 @@ import { Balance } from '@iota/wallet'
 
 export const MOCK_ACCOUNT_BALANCE: Balance = {
     baseCoin: {
-        total: '10000',
-        available: '9000',
+        total: BigInt('10000'),
+        available: BigInt('9000'),
         votingPower: '0',
     },
     aliases: [],
@@ -12,9 +12,9 @@ export const MOCK_ACCOUNT_BALANCE: Balance = {
     nfts: [],
     potentiallyLockedOutputs: {},
     requiredStorageDeposit: {
-        alias: '0',
-        basic: '0',
-        foundry: '0',
-        nft: '0',
+        alias: BigInt('0'),
+        basic: BigInt('0'),
+        foundry: BigInt('0'),
+        nft: BigInt('0'),
     },
 }

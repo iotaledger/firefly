@@ -1,4 +1,4 @@
-import { Address, AddressType, AliasAddress, Ed25519Address, NftAddress } from '@iota/wallet'
+import { Address, AddressType, AliasAddress, Ed25519Address, NftAddress } from '@iota/wallet/out/types'
 
 export function getHexAddressFromAddressTypes(address: Address): string {
     switch (address?.getType()) {

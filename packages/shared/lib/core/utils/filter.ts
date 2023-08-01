@@ -1,4 +1,5 @@
-import { BasicOutput, OutputData, OutputType } from '@iota/wallet'
+import type { BasicOutput, OutputData } from '@iota/wallet'
+import { OutputType } from '@iota/wallet/out/types'
 
 export function filterBasicOutput(outputData: OutputData): boolean {
     return outputData?.output?.getType() === OutputType.Basic

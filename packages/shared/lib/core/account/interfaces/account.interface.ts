@@ -17,7 +17,6 @@ import type {
     ParticipationEventMap,
     ParticipationEventRegistrationOptions,
     ParticipationEventStatus,
-    ParticipationEventType,
     ParticipationEventWithNodes,
     ParticipationOverview,
     PreparedTransactionData,
@@ -42,6 +41,8 @@ import type {
     NftOutputBuilderParams,
     INode,
 } from '@iota/wallet'
+
+import { ParticipationEventType } from '@iota/wallet/out/types'
 
 export interface IAccount {
     addresses(): Promise<Address[]>

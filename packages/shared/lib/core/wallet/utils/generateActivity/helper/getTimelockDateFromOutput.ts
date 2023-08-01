@@ -1,5 +1,5 @@
 import { MILLISECONDS_PER_SECOND } from '@core/utils'
-import { CommonOutput, TimelockUnlockCondition, UnlockConditionType } from '@iota/wallet'
+import { CommonOutput, TimelockUnlockCondition, UnlockConditionType } from '@iota/wallet/out/types'
 
 export function getTimelockDateFromOutput(output: CommonOutput): Date | undefined {
     for (const unlockCondition of output.getUnlockConditions()) {

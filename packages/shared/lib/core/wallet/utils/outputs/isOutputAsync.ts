@@ -1,4 +1,4 @@
-import { CommonOutput, Output, OutputType } from '@iota/wallet'
+import { CommonOutput, Output, OutputType } from '@iota/wallet/out/types'
 import { ASYNC_UNLOCK_CONDITION_TYPES } from '../../constants'
 
 export function isOutputAsync(output: Output): boolean {

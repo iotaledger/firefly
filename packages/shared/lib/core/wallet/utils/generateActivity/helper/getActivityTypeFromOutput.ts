@@ -1,7 +1,7 @@
 import { isParticipationOutput } from '@contexts/governance/utils'
 import { ActivityType } from '@core/wallet/enums'
 import { IWrappedOutput } from '@core/wallet/interfaces'
-import { OutputType } from '@iota/wallet'
+import { OutputType } from '@iota/wallet/out/types'
 
 export function getActivityTypeFromOutput(output: IWrappedOutput): ActivityType {
     switch (output.output.getType()) {

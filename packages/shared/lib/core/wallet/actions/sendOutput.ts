@@ -5,7 +5,7 @@ import { updateNftInAllAccountNfts } from '@core/nfts/actions'
 import { DEFAULT_TRANSACTION_OPTIONS } from '../constants'
 import { resetNewTokenTransactionDetails } from '../stores'
 import { processAndAddToActivities } from '../utils'
-import { NftOutput, Output, OutputType } from '@iota/wallet'
+import { NftOutput, Output, OutputType } from '@iota/wallet/out/types'
 
 export async function sendOutput(output: Output): Promise<void> {
     try {

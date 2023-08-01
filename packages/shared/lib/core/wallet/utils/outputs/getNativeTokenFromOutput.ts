@@ -1,5 +1,6 @@
 import { buildFoundryId } from './getFoundryId'
-import { CommonOutput, FoundryOutput, INativeToken, OutputType, SimpleTokenScheme } from '@iota/wallet'
+import type { CommonOutput, FoundryOutput, INativeToken, SimpleTokenScheme } from '@iota/wallet'
+import { OutputType } from '@iota/wallet/out/types'
 
 export function getNativeTokenFromOutput(output: CommonOutput): INativeToken | undefined {
     if (output?.getType() === OutputType.Foundry) {

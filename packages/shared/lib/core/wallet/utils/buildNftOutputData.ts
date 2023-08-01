@@ -1,4 +1,4 @@
-import { AddressUnlockCondition, BuildNftOutputData, Ed25519Address, MetadataFeature } from '@iota/wallet'
+import { AddressUnlockCondition, BuildNftOutputData, Ed25519Address, MetadataFeature } from '@iota/wallet/out/types'
 import { Converter } from '@core/utils'
 import { EMPTY_HEX_ID } from '../constants'
 import { convertBech32ToHexAddress } from './convertBech32ToHexAddress'

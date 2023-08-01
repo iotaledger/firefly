@@ -1,5 +1,5 @@
 import { IAccountState } from '@core/account/interfaces'
-import { CommonOutput, StorageDepositReturnUnlockCondition, UnlockConditionType } from '@iota/wallet'
+import { CommonOutput, StorageDepositReturnUnlockCondition, UnlockConditionType } from '@iota/wallet/out/types'
 
 export async function getStorageDepositFromOutput(
     account: IAccountState,

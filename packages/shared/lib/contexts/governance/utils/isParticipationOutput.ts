@@ -1,5 +1,6 @@
 import { PARTICIPATE_TAG_HEX } from '../constants'
-import { CommonOutput, FeatureType, Output, OutputType, TagFeature } from '@iota/wallet'
+import { CommonOutput, Output, TagFeature } from '@iota/wallet'
+import { FeatureType, OutputType } from '@iota/wallet/out/types'
 
 export function isParticipationOutput(output: Output): boolean {
     if (output.getType() === OutputType.Treasury) {
