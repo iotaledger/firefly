@@ -16,15 +16,19 @@
         Button,
         Text,
         TextHint,
-        AssetActionsButton,
         AssetTile,
         KeyValueBox,
         FontWeight,
         TextType,
+        AssetActionsModal,
+        MeatballMenuButton,
+        Modal,
     } from 'shared/components'
 
     export let asset: IAsset
     export let activityId: string = undefined
+
+    let modal: Modal
 
     function onSkipClick(): void {
         unverifyAsset(asset.id, NotVerifiedStatus.Skipped)
@@ -83,7 +87,10 @@
                     : asset.metadata?.name}
             </Text>
             {#if asset.standard === TokenStandard.Irc30}
-                <AssetActionsButton {asset} />
+                <div class="max-h-7 max-w-9 overflow-visible relative">
+                    <MeatballMenuButton onClick={modal?.toggle} />
+                    <AssetActionsModal bind:modal {asset} position={{ right: '0' }} classes="mt-1.5" />
+                </div>
             {/if}
         </div>
 
