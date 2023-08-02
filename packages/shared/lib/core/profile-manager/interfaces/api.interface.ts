@@ -1,4 +1,4 @@
-import { WalletOptions, CreateAccountPayload } from '@iota/wallet/out/types'
+import { WalletOptions, CreateAccountPayload, TransactionId, OutputId } from '@iota/wallet/out/types'
 import { IAuth } from '@core/network'
 import { INodeInfoResponse } from '@core/network/interfaces'
 
@@ -8,6 +8,7 @@ import { IProfileManager } from './profile-manager.interface'
 import { RecoverAccountsPayload } from './recover-account-payload.interface'
 
 export interface IApi {
+    computeOutputId(id: TransactionId, index: number): Promise<OutputId>
     getNodeInfo(profileManagerId: string, url?: string, auth?: IAuth): Promise<INodeInfoResponse>
     generateMnemonic(): Promise<string>
     verifyMnemonic(mnemonic: string): Promise<void>

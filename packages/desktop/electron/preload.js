@@ -96,7 +96,18 @@ try {
     // https://www.electronjs.org/docs/latest/api/context-bridge
     // This workaround exposes the classes through factory methods
     // The factory method also copies all the prototype methods to the object so that it gets passed through the bridge
+
+    const methodNames = Object.getOwnPropertyNames(WalletApi.Utils).filter(
+        (m) => !['length', 'name', 'prototype'].includes(m)
+    )
+    const methods = {}
+
+    for (const name of methodNames) {
+        methods[name] = (...args) => WalletApi.Utils[name](...args)
+    }
+
     contextBridge.exposeInMainWorld('__WALLET__API__', {
+        ...methods,
         async getNodeInfo(managerId, url, auth) {
             const manager = profileManagers[managerId]
             const client = await manager.getClient()
@@ -108,12 +119,6 @@ try {
                 url: nodeUrl,
                 nodeInfo,
             }
-        },
-        generateMnemonic() {
-            return WalletApi.Utils.generateMnemonic()
-        },
-        verifyMnemonic(mnemonic) {
-            return WalletApi.Utils.verifyMnemonic(mnemonic)
         },
         createWallet(id, options) {
             const manager = new WalletApi.Wallet(options)
@@ -173,7 +178,19 @@ function bindMethodsAcrossContextBridge(prototype, object) {
     const prototypeProperties = Object.getOwnPropertyNames(prototype)
     prototypeProperties.forEach((key) => {
         if (key !== 'constructor') {
-            object[key] = object[key].bind(object)
+            if (key === 'incomingTransactions') {
+                const method = object[key].bind(object)
+                object[key] = async function () {
+                    const txs = await method(arguments)
+                    txs.forEach((tx) => {
+                        // Or classToInstance?
+                        bindMethodsAcrossContextBridge(WalletApi.Transaction.prototype, tx)
+                    })
+                    return txs
+                }
+            } else {
+                object[key] = object[key].bind(object)
+            }
         }
     })
 }

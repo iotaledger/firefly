@@ -1,8 +1,9 @@
 import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
-import { Output, RegularTransactionEssence, Transaction, UTXOInput, Utils } from '@iota/wallet/out/types'
+import { Output, RegularTransactionEssence, Transaction, UTXOInput } from '@iota/wallet/out/types'
 import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransactionIdAndIndex'
 import { getDirectionFromTransaction } from '../transactions'
 import { IAccountState } from '@core/account'
+import { computeOutputId } from '@core/profile-manager'
 
 export async function preprocessTransaction(
     transaction: Transaction,
@@ -16,11 +17,13 @@ export async function preprocessTransaction(
     )
     const direction = getDirectionFromTransaction(outputs, transaction.incoming, account.depositAddress)
     const utxoInputs = regularTransactionEssence.inputs.map((i) => i as UTXOInput)
-    const inputIds = utxoInputs.map((input) => {
-        const transactionId = input.transactionId
-        const transactionOutputIndex = input.transactionOutputIndex
-        return Utils.computeOutputId(transactionId, transactionOutputIndex)
-    })
+    const inputIds = await Promise.all(
+        utxoInputs.map((input) => {
+            const transactionId = input.transactionId
+            const transactionOutputIndex = input.transactionOutputIndex
+            return computeOutputId(transactionId, transactionOutputIndex)
+        })
+    )
 
     const inputs = await Promise.all(inputIds.map((inputId) => account.getOutput(inputId)))
 
