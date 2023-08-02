@@ -15,7 +15,7 @@ crate-type = ["cdylib"]
 neon-build = "0.10.1"
 
 [dependencies]
-iota-wallet = { git = "https://github.com/iotaledger/wallet.rs", branch = "firefly-desktop", default-features = false, features = ["stronghold", "ledger-nano", "ledger-nano-simulator", "participation"] }
+iota-wallet = { git = "https://github.com/iotaledger/wallet.rs", rev = "0baa5cd23b5542cd9d254851afa65add8e4956b9", default-features = false, features = ["stronghold", "ledger-nano", "ledger-nano-simulator", "participation"] }
 futures = { version = "0.3.17", default-features = false }
 neon = "0.10.1"
 serde_json = { version = "1.0.68", default-features = false }

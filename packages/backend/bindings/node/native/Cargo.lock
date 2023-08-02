@@ -1245,7 +1245,7 @@ name = "firefly-actor-system"
 version = "0.1.0"
 dependencies = [
  "bee-common 0.4.1",
- "iota-wallet 0.2.0 (git+https://github.com/iotaledger/wallet.rs?rev=cfbae0e87f2e8d20e0cfbb6e7495f6cc79bcef38)",
+ "iota-wallet",
  "log",
  "once_cell",
  "riker",
@@ -1919,41 +1919,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.2.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=firefly-desktop#cfbae0e87f2e8d20e0cfbb6e7495f6cc79bcef38"
-dependencies = [
- "async-trait",
- "backtrace",
- "bee-common 0.5.0",
- "bytemuck",
- "chrono",
- "futures",
- "getset",
- "hex",
- "iota-client 1.1.1",
- "iota-core",
- "iota-crypto 0.23.0",
- "iota-ledger",
- "iota_stronghold",
- "log",
- "once_cell",
- "rand 0.8.5",
- "reqwest",
- "riker",
- "rocksdb",
- "serde 1.0.160",
- "serde_json",
- "serde_repr",
- "slog",
- "thiserror",
- "tokio",
- "url",
- "zeroize",
-]
-
-[[package]]
-name = "iota-wallet"
-version = "0.2.0"
-source = "git+https://github.com/iotaledger/wallet.rs?rev=cfbae0e87f2e8d20e0cfbb6e7495f6cc79bcef38#cfbae0e87f2e8d20e0cfbb6e7495f6cc79bcef38"
+source = "git+https://github.com/iotaledger/wallet.rs?rev=0baa5cd23b5542cd9d254851afa65add8e4956b9#0baa5cd23b5542cd9d254851afa65add8e4956b9"
 dependencies = [
  "async-trait",
  "backtrace",
@@ -2379,7 +2345,7 @@ version = "0.1.0"
 dependencies = [
  "firefly-actor-system",
  "futures",
- "iota-wallet 0.2.0 (git+https://github.com/iotaledger/wallet.rs?branch=firefly-desktop)",
+ "iota-wallet",
  "neon",
  "neon-build",
  "once_cell",
