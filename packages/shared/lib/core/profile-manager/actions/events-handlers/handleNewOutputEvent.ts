@@ -1,10 +1,11 @@
 import { Event, NewOutputWalletEvent } from '@iota/wallet'
 import { WalletEventType } from '@iota/wallet/out/types'
 
+import { getAddressesWithOutputs } from '@core/account'
 import { syncBalance } from '@core/account/actions/syncBalance'
 import { addNftsToDownloadQueue, addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput } from '@core/nfts'
 import { checkAndRemoveProfilePicture } from '@core/profile/actions'
-import { activeAccounts } from '@core/profile/stores'
+import { activeAccounts, updateActiveAccount } from '@core/profile/stores'
 import {
     ActivityType,
     IWrappedOutput,
@@ -45,6 +46,8 @@ export async function handleNewOutputEventInternal(accountIndex: number, payload
 
     if ((account?.depositAddress === address && !output?.remainder) || isNewAliasOutput) {
         await syncBalance(account.index)
+        const addressesWithOutputs = await getAddressesWithOutputs(account)
+        updateActiveAccount(account.index, { addressesWithOutputs })
 
         const processedOutput = preprocessGroupedOutputs([output], payload?.transactionInputs ?? [], account)
 
