@@ -11,11 +11,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: retypeapp/action-build@v2
+      - uses: retypeapp/action-build@v3
         with:
           config: docs
 
-      - uses: retypeapp/action-github-pages@v2
+      - uses: retypeapp/action-github-pages@latest
         with:
           branch: retype
           update-branch: true

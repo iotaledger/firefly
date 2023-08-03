@@ -8,7 +8,9 @@
 
 <Text type={TextType.h4} classes="mb-3">{localize('views.settings.exportStronghold.title')}</Text>
 <Text type={TextType.p} secondary classes="mb-5">{localize('views.settings.exportStronghold.description')}</Text>
-<div class="flex flex-row items-center">
+<div class="flex flex-row items-center space-x-2">
     <ExportStrongholdButton bind:isBusy bind:message />
-    <Spinner busy={isBusy} {message} classes="ml-2" />
+    {#if isBusy}
+        <Spinner {message} />
+    {/if}
 </div>

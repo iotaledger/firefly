@@ -162,7 +162,7 @@
             bind:checked={exportStrongholdChecked}
             disabled={busy}
         />
-        <div class="flex flex-row items-center">
+        <div class="flex flex-row items-center space-x-2">
             <Button
                 size={ButtonSize.Medium}
                 disabled={!currentPassword || !newPassword || !confirmedPassword || busy}
@@ -170,7 +170,9 @@
             >
                 {localize('views.settings.changePassword.title')}
             </Button>
-            <Spinner {busy} message={localize(changeMessageLocale)} classes="ml-2" />
+            {#if busy}
+                <Spinner message={localize(changeMessageLocale)} />
+            {/if}
         </div>
     </div>
 </form>
