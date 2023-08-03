@@ -624,6 +624,18 @@
             "changePassword": {
                 "hint": "Your Stronghold was out of date and has been updated. We recommend that you change your Stronghold password."
             }
+        },
+        "vesting": {
+            "tableHeaders": {
+                "outputId": "Output ID",
+                "amount": "Amount",
+                "unlockTime": "Unlock time",
+                "status": "Status"
+            },
+            "status": {
+                "locked": "Locked",
+                "available": "Available"
+            }
         }
     },
     "popups": {

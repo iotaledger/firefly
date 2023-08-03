@@ -14,12 +14,8 @@
     import { stopPollingLedgerNanoStatus } from '@core/ledger'
     import { removeDisplayNotification, showAppNotification } from '@auxiliary/notification'
     import { Platform } from '@core/app'
-    import { Developer } from './developer'
-    import { Settings } from './settings'
-    import { Wallet } from './wallet'
+    import { Developer, Settings, Vesting, Collectibles, Governance, Wallet } from './'
     import { onDestroy, onMount } from 'svelte'
-    import Collectibles from './collectibles/Collectibles.svelte'
-    import { Governance } from './governance'
     import Sidebar from './Sidebar.svelte'
     import TopNavigation from './TopNavigation.svelte'
 
@@ -42,6 +38,7 @@
         collectibles: Collectibles,
         governance: Governance,
         developer: Developer,
+        vesting: Vesting,
     }
 
     let fundsSoonNotificationId
