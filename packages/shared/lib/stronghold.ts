@@ -15,7 +15,7 @@ import { Profile, ProfileType } from '@lib/typings/profile'
 
 export const STRONGHOLD_VERSION = 3
 
-export const STRONGHOLD_VERSION_ERROR = 'Unsupported snapshot version, migration required'
+export const STRONGHOLD_VERSION_ERROR = 'unsupported snapshot version, migration required'
 
 export const STRONGHOLD_DECRYPTION_ERROR = 'Failed to decrypt snapshot: incorrect password or corrupt data'
 
