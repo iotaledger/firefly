@@ -190,8 +190,8 @@ jobs:
             - name: Test Python 2.x (macOS)
               if: matrix.os == 'macos-13'
               run: |
-                which python
-                python --version
+                which python2
+                python2 --version
 
             - name: Build Electron app (macOS)
               run: yarn compile:${STAGE}:mac

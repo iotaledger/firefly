@@ -7,7 +7,7 @@ index ad0bb2e..e3e9769 100644
    env.iconLocations = await computeDmgEntries(specification, volumePath, packager, asyncTaskManager);
    await asyncTaskManager.awaitTasks();
 -  await (0, _builderUtil().exec)("/usr/bin/python", [path.join((0, _dmgUtil().getDmgVendorPath)(), "dmgbuild/core.py")], {
-+  const pythonPath = (await (0, _builderUtil().exec)("which", ["python"])).trim();
++  const pythonPath = (await (0, _builderUtil().exec)("which", ["python2"])).trim();
 +  await (0, _builderUtil().exec)(pythonPath, [path.join((0, _dmgUtil().getDmgVendorPath)(), "dmgbuild/core.py")], {
      cwd: (0, _dmgUtil().getDmgVendorPath)(),
      env
