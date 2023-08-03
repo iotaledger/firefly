@@ -483,55 +483,6 @@
                     "updateVersion": "Firefly v{version}",
                     "button": "Opdatér"
                 }
-            },
-            "drawers": {
-                "networkConfig": {
-                    "addChain": {
-                        "title": "Tilføj kæde"
-                    },
-                    "chain": {
-                        "chainId": "Kæde-ID",
-                        "aliasAddress": "Aliasadresse",
-                        "iscpEndpoint": "ISCP-slutpunkt",
-                        "explorerEndpoint": "Explorerslutpunkt (valgfrit)",
-                        "errors": {
-                            "cannotBeEmpty": "Navn er obligatorisk",
-                            "nameTooLong": "Navn for langt",
-                            "aliasAddressWrongFormat": "Skal være enten i hex- eller Bech32-format",
-                            "aliasAddressAlreadyInUse": "Aliasadresse findes allerede",
-                            "invalidUrl": "Ugyldig URL"
-                        }
-                    },
-                    "chainDepositAddress": {
-                        "title": "Kædeindbetalingsadresse",
-                        "networkTitle": "Netværksindbetalingsadresse"
-                    },
-                    "chainInformation": {
-                        "title": "Kædeinformation"
-                    },
-                    "confirmLedgerEvmAddress": {
-                        "title": "Bekræft EVM-adresse",
-                        "header": "Vi har genereret din EVM-adresse"
-                    },
-                    "connectedChains": {
-                        "title": "Forbundne kæder"
-                    },
-                    "connectLedgerDevice": {
-                        "title": "Tilslut Ledger-enheden",
-                        "header": "Åbn Ethereum-appen",
-                        "body": "For at Firefly kan finde Ledger-enheden, så sørg for, at den officielle Ledger Live-applikation er lukket, før disse trin følges.",
-                        "requirements": {
-                            "connect": "Tilslut og oplås Ledger-enheden",
-                            "openApp": "Åbn Ethereum-appen på Ledger-enheden"
-                        }
-                    },
-                    "editChain": {
-                        "title": "Redigér kæde"
-                    },
-                    "removeChain": {
-                        "title": "Fjern kæde"
-                    }
-                }
             }
         },
         "staking": {
@@ -1104,15 +1055,6 @@
                 "assetId": "Asset Id"
             }
         },
-        "importErc20Token": {
-            "title": "Importér ERC20-token",
-            "property": {
-                "chainId": "Kæde-ID",
-                "tokenAddress": "Tokenadresse"
-            },
-            "success": "Importeret {tokenSymbol}-token",
-            "error": "Kan ikke importere ERC20-token"
-        },
         "noAlias": {
             "title": "Unable to mint",
             "description": "You must own an alias output to mint native tokens. To continue, please create an alias first"
@@ -1652,11 +1594,7 @@
         "jwt": "JSON web token",
         "internalTransaction": "Intern transaktion",
         "coinType": "Mønttyper",
-        "custom": "Tilpasset",
-        "evmAddress": "EVM-adresse",
-        "chain": "Kæde",
-        "importErc20Token": "Importér ERC20-token",
-        "importErc20TokenDescription": "Importér et ERC20-token fra en EVM-kæde"
+        "custom": "Tilpasset"
     },
     "filters": {
         "title": "Filtre",
@@ -1757,9 +1695,6 @@
             "label": "Sortering",
             "name": "Navn",
             "phase": "Fase"
-        },
-        "network": {
-            "label": "Netværk"
         }
     },
     "dates": {
@@ -2090,10 +2025,6 @@
                 "short": "Forslag kan ikke tilføjes",
                 "long": "Forslaget {proposalId} ikke fundet på den angivne node"
             }
-        },
-        "erc20Token": {
-            "invalidAddressFormat": "Formatet skal være hexadecimalt",
-            "invalidAddressLength": "Ugyldig længde"
         }
     },
     "warning": {

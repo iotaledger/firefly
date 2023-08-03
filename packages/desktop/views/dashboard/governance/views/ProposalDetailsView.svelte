@@ -36,6 +36,7 @@
     } from '@contexts/governance/utils'
     import { openPopup, PopupId } from '@auxiliary/popup'
     import { activeProfile } from '@core/profile'
+    import { TextHintVariant } from 'shared/components/enums'
 
     const { metadata } = $visibleSelectedAccountAssets?.[$activeProfile?.network?.id]?.baseCoin ?? {}
 
@@ -275,7 +276,7 @@
                     {/if}
                 </proposal-questions>
                 {#if $selectedProposal?.status === ProposalStatus.Upcoming}
-                    <TextHint info text={textHintString} />
+                    <TextHint variant={TextHintVariant.Info} text={textHintString} />
                 {:else if [ProposalStatus.Commencing, ProposalStatus.Holding].includes($selectedProposal?.status)}
                     {@const isLoaded = questions && overviewLoaded && statusLoaded}
                     {@const isStoppingVote = lastAction === 'stopVote' && hasGovernanceTransactionInProgress}
