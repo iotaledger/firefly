@@ -25,7 +25,7 @@ export function formatNumber(
     const appLanguage = get(appSettings).language
 
     const formatted = Intl.NumberFormat(appLanguage, {
-        minimumFractionDigits: minDecimals ?? 2,
+        minimumFractionDigits: minDecimals ?? maxDecimals ?? 2,
         maximumFractionDigits: maxDecimals,
         useGrouping: grouped,
     }).format(value)
