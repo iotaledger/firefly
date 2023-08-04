@@ -32,7 +32,7 @@ const LEGACY_ADDRESS_WITHOUT_CHECKSUM_LENGTH = 81
 
 export const LOG_FILE_NAME = 'migration.log'
 
-export const MIGRATION_NODES = ['https://nodes.iota.org', 'https://nodes.iota.cafe']
+export const MIGRATION_NODES = ['https://api-legacy.migrator.h.potonet.if4testing.rocks']
 export const PERMANODE = 'https://chronicle.iota.org/api'
 
 export const ADDRESS_SECURITY_LEVEL = 2
