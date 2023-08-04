@@ -55,9 +55,12 @@
         icon={TOAST_STYLE[type].icon}
         classes="fill-current {TOAST_STYLE[type].iconColor}"
     />
-    <div class="flex flex-auto flex-col px-4">
-        <Text fontWeight={FontWeight.semibold} class="flex text-13 {TOAST_STYLE[type].messageColor}">{message}</Text>
-    </div>
+    <message-container class="w-full flex flex-auto flex-col px-4">
+        <Text
+            fontWeight={FontWeight.semibold}
+            class="flex text-13 text-ellipsis overflow-hidden {TOAST_STYLE[type].messageColor}">{message}</Text
+        >
+    </message-container>
     {#if showDismiss}
         <button
             type="button"
