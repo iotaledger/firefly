@@ -905,10 +905,10 @@
   dependencies:
     big-integer "^1.6.51"
 
-"@iota/wallet@npm:@iota/sdk@1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@iota/sdk/-/sdk-1.0.3.tgz#990b5874e188056b722d99dcfc762713b3da3ff0"
-  integrity sha512-ZQDZT8vbSd5Q2el5P6ixL95LgD+KI7jT8XIVaLPGd8VzE6qU8o/0inDOAJ/8T9qGknqrJ3CybGuGQpdxbSmpCQ==
+"@iota/wallet@npm:@iota/sdk@1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@iota/sdk/-/sdk-1.0.4.tgz#47fa6f559a551a2bf3c2664f8840c48a497dde47"
+  integrity sha512-qjgxce/aOIFoWBDKU+fdcDiX4xbihMiigmsJqb5nK9I3vRPMOG3kxQ9eC7BPRNME3u8c8/sQgdQY9gzqywhZXA==
   dependencies:
     "@types/node" "^18.15.12"
     cargo-cp-artifact "^0.1.6"
