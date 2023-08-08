@@ -28,17 +28,15 @@ export async function generateSingleFoundryActivity(
 
     const output = wrappedOutput.output as FoundryOutput
     const outputId = wrappedOutput.outputId
-    const tokenScheme = output.getTokenScheme() as SimpleTokenScheme
-    const mintedTokens = tokenScheme.getMintedTokens()
-    const meltedTokens = tokenScheme.getMeltedTokens()
-    const maximumSupply = tokenScheme.getMaximumSupply()
+    const tokenScheme = output.tokenScheme as SimpleTokenScheme
+    const mintedTokens = tokenScheme.mintedTokens.toString()
+    const meltedTokens = tokenScheme.meltedTokens.toString()
+    const maximumSupply = tokenScheme.maximumSupply.toString()
 
-    const addressUnlockCondition = output
-        .getUnlockConditions()
-        .find(
-            (unlockCondition) => unlockCondition.getType() === UnlockConditionType.ImmutableAliasAddress
-        ) as ImmutableAliasAddressUnlockCondition
-    const aliasId = (addressUnlockCondition?.getAddress() as AliasAddress)?.getAliasId()
+    const addressUnlockCondition = output.unlockConditions.find(
+        (unlockCondition) => unlockCondition.type === UnlockConditionType.ImmutableAliasAddress
+    ) as ImmutableAliasAddressUnlockCondition
+    const aliasId = (addressUnlockCondition?.address as AliasAddress)?.aliasId
     const aliasAddress = aliasId ? convertHexAddressToBech32(AddressType.Alias, aliasId) : undefined
 
     const isHidden = false

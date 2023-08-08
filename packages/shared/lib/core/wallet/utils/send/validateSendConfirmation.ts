@@ -7,17 +7,17 @@ import { CommonOutput, ExpirationUnlockCondition, OutputType, UnlockConditionTyp
 
 export async function validateSendConfirmation(account: IAccountState, output: CommonOutput): Promise<void> {
     const parseNumber: (value: string) => number = (value: string) => parseInt(value, 10) ?? 0
-    const amount = parseNumber(output?.getAmount())
+    const amount = parseNumber(output?.amount)
     const balance = parseNumber(getSelectedAccount()?.balances?.baseCoin.available ?? '0')
     const { storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(account, output)
 
-    const expirationUnlockCondition = output
-        .getUnlockConditions()
-        .find((c) => c.getType() === UnlockConditionType.Expiration) as ExpirationUnlockCondition
+    const expirationUnlockCondition = output.unlockConditions.find(
+        (c) => c.type === UnlockConditionType.Expiration
+    ) as ExpirationUnlockCondition
     const expirationUnixTime = expirationUnlockCondition?.getUnixTime()
     const expirationDateTime = expirationUnixTime ? convertUnixTimestampToDate(expirationUnixTime) : undefined
 
-    const isNft = output.getType() === OutputType.Nft
+    const isNft = output.type === OutputType.Nft
     if (!isNft && (balance < amount + storageDeposit || balance < amount + giftedStorageDeposit)) {
         throw new InsufficientFundsForStorageDepositError()
     } else if (expirationDateTime && !isValidExpirationDateTime(expirationDateTime)) {

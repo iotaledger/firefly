@@ -31,7 +31,7 @@ export async function generateActivitiesFromBasicOutputs(
 
         const isSelfTransaction = processedTransaction.direction === ActivityDirection.SelfTransaction
         const burnedNftInputIndex = burnedNftInputs.findIndex(
-            (input) => input.output.getAmount() === basicOutput.output.getAmount()
+            (input) => input.output.amount === basicOutput.output.amount
         )
         const burnedNativeToken =
             burnedNftInputIndex < 0 ? getBurnedNativeTokens(basicOutput, processedTransaction) : undefined
@@ -46,7 +46,7 @@ export async function generateActivitiesFromBasicOutputs(
                     processedTransaction,
                     wrappedOutput: basicOutput,
                 },
-                getNftId(nftInput.getNftId(), wrappedInput.outputId)
+                getNftId(nftInput.nftId, wrappedInput.outputId)
             )
             const nft = buildNftFromNftOutput(wrappedInput, account.depositAddress, false)
             addOrUpdateNftInAllAccountNfts(account.index, nft)
@@ -84,14 +84,14 @@ export async function generateActivitiesFromBasicOutputs(
 function getBurnedNftInputs(processedTransaction: IProcessedTransaction): IWrappedOutput[] {
     return processedTransaction.wrappedInputs.filter((wrappedInput) => {
         const input = wrappedInput.output
-        if (input.getType() === OutputType.Nft) {
+        if (input.type === OutputType.Nft) {
             const nftInput = input as NftOutput
-            const nftId = getNftId(nftInput.getNftId(), wrappedInput.outputId)
+            const nftId = getNftId(nftInput.nftId, wrappedInput.outputId)
 
             const isIncludedInOutputs = processedTransaction.outputs.some((output) => {
-                if (output.output.getType() === OutputType.Nft) {
+                if (output.output.type === OutputType.Nft) {
                     const nftOutput = output.output as NftOutput
-                    return getNftId(nftOutput.getNftId(), output.outputId) === nftId
+                    return getNftId(nftOutput.nftId, output.outputId) === nftId
                 } else {
                     return false
                 }
@@ -133,7 +133,7 @@ function getAllNativeTokensFromOutputs(outputs: IWrappedOutput[]): { [key: strin
     for (const output of outputs) {
         if (output.output.type !== OutputType.Treasury) {
             const commonOutput = output.output as CommonOutput
-            for (const nativeToken of commonOutput.getNativeTokens() ?? []) {
+            for (const nativeToken of commonOutput.nativeTokens ?? []) {
                 if (!nativeTokens[nativeToken.id]) {
                     nativeTokens[nativeToken.id] = 0
                 }
@@ -145,13 +145,11 @@ function getAllNativeTokensFromOutputs(outputs: IWrappedOutput[]): { [key: strin
 }
 
 function isConsolidation(output: IWrappedOutput, processedTransaction: IProcessedTransaction): boolean {
-    const allBasicInputs = processedTransaction.wrappedInputs.every(
-        (input) => input.output.getType() === OutputType.Basic
-    )
+    const allBasicInputs = processedTransaction.wrappedInputs.every((input) => input.output.type === OutputType.Basic)
     const isSelfTransaction = processedTransaction.direction === ActivityDirection.SelfTransaction
     const isSameAmount =
-        processedTransaction.wrappedInputs.reduce((sum, input) => sum + Number(input.output.getAmount()), 0) ===
-        Number(output.output.getAmount())
+        processedTransaction.wrappedInputs.reduce((sum, input) => sum + Number(input.output.amount), 0) ===
+        Number(output.output.amount)
 
     return allBasicInputs && isSelfTransaction && isSameAmount
 }

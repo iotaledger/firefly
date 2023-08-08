@@ -59,5 +59,5 @@ export async function generateSingleConsolidationActivity(
 }
 
 function getAmountOfConsolidationInputs(inputs: IWrappedOutput[]): number {
-    return inputs.filter((input) => input.output.getType() === OutputType.Basic).length
+    return inputs.filter((input) => input.output.type === OutputType.Basic).length
 }

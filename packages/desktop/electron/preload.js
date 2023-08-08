@@ -156,6 +156,13 @@ try {
             accounts.forEach((account) => bindMethodsAcrossContextBridge(WalletApi.Account.prototype, account))
             return accounts
         },
+        async getClient(managerId) {
+            const manager = profileManagers[managerId]
+            const client = await manager.getClient()
+            bindMethodsAcrossContextBridge(WalletApi.Client.prototype, client)
+
+            return client
+        },
         async migrateStrongholdSnapshotV2ToV3(currentPath, newPath, currentPassword, newPassword) {
             const snapshotSaltV2 = 'wallet.rs'
             const snapshotRoundsV2 = 100

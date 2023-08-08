@@ -66,7 +66,7 @@ export async function generateSingleAliasActivity(
 }
 
 function getAliasId(output: AliasOutput, outputId: string): string {
-    const isNewAlias = output.getAliasId() === EMPTY_HEX_ID
-    const aliasId = isNewAlias ? hashOutputId(outputId) : output.getAliasId()
+    const isNewAlias = output.aliasId === EMPTY_HEX_ID
+    const aliasId = isNewAlias ? hashOutputId(outputId) : output.aliasId
     return convertHexAddressToBech32(ADDRESS_TYPE_ALIAS, aliasId)
 }

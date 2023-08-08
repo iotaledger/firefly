@@ -91,7 +91,6 @@ export interface IAccount {
         transactionOptions?: TransactionOptions
     ): Promise<CreateNativeTokenTransaction>
     increaseVotingPower(amount: string): Promise<Transaction>
-    minimumRequiredStorageDeposit(output: Output): Promise<string>
     createNativeToken(
         params: CreateNativeTokenParams,
         transactionOptions?: TransactionOptions

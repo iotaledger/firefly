@@ -3,13 +3,13 @@ import type { CommonOutput, FoundryOutput, INativeToken, SimpleTokenScheme } fro
 import { OutputType } from '@iota/wallet/out/types'
 
 export function getNativeTokenFromOutput(output: CommonOutput): INativeToken | undefined {
-    if (output?.getType() === OutputType.Foundry) {
+    if (output?.type === OutputType.Foundry) {
         const foundryOutput = output as FoundryOutput
         return {
             id: buildFoundryId(output as FoundryOutput),
-            amount: (foundryOutput.getTokenScheme() as SimpleTokenScheme).getMintedTokens(),
+            amount: (foundryOutput.tokenScheme as SimpleTokenScheme).mintedTokens,
         }
     }
 
-    return output?.getNativeTokens()?.[0]
+    return output?.nativeTokens?.[0]
 }

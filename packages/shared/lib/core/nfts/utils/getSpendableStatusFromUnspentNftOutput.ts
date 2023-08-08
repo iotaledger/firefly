@@ -15,9 +15,9 @@ export function getSpendableStatusFromUnspentNftOutput(
         const expirationUnixTime = getExpirationUnixTimeFromOutput(nftOutput)
         const timeLockUnixTime = getTimelockDateFromOutput(nftOutput)?.getTime()
         const isRecipient = getRecipientAddressFromOutput(nftOutput) === accountAddress
-        const hasStorageDepositReturnUnlockCondition = nftOutput
-            .getUnlockConditions()
-            .some((unlockCondition) => unlockCondition?.getType() === UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN)
+        const hasStorageDepositReturnUnlockCondition = nftOutput.unlockConditions.some(
+            (unlockCondition) => unlockCondition?.type === UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN
+        )
         if (expirationUnixTime) {
             if (isRecipient) {
                 isSpendable = false

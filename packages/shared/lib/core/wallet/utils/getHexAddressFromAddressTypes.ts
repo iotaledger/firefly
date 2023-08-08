@@ -1,12 +1,12 @@
 import { Address, AddressType, AliasAddress, Ed25519Address, NftAddress } from '@iota/wallet/out/types'
 
 export function getHexAddressFromAddressTypes(address: Address): string {
-    switch (address?.getType()) {
+    switch (address?.type) {
         case AddressType.Ed25519:
-            return (address as Ed25519Address).getPubKeyHash()
+            return (address as Ed25519Address).pubKeyHash
         case AddressType.Alias:
-            return (address as AliasAddress).getAliasId()
+            return (address as AliasAddress).aliasId
         case AddressType.Nft:
-            return (address as NftAddress).getNftId()
+            return (address as NftAddress).nftId
     }
 }

@@ -1,20 +1,20 @@
+import { api } from '@core/profile-manager'
 import {
     AddressType,
     AliasAddress,
+    FoundryId,
     FoundryOutput,
     ImmutableAliasAddressUnlockCondition,
     UnlockConditionType,
-    Utils,
 } from '@iota/wallet/out/types'
 
-export function buildFoundryId(foundry: FoundryOutput): string {
-    const unlockCondition = foundry.getUnlockConditions()[0]
-    // TODO-sdk Make this clearer without inline casts
+export function buildFoundryId(foundry: FoundryOutput): Promise<FoundryId> {
+    const unlockCondition = foundry.unlockConditions[0]
     const aliasId =
-        unlockCondition.getType() === UnlockConditionType.ImmutableAliasAddress &&
-        (unlockCondition as ImmutableAliasAddressUnlockCondition).getAddress().getType() === AddressType.Alias
-            ? ((unlockCondition as ImmutableAliasAddressUnlockCondition).getAddress() as AliasAddress).getAliasId()
+        unlockCondition.type === UnlockConditionType.ImmutableAliasAddress &&
+        (unlockCondition as ImmutableAliasAddressUnlockCondition).address.type === AddressType.Alias
+            ? ((unlockCondition as ImmutableAliasAddressUnlockCondition).address as AliasAddress).aliasId
             : ''
 
-    return Utils.computeFoundryId(aliasId, foundry.getSerialNumber(), foundry.getTokenScheme().getType())
+    return api.computeFoundryId(aliasId, foundry.serialNumber, foundry.tokenScheme.type)
 }

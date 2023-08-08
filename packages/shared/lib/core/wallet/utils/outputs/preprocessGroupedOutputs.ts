@@ -23,7 +23,7 @@ export function preprocessGroupedOutputs(
     const wrappedOutputs = outputDatas.map((outputData) => ({
         outputId: outputData.outputId,
         remainder: outputData.remainder,
-        output: outputData.output.getType() !== OutputType.Treasury ? outputData.output : undefined,
+        output: outputData.output.type !== OutputType.Treasury ? outputData.output : undefined,
     }))
 
     return {
@@ -74,7 +74,7 @@ function convertTransactionOutputResponseToWrappedOutput(
     transactionId: string,
     outputResponse: OutputResponse
 ): IWrappedOutput {
-    if (outputResponse.output.getType() === OutputType.Treasury) {
+    if (outputResponse.output.type === OutputType.Treasury) {
         return undefined
     } else {
         const outputId = getOutputIdFromTransactionIdAndIndex(transactionId, outputResponse.metadata.outputIndex)

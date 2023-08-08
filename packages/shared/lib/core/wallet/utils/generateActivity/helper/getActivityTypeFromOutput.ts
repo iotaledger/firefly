@@ -4,7 +4,7 @@ import { IWrappedOutput } from '@core/wallet/interfaces'
 import { OutputType } from '@iota/wallet/out/types'
 
 export function getActivityTypeFromOutput(output: IWrappedOutput): ActivityType {
-    switch (output.output.getType()) {
+    switch (output.output.type) {
         case OutputType.Nft:
             return ActivityType.Nft
         case OutputType.Alias:

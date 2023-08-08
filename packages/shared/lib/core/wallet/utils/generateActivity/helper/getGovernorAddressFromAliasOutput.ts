@@ -2,10 +2,8 @@ import { getBech32AddressFromAddressTypes } from '../../getBech32AddressFromAddr
 import { AliasOutput, GovernorAddressUnlockCondition, UnlockConditionType } from '@iota/wallet/out/types'
 
 export function getGovernorAddressFromAliasOutput(output: AliasOutput): string {
-    const governorUnlockCondition = output
-        .getUnlockConditions()
-        .find(
-            (unlockCondition) => unlockCondition.getType() === UnlockConditionType.GovernorAddress
-        ) as GovernorAddressUnlockCondition
-    return getBech32AddressFromAddressTypes(governorUnlockCondition.getAddress())
+    const governorUnlockCondition = output.unlockConditions.find(
+        (unlockCondition) => unlockCondition.type === UnlockConditionType.GovernorAddress
+    ) as GovernorAddressUnlockCondition
+    return getBech32AddressFromAddressTypes(governorUnlockCondition.address)
 }

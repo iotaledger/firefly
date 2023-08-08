@@ -11,12 +11,12 @@ export function getSenderAddressFromUnlockCondition(
     unlockCondition: StorageDepositReturnUnlockCondition | ExpirationUnlockCondition
 ): string | undefined {
     if (
-        (unlockCondition?.getType() === UnlockConditionType.StorageDepositReturn ||
-            unlockCondition?.getType() === UnlockConditionType.Expiration) &&
-        unlockCondition?.getReturnAddress()?.getType() === AddressType.Ed25519
+        (unlockCondition?.type === UnlockConditionType.StorageDepositReturn ||
+            unlockCondition?.type === UnlockConditionType.Expiration) &&
+        unlockCondition?.returnAddress?.type === AddressType.Ed25519
     ) {
         return getBech32AddressFromAddressTypes(
-            new Ed25519Address((unlockCondition.getReturnAddress() as Ed25519Address).getPubKeyHash())
+            new Ed25519Address((unlockCondition.returnAddress as Ed25519Address).pubKeyHash)
         )
     } else {
         return undefined

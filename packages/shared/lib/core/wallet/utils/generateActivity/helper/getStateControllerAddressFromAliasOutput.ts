@@ -2,10 +2,8 @@ import { AliasOutput, StateControllerAddressUnlockCondition, UnlockConditionType
 import { getBech32AddressFromAddressTypes } from '../../getBech32AddressFromAddressTypes'
 
 export function getStateControllerAddressFromAliasOutput(output: AliasOutput): string {
-    const stateControllerUnlockCondition = output
-        .getUnlockConditions()
-        .find(
-            (unlockCondition) => unlockCondition.getType() === UnlockConditionType.StateControllerAddress
-        ) as StateControllerAddressUnlockCondition
-    return getBech32AddressFromAddressTypes(stateControllerUnlockCondition.getAddress())
+    const stateControllerUnlockCondition = output.unlockConditions.find(
+        (unlockCondition) => unlockCondition.type === UnlockConditionType.StateControllerAddress
+    ) as StateControllerAddressUnlockCondition
+    return getBech32AddressFromAddressTypes(stateControllerUnlockCondition.address)
 }

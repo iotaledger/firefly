@@ -38,7 +38,7 @@ export function buildNftFromNftOutput(
     const parsedMetadata = parseNftMetadata(metadata)
     const composedUrl = composeUrlFromNftUri(parsedMetadata?.uri)
     const filePath = `${get(activeProfileId)}/nfts/${id}`
-    const storageDeposit = Number(nftOutput.getAmount())
+    const storageDeposit = Number(nftOutput.amount)
 
     return {
         id,

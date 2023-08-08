@@ -53,25 +53,20 @@
 
                 let type: string
                 let amount: number
-                if (output.getType() !== OutputType.Treasury) {
+                if (output.type !== OutputType.Treasury) {
                     const commonOutput = output as CommonOutput
-                    if (containsUnlockCondition(commonOutput.getUnlockConditions(), UnlockConditionType.Expiration)) {
+                    if (containsUnlockCondition(commonOutput.unlockConditions, UnlockConditionType.Expiration)) {
                         type = PendingFundsType.Unclaimed
-                        amount = Number(commonOutput.getAmount())
+                        amount = Number(commonOutput.amount)
                     } else if (
-                        containsUnlockCondition(
-                            commonOutput.getUnlockConditions(),
-                            UnlockConditionType.StorageDepositReturn
-                        )
+                        containsUnlockCondition(commonOutput.unlockConditions, UnlockConditionType.StorageDepositReturn)
                     ) {
                         type = PendingFundsType.StorageDepositReturn
                         // TODO-sdk the signature of this function has changed recently. Find a way to fix
                         amount = getStorageDepositFromOutput(commonOutput).storageDeposit
-                    } else if (
-                        containsUnlockCondition(commonOutput.getUnlockConditions(), UnlockConditionType.Timelock)
-                    ) {
+                    } else if (containsUnlockCondition(commonOutput.unlockConditions, UnlockConditionType.Timelock)) {
                         type = PendingFundsType.Timelock
-                        amount = Number(output.getAmount())
+                        amount = Number(output.amount)
                     }
                 }
 
@@ -118,7 +113,7 @@
     }
 
     function containsUnlockCondition(unlockConditions: UnlockCondition[], unlockConditionId: number): boolean {
-        return unlockConditions.some((unlockCondition) => unlockCondition.getType() === unlockConditionId)
+        return unlockConditions.some((unlockCondition) => unlockCondition.type === unlockConditionId)
     }
 
     function onConsolidationClick(): void {

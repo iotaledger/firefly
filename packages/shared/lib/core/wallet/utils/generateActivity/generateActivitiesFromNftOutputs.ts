@@ -11,11 +11,11 @@ export async function generateActivitiesFromNftOutputs(
     const outputs = processedTransaction.outputs
     const activities = []
 
-    const nftOutputs = outputs.filter((output) => output.output.getType() === OutputType.Nft)
+    const nftOutputs = outputs.filter((output) => output.output.type === OutputType.Nft)
     for (const nftOutput of nftOutputs) {
         const output = nftOutput.output as NftOutput
         const activity = await generateSingleNftActivity(account, {
-            action: output.getNftId() === EMPTY_HEX_ID ? ActivityAction.Mint : ActivityAction.Send,
+            action: output.nftId === EMPTY_HEX_ID ? ActivityAction.Mint : ActivityAction.Send,
             processedTransaction,
             wrappedOutput: nftOutput,
         })

@@ -10,7 +10,7 @@ export function sumTotalClaimedRewards(shimmerClaimingAccounts: IShimmerClaiming
             tryNumberOrZero(
                 (curr?.claimingTransaction?.payload?.essence as RegularTransactionEssence).outputs?.reduce(
                     (outputsTotal: number, currentOutput: Output) =>
-                        outputsTotal + tryNumberOrZero(currentOutput?.getAmount()),
+                        outputsTotal + tryNumberOrZero(currentOutput?.amount),
                     0
                 )
             ),

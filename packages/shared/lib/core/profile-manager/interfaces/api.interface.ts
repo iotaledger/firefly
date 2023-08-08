@@ -1,4 +1,5 @@
 import { WalletOptions, CreateAccountPayload, TransactionId, OutputId } from '@iota/wallet/out/types'
+import { AliasId, Client, FoundryId } from '@iota/wallet'
 import { IAuth } from '@core/network'
 import { INodeInfoResponse } from '@core/network/interfaces'
 
@@ -8,15 +9,13 @@ import { IProfileManager } from './profile-manager.interface'
 import { RecoverAccountsPayload } from './recover-account-payload.interface'
 
 export interface IApi {
-    computeOutputId(id: TransactionId, index: number): Promise<OutputId>
     getNodeInfo(profileManagerId: string, url?: string, auth?: IAuth): Promise<INodeInfoResponse>
-    generateMnemonic(): Promise<string>
-    verifyMnemonic(mnemonic: string): Promise<void>
     createWallet(id: string, options: WalletOptions): Promise<IProfileManager>
     createAccount(managerId: string, payload: CreateAccountPayload): Promise<IAccount>
     deleteWallet(id: string): void
     getAccount(profileManagerId: string, index: number): Promise<IAccount>
     getAccounts(profileManagerId: string): Promise<IAccount[]>
+    getClient(profileManagerId: string): Promise<Client>
     recoverAccounts(profileManagerId: string, payload: RecoverAccountsPayload): Promise<IAccount[]>
     migrateStrongholdSnapshotV2ToV3(
         currentPath: string,
@@ -24,4 +23,9 @@ export interface IApi {
         newPath: string,
         newPassword: string
     ): Promise<void>
+    // Mapped from sdk#Utils
+    generateMnemonic(): Promise<string>
+    verifyMnemonic(mnemonic: string): Promise<void>
+    computeOutputId(id: TransactionId, index: number): Promise<OutputId>
+    computeFoundryId(aliasId: AliasId, serialNumber: number, tokenSchemeType: number): Promise<FoundryId>
 }
