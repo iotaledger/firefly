@@ -8,14 +8,41 @@
     import { burnNft } from '@core/wallet'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { activeProfile, updateActiveProfile } from '@core/profile/stores'
+    import { TextHintVariant } from 'shared/components/enums'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
-    export let modal: Modal = undefined
+    export let modal: Modal
     export let nft: INft
 
     $: url = nft?.parsedMetadata?.uri && composeUrl(nft.parsedMetadata.uri)
     $: isLocked = nft.timelockTime > $time.getTime()
     $: isCurrentPfp = $activeProfile.pfp?.id === nft.id
+
+    $: MENU_ITEMS = [
+        {
+            icon: IconEnum.Receive,
+            title: localize('views.collectibles.details.menu.download'),
+            disabled: true,
+            onClick: (): void => {},
+        },
+        {
+            icon: IconEnum.Profile,
+            title: localize(`views.collectibles.details.menu.${isCurrentPfp ? 'unsetPfp' : 'setPfp'}`),
+            onClick: onSetPfpClick,
+        },
+        {
+            icon: IconEnum.Export,
+            title: localize('views.collectibles.details.menu.view'),
+            onClick: onOpenMediaClick,
+            disabled: !url,
+        },
+        {
+            icon: IconEnum.Delete,
+            title: localize('views.collectibles.details.menu.burn'),
+            onClick: openBurnNft,
+            disabled: isLocked,
+        },
+    ]
 
     function openBurnNft(): void {
         openPopup({
@@ -28,7 +55,7 @@
                 }),
                 description: localize('actions.confirmNftBurn.description'),
                 hint: localize('actions.confirmNftBurn.hint'),
-                warning: true,
+                variant: TextHintVariant.Warning,
                 confirmText: localize('actions.burn'),
                 onConfirm: async () => {
                     await checkActiveProfileAuth(
@@ -76,29 +103,7 @@
 </script>
 
 <Modal bind:this={modal} position={{ top: '100px', right: '60px' }}>
-    <div class="flex flex-col">
-        <MenuItem
-            icon={IconEnum.Receive}
-            title={localize('views.collectibles.details.menu.download')}
-            disabled={true}
-            onClick={() => {}}
-        />
-        <MenuItem
-            icon={IconEnum.Profile}
-            title={localize(`views.collectibles.details.menu.${isCurrentPfp ? 'unsetPfp' : 'setPfp'}`)}
-            onClick={onSetPfpClick}
-        />
-        <MenuItem
-            icon={IconEnum.Export}
-            title={localize('views.collectibles.details.menu.view')}
-            onClick={onOpenMediaClick}
-            disabled={!url}
-        />
-        <MenuItem
-            icon={IconEnum.Delete}
-            title={localize('views.collectibles.details.menu.burn')}
-            onClick={openBurnNft}
-            disabled={isLocked}
-        />
-    </div>
+    {#each MENU_ITEMS as item}
+        <MenuItem {...item} />
+    {/each}
 </Modal>

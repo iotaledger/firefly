@@ -6,6 +6,7 @@
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import { UnlockCondition, UnlockConditionType, OutputType, CommonOutput } from '@iota/wallet/out/types'
+    import { TextHintVariant } from 'shared/components/enums'
     import { BalanceSummarySection, Button, FontWeight, Text, TextType } from 'shared/components'
 
     interface BalanceBreakdown {
@@ -120,7 +121,7 @@
                 title: localize('popups.minimizeStorageDeposit.title'),
                 description: localize('popups.minimizeStorageDeposit.description'),
                 confirmText: localize('popups.minimizeStorageDeposit.confirmButton'),
-                info: true,
+                variant: TextHintVariant.Info,
                 onConfirm: async () => {
                     await checkActiveProfileAuth(
                         async () => {

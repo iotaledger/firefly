@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Button, Text, TextHint } from 'shared/components'
-    import { HTMLButtonType, TextType } from 'shared/components/enums'
+    import { HTMLButtonType, TextHintVariant, TextType } from 'shared/components/enums'
     import { selectedAccount } from '@core/account/stores'
     import { handleError } from '@core/error/handlers'
     import { setVotingPower } from '@contexts/governance/actions'
@@ -37,7 +37,7 @@
 
 <form class="space-y-4" on:submit|preventDefault={onSubmit}>
     <Text type={TextType.h4} classes="mb-3">{localize('popups.manageVotingPower.title')}</Text>
-    <TextHint warning text={localize('popups.manageVotingPower.amountZero')} />
+    <TextHint variant={TextHintVariant.Warning} text={localize('popups.manageVotingPower.amountZero')} />
     <div class="flex flex-row flex-nowrap w-full space-x-4">
         <Button outline classes="w-full" onClick={onCancelClick}>
             {localize('actions.cancel')}
