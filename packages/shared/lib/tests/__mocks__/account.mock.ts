@@ -89,7 +89,10 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    createAliasOutput(params?: AliasOutputParams, transactionOptions?: TransactionOptions): Promise<Transaction> {
+    prepareCreateAliasOutput(
+        params?: AliasOutputParams,
+        transactionOptions?: TransactionOptions
+    ): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
 

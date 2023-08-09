@@ -9,6 +9,7 @@
 const { ipcRenderer, contextBridge } = require('electron')
 const ElectronApi = require('./electronApi')
 const WalletApi = require('@iota/wallet')
+const { plainToInstance } = require('class-transformer')
 const fs = require('fs')
 
 const SEND_CRASH_REPORTS = window.process.argv.includes('--send-crash-reports=true')
@@ -131,7 +132,7 @@ try {
             const manager = profileManagers[managerId]
             const account = await manager.createAccount(payload)
             bindMethodsAcrossContextBridge(WalletApi.Account.prototype, account)
-            return account
+            return plainToInstance(WalletApi.Account, account)
         },
         deleteWallet(id) {
             if (id && id in profileManagers) {

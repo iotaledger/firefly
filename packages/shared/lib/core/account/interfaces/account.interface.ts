@@ -28,19 +28,13 @@ import type {
     SyncOptions,
     Transaction,
     TransactionOptions,
-    AliasOutput,
-    BasicOutput,
     FoundryOutput,
-    NftOutput,
     HexEncodedAmount,
     Output,
     HexEncodedString,
-    AliasOutputBuilderParams,
-    BasicOutputBuilderParams,
-    FoundryOutputBuilderParams,
-    NftOutputBuilderParams,
     INode,
     AccountAddress,
+    PreparedTransaction,
 } from '@iota/wallet/out/types'
 
 import { ParticipationEventType } from '@iota/wallet/out/types'
@@ -48,10 +42,6 @@ import { ParticipationEventType } from '@iota/wallet/out/types'
 export interface IAccount {
     addresses(): Promise<AccountAddress[]>
     addressesWithUnspentOutputs(): Promise<AddressWithUnspentOutputs[]>
-    buildAliasOutput(data: AliasOutputBuilderParams): Promise<AliasOutput>
-    buildBasicOutput(data: BasicOutputBuilderParams): Promise<BasicOutput>
-    buildFoundryOutput(data: FoundryOutputBuilderParams): Promise<FoundryOutput>
-    buildNftOutput(data: NftOutputBuilderParams): Promise<NftOutput>
     burnNativeToken(
         tokenId: string,
         burnAmount: HexEncodedAmount,
@@ -60,7 +50,10 @@ export interface IAccount {
     burnNft(nftId: string, transactionOptions?: TransactionOptions): Promise<Transaction>
     claimOutputs(outputIds: string[]): Promise<Transaction>
     consolidateOutputs(params: ConsolidationParams): Promise<Transaction>
-    createAliasOutput(params?: AliasOutputParams, transactionOptions?: TransactionOptions): Promise<Transaction>
+    prepareCreateAliasOutput(
+        params?: AliasOutputParams,
+        transactionOptions?: TransactionOptions
+    ): Promise<PreparedTransaction>
     meltNativeToken(
         tokenId: string,
         meltAmount: HexEncodedAmount,
@@ -125,5 +118,4 @@ export interface IAccount {
     vote(eventId?: string, answers?: number[]): Promise<Transaction>
     verifyEd25519Signature(signature: Ed25519Signature, message: HexEncodedString): Promise<boolean>
     verifySecp256k1EcdsaSignature(signature: Secp256k1EcdsaSignature, message: HexEncodedString): Promise<boolean>
-    minimumRequiredStorageDeposit(output: Output): Promise<number>
 }

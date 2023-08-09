@@ -1,6 +1,7 @@
 <script lang="ts">
     import { Button, KeyValueBox, Text, FontWeight, TextType } from 'shared/components'
     import { selectedAccount, updateSelectedAccount } from '@core/account'
+    import { getClient } from '@core/profile-manager'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth, getBaseToken } from '@core/profile'
     import {
@@ -11,9 +12,11 @@
         UNLOCK_CONDITION_STATE_CONTROLLER_ADDRESS,
         processAndAddToActivities,
     } from '@core/wallet'
+    import { PreparedTransaction } from '@iota/wallet/out/types'
     import { closePopup } from '@auxiliary/popup'
     import { onMount } from 'svelte'
     import { handleError } from '@core/error/handlers/handleError'
+    import { plainToInstance } from 'class-transformer'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -44,7 +47,8 @@
 
     async function setStorageDeposit(aliasOutput): Promise<void> {
         try {
-            const { amount } = await $selectedAccount.buildAliasOutput(aliasOutput)
+            const client = await getClient()
+            const { amount } = await client.buildAliasOutput(aliasOutput)
             storageDeposit = formatTokenAmountPrecise(Number(amount), getBaseToken())
         } catch (err) {
             handleError(err)
@@ -54,7 +58,9 @@
     async function createAlias(): Promise<void> {
         try {
             updateSelectedAccount({ isTransferring: true })
-            const transaction = await $selectedAccount.createAliasOutput()
+            const transaction = await $selectedAccount
+                .prepareCreateAliasOutput()
+                .then((prepared) => plainToInstance(PreparedTransaction, prepared).send())
             await processAndAddToActivities(transaction, $selectedAccount)
             closePopup()
         } catch (err) {
