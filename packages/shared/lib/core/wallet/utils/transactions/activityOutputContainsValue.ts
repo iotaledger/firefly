@@ -15,7 +15,7 @@ export async function activityOutputContainsValue(
         const output = wrappedOutput.output as BasicOutput
 
         const isAsync = isOutputAsync(output)
-        const nativeToken = getNativeTokenFromOutput(output)
+        const nativeToken = await getNativeTokenFromOutput(output)
 
         const { storageDeposit } = await getStorageDepositFromOutput(account, output)
         const rawAmount = getAmountFromOutput(output) - storageDeposit

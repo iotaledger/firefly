@@ -44,7 +44,7 @@ export async function generateSingleFoundryActivity(
     const containsValue = true
 
     const id = outputId || transactionId
-    const nativeToken = getNativeTokenFromOutput(output)
+    const nativeToken = await getNativeTokenFromOutput(output)
     const assetId = nativeToken?.id ?? getCoinType()
 
     const storageDeposit = getAmountFromOutput(output)

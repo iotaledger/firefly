@@ -13,7 +13,7 @@ import { parseNftMetadata } from './parseNftMetadata'
 import { composeUrlFromNftUri } from './composeUrlFromNftUri'
 import { getSpendableStatusFromUnspentNftOutput } from './getSpendableStatusFromUnspentNftOutput'
 import { ADDRESS_TYPE_NFT } from '@core/wallet/constants'
-import { NftOutput } from '@iota/wallet/out/types'
+import { Address, NftOutput } from '@iota/wallet/out/types'
 
 export function buildNftFromNftOutput(
     wrappedOutput: IWrappedOutput,
@@ -32,11 +32,11 @@ export function buildNftFromNftOutput(
     }
 
     const id = getNftId(nftOutput.getNftId(), wrappedOutput.outputId)
-    const address = getBech32AddressFromAddressTypes({ type: ADDRESS_TYPE_NFT, nftId: id })
+    const address = getBech32AddressFromAddressTypes({ type: ADDRESS_TYPE_NFT, nftId: id } as unknown as Address)
     const issuer = getIssuerFromNftOutput(nftOutput)
     const metadata = getMetadataFromNftOutput(nftOutput)
     const parsedMetadata = parseNftMetadata(metadata)
-    const composedUrl = composeUrlFromNftUri(parsedMetadata?.uri)
+    const composedUrl = composeUrlFromNftUri(parsedMetadata.uri)
     const filePath = `${get(activeProfileId)}/nfts/${id}`
     const storageDeposit = Number(nftOutput.amount)
 

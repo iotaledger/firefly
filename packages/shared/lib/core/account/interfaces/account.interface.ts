@@ -40,12 +40,13 @@ import type {
     FoundryOutputBuilderParams,
     NftOutputBuilderParams,
     INode,
+    AccountAddress,
 } from '@iota/wallet/out/types'
 
 import { ParticipationEventType } from '@iota/wallet/out/types'
 
 export interface IAccount {
-    addresses(): Promise<Address[]>
+    addresses(): Promise<AccountAddress[]>
     addressesWithUnspentOutputs(): Promise<AddressWithUnspentOutputs[]>
     buildAliasOutput(data: AliasOutputBuilderParams): Promise<AliasOutput>
     buildBasicOutput(data: BasicOutputBuilderParams): Promise<BasicOutput>
@@ -124,4 +125,5 @@ export interface IAccount {
     vote(eventId?: string, answers?: number[]): Promise<Transaction>
     verifyEd25519Signature(signature: Ed25519Signature, message: HexEncodedString): Promise<boolean>
     verifySecp256k1EcdsaSignature(signature: Secp256k1EcdsaSignature, message: HexEncodedString): Promise<boolean>
+    minimumRequiredStorageDeposit(output: Output): Promise<number>
 }

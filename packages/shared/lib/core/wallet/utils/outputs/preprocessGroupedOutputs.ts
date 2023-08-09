@@ -83,12 +83,7 @@ function convertTransactionOutputResponseToWrappedOutput(
 }
 
 function getUtxoInputsFromWrappedInputs(wrappedInputs: IWrappedOutput[]): UTXOInput[] {
-    // TODO-sdk This won't work probably
     return (
-        wrappedInputs?.map((input) => ({
-            type: 0,
-            transactionId: input.metadata?.transactionId,
-            transactionInputIndex: input.metadata?.outputIndex,
-        })) ?? []
+        wrappedInputs?.map((input) => new UTXOInput(input.metadata?.transactionId, input.metadata?.outputIndex)) ?? []
     )
 }

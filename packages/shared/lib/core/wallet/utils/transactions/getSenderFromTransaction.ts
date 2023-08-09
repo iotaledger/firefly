@@ -1,10 +1,11 @@
-import { Output, Subject } from '@core/wallet/types'
+import { Subject } from '@core/wallet/types'
+import { CommonOutput } from '@iota/wallet'
 import { getSenderFromOutput } from '../outputs/getSenderFromOutput'
 
 export function getSenderFromTransaction(
     isIncoming: boolean,
     accountAddress: string,
-    output: Output
+    output: CommonOutput
 ): Subject | undefined {
     if (isIncoming) {
         return getSenderFromOutput(output)

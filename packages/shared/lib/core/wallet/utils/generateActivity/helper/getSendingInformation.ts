@@ -6,11 +6,11 @@ import { getSubjectFromAddress } from '../../getSubjectFromAddress'
 import { isSubjectInternal } from '../../isSubjectInternal'
 import { getRecipientFromOutput } from '../../outputs'
 import { getSenderAddressFromInputs, getSenderFromTransaction } from '../../transactions'
-import { Output } from '@iota/wallet/out/types'
+import { CommonOutput } from '@iota/wallet/out/types'
 
 export function getSendingInformation(
     processedTransaction: IProcessedTransaction,
-    output: Output,
+    output: CommonOutput,
     account: IAccountState
 ): SenderInfo {
     const { direction, wrappedInputs } = processedTransaction

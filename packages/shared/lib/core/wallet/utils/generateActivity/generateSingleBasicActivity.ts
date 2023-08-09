@@ -52,7 +52,7 @@ export async function generateSingleBasicActivity(
 
     const baseTokenAmount = getAmountFromOutput(output) - storageDeposit - gasBudget
 
-    const nativeToken = getNativeTokenFromOutput(output)
+    const nativeToken = await getNativeTokenFromOutput(output)
     const assetId = fallbackAssetId ?? nativeToken?.id ?? getCoinType()
 
     let surplus: number | undefined = undefined

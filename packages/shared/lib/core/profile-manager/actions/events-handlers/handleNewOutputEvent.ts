@@ -1,4 +1,4 @@
-import { Event, NewOutputWalletEvent } from '@iota/wallet/out/types'
+import { AliasOutput, Event, NewOutputWalletEvent } from '@iota/wallet/out/types'
 import { WalletEventType } from '@iota/wallet/out/types'
 
 import { syncBalance } from '@core/account/actions/syncBalance'
@@ -32,34 +32,39 @@ export function handleNewOutputEvent(error: Error, rawEvent: Event): void {
 
 export async function handleNewOutputEventInternal(accountIndex: number, payload: NewOutputWalletEvent): Promise<void> {
     const account = get(activeAccounts)?.find((account) => account.index === accountIndex)
-    const output = payload.output
+    const outputData = payload.output
 
-    if (!account || !output) return
+    if (!account || !outputData) return
 
-    const address = getBech32AddressFromAddressTypes(output?.address)
+    const output = outputData.output as AliasOutput
+
+    const address = getBech32AddressFromAddressTypes(outputData?.address)
     const isNewAliasOutput =
-        output.output.type === OUTPUT_TYPE_ALIAS &&
-        output.output.stateIndex === 0 &&
-        !get(allAccountActivities)[accountIndex].find((_activity) => _activity.id === output.outputId)
-    const isNftOutput = output.output.type === OUTPUT_TYPE_NFT
+        output.type === OUTPUT_TYPE_ALIAS &&
+        output.stateIndex === 0 &&
+        !get(allAccountActivities)[accountIndex].find((_activity) => _activity.id === outputData.outputId)
+    const isNftOutput = outputData.output.type === OUTPUT_TYPE_NFT
 
-    if ((account?.depositAddress === address && !output?.remainder) || isNewAliasOutput) {
+    if ((account?.depositAddress === address && !outputData?.remainder) || isNewAliasOutput) {
         await syncBalance(account.index)
 
-        const processedOutput = preprocessGroupedOutputs([output], payload?.transactionInputs ?? [], account)
+        const processedOutput = preprocessGroupedOutputs([outputData], payload?.transactionInputs ?? [], account)
 
         const activities = await generateActivities(processedOutput, account)
         for (const activity of activities) {
             if (activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry) {
                 const asset = await getOrRequestAssetFromPersistedAssets(activity.assetId)
-                addPersistedAsset(asset)
+                if (asset) {
+                    addPersistedAsset(asset)
+                }
             }
         }
         addActivitiesToAccountActivitiesInAllAccountActivities(account.index, activities)
     }
 
     if (isNftOutput) {
-        const nft = buildNftFromNftOutput(output as IWrappedOutput, account.depositAddress)
+        const wrappedOutput = outputData.output as unknown as IWrappedOutput
+        const nft = buildNftFromNftOutput(wrappedOutput, account.depositAddress)
         addOrUpdateNftInAllAccountNfts(account.index, nft)
         void addNftsToDownloadQueue(accountIndex, [nft])
 
