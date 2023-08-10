@@ -63,8 +63,8 @@
                         containsUnlockCondition(commonOutput.unlockConditions, UnlockConditionType.StorageDepositReturn)
                     ) {
                         type = PendingFundsType.StorageDepositReturn
-                        // TODO-sdk the signature of this function has changed recently. Find a way to fix
-                        amount = getStorageDepositFromOutput(commonOutput).storageDeposit
+                        const storageDepositData = await getStorageDepositFromOutput($selectedAccount, commonOutput)
+                        amount = storageDepositData.storageDeposit
                     } else if (containsUnlockCondition(commonOutput.unlockConditions, UnlockConditionType.Timelock)) {
                         type = PendingFundsType.Timelock
                         amount = Number(output.amount)

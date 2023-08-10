@@ -1,5 +1,5 @@
 import { WalletOptions, CreateAccountPayload, TransactionId, OutputId } from '@iota/sdk/out/types'
-import { AliasId, Client, FoundryId } from '@iota/sdk'
+import { AliasId, Client, FoundryId, NftId } from '@iota/sdk'
 import { IAuth } from '@core/network'
 import { INodeInfoResponse } from '@core/network/interfaces'
 
@@ -26,6 +26,13 @@ export interface IApi {
     // Mapped from sdk#Utils
     generateMnemonic(): Promise<string>
     verifyMnemonic(mnemonic: string): Promise<void>
-    computeOutputId(id: TransactionId, index: number): Promise<OutputId>
+    hexToBech32(hex: string, bech32Hrp: string): string
+    bech32ToHex(bech32: string): string
+    computeAliasId(outputId: string): AliasId
     computeFoundryId(aliasId: AliasId, serialNumber: number, tokenSchemeType: number): Promise<FoundryId>
+    computeNftId(outputId: string): NftId
+    hexPublicKeyToBech32Address(hex: string, bech32Hrp: string): string
+    aliasIdToBech32(aliasId: string, bech32Hrp: string): string
+    nftIdToBech32(nftId: string, bech32Hrp: string): string
+    computeOutputId(id: TransactionId, index: number): Promise<OutputId>
 }

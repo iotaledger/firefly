@@ -1,7 +1,7 @@
 import { getRecipientAddressFromOutput } from '..'
 import { IWrappedOutput } from '@core/wallet/interfaces'
 import { ActivityDirection } from '@core/wallet/enums'
-import { CommonOutput } from '@iota/sdk'
+import { CommonOutput } from '@iota/sdk/out/types'
 
 export function getNonRemainderBasicOutputsFromTransaction(
     wrappedOutputs: IWrappedOutput[],

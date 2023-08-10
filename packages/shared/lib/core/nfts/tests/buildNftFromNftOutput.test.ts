@@ -46,12 +46,6 @@ const incomingExpiredTimelockedCondition: UnlockCondition[] = [
     new TimelockUnlockCondition(136367917),
 ]
 
-jest.mock('../../wallet/utils/convertHexAddressToBech32.ts', () => ({
-    convertHexAddressToBech32: jest.fn((addressType: number, hexAddress: string) => {
-        return hexAddress ? Bech32Helper.toBech32(addressType, Converter.hexToBytes(hexAddress), 'rms') : undefined
-    }),
-}))
-
 describe('File: buildNFtFromOutput.ts', () => {
     let outputData: IWrappedOutput
 

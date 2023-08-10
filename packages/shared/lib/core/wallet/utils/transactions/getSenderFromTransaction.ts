@@ -1,5 +1,5 @@
 import { Subject } from '@core/wallet/types'
-import { CommonOutput } from '@iota/sdk'
+import { CommonOutput } from '@iota/sdk/out/types'
 import { getSenderFromOutput } from '../outputs/getSenderFromOutput'
 
 export function getSenderFromTransaction(

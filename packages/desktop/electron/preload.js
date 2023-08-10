@@ -8,7 +8,7 @@
 
 const { ipcRenderer, contextBridge } = require('electron')
 const ElectronApi = require('./electronApi')
-const WalletApi = require('@iota/sdk')
+const IotaSdk = require('@iota/sdk')
 const fs = require('fs')
 
 const SEND_CRASH_REPORTS = window.process.argv.includes('--send-crash-reports=true')
@@ -65,7 +65,7 @@ try {
                 levelFilter: 'debug',
                 targetExclusions: ['h2', 'hyper', 'rustls', 'message_handler'],
             }
-            WalletApi.initLogger(loggerOptions)
+            IotaSdk.initLogger(loggerOptions)
 
             deleteOldLogs(logDir, versionDetails.currentVersion)
         })
@@ -97,13 +97,13 @@ try {
     // This workaround exposes the classes through factory methods
     // The factory method also copies all the prototype methods to the object so that it gets passed through the bridge
 
-    const methodNames = Object.getOwnPropertyNames(WalletApi.Utils).filter(
+    const methodNames = Object.getOwnPropertyNames(IotaSdk.Utils).filter(
         (m) => !['length', 'name', 'prototype'].includes(m)
     )
     const methods = {}
 
     for (const name of methodNames) {
-        methods[name] = (...args) => WalletApi.Utils[name](...args)
+        methods[name] = (...args) => IotaSdk.Utils[name](...args)
     }
 
     contextBridge.exposeInMainWorld('__WALLET__API__', {
@@ -121,16 +121,16 @@ try {
             }
         },
         createWallet(id, options) {
-            const manager = new WalletApi.Wallet(options)
+            const manager = new IotaSdk.Wallet(options)
             manager.id = id
             profileManagers[id] = manager
-            bindMethodsAcrossContextBridge(WalletApi.Wallet.prototype, manager)
+            bindMethodsAcrossContextBridge(IotaSdk.Wallet.prototype, manager)
             return manager
         },
         async createAccount(managerId, payload) {
             const manager = profileManagers[managerId]
             const account = await manager.createAccount(payload)
-            bindMethodsAcrossContextBridge(WalletApi.Account.prototype, account)
+            bindMethodsAcrossContextBridge(IotaSdk.Account.prototype, account)
             return account
         },
         deleteWallet(id) {
@@ -141,32 +141,32 @@ try {
         async getAccount(managerId, index) {
             const manager = profileManagers[managerId]
             const account = await manager.getAccount(index)
-            bindMethodsAcrossContextBridge(WalletApi.Account.prototype, account)
+            bindMethodsAcrossContextBridge(IotaSdk.Account.prototype, account)
             return account
         },
         async getAccounts(managerId) {
             const manager = profileManagers[managerId]
             const accounts = await manager.getAccounts()
-            accounts.forEach((account) => bindMethodsAcrossContextBridge(WalletApi.Account.prototype, account))
+            accounts.forEach((account) => bindMethodsAcrossContextBridge(IotaSdk.Account.prototype, account))
             return accounts
         },
         async recoverAccounts(managerId, payload) {
             const manager = profileManagers[managerId]
             const accounts = await manager.recoverAccounts(...Object.values(payload))
-            accounts.forEach((account) => bindMethodsAcrossContextBridge(WalletApi.Account.prototype, account))
+            accounts.forEach((account) => bindMethodsAcrossContextBridge(IotaSdk.Account.prototype, account))
             return accounts
         },
         async getClient(managerId) {
             const manager = profileManagers[managerId]
             const client = await manager.getClient()
-            bindMethodsAcrossContextBridge(WalletApi.Client.prototype, client)
+            bindMethodsAcrossContextBridge(IotaSdk.Client.prototype, client)
 
             return client
         },
         async migrateStrongholdSnapshotV2ToV3(currentPath, newPath, currentPassword, newPassword) {
             const snapshotSaltV2 = 'wallet.rs'
             const snapshotRoundsV2 = 100
-            return WalletApi.migrateStrongholdSnapshotV2ToV3(
+            return IotaSdk.migrateStrongholdSnapshotV2ToV3(
                 currentPath,
                 newPath,
                 snapshotSaltV2,
@@ -191,7 +191,7 @@ function bindMethodsAcrossContextBridge(prototype, object) {
                     const txs = await method(arguments)
                     txs.forEach((tx) => {
                         // Or classToInstance?
-                        bindMethodsAcrossContextBridge(WalletApi.Transaction.prototype, tx)
+                        bindMethodsAcrossContextBridge(IotaSdk.Transaction.prototype, tx)
                     })
                     return txs
                 }

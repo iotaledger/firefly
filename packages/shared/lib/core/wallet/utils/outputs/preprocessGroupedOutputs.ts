@@ -2,7 +2,6 @@ import { CommonOutput, OutputData, OutputResponse, OutputType, UTXOInput } from 
 import { MILLISECONDS_PER_SECOND } from '@core/utils/constants'
 import { IAccountState } from '@core/account/interfaces'
 import { InclusionState, ActivityDirection } from '../../enums'
-import { OUTPUT_TYPE_TREASURY } from '../../constants'
 import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
 import { getRecipientAddressFromOutput } from './getRecipientAddressFromOutput'
 import { getSenderAddressFromInputs } from '../transactions'
@@ -47,7 +46,7 @@ function getDirectionForOutputs(
         return ActivityDirection.Outgoing
     }
     const output =
-        nonRemainderOutputs[0].output.type !== OUTPUT_TYPE_TREASURY ? nonRemainderOutputs[0].output : undefined
+        nonRemainderOutputs[0].output.type !== OutputType.Treasury ? nonRemainderOutputs[0].output : undefined
     const recipientAddress = output ? getRecipientAddressFromOutput(output as CommonOutput) : undefined
     const senderAddress = wrappedInputs ? getSenderAddressFromInputs(wrappedInputs) : ''
 

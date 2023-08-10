@@ -1,9 +1,9 @@
 import { IAccountState } from '@core/account'
-import { getCoinType } from '@core/profile'
+import { getCoinType, getNetworkHrp } from '@core/profile'
 import { ActivityType } from '@core/wallet/enums'
 import { IActivityGenerationParameters } from '@core/wallet/interfaces'
 import { FoundryActivity } from '@core/wallet/types'
-import { convertHexAddressToBech32, getNativeTokenFromOutput } from '..'
+import { getNativeTokenFromOutput } from '..'
 import {
     getAmountFromOutput,
     getAsyncDataFromOutput,
@@ -12,13 +12,13 @@ import {
     getTagFromOutput,
 } from './helper'
 import {
-    AddressType,
     AliasAddress,
     FoundryOutput,
     ImmutableAliasAddressUnlockCondition,
     SimpleTokenScheme,
     UnlockConditionType,
 } from '@iota/sdk/out/types'
+import { api } from '@core/profile-manager'
 
 export async function generateSingleFoundryActivity(
     account: IAccountState,
@@ -37,7 +37,7 @@ export async function generateSingleFoundryActivity(
         (unlockCondition) => unlockCondition.type === UnlockConditionType.ImmutableAliasAddress
     ) as ImmutableAliasAddressUnlockCondition
     const aliasId = (addressUnlockCondition?.address as AliasAddress)?.aliasId
-    const aliasAddress = aliasId ? convertHexAddressToBech32(AddressType.Alias, aliasId) : undefined
+    const aliasAddress = aliasId ? api.aliasIdToBech32(aliasId, getNetworkHrp()) : undefined
 
     const isHidden = false
     const isAssetHidden = false

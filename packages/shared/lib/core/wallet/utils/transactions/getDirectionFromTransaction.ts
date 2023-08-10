@@ -1,7 +1,7 @@
 import { IWrappedOutput } from '../../interfaces'
 import { getRecipientAddressFromOutput } from '../outputs/getRecipientAddressFromOutput'
 import { ActivityDirection } from '@core/wallet/enums'
-import { CommonOutput } from '@iota/sdk'
+import { CommonOutput } from '@iota/sdk/out/types'
 
 export function getDirectionFromTransaction(
     wrappedOutputs: IWrappedOutput[],

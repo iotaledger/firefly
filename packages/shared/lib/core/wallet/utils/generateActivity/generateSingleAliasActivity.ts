@@ -1,9 +1,8 @@
 import { IAccountState } from '@core/account'
-import { ADDRESS_TYPE_ALIAS, EMPTY_HEX_ID } from '@core/wallet/constants'
+import { EMPTY_HEX_ID } from '@core/wallet/constants'
 import { ActivityType } from '@core/wallet/enums'
 import { IActivityGenerationParameters } from '@core/wallet/interfaces'
 import { AliasActivity } from '@core/wallet/types'
-import { convertHexAddressToBech32, hashOutputId } from '..'
 import {
     getAmountFromOutput,
     getAsyncDataFromOutput,
@@ -15,6 +14,8 @@ import {
     getTagFromOutput,
 } from './helper'
 import { AliasOutput } from '@iota/sdk/out/types'
+import { api } from '@core/profile-manager'
+import { getNetworkHrp } from '@core/profile'
 
 export async function generateSingleAliasActivity(
     account: IAccountState,
@@ -67,6 +68,6 @@ export async function generateSingleAliasActivity(
 
 function getAliasId(output: AliasOutput, outputId: string): string {
     const isNewAlias = output.aliasId === EMPTY_HEX_ID
-    const aliasId = isNewAlias ? hashOutputId(outputId) : output.aliasId
-    return convertHexAddressToBech32(ADDRESS_TYPE_ALIAS, aliasId)
+    const aliasId = isNewAlias ? api.computeAliasId(outputId) : output.aliasId
+    return api.aliasIdToBech32(aliasId, getNetworkHrp())
 }

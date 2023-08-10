@@ -9,8 +9,8 @@ import {
 } from '@iota/sdk/out/types'
 import { Converter } from '@core/utils'
 import { IIrc30Metadata } from '../interfaces'
-import { convertBech32ToHexAddress } from './convertBech32ToHexAddress'
 import { getSerialNumberFromAliasOutput } from './outputs/getSerialNumberFromAliasOutput'
+import { api } from '@core/profile-manager'
 
 export async function buildFoundryOutputData(
     totalSupply: number,
@@ -19,7 +19,7 @@ export async function buildFoundryOutputData(
     aliasId: string
 ): Promise<FoundryOutputBuilderParams> {
     const immutableAliasUnlockCondition = new ImmutableAliasAddressUnlockCondition(
-        new AliasAddress(convertBech32ToHexAddress(aliasId))
+        new AliasAddress(api.bech32ToHex(aliasId))
     )
 
     const unlockConditions: UnlockCondition[] = [immutableAliasUnlockCondition]
