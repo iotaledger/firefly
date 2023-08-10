@@ -1,10 +1,10 @@
-import { AddressUnlockCondition, BuildNftOutputData, Ed25519Address, MetadataFeature } from '@iota/wallet/out/types'
+import { AddressUnlockCondition, Ed25519Address, MetadataFeature, NftOutputBuilderParams } from '@iota/wallet/out/types'
 import { Converter } from '@core/utils'
 import { EMPTY_HEX_ID } from '../constants'
 import { convertBech32ToHexAddress } from './convertBech32ToHexAddress'
 import { IIrc27Metadata } from '@core/nfts/interfaces'
 
-export function buildNftOutputData(metadata: IIrc27Metadata, address: string): BuildNftOutputData {
+export function buildNftOutputData(metadata: IIrc27Metadata, address: string): NftOutputBuilderParams {
     const addressUnlockCondition = new AddressUnlockCondition(new Ed25519Address(convertBech32ToHexAddress(address)))
 
     const unlockConditions: AddressUnlockCondition[] = [addressUnlockCondition]

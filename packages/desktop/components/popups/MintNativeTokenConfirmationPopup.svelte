@@ -13,6 +13,7 @@
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { Button, KeyValueBox, Text, FontWeight, TextType } from 'shared/components'
     import { onMount } from 'svelte'
+    import { getClient } from '@core/profile-manager'
     import { selectedAccount } from '@core/account'
     import { handleError } from '@core/error/handlers/handleError'
 
@@ -33,7 +34,8 @@
                 metadata,
                 aliasId
             )
-            const preparedOutput = await $selectedAccount.buildFoundryOutput(outputData)
+            const client = await getClient()
+            const preparedOutput = await client.buildFoundryOutput(outputData)
             storageDeposit = formatTokenAmountPrecise(Number(preparedOutput.amount) ?? 0, getBaseToken())
         }
     }

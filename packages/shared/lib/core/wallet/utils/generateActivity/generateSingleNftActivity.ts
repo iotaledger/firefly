@@ -13,6 +13,7 @@ import {
     getTagFromOutput,
 } from './helper'
 import { NftOutput } from '@iota/wallet/out/types'
+import { getClient } from '@core/profile-manager'
 
 export async function generateSingleNftActivity(
     account: IAccountState,
@@ -28,7 +29,7 @@ export async function generateSingleNftActivity(
     const isAssetHidden = false
     const containsValue = true
 
-    const nftId = nftIdFromInput ? nftIdFromInput : getNftId(output.getNftId(), outputId)
+    const nftId = nftIdFromInput ? nftIdFromInput : getNftId(output.nftId, outputId)
     const metadata = getMetadataFromOutput(output)
     const tag = getTagFromOutput(output)
 
@@ -38,13 +39,16 @@ export async function generateSingleNftActivity(
     const { parsedLayer2Metadata, destinationNetwork } = getLayer2ActivityInformation(metadata, sendingInfo)
     const gasBudget = Number(parsedLayer2Metadata?.gasBudget ?? '0')
 
-    let { storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(account, output)
+    const storageDepositData = await getStorageDepositFromOutput(account, output)
+    const { storageDeposit } = storageDepositData
+    let { giftedStorageDeposit } = storageDepositData
     giftedStorageDeposit = action === ActivityAction.Burn ? 0 : giftedStorageDeposit
     giftedStorageDeposit = gasBudget === 0 ? giftedStorageDeposit : 0
 
     let surplus: number | undefined = undefined
     try {
-        const minimumRequiredStorageDeposit = await account.minimumRequiredStorageDeposit(output)
+        const client = await getClient()
+        const minimumRequiredStorageDeposit = await client.minimumRequiredStorageDeposit(output)
         surplus = Number(output.amount) - Number(minimumRequiredStorageDeposit)
         if (surplus && !storageDeposit) {
             giftedStorageDeposit = Number(minimumRequiredStorageDeposit)

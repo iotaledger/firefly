@@ -1,4 +1,4 @@
-import { AliasOutput, Event, NewOutputWalletEvent } from '@iota/wallet/out/types'
+import { AliasOutput, Event, NewOutputWalletEvent, OutputType } from '@iota/wallet/out/types'
 import { WalletEventType } from '@iota/wallet/out/types'
 
 import { syncBalance } from '@core/account/actions/syncBalance'
@@ -12,7 +12,6 @@ import {
     generateActivities,
     getOrRequestAssetFromPersistedAssets,
 } from '@core/wallet'
-import { OUTPUT_TYPE_ALIAS, OUTPUT_TYPE_NFT } from '@core/wallet/constants'
 import {
     addActivitiesToAccountActivitiesInAllAccountActivities,
     allAccountActivities,
@@ -40,10 +39,10 @@ export async function handleNewOutputEventInternal(accountIndex: number, payload
 
     const address = getBech32AddressFromAddressTypes(outputData?.address)
     const isNewAliasOutput =
-        output.type === OUTPUT_TYPE_ALIAS &&
+        output.type === OutputType.Alias &&
         output.stateIndex === 0 &&
         !get(allAccountActivities)[accountIndex].find((_activity) => _activity.id === outputData.outputId)
-    const isNftOutput = outputData.output.type === OUTPUT_TYPE_NFT
+    const isNftOutput = outputData.output.type === OutputType.Nft
 
     if ((account?.depositAddress === address && !outputData?.remainder) || isNewAliasOutput) {
         await syncBalance(account.index)
@@ -63,7 +62,7 @@ export async function handleNewOutputEventInternal(accountIndex: number, payload
     }
 
     if (isNftOutput) {
-        const wrappedOutput = outputData.output as unknown as IWrappedOutput
+        const wrappedOutput = outputData as unknown as IWrappedOutput
         const nft = buildNftFromNftOutput(wrappedOutput, account.depositAddress)
         addOrUpdateNftInAllAccountNfts(account.index, nft)
         void addNftsToDownloadQueue(accountIndex, [nft])

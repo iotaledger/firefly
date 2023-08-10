@@ -15,6 +15,7 @@ export async function preprocessTransaction(
         transaction?.transactionId,
         regularTransactionEssence.outputs
     )
+
     const direction = getDirectionFromTransaction(outputs, transaction.incoming, account.depositAddress)
     const utxoInputs = regularTransactionEssence.inputs.map((i) => i as UTXOInput)
     const inputIds = await Promise.all(
