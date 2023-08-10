@@ -1,4 +1,4 @@
-import { CommonOutput, ExpirationUnlockCondition, UnlockConditionType } from '@iota/wallet/out/types'
+import { CommonOutput, ExpirationUnlockCondition, UnlockConditionType } from '@iota/sdk/out/types'
 import { MILLISECONDS_PER_SECOND } from '@core/utils'
 
 export function getExpirationDateFromOutput(output: CommonOutput): Date | undefined {

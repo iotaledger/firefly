@@ -852,6 +852,18 @@
   resolved "https://registry.yarnpkg.com/@iota/pad/-/pad-1.0.0-beta.30.tgz#de19728f8f1b09c20e2365d0da34945006760082"
   integrity sha512-fnhPMPul18WunLq9Ni4rxzBFmhna6eaG8WroDg6GdQqSK/eN62uFHV8tpspJHXuCqwgCUVp6NpuUna7+B2OV9g==
 
+"@iota/sdk@1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@iota/sdk/-/sdk-1.0.4.tgz#47fa6f559a551a2bf3c2664f8840c48a497dde47"
+  integrity sha512-qjgxce/aOIFoWBDKU+fdcDiX4xbihMiigmsJqb5nK9I3vRPMOG3kxQ9eC7BPRNME3u8c8/sQgdQY9gzqywhZXA==
+  dependencies:
+    "@types/node" "^18.15.12"
+    cargo-cp-artifact "^0.1.6"
+    class-transformer "^0.5.1"
+    prebuild-install "^7.1.1"
+    reflect-metadata "^0.1.13"
+    typescript "^4.9.4"
+
 "@iota/signing@^1.0.0-beta.30":
   version "1.0.0-beta.30"
   resolved "https://registry.yarnpkg.com/@iota/signing/-/signing-1.0.0-beta.30.tgz#43bf82f9dd43bb3b98c63dd57ac9cde2554f1472"
@@ -904,18 +916,6 @@
   integrity sha512-c6n5LPiimwkz5aCKsMjRg3GKWzcK+zELmJK1AVaziLneJ8BsdZBKvWJyQGNqjREQjOhRaixizmZc3nGuihldnQ==
   dependencies:
     big-integer "^1.6.51"
-
-"@iota/wallet@npm:@iota/sdk@1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@iota/sdk/-/sdk-1.0.4.tgz#47fa6f559a551a2bf3c2664f8840c48a497dde47"
-  integrity sha512-qjgxce/aOIFoWBDKU+fdcDiX4xbihMiigmsJqb5nK9I3vRPMOG3kxQ9eC7BPRNME3u8c8/sQgdQY9gzqywhZXA==
-  dependencies:
-    "@types/node" "^18.15.12"
-    cargo-cp-artifact "^0.1.6"
-    class-transformer "^0.5.1"
-    prebuild-install "^7.1.1"
-    reflect-metadata "^0.1.13"
-    typescript "^4.9.4"
 
 "@isaacs/cliui@^8.0.2":
   version "8.0.2"

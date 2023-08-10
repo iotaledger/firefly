@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
 import { selectedAccount } from '@core/account/stores'
 import { convertBech32ToHexAddress } from '@core/wallet/utils/convertBech32ToHexAddress'
-import { AliasOutput } from '@iota/wallet/out/types'
+import { AliasOutput } from '@iota/sdk/out/types'
 
 export async function getSerialNumberFromAliasOutput(aliasAddress: string): Promise<number> {
     const account = get(selectedAccount)

@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
 
-import { INode, ParticipationEventId } from '@iota/wallet'
-import { ParticipationEventType } from '@iota/wallet/out/types'
+import { INode, ParticipationEventId } from '@iota/sdk'
+import { ParticipationEventType } from '@iota/sdk/out/types'
 
 import { selectedAccount } from '@core/account/stores'
 

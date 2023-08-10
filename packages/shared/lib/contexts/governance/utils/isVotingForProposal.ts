@@ -1,5 +1,5 @@
 import { get } from 'svelte/store'
-import type { TrackedParticipationOverview } from '@iota/wallet/out/types'
+import type { TrackedParticipationOverview } from '@iota/sdk/out/types'
 import { selectedAccountIndex } from '@core/account'
 import { getParticipationsForProposal } from './getParticipationsForProposal'
 

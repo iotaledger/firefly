@@ -1,6 +1,6 @@
 import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-import { Event, TransactionInclusionWalletEvent } from '@iota/wallet/out/types'
-import { WalletEventType } from '@iota/wallet/out/types'
+import { Event, TransactionInclusionWalletEvent } from '@iota/sdk/out/types'
+import { WalletEventType } from '@iota/sdk/out/types'
 
 import { updateParticipationOverview } from '@contexts/governance/stores'
 import { isAccountVoting } from '@contexts/governance/utils/isAccountVoting'

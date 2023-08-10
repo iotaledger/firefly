@@ -4,7 +4,7 @@ import {
     ExpirationUnlockCondition,
     StorageDepositReturnUnlockCondition,
     UnlockConditionType,
-} from '@iota/wallet/out/types'
+} from '@iota/sdk/out/types'
 import { getBech32AddressFromAddressTypes } from './getBech32AddressFromAddressTypes'
 
 export function getSenderAddressFromUnlockCondition(

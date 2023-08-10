@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { AnswerStatus, Question } from '@iota/wallet/out/types'
+    import type { AnswerStatus, Question } from '@iota/sdk/out/types'
 
     import { ProposalAnswer } from '@components'
     import { Icon, Text, TooltipIcon } from '@ui'

@@ -12,7 +12,7 @@
         UNLOCK_CONDITION_STATE_CONTROLLER_ADDRESS,
         processAndAddToActivities,
     } from '@core/wallet'
-    import { PreparedTransaction } from '@iota/wallet/out/types'
+    import { PreparedTransaction } from '@iota/sdk/out/types'
     import { closePopup } from '@auxiliary/popup'
     import { onMount } from 'svelte'
     import { handleError } from '@core/error/handlers/handleError'

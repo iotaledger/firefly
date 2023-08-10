@@ -5,7 +5,7 @@ import { getTimelockDateFromOutput } from './getTimelockDateFromOutput'
 import { isOutputAsync } from '../../outputs/isOutputAsync'
 import { getAsyncStatus } from './getAsyncStatus'
 import { getStorageDepositFromOutput } from './getStorageDepositFromOutput'
-import { CommonOutput, Output } from '@iota/wallet/out/types'
+import { CommonOutput, Output } from '@iota/sdk/out/types'
 
 export async function getAsyncDataFromOutput(
     output: Output,

@@ -10,7 +10,7 @@ import {
     getStorageDepositFromOutput,
     getTagFromOutput,
 } from './helper'
-import { BasicOutput, OutputType } from '@iota/wallet/out/types'
+import { BasicOutput, OutputType } from '@iota/sdk/out/types'
 
 export async function generateSingleConsolidationActivity(
     account: IAccountState,

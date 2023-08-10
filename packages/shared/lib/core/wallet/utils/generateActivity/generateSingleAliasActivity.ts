@@ -14,7 +14,7 @@ import {
     getStorageDepositFromOutput,
     getTagFromOutput,
 } from './helper'
-import { AliasOutput } from '@iota/wallet/out/types'
+import { AliasOutput } from '@iota/sdk/out/types'
 
 export async function generateSingleAliasActivity(
     account: IAccountState,

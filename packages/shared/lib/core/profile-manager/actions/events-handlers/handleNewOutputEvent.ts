@@ -1,5 +1,5 @@
-import { AliasOutput, Event, NewOutputWalletEvent, OutputType } from '@iota/wallet/out/types'
-import { WalletEventType } from '@iota/wallet/out/types'
+import { AliasOutput, Event, NewOutputWalletEvent, OutputType } from '@iota/sdk/out/types'
+import { WalletEventType } from '@iota/sdk/out/types'
 
 import { syncBalance } from '@core/account/actions/syncBalance'
 import { addNftsToDownloadQueue, addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput } from '@core/nfts'

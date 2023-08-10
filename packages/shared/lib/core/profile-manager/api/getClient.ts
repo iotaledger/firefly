@@ -1,4 +1,4 @@
-import { Client } from '@iota/wallet/out/client'
+import { Client } from '@iota/sdk/out/client'
 import { api } from './api'
 import { get } from 'svelte/store'
 import { profileManager } from '../stores'

@@ -35,7 +35,7 @@ import {
     FoundryOutput,
     NftOutput,
     Output,
-} from '@iota/wallet/out/types'
+} from '@iota/sdk/out/types'
 
 import { IAccount } from '../../core/account'
 

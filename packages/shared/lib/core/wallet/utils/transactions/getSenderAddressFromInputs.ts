@@ -7,7 +7,7 @@ import {
     CommonOutput,
     ExpirationUnlockCondition,
     UnlockConditionType,
-} from '@iota/wallet/out/types'
+} from '@iota/sdk/out/types'
 
 export function getSenderAddressFromInputs(inputs: IWrappedOutput[]): string | undefined {
     for (const input of inputs) {

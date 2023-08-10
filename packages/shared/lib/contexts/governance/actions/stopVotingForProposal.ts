@@ -1,5 +1,5 @@
 import { get } from 'svelte/store'
-import type { Transaction } from '@iota/wallet/out/types'
+import type { Transaction } from '@iota/sdk/out/types'
 import { selectedAccount, updateSelectedAccount } from '@core/account/stores'
 import { showAppNotification } from '@auxiliary/notification/actions'
 import { localize } from '@core/i18n'

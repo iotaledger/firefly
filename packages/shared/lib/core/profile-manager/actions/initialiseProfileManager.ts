@@ -1,5 +1,5 @@
-import { IClientOptions, SecretManagerType } from '@iota/wallet/out/types'
-import { CoinType } from '@iota/wallet/out/types'
+import { IClientOptions, SecretManagerType } from '@iota/sdk/out/types'
+import { CoinType } from '@iota/sdk/out/types'
 
 import { generateRandomId } from '@core/utils'
 

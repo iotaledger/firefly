@@ -1,4 +1,4 @@
-import { INodeInfo } from '@iota/wallet/out/types'
+import { INodeInfo } from '@iota/sdk/out/types'
 import { writable } from 'svelte/store'
 
 export const nodeInfo = writable<INodeInfo | undefined>(undefined)

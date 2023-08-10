@@ -1,4 +1,4 @@
-import { FeatureType, FoundryOutput, MetadataFeature } from '@iota/wallet/out/types'
+import { FeatureType, FoundryOutput, MetadataFeature } from '@iota/sdk/out/types'
 
 export function getMetadataFromFoundryOutput(foundry: FoundryOutput): string {
     for (const feature of foundry?.getImmutableFeatures() ?? []) {

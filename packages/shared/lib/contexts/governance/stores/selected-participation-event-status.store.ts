@@ -1,4 +1,4 @@
-import { ParticipationEventStatus } from '@iota/wallet/out/types'
+import { ParticipationEventStatus } from '@iota/sdk/out/types'
 import { get, writable } from 'svelte/store'
 import { selectedAccountIndex } from '@core/account/stores'
 import { getAccountsParticipationEventStatusForEvent } from '../actions'

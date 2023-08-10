@@ -36,9 +36,9 @@ import type {
     AccountAddress,
     PreparedTransaction,
     PreparedCreateNativeTokenTransaction,
-} from '@iota/wallet/out/types'
+} from '@iota/sdk/out/types'
 
-import { ParticipationEventType } from '@iota/wallet/out/types'
+import { ParticipationEventType } from '@iota/sdk/out/types'
 
 export interface IAccount {
     addresses(): Promise<AccountAddress[]>

@@ -6,7 +6,7 @@ import { getSubjectFromAddress } from '../../getSubjectFromAddress'
 import { isSubjectInternal } from '../../isSubjectInternal'
 import { getRecipientFromOutput } from '../../outputs'
 import { getSenderAddressFromInputs, getSenderFromTransaction } from '../../transactions'
-import { CommonOutput } from '@iota/wallet/out/types'
+import { CommonOutput } from '@iota/sdk/out/types'
 
 export function getSendingInformation(
     processedTransaction: IProcessedTransaction,

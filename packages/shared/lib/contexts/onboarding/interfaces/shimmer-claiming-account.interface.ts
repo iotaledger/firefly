@@ -1,4 +1,4 @@
-import { Transaction } from '@iota/wallet/out/types'
+import { Transaction } from '@iota/sdk/out/types'
 
 import { IAccount } from '@core/account'
 

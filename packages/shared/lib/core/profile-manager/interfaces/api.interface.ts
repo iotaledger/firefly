@@ -1,5 +1,5 @@
-import { WalletOptions, CreateAccountPayload, TransactionId, OutputId } from '@iota/wallet/out/types'
-import { AliasId, Client, FoundryId } from '@iota/wallet'
+import { WalletOptions, CreateAccountPayload, TransactionId, OutputId } from '@iota/sdk/out/types'
+import { AliasId, Client, FoundryId } from '@iota/sdk'
 import { IAuth } from '@core/network'
 import { INodeInfoResponse } from '@core/network/interfaces'
 

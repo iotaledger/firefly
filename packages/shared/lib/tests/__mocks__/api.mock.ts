@@ -1,7 +1,7 @@
 import { AccountMock } from './account.mock'
 import { ProfileManagerMock } from './profile-manager.mock'
 
-import { WalletOptions, CreateAccountPayload } from '@iota/wallet/out/types'
+import { WalletOptions, CreateAccountPayload } from '@iota/sdk/out/types'
 
 import { IApi, RecoverAccountsPayload } from '@core/profile-manager'
 import { IAccount } from '@core/account'

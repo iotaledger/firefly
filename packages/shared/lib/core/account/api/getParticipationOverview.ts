@@ -1,4 +1,4 @@
-import type { ParticipationOverview } from '@iota/wallet/out/types'
+import type { ParticipationOverview } from '@iota/sdk/out/types'
 
 import { getAccount } from '@core/profile-manager/api'
 

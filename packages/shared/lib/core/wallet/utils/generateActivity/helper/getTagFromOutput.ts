@@ -1,4 +1,4 @@
-import { CommonOutput, FeatureType, TagFeature } from '@iota/wallet/out/types'
+import { CommonOutput, FeatureType, TagFeature } from '@iota/sdk/out/types'
 import { Converter } from '@core/utils'
 
 export function getTagFromOutput(output: CommonOutput): string | undefined {

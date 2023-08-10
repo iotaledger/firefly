@@ -12,7 +12,7 @@ import { INft } from '../interfaces'
 import { parseNftMetadata } from './parseNftMetadata'
 import { composeUrlFromNftUri } from './composeUrlFromNftUri'
 import { getSpendableStatusFromUnspentNftOutput } from './getSpendableStatusFromUnspentNftOutput'
-import { Address, AddressType, NftOutput } from '@iota/wallet/out/types'
+import { Address, AddressType, NftOutput } from '@iota/sdk/out/types'
 
 export function buildNftFromNftOutput(
     wrappedOutput: IWrappedOutput,

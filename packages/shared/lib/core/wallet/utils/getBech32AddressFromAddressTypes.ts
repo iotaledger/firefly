@@ -1,5 +1,5 @@
 import { convertHexAddressToBech32 } from './convertHexAddressToBech32'
-import { Address, AddressType, AliasAddress, Ed25519Address, NftAddress } from '@iota/wallet/out/types'
+import { Address, AddressType, AliasAddress, Ed25519Address, NftAddress } from '@iota/sdk/out/types'
 
 export function getBech32AddressFromAddressTypes(address: Address): string | undefined {
     switch (address.type) {

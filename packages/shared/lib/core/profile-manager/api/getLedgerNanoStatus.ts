@@ -1,4 +1,4 @@
-import { LedgerNanoStatus } from '@iota/wallet/out/types'
+import { LedgerNanoStatus } from '@iota/sdk/out/types'
 import { get } from 'svelte/store'
 import { profileManager as _profileManager } from '@core/profile-manager/stores'
 

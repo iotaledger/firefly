@@ -7,7 +7,7 @@ import { OUTPUT_TYPE_NFT } from '../../wallet/constants'
 import { INft } from '../interfaces'
 import { buildNftFromNftOutput } from '../utils'
 import { setAccountNftsInAllAccountNfts } from './setAccountNftsInAllAccountNfts'
-import { NftOutput } from '@iota/wallet/out/types'
+import { NftOutput } from '@iota/sdk/out/types'
 
 export async function loadNftsForActiveProfile(): Promise<void> {
     const allAccounts = get(activeAccounts)

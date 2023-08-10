@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 
-import { Transaction } from '@iota/wallet/out/types'
+import { Transaction } from '@iota/sdk/out/types'
 
 import { IAccount, sumTotalFromOutputs, syncAccountsInParallel, syncAccountsInSeries } from '@core/account'
 import { filterShimmerClaimingOutputs } from '@core/utils'

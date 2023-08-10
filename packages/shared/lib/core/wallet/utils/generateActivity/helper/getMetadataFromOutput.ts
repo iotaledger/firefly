@@ -2,7 +2,7 @@ import { isParticipationOutput } from '@contexts/governance/utils'
 import { EXTERNALLY_OWNED_ACCOUNT } from '@core/layer-2/constants'
 import { parseLayer2MetadataForTransfer } from '@core/layer-2/utils'
 import { containsControlCharacters, Converter } from '@core/utils'
-import { CommonOutput, FeatureType, MetadataFeature, Output, OutputType } from '@iota/wallet/out/types'
+import { CommonOutput, FeatureType, MetadataFeature, Output, OutputType } from '@iota/sdk/out/types'
 
 export function getMetadataFromOutput(output: Output): string | undefined {
     if (output.type === OutputType.Treasury) {

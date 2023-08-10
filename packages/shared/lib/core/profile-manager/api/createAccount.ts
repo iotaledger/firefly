@@ -1,6 +1,6 @@
 import { get, Writable } from 'svelte/store'
 
-import { CreateAccountPayload } from '@iota/wallet/out/types'
+import { CreateAccountPayload } from '@iota/sdk/out/types'
 
 import { IAccount } from '@core/account'
 

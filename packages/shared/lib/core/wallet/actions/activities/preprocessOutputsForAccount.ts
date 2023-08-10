@@ -1,4 +1,4 @@
-import type { OutputData, OutputResponse, Transaction } from '@iota/wallet/out/types'
+import type { OutputData, OutputResponse, Transaction } from '@iota/sdk/out/types'
 
 import { IAccountState } from '@core/account/interfaces'
 

@@ -1,4 +1,4 @@
-import { AddressUnlockCondition, CommonOutput } from '@iota/wallet/out/types'
+import { AddressUnlockCondition, CommonOutput } from '@iota/sdk/out/types'
 import { UNLOCK_CONDITION_ADDRESS } from '../../constants'
 import { getBech32AddressFromAddressTypes } from '../getBech32AddressFromAddressTypes'
 

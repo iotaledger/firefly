@@ -10,7 +10,7 @@ import { DeepLinkManager } from './lib/deepLinkManager'
 import { NotificationManager } from './lib/notificationManager'
 import { PincodeManager } from './lib/pincodeManager'
 
-import { WalletApi } from '@iota/wallet-mobile'
+import { WalletApi } from '@iota/sdk-mobile'
 
 window['__WALLET__API__'] = WalletApi
 

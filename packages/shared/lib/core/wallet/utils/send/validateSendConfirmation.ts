@@ -3,7 +3,7 @@ import { InsufficientFundsForStorageDepositError, InvalidExpirationDateTimeError
 import { convertUnixTimestampToDate, isValidExpirationDateTime } from '@core/utils'
 import { getStorageDepositFromOutput } from '../generateActivity/helper'
 import { IAccountState } from '@core/account/interfaces'
-import { CommonOutput, ExpirationUnlockCondition, OutputType, UnlockConditionType } from '@iota/wallet/out/types'
+import { CommonOutput, ExpirationUnlockCondition, OutputType, UnlockConditionType } from '@iota/sdk/out/types'
 
 export async function validateSendConfirmation(account: IAccountState, output: CommonOutput): Promise<void> {
     const parseNumber = (value: string) => parseInt(value, 10) ?? 0

@@ -6,7 +6,7 @@ import {
     FoundryOutput,
     ImmutableAliasAddressUnlockCondition,
     UnlockConditionType,
-} from '@iota/wallet/out/types'
+} from '@iota/sdk/out/types'
 
 export function buildFoundryId(foundry: FoundryOutput): Promise<FoundryId> {
     const unlockCondition = foundry.unlockConditions[0]

@@ -12,7 +12,7 @@ import { generateActivitiesFromNftOutputs } from './generateActivitiesFromNftOut
 import { generateActivitiesFromAliasOutputs } from './generateActivitiesFromAliasOutputs'
 import { generateActivitiesFromFoundryOutputs } from './generateActivitiesFromFoundryOutputs'
 import { generateActivitiesFromBasicOutputs } from './generateActivitiesFromBasicOutputs'
-import { OutputType } from '@iota/wallet/out/types'
+import { OutputType } from '@iota/sdk/out/types'
 
 export async function generateActivities(
     processedTransaction: IProcessedTransaction,

@@ -1,4 +1,4 @@
-import { Balance } from '@iota/wallet/out/types'
+import { Balance } from '@iota/sdk/out/types'
 
 export const MOCK_ACCOUNT_BALANCE: Balance = {
     baseCoin: {

@@ -1,4 +1,4 @@
-import { CommonOutput, OutputData, OutputResponse, OutputType, UTXOInput } from '@iota/wallet/out/types'
+import { CommonOutput, OutputData, OutputResponse, OutputType, UTXOInput } from '@iota/sdk/out/types'
 import { MILLISECONDS_PER_SECOND } from '@core/utils/constants'
 import { IAccountState } from '@core/account/interfaces'
 import { InclusionState, ActivityDirection } from '../../enums'

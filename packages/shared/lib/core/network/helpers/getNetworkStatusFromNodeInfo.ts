@@ -1,7 +1,7 @@
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from '@core/utils'
 import { NetworkHealth } from '../enums'
 import { INetworkStatus } from '../interfaces'
-import { INodeInfo } from '@iota/wallet/out/types'
+import { INodeInfo } from '@iota/sdk/out/types'
 
 /**
  * Update the network status store from the NodeInfo.

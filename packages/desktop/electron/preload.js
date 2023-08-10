@@ -8,7 +8,7 @@
 
 const { ipcRenderer, contextBridge } = require('electron')
 const ElectronApi = require('./electronApi')
-const WalletApi = require('@iota/wallet')
+const WalletApi = require('@iota/sdk')
 const fs = require('fs')
 
 const SEND_CRASH_REPORTS = window.process.argv.includes('--send-crash-reports=true')

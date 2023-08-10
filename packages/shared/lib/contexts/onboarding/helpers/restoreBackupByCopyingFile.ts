@@ -1,6 +1,6 @@
 import { get, Writable } from 'svelte/store'
 
-import { IClientOptions } from '@iota/wallet/out/types'
+import { IClientOptions } from '@iota/sdk/out/types'
 
 import { ClientError, CLIENT_ERROR_REGEXES } from '@core/error'
 import { IProfileManager } from '@core/profile-manager'

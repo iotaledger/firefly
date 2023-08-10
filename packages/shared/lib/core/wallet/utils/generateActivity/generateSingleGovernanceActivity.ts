@@ -11,7 +11,7 @@ import {
     getStorageDepositFromOutput,
     getTagFromOutput,
 } from './helper'
-import { BasicOutput } from '@iota/wallet/out/types'
+import { BasicOutput } from '@iota/sdk/out/types'
 
 export async function generateSingleGovernanceActivity(
     account: IAccountState,

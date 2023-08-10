@@ -6,7 +6,7 @@ import {
     SimpleTokenScheme,
     MetadataFeature,
     Feature,
-} from '@iota/wallet/out/types'
+} from '@iota/sdk/out/types'
 import { Converter } from '@core/utils'
 import { IIrc30Metadata } from '../interfaces'
 import { convertBech32ToHexAddress } from './convertBech32ToHexAddress'

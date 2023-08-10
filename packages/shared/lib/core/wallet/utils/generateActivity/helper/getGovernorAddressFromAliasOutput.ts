@@ -1,5 +1,5 @@
 import { getBech32AddressFromAddressTypes } from '../../getBech32AddressFromAddressTypes'
-import { AliasOutput, GovernorAddressUnlockCondition, UnlockConditionType } from '@iota/wallet/out/types'
+import { AliasOutput, GovernorAddressUnlockCondition, UnlockConditionType } from '@iota/sdk/out/types'
 
 export function getGovernorAddressFromAliasOutput(output: AliasOutput): string {
     const governorUnlockCondition = output.unlockConditions.find(

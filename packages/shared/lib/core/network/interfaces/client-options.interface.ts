@@ -1,4 +1,4 @@
-import { IClientOptions } from '@iota/wallet/out/types'
+import { IClientOptions } from '@iota/sdk/out/types'
 
 import { INode } from './node.interface'
 

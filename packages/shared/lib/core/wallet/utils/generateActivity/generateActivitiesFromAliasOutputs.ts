@@ -2,7 +2,7 @@ import { IAccountState } from '@core/account'
 import { ActivityAction, EMPTY_HEX_ID, IProcessedTransaction, OUTPUT_TYPE_ALIAS } from '@core/wallet'
 import { Activity, type AliasActivity } from '@core/wallet/types'
 import { generateSingleAliasActivity } from './generateSingleAliasActivity'
-import { AliasOutput } from '@iota/wallet/out/types'
+import { AliasOutput } from '@iota/sdk/out/types'
 
 export async function generateActivitiesFromAliasOutputs(
     processedTransaction: IProcessedTransaction,

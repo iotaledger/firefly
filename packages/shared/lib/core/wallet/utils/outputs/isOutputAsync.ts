@@ -1,4 +1,4 @@
-import { CommonOutput, Output, OutputType, UnlockConditionType } from '@iota/wallet/out/types'
+import { CommonOutput, Output, OutputType, UnlockConditionType } from '@iota/sdk/out/types'
 
 const ASYNC_UNLOCK_CONDITION_TYPES = [
     UnlockConditionType.StorageDepositReturn,

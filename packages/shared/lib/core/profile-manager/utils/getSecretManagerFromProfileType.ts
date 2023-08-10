@@ -1,4 +1,4 @@
-import { SecretManagerType } from '@iota/wallet/out/types'
+import { SecretManagerType } from '@iota/sdk/out/types'
 
 import { USE_LEDGER_SIMULATOR } from '@core/ledger'
 import { ProfileType } from '@core/profile'

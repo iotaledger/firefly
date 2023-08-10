@@ -1,4 +1,4 @@
-import { AliasOutput, StateControllerAddressUnlockCondition, UnlockConditionType } from '@iota/wallet/out/types'
+import { AliasOutput, StateControllerAddressUnlockCondition, UnlockConditionType } from '@iota/sdk/out/types'
 import { getBech32AddressFromAddressTypes } from '../../getBech32AddressFromAddressTypes'
 
 export function getStateControllerAddressFromAliasOutput(output: AliasOutput): string {

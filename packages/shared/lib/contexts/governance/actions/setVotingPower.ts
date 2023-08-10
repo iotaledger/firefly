@@ -1,5 +1,5 @@
 import { get } from 'svelte/store'
-import { Transaction } from '@iota/wallet/out/types'
+import { Transaction } from '@iota/sdk/out/types'
 import { selectedAccount, updateSelectedAccount } from '@core/account/stores'
 import { processAndAddToActivities } from '@core/wallet/utils'
 import { handleError } from '@core/error/handlers'

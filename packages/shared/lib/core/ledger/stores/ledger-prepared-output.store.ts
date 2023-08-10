@@ -1,4 +1,4 @@
-import { Output } from '@iota/wallet/out/types'
+import { Output } from '@iota/sdk/out/types'
 import { writable } from 'svelte/store'
 
 export const ledgerPreparedOutput = writable<Output>(null)

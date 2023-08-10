@@ -11,7 +11,7 @@ import {
     NftOutput,
     TimelockUnlockCondition,
     UnlockCondition,
-} from '@iota/wallet/out/types'
+} from '@iota/sdk/out/types'
 
 const accountAddress = 'rms1qr47ee0fhahukrzec088v9lngv7w5k2sn3jjtwvkcpjfgxhhsazlsurxrx9'
 
