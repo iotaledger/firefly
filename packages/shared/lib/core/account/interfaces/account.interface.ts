@@ -118,4 +118,5 @@ export interface IAccount {
     vote(eventId?: string, answers?: number[]): Promise<Transaction>
     verifyEd25519Signature(signature: Ed25519Signature, message: HexEncodedString): Promise<boolean>
     verifySecp256k1EcdsaSignature(signature: Secp256k1EcdsaSignature, message: HexEncodedString): Promise<boolean>
+    minimumRequiredStorageDeposit(output: Output): Promise<number>
 }

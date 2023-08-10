@@ -1,4 +1,4 @@
-import { OutputData, OutputResponse, OutputType, UTXOInput } from '@iota/wallet/out/types'
+import { CommonOutput, OutputData, OutputResponse, OutputType, UTXOInput } from '@iota/wallet/out/types'
 import { MILLISECONDS_PER_SECOND } from '@core/utils/constants'
 import { IAccountState } from '@core/account/interfaces'
 import { InclusionState, ActivityDirection } from '../../enums'
@@ -48,7 +48,7 @@ function getDirectionForOutputs(
     }
     const output =
         nonRemainderOutputs[0].output.type !== OUTPUT_TYPE_TREASURY ? nonRemainderOutputs[0].output : undefined
-    const recipientAddress = getRecipientAddressFromOutput(output)
+    const recipientAddress = output ? getRecipientAddressFromOutput(output as CommonOutput) : undefined
     const senderAddress = wrappedInputs ? getSenderAddressFromInputs(wrappedInputs) : ''
 
     if (recipientAddress === accountAddress && recipientAddress === senderAddress) {
