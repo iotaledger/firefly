@@ -14,7 +14,7 @@ export async function validateSendConfirmation(account: IAccountState, output: C
     const expirationUnlockCondition = output.unlockConditions.find(
         (c) => c.type === UnlockConditionType.Expiration
     ) as ExpirationUnlockCondition
-    const expirationUnixTime = expirationUnlockCondition?.getUnixTime()
+    const expirationUnixTime = expirationUnlockCondition?.unixTime
     const expirationDateTime = expirationUnixTime ? convertUnixTimestampToDate(expirationUnixTime) : undefined
 
     const isNft = output.type === OutputType.Nft
