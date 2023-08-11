@@ -1,14 +1,12 @@
+import { getClient } from '@core/profile-manager'
 import { IWrappedOutput } from '../../wallet/interfaces'
 import { buildNftFromNftOutput } from '../utils/buildNftFromNftOutput'
-import { Converter } from '../../utils/convert'
-import { Bech32Helper } from '../../utils/crypto'
 import {
     AddressUnlockCondition,
     Ed25519Address,
     Feature,
     IssuerFeature,
     MetadataFeature,
-    NftOutput,
     TimelockUnlockCondition,
     UnlockCondition,
 } from '@iota/sdk/out/types'
@@ -48,10 +46,15 @@ const incomingExpiredTimelockedCondition: UnlockCondition[] = [
 
 describe('File: buildNFtFromOutput.ts', () => {
     let outputData: IWrappedOutput
+    const client = () => getClient()
 
-    it('should classify default nft as spendable', () => {
-        const nftOutput = new NftOutput(amount, nftId, incomingUnlockConditions)
-        nftOutput.setImmutableFeatures(immutableFeatures)
+    it('should classify default nft as spendable', async () => {
+        const nftOutput = await client().buildNftOutput({
+            amount,
+            nftId,
+            unlockConditions: incomingUnlockConditions,
+            immutableFeatures,
+        })
 
         outputData = {
             outputId,
@@ -62,9 +65,13 @@ describe('File: buildNFtFromOutput.ts', () => {
         expect(nft.isSpendable).toBe(true)
     })
 
-    it('should correctly classify nft as timelocked', () => {
-        const nftOutput = new NftOutput(amount, nftId, incomingTimelockedCondition)
-        nftOutput.setImmutableFeatures(immutableFeatures)
+    it('should correctly classify nft as timelocked', async () => {
+        const nftOutput = await client().buildNftOutput({
+            amount,
+            nftId,
+            unlockConditions: incomingTimelockedCondition,
+            immutableFeatures,
+        })
 
         outputData = {
             outputId,
@@ -75,9 +82,13 @@ describe('File: buildNFtFromOutput.ts', () => {
         expect(nft.timelockTime).toBe(2876367917000)
     })
 
-    it('should correctly classify expired timelocked nft', () => {
-        const nftOutput = new NftOutput(amount, nftId, incomingExpiredTimelockedCondition)
-        nftOutput.setImmutableFeatures(immutableFeatures)
+    it('should correctly classify expired timelocked nft', async () => {
+        const nftOutput = await client().buildNftOutput({
+            amount,
+            nftId,
+            unlockConditions: incomingExpiredTimelockedCondition,
+            immutableFeatures,
+        })
 
         outputData = {
             outputId,
@@ -88,8 +99,12 @@ describe('File: buildNFtFromOutput.ts', () => {
         expect(nft.timelockTime).toBe(136367917000)
     })
 
-    it('should ignore parsing spendable state and timelock', () => {
-        let nftOutput = new NftOutput(amount, nftId, incomingUnlockConditions)
+    it('should ignore parsing spendable state and timelock', async () => {
+        let nftOutput = await client().buildNftOutput({
+            amount,
+            nftId,
+            unlockConditions: incomingUnlockConditions,
+        })
 
         outputData = {
             outputId,
@@ -100,7 +115,11 @@ describe('File: buildNFtFromOutput.ts', () => {
         expect(nft.isSpendable).toBe(false)
         expect(nft.timelockTime).toBe(undefined)
 
-        nftOutput = new NftOutput(amount, nftId, incomingTimelockedCondition)
+        nftOutput = await client().buildNftOutput({
+            amount,
+            nftId,
+            unlockConditions: incomingTimelockedCondition,
+        })
 
         outputData = {
             outputId,
@@ -110,8 +129,12 @@ describe('File: buildNFtFromOutput.ts', () => {
         expect(nft.isSpendable).toBe(false)
         expect(nft.timelockTime).toBe(undefined)
 
-        nftOutput = new NftOutput(amount, nftId, incomingExpiredTimelockedCondition)
-        nftOutput.setImmutableFeatures(immutableFeatures)
+        nftOutput = await client().buildNftOutput({
+            amount,
+            nftId,
+            unlockConditions: incomingExpiredTimelockedCondition,
+            immutableFeatures,
+        })
 
         outputData = {
             outputId,
@@ -122,10 +145,13 @@ describe('File: buildNFtFromOutput.ts', () => {
         expect(nft.timelockTime).toBe(undefined)
     })
 
-    it('should parse the metadata correctly', () => {
-        let nftOutput = new NftOutput(amount, nftId, incomingUnlockConditions)
-
-        nftOutput.setImmutableFeatures(immutableFeatures)
+    it('should parse the metadata correctly', async () => {
+        let nftOutput = await client().buildNftOutput({
+            amount,
+            nftId,
+            unlockConditions: incomingUnlockConditions,
+            immutableFeatures,
+        })
 
         outputData = {
             outputId,

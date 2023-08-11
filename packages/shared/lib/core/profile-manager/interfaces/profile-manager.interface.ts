@@ -27,7 +27,6 @@ export interface IProfileManager {
         options?: GenerateAddressOptions,
         bech32Hrp?: string
     ): Promise<string>
-    generateMnemonic(): Promise<string>
     getAccountIndexes(): Promise<number[]>
     getAccount(accountIndex: number): Promise<IAccount>
     getAccounts(): Promise<IAccount[]>
@@ -50,6 +49,5 @@ export interface IProfileManager {
     startBackgroundSync(options?: SyncOptions, intervalInMilliseconds?: number): Promise<void>
     stopBackgroundSync(): Promise<void>
     storeMnemonic(mnemonic: string): Promise<void>
-    verifyMnemonic(mnemonic: string): Promise<void>
     updateNodeAuth(url: string, auth?: IAuth): Promise<void>
 }
