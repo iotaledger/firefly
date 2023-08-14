@@ -39,7 +39,7 @@
 
     function getTitleText(): string {
         if (tos && privacyPolicy) {
-            return 'views.legal.title'
+            return 'popups.legalUpdate.tosAndPrivPolicyBody'
         } else if (tos) {
             return 'popups.legalUpdate.tosTitle'
         } else if (privacyPolicy) {
@@ -73,16 +73,16 @@
     <Text type="p" secondary>{localize(getBodyText())}</Text>
     {#if tos && privacyPolicy}
         <ul>
-            <li><Link onClick={onViewTosClick}>{localize('popups.legalUpdate.tosTitle')}</Link></li>
-            <li><Link onClick={onViewPrivPolicyClick}>{localize('popups.legalUpdate.privPolicyTitle')}</Link></li>
+            <li><Link on:click={onViewTosClick}>{localize('popups.legalUpdate.tosTitle')}</Link></li>
+            <li><Link on:click={onViewPrivPolicyClick}>{localize('popups.legalUpdate.privPolicyTitle')}</Link></li>
         </ul>
     {:else if tos}
         <ul>
-            <li><Link onClick={onViewTosClick}>{localize('popups.legalUpdate.tosTitle')}</Link></li>
+            <li><Link on:click={onViewTosClick}>{localize('popups.legalUpdate.tosTitle')}</Link></li>
         </ul>
     {:else if privacyPolicy}
         <ul>
-            <li><Link onClick={onViewPrivPolicyClick}>{localize('popups.legalUpdate.privPolicyTitle')}</Link></li>
+            <li><Link on:click={onViewPrivPolicyClick}>{localize('popups.legalUpdate.privPolicyTitle')}</Link></li>
         </ul>
     {/if}
     <Checkbox label={localize(getCheckboxText())} bind:checked classes="mt-4" />
