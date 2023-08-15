@@ -1,4 +1,3 @@
-import { getClient } from '@core/profile-manager'
 import { IWrappedOutput } from '../../wallet/interfaces'
 import { buildNftFromNftOutput } from '../utils/buildNftFromNftOutput'
 import {
@@ -10,6 +9,7 @@ import {
     TimelockUnlockCondition,
     UnlockCondition,
 } from '@iota/sdk/out/types'
+import { Address, AddressType, AliasAddress, Client, NftAddress, Utils } from '@iota/sdk'
 
 const accountAddress = 'rms1qr47ee0fhahukrzec088v9lngv7w5k2sn3jjtwvkcpjfgxhhsazlsurxrx9'
 
@@ -44,12 +44,27 @@ const incomingExpiredTimelockedCondition: UnlockCondition[] = [
     new TimelockUnlockCondition(136367917),
 ]
 
-describe('File: buildNFtFromOutput.ts', () => {
+// i think that we need to mock this function as api won't work in tests (contextBridge) but
+// we can use Utils directly here without breaking the build
+jest.mock('../../../../lib/core/wallet/utils/getBech32AddressFromAddressTypes.ts', () => ({
+    getBech32AddressFromAddressTypes: jest.fn((address: Address) => {
+        switch (address.type) {
+            case AddressType.Ed25519:
+                return Utils.hexToBech32((address as Ed25519Address).pubKeyHash, 'rms')
+            case AddressType.Alias:
+                return Utils.aliasIdToBech32((address as AliasAddress).aliasId, 'rms')
+            case AddressType.Nft:
+                return Utils.nftIdToBech32((address as NftAddress).nftId, 'rms')
+        }
+    }),
+}))
+
+describe('File: buildNftFromOutput.ts', () => {
     let outputData: IWrappedOutput
-    const client = () => getClient()
+    let client: Client = new Client({})
 
     it('should classify default nft as spendable', async () => {
-        const nftOutput = await client().buildNftOutput({
+        const nftOutput = await client.buildNftOutput({
             amount,
             nftId,
             unlockConditions: incomingUnlockConditions,
@@ -66,7 +81,7 @@ describe('File: buildNFtFromOutput.ts', () => {
     })
 
     it('should correctly classify nft as timelocked', async () => {
-        const nftOutput = await client().buildNftOutput({
+        const nftOutput = await client.buildNftOutput({
             amount,
             nftId,
             unlockConditions: incomingTimelockedCondition,
@@ -83,7 +98,7 @@ describe('File: buildNFtFromOutput.ts', () => {
     })
 
     it('should correctly classify expired timelocked nft', async () => {
-        const nftOutput = await client().buildNftOutput({
+        const nftOutput = await client.buildNftOutput({
             amount,
             nftId,
             unlockConditions: incomingExpiredTimelockedCondition,
@@ -100,7 +115,7 @@ describe('File: buildNFtFromOutput.ts', () => {
     })
 
     it('should ignore parsing spendable state and timelock', async () => {
-        let nftOutput = await client().buildNftOutput({
+        let nftOutput = await client.buildNftOutput({
             amount,
             nftId,
             unlockConditions: incomingUnlockConditions,
@@ -115,7 +130,7 @@ describe('File: buildNFtFromOutput.ts', () => {
         expect(nft.isSpendable).toBe(false)
         expect(nft.timelockTime).toBe(undefined)
 
-        nftOutput = await client().buildNftOutput({
+        nftOutput = await client.buildNftOutput({
             amount,
             nftId,
             unlockConditions: incomingTimelockedCondition,
@@ -129,7 +144,7 @@ describe('File: buildNFtFromOutput.ts', () => {
         expect(nft.isSpendable).toBe(false)
         expect(nft.timelockTime).toBe(undefined)
 
-        nftOutput = await client().buildNftOutput({
+        nftOutput = await client.buildNftOutput({
             amount,
             nftId,
             unlockConditions: incomingExpiredTimelockedCondition,
@@ -146,7 +161,7 @@ describe('File: buildNFtFromOutput.ts', () => {
     })
 
     it('should parse the metadata correctly', async () => {
-        let nftOutput = await client().buildNftOutput({
+        let nftOutput = await client.buildNftOutput({
             amount,
             nftId,
             unlockConditions: incomingUnlockConditions,

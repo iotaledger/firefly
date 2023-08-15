@@ -6,7 +6,7 @@ export function getBech32AddressFromAddressTypes(address: Address): string | und
     const hrp = getNetworkHrp()
     switch (address.type) {
         case AddressType.Ed25519:
-            return api.hexPublicKeyToBech32Address((address as Ed25519Address).pubKeyHash, hrp)
+            return api.hexToBech32((address as Ed25519Address).pubKeyHash, hrp)
         case AddressType.Alias:
             return api.aliasIdToBech32((address as AliasAddress).aliasId, hrp)
         case AddressType.Nft:
