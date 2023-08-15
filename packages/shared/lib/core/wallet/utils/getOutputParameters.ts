@@ -81,7 +81,7 @@ function getAssetFromTransactionDetails(transactionDetails: NewTransactionDetail
                 nativeTokens: [
                     {
                         id: nativeTokenId,
-                        amount: BigInt(bigAmount),
+                        amount: bigAmount,
                     },
                 ],
             }
