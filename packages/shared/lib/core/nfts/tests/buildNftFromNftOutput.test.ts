@@ -82,7 +82,7 @@ jest.mock('../../../../lib/core/wallet/utils/getBech32AddressFromAddressTypes.ts
 describe('File: buildNftFromOutput.ts', () => {
     let outputData: IWrappedOutput
 
-    it('should classify default nft as spendable', async () => {
+    it('should classify default nft as spendable', () => {
         outputData = {
             outputId,
             output: buildNftOutput({
@@ -97,7 +97,7 @@ describe('File: buildNftFromOutput.ts', () => {
         expect(nft.isSpendable).toBe(true)
     })
 
-    it('should correctly classify nft as timelocked', async () => {
+    it('should correctly classify nft as timelocked', () => {
         outputData = {
             outputId,
             output: buildNftOutput({
@@ -112,7 +112,7 @@ describe('File: buildNftFromOutput.ts', () => {
         expect(nft.timelockTime).toBe(2876367917000)
     })
 
-    it('should correctly classify expired timelocked nft', async () => {
+    it('should correctly classify expired timelocked nft', () => {
         outputData = {
             outputId,
             output: buildNftOutput({
@@ -127,7 +127,7 @@ describe('File: buildNftFromOutput.ts', () => {
         expect(nft.timelockTime).toBe(136367917000)
     })
 
-    it('should ignore parsing spendable state and timelock', async () => {
+    it('should ignore parsing spendable state and timelock', () => {
         let outputData = {
             outputId,
             output: buildNftOutput({
@@ -168,7 +168,7 @@ describe('File: buildNftFromOutput.ts', () => {
         expect(nft.timelockTime).toBe(undefined)
     })
 
-    it('should parse the metadata correctly', async () => {
+    it('should parse the metadata correctly', () => {
         outputData = {
             outputId,
             output: buildNftOutput({
