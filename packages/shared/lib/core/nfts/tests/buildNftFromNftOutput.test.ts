@@ -9,7 +9,8 @@ import {
     TimelockUnlockCondition,
     UnlockCondition,
 } from '@iota/sdk/out/types'
-import { Address, AddressType, AliasAddress, Client, NftAddress, Utils } from '@iota/sdk'
+import { Address, AddressType, AliasAddress, NftAddress } from '@iota/sdk/out/types'
+import { Client, Utils } from '@iota/sdk'
 
 const accountAddress = 'rms1qr47ee0fhahukrzec088v9lngv7w5k2sn3jjtwvkcpjfgxhhsazlsurxrx9'
 
