@@ -61,7 +61,8 @@
                         containsUnlockCondition(commonOutput.unlockConditions, UnlockConditionType.StorageDepositReturn)
                     ) {
                         type = PendingFundsType.StorageDepositReturn
-                        amount = (await getStorageDepositFromOutput($selectedAccount, output))?.storageDeposit
+                        amount = (await getStorageDepositFromOutput($selectedAccount, output as CommonOutput))
+                            ?.storageDeposit
                     } else if (containsUnlockCondition(commonOutput.unlockConditions, UnlockConditionType.Timelock)) {
                         type = PendingFundsType.Timelock
                         amount = Number(output.amount)

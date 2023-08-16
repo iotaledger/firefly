@@ -14,11 +14,12 @@
         getOutputParameters,
         newTransactionDetails,
         NewTransactionType,
-        Output,
         sendOutput,
         updateNewTransactionDetails,
         validateSendConfirmation,
     } from '@core/wallet'
+    import { CommonOutput, Output } from '@iota/sdk/out/types'
+
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
 
     import { sendRoute, SendRoute, sendRouter } from '@/routers'
@@ -42,7 +43,7 @@
     async function sendTransaction(): Promise<void> {
         try {
             await prepareTransactionOutput()
-            validateSendConfirmation(preparedOutput)
+            validateSendConfirmation($selectedAccount, preparedOutput as CommonOutput)
 
             updateNewTransactionDetails({
                 type: $newTransactionDetails.type,
@@ -67,17 +68,15 @@
         }
         const outputParams = await getOutputParameters(transactionDetails)
         preparedOutput = await prepareOutput($selectedAccount.index, outputParams, DEFAULT_TRANSACTION_OPTIONS)
-        setStorageDeposit(preparedOutput, Number(surplus))
+        await setStorageDeposit(preparedOutput, Number(surplus))
         if (!initialExpirationDate) {
             initialExpirationDate = getInitialExpirationDate()
         }
     }
 
-    function setStorageDeposit(preparedOutput: Output, surplus?: number): void {
-        const rawAmount =
-            transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.rawAmount : '0'
+    async function setStorageDeposit(preparedOutput: Output, surplus?: number): Promise<void> {
         const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
-            getStorageDepositFromOutput(preparedOutput, rawAmount)
+            await getStorageDepositFromOutput($selectedAccount, preparedOutput as CommonOutput)
         if (surplus > _storageDeposit) {
             visibleSurplus = Number(surplus)
         }
