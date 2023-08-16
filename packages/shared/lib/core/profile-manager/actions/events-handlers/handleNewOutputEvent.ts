@@ -1,5 +1,4 @@
-import { AliasOutput, Event, NewOutputWalletEvent, OutputType } from '@iota/sdk/out/types'
-import { WalletEventType } from '@iota/sdk/out/types'
+import { AliasOutput, Event, NewOutputWalletEvent, OutputType, WalletEventType } from '@iota/sdk/out/types'
 
 import { syncBalance } from '@core/account/actions/syncBalance'
 import { addNftsToDownloadQueue, addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput } from '@core/nfts'
@@ -42,7 +41,7 @@ export async function handleNewOutputEventInternal(accountIndex: number, payload
         output.type === OutputType.Alias &&
         output.stateIndex === 0 &&
         !get(allAccountActivities)[accountIndex].find((_activity) => _activity.id === outputData.outputId)
-    const isNftOutput = outputData.output.type === OutputType.Nft
+    const isNftOutput = output.type === OutputType.Nft
 
     if ((account?.depositAddress === address && !outputData?.remainder) || isNewAliasOutput) {
         await syncBalance(account.index)

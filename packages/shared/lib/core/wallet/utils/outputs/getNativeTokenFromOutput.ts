@@ -6,7 +6,7 @@ export async function getNativeTokenFromOutput(output: CommonOutput): Promise<IN
     if (output?.type === OutputType.Foundry) {
         const foundryOutput = output as FoundryOutput
         return {
-            id: await buildFoundryId(output as FoundryOutput),
+            id: await buildFoundryId(foundryOutput),
             amount: (foundryOutput.tokenScheme as SimpleTokenScheme).mintedTokens,
         }
     }

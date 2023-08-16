@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
 import { selectedAccount } from '@core/account/stores'
-import { AliasOutput } from '@iota/sdk/out/types'
 import { api } from '@core/profile-manager'
+import { AliasOutput } from '@iota/sdk/out/types'
 
 export async function getSerialNumberFromAliasOutput(aliasAddress: string): Promise<number> {
     const account = get(selectedAccount)

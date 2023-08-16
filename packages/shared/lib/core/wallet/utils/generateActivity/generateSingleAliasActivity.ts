@@ -3,6 +3,8 @@ import { EMPTY_HEX_ID } from '@core/wallet/constants'
 import { ActivityType } from '@core/wallet/enums'
 import { IActivityGenerationParameters } from '@core/wallet/interfaces'
 import { AliasActivity } from '@core/wallet/types'
+import { api } from '@core/profile-manager'
+import { getNetworkHrp } from '@core/profile'
 import {
     getAmountFromOutput,
     getAsyncDataFromOutput,
@@ -14,8 +16,6 @@ import {
     getTagFromOutput,
 } from './helper'
 import { AliasOutput } from '@iota/sdk/out/types'
-import { api } from '@core/profile-manager'
-import { getNetworkHrp } from '@core/profile'
 
 export async function generateSingleAliasActivity(
     account: IAccountState,

@@ -1,7 +1,6 @@
 import { get } from 'svelte/store'
 
-import { Event, TransactionInclusionWalletEvent } from '@iota/sdk/out/types'
-import { WalletEventType } from '@iota/sdk/out/types'
+import { Event, TransactionInclusionWalletEvent, WalletEventType } from '@iota/sdk/out/types'
 
 import { localize } from '@core/i18n'
 import { validateWalletApiEvent } from '@core/profile-manager'

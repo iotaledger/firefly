@@ -1,5 +1,6 @@
 import { IAccountState } from '@core/account'
 import { getCoinType, getNetworkHrp } from '@core/profile'
+import { api } from '@core/profile-manager'
 import { ActivityType } from '@core/wallet/enums'
 import { IActivityGenerationParameters } from '@core/wallet/interfaces'
 import { FoundryActivity } from '@core/wallet/types'
@@ -18,7 +19,6 @@ import {
     SimpleTokenScheme,
     UnlockConditionType,
 } from '@iota/sdk/out/types'
-import { api } from '@core/profile-manager'
 
 export async function generateSingleFoundryActivity(
     account: IAccountState,

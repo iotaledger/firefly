@@ -3,6 +3,7 @@ import { handleError } from '@core/error/handlers'
 import { ActivityAction, ActivityType } from '@core/wallet/enums'
 import { IActivityGenerationParameters } from '@core/wallet/interfaces'
 import { NftActivity } from '@core/wallet/types'
+import { getClient } from '@core/profile-manager'
 import { getNftId } from '../outputs/getNftId'
 import {
     getAsyncDataFromOutput,
@@ -13,7 +14,6 @@ import {
     getTagFromOutput,
 } from './helper'
 import { NftOutput } from '@iota/sdk/out/types'
-import { getClient } from '@core/profile-manager'
 
 export async function generateSingleNftActivity(
     account: IAccountState,

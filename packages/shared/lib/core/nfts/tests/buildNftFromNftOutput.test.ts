@@ -4,12 +4,10 @@ import { buildNftFromNftOutput } from '../utils/buildNftFromNftOutput'
 import {
     AddressUnlockCondition,
     Ed25519Address,
-    Feature,
     IssuerFeature,
     MetadataFeature,
     NftOutputBuilderParams,
     TimelockUnlockCondition,
-    UnlockCondition,
 } from '@iota/sdk/out/types'
 import { Address, AddressType, NftOutput } from '@iota/sdk/out/types'
 

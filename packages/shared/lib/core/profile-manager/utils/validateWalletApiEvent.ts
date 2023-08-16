@@ -1,7 +1,6 @@
 import { localize } from '@core/i18n'
 
-import { Event } from '@iota/sdk/out/types'
-import { WalletEventType } from '@iota/sdk/out/types'
+import { Event, WalletEventType } from '@iota/sdk/out/types'
 
 import { WalletApiEventError, WalletApiEventValidationError } from '../errors'
 import { IWalletApiEventPayloadWrapper } from '../interfaces'
