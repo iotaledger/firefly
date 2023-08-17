@@ -11,6 +11,7 @@
         ActivityAsyncStatusPill,
         FontWeight,
         NftImageOrIconBox,
+        NftSize,
         Pill,
         SubjectBox,
         Text,
@@ -40,9 +41,10 @@
         <button
             on:click|preventDefault={onClick}
             disabled={!nftIsOwned}
-            class="flex w-full items-start justify-center space-x-2 cursor-{nftIsOwned ? 'pointer' : 'default'}"
+            class="flex w-full items-start justify-center space-x-2 cursor-default"
+            class:cursor-pointer={nftIsOwned}
         >
-            <NftImageOrIconBox nftId={activity.nftId} size="small" />
+            <NftImageOrIconBox {nft} size={NftSize.Small} />
             <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="whitespace-normal text-left">
                 {nft?.name}
             </Text>

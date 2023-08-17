@@ -23,6 +23,7 @@
     import { sendRouter } from '@/routers'
     import { activeProfile } from '@core/profile'
     import { ToggleColor } from '@ui/inputs/Toggle.svelte'
+    import { TextHintVariant } from 'shared/components/enums'
 
     export let sendTransaction: () => Promise<void>
     export let storageDeposit: number
@@ -129,7 +130,7 @@
                     </KeyValueBox>
                 {/if}
                 {#if surplus}
-                    <TextHint warning text={localize('popups.transaction.surplusIncluded')} />
+                    <TextHint variant={TextHintVariant.Warning} text={localize('popups.transaction.surplusIncluded')} />
                 {/if}
             </div>
         </div>
