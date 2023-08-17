@@ -1,14 +1,9 @@
 <script lang="ts">
-    import { appSettings } from '@core/app'
-
-    export let recoveryPhrase: string[] = []
-    export let verifyRecoveryPhrase: string[] = undefined
-
+    export let recoveryPhrase: string[]
+    export let verifyRecoveryPhrase: string[] | undefined = undefined
     export let blurred: boolean = false
     export let disabled: boolean = false
     export let boxed: boolean = false
-
-    $: dark = $appSettings.darkMode
 </script>
 
 {#if recoveryPhrase}
@@ -24,7 +19,6 @@
             <recovery-word
                 id="recovery-word-{i}"
                 class:boxed
-                class:dark
                 class:disabled
                 class:errored
                 class:selected
@@ -64,11 +58,8 @@
     }
 
     recovery-word:not(.boxed) {
-        @apply px-6 py-4 rounded-2xl bg-gray-200;
-
-        &.dark {
-            @apply bg-gray-800;
-        }
+        @apply px-6 py-4 rounded-2xl;
+        @apply bg-gray-200 dark:bg-gray-800;
 
         &.unmatched {
             @apply filter blur-sm;
@@ -84,18 +75,12 @@
 
         &.selected {
             @apply rounded border border-solid border-blue-500 bg-blue-50;
+            @apply dark:bg-blue-300 dark:bg-opacity-10;
         }
 
         &.errored {
             @apply rounded border border-solid border-red-500 bg-red-50;
-        }
-
-        &.dark.selected {
-            @apply bg-blue-300 bg-opacity-10;
-        }
-
-        &.dark.errored {
-            @apply bg-red-300 bg-opacity-10;
+            @apply dark:bg-red-300 dark:bg-opacity-10;
         }
     }
 </style>

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { HR, MenuItem, Modal } from '@ui'
+    import { MenuItem, Modal } from '@ui'
 
     import { localize } from '@core/i18n'
     import {
@@ -11,6 +11,7 @@
     import { getOfficialNodes } from '@core/network/utils'
     import { activeProfile } from '@core/profile/stores'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { MenuItemVariant, TextHintVariant } from '../enums'
 
     export let node: INode
     export let clientOptions: IClientOptions
@@ -41,7 +42,7 @@
                 props: {
                     title: localize('popups.unsetAsPrimaryNode.title'),
                     description: localize('popups.unsetAsPrimaryNode.body', { values: { url: node.url } }),
-                    danger: true,
+                    variant: TextHintVariant.Danger,
                     confirmText: localize('actions.clear'),
                     onConfirm: () => {
                         void togglePrimaryNodeInClientOptions(node)
@@ -61,7 +62,7 @@
             props: {
                 title: localize('popups.node.titleRemove'),
                 description: localize('popups.node.removeConfirmation'),
-                danger: true,
+                variant: TextHintVariant.Danger,
                 confirmText: localize('actions.removeNode'),
                 onConfirm: () => {
                     void removeNodeFromClientOptions(node)
@@ -81,7 +82,7 @@
                 props: {
                     title: localize('popups.excludeNode.title'),
                     description: localize('popups.excludeNode.body', { values: { url: node?.url } }),
-                    danger: true,
+                    variant: TextHintVariant.Danger,
                     confirmText: localize('views.settings.configureNodeList.excludeNode'),
                     onConfirm: () => {
                         void toggleDisabledNodeInClientOptions(node)
@@ -110,11 +111,11 @@
         title={localize(`views.settings.configureNodeList.${node.disabled ? 'include' : 'exclude'}Node`)}
         onClick={onToggleDisabledNodeClick}
     />
-    <HR />
+    <hr />
     <MenuItem
         disabled={!allowDisableOrRemove}
         title={localize('views.settings.configureNodeList.removeNode')}
         onClick={onRemoveNodeClick}
-        variant="error"
+        variant={MenuItemVariant.Error}
     />
 </Modal>

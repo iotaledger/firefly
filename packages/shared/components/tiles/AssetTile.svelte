@@ -5,6 +5,7 @@
     import { formatCurrency } from '@core/i18n/utils'
     import { getMarketAmountFromAssetValue } from '@core/market/utils/getMarketAmountFromAssetValue'
     import { getMarketPriceForAsset } from '@core/market/utils'
+    import { AssetIconSize } from 'shared/components/enums'
 
     export let asset: IAsset | undefined
     export let onClick: () => unknown
@@ -26,7 +27,7 @@
     >
         <div class="w-full flex flex-row justify-between items-center">
             <div class="flex flex-row items-center text-left space-x-4">
-                <AssetIcon small={squashed} {asset} />
+                <AssetIcon size={squashed ? AssetIconSize.Small : AssetIconSize.Medium} {asset} />
                 <div class="flex flex-col">
                     <Text type={TextType.p} fontWeight={FontWeight.semibold}>
                         {asset.metadata?.name

@@ -14,6 +14,7 @@
     import { formatDate, localize } from '@core/i18n'
     import { closePopup } from '@auxiliary/popup'
     import features from '@features/features'
+    import { TextHintVariant } from 'shared/components/enums'
 
     let hasAutoUpdate = false
 
@@ -50,7 +51,7 @@
             valueText={localize(`popups.appUpdate.${get(appStage)}`)}
         />
         {#if $appVersionDetails.upToDate}
-            <TextHint success classes="w-full" text={localize('popups.appUpdate.latestInstalled')} />
+            <TextHint variant={TextHintVariant.Success} text={localize('popups.appUpdate.latestInstalled')} />
         {:else}
             <KeyValueBox keyText={localize('popups.appUpdate.newVerion')} valueText={$appVersionDetails.newVersion} />
             <KeyValueBox
@@ -61,8 +62,7 @@
                 })}
             />
             <TextHint
-                info
-                classes="w-full"
+                variant={TextHintVariant.Info}
                 text={localize(`popups.appUpdate.${hasAutoUpdate ? 'updateAvailable' : 'updatesDisabled'}`)}
             />
         {/if}

@@ -1,5 +1,9 @@
+import { Event, NewOutputWalletEvent } from '@iota/wallet'
+import { WalletEventType } from '@iota/wallet/out/types'
+
 import { syncBalance } from '@core/account/actions/syncBalance'
-import { addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput, addNftsToDownloadQueue } from '@core/nfts'
+import { addNftsToDownloadQueue, addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput } from '@core/nfts'
+import { checkAndRemoveProfilePicture } from '@core/profile/actions'
 import { activeAccounts } from '@core/profile/stores'
 import {
     ActivityType,
@@ -16,23 +20,19 @@ import {
 import { getBech32AddressFromAddressTypes } from '@core/wallet/utils/getBech32AddressFromAddressTypes'
 import { preprocessGroupedOutputs } from '@core/wallet/utils/outputs/preprocessGroupedOutputs'
 import { get } from 'svelte/store'
-import { WalletApiEvent } from '../../enums'
-import { INewOutputEventPayload } from '../../interfaces'
 import { validateWalletApiEvent } from '../../utils'
-import { checkAndRemoveProfilePicture } from '@core/profile/actions'
 
-export function handleNewOutputEvent(error: Error, rawEvent: string): void {
-    const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletApiEvent.NewOutput)
-    /* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
-    void handleNewOutputEventInternal(accountIndex, payload as INewOutputEventPayload)
+export function handleNewOutputEvent(error: Error, rawEvent: Event): void {
+    const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletEventType.NewOutput)
+    const type = payload.type
+    if (type === WalletEventType.NewOutput) {
+        void handleNewOutputEventInternal(accountIndex, payload as NewOutputWalletEvent)
+    }
 }
 
-export async function handleNewOutputEventInternal(
-    accountIndex: number,
-    payload: INewOutputEventPayload
-): Promise<void> {
+export async function handleNewOutputEventInternal(accountIndex: number, payload: NewOutputWalletEvent): Promise<void> {
     const account = get(activeAccounts)?.find((account) => account.index === accountIndex)
-    const output = payload?.output
+    const output = payload.output
 
     if (!account || !output) return
 
