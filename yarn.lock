@@ -915,10 +915,10 @@
   dependencies:
     big-integer "^1.6.51"
 
-"@iota/wallet@2.0.3-rc.42":
-  version "2.0.3-rc.42"
-  resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.3-rc.42.tgz#62373ba2dca09a9d6a0358ae2580e89f88d1f353"
-  integrity sha512-w3M0B/KLDYyYP0C72rHgc1KQ+WN21RDdFldapVbGDgtWyDuQN/XiXC90hPDvr8G8++V9d2nQ0gnxfSvpfsgOPQ==
+"@iota/wallet@2.0.3-rc.44":
+  version "2.0.3-rc.44"
+  resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.3-rc.44.tgz#5d724638a23c68e5f0f61861660ac4ed321a0a54"
+  integrity sha512-/o1o9yH83nY16nvqLfcMtSZPy92Ca0m5+MtKjnR2V0u5UCwUu6GH3cSauIuWrT4rFJoaKZF3CAPcc2raJ/5YDg==
   dependencies:
     "@iota/types" "^1.0.0-beta.15"
     cargo-cp-artifact "^0.1.6"
