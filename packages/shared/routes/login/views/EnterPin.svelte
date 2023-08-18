@@ -1,18 +1,19 @@
 <script lang="typescript">
+    import { Locale } from '@core/i18n'
+    import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos } from '@lib/app'
+    import { isStrongholdOutdated } from '@lib/stronghold'
+    import { destroyActor } from '@lib/wallet'
     import { Icon, Pin, Profile, Text, TextHint } from 'shared/components'
     import { initAppSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { Platform } from 'shared/lib/platform'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { activeProfile, clearActiveProfile } from 'shared/lib/profile'
-    import { isStrongholdOutdated } from '@lib/stronghold'
+    import { activeProfile, activeProfileId, clearActiveProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
     import { api, getProfileDataPath, initialise } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy } from 'svelte'
-    import { Locale } from '@core/i18n'
     import { get } from 'svelte/store'
-    import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos } from '@lib/app'
 
     export let locale: Locale
 
@@ -143,6 +144,7 @@
 
     function handleBackClick() {
         if (!hasReachedMaxAttempts) {
+            destroyActor($activeProfileId)
             clearActiveProfile()
             dispatch('previous')
         }

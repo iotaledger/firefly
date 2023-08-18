@@ -1,0 +1,14 @@
+diff --git a/node_modules/dmg-builder/out/dmg.js b/node_modules/dmg-builder/out/dmg.js
+index ad0bb2e..e3e9769 100644
+--- a/node_modules/dmg-builder/out/dmg.js
++++ b/node_modules/dmg-builder/out/dmg.js
+@@ -389,7 +389,8 @@ async function customizeDmg(volumePath, specification, packager, backgroundFile)
+   const asyncTaskManager = new (_builderUtil().AsyncTaskManager)(packager.info.cancellationToken);
+   env.iconLocations = await computeDmgEntries(specification, volumePath, packager, asyncTaskManager);
+   await asyncTaskManager.awaitTasks();
+-  await (0, _builderUtil().exec)("/usr/bin/python", [path.join((0, _dmgUtil().getDmgVendorPath)(), "dmgbuild/core.py")], {
++  const pythonPath = (await (0, _builderUtil().exec)("which", ["python2"])).trim();
++  await (0, _builderUtil().exec)(pythonPath, [path.join((0, _dmgUtil().getDmgVendorPath)(), "dmgbuild/core.py")], {
+     cwd: (0, _dmgUtil().getDmgVendorPath)(),
+     env
+   });
