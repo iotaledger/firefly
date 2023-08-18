@@ -13,7 +13,7 @@
         "@typescript-eslint/parser": "^5.57.1",
         "eslint": "^8.42.0",
         "eslint-plugin-security": "^1.4.0",
-        "eslint-plugin-svelte3": "^3.4.1",
+        "eslint-plugin-svelte3": "^4.0.0",
         "husky": "^7.0.0",
         "lint-staged": "^12.3.3",
         "patch-package": "^7.0.0",
