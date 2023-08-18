@@ -118,7 +118,7 @@ jobs:
               # This step is required to support macOS 10.13
             - name: Apply librocksdb-sys patch (macOS)
               run: |
-                cargo install cargo-patch
+                cargo +nightly install cargo-patch
                 cp ${{ github.workspace }}/manual-patches/rocksdb_faligned_allocation.patch .
                 git apply --ignore-space-change --ignore-whitespace ${{ github.workspace }}/manual-patches/macos_cargo_toml.patch
                 cat Cargo.toml
