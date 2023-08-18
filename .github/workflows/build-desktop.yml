@@ -46,7 +46,7 @@ jobs:
         needs: [setup]
         strategy:
             matrix:
-                os: [ubuntu-20.04, macos-13, windows-latest]
+                os: [ubuntu-20.04, macos-11, windows-latest]
             fail-fast: false
         env:
             VERSION: ${{ needs.setup.outputs.version }}
@@ -67,7 +67,7 @@ jobs:
 
             - name: Select Xcode
               uses: maxim-lobanov/setup-xcode@v1
-              if: matrix.os == 'macos-13'
+              if: matrix.os == 'macos-11'
               with:
                 xcode-version: 'latest-stable'
 
@@ -119,18 +119,7 @@ jobs:
 
             - name: Set deployment target (macOS)
               run: echo "MACOSX_DEPLOYMENT_TARGET=10.13" >> $GITHUB_ENV
-              if: matrix.os == 'macos-13'
-
-              # This step is required to support macOS 10.13
-            - name: Apply librocksdb-sys patch (macOS)
-              run: |
-                cargo +nightly install cargo-patch
-                cp ${{ github.workspace }}/manual-patches/rocksdb_faligned_allocation.patch .
-                git apply --ignore-space-change --ignore-whitespace ${{ github.workspace }}/manual-patches/macos_cargo_toml.patch
-                cat Cargo.toml
-                cargo patch
-              working-directory: packages/backend/bindings/node/native
-              if: ${{ startsWith(matrix.os, 'macos') }}
+              if: matrix.os == 'macos-11'
 
             - name: Install required packages (Linux)
               run: |
@@ -162,7 +151,7 @@ jobs:
             - name: Install Sentry CLI
               # Yarn has issues putting binaries in the PATH on Windows
               run: npm i -g @sentry/cli
-              if: ${{ startsWith(github.ref, 'refs/tags/desktop') && matrix.os != 'macos-13' }}
+              if: ${{ startsWith(github.ref, 'refs/tags/desktop') && matrix.os != 'macos-11' }}
 
             #    - name: Strip backend debug info and upload to Sentry (Linux)
             #      run: |
@@ -203,13 +192,13 @@ jobs:
                   SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
             - name: Set up Python 2.x (macOS)
-              if: matrix.os == 'macos-13'
+              if: matrix.os == 'macos-11'
               run: |
                 wget https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg -O ${{ runner.temp }}/python.pkg
                 sudo installer -pkg ${{ runner.temp }}/python.pkg -target / -verbose
             
             - name: Test Python 2.x (macOS)
-              if: matrix.os == 'macos-13'
+              if: matrix.os == 'macos-11'
               run: |
                 which python2
                 python2 --version
@@ -222,7 +211,7 @@ jobs:
                   FIREFLY_APPLE_ID: ${{ secrets.APPLE_ID }}
                   FIREFLY_APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
               working-directory: packages/desktop
-              if: matrix.os == 'macos-13'
+              if: matrix.os == 'macos-11'
 
             - name: Build Electron app (Windows)
               run: yarn compile:${env:STAGE}:win
@@ -261,7 +250,7 @@ jobs:
             - name: Compute checksums (macOS)
               run: for i in `ls | grep 'firefly-desktop*'` ; do shasum -a 256 $i | awk {'print $1'} > $i.sha256 ; done
               working-directory: packages/desktop/out
-              if: matrix.os == 'macos-13'
+              if: matrix.os == 'macos-11'
 
             - name: Compute checksums (Windows)
               run: Get-ChildItem "." -Filter firefly-desktop* | Foreach-Object { $(Get-FileHash -Path $_.FullName -Algorithm SHA256).Hash | Set-Content ($_.FullName + '.sha256') }
@@ -300,7 +289,7 @@ jobs:
             - name: Downloading artifacts
               uses: actions/download-artifact@v2
               with:
-                  name: firefly-desktop-macos-13
+                  name: firefly-desktop-macos-11
                   path: assets
 
             - name: Downloading artifacts
