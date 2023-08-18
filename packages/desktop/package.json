@@ -42,7 +42,7 @@
         "url": "^0.11.0"
     },
     "devDependencies": {
-        "@sentry/webpack-plugin": "^1.18.5",
+        "@sentry/webpack-plugin": "^2.6.2",
         "@tsconfig/svelte": "^4.0.1",
         "@types/webpack": "^5.28.1",
         "copy-webpack-plugin": "^11.0.0",
