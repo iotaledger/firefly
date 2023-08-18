@@ -34,7 +34,7 @@
                 emitStrongholdMigrationEvent({ success: true, onboardingType })
             } else {
                 await migrateStrongholdFromActiveProfile(password)
-                emitStrongholdMigrationEvent({ success: true, onboardingType })
+                emitStrongholdMigrationEvent({ success: true })
             }
             isBusy = false
             $updateStrongholdRouter.next()
