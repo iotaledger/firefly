@@ -14,6 +14,9 @@ const analyticsFeatures: IAnalyticsFeatures = {
     dashboardRoute: {
         enabled: true,
     },
+    migration: {
+        enabled: true,
+    },
 }
 
 export default analyticsFeatures

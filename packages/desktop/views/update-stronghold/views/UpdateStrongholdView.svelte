@@ -8,6 +8,7 @@
     import { HTMLButtonType, TextType } from '@ui/enums'
     import { updateStrongholdRouter } from '../update-stronghold-router'
     import { AnimationEnum } from '@auxiliary/animation'
+    import { Platform } from '@core/app'
 
     export let password: string = ''
     export let isRecovery: boolean = false
@@ -20,8 +21,10 @@
             isBusy = true
             if (isRecovery) {
                 await migrateStrongholdFromOnboardingProfile(password)
+                Platform.trackEvent('stronghold-migration', { success: true, route: 'onboarding-profile' })
             } else {
                 await migrateStrongholdFromActiveProfile(password)
+                Platform.trackEvent('stronghold-migration', { success: true, route: 'active-profile' })
             }
             isBusy = false
             $updateStrongholdRouter.next()
@@ -30,6 +33,11 @@
             const message = err?.message ?? ''
             const parsedError = isValidJson(message) ? JSON.parse(message) : ''
             passwordError = parsedError?.payload?.error.replaceAll('`', '') ?? localize(message)
+            Platform.trackEvent('stronghold-migration', {
+                success: false,
+                route: isRecovery ? 'onboarding-profile' : 'active-profile',
+                error: parsedError || passwordError,
+            })
             return
         }
     }
