@@ -14,7 +14,7 @@ const analyticsFeatures: IAnalyticsFeatures = {
     dashboardRoute: {
         enabled: true,
     },
-    migration: {
+    strongholdMigration: {
         enabled: true,
     },
 }

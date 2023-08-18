@@ -5,5 +5,5 @@ export interface IAnalyticsFeatures extends IFeatureFlag {
     onboardingRoute: IFeatureFlag
     loginRoute: IFeatureFlag
     dashboardRoute: IFeatureFlag
-    migration: IFeatureFlag
+    strongholdMigration: IFeatureFlag
 }

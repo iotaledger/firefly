@@ -10,6 +10,7 @@
     import { AnimationEnum } from '@auxiliary/animation'
     import { Platform } from '@core/app'
     import { onboardingProfile } from '@contexts/onboarding'
+    import features from '@features/features'
 
     export let password: string = ''
     export let isRecovery: boolean = false
@@ -17,17 +18,23 @@
     let passwordError: string = ''
     let isBusy = false
 
+    function emitStrongholdMigrationEvent(eventProperties: Record<string, unknown>): void {
+        if (features.analytics.strongholdMigration.enabled) {
+            Platform.trackEvent('stronghold-migration', eventProperties)
+        }
+    }
+
     async function onSubmit(): Promise<void> {
-        const onboardingType = $onboardingProfile.onboardingType
+        const onboardingType = $onboardingProfile?.onboardingType
 
         try {
             isBusy = true
             if (isRecovery) {
                 await migrateStrongholdFromOnboardingProfile(password)
-                Platform.trackEvent('stronghold-migration', { success: true, onboardingType })
+                emitStrongholdMigrationEvent({ success: true, onboardingType })
             } else {
                 await migrateStrongholdFromActiveProfile(password)
-                Platform.trackEvent('stronghold-migration', { success: true, onboardingType })
+                emitStrongholdMigrationEvent({ success: true, onboardingType })
             }
             isBusy = false
             $updateStrongholdRouter.next()
@@ -36,11 +43,7 @@
             const message = err?.message ?? ''
             const parsedError = isValidJson(message) ? JSON.parse(message) : ''
             passwordError = parsedError?.payload?.error.replaceAll('`', '') ?? localize(message)
-            Platform.trackEvent('stronghold-migration', {
-                success: false,
-                onboardingType,
-                error: parsedError || passwordError,
-            })
+            emitStrongholdMigrationEvent({ success: false, onboardingType })
             return
         }
     }
