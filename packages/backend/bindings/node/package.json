@@ -11,9 +11,9 @@
     },
     "scripts": {
         "postinstall": "yarn build",
-        "pretest": "yarn build:api && yarn neon build --release",
+        "pretest": "yarn build:api && yarn neon build",
         "build": "node ./scripts/build.js",
-        "build:binding": "electron-build-env --disturl https://artifacts.electronjs.org/headers/dist -- yarn neon build --release && move-file native/index.node ./index.node",
+        "build:binding": "electron-build-env --disturl https://artifacts.electronjs.org/headers/dist -- yarn neon build && move-file native/index.node ./index.node",
         "build:api": "rimraf ./index.js && rollup -c --silent && yarn generate-declaration",
         "generate-declaration": "tsc --project tsconfig.build.json --declaration --emitDeclarationOnly --outDir dist && move-file dist/backend/bindings/node/index.d.ts dist/index.d.ts",
         "test": "mocha --timeout 0"
