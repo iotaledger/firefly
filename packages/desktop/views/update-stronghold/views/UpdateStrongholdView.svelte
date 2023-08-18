@@ -9,6 +9,7 @@
     import { updateStrongholdRouter } from '../update-stronghold-router'
     import { AnimationEnum } from '@auxiliary/animation'
     import { Platform } from '@core/app'
+    import { onboardingProfile } from '@contexts/onboarding'
 
     export let password: string = ''
     export let isRecovery: boolean = false
@@ -17,14 +18,16 @@
     let isBusy = false
 
     async function onSubmit(): Promise<void> {
+        const onboardingType = $onboardingProfile.onboardingType
+
         try {
             isBusy = true
             if (isRecovery) {
                 await migrateStrongholdFromOnboardingProfile(password)
-                Platform.trackEvent('stronghold-migration', { success: true, route: 'onboarding-profile' })
+                Platform.trackEvent('stronghold-migration', { success: true, onboardingType })
             } else {
                 await migrateStrongholdFromActiveProfile(password)
-                Platform.trackEvent('stronghold-migration', { success: true, route: 'active-profile' })
+                Platform.trackEvent('stronghold-migration', { success: true, onboardingType })
             }
             isBusy = false
             $updateStrongholdRouter.next()
@@ -35,7 +38,7 @@
             passwordError = parsedError?.payload?.error.replaceAll('`', '') ?? localize(message)
             Platform.trackEvent('stronghold-migration', {
                 success: false,
-                route: isRecovery ? 'onboarding-profile' : 'active-profile',
+                onboardingType,
                 error: parsedError || passwordError,
             })
             return
