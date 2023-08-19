@@ -16,15 +16,20 @@
         Button,
         Text,
         TextHint,
-        AssetActionsButton,
         AssetTile,
         KeyValueBox,
         FontWeight,
         TextType,
+        AssetActionsModal,
+        MeatballMenuButton,
+        Modal,
     } from 'shared/components'
+    import { TextHintVariant } from 'shared/components/enums'
 
     export let asset: IAsset
     export let activityId: string = undefined
+
+    let modal: Modal
 
     function onSkipClick(): void {
         unverifyAsset(asset.id, NotVerifiedStatus.Skipped)
@@ -83,7 +88,10 @@
                     : asset.metadata?.name}
             </Text>
             {#if asset.standard === TokenStandard.Irc30}
-                <AssetActionsButton {asset} />
+                <div class="max-h-7 max-w-9 overflow-visible relative">
+                    <MeatballMenuButton onClick={modal?.toggle} />
+                    <AssetActionsModal bind:modal {asset} position={{ right: '0' }} classes="mt-1.5" />
+                </div>
             {/if}
         </div>
 
@@ -91,7 +99,10 @@
 
         <div class="space-y-4 flex flex-col items-center justify-center">
             {#if !asset.verification?.verified}
-                <TextHint warning text={localize('popups.tokenInformation.verificationWarning')} />
+                <TextHint
+                    variant={TextHintVariant.Warning}
+                    text={localize('popups.tokenInformation.verificationWarning')}
+                />
             {/if}
             <div class="w-full flex flex-col space-y-2">
                 <KeyValueBox

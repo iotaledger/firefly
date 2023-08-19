@@ -2,7 +2,7 @@ import { ClientError, IotaClientError } from '../enums'
 
 export const CLIENT_ERROR_REGEXES = {
     [ClientError.InvalidStrongholdPassword]: /`invalid stronghold password`/,
-    [ClientError.MigrationRequired]: /`Unsupported snapshot version, migration required`/,
+    [ClientError.MigrationRequired]: /`unsupported snapshot version, expected \d*, found \d*, migration required`/,
     [ClientError.NoSyncedNode]: /`No synced node available`/,
     [ClientError.InsufficientAmount]: /`insufficient amount: found \d*, required \d*`/,
     [ClientError.TimeNotSynced]: /`local time \d* doesn't match the time of the latest milestone timestamp: \d*`/,

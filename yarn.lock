@@ -915,10 +915,10 @@
   dependencies:
     big-integer "^1.6.51"
 
-"@iota/wallet@2.0.3-rc.35":
-  version "2.0.3-rc.35"
-  resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.3-rc.35.tgz#ec1d6cd74a1ad00d1c66edc53a11e13f74d77a24"
-  integrity sha512-acTmzXEEaaJ7FbiLkhRdNHcYc0P7x4h34Ci4KFWNTaIR+BHyMxKEJeLetKjrsz4xyvEZVlE7/MjML9xPTeXeEQ==
+"@iota/wallet@2.0.3-rc.44":
+  version "2.0.3-rc.44"
+  resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.3-rc.44.tgz#5d724638a23c68e5f0f61861660ac4ed321a0a54"
+  integrity sha512-/o1o9yH83nY16nvqLfcMtSZPy92Ca0m5+MtKjnR2V0u5UCwUu6GH3cSauIuWrT4rFJoaKZF3CAPcc2raJ/5YDg==
   dependencies:
     "@iota/types" "^1.0.0-beta.15"
     cargo-cp-artifact "^0.1.6"
@@ -7413,10 +7413,10 @@ retry@^0.13.1:
   resolved "https://registry.yarnpkg.com/retry/-/retry-0.13.1.tgz#185b1587acf67919d63b357349e03537b2484658"
   integrity sha512-XQBQ3I8W1Cge0Seh+6gjj03LbmRFWuoszgK9ooCpwYIrhhoO80pfq4cUkU5DkknwfOfFteRwlZ56PYOGYyFWdg==
 
-retypeapp@^2.3.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/retypeapp/-/retypeapp-2.4.0.tgz#a794e3185f2ea04d22b8948df1a3d9a971d78b78"
-  integrity sha512-vEND+JC0EtK1nws958J108Z14Enfvt84bYeycaLa6eCZjsVzqV4Xe6hl7amYILycp7ld0x2uhx4Wh7iVlcdoCg==
+retypeapp@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/retypeapp/-/retypeapp-3.1.0.tgz#73cb9849c767c8f61ed0b228e48ec88bd96b68f3"
+  integrity sha512-8qRO299gucLgcE46yp0ZzFZ5GXuydg141ApbdJYGYQpZBK7V3WS/ENnU3uDvDxlCnKbNxTj+0gR8quAKjsrg6Q==
 
 reusify@^1.0.4:
   version "1.0.4"
