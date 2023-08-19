@@ -8,7 +8,7 @@
     import { isRecentDate } from '@core/utils'
     import { ISidebarTab } from '@desktop/routers'
     import features from '@features/features'
-    import { Icon, Modal, NotificationBadge, ProfileActionsModal, ProfilePicture } from '@ui'
+    import { Icon, Modal, NotificationBadge, ProfileActionsModal, ProfilePicture, Size } from '@ui'
 
     let profileModal: Modal
 
@@ -115,7 +115,7 @@
                 class="w-10 h-10 relative flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
                 on:click={profileModal?.open}
             >
-                <ProfilePicture profile={$activeProfile} size="medium" />
+                <ProfilePicture profile={$activeProfile} size={Size.Medium} />
                 {#if !$shouldOpenProfileModal && (!isBackupSafe || !$appVersionDetails.upToDate)}
                     <NotificationBadge />
                 {/if}
