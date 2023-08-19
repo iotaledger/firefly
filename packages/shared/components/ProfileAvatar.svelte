@@ -30,7 +30,7 @@
     }
 </script>
 
-<user-avatar
+<profile-avatar
     class="rounded-full font-bold text-center flex items-center justify-center icon-bg overflow-hidden {size}"
     style:--icon-bg-color={backgroundColor}
 >
@@ -39,14 +39,14 @@
             <NftMedia nft={profile.pfp} classes="w-full h-full rounded-full object-cover" />
         </nft-wrapper>
     {:else if profile?.name}
-        <Text {fontSize} {lineHeight} fontWeight={FontWeight.bold} classes="text-white"
-            >{getInitials(profile.name, 3)}</Text
-        >
+        <Text {fontSize} {lineHeight} fontWeight={FontWeight.bold} classes="text-white">
+            {getInitials(profile.name, 3)}
+        </Text>
     {/if}
-</user-avatar>
+</profile-avatar>
 
 <style lang="scss">
-    user-avatar {
+    profile-avatar {
         background-color: var(--icon-bg-color);
         &.small,
         &.small nft-wrapper {

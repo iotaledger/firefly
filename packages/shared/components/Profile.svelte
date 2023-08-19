@@ -5,11 +5,11 @@
         DeveloperIndicatorPill,
         Icon,
         NetworkIconBadge,
-        UserAvatar,
+        ProfileAvatar,
+        Size,
         StrongholdBadge,
         Text,
         TextType,
-        Size,
     } from '@ui'
 
     export let profile: IPersistedProfile
@@ -29,7 +29,7 @@
             disabled={!onClick}
             class="relative mb-3 {onClick ? 'cursor-pointer' : 'cursor-default'}"
         >
-            <UserAvatar {profile} size={Size.Large} />
+            <ProfileAvatar {profile} size={Size.Large} />
             {#if !updateRequired}
                 <NetworkIconBadge networkId={profile?.network?.id} tooltipText={profile?.network?.name} />
             {:else}
