@@ -4,6 +4,7 @@
     import { formatHexString } from '@core/utils'
     import { onDestroy } from 'svelte'
     import { showInternalVerificationPopup, resetShowInternalVerificationPopup } from '@core/ledger'
+    import { TextHintVariant } from 'shared/components/enums'
     import { AnimationEnum } from '@auxiliary/animation'
 
     export let toAddress: string
@@ -36,6 +37,6 @@
             <KeyValueBox keyText={localize('general.amount')} valueText={toAmount} />
         {/if}
     {:else if $showInternalVerificationPopup}
-        <TextHint info text={localize('popups.verifyInternalLedgerTransaction.hint')} />
+        <TextHint variant={TextHintVariant.Info} text={localize('popups.verifyInternalLedgerTransaction.hint')} />
     {/if}
 </div>

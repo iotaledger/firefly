@@ -7,6 +7,7 @@
     import { handleError } from '@core/error/handlers'
     import { onMount } from 'svelte'
     import { selectedAccount } from '@core/account'
+    import { TextHintVariant } from 'shared/components/enums'
 
     export let asset: IAsset
     export let rawAmount: string
@@ -55,7 +56,7 @@
     <div class="space-y-4">
         <KeyValueBox keyText={localize('popups.nativeToken.property.assetId')} valueText={asset.id} isCopyable />
         <KeyValueBox keyText={localize('general.amount')} valueText={formattedAmount} />
-        <TextHint warning text={localize('actions.confirmTokenBurn.hint')} />
+        <TextHint variant={TextHintVariant.Warning} text={localize('actions.confirmTokenBurn.hint')} />
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" outline onClick={onBackClick}>{localize('actions.back')}</Button>

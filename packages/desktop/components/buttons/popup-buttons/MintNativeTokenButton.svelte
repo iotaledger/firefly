@@ -6,6 +6,7 @@
     import { resetMintTokenDetails } from '@core/wallet'
 
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { TextHintVariant } from 'shared/components/enums'
 
     $: hasAliases = $selectedAccount.balances?.aliases.length > 0
 
@@ -21,7 +22,7 @@
                 props: {
                     title: localize('popups.noAlias.title'),
                     hint: localize('popups.noAlias.description'),
-                    warning: true,
+                    variant: TextHintVariant.Warning,
                     confirmText: localize('actions.createAlias'),
                     onConfirm: () => {
                         closePopup()

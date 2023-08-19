@@ -8,7 +8,7 @@ export async function consolidateOutputs(): Promise<void> {
     try {
         updateSelectedAccount({ isTransferring: true })
 
-        const transaction = await account.consolidateOutputs(false, 2)
+        const transaction = await account.consolidateOutputs({ force: false, outputThreshold: 2 })
         await processAndAddToActivities(transaction, account)
     } catch (err) {
         handleError(err)

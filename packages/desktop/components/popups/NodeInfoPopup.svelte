@@ -175,5 +175,7 @@
         </Button>
     </div>
 {:else}
-    <Spinner busy message={localize('popups.node.loadingNodeInfo')} classes="my-12 justify-center" />
+    <div class="my-12">
+        <Spinner message={localize('popups.node.loadingNodeInfo')} />
+    </div>
 {/if}

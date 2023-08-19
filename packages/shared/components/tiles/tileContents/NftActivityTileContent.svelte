@@ -26,5 +26,5 @@
 </script>
 
 <ActivityTileContent {action} {subject} {formattedAsset}>
-    <NftImageOrIconBox slot="icon" {nft} size="medium" />
+    <NftImageOrIconBox slot="icon" {nft} />
 </ActivityTileContent>
