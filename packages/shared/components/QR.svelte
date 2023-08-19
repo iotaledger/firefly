@@ -1,16 +1,17 @@
 <script lang="ts">
-    import { default as QrCode } from 'qrious'
     import { appSettings } from '@core/app'
+    import { default as QrCode } from 'qrious'
 
     export let data: string
 
     $: color = $appSettings.darkMode ? '#ffffff' : '#000000'
+    $: data && generateQrCode()
 
-    const QRcode = new QrCode()
-    let QRImage = ''
+    const qrCode = new QrCode()
+    let qrImage = ''
 
     function generateQrCode(): void {
-        QRcode.set({
+        qrCode.set({
             background: '#ffffff00',
             foreground: color,
             level: 'L',
@@ -18,12 +19,8 @@
             value: data,
         })
 
-        QRImage = QRcode.toDataURL('image/png')
-    }
-
-    $: if (data) {
-        generateQrCode()
+        qrImage = qrCode.toDataURL('image/png')
     }
 </script>
 
-<img src={QRImage} alt={data} />
+<img src={qrImage} alt={data} />
