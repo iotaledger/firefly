@@ -154,16 +154,16 @@
             </div>
         </div>
     </div>
-    <div class="w-1/2">
+    <div class="max-w-lg">
         <Pane height={Height.Full}>
-            <collectibles-details class="flex flex-col space-y-3 w-full max-w-lg">
+            <collectibles-details class="flex flex-col space-y-3 w-full max-w-lg h-full">
                 <nft-title class="flex justify-between items-center">
-                    <Text type={TextType.h3} fontWeight={FontWeight.semibold}>{name}</Text>
+                    <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="break-words">{name}</Text>
                     <MeatballMenuButton onClick={modal?.toggle} />
                     <CollectibleActionsModal bind:modal {nft} />
                 </nft-title>
                 {#if description}
-                    <nft-description>
+                    <nft-description class="break-words">
                         <Text type={TextType.h5} fontWeight={FontWeight.normal} color="gray-700">
                             {description}
                         </Text>
