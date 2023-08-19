@@ -1,5 +1,4 @@
 import { generateRandomId } from '@core/utils'
-import { STRONGHOLD_VERSION } from '@core/stronghold'
 import { IOnboardingProfile } from '../interfaces'
 
 /**
@@ -10,6 +9,5 @@ export function buildInitialOnboardingProfile(isDeveloperProfile: boolean): Part
     return {
         id: generateRandomId(),
         isDeveloperProfile,
-        strongholdVersion: STRONGHOLD_VERSION,
     }
 }
