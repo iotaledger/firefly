@@ -53,7 +53,6 @@ export { default as Toast } from './Toast.svelte'
 export { default as Tooltip } from './Tooltip.svelte'
 export { default as Transition } from './Transition.svelte'
 
-export * from './atoms'
 export * from './enums'
 export * from './inputs'
 export * from './interfaces'
