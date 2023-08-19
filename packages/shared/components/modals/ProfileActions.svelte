@@ -13,7 +13,7 @@
         DeveloperIndicatorPill,
         Icon,
         Modal,
-        ProfileAvatar,
+        ProfilePicture,
         Text,
         TextType,
         Toggle,
@@ -88,7 +88,7 @@
 >
     <profile-modal-content class="flex flex-col" in:fade={{ duration: 100 }}>
         <div class="flex flex-row flex-nowrap items-center space-x-3 p-3">
-            <ProfileAvatar profile={$activeProfile} size={Size.Small} />
+            <ProfilePicture profile={$activeProfile} size={Size.Small} />
             <div class="flex flex-row items-center space-x-2">
                 <Text>{profileName}</Text>
                 {#if $activeProfile?.isDeveloperProfile}

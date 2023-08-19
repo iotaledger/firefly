@@ -5,7 +5,7 @@
         DeveloperIndicatorPill,
         Icon,
         NetworkIconBadge,
-        ProfileAvatar,
+        ProfilePicture,
         Size,
         StrongholdBadge,
         Text,
@@ -29,7 +29,7 @@
             disabled={!onClick}
             class="relative mb-3 {onClick ? 'cursor-pointer' : 'cursor-default'}"
         >
-            <ProfileAvatar {profile} size={Size.Large} />
+            <ProfilePicture {profile} size={Size.Large} />
             {#if !updateRequired}
                 <NetworkIconBadge networkId={profile?.network?.id} tooltipText={profile?.network?.name} />
             {:else}

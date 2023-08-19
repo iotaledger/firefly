@@ -30,7 +30,7 @@
     }
 </script>
 
-<profile-avatar
+<profile-picture
     class="rounded-full font-bold text-center flex items-center justify-center icon-bg overflow-hidden {size}"
     style:--icon-bg-color={backgroundColor}
 >
@@ -43,10 +43,10 @@
             {getInitials(profile.name, 3)}
         </Text>
     {/if}
-</profile-avatar>
+</profile-picture>
 
 <style lang="scss">
-    profile-avatar {
+    profile-picture {
         background-color: var(--icon-bg-color);
         &.small,
         &.small nft-wrapper {
