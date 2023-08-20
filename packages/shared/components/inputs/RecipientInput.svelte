@@ -73,9 +73,11 @@
     bind:error
     {disabled}
     options={accountOptions}
-    maxHeight="max-h-48"
+    pickerHeight="max-h-48"
     {...$$restProps}
     let:option
 >
-    <ColoredCircle color={getAccountColorById(option?.id)} />
+    {#if option?.id}
+        <ColoredCircle color={getAccountColorById(option?.id)} />
+    {/if}
 </SelectorInput>

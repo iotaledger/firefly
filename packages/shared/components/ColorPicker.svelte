@@ -114,7 +114,7 @@
                 on:keypress={toggleTooltip}
                 on:keypress={activeCustomColor}
                 tabindex="0"
-                class="custom-color w-12 h-12 rounded-lg cursor-pointer flex justify-center items-center hover:bg-gray-50 focus:bg-white"
+                class="custom-color"
                 class:ring-4={isSelectedCustomElement}
             >
                 <Icon icon={IconEnum.Edit} classes={iconColor} />
@@ -148,6 +148,13 @@
     }
 
     .custom-color {
+        @apply w-12 h-12;
+        @apply flex;
+        @apply justify-center items-center;
+        @apply rounded-lg;
+        @apply hover:bg-gray-50 focus:bg-white;
+        @apply ring-white;
+        @apply ring-opacity-30 hover:ring-opacity-40;
         background-color: var(--custom-color);
         --tw-ring-color: var(--custom-color-ring);
     }

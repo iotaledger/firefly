@@ -11,7 +11,7 @@
         "@iota/transaction-converter": "^1.0.0-beta.30",
         "@iota/unit-converter": "^1.0.0-beta.30",
         "@iota/util.js": "^2.0.0-rc.1",
-        "@iota/wallet": "2.0.3-rc.35",
+        "@iota/wallet": "2.0.3-rc.44",
         "@sveltejs/svelte-virtual-list": "^3.0.1",
         "big-integer": "^1.6.51",
         "big.js": "^6.0.3",

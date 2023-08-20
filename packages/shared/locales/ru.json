@@ -483,55 +483,6 @@
                     "updateVersion": "Firefly v{version}",
                     "button": "Обновить"
                 }
-            },
-            "drawers": {
-                "networkConfig": {
-                    "addChain": {
-                        "title": "Добавить цепочку"
-                    },
-                    "chain": {
-                        "chainId": "ID цепочки",
-                        "aliasAddress": "Псевдоним адреса",
-                        "iscpEndpoint": "ISCP Конечная точка",
-                        "explorerEndpoint": "Конечная точка проводника (необязательно)",
-                        "errors": {
-                            "cannotBeEmpty": "Имя не должно быть пустым",
-                            "nameTooLong": "Имя слишком длинное",
-                            "aliasAddressWrongFormat": "Должен быть в формате hex или Bech32",
-                            "aliasAddressAlreadyInUse": "Псевдоним адреса уже используется",
-                            "invalidUrl": "Неверный URL"
-                        }
-                    },
-                    "chainDepositAddress": {
-                        "title": "Адрес вклада цепочки",
-                        "networkTitle": "Network deposit address"
-                    },
-                    "chainInformation": {
-                        "title": "Информация о цепочке"
-                    },
-                    "confirmLedgerEvmAddress": {
-                        "title": "Подтвердите адрес EVM",
-                        "header": "Мы создали ваш адрес EVM"
-                    },
-                    "connectedChains": {
-                        "title": "Connected chains"
-                    },
-                    "connectLedgerDevice": {
-                        "title": "Connect Ledger Device",
-                        "header": "Open the Ethereum app",
-                        "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed before following these steps.",
-                        "requirements": {
-                            "connect": "Connect and unlock your Ledger",
-                            "openApp": "Open the Ethereum app on your Ledger"
-                        }
-                    },
-                    "editChain": {
-                        "title": "Edit chain"
-                    },
-                    "removeChain": {
-                        "title": "Remove chain"
-                    }
-                }
             }
         },
         "staking": {
@@ -1104,15 +1055,6 @@
                 "assetId": "Id Актива"
             }
         },
-        "importErc20Token": {
-            "title": "Import ERC20 token",
-            "property": {
-                "chainId": "Chain ID",
-                "tokenAddress": "Token address"
-            },
-            "success": "Imported {tokenSymbol} token",
-            "error": "Unable to import ERC20 token"
-        },
         "noAlias": {
             "title": "Невозможно чеканить",
             "description": "Вы должны владеть выводным псевдонимом для чеканки нативных токенов. Чтобы продолжить, пожалуйста, сначала создайте псевдоним"
@@ -1652,11 +1594,7 @@
         "jwt": "JSON веб-токен",
         "internalTransaction": "Внутренняя транзакция",
         "coinType": "Coin type",
-        "custom": "Custom",
-        "evmAddress": "EVM address",
-        "chain": "Chain",
-        "importErc20Token": "Import ERC20 token",
-        "importErc20TokenDescription": "Import an ERC20 token from an EVM chain"
+        "custom": "Custom"
     },
     "filters": {
         "title": "Фильтры",
@@ -1757,9 +1695,6 @@
             "label": "Порядок",
             "name": "Имя",
             "phase": "Фаза"
-        },
-        "network": {
-            "label": "Network"
         }
     },
     "dates": {
@@ -2090,10 +2025,6 @@
                 "short": "Невозможно добавить предложение",
                 "long": "Unable to find proposal {proposalId} on the specified node"
             }
-        },
-        "erc20Token": {
-            "invalidAddressFormat": "Must be hexadecimal format",
-            "invalidAddressLength": "Length is invalid"
         }
     },
     "warning": {

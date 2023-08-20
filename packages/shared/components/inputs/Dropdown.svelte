@@ -49,7 +49,8 @@
         dropdown = !dropdown
         isFocused = !isFocused
         if (dropdown) {
-            let elem = document.getElementById(String(value))
+            const elementLabel = items.find((item) => item.value === value)?.label || ''
+            let elem = document.getElementById(elementLabel)
             if (!elem) {
                 elem = navContainer.firstChild as HTMLElement
             }
