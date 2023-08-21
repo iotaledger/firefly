@@ -75,12 +75,8 @@ jobs:
               uses: actions-rs/toolchain@v1
               with:
                 toolchain: "1.67.0"
+                profile: minimal
                 override: true
-
-            - name: Install Rust nightly toolchain
-              uses: actions-rs/toolchain@v1
-              with:
-                toolchain: nightly
 
             - name: Install LLVM and Clang (Windows) # required for bindgen to work, see https://github.com/rust-lang/rust-bindgen/issues/1797
               uses: KyleMayes/install-llvm-action@32c4866ebb71e0949e8833eb49beeebed48532bd
@@ -107,7 +103,7 @@ jobs:
 
             - name: Apply neon-sys patch (Windows)
               run: |
-                cargo install cargo-patch
+                cargo install cargo-patch --version 0.3.1
                 cp ${{ github.workspace }}\manual-patches\neon_temp_buf.patch .
                 git apply --ignore-space-change --ignore-whitespace ${{ github.workspace }}\manual-patches\windows_cargo_toml.patch
                 cat Cargo.toml
