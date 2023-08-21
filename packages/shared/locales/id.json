@@ -483,55 +483,6 @@
                     "updateVersion": "Firefly v{version}",
                     "button": "Memperbarui"
                 }
-            },
-            "drawers": {
-                "networkConfig": {
-                    "addChain": {
-                        "title": "Add chain"
-                    },
-                    "chain": {
-                        "chainId": "Chain ID",
-                        "aliasAddress": "Alias Address",
-                        "iscpEndpoint": "ISCP Endpoint",
-                        "explorerEndpoint": "Explorer Endpoint (optional)",
-                        "errors": {
-                            "cannotBeEmpty": "Name cannot be empty",
-                            "nameTooLong": "Name is too long",
-                            "aliasAddressWrongFormat": "Must be in either hex or Bech32 format",
-                            "aliasAddressAlreadyInUse": "Alias address already in use",
-                            "invalidUrl": "Invalid URL"
-                        }
-                    },
-                    "chainDepositAddress": {
-                        "title": "Chain deposit address",
-                        "networkTitle": "Network deposit address"
-                    },
-                    "chainInformation": {
-                        "title": "Chain information"
-                    },
-                    "confirmLedgerEvmAddress": {
-                        "title": "Confirm EVM address",
-                        "header": "We have generated your EVM address"
-                    },
-                    "connectedChains": {
-                        "title": "Connected chains"
-                    },
-                    "connectLedgerDevice": {
-                        "title": "Connect Ledger Device",
-                        "header": "Open the Ethereum app",
-                        "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed before following these steps.",
-                        "requirements": {
-                            "connect": "Connect and unlock your Ledger",
-                            "openApp": "Open the Ethereum app on your Ledger"
-                        }
-                    },
-                    "editChain": {
-                        "title": "Edit chain"
-                    },
-                    "removeChain": {
-                        "title": "Remove chain"
-                    }
-                }
             }
         },
         "staking": {
@@ -1104,15 +1055,6 @@
                 "assetId": "Asset Id"
             }
         },
-        "importErc20Token": {
-            "title": "Import ERC20 token",
-            "property": {
-                "chainId": "Chain ID",
-                "tokenAddress": "Token address"
-            },
-            "success": "Imported {tokenSymbol} token",
-            "error": "Unable to import ERC20 token"
-        },
         "noAlias": {
             "title": "Unable to mint",
             "description": "You must own an alias output to mint native tokens. To continue, please create an alias first"
@@ -1652,11 +1594,7 @@
         "jwt": "JSON web token",
         "internalTransaction": "Internal transaction",
         "coinType": "Coin type",
-        "custom": "Custom",
-        "evmAddress": "EVM address",
-        "chain": "Chain",
-        "importErc20Token": "Import ERC20 token",
-        "importErc20TokenDescription": "Import an ERC20 token from an EVM chain"
+        "custom": "Custom"
     },
     "filters": {
         "title": "Filters",
@@ -1757,9 +1695,6 @@
             "label": "Order",
             "name": "Name",
             "phase": "Phase"
-        },
-        "network": {
-            "label": "Network"
         }
     },
     "dates": {
@@ -2090,10 +2025,6 @@
                 "short": "Unable to add proposal",
                 "long": "Unable to find proposal {proposalId} on the specified node"
             }
-        },
-        "erc20Token": {
-            "invalidAddressFormat": "Must be hexadecimal format",
-            "invalidAddressLength": "Length is invalid"
         }
     },
     "warning": {

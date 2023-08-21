@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { getBaseToken, checkActiveProfileAuth } from '@core/profile'
     import {
-        mintNativeToken,
+        createNativeToken,
         mintTokenDetails,
         TokenStandard,
         buildFoundryOutputData,
@@ -27,7 +27,12 @@
     async function prepareFoundryOutput(): Promise<void> {
         if ($mintTokenDetails && $selectedAccount && metadata) {
             const { totalSupply, circulatingSupply, aliasId } = $mintTokenDetails
-            const outputData = buildFoundryOutputData(Number(totalSupply), Number(circulatingSupply), metadata, aliasId)
+            const outputData = await buildFoundryOutputData(
+                Number(totalSupply),
+                Number(circulatingSupply),
+                metadata,
+                aliasId
+            )
             const preparedOutput = await $selectedAccount.buildFoundryOutput(outputData)
             storageDeposit = formatTokenAmountPrecise(Number(preparedOutput.amount) ?? 0, getBaseToken())
         }
@@ -89,7 +94,7 @@
     async function mintAction(): Promise<void> {
         try {
             if ($mintTokenDetails && metadata) {
-                await mintNativeToken(
+                await createNativeToken(
                     Number($mintTokenDetails.totalSupply),
                     Number($mintTokenDetails.circulatingSupply),
                     metadata

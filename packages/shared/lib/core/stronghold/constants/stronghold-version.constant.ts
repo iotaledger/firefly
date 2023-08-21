@@ -1,3 +1,3 @@
 import { StrongholdVersion } from '../enums'
 
-export const STRONGHOLD_VERSION = StrongholdVersion.V2
+export const STRONGHOLD_VERSION = StrongholdVersion.V3

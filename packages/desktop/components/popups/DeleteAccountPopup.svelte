@@ -6,6 +6,7 @@
     import { isSoftwareProfile } from '@core/profile'
     import { selectedAccount } from '@core/account'
     import { handleError } from '@core/error/handlers/handleError'
+    import { TextHintVariant } from 'shared/components/enums'
 
     export let deleteAccount: (index: number) => Promise<void> = async () => {}
 
@@ -47,7 +48,7 @@
 </div>
 <form on:submit|preventDefault={onDeleteClick} class="flex w-full flex-col space-y-5">
     <Text secondary>{localize('popups.deleteAccount.body')}</Text>
-    <TextHint info text={localize('popups.deleteAccount.hint')} />
+    <TextHint variant={TextHintVariant.Info} text={localize('popups.deleteAccount.hint')} />
     <div class="flex w-full flex-col space-y-3">
         {#if $isSoftwareProfile}
             <Text secondary>{localize('popups.deleteAccount.typePassword')}</Text>
