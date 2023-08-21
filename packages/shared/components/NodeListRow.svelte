@@ -150,7 +150,7 @@
         {/if}
     </div>
 
-    <div>
+    <node-actions-button>
         <MeatballMenuButton onClick={toggleModal} />
         <Modal bind:this={modal} size="small">
             {#each MENU_ITEMS as { separator, ...item }}
@@ -160,5 +160,5 @@
                 {/if}
             {/each}
         </Modal>
-    </div>
+    </node-actions-button>
 </button>
