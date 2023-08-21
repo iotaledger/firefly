@@ -15,7 +15,6 @@
         Modal,
         ProfilePicture,
         Text,
-        TextType,
         Toggle,
         Size,
         BoxedIcon,
@@ -121,8 +120,8 @@
                     <div class="flex flex-row items-center space-x-3">
                         <BoxedIcon icon={IconEnum.Warning} classes="text-blue-500" />
                         <div>
-                            <Text type={TextType.p}>{localize('views.dashboard.profileModal.version.title')}</Text>
-                            <Text type={TextType.p} overrideColor classes="text-gray-500 -mt-0.5">
+                            <Text>{localize('views.dashboard.profileModal.version.title')}</Text>
+                            <Text overrideColor classes="text-gray-500 -mt-0.5">
                                 {localize('views.dashboard.profileModal.version.updateVersion', {
                                     values: { version: $appVersionDetails.newVersion },
                                 })}
@@ -146,8 +145,8 @@
                         <div class="flex flex-row items-center space-x-3">
                             <BoxedIcon icon={IconEnum.Warning} classes="text-{backupWarningColor}-500" />
                             <div>
-                                <Text type={TextType.p}>{localize('views.dashboard.profileModal.backup.title')}</Text>
-                                <Text type={TextType.p} overrideColor classes="text-gray-500 -mt-0.5">
+                                <Text>{localize('views.dashboard.profileModal.backup.title')}</Text>
+                                <Text overrideColor classes="text-gray-500 -mt-0.5">
                                     {$activeProfile?.lastStrongholdBackupTime
                                         ? localize('views.dashboard.profileModal.backup.lastBackup', {
                                               values: {
@@ -175,8 +174,8 @@
                         boxClasses="bg-blue-100 dark:bg-gray-800"
                     />
                     <div>
-                        <Text type={TextType.p}>{localize('views.dashboard.profileModal.stronghold.title')}</Text>
-                        <Text type={TextType.p} overrideColor classes="text-gray-500 -mt-0.5">
+                        <Text>{localize('views.dashboard.profileModal.stronghold.title')}</Text>
+                        <Text overrideColor classes="text-gray-500 -mt-0.5">
                             {localize(
                                 `views.dashboard.profileModal.stronghold.${$isStrongholdLocked ? 'locked' : 'unlocked'}`
                             )}
@@ -199,10 +198,8 @@
                             : 'text-gray-500 dark:text-white'}
                     />
                     <div>
-                        <Text type={TextType.p}>{localize('views.dashboard.profileModal.hardware.title')}</Text>
-                        <Text type={TextType.p} overrideColor classes="text-gray-500 -mt-0.5"
-                            >{ledgerConnectionText}</Text
-                        >
+                        <Text>{localize('views.dashboard.profileModal.hardware.title')}</Text>
+                        <Text overrideColor classes="text-gray-500 -mt-0.5">{ledgerConnectionText}</Text>
                     </div>
                 </div>
             </div>
