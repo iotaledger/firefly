@@ -3,6 +3,7 @@ import { localize } from '@core/i18n'
 import { Platform } from '../classes/platform.class'
 import { externalAllowedLinks } from '../constants'
 import { showAppNotification } from '@auxiliary/notification'
+import { TextHintVariant } from 'shared/components/enums'
 
 export function openUrlInBrowser(targetUrl: string): void {
     // If no protocol is specified, assume https
@@ -25,7 +26,7 @@ export function openUrlInBrowser(targetUrl: string): void {
                 title: localize('popups.externalUrl.title'),
                 description: localize('popups.externalUrl.body', { values: { url: targetUrl } }),
                 hint: localize('popups.externalUrl.hint'),
-                warning: true,
+                variant: TextHintVariant.Warning,
                 confirmText: localize('popups.externalUrl.action'),
                 onConfirm: () => {
                     openHttpsUrlsOnly(url.protocol, targetUrl)

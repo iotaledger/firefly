@@ -1,6 +1,7 @@
 import { localize } from '@core/i18n'
 import { rejectActivity } from '@core/wallet'
 import { closeDrawer, DrawerId, openDrawer } from '../../../auxiliary/drawer'
+import { TextHintVariant } from 'shared/components/enums'
 
 export function handleRejectActivity(activityId: string): void {
     const _onConfirm = (): void => {
@@ -11,9 +12,8 @@ export function handleRejectActivity(activityId: string): void {
         title: localize('actions.confirmRejection.title'),
         description: localize('actions.confirmRejection.description'),
         hint: localize('actions.confirmRejection.node'),
-        info: true,
         confirmText: localize('actions.reject'),
-        warning: true,
+        variant: TextHintVariant.Warning,
         onConfirm: _onConfirm,
     })
 }
