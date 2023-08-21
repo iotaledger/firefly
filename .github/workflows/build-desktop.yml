@@ -103,13 +103,17 @@ jobs:
 
             - name: Apply neon-sys patch (Windows)
               run: |
-                cargo install cargo-patch
+                cargo install cargo-patch --version 0.3.1
                 cp ${{ github.workspace }}\manual-patches\neon_temp_buf.patch .
                 git apply --ignore-space-change --ignore-whitespace ${{ github.workspace }}\manual-patches\windows_cargo_toml.patch
                 cat Cargo.toml
                 cargo patch
               working-directory: packages/backend/bindings/node/native
               if: matrix.os == 'windows-latest'
+
+            - name: Set deployment target (macOS)
+              run: echo "MACOSX_DEPLOYMENT_TARGET=10.14" >> $GITHUB_ENV
+              if: matrix.os == 'macos-13'
 
             - name: Install required packages (Linux)
               run: |
