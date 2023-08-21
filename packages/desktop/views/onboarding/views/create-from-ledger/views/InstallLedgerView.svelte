@@ -48,9 +48,11 @@
         </div>
     </div>
     <div slot="leftpane__action">
-        <Link icon={IconEnum.Info} onClick={onPopupOpenClick} classes="mb-10 justify-center"
-            >{localize('popups.ledgerAppGuide.title', { values: { legacy: LedgerAppName.Shimmer } })}</Link
-        >
+        <span class="flex justify-center mb-10">
+            <Link icon={IconEnum.Info} on:click={onPopupOpenClick}
+                >{localize('popups.ledgerAppGuide.title', { values: { legacy: LedgerAppName.Shimmer } })}</Link
+            >
+        </span>
         <Button classes="w-full" onClick={onContinueClick}
             >{localize('views.ledgerInstallationGuide.action', { values: { network: LedgerAppName.Shimmer } })}</Button
         >

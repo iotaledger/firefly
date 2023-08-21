@@ -16,7 +16,7 @@
     $: ({ baseCoin } = $selectedAccountAssets[$activeProfile?.network.id])
 </script>
 
-<account-summary class="block relative p-6 space-y-4">
+<account-summary class="block relative space-y-4">
     <div class="flex flex-row items-center justify-between">
         <Text type={TextType.h5} classes="text-left">
             {localize('general.balanceWithNetwork', { values: { network: fomattedNetworkName } })}

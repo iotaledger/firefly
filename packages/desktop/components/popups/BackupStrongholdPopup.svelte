@@ -2,6 +2,7 @@
     import { localize } from '@core/i18n'
     import { Button, Logo, Text, ExportStrongholdButton, TextType } from 'shared/components'
     import { closePopup } from '@auxiliary/popup'
+    import { Logo as LogoEnum } from 'shared/components/enums'
 
     const busy = false
 
@@ -16,7 +17,7 @@
     </Text>
     <div class="flex flex-col space-y-4">
         <div class="w-full p-10 bg-gray-50 dark:bg-gray-800 flex justify-center content-center">
-            <Logo width="50%" logo="logo-stronghold" />
+            <Logo width="50%" logo={LogoEnum.Stronghold} />
         </div>
         <div class="w-full">
             <Text type={TextType.p} color="gray-700">
@@ -28,6 +29,6 @@
         <Button outline classes="w-1/2" onClick={onCancelClick} disabled={busy}>
             {localize('actions.cancel')}
         </Button>
-        <ExportStrongholdButton showNotification overrideTitle={localize('actions.backup')} classes="w-1/2" />
+        <ExportStrongholdButton showNotification title={localize('actions.backup')} classes="w-1/2" />
     </div>
 </div>

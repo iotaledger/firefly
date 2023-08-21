@@ -1,12 +1,14 @@
 <script lang="ts">
-    import { NodeActionsButton, Pill, Text } from '@ui'
+    import { Pill, Text } from '@ui'
     import { localize } from '@core/i18n'
     import { getOfficialNodes, INode, isOfficialNetwork } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { PopupId, openPopup } from '@auxiliary/popup'
+    import { MeatballMenuButton } from './iconButtons'
+    import { Modal, NodeActionsMenu } from './modals'
 
     export let nodesContainer: HTMLElement | undefined = undefined
-
+    let modal: Modal
     $: clientOptions = $activeProfile?.clientOptions
 
     function isPrimary(node: INode): boolean {
@@ -52,7 +54,10 @@
                             <Pill data={localize('general.excluded').toLowerCase()} textColor="red-500" />
                         {/if}
                     </div>
-                    <NodeActionsButton {node} {clientOptions} />
+                    <node-actions-button>
+                        <MeatballMenuButton onClick={modal?.toggle} />
+                        <NodeActionsMenu bind:modal {node} {clientOptions} />
+                    </node-actions-button>
                 </button>
             {/each}
         {/if}

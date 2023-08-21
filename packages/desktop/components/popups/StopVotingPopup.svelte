@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Button, Text, TextType, TextHint } from 'shared/components'
-    import { ButtonVariant } from 'shared/components/enums'
+    import { ButtonVariant, TextHintVariant } from 'shared/components/enums'
     import { closePopup } from '@auxiliary/popup'
     import { stopVotingForProposal } from '@contexts/governance/actions'
     import { selectedProposal } from '@contexts/governance/stores'
@@ -29,7 +29,7 @@
         <Text fontSize="15"
             >{localize('popups.stopVoting.body', { values: { proposalName: $selectedProposal?.title } })}</Text
         >
-        <TextHint info text={localize('popups.stopVoting.hint')} />
+        <TextHint variant={TextHintVariant.Info} text={localize('popups.stopVoting.hint')} />
     </div>
     <div class="flex w-full space-x-4 mt-6">
         <Button outline classes="w-full" disabled={hasGovernanceTransactionInProgress} onClick={onCancelClick}

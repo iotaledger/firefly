@@ -483,55 +483,6 @@
                     "updateVersion": "Firefly v{version}",
                     "button": "Aktualizuj"
                 }
-            },
-            "drawers": {
-                "networkConfig": {
-                    "addChain": {
-                        "title": "Dodaj łańcuch"
-                    },
-                    "chain": {
-                        "chainId": "Identyfikator łańcucha",
-                        "aliasAddress": "Adres aliasu",
-                        "iscpEndpoint": "ISCP Endpoint",
-                        "explorerEndpoint": "Explorer Endpoint (opcjonalnie)",
-                        "errors": {
-                            "cannotBeEmpty": "Nazwa nie może być pusta",
-                            "nameTooLong": "Nazwa jest za długa",
-                            "aliasAddressWrongFormat": "Musi być w formacie hex lub Bech32",
-                            "aliasAddressAlreadyInUse": "Adres aliasu jest już używany",
-                            "invalidUrl": "Nieprawidłowy URL"
-                        }
-                    },
-                    "chainDepositAddress": {
-                        "title": "Adres depozytu łańcucha",
-                        "networkTitle": "Adres depozytowy sieci"
-                    },
-                    "chainInformation": {
-                        "title": "Informacje o łańcuchu"
-                    },
-                    "confirmLedgerEvmAddress": {
-                        "title": "Potwierdź adres EVM",
-                        "header": "Wygenerowaliśmy Twój adres EVM"
-                    },
-                    "connectedChains": {
-                        "title": "Połączone łańcuchy"
-                    },
-                    "connectLedgerDevice": {
-                        "title": "Podłącz urządzenie Ledger",
-                        "header": "Otwórz aplikację Ethereum",
-                        "body": "Aby Twoje urządzenie Ledger zostało znalezione przez Firefly, upewnij się, że oficjalna aplikacja Ledger Live jest zamknięta.",
-                        "requirements": {
-                            "connect": "Podłącz i odblokuj swoje urządzenie Ledger",
-                            "openApp": "Otwórz aplikację Ethereum na swoim urządzeniu Ledger"
-                        }
-                    },
-                    "editChain": {
-                        "title": "Edytuj łańcuch"
-                    },
-                    "removeChain": {
-                        "title": "Usuń łańcuch"
-                    }
-                }
             }
         },
         "staking": {
@@ -1104,15 +1055,6 @@
                 "assetId": "ID aktywa"
             }
         },
-        "importErc20Token": {
-            "title": "Importuj token ERC20",
-            "property": {
-                "chainId": "Identyfikator łańcucha",
-                "tokenAddress": "Adres tokena"
-            },
-            "success": "Importowano token {tokenSymbol}",
-            "error": "Nie można zaimportować tokena ERC20"
-        },
         "noAlias": {
             "title": "Mintowanie nieudane",
             "description": "Musisz posiadać wyjście aliasu, aby mintować natywne tokeny. Aby kontynuować, najpierw stwórz alias"
@@ -1652,11 +1594,7 @@
         "jwt": "Token internetowy JSON",
         "internalTransaction": "Transakcja wewnętrzna",
         "coinType": "Typ tokena",
-        "custom": "Niestandardowe",
-        "evmAddress": "Adres EVM",
-        "chain": "Łańcuch",
-        "importErc20Token": "Importuj token ERC20",
-        "importErc20TokenDescription": "Importuj token ERC20 z łańcucha EVM"
+        "custom": "Niestandardowe"
     },
     "filters": {
         "title": "Filtry",
@@ -1757,9 +1695,6 @@
             "label": "Sortowanie",
             "name": "Nazwa",
             "phase": "Etap"
-        },
-        "network": {
-            "label": "Sieć"
         }
     },
     "dates": {
@@ -2090,10 +2025,6 @@
                 "short": "Nie można dodać propozycji",
                 "long": "Nie można znaleźć propozycji {proposalId} na wybranym serwerze"
             }
-        },
-        "erc20Token": {
-            "invalidAddressFormat": "Wymagany format szesnastkowy",
-            "invalidAddressLength": "Długość jest nieprawidłowa"
         }
     },
     "warning": {

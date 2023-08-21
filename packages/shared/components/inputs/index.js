@@ -1,4 +1,4 @@
-export { default as AccountInput } from './AccountInput.svelte'
+export { default as AccountSelector } from './AccountSelector.svelte'
 export { default as AliasInput } from './AliasInput.svelte'
 export { default as AmountInput } from './AmountInput.svelte'
 export { default as AssetAmountInput } from './AssetAmountInput.svelte'
