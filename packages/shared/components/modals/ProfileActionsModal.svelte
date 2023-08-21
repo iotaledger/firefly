@@ -15,7 +15,6 @@
         Modal,
         ProfilePicture,
         Text,
-        TextType,
         Toggle,
         Size,
         BoxedIcon,
@@ -23,11 +22,7 @@
     import { fade } from 'svelte/transition'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
-    export let modal: Modal = undefined
-
-    const isUpToDate = $appVersionDetails.upToDate
-
-    const { isStrongholdLocked, shouldOpenProfileModal } = $activeProfile
+    export let modal: Modal | undefined
 
     let ledgerConnectionText = ''
 
@@ -39,10 +34,25 @@
     $: backupWarningColor = getBackupWarningColor(lastBackupDate)
     // used to prevent the modal from closing when interacting with the password popup
     // to be able to see the stronghold toggle change
-    $: isPasswordPopupOpen = $popupState?.active && $popupState?.id === 'password'
+    $: isPasswordPopupOpen = $popupState?.active && $popupState?.id === PopupId.UnlockStronghold
     $: if ($isActiveLedgerProfile && $ledgerConnectionState) {
         updateLedgerConnectionText()
     }
+
+    const isUpToDate = $appVersionDetails.upToDate
+    const { isStrongholdLocked, shouldOpenProfileModal } = $activeProfile
+    const ACTION_BUTTONS: { icon: IconEnum; label: string; onClick: () => void }[] = [
+        {
+            label: localize('views.dashboard.profileModal.allSettings'),
+            icon: IconEnum.Settings,
+            onClick: onSettingsClick,
+        },
+        {
+            label: localize('views.dashboard.profileModal.logout'),
+            icon: IconEnum.Logout,
+            onClick: onLogoutClick,
+        },
+    ]
 
     function onSettingsClick(): void {
         closePopup()
@@ -77,13 +87,17 @@
         modal?.close()
         openPopup({ id: PopupId.CheckForUpdates })
     }
+
+    function openProfileModal(): void {
+        shouldOpenProfileModal.set(true)
+    }
 </script>
 
 <Modal
     bind:this={modal}
     position={{ bottom: '16px', left: '80px' }}
     classes="w-80"
-    on:open={() => shouldOpenProfileModal.set(true)}
+    on:open={openProfileModal}
     disableOnClickOutside={isPasswordPopupOpen}
 >
     <profile-modal-content class="flex flex-col" in:fade={{ duration: 100 }}>
@@ -106,8 +120,8 @@
                     <div class="flex flex-row items-center space-x-3">
                         <BoxedIcon icon={IconEnum.Warning} classes="text-blue-500" />
                         <div>
-                            <Text type={TextType.p}>{localize('views.dashboard.profileModal.version.title')}</Text>
-                            <Text type={TextType.p} overrideColor classes="text-gray-500 -mt-0.5">
+                            <Text>{localize('views.dashboard.profileModal.version.title')}</Text>
+                            <Text overrideColor classes="text-gray-500 -mt-0.5">
                                 {localize('views.dashboard.profileModal.version.updateVersion', {
                                     values: { version: $appVersionDetails.newVersion },
                                 })}
@@ -121,6 +135,7 @@
             </div>
             <hr />
         {/if}
+
         {#if $isSoftwareProfile}
             {#if !isBackupSafe}
                 <div class="items-center p-3">
@@ -130,13 +145,13 @@
                         <div class="flex flex-row items-center space-x-3">
                             <BoxedIcon icon={IconEnum.Warning} classes="text-{backupWarningColor}-500" />
                             <div>
-                                <Text type={TextType.p}>{localize('views.dashboard.profileModal.backup.title')}</Text>
-                                <Text type={TextType.p} overrideColor classes="text-gray-500 -mt-0.5">
+                                <Text>{localize('views.dashboard.profileModal.backup.title')}</Text>
+                                <Text overrideColor classes="text-gray-500 -mt-0.5">
                                     {$activeProfile?.lastStrongholdBackupTime
                                         ? localize('views.dashboard.profileModal.backup.lastBackup', {
                                               values: {
-                                                  date: localize(`dates.${lastBackupDateFormatted.unit}`, {
-                                                      values: { time: lastBackupDateFormatted.value },
+                                                  date: localize(`dates.${lastBackupDateFormatted?.unit}`, {
+                                                      values: { time: lastBackupDateFormatted?.value },
                                                   }),
                                               },
                                           })
@@ -159,8 +174,8 @@
                         boxClasses="bg-blue-100 dark:bg-gray-800"
                     />
                     <div>
-                        <Text type={TextType.p}>{localize('views.dashboard.profileModal.stronghold.title')}</Text>
-                        <Text type={TextType.p} overrideColor classes="text-gray-500 -mt-0.5">
+                        <Text>{localize('views.dashboard.profileModal.stronghold.title')}</Text>
+                        <Text overrideColor classes="text-gray-500 -mt-0.5">
                             {localize(
                                 `views.dashboard.profileModal.stronghold.${$isStrongholdLocked ? 'locked' : 'unlocked'}`
                             )}
@@ -183,30 +198,24 @@
                             : 'text-gray-500 dark:text-white'}
                     />
                     <div>
-                        <Text type={TextType.p}>{localize('views.dashboard.profileModal.hardware.title')}</Text>
-                        <Text type={TextType.p} overrideColor classes="text-gray-500 -mt-0.5"
-                            >{ledgerConnectionText}</Text
-                        >
+                        <Text>{localize('views.dashboard.profileModal.hardware.title')}</Text>
+                        <Text overrideColor classes="text-gray-500 -mt-0.5">{ledgerConnectionText}</Text>
                     </div>
                 </div>
             </div>
             <hr />
         {/if}
-        <button
-            on:click={() => onSettingsClick()}
-            class="group flex flex-row space-x-3 justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full"
-        >
-            <Icon icon={IconEnum.Settings} classes="text-gray-500 group-hover:text-blue-500" />
-            <Text smaller classes="group-hover:text-blue-500">
-                {localize('views.dashboard.profileModal.allSettings')}
-            </Text>
-        </button>
-        <button
-            on:click={() => onLogoutClick()}
-            class="group flex flex-row space-x-3 justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full"
-        >
-            <Icon icon={IconEnum.Logout} classes="text-gray-500 group-hover:text-blue-500" />
-            <Text smaller classes="group-hover:text-blue-500">{localize('views.dashboard.profileModal.logout')}</Text>
-        </button>
+
+        {#each ACTION_BUTTONS as { onClick, icon, label }}
+            <button
+                on:click={onClick}
+                class="group flex flex-row space-x-3 justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full"
+            >
+                <Icon {icon} classes="text-gray-500 group-hover:text-blue-500" />
+                <Text smaller classes="group-hover:text-blue-500">
+                    {label}
+                </Text>
+            </button>
+        {/each}
     </profile-modal-content>
 </Modal>
