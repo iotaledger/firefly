@@ -185,19 +185,7 @@ function bindMethodsAcrossContextBridge(prototype, object) {
     const prototypeProperties = Object.getOwnPropertyNames(prototype)
     prototypeProperties.forEach((key) => {
         if (key !== 'constructor') {
-            if (key === 'incomingTransactions') {
-                const method = object[key].bind(object)
-                object[key] = async function () {
-                    const txs = await method(arguments)
-                    txs.forEach((tx) => {
-                        // Or classToInstance?
-                        bindMethodsAcrossContextBridge(IotaSdk.Transaction.prototype, tx)
-                    })
-                    return txs
-                }
-            } else {
-                object[key] = object[key].bind(object)
-            }
+            object[key] = object[key].bind(object)
         }
     })
 }
