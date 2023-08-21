@@ -917,19 +917,6 @@
   dependencies:
     big-integer "^1.6.51"
 
-<<<<<<< HEAD
-=======
-"@iota/wallet@2.0.3-rc.44":
-  version "2.0.3-rc.44"
-  resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.3-rc.44.tgz#5d724638a23c68e5f0f61861660ac4ed321a0a54"
-  integrity sha512-/o1o9yH83nY16nvqLfcMtSZPy92Ca0m5+MtKjnR2V0u5UCwUu6GH3cSauIuWrT4rFJoaKZF3CAPcc2raJ/5YDg==
-  dependencies:
-    "@iota/types" "^1.0.0-beta.15"
-    cargo-cp-artifact "^0.1.6"
-    prebuild-install "^7.1.1"
-    typescript "^4.9.4"
-
->>>>>>> develop
 "@isaacs/cliui@^8.0.2":
   version "8.0.2"
   resolved "https://registry.yarnpkg.com/@isaacs/cliui/-/cliui-8.0.2.tgz#b37667b7bc181c168782259bab42474fbf52b550"
