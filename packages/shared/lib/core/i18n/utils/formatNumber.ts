@@ -18,14 +18,14 @@ export function formatNumber(
 
     // The maximum decimals are equal to the max decimals of Ethereum.
     // Larger values throw an error when trying to format.
-    if (maxDecimals > 18) {
+    if (maxDecimals && maxDecimals > 18) {
         return String(value)
     }
 
     const appLanguage = get(appSettings).language
 
     const formatted = Intl.NumberFormat(appLanguage, {
-        minimumFractionDigits: minDecimals ?? maxDecimals ?? 2,
+        minimumFractionDigits: minDecimals ?? (maxDecimals ? Math.min(maxDecimals, 2) : 2),
         maximumFractionDigits: maxDecimals,
         useGrouping: grouped,
     }).format(value)
