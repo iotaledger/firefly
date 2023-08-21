@@ -60,7 +60,7 @@
             {/if}
         </div>
         <div class="w-full flex flex-auto flex-col px-4 pr-8">
-            <span class="flex text-12 text-{style?.messageColor} text-ellipsis overflow-hidden">{toast.message}</span>
+            <span class="flex text-12 text-{style?.messageColor} break-all">{toast.message}</span>
             {#if toast.progress !== undefined}
                 <span class="block bg-{style?.subMessageColor}" style={'width:100%;height:2px;margin:4px 0'}>
                     <span class="block bg-{style?.messageColor}" style={`width:${toast.progress}%;height:2px`} />

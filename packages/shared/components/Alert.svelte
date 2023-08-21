@@ -56,9 +56,8 @@
         classes="fill-current {TOAST_STYLE[type].iconColor}"
     />
     <message-container class="w-full flex flex-auto flex-col px-4">
-        <Text
-            fontWeight={FontWeight.semibold}
-            class="flex text-13 text-ellipsis overflow-hidden {TOAST_STYLE[type].messageColor}">{message}</Text
+        <Text fontWeight={FontWeight.semibold} class="flex text-13 break-all {TOAST_STYLE[type].messageColor}"
+            >{message}</Text
         >
     </message-container>
     {#if showDismiss}
