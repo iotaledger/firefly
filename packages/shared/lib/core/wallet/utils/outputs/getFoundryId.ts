@@ -9,12 +9,17 @@ import {
 } from '@iota/sdk/out/types'
 
 export function buildFoundryId(foundry: FoundryOutput): Promise<FoundryId> {
-    const unlockCondition = foundry.unlockConditions[0]
-    const aliasId =
-        unlockCondition.type === UnlockConditionType.ImmutableAliasAddress &&
-        (unlockCondition as ImmutableAliasAddressUnlockCondition).address.type === AddressType.Alias
-            ? ((unlockCondition as ImmutableAliasAddressUnlockCondition).address as AliasAddress).aliasId
-            : ''
+    const unlockCondition = foundry.unlockConditions[0] as ImmutableAliasAddressUnlockCondition
+    const isImmutableAliasAddress = unlockCondition.type === UnlockConditionType.ImmutableAliasAddress
+
+    let aliasId = ''
+
+    if (isImmutableAliasAddress) {
+        const hasAliasAddress = unlockCondition.address.type === AddressType.Alias
+        if (hasAliasAddress) {
+            aliasId = (unlockCondition.address as AliasAddress).aliasId
+        }
+    }
 
     return api.computeFoundryId(aliasId, foundry.serialNumber, foundry.tokenScheme.type)
 }
