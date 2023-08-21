@@ -148,26 +148,7 @@
     setContext<Readable<WalletAccount[]>>('viewableAccounts', viewableAccounts)
     setContext<Readable<WalletAccount[]>>('liveAccounts', liveAccounts)
 
-    function shouldVisitStaking(): boolean {
-        if (($activeProfile.lastAssemblyPeriodVisitedStaking ?? 0) < LAST_ASSEMBLY_STAKING_PERIOD) {
-            updateProfile('lastAssemblyPeriodVisitedStaking', LAST_ASSEMBLY_STAKING_PERIOD)
-        }
-        if (($activeProfile.lastShimmerPeriodVisitedStaking ?? 0) < LAST_SHIMMER_STAKING_PERIOD) {
-            updateProfile('lastShimmerPeriodVisitedStaking', LAST_SHIMMER_STAKING_PERIOD)
-        }
-        return (
-            CURRENT_ASSEMBLY_STAKING_PERIOD > $activeProfile.lastAssemblyPeriodVisitedStaking ||
-            CURRENT_SHIMMER_STAKING_PERIOD > $activeProfile.lastShimmerPeriodVisitedStaking
-        )
-    }
-
     onMount(() => {
-        if (shouldVisitStaking()) {
-            updateProfile('hasVisitedStaking', false)
-            updateProfile('lastAssemblyPeriodVisitedStaking', CURRENT_ASSEMBLY_STAKING_PERIOD)
-            updateProfile('lastShimmerPeriodVisitedStaking', CURRENT_SHIMMER_STAKING_PERIOD)
-        }
-
         if ($isSoftwareProfile) {
             api.setStrongholdPasswordClearInterval({ secs: STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, nanos: 0 })
         }
