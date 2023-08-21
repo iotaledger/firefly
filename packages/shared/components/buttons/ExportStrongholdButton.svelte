@@ -5,12 +5,12 @@
     import { openPopup, PopupId } from '@auxiliary/popup'
     import { Button, ButtonSize } from 'shared/components'
 
-    export let isBusy = false
-    export let message = ''
-    export let showNotification = false
-    export let overrideTitle = ''
+    export let isBusy: boolean = false
+    export let message: string = ''
+    export let showNotification: boolean = false
+    export let title: string = ''
 
-    function handleExportStrongholdResponse(cancelled, error): void {
+    function handleExportStrongholdResponse(cancelled: boolean, error: string | undefined): void {
         setTimeout(
             () => {
                 message = ''
@@ -63,5 +63,5 @@
     disabled={isBusy}
     {...$$restProps}
 >
-    {overrideTitle || localize('actions.export')}
+    {title || localize('actions.export')}
 </Button>

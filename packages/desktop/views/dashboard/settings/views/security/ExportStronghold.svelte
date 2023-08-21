@@ -2,7 +2,7 @@
     import { ExportStrongholdButton, Spinner, Text, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
 
-    let isBusy = false
+    let isBusy: boolean = false
     let message: string = ''
 </script>
 

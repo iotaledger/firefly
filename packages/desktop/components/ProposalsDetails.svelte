@@ -1,15 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import {
-        Button,
-        KeyValueBox,
-        Text,
-        Modal,
-        MeatballMenuButton,
-        ProposalsDetailsMenu,
-        ButtonSize,
-        FontWeight,
-    } from '@ui'
+    import { Button, KeyValueBox, Text, Modal, MeatballMenuButton, ButtonSize, FontWeight, MenuItem } from '@ui'
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { activeProfileId } from '@core/profile'
@@ -24,18 +15,19 @@
         IProposalsDetails,
     } from '@contexts/governance'
     import { openPopup, PopupId } from '@auxiliary/popup'
+    import { Icon } from '@auxiliary/icon'
 
+    let modal: Modal
     let details = <IProposalsDetails>{
         totalProposals: null,
         activeProposals: null,
         votingProposals: null,
         votedProposals: null,
     }
-    let modal: Modal
 
     $: isOverviewLoaded = !!$participationOverviewForSelectedAccount
     $: $registeredProposalsForSelectedAccount, $participationOverviewForSelectedAccount, updateProposalsDetails()
-    $: $selectedAccount, setParticipationOverview()
+    $: $selectedAccount, void setParticipationOverview()
 
     function updateProposalsDetails(): void {
         if ($activeProfileId) {
@@ -61,6 +53,13 @@
         })
     }
 
+    function onRevoteClick(): void {
+        openPopup({
+            id: PopupId.Revote,
+        })
+        modal.close()
+    }
+
     onMount(setParticipationOverview)
 </script>
 
@@ -72,20 +71,29 @@
 
         <div class="max-h-7 max-w-9 flex-none overflow-visible relative">
             <MeatballMenuButton onClick={modal?.toggle} />
-            <ProposalsDetailsMenu bind:modal position={{ right: '0' }} classes="mt-1.5" />
+            <Modal bind:this={modal} position={{ right: '0' }}>
+                <div class="flex flex-col">
+                    <MenuItem
+                        icon={Icon.Delete}
+                        iconProps={{ width: '16', height: '19' }}
+                        title={localize('actions.revote')}
+                        onClick={onRevoteClick}
+                    />
+                </div>
+            </Modal>
         </div>
     </header-container>
-    <ul class="space-y-2">
-        {#each Object.keys(details) as detailKey}
-            <li>
-                <KeyValueBox
-                    keyText={localize(`views.governance.proposalsDetails.${detailKey}`)}
-                    valueText={details[detailKey]?.toString() ?? '-'}
-                    isLoading={details[detailKey] === undefined}
-                />
-            </li>
+
+    <div class="space-y-2">
+        {#each Object.entries(details) as [detailKey, detailValue]}
+            <KeyValueBox
+                keyText={localize(`views.governance.proposalsDetails.${detailKey}`)}
+                valueText={detailValue?.toString() ?? '-'}
+                isLoading={detailValue === undefined}
+            />
         {/each}
-    </ul>
+    </div>
+
     <Button size={ButtonSize.Medium} outline onClick={onAddProposalClick} classes="w-full">
         {localize('actions.addProposal')}
     </Button>
