@@ -11,6 +11,7 @@ on:
                     - macos-11
                     - ubuntu-20.04
                     - windows-2019
+                    - self-hosted
             stage:
                 description: 'Stage'
                 required: true
@@ -73,7 +74,7 @@ jobs:
                   sudo apt install -y gcc-multilib g++-multilib build-essential libssl-dev rpm libsecret-1-dev \
                     software-properties-common apt-transport-https libudev-dev libusb-1.0-0-dev \
                     llvm-dev libclang-dev clang
-              if: matrix.os == 'ubuntu-20.04'
+              if: matrix.os == 'ubuntu-20.04' || matrix.os == 'self-hosted'
 
             - name: Enable verbose output for electron-builder (macOS/Linux)
               run: echo "DEBUG=electron-builder" >> $GITHUB_ENV
@@ -128,7 +129,7 @@ jobs:
             - name: Build Electron app (Linux)
               run: yarn compile:${STAGE}:linux
               working-directory: packages/desktop
-              if: matrix.os == 'ubuntu-20.04'
+              if: matrix.os == 'ubuntu-20.04' || matrix.os == 'self-hosted'
 
             - name: Import GPG key (Linux)
               run: |
@@ -137,19 +138,19 @@ jobs:
               env:
                   GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
                   GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-              if: matrix.os == 'ubuntu-20.04'
+              if: matrix.os == 'ubuntu-20.04' || matrix.os == 'self-hosted'
 
             - name: Sign AppImage (Linux)
               run: echo $GPG_PASSPHRASE | gpg --pinentry-mode loopback --batch --passphrase-fd 0 --armor --detach-sign --default-key contact@iota.org firefly-desktop*.AppImage
               working-directory: packages/desktop/out
               env:
                   GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-              if: matrix.os == 'ubuntu-20.04'
+              if: matrix.os == 'ubuntu-20.04' || matrix.os == 'self-hosted'
 
             - name: Compute checksums (Linux)
               run: for i in `ls | grep 'firefly-desktop*'` ; do sha256sum $i | awk {'print $1'} > $i.sha256 ; done
               working-directory: packages/desktop/out
-              if: matrix.os == 'ubuntu-20.04'
+              if: matrix.os == 'ubuntu-20.04' || matrix.os == 'self-hosted'
 
             - name: Compute checksums (macOS)
               run: for i in `ls | grep 'firefly-desktop*'` ; do shasum -a 256 $i | awk {'print $1'} > $i.sha256 ; done
