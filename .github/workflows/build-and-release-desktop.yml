@@ -226,7 +226,7 @@ jobs:
             - name: Downloading artifacts
               uses: actions/download-artifact@v2
               with:
-                  name: firefly-desktop-ubuntu-20.04
+                  name: firefly-desktop-self-hosted-ubuntu-22.04
                   path: assets
 
             - name: Preparing release body
