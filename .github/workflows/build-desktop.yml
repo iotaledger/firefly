@@ -84,6 +84,9 @@ jobs:
               run: echo "DEBUG=electron-builder" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
               if: matrix.os == 'windows-2019'
 
+            - name: Install Yarn
+              run: npm install -g yarn
+
             - name: Install dependencies
               # Increase network timeout threshold to reduce build failures on Windows
               run: yarn --network-timeout 1000000
