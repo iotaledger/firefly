@@ -12,7 +12,7 @@ const DEFAULT_IOTA_BASE_TOKEN: IBaseToken = {
     useMetricPrefix: false,
 }
 
-const DEFAULT_IOTA_TESTNET_BASE_TOKEN: IBaseToken = {
+const DEFAULT_IOTA_ALPHANET_BASE_TOKEN: IBaseToken = {
     standard: TokenStandard.BaseToken,
     name: 'IOTA',
     tickerSymbol: 'IOTA',
@@ -44,7 +44,7 @@ const DEFAULT_TESTNET_BASE_TOKEN: IBaseToken = {
 
 export const DEFAULT_BASE_TOKEN: Readonly<{ [key in NetworkId]?: IBaseToken }> = {
     [NetworkId.Iota]: DEFAULT_IOTA_BASE_TOKEN,
-    [NetworkId.IotaTestnet]: DEFAULT_IOTA_TESTNET_BASE_TOKEN,
+    [NetworkId.IotaAlphanet]: DEFAULT_IOTA_ALPHANET_BASE_TOKEN,
     [NetworkId.Shimmer]: DEFAULT_SHIMMER_BASE_TOKEN,
     [NetworkId.Testnet]: DEFAULT_TESTNET_BASE_TOKEN,
 }

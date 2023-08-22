@@ -26,17 +26,17 @@
                 "chooseNetwork": {
                     "title": "Choose network",
                     "body": "Set the network for your profile.",
-                    "iota": {
-                        "title": "IOTA",
-                        "body": "IOTA Mainnet"
-                    },
                     "shimmer": {
                         "title": "Shimmer",
                         "body": "Staging network for IOTA"
                     },
-                    "testnet": {
-                        "title": "Testnet",
-                        "body": "Public beta network for Shimmer"
+                    "iota": {
+                        "title": "IOTA",
+                        "body": "IOTA Mainnet"
+                    },
+                    "iotaAlphanet": {
+                        "title": "IOTA Alphanet",
+                        "body": "IOTA Alphanet"
                     },
                     "custom": {
                         "title": "Custom network",
@@ -1182,12 +1182,14 @@
         "importSeed": "Import an existing seed",
         "restoreWallet": {
             "iota": "Migrate or restore a wallet",
+            "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "Restore Shimmer profile",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
             "iota": "Migrate to Chrysalis or restore an existing wallet",
+            "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Restore an existing Shimmer profile",
             "testnet": "Restore an existing Testnet profile",
             "custom": "Restore an existing Custom Network profile"

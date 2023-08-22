@@ -17,12 +17,12 @@
     import { networkSetupRouter } from '../network-setup-router'
     import { AnimationEnum } from '@auxiliary/animation'
 
-    let networkIcon: { [key in NetworkId]: string }
-    $: networkIcon = {
+    const NETWORK_ICON: Record<NetworkId, Icon> = {
         [NetworkId.Iota]: Icon.Iota,
+        [NetworkId.Testnet]: Icon.Settings,
         [NetworkId.Shimmer]: Icon.Shimmer,
-        [NetworkId.Testnet]: 'settings',
-        [NetworkId.Custom]: 'settings',
+        [NetworkId.IotaAlphanet]: Icon.Settings,
+        [NetworkId.Custom]: Icon.Settings,
     }
 
     function getIconColor(networkId: NetworkId): string {
@@ -32,8 +32,8 @@
             case NetworkId.Shimmer:
                 return 'shimmer-highlight'
             case NetworkId.Testnet:
-                return 'blue-500'
             case NetworkId.Custom:
+            case NetworkId.IotaAlphanet:
                 return 'blue-500'
         }
     }
@@ -75,7 +75,7 @@
                 secondaryText={!$mobile
                     ? localize(`views.onboarding.networkSetup.chooseNetwork.${networkId}.body`)
                     : ''}
-                icon={networkIcon[networkId]}
+                icon={NETWORK_ICON[networkId]}
                 iconColor={getIconColor(networkId)}
                 hidden={features?.onboarding?.[networkId]?.hidden}
                 disabled={!features?.onboarding?.[networkId]?.enabled}

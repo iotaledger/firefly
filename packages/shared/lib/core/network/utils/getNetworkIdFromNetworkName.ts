@@ -2,11 +2,11 @@ import { NetworkId } from '../enums'
 
 export function getNetworkIdFromNetworkName(networkName: string): NetworkId {
     switch (networkName) {
-        case 'stardust-mainnet':
+        case 'stardust-mainnet-pre1':
             return NetworkId.Iota
         case 'iota-alphanet':
         case 'iota-alphanet-2':
-            return NetworkId.IotaTestnet
+            return NetworkId.IotaAlphanet
         case 'shimmer':
             return NetworkId.Shimmer
         case 'testnet':
