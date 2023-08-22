@@ -35,6 +35,7 @@ interface INetworkSettingsFeatures extends IFeatureFlag {
 }
 
 interface IAdvancedSettingsFeatures extends IFeatureFlag {
+    balanceFinder: IFeatureFlag
     walletFinder: IFeatureFlag
     hiddenAccounts: IFeatureFlag
     developerToggle: IFeatureFlag

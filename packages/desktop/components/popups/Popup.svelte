@@ -52,6 +52,7 @@
     import VoteForProposal from './VoteForProposalPopup.svelte'
     import VotingPowerToZeroPopup from './VotingPowerToZeroPopup.svelte'
     import WalletFinderPopup from './WalletFinderPopup.svelte'
+    import BalanceFinderPopup from './BalanceFinderPopup.svelte'
 
     export let id: PopupId
     export let props: any
@@ -134,6 +135,7 @@
         [PopupId.VoteForProposal]: VoteForProposal,
         [PopupId.VotingPowerToZero]: VotingPowerToZeroPopup,
         [PopupId.WalletFinder]: WalletFinderPopup,
+        [PopupId.BalanceFinder]: BalanceFinderPopup,
     }
 
     function onKey(event: KeyboardEvent): void {

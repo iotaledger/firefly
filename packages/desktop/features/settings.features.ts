@@ -76,6 +76,9 @@ const settingsFeatures: ISettingsFeatures = {
     },
     advanced: {
         enabled: true,
+        balanceFinder: {
+            enabled: true,
+        },
         walletFinder: {
             enabled: true,
         },
