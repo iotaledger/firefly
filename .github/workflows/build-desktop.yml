@@ -41,6 +41,9 @@ jobs:
               with:
                   node-version: 18.15.0
 
+            - name: Install Yarn
+              run: npm install -g yarn
+
             # Used to read the `binding.gyp` file from `@iota/wallet`
             - name: Set up Python 3.10
               uses: actions/setup-python@v4
@@ -83,9 +86,6 @@ jobs:
             - name: Enable verbose output for electron-builder (Windows)
               run: echo "DEBUG=electron-builder" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
               if: matrix.os == 'windows-2019'
-
-            - name: Install Yarn
-              run: npm install -g yarn
 
             - name: Install dependencies
               # Increase network timeout threshold to reduce build failures on Windows
