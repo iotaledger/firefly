@@ -20,6 +20,6 @@ export interface IPersistedProfile {
     lastUsedAccountIndex?: number
     clientOptions: IClientOptions
     forceAssetRefresh: boolean
-    strongholdVersion: StrongholdVersion
+    strongholdVersion?: StrongholdVersion
     pfp?: INft
 }
