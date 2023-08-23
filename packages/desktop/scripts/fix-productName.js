@@ -12,8 +12,7 @@ if (!process.env.CI) {
 }
 
 const stage = process.env.STAGE || 'alpha'
-const appName =
-    stage === 'prod' ? 'Firefly Shimmer' : `Firefly Shimmer - ${stage.replace(/^\w/, (c) => c.toUpperCase())}`
+const appName = stage === 'prod' ? 'Firefly' : `Firefly - ${stage.replace(/^\w/, (c) => c.toUpperCase())}`
 const packageJsonPath = path.resolve(__dirname, '../package.json')
 
 const packageJson = JSON.parse(readFileSync(packageJsonPath, { encoding: 'utf-8' }))

@@ -15,7 +15,7 @@ const CHANNEL_NAME = getChannelName()
  * @returns
  */
 function getAppName() {
-    return STAGE === 'prod' ? 'Firefly Shimmer' : `Firefly Shimmer - ${STAGE.replace(/^\w/, (c) => c.toUpperCase())}`
+    return STAGE === 'prod' ? 'Firefly' : `Firefly - ${STAGE.replace(/^\w/, (c) => c.toUpperCase())}`
 }
 
 function getAppProtocol() {
@@ -23,7 +23,7 @@ function getAppProtocol() {
 }
 
 function getAppId() {
-    const defaultAppId = 'org.iota.firefly-shimmer'
+    const defaultAppId = 'org.iota.firefly'
     if (STAGE === 'prod') {
         return defaultAppId
     }
