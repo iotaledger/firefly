@@ -14,7 +14,7 @@
         BasicActivityDetails,
         ActivityInformation,
     } from 'shared/components'
-    import { Tab } from 'shared/components/enums'
+    import { Tab, TextHintVariant } from 'shared/components/enums'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
@@ -138,7 +138,7 @@
             }
         }
 
-        if (!initialExpirationDate) {
+        if (transactionDetails.expirationDate === undefined) {
             initialExpirationDate = getInitialExpirationDate()
         }
     }
@@ -237,7 +237,7 @@
         {/if}
     </div>
     {#if surplus}
-        <TextHint warning text={localize('popups.transaction.surplusIncluded')} />
+        <TextHint variant={TextHintVariant.Warning} text={localize('popups.transaction.surplusIncluded')} />
     {/if}
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         {#if disableBack}

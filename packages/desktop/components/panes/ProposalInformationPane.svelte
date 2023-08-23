@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { KeyValueBox, Pane, Text } from '@ui'
+    import { Height, KeyValueBox, Pane, Text } from '@ui'
     import { formatDate, localize } from '@core/i18n'
     import { DATE_FORMAT, IKeyValueBoxList, milestoneToDate, truncateString } from '@core/utils'
     import { networkStatus } from '@core/network/stores'
@@ -61,7 +61,7 @@
     }
 </script>
 
-<Pane classes="p-6 h-fit {classes}">
+<Pane height={Height.Fit}>
     <Text smaller classes="mb-5">
         {localize('views.governance.details.proposalInformation.title')}
     </Text>

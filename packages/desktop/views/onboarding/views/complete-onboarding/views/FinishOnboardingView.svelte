@@ -16,6 +16,7 @@
     import { setStrongholdPassword } from '@core/profile-manager'
     import { STRONGHOLD_VERSION } from '@core/stronghold'
     import { Animation, Button, Icon, Text, TextHint } from '@ui'
+    import { TextHintVariant } from 'shared/components/enums'
     import { TextType } from '@ui/enums'
     import { onboardingRouter } from '@views/onboarding/onboarding-router'
 
@@ -55,7 +56,10 @@
             </Text>
         </div>
         {#if $isOnboardingLedgerProfile}
-            <TextHint warning text={localize('views.onboarding.congratulations.ledgerHint')} />
+            <TextHint
+                variant={TextHintVariant.Warning}
+                text={localize('views.onboarding.congratulations.ledgerHint')}
+            />
         {/if}
     </div>
     <div slot="leftpane__action">
