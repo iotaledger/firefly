@@ -1,7 +1,6 @@
 <script lang="ts">
     import { Error, Icon, Text } from 'shared/components'
     import { createEventDispatcher, onMount } from 'svelte'
-    import { PlatformOption, platform } from '@core/app'
     import { isValidPin, PIN_LENGTH } from '@core/utils'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
@@ -24,7 +23,6 @@
         }
     }
     $: value.length === PIN_LENGTH && dispatch('filled')
-    $: isAndroid = $platform === PlatformOption.Android
 
     let root: HTMLElement
     const inputElements: HTMLElement[] = []
