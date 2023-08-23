@@ -15,7 +15,9 @@
     import { onMount } from 'svelte'
     import zxcvbn from 'zxcvbn'
     import { updateStrongholdRouter } from '../update-stronghold-router'
+    import { TextHintVariant } from 'shared/components/enums'
     import { AnimationEnum } from '@auxiliary/animation'
+    import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
 
     export let oldPassword: string
     export let newPassword: string
@@ -65,6 +67,9 @@
             try {
                 isSubmitBusy = true
                 await changeStrongholdPassword(oldPassword, newPassword)
+                if ($onboardingProfile) {
+                    updateOnboardingProfile({ strongholdPassword: newPassword })
+                }
                 showAppNotification({
                     alert: true,
                     type: 'success',
@@ -118,7 +123,7 @@
         </Text>
     </div>
     <div slot="leftpane__content">
-        <TextHint warning text={localize('views.updateStronghold.changePassword.hint')} />
+        <TextHint variant={TextHintVariant.Warning} text={localize('views.updateStronghold.changePassword.hint')} />
         <form on:submit|preventDefault={onSubmit} id="update-stronghold-form" class="mt-12">
             <PasswordInput
                 bind:error={passwordError}

@@ -2,12 +2,12 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { showAppNotification } from '@auxiliary/notification'
     import { OnboardingLayout } from '@components'
-    import { updateOnboardingProfile } from '@contexts/onboarding/stores'
     import { exportStronghold } from '@contexts/settings/actions'
     import { localize } from '@core/i18n'
     import { login } from '@core/profile/actions'
     import { Animation, Button, Icon, Text, TextHint, TextType } from '@ui'
     import { updateStrongholdRouter } from '../update-stronghold-router'
+    import { TextHintVariant } from 'shared/components/enums'
     import { AnimationEnum } from '@auxiliary/animation'
 
     export let busy = false
@@ -18,14 +18,7 @@
     const skipBackup = false
 
     function onAdvanceView(): void {
-        if (isRecovery) {
-            updateOnboardingProfile({
-                mnemonic: null,
-                strongholdPassword: null,
-                importFile: null,
-                importFilePath: null,
-            })
-        } else {
+        if (!isRecovery) {
             void login()
         }
 
@@ -79,7 +72,7 @@
                 {localize(`views.updateStronghold.updateBackup.${isRecovery ? 'recoveryBody' : 'loginBody'}`)}
             </Text>
         </div>
-        <TextHint warning text={localize('views.updateStronghold.updateBackup.hint')} />
+        <TextHint variant={TextHintVariant.Warning} text={localize('views.updateStronghold.updateBackup.hint')} />
     </div>
     <div slot="leftpane__action">
         <Button

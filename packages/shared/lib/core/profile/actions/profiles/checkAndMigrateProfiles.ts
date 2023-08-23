@@ -17,6 +17,7 @@ import {
 } from '../../constants'
 import { IPersistedProfile } from '../../interfaces'
 import { currentProfileVersion, profiles, saveProfile } from '../../stores'
+import { ProfileType } from '@core/profile/enums'
 
 /**
  * Migrates profile data in need of being modified to accommodate changes
@@ -60,6 +61,7 @@ const persistedProfileMigrationsMap: Record<number, (existingProfile: unknown) =
     10: persistedProfileMigrationToV11,
     11: persistedProfileMigrationToV12,
     12: persistedProfileMigrationToV13,
+    13: persistedProfileMigrationToV14,
 }
 
 function persistedProfileMigrationToV4(existingProfile: unknown): void {
@@ -262,7 +264,7 @@ function persistedProfileMigrationToV13(
     const accountPersistedData = {}
     existingProfile.accountMetadata?.forEach((metadata) => {
         const { index, ...rest } = metadata
-        accountPersistedData[index] = { ...rest, depositAddress: '' }
+        accountPersistedData[index] = { ...rest }
     })
     existingProfile.accountPersistedData = accountPersistedData
     keysToKeep.forEach((key) => {
@@ -288,4 +290,12 @@ function persistedProfileMigrationToV13(
     }
 
     saveProfile(newProfile as IPersistedProfile)
+}
+
+function persistedProfileMigrationToV14(existingProfile: IPersistedProfile): void {
+    const isLedgerProfile = existingProfile?.type === ProfileType.Ledger
+    if (isLedgerProfile) {
+        delete existingProfile.strongholdVersion
+        saveProfile(existingProfile)
+    }
 }

@@ -14,7 +14,7 @@
     import { updateActiveAccountPersistedData } from '@core/profile/actions'
     import { governanceRouter } from '@core/router'
     import { Button, Text, TextHint, TextType } from 'shared/components'
-    import { ButtonVariant } from 'shared/components/enums'
+    import { ButtonVariant, TextHintVariant } from 'shared/components/enums'
 
     function onCancelClick(): void {
         closePopup()
@@ -55,7 +55,7 @@
     <div class="flex flex-col w-full space-y-4 mt-6">
         <Text fontSize="15">{localize('popups.removeProposal.body')}</Text>
         {#if isTextHintVisible}
-            <TextHint info text={localize('popups.removeProposal.hint')} />
+            <TextHint variant={TextHintVariant.Info} text={localize('popups.removeProposal.hint')} />
         {/if}
     </div>
     <div class="flex w-full space-x-4 mt-6">

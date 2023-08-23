@@ -1,47 +1,39 @@
 <script lang="ts">
     import { appSettings, appStage } from '@core/app'
-    import { get } from 'svelte/store'
+    import { Logo as LogoEnum } from './enums'
 
-    export let logo = undefined
-    export let width = undefined
-    export let height = undefined
-    export let classes = ''
-    export let overrideStage: undefined | 'alpha' | 'beta' | 'prod' = undefined
-
-    $: darkModeEnabled = $appSettings.darkMode
-    $: selected = logos[logo]?.[overrideStage ?? get(appStage)]
+    export let logo: LogoEnum
+    export let width: string = '100%'
+    export let height: string = '100%'
 
     const logos = {
-        'logo-firefly-full': {
+        [LogoEnum.FireflyFull]: {
             alpha: 'firefly_logo_full.svg',
             beta: 'firefly_logo_full.svg',
             prod: 'firefly_logo_full.svg',
         },
-        'logo-firefly': {
+        [LogoEnum.Firefly]: {
             alpha: 'alpha_firefly_logo.svg',
             beta: 'beta_firefly_logo.svg',
             prod: 'prod_firefly_logo.svg',
         },
-        'logo-stronghold': {
+        [LogoEnum.Stronghold]: {
             alpha: 'stronghold.svg',
             beta: 'stronghold.svg',
             prod: 'stronghold.svg',
         },
-        'logo-chrysalis-gem': {
+        [LogoEnum.ChrysalisGem]: {
             alpha: 'chrysalis_gem.svg',
             beta: 'chrysalis_gem.svg',
             prod: 'chrysalis_gem.svg',
         },
     }
+
+    $: darkModeEnabled = $appSettings.darkMode
+    $: selected = logos[logo]?.[$appStage]
+    $: logoSrc = darkModeEnabled ? `assets/logos/darkmode/${selected}` : `assets/logos/lightmode/${selected}`
 </script>
 
 {#if selected}
-    <img
-        data-label="logo"
-        class={classes}
-        width={width || '100%'}
-        height={height || '100%'}
-        src={`assets/logos/${darkModeEnabled ? 'darkmode' : 'lightmode'}/${selected}`}
-        alt=""
-    />
+    <img data-label="logo" {width} {height} src={logoSrc} alt={selected} />
 {/if}
