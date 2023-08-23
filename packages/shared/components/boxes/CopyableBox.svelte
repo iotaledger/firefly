@@ -5,10 +5,10 @@
     import { localize } from '@core/i18n'
     import { onDestroy } from 'svelte'
 
-    export let value = ''
-    export let isCopyable = true
-    export let clearPadding = false
-    export let offset: number = undefined
+    export let value: string = ''
+    export let isCopyable: boolean = true
+    export let offset: number | undefined = undefined
+    export let classes: string = ''
 
     let tooltipAnchor: HTMLElement
     let showTooltip = false
@@ -34,9 +34,9 @@
         type="button"
         bind:this={tooltipAnchor}
         on:click={onClick}
-        class="{clearPadding ? '' : 'w-full'} {isCopyable ? 'cursor-pointer' : 'cursor-default'}"
+        class="w-full {isCopyable ? 'cursor-pointer' : 'cursor-default'}"
     >
-        <Box {...$$restProps}>
+        <Box {...$$restProps} {classes}>
             <slot />
         </Box>
     </button>
@@ -44,7 +44,7 @@
 {#if isCopyable && showTooltip}
     <InformationTooltip
         anchor={tooltipAnchor}
-        offset={clearPadding ? offset ?? 25 : offset ?? 15}
+        offset={offset ?? 15}
         size="small"
         backgroundColor="green-600"
         borderColor="green-600"
