@@ -7,6 +7,7 @@
     import EnterNameView from './views/EnterNameView.svelte'
     import EnterPinView from './views/EnterPinView.svelte'
     import FinishOnboardingView from './views/FinishOnboardingView.svelte'
+    import BalanceOverview from './views/BalanceOverview.svelte'
 
     $: if (features.analytics.onboardingRoute.enabled && $completeOnboardingRoute) {
         Platform.trackEvent('complete-onboarding-route', { route: $completeOnboardingRoute })
@@ -20,6 +21,10 @@
 {:else if $completeOnboardingRoute === CompleteOnboardingRoute.EnterPin}
     <Transition>
         <EnterPinView />
+    </Transition>
+{:else if $completeOnboardingRoute === CompleteOnboardingRoute.BalanceOverview && features.onboarding.balanceOverview.enabled}
+    <Transition>
+        <BalanceOverview />
     </Transition>
 {:else if $completeOnboardingRoute === CompleteOnboardingRoute.FinishOnboarding}
     <Transition>

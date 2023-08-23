@@ -201,6 +201,9 @@ const onboardingFeatures: OnboardingFeatures = {
     strongholdVersionCheck: {
         enabled: true,
     },
+    balanceOverview: {
+        enabled: true,
+    },
     iota: onboardingFeaturesForIota,
     iotaAlphanet: onboardingFeaturesForIotaAlphanet,
     shimmer: onboardingFeaturesForShimmer,

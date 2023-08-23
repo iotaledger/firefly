@@ -167,6 +167,11 @@
                     "successfullyFound": "Successfully found {amount}"
                 }
             },
+            "balanceOverview":{
+                "title": "Balance overview",
+                "description": "Find information about all your wallets and the balance of each.",
+                "total": "Total balance"
+            },
             "congratulations": {
                 "title": "Profile setup almost complete...",
                 "fundsMigrated": "Funds migrated",

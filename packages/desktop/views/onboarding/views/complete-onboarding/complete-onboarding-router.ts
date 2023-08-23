@@ -1,6 +1,7 @@
 import { Router, Subrouter } from '@core/router'
 import { get, writable } from 'svelte/store'
 import { CompleteOnboardingRoute } from './complete-onboarding-route.enum'
+import features from '@features/features'
 
 export const completeOnboardingRoute = writable<CompleteOnboardingRoute>(undefined)
 export const completeOnboardingRouter = writable<CompleteOnboardingRouter>(undefined)
@@ -19,6 +20,11 @@ export class CompleteOnboardingRouter extends Subrouter<CompleteOnboardingRoute>
                 nextRoute = CompleteOnboardingRoute.EnterPin
                 break
             case CompleteOnboardingRoute.EnterPin:
+                features.onboarding.balanceOverview.enabled
+                    ? (nextRoute = CompleteOnboardingRoute.BalanceOverview)
+                    : (nextRoute = CompleteOnboardingRoute.FinishOnboarding)
+                break
+            case CompleteOnboardingRoute.BalanceOverview:
                 nextRoute = CompleteOnboardingRoute.FinishOnboarding
                 break
             case CompleteOnboardingRoute.FinishOnboarding:
