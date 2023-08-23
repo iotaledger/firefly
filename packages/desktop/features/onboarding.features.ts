@@ -40,8 +40,10 @@ const onboardingFeaturesForIota: IOnboardingFeaturesForNetwork = {
     },
 }
 
+const IS_ALPHANET_ENABLED = process.env.STAGE !== 'prod'
 const onboardingFeaturesForIotaAlphanet: IOnboardingFeaturesForNetwork = {
-    enabled: true,
+    enabled: IS_ALPHANET_ENABLED,
+    hidden: !IS_ALPHANET_ENABLED,
     newProfile: {
         enabled: true,
         softwareProfile: {
