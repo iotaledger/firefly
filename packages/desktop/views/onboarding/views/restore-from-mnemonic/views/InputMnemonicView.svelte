@@ -1,7 +1,6 @@
 <script lang="ts">
     import { OnboardingLayout } from '@components'
     import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
-    import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { Animation, Button, HTMLButtonType, ImportTextfield, Text } from '@ui'
     import { onMount } from 'svelte'
@@ -44,7 +43,7 @@
             {localize('actions.continue')}
         </Button>
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-blue dark:bg-gray-900'}">
+    <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
         <Animation animation={AnimationEnum.ImportFromTextDesktop} />
     </div>
 </OnboardingLayout>
