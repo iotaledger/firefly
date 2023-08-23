@@ -4,6 +4,9 @@
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile'
     import {
+        isOutputTimeLocked,
+        isVestingOutput,
+        isVestingOutputId,
         OUTPUT_TYPE_TREASURY,
         UNLOCK_CONDITION_EXPIRATION,
         UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN,
@@ -12,8 +15,8 @@
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import type { UnlockConditionTypes } from '@iota/types'
-    import { TextHintVariant } from 'shared/components/enums'
     import { BalanceSummarySection, Button, FontWeight, Text, TextType } from 'shared/components'
+    import { TextHintVariant } from 'shared/components/enums'
 
     interface BalanceBreakdown {
         amount: number
@@ -27,20 +30,23 @@
     }
 
     $: accountBalance = $selectedAccount?.balances
+    $: accountBalance, void setBreakdown()
 
     let breakdown: { [key: string]: BalanceBreakdown } = {}
-    $: accountBalance, void setBreakdown()
+
     async function setBreakdown(): Promise<void> {
         const availableBreakdown = getAvailableBreakdown()
         const pendingBreakdown = await getPendingBreakdown()
         const lockedBreakdown = getLockedBreakdown()
         const storageDepositBreakdown = getStorageDepositBreakdown()
+        const vestingBreakdown = getVestingBreakdown()
 
         breakdown = {
             available: availableBreakdown,
             pending: pendingBreakdown,
             locked: lockedBreakdown,
             storageDeposit: storageDepositBreakdown,
+            vesting: vestingBreakdown,
         }
     }
 
@@ -57,8 +63,8 @@
                 const output = (await $selectedAccount.getOutput(outputId)).output
 
                 let type: string
-                let amount: number
-                if (output.type !== OUTPUT_TYPE_TREASURY) {
+                let amount: number = 0
+                if (output.type !== OUTPUT_TYPE_TREASURY && !isVestingOutputId(outputId)) {
                     if (containsUnlockCondition(output.unlockConditions, UNLOCK_CONDITION_EXPIRATION)) {
                         type = PendingFundsType.Unclaimed
                         amount = Number(output.amount)
@@ -115,7 +121,21 @@
         return { amount: totalStorageDeposit, subBreakdown }
     }
 
-    function containsUnlockCondition(unlockConditions: UnlockConditionTypes[], unlockConditionId: number) {
+    function getVestingBreakdown(): BalanceBreakdown {
+        const allOutputs = $selectedAccount.addressesWithOutputs.flatMap(({ outputs }) => outputs)
+
+        const filteredVestingOutputs = allOutputs.filter(
+            (output) => isVestingOutput(output) && isOutputTimeLocked(output)
+        )
+
+        const amount = filteredVestingOutputs
+            .map(({ output }) => parseInt(output.amount, 10))
+            .reduce((total, amount) => total + amount, 0)
+
+        return { amount }
+    }
+
+    function containsUnlockCondition(unlockConditions: UnlockConditionTypes[], unlockConditionId: number): boolean {
         return unlockConditions.some((unlockCondition) => unlockCondition.type === unlockConditionId)
     }
 
