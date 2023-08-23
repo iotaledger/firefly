@@ -29,8 +29,10 @@ import {
     TransactionOptions,
     Secp256k1EcdsaSignature,
     GenerateAddressOptions,
+    GenerateAddressesOptions,
     SyncOptions,
     Ed25519Signature,
+    CreateNativeTokenParams,
 } from '@iota/wallet'
 
 import { IAccount } from '../../core/account'
@@ -113,7 +115,14 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    generateEvmAddresses(generateAddressesOptions: GenerateAddressOptions): Promise<string[]> {
+    generateEvmAddresses(generateAddressesOptions: GenerateAddressesOptions): Promise<string[]> {
+        throw new Error('Method not implemented.')
+    }
+
+    createNativeToken(
+        params: CreateNativeTokenParams,
+        transactionOptions?: TransactionOptions
+    ): Promise<CreateNativeTokenTransaction> {
         throw new Error('Method not implemented.')
     }
 
@@ -228,16 +237,12 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    generateEd25519Address(): Promise<Address> {
+    generateEd25519Address(options?: GenerateAddressOptions): Promise<Address> {
         return Promise.resolve(MOCK_ADDRESS)
     }
 
-    generateEd25519Addresses(): Promise<Address[]> {
+    generateEd25519Addresses(amount: number, options?: GenerateAddressOptions): Promise<Address[]> {
         return Promise.resolve([MOCK_ADDRESS])
-    }
-
-    mintNativeToken(params, transferOptions): Promise<CreateNativeTokenTransaction> {
-        throw new Error('Method not implemented.')
     }
 
     mintNfts(params, transferOptions): Promise<Transaction> {
@@ -274,7 +279,7 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    sendAmount(params: SendParams[], transactionOptions?: TransactionOptions): Promise<Transaction> {
+    send(params: SendParams[], transactionOptions?: TransactionOptions): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
 

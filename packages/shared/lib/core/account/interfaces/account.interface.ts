@@ -23,6 +23,7 @@ import type {
     Ed25519Signature,
     FilterOptions,
     GenerateAddressOptions,
+    GenerateAddressesOptions,
     MintNftParams,
     Node,
     OutputData,
@@ -72,7 +73,7 @@ export interface IAccount {
     destroyFoundry(foundryId: string, transactionOptions?: TransactionOptions): Promise<Transaction>
     generateEd25519Address(options?: GenerateAddressOptions): Promise<Address>
     generateEd25519Addresses(amount: number, options?: GenerateAddressOptions): Promise<Address[]>
-    generateEvmAddresses(generateAddressesOptions: GenerateAddressOptions): Promise<string[]>
+    generateEvmAddresses(generateAddressesOptions: GenerateAddressesOptions): Promise<string[]>
     getBalance(): Promise<Balance>
     getFoundryOutput(tokenId: string): Promise<IFoundryOutput>
     getIncomingTransaction(transactionId: string): Promise<Transaction>
@@ -110,7 +111,7 @@ export interface IAccount {
         maxAttempts?: number
     ): Promise<PreparedTransactionData>
     requestFundsFromFaucet(url: string, address: string): Promise<string>
-    sendAmount(params: SendParams[], transactionOptions?: TransactionOptions): Promise<Transaction>
+    send(params: SendParams[], transactionOptions?: TransactionOptions): Promise<Transaction>
     sendNativeTokens(params: SendNativeTokensParams[], transactionOptions?: TransactionOptions): Promise<Transaction>
     sendNft(params: SendNftParams[], transactionOptions?: TransactionOptions): Promise<Transaction>
     sendOutputs(outputs: OutputTypes[], transactionOptions?: TransactionOptions): Promise<Transaction>
