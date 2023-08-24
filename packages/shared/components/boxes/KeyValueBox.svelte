@@ -5,10 +5,12 @@
 
     export let keyText: string = ''
     export let valueText: string = ''
-    export let textColor: string = 'text-gray-600 dark:text-gray-500'
-    export let darkTextColor: string = 'text-gray-500'
-    export let backgroundColor: string = 'bg-gray-50 dark:bg-gray-850'
+    export let textColor: string = 'gray-600'
+    export let darkTextColor: string = 'gray-500'
+    export let backgroundColor: string = 'gray-50'
+    export let darkBackgroundColor: string = 'gray-850'
     export let padding: string = 'px-4 py-2.5'
+    export let classes: string = ''
     export let copyValue: string = ''
     export let isCopyable: boolean = false
     export let tooltipText: string = ''
@@ -35,7 +37,9 @@
         row={!isVertical}
         col={isVertical}
         {backgroundColor}
-        classes="w-full overflow-hidden {padding} {isLoading ? 'animate-pulse' : ''} {outline
+        {darkBackgroundColor}
+        clearBoxPadding
+        classes="w-full overflow-hidden {padding} {classes} {isLoading ? 'animate-pulse' : ''} {outline
             ? 'border-2 border-gray-100'
             : ''}"
     >
