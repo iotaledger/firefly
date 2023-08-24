@@ -31,6 +31,8 @@
     import { selectedAccountIndex } from '@core/account'
     import { get } from 'svelte/store'
     import features from '@features/features'
+    import { isAwareOfMetricSystemDrop } from '@contexts/dashboard/stores'
+    import { openPopup, PopupId } from '@auxiliary/popup'
 
     const tabs = {
         wallet: Wallet,
@@ -89,6 +91,12 @@
                     values: { networkName: $nodeInfo.protocol.networkName },
                 }),
             })
+        }
+        if ($isAwareOfMetricSystemDrop !== true) {
+            openPopup({
+                id: PopupId.MetricSystemInfo,
+            })
+            $isAwareOfMetricSystemDrop = true
         }
     })
 

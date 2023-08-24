@@ -52,6 +52,7 @@
     import VoteForProposal from './VoteForProposalPopup.svelte'
     import VotingPowerToZeroPopup from './VotingPowerToZeroPopup.svelte'
     import WalletFinderPopup from './WalletFinderPopup.svelte'
+    import MetricSystemInfoPopup from './metricSystemInfoPopup.svelte'
     import BalanceFinderPopup from './BalanceFinderPopup.svelte'
 
     export let id: PopupId
@@ -113,6 +114,7 @@
         [PopupId.LegalUpdate]: LegalUpdatePopup,
         [PopupId.ManageAccount]: ManageAccountPopup,
         [PopupId.ManageVotingPower]: ManageVotingPowerPopup,
+        [PopupId.MetricSystemInfo]: MetricSystemInfoPopup,
         [PopupId.MintNativeTokenConfirmation]: MintNativeTokenConfirmationPopup,
         [PopupId.MintNativeTokenForm]: MintNativeTokenFormPopup,
         [PopupId.MintNftConfirmation]: MintNftConfirmationPopup,

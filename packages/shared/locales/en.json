@@ -648,6 +648,13 @@
         }
     },
     "popups": {
+        "metricSystemInfo": {
+            "title": "Metric System Information",
+            "body1": "We want to update you on a significant change approaching within the IOTA network - a shift in our metric system.",
+            "body2": "Previously, we employed prefixes like miota based on measurement units. However, to ensure clarity and uniformity, we have opted to simplify by exclusively using micro and iota units.",
+            "body3": "What does this mean for you?",
+            "body4": "From now on, IOTA will stand as the fundamental unit, streamlining transactions and communication. Please be assured, this alteration won't affect your assets or transactions - it's a linguistic refinement, not a functional change."
+        },
         "enableLedgerBlindSigning": {
             "title": "Enable Blind Signing",
             "info": "In order to confirm this transaction you need to enable Blind Signing on your ledger device.",

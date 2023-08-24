@@ -23,6 +23,7 @@ export enum PopupId {
     LegalUpdate = 'legalUpdate',
     ManageAccount = 'manageAccount',
     ManageVotingPower = 'manageVotingPower',
+    MetricSystemInfo = 'metricSystemInfo',
     MintNativeTokenConfirmation = 'mintNativeTokenConfirmation',
     MintNativeTokenForm = 'mintNativeTokenForm',
     MintNftConfirmation = 'mintNftConfirmation',
