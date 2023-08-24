@@ -94,13 +94,6 @@
     function updateSidebarNotification() {
         sidebarTabs = sidebarTabs.map((tab) => {
             switch (tab.route) {
-                case DashboardRoute.Staking:
-                    tab.notificationType = !$activeProfile?.hasVisitedStaking
-                        ? 'error'
-                        : showStakingNotification
-                        ? 'warning'
-                        : null
-                    break
                 case DashboardRoute.Governance:
                     tab.notificationType = showGovernanceNotification ? 'warning' : null
                     break
