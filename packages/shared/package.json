@@ -21,7 +21,7 @@
         "svelte": "^3.49.0",
         "svelte-i18n": "3.7.0",
         "svelte-markdown": "0.2.3",
-        "svelty-picker": "^3.5.0",
+        "svelty-picker": "^4.1.2",
         "zxcvbn": "^4.4.2"
     },
     "scripts": {
