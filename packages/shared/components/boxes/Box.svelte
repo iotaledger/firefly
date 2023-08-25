@@ -9,15 +9,12 @@
 </script>
 
 <box-content
-    class={`
-    w-full flex rounded-lg
-    ${col ? 'flex-col' : ''}
-    ${row ? 'flex-row' : ''}
-    ${clearPadding ? '' : 'px-4 py-4'}
-    ${backgroundColor && !clearBackground ? 'bg-' + backgroundColor : ''}  
-    ${darkBackgroundColor && !clearBackground ? 'dark:bg-' + darkBackgroundColor : ''}
-    ${classes}
-`}
+    class="w-full flex rounded-lg
+    {clearPadding ? '' : 'px-4 py-4'}
+    {backgroundColor && !clearBackground ? 'bg-' + backgroundColor : ''}
+    {darkBackgroundColor && !clearBackground ? 'dark:bg-' + darkBackgroundColor : ''} {classes}"
+    class:flex-col={col}
+    class:flex-row={row}
 >
     <slot />
 </box-content>
