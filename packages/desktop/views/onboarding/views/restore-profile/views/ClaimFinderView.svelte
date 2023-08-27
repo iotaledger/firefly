@@ -31,7 +31,7 @@
         pollLedgerNanoStatus,
         stopPollingLedgerNanoStatus,
     } from '@core/ledger'
-    import { unsubscribeFromWalletApiEvents } from '@core/profile-manager'
+    import { setStrongholdPassword, unsubscribeFromWalletApiEvents } from '@core/profile-manager'
     import { Animation, Button, ShimmerClaimingAccountList, Text } from '@ui'
     import { onDestroy, onMount } from 'svelte'
     import { restoreProfileRouter } from '../restore-profile-router'
@@ -138,6 +138,7 @@
                         shimmerClaimingProfileDirectory,
                         $onboardingProfile?.importFilePath
                     )
+                    await setStrongholdPassword($onboardingProfile?.strongholdPassword)
                 }
 
                 await createShimmerClaimingProfileManager()
