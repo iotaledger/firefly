@@ -18,7 +18,7 @@ This part of the app consists of different sub-sections:
 - **Profile Recovery**: Recovering or restoring a profile based on a mnemonic phrase, Stronghold backup, or Ledger device (claiming rewards  
   or recovering / restoring profiles **ONLY**)
 - **Stronghold Setup**: Configuring the password for the Stronghold encryption (software profiles **ONLY**)
-- **Storage Protection Setup**: Choosing and configuring the protection method for the profile's local data (currently only PIN, but biometric available for mobile)
+- **Storage Protection Setup**: Choosing and configuring the protection method for the profile's local data (currently only PIN)
 - **Ledger Setup**: Verifying and / or establishing connection with the Ledger device
 - **Profile Backup**: Backing up a mnemonic phrase on paper and / or exporting a Stronghold backup
 - **Shimmer Claiming**: Finding and claiming Shimmer rewards

@@ -125,9 +125,6 @@ Thumbs.db
 .cproject
 .settings/
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
 # Package Files #
 *.war
 *.ear
@@ -151,36 +148,6 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
-
-### AndroidStudio Patch ###
-
-!/gradle/wrapper/gradle-wrapper.jar
-
-# End of https://www.gitignore.io/api/androidstudio
-
-# Created by https://www.gitignore.io/api/xcode,fastlane
-# Edit at https://www.gitignore.io/?templates=xcode,fastlane
-
-### fastlane ###
-# fastlane - A streamlined workflow tool for Cocoa deployment
-#
-# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
-# screenshots whenever they are needed.
-# For more information about the recommended setup visit:
-# https://docs.fastlane.tools/best-practices/source-control/#source-control
-
-# fastlane specific
-mobile/**/fastlane/report.xml
-
-# deliver temporary files
-mobile/**/fastlane/Preview.html
-
-# snapshot generated screenshots
-mobile/**/fastlane/screenshots/**/*.png
-mobile/**/fastlane/screenshots/screenshots.html
-
-# scan temporary files
-mobile/**/fastlane/test_output
 
 ### Xcode ###
 # Xcode
