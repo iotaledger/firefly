@@ -635,16 +635,13 @@
             }
         },
         "vesting": {
-            "tableHeaders": {
-                "outputId": "Output ID",
-                "amount": "Amount",
-                "unlockTime": "Unlock time",
-                "status": "Status"
-            },
-            "status": {
-                "locked": "Locked",
-                "available": "Available"
-            },
+           "title": "Vesting",
+           "stats": {
+            "airdrop": "Airdrop",
+            "remaining": "Remaining",
+            "totalRewards": "Total Rewards"
+           },
+           "collect": "Collect",
             "airdrops": {
                 "title": "Airdrop Schedule",
                 "information": "Airdrop information.",
