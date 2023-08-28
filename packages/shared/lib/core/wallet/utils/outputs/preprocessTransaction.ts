@@ -1,9 +1,9 @@
 import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
 import { Output, RegularTransactionEssence, Transaction, UTXOInput } from '@iota/sdk/out/types'
+import { computeOutputId } from './computeOutputId'
 import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransactionIdAndIndex'
 import { getDirectionFromTransaction } from '../transactions'
 import { IAccountState } from '@core/account'
-import { computeOutputId } from '@core/profile-manager'
 
 export async function preprocessTransaction(
     transaction: Transaction,
