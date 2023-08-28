@@ -8,6 +8,7 @@ import {
 } from '@core/network'
 import { INode, IPersistedNetwork } from '@core/network/interfaces'
 import { DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_SECONDS, DEFAULT_MAX_NFT_SIZE_IN_MEGABYTES } from '@core/nfts'
+import { ProfileType } from '@core/profile/enums'
 import { StrongholdVersion } from '@core/stronghold/enums'
 import { get } from 'svelte/store'
 import {
@@ -17,7 +18,7 @@ import {
 } from '../../constants'
 import { IPersistedProfile } from '../../interfaces'
 import { currentProfileVersion, profiles, saveProfile } from '../../stores'
-import { ProfileType } from '@core/profile/enums'
+import { checkAndMigrateChrysalisProfiles } from './'
 
 /**
  * Migrates profile data in need of being modified to accommodate changes
@@ -26,7 +27,13 @@ import { ProfileType } from '@core/profile/enums'
 
 export function checkAndMigrateProfiles(): void {
     const shouldMigratePersistedProfiles = (get(currentProfileVersion) ?? 3) < PROFILE_VERSION
+
     if (shouldMigratePersistedProfiles) {
+        if (checkAndMigrateChrysalisProfiles()) {
+            // If there was a migration, we need to update the currentProfileVersion
+            // to the latest compatible with the chrysalis migration, which is 13
+            currentProfileVersion.set(13)
+        }
         migrateEachVersion()
     }
 }
