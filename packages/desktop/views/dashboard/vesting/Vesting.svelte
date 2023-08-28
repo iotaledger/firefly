@@ -1,33 +1,50 @@
 <script lang="ts">
-    import { Pane, Text, TextType } from '@ui'
+    import { Pane, Text, TextType, Button } from '@ui'
+    import { localize } from '@core/i18n'
     import { selectedAccount } from '@core/account/stores'
-    import { VestingTable } from '@components'
+    import { VestingSchedule } from '@components'
+    import { IVestingOutput, getBestTimeDuration, VestingOutputStatus } from '@core/utils'
+
+    const MOCKED_OUTPUTS: IVestingOutput[] = Array.from({ length: 120 }, (_, i) => {
+        const amount = Math.floor(Math.random() * 100)
+        const unlockTime = new Date(Date.now() + Math.random() * (2 * 365 * 24 * 60 * 60 * 1000))
+        return {
+            outputId: `output ID ${i}`,
+            status: VestingOutputStatus.Locked,
+            unlockTime,
+            amount,
+        }
+    })
+
+    $: sortedVestingOutputsByUnlockTime = MOCKED_OUTPUTS.sort((a, b) => a.unlockTime.getTime() - b.unlockTime.getTime())
+
+    $: nextVestingDate =
+        MOCKED_OUTPUTS?.filter((output) => output?.unlockTime.getTime() > Date.now())
+            ?.sort((a, b) => a?.unlockTime?.getTime() - b?.unlockTime?.getTime())?.[0]
+            ?.unlockTime?.getTime() - Date.now()
 </script>
 
 {#if $selectedAccount}
     <vesting-container class="w-full h-full flex flex-col flex-nowrap p-8 relative flex-1 bg-gray-50 dark:bg-gray-900">
         {#key $selectedAccount?.index}
-            <div class="h-full flex flex-col space-y-4">
-                <div class="flex flex-row space-x-4">
-                    <Pane classes="flex flex-col p-6 space-y-2 w-1/3">
-                        <Text type={TextType.h4} classes="mb-4">Pending vesting amount</Text>
-                        <Text type={TextType.h1} classes="mb-4">200 SMR</Text>
-                    </Pane>
-                    <Pane classes="flex flex-col p-6 space-y-2 w-full">
-                        <Text type={TextType.h4} classes="mb-4">
-                            Information about what is vesting and how it works
-                        </Text>
-                        <Text type={TextType.p} classes="mb-4">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </Text>
-                    </Pane>
-                </div>
-                <Pane classes="h-full min-h-96">
-                    <VestingTable />
+            <div class="h-full flex flex-row space-x-4">
+                <Pane classes="flex flex-col p-6 w-1/4">
+                    <Text type={TextType.h4} classes="mb-4">Pending vesting amount</Text>
+                    <Text type={TextType.h1} classes="mb-4">200 SMR</Text>
+                    <div class="mt-auto w-full">
+                        {#if nextVestingDate}
+                            <Text classes="mb-4">Next reward available in {getBestTimeDuration(nextVestingDate)}</Text>
+                        {/if}
+                        <div class="flex space-x-4">
+                            <Button classes="w-full">Collect</Button>
+                        </div>
+                    </div>
+                </Pane>
+                <Pane classes="h-full min-h-96 flex-1 py-8 px-12">
+                    <Text type={TextType.h4}>{localize('views.vesting.airdrops.title')}</Text>
+                    <div class="h-full flex justify-center items-center">
+                        <VestingSchedule outputs={sortedVestingOutputsByUnlockTime} />
+                    </div>
                 </Pane>
             </div>
         {/key}

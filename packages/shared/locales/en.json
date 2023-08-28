@@ -644,6 +644,15 @@
             "status": {
                 "locked": "Locked",
                 "available": "Available"
+            },
+            "airdrops": {
+                "title": "Airdrop Schedule",
+                "information": "Airdrop information.",
+                "tooltip" : {
+                    "title": "Airdrop",
+                    "amount": "Amount",
+                    "unlockDate": "Drop date"
+                }
             }
         }
     },
@@ -2322,7 +2331,12 @@
             "disconnected": "Disconnected"
         },
         "locked": "locked",
-        "smartContract": "smart contract"
+        "smartContract": "smart contract",
+        "vesting": {
+            "pending": "Pending",
+            "claimed": "Claimed",
+            "locked": "Locked"
+        }
     },
     "menus": {
         "expirationTimePicker": {
