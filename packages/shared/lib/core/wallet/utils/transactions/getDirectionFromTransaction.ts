@@ -1,3 +1,4 @@
+import { AddressWithOutputs } from '@core/account/interfaces'
 import { IWrappedOutput } from '../../interfaces'
 import { getRecipientAddressFromOutput } from '../outputs/getRecipientAddressFromOutput'
 import { ActivityDirection } from '@core/wallet/enums'
@@ -5,23 +6,20 @@ import { ActivityDirection } from '@core/wallet/enums'
 export function getDirectionFromTransaction(
     wrappedOutputs: IWrappedOutput[],
     incoming: boolean,
-    accountAddress: string
+    accountAddressesWithOutputs: AddressWithOutputs[]
 ): ActivityDirection {
-    const containsOutput = wrappedOutputs.some((outputData) => {
-        const recipientAddress = getRecipientAddressFromOutput(outputData.output)
+    const accountAddresses = accountAddressesWithOutputs.map((addressWithOutputs) => addressWithOutputs.address)
 
-        if (incoming) {
-            return accountAddress === recipientAddress
-        } else {
-            return accountAddress !== recipientAddress
-        }
+    const isAccountRecepient = wrappedOutputs.some((outputData) => {
+        const outputRecipient = getRecipientAddressFromOutput(outputData.output)
+        return accountAddresses.includes(outputRecipient)
     })
-    if (containsOutput) {
-        return incoming ? ActivityDirection.Incoming : ActivityDirection.Outgoing
+
+    const isSelfTransaction = incoming && isAccountRecepient
+
+    if (isSelfTransaction) {
+        return ActivityDirection.SelfTransaction
     } else {
-        const isSelfTransaction = wrappedOutputs.some(
-            (outputData) => accountAddress === getRecipientAddressFromOutput(outputData.output)
-        )
-        return isSelfTransaction ? ActivityDirection.SelfTransaction : ActivityDirection.Incoming
+        return incoming ? ActivityDirection.Incoming : ActivityDirection.Outgoing
     }
 }

@@ -14,7 +14,7 @@ export async function preprocessTransaction(
         transaction?.transactionId,
         transaction.payload.essence.outputs
     )
-    const direction = getDirectionFromTransaction(outputs, transaction.incoming, account.depositAddress)
+    const direction = getDirectionFromTransaction(outputs, transaction.incoming, account.addressesWithOutputs)
     const utxoInputs = transaction.payload.essence.inputs
     const inputIds = utxoInputs.map((input) =>
         getOutputIdFromTransactionIdAndIndex(input?.transactionId, input.transactionOutputIndex)
