@@ -131,7 +131,7 @@
                     <KeyValueBox
                         keyText={localize('general.metadata')}
                         valueText={JSON.stringify(irc27Metadata, null, '\t')}
-                        classes="whitespace-pre-wrap"
+                        isPreText
                     />
                 {/if}
             </activity-details>
