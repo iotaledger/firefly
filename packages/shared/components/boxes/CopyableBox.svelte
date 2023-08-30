@@ -5,12 +5,12 @@
     import { localize } from '@core/i18n'
     import { onDestroy } from 'svelte'
 
-    export let value = ''
-    export let isCopyable = true
-    export let clearPadding = false
-    export let clearBoxPadding = false
-    export let offset: number = undefined
-    export let classes = ''
+    export let value: string = ''
+    export let isCopyable: boolean = true
+    export let clearPadding: boolean = false
+    export let clearBoxPadding: boolean = false
+    export let offset: number | undefined = undefined
+    export let classes: string = ''
 
     let tooltipAnchor: HTMLElement
     let showTooltip = false

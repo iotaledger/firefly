@@ -4,8 +4,8 @@
     import { localize } from '@core/i18n'
     import { validateBech32Address } from '@core/utils/crypto'
     import { ADDRESS_TYPE_ALIAS } from '@core/wallet/constants'
-    import { convertHexAddressToBech32 } from '@core/wallet/utils'
     import { getNetworkHrp } from '@core/profile/actions'
+    import { api } from '@core/profile-manager'
 
     export let alias: string = ''
     export let error: string = ''
@@ -15,7 +15,7 @@
 
     const aliasOptions: IOption[] =
         $selectedAccount.balances?.aliases.map((hexAliasId, index) => {
-            const aliasId = convertHexAddressToBech32(ADDRESS_TYPE_ALIAS, hexAliasId)
+            const aliasId = api.aliasIdToBech32(hexAliasId, getNetworkHrp())
             return { key: 'Alias ' + (index + 1), value: aliasId }
         }) ?? []
 

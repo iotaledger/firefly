@@ -1,19 +1,15 @@
 <script lang="ts">
     import { Button, KeyValueBox, Text, FontWeight, TextType } from 'shared/components'
     import { selectedAccount, updateSelectedAccount } from '@core/account'
+    import { api, getClient } from '@core/profile-manager'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth, getBaseToken } from '@core/profile'
-    import {
-        convertBech32ToHexAddress,
-        formatTokenAmountPrecise,
-        EMPTY_HEX_ID,
-        UNLOCK_CONDITION_GOVERNOR_ADDRESS,
-        UNLOCK_CONDITION_STATE_CONTROLLER_ADDRESS,
-        processAndAddToActivities,
-    } from '@core/wallet'
+    import { formatTokenAmountPrecise, EMPTY_HEX_ID, processAndAddToActivities } from '@core/wallet'
+    import { AliasOutput, UnlockConditionType, PreparedTransaction } from '@iota/sdk/out/types'
     import { closePopup } from '@auxiliary/popup'
     import { onMount } from 'svelte'
     import { handleError } from '@core/error/handlers/handleError'
+    import { plainToInstance } from 'class-transformer'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -21,18 +17,18 @@
 
     $: address = {
         type: 0,
-        pubKeyHash: convertBech32ToHexAddress($selectedAccount.depositAddress),
+        pubKeyHash: api.bech32ToHex($selectedAccount.depositAddress),
     }
     $: aliasOutput = address
         ? {
               aliasId: EMPTY_HEX_ID,
               unlockConditions: [
                   {
-                      type: UNLOCK_CONDITION_GOVERNOR_ADDRESS,
+                      type: UnlockConditionType.GovernorAddress,
                       address,
                   },
                   {
-                      type: UNLOCK_CONDITION_STATE_CONTROLLER_ADDRESS,
+                      type: UnlockConditionType.StateControllerAddress,
                       address,
                   },
               ],
@@ -42,9 +38,10 @@
     $: void setStorageDeposit(aliasOutput)
     $: isTransferring = $selectedAccount.isTransferring
 
-    async function setStorageDeposit(aliasOutput): Promise<void> {
+    async function setStorageDeposit(aliasOutput: AliasOutput): Promise<void> {
         try {
-            const { amount } = await $selectedAccount.buildAliasOutput(aliasOutput)
+            const client = await getClient()
+            const { amount } = await client.buildAliasOutput(aliasOutput)
             storageDeposit = formatTokenAmountPrecise(Number(amount), getBaseToken())
         } catch (err) {
             handleError(err)
@@ -54,7 +51,9 @@
     async function createAlias(): Promise<void> {
         try {
             updateSelectedAccount({ isTransferring: true })
-            const transaction = await $selectedAccount.createAliasOutput()
+            const transaction = await $selectedAccount
+                .prepareCreateAliasOutput()
+                .then((prepared) => plainToInstance(PreparedTransaction, prepared).send())
             await processAndAddToActivities(transaction, $selectedAccount)
             closePopup()
         } catch (err) {

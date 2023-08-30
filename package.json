@@ -1,13 +1,11 @@
 {
     "private": true,
     "workspaces": [
-        "packages/mobile",
         "packages/desktop",
         "packages/shared"
     ],
     "devDependencies": {
         "@babel/eslint-parser": "^7.15.0",
-        "@iota/types": "^1.0.0-beta.9",
         "@types/node": "^18.15.11",
         "@typescript-eslint/eslint-plugin": "^5.58.0",
         "@typescript-eslint/parser": "^5.57.1",
@@ -25,7 +23,6 @@
     "scripts": {
         "check-strict": "yarn check-strict:desktop && yarn check-strict:shared",
         "check-strict:desktop": "cd packages/desktop && tsc --project tsconfig.strict.json --pretty --noEmit",
-        "check-strict:mobile": "cd packages/mobile && tsc --project tsconfig.strict.json --pretty --noEmit",
         "check-strict:shared": "cd packages/shared && tsc --project tsconfig.json --pretty --noEmit",
         "check-types": "yarn check-types:shared && yarn check-types:desktop",
         "check-types:desktop": "cd packages/desktop && tsc --pretty --noEmit",

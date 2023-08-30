@@ -3,13 +3,14 @@ import { showAppNotification } from '@auxiliary/notification'
 import { selectedAccount, updateSelectedAccount } from '@core/account'
 import { localize } from '@core/i18n'
 import { Converter } from '@core/utils'
-import { CreateNativeTokenParams } from '@iota/wallet'
+import { CreateNativeTokenParams, PreparedTransaction } from '@iota/sdk/out/types'
 import { DEFAULT_TRANSACTION_OPTIONS } from '../constants'
 import { VerifiedStatus } from '../enums'
 import { buildPersistedAssetFromMetadata } from '../helpers'
 import { IIrc30Metadata, IPersistedAsset } from '../interfaces'
 import { resetMintTokenDetails } from '../stores'
 import { addPersistedAsset } from '../stores/persisted-assets.store'
+import { plainToInstance } from 'class-transformer'
 import { processAndAddToActivities } from '../utils'
 
 export async function createNativeToken(
@@ -22,20 +23,25 @@ export async function createNativeToken(
         const account = get(selectedAccount)
 
         const params: CreateNativeTokenParams = {
-            maximumSupply: Converter.decimalToHex(maximumSupply),
-            circulatingSupply: Converter.decimalToHex(circulatingSupply),
+            maximumSupply: BigInt(maximumSupply),
+            circulatingSupply: BigInt(circulatingSupply),
             foundryMetadata: Converter.utf8ToHex(JSON.stringify(metadata)),
         }
 
-        const createNativeTokenTransaction = await account.createNativeToken(params, DEFAULT_TRANSACTION_OPTIONS)
+        const preparedNativeTokenTransaction = await account?.prepareCreateNativeToken(
+            params,
+            DEFAULT_TRANSACTION_OPTIONS
+        )
+        const preparedTransaction = plainToInstance(PreparedTransaction, preparedNativeTokenTransaction)
+        const transaction = await preparedTransaction?.send()
         const persistedAsset: IPersistedAsset = buildPersistedAssetFromMetadata(
-            createNativeTokenTransaction.tokenId,
+            preparedNativeTokenTransaction._tokenId,
             metadata,
             { verified: true, status: VerifiedStatus.SelfVerified }
         )
         addPersistedAsset(persistedAsset)
 
-        await processAndAddToActivities(createNativeTokenTransaction.transaction, account)
+        await processAndAddToActivities(transaction, account)
 
         showAppNotification({
             type: 'success',

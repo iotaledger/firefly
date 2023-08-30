@@ -3,15 +3,9 @@
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile'
-    import {
-        OUTPUT_TYPE_TREASURY,
-        UNLOCK_CONDITION_EXPIRATION,
-        UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN,
-        UNLOCK_CONDITION_TIMELOCK,
-    } from '@core/wallet'
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
-    import type { UnlockConditionTypes } from '@iota/types'
+    import { UnlockCondition, UnlockConditionType, OutputType, CommonOutput } from '@iota/sdk/out/types'
     import { TextHintVariant } from 'shared/components/enums'
     import { BalanceSummarySection, Button, FontWeight, Text, TextType } from 'shared/components'
 
@@ -58,16 +52,18 @@
 
                 let type: string
                 let amount: number
-                if (output.type !== OUTPUT_TYPE_TREASURY) {
-                    if (containsUnlockCondition(output.unlockConditions, UNLOCK_CONDITION_EXPIRATION)) {
+                if (output.type !== OutputType.Treasury) {
+                    const commonOutput = output as CommonOutput
+                    if (containsUnlockCondition(commonOutput.unlockConditions, UnlockConditionType.Expiration)) {
                         type = PendingFundsType.Unclaimed
                         amount = Number(output.amount)
                     } else if (
-                        containsUnlockCondition(output.unlockConditions, UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN)
+                        containsUnlockCondition(commonOutput.unlockConditions, UnlockConditionType.StorageDepositReturn)
                     ) {
                         type = PendingFundsType.StorageDepositReturn
-                        amount = (await getStorageDepositFromOutput($selectedAccount, output))?.storageDeposit
-                    } else if (containsUnlockCondition(output.unlockConditions, UNLOCK_CONDITION_TIMELOCK)) {
+                        amount = (await getStorageDepositFromOutput($selectedAccount, output as CommonOutput))
+                            ?.storageDeposit
+                    } else if (containsUnlockCondition(commonOutput.unlockConditions, UnlockConditionType.Timelock)) {
                         type = PendingFundsType.Timelock
                         amount = Number(output.amount)
                     }
@@ -115,7 +111,7 @@
         return { amount: totalStorageDeposit, subBreakdown }
     }
 
-    function containsUnlockCondition(unlockConditions: UnlockConditionTypes[], unlockConditionId: number) {
+    function containsUnlockCondition(unlockConditions: UnlockCondition[], unlockConditionId: number): boolean {
         return unlockConditions.some((unlockCondition) => unlockCondition.type === unlockConditionId)
     }
 
