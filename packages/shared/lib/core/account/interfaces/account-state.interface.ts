@@ -1,4 +1,4 @@
-import { Balance } from '@iota/wallet'
+import { Balance } from '@iota/sdk/out/types'
 import { AddressWithOutputs, IAccount } from './'
 import { IPersistedAccountData } from './persisted-account-data.interface'
 

@@ -1,10 +1,9 @@
-import type { OutputData, Transaction } from '@iota/wallet'
+import type { OutputData, OutputResponse, Transaction } from '@iota/sdk/out/types'
 
 import { IAccountState } from '@core/account/interfaces'
 
 import { preprocessGroupedOutputs } from '../../utils/outputs'
 import { IProcessedTransaction } from '../../interfaces'
-import { IOutputResponse } from '@iota/types'
 
 export async function preprocessOutputsForAccount(account: IAccountState): Promise<IProcessedTransaction[]> {
     const outputs = await account.outputs()
@@ -29,7 +28,7 @@ export async function preprocessOutputsForAccount(account: IAccountState): Promi
     const processedTransactions: IProcessedTransaction[] = []
     for (const transactionId of Object.keys(groupedOutputs)) {
         try {
-            const inputs: IOutputResponse[] = incomingTransactions[transactionId]?.inputs ?? []
+            const inputs: OutputResponse[] = incomingTransactions[transactionId]?.inputs ?? []
             const processedTransaction = preprocessGroupedOutputs(groupedOutputs[transactionId], inputs, account)
 
             processedTransactions.push(processedTransaction)

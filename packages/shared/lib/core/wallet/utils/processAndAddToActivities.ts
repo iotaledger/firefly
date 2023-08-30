@@ -1,4 +1,4 @@
-import type { Transaction } from '@iota/wallet/out/types'
+import type { Transaction } from '@iota/sdk/out/types'
 
 import type { IAccountState } from '@core/account/interfaces'
 import { addActivitiesToAccountActivitiesInAllAccountActivities } from '../stores'

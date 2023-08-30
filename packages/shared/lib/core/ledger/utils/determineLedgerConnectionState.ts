@@ -1,6 +1,6 @@
 import { LedgerConnectionState } from '../interfaces'
 import { LedgerAppName } from '../enums'
-import { LedgerNanoStatus } from '@iota/wallet'
+import { LedgerNanoStatus } from '@iota/sdk/out/types'
 
 export function determineLedgerConnectionState(
     status: LedgerNanoStatus,

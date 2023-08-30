@@ -1,4 +1,4 @@
-import { SyncOptions } from '@iota/wallet'
+import { SyncOptions } from '@iota/sdk/out/types'
 import { get } from 'svelte/store'
 import { profileManager } from '../stores'
 
