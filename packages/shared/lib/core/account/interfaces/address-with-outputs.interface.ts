@@ -1,4 +1,4 @@
-import { OutputData } from '@iota/wallet'
+import { OutputData } from '@iota/sdk/out/types'
 
 export interface AddressWithOutputs {
     address: string

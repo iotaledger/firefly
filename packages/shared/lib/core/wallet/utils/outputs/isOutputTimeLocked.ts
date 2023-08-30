@@ -1,10 +1,10 @@
-import { OUTPUT_TYPE_TREASURY, Output, getTimelockDateFromOutput } from '@core/wallet'
-import { OutputData } from '@iota/wallet'
+import { getTimelockDateFromOutput } from '@core/wallet'
+import { CommonOutput, OutputData, OutputType } from '@iota/sdk/out/types'
 
 export function isOutputTimeLocked(outputData: OutputData): boolean {
     const output = outputData.output
-    if (output.type !== OUTPUT_TYPE_TREASURY) {
-        const unlockTime = getTimelockDateFromOutput(output as Output)
+    if (output.type !== OutputType.Treasury) {
+        const unlockTime = getTimelockDateFromOutput(output as CommonOutput)
         return unlockTime !== undefined && unlockTime.getTime() > Date.now()
     }
     return false

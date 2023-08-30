@@ -1,6 +1,6 @@
 import { isVestingOutput } from '@core/wallet'
-import { OutputData } from '@iota/wallet'
 import { derived, Readable } from 'svelte/store'
+import { OutputData } from '@iota/sdk/out/types'
 import { selectedAccount } from '.'
 
 export const selectedAccountVestingOutputs: Readable<OutputData[] | undefined> = derived(
