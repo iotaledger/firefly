@@ -233,7 +233,7 @@
             </Button>
         {/if}
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {true && 'bg-pastel-yellow dark:bg-gray-900'}">
+    <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-yellow dark:bg-gray-900">
         <Animation animation={AnimationEnum.ImportDesktop} />
     </div>
 </OnboardingLayout>

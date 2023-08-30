@@ -28,9 +28,6 @@ If editing files that are imported within `packages/desktop`, then it will be ne
 - `shared/lib/core/shell/*.ts`
 - `shared/lib/core/validation/*.ts`
 
-### Mobile
-
-_TBD_
 
 ## Common Processes
 

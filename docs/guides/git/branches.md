@@ -11,5 +11,4 @@ Branch names __must__ follow a certain structure, which is `branch-prefix/branch
 The Firefly team develops code and pushes PRs on certain protected branches. The following three branches are protected:
 
 - `main`: contains the code for Firefly Desktop v1.
-- `main-mobile`: contains the code for Firefly Mobile v1.
-- `develop`: contains the code for Firefly Shimmer Desktop & Firefly Shimmer Mobile
+- `develop`: contains the code for Firefly Shimmer Desktop

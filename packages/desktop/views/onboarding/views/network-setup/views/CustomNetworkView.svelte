@@ -6,7 +6,6 @@
         initialiseProfileManagerFromOnboardingProfile,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
-    import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import {
         INode,
@@ -120,7 +119,7 @@
             {localize('actions.continue')}
         </Button>
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-yellow dark:bg-gray-900'}">
+    <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-yellow dark:bg-gray-900">
         <Animation animation={AnimationEnum.OnboardingCustomNetworkDesktop} />
     </div>
 </OnboardingLayout>

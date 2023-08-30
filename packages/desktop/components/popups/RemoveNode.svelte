@@ -19,7 +19,7 @@
 <div class="w-full h-full mb-7">
     <Text>{localize(`popups.node.remove${removeAll ? 'All' : ''}Confirmation`)}</Text>
 </div>
-<div class="flex flex-row justify-between space-x-4 w-full md:px-8">
+<div class="flex flex-row justify-between space-x-4 w-full px-8">
     <Button outline classes="w-1/2" onClick={closePopup}>{localize('actions.no')}</Button>
     <Button classes="w-1/2" onClick={onRemoveCustomNodeClick}>{localize('actions.yes')}</Button>
 </div>
