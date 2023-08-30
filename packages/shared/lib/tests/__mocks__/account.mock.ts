@@ -1,20 +1,13 @@
-import type { IAliasOutput, IBasicOutput, IFoundryOutput, INftOutput, OutputTypes } from '@iota/types'
 import {
     Balance,
     AccountMetadata,
-    Address,
     SendNativeTokensParams,
     SendNftParams,
     SendParams,
     AliasOutputParams,
-    BuildAliasOutputData,
-    BuildBasicOutputData,
-    BuildFoundryOutputData,
-    BuildNftOutputData,
     ConsolidationParams,
     FilterOptions,
-    CreateNativeTokenTransaction,
-    Node,
+    INode,
     OutputData,
     OutputParams,
     OutputsToClaim,
@@ -23,17 +16,18 @@ import {
     ParticipationEventType,
     ParticipationEventWithNodes,
     ParticipationOverview,
+    PreparedTransaction,
     PreparedTransactionData,
     SignedTransactionEssence,
     Transaction,
     TransactionOptions,
-    Secp256k1EcdsaSignature,
-    GenerateAddressOptions,
-    GenerateAddressesOptions,
     SyncOptions,
-    Ed25519Signature,
-    CreateNativeTokenParams,
-} from '@iota/wallet'
+    FoundryOutput,
+    Output,
+    AccountAddress,
+    PreparedCreateNativeTokenTransaction,
+    Burn,
+} from '@iota/sdk/out/types'
 
 import { IAccount } from '../../core/account'
 
@@ -51,35 +45,23 @@ export class AccountMock implements IAccount {
         return Promise.resolve([])
     }
 
-    buildAliasOutput(data: BuildAliasOutputData): Promise<IAliasOutput> {
-        throw new Error('Method not implemented.')
-    }
-
-    buildBasicOutput(data: BuildBasicOutputData): Promise<IBasicOutput> {
-        throw new Error('Method not implemented.')
-    }
-
-    buildFoundryOutput(data: BuildFoundryOutputData): Promise<IFoundryOutput> {
-        throw new Error('Method not implemented.')
-    }
-
-    buildNftOutput(data: BuildNftOutputData): Promise<INftOutput> {
-        throw new Error('Method not implemented.')
-    }
-
-    burnNativeToken(
+    prepareBurnNativeToken(
         tokenId: string,
         burnAmount: string,
         transactionOptions?: TransactionOptions
-    ): Promise<Transaction> {
+    ): Promise<PreparedTransaction> {
         throw new Error('Method not implemented.')
     }
 
-    burnNft(nftId: string, transactionOptions?: TransactionOptions): Promise<Transaction> {
+    prepareBurn(burn: Burn, transactionOptions?: TransactionOptions): Promise<PreparedTransaction> {
         throw new Error('Method not implemented.')
     }
 
-    consolidateOutputs(params: ConsolidationParams): Promise<Transaction> {
+    prepareBurnNft(nftId: string, transactionOptions?: TransactionOptions): Promise<PreparedTransaction> {
+        throw new Error('Method not implemented.')
+    }
+
+    prepareConsolidateOutputs(params: ConsolidationParams): Promise<PreparedTransaction> {
         throw new Error('Method not implemented.')
     }
 
@@ -87,11 +69,14 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    createAliasOutput(params?: AliasOutputParams, transactionOptions?: TransactionOptions): Promise<Transaction> {
+    prepareCreateAliasOutput(
+        params?: AliasOutputParams,
+        transactionOptions?: TransactionOptions
+    ): Promise<PreparedTransaction> {
         throw new Error('Method not implemented.')
     }
 
-    meltNativeToken(
+    prepareMeltNativeToken(
         tokenId: string,
         meltAmount: string,
         transactionOptions?: TransactionOptions
@@ -99,7 +84,7 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    decreaseVotingPower(amount: string): Promise<Transaction> {
+    prepareDecreaseVotingPower(amount: string): Promise<PreparedTransaction> {
         throw new Error('Method not implemented.')
     }
 
@@ -107,22 +92,11 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    destroyAlias(aliasId: string, transactionOptions?: TransactionOptions): Promise<Transaction> {
+    prepareDestroyAlias(aliasId: string, transactionOptions?: TransactionOptions): Promise<PreparedTransaction> {
         throw new Error('Method not implemented.')
     }
 
-    destroyFoundry(foundryId: string, transactionOptions?: TransactionOptions): Promise<Transaction> {
-        throw new Error('Method not implemented.')
-    }
-
-    generateEvmAddresses(generateAddressesOptions: GenerateAddressesOptions): Promise<string[]> {
-        throw new Error('Method not implemented.')
-    }
-
-    createNativeToken(
-        params: CreateNativeTokenParams,
-        transactionOptions?: TransactionOptions
-    ): Promise<CreateNativeTokenTransaction> {
+    prepareDestroyFoundry(foundryId: string, transactionOptions?: TransactionOptions): Promise<PreparedTransaction> {
         throw new Error('Method not implemented.')
     }
 
@@ -134,7 +108,7 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    getFoundryOutput(tokenId: string): Promise<IFoundryOutput> {
+    getFoundryOutput(tokenId: string): Promise<FoundryOutput> {
         throw new Error('Method not implemented.')
     }
 
@@ -185,7 +159,7 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    getParticipationEventIds(node: Node, eventType?: ParticipationEventType): Promise<string[]> {
+    getParticipationEventIds(node: INode, eventType?: ParticipationEventType): Promise<string[]> {
         throw new Error('Method not implemented.')
     }
 
@@ -205,51 +179,47 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    mintNativeToken(
+    prepareMintNativeToken(
         tokenId: string,
         mintAmount: string,
         transactionOptions?: TransactionOptions
-    ): Promise<CreateNativeTokenTransaction> {
+    ): Promise<PreparedTransaction> {
         throw new Error('Method not implemented.')
     }
 
-    increaseVotingPower(amount: string): Promise<Transaction> {
+    prepareIncreaseVotingPower(amount: string): Promise<PreparedTransaction> {
         throw new Error('Method not implemented.')
     }
 
-    minimumRequiredStorageDeposit(output: OutputTypes): Promise<string> {
-        throw new Error('Method not implemented.')
-    }
-
-    outputs(filterOptions?: FilterOptions): Promise<[]> {
+    outputs(filterOptions?: FilterOptions): Promise<OutputData[]> {
         return Promise.resolve([])
     }
 
-    pendingTransactions(): Promise<[]> {
+    pendingTransactions(): Promise<Transaction[]> {
         return Promise.resolve([])
     }
 
-    prepareSend(params: SendParams[], options?: TransactionOptions): Promise<PreparedTransactionData> {
+    prepareSend(params: SendParams[], options?: TransactionOptions): Promise<PreparedTransaction> {
         throw new Error('Method not implemented.')
     }
 
-    prepareTransaction(outputs: OutputTypes[], options?: TransactionOptions): Promise<PreparedTransactionData> {
+    prepareTransaction(outputs: Output[], options?: TransactionOptions): Promise<PreparedTransaction> {
         throw new Error('Method not implemented.')
     }
 
-    generateEd25519Address(options?: GenerateAddressOptions): Promise<Address> {
-        return Promise.resolve(MOCK_ADDRESS)
-    }
-
-    generateEd25519Addresses(amount: number, options?: GenerateAddressOptions): Promise<Address[]> {
+    generateEd25519Addresses(): Promise<AccountAddress[]> {
         return Promise.resolve([MOCK_ADDRESS])
     }
 
-    mintNfts(params, transferOptions): Promise<Transaction> {
+    prepareCreateNativeToken(params, transferOptions): Promise<PreparedCreateNativeTokenTransaction> {
         throw new Error('Method not implemented.')
     }
 
-    prepareOutput(options: OutputParams, transactionOptions?: TransactionOptions): Promise<OutputTypes> {
+    prepareMintNfts(params, transferOptions): Promise<PreparedTransaction> {
+        throw new Error('Method not implemented.')
+    }
+
+    prepareOutput(options: OutputParams, transactionOptions?: TransactionOptions): Promise<Output> {
         throw new Error('Method not implemented.')
     }
 
@@ -263,15 +233,7 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    retryTransactionUntilIncluded(
-        transactionId: string,
-        interval?: number,
-        maxAttempts?: number
-    ): Promise<PreparedTransactionData> {
-        throw new Error('Method not implemented.')
-    }
-
-    requestFundsFromFaucet(url: string, address: string): Promise<string> {
+    retryTransactionUntilIncluded(transactionId: string, interval?: number, maxAttempts?: number): Promise<string> {
         throw new Error('Method not implemented.')
     }
 
@@ -279,19 +241,26 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    send(params: SendParams[], transactionOptions?: TransactionOptions): Promise<Transaction> {
+    send(amount: bigint | string, address: string, transactionOptions?: TransactionOptions): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
 
-    sendNativeTokens(params: SendNativeTokensParams[], transactionOptions?: TransactionOptions): Promise<Transaction> {
+    sendWithParams(params: SendParams[], options?: TransactionOptions): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
 
-    sendNft(params: SendNftParams[], transactionOptions?: TransactionOptions): Promise<Transaction> {
+    prepareSendNativeTokens(
+        params: SendNativeTokensParams[],
+        transactionOptions?: TransactionOptions
+    ): Promise<PreparedTransaction> {
         throw new Error('Method not implemented.')
     }
 
-    sendOutputs(outputs: OutputTypes[], transactionOptions?: TransactionOptions): Promise<Transaction> {
+    prepareSendNft(params: SendNftParams[], transactionOptions?: TransactionOptions): Promise<PreparedTransaction> {
+        throw new Error('Method not implemented.')
+    }
+
+    sendOutputs(outputs: Output[], transactionOptions?: TransactionOptions): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
 
@@ -299,15 +268,15 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    signSecp256k1Ecdsa(message: string, chain: number[]): Promise<Secp256k1EcdsaSignature> {
-        throw new Error('Method not implemented.')
-    }
-
     signTransactionEssence(preparedTransactionData: PreparedTransactionData): Promise<SignedTransactionEssence> {
         throw new Error('Method not implemented.')
     }
 
-    stopParticipating(eventId: string): Promise<Transaction> {
+    prepareStopParticipating(eventId: string): Promise<PreparedTransaction> {
+        throw new Error('Method not implemented.')
+    }
+
+    signAndSubmitTransaction(preparedTransactionData: PreparedTransactionData): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
 
@@ -327,15 +296,7 @@ export class AccountMock implements IAccount {
         return Promise.resolve([])
     }
 
-    verifyEd25519Signature(signature: Ed25519Signature, message: string): Promise<boolean> {
-        throw new Error('Method not implemented.')
-    }
-
-    verifySecp256k1EcdsaSignature(signature: Secp256k1EcdsaSignature, message: string): Promise<boolean> {
-        throw new Error('Method not implemented.')
-    }
-
-    vote(eventId?: string, answers?: number[]): Promise<Transaction> {
+    prepareVote(eventId?: string, answers?: number[]): Promise<PreparedTransaction> {
         throw new Error('Method not implemented.')
     }
 }

@@ -1,11 +1,15 @@
-import { OUTPUT_TYPE_FOUNDRY } from '@core/wallet/constants'
-import { Output } from '@core/wallet/types'
-import type { INativeToken } from '@iota/types'
 import { buildFoundryId } from './getFoundryId'
+import type { CommonOutput, FoundryOutput, INativeToken, SimpleTokenScheme } from '@iota/sdk/out/types'
+import { OutputType } from '@iota/sdk/out/types'
 
-export function getNativeTokenFromOutput(output: Output): INativeToken {
-    if (output?.type === OUTPUT_TYPE_FOUNDRY) {
-        return { id: buildFoundryId(output), amount: output.tokenScheme.mintedTokens }
+export async function getNativeTokenFromOutput(output: CommonOutput): Promise<INativeToken | undefined> {
+    if (output?.type === OutputType.Foundry) {
+        const foundryOutput = output as FoundryOutput
+        return {
+            id: await buildFoundryId(foundryOutput),
+            amount: (foundryOutput.tokenScheme as SimpleTokenScheme).mintedTokens,
+        }
     }
+
     return output?.nativeTokens?.[0]
 }

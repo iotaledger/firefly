@@ -1,7 +1,5 @@
-import { get } from 'svelte/store'
-import { profileManager } from '../stores'
+import { api } from '../api'
 
 export function generateMnemonic(): Promise<string> {
-    const manager = get(profileManager)
-    return manager.generateMnemonic()
+    return api.generateMnemonic()
 }

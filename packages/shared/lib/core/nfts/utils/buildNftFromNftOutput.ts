@@ -6,24 +6,23 @@ import {
     getNftId,
 } from '@core/wallet/utils'
 import { IWrappedOutput } from '@core/wallet/interfaces'
-import type { INftOutput } from '@iota/types'
 import { get } from 'svelte/store'
 import { DEFAULT_NFT_NAME } from '../constants'
 import { INft } from '../interfaces'
 import { parseNftMetadata } from './parseNftMetadata'
 import { composeUrlFromNftUri } from './composeUrlFromNftUri'
 import { getSpendableStatusFromUnspentNftOutput } from './getSpendableStatusFromUnspentNftOutput'
-import { ADDRESS_TYPE_NFT } from '@core/wallet/constants'
+import { Address, AddressType, NftOutput } from '@iota/sdk/out/types'
 
 export function buildNftFromNftOutput(
     wrappedOutput: IWrappedOutput,
     accountAddress: string,
     calculateStatus: boolean = true
 ): INft {
-    const nftOutput = wrappedOutput.output as INftOutput
+    const nftOutput = wrappedOutput.output as NftOutput
 
     let isSpendable = false
-    let timeLockTime = undefined
+    let timeLockTime: number | undefined = undefined
 
     if (calculateStatus) {
         const status = getSpendableStatusFromUnspentNftOutput(accountAddress, nftOutput)
@@ -32,7 +31,7 @@ export function buildNftFromNftOutput(
     }
 
     const id = getNftId(nftOutput.nftId, wrappedOutput.outputId)
-    const address = getBech32AddressFromAddressTypes({ type: ADDRESS_TYPE_NFT, nftId: id })
+    const address = getBech32AddressFromAddressTypes({ type: AddressType.Nft, nftId: id } as unknown as Address)
     const issuer = getIssuerFromNftOutput(nftOutput)
     const metadata = getMetadataFromNftOutput(nftOutput)
     const parsedMetadata = parseNftMetadata(metadata)

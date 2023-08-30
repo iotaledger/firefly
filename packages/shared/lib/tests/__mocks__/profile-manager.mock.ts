@@ -4,19 +4,16 @@ import type {
     AccountId,
     CreateAccountPayload,
     SyncOptions,
-    ClientOptions,
+    IClientOptions,
     WalletEvent,
     LedgerNanoStatus,
     GenerateAddressOptions,
-} from '@iota/wallet'
-import { WalletEventType } from '@iota/wallet/out/types'
+    WalletEventType,
+} from '@iota/sdk/out/types'
 
 import { IAccount } from '@core/account'
 import { IAuth, INodeInfoResponse } from '@core/network'
 import { IProfileManager, WalletApiEventHandler } from '@core/profile-manager'
-
-export const MOCK_MNEMONIC =
-    'term aisle loyal cradle talent buddy crater express asthma load antique game better head position master aspect print more wine sword speed joy story'
 
 export class ProfileManagerMock implements IProfileManager {
     id: string
@@ -55,10 +52,6 @@ export class ProfileManagerMock implements IProfileManager {
 
     emitTestEvent(event: WalletEvent): Promise<void> {
         throw new Error('Method not implemented.')
-    }
-
-    generateMnemonic(): Promise<string> {
-        return Promise.resolve(MOCK_MNEMONIC)
     }
 
     generateEd25519Address(
@@ -179,7 +172,7 @@ export class ProfileManagerMock implements IProfileManager {
         return Promise.resolve()
     }
 
-    setClientOptions(options: ClientOptions): Promise<void> {
+    setClientOptions(options: IClientOptions): Promise<void> {
         return Promise.resolve()
     }
 
@@ -200,10 +193,6 @@ export class ProfileManagerMock implements IProfileManager {
     }
 
     storeMnemonic(mnemonic: string): Promise<void> {
-        return Promise.resolve()
-    }
-
-    verifyMnemonic(mnemonic: string): Promise<void> {
         return Promise.resolve()
     }
 

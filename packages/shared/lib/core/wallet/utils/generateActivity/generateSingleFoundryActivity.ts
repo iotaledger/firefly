@@ -1,11 +1,10 @@
 import { IAccountState } from '@core/account'
-import { getCoinType } from '@core/profile'
-import { ADDRESS_TYPE_ALIAS, UNLOCK_CONDITION_IMMUTABLE_ALIAS } from '@core/wallet/constants'
+import { getCoinType, getNetworkHrp } from '@core/profile'
+import { api } from '@core/profile-manager'
 import { ActivityType } from '@core/wallet/enums'
 import { IActivityGenerationParameters } from '@core/wallet/interfaces'
 import { FoundryActivity } from '@core/wallet/types'
-import type { IAliasAddress, IFoundryOutput, IImmutableAliasUnlockCondition } from '@iota/types'
-import { convertHexAddressToBech32, getNativeTokenFromOutput } from '..'
+import { getNativeTokenFromOutput } from '..'
 import {
     getAmountFromOutput,
     getAsyncDataFromOutput,
@@ -13,6 +12,13 @@ import {
     getSendingInformation,
     getTagFromOutput,
 } from './helper'
+import {
+    AliasAddress,
+    FoundryOutput,
+    ImmutableAliasAddressUnlockCondition,
+    SimpleTokenScheme,
+    UnlockConditionType,
+} from '@iota/sdk/out/types'
 
 export async function generateSingleFoundryActivity(
     account: IAccountState,
@@ -20,22 +26,25 @@ export async function generateSingleFoundryActivity(
 ): Promise<FoundryActivity> {
     const { transactionId, claimingData, time, direction, inclusionState } = processedTransaction
 
-    const output = wrappedOutput.output as IFoundryOutput
+    const output = wrappedOutput.output as FoundryOutput
     const outputId = wrappedOutput.outputId
-    const { mintedTokens, meltedTokens, maximumSupply } = output.tokenScheme
+    const tokenScheme = output.tokenScheme as SimpleTokenScheme
+    const mintedTokens = tokenScheme.mintedTokens.toString()
+    const meltedTokens = tokenScheme.meltedTokens.toString()
+    const maximumSupply = tokenScheme.maximumSupply.toString()
 
     const addressUnlockCondition = output.unlockConditions.find(
-        (unlockCondition) => unlockCondition.type === UNLOCK_CONDITION_IMMUTABLE_ALIAS
-    ) as IImmutableAliasUnlockCondition
-    const aliasId = (addressUnlockCondition?.address as IAliasAddress)?.aliasId
-    const aliasAddress = aliasId ? convertHexAddressToBech32(ADDRESS_TYPE_ALIAS, aliasId) : undefined
+        (unlockCondition) => unlockCondition.type === UnlockConditionType.ImmutableAliasAddress
+    ) as ImmutableAliasAddressUnlockCondition
+    const aliasId = (addressUnlockCondition?.address as AliasAddress)?.aliasId
+    const aliasAddress = aliasId ? api.aliasIdToBech32(aliasId, getNetworkHrp()) : undefined
 
     const isHidden = false
     const isAssetHidden = false
     const containsValue = true
 
     const id = outputId || transactionId
-    const nativeToken = getNativeTokenFromOutput(output)
+    const nativeToken = await getNativeTokenFromOutput(output)
     const assetId = nativeToken?.id ?? getCoinType()
 
     const storageDeposit = getAmountFromOutput(output)
