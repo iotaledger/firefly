@@ -1,5 +1,5 @@
 import { get } from 'svelte/store'
-import { WalletEventType } from '@iota/wallet/out/types'
+import { WalletEventType } from '@iota/sdk/out/types'
 
 import { handleTransactionProgressEvent, subscribeToWalletApiEvents, WalletApiEventMap } from '@core/profile-manager'
 

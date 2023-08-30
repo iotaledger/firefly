@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { VotingEventPayload, ParticipationEventType, TrackedParticipationOverview } from '@iota/wallet/out/types'
+    import { VotingEventPayload, ParticipationEventType, TrackedParticipationOverview } from '@iota/sdk/out/types'
 
     import { onMount, onDestroy } from 'svelte'
 

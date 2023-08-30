@@ -24,7 +24,8 @@
     import { sendOutput } from '@core/wallet/actions'
     import { DEFAULT_TRANSACTION_OPTIONS } from '@core/wallet/constants'
     import { getOutputParameters, validateSendConfirmation, getAddressFromSubject } from '@core/wallet/utils'
-    import { Activity, NewTokenTransactionDetails, Output } from '@core/wallet/types'
+    import { Activity, NewTokenTransactionDetails } from '@core/wallet/types'
+    import { CommonOutput, Output } from '@iota/sdk/out/types'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { ledgerPreparedOutput } from '@core/ledger'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
@@ -145,7 +146,7 @@
 
     async function updateStorageDeposit(): Promise<void> {
         const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
-            await getStorageDepositFromOutput($selectedAccount, preparedOutput)
+            await getStorageDepositFromOutput($selectedAccount, preparedOutput as CommonOutput)
         storageDeposit = minimumStorageDeposit = _storageDeposit > 0 ? _storageDeposit : _giftedStorageDeposit
         if (isBaseTokenTransfer) {
             const rawAmount = Number((transactionDetails as NewTokenTransactionDetails).rawAmount)
@@ -166,7 +167,7 @@
 
     async function onConfirmClick(): Promise<void> {
         try {
-            await validateSendConfirmation($selectedAccount, preparedOutput)
+            await validateSendConfirmation($selectedAccount, preparedOutput as CommonOutput)
 
             if ($isActiveLedgerProfile) {
                 ledgerPreparedOutput.set(preparedOutput)

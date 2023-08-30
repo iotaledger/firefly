@@ -16,7 +16,7 @@
     export let tooltipText: string = ''
     export let shrink: boolean = false
     export let isPreText: boolean = false
-    export let maxHeight: number = undefined
+    export let maxHeight: number | undefined = undefined
     export let isLoading: boolean = false
     export let outline: boolean = false
 

@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { Text, CopyableBox, FontWeight } from 'shared/components'
+    import { Text, CopyableBox, FontWeight, TextType } from 'shared/components'
 
-    export let address = ''
-    export let isCopyable = false
-    export let fontSize = 'base'
+    export let address: string = ''
+    export let isCopyable: boolean = false
+    export let fontSize: string = 'base'
 
     let copyableBoxElement: CopyableBox
 
@@ -15,14 +15,14 @@
 {#if address}
     <CopyableBox bind:this={copyableBoxElement} col {isCopyable} value={address} clearBoxPadding {...$$restProps}>
         {#if address.length > 20}
-            <Text type="pre" {fontSize} fontWeight={FontWeight.medium}>
+            <Text type={TextType.pre} {fontSize} fontWeight={FontWeight.medium}>
                 {address.slice(0, address.length / 2)}
             </Text>
-            <Text type="pre" {fontSize} fontWeight={FontWeight.medium}>
+            <Text type={TextType.pre} {fontSize} fontWeight={FontWeight.medium}>
                 {address.slice(address.length / 2)}
             </Text>
         {:else}
-            <Text type="pre" {fontSize} fontWeight={FontWeight.medium}>
+            <Text type={TextType.pre} {fontSize} fontWeight={FontWeight.medium}>
                 {address}
             </Text>
         {/if}

@@ -6,6 +6,7 @@
 import './__mocks__/api.mock'
 import './__mocks__/match-media.mock'
 import './__mocks__/platform.mock'
+import 'reflect-metadata'
 
 beforeAll(async () => {})
 afterAll(async () => {})

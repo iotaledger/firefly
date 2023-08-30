@@ -1,6 +1,5 @@
 import { getAccount } from '@core/profile-manager'
-import { Output } from '@core/wallet'
-import { OutputParams, TransactionOptions } from '@iota/wallet'
+import { Output, OutputParams, TransactionOptions } from '@iota/sdk/out/types'
 
 export async function prepareOutput(
     accountIndex: number,
