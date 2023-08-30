@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/firefly">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.2.0.746615995176">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.2.0.746698954161">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.2.0">
@@ -32,11 +32,11 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("/firefly/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../static/icon_firefly.png" rel="icon">
-    <link href="../../../resources/css/retype.css?v=3.2.0.746615995176" rel="stylesheet">
+    <link href="../../../resources/css/retype.css?v=3.2.0.746698954161" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../../resources/js/config.js?v=3.2.0.746615995176" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/config.js?v=3.2.0.746698954161" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../../resources/js/retype.js?v=3.2.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=3.2.0.746615995176" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=3.2.0.746698954161" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -332,7 +332,6 @@
 <li><doc-anchor-trigger to="#regular-releases">Regular Releases</doc-anchor-trigger></li>
 <li><doc-anchor-trigger to="#milestone-releases">Milestone Releases</doc-anchor-trigger></li>
 <li><doc-anchor-trigger to="#hotfix-releases">Hotfix Releases</doc-anchor-trigger></li>
-<li><doc-anchor-trigger to="#iotawallet-npm-release">@iota/wallet (NPM) release</doc-anchor-trigger></li>
 </ul>
 <doc-anchor-target id="external-references">
     <h2>
@@ -680,33 +679,6 @@
 <li>Do <strong>not</strong> use squash and merge at this point as we will loose the commit history used for the changelog</li>
 <li>Do <strong>not</strong> delete the release branch, as it will be used as the base for hotfixes in the future</li>
 </ul>
-<doc-anchor-target id="iotawallet-npm-release">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#iotawallet-npm-release">#</doc-anchor-trigger>
-        <span>@iota/wallet (NPM) Release</span>
-    </h2>
-</doc-anchor-target>
-<p>The Firefly team is partly responsible for the npm package release of the <a href="https://github.com/iotaledger/wallet.rs/tree/production/bindings/nodejs">wallet.rs bindings</a>. The package serves
-as the backend of the application. The following steps describe the release process of the wallet.rs bindings.</p>
-<doc-anchor-target id="1-opening-changelog-pr">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#1-opening-changelog-pr">#</doc-anchor-trigger>
-        <span>1. Opening changelog PR</span>
-    </h3>
-</doc-anchor-target>
-<p>To trigger the release process, you add a markdown file describing the type of release (major/minor/patch) together with a description of what changed.
-The GitHub action expects the file to be under <code v-pre>wallet.rs/.changes</code>. More information can be found <a href="https://github.com/iotaledger/wallet.rs/tree/production/.changes#readme">here</a>.</p>
-<p><a href="https://github.com/iotaledger/wallet.rs/pull/1212">Here</a> is an example PR.</p>
-<p>The merge of this PR triggers the action described in the following step.</p>
-<doc-anchor-target id="2-merge-the-release-pr">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#2-merge-the-release-pr">#</doc-anchor-trigger>
-        <span>2. Merge the release PR</span>
-    </h3>
-</doc-anchor-target>
-<p>Upon merging the PR from the previous step, GitHub actions automatically opens a new PR. This PR deletes the previously added .md file and updates
-the package.json file and appends the changelog message to the changelog file. Merging this PR triggers the automatic release of the npm package.</p>
-<p><a href="https://github.com/iotaledger/wallet.rs/pull/1216">Here</a> is an example PR.</p>
 
                                 
                                 <!-- Required only on API pages -->
