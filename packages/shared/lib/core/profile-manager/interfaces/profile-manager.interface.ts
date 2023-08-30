@@ -1,12 +1,12 @@
 import type {
-    ClientOptions,
+    IClientOptions,
     GenerateAddressOptions,
     LedgerNanoStatus,
-    NodeInfoWrapper,
+    INodeInfoWrapper,
     SyncOptions,
     WalletEvent,
-} from '@iota/wallet'
-import { WalletEventType } from '@iota/wallet/out/types'
+    WalletEventType,
+} from '@iota/sdk/out/types'
 
 import { IAccount } from '@core/account/interfaces'
 import { IAuth } from '@core/network/interfaces'
@@ -27,11 +27,10 @@ export interface IProfileManager {
         options?: GenerateAddressOptions,
         bech32Hrp?: string
     ): Promise<string>
-    generateMnemonic(): Promise<string>
     getAccountIndexes(): Promise<number[]>
     getAccount(accountIndex: number): Promise<IAccount>
     getAccounts(): Promise<IAccount[]>
-    getNodeInfo(url?: string, auth?: IAuth): Promise<NodeInfoWrapper>
+    getNodeInfo(url?: string, auth?: IAuth): Promise<INodeInfoWrapper>
     getLedgerNanoStatus(): Promise<LedgerNanoStatus>
     hexToBech32(hex: string, bech32Hrp?: string): Promise<string>
     isStrongholdPasswordAvailable(): Promise<boolean>
@@ -44,12 +43,11 @@ export interface IProfileManager {
         ignoreIfCoinTypeMismatch: boolean,
         ignoreIfBech32Mismatch: string
     ): Promise<void>
-    setClientOptions(options: ClientOptions): Promise<void>
+    setClientOptions(options: IClientOptions): Promise<void>
     setStrongholdPassword(password: string): Promise<void>
     setStrongholdPasswordClearInterval(intervalInMilliseconds?: number): Promise<void>
     startBackgroundSync(options?: SyncOptions, intervalInMilliseconds?: number): Promise<void>
     stopBackgroundSync(): Promise<void>
     storeMnemonic(mnemonic: string): Promise<void>
-    verifyMnemonic(mnemonic: string): Promise<void>
     updateNodeAuth(url: string, auth?: IAuth): Promise<void>
 }

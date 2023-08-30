@@ -11,6 +11,6 @@ export async function destroyProfileManager(
     if (!manager) return
 
     _profileManager.set(null)
-    api.deleteAccountManager(manager?.id)
+    api.deleteWallet(manager?.id)
     await manager.destroy()
 }

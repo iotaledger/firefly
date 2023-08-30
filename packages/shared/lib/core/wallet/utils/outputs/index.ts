@@ -1,3 +1,4 @@
+export * from './computeOutputId'
 export * from './getExpirationDateFromOutput'
 export * from './getFormattedAmountFromActivity'
 export * from './getFormattedVotingPowerFromGovernanceActivity'
