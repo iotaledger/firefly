@@ -59,8 +59,8 @@
                 <Icon icon={style?.icon} />
             {/if}
         </div>
-        <div class="flex flex-auto flex-col px-4">
-            <span class="flex text-12 text-{style?.messageColor}">{toast.message}</span>
+        <div class="w-full flex flex-auto flex-col px-4">
+            <p class="text-12 text-{style?.messageColor} break-words">{toast.message}</p>
             {#if toast.progress !== undefined}
                 <span class="block bg-{style?.subMessageColor}" style={'width:100%;height:2px;margin:4px 0'}>
                     <span class="block bg-{style?.messageColor}" style={`width:${toast.progress}%;height:2px`} />
