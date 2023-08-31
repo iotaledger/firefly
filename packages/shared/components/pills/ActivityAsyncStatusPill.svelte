@@ -5,26 +5,29 @@
 
     export let asyncStatus: ActivityAsyncStatus
 
-    let backgroundColor = 'bg-gray-200 dark:bg-gray-300'
+    let backgroundColor = 'gray-200'
+    let darkBackgroundColor = 'gray-300'
     const textColor = 'gray-800'
-
     $: {
         switch (asyncStatus) {
             case ActivityAsyncStatus.Unclaimed:
-                backgroundColor = 'bg-purple-200 dark:bg-purple-200'
+                backgroundColor = 'purple-200'
+                darkBackgroundColor = 'purple-200'
                 break
             case ActivityAsyncStatus.Claimed:
-                backgroundColor = 'bg-blue-200 dark:bg-blue-300'
+                backgroundColor = 'blue-200'
+                darkBackgroundColor = 'blue-300'
                 break
             case ActivityAsyncStatus.Expired:
-                backgroundColor = 'bg-gray-200 dark:bg-gray-200'
+                backgroundColor = 'gray-200'
+                darkBackgroundColor = 'gray-200'
                 break
         }
     }
 </script>
 
 {#if asyncStatus}
-    <Pill {backgroundColor} {textColor}>
+    <Pill {backgroundColor} {darkBackgroundColor} {textColor}>
         {localize('pills.asyncStatus.' + asyncStatus)}
     </Pill>
 {/if}

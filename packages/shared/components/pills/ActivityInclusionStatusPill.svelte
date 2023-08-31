@@ -6,26 +6,29 @@
     export let localizationKey: string
     export let inclusionState: InclusionState
 
-    let backgroundColor = 'bg-gray-200 dark:bg-gray-300'
+    let backgroundColor = 'gray-200'
+    let darkBackgroundColor = 'gray-300'
     const textColor = 'gray-800'
-
     $: {
         switch (inclusionState) {
             case InclusionState.Pending:
-                backgroundColor = 'bg-blue-100 dark:bg-blue-100'
+                backgroundColor = 'blue-100'
+                darkBackgroundColor = 'blue-100'
                 break
             case InclusionState.Confirmed:
-                backgroundColor = 'bg-green-300 dark:bg-green-300'
+                backgroundColor = 'green-300'
+                darkBackgroundColor = 'green-300'
                 break
             case InclusionState.Conflicting:
-                backgroundColor = 'bg-red-200 dark:bg-red-200'
+                backgroundColor = 'red-200'
+                darkBackgroundColor = 'red-200'
                 break
         }
     }
 </script>
 
 {#if localizationKey && inclusionState}
-    <Pill {backgroundColor} {textColor}>
+    <Pill {backgroundColor} {darkBackgroundColor} {textColor}>
         {localize(`pills.${localizationKey}.${inclusionState}`)}
     </Pill>
 {/if}

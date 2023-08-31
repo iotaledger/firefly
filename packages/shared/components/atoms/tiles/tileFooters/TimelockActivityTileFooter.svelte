@@ -30,7 +30,7 @@
         <Text fontSize="13" color="gray-600" fontWeight={FontWeight.semibold}>{timeDiff}</Text>
     </svelte:fragment>
 
-    <Pill slot="right" backgroundColor="bg-gray-200">
+    <Pill slot="right" backgroundColor="gray-200" darkBackgroundColor="gray-200">
         {localize('pills.locked')}
     </Pill>
 </TileFooter>

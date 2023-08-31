@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Icon, Pill, PillBorderRadius } from 'shared/components'
+    import { Icon, Pill } from 'shared/components'
     import { Icon as _Icon } from '@auxiliary/icon'
     import { localize } from '@core/i18n'
     import { ProposalStatus } from '@contexts/governance/enums'
@@ -22,9 +22,9 @@
     data={localize(`pills.governance.proposalStatus.${error ? error : status}`)}
     textColor={error ? 'red-700' : 'grey-800'}
     darkTextColor={error ? 'red-700' : 'grey-800'}
-    backgroundColor={error ? 'bg-red-200' : STATUS_COLORS[status]}
-    invisible={!status}
-    borderRadius={PillBorderRadius.Full}
+    backgroundColor={error ? 'red-200' : STATUS_COLORS[status]}
+    darkBackgroundColor={error ? 'red-200' : STATUS_COLORS[status]}
+    classes="rounded-full px-2 py-1 flex items-center {status ? '' : 'invisible'}"
 >
     {#if error}
         <Icon icon={error ? _Icon.StatusError : undefined} classes="text-red-700" />

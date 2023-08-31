@@ -43,12 +43,12 @@
             <ActivityAsyncStatusPill asyncStatus={activity.asyncData.asyncStatus} />
         {/if}
         {#if isTimelocked}
-            <Pill backgroundColor="bg-gray-200">
+            <Pill backgroundColor="gray-200" darkBackgroundColor="gray-200">
                 {localize('pills.locked')}
             </Pill>
         {/if}
         {#if activity?.parsedLayer2Metadata}
-            <Pill backgroundColor="bg-blue-200">
+            <Pill backgroundColor="blue-200" darkBackgroundColor="blue-200">
                 {localize('pills.smartContract')}
             </Pill>
         {/if}

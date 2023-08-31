@@ -1,13 +1,13 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { Pill, PillBorderRadius } from 'shared/components'
+    import { Pill } from 'shared/components'
 </script>
 
 <Pill
     data={localize('general.dev')}
     textColor="gray-600"
     darkTextColor="white"
-    backgroundColor="bg-gray-100 dark:bg-opacity-20"
-    uppercase
-    rounded={PillBorderRadius.Full}
+    backgroundColor="gray-100"
+    darkBackgroundColor="gray-700"
+    classes="uppercase dark:bg-opacity-20 rounded-full px-3"
 />

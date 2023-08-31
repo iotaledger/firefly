@@ -1,34 +1,28 @@
 <script lang="ts">
-    import { Text, FontWeight, TextType, PillBorderRadius } from 'shared/components'
-
-    export let data: string | undefined = undefined
-    export let textColor: string = 'gray-800'
-    export let darkTextColor: string | undefined = undefined
-    export let shrink: boolean = false
-    export let uppercase: boolean = false
-    export let invisible: boolean = false
-    export let backgroundColor: string | undefined = undefined
-    export let borderRadius: PillBorderRadius = PillBorderRadius['2xl']
+    import { Text, FontWeight } from 'shared/components'
+    export let data: string = ''
+    export let textColor = 'gray-800'
+    export let darkTextColor: string = ''
+    export let backgroundColor: string = ''
+    export let darkBackgroundColor: string = ''
+    export let classes: string = ''
 </script>
 
-<pill-wrapper
-    class:shrink-0={shrink}
-    class:uppercase
-    class:invisible
-    class="flex items-center {backgroundColor ?? ''} {borderRadius} px-2.5 py-1"
+<Text
+    smaller
+    fontWeight={FontWeight.semibold}
+    color={textColor}
+    darkColor={darkTextColor || textColor}
+    classes="px-2.5 py-1 rounded-2xl
+        {backgroundColor ? 'bg-' + backgroundColor : ''}
+        {darkBackgroundColor ? 'dark:bg-' + darkBackgroundColor : ''}
+        {classes}
+    "
 >
-    <Text
-        type={TextType.p}
-        smaller
-        fontWeight={FontWeight.semibold}
-        color={textColor}
-        darkColor={darkTextColor || textColor}
-    >
-        {#if data}
-            <slot />
-            {data}
-        {:else}
-            <slot />
-        {/if}
-    </Text>
-</pill-wrapper>
+    {#if data}
+        <slot />
+        {data}
+    {:else}
+        <slot />
+    {/if}
+</Text>
