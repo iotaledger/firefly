@@ -244,7 +244,7 @@ type UtxoInput {
     }
     ```
 
-- User action handlers **must** start with `on` and **should** end in `Click`. They **mustn’t** end in `Click` when the user action can be triggered by pressing *enter button* as well. (Note: for mobile development purposes a touch equals a click)
+- User action handlers **must** start with `on` and **should** end in `Click`. They **mustn’t** end in `Click` when the user action can be triggered by pressing *enter button* as well.
     
     .**Bad**
     
