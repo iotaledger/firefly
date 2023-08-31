@@ -7,11 +7,11 @@
         "@iota/bundle": "^1.0.0-beta.30",
         "@iota/converter": "^1.0.0-beta.30",
         "@iota/crypto.js": "^1.8.6",
+        "@iota/sdk": "1.0.6",
         "@iota/transaction": "^1.0.0-beta.30",
         "@iota/transaction-converter": "^1.0.0-beta.30",
         "@iota/unit-converter": "^1.0.0-beta.30",
         "@iota/util.js": "^2.0.0-rc.1",
-        "@iota/sdk": "1.0.6",
         "@sveltejs/svelte-virtual-list": "^3.0.1",
         "big-integer": "^1.6.51",
         "big.js": "^6.0.3",
@@ -21,7 +21,7 @@
         "svelte": "^3.49.0",
         "svelte-i18n": "3.7.0",
         "svelte-markdown": "0.2.3",
-        "svelty-picker": "^3.5.0",
+        "svelty-picker": "^4.1.4",
         "zxcvbn": "^4.4.2"
     },
     "scripts": {

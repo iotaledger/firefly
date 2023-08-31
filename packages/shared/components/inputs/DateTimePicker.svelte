@@ -1,25 +1,25 @@
 <!-- this is a wrapper component for svelty-picker -->
 <script lang="ts">
     import SveltyPicker from 'svelty-picker'
-    import { createEventDispatcher } from 'svelte'
+    import sveltyPickerTranslations from 'svelty-picker/i18n'
+    import { ComponentProps, createEventDispatcher } from 'svelte'
     import { Tooltip, Button, ButtonSize } from 'shared/components'
     import { localize } from '@core/i18n'
-    import sveltyPickerTranslations from 'svelty-picker/i18n'
     import { appSettings } from '@core/app'
 
-    export let value: Date = undefined
-    export let startDate: Date = null
+    export let value: Date | undefined = undefined
+    export let startDate: Date | null = null
     export let mode: 'auto' | 'datetime' | 'date' | 'time' = 'auto'
 
     const dispatch = createEventDispatcher()
     const sveltyPickerStartDate = convertDateToSveltyPickerFormat(startDate)
-
-    let sveltyPickerDate = convertDateToSveltyPickerFormat(value) ?? sveltyPickerStartDate
     const translations = getSveltyPickerTranslations()
+
+    let sveltyPickerDate = value ? convertDateToSveltyPickerFormat(value) : sveltyPickerStartDate
     let tooltip: Tooltip
 
-    function convertDateToSveltyPickerFormat(date: Date): string {
-        return date?.toLocaleString('sv')
+    function convertDateToSveltyPickerFormat(date: Date | null): string | undefined {
+        return date ? date?.toLocaleString('sv') : undefined
     }
 
     function onCancelClick(): void {
@@ -27,15 +27,17 @@
     }
 
     function onConfirmClick(): void {
-        value = new Date(sveltyPickerDate)
-        dispatch('confirm')
+        if (sveltyPickerDate) {
+            value = new Date(sveltyPickerDate)
+            dispatch('confirm')
+        }
     }
 
-    function getSveltyPickerTranslations(): Record<string, unknown> {
+    function getSveltyPickerTranslations(): ComponentProps<SveltyPicker>['i18n'] {
         return sveltyPickerTranslations[getSveltyPickerLanguage($appSettings.language)] ?? sveltyPickerTranslations.en
     }
 
-    function getSveltyPickerLanguage(settingsLanguage: string): string {
+    function getSveltyPickerLanguage(settingsLanguage: string): keyof typeof sveltyPickerTranslations {
         switch (settingsLanguage) {
             case 'cs':
                 return 'cz'
@@ -70,19 +72,20 @@
 </script>
 
 <Tooltip {...$$restProps} classes="flex justify-center items-center flex-col" bind:this={tooltip}>
-    <SveltyPicker
-        pickerOnly
-        autoclose
-        {mode}
-        clearBtn={false}
-        todayBtn={false}
-        startDate={sveltyPickerStartDate}
-        i18n={translations}
-        format="yyyy-mm-dd hh:ii"
-        theme="datetime-picker-colors"
-        bind:value={sveltyPickerDate}
-        on:change={tooltip?.refreshPosition}
-    />
+    <datetime-picker-wrapper>
+        <SveltyPicker
+            pickerOnly
+            autocommit
+            {mode}
+            clearBtn={false}
+            todayBtn={false}
+            startDate={sveltyPickerStartDate}
+            i18n={translations}
+            format="yyyy-mm-dd hh:ii"
+            bind:value={sveltyPickerDate}
+            on:change={tooltip?.refreshPosition}
+        />
+    </datetime-picker-wrapper>
     <div class="flex flex-row justify-center items-center space-x-4 w-full">
         <Button size={ButtonSize.Small} outline onClick={onCancelClick} classes="w-full"
             >{localize('actions.cancel')}</Button
@@ -93,31 +96,33 @@
 
 <style lang="scss">
     @media (prefers-color-scheme: dark) {
-        :global(.datetime-picker-colors) {
-            --sdt-primary: theme('colors.blue.500');
-            --sdt-color: theme('colors.white');
-            --sdt-bg-today: var(--sdt-primary);
-            --sdt-btn-bg-hover: theme('colors.gray.800');
-            --sdt-btn-header-bg-hover: theme('colors.gray.800');
-            --sdt-clock-bg: theme('colors.gray.800');
-            --sdt-clock-bg-minute: theme('colors.gray.800');
+        :global(datetime-picker-wrapper) {
+            :global(.std-calendar-wrap) {
+                --sdt-bg-main: theme('colors.gray.900');
+                --sdt-primary: theme('colors.blue.500');
+                --sdt-header-color: theme('colors.white');
+                --sdt-btn-bg-hover: theme('colors.gray.800');
+                --sdt-btn-header-bg-hover: theme('colors.gray.800');
+                --sdt-clock-bg: theme('colors.gray.800');
+                --sdt-wrap-shadow: none;
+                --sdt-disabled-date: theme('colors.gray.500');
+                --sdt-color-selected: theme('colors.white');
+            }
         }
     }
-
     @media (prefers-color-scheme: light) {
-        :global(.datetime-picker-colors) {
-            --sdt-primary: theme('colors.blue.500');
-            --sdt-color: theme('colors.gray.600');
-            --sdt-color-selected: theme('colors.white');
-            --sdt-bg-main: none;
-            --sdt-bg-today: var(--sdt-primary);
-            --sdt-today-color: theme('colors.white');
-            --sdt-btn-bg-hover: theme('colors.gray.200');
-            --sdt-btn-header-bg-hover: theme('colors.gray.200');
-            --sdt-clock-bg: theme('colors.gray.200');
-            --sdt-clock-bg-minute: theme('colors.gray.200');
-            --sdt-clock-bg-shadow: none;
-            --sdt-shadow: none;
+        :global(datetime-picker-wrapper) {
+            :global(.std-calendar-wrap) {
+                --sdt-primary: theme('colors.blue.500');
+                --sdt-color: theme('colors.gray.600');
+                --sdt-color-selected: theme('colors.white');
+                --sdt-bg-main: none;
+                --sdt-today-color: theme('colors.white');
+                --sdt-btn-bg-hover: theme('colors.gray.200');
+                --sdt-btn-header-bg-hover: theme('colors.gray.200');
+                --sdt-clock-bg: theme('colors.gray.200');
+                --sdt-wrap-shadow: none;
+            }
         }
     }
 </style>
