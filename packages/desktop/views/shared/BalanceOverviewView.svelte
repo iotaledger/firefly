@@ -1,13 +1,14 @@
 <script lang="ts">
+    import { AnimationEnum } from '@auxiliary/animation'
+    import { Icon as IconEnum } from '@auxiliary/icon'
     import { OnboardingLayout } from '@components'
     import { localize } from '@core/i18n'
-    import { Animation, Button, HTMLButtonType, Icon, Text, TextHint, TextHintVariant, TextType, Tile } from '@ui'
-    import { completeOnboardingRouter } from '../complete-onboarding-router'
-    import { AnimationEnum } from '@auxiliary/animation'
     import VirtualList from '@sveltejs/svelte-virtual-list'
-    import { Icon as IconEnum } from '@auxiliary/icon'
+    import { Animation, Button, HTMLButtonType, Icon, Text, TextHint, TextHintVariant, TextType, Tile } from '@ui'
 
-    export let busy = false
+    export let busy: boolean = false
+    export let onContinueClick: () => void
+
     // TODO: Replace this mocked data with real one
     const DUMMY_LIST_OF_ALL_WALLETS = [
         {
@@ -24,18 +25,10 @@
         },
     ]
 
-    const totalBalance = DUMMY_LIST_OF_ALL_WALLETS.reduce((acc, curr) => acc + parseInt(curr.balance), 0)
-
-    function onBackClick(): void {
-        $completeOnboardingRouter.previous()
-    }
-
-    function onContinueClick(): void {
-        $completeOnboardingRouter.next()
-    }
+    $: totalBalance = DUMMY_LIST_OF_ALL_WALLETS.reduce((acc, curr) => acc + parseInt(curr.balance), 0)
 </script>
 
-<OnboardingLayout {onBackClick} {busy}>
+<OnboardingLayout {...$$restProps}>
     <div slot="title">
         <Text type={TextType.h2}>{localize('views.onboarding.balanceOverview.title')}</Text>
     </div>
@@ -62,7 +55,7 @@
                 icon={IconEnum.Exclamation}
                 text={localize('popups.walletFinder.searchAgainHint')}
             />
-            <Button type={HTMLButtonType.Button} on:click={() => $completeOnboardingRouter.next()}>
+            <Button type={HTMLButtonType.Button} on:click={onContinueClick}>
                 {localize('actions.searchAgain')}
             </Button>
         </div>
