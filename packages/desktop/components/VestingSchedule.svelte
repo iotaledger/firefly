@@ -1,6 +1,6 @@
 <script lang="ts">
     import { IVestingPayout, VestingOutputStatus } from '@contexts/vesting'
-    import { formatDate, localize } from '@core/i18n'
+    import { getFormattedTimeStamp, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import { formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
     import { Pill, Text, TextType, Tooltip } from '@ui'
@@ -13,7 +13,6 @@
     $: columnsAmount = calculateOptimalColumns(payouts.length)
     $: remainingSpaces = calculateRemainingGridSpaces(payouts.length, columnsAmount)
     $: baseCoin = ($selectedAccountAssets?.[$activeProfile?.network?.id] ?? {}).baseCoin
-    $: unlockDate = formatDate(hoveredPayout?.unlockTime, { format: 'short' })
 
     const MAX_GRID_COLUMNS = 14
 
@@ -76,14 +75,16 @@
                 >{localize(`pills.vesting.${hoveredPayout.status}`)}</Pill
             >
         </div>
-        <div class="w-full flex flex-row justify-between mt-8">
+        <div class="w-full flex flex-col justify-between space-y-1 mt-2">
             <div class="text-left">
+                <Text color="gray-600" darkColor="gray-500">{localize('views.vesting.airdrops.tooltip.amount')}</Text>
                 <Text bold>{formatCoinAmount(hoveredPayout.amount)}</Text>
-                <Text>{localize('views.vesting.airdrops.tooltip.amount')}</Text>
             </div>
             <div class="text-left">
-                <Text bold>{unlockDate}</Text>
-                <Text>{localize('views.vesting.airdrops.tooltip.unlockDate')}</Text>
+                <Text color="gray-600" darkColor="gray-500">
+                    {localize('views.vesting.airdrops.tooltip.unlockDate')}
+                </Text>
+                <Text bold>{getFormattedTimeStamp(hoveredPayout.unlockTime)}</Text>
             </div>
         </div>
     </Tooltip>
