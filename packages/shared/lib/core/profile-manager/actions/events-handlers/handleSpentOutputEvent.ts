@@ -1,5 +1,4 @@
-import { Event, SpentOutputWalletEvent } from '@iota/wallet'
-import { WalletEventType } from '@iota/wallet/out/types'
+import { Event, SpentOutputWalletEvent, WalletEventType } from '@iota/sdk/out/types'
 
 import { syncBalance } from '@core/account/actions/syncBalance'
 import { getNftByIdFromAllAccountNfts, updateNftInAllAccountNfts } from '@core/nfts'

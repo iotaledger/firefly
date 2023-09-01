@@ -1,8 +1,11 @@
 import { getRecipientAddressFromOutput } from './getRecipientAddressFromOutput'
-import { Output, Subject } from '../../types'
+import { Subject } from '../../types'
 import { getSubjectFromAddress } from '../getSubjectFromAddress'
+import { CommonOutput } from '@iota/sdk/out/types'
 
-export function getRecipientFromOutput(output: Output): Subject {
+export function getRecipientFromOutput(output: CommonOutput): Subject | undefined {
     const recipientAddress = getRecipientAddressFromOutput(output)
-    return getSubjectFromAddress(recipientAddress)
+    if (recipientAddress) {
+        return getSubjectFromAddress(recipientAddress)
+    }
 }

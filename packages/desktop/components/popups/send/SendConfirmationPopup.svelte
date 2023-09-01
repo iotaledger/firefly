@@ -14,7 +14,7 @@
         BasicActivityDetails,
         ActivityInformation,
     } from 'shared/components'
-    import { Tab } from 'shared/components/enums'
+    import { Tab, TextHintVariant } from 'shared/components/enums'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
@@ -24,8 +24,9 @@
     import { sendOutput } from '@core/wallet/actions'
     import { DEFAULT_TRANSACTION_OPTIONS } from '@core/wallet/constants'
     import { getOutputParameters, validateSendConfirmation, getAddressFromSubject } from '@core/wallet/utils'
-    import { Activity, NewTokenTransactionDetails, Output } from '@core/wallet/types'
     import { closePopup, openPopup, PopupId, updatePopupProps } from '@auxiliary/popup'
+    import { Activity, NewTokenTransactionDetails } from '@core/wallet/types'
+    import { CommonOutput, Output } from '@iota/sdk/out/types'
     import { ledgerPreparedOutput } from '@core/ledger'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import { handleError } from '@core/error/handlers/handleError'
@@ -141,14 +142,14 @@
             }
         }
 
-        if (!initialExpirationDate) {
+        if (transactionDetails.expirationDate === undefined) {
             initialExpirationDate = getInitialExpirationDate()
         }
     }
 
     async function updateStorageDeposit(): Promise<void> {
         const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
-            await getStorageDepositFromOutput($selectedAccount, preparedOutput)
+            await getStorageDepositFromOutput($selectedAccount, preparedOutput as CommonOutput)
         storageDeposit = minimumStorageDeposit = _storageDeposit > 0 ? _storageDeposit : _giftedStorageDeposit
         if (isBaseTokenTransfer) {
             const rawAmount = Number((transactionDetails as NewTokenTransactionDetails).rawAmount)
@@ -169,7 +170,7 @@
 
     async function onConfirmClick(): Promise<void> {
         try {
-            await validateSendConfirmation($selectedAccount, preparedOutput)
+            await validateSendConfirmation($selectedAccount, preparedOutput as CommonOutput)
 
             if ($isActiveLedgerProfile) {
                 ledgerPreparedOutput.set(preparedOutput)
@@ -242,7 +243,7 @@
         {/if}
     </div>
     {#if surplus}
-        <TextHint warning text={localize('popups.transaction.surplusIncluded')} />
+        <TextHint variant={TextHintVariant.Warning} text={localize('popups.transaction.surplusIncluded')} />
     {/if}
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         {#if disableBack}

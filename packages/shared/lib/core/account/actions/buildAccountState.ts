@@ -1,4 +1,4 @@
-import { Balance } from '@iota/wallet'
+import { Balance } from '@iota/sdk/out/types'
 
 import { getDepositAddress } from '@core/account/utils'
 
@@ -10,15 +10,15 @@ export async function buildAccountState(
 ): Promise<IAccountState> {
     let balances: Balance = {
         baseCoin: {
-            total: '0',
-            available: '0',
+            total: BigInt(0),
+            available: BigInt(0),
             votingPower: '0',
         },
         requiredStorageDeposit: {
-            alias: '0',
-            basic: '0',
-            foundry: '0',
-            nft: '0',
+            alias: BigInt(0),
+            basic: BigInt(0),
+            foundry: BigInt(0),
+            nft: BigInt(0),
         },
         nativeTokens: [],
         nfts: [],

@@ -9,13 +9,13 @@
         onboardingProfile,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
-    import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { checkOrConnectLedger } from '@core/ledger'
     import { ProfileType } from '@core/profile'
     import { setStrongholdPassword } from '@core/profile-manager'
     import { STRONGHOLD_VERSION } from '@core/stronghold'
     import { Animation, Button, Icon, Text, TextHint } from '@ui'
+    import { TextHintVariant } from 'shared/components/enums'
     import { TextType } from '@ui/enums'
     import { onboardingRouter } from '@views/onboarding/onboarding-router'
 
@@ -55,7 +55,10 @@
             </Text>
         </div>
         {#if $isOnboardingLedgerProfile}
-            <TextHint warning text={localize('views.onboarding.congratulations.ledgerHint')} />
+            <TextHint
+                variant={TextHintVariant.Warning}
+                text={localize('views.onboarding.congratulations.ledgerHint')}
+            />
         {/if}
     </div>
     <div slot="leftpane__action">
@@ -63,7 +66,7 @@
             {localize('actions.finishSetup')}
         </Button>
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-yellow dark:bg-gray-900'}">
+    <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-yellow dark:bg-gray-900">
         <Animation animation={AnimationEnum.CongratulationsDesktop} />
     </div>
 </OnboardingLayout>

@@ -1,9 +1,9 @@
-import { SecretManager } from '@iota/wallet'
+import { SecretManagerType } from '@iota/sdk/out/types'
 
 import { USE_LEDGER_SIMULATOR } from '@core/ledger'
 import { ProfileType } from '@core/profile'
 
-export function getSecretManagerFromProfileType(type: ProfileType, storagePath?: string): SecretManager {
+export function getSecretManagerFromProfileType(type: ProfileType, storagePath?: string): SecretManagerType {
     const strongholdSecretManager = {
         stronghold: { snapshotPath: `${storagePath}/wallet.stronghold` },
     }

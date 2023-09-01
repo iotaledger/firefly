@@ -167,7 +167,7 @@ describe('File: getOutputParameters.ts', () => {
             assets: {
                 nativeTokens: [
                     {
-                        amount: '0x3b9aca00',
+                        amount: BigInt(1000000000),
                         id: nativeTokenAsset.id,
                     },
                 ],
@@ -216,7 +216,7 @@ describe('File: getOutputParameters.ts', () => {
             assets: {
                 nativeTokens: [
                     {
-                        amount: '0x3b9aca00',
+                        amount: BigInt(1000000000),
                         id: nativeTokenAsset.id,
                     },
                 ],
@@ -295,7 +295,7 @@ describe('File: getOutputParameters.ts', () => {
             assets: {
                 nativeTokens: [
                     {
-                        amount: '0x3b9aca00',
+                        amount: BigInt(1000000000),
                         id: nativeTokenAsset.id,
                     },
                 ],

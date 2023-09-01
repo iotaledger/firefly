@@ -483,55 +483,6 @@
                     "updateVersion": "Firefly v{version}",
                     "button": "Actualizar"
                 }
-            },
-            "drawers": {
-                "networkConfig": {
-                    "addChain": {
-                        "title": "Add chain"
-                    },
-                    "chain": {
-                        "chainId": "ID de la cadena",
-                        "aliasAddress": "Dirección del alias",
-                        "iscpEndpoint": "Endpoint del ISCP",
-                        "explorerEndpoint": "Endpoint del explorador (opcional)",
-                        "errors": {
-                            "cannotBeEmpty": "El nombre no puede estar vacío",
-                            "nameTooLong": "El nombre es demasiado largo",
-                            "aliasAddressWrongFormat": "Debe estar en formato hexadecimal o Bech32",
-                            "aliasAddressAlreadyInUse": "La dirección del alias ya está en uso",
-                            "invalidUrl": "URL inválida"
-                        }
-                    },
-                    "chainDepositAddress": {
-                        "title": "Chain deposit address",
-                        "networkTitle": "Network deposit address"
-                    },
-                    "chainInformation": {
-                        "title": "Chain information"
-                    },
-                    "confirmLedgerEvmAddress": {
-                        "title": "Confirmar dirección EVM",
-                        "header": "Hemos generado tu dirección EVM"
-                    },
-                    "connectedChains": {
-                        "title": "Connected chains"
-                    },
-                    "connectLedgerDevice": {
-                        "title": "Conecte el dispositivo Ledger",
-                        "header": "Abrir la aplicación Ethereum",
-                        "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed before following these steps.",
-                        "requirements": {
-                            "connect": "Connect and unlock your Ledger",
-                            "openApp": "Open the Ethereum app on your Ledger"
-                        }
-                    },
-                    "editChain": {
-                        "title": "Edit chain"
-                    },
-                    "removeChain": {
-                        "title": "Remove chain"
-                    }
-                }
             }
         },
         "staking": {
@@ -1104,15 +1055,6 @@
                 "assetId": "ID del activo"
             }
         },
-        "importErc20Token": {
-            "title": "Import ERC20 token",
-            "property": {
-                "chainId": "Chain ID",
-                "tokenAddress": "Token address"
-            },
-            "success": "Imported {tokenSymbol} token",
-            "error": "Unable to import ERC20 token"
-        },
         "noAlias": {
             "title": "No se pudo acuñar",
             "description": "Debes poseer un alias de salida para acuñar tokens nativos. Para continuar, por favor crea un alias primero"
@@ -1652,11 +1594,7 @@
         "jwt": "Token web JSON",
         "internalTransaction": "Transacción interna",
         "coinType": "Coin type",
-        "custom": "Custom",
-        "evmAddress": "EVM address",
-        "chain": "Chain",
-        "importErc20Token": "Import ERC20 token",
-        "importErc20TokenDescription": "Import an ERC20 token from an EVM chain"
+        "custom": "Custom"
     },
     "filters": {
         "title": "Filtros",
@@ -1757,9 +1695,6 @@
             "label": "Solicitar",
             "name": "Nombre",
             "phase": "Fase"
-        },
-        "network": {
-            "label": "Red"
         }
     },
     "dates": {
@@ -2090,10 +2025,6 @@
                 "short": "No se pudo añadir la propuesta",
                 "long": "No se pudo encontrar la propuesta {proposalId} en el nodo especificado"
             }
-        },
-        "erc20Token": {
-            "invalidAddressFormat": "Must be hexadecimal format",
-            "invalidAddressLength": "Length is invalid"
         }
     },
     "warning": {

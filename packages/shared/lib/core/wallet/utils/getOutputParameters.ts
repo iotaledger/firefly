@@ -1,4 +1,4 @@
-import { OutputParams, Assets } from '@iota/wallet/out/types'
+import { OutputParams, Assets } from '@iota/sdk/out/types'
 import { convertDateToUnixTimestamp, Converter } from '@core/utils'
 import { NewTransactionType } from '../stores'
 import { getEstimatedGasForTransferFromTransactionDetails, getLayer2MetadataForTransfer } from '@core/layer-2/utils'
@@ -81,7 +81,7 @@ function getAssetFromTransactionDetails(transactionDetails: NewTransactionDetail
                 nativeTokens: [
                     {
                         id: nativeTokenId,
-                        amount: Converter.bigIntToHex(bigAmount),
+                        amount: bigAmount,
                     },
                 ],
             }

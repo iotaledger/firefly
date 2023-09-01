@@ -5,7 +5,7 @@ import {
     SpentOutputWalletEvent,
     TransactionInclusionWalletEvent,
     TransactionProgressWalletEvent,
-} from '@iota/wallet'
+} from '@iota/sdk/out/types'
 
 export interface IWalletApiEventPayloadWrapper {
     accountIndex: number

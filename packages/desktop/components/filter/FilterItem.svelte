@@ -66,7 +66,7 @@
 
 <style lang="scss">
     filter-item {
-        :global(box) {
+        :global(box-content) {
             @apply p-2;
         }
 

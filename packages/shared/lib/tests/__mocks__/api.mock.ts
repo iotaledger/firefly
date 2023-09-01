@@ -1,15 +1,18 @@
 import { AccountMock } from './account.mock'
 import { ProfileManagerMock } from './profile-manager.mock'
 
-import { AccountManagerOptions, CreateAccountPayload } from '@iota/wallet'
+import { WalletOptions, CreateAccountPayload } from '@iota/sdk/out/types'
 
 import { IApi, RecoverAccountsPayload } from '@core/profile-manager'
 import { IAccount } from '@core/account'
 
+export const MOCK_MNEMONIC =
+    'term aisle loyal cradle talent buddy crater express asthma load antique game better head position master aspect print more wine sword speed joy story'
+
 const profileManagers = {}
 
 const api: IApi = {
-    async createAccountManager(id: string, _: AccountManagerOptions): Promise<ProfileManagerMock> {
+    async createWallet(id: string, _: WalletOptions): Promise<ProfileManagerMock> {
         const manager = new ProfileManagerMock(id)
 
         profileManagers[id] = manager
@@ -21,7 +24,7 @@ const api: IApi = {
             resolve(new AccountMock())
         })
     },
-    deleteAccountManager(id: string) {
+    deleteWallet(id: string) {
         if (id && id in profileManagers) {
             delete profileManagers[id]
         }
@@ -50,6 +53,14 @@ const api: IApi = {
         return new Promise((resolve) => {
             resolve()
         })
+    },
+
+    generateMnemonic(): Promise<string> {
+        return Promise.resolve(MOCK_MNEMONIC)
+    },
+
+    verifyMnemonic(mnemonic: string): Promise<void> {
+        return Promise.resolve()
     },
 }
 

@@ -1,18 +1,14 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-
-    import { Button, Icon, RecoveryPhrase, Text, TextType } from '@ui'
+    import { Button, Icon, RecoveryPhrase, Text, TextHint, TextHintVariant, TextType } from '@ui'
     import { OnboardingLayout } from '@components'
-
     import { localize } from '@core/i18n'
     import { downloadRecoveryKit } from '@core/utils'
-
     import {
         generateMnemonicForOnboardingProfile,
         onboardingProfile,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
-
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { createFromMnemonicRouter } from '../create-from-mnemonic-router'
 
@@ -48,12 +44,12 @@
     <title-container slot="title" class="block">
         <Text type={TextType.h2}>{localize('views.onboarding.profileBackup.viewMnemonic.title')}</Text>
     </title-container>
-    <leftpane-content slot="leftpane__content" class="block">
-        <Text secondary classes="mb-4">{localize('views.onboarding.profileBackup.viewMnemonic.body1')}</Text>
-        <Text secondary highlighted classes="font-bold mb-4">
+    <leftpane-content slot="leftpane__content" class="block space-y-4">
+        <TextHint variant={TextHintVariant.Info} text={localize('views.onboarding.profileBackup.viewMnemonic.body1')} />
+        <Text secondary highlighted classes="font-bold">
             {localize('views.onboarding.profileBackup.viewMnemonic.body2')}
         </Text>
-        <Text secondary classes="mb-4">{localize('views.onboarding.profileBackup.viewMnemonic.body3')}</Text>
+        <Text secondary>{localize('views.onboarding.profileBackup.viewMnemonic.body3')}</Text>
     </leftpane-content>
     <leftpane-action slot="leftpane__action" class="flex flex-col space-y-4">
         <Button outline classes="w-full" onClick={onDownloadClick}>

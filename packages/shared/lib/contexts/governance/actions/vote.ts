@@ -1,3 +1,6 @@
+import { PreparedTransaction } from '@iota/sdk/out/types'
+import { plainToInstance } from 'class-transformer'
+
 import { get } from 'svelte/store'
 import { selectedAccount, updateSelectedAccount } from '@core/account/stores'
 import { showAppNotification } from '@auxiliary/notification/actions'
@@ -9,8 +12,10 @@ export async function vote(eventId?: string, answers?: number[]): Promise<void> 
     const account = get(selectedAccount)
     try {
         updateSelectedAccount({ hasVotingTransactionInProgress: true })
+        const prepareVoteTransaction = await account?.prepareVote(eventId, answers)
+        const preparedTransaction = plainToInstance(PreparedTransaction, prepareVoteTransaction)
+        const transaction = await preparedTransaction?.send()
 
-        const transaction = await account.vote(eventId, answers)
         await processAndAddToActivities(transaction, account)
 
         showAppNotification({
