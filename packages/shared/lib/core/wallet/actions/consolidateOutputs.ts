@@ -7,12 +7,15 @@ import { plainToInstance } from 'class-transformer'
 
 export async function consolidateOutputs(): Promise<void> {
     const account = get(selectedAccount)
+    if (!account) return Promise.reject('No account selected')
+
     try {
         updateSelectedAccount({ isTransferring: true })
 
-        const preparedConsolidateOutputsTransaction = await account?.prepareConsolidateOutputs({
+        const preparedConsolidateOutputsTransaction = await account.prepareConsolidateOutputs({
             force: false,
             outputThreshold: 2,
+            targetAddress: account.depositAddress,
         })
         const preparedTransaction = plainToInstance(PreparedTransaction, preparedConsolidateOutputsTransaction)
         const transaction = await preparedTransaction?.send()
