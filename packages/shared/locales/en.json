@@ -636,7 +636,7 @@
         },
         "vesting": {
            "title": "Vesting",
-           "stats": {
+           "overview": {
             "airdrop": "Airdrop",
             "remaining": "Remaining",
             "totalRewards": "Total Rewards"

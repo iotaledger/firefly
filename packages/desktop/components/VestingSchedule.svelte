@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { Text, Tooltip, Pill, TextType } from '@ui'
-    import { IVestingOutput, VestingOutputStatus } from '@core/utils'
+    import { IVestingOutput, VestingOutputStatus } from '@contexts/vesting'
+    import { formatDate, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import { formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
-    import { formatDate, localize } from '@core/i18n'
+    import { Pill, Text, TextType, Tooltip } from '@ui'
 
     export let outputs: IVestingOutput[] = []
 

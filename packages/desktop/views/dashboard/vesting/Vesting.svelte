@@ -1,9 +1,12 @@
 <script lang="ts">
-    import { Pane, Text, TextType, Button } from '@ui'
-    import { localize } from '@core/i18n'
-    import { selectedAccount } from '@core/account/stores'
     import { VestingSchedule } from '@components'
-    import { IVestingOutput, VestingOutputStatus } from '@core/utils'
+    import { IVestingOutput, VestingOutputStatus, selectedAccountVestingOverview } from '@contexts/vesting'
+    import { selectedAccount } from '@core/account/stores'
+    import { formatCurrency, localize } from '@core/i18n'
+    import { getMarketAmountFromAssetValue } from '@core/market/utils'
+    import { activeProfile } from '@core/profile'
+    import { formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
+    import { Button, Pane, Text, TextType } from '@ui'
 
     const MOCKED_OUTPUTS: IVestingOutput[] = Array.from({ length: 120 }, (_, i) => {
         const amount = Math.floor(Math.random() * 100)
@@ -16,26 +19,29 @@
         }
     })
 
-    const MOCKED_VESTING_STATS = [
+    $: ({ baseCoin } = $selectedAccountAssets[$activeProfile?.network?.id])
+
+    $: vestingOverview = [
         {
-            title: localize('views.vesting.stats.airdrop'),
-            iotaAmount: '--- IOTA',
-            convertedAmount: '$--',
+            title: localize('views.vesting.overview.airdrop'),
+            iotaAmount: $selectedAccountVestingOverview?.accumulatedPayout || 0,
         },
         {
-            title: localize('views.vesting.stats.remaining'),
-            iotaAmount: '--- IOTA',
-            convertedAmount: '$--',
+            title: localize('views.vesting.overview.remaining'),
+            iotaAmount: $selectedAccountVestingOverview?.remainingPayout || 0,
         },
         {
-            title: localize('views.vesting.stats.totalRewards'),
-            iotaAmount: '--- IOTA',
-            convertedAmount: '$--',
+            title: localize('views.vesting.overview.totalRewards'),
+            iotaAmount: $selectedAccountVestingOverview?.totalRewards || 0,
             asmbAmount: '--- ASMB',
         },
     ]
 
     $: sortedVestingOutputsByUnlockTime = MOCKED_OUTPUTS.sort((a, b) => a.unlockTime.getTime() - b.unlockTime.getTime())
+
+    function getFiatAmount(amount: number): string {
+        return baseCoin ? formatCurrency(getMarketAmountFromAssetValue(amount, baseCoin)) : ''
+    }
 </script>
 
 {#if $selectedAccount}
@@ -46,11 +52,17 @@
                     <div class="flex flex-col space-y-4">
                         <Text type={TextType.h1}>{localize('views.vesting.title')}</Text>
                         <div class="flex flex-col space-y-4">
-                            {#each MOCKED_VESTING_STATS as { title, iotaAmount, convertedAmount, asmbAmount }}
+                            {#each vestingOverview as { title, iotaAmount, asmbAmount }}
                                 <div class="flex flex-col space-y-2">
                                     <Text color="gray-600" darkColor="gray-400" fontSize="12">{title}</Text>
-                                    <Text type={TextType.h1} classes="mt-4 mb-2">{iotaAmount}</Text>
-                                    <Text darkColor="gray-100" fontSize="12">{convertedAmount}</Text>
+                                    <Text type={TextType.h1} classes="mt-4 mb-2">
+                                        {baseCoin
+                                            ? formatTokenAmountBestMatch(Math.round(iotaAmount), baseCoin.metadata)
+                                            : '----'}
+                                    </Text>
+                                    <Text darkColor="gray-100" fontSize="12">
+                                        {getFiatAmount(iotaAmount) ?? '----'}
+                                    </Text>
                                     {#if asmbAmount}
                                         <Text darkColor="gray-100" fontSize="12">{asmbAmount}</Text>
                                     {/if}

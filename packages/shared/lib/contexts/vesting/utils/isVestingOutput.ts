@@ -1,4 +1,4 @@
-import { VESTING_OUTPUT_SUPPLY_MARKER } from '@core/wallet/constants'
+import { VESTING_OUTPUT_SUPPLY_MARKER } from '../constants'
 import { OutputData } from '@iota/sdk/out/types'
 
 export function isVestingOutputId(outputId: string): boolean {

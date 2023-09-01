@@ -1,9 +1,10 @@
 <script lang="ts">
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { isVestingOutputId, isVestingOutput } from '@contexts/vesting'
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile'
-    import { isOutputTimeLocked, isVestingOutput, isVestingOutputId } from '@core/wallet'
+    import { isOutputTimeLocked } from '@core/wallet'
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import { UnlockCondition, UnlockConditionType, OutputType, CommonOutput } from '@iota/sdk/out/types'
