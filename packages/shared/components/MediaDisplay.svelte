@@ -1,41 +1,40 @@
 <script lang="ts">
     import { MimeType, ParentMimeType } from '@core/nfts'
-    import { onMount } from 'svelte'
 
-    export let Media: HTMLImageElement | HTMLVideoElement | undefined = undefined
     export let src: string
     export let expectedType: MimeType
-    export let alt: string = ''
-    export let autoplay: boolean = false
-    export let controls: boolean = false
-    export let muted: boolean = false
-    export let loop: boolean = false
+    export const alt: string = ''
+    export const autoplay: boolean = false
+    export const controls: boolean = false
+    export const muted: boolean = false
+    export const loop: boolean = false
     export let isLoaded: boolean
 
     const htmlTag: string | undefined = convertMimeTypeToHtmlTag(expectedType)
-
-    let isMounted = false
+    const videoElement: HTMLVideoElement | undefined = undefined
 
     $: isLoaded && muteVideo()
 
+    // Why is this needed? We are already passing the muted attribute to the element below
     function muteVideo() {
-        if (muted && Media instanceof HTMLVideoElement) {
-            Media.muted = true
+        if (muted && videoElement) {
+            videoElement.muted = true
         }
     }
 
     function startPlaying() {
-        if (!autoplay && Media instanceof HTMLVideoElement) {
-            Media.play()
+        if (!autoplay && videoElement) {
+            videoElement.play()
         }
     }
 
     function stopPlaying() {
-        if (!autoplay && Media instanceof HTMLVideoElement) {
-            Media.pause()
+        if (!autoplay && videoElement) {
+            videoElement.pause()
         }
     }
 
+    // TODO: Make this agnostic
     function convertMimeTypeToHtmlTag(mimeType: MimeType): string | undefined {
         const parentMimeType = mimeType?.split('/', 1)?.[0]
         switch (parentMimeType) {
@@ -47,34 +46,22 @@
                 return undefined
         }
     }
-
-    onMount(() => {
-        isMounted = true
-    })
 </script>
 
-{#if isMounted}
-    {#key isLoaded && src}
-        <svelte:element
-            this={htmlTag}
-            bind:this={Media}
-            {...$$props}
-            class="h-full w-full object-cover"
-            on:mouseenter={startPlaying}
-            on:mouseleave={stopPlaying}
-        >
-            {#if htmlTag === ParentMimeType.Image}
-                <img {src} {alt} />
-            {:else if htmlTag === ParentMimeType.Video}
-                <video
-                    {src}
-                    autoplay={autoplay ? true : undefined}
-                    controls={controls ? true : undefined}
-                    loop={loop ? true : undefined}
-                    muted
-                    preload="metadata"
-                />
-            {/if}
-        </svelte:element>
-    {/key}
-{/if}
+{#key isLoaded && src}
+    <div class="h-full w-full object-cover">
+        {#if htmlTag === ParentMimeType.Image}
+            <img {src} {alt} />
+        {:else if htmlTag === ParentMimeType.Video}
+            <video
+                {...$$props}
+                autoplay={autoplay ? true : undefined}
+                on:mouseenter={startPlaying}
+                on:mouseleave={stopPlaying}
+                preload="metadata"
+            >
+                <source {src} type={expectedType} />
+            </video>
+        {/if}
+    </div>
+{/key}
