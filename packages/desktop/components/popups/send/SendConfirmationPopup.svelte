@@ -22,8 +22,12 @@
     import { ActivityDirection, ActivityType, InclusionState, ActivityAction, TokenStandard } from '@core/wallet/enums'
     import { newTransactionDetails, updateNewTransactionDetails, NewTransactionType } from '@core/wallet/stores'
     import { sendOutput } from '@core/wallet/actions'
-    import { DEFAULT_TRANSACTION_OPTIONS } from '@core/wallet/constants'
-    import { getOutputParameters, validateSendConfirmation, getAddressFromSubject } from '@core/wallet/utils'
+    import {
+        getOutputParameters,
+        validateSendConfirmation,
+        getAddressFromSubject,
+        getDefaultTransactionOptions,
+    } from '@core/wallet/utils'
     import { Activity, NewTokenTransactionDetails } from '@core/wallet/types'
     import { CommonOutput, Output } from '@iota/sdk/out/types'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
@@ -121,7 +125,7 @@
     async function prepareTransactionOutput(): Promise<void> {
         const transactionDetails = get(newTransactionDetails)
         const outputParams = await getOutputParameters(transactionDetails)
-        preparedOutput = await prepareOutput($selectedAccount.index, outputParams, DEFAULT_TRANSACTION_OPTIONS)
+        preparedOutput = await prepareOutput($selectedAccount.index, outputParams, getDefaultTransactionOptions())
 
         await updateStorageDeposit()
 
