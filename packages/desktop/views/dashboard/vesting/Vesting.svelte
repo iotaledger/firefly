@@ -1,6 +1,11 @@
 <script lang="ts">
     import { VestingSchedule } from '@components'
-    import { IVestingOutput, VestingOutputStatus, selectedAccountVestingOverview } from '@contexts/vesting'
+    import {
+        getLockedPayouts,
+        getTotalPayouts,
+        getUnlockedPayouts,
+        selectedAccountVestingOverview,
+    } from '@contexts/vesting'
     import { selectedAccount } from '@core/account/stores'
     import { formatCurrency, localize } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
@@ -8,18 +13,16 @@
     import { formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
     import { Button, Pane, Text, TextType } from '@ui'
 
-    const MOCKED_OUTPUTS: IVestingOutput[] = Array.from({ length: 120 }, (_, i) => {
-        const amount = Math.floor(Math.random() * 100)
-        const unlockTime = new Date(Date.now() + Math.random() * (2 * 365 * 24 * 60 * 60 * 1000))
-        return {
-            outputId: `output ID ${i}`,
-            status: VestingOutputStatus.Locked,
-            unlockTime,
-            amount,
-        }
-    })
-
     $: ({ baseCoin } = $selectedAccountAssets[$activeProfile?.network?.id])
+
+    $: totalPayouts = $selectedAccountVestingOverview ? getTotalPayouts() : 0
+    $: lockedPayouts = $selectedAccountVestingOverview
+        ? getLockedPayouts($selectedAccountVestingOverview.lockedOutputs, $selectedAccountVestingOverview.payoutAmount)
+        : []
+    $: unlockedPayouts = $selectedAccountVestingOverview
+        ? getUnlockedPayouts(totalPayouts, lockedPayouts, $selectedAccountVestingOverview.payoutAmount)
+        : []
+    $: allPayouts = [...unlockedPayouts, ...lockedPayouts]
 
     $: vestingOverview = [
         {
@@ -37,8 +40,6 @@
         },
     ]
 
-    $: sortedVestingOutputsByUnlockTime = MOCKED_OUTPUTS.sort((a, b) => a.unlockTime.getTime() - b.unlockTime.getTime())
-
     function getFiatAmount(amount: number): string {
         return baseCoin ? formatCurrency(getMarketAmountFromAssetValue(amount, baseCoin)) : ''
     }
@@ -48,7 +49,7 @@
     <vesting-container class="w-full h-full flex flex-col flex-nowrap p-8 relative flex-1 bg-gray-50 dark:bg-gray-900">
         {#key $selectedAccount?.index}
             <div class="h-full flex flex-row space-x-4">
-                <Pane classes="flex flex-col p-6 w-1/3 justify-between">
+                <Pane>
                     <div class="flex flex-col space-y-4">
                         <Text type={TextType.h1}>{localize('views.vesting.title')}</Text>
                         <div class="flex flex-col space-y-4">
@@ -74,10 +75,10 @@
                         <Button classes="w-full">{localize('views.vesting.collect')}</Button>
                     </div>
                 </Pane>
-                <Pane classes="h-full min-h-96 flex-1 py-8 px-12 w-2/3">
+                <Pane>
                     <Text type={TextType.h4}>{localize('views.vesting.airdrops.title')}</Text>
                     <div class="h-full flex justify-center items-center">
-                        <VestingSchedule outputs={sortedVestingOutputsByUnlockTime} />
+                        <VestingSchedule payouts={allPayouts} />
                     </div>
                 </Pane>
             </div>

@@ -1,18 +1,19 @@
 <script lang="ts">
-    import { IVestingOutput, VestingOutputStatus } from '@contexts/vesting'
+    import { IVestingPayout, VestingOutputStatus } from '@contexts/vesting'
     import { formatDate, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import { formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
     import { Pill, Text, TextType, Tooltip } from '@ui'
 
-    export let outputs: IVestingOutput[] = []
+    export let payouts: IVestingPayout[] = []
 
-    let hoveredOutput: IVestingOutput | undefined = undefined
+    let hoveredPayout: IVestingPayout | undefined = undefined
     let anchor: HTMLElement | undefined = undefined
 
-    $: columnsAmount = calculateOptimalColumns(outputs.length)
-    $: remainingSpaces = calculateRemainingGridSpaces(outputs.length, columnsAmount)
+    $: columnsAmount = calculateOptimalColumns(payouts.length)
+    $: remainingSpaces = calculateRemainingGridSpaces(payouts.length, columnsAmount)
     $: baseCoin = ($selectedAccountAssets?.[$activeProfile?.network?.id] ?? {}).baseCoin
+    $: unlockDate = formatDate(hoveredPayout?.unlockTime, { format: 'short' })
 
     const MAX_GRID_COLUMNS = 14
 
@@ -28,14 +29,14 @@
         return baseCoin?.metadata ? formatTokenAmountBestMatch(amount, baseCoin?.metadata) : ''
     }
 
-    function handleHoverEvent(output?: IVestingOutput): (e: MouseEvent) => void {
+    function handleHoverEvent(payout?: IVestingPayout): (e: MouseEvent) => void {
         return (e) => {
-            if (output) {
+            if (payout) {
                 anchor = e.currentTarget as HTMLElement
-                hoveredOutput = output
+                hoveredPayout = payout
             } else {
                 anchor = undefined
-                hoveredOutput = undefined
+                hoveredPayout = undefined
             }
         }
     }
@@ -48,41 +49,40 @@
     }
 </script>
 
-{#if outputs.length}
+{#if payouts.length}
     <vesting-outputs-grid style:--columns={columnsAmount}>
         {#if remainingSpaces > 0}
             {#each Array.from({ length: remainingSpaces }) as _}
                 <output-placeholder />
             {/each}
         {/if}
-
-        {#each outputs as output}
-            {@const onMouseEnterOutput = handleHoverEvent(output)}
+        {#each payouts as payout}
+            {@const onMouseEnterOutput = handleHoverEvent(payout)}
             {@const onMouseLeaveOutput = handleHoverEvent()}
             <vesting-output
                 on:mouseleave={onMouseLeaveOutput}
                 on:mouseenter={onMouseEnterOutput}
-                class:unlocked={output.status === VestingOutputStatus.Unlocked}
+                class:unlocked={payout.status === VestingOutputStatus.Unlocked}
             />
         {/each}
     </vesting-outputs-grid>
 {/if}
 
-{#if hoveredOutput && anchor}
+{#if hoveredPayout && anchor}
     <Tooltip {anchor}>
         <div class="flex flex-row justify-between space-x-24">
             <Text type={TextType.h4}>{localize('views.vesting.airdrops.tooltip.title')}</Text>
             <Pill backgroundColor="gray-300" textColor="gray-600"
-                >{localize(`pills.vesting.${hoveredOutput.status}`)}</Pill
+                >{localize(`pills.vesting.${hoveredPayout.status}`)}</Pill
             >
         </div>
         <div class="w-full flex flex-row justify-between mt-8">
             <div class="text-left">
-                <Text bold>{formatCoinAmount(hoveredOutput.amount)}</Text>
+                <Text bold>{formatCoinAmount(hoveredPayout.amount)}</Text>
                 <Text>{localize('views.vesting.airdrops.tooltip.amount')}</Text>
             </div>
             <div class="text-left">
-                <Text bold>{formatDate(hoveredOutput.unlockTime, { format: 'short' })}</Text>
+                <Text bold>{unlockDate}</Text>
                 <Text>{localize('views.vesting.airdrops.tooltip.unlockDate')}</Text>
             </div>
         </div>
@@ -113,6 +113,7 @@
             &.unlocked {
                 @apply bg-gray-300;
             }
+
             &:hover {
                 @apply bg-blue-600;
             }

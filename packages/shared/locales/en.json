@@ -2330,8 +2330,7 @@
         "locked": "locked",
         "smartContract": "smart contract",
         "vesting": {
-            "pending": "Pending",
-            "claimed": "Claimed",
+            "unlocked": "Unlocked",
             "locked": "Locked"
         }
     },

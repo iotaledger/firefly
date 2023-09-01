@@ -1,9 +1,10 @@
 import { VESTING_OUTPUT_SUPPLY_MARKER } from '../constants'
 import { OutputData } from '@iota/sdk/out/types'
 
+const OUTPUT_ID_REGEX = new RegExp(`^${VESTING_OUTPUT_SUPPLY_MARKER}`)
+
 export function isVestingOutputId(outputId: string): boolean {
-    const regex = new RegExp(`^${VESTING_OUTPUT_SUPPLY_MARKER}`)
-    return regex.test(outputId)
+    return OUTPUT_ID_REGEX.test(outputId)
 }
 
 export function isVestingOutput(outputData: OutputData): boolean {
