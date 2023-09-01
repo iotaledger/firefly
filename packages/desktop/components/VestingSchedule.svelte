@@ -94,7 +94,7 @@
         @apply grid;
         @apply gap-3;
         @apply place-items-center;
-        @apply overflow-auto;
+        @apply overflow-y-auto;
         @apply max-h-[90%];
         grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
 

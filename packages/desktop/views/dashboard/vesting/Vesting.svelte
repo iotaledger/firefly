@@ -21,7 +21,7 @@
         selectedAccountAssets,
     } from '@core/wallet'
     import { CommonOutput } from '@iota/sdk/out/types'
-    import { Button, FontWeight, Icon, Pane, Text, TextType, Tile } from '@ui'
+    import { Button, FontWeight, Height, Icon, Pane, Text, TextType, Tile } from '@ui'
 
     const DEFAULT_EMPTY_VALUE_STRING = '----'
 
@@ -74,53 +74,64 @@
 </script>
 
 {#if $selectedAccount}
-    <vesting-container class="w-full h-full flex flex-col flex-nowrap p-8 relative flex-1 bg-gray-50 dark:bg-gray-900">
-        {#key $selectedAccount?.index}
-            <div class="h-full flex flex-row space-x-4">
-                <Pane>
-                    <div class="flex flex-col space-y-4">
-                        <Text type={TextType.h1}>{localize('views.vesting.title')}</Text>
-                        <div class="flex flex-col space-y-4">
-                            {#each vestingOverview as { title, iotaAmount, asmbAmount }}
-                                <div class="flex flex-col space-y-2">
-                                    <Text color="gray-600" darkColor="gray-400" fontSize="12">{title}</Text>
-                                    <Text type={TextType.h1} classes="mt-4 mb-2">
-                                        {baseCoin
-                                            ? formatTokenAmountBestMatch(Math.round(iotaAmount), baseCoin.metadata)
-                                            : DEFAULT_EMPTY_VALUE_STRING}
-                                    </Text>
-                                    <Text darkColor="gray-100" fontSize="12">
-                                        {getFiatAmount(iotaAmount) ?? DEFAULT_EMPTY_VALUE_STRING}
-                                    </Text>
-                                    {#if asmbAmount}
-                                        <Text darkColor="gray-100" fontSize="12">{asmbAmount}</Text>
-                                    {/if}
+    <vesting-container
+        class="w-full h-full flex flex-nowrap p-8 relative flex-1 bg-gray-50 dark:bg-gray-900 space-x-4 justify-center"
+    >
+        <div class="flex space-x-4 max-w-7xl justify-center w-full">
+            {#key $selectedAccount?.index}
+                <left-pane class="flex flex-col w-1/3">
+                    <Pane height={Height.Full}>
+                        <left-pane-content class="flex flex-col justify-between h-full">
+                            <div class="flex flex-col space-y-4">
+                                <Text type={TextType.h5} classes="text-left">{localize('views.vesting.title')}</Text>
+                                <div class="flex flex-col space-y-4">
+                                    {#each vestingOverview as { title, iotaAmount, asmbAmount }}
+                                        <div class="flex flex-col space-y-2">
+                                            <Text color="gray-600" darkColor="gray-400" fontSize="12">{title}</Text>
+                                            <Text type={TextType.h1} classes="mt-4 mb-2">
+                                                {baseCoin
+                                                    ? formatTokenAmountBestMatch(
+                                                          Math.round(iotaAmount),
+                                                          baseCoin.metadata
+                                                      )
+                                                    : DEFAULT_EMPTY_VALUE_STRING}
+                                            </Text>
+                                            <Text darkColor="gray-100" fontSize="12">
+                                                {getFiatAmount(iotaAmount) ?? DEFAULT_EMPTY_VALUE_STRING}
+                                            </Text>
+                                            {#if asmbAmount}
+                                                <Text darkColor="gray-100" fontSize="12">{asmbAmount}</Text>
+                                            {/if}
+                                        </div>
+                                    {/each}
                                 </div>
-                            {/each}
+                            </div>
+                            <div class="flex flex-col space-y-4">
+                                <div class="flex flex-col space-y-2">
+                                    <Text color="gray-600" darkColor="gray-400" fontSize="12">
+                                        {localize('views.vesting.timeUntilNextAirdrop')}
+                                    </Text>
+                                    <Tile classes="flex flex-row items-center space-x-2">
+                                        <Icon icon={IconEnum.Timelock} classes="text-gray-800 dark:text-gray-100" />
+                                        <Text color="gray-800" darkColor="gray-400" fontWeight={FontWeight.semibold}>
+                                            {timeUntilNextAirdrop}
+                                        </Text>
+                                    </Tile>
+                                </div>
+                                <Button classes="w-full">{localize('views.vesting.collect')}</Button>
+                            </div>
+                        </left-pane-content>
+                    </Pane>
+                </left-pane>
+                <right-pane class="w-full h-full min-h-96 flex-1 space-y-4 flex flex-col">
+                    <Pane height={Height.Full}>
+                        <Text type={TextType.h5} classes="text-left">{localize('views.vesting.airdrops.title')}</Text>
+                        <div class="h-full flex justify-center items-center">
+                            <VestingSchedule payouts={allPayouts} />
                         </div>
-                    </div>
-                    <div class="flex flex-col space-y-4">
-                        <div class="flex flex-col space-y-2">
-                            <Text color="gray-600" darkColor="gray-400" fontSize="12">
-                                {localize('views.vesting.timeUntilNextAirdrop')}
-                            </Text>
-                            <Tile classes="flex flex-row items-center space-x-2">
-                                <Icon icon={IconEnum.Timelock} classes="text-gray-800 dark:text-gray-100" />
-                                <Text color="gray-800" darkColor="gray-400" fontWeight={FontWeight.semibold}>
-                                    {timeUntilNextAirdrop}
-                                </Text>
-                            </Tile>
-                        </div>
-                        <Button classes="w-full">{localize('views.vesting.collect')}</Button>
-                    </div>
-                </Pane>
-                <Pane>
-                    <Text type={TextType.h4}>{localize('views.vesting.airdrops.title')}</Text>
-                    <div class="h-full flex justify-center items-center">
-                        <VestingSchedule payouts={allPayouts} />
-                    </div>
-                </Pane>
-            </div>
-        {/key}
+                    </Pane>
+                </right-pane>
+            {/key}
+        </div>
     </vesting-container>
 {/if}
