@@ -41,6 +41,7 @@
         {controls}
         {loop}
         {muted}
+        {...$$restProps}
         alt={`Media display for ${nft.name}`}
     />
 {:else}
