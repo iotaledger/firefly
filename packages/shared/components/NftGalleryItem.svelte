@@ -43,14 +43,8 @@
 
 <button type="button" on:click={onClick} class="flex flex-col items-center justify-center">
     <div class="w-full rounded-2xl overflow-hidden flex flex-col shadow-elevation-1">
-        <nft-media-wrapper>
-            <figure
-                class="bg-gray-200 dark:bg-gray-700 min-w-full h-full object-cover"
-                style:--height="{nftWrapperClientWidth}px"
-                bind:clientWidth={nftWrapperClientWidth}
-            >
-                <NftMedia {nft} loop muted />
-            </figure>
+        <nft-media-wrapper bind:clientWidth={nftWrapperClientWidth} style:--height="{nftWrapperClientWidth}px">
+            <NftMedia {nft} class="bg-gray-200 dark:bg-gray-700 min-w-full min-h-full object-cover" loop muted />
             {#if nft.downloadMetadata.error || nft.downloadMetadata.warning}
                 <div class="absolute right-3 top-3">
                     <TooltipIcon
@@ -84,10 +78,6 @@
         @apply w-full;
         @apply flex;
         @apply relative;
-        aspect-ratio: 1 / 1;
-
-        figure {
-            height: var(--height);
-        }
+        height: var(--height);
     }
 </style>

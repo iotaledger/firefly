@@ -12,9 +12,11 @@
     export let loop: boolean = false
     export let muted: boolean = false
     export let useCaching: boolean = true
+    export { classes as class }
 
     let hasMounted: boolean = false
     let basePath: string
+    let classes: string = ''
 
     $: isDownloading = $nftDownloadQueue.some((queueItem) => queueItem.nft.id === nft.id)
     $: src =
@@ -41,7 +43,7 @@
         {controls}
         {loop}
         {muted}
-        {...$$restProps}
+        class={classes}
         alt={`Media display for ${nft.name}`}
     />
 {:else}

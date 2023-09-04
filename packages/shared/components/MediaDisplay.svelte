@@ -11,16 +11,19 @@
     export let muted: boolean = false
     export let loop: boolean = false
     export let isLoaded: boolean
+    export { classes as class }
 
     enum MediaTag {
         Image = 'img',
         Video = 'video',
     }
-    const HTML_TAG = convertMimeTypeToHtmlTag(expectedType)
 
+    let classes: string = ''
     let isMounted = false
     let playPromise: Promise<void> | undefined
+    let htmlTag: MediaTag | undefined
 
+    $: htmlTag = convertMimeTypeToHtmlTag(expectedType)
     $: isLoaded && muteVideo()
 
     function muteVideo(): void {
@@ -66,9 +69,9 @@
 
 {#if isMounted}
     {#key isLoaded && src}
-        {#if HTML_TAG === MediaTag.Image}
-            <img bind:this={Media} {src} {alt} {...$$restProps} />
-        {:else if HTML_TAG === MediaTag.Video}
+        {#if htmlTag === MediaTag.Image}
+            <img bind:this={Media} {src} {alt} class={classes} />
+        {:else if htmlTag === MediaTag.Video}
             <video
                 {src}
                 bind:this={Media}
@@ -78,7 +81,7 @@
                 muted={muted || null}
                 on:mouseenter={startPlaying}
                 on:mouseleave={stopPlaying}
-                {...$$restProps}
+                class={classes || null}
             />
         {/if}
     {/key}
