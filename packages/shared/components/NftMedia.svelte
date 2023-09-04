@@ -36,7 +36,6 @@
     <MediaDisplay
         {src}
         expectedType={nft.parsedMetadata.type}
-        isLoaded={nft.downloadMetadata.isLoaded}
         {autoplay}
         {controls}
         {loop}
