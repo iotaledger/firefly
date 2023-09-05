@@ -37,7 +37,7 @@
     $: allPayouts = [...unlockedPayouts, ...lockedPayouts]
     $: vestingOverview = [
         {
-            title: localize('views.vesting.overview.airdrop'),
+            title: localize('views.vesting.overview.payout'),
             iotaAmount: $selectedAccountVestingOverview?.accumulatedPayout || 0,
         },
         {
@@ -52,14 +52,14 @@
     ]
 
     // TODO: reduce to every minute or so
-    let timeUntilNextAirdrop = DEFAULT_EMPTY_VALUE_STRING
-    $: $time, (timeUntilNextAirdrop = getTimeUntilNextAirdrop())
+    let timeUntilNextPayout = DEFAULT_EMPTY_VALUE_STRING
+    $: $time, (timeUntilNextPayout = getTimeUntilNextPayout())
 
     function getFiatAmount(amount: number): string {
         return baseCoin ? formatCurrency(getMarketAmountFromAssetValue(amount, baseCoin)) : ''
     }
 
-    function getTimeUntilNextAirdrop(): string {
+    function getTimeUntilNextPayout(): string {
         // Note: we can look at the time of the first output, since all outputs along the addresses are unlocked at the same time
         const upComingPayoutOutput = $selectedAccountVestingOutputs
             ?.find((addressWithOutputs) => addressWithOutputs.outputs?.length)
@@ -109,12 +109,12 @@
                             <div class="flex flex-col space-y-4">
                                 <div class="flex flex-col space-y-2">
                                     <Text color="gray-600" darkColor="gray-400" fontSize="12">
-                                        {localize('views.vesting.timeUntilNextAirdrop')}
+                                        {localize('views.vesting.timeUntilNextPayout')}
                                     </Text>
                                     <Tile classes="flex flex-row items-center space-x-2">
                                         <Icon icon={IconEnum.Timelock} classes="text-gray-800 dark:text-gray-100" />
                                         <Text color="gray-800" darkColor="gray-400" fontWeight={FontWeight.semibold}>
-                                            {timeUntilNextAirdrop}
+                                            {timeUntilNextPayout}
                                         </Text>
                                     </Tile>
                                 </div>
@@ -125,7 +125,7 @@
                 </left-pane>
                 <right-pane class="w-full h-full min-h-96 flex-1 space-y-4 flex flex-col">
                     <Pane height={Height.Full}>
-                        <Text type={TextType.h5} classes="text-left">{localize('views.vesting.airdrops.title')}</Text>
+                        <Text type={TextType.h5} classes="text-left">{localize('views.vesting.payouts.title')}</Text>
                         <div class="h-full flex justify-center items-center">
                             <VestingSchedule payouts={allPayouts} />
                         </div>

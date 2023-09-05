@@ -70,19 +70,19 @@
 {#if hoveredPayout && anchor}
     <Tooltip {anchor}>
         <div class="flex flex-row justify-between space-x-24">
-            <Text type={TextType.h4}>{localize('views.vesting.airdrops.tooltip.title')}</Text>
+            <Text type={TextType.h4}>{localize('views.vesting.payouts.tooltip.title')}</Text>
             <Pill backgroundColor="gray-300" textColor="gray-600"
                 >{localize(`pills.vesting.${hoveredPayout.status}`)}</Pill
             >
         </div>
         <div class="w-full flex flex-col justify-between space-y-1 mt-2">
             <div class="text-left">
-                <Text color="gray-600" darkColor="gray-500">{localize('views.vesting.airdrops.tooltip.amount')}</Text>
+                <Text color="gray-600" darkColor="gray-500">{localize('views.vesting.payouts.tooltip.amount')}</Text>
                 <Text bold>{formatCoinAmount(hoveredPayout.amount)}</Text>
             </div>
             <div class="text-left">
                 <Text color="gray-600" darkColor="gray-500">
-                    {localize('views.vesting.airdrops.tooltip.unlockDate')}
+                    {localize('views.vesting.payouts.tooltip.unlockDate')}
                 </Text>
                 <Text bold>{getFormattedTimeStamp(hoveredPayout.unlockTime)}</Text>
             </div>

@@ -637,19 +637,19 @@
         "vesting": {
            "title": "Vesting",
            "overview": {
-            "airdrop": "Airdrop",
+            "payout": "Payout",
             "remaining": "Remaining",
             "totalRewards": "Total Rewards"
            },
-           "timeUntilNextAirdrop": "Time Until Next Airdrop",
+           "timeUntilNextPayout": "Time Until Next Payout",
            "collect": "Collect",
-            "airdrops": {
-                "title": "Airdrop Schedule",
-                "information": "Airdrop information.",
+            "payouts": {
+                "title": "Biweekly Payout Schedule",
+                "information": "Payout Information",
                 "tooltip" : {
-                    "title": "Airdrop",
+                    "title": "Payout",
                     "amount": "Amount",
-                    "unlockDate": "Drop date"
+                    "unlockDate": "Unlock Date"
                 }
             }
         }
