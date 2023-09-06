@@ -22,6 +22,7 @@
     } from '@core/wallet'
     import { CommonOutput } from '@iota/sdk/out/types'
     import { Button, FontWeight, Height, Icon, Pane, Text, TextType, Tile } from '@ui'
+    import { openPopup, PopupId } from '@auxiliary/popup'
 
     const DEFAULT_EMPTY_VALUE_STRING = '----'
 
@@ -71,6 +72,12 @@
             getTimelockDateFromOutput(upComingPayoutOutput as CommonOutput)?.getTime() - $time.getTime()
         )
     }
+
+    function onCollectClick(): void {
+        openPopup({
+            id: PopupId.VestingCollect,
+        })
+    }
 </script>
 
 {#if $selectedAccount}
@@ -111,14 +118,16 @@
                                     <Text color="gray-600" darkColor="gray-400" fontSize="12">
                                         {localize('views.vesting.timeUntilNextPayout')}
                                     </Text>
-                                    <Tile classes="flex flex-row items-center space-x-2">
+                                    <Tile classes="flex flex-row items-center space-x-2 py-3">
                                         <Icon icon={IconEnum.Timelock} classes="text-gray-800 dark:text-gray-100" />
                                         <Text color="gray-800" darkColor="gray-400" fontWeight={FontWeight.semibold}>
                                             {timeUntilNextPayout}
                                         </Text>
                                     </Tile>
                                 </div>
-                                <Button classes="w-full">{localize('views.vesting.collect')}</Button>
+                                <Button onClick={onCollectClick} classes="w-full"
+                                    >{localize('views.vesting.collect')}</Button
+                                >
                             </div>
                         </left-pane-content>
                     </Pane>

@@ -46,4 +46,5 @@ export enum PopupId {
     VotingPowerToZero = 'votingPowerToZero',
     WalletFinder = 'walletFinder',
     BalanceFinder = 'balanceFinder',
+    VestingCollect = 'vestingCollect',
 }

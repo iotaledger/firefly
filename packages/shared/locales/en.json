@@ -655,6 +655,12 @@
         }
     },
     "popups": {
+        "vestingCollect": {
+            "title": "Collect",
+            "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas consequat sapien ac venenatis fermentum. Duis eget eleifend arcu, ut maximus dui. Suspendisse elementum dictum sem non egestas. ",
+            "unclaimedFunds": "Unclaimed funds",
+            "button": "Collect"
+        },
         "metricSystemInfo": {
             "title": "Metric System Information",
             "body1": "We want to update you on a significant change approaching within the IOTA network - a shift in our metric system.",
