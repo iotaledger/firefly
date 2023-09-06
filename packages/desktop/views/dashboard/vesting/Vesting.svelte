@@ -2,40 +2,23 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { VestingSchedule } from '@components'
     import {
-        getLockedPayouts,
-        getTotalPayouts,
-        getUnlockedPayouts,
-        selectedAccountVestingOutputs,
+        IVestingPayout,
+        VestingOutputStatus,
         selectedAccountVestingOverview,
+        selectedAccountVestingPayouts,
     } from '@contexts/vesting'
     import { selectedAccount } from '@core/account/stores'
-    import { time } from '@core/app'
     import { formatCurrency, localize } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
     import { activeProfile } from '@core/profile'
     import { getBestTimeDuration } from '@core/utils'
-    import {
-        formatTokenAmountBestMatch,
-        getTimelockDateFromOutput,
-        isOutputTimeLocked,
-        selectedAccountAssets,
-    } from '@core/wallet'
-    import { CommonOutput } from '@iota/sdk/out/types'
+    import { formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
     import { Button, FontWeight, Height, Icon, Pane, Text, TextType, Tile } from '@ui'
     import { openPopup, PopupId } from '@auxiliary/popup'
 
     const DEFAULT_EMPTY_VALUE_STRING = '----'
 
     $: ({ baseCoin } = $selectedAccountAssets[$activeProfile?.network?.id])
-
-    $: totalPayouts = $selectedAccountVestingOverview ? getTotalPayouts() : 0
-    $: lockedPayouts = $selectedAccountVestingOverview
-        ? getLockedPayouts($selectedAccountVestingOverview.lockedOutputs, $selectedAccountVestingOverview.payoutAmount)
-        : []
-    $: unlockedPayouts = $selectedAccountVestingOverview
-        ? getUnlockedPayouts(totalPayouts, lockedPayouts, $selectedAccountVestingOverview.payoutAmount)
-        : []
-    $: allPayouts = [...unlockedPayouts, ...lockedPayouts]
     $: vestingOverview = [
         {
             title: localize('views.vesting.overview.payout'),
@@ -52,9 +35,8 @@
         },
     ]
 
-    // TODO: reduce to every minute or so
     let timeUntilNextPayout = DEFAULT_EMPTY_VALUE_STRING
-    $: $time, (timeUntilNextPayout = getTimeUntilNextPayout())
+    $: $selectedAccountVestingPayouts, (timeUntilNextPayout = getTimeUntilNextPayout())
 
     function getFiatAmount(amount: number): string {
         return baseCoin ? formatCurrency(getMarketAmountFromAssetValue(amount, baseCoin)) : ''
@@ -62,15 +44,13 @@
 
     function getTimeUntilNextPayout(): string {
         // Note: we can look at the time of the first output, since all outputs along the addresses are unlocked at the same time
-        const upComingPayoutOutput = $selectedAccountVestingOutputs
-            ?.find((addressWithOutputs) => addressWithOutputs.outputs?.length)
-            ?.outputs.filter(isOutputTimeLocked)?.[0]?.output
-        if (!upComingPayoutOutput) {
+        const upcomingPayout: IVestingPayout = $selectedAccountVestingPayouts?.find(
+            (payout) => payout.status === VestingOutputStatus.Locked
+        )
+        if (!upcomingPayout) {
             return DEFAULT_EMPTY_VALUE_STRING
         }
-        return getBestTimeDuration(
-            getTimelockDateFromOutput(upComingPayoutOutput as CommonOutput)?.getTime() - $time.getTime()
-        )
+        return getBestTimeDuration(upcomingPayout.unlockTime?.getTime() - new Date().getTime())
     }
 
     function onCollectClick(): void {
@@ -136,7 +116,7 @@
                     <Pane height={Height.Full}>
                         <Text type={TextType.h5} classes="text-left">{localize('views.vesting.payouts.title')}</Text>
                         <div class="h-full flex justify-center items-center">
-                            <VestingSchedule payouts={allPayouts} />
+                            <VestingSchedule payouts={$selectedAccountVestingPayouts} />
                         </div>
                     </Pane>
                 </right-pane>

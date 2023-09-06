@@ -5,4 +5,5 @@ export interface IVestingOutput {
     status: VestingOutputStatus
     unlockTime: Date
     amount: number
+    isSpent: boolean
 }
